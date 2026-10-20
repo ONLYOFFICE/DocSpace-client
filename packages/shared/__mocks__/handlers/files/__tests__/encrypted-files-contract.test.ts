@@ -37,6 +37,8 @@
 // behavior. Same purpose as privacyroom/__tests__/contract.test.ts; see that
 // file's preamble for the rationale.
 
+import { File as NodeFile } from "node:buffer";
+
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from "vitest";
 
 import { setupServer } from "../../../e2e/msw-compat";
@@ -278,6 +280,150 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors S
     expect(body.response.map((k) => k.id)).toEqual(["a", "b"]);
     expect(body.response[0].privateKeyEnc).toBe("ENC-A");
     expect(body.response[1]).not.toHaveProperty("privateKeyEnc");
+  });
+});
+
+describe("encryptedFiles mock — upload sessions (mirrors UploadController)", () => {
+  const ROOMS_SECTION_ID = 2002;
+  const SESSION_URL = (folderId: number) =>
+    `${BASE_URL}:${PORT}/${API_PREFIX}/files/${folderId}/session`;
+
+  const createSession = async (folderId: number, fileSize: number) => {
+    const res = await fetch(SESSION_URL(folderId), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fileName: "blob.bin", fileSize, encrypted: true }),
+    });
+    return (await res.json()).response as Record<string, unknown> & {
+      id: string;
+    };
+  };
+
+  // jsdom replaces File, which Node's multipart parser builds parts from,
+  // and its FormData is opaque to Node's fetch: restore the one and build
+  // the multipart body by hand instead of the other.
+  const jsdomFile = globalThis.File;
+  beforeAll(() => {
+    globalThis.File = NodeFile as unknown as typeof File;
+  });
+  afterAll(() => {
+    globalThis.File = jsdomFile;
+  });
+
+  const postChunk = (url: string, bytes: number[]) => {
+    const boundary = "contract-test-boundary";
+    const encoder = new TextEncoder();
+    const head = encoder.encode(
+      [
+        `--${boundary}`,
+        'Content-Disposition: form-data; name="file"; filename="blob.bin"',
+        "Content-Type: application/octet-stream",
+        "",
+        "",
+      ].join("\r\n"),
+    );
+    const tail = encoder.encode(`\r\n--${boundary}--\r\n`);
+    const body = new Uint8Array(head.length + bytes.length + tail.length);
+    body.set(head, 0);
+    body.set(bytes, head.length);
+    body.set(tail, head.length + bytes.length);
+    return fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": `multipart/form-data; boundary=${boundary}` },
+      body,
+    });
+  };
+
+  it("session create answers a ChunkedUploadSessionDto with the breadcrumb folder ids as path", async () => {
+    const session = await createSession(ROOM_ID, 4);
+
+    expect(Object.keys(session).sort()).toEqual(
+      ["bytes_total", "created", "expired", "id", "location", "path"].sort(),
+    );
+    expect(session.path).toEqual([ROOMS_SECTION_ID, ROOM_ID]);
+    expect(session.bytes_total).toBe(4);
+    expect(session.location).toBe(
+      `${BASE_URL}:${PORT}/ChunkedUploader.ashx?uid=${session.id}`,
+    );
+
+    const inFolder = await createSession(9101, 4);
+    expect(inFolder.path).toEqual([ROOMS_SECTION_ID, ROOM_ID, 9101]);
+  });
+
+  it("numbered upload answers the session DTO and never builds the file", async () => {
+    const session = await createSession(ROOM_ID, 2);
+
+    const res = await postChunk(
+      `${SESSION_URL(ROOM_ID)}/${session.id}/upload`,
+      [1, 2],
+    );
+    const body = (await res.json()) as { response: Record<string, unknown> };
+
+    expect(res.status).toBe(200);
+    expect(body.response).toMatchObject({
+      id: session.id,
+      path: [ROOM_ID],
+      bytes_total: 2,
+    });
+    expect(body.response).not.toHaveProperty("uploaded");
+    expect(handle.current!.getFiles()).toHaveLength(0);
+  });
+
+  it("sequential upload answers 200 uploaded false until the last byte, then 201 with the stored file", async () => {
+    const session = await createSession(ROOM_ID, 4);
+    const url = `${SESSION_URL(ROOM_ID)}/${session.id}`;
+
+    const first = await postChunk(url, [1, 2]);
+    const firstBody = (await first.json()) as {
+      statusCode: number;
+      response: Record<string, unknown>;
+    };
+    expect(first.status).toBe(200);
+    expect(firstBody.response).toMatchObject({
+      id: 0,
+      folderId: ROOM_ID,
+      version: 1,
+      uploaded: false,
+    });
+    expect(handle.current!.getFiles()).toHaveLength(0);
+
+    const last = await postChunk(url, [3, 4]);
+    const lastBody = (await last.json()) as {
+      statusCode: number;
+      response: { id: number; uploaded: boolean; file: { id: number } };
+    };
+    expect(last.status).toBe(201);
+    expect(lastBody.statusCode).toBe(201);
+    expect(lastBody.response.uploaded).toBe(true);
+    expect(lastBody.response.file.id).toBe(lastBody.response.id);
+    expect(
+      Array.from(handle.current!.getFile(lastBody.response.id).bytes ?? []),
+    ).toEqual([1, 2, 3, 4]);
+  });
+
+  it("finalize answers 201 with the stored file, then 404 for a finalised or unknown session", async () => {
+    const session = await createSession(ROOM_ID, 2);
+    await postChunk(`${SESSION_URL(ROOM_ID)}/${session.id}/upload`, [7, 8]);
+    const finalizeUrl = `${SESSION_URL(ROOM_ID)}/${session.id}/finalize`;
+
+    const res = await fetch(finalizeUrl, { method: "PUT" });
+    const body = (await res.json()) as {
+      response: { id: number; uploaded: boolean; file: { id: number } };
+    };
+    expect(res.status).toBe(201);
+    expect(body.response.uploaded).toBe(true);
+    expect(
+      Array.from(handle.current!.getFile(body.response.id).bytes ?? []),
+    ).toEqual([7, 8]);
+
+    expect((await fetch(finalizeUrl, { method: "PUT" })).status).toBe(404);
+    expect(
+      (
+        await fetch(`${SESSION_URL(ROOM_ID)}/mock-session-404/finalize`, {
+          method: "PUT",
+        })
+      ).status,
+    ).toBe(404);
   });
 });
 

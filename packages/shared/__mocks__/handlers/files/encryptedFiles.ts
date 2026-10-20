@@ -71,6 +71,8 @@ export type UploadSessionRecord = {
   chunks: Uint8Array[];
   completed: boolean;
   resultFileId?: number;
+  created: string;
+  expired: string;
 };
 
 export type EncryptedFilesHandlerHandle = {
@@ -109,11 +111,15 @@ export type EncryptedFilesHandlerOptions = {
 
 const DEFAULT_CURRENT_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef"; // matches successSelf
 const MOCK_TENANT_ID = 1;
+/** The Rooms section folder id the room mocks share (see privateRoomList.ts). */
+const ROOMS_SECTION_ID = 2002;
+/** ChunkedUploadSessionHolder.SlidingExpiration. */
+const SESSION_SLIDING_EXPIRATION_MS = 12 * 60 * 60 * 1000;
 
-const okResponse = <T>(response: T): Response =>
+const okResponse = <T>(response: T, statusCode = 200): Response =>
   new Response(
-    JSON.stringify({ response, status: 0, statusCode: 200 }),
-    { headers: { "Content-Type": "application/json" } },
+    JSON.stringify({ response, status: 0, statusCode }),
+    { status: statusCode, headers: { "Content-Type": "application/json" } },
   );
 
 const errorResponse = (status: number, message: string): Response =>
@@ -266,6 +272,57 @@ export const encryptedFilesHandlers = (
   };
   let nextFileId = 1000;
   let nextSessionId = 1;
+
+  const sessionBytes = (session: UploadSessionRecord) =>
+    session.chunks.reduce((acc, c) => acc + c.byteLength, 0);
+
+  const readChunk = async (request: Request) => {
+    const filePart = (await request.formData()).get("file");
+    return typeof filePart === "object" && filePart
+      ? new Uint8Array(await filePart.arrayBuffer())
+      : new Uint8Array();
+  };
+
+  /** ChunkedUploadSessionDto; `location` is FilesLinkUtility.GetUploadChunkLocationUrl. */
+  const sessionDto = (session: UploadSessionRecord, path: number[]) => ({
+    id: session.id,
+    path,
+    created: session.created,
+    expired: session.expired,
+    location: `${BASE_URL}:${port}/ChunkedUploader.ashx?uid=${session.id}`,
+    bytes_total: session.fileSize,
+  });
+
+  /** Stores the session's parts as one file; returns the UploadSessionResponseDto. */
+  const completeSession = (session: UploadSessionRecord) => {
+    session.completed = true;
+    const id = nextFileId++;
+    session.resultFileId = id;
+    const merged = new Uint8Array(sessionBytes(session));
+    let offset = 0;
+    for (const c of session.chunks) {
+      merged.set(c, offset);
+      offset += c.byteLength;
+    }
+    const record: EncryptedFileRecord = {
+      id,
+      title: session.fileName,
+      serverTitle: session.fileName,
+      size: session.fileSize,
+      encrypted: session.encrypted,
+      fileKeys: [],
+      bytes: merged,
+    };
+    files.set(id, record);
+    return {
+      id,
+      folderId: session.folderId,
+      version: 1,
+      title: session.fileName,
+      uploaded: true,
+      file: buildFileDto(record, session.folderId, ownerId, port),
+    };
+  };
 
   const handle: EncryptedFilesHandlerHandle = {
     getFiles: () => Array.from(files.values()),
@@ -510,11 +567,11 @@ export const encryptedFilesHandlers = (
     ),
 
     /**
-     * Mirrors UploadController.CreateUploadSession.
-     * @see server/products/ASC.Files/Server/Api/UploadController.cs
-     *
-     * Starts a chunked upload session for the given folder; returns
-     * { id, path, bytes_total, bytes_uploaded, created, expired }.
+     * Mirrors UploadController.CreateUploadSessionInFolder
+     * (HttpPost "{folderId}/session") -> ChunkedUploadSessionHelper
+     * .ToResponseObjectAsync(session, appendBreadCrumbs: true): a
+     * ChunkedUploadSessionDto whose `path` is the breadcrumb chain of folder
+     * ids, from the Rooms section down to the target folder.
      */
     http.post(
       `${apiBase}/files/:folderId(\\d+)/session`,
@@ -532,7 +589,8 @@ export const encryptedFilesHandlers = (
         });
 
         const sessionId = `mock-session-${nextSessionId++}`;
-        sessions.set(sessionId, {
+        const created = new Date();
+        const session: UploadSessionRecord = {
           id: sessionId,
           folderId,
           fileName: body.fileName,
@@ -540,199 +598,111 @@ export const encryptedFilesHandlers = (
           encrypted: !!body.encrypted,
           chunks: [],
           completed: false,
-        });
-        return okResponse({
-          id: sessionId,
-          path: `/files/${folderId}/session/${sessionId}/upload`,
-          bytes_total: body.fileSize,
-          bytes_uploaded: 0,
-          created: new Date(),
-          expired: new Date(Date.now() + 60 * 60 * 1000),
-        });
+          created: created.toISOString(),
+          expired: new Date(
+            created.getTime() + SESSION_SLIDING_EXPIRATION_MS,
+          ).toISOString(),
+        };
+        sessions.set(sessionId, session);
+        const path =
+          folderId === roomId
+            ? [ROOMS_SECTION_ID, roomId]
+            : [ROOMS_SECTION_ID, roomId, folderId];
+        return okResponse(sessionDto(session, path));
       },
     ),
 
     /**
-     * Mirrors UploadController.UploadChunkInSession — accepts one chunk of the
-     * session's payload as multipart/form-data. On the final chunk the server
-     * materialises the file record and returns its full FileDto.
+     * Mirrors UploadController.UploadAsyncSession
+     * (HttpPost "{folderId}/session/{sessionId}/upload"): stores one numbered
+     * part and answers the ChunkedUploadSessionDto (path = [folderId]). It
+     * never assembles the file; that happens on finalize.
      */
     http.post(
       `${apiBase}/files/:folderId(\\d+)/session/:sessionId/upload`,
       async ({ params, request }) => {
         const session = sessions.get(String(params.sessionId));
-        if (!session) return errorResponse(404, "session not found");
+        if (!session || session.completed) {
+          return errorResponse(404, "session not found");
+        }
 
-        const fd = await request.formData();
-        const filePart = fd.get("file");
-        const chunkBytes =
-          filePart instanceof Blob
-            ? new Uint8Array(await filePart.arrayBuffer())
-            : new Uint8Array();
+        const chunkBytes = await readChunk(request);
         session.chunks.push(chunkBytes);
-        const totalUploaded = session.chunks.reduce(
-          (acc, c) => acc + c.byteLength,
-          0,
-        );
         requests.push({
           method: "POST",
           url: new URL(request.url).pathname,
           body: { chunkBytes: chunkBytes.byteLength },
         });
 
-        const isFinal = totalUploaded >= session.fileSize;
-        if (isFinal && !session.completed) {
-          session.completed = true;
-          const id = nextFileId++;
-          session.resultFileId = id;
-          const merged = new Uint8Array(totalUploaded);
-          let offset = 0;
-          for (const c of session.chunks) {
-            merged.set(c, offset);
-            offset += c.byteLength;
-          }
-          files.set(id, {
-            id,
-            title: session.fileName,
-            serverTitle: session.fileName,
-            size: session.fileSize,
-            encrypted: session.encrypted,
-            fileKeys: [],
-            bytes: merged,
-          });
-          return okResponse({
-            success: true,
-            data: buildFileDto(
-              files.get(id) as EncryptedFileRecord,
-              session.folderId,
-              ownerId,
-              port,
-            ),
-          });
-        }
-
-        return okResponse({
-          success: true,
-          data: {
-            id: session.id,
-            bytes_total: session.fileSize,
-            bytes_uploaded: totalUploaded,
-          },
-        });
+        return okResponse(sessionDto(session, [session.folderId]));
       },
     ),
 
+    /**
+     * Mirrors UploadController.UploadSession
+     * (HttpPost "{folderId}/session/{sessionId}"): stores one part in order;
+     * once every byte arrived the server finalises the session and answers
+     * 201 with an UploadSessionResponseDto carrying `uploaded: true` and the
+     * stored FileDto, otherwise 200 with `uploaded: false` and the DTO of the
+     * file not stored yet (id 0, version 1).
+     */
     http.post(
       `${apiBase}/files/:folderId(\\d+)/session/:sessionId`,
       async ({ params, request }) => {
         const session = sessions.get(String(params.sessionId));
-        if (!session) return errorResponse(404, "session not found");
+        if (!session || session.completed) {
+          return errorResponse(404, "session not found");
+        }
 
-        const fd = await request.formData();
-        const filePart = fd.get("file");
-        const chunkBytes =
-          filePart instanceof Blob
-            ? new Uint8Array(await filePart.arrayBuffer())
-            : new Uint8Array();
+        const chunkBytes = await readChunk(request);
         session.chunks.push(chunkBytes);
-        const totalUploaded = session.chunks.reduce(
-          (acc, c) => acc + c.byteLength,
-          0,
-        );
         requests.push({
           method: "POST",
           url: new URL(request.url).pathname,
           body: { chunkBytes: chunkBytes.byteLength },
         });
 
-        const isFinal = totalUploaded >= session.fileSize;
-        if (isFinal && !session.completed) {
-          session.completed = true;
-          const id = nextFileId++;
-          session.resultFileId = id;
-          const merged = new Uint8Array(totalUploaded);
-          let offset = 0;
-          for (const c of session.chunks) {
-            merged.set(c, offset);
-            offset += c.byteLength;
-          }
-          files.set(id, {
-            id,
+        if (sessionBytes(session) < session.fileSize) {
+          const pending: EncryptedFileRecord = {
+            id: 0,
             title: session.fileName,
             serverTitle: session.fileName,
             size: session.fileSize,
             encrypted: session.encrypted,
             fileKeys: [],
-            bytes: merged,
-          });
+          };
           return okResponse({
-            success: true,
-            data: buildFileDto(
-              files.get(id) as EncryptedFileRecord,
-              session.folderId,
-              ownerId,
-              port,
-            ),
+            id: 0,
+            folderId: session.folderId,
+            version: 1,
+            title: session.fileName,
+            uploaded: false,
+            file: buildFileDto(pending, session.folderId, ownerId, port),
           });
         }
-
-        return okResponse({
-          success: true,
-          data: {
-            id: session.id,
-            bytes_total: session.fileSize,
-            bytes_uploaded: totalUploaded,
-          },
-        });
+        return okResponse(completeSession(session), 201);
       },
     ),
 
+    /**
+     * Mirrors UploadController.FinalizeSession
+     * (HttpPut "{folderId}/session/{sessionId}/finalize"): assembles the
+     * numbered parts and answers 201 with an UploadSessionResponseDto. A
+     * session that is unknown or already finalised answers 404.
+     */
     http.put(
       `${apiBase}/files/:folderId(\\d+)/session/:sessionId/finalize`,
       async ({ params, request }) => {
         const session = sessions.get(String(params.sessionId));
-        if (!session) return errorResponse(404, "session not found");
-
         requests.push({
           method: "PUT",
           url: new URL(request.url).pathname,
           body: {},
         });
-
-        if (!session.completed) {
-          const totalUploaded = session.chunks.reduce(
-            (acc, c) => acc + c.byteLength,
-            0,
-          );
-          session.completed = true;
-          const id = nextFileId++;
-          session.resultFileId = id;
-          const merged = new Uint8Array(totalUploaded);
-          let offset = 0;
-          for (const c of session.chunks) {
-            merged.set(c, offset);
-            offset += c.byteLength;
-          }
-          files.set(id, {
-            id,
-            title: session.fileName,
-            serverTitle: session.fileName,
-            size: session.fileSize,
-            encrypted: session.encrypted,
-            fileKeys: [],
-            bytes: merged,
-          });
+        if (!session || session.completed) {
+          return errorResponse(404, "session not found");
         }
-
-        return okResponse({
-          success: true,
-          data: buildFileDto(
-            files.get(session.resultFileId as number) as EncryptedFileRecord,
-            session.folderId,
-            ownerId,
-            port,
-          ),
-        });
+        return okResponse(completeSession(session), 201);
       },
     ),
 

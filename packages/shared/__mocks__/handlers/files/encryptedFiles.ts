@@ -711,8 +711,10 @@ export const encryptedFilesHandlers = (
      * @see server/products/ASC.Files/Server/Api/OperationController.cs (HttpPut "fileops/delete")
      *
      * Removes the listed files from the mock and answers with one operation
-     * that is already finished (FileOperationType.Delete = 2), so the client
-     * does not poll `fileops` for progress.
+     * that is already finished (FileOperationType.Delete = 2,
+     * DistributedTaskStatus.Completed = 2), so the client does not poll
+     * `fileops` for progress. FileOperationDtoHelper never lists `files` or
+     * `folders` for a delete.
      */
     http.put(`${apiBase}/files/fileops/delete`, async ({ request }) => {
       const body = (await request.json()) as {
@@ -735,8 +737,7 @@ export const encryptedFilesHandlers = (
           error: "",
           processed: String(fileIds.length),
           finished: true,
-          files: [],
-          folders: [],
+          status: 2,
         },
       ]);
     }),

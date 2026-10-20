@@ -12,7 +12,7 @@
 - [x] 2.3 `files/file/{id}/publickeys`: 415 outside a private room, sanitised foreign entries; verify with contract-test cases.
 - [x] 2.4 Upload sessions: session create returns `ChunkedUploadSessionDto` (`path` as folder ids, `location`, no `bytes_uploaded`); numbered chunk upload returns the session DTO and never builds the file; sequential chunk and finalize return `UploadSessionResponseDto` with 201 on completion; verify with contract tests for each route.
 - [x] 2.5 Entry DTOs in `encryptedFiles.ts` and `privateRoomList.ts`: section `rootFolderId`, room `parentId` = section id, `parentRoomType` 19, `encrypted` omitted when false, file `security.Copy` false, subfolders `private: false`, remove fields the server lacks; fix the listing and folder-info doc comments (`GetFolderByFolderId`, `GetFolderInfo`); verify with a contract test on one listed file and the room DTO.
-- [ ] 2.6 `fileops/delete`: no `files`/`folders` for a delete, add `status`; verify with the existing delete contract test.
+- [x] 2.6 `fileops/delete`: no `files`/`folders` for a delete, add `status`; verify with the existing delete contract test.
 
 ## 3. E2E and client fallout
 

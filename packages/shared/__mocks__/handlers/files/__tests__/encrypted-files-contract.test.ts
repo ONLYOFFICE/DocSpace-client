@@ -509,7 +509,7 @@ describe("PUT /files/fileops/delete", () => {
       }),
     });
     const body = (await res.json()) as {
-      response: Array<{ Operation: number; finished: boolean; error: string }>;
+      response: Array<Record<string, unknown>>;
     };
 
     expect(body.response).toHaveLength(1);
@@ -517,7 +517,10 @@ describe("PUT /files/fileops/delete", () => {
       Operation: 2,
       finished: true,
       error: "",
+      status: 2,
     });
+    expect(body.response[0]).not.toHaveProperty("files");
+    expect(body.response[0]).not.toHaveProperty("folders");
     expect(handle.current!.getFiles().map((f) => f.id)).toEqual([6]);
   });
 });

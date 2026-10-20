@@ -64,6 +64,7 @@ import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
 import { useImportKeyFlow } from "./flows/useImportKeyFlow";
 import { useDeleteKeyFlow } from "./flows/useDeleteKeyFlow";
+import { useDeleteUnusedKeysFlow } from "./flows/useDeleteUnusedKeysFlow";
 import { useExportKeyFlow } from "./flows/useExportKeyFlow";
 import { useRotatePassphraseFlow } from "./flows/useRotatePassphraseFlow";
 import { useResetKeysFlow } from "./flows/useResetKeysFlow";
@@ -219,6 +220,12 @@ const KeysManagement = ({
     refreshKeysFromServer,
     onForgotPassphrase: handleForgotPassphrase,
   });
+  const deleteUnused = useDeleteUnusedKeysFlow({
+    userId,
+    encryptionKeys,
+    refreshKeysFromServer,
+    onForgotPassphrase: handleForgotPassphrase,
+  });
   const exportFlow = useExportKeyFlow({
     onForgotPassphrase: handleForgotPassphrase,
   });
@@ -232,6 +239,7 @@ const KeysManagement = ({
     generate.isPending ||
     importFlow.isPending ||
     remove.isPending ||
+    deleteUnused.isPending ||
     exportFlow.isPending ||
     rotate.isPending ||
     recover.isPending ||
@@ -247,6 +255,23 @@ const KeysManagement = ({
         isDeleting={remove.isPending}
         deletingKeyId={remove.pendingId}
       />
+      {deleteUnused.unusedCount > 0 ? (
+        <div className={styles.resetSection} data-testid="unused_keys_notice">
+          <span className={styles.resetHint}>
+            {t("Common:UnusedEncryptionKeysNotice", {
+              count: deleteUnused.unusedCount,
+            })}
+          </span>
+          <Button
+            className={styles.resetButton}
+            size={ButtonSize.small}
+            onClick={deleteUnused.request}
+            label={t("Common:DeleteUnusedEncryptionKeys")}
+            isLoading={deleteUnused.isPending}
+            isDisabled={busy}
+          />
+        </div>
+      ) : null}
       <div className={styles.contentBody}>
         {hasKeys ? null : (
           <div className={styles.inputGroup}>
@@ -371,6 +396,7 @@ const KeysManagement = ({
       {importFlow.modals}
       {recover.modals}
       {remove.modals}
+      {deleteUnused.modals}
       {exportFlow.modals}
       {rotate.modals}
       {reset.modals}

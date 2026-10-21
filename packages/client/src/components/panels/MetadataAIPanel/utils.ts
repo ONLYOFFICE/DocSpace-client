@@ -108,7 +108,8 @@ export const getMetadataAIOptions = (
     !CLOSED_ROOT_TYPES.includes(item.rootFolderType as FolderType) &&
     canEditMetadata(item) &&
     !!item.security?.Download &&
-    (!isFile(item) || canReadAsText(item.fileExst, extsConvertible));
+    isFile(item) &&
+    canReadAsText(item.fileExst, extsConvertible);
 
   return isAvailable ? METADATA_AI_OPTIONS : [];
 };

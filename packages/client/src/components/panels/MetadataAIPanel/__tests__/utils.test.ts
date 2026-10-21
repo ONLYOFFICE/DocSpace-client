@@ -129,11 +129,12 @@ const room = (patch: Partial<TMetadataAIItem> = {}) =>
   }) as unknown as TMetadataAIItem;
 
 describe("context menu options", () => {
-  it("offers both actions on files, folders and rooms", () => {
-    const both = ["fill-metadata-ai", "suggest-metadata-ai"];
-
-    expect(getMetadataAIOptions(file(), context)).toEqual(both);
-    expect(getMetadataAIOptions(room(), context)).toEqual(both);
+  it("offers both actions on files only", () => {
+    expect(getMetadataAIOptions(file(), context)).toEqual([
+      "fill-metadata-ai",
+      "suggest-metadata-ai",
+    ]);
+    expect(getMetadataAIOptions(room(), context)).toEqual([]);
   });
 
   it("hides both where AI cannot read or write the metadata", () => {

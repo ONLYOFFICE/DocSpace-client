@@ -92,7 +92,7 @@ test.describe("Private rooms behind the localStorage flag", () => {
     );
   });
 
-  test("create-room chooser hides the Private room card without the flag", async ({
+  test("Chooser without the flag", async ({
     page,
     mockRequest,
     baseUrl,
@@ -105,16 +105,12 @@ test.describe("Private rooms behind the localStorage flag", () => {
     await expect(privateRoomCard(page)).toHaveCount(0);
   });
 
-  test("create-room chooser offers the Private room card with the flag", async ({
-    page,
-    mockRequest,
-    baseUrl,
-  }) => {
+  test("Chooser with the flag", async ({ page, mockRequest, baseUrl }) => {
     mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.IsDefault));
 
     await openCreateRoomDialog(page, baseUrl);
 
-    await expect(privateRoomCard(page).first()).toBeVisible();
+    await expect(privateRoomCard(page)).toHaveCount(0);
   });
 
   test("profile hides the Keys management tab without the flag", async ({

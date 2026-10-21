@@ -37,6 +37,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 import { RoomsTypePrivate } from "../enums";
 
+import { RoomsTypeValues } from "./common";
 import { getCreateRoomTypes } from "./rooms";
 import { isPrivateRoomsEnabled, PRIVATE_ROOMS_FLAG_KEY } from "./privateRooms";
 
@@ -62,22 +63,25 @@ describe("private rooms feature flag", () => {
     expect(isPrivateRoomsEnabled()).toBe(false);
   });
 
-  it("hides the private room type from the create-room chooser", () => {
+  it("Chooser without the flag: hides the private room type", () => {
     expect(getCreateRoomTypes()).not.toContain(RoomsTypePrivate);
   });
 
-  it("offers the private room type once the flag is set", () => {
+  it("Chooser with the flag: still hides the private room type", () => {
     localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
 
-    expect(getCreateRoomTypes()).toContain(RoomsTypePrivate);
+    expect(getCreateRoomTypes()).not.toContain(RoomsTypePrivate);
   });
 
   it("keeps every other room type in both states", () => {
-    const hidden = getCreateRoomTypes();
+    const withoutFlag = getCreateRoomTypes();
 
     localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
-    const shown = getCreateRoomTypes();
+    const withFlag = getCreateRoomTypes();
 
-    expect(shown.filter((type) => type !== RoomsTypePrivate)).toEqual(hidden);
+    expect(withoutFlag).toEqual(
+      RoomsTypeValues.filter((type) => type !== RoomsTypePrivate),
+    );
+    expect(withFlag).toEqual(withoutFlag);
   });
 });

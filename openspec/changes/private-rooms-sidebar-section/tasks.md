@@ -112,7 +112,7 @@
 
 ## 4. Creation from the section
 
-- [ ] 4.1 Make `getCreateRoomTypes` drop `RoomsTypePrivate` in every state. Verify by updating `packages/shared/utils/privateRooms.test.ts`: the chooser hides the private type with and without the flag, and keeps every other type. Run `cd packages/shared && pnpm exec vitest run utils/privateRooms.test.ts`.
+- [x] 4.1 Make `getCreateRoomTypes` drop `RoomsTypePrivate` in every state. Verify by updating `packages/shared/utils/privateRooms.test.ts`: the chooser hides the private type with and without the flag, and keeps every other type. Run `cd packages/shared && pnpm exec vitest run utils/privateRooms.test.ts`.
 - [ ] 4.2 Add the private branch to `ContextOptionsStore.onCreateRoom`: WebCrypto check, then `Events.ROOM_CREATE` with `startRoomType = RoomsTypePrivate`. Point `CreateButtonMobile`, the Shift+R hotkey (`HOCs/withHotkeys.js`) and the empty-state create button (`EmptyViewContainer.hooks.ts`) at it (design D6). Hide every entry point from users without the room-creation right.
 
   Verify with:

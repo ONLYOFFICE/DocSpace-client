@@ -48,7 +48,6 @@ import {
 import { CategoryType } from "../constants";
 
 import { RoomsTypeValues } from "./common";
-import { isPrivateRoomsEnabled } from "./privateRooms";
 
 /**
  * Room types offered as filter options in the "Rooms" section dropdown.
@@ -86,15 +85,13 @@ export const ROOMS_SECTION_FOLDER_TYPES = [
 /**
  * Room types the create-room chooser may offer, in catalog order.
  *
- * Private rooms are still unreleased, so their card is only offered when the
- * tester opted in via the `privateRooms` localStorage flag (see
- * ./privateRooms.ts). Read this per render instead of caching it at module
- * scope: the flag is flipped from the console at runtime.
+ * Never the Private type: private rooms are created from the Private section,
+ * which opens the dialog on that type directly.
+ * Spec: private-rooms/feature-gating, "Private room card is gated in the
+ * create-room chooser"
  */
 export const getCreateRoomTypes = () =>
-  isPrivateRoomsEnabled()
-    ? RoomsTypeValues
-    : RoomsTypeValues.filter((type) => type !== RoomsTypePrivate);
+  RoomsTypeValues.filter((type) => type !== RoomsTypePrivate);
 
 const getRoomCreationAdditionalParams = (roomType: RoomsType) => {
   const additionalParams = {

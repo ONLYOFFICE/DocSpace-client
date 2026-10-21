@@ -58,7 +58,7 @@
   - from room-membership: "Archived private room under Rooms" and "Ordinary archived room" (AI chat), and "Encrypted file in an archived private room".
 
   Rebuild the image first, because the mocks changed (`pnpm test:e2e:docker:build`), or use `pnpm test:e2e:docker:dev`. Then verify with `cd packages/client && pnpm test:e2e:docker:start __tests__/private-room-archived.spec.ts`.
-- [ ] 3.3 Run the existing private-room E2E specs to show that the active-room behaviour is unchanged: `cd packages/client && pnpm test:e2e:docker:start __tests__/private-room-access.spec.ts __tests__/private-room-cross-user-download.spec.ts __tests__/private-room-invite.spec.ts __tests__/private-room-members.spec.ts __tests__/private-room-tofu.spec.ts __tests__/encrypted-file-ui.spec.ts`. Verify that all are green in Docker.
+- [x] 3.3 Run the existing private-room E2E specs to show that the active-room behaviour is unchanged: `cd packages/client && pnpm test:e2e:docker:start __tests__/private-room-access.spec.ts __tests__/private-room-cross-user-download.spec.ts __tests__/private-room-invite.spec.ts __tests__/private-room-members.spec.ts __tests__/private-room-tofu.spec.ts __tests__/encrypted-file-ui.spec.ts`. Verify that all are green in Docker.
 
 ## 4. Integration
 

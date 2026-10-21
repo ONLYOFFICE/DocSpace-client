@@ -257,3 +257,50 @@ describe("getFilesContextOptions — room/folder with no permissions", () => {
     expect(opts).toMatchSnapshot();
   });
 });
+
+describe("getFilesContextOptions — folder inside an archived private room", () => {
+  const archivedFolder = (): TItem =>
+    ({
+      id: 6,
+      parentId: 7,
+      title: "Reports",
+      isFolder: true,
+      private: false,
+      rootFolderType: FolderType.Archive,
+      security: { Read: true, Download: true, Copy: true, Duplicate: true },
+      viewAccessibility: {},
+    }) as unknown as TItem;
+
+  const withheld = [
+    "download",
+    "copy-to",
+    "duplicate",
+    "sharing-settings",
+    "copy-shared-link",
+    "manage-links",
+    "link-for-room-members",
+    "mark-as-favorite",
+  ];
+
+  it("Folder menu in an archived private room", () => {
+    const store = createTestFilesStore({
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+    const opts = store.getFilesContextOptions(archivedFolder());
+
+    for (const option of withheld) {
+      expect(opts).not.toContain(option);
+    }
+    expect(opts).toContain("download-encrypted");
+  });
+
+  it("keeps download and copy-to for the same folder in an ordinary archived room", () => {
+    const opts = createTestFilesStore().getFilesContextOptions(
+      archivedFolder(),
+    );
+
+    expect(opts).toContain("download");
+    expect(opts).toContain("copy-to");
+    expect(opts).not.toContain("download-encrypted");
+  });
+});

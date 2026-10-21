@@ -269,3 +269,63 @@ describe("FilesActionsStore - drag out of a private room", () => {
     },
   );
 });
+
+describe("FilesActionsStore - drag out of an archived private room", () => {
+  const ARCHIVE_ROOT_ID = 30;
+  const myDocuments = { id: 5, private: false, rootFolderId: 20 } as never;
+
+  // The server grants Copy, not Move, inside an archived room.
+  const archivedStore = (selection: unknown[]) => {
+    const itemOperationToFolder = vi.fn(async () => {});
+    const store = createTestFilesActionsStore({
+      treeFoldersStore: { isPrivacyFolder: true },
+      selectedFolderStore: {
+        rootFolderId: ARCHIVE_ROOT_ID,
+        rootFolderType: FolderType.Archive,
+      },
+      filesStore: { selection, bufferSelection: null },
+      uploadDataStore: progressStore({ itemOperationToFolder }),
+    });
+    const copy = vi.fn(async () => {});
+    store.copyEncryptedFilesToFolder = copy;
+    return { store, copy, itemOperationToFolder };
+  };
+
+  it("decrypts encrypted files dragged to My documents and requests no server copy", () => {
+    const file = {
+      id: 1,
+      title: "a.docx",
+      fileExst: ".docx",
+      encrypted: true,
+      security: { Copy: true, Move: false },
+    };
+    const { store, copy, itemOperationToFolder } = archivedStore([file]);
+
+    store.moveDragItems(5, "My documents", myDocuments);
+
+    expect(copy).toHaveBeenCalledWith(
+      [file],
+      5,
+      expect.objectContaining({ deleteSourceOnSuccess: false }),
+    );
+    expect(itemOperationToFolder).not.toHaveBeenCalled();
+  });
+
+  it("Folder dragged out", () => {
+    const folder = {
+      id: 2,
+      title: "Reports",
+      isFolder: true,
+      security: { Copy: true, Move: false },
+    };
+    const { store, copy, itemOperationToFolder } = archivedStore([folder]);
+
+    store.moveDragItems(5, "My documents", myDocuments);
+
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:CannotTransferFolderFromPrivateRoom",
+    );
+    expect(copy).not.toHaveBeenCalled();
+    expect(itemOperationToFolder).not.toHaveBeenCalled();
+  });
+});

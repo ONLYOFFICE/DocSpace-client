@@ -11,7 +11,7 @@
   - My documents.
 
   Run `cd packages/client && pnpm exec vitest run src/store/__tests__/TreeFoldersStore.privacy.test.ts`. Then run `pnpm exec vitest run src/store` to show that the existing consumer tests stay green unchanged.
-- [ ] 1.2 Pin the archive outcome of the consumers that read the signal, without changing their code. Add cases to:
+- [x] 1.2 Pin the archive outcome of the consumers that read the signal, without changing their code. Add cases to:
   - `packages/client/src/store/filesStore/__tests__/FilesStore.contextOptions.branches.test.ts`. A folder whose root is Archive, inside a private room, offers no download, copy-to, duplicate, sharing-settings, copy-shared-link, manage-links, link-for-room-members or mark-as-favorite, and does offer download-encrypted (scenario "Folder menu in an archived private room").
   - `FilesStore.contextOptions.plugins.test.ts`. A folder inside an archived private room gets no plugin entries and no ask-ai (scenario "Folder context menu with a folder plugin installed").
   - `packages/client/src/store/filesActionsStore/__tests__/FilesActionsStore.copyDelete.test.ts`:

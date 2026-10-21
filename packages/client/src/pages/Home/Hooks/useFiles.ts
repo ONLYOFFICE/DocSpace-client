@@ -39,6 +39,7 @@ import { useNavigate, useLocation, useParams } from "react-router";
 
 import { getFolder } from "@docspace/shared/api/files";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { getMetadataTemplates } from "@docspace/shared/api/metadata";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import {
   CREATED_FORM_KEY,
@@ -61,12 +62,31 @@ import type { ValueOf } from "@docspace/shared/types";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { getSectionTrashUrl } from "SRC_DIR/helpers/articleNavigation";
+import {
+  applyMetadataFilter,
+  getMetadataFilterState,
+  pruneMetadataFilter,
+} from "SRC_DIR/pages/Home/Section/Filter/MetadataFilter/utils";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
+
+const dropDeletedMetadata = async (filter: FilesFilter | RoomsFilter) => {
+  const state = getMetadataFilterState(filter);
+  if (!state) return false;
+
+  const templates = await getMetadataTemplates().catch(() => null);
+  if (!templates) return false;
+
+  const pruned = pruneMetadataFilter(state, templates);
+  if (JSON.stringify(pruned) === JSON.stringify(state)) return false;
+
+  applyMetadataFilter(filter, pruned);
+  return true;
+};
 
 export type UseFilesProps = {
   fetchFiles: FilesStore["fetchFiles"];
@@ -345,6 +365,17 @@ const useFiles = ({
         : isRooms
           ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
           : FilesFilter.getDefault({ categoryType });
+
+    if (await dropDeletedMetadata(newFilter)) {
+      const params =
+        newFilter instanceof RoomsFilter
+          ? newFilter.toUrlParams(userId)
+          : newFilter.toUrlParams();
+
+      navigate(`${location.pathname}?${params}`, { replace: true });
+      return;
+    }
+
     const requests = [Promise.resolve(newFilter)];
 
     await axios

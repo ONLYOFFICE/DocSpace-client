@@ -165,6 +165,18 @@ export const fromFilterCondition = (
     return { operator: isDate ? "before" : "lessThan", input: value ?? "" };
   }
 
+  if (op === "gte" && value) {
+    return isDate
+      ? { operator: "after", input: shiftDay(value, -1) }
+      : { operator: "greaterThan", input: shiftNumber(value, -1) };
+  }
+
+  if (op === "lte" && value) {
+    return isDate
+      ? { operator: "before", input: shiftDay(value, 1) }
+      : { operator: "lessThan", input: shiftNumber(value, 1) };
+  }
+
   if (op !== "range") return null;
 
   if (from && from === to) {
@@ -235,6 +247,32 @@ export const parseMetadataFilter = (
   } catch {
     return null;
   }
+};
+
+export const pruneMetadataFilter = (
+  state: TMetadataFilterState,
+  templates: Pick<TMetadataTemplate, "id" | "fields">[],
+): TMetadataFilterState | null => {
+  const template = templates.find(({ id }) => id === state.templateId);
+
+  if (!template) return null;
+
+  const conditions = state.conditions.flatMap((condition) => {
+    if (condition.fieldId === undefined) return [condition];
+
+    const field = template.fields?.find(({ id }) => id === condition.fieldId);
+
+    if (!field) return [];
+    if (condition.op !== "in") return [condition];
+
+    const optionIds = (condition.optionIds ?? []).filter((optionId) =>
+      field.options?.some(({ id }) => id === optionId),
+    );
+
+    return optionIds.length ? [{ ...condition, optionIds }] : [];
+  });
+
+  return { ...state, conditions };
 };
 
 export const getMetadataFilterState = ({

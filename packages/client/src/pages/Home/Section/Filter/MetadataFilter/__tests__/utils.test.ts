@@ -57,6 +57,7 @@ import {
   getOperators,
   METADATA_FILTER_GROUP,
   parseMetadataFilter,
+  pruneMetadataFilter,
   removeMetadataChip,
   serializeMetadataFilter,
   TEMPLATE_CHIP_KEY,
@@ -204,9 +205,42 @@ describe("conditions", () => {
         to: "2026-06-30",
       }),
     ).toBe(null);
+  });
+
+  it("reads inclusive bounds from links as the strict operators", () => {
     expect(
       fromFilterCondition(amount, { fieldId: 2, op: "gte", value: "100" }),
-    ).toBe(null);
+    ).toEqual({ operator: "greaterThan", input: "99" });
+    expect(
+      fromFilterCondition(hearing, {
+        fieldId: 3,
+        op: "lte",
+        value: "2026-09-14",
+      }),
+    ).toEqual({ operator: "before", input: "2026-09-15" });
+  });
+
+  it("drops what was deleted from the template since the filter was applied", () => {
+    const state = {
+      templateId: 1,
+      conditions: [
+        { fieldId: 1, op: "contains" as const, value: "acme" },
+        { fieldId: 5, op: "in" as const, optionIds: ["x", "gone"] },
+        { fieldId: 4, op: "in" as const, optionIds: ["gone"] },
+        { fieldId: 99, op: "eq" as const, value: "1" },
+        { name: "Reviewer", op: "eq" as const, value: "Ann" },
+      ],
+    };
+
+    expect(pruneMetadataFilter(state, [template])).toEqual({
+      templateId: 1,
+      conditions: [
+        { fieldId: 1, op: "contains", value: "acme" },
+        { fieldId: 5, op: "in", optionIds: ["x"] },
+        { name: "Reviewer", op: "eq", value: "Ann" },
+      ],
+    });
+    expect(pruneMetadataFilter(state, [])).toBe(null);
   });
 });
 

@@ -77,6 +77,7 @@ const MetadataFilterSection = ({
     ? getMetadataSelectedItem(t, state, template, i18n.language).chips
     : [];
   const isTemplateOnly = chips[0]?.key === TEMPLATE_CHIP_KEY;
+  const conditionCount = isTemplateOnly ? 0 : chips.length;
 
   const setState = (next: TMetadataFilterState | null) =>
     onChange(
@@ -108,13 +109,11 @@ const MetadataFilterSection = ({
     <div className={styles.section} data-testid="metadata_filter_section">
       <div className={styles.header}>
         <Heading size={HeadingSize.xsmall} level={HeadingLevel.h1}>
-          {!state?.conditions.length
+          {!conditionCount
             ? t("Common:SubmenuMetadata")
-            : state.conditions.length === 1
+            : conditionCount === 1
               ? t("Metadata:ConditionsCount_one", { count: 1 })
-              : t("Metadata:ConditionsCount_other", {
-                  count: state.conditions.length,
-                })}
+              : t("Metadata:ConditionsCount_other", { count: conditionCount })}
         </Heading>
       </div>
 

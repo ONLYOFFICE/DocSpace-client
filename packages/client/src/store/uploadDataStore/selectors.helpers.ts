@@ -131,7 +131,7 @@ export function getUserEncryptionKeysImpl(self: UploadDataStore): {
 export function shouldEncryptCurrentUploadImpl(self: UploadDataStore) {
   const { publicKey, userId } = self.getUserEncryptionKeys();
   return (
-    resolveUploadGate({ publicKey, userId }, self.getUploadFolderContext())
+    resolveUploadGate({ publicKey, userId }, self.resolveOpenFolderTarget())
       .action === "encrypt"
   );
 }
@@ -149,6 +149,6 @@ export function willEncryptItemImpl(
       publicKey,
       userId,
     },
-    self.getUploadFolderContext(),
+    item.target,
   );
 }

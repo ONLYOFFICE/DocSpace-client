@@ -644,7 +644,7 @@ export async function startSessionFuncImpl(
       publicKey,
       userId,
     },
-    self.getUploadFolderContext(),
+    item.target,
   );
 
   if (gate.action === "refuse") {
@@ -698,7 +698,7 @@ export async function startSessionFuncImpl(
       } else {
         const prepared = await self.prepareFileForEncryptedUpload(
           file,
-          toFolderId,
+          item.target,
           (progress) => {
             const fileIndex = self.uploadedFilesHistory.findIndex(
               (f) => f.uniqueId === self.files[indexOfFile].uniqueId,

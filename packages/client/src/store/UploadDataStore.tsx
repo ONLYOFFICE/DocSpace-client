@@ -36,7 +36,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import type { SkippedMemberKey } from "@docspace/shared/services/private-room/member-key-verification";
 import { ConflictResolveType } from "@docspace/shared/enums";
-import { resolveItemRoomContext } from "@docspace/shared/services/private-room/encrypted-upload";
 import type { MoveSourceRef } from "@docspace/shared/services/private-room/encrypted-upload";
 import { getFileInfo } from "@docspace/shared/api/files";
 
@@ -394,18 +393,6 @@ class UploadDataStore {
 
   shouldEncryptCurrentUpload = () => shouldEncryptCurrentUploadImpl(this);
 
-  getUploadFolderContext = () => ({
-    isPrivacyFolder: this.treeFoldersStore.isPrivacyFolder,
-    selectedRoomType: this.selectedFolderStore.roomType,
-  });
-
-  getUploadEncryptionContext = (item: TUploadFile | null | undefined) => {
-    return resolveItemRoomContext(
-      item?.file?.uploadContext,
-      this.getUploadFolderContext(),
-    );
-  };
-
   willEncryptItem = (item: TUploadFile | null | undefined) =>
     willEncryptItemImpl(this, item);
 
@@ -416,9 +403,9 @@ class UploadDataStore {
 
   prepareFileForEncryptedUpload = (
     file: TUploadBrowserFile,
-    folderId: number | string | null | undefined,
+    target: TUploadTarget,
     onProgress?: (progress: number) => void,
-  ) => prepareFileForEncryptedUploadImpl(this, file, folderId, onProgress);
+  ) => prepareFileForEncryptedUploadImpl(file, target, onProgress);
 
   removeFiles = (fileIds: number[]) => {
     fileIds.forEach((id) => {

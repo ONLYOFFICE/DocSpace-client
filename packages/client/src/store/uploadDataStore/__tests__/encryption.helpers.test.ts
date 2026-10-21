@@ -31,6 +31,7 @@ import {
   createTestUploadDataStore,
   installWindowGlobals,
   makeBrowserFile,
+  makePrivateUploadTarget,
   makeUploadFile,
 } from "./testHarness";
 
@@ -90,8 +91,7 @@ vi.mock(
   }),
 );
 
-const keyedPrivacy = {
-  treeFoldersStore: { isPrivacyFolder: true },
+const keyed = {
   userStore: { encryptionKeys: [{ id: "key-1", publicKey: "pk-base64-1" }] },
 };
 
@@ -102,19 +102,23 @@ beforeEach(() => {
 
 describe("cancelEncryptedBatchUploadImpl", () => {
   it("Uploader declines to unlock: only pending, encryptable rows fail with Common:EncryptionLockedUpload", () => {
-    const { store } = createTestUploadDataStore(keyedPrivacy);
-    const enc = makeUploadFile({ uniqueId: "enc", action: "upload" });
+    const { store } = createTestUploadDataStore(keyed);
+    const target = makePrivateUploadTarget();
+    const enc = makeUploadFile({ uniqueId: "enc", action: "upload", target });
     const already = makeUploadFile({
       uniqueId: "already",
       action: "upload",
       encrypted: true,
+      target,
     });
     const errored = makeUploadFile({
       uniqueId: "err",
       action: "upload",
       error: "boom",
+      target,
     });
-    store.files = [enc, already, errored];
+    const plain = makeUploadFile({ uniqueId: "plain", action: "upload" });
+    store.files = [enc, already, errored, plain];
     store.uploadedFilesHistory = [
       makeUploadFile({ uniqueId: "enc" }),
       makeUploadFile({ uniqueId: "already" }),
@@ -131,13 +135,18 @@ describe("cancelEncryptedBatchUploadImpl", () => {
     expect(store.files[1].error).toBeNull();
     expect(store.uploadedFilesHistory[1].error).toBeNull();
     expect(store.files[2].error).toBe("boom");
+    expect(store.files[3].error).toBeNull();
   });
 
   it("does nothing when the user has no encryption keys", () => {
-    const { store } = createTestUploadDataStore({
-      treeFoldersStore: { isPrivacyFolder: true },
-    });
-    store.files = [makeUploadFile({ uniqueId: "a", action: "upload" })];
+    const { store } = createTestUploadDataStore();
+    store.files = [
+      makeUploadFile({
+        uniqueId: "a",
+        action: "upload",
+        target: makePrivateUploadTarget(),
+      }),
+    ];
 
     cancelEncryptedBatchUploadImpl(store);
 
@@ -157,14 +166,19 @@ describe("ensureEncryptionUnlockedForBatchImpl", () => {
   });
 
   it("returns true when no queued file needs encryption", async () => {
-    const { store } = createTestUploadDataStore(keyedPrivacy);
+    const { store } = createTestUploadDataStore({
+      ...keyed,
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
     store.files = [
       makeUploadFile({
         action: "upload",
         file: makeBrowserFile("a.docx", 10, { encrypted: true }),
         encrypted: true,
+        target: makePrivateUploadTarget(),
       }),
-      makeUploadFile({ action: "converted" }),
+      makeUploadFile({ action: "converted", target: makePrivateUploadTarget() }),
+      makeUploadFile({ action: "upload" }),
     ];
 
     await expect(ensureEncryptionUnlockedForBatchImpl(store)).resolves.toBe(

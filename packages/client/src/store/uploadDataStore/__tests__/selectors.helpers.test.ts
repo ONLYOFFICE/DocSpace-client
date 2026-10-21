@@ -31,6 +31,7 @@ import {
   createTestUploadDataStore,
   installWindowGlobals,
   makeBrowserFile,
+  makePrivateUploadTarget,
   makeUploadFile,
 } from "./testHarness";
 
@@ -265,24 +266,35 @@ describe("willEncryptItemImpl", () => {
     expect(willEncryptItemImpl(store, undefined)).toBe(false);
   });
 
-  it("is true for a plain item in a privacy folder with keys available", () => {
+  it("is true for a plain item fixed for a private room with keys available", () => {
+    const { store } = createTestUploadDataStore({ userStore: keyedUserStore });
+
+    expect(
+      willEncryptItemImpl(
+        store,
+        makeUploadFile({ target: makePrivateUploadTarget() }),
+      ),
+    ).toBe(true);
+  });
+
+  it("is false for an item fixed outside private rooms, even in a privacy folder", () => {
     const { store } = createTestUploadDataStore({
       treeFoldersStore: { isPrivacyFolder: true },
       userStore: keyedUserStore,
     });
 
-    expect(willEncryptItemImpl(store, makeUploadFile())).toBe(true);
+    expect(willEncryptItemImpl(store, makeUploadFile())).toBe(false);
   });
 
   it("is false when the item is already encrypted", () => {
-    const { store } = createTestUploadDataStore({
-      treeFoldersStore: { isPrivacyFolder: true },
-      userStore: keyedUserStore,
-    });
+    const { store } = createTestUploadDataStore({ userStore: keyedUserStore });
 
-    expect(willEncryptItemImpl(store, makeUploadFile({ encrypted: true }))).toBe(
-      false,
-    );
+    expect(
+      willEncryptItemImpl(
+        store,
+        makeUploadFile({ encrypted: true, target: makePrivateUploadTarget() }),
+      ),
+    ).toBe(false);
   });
 
   it("honors a per-file uploadContext override in a non-private folder", () => {

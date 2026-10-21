@@ -33,6 +33,7 @@ import {
   installWindowGlobals,
   makeBrowserFile,
   makeFileInfo,
+  makePrivateUploadTarget,
   makeUploadFile,
 } from "./testHarness";
 
@@ -45,11 +46,13 @@ import { requestDeviceSetupHint } from "@docspace/shared/services/encryption/dev
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import {
   EncryptedReimportError,
+  makeOpaqueUploadName,
   prepareEncryptedUpload,
   recoverDekForReimport,
   sniffDse3Upload,
 } from "@docspace/shared/services/private-room/encrypted-upload";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 import { hasFileDek, setFileDek, takeFileDek } from "../helpers";
 
@@ -381,15 +384,13 @@ describe("UploadDataStore.checkChunkUpload — encrypted final chunk", () => {
 
 describe("UploadDataStore.startSessionFunc — encrypted upload preparation", () => {
   const setupEncryptedPendingFile = () => {
-    const harness = createTestUploadDataStore({
-      treeFoldersStore: { isPrivacyFolder: true },
-      userStore: userWithKeys(),
-    });
+    const harness = createTestUploadDataStore({ userStore: userWithKeys() });
     const { store } = harness;
     const entry = makeUploadFile({
       uniqueId: "enc-pending",
       file: makeBrowserFile("secret.docx", 3000),
       toFolderId: 7,
+      target: makePrivateUploadTarget({ folderId: 7 }),
     });
     store.files = [entry];
     store.uploadedFilesHistory = [{ ...entry }];
@@ -500,7 +501,6 @@ describe("UploadDataStore.startSessionFunc — encrypted upload preparation", ()
 describe("UploadDataStore.startSessionFunc — uploader without a key", () => {
   const setupKeylessPendingFile = () => {
     const harness = createTestUploadDataStore({
-      treeFoldersStore: { isPrivacyFolder: true },
       userStore: { user: { id: "user-1", isAdmin: false }, encryptionKeys: [] },
     });
     const { store } = harness;
@@ -508,6 +508,7 @@ describe("UploadDataStore.startSessionFunc — uploader without a key", () => {
       uniqueId: "keyless-pending",
       file: makeBrowserFile("secret.docx", 3000),
       toFolderId: 7,
+      target: makePrivateUploadTarget({ folderId: 7 }),
     });
     store.files = [entry];
     store.uploadedFilesHistory = [{ ...entry }];
@@ -580,16 +581,14 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
   const identity = { publicKey: "id-pub" };
 
   const setupReimportPendingFile = () => {
-    const harness = createTestUploadDataStore({
-      treeFoldersStore: { isPrivacyFolder: true },
-      userStore: userWithKeys(),
-    });
+    const harness = createTestUploadDataStore({ userStore: userWithKeys() });
     const { store } = harness;
     const entry = makeUploadFile({
       uniqueId: "reimport-pending",
       file: makeBrowserFile(RAW_NAME, 2048),
       toFolderId: 7,
       encryptionRoomId: 55,
+      target: makePrivateUploadTarget({ folderId: 7, encryptionRoomId: 55 }),
     });
     store.files = [entry];
     store.uploadedFilesHistory = [{ ...entry }];
@@ -729,11 +728,8 @@ describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
   });
 
   it("ensureEncryptionUnlockedForBatch requires an unlocked identity when a pending file will encrypt", async () => {
-    const { store } = createTestUploadDataStore({
-      treeFoldersStore: { isPrivacyFolder: true },
-      userStore: userWithKeys(),
-    });
-    store.files = [makeUploadFile()];
+    const { store } = createTestUploadDataStore({ userStore: userWithKeys() });
+    store.files = [makeUploadFile({ target: makePrivateUploadTarget() })];
 
     vi.mocked(requireUnlock).mockResolvedValue({ pub: "x" } as never);
     await expect(store.ensureEncryptionUnlockedForBatch()).resolves.toBe(true);
@@ -746,18 +742,18 @@ describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
   });
 
   it("uploader declines to unlock: cancelEncryptedBatchUpload fails only the not-yet-started encryptable files with the locked reason", () => {
-    const { store } = createTestUploadDataStore({
-      treeFoldersStore: { isPrivacyFolder: true },
-      userStore: userWithKeys(),
-    });
-    const pendingEncryptable = makeUploadFile({ uniqueId: "enc-a" });
+    const { store } = createTestUploadDataStore({ userStore: userWithKeys() });
+    const target = makePrivateUploadTarget();
+    const pendingEncryptable = makeUploadFile({ uniqueId: "enc-a", target });
     const alreadyRunning = makeUploadFile({
       uniqueId: "run-b",
       inAction: true,
+      target,
     });
     const alreadyEncrypted = makeUploadFile({
       uniqueId: "pre-c",
       encrypted: true,
+      target,
     });
     store.files = [pendingEncryptable, alreadyRunning, alreadyEncrypted];
     store.uploadedFilesHistory = [
@@ -785,5 +781,217 @@ describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
     expect(toastr.info).toHaveBeenCalledWith(
       "Common:EncryptionUploadCancelled",
     );
+  });
+});
+
+describe("UploadDataStore — upload target fixed when the user starts the upload", () => {
+  const OPAQUE_NAME =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.docx$/;
+  const PRIVATE_ROOM_ID = 50;
+  const PLAIN_FOLDER_ID = 9;
+
+  const privateRoomOpen = {
+    selectedFolderStore: {
+      id: PRIVATE_ROOM_ID,
+      isRoom: true,
+      roomType: RoomsType.CustomRoom,
+      navigationPath: [],
+    },
+    treeFoldersStore: { isPrivacyFolder: true },
+  };
+
+  const plainFolderOpen = {
+    selectedFolderStore: {
+      id: PLAIN_FOLDER_ID,
+      isRoom: false,
+      roomType: null,
+      navigationPath: [],
+    },
+    treeFoldersStore: { isPrivacyFolder: false },
+  };
+
+  const openFolder = (
+    store: UploadDataStore,
+    folder: {
+      selectedFolderStore: Record<string, unknown>;
+      treeFoldersStore: Record<string, unknown>;
+    },
+  ) => {
+    Object.assign(store.selectedFolderStore, folder.selectedFolderStore);
+    Object.assign(store.treeFoldersStore, folder.treeFoldersStore);
+  };
+
+  const openRoomsList = (store: UploadDataStore) =>
+    openFolder(store, {
+      selectedFolderStore: {
+        id: 2,
+        isRoom: false,
+        roomType: null,
+        navigationPath: [],
+      },
+      treeFoldersStore: { isPrivacyFolder: false },
+    });
+
+  const clearSelectedFolder = (store: UploadDataStore) =>
+    openFolder(store, {
+      selectedFolderStore: {
+        id: null,
+        isRoom: false,
+        roomType: null,
+        navigationPath: [],
+      },
+      treeFoldersStore: { isPrivacyFolder: false },
+    });
+
+  /** Queues files the way an entry point does: the open folder is the target. */
+  const queueIntoOpenFolder = (store: UploadDataStore, count: number) => {
+    const handleUploadConflicts = vi.fn();
+    store.handleUploadConflicts = handleUploadConflicts as never;
+    const parentFolderId = store.selectedFolderStore.id;
+    const files = Array.from({ length: count }, (_, i) =>
+      makeBrowserFile(`report-${i}.docx`, 100, { parentFolderId }),
+    );
+    store.startUpload(files, null, t, store.resolveOpenFolderTarget());
+    return handleUploadConflicts.mock.calls[0][2];
+  };
+
+  const encryptEveryFile = () =>
+    vi.mocked(prepareEncryptedUpload).mockImplementation(
+      async (config) =>
+        ({
+          data: new Blob([new Uint8Array(config.file.size + 100)]),
+          encrypted: true,
+          dek: makeDek(),
+          uploadFileName: makeOpaqueUploadName(config.file.name),
+          originalFileType: "application/octet-stream",
+          originalFileSize: config.file.size,
+          originalFileName: config.file.name,
+        }) as never,
+    );
+
+  const sessionCalls = () => vi.mocked(filesApi.startUploadSession).mock.calls;
+
+  beforeEach(() => {
+    vi.mocked(sniffDse3Upload).mockResolvedValue(null);
+    vi.mocked(filesApi.startUploadSession).mockReturnValue(
+      new Promise(() => {}) as never,
+    );
+  });
+
+  it("Room left while files are queued", async () => {
+    const { store } = createTestUploadDataStore({
+      ...privateRoomOpen,
+      userStore: userWithKeys(),
+    });
+    vi.mocked(requireUnlock).mockResolvedValue({ pub: "x" } as never);
+    encryptEveryFile();
+
+    const data = queueIntoOpenFolder(store, 6);
+    openRoomsList(store);
+    store.handleFilesUpload(data, t);
+    await vi.waitFor(() => expect(sessionCalls()).toHaveLength(5));
+
+    store.startSessionFunc(5, t);
+    await vi.waitFor(() => expect(sessionCalls()).toHaveLength(6));
+
+    expect(vi.mocked(requireUnlock).mock.calls).toEqual([["user-1"]]);
+    for (const [folderId, name, , , encrypted] of sessionCalls()) {
+      expect(folderId).toBe(PRIVATE_ROOM_ID);
+      expect(name).toMatch(OPAQUE_NAME);
+      expect(encrypted).toBe(true);
+    }
+    for (const [config] of vi.mocked(prepareEncryptedUpload).mock.calls) {
+      expect(config).toMatchObject({
+        isPrivate: true,
+        roomType: RoomsType.CustomRoom,
+      });
+    }
+    expect(store.files.every((f) => f.encrypted)).toBe(true);
+  });
+
+  it("Files section left while files are queued", async () => {
+    const { store } = createTestUploadDataStore({
+      ...privateRoomOpen,
+      userStore: userWithKeys(),
+    });
+    vi.mocked(requireUnlock).mockResolvedValue({ pub: "x" } as never);
+    encryptEveryFile();
+
+    const data = queueIntoOpenFolder(store, 2);
+    clearSelectedFolder(store);
+    store.handleFilesUpload(data, t);
+    await vi.waitFor(() => expect(sessionCalls()).toHaveLength(2));
+
+    for (const [folderId, name, , , encrypted] of sessionCalls()) {
+      expect(folderId).toBe(PRIVATE_ROOM_ID);
+      expect(name).toMatch(OPAQUE_NAME);
+      expect(encrypted).toBe(true);
+    }
+  });
+
+  it("Private room opened while a plain upload is queued", async () => {
+    const { store } = createTestUploadDataStore({
+      ...plainFolderOpen,
+      userStore: userWithKeys(),
+    });
+
+    const data = queueIntoOpenFolder(store, 2);
+    openFolder(store, privateRoomOpen);
+    store.handleFilesUpload(data, t);
+    await vi.waitFor(() => expect(sessionCalls()).toHaveLength(2));
+
+    expect(requireUnlock).not.toHaveBeenCalled();
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(sessionCalls().map(([folderId, name, , , encrypted]) => [
+      folderId,
+      name,
+      encrypted,
+    ])).toEqual([
+      [PLAIN_FOLDER_ID, "report-0.docx", false],
+      [PLAIN_FOLDER_ID, "report-1.docx", false],
+    ]);
+  });
+
+  it("No key when the queued file starts", async () => {
+    const { store } = createTestUploadDataStore({
+      ...privateRoomOpen,
+      userStore: { user: { id: "user-1", isAdmin: false }, encryptionKeys: [] },
+    });
+    replaceAction(store, "finishUploadFiles");
+
+    const data = queueIntoOpenFolder(store, 2);
+    openRoomsList(store);
+    store.handleFilesUpload(data, t);
+    await vi.waitFor(() =>
+      expect(store.files.every((f) => !!f.error)).toBe(true),
+    );
+
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(store.files.map((f) => f.error)).toEqual([
+      "Common:EncryptionKeysRequiredForUpload",
+      "Common:EncryptionKeysRequiredForUpload",
+    ]);
+  });
+
+  it("Unlock declined for a queued batch", async () => {
+    const { store } = createTestUploadDataStore({
+      ...privateRoomOpen,
+      userStore: userWithKeys(),
+    });
+    vi.mocked(requireUnlock).mockResolvedValue(null as never);
+
+    const data = queueIntoOpenFolder(store, 2);
+    openRoomsList(store);
+    store.handleFilesUpload(data, t);
+    await vi.waitFor(() => expect(store.uploaded).toBe(true));
+
+    expect(vi.mocked(requireUnlock).mock.calls).toEqual([["user-1"]]);
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(store.files.map((f) => f.error)).toEqual([
+      "Common:EncryptionLockedUpload",
+      "Common:EncryptionLockedUpload",
+    ]);
   });
 });

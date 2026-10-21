@@ -85,9 +85,10 @@ export function shouldEncryptUpload(
   return isEncryptableRoomType(roomType) && isPrivate;
 }
 
-export type UploadFolderContext = {
-  isPrivacyFolder: boolean;
-  selectedRoomType?: RoomsType | null;
+/** Privacy of an upload's target, fixed when the user started the upload. */
+export type UploadTargetContext = {
+  isPrivate: boolean;
+  roomType?: RoomsType | null;
 };
 
 /** Set on a decrypted copy that completes a move out of a private room. */
@@ -101,15 +102,13 @@ export type ItemUploadContext = {
 
 export function resolveItemRoomContext(
   uploadContext: ItemUploadContext | undefined,
-  folder: UploadFolderContext,
+  target: UploadTargetContext,
 ): { roomType: RoomsType | null | undefined; isPrivate: boolean } {
-  const roomType =
-    uploadContext?.roomType ??
-    (folder.isPrivacyFolder ? RoomsType.CustomRoom : folder.selectedRoomType);
+  const roomType = uploadContext?.roomType ?? target.roomType;
   const isPrivate =
     uploadContext && "isPrivate" in uploadContext
       ? !!uploadContext.isPrivate
-      : folder.isPrivacyFolder;
+      : target.isPrivate;
   return { roomType, isPrivate };
 }
 
@@ -136,11 +135,11 @@ export type UploadGateOutcome =
 
 export function resolveUploadGate(
   params: UploadGateParams,
-  folder: UploadFolderContext,
+  target: UploadTargetContext,
 ): UploadGateOutcome {
   const { roomType, isPrivate } = resolveItemRoomContext(
     params.uploadContext,
-    folder,
+    target,
   );
   const privateTarget =
     roomType !== null &&
@@ -157,9 +156,9 @@ export function resolveUploadGate(
 
 export function willEncryptUploadItem(
   params: UploadGateParams,
-  folder: UploadFolderContext,
+  target: UploadTargetContext,
 ): boolean {
-  return resolveUploadGate(params, folder).action === "encrypt";
+  return resolveUploadGate(params, target).action === "encrypt";
 }
 
 function newUuid(): string {

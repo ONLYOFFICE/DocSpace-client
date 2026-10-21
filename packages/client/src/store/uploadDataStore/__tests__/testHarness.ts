@@ -107,6 +107,8 @@ import type { TUploadFile, TUploadTarget } from "../helpers";
 // eslint-disable-next-line import/first
 import type { TFile } from "@docspace/shared/api/files/types";
 // eslint-disable-next-line import/first
+import { RoomsType } from "@docspace/shared/enums";
+// eslint-disable-next-line import/first
 import { createTestFilesStore } from "../../filesStore/__tests__/testHarness";
 // eslint-disable-next-line import/first
 import {
@@ -262,6 +264,17 @@ export const makeUploadTarget = (
   encryptionRoomId: null,
   ...overrides,
 });
+
+export const makePrivateUploadTarget = (
+  overrides: Partial<TUploadTarget> = {},
+): TUploadTarget =>
+  makeUploadTarget({
+    folderId: 50,
+    isPrivate: true,
+    roomType: RoomsType.CustomRoom,
+    encryptionRoomId: 50,
+    ...overrides,
+  });
 
 export const makeUploadFile = (
   overrides: Partial<TUploadFile> = {},

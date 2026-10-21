@@ -50,7 +50,10 @@ import {
 } from "@docspace/shared/services/private-room/member-key-verification";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
-import { prepareEncryptedUpload } from "@docspace/shared/services/private-room/encrypted-upload";
+import {
+  prepareEncryptedUpload,
+  resolveItemRoomContext,
+} from "@docspace/shared/services/private-room/encrypted-upload";
 import type { MoveSourceRef } from "@docspace/shared/services/private-room/encrypted-upload";
 import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
@@ -61,7 +64,7 @@ import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types
 
 import i18n from "../../i18n";
 
-import type { TUploadBrowserFile } from "./helpers";
+import type { TUploadBrowserFile, TUploadTarget } from "./helpers";
 import type { default as UploadDataStore } from "../UploadDataStore";
 
 // Spec: private-rooms/file-operations, "Files leaving a private room are decrypted".
@@ -330,27 +333,19 @@ export function cancelEncryptedBatchUploadImpl(self: UploadDataStore) {
 }
 
 export async function prepareFileForEncryptedUploadImpl(
-  self: UploadDataStore,
   file: TUploadBrowserFile,
-  folderId: number | string | null | undefined,
+  target: TUploadTarget,
   onProgress?: (progress: number) => void,
 ) {
-  const overrideCtx = file?.uploadContext;
-  const ancestorIsPrivate = self.treeFoldersStore.isPrivacyFolder;
-  const roomType =
-    overrideCtx?.roomType ??
-    (ancestorIsPrivate
-      ? RoomsType.CustomRoom
-      : self.selectedFolderStore.roomType);
-  const isPrivate =
-    overrideCtx && "isPrivate" in overrideCtx
-      ? overrideCtx.isPrivate
-      : ancestorIsPrivate;
+  const { roomType, isPrivate } = resolveItemRoomContext(
+    file?.uploadContext,
+    target,
+  );
   return prepareEncryptedUpload({
     file,
-    folderId: folderId as number,
+    folderId: target.folderId as number,
     roomType: roomType || RoomsType.CustomRoom,
-    isPrivate: isPrivate || false,
+    isPrivate,
     onProgress,
   });
 }

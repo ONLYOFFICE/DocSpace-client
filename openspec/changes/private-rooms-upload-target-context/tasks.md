@@ -17,7 +17,7 @@
   - `uploadContext` precedence.
 
   Run `cd packages/client && pnpm exec vitest run src/store/uploadDataStore`.
-- [ ] 1.2 Decide privacy from the item's context only (design D2):
+- [x] 1.2 Decide privacy from the item's context only (design D2):
   - `resolveUploadGate` and `willEncryptUploadItem` in `packages/shared/services/private-room/encrypted-upload.ts` take a required item context (`isPrivate`, `roomType`) instead of `UploadFolderContext`;
   - `resolveItemRoomContext` loses its folder fallback;
   - the client readers pass the item's fixed context:

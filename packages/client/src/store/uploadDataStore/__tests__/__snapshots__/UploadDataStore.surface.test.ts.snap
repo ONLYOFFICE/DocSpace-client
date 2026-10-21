@@ -46,8 +46,6 @@ exports[`UploadDataStore — public surface > exposes a stable set of public mem
   "getConversationPercent",
   "getFilesPercent",
   "getNewPercent",
-  "getUploadEncryptionContext",
-  "getUploadFolderContext",
   "getUploadedFile",
   "getUserEncryptionKeys",
   "handleFilesUpload",

@@ -49,14 +49,12 @@ import {
 
 const KEYS = { publicKey: "pub-base64", userId: "user-1" };
 
-describe("resolveUploadGate", () => {
-  const privacyFolder = {
-    isPrivacyFolder: true,
-    selectedRoomType: RoomsType.CustomRoom,
-  };
+const privateTarget = { isPrivate: true, roomType: RoomsType.CustomRoom };
+const plainTarget = { isPrivate: false, roomType: RoomsType.EditingRoom };
 
-  it("encrypts a fresh file in a private custom room when keys exist", () => {
-    expect(resolveUploadGate({ ...KEYS }, privacyFolder)).toEqual({
+describe("resolveUploadGate", () => {
+  it("encrypts a fresh file fixed for a private room when keys exist", () => {
+    expect(resolveUploadGate({ ...KEYS }, privateTarget)).toEqual({
       action: "encrypt",
     });
   });
@@ -65,28 +63,25 @@ describe("resolveUploadGate", () => {
     expect(
       resolveUploadGate(
         { publicKey: null, userId: null, alreadyEncrypted: true },
-        privacyFolder,
+        privateTarget,
       ),
     ).toEqual({ action: "refuse", reason: "no-key" });
   });
 
   it("passes an already-encrypted item through unchanged", () => {
     expect(
-      resolveUploadGate({ ...KEYS, alreadyEncrypted: true }, privacyFolder),
+      resolveUploadGate({ ...KEYS, alreadyEncrypted: true }, privateTarget),
     ).toEqual({ action: "plain" });
   });
 
-  it("sends plaintext outside private rooms even without keys", () => {
+  it("sends plaintext for a non-private target even without keys", () => {
     expect(
-      resolveUploadGate(
-        { publicKey: null, userId: null },
-        { isPrivacyFolder: false, selectedRoomType: RoomsType.EditingRoom },
-      ),
+      resolveUploadGate({ publicKey: null, userId: null }, plainTarget),
     ).toEqual({ action: "plain" });
     expect(
       resolveUploadGate(
         { publicKey: null, userId: null },
-        { isPrivacyFolder: false, selectedRoomType: null },
+        { isPrivate: false, roomType: null },
       ),
     ).toEqual({ action: "plain" });
   });
@@ -99,35 +94,28 @@ describe("resolveUploadGate", () => {
           userId: null,
           uploadContext: { roomType: RoomsType.PublicRoom, isPrivate: true },
         },
-        { isPrivacyFolder: false, selectedRoomType: null },
+        plainTarget,
       ),
     ).toEqual({ action: "plain" });
   });
 });
 
 describe("resolveItemRoomContext", () => {
-  it("falls back to CustomRoom + private inside a privacy folder", () => {
-    const ctx = resolveItemRoomContext(undefined, {
-      isPrivacyFolder: true,
-      selectedRoomType: RoomsType.PublicRoom,
+  it("takes privacy and room type from the fixed target", () => {
+    expect(resolveItemRoomContext(undefined, privateTarget)).toEqual({
+      roomType: RoomsType.CustomRoom,
+      isPrivate: true,
     });
-    expect(ctx.roomType).toBe(RoomsType.CustomRoom);
-    expect(ctx.isPrivate).toBe(true);
+    expect(resolveItemRoomContext(undefined, plainTarget)).toEqual({
+      roomType: RoomsType.EditingRoom,
+      isPrivate: false,
+    });
   });
 
-  it("uses the selected room type outside a privacy folder", () => {
-    const ctx = resolveItemRoomContext(undefined, {
-      isPrivacyFolder: false,
-      selectedRoomType: RoomsType.EditingRoom,
-    });
-    expect(ctx.roomType).toBe(RoomsType.EditingRoom);
-    expect(ctx.isPrivate).toBe(false);
-  });
-
-  it("honors the per-file uploadContext override over the folder context", () => {
+  it("honors the per-file uploadContext override over the target", () => {
     const ctx = resolveItemRoomContext(
       { roomType: RoomsType.CustomRoom, isPrivate: true },
-      { isPrivacyFolder: false, selectedRoomType: RoomsType.PublicRoom },
+      { isPrivate: false, roomType: RoomsType.PublicRoom },
     );
     expect(ctx.roomType).toBe(RoomsType.CustomRoom);
     expect(ctx.isPrivate).toBe(true);
@@ -136,64 +124,51 @@ describe("resolveItemRoomContext", () => {
   it("treats an override with isPrivate=false as non-private", () => {
     const ctx = resolveItemRoomContext(
       { roomType: RoomsType.CustomRoom, isPrivate: false },
-      { isPrivacyFolder: true, selectedRoomType: null },
+      privateTarget,
     );
     expect(ctx.isPrivate).toBe(false);
   });
 });
 
 describe("willEncryptUploadItem", () => {
-  const privacyFolder = {
-    isPrivacyFolder: true,
-    selectedRoomType: RoomsType.CustomRoom,
-  };
-
-  it("encrypts a fresh file in a private custom room when keys exist", () => {
-    expect(willEncryptUploadItem({ ...KEYS }, privacyFolder)).toBe(true);
+  it("encrypts a fresh file fixed for a private room when keys exist", () => {
+    expect(willEncryptUploadItem({ ...KEYS }, privateTarget)).toBe(true);
   });
 
   it("uploader without a key: refuses instead of uploading plaintext", () => {
     expect(
-      willEncryptUploadItem({ publicKey: null, userId: null }, privacyFolder),
+      willEncryptUploadItem({ publicKey: null, userId: null }, privateTarget),
     ).toBe(false);
     expect(
-      resolveUploadGate({ publicKey: null, userId: null }, privacyFolder),
+      resolveUploadGate({ publicKey: null, userId: null }, privateTarget),
     ).toEqual({ action: "refuse", reason: "no-key" });
     expect(
-      resolveUploadGate({ publicKey: "pub", userId: null }, privacyFolder),
+      resolveUploadGate({ publicKey: "pub", userId: null }, privateTarget),
     ).toEqual({ action: "refuse", reason: "no-key" });
   });
 
   it("does NOT re-encrypt an already-encrypted item", () => {
     expect(
-      willEncryptUploadItem({ ...KEYS, alreadyEncrypted: true }, privacyFolder),
+      willEncryptUploadItem({ ...KEYS, alreadyEncrypted: true }, privateTarget),
     ).toBe(false);
   });
 
-  it("does NOT encrypt in a non-private folder", () => {
-    expect(
-      willEncryptUploadItem(
-        { ...KEYS },
-        { isPrivacyFolder: false, selectedRoomType: RoomsType.EditingRoom },
-      ),
-    ).toBe(false);
+  it("never encrypts for a non-private target", () => {
+    expect(willEncryptUploadItem({ ...KEYS }, plainTarget)).toBe(false);
   });
 
   it("does NOT encrypt a non-encryptable room type even when private", () => {
     expect(
       willEncryptUploadItem(
-        { ...KEYS, uploadContext: { roomType: RoomsType.PublicRoom, isPrivate: true } },
-        { isPrivacyFolder: false, selectedRoomType: null },
+        { ...KEYS },
+        { isPrivate: true, roomType: RoomsType.PublicRoom },
       ),
     ).toBe(false);
   });
 
-  it("returns false when no room type can be resolved", () => {
+  it("returns false when the target has no room type", () => {
     expect(
-      willEncryptUploadItem(
-        { ...KEYS },
-        { isPrivacyFolder: false, selectedRoomType: null },
-      ),
+      willEncryptUploadItem({ ...KEYS }, { isPrivate: true, roomType: null }),
     ).toBe(false);
   });
 });

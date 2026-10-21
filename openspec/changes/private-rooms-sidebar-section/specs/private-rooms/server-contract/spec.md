@@ -48,3 +48,31 @@ The server SHALL NOT provide private rooms with a root folder, search area or ro
 #### Scenario: Archived private room
 - **WHEN** a private room is archived
 - **THEN** it moves to the same Archive root as every other archived room
+
+### Requirement: New-items counts include private rooms
+The server SHALL count new items of private rooms the same way as new items of every other room. That covers the Rooms root's new-items count, the news listings of the Rooms root and of rooms, and mark-as-read on the Rooms root. None of them applies a privacy distinction.
+
+#### Scenario: New file in a private room
+- **WHEN** a member uploads a file into a private room
+- **THEN** the Rooms root's new-items count of the other members grows, and the Rooms news listing includes the file
+
+### Requirement: Room socket events carry no private flag
+The server SHALL send room socket events (create, update and delete of a folder) with the room's id, parent, title, room type and creator only. The private setting is not part of the payload. Archiving or restoring a room SHALL be sent as a delete from the source followed by a create in the destination.
+
+#### Scenario: User invited into a private room
+- **WHEN** a user is added to a private room
+- **THEN** that user receives a create-folder event whose payload does not say the room is private
+
+### Requirement: Room groups ignore privacy
+The server SHALL NOT accept a privacy filter on the room-group endpoints. A group of the Rooms area SHALL list and count every readable, non-archived room of that area, private rooms included.
+
+#### Scenario: Group with a private room
+- **WHEN** a Rooms-area group holds a private room the user can read
+- **THEN** the group's room count and listing include that room
+
+### Requirement: Server-built room links
+The server SHALL build links to an active room or a folder inside one as `rooms/shared/{id}/filter?folder={id}`. Links to an archived room or a folder inside one SHALL be built as `rooms/archived/filter?folder={id}`. Private rooms SHALL get the same forms.
+
+#### Scenario: Link to an archived private room
+- **WHEN** the server builds a link to an archived private room
+- **THEN** the link is `rooms/archived/filter?folder={id}`

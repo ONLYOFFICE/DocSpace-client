@@ -100,6 +100,7 @@ const MetadataTemplates = () => {
           template={editingTemplate}
           onClose={closePanel}
           onSaved={onSaved}
+          onApplied={loadTemplates}
         />
       ) : null}
 

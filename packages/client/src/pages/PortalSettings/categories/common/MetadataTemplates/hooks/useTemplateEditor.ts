@@ -41,6 +41,7 @@ import {
   createMetadataField,
   createMetadataTemplate,
   deleteMetadataField,
+  getMetadataTemplates,
   updateMetadataField,
   updateMetadataTemplate,
 } from "@docspace/shared/api/metadata";
@@ -84,9 +85,11 @@ const applyFieldChanges = (
 export const useTemplateEditor = (
   template: TMetadataTemplate | null,
   onSaved: () => void,
+  onApplied: () => void,
 ) => {
   const { t } = useTranslation(["Common"]);
 
+  const [original, setOriginal] = useState(template);
   const [draft, setDraft] = useState(() => toTemplateDraft(template));
   const [fieldForm, setFieldForm] = useState<TFieldForm | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -96,7 +99,22 @@ export const useTemplateEditor = (
     !!fieldForm && !draft.fields.some((field) => field.key === fieldForm.key);
 
   const hasRemovedFields =
-    !!template && getTemplateChanges(template, draft).removed.length > 0;
+    !!original && getTemplateChanges(original, draft).removed.length > 0;
+
+  const reloadAfterPartialSave = async (templateId: number) => {
+    const fresh = await getMetadataTemplates()
+      .then((templates) => templates.find(({ id }) => id === templateId))
+      .catch(() => undefined);
+
+    if (!fresh) {
+      onSaved();
+      return;
+    }
+
+    setOriginal(fresh);
+    setDraft(toTemplateDraft(fresh));
+    onApplied();
+  };
 
   const changeDraft = (patch: Partial<TTemplateDraft>) =>
     setDraft((prev) => ({ ...prev, ...patch }));
@@ -132,24 +150,24 @@ export const useTemplateEditor = (
     setIsSaving(true);
 
     try {
-      if (!template) {
+      if (!original) {
         await createMetadataTemplate({
           name,
           visible: draft.visible,
           fields: draft.fields.map(toFieldRequest),
         });
       } else {
-        const changes = getTemplateChanges(template, draft);
+        const changes = getTemplateChanges(original, draft);
 
         if (changes.isTemplateChanged) {
-          await updateMetadataTemplate(template.id, {
+          await updateMetadataTemplate(original.id, {
             name,
             visible: draft.visible,
           });
           markApplied();
         }
 
-        await applyFieldChanges(template.id, changes, markApplied);
+        await applyFieldChanges(original.id, changes, markApplied);
       }
 
       toastr.success(t("Common:ChangesSavedSuccessfully"));
@@ -157,7 +175,7 @@ export const useTemplateEditor = (
       return true;
     } catch (e) {
       toastr.error(e as string);
-      if (isApplied) onSaved();
+      if (isApplied && original) await reloadAfterPartialSave(original.id);
       return false;
     } finally {
       setIsSaving(false);
@@ -165,11 +183,12 @@ export const useTemplateEditor = (
   };
 
   return {
+    original,
     draft,
     fieldForm,
     isNewField,
     isSaving,
-    canSave: canSaveTemplate(template, draft),
+    canSave: canSaveTemplate(original, draft),
     hasRemovedFields,
     changeDraft,
     setFieldForm,

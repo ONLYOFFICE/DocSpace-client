@@ -224,6 +224,21 @@ export const settleRequests = async (
   if (failure) throw failure.reason;
 };
 
+export const isNameFreedOnSave = (
+  template: TMetadataTemplate | null,
+  draft: TTemplateDraft,
+  form: TFieldForm,
+) => {
+  if (!template || form.id === undefined) return false;
+
+  const keptIds = new Set(draft.fields.map(({ id }) => id));
+  const kept = toFieldDrafts(template.fields).filter(
+    (field) => field.id !== form.id && keptIds.has(field.id),
+  );
+
+  return isFieldNameTaken(kept, form);
+};
+
 export const settleInOrder = async (
   steps: (() => Promise<unknown>[])[],
   onApplied: () => void,

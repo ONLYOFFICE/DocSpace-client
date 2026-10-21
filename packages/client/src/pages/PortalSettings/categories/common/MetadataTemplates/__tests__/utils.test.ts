@@ -47,6 +47,7 @@ import {
   getInsertPosition,
   getTemplateChanges,
   isFieldNameTaken,
+  isNameFreedOnSave,
   isValidField,
   moveItem,
   removeOption,
@@ -420,5 +421,39 @@ describe("isFieldNameTaken", () => {
     expect(
       isFieldNameTaken(fields, { ...createFieldForm("a"), name: "Court" }),
     ).toBe(false);
+  });
+});
+
+describe("isNameFreedOnSave", () => {
+  const renamed = {
+    ...draft,
+    fields: [caseNumber, { ...court, name: "Stage" }],
+  };
+
+  it("holds back a name another saved field gives up only on save", () => {
+    expect(
+      isNameFreedOnSave(template, renamed, { ...caseNumber, name: "court" }),
+    ).toBe(true);
+  });
+
+  it("frees the name of a removed field and lets new fields take it", () => {
+    expect(
+      isNameFreedOnSave(
+        template,
+        { ...draft, fields: [caseNumber] },
+        { ...caseNumber, name: "Court" },
+      ),
+    ).toBe(false);
+    expect(
+      isNameFreedOnSave(template, renamed, {
+        ...createFieldForm("new-1"),
+        name: "Court",
+      }),
+    ).toBe(false);
+  });
+
+  it("lets a field keep its own name", () => {
+    expect(isNameFreedOnSave(template, draft, court)).toBe(false);
+    expect(isNameFreedOnSave(null, draft, court)).toBe(false);
   });
 });

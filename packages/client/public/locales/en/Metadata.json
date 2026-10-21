@@ -53,6 +53,7 @@
   "EnterTemplateName": "Enter template name",
   "EnterValue": "Enter value",
   "FieldNameExists": "A field with this name already exists",
+  "FieldNameFreedOnSave": "This name stays taken until you save the template. Save it first, then use this name.",
   "Fields": "Fields",
   "FieldsCount": "Fields: {{count}}",
   "FieldsDescription": "Fields are what users fill in when this template is applied to a file, folder or room. Drag to reorder — users will see the fields in this order.",

@@ -63,11 +63,11 @@ import styles from "./TemplatePanel.module.scss";
 
 type FieldFormProps = {
   value: TFieldForm;
-  isNameTaken: boolean;
+  nameError: string;
   onChange: (value: TFieldForm) => void;
 };
 
-const FieldForm = ({ value, isNameTaken, onChange }: FieldFormProps) => {
+const FieldForm = ({ value, nameError, onChange }: FieldFormProps) => {
   const { t } = useTranslation(["Metadata", "Common"]);
 
   const typeOptions: TOption[] = FIELD_TYPES.map((type) => ({
@@ -86,13 +86,13 @@ const FieldForm = ({ value, isNameTaken, onChange }: FieldFormProps) => {
         isVertical
         removeMargin
         labelText={t("Common:Name")}
-        hasError={isNameTaken}
-        errorMessage={t("Metadata:FieldNameExists")}
+        hasError={!!nameError}
+        errorMessage={nameError}
       >
         <TextInput
           type={InputType.text}
           value={value.name}
-          hasError={isNameTaken}
+          hasError={!!nameError}
           onChange={(e) => onChange({ ...value, name: e.target.value })}
           placeholder={t("Metadata:EnterFieldName")}
           maxLength={METADATA_NAME_MAX_LENGTH}

@@ -46,7 +46,7 @@ import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
 import ConfirmDeleteDialog from "SRC_DIR/components/ConfirmDeleteDialog";
 
 import { useTemplateEditor } from "../../hooks/useTemplateEditor";
-import { isFieldNameTaken, isValidField } from "../../utils";
+import { isFieldNameTaken, isNameFreedOnSave, isValidField } from "../../utils";
 import FieldForm from "./FieldForm";
 import TemplateForm from "./TemplateForm";
 
@@ -54,12 +54,19 @@ type TemplatePanelProps = {
   template: TMetadataTemplate | null;
   onClose: () => void;
   onSaved: () => void;
+  onApplied: () => void;
 };
 
-const TemplatePanel = ({ template, onClose, onSaved }: TemplatePanelProps) => {
+const TemplatePanel = ({
+  template,
+  onClose,
+  onSaved,
+  onApplied,
+}: TemplatePanelProps) => {
   const { t } = useTranslation(["Metadata", "Files", "Common"]);
 
   const {
+    original,
     draft,
     fieldForm,
     isNewField,
@@ -74,14 +81,27 @@ const TemplatePanel = ({ template, onClose, onSaved }: TemplatePanelProps) => {
     moveField,
     removeField,
     save,
-  } = useTemplateEditor(template, onSaved);
+  } = useTemplateEditor(template, onSaved, onApplied);
 
   const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
 
   const onSave = () =>
     hasRemovedFields ? setIsDeleteConfirmVisible(true) : save();
 
-  const isNameTaken = !!fieldForm && isFieldNameTaken(draft.fields, fieldForm);
+  const saveAfterConfirm = () =>
+    save().finally(() => setIsDeleteConfirmVisible(false));
+
+  const getNameError = () => {
+    if (!fieldForm) return "";
+    if (isFieldNameTaken(draft.fields, fieldForm))
+      return t("Metadata:FieldNameExists");
+    if (isNameFreedOnSave(original, draft, fieldForm))
+      return t("Metadata:FieldNameFreedOnSave");
+
+    return "";
+  };
+
+  const nameError = getNameError();
 
   const getTitle = () => {
     if (fieldForm)
@@ -108,7 +128,7 @@ const TemplatePanel = ({ template, onClose, onSaved }: TemplatePanelProps) => {
           {fieldForm ? (
             <FieldForm
               value={fieldForm}
-              isNameTaken={isNameTaken}
+              nameError={nameError}
               onChange={setFieldForm}
             />
           ) : (
@@ -132,7 +152,7 @@ const TemplatePanel = ({ template, onClose, onSaved }: TemplatePanelProps) => {
               label={
                 isNewField ? t("Common:AddButton") : t("Common:SaveButton")
               }
-              isDisabled={!isValidField(fieldForm) || isNameTaken}
+              isDisabled={!isValidField(fieldForm) || !!nameError}
               onClick={submitField}
               testId="metadata_field_submit_button"
             />
@@ -162,7 +182,7 @@ const TemplatePanel = ({ template, onClose, onSaved }: TemplatePanelProps) => {
         <ConfirmDeleteDialog
           title={t("Metadata:DeleteFieldsTitle")}
           description={t("Metadata:DeleteFieldsDescription")}
-          onDelete={save}
+          onDelete={saveAfterConfirm}
           onClose={() => setIsDeleteConfirmVisible(false)}
         />
       ) : null}

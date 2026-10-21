@@ -401,9 +401,6 @@ class TreeFoldersStore {
   }
 
   get isPrivacyFolder() {
-    if (this.selectedFolderStore.rootFolderType !== FolderType.Rooms) {
-      return false;
-    }
     if (this.selectedFolderStore.private === true) {
       return true;
     }

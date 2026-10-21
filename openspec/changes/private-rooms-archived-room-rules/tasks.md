@@ -2,7 +2,7 @@
 
 ## 1. The private-room signal
 
-- [ ] 1.1 Drop the root-type condition from `TreeFoldersStore.isPrivacyFolder` (`packages/client/src/store/TreeFoldersStore.ts`), as design D1 and D2 describe. The open folder's own `private` flag or any `private` entry of `navigationPath` decides, whatever the root folder type.
+- [x] 1.1 Drop the root-type condition from `TreeFoldersStore.isPrivacyFolder` (`packages/client/src/store/TreeFoldersStore.ts`), as design D1 and D2 describe. The open folder's own `private` flag or any `private` entry of `navigationPath` decides, whatever the root folder type.
 
   Verify with a new `packages/client/src/store/__tests__/TreeFoldersStore.privacy.test.ts`, which names its cases after the scenarios of "Private-room rules follow the room into Archive":
   - an active private room, at the root and in a subfolder;

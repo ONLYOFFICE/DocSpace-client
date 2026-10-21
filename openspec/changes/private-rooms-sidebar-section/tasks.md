@@ -151,7 +151,7 @@
 
 ## 7. Integration
 
-- [ ] 7.1 Regenerate the screenshots touched by the new sidebar item:
+- [x] 7.1 Regenerate the screenshots touched by the new sidebar item:
 
   ```bash
   docker-compose run --rm -T -e WORKERS=3 tests-local pnpm exec playwright test --update-snapshots=changed

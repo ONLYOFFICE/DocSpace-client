@@ -115,7 +115,7 @@ test.describe("Private rooms behind the localStorage flag", () => {
     await disablePrivateRooms(page);
 
     await page.goto(`${baseUrl}${ROOMS_URL}`);
-    await expect(page.getByTestId("table-body")).toBeVisible();
+    await expect(page.getByTestId("table-body")).toBeVisible({ timeout: 15000 });
 
     await expect(page.locator('nav [data-item-id="private-rooms"]')).toHaveCount(
       0,

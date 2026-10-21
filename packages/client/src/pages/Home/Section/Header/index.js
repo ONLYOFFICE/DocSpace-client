@@ -907,7 +907,9 @@ const SectionHeaderContent = (props) => {
   const insideTheRoom =
     (categoryType === CategoryType.SharedRoom ||
       categoryType === CategoryType.Form ||
-      categoryType === CategoryType.Archive) &&
+      categoryType === CategoryType.Archive ||
+      categoryType === CategoryType.PrivateRoom ||
+      categoryType === CategoryType.PrivateArchive) &&
     !isCurrentRoom;
 
   const insideTheAgent = categoryType === CategoryType.AIAgent && !isAIAgent;

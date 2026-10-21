@@ -96,7 +96,8 @@ export const createFolderNavigation = async (
   } else if (isRoom) {
     if (userId) {
       const key =
-        categoryType === CategoryType.Archive
+        categoryType === CategoryType.Archive ||
+        categoryType === CategoryType.PrivateArchive
           ? `${FILTER_ARCHIVE_DOCUMENTS}=${userId}`
           : `${FILTER_ROOM_DOCUMENTS}=${userId}`;
 

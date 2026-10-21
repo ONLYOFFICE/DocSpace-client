@@ -251,7 +251,8 @@ self: FilesActionStore,item: {
   if (!isAIAgent && (isRoom || isTemplate)) {
     if (self.userStore.user?.id) {
       const key =
-        categoryType === CategoryType.Archive
+        categoryType === CategoryType.Archive ||
+        categoryType === CategoryType.PrivateArchive
           ? `${FILTER_ARCHIVE_DOCUMENTS}=${self.userStore.user?.id}`
           : `${FILTER_ROOM_DOCUMENTS}=${self.userStore.user?.id}`;
 

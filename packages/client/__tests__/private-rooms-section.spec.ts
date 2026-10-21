@@ -389,6 +389,20 @@ test.describe("Private section — rooms open inside it", () => {
     });
   });
 
+  test("Folder inside a private room", async ({ page, baseUrl }) => {
+    await page.goto(
+      `${baseUrl}/private/${SUBFOLDER_ID}/filter?folder=${SUBFOLDER_ID}`,
+    );
+    await expect(fileRow(page, SUBFOLDER_FILE.title)).toBeVisible({
+      timeout: 15000,
+    });
+
+    // The room's title row above the folder's own title.
+    await expect(
+      page.locator(`text="${ROOM_TITLE}" >> visible=true`).first(),
+    ).toBeVisible();
+  });
+
   test("Cold link to a private room", async ({ page, baseUrl }) => {
     await page.goto(
       `${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`,

@@ -71,11 +71,13 @@ export function setFilesFilterImpl(
   const key = match(self.categoryType)
     .with(
       CategoryType.Archive,
+      CategoryType.PrivateArchive,
       () => `${FILTER_ARCHIVE_DOCUMENTS}=${self.userStore.user?.id}`,
     )
     .with(
       CategoryType.SharedRoom,
       CategoryType.Form,
+      CategoryType.PrivateRoom,
       () => `${FILTER_ROOM_DOCUMENTS}=${self.userStore.user?.id}`,
     )
     .with(
@@ -126,7 +128,9 @@ export function setFilesFilterImpl(
 export function setRoomsFilterImpl(self: FilesStore, filter: TRoomsFilter) {
   filter.pageCount = 100;
 
-  const isArchive = self.categoryType === CategoryType.Archive;
+  const isArchive =
+    self.categoryType === CategoryType.Archive ||
+    self.categoryType === CategoryType.PrivateArchive;
   const isTemplate = filter.searchArea === RoomSearchArea.Templates;
 
   const key = isArchive

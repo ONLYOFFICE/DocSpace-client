@@ -78,7 +78,7 @@
 - [x] 2.5 Review every remaining pathname route check found by `grep -rnE "(indexOf|includes|startsWith)\(\"/?(rooms|forms)" packages/client/src packages/shared`, and every navigate call with a `rooms/` template literal (design D4). Make `InfoPanelStore.getIsRooms` recognise `/private`.
 
   Verify with an `InfoPanelStore` unit case, the E2E scenarios "Nothing selected on the list" and "Private room selected", and the reviewed list recorded in the commit body.
-- [ ] 2.6 Review every `CategoryType.(Shared|SharedRoom|Archive|ArchivedRoom)` check for the new categories (design D3). Cover at least:
+- [x] 2.6 Review every `CategoryType.(Shared|SharedRoom|Archive|ArchivedRoom)` check for the new categories (design D3). Cover at least:
   - the sort keys in `filesStore/filter.helpers.ts`, `helpers/createFolderNavigation.js` and `filesActionsStore/navigation.helpers.ts`;
   - `insideTheRoom` in the header;
   - `MediaViewerDataStore.getFirstUrl`.

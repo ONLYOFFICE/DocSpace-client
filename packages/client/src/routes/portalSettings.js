@@ -86,6 +86,18 @@ const ProtectedAISettingsRoute = inject(({ settingsStore }) => ({
   }),
 );
 
+const ProtectedAILimitsRoute = inject(({ settingsStore }) => ({
+  standalone: settingsStore.standalone,
+}))(
+  observer(({ standalone, children }) => {
+    return standalone ? (
+      <Navigate to="/portal-settings/ai-settings/ai-models" replace />
+    ) : (
+      children
+    );
+  }),
+);
+
 // Wraps a lazily loaded settings section in the AI switch guard, so a
 // bookmark or an old link cannot open a page the portal no longer has.
 const withAIServicesGuard = (Component) => () => (
@@ -422,7 +434,9 @@ const PortalSettingsRoutes = {
       path: "ai-settings/limits",
       element: (
         <ProtectedAISettingsRoute>
-          <ViewComponent />
+          <ProtectedAILimitsRoute>
+            <ViewComponent />
+          </ProtectedAILimitsRoute>
         </ProtectedAISettingsRoute>
       ),
     },

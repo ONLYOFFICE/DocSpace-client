@@ -53,7 +53,7 @@
   Add the `Common:Private` key ("Private"). Its `.meta` comment must say it names the sidebar section of end-to-end encrypted rooms, so translators pick the plural/section form. Then run the `translate-comments` and `translate-locales` skills and `cd common/tests && npx vitest run test/locales.test.js`.
 
   Verify with active-id cases in `privateRoomsSectionNavigation.test.ts`, and with the E2E scenarios "Section available", "Section not available", "Item clicked", "Archive address" and "Section expanded".
-- [x] 2.3 Implement the section decision (design D5):
+- [ ] 2.3 Implement the section decision (design D5):
   - the private signal in `getCategoryTypeByFolderTypeInSection`, before its early return, plus the Archive branch;
   - the item passed by its callers;
   - the section-aware category in `fetchRooms`;
@@ -62,7 +62,7 @@
   Verify with:
   - unit cases for the decision function in the section test file;
   - a `FilesStore.fetchFiles` case asserting that no state is committed before a replace;
-  - the E2E scenarios "Room clicked in the section", "Row link opened in a new tab", "Rooms address of a private room", "Archived room link", "Open location from a feed", "Back from the editor", "Cold link to a private room", "Hand-edited address", "Go to the destination after copying out" and "Archived room address".
+  - the E2E scenarios "Room clicked in the section", "Row link opened in a new tab", "Rooms address of a private room", "Archived room link", "Open location from a feed", "Back from the editor", "Cold link to a private room", "Hand-edited address", "New file of an ordinary room opened from the section" and "Archived room address".
 - [ ] 2.4 Keep every exit in the section (design D4):
   - the crumb title, `moveToRoomsPageImpl` and `onClickBackImpl`;
   - the header back scope;

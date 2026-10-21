@@ -247,9 +247,9 @@ The system SHALL open a room without the private setting, or a folder outside pr
 - **WHEN** the user opens `/private/{roomId}/filter` for a room without the private setting
 - **THEN** the address is replaced with `/rooms/shared/{roomId}/filter` and the Rooms item is highlighted
 
-#### Scenario: Go to the destination after copying out
-- **WHEN** the user copies a file out of a private room into a folder of an ordinary room and follows the toast link to the destination
-- **THEN** the destination opens under its Rooms address directly, without passing through `/private`
+#### Scenario: New file of an ordinary room opened from the section
+- **WHEN** the user, inside the Private section, opens the location of a new file of an ordinary room from the new-items panel of Rooms
+- **THEN** the file's folder opens under its Rooms address directly, without passing through `/private`
 
 ### Requirement: Section titles and path labels
 The system SHALL show Common:Private as the header title of the section list. The section's Archive SHALL show the same header as Rooms → Archive. Inside the section, the breadcrumb root and the root of the Location column SHALL read Common:Private instead of the title of the Rooms folder. Folders inside a private room SHALL keep the room's title row in the header, as in Rooms.

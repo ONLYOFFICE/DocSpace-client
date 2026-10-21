@@ -791,6 +791,9 @@ const SectionHeaderContent = (props) => {
         ? t("Common:Templates")
         : t("Common:Forms");
 
+    if (getCategoryType(location) === CategoryType.PrivateRooms)
+      return t("Common:Private");
+
     if (isContactsPage) {
       switch (contactsTab) {
         case "people":

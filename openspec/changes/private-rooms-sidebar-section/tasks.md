@@ -90,7 +90,7 @@
 
 ## 3. Section UI: header, filter, groups, AI, tour, empty states
 
-- [ ] 3.1 Set the section header title to `Common:Private`. Verify with the E2E scenarios "Section list header" and "Breadcrumb root in a private room".
+- [x] 3.1 Set the section header title to `Common:Private`. Verify with the E2E scenarios "Section list header" and "Breadcrumb root in a private room".
 - [ ] 3.2 Section filter in `pages/Home/Section/Filter/index.js`:
   - list base path `private` / `private/archived`;
   - no room-type, third-party storage or room-group controls.

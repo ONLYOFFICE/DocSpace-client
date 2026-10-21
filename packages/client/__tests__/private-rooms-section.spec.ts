@@ -389,6 +389,18 @@ test.describe("Private section — rooms open inside it", () => {
     });
   });
 
+  test("Section list header", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await expect(
+      page.getByRole("heading", { name: "Private", exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Rooms", exact: true }),
+    ).toHaveCount(0);
+  });
+
   test("Folder inside a private room", async ({ page, baseUrl }) => {
     await page.goto(
       `${baseUrl}/private/${SUBFOLDER_ID}/filter?folder=${SUBFOLDER_ID}`,
@@ -401,6 +413,21 @@ test.describe("Private section — rooms open inside it", () => {
     await expect(
       page.locator(`text="${ROOM_TITLE}" >> visible=true`).first(),
     ).toBeVisible();
+  });
+
+  test("Breadcrumb root in a private room", async ({ page, baseUrl }) => {
+    await page.goto(
+      `${baseUrl}/private/${SUBFOLDER_ID}/filter?folder=${SUBFOLDER_ID}`,
+    );
+    await expect(fileRow(page, SUBFOLDER_FILE.title)).toBeVisible({
+      timeout: 15000,
+    });
+
+    await page.getByRole("heading", { name: "Reports", exact: true }).click();
+
+    const crumbs = page.locator('[class*="Navigation-module__box"]');
+    await expect(crumbs.getByText("Private", { exact: true })).toBeVisible();
+    await expect(crumbs.getByText("Rooms", { exact: true })).toHaveCount(0);
   });
 
   test("Cold link to a private room", async ({ page, baseUrl }) => {

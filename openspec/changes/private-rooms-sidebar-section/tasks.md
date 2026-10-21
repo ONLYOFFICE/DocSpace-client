@@ -7,7 +7,7 @@
   - keep the SDK-side opt-in.
 
   Verify with `npx -y @fission-ai/openspec@latest validate --all --strict` (with `OPENSPEC_TELEMETRY=0`), and commit as `OpenSpec: private-rooms-sdk-gating-and-parity: drop the client iframe replaced by the Private section`.
-- [ ] 0.2 Confirm that `private-rooms-upload-target-context` is archived before starting group 2, and that `private-rooms-archived-room-rules` is archived before task 2.1 ships the archive routes. Verify with `npx -y @fission-ai/openspec@latest list`: both changes are gone from the active list and present under `openspec/changes/archive/`.
+- [x] 0.2 Confirm that `private-rooms-upload-target-context` is archived before starting group 2, and that `private-rooms-archived-room-rules` is archived before task 2.1 ships the archive routes. Verify with `npx -y @fission-ai/openspec@latest list`: both changes are gone from the active list and present under `openspec/changes/archive/`.
 
 ## 1. Availability, request scope and mocks
 

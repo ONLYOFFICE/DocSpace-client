@@ -1,5 +1,18 @@
 # Spec Delta
 
+## ADDED Requirements
+
+### Requirement: Private list header uses the section label
+The SDK private rooms list SHALL show Common:Private as its header title, the same label as the client's Private section. The archive page SHALL keep Common:Archive.
+
+#### Scenario: List header
+- **WHEN** a signed-in user opens the SDK private rooms list
+- **THEN** the header title is Common:Private
+
+#### Scenario: Archive header
+- **WHEN** a signed-in user opens the SDK private archive
+- **THEN** the header title is Common:Archive
+
 ## REMOVED Requirements
 
 ### Requirement: Client app embeds the SDK surface

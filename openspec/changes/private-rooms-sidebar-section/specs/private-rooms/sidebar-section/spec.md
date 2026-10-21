@@ -261,6 +261,13 @@ The system SHALL redirect `/e2e-rooms` to `/private/filter`, and `/e2e-rooms?sec
 - **WHEN** the user opens `/e2e-rooms?section=archive` while the section is available
 - **THEN** the address is replaced with `/private/archived/filter`
 
+### Requirement: Apps catalog uses the section label
+The system SHALL title the E2E rooms app Common:Private in the apps catalog, the same label as the sidebar section. Its description stays Common:DashboardE2eRoomsDescription. The name "Rooms E2E" SHALL NOT appear anywhere in the client.
+
+#### Scenario: Catalog with the flag
+- **WHEN** an administrator opens the apps settings with the opt-in set
+- **THEN** the E2E rooms app is listed as Common:Private with its description
+
 ### Requirement: Section is not a start page option
 The system SHALL NOT offer the Private section as a default start page in the file-management settings in this version.
 

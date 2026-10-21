@@ -109,6 +109,15 @@
 
   Verify by updating `packages/client/__tests__/private-rooms-hidden.spec.ts` (section absent without the flag, `/e2e-rooms` goes to the dashboard) and with the E2E scenarios "Old bookmark" and "Archive bookmark".
 - [ ] 6.2 Adjust the existing private-room E2E specs that open private rooms under `/rooms/shared/{id}` or assert the Rooms list. Verify with `cd packages/client && pnpm exec playwright test private-room encrypted-file-ui keys-management` in Docker.
+- [ ] 6.3 Rename "Rooms E2E" to "Private" (design D12):
+  - title the apps catalog entry (`packages/client/src/helpers/apps-catalog.tsx`), the SDK private list header (`packages/sdk/src/app/(private)/private/page.client.tsx`) and the label in `packages/client/src/components/NewArticle/index.tsx` with `Common:Private`;
+  - delete `DashboardE2eRoomsTitle` from every `public/locales/*/Common.json` and `public/locales/.meta/Common/DashboardE2eRoomsTitle.json`, using a dry-run script that checks each file loses exactly that key (`.claude/rules/bulk-locale-edits.md`).
+
+  Verify with:
+  - `cd common/tests && npx vitest run test/locales.test.js`, including NotFoundKeysTest and UselessTranslationKeysTest;
+  - `pnpm run test:sdk`;
+  - the E2E scenario "Catalog with the flag" in `private-rooms-hidden.spec.ts`;
+  - the scenario "List header" in `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`.
 
 ## 7. Integration
 
@@ -126,4 +135,4 @@
 - Before archiving, update the Purpose of `openspec/specs/private-rooms/sdk-surface/spec.md` (it still describes the client's iframe app and lists `packages/client/src/pages/E2eRooms/index.tsx`) and the implementation list in the feature-gating Purpose.
 - Archive with `/opsx:archive`. This applies the RENAMED, MODIFIED and REMOVED operations and creates `openspec/specs/private-rooms/sidebar-section/spec.md`.
 - When `private-rooms-release-gate` is picked up, revise its feature-gating delta. It removes "Private room card is gated in the create-room chooser" and "E2E rooms app is gated as an unreleased app" by name, and its scenarios still speak of the E2E rooms app.
-- Decide with the backend team whether to open the server-backed follow-up (design.md, "Follow-up: server-backed section").
+- Ask the backend team for server-side sections (design.md, "Follow-up: server-backed section"). Once they land, open a follow-up change that moves the client from `privacyFilter` onto them and adds the counter and the Recent/Favorites/Trash sub-items.

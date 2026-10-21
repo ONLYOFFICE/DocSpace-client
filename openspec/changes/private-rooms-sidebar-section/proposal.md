@@ -13,13 +13,14 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
 - Private rooms are created from the section only. Its create buttons open the create-room dialog directly on the Private type, with the existing key-generation and secure-context checks. The generic room-type chooser no longer offers the Private card.
 - Section-specific UI: no room-type filter, no third-party storage filter and no room groups. The section also gets its own empty state, info panel support, and live updates that respect the split.
 - **BREAKING** (tester-facing, behind the flag): the iframe page behind `/e2e-rooms` is removed. `/e2e-rooms` and `/e2e-rooms?section=archive` redirect to the section, and the app launcher opens the section.
+- The product name changes from "Rooms E2E" to "Private" everywhere it is shown: the apps catalog entry and the header of the SDK private rooms list use `Common:Private`, like Forms uses `Common:Forms` in both places. The `Common:DashboardE2eRoomsTitle` key is then unused and is removed from every language. The app id `e2e-rooms` and its description stay.
 - The E2E suite enables the flag for every page, so the new sidebar item appears in every screenshot that shows the sidebar, and those baselines are regenerated.
 
 ## Capabilities
 
 ### New Capabilities
 
-- `private-rooms/sidebar-section`: the Private section of the client sidebar. It covers when the section is available, its addresses and sub-items, the Rooms/section split of the rooms lists, opening private rooms inside the section, creation from the section, and the section's header, filter, empty state, info panel and live updates. It also records the v1 limitations of a client-only section (no Recent/Favorites/Trash, no new-items counter).
+- `private-rooms/sidebar-section`: the Private section of the client sidebar. It covers when the section is available, its addresses and sub-items, the Rooms/section split of the rooms lists, opening private rooms inside the section, creation from the section, and the section's header, filter, empty state, info panel, live updates and apps catalog title. It also records the v1 limitations of a client-only section (no Recent/Favorites/Trash, no new-items counter).
 
 ### Modified Capabilities
 
@@ -33,7 +34,7 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
   - "Choosing the Private card without a key starts key generation": creation starts from the section, and the requirement is renamed to "Starting private room creation without a key starts key generation".
   - "Navigation into the new private room": the new room opens under the section.
   - "Standard room management stays available": an archived private room appears in Private → Archive.
-- `private-rooms/sdk-surface`: "Client app embeds the SDK surface" is removed; the SDK pages themselves are unchanged.
+- `private-rooms/sdk-surface`: "Client app embeds the SDK surface" is removed. A new requirement titles the SDK private rooms list `Common:Private`; the SDK pages are otherwise unchanged.
 - `private-rooms/server-contract`: new requirements that record what the client now relies on:
   - the `privacyFilter` parameter of the rooms list, and that it drops third-party rooms for `Private`;
   - private rooms of other users are not listed to administrators;
@@ -49,8 +50,10 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
   - the empty views; the info panel store;
   - the create entry points (`Article/MainButton`, `CreateButtonMobile`, `helpers/getSectionCreateButton.ts`, `ContextOptionsStore`, `CreateEditRoomDialog`);
   - `packages/shared/utils/rooms.tsx` (`getCreateRoomTypes`), `helpers/disabled-apps.ts`, the Dashboard module launcher;
-  - removal of `packages/client/src/pages/E2eRooms`.
-- Locales: new keys in `public/locales/en/Common.json` (`PrivateRooms`) and `packages/client/public/locales/en/EmptyView.json`, translated to every supported language.
+  - removal of `packages/client/src/pages/E2eRooms`;
+  - the apps catalog title (`packages/client/src/helpers/apps-catalog.tsx`) and the label in the unused `components/NewArticle`.
+- SDK: the list header title in `packages/sdk/src/app/(private)/private/page.client.tsx`.
+- Locales: new keys in `public/locales/en/Common.json` (`Private`) and `packages/client/public/locales/en/EmptyView.json`, translated to every supported language. `DashboardE2eRoomsTitle` is removed from all 32 `Common.json` files and from `public/locales/.meta/Common`.
 - Tests:
   - client store unit tests for the request scoping and the route helpers;
   - a new Playwright spec `private-rooms-section.spec.ts`;
@@ -65,7 +68,7 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
 ## Out of scope
 
 - A server-backed section like Forms: a root folder type, a `SearchArea` value, an `@root` entry, a new-items counter, and Recent/Favorites/Trash scoped to private rooms. This needs backend work. It is listed as a follow-up in design.md and is not specified here.
-- The SDK private surface `/sdk/private*` and the SDK rooms list.
+- The SDK private surface `/sdk/private*` and the SDK rooms list, apart from the title of the private rooms list.
 - Room pickers (move/copy/"share to room" selectors), the default start page setting, tours, and a Dashboard card for the section (none exists today).
 - Releasing the feature or replacing the opt-in (`private-rooms-release-gate`).
 
@@ -86,8 +89,8 @@ Already decided with the user:
 - Archive is the only sub-item;
 - the route is `/private`;
 - the section is labelled "Private" (`Common:Private`) in the sidebar and the header;
-- the section sits after Forms and before AI Agents.
+- the section sits after Forms and before AI Agents;
+- "Rooms E2E" is renamed to "Private" everywhere, the apps catalog and the SDK private list included;
+- the server-backed sections will be requested from the backend team later. This change stays client-only; a follow-up change will move the client onto the server sections once they exist.
 
-Still open:
-1. The apps catalog keeps its own title, "Rooms E2E" (`Common:DashboardE2eRoomsTitle`). Renaming it to match the section, as Forms did, is a separate wording decision and is not part of this change.
-2. Whether to request the server-backed section from the backend team as a follow-up change. That would add a counter and scoped Recent/Favorites/Trash.
+Nothing is left open.

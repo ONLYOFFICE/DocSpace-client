@@ -51,7 +51,7 @@ No stashed design document covers a private-rooms section. The decisions below f
 **Non-Goals:**
 - No server-backed root (see Follow-up).
 - No change to `isPrivacyFolder` semantics.
-- No change to SDK pages or room pickers.
+- No change to SDK pages beyond the title of the private rooms list, and no change to room pickers.
 - Not deleting the dead `components/NewArticle` (it still mentions `e2e-rooms`). That is a separate clean-up.
 
 ## Decisions
@@ -154,6 +154,13 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 - Unit tests cover: the scope helper, `getCategoryType` / `getCategoryUrl` / `getClientActiveId`, the address-correction decision (a pure function of route + folder data), and the socket predicate.
 - A new `private-rooms-section.spec.ts` walks the spec scenarios.
 
+**D12. One name: "Private".**
+- The apps catalog entry (`helpers/apps-catalog.tsx:147`) and the SDK list header (`packages/sdk/src/app/(private)/private/page.client.tsx:126-128`) switch from `Common:DashboardE2eRoomsTitle` to `Common:Private`, the key the sidebar and the section header use. Forms does the same with `Common:Forms`.
+- The unused `components/NewArticle/index.tsx:512` gets the same key, so nothing references the old one.
+- `DashboardE2eRoomsTitle` is then deleted from every `Common.json` and from `public/locales/.meta/Common`. `UselessTranslationKeysTest` (`common/tests/test/locales.test.js:665`) fails on a key that no code uses. The deletion follows `.claude/rules/bulk-locale-edits.md`: a dry run first, then a check that every file lost exactly that one key.
+- `DashboardE2eRoomsDescription` stays as the catalog description.
+- Alternative rejected: changing the English value of `DashboardE2eRoomsTitle` to "Private". That leaves two keys with the same text and makes every existing translation stale.
+
 ## Risks / Trade-offs
 
 - [The base E2E fixture enables the opt-in and the apps mock reports `e2e-rooms` on, so every frame that shows the sidebar gains an item. The suite has 734 PNG baselines.] → Regenerate in Docker with `--update-snapshots=changed` in one task. Review the list of rewritten frames: only sidebar frames and lists that showed a private room may change.
@@ -171,7 +178,7 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 
 ## Follow-up: server-backed section
 
-A full Forms-like section needs the server to repeat `99c9ea065c` for private rooms:
+Decided with the user: the backend team will be asked for server-side sections after this change. A full Forms-like section needs the server to repeat `99c9ea065c` for private rooms:
 - a new `FolderType` and a tenant root (`FolderDao` bunch key, `GlobalFolder` cache);
 - a `SearchArea` value, with `MatchesRoomType` able to see the private setting (today it takes only a folder type, `SearchArea.cs:84-92`);
 - a case in `GetRoomsSectionIdAsync`;
@@ -179,8 +186,4 @@ A full Forms-like section needs the server to repeat `99c9ea065c` for private ro
 - new-items routing in `FileMarker`;
 - a way to scope Recent/Favorites/Trash by privacy.
 
-The client would then swap `privacyFilter` for that search area and add the counter and the sub-items. That is a separate change, owned with the backend team.
-
-## Open Questions
-
-- Whether and when to ask the backend team for the server-backed follow-up. This does not affect this change's specs or tasks.
+The client would then swap `privacyFilter` for that search area and add the counter and the sub-items. That is a separate change, opened once the server work lands.

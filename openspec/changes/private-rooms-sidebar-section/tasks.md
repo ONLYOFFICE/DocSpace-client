@@ -126,7 +126,7 @@
 
 ## 5. Live updates
 
-- [ ] 5.1 Guard room insertion in `store/filesStore/socket.helpers.ts` (create, restore, shared-with-me paths) with the scope of the open list, reading `private` from `getFolderInfo`. Verify with new cases "Invited to a private room" and "Ordinary room created in another tab" in `packages/client/src/store/filesStore/__tests__/FilesStore.socketCreate.test.ts`.
+- [x] 5.1 Guard room insertion in `store/filesStore/socket.helpers.ts` (create, restore, shared-with-me paths) with the scope of the open list, reading `private` from `getFolderInfo`. Verify with new cases "Invited to a private room" and "Ordinary room created in another tab" in `packages/client/src/store/filesStore/__tests__/FilesStore.socketCreate.test.ts`.
 
 ## 6. Replace the E2E rooms app
 

@@ -154,6 +154,69 @@ describe("FilesStore.wsModifyFolderCreate — form rooms", () => {
   });
 });
 
+describe("FilesStore.wsModifyFolderCreate — Private section", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+    window.history.pushState({}, "", "/");
+  });
+
+  const ROOMS_ROOT_ID = 8;
+
+  const roomArrives = async (
+    pathname: string,
+    isPrivate: boolean,
+    createdBy = "other-user",
+  ) => {
+    window.history.pushState({}, "", pathname);
+    const store = createTestFilesStore({
+      selectedFolderStore: { id: ROOMS_ROOT_ID },
+      treeFoldersStore: { isFormsFolder: false },
+    });
+    store.appsStore = {
+      isPrivateRoomsSectionAvailable: true,
+      isInstalled: () => true,
+    } as never;
+    // The socket payload carries no private flag; folder info does.
+    const room = {
+      id: 100,
+      title: "Room",
+      roomType: RoomsType.CustomRoom,
+      parentId: ROOMS_ROOT_ID,
+      createdBy: { id: createdBy },
+    };
+    vi.spyOn(api.files, "getFolderInfo").mockResolvedValue({
+      ...room,
+      private: isPrivate,
+    } as never);
+
+    await store.wsModifyFolderCreate({
+      type: "folder",
+      id: room.id,
+      data: JSON.stringify(room),
+    } as never);
+
+    return store.folders.map((f) => f.id);
+  };
+
+  it("Invited to a private room: not inserted into the Rooms list", async () => {
+    expect(await roomArrives("/rooms/shared/filter", true)).toEqual([]);
+  });
+
+  it("Invited to a private room: inserted into the Private list", async () => {
+    expect(await roomArrives("/private/filter", true)).toEqual([100]);
+  });
+
+  it("Ordinary room created in another tab: not inserted into the Private list", async () => {
+    expect(await roomArrives("/private/filter", false, "user-1")).toEqual([]);
+  });
+
+  it("Ordinary room created in another tab: inserted into the Rooms list", async () => {
+    expect(await roomArrives("/rooms/shared/filter", false, "user-1")).toEqual([
+      100,
+    ]);
+  });
+});
+
 describe("FilesStore.redirectToParent — characterization", () => {
   const pathPart = (id: number) => ({ id }) as never;
 

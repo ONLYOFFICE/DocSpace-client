@@ -38,9 +38,11 @@ import api from "@docspace/shared/api";
 import {
   AnalyticsEvents,
   FolderType,
+  RoomPrivacyFilter,
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
+import { getRoomsRequestScope } from "@docspace/shared/utils/rooms";
 import {
   frameCallEvent,
   getCategoryType,
@@ -227,6 +229,22 @@ export async function wsModifyFolderCreateImpl(
     if (!folderInfo || !isInSelectedFolder(folderInfo.parentId)) {
       console.log("Skip UNSUBSCRIBED folder creation");
       return;
+    }
+
+    // Spec: private-rooms/sidebar-section, "Live updates respect the split"
+    if (folder.roomType) {
+      const scope = getRoomsRequestScope(
+        getCategoryType(window.DocSpace?.location ?? window.location),
+        self.roomsFilter.searchArea,
+        self.isPrivateRoomsSectionAvailable,
+      );
+      const isPrivate = !!folderInfo.private;
+      if (
+        (scope?.privacyFilter === RoomPrivacyFilter.Private && !isPrivate) ||
+        (scope?.privacyFilter === RoomPrivacyFilter.NotPrivate && isPrivate)
+      ) {
+        return;
+      }
     }
 
     const newFolders = [folderInfo, ...self.folders];

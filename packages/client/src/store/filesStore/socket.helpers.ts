@@ -530,7 +530,12 @@ export function redirectToParentImpl(
       );
       archiveFilter.searchArea = RoomSearchArea.Archive;
       const params = archiveFilter.toUrlParams(userId as string, true);
-      const path = getCategoryUrl(CategoryType.Archive);
+      const path = getCategoryUrl(
+        getCategoryType(window.DocSpace.location) ===
+          CategoryType.PrivateArchive
+          ? CategoryType.PrivateArchive
+          : CategoryType.Archive,
+      );
 
       return window.DocSpace.navigate(`${path}?${params}`);
     }
@@ -540,14 +545,18 @@ export function redirectToParentImpl(
       }
 
       if (pathPart.id === roomsFolderId) {
-        const isForms =
-          getCategoryType(window.DocSpace.location) === CategoryType.Form;
+        const categoryType = getCategoryType(window.DocSpace.location);
+        const isForms = categoryType === CategoryType.Form;
 
         const roomsFilter = RoomsFilter.getDefault();
         if (isForms) roomsFilter.searchArea = RoomSearchArea.Forms;
 
         const path = getCategoryUrl(
-          isForms ? CategoryType.Forms : CategoryType.Shared,
+          isForms
+            ? CategoryType.Forms
+            : categoryType === CategoryType.PrivateRoom
+              ? CategoryType.PrivateRooms
+              : CategoryType.Shared,
         );
 
         return window.DocSpace.navigate(

@@ -289,6 +289,9 @@ const buildFolderDto = (
     roomType: 5,
     shared: false,
     private: isPrivate,
+    // FolderDtoHelper sets InRoom for the room's creator and for a user with
+    // a direct share record; the mock's current user is always one of them.
+    inRoom: true,
     ...(archived && {
       security: {
         Read: true,

@@ -40,8 +40,10 @@ import {
   filesSettingsHandler,
   privateRoomListHandler,
   roomListHandler,
+  roomMembersHandlers,
   rootHandler,
   selfActivationStatusHandler,
+  selfByTypeHandler,
   settingsHandler,
   TypeRoomList,
   TypeSettings,
@@ -513,3 +515,195 @@ test.describe("Private section — rooms open inside it", () => {
     await expect(navItem(page, ROOMS_ID)).toHaveClass(isActive);
   });
 });
+
+const ALICE_ID = "11111111-1111-1111-1111-111111111111";
+const GONE_ROOM_ID = 9700;
+
+const pathOf = (page: Page) => new URL(page.url()).pathname;
+
+const apiAddress = (path: string) =>
+  `${BASE_URL}:${TEST_PORT}/${API_PREFIX}/${path}`;
+
+/**
+ * Mirrors FoldersController.GetFolderByFolderId (HttpGet "{folderId}") for a
+ * room that cannot be opened: FileStorageService throws ItemNotFoundException
+ * for a missing folder and InvalidOperationException without the read right,
+ * which ResponseWrapper answers with 404 and 403.
+ */
+const roomCannotBeOpened = (statusCode: 403 | 404) =>
+  http.get(apiAddress(`files/${GONE_ROOM_ID}`), () =>
+    Response.json(
+      { error: { message: "The room cannot be opened" }, status: 1, statusCode },
+      { status: statusCode },
+    ),
+  );
+
+test.describe("Private section — ways out stay in it", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      privateRoomListHandler(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        title: ROOM_TITLE,
+        ownerId: ALICE_ID,
+        initialFiles: [
+          { id: 9501, title: FILE_TITLE, size: 4, encrypted: false },
+        ],
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ARCHIVED_ROOM_ID,
+        title: "Archived Private Room",
+        archived: true,
+        initialFiles: [
+          { id: 9511, title: ARCHIVED_FILE_TITLE, size: 4, encrypted: false },
+        ],
+      }),
+    );
+  });
+
+  const openRoom = async (page: Page, baseUrl: string) => {
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await expect(fileRow(page, FILE_TITLE)).toBeVisible({ timeout: 15000 });
+  };
+
+  test("Back from a private room", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await roomLink(page).click();
+    await expect(fileRow(page, FILE_TITLE)).toBeVisible({ timeout: 15000 });
+
+    await page.keyboard.press("Backspace");
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/filter");
+  });
+
+  test("Leave a private room", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "roomAdmin"),
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID),
+    );
+    await openRoom(page, baseUrl);
+
+    await page.locator("#header_optional-button").click();
+    await page.locator("#option_leave-room").click();
+    await page.getByTestId("leave_room_modal_submit").click();
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/filter");
+  });
+
+  test("Access to the open private room lost: removed from the room", async ({
+    page,
+    wsMock,
+    baseUrl,
+  }) => {
+    await wsMock.setupWebSocketMock();
+    await openRoom(page, baseUrl);
+
+    wsMock.emitModifyFolder({
+      cmd: "delete",
+      id: ROOM_ID,
+      type: "folder",
+      data: "",
+    });
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/filter");
+    wsMock.closeConnection();
+  });
+
+  test("Access to the open private room lost: the server answers 403", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(roomCannotBeOpened(403));
+
+    await page.goto(
+      `${baseUrl}/private/${GONE_ROOM_ID}/filter?folder=${GONE_ROOM_ID}`,
+    );
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/filter");
+  });
+
+  test("Removed from an archived private room", async ({
+    page,
+    wsMock,
+    baseUrl,
+  }) => {
+    await wsMock.setupWebSocketMock();
+    await page.goto(
+      `${baseUrl}/private/archived/filter?folder=${ARCHIVED_ROOM_ID}`,
+    );
+    await expect(fileRow(page, ARCHIVED_FILE_TITLE)).toBeVisible({
+      timeout: 15000,
+    });
+
+    wsMock.emitModifyFolder({
+      cmd: "delete",
+      id: ARCHIVED_ROOM_ID,
+      type: "folder",
+      data: "",
+    });
+
+    // The archived room and the archive share a path; the room adds its folder.
+    await expect
+      .poll(
+        () => {
+          const url = new URL(page.url());
+          return [url.pathname, url.searchParams.get("folder")];
+        },
+        { timeout: 15000 },
+      )
+      .toEqual(["/private/archived/filter", null]);
+    wsMock.closeConnection();
+  });
+
+  test("No-access view", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(roomCannotBeOpened(404));
+
+    await page.goto(
+      `${baseUrl}/private/${GONE_ROOM_ID}/filter?folder=${GONE_ROOM_ID}`,
+    );
+
+    const view = page.getByTestId("empty-view");
+    await expect(view).toContainText("redirected to the Private", {
+      timeout: 15000,
+    });
+    await view.getByText("Go to Private").click();
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/filter");
+  });
+
+  test("No-access view: the automatic redirect", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(roomCannotBeOpened(404));
+
+    await page.goto(
+      `${baseUrl}/private/${GONE_ROOM_ID}/filter?folder=${GONE_ROOM_ID}`,
+    );
+    await expect(page.getByTestId("empty-view")).toBeVisible({
+      timeout: 15000,
+    });
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/filter");
+  });
+});
+

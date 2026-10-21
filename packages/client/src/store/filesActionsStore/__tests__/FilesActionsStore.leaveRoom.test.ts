@@ -121,3 +121,38 @@ describe("FilesActionsStore — onLeaveRoom private-room key cleanup", () => {
     expect(toastr.success).toHaveBeenCalled();
   });
 });
+
+describe("FilesActionsStore — onLeaveRoom from inside the room", () => {
+  let navigate: ReturnType<typeof vi.fn>;
+
+  beforeEach(() => {
+    vi.mocked(updateRoomMemberRole).mockResolvedValue(
+      {} as Awaited<ReturnType<typeof updateRoomMemberRole>>,
+    );
+    vi.mocked(revokeMemberFromEncryptedRoom).mockResolvedValue([]);
+    navigate = vi.fn();
+  });
+
+  it.each([
+    ["/private/42/filter", true, "/private/filter?"],
+    ["/rooms/shared/42/filter", false, "rooms/shared/filter?"],
+  ])(
+    "Leave a private room: leaving %s opens the list of its section",
+    async (pathname, isPrivate, list) => {
+      (window as unknown as { DocSpace: unknown }).DocSpace = {
+        navigate,
+        location: { pathname, search: "?folder=42" },
+      };
+      const store = createTestFilesActionsStore({
+        filesStore: { selection: [], bufferSelection: null, removeFiles: vi.fn() },
+        selectedFolderStore: { id: 42, private: isPrivate, isRootFolder: false },
+      });
+
+      await store.onLeaveRoom(t);
+
+      expect(navigate).toHaveBeenCalledTimes(1);
+      expect(navigate.mock.calls[0][0].startsWith(list)).toBe(true);
+    },
+  );
+});
+

@@ -42,7 +42,10 @@ import {
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { splitFileAndFolderIds } from "@docspace/shared/utils/common";
+import {
+  isPrivateRoomsRoute,
+  splitFileAndFolderIds,
+} from "@docspace/shared/utils/common";
 import { revokeMemberFromEncryptedRoom } from "@docspace/shared/services/private-room/room-encryption";
 import uniqueid from "lodash/uniqueId";
 import api from "@docspace/shared/api";
@@ -676,9 +679,10 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
         if (!isAdmin) {
           if (!isRoot) {
             const filter = RoomsFilter.getDefault();
-            window.DocSpace.navigate(
-              `rooms/shared/filter?${filter.toUrlParams()}`,
-            );
+            const list = isPrivateRoomsRoute(window.DocSpace.location.pathname)
+              ? "/private/filter"
+              : "rooms/shared/filter";
+            window.DocSpace.navigate(`${list}?${filter.toUrlParams()}`);
           } else {
             self.filesStore.removeFiles(null, [roomId]);
           }

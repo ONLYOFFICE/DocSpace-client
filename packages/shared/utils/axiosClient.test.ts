@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import AxiosClient from "./axiosClient";
 import {
@@ -136,3 +136,37 @@ describe("AxiosClient error redirects", () => {
     expect(location.href).toBe(HOME);
   });
 });
+
+describe("AxiosClient 403 redirect", () => {
+  let navigate: ReturnType<typeof vi.fn>;
+
+  beforeEach(() => {
+    flags().__redirectToLogin = undefined;
+    resetPortalNotFoundRedirect();
+    vi.useFakeTimers();
+    navigate = vi.fn();
+    (window as unknown as { DocSpace: unknown }).DocSpace = { navigate };
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it.each([
+    ["/rooms/shared/12/filter", "/"],
+    ["/rooms/archived/filter", "/archived"],
+    ["/private/12/filter", "/private"],
+    ["/private/archived/filter", "/private/archived"],
+  ])("sends the user from %s to %s", async (pathname, target) => {
+    stubLocation().pathname = pathname;
+    const client = createFailingClient(403);
+
+    await client
+      .request({ method: "get", url: "/files/12" })
+      ?.catch(() => undefined);
+    await vi.advanceTimersByTimeAsync(1000);
+
+    expect(navigate).toHaveBeenCalledWith(target);
+  });
+});
+

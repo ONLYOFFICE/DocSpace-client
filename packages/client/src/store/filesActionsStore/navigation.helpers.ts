@@ -98,7 +98,9 @@ self: FilesActionStore
         ? CategoryType.Forms
         : CategoryType.ArchivedRoom === categoryType
           ? CategoryType.Archive
-          : categoryType;
+          : categoryType === CategoryType.PrivateRoom
+            ? CategoryType.PrivateRooms
+            : categoryType;
 
   const path = getCategoryUrl(correctCategoryType);
 
@@ -114,7 +116,10 @@ self: FilesActionStore
     rootFolderType: self.selectedFolderStore.rootFolderType,
   };
 
-  if ((categoryType as TCategoryType) == CategoryType.Archive) {
+  if (
+    (categoryType as TCategoryType) == CategoryType.Archive ||
+    categoryType === CategoryType.PrivateArchive
+  ) {
     filter.searchArea = RoomSearchArea.Archive;
   }
 
@@ -420,6 +425,7 @@ self: FilesActionStore,fromHotkeys = true
   if (
     categoryType === CategoryType.SharedRoom ||
     categoryType === CategoryType.Form ||
+    categoryType === CategoryType.PrivateRoom ||
     isArchivedRoom
   ) {
     if (isRoom) {
@@ -431,7 +437,9 @@ self: FilesActionStore,fromHotkeys = true
 
   if (
     categoryType === CategoryType.Shared ||
-    categoryType === CategoryType.Archive
+    categoryType === CategoryType.Archive ||
+    categoryType === CategoryType.PrivateRooms ||
+    categoryType === CategoryType.PrivateArchive
   ) {
     return self.moveToRoomsPage();
   }

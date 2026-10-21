@@ -114,3 +114,63 @@ describe("FilesActionsStore — navigation/filter (batch 6)", () => {
     expect(() => store.onClickBack()).not.toThrow();
   });
 });
+
+describe("FilesActionsStore — exits from the Private section", () => {
+  const openAddress = (pathname: string, search = "") => {
+    (window as unknown as { DocSpace: unknown }).DocSpace = {
+      location: { pathname, search, state: {} },
+      navigate,
+    };
+  };
+
+  const backStore = (roomType?: number) =>
+    createTestFilesActionsStore({
+      clientLoadingStore: { isLoading: false },
+      mediaViewerDataStore: { visible: false },
+      peopleStore: { groupsStore: { insideGroupBackUrl: null } },
+      filesStore: {
+        setBufferSelection: vi.fn(),
+        setSelection: vi.fn(),
+        clearFiles: vi.fn(),
+      },
+      selectedFolderStore: { roomType, navigationPath: [] },
+    });
+
+  it.each([
+    ["/private/12/filter", "?folder=12", "/private/filter?", RoomSearchArea.Active],
+    [
+      "/private/archived/filter",
+      "?folder=12",
+      "/private/archived/filter?",
+      RoomSearchArea.Archive,
+    ],
+  ])(
+    "moveToRoomsPage from %s%s returns to %s",
+    (pathname, search, list, searchArea) => {
+      openAddress(pathname, search);
+
+      backStore(5).moveToRoomsPage();
+
+      const [url] = navigate.mock.calls[0];
+      expect(url.startsWith(list)).toBe(true);
+      expect(url).toContain(`searchArea=${searchArea}`);
+    },
+  );
+
+  it("Back from a private room: back at the room's root opens the Private list", () => {
+    openAddress("/private/12/filter", "?folder=12");
+
+    backStore(5).onClickBack();
+
+    expect(navigate.mock.calls[0][0].startsWith("/private/filter?")).toBe(true);
+  });
+
+  it("keeps back on the Private list in the section", () => {
+    openAddress("/private/filter");
+
+    backStore().onClickBack();
+
+    expect(navigate.mock.calls[0][0].startsWith("/private/filter?")).toBe(true);
+  });
+});
+

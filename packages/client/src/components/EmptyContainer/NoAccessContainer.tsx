@@ -42,7 +42,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { withoutInjected } from "SRC_DIR/helpers/injected";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 import { RoomSearchArea } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -50,6 +50,7 @@ import { EmptyView } from "@docspace/shared/components/empty-view";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
+import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 import { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { TTranslation } from "@docspace/shared/types";
 import { EmptyViewProps } from "@onlyoffice/apps-ui-kit/components/empty-view";
@@ -74,6 +75,10 @@ const NoAccessContainer = (props: Props) => {
 
   let emptyViewProps: EmptyViewProps | null = null;
 
+  const location = useLocation();
+  const isPrivateSection =
+    type === NoAccessContainerType.Room && isPrivateRoomsRoute(location.pathname);
+
   const onGoTo = (event?: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event?.preventDefault();
 
@@ -89,7 +94,9 @@ const NoAccessContainer = (props: Props) => {
         {
           const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
           filterParamsStr = filter.toUrlParams();
-          path = getCategoryUrl(CategoryType.Shared);
+          path = getCategoryUrl(
+            isPrivateSection ? CategoryType.PrivateRooms : CategoryType.Shared,
+          );
         }
         break;
       case NoAccessContainerType.Agent:
@@ -123,7 +130,9 @@ const NoAccessContainer = (props: Props) => {
             ? t("NoAccessSectionTitle")
             : t("NoAccessRoomTitle"),
         description: t("RoomAccessRedirectNote", {
-          sectionName: t("Common:Rooms"),
+          sectionName: isPrivateSection
+            ? t("Common:Private")
+            : t("Common:Rooms"),
         }),
         icon: theme.isBase ? (
           <ManageAccessRightsLightIcon />
@@ -138,7 +147,11 @@ const NoAccessContainer = (props: Props) => {
                 icon: <FolderIcon />,
                 onClick: onGoTo,
                 key: "empty-view-goto-rooms",
-                description: t("Common:GoToMyRooms"),
+                description: isPrivateSection
+                  ? t("Common:GoToSection", {
+                      sectionName: t("Common:Private"),
+                    })
+                  : t("Common:GoToMyRooms"),
               },
             ],
       };

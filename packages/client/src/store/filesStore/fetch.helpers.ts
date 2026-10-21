@@ -412,7 +412,11 @@ export function fetchFilesImpl(
           const crumbTitle =
             isRootRoom && window.location.pathname.startsWith("/forms")
               ? i18n.t("Common:Forms")
-              : title;
+              : isRootRoom &&
+                  folderType === Rooms &&
+                  isPrivateRoomsRoute(address.pathname)
+                ? i18n.t("Common:Private")
+                : title;
 
           let shared: boolean | undefined;
           let quotaLimit: number | undefined;

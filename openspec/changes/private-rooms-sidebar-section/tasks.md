@@ -63,7 +63,7 @@
   - unit cases for the decision function in the section test file;
   - a `FilesStore.fetchFiles` case asserting that no state is committed before a replace;
   - the E2E scenarios "Room clicked in the section", "Row link opened in a new tab", "Rooms address of a private room", "Archived room link", "Open location from a feed", "Back from the editor", "Cold link to a private room", "Hand-edited address", "New file of an ordinary room opened from the section" and "Archived room address".
-- [ ] 2.4 Keep every exit in the section (design D4):
+- [x] 2.4 Keep every exit in the section (design D4):
   - the crumb title, `moveToRoomsPageImpl` and `onClickBackImpl`;
   - the header back scope;
   - leaving a room (`filesActionsStore/rooms.helpers.ts`);

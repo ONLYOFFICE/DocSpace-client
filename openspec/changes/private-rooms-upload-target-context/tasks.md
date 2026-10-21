@@ -75,7 +75,7 @@
   - "Target room cannot be determined".
 
   Run `cd packages/client && pnpm exec vitest run src/store/uploadDataStore`.
-- [ ] 2.2 Capture the target at every entry point that uploads into the open folder, and make `startUpload`'s target argument required (design D4, D7). The entry points:
+- [x] 2.2 Capture the target at every entry point that uploads into the open folder, and make `startUpload`'s target argument required (design D4, D7). The entry points:
   - the section drop in `pages/Home/index.js`;
   - `HotkeyStore.uploadClipboardFiles`;
   - `components/UploadInputs/index.tsx`;

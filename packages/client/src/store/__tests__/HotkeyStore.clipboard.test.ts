@@ -9,6 +9,7 @@ import { FolderType, RoomsType } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 
 import HotkeyStore from "../HotkeyStore";
+import { resolveOpenFolderTarget } from "../uploadDataStore/target.helpers";
 
 const t = ((key: string) => key) as unknown as TTranslation;
 
@@ -99,18 +100,27 @@ const setup = () => {
     getSelectedFolder: () => ({ id: selectedFolderStore.id }),
   });
   const itemOperationToFolder = vi.fn(async () => {});
+  const startUpload = vi.fn();
   const uploadDataStore = asStore({
     itemOperationToFolder,
     clearActiveOperations: vi.fn(),
-    startUpload: vi.fn(),
+    startUpload,
+    resolveOpenFolderTarget: () =>
+      resolveOpenFolderTarget({
+        selectedFolderStore,
+        treeFoldersStore,
+        aiRoomStore: { knowledgeId: null },
+      } as never),
   });
 
   const filesActionsStore = createTestFilesActionsStore({ uploadDataStore });
   const copyEncryptedFilesToFolder = vi.fn(async () => {});
+  const createFoldersTree = vi.fn();
   // The app shares one SelectedFolderStore between the stores.
   Object.assign(filesActionsStore, {
     selectedFolderStore,
     copyEncryptedFilesToFolder,
+    createFoldersTree,
     checkFileConflicts: vi.fn(async () => []),
     setSelectedItems: vi.fn(),
     setConflictDialogData: vi.fn(),
@@ -149,12 +159,15 @@ const setup = () => {
   };
 
   return {
+    store,
     goTo,
     clip,
     paste,
     filesStore,
     itemOperationToFolder,
     copyEncryptedFilesToFolder,
+    createFoldersTree,
+    startUpload,
   };
 };
 
@@ -267,5 +280,42 @@ describe("HotkeyStore - clipboard paste and private rooms", () => {
         isCopy: false,
       }),
     );
+  });
+});
+
+describe("HotkeyStore - files pasted from the computer", () => {
+  it("Pasted files after navigation", async () => {
+    const s = setup();
+    s.goTo(location.privateRoom(7));
+    let releaseTree!: () => void;
+    const treeHeld = new Promise<void>((resolve) => {
+      releaseTree = resolve;
+    });
+    s.createFoldersTree.mockImplementation(
+      async (_t: TTranslation, files: File[]) => {
+        await treeHeld;
+        return files;
+      },
+    );
+    const pasted = new File(["secret"], "secret.txt");
+
+    const handled = s.store.uploadClipboardFiles(t, {
+      type: "paste",
+      target: null,
+      clipboardData: { files: [pasted] },
+    } as unknown as ClipboardEvent);
+    s.goTo(location.myDocuments(5));
+    releaseTree();
+    await handled;
+    await vi.waitFor(() => expect(s.startUpload).toHaveBeenCalledTimes(1));
+
+    const privateRoom = {
+      folderId: 7,
+      isPrivate: true,
+      roomType: RoomsType.CustomRoom,
+      encryptionRoomId: 7,
+    };
+    expect(s.createFoldersTree).toHaveBeenCalledWith(t, [pasted], privateRoom);
+    expect(s.startUpload).toHaveBeenCalledWith([pasted], privateRoom, t);
   });
 });

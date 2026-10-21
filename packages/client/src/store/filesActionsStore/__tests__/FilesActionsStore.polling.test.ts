@@ -41,7 +41,14 @@ describe("FilesActionsStore — polling/tree operations (batch 20)", () => {
         id: 1,
       },
     });
-    await expect(store.createFoldersTree(t, {})).resolves.toBeDefined();
+    await expect(
+      store.createFoldersTree(t, {}, {
+        folderId: 1,
+        isPrivate: false,
+        roomType: null,
+        encryptionRoomId: null,
+      }),
+    ).resolves.toBeDefined();
   });
 
   it("emptyPersonalRoom drives the progress bar", async () => {

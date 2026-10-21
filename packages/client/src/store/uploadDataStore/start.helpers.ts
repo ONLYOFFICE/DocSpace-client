@@ -292,13 +292,12 @@ export async function handleUploadConflictsImpl(
 export function startUploadImpl(
   self: UploadDataStore,
   uploadFiles: Record<string, TUploadBrowserFile> | unknown[],
-  folderId: number | string | null,
+  target: TUploadTarget,
   t: TTranslation,
-  target: TUploadTarget = self.resolveOpenFolderTarget(),
 ) {
   const { canConvert } = self.filesSettingsStore;
 
-  const toFolderId = folderId || target.folderId;
+  const toFolderId = target.folderId;
 
   if (self.uploaded) {
     self.files = self.files.filter((f) => f.action !== "upload" || f.error);

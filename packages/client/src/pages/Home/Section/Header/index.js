@@ -172,6 +172,7 @@ const SectionHeaderContent = (props) => {
     showNavigationButton,
     isFormRoomRoot,
     startUpload,
+    resolveOpenFolderTarget,
     getFolderModel,
     contactsCanCreate,
     onCreateRoom,
@@ -280,17 +281,18 @@ const SectionHeaderContent = (props) => {
 
   const onFileChange = React.useCallback(
     async (e) => {
+      const target = resolveOpenFolderTarget();
       const files = await getFilesFromEvent(e);
 
-      createFoldersTree(t, files)
+      createFoldersTree(t, files, target)
         .then((f) => {
-          if (f.length > 0) startUpload(f, null, t);
+          if (f.length > 0) startUpload(f, target, t);
         })
         .catch((err) => {
           toastr.error(err, null, 0, true);
         });
     },
-    [startUpload, t],
+    [startUpload, resolveOpenFolderTarget, t],
   );
 
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
@@ -1160,7 +1162,7 @@ export default inject(
     profileActionsStore,
     mediaViewerDataStore,
   }) => {
-    const { startUpload } = uploadDataStore;
+    const { startUpload, resolveOpenFolderTarget } = uploadDataStore;
 
     const isRoomAdmin = userStore.user?.isRoomAdmin;
     const isCollaborator = userStore.user?.isCollaborator;
@@ -1446,6 +1448,7 @@ export default inject(
       showNavigationButton,
       isFormRoomRoot,
       startUpload,
+      resolveOpenFolderTarget,
       getFolderModel,
       onCreateRoom,
       onCreateAgent,

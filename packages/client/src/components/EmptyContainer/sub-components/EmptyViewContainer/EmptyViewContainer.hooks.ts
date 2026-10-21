@@ -243,6 +243,7 @@ export const useOptions = (
     isGracePeriod,
     knowledgeId,
     startUpload,
+    resolveOpenFolderTarget,
     createFoldersTree,
     isCardLinkedToPortal,
     enableAIService,
@@ -511,10 +512,11 @@ export const useOptions = (
     input.style.display = "none";
 
     input.onchange = async (e) => {
+      const target = { ...resolveOpenFolderTarget(), folderId: knowledgeId };
       try {
         const files = await getFilesFromEvent(e);
-        const tree = await createFoldersTree(t, files);
-        if (tree.length > 0) startUpload(tree, knowledgeId, t);
+        const tree = await createFoldersTree(t, files, target);
+        if (tree.length > 0) startUpload(tree, target, t);
       } catch (err) {
         toastr.error(err as string, undefined, 0, true);
       } finally {
@@ -524,7 +526,13 @@ export const useOptions = (
 
     document.body.appendChild(input);
     input.click();
-  }, [knowledgeId, createFoldersTree, startUpload, t]);
+  }, [
+    knowledgeId,
+    createFoldersTree,
+    startUpload,
+    resolveOpenFolderTarget,
+    t,
+  ]);
 
   const onCreate = useCallback(
     (extension: ExtensionType, withoutDialog?: boolean) => {

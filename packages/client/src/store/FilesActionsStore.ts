@@ -81,6 +81,7 @@ import {
   nameWithoutExtension as nameWithoutExtensionHelper,
 } from "./filesActionsStore/helpers";
 import type { TTreeNode, TUploadTreeFile } from "./filesActionsStore/helpers";
+import type { TUploadTarget } from "./uploadDataStore/helpers";
 import {
   isAvailableOptionImpl,
   getOptionImpl,
@@ -551,9 +552,9 @@ class FilesActionStore {
   createFoldersTree = async (
     t: TTranslation,
     files: TUploadTreeFile[] | Record<string, TUploadTreeFile>,
-    folderId?: number | string | null,
+    target: TUploadTarget,
     dragged?: boolean,
-  )=> createFoldersTreeImpl(this, t, files, folderId, dragged);
+  )=> createFoldersTreeImpl(this, t, files, target, dragged);
 
   updateFilesAfterDelete = (operationId: string, operationName: TOperationName)=> updateFilesAfterDeleteImpl(this, operationId, operationName);
 

@@ -73,6 +73,7 @@ const Item = ({
   onMoveTo,
   showDragItems,
   startUpload,
+  resolveOpenFolderTarget,
   createFoldersTree,
   setDragging,
   showBadge,
@@ -104,19 +105,30 @@ const Item = ({
 
   const onDropZoneUpload = React.useCallback(
     (files, uploadToFolder) => {
+      const open = resolveOpenFolderTarget();
+      const target = uploadToFolder
+        ? { ...open, folderId: uploadToFolder }
+        : open;
       const dragged = dragging;
 
       dragging && setDragging(false);
 
-      createFoldersTree(t, files, uploadToFolder, dragged)
+      createFoldersTree(t, files, target, dragged)
         .then((f) => {
-          if (f.length > 0) startUpload(f, uploadToFolder, t);
+          if (f.length > 0) startUpload(f, target, t);
         })
         .catch((err) => {
           toastr.error(err);
         });
     },
-    [t, dragging, setDragging, startUpload, createFoldersTree],
+    [
+      t,
+      dragging,
+      setDragging,
+      startUpload,
+      resolveOpenFolderTarget,
+      createFoldersTree,
+    ],
   );
 
   const onDrop = React.useCallback(
@@ -244,6 +256,7 @@ const Items = ({
   dragging,
   setDragging,
   startUpload,
+  resolveOpenFolderTarget,
   createFoldersTree,
   isVisitor,
   isCollaborator,
@@ -372,6 +385,7 @@ const Items = ({
             t={t}
             setDragging={setDragging}
             startUpload={startUpload}
+            resolveOpenFolderTarget={resolveOpenFolderTarget}
             createFoldersTree={createFoldersTree}
             item={item}
             setBufferSelection={setBufferSelection}
@@ -455,6 +469,7 @@ const Items = ({
       showText,
       setDragging,
       startUpload,
+      resolveOpenFolderTarget,
       createFoldersTree,
       trashIsEmpty,
       isAdmin,
@@ -513,7 +528,8 @@ export default inject(
 
     const { firstLoad } = clientLoadingStore;
 
-    const { startUpload, primaryProgressDataStore } = uploadDataStore;
+    const { startUpload, resolveOpenFolderTarget, primaryProgressDataStore } =
+      uploadDataStore;
     const { setDropTargetPreview } = primaryProgressDataStore;
     const {
       treeFolders,
@@ -556,6 +572,7 @@ export default inject(
       setBufferSelection,
       deleteAction,
       startUpload,
+      resolveOpenFolderTarget,
       createFoldersTree,
       setEmptyTrashDialogVisible,
       trashIsEmpty,

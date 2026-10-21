@@ -589,10 +589,9 @@ class UploadDataStore {
 
   startUpload = (
     uploadFiles: Record<string, TUploadBrowserFile> | unknown[],
-    folderId: number | string | null,
+    target: TUploadTarget,
     t: TTranslation,
-    target?: TUploadTarget,
-  ) => startUploadImpl(this, uploadFiles, folderId, t, target);
+  ) => startUploadImpl(this, uploadFiles, target, t);
 
   refreshFiles = (currentFile?: TUploadFile) =>
     refreshFilesImpl(this, currentFile);

@@ -851,7 +851,7 @@ describe("UploadDataStore — upload target fixed when the user starts the uploa
     const files = Array.from({ length: count }, (_, i) =>
       makeBrowserFile(`report-${i}.docx`, 100, { parentFolderId }),
     );
-    store.startUpload(files, null, t, store.resolveOpenFolderTarget());
+    store.startUpload(files, store.resolveOpenFolderTarget(), t);
     return handleUploadConflicts.mock.calls[0][2];
   };
 

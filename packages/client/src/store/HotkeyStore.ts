@@ -61,6 +61,7 @@ import type {
   TPrivateTransferParams,
   TPrivateTransferPlan,
 } from "./filesActionsStore/copyMove.helpers";
+import type { TUploadTarget } from "./uploadDataStore/helpers";
 
 type TFilesItem = {
   id: number | string;
@@ -138,7 +139,11 @@ type TFilesActionsStore = {
     options: { move: boolean; sourceRoomId?: number | string | null },
   ) => boolean;
   resolveRoomIdForFile: (file?: null) => number | string | null;
-  createFoldersTree: (t: TTranslation, files: unknown[]) => Promise<unknown[]>;
+  createFoldersTree: (
+    t: TTranslation,
+    files: unknown[],
+    target: TUploadTarget,
+  ) => Promise<unknown[]>;
 };
 
 type TUploadDataStore = {
@@ -147,7 +152,8 @@ type TUploadDataStore = {
     fileIds: (number | string)[],
     folderIds: (number | string)[],
   ) => void;
-  startUpload: (files: unknown[], folderId: null, t: TTranslation) => void;
+  startUpload: (files: unknown[], target: TUploadTarget, t: TTranslation) => void;
+  resolveOpenFolderTarget: () => TUploadTarget;
 };
 
 class HotkeyStore {
@@ -897,7 +903,7 @@ class HotkeyStore {
 
   uploadClipboardFiles = async (t: TTranslation, event: ClipboardEvent) => {
     const { createFoldersTree } = this.filesActionsStore;
-    const { startUpload } = this.uploadDataStore;
+    const { startUpload, resolveOpenFolderTarget } = this.uploadDataStore;
 
     // Return early if the event target is an input or textarea element
     if (
@@ -913,11 +919,12 @@ class HotkeyStore {
       return this.moveFilesFromClipboard(t);
     }
 
+    const target = resolveOpenFolderTarget();
     const files = await getFilesFromEvent(event);
 
-    createFoldersTree(t, files)
+    createFoldersTree(t, files, target)
       .then((f) => {
-        if (f.length > 0) startUpload(f, null, t);
+        if (f.length > 0) startUpload(f, target, t);
       })
       .catch((err) => {
         toastr.error(err as string, null, 0, true);

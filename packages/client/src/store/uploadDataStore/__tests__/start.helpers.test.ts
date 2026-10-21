@@ -220,14 +220,15 @@ describe("retryQuotaFailedFilesImpl", () => {
   });
 });
 
+/** Queues files the way an entry point does: by default the open folder is the target. */
 const queueFiles = (
   store: UploadDataStore,
   files: File[],
-  target?: TUploadTarget,
+  target: TUploadTarget = store.resolveOpenFolderTarget(),
 ): TUploadFile[] => {
   const handleUploadConflicts = vi.fn();
   store.handleUploadConflicts = handleUploadConflicts as never;
-  startUploadImpl(store, files, null, t, target);
+  startUploadImpl(store, files, target, t);
   return handleUploadConflicts.mock.calls[0][2].allNewFiles;
 };
 
@@ -256,7 +257,7 @@ describe("startUploadImpl - upload target", () => {
     expect(items.map((i) => i.encryptionRoomId)).toEqual([50, 50]);
   });
 
-  it("takes the open folder's target when the caller passes none", () => {
+  it("stores the snapshot of the open folder an entry point took", () => {
     const { store } = createTestUploadDataStore({
       selectedFolderStore: {
         id: 60,

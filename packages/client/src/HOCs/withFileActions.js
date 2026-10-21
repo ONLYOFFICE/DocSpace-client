@@ -71,16 +71,26 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDropZoneUpload = (files, uploadToFolder) => {
-      const { t, dragging, setDragging, startUpload, createFoldersTree } =
-        this.props;
+      const {
+        t,
+        dragging,
+        setDragging,
+        startUpload,
+        createFoldersTree,
+        resolveOpenFolderTarget,
+      } = this.props;
 
+      const open = resolveOpenFolderTarget();
+      const target = uploadToFolder
+        ? { ...open, folderId: uploadToFolder }
+        : open;
       const dragged = dragging;
 
       dragging && setDragging(false);
 
-      createFoldersTree(t, files, uploadToFolder, dragged)
+      createFoldersTree(t, files, target, dragged)
         .then((f) => {
-          if (f.length > 0) startUpload(f, uploadToFolder, t);
+          if (f.length > 0) startUpload(f, target, t);
         })
         .catch((err) => {
           toastr.error(err, null, 0, true);
@@ -477,7 +487,11 @@ export default function withFileActions(WrappedFileItem) {
         withShiftSelect,
       } = filesStore;
       const { id, isInsideResultStorage } = selectedFolderStore;
-      const { startUpload, secondaryProgressDataStore } = uploadDataStore;
+      const {
+        startUpload,
+        resolveOpenFolderTarget,
+        secondaryProgressDataStore,
+      } = uploadDataStore;
       const { withContentSelection } = hotkeyStore;
       const { findOperationById } = secondaryProgressDataStore;
       const {
@@ -584,6 +598,7 @@ export default function withFileActions(WrappedFileItem) {
         dragging,
         setDragging,
         startUpload,
+        resolveOpenFolderTarget,
         createFoldersTree,
         draggable,
         setTooltipPosition,

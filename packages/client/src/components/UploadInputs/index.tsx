@@ -41,14 +41,21 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import type { TTranslation } from "@docspace/shared/types";
 
+import type { TUploadTarget } from "SRC_DIR/store/uploadDataStore/helpers";
+
 const FOLDER_INPUT_ATTRS = {
   webkitdirectory: "",
   mozdirectory: "",
 } as Record<string, string>;
 
 type UploadFileInputsProps = {
-  startUpload?: (files: File[], folderId: null, t: TTranslation) => void;
-  createFoldersTree?: (t: TTranslation, files: File[]) => Promise<File[]>;
+  startUpload?: (files: File[], target: TUploadTarget, t: TTranslation) => void;
+  createFoldersTree?: (
+    t: TTranslation,
+    files: File[],
+    target: TUploadTarget,
+  ) => Promise<File[]>;
+  resolveOpenFolderTarget?: () => TUploadTarget;
   isAIRoom?: boolean;
   extsFilesVectorized?: string[];
 };
@@ -56,6 +63,7 @@ type UploadFileInputsProps = {
 const UploadFileInputs = ({
   startUpload,
   createFoldersTree,
+  resolveOpenFolderTarget,
   isAIRoom,
   extsFilesVectorized,
 }: UploadFileInputsProps) => {
@@ -63,17 +71,19 @@ const UploadFileInputs = ({
 
   const onFileChange = React.useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const target = resolveOpenFolderTarget?.();
+      if (!target) return;
       const files = await getFilesFromEvent(e);
 
-      createFoldersTree?.(t, files)
+      createFoldersTree?.(t, files, target)
         .then((tree) => {
-          if (tree.length > 0) startUpload?.(tree, null, t);
+          if (tree.length > 0) startUpload?.(tree, target, t);
         })
         .catch((err) => {
           toastr.error(err, null, 0, true);
         });
     },
-    [createFoldersTree, startUpload, t],
+    [createFoldersTree, startUpload, resolveOpenFolderTarget, t],
   );
 
   const onInputClick = React.useCallback(
@@ -128,6 +138,7 @@ export default inject(
     filesSettingsStore,
   }: TStore) => ({
     startUpload: uploadDataStore.startUpload,
+    resolveOpenFolderTarget: uploadDataStore.resolveOpenFolderTarget,
     createFoldersTree: filesActionsStore.createFoldersTree,
     isAIRoom: selectedFolderStore.isAIRoom,
     extsFilesVectorized: filesSettingsStore.extsFilesVectorized,

@@ -66,6 +66,7 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import i18n from "../../i18n";
 import type FilesActionStore from "../FilesActionsStore";
 import type DialogsStore from "../DialogsStore";
+import type { TUploadTarget } from "../uploadDataStore/helpers";
 import type { TActionItem, TOperationDataPayload } from "../FilesActionsStore";
 
 export const duplicateActionImpl = async (
@@ -317,6 +318,11 @@ self: FilesActionStore,
     roomType: destInfo?.roomType ?? RoomsType.CustomRoom,
     isPrivate: !!sameRoomRoot,
   };
+  const target: TUploadTarget = {
+    ...self.uploadDataStore.resolveOpenFolderTarget(),
+    ...destContext,
+    folderId: destFolderId ?? null,
+  };
 
   const filesToUpload: ReturnType<typeof tagFileForCopy>[] = [];
   const failed: string[] = [];
@@ -362,11 +368,7 @@ self: FilesActionStore,
   }
 
   if (filesToUpload.length > 0) {
-    self.uploadDataStore.startUpload(
-      filesToUpload,
-      destFolderId as number | string,
-      i18n.t,
-    );
+    self.uploadDataStore.startUpload(filesToUpload, target, i18n.t);
   }
 
   if (failed.length > 0) {

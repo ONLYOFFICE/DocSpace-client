@@ -132,6 +132,7 @@ export interface InjectedEmptyViewContainerProps
   isGracePeriod: boolean;
   knowledgeId: number | null;
   startUpload: TStore["uploadDataStore"]["startUpload"];
+  resolveOpenFolderTarget: TStore["uploadDataStore"]["resolveOpenFolderTarget"];
   createFoldersTree: TStore["filesActionsStore"]["createFoldersTree"];
   templateGalleryAvailable: boolean;
   onShowTemplateGallery: TStore["contextOptionsStore"]["onShowTemplateGallery"];

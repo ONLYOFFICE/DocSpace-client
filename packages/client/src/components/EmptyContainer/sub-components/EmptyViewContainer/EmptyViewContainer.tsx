@@ -126,7 +126,7 @@ const InjectedEmptyViewContainer = inject<
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isGracePeriod } = currentTariffStatusStore;
-    const { startUpload } = uploadDataStore;
+    const { startUpload, resolveOpenFolderTarget } = uploadDataStore;
     const { createFoldersTree } = filesActionsStore;
     const { knowledgeId } = aiRoomStore;
 
@@ -217,6 +217,7 @@ const InjectedEmptyViewContainer = inject<
       isGracePeriod,
       knowledgeId,
       startUpload,
+      resolveOpenFolderTarget,
       createFoldersTree,
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
       onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,

@@ -120,6 +120,7 @@ const PureHome = observer((props) => {
     selectedFolderStore,
     t,
     startUpload,
+    resolveOpenFolderTarget,
     setDragging,
     dragging,
     isChatDropTarget,
@@ -383,7 +384,7 @@ const PureHome = observer((props) => {
 
   const onHideQuickActions = useHideQuickActions({ t, setShowQuickActions });
 
-  const onDrop = useEventCallback((f, uploadToFolder) => {
+  const onDrop = useEventCallback((f) => {
     if (isContactsPage || isProfile) return;
 
     if (
@@ -393,14 +394,15 @@ const PureHome = observer((props) => {
     )
       return;
 
+    const target = resolveOpenFolderTarget();
     const dragged = dragging;
     dragging && setDragging(false);
 
     if (disableDrag) return;
 
-    createFoldersTree(t, f, uploadToFolder, dragged)
+    createFoldersTree(t, f, target, dragged)
       .then((fItem) => {
-        if (fItem.length > 0) startUpload(fItem, uploadToFolder, t);
+        if (fItem.length > 0) startUpload(fItem, target, t);
       })
       .catch((err) => {
         toastr.error(err, null, 0, true);
@@ -952,7 +954,7 @@ export const Component = inject(
       cancelSecondaryOperationById,
     } = secondaryProgressDataStore;
 
-    const { startUpload } = uploadDataStore;
+    const { startUpload, resolveOpenFolderTarget } = uploadDataStore;
 
     const { createFoldersTree } = filesActionsStore;
 
@@ -1061,6 +1063,7 @@ export const Component = inject(
       fetchRooms,
 
       startUpload,
+      resolveOpenFolderTarget,
       createFoldersTree,
 
       setToPreviewFile,

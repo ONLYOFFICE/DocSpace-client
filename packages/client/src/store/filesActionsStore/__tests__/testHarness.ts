@@ -140,6 +140,12 @@ const defaultFakes = (): FakeStores => ({
     clearActiveOperations: vi.fn(),
     loopFilesOperations: vi.fn(async () => {}),
     itemOperationToFolder: vi.fn(async () => {}),
+    resolveOpenFolderTarget: vi.fn(() => ({
+      folderId: 1,
+      isPrivate: false,
+      roomType: null,
+      encryptionRoomId: null,
+    })),
   },
   treeFoldersStore: {
     treeFolders: [],

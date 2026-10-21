@@ -62,6 +62,7 @@ import type { TTranslation } from "@docspace/shared/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { convertToTree } from "./helpers";
 import type { TTreeNode, TUploadTreeFile } from "./helpers";
+import type { TUploadTarget } from "../uploadDataStore/helpers";
 import type FilesActionStore from "../FilesActionsStore";
 import type { TActionItem, TOperationName } from "../FilesActionsStore";
 
@@ -194,7 +195,7 @@ export const createFoldersTreeImpl = async (
 self: FilesActionStore,
   t: TTranslation,
   files: TUploadTreeFile[] | Record<string, TUploadTreeFile>,
-  folderId?: number | string | null,
+  target: TUploadTarget,
   dragged?: boolean,
 
 )=> {
@@ -216,7 +217,7 @@ self: FilesActionStore,
   });
 
   // Spec: private-rooms/file-operations, "Folder upload disabled in private rooms".
-  if (self.treeFoldersStore.isPrivacyFolder) {
+  if (target.isPrivate) {
     const isFolderEntry = (f: TUploadTreeFile) =>
       !!f.isEmptyDirectory ||
       (f.path ?? "").split("/").filter((name) => name !== "").length > 1;
@@ -265,7 +266,7 @@ self: FilesActionStore,
     }
   }
 
-  const toFolderId = folderId || self.selectedFolderStore.id;
+  const toFolderId = target.folderId;
 
   if (withoutHiddenFiles.length) {
     setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });

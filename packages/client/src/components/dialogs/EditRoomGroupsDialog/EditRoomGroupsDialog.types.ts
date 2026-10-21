@@ -114,6 +114,8 @@ export interface EditRoomGroupsDialogProps {
   ) => Promise<boolean>;
   /** Section the groups belong to: the Rooms section or the Forms section */
   searchArea: RoomSearchArea;
+  /** The rooms the Private section lists, kept out of the Rooms groups */
+  getPrivateSectionRoomIds: () => Promise<number[]>;
 }
 
 export interface IRoomItem {
@@ -151,4 +153,6 @@ export interface RoomListPanelProps {
   sortSelectedFirst?: boolean;
   withoutBackdropBackground?: boolean;
   isFormsSection?: boolean;
+  /** Rooms the list leaves out */
+  excludeItems?: number[];
 }

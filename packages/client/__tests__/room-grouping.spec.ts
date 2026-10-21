@@ -63,8 +63,12 @@ const LONG_LIFETIME_ROOM_ID = 33;
 const roomListWithLifetimeHandler = () =>
   http.get(
     `${BASE_URL}:${TEST_PORT}/${API_PREFIX}/files/rooms*`,
-    async () => {
-      const { response } = await roomListResolver(TypeRoomList.IsDefault).json();
+    async ({ request }) => {
+      const { response } = await roomListResolver(
+        TypeRoomList.IsDefault,
+        undefined,
+        request,
+      ).json();
 
       response.folders = response.folders.map((room: { id: number }) =>
         room.id === SHORT_LIFETIME_ROOM_ID || room.id === LONG_LIFETIME_ROOM_ID

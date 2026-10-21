@@ -54,6 +54,7 @@ import type {
   ContextMenuModel,
 } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
+import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 import { onShowEditingToast } from "./helpers";
 import type { TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
@@ -138,7 +139,15 @@ self: ContextOptionsStore,t: TTranslation
     const { organizeRoomsGrouping } = self.filesSettingsStore;
     const { setEditRoomGroupsDialogVisible, roomGroups } = self.dialogsStore;
 
-    if (organizeRoomsGrouping && !isArchiveFolder && !isAIAgentsFolder) {
+    // Spec: private-rooms/sidebar-section, "No room groups in the section"
+    const isPrivateSection = isPrivateRoomsRoute(window.location.pathname);
+
+    if (
+      organizeRoomsGrouping &&
+      !isArchiveFolder &&
+      !isAIAgentsFolder &&
+      !isPrivateSection
+    ) {
       const roomIds = selection.map((room) => room.id);
       options.push({
         key: "create-group",

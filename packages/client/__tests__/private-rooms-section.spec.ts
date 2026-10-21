@@ -879,3 +879,59 @@ test.describe("Private section — filter", () => {
   });
 });
 
+test.describe("Private section — room groups", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT, { organizeRoomsGrouping: true }),
+      roomGroupsHandler(TEST_PORT),
+      privateRoomListHandler(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+    );
+  });
+
+  test("Context menu of a private room in the section", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await page
+      .getByTestId("table-row-0")
+      .getByTestId("context-menu-button")
+      .first()
+      .click();
+
+    await expect(page.getByTestId("pin-room")).toBeVisible();
+    await expect(page.getByTestId("create-group")).toHaveCount(0);
+    await expect(page.getByTestId("add-to-group")).toHaveCount(0);
+  });
+
+  test("Room group editor in Rooms", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        title: ROOM_TITLE,
+        ordinaryRooms: [{ roomId: ORDINARY_ROOM_ID, title: "Team Room" }],
+      }),
+    );
+
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+    await expect(page.getByTestId("table-body")).toBeVisible({
+      timeout: 15000,
+    });
+
+    await page.locator('[class*="groupManagementButton"]').click();
+    await page.getByTestId("create_new_group_button").click();
+
+    const roomSelector = page.getByTestId("room_selector");
+    await expect(roomSelector.getByText("Team Room")).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(roomSelector.getByText(ROOM_TITLE)).toHaveCount(0);
+  });
+});
+

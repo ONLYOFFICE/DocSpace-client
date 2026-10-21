@@ -1,6 +1,6 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
-import { describe, it, expect } from "vitest";
+import { afterEach, describe, it, expect } from "vitest";
 import { createTestFilesActionsStore, t } from "./testHarness";
 
 // Recursive {id,label} projection excluding onClick/handlers.
@@ -83,5 +83,29 @@ describe("FilesActionsStore.getHeaderMenu — dispatch by folder type", () => {
   });
   it("another (default) folder", () => {
     expect(menuFor({})).toMatchSnapshot();
+  });
+});
+
+describe("FilesActionsStore.getHeaderMenu — Private section", () => {
+  const ROOM_GROUP_ITEMS = [
+    "menu-create-group",
+    "menu-add-to-group",
+    "menu-remove-from-group",
+  ];
+  const ids = (menu: unknown[]) => menu.map((item) => (item as Node).id);
+
+  afterEach(() => window.history.pushState({}, "", "/"));
+
+  it("Context menu of a private room in the section", () => {
+    window.history.pushState({}, "", "/rooms/shared/filter");
+    const inRooms = ids(menuFor({ isRoomsFolder: true }));
+
+    window.history.pushState({}, "", "/private/filter");
+    const inPrivate = ids(menuFor({ isRoomsFolder: true }));
+
+    expect(inRooms).toEqual(expect.arrayContaining(ROOM_GROUP_ITEMS));
+    expect(inPrivate).toEqual(
+      inRooms.filter((id) => !ROOM_GROUP_ITEMS.includes(id as string)),
+    );
   });
 });

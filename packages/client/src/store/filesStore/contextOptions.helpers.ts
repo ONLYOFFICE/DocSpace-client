@@ -40,6 +40,7 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
+import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 import { EMPTY_ARRAY } from "@docspace/shared/constants";
 
 import { removeOptions, removeSeparator } from "SRC_DIR/helpers/filesUtils";
@@ -953,7 +954,9 @@ export const buildContextOptions = (
       isArchiveFolder ||
       item.rootFolderType === FolderType.Archive ||
       deps.treeFoldersStore.isAIAgentsFolder ||
-      itemGroupsArea !== sectionGroupsArea
+      itemGroupsArea !== sectionGroupsArea ||
+      // Spec: private-rooms/sidebar-section, "No room groups in the section"
+      isPrivateRoomsRoute(window.location.pathname)
     ) {
       roomOptions = removeOptions(roomOptions, [
         "create-group",

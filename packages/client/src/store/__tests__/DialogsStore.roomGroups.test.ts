@@ -35,13 +35,17 @@
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-import { RoomSearchArea } from "@docspace/shared/enums";
+import { RoomPrivacyFilter, RoomSearchArea } from "@docspace/shared/enums";
 
-const { getRoomGroups } = vi.hoisted(() => ({ getRoomGroups: vi.fn() }));
+const { getRoomGroups, getRooms } = vi.hoisted(() => ({
+  getRoomGroups: vi.fn(),
+  getRooms: vi.fn(),
+}));
 
 vi.mock("@docspace/shared/api/rooms", async (io) => ({
   ...((await io()) as Record<string, unknown>),
   getRoomGroups,
+  getRooms,
 }));
 
 const { default: DialogsStore } = await import("../DialogsStore");
@@ -129,5 +133,54 @@ describe("DialogsStore — room groups per section", () => {
     });
 
     await store.getAllRoomGroups(RoomSearchArea.Forms);
+  });
+});
+
+describe("DialogsStore — rooms of the Private section", () => {
+  const createStoreWithSection = (isPrivateRoomsSectionAvailable: boolean) =>
+    new DialogsStore(
+      {} as never,
+      {} as never,
+      { isPrivateRoomsSectionAvailable } as never,
+      {} as never,
+      {} as never,
+      {} as never,
+    );
+
+  const rooms = (from: number, count: number) =>
+    Array.from({ length: count }, (_, i) => ({ id: from + i }));
+
+  beforeEach(() => {
+    getRooms.mockReset();
+  });
+
+  it("Room group editor in Rooms: every private room, page by page", async () => {
+    const pages = [
+      { folders: rooms(1, 100), total: 101 },
+      { folders: rooms(101, 1), total: 101 },
+    ];
+    const requests: unknown[] = [];
+    getRooms.mockImplementation(async (filter) => {
+      const { page, pageCount, privacyFilter, searchArea } = filter;
+      requests.push({ page, pageCount, privacyFilter, searchArea });
+      return pages.shift();
+    });
+
+    const ids = await createStoreWithSection(true).getPrivateSectionRoomIds();
+
+    expect(ids).toEqual(rooms(1, 101).map((room) => room.id));
+    expect(requests).toEqual([0, 1].map((page) => ({
+      page,
+      pageCount: 100,
+      privacyFilter: RoomPrivacyFilter.Private,
+      searchArea: RoomSearchArea.Active,
+    })));
+  });
+
+  it("none while the section is not available", async () => {
+    const ids = await createStoreWithSection(false).getPrivateSectionRoomIds();
+
+    expect(ids).toEqual([]);
+    expect(getRooms).not.toHaveBeenCalled();
   });
 });

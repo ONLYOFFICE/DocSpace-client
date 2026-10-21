@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { describe, it, expect, beforeEach } from "vitest";
+import { afterEach, describe, it, expect, beforeEach } from "vitest";
 import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
@@ -311,5 +311,30 @@ describe("FilesStore.getFilesContextOptions — characterization", () => {
       isLinkExpired: true,
     } as TItem;
     expect(store.getFilesContextOptions(expired)).toStrictEqual(["select"]);
+  });
+});
+
+describe("FilesStore.getFilesContextOptions — Private section", () => {
+  afterEach(() => window.history.pushState({}, "", "/"));
+
+  it("Context menu of a private room in the section", () => {
+    const store = createTestFilesStore({
+      filesSettingsStore: { organizeRoomsGrouping: true },
+    });
+    store.dialogsStore = { roomGroups: [{ id: "g1" }] } as never;
+    const privateRoom = { ...customRoom(), private: true } as TItem;
+
+    window.history.pushState({}, "", "/rooms/shared/filter");
+    const inRooms = store.getFilesContextOptions(privateRoom);
+
+    window.history.pushState({}, "", "/private/filter");
+    const inPrivate = store.getFilesContextOptions(privateRoom);
+
+    expect(inRooms).toEqual(
+      expect.arrayContaining(["create-group", "add-to-group"]),
+    );
+    expect(inPrivate).not.toContain("create-group");
+    expect(inPrivate).not.toContain("add-to-group");
+    expect(inPrivate).not.toContain("remove-from-group");
   });
 });

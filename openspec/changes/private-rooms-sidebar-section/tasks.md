@@ -96,7 +96,7 @@
   - no room-type, third-party storage or room-group controls.
 
   Verify with the E2E scenario "Filter opened in the section".
-- [ ] 3.3 Room groups:
+- [x] 3.3 Room groups:
   - withhold the create-group and add-to-group actions on the private route, in `store/filesActionsStore/menu.helpers.ts`, `store/filesStore/contextOptions.helpers.ts` and `store/contextOptionsStore/groupContextOptions.helpers.ts`;
   - filter private rooms out of the Rooms room-group dialogs (`components/dialogs/EditRoomGroupsDialog`, `AddRoomToGroupDialog`) while the section is available.
 

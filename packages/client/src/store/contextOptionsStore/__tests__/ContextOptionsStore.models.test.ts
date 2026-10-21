@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { afterEach, describe, it, expect, beforeEach, vi } from "vitest";
 
 import { createTestContextOptionsStore, menuShape, t } from "./testHarness";
 
@@ -83,6 +83,39 @@ describe("ContextOptionsStore.getGroupContextOptions — characterization", () =
     const model = store.getGroupContextOptions(t);
     expect(Array.isArray(model)).toBe(true);
     expect(menuShape(model)).toMatchSnapshot();
+  });
+});
+
+describe("ContextOptionsStore.getGroupContextOptions — Private section", () => {
+  const ROOM_GROUP_KEYS = ["create-group", "add-to-group", "remove-from-group"];
+
+  const keysFor = (pathname: string) => {
+    window.history.pushState({}, "", pathname);
+    const store = createTestContextOptionsStore({
+      treeFoldersStore: { isRoomsFolder: true },
+      filesSettingsStore: { organizeRoomsGrouping: true },
+      dialogsStore: { roomGroups: [{ id: "g1", name: "Team" }] },
+      filesStore: {
+        roomsFilter: { groupId: "g1" },
+        selection: [
+          { id: 1, private: true, security: {}, contextOptions: [] },
+          { id: 2, private: true, security: {}, contextOptions: [] },
+        ],
+      },
+    });
+    return menuShape(store.getGroupContextOptions(t)).map((m) => m.key);
+  };
+
+  afterEach(() => window.history.pushState({}, "", "/"));
+
+  it("Context menu of a private room in the section", () => {
+    const inRooms = keysFor("/rooms/shared/filter");
+    const inPrivate = keysFor("/private/filter");
+
+    expect(inRooms).toEqual(expect.arrayContaining(ROOM_GROUP_KEYS));
+    expect(inPrivate).toEqual(
+      inRooms.filter((key) => !ROOM_GROUP_KEYS.includes(key as string)),
+    );
   });
 });
 

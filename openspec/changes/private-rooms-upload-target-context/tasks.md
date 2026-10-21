@@ -111,7 +111,7 @@
 
 ## 3. Integration
 
-- [ ] 3.1 Run the private-room E2E suites in Docker with `cd packages/client && pnpm test:e2e:docker:dev __tests__/private-room __tests__/encrypted-file-ui.spec.ts __tests__/keys-management`. Verify that the `--reporter=line` summary is green, including the "Uploader without a key" case in `private-room-access.spec.ts`.
+- [x] 3.1 Run the private-room E2E suites in Docker with `cd packages/client && pnpm test:e2e:docker:dev __tests__/private-room __tests__/encrypted-file-ui.spec.ts __tests__/keys-management`. Verify that the `--reporter=line` summary is green, including the "Uploader without a key" case in `private-room-access.spec.ts`.
 - [ ] 3.2 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`) and `npx -y @fission-ai/openspec@latest validate --all --strict` (with `OPENSPEC_TELEMETRY=0`). Verify that everything is green.
 
 ## Workflow follow-up

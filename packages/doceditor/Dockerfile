@@ -25,8 +25,6 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 # tarball at the repo root can be referenced as `file:../../<name>.tgz` for
 # local development. A glob matching nothing is fine next to real sources.
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
-# pnpm applies `patchedDependencies` (pnpm-workspace.yaml) at install time.
-COPY patches/ ./patches/
 
 # Copy the source code with correct directory structure
 COPY common/ ./common/

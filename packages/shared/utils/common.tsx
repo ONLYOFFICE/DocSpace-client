@@ -1587,11 +1587,25 @@ export const getErrorInfo = (
  */
 const ROUTE_ID = "-?\\d+";
 
+/** The Private section of the sidebar: private rooms listed apart from Rooms. */
+export const isPrivateRoomsRoute = (pathname: string) =>
+  pathname === "/private" || pathname.startsWith("/private/");
+
 export const getCategoryType = (location: { pathname: string }) => {
   let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
   const { pathname } = location;
 
-  if (pathname.startsWith("/forms")) {
+  if (isPrivateRoomsRoute(pathname)) {
+    const privateRoomRegexp = new RegExp(`^/private/(${ROUTE_ID})(/|$)`);
+
+    if (pathname.startsWith("/private/archived")) {
+      categoryType = CategoryType.PrivateArchive;
+    } else if (privateRoomRegexp.test(pathname)) {
+      categoryType = CategoryType.PrivateRoom;
+    } else {
+      categoryType = CategoryType.PrivateRooms;
+    }
+  } else if (pathname.startsWith("/forms")) {
     const formRoomRegexp = new RegExp(`(forms)/(${ROUTE_ID})`);
 
     if (formRoomRegexp.test(pathname)) {

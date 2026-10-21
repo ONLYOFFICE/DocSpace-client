@@ -11,7 +11,7 @@
 
 ## 1. Availability, request scope and mocks
 
-- [ ] 1.1 Add the routing primitives:
+- [x] 1.1 Add the routing primitives:
   - `CategoryType.PrivateRooms`, `PrivateRoom` and `PrivateArchive`;
   - a `/private` branch at the top of `getCategoryType` (`packages/shared/utils/common.tsx`) and an `isPrivateRoomsRoute` helper;
   - `getCategoryUrl` cases for the three categories (`packages/client/src/helpers/utils.js`), with archived rooms as `/private/archived/filter?folder={id}`.

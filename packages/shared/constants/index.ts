@@ -260,6 +260,9 @@ export const CategoryType = Object.freeze({
   AIAgent: 16,
   Forms: 17,
   Form: 18,
+  PrivateRooms: 19,
+  PrivateRoom: 20,
+  PrivateArchive: 21,
 });
 
 export const SHARED_MEMBERS_COUNT = 100;

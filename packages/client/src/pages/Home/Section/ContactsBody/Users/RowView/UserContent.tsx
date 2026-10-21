@@ -58,6 +58,7 @@ const UserContent = ({
   contactsTab,
   showStorageInfo,
   isDefaultUsersQuotaSet,
+  showAISpendingInfo,
 
   standalone,
 
@@ -203,7 +204,7 @@ const UserContent = ({
       ) : (
         <div />
       )}
-      {!isGuests && aiSpending ? (
+      {!isGuests && showAISpendingInfo && aiSpending ? (
         <Link
           type={LinkType.page}
           fontSize="12px"

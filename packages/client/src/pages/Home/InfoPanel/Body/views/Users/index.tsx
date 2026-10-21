@@ -84,6 +84,7 @@ type UsersProps = {
 	getUserContextOptions?: ContactsConextOptionsStore["getUserContextOptions"];
 
 	showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
+	showAISpendingInfo?: UsersStore["showAISpendingInfo"];
 
 	standalone?: SettingsStore["standalone"];
 
@@ -104,6 +105,7 @@ const Users = ({
 	getUserContextOptions,
 
 	showStorageInfo,
+	showAISpendingInfo,
 	standalone,
 	userSelection,
 	isGuests,
@@ -350,7 +352,9 @@ const Users = ({
 							/>
 						</>
 					) : null}
-					{!isGuests && userSelection.aiServicesLimit ? (
+					{!isGuests &&
+					showAISpendingInfo &&
+					userSelection.aiServicesLimit ? (
 						<>
 							<Text
 								className={styles.infoField}
@@ -418,6 +422,7 @@ export default inject(
 
 			selection,
 			bufferSelection,
+			showAISpendingInfo,
 		} = usersStore!;
 
 		const { getUsersChangeTypeOptions, getUserContextOptions } =
@@ -442,6 +447,7 @@ export default inject(
 			getUsersChangeTypeOptions,
 
 			showStorageInfo,
+			showAISpendingInfo,
 			standalone,
 
 			userSelection,

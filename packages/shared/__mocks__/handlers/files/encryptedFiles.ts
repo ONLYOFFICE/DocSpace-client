@@ -108,6 +108,14 @@ export type EncryptedFilesHandlerOptions = {
   currentUserId?: string;
   /** The signed-in user's own key pairs, returned as `userKeys`. */
   callerKeys?: RoomMemberKeyEntry[];
+  /**
+   * The room lies in the Archive section. Rights then follow the Archive
+   * branch of FileSecurity.FilterEntryAsync (FileSecurity.cs, FolderType.Archive)
+   * for the room owner: files keep Read, Download, ReadHistory and Copy and
+   * lose Edit, Rename, Move, Delete and Duplicate; the room denies Create,
+   * CopyTo and MoveTo.
+   */
+  archived?: boolean;
   handle?: { current: EncryptedFilesHandlerHandle | null };
 };
 
@@ -115,6 +123,13 @@ const DEFAULT_CURRENT_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef"; // match
 const MOCK_TENANT_ID = 1;
 /** The Rooms section folder id the room mocks share (see privateRoomList.ts). */
 const ROOMS_SECTION_ID = 2002;
+/** The Archive section folder id of the root mock (see root.ts). */
+const ARCHIVE_SECTION_ID = 11244;
+
+const sectionOf = (archived: boolean) =>
+  archived
+    ? { id: ARCHIVE_SECTION_ID, title: "Archive", folderType: 20 }
+    : { id: ROOMS_SECTION_ID, title: "Rooms", folderType: 14 };
 /** ChunkedUploadSessionHolder.SlidingExpiration. */
 const SESSION_SLIDING_EXPIRATION_MS = 12 * 60 * 60 * 1000;
 
@@ -150,7 +165,9 @@ const buildFileDto = (
   roomId: number,
   ownerId: string,
   port?: string,
+  archived = false,
 ) => {
+  const section = sectionOf(archived);
   const downloadOrigin = port ? `${BASE_URL}:${port}` : BASE_URL;
   const dotIdx = record.serverTitle.lastIndexOf(".");
   const fileExst = dotIdx > 0 ? record.serverTitle.slice(dotIdx) : "";
@@ -174,8 +191,8 @@ const buildFileDto = (
     fileStatus: 0,
     fileEntryType: 2,
     folderId: roomId,
-    rootFolderId: ROOMS_SECTION_ID,
-    rootFolderType: 14,
+    rootFolderId: section.id,
+    rootFolderType: section.folderType,
     parentRoomType: 19,
     pureContentLength: record.size,
     contentLength: `${record.size} bytes`,
@@ -229,28 +246,53 @@ const buildFileDto = (
       CopyLink: false,
       Embed: false,
       Vectorization: false,
+      ...(archived && {
+        Edit: false,
+        Delete: false,
+        Copy: true,
+        Move: false,
+        Rename: false,
+        ReadHistory: true,
+        Duplicate: false,
+      }),
     },
   };
 };
 
-const buildFolderDto = (roomId: number) => ({
-  id: roomId,
-  title: "Private Room",
-  parentId: ROOMS_SECTION_ID,
-  filesCount: 0,
-  foldersCount: 0,
-  rootFolderId: ROOMS_SECTION_ID,
-  rootFolderType: 14,
-  roomType: 5,
-  shared: false,
-  private: true,
-});
+const buildFolderDto = (roomId: number, archived = false) => {
+  const section = sectionOf(archived);
+  return {
+    id: roomId,
+    title: "Private Room",
+    parentId: section.id,
+    filesCount: 0,
+    foldersCount: 0,
+    rootFolderId: section.id,
+    rootFolderType: section.folderType,
+    roomType: 5,
+    shared: false,
+    private: true,
+    ...(archived && {
+      security: {
+        Read: true,
+        Download: true,
+        Copy: true,
+        Create: false,
+        CopyTo: false,
+        MoveTo: false,
+        EditRoom: false,
+        Rename: false,
+      },
+    }),
+  };
+};
 
 export const encryptedFilesHandlers = (
   port: string,
   opts: EncryptedFilesHandlerOptions,
 ) => {
   const roomId = opts.roomId;
+  const archived = !!opts.archived;
   const ownerId =
     opts.ownerId ?? "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
   const files = new Map<number, EncryptedFileRecord>();
@@ -319,7 +361,7 @@ export const encryptedFilesHandlers = (
       version: 1,
       title: session.fileName,
       uploaded: true,
-      file: buildFileDto(record, session.folderId, ownerId, port),
+      file: buildFileDto(record, session.folderId, ownerId, port, archived),
     };
   };
 
@@ -373,7 +415,7 @@ export const encryptedFilesHandlers = (
      * stamps the room's type (CustomRoom, 19) as `parentRoomType` on the
      * room itself and on every entry in it. `pathParts` are its breadcrumbs,
      * each `{ id, title, roomType, folderType }`; MapToRoomType gives the
-     * Rooms section no room type, so that part has none.
+     * section (Rooms or Archive) no room type, so that part has none.
      */
     http.get(`${apiBase}/files/:folderId(\\d+)`, ({ params, request }) => {
       const folderId = Number(params.folderId);
@@ -384,11 +426,17 @@ export const encryptedFilesHandlers = (
 
       const all = Array.from(files.values());
       return okResponse({
-        files: all.map((f) => buildFileDto(f, roomId, ownerId, port)),
+        files: all.map((f) =>
+          buildFileDto(f, roomId, ownerId, port, archived),
+        ),
         folders: [],
-        current: { ...buildFolderDto(roomId), parentRoomType: 19 },
+        current: { ...buildFolderDto(roomId, archived), parentRoomType: 19 },
         pathParts: [
-          { id: ROOMS_SECTION_ID, title: "Rooms", folderType: 14 },
+          {
+            id: sectionOf(archived).id,
+            title: sectionOf(archived).title,
+            folderType: sectionOf(archived).folderType,
+          },
           { id: roomId, title: "Private Room", roomType: 5, folderType: 19 },
         ],
         startIndex: 0,
@@ -409,7 +457,7 @@ export const encryptedFilesHandlers = (
         const folderId = Number(params.folderId);
         if (folderId !== roomId) return undefined;
         requests.push({ method: "GET", url: new URL(request.url).pathname });
-        return okResponse(buildFolderDto(roomId));
+        return okResponse(buildFolderDto(roomId, archived));
       },
     ),
 
@@ -688,7 +736,13 @@ export const encryptedFilesHandlers = (
             version: 1,
             title: session.fileName,
             uploaded: false,
-            file: buildFileDto(pending, session.folderId, ownerId, port),
+            file: buildFileDto(
+              pending,
+              session.folderId,
+              ownerId,
+              port,
+              archived,
+            ),
           });
         }
         return okResponse(completeSession(session), 201);

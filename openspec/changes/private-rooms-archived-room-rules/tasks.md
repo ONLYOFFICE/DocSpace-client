@@ -40,7 +40,7 @@
 
 ## 3. Mocks and end-to-end coverage
 
-- [ ] 3.1 Add an `archived` option to `encryptedFilesHandlers` (`packages/shared/__mocks__/handlers/files/encryptedFiles.ts`), as design D6 describes:
+- [x] 3.1 Add an `archived` option to `encryptedFilesHandlers` (`packages/shared/__mocks__/handlers/files/encryptedFiles.ts`), as design D6 describes:
   - the room and its files report `rootFolderType: 20` and the Archive section id as `rootFolderId`;
   - the files follow the Archive branch of `FileSecurity.FilterEntryAsync` for the room owner: Read, Download, ReadHistory and Copy true; Edit, Rename, Move, Delete and Duplicate false;
   - the room denies Create, CopyTo and MoveTo.

@@ -51,6 +51,7 @@ import { BASE_URL, API_PREFIX } from "../../../e2e/utils";
 
 const PORT = "3200";
 const ROOM_ID = 9100;
+const ARCHIVED_ROOM_ID = 9200;
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";
 const BOB_ID = "22222222-2222-2222-2222-222222222222";
 
@@ -63,6 +64,9 @@ const PUBLIC_KEYS_URL = (fileId: number) =>
 const handle: { current: EncryptedFilesHandlerHandle | null } = {
   current: null,
 };
+const archivedHandle: { current: EncryptedFilesHandlerHandle | null } = {
+  current: null,
+};
 
 const server = setupServer(
   ...encryptedFilesHandlers(PORT, {
@@ -72,6 +76,13 @@ const server = setupServer(
     handle,
   }),
   privateRoomListHandler(PORT, { roomId: ROOM_ID }),
+  ...encryptedFilesHandlers(PORT, {
+    roomId: ARCHIVED_ROOM_ID,
+    ownerId: ALICE_ID,
+    currentUserId: ALICE_ID,
+    archived: true,
+    handle: archivedHandle,
+  }),
 );
 
 beforeAll(() => {
@@ -82,6 +93,7 @@ afterAll(() => server.close());
 
 beforeEach(() => {
   handle.current?.reset();
+  archivedHandle.current?.reset();
 });
 
 describe("encryptedFiles mock — GET /files/{fileId}/access (mirrors FilesController.GetEncryptionInfoAsync)", () => {
@@ -362,6 +374,63 @@ describe("encryptedFiles mock — entry DTOs (mirrors FoldersController.GetFolde
     });
     expect(body.response).not.toHaveProperty("parentRoomType");
     expect(body.response).not.toHaveProperty("pathParts");
+  });
+});
+
+describe("encryptedFiles mock — the copy right (mirrors FileSecurity.FilterEntryAsync)", () => {
+  type Listing = {
+    response: {
+      files: { security: Record<string, boolean> }[];
+      current: Record<string, unknown> & { security?: Record<string, boolean> };
+      pathParts: Record<string, unknown>[];
+    };
+  };
+  const list = async (roomId: number) =>
+    (await (
+      await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/${roomId}`)
+    ).json()) as Listing;
+  const seed = { id: 1, title: "secret.docx", encrypted: true, fileKeys: [] };
+
+  it("File in an active private room", async () => {
+    handle.current!.setFiles([seed]);
+
+    const { files } = (await list(ROOM_ID)).response;
+
+    expect(files.map((f) => f.security.Copy)).toEqual([false]);
+  });
+
+  it("File in an archived private room", async () => {
+    archivedHandle.current!.setFiles([seed]);
+
+    const { files, current, pathParts } = (await list(ARCHIVED_ROOM_ID))
+      .response;
+
+    expect(files[0]).toMatchObject({
+      rootFolderId: 11244,
+      rootFolderType: 20,
+      security: {
+        Read: true,
+        Download: true,
+        ReadHistory: true,
+        Copy: true,
+        Edit: false,
+        Rename: false,
+        Move: false,
+        Delete: false,
+        Duplicate: false,
+      },
+    });
+    expect(current).toMatchObject({
+      rootFolderId: 11244,
+      rootFolderType: 20,
+      private: true,
+      security: { Create: false, CopyTo: false, MoveTo: false },
+    });
+    expect(pathParts[0]).toEqual({
+      id: 11244,
+      title: "Archive",
+      folderType: 20,
+    });
   });
 });
 

@@ -158,7 +158,7 @@
   ```
 
   Review the list of rewritten frames: only sidebar frames and lists that showed a private room may change. Verify that a full Docker E2E run is green.
-- [ ] 7.2 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`) and `npx -y @fission-ai/openspec@latest validate --all --strict`. Verify that everything is green.
+- [x] 7.2 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`) and `npx -y @fission-ai/openspec@latest validate --all --strict`. Verify that everything is green.
 
 ## Workflow follow-up
 

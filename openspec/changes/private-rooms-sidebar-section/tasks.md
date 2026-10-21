@@ -53,7 +53,7 @@
   Add the `Common:Private` key ("Private"). Its `.meta` comment must say it names the sidebar section of end-to-end encrypted rooms, so translators pick the plural/section form. Then run the `translate-comments` and `translate-locales` skills and `cd common/tests && npx vitest run test/locales.test.js`.
 
   Verify with active-id cases in `privateRoomsSectionNavigation.test.ts`, and with the E2E scenarios "Section available", "Section not available", "Item clicked", "Archive address" and "Section expanded".
-- [ ] 2.3 Implement the section decision (design D5):
+- [x] 2.3 Implement the section decision (design D5):
   - the private signal in `getCategoryTypeByFolderTypeInSection`, before its early return, plus the Archive branch;
   - the item passed by its callers;
   - the section-aware category in `fetchRooms`;

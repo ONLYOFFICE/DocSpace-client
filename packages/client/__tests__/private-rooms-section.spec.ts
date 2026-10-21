@@ -46,7 +46,10 @@ import {
   TypeRoomList,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
+import { rootResolve } from "@docspace/shared/__mocks__/handlers/files/root";
+import { API_PREFIX, BASE_URL } from "@docspace/shared/__mocks__/e2e";
 import { PRIVATE_ROOMS_FLAG_KEY } from "@docspace/shared/utils/privateRooms";
+import { http } from "msw";
 import type { Page } from "@playwright/test";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
@@ -394,6 +397,105 @@ test.describe("Private section — rooms open inside it", () => {
     await expect(keysMissing(page)).toHaveCount(1);
     await page.waitForTimeout(1000);
     await expect(keysMissing(page)).toHaveCount(1);
+  });
+
+  test("New file of an ordinary room opened from the section", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const apiUrl = (path: string) =>
+      `${BASE_URL}:${TEST_PORT}/${API_PREFIX}/${path}`;
+    mockRequest.use(
+      /**
+       * Mirrors FoldersController.GetRootFolders (HttpGet "@root"): the
+       * Rooms root reports one new item, so its sidebar item has a badge.
+       */
+      http.get(apiUrl("files/@root"), async () => {
+        const body = await rootResolve().json();
+        for (const root of body.response)
+          if (root.current.rootFolderType === 14) root.new = 1;
+        return Response.json(body);
+      }),
+      /**
+       * Mirrors VirtualRoomsController.GetRoomsNewItems (HttpGet
+       * "rooms/news"): the unseen files of the active rooms grouped by day
+       * and by room, the room in its short form.
+       */
+      http.get(apiUrl("files/rooms/news"), () =>
+        Response.json({
+          response: [
+            {
+              date: "2026-01-01T12:00:00.0000000+00:00",
+              items: [
+                {
+                  room: {
+                    id: ORDINARY_ROOM_ID,
+                    title: "Team Room",
+                    roomType: 5,
+                    logo: {
+                      original: "",
+                      large: "",
+                      medium: "",
+                      small: "",
+                      color: "8048B0",
+                    },
+                  },
+                  items: [
+                    {
+                      id: 9601,
+                      title: ORDINARY_FILE_TITLE,
+                      fileExst: ".txt",
+                      fileType: 5,
+                      folderId: ORDINARY_ROOM_ID,
+                      rootFolderId: 2002,
+                      rootFolderType: 14,
+                      fileEntryType: 2,
+                      version: 1,
+                      viewAccessibility: {},
+                      security: { Read: true },
+                      created: "2026-01-01T12:00:00.0000000+00:00",
+                      updated: "2026-01-01T12:00:00.0000000+00:00",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+          status: 0,
+          statusCode: 200,
+        }),
+      ),
+    );
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    const addresses: string[] = [];
+    page.on("framenavigated", (frame) => {
+      if (frame === page.mainFrame()) addresses.push(frame.url());
+    });
+
+    await page
+      .locator(`nav li:has([data-item-id="${ROOMS_ID}"])`)
+      .getByTestId("badge")
+      .first()
+      .click();
+    // The location button shows on hover, as in the panel itself.
+    const newFile = page
+      .locator('[class*="fileItem"]')
+      .filter({ hasText: "agenda" });
+    await newFile.hover();
+    await newFile.locator(".open-location-button").click();
+
+    await expect(fileRow(page, ORDINARY_FILE_TITLE)).toBeVisible({
+      timeout: 15000,
+    });
+    expect(new URL(page.url()).pathname).toBe(
+      `/rooms/shared/${ORDINARY_ROOM_ID}/filter`,
+    );
+    expect(addresses.filter((address) => address.includes("/private/"))).toEqual(
+      [],
+    );
   });
 
   test("Hand-edited address", async ({ page, baseUrl }) => {

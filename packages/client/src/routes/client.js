@@ -49,6 +49,7 @@ import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 import ProtectedAppRoute from "../components/ProtectedAppRoute";
+import PrivateRoomsSectionRoute from "../components/PrivateRoomsSectionRoute";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
 import { contactsRoutes } from "./contacts";
@@ -260,7 +261,7 @@ const ClientRoutes = [
             path: "rooms/shared",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId="ai-rooms">
+                <ProtectedAppRoute appId="ai-rooms" admitPrivateRooms>
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -270,7 +271,7 @@ const ClientRoutes = [
             path: "rooms/shared/filter",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId="ai-rooms">
+                <ProtectedAppRoute appId="ai-rooms" admitPrivateRooms>
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -280,7 +281,10 @@ const ClientRoutes = [
             path: "rooms/shared/:room",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                <ProtectedAppRoute
+                  appId={["ai-rooms", "ai-forms"]}
+                  admitPrivateRooms
+                >
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -290,7 +294,10 @@ const ClientRoutes = [
             path: "rooms/shared/:room/filter",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                <ProtectedAppRoute
+                  appId={["ai-rooms", "ai-forms"]}
+                  admitPrivateRooms
+                >
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -397,10 +404,70 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "private",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/filter",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/archived",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/archived/filter",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/:room",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/:room/filter",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "rooms/archived",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId="ai-rooms">
+                <ProtectedAppRoute appId="ai-rooms" admitPrivateRooms>
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -410,7 +477,7 @@ const ClientRoutes = [
             path: "rooms/archived/filter",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId="ai-rooms">
+                <ProtectedAppRoute appId="ai-rooms" admitPrivateRooms>
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -420,7 +487,10 @@ const ClientRoutes = [
             path: "rooms/archived/:room",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                <ProtectedAppRoute
+                  appId={["ai-rooms", "ai-forms"]}
+                  admitPrivateRooms
+                >
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -430,7 +500,10 @@ const ClientRoutes = [
             path: "rooms/archived/:room/filter",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                <ProtectedAppRoute
+                  appId={["ai-rooms", "ai-forms"]}
+                  admitPrivateRooms
+                >
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>

@@ -34,13 +34,17 @@
  */
 
 import { useEffect } from "react";
-import { Navigate } from "react-router";
+import { Navigate, useLocation, useParams } from "react-router";
 import { inject, observer } from "mobx-react";
 
 type ProtectedAppRouteProps = {
   // Several ids let a route shared by two apps through as long as either of
   // them is on.
   appId: string | string[];
+  // Also admits a room or folder address while the Private section is
+  // available: it may hold a private room.
+  admitPrivateRooms?: boolean;
+  isPrivateRoomsSectionAvailable: boolean;
   isInstalled: (id: string) => boolean;
   isAppsLoaded: boolean;
   isAppsLoadFailed: boolean;
@@ -54,6 +58,8 @@ const GUEST_RESTRICTED_APPS = new Set(["ai-files"]);
 
 const ProtectedAppRoute = ({
   appId,
+  admitPrivateRooms = false,
+  isPrivateRoomsSectionAvailable,
   isInstalled,
   isAppsLoaded,
   isAppsLoadFailed,
@@ -62,6 +68,9 @@ const ProtectedAppRoute = ({
   isGuest,
   children,
 }: ProtectedAppRouteProps) => {
+  const location = useLocation();
+  const { room } = useParams();
+
   useEffect(() => {
     ensureAppsLoaded();
   }, [ensureAppsLoaded]);
@@ -76,14 +85,20 @@ const ProtectedAppRoute = ({
   if (isGuest && appIds.every((id) => GUEST_RESTRICTED_APPS.has(id)))
     return <Navigate to="/dashboard" replace />;
 
-  return appIds.some(isInstalled) ? (
-    children
-  ) : (
-    <Navigate to="/dashboard" replace />
-  );
+  if (appIds.some(isInstalled)) return children;
+
+  const isFolderAddress =
+    !!room || new URLSearchParams(location.search).has("folder");
+
+  // Spec: private-rooms/sidebar-section, "Private rooms open inside the section"
+  if (admitPrivateRooms && isPrivateRoomsSectionAvailable && isFolderAddress)
+    return children;
+
+  return <Navigate to="/dashboard" replace />;
 };
 
 export default inject<TStore>(({ appsStore, userStore }) => ({
+  isPrivateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
   isInstalled: appsStore.isInstalled,
   isAppsLoaded: appsStore.isLoaded,
   isAppsLoadFailed: appsStore.isLoadFailed,

@@ -35,17 +35,24 @@
 
 
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("mobx-react", () => ({
   inject: () => (component: unknown) => component,
   observer: (component: unknown) => component,
 }));
 
+const router = vi.hoisted(() => ({
+  search: "",
+  params: {} as { room?: string },
+}));
+
 vi.mock("react-router", () => ({
   Navigate: ({ to }: { to: string }) => (
     <div data-testid="redirect" data-to={to} />
   ),
+  useLocation: () => ({ pathname: "/rooms/shared/filter", search: router.search }),
+  useParams: () => router.params,
 }));
 
 const { default: ProtectedAppRoute } = await import("../index");
@@ -62,6 +69,7 @@ const renderRoute = (props: Partial<Props> = {}) =>
       ensureAppsLoaded={vi.fn()}
       canManageApps
       isGuest={false}
+      isPrivateRoomsSectionAvailable={false}
       {...(props as object)}
     >
       <div data-testid="section" />
@@ -69,6 +77,11 @@ const renderRoute = (props: Partial<Props> = {}) =>
   );
 
 describe("ProtectedAppRoute", () => {
+  beforeEach(() => {
+    router.search = "";
+    router.params = {};
+  });
+
   it("renders nothing on standalone while the apps list is loading", () => {
     renderRoute({ isAppsLoaded: false });
 
@@ -118,5 +131,54 @@ describe("ProtectedAppRoute", () => {
     renderRoute({ appId: "ai-files", isGuest: true });
 
     expect(screen.getByTestId("redirect")).toBeInTheDocument();
+  });
+
+  describe("a Rooms room address while the Rooms app is off", () => {
+    const roomsOff = {
+      admitPrivateRooms: true,
+      isInstalled: () => false,
+    } as Partial<Props>;
+
+    it("admits a room address while the Private section is available", () => {
+      router.params = { room: "12" };
+
+      renderRoute({ ...roomsOff, isPrivateRoomsSectionAvailable: true });
+
+      expect(screen.getByTestId("section")).toBeInTheDocument();
+    });
+
+    it("admits a folder address while the Private section is available", () => {
+      router.search = "?folder=12";
+
+      renderRoute({ ...roomsOff, isPrivateRoomsSectionAvailable: true });
+
+      expect(screen.getByTestId("section")).toBeInTheDocument();
+    });
+
+    it("keeps the list out", () => {
+      renderRoute({ ...roomsOff, isPrivateRoomsSectionAvailable: true });
+
+      expect(screen.getByTestId("redirect")).toBeInTheDocument();
+    });
+
+    it("keeps a room address out without the Private section", () => {
+      router.params = { room: "12" };
+
+      renderRoute({ ...roomsOff, isPrivateRoomsSectionAvailable: false });
+
+      expect(screen.getByTestId("redirect")).toBeInTheDocument();
+    });
+
+    it("keeps a room address out of a route that does not admit private rooms", () => {
+      router.params = { room: "12" };
+
+      renderRoute({
+        ...roomsOff,
+        admitPrivateRooms: false,
+        isPrivateRoomsSectionAvailable: true,
+      });
+
+      expect(screen.getByTestId("redirect")).toBeInTheDocument();
+    });
   });
 });

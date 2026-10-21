@@ -43,7 +43,7 @@
 
 ## 2. Routes, sidebar and navigation
 
-- [ ] 2.1 Register the six `/private` routes in `packages/client/src/routes/client.js` on the Home view, behind a guard that waits for the apps list and redirects to the Rooms counterpart while the section is not available. Let the Rooms room and archive routes through their Rooms-app guard while the section is available (design D3). Teach `useFiles` the three categories.
+- [x] 2.1 Register the six `/private` routes in `packages/client/src/routes/client.js` on the Home view, behind a guard that waits for the apps list and redirects to the Rooms counterpart while the section is not available. Let the Rooms room and archive routes through their Rooms-app guard while the section is available (design D3). Teach `useFiles` the three categories.
 
   Verify with:
   - fallback-mapping cases in `privateRoomsSectionNavigation.test.ts`;

@@ -41,6 +41,7 @@ import {
   isPrivateRoomsRoute,
 } from "@docspace/shared/utils/common";
 
+import { getRoomsAddressOfPrivateAddress } from "../privateRoomsSection";
 import { getCategoryUrl } from "../utils";
 
 const categoryOf = (pathname: string) => getCategoryType({ pathname });
@@ -88,6 +89,39 @@ describe("Private section addresses", () => {
     expect(url).toBe("/private/archived/filter?folder=123");
     expect(categoryOf(new URL(url, "http://x").pathname)).toBe(
       CategoryType.PrivateArchive,
+    );
+  });
+});
+
+describe("Private section addresses without the section", () => {
+  it.each([
+    ["/private", "", "/rooms/shared", CategoryType.Shared],
+    [
+      "/private/filter",
+      "?searchArea=Active",
+      "/rooms/shared/filter?searchArea=Active",
+      CategoryType.Shared,
+    ],
+    ["/private/123", "", "/rooms/shared/123", CategoryType.SharedRoom],
+    [
+      "/private/123/filter",
+      "?folder=123",
+      "/rooms/shared/123/filter?folder=123",
+      CategoryType.SharedRoom,
+    ],
+    ["/private/archived", "", "/rooms/archived", CategoryType.Archive],
+    [
+      "/private/archived/filter",
+      "?folder=123",
+      "/rooms/archived/filter?folder=123",
+      CategoryType.Archive,
+    ],
+  ])("open %s%s under Rooms", (pathname, search, address, category) => {
+    const roomsAddress = getRoomsAddressOfPrivateAddress({ pathname, search });
+
+    expect(roomsAddress).toBe(address);
+    expect(categoryOf(new URL(roomsAddress, "http://x").pathname)).toBe(
+      category,
     );
   });
 });

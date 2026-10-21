@@ -47,7 +47,7 @@ New items, sockets and room groups:
 - Private rooms are listed in Rooms with a badge.
 - The `e2e-rooms` app (`packages/client/src/pages/E2eRooms/index.tsx`) frames `/sdk/private`. It has no item in the sidebar that is actually rendered: `ClientArticleSidebar` is the only sidebar in use, and `components/NewArticle` is not imported anywhere.
 - The Private card is offered by `getCreateRoomTypes` (`packages/shared/utils/rooms.tsx:86-89`).
-- `TreeFoldersStore.isPrivacyFolder` requires `rootFolderType === Rooms` (`packages/client/src/store/TreeFoldersStore.ts:403-411`), so it is false on both list roots and inside archived private rooms.
+- `TreeFoldersStore.isPrivacyFolder` reads the open folder's private flag and the private entries of its path, whatever section holds the room (`packages/client/src/store/TreeFoldersStore.ts`, since `private-rooms-archived-room-rules`). It is false on both list roots and true inside active and archived private rooms.
 - `EncryptionProviderWrapper` is mounted globally and keys unlock, name recovery and hints off folder data, not the route. The same goes for the backfill sweep (`store/filesStore/fetch.helpers.ts:210-224`).
 - The MSW rooms-list handler (`packages/shared/__mocks__/handlers/files/roomList.ts`) ignores `privacyFilter`.
 
@@ -64,8 +64,8 @@ No stashed design document covers a private-rooms section. The decisions below f
 
 **Non-Goals:**
 - No server-backed root (see Follow-up).
-- No change to `isPrivacyFolder` semantics. Archived private rooms get their own change, `private-rooms-archived-room-rules`.
-- No change to the upload pipeline. Drops onto a private room row and the upload context of queued items get their own change, `private-rooms-upload-target-context`.
+- No change to `isPrivacyFolder` semantics. `private-rooms-archived-room-rules` (archived) already extended it to archived private rooms.
+- No change to the upload pipeline. `private-rooms-upload-target-context` (archived) refuses drops onto a private room row from outside it and fixes the target of every queued upload.
 - No change to SDK pages beyond the title of the private rooms list, and no change to room pickers.
 - Not deleting the dead `components/NewArticle` beyond its one label. That is a separate clean-up.
 
@@ -220,7 +220,7 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 - A unit test asserts that the upload and transfer helpers give the same answer for a private room under `/rooms/shared` and under `/private`.
 
 **D14. AI chat and the Rooms tour are hidden on Private addresses.**
-- `Shell.jsx:760-771` hides the chat while `isPrivacyFolder` is true. It also hides it on the private categories, which covers both list roots and archived private rooms. `aiSuggestions.ts` is not consulted there.
+- `Shell.jsx:760-771` hides the chat while `isPrivacyFolder` is true, which covers active and archived private rooms. It also hides it on the private categories, which covers both list roots. `aiSuggestions.ts` is not consulted there.
 - `RoomsTour` (`components/RoomsTour/index.tsx:227-238`, `:383`) starts on `isRoomsFolderRoot`. It also requires a non-private category, so its stand-in rooms are never swapped into the Private list.
 
 ## Risks / Trade-offs
@@ -229,8 +229,7 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 - [Optimistic apps load. On standalone with the app off, Rooms first requests `NotPrivate` and private rooms are missing until the apps list arrives.] → The D2 reaction refetches. The route guard and the D5 decision wait for the list.
 - [Deciding inside `fetchFiles` touches the most central loading path of the client.] → The decision is a pure function with its own unit tests. The fetch change is limited to "decide, then commit or replace". The existing `FilesStore.fetchFiles` tests run unchanged.
 - [The Rooms counter and its panel still include private news, and a Rooms group's room count includes private rooms.] → Accepted v1 limitations, written as requirements. Both are removed only by the server-backed follow-up.
-- [`isPrivacyFolder` is false inside archived private rooms.] → Handled by `private-rooms-archived-room-rules`, which must land before the private Archive ships.
-- [A drop onto a private room row, and a queued or retried upload after leaving the room, are sent in plaintext today.] → Handled by `private-rooms-upload-target-context`, which must land before group 2 of this change. Group 2 adds the exits that make the second case more likely.
+- [A drop onto a private room row, and a queued or retried upload after leaving the room, were sent in plaintext.] → Closed by `private-rooms-upload-target-context` (archived 2026-10-21). Task 0.2 confirms it before group 2 adds the exits that made the second case more likely.
 - [Two archives (Rooms → Archive and Private → Archive) may confuse users who archived a private room before the section existed.] → Each room shows up in exactly one of them.
 - [Coordination with `private-rooms-sdk-gating-and-parity` (its iframe task and scenarios) and with `private-rooms-release-gate` (it removes requirements this change modifies).] → Task 0.1 reconciles the SDK change before either is applied. The release-gate revision is noted in its proposal when it is picked up.
 
@@ -241,7 +240,7 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 
 ## Server findings outside this change
 
-The review found two server behaviours that do not block this change. They belong to `private-rooms-server-hardening`:
+The review found two server behaviours that do not block this change. They are handed to `private-rooms-server-hardening` (its tasks 9.1 and 9.3):
 - **Archived private rooms are open to administrators.** The Archive branch of the administrator bypass grants Move and Delete on any room, with no private guard (`Core/Core/Security/FileSecurity.cs:1949-1981`). The VirtualRooms branch has one (`:1650-1652`). An administrator who is not a member can delete or unarchive an archived private room by id.
 - **Room socket events reach every administrator.** For VirtualRooms and Archive, `WhoCanRead` adds every administrator to the recipients (`Core/Utils/SocketManager.cs:415-419`). Administrators who are not members therefore receive the titles of private rooms.
 

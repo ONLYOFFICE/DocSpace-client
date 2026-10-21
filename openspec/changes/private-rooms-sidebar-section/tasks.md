@@ -164,5 +164,5 @@
 - Before archiving, update the Purpose of `openspec/specs/private-rooms/sdk-surface/spec.md` (it still describes the client's iframe app and lists `packages/client/src/pages/E2eRooms/index.tsx`) and the implementation list in the feature-gating Purpose.
 - Archive with `/opsx:archive`. This applies the RENAMED, MODIFIED and REMOVED operations and creates `openspec/specs/private-rooms/sidebar-section/spec.md`.
 - When `private-rooms-release-gate` is picked up, revise its feature-gating delta. It removes "Private room card is gated in the create-room chooser" and "E2E rooms app is gated as an unreleased app" by name, and its scenarios still speak of the E2E rooms app.
-- Hand the two server findings in design.md ("Server findings outside this change") to `private-rooms-server-hardening` with `/opsx:update`.
+- Done in `e9c875edf90`: the two server findings in design.md ("Server findings outside this change") were handed to `private-rooms-server-hardening` (its tasks 9.1 and 9.3).
 - Ask the backend team for server-side sections (design.md, "Follow-up: server-backed section"). Once they land, open a follow-up change that moves the client from `privacyFilter` onto them and adds the counter.

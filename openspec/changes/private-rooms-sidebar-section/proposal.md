@@ -100,7 +100,7 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
   - regenerated sidebar screenshots across the suite (Docker).
 - Server (`../server`): **no work required**. The change relies on behaviour already on `hotfix/v4.0.1`; design.md cites the source of each fact.
 
-  Two server findings from the review are handed to `private-rooms-server-hardening` (design.md, "Server findings outside this change"):
+  Two server findings from the review are handed to `private-rooms-server-hardening`, its tasks 9.1 and 9.3 (design.md, "Server findings outside this change"):
   - an administrator can delete or unarchive an archived private room by id;
   - room socket events reach every administrator.
 - Document Server: none. Buildtools: none, since nginx already serves `/private` to the client through `location /`.
@@ -108,7 +108,7 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
 ## Out of scope
 
 - A server-backed section like Forms: a root folder type, a `SearchArea` value, an `@root` entry and a new-items counter. This needs backend work. It is listed as a follow-up in design.md and is not specified here.
-- Two encryption fixes found during the review. Both exist today in Rooms, and each gets its own change and its own file-operations delta:
+- Two encryption fixes found during the review. Both existed in Rooms, and each got its own change and its own file-operations delta; both were archived on 2026-10-21:
   - `private-rooms-upload-target-context`: files dropped onto a private room row in a list, and queued or retried uploads after the user left the room, are sent in plaintext, because the upload decides privacy from the open folder.
   - `private-rooms-archived-room-rules`: inside an archived private room the private-room rules (copy-out decryption, Ctrl+C, client-side search) do not apply.
 - The SDK private surface `/sdk/private*` and the SDK rooms list, apart from the title of the private rooms list.
@@ -117,8 +117,8 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
 
 ## Coordination with in-flight changes
 
-- `private-rooms-upload-target-context` must be applied before group 2 of this change. Group 2 adds the redirects out of a private room, which are exactly the exits that turn a queued or retried upload into a plaintext one. Without that change, the Private list also offers every row as a drop target for plaintext uploads.
-- `private-rooms-archived-room-rules` must be applied before the Private → Archive view ships (task group 2), since that view becomes the home of archived private rooms.
+- `private-rooms-upload-target-context` (archived 2026-10-21) must be applied before group 2 of this change. Group 2 adds the redirects out of a private room, which are exactly the exits that turn a queued or retried upload into a plaintext one. Without that change, the Private list also offers every row as a drop target for plaintext uploads.
+- `private-rooms-archived-room-rules` (archived 2026-10-21) must be applied before the Private → Archive view ships (task group 2), since that view becomes the home of archived private rooms.
 - `private-rooms-sdk-gating-and-parity` has these items built on the iframe page this change removes:
   - task 1.3 appends the opt-in to the client iframe;
   - the scenarios "Client passes its flag" and "Client iframe".

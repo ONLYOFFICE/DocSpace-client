@@ -113,12 +113,13 @@
 ## 4. Creation from the section
 
 - [ ] 4.1 Make `getCreateRoomTypes` drop `RoomsTypePrivate` in every state. Verify by updating `packages/shared/utils/privateRooms.test.ts`: the chooser hides the private type with and without the flag, and keeps every other type. Run `cd packages/shared && pnpm exec vitest run utils/privateRooms.test.ts`.
-- [ ] 4.2 Add the private branch to `ContextOptionsStore.onCreateRoom`: WebCrypto check, then `Events.ROOM_CREATE` with `startRoomType = RoomsTypePrivate`. Point `CreateButtonMobile` and the Shift+R hotkey (`HOCs/withHotkeys.js`) at it (design D6). Hide every entry point from users without the room-creation right.
+- [ ] 4.2 Add the private branch to `ContextOptionsStore.onCreateRoom`: WebCrypto check, then `Events.ROOM_CREATE` with `startRoomType = RoomsTypePrivate`. Point `CreateButtonMobile`, the Shift+R hotkey (`HOCs/withHotkeys.js`) and the empty-state create button (`EmptyViewContainer.hooks.ts`) at it (design D6). Hide every entry point from users without the room-creation right.
 
   Verify with:
   - unit cases for the branch (no WebCrypto: toast `Common:EncryptionRequiresHttps`, nothing dispatched);
   - the `ContextOptionsStore.models` snapshot, updated for the touched helper only;
-  - the E2E scenarios "Room admin creates from the section", "Hotkey in the section" and "User without the room-creation right".
+  - the E2E scenarios "Room admin creates from the section", "Hotkey in the section" and "User without the room-creation right";
+  - the create button of the empty Private list opening the dialog on the Private type.
 - [ ] 4.3 Add the `"private"` quick-actions section (`helpers/quickActions.ts`) and its single Private room tile (`pages/Home/Hooks/useQuickActions.tsx`). Verify with cases in the quick-actions unit tests (`cd packages/client && pnpm exec vitest run quickActions`) and the E2E scenario "Banner on a non-empty Private list".
 - [ ] 4.4 Widen the key auto-prompt in `components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js` to the private start type, and make the new room open at `/private/{roomId}/filter`. Verify with the E2E scenarios "User accepts key generation", "User cancels key generation" and "Creation succeeds", and with `private-room-access.spec.ts` still passing.
 - [ ] 4.5 Assert the encryption-independence rule (design D13): unit cases showing that the upload and transfer helpers decide the same way for a private room under `/rooms/shared` and under `/private`. Add the E2E scenario "Private room opened under Rooms": with the section unavailable, the upload body is DSE3 under an opaque name.

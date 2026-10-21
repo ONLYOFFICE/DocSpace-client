@@ -764,6 +764,8 @@ class HotkeyStore {
 
     // A cut is a move: inside a private room the server allows Move and denies Copy.
     if ((isCut ? !canMove : !canCopy) || !selection.length) return;
+    // Spec: file-operations, "Copy hotkey withheld in an archived private room".
+    if (!isCut && this.treeFoldersStore.isPrivacyFolder) return;
 
     setHotkeysClipboard();
     this.hotkeysClipboardAction = isCut ? "move" : "copy";

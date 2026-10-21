@@ -15,12 +15,14 @@ const t = ((key: string) => key) as unknown as TTranslation;
 
 const ROOMS_ROOT = 100;
 const MY_ROOT = 200;
+const ARCHIVE_ROOT = 300;
 
 type TItem = {
   id: number;
   title: string;
   fileExst?: string;
   isFolder?: boolean;
+  encrypted?: boolean;
   security: { Copy: boolean; Move: boolean };
 };
 
@@ -41,6 +43,11 @@ const privateFile = (id: number): TItem => ({
   ...file(id),
   security: { Copy: false, Move: true },
 });
+const archivedEncryptedFile = (id: number): TItem => ({
+  ...file(id),
+  encrypted: true,
+  security: { Copy: true, Move: false },
+});
 const privateFolder = (id: number): TItem => ({
   ...folder(id),
   security: { Copy: false, Move: true },
@@ -54,6 +61,15 @@ const location = {
     navigationPath:
       folderId === roomId ? [] : [{ id: roomId, isRoom: true, private: true }],
     isRoom: folderId === roomId,
+    roomType: RoomsType.CustomRoom,
+  }),
+  // The server grants Copy in an archived room, private or not.
+  archivedPrivateRoom: (roomId: number) => ({
+    private: true,
+    id: roomId,
+    rootFolderId: ARCHIVE_ROOT,
+    navigationPath: [],
+    isRoom: true,
     roomType: RoomsType.CustomRoom,
   }),
   room: (roomId: number) => ({
@@ -141,8 +157,10 @@ const setup = () => {
     treeFoldersStore.isPrivacyFolder = where.private;
     selectedFolderStore.id = where.id;
     selectedFolderStore.rootFolderId = where.rootFolderId;
-    selectedFolderStore.rootFolderType =
-      where.rootFolderId === ROOMS_ROOT ? FolderType.Rooms : FolderType.USER;
+    selectedFolderStore.rootFolderType = {
+      [ROOMS_ROOT]: FolderType.Rooms,
+      [ARCHIVE_ROOT]: FolderType.Archive,
+    }[where.rootFolderId] ?? FolderType.USER;
     selectedFolderStore.roomType = where.roomType;
     selectedFolderStore.navigationPath = where.navigationPath;
     selectedFolderStore.isRoom = where.isRoom;
@@ -234,6 +252,26 @@ describe("HotkeyStore - clipboard paste and private rooms", () => {
 
     expect(s.filesStore.hotkeysClipboard).toEqual([]);
     expect(toastr.success).not.toHaveBeenCalled();
+  });
+
+  it("Ctrl+C on encrypted files", () => {
+    const s = setup();
+    s.goTo(location.archivedPrivateRoom(7));
+    s.clip([archivedEncryptedFile(1), archivedEncryptedFile(2)]);
+
+    expect(s.filesStore.hotkeysClipboard).toEqual([]);
+    expect(toastr.success).not.toHaveBeenCalled();
+  });
+
+  it("Paste after Ctrl+C", async () => {
+    const s = setup();
+    s.goTo(location.archivedPrivateRoom(7));
+    s.clip([archivedEncryptedFile(1)]);
+    s.goTo(location.myDocuments(5));
+    await s.paste();
+
+    expect(s.itemOperationToFolder).not.toHaveBeenCalled();
+    expect(s.copyEncryptedFilesToFolder).not.toHaveBeenCalled();
   });
 
   it("Folder cut out of a private room: the folder is not transferred", async () => {

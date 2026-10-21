@@ -22,7 +22,7 @@
 
 ## 2. Clipboard and destination picker
 
-- [ ] 2.1 Withhold Ctrl+C inside a private room in `HotkeyStore.copyToClipboard` (`packages/client/src/store/HotkeyStore.ts`), as design D3 describes. A copy, not a cut, returns while the signal is true, whatever the items' copy right. Leave the pointer `Spec: file-operations, "Copy hotkey withheld in an archived private room"`.
+- [x] 2.1 Withhold Ctrl+C inside a private room in `HotkeyStore.copyToClipboard` (`packages/client/src/store/HotkeyStore.ts`), as design D3 describes. A copy, not a cut, returns while the signal is true, whatever the items' copy right. Leave the pointer `Spec: file-operations, "Copy hotkey withheld in an archived private room"`.
 
   Verify with new cases in `packages/client/src/store/__tests__/HotkeyStore.clipboard.test.ts`, on encrypted files that report `security.Copy: true` in an archived private room:
   - "Ctrl+C on encrypted files": the clipboard stays empty and no toast is shown;

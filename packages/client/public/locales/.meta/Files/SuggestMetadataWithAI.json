@@ -1,0 +1,41 @@
+{
+  "key_path": "SuggestMetadataWithAI",
+  "content": "Suggest metadata with AI",
+  "content_en_sha1_hash": "ee2a46daba6cef9a221a5805b4108e86db6f6441",
+  "created_at": "2026-10-21T10:17:42.628Z",
+  "updated_at": "2026-10-21T10:20:42.121Z",
+  "comment": {
+    "text": "Context menu item for a file, folder or room, also title of the side panel it opens: AI reads the item's content and proposes new custom metadata fields with values.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
+      "line_number": 115,
+      "context": "return t(\"Files:FillMetadataWithAI\");\n }\n \n return isReview\n ? t(\"Metadata:AIReviewSuggestions\")\n : t(\"Files:SuggestMetadataWithAI\");\n };\n \n const loader = (\n <div className={styles.loader}>\n <Loader type={LoaderTypes.track} size=\"64px\" />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
+      "line_number": 115,
+      "context": "return t(\"Files:FillMetadataWithAI\");\n }\n \n return isReview\n ? t(\"Metadata:AIReviewSuggestions\")\n : t(\"Files:SuggestMetadataWithAI\");\n };\n \n const loader = (\n <div className={styles.loader}>\n <Loader type={LoaderTypes.track} size=\"64px\" />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 527,
+      "context": "disabled: false,\n },\n {\n id: \"option_suggest-metadata-ai\",\n key: \"suggest-metadata-ai\",\n label: t(\"Files:SuggestMetadataWithAI\"),\n icon: AISvgUrl,\n onClick: () =>\n self.dialogsStore.setMetadataAIPanelData({\n visible: true,\n item: item as TMetadataSelection,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

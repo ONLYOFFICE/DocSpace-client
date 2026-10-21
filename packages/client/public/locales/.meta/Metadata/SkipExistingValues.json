@@ -1,0 +1,29 @@
+{
+  "key_path": "SkipExistingValues",
+  "content": "Skip and keep existing values",
+  "content_en_sha1_hash": "c05bf082a5749a385406c79877d23eaf437e4fbe",
+  "created_at": "2026-10-21T10:17:41.291Z",
+  "updated_at": "2026-10-21T10:20:42.121Z",
+  "comment": {
+    "text": "Radio option in the Apply metadata dialog: leave items that already have values untouched.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CascadeBlock/ApplyMetadataDialog.tsx",
+      "line_number": 84,
+      "context": "title: string;\n description: string;\n }[] = [\n {\n value: ConflictResolveType.Skip,\n title: t(\"Metadata:SkipExistingValues\"),\n description: t(\"Metadata:SkipExistingValuesDescription\", {\n template: templateName,\n }),\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

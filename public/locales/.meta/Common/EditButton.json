@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2026-10-01T08:23:21.777Z",
+  "updated_at": "2026-10-21T10:17:45.717Z",
   "comment": {
     "text": "This is a button label. It allows users to edit settings, such as auto-payments or submission configurations.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx",
-      "line_number": 169,
+      "line_number": 180,
       "context": "<IconButton\n className={styles.profileCardEdit}\n iconName={PencilReactSvgUrl}\n size={12}\n onClick={handleEditPortalName}\n title={t(\"Common:EditButton\")}\n dataTestId=\"dashboard-profile-rename\"\n />\n ) : null}\n </span>\n </div>",
       "module": "/packages/client"
     },
@@ -36,9 +36,27 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/MetadataCard.tsx",
+      "line_number": 67,
+      "context": "const { t } = useTranslation([\"Common\"]);\n \n const getContextOptions = (): ContextMenuModel[] => [\n {\n key: \"metadata-card_edit\",\n label: t(\"Common:EditButton\"),\n icon: EditReactSvgUrl,\n onClick: actions?.onEdit,\n },\n {\n key: \"separator\",",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
       "line_number": 816,
       "context": "testId=\"appearance_save_button\"\n />\n \n <Button\n className=\"edit-current-theme button\"\n label={t(\"Common:EditButton\")}\n onClick={onClickEdit}\n size={buttonSize}\n isDisabled={isDisabledEditButton}\n testId=\"appearance_edit_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/FieldRow.tsx",
+      "line_number": 80,
+      "context": "onRemove,\n }: FieldRowProps) => {\n const { t } = useTranslation([\"Metadata\", \"Common\"]);\n \n const getContextOptions = (): ContextMenuModel[] => [\n { key: \"edit\", label: t(\"Common:EditButton\"), onClick: onEdit },\n {\n key: \"move-up\",\n label: t(\"Metadata:MoveUp\"),\n disabled: isFirst,\n onClick: onMoveUp,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/useContextOptions.ts",
+      "line_number": 55,
+      "context": "const { t } = useTranslation([\"Common\"]);\n \n const contextOptions: ContextMenuModel[] = [\n {\n key: \"metadata-template_edit\",\n label: t(\"Common:EditButton\"),\n icon: EditReactSvgUrl,\n onClick: () => onEdit(item),\n },\n {\n key: \"separator\",",
       "module": "/packages/client"
     },
     {
@@ -55,7 +73,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 427,
+      "line_number": 430,
       "context": "fontWeight={600}\n textDecoration=\"underline dashed\"\n onClick={() => openBuyPlan?.(\"edit\")}\n dataTestId=\"docs_connect_edit_subscription_link\"\n >\n {t(\"Common:EditButton\")}\n </Link>\n )}\n </div>\n <div className={styles.detailRows}>\n <div className={styles.detailRow}>",
       "module": "/packages/client"
     },
@@ -67,13 +85,13 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 366,
+      "line_number": 367,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 366,
+      "line_number": 367,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
@@ -103,7 +121,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 214,
+      "line_number": 219,
       "context": ": null,\n edit: canEdit\n ? {\n id: \"option_edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: PencilReactSvgUrl,\n onClick: () => openForm(file, \"edit\"),\n disabled: false,\n }\n : null,",
       "module": "/packages/sdk"
     },

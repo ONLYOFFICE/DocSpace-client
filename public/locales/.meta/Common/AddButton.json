@@ -3,7 +3,7 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2026-09-08T08:44:10.019Z",
+  "updated_at": "2026-10-21T10:17:45.686Z",
   "comment": {
     "text": "This is a button label that initiates an \"add\" action, such as adding a file, a server, or an item to a selection.",
     "is_auto": true,
@@ -33,6 +33,18 @@
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
       "line_number": 149,
       "context": "onClick={onOpenEditor}\n data-testid=\"info_panel_details_comment_edit_toggle\"\n >\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/index.tsx",
+      "line_number": 141,
+      "context": "{newField ? (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:AddButton\")}\n isDisabled={!canSubmitNewField}\n onClick={submitNewField}\n testId=\"metadata_custom_field_submit_button\"\n />\n ) : (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
+      "line_number": 133,
+      "context": "<Button\n primary\n scale\n size={ButtonSize.normal}\n label={\n isNewField ? t(\"Common:AddButton\") : t(\"Common:SaveButton\")\n }\n isDisabled={!isValidField(fieldForm) || isNameTaken}\n onClick={submitField}\n testId=\"metadata_field_submit_button\"\n />",
       "module": "/packages/client"
     },
     {

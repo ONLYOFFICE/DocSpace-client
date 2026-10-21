@@ -3,7 +3,7 @@
   "content": "Couldn't update the subscription. Try again later or contact support.",
   "content_en_sha1_hash": "1f1a93e1fc93e4e0c5e8a7a98de155efda3e2a96",
   "created_at": "2026-10-10T12:49:51.553Z",
-  "updated_at": "2026-10-10T12:52:08.719Z",
+  "updated_at": "2026-10-21T10:17:45.817Z",
   "comment": {
     "text": "Error toast shown in the Docs Connect plan panel when the billing service declines buying or changing the subscription (number of users, turning Dev Pack off). Full sentence; subscription means the paid Docs Connect plan.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/DocsConnectStore.ts",
-      "line_number": 98,
+      "line_number": 99,
       "context": "case \"cancelPlan\":\n return i18n.t(\"DocsConnect:PlanCancellationFailed\");\n case \"cancelScheduledChange\":\n return i18n.t(\"DocsConnect:ScheduledChangeCancellationFailed\");\n case \"buyPlan\":\n return i18n.t(\"DocsConnect:PlanUpdateFailed\");\n case \"switchToDevPack\":\n return i18n.t(\"DocsConnect:DevPackSwitchFailed\");\n }\n };",
       "module": "/packages/client"
     }

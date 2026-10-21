@@ -3,7 +3,7 @@
   "content": "Top up wallet",
   "content_en_sha1_hash": "155fb560e348142a6331187a877f862f8cc8df81",
   "created_at": "2026-04-10T13:53:43.673Z",
-  "updated_at": "2026-10-02T12:15:32.380Z",
+  "updated_at": "2026-10-21T10:17:45.650Z",
   "comment": {
     "text": "Dialog title for a modal window where users can add funds to their wallet.",
     "is_auto": true,
@@ -55,19 +55,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 482,
+      "line_number": 540,
       "context": "if (isOverLimit) return t(\"Common:SendRequest\");\n \n if (isEditActive) {\n if (isScheduled) return t(\"Common:ScheduleChange\");\n \n if (isDelayedPaymentTopUp) return t(\"Common:TopUpWallet\");\n \n return insufficientFunds && !isTopUpUnavailable\n ? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 482,
+      "line_number": 540,
       "context": "if (isOverLimit) return t(\"Common:SendRequest\");\n \n if (isEditActive) {\n if (isScheduled) return t(\"Common:ScheduleChange\");\n \n if (isDelayedPaymentTopUp) return t(\"Common:TopUpWallet\");\n \n return insufficientFunds && !isTopUpUnavailable\n ? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 908,
+      "line_number": 932,
       "context": "description: isPayer\n ? t(\"Common:TopUpWalletToContinue\")\n : t(\"Common:InsufficientFundsContactPayerShort\"),\n action: isPayer\n ? {\n text: t(\"Common:TopUpWallet\"),\n onClick: () => navigate(PAYMENT_ROUTES.wallet),\n }\n : null,\n };\n },",
       "module": "/packages/client"
     },

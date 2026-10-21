@@ -2,11 +2,11 @@
 
 ## Why
 
-The embeddable SDK carries its own private-rooms surface (`/sdk/private*`, also framed by the client's "E2E rooms" app) that was built to parity with the client in June 2026 and then stopped at a checkpoint (stashed `docs/private-rooms/04-implementation-status.md`). It ignores the client's opt-in flag, so the hidden feature is reachable in production through the SDK; it cannot create documents, cannot reach key management, loses translations outside Common, and runs folder operations without re-encryption awareness. Eight of its end-to-end tests are `test.fixme`. Releasing the client half without closing these gaps would ship two different products under one name.
+The embeddable SDK carries its own private-rooms surface (`/sdk/private*`, also framed by the client's "E2E rooms" app until `private-rooms-sidebar-section` replaces it with a native Private section) that was built to parity with the client in June 2026 and then stopped at a checkpoint (stashed `docs/private-rooms/04-implementation-status.md`). It ignores the client's opt-in flag, so the hidden feature is reachable in production through the SDK; it cannot create documents, cannot reach key management, loses translations outside Common, and runs folder operations without re-encryption awareness. Eight of its end-to-end tests are `test.fixme`. Releasing the client half without closing these gaps would ship two different products under one name.
 
 ## What Changes
 
-- The SDK private surface honours the same opt-in as the client until release: the host passes the flag (frame config or query) and the SDK reads it; without it the private routes render the "not available" view. The client's iframe passes its own flag state.
+- The SDK private surface honours the same opt-in as the client until release: the host passes the flag (frame config or query) and the SDK reads it; without it the private routes render the "not available" view. The client no longer frames these pages once `private-rooms-sidebar-section` replaces its E2E rooms app with a native Private section.
 - Create menu inside an SDK private room offers document, spreadsheet and presentation through the shared encrypted file creation (same rules as the client).
 - The archive page is verified against the private-room rules: Share tab hidden, encrypted download path, key check, empty view.
 - Key management becomes reachable from the SDK: the forgot-passphrase and device-setup links open the client keys-management page through a route that works while the client is flag-gated (the link carries the opt-in), and the SDK shows an in-place explanation when the client is not reachable from the host.
@@ -15,7 +15,7 @@ The embeddable SDK carries its own private-rooms surface (`/sdk/private*`, also 
 - The device-setup hint waits for the key list to load before deciding the user has no keys.
 - The `test.fixme` SDK E2E tests that only lacked a logged-in session and the crypto fixture are enabled (unlock, upload, download, preview, duplicate, copy/move, copy-out blocked, invite); the editor-open test stays `fixme` until `private-rooms-editor-contract` lands.
 
-Out of scope: opening encrypted files in the editor from the SDK (editor contract change), a full in-SDK key-generation flow (deferred; the link-out is kept), the frame postMessage bridge for unlock events. Decision needed from the user: how the host passes the opt-in (frame config property vs query parameter); the design recommends the frame config property with a query fallback for the client iframe.
+Out of scope: opening encrypted files in the editor from the SDK (editor contract change), a full in-SDK key-generation flow (deferred; the link-out is kept), the frame postMessage bridge for unlock events. Decision needed from the user: how the host passes the opt-in (frame config property vs query parameter); the design recommends the frame config property with a query fallback.
 
 ## Capabilities
 
@@ -31,7 +31,7 @@ Out of scope: opening encrypted files in the editor from the SDK (editor contrac
 ## Impact
 
 - SDK: `packages/sdk/src/app/(private)/**` (layout, pages, private-shell effects, create-room and members components), `packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx` (create menu), `packages/sdk/src/app/(docspace)/_hooks/useEncryptedCopyMove.ts` and file-operations hooks, `packages/sdk/src/utils/translationLoaders.ts`, `packages/sdk/src/proxy.ts` if the opt-in is read server-side.
-- Client: `packages/client/src/pages/E2eRooms/index.tsx` (pass the flag to the iframe), `packages/client/src/routes/general.js` (keys-management deep link while gated).
+- Client: `packages/client/src/routes/general.js` (keys-management deep link while gated).
 - Shared: `packages/shared/utils/privateRooms.ts` (a host-provided source for the flag), `packages/shared/services/private-room/encrypted-file-creation.ts` reused by the SDK.
 - Locales: keys moved into Common and translated.
 - Tests: SDK unit tests under `(private)`, `packages/sdk/__tests__/e2e/private/*.spec.ts`, client `private-rooms-hidden.spec.ts`.

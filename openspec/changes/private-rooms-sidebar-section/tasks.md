@@ -2,7 +2,7 @@
 
 ## 0. Coordination
 
-- [ ] 0.1 Revise `private-rooms-sdk-gating-and-parity` with `/opsx:update`:
+- [x] 0.1 Revise `private-rooms-sdk-gating-and-parity` with `/opsx:update`:
   - drop the client-iframe parts (the iframe-address half of its task 1.3, and the scenarios "Client passes its flag" and "Client iframe");
   - keep the SDK-side opt-in.
 

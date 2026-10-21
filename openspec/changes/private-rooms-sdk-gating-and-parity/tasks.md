@@ -4,7 +4,7 @@
 
 - [ ] 1.1 Confirm with the user the opt-in source (frame config property with query fallback, design D1); verified by the decision recorded in design.md
 - [ ] 1.2 Add an injectable opt-in source to `packages/shared/utils/privateRooms.ts` (localStorage in the client, frame config or `?privateRooms=1` in the SDK) and read it in `packages/sdk/src/app/(private)/layout.tsx` to render the not-available view without it; verify with new cases in `packages/shared/utils/privateRooms.test.ts` and an SDK unit test for the layout gate (`cd packages/sdk && pnpm exec vitest run "src/app/(private)"`)
-- [ ] 1.3 Make `packages/client/src/pages/E2eRooms/index.tsx` append the opt-in to the iframe address and make the client bootstrap honour `?privateRooms=1` for the keys-management deep link; verify with `packages/client/__tests__/private-rooms-hidden.spec.ts` extended with an iframe-address assertion
+- [ ] 1.3 Make the client bootstrap honour `?privateRooms=1` for the keys-management deep link; verify with a case in `packages/client/__tests__/private-rooms-hidden.spec.ts` that opens `/profile/keys-management?privateRooms=1` without the stored flag and sees the page render
 
 ## 2. Keys management reachability and hint gating
 

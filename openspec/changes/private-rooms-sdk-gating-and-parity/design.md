@@ -4,7 +4,7 @@
 
 See proposal.md for motivation. Observed state on the branch:
 
-- The SDK has no reference to the client flag: `grep isPrivateRoomsEnabled packages/sdk/src` is empty; `packages/sdk/src/app/(private)/layout.tsx` mounts the private pages unconditionally. The client frames them from `packages/client/src/pages/E2eRooms/index.tsx:75` (`/sdk/private`, `/sdk/private/archive`) and that client page is itself gated.
+- The SDK has no reference to the client flag: `grep isPrivateRoomsEnabled packages/sdk/src` is empty; `packages/sdk/src/app/(private)/layout.tsx` mounts the private pages unconditionally. The client frames them from `packages/client/src/pages/E2eRooms/index.tsx:75` (`/sdk/private`, `/sdk/private/archive`) and that client page is itself gated. `private-rooms-sidebar-section` removes that page and its iframe: the client lists private rooms in its own Private section.
 - Create menu inside a private room is filtered to `new-folder`, `separator-1`, `upload-files` in `packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx:291-297`; the client creates documents through `packages/shared/services/private-room/encrypted-file-creation.ts`, which the SDK does not call.
 - `packages/sdk/src/utils/translationLoaders.ts:43-51` builds the namespace map from `Common` only; the private surface renders `People:RemoveUser` and `UploadPanel:QuotaExceededTooltip` as raw keys.
 - Forgot-passphrase and device-setup open `/profile/keys-management` with `window.open` (`packages/sdk/src/app/(private)/_store/EncryptionShell.tsx:67-70`, `_components/private-shell/DeviceSetupHintEffect.tsx:78`); that client route is built only when the client flag is set (`packages/client/src/routes/general.js:46`).
@@ -27,7 +27,7 @@ See proposal.md for motivation. Observed state on the branch:
 
 ## Decisions
 
-**D1. Opt-in source: frame configuration property, query fallback (needs user confirmation).** The SDK reads `frameConfig.privateRooms === true` (host embedding) or `?privateRooms=1` (client iframe, which appends it when the client flag is set). Both feed `isPrivateRoomsEnabled()` through an injectable source so the shared utility stays the single truth. Alternative: read the same localStorage key in the SDK origin. Rejected: the SDK may run on a different origin than the host, and localStorage is not shared across origins. At release both the client flag and this opt-in are deleted together (`private-rooms-release-gate`).
+**D1. Opt-in source: frame configuration property, query fallback (needs user confirmation).** The SDK reads `frameConfig.privateRooms === true` (host embedding) or `?privateRooms=1`. The query fallback was meant for the client iframe, which `private-rooms-sidebar-section` removes; whether to keep it without that consumer is part of the confirmation in task 1.1. Both feed `isPrivateRoomsEnabled()` through an injectable source so the shared utility stays the single truth. Alternative: read the same localStorage key in the SDK origin. Rejected: the SDK may run on a different origin than the host, and localStorage is not shared across origins. At release both the client flag and this opt-in are deleted together (`private-rooms-release-gate`).
 
 **D2. Keys-management deep link carries the opt-in.** The client route table is built once per load from the flag; the link `/profile/keys-management?privateRooms=1` makes the client set the flag before building routes (one-line change in the client bootstrap), so the page renders even on a browser without the flag. When `window.open` is blocked or the client origin is unknown (`frameConfig` without a portal URL), the hint shows `Common:EncryptionKeysManagedInProfile` instead.
 
@@ -43,7 +43,7 @@ See proposal.md for motivation. Observed state on the branch:
 
 ## Risks / Trade-offs
 
-- [A host forgets to pass the opt-in and reports the feature as missing] → the not-available view names the configuration property; the client iframe always passes it.
+- [A host forgets to pass the opt-in and reports the feature as missing] → the not-available view names the configuration property.
 - [Moving locale keys breaks client call sites] → `translate-stale` and the locale tests run in the same task group; call sites are updated by the same change.
 - [Seeded cookie in SDK E2E drifts from the real login flow] → the cookie only unblocks the private tests; login itself is covered by the login package tests.
 

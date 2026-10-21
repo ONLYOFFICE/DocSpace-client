@@ -63,7 +63,7 @@ A folder move within the same private room SHALL be executed by the server witho
 - **THEN** the operation is refused with Common:CannotTransferFolderFromPrivateRoom and nothing is transferred
 
 ### Requirement: SDK private surface honours the opt-in
-The SDK private routes SHALL render the private-rooms list, room and archive pages only when the host has passed the private-rooms opt-in (frame configuration, with a query parameter fallback for the client's own iframe); without it they SHALL render the "feature not available" view. The opt-in SHALL be removed together with the client flag at release.
+The SDK private routes SHALL render the private-rooms list, room and archive pages only when the host has passed the private-rooms opt-in (frame configuration, with a query parameter fallback); without it they SHALL render the "feature not available" view. The opt-in SHALL be removed together with the client flag at release.
 
 #### Scenario: Host passes the opt-in
 - **WHEN** the host configuration enables private rooms and a signed-in user opens `/sdk/private`
@@ -72,10 +72,6 @@ The SDK private routes SHALL render the private-rooms list, room and archive pag
 #### Scenario: Flag absent
 - **WHEN** the host configuration does not enable private rooms
 - **THEN** `/sdk/private`, `/sdk/private/[roomId]` and `/sdk/private/archive` render the not-available view and make no key or room requests
-
-#### Scenario: Client iframe
-- **WHEN** the client's E2E rooms page frames `/sdk/private` with the client flag set
-- **THEN** the SDK receives the opt-in from the frame address and renders the list
 
 ### Requirement: Translations needed by the private surface are bundled
 The SDK SHALL ship every translation key the private surface renders; no private-surface component SHALL render a raw key. Keys that belonged to other namespaces are moved into Common or their namespace is bundled.

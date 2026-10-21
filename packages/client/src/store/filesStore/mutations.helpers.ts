@@ -43,6 +43,7 @@ import type { default as TFilesFilter } from "@docspace/shared/api/files/filter"
 import type { default as TRoomsFilter } from "@docspace/shared/api/rooms/filter";
 
 import type { default as FilesStore } from "../FilesStore";
+import { scopeRoomsRequest } from "./fetch.helpers";
 
 // State-mutation actions extracted from FilesStore. Side-effectful (not
 // computeds); moved verbatim into free functions over `self: FilesStore`.
@@ -168,8 +169,10 @@ export function removeFilesImpl(
     (newFilter.page + 1) * newFilter.pageCount - deleteCount;
   newFilter.pageCount = deleteCount;
   if (isRooms) {
-    const req = isAIAgentsFolder ? api.ai.getAIAgents : api.rooms.getRooms;
-    return req(newFilter as TRoomsFilter)
+    const request = isAIAgentsFolder
+      ? api.ai.getAIAgents(newFilter as TRoomsFilter)
+      : api.rooms.getRooms(scopeRoomsRequest(self, newFilter as TRoomsFilter));
+    return request
       .then((res) => {
         const folders = folderIds
           ? self.folders.filter((x) => !folderIds.includes(x.id))

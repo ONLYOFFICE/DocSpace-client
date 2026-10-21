@@ -240,6 +240,7 @@ const dialogsStore = new DialogsStore(
 );
 
 filesStore.dialogsStore = dialogsStore;
+filesStore.watchPrivateRoomsSection(appsStore);
 
 const profileActionsStore = new ProfileActionsStore(
   authStore,

@@ -51,6 +51,10 @@ import {
 } from "@docspace/shared/utils/common";
 import { isDesktop } from "@docspace/shared/utils";
 import {
+  getRoomsRequestScope,
+  withRoomsRequestScope,
+} from "@docspace/shared/utils/rooms";
+import {
   CategoryType,
   EMPTY_ARRAY,
   ROOMS_PROVIDER_TYPE_NAME,
@@ -746,9 +750,13 @@ export function fetchRoomsImpl(
   // `searchArea=Active` never returns Form Filling Rooms, and the Forms
   // section requests `searchArea=Forms`. The filter (carrying searchArea)
   // maps directly to the request — no client-side room-type scoping needed.
+  // The Rooms/Private split is client-side: scopeRoomsRequest adds it.
   const request = () =>
     api.rooms
-      .getRooms(filterData, self.roomsController!.signal)
+      .getRooms(
+        scopeRoomsRequest(self, filterData),
+        self.roomsController!.signal,
+      )
       .then(async (data) => {
         if (!folderId) setSelectedNode([`${data.current.id}`]);
 
@@ -1059,6 +1067,44 @@ export function fetchAgentsImpl(
   return request();
 }
 
+/**
+ * The copy of a rooms filter a list request sends: the Private section asks
+ * for private rooms only, and Rooms for none while that section exists.
+ */
+export const scopeRoomsRequest = (
+  self: FilesStore,
+  filter: TRoomsFilter,
+): TRoomsFilter =>
+  withRoomsRequestScope(
+    filter,
+    getRoomsRequestScope(
+      getCategoryType(window.DocSpace?.location ?? window.location),
+      filter.searchArea,
+      !!self.appsStore?.isPrivateRoomsSectionAvailable,
+    ),
+  );
+
+/** Reloads an open Rooms list when the Private section appears or goes away. */
+export function refetchRoomsListOnSectionChangeImpl(self: FilesStore) {
+  const { isRoomsFolder, isArchiveFolder } = self.treeFoldersStore;
+  if (!isRoomsFolder && !isArchiveFolder) return;
+
+  const categoryType = getCategoryType(
+    window.DocSpace?.location ?? window.location,
+  );
+  if (
+    categoryType !== CategoryType.Shared &&
+    categoryType !== CategoryType.Archive
+  )
+    return;
+
+  // The list changes membership, so a selected room may be gone from it.
+  // A cancelled request was superseded by a newer list request.
+  self
+    .fetchRooms(null, self.roomsFilter, true, false, true)
+    .catch(() => {});
+}
+
 export async function fetchMoreFilesImpl(self: FilesStore) {
   if (
     !self.hasMoreFiles ||
@@ -1091,7 +1137,9 @@ export async function fetchMoreFilesImpl(self: FilesStore) {
   else self.setFilter(newFilter as TFilesFilter);
 
   const newFilesData = isRooms
-    ? await api.rooms.getRooms(newFilter as TRoomsFilter)
+    ? await api.rooms.getRooms(
+        scopeRoomsRequest(self, newFilter as TRoomsFilter),
+      )
     : isAIAgentsFolder
       ? await api.ai.getAIAgents(newFilter as TRoomsFilter)
       : await api.files.getFolder(

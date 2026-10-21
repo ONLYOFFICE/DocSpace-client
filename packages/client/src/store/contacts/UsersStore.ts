@@ -48,7 +48,11 @@ import {
   FolderType,
   RoomSearchArea,
 } from "@docspace/shared/enums";
-import { getUserType } from "@docspace/shared/utils/common";
+import {
+  getCategoryType,
+  getUserType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
@@ -61,7 +65,7 @@ import {
   FILTER_INSIDE_GROUPS,
   FILTER_PEOPLE,
 } from "@docspace/shared/utils/filterConstants";
-import { LANGUAGE } from "@docspace/shared/constants";
+import { CategoryType, LANGUAGE } from "@docspace/shared/constants";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import SocketHelper, {
@@ -294,8 +298,11 @@ class UsersStore {
         return;
       }
 
-      const isArchive = pathname.includes("rooms/archived");
-      if (isArchive || pathname.includes("rooms/shared")) {
+      const isPrivate = isPrivateRoomsRoute(pathname);
+      const isArchive = isPrivate
+        ? getCategoryType({ pathname }) === CategoryType.PrivateArchive
+        : pathname.includes("rooms/archived");
+      if (isArchive || isPrivate || pathname.includes("rooms/shared")) {
         const { fetchRooms } = this.filesStore;
 
         const roomsFilter = RoomsFilter.getDefault(

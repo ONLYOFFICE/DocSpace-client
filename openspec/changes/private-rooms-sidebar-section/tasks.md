@@ -25,7 +25,7 @@
   - SaaS;
   - standalone with the app off;
   - before the apps list loads.
-- [ ] 1.3 Add the request-scope helper to `packages/shared/utils/rooms.tsx`: privacy filter plus a search area derived from the category (design D1). Apply it to a filter clone in:
+- [x] 1.3 Add the request-scope helper to `packages/shared/utils/rooms.tsx`: privacy filter plus a search area derived from the category (design D1). Apply it to a filter clone in:
   - `fetchRooms` and `fetchMoreFiles` (`packages/client/src/store/filesStore/fetch.helpers.ts`);
   - the refill in `packages/client/src/store/filesStore/mutations.helpers.ts`;
   - the Rooms refetch in `packages/client/src/store/contacts/UsersStore.ts`.

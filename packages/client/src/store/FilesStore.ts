@@ -34,7 +34,7 @@
  */
 
 import equal from "fast-deep-equal";
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import {
@@ -122,6 +122,7 @@ import type AccessRightsStore from "./AccessRightsStore";
 import type ClientLoadingStore from "./ClientLoadingStore";
 import type PluginStore from "./PluginStore";
 import type PublicRoomStore from "./PublicRoomStore";
+import type AppsStore from "./AppsStore";
 import type IndexingStore from "./IndexingStore";
 import type AiRoomStore from "./AiRoomStore";
 import type DialogsStore from "./DialogsStore";
@@ -158,6 +159,7 @@ import {
   fetchRoomsImpl,
   fetchAgentsImpl,
   fetchMoreFilesImpl,
+  refetchRoomsListOnSectionChangeImpl,
 } from "./filesStore/fetch.helpers";
 import {
   onResolveNewFileImpl,
@@ -382,6 +384,11 @@ class FilesStore {
   // Narrow interface (Track F): attached post-construction in
   // store/index.ts (mutual reference); only `roomGroups` is read here.
   dialogsStore: Nullable<Pick<DialogsStore, "roomGroups">> = null;
+
+  // Attached post-construction in store/index.ts with
+  // watchPrivateRoomsSection; read for the Private section's request scope.
+  appsStore: Nullable<Pick<AppsStore, "isPrivateRoomsSectionAvailable">> =
+    null;
 
   arrRoomGroups: unknown[] = [];
 
@@ -1276,6 +1283,17 @@ class FilesStore {
       withSubfolders,
       clearSelection,
     );
+
+  watchPrivateRoomsSection = (
+    appsStore: Pick<AppsStore, "isPrivateRoomsSectionAvailable">,
+  ) => {
+    this.appsStore = appsStore;
+
+    reaction(
+      () => appsStore.isPrivateRoomsSectionAvailable,
+      () => refetchRoomsListOnSectionChangeImpl(this),
+    );
+  };
 
   fetchRooms = (
     folderId: Nullable<number | string>,

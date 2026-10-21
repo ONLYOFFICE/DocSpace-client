@@ -33,9 +33,17 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect, vi, afterEach } from "vitest";
+import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
+import { observable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
-import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
+import type RoomsFilter from "@docspace/shared/api/rooms/filter";
+import {
+  FileType,
+  FolderType,
+  RoomPrivacyFilter,
+  RoomSearchArea,
+  RoomsType,
+} from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
 import type { TItem } from "../types";
@@ -184,4 +192,187 @@ describe("FilesStore.fetchRooms / fetchAgents — last-page clamp", () => {
 
     expect(getAgents).toHaveBeenCalledTimes(2);
   });
+});
+
+type TDocSpaceWindow = { DocSpace?: { location: { pathname: string } } };
+
+const openAddress = (pathname: string) => {
+  (window as unknown as TDocSpaceWindow).DocSpace = { location: { pathname } };
+};
+
+const sentFilter = (getRooms: { mock: { calls: unknown[][] } }, call = 0) =>
+  getRooms.mock.calls[call][0] as RoomsFilter;
+
+const storeOnRoomsList = (isPrivateRoomsSectionAvailable: boolean) => {
+  const store = createTestFilesStore({
+    treeFoldersStore: { isRoomsFolder: true },
+  });
+  store.appsStore = { isPrivateRoomsSectionAvailable };
+  store.getFilesContextOptions = (() => []) as never;
+  return store;
+};
+
+describe("FilesStore rooms requests — Private section scope", () => {
+  beforeEach(() => openAddress("/rooms/shared/filter"));
+
+  afterEach(() => {
+    delete (window as unknown as TDocSpaceWindow).DocSpace;
+    vi.restoreAllMocks();
+  });
+
+  it.each([
+    ["/private/filter", RoomSearchArea.Active],
+    ["/private/12/filter", RoomSearchArea.Active],
+    ["/private/archived/filter", RoomSearchArea.Archive],
+  ])("Private on %s", async (pathname, searchArea) => {
+    openAddress(pathname);
+    const store = storeOnRoomsList(true);
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+
+    await store.fetchRooms(0);
+
+    expect(sentFilter(getRooms)).toMatchObject({
+      privacyFilter: RoomPrivacyFilter.Private,
+      searchArea,
+    });
+  });
+
+  it.each([
+    ["/rooms/shared/filter", RoomSearchArea.Active],
+    ["/rooms/archived/filter", RoomSearchArea.Archive],
+  ])(
+    "NotPrivate on %s while the section is available",
+    async (pathname, searchArea) => {
+      openAddress(pathname);
+      const store = storeOnRoomsList(true);
+      const getRooms = vi
+        .spyOn(api.rooms, "getRooms")
+        .mockResolvedValue(roomsPayload([room(1)]) as never);
+      const filter = store.roomsFilter.clone();
+      filter.searchArea = searchArea;
+
+      await store.fetchRooms(0, filter);
+
+      expect(sentFilter(getRooms)).toMatchObject({
+        privacyFilter: RoomPrivacyFilter.NotPrivate,
+        searchArea,
+      });
+    },
+  );
+
+  it("none while the section is not available", async () => {
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+
+    const unavailable = storeOnRoomsList(false);
+    await unavailable.fetchRooms(0);
+
+    const beforeAppsStore = storeOnRoomsList(false);
+    beforeAppsStore.appsStore = null;
+    await beforeAppsStore.fetchRooms(0);
+
+    expect(sentFilter(getRooms, 0).privacyFilter).toBeNull();
+    expect(sentFilter(getRooms, 1).privacyFilter).toBeNull();
+  });
+
+  it("a URL privacyFilter and searchArea are overridden, roomsFilter is not mutated", async () => {
+    openAddress("/private/filter");
+    const store = storeOnRoomsList(true);
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+    const filter = store.roomsFilter.clone();
+    filter.privacyFilter = RoomPrivacyFilter.NotPrivate;
+    filter.searchArea = RoomSearchArea.Archive;
+
+    await store.fetchRooms(0, filter);
+
+    expect(sentFilter(getRooms)).toMatchObject({
+      privacyFilter: RoomPrivacyFilter.Private,
+      searchArea: RoomSearchArea.Active,
+    });
+    expect(filter.privacyFilter).toBe(RoomPrivacyFilter.NotPrivate);
+    expect(store.roomsFilter.privacyFilter).toBe(RoomPrivacyFilter.NotPrivate);
+    expect(store.roomsFilter.searchArea).toBe(RoomSearchArea.Archive);
+  });
+
+  it("the next page keeps the scope", async () => {
+    openAddress("/private/archived/filter");
+    const store = storeOnRoomsList(true);
+    store.folders = [room(1)] as never;
+    store.roomsFilter.total = 10;
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(2)]) as never);
+
+    await store.fetchMoreFiles();
+
+    expect(sentFilter(getRooms)).toMatchObject({
+      privacyFilter: RoomPrivacyFilter.Private,
+      searchArea: RoomSearchArea.Archive,
+      page: 1,
+    });
+    expect(store.roomsFilter.privacyFilter).toBeNull();
+  });
+
+  it("the refill after rooms leave the list keeps the scope", async () => {
+    openAddress("/private/filter");
+    const store = storeOnRoomsList(true);
+    store.folders = [room(1), room(2), room(3)] as never;
+    store.roomsFilter.total = 200;
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(4)]) as never);
+
+    await store.removeFiles(null, [1]);
+
+    expect(sentFilter(getRooms)).toMatchObject({
+      privacyFilter: RoomPrivacyFilter.Private,
+      searchArea: RoomSearchArea.Active,
+    });
+    expect(store.folders.map((f) => f.id)).toEqual([2, 3, 4]);
+  });
+
+  it("reloads the open Rooms list when the section availability flips", async () => {
+    const store = storeOnRoomsList(true);
+    const apps = observable({ isPrivateRoomsSectionAvailable: true });
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+    store.watchPrivateRoomsSection(apps);
+
+    runInAction(() => {
+      apps.isPrivateRoomsSectionAvailable = false;
+    });
+    await vi.waitFor(() => expect(getRooms).toHaveBeenCalledTimes(1));
+    expect(sentFilter(getRooms, 0).privacyFilter).toBeNull();
+
+    runInAction(() => {
+      apps.isPrivateRoomsSectionAvailable = true;
+    });
+    await vi.waitFor(() => expect(getRooms).toHaveBeenCalledTimes(2));
+    expect(sentFilter(getRooms, 1).privacyFilter).toBe(
+      RoomPrivacyFilter.NotPrivate,
+    );
+  });
+
+  it.each(["/private/filter", "/rooms/shared/12/filter"])(
+    "leaves %s alone when the section availability flips",
+    async (pathname) => {
+      openAddress(pathname);
+      const store = storeOnRoomsList(true);
+      const apps = observable({ isPrivateRoomsSectionAvailable: true });
+      const getRooms = vi.spyOn(api.rooms, "getRooms");
+      store.watchPrivateRoomsSection(apps);
+
+      runInAction(() => {
+        apps.isPrivateRoomsSectionAvailable = false;
+      });
+
+      expect(getRooms).not.toHaveBeenCalled();
+    },
+  );
 });

@@ -100,8 +100,11 @@ import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.fo
 
 import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
-import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
-import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
+
+import AIChatNotAvailableDarkIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.dark.svg";
+import AIChatNotAvailableLightIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.light.svg";
+
+import { Text } from "@onlyoffice/apps-ui-kit/components";
 
 import {
   FilesSelectorFilterTypes,
@@ -124,7 +127,6 @@ import type {
   OptionActions,
   UploadType,
 } from "./EmptyViewContainer.types";
-import { Text } from "@onlyoffice/apps-ui-kit/components";
 
 export const isUser = (access: AccessType) => {
   return (
@@ -286,9 +288,7 @@ const getAIAgentsAIDisabledTitle = (
       )
       .with([false, true], () => t("Common:EmptyAIAgentsNotActiveYetTitle"))
       // standalone user
-      .with([true, false], () =>
-        t("Common:EmptyAIAgentsAIDisabledUserTitle"),
-      )
+      .with([true, false], () => t("Common:EmptyAIAgentsAIDisabledUserTitle"))
       // saas user
       .otherwise(() => t("Common:AIFeaturesNotActive"))
   );
@@ -315,9 +315,7 @@ const getAIAgentsAIDisabledDescription = (
         </Text>
       </>
     ))
-    .with([true, false], () =>
-      t("Common:EmptyAIAgentsAIDisabledDescription"),
-    )
+    .with([true, false], () => t("Common:EmptyAIAgentsAIDisabledDescription"))
     .otherwise(() => t("Common:EmptyAIDisabledContactAdminDesc"));
 };
 
@@ -558,9 +556,9 @@ export const getFolderIcon = (
       ],
       () =>
         isBaseTheme ? (
-          <ChatNoAccessRightsLightIcon />
+          <AIChatNotAvailableLightIcon />
         ) : (
-          <ChatNoAccessRightsDarkIcon />
+          <AIChatNotAvailableDarkIcon />
         ),
     )
     .with([FolderType.FormRoom, P._, P._], () =>
@@ -722,9 +720,9 @@ export const getRoomIcon = (
       ],
       () =>
         isBaseTheme ? (
-          <ChatNoAccessRightsLightIcon />
+          <AIChatNotAvailableLightIcon />
         ) : (
-          <ChatNoAccessRightsDarkIcon />
+          <AIChatNotAvailableDarkIcon />
         ),
     )
     .with(
@@ -756,11 +754,24 @@ export const getRootIcon = (
   rootFolderType: Nullable<FolderType>,
   access: AccessType,
   isBaseTheme: boolean,
+  aiReady: boolean,
 ) => {
   return match([rootFolderType, access])
-    .with([FolderType.AIAgents, P._], () =>
-      isBaseTheme ? <EmptyAIAgentsLightIcon /> : <EmptyAIAgentsDarkIcon />,
-    )
+    .with([FolderType.AIAgents, P._], () => {
+      if (aiReady) {
+        return isBaseTheme ? (
+          <EmptyAIAgentsLightIcon />
+        ) : (
+          <EmptyAIAgentsDarkIcon />
+        );
+      }
+
+      return isBaseTheme ? (
+        <AIChatNotAvailableLightIcon />
+      ) : (
+        <AIChatNotAvailableDarkIcon />
+      );
+    })
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       isBaseTheme ? <EmptyRoomsRootLightIcon /> : <EmptyRoomsRootDarkIcon />,
     )
@@ -906,4 +917,3 @@ export const helperOptions = (
     createUploadFromDeviceOption,
   };
 };
-

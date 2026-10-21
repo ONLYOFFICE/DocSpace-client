@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState, useCallback } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -52,7 +52,12 @@ import type {
 } from "./EmptyViewContainer.types";
 
 const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
-  const { t } = useTranslation(["EmptyView", "Files", "Common", "Translations"]);
+  const { t } = useTranslation([
+    "EmptyView",
+    "Files",
+    "Common",
+    "Translations",
+  ]);
 
   const { isCardLinkedToPortal } = props;
 
@@ -227,4 +232,3 @@ const InjectedEmptyViewContainer = inject<
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);
 
 export default InjectedEmptyViewContainer;
-

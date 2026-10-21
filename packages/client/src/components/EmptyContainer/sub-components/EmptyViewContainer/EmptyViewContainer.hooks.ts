@@ -181,6 +181,7 @@ export const useEmptyView = (
       isKnowledgeTab,
       isAIRoom,
       isPublicRoom,
+      isAiReady,
     );
 
     return { description, title, icon };
@@ -471,7 +472,11 @@ export const useOptions = (
     }
 
     onShowTemplateGallery(true);
-  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, onShowTemplateGallery]);
+  }, [
+    isWarningRoomsDialog,
+    setQuotaWarningDialogVisible,
+    onShowTemplateGallery,
+  ]);
 
   const onCreateAIAgent = useCallback(() => {
     if (isGracePeriod) {

@@ -37,7 +37,7 @@ import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { FilterType, FolderType } from "@docspace/shared/enums";
+import { Events, FilterType, FolderType } from "@docspace/shared/enums";
 import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -68,6 +68,8 @@ import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import { FILES_SELECTOR_AGENT_CONTEXT } from "SRC_DIR/store/CreateEditAgentStore";
+import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
 import {
@@ -77,6 +79,16 @@ import {
   getShowEncryptedTransferBanner,
 } from "./utils";
 import { getBrandName } from "@docspace/shared/constants/brands";
+
+// The selector cannot create an agent itself: its "New agent" item opens the
+// create dialog through the same event the agents section uses.
+const createAgent = () => {
+  window.dispatchEvent(
+    new CustomEvent(Events.AGENT_CREATE, {
+      detail: { context: FILES_SELECTOR_AGENT_CONTEXT },
+    }),
+  );
+};
 
 let disabledItems: (string | number)[] = [];
 
@@ -175,6 +187,7 @@ const FilesSelectorWrapper = ({
 
   withCreate,
   disabledCreatePublicRoom,
+  standalone,
   folderIsShared,
   checkCreating,
   isMultiSelect,
@@ -221,6 +234,14 @@ const FilesSelectorWrapper = ({
       setMoveToPanelVisible(false);
     }
   };
+
+  // Standalone creates agents only with an AI provider connected; without one
+  // the create flow would leave for the settings page, so the selector
+  // offers no "New agent" and says why instead. SaaS keeps it: its create
+  // flow activates AI in place.
+  const hasAiProfiles = useHasAiProfiles();
+  const canCreateAgent = !standalone || hasAiProfiles;
+  const withAgentCreation = isMove || isCopy || isRestore || isRestoreAll;
 
   const onCloseAndDeselectAction = () => {
     setSelected("none");
@@ -640,6 +661,14 @@ const FilesSelectorWrapper = ({
         (isMove || isCopy || isRestore || isRestoreAll) ?? withCreate ?? false
       }
       disabledCreatePublicRoom={disabledCreatePublicRoom}
+      onCreateAIAgent={
+        withAgentCreation && canCreateAgent ? createAgent : undefined
+      }
+      agentsEmptyDescription={
+        withAgentCreation && !canCreateAgent
+          ? t("Common:EmptyAIAgentsSelectorNoProviderDescription")
+          : undefined
+      }
       filesSettings={filesSettings as unknown as FilesSettingsDto}
       headerProps={headerProps}
       formProps={formProps}
@@ -873,6 +902,7 @@ export default inject(
       isExternalShareEnabled: externalShare,
       disabledCreatePublicRoom:
         isExternalShareRestricted && externalShareApplyToRooms,
+      standalone: settingsStore.standalone,
       getIcon,
 
       roomsFolderId,

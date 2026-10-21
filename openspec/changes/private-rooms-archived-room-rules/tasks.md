@@ -48,7 +48,7 @@
   The doc comment names `FileSecurity.FilterEntryAsync` and its Archive branch. Add no `fileops/copy` handler.
 
   Verify with new cases in `packages/shared/__mocks__/handlers/files/__tests__/encrypted-files-contract.test.ts`, mirroring the server-contract scenarios "File in an active private room" and "File in an archived private room". Run `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`.
-- [ ] 3.2 Add `packages/client/__tests__/private-room-archived.spec.ts` on the archived mock. Use `aiConfigHandler` with AI services on, as `ai-chat-header-button.spec.ts` does, and record every request to assert what is not sent. Walk these scenarios:
+- [x] 3.2 Add `packages/client/__tests__/private-room-archived.spec.ts` on the archived mock. Use `aiConfigHandler` with AI services on, as `ai-chat-header-button.spec.ts` does, and record every request to assert what is not sent. Walk these scenarios:
   - from file-operations:
     - "Archived private room opened", "Folder inside an archived private room", "Ordinary archived room" and "Download in an archived private room";
     - "Copy to My documents", "No server copy", "Warning in the destination picker" and "Identity locked";

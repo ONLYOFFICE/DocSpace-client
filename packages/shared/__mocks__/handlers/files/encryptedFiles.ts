@@ -53,14 +53,19 @@ export type EncryptedFileSeed = {
   fileKeys?: EncryptedFileKey[];
   bytes?: Uint8Array;
   encryptedNameHeader?: string;
+  /** One of `folders`; the room itself when left out. */
+  folderId?: number;
 };
 
 export type EncryptedFileRecord = Required<
-  Omit<EncryptedFileSeed, "bytes" | "encryptedNameHeader">
+  Omit<EncryptedFileSeed, "bytes" | "encryptedNameHeader" | "folderId">
 > & {
   bytes?: Uint8Array;
   encryptedNameHeader?: string;
+  folderId?: number;
 };
+
+export type EncryptedFolderSeed = { id: number; title: string };
 
 export type UploadSessionRecord = {
   id: string;
@@ -116,6 +121,12 @@ export type EncryptedFilesHandlerOptions = {
    * CopyTo and MoveTo.
    */
   archived?: boolean;
+  /** `false` serves an ordinary room through the same routes. */
+  isPrivate?: boolean;
+  /** The room's title; "Private Room" when left out. */
+  title?: string;
+  /** Folders directly inside the room. */
+  folders?: EncryptedFolderSeed[];
   handle?: { current: EncryptedFilesHandlerHandle | null };
 };
 
@@ -158,6 +169,7 @@ const seedToRecord = (seed: EncryptedFileSeed): EncryptedFileRecord => ({
   fileKeys: seed.fileKeys ?? [],
   bytes: seed.bytes,
   encryptedNameHeader: seed.encryptedNameHeader,
+  folderId: seed.folderId,
 });
 
 const buildFileDto = (
@@ -190,10 +202,10 @@ const buildFileDto = (
     fileType: 0,
     fileStatus: 0,
     fileEntryType: 2,
-    folderId: roomId,
+    folderId: record.folderId ?? roomId,
     rootFolderId: section.id,
     rootFolderType: section.folderType,
-    parentRoomType: 19,
+    ...(!archived && { parentRoomType: 19 }),
     pureContentLength: record.size,
     contentLength: `${record.size} bytes`,
     version: 1,
@@ -259,11 +271,16 @@ const buildFileDto = (
   };
 };
 
-const buildFolderDto = (roomId: number, archived = false) => {
+const buildFolderDto = (
+  roomId: number,
+  archived = false,
+  isPrivate = true,
+  title = "Private Room",
+) => {
   const section = sectionOf(archived);
   return {
     id: roomId,
-    title: "Private Room",
+    title,
     parentId: section.id,
     filesCount: 0,
     foldersCount: 0,
@@ -271,7 +288,7 @@ const buildFolderDto = (roomId: number, archived = false) => {
     rootFolderType: section.folderType,
     roomType: 5,
     shared: false,
-    private: true,
+    private: isPrivate,
     ...(archived && {
       security: {
         Read: true,
@@ -287,12 +304,74 @@ const buildFolderDto = (roomId: number, archived = false) => {
   };
 };
 
+/**
+ * A folder inside the room, as FolderDtoHelper.GetAsync builds it: `private`
+ * is the folder's own setting, which only a room carries, and the rights
+ * follow FileSecurity.FilterEntryAsync for the room owner. In an active
+ * private room a subfolder loses Copy and CopyTo; in Archive only Read,
+ * ReadHistory, Copy and Download pass for a folder that is not the room.
+ */
+const buildSubfolderDto = (
+  folder: EncryptedFolderSeed,
+  roomId: number,
+  archived: boolean,
+  isPrivate: boolean,
+) => {
+  const section = sectionOf(archived);
+  const activeSecurity = {
+    Read: true,
+    Create: true,
+    Delete: true,
+    Download: true,
+    Rename: true,
+    Move: true,
+    MoveTo: true,
+    Copy: !isPrivate,
+    CopyTo: !isPrivate,
+    Duplicate: true,
+    EditAccess: !isPrivate,
+  };
+  return {
+    id: folder.id,
+    title: folder.title,
+    parentId: roomId,
+    filesCount: 0,
+    foldersCount: 0,
+    fileEntryType: 1,
+    rootFolderId: section.id,
+    rootFolderType: section.folderType,
+    shared: false,
+    private: false,
+    ...(!archived && { parentRoomType: 19 }),
+    security: archived
+      ? {
+          Read: true,
+          ReadHistory: true,
+          Copy: true,
+          Download: true,
+          Create: false,
+          Delete: false,
+          Rename: false,
+          Move: false,
+          MoveTo: false,
+          CopyTo: false,
+          Duplicate: false,
+          EditAccess: false,
+        }
+      : activeSecurity,
+  };
+};
+
 export const encryptedFilesHandlers = (
   port: string,
   opts: EncryptedFilesHandlerOptions,
 ) => {
   const roomId = opts.roomId;
   const archived = !!opts.archived;
+  const isPrivate = opts.isPrivate ?? true;
+  const roomTitle = opts.title ?? "Private Room";
+  const folders = opts.folders ?? [];
+  const roomDto = () => buildFolderDto(roomId, archived, isPrivate, roomTitle);
   const ownerId =
     opts.ownerId ?? "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
   const files = new Map<number, EncryptedFileRecord>();
@@ -353,6 +432,7 @@ export const encryptedFilesHandlers = (
       encrypted: session.encrypted,
       fileKeys: [],
       bytes: merged,
+      folderId: session.folderId,
     };
     files.set(id, record);
     return {
@@ -411,53 +491,71 @@ export const encryptedFilesHandlers = (
   return [
     /**
      * Mirrors FoldersController.GetFolderByFolderId (HttpGet "{folderId}"): a
-     * FolderContentDto of the room. FileStorageService.GetFolderItemsAsync
-     * stamps the room's type (CustomRoom, 19) as `parentRoomType` on the
-     * room itself and on every entry in it. `pathParts` are its breadcrumbs,
+     * FolderContentDto of the room or of a folder in it.
+     * FileStorageService.GetFolderItemsAsync stamps the room's type
+     * (CustomRoom, 19) as `parentRoomType` on the folder and on every entry
+     * in it only under the Rooms section (RootFolderType VirtualRooms), so an
+     * archived room's answer carries none. `pathParts` are its breadcrumbs,
      * each `{ id, title, roomType, folderType }`; MapToRoomType gives the
      * section (Rooms or Archive) no room type, so that part has none.
      */
     http.get(`${apiBase}/files/:folderId(\\d+)`, ({ params, request }) => {
       const folderId = Number(params.folderId);
-      if (folderId !== roomId) {
+      const subfolder = folders.find((f) => f.id === folderId);
+      if (folderId !== roomId && !subfolder) {
         return undefined;
       }
       requests.push({ method: "GET", url: new URL(request.url).pathname });
 
-      const all = Array.from(files.values());
+      const listed = Array.from(files.values()).filter(
+        (f) => (f.folderId ?? roomId) === folderId,
+      );
+      const listedFolders = subfolder
+        ? []
+        : folders.map((f) =>
+            buildSubfolderDto(f, roomId, archived, isPrivate),
+          );
+      const section = sectionOf(archived);
+      const current = subfolder
+        ? buildSubfolderDto(subfolder, roomId, archived, isPrivate)
+        : { ...roomDto(), ...(!archived && { parentRoomType: 19 }) };
       return okResponse({
-        files: all.map((f) =>
+        files: listed.map((f) =>
           buildFileDto(f, roomId, ownerId, port, archived),
         ),
-        folders: [],
-        current: { ...buildFolderDto(roomId, archived), parentRoomType: 19 },
+        folders: listedFolders,
+        current,
         pathParts: [
-          {
-            id: sectionOf(archived).id,
-            title: sectionOf(archived).title,
-            folderType: sectionOf(archived).folderType,
-          },
-          { id: roomId, title: "Private Room", roomType: 5, folderType: 19 },
+          { id: section.id, title: section.title, folderType: section.folderType },
+          { id: roomId, title: roomTitle, roomType: 5, folderType: 19 },
+          ...(subfolder
+            ? [{ id: subfolder.id, title: subfolder.title, folderType: 1 }]
+            : []),
         ],
         startIndex: 0,
-        count: all.length,
-        total: all.length,
+        count: listed.length + listedFolders.length,
+        total: listed.length + listedFolders.length,
         new: 0,
       });
     }),
 
     /**
      * Mirrors FoldersController.GetFolderInfo (HttpGet "folder/{folderId}"):
-     * the room's FolderDto. DetermineParentRoomType finds no room above a
-     * room, so it carries no `parentRoomType`.
+     * the FolderDto of the room or of a folder in it. DetermineParentRoomType
+     * finds no room above a room, so the room carries no `parentRoomType`.
      */
     http.get(
       `${apiBase}/files/folder/:folderId(\\d+)`,
       ({ params, request }) => {
         const folderId = Number(params.folderId);
-        if (folderId !== roomId) return undefined;
+        const subfolder = folders.find((f) => f.id === folderId);
+        if (folderId !== roomId && !subfolder) return undefined;
         requests.push({ method: "GET", url: new URL(request.url).pathname });
-        return okResponse(buildFolderDto(roomId, archived));
+        return okResponse(
+          subfolder
+            ? buildSubfolderDto(subfolder, roomId, archived, isPrivate)
+            : roomDto(),
+        );
       },
     ),
 

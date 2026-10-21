@@ -52,6 +52,7 @@ import { BASE_URL, API_PREFIX } from "../../../e2e/utils";
 const PORT = "3200";
 const ROOM_ID = 9100;
 const ARCHIVED_ROOM_ID = 9200;
+const ARCHIVED_FOLDER_ID = 9201;
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";
 const BOB_ID = "22222222-2222-2222-2222-222222222222";
 
@@ -81,6 +82,7 @@ const server = setupServer(
     ownerId: ALICE_ID,
     currentUserId: ALICE_ID,
     archived: true,
+    folders: [{ id: ARCHIVED_FOLDER_ID, title: "Reports" }],
     handle: archivedHandle,
   }),
 );
@@ -430,6 +432,92 @@ describe("encryptedFiles mock — the copy right (mirrors FileSecurity.FilterEnt
       id: 11244,
       title: "Archive",
       folderType: 20,
+    });
+  });
+});
+
+describe("encryptedFiles mock — an archived room and its folders (mirrors FoldersController and FolderDtoHelper)", () => {
+  type Entry = Record<string, unknown> & { security?: Record<string, boolean> };
+  type Listing = {
+    response: {
+      files: Entry[];
+      folders: Entry[];
+      current: Entry;
+      pathParts: Entry[];
+    };
+  };
+  const get = async <T>(path: string) =>
+    (await (await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/${path}`)).json()) as T;
+
+  beforeEach(() => {
+    archivedHandle.current!.setFiles([
+      { id: 1, title: "root.docx", encrypted: true, fileKeys: [] },
+      {
+        id: 2,
+        title: "nested.docx",
+        encrypted: true,
+        fileKeys: [],
+        folderId: ARCHIVED_FOLDER_ID,
+      },
+    ]);
+  });
+
+  it("stamps no parent room type under Archive, on the room or its entries", async () => {
+    const { response } = await get<Listing>(`files/${ARCHIVED_ROOM_ID}`);
+
+    expect(response.current).not.toHaveProperty("parentRoomType");
+    expect(response.files[0]).not.toHaveProperty("parentRoomType");
+    expect(response.folders[0]).not.toHaveProperty("parentRoomType");
+  });
+
+  it("lists the room's own files and its folder, which reports private false and the Archive rights", async () => {
+    const { response } = await get<Listing>(`files/${ARCHIVED_ROOM_ID}`);
+
+    expect(response.files.map((f) => f.id)).toEqual([1]);
+    expect(response.folders).toHaveLength(1);
+    expect(response.folders[0]).toMatchObject({
+      id: ARCHIVED_FOLDER_ID,
+      parentId: ARCHIVED_ROOM_ID,
+      rootFolderType: 20,
+      private: false,
+      security: {
+        Read: true,
+        Copy: true,
+        Download: true,
+        CopyTo: false,
+        Create: false,
+        Delete: false,
+        Move: false,
+        Duplicate: false,
+      },
+    });
+  });
+
+  it("answers a folder's listing with its files and the breadcrumbs from Archive through the room", async () => {
+    const { response } = await get<Listing>(`files/${ARCHIVED_FOLDER_ID}`);
+
+    expect(response.files.map((f) => f.id)).toEqual([2]);
+    expect(response.files[0]).toMatchObject({ folderId: ARCHIVED_FOLDER_ID });
+    expect(response.current).toMatchObject({
+      id: ARCHIVED_FOLDER_ID,
+      private: false,
+    });
+    expect(response.pathParts.map((p) => p.id)).toEqual([
+      11244,
+      ARCHIVED_ROOM_ID,
+      ARCHIVED_FOLDER_ID,
+    ]);
+  });
+
+  it("answers GetFolderInfo for the folder with the same DTO", async () => {
+    const { response } = await get<{ response: Entry }>(
+      `files/folder/${ARCHIVED_FOLDER_ID}`,
+    );
+
+    expect(response).toMatchObject({
+      id: ARCHIVED_FOLDER_ID,
+      parentId: ARCHIVED_ROOM_ID,
+      private: false,
     });
   });
 });

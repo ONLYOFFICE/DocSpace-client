@@ -282,6 +282,36 @@ test.describe("Private room — upload target fixed when the user starts the upl
     expectOnlyCiphertext(sent, filesHandle.current!);
   });
 
+  test("Private room opened under Rooms", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const { filesHandle, passphrase } = await openPrivateRoomWithKey(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const sent = recordSessionRequests(page);
+
+    await page.locator("#customFileInput").first().setInputFiles(plaintextFiles(1));
+    await unlockIfPrompted(page, passphrase);
+
+    await expect
+      .poll(
+        () => filesHandle.current!.getSessions().filter((s) => s.completed)
+          .length,
+        { timeout: 30000 },
+      )
+      .toBe(1);
+    expect(new URL(page.url()).pathname).toBe(
+      `/rooms/shared/${ROOM_ID}/filter`,
+    );
+    expect(sent).toHaveLength(1);
+    expectOnlyCiphertext(sent, filesHandle.current!);
+  });
+
   test("Retry from another folder", async ({ page, mockRequest, baseUrl }) => {
     test.slow();
     const { filesHandle, passphrase } = await openPrivateRoomWithKey(

@@ -33,10 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { getFolderPath } from "@docspace/shared/api/files";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
+
+import TreeFoldersStore from "../../TreeFoldersStore";
 
 import {
   isDropRefused,
@@ -45,6 +47,20 @@ import {
   type TDropRow,
 } from "../target.helpers";
 import type { TUploadTarget } from "../helpers";
+
+vi.mock("SRC_DIR/i18n", () => ({
+  default: { t: (key: string) => key },
+}));
+
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (importOriginal) => ({
+  ...((await importOriginal()) as Record<string, unknown>),
+  default: {
+    on: vi.fn(),
+    off: vi.fn(),
+    emit: vi.fn(),
+    socketSubscribers: new Set<string>(),
+  },
+}));
 
 vi.mock("@docspace/shared/api/files", async (io) => ({
   ...((await io()) as Record<string, unknown>),
@@ -169,6 +185,47 @@ describe("resolveOpenFolderTarget", () => {
         }),
       ),
     ).toMatchObject({ folderId: 71, roomType: RoomsType.AIRoom });
+  });
+});
+
+describe("resolveOpenFolderTarget — the section does not decide encryption", () => {
+  // The open folder as SelectedFolderStore holds it: a folder of a private room.
+  const openFolder = {
+    id: 60,
+    isRoom: false,
+    isAIRoom: false,
+    roomType: null,
+    private: false,
+    navigationPath: [{ id: PRIVATE_ROOM_ID, isRoom: true, private: true }],
+  };
+
+  const targetUnder = (pathname: string) => {
+    window.history.pushState({}, "", pathname);
+    const treeFoldersStore = new TreeFoldersStore(
+      ...([openFolder, {}, {}] as unknown as ConstructorParameters<
+        typeof TreeFoldersStore
+      >),
+    );
+    return resolveOpenFolderTarget({
+      selectedFolderStore: openFolder,
+      treeFoldersStore,
+      aiRoomStore: { knowledgeId: null },
+    } as never);
+  };
+
+  afterEach(() => window.history.pushState({}, "", "/"));
+
+  it("Private room opened under Rooms: the same encrypted target as under /private", () => {
+    const underRooms = targetUnder(`/rooms/shared/60/filter?folder=60`);
+    const underPrivate = targetUnder(`/private/60/filter?folder=60`);
+
+    expect(underRooms).toEqual({
+      folderId: 60,
+      isPrivate: true,
+      roomType: RoomsType.CustomRoom,
+      encryptionRoomId: PRIVATE_ROOM_ID,
+    });
+    expect(underPrivate).toEqual(underRooms);
   });
 });
 

@@ -1,6 +1,6 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
-import { describe, it, expect, vi } from "vitest";
+import { afterEach, describe, it, expect, vi } from "vitest";
 
 vi.mock("@docspace/shared/api/files", async (io) => ({
   ...((await io()) as Record<string, unknown>),
@@ -13,6 +13,7 @@ import { createTestFilesActionsStore, t } from "./testHarness";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { FolderType } from "@docspace/shared/enums";
+import TreeFoldersStore from "../../TreeFoldersStore";
 
 const progressStore = (extra: Record<string, unknown> = {}) => ({
   loopFilesOperations: vi.fn(async () => ({})),
@@ -327,5 +328,52 @@ describe("FilesActionsStore - drag out of an archived private room", () => {
     );
     expect(copy).not.toHaveBeenCalled();
     expect(itemOperationToFolder).not.toHaveBeenCalled();
+  });
+});
+
+describe("FilesActionsStore - the section does not decide transfers", () => {
+  // The root of a private room as SelectedFolderStore holds it.
+  const openFolder = { id: 50, private: true, navigationPath: [] };
+  const file = {
+    id: 1,
+    title: "a.docx",
+    isFolder: false,
+    security: { Move: true },
+  };
+
+  const dragOutUnder = (pathname: string) => {
+    window.history.pushState({}, "", pathname);
+    const { isPrivacyFolder } = new TreeFoldersStore(
+      ...([openFolder, {}, {}] as unknown as ConstructorParameters<
+        typeof TreeFoldersStore
+      >),
+    );
+    const store = createTestFilesActionsStore({
+      treeFoldersStore: { isPrivacyFolder },
+      selectedFolderStore: { rootFolderId: 10 },
+      filesStore: { selection: [file], bufferSelection: null },
+    });
+    const copy = vi.fn(async () => {});
+    store.copyEncryptedFilesToFolder = copy;
+
+    store.moveDragItems(5, "Docs", {
+      id: 5,
+      private: false,
+      rootFolderId: 20,
+    } as never);
+
+    return copy.mock.calls;
+  };
+
+  afterEach(() => window.history.pushState({}, "", "/"));
+
+  it("Private room opened under Rooms: files dragged out are decrypted as under /private", () => {
+    const underRooms = dragOutUnder("/rooms/shared/50/filter");
+    const underPrivate = dragOutUnder("/private/50/filter");
+
+    expect(underRooms).toEqual([
+      [[file], 5, expect.objectContaining({ deleteSourceOnSuccess: true })],
+    ]);
+    expect(underPrivate).toEqual(underRooms);
   });
 });

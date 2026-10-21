@@ -52,6 +52,7 @@
   "EnterFieldName": "Enter field name",
   "EnterTemplateName": "Enter template name",
   "EnterValue": "Enter value",
+  "FieldNameCaseOnly": "Field names ignore letter case, so changing only the case can't be saved",
   "FieldNameExists": "A field with this name already exists",
   "FieldNameFreedOnSave": "This name stays taken until you save the template. Save it first, then use this name.",
   "Fields": "Fields",

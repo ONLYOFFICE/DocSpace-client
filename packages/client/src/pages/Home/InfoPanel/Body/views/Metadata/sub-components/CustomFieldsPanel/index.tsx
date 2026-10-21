@@ -122,6 +122,7 @@ const CustomFieldsPanel = ({
                   key={draft.key}
                   draft={draft}
                   canRename
+                  isValueRequired
                   isNameTaken={isNameTaken(draft)}
                   onChange={changeDraft}
                   onRemove={() => removeDraft(draft.key)}

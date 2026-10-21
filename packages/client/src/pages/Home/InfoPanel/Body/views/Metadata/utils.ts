@@ -286,14 +286,20 @@ export const isCustomFieldNameTaken = (
   return !!name && others.some((item) => normalizeName(item.name) === name);
 };
 
+export const isCaseOnlyRename = (draft: TCustomFieldDraft) =>
+  !draft.isNew &&
+  draft.name.trim() !== draft.key &&
+  normalizeName(draft.name) === normalizeName(draft.key);
+
 export const isValidCustomFieldDraft = (
   draft: TCustomFieldDraft,
   fields: TCustomField[],
   drafts: TCustomFieldDraft[],
 ) =>
   !!draft.name.trim() &&
+  !!draft.value.trim() &&
   !isCustomFieldNameTaken(draft, fields, drafts) &&
-  (!draft.isNew || !!draft.value.trim());
+  !isCaseOnlyRename(draft);
 
 export const getCustomFieldChanges = (
   fields: TCustomField[],
@@ -308,22 +314,23 @@ export const getCustomFieldChanges = (
   return [
     ...fields.flatMap(({ name, value }): TCustomFieldRequest[] => {
       const draft = kept.get(name);
+      const newValue = draft?.value.trim();
 
-      if (!draft?.value) return [{ name, value: null }];
+      if (!draft || !newValue) return [{ name, value: null }];
 
       const newName = draft.name.trim();
 
       if (normalizeName(newName) !== normalizeName(name)) {
         return [
           { name, value: null },
-          { name: newName, value: draft.value },
+          { name: newName, value: newValue },
         ];
       }
 
-      return draft.value === value ? [] : [{ name, value: draft.value }];
+      return newValue === value.trim() ? [] : [{ name, value: newValue }];
     }),
     ...drafts
       .filter((draft) => draft.isNew)
-      .map(({ name, value }) => ({ name: name.trim(), value })),
+      .map(({ name, value }) => ({ name: name.trim(), value: value.trim() })),
   ];
 };

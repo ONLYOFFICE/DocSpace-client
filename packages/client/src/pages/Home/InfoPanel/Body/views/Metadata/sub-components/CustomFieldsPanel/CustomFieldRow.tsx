@@ -49,12 +49,14 @@ import {
 } from "@docspace/shared/utils/metadata";
 
 import type { TCustomFieldDraft } from "../../types";
+import { isCaseOnlyRename } from "../../utils";
 import styles from "../Panel.module.scss";
 
 type CustomFieldRowProps = {
   draft: TCustomFieldDraft;
   isNameTaken: boolean;
   canRename?: boolean;
+  isValueRequired?: boolean;
   onChange: (draft: TCustomFieldDraft) => void;
   onRemove?: () => void;
 };
@@ -63,10 +65,22 @@ const CustomFieldRow = ({
   draft,
   isNameTaken,
   canRename = false,
+  isValueRequired = false,
   onChange,
   onRemove,
 }: CustomFieldRowProps) => {
   const { t } = useTranslation(["Metadata", "Common"]);
+
+  const getNameError = () => {
+    if (isNameTaken) return t("Metadata:FieldNameExists");
+    if (isCaseOnlyRename(draft)) return t("Metadata:FieldNameCaseOnly");
+
+    return "";
+  };
+
+  const nameError = getNameError();
+  const valueError =
+    isValueRequired && !draft.value.trim() ? t("Common:RequiredField") : "";
 
   const valueInput = (
     <TextInput
@@ -75,6 +89,7 @@ const CustomFieldRow = ({
       onChange={(e) => onChange({ ...draft, value: e.target.value })}
       placeholder={t("Metadata:EnterValue")}
       maxLength={METADATA_VALUE_MAX_LENGTH}
+      hasError={!!valueError}
       scale
       testId="metadata_custom_field_value_input"
     />
@@ -98,6 +113,8 @@ const CustomFieldRow = ({
         isVertical
         removeMargin
         labelText={draft.name}
+        hasError={!!valueError}
+        errorMessage={valueError}
       >
         {onRemove ? (
           <div className={styles.inputRow}>
@@ -118,8 +135,8 @@ const CustomFieldRow = ({
         isVertical
         removeMargin
         labelText={t("Metadata:CustomFieldName")}
-        hasError={isNameTaken}
-        errorMessage={t("Metadata:FieldNameExists")}
+        hasError={!!nameError}
+        errorMessage={nameError}
       >
         <div className={styles.inputRow}>
           <TextInput
@@ -128,7 +145,7 @@ const CustomFieldRow = ({
             onChange={(e) => onChange({ ...draft, name: e.target.value })}
             placeholder={t("Metadata:EnterFieldName")}
             maxLength={METADATA_NAME_MAX_LENGTH}
-            hasError={isNameTaken}
+            hasError={!!nameError}
             scale
             testId="metadata_custom_field_name_input"
           />
@@ -140,6 +157,8 @@ const CustomFieldRow = ({
         isVertical
         removeMargin
         labelText={t("Metadata:CustomFieldValue")}
+        hasError={!!valueError}
+        errorMessage={valueError}
       >
         <div className={styles.inputRow}>
           {valueInput}

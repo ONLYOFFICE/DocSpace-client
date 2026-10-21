@@ -348,7 +348,22 @@ describe("custom fields", () => {
     ).toEqual([]);
   });
 
-  it("refuses a rename to an empty name or to the name of another field", () => {
+  it("trims values and ignores spaces around an unchanged one", () => {
+    const [client, owner] = toCustomFieldDrafts(fields);
+
+    expect(
+      getCustomFieldChanges(fields, [
+        { ...client, value: " ACME " },
+        { ...owner, value: " Finance " },
+        newDraft("new-1", "Region", " EU "),
+      ]),
+    ).toEqual([
+      { name: "Owner", value: "Finance" },
+      { name: "Region", value: "EU" },
+    ]);
+  });
+
+  it("refuses a rename to an empty name, another field's name or a case change", () => {
     const [client, owner] = toCustomFieldDrafts(fields);
     const renamed = (name: string) => {
       const draft = { ...client, name };
@@ -356,9 +371,19 @@ describe("custom fields", () => {
     };
 
     expect(renamed("Customer")).toBe(true);
-    expect(renamed("client")).toBe(true);
+    expect(renamed(" Client ")).toBe(true);
+    expect(renamed("client")).toBe(false);
     expect(renamed(" owner ")).toBe(false);
     expect(renamed(" ")).toBe(false);
+  });
+
+  it("keeps a cleared field from being saved as a deletion", () => {
+    const [client, owner] = toCustomFieldDrafts(fields);
+    const cleared = { ...owner, value: " " };
+
+    expect(isValidCustomFieldDraft(cleared, fields, [client, cleared])).toBe(
+      false,
+    );
   });
 
   it("requires a free name and a value for a new field", () => {

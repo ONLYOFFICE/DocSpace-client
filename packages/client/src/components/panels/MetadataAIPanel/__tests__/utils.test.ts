@@ -36,6 +36,7 @@
 import { describe, expect, it } from "vitest";
 
 import { FolderType, MetadataFieldType } from "@docspace/shared/enums";
+import type { TProfile } from "@docspace/shared/api/ai/types";
 import type { TEntryMetadata } from "@docspace/shared/api/metadata/types";
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -56,6 +57,7 @@ import {
   getSkippedTitles,
   getSuggestNotFound,
   getTemplateForms,
+  getMetadataAIModel,
   isSameEntry,
   isValidSuggestion,
   toCustomFieldRequests,
@@ -159,6 +161,20 @@ describe("context menu options", () => {
     ];
 
     expect(hidden.every((options) => options.length === 0)).toBe(true);
+  });
+
+  it("names the model bound to metadata generation, else the default one", () => {
+    const profiles = [
+      { id: "a", name: "GPT", modelId: "gpt-4o" },
+      { id: "b", name: "", modelId: "claude-sonnet" },
+    ] as TProfile[];
+
+    expect(getMetadataAIModel(profiles, { Default: "a" })).toBe("GPT");
+    expect(
+      getMetadataAIModel(profiles, { Default: "a", GenerateMeta: "b" }),
+    ).toBe("claude-sonnet");
+    expect(getMetadataAIModel(profiles, { GenerateMeta: "gone" })).toBe(null);
+    expect(getMetadataAIModel(profiles, {})).toBe(null);
   });
 
   it("opens the metadata tab only for the entry the info panel shows", () => {

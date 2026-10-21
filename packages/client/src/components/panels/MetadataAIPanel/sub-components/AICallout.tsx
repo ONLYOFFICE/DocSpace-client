@@ -46,6 +46,7 @@ import styles from "../MetadataAIPanel.module.scss";
 type AICalloutProps = {
   title: string;
   description: string;
+  model?: string;
   buttonLabel: string;
   error: string;
   isDisabled: boolean;
@@ -56,6 +57,7 @@ type AICalloutProps = {
 const AICallout = ({
   title,
   description,
+  model,
   buttonLabel,
   error,
   isDisabled,
@@ -78,6 +80,16 @@ const AICallout = ({
       <Text className={styles.description} fontSize="13px" lineHeight="20px">
         {description}
       </Text>
+      {model ? (
+        <Text
+          className={styles.description}
+          fontSize="12px"
+          lineHeight="16px"
+          dataTestId="metadata_ai_model"
+        >
+          {model}
+        </Text>
+      ) : null}
     </div>
     {children}
     <Button

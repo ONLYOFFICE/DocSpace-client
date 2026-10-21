@@ -40,6 +40,8 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   fillMetadataWithAI,
   generateMetadataWithAI,
+  getProfileAssignments,
+  getProfilesList,
 } from "@docspace/shared/api/ai";
 import {
   getEntryMetadata,
@@ -72,6 +74,7 @@ import {
   getFillCustomFieldChanges,
   getFillNotFound,
   getMetadataAIError,
+  getMetadataAIModel,
   getSkippedTitles,
   getSuggestNotFound,
   getTemplateForms,
@@ -102,6 +105,7 @@ export const useMetadataAIPanel = ({
   const [isSaving, setIsSaving] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [overwrite, setOverwrite] = useState(false);
+  const [model, setModel] = useState<string | null | undefined>();
 
   const controller = useRef<AbortController | null>(null);
   const beforeRun = useRef<{
@@ -131,6 +135,20 @@ export const useMetadataAIPanel = ({
 
     return () => controller.current?.abort();
   }, [kind, id]);
+
+  useEffect(() => {
+    let isActive = true;
+
+    Promise.all([getProfilesList(), getProfileAssignments()])
+      .then(([profiles, assignments]) => {
+        if (isActive) setModel(getMetadataAIModel(profiles, assignments));
+      })
+      .catch(() => {});
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
 
   const fill = async (signal: AbortSignal) => {
     const result = await fillMetadataWithAI(
@@ -267,6 +285,7 @@ export const useMetadataAIPanel = ({
     canSave,
     prompt,
     overwrite,
+    model,
     setPrompt,
     setOverwrite,
     runAI,

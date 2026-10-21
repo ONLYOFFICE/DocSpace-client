@@ -10,6 +10,7 @@
   "AIFilledFields_one": "AI filled {{count}} field. Review the values before saving.",
   "AIFilledFields_other": "AI filled {{count}} fields. Review the values before saving.",
   "AIFillingTitle": "Filling metadata with AI",
+  "AIModel": "Model: {{model}}",
   "AINoChanges": "AI found no new values in the content.",
   "AINoModel": "No AI model is selected for metadata. Ask the administrator to choose one in the AI settings.",
   "AINotFound": "<strong>No values found for:</strong> {{fields}}",

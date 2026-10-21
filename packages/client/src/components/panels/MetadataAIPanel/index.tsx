@@ -83,6 +83,7 @@ const MetadataAIDialog = ({
     canSave,
     prompt,
     overwrite,
+    model,
     setPrompt,
     setOverwrite,
     runAI,
@@ -98,6 +99,15 @@ const MetadataAIDialog = ({
   const isReview = phase === "review" && !!summary;
   const hasNothingToFill =
     isFill && phase !== "loading" && !forms.length && !drafts.length;
+  const hasNoModel = model === null;
+
+  const getCalloutError = () => {
+    if (error) return error;
+    if (hasNoModel) return t("Metadata:AINoModel");
+    if (hasNothingToFill) return t("Metadata:AINothingToFill");
+
+    return "";
+  };
 
   const customFields = metadata ? (
     <CustomFieldList
@@ -158,16 +168,19 @@ const MetadataAIDialog = ({
                       ? t("Metadata:AIFillDescription")
                       : t("Metadata:AISuggestDescription")
                   }
+                  model={model ? t("Metadata:AIModel", { model }) : undefined}
                   buttonLabel={
                     isFill
                       ? t("Metadata:FillWithAI")
                       : t("Metadata:SuggestMetadata")
                   }
-                  error={
-                    error || (hasNothingToFill ? t("Metadata:AINothingToFill") : "")
-                  }
+                  error={getCalloutError()}
                   isDisabled={
-                    isAnalyzing || isSaving || hasNothingToFill || !metadata
+                    isAnalyzing ||
+                    isSaving ||
+                    hasNothingToFill ||
+                    hasNoModel ||
+                    !metadata
                   }
                   onClick={runAI}
                 >

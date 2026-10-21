@@ -40,6 +40,7 @@ import type {
   TMetadataAIFilledField,
   TMetadataAISkipped,
   TMetadataAIUnresolvedField,
+  TProfile,
 } from "@docspace/shared/api/ai/types";
 import type {
   TCustomField,
@@ -112,6 +113,16 @@ export const getMetadataAIOptions = (
     canReadAsText(item.fileExst, extsConvertible);
 
   return isAvailable ? METADATA_AI_OPTIONS : [];
+};
+
+export const getMetadataAIModel = (
+  profiles: TProfile[],
+  assignments: Record<string, string>,
+) => {
+  const profileId = assignments.GenerateMeta ?? assignments.Default;
+  const profile = profiles.find(({ id }) => id === profileId);
+
+  return profile ? profile.name || profile.modelId : null;
 };
 
 type TEntryRef = { id?: number | string; isFolder?: boolean };

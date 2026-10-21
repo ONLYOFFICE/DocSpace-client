@@ -221,6 +221,7 @@ const InjectedEmptyViewContainer = inject<
       createFoldersTree,
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
       onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
+      createRoom: contextOptionsStore.onCreateRoom,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

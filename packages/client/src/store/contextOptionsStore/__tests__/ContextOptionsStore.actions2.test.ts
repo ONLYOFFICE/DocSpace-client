@@ -33,9 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect, vi } from "vitest";
+import { afterEach, describe, it, expect, vi } from "vitest";
+
+import { RoomsTypePrivate } from "@docspace/shared/enums";
 
 import { createTestContextOptionsStore, t } from "./testHarness";
+// After the harness, which mocks the toast module.
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 const item = (over: Record<string, unknown> = {}) =>
   ({ id: 1, isFolder: false, fileExst: ".docx", providerKey: "gd", ...over }) as never;
@@ -251,5 +255,73 @@ describe("ContextOptionsStore — action handler delegation (batch 5)", () => {
     store.onSaveAsTemplate(item());
     expect(dispatchEvent).toHaveBeenCalledTimes(1);
     dispatchEvent.mockRestore();
+  });
+});
+
+describe("ContextOptionsStore.onCreateRoom — Private section", () => {
+  type TRoomCreateEvent = CustomEvent<{ context: string }> & {
+    payload?: { startRoomType?: unknown; isFormsCreate?: boolean };
+  };
+
+  const dispatched = () => {
+    const dispatchEvent = vi.spyOn(window, "dispatchEvent");
+    return {
+      events: () =>
+        dispatchEvent.mock.calls.map(([event]) => event as TRoomCreateEvent),
+      restore: () => dispatchEvent.mockRestore(),
+    };
+  };
+
+  afterEach(() => {
+    window.history.pushState({}, "", "/");
+    vi.unstubAllGlobals();
+  });
+
+  it("Room admin creates from the section: opens on the Private type", () => {
+    window.history.pushState({}, "", "/private/filter");
+    const spy = dispatched();
+
+    createTestContextOptionsStore().onCreateRoom();
+
+    const [event] = spy.events();
+    spy.restore();
+    expect(event.payload).toEqual({ startRoomType: RoomsTypePrivate });
+    expect(event.detail.context).toBe("context_menu");
+  });
+
+  it("Hotkey in the section: keeps the context of the entry point", () => {
+    window.history.pushState({}, "", "/private/filter");
+    const spy = dispatched();
+
+    createTestContextOptionsStore().onCreateRoom(null, false, "hotkey");
+
+    const [event] = spy.events();
+    spy.restore();
+    expect(event.payload).toEqual({ startRoomType: RoomsTypePrivate });
+    expect(event.detail.context).toBe("hotkey");
+  });
+
+  it("Private rooms need a secure context: a toast and nothing dispatched", () => {
+    window.history.pushState({}, "", "/private/filter");
+    vi.stubGlobal("crypto", {});
+    const spy = dispatched();
+
+    createTestContextOptionsStore().onCreateRoom();
+
+    const events = spy.events();
+    spy.restore();
+    expect(events).toHaveLength(0);
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptionRequiresHttps");
+  });
+
+  it("opens the generic chooser outside the section", () => {
+    window.history.pushState({}, "", "/rooms/shared/filter");
+    const spy = dispatched();
+
+    createTestContextOptionsStore().onCreateRoom();
+
+    const [event] = spy.events();
+    spy.restore();
+    expect(event.payload).toBeUndefined();
   });
 });

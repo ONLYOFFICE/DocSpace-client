@@ -259,6 +259,7 @@ export const useOptions = (
     refreshPaymentInfo,
     templateGalleryAvailable,
     onShowTemplateGallery,
+    createRoom,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -419,6 +420,11 @@ export const useOptions = (
   }, [myFolder?.rootFolderType, myFolder?.title, myFolderId]);
 
   const onCreateRoom = useCallback(() => {
+    if (isPrivateRoomsRoute(window.location.pathname)) {
+      createRoom(null, false, "empty_state");
+      return;
+    }
+
     if (isWarningRoomsDialog) {
       setQuotaWarningDialogVisible(true);
       return;
@@ -432,7 +438,12 @@ export const useOptions = (
       event.payload = { startRoomType: RoomsType.FormRoom };
     }
     window.dispatchEvent(event);
-  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
+  }, [
+    isWarningRoomsDialog,
+    setQuotaWarningDialogVisible,
+    selectedFolder?.id,
+    createRoom,
+  ]);
 
   // Opens the create dialog straight on its template picker, scoped to form
   // templates -- the Forms "Space template" quick action.

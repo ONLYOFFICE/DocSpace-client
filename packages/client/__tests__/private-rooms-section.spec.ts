@@ -38,11 +38,13 @@ import {
   appsHandler,
   capabilitiesHandler,
   encryptedFilesHandlers,
+  privacyroomKeysHandlers,
   filesSettingsHandler,
   privateRoomListHandler,
   roomGroupsHandler,
   roomListHandler,
   roomMembersHandlers,
+  roomTagsHandler,
   rootHandler,
   selfActivationStatusHandler,
   selfByTypeHandler,
@@ -1086,3 +1088,100 @@ test.describe("Private section — empty states", () => {
   });
 });
 
+
+test.describe("Private section — creation", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [
+          {
+            id: "1",
+            userId: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+            publicKey: "BASE64_PUBLIC_KEY_FIXTURE_FOR_TEST",
+            privateKeyEnc: "BASE64_PRIVATE_KEY_ENC_FIXTURE_FOR_TEST",
+            date: "2026-01-01T00:00:00.000Z",
+          },
+        ],
+      }),
+      roomTagsHandler(TEST_PORT),
+      privateRoomListHandler(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+    );
+  });
+
+  const createRoomDialog = (page: Page) =>
+    page
+      .getByTestId("modal-dialog")
+      .filter({ has: page.getByTestId("create_room_dialog_save") });
+
+  const expectPrivateTypeLocked = async (page: Page) => {
+    const dialog = createRoomDialog(page);
+    await expect(dialog).toBeVisible({ timeout: 15000 });
+    await expect(dialog.getByText("Private Room", { exact: true })).toBeVisible();
+    await expect(dialog.getByTestId("room-type-list-item")).toHaveCount(0);
+    await expect(dialog.getByTestId("room-type-dropdown-button")).toHaveCount(
+      0,
+    );
+  };
+
+  test("Room admin creates from the section", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await page.getByTestId("main-button").first().click();
+
+    await expectPrivateTypeLocked(page);
+  });
+
+  test("Hotkey in the section", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await page.keyboard.press("Shift+R");
+
+    await expectPrivateTypeLocked(page);
+  });
+
+  test("Room admin without private rooms: the create button", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.IsDefault));
+
+    await page.goto(`${baseUrl}/private/filter`);
+    await page.getByTestId("empty-view").locator("#create-room").click();
+
+    await expectPrivateTypeLocked(page);
+  });
+
+  test("User without the room-creation right", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "regular"),
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, {
+        canCreate: false,
+        rootAccess: ShareAccessRights.DenyAccess,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(page.getByTestId("empty-view")).toBeVisible({
+      timeout: 15000,
+    });
+
+    await expect(page.getByTestId("main-button")).toHaveCount(0);
+    await expect(page.locator("#create-room")).toHaveCount(0);
+
+    await page.keyboard.press("Shift+R");
+    await page.waitForTimeout(1000);
+    await expect(createRoomDialog(page)).toHaveCount(0);
+  });
+});

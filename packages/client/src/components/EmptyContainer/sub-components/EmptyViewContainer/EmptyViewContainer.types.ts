@@ -136,6 +136,7 @@ export interface InjectedEmptyViewContainerProps
   createFoldersTree: TStore["filesActionsStore"]["createFoldersTree"];
   templateGalleryAvailable: boolean;
   onShowTemplateGallery: TStore["contextOptionsStore"]["onShowTemplateGallery"];
+  createRoom: TStore["contextOptionsStore"]["onCreateRoom"];
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

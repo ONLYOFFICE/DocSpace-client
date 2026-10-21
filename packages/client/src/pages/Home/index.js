@@ -227,6 +227,7 @@ const PureHome = observer((props) => {
     canCreateFiles,
     canCreateEncrypted,
     canCreateRooms,
+    onCreateRoom,
     isDocumentsFolder,
     isRoom,
     isFormRoomFolder,
@@ -340,6 +341,14 @@ const PureHome = observer((props) => {
   const isFormRoom =
     getCategoryType(location) === CategoryType.Form || isFormRoomFolder;
 
+  const isPrivateRoomsSection =
+    getCategoryType(location) === CategoryType.PrivateRooms;
+
+  const onCreatePrivateRoom = useCallback(
+    () => onCreateRoom(null, false, "sidebar"),
+    [onCreateRoom],
+  );
+
   // AI-agents create gating: AI must be ready and the user able to manage
   // agents (admins / owners / room admins — same set as canCreateRooms).
   // `aiReady` (portal /ai/config) can lag behind the chat-lib profiles, so
@@ -363,6 +372,7 @@ const PureHome = observer((props) => {
     setTemplateGalleryVisible,
     setOformFromFolderId,
     setCreateRoomFromTemplate,
+    onCreatePrivateRoom,
     isDocumentsFolder,
     isRoom,
     isFormRoom,
@@ -375,6 +385,7 @@ const PureHome = observer((props) => {
     isRecentFolder,
     isAIAgentsFolder,
     isFormsSection,
+    isPrivateRoomsSection,
     isContactsPage,
     isProfile,
     isSettingsPage,
@@ -1161,6 +1172,7 @@ export const Component = inject(
       canCreateFiles: folderSecurity?.Create,
       canCreateEncrypted: uploadDataStore.shouldEncryptCurrentUpload(),
       canCreateRooms: isAdmin || isRoomAdmin,
+      onCreateRoom: contextOptionsStore.onCreateRoom,
       isDocumentsFolder,
       isRoom,
       isFormRoomFolder:

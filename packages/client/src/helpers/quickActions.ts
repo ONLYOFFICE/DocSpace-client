@@ -54,6 +54,8 @@ export type QuickActionsSection =
   | "ai-agents"
   // Private room: file-creation tiles wired to the client-side encryption flow.
   | "private"
+  // Private section list root: offer the single Private room tile.
+  | "private-rooms"
   // Archive / trash / templates / favorites / recent / contacts / profile /
   // settings: no quick-actions banner.
   | null;
@@ -73,6 +75,7 @@ export type SectionFlags = {
   isAIAgentsFolder?: boolean;
   // View-level flags (already computed in Home/Header).
   isFormsSection?: boolean; // the "Forms" section root (CategoryType.Forms)
+  isPrivateRoomsSection?: boolean; // the Private list root (CategoryType.PrivateRooms)
   isContactsPage?: boolean;
   isProfile?: boolean;
   isSettingsPage?: boolean;
@@ -95,6 +98,7 @@ export const getQuickActionsSection = (
     isRecentFolder,
     isAIAgentsFolder,
     isFormsSection,
+    isPrivateRoomsSection,
     isContactsPage,
     isProfile,
     isSettingsPage,
@@ -116,6 +120,10 @@ export const getQuickActionsSection = (
 
   // Forms section root → collect-forms + from-template tiles.
   if (isFormsSection) return "forms";
+
+  // Private list root → the Private room tile. It is a Rooms list root too, so
+  // it must be checked first.
+  if (isPrivateRoomsSection) return "private-rooms";
 
   // Rooms list root → room tiles.
   if (isRoomsFolder) return "rooms";

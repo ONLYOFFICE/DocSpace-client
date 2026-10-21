@@ -1146,6 +1146,25 @@ test.describe("Private section — creation", () => {
     await expectPrivateTypeLocked(page);
   });
 
+  test("Banner on a non-empty Private list", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    const tile = page.getByTestId("quick-private-room");
+    await expect(tile).toBeVisible();
+    for (const other of [
+      "quick-vdr-room",
+      "quick-custom-room",
+      "quick-use-template",
+      "quick-ai-chat",
+    ])
+      await expect(page.getByTestId(other)).toHaveCount(0);
+
+    await tile.click();
+
+    await expectPrivateTypeLocked(page);
+  });
+
   test("Room admin without private rooms: the create button", async ({
     page,
     mockRequest,

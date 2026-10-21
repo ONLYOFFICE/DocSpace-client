@@ -112,6 +112,7 @@
   "DeveloperToolsAccessDescription": "Zgjidhni nëse të gjithë përdoruesit (përveç mysafirëve) mund ta shohin seksionin \"Veglat e zhvilluesit\", ose kufizojeni vetëm te pronari dhe superadministratorët duke zgjedhur Çaktivizuar.",
   "DeveloperToolsAccessMobileDescription": "Ky cilësim ju lejon të bëni seksionin \"Veglat e zhvilluesit\" të dukshëm për të gjithë përdoruesit, përveç mysafirëve.",
   "DeveloperToolsDescription": "Integroni, zgjeroni dhe automatizoni {{organizationName}} {{editorsName}} dhe {{productName}} me mjetet e zhvilluesit — nga Docs Connect dhe SDK i Integruar deri te Webhooks dhe aplikacionet OAuth. Zgjidhni një mjet më poshtë për të filluar.",
+  "DeveloperToolsDescriptionStandalone": "Integroni, zgjeroni dhe automatizoni {{organizationName}} {{editorsName}} dhe {{productName}} me mjetet e zhvilluesit — nga SDK i Integruar dhe Webhooks deri te aplikacionet OAuth dhe çelësat API. Zgjidhni një mjet më poshtë për të filluar.",
   "DisableAiServices": "Shkaktivizoni {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "Agjentët IA do të fshihen për të gjithë përdoruesit (historia e ndërveprimit do të ruhet).",
   "DisableAiServicesConfirm": "Ju mund të riaktivizoni {{aiServices}} në çdo moment. Jeni të sigurt se dëshironi të vazhdoni?",

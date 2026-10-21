@@ -112,6 +112,7 @@
   "DeveloperToolsAccessDescription": "Misafirler haricindeki tüm kullanıcıların Geliştirici Araçları bölümünü görüp göremeyeceğini seçin veya Devre Dışı seçeneğini seçerek bunu yalnızca sahip ve süper yöneticilerle sınırlandırın.",
   "DeveloperToolsAccessMobileDescription": "Bu ayar, Geliştirici Araçları bölümünü misafirler haricindeki tüm kullanıcılara görünür hale getirmenizi sağlar.",
   "DeveloperToolsDescription": "{{organizationName}} {{editorsName}} ve {{productName}} ürünlerini geliştirici araçlarıyla entegre edin, genişletin ve otomatikleştirin — Docs Connect ve Gömülü SDK'dan Webhook'lara ve OAuth uygulamalarına kadar. Başlamak için aşağıdan bir araç seçin.",
+  "DeveloperToolsDescriptionStandalone": "{{organizationName}} {{editorsName}} ve {{productName}} ürünlerini geliştirici araçlarıyla entegre edin, genişletin ve otomatikleştirin — Gömülü SDK ve Webhook'lardan OAuth uygulamalarına ve API anahtarlarına kadar. Başlamak için aşağıdan bir araç seçin.",
   "DisableAiServices": "{{aiServices}}'i Devre Dışı Bırak",
   "DisableAiServicesAgentsDisabled": "Yapay zeka ajanları tüm kullanıcılar için gizlenecektir (etkileşim geçmişi korunmaya devam edecektir).",
   "DisableAiServicesConfirm": "{{aiServices}}'i istediğiniz zaman yeniden etkinleştirebilirsiniz. Devam etmek istediğinizden emin misiniz?",

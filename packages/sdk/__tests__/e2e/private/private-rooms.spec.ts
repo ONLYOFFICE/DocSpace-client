@@ -132,6 +132,27 @@ test.describe("(private) — rooms list & unlock", () => {
       await expect(page.getByText("Private Test Room")).toBeVisible();
     },
   );
+
+  test("List header", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+  }) => {
+    const opts = { roomId: 7001, title: "Private Test Room" };
+    serverRequestInterceptor.use(privateRoomListHandler(port, opts));
+    clientRequestInterceptor.use(privateRoomListHandler(port, opts));
+
+    await page.goto(`${baseUrl}${PRIVATE_LIST}`);
+    await expect(page.getByText("Private Test Room")).toBeVisible();
+
+    const header = page.locator(".header-container");
+    await expect(
+      header.getByRole("heading", { name: "Private", exact: true }),
+    ).toBeVisible();
+    await expect(page.getByText("Rooms E2E")).toHaveCount(0);
+  });
 });
 
 test.describe("(private) — encrypted upload / download / preview", () => {

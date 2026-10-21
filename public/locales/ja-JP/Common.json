@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "アービターは多数決ではなく、推論の質によって各専門家の回答を評価し、単一の信頼できる結論を提供します。",
   "DashboardArbiterInstallConfirmIntro": "複数のAI専門家に同じ質問をして、アービターに回答を評価させてください — そして単一のよく推論された評決を得ます。すぐにすべてをセットアップします。",
   "DashboardE2eRoomsDescription": "エンドツーエンドで暗号化されたルームです。ファイルはアップロード前にブラウザーで暗号化され、招待した相手だけが読むことができます。",
-  "DashboardE2eRoomsTitle": "E2E ルーム",
   "DashboardFilesDescription": "自分用またはチーム用にファイルを保存、整理、共有します。",
   "DashboardFormsDescription": "フォームを作成し、回答を収集して、構造化されたデータを分析します。",
   "DashboardInstallBulletCreateRoom": "回答を一か所に収集する",

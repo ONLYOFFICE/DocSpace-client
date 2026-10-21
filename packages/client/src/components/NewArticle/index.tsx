@@ -509,7 +509,7 @@ const NewArticle = ({
 
     const e2eRoomsItem: NavMenuItem = {
       id: E2E_ROOMS_ID,
-      label: t("Common:DashboardE2eRoomsTitle"),
+      label: t("Common:Private"),
       icon: CatalogPrivateReactSvgUrl,
       onClick: handleE2eRoomsClick,
       children: e2eRoomsEnabled

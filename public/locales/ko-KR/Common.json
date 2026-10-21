@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "중재자는 다수결이 아닌 추론 품질로 각 전문가의 답변을 평가하여 신뢰할 수 있는 단일 결론을 제공합니다.",
   "DashboardArbiterInstallConfirmIntro": "여러 AI 전문가에게 같은 질문을 하고 중재자가 답변을 평가하게 하세요 — 그러면 잘 추론된 단일 평결을 받을 수 있습니다. 곧 모든 설정을 완료하겠습니다.",
   "DashboardE2eRoomsDescription": "종단 간 암호화된 룸입니다. 파일은 업로드 전에 브라우저에서 암호화되며 초대한 사람만 읽을 수 있습니다.",
-  "DashboardE2eRoomsTitle": "E2E 룸",
   "DashboardFilesDescription": "나 자신 또는 팀을 위해 파일을 저장, 정리하고 공유하세요.",
   "DashboardFormsDescription": "양식을 만들고, 응답을 수집하고, 구조화된 데이터를 분석하세요.",
   "DashboardInstallBulletCreateRoom": "한 곳에서 응답 수집하기",

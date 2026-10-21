@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "Arbiter ocenia każdą odpowiedź eksperta według jakości rozumowania — nie przez głosowanie większością — i dostarcza jeden wiarygodny wniosek.",
   "DashboardArbiterInstallConfirmIntro": "Zadaj to samo pytanie wielu ekspertom AI i pozwól arbitrowi ocenić ich odpowiedzi — a następnie uzyskaj jeden dobrze uzasadniony werdykt. Za chwilę skonfigurujemy wszystko.",
   "DashboardE2eRoomsDescription": "Pokoje szyfrowane end-to-end. Pliki są szyfrowane w przeglądarce przed wgraniem i mogą je odczytać tylko zaproszone przez Ciebie osoby.",
-  "DashboardE2eRoomsTitle": "Pokoje E2E",
   "DashboardFilesDescription": "Przechowuj, organizuj i udostępniaj pliki — dla siebie lub dla zespołu.",
   "DashboardFormsDescription": "Twórz formularze, zbieraj odpowiedzi i analizuj ustrukturyzowane dane.",
   "DashboardInstallBulletCreateRoom": "Zbieraj odpowiedzi w jednym miejscu",

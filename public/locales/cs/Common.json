@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "Arbitr hodnotí každou odpověď experta podle kvality argumentace — nikoli hlasováním většiny — a vydá jeden spolehlivý závěr.",
   "DashboardArbiterInstallConfirmIntro": "Položte stejnou otázku více odborníkům AI a nechte arbitra zvážit jejich odpovědi — poté získejte jeden dobře zdůvodněný verdikt. Vše nastavíme za chvíli.",
   "DashboardE2eRoomsDescription": "Místnosti s koncovým šifrováním. Soubory jsou zašifrovány ve vašem prohlížeči před nahráním a přečíst je mohou pouze lidé, které pozvete.",
-  "DashboardE2eRoomsTitle": "Místnosti E2E",
   "DashboardFilesDescription": "Ukládejte, organizujte a sdílejte soubory — pro sebe nebo pro svůj tým.",
   "DashboardFormsDescription": "Vytvářejte formuláře, sbírejte odpovědi a analyzujte strukturovaná data.",
   "DashboardInstallBulletCreateRoom": "Sbírejte odpovědi na jednom místě",

@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "يزن المحكّم كل إجابة خبير بحسب جودة التفكير — لا بالتصويت الأغلبي — ويقدم استنتاجاً واحداً موثوقاً.",
   "DashboardArbiterInstallConfirmIntro": "اطرح نفس السؤال على عدة خبراء AI ودع المحكّم يوازن إجاباتهم — ثم احصل على حكم واحد مدروس. سنهيئ كل شيء في لحظة.",
   "DashboardE2eRoomsDescription": "غرف مشفّرة من طرف إلى طرف. تُشفَّر الملفات في متصفحك قبل التحميل ولا يمكن قراءتها إلا للأشخاص الذين تدعوهم.",
-  "DashboardE2eRoomsTitle": "غرف E2E",
   "DashboardFilesDescription": "احفظ الملفات ونظّمها وشاركها — لنفسك أو لفريقك.",
   "DashboardFormsDescription": "أنشئ النماذج واجمع الردود وحلّل البيانات المنظّمة.",
   "DashboardInstallBulletCreateRoom": "جمع الردود في مكان واحد",

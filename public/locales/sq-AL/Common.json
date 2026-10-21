@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "Arbitri mat çdo përgjigje eksperte sipas cilësisë së arsyetimit — jo me votë shumice — dhe jep një përfundim të vetëm të besueshëm.",
   "DashboardArbiterInstallConfirmIntro": "Bëni të njëjtën pyetje ekspertëve të shumtë të AI dhe lini arbitrin të peshojë përgjigjet e tyre — pastaj merrni një vendim të vetëm të arsyetuar mirë. Do të konfigurojmë gjithçka për pak çaste.",
   "DashboardE2eRoomsDescription": "Dhoma me enkriptim skaj-më-skaj. Skedarët enkriptohen në shfletuesin tuaj përpara ngarkimit dhe vetëm personat që ftoni mund t'i lexojnë.",
-  "DashboardE2eRoomsTitle": "Dhoma E2E",
   "DashboardFilesDescription": "Ruani, organizoni dhe ndani skedarë — për veten ose për ekipin tuaj.",
   "DashboardFormsDescription": "Ndërtoni formularë, mblidhni përgjigje dhe analizoni të dhëna të strukturuara.",
   "DashboardInstallBulletCreateRoom": "Mblidhni përgjigjet në një vend",

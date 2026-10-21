@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "Šķīrējs novērtē katra eksperta atbildi pēc argumentācijas kvalitātes — ne ar balsu vairākumu — un sniedz vienu uzticamu secinājumu.",
   "DashboardArbiterInstallConfirmIntro": "Uzdodiet to pašu jautājumu vairākiem MI ekspertiem un ļaujiet šķīrējam izvērtēt viņu atbildes — pēc tam saņemiet vienu labi pamatotu spriedumu. Mēs visu iestatīsim pēc brīža.",
   "DashboardE2eRoomsDescription": "Pilnīgi šifrētas telpas. Faili tiek šifrēti jūsu pārlūkprogrammā pirms augšupielādes, un tos var lasīt tikai jūsu uzaicinātie cilvēki.",
-  "DashboardE2eRoomsTitle": "E2E telpas",
   "DashboardFilesDescription": "Glabājiet, organizējiet un kopīgojiet failus — sev vai savai komandai.",
   "DashboardFormsDescription": "Veidojiet veidlapas, vāciet atbildes un analizējiet strukturētus datus.",
   "DashboardInstallBulletCreateRoom": "Apkopojiet atbildes vienā vietā",

@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "Arbitr hər ekspert cavabını əksəriyyət səsverməsinə deyil, əsaslandırma keyfiyyətinə görə çəkiləndirir və tək etibarlı nəticə çıxarır.",
   "DashboardArbiterInstallConfirmIntro": "Eyni sualı bir neçə AI ekspertinə verin və arbitrin cavablarını çəkiləndirməsinə icazə verin — sonra tək, yaxşı əsaslandırılmış hökm alın. Hər şeyi bir anda hazırlayacağıq.",
   "DashboardE2eRoomsDescription": "Uçdan-uca şifrələnmiş otaqlar. Fayllar yükləməzdən əvvəl brauzerinizdə şifrələnir və yalnız dəvət etdiyiniz şəxslər onları oxuya bilər.",
-  "DashboardE2eRoomsTitle": "E2E otaqlar",
   "DashboardFilesDescription": "Faylları saxlayın, təşkil edin və paylaşın — özünüz və ya komandanız üçün.",
   "DashboardFormsDescription": "Formalar yaradın, cavablar toplayın və strukturlaşdırılmış məlumatları təhlil edin.",
   "DashboardInstallBulletCreateRoom": "Cavabları bir yerdə toplayın",

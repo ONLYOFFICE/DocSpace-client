@@ -40,6 +40,7 @@ import {
   roomListHandler,
   rootHandler,
   selfActivationStatusHandler,
+  selfByTypeHandler,
   settingsHandler,
   TypeRoomList,
   TypeSettings,
@@ -127,6 +128,18 @@ test.describe("Private rooms behind the localStorage flag", () => {
     await page.goto(`${baseUrl}/e2e-rooms`);
 
     await expect(page).toHaveURL(/\/dashboard/, { timeout: 15000 });
+  });
+
+  test("Catalog with the flag", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "owner"));
+
+    await page.goto(`${baseUrl}/portal-settings/apps`);
+
+    const app = page.getByTestId("settings-app-e2e-rooms");
+    await expect(app).toBeVisible({ timeout: 15000 });
+    await expect(app.getByText("Private", { exact: true })).toBeVisible();
+    await expect(app).toContainText("End-to-end encrypted rooms.");
+    await expect(page.getByText("Rooms E2E")).toHaveCount(0);
   });
 
   test("Chooser with the flag", async ({ page, mockRequest, baseUrl }) => {

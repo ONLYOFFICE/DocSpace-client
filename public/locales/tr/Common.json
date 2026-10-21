@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "Hakem, her uzman yanıtını çoğunluk oylamasıyla değil, akıl yürütme kalitesine göre tartarak tek bir güvenilir sonuç sunar.",
   "DashboardArbiterInstallConfirmIntro": "Aynı soruyu birden fazla AI uzmanına sorun ve hakeme yanıtlarını tartmasına izin verin — ardından tek, iyi gerekçelendirilmiş bir karar alın. Her şeyi bir anda ayarlayacağız.",
   "DashboardE2eRoomsDescription": "Uçtan uca şifrelenmiş odalar. Dosyalar yüklenmeden önce tarayıcınızda şifrelenir ve yalnızca davet ettiğiniz kişiler bunları okuyabilir.",
-  "DashboardE2eRoomsTitle": "E2E odalar",
   "DashboardFilesDescription": "Dosyaları depolayın, düzenleyin ve paylaşın — kendiniz veya ekibiniz için.",
   "DashboardFormsDescription": "Formlar oluşturun, yanıtları toplayın ve yapılandırılmış verileri analiz edin.",
   "DashboardInstallBulletCreateRoom": "Yanıtları tek bir yerde toplayın",

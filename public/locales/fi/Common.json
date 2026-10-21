@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "Välimies arvioi jokaisen asiantuntijan vastauksen päättelylaadun perusteella — ei enemmistöäänestyksellä — ja toimittaa yhden luotettavan johtopäätöksen.",
   "DashboardArbiterInstallConfirmIntro": "Esitä sama kysymys useille AI-asiantuntijoille ja anna välimiehen punnita heidän vastauksensa — ja saat yhden hyvin perustellun tuomion. Asetamme kaiken kuntoon hetkessä.",
   "DashboardE2eRoomsDescription": "Päästä päähän salatut huoneet. Tiedostot salataan selaimessasi ennen lähetystä, ja vain kutsumasi henkilöt voivat lukea niitä.",
-  "DashboardE2eRoomsTitle": "E2E-huoneet",
   "DashboardFilesDescription": "Tallenna, järjestä ja jaa tiedostoja — itsellesi tai tiimillesi.",
   "DashboardFormsDescription": "Luo lomakkeita, kerää vastauksia ja analysoi jäsenneltyä dataa.",
   "DashboardInstallBulletCreateRoom": "Kerää vastauksia yhteen paikkaan",

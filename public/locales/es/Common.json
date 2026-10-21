@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "El árbitro sopesa cada respuesta de experto según la calidad del razonamiento — no por votación mayoritaria — y entrega una única conclusión de confianza.",
   "DashboardArbiterInstallConfirmIntro": "Formule la misma pregunta a varios expertos en IA y deje que el árbitro sopese sus respuestas — luego obtenga un único veredicto bien razonado. Configuraremos todo en un momento.",
   "DashboardE2eRoomsDescription": "Salas cifradas de extremo a extremo. Los archivos se cifran en su navegador antes de subirlos y solo las personas que invite pueden leerlos.",
-  "DashboardE2eRoomsTitle": "Salas E2E",
   "DashboardFilesDescription": "Almacene, organice y comparta archivos — para usted o para su equipo.",
   "DashboardFormsDescription": "Cree formularios, recopile respuestas y analice datos estructurados.",
   "DashboardInstallBulletCreateRoom": "Recopilar respuestas en un solo lugar",

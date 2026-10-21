@@ -617,7 +617,7 @@ const RoomsList = ({
       } = res;
 
       if (titleOverride) {
-        // Sticky title — keep the page-level override (e.g. "Rooms E2E")
+        // Sticky title — keep the page-level override (e.g. "Private")
         // even after the server response carries a generic title.
         navigationStore.setCurrentTitle(titleOverride);
       } else if (newCurrent?.title) {

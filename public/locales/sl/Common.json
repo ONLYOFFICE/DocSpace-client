@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "Arbiter ovrednoti vsak odgovor strokovnjaka glede na kakovost utemeljitve — ne po večinskem glasovanju — in poda en zanesljiv zaključek.",
   "DashboardArbiterInstallConfirmIntro": "Zastavite isto vprašanje več strokovnjakom za umetno inteligenco in pustite arbitru, da oceni njihove odgovore — nato dobite eno dobro utemeljeno mnenje. Vse bomo nastavili v kratkem.",
   "DashboardE2eRoomsDescription": "Sobe s šifriranjem od konca do konca. Datoteke se šifrirajo v vašem brskalniku pred nalaganjem in berejo jih lahko samo osebe, ki jih povabite.",
-  "DashboardE2eRoomsTitle": "Sobe E2E",
   "DashboardFilesDescription": "Shranjujte, organizirajte in delite datoteke — zase ali za svojo ekipo.",
   "DashboardFormsDescription": "Ustvarjajte obrazce, zbirajte odgovore in analizirajte strukturirane podatke.",
   "DashboardInstallBulletCreateRoom": "Zbirajte odgovore na enem mestu",

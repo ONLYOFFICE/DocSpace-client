@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "Arbitrul cântărește fiecare răspuns al expertului după calitatea raționamentului — nu prin votul majorității — și livrează o singură concluzie de încredere.",
   "DashboardArbiterInstallConfirmIntro": "Puneți aceeași întrebare mai multor experți AI și lăsați arbitrul să cântărească răspunsurile lor — apoi obțineți un singur verdict bine argumentat. Vom configura totul imediat.",
   "DashboardE2eRoomsDescription": "Săli criptate end-to-end. Fișierele sunt criptate în browserul dvs. înainte de încărcare și numai persoanele pe care le invitați le pot citi.",
-  "DashboardE2eRoomsTitle": "Săli E2E",
   "DashboardFilesDescription": "Stocați, organizați și partajați fișiere — pentru dvs. sau pentru echipa dvs.",
   "DashboardFormsDescription": "Creați formulare, colectați răspunsuri și analizați date structurate.",
   "DashboardInstallBulletCreateRoom": "Colectați răspunsurile într-un singur loc",

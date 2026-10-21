@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "L'arbitro valuta ogni risposta degli esperti in base alla qualità del ragionamento — non per voto di maggioranza — e fornisce un'unica conclusione affidabile.",
   "DashboardArbiterInstallConfirmIntro": "Poni la stessa domanda a più esperti AI e lascia che l'arbitro pesi le loro risposte — poi ottieni un unico verdetto ben argomentato. Configureremo tutto in un momento.",
   "DashboardE2eRoomsDescription": "Stanze crittografate end-to-end. I file vengono crittografati nel browser prima del caricamento e solo le persone che inviti possono leggerli.",
-  "DashboardE2eRoomsTitle": "Stanze E2E",
   "DashboardFilesDescription": "Archivia, organizza e condividi file — per te o per il tuo team.",
   "DashboardFormsDescription": "Crea moduli, raccogli risposte e analizza dati strutturati.",
   "DashboardInstallBulletCreateRoom": "Raccogliere le risposte in un unico posto",

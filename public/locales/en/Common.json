@@ -567,7 +567,6 @@
   "DashboardArbiterInstallBulletAIDescription": "The arbiter weighs every expert answer by reasoning quality — not by majority vote — and delivers a single trusted conclusion.",
   "DashboardArbiterInstallConfirmIntro": "Ask the same question to multiple AI experts and let the arbiter weigh their answers — then get a single, well-reasoned verdict. We’ll set everything up in a moment.",
   "DashboardE2eRoomsDescription": "End-to-end encrypted rooms. Files are encrypted in your browser before upload and only the people you invite can read them.",
-  "DashboardE2eRoomsTitle": "Rooms E2E",
   "DashboardFilesDescription": "Store, organize, and share files — for yourself or your team.",
   "DashboardFormsDescription": "Build forms, collect responses, and analyze structured data.",
   "DashboardInstallBulletCreateRoom": "Collect responses in one place",

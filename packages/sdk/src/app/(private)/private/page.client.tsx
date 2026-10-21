@@ -123,9 +123,7 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
     [dialogsStore],
   );
 
-  const headerTitle = isArchive
-    ? t("Common:Archive")
-    : t("Common:DashboardE2eRoomsTitle");
+  const headerTitle = isArchive ? t("Common:Archive") : t("Common:Private");
   const currentWithTitle = React.useMemo(
     () => ({ ...folderData.current, title: headerTitle }),
     [folderData.current, headerTitle],

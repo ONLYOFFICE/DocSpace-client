@@ -114,6 +114,16 @@ export const getMetadataAIOptions = (
   return isAvailable ? METADATA_AI_OPTIONS : [];
 };
 
+type TEntryRef = { id?: number | string; isFolder?: boolean };
+
+export const isSameEntry = (selection: unknown, item: TEntryRef) => {
+  if (!selection || Array.isArray(selection)) return false;
+
+  const entry = selection as TEntryRef;
+
+  return entry.id === item.id && !!entry.isFolder === !!item.isFolder;
+};
+
 export const getTemplateForms = ({ templates }: TEntryMetadata) =>
   getVisibleTemplates(templates).map(createTemplateForm);
 

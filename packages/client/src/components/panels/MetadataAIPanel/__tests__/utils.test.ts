@@ -56,6 +56,7 @@ import {
   getSkippedTitles,
   getSuggestNotFound,
   getTemplateForms,
+  isSameEntry,
   isValidSuggestion,
   toCustomFieldRequests,
   toSuggestionDrafts,
@@ -158,6 +159,14 @@ describe("context menu options", () => {
     ];
 
     expect(hidden.every((options) => options.length === 0)).toBe(true);
+  });
+
+  it("opens the metadata tab only for the entry the info panel shows", () => {
+    expect(isSameEntry({ id: 7 }, { id: 7 })).toBe(true);
+    expect(isSameEntry({ id: 7, isFolder: true }, { id: 7 })).toBe(false);
+    expect(isSameEntry({ id: 9 }, { id: 7 })).toBe(false);
+    expect(isSameEntry([{ id: 7 }], { id: 7 })).toBe(false);
+    expect(isSameEntry(null, { id: 7 })).toBe(false);
   });
 
   it("reads plain text as it is and the rest through a text conversion", () => {

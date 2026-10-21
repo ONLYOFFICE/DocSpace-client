@@ -83,13 +83,13 @@ import {
 type TUseMetadataAIPanel = {
   item: TMetadataSelection;
   mode: TMetadataAIMode;
-  onClose: () => void;
+  onSaved: () => void;
 };
 
 export const useMetadataAIPanel = ({
   item,
   mode,
-  onClose,
+  onSaved,
 }: TUseMetadataAIPanel) => {
   const { t } = useTranslation(["Metadata", "Common"]);
 
@@ -249,7 +249,7 @@ export const useMetadataAIPanel = ({
       }
 
       toastr.success(t("Common:ChangesSavedSuccessfully"));
-      onClose();
+      onSaved();
     } catch (e) {
       toastr.error(e as string);
       setIsSaving(false);

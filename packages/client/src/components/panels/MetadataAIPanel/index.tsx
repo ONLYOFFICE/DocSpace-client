@@ -50,7 +50,7 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import { useMetadataAIPanel } from "./hooks/useMetadataAIPanel";
 import type { TMetadataAIMode } from "./types";
-import { METADATA_AI_PROMPT_MAX_LENGTH } from "./utils";
+import { isSameEntry, METADATA_AI_PROMPT_MAX_LENGTH } from "./utils";
 import AICallout from "./sub-components/AICallout";
 import CustomFieldList from "./sub-components/CustomFieldList";
 import FillForms from "./sub-components/FillForms";
@@ -61,9 +61,15 @@ type MetadataAIDialogProps = {
   item: TMetadataSelection;
   mode: TMetadataAIMode;
   onClose: () => void;
+  onSaved: () => void;
 };
 
-const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
+const MetadataAIDialog = ({
+  item,
+  mode,
+  onClose,
+  onSaved,
+}: MetadataAIDialogProps) => {
   const { t } = useTranslation(["Metadata", "Files", "Common"]);
 
   const {
@@ -85,7 +91,7 @@ const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
     removeDraft,
     discard,
     save,
-  } = useMetadataAIPanel({ item, mode, onClose });
+  } = useMetadataAIPanel({ item, mode, onSaved });
 
   const isFill = mode === "fill";
   const isAnalyzing = phase === "analyzing";
@@ -233,14 +239,28 @@ const MetadataAIDialog = ({ item, mode, onClose }: MetadataAIDialogProps) => {
 const MetadataAIPanel = () => {
   const { metadataAIPanelData, setMetadataAIPanelData } =
     useStore("dialogsStore");
+  const infoPanelStore = useStore("infoPanelStore");
 
   if (!metadataAIPanelData.visible) return null;
 
+  const { item } = metadataAIPanelData;
+
+  const close = () => setMetadataAIPanelData({ visible: false });
+
+  const onSaved = () => {
+    close();
+
+    if (isSameEntry(infoPanelStore.infoPanelSelection, item)) {
+      infoPanelStore.openMetadataTab();
+    }
+  };
+
   return (
     <MetadataAIDialog
-      item={metadataAIPanelData.item}
+      item={item}
       mode={metadataAIPanelData.mode}
-      onClose={() => setMetadataAIPanelData({ visible: false })}
+      onClose={close}
+      onSaved={onSaved}
     />
   );
 };

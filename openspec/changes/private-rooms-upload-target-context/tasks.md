@@ -36,7 +36,7 @@
     Run `cd packages/shared && pnpm exec vitest run services/private-room/__tests__/upload-encryption-gate.test.ts`;
   - new cases in `packages/client/src/store/uploadDataStore/__tests__/UploadDataStore.encryption.test.ts`, named after the scenarios "Room left while files are queued", "Files section left while files are queued", "Private room opened while a plain upload is queued", "No key when the queued file starts" and "Unlock declined for a queued batch". Each case changes or clears the selected folder between queuing and session start, then asserts the session's `encrypted` flag and the opaque name;
   - `cd packages/client && pnpm exec vitest run src/store/uploadDataStore` and `pnpm run tsc`.
-- [ ] 1.3 Make the session folder and the ciphertext check follow the item (design D2, D5):
+- [x] 1.3 Make the session folder and the ciphertext check follow the item (design D2, D5):
   - `startSessionFuncImpl` opens the session in `toFolderId` as stored, with no `isAIRoom ? knowledgeId : ...`;
   - when the gate says "encrypt" and preparation returns no ciphertext, the item fails with `Common:EncryptionPrepareFailed` before the session starts.
 

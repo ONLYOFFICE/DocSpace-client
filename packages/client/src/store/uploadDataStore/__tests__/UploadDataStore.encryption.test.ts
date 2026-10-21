@@ -974,6 +974,39 @@ describe("UploadDataStore — upload target fixed when the user starts the uploa
     ]);
   });
 
+  it("Encryption yields no ciphertext", async () => {
+    allowConsoleError("[ENCRYPTION] prepareFileForEncryptedUpload failed");
+    const { store } = createTestUploadDataStore({
+      ...privateRoomOpen,
+      userStore: userWithKeys(),
+    });
+    vi.mocked(requireUnlock).mockResolvedValue({ pub: "x" } as never);
+    vi.mocked(prepareEncryptedUpload).mockImplementation(
+      async (config) =>
+        ({
+          data: config.file,
+          encrypted: false,
+          dek: null,
+          uploadFileName: config.file.name,
+          originalFileType: "application/octet-stream",
+          originalFileSize: config.file.size,
+          originalFileName: config.file.name,
+        }) as never,
+    );
+    replaceAction(store, "finishUploadFiles");
+
+    const data = queueIntoOpenFolder(store, 1);
+    openRoomsList(store);
+    store.handleFilesUpload(data, t);
+    await vi.waitFor(() =>
+      expect(store.files[0].error).toBe("Common:EncryptionPrepareFailed"),
+    );
+
+    expect(prepareEncryptedUpload).toHaveBeenCalledTimes(1);
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0].encrypted).toBeFalsy();
+  });
+
   it("Unlock declined for a queued batch", async () => {
     const { store } = createTestUploadDataStore({
       ...privateRoomOpen,

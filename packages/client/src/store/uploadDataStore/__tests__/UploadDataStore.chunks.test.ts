@@ -34,12 +34,13 @@ import {
   makeBrowserFile,
   makeFileInfo,
   makeUploadFile,
+  makeUploadTarget,
 } from "./testHarness";
 
 import * as filesApi from "@docspace/shared/api/files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { AnalyticsEvents } from "@docspace/shared/enums";
+import { AnalyticsEvents, RoomsType } from "@docspace/shared/enums";
 
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";
@@ -716,5 +717,38 @@ describe("UploadDataStore.parallelUploading — semaphore", () => {
     ]);
 
     expect(store.currentUploadNumber).toBe(-2);
+  });
+});
+
+describe("UploadDataStore.startSessionFunc — session folder", () => {
+  it("opens the session in the folder the item was queued for after an AI agent is opened", async () => {
+    const { store } = createTestUploadDataStore();
+    const entry = makeUploadFile({
+      uniqueId: "queued",
+      file: makeBrowserFile("notes.docx", 1024),
+      toFolderId: 9,
+      target: makeUploadTarget({ folderId: 9 }),
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    Object.assign(store.selectedFolderStore, {
+      id: 70,
+      isRoom: true,
+      isAIRoom: true,
+      roomType: RoomsType.AIRoom,
+    });
+    Object.assign(store.aiRoomStore, { knowledgeId: 71 });
+    vi.mocked(filesApi.startUploadSession).mockReturnValue(
+      new Promise(() => {}) as never,
+    );
+
+    store.startSessionFunc(0, t);
+    await vi.waitFor(() =>
+      expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1),
+    );
+
+    expect(vi.mocked(filesApi.startUploadSession).mock.calls[0][0]).toBe(9);
   });
 });

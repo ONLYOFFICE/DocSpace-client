@@ -596,8 +596,6 @@ export async function startSessionFuncImpl(
   t: TTranslation,
   createNewIfExist = true,
 ) {
-  const { isAIRoom } = self.selectedFolderStore;
-  const { knowledgeId } = self.aiRoomStore;
   if (!self.uploaded && self.files.length === 0) {
     self.uploaded = true;
     self.asyncUploadObj = {};
@@ -630,8 +628,6 @@ export async function startSessionFuncImpl(
   const { file, toFolderId } = item;
   let fileToUpload = file;
   let fileName = file.name;
-
-  const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
 
   let uploadDEK: Uint8Array | null = null;
   let isEncrypted = file.encrypted || false;
@@ -718,18 +714,20 @@ export async function startSessionFuncImpl(
           },
         );
 
-        if (prepared.encrypted) {
-          fileName = prepared.uploadFileName;
-          fileToUpload = new File([prepared.data], prepared.uploadFileName, {
-            type: "application/octet-stream",
-            lastModified: file.lastModified,
-          });
-          uploadDEK = prepared.dek;
-          isEncrypted = true;
-
-          setFileDek(self.files[indexOfFile], uploadDEK);
-          self.files[indexOfFile].encrypted = true;
+        if (!prepared.encrypted) {
+          // Spec: private-rooms/file-operations, "Queued private uploads are sent only as ciphertext".
+          throw new Error("encryption returned no ciphertext");
         }
+        fileName = prepared.uploadFileName;
+        fileToUpload = new File([prepared.data], prepared.uploadFileName, {
+          type: "application/octet-stream",
+          lastModified: file.lastModified,
+        });
+        uploadDEK = prepared.dek;
+        isEncrypted = true;
+
+        setFileDek(self.files[indexOfFile], uploadDEK);
+        self.files[indexOfFile].encrypted = true;
       }
     } catch (error) {
       console.error("[ENCRYPTION] prepareFileForEncryptedUpload failed", {
@@ -751,7 +749,7 @@ export async function startSessionFuncImpl(
   const chunks = fileSize === 0 ? 1 : Math.ceil(fileSize / chunkUploadSize);
 
   return startUploadSession(
-    actualFolderId!,
+    toFolderId!,
     fileName,
     fileSize,
     "",
@@ -780,7 +778,7 @@ export async function startSessionFuncImpl(
 
       return {
         sessionId,
-        folderId: actualFolderId,
+        folderId: toFolderId,
         requestsDataArray,
         path,
         operationId,

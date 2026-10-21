@@ -265,6 +265,8 @@ const SectionFilterContent = ({
   );
 
   const getMetadataItem = async (listFilter) => {
+    if (!isMetadataFilterAvailable) return null;
+
     const metadataState = getMetadataFilterState(listFilter);
     if (!metadataState) return null;
 

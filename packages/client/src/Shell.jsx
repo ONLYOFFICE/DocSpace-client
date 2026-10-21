@@ -92,6 +92,11 @@ import "@docspace/shared/styles/theme.scss";
 
 import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
 import { getAiContextRoom } from "SRC_DIR/helpers/aiContextRoom";
+import AiPresetsBridge from "SRC_DIR/components/AiPresetsBridge";
+import {
+  isAiPresetActionId,
+  useAiPresetsPickerActions,
+} from "SRC_DIR/Hooks/useAiPresetsPickerActions";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 import { setFileView } from "SRC_DIR/helpers/info-panel";
@@ -176,6 +181,10 @@ const Shell = ({ page = "home", ...rest }) => {
     isFormRoomRoot,
     isAIReady,
     aiContextRoom,
+    aiPresetContextRoom,
+    aiPresets,
+    requestPresetApply,
+    setActiveAiPreset,
   } = rest;
 
   const [searchParams] = useSearchParams();
@@ -819,27 +828,47 @@ const Shell = ({ page = "home", ...rest }) => {
 
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.
-  const { actions: profilePickerActions, getAgentByRoomId } =
+  const {
+    actions: agentPickerActions,
+    getAgentByRoomId,
+    isLoaded: isAgentsLoaded,
+  } =
     useAiAgentsPickerActions(
       isLoaded && isAiChatAvailable && canUseAi,
       setPickedAgent,
     );
 
+  // "Choose AI Preset" next to it: the saved presets, applied to the open
+  // chat by AiPresetsBridge (the chat stores live below AiAgentProviders).
+  const presetPickerActions = useAiPresetsPickerActions(
+    aiPresets,
+    requestPresetApply,
+  );
+  const profilePickerActions = useMemo(
+    () => [...agentPickerActions, ...presetPickerActions],
+    [agentPickerActions, presetPickerActions],
+  );
+
   // Re-derive the picked agent from the opened thread's persisted context:
   // agent threads restore their agent (alias + request context), plain
-  // threads drop it. An agent missing from the loaded list still restores
-  // the request context — only the picker alias is skipped.
+  // threads drop it. A thread also keeps the context of a connected skills
+  // room or context folder (the rounds are scoped to it), so once the agents
+  // list is in, an id that is not on it is no agent and restores nothing.
+  // Before the list arrives the id still restores the request context — only
+  // the picker alias is skipped.
   const onThreadContextChange = useCallback(
     (contextEntityId) => {
       if (!contextEntityId) {
         setPickedAgent(null);
         return;
       }
-      setPickedAgent(
-        getAgentByRoomId(contextEntityId) ?? { entityId: contextEntityId },
-      );
+      const agent = getAgentByRoomId(contextEntityId);
+      if (agent) setPickedAgent(agent);
+      else {
+        setPickedAgent(isAgentsLoaded ? null : { entityId: contextEntityId });
+      }
     },
-    [getAgentByRoomId],
+    [getAgentByRoomId, isAgentsLoaded],
   );
 
   // Picking a plain profile row returns the chat to the current-location
@@ -855,7 +884,12 @@ const Shell = ({ page = "home", ...rest }) => {
   // are suppressed in agent rooms), so no extra guard is needed.
   const onProfilePickerSelect = useCallback(
     (profile, actionId) => {
-      if (!actionId) setPickedAgent(null);
+      // A preset pick also leaves a picked agent: its skills room is the
+      // round's scope from then on.
+      if (!actionId || isAiPresetActionId(actionId)) setPickedAgent(null);
+      // An agent pick leaves the project: its title, its skills room and the
+      // sources column would otherwise stay on a chat that is the agent's.
+      if (actionId && !isAiPresetActionId(actionId)) setActiveAiPreset(null);
 
       if (isInsideAgentRoom && !actionId && profile?.id && agentEntityId) {
         editAIAgent(Number(agentEntityId), { profileId: profile.id }).catch(
@@ -863,7 +897,7 @@ const Shell = ({ page = "home", ...rest }) => {
         );
       }
     },
-    [isInsideAgentRoom, agentEntityId],
+    [isInsideAgentRoom, agentEntityId, setActiveAiPreset],
   );
 
   useEffect(() => {
@@ -992,10 +1026,15 @@ const Shell = ({ page = "home", ...rest }) => {
           // The room the user is in, connected as chat context (with the
           // skills of its .ai folder) when the chat opens — see
           // ContextRoomSync in ui-kit.
-          contextRoom={canUseAi ? aiContextRoom : undefined}
+          // A chat opened from an AI preset takes the preset's skills room
+          // instead, until the panel closes (see AiPresetsBridge).
+          contextRoom={
+            canUseAi ? (aiPresetContextRoom ?? aiContextRoom) : undefined
+          }
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
+          <AiPresetsBridge />
           <ModelUpdatedBanner
             key={agentEntityId}
             entityId={agentEntityId}
@@ -1023,6 +1062,7 @@ const ShellWrapper = inject(
     selectedFolderStore,
     treeFoldersStore,
     aiRoomStore,
+    aiPresetsStore,
     paymentStore,
     accessRightsStore,
   }) => {
@@ -1167,6 +1207,10 @@ const ShellWrapper = inject(
       // The current room as a chat-context candidate; a new object per
       // render, the ui-kit provider memoizes it by id and name.
       aiContextRoom: getAiContextRoom(selectedFolderStore),
+      aiPresetContextRoom: aiPresetsStore.activePresetContextRoom,
+      aiPresets: aiPresetsStore.presets,
+      requestPresetApply: aiPresetsStore.requestApply,
+      setActiveAiPreset: aiPresetsStore.setActivePreset,
       // The Forms section, in both its shapes: the bare Forms root, and a
       // form filling room with its In progress / Complete folders. Caps the
       // chat's attachments at one (see `attachmentLimit`).

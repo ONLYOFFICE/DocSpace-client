@@ -1241,6 +1241,20 @@ const SectionFilterContent = ({
                   group: FilterGroups.roomFilterType,
                   label: t("Common:AIRoomTitle"),
                 };
+              case RoomsType.InstructionsRoom:
+                return {
+                  id: "filter_type-instructions",
+                  key: RoomsType.InstructionsRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("Common:InstructionsRooms"),
+                };
+              case RoomsType.KnowledgeRoom:
+                return {
+                  id: "filter_type-knowledge",
+                  key: RoomsType.KnowledgeRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("Common:KnowledgeRooms"),
+                };
               case RoomsType.CustomRoom:
               default:
                 return {

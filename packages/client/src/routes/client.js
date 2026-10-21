@@ -688,6 +688,24 @@ const ClientRoutes = [
           return { Component };
         },
       },
+      {
+        path: "/ai-projects",
+        async lazy() {
+          const { AiProjects } = await componentLoader(
+            () => import("SRC_DIR/pages/AiProjects"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ErrorBoundary>
+                <AiProjects />
+              </ErrorBoundary>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
     ],
   },
   {

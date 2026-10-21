@@ -103,6 +103,19 @@ describe("useAiAgentsPickerActions", () => {
     expect(result.current.actions).toEqual([]);
   });
 
+  it("tells a room that is no agent from a list not loaded yet", async () => {
+    mockAgents([agent(1, "Alpha")]);
+
+    const { result } = renderHook(() =>
+      useAiAgentsPickerActions(true, vi.fn()),
+    );
+
+    expect(result.current.isLoaded).toBe(false);
+    await waitFor(() => expect(result.current.isLoaded).toBe(true));
+    expect(result.current.getAgentByRoomId("1")?.title).toBe("Alpha");
+    expect(result.current.getAgentByRoomId("42")).toBeNull();
+  });
+
   it("reloads the list each time it is enabled again", async () => {
     mockAgents([agent(1, "Alpha"), agent(2, "Beta")]);
 

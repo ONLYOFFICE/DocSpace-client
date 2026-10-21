@@ -802,6 +802,8 @@ export const getOptions = (
 
     case RoomsType.CustomRoom:
     case RoomsType.AIRoom:
+    case RoomsType.InstructionsRoom:
+    case RoomsType.KnowledgeRoom:
       if (isNotAdmin) return [];
 
       if (isCollaborator)

@@ -93,6 +93,10 @@ export const getRoomsIcon = (
       case RoomsType.FormRoom:
         path = "formRoom.svg";
         break;
+      case RoomsType.InstructionsRoom:
+      case RoomsType.KnowledgeRoom:
+        path = "aiRoom.svg";
+        break;
       default:
         path = "customRoom.svg";
     }

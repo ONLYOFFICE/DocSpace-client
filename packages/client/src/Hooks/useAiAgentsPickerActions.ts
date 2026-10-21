@@ -94,7 +94,8 @@ export type TPickedAgent = {
  * distinct action even with a single one, since it also switches the request
  * context to the agent's room). `getAgentByRoomId` resolves a loaded agent by
  * its room id — used to restore the picked agent from a thread's persisted
- * context.
+ * context; `isLoaded` says whether a miss there means "not an agent" or only
+ * "not loaded yet".
  *
  * The list is reloaded, rather than loaded once, on two signals:
  * - `enabled` turning true again. Agents are created, edited and deleted in
@@ -111,6 +112,7 @@ export const useAiAgentsPickerActions = (
 ): {
   actions: ProfilePickerAction[];
   getAgentByRoomId: (roomId: string) => TPickedAgent | null;
+  isLoaded: boolean;
 } => {
   const [agents, setAgents] = useState<TAgent[] | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
@@ -227,5 +229,5 @@ export const useAiAgentsPickerActions = (
     [agents],
   );
 
-  return { actions, getAgentByRoomId };
+  return { actions, getAgentByRoomId, isLoaded: agents !== null };
 };

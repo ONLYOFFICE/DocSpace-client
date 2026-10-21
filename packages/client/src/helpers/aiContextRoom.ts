@@ -37,13 +37,8 @@ import { RoomsType } from "@docspace/shared/enums";
 
 import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
 
-/** The kinds of room whose root may hold a `.ai` folder (server `ResolveFolderTypeAsync`). */
-const ROOM_TYPES_WITH_AI_FOLDER = new Set<RoomsType>([
-  RoomsType.CustomRoom,
-  RoomsType.PublicRoom,
-  RoomsType.VirtualDataRoom,
-  RoomsType.EditingRoom,
-]);
+/** The one kind of room whose Markdown files are the chat's skills (server `GetRoomSkillsFolderAsync`). */
+const SKILLS_ROOM_TYPES = new Set<RoomsType>([RoomsType.InstructionsRoom]);
 
 export type AiContextRoom = { id: string; name: string };
 
@@ -64,11 +59,11 @@ type SelectedLocation = {
 
 /**
  * The room the AI chat may connect as context at the current location: the
- * room itself when the user stands in its root, or the room entry of the
- * navigation path from any of its subfolders. `null` outside rooms, in a
- * room kind that cannot hold a `.ai` folder (an AI agent room, a form
- * room), and in a tour stand-in space the server has never heard of.
- * Whether the room does hold the folder is checked when the chat opens.
+ * Instructions room itself when the user stands in its root, or the room
+ * entry of the navigation path from any of its subfolders. `null` outside
+ * rooms, in a room of any other kind (its files are no skills), and in a
+ * tour stand-in space the server has never heard of. Whether the room does
+ * hold a skill file is checked when the chat opens.
  */
 export const getAiContextRoom = (
   location: SelectedLocation,
@@ -84,7 +79,7 @@ export const getAiContextRoom = (
   if (!room || room.id === null || room.id === undefined) return null;
   if (
     room.roomType === undefined ||
-    !ROOM_TYPES_WITH_AI_FOLDER.has(room.roomType)
+    !SKILLS_ROOM_TYPES.has(room.roomType)
   ) {
     return null;
   }

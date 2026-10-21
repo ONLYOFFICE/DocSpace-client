@@ -235,6 +235,7 @@ export const getClientActiveId = (
   const isFormTemplates = searchArea === RoomSearchArea.FormTemplates;
 
   if (pathname.startsWith("/dashboard")) return "dashboard";
+  if (pathname.startsWith("/ai-projects")) return "ai-projects";
   // Agent-scoped sections highlight their own sidebar sub-items (checked
   // before the generic /ai-agents and the global /recent matchers — note
   // "/ai-agents/recent" also contains the "/recent" substring).

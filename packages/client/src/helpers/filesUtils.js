@@ -77,6 +77,10 @@ export const getRoomTypeName = (room, t) => {
 
     case RoomsType.FormRoom:
       return t("Common:FormRoom");
+    case RoomsType.InstructionsRoom:
+      return t("Common:InstructionsRooms");
+    case RoomsType.KnowledgeRoom:
+      return t("Common:KnowledgeRooms");
     default:
       break;
   }

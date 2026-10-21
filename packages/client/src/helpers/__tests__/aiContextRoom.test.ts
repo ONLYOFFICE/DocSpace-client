@@ -53,7 +53,7 @@ const inRoomRoot = (roomType: RoomsType | null) => ({
 
 describe("getAiContextRoom", () => {
   it("names the room the user stands in", () => {
-    expect(getAiContextRoom(inRoomRoot(RoomsType.CustomRoom))).toEqual({
+    expect(getAiContextRoom(inRoomRoot(RoomsType.InstructionsRoom))).toEqual({
       id: "12",
       name: "Sales",
     });
@@ -68,11 +68,22 @@ describe("getAiContextRoom", () => {
         roomType: null,
         navigationPath: [
           { id: 14, title: "Rooms", isRoom: false },
-          { id: 12, title: "Sales", isRoom: true, roomType: RoomsType.PublicRoom },
+          {
+            id: 12,
+            title: "Sales",
+            isRoom: true,
+            roomType: RoomsType.InstructionsRoom,
+          },
           { id: 30, title: "Reports", isRoom: false },
         ],
       }),
     ).toEqual({ id: "12", name: "Sales" });
+  });
+
+  it("accepts an Instructions room", () => {
+    expect(
+      getAiContextRoom(inRoomRoot(RoomsType.InstructionsRoom)),
+    ).not.toBeNull();
   });
 
   it.each([
@@ -80,16 +91,13 @@ describe("getAiContextRoom", () => {
     RoomsType.PublicRoom,
     RoomsType.VirtualDataRoom,
     RoomsType.EditingRoom,
-  ])("accepts room type %s", (roomType) => {
-    expect(getAiContextRoom(inRoomRoot(roomType))).not.toBeNull();
+    RoomsType.KnowledgeRoom,
+    RoomsType.AIRoom,
+    RoomsType.FormRoom,
+    null,
+  ])("skips a room of type %s, whose files are no skills", (roomType) => {
+    expect(getAiContextRoom(inRoomRoot(roomType))).toBeNull();
   });
-
-  it.each([RoomsType.AIRoom, RoomsType.FormRoom, null])(
-    "skips a room of type %s, which cannot hold a .ai folder",
-    (roomType) => {
-      expect(getAiContextRoom(inRoomRoot(roomType))).toBeNull();
-    },
-  );
 
   it("is null outside rooms", () => {
     expect(
@@ -105,7 +113,10 @@ describe("getAiContextRoom", () => {
 
   it("skips a tour stand-in room the server does not know", () => {
     expect(
-      getAiContextRoom({ ...inRoomRoot(RoomsType.CustomRoom), id: "tour-1" }),
+      getAiContextRoom({
+        ...inRoomRoot(RoomsType.InstructionsRoom),
+        id: "tour-1",
+      }),
     ).toBeNull();
   });
 });

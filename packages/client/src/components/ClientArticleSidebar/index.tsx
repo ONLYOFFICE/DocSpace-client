@@ -154,14 +154,6 @@ const ClientArticleSidebar = ({
     [userId],
   );
 
-  // Agent-scoped Recent/Favorites/Trash: same alias data, routed under
-  // /ai-agents/* so the sidebar keeps the selection under AI Agents.
-  const agentFolderUrl = React.useCallback(
-    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) =>
-      buildFolderUrl(folderId, rootFolderType, userId, true),
-    [userId],
-  );
-
   // Section-scoped Recent/Favorites/Trash: the same special files views,
   // constrained to the section's content via the `folderType` scope filter
   // (the folder types of the rooms/root the section is made of). The
@@ -294,7 +286,6 @@ const ClientArticleSidebar = ({
     const recentFolder = find(FolderType.Recent);
     const favFolder = find(FolderType.Favorites);
     const trashFolder = find(FolderType.TRASH);
-    const aiAgentsFolder = find(FolderType.AIAgents);
     const formsFolder = find(FolderType.Forms);
 
     const mainItems: NavMenuItem[] = [];
@@ -495,63 +486,19 @@ const ClientArticleSidebar = ({
       });
     }
 
-    // AI Agents sits right after Rooms as a top-level item, with the
-    // Recent/Favorites/Trash sections nested beneath it. These reuse the
-    // portal-wide aliases (@recent/@favorites/@trash) — the same targets as
-    // the My Documents sections — mirroring the SDK agents sections. Unique
-    // sidebar ids keep them distinct from the My Documents entries.
-    // The folder is served whether or not the portal has AI switched on, so
-    // the switch is asked here as well: with AI off the app is not on offer.
-    if (aiAgentsFolder && aiServicesEnabled) {
-      const agentChildren: NavSubItem[] = [];
-      if (recentFolder)
-        agentChildren.push(
-          navItem(recentFolder, {
-            id: "agents-recent",
-            ...sectionBadge(recentFolder.id, newCount(recentFolder)),
-            ...nav(
-              agentFolderUrl(recentFolder.id, recentFolder.rootFolderType),
-            ),
-          }),
-        );
-      if (favFolder)
-        agentChildren.push(
-          navItem(favFolder, {
-            id: "agents-favorites",
-            ...sectionBadge(favFolder.id, newCount(favFolder)),
-            ...nav(agentFolderUrl(favFolder.id, favFolder.rootFolderType)),
-          }),
-        );
-      if (trashFolder)
-        agentChildren.push(
-          navItem(trashFolder, {
-            id: "agents-trash",
-            withTopSeparator: true,
-            ...sectionBadge(trashFolder.id, newCount(trashFolder)),
-            ...nav(agentFolderUrl(trashFolder.id, trashFolder.rootFolderType)),
-          }),
-        );
-
-      const agentsItem: NavMenuItem = {
-        ...navItem(aiAgentsFolder),
-        ...sectionBadge(
-          panelFolderId(aiAgentsFolder),
-          newCount(aiAgentsFolder),
-        ),
-      };
-      mainItems.push(
-        agentChildren.length > 0
-          ? {
-              ...agentsItem,
-              ...collapsedBadge(aiAgentsFolder, [
-                recentFolder,
-                favFolder,
-                trashFolder,
-              ]),
-              children: agentChildren,
-            }
-          : agentsItem,
-      );
+    // AI Projects closes the apps: the saved AI chat setups, each opening a
+    // fullscreen chat with its model, skills room and knowledge base. It
+    // takes the AI Agents icon and place, and is on offer only while the
+    // portal has AI switched on.
+    if (aiServicesEnabled) {
+      mainItems.push({
+        id: "ai-projects",
+        label: t("Common:AIProjects"),
+        icon:
+          getCatalogIconUrlByType(FolderType.AIAgents) ??
+          CatalogOverviewReactSvgUrl,
+        ...nav("/ai-projects"),
+      });
     }
 
     return [
@@ -573,7 +520,6 @@ const ClientArticleSidebar = ({
     t,
     nav,
     folderUrl,
-    agentFolderUrl,
     scopedUrl,
     searchAreaUrl,
     treeFolders,

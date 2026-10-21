@@ -219,6 +219,8 @@ export const getAccessOptions = (
 		//   ];
 		//   break;
 		case RoomsType.EditingRoom:
+		case RoomsType.InstructionsRoom:
+		case RoomsType.KnowledgeRoom:
 			options = [
 				accesses.roomManager,
 				{ key: "s1", isSeparator: withSeparator },

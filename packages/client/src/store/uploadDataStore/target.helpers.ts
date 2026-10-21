@@ -33,7 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { RoomsType } from "@docspace/shared/enums";
+import { getFolderPath } from "@docspace/shared/api/files";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 
 import type { ItemUploadContext } from "@docspace/shared/services/private-room/encrypted-upload";
 
@@ -91,4 +92,78 @@ export function withItemUploadContext(
         ? !!uploadContext.isPrivate
         : target.isPrivate,
   };
+}
+
+/** The part of a list row that decides where files dropped on it go. */
+export type TDropRow = {
+  id: number | string;
+  isFolder?: boolean;
+  fileExst?: string;
+  isRoom?: boolean;
+  roomType?: RoomsType | null;
+  isPrivateRoom?: boolean;
+  rootFolderType?: FolderType;
+};
+
+/**
+ * Where files dropped on a row go, given a snapshot of the open folder taken
+ * before the drop is handled. Rejects when a folder's room cannot be loaded.
+ */
+export async function resolveDropTarget(
+  open: TUploadTarget,
+  row: TDropRow | null | undefined,
+): Promise<TUploadTarget> {
+  if (!row || row.fileExst || !row.isFolder) return { ...open };
+
+  if (row.isRoom) {
+    return {
+      folderId: row.id,
+      isPrivate: !!row.isPrivateRoom,
+      roomType: row.roomType ?? null,
+      encryptionRoomId: row.id,
+    };
+  }
+
+  if (open.encryptionRoomId !== null) return { ...open, folderId: row.id };
+
+  if (
+    row.rootFolderType === FolderType.Rooms ||
+    row.rootFolderType === FolderType.Archive
+  ) {
+    const path = await getFolderPath(row.id as number);
+    const room = path.find((folder) => !!folder.roomType);
+    if (!room) {
+      throw new Error(`The room of folder ${row.id} is not in its path`);
+    }
+    return {
+      folderId: row.id,
+      isPrivate: !!room.private,
+      roomType: room.roomType ?? null,
+      encryptionRoomId: room.id,
+    };
+  }
+
+  return {
+    folderId: row.id,
+    isPrivate: false,
+    roomType: null,
+    encryptionRoomId: null,
+  };
+}
+
+/**
+ * `target` is `null` when it could not be resolved.
+ * Spec: private-rooms/file-operations, "Drops onto a private room from outside it are refused".
+ */
+export function isDropRefused(
+  open: TUploadTarget,
+  target: TUploadTarget | null,
+): boolean {
+  if (!target) return true;
+  if (!target.isPrivate) return false;
+  return (
+    target.encryptionRoomId === null ||
+    open.encryptionRoomId === null ||
+    String(target.encryptionRoomId) !== String(open.encryptionRoomId)
+  );
 }

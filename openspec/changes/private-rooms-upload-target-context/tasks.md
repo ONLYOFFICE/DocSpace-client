@@ -63,7 +63,7 @@
 
 ## 2. The target captured at every entry point
 
-- [ ] 2.1 Add `packages/client/src/store/uploadDataStore/target.helpers.ts` with `resolveOpenFolderTarget`, `resolveDropTarget` and the refusal predicate (design D1, cases (a) to (e), and D3):
+- [x] 2.1 Add `packages/client/src/store/uploadDataStore/target.helpers.ts` with `resolveOpenFolderTarget`, `resolveDropTarget` and the refusal predicate (design D1, cases (a) to (e), and D3):
   - case (d) loads the folder's path and its room the way `filesStore/fetch.helpers.ts` does, and rejects on any error;
   - the predicate refuses a private target whose room is not the open folder's room, and it refuses a rejected lookup.
 

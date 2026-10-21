@@ -112,6 +112,7 @@
   "DeveloperToolsAccessDescription": "Escolha se todos os utilizadores (exceto convidados) podem ver a secção Ferramentas de Programador, ou restrinja-a apenas ao proprietário e aos superadministradores selecionando Desativado.",
   "DeveloperToolsAccessMobileDescription": "Esta definição permite tornar a secção Ferramentas de Programador visível para todos os utilizadores, exceto convidados.",
   "DeveloperToolsDescription": "Integre, amplie e automatize o {{organizationName}} {{editorsName}} e o {{productName}} com ferramentas de desenvolvedor — do Docs Connect e do SDK de Incorporação aos webhooks e às aplicações OAuth. Escolha uma ferramenta abaixo para começar.",
+  "DeveloperToolsDescriptionStandalone": "Integre, amplie e automatize o {{organizationName}} {{editorsName}} e o {{productName}} com ferramentas de desenvolvedor — do SDK de Incorporação e dos webhooks às aplicações OAuth e às chaves API. Escolha uma ferramenta abaixo para começar.",
   "DisableAiServices": "Desativar {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "Os agentes de IA ficarão ocultos para todos os utilizadores (o histórico de interações permanecerá preservado).",
   "DisableAiServicesConfirm": "Você pode reativar {{aiServices}} a qualquer momento. Tem certeza de que deseja continuar?",

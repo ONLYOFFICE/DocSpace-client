@@ -112,6 +112,7 @@
   "DeveloperToolsAccessDescription": "Escolha se todos os usuários (exceto convidados) podem ver a seção Ferramentas do Desenvolvedor ou restrinja o acesso apenas ao proprietário e aos administradores completos selecionando Desativado.",
   "DeveloperToolsAccessMobileDescription": "Esta configuração permite que você torne a seção Ferramentas do Desenvolvedor visível para todos os usuários, exceto convidados.",
   "DeveloperToolsDescription": "Integre, amplie e automatize o {{organizationName}} {{editorsName}} e o {{productName}} com ferramentas de desenvolvimento — do Docs Connect e do SDK de Incorporação aos webhooks e aos aplicativos OAuth. Escolha uma ferramenta abaixo para começar.",
+  "DeveloperToolsDescriptionStandalone": "Integre, amplie e automatize o {{organizationName}} {{editorsName}} e o {{productName}} com ferramentas de desenvolvimento — do SDK de Incorporação e dos webhooks aos aplicativos OAuth e às chaves de API. Escolha uma ferramenta abaixo para começar.",
   "DisableAiServices": "Desativar {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "Os agentes de IA serão ocultados para todos os usuários (o histórico de interações permanecerá preservado).",
   "DisableAiServicesConfirm": "Você pode reativar {{aiServices}} a qualquer momento. Tem certeza de que deseja continuar?",

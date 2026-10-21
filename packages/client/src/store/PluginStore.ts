@@ -2150,6 +2150,10 @@ class PluginStore {
   };
 
   get articleNavigationItemsList() {
+    // Plugins load in parallel and each adds its items once its bundle has loaded, so the map holds them in the
+    // order the downloads happened to finish - a different order after every reload. Sorting by plugin name gives a
+    // stable sidebar that an administrator can arrange by naming the plugins (numeric parts compare as numbers);
+    // the sort is stable, so the items of one plugin keep the order the plugin gave them.
     const items = Array.from(this.articleNavigationItems, ([key, value]) => {
       return {
         key,
@@ -2157,7 +2161,11 @@ class PluginStore {
           ...value,
         },
       };
-    });
+    }).sort((a, b) =>
+      a.value.pluginName.localeCompare(b.value.pluginName, "en", {
+        numeric: true,
+      }),
+    );
 
     if (items.length > 0) {
       return items;

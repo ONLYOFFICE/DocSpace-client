@@ -257,6 +257,24 @@ export const isFormRoomFile = (file: TFile | undefined) =>
   file?.parentRoomType === FolderType.FormRoom &&
   file?.rootFolderType !== FolderType.RoomTemplates;
 
+export const getSafeReturnUrl = (url: string | undefined) => {
+  if (!url || typeof window === "undefined") return undefined;
+
+  try {
+    const parsedUrl = new URL(url, window.location.origin);
+
+    if (
+      (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") ||
+      parsedUrl.origin !== window.location.origin
+    )
+      return undefined;
+
+    return parsedUrl.toString();
+  } catch {
+    return undefined;
+  }
+};
+
 const ROOMS_SECTION_PATH = /\/rooms\/shared(\/\d+)?(\/filter)?\/?$/;
 
 export const getFormsSectionFolderUrl = (folderId: number | string) =>

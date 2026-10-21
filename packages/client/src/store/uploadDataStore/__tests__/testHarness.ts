@@ -103,7 +103,7 @@ vi.mock("@docspace/shared/utils/getOperationProgress", () => ({
 // eslint-disable-next-line import/first
 import UploadDataStore from "../../UploadDataStore";
 // eslint-disable-next-line import/first
-import type { TUploadFile } from "../helpers";
+import type { TUploadFile, TUploadTarget } from "../helpers";
 // eslint-disable-next-line import/first
 import type { TFile } from "@docspace/shared/api/files/types";
 // eslint-disable-next-line import/first
@@ -253,6 +253,16 @@ export const makeFileInfo = (overrides: Partial<TFile> = {}): TFile =>
     ...overrides,
   }) as unknown as TFile;
 
+export const makeUploadTarget = (
+  overrides: Partial<TUploadTarget> = {},
+): TUploadTarget => ({
+  folderId: 1,
+  isPrivate: false,
+  roomType: null,
+  encryptionRoomId: null,
+  ...overrides,
+});
+
 export const makeUploadFile = (
   overrides: Partial<TUploadFile> = {},
 ): TUploadFile => {
@@ -263,6 +273,7 @@ export const makeUploadFile = (
     uniqueId: `temp_${fixtureSeq}`,
     fileId: null,
     toFolderId: 1,
+    target: makeUploadTarget(),
     action: "upload",
     error: null,
     fileInfo: null,

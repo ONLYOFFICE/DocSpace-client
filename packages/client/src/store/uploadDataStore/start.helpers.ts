@@ -38,12 +38,14 @@ import uniqueid from "lodash/uniqueId";
 import { checkIsFileExist, getFolderInfo } from "@docspace/shared/api/files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 import type { TTranslation } from "@docspace/shared/types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
 
 import { releaseUploadAutoLockSuspension, removeDuplicate } from "./helpers";
-import type { TUploadBrowserFile, TUploadFile } from "./helpers";
+import type { TUploadBrowserFile, TUploadFile, TUploadTarget } from "./helpers";
+import { withItemUploadContext } from "./target.helpers";
 import type {
   default as UploadDataStore,
   TAxiosLikeError,
@@ -291,20 +293,11 @@ export function startUploadImpl(
   uploadFiles: Record<string, TUploadBrowserFile> | unknown[],
   folderId: number | string | null,
   t: TTranslation,
+  target: TUploadTarget = self.resolveOpenFolderTarget(),
 ) {
   const { canConvert } = self.filesSettingsStore;
 
-  const { isAIRoom } = self.selectedFolderStore;
-
-  const { knowledgeId } = self.aiRoomStore;
-
-  const toFolderId = folderId || self.selectedFolderStore.id;
-
-  const encryptionRoomId =
-    self.selectedFolderStore.navigationPath?.find((r) => r.isRoom)?.id ??
-    (self.selectedFolderStore.isRoom ? self.selectedFolderStore.id : null);
-
-  const isPrivateUpload = self.treeFoldersStore.isPrivacyFolder;
+  const toFolderId = folderId || target.folderId;
 
   if (self.uploaded) {
     self.files = self.files.filter((f) => f.action !== "upload" || f.error);
@@ -327,23 +320,28 @@ export function startUploadImpl(
 
   uploadFilesArray.forEach((index) => {
     const file = (uploadFiles as Record<string, TUploadBrowserFile>)[index];
+    const itemTarget = withItemUploadContext(target, file.uploadContext);
 
     const parts = file.name.split(".");
     const ext = parts.length > 1 ? `.${parts.pop()}` : "";
-    const needConvert = !isPrivateUpload && canConvert(ext);
+    const needConvert = !itemTarget.isPrivate && canConvert(ext);
 
     const newFile: TUploadFile = {
       file,
       uniqueId: uniqueid("download_row-key_"),
       fileId: null,
-      toFolderId: isAIRoom ? knowledgeId : file.parentFolderId,
+      toFolderId:
+        target.roomType === RoomsType.AIRoom
+          ? target.folderId
+          : file.parentFolderId,
+      target: itemTarget,
       action: "upload",
       error: null,
       fileInfo: null,
       cancel: false,
       needConvert,
       encrypted: file.encrypted,
-      encryptionRoomId,
+      encryptionRoomId: itemTarget.encryptionRoomId,
       percent: 0,
     };
 

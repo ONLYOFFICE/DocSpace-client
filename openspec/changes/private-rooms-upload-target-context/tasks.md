@@ -2,7 +2,7 @@
 
 ## 1. A fixed context in the upload pipeline
 
-- [ ] 1.1 Add `TUploadTarget` (`{ folderId, isPrivate, roomType, encryptionRoomId }`) to `packages/client/src/store/uploadDataStore/helpers.ts`, and store it on every `TUploadFile` that `startUploadImpl` (`start.helpers.ts`) creates (design D1, D2):
+- [x] 1.1 Add `TUploadTarget` (`{ folderId, isPrivate, roomType, encryptionRoomId }`) to `packages/client/src/store/uploadDataStore/helpers.ts`, and store it on every `TUploadFile` that `startUploadImpl` (`start.helpers.ts`) creates (design D1, D2):
   - `startUpload` accepts a target. Until task 2.2 makes it required, a caller that passes none gets the open folder's target, taken when it calls;
   - a per-file `uploadContext` (copy and move) wins for `isPrivate`, `roomType` and `moveSource`;
   - `needConvert` is decided from the target;

@@ -57,7 +57,9 @@ import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/Conf
 import type {
   TUploadBrowserFile,
   TUploadFile,
+  TUploadTarget,
 } from "./uploadDataStore/helpers";
+import { resolveOpenFolderTarget } from "./uploadDataStore/target.helpers";
 import {
   getActiveUploadCountForRoomImpl,
   getConversationPercentImpl,
@@ -596,11 +598,14 @@ class UploadDataStore {
     uploadData: TStartUploadData,
   ) => handleUploadConflictsImpl(this, t, toFolderId, uploadData);
 
+  resolveOpenFolderTarget = () => resolveOpenFolderTarget(this);
+
   startUpload = (
     uploadFiles: Record<string, TUploadBrowserFile> | unknown[],
     folderId: number | string | null,
     t: TTranslation,
-  ) => startUploadImpl(this, uploadFiles, folderId, t);
+    target?: TUploadTarget,
+  ) => startUploadImpl(this, uploadFiles, folderId, t, target);
 
   refreshFiles = (currentFile?: TUploadFile) =>
     refreshFilesImpl(this, currentFile);

@@ -29,8 +29,11 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import {
   createTestUploadDataStore,
   installWindowGlobals,
+  makeBrowserFile,
   makeUploadFile,
+  makeUploadTarget,
 } from "./testHarness";
+import { RoomsType } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 
 import {
@@ -40,7 +43,10 @@ import {
   retryQuotaFailedFilesImpl,
   retryUploadFilesImpl,
   setConflictDialogDataImpl,
+  startUploadImpl,
 } from "../start.helpers";
+import type { TUploadFile, TUploadTarget } from "../helpers";
+import type UploadDataStore from "../../UploadDataStore";
 
 const t = ((key: string) => key) as unknown as TTranslation;
 
@@ -211,5 +217,162 @@ describe("retryQuotaFailedFilesImpl", () => {
     retryQuotaFailedFilesImpl(store, t);
 
     expect(parallelUploading).not.toHaveBeenCalled();
+  });
+});
+
+const queueFiles = (
+  store: UploadDataStore,
+  files: File[],
+  target?: TUploadTarget,
+): TUploadFile[] => {
+  const handleUploadConflicts = vi.fn();
+  store.handleUploadConflicts = handleUploadConflicts as never;
+  startUploadImpl(store, files, null, t, target);
+  return handleUploadConflicts.mock.calls[0][2].allNewFiles;
+};
+
+const privateRoomTarget = makeUploadTarget({
+  folderId: 50,
+  isPrivate: true,
+  roomType: RoomsType.CustomRoom,
+  encryptionRoomId: 50,
+});
+
+describe("startUploadImpl - upload target", () => {
+  it("stores the target it was queued with on every item", () => {
+    const { store } = createTestUploadDataStore();
+    const files = [
+      makeBrowserFile("a.docx", 10, { parentFolderId: 50 }),
+      makeBrowserFile("b.docx", 10, { parentFolderId: 51 }),
+    ];
+
+    const items = queueFiles(store, files, privateRoomTarget);
+
+    expect(items.map((i) => i.target)).toEqual([
+      privateRoomTarget,
+      privateRoomTarget,
+    ]);
+    expect(items.map((i) => i.toFolderId)).toEqual([50, 51]);
+    expect(items.map((i) => i.encryptionRoomId)).toEqual([50, 50]);
+  });
+
+  it("takes the open folder's target when the caller passes none", () => {
+    const { store } = createTestUploadDataStore({
+      selectedFolderStore: {
+        id: 60,
+        isRoom: false,
+        roomType: null,
+        navigationPath: [{ id: 50, isRoom: true, private: true }],
+      },
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+
+    const [item] = queueFiles(store, [
+      makeBrowserFile("a.docx", 10, { parentFolderId: 60 }),
+    ]);
+
+    expect(item.target).toEqual({
+      folderId: 60,
+      isPrivate: true,
+      roomType: RoomsType.CustomRoom,
+      encryptionRoomId: 50,
+    });
+  });
+
+  it("leaves queued items unchanged when the selected folder changes or is cleared", () => {
+    const { store } = createTestUploadDataStore({
+      selectedFolderStore: { id: 50, isRoom: true, navigationPath: [] },
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+
+    const [item] = queueFiles(store, [
+      makeBrowserFile("a.docx", 10, { parentFolderId: 50 }),
+    ]);
+    const queued = { ...item.target };
+
+    Object.assign(store.selectedFolderStore, {
+      id: null,
+      isRoom: false,
+      navigationPath: [],
+    });
+    Object.assign(store.treeFoldersStore, { isPrivacyFolder: false });
+    expect(store.resolveOpenFolderTarget().isPrivate).toBe(false);
+
+    expect(item.target).toEqual(queued);
+    expect(item.target.isPrivate).toBe(true);
+    expect(item.encryptionRoomId).toBe(50);
+    expect(item.toFolderId).toBe(50);
+  });
+
+  it("offers no conversion for a private target", () => {
+    const { store } = createTestUploadDataStore({
+      filesSettingsStore: { canConvert: vi.fn(() => true) },
+    });
+
+    const [privateItem] = queueFiles(
+      store,
+      [makeBrowserFile("legacy.doc", 10)],
+      privateRoomTarget,
+    );
+    const [plainItem] = queueFiles(
+      store,
+      [makeBrowserFile("legacy.doc", 10)],
+      makeUploadTarget(),
+    );
+
+    expect(privateItem.needConvert).toBe(false);
+    expect(plainItem.needConvert).toBe(true);
+  });
+
+  it("lets a per-file upload context win for privacy and room type", () => {
+    const { store } = createTestUploadDataStore();
+    const moveSource = { fileId: 7, title: "a.docx" };
+    const copyOut = makeBrowserFile("a.docx", 10, {
+      parentFolderId: 80,
+      uploadContext: {
+        roomType: RoomsType.PublicRoom,
+        isPrivate: false,
+        moveSource,
+      },
+    });
+    const sameRoomCopy = makeBrowserFile("b.docx", 10, {
+      parentFolderId: 80,
+      uploadContext: { roomType: RoomsType.CustomRoom, isPrivate: true },
+    });
+
+    const [outItem, inItem] = queueFiles(
+      store,
+      [copyOut, sameRoomCopy],
+      makeUploadTarget({ folderId: 80, encryptionRoomId: 50 }),
+    );
+
+    expect(outItem.target).toEqual({
+      folderId: 80,
+      isPrivate: false,
+      roomType: RoomsType.PublicRoom,
+      encryptionRoomId: 50,
+    });
+    expect(outItem.file.uploadContext?.moveSource).toEqual(moveSource);
+    expect(inItem.target).toEqual({
+      folderId: 80,
+      isPrivate: true,
+      roomType: RoomsType.CustomRoom,
+      encryptionRoomId: 50,
+    });
+  });
+
+  it("sends every item of an AI agent's upload to its knowledge folder", () => {
+    const { store } = createTestUploadDataStore({
+      selectedFolderStore: { id: 70, isRoom: true, isAIRoom: true },
+      aiRoomStore: { knowledgeId: 71 },
+    });
+
+    const [item] = queueFiles(store, [
+      makeBrowserFile("a.docx", 10, { parentFolderId: 70 }),
+    ]);
+
+    expect(item.target.folderId).toBe(71);
+    expect(item.target.roomType).toBe(RoomsType.AIRoom);
+    expect(item.toFolderId).toBe(71);
   });
 });

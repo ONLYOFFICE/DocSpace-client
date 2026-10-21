@@ -71,6 +71,7 @@ exports[`UploadDataStore — public surface > exposes a stable set of public mem
   "removeFiles",
   "reportSkippedMembers",
   "reportedSkippedMemberIds",
+  "resolveOpenFolderTarget",
   "retryConvertFiles",
   "retryQuotaFailedFiles",
   "retryUploadFiles",

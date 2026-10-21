@@ -76,7 +76,14 @@ import {
   RoomsType,
   SortByFieldName,
 } from "@docspace/shared/enums";
-import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
+import {
+  CategoryType,
+  ROOMS_PROVIDER_TYPE_NAME,
+} from "@docspace/shared/constants";
+import {
+  getCategoryType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
@@ -180,6 +187,9 @@ const SectionFilterContent = ({
   // Form Filling Rooms only, so the room-type filter is not offered there.
   const isFormsSection = location.pathname.startsWith("/forms");
 
+  // Spec: private-rooms/sidebar-section, "Section filter"
+  const isPrivateSection = isPrivateRoomsRoute(location.pathname);
+
   // Trash is a single, centralized folder reached from several sections
   // (/files/trash, /rooms/trash, /forms/trash, ...). The "Room" filter only
   // makes sense for Trash opened from the Rooms section.
@@ -191,12 +201,17 @@ const SectionFilterContent = ({
     (searchArea) => {
       if (isFormsSection) return "forms";
 
+      if (isPrivateSection)
+        return getCategoryType(location) === CategoryType.PrivateArchive
+          ? "private/archived"
+          : "private";
+
       return searchArea === RoomSearchArea.Active ||
         searchArea === RoomSearchArea.Templates
         ? "rooms/shared"
         : "rooms/archived";
     },
-    [isFormsSection],
+    [isFormsSection, isPrivateSection, location],
   );
 
   const roomGroupsSearchArea = isFormsSection
@@ -1114,7 +1129,10 @@ const SectionFilterContent = ({
     });
 
     const showThirdPartyFilter =
-      connectedThirdParty.length > 0 && !isTemplatesFolder && !isFormsSection;
+      connectedThirdParty.length > 0 &&
+      !isTemplatesFolder &&
+      !isFormsSection &&
+      !isPrivateSection;
 
     const isLastTypeOptionsRooms = !showThirdPartyFilter && !tags?.length;
 
@@ -1414,7 +1432,8 @@ const SectionFilterContent = ({
 
       // The "Forms" section is already scoped to Form Filling Rooms — no
       // room-type filter is shown there.
-      if (!isFormsSection) filterOptions.push(...typeOptions);
+      if (!isFormsSection && !isPrivateSection)
+        filterOptions.push(...typeOptions);
 
       if (tags?.length > 0) {
         const tagsOptions = tags.map((tag) => ({
@@ -1539,6 +1558,7 @@ const SectionFilterContent = ({
     isPersonalRoom,
     isRooms,
     isFormsSection,
+    isPrivateSection,
     isAIAgentsFolder,
     isContactsPage,
     isRecentFolder,
@@ -1956,7 +1976,11 @@ const SectionFilterContent = ({
       roomGroups={roomGroups}
       onFilterByGroup={onFilterByGroup}
       currentGroupId={getPinnedGroupId() ? null : roomsFilter?.groupId}
-      withRoomGroups={(isRoomsFolder || isFormsFolder) && !getPinnedGroupId()}
+      withRoomGroups={
+        (isRoomsFolder || isFormsFolder) &&
+        !isPrivateSection &&
+        !getPinnedGroupId()
+      }
       isFormsSection={isFormsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}

@@ -39,6 +39,7 @@ import {
   encryptedFilesHandlers,
   filesSettingsHandler,
   privateRoomListHandler,
+  roomGroupsHandler,
   roomListHandler,
   roomMembersHandlers,
   rootHandler,
@@ -792,6 +793,89 @@ test.describe("Private section — info panel", () => {
     await expect(page.getByText("Alice Private")).toBeVisible({
       timeout: 15000,
     });
+  });
+});
+
+test.describe("Private section — filter", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT, { organizeRoomsGrouping: true }),
+      roomGroupsHandler(TEST_PORT),
+      /**
+       * Mirrors VirtualRoomsCommonController.GetRoomTagsInfo (HttpGet
+       * "tags"): the tag names of the rooms the caller can see.
+       */
+      http.get(apiAddress("files/tags"), () =>
+        Response.json({ response: ["Finance"] }),
+      ),
+      /**
+       * Mirrors ThirdpartyController.GetThirdPartyAccounts (HttpGet
+       * "thirdparty"): one Box account connected as room storage.
+       */
+      http.get(apiAddress("files/thirdparty"), () =>
+        Response.json({
+          response: [
+            {
+              corporate: false,
+              roomsStorage: true,
+              customer_title: "Box",
+              provider_id: 1,
+              provider_key: "Box",
+            },
+          ],
+        }),
+      ),
+      privateRoomListHandler(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+    );
+  });
+
+  const filterGroup = (page: Page, name: string) =>
+    page.getByTestId(`filter_block_item_${name}`);
+
+  const applyTagFilter = async (page: Page) => {
+    await filterGroup(page, "filter-tags")
+      .getByTestId("filter_tag_Finance")
+      .click();
+    await page.locator("#filter_apply-button").click();
+  };
+
+  test("Filter opened in the section", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await page.getByTestId("filter_icon_button").click();
+
+    await expect(filterGroup(page, "filter-owner")).toBeVisible();
+    await expect(filterGroup(page, "filter-tags")).toBeVisible();
+    await expect(filterGroup(page, "filter-type")).toHaveCount(0);
+    await expect(filterGroup(page, "filter-provider-type")).toHaveCount(0);
+    await expect(page.locator('[class*="rowGroupingRooms"]')).toHaveCount(0);
+
+    await applyTagFilter(page);
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/filter");
+    expect(new URL(page.url()).searchParams.get("tags")).toContain("Finance");
+  });
+
+  test("Filter opened in the section: Private archive", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/private/archived/filter?searchArea=Active`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await page.getByTestId("filter_icon_button").click();
+    await applyTagFilter(page);
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/archived/filter");
   });
 });
 

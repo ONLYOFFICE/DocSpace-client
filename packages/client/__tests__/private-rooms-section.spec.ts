@@ -1358,3 +1358,36 @@ test.describe("Private section — key prompt", () => {
     expect(createRequests).toEqual([]);
   });
 });
+
+test.describe("Private section — E2E rooms bookmarks", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      privateRoomListHandler(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+    );
+  });
+
+  test("Old bookmark", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/e2e-rooms`);
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/filter");
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+    await expect(page.locator("iframe")).toHaveCount(0);
+  });
+
+  test("Archive bookmark", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/e2e-rooms?section=archive`);
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/archived/filter");
+    await expect(navItem(page, "private-rooms-archive")).toHaveClass(isActive);
+  });
+});
+

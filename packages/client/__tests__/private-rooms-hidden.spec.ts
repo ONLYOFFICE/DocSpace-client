@@ -105,6 +105,30 @@ test.describe("Private rooms behind the localStorage flag", () => {
     await expect(privateRoomCard(page)).toHaveCount(0);
   });
 
+  test("Section not available without the flag", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.IsDefault));
+    await disablePrivateRooms(page);
+
+    await page.goto(`${baseUrl}${ROOMS_URL}`);
+    await expect(page.getByTestId("table-body")).toBeVisible();
+
+    await expect(page.locator('nav [data-item-id="private-rooms"]')).toHaveCount(
+      0,
+    );
+  });
+
+  test("Direct navigation without the flag", async ({ page, baseUrl }) => {
+    await disablePrivateRooms(page);
+
+    await page.goto(`${baseUrl}/e2e-rooms`);
+
+    await expect(page).toHaveURL(/\/dashboard/, { timeout: 15000 });
+  });
+
   test("Chooser with the flag", async ({ page, mockRequest, baseUrl }) => {
     mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.IsDefault));
 

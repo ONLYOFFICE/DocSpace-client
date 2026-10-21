@@ -45,15 +45,19 @@
  * Any non-empty value counts as "enabled" (presence-flag pattern), so
  * `"true"`, `"1"` or `"on"` all work.
  *
- * Gated surfaces (all of them behave exactly as before once the flag is set):
- *   - the Private room card in the create-room type chooser
- *     (`getCreateRoomTypes` in ./rooms.tsx),
- *   - the "e2e-rooms" app: sidebar item, `/e2e-rooms` route and the enable
- *     flow (`SRC_DIR/helpers/disabled-apps.ts`, `AppsStore.isEnabled`),
+ * Gated surfaces:
+ *   - the "e2e-rooms" app, which stands for the Private section of the
+ *     sidebar: the section and its `/private` routes, `/e2e-rooms` (a
+ *     redirect into the section) and the enable flow
+ *     (`SRC_DIR/helpers/disabled-apps.ts`,
+ *     `AppsStore.isPrivateRoomsSectionAvailable`),
  *   - the Keys management tab and its `profile/keys-management` routes.
  *
- * The flag is read on demand, but the routing table is built once per page
- * load, so flipping it requires a reload.
+ * Private rooms are created from the Private section only; the create-room
+ * chooser never offers them (`getCreateRoomTypes` in ./rooms.tsx).
+ *
+ * The flag is read on demand, but the routing table and the Private section
+ * are fixed once per page load, so flipping it requires a reload.
  */
 export const PRIVATE_ROOMS_FLAG_KEY = "privateRooms";
 

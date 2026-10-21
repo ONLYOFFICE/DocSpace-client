@@ -10,7 +10,6 @@ paths:
   - "packages/shared/api/privacy/**"
   - "packages/shared/utils/privateRooms.ts"
   - "packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/**"
-  - "packages/client/src/pages/E2eRooms/**"
   - "packages/client/src/components/EncryptionProviderWrapper.jsx"
   - "packages/client/src/helpers/encryptedFileCreation.ts"
   - "packages/client/src/store/filesStore/encryption.helpers.ts"

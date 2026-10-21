@@ -44,6 +44,7 @@ import {
 
 import { getClientActiveId } from "../articleNavigation";
 import {
+  getPrivateAddressOfE2eRoomsAddress,
   getRoomsAddressOfPrivateAddress,
   getSectionAddressCorrection,
   type TSectionDecision,
@@ -265,3 +266,14 @@ describe("Section decided before the folder is shown", () => {
     );
   });
 });
+
+describe("E2E rooms bookmarks", () => {
+  it.each([
+    ["", "/private/filter"],
+    ["?section=rooms", "/private/filter"],
+    ["?section=archive", "/private/archived/filter"],
+  ])("/e2e-rooms%s opens %s", (search, address) => {
+    expect(getPrivateAddressOfE2eRoomsAddress(search)).toBe(address);
+  });
+});
+

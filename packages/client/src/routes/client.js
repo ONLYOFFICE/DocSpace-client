@@ -50,6 +50,7 @@ import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 import ProtectedAppRoute from "../components/ProtectedAppRoute";
 import PrivateRoomsSectionRoute from "../components/PrivateRoomsSectionRoute";
+import E2eRoomsRedirect from "../components/PrivateRoomsSectionRoute/E2eRoomsRedirect";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
 import { contactsRoutes } from "./contacts";
@@ -803,23 +804,13 @@ const ClientRoutes = [
       },
       {
         path: "/e2e-rooms",
-        async lazy() {
-          const { E2eRooms } = await componentLoader(
-            () => import("SRC_DIR/pages/E2eRooms"),
-          );
-
-          const Component = () => (
-            <PrivateRoute>
-              <ProtectedAppRoute appId="e2e-rooms">
-                <ErrorBoundary>
-                  <E2eRooms />
-                </ErrorBoundary>
-              </ProtectedAppRoute>
-            </PrivateRoute>
-          );
-
-          return { Component };
-        },
+        element: (
+          <PrivateRoute>
+            <ProtectedAppRoute appId="e2e-rooms">
+              <E2eRoomsRedirect />
+            </ProtectedAppRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard",

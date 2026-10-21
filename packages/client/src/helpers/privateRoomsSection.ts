@@ -95,6 +95,12 @@ export const getPrivateAddressOfRoomsAddress = (
   return `${PRIVATE_LIST}${pathname.slice(ROOMS_LIST.length)}${search}`;
 };
 
+/** The Private section address an `/e2e-rooms` bookmark of the former app stands for. */
+export const getPrivateAddressOfE2eRoomsAddress = (search: string) =>
+  new URLSearchParams(search).get("section") === "archive"
+    ? `${PRIVATE_ARCHIVE}/filter`
+    : `${PRIVATE_LIST}/filter`;
+
 export type TSectionDecision = {
   pathname: string;
   search: string;

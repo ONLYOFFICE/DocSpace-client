@@ -158,7 +158,7 @@ export const useModuleLauncher = ({
           if (!isAppEnabled("e2e-rooms")) {
             await enable("e2e-rooms", true);
           }
-          navigate("/e2e-rooms");
+          navigate("/private/filter");
         } catch (err) {
           console.error("Failed to enable e2e-rooms", err);
           toastr.error(t("Common:SomethingWentWrong"));

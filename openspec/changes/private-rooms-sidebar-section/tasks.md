@@ -130,7 +130,7 @@
 
 ## 6. Replace the E2E rooms app
 
-- [ ] 6.1 Replace the E2E rooms app with the section:
+- [x] 6.1 Replace the E2E rooms app with the section:
   - turn `/e2e-rooms` into a redirect to `/private/filter` or `/private/archived/filter`, kept behind `ProtectedAppRoute`;
   - delete `packages/client/src/pages/E2eRooms`;
   - point `useModuleLauncher` at `/private/filter`;

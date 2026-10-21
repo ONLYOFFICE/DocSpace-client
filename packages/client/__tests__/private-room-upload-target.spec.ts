@@ -53,12 +53,18 @@ import {
 } from "@docspace/shared/__mocks__/e2e";
 import { isDSE3Format } from "@docspace/shared/services/encryption/streaming-encryption";
 import { http } from "msw";
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
 const ROOM_ID = 9470;
 const ROOM_TITLE = "Private Test Room";
+const ORDINARY_ROOM_ID = 9471;
+const ORDINARY_ROOM_TITLE = "Team Room";
+const REFUSAL =
+  /Open the private room to upload files to it|OpenPrivateRoomToUpload/;
+const FOLDER_REFUSAL =
+  /Folders cannot be uploaded to a private room|FolderUploadNotSupportedInPrivateRoom/;
 const TEST_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 const ROOMS_URL = "/rooms/shared/filter";
 /** One more than FilesSettingsStore.maxUploadFilesCount. */
@@ -300,5 +306,250 @@ test.describe("Private room — upload target fixed when the user starts the upl
       .toBe(1);
     expect(sent).toHaveLength(2);
     expectOnlyCiphertext(sent, filesHandle.current!);
+  });
+});
+
+type DropFile = { name: string; content: string };
+type DropEntry = DropFile | { dir: string; files: DropFile[] };
+
+/**
+ * Dispatches dragenter, dragover and drop carrying `entries` on the element.
+ * A real DataTransfer cannot hold a directory, so the events carry a stand-in
+ * with the items and entries the drop zone reads.
+ */
+const dropOn = (target: Locator, entries: DropEntry[]) =>
+  target.evaluate((element, list) => {
+    const toFile = (f: DropFile) =>
+      new File([f.content], f.name, { type: "text/plain" });
+    type DropItem = {
+      kind: string;
+      type: string;
+      getAsFile: () => File | null;
+      webkitGetAsEntry: () => unknown;
+    };
+    const items = list.map((entry): DropItem => {
+      if (!("dir" in entry)) {
+        const file = toFile(entry);
+        return {
+          kind: "file",
+          type: file.type,
+          getAsFile: () => file,
+          webkitGetAsEntry: () => null,
+        };
+      }
+      const children = entry.files.map((f) => ({
+        isFile: true,
+        isDirectory: false,
+        name: f.name,
+        fullPath: `/${entry.dir}/${f.name}`,
+        file: (resolve: (file: File) => void) => resolve(toFile(f)),
+      }));
+      let read = false;
+      const dirEntry = {
+        isFile: false,
+        isDirectory: true,
+        name: entry.dir,
+        fullPath: `/${entry.dir}`,
+        createReader: () => ({
+          readEntries: (resolve: (batch: unknown[]) => void) => {
+            const batch = read ? [] : children;
+            read = true;
+            resolve(batch);
+          },
+        }),
+      };
+      return {
+        kind: "file",
+        type: "",
+        getAsFile: () => null,
+        webkitGetAsEntry: () => dirEntry,
+      };
+    });
+    const dataTransfer = {
+      items,
+      files: [],
+      types: ["Files"],
+      dropEffect: "copy",
+      effectAllowed: "all",
+      getData: () => "",
+    };
+    for (const type of ["dragenter", "dragover", "drop"]) {
+      const event = new DragEvent(type, { bubbles: true, cancelable: true });
+      Object.defineProperty(event, "dataTransfer", { value: dataTransfer });
+      element.dispatchEvent(event);
+    }
+  }, entries);
+
+/** Records every write the client sends to a folder: sessions, upload checks, new folders. */
+const recordWritesTo = (page: Page, folderId: number) => {
+  const writes: string[] = [];
+  page.on("request", (req) => {
+    const { pathname } = new URL(req.url());
+    if (
+      req.method() !== "GET" &&
+      (pathname.includes(`/files/${folderId}/`) ||
+        pathname.endsWith(`/files/folder/${folderId}`))
+    ) {
+      writes.push(`${req.method()} ${pathname}`);
+    }
+  });
+  return writes;
+};
+
+/** Opens the Rooms list with a private room and an ordinary room in it. */
+const openRoomsListWithPrivateRoom = async (
+  page: Page,
+  mockRequest: WorkerFixture,
+  baseUrl: string,
+  view: "table" | "tile" = "table",
+) => {
+  const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+    current: null,
+  };
+  mockRequest.use(
+    ...encryptedFilesHandlers(TEST_PORT, {
+      roomId: ROOM_ID,
+      ownerId: TEST_USER_ID,
+      handle: filesHandle,
+    }),
+    privateRoomListHandler(TEST_PORT, {
+      roomId: ROOM_ID,
+      title: ROOM_TITLE,
+      ordinaryRooms: [{ roomId: ORDINARY_ROOM_ID, title: ORDINARY_ROOM_TITLE }],
+    }),
+    /**
+     * Mirrors UploadController.CheckUploadAsync
+     * (HttpPost "{folderId}/upload/check"): the submitted titles that already
+     * belong to a file in the folder; the ordinary room holds none.
+     */
+    http.post(
+      `${BASE_URL}:${TEST_PORT}/${API_PREFIX}/files/${ORDINARY_ROOM_ID}/upload/check`,
+      () =>
+        new Response(
+          JSON.stringify({ response: [], status: 0, statusCode: 200 }),
+          { headers: { "Content-Type": "application/json" } },
+        ),
+    ),
+  );
+  if (view === "tile") {
+    await page.addInitScript(() =>
+      window.localStorage.setItem("viewAs", "tile"),
+    );
+  }
+
+  await page.goto(`${baseUrl}${ROOMS_URL}`);
+  await expect(page.locator(`[data-title="${ROOM_TITLE}"]`)).toBeVisible({
+    timeout: 15000,
+  });
+  return filesHandle;
+};
+
+const toast = (page: Page, text: RegExp) =>
+  page.getByTestId("toast-content").filter({ hasText: text });
+
+test.describe("Private room — drops onto a private room from outside it", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Files dropped on a private room row", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await openRoomsListWithPrivateRoom(page, mockRequest, baseUrl);
+    const writes = recordWritesTo(page, ROOM_ID);
+
+    await dropOn(page.locator(`[data-title="${ROOM_TITLE}"]`), [
+      { name: "secret.txt", content: PLAINTEXT },
+    ]);
+
+    await expect(toast(page, REFUSAL)).toBeVisible({ timeout: 10000 });
+    expect(writes).toEqual([]);
+  });
+
+  test("Files dropped on a private room tile", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await openRoomsListWithPrivateRoom(page, mockRequest, baseUrl, "tile");
+    const writes = recordWritesTo(page, ROOM_ID);
+
+    await dropOn(page.locator(`[data-title="${ROOM_TITLE}"]`), [
+      { name: "secret.txt", content: PLAINTEXT },
+    ]);
+
+    await expect(toast(page, REFUSAL)).toBeVisible({ timeout: 10000 });
+    expect(writes).toEqual([]);
+  });
+
+  test("Folder tree dropped on a private room row", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await openRoomsListWithPrivateRoom(page, mockRequest, baseUrl);
+    const writes = recordWritesTo(page, ROOM_ID);
+
+    await dropOn(page.locator(`[data-title="${ROOM_TITLE}"]`), [
+      { dir: "reports", files: [{ name: "q3.txt", content: PLAINTEXT }] },
+    ]);
+
+    await expect(toast(page, REFUSAL)).toBeVisible({ timeout: 10000 });
+    await expect(toast(page, FOLDER_REFUSAL)).toBeHidden();
+    expect(writes).toEqual([]);
+  });
+
+  test("Convertible file dropped on a private room row", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await openRoomsListWithPrivateRoom(page, mockRequest, baseUrl);
+    const writes = recordWritesTo(page, ROOM_ID);
+
+    await dropOn(page.locator(`[data-title="${ROOM_TITLE}"]`), [
+      { name: "legacy.doc", content: PLAINTEXT },
+    ]);
+
+    await expect(toast(page, REFUSAL)).toBeVisible({ timeout: 10000 });
+    await expect(page.getByRole("dialog")).toBeHidden();
+    expect(writes).toEqual([]);
+  });
+
+  test("Ordinary room row", async ({ page, mockRequest, baseUrl }) => {
+    const filesHandle = await openRoomsListWithPrivateRoom(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const privateWrites = recordWritesTo(page, ROOM_ID);
+
+    await dropOn(page.locator(`[data-title="${ORDINARY_ROOM_TITLE}"]`), [
+      { name: "notes.txt", content: "team notes" },
+    ]);
+
+    await expect
+      .poll(
+        () =>
+          filesHandle.current!
+            .getSessions()
+            .filter((s) => s.folderId === ORDINARY_ROOM_ID && s.completed)
+            .length,
+        { timeout: 15000 },
+      )
+      .toBe(1);
+    const [session] = filesHandle.current!.getSessions();
+    expect(session).toMatchObject({ fileName: "notes.txt", encrypted: false });
+    expect(Buffer.from(session.chunks[0]).toString()).toBe("team notes");
+    await expect(toast(page, REFUSAL)).toBeHidden();
+    expect(privateWrites).toEqual([]);
   });
 });

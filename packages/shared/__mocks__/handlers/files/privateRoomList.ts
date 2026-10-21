@@ -42,6 +42,8 @@ export type PrivateRoomListOptions = {
   roomId: number;
   title?: string;
   ownerId?: string;
+  /** Rooms listed after the private one, with `private: false`. */
+  ordinaryRooms?: { roomId: number; title: string }[];
 };
 
 const okResponse = <T>(response: T): Response =>
@@ -90,7 +92,7 @@ export const privateRoomListHandler = (
     hasAvatar: false,
   };
 
-  const folder = {
+  const roomDto = (id: number, roomTitle: string, isPrivate: boolean) => ({
     parentId: 2002,
     filesCount: 0,
     foldersCount: 0,
@@ -106,17 +108,17 @@ export const privateRoomListHandler = (
     },
     pinned: false,
     roomType: 5,
-    private: true,
+    private: isPrivate,
     indexing: false,
     denyDownload: false,
     inRoom: true,
     usedSpace: 0,
     fileEntryType: 1,
-    id: opts.roomId,
+    id,
     rootFolderId: 2002,
     canShare: true,
     security,
-    title,
+    title: roomTitle,
     access: 0,
     shared: false,
     sharedForUser: false,
@@ -128,12 +130,19 @@ export const privateRoomListHandler = (
     rootFolderType: 14,
     parentRoomType: 14,
     updatedBy: createdBy,
-  };
+  });
+
+  const folders = [
+    roomDto(opts.roomId, title, true),
+    ...(opts.ordinaryRooms ?? []).map((room) =>
+      roomDto(room.roomId, room.title, false),
+    ),
+  ];
 
   const current = {
     parentId: 0,
     filesCount: 0,
-    foldersCount: 1,
+    foldersCount: folders.length,
     new: 0,
     mute: false,
     pinned: false,
@@ -160,13 +169,13 @@ export const privateRoomListHandler = (
   };
 
   const body = {
-    folders: [folder],
+    folders,
     files: [],
     current,
     pathParts: [{ id: 2002, title: "Rooms", folderType: 14 }],
     startIndex: 0,
-    total: 1,
-    count: 1,
+    total: folders.length,
+    count: folders.length,
     new: 0,
   };
 

@@ -93,7 +93,7 @@
   - a case "Pasted files after navigation" in `packages/client/src/store/__tests__/HotkeyStore.clipboard.test.ts`;
   - `UploadDataStore.moveSource.test.ts` and the copy-out cases of `packages/client/__tests__/encrypted-file-ui.spec.ts`, unchanged and green;
   - `pnpm run tsc` and `cd common/tests && npx vitest run test/locales.test.js`.
-- [ ] 2.3 Refuse drops onto a private room from outside it (design D3). In `packages/client/src/HOCs/withFileActions.js`, `onDrop` resolves the row's target before `createFoldersTree`:
+- [x] 2.3 Refuse drops onto a private room from outside it (design D3). In `packages/client/src/HOCs/withFileActions.js`, `onDrop` resolves the row's target before `createFoldersTree`:
   - a refused drop shows `toastr.warning(t("Common:OpenPrivateRoomToUpload"))`, resets the dragging state and sends nothing;
   - a failed lookup shows the request's error, as other failed requests do.
 

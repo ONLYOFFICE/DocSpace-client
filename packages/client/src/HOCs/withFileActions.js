@@ -42,6 +42,11 @@ import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { isMobile } from "react-device-detect";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
+import {
+  isDropRefused,
+  resolveDropTarget,
+} from "SRC_DIR/store/uploadDataStore/target.helpers";
+
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
     onContentFileSelect = (checked, file) => {
@@ -70,9 +75,10 @@ export default function withFileActions(WrappedFileItem) {
       setEnabledHotkeys(true);
     };
 
-    onDropZoneUpload = (files, uploadToFolder) => {
+    onDropZoneUpload = async (files) => {
       const {
         t,
+        item,
         dragging,
         setDragging,
         startUpload,
@@ -81,12 +87,18 @@ export default function withFileActions(WrappedFileItem) {
       } = this.props;
 
       const open = resolveOpenFolderTarget();
-      const target = uploadToFolder
-        ? { ...open, folderId: uploadToFolder }
-        : open;
       const dragged = dragging;
 
       dragging && setDragging(false);
+
+      const target = await resolveDropTarget(open, item).catch((err) => {
+        toastr.error(err, null, 0, true);
+        return null;
+      });
+      if (isDropRefused(open, target)) {
+        if (target) toastr.warning(t("Common:OpenPrivateRoomToUpload"));
+        return;
+      }
 
       createFoldersTree(t, files, target, dragged)
         .then((f) => {
@@ -103,18 +115,12 @@ export default function withFileActions(WrappedFileItem) {
         dragging,
         setDragging,
         isDisabledDropItem,
-        item,
         isRecentFolder,
       } = this.props;
-      const { fileExst, isFolder, id } = item;
 
       if (isTrashFolder || isRecentFolder || isDisabledDropItem)
         return dragging && setDragging(false);
-      if (!fileExst && isFolder) {
-        this.onDropZoneUpload(items, id);
-      } else {
-        this.onDropZoneUpload(items);
-      }
+      this.onDropZoneUpload(items);
     };
 
     onMouseDown = (e) => {

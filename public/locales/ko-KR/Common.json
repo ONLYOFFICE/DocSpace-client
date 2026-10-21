@@ -1537,6 +1537,7 @@
   "OpenKeysManagement": "키 관리 열기",
   "OpenLocation": "위치 열기",
   "OpenPortalBilling": "워크스페이스 결제로 이동",
+  "OpenPrivateRoomToUpload": "파일이 업로드되지 않았습니다. 파일을 업로드하려면 비공개 방을 여세요.",
   "OpenSavedDocument": "새로운 탭에서 저장 문서 열기",
   "OperationStopped": "작업이 중지되었습니다",
   "Or": "또는",

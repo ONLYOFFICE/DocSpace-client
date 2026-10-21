@@ -1537,6 +1537,7 @@
   "OpenKeysManagement": "Ouvrir la gestion des clés",
   "OpenLocation": "Ouvrir un emplacement",
   "OpenPortalBilling": "Accéder à la facturation de l'espace de travail",
+  "OpenPrivateRoomToUpload": "Les fichiers n'ont pas été téléversés. Ouvrez la salle privée pour y téléverser des fichiers.",
   "OpenSavedDocument": "Ouvrir le document enregistré dans un nouvel onglet",
   "OperationStopped": "L'opération a été arrêtée",
   "Or": "ou",

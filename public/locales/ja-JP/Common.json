@@ -1537,6 +1537,7 @@
   "OpenKeysManagement": "鍵の管理を開く",
   "OpenLocation": "場所を開く",
   "OpenPortalBilling": "ワークスペースの請求へ移動",
+  "OpenPrivateRoomToUpload": "ファイルはアップロードされませんでした。ファイルをアップロードするには、プライベートルームを開いてください。",
   "OpenSavedDocument": "保存されたファイルを新しいタブで開く",
   "OperationStopped": "操作が停止されました",
   "Or": "または",

@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI-gebruik wordt gefactureerd vanaf uw portemonnee-saldo",
   "EmptyAIAgentsNotActiveYetTitle": "AI-functies zijn nog niet actief",
   "EmptyAIAgentsSelectorDescription": "Maak een nieuwe agent om bestanden aan zijn kennisbank toe te voegen.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Agenten kunnen worden gemaakt zodra er in de instellingen een AI-provider is verbonden.",
   "EmptyAIAgentsTitle": "Maak uw AI-agent aan",
   "EmptyAIAgentsUserTitle": "Nog geen AI-agenten beschikbaar",
   "EmptyAIChatNotActiveYetAdminDescription": "Activeer {{aiChat}} om gesprekken in deze sectie te starten.",

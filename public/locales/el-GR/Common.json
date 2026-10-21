@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Η χρήση AI χρεώνεται από το υπόλοιπο του πορτοφολιού σας",
   "EmptyAIAgentsNotActiveYetTitle": "Οι λειτουργίες AI δεν είναι ακόμη ενεργές",
   "EmptyAIAgentsSelectorDescription": "Δημιουργήστε έναν νέο πράκτορα για να προσθέσετε αρχεία στη βάση γνώσης του.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Οι πράκτορες μπορούν να δημιουργηθούν μόλις συνδεθεί ένας πάροχος AI στις ρυθμίσεις.",
   "EmptyAIAgentsTitle": "Δημιουργήστε τον AI πράκτορά σας",
   "EmptyAIAgentsUserTitle": "Δεν υπάρχουν ακόμα διαθέσιμοι πράκτορες Τεχνητής Νοημοσύνης",
   "EmptyAIChatNotActiveYetAdminDescription": "Ενεργοποιήστε το {{aiChat}} για να ξεκινήσετε συνομιλίες σε αυτήν την ενότητα.",

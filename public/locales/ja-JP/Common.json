@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AIの利用料はウォレット残高から請求されます",
   "EmptyAIAgentsNotActiveYetTitle": "AI機能はまだ有効になっていません",
   "EmptyAIAgentsSelectorDescription": "新しいエージェントを作成して、そのナレッジベースにファイルを追加しましょう。",
+  "EmptyAIAgentsSelectorNoProviderDescription": "設定でAIプロバイダーを接続すると、エージェントを作成できるようになります。",
   "EmptyAIAgentsTitle": "AIエージェントを作成する",
   "EmptyAIAgentsUserTitle": "AIエージェントはまだありません",
   "EmptyAIChatNotActiveYetAdminDescription": "このセクションで会話を開始するには、{{aiChat}}を有効にしてください。",

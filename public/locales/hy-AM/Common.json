@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "ԱԲ-ի օգտագործումը գանձվում է ձեր դրամապանակի մնացորդից",
   "EmptyAIAgentsNotActiveYetTitle": "ԱԲ ֆունկցիաները դեռ ակտիվ չեն",
   "EmptyAIAgentsSelectorDescription": "Ստեղծեք նոր գործակալ՝ ֆայլերը նրա գիտելիքների բազային ավելացնելու համար:",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Գործակալներ կարելի է ստեղծել, երբ կարգավորումներում միացված լինի ԱԲ մատակարար:",
   "EmptyAIAgentsTitle": "Ստեղծեք ձեր ԱԲ գործակալը",
   "EmptyAIAgentsUserTitle": "Հասանելի ԱԲ գործակալներ դեռ չկան",
   "EmptyAIChatNotActiveYetAdminDescription": "Ակտիվացրեք {{aiChat}}-ը՝ այս բաժնում զրույցներ սկսելու համար։",

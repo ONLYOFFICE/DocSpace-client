@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Die KI-Nutzung wird von Ihrem Wallet-Guthaben abgerechnet",
   "EmptyAIAgentsNotActiveYetTitle": "KI-Funktionen sind noch nicht aktiv",
   "EmptyAIAgentsSelectorDescription": "Erstellen Sie einen neuen Agenten, um Dateien zu seiner Wissensdatenbank hinzuzufügen.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Agenten können erstellt werden, sobald in den Einstellungen ein KI-Anbieter verbunden ist.",
   "EmptyAIAgentsTitle": "Erstellen Sie Ihren KI-Agenten",
   "EmptyAIAgentsUserTitle": "Noch keine KI-Agenten verfügbar",
   "EmptyAIChatNotActiveYetAdminDescription": "Aktivieren Sie {{aiChat}}, um in diesem Bereich Unterhaltungen zu beginnen.",

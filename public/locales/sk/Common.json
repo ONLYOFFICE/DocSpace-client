@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Používanie AI sa účtuje zo zostatku vašej peňaženky",
   "EmptyAIAgentsNotActiveYetTitle": "AI funkcie ešte nie sú aktívne",
   "EmptyAIAgentsSelectorDescription": "Vytvorte nového agenta a pridajte súbory do jeho znalostnej bázy.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Agentov možno vytvárať po pripojení poskytovateľa AI v nastaveniach.",
   "EmptyAIAgentsTitle": "Vytvorte svojho AI agenta",
   "EmptyAIAgentsUserTitle": "Zatiaľ nie sú k dispozícii žiadni AI agenti",
   "EmptyAIChatNotActiveYetAdminDescription": "Aktivujte {{aiChat}}, aby ste mohli začať konverzácie v tejto sekcii.",

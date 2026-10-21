@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI kullanımı cüzdan bakiyenizden faturalandırılır",
   "EmptyAIAgentsNotActiveYetTitle": "AI özellikleri henüz etkin değil",
   "EmptyAIAgentsSelectorDescription": "Dosyaları bilgi tabanına eklemek için yeni bir ajan oluşturun.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Ayarlarda bir yapay zeka sağlayıcısı bağlandığında ajanlar oluşturulabilir.",
   "EmptyAIAgentsTitle": "AI aracınızı oluşturun",
   "EmptyAIAgentsUserTitle": "Henüz mevcut AI ajanı yok",
   "EmptyAIChatNotActiveYetAdminDescription": "Bu bölümde sohbetlere başlamak için {{aiChat}} özelliğini etkinleştirin.",

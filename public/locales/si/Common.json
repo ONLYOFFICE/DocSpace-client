@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI භාවිතය ඔබේ පසුම්බි ශේෂයෙන් බිල් කෙරේ",
   "EmptyAIAgentsNotActiveYetTitle": "AI අංග තවම ක්‍රියාත්මක නැත",
   "EmptyAIAgentsSelectorDescription": "ගොනු එහි දැනුම් පදනමට එක් කිරීමට නව නියෝජිතයෙකු සාදන්න.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "සැකසීම් තුළ AI සැපයුම්කරුවෙකු සම්බන්ධ කළ පසු නියෝජිතයන් සෑදිය හැක.",
   "EmptyAIAgentsTitle": "ඔබේ AI නියෝජිතයා සාදන්න",
   "EmptyAIAgentsUserTitle": "AI නියෝජිතයන් තවම නොමැත",
   "EmptyAIChatNotActiveYetAdminDescription": "මෙම කොටසේ සංවාද ආරම්භ කිරීමට {{aiChat}} ක්‍රියාත්මක කරන්න.",

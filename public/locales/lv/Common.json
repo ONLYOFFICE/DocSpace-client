@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "MI lietojums tiek iekasēts no jūsu maka bilances",
   "EmptyAIAgentsNotActiveYetTitle": "MI funkcijas vēl nav aktīvas",
   "EmptyAIAgentsSelectorDescription": "Izveidojiet jaunu aģentu, lai pievienotu failus tā zināšanu bāzei.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Aģentus var izveidot, kad iestatījumos ir pievienots MI pakalpojumu sniedzējs.",
   "EmptyAIAgentsTitle": "Izveidojiet savu MI aģentu",
   "EmptyAIAgentsUserTitle": "Vēl nav pieejamu MI aģentu",
   "EmptyAIChatNotActiveYetAdminDescription": "Aktivizējiet {{aiChat}}, lai sāktu sarunas šajā sadaļā.",

@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "ການນຳໃຊ້ AI ຖືກຄິດເງິນຈາກຍອດເງິນໃນກະເປົ໋າເງິນຂອງທ່ານ",
   "EmptyAIAgentsNotActiveYetTitle": "ຄຸນສົມບັດ AI ຍັງບໍ່ໄດ້ເປີດໃຊ້ງານເທື່ອ",
   "EmptyAIAgentsSelectorDescription": "ສ້າງຕົວແທນໃໝ່ເພື່ອເພີ່ມໄຟລ໌ເຂົ້າໃນຖານຄວາມຮູ້ຂອງມັນ.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "ສາມາດສ້າງຕົວແທນໄດ້ເມື່ອເຊື່ອມຕໍ່ຜູ້ໃຫ້ບໍລິການ AI ໃນການຕັ້ງຄ່າແລ້ວ.",
   "EmptyAIAgentsTitle": "ສ້າງຕົວແທນ AI ຂອງທ່ານ",
   "EmptyAIAgentsUserTitle": "ຍັງບໍ່ມີຕົວແທນ AI ທີ່ພ້ອມໃຊ້",
   "EmptyAIChatNotActiveYetAdminDescription": "ເປີດໃຊ້ງານ {{aiChat}} ເພື່ອເລີ່ມການສົນທະນາໃນພາກນີ້.",

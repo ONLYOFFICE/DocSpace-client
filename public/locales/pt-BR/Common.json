@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "O uso de IA é cobrado do saldo da sua carteira",
   "EmptyAIAgentsNotActiveYetTitle": "Os recursos de IA ainda não estão ativos",
   "EmptyAIAgentsSelectorDescription": "Crie um novo agente para adicionar arquivos à base de conhecimento dele.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "É possível criar agentes depois de conectar um provedor de IA nas configurações.",
   "EmptyAIAgentsTitle": "Crie seu agente de IA",
   "EmptyAIAgentsUserTitle": "Nenhum agente de IA disponível ainda",
   "EmptyAIChatNotActiveYetAdminDescription": "Ative {{aiChat}} para iniciar conversas nesta seção.",

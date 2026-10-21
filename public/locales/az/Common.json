@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI istifadəsi cüzdan balansınızdan hesablanır",
   "EmptyAIAgentsNotActiveYetTitle": "AI funksiyaları hələ aktiv deyil",
   "EmptyAIAgentsSelectorDescription": "Faylları bilik bazasına əlavə etmək üçün yeni agent yaradın.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "AI provayderi parametrlərdə qoşulduqdan sonra agentlər yaradıla bilər.",
   "EmptyAIAgentsTitle": "Öz AI agentinizi yaradın",
   "EmptyAIAgentsUserTitle": "Hələ heç bir AI agenti mövcud deyil",
   "EmptyAIChatNotActiveYetAdminDescription": "Bu bölmədə söhbətlərə başlamaq üçün {{aiChat}} aktivləşdirin.",

@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI usage is billed from your wallet balance",
   "EmptyAIAgentsNotActiveYetTitle": "AI agents & tools aren’t active yet",
   "EmptyAIAgentsSelectorDescription": "Create a new agent to add files to its knowledge base.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Agents can be created once an AI provider is connected in the settings.",
   "EmptyAIAgentsTitle": "Create your AI agent",
   "EmptyAIAgentsUserTitle": "No AI agents available yet",
   "EmptyAIChatNotActiveYetAdminDescription": "Activate {{aiChat}} to start conversations in this section.",

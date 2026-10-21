@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI:n käyttö veloitetaan lompakkosi saldosta",
   "EmptyAIAgentsNotActiveYetTitle": "AI-ominaisuudet eivät ole vielä aktiivisia",
   "EmptyAIAgentsSelectorDescription": "Luo uusi agentti lisätäksesi tiedostoja sen tietokantaan.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Agentteja voi luoda, kun asetuksissa on yhdistetty tekoälypalveluntarjoaja.",
   "EmptyAIAgentsTitle": "Luo oma AI-agenttisi",
   "EmptyAIAgentsUserTitle": "Ei vielä saatavilla olevia AI-agentteja",
   "EmptyAIChatNotActiveYetAdminDescription": "Aktivoi {{aiChat}}, jotta voit aloittaa keskustelut tässä osiossa.",

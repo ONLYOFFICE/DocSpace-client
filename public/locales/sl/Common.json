@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Uporaba umetne inteligence se obračuna iz stanja vaše denarnice",
   "EmptyAIAgentsNotActiveYetTitle": "Funkcije umetne inteligence še niso aktivne",
   "EmptyAIAgentsSelectorDescription": "Ustvarite novega agenta, da v njegovo zbirko znanja dodate datoteke.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Agente lahko ustvarite, ko je v nastavitvah povezan ponudnik AI.",
   "EmptyAIAgentsTitle": "Ustvarite svojega AI agenta",
   "EmptyAIAgentsUserTitle": "Na voljo še ni nobenih AI agentov",
   "EmptyAIChatNotActiveYetAdminDescription": "Aktivirajte {{aiChat}}, da začnete pogovore v tem razdelku.",

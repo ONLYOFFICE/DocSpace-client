@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Коришћење АИ се наплаћује из стања вашег новчаника",
   "EmptyAIAgentsNotActiveYetTitle": "АИ функције још нису активне",
   "EmptyAIAgentsSelectorDescription": "Креирајте новог агента да бисте додали датотеке у његову базу знања.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Агенти могу да се креирају када се у подешавањима повеже АИ провајдер.",
   "EmptyAIAgentsTitle": "Направите свог АИ агента",
   "EmptyAIAgentsUserTitle": "Још нема доступних АИ агената",
   "EmptyAIChatNotActiveYetAdminDescription": "Активирајте {{aiChat}} да бисте започели разговоре у овом одељку.",

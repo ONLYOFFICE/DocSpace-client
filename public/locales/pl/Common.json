@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Korzystanie z AI jest rozliczane z salda Twojego portfela",
   "EmptyAIAgentsNotActiveYetTitle": "Funkcje AI nie są jeszcze aktywne",
   "EmptyAIAgentsSelectorDescription": "Utwórz nowego agenta, aby dodać pliki do jego bazy wiedzy.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Agentów można tworzyć po połączeniu dostawcy AI w ustawieniach.",
   "EmptyAIAgentsTitle": "Stwórz swojego agenta AI",
   "EmptyAIAgentsUserTitle": "Brak dostępnych agentów AI",
   "EmptyAIChatNotActiveYetAdminDescription": "Aktywuj {{aiChat}}, aby rozpocząć rozmowy w tej sekcji.",

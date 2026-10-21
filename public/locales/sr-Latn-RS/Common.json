@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Korišćenje AI se naplaćuje sa salda vašeg novčanika",
   "EmptyAIAgentsNotActiveYetTitle": "AI funkcije još uvek nisu aktivne",
   "EmptyAIAgentsSelectorDescription": "Kreirajte novog agenta da biste dodali datoteke u njegovu bazu znanja.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "Agenti mogu da se kreiraju kada se u podešavanjima poveže AI provajder.",
   "EmptyAIAgentsTitle": "Napravite svog AI agenta",
   "EmptyAIAgentsUserTitle": "Još nema dostupnih AI agenata",
   "EmptyAIChatNotActiveYetAdminDescription": "Aktivirajte {{aiChat}} da biste započeli razgovore u ovom odeljku.",

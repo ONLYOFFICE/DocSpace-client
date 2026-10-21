@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI 사용량은 지갑 잔액에서 청구됩니다",
   "EmptyAIAgentsNotActiveYetTitle": "AI 기능이 아직 활성화되지 않았습니다",
   "EmptyAIAgentsSelectorDescription": "새 에이전트를 만들어 해당 지식 기반에 파일을 추가하세요.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "설정에서 AI 공급자를 연결하면 에이전트를 만들 수 있습니다.",
   "EmptyAIAgentsTitle": "AI 에이전트 만들기",
   "EmptyAIAgentsUserTitle": "아직 사용 가능한 AI 에이전트가 없습니다",
   "EmptyAIChatNotActiveYetAdminDescription": "이 섹션에서 대화를 시작하려면 {{aiChat}}을 활성화하세요.",

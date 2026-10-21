@@ -776,6 +776,7 @@
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "يتم احتساب رسوم استخدام الذكاء الاصطناعي من رصيد محفظتك",
   "EmptyAIAgentsNotActiveYetTitle": "ميزات الذكاء الاصطناعي غير مفعّلة بعد",
   "EmptyAIAgentsSelectorDescription": "أنشئ وكيلاً جديدًا لإضافة الملفات إلى قاعدة معرفته.",
+  "EmptyAIAgentsSelectorNoProviderDescription": "يمكن إنشاء الوكلاء بعد ربط مزوّد ذكاء اصطناعي في الإعدادات.",
   "EmptyAIAgentsTitle": "أنشئ وكيل الذكاء الاصطناعي الخاص بك",
   "EmptyAIAgentsUserTitle": "لا يوجد وكلاء ذكاء اصطناعي متاحون بعد",
   "EmptyAIChatNotActiveYetAdminDescription": "قم بتفعيل {{aiChat}} لبدء المحادثات في هذا القسم.",

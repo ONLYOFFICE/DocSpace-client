@@ -96,6 +96,7 @@ import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import type { IProfileMenuItemClient } from "SRC_DIR/helpers/plugins/types";
 import i18n from "SRC_DIR/i18n";
 
+import { clearPendingTours } from "./TourStore";
 import type ClientLoadingStore from "./ClientLoadingStore";
 import type InfoPanelStore from "./InfoPanelStore";
 import type PluginStore from "./PluginStore";
@@ -322,11 +323,11 @@ class ProfileActionsStore {
 
     this.setStateLiveChat(isShow);
 
-    // Only the closing half talks to the widget: the flag above is what puts
-    // the app's own Support button on the page, while the vendor's launcher
-    // stays hidden either way. Switching live chat off has to take an open
-    // chat window down with it.
-    if (!isShow) zendeskAPI.addChanges("webWidget", "hide");
+    // The widget's own launcher is the way into the chat, so the switch shows
+    // and hides the widget as a whole. The first switch-on is what loads the
+    // script (ui-kit's Zendesk, off the flag above), and the command waits in
+    // the queue until it has; the launcher is on screen by default anyway.
+    zendeskAPI.addChanges("messenger", isShow ? "show" : "hide");
 
     toastr.success(isShow ? t("Common:LiveChatOn") : t("Common:LiveChatOff"));
   };
@@ -376,6 +377,7 @@ class ProfileActionsStore {
   onLogoutClick = async (t: TTranslationFn) => {
     try {
       const ssoLogoutUrl = await this.authStore.logout(false);
+      clearPendingTours();
       window.location.replace(
         combineUrl(window.ClientConfig?.proxy?.url, ssoLogoutUrl || "/login"),
       );

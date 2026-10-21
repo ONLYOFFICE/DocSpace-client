@@ -880,7 +880,7 @@ test.describe("AI services page", () => {
     await page.goto(`${baseUrl}${AI_ROUTE}`);
 
     await expect(
-      page.getByText("Enable AI features", { exact: true }),
+      page.getByText("Enable AI agents & tools", { exact: true }),
     ).toBeVisible(FIRST_RENDER);
     await expect(aiToggle(page)).toHaveAttribute("aria-checked", "false");
     await expect(page.getByText("$1.50", { exact: true })).toBeVisible();
@@ -944,7 +944,7 @@ test.describe("AI services page", () => {
 
     await expect(
       page.getByText(
-        "Your credits are running low. Add more credits to avoid interruptions to AI features.",
+        "Your credits are running low. Add more credits to avoid interruptions to AI agents & tools.",
       ),
     ).toBeVisible(FIRST_RENDER);
     await expect(page.getByText("Available credits: $0.50")).toBeVisible();
@@ -1019,8 +1019,8 @@ test.describe("AI search page", () => {
     await expect(toggleSwitch(searchToggle(page))).toBeVisible(FIRST_RENDER);
     await toggleSwitch(searchToggle(page)).click();
 
-    await expect(page.getByText("Activate AI features")).toBeVisible();
-    await expect(page.getByText("AI Search requires AI features.")).toBeVisible();
+    await expect(page.getByText("Activate AI agents & tools")).toBeVisible();
+    await expect(page.getByText("AI Search requires AI agents & tools.")).toBeVisible();
     await expect(activateButton(page)).toHaveText("Activate");
     expect(changes).toHaveLength(0);
 

@@ -98,11 +98,18 @@ type ClientArticleSidebarProps = FolderIds & {
   // former Rooms/Templates submenu (and the Use template quick action).
   canUseTemplates?: boolean;
   isTemplatesFolderRoot?: boolean;
+  isDocumentsFolder?: boolean;
   isNavLoading?: boolean;
   // The portal-wide AI switch (Settings -> Integration -> AI services). With it
   // off there is no AI in the portal at all, so the AI Agents app is dropped
   // from the catalog rather than left pointing at a section that cannot work.
   aiServicesEnabled?: boolean;
+  // Settings -> Apps (standalone only): a switched-off app is not on offer, so
+  // its section is left out of the sidebar altogether.
+  roomsInstalled?: boolean;
+  formsInstalled?: boolean;
+  agentsInstalled?: boolean;
+  ensureAppsLoaded?: () => void;
   onFolderNavigate: () => void;
 };
 
@@ -112,8 +119,13 @@ const ClientArticleSidebar = ({
   isVisitor,
   canUseTemplates,
   isTemplatesFolderRoot,
+  isDocumentsFolder,
   isNavLoading,
   aiServicesEnabled = true,
+  roomsInstalled = true,
+  formsInstalled = true,
+  agentsInstalled = true,
+  ensureAppsLoaded,
   onFolderNavigate,
   ...folderIds
 }: ClientArticleSidebarProps) => {
@@ -129,6 +141,10 @@ const ClientArticleSidebar = ({
   onFolderNavigateRef.current = onFolderNavigate;
 
   const aiChatStore = useAiChatStoreOptional();
+
+  React.useEffect(() => {
+    ensureAppsLoaded?.();
+  }, [ensureAppsLoaded]);
 
   // Every sidebar entry is described by the URL it opens, so the same target
   // can be rendered as a real <a href> (Ctrl/Cmd-click and "Open link in new
@@ -200,8 +216,15 @@ const ClientArticleSidebar = ({
         folderIds,
         location.search,
         isTemplatesFolderRoot,
+        isDocumentsFolder,
       ),
-    [location.pathname, location.search, folderIds, isTemplatesFolderRoot],
+    [
+      location.pathname,
+      location.search,
+      folderIds,
+      isTemplatesFolderRoot,
+      isDocumentsFolder,
+    ],
   );
 
   const groups = React.useMemo<NavMenuGroup[]>(() => {
@@ -342,7 +365,7 @@ const ClientArticleSidebar = ({
       });
     }
 
-    if (roomsFolder) {
+    if (roomsFolder && roomsInstalled) {
       mainItems.push({
         ...navItem(roomsFolder),
         ...sectionBadge(panelFolderId(roomsFolder), newCount(roomsFolder)),
@@ -420,7 +443,7 @@ const ClientArticleSidebar = ({
     // The backend serves them via `searchArea=Forms` (they are excluded from the
     // Active rooms listing), so the item points at the dedicated /forms route
     // scoped to that search area.
-    if (roomsFolder) {
+    if (roomsFolder && formsInstalled) {
       mainItems.push({
         id: "forms",
         label: t("Common:Forms"),
@@ -493,7 +516,7 @@ const ClientArticleSidebar = ({
     // sidebar ids keep them distinct from the My Documents entries.
     // The folder is served whether or not the portal has AI switched on, so
     // the switch is asked here as well: with AI off the app is not on offer.
-    if (aiAgentsFolder && aiServicesEnabled) {
+    if (aiAgentsFolder && aiServicesEnabled && agentsInstalled) {
       const agentChildren: NavSubItem[] = [];
       if (recentFolder)
         agentChildren.push(
@@ -571,6 +594,9 @@ const ClientArticleSidebar = ({
     isVisitor,
     canUseTemplates,
     aiServicesEnabled,
+    roomsInstalled,
+    formsInstalled,
+    agentsInstalled,
     recentFolderId,
     favoritesFolderId,
     recycleBinFolderId,
@@ -595,6 +621,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
     filesStore,
     clientLoadingStore,
     settingsStore,
+    appsStore,
   }) => ({
     userId: userStore.user?.id,
     treeFolders: treeFoldersStore.treeFolders,
@@ -610,7 +637,12 @@ const ClientArticleSidebarConnected = inject<TStore>(
     // Matches Home's canCreateRooms — room admins and admins can use templates.
     canUseTemplates: authStore.isAdmin || authStore.isRoomAdmin,
     isTemplatesFolderRoot: treeFoldersStore.isTemplatesFolderRoot,
+    isDocumentsFolder: treeFoldersStore.isDocumentsFolder,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
+    roomsInstalled: appsStore.isInstalled("ai-rooms"),
+    formsInstalled: appsStore.isInstalled("ai-forms"),
+    agentsInstalled: appsStore.isInstalled("ai-agents"),
+    ensureAppsLoaded: appsStore.ensureLoaded,
     // Same signal the old article used to show <ArticleFolderLoader />.
     isNavLoading: clientLoadingStore.showArticleLoader,
     onFolderNavigate: () => {

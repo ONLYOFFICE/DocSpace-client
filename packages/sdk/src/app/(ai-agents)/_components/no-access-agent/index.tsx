@@ -97,8 +97,7 @@ const NoAccessAgent = () => {
   return (
     <EmptyView
       title={t("Common:NoAccessAIAgentTitle", {
-        aiAgent: t("Common:AIAgent", { defaultValue: "AI Agent" }),
-        defaultValue: "You don't have access to this {{aiAgent}}",
+        defaultValue: "You don't have access to this AI agent",
       })}
       description={t("Common:AIAgentAccessRedirectNote", {
         sectionName: t("Common:AIAgents", { defaultValue: "AI Agents" }),

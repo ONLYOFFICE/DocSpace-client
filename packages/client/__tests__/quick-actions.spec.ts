@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { Page } from "@playwright/test";
+import { FolderType, RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 import {
   settingsHandler,
   TypeSettings,
@@ -42,6 +44,11 @@ import {
   TypeRoomList,
   filesSettingsHandler,
   showQuickActionsHandler,
+  rootHandler,
+  myDocumentsHandler,
+  myHandler,
+  fileSharedUsersHandler,
+  roomContentHandler,
 } from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
@@ -168,5 +175,75 @@ test.describe("Quick actions visibility", () => {
     await toggle.getByTestId("toggle-button-container").click();
 
     await expect(toggle).toHaveAttribute("aria-checked", "true");
+  });
+});
+
+// A form filling room accepts PDF forms only. It is normally opened under
+// `/forms/{id}`, but the same room is reachable under `/rooms/shared/{id}`
+// too, and there the banner used to fall back to the regular file tiles: the
+// Spreadsheet tile opened the editor, which the server refused with "The file
+// cannot be uploaded to this room" (production report, 4.0.0).
+test.describe("Quick actions in a form filling room", () => {
+  const ROOM_ID = 33;
+  const ROOM_FILE_ID = 200;
+  const ROOM_CONTENT_URL = `/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`;
+
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault),
+      myHandler(TEST_PORT, true),
+      myDocumentsHandler(TEST_PORT, true),
+      fileSharedUsersHandler(TEST_PORT),
+    );
+  });
+
+  const expectFormTilesOnly = async (page: Page) => {
+    await expect(page.getByTestId(BANNER)).toBeVisible();
+    await expect(page.getByTestId("quick-blank-pdf-form")).toBeVisible();
+
+    for (const tile of ["quick-docx", "quick-xlsx", "quick-pptx"]) {
+      await expect(page.getByTestId(tile)).toHaveCount(0);
+    }
+  };
+
+  test("offers only PDF forms in the room opened from the Rooms URL", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // must be registered after myDocumentsHandler: its `files/:id` pattern
+    // would otherwise resolve the room content request.
+    mockRequest.use(
+      roomContentHandler(TEST_PORT, ROOM_ID, ROOM_FILE_ID, {
+        roomType: RoomsType.FormRoom,
+      }),
+    );
+
+    await page.goto(`${baseUrl}${ROOM_CONTENT_URL}`);
+
+    await expectFormTilesOnly(page);
+  });
+
+  test("offers only PDF forms in a subfolder of the room", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // A subfolder carries no roomType of its own, only the parent's type.
+    mockRequest.use(
+      roomContentHandler(TEST_PORT, ROOM_ID, ROOM_FILE_ID, {
+        isRoom: false,
+        roomType: null,
+        parentRoomType: FolderType.FormRoom,
+      }),
+    );
+
+    await page.goto(`${baseUrl}${ROOM_CONTENT_URL}`);
+
+    await expectFormTilesOnly(page);
   });
 });

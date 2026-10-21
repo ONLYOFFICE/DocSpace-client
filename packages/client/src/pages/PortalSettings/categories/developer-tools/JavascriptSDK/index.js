@@ -136,7 +136,7 @@ const PortalIntegration = (props) => {
   ];
 
   useEffect(() => {
-    if (tReady) setDocumentTitle(t("JavascriptSdk"));
+    if (tReady) setDocumentTitle(t("Settings:EmbedSDK"));
   }, [tReady]);
 
   return (
@@ -192,6 +192,7 @@ export default inject(({ settingsStore }) => {
 })(
   withTranslation([
     "JavascriptSdk",
+    "Settings",
     "Files",
     "CreateEditRoomDialog",
     "Common",

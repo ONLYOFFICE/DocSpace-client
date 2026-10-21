@@ -50,4 +50,7 @@ export type RoomTypeProps = {
   isTemplate?: boolean;
   isTemplateRoom?: boolean;
   isFormSection?: boolean;
+  // Opens the OForms template gallery instead of a room type; the picked
+  // template becomes the first form of a new form space.
+  isTemplateGallery?: boolean;
 };

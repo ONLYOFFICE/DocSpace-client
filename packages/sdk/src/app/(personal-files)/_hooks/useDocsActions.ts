@@ -39,6 +39,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import {
+  createFile,
   createFolder,
   startUploadSession,
   uploadChunkParallel,
@@ -46,6 +47,7 @@ import {
   checkIsFileExist,
 } from "@docspace/shared/api/files";
 import { ConflictResolveType } from "@docspace/shared/enums";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { createChunks, runWithConcurrency } from "@onlyoffice/apps-ui-kit/uploader";
 
@@ -98,18 +100,6 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     filesSettings?.openEditorInSameTab ??
     true;
 
-  const navigateToCreate = useCallback(
-    (folderId: number | string, fileTitle: string) => {
-      openDocEditor({
-        parentId: folderId,
-        fileTitle,
-        openInSameTab,
-        frameConfig: sdkConfig,
-      });
-    },
-    [openInSameTab, sdkConfig],
-  );
-
   const inputFilesRef = useRef<HTMLInputElement | null>(null);
   const inputFolderRef = useRef<HTMLInputElement | null>(null);
 
@@ -127,6 +117,37 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [dialogType, setDialogType] = useState<CreateFileDialogType>("folder");
   const [isCreating, setIsCreating] = useState(false);
+
+  const navigateToCreate = useCallback(
+    (folderId: number | string, fileTitle: string) => {
+      if (sdkConfig?.events?.onEditorOpen) {
+        setIsCreating(true);
+        createFile(folderId, fileTitle)
+          .then((file) => {
+            frameCallEvent({
+              event: "onEditorOpen",
+              data: { ...file, action: "edit" },
+            });
+            router.refresh();
+          })
+          .catch((error: unknown) => {
+            toastr.error(
+              error instanceof Error ? error.message : String(error),
+            );
+          })
+          .finally(() => setIsCreating(false));
+        return;
+      }
+
+      openDocEditor({
+        parentId: folderId,
+        fileTitle,
+        openInSameTab,
+        frameConfig: sdkConfig,
+      });
+    },
+    [openInSameTab, sdkConfig, router],
+  );
 
   useEffect(() => {
     return () => {

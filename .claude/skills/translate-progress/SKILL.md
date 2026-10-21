@@ -79,4 +79,4 @@ If every language reports `Miss` = 0, print: **All translations complete.**
 
 ## Out of scope
 
-ui-kit's `locales/` are not measured by `translation-stats.js` and not covered by the locales tests — ui-kit is a separate repository consumed here as a prebuilt tarball, and its gaps must be fixed in `docspace-ui-kit-react`. To check them, compare `locales/en/*.json` against the other language folders inside that repository.
+ui-kit's `locales/` are not measured by `translation-stats.js` and not covered by the locales tests — ui-kit is a separate repository consumed here as a published npm package, and its gaps must be fixed in `docspace-ui-kit-react`. To check them, compare `locales/en/*.json` against the other language folders inside that repository.

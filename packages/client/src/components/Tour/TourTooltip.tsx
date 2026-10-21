@@ -51,6 +51,7 @@ export default function TourTooltip({
   size,
   backProps,
   closeProps,
+  controls,
   primaryProps,
   tooltipProps,
 }: TooltipRenderProps) {
@@ -72,7 +73,13 @@ export default function TourTooltip({
       onClick={stopPropagation}
       onMouseDown={stopPropagation}
     >
-      <button type="button" className={styles.close} {...closeProps}>
+      <button
+        type="button"
+        className={styles.close}
+        {...closeProps}
+        // Past the last step: joyride's own close advances one instead.
+        onClick={() => controls.go(size)}
+      >
         <ReactSVG src={CrossReactSvgUrl} />
       </button>
 

@@ -9,7 +9,7 @@ paths:
 
 Rules below are enforced by `common/tests` suites (blocking pre-push gate) and
 Biome plugins, but are invisible until the push fails. ui-kit is **not** in
-scope: it ships as a prebuilt tarball from `docspace-ui-kit-react` and is not
+scope: it ships as an npm package built in `docspace-ui-kit-react` and is not
 checked out here, so its own checks run in that repository.
 
 ## No hardcoded hex colors — anywhere (colors.test.js)
@@ -145,6 +145,5 @@ with the change.
 
 ## Advisory-only tools (not gated)
 
-`pnpm check-circular` (madge) and `fallow` / `fallow:audit` (dead code,
-unused exports; config in `.fallowrc.json`) run manually — useful before
-large refactors, but nothing in lefthook/CI enforces them.
+`pnpm check-circular` (madge) runs manually — useful before large
+refactors, but nothing in lefthook/CI enforces it.

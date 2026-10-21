@@ -23,7 +23,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install PNPM
-RUN npm install -g pnpm@12.4.1
+RUN npm install -g pnpm@12.11.2
 
 WORKDIR /app
 
@@ -31,18 +31,10 @@ WORKDIR /app
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
 # Copy package files first for better layer caching
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
-
-# ui-kit and ai-chat ship as prebuilt tarballs at the repo root; every app's
-# `file:../../*.tgz` dependency resolves against these, so they must be present
-# before `pnpm install --frozen-lockfile` runs.
-COPY *.tgz ./
-
-# `--frozen-lockfile` installs every package the lockfile names, not just the
-# ones the workspace projects present in this image depend on. Two of them are
-# tarballs under packages/client, so they have to be here even though this image
-# never builds the client.
-COPY packages/client/*.tgz ./packages/client/
+# `*.tgz` is optional: ui-kit and ai-chat come from npm, but a locally packed
+# tarball at the repo root can be referenced as `file:../../<name>.tgz` for
+# local development. A glob matching nothing is fine next to real sources.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
 
 # Copy the source code with correct directory structure
 COPY common/tests/package-lock.json ./common/tests/package-lock.json

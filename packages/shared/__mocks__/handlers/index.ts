@@ -42,6 +42,7 @@ import { portalHandlers } from "./portal";
 import { filesHandlers } from "./files";
 import { staticsHandlers } from "./statics";
 import { aiHandlers } from "./ai";
+import { appsHandlers } from "./apps";
 import { roomsHandlers } from "./rooms";
 import { shareHandlers } from "./share";
 import { apisystemHandlers } from "./apisystem";
@@ -60,6 +61,7 @@ export * from "./portal";
 export * from "./files";
 export * from "./statics";
 export * from "./ai";
+export * from "./apps";
 export * from "./rooms";
 export * from "./share";
 export * from "./apisystem";
@@ -67,6 +69,7 @@ export * from "./editor";
 export * from "./notification";
 export * from "./privacyroom";
 export * from "./docsconnect";
+export * from "./oforms";
 
 export const allHandlers = (port: string) => [
   ...settingsHandlers(port),
@@ -78,6 +81,9 @@ export const allHandlers = (port: string) => [
   ...filesHandlers(port),
   ...staticsHandlers(),
   ...aiHandlers(port),
+  // Without it the test server answers `GET apps` with index.html, the list
+  // reads as empty, and a standalone portal treats every app as switched off.
+  ...appsHandlers(port),
   ...roomsHandlers(port),
   ...shareHandlers(port),
   ...apisystemHandlers(port),

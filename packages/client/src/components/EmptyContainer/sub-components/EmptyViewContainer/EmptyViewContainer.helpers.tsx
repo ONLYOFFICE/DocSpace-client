@@ -51,6 +51,8 @@ import CreatePDFFormIcon from "PUBLIC_DIR/images/emptyview/create.pdf.form.svg";
 import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spreadsheet.svg";
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
+import CreateFromTemplateIcon from "PUBLIC_DIR/images/emptyview/create.from.template.svg";
+import CreateFromGalleryIcon from "PUBLIC_DIR/images/emptyview/create.from.gallery.svg";
 import CreateAIAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
 import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
 import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
@@ -194,6 +196,7 @@ export const getTitle = (
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
   isFormsScope: boolean = false,
+  isPublicRoom: boolean = false,
 ): string => {
   const isNotAdmin = isUser(access);
 
@@ -205,6 +208,8 @@ export const getTitle = (
         ? t("Common:EmptyResultsTitle")
         : t("Common:NothingToShowYet");
   }
+
+  if (isRootEmptyPage && isPublicRoom) return t("Common:EmptyScreenFolder");
 
   if (isRootEmptyPage)
     return getRootTitle(
@@ -245,7 +250,11 @@ export const getIcon = (
   isResultsTab?: boolean,
   isKnowledgeTab?: boolean,
   isAIRoom?: boolean,
+  isPublicRoom: boolean = false,
 ): JSX.Element => {
+  if (isRootEmptyPage && isPublicRoom)
+    return isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />;
+
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
 
   // The knowledge tab shows a folder whose `folderType` isn't a default-folder
@@ -294,6 +303,7 @@ export const getOptions = (
   isCardLinkedToPortal: boolean = false,
   isActivating: boolean = false,
   isAiChatAvailable: boolean = false,
+  isTemplateGalleryAvailable: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -413,11 +423,33 @@ export const getOptions = (
     disabled: false,
   };
 
+  // The same two ways in as the Forms quick actions, so a form space can still
+  // be started from a template when those tiles are turned off.
+  const createFormSpaceFromTemplate = {
+    title: t("Common:FromTemplate"),
+    description: t("Common:SetTemplateDescription"),
+    icon: <CreateFromTemplateIcon />,
+    key: "create-form-space-from-template",
+    onClick: actions.onCreateRoomFromTemplate,
+    disabled: false,
+  };
+
+  const createFormSpaceFromGallery = {
+    title: t("Common:FromTemplateGallery"),
+    description: t("Common:FromTemplateGalleryDescription"),
+    icon: <CreateFromGalleryIcon />,
+    key: "create-form-space-from-gallery",
+    onClick: actions.onOpenTemplateGallery,
+    disabled: false,
+  };
+
+  const templateGalleryOption = isTemplateGalleryAvailable
+    ? [createFormSpaceFromGallery]
+    : [];
+
   const createAIAgent = {
     title: t("Common:CreateAIAgentTitle"),
-    description: t("Common:CreateAIAgentDescription", {
-      aiAgent: t("Common:AIAgent"),
-    }),
+    description: t("Common:CreateAIAgentDescription"),
     icon: <CreateAIAgentIcon />,
     key: "create-ai-agent",
     onClick: actions.onCreateAIAgent,
@@ -593,6 +625,8 @@ export const getOptions = (
       .with([FolderType.Forms, P.when(isUser), P._], () => [])
       .with([FolderType.Forms, P._, P._], () => [
         createFormSpace,
+        createFormSpaceFromTemplate,
+        ...templateGalleryOption,
         ...aiChatOption,
       ])
       .with([FolderType.USER, ShareAccessRights.None, P._], () => [
@@ -658,7 +692,6 @@ export const getOptions = (
           files: t("Common:Files"),
           rooms: t("Common:Rooms"),
           forms: t("Common:Forms"),
-          aiAgents: t("Common:AIAgents"),
         }),
         "",
         true,

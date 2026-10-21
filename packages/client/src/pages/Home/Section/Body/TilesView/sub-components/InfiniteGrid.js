@@ -216,7 +216,7 @@ const InfiniteGrid = (props) => {
         const cardKey = key ? `card-item_${key}` : uniqueid("card-item_");
 
         cards.push(
-          <Card countTilesInRow={countTilesInRow} key={cardKey}>
+          <Card key={cardKey}>
             {child}
           </Card>,
         );

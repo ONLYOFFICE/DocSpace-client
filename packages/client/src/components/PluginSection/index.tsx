@@ -44,6 +44,7 @@ import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import { getPluginSectionByPath } from "SRC_DIR/helpers/plugins/navigation";
 import type { IArticleNavigationItemClient } from "SRC_DIR/helpers/plugins/types";
 import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
 import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
@@ -94,6 +95,10 @@ const PluginSectionContent = ({
   useEffect(() => {
     setSelectedFolder(null);
   }, [setSelectedFolder]);
+
+  useEffect(() => {
+    setDocumentTitle(item.label);
+  }, [item.label]);
 
   if (item.component) {
     return (

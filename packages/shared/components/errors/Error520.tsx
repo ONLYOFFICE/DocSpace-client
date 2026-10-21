@@ -93,7 +93,7 @@ const Error520 = ({
     window.location.reload();
   };
 
-  zendeskAPI.addChanges("webWidget", "show");
+  zendeskAPI.addChanges("messenger", "show");
 
   if (!firebaseHelper?.isEnabledDB)
     return (

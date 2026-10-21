@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Danh hiệu làm nổi bật các hoạt động tệp như tải lên, chỉnh sửa và chia sẻ trong các ứng dụng {{files}}, {{rooms}}, {{forms}} và {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Danh hiệu làm nổi bật các hoạt động tệp như tải lên, chỉnh sửa và chia sẻ trong các ứng dụng {{files}}, {{rooms}}, {{forms}} và tác nhân AI.",
   "AdminSetupRequired": "Thiết lập quản trị viên cần thiết",
   "Badges": "Danh hiệu",
   "DailyFeed": "Nguồn cấp dữ liệu {{organizationName}} {{productName}} hàng ngày",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "Tài khoản người dùng này được tải từ LDAP. Địa chỉ email của người dùng không được chỉ định, và địa chỉ hiện tại được tạo tự động và không thể sử dụng để gửi thông báo.",
   "NotConfigured": "Chưa được cấu hình",
   "Notifications": "Thông báo",
-  "RoomsActivityDescription": "Nhận thông báo email tức thì về các tệp và thư mục mới được chia sẻ và về hoạt động trong {{files}}, {{rooms}}, {{forms}} và {{aiAgents}}.",
-  "RoomUpdateNotify": "Hoạt động trong {{files}}, {{rooms}}, {{forms}} và {{aiAgents}}",
+  "RoomsActivityDescription": "Nhận thông báo email tức thì về các tệp và thư mục mới được chia sẻ và về hoạt động trong {{files}}, {{rooms}}, {{forms}} và tác nhân AI.",
+  "RoomUpdateNotify": "Hoạt động trong {{files}}, {{rooms}}, {{forms}} và tác nhân AI",
   "SettingUpNotifications": "Cài đặt thông báo",
   "SuccessConnected": "{{serviceName}} đã được kết nối thành công như một kênh thông báo. Bạn sẽ nhận được thông báo ở đó từ bây giờ.",
   "SuccessDisconnected": "{{serviceName}} đã được hủy kết nối thành công như một kênh thông báo. Thông báo sẽ không còn được gửi đến đó.",

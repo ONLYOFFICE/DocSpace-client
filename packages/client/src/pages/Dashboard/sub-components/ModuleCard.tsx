@@ -67,7 +67,7 @@ import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import TickSvg from "PUBLIC_DIR/images/icons/12/tick.svg";
-import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
+import TourReactSvgUrl from "PUBLIC_DIR/images/icons/16/tour.react.svg?url";
 
 import styles from "../Dashboard.module.scss";
 
@@ -76,6 +76,11 @@ export type ModuleItem = {
   icon: React.ReactNode;
   title: string;
   description: string;
+  /**
+   * Whether the app is switched on for the portal. A card that is not is
+   * badged "Disabled" and its button leads to the apps settings (see
+   * `onAction`); it is only built for a user who can switch the app on.
+   */
   installed: boolean;
   /** Label of the card's action button — each app words its own. */
   buttonLabel: string;
@@ -89,7 +94,8 @@ export type ModuleItem = {
    * The card's primary action, worded by `buttonLabel`: opening the section for
    * Files, or the create dialog for an app whose entry point is creation. Falls
    * back to navigating to `href` for a user without the create right, in which
-   * case `buttonLabel` reads "Open" instead.
+   * case `buttonLabel` reads "Open" instead. For an app that is switched off it
+   * opens Settings -> Apps, and `buttonLabel` reads "Go to Settings".
    */
   onAction: () => void;
 };
@@ -99,7 +105,8 @@ type ModuleCardProps = {
   /**
    * Starts the app's onboarding tour, which used to be offered by the promo
    * modal's "Take a tour" button. Left out for an app that has no tour — the
-   * help icon is then not rendered at all.
+   * help icon is then not rendered at all. For an app that is switched off the
+   * icon stays in place but disabled: its section cannot be reached.
    */
   onTakeTour?: () => void;
 };
@@ -117,7 +124,7 @@ export const ModuleCard = ({ mod, onTakeTour }: ModuleCardProps) => {
         {/*
          * Title and badge share a wrapping flex line of their own rather than
          * sitting in the header next to the icon: in a language whose app name
-         * and "Installed" together outgrow a quarter of the grid, the badge
+         * and "Enabled" together outgrow a quarter of the grid, the badge
          * drops under the title instead of overlapping it, and stays aligned
          * with the title rather than with the icon.
          */}
@@ -125,12 +132,16 @@ export const ModuleCard = ({ mod, onTakeTour }: ModuleCardProps) => {
           <Text as="p" className={styles.moduleTitle}>
             {mod.title}
           </Text>
-          {mod.installed ? (
-            <Text as="span" className={styles.moduleInstalledBadge}>
-              <TickSvg />
-              {t("Common:Installed")}
-            </Text>
-          ) : null}
+          <Text as="span" className={styles.moduleInstalledBadge}>
+            {mod.installed ? (
+              <>
+                <TickSvg />
+                {t("Common:Enabled")}
+              </>
+            ) : (
+              t("Common:Disabled")
+            )}
+          </Text>
         </div>
       </div>
 
@@ -149,9 +160,10 @@ export const ModuleCard = ({ mod, onTakeTour }: ModuleCardProps) => {
         {onTakeTour ? (
           <IconButton
             className={styles.moduleTourButton}
-            iconName={QuestionReactSvgUrl}
+            iconName={TourReactSvgUrl}
             size={16}
-            isClickable
+            isClickable={mod.installed}
+            isDisabled={!mod.installed}
             title={t("Common:WelcomeStartTour")}
             onClick={onTakeTour}
             dataTestId={`dashboard-app-tour-${mod.id}`}

@@ -89,7 +89,7 @@ const EDITOR_EVENT_TYPES = [
 const Editor = (props) => {
   const { t, theme } = props;
 
-  setDocumentTitle(t("JavascriptSdk"));
+  setDocumentTitle(t("Settings:EmbedSDK"));
 
   const [version, onSetVersion] = useState(sdkVersion[220]);
 
@@ -326,7 +326,7 @@ export const Component = inject(({ settingsStore }) => {
     theme,
   };
 })(
-  withTranslation(["JavascriptSdk", "Files", "Common"])(
+  withTranslation(["JavascriptSdk", "Settings", "Files", "Common"])(
     observer(Editor),
   ),
 );

@@ -561,14 +561,18 @@
 .light {
   --status-warning: #{$light-status-warning};
   --main-button-mobile-text-color: #{$light-gray-dark};
-  --main-button-mobile-button-color: #{$light-blue-main};
+  --main-button-mobile-button-color: var(--accent-main, #{$light-blue-main});
   --main-button-mobile-icon-fill: #{$white};
   --main-button-mobile-circle-background: #{$white};
   --main-button-mobile-mobile-progress-bar-background: #{$gray-strong};
   --main-button-mobile-bar-icon: #{$gray};
   --main-button-mobile-button-wrapper-background: #{$white};
   --main-button-mobile-button-wrapper-uploading-background: #{$gray-light-mid};
-  --main-button-mobile-button-options-background-color: #{$blue-light-mid};
+  --main-button-mobile-button-options-background-color: color-mix(
+    in srgb,
+    var(--accent-main, #{$light-blue-main}) 70%,
+    black
+  );
   --main-button-mobile-button-options-color: #{$white};
 
   --main-button-mobile-dropdown-position: fixed;
@@ -581,15 +585,19 @@
   --main-button-mobile-dropdown-mobile-bottom: 40px;
   --main-button-mobile-dropdown-separator-background: #{$white};
   --main-button-mobile-dropdown-button-color: #{$white};
-  --main-button-mobile-dropdown-hover-button-color: #{$light-blue-main-pressed};
+  --main-button-mobile-dropdown-hover-button-color: color-mix(
+    in srgb,
+    var(--accent-main, #{$light-blue-main}) 90%,
+    black
+  );
   --main-button-mobile-dropdown-background-action-mobile: #{$blue-light-mid};
-  --main-button-mobile-progress-bar-color: #{$light-blue-main};
+  --main-button-mobile-progress-bar-color: var(--accent-main, #{$light-blue-main});
 }
 
 .dark {
   --status-warning: #{$dark-status-warning};
   --main-button-mobile-text-color: #{$dark-gray-dark};
-  --main-button-mobile-button-color: #{$light-blue-main};
+  --main-button-mobile-button-color: var(--accent-main, #{$light-blue-main});
   --main-button-mobile-icon-fill: #{$black};
   --main-button-mobile-circle-background: #{$black};
   --main-button-mobile-mobile-progress-bar-background: #{$gray-dark-strong};
@@ -603,7 +611,7 @@
   --main-button-mobile-dropdown-button-color: #{$white};
   --main-button-mobile-dropdown-hover-button-color: #{$black};
   --main-button-mobile-dropdown-background-action-mobile: #{$blue-light-mid};
-  --main-button-mobile-progress-bar-color: #{$light-blue-main};
+  --main-button-mobile-progress-bar-color: var(--accent-main, #{$light-blue-main});
 }
 
 .dark {
@@ -2584,21 +2592,7 @@
 
   --template-tile-icon-fill: #{$gray};
 
-  --submit-gallery-tile-border: var(--color-scheme-main-accent);
-  --submit-gallery-tile-color-close-icon-fill: #{$light-gray-dark};
-  --submit-gallery-tile-background: #{$white};
-
-  --submit-gallery-tile-text: var(--color-scheme-main-accent);
-  --submit-gallery-tile-text-body: #{$gray-text};
-  --submit-gallery-tile-text-background: #{$white};
-
-  --submit-gallery-tile-text-background: #{$white};
-
   --template-gallery-empty-screen: #{$gray-text};
-
-  --template-gallery-sort-background: #{$white};
-  --template-gallery-sort-fill: #{$light-gray-dark};
-  --template-gallery-sort-hover: #{$gray-light};
 
   --template-gallery-view-button-border: #{$gray-strong};
 }
@@ -2620,18 +2614,7 @@
 
   --template-tile-icon-fill: #{$gray-dark};
 
-  --submit-gallery-tile-border: #{$white};
-  --submit-gallery-tile-color-close-icon-fill: #{$dark-gray-dark};
-  --submit-gallery-tile-background: #{$dark-gray-light};
-
-  --submit-gallery-tile-text: #{$white};
-  --submit-gallery-tile-text-body: #{$dark-gray-dark};
-
   --template-gallery-empty-screen: #{$dark-gray-dark};
-
-  --template-gallery-sort-background: #{$black};
-  --template-gallery-sort-fill: #{$dark-gray-dark};
-  --template-gallery-sort-hover: #{$black};
 
   --template-gallery-view-button-border: #{$gray-dark-strong};
 }

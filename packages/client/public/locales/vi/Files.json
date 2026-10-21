@@ -118,6 +118,7 @@
   "SharePDFFormModalDescription": "Một không gian mới sẽ được tạo và biểu mẫu PDF sẽ được sao chép ở đó. Sau đó, bạn có thể mời những người dùng khác điền vào biểu mẫu trong không gian.",
   "SharePDFFormModalTitle": "Chia sẻ biểu mẫu PDF",
   "ShareRoom": "Chia sẻ phòng",
+  "ShareSpace": "Chia sẻ không gian",
   "ShowLinkActions": "Hiển thị hành động với liên kết",
   "SyncWithDatabase": "Đồng bộ hóa với cơ sở dữ liệu",
   "SyncWithDatabaseError": "Lỗi đồng bộ hóa với cơ sở dữ liệu",

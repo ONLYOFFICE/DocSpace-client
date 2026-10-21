@@ -34,7 +34,12 @@
  */
 
 import React, { useEffect, useMemo, useCallback, useState } from "react";
-import { Outlet, useLocation, useNavigate, useSearchParams } from "react-router";
+import {
+  Outlet,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
@@ -59,7 +64,11 @@ import {
 import { getAiAccessSettings } from "@docspace/shared/api/settings";
 import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
-import { Toast, toastr, ToastType } from "@onlyoffice/apps-ui-kit/components/toast";
+import {
+  Toast,
+  toastr,
+  ToastType,
+} from "@onlyoffice/apps-ui-kit/components/toast";
 import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { getCookie, deleteCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
@@ -111,6 +120,7 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import { AskAIChatBridge } from "./components/AskAIChatBridge";
+import { AiChatVisibilityBridge } from "./components/AiChatVisibilityBridge";
 import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
@@ -402,7 +412,10 @@ const Shell = ({ page = "home", ...rest }) => {
       fetchTreeFolders?.();
     };
 
-    SocketHelper?.on(SocketEvents.ChangeAiAccessSettings, handleAiAccessChanged);
+    SocketHelper?.on(
+      SocketEvents.ChangeAiAccessSettings,
+      handleAiAccessChanged,
+    );
 
     return () => {
       SocketHelper?.off(
@@ -817,11 +830,22 @@ const Shell = ({ page = "home", ...rest }) => {
   const canUseAi =
     isAuthenticated && !isGuest && !isNotPaidPeriod && aiServicesEnabled;
 
+  // Whether the side chat panel is open — reported from inside the providers
+  // by AiChatVisibilityBridge, since the panel store lives there.
+  const [isChatPanelVisible, setIsChatPanelVisible] = useState(false);
+
+  // The chat is on screen either in the side panel or inline, as the body of
+  // an AI agent room. While it is not, the providers only remember the scope
+  // (entityId) and the agents list below is not refreshed: entering a folder
+  // must not cost AI requests — they wait for the chat to open.
+  const isChatOpen = isChatPanelVisible || isInsideAgentRoom;
+
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.
   const { actions: profilePickerActions, getAgentByRoomId } =
     useAiAgentsPickerActions(
       isLoaded && isAiChatAvailable && canUseAi,
+      isChatOpen,
       setPickedAgent,
     );
 
@@ -977,6 +1001,7 @@ const Shell = ({ page = "home", ...rest }) => {
           hideProfilePicker={false}
           profilePickerReadOnly={isInsideAgentRoom && !canEditAgentRoom}
           isAgentRoom={isInsideAgentRoom}
+          isChatOpen={isChatOpen}
           profilePickerActions={
             isInsideAgentRoom ? undefined : profilePickerActions
           }
@@ -992,10 +1017,11 @@ const Shell = ({ page = "home", ...rest }) => {
           // The room the user is in, connected as chat context (with the
           // skills of its .ai folder) when the chat opens — see
           // ContextRoomSync in ui-kit.
-          contextRoom={aiContextRoom}
+          contextRoom={canUseAi ? aiContextRoom : undefined}
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
+          <AiChatVisibilityBridge onChange={setIsChatPanelVisible} />
           <ModelUpdatedBanner
             key={agentEntityId}
             entityId={agentEntityId}
@@ -1050,6 +1076,7 @@ const ShellWrapper = inject(
       isFrame,
       frameConfig,
       isPortalDeactivate,
+      isPortalBlocked,
       isPortalRestoring,
       logoText,
       setLogoText,
@@ -1086,6 +1113,7 @@ const ShellWrapper = inject(
     const pagesWithoutNavMenu =
       clientError ||
       isPortalDeactivate ||
+      isPortalBlocked ||
       isPortalRestoring ||
       (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
 
@@ -1093,7 +1121,11 @@ const ShellWrapper = inject(
       loadBaseInfo: async () => {
         await init(false, i18n);
 
-        if (settingsStore.walletLowBalance) {
+        if (
+          settingsStore.walletLowBalance &&
+          !settingsStore.isPortalDeactivate &&
+          !settingsStore.isPortalBlocked
+        ) {
           paymentStore.fetchWalletBalance().catch((e) => console.error(e));
         }
 
@@ -1188,10 +1220,15 @@ const ShellWrapper = inject(
       // room the server has never heard of, so every scoped AI request made
       // for it comes back 404 ("Entity not found") — the demo answers what the
       // section asks about the space, and the AI service is no part of that.
+      // And for a location whose id is not a room id (a third-party storage
+      // folder carries a string id): the AI service accepts only integer room
+      // ids as a scope, reads included (Bug 84417), and folds any other
+      // location to the global scope anyway, so send that scope outright.
       agentEntityId:
         (selectedFolderStore.isAIRoom && !accessRightsStore.canUseChat) ||
         !chatScopeId ||
-        isTourDemoId(chatScopeId)
+        isTourDemoId(chatScopeId) ||
+        !/^\d+$/.test(String(chatScopeId))
           ? undefined
           : String(chatScopeId),
       // Inside AI agent rooms the model is fixed by the agent's assigned
@@ -1238,3 +1275,4 @@ const Root = () => (
 );
 
 export default Root;
+

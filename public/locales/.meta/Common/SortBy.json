@@ -3,7 +3,7 @@
   "content": "Sort by",
   "content_en_sha1_hash": "a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2",
   "created_at": "2025-05-19T21:30:48.943Z",
-  "updated_at": "2026-10-01T08:23:21.759Z",
+  "updated_at": "2026-10-06T10:42:37.602Z",
   "comment": {
     "text": "This is a label for a dropdown menu or button that allows users to choose the order in which items are displayed. It appears as a short label.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/TemplateGallery/Filter/SortFilter/index.tsx",
-      "line_number": 106,
-      "context": "withBackground={false}\n />\n \n <div\n className={styles.sortButton}\n title={t(\"Common:SortBy\")}\n onClick={onToggleCombobox}\n >\n <ComboBox\n id=\"comboBoxSort\"\n tabIndex={1}",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
       "line_number": 1937,

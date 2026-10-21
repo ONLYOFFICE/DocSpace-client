@@ -74,6 +74,7 @@ const CreateRoomDialog = ({
   enableThirdParty,
   startRoomType,
   isFormsCreate,
+  onOpenTemplateGallery,
   processCreatingRoomFromData,
   setProcessCreatingRoomFromData,
   selectionItems,
@@ -117,6 +118,10 @@ const CreateRoomDialog = ({
       isMountRef.current = false;
     };
   });
+
+  React.useEffect(() => {
+    if (startRoomType) setSelectedRoomType(startRoomType);
+  }, []);
 
   const isTemplateItem = !!fetchedRoomParams;
 
@@ -409,6 +414,7 @@ const CreateRoomDialog = ({
               isExternalShareRestricted={isExternalShareRestricted}
               processCreatingRoomFromData={processCreatingRoomFromData}
               isFormsCreate={isFormsCreate}
+              onOpenTemplateGallery={onOpenTemplateGallery}
               setTemplateDialogIsVisible={setTemplateDialogIsVisible}
             />
           ) : (

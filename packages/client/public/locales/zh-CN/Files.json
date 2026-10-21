@@ -118,6 +118,7 @@
   "SharePDFFormModalDescription": "将创建一个新空间，并将 PDF 表单复制到其中。然后，您可以邀请其他用户在空间中填写表单。",
   "SharePDFFormModalTitle": "共享 PDF 表单",
   "ShareRoom": "分享房间",
+  "ShareSpace": "分享空间",
   "ShowLinkActions": "显示链接操作",
   "SyncWithDatabase": "与数据库同步",
   "SyncWithDatabaseError": "与数据库同步失败",

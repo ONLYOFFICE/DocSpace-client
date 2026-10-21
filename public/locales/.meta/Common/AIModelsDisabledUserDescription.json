@@ -1,0 +1,21 @@
+{
+  "key_path": "AIModelsDisabledUserDescription",
+  "content": "All AI models in this workspace are disabled. Contact your Full admin to enable them.",
+  "content_en_sha1_hash": "2d50854be5429fc3541064d09388afdbe9fb71dc",
+  "created_at": "2026-10-14T15:10:22.106Z",
+  "updated_at": "2026-10-14T15:10:22.106Z",
+  "comment": {
+    "text": "Shown on the placeholder screen of the AI chat panel / AI agents section when every AI model in the portal has been switched off in AI settings. Text for a regular user, who cannot change AI settings: they must ask a Full admin (the highest administrator role of the portal) to turn the models back on.",
+    "is_auto": false,
+    "updated_at": "2026-10-14T15:11:28.000Z"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

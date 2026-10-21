@@ -35,10 +35,10 @@ The trees it covers:
 | `common/translation-app/{frontend,backend}` | npm | that project's `package.json` |
 | `common/oauth-sdk-stand`, `common/screenshot-comparison-app` | npm | that project's `package.json` |
 
-ui-kit is **not** audited here: it ships as a prebuilt tarball from its own
+ui-kit is **not** audited here: it ships as a prebuilt npm package from its own
 repository and has no lockfile in this tree. Audit it inside
 `docspace-ui-kit-react`. A vulnerability reachable through ui-kit's bundled
-code can only be fixed by publishing a new tarball from there.
+code can only be fixed by publishing a new release from there.
 
 ## Step 2 — pick the fix
 

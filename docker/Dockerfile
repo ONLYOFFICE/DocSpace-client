@@ -31,7 +31,7 @@ RUN apt-get -y update && \
     apt-get install -yq
     
 # Install PNPM
-RUN npm install -g pnpm@12.4.1
+RUN npm install -g pnpm@12.11.2
 
 WORKDIR /app
 
@@ -39,12 +39,10 @@ WORKDIR /app
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
 # Copy package files first for better layer caching
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-
-# ui-kit and ai-chat ship as prebuilt tarballs at the repo root; every app's
-# `file:../../*.tgz` dependency resolves against these, so they must be present
-# before `pnpm install --frozen-lockfile` runs.
-COPY *.tgz ./
+# `*.tgz` is optional: ui-kit and ai-chat come from npm, but a locally packed
+# tarball at the repo root can be referenced as `file:../../<name>.tgz` for
+# local development. A glob matching nothing is fine next to real sources.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml *.tgz ./
 
 # Copy the source code with correct directory structure
 COPY ../common/ ./common/

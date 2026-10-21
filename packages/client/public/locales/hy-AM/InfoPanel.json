@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "«{{folderTitle}}»-ից",
   "FeedLocationRoomLabel": "Սենյալ «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Հատված «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Տարածք «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Պատասխանների վերլուծություն ԱԲ-ի միջոցով",
   "FormRoomAIModalConnect": "Կապել տվյալների բազան",
   "FormRoomAIModalDescription": "Կապեք տվյալների բազա՝ «ԱԲ-ին հարցրեք» միջոցով բոլոր հավաքված պատասխանները վերլուծելու համար: Կարող եք շարունակել առանց դրա և հարցնել միայն այս ձևի մասին:",

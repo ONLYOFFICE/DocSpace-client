@@ -61,6 +61,8 @@
 
 import type { CSSProperties } from "react";
 
+import { AnalyticsEvents } from "@docspace/shared/enums";
+
 /**
  * Columns the apps grid uses at its widest.
  *
@@ -103,6 +105,34 @@ export const makeCreateUrl = (
   const params = new URLSearchParams({ fileTitle });
   if (parentId) params.set("parentId", String(parentId));
   return `/doceditor/create?${params.toString()}`;
+};
+
+/**
+ * Analytics `context` for everything created from the Dashboard, so GTM can
+ * tell it apart from the same actions started in the sidebar.
+ */
+export const DASHBOARD_ANALYTICS_CONTEXT = "home";
+
+/**
+ * Reports a file created from a Dashboard tile.
+ *
+ * In a folder `FileCreated` is pushed by the socket `create` handler, which
+ * only fires for the folder on screen; the Dashboard shows no folder, so it
+ * would never fire for these files. The editor tab that creates the file does
+ * not load GTM either, so the push happens here, on the click that opens it.
+ * The file id is not known yet at this point.
+ */
+export const pushDashboardFileCreated = (
+  fileTitle: string,
+  parentId: number | null,
+) => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: AnalyticsEvents.FileCreated,
+    parentId,
+    file_type: fileTitle.split(".").pop(),
+    context: DASHBOARD_ANALYTICS_CONTEXT,
+  });
 };
 
 export type AiFormsSettings = {

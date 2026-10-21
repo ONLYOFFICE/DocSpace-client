@@ -53,16 +53,16 @@ export const HelpLinks = ({
   organizationName,
   license,
   salesEmail,
-  forEnterprisesUrl,
+  docsEnterpriseUrl,
   demoOrderUrl,
-  feedbackAndSupportUrl,
+  supportUrl,
 }: {
   organizationName: string;
   license: string;
   salesEmail: string;
-  forEnterprisesUrl: string;
+  docsEnterpriseUrl: string;
   demoOrderUrl: string;
-  feedbackAndSupportUrl: string;
+  supportUrl: string;
 }) => {
   const { t } = useTranslation("Common");
 
@@ -86,7 +86,7 @@ export const HelpLinks = ({
         {t("Common:UpgradeLearnMoreTitle")}
       </Text>
       <div className={styles.helpLines}>
-        {forEnterprisesUrl ? (
+        {docsEnterpriseUrl ? (
           <Text
             fontSize="13px"
             fontWeight={600}
@@ -99,7 +99,7 @@ export const HelpLinks = ({
               i18nKey="UpgradeLearnMoreAbout"
               values={{ organizationName, license }}
               components={{
-                1: renderLink(forEnterprisesUrl, "for_enterprise_license_link"),
+                1: renderLink(docsEnterpriseUrl, "for_enterprise_license_link"),
               }}
             />
           </Text>
@@ -140,7 +140,7 @@ export const HelpLinks = ({
             />
           </Text>
         ) : null}
-        {feedbackAndSupportUrl ? (
+        {supportUrl ? (
           <Text
             fontSize="13px"
             fontWeight={600}
@@ -151,10 +151,10 @@ export const HelpLinks = ({
               t={t}
               ns="Common"
               i18nKey="UpgradeGetTechAssistance"
-              values={{ helpUrl: getHost(feedbackAndSupportUrl) }}
+              values={{ helpUrl: getHost(supportUrl) }}
               components={{
                 1: renderLink(
-                  feedbackAndSupportUrl,
+                  supportUrl,
                   "upgrade_to_pro_banner_support_link",
                 ),
               }}

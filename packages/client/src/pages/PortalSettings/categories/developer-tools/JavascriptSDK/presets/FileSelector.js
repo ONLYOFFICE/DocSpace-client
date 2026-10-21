@@ -105,7 +105,7 @@ const FILE_SELECTOR_EVENT_TYPES = [
 const FileSelector = (props) => {
   const { t, fetchExternalLinks, theme, logoText } = props;
 
-  setDocumentTitle(t("JavascriptSdk"));
+  setDocumentTitle(t("Settings:EmbedSDK"));
 
   const fileTypeDisplay = [
     {
@@ -547,6 +547,7 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
 })(
   withTranslation([
     "JavascriptSdk",
+    "Settings",
     "Files",
     "Common",
     "Translations",

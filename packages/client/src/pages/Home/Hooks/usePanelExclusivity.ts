@@ -50,6 +50,7 @@ import type InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
  * toggle, section setVisible, AI trigger) without scattering close() calls
  * across call sites. Closing the other store flips its `isVisible` to false,
  * firing the sibling reaction with `false` — a guarded no-op, so no loop.
+ * On mount the two are reconciled once, for changes made while Home was away.
  *
  * `enabled` lets views that don't host the AI Chat panel (contacts, profile,
  * settings, …) skip wiring the reactions while keeping the hook call
@@ -72,6 +73,14 @@ export const usePanelExclusivity = (infoPanelStore: InfoPanelStore) => {
 
   React.useEffect(() => {
     if (!infoPanelStore) return undefined;
+
+    // The reactions below only see transitions made while Home is mounted. The
+    // chat panel is shared state that can also be opened on the dashboard,
+    // where the Info Panel keeps its last `isVisible` untouched; coming back
+    // would then show both. The chat is the newer of the two, so it wins.
+    if (aiChatStore.isVisible && infoPanelStore.isVisible) {
+      infoPanelStore.setIsVisible(false);
+    }
 
     const disposers = [
       reaction(

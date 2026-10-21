@@ -74,7 +74,6 @@
   "ItemsCount": "Število predmetov na eno stran",
   "ItemsCountDescription": "Specificirate lahko število datotek / map, prikazanih na eni strani, kot tudi to, katera stran naj se začne prikazovati",
   "JavaScriptCodeDescription": "Vdelava delovnega prostora ali njegovega dela z uporabo JavaScripta. Kopirajte spodnjo JavaScript kodo.",
-  "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Omejitev na časovno obdobje",
   "LinkSetDescription": "Ta povezava je zaščitena s parametrom {{parameter}}. Če želite konfigurirati povezavo,",
   "LinkSetDescription2": "Za to povezavo sta nastavljena {{parameter1}} in {{parameter2}}. Za konfiguriranje",

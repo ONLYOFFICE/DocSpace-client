@@ -35,6 +35,7 @@ import {
   webPluginsBrokenBundleHandler,
   webPluginsDeleteHandler,
   webPluginsHandler,
+  webPluginsUpdateHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 
@@ -112,15 +113,22 @@ test.describe("Plugin whose bundle fails to load", () => {
     await expect(tooltip).toBeVisible();
   });
 
-  test("The enable toggle reads off and is locked", async ({
+  test("The enabled plugin can be switched off but not back on", async ({
     page,
     baseUrl,
+    mockRequest,
   }) => {
+    mockRequest.use(webPluginsUpdateHandler(TEST_PORT));
+
     const card = await openPluginsPage(page, baseUrl);
 
-    const toggleInput = card
-      .getByTestId("enable_plugin_toggle_button")
-      .getByTestId("toggle-button-input");
+    const toggle = card.getByTestId("enable_plugin_toggle_button");
+    const toggleInput = toggle.getByTestId("toggle-button-input");
+    await expect(toggleInput).toBeChecked();
+    await expect(toggleInput).toBeEnabled();
+
+    await toggle.click();
+
     await expect(toggleInput).not.toBeChecked();
     await expect(toggleInput).toBeDisabled();
   });

@@ -211,7 +211,9 @@ const AISettings = ({
     {
       id: TAB_IDS.MCP_SERVERS,
       name: t("Common:MCPServers"),
-      content: <McpServers />,
+      // Portal settings are an administrator page: a tool switched off here is
+      // off for every user, so the page edits the tenant list (Bug 84381).
+      content: <McpServers toolPrefsScope="tenant" />,
       onClick: makeOnClick(TAB_IDS.MCP_SERVERS),
       isDisabled: disableNonAiModels,
     },

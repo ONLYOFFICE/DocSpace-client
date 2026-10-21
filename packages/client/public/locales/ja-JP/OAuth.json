@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "アプリケーションの有効化に成功しました",
   "AppName": "アプリ名",
   "Apps": "アプリ",
+  "AppsLimitReached": "作成できるアプリの最大数に達しました。新しいアプリを追加するには、不要になったアプリを削除してください。",
+  "AppsLimitReachedWorkspace": "このワークスペースはアプリの最大数に達しました。新しいアプリを追加するには、不要になったアプリを削除してください。",
   "AuthButton": "認証ボタン",
   "AuthenticationMethod": "認証方法",
   "AuthorizedApps": "認証済みアプリ",

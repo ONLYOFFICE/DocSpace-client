@@ -196,7 +196,6 @@ import {
   openDocEditorImpl,
   createThumbnailsImpl,
   createThumbnailImpl,
-  fetchFavoritesFolderImpl,
   scrollToTopImpl,
   getIsEmptyTrashImpl,
 } from "./filesStore/actions.helpers";
@@ -2076,9 +2075,6 @@ class FilesStore {
     }
     return false;
   }
-
-  fetchFavoritesFolder = async (folderId: number | string) =>
-    fetchFavoritesFolderImpl(this, folderId);
 
   getFileInfo = async (
     id: number | string,

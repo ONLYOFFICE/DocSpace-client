@@ -64,4 +64,6 @@ export type ErrorBoundaryProps = PropsWithChildren & {
 export type ErrorBoundaryState = {
 	/** Current error object if an error occurred, null otherwise */
 	error: Error | null;
+	/** The error is a chunk load failure being recovered by a page reload */
+	isReloading: boolean;
 };

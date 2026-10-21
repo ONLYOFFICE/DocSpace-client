@@ -118,6 +118,7 @@
   "SharePDFFormModalDescription": "ສະເປສໃໝ່ຈະຖືກສ້າງຂຶ້ນ ແລະແບບຟອມ PDF ຈະຖືກສໍາເນົາໄປນໍາ. ຫຼັງຈາກນັ້ນ, ທ່ານສາມາດເຊີນຜູ້ໃຊ້ອື່ນໆ ມາຕື່ມຂໍ້ມູນໃສ່ແບບຟອມໃນສະເປສໄດ້.",
   "SharePDFFormModalTitle": "ແບ່ງປັນແບບຟອມ PDF",
   "ShareRoom": "ແບ່ງປັນຫ້ອງ",
+  "ShareSpace": "ແບ່ງປັນສະເປສ",
   "ShowLinkActions": "ສະແດງການດໍາເນີນການເຊື່ອມຕໍ່",
   "SyncWithDatabase": "ການຊິງໂຄຣໄນສ໌ກັບຖານຂໍ້ມູນ",
   "SyncWithDatabaseError": "ການຊິງໂຄຣນຖານຂໍ້ມູນລ້ມຫຼວ",

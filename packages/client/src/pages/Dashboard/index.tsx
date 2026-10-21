@@ -129,6 +129,13 @@ type DashboardProps = ChatNoAccessStoreProps & {
   /** Rooms quota exhausted or portal in its grace period. */
   isWarningRoomsDialog: boolean;
   setQuotaWarningDialogVisible: (visible: boolean) => void;
+  logoText: string;
+  /** Whether an app is switched on; always true in SaaS. */
+  isAppInstalled: (id: string) => boolean;
+  /** Apps can be switched on and off on this portal (standalone only). */
+  canManageApps: boolean;
+  /** Fetches the apps list once, which `isAppInstalled` reads. */
+  ensureAppsLoaded: () => void;
 };
 
 const UPLOAD_LINK_ID = "dashboard-upload-link";
@@ -150,9 +157,13 @@ const Dashboard = (props: DashboardProps) => {
     standalone,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
+    logoText,
+    isAppInstalled,
+    canManageApps,
+    ensureAppsLoaded,
   } = props;
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:Home");
+  useDocumentTitle("Common:Home", logoText);
 
   // Gates every tour entry point on this page. The tours walk through desktop
   // chrome (`useTour` refuses to run on mobile outright), so on a phone the
@@ -187,6 +198,11 @@ const Dashboard = (props: DashboardProps) => {
   // profiles count as ready too — the same signal Home and the agents EmptyView
   // use to decide whether to offer agent creation.
   const hasAiProfiles = useHasAiProfiles();
+
+  React.useEffect(() => {
+    ensureAppsLoaded();
+  }, [ensureAppsLoaded]);
+
   const moduleItems = useModuleItems({
     isGuest,
     canCreateRooms,
@@ -194,6 +210,10 @@ const Dashboard = (props: DashboardProps) => {
     aiServicesEnabled,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
+    isAppInstalled,
+    // Settings -> Apps, where an app is switched on, is open to portal admins
+    // and the owner only.
+    canEnableApps: isAdminOrOwner && canManageApps,
   });
 
   // The dashboard renders its own content (no SDK iframe). Tell the
@@ -373,6 +393,8 @@ const Dashboard = (props: DashboardProps) => {
                       key={mod.id}
                       mod={mod}
                       onTakeTour={
+                        // An app that is switched off has no section for its
+                        // tour to run in; ModuleCard disables the icon then.
                         isMobile
                           ? undefined
                           : () => {
@@ -409,6 +431,7 @@ const Dashboard = (props: DashboardProps) => {
           <WelcomeDialog
             onTakeTour={onWelcomeTakeTour}
             onClose={onWelcomeClose}
+            organizationName={logoText}
           />
         ) : null}
 
@@ -451,6 +474,7 @@ const DashboardConnected = inject((stores: TStore) => {
     formsTourStore,
     aiAgentsTourStore,
     dashboardTourStore,
+    appsStore,
   } = stores;
 
   // The app cards an onboarding tour can be started from. An app that isn't
@@ -496,6 +520,10 @@ const DashboardConnected = inject((stores: TStore) => {
     standalone: settingsStore.standalone,
     isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,
     setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
+    logoText: settingsStore.logoText,
+    isAppInstalled: appsStore.isInstalled,
+    canManageApps: appsStore.canManageApps,
+    ensureAppsLoaded: appsStore.ensureLoaded,
   };
 })(observer(Dashboard));
 

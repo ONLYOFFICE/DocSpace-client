@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "private": true,
   "engines": {
     "node": ">=24",
@@ -36,11 +36,6 @@
     "update-fonts": "node scripts/update-open-sans-fonts.js",
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
-    "fallow": "fallow dead-code",
-    "fallow:audit": "fallow audit --base origin/develop --gate new-only",
-    "fallow:health": "fallow health --top 20 --sort crap",
-    "fallow:fix": "fallow fix --dry-run",
-    "fallow:fix:apply": "fallow fix --yes",
     "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
     "lint:fix": "pnpm nx run-many -t lint:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
     "format": "pnpm nx run-many -t format -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
@@ -49,17 +44,17 @@
     "prepare": "node -e \"if (!process.env.CI) { try { require('child_process').execSync('git --version', {stdio: 'ignore'}); require('child_process').execSync('lefthook install', {stdio: 'inherit'}); } catch (e) { console.error('Lefthook installation skipped:', e.message); } }\" && npm --prefix ./common/tests ci --no-audit --no-fund",
     "update-translation-app-lock": "npm --prefix common/translation-app/frontend install --package-lock-only && npm --prefix common/translation-app/backend install --package-lock-only",
     "update-ui-kit": "node scripts/update-ui-kit.mjs",
+    "update-ai-chat": "node scripts/update-ai-chat.mjs",
     "start:ui-kit-src": "node scripts/start-ui-kit-src.mjs"
   },
   "devDependencies": {
     "@types/node": "24.10.7",
     "@types/react-text-mask": "5.4.14",
     "babel-plugin-react-compiler": "^1.0.0",
-    "fallow": "^2.104.0",
     "he": "1.2.0",
     "lefthook": "^2.1.10",
     "madge": "8.0.0",
-    "nx": "23.1.1",
+    "nx": "23.2.1",
     "prettier": "^3.9.6",
     "react": "19.2.8",
     "shx": "0.4.0",
@@ -67,5 +62,5 @@
     "ts-node": "10.9.2",
     "typescript": "5.9.3"
   },
-  "packageManager": "pnpm@12.4.1"
+  "packageManager": "pnpm@12.11.2"
 }

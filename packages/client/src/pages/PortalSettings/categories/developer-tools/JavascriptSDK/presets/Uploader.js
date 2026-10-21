@@ -98,7 +98,7 @@ const UPLOADER_EVENT_TYPES = [
 const Uploader = (props) => {
   const { t, theme, myFolderId, fetchTreeFolders } = props;
 
-  setDocumentTitle(t("JavascriptSdk"));
+  setDocumentTitle(t("Settings:EmbedSDK"));
 
   const [version, onSetVersion] = useState(sdkVersion[220]);
   const [source, onSetSource] = useState(sdkSource.Package);
@@ -612,6 +612,7 @@ export const Component = inject(({ settingsStore, treeFoldersStore }) => {
 })(
   withTranslation([
     "JavascriptSdk",
+    "Settings",
     "Files",
     "Common",
     "CreateEditRoomDialog",

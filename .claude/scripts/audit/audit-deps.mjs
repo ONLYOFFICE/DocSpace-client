@@ -6,7 +6,7 @@
  * handful of npm sub-projects under common/). `pnpm audit` at the root only
  * ever sees the first one, so a clean root audit says nothing about the rest.
  *
- * ui-kit is out of scope: it ships as a prebuilt tarball from its own
+ * ui-kit is out of scope: it ships as a prebuilt npm package from its own
  * repository and has no lockfile here. Audit it in `docspace-ui-kit-react`.
  *
  * Read-only: runs audits, reads lockfiles, prints findings and the override

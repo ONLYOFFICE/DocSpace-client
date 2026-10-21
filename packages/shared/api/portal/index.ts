@@ -45,7 +45,6 @@ import {
   TPaymentQuota,
   TPortal,
   TPortalTariff,
-  TPortalWalletService,
   TRestoreProgress,
   TLicenseQuota,
 } from "./types";
@@ -290,6 +289,20 @@ export function continuePortal(confirmKey: Nullable<string> = null) {
   return request(options);
 }
 
+export function unblockPortal(confirmKey: Nullable<string> = null) {
+  const options = {
+    method: "put",
+    url: "/portal/unblock",
+    // 401 here refuses the link (an earlier block, or the portal is no longer
+    // blocked), not a session: it must reach the caller instead of signing out.
+    skipLogout: true,
+  };
+
+  if (confirmKey) options.headers = { confirm: confirmKey };
+
+  return request(options);
+}
+
 export function deletePortal(confirmKey: Nullable<string> = null) {
   const options = {
     method: "delete",
@@ -368,16 +381,6 @@ export async function getPortalTariff(refresh = false, signal?: AbortSignal) {
     params,
     signal,
   })) as TPortalTariff;
-
-  return res;
-}
-
-export async function getWalletServices(signal?: AbortSignal) {
-  const res = (await request({
-    method: "get",
-    url: "/portal/payment/walletservices",
-    signal,
-  })) as TPortalWalletService[] | null;
 
   return res;
 }

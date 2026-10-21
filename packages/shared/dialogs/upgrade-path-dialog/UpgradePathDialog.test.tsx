@@ -41,14 +41,14 @@ import userEvent from "@testing-library/user-event";
 import { UpgradePathDialog } from "./index";
 import {
   ENTERPRISE_TRIAL_PATH,
-  getUpgradeTrialUrl,
+  getUpgradeSiteUrl,
 } from "./UpgradePathDialog.constants";
 
 const defaultProps = {
   visible: true,
   onClose: vi.fn(),
   demoOrderUrl: "https://example.com/demo",
-  feedbackAndSupportUrl: "https://example.com/support",
+  supportUrl: "https://example.com/support",
   salesEmail: "sales@example.com",
 };
 
@@ -69,7 +69,7 @@ describe("UpgradePathDialog", () => {
     );
     expect(screen.getByTestId("upgrade-path-support-link")).toHaveAttribute(
       "href",
-      defaultProps.feedbackAndSupportUrl,
+      defaultProps.supportUrl,
     );
     expect(screen.getByTestId("upgrade-path-purchase-link")).toHaveAttribute(
       "href",
@@ -91,7 +91,7 @@ describe("UpgradePathDialog", () => {
       <UpgradePathDialog
         {...defaultProps}
         demoOrderUrl=""
-        feedbackAndSupportUrl=""
+        supportUrl=""
       />,
     );
 
@@ -131,10 +131,14 @@ describe("UpgradePathDialog", () => {
   });
 });
 
-describe("getUpgradeTrialUrl", () => {
-  it("joins the site domain and the trial path", () => {
+describe("getUpgradeSiteUrl", () => {
+  it("joins the site domain and the path", () => {
     expect(
-      getUpgradeTrialUrl("https://www.onlyoffice.com/", ENTERPRISE_TRIAL_PATH),
-    ).toBe("https://www.onlyoffice.com/download#docspace-enterprise");
+      getUpgradeSiteUrl("https://www.onlyoffice.com/", ENTERPRISE_TRIAL_PATH),
+    ).toBe("https://www.onlyoffice.com/download#for-enterprises");
+  });
+
+  it("returns no address without a site domain", () => {
+    expect(getUpgradeSiteUrl("", ENTERPRISE_TRIAL_PATH)).toBe("");
   });
 });

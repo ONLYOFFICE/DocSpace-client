@@ -39,50 +39,28 @@ import { isMobile } from "react-device-detect";
 
 import ArticleLiveChat from "@onlyoffice/apps-ui-kit/components/article/sub-components/LiveChat";
 
-import LiveChatLauncher from "SRC_DIR/components/LiveChatLauncher";
-
 type LiveChatBlockProps = {
   isLiveChatAvailable: boolean;
   languageBaseName: string;
-  zendeskEmail: string;
-  chatDisplayName: string;
   zendeskKey: string;
   isShowLiveChat: boolean;
   withFloatingButton: boolean;
   isInfoPanelVisible: boolean;
-  onLiveChatClick: (t: (key: string) => string) => void;
 };
 
 /**
- * Live chat for the sidebar: the Zendesk widget plus the Support button that
- * opens it. The widget's own launcher stays hidden (ui-kit's loader sees to
- * that), so the button here is the only one on screen and is laid out with the
- * rest of the floating corner. The "Live chat" switch in the profile menu
- * (ProfileActionsStore.onLiveChatClick) is what puts the pair on the page. The
- * availability gate repeats the one that adds the switch to the menu, so the
- * two can never disagree.
+ * Live chat for the sidebar: the Zendesk widget, whose own launcher is the way
+ * into the chat. The "Live chat" switch in the profile menu
+ * (ProfileActionsStore.onLiveChatClick) loads the widget the first time and
+ * shows or hides it from then on. The availability gate repeats the one that
+ * adds the switch to the menu, so the two can never disagree. The launcher
+ * shares the bottom corner with the create button and the progress button,
+ * and the two flags below are what move it aside while one of those is there.
  */
-const LiveChatBlock = ({
-  isLiveChatAvailable,
-  withFloatingButton,
-  isInfoPanelVisible,
-  onLiveChatClick,
-  ...rest
-}: LiveChatBlockProps) => {
+const LiveChatBlock = ({ isLiveChatAvailable, ...rest }: LiveChatBlockProps) => {
   if (isMobile || !isLiveChatAvailable) return null;
 
-  return (
-    <>
-      <ArticleLiveChat {...rest} />
-      {rest.isShowLiveChat ? (
-        <LiveChatLauncher
-          withFloatingButton={withFloatingButton}
-          isInfoPanelVisible={isInfoPanelVisible}
-          onLiveChatClick={onLiveChatClick}
-        />
-      ) : null}
-    </>
-  );
+  return <ArticleLiveChat {...rest} />;
 };
 
 // Every field comes from the stores, so the public component takes no props.
@@ -90,7 +68,6 @@ const LiveChatBlockConnected = inject<TStore>(
   ({
     authStore,
     settingsStore,
-    userStore,
     infoPanelStore,
     profileActionsStore,
     filesStore,
@@ -108,13 +85,8 @@ const LiveChatBlockConnected = inject<TStore>(
     return {
       isLiveChatAvailable: authStore.isLiveChatAvailable,
       languageBaseName: authStore.languageBaseName,
-      zendeskEmail: userStore.user?.email ?? "",
-      chatDisplayName: userStore.user?.displayName ?? "",
       zendeskKey: settingsStore.zendeskKey,
       isShowLiveChat: profileActionsStore.isShowLiveChat,
-      // The launcher's own close switches live chat off, through the very
-      // action the profile menu toggle runs.
-      onLiveChatClick: profileActionsStore.onLiveChatClick,
       // CreateButtonMobile keeps mainButtonVisible in step with the create
       // button it renders into the same corner, so the launcher dodges exactly
       // when that button or the progress button is there.

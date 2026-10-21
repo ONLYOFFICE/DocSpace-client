@@ -161,6 +161,7 @@ export default async function RootLayout({
           contextData={{
             user,
             settings,
+            isCommunity: openSource,
             systemTheme: systemTheme?.value as ThemeKeys,
             colorTheme,
             locale,

@@ -45,6 +45,10 @@ import { AnalyticsEvents } from "@onlyoffice/apps-ui-kit/enums";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getBannerAttribute } from "@docspace/shared/utils";
+import {
+  getBannerTheme,
+  withBannerTheme,
+} from "@docspace/shared/utils/banner";
 import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
@@ -85,6 +89,7 @@ const Bar = (props) => {
     isUserTariffAlmostLimit,
 
     currentColorScheme,
+    isBaseTheme,
 
     setMainBarVisible,
     isPersonalQuotaLimit,
@@ -129,6 +134,9 @@ const Bar = (props) => {
   const [campaigns, setCampaigns] = useState();
 
   const { loadLanguagePath } = getBannerAttribute();
+
+  const isBaseThemeRef = React.useRef(isBaseTheme);
+  isBaseThemeRef.current = isBaseTheme;
 
   const onCloseQuota = (currentBar) => {
     // The tariff bars stay closed for good — they are resolved by an upgrade.
@@ -332,9 +340,12 @@ const Bar = (props) => {
     }
 
     try {
-      const [htmlUrl, currentBar] = await loadLanguagePath();
+      const [htmlUrl, currentBar] = await loadLanguagePath(
+        getBannerTheme(isBaseThemeRef.current),
+      );
 
-      setHtmlLink(htmlUrl);
+      // The theme may have flipped while the page was being checked.
+      setHtmlLink(withBannerTheme(htmlUrl, isBaseThemeRef.current));
       setCampaigns(currentBar);
     } catch (e) {
       console.error(e);
@@ -356,6 +367,12 @@ const Bar = (props) => {
   useEffect(() => {
     updateBanner();
   }, [t]);
+
+  // A theme switch re-themes the campaign on screen rather than calling
+  // updateBanner, which would advance the rotation to the next campaign.
+  useEffect(() => {
+    setHtmlLink((link) => withBannerTheme(link, isBaseTheme));
+  }, [isBaseTheme]);
 
   // The backend re-arms its own notification once the balance recovers, so the
   // dismissal is dropped on the same edge. Guarded on the true -> false
@@ -636,7 +653,7 @@ export default inject(
       isRoomsTariffLimit,
     } = currentQuotaStore;
 
-    const { currentColorScheme, setMainBarVisible } = settingsStore;
+    const { currentColorScheme, setMainBarVisible, theme } = settingsStore;
 
     const { formatWalletCurrency, isPayer } = paymentStore;
     const { walletLowBalance } = settingsStore;
@@ -667,6 +684,7 @@ export default inject(
       isUserTariffAlmostLimit,
 
       currentColorScheme,
+      isBaseTheme: theme?.isBase,
       setMainBarVisible,
 
       isPersonalQuotaLimit,

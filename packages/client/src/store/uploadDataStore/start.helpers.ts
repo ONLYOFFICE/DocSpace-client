@@ -429,6 +429,7 @@ export function retryUploadFilesImpl(
   retryFileUploaded.percent = 0;
 
   self.quotaErrorRaised = false;
+  self.finishUploadFilesCalled = false;
 
   if (self.uploaded) {
     const newUploadData = {
@@ -461,6 +462,7 @@ export function retryQuotaFailedFilesImpl(
   if (failed.length === 0) return;
 
   self.quotaErrorRaised = false;
+  self.finishUploadFilesCalled = false;
   failed.forEach((retryFile) => {
     const fileIndex = self.files.findIndex(
       (f) => f.uniqueId === retryFile.uniqueId,

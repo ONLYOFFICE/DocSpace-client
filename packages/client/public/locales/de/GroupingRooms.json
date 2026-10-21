@@ -8,6 +8,7 @@
   "DeleteGroup": "Gruppe löschen",
   "DisablingRoomGroups": "Deaktivierung von Raumgruppen",
   "DisablingRoomGroupsDescription": "Die Gruppen werden gespeichert, sind aber versteckt. Sie können sie in Profil, Dateiverwaltung wieder aktivieren.",
+  "DisablingSpaceGroups": "Deaktivierung von Space-Gruppen",
   "EditRoomGroups": "Bearbeiten Raumgruppen",
   "EditSpaceGroups": "Space-Gruppen bearbeiten",
   "EmptyGroupRoomsDescription": "Hier sind keine Räume vorhanden. Versuchen Sie, einen Raum hinzuzufügen, oder entfernen Sie diese Gruppe.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Die ausgewählten Räume wurden zu <1>{{groupName}}</1> hinzugefügt.",
   "RoomsRemovedFromGroup": "Die ausgewählten Räume wurden aus <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Der ausgewählte Space wurde zu <1>{{groupName}}</1> hinzugefügt.",
+  "SpaceGrouping": "Space-Gruppierung",
+  "SpaceGroupingDisabled": "Die Space-Gruppierung ist deaktiviert",
+  "SpaceGroupingEnabled": "Die Space-Gruppierung ist aktiviert",
+  "SpaceGroupingSettingDescription": "Sie können Spaces in Ordnern gruppieren und einfach zwischen ihnen wechseln.",
   "SpaceRemovedFromGroup": "Der ausgewählte Space wurde aus <1>{{groupName}}</1> entfernt.",
   "SpacesAddedToGroup": "Die ausgewählten Spaces wurden zu <1>{{groupName}}</1> hinzugefügt.",
   "SpacesRemovedFromGroup": "Die ausgewählten Spaces wurden aus <1>{{groupName}}</1> entfernt."

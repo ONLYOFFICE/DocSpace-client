@@ -45,8 +45,7 @@ import {
   elementGroupStep,
   sidebarSelector,
 } from "SRC_DIR/components/Tour/stepBuilders";
-
-const LOG_LABEL = "dashboard tour";
+import { DASHBOARD_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 
 /**
  * The dashboard's own anchors, as `data-tour-id` attributes rather than the
@@ -139,7 +138,7 @@ export function getTourSteps(
         t("DashboardTour:DashboardProfileTitle"),
         t("DashboardTour:DashboardProfile"),
         callbacks,
-        LOG_LABEL,
+        DASHBOARD_TOUR_LABEL,
       ),
 
     // 2. The quick actions, as an invitation rather than a description: create
@@ -152,15 +151,12 @@ export function getTourSteps(
         files: t("Common:Files"),
       }),
       callbacks,
-      LOG_LABEL,
+      DASHBOARD_TOUR_LABEL,
     ),
 
-    // 3. The whole row of apps, lit up as one region — every card named
-    // individually so the spotlight covers all of them rather than the first
-    // (see `appCardSelector`). The tooltip anchors on the section, so the
-    // heading above stays out of the spotlight while the text can still speak
-    // about the row as a whole: these are the products, and each one is a place
-    // to get something done.
+    // 3. The whole row of apps, every card named so the spotlight covers them
+    // all (see `appCardSelector`). The tooltip sits by the row, not by the
+    // section: the section's heading would push it up over the create tiles.
     appIds.length > 0 &&
       elementGroupStep(
         APPS_SECTION_SELECTOR,
@@ -168,7 +164,10 @@ export function getTourSteps(
         t("DashboardTour:DashboardAppsTitle"),
         t("DashboardTour:DashboardApps"),
         callbacks,
-        LOG_LABEL,
+        DASHBOARD_TOUR_LABEL,
+        6,
+        undefined,
+        true,
       ),
 
     // 4. The integrations card, which reads as an ad and is skipped as one —
@@ -180,7 +179,7 @@ export function getTourSteps(
         t("DashboardTour:DashboardIntegrationsTitle"),
         t("DashboardTour:DashboardIntegrations"),
         callbacks,
-        LOG_LABEL,
+        DASHBOARD_TOUR_LABEL,
       ),
 
     // 5. The developer tools, which is the one card on the page whose audience
@@ -200,7 +199,7 @@ export function getTourSteps(
           productName: getBrandName("ProductName"),
         }),
         callbacks,
-        LOG_LABEL,
+        DASHBOARD_TOUR_LABEL,
       ),
 
     // 6. The way back. The dashboard is a page users leave and have to be able
@@ -212,7 +211,7 @@ export function getTourSteps(
       t("DashboardTour:DashboardOverviewTitle"),
       t("DashboardTour:DashboardOverview", { overview: t("Common:Home") }),
       callbacks,
-      LOG_LABEL,
+      DASHBOARD_TOUR_LABEL,
     ),
   ].filter(Boolean) as Step[];
 }

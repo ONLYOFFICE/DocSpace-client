@@ -3,7 +3,7 @@
   "content": "Add members to work together in the room",
   "content_en_sha1_hash": "e19f18cf783ccb85e5c0d701d010f05303f7f642",
   "created_at": "2026-08-31T18:23:45.817Z",
-  "updated_at": "2026-08-31T19:58:03.550Z",
+  "updated_at": "2026-10-06T10:42:37.463Z",
   "comment": {
     "text": "Subtext for an invitation option in an empty state view, explaining the purpose of adding members to a room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 341,
+      "line_number": 344,
       "context": "\"pdf\",\n );\n \n const inviteUserOption = createInviteOption(\n t(\"Common:InviteContacts\"),\n t(\"EmptyView:InviteUsersOptionDescription\"),\n );\n \n const inviteUser = isTemplateFolder ? templateAccess : inviteUserOption;\n \n const shareFillingRoom = {",
       "module": "/packages/client"
     }

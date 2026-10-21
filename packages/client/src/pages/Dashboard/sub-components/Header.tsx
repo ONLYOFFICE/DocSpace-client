@@ -66,9 +66,8 @@ import { useNavigate } from "react-router";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
-import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
+import TourReactSvgUrl from "PUBLIC_DIR/images/icons/16/tour.react.svg?url";
 
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 
@@ -87,6 +86,7 @@ type HeaderProps = {
   isAdminOrOwner?: boolean;
   standalone?: boolean;
   isCommunity?: boolean;
+  logoText?: string;
 };
 
 const Header = ({
@@ -96,6 +96,7 @@ const Header = ({
   isAdminOrOwner = false,
   standalone = false,
   isCommunity = false,
+  logoText = "",
 }: HeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -109,7 +110,7 @@ const Header = ({
       <div className={styles.planHeaderText}>
         <Text className={styles.planTitle}>
           {t("Common:WelcomeToOrganization", {
-            organizationName: getBrandName("OrganizationName"),
+            organizationName: logoText,
           })}
         </Text>
 
@@ -156,7 +157,7 @@ const Header = ({
       {onOpenTour ? (
         <IconButton
           className={styles.helpButton}
-          iconName={QuestionReactSvgUrl}
+          iconName={TourReactSvgUrl}
           size={16}
           isClickable
           title={t("Common:WelcomeStartTour")}
@@ -181,6 +182,7 @@ const HeaderConnected = inject<TStore>(
       (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
     standalone: settingsStore.standalone,
     isCommunity: currentTariffStatusStore.isCommunity,
+    logoText: settingsStore.logoText,
   }),
 )(observer(Header));
 

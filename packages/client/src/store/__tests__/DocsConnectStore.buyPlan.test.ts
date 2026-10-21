@@ -48,6 +48,14 @@ vi.mock("@docspace/shared/api/docs-connect", () => ({
   startDocsConnectReport: vi.fn(),
   getDocsConnectReportStatus: vi.fn(),
   getDocsConnectConnection: vi.fn(),
+  DocsConnectDeclinedError: class extends Error {
+    action: string;
+
+    constructor(action: string) {
+      super(action);
+      this.action = action;
+    }
+  },
 }));
 
 vi.mock("@docspace/shared/api/portal", () => ({
@@ -79,6 +87,9 @@ vi.mock("../../i18n", () => ({
 
 import {
   buyDocsConnectPlan,
+  cancelDocsConnectPlan,
+  cancelDocsConnectScheduledChange,
+  DocsConnectDeclinedError,
   getDocsConnectInfo,
   switchDocsConnectToDevPack,
 } from "@docspace/shared/api/docs-connect";
@@ -165,6 +176,9 @@ const createStore = (
   return store;
 };
 
+const panelTopUp = (store: DocsConnectStore, charge: number) =>
+  Math.max(0, Math.ceil(charge - (store.info?.wallet?.availableCredits ?? 0)));
+
 const mockedSaveDeposite = vi.mocked(saveDeposite);
 const mockedGetInfo = vi.mocked(getDocsConnectInfo);
 const mockedSwitchToDevPack = vi.mocked(switchDocsConnectToDevPack);
@@ -201,11 +215,13 @@ describe("DocsConnectStore.switchToDevPack", () => {
 
     expect(mockedSaveDeposite).toHaveBeenCalledTimes(1);
     expect(mockedSaveDeposite).toHaveBeenCalledWith(TOP_UP, "USD");
-    expect(store.depositedTopUp).toBe(TOP_UP);
     expect(store.info?.wallet?.availableCredits).toBe(START_BALANCE + TOP_UP);
     expect(store.buyPlanPanelVisible).toBe(true);
 
-    await store.switchToDevPack({ quantity: USERS, topUp: TOP_UP });
+    await store.switchToDevPack({
+      quantity: USERS,
+      topUp: panelTopUp(store, DEV_PACK_CHARGE),
+    });
 
     expect(mockedSaveDeposite).toHaveBeenCalledTimes(1);
     expect(mockedSwitchToDevPack).toHaveBeenCalledTimes(2);
@@ -225,11 +241,61 @@ describe("DocsConnectStore.switchToDevPack", () => {
       store.switchToDevPack({ quantity: USERS, topUp: TOP_UP }),
     ).rejects.toThrow("Insufficient funds");
 
-    await store.switchToDevPack({ quantity: USERS + 10, topUp: TOP_UP + 50 });
+    await store.switchToDevPack({
+      quantity: USERS + 10,
+      topUp: panelTopUp(store, DEV_PACK_CHARGE + 50),
+    });
 
     expect(mockedSaveDeposite).toHaveBeenCalledTimes(2);
     expect(mockedSaveDeposite).toHaveBeenNthCalledWith(1, TOP_UP, "USD");
     expect(mockedSaveDeposite).toHaveBeenNthCalledWith(2, 50, "USD");
+  });
+
+  it("tops up a smaller shortfall on a retry after the deposit shows on the balance", async () => {
+    const store = createStore(makeInfo());
+
+    mockedSwitchToDevPack
+      .mockRejectedValueOnce(new Error("Insufficient funds"))
+      .mockResolvedValueOnce(makeInfo({ devPackEnabled: true }));
+
+    await expect(
+      store.switchToDevPack({ quantity: USERS, topUp: TOP_UP }),
+    ).rejects.toThrow("Insufficient funds");
+
+    expect(store.depositedTopUp).toBe(0);
+
+    await store.switchToDevPack({
+      quantity: USERS + 2,
+      topUp: panelTopUp(store, DEV_PACK_CHARGE + 20),
+    });
+
+    expect(mockedSaveDeposite).toHaveBeenCalledTimes(2);
+    expect(mockedSaveDeposite).toHaveBeenNthCalledWith(2, 20, "USD");
+    expect(mockedSwitchToDevPack).toHaveBeenCalledTimes(2);
+  });
+
+  it("does not top up again while the deposit is not on the balance yet", async () => {
+    const store = createStore(makeInfo());
+
+    mockedSaveDeposite.mockResolvedValueOnce("ok");
+    mockedSwitchToDevPack
+      .mockRejectedValueOnce(new Error("Insufficient funds"))
+      .mockResolvedValueOnce(makeInfo({ devPackEnabled: true }));
+
+    await expect(
+      store.switchToDevPack({ quantity: USERS, topUp: TOP_UP }),
+    ).rejects.toThrow("Insufficient funds");
+
+    expect(store.depositedTopUp).toBe(TOP_UP);
+    expect(store.info?.wallet?.availableCredits).toBe(START_BALANCE);
+
+    await store.switchToDevPack({
+      quantity: USERS,
+      topUp: panelTopUp(store, DEV_PACK_CHARGE),
+    });
+
+    expect(mockedSaveDeposite).toHaveBeenCalledTimes(1);
+    expect(mockedSwitchToDevPack).toHaveBeenCalledTimes(2);
   });
 
   it("does not switch the plan when the top-up itself fails", async () => {
@@ -313,7 +379,11 @@ describe("DocsConnectStore.buyPlan", () => {
 
     expect(mockedSaveDeposite).toHaveBeenCalledTimes(1);
 
-    await store.buyPlan({ users: USERS + 10, devPack: false, topUp: TOP_UP });
+    await store.buyPlan({
+      users: USERS + 10,
+      devPack: false,
+      topUp: panelTopUp(store, DEV_PACK_CHARGE),
+    });
 
     expect(mockedSaveDeposite).toHaveBeenCalledTimes(1);
     expect(mockedBuyPlan).toHaveBeenCalledTimes(2);
@@ -389,6 +459,61 @@ describe("DocsConnectStore.buyPlanViaStripe", () => {
 
     expect(result).toBeNull();
     expect(store.buyPlanPanelVisible).toBe(true);
+  });
+});
+
+describe("DocsConnectStore declined requests", () => {
+  it("reports a declined cancellation with a translated message", async () => {
+    const store = createStore(makeInfo());
+    vi.mocked(cancelDocsConnectPlan).mockRejectedValueOnce(
+      new DocsConnectDeclinedError("cancelPlan"),
+    );
+
+    await expect(store.cancelPlan()).rejects.toThrow(
+      "DocsConnect:PlanCancellationFailed",
+    );
+  });
+
+  it("reports a declined scheduled change cancellation with a translated message", async () => {
+    const store = createStore(makeInfo());
+    vi.mocked(cancelDocsConnectScheduledChange).mockRejectedValueOnce(
+      new DocsConnectDeclinedError("cancelScheduledChange"),
+    );
+
+    await expect(store.cancelScheduledChange()).rejects.toThrow(
+      "DocsConnect:ScheduledChangeCancellationFailed",
+    );
+  });
+
+  it("reports a declined purchase with a translated message", async () => {
+    const store = createStore(makeInfo());
+    mockedBuyPlan.mockRejectedValueOnce(
+      new DocsConnectDeclinedError("buyPlan"),
+    );
+
+    await expect(
+      store.buyPlan({ users: USERS, devPack: false, topUp: 0 }),
+    ).rejects.toThrow("DocsConnect:PlanUpdateFailed");
+  });
+
+  it("reports a declined Dev Pack switch with a translated message", async () => {
+    const store = createStore(makeInfo());
+    mockedSwitchToDevPack.mockRejectedValueOnce(
+      new DocsConnectDeclinedError("switchToDevPack"),
+    );
+
+    await expect(
+      store.switchToDevPack({ quantity: USERS, topUp: 0 }),
+    ).rejects.toThrow("DocsConnect:DevPackSwitchFailed");
+  });
+
+  it("passes other errors through unchanged", async () => {
+    const store = createStore(makeInfo());
+    vi.mocked(cancelDocsConnectPlan).mockRejectedValueOnce(
+      new Error("Tariff is not paid"),
+    );
+
+    await expect(store.cancelPlan()).rejects.toThrow("Tariff is not paid");
   });
 });
 

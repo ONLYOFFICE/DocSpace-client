@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "«{{folderTitle}}» -kansiosta",
   "FeedLocationRoomLabel": "Huone «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Osio «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Tila «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Analysoi vastaukset tekoälyllä",
   "FormRoomAIModalConnect": "Yhdistä tietokanta",
   "FormRoomAIModalDescription": "Yhdistä tietokanta analysoidaksesi kaikki kerätyt vastaukset \"Kysy AI:lta\" -toiminnolla. Voit jatkaa ilman sitä ja kysyä vain tästä lomakkeesta.",

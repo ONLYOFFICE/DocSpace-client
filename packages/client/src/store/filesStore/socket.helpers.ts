@@ -43,6 +43,7 @@ import {
 } from "@docspace/shared/enums";
 import {
   frameCallEvent,
+  getCategoryType,
   getFileExtension,
 } from "@docspace/shared/utils/common";
 import {
@@ -204,8 +205,14 @@ export async function wsModifyFolderCreateImpl(
       if (movedToIndex > -1) self.folders[movedToIndex].foldersCount++;
     }
 
+    const isFormRoom = folder.roomType === RoomsType.FormRoom;
+    const isInSelectedFolder = (parentId: number | string) =>
+      isFormRoom
+        ? self.treeFoldersStore.isFormsFolder
+        : self.selectedFolderStore.id == parentId;
+
     if (
-      self.selectedFolderStore.id != folder.parentId ||
+      !isInSelectedFolder(folder.parentId) ||
       (folder.roomType &&
         folder.createdBy.id === self.userStore.user!.id &&
         self.roomCreated)
@@ -217,7 +224,7 @@ export async function wsModifyFolderCreateImpl(
 
     console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
 
-    if (!folderInfo || folderInfo.parentId !== self.selectedFolderStore.id) {
+    if (!folderInfo || !isInSelectedFolder(folderInfo.parentId)) {
       console.log("Skip UNSUBSCRIBED folder creation");
       return;
     }
@@ -533,7 +540,20 @@ export function redirectToParentImpl(
       }
 
       if (pathPart.id === roomsFolderId) {
-        return window.DocSpace.navigate("/");
+        const isForms =
+          getCategoryType(window.DocSpace.location) === CategoryType.Form;
+
+        const roomsFilter = RoomsFilter.getDefault();
+        if (isForms) roomsFilter.searchArea = RoomSearchArea.Forms;
+
+        const path = getCategoryUrl(
+          isForms ? CategoryType.Forms : CategoryType.Shared,
+        );
+
+        return window.DocSpace.navigate(
+          `${path}?${roomsFilter.toUrlParams(userId as string, true)}`,
+          { replace: true },
+        );
       }
 
       const filter = FilesFilter.getDefault();

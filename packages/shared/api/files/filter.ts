@@ -246,6 +246,9 @@ class FilesFilter {
       case CategoryType.Favorite:
         filter.folder = "@favorites";
         break;
+      case CategoryType.Trash:
+        filter.folder = "@trash";
+        break;
       default:
     }
 

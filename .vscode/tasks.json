@@ -313,6 +313,21 @@
       }
     },
     {
+      "label": "Frontend | update ai-chat",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run update-ai-chat",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | build",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run build",

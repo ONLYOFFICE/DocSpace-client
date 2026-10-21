@@ -187,6 +187,3 @@ overrides:
   # Deliberately NOT overridden: braces (GHSA-vfj7-8cjw-p6xm) has no patched
   # release. It arrives only via shx > shelljs > fast-glob > micromatch, a
   # build-script path that expands our own fixed glob patterns.
-
-patchedDependencies:
-  '@onlyoffice/docspace-api-sdk@3.7.0': patches/@onlyoffice__docspace-api-sdk@3.7.0.patch

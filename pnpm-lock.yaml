@@ -290,9 +290,6 @@ overrides:
   fflate: ^0.8.3
   compression: ^1.8.2
 
-patchedDependencies:
-  '@onlyoffice/docspace-api-sdk@3.7.0': 753645ac85bde516d80ecdcfd246ded53f8dbcc0843dc7fa9f2f36c0f2ed3f53
-
 importers:
 
   .:
@@ -3610,7 +3607,7 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-s+v4pZ+TUNIDxv5nKuSPlKh1CD1VQIwdI3gllwvJ3CpT68rtLsGfK5j7DzP/RDK4JqJAHpnJpvG5O9N7R12xQQ==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-zzmcf3GVqT18Hxtnp/8tN11M0CYrdx07Gxe1BcNs53tQNPN89vBfQIxAUF6ujRmqM0emj0KMGx5HpQ77oIQu7w==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.0.1
     engines: {node: '>=22'}
     peerDependencies:
@@ -11861,7 +11858,7 @@ snapshots:
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(bafd37fd21029477e628db2559e7882c)':
     dependencies:
       '@floating-ui/dom': 1.6.13
-      '@onlyoffice/docspace-api-sdk': 3.7.0(patch_hash=753645ac85bde516d80ecdcfd246ded53f8dbcc0843dc7fa9f2f36c0f2ed3f53)(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
+      '@onlyoffice/docspace-api-sdk': 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
       classnames: 2.5.1
       cnbuilder: 3.1.0
       copy-to-clipboard: 3.3.3
@@ -11917,7 +11914,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@onlyoffice/docspace-api-sdk@3.7.0(patch_hash=753645ac85bde516d80ecdcfd246ded53f8dbcc0843dc7fa9f2f36c0f2ed3f53)(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)':
+  '@onlyoffice/docspace-api-sdk@3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
       axios: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
     transitivePeerDependencies:

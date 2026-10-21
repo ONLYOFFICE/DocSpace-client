@@ -9,7 +9,10 @@ file titles are not validated, watermark/indexing/lifetime settings can be
 applied to a private room, audit events cover
 key envelopes only, no operation removes a user's file access entries (a
 removed member keeps them), and there is no administrative recovery, SCIM
-offboarding or file-key history. The stashed `AUDIT_BACKEND.md` (June 2026) listed these as
+offboarding or file-key history. Archived private rooms lose the server's
+private-room guards: their files report the copy right, and a portal
+administrator who is not a member can read, copy, delete or unarchive them by
+id. Room events also carry private-room titles to every administrator. The stashed `AUDIT_BACKEND.md` (June 2026) listed these as
 P1/P2; the stashed `V1_RELEASE_PROGRESS.md` made admin recovery, audit log
 viewer and SCIM the P0 set for a B2B launch and decided that without them the
 feature ships to individuals and SMB owners only. None of it has landed on the
@@ -41,6 +44,12 @@ the file to change so the backend team can pick them up; nothing here is
   recovery flows once the endpoints exist.
 - The existing upload-session abort route is documented and used by the
   client when an encrypted upload is cancelled.
+- Archived private rooms keep the private-room guards of active ones: no copy
+  right on their files and subfolders, and no administrator bypass for
+  administrators who are not members. Whether a folder can be copied out of
+  an archived private room is traced first (design.md, Open Questions).
+- Socket events of a private room reach its members only, not every
+  administrator.
 
 ## Capabilities
 
@@ -52,8 +61,10 @@ None.
 
 - `private-rooms/server-contract`: owner change, edition gate, invitation
   e-mail, audit scope, recovery/offboarding
-  endpoints change; new requirements for metadata guards, title validation,
-  upload-session abort and access history.
+  endpoints and the copy right in archived private rooms change; new
+  requirements for metadata guards, title validation, upload-session abort,
+  access history, the administrator bypass in archived private rooms and
+  private-room event recipients.
 
 ## Impact
 
@@ -61,12 +72,16 @@ None.
   `CreateRoomAsync`, `UpdateRoomAsync`, `SetEncryptionInfoAsync`),
   `FileSharing.cs` / `StudioNotifyService` (invite e-mails),
   `DocumentsActionMapper.cs` and the audit pipeline, `VirtualRoomsController.cs`,
-  new recovery and SCIM controllers.
+  new recovery and SCIM controllers, the Archive branch of
+  `FileSecurity.FilterEntryAsync`, `CopyPermissionsCheck.cs` (traced only) and
+  `SocketManager.cs`.
 - Client: `packages/shared/api/privacy`, `packages/shared/api/files`,
   `packages/shared/services/private-room/room-encryption.ts` (owner hand-over
   backfill), `packages/client/src/components/panels/ChangeRoomOwnerPanel`,
   keys-management enrolment UI, MSW handlers and contract tests under
-  `packages/shared/__mocks__/handlers/{privacyroom,files}`.
+  `packages/shared/__mocks__/handlers/{privacyroom,files}` (the archived
+  variant of `encryptedFilesHandlers` follows the copy right once the server
+  changes).
 - No Document Server dependency.
 
 ## Out of scope

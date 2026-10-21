@@ -60,7 +60,40 @@ For the B2B launch the server SHALL, when a user is deprovisioned (SCIM or manua
 - **WHEN** the owner of a private room is deprovisioned without a new owner
 - **THEN** the deactivation is refused until a new owner with keys is named
 
+### Requirement: Administrator bypass excludes archived private rooms
+The server SHALL NOT grant a portal administrator who is not a member of an archived private room any right by role alone: no read, copy or download on its files and folders, and no move, delete or index export on the room. This SHALL match an active private room. An administrator who is a member SHALL keep the rights of their own share.
+
+#### Scenario: Non-member administrator reads an archived private room's file
+- **WHEN** a portal administrator who is not a member requests a file of an archived private room by id
+- **THEN** the server answers as for an entry the caller cannot read and reports no right on it
+
+#### Scenario: Non-member administrator deletes or restores an archived private room
+- **WHEN** a portal administrator who is not a member asks to delete an archived private room, or to move it back to Rooms, by id
+- **THEN** the server refuses the request and the room stays where it is
+
+#### Scenario: Member administrator
+- **WHEN** a portal administrator who was invited to a private room opens it after it was archived
+- **THEN** they keep the rights of their share in the room
+
+### Requirement: Private-room events reach members only
+The server SHALL send the socket events of a private room, active or archived, and of its entries only to users who can read the room. It SHALL NOT add portal administrators who are not members to the recipients, so the room title reaches no one outside the room.
+
+#### Scenario: Private room renamed
+- **WHEN** a private room is renamed or a file is added to it
+- **THEN** members receive the event and a portal administrator who is not a member receives none
+
 ## MODIFIED Requirements
+
+### Requirement: Copy right inside archived private rooms
+The server SHALL deny the copy right on a file inside a private room, and on a subfolder of one, to every user, room owner included, whether the room is active or archived. In an archived private room the other rights follow the rules of every archived room.
+
+#### Scenario: File in an active private room
+- **WHEN** the owner of an active private room lists its encrypted files
+- **THEN** each file reports the copy right as false
+
+#### Scenario: File in an archived private room
+- **WHEN** the owner, a room manager, a content creator or an editor lists the encrypted files of an archived private room
+- **THEN** each file reports the copy right as false, as it does editing, renaming, moving and deleting
 
 ### Requirement: Owner change requires the new owner's keys
 The server SHALL refuse an ownership change of a private room when the new owner has no encryption keys, and SHALL report which encrypted files in the room have no access entry for the new owner so the client can backfill them before completing the change.

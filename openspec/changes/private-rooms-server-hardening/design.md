@@ -43,6 +43,29 @@ See proposal.md. Server state on `hotfix/v4.0.1` (`../server`):
   (`HttpDelete("{folderId}/session/{sessionId}")`) exists; the client has no
   caller for it.
 - No recovery, SCIM or access-history controllers exist.
+- Archived private rooms: the Archive branch of `FileSecurity.FilterEntryAsync`
+  (`products/ASC.Files/Core/Core/Security/FileSecurity.cs:1929-1989`) has no
+  private-room guard. Recorded by `private-rooms-archived-room-rules` and
+  `private-rooms-sidebar-section` (their design.md, "Server findings outside
+  this change"):
+  - a file in an archived private room reports the copy right, which an
+    active one denies (`:1894-1922`);
+  - its administrator bypass (`:1949-1983`) has no `inPrivateRoom` exclusion,
+    unlike the VirtualRooms branch (`:1650-1652`). A portal administrator who
+    is not a member gets read, copy and download on the room's entries by id
+    (the content stays ciphertext), and move, delete and index export on the
+    room itself (`:1979`), so they can delete or unarchive it.
+- Folder copy out of an archived private room: the folder-level private rule
+  of the copy check reads the folder's own private setting
+  (`products/ASC.Files/Core/Services/WCFService/FileOperations/CopyPermissionsCheck.cs:467`),
+  which only a room carries, and the Archive branch grants Copy on
+  subfolders. How the copy operation then treats the files inside was not
+  traced.
+- Room events: `SocketManager.WhoCanRead`
+  (`products/ASC.Files/Core/Utils/SocketManager.cs:411-419`) adds every
+  administrator to the recipients for VirtualRooms and Archive entries, and
+  the folder payload carries the room title, so administrators who are not
+  members receive the titles of private rooms.
 
 The stashed `AUDIT_BACKEND.md` (2026-06-03) already lists the owner-change,
 billing, metadata-guard, title-validation, e-mail and PK items; the
@@ -100,6 +123,20 @@ without them.
    session; cancelling currently leaves the session to expire. Calling abort
    removes the partial ciphertext immediately.
 
+7. **Archive gets the VirtualRooms guards.** The Archive branch applies the
+   same private-room copy denial for files and subfolders and skips the
+   administrator bypass inside private rooms, as the VirtualRooms branch does.
+   The client already withholds Ctrl+C and decrypts copy-out in archived
+   private rooms (`private-rooms-archived-room-rules`), so the server rule is
+   the second line, not a client prerequisite. Alternative: deny every right
+   to non-members in Archive; rejected because a member administrator must
+   keep the rights of their share.
+
+8. **Private-room events go to members only.** `WhoCanRead` adds the
+   administrators only for rooms without the private setting. Alternative:
+   strip the title from the event payload; rejected because a member's client
+   needs it to refresh the list.
+
 ## Risks / Trade-offs
 
 - [Backend schedule] → every server task is independent; the client lands
@@ -137,3 +174,9 @@ without them.
   upload sessions and uploads, `copyas` conversion output). No requirement in
   this change covers it yet, although `private-rooms-upload-fail-closed`
   defers its server-side guard here. Owner: backend team with product.
+- Folder copy out of an archived private room (see Context): whether a batch
+  copy of a subfolder creates the folder outside the room, and what happens
+  to the encrypted files in it. The client never requests one
+  (file-operations, "Folders cannot leave an archived private room"). Owner:
+  backend team; task 9.2 traces it and decides whether a requirement is
+  needed.

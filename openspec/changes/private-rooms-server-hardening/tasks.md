@@ -39,9 +39,16 @@ Withdrawn: the client operates with one key per user (`private-rooms-single-key`
 - [ ] 8.1 Backend: recovery-administrator enrolment and retrieval routes with audit, and the deprovisioning hook that blocks owner deprovisioning; the part of the hook that revokes entries is BLOCKED on 6.0 (no removal operation exists today); verify with server unit tests
 - [ ] 8.2 Client: enrolment step in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management` (opt-in by policy) and a recovery action for administrators, with locale keys translated; verify with hook unit tests next to the existing flows and `packages/client/__tests__/keys-management.spec.ts`
 
-## 9. Integration
+## 9. Archived private rooms and room events
 
-- [ ] 9.1 Run the client E2E private-room suite against the updated mocks and the pre-push gate; verify with `pnpm test:e2e:docker:start` and `openspec validate --all --strict`
+- [ ] 9.1 Backend: in the Archive branch of `FileSecurity.FilterEntryAsync` (`../server/products/ASC.Files/Core/Core/Security/FileSecurity.cs`) apply the private-room copy denial for files and subfolders and skip the administrator bypass inside private rooms, as the VirtualRooms branch does (design decision 7); verify with server unit tests on an archived private room: the owner and members get no Copy, an administrator who is not a member gets no right on its entries and cannot delete or move the room, an administrator who is a member keeps the rights of their share
+- [ ] 9.2 Backend: trace a batch copy of a subfolder out of an archived private room (`CopyPermissionsCheck.cs:467` reads the folder's own private setting; the Archive branch grants Copy on subfolders) and record in design.md whether the folder or its encrypted files can land outside the room; if they can, add a requirement and a backend task to this section. Verified by the result recorded in design.md
+- [ ] 9.3 Backend: leave administrators who are not members out of the socket recipients of a private room in `SocketManager.WhoCanRead` (`../server/products/ASC.Files/Core/Utils/SocketManager.cs`) (design decision 8); verify with a server unit test
+- [ ] 9.4 Client: once 9.1 has merged, set Copy to false for the files and folders of the `archived` variant of `encryptedFilesHandlers` (`packages/shared/__mocks__/handlers/files/encryptedFiles.ts`) and update the contract case "File in an archived private room" in `encrypted-files-contract.test.ts`; client behaviour does not change, because Ctrl+C is already withheld and copy-out already decrypts; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files` and `cd packages/client && pnpm test:e2e:docker:dev __tests__/private-room-archived.spec.ts`
+
+## 10. Integration
+
+- [ ] 10.1 Run the client E2E private-room suite against the updated mocks and the pre-push gate; verify with `pnpm test:e2e:docker:start` and `openspec validate --all --strict`
 
 ## Workflow follow-up
 

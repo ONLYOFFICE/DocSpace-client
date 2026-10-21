@@ -46,6 +46,7 @@ import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/Conf
 import { releaseUploadAutoLockSuspension, removeDuplicate } from "./helpers";
 import type { TUploadBrowserFile, TUploadFile, TUploadTarget } from "./helpers";
 import { withItemUploadContext } from "./target.helpers";
+import { finishUploadIfSettled } from "./chunkUpload.helpers";
 import type {
   default as UploadDataStore,
   TAxiosLikeError,
@@ -394,7 +395,26 @@ export function startUploadImpl(
   }
 }
 
-export function retryUploadFilesImpl(
+/** Retried files go through the batch unlock again before any byte is sent. */
+async function sendRetriedFiles(
+  self: UploadDataStore,
+  retryFiles: TUploadFile[],
+  t: TTranslation,
+) {
+  const canProceed = await self.ensureEncryptionUnlockedForBatch();
+  if (!canProceed) {
+    self.cancelEncryptedBatchUpload();
+  }
+
+  const filesToSend = retryFiles.filter((f) => !f.error);
+  if (filesToSend.length === 0) {
+    finishUploadIfSettled(self, t);
+    return;
+  }
+  self.parallelUploading(filesToSend, t);
+}
+
+export async function retryUploadFilesImpl(
   self: UploadDataStore,
   t: TTranslation,
   uniqueId: string,
@@ -449,10 +469,10 @@ export function retryUploadFilesImpl(
     self.primaryProgressDataStore.setPrimaryProgressBarData(progressData);
   }
 
-  self.parallelUploading([retryFile], t);
+  await sendRetriedFiles(self, [retryFile], t);
 }
 
-export function retryQuotaFailedFilesImpl(
+export async function retryQuotaFailedFilesImpl(
   self: UploadDataStore,
   t: TTranslation,
 ) {
@@ -504,5 +524,5 @@ export function retryQuotaFailedFilesImpl(
   const retryFiles = self.files.filter((f) =>
     failed.some((rf) => rf.uniqueId === f.uniqueId),
   );
-  self.parallelUploading(retryFiles, t);
+  await sendRetriedFiles(self, retryFiles, t);
 }

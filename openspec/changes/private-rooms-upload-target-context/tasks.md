@@ -49,7 +49,7 @@
     - every `/files/{roomId}/session` request must carry `encrypted: true` and a UUID name, and no chunk body may be plaintext.
 
   Run `cd packages/client && pnpm exec vitest run src/store/uploadDataStore`, and the E2E spec in Docker with `cd packages/client && pnpm test:e2e:docker:dev __tests__/private-room-upload-target.spec.ts`.
-- [ ] 1.4 Make retry run the rules again (design D6). `retryUploadFilesImpl` and `retryQuotaFailedFilesImpl` (`start.helpers.ts`) keep the item's target. Before `parallelUploading`, they run the batch unlock over the retried items that will be encrypted. If the user declines, the existing cancel path fails those items with `Common:EncryptionLockedUpload`.
+- [x] 1.4 Make retry run the rules again (design D6). `retryUploadFilesImpl` and `retryQuotaFailedFilesImpl` (`start.helpers.ts`) keep the item's target. Before `parallelUploading`, they run the batch unlock over the retried items that will be encrypted. If the user declines, the existing cancel path fails those items with `Common:EncryptionLockedUpload`.
 
   Verify with:
   - new cases in `packages/client/src/store/uploadDataStore/__tests__/UploadDataStore.retry.test.ts`:

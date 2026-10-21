@@ -145,7 +145,7 @@ describe("handleFilesUploadImpl", () => {
 });
 
 describe("retryUploadFilesImpl", () => {
-  it("resets an errored upload row, clears the quota flag and re-primes the pool", () => {
+  it("resets an errored upload row, clears the quota flag and re-primes the pool", async () => {
     const { store } = createTestUploadDataStore();
     store.files = [
       makeUploadFile({
@@ -162,7 +162,7 @@ describe("retryUploadFilesImpl", () => {
     const parallelUploading = vi.fn();
     store.parallelUploading = parallelUploading as never;
 
-    retryUploadFilesImpl(store, t, "x");
+    await retryUploadFilesImpl(store, t, "x");
 
     expect(store.files[0].action).toBe("upload");
     expect(store.files[0].error).toBe("");
@@ -171,7 +171,7 @@ describe("retryUploadFilesImpl", () => {
     expect(parallelUploading).toHaveBeenCalledTimes(1);
   });
 
-  it("delegates a failed conversion retry to convertFile", () => {
+  it("delegates a failed conversion retry to convertFile", async () => {
     const { store } = createTestUploadDataStore();
     store.files = [makeUploadFile({ uniqueId: "c", action: "convert" })];
     store.uploadedFilesHistory = [
@@ -180,14 +180,14 @@ describe("retryUploadFilesImpl", () => {
     const convertFile = vi.fn();
     store.convertFile = convertFile as never;
 
-    retryUploadFilesImpl(store, t, "c");
+    await retryUploadFilesImpl(store, t, "c");
 
     expect(convertFile).toHaveBeenCalledTimes(1);
   });
 });
 
 describe("retryQuotaFailedFilesImpl", () => {
-  it("resets only quota-failed rows and re-primes the pool", () => {
+  it("resets only quota-failed rows and re-primes the pool", async () => {
     const { store } = createTestUploadDataStore();
     store.files = [
       makeUploadFile({ uniqueId: "q", action: "upload", isQuotaError: true }),
@@ -200,7 +200,7 @@ describe("retryQuotaFailedFilesImpl", () => {
     const parallelUploading = vi.fn();
     store.parallelUploading = parallelUploading as never;
 
-    retryQuotaFailedFilesImpl(store, t);
+    await retryQuotaFailedFilesImpl(store, t);
 
     expect(store.files[0].isQuotaError).toBe(false);
     expect(store.files[0].action).toBe("upload");
@@ -208,13 +208,13 @@ describe("retryQuotaFailedFilesImpl", () => {
     expect(parallelUploading).toHaveBeenCalledTimes(1);
   });
 
-  it("is a no-op when no file has a quota error", () => {
+  it("is a no-op when no file has a quota error", async () => {
     const { store } = createTestUploadDataStore();
     store.files = [makeUploadFile({ action: "upload" })];
     const parallelUploading = vi.fn();
     store.parallelUploading = parallelUploading as never;
 
-    retryQuotaFailedFilesImpl(store, t);
+    await retryQuotaFailedFilesImpl(store, t);
 
     expect(parallelUploading).not.toHaveBeenCalled();
   });

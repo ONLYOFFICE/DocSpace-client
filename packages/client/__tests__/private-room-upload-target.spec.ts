@@ -177,6 +177,30 @@ const holdSessions = (mockRequest: WorkerFixture) => {
   return release;
 };
 
+/** Answers the first session request into the private room with a server error. */
+const failFirstSession = (mockRequest: WorkerFixture) => {
+  let failed = false;
+  mockRequest.use(
+    http.post(sessionUrl, () => {
+      if (failed) return undefined;
+      failed = true;
+      return new Response(
+        JSON.stringify({
+          error: { message: "Upload session failed" },
+          status: 1,
+          statusCode: 500,
+        }),
+        { status: 500, headers: { "Content-Type": "application/json" } },
+      );
+    }),
+  );
+};
+
+const retryFromUploadPanel = async (page: Page) => {
+  await page.locator(".layout-progress-bar").getByTestId("icon-upload").click();
+  await page.locator(".enter-password", { hasText: "Retry" }).click();
+};
+
 const plaintextFiles = (count: number) =>
   Array.from({ length: count }, (_, i) => ({
     name: `note-${i}.txt`,
@@ -246,6 +270,35 @@ test.describe("Private room — upload target fixed when the user starts the upl
       )
       .toBe(QUEUED_FILE_COUNT);
     expect(sent).toHaveLength(QUEUED_FILE_COUNT);
+    expectOnlyCiphertext(sent, filesHandle.current!);
+  });
+
+  test("Retry from another folder", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const { filesHandle, passphrase } = await openPrivateRoomWithKey(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const sent = recordSessionRequests(page);
+    failFirstSession(mockRequest);
+
+    await page.locator("#customFileInput").first().setInputFiles(plaintextFiles(1));
+    await unlockIfPrompted(page, passphrase);
+    await expect.poll(() => sent.length, { timeout: 30000 }).toBe(1);
+
+    await openRoomsList(page);
+    await retryFromUploadPanel(page);
+    await unlockIfPrompted(page, passphrase);
+
+    await expect
+      .poll(
+        () => filesHandle.current!.getSessions().filter((s) => s.completed)
+          .length,
+        { timeout: 30000 },
+      )
+      .toBe(1);
+    expect(sent).toHaveLength(2);
     expectOnlyCiphertext(sent, filesHandle.current!);
   });
 });

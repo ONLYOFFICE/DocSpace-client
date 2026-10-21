@@ -572,20 +572,25 @@ export function failUploadItem(
   if (nextFileIndex !== -1) {
     self.startSessionFunc(nextFileIndex, t, createNewIfExist);
   } else {
-    const allFilesIsUploaded =
-      self.files.findIndex(
-        (f) =>
-          f.action !== "uploaded" &&
-          f.action !== "convert" &&
-          f.action !== "converted" &&
-          !f.error &&
-          !f.cancel,
-      ) === -1;
-    if (allFilesIsUploaded && !self.finishUploadFilesCalled) {
-      self.finishUploadFilesCalled = true;
-      if (!self.filesToConversion.length) {
-        self.finishUploadFiles(t, !!self.tempConversionFiles?.length);
-      }
+    finishUploadIfSettled(self, t);
+  }
+}
+
+/** Finish the upload once no file is left to send. */
+export function finishUploadIfSettled(self: UploadDataStore, t: TTranslation) {
+  const allFilesIsUploaded =
+    self.files.findIndex(
+      (f) =>
+        f.action !== "uploaded" &&
+        f.action !== "convert" &&
+        f.action !== "converted" &&
+        !f.error &&
+        !f.cancel,
+    ) === -1;
+  if (allFilesIsUploaded && !self.finishUploadFilesCalled) {
+    self.finishUploadFilesCalled = true;
+    if (!self.filesToConversion.length) {
+      self.finishUploadFiles(t, !!self.tempConversionFiles?.length);
     }
   }
 }

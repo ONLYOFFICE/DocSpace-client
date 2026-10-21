@@ -2120,6 +2120,7 @@
   "StorageWarning": "Ohranili boste polni dostop {{amount}} do konca vašega plačljivega obračunskega obdobja. Če bo vaša shranjena količina na začetku naslednjega obdobja presegla novo omejitev, boste zaračunani za dejansko porabo, zaokroženo na najbližjo {{storageUnit}}.",
   "SubmenuDetails": "Podrobnosti",
   "SubmenuHistory": "Zgodovina",
+  "SubmenuMetadata": "Metapodatki",
   "SubmitToGallery": "Oddaj v galerijo",
   "SubmitToTemplateGallery": "Pošilji v galerijo predložkov",
   "Subscribe": "Naroči se",

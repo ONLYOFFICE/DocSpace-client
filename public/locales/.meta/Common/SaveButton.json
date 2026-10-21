@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-10-07T14:48:38.456Z",
+  "updated_at": "2026-10-21T10:17:45.677Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -120,8 +120,20 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/index.tsx",
+      "line_number": 151,
+      "context": ") : (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={!canSave}\n isLoading={isSaving}\n onClick={save}\n testId=\"metadata_custom_fields_save_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/index.tsx",
+      "line_number": 120,
+      "context": "{form ? (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={!canSave}\n isLoading={isSaving}\n onClick={save}\n testId=\"metadata_template_save_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 367,
+      "line_number": 366,
       "context": "</div>\n <div className={styles.buttonContainer}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:SaveButton\")}\n scale={false}\n onClick={onSave}\n isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n testId=\"knowledge-save-button\"",
       "module": "/packages/client"
     },
@@ -139,7 +151,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 294,
+      "line_number": 293,
       "context": "className={styles.saveCancelButtons}\n onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"ai_services_management_save_button\"",
       "module": "/packages/client"
     },
@@ -157,7 +169,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 565,
+      "line_number": 562,
       "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={hasScroll}\n additionalClassSaveButton=\"language-time-zone-save\"\n additionalClassCancelButton=\"language-time-zone-cancel\"",
       "module": "/packages/client"
     },
@@ -174,6 +186,18 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
+      "line_number": 133,
+      "context": "<Button\n primary\n scale\n size={ButtonSize.normal}\n label={\n isNewField ? t(\"Common:AddButton\") : t(\"Common:SaveButton\")\n }\n isDisabled={!isValidField(fieldForm) || isNameTaken}\n onClick={submitField}\n testId=\"metadata_field_submit_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
+      "line_number": 133,
+      "context": "<Button\n primary\n scale\n size={ButtonSize.normal}\n label={\n isNewField ? t(\"Common:AddButton\") : t(\"Common:SaveButton\")\n }\n isDisabled={!isValidField(fieldForm) || isNameTaken}\n onClick={submitField}\n testId=\"metadata_field_submit_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/sub-components/colorSchemeDialog.js",
       "line_number": 119,
       "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n className=\"save\"\n label={t(\"Common:SaveButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onSaveColorSchemeDialog}\n isDisabled={!showSaveButtonDialog}",
@@ -181,13 +205,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 605,
+      "line_number": 608,
       "context": "onSaveClick={onSaveGeneral}\n onCancelClick={onCancelGeneral}\n saveButtonDisabled={!isGeneralValid}\n showReminder={hasChangesGeneral}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n isSaving={isSavingGeneral}\n displaySettings\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/index.tsx",
-      "line_number": 495,
+      "line_number": 508,
       "context": "errorFields={allErrorFields}\n requiredErrorFields={requiredErrorFields}\n onBlur={onBlur}\n />\n <ButtonsBlock\n saveLabel={t(\"Common:SaveButton\")}\n cancelLabel={t(\"Common:CancelButton\")}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n isRequestRunning={isRequestRunning}\n saveButtonDisabled={isEdit ? !isValid : false}",
       "module": "/packages/client"
     },
@@ -325,7 +349,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
-      "line_number": 386,
+      "line_number": 385,
       "context": "</div>\n <div className={styles.buttonContainer}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:SaveButton\")}\n scale={false}\n onClick={onSave}\n isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n testId=\"knowledge-save-button\"",
       "module": "/packages/sdk"
     },

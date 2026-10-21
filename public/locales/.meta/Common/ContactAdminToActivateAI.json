@@ -1,14 +1,13 @@
 {
   "key_path": "ContactAdminToActivateAI",
-  "content": "<1>AI features aren't active.</1> Contact the Full admin to activate the AI features and create new AI agents.",
-  "content_en_sha1_hash": "45ad814c2ec82a6f8cea4c5c307cac4886948676",
-  "created_at": "2026-08-13T14:36:43.237Z",
-  "updated_at": "2026-08-14T14:58:32.680Z",
+  "content": "<1>AI agents & tools aren't active.</1> Contact the Full admin to activate the AI agents & tools and create new AI agents.",
+  "content_en_sha1_hash": "f2635d3ac3f693c06f0feb984742fe5594fd53ee",
+  "created_at": "2026-10-21T10:17:03.494Z",
+  "updated_at": "2026-10-21T10:17:45.695Z",
   "comment": {
-    "text": "Informational message within the ActivateAIDialog notifying the user that AI features are disabled; the `<1>` tag wraps the first sentence for specific formatting.",
-    "is_auto": true,
-    "updated_at": "2026-08-13T14:54:32.493Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {

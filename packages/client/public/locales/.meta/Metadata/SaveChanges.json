@@ -1,0 +1,29 @@
+{
+  "key_path": "SaveChanges",
+  "content": "Save changes",
+  "content_en_sha1_hash": "179359b39edbd0bf0cdf3bb6b7dfb4223f663af2",
+  "created_at": "2026-10-21T10:17:41.289Z",
+  "updated_at": "2026-10-21T10:20:42.121Z",
+  "comment": {
+    "text": "Primary footer button of the AI metadata panel that saves the reviewed values. Imperative verb.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
+      "line_number": 214,
+      "context": "<ModalDialog.Footer>\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Metadata:SaveChanges\")}\n isDisabled={!canSave}\n isLoading={isSaving}\n onClick={save}\n testId=\"metadata_ai_save_button\"\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

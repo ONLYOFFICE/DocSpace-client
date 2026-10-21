@@ -3,7 +3,7 @@
   "content": "New presentation",
   "content_en_sha1_hash": "2f9d6210592804df00fdbb934945bcb6ee2accb8",
   "created_at": "2025-05-19T21:30:46.772Z",
-  "updated_at": "2026-09-10T16:17:50.195Z",
+  "updated_at": "2026-10-21T10:17:45.737Z",
   "comment": {
     "text": "This is a label for creating a new presentation file. It appears in menus and as a default file name.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsActions.ts",
-      "line_number": 72,
+      "line_number": 74,
       "context": "case \"docx\":\n return t(\"Common:NewDocument\");\n case \"xlsx\":\n return t(\"Common:NewSpreadsheet\");\n case \"pptx\":\n return t(\"Common:NewPresentation\");\n case \"pdf\":\n return t(\"Common:NewPDFForm\");\n case \"folder\":\n return t(\"Common:NewFolder\");\n }",
       "module": "/packages/sdk"
     }

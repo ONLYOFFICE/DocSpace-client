@@ -3,7 +3,7 @@
   "content": "New agent",
   "content_en_sha1_hash": "d200d92a331aabd52dfb0d7911c95be2fdd35eab",
   "created_at": "2025-10-27T16:14:17.785Z",
-  "updated_at": "2026-10-01T08:23:21.740Z",
+  "updated_at": "2026-10-21T10:17:45.658Z",
   "comment": {
     "text": "This is a button label or an item in a dropdown list. It allows users to create a new AI agent.",
     "is_auto": true,
@@ -31,13 +31,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 393,
-      "context": "const agentItems = React.useMemo<QuickActionItem[]>(\n () => [\n {\n id: \"quick-new-agent\",\n icon: <CreateAgentIcon />,\n label: t(\"Common:NewAgent\"),\n onClick: () => dispatchCreateAgent(currentFolderId),\n },\n ],\n [t, currentFolderId],\n );",
+      "line_number": 396,
+      "context": "() => [\n {\n id: \"quick-new-agent\",\n dataTestId: \"quick-new-agent\",\n icon: <CreateAgentIcon />,\n label: t(\"Common:NewAgent\"),\n onClick: () => dispatchCreateAgent(currentFolderId),\n },\n ],\n [t, currentFolderId],\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1906,
+      "line_number": 2008,
       "context": "const agentsMainButtonProps = React.useMemo(\n () => ({\n isDropdown: false,\n model: [],\n onAction: onCreateAgentFromFilter,\n text: t(\"Common:NewAgent\"),\n }),\n [t, onCreateAgentFromFilter],\n );\n \n if (showFilterLoader) return <FilterLoader />;",
       "module": "/packages/client"
     },

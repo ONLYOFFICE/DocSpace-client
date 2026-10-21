@@ -2120,6 +2120,7 @@
   "StorageWarning": "有料請求期間が終了するまで、{{amount}} のアクセスはそのまま維持されます。次の期間開始時にストレージが新しい制限を超えた場合、実際の使用量に応じて、最も近い{{storageUnit}}に四捨五入された金額が請求されます。",
   "SubmenuDetails": "詳細",
   "SubmenuHistory": "履歴",
+  "SubmenuMetadata": "メタデータ",
   "SubmitToGallery": "ギャラリーに投稿",
   "SubmitToTemplateGallery": "テンプレートギャラリーに登録",
   "Subscribe": "申し込む",

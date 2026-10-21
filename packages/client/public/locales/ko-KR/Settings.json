@@ -209,6 +209,7 @@
   "ManagementCategoryDataManagement": "데이터 관리",
   "ManagementCategoryIntegration": "통합",
   "ManagementCategorySecurity": "보안",
+  "MetadataTemplates": "메타데이터 템플릿",
   "Migration": "마이그레이션",
   "NewColorScheme": "새로운 색 구성표",
   "NewSecretKey": "새 시크릿 키",

@@ -19,7 +19,7 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
   - the editor's back link and e-mails;
   - leaving the room, losing access, the no-access view and Backspace.
 
-  The address is decided before the folder is shown, so a corrected link loads once and never bounces between sections. Inside the section, the sidebar highlights Private, and the header title, breadcrumb root and Location column read Private.
+  The address is decided before the folder is shown, so a corrected link loads once and never bounces between sections. Inside the section, the sidebar highlights Private, and the header title and breadcrumb root read Private.
 - Private rooms are created from the section only. Every create entry point of the section opens the create-room dialog directly on the Private type, with the existing key-generation and secure-context checks:
   - the header buttons and the mobile create button;
   - "+ New" and the context menu of empty space;

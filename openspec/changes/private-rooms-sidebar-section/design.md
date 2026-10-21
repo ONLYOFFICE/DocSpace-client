@@ -181,7 +181,7 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 **D8. Section UI deltas, each mirroring a Forms condition.**
 - Filter (`pages/Home/Section/Filter/index.js`): `getRoomsListBasePath` returns `private` / `private/archived`; type options and the third-party group are dropped as for Forms (`:1117`, `:1417`); `withRoomGroups` is false.
 - Header title: `Common:Private` on `PrivateRooms`.
-- Crumb and Location root label: `cd2be2ca2ba` pattern.
+- Crumb root label: the `cd2be2ca2ba` pattern. The Location column is not shown in the section: only Recent, Favorites and Trash show it, and private content never reaches them.
 - Group-context and menu helpers drop create-group/add-to-group on the private route.
 - Empty view: the matchers in `EmptyViewContainer.{utils,helpers}.tsx` key by folder type, and the private list root reports Rooms. They get a route-derived discriminator, as `isFormsSectionScope` does, with:
   - three new `EmptyView` keys;

@@ -6,7 +6,7 @@
   - drop the client-iframe parts (the iframe-address half of its task 1.3, and the scenarios "Client passes its flag" and "Client iframe");
   - keep the SDK-side opt-in.
 
-  Verify with `npx -y @fission-ai/openspec@latest validate --all --strict` (with `OPENSPEC_TELEMETRY=0`), and commit as `OpenSpec: private-rooms-sdk-gating-and-parity: drop the client iframe replaced by the Private rooms section`.
+  Verify with `npx -y @fission-ai/openspec@latest validate --all --strict` (with `OPENSPEC_TELEMETRY=0`), and commit as `OpenSpec: private-rooms-sdk-gating-and-parity: drop the client iframe replaced by the Private section`.
 
 ## 1. Availability, request scope and mocks
 
@@ -42,7 +42,7 @@
 - [ ] 2.1 Register the eight `/private` routes in `packages/client/src/routes/client.js` on the Home view, behind a guard that waits for the apps list. While the section is not available, the guard redirects to the Rooms counterpart. Teach `useFiles` the four categories, including default filters with `searchArea` Active/Archive.
 
   Verify with fallback-mapping cases in `privateRoomsSectionNavigation.test.ts`, and with the scenario "Link opened without the opt-in" in a new `packages/client/__tests__/private-rooms-section.spec.ts` (`cd packages/client && pnpm exec playwright test private-rooms-section.spec.ts`).
-- [ ] 2.2 Add the Private rooms sidebar item and its Archive child to `packages/client/src/components/ClientArticleSidebar/index.tsx` (design D7), and the `/private` matchers to `getClientActiveId` (`packages/client/src/helpers/articleNavigation.ts`). Add the `Common:PrivateRooms` key, then run the `translate-comments` and `translate-locales` skills and `cd common/tests && npx vitest run test/locales.test.js`.
+- [ ] 2.2 Add the Private sidebar item and its Archive child to `packages/client/src/components/ClientArticleSidebar/index.tsx` (design D7), and the `/private` matchers to `getClientActiveId` (`packages/client/src/helpers/articleNavigation.ts`). Add the `Common:Private` key ("Private"; its `.meta` comment must say it names the sidebar section of end-to-end encrypted rooms, so translators pick the plural/section form), then run the `translate-comments` and `translate-locales` skills and `cd common/tests && npx vitest run test/locales.test.js`.
 
   Verify with active-id cases in `privateRoomsSectionNavigation.test.ts`, and with the E2E scenarios "Section available", "Section not available", "Item clicked", "Archive address" and "Section expanded".
 - [ ] 2.3 Add the private signal to `getCategoryTypeByFolderTypeInSection`. Add the post-load address correction in both directions (design D5) as a pure decision function wired into `useFiles`.
@@ -67,14 +67,14 @@
 
 ## 3. Section UI: header, filter, groups, empty state
 
-- [ ] 3.1 Set the section header title to `Common:PrivateRooms`, and the Location column root label (`pages/Home/Section/Body/TableView/sub-components/LocationCell.tsx`). Verify with the E2E scenarios "Section list header" and "Location column in a search".
+- [ ] 3.1 Set the section header title to `Common:Private`, and the Location column root label (`pages/Home/Section/Body/TableView/sub-components/LocationCell.tsx`). Verify with the E2E scenarios "Section list header" and "Location column in a search".
 - [ ] 3.2 Section filter in `pages/Home/Section/Filter/index.js`:
   - list base path `private` / `private/archived`;
   - no room-type, third-party storage or room-group controls.
 
   Verify with the E2E scenario "Filter opened in the section".
 - [ ] 3.3 Withhold the create-group and add-to-group actions on the private route, in `store/filesActionsStore/menu.helpers.ts`, `store/filesStore/contextOptions.helpers.ts` and `store/contextOptionsStore/groupContextOptions.helpers.ts`. Verify with new cases in the headerMenu and contextOptions tests (`cd packages/client && pnpm exec vitest run src/store/filesActionsStore src/store/filesStore src/store/contextOptionsStore`), updating only the snapshots of the touched helpers, and with the E2E scenario "Context menu of a private room in the section".
-- [ ] 3.4 Add the Private rooms empty state, with a route discriminator in `components/EmptyContainer/sub-components/EmptyViewContainer` and the keys `EmptyView:EmptyRootPrivateRoomsTitle`, `EmptyRootPrivateRoomsDescription` and `EmptyRootPrivateRoomsUserDescription`. Then run `translate-comments`, `translate-locales` and the locale tests.
+- [ ] 3.4 Add the Private section empty state, with a route discriminator in `components/EmptyContainer/sub-components/EmptyViewContainer` and the keys `EmptyView:EmptyRootPrivateRoomsTitle`, `EmptyRootPrivateRoomsDescription` and `EmptyRootPrivateRoomsUserDescription`. Then run `translate-comments`, `translate-locales` and the locale tests.
 
   Verify with the E2E scenarios "Room admin without private rooms" and "User without private rooms", and with `cd common/tests && npx vitest run test/locales.test.js`.
 

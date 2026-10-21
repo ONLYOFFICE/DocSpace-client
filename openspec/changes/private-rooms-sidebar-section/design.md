@@ -129,7 +129,7 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 
 **D7. Sidebar.** `ClientArticleSidebar` gets the item described in `private-rooms/sidebar-section`:
 - id `private-rooms`, icon `catalog.private.react.svg` (already in the repo, used by the apps catalog);
-- placed after the Forms block;
+- placed after the Forms block and before AI Agents;
 - one child, `private-rooms-archive`, built with `searchAreaUrl("/private/archived/filter", RoomSearchArea.Archive)`;
 - no `sectionBadge`, because there is no folder to count against.
 
@@ -137,7 +137,7 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 
 **D8. Section UI deltas, each mirroring a Forms condition.**
 - Filter (`pages/Home/Section/Filter/index.js`): `getRoomsListBasePath` returns `private` / `private/archived`; type options and the third-party group are dropped as for Forms (`:1117`, `:1417`); `withRoomGroups` is false.
-- Header title: `Common:PrivateRooms` on `PrivateRooms`.
+- Header title: `Common:Private` on `PrivateRooms`.
 - Crumb and Location root label: `cd2be2ca2ba` pattern.
 - Group-context and menu helpers drop create-group/add-to-group on the private route.
 - Empty view: the matchers in `EmptyViewContainer.{utils,helpers}.tsx` key by folder type, and the private list root reports Rooms. They get a route-derived discriminator, as `isFormsSectionScope` does, and three new `EmptyView` keys.
@@ -161,7 +161,7 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 - [Corrected addresses cost one extra request and a visible address change.] → It only happens on cold links and feed entry points. The common path is right first time (D5).
 - [Rooms → Recent/Favorites/Trash still mix in private content, and the section has no counter.] → Accepted v1 limitations, written as SHALL NOT requirements. They are removed by the server-backed follow-up.
 - [`isPrivacyFolder` is false inside archived private rooms, because their rootFolderType is Archive.] → Already the case in Rooms → Archive today and out of scope here. The section only moves where those rooms are listed.
-- [Two archives (Rooms → Archive and Private rooms → Archive) may confuse users who archived a private room before the section existed.] → Each room shows up in exactly one of them. The empty state of Rooms → Archive is unchanged.
+- [Two archives (Rooms → Archive and Private → Archive) may confuse users who archived a private room before the section existed.] → Each room shows up in exactly one of them. The empty state of Rooms → Archive is unchanged.
 - [Coordination with `private-rooms-sdk-gating-and-parity` (its iframe task and scenarios) and with `private-rooms-release-gate` (it removes requirements this change modifies).] → Task 0.1 reconciles the SDK change before either is applied. The release-gate revision is noted in its proposal when it is picked up.
 
 ## Migration Plan

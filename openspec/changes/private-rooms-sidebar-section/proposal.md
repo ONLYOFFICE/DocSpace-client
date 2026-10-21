@@ -6,10 +6,10 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
 
 ## What Changes
 
-- A new top-level **Private rooms** section in the client sidebar (`Common:PrivateRooms`), placed after Forms, with one sub-item, **Archive**. Addresses: `/private/filter`, `/private/{roomId}/filter`, `/private/archived/filter`, `/private/archived/{roomId}/filter`.
+- A new top-level **Private** section in the client sidebar (`Common:Private`), placed after Forms and before AI Agents, with one sub-item, **Archive**. Addresses: `/private/filter`, `/private/{roomId}/filter`, `/private/archived/filter`, `/private/archived/{roomId}/filter`.
 - The section is available while the `privateRooms` opt-in is set and the `e2e-rooms` app is on for the portal. This mirrors Forms, which is shown while the `ai-forms` app is on.
 - The section lists rooms with `searchArea=Active&privacyFilter=Private`, and its Archive with `searchArea=Archive&privacyFilter=Private`. While the section is available, Rooms and Rooms → Archive add `privacyFilter=NotPrivate`, so every private room is listed in exactly one place. Without the section, Rooms lists private rooms exactly as today.
-- A private room, and any folder inside it, opens under `/private/...` from every entry point: the sidebar highlights Private rooms, and the header title, breadcrumb root and Location column read Private rooms.
+- A private room, and any folder inside it, opens under `/private/...` from every entry point: the sidebar highlights Private, and the header title, breadcrumb root and Location column read Private.
 - Private rooms are created from the section only. Its create buttons open the create-room dialog directly on the Private type, with the existing key-generation and secure-context checks. The generic room-type chooser no longer offers the Private card.
 - Section-specific UI: no room-type filter, no third-party storage filter and no room groups. The section also gets its own empty state, info panel support, and live updates that respect the split.
 - **BREAKING** (tester-facing, behind the flag): the iframe page behind `/e2e-rooms` is removed. `/e2e-rooms` and `/e2e-rooms?section=archive` redirect to the section, and the app launcher opens the section.
@@ -19,7 +19,7 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
 
 ### New Capabilities
 
-- `private-rooms/sidebar-section`: the Private rooms section of the client sidebar. It covers when the section is available, its addresses and sub-items, the Rooms/section split of the rooms lists, opening private rooms inside the section, creation from the section, and the section's header, filter, empty state, info panel and live updates. It also records the v1 limitations of a client-only section (no Recent/Favorites/Trash, no new-items counter).
+- `private-rooms/sidebar-section`: the Private section of the client sidebar. It covers when the section is available, its addresses and sub-items, the Rooms/section split of the rooms lists, opening private rooms inside the section, creation from the section, and the section's header, filter, empty state, info panel and live updates. It also records the v1 limitations of a client-only section (no Recent/Favorites/Trash, no new-items counter).
 
 ### Modified Capabilities
 
@@ -32,7 +32,7 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
   - "Private room is a flagged Custom room" and "Private rooms need a secure context": creation starts from the section.
   - "Choosing the Private card without a key starts key generation": creation starts from the section, and the requirement is renamed to "Starting private room creation without a key starts key generation".
   - "Navigation into the new private room": the new room opens under the section.
-  - "Standard room management stays available": an archived private room appears in Private rooms → Archive.
+  - "Standard room management stays available": an archived private room appears in Private → Archive.
 - `private-rooms/sdk-surface`: "Client app embeds the SDK surface" is removed; the SDK pages themselves are unchanged.
 - `private-rooms/server-contract`: new requirements that record what the client now relies on:
   - the `privacyFilter` parameter of the rooms list, and that it drops third-party rooms for `Private`;
@@ -84,9 +84,10 @@ Already decided with the user:
 - client-only approach;
 - the section replaces the E2E rooms app;
 - Archive is the only sub-item;
-- the route is `/private`.
+- the route is `/private`;
+- the section is labelled "Private" (`Common:Private`) in the sidebar and the header;
+- the section sits after Forms and before AI Agents.
 
-Still open (defaults written into the specs; each can be flipped before apply):
-1. Section label: `Common:PrivateRooms` = "Private rooms" in the sidebar and header. The apps catalog keeps "Rooms E2E" (`Common:DashboardE2eRoomsTitle`). Alternative: rename the catalog entry too, as Forms did.
-2. Sidebar position: after Forms, before AI Agents.
-3. Whether to request the server-backed section from the backend team as a follow-up change. That would add a counter and scoped Recent/Favorites/Trash.
+Still open:
+1. The apps catalog keeps its own title, "Rooms E2E" (`Common:DashboardE2eRoomsTitle`). Renaming it to match the section, as Forms did, is a separate wording decision and is not part of this change.
+2. Whether to request the server-backed section from the backend team as a follow-up change. That would add a counter and scoped Recent/Favorites/Trash.

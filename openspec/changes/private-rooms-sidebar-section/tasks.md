@@ -138,7 +138,7 @@
   - drop `packages/client/src/pages/E2eRooms/**` from the paths of `.claude/rules/private-rooms.md`.
 
   Verify by updating `packages/client/__tests__/private-rooms-hidden.spec.ts` (section absent without the flag, `/e2e-rooms` goes to the dashboard) and with the E2E scenarios "Old bookmark" and "Archive bookmark".
-- [ ] 6.2 Adjust the existing private-room E2E specs that open private rooms under `/rooms/shared/{id}` or assert the Rooms list. Verify with `cd packages/client && pnpm exec playwright test private-room encrypted-file-ui keys-management` in Docker.
+- [x] 6.2 Adjust the existing private-room E2E specs that open private rooms under `/rooms/shared/{id}` or assert the Rooms list. Verify with `cd packages/client && pnpm exec playwright test private-room encrypted-file-ui keys-management` in Docker.
 - [ ] 6.3 Rename "Rooms E2E" to "Private" (design D12):
   - title the apps catalog entry (`packages/client/src/helpers/apps-catalog.tsx`), the SDK private list header (`packages/sdk/src/app/(private)/private/page.client.tsx`) and the label in `packages/client/src/components/NewArticle/index.tsx` with `Common:Private`;
   - delete `DashboardE2eRoomsTitle` from every `public/locales/*/Common.json` and `public/locales/.meta/Common/DashboardE2eRoomsTitle.json`, using a dry-run script that checks each file loses exactly that key (`.claude/rules/bulk-locale-edits.md`).

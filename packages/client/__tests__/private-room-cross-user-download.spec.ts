@@ -34,7 +34,6 @@
  */
 
 import {
-  appsHandler,
   capabilitiesHandler,
   encryptedFilesHandlers,
   filesSettingsHandler,
@@ -72,9 +71,6 @@ async function blobToUint8Array(blob: Blob): Promise<Uint8Array> {
 test.describe("Private room — cross-user file exchange", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
-      // Private rooms open under their Rooms addresses only while the Private
-      // section is off.
-      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
       rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
@@ -164,7 +160,7 @@ test.describe("Private room — cross-user file exchange", () => {
     ]);
 
     await page.goto(
-      `${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`,
+      `${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`,
     );
     await page.waitForResponse(
       (res) =>

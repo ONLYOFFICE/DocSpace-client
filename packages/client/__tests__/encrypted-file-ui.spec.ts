@@ -34,7 +34,6 @@
  */
 
 import {
-  appsHandler,
   capabilitiesHandler,
   encryptedFilesHandlers,
   filesSettingsHandler,
@@ -102,9 +101,6 @@ function installRoomWithEncryptedFile(
 test.describe("Encrypted file UI in private room", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
-      // Private rooms open under their Rooms addresses only while the Private
-      // section is off.
-      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
       rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
@@ -129,7 +125,7 @@ test.describe("Encrypted file UI in private room", () => {
     );
     installRoomWithEncryptedFile(mockRequest, filesHandle);
 
-    await page.goto(`${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
     await page.waitForResponse(
       (res) =>
         res.request().method() === "GET" &&
@@ -155,7 +151,7 @@ test.describe("Encrypted file UI in private room", () => {
     };
     installRoomWithEncryptedFile(mockRequest, filesHandle);
 
-    await page.goto(`${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
     await page.waitForResponse(
       (res) =>
         res.request().method() === "GET" &&
@@ -187,7 +183,7 @@ test.describe("Encrypted file UI in private room", () => {
     );
     installRoomWithEncryptedFile(mockRequest, filesHandle);
 
-    await page.goto(`${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
     await page.waitForResponse(
       (res) =>
         res.request().method() === "GET" &&
@@ -238,7 +234,7 @@ test.describe("Encrypted file UI in private room", () => {
     );
     installRoomWithEncryptedFile(mockRequest, filesHandle);
 
-    await page.goto(`${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
     await page.waitForResponse(
       (res) =>
         res.request().method() === "GET" &&
@@ -282,9 +278,6 @@ test.describe("Encrypted file moved out of a private room", () => {
 
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
-      // Private rooms open under their Rooms addresses only while the Private
-      // section is off.
-      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
       rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
@@ -371,7 +364,7 @@ test.describe("Encrypted file moved out of a private room", () => {
     ]);
 
     await page.goto(
-      `${baseUrl}/rooms/shared/${MOVE_ROOM_ID}/filter?folder=${MOVE_ROOM_ID}`,
+      `${baseUrl}/private/${MOVE_ROOM_ID}/filter?folder=${MOVE_ROOM_ID}`,
     );
     const row = page.getByTestId("table-row-0");
     await expect(row).toBeVisible({ timeout: 15000 });

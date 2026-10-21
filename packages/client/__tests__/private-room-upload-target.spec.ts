@@ -68,6 +68,7 @@ const FOLDER_REFUSAL =
   /Folders cannot be uploaded to a private room|FolderUploadNotSupportedInPrivateRoom/;
 const TEST_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 const ROOMS_URL = "/rooms/shared/filter";
+const PRIVATE_LIST_URL = "/private/filter";
 /** One more than FilesSettingsStore.maxUploadFilesCount. */
 const QUEUED_FILE_COUNT = 6;
 const PLAINTEXT = "must never leave the browser";
@@ -96,6 +97,7 @@ const openPrivateRoomWithKey = async (
   page: Page,
   mockRequest: WorkerFixture,
   baseUrl: string,
+  roomUrl = `/private/${ROOM_ID}/filter?folder=${ROOM_ID}`,
 ) => {
   const { keysHandle, passphrase } = await bootstrapEncryption(
     page,
@@ -121,7 +123,7 @@ const openPrivateRoomWithKey = async (
     { ...keysHandle.getKeys()[0], userId: TEST_USER_ID },
   ]);
 
-  await navigateInApp(page, `/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+  await navigateInApp(page, roomUrl);
   await page.waitForResponse(
     (res) =>
       res.request().method() === "GET" &&
@@ -142,8 +144,8 @@ const navigateInApp = (page: Page, url: string) =>
     url,
   );
 
-/** Opens the Rooms list in-app and waits until it has replaced the room's view. */
-const openRoomsList = async (page: Page) => {
+/** Opens the Private list in-app and waits until it has replaced the room's view. */
+const openPrivateList = async (page: Page) => {
   const roomsLoaded = page.waitForResponse(
     (res) =>
       res.request().method() === "GET" &&
@@ -151,7 +153,7 @@ const openRoomsList = async (page: Page) => {
       res.ok(),
     { timeout: 15000 },
   );
-  await navigateInApp(page, ROOMS_URL);
+  await navigateInApp(page, PRIVATE_LIST_URL);
   await roomsLoaded;
   await expect(
     page.getByTestId("table-body").getByText(ROOM_TITLE),
@@ -240,8 +242,6 @@ test.describe("Private room — upload target fixed when the user starts the upl
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       capabilitiesHandler(TEST_PORT, true),
       filesSettingsHandler(TEST_PORT),
-      // Rooms lists private rooms only while the Private section is off.
-      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
     );
   });
 
@@ -268,7 +268,7 @@ test.describe("Private room — upload target fixed when the user starts the upl
       .poll(() => sent.length, { timeout: 30000 })
       .toBe(QUEUED_FILE_COUNT - 1);
 
-    await openRoomsList(page);
+    await openPrivateList(page);
     releaseSessions();
 
     await expect
@@ -288,10 +288,13 @@ test.describe("Private room — upload target fixed when the user starts the upl
     baseUrl,
   }) => {
     test.slow();
+    // Under Rooms only while the Private section is off.
+    mockRequest.use(appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }));
     const { filesHandle, passphrase } = await openPrivateRoomWithKey(
       page,
       mockRequest,
       baseUrl,
+      `/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`,
     );
     const sent = recordSessionRequests(page);
 
@@ -326,7 +329,7 @@ test.describe("Private room — upload target fixed when the user starts the upl
     await unlockIfPrompted(page, passphrase);
     await expect.poll(() => sent.length, { timeout: 30000 }).toBe(1);
 
-    await openRoomsList(page);
+    await openPrivateList(page);
     await retryFromUploadPanel(page);
     await unlockIfPrompted(page, passphrase);
 
@@ -430,11 +433,12 @@ const recordWritesTo = (page: Page, folderId: number) => {
 };
 
 /** Opens the Rooms list with a private room and an ordinary room in it. */
-const openRoomsListWithPrivateRoom = async (
+const openListOfRooms = async (
   page: Page,
   mockRequest: WorkerFixture,
   baseUrl: string,
   view: "table" | "tile" = "table",
+  list: "private" | "rooms" = "private",
 ) => {
   const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
     current: null,
@@ -470,8 +474,12 @@ const openRoomsListWithPrivateRoom = async (
     );
   }
 
-  await page.goto(`${baseUrl}${ROOMS_URL}`);
-  await expect(page.locator(`[data-title="${ROOM_TITLE}"]`)).toBeVisible({
+  const [url, title] =
+    list === "private"
+      ? [PRIVATE_LIST_URL, ROOM_TITLE]
+      : [ROOMS_URL, ORDINARY_ROOM_TITLE];
+  await page.goto(`${baseUrl}${url}`);
+  await expect(page.locator(`[data-title="${title}"]`)).toBeVisible({
     timeout: 15000,
   });
   return filesHandle;
@@ -488,8 +496,6 @@ test.describe("Private room — drops onto a private room from outside it", () =
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       capabilitiesHandler(TEST_PORT, true),
       filesSettingsHandler(TEST_PORT),
-      // Rooms lists private rooms only while the Private section is off.
-      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
     );
   });
 
@@ -498,7 +504,7 @@ test.describe("Private room — drops onto a private room from outside it", () =
     mockRequest,
     baseUrl,
   }) => {
-    await openRoomsListWithPrivateRoom(page, mockRequest, baseUrl);
+    await openListOfRooms(page, mockRequest, baseUrl);
     const writes = recordWritesTo(page, ROOM_ID);
 
     await dropOn(page.locator(`[data-title="${ROOM_TITLE}"]`), [
@@ -514,7 +520,7 @@ test.describe("Private room — drops onto a private room from outside it", () =
     mockRequest,
     baseUrl,
   }) => {
-    await openRoomsListWithPrivateRoom(page, mockRequest, baseUrl, "tile");
+    await openListOfRooms(page, mockRequest, baseUrl, "tile");
     const writes = recordWritesTo(page, ROOM_ID);
 
     await dropOn(page.locator(`[data-title="${ROOM_TITLE}"]`), [
@@ -530,7 +536,7 @@ test.describe("Private room — drops onto a private room from outside it", () =
     mockRequest,
     baseUrl,
   }) => {
-    await openRoomsListWithPrivateRoom(page, mockRequest, baseUrl);
+    await openListOfRooms(page, mockRequest, baseUrl);
     const writes = recordWritesTo(page, ROOM_ID);
 
     await dropOn(page.locator(`[data-title="${ROOM_TITLE}"]`), [
@@ -547,7 +553,7 @@ test.describe("Private room — drops onto a private room from outside it", () =
     mockRequest,
     baseUrl,
   }) => {
-    await openRoomsListWithPrivateRoom(page, mockRequest, baseUrl);
+    await openListOfRooms(page, mockRequest, baseUrl);
     const writes = recordWritesTo(page, ROOM_ID);
 
     await dropOn(page.locator(`[data-title="${ROOM_TITLE}"]`), [
@@ -560,10 +566,12 @@ test.describe("Private room — drops onto a private room from outside it", () =
   });
 
   test("Ordinary room row", async ({ page, mockRequest, baseUrl }) => {
-    const filesHandle = await openRoomsListWithPrivateRoom(
+    const filesHandle = await openListOfRooms(
       page,
       mockRequest,
       baseUrl,
+      "table",
+      "rooms",
     );
     const privateWrites = recordWritesTo(page, ROOM_ID);
 

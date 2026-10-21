@@ -77,6 +77,9 @@ const Q3 = { id: 8903, name: "q3-report.txt", text: "Third quarter." };
 const archivedRoomUrl = (folderId: number, extra = "") =>
   `/rooms/archived/filter?folder=${folderId}${extra}`;
 
+const privateArchivedRoomUrl = (folderId: number, extra = "") =>
+  `/private/archived/filter?folder=${folderId}${extra}`;
+
 const apiUrl = (path: string) => `${BASE_URL}:${TEST_PORT}/${API_PREFIX}/${path}`;
 
 type TArchivedRoom = {
@@ -201,7 +204,12 @@ const navigateInApp = (page: Page, url: string) =>
   );
 
 /** Opens a folder of the room in-app, so the identity stays unlocked. */
-const openInApp = async (page: Page, folderId: number, extra = "") => {
+const openInApp = async (
+  page: Page,
+  folderId: number,
+  extra = "",
+  urlOf = privateArchivedRoomUrl,
+) => {
   const loaded = page.waitForResponse(
     (res) =>
       res.request().method() === "GET" &&
@@ -209,7 +217,7 @@ const openInApp = async (page: Page, folderId: number, extra = "") => {
       res.ok(),
     { timeout: 15000 },
   );
-  await navigateInApp(page, archivedRoomUrl(folderId, extra));
+  await navigateInApp(page, urlOf(folderId, extra));
   await loaded;
 };
 
@@ -304,9 +312,6 @@ test.describe("Private room — archived", () => {
   test.beforeEach(async ({ page, mockRequest }) => {
     await page.setViewportSize({ width: 1440, height: 1024 });
     mockRequest.use(
-      // Private rooms open under their Rooms addresses only while the Private
-      // section is off.
-      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
       rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
@@ -352,14 +357,16 @@ test.describe("Private room — archived", () => {
     baseUrl,
   }) => {
     test.slow();
+    // Under Rooms -> Archive only while the Private section is off.
+    mockRequest.use(appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }));
     await serveArchivedPrivateRoom(page, mockRequest, baseUrl);
 
-    await openInApp(page, ROOM_ID);
+    await openInApp(page, ROOM_ID, "", archivedRoomUrl);
     await expect(row(page, BUDGET.name)).toBeVisible({ timeout: 15000 });
     await settle(page);
     await expect(page.getByTestId("ai-chat-button")).toHaveCount(0);
 
-    await openInApp(page, SUBFOLDER_ID);
+    await openInApp(page, SUBFOLDER_ID, "", archivedRoomUrl);
     await expect(row(page, Q3.name)).toBeVisible({ timeout: 15000 });
     await settle(page);
     await expect(page.getByTestId("ai-chat-button")).toHaveCount(0);
@@ -472,7 +479,7 @@ test.describe("Private room — archived", () => {
     );
     const seen = recordRequests(page);
     // A full load locks the identity again.
-    await page.goto(`${baseUrl}${archivedRoomUrl(ROOM_ID)}`);
+    await page.goto(`${baseUrl}${privateArchivedRoomUrl(ROOM_ID)}`);
     const entryPrompt = passphrasePrompt(page);
     try {
       await entryPrompt.waitFor({ state: "visible", timeout: 10000 });

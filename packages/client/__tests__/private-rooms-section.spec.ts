@@ -34,6 +34,7 @@
  */
 
 import {
+  aiConfigHandler,
   appsHandler,
   capabilitiesHandler,
   encryptedFilesHandlers,
@@ -55,8 +56,11 @@ import { PRIVATE_ROOMS_FLAG_KEY } from "@docspace/shared/utils/privateRooms";
 import { http } from "msw";
 import type { Page } from "@playwright/test";
 import { expect, test, TEST_PORT } from "./fixtures/base";
+import { armTour, tourTooltip } from "./helpers/tour";
 
 const ROOM_ID = 9500;
+/** The pending flag of the Rooms tour, packages/client/src/store/RoomsTourStore.ts */
+const ROOMS_TOUR_KEY = "rooms_tour_pending";
 /** The AI agents folder of the root mock, the sidebar item that follows Private. */
 const AI_AGENTS_ID = "224866";
 const ROOM_TITLE = "Private Section Room";
@@ -932,6 +936,49 @@ test.describe("Private section — room groups", () => {
       timeout: 15000,
     });
     await expect(roomSelector.getByText(ROOM_TITLE)).toHaveCount(0);
+  });
+});
+
+test.describe("Private section — AI chat and tour", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      selfByTypeHandler(TEST_PORT),
+      aiConfigHandler(TEST_PORT),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        title: ROOM_TITLE,
+        ordinaryRooms: [{ roomId: ORDINARY_ROOM_ID, title: "Team Room" }],
+      }),
+    );
+  });
+
+  const aiChatButton = (page: Page) => page.getByTestId("ai-chat-button");
+
+  test("Private list", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+    await expect(aiChatButton(page)).toBeVisible({ timeout: 15000 });
+
+    for (const list of ["/private/filter", "/private/archived/filter"]) {
+      await page.goto(`${baseUrl}${list}`);
+      await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+      await expect(aiChatButton(page)).toHaveCount(0);
+    }
+  });
+
+  test("Pending Rooms tour", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await armTour(page, ROOMS_TOUR_KEY);
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await page.waitForTimeout(5000);
+    await expect(tourTooltip(page)).toHaveCount(0);
+    await expect(roomLink(page)).toBeVisible();
   });
 });
 

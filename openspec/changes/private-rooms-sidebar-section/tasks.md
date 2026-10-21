@@ -103,7 +103,7 @@
   Verify with:
   - new cases in the headerMenu and contextOptions tests (`cd packages/client && pnpm exec vitest run src/store/filesActionsStore src/store/filesStore src/store/contextOptionsStore`), updating only the snapshots of the touched helpers;
   - the E2E scenarios "Context menu of a private room in the section" and "Room group editor in Rooms".
-- [ ] 3.4 Hide the AI chat on the private categories (`Shell.jsx`) and keep the Rooms tour off them (`components/RoomsTour/index.tsx`) (design D14). Verify with the E2E scenarios "Private list" (no AI chat) and "Pending Rooms tour".
+- [x] 3.4 Hide the AI chat on the private categories (`Shell.jsx`) and keep the Rooms tour off them (`components/RoomsTour/index.tsx`) (design D14). Verify with the E2E scenarios "Private list" (no AI chat) and "Pending Rooms tour".
 - [ ] 3.5 Add the Private empty states, with a route discriminator in `components/EmptyContainer/sub-components/EmptyViewContainer` and the keys `EmptyView:EmptyRootPrivateRoomsTitle`, `EmptyRootPrivateRoomsDescription` and `EmptyRootPrivateRoomsUserDescription`:
   - the list offers only a create button;
   - the private Archive's back option opens `/private/filter`.

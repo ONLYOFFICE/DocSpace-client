@@ -75,6 +75,7 @@ import { getCookie, deleteCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 
 import {
   getFrameInitialTheme,
+  isPrivateRoomsRoute,
   updateTempContent,
 } from "@docspace/shared/utils/common";
 import {
@@ -766,6 +767,8 @@ const Shell = ({ page = "home", ...rest }) => {
     currentClientView !== "chat" &&
     !isSettingsPage &&
     !isPrivacyFolder &&
+    // Spec: private-rooms/sidebar-section, "No AI chat in the section"
+    !isPrivateRoomsRoute(location.pathname) &&
     selectedFolderType !== FolderType.Knowledge &&
     selectedFolderType !== FolderType.ResultStorage &&
     selectedRootFolderType !== FolderType.AIAgents;

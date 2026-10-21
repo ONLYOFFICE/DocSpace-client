@@ -386,9 +386,11 @@ class FilesStore {
   dialogsStore: Nullable<Pick<DialogsStore, "roomGroups">> = null;
 
   // Attached post-construction in store/index.ts with
-  // watchPrivateRoomsSection; read for the Private section's request scope.
-  appsStore: Nullable<Pick<AppsStore, "isPrivateRoomsSectionAvailable">> =
-    null;
+  // watchPrivateRoomsSection; read for the Private section's request scope
+  // and address.
+  appsStore: Nullable<
+    Pick<AppsStore, "isPrivateRoomsSectionAvailable" | "isInstalled">
+  > = null;
 
   arrRoomGroups: unknown[] = [];
 
@@ -1285,7 +1287,7 @@ class FilesStore {
     );
 
   watchPrivateRoomsSection = (
-    appsStore: Pick<AppsStore, "isPrivateRoomsSectionAvailable">,
+    appsStore: Pick<AppsStore, "isPrivateRoomsSectionAvailable" | "isInstalled">,
   ) => {
     this.appsStore = appsStore;
 
@@ -2188,6 +2190,10 @@ class FilesStore {
     }
 
     return minWidth + orderLength * 2;
+  }
+
+  get isPrivateRoomsSectionAvailable() {
+    return !!this.appsStore?.isPrivateRoomsSectionAvailable;
   }
 
   get hasMoreFiles() {

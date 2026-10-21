@@ -34,6 +34,7 @@
  */
 
 import {
+  appsHandler,
   capabilitiesHandler,
   encryptedFilesHandlers,
   filesSettingsHandler,
@@ -83,6 +84,9 @@ const unlockIfPrompted = async (page: Page, passphrase: string) => {
 test.describe("Private room — member key checked on upload", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
+      // Private rooms open under their Rooms addresses only while the Private
+      // section is off.
+      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
       rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),

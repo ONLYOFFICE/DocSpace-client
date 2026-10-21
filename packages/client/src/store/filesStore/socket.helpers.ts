@@ -580,7 +580,11 @@ export function redirectToParentImpl(
 
       const categoryType = isPublic
         ? CategoryType.PublicRoom
-        : getCategoryTypeByFolderTypeInSection(rootFolderType, pathPart.id);
+        : getCategoryTypeByFolderTypeInSection(rootFolderType, pathPart.id, {
+            isPrivate:
+              self.isPrivateRoomsSectionAvailable &&
+              self.treeFoldersStore.isPrivacyFolder,
+          });
 
       const path = getCategoryUrl(categoryType, pathPart.id);
 

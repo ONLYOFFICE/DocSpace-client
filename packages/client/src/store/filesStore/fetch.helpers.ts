@@ -47,6 +47,7 @@ import {
 import {
   frameCallEvent,
   getCategoryType,
+  isPrivateRoomsRoute,
   isPublicRoom,
 } from "@docspace/shared/utils/common";
 import { isDesktop } from "@docspace/shared/utils";
@@ -71,6 +72,10 @@ import {
   getCategoryTypeByFolderTypeInSection,
 } from "SRC_DIR/helpers/utils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
+import {
+  getSectionAddressCorrection,
+  SECTION_DECIDED_STATE,
+} from "SRC_DIR/helpers/privateRoomsSection";
 
 import type { Nullable, TPathParts } from "@docspace/shared/types";
 import type { default as TFilesFilter } from "@docspace/shared/api/files/filter";
@@ -94,6 +99,68 @@ const { FilesFilter, RoomsFilter } = api;
 // Module-level request guard used by fetchFilesImpl (moved verbatim from
 // FilesStore, where it was only referenced by fetchFiles).
 let requestCounter = 0;
+
+type TFetchAddress = { pathname: string; search: string; state: unknown };
+
+/**
+ * Whether a loaded room or folder belongs to the other section than the
+ * address it was opened at, decided before anything of it is committed. The
+ * room of a folder is read only when its privacy decides, and is handed on.
+ */
+async function checkSectionAddress(
+  self: FilesStore,
+  data: { current: TFolder; pathParts: TPathParts[] },
+  address: TFetchAddress,
+  controller: Nullable<AbortController>,
+): Promise<{ correction: string | null; room: Nullable<TItem> }> {
+  const { appsStore } = self;
+  const decision = {
+    pathname: address.pathname,
+    search: address.search,
+    folderId: data.current.id,
+    isPrivate: !!data.current.private,
+    isSectionAvailable: self.isPrivateRoomsSectionAvailable,
+    isRoomsAppOff:
+      !!appsStore &&
+      !appsStore.isInstalled("ai-rooms") &&
+      !appsStore.isInstalled("ai-forms"),
+    isFrame: !!self.settingsStore.isFrame,
+    isDecided: !!(address.state as Nullable<Record<string, unknown>>)?.[
+      SECTION_DECIDED_STATE
+    ],
+  };
+
+  const roomPart = data.pathParts?.[1];
+  const isInRoom =
+    !!roomPart &&
+    String(roomPart.id) !== String(data.current.id) &&
+    (data.current.rootFolderType === FolderType.Rooms ||
+      data.current.rootFolderType === FolderType.Archive);
+  const privacyDecides =
+    getSectionAddressCorrection({ ...decision, isPrivate: true }) !==
+    getSectionAddressCorrection(decision);
+
+  const room: Nullable<TItem> =
+    !decision.isPrivate && isInRoom && privacyDecides
+      ? await api.files.getFolderInfo(roomPart.id)
+      : null;
+
+  const current = window.DocSpace?.location ?? window.location;
+  const isStale =
+    self.filesController !== controller ||
+    current.pathname !== address.pathname ||
+    current.search !== address.search;
+
+  if (isStale) return { correction: null, room };
+
+  return {
+    correction: getSectionAddressCorrection({
+      ...decision,
+      isPrivate: decision.isPrivate || !!room?.private,
+    }),
+    room,
+  };
+}
 
 // Network-fetch orchestration extracted from the FilesStore methods. These are
 // side-effectful actions (not computeds), so they are moved verbatim into free
@@ -185,9 +252,37 @@ export function fetchFilesImpl(
 
   let room: Nullable<TItem> = null;
 
+  const controller = self.filesController;
+  let isAddressCorrected = false;
+  const routerLocation = window.DocSpace?.location;
+  const address: TFetchAddress = {
+    pathname: (routerLocation ?? window.location).pathname,
+    search: (routerLocation ?? window.location).search,
+    state: routerLocation?.state,
+  };
+
   return api.files
     .getFolder(folderId as string, filterData, self.filesController.signal)
     .then(async (data) => {
+      const sectionCheck = await checkSectionAddress(
+        self,
+        data,
+        address,
+        controller,
+      );
+
+      if (sectionCheck.correction) {
+        isAddressCorrected = true;
+        window.DocSpace.navigate(sectionCheck.correction, {
+          replace: true,
+          state: {
+            ...((address.state ?? {}) as Record<string, unknown>),
+            [SECTION_DECIDED_STATE]: true,
+          },
+        });
+
+        return;
+      }
       let newTotal = data.total;
 
       // fixed row loader if total and items length is different
@@ -263,10 +358,15 @@ export function fetchFilesImpl(
             data.current.roomType === RoomsType.FormRoom ||
             data.current.parentRoomType === FolderType.FormRoom;
 
+          // The address is settled by now: a private room opened under Rooms
+          // was moved to the section above.
           self.categoryType = getCategoryTypeByFolderTypeInSection(
             data.current.rootFolderType,
             data.current.parentId,
-            { roomType: isInFormRoom ? RoomsType.FormRoom : undefined },
+            {
+              roomType: isInFormRoom ? RoomsType.FormRoom : undefined,
+              isPrivate: isPrivateRoomsRoute(address.pathname),
+            },
           );
         }
       });
@@ -324,7 +424,8 @@ export function fetchFilesImpl(
 
           if (idx === 1) {
             if (!isCurrentFolder) {
-              room = await api.files.getFolderInfo(folder.id);
+              room =
+                sectionCheck.room ?? (await api.files.getFolderInfo(folder.id));
 
               shared = room.shared;
               external = room.external;
@@ -668,6 +769,9 @@ export function fetchFilesImpl(
       }
     })
     .finally(() => {
+      // The corrected address loads the folder again and ends the loading.
+      if (isAddressCorrected) return;
+
       self.setIsLoadedFetchFiles(true);
 
       self.clientLoadingStore.setIsSectionHeaderLoading(false);
@@ -779,9 +883,14 @@ export function fetchRoomsImpl(
         }
 
         runInAction(() => {
-          self.categoryType = getCategoryTypeByFolderType(
+          self.categoryType = getCategoryTypeByFolderTypeInSection(
             data.current.rootFolderType,
             data.current.parentId,
+            {
+              isPrivate: isPrivateRoomsRoute(
+                (window.DocSpace?.location ?? window.location).pathname,
+              ),
+            },
           );
         });
 

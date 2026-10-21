@@ -34,6 +34,7 @@
  */
 
 import {
+  appsHandler,
   aiConfigHandler,
   capabilitiesHandler,
   encryptedFilesHandlers,
@@ -303,6 +304,9 @@ test.describe("Private room — archived", () => {
   test.beforeEach(async ({ page, mockRequest }) => {
     await page.setViewportSize({ width: 1440, height: 1024 });
     mockRequest.use(
+      // Private rooms open under their Rooms addresses only while the Private
+      // section is off.
+      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
       rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),

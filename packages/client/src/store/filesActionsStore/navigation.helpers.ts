@@ -218,6 +218,7 @@ self: FilesActionStore,item: {
   title?: string;
   rootFolderType?: FolderType;
   roomType?: RoomsType;
+  private?: boolean;
 }
 )=> {
   if (self.publicRoomStore.isPublicRoom)
@@ -228,7 +229,12 @@ self: FilesActionStore,item: {
 
   const categoryType = isAIAgent
     ? CategoryType.Chat
-    : getCategoryTypeByFolderTypeInSection(rootFolderType, id, { roomType });
+    : getCategoryTypeByFolderTypeInSection(rootFolderType, id, {
+        roomType,
+        isPrivate:
+          self.filesStore.isPrivateRoomsSectionAvailable &&
+          item.private === true,
+      });
 
   const state = { title, rootFolderType, isRoot: false, isRoom };
   const filter = FilesFilter.getDefault();
@@ -614,6 +620,8 @@ self: FilesActionStore,
       self.userStore.user?.id,
       roomType,
       currentTitle,
+      self.filesStore.isPrivateRoomsSectionAvailable &&
+        (item.private === true || self.treeFoldersStore.isPrivacyFolder),
     );
 
     if (openingNewTab(url, e)) return;

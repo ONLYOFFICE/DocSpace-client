@@ -34,6 +34,7 @@
  */
 
 import {
+  appsHandler,
   capabilitiesHandler,
   encryptedFilesHandlers,
   filesSettingsHandler,
@@ -62,6 +63,9 @@ const TOAST_KEY_FRAGMENT = /Encryption keys are not configured|EncryptionKeysNot
 test.describe("Private room — entry warning toast", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
+      // Private rooms open under their Rooms addresses only while the Private
+      // section is off.
+      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
       rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
@@ -143,6 +147,9 @@ test.describe("Private room — entry warning toast", () => {
 test.describe("Private room — upload without a key", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
+      // Private rooms open under their Rooms addresses only while the Private
+      // section is off.
+      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
       rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),

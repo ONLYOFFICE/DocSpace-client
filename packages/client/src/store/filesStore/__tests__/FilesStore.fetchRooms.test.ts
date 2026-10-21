@@ -207,7 +207,10 @@ const storeOnRoomsList = (isPrivateRoomsSectionAvailable: boolean) => {
   const store = createTestFilesStore({
     treeFoldersStore: { isRoomsFolder: true },
   });
-  store.appsStore = { isPrivateRoomsSectionAvailable };
+  store.appsStore = {
+    isPrivateRoomsSectionAvailable,
+    isInstalled: () => true,
+  };
   store.getFilesContextOptions = (() => []) as never;
   return store;
 };
@@ -338,7 +341,10 @@ describe("FilesStore rooms requests — Private section scope", () => {
 
   it("reloads the open Rooms list when the section availability flips", async () => {
     const store = storeOnRoomsList(true);
-    const apps = observable({ isPrivateRoomsSectionAvailable: true });
+    const apps = observable({
+      isPrivateRoomsSectionAvailable: true,
+      isInstalled: () => true,
+    });
     const getRooms = vi
       .spyOn(api.rooms, "getRooms")
       .mockResolvedValue(roomsPayload([room(1)]) as never);
@@ -364,7 +370,10 @@ describe("FilesStore rooms requests — Private section scope", () => {
     async (pathname) => {
       openAddress(pathname);
       const store = storeOnRoomsList(true);
-      const apps = observable({ isPrivateRoomsSectionAvailable: true });
+      const apps = observable({
+        isPrivateRoomsSectionAvailable: true,
+        isInstalled: () => true,
+      });
       const getRooms = vi.spyOn(api.rooms, "getRooms");
       store.watchPrivateRoomsSection(apps);
 

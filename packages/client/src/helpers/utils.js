@@ -160,19 +160,38 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
  * pathname is the fallback for folders *inside* a form room, which carry no
  * room type of their own.
  *
+ * Private rooms open in the Private section while it is available. The caller
+ * says so with `isPrivate`: the target is a private room, or lies inside the
+ * private room open now. The route alone is not a signal, since links from the
+ * section to ordinary folders must not pass through it.
+ *
  * @param {import("@docspace/shared/enums").FolderType|null} [folderType]
  * @param {number|string|null} [parentId]
  * @param {{
  *   roomType?: import("@docspace/shared/enums").RoomsType,
  *   pathname?: string,
+ *   isPrivate?: boolean,
  * }} [options]
  */
 export const getCategoryTypeByFolderTypeInSection = (
   folderType,
   parentId,
-  { roomType, pathname = window.location.pathname } = {},
+  { roomType, pathname = window.location.pathname, isPrivate = false } = {},
 ) => {
   const categoryType = getCategoryTypeByFolderType(folderType, parentId);
+
+  if (isPrivate) {
+    switch (categoryType) {
+      case CategoryType.Shared:
+        return CategoryType.PrivateRooms;
+      case CategoryType.SharedRoom:
+        return CategoryType.PrivateRoom;
+      case CategoryType.Archive:
+        return CategoryType.PrivateArchive;
+      default:
+        break;
+    }
+  }
 
   if (categoryType !== CategoryType.SharedRoom) return categoryType;
 

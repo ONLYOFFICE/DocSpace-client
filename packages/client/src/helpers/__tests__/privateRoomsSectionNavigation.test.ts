@@ -36,14 +36,22 @@
 import { describe, expect, it } from "vitest";
 
 import { CategoryType } from "@docspace/shared/constants";
+import { FolderType } from "@docspace/shared/enums";
 import {
   getCategoryType,
   isPrivateRoomsRoute,
 } from "@docspace/shared/utils/common";
 
 import { getClientActiveId } from "../articleNavigation";
-import { getRoomsAddressOfPrivateAddress } from "../privateRoomsSection";
-import { getCategoryUrl } from "../utils";
+import {
+  getRoomsAddressOfPrivateAddress,
+  getSectionAddressCorrection,
+  type TSectionDecision,
+} from "../privateRoomsSection";
+import {
+  getCategoryTypeByFolderTypeInSection,
+  getCategoryUrl,
+} from "../utils";
 
 const categoryOf = (pathname: string) => getCategoryType({ pathname });
 
@@ -144,5 +152,116 @@ describe("Private section in the sidebar", () => {
     ["/rooms/archived/filter", "2"],
   ])("keeps %s on Rooms", (pathname, activeId) => {
     expect(getClientActiveId(pathname, ids, "")).toBe(activeId);
+  });
+});
+
+describe("Private section of a room opened from elsewhere", () => {
+  it.each([
+    [FolderType.Rooms, 0, CategoryType.PrivateRooms],
+    [FolderType.Rooms, 12, CategoryType.PrivateRoom],
+    [FolderType.Archive, 12, CategoryType.PrivateArchive],
+  ])(
+    "opens a private target of folder type %s under the section",
+    (folderType, parentId, category) => {
+      expect(
+        getCategoryTypeByFolderTypeInSection(folderType, parentId, {
+          isPrivate: true,
+          pathname: "/rooms/shared/filter",
+        }),
+      ).toBe(category);
+    },
+  );
+
+  it("leaves a target that is not private where it was", () => {
+    expect(
+      getCategoryTypeByFolderTypeInSection(FolderType.Rooms, 12, {
+        pathname: "/private/12/filter",
+      }),
+    ).toBe(CategoryType.SharedRoom);
+    expect(
+      getCategoryTypeByFolderTypeInSection(FolderType.USER, 12, {
+        isPrivate: true,
+      }),
+    ).toBe(CategoryType.Personal);
+  });
+});
+
+describe("Section decided before the folder is shown", () => {
+  const decide = (decision: Partial<TSectionDecision>) =>
+    getSectionAddressCorrection({
+      pathname: "/rooms/shared/12/filter",
+      search: "?folder=12",
+      folderId: 12,
+      isPrivate: true,
+      isSectionAvailable: true,
+      isRoomsAppOff: false,
+      isFrame: false,
+      isDecided: false,
+      ...decision,
+    });
+
+  it.each([
+    ["/rooms/shared/12/filter", "?folder=12", "/private/12/filter?folder=12"],
+    ["/rooms/shared/filter", "?folder=12", "/private/filter?folder=12"],
+    [
+      "/rooms/archived/filter",
+      "?folder=12&page=1",
+      "/private/archived/filter?folder=12&page=1",
+    ],
+    ["/rooms/archived/12/filter", "", "/private/archived/filter?folder=12"],
+  ])(
+    "moves a private room opened at %s%s to the section",
+    (pathname, search, address) => {
+      expect(decide({ pathname, search })).toBe(address);
+    },
+  );
+
+  it.each([
+    ["/private/12/filter", "?folder=12", "/rooms/shared/12/filter?folder=12"],
+    [
+      "/private/archived/filter",
+      "?folder=12",
+      "/rooms/archived/filter?folder=12",
+    ],
+  ])(
+    "moves an ordinary room opened at %s%s to Rooms",
+    (pathname, search, address) => {
+      expect(decide({ pathname, search, isPrivate: false })).toBe(address);
+    },
+  );
+
+  it.each([
+    ["/private/12/filter", true],
+    ["/rooms/shared/12/filter", false],
+    ["/rooms/personal/filter", true],
+    ["/forms/12/filter", true],
+  ])("keeps %s when the room's privacy is %s", (pathname, isPrivate) => {
+    expect(decide({ pathname, isPrivate })).toBeNull();
+  });
+
+  it.each([
+    ["the section is not available", { isSectionAvailable: false }],
+    ["the client runs in a frame", { isFrame: true }],
+    ["the address was decided already", { isDecided: true }],
+  ])("keeps the address while %s", (_, decision) => {
+    expect(decide(decision)).toBeNull();
+    expect(
+      decide({ ...decision, pathname: "/private/12/filter", isPrivate: false }),
+    ).toBeNull();
+  });
+
+  it.each(["/rooms/shared/12/filter", "/private/12/filter"])(
+    "sends an ordinary room at %s to the dashboard while the Rooms app is off",
+    (pathname) => {
+      expect(decide({ pathname, isPrivate: false, isRoomsAppOff: true })).toBe(
+        "/dashboard",
+      );
+    },
+  );
+
+  it("moves a private room while the Rooms app is off", () => {
+    expect(decide({ isRoomsAppOff: true })).toBe(
+      "/private/12/filter?folder=12",
+    );
   });
 });

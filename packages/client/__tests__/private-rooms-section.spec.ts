@@ -38,6 +38,7 @@ import {
   capabilitiesHandler,
   encryptedFilesHandlers,
   filesSettingsHandler,
+  privateRoomListHandler,
   roomListHandler,
   rootHandler,
   selfActivationStatusHandler,
@@ -90,6 +91,7 @@ test.describe("Private section — addresses", () => {
 
     await expect(page).toHaveURL(
       `${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`,
+      { timeout: 15000 },
     );
     await expect(roomRow(page)).toBeVisible({ timeout: 15000 });
   });
@@ -103,8 +105,11 @@ test.describe("Private section — addresses", () => {
       `${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`,
     );
 
+    await expect(page).toHaveURL(
+      `${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`,
+      { timeout: 15000 },
+    );
     await expect(roomRow(page)).toBeVisible({ timeout: 15000 });
-    await expect(page).not.toHaveURL(/\/dashboard/);
   });
 
   test("Rooms app switched off without the section", async ({
@@ -204,5 +209,205 @@ test.describe("Private section — sidebar", () => {
     expect(await subItemIds(page, "private-rooms")).toEqual([
       "private-rooms-archive",
     ]);
+  });
+});
+
+const SUBFOLDER_ID = 9502;
+const SUBFOLDER_FILE = { id: 9503, title: "q3.txt" };
+const ARCHIVED_ROOM_ID = 9510;
+const ARCHIVED_FILE_TITLE = "minutes.txt";
+const ORDINARY_ROOM_ID = 9600;
+const ORDINARY_FILE_TITLE = "agenda.txt";
+/** The Rooms folder of the root mock, the sidebar item of the Rooms section. */
+const ROOMS_ID = "2002";
+
+const fileRow = (page: Page, title: string) =>
+  page
+    .locator('[data-testid^="table-row-"]')
+    .filter({ hasText: title.replace(/\.txt$/, "") });
+
+const roomLink = (page: Page) =>
+  page.locator(`[data-title="${ROOM_TITLE}"] [data-testid="link"]`).first();
+
+const navigateInApp = (page: Page, url: string, state?: unknown) =>
+  page.evaluate(
+    ([to, routeState]) =>
+      (
+        window as unknown as {
+          DocSpace: { navigate: (to: string, opts?: unknown) => void };
+        }
+      ).DocSpace.navigate(to, { state: routeState }),
+    [url, state] as const,
+  );
+
+const keysMissing = (page: Page) =>
+  page
+    .getByTestId("toast-content")
+    .filter({ hasText: /Encryption keys are not configured/ });
+
+test.describe("Private section — rooms open inside it", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      privateRoomListHandler(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        title: ROOM_TITLE,
+        folders: [{ id: SUBFOLDER_ID, title: "Reports" }],
+        initialFiles: [
+          { id: 9501, title: FILE_TITLE, size: 4, encrypted: false },
+          {
+            ...SUBFOLDER_FILE,
+            size: 4,
+            encrypted: false,
+            folderId: SUBFOLDER_ID,
+          },
+        ],
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ARCHIVED_ROOM_ID,
+        title: "Archived Private Room",
+        archived: true,
+        initialFiles: [
+          { id: 9511, title: ARCHIVED_FILE_TITLE, size: 4, encrypted: false },
+        ],
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ORDINARY_ROOM_ID,
+        title: "Team Room",
+        isPrivate: false,
+        initialFiles: [
+          { id: 9601, title: ORDINARY_FILE_TITLE, size: 4, encrypted: false },
+        ],
+      }),
+    );
+  });
+
+  test("Room clicked in the section", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+
+    await roomLink(page).click();
+
+    await expect
+      .poll(() => new URL(page.url()).pathname)
+      .toBe(`/private/${ROOM_ID}/filter`);
+    await expect(fileRow(page, FILE_TITLE)).toBeVisible({ timeout: 15000 });
+  });
+
+  test("Row link opened in a new tab", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    const href = await roomLink(page).getAttribute("href");
+    expect(href).toMatch(
+      new RegExp(`/private/${ROOM_ID}/filter\\?folder=${ROOM_ID}$`),
+    );
+
+    await page.goto(href!);
+
+    await expect(fileRow(page, FILE_TITLE)).toBeVisible({ timeout: 15000 });
+    expect(page.url()).toBe(href);
+  });
+
+  test("Rooms address of a private room", async ({ page, baseUrl }) => {
+    await page.goto(
+      `${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`,
+    );
+
+    await expect(page).toHaveURL(
+      `${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`,
+      { timeout: 15000 },
+    );
+    await expect(fileRow(page, FILE_TITLE)).toBeVisible({ timeout: 15000 });
+    await expect(navItem(page, "private-rooms")).toHaveClass(isActive);
+  });
+
+  test("Archived room link", async ({ page, baseUrl }) => {
+    await page.goto(
+      `${baseUrl}/rooms/archived/filter?folder=${ARCHIVED_ROOM_ID}`,
+    );
+
+    await expect(page).toHaveURL(
+      `${baseUrl}/private/archived/filter?folder=${ARCHIVED_ROOM_ID}`,
+      { timeout: 15000 },
+    );
+    await expect(fileRow(page, ARCHIVED_FILE_TITLE)).toBeVisible({
+      timeout: 15000,
+    });
+  });
+
+  test("Archived room address", async ({ page, baseUrl }) => {
+    const address = `${baseUrl}/private/archived/filter?folder=${ARCHIVED_ROOM_ID}`;
+
+    await page.goto(address);
+
+    await expect(fileRow(page, ARCHIVED_FILE_TITLE)).toBeVisible({
+      timeout: 15000,
+    });
+    expect(page.url()).toBe(address);
+    await expect(navItem(page, "private-rooms-archive")).toHaveClass(isActive);
+  });
+
+  test("Open location from a feed", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await navigateInApp(
+      page,
+      `/rooms/shared/${SUBFOLDER_ID}/filter?folder=${SUBFOLDER_ID}`,
+      { highlightFileId: SUBFOLDER_FILE.id, isFileHasExst: false },
+    );
+
+    await expect(page).toHaveURL(
+      `${baseUrl}/private/${SUBFOLDER_ID}/filter?folder=${SUBFOLDER_ID}`,
+      { timeout: 15000 },
+    );
+    await expect(navItem(page, "private-rooms")).toHaveClass(isActive);
+    await expect(fileRow(page, SUBFOLDER_FILE.title)).toHaveClass(
+      /__isHighlight--/,
+    );
+  });
+
+  test("Back from the editor", async ({ page, baseUrl }) => {
+    await page.goto(
+      `${baseUrl}/rooms/shared/${SUBFOLDER_ID}/filter?folder=${SUBFOLDER_ID}`,
+    );
+
+    await expect(page).toHaveURL(
+      `${baseUrl}/private/${SUBFOLDER_ID}/filter?folder=${SUBFOLDER_ID}`,
+      { timeout: 15000 },
+    );
+    await expect(fileRow(page, SUBFOLDER_FILE.title)).toBeVisible({
+      timeout: 15000,
+    });
+  });
+
+  test("Cold link to a private room", async ({ page, baseUrl }) => {
+    await page.goto(
+      `${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`,
+    );
+
+    await expect(fileRow(page, FILE_TITLE)).toBeVisible({ timeout: 15000 });
+    expect(new URL(page.url()).pathname).toBe(`/private/${ROOM_ID}/filter`);
+    await expect(keysMissing(page)).toHaveCount(1);
+    await page.waitForTimeout(1000);
+    await expect(keysMissing(page)).toHaveCount(1);
+  });
+
+  test("Hand-edited address", async ({ page, baseUrl }) => {
+    await page.goto(
+      `${baseUrl}/private/${ORDINARY_ROOM_ID}/filter?folder=${ORDINARY_ROOM_ID}`,
+    );
+
+    await expect(page).toHaveURL(
+      `${baseUrl}/rooms/shared/${ORDINARY_ROOM_ID}/filter?folder=${ORDINARY_ROOM_ID}`,
+      { timeout: 15000 },
+    );
+    await expect(fileRow(page, ORDINARY_FILE_TITLE)).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(navItem(page, ROOMS_ID)).toHaveClass(isActive);
   });
 });

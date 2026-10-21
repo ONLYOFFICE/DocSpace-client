@@ -70,7 +70,7 @@ import {
 
 import { CategoryType, EMPTY_ARRAY } from "@docspace/shared/constants";
 import {
-  getCategoryTypeByFolderType,
+  getCategoryTypeByFolderTypeInSection,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import {
@@ -195,6 +195,7 @@ const SectionHeaderContent = (props) => {
     rootFolderId,
     isPersonalReadOnly,
     isPrivacyFolder,
+    isPrivateRoomsSectionAvailable,
     showTemplateBadge,
 
     isAIRoom,
@@ -439,7 +440,9 @@ const SectionHeaderContent = (props) => {
       // folder/room id here, so it maps to CategoryType.Form → /forms/{id}).
       const categoryType = isFormsRoute
         ? CategoryType.Form
-        : getCategoryTypeByFolderType(rootFolderType, id);
+        : getCategoryTypeByFolderTypeInSection(rootFolderType, id, {
+            isPrivate: isPrivateRoomsSectionAvailable && isPrivacyFolder,
+          });
 
       const path = getCategoryUrl(categoryType, id);
 
@@ -490,6 +493,8 @@ const SectionHeaderContent = (props) => {
       setSelected,
       setIsLoading,
       isFormsRoute,
+      isPrivateRoomsSectionAvailable,
+      isPrivacyFolder,
     ],
   );
 
@@ -1185,6 +1190,7 @@ export default inject(
       categoryType,
       setBufferSelection,
       selection: filesSelection,
+      isPrivateRoomsSectionAvailable,
     } = filesStore;
 
     const {
@@ -1399,6 +1405,7 @@ export default inject(
       isEmptyArchive,
       isArchiveFolder,
       isPrivacyFolder,
+      isPrivateRoomsSectionAvailable,
 
       setIsLoading,
 

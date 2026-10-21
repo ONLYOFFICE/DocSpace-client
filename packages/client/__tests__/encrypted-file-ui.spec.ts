@@ -34,6 +34,7 @@
  */
 
 import {
+  appsHandler,
   capabilitiesHandler,
   encryptedFilesHandlers,
   filesSettingsHandler,
@@ -101,6 +102,9 @@ function installRoomWithEncryptedFile(
 test.describe("Encrypted file UI in private room", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
+      // Private rooms open under their Rooms addresses only while the Private
+      // section is off.
+      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
       rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
@@ -278,6 +282,9 @@ test.describe("Encrypted file moved out of a private room", () => {
 
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
+      // Private rooms open under their Rooms addresses only while the Private
+      // section is off.
+      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
       rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),

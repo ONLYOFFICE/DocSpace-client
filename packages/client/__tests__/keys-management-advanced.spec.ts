@@ -38,6 +38,7 @@ import {
   serializeIdentity,
 } from "@docspace/shared/services/encryption/identity";
 import {
+  appsHandler,
   capabilitiesHandler,
   encryptedFilesHandlers,
   filesSettingsHandler,
@@ -83,6 +84,9 @@ async function realEnvelope() {
 test.describe("Keys management — advanced flows", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
+      // Private rooms open under their Rooms addresses only while the Private
+      // section is off.
+      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       capabilitiesHandler(TEST_PORT, true),

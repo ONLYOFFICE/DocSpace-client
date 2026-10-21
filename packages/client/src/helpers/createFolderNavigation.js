@@ -52,6 +52,7 @@ export const createFolderNavigation = async (
   userId,
   roomType,
   currentTitle,
+  isPrivate = false,
 ) => {
   if (!item) return { url: "", state: {} };
 
@@ -81,7 +82,7 @@ export const createFolderNavigation = async (
   const baseCategory = getCategoryTypeByFolderTypeInSection(
     rootFolderType,
     id,
-    { roomType: itemRoomType },
+    { roomType: itemRoomType, isPrivate },
   );
 
   const path = isAiRoom

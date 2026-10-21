@@ -26,6 +26,7 @@
 
 import { describe, it, expect } from "vitest";
 
+import { CategoryType } from "@docspace/shared/constants";
 import { createTestFilesStore } from "./testHarness";
 
 // getItemUrl builds the target URL per item kind. Asserted via substring
@@ -73,5 +74,23 @@ describe("FilesStore.getItemUrl — characterization", () => {
     const url = store.getItemUrl(7, false, false, true) as string;
     expect(url).toContain("/rooms/share");
     expect(url).toContain("key=ROOMKEY");
+  });
+
+  it("Row link opened in a new tab: a room of the Private list links to its own address", () => {
+    const store = createTestFilesStore();
+    store.categoryType = CategoryType.PrivateRooms;
+
+    expect(store.getItemUrl(12, true, false, false)).toContain(
+      "/private/12/filter?folder=12",
+    );
+  });
+
+  it("links a folder inside a private room to its address in the section", () => {
+    const store = createTestFilesStore();
+    store.categoryType = CategoryType.PrivateRoom;
+
+    expect(store.getItemUrl(13, true, false, false)).toContain(
+      "/private/13/filter?folder=13",
+    );
   });
 });

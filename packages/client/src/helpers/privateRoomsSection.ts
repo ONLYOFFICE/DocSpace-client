@@ -38,6 +38,23 @@ import { getCategoryType } from "@docspace/shared/utils/common";
 
 const PRIVATE_LIST = "/private";
 const PRIVATE_ARCHIVE = "/private/archived";
+const ROOMS_LIST = "/rooms/shared";
+
+const PRIVATE_CATEGORIES: number[] = [
+  CategoryType.PrivateRooms,
+  CategoryType.PrivateRoom,
+  CategoryType.PrivateArchive,
+];
+
+const ROOMS_CATEGORIES: number[] = [
+  CategoryType.Shared,
+  CategoryType.SharedRoom,
+  CategoryType.Archive,
+  CategoryType.ArchivedRoom,
+];
+
+/** The history state key of an address this decision has already corrected. */
+export const SECTION_DECIDED_STATE = "privateRoomsSectionDecided";
 
 /**
  * The Rooms address a Private section address opens under while the section
@@ -57,4 +74,67 @@ export const getRoomsAddressOfPrivateAddress = ({
       : [PRIVATE_LIST, "/rooms/shared"];
 
   return `${to}${pathname.slice(from.length)}${search}`;
+};
+
+/**
+ * The Private section address of a Rooms address of a room or folder: an
+ * active one keeps its path under /private, an archived one opens in the
+ * private archive with its folder.
+ */
+export const getPrivateAddressOfRoomsAddress = (
+  { pathname, search }: { pathname: string; search: string },
+  folderId: number | string,
+) => {
+  if (getCategoryType({ pathname }) === CategoryType.Archive) {
+    const params = new URLSearchParams(search);
+    if (!params.has("folder")) params.set("folder", `${folderId}`);
+
+    return `${PRIVATE_ARCHIVE}/filter?${params.toString()}`;
+  }
+
+  return `${PRIVATE_LIST}${pathname.slice(ROOMS_LIST.length)}${search}`;
+};
+
+export type TSectionDecision = {
+  pathname: string;
+  search: string;
+  folderId: number | string;
+  /** The loaded folder is a private room or lies inside one. */
+  isPrivate: boolean;
+  isSectionAvailable: boolean;
+  /** Neither the Rooms nor the Forms app is on. */
+  isRoomsAppOff: boolean;
+  isFrame: boolean;
+  /** The address is the result of an earlier correction. */
+  isDecided: boolean;
+};
+
+/**
+ * Where a loaded room or folder must be shown instead of the address it was
+ * opened at, or null to show it there.
+ */
+export const getSectionAddressCorrection = (
+  decision: TSectionDecision,
+): string | null => {
+  const { isPrivate, isSectionAvailable, isRoomsAppOff, isFrame, isDecided } =
+    decision;
+
+  if (!isSectionAvailable || isFrame || isDecided) return null;
+
+  const categoryType = getCategoryType(decision);
+  const isPrivateAddress = PRIVATE_CATEGORIES.includes(categoryType);
+  const isRoomsAddress = ROOMS_CATEGORIES.includes(categoryType);
+
+  if (!isPrivateAddress && !isRoomsAddress) return null;
+
+  if (isPrivate)
+    return isRoomsAddress
+      ? getPrivateAddressOfRoomsAddress(decision, decision.folderId)
+      : null;
+
+  // Rooms room addresses are let in with the Rooms app off only for the
+  // private rooms they may hold.
+  if (isRoomsAppOff) return "/dashboard";
+
+  return isPrivateAddress ? getRoomsAddressOfPrivateAddress(decision) : null;
 };

@@ -74,6 +74,7 @@ import {
   getAcceptButtonLabel,
   getIsDisabled,
   getSelectorTransfer,
+  getShowEncryptedTransferBanner,
 } from "./utils";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -124,7 +125,6 @@ const FilesSelectorWrapper = ({
   copyEncryptedFilesToFolder,
   planPrivateTransfer,
   runPrivateTransferPlan,
-  sourceIsPrivate,
   sourceInPrivateRoom,
   privateRoomId,
   clearActiveOperations,
@@ -282,18 +282,12 @@ const FilesSelectorWrapper = ({
     };
   }, [selection, isCopy, isMove, isFormRoom, t]);
 
-  const encryptedInSelection = React.useMemo(
-    () =>
-      (selection as Array<TFile | TFolder>).filter(
-        (it) =>
-          "fileExst" in it && it.fileExst && (it as TFile).encrypted === true,
-      ) as TFile[],
-    [selection],
-  );
-  const hasEncryptedInSelection = encryptedInSelection.length > 0;
-
-  const showEncryptedTransferBanner =
-    !!(isCopy || isMove) && hasEncryptedInSelection && !!sourceIsPrivate;
+  const showEncryptedTransferBanner = getShowEncryptedTransferBanner({
+    selection: selection as Array<TFile | TFolder>,
+    sourceInPrivateRoom,
+    isCopy,
+    isMove,
+  });
 
   const onAccept = async (
     selectedItemId: string | number | undefined,
@@ -708,7 +702,6 @@ export default inject(
       id: selectedId,
       parentId,
       rootFolderType,
-      private: sourceIsPrivate,
       shared,
       navigationPath,
       isRoom,
@@ -871,7 +864,6 @@ export default inject(
       copyEncryptedFilesToFolder,
       planPrivateTransfer,
       runPrivateTransferPlan,
-      sourceIsPrivate,
       sourceInPrivateRoom: treeFoldersStore.isPrivacyFolder,
       privateRoomId,
 

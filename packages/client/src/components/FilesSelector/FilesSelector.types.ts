@@ -120,7 +120,6 @@ export type FilesSelectorProps = TSelectorHeader & {
 	) => Promise<void>;
 	planPrivateTransfer: FilesActionStore["planPrivateTransfer"];
 	runPrivateTransferPlan: FilesActionStore["runPrivateTransferPlan"];
-	sourceIsPrivate?: boolean;
 	sourceInPrivateRoom?: boolean;
 	privateRoomId?: number | string;
 	clearActiveOperations: (

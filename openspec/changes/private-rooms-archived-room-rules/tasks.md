@@ -29,7 +29,7 @@
   - "Paste after Ctrl+C": Ctrl+V in My documents transfers nothing and requests no server copy.
 
   The existing case "Copy hotkey inside a private room" must still pass. Run `cd packages/client && pnpm exec vitest run src/store/__tests__/HotkeyStore.clipboard.test.ts`.
-- [ ] 2.2 Make the destination picker's encrypted-transfer warning follow the signal, as design D4 describes. Move the predicate behind `showEncryptedTransferBanner` (`packages/client/src/components/FilesSelector/index.tsx`) into a pure helper in `components/FilesSelector/utils.ts`. The helper reads `sourceInPrivateRoom` instead of the open folder's own `private` flag.
+- [x] 2.2 Make the destination picker's encrypted-transfer warning follow the signal, as design D4 describes. Move the predicate behind `showEncryptedTransferBanner` (`packages/client/src/components/FilesSelector/index.tsx`) into a pure helper in `components/FilesSelector/utils.ts`. The helper reads `sourceInPrivateRoom` instead of the open folder's own `private` flag.
 
   Verify with new cases in `packages/client/src/components/FilesSelector/__tests__/utils.test.ts`:
   - copy or move of encrypted files from inside a private room shows the warning at the root and in a subfolder whose own flag is false (scenario "Warning in the destination picker");

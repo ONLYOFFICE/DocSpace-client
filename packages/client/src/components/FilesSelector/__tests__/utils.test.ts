@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-import { getSelectorTransfer } from "../utils";
+import { getSelectorTransfer, getShowEncryptedTransferBanner } from "../utils";
 
 const encrypted = (id: number) =>
   ({ id, title: `e${id}.docx`, fileExst: ".docx", encrypted: true }) as TFile;
@@ -104,5 +104,62 @@ describe("FilesSelector getSelectorTransfer", () => {
       isMove: true,
     });
     expect(transfer).toEqual({ kind: "generic" });
+  });
+});
+
+describe("FilesSelector getShowEncryptedTransferBanner", () => {
+  it.each([
+    ["copy", { isCopy: true }],
+    ["move", { isMove: true }],
+  ])(
+    "Warning in the destination picker: a %s of encrypted files out of a private room warns",
+    (_, operation) => {
+      expect(
+        getShowEncryptedTransferBanner({
+          selection: [encrypted(1), plain(2)],
+          sourceInPrivateRoom: true,
+          ...operation,
+        }),
+      ).toBe(true);
+    },
+  );
+
+  it("warns from a subfolder too, whose own private flag is false", () => {
+    expect(
+      getShowEncryptedTransferBanner({
+        selection: [encrypted(1)],
+        sourceInPrivateRoom: true,
+        isCopy: true,
+      }),
+    ).toBe(true);
+  });
+
+  it("does not warn for a source outside private rooms", () => {
+    expect(
+      getShowEncryptedTransferBanner({
+        selection: [encrypted(1)],
+        sourceInPrivateRoom: false,
+        isCopy: true,
+      }),
+    ).toBe(false);
+  });
+
+  it("does not warn for a selection without encrypted files", () => {
+    expect(
+      getShowEncryptedTransferBanner({
+        selection: [plain(1), folder(3)],
+        sourceInPrivateRoom: true,
+        isMove: true,
+      }),
+    ).toBe(false);
+  });
+
+  it("does not warn outside a copy or a move", () => {
+    expect(
+      getShowEncryptedTransferBanner({
+        selection: [encrypted(1)],
+        sourceInPrivateRoom: true,
+      }),
+    ).toBe(false);
   });
 });

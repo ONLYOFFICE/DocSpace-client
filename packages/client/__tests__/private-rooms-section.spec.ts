@@ -707,3 +707,50 @@ test.describe("Private section — ways out stay in it", () => {
   });
 });
 
+test.describe("Private section — info panel", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      // Ahead of the rooms list, whose files/rooms* pattern also matches
+      // files/rooms/{id}/share.
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID, {
+        initial: [{ id: ALICE_ID, displayName: "Alice Private", access: 0 }],
+      }),
+      privateRoomListHandler(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+    );
+  });
+
+  const openInfoPanel = async (page: Page) => {
+    const detailsTab = page.getByTestId("info_details_tab");
+    if (!(await detailsTab.isVisible().catch(() => false)))
+      await page.locator(".info-panel-toggle").click();
+  };
+
+  test("Nothing selected on the list", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await page.locator(".info-panel-toggle").click();
+
+    await expect(page.getByText("See rooms details here")).toBeVisible();
+  });
+
+  test("Private room selected", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await page.getByTestId("table-row-0").click();
+    await openInfoPanel(page);
+
+    await expect(page.getByTestId("info_details_tab")).toBeVisible();
+    await page.getByTestId("info_members_tab").click();
+    await expect(page.getByText("Alice Private")).toBeVisible({
+      timeout: 15000,
+    });
+  });
+});
+

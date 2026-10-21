@@ -58,7 +58,10 @@ import {
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
-import { getUserType } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
 import { LANGUAGE, SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import config from "PACKAGE_FILE";
@@ -424,7 +427,9 @@ class InfoPanelStore {
   getIsRooms = () => {
     const pathname = window.location.pathname.toLowerCase();
     return (
-      pathname.indexOf("rooms") !== -1 && !(pathname.indexOf("personal") !== -1)
+      (pathname.indexOf("rooms") !== -1 &&
+        !(pathname.indexOf("personal") !== -1)) ||
+      isPrivateRoomsRoute(pathname)
     );
   };
 

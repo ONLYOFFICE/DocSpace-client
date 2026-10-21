@@ -75,7 +75,7 @@
   - new cases in `packages/client/src/store/filesActionsStore/__tests__/FilesActionsStore.navigation.test.ts` and `FilesActionsStore.leaveRoom.test.ts`;
   - a `/private` case in `packages/shared/utils/axiosClient.test.ts`;
   - the E2E scenarios "Back from a private room", "Leave a private room", "Access to the open private room lost", "Removed from an archived private room" and "No-access view".
-- [ ] 2.5 Review every remaining pathname route check found by `grep -rnE "(indexOf|includes|startsWith)\(\"/?(rooms|forms)" packages/client/src packages/shared`, and every navigate call with a `rooms/` template literal (design D4). Make `InfoPanelStore.getIsRooms` recognise `/private`.
+- [x] 2.5 Review every remaining pathname route check found by `grep -rnE "(indexOf|includes|startsWith)\(\"/?(rooms|forms)" packages/client/src packages/shared`, and every navigate call with a `rooms/` template literal (design D4). Make `InfoPanelStore.getIsRooms` recognise `/private`.
 
   Verify with an `InfoPanelStore` unit case, the E2E scenarios "Nothing selected on the list" and "Private room selected", and the reviewed list recorded in the commit body.
 - [ ] 2.6 Review every `CategoryType.(Shared|SharedRoom|Archive|ArchivedRoom)` check for the new categories (design D3). Cover at least:

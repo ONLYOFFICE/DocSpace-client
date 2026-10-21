@@ -366,7 +366,12 @@ const useFiles = ({
           ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
           : FilesFilter.getDefault({ categoryType });
 
-    if (await dropDeletedMetadata(newFilter)) {
+    const href = window.location.href;
+    const isPruned = await dropDeletedMetadata(newFilter);
+
+    if (window.location.href !== href) return;
+
+    if (isPruned) {
       const params =
         newFilter instanceof RoomsFilter
           ? newFilter.toUrlParams(userId)

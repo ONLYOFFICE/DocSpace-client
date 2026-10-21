@@ -21,7 +21,7 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
 
   The address is decided before the folder is shown, so a corrected link loads once and never bounces between sections. Inside the section, the sidebar highlights Private, and the header title, breadcrumb root and Location column read Private.
 - Private rooms are created from the section only. Every create entry point of the section opens the create-room dialog directly on the Private type, with the existing key-generation and secure-context checks:
-  - the header buttons and the main and mobile buttons;
+  - the header buttons and the mobile create button;
   - "+ New" and the context menu of empty space;
   - the empty state;
   - the quick-action banner, which shows a single Private room tile;
@@ -87,7 +87,7 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
   - the Home section header, filter and body;
   - the empty views; quick actions (`helpers/quickActions.ts`, `pages/Home/Hooks/useQuickActions.tsx`); hotkeys (`HOCs/withHotkeys.js`);
   - the AI chat gate in `Shell.jsx`; `RoomsTour`; the info panel store;
-  - the create entry points (`Article/MainButton`, `CreateButtonMobile`, `helpers/getSectionCreateButton.ts`, `ContextOptionsStore`, `CreateEditRoomDialog`);
+  - the create entry points (`CreateButtonMobile`, `helpers/getSectionCreateButton.ts`, `ContextOptionsStore`, `CreateEditRoomDialog`);
   - `packages/shared/utils/rooms.tsx` (`getCreateRoomTypes`), `helpers/disabled-apps.ts`, the Dashboard module launcher;
   - removal of `packages/client/src/pages/E2eRooms`;
   - the apps catalog title (`packages/client/src/helpers/apps-catalog.tsx`) and the label in the unused `components/NewArticle`.

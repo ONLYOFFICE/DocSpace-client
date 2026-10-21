@@ -162,10 +162,10 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
   - without WebCrypto, it shows `Common:EncryptionRequiresHttps` and dispatches nothing;
   - otherwise it dispatches `Events.ROOM_CREATE` with `payload.startRoomType = RoomsTypePrivate`.
 - The header buttons (`helpers/getSectionCreateButton.ts`, `Header/index.js:499-507`), the context menu of empty space (`Home/index.js:458-463`) and "+ New" already call `onCreateRoom`.
-- Three entry points dispatch on their own and are pointed at the same branch:
-  - `Article/MainButton`;
+- Two entry points dispatch on their own and are pointed at the same branch:
   - `CreateButtonMobile`;
   - the Shift+R hotkey (`HOCs/withHotkeys.js:194-205`, `:411`).
+- `Article/MainButton` is not an entry point: `Client.jsx` imports `ArticleMainButtonContent` but its `ClientArticle` renders only `ClientArticleSidebar`, which has no create button.
 - Quick actions get a `"private"` list section in `getQuickActionsSection` (`helpers/quickActions.ts:118-121`), checked before `isRoomsFolder`. `useQuickActions` renders a single Private room tile for it, through the same branch, and nothing for users who cannot create rooms.
 - `CreateRoomDialog` already locks the type for a `startRoomType`. Its key auto-prompt effect (`CreateRoomDialog.js:182-193`) is widened from template items to "private start type without keys". Cancel or error closes the dialog through the existing `onCloseRef`.
 - `getCreateRoomTypes` drops `RoomsTypePrivate` in every state.

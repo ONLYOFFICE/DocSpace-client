@@ -269,7 +269,7 @@ The system SHALL show Common:Private as the header title of the section list. Th
 ### Requirement: Private rooms are created from the section
 The system SHALL open the create-room dialog directly on the Private room type, with the type locked, from every create entry point of the section:
 - the header create button and the header "+" on an empty page;
-- the sidebar main button and the mobile create button;
+- the mobile create button;
 - "+ New" and the context menu of empty space in the list;
 - the empty-state button and the quick-action tile;
 - the Shift+R hotkey.

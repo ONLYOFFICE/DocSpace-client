@@ -3036,6 +3036,56 @@ const withRoot = <T extends { current: { access?: number; security?: object } }>
   };
 };
 
+// RoomPrivacyFilter (Core/Core/RoomPrivacyFilter.cs): None 0, Private 1,
+// NotPrivate 2. The client sends the number.
+const PRIVACY_FILTER_PRIVATE = 1;
+const PRIVACY_FILTER_NOT_PRIVATE = 2;
+
+const readPrivacyFilter = (request?: Request) => {
+  if (!request) return null;
+
+  const value = Number(new URL(request.url).searchParams.get("privacyFilter"));
+
+  return value === PRIVACY_FILTER_PRIVATE || value === PRIVACY_FILTER_NOT_PRIVATE
+    ? value
+    : null;
+};
+
+type TPrivacyFilteredList = {
+  folders: { private?: boolean; providerItem?: boolean }[];
+  total: number;
+  count: number;
+};
+
+/**
+ * The `privacyFilter` query parameter of `GET files/rooms`
+ * (VirtualRoomsCommonController.GetRoomsFolder), with any search area.
+ * FolderDao.BuildRoomsQuery keeps the private rooms for `Private` and the
+ * others for `NotPrivate`; FileSecurity.GetVirtualRoomsAsync adds no room on
+ * third-party storage for `Private`. The totals lose the rooms left out.
+ */
+export const withRoomPrivacyFilter = <T extends TPrivacyFilteredList>(
+  list: T,
+  request?: Request,
+): T => {
+  const privacyFilter = readPrivacyFilter(request);
+  if (!privacyFilter) return list;
+
+  const folders = list.folders.filter((room) =>
+    privacyFilter === PRIVACY_FILTER_PRIVATE
+      ? !!room.private && !room.providerItem
+      : !room.private,
+  );
+  const dropped = list.folders.length - folders.length;
+
+  return {
+    ...list,
+    folders,
+    total: Math.max(0, list.total - dropped),
+    count: Math.max(0, list.count - dropped),
+  };
+};
+
 export const roomListResolver = (
   roomListType?: TypeRoomList,
   params?: {
@@ -3045,31 +3095,44 @@ export const roomListResolver = (
     canCreate?: boolean;
     rootAccess?: ShareAccessRights;
   },
+  request?: Request,
 ) => {
   const root = { canCreate: params?.canCreate, rootAccess: params?.rootAccess };
 
   if (roomListType === TypeRoomList.IsFiltered) {
     return new Response(
-      JSON.stringify({ response: withRoot(getRoomList(true), root) }),
+      JSON.stringify({
+        response: withRoomPrivacyFilter(
+          withRoot(getRoomList(true), root),
+          request,
+        ),
+      }),
     );
   }
 
   if (roomListType === TypeRoomList.IsDefault) {
     return new Response(
-      JSON.stringify({ response: withRoot(getRoomList(), root) }),
+      JSON.stringify({
+        response: withRoomPrivacyFilter(withRoot(getRoomList(), root), request),
+      }),
     );
   }
 
   if (roomListType === TypeRoomList.ContextMenu) {
     return new Response(
       JSON.stringify({
-        response: withRoot(getContextMenuRoomList(params ?? {}), root),
+        response: withRoomPrivacyFilter(
+          withRoot(getContextMenuRoomList(params ?? {}), root),
+          request,
+        ),
       }),
     );
   }
 
   return new Response(
-    JSON.stringify({ response: withRoot(getEmptyRoomList(), root) }),
+    JSON.stringify({
+      response: withRoomPrivacyFilter(withRoot(getEmptyRoomList(), root), request),
+    }),
   );
 };
 
@@ -3096,9 +3159,12 @@ export const roomListHandler = (
       typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
   }
 
-  return http.get(`${baseUrl}/${API_PREFIX}/${PATH_ROOMS_LIST}`, () => {
-    return roomListResolver(roomListType, params);
-  });
+  return http.get(
+    `${baseUrl}/${API_PREFIX}/${PATH_ROOMS_LIST}`,
+    ({ request }) => {
+      return roomListResolver(roomListType, params, request);
+    },
+  );
 };
 
 export const createRoomHandler = (port?: string) => {

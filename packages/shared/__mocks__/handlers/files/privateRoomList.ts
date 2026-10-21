@@ -36,7 +36,7 @@
 import { http } from "msw";
 
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
-import { PATH_ROOMS_LIST } from "./roomList";
+import { PATH_ROOMS_LIST, withRoomPrivacyFilter } from "./roomList";
 
 export type PrivateRoomListOptions = {
   roomId: number;
@@ -182,10 +182,11 @@ export const privateRoomListHandler = (
   /**
    * Mirrors VirtualRoomsController.GetRoomsFolder (HttpGet "rooms") ->
    * FileStorageService.GetFolderItemsAsync on the Rooms section, whose
-   * breadcrumbs, and so `pathParts`, are the section alone.
+   * breadcrumbs, and so `pathParts`, are the section alone. `privacyFilter`
+   * keeps the private room or the ordinary ones (withRoomPrivacyFilter).
    */
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ROOMS_LIST}`,
-    () => okResponse(body),
+    ({ request }) => okResponse(withRoomPrivacyFilter(body, request)),
   );
 };

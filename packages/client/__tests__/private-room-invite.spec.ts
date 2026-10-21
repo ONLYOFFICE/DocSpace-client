@@ -34,6 +34,7 @@
  */
 
 import {
+  appsHandler,
   capabilitiesHandler,
   filesSettingsHandler,
   privateRoomListHandler,
@@ -56,6 +57,8 @@ test.describe("Private room — invite entry point", () => {
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       capabilitiesHandler(TEST_PORT, true),
       filesSettingsHandler(TEST_PORT),
+      // Rooms lists private rooms only while the Private section is off.
+      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
     );
   });
 

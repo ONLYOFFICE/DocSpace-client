@@ -37,7 +37,7 @@
   - a URL `privacyFilter` and `searchArea` are overridden;
   - the next page and the refill keep the scope;
   - `roomsFilter` is not mutated.
-- [ ] 1.4 Make the MSW rooms-list handler (`packages/shared/__mocks__/handlers/files/roomList.ts`) honour `privacyFilter` as `VirtualRoomsCommonController.GetRoomsFolder` / `FolderDao.BuildRoomsQuery` do, including the third-party skip for `Private`. Its doc comment names the controller action. Make `privateRoomListHandler` answer `privacyFilter=Private`.
+- [x] 1.4 Make the MSW rooms-list handler (`packages/shared/__mocks__/handlers/files/roomList.ts`) honour `privacyFilter` as `VirtualRoomsCommonController.GetRoomsFolder` / `FolderDao.BuildRoomsQuery` do, including the third-party skip for `Private`. Its doc comment names the controller action. Make `privateRoomListHandler` answer `privacyFilter=Private`.
 
   Verify with new cases in a rooms-list contract test under `packages/shared/__mocks__/handlers/files/__tests__` (`cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`).
 

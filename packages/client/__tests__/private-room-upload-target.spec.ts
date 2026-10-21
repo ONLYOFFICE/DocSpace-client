@@ -34,6 +34,7 @@
  */
 
 import {
+  appsHandler,
   capabilitiesHandler,
   encryptedFilesHandlers,
   filesSettingsHandler,
@@ -239,6 +240,8 @@ test.describe("Private room — upload target fixed when the user starts the upl
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       capabilitiesHandler(TEST_PORT, true),
       filesSettingsHandler(TEST_PORT),
+      // Rooms lists private rooms only while the Private section is off.
+      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
     );
   });
 
@@ -455,6 +458,8 @@ test.describe("Private room — drops onto a private room from outside it", () =
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       capabilitiesHandler(TEST_PORT, true),
       filesSettingsHandler(TEST_PORT),
+      // Rooms lists private rooms only while the Private section is off.
+      appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }),
     );
   });
 

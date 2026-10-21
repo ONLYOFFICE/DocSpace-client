@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "您的下一期月度账单将为 <1>{{price}}</1>，自 <2>{{date}}</2> 起",
   "PricePerAdmin": "每位管理员价格",
   "PricePerGB": "每 GB 价格",
+  "Private": "私人房间",
   "PrivateOwnerEncryptionHint": "只有已经是此房间成员并已设置加密的用户才能成为所有者。",
   "PrivateRoomConvertNotSupported": "私人房间内暂不支持打开需要转换的文件。",
   "PrivateRoomDescription": "此房间中的所有文件将被加密",

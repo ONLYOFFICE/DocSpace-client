@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "Vaše příští měsíční faktura bude <1>{{price}}</1> počínaje <2>{{date}}</2>",
   "PricePerAdmin": "Cena za administrátora",
   "PricePerGB": "Cena za GB",
+  "Private": "Soukromé místnosti",
   "PrivateOwnerEncryptionHint": "Vlastníkem se mohou stát pouze uživatelé, kteří již jsou členy této místnosti a mají nastavené šifrování.",
   "PrivateRoomConvertNotSupported": "Soubory, které vyžadují konverzi, zatím nelze v soukromé místnosti otevřít.",
   "PrivateRoomDescription": "Všechny soubory v této místnosti budou zašifrovány",

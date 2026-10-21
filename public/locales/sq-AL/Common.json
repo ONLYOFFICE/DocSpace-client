@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "Fatura juaj e ardhshme mujore do të jetë <1>{{price}}</1> duke filluar nga <2>{{date}}</2>",
   "PricePerAdmin": "Çmimi për administrator",
   "PricePerGB": "Çmimi për GB",
+  "Private": "Dhomat private",
   "PrivateOwnerEncryptionHint": "Vetëm përdoruesit që janë tashmë anëtarë të kësaj dhome dhe kanë konfiguruar enkriptimin mund të bëhen pronarë.",
   "PrivateRoomConvertNotSupported": "Skedarët që kërkojnë konvertim nuk mund të hapen ende në një dhomë private.",
   "PrivateRoomDescription": "Të gjithë skedarët në këtë dhomë do të enkriptohen",

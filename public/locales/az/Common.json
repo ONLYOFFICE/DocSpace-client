@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "Növbəti aylıq fakturanız <2>{{date}}</2> tarixindən başlayaraq <1>{{price}}</1> olacaq",
   "PricePerAdmin": "Hər admin üçün qiymət",
   "PricePerGB": "GB başına qiymət",
+  "Private": "Şəxsi otaqlar",
   "PrivateOwnerEncryptionHint": "Yalnız bu otağın üzvü olan və şifrələməni quraşdırmış istifadəçilər sahib ola bilər.",
   "PrivateRoomConvertNotSupported": "Çevrilməsi tələb olunan fayllar şəxsi otaqda hələ açıla bilmir.",
   "PrivateRoomDescription": "Bu otaqdakı bütün fayllar şifrələnəcək",

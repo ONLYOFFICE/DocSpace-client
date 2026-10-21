@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "다음 월별 청구액은 <2>{{date}}</2>부터 <1>{{price}}</1>입니다",
   "PricePerAdmin": "관리자당 가격",
   "PricePerGB": "GB당 가격",
+  "Private": "비공개 룸",
   "PrivateOwnerEncryptionHint": "이미 이 룸의 멤버이고 암호화를 설정한 사용자만 소유자가 될 수 있습니다.",
   "PrivateRoomConvertNotSupported": "변환이 필요한 파일은 비공개 룸에서 아직 열 수 없습니다.",
   "PrivateRoomDescription": "이 룸의 모든 파일이 암호화됩니다",

@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "Jūsu nākamais ikmēneša rēķins būs <1>{{price}}</1>, sākot no <2>{{date}}</2>",
   "PricePerAdmin": "Cena par administratoru",
   "PricePerGB": "Cena par GB",
+  "Private": "Privātās telpas",
   "PrivateOwnerEncryptionHint": "Par īpašnieku var kļūt tikai lietotāji, kuri jau ir šīs telpas dalībnieki un ir iestatījuši šifrēšanu.",
   "PrivateRoomConvertNotSupported": "Failus, kuriem nepieciešama konvertēšana, privātajā telpā vēl nevar atvērt.",
   "PrivateRoomDescription": "Visi faili šajā telpā tiks šifrēti",

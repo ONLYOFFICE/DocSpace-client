@@ -48,7 +48,7 @@
   Verify with:
   - fallback-mapping cases in `privateRoomsSectionNavigation.test.ts`;
   - the scenarios "Link opened without the opt-in" and "Rooms app switched off" in a new `packages/client/__tests__/private-rooms-section.spec.ts` (`cd packages/client && pnpm exec playwright test private-rooms-section.spec.ts`).
-- [ ] 2.2 Add the Private sidebar item and its Archive child to `packages/client/src/components/ClientArticleSidebar/index.tsx` (design D7), the `/private` matchers to `getClientActiveId` (`packages/client/src/helpers/articleNavigation.ts`), and `/private` to `SECTION_PREFIXES` (`contexts/SectionNavigationContext.tsx`).
+- [x] 2.2 Add the Private sidebar item and its Archive child to `packages/client/src/components/ClientArticleSidebar/index.tsx` (design D7), the `/private` matchers to `getClientActiveId` (`packages/client/src/helpers/articleNavigation.ts`), and `/private` to `SECTION_PREFIXES` (`contexts/SectionNavigationContext.tsx`).
 
   Add the `Common:Private` key ("Private"). Its `.meta` comment must say it names the sidebar section of end-to-end encrypted rooms, so translators pick the plural/section form. Then run the `translate-comments` and `translate-locales` skills and `cd common/tests && npx vitest run test/locales.test.js`.
 

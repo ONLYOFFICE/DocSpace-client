@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "Următoarea dvs. factură lunară va fi <1>{{price}}</1> începând de la <2>{{date}}</2>",
   "PricePerAdmin": "Preț per administrator",
   "PricePerGB": "Preț pe GB",
+  "Private": "Săli private",
   "PrivateOwnerEncryptionHint": "Numai utilizatorii care sunt deja membri ai acestei săli și care au configurat criptarea pot deveni proprietari.",
   "PrivateRoomConvertNotSupported": "Fișierele care necesită conversie nu pot fi deschise încă într-o cameră privată.",
   "PrivateRoomDescription": "Toate fișierele din această cameră vor fi criptate",

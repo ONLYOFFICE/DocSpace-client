@@ -80,6 +80,7 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
+import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 import {
@@ -109,6 +110,7 @@ type ClientArticleSidebarProps = FolderIds & {
   roomsInstalled?: boolean;
   formsInstalled?: boolean;
   agentsInstalled?: boolean;
+  privateRoomsSectionAvailable?: boolean;
   ensureAppsLoaded?: () => void;
   onFolderNavigate: () => void;
 };
@@ -125,6 +127,7 @@ const ClientArticleSidebar = ({
   roomsInstalled = true,
   formsInstalled = true,
   agentsInstalled = true,
+  privateRoomsSectionAvailable = false,
   ensureAppsLoaded,
   onFolderNavigate,
   ...folderIds
@@ -509,6 +512,27 @@ const ClientArticleSidebar = ({
       });
     }
 
+    // Private rooms are listed apart from Rooms, by the rooms' privacy filter;
+    // there is no folder of their own to count new items against.
+    if (roomsFolder && privateRoomsSectionAvailable) {
+      mainItems.push({
+        id: "private-rooms",
+        label: t("Common:Private"),
+        icon: CatalogPrivateReactSvgUrl,
+        ...nav(searchAreaUrl("/private/filter", RoomSearchArea.Active)),
+        children: [
+          {
+            id: "private-rooms-archive",
+            label: t("Common:Archive"),
+            icon: getCatalogIconUrlByType(FolderType.Archive),
+            ...nav(
+              searchAreaUrl("/private/archived/filter", RoomSearchArea.Archive),
+            ),
+          },
+        ],
+      });
+    }
+
     // AI Agents sits right after Rooms as a top-level item, with the
     // Recent/Favorites/Trash sections nested beneath it. These reuse the
     // portal-wide aliases (@recent/@favorites/@trash) — the same targets as
@@ -597,6 +621,7 @@ const ClientArticleSidebar = ({
     roomsInstalled,
     formsInstalled,
     agentsInstalled,
+    privateRoomsSectionAvailable,
     recentFolderId,
     favoritesFolderId,
     recycleBinFolderId,
@@ -642,6 +667,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
     roomsInstalled: appsStore.isInstalled("ai-rooms"),
     formsInstalled: appsStore.isInstalled("ai-forms"),
     agentsInstalled: appsStore.isInstalled("ai-agents"),
+    privateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
     ensureAppsLoaded: appsStore.ensureLoaded,
     // Same signal the old article used to show <ArticleFolderLoader />.
     isNavLoading: clientLoadingStore.showArticleLoader,

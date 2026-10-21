@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "ඔබගේ ඊළඟ මාසික බිල්පත <1>{{price}}</1> වන අතර එය <2>{{date}}</2> දින සිට ආරම්භ වේ",
   "PricePerAdmin": "පරිපාලකයෙකුට මිල",
   "PricePerGB": "GB එකකට මිල",
+  "Private": "පුද්ගලික කාමර",
   "PrivateOwnerEncryptionHint": "මෙම කාමරයේ දැනටමත් සාමාජිකයන් වන සහ සංකේතාංකනය සකසා ඇති පරිශීලකයන්ට පමණක් හිමිකරු විය හැකිය.",
   "PrivateRoomConvertNotSupported": "පරිවර්තනය අවශ්‍ය ගොනු පෞද්ගලික කාමරයේ තවමත් විවෘත කළ නොහැක.",
   "PrivateRoomDescription": "මෙම කාමරයේ සියලු ගොනු සංකේතාංකනය කෙරේ",

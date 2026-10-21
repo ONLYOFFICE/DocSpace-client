@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "ستكون فاتورتك الشهرية التالية <1>{{price}}</1> بدءًا من <2>{{date}}</2>",
   "PricePerAdmin": "السعر لكل مسؤول",
   "PricePerGB": "سعر لكل جيجابايت",
+  "Private": "الغرف الخاصة",
   "PrivateOwnerEncryptionHint": "لا يمكن أن يصبح مالكاً إلا المستخدمون الأعضاء بالفعل في هذه الغرفة والذين أعدّوا التشفير.",
   "PrivateRoomConvertNotSupported": "لا يمكن بعد فتح الملفات التي تحتاج إلى تحويل في غرفة خاصة.",
   "PrivateRoomDescription": "ستُشفَّر جميع الملفات في هذه الغرفة",

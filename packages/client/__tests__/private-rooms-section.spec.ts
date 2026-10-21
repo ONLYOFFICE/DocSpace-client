@@ -38,9 +38,11 @@ import {
   capabilitiesHandler,
   encryptedFilesHandlers,
   filesSettingsHandler,
+  roomListHandler,
   rootHandler,
   selfActivationStatusHandler,
   settingsHandler,
+  TypeRoomList,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
 import { PRIVATE_ROOMS_FLAG_KEY } from "@docspace/shared/utils/privateRooms";
@@ -48,6 +50,8 @@ import type { Page } from "@playwright/test";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 const ROOM_ID = 9500;
+/** The AI agents folder of the root mock, the sidebar item that follows Private. */
+const AI_AGENTS_ID = "224866";
 const ROOM_TITLE = "Private Section Room";
 const FILE_TITLE = "plan.txt";
 
@@ -119,5 +123,86 @@ test.describe("Private section — addresses", () => {
     );
 
     await expect(page).toHaveURL(/\/dashboard/, { timeout: 15000 });
+  });
+});
+
+const navItem = (page: Page, id: string) =>
+  page.locator(`nav [data-item-id="${id}"]`);
+
+/** The ids of the sidebar entries in the order they are shown. */
+const navItemIds = (page: Page) =>
+  page
+    .locator("nav [data-item-id]")
+    .evaluateAll((items) => items.map((item) => item.getAttribute("data-item-id")));
+
+/** The ids of the sub-items listed under a sidebar item. */
+const subItemIds = (page: Page, id: string) =>
+  navItem(page, id).evaluate((item) =>
+    Array.from(
+      item.closest("li")?.querySelectorAll(":scope ul [data-item-id]") ?? [],
+      (subItem) => subItem.getAttribute("data-item-id"),
+    ),
+  );
+
+const isActive = /NavMenu-module__active--/;
+
+test.describe("Private section — sidebar", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault),
+    );
+  });
+
+  test("Section available", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+
+    await expect(navItem(page, "private-rooms")).toHaveText("Private");
+
+    const ids = await navItemIds(page);
+    const topLevel = ids.filter(
+      (id) => id === "forms" || id === "private-rooms" || id === AI_AGENTS_ID,
+    );
+    expect(topLevel).toEqual(["forms", "private-rooms", AI_AGENTS_ID]);
+  });
+
+  test("Section not available", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }));
+
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+
+    await expect(navItem(page, "forms")).toBeVisible();
+    await expect(navItem(page, "private-rooms")).toHaveCount(0);
+  });
+
+  test("Item clicked", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+
+    await navItem(page, "private-rooms").click();
+
+    await expect
+      .poll(() => new URL(page.url()).pathname)
+      .toBe("/private/filter");
+    await expect(navItem(page, "private-rooms")).toHaveClass(isActive);
+  });
+
+  test("Archive address", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/archived/filter`);
+
+    await expect(navItem(page, "private-rooms-archive")).toHaveClass(isActive);
+    await expect(navItem(page, "private-rooms-archive")).toBeVisible();
+  });
+
+  test("Section expanded", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/archived/filter`);
+    await expect(navItem(page, "private-rooms-archive")).toBeVisible();
+
+    expect(await subItemIds(page, "private-rooms")).toEqual([
+      "private-rooms-archive",
+    ]);
   });
 });

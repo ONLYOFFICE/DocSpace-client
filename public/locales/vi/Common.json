@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "Hóa đơn hàng tháng tiếp theo của bạn sẽ là <1>{{price}}</1> bắt đầu từ <2>{{date}}</2>",
   "PricePerAdmin": "Giá mỗi quản trị viên",
   "PricePerGB": "Giá mỗi GB",
+  "Private": "Phòng riêng tư",
   "PrivateOwnerEncryptionHint": "Chỉ những người dùng đã là thành viên của phòng này và đã thiết lập mã hoá mới có thể trở thành chủ sở hữu.",
   "PrivateRoomConvertNotSupported": "Chưa thể mở các tệp cần chuyển đổi trong phòng riêng tư.",
   "PrivateRoomDescription": "Tất cả tập tin trong phòng này sẽ được mã hoá",

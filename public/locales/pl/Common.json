@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "Twój następny miesięczny rachunek wyniesie <1>{{price}}</1> począwszy od <2>{{date}}</2>",
   "PricePerAdmin": "Cena za administratora",
   "PricePerGB": "Cena za GB",
+  "Private": "Prywatne pokoje",
   "PrivateOwnerEncryptionHint": "Właścicielem mogą zostać wyłącznie użytkownicy, którzy są już członkami tego pokoju i skonfigurowali szyfrowanie.",
   "PrivateRoomConvertNotSupported": "Plików wymagających konwersji nie można jeszcze otworzyć w pokoju prywatnym.",
   "PrivateRoomDescription": "Wszystkie pliki w tym pokoju będą szyfrowane",

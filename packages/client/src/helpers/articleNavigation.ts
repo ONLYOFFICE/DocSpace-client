@@ -38,6 +38,10 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import {
+  getCategoryType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
 import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
 import {
   FILTER_DOCUMENTS,
@@ -235,6 +239,10 @@ export const getClientActiveId = (
   const isFormTemplates = searchArea === RoomSearchArea.FormTemplates;
 
   if (pathname.startsWith("/dashboard")) return "dashboard";
+  if (isPrivateRoomsRoute(pathname))
+    return getCategoryType({ pathname }) === CategoryType.PrivateArchive
+      ? "private-rooms-archive"
+      : "private-rooms";
   // Agent-scoped sections highlight their own sidebar sub-items (checked
   // before the generic /ai-agents and the global /recent matchers — note
   // "/ai-agents/recent" also contains the "/recent" substring).

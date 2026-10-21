@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "Vaš naslednji mesečni račun bo <1>{{price}}</1> z začetkom od <2>{{date}}</2>",
   "PricePerAdmin": "Cena na skrbnika",
   "PricePerGB": "Cena na GB",
+  "Private": "Zasebne sobe",
   "PrivateOwnerEncryptionHint": "Lastnik lahko postane samo uporabnik, ki je že član te sobe in ima nastavljeno šifriranje.",
   "PrivateRoomConvertNotSupported": "Datotek, ki zahtevajo pretvorbo, v zasebni sobi še ni mogoče odpreti.",
   "PrivateRoomDescription": "Vse datoteke v tej sobi bodo šifrirane",

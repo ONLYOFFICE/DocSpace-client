@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "Your next monthly bill will be <1>{{price}}</1> starting from <2>{{date}}</2>",
   "PricePerAdmin": "Price per admin",
   "PricePerGB": "Price per GB",
+  "Private": "Private",
   "PrivateOwnerEncryptionHint": "Only users who are already members of this room and have set up encryption can become the owner.",
   "PrivateRoomConvertNotSupported": "Files that need conversion cannot be opened in a private room yet.",
   "PrivateRoomDescription": "All files in this room will be encrypted",

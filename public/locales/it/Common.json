@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "La tua prossima fattura mensile sarà di <1>{{price}}</1> a partire dal <2>{{date}}</2>",
   "PricePerAdmin": "Prezzo per amministratore",
   "PricePerGB": "Prezzo per GB",
+  "Private": "Stanze private",
   "PrivateOwnerEncryptionHint": "Solo gli utenti che sono già membri di questa stanza e che hanno configurato la crittografia possono diventare proprietari.",
   "PrivateRoomConvertNotSupported": "I file che richiedono la conversione non possono ancora essere aperti in una stanza privata.",
   "PrivateRoomDescription": "Tutti i file in questa stanza saranno cifrati",

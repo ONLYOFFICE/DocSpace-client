@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "次回の月額請求は<2>{{date}}</2>から<1>{{price}}</1>になります",
   "PricePerAdmin": "管理者あたりの価格",
   "PricePerGB": "1GBあたりの価格",
+  "Private": "プライベートルーム",
   "PrivateOwnerEncryptionHint": "このルームのメンバーであり、かつ暗号化を設定済みのユーザーのみが所有者になれます。",
   "PrivateRoomConvertNotSupported": "変換が必要なファイルはプライベートルームではまだ開けません。",
   "PrivateRoomDescription": "このルーム内のすべてのファイルは暗号化されます",

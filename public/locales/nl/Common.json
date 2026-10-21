@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "Uw volgende maandelijkse factuur bedraagt <1>{{price}}</1> vanaf <2>{{date}}</2>",
   "PricePerAdmin": "Prijs per beheerder",
   "PricePerGB": "Prijs per GB",
+  "Private": "Privékamers",
   "PrivateOwnerEncryptionHint": "Alleen gebruikers die al lid zijn van deze kamer en versleuteling hebben ingesteld, kunnen eigenaar worden.",
   "PrivateRoomConvertNotSupported": "Bestanden die geconverteerd moeten worden, kunnen nog niet worden geopend in een privéruimte.",
   "PrivateRoomDescription": "Alle bestanden in deze kamer worden versleuteld",

@@ -1681,6 +1681,7 @@
   "PriceDetailsNextBill": "Seuraava kuukausilaskusi on <1>{{price}}</1> alkaen <2>{{date}}</2>",
   "PricePerAdmin": "Hinta per ylläpitäjä",
   "PricePerGB": "Hinta GB kohden",
+  "Private": "Yksityishuoneet",
   "PrivateOwnerEncryptionHint": "Omistajaksi voivat tulla vain käyttäjät, jotka ovat jo tämän huoneen jäseniä ja ovat ottaneet salauksen käyttöön.",
   "PrivateRoomConvertNotSupported": "Muunnosta vaativia tiedostoja ei voi vielä avata yksityisessä huoneessa.",
   "PrivateRoomDescription": "Kaikki tämän huoneen tiedostot salataan",

@@ -41,6 +41,7 @@ import {
   isPrivateRoomsRoute,
 } from "@docspace/shared/utils/common";
 
+import { getClientActiveId } from "../articleNavigation";
 import { getRoomsAddressOfPrivateAddress } from "../privateRoomsSection";
 import { getCategoryUrl } from "../utils";
 
@@ -123,5 +124,25 @@ describe("Private section addresses without the section", () => {
     expect(categoryOf(new URL(roomsAddress, "http://x").pathname)).toBe(
       category,
     );
+  });
+});
+
+describe("Private section in the sidebar", () => {
+  const ids = { roomsFolderId: 1, archiveFolderId: 2 };
+
+  it.each([
+    ["/private/filter", "private-rooms"],
+    ["/private/123/filter", "private-rooms"],
+    ["/private/archived/filter", "private-rooms-archive"],
+  ])("highlights %s", (pathname, activeId) => {
+    expect(getClientActiveId(pathname, ids, "?folder=123")).toBe(activeId);
+  });
+
+  it.each([
+    ["/rooms/shared/filter", "1"],
+    ["/rooms/shared/123/filter", "1"],
+    ["/rooms/archived/filter", "2"],
+  ])("keeps %s on Rooms", (pathname, activeId) => {
+    expect(getClientActiveId(pathname, ids, "")).toBe(activeId);
   });
 });

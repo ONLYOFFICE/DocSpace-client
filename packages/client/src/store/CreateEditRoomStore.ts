@@ -861,8 +861,14 @@ class CreateEditRoomStore {
     setIsSectionBodyLoading(true);
 
     const isFormRoom = room.roomType === RoomsType.FormRoom;
+    const isPrivateRoom =
+      this.filesStore!.isPrivateRoomsSectionAvailable && room.private === true;
     const path = getCategoryUrl(
-      isFormRoom ? CategoryType.Form : CategoryType.SharedRoom,
+      isFormRoom
+        ? CategoryType.Form
+        : isPrivateRoom
+          ? CategoryType.PrivateRoom
+          : CategoryType.SharedRoom,
       room.id,
     );
 

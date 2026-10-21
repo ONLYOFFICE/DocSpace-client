@@ -179,8 +179,9 @@ const CreateRoomDialog = ({
   });
 
   const keyAutoPromptedRef = useRef(false);
+  const isPrivateStart = startRoomType === RoomsTypePrivate;
   React.useEffect(() => {
-    if (!isTemplateItem || !roomParams.isPrivate) return;
+    if (!(isTemplateItem || isPrivateStart) || !roomParams.isPrivate) return;
     if (encryptionKeys && encryptionKeys.length > 0) return;
     if (keyAutoPromptedRef.current) return;
     keyAutoPromptedRef.current = true;
@@ -190,7 +191,7 @@ const CreateRoomDialog = ({
       return;
     }
     setKeyConfirmVisible(true);
-  }, [isTemplateItem, roomParams.isPrivate, encryptionKeys, t]);
+  }, [isTemplateItem, isPrivateStart, roomParams.isPrivate, encryptionKeys, t]);
 
   const setRoomType = (newRoomType) => {
     if (newRoomType === RoomsTypePrivate) {

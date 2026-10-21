@@ -39,6 +39,7 @@ import {
   capabilitiesHandler,
   encryptedFilesHandlers,
   privacyroomKeysHandlers,
+  type PrivacyroomHandlerHandle,
   filesSettingsHandler,
   privateRoomListHandler,
   roomGroupsHandler,
@@ -1178,6 +1179,72 @@ test.describe("Private section — creation", () => {
     await expectPrivateTypeLocked(page);
   });
 
+  test("Creation succeeds", async ({ page, mockRequest, baseUrl }) => {
+    const NEW_ROOM_ID = 9800;
+    mockRequest.use(
+      /**
+       * Mirrors VirtualRoomsController.CreateRoom (HttpPost ""): the created
+       * room as FolderDtoHelper maps it, `private` from SettingsPrivate.
+       */
+      http.post(apiAddress("files/rooms"), () =>
+        Response.json({
+          response: {
+            id: NEW_ROOM_ID,
+            title: "New Private Room",
+            roomType: 5,
+            private: true,
+            parentId: 2002,
+            rootFolderId: 2002,
+            rootFolderType: 14,
+            tags: [],
+            security: { Read: true, Create: true, EditRoom: true },
+          },
+          status: 0,
+          statusCode: 200,
+        }),
+      ),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: NEW_ROOM_ID,
+        title: "New Private Room",
+        initialFiles: [],
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+    await page.getByTestId("main-button").first().click();
+    await expectPrivateTypeLocked(page);
+
+    await createRoomDialog(page)
+      .locator(
+        'input[data-testid="create_edit_room_input"], [data-testid="create_edit_room_input"] input',
+      )
+      .first()
+      .fill("New Private Room");
+
+    await page.evaluate(() => {
+      const w = window as unknown as { visitedPaths: string[] };
+      w.visitedPaths = [];
+      for (const method of ["pushState", "replaceState"] as const) {
+        const original = window.history[method].bind(window.history);
+        window.history[method] = (...args) => {
+          original(...args);
+          w.visitedPaths.push(window.location.pathname);
+        };
+      }
+    });
+    await page.getByTestId("create_room_dialog_save").click();
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe(`/private/${NEW_ROOM_ID}/filter`);
+    await expect(navItem(page, "private-rooms")).toHaveClass(isActive);
+    const visitedPaths = await page.evaluate(
+      () => (window as unknown as { visitedPaths: string[] }).visitedPaths,
+    );
+    expect(visitedPaths).not.toContain(`/rooms/shared/${NEW_ROOM_ID}/filter`);
+  });
+
   test("User without the room-creation right", async ({
     page,
     mockRequest,
@@ -1202,5 +1269,92 @@ test.describe("Private section — creation", () => {
     await page.keyboard.press("Shift+R");
     await page.waitForTimeout(1000);
     await expect(createRoomDialog(page)).toHaveCount(0);
+  });
+});
+
+test.describe("Private section — key prompt", () => {
+  const keys: { current: PrivacyroomHandlerHandle | null } = { current: null };
+
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      ...privacyroomKeysHandlers(TEST_PORT, { initial: [], handle: keys }),
+      roomTagsHandler(TEST_PORT),
+      privateRoomListHandler(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+    );
+  });
+
+  const keyPrompt = (page: Page) =>
+    page
+      .getByRole("dialog")
+      .filter({ hasText: "Encryption key required" });
+
+  const openCreateFromSection = async (page: Page, baseUrl: string) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+    await page.getByTestId("main-button").first().click();
+    await expect(keyPrompt(page)).toBeVisible({ timeout: 15000 });
+  };
+
+  test("User accepts key generation", async ({ page, baseUrl }) => {
+    await openCreateFromSection(page, baseUrl);
+
+    await keyPrompt(page).getByRole("button", { name: "Continue" }).click();
+
+    const passphrase = "Test-Horse-Battery-Staple-99!";
+    await page
+      .locator('input[name="passphrase"], #passphrase input')
+      .first()
+      .fill(passphrase);
+    await page
+      .locator('input[name="confirmPassphrase"], #confirmPassphrase input')
+      .first()
+      .fill(passphrase);
+    await page
+      .getByRole("dialog")
+      .filter({ has: page.locator('input[name="confirmPassphrase"]') })
+      .getByRole("button", { name: "Continue" })
+      .click();
+
+    const acknowledge = page.locator("#recoveryPhraseAcknowledged");
+    await expect(acknowledge).toBeVisible({ timeout: 15000 });
+    const recovery = page
+      .getByRole("dialog")
+      .filter({ has: page.locator("#recoveryPhraseAcknowledged") });
+    const download = page.waitForEvent("download");
+    await recovery.getByRole("button", { name: "Download", exact: true }).click();
+    await download;
+    await acknowledge.check();
+    await recovery.getByRole("button", { name: "Continue" }).click();
+
+    await expect
+      .poll(() => keys.current?.getKeys().length ?? 0, { timeout: 15000 })
+      .toBe(1);
+    await expect(keyPrompt(page)).toHaveCount(0);
+    const dialog = page
+      .getByTestId("modal-dialog")
+      .filter({ has: page.getByTestId("create_room_dialog_save") });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByText("Private Room", { exact: true })).toBeVisible();
+  });
+
+  test("User cancels key generation", async ({ page, baseUrl }) => {
+    const createRequests: string[] = [];
+    page.on("request", (request) => {
+      if (request.method() === "POST" && /\/files\/rooms$/.test(request.url()))
+        createRequests.push(request.url());
+    });
+
+    await openCreateFromSection(page, baseUrl);
+
+    await keyPrompt(page).getByRole("button", { name: "Cancel" }).click();
+
+    await expect(keyPrompt(page)).toHaveCount(0);
+    await expect(page.getByTestId("create_room_dialog_save")).toHaveCount(0);
+    expect(createRequests).toEqual([]);
   });
 });

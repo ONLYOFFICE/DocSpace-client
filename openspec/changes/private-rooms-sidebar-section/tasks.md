@@ -121,7 +121,7 @@
   - the E2E scenarios "Room admin creates from the section", "Hotkey in the section" and "User without the room-creation right";
   - the create button of the empty Private list opening the dialog on the Private type.
 - [x] 4.3 Add the `"private"` quick-actions section (`helpers/quickActions.ts`) and its single Private room tile (`pages/Home/Hooks/useQuickActions.tsx`). Verify with cases in the quick-actions unit tests (`cd packages/client && pnpm exec vitest run quickActions`) and the E2E scenario "Banner on a non-empty Private list".
-- [ ] 4.4 Widen the key auto-prompt in `components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js` to the private start type, and make the new room open at `/private/{roomId}/filter`. Verify with the E2E scenarios "User accepts key generation", "User cancels key generation" and "Creation succeeds", and with `private-room-access.spec.ts` still passing.
+- [x] 4.4 Widen the key auto-prompt in `components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js` to the private start type, and make the new room open at `/private/{roomId}/filter`. Verify with the E2E scenarios "User accepts key generation", "User cancels key generation" and "Creation succeeds", and with `private-room-access.spec.ts` still passing.
 - [ ] 4.5 Assert the encryption-independence rule (design D13): unit cases showing that the upload and transfer helpers decide the same way for a private room under `/rooms/shared` and under `/private`. Add the E2E scenario "Private room opened under Rooms": with the section unavailable, the upload body is DSE3 under an opaque name.
 
 ## 5. Live updates

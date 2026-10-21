@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Active las funciones de IA para crear agentes con su propia base de conocimiento, compartirlos con su equipo y permitirles ejecutar tareas en todas sus aplicaciones.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "El uso de IA se factura del saldo de su monedero",
   "EmptyAIAgentsNotActiveYetTitle": "Las funciones de IA aún no están activas",
+  "EmptyAIAgentsSelectorDescription": "Cree un nuevo agente para añadir archivos a su base de conocimiento.",
   "EmptyAIAgentsTitle": "Crea tu agente de IA",
   "EmptyAIAgentsUserTitle": "Aún no hay agentes de IA disponibles",
   "EmptyAIChatNotActiveYetAdminDescription": "Active {{aiChat}} para iniciar conversaciones en esta sección.",

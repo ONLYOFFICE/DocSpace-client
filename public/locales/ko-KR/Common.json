@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "AI 기능을 활성화하여 자체 지식 기반을 갖춘 에이전트를 만들고, 팀과 공유하고, 여러 앱에서 작업을 실행하도록 하세요.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI 사용량은 지갑 잔액에서 청구됩니다",
   "EmptyAIAgentsNotActiveYetTitle": "AI 기능이 아직 활성화되지 않았습니다",
+  "EmptyAIAgentsSelectorDescription": "새 에이전트를 만들어 해당 지식 기반에 파일을 추가하세요.",
   "EmptyAIAgentsTitle": "AI 에이전트 만들기",
   "EmptyAIAgentsUserTitle": "아직 사용 가능한 AI 에이전트가 없습니다",
   "EmptyAIChatNotActiveYetAdminDescription": "이 섹션에서 대화를 시작하려면 {{aiChat}}을 활성화하세요.",

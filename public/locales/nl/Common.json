@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Activeer AI-functies om agenten met hun eigen kennisbank te maken, ze met uw team te delen en ze taken in uw apps te laten uitvoeren.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI-gebruik wordt gefactureerd vanaf uw portemonnee-saldo",
   "EmptyAIAgentsNotActiveYetTitle": "AI-functies zijn nog niet actief",
+  "EmptyAIAgentsSelectorDescription": "Maak een nieuwe agent om bestanden aan zijn kennisbank toe te voegen.",
   "EmptyAIAgentsTitle": "Maak uw AI-agent aan",
   "EmptyAIAgentsUserTitle": "Nog geen AI-agenten beschikbaar",
   "EmptyAIChatNotActiveYetAdminDescription": "Activeer {{aiChat}} om gesprekken in deze sectie te starten.",

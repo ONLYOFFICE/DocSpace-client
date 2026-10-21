@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Ative os recursos de IA para criar agentes com a sua própria base de conhecimento, partilhá-los com a sua equipa e deixá-los executar tarefas nas suas aplicações.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "A utilização de IA é cobrada do saldo da sua carteira",
   "EmptyAIAgentsNotActiveYetTitle": "Os recursos de IA ainda não estão ativos",
+  "EmptyAIAgentsSelectorDescription": "Crie um novo agente para adicionar ficheiros à sua base de conhecimento.",
   "EmptyAIAgentsTitle": "Crie o seu agente de IA",
   "EmptyAIAgentsUserTitle": "Ainda não há agentes de IA disponíveis",
   "EmptyAIChatNotActiveYetAdminDescription": "Ative {{aiChat}} para iniciar conversas nesta secção.",

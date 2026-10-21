@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Aktivizējiet MI funkcijas, lai izveidotu aģentus ar savu zināšanu bāzi, kopīgotu tos ar savu komandu un ļautu tiem izpildīt uzdevumus visās jūsu lietotnēs.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "MI lietojums tiek iekasēts no jūsu maka bilances",
   "EmptyAIAgentsNotActiveYetTitle": "MI funkcijas vēl nav aktīvas",
+  "EmptyAIAgentsSelectorDescription": "Izveidojiet jaunu aģentu, lai pievienotu failus tā zināšanu bāzei.",
   "EmptyAIAgentsTitle": "Izveidojiet savu MI aģentu",
   "EmptyAIAgentsUserTitle": "Vēl nav pieejamu MI aģentu",
   "EmptyAIChatNotActiveYetAdminDescription": "Aktivizējiet {{aiChat}}, lai sāktu sarunas šajā sadaļā.",

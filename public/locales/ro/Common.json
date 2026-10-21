@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Activați funcțiile IA pentru a crea agenți cu propria bază de cunoștințe, a-i partaja cu echipa dvs. și a-i lăsa să execute sarcini în toate aplicațiile dvs.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Utilizarea IA este facturată din soldul portofelului dvs.",
   "EmptyAIAgentsNotActiveYetTitle": "Funcțiile IA nu sunt încă active",
+  "EmptyAIAgentsSelectorDescription": "Creați un agent nou pentru a adăuga fișiere în baza sa de cunoștințe.",
   "EmptyAIAgentsTitle": "Creați-vă agentul IA",
   "EmptyAIAgentsUserTitle": "Nu există încă agenți de inteligență artificială disponibili",
   "EmptyAIChatNotActiveYetAdminDescription": "Activați {{aiChat}} pentru a începe conversații în această secțiune.",

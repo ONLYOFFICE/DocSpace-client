@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Aktivizoni funksionet e IA për të krijuar agjentë me bazën e tyre të njohurive, për t'i ndarë me ekipin tuaj dhe për t'i lejuar të kryejnë detyra nëpër aplikacionet tuaja.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Përdorimi i IA faturohet nga balanca e portofolit tuaj",
   "EmptyAIAgentsNotActiveYetTitle": "Funksionet e IA nuk janë aktive ende",
+  "EmptyAIAgentsSelectorDescription": "Krijoni një agjent të ri për të shtuar skedarë në bazën e tij të njohurive.",
   "EmptyAIAgentsTitle": "Krijoni agjentin tuaj të AI",
   "EmptyAIAgentsUserTitle": "Nuk ka akoma agjentë IA të disponueshëm",
   "EmptyAIChatNotActiveYetAdminDescription": "Aktivizoni {{aiChat}} për të nisur bisedat në këtë seksion.",

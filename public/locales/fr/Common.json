@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Activez les fonctionnalités IA pour créer des agents dotés de leur propre base de connaissances, les partager avec votre équipe et leur permettre d'exécuter des tâches dans toutes vos applications.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "L'utilisation de l'IA est facturée sur le solde de votre Wallet",
   "EmptyAIAgentsNotActiveYetTitle": "Les fonctionnalités IA ne sont pas encore activées",
+  "EmptyAIAgentsSelectorDescription": "Créez un nouvel agent pour ajouter des fichiers à sa base de connaissances.",
   "EmptyAIAgentsTitle": "Créez votre agent IA",
   "EmptyAIAgentsUserTitle": "Aucun agent IA disponible pour l'instant",
   "EmptyAIChatNotActiveYetAdminDescription": "Activez {{aiChat}} pour commencer des conversations dans cette section.",

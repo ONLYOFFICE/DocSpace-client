@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "AI機能を有効にすると、独自のナレッジベースを持つエージェントを作成し、チームと共有して、アプリをまたいでタスクを実行させることができます。",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AIの利用料はウォレット残高から請求されます",
   "EmptyAIAgentsNotActiveYetTitle": "AI機能はまだ有効になっていません",
+  "EmptyAIAgentsSelectorDescription": "新しいエージェントを作成して、そのナレッジベースにファイルを追加しましょう。",
   "EmptyAIAgentsTitle": "AIエージェントを作成する",
   "EmptyAIAgentsUserTitle": "AIエージェントはまだありません",
   "EmptyAIChatNotActiveYetAdminDescription": "このセクションで会話を開始するには、{{aiChat}}を有効にしてください。",

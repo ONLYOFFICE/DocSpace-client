@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Aktivujte AI funkcie, aby ste mohli vytvárať agentov s vlastnou znalostnou bázou, zdieľať ich s tímom a nechať ich vykonávať úlohy naprieč vašimi aplikáciami.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Používanie AI sa účtuje zo zostatku vašej peňaženky",
   "EmptyAIAgentsNotActiveYetTitle": "AI funkcie ešte nie sú aktívne",
+  "EmptyAIAgentsSelectorDescription": "Vytvorte nového agenta a pridajte súbory do jeho znalostnej bázy.",
   "EmptyAIAgentsTitle": "Vytvorte svojho AI agenta",
   "EmptyAIAgentsUserTitle": "Zatiaľ nie sú k dispozícii žiadni AI agenti",
   "EmptyAIChatNotActiveYetAdminDescription": "Aktivujte {{aiChat}}, aby ste mohli začať konverzácie v tejto sekcii.",

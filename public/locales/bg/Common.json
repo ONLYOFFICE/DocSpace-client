@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Активирайте ИИ функциите, за да създавате агенти със собствена база знания, да ги споделяте с екипа си и да им позволите да изпълняват задачи във всичките ви приложения.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Използването на ИИ се таксува от баланса на портфейла ви",
   "EmptyAIAgentsNotActiveYetTitle": "ИИ функциите още не са активни",
+  "EmptyAIAgentsSelectorDescription": "Създайте нов агент, за да добавите файлове в неговата база знания.",
   "EmptyAIAgentsTitle": "Създайте своя ИИ агент",
   "EmptyAIAgentsUserTitle": "Все още няма налични ИИ агенти",
   "EmptyAIChatNotActiveYetAdminDescription": "Активирайте {{aiChat}}, за да започнете разговори в този раздел.",

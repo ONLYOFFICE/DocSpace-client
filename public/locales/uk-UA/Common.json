@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Активуйте функції AI, щоб створювати агентів із власною базою знань, ділитися ними з командою та доручати їм виконання завдань у ваших застосунках.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Використання AI оплачується з балансу вашого гаманця",
   "EmptyAIAgentsNotActiveYetTitle": "Функції AI ще не активні",
+  "EmptyAIAgentsSelectorDescription": "Створіть нового агента, щоб додати файли до його бази знань.",
   "EmptyAIAgentsTitle": "Створіть свого AI-агента",
   "EmptyAIAgentsUserTitle": "Агентів AI поки немає",
   "EmptyAIChatNotActiveYetAdminDescription": "Активуйте {{aiChat}}, щоб почати спілкування в цьому розділі.",

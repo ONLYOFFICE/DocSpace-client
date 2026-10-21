@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Aktivoi AI-ominaisuudet luodaksesi agentteja, joilla on oma tietokanta, jakaaksesi ne tiimisi kanssa ja antaaksesi niiden suorittaa tehtäviä sovelluksissasi.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI:n käyttö veloitetaan lompakkosi saldosta",
   "EmptyAIAgentsNotActiveYetTitle": "AI-ominaisuudet eivät ole vielä aktiivisia",
+  "EmptyAIAgentsSelectorDescription": "Luo uusi agentti lisätäksesi tiedostoja sen tietokantaan.",
   "EmptyAIAgentsTitle": "Luo oma AI-agenttisi",
   "EmptyAIAgentsUserTitle": "Ei vielä saatavilla olevia AI-agentteja",
   "EmptyAIChatNotActiveYetAdminDescription": "Aktivoi {{aiChat}}, jotta voit aloittaa keskustelut tässä osiossa.",

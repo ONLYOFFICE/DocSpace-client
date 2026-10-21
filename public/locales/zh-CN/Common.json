@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "激活 AI 功能即可创建拥有自己知识库的智能体，与您的团队共享，并让它们在您的各个应用中执行任务。",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI 使用费将从您的钱包余额中扣除",
   "EmptyAIAgentsNotActiveYetTitle": "AI 功能尚未激活",
+  "EmptyAIAgentsSelectorDescription": "创建新智能体，将文件添加到其知识库中。",
   "EmptyAIAgentsTitle": "创建您的 AI 智能体",
   "EmptyAIAgentsUserTitle": "暂无可用的 AI 智能体",
   "EmptyAIChatNotActiveYetAdminDescription": "激活 {{aiChat}} 即可在此部分开始对话。",

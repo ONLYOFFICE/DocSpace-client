@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Aktivirajte funkcije umetne inteligence za ustvarjanje agentov z lastno zbirko znanja, jih delite s svojo ekipo in jim omogočite izvajanje nalog v vaših aplikacijah.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Uporaba umetne inteligence se obračuna iz stanja vaše denarnice",
   "EmptyAIAgentsNotActiveYetTitle": "Funkcije umetne inteligence še niso aktivne",
+  "EmptyAIAgentsSelectorDescription": "Ustvarite novega agenta, da v njegovo zbirko znanja dodate datoteke.",
   "EmptyAIAgentsTitle": "Ustvarite svojega AI agenta",
   "EmptyAIAgentsUserTitle": "Na voljo še ni nobenih AI agentov",
   "EmptyAIChatNotActiveYetAdminDescription": "Aktivirajte {{aiChat}}, da začnete pogovore v tem razdelku.",

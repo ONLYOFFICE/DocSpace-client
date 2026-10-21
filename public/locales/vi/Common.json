@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Kích hoạt các tính năng AI để tạo các tác nhân với cơ sở kiến thức riêng, chia sẻ chúng với nhóm của bạn và cho phép chúng thực hiện các tác vụ trên các ứng dụng của bạn.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "Mức sử dụng AI được tính từ số dư ví của bạn",
   "EmptyAIAgentsNotActiveYetTitle": "Các tính năng AI chưa được kích hoạt",
+  "EmptyAIAgentsSelectorDescription": "Tạo một tác nhân mới để thêm tệp vào cơ sở kiến thức của tác nhân đó.",
   "EmptyAIAgentsTitle": "Tạo tác nhân AI của bạn",
   "EmptyAIAgentsUserTitle": "Chưa có tác nhân AI nào",
   "EmptyAIChatNotActiveYetAdminDescription": "Kích hoạt {{aiChat}} để bắt đầu các cuộc trò chuyện trong phần này.",

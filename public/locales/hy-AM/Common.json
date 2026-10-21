@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Ակտիվացրեք ԱԲ ֆունկցիաները՝ ստեղծելու համար գործակալներ իրենց սեփական գիտելիքների բազայով, կիսվելու դրանցով ձեր թիմի հետ և թույլ տալու, որ նրանք առաջադրանքներ կատարեն ձեր հավելվածներում:",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "ԱԲ-ի օգտագործումը գանձվում է ձեր դրամապանակի մնացորդից",
   "EmptyAIAgentsNotActiveYetTitle": "ԱԲ ֆունկցիաները դեռ ակտիվ չեն",
+  "EmptyAIAgentsSelectorDescription": "Ստեղծեք նոր գործակալ՝ ֆայլերը նրա գիտելիքների բազային ավելացնելու համար:",
   "EmptyAIAgentsTitle": "Ստեղծեք ձեր ԱԲ գործակալը",
   "EmptyAIAgentsUserTitle": "Հասանելի ԱԲ գործակալներ դեռ չկան",
   "EmptyAIChatNotActiveYetAdminDescription": "Ակտիվացրեք {{aiChat}}-ը՝ այս բաժնում զրույցներ սկսելու համար։",

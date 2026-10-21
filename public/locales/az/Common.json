@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Öz bilik bazası olan agentlər yaratmaq, onları komandanızla paylaşmaq və tətbiqləriniz arasında tapşırıqları yerinə yetirmələrinə imkan vermək üçün AI funksiyalarını aktivləşdirin.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI istifadəsi cüzdan balansınızdan hesablanır",
   "EmptyAIAgentsNotActiveYetTitle": "AI funksiyaları hələ aktiv deyil",
+  "EmptyAIAgentsSelectorDescription": "Faylları bilik bazasına əlavə etmək üçün yeni agent yaradın.",
   "EmptyAIAgentsTitle": "Öz AI agentinizi yaradın",
   "EmptyAIAgentsUserTitle": "Hələ heç bir AI agenti mövcud deyil",
   "EmptyAIChatNotActiveYetAdminDescription": "Bu bölmədə söhbətlərə başlamaq üçün {{aiChat}} aktivləşdirin.",

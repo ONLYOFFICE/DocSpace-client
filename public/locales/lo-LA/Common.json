@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "ເປີດໃຊ້ຄຸນສົມບັດ AI ເພື່ອສ້າງຕົວແທນທີ່ມີຖານຄວາມຮູ້ຂອງຕົນເອງ, ແບ່ງປັນພວກມັນກັບທີມຂອງທ່ານ, ແລະ ໃຫ້ພວກມັນປະຕິບັດໜ້າວຽກຂ້າມແອັບຂອງທ່ານ.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "ການນຳໃຊ້ AI ຖືກຄິດເງິນຈາກຍອດເງິນໃນກະເປົ໋າເງິນຂອງທ່ານ",
   "EmptyAIAgentsNotActiveYetTitle": "ຄຸນສົມບັດ AI ຍັງບໍ່ໄດ້ເປີດໃຊ້ງານເທື່ອ",
+  "EmptyAIAgentsSelectorDescription": "ສ້າງຕົວແທນໃໝ່ເພື່ອເພີ່ມໄຟລ໌ເຂົ້າໃນຖານຄວາມຮູ້ຂອງມັນ.",
   "EmptyAIAgentsTitle": "ສ້າງຕົວແທນ AI ຂອງທ່ານ",
   "EmptyAIAgentsUserTitle": "ຍັງບໍ່ມີຕົວແທນ AI ທີ່ພ້ອມໃຊ້",
   "EmptyAIChatNotActiveYetAdminDescription": "ເປີດໃຊ້ງານ {{aiChat}} ເພື່ອເລີ່ມການສົນທະນາໃນພາກນີ້.",

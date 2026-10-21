@@ -775,6 +775,7 @@
   "EmptyAIAgentsNotActiveYetDescription": "Kendi bilgi tabanına sahip ajanlar oluşturmak, bunları ekibinizle paylaşmak ve uygulamalarınız arasında görevler çalıştırmalarına izin vermek için AI özelliklerini etkinleştirin.",
   "EmptyAIAgentsNotActiveYetDescriptionLine2": "AI kullanımı cüzdan bakiyenizden faturalandırılır",
   "EmptyAIAgentsNotActiveYetTitle": "AI özellikleri henüz etkin değil",
+  "EmptyAIAgentsSelectorDescription": "Dosyaları bilgi tabanına eklemek için yeni bir ajan oluşturun.",
   "EmptyAIAgentsTitle": "AI aracınızı oluşturun",
   "EmptyAIAgentsUserTitle": "Henüz mevcut AI ajanı yok",
   "EmptyAIChatNotActiveYetAdminDescription": "Bu bölümde sohbetlere başlamak için {{aiChat}} özelliğini etkinleştirin.",

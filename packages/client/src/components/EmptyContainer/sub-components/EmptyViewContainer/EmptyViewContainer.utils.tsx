@@ -345,6 +345,7 @@ export const getRootDescription = (
   isPortalAdmin: boolean,
   isFormsScope: boolean = false,
   filterFolderType: Nullable<number[]> = null,
+  isPrivateScope: boolean = false,
 ) => {
   return match([rootFolderType, access])
     .with([P._, P.when(() => isPublicRoom)], () => (
@@ -358,6 +359,11 @@ export const getRootDescription = (
       aiReady
         ? getAIAgentsAIEnabledDescription(t, access)
         : getAIAgentsAIDisabledDescription(t, standalone, isPortalAdmin),
+    )
+    .with([FolderType.Rooms, P.when(() => isPrivateScope)], () =>
+      access === ShareAccessRights.None
+        ? t("EmptyView:EmptyRootPrivateRoomsDescription")
+        : t("EmptyView:EmptyRootPrivateRoomsUserDescription"),
     )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),
@@ -477,12 +483,16 @@ export const getRootTitle = (
   standalone: boolean,
   isPortalAdmin: boolean,
   isFormsScope: boolean = false,
+  isPrivateScope: boolean = false,
 ) => {
   return match([rootFolderType, access])
     .with([FolderType.AIAgents, P._], () =>
       aiReady
         ? getAIAgentsAIEnabledTitle(t, access)
         : getAIAgentsAIDisabledTitle(t, standalone, isPortalAdmin),
+    )
+    .with([FolderType.Rooms, P.when(() => isPrivateScope)], () =>
+      t("EmptyView:EmptyRootPrivateRoomsTitle"),
     )
     .with(
       [

@@ -51,6 +51,8 @@ import {
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
 import { rootResolve } from "@docspace/shared/__mocks__/handlers/files/root";
+import { roomListResolver } from "@docspace/shared/__mocks__/handlers/files/roomList";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { API_PREFIX, BASE_URL } from "@docspace/shared/__mocks__/e2e";
 import { PRIVATE_ROOMS_FLAG_KEY } from "@docspace/shared/utils/privateRooms";
 import { http } from "msw";
@@ -979,6 +981,108 @@ test.describe("Private section — AI chat and tour", () => {
     await page.waitForTimeout(5000);
     await expect(tourTooltip(page)).toHaveCount(0);
     await expect(roomLink(page)).toBeVisible();
+  });
+});
+
+/** The Archive section folder of the root mock (see root.ts). */
+const ARCHIVE_SECTION_ID = 11244;
+
+/**
+ * Mirrors VirtualRoomsCommonController.GetRoomsFolder for searchArea=Archive:
+ * GetRoomsSectionIdAsync answers the Archive root (FolderType.Archive = 20) as
+ * `current`, with the Access a DocSpace admin keeps on it (FileShare.None,
+ * FileSecurity returns before it sets one). No archived room here.
+ */
+const emptyArchiveHandler = () =>
+  http.get(apiAddress("files/rooms*"), async ({ request }) => {
+    const { response } = await roomListResolver(
+      TypeRoomList.IsDefault,
+      undefined,
+      request,
+    ).json();
+    if (new URL(request.url).searchParams.get("searchArea") !== "Archive")
+      return Response.json({ response });
+
+    return Response.json({
+      response: {
+        ...response,
+        folders: [],
+        count: 0,
+        total: 0,
+        current: {
+          ...response.current,
+          id: ARCHIVE_SECTION_ID,
+          rootFolderId: ARCHIVE_SECTION_ID,
+          title: "Archive",
+          rootFolderType: 20,
+          folderType: 20,
+        },
+      },
+    });
+  });
+
+test.describe("Private section — empty states", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      // The default list holds no private room, so privacyFilter=Private
+      // answers an empty Private list.
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault),
+    );
+  });
+
+  const emptyView = (page: Page) => page.getByTestId("empty-view");
+
+  test("Room admin without private rooms", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+
+    await expect(emptyView(page)).toBeVisible({ timeout: 15000 });
+    await expect(emptyView(page)).toContainText("No private rooms here yet");
+    await expect(emptyView(page)).toContainText(
+      "Please create the first private room.",
+    );
+    await expect(emptyView(page).locator("#create-room")).toBeVisible();
+    await expect(emptyView(page).locator("#invite-root-room")).toHaveCount(0);
+    await expect(emptyView(page).locator("#migration-data")).toHaveCount(0);
+    await expect(emptyView(page).locator("#open-ai-chat")).toHaveCount(0);
+  });
+
+  test("User without private rooms", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "regular"),
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, {
+        canCreate: false,
+        rootAccess: ShareAccessRights.DenyAccess,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/filter`);
+
+    await expect(emptyView(page)).toBeVisible({ timeout: 15000 });
+    await expect(emptyView(page)).toContainText("No private rooms here yet");
+    await expect(emptyView(page)).toContainText(
+      "Private rooms you are invited to will appear here.",
+    );
+    await expect(emptyView(page).locator("#create-room")).toHaveCount(0);
+  });
+
+  test("Empty Private archive", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(emptyArchiveHandler());
+
+    await page.goto(`${baseUrl}/private/archived/filter`);
+
+    await expect(emptyView(page)).toBeVisible({ timeout: 15000 });
+    await expect(emptyView(page).locator('a[href*="/rooms/"]')).toHaveCount(0);
+
+    await emptyView(page).locator("#empty-view-goto-shared").click();
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/filter");
   });
 });
 

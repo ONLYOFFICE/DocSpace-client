@@ -58,6 +58,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import type { TTranslation } from "@docspace/shared/types";
 import { CategoryType } from "@docspace/shared/constants";
+import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
@@ -105,6 +106,7 @@ export const useEmptyView = (
   t: TTranslation,
 ) => {
   const { isBase } = useTheme();
+  const { pathname } = useLocation();
 
   const hasAiProfiles = useHasAiProfiles();
   const isAiReady = standalone ? hasAiProfiles : aiReady;
@@ -113,6 +115,8 @@ export const useEmptyView = (
     rootFolderType === FolderType.RoomTemplates
       ? roomsFilterSearchArea === RoomSearchArea.FormTemplates
       : isFormsSectionScope(filterFolderType);
+
+  const isPrivateScope = isPrivateRoomsRoute(pathname);
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -140,6 +144,7 @@ export const useEmptyView = (
       isPortalAdmin,
       isFormsScope,
       filterFolderType,
+      isPrivateScope,
     );
     const title = getTitle(
       type,
@@ -160,6 +165,7 @@ export const useEmptyView = (
       isPortalAdmin,
       isFormsScope,
       isPublicRoom,
+      isPrivateScope,
     );
     const icon = getIcon(
       type,
@@ -198,6 +204,7 @@ export const useEmptyView = (
     isPortalAdmin,
     isFormsScope,
     filterFolderType,
+    isPrivateScope,
   ]);
 
   return emptyViewOptions;
@@ -324,6 +331,17 @@ export const useOptions = (
       state,
     };
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
+
+  const onGoToPrivate = useCallback((): LinkProps => {
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
+
+    return {
+      to: {
+        pathname: getCategoryUrl(CategoryType.PrivateRooms),
+        search: newFilter.toUrlParams(userId, false),
+      },
+    };
+  }, [userId]);
 
   const onGoToForms = useCallback((): LinkProps => {
     const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);
@@ -605,6 +623,7 @@ export const useOptions = (
           navigate,
           onGoToPersonal,
           onGoToShared,
+          onGoToPrivate,
           onGoToForms,
           onGoToAgents,
           onOpenAccessSettings,
@@ -631,6 +650,7 @@ export const useOptions = (
         isActivating,
         isAiChatAvailable,
         templateGalleryAvailable,
+        isPrivateRoomsRoute(pathname),
       ),
     [
       type,
@@ -659,6 +679,7 @@ export const useOptions = (
       navigate,
       onGoToPersonal,
       onGoToShared,
+      onGoToPrivate,
       onGoToForms,
       onGoToAgents,
       trashSection,
@@ -677,6 +698,7 @@ export const useOptions = (
       onStartNewChat,
       isAiChatAvailable,
       templateGalleryAvailable,
+      pathname,
     ],
   );
 

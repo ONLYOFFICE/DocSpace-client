@@ -143,3 +143,74 @@ describe("AppsStore.isInstalled", () => {
     }
   });
 });
+
+describe("AppsStore.isPrivateRoomsSectionAvailable", () => {
+  const optIn = () => window.localStorage.setItem("privateRooms", "true");
+
+  beforeEach(() => {
+    window.localStorage.removeItem("privateRooms");
+  });
+
+  it("is off without the opt-in, whatever the app says", async () => {
+    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: true }]);
+
+    for (const standalone of [false, true]) {
+      const store = createStore(standalone);
+      await store.fetchApps();
+      expect(store.isPrivateRoomsSectionAvailable).toBe(false);
+    }
+  });
+
+  it("stays off when the opt-in is set after the store was built", async () => {
+    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: true }]);
+    const store = createStore(false);
+    optIn();
+
+    await store.fetchApps();
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(false);
+  });
+
+  it("is on in SaaS with the opt-in, whatever the server says", async () => {
+    optIn();
+    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: false }]);
+    const store = createStore(false);
+
+    await store.fetchApps();
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(true);
+  });
+
+  it("follows the app on standalone once the list is loaded", async () => {
+    optIn();
+    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: false }]);
+    const off = createStore(true);
+    await off.fetchApps();
+
+    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: true }]);
+    const on = createStore(true);
+    await on.fetchApps();
+
+    expect(off.isPrivateRoomsSectionAvailable).toBe(false);
+    expect(on.isPrivateRoomsSectionAvailable).toBe(true);
+  });
+
+  it("is optimistic on standalone until the list arrives", () => {
+    optIn();
+    const store = createStore(true);
+
+    expect(store.isLoaded).toBe(false);
+    expect(store.isPrivateRoomsSectionAvailable).toBe(true);
+  });
+
+  it("turns off when the app is switched off in another tab", async () => {
+    optIn();
+    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: true }]);
+    const store = createStore(true);
+    await store.fetchApps();
+
+    store.handleAppEnabledChange({ id: "e2e-rooms", enabled: false });
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(false);
+  });
+});

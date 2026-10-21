@@ -17,7 +17,7 @@
   - `getCategoryUrl` cases for the three categories (`packages/client/src/helpers/utils.js`), with archived rooms as `/private/archived/filter?folder={id}`.
 
   Verify with a new `packages/client/src/helpers/__tests__/privateRoomsSectionNavigation.test.ts`. It must cover every section address, and show that `/rooms/archived` and `/forms` keep their categories (`cd packages/client && pnpm exec vitest run src/helpers/__tests__`).
-- [ ] 1.2 Add `AppsStore.isPrivateRoomsSectionAvailable` (design D2). It reads the opt-in captured at construction, and the `e2e-rooms` state without re-reading the flag.
+- [x] 1.2 Add `AppsStore.isPrivateRoomsSectionAvailable` (design D2). It reads the opt-in captured at construction, and the `e2e-rooms` state without re-reading the flag.
 
   Verify with new cases in `packages/client/src/store/__tests__/AppsStore.installed.test.ts`:
   - opt-in absent;

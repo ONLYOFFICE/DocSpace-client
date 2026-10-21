@@ -74,7 +74,10 @@ import {
 } from "@docspace/shared/api/apps";
 import type { TApp } from "@docspace/shared/api/apps/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
 import { isAppTemporarilyDisabled } from "SRC_DIR/helpers/disabled-apps";
+
+const PRIVATE_ROOMS_APP_ID = "e2e-rooms";
 
 class AppsStore {
   apps: TApp[] = [];
@@ -89,6 +92,10 @@ class AppsStore {
   isLoadFailed = false;
 
   settingsStore: SettingsStore;
+
+  // Read once, like the route tables: a flag flipped from the console must
+  // not make Rooms drop private rooms before a section is there to list them.
+  privateRoomsOptIn = isPrivateRoomsEnabled();
 
   constructor(settingsStore: SettingsStore) {
     this.settingsStore = settingsStore;
@@ -174,6 +181,16 @@ class AppsStore {
     if (!this.canManageApps || !this.isLoaded) return true;
     return this.isEnabled(id);
   };
+
+  // The Private section: the opt-in captured at load, and the E2E rooms app
+  // read as `isInstalled` reads it, without asking the flag again.
+  get isPrivateRoomsSectionAvailable() {
+    if (!this.privateRoomsOptIn) return false;
+    if (!this.canManageApps || !this.isLoaded) return true;
+    return (
+      this.apps.find((a) => a.id === PRIVATE_ROOMS_APP_ID)?.enabled ?? false
+    );
+  }
 
   getSettings = <T = Record<string, unknown>>(id: string): T | undefined => {
     return this.apps.find((a) => a.id === id)?.settings as T | undefined;

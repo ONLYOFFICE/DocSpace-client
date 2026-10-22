@@ -76,6 +76,7 @@ export type SectionFlags = {
   // View-level flags (already computed in Home/Header).
   isFormsSection?: boolean; // the "Forms" section root (CategoryType.Forms)
   isPrivateRoomsSection?: boolean; // the Private list address (CategoryType.PrivateRooms)
+  isPrivateRoute?: boolean; // any `/private` address
   isContactsPage?: boolean;
   isProfile?: boolean;
   isSettingsPage?: boolean;
@@ -99,6 +100,7 @@ export const getQuickActionsSection = (
     isAIAgentsFolder,
     isFormsSection,
     isPrivateRoomsSection,
+    isPrivateRoute,
     isContactsPage,
     isProfile,
     isSettingsPage,
@@ -125,8 +127,10 @@ export const getQuickActionsSection = (
   // it must be checked first; a room named by the list address's query is not.
   if (isPrivateRoomsSection && isRoomsFolder) return "private-rooms";
 
-  // Rooms list root → room tiles.
-  if (isRoomsFolder) return "rooms";
+  // Rooms list root → room tiles. A `/private` address still holding the rooms
+  // root, as under its no-access view, gets none.
+  // Spec: private-rooms/sidebar-section, "Navigation up and out stays in the section"
+  if (isRoomsFolder) return isPrivateRoute ? null : "rooms";
 
   // Encrypted/private room → handled separately (no banner for now).
   if (isPrivacyFolder) return "private";

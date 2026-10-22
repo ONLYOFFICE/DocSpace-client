@@ -62,6 +62,16 @@ describe("getQuickActionsSection — Private section", () => {
     expect(getQuickActionsSection({ isRoomsFolder: true })).toBe("rooms");
   });
 
+  it("No-access view offers no room types: the rooms root still loaded under a private room address", () => {
+    expect(
+      getQuickActionsSection({
+        isRoomsFolder: true,
+        isPrivateRoomsSection: false,
+        isPrivateRoute: true,
+      }),
+    ).toBeNull();
+  });
+
   it("keeps the file tiles inside a private room", () => {
     expect(
       getQuickActionsSection({ isRoom: true, isPrivacyFolder: true }),

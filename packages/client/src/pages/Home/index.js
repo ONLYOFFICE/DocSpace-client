@@ -61,7 +61,10 @@ import { createFolder } from "@docspace/shared/api/files";
 import Section from "@onlyoffice/apps-ui-kit/components/section";
 import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { getCategoryType } from "@docspace/shared/utils/common";
+import {
+  getCategoryType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 
@@ -385,6 +388,7 @@ const PureHome = observer((props) => {
     isAIAgentsFolder,
     isFormsSection,
     isPrivateRoomsSection,
+    isPrivateRoute: isPrivateRoomsRoute(location.pathname),
     isContactsPage,
     isProfile,
     isSettingsPage,

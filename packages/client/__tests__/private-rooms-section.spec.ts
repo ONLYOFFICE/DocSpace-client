@@ -842,6 +842,37 @@ test.describe("Private section — ways out stay in it", () => {
       .toBe("/private/filter");
   });
 
+  test("No-access view offers no room types", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(roomCannotBeOpened(403));
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await navigateInApp(
+      page,
+      `/private/${GONE_ROOM_ID}/filter?folder=${GONE_ROOM_ID}`,
+    );
+    await expect(page.getByTestId("empty-view")).toBeVisible({
+      timeout: 15000,
+    });
+
+    await expect(page.getByTestId("quick-actions")).toHaveCount(0);
+    for (const tile of [
+      "quick-collaboration-room",
+      "quick-public-room",
+      "quick-custom-room",
+      "quick-vdr-room",
+      "quick-use-template",
+    ])
+      await expect(page.getByTestId(tile)).toHaveCount(0);
+    await expect(
+      page.getByText(/Collaboration room|Public room|Custom room|Virtual Data Room/i),
+    ).toHaveCount(0);
+  });
+
   test("No-access view: the automatic redirect", async ({
     page,
     mockRequest,

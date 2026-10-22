@@ -254,3 +254,7 @@ The server SHALL refuse a batch copy of a file from inside a private room to a f
 #### Scenario: Copy within the same private room
 - **WHEN** a member requests a batch copy of an encrypted file into a subfolder of the same private room
 - **THEN** the server refuses the request and creates no file
+
+#### Scenario: Move into another private room
+- **WHEN** a member of two private rooms requests a batch move of an encrypted file from one into the other
+- **THEN** the server refuses the file with "You don't have enough permission to move the file" and moves nothing

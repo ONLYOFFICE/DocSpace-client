@@ -67,6 +67,41 @@ const ALICE_ID = "11111111-1111-1111-1111-111111111111";
 const BOB_ID = "22222222-2222-2222-2222-222222222222";
 
 const PLAN = { id: 8951, name: "plan.txt", text: "Plan of record." };
+/** A file of the destination room whose decrypted name is the same as PLAN's. */
+const OLDER_PLAN = { id: 8961, name: "plan.txt", text: "Older plan." };
+
+type TKeyHolder = {
+  userId: string;
+  pair: Awaited<ReturnType<typeof generateIdentityKeyPair>>;
+  publicKey: string;
+};
+
+/** Encrypts a file the way a member's upload does, its key wrapped for `recipients`. */
+const encryptedSeed = async (
+  file: { id: number; name: string; text: string },
+  sender: TKeyHolder,
+  recipients: { userId: string; publicKey: string }[],
+): Promise<EncryptedFileSeed> => {
+  const plain = new TextEncoder().encode(file.text);
+  const { encryptedBlob, dek } = await encryptFile(plain, {
+    fileName: file.name,
+  });
+  return {
+    id: file.id,
+    title: file.name,
+    serverTitle: `${crypto.randomUUID()}.txt`,
+    size: plain.byteLength,
+    encrypted: true,
+    fileKeys: await wrapDekForRecipients({
+      dek,
+      senderIdentity: sender.pair,
+      senderUserId: sender.userId,
+      recipients,
+      fileId: file.id,
+    }),
+    bytes: new Uint8Array(await encryptedBlob.arrayBuffer()),
+  };
+};
 
 const MOVE_REFUSAL =
   /can't be moved to another private room|CannotMoveToAnotherPrivateRoom/;
@@ -86,7 +121,7 @@ const serveTwoPrivateRooms = async (
   page: Page,
   mockRequest: WorkerFixture,
   baseUrl: string,
-  { sourceArchived = false } = {},
+  { sourceArchived = false, destHoldsPlan = false } = {},
 ): Promise<TRooms> => {
   const { keysHandle, passphrase } = await bootstrapEncryption(
     page,
@@ -94,38 +129,25 @@ const serveTwoPrivateRooms = async (
     baseUrl,
   );
   const memberKey = keysHandle.getKeys()[0];
-  const publicKeyOf = async () => {
+  const keyHolder = async (userId: string): Promise<TKeyHolder> => {
     const pair = await generateIdentityKeyPair();
     return {
+      userId,
       pair,
       publicKey: arrayBufferToBase64(pair.publicKey.buffer as ArrayBuffer),
     };
   };
-  const alice = await publicKeyOf();
-  const bob = await publicKeyOf();
-
-  const plain = new TextEncoder().encode(PLAN.text);
-  const { encryptedBlob, dek } = await encryptFile(plain, {
-    fileName: PLAN.name,
-  });
-  const seed: EncryptedFileSeed = {
-    id: PLAN.id,
-    title: PLAN.name,
-    serverTitle: `${crypto.randomUUID()}.txt`,
-    size: plain.byteLength,
-    encrypted: true,
-    fileKeys: await wrapDekForRecipients({
-      dek,
-      senderIdentity: alice.pair,
-      senderUserId: ALICE_ID,
-      recipients: [
-        { userId: ALICE_ID, publicKey: alice.publicKey },
-        { userId: TEST_USER_ID, publicKey: memberKey.publicKey },
-      ],
-      fileId: PLAN.id,
-    }),
-    bytes: new Uint8Array(await encryptedBlob.arrayBuffer()),
+  const alice = await keyHolder(ALICE_ID);
+  const bob = await keyHolder(BOB_ID);
+  const memberRecipient = {
+    userId: TEST_USER_ID,
+    publicKey: memberKey.publicKey,
   };
+
+  const seed = await encryptedSeed(PLAN, alice, [alice, memberRecipient]);
+  const destFiles = destHoldsPlan
+    ? [await encryptedSeed(OLDER_PLAN, bob, [bob, memberRecipient])]
+    : [];
 
   const sourceHandle: { current: EncryptedFilesHandlerHandle | null } = {
     current: null,
@@ -173,6 +195,7 @@ const serveTwoPrivateRooms = async (
         MoveTo: true,
         EditRoom: true,
       },
+      initialFiles: destFiles,
       withOtherRooms: true,
       handle: destHandle,
     }),
@@ -327,6 +350,46 @@ test.describe("Private room — copy into another private room", () => {
     await unlockIfPrompted(page, rooms.passphrase);
 
     await expectReencryptedCopy(rooms);
+  });
+
+  test("Copy into a room holding a file of the same name", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl, {
+      destHoldsPlan: true,
+    });
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+
+    await openTransferDialog(page, "copy");
+    await copyToDestinationRoom(page);
+    await unlockIfPrompted(page, rooms.passphrase);
+
+    const dialog = page
+      .getByRole("dialog")
+      .filter({ hasText: "Action required" });
+    await expect(dialog).toBeVisible({ timeout: 30000 });
+    await expect(dialog).toContainText(PLAN.name);
+    await expect(dialog.getByText("Overwrite with version update")).toHaveCount(
+      0,
+    );
+    expect(rooms.destHandle.getSessions()).toEqual([]);
+
+    await dialog.getByRole("button", { name: "OK" }).click();
+
+    await expect
+      .poll(() => rooms.destHandle.getFiles().length, { timeout: 30000 })
+      .toBe(2);
+    expect(rooms.destHandle.getFiles().every((f) => f.encrypted)).toBe(true);
+    await openRoomInApp(page, DEST_ROOM_ID, activeRoomUrl(DEST_ROOM_ID));
+    const rows = page.locator('[data-testid^="table-row-"]');
+    await expect(rows.filter({ hasText: "plan (1)" })).toHaveCount(1, {
+      timeout: 15000,
+    });
+    await expect(rows).toHaveCount(2);
   });
 
   test("Copy from an archived private room", async ({

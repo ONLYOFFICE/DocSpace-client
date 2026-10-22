@@ -106,10 +106,12 @@ import {
   handleFilesUploadImpl,
   handleUploadAndOptionalConversionImpl,
   handleUploadConflictsImpl,
+  keepBothPrivateNamesImpl,
   retryQuotaFailedFilesImpl,
   retryUploadFilesImpl,
   setConflictDialogDataImpl,
   startUploadImpl,
+  type TPrivateRename,
 } from "./uploadDataStore/start.helpers";
 import {
   asyncUploadImpl,
@@ -576,7 +578,11 @@ class UploadDataStore {
     uploadData: TStartUploadData,
     t: TTranslation,
     createNewIfExist?: boolean,
+    privateRenames?: TPrivateRename[],
   ) => {
+    if (createNewIfExist && privateRenames) {
+      keepBothPrivateNamesImpl(uploadData, privateRenames);
+    }
     this.handleUploadAndOptionalConversion(uploadData, t, createNewIfExist);
   };
 

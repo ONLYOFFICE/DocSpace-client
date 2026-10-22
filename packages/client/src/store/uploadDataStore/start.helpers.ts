@@ -39,6 +39,11 @@ import { checkIsFileExist, getFolderInfo } from "@docspace/shared/api/files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { RoomsType } from "@docspace/shared/enums";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import {
+  listDecryptedFileNames,
+  resolveNameClashes,
+} from "@docspace/shared/services/private-room/encrypted-name-clash";
 
 import type { TTranslation } from "@docspace/shared/types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
@@ -226,6 +231,90 @@ export function handleUploadAndOptionalConversionImpl(
   }
 }
 
+/** A file of a private upload that is kept next to one of the same name. */
+export type TPrivateRename = {
+  uniqueId: string;
+  /** The decrypted name both files have. */
+  title: string;
+  /** The name the new file takes. */
+  name: string;
+};
+
+/**
+ * The files of the batch that would go encrypted into a folder already
+ * holding a file of the same decrypted name. The comparison needs the
+ * identity: when the unlock is declined, those files fail as for a declined
+ * batch and nothing is compared.
+ */
+async function findPrivateNameClashes(
+  self: UploadDataStore,
+  items: TUploadFile[],
+): Promise<TPrivateRename[]> {
+  const privateItems = items.filter((f) => self.willEncryptItem(f));
+  if (privateItems.length === 0) return [];
+
+  const { userId } = self.getUserEncryptionKeys();
+  const identity = await requireUnlock(String(userId));
+  if (!identity) {
+    self.cancelEncryptedBatchUpload(privateItems);
+    return [];
+  }
+
+  const byFolder = new Map<string, TUploadFile[]>();
+  for (const item of privateItems) {
+    const folderId = String(item.toFolderId ?? item.target.folderId);
+    byFolder.set(folderId, [...(byFolder.get(folderId) ?? []), item]);
+  }
+
+  const renames: TPrivateRename[] = [];
+  for (const [folderId, folderItems] of byFolder) {
+    const roomId = folderItems[0].target.encryptionRoomId;
+    if (roomId === null) continue;
+
+    const existingNames = await listDecryptedFileNames(
+      folderId,
+      roomId,
+      String(userId),
+      identity,
+    );
+    const clashes = resolveNameClashes(
+      folderItems.map((item) => ({ item, name: item.file.name })),
+      existingNames,
+    );
+    clashes.forEach(({ item, name, renamed }) => {
+      renames.push({ uniqueId: item.uniqueId, title: name, name: renamed });
+    });
+  }
+  return renames;
+}
+
+/** Keeps both files of a private clash: the new one takes its suffixed name. */
+export function keepBothPrivateNamesImpl(
+  uploadData: TStartUploadData,
+  renames: TPrivateRename[],
+) {
+  const items = [
+    ...uploadData.files,
+    ...(uploadData.allNewFiles ?? []),
+    ...(uploadData.uploadedFilesHistory ?? []),
+  ];
+
+  renames.forEach(({ uniqueId, name }) => {
+    items
+      .filter((item) => item.uniqueId === uniqueId)
+      .forEach((item) => {
+        const { file } = item;
+        item.file = Object.assign(
+          new File([file], name, {
+            type: file.type,
+            lastModified: file.lastModified,
+          }),
+          { ...file },
+        );
+      });
+  });
+}
+
 export async function handleUploadConflictsImpl(
   self: UploadDataStore,
   t: TTranslation,
@@ -255,11 +344,20 @@ export async function handleUploadConflictsImpl(
       isFile: true,
     }));
 
+    const privateRenames = await findPrivateNameClashes(
+      self,
+      uploadData.allNewFiles,
+    );
+    privateRenames.forEach(({ title }) => {
+      conflicts.push({ title, isFile: true });
+    });
+
     if (conflicts.length > 0) {
       self.setConflictDialogData(conflicts, {
         isUploadConflict: true,
         newUploadData: uploadData,
         folderTitle: folderInfo.title,
+        ...(privateRenames.length > 0 && { privateRenames }),
       });
     } else {
       self.handleUploadAndOptionalConversion(uploadData, t, true);

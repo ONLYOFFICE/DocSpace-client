@@ -58,6 +58,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
     selectActionText,
     submitButtonLabel,
     cancelButtonLabel,
+    withOverwrite = true,
     overwriteDescription,
     overwriteTitle,
     duplicateDescription,
@@ -68,7 +69,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
   } = props;
 
   const [resolveType, setResolveType] = useState<ConflictResolveType>(
-    ConflictResolveType.Overwrite,
+    withOverwrite ? ConflictResolveType.Overwrite : ConflictResolveType.Duplicate,
   );
 
   const onSelectResolveType = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,19 +83,21 @@ const ConflictResolve = (props: ConflictResolveProps) => {
     onSubmit(resolveType);
   };
 
+  const overwriteOption = {
+    label: (
+      <div>
+        <Text className="radio-option-title">{overwriteTitle}</Text>
+        <Text className="radio-option-description">
+          {overwriteDescription}
+        </Text>
+      </div>
+    ),
+    value: ConflictResolveType.Overwrite as unknown as string,
+    autoFocus: true,
+  };
+
   const radioOptions = [
-    {
-      label: (
-        <div>
-          <Text className="radio-option-title">{overwriteTitle}</Text>
-          <Text className="radio-option-description">
-            {overwriteDescription}
-          </Text>
-        </div>
-      ),
-      value: ConflictResolveType.Overwrite as unknown as string,
-      autoFocus: true,
-    },
+    ...(withOverwrite ? [overwriteOption] : []),
     {
       label: (
         <div>
@@ -106,6 +109,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
       ),
 
       value: ConflictResolveType.Duplicate as unknown as string,
+      autoFocus: !withOverwrite,
     },
     {
       label: (

@@ -36,6 +36,8 @@ import {
 } from "./testHarness";
 import * as filesApi from "@docspace/shared/api/files";
 import { RoomsType } from "@docspace/shared/enums";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import { listDecryptedFileNames } from "@docspace/shared/services/private-room/encrypted-name-clash";
 import type { TTranslation } from "@docspace/shared/types";
 
 import {
@@ -50,6 +52,19 @@ import {
 } from "../start.helpers";
 import type { TUploadFile, TUploadTarget } from "../helpers";
 import type UploadDataStore from "../../UploadDataStore";
+
+vi.mock("@docspace/shared/services/encryption/secret-storage", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  requireUnlock: vi.fn(),
+}));
+
+vi.mock(
+  "@docspace/shared/services/private-room/encrypted-name-clash",
+  async (io) => ({
+    ...((await io()) as Record<string, unknown>),
+    listDecryptedFileNames: vi.fn(),
+  }),
+);
 
 const t = ((key: string) => key) as unknown as TTranslation;
 
@@ -202,6 +217,110 @@ describe("handleUploadConflictsImpl", () => {
     await checkConflicts(store, [privateItem(), ordinaryItem()], 1);
 
     expect(filesApi.checkIsFileExist).toHaveBeenCalledWith(1, ["Agenda.docx"]);
+  });
+
+  describe("name clashes in a private room", () => {
+    const keyed = {
+      userStore: {
+        user: { id: "user-1", isAdmin: false },
+        encryptionKeys: [{ id: "key-1", publicKey: "pub-b64" }],
+      },
+    };
+
+    const copyInto = (name: string) =>
+      makeUploadFile({
+        file: makeBrowserFile(name, 10, {
+          parentFolderId: 50,
+          uploadContext: { roomType: RoomsType.CustomRoom, isPrivate: true },
+        }),
+        toFolderId: 50,
+        target: makePrivateUploadTarget(),
+      });
+
+    const dialogPayload = (setData: unknown) =>
+      vi.mocked(setData as (data: unknown) => void).mock
+        .calls[0][0] as unknown as {
+        newUploadData: never;
+        privateRenames: never;
+      };
+
+    it("Copy into a room holding a file of the same name", async () => {
+      const { store, fakes } = createTestUploadDataStore(keyed);
+      vi.mocked(requireUnlock).mockResolvedValue({} as never);
+      vi.mocked(listDecryptedFileNames).mockResolvedValue([
+        "New document.docx",
+      ]);
+      const item = copyInto("New document.docx");
+
+      const upload = await checkConflicts(store, [item], 50);
+
+      expect(upload).not.toHaveBeenCalled();
+      expect(filesApi.checkIsFileExist).not.toHaveBeenCalled();
+      expect(listDecryptedFileNames).toHaveBeenCalledWith(
+        "50",
+        50,
+        "user-1",
+        {},
+      );
+      expect(
+        fakes.dialogsStore.setConflictResolveDialogItems,
+      ).toHaveBeenCalledWith([{ title: "New document.docx", isFile: true }]);
+      const payload = dialogPayload(
+        fakes.dialogsStore.setConflictResolveDialogData,
+      );
+      expect(payload.privateRenames).toEqual([
+        {
+          uniqueId: item.uniqueId,
+          title: "New document.docx",
+          name: "New document (1).docx",
+        },
+      ]);
+
+      store.conflictDialogUploadHandler(
+        payload.newUploadData,
+        t,
+        true,
+        payload.privateRenames,
+      );
+
+      expect(item.file.name).toBe("New document (1).docx");
+      expect(item.file.parentFolderId).toBe(50);
+      expect(item.file.uploadContext).toEqual({
+        roomType: RoomsType.CustomRoom,
+        isPrivate: true,
+      });
+      expect(upload).toHaveBeenCalledWith(payload.newUploadData, t, true);
+    });
+
+    it("Upload without a clash", async () => {
+      const { store, fakes } = createTestUploadDataStore(keyed);
+      vi.mocked(requireUnlock).mockResolvedValue({} as never);
+      vi.mocked(listDecryptedFileNames).mockResolvedValue(["Other.docx"]);
+
+      const upload = await checkConflicts(store, [privateItem()], 50);
+
+      expect(upload).toHaveBeenCalledTimes(1);
+      expect(
+        fakes.dialogsStore.setConflictResolveDialogVisible,
+      ).not.toHaveBeenCalled();
+      expect(filesApi.checkIsFileExist).not.toHaveBeenCalled();
+    });
+
+    it("fails the files as locked when the unlock for the comparison is declined", async () => {
+      const { store, fakes } = createTestUploadDataStore(keyed);
+      vi.mocked(requireUnlock).mockResolvedValue(null as never);
+      const item = privateItem();
+
+      const upload = await checkConflicts(store, [item], 50);
+
+      expect(listDecryptedFileNames).not.toHaveBeenCalled();
+      expect(item.error).toBe("Common:EncryptionLockedUpload");
+      expect(item.inAction).toBe(true);
+      expect(
+        fakes.dialogsStore.setConflictResolveDialogVisible,
+      ).not.toHaveBeenCalled();
+      expect(upload).toHaveBeenCalledTimes(1);
+    });
   });
 
   it("checks an ordinary target while an AI room is open", async () => {

@@ -42,7 +42,6 @@ import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
-import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import {
   useChatNoAccess,
@@ -62,7 +61,6 @@ import { createFolder } from "@docspace/shared/api/files";
 import Section from "@onlyoffice/apps-ui-kit/components/section";
 import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
@@ -102,6 +100,7 @@ import {
 } from "./Hooks";
 import { useQuickActions } from "./Hooks/useQuickActions";
 import { useHideQuickActions } from "./Hooks/useHideQuickActions";
+import { useSectionDrop } from "./Hooks/useSectionDrop";
 
 import styles from "./Home.module.scss";
 
@@ -395,29 +394,22 @@ const PureHome = observer((props) => {
 
   const onHideQuickActions = useHideQuickActions({ t, setShowQuickActions });
 
-  const onDrop = useEventCallback((f) => {
-    if (isContactsPage || isProfile) return;
-
-    if (
-      folderSecurity &&
-      hasOwnProperty(folderSecurity, "Create") &&
-      !folderSecurity.Create
-    )
-      return;
-
-    const target = resolveOpenFolderTarget();
-    const dragged = dragging;
-    dragging && setDragging(false);
-
-    if (disableDrag) return;
-
-    createFoldersTree(t, f, target, dragged)
-      .then((fItem) => {
-        if (fItem.length > 0) startUpload(fItem, target, t);
-      })
-      .catch((err) => {
-        toastr.error(err, null, 0, true);
-      });
+  const { onDrop, onDropCapture } = useSectionDrop({
+    t,
+    canUpload:
+      !isContactsPage &&
+      !isProfile &&
+      !(
+        folderSecurity &&
+        hasOwnProperty(folderSecurity, "Create") &&
+        !folderSecurity.Create
+      ),
+    disableDrag,
+    dragging,
+    setDragging,
+    resolveOpenFolderTarget,
+    createFoldersTree,
+    startUpload,
   });
 
   useOperations({
@@ -723,6 +715,7 @@ const PureHome = observer((props) => {
           [styles.stickyBannerVars]: showQuickActions,
         })}
         data-layout-mode={isAiChatFullscreen ? "ai-fullscreen" : undefined}
+        onDropCapture={onDropCapture}
       >
         <SectionWrapper
           {...sectionProps}

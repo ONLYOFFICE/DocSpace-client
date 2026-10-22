@@ -75,6 +75,12 @@ export default function withFileActions(WrappedFileItem) {
       setEnabledHotkeys(true);
     };
 
+    // Taken on the native drop event, before the browser reads the dropped
+    // directories: the open folder may change while it does.
+    onDropCapture = () => {
+      this.dropSnapshot = this.props.resolveOpenFolderTarget();
+    };
+
     onDropZoneUpload = async (files) => {
       const {
         t,
@@ -86,7 +92,8 @@ export default function withFileActions(WrappedFileItem) {
         resolveOpenFolderTarget,
       } = this.props;
 
-      const open = resolveOpenFolderTarget();
+      const open = this.dropSnapshot ?? resolveOpenFolderTarget();
+      this.dropSnapshot = null;
       const dragged = dragging;
 
       dragging && setDragging(false);
@@ -405,6 +412,7 @@ export default function withFileActions(WrappedFileItem) {
           onContentFileSelect={this.onContentFileSelect}
           fileContextClick={this.onFileContextClick}
           onDrop={this.onDrop}
+          onDropCapture={this.onDropCapture}
           onMouseDown={this.onMouseDown}
           onFilesClick={this.onFilesClick}
           onDoubleClick={this.onDoubleClick}

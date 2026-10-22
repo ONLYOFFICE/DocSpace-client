@@ -97,6 +97,7 @@ export function withItemUploadContext(
 /** The part of a list row that decides where files dropped on it go. */
 export type TDropRow = {
   id: number | string;
+  parentId?: number | string;
   isFolder?: boolean;
   fileExst?: string;
   isRoom?: boolean;
@@ -124,12 +125,20 @@ export async function resolveDropTarget(
     };
   }
 
-  if (open.encryptionRoomId !== null) return { ...open, folderId: row.id };
-
-  if (
+  const inRoomsSections =
     row.rootFolderType === FolderType.Rooms ||
-    row.rootFolderType === FolderType.Archive
+    row.rootFolderType === FolderType.Archive;
+
+  // A row of a rooms section takes the snapshot's room only when it is
+  // listed in the snapshot's folder; any other is looked up.
+  if (
+    open.encryptionRoomId !== null &&
+    (!inRoomsSections || String(row.parentId) === String(open.folderId))
   ) {
+    return { ...open, folderId: row.id };
+  }
+
+  if (inRoomsSections) {
     const target = await resolveFolderTarget(row);
     if (target.encryptionRoomId === null) {
       throw new Error(`The room of folder ${row.id} is not in its path`);

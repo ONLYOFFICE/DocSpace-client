@@ -272,10 +272,55 @@ describe("resolveDropTarget", () => {
   });
 
   it("Folder row inside the open private room", async () => {
-    const target = await resolveDropTarget(privateRoomOpen, folderRow());
+    const target = await resolveDropTarget(
+      privateRoomOpen,
+      folderRow({ parentId: PRIVATE_ROOM_ID }),
+    );
 
     expect(target).toEqual({ ...privateRoomOpen, folderId: 60 });
     expect(isDropRefused(privateRoomOpen, target)).toBe(false);
+    expect(getFolderPath).not.toHaveBeenCalled();
+  });
+
+  it("Another room opened during the directory read", async () => {
+    vi.mocked(getFolderPath).mockResolvedValue(
+      pathThrough({
+        id: PRIVATE_ROOM_ID,
+        private: true,
+        roomType: RoomsType.CustomRoom,
+      }),
+    );
+    const ordinaryRoomOpen: TUploadTarget = {
+      folderId: 70,
+      isPrivate: false,
+      roomType: RoomsType.EditingRoom,
+      encryptionRoomId: 70,
+    };
+
+    const target = await resolveDropTarget(
+      ordinaryRoomOpen,
+      folderRow({ parentId: PRIVATE_ROOM_ID }),
+    );
+
+    expect(vi.mocked(getFolderPath).mock.calls).toEqual([[60]]);
+    expect(target).toEqual({ ...privateRoomOpen, folderId: 60 });
+    expect(isDropRefused(ordinaryRoomOpen, target)).toBe(true);
+  });
+
+  it("keeps the open AI agent's target for a folder row outside the rooms sections", async () => {
+    const agentOpen: TUploadTarget = {
+      folderId: 71,
+      isPrivate: false,
+      roomType: RoomsType.AIRoom,
+      encryptionRoomId: 70,
+    };
+
+    const target = await resolveDropTarget(
+      agentOpen,
+      folderRow({ parentId: 72, rootFolderType: FolderType.AIAgents }),
+    );
+
+    expect(target).toEqual({ ...agentOpen, folderId: 60 });
     expect(getFolderPath).not.toHaveBeenCalled();
   });
 

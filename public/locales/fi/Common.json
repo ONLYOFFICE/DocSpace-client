@@ -394,6 +394,7 @@
   "CancelUpload": "Lataus on keskeytetty. Joitakin tiedostoja ei ole ladattu.",
   "CancelUploadingProcess": "Haluatko perua latauksen?",
   "CannotChangePlan": "Et voi muuttaa ohjelmaasi, koska käytetyn muistin määrä tai ylläpitäjien määrä ylittää valitun ohjelman rajoitukset:",
+  "CannotMoveToAnotherPrivateRoom": "Tiedostoja ei voi siirtää toiseen yksityiseen huoneeseen. Kopioi ne sen sijaan.",
   "CannotRemoveMemberWhileUploads": "Jäsentä ei voi poistaa latausten ollessa käynnissä ({{count}}). Odota erän valmistumista ja yritä uudelleen.",
   "CannotTransferFolderFromPrivateRoom": "Kansioita ei voi siirtää tai kopioida pois yksityisestä huoneesta.",
   "CannotTransferToPrivateRoom": "Kohteita ei voi siirtää tai kopioida yksityiseen huoneeseen. Lataa tiedostot suoraan huoneeseen, jotta ne pysyvät salattuina.",

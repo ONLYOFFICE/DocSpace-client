@@ -394,6 +394,7 @@
   "CancelUpload": "Ngarkimi është ndërprerë. Disa skedarë nuk janë ngarkuar.",
   "CancelUploadingProcess": "A doni të anulloni ngarkimin?",
   "CannotChangePlan": "Ju nuk mund ta ndryshoni planin tuaj sepse vëllimi i hapësirës së përdorur ose numri i administratorëve tejkalon kufizimet e planit të selektuar:",
+  "CannotMoveToAnotherPrivateRoom": "Skedarët nuk mund të zhvendosen në një dhomë tjetër private. Në vend të kësaj, kopjojini.",
   "CannotRemoveMemberWhileUploads": "Nuk mund të hiqet anëtari ndërkohë që ngarkimet janë në vazhdim ({{count}}). Prisni që grupi të përfundojë, pastaj provoni përsëri.",
   "CannotTransferFolderFromPrivateRoom": "Dosjet nuk mund të zhvendosen ose kopjohen jashtë një dhome private.",
   "CannotTransferToPrivateRoom": "Nuk mund t'i zhvendosni ose kopjoni artikujt në një dhomë private. Ngarkoni skedarët drejtpërdrejt në dhomë që të mbeten të enkriptuar.",

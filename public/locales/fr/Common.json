@@ -394,6 +394,7 @@
   "CancelUpload": "Le téléchargement a été interrompu. Certains fichiers n’ont pas été téléchargés.",
   "CancelUploadingProcess": "Voulez-vous annuler le téléchargement ?",
   "CannotChangePlan": "Vous ne pouvez pas changer de plan tarifaire, car le volume de stockage utilisé ou le nombre d'administrateurs dépasse les limites du plan sélectionné :",
+  "CannotMoveToAnotherPrivateRoom": "Les fichiers ne peuvent pas être déplacés vers une autre salle privée. Copiez-les plutôt.",
   "CannotRemoveMemberWhileUploads": "Impossible de retirer le membre pendant que des téléversements sont en cours ({{count}}). Attendez la fin du lot, puis réessayez.",
   "CannotTransferFolderFromPrivateRoom": "Les dossiers ne peuvent pas être déplacés ou copiés hors d'une salle privée.",
   "CannotTransferToPrivateRoom": "Vous ne pouvez pas déplacer ou copier des éléments dans une salle privée. Téléversez les fichiers directement dans la salle pour qu'ils restent chiffrés.",

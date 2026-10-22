@@ -394,6 +394,7 @@
   "CancelUpload": "Încărcarea a fost întreruptă. Unele fișiere nu au fost încărcate.",
   "CancelUploadingProcess": "Doriți să anulați încărcarea?",
   "CannotChangePlan": "Nu vă puteți schimba abonamentul deoarece volumul de stocare utilizat sau numărul de administratori depășește limitele abonamentului selectat:",
+  "CannotMoveToAnotherPrivateRoom": "Fișierele nu pot fi mutate într-o altă cameră privată. Copiați-le în schimb.",
   "CannotRemoveMemberWhileUploads": "Nu se poate elimina membrul în timp ce încărcările sunt în desfășurare ({{count}}). Așteptați finalizarea lotului, apoi încercați din nou.",
   "CannotTransferFolderFromPrivateRoom": "Folderele nu pot fi mutate sau copiate în afara unei camere private.",
   "CannotTransferToPrivateRoom": "Nu puteți muta sau copia elemente într-o cameră privată. Încărcați fișierele direct în cameră pentru a le păstra criptate.",

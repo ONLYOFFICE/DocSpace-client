@@ -394,6 +394,7 @@
   "CancelUpload": "Yükleme kesintiye uğradı. Bazı dosyalar yüklenmedi.",
   "CancelUploadingProcess": "Yüklemeyi iptal etmek istiyor musunuz?",
   "CannotChangePlan": "Kullanılan depolama hacmi veya yönetici sayısı seçilen planın limitlerini aştığı için planınızı değiştiremezsiniz:",
+  "CannotMoveToAnotherPrivateRoom": "Dosyalar başka bir özel odaya taşınamaz. Bunun yerine kopyalayın.",
   "CannotRemoveMemberWhileUploads": "Yüklemeler devam ederken ({{count}}) üye kaldırılamaz. Toplu işlemin tamamlanmasını bekleyip tekrar deneyin.",
   "CannotTransferFolderFromPrivateRoom": "Klasörler özel bir odanın dışına taşınamaz veya kopyalanamaz.",
   "CannotTransferToPrivateRoom": "Öğeleri özel bir odaya taşıyamaz veya kopyalayamazsınız. Dosyaların şifreli kalması için doğrudan odaya yükleyin.",

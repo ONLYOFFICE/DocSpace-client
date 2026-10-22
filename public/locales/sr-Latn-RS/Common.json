@@ -394,6 +394,7 @@
   "CancelUpload": "Otpremanje je prekinuto. Neke datoteke nisu otpremljene.",
   "CancelUploadingProcess": "Da li želite da otkažete otpremanje?",
   "CannotChangePlan": "Ne možete da promenite svoj plan jer korišćeni obim memorijskog prostora ili broj administratora premašuju ograničenja izabranog plana:",
+  "CannotMoveToAnotherPrivateRoom": "Datoteke se ne mogu premestiti u drugu privatnu sobu. Umesto toga ih kopirajte.",
   "CannotRemoveMemberWhileUploads": "Nije moguće ukloniti člana dok su otpremanja u toku ({{count}}). Sačekajte da se serija završi, pa pokušajte ponovo.",
   "CannotTransferFolderFromPrivateRoom": "Fascikle se ne mogu premestiti ili kopirati izvan privatne sobe.",
   "CannotTransferToPrivateRoom": "Ne možete da premeštate ili kopirate stavke u privatnu sobu. Otpremite datoteke direktno u sobu da bi ostale šifrovane.",

@@ -394,6 +394,7 @@
   "CancelUpload": "アップロードが中断されました。一部のファイルがアップロードされていません。",
   "CancelUploadingProcess": "アップロードをキャンセルしますか？",
   "CannotChangePlan": "選択したプランの制限を超えているため、プランを変更できません。使用ストレージ容量または管理者の数が選択したプランの制限を超えています。",
+  "CannotMoveToAnotherPrivateRoom": "ファイルを別のプライベートルームに移動することはできません。代わりにコピーしてください。",
   "CannotRemoveMemberWhileUploads": "アップロード中（{{count}}件）はメンバーを削除できません。バッチが完了してから再試行してください。",
   "CannotTransferFolderFromPrivateRoom": "フォルダをプライベートルームから移動またはコピーすることはできません。",
   "CannotTransferToPrivateRoom": "アイテムをプライベートルームに移動またはコピーすることはできません。暗号化された状態を保つには、ファイルをルームに直接アップロードしてください。",

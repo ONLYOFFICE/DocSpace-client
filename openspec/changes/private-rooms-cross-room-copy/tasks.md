@@ -4,7 +4,7 @@
 
 - [x] 1.1 Extract the folder path lookup of `resolveDropTarget` case (d) into `resolveFolderTarget(folderId)` in `packages/client/src/store/uploadDataStore/target.helpers.ts` and call it from `resolveDropTarget` (no behaviour change); verify with `cd packages/client && pnpm exec vitest run src/store/uploadDataStore/__tests__/target.helpers.test.ts` extended with direct cases for `resolveFolderTarget` (room path, plain folder, failed lookup rejects)
 - [x] 1.2 Plan private transfers by room id (design D1, D2): replace `sourceRootFolderId` with `sourceRoomId` and `dest.roomId` in `planPrivateTransfer`, add the kinds `reencrypt-into` and `refuse-move-into`, treat a private destination with an unknown room as another room, and handle both kinds in `runPrivateTransferPlanImpl` (`copyMove.helpers.ts`); update the callers in `moveDragItemsImpl` and `HotkeyStore.ts` paste to pass room ids; verify with plan cases named after the scenarios "Paste into another private room", "Paste within the same private room" and "Folder copied to another private room" in `src/store/filesActionsStore/__tests__` and `src/store/__tests__/HotkeyStore.clipboard.test.ts`
-- [ ] 1.3 Add `Common:CannotMoveToAnotherPrivateRoom` to `public/locales/en/Common.json`, run `/translate-comments` and `/translate-locales` for it; verify with `cd common/tests && npx vitest run test/locales.test.js`
+- [x] 1.3 Add `Common:CannotMoveToAnotherPrivateRoom` to `public/locales/en/Common.json`, run `/translate-comments` and `/translate-locales` for it; verify with `cd common/tests && npx vitest run test/locales.test.js`
 
 ## 2. Re-encrypting copy
 

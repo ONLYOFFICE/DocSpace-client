@@ -394,6 +394,7 @@
   "CancelUpload": "Augšupielāde ir pārtraukta. Daži faili nav augšupielādēti.",
   "CancelUploadingProcess": "Vai vēlaties atcelt augšupielādi?",
   "CannotChangePlan": "Plānu nevar mainīt, jo izmantotais krātuves apjoms vai administratoru skaits pārsniedz atlasītā plāna ierobežojumus:",
+  "CannotMoveToAnotherPrivateRoom": "Failus nevar pārvietot uz citu privātu telpu. Tā vietā kopējiet tos.",
   "CannotRemoveMemberWhileUploads": "Nevar noņemt dalībnieku, kamēr augšupielādes ir procesā ({{count}}). Pagaidiet, līdz partija ir pabeigta, pēc tam mēģiniet vēlreiz.",
   "CannotTransferFolderFromPrivateRoom": "Mapes nevar pārvietot vai kopēt ārpus privātas istabas.",
   "CannotTransferToPrivateRoom": "Vienumus nevar pārvietot vai kopēt privātā telpā. Augšupielādējiet failus tieši telpā, lai tie paliktu šifrēti.",

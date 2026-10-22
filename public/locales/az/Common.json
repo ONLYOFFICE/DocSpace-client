@@ -394,6 +394,7 @@
   "CancelUpload": "Yükləmə dayandırıldı. Bəzi fayllar yüklənmədi.",
   "CancelUploadingProcess": "Yükləməni ləğv etmək istəyirsiniz?",
   "CannotChangePlan": "İstifadə olunan yaddaşın həcmi və ya admin sayı seçilmiş planın məhdudiyyətlərini keçdiyi üçün planınızı dəyişə bilməzsiniz:",
+  "CannotMoveToAnotherPrivateRoom": "Faylları başqa şəxsi otağa köçürmək mümkün deyil. Bunun əvəzinə onları kopyalayın.",
   "CannotRemoveMemberWhileUploads": "Yükləmələr davam edərkən ({{count}}) üzv çıxarıla bilməz. Partiyının bitməsini gözləyin, sonra yenidən cəhd edin.",
   "CannotTransferFolderFromPrivateRoom": "Qovluqları şəxsi otaqdan kənara köçürmək və ya kopyalamaq mümkün deyil.",
   "CannotTransferToPrivateRoom": "Elementləri özəl otağa köçürmək və ya kopyalamaq mümkün deyil. Faylları şifrələnmiş saxlamaq üçün birbaşa otağa yükləyin.",

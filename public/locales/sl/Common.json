@@ -394,6 +394,7 @@
   "CancelUpload": "Nalaganje je bilo prekinjeno. Nekatere datoteke niso bile naložene.",
   "CancelUploadingProcess": "Ali želite preklicati nalaganje?",
   "CannotChangePlan": "Svojega paketa ne morete spremeniti, ker uporabljena količina prostora za shranjevanje ali število skrbnikov presega omejitve izbranega paketa:",
+  "CannotMoveToAnotherPrivateRoom": "Datotek ni mogoče premakniti v drugo zasebno sobo. Namesto tega jih kopirajte.",
   "CannotRemoveMemberWhileUploads": "Člana ni mogoče odstraniti med nalaganjem ({{count}}). Počakajte, da se serija konča, in poskusite znova.",
   "CannotTransferFolderFromPrivateRoom": "Map ni mogoče premakniti ali kopirati iz zasebne sobe.",
   "CannotTransferToPrivateRoom": "Elementov ni mogoče premakniti ali kopirati v zasebno sobo. Datoteke naložite neposredno v sobo, da ostanejo šifrirane.",

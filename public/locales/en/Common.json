@@ -394,6 +394,7 @@
   "CancelUpload": "The upload has been interrupted. Some files have not been uploaded.",
   "CancelUploadingProcess": "Do you want to cancel uploading?",
   "CannotChangePlan": "You cannot change your plan because the used storage volume or the number of admins exceeds the limitations of the selected plan:",
+  "CannotMoveToAnotherPrivateRoom": "Files can't be moved to another private room. Copy them instead.",
   "CannotRemoveMemberWhileUploads": "Cannot remove member while uploads are in progress ({{count}}). Wait for the batch to finish, then try again.",
   "CannotTransferFolderFromPrivateRoom": "Folders can't be moved or copied out of a private room.",
   "CannotTransferToPrivateRoom": "You can't move or copy items into a private room. Upload files directly to the room to keep them encrypted.",

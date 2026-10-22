@@ -394,6 +394,7 @@
   "CancelUpload": "Quá trình tải lên đã bị gián đoạn. Một số tập tin chưa được tải lên.",
   "CancelUploadingProcess": "Bạn có muốn hủy tải lên không?",
   "CannotChangePlan": "Bạn không thể thay đổi gói dịch vụ của mình vì dung lượng lưu trữ đã sử dụng hoặc số lượng quản trị viên vượt quá giới hạn của gói dịch vụ đã chọn:",
+  "CannotMoveToAnotherPrivateRoom": "Không thể di chuyển tệp sang phòng riêng tư khác. Thay vào đó, hãy sao chép chúng.",
   "CannotRemoveMemberWhileUploads": "Không thể xoá thành viên trong khi đang tải lên ({{count}}). Hãy đợi đến khi hoàn tất, rồi thử lại.",
   "CannotTransferFolderFromPrivateRoom": "Không thể di chuyển hoặc sao chép thư mục ra khỏi phòng riêng tư.",
   "CannotTransferToPrivateRoom": "Bạn không thể di chuyển hoặc sao chép các mục vào phòng riêng tư. Hãy tải tệp trực tiếp lên phòng để giữ cho chúng được mã hóa.",

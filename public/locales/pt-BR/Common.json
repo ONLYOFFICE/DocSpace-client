@@ -394,6 +394,7 @@
   "CancelUpload": "O upload foi interrompido. Alguns arquivos não foram carregados.",
   "CancelUploadingProcess": "Você quer cancelar o upload?",
   "CannotChangePlan": "Você não pode alterar seu plano porque o volume de armazenamento usado ou o número de administradores excede as limitações do plano selecionado:",
+  "CannotMoveToAnotherPrivateRoom": "Os arquivos não podem ser movidos para outra sala privada. Em vez disso, copie-os.",
   "CannotRemoveMemberWhileUploads": "Não é possível remover o membro enquanto há uploads em andamento ({{count}}). Aguarde a conclusão do lote e tente novamente.",
   "CannotTransferFolderFromPrivateRoom": "As pastas não podem ser movidas ou copiadas para fora de uma sala privada.",
   "CannotTransferToPrivateRoom": "Não é possível mover ou copiar itens para uma sala privada. Faça upload dos arquivos diretamente na sala para mantê-los criptografados.",

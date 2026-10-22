@@ -394,6 +394,7 @@
   "CancelUpload": "Il caricamento è stato interrotto. Alcuni file non sono stati caricati.",
   "CancelUploadingProcess": "Vuoi annullare il caricamento?",
   "CannotChangePlan": "Non puoi modificare il tuo piano perché il volume di archiviazione utilizzato o il numero di amministratori supera i limiti del piano selezionato:",
+  "CannotMoveToAnotherPrivateRoom": "I file non possono essere spostati in un'altra stanza privata. Copiali invece.",
   "CannotRemoveMemberWhileUploads": "Impossibile rimuovere il membro mentre i caricamenti sono in corso ({{count}}). Attendere il termine del batch, quindi riprovare.",
   "CannotTransferFolderFromPrivateRoom": "Le cartelle non possono essere spostate o copiate al di fuori di una stanza privata.",
   "CannotTransferToPrivateRoom": "Non è possibile spostare o copiare elementi in una stanza privata. Carica i file direttamente nella stanza per mantenerli crittografati.",

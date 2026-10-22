@@ -3567,11 +3567,11 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-H6q1l24HQSCOfRnUU4qq6f/pnpkyUpLRUuvm5S3Llpyo5WP5fYtJKFDRlddGVYEkR/7a9QU8oPg3F5hq0FhVWA==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-pLrfVZ+Zjat/vTfmTDDYcufVa3eCQWhF+KLafl+Y4jHapkzW+X7TorOMfFckhKu4mCRBNFrNQcTg/YP2kz9MFQ==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.0.2
     engines: {node: '>=22'}
     peerDependencies:
-      '@onlyoffice/ai-chat': ^1.0.4
+      '@onlyoffice/ai-chat': '>=1.0.2-20261022'
       '@onlyoffice/doceditor-types': '>=9.3.1'
       '@onlyoffice/document-editor-react': 2.3.0
       '@socket.io/component-emitter': 3.1.2

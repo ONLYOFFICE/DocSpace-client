@@ -47,6 +47,7 @@ import {
   frameCallEvent,
   getCategoryType,
   getFileExtension,
+  isPrivateRoomsRoute,
 } from "@docspace/shared/utils/common";
 import {
   CategoryType,
@@ -548,9 +549,9 @@ export function redirectToParentImpl(
       );
       archiveFilter.searchArea = RoomSearchArea.Archive;
       const params = archiveFilter.toUrlParams(userId as string, true);
+      // An archived private room may be open at its active-form /private address.
       const path = getCategoryUrl(
-        getCategoryType(window.DocSpace.location) ===
-          CategoryType.PrivateArchive
+        isPrivateRoomsRoute(window.DocSpace.location.pathname)
           ? CategoryType.PrivateArchive
           : CategoryType.Archive,
       );

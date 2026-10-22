@@ -48,6 +48,7 @@ import {
   getTemplateChanges,
   isFieldNameTaken,
   isNameFreedOnSave,
+  isRowControlClick,
   isValidField,
   moveItem,
   removeOption,
@@ -421,6 +422,25 @@ describe("isFieldNameTaken", () => {
     expect(
       isFieldNameTaken(fields, { ...createFieldForm("a"), name: "Court" }),
     ).toBe(false);
+  });
+});
+
+describe("isRowControlClick", () => {
+  it("leaves clicks on the toggle, the menu and from the keyboard to them", () => {
+    const row = document.createElement("div");
+    row.innerHTML =
+      '<span class="name"></span>' +
+      '<div class="toggleButton"><input /></div>' +
+      '<div class="table-container_row-context-menu-wrapper"><button></button></div>';
+
+    const name = row.querySelector(".name")!;
+    const toggle = row.querySelector("input")!;
+    const menu = row.querySelector("button")!;
+
+    expect(isRowControlClick({ detail: 1, target: name })).toBe(false);
+    expect(isRowControlClick({ detail: 1, target: toggle })).toBe(true);
+    expect(isRowControlClick({ detail: 1, target: menu })).toBe(true);
+    expect(isRowControlClick({ detail: 0, target: name })).toBe(true);
   });
 });
 

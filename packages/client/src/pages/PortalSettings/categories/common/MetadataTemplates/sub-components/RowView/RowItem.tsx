@@ -41,6 +41,7 @@ import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 
 import type { TTemplateItemProps } from "../../types";
+import { isRowControlClick } from "../../utils";
 import { useContextOptions } from "../useContextOptions";
 import styles from "./RowView.module.scss";
 
@@ -62,8 +63,12 @@ const RowItem = ({
     count: item.fields?.length ?? 0,
   });
 
+  const onRowClick = (e: React.MouseEvent) => {
+    if (!isRowControlClick(e)) onEdit(item);
+  };
+
   return (
-    <Row contextOptions={contextOptions}>
+    <Row contextOptions={contextOptions} onRowClick={onRowClick}>
       <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
         <div>
           <Text fontSize="14px" fontWeight={600} truncate>

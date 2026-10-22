@@ -46,6 +46,7 @@ import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDat
 import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 
 import type { TTemplateItemProps } from "../../types";
+import { isRowControlClick } from "../../utils";
 import { useContextOptions } from "../useContextOptions";
 import styles from "./TableView.module.scss";
 
@@ -63,44 +64,50 @@ const TableRow = ({
   const { i18n } = useTranslation();
   const contextOptions = useContextOptions({ item, onEdit, onDelete });
 
+  const onRowClick = (e: React.MouseEvent) => {
+    if (!isRowControlClick(e)) onEdit(item);
+  };
+
   return (
-    <TableRowComponent
-      className={classNames(styles.tableRow, {
-        [styles.hideColumns]: hideColumns,
-      })}
-      contextOptions={contextOptions}
-      hideColumns={hideColumns}
-      dataTestId={`metadata_template_row_${item.id}`}
-    >
-      <TableCell>
-        <Text fontWeight={600} truncate>
-          {item.name}
-        </Text>
-      </TableCell>
-      <TableCell>
-        <Text className={styles.secondaryText} fontWeight={600}>
-          {item.fields?.length ?? 0}
-        </Text>
-      </TableCell>
-      <TableCell>
-        <Text className={styles.secondaryText} fontWeight={600} truncate>
-          {Encoder.htmlDecode(item.createBy.displayName)}
-        </Text>
-      </TableCell>
-      <TableCell>
-        <Text className={styles.secondaryText} fontWeight={600} truncate>
-          {getCorrectDate(i18n.language, item.modifiedOn)}
-        </Text>
-      </TableCell>
-      <TableCell>
-        <ToggleButton
-          className={styles.toggleButton}
-          isChecked={item.visible}
-          onChange={() => onToggleVisible(item)}
-          dataTestId={`metadata_template_visible_${item.id}`}
-        />
-      </TableCell>
-    </TableRowComponent>
+    <div className={styles.rowWrapper} onClick={onRowClick}>
+      <TableRowComponent
+        className={classNames(styles.tableRow, {
+          [styles.hideColumns]: hideColumns,
+        })}
+        contextOptions={contextOptions}
+        hideColumns={hideColumns}
+        dataTestId={`metadata_template_row_${item.id}`}
+      >
+        <TableCell>
+          <Text fontWeight={600} truncate>
+            {item.name}
+          </Text>
+        </TableCell>
+        <TableCell>
+          <Text className={styles.secondaryText} fontWeight={600}>
+            {item.fields?.length ?? 0}
+          </Text>
+        </TableCell>
+        <TableCell>
+          <Text className={styles.secondaryText} fontWeight={600} truncate>
+            {Encoder.htmlDecode(item.createBy.displayName)}
+          </Text>
+        </TableCell>
+        <TableCell>
+          <Text className={styles.secondaryText} fontWeight={600} truncate>
+            {getCorrectDate(i18n.language, item.modifiedOn)}
+          </Text>
+        </TableCell>
+        <TableCell>
+          <ToggleButton
+            className={classNames(styles.toggleButton, "toggleButton")}
+            isChecked={item.visible}
+            onChange={() => onToggleVisible(item)}
+            dataTestId={`metadata_template_visible_${item.id}`}
+          />
+        </TableCell>
+      </TableRowComponent>
+    </div>
   );
 };
 

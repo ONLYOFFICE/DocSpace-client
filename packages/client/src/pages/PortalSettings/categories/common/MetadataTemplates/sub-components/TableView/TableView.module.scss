@@ -39,6 +39,31 @@
   :global(.table-container_header) {
     position: absolute;
   }
+
+  :global(.table-list-item) {
+    margin-top: -1px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--files-section-row-view-checked-background);
+
+      :global(.table-container_cell) {
+        margin-top: -1px;
+        border-top: 1px solid var(--files-section-table-view-row-border-color);
+        margin-inline-start: -24px;
+        padding-inline-start: 24px;
+      }
+
+      :global(.table-container_row-context-menu-wrapper) {
+        margin-inline-end: -20px;
+        padding-inline-end: 20px;
+      }
+    }
+  }
+}
+
+.rowWrapper {
+  display: contents;
 }
 
 .tableRow {

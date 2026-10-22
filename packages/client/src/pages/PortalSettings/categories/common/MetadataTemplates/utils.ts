@@ -77,6 +77,12 @@ export const getFieldTypeLabel = (t: TTranslation, type: MetadataFieldType) => {
   }
 };
 
+const ROW_CONTROLS =
+  ".table-container_row-context-menu-wrapper, .row_context-menu-wrapper, .toggleButton";
+
+export const isRowControlClick = (e: Pick<MouseEvent, "detail" | "target">) =>
+  e.detail === 0 || !!(e.target as HTMLElement).closest(ROW_CONTROLS);
+
 export const moveItem = <T>(items: T[], from: number, to: number): T[] => {
   if (from === to || to < 0 || to >= items.length) return items;
 

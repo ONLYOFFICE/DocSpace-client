@@ -200,10 +200,15 @@ export function getUserFromConfirm(userId, confirmKey = null) {
 }
 
 export function getUserPhoto(userId) {
-  return request({
-    method: "get",
-    url: `/people/${userId}/photo`,
-  });
+  const skipRedirect = true;
+
+  return request(
+    {
+      method: "get",
+      url: `/people/${userId}/photo`,
+    },
+    skipRedirect,
+  );
 }
 
 export async function startEmptyPersonal() {

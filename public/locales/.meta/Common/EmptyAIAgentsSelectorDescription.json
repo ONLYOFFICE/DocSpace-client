@@ -1,23 +1,16 @@
 {
-  "key_path": "EmptyRoomsHeaderAgent",
-  "content": "No agents here yet",
-  "content_en_sha1_hash": "e6f0a167840ed14c72445fd927a603c17bf1fa27",
-  "created_at": "2025-11-03T12:10:17.484Z",
-  "updated_at": "2026-08-24T22:30:00.771Z",
+  "key_path": "EmptyAIAgentsSelectorDescription",
+  "content": "Create a new agent to add files to its knowledge base.",
+  "content_en_sha1_hash": "cde9704427f4a52c9fd5b831aa72406ad4ae9de8",
+  "created_at": "2026-10-21T00:10:01.908Z",
+  "updated_at": "2026-10-21T00:12:37.447Z",
   "comment": {
-    "text": "This is a header text displayed when there are no agents listed in the \"Rooms\" section of the application.",
+    "text": "Description on the empty AI agents list of the file/folder picker opened to move, copy or restore files, shown above a 'New agent' link; it invites the user to create an AI agent so the files can be placed in that agent's knowledge base. Keep the verb neutral (it covers move, copy and restore), imperative mood.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:53:48.222Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-10-21T00:12:37.447Z",
+    "model": "claude-opus-5-5"
   },
-  "usage": [
-    {
-      "file_path": "@onlyoffice/apps-ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 244,
-      "context": "return t(\"SelectorEmptyScreenHeaderKnowledge\");\n }\n \n if (isEmptyFilesRootScreen) return t(\"SelectorEmptyScreenHeader\");\n \n if (isEmptyAgentsRootScreen) return t(\"EmptyRoomsHeaderAgent\");\n \n return t(\"EmptyRoomsHeader\");\n }, [isKnowledgeFolder, isEmptyFilesRootScreen, isEmptyAgentsRootScreen, t]);\n \n const emptyScreenDescription = isEmptyFilesRootScreen",
-      "module": "@onlyoffice/apps-ui-kit"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -149,7 +142,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

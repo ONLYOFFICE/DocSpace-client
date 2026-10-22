@@ -133,11 +133,11 @@ const ChangeAILimitDialog = ({
   const canSave = amount !== null && !isOutOfRange && isDirty && !isLoading;
 
   const isSamePeriod = Boolean(limit && period === limit.period);
-  const periodEnd = isSamePeriod && limit ? limit.periodEnd : null;
+  const periodEnd = limit?.periodEnd ?? null;
   const date = formatPeriodEnd(periodEnd, i18n.language);
   const spentValue = limit?.amountConsumed ?? 0;
-  const isSpentKnown = isSamePeriod;
-  const isBelowSpent = isSpentKnown && amount !== null && amount < spentValue;
+  const isBelowSpent =
+    isSamePeriod && !isOutOfRange && amount !== null && amount < spentValue;
 
   const getCountedFromHint = () => {
     switch (period) {
@@ -152,39 +152,41 @@ const ChangeAILimitDialog = ({
     }
   };
 
+  const renderWarning = () => {
+    if (!isBelowSpent || amount === null) return null;
+
+    const values = {
+      spent: format(spentValue),
+      amount: format(amount),
+      date,
+    };
+    const components = { 1: <Text as="span" fontWeight={600} /> };
+
+    return (
+      <Text className={classNames(styles.status, styles.statusWarning)}>
+        {periodEnd ? (
+          <Trans
+            t={t}
+            i18nKey="Common:LimitBelowSpent"
+            values={values}
+            components={components}
+          />
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="Common:LimitBelowSpentLifetime"
+            values={values}
+            components={components}
+          />
+        )}
+      </Text>
+    );
+  };
+
   const renderSpending = () => {
-    if (isBelowSpent && amount !== null) {
-      const values = {
-        spent: format(spentValue),
-        amount: format(amount),
-        date,
-      };
-      const components = { 1: <Text as="span" fontWeight={600} /> };
-
-      return (
-        <Text className={classNames(styles.status, styles.statusWarning)}>
-          {periodEnd ? (
-            <Trans
-              t={t}
-              i18nKey="Common:LimitBelowSpent"
-              values={values}
-              components={components}
-            />
-          ) : (
-            <Trans
-              t={t}
-              i18nKey="Common:LimitBelowSpentLifetime"
-              values={values}
-              components={components}
-            />
-          )}
-        </Text>
-      );
-    }
-
     const parts: string[] = [];
 
-    if (isSpentKnown && limit && limit.amountValue !== null) {
+    if (limit && limit.amountValue !== null) {
       parts.push(
         t("Common:AISpentOfLimit", {
           spent: format(spentValue),
@@ -200,6 +202,9 @@ const ChangeAILimitDialog = ({
 
     return <Text className={styles.status}>{parts.join(" ")}</Text>;
   };
+
+  const spending = limit ? renderSpending() : null;
+  const warning = renderWarning();
 
   const onSave = async () => {
     if (!canSave || amount === null) return;
@@ -226,11 +231,20 @@ const ChangeAILimitDialog = ({
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
+      autoMaxHeight
     >
       <ModalDialog.Header>{t("Common:ChangeAILimit")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.content}>
           <Text>{t("Common:SetAILimitDescription")}</Text>
+          {spending ? (
+            <div className={styles.currentPeriod}>
+              <Text className={styles.status}>
+                {t("Common:AILimitCurrentPeriod")}
+              </Text>
+              {spending}
+            </div>
+          ) : null}
           <div className={styles.controls}>
             <div className={styles.amount}>
               <LimitAmountField
@@ -253,8 +267,9 @@ const ChangeAILimitDialog = ({
             />
           </div>
           <div className={styles.statusBlock}>
-            <Text className={styles.status}>{getCountedFromHint()}</Text>
-            {renderSpending()}
+            {warning ?? (
+              <Text className={styles.status}>{getCountedFromHint()}</Text>
+            )}
           </div>
         </div>
       </ModalDialog.Body>

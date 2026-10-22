@@ -139,6 +139,7 @@
   "AILimitCountedFromLifetime": "Counted from the moment the limit is set, never resets.",
   "AILimitCountedFromMonth": "Counted from the 1st of the month.",
   "AILimitCountedFromWeek": "Counted from Monday.",
+  "AILimitCurrentPeriod": "Current period:",
   "AILimitReset": "AI spending limit successfully set to default.",
   "AILimits": "AI limits",
   "AILimitSet": "AI spending limit successfully set.",

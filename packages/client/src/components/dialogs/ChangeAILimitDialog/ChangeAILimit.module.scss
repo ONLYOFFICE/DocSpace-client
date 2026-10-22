@@ -64,10 +64,13 @@
   }
 }
 
-.statusBlock {
+.currentPeriod {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.statusBlock {
   margin-top: -4px;
 }
 

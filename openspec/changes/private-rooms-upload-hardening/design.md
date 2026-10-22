@@ -40,7 +40,7 @@ The answer decides whether a requirement and a locale key are added. Tasks after
 
 **D4. A row drop trusts the row, not the late snapshot.** Case (b) applies only when `row.parentId` equals the snapshot's folder; otherwise the row goes through the path lookup (d) (`resolveFolderTarget`). The snapshot is also taken on the native `drop` event, before the directory read starts.
 
-**D5. The gate fails closed.** `resolveUploadGate` refuses a private target whose room type is neither null-safe custom nor `RoomsType.CustomRoom`, with `Common:EncryptionPrepareFailed`.
+**D5. The gate fails closed.** `resolveUploadGate` refuses a private target whose room type is not `RoomsType.CustomRoom`, a missing type included, with `Common:EncryptionPrepareFailed`.
 
 **D6. Leftovers.** Delete `Items.js`; read the quota from the target folder; add the wiring tests; turn restating comments into `Spec:` pointers (`start.helpers.ts:397`, `helpers.ts:45`, `target.helpers.ts:81`, `encrypted-upload.ts:88`).
 

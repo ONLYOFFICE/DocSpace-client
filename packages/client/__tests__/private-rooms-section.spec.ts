@@ -342,6 +342,23 @@ test.describe("Private section — rooms open inside it", () => {
     await expect(navItem(page, "private-rooms")).toHaveClass(isActive);
   });
 
+  test("Row link of the Rooms list", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/shared/filter?folder=${ROOM_ID}`);
+
+    await expect(page).toHaveURL(
+      `${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`,
+      { timeout: 15000 },
+    );
+    await expect(fileRow(page, FILE_TITLE)).toBeVisible({ timeout: 15000 });
+    await expect(
+      page.getByRole("heading", { name: ROOM_TITLE, exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Private", exact: true }),
+    ).toHaveCount(0);
+    await expect(page.getByTestId("quick-private-room")).toHaveCount(0);
+  });
+
   test("Archived room link", async ({ page, baseUrl }) => {
     await page.goto(
       `${baseUrl}/rooms/archived/filter?folder=${ARCHIVED_ROOM_ID}`,

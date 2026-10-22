@@ -47,6 +47,7 @@ import {
   getPrivateAddressOfE2eRoomsAddress,
   getRoomsAddressOfPrivateAddress,
   getSectionAddressCorrection,
+  isPrivateRoomsListRoot,
   type TSectionDecision,
 } from "../privateRoomsSection";
 import {
@@ -187,6 +188,27 @@ describe("Private section of a room opened from elsewhere", () => {
   });
 });
 
+describe("Private list root, as the header title reads it", () => {
+  it("is the list address with the rooms root loaded", () => {
+    expect(isPrivateRoomsListRoot({ pathname: "/private/filter" }, true)).toBe(
+      true,
+    );
+  });
+
+  it("Row link of the Rooms list: a room loaded under the list address is not the list", () => {
+    expect(isPrivateRoomsListRoot({ pathname: "/private/filter" }, false)).toBe(
+      false,
+    );
+  });
+
+  it.each(["/private/12/filter", "/private/archived/filter", "/rooms/shared/filter"])(
+    "is not %s",
+    (pathname) => {
+      expect(isPrivateRoomsListRoot({ pathname }, true)).toBe(false);
+    },
+  );
+});
+
 describe("Section decided before the folder is shown", () => {
   const decide = (decision: Partial<TSectionDecision>) =>
     getSectionAddressCorrection({
@@ -203,7 +225,7 @@ describe("Section decided before the folder is shown", () => {
 
   it.each([
     ["/rooms/shared/12/filter", "?folder=12", "/private/12/filter?folder=12"],
-    ["/rooms/shared/filter", "?folder=12", "/private/filter?folder=12"],
+    ["/rooms/shared/filter", "?folder=12", "/private/12/filter?folder=12"],
     [
       "/rooms/archived/filter",
       "?folder=12&page=1",

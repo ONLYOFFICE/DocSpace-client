@@ -47,6 +47,17 @@ describe("getQuickActionsSection — Private section", () => {
     ).toBe("private-rooms");
   });
 
+  it("Row link of the Rooms list: a room loaded under the Private list address gets no Private room tile", () => {
+    expect(
+      getQuickActionsSection({
+        isRoom: true,
+        isPrivacyFolder: true,
+        isRoomsFolder: false,
+        isPrivateRoomsSection: true,
+      }),
+    ).toBe("private");
+  });
+
   it("keeps the room tiles of the Rooms list", () => {
     expect(getQuickActionsSection({ isRoomsFolder: true })).toBe("rooms");
   });

@@ -75,7 +75,7 @@ export type SectionFlags = {
   isAIAgentsFolder?: boolean;
   // View-level flags (already computed in Home/Header).
   isFormsSection?: boolean; // the "Forms" section root (CategoryType.Forms)
-  isPrivateRoomsSection?: boolean; // the Private list root (CategoryType.PrivateRooms)
+  isPrivateRoomsSection?: boolean; // the Private list address (CategoryType.PrivateRooms)
   isContactsPage?: boolean;
   isProfile?: boolean;
   isSettingsPage?: boolean;
@@ -122,8 +122,8 @@ export const getQuickActionsSection = (
   if (isFormsSection) return "forms";
 
   // Private list root → the Private room tile. It is a Rooms list root too, so
-  // it must be checked first.
-  if (isPrivateRoomsSection) return "private-rooms";
+  // it must be checked first; a room named by the list address's query is not.
+  if (isPrivateRoomsSection && isRoomsFolder) return "private-rooms";
 
   // Rooms list root → room tiles.
   if (isRoomsFolder) return "rooms";

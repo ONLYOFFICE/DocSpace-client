@@ -78,6 +78,7 @@ import {
   hideInfoPanel as hideInfoPanelEvent,
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
+import { isPrivateRoomsListRoot } from "SRC_DIR/helpers/privateRoomsSection";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import {
   getLifetimePeriodTranslation,
@@ -791,7 +792,7 @@ const SectionHeaderContent = (props) => {
         ? t("Common:Templates")
         : t("Common:Forms");
 
-    if (getCategoryType(location) === CategoryType.PrivateRooms)
+    if (isPrivateRoomsListRoot(location, isRoomsFolder))
       return t("Common:Private");
 
     if (isContactsPage) {
@@ -824,6 +825,7 @@ const SectionHeaderContent = (props) => {
     currentGroupName,
     title,
     location,
+    isRoomsFolder,
     selectedFolder?.rootFolderType,
   ]);
 

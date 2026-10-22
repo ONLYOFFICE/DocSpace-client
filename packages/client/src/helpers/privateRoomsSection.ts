@@ -85,15 +85,31 @@ export const getPrivateAddressOfRoomsAddress = (
   { pathname, search }: { pathname: string; search: string },
   folderId: number | string,
 ) => {
-  if (getCategoryType({ pathname }) === CategoryType.Archive) {
+  const categoryType = getCategoryType({ pathname });
+
+  if (categoryType === CategoryType.Archive) {
     const params = new URLSearchParams(search);
     if (!params.has("folder")) params.set("folder", `${folderId}`);
 
     return `${PRIVATE_ARCHIVE}/filter?${params.toString()}`;
   }
 
+  // The Rooms list's row link names the room in its query only.
+  if (categoryType === CategoryType.Shared)
+    return `${PRIVATE_LIST}/${folderId}/filter${search}`;
+
   return `${PRIVATE_LIST}${pathname.slice(ROOMS_LIST.length)}${search}`;
 };
+
+/**
+ * The Private list itself is shown: its address, with the rooms root loaded
+ * rather than a room named by the query.
+ */
+export const isPrivateRoomsListRoot = (
+  location: { pathname: string },
+  isRoomsFolder: boolean | undefined,
+) =>
+  getCategoryType(location) === CategoryType.PrivateRooms && !!isRoomsFolder;
 
 /** The Private section address an `/e2e-rooms` bookmark of the former app stands for. */
 export const getPrivateAddressOfE2eRoomsAddress = (search: string) =>

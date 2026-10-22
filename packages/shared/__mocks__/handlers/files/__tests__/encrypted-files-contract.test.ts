@@ -39,7 +39,15 @@
 
 import { File as NodeFile } from "node:buffer";
 
-import { describe, it, expect, beforeAll, afterAll, beforeEach } from "vitest";
+import {
+  describe,
+  it,
+  expect,
+  beforeAll,
+  afterAll,
+  beforeEach,
+  afterEach,
+} from "vitest";
 
 import { setupServer } from "../../../e2e/msw-compat";
 import {
@@ -700,5 +708,98 @@ describe("PUT /files/fileops/delete", () => {
     expect(body.response[0]).not.toHaveProperty("files");
     expect(body.response[0]).not.toHaveProperty("folders");
     expect(handle.current!.getFiles().map((f) => f.id)).toEqual([6]);
+  });
+});
+
+describe("encryptedFiles mock — GET /files/folder/{folderId}/path (mirrors FoldersController.GetFolderPath)", () => {
+  type PathEntry = Record<string, unknown>;
+  const getPath = async (folderId: number) =>
+    (
+      (await (
+        await fetch(
+          `${BASE_URL}:${PORT}/${API_PREFIX}/files/folder/${folderId}/path`,
+        )
+      ).json()) as { response: PathEntry[] }
+    ).response;
+
+  it("answers the room from the section root down, the room carrying its type and privacy", async () => {
+    const path = await getPath(ROOM_ID);
+
+    expect(path.map((entry) => entry.id)).toEqual([2002, ROOM_ID]);
+    expect(path[1]).toMatchObject({ roomType: 5, private: true });
+  });
+
+  it("ends with the folder itself for a folder of an archived room", async () => {
+    const path = await getPath(ARCHIVED_FOLDER_ID);
+
+    expect(path.map((entry) => entry.id)).toEqual([
+      11244,
+      ARCHIVED_ROOM_ID,
+      ARCHIVED_FOLDER_ID,
+    ]);
+    expect(path[1]).toMatchObject({ private: true, rootFolderType: 20 });
+    expect(path[2]).toMatchObject({ private: false });
+  });
+});
+
+describe("encryptedFiles mock — a second room in the same spec (withOtherRooms)", () => {
+  const OTHER_ROOM_ID = 9300;
+  const otherHandle: { current: EncryptedFilesHandlerHandle | null } = {
+    current: null,
+  };
+
+  beforeEach(() => {
+    server.use(
+      ...encryptedFilesHandlers(PORT, {
+        roomId: OTHER_ROOM_ID,
+        ownerId: ALICE_ID,
+        currentUserId: ALICE_ID,
+        withOtherRooms: true,
+        handle: otherHandle,
+      }),
+    );
+  });
+
+  afterEach(() => server.resetHandlers());
+
+  it("lets a file of the first room reach the instance that holds it", async () => {
+    handle.current!.setFiles([
+      {
+        id: 1,
+        title: "doc.txt",
+        encrypted: true,
+        fileKeys: [
+          { userId: ALICE_ID, publicKeyId: "alice-pk", privateKeyEnc: "wrapA" },
+        ],
+      },
+    ]);
+
+    const res = await fetch(FILE_ACCESS_URL(1));
+
+    expect(res.status).toBe(200);
+    expect(otherHandle.current!.getRequests()).toEqual([]);
+  });
+
+  it("opens an upload session in its own room and leaves the first room's to that instance", async () => {
+    const create = (folderId: number) =>
+      fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/${folderId}/session`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fileName: "blob.bin",
+          fileSize: 4,
+          encrypted: true,
+        }),
+      });
+
+    await create(OTHER_ROOM_ID);
+    await create(ROOM_ID);
+
+    expect(otherHandle.current!.getSessions().map((s) => s.folderId)).toEqual([
+      OTHER_ROOM_ID,
+    ]);
+    expect(handle.current!.getSessions().map((s) => s.folderId)).toEqual([
+      ROOM_ID,
+    ]);
   });
 });

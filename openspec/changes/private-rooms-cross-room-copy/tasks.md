@@ -13,7 +13,7 @@
 
 ## 3. End-to-end
 
-- [ ] 3.1 Let the private-room MSW handlers serve a second private room with different members, and its path through `files/folder/{id}/path`, mirroring the server DTOs already used by `privateRoomList.ts`; verify with the mock contract tests `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`
+- [x] 3.1 Let the private-room MSW handlers serve a second private room with different members, and its path through `files/folder/{id}/path`, mirroring the server DTOs already used by `privateRoomList.ts`; verify with the mock contract tests `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`
 - [ ] 3.2 E2E: copy an encrypted file from an archived private room into an active private room in `packages/client/__tests__/private-room-archived.spec.ts`, and from one active private room into another in the private-room suite, asserting an encrypted upload session, DSE3 chunks only, and access entries written for the destination room's members only; verify with `cd packages/client && pnpm exec playwright test private-room-archived.spec.ts` and the new case in Docker
 - [ ] 3.3 E2E: Ctrl+X in one private room and Ctrl+V in another shows `Common:CannotMoveToAnotherPrivateRoom` and sends no operation request, and the Move dialog of a private room offers only that room; verify with the Playwright cases named "Paste into another private room" and "Move dialog"
 

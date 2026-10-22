@@ -42,7 +42,9 @@ export type PrivateRoomListOptions = {
   roomId: number;
   title?: string;
   ownerId?: string;
-  /** Rooms listed after the private one, with `private: false`. */
+  /** More private rooms, listed right after the first one. */
+  otherPrivateRooms?: { roomId: number; title: string }[];
+  /** Rooms listed after the private ones, with `private: false`. */
   ordinaryRooms?: { roomId: number; title: string }[];
 };
 
@@ -134,6 +136,9 @@ export const privateRoomListHandler = (
 
   const folders = [
     roomDto(opts.roomId, title, true),
+    ...(opts.otherPrivateRooms ?? []).map((room) =>
+      roomDto(room.roomId, room.title, true),
+    ),
     ...(opts.ordinaryRooms ?? []).map((room) =>
       roomDto(room.roomId, room.title, false),
     ),

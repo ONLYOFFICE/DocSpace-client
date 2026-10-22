@@ -127,6 +127,12 @@ export type EncryptedFilesHandlerOptions = {
   title?: string;
   /** Folders directly inside the room. */
   folders?: EncryptedFolderSeed[];
+  /**
+   * Mock-only: another instance serves other rooms in the same spec, so a
+   * file, folder or upload session this room does not hold falls through to
+   * it instead of being answered 403 or 404.
+   */
+  withOtherRooms?: boolean;
   handle?: { current: EncryptedFilesHandlerHandle | null };
 };
 
@@ -374,6 +380,9 @@ export const encryptedFilesHandlers = (
   const isPrivate = opts.isPrivate ?? true;
   const roomTitle = opts.title ?? "Private Room";
   const folders = opts.folders ?? [];
+  const withOtherRooms = !!opts.withOtherRooms;
+  const holdsFolder = (folderId: number) =>
+    folderId === roomId || folders.some((f) => f.id === folderId);
   const roomDto = () => buildFolderDto(roomId, archived, isPrivate, roomTitle);
   const ownerId =
     opts.ownerId ?? "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
@@ -563,6 +572,36 @@ export const encryptedFilesHandlers = (
     ),
 
     /**
+     * Mirrors FoldersController.GetFolderPath (HttpGet "folder/{folderId}/path"):
+     * the breadcrumbs of the folder as FileEntryBaseDto entries, from the
+     * section root down to the folder itself, each built by FolderDtoHelper.
+     */
+    http.get(
+      `${apiBase}/files/folder/:folderId(\\d+)/path`,
+      ({ params, request }) => {
+        const folderId = Number(params.folderId);
+        const subfolder = folders.find((f) => f.id === folderId);
+        if (folderId !== roomId && !subfolder) return undefined;
+        requests.push({ method: "GET", url: new URL(request.url).pathname });
+        const section = sectionOf(archived);
+        return okResponse([
+          {
+            id: section.id,
+            title: section.title,
+            parentId: 0,
+            rootFolderId: section.id,
+            rootFolderType: section.folderType,
+            fileEntryType: 1,
+          },
+          roomDto(),
+          ...(subfolder
+            ? [buildSubfolderDto(subfolder, roomId, archived, isPrivate)]
+            : []),
+        ]);
+      },
+    ),
+
+    /**
      * Mirrors UploadController.CheckUpload — preflight collision check; returns
      * the list of files in the destination folder that would conflict.
      */
@@ -593,6 +632,7 @@ export const encryptedFilesHandlers = (
       ({ params, request }) => {
         const fileId = Number(params.fileId);
         const f = files.get(fileId);
+        if (!f && withOtherRooms) return undefined;
         requests.push({
           method: "GET",
           url: new URL(request.url).pathname,
@@ -629,6 +669,7 @@ export const encryptedFilesHandlers = (
       `${apiBase}/files/:fileId(\\d+)/access`,
       async ({ params, request }) => {
         const fileId = Number(params.fileId);
+        if (!files.has(fileId) && withOtherRooms) return undefined;
         const body = (await request.json()) as unknown;
         requests.push({
           method: "PUT",
@@ -679,6 +720,7 @@ export const encryptedFilesHandlers = (
       ({ params, request }) => {
         const fileId = Number(params.fileId);
         const f = files.get(fileId);
+        if (!f && withOtherRooms) return undefined;
         requests.push({
           method: "GET",
           url: new URL(request.url).pathname,
@@ -708,6 +750,7 @@ export const encryptedFilesHandlers = (
       ({ params, request }) => {
         const fileId = Number(params.fileId);
         const f = files.get(fileId);
+        if (!f && withOtherRooms) return undefined;
         requests.push({
           method: "GET",
           url: new URL(request.url).pathname,
@@ -737,6 +780,7 @@ export const encryptedFilesHandlers = (
       `${apiBase}/files/:folderId(\\d+)/session`,
       async ({ params, request }) => {
         const folderId = Number(params.folderId);
+        if (withOtherRooms && !holdsFolder(folderId)) return undefined;
         const body = (await request.json()) as {
           fileName: string;
           fileSize: number;
@@ -782,6 +826,7 @@ export const encryptedFilesHandlers = (
       `${apiBase}/files/:folderId(\\d+)/session/:sessionId/upload`,
       async ({ params, request }) => {
         const session = sessions.get(String(params.sessionId));
+        if (!session && withOtherRooms) return undefined;
         if (!session || session.completed) {
           return errorResponse(404, "session not found");
         }
@@ -810,6 +855,7 @@ export const encryptedFilesHandlers = (
       `${apiBase}/files/:folderId(\\d+)/session/:sessionId`,
       async ({ params, request }) => {
         const session = sessions.get(String(params.sessionId));
+        if (!session && withOtherRooms) return undefined;
         if (!session || session.completed) {
           return errorResponse(404, "session not found");
         }
@@ -860,6 +906,7 @@ export const encryptedFilesHandlers = (
       `${apiBase}/files/:folderId(\\d+)/session/:sessionId/finalize`,
       async ({ params, request }) => {
         const session = sessions.get(String(params.sessionId));
+        if (!session && withOtherRooms) return undefined;
         requests.push({
           method: "PUT",
           url: new URL(request.url).pathname,

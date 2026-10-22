@@ -151,7 +151,7 @@ describe("AppsStore.isPrivateRoomsSectionAvailable", () => {
     window.localStorage.removeItem("privateRooms");
   });
 
-  it("is off without the opt-in, whatever the app says", async () => {
+  it("Opt-in absent: off whatever the app says", async () => {
     getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: true }]);
 
     for (const standalone of [false, true]) {
@@ -161,7 +161,7 @@ describe("AppsStore.isPrivateRoomsSectionAvailable", () => {
     }
   });
 
-  it("stays off when the opt-in is set after the store was built", async () => {
+  it("Opt-in set after load: stays off when the opt-in is set after the store was built", async () => {
     getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: true }]);
     const store = createStore(false);
     optIn();

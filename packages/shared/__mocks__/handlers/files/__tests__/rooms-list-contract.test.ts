@@ -112,6 +112,24 @@ describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonCo
     },
   );
 
+  it.each([
+    ["Active", 2002, "Rooms"],
+    ["Archive", 11244, "Archive"],
+  ])(
+    "answers the section root of searchArea=%s as current",
+    async (searchArea, id, title) => {
+      useList();
+
+      const list = (await getRooms(`?searchArea=${searchArea}`)) as unknown as {
+        current: { id: number; title: string };
+        pathParts: { id: number }[];
+      };
+
+      expect(list.current).toMatchObject({ id, title });
+      expect(list.pathParts.map((part) => part.id)).toEqual([id]);
+    },
+  );
+
   it("NotPrivate leaves the private room out", async () => {
     useList();
 

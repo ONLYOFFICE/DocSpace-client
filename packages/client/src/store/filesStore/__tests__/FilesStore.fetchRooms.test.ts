@@ -227,7 +227,7 @@ describe("FilesStore rooms requests — Private section scope", () => {
     ["/private/filter", RoomSearchArea.Active],
     ["/private/12/filter", RoomSearchArea.Active],
     ["/private/archived/filter", RoomSearchArea.Archive],
-  ])("Private on %s", async (pathname, searchArea) => {
+  ])("List opened: Private on %s", async (pathname, searchArea) => {
     openAddress(pathname);
     const store = storeOnRoomsList(true);
     const getRooms = vi
@@ -265,6 +265,27 @@ describe("FilesStore rooms requests — Private section scope", () => {
     },
   );
 
+  it.each([
+    ["Search in Rooms", { filterValue: "budget" }],
+    ["Room group opened in Rooms", { groupId: "group-1" }],
+  ])(
+    "%s: NotPrivate while the section is available",
+    async (_, query) => {
+      const store = storeOnRoomsList(true);
+      const getRooms = vi
+        .spyOn(api.rooms, "getRooms")
+        .mockResolvedValue(roomsPayload([room(1)]) as never);
+      const filter = Object.assign(store.roomsFilter.clone(), query);
+
+      await store.fetchRooms(0, filter);
+
+      expect(sentFilter(getRooms)).toMatchObject({
+        ...query,
+        privacyFilter: RoomPrivacyFilter.NotPrivate,
+      });
+    },
+  );
+
   it("none while the section is not available", async () => {
     const getRooms = vi
       .spyOn(api.rooms, "getRooms")
@@ -281,7 +302,7 @@ describe("FilesStore rooms requests — Private section scope", () => {
     expect(sentFilter(getRooms, 1).privacyFilter).toBeNull();
   });
 
-  it("a URL privacyFilter and searchArea are overridden, roomsFilter is not mutated", async () => {
+  it("Address carries another privacy value: the URL privacyFilter and searchArea are overridden, roomsFilter is not mutated", async () => {
     openAddress("/private/filter");
     const store = storeOnRoomsList(true);
     const getRooms = vi
@@ -302,7 +323,7 @@ describe("FilesStore rooms requests — Private section scope", () => {
     expect(store.roomsFilter.searchArea).toBe(RoomSearchArea.Archive);
   });
 
-  it("the next page keeps the scope", async () => {
+  it("Next page: the next-page request keeps the scope", async () => {
     openAddress("/private/archived/filter");
     const store = storeOnRoomsList(true);
     store.folders = [room(1)] as never;
@@ -321,7 +342,7 @@ describe("FilesStore rooms requests — Private section scope", () => {
     expect(store.roomsFilter.privacyFilter).toBeNull();
   });
 
-  it("the refill after rooms leave the list keeps the scope", async () => {
+  it("Refill after archiving: the refill after rooms leave the list keeps the scope", async () => {
     openAddress("/private/filter");
     const store = storeOnRoomsList(true);
     store.folders = [room(1), room(2), room(3)] as never;

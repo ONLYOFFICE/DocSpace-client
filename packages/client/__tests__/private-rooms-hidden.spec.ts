@@ -37,6 +37,7 @@ import type { Page } from "@playwright/test";
 import {
   capabilitiesHandler,
   filesSettingsHandler,
+  privateRoomListHandler,
   roomListHandler,
   rootHandler,
   selfActivationStatusHandler,
@@ -82,6 +83,23 @@ const privateRoomCard = (page: Page) =>
     `[data-testid="room-type-list-item"][data-selected-id="${PRIVATE_ROOM_TYPE}"]`,
   );
 
+const navItem = (page: Page, id: string) =>
+  page.locator(`nav [data-item-id="${id}"]`);
+
+const roomLink = (page: Page, title: string) =>
+  page.locator(`[data-title="${title}"] [data-testid="link"]`).first();
+
+/** The query of every rooms list request the page sends. */
+const recordRoomsRequests = (page: Page) => {
+  const requests: URLSearchParams[] = [];
+  page.on("request", (request) => {
+    const url = new URL(request.url());
+    if (request.method() === "GET" && url.pathname.endsWith("/files/rooms"))
+      requests.push(url.searchParams);
+  });
+  return requests;
+};
+
 test.describe("Private rooms behind the localStorage flag", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
@@ -113,13 +131,57 @@ test.describe("Private rooms behind the localStorage flag", () => {
   }) => {
     mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.IsDefault));
     await disablePrivateRooms(page);
+    const roomsRequests = recordRoomsRequests(page);
 
     await page.goto(`${baseUrl}${ROOMS_URL}`);
     await expect(page.getByTestId("table-body")).toBeVisible({ timeout: 15000 });
 
-    await expect(page.locator('nav [data-item-id="private-rooms"]')).toHaveCount(
-      0,
+    await expect(navItem(page, "private-rooms")).toHaveCount(0);
+    expect(roomsRequests.length).toBeGreaterThan(0);
+    for (const params of roomsRequests)
+      expect(params.has("privacyFilter")).toBe(false);
+  });
+
+  test("Sidebar with the flag", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.IsDefault));
+
+    await page.goto(`${baseUrl}${ROOMS_URL}`);
+    await expect(navItem(page, "private-rooms")).toHaveText("Private", {
+      timeout: 15000,
+    });
+
+    await page.goto(`${baseUrl}/e2e-rooms`);
+
+    await expect
+      .poll(() => new URL(page.url()).pathname, { timeout: 15000 })
+      .toBe("/private/filter");
+    await expect(navItem(page, "private-rooms-archive")).toBeVisible();
+  });
+
+  test("Private room listed with the section", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      privateRoomListHandler(TEST_PORT, {
+        roomId: 9700,
+        title: "Gated Private Room",
+        ordinaryRooms: [{ roomId: 9701, title: "Gated Ordinary Room" }],
+      }),
     );
+
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page, "Gated Private Room")).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(roomLink(page, "Gated Ordinary Room")).toHaveCount(0);
+
+    await page.goto(`${baseUrl}${ROOMS_URL}filter`);
+    await expect(roomLink(page, "Gated Ordinary Room")).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(roomLink(page, "Gated Private Room")).toHaveCount(0);
   });
 
   test("Direct navigation without the flag", async ({ page, baseUrl }) => {

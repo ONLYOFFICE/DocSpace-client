@@ -46,6 +46,8 @@ export type PrivateRoomListOptions = {
   otherPrivateRooms?: { roomId: number; title: string }[];
   /** Rooms listed after the private ones, with `private: false`. */
   ordinaryRooms?: { roomId: number; title: string }[];
+  /** The new-items count (`new`) of the first private room. */
+  newItems?: number;
 };
 
 const okResponse = <T>(response: T): Response =>
@@ -94,11 +96,16 @@ export const privateRoomListHandler = (
     hasAvatar: false,
   };
 
-  const roomDto = (id: number, roomTitle: string, isPrivate: boolean) => ({
+  const roomDto = (
+    id: number,
+    roomTitle: string,
+    isPrivate: boolean,
+    newItems = 0,
+  ) => ({
     parentId: 2002,
     filesCount: 0,
     foldersCount: 0,
-    new: 0,
+    new: newItems,
     mute: false,
     tags: [],
     logo: {
@@ -135,7 +142,7 @@ export const privateRoomListHandler = (
   });
 
   const folders = [
-    roomDto(opts.roomId, title, true),
+    roomDto(opts.roomId, title, true, opts.newItems),
     ...(opts.otherPrivateRooms ?? []).map((room) =>
       roomDto(room.roomId, room.title, true),
     ),
@@ -184,14 +191,37 @@ export const privateRoomListHandler = (
     new: 0,
   };
 
+  // The Archive root has id 11244 in the root mock (root.ts).
+  const archiveBody = {
+    ...body,
+    current: {
+      ...current,
+      id: 11244,
+      rootFolderId: 11244,
+      title: "Archive",
+      rootFolderType: 20,
+    },
+    pathParts: [{ id: 11244, title: "Archive", folderType: 20 }],
+  };
+
   /**
-   * Mirrors VirtualRoomsController.GetRoomsFolder (HttpGet "rooms") ->
-   * FileStorageService.GetFolderItemsAsync on the Rooms section, whose
-   * breadcrumbs, and so `pathParts`, are the section alone. `privacyFilter`
-   * keeps the private room or the ordinary ones (withRoomPrivacyFilter).
+   * Mirrors VirtualRoomsController.GetRoomsFolder (HttpGet "rooms"):
+   * GetRoomsSectionIdAsync picks the Archive root for searchArea=Archive and
+   * the Rooms root otherwise, and FileStorageService.GetFolderItemsAsync
+   * answers that section as `current` and as the only breadcrumb, titled by
+   * FilesMappingAction (FilesUCResource.Archive or VirtualRooms). Both areas
+   * list the same rooms. `privacyFilter` keeps the private room or the
+   * ordinary ones (withRoomPrivacyFilter).
    */
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ROOMS_LIST}`,
-    ({ request }) => okResponse(withRoomPrivacyFilter(body, request)),
+    ({ request }) => {
+      const isArchive =
+        new URL(request.url).searchParams.get("searchArea") === "Archive";
+
+      return okResponse(
+        withRoomPrivacyFilter(isArchive ? archiveBody : body, request),
+      );
+    },
   );
 };

@@ -228,6 +228,20 @@ test.describe("Private section — sidebar", () => {
       "private-rooms-archive",
     ]);
   });
+
+  test("Default page setting", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+    await expect(navItem(page, "private-rooms")).toBeVisible({
+      timeout: 15000,
+    });
+
+    await page.goto(`${baseUrl}/profile/file-management`);
+    await page.getByTestId("default_homepage_combobox").click();
+
+    const options = page.getByTestId("default_homepage_combobox_dropdown");
+    await expect(options.getByText("Rooms", { exact: true })).toBeVisible();
+    await expect(options.getByText("Private", { exact: true })).toHaveCount(0);
+  });
 });
 
 const SUBFOLDER_ID = 9502;
@@ -262,6 +276,86 @@ const keysMissing = (page: Page) =>
   page
     .getByTestId("toast-content")
     .filter({ hasText: /Encryption keys are not configured/ });
+
+/** The new-items counter of a sidebar item or of one of its sub-items. */
+const navBadge = (page: Page, id: string) =>
+  page.locator(`nav li:has([data-item-id="${id}"]) .new-items`).first();
+
+/**
+ * One new file of a room, counted under the Rooms root.
+ *
+ * - FoldersController.GetRootFolders (HttpGet "@root"): the Rooms root
+ *   reports one new item, so its sidebar item has a badge.
+ * - VirtualRoomsController.GetRoomsNewItems (HttpGet "rooms/news"): the
+ *   unseen files of the active rooms grouped by day and by room, the room in
+ *   its short form.
+ */
+const roomsNewFileHandlers = (
+  room: { id: number; title: string },
+  file: { id: number; title: string },
+) => [
+  http.get(apiAddress("files/@root"), async () => {
+    const body = await rootResolve().json();
+    for (const root of body.response)
+      if (root.current.rootFolderType === 14) root.new = 1;
+    return Response.json(body);
+  }),
+  http.get(apiAddress("files/rooms/news"), () =>
+    Response.json({
+      response: [
+        {
+          date: "2026-01-01T12:00:00.0000000+00:00",
+          items: [
+            {
+              room: {
+                id: room.id,
+                title: room.title,
+                roomType: 5,
+                logo: {
+                  original: "",
+                  large: "",
+                  medium: "",
+                  small: "",
+                  color: "8048B0",
+                },
+              },
+              items: [
+                {
+                  id: file.id,
+                  title: file.title,
+                  fileExst: ".txt",
+                  fileType: 5,
+                  folderId: room.id,
+                  rootFolderId: 2002,
+                  rootFolderType: 14,
+                  fileEntryType: 2,
+                  version: 1,
+                  viewAccessibility: {},
+                  security: { Read: true },
+                  created: "2026-01-01T12:00:00.0000000+00:00",
+                  updated: "2026-01-01T12:00:00.0000000+00:00",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      status: 0,
+      statusCode: 200,
+    }),
+  ),
+];
+
+/** Opens the Rooms new-items panel and a new file's location from it. */
+const openNewFileLocation = async (page: Page, fileName: string) => {
+  await navBadge(page, ROOMS_ID).click();
+  // The location button shows on hover, as in the panel itself.
+  const newFile = page
+    .locator('[class*="fileItem"]')
+    .filter({ hasText: fileName });
+  await newFile.hover();
+  await newFile.locator(".open-location-button").click();
+};
 
 test.describe("Private section — rooms open inside it", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -477,67 +571,10 @@ test.describe("Private section — rooms open inside it", () => {
     mockRequest,
     baseUrl,
   }) => {
-    const apiUrl = (path: string) =>
-      `${BASE_URL}:${TEST_PORT}/${API_PREFIX}/${path}`;
     mockRequest.use(
-      /**
-       * Mirrors FoldersController.GetRootFolders (HttpGet "@root"): the
-       * Rooms root reports one new item, so its sidebar item has a badge.
-       */
-      http.get(apiUrl("files/@root"), async () => {
-        const body = await rootResolve().json();
-        for (const root of body.response)
-          if (root.current.rootFolderType === 14) root.new = 1;
-        return Response.json(body);
-      }),
-      /**
-       * Mirrors VirtualRoomsController.GetRoomsNewItems (HttpGet
-       * "rooms/news"): the unseen files of the active rooms grouped by day
-       * and by room, the room in its short form.
-       */
-      http.get(apiUrl("files/rooms/news"), () =>
-        Response.json({
-          response: [
-            {
-              date: "2026-01-01T12:00:00.0000000+00:00",
-              items: [
-                {
-                  room: {
-                    id: ORDINARY_ROOM_ID,
-                    title: "Team Room",
-                    roomType: 5,
-                    logo: {
-                      original: "",
-                      large: "",
-                      medium: "",
-                      small: "",
-                      color: "8048B0",
-                    },
-                  },
-                  items: [
-                    {
-                      id: 9601,
-                      title: ORDINARY_FILE_TITLE,
-                      fileExst: ".txt",
-                      fileType: 5,
-                      folderId: ORDINARY_ROOM_ID,
-                      rootFolderId: 2002,
-                      rootFolderType: 14,
-                      fileEntryType: 2,
-                      version: 1,
-                      viewAccessibility: {},
-                      security: { Read: true },
-                      created: "2026-01-01T12:00:00.0000000+00:00",
-                      updated: "2026-01-01T12:00:00.0000000+00:00",
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-          status: 0,
-          statusCode: 200,
-        }),
+      ...roomsNewFileHandlers(
+        { id: ORDINARY_ROOM_ID, title: "Team Room" },
+        { id: 9601, title: ORDINARY_FILE_TITLE },
       ),
     );
     await page.goto(`${baseUrl}/private/filter`);
@@ -548,17 +585,7 @@ test.describe("Private section — rooms open inside it", () => {
       if (frame === page.mainFrame()) addresses.push(frame.url());
     });
 
-    await page
-      .locator(`nav li:has([data-item-id="${ROOMS_ID}"])`)
-      .getByTestId("badge")
-      .first()
-      .click();
-    // The location button shows on hover, as in the panel itself.
-    const newFile = page
-      .locator('[class*="fileItem"]')
-      .filter({ hasText: "agenda" });
-    await newFile.hover();
-    await newFile.locator(".open-location-button").click();
+    await openNewFileLocation(page, "agenda");
 
     await expect(fileRow(page, ORDINARY_FILE_TITLE)).toBeVisible({
       timeout: 15000,
@@ -569,6 +596,56 @@ test.describe("Private section — rooms open inside it", () => {
     expect(addresses.filter((address) => address.includes("/private/"))).toEqual(
       [],
     );
+  });
+
+  test("New file in a private room: no counter on the section item", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      ...roomsNewFileHandlers(
+        { id: ROOM_ID, title: ROOM_TITLE },
+        { id: 9501, title: FILE_TITLE },
+      ),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        title: ROOM_TITLE,
+        newItems: 1,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/filter`);
+    const privateRoomRow = fileRow(page, ROOM_TITLE);
+    await expect(privateRoomRow.getByTestId("badge")).toBeVisible({
+      timeout: 15000,
+    });
+
+    await expect(navBadge(page, ROOMS_ID)).toBeVisible();
+    await expect(navBadge(page, "private-rooms")).toHaveCount(0);
+    await expect(navBadge(page, "private-rooms-archive")).toHaveCount(0);
+  });
+
+  test("New file in a private room: opened from the Rooms new-items panel", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      ...roomsNewFileHandlers(
+        { id: ROOM_ID, title: ROOM_TITLE },
+        { id: 9501, title: FILE_TITLE },
+      ),
+    );
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+    await expect(navBadge(page, ROOMS_ID)).toHaveText("1", {
+      timeout: 15000,
+    });
+
+    await openNewFileLocation(page, "plan");
+
+    await expect(fileRow(page, FILE_TITLE)).toBeVisible({ timeout: 15000 });
+    expect(pathOf(page)).toBe(`/private/${ROOM_ID}/filter`);
   });
 
   test("Hand-edited address", async ({ page, baseUrl }) => {
@@ -1135,51 +1212,51 @@ test.describe("Private section — empty states", () => {
   });
 });
 
+const ARCHIVABLE_ROOM_TITLE = "Archivable Private Room";
+
 /**
- * Private → Archive holding one archived private room until it is restored.
+ * One private room that moves between the Private list and Private → Archive.
  *
- * - The list mirrors VirtualRoomsCommonController.GetRoomsFolder for
- *   searchArea=Archive: the Archive root (FolderType.Archive = 20) is
- *   `current`, and the room lies under it. withRoomPrivacyFilter applies the
- *   privacyFilter of the request.
- * - Restore mirrors OperationController.MoveBatchItems (HttpPut
- *   "fileops/move"), which the client calls with the Rooms root as the
- *   destination: it answers with the caller's move operation
+ * - The lists mirror VirtualRoomsCommonController.GetRoomsFolder:
+ *   GetRoomsSectionIdAsync answers the Archive root (FolderType.Archive = 20)
+ *   as `current` for searchArea=Archive, and the Rooms root otherwise. The room
+ *   lies under the root of its area, beside the rooms of the default list in
+ *   the active one. withRoomPrivacyFilter applies the privacyFilter of the
+ *   request.
+ * - Archive and restore mirror OperationController.MoveBatchItems (HttpPut
+ *   "fileops/move"), which the client calls with the Archive or the Rooms root
+ *   as `destFolderId`: it answers with the caller's move operation
  *   (FileOperationType.Move = 0), already finished, so the client does not
- *   poll `fileops`, and the room leaves the archive.
+ *   poll `fileops`, and the room lands in that area.
  */
-const restorableArchive = () => {
-  let restored = false;
+const privateRoomArchive = (initiallyArchived: boolean) => {
+  let archived = initiallyArchived;
+  let moved = false;
   const archiveRequests: URLSearchParams[] = [];
 
   const list = http.get(apiAddress("files/rooms*"), async ({ request }) => {
-    const { response } = await roomListResolver(
-      TypeRoomList.IsDefault,
-      undefined,
-      request,
-    ).json();
     const params = new URL(request.url).searchParams;
-    if (params.get("searchArea") !== "Archive") return Response.json({ response });
-    if (restored) archiveRequests.push(params);
+    const inArchive = params.get("searchArea") === "Archive";
+    if (inArchive && moved) archiveRequests.push(params);
 
-    // A room of the unfiltered default list lends the archived room its fields.
-    const unfiltered = await roomListResolver(TypeRoomList.IsDefault).json();
-    const [template] = unfiltered.response.folders;
-    const folders = restored
-      ? []
-      : [
-          {
-            ...template,
-            id: ARCHIVED_ROOM_ID,
-            title: "Archived Private Room",
-            roomType: 5,
-            private: true,
-            parentId: ARCHIVE_SECTION_ID,
-            rootFolderId: ARCHIVE_SECTION_ID,
-            rootFolderType: 20,
-            security: { ...template.security, Read: true, Move: true },
-          },
-        ];
+    const { response } = await roomListResolver(TypeRoomList.IsDefault).json();
+    const [template] = response.folders;
+    const sectionId = inArchive ? ARCHIVE_SECTION_ID : response.current.id;
+    const room = {
+      ...template,
+      id: ARCHIVED_ROOM_ID,
+      title: ARCHIVABLE_ROOM_TITLE,
+      roomType: 5,
+      private: true,
+      parentId: sectionId,
+      rootFolderId: sectionId,
+      rootFolderType: inArchive ? 20 : 14,
+      security: { ...template.security, Read: true, Move: true },
+    };
+    const folders = [
+      ...(archived === inArchive ? [room] : []),
+      ...(inArchive ? [] : response.folders),
+    ];
 
     return Response.json({
       response: withRoomPrivacyFilter(
@@ -1188,41 +1265,50 @@ const restorableArchive = () => {
           folders,
           count: folders.length,
           total: folders.length,
-          current: {
-            ...response.current,
-            id: ARCHIVE_SECTION_ID,
-            rootFolderId: ARCHIVE_SECTION_ID,
-            title: "Archive",
-            rootFolderType: 20,
-            folderType: 20,
-          },
+          current: inArchive
+            ? {
+                ...response.current,
+                id: ARCHIVE_SECTION_ID,
+                rootFolderId: ARCHIVE_SECTION_ID,
+                title: "Archive",
+                rootFolderType: 20,
+                folderType: 20,
+              }
+            : response.current,
         },
         request,
       ),
     });
   });
 
-  const move = http.put(apiAddress("files/fileops/move"), async () => {
-    restored = true;
-    return Response.json({
-      response: [
-        {
-          id: "mock-restore",
-          Operation: 0,
-          progress: 100,
-          error: "",
-          processed: "1",
-          finished: true,
-          status: 2,
-        },
-      ],
-    });
-  });
+  const move = http.put(
+    apiAddress("files/fileops/move"),
+    async ({ request }) => {
+      const { destFolderId } = (await request.json()) as {
+        destFolderId: number | string;
+      };
+      archived = Number(destFolderId) === ARCHIVE_SECTION_ID;
+      moved = true;
+      return Response.json({
+        response: [
+          {
+            id: "mock-move",
+            Operation: 0,
+            progress: 100,
+            error: "",
+            processed: "1",
+            finished: true,
+            status: 2,
+          },
+        ],
+      });
+    },
+  );
 
   return { handlers: [list, move], archiveRequests };
 };
 
-test.describe("Private section — restore", () => {
+test.describe("Private section — archive and restore", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -1233,15 +1319,19 @@ test.describe("Private section — restore", () => {
     );
   });
 
+  const roomContextMenu = async (page: Page) => {
+    const row = fileRow(page, ARCHIVABLE_ROOM_TITLE);
+    await expect(row).toBeVisible({ timeout: 15000 });
+    await row.getByTestId("context-menu-button").first().click();
+    return row;
+  };
+
   test("Restore from the archive", async ({ page, mockRequest, baseUrl }) => {
-    const archive = restorableArchive();
+    const archive = privateRoomArchive(true);
     mockRequest.use(...archive.handlers);
 
     await page.goto(`${baseUrl}/private/archived/filter`);
-    const archivedRow = fileRow(page, "Archived Private Room");
-    await expect(archivedRow).toBeVisible({ timeout: 15000 });
-
-    await archivedRow.getByTestId("context-menu-button").first().click();
+    const archivedRow = await roomContextMenu(page);
     await page.getByTestId("option_unarchive-room").click();
     await page.getByTestId("restore_room_dialog_submit").click();
 
@@ -1254,6 +1344,71 @@ test.describe("Private section — restore", () => {
         String(RoomPrivacyFilter.Private),
       );
     }
+  });
+
+  test("Archive a private room", async ({
+    page,
+    mockRequest,
+    wsMock,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
+      ...privateRoomArchive(false).handlers,
+    );
+    await wsMock.setupWebSocketMock();
+
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect
+      .poll(() => wsMock.isWebSocketConnected(), { timeout: 15000 })
+      .toBe(true);
+    const activeRow = await roomContextMenu(page);
+    await page.getByTestId("option_archive-room").click();
+    const moved = page.waitForResponse(/\/files\/fileops\/move/);
+    await page.getByTestId("move_to_archived_modal_submit").click();
+    await moved;
+    // Spec: server-contract, "Room socket events carry no private flag"
+    wsMock.emitModifyFolder({
+      cmd: "delete",
+      id: ARCHIVED_ROOM_ID,
+      type: "folder",
+      data: "",
+    });
+
+    await expect(activeRow).toHaveCount(0, { timeout: 15000 });
+
+    await navItem(page, "private-rooms-archive").click();
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/archived/filter");
+    await expect(fileRow(page, ARCHIVABLE_ROOM_TITLE)).toBeVisible({
+      timeout: 15000,
+    });
+
+    await page.goto(`${baseUrl}/rooms/archived/filter`);
+    await expect(page.getByTestId("empty-view")).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(fileRow(page, ARCHIVABLE_ROOM_TITLE)).toHaveCount(0);
+    wsMock.closeConnection();
+  });
+
+  test("Restore a private room", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(...privateRoomArchive(true).handlers);
+
+    await page.goto(`${baseUrl}/private/archived/filter`);
+    const archivedRow = await roomContextMenu(page);
+    await page.getByTestId("option_unarchive-room").click();
+    await page.getByTestId("restore_room_dialog_submit").click();
+    await expect(archivedRow).toHaveCount(0, { timeout: 15000 });
+
+    await navItem(page, "private-rooms").click();
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe("/private/filter");
+    await expect(fileRow(page, ARCHIVABLE_ROOM_TITLE)).toBeVisible({
+      timeout: 15000,
+    });
   });
 });
 

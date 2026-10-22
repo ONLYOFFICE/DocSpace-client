@@ -75,6 +75,7 @@ import { FilesSelectorProps } from "./FilesSelector.types";
 import {
   getAcceptButtonLabel,
   getIsDisabled,
+  getPickedRoomId,
   getSelectorTransfer,
   getShowEncryptedTransferBanner,
 } from "./utils";
@@ -330,8 +331,11 @@ const FilesSelectorWrapper = ({
       const destInfo = {
         private: destInPrivateRoom,
         insidePrivateRoom: destInPrivateRoom,
-        // A move from a private room is pinned to that room.
-        roomId: isMove && sourceInPrivateRoom ? privateRoomId : undefined,
+        // A move from a private room is pinned to that room. The copy itself
+        // resolves the destination room again before it uploads.
+        roomId:
+          getPickedRoomId(breadCrumbs) ??
+          (isMove && sourceInPrivateRoom ? privateRoomId : undefined),
         rootFolderId: (selectedTreeNode as unknown as { rootFolderId?: number })
           ?.rootFolderId,
         roomType: (selectedTreeNode as unknown as { roomType?: number })

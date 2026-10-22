@@ -4,7 +4,12 @@ import { describe, expect, it } from "vitest";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-import { getSelectorTransfer, getShowEncryptedTransferBanner } from "../utils";
+import {
+  getIsDisabled,
+  getPickedRoomId,
+  getSelectorTransfer,
+  getShowEncryptedTransferBanner,
+} from "../utils";
 
 const encrypted = (id: number) =>
   ({ id, title: `e${id}.docx`, fileExst: ".docx", encrypted: true }) as TFile;
@@ -104,6 +109,89 @@ describe("FilesSelector getSelectorTransfer", () => {
       isMove: true,
     });
     expect(transfer).toEqual({ kind: "generic" });
+  });
+
+  it("Copy to another private room: encrypted files take the client copy and folders are refused", () => {
+    const transfer = getSelectorTransfer({
+      plan: {
+        kind: "reencrypt-into",
+        files: [encrypted(1)] as never,
+        refusedFolders: [folder(3)] as never,
+      },
+      selection: [encrypted(1), folder(3)],
+      selectedItemId: 80,
+      isCopy: true,
+    });
+    expect(transfer).toEqual({
+      kind: "encrypted",
+      encryptedFiles: [encrypted(1)],
+      fileIds: [],
+      folderIds: [],
+      movesIntoItself: false,
+      refusedFolders: true,
+      deleteSourceOnSuccess: false,
+    });
+  });
+
+  it("refuses a refuse-move-into plan", () => {
+    const transfer = getSelectorTransfer({
+      plan: { kind: "refuse-move-into" },
+      selection: [encrypted(1)],
+      selectedItemId: 80,
+      isMove: true,
+    });
+    expect(transfer).toEqual({ kind: "refuse" });
+  });
+});
+
+describe("FilesSelector destination in another private room", () => {
+  // Arguments of getIsDisabled up to `security`, for a copy into a folder.
+  const copyInto = [false, false, false, false, false, true, false, false, false] as const;
+
+  it("Room without create right", () => {
+    expect(
+      getIsDisabled(
+        ...copyInto,
+        { Create: false } as never,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        true,
+        true,
+      ),
+    ).toBe(true);
+    expect(
+      getIsDisabled(
+        ...copyInto,
+        { Create: true } as never,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        true,
+        true,
+      ),
+    ).toBe(false);
+  });
+
+  it("Subfolder of another private room", () => {
+    expect(
+      getPickedRoomId([
+        { id: 10, label: "Rooms" },
+        { id: 8, label: "Room B", isRoom: true },
+        { id: 80, label: "Folder" },
+      ]),
+    ).toBe(8);
+    expect(getPickedRoomId([{ id: 10, label: "Rooms" }])).toBeUndefined();
   });
 });
 

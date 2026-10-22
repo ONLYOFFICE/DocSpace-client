@@ -44,6 +44,7 @@ import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 
+import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type { TPrivateTransferPlan } from "SRC_DIR/store/filesActionsStore/copyMove.helpers";
 
 export const getHeaderLabel = (
@@ -195,6 +196,10 @@ export type TSelectorTransfer =
       refusedFolders: boolean;
       deleteSourceOnSuccess: boolean;
     };
+
+/** The room that contains the folder the picker points at, if it is known. */
+export const getPickedRoomId = (breadCrumbs: TBreadCrumb[] | undefined) =>
+  breadCrumbs?.find((crumb) => crumb.isRoom)?.id;
 
 /**
  * Splits the picker selection for a copy or move according to the

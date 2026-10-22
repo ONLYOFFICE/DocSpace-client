@@ -39,7 +39,7 @@ No stashed design document covers copies between private rooms. The decision com
 
 **D1. Plan by room id, never by root folder id.** `TPrivateTransferParams` drops `sourceRootFolderId` and gains `sourceRoomId`, and the destination carries `roomId`: the private room that contains it.
 - Same room means both ids are known and equal. Callers supply both:
-  - **Copy dialog:** `privateRoomId` for the source, and the destination's path lookup (D3) before planning.
+  - **Copy dialog:** `privateRoomId` for the source, and the room crumb of the picker's breadcrumbs for the destination (`isRoom`), with no request. The copy resolves the room again from the destination's path before it uploads (D3), so a missing crumb only makes the plan treat the room as another one.
   - **Ctrl+X / Ctrl+V:** the room id captured with the clipboard source (it already holds `roomId`), and the open folder's room from `navigationPath` for the destination.
   - **Drag-and-drop:** the open room for the source. For the destination, a room row's own id, and the open room for a folder row or breadcrumb of the current view.
 - A private destination whose room id is unknown is treated as another room: a copy is refused (D3), and so is a move (D2).

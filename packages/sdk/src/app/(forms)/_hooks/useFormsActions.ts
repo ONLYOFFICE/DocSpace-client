@@ -274,8 +274,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         } else {
           progressStore.start("other");
           progressStarted = true;
-          await XlsxUpdateService.poll(form.id, task.id, (progress) => {
-            progressStore.update(progress?.percentage ?? 0);
+          await XlsxUpdateService.poll(form.id, (progress) => {
+            progressStore.update(progress.percentage);
           });
           progressStore.finish();
         }

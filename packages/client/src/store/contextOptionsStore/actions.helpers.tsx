@@ -704,11 +704,11 @@ export const onSyncXlsxDataImpl = async (
 
       setSecondaryProgressBarData({ ...basePayload, percent: 0 });
 
-      await XlsxUpdateService.poll(form.id, task.id, (progress) => {
+      await XlsxUpdateService.poll(form.id, (progress) => {
         setSecondaryProgressBarData({
           ...basePayload,
-          percent: progress?.percentage ?? 100,
-          completed: progress?.isCompleted ?? true,
+          percent: progress.percentage,
+          completed: progress.isCompleted,
         });
       }).catch((error) => {
         clearSecondaryProgressData(task.id, OPERATIONS_NAME.other);

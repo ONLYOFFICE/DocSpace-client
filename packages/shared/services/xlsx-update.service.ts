@@ -33,8 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { pipe, delay, stopWhen } from "@onlyoffice/apps-ui-kit/utils/pipe";
-
 import {
   getProgressXlsx,
   updateXlsxFile,
@@ -42,6 +40,7 @@ import {
 } from "../api/files";
 import { DistributedTaskStatus } from "../enums";
 import type { UpdateXlsxResponse } from "../api/files/types";
+import { pollTask } from "../utils/poll-task";
 
 type XlsxTask = UpdateXlsxResponse["task"];
 
@@ -67,36 +66,20 @@ export class XlsxUpdateService {
   }
 
   /**
-   * Polls task progress until completion, calling onProgress on each tick.
+   * Polls the task of the form until completion, calling onProgress on each
+   * tick. The server keeps one task per form, so the form id finds it.
    */
   static poll(
-    itemId: number,
-    taskId: string,
+    formId: number,
     onProgress: (task: XlsxTask) => void,
-    maxAttempts = 120,
+    maxStalledPolls?: number,
   ): Promise<XlsxTask> {
-    let attempts = 0;
-
-    const step: () => Promise<XlsxTask> = pipe(
-      delay(1000),
-      () => {
-        if (++attempts > maxAttempts) throw new Error("XLSX update timed out");
-        return getProgressXlsx(itemId) as Promise<XlsxTask>;
-      },
-      (task) => {
-        onProgress(task);
-        return task;
-      },
-      stopWhen(
-        (task) => task.isCompleted,
-        (task) => {
-          XlsxUpdateService.assertTaskSucceeded(task);
-          return task;
-        },
-        () => step(),
-      ),
-    );
-
-    return step();
+    return pollTask({
+      name: "XLSX update",
+      fetchTask: () => getProgressXlsx(formId),
+      onProgress,
+      assertSucceeded: XlsxUpdateService.assertTaskSucceeded,
+      maxStalledPolls,
+    });
   }
 }

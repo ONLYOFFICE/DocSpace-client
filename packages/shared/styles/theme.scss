@@ -2161,10 +2161,12 @@
 
 .light {
   --about-logo-color: #{$black};
+  --about-secondary-text-color: #{$light-gray-dark};
 }
 
 .dark {
   --about-logo-color: #{$white};
+  --about-secondary-text-color: #{$dark-gray-dark};
 }
 
 .light {

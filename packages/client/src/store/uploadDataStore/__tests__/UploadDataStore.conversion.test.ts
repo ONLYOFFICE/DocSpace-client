@@ -31,11 +31,13 @@ import {
   createTestUploadDataStore,
   makeFileInfo,
   makeUploadFile,
+  makeUploadTarget,
 } from "./testHarness";
 
 import * as filesApi from "@docspace/shared/api/files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 import type { TTranslation } from "@docspace/shared/types";
 import type { TUploadFile } from "../helpers";
@@ -317,12 +319,18 @@ describe("UploadDataStore.handleUploadConflicts — characterization", () => {
     ).not.toHaveBeenCalled();
   });
 
-  it("skips the existence check entirely inside an AI room", async () => {
-    const { store } = createTestUploadDataStore({
-      selectedFolderStore: { isAIRoom: true },
-    });
+  it("skips the existence check for items queued for an AI room", async () => {
+    const { store } = createTestUploadDataStore();
     const data = makeStartUploadData({
-      files: [makeUploadFile({ toFolderId: 5 })],
+      files: [
+        makeUploadFile({
+          toFolderId: 5,
+          target: makeUploadTarget({
+            folderId: 5,
+            roomType: RoomsType.AIRoom,
+          }),
+        }),
+      ],
     });
 
     vi.mocked(filesApi.checkIsFileExist).mockResolvedValue([

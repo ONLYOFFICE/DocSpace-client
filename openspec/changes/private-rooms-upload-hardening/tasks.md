@@ -2,7 +2,7 @@
 
 ## 1. No original names on the server
 
-- [ ] 1.1 Skip `checkIsFileExist` for items whose fixed target is private, and read the AI-room skip from the target, in `handleUploadConflictsImpl` (`packages/client/src/store/uploadDataStore/start.helpers.ts`), design D1; verify with a case named "Conflict check" in `src/store/uploadDataStore/__tests__/start.helpers.test.ts` asserting no `upload/check` call for a private target, and an E2E assertion in `private-room-upload-target.spec.ts` that no request body contains the original name
+- [x] 1.1 Skip `checkIsFileExist` for items whose fixed target is private, and read the AI-room skip from the target, in `handleUploadConflictsImpl` (`packages/client/src/store/uploadDataStore/start.helpers.ts`), design D1; verify with a case named "Conflict check" in `src/store/uploadDataStore/__tests__/start.helpers.test.ts` asserting no `upload/check` call for a private target, and an E2E assertion in `private-room-upload-target.spec.ts` that no request body contains the original name
 
 ## 2. Retry, drop and gate
 

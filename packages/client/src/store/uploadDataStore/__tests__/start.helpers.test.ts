@@ -30,9 +30,11 @@ import {
   createTestUploadDataStore,
   installWindowGlobals,
   makeBrowserFile,
+  makePrivateUploadTarget,
   makeUploadFile,
   makeUploadTarget,
 } from "./testHarness";
+import * as filesApi from "@docspace/shared/api/files";
 import { RoomsType } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -40,6 +42,7 @@ import {
   cancelUploadActionImpl,
   cancelUploadImpl,
   handleFilesUploadImpl,
+  handleUploadConflictsImpl,
   retryQuotaFailedFilesImpl,
   retryUploadFilesImpl,
   setConflictDialogDataImpl,
@@ -141,6 +144,74 @@ describe("handleFilesUploadImpl", () => {
     expect(store.uploadedFilesHistory.map((f) => f.uniqueId)).toEqual(["h"]);
     expect(store.files.map((f) => f.uniqueId)).toEqual(["h"]);
     expect(startUploadFiles).toHaveBeenCalledWith(t, true);
+  });
+});
+
+describe("handleUploadConflictsImpl", () => {
+  const checkConflicts = async (
+    store: UploadDataStore,
+    files: TUploadFile[],
+    toFolderId: number,
+  ) => {
+    const handleUploadAndOptionalConversion = vi.fn();
+    store.handleUploadAndOptionalConversion =
+      handleUploadAndOptionalConversion as never;
+    vi.mocked(filesApi.checkIsFileExist).mockResolvedValue([] as never);
+    vi.mocked(filesApi.getFolderInfo).mockResolvedValue({
+      title: "Room",
+    } as never);
+
+    await handleUploadConflictsImpl(store, t, toFolderId, {
+      files,
+      filesSize: 0,
+      uploadedFilesHistory: files,
+      newFilesWithoutConversion: files,
+      allNewFiles: files,
+      conversionFiles: [],
+      percent: 0,
+    } as never);
+
+    return handleUploadAndOptionalConversion;
+  };
+
+  const privateItem = () =>
+    makeUploadFile({
+      file: makeBrowserFile("Salary review.docx", 10),
+      toFolderId: 50,
+      target: makePrivateUploadTarget(),
+    });
+
+  const ordinaryItem = () =>
+    makeUploadFile({
+      file: makeBrowserFile("Agenda.docx", 10),
+      toFolderId: 1,
+    });
+
+  it("Conflict check", async () => {
+    const { store } = createTestUploadDataStore();
+
+    const upload = await checkConflicts(store, [privateItem()], 50);
+
+    expect(filesApi.checkIsFileExist).not.toHaveBeenCalled();
+    expect(upload).toHaveBeenCalledTimes(1);
+  });
+
+  it("leaves files queued for a private room out of a later ordinary check", async () => {
+    const { store } = createTestUploadDataStore();
+
+    await checkConflicts(store, [privateItem(), ordinaryItem()], 1);
+
+    expect(filesApi.checkIsFileExist).toHaveBeenCalledWith(1, ["Agenda.docx"]);
+  });
+
+  it("checks an ordinary target while an AI room is open", async () => {
+    const { store } = createTestUploadDataStore({
+      selectedFolderStore: { isAIRoom: true },
+    });
+
+    await checkConflicts(store, [ordinaryItem()], 1);
+
+    expect(filesApi.checkIsFileExist).toHaveBeenCalledWith(1, ["Agenda.docx"]);
   });
 });
 

@@ -205,6 +205,17 @@ const failFirstSession = (mockRequest: WorkerFixture) => {
   );
 };
 
+/** Records every request whose address or body carries `text`. */
+const recordRequestsCarrying = (page: Page, text: string) => {
+  const carrying: string[] = [];
+  page.on("request", (req) => {
+    if (req.url().includes(text) || req.postDataBuffer()?.includes(text)) {
+      carrying.push(`${req.method()} ${req.url()}`);
+    }
+  });
+  return carrying;
+};
+
 const retryFromUploadPanel = async (page: Page) => {
   await page.locator(".layout-progress-bar").getByTestId("icon-upload").click();
   await page.locator(".enter-password", { hasText: "Retry" }).click();
@@ -313,6 +324,32 @@ test.describe("Private room — upload target fixed when the user starts the upl
     );
     expect(sent).toHaveLength(1);
     expectOnlyCiphertext(sent, filesHandle.current!);
+  });
+
+  test("Conflict check", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const { filesHandle, passphrase } = await openPrivateRoomWithKey(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const [file] = plaintextFiles(1);
+    const carryingName = recordRequestsCarrying(
+      page,
+      file.name.replace(/\.txt$/, ""),
+    );
+
+    await page.locator("#customFileInput").first().setInputFiles([file]);
+    await unlockIfPrompted(page, passphrase);
+
+    await expect
+      .poll(
+        () => filesHandle.current!.getSessions().filter((s) => s.completed)
+          .length,
+        { timeout: 30000 },
+      )
+      .toBe(1);
+    expect(carryingName).toEqual([]);
   });
 
   test("Retry from another folder", async ({ page, mockRequest, baseUrl }) => {

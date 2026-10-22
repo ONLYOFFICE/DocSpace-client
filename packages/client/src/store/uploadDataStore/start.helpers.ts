@@ -232,15 +232,17 @@ export async function handleUploadConflictsImpl(
   toFolderId: number | string | null,
   uploadData: TStartUploadData,
 ) {
-  const { isAIRoom } = self.selectedFolderStore;
-  const filesArray = uploadData.files.map((fileInfo) => fileInfo.file.name);
+  // Spec: encryption-core, "Opaque upload name with visible extension".
+  const checkedFiles = uploadData.files.filter(
+    (f) => !f.target.isPrivate && f.target.roomType !== RoomsType.AIRoom,
+  );
+  const filesArray = checkedFiles.map((fileInfo) => fileInfo.file.name);
 
-  const checkConflicts =
-    uploadData.files.findIndex((f) => f.toFolderId === toFolderId) > -1;
+  const checkConflicts = checkedFiles.some((f) => f.toFolderId === toFolderId);
 
   try {
     let conflicts: (string | { title: string; isFile: boolean })[] =
-      isAIRoom || !checkConflicts
+      !checkConflicts
         ? []
         : ((await checkIsFileExist(
             toFolderId as number,

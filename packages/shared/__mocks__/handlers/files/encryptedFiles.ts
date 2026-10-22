@@ -128,6 +128,11 @@ export type EncryptedFilesHandlerOptions = {
   /** Folders directly inside the room. */
   folders?: EncryptedFolderSeed[];
   /**
+   * The rights of the active room, as FolderDtoHelper sends them in
+   * `security`; the active room carries none when left out.
+   */
+  roomSecurity?: Record<string, boolean>;
+  /**
    * Mock-only: another instance serves other rooms in the same spec, so a
    * file, folder or upload session this room does not hold falls through to
    * it instead of being answered 403 or 404.
@@ -383,7 +388,10 @@ export const encryptedFilesHandlers = (
   const withOtherRooms = !!opts.withOtherRooms;
   const holdsFolder = (folderId: number) =>
     folderId === roomId || folders.some((f) => f.id === folderId);
-  const roomDto = () => buildFolderDto(roomId, archived, isPrivate, roomTitle);
+  const roomDto = () => ({
+    ...buildFolderDto(roomId, archived, isPrivate, roomTitle),
+    ...(!archived && opts.roomSecurity && { security: opts.roomSecurity }),
+  });
   const ownerId =
     opts.ownerId ?? "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
   const files = new Map<number, EncryptedFileRecord>();

@@ -93,7 +93,7 @@ const CustomFieldsPanel = ({
       displayType={ModalDialogType.aside}
       isBackButton={!!newField}
       onBackClick={closeNewField}
-      onClose={onClose}
+      onClose={newField ? closeNewField : onClose}
       dataTestId="metadata_custom_fields_panel"
     >
       <ModalDialog.Header>

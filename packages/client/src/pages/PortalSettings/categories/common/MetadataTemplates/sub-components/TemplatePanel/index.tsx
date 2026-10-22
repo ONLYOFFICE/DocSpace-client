@@ -119,7 +119,7 @@ const TemplatePanel = ({
         isBackButton={!!fieldForm}
         isCloseable={!isDeleteConfirmVisible}
         onBackClick={closeField}
-        onClose={onClose}
+        onClose={fieldForm ? closeField : onClose}
         dataTestId="metadata_template_panel"
       >
         <ModalDialog.Header>{getTitle()}</ModalDialog.Header>

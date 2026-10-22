@@ -1,0 +1,22 @@
+{
+  "key_path": "ServiceLimitsDescription",
+  "content": "Set spending limits for the whole portal and per user. <1>One limit covers both AI features and AI search.</1>",
+  "content_en_sha1_hash": "e05a2f41909163b9dc4c9f8d160dde38ee7b3bc6",
+  "created_at": "2026-10-22T16:09:21.902Z",
+  "updated_at": "2026-10-22T16:10:38.032Z",
+  "comment": {
+    "text": "Intro text at the top of the AI limits settings page, followed by a Help Center link; <1></1> wraps a bold second sentence saying the same limit covers both AI features (agents, chat) and AI search.",
+    "is_auto": true,
+    "updated_at": "2026-10-22T16:10:38.032Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "min {{currency}}",
   "content_en_sha1_hash": "867afbebb2d8f291b3ef9d86d74dd959c6966586",
   "created_at": "2026-04-10T13:53:42.720Z",
-  "updated_at": "2026-09-10T16:17:50.382Z",
+  "updated_at": "2026-10-22T16:09:36.844Z",
   "comment": {
     "text": "Error text displayed below an input field when the entered value is below the minimum allowed. `{{currency}}` will be replaced with the minimum value and its unit (e.g., \"10 GB\" or \"5 USD\").",
     "is_auto": true,
@@ -22,6 +22,12 @@
       "line_number": 170,
       "context": "</Text>\n <FieldContainer\n isVertical\n errorMessage={\n hasMinError\n ? t(\"MinCurrency\", {\n currency: formatWalletCurrency!(+minValue!, 0),\n })\n : \"\"\n }\n hasError={hasError}",
       "module": "@onlyoffice/apps-ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeAILimitDialog/index.tsx",
+      "line_number": 120,
+      "context": "currency: format(MAX_LIMIT_AMOUNT, 0),\n });\n }\n \n if (amount < MIN_LIMIT_AMOUNT) {\n return t(\"Common:MinCurrency\", {\n currency: format(MIN_LIMIT_AMOUNT, 0),\n });\n }\n \n return undefined;",
+      "module": "/packages/client"
     }
   ],
   "languages": {

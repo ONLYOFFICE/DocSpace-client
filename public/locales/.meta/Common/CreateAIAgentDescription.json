@@ -3,7 +3,7 @@
   "content": "Start building your first AI agent",
   "content_en_sha1_hash": "2181a7beb1b77bfeae5d01b0256bca3b40890f09",
   "created_at": "2026-10-16T12:02:57.480Z",
-  "updated_at": "2026-10-16T12:03:59.839Z",
+  "updated_at": "2026-10-22T16:09:36.816Z",
   "comment": {
     "text": "Description of the create tile in the empty AI agents section, inviting the user to build their first AI agent.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 445,
+      "line_number": 454,
       "context": "? [createFormSpaceFromGallery]\n : [];\n \n const createAIAgent = {\n title: t(\"Common:CreateAIAgentTitle\"),\n description: t(\"Common:CreateAIAgentDescription\"),\n icon: <CreateAIAgentIcon />,\n key: \"create-ai-agent\",\n onClick: actions.onCreateAIAgent,\n //disabled: !security?.Create,\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 199,
+      "line_number": 207,
       "context": "{\n key: \"create-ai-agent\",\n title: t(\"Common:CreateAIAgentTitle\", {\n defaultValue: \"Create a new AI agent\",\n }),\n description: t(\"Common:CreateAIAgentDescription\", {\n defaultValue: \"Set up a new AI agent from scratch.\",\n }),\n icon: <CreateAIAgentIcon />,\n onClick: () => dialogsStore.setCreateAgentDialogVisible(true),\n disabled: false,",
       "module": "/packages/sdk"
     }

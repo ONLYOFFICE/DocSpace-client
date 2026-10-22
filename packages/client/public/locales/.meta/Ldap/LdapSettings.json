@@ -3,7 +3,7 @@
   "content": "LDAP",
   "content_en_sha1_hash": "d8343c683ae1584c96390fa627005bc1bb0719cd",
   "created_at": "2026-08-31T18:23:43.819Z",
-  "updated_at": "2026-08-31T20:01:45.437Z",
+  "updated_at": "2026-10-22T16:09:36.907Z",
   "comment": {
     "text": "Page title and category item title for the LDAP integration settings section.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 228,
+      "line_number": 232,
       "context": "case \"Common:PaymentsTitle\":\n return standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":",
       "module": "/packages/client"
     },

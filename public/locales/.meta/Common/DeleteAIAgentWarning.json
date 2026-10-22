@@ -17,11 +17,11 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-09-24T18:43:14.875Z",
+  "updated_at": "2026-10-22T16:09:36.858Z",
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 283,
+      "line_number": 287,
       "context": "style={{ marginTop: \"16px\" }}\n label={\n isAIAgent\n ? selection.length > 1\n ? t(\"Common:DeleteAIAgentsWarning\")\n : t(\"Common:DeleteAIAgentWarning\")\n : isTemplate\n ? t(\"DeleteTemplateWarning\")\n : isFormSpace\n ? t(\"Common:DeleteFormSpaceWarning\")\n : t(\"Common:DeleteRoomWarning\")",
       "module": "/packages/client"
     }

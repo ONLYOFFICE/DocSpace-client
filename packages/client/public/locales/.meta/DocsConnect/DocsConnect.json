@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-10-07T14:48:38.443Z",
+  "updated_at": "2026-10-22T16:09:36.802Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -55,31 +55,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 521,
+      "line_number": 579,
       "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 521,
+      "line_number": 579,
       "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 521,
+      "line_number": 579,
       "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 521,
+      "line_number": 579,
       "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 521,
+      "line_number": 579,
       "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
@@ -127,19 +127,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 355,
+      "line_number": 357,
       "context": "ns=\"DocsConnect\"\n i18nKey=\"ConnectedBanner\"\n values={{\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n service: t(\"DocsConnect:DocsConnect\"),\n }}\n components={{ 1: <Text as=\"span\" fontWeight={600} /> }}\n />\n </Text>\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 355,
+      "line_number": 357,
       "context": "ns=\"DocsConnect\"\n i18nKey=\"ConnectedBanner\"\n values={{\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n service: t(\"DocsConnect:DocsConnect\"),\n }}\n components={{ 1: <Text as=\"span\" fontWeight={600} /> }}\n />\n </Text>\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 310,
+      "line_number": 311,
       "context": "title={scheduledChangeTitle}\n body={\n isCancellation\n ? t(\"Common:PlanCancellationBillingPeriodNote\", {\n date: scheduledChangeDate,\n service: t(\"DocsConnect:DocsConnect\"),\n })\n : t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: scheduledChangeDate,\n })\n }",
       "module": "/packages/client"
     },
@@ -163,7 +163,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 113,
+      "line_number": 119,
       "context": "<div className={styles.grid}>\n {canOpenDocsConnect ? (\n <Card\n className={styles.featured}\n icon={<DocsConnectSvg />}\n title={t(\"DocsConnect:DocsConnect\")}\n description={t(\"DocsConnect:CardDescription\", {\n productName: docsName,\n })}\n url=\"/developer-tools/docs-connect\"\n color={globalColors.docsConnectAccent}",
       "module": "/packages/client"
     },
@@ -181,7 +181,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 650,
+      "line_number": 674,
       "context": "{\n id: \"portal-settings_catalog-services-docs-connect\",\n key: \"10-3-4\",\n icon: \"\",\n link: \"docs-connect\",\n tKey: \"DocsConnect:DocsConnect\",\n },\n ],\n },\n ],\n },",
       "module": "/packages/client"
     }

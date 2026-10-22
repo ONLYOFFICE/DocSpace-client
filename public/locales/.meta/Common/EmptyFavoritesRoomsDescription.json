@@ -3,7 +3,7 @@
   "content": "Star files and folders in Rooms to keep them close at hand.",
   "content_en_sha1_hash": "6677b3cd0ce3146cdda9b9b59efa630a7b637010",
   "created_at": "2026-08-21T15:04:01.510Z",
-  "updated_at": "2026-08-21T15:10:48.225Z",
+  "updated_at": "2026-10-22T16:09:36.817Z",
   "comment": {
     "text": "Instructional text shown in an empty state view when no items have been favorited within the Rooms section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 195,
+      "line_number": 197,
       "context": ") => {\n if (isFormsScope) return t(\"Common:EmptyFavoritesFormsDescription\");\n if (isAgentsSectionScope(filterFolderType))\n return t(\"Common:EmptyFavoritesAgentsDescription\");\n if (isRoomsSectionScope(filterFolderType))\n return t(\"Common:EmptyFavoritesRoomsDescription\");\n \n return t(\"Common:EmptyFavoritesDescription\");\n };\n \n /**",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Sync responses",
   "content_en_sha1_hash": "69c29f831fa2105be7e339c599a8caf76bf70fe8",
   "created_at": "2026-10-01T08:23:09.584Z",
-  "updated_at": "2026-10-01T08:27:28.314Z",
+  "updated_at": "2026-10-22T16:09:36.964Z",
   "comment": {
     "text": "Context menu option label used to trigger the synchronization of data or responses from an XLSX spreadsheet.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 225,
+      "line_number": 230,
       "context": "separator0: makeSeparator(\"separator0\"),\n \"update-xlsx-data\": canUpdateXlsx\n ? {\n id: \"option_update-xlsx-data\",\n key: \"update-xlsx-data\",\n label: t(\"Common:SyncXlsxData\"),\n icon: SpreadsheetSvgUrl,\n onClick: () => syncXlsxData(file),\n disabled: false,\n }\n : null,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 225,
+      "line_number": 230,
       "context": "separator0: makeSeparator(\"separator0\"),\n \"update-xlsx-data\": canUpdateXlsx\n ? {\n id: \"option_update-xlsx-data\",\n key: \"update-xlsx-data\",\n label: t(\"Common:SyncXlsxData\"),\n icon: SpreadsheetSvgUrl,\n onClick: () => syncXlsxData(file),\n disabled: false,\n }\n : null,",
       "module": "/packages/sdk"
     }

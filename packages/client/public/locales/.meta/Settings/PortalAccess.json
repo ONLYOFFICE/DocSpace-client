@@ -3,7 +3,7 @@
   "content": "Access",
   "content_en_sha1_hash": "2f81a22de0af5e9eab19326e19693f86ce612518",
   "created_at": "2026-08-31T18:23:41.713Z",
-  "updated_at": "2026-08-31T20:25:57.950Z",
+  "updated_at": "2026-10-22T16:09:36.906Z",
   "comment": {
     "text": "Page title and menu item label for the section managing portal access permissions within security settings.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 211,
+      "line_number": 215,
       "context": "return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\");\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");",
       "module": "/packages/client"
     },

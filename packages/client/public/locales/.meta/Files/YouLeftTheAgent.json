@@ -3,7 +3,7 @@
   "content": "You have left the agent",
   "content_en_sha1_hash": "9046d9c834b4b78bdceb1017ec100bcfc353675a",
   "created_at": "2025-10-27T16:14:30.911Z",
-  "updated_at": "2026-08-21T15:49:57.297Z",
+  "updated_at": "2026-10-22T16:09:36.968Z",
   "comment": {
     "text": "Toast message. Appears when a user successfully leaves an AI agent.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
-      "line_number": 639,
+      "line_number": 665,
       "context": "const roomSuccessText = isOwner\n ? t(\"Common:LeftAndAppointNewOwner\")\n : t(\"Common:YouLeftTheRoom\");\n const agentSuccessText = isOwner\n ? t(\"Common:LeftAgentAndAppointNewOwner\")\n : t(\"Files:YouLeftTheAgent\");\n const successText = isAIAgent ? agentSuccessText : roomSuccessText;\n \n const leave = () =>\n (\n api.rooms.updateRoomMemberRole(roomId, {",
       "module": "/packages/client"
     }

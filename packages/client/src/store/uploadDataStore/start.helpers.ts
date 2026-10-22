@@ -495,9 +495,9 @@ export function startUploadImpl(
 }
 
 /**
- * Asks for the unlock before any retried file is reset, so the running queue
- * cannot pick one up while the prompt is open. Returns the files to reset; on
- * decline the encrypted ones fail instead.
+ * Returns the retried files to reset; the encrypted ones fail instead when the
+ * unlock is declined.
+ * Spec: private-rooms/file-operations, "Retry keeps the fixed target".
  */
 async function unlockRetriedFiles(
   self: UploadDataStore,

@@ -42,7 +42,11 @@ import type { RoomsType } from "@docspace/shared/enums";
 import type { ItemUploadContext } from "@docspace/shared/services/private-room/encrypted-upload";
 import type { SkippedMemberKey } from "@docspace/shared/services/private-room/member-key-verification";
 
-/** Where an upload goes, fixed when the user drops, pastes or picks the files. */
+/**
+ * Where an upload goes.
+ * Spec: private-rooms/file-operations, "Upload target is fixed when the user
+ * starts the upload".
+ */
 export type TUploadTarget = {
   folderId: number | string | null;
   isPrivate: boolean;

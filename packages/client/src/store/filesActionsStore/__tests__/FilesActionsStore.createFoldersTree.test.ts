@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { createTestFilesActionsStore } from "./testHarness";
 
-import { createFolder } from "@docspace/shared/api/files";
+import { createFolder, getFolderInfo } from "@docspace/shared/api/files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import type { TUploadTreeFile } from "../helpers";
@@ -13,6 +13,7 @@ import type { TTranslation } from "@docspace/shared/types";
 vi.mock("@docspace/shared/api/files", async (io) => ({
   ...((await io()) as Record<string, unknown>),
   createFolder: vi.fn(async () => ({ id: 55 })),
+  getFolderInfo: vi.fn(),
 }));
 
 const t = ((key: string) => key) as unknown as TTranslation;
@@ -28,6 +29,9 @@ const entry = (
 
 beforeEach(() => {
   vi.clearAllMocks();
+  vi.mocked(getFolderInfo).mockImplementation(
+    async (id) => ({ id }) as never,
+  );
 });
 
 const privateRoomTarget = (folderId = 7): TUploadTarget => ({
@@ -142,5 +146,53 @@ describe("FilesActionsStore.createFoldersTree — the drop's target decides the 
       "report.docx",
     ]);
     expect(toastr.warning).not.toHaveBeenCalled();
+  });
+});
+
+describe("FilesActionsStore.createFoldersTree — the quota of the target's room", () => {
+  const ordinaryRoomTarget: TUploadTarget = {
+    folderId: 70,
+    isPrivate: false,
+    roomType: RoomsType.EditingRoom,
+    encryptionRoomId: 70,
+  };
+
+  it("counts a drop onto another room against that room's quota", async () => {
+    const store = createTestFilesActionsStore({
+      selectedFolderStore: {
+        navigationPath: [],
+        getSelectedFolder: () => ({ id: 1, quotaLimit: 1000, usedSpace: 0 }),
+      },
+    });
+    vi.mocked(getFolderInfo).mockResolvedValue({
+      id: 70,
+      quotaLimit: 10,
+      usedSpace: 10,
+    } as never);
+
+    await expect(
+      store.createFoldersTree(t, [entry("big.txt")], ordinaryRoomTarget),
+    ).rejects.toThrow("Common:RoomSpaceQuotaExceeded");
+
+    expect(getFolderInfo).toHaveBeenCalledWith(70);
+    expect(createFolder).not.toHaveBeenCalled();
+  });
+
+  it("takes the open room's quota without a lookup when the target is in it", async () => {
+    const store = createTestFilesActionsStore({
+      selectedFolderStore: {
+        navigationPath: [{ id: 70, isRoom: true, quotaLimit: 10, usedSpace: 10 }],
+        getSelectedFolder: () => ({ id: 71 }),
+      },
+    });
+
+    await expect(
+      store.createFoldersTree(t, [entry("big.txt")], {
+        ...ordinaryRoomTarget,
+        folderId: 71,
+      }),
+    ).rejects.toThrow("Common:RoomSpaceQuotaExceeded");
+
+    expect(getFolderInfo).not.toHaveBeenCalled();
   });
 });

@@ -78,7 +78,11 @@ export function resolveOpenFolderTarget({
   };
 }
 
-/** A copy or move knows its destination, so its per-file context wins. */
+/**
+ * The batch's target with a file's own upload context applied over it.
+ * Spec: private-rooms/file-operations, "Files leaving a private room are
+ * decrypted", "Copy into another private room is re-encrypted".
+ */
 export function withItemUploadContext(
   target: TUploadTarget,
   uploadContext: ItemUploadContext | undefined,
@@ -129,8 +133,7 @@ export async function resolveDropTarget(
     row.rootFolderType === FolderType.Rooms ||
     row.rootFolderType === FolderType.Archive;
 
-  // A row of a rooms section takes the snapshot's room only when it is
-  // listed in the snapshot's folder; any other is looked up.
+  // Spec: private-rooms/file-operations, "Drops onto a private room from outside it are refused".
   if (
     open.encryptionRoomId !== null &&
     (!inRoomsSections || String(row.parentId) === String(open.folderId))

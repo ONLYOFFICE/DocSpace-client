@@ -75,8 +75,7 @@ export default function withFileActions(WrappedFileItem) {
       setEnabledHotkeys(true);
     };
 
-    // Taken on the native drop event, before the browser reads the dropped
-    // directories: the open folder may change while it does.
+    // Spec: private-rooms/file-operations, "Drops onto a private room from outside it are refused".
     onDropCapture = () => {
       this.dropSnapshot = this.props.resolveOpenFolderTarget();
     };

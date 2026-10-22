@@ -39,6 +39,7 @@ import {
   markAsRead,
   createFolder,
   deleteFilesFromRecent,
+  getFolderInfo,
 } from "@docspace/shared/api/files";
 import {
   FileAction,
@@ -191,6 +192,29 @@ self: FilesActionStore,
 };
 
 
+type TRoomQuota = { quotaLimit?: number; usedSpace?: number };
+
+/**
+ * The room whose quota an upload into `target` counts against: the open one
+ * as the folder store holds it, or another room loaded by its id.
+ */
+const targetRoomForQuota = async (
+  self: FilesActionStore,
+  target: TUploadTarget,
+): Promise<TRoomQuota | null> => {
+  if (target.encryptionRoomId === null) return null;
+
+  const openRoom =
+    self.selectedFolderStore.navigationPath.find((r) => r.isRoom) ??
+    self.selectedFolderStore.getSelectedFolder();
+  if (openRoom && String(openRoom.id) === String(target.encryptionRoomId)) {
+    return openRoom;
+  }
+
+  // A room's folder info carries its quota; TFolder does not declare it.
+  return (await getFolderInfo(target.encryptionRoomId)) as TRoomQuota;
+};
+
 export const createFoldersTreeImpl = async (
 self: FilesActionStore,
   t: TTranslation,
@@ -206,9 +230,7 @@ self: FilesActionStore,
   const { setPrimaryProgressBarData } =
     self.uploadDataStore.primaryProgressDataStore;
 
-  const roomFolder =
-    self.selectedFolderStore.navigationPath.find((r) => r.isRoom) ??
-    self.selectedFolderStore.getSelectedFolder();
+  const roomFolder = await targetRoomForQuota(self, target);
 
   let withoutHiddenFiles = Object.values(files).filter((f) => {
     const isHidden = /(^|\/)\.[^\/\.]/g.test(f.name);

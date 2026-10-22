@@ -85,7 +85,11 @@ export function shouldEncryptUpload(
   return isEncryptableRoomType(roomType) && isPrivate;
 }
 
-/** Privacy of an upload's target, fixed when the user started the upload. */
+/**
+ * Privacy of an upload's target.
+ * Spec: private-rooms/file-operations, "Upload target is fixed when the user
+ * starts the upload".
+ */
 export type UploadTargetContext = {
   isPrivate: boolean;
   roomType?: RoomsType | null;

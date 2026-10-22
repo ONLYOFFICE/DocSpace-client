@@ -803,6 +803,29 @@ test.describe("Private section — info panel", () => {
       timeout: 15000,
     });
   });
+
+  test("Members view of a room selected in a list", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await page.locator(".info-panel-toggle").click();
+    await page.getByTestId("table-row-0").click();
+    await page.getByTestId("info_members_tab").click();
+    await expect(page.getByText("Alice Private")).toBeVisible({
+      timeout: 15000,
+    });
+
+    await expect(
+      page.getByTestId("info_panel_members_links_block"),
+    ).toHaveCount(0);
+    await expect(
+      page.getByTestId("info_panel_members_create_additional_link"),
+    ).toHaveCount(0);
+    await expect(page.getByTestId("info_share_tab")).toHaveCount(0);
+  });
 });
 
 test.describe("Private section — filter", () => {

@@ -80,6 +80,12 @@ import FilesActionsStore from "./FilesActionsStore";
 import SelectedFolderStore from "./SelectedFolderStore";
 import TagsStore from "./TagsStore";
 
+// The Files selector's "New agent" item. The selector stays open on the agent
+// list and takes the new agent from the socket, so the create must not move
+// the page: the selector follows the current folder and would reopen inside
+// the new agent, on its Knowledge and Result folders.
+export const FILES_SELECTOR_AGENT_CONTEXT = "files_selector";
+
 class CreateEditRoomStore {
   agentParams: Nullable<TAgentParams> = null;
 
@@ -412,7 +418,8 @@ class CreateEditRoomStore {
         ).catch((err) => toastr.error(err as string));
       }
 
-      this.onOpenNewAgent(agent);
+      if (this.openContext !== FILES_SELECTOR_AGENT_CONTEXT)
+        this.onOpenNewAgent(agent);
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({

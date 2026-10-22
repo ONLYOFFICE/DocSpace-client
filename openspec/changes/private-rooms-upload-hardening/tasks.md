@@ -17,7 +17,7 @@
 
 ## 4. Leftovers
 
-- [ ] 4.1 Delete `packages/client/src/components/Article/Body/Items.js`, read the quota from the target folder in `createFoldersTreeImpl`, add a test named "Shift+U pressed", and turn the restating comments of design D6 into `Spec:` pointers; verify with `pnpm run tsc`, `pnpm run lint` and `cd packages/client && pnpm exec vitest run src/store/uploadDataStore src/store/filesActionsStore`
+- [ ] 4.1 Delete `packages/client/src/components/Article/Body/Items.js`, read the quota from the target folder in `createFoldersTreeImpl`, add tests named "Shift+U pressed" and "Shift+I pressed", and turn the restating comments of design D6 into `Spec:` pointers; verify with `pnpm run tsc`, `pnpm run lint` and `cd packages/client && pnpm exec vitest run src/store/uploadDataStore src/store/filesActionsStore`
 
 ## 5. Integration
 

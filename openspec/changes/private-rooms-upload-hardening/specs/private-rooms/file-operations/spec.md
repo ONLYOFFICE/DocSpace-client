@@ -98,3 +98,26 @@ The system SHALL send a file whose fixed target lies inside a private room only 
 #### Scenario: Private target with another room type
 - **WHEN** a file's fixed target lies in a private room but names a room type other than the custom room type
 - **THEN** the file is refused and no bytes are sent, rather than being sent unencrypted
+
+### Requirement: Folder upload disabled in private rooms
+The system SHALL NOT offer the "Upload folder" action or the Shift+I hotkey inside a private room. It SHALL refuse folder trees dropped into an open private room, or onto one of its folders, with Common:FolderUploadNotSupportedInPrivateRoom, deciding from the drop's target and not from the folder that is open when the files are queued. Drops onto a private room from outside it are refused as a whole by "Drops onto a private room from outside it are refused".
+
+#### Scenario: Shift+U pressed
+- **WHEN** the user presses Shift+U while a private room is open
+- **THEN** the file picker opens, never the folder picker
+
+#### Scenario: Shift+I pressed
+- **WHEN** the user presses Shift+I while a private room is open
+- **THEN** no folder picker opens
+
+#### Scenario: Folders dropped on the view
+- **WHEN** the user drags a folder tree into an open private room
+- **THEN** nothing is uploaded and Common:FolderUploadNotSupportedInPrivateRoom is shown
+
+#### Scenario: Files and folders dropped together
+- **WHEN** a drop into an open private room contains both files and folders
+- **THEN** the files are uploaded encrypted and the folders are refused with Common:FolderUploadNotSupportedInPrivateRoom
+
+#### Scenario: Folders dropped on a folder of the open room
+- **WHEN** the user drags a folder tree onto the row of a folder inside the open private room
+- **THEN** no folder is created and Common:FolderUploadNotSupportedInPrivateRoom is shown

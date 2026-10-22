@@ -11,7 +11,7 @@ Found in the review of `private-rooms-upload-target-context` and on a local port
   - `components/Article/Body/Items.js:110` builds `{ ...open, folderId: uploadToFolder }`; nothing imports the file.
   - `createFoldersTreeImpl` reads the quota of the open folder.
   - The folder lookup of a row drop (`withFileActions` case (d): toast, failed lookup) and the section drop of Home have no wiring tests.
-  - The scenario "Shift+U pressed" has no test carrying its name.
+  - The scenario "Shift+U pressed" has no test carrying its name, and it names the wrong hotkey: Shift+U uploads files, folder upload is Shift+I (the hotkeys panel, `HOCs/withHotkeys.js`), and the private-room refusal sits on that one (`HotkeyStore.uploadFile` with `isFolder`). The delta names Shift+I in the requirement, keeps "Shift+U pressed" with what that hotkey does (the file picker, never the folder picker; a modified requirement must keep its scenarios) and adds "Shift+I pressed".
 
 No stashed design document covers these points.
 

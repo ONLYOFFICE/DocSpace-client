@@ -38,6 +38,7 @@ None.
   - "Retry keeps the fixed target" gains retry during a running queue;
   - "Drops onto a private room from outside it are refused" gains navigation during the directory read;
   - "Queued private uploads are sent only as ciphertext" gains the inconsistent target;
+  - "Folder upload disabled in private rooms" names Shift+I, the folder-upload hotkey, instead of Shift+U, which uploads files: "Shift+U pressed" now says the file picker opens, and "Shift+I pressed" is added;
   - new requirement: name clashes in a private room are checked on the client.
 
 ## Impact

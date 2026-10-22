@@ -18,6 +18,8 @@ Found on a local portal on 2026-10-22 and added here:
 - the Copy and Move dialogs list encrypted files by their opaque server titles; they get the decrypted names the feeds get, through a title resolver that ui-kit has to offer first (external dependency on `docspace-ui-kit-react`);
 - the Move dialog of a private room, pinned to that room, warns that files will be saved decrypted; the warning is dropped there.
 
+Also found on the local portal: the key-change dialog names the peer by user id instead of display name, and the empty private room view nests a list inside a paragraph.
+
 Out of scope: any change to the encryption model or transfer rules (see `private-rooms-upload-fail-closed`), the SDK surface (see `private-rooms-sdk-gating-and-parity`), editor behaviour. No decision is needed from the user; "withhold New PDF form" is the recommendation and can be flipped to "keep" by editing one scenario before apply.
 
 ## Capabilities

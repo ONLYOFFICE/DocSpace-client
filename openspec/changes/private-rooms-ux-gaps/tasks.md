@@ -18,6 +18,7 @@
 ## 3. Remove the PDF form dead end
 
 - [ ] 3.1 Drop the PDF form entry for private rooms in `packages/client/src/store/contextOptionsStore/folderModel.helpers.ts`, `packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx`, `packages/client/src/helpers/quickActions.ts` and the create hotkeys; verify with the contextOptionsStore snapshot tests and `cd packages/client && pnpm exec vitest run quickActions folderModel`
+- [ ] 3.3 Render the bullet list of the empty private room view outside the paragraph element in `packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx` (a `<ul>` inside the description `<p>`, reported by React on the local portal, 2026-10-22); verify with a component test asserting the list is not inside a `p` and no console error
 - [ ] 3.2 Update `packages/client/__tests__/encrypted-file-ui.spec.ts` for the new create menu; verify with `cd packages/client && pnpm exec playwright test encrypted-file-ui.spec.ts`
 
 ## 4. Decrypted folder download and bulk menu
@@ -31,6 +32,7 @@
 - [ ] 5.0 Decide how the affected-rooms list is computed (design.md D6 and Open Questions): per-file `GET files/{fileId}/access` reads with early exit per room, a capped scan, or a new server query; the server has no per-room read of file access entries. Verified by the decision recorded in design.md
 - [ ] 5.1 BLOCKED on 5.0. List affected rooms in the delete-key confirmation (`useDeleteKeyFlow.tsx`) using the method chosen in 5.0, with `Common:DeleteKeyAffectedRooms` / `Common:DeleteKeyNoAffectedRooms`; verify with `cd packages/client && pnpm exec vitest run useDeleteKeyFlow`
 - [ ] 5.2 Add dialog roles, accessible names and labelled inputs, and the aside display on narrow screens, to `packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx`, `packages/shared/dialogs/key-generation/*`, `packages/shared/dialogs/key-recovery/*`, `packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx` and the keys-management modals; verify with jest-dom role queries in the shared dialog tests (`cd packages/shared && pnpm exec vitest run dialogs`)
+- [ ] 5.5 Name the peer by display name in the key-change dialog (it showed the user id on the local portal, 2026-10-22, while the toast named the user), loading the name before the dialog opens or updating it in place; verify with a case named "Peer named in the dialog" in the key-change dialog tests (`cd packages/shared && pnpm exec vitest run dialogs/key-change-dialog`)
 - [ ] 5.3 Refresh the keys-management Playwright screenshots and run `cd packages/client && pnpm exec playwright test keys-management.spec.ts keys-management-advanced.spec.ts`; verify they pass on desktop and the mobile project
 - [ ] 5.4 Translate the new keys from groups 4 and 5 (`translate-comments`, `translate-locales`) and rerun `cd common/tests && npx vitest run test/locales.test.js`
 

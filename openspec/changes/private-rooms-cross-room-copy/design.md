@@ -60,7 +60,7 @@ No stashed design document covers copies between private rooms. The decision com
 **D4. Key wraps, checks and decryption are the existing ones.**
 - The upload pipeline already wraps the new file key for the uploader and then for the room in `encryptionRoomId`, applying the member key checks and recording skipped members. Pointing that id at the destination is all re-encryption needs.
 - Decryption keeps its sender-key lookup in the source room (`item.originRoomId ?? sourceRoomId ?? resolveRoomIdForFile`), which works for archived rooms too.
-- A cross-room copy keeps the original name. The suffix stays for same-room copies at the room root.
+- A cross-room copy keeps the original name. A same-room copy keeps its copy suffix, as today. A copy into the open folder (a paste, a duplicate) takes the open-folder target without a lookup, since that target already comes from the room on the open path.
 
 **D5. Access to the destination is the folder's `Create` right.**
 - The picker keeps private rooms navigable for a private source, and `getIsDisabled` keeps Copy disabled where the chosen folder lacks `Create`. That matches "may create files there".

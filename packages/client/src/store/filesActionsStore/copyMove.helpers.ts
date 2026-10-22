@@ -67,6 +67,7 @@ import i18n from "../../i18n";
 import type FilesActionStore from "../FilesActionsStore";
 import type DialogsStore from "../DialogsStore";
 import type { TUploadTarget } from "../uploadDataStore/helpers";
+import { resolveFolderTarget } from "../uploadDataStore/target.helpers";
 import type { TActionItem, TOperationDataPayload } from "../FilesActionsStore";
 
 export const duplicateActionImpl = async (
@@ -172,6 +173,7 @@ self: FilesActionStore,item: TActionItem
   return self.copyEncryptedFilesToFolder([item], item.folderId, {
     private: true,
     rootFolderId: self.selectedFolderStore.rootFolderId,
+    rootFolderType: self.selectedFolderStore.rootFolderType ?? undefined,
     roomType: self.selectedFolderStore.roomType ?? RoomsType.CustomRoom,
   });
 };
@@ -320,27 +322,52 @@ self: FilesActionStore,
   const userId = user?.id;
   if (!userId) return;
 
+  const reportFailed = (names: string[]) =>
+    toastr.error(
+      i18n.t("Common:EncryptedCopyFailed", {
+        defaultValue: "Failed to copy encrypted files: {{names}}",
+        names: names.join(", "),
+      }),
+    );
+
+  // Spec: private-rooms/file-operations, "Copy into another private room needs access to it".
+  let destTarget: TUploadTarget | null = null;
+  try {
+    destTarget = await resolveCopyDestination(self, destFolderId, destInfo);
+  } catch (error) {
+    console.error("[ENCRYPTION] copy destination not resolved:", error);
+  }
+  if (
+    !destTarget ||
+    (destTarget.isPrivate && destTarget.encryptionRoomId === null)
+  ) {
+    reportFailed(items.map((item) => item.title));
+    return;
+  }
+
   const identity = await requireUnlock(String(userId));
   if (!identity) {
     toastr.error(i18n.t("Common:EncryptionLockedAddMembers"));
     return;
   }
 
-  const sameRoomRoot =
-    destInfo?.private === true &&
-    destInfo?.rootFolderId === self.selectedFolderStore.rootFolderId;
+  const copySourceRoomId =
+    destInfo?.sourceRoomId ?? self.resolveRoomIdForFile(null);
+  const sameRoom =
+    destTarget.isPrivate &&
+    copySourceRoomId !== null &&
+    copySourceRoomId !== undefined &&
+    String(destTarget.encryptionRoomId) === String(copySourceRoomId);
   const deleteSourceOnSuccess =
-    destInfo?.deleteSourceOnSuccess === true && !sameRoomRoot;
+    destInfo?.deleteSourceOnSuccess === true && !sameRoom;
 
   const destContext = {
-    roomType: destInfo?.roomType ?? RoomsType.CustomRoom,
-    isPrivate: !!sameRoomRoot,
+    roomType: destTarget.isPrivate
+      ? RoomsType.CustomRoom
+      : (destTarget.roomType ?? destInfo?.roomType ?? RoomsType.CustomRoom),
+    isPrivate: destTarget.isPrivate,
   };
-  const target: TUploadTarget = {
-    ...self.uploadDataStore.resolveOpenFolderTarget(),
-    ...destContext,
-    folderId: destFolderId ?? null,
-  };
+  const target: TUploadTarget = { ...destTarget, ...destContext };
 
   const filesToUpload: ReturnType<typeof tagFileForCopy>[] = [];
   const failed: string[] = [];
@@ -362,7 +389,7 @@ self: FilesActionStore,
         sourceRoomId as number | string,
       );
 
-      const newName = sameRoomRoot
+      const newName = sameRoom
         ? addCopySuffix(decryptedFile.name)
         : decryptedFile.name;
       const tagged = tagFileForCopy(
@@ -390,17 +417,40 @@ self: FilesActionStore,
   }
 
   if (failed.length > 0) {
-    toastr.error(
-      deleteSourceOnSuccess
-        ? i18n.t("Common:EncryptedMovePartialFailure", {
-            names: failed.join(", "),
-          })
-        : i18n.t("Common:EncryptedCopyFailed", {
-            defaultValue: "Failed to copy encrypted files: {{names}}",
-            names: failed.join(", "),
-          }),
-    );
+    if (deleteSourceOnSuccess) {
+      toastr.error(
+        i18n.t("Common:EncryptedMovePartialFailure", {
+          names: failed.join(", "),
+        }),
+      );
+    } else {
+      reportFailed(failed);
+    }
   }
+};
+
+/**
+ * The upload target of a copy: the open folder when the copy lands there,
+ * otherwise the room on the destination folder's own path.
+ */
+const resolveCopyDestination = async (
+  self: FilesActionStore,
+  destFolderId: number | string | undefined,
+  destInfo: TEncryptedTransferDest | undefined,
+): Promise<TUploadTarget | null> => {
+  if (destFolderId === undefined || destFolderId === null) return null;
+
+  if (String(destFolderId) === String(self.selectedFolderStore.id)) {
+    return {
+      ...self.uploadDataStore.resolveOpenFolderTarget(),
+      folderId: destFolderId,
+    };
+  }
+
+  return resolveFolderTarget({
+    id: destFolderId,
+    rootFolderType: destInfo?.rootFolderType,
+  });
 };
 
 

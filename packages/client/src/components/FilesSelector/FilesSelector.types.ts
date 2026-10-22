@@ -115,8 +115,10 @@ export type FilesSelectorProps = TSelectorHeader & {
 		destInfo: {
 			private?: boolean;
 			rootFolderId?: number;
+			rootFolderType?: FolderType;
 			roomType?: number;
 			deleteSourceOnSuccess?: boolean;
+			sourceRoomId?: number | string | null;
 		},
 	) => Promise<void>;
 	planPrivateTransfer: FilesActionStore["planPrivateTransfer"];

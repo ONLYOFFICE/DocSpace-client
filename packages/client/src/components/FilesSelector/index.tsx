@@ -378,8 +378,12 @@ const FilesSelectorWrapper = ({
             {
               private: destInfo.private,
               rootFolderId: destInfo.rootFolderId,
+              rootFolderType: (
+                selectedTreeNode as unknown as { rootFolderType?: FolderType }
+              )?.rootFolderType,
               roomType: destInfo.roomType,
               deleteSourceOnSuccess: transfer.deleteSourceOnSuccess,
+              sourceRoomId: privateRoomId,
             },
           );
         }

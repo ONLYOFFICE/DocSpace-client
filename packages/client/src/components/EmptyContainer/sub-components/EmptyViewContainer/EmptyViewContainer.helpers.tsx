@@ -651,7 +651,9 @@ export const getOptions = (
         {
           ...(isPrivateScope ? actions.onGoToPrivate() : actions.onGoToShared()),
           icon: <FolderIcon />,
-          description: t("Common:GoToMyRooms"),
+          description: isPrivateScope
+            ? t("Common:GoToSection", { sectionName: t("Common:Private") })
+            : t("Common:GoToMyRooms"),
           key: "empty-view-goto-shared",
         },
       ])

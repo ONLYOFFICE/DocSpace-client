@@ -1123,8 +1123,11 @@ test.describe("Private section — empty states", () => {
 
     await expect(emptyView(page)).toBeVisible({ timeout: 15000 });
     await expect(emptyView(page).locator('a[href*="/rooms/"]')).toHaveCount(0);
+    const goBack = emptyView(page).locator("#empty-view-goto-shared");
+    await expect(goBack).toContainText("Go to Private");
+    await expect(goBack).not.toContainText("Go to rooms");
 
-    await emptyView(page).locator("#empty-view-goto-shared").click();
+    await goBack.click();
 
     await expect
       .poll(() => pathOf(page), { timeout: 15000 })

@@ -68,6 +68,24 @@ The system SHALL offer "Download" for a folder inside a private room and for the
 
 ## ADDED Requirements
 
+### Requirement: Pickers show resolved names
+The system SHALL show the decrypted display name of encrypted files in the file and destination pickers, recovering it from the file header when it is not cached and the identity is unlocked. While locked or before recovery completes the opaque name is shown, and the picker itself SHALL NOT raise an unlock prompt.
+
+#### Scenario: Destination picker in a private room
+- **WHEN** the Copy or Move dialog lists the encrypted files of a private room with the identity unlocked
+- **THEN** each file is listed by its decrypted name, not by its opaque server title
+
+#### Scenario: Picker while locked
+- **WHEN** a picker lists encrypted files while the identity is locked
+- **THEN** the opaque names are shown and no unlock prompt is raised by the picker
+
+### Requirement: No decryption warning in a Move that stays in the room
+The destination picker SHALL NOT show the Common:EncryptedTransferBannerTitle warning for a Move from a private room, because the Move is pinned to that room and nothing can leave it decrypted.
+
+#### Scenario: Move dialog of a private room
+- **WHEN** the Move dialog is opened for encrypted files of a private room
+- **THEN** no decryption warning is shown
+
 ### Requirement: Errors on encrypted paths are localized
 The system SHALL take every message of an encrypted copy, download or open from the locale files, with no English fallback text in code; an error without a specific message SHALL show Common:EncryptedOperationFailed.
 

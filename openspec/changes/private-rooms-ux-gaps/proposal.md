@@ -14,6 +14,10 @@ The private-rooms client UI is functionally complete but ships several rough edg
 - Key dialogs (passphrase, recovery phrase, key change, passphrase change, reset) get dialog roles, labelled inputs and an aside variant on narrow screens.
 - The bulk header menu in a private room gets "Download without decryption".
 
+Found on a local portal on 2026-10-22 and added here:
+- the Copy and Move dialogs list encrypted files by their opaque server titles; they get the decrypted names the feeds get, through a title resolver that ui-kit has to offer first (external dependency on `docspace-ui-kit-react`);
+- the Move dialog of a private room, pinned to that room, warns that files will be saved decrypted; the warning is dropped there.
+
 Out of scope: any change to the encryption model or transfer rules (see `private-rooms-upload-fail-closed`), the SDK surface (see `private-rooms-sdk-gating-and-parity`), editor behaviour. No decision is needed from the user; "withhold New PDF form" is the recommendation and can be flipped to "keep" by editing one scenario before apply.
 
 ## Capabilities
@@ -24,7 +28,7 @@ Out of scope: any change to the encryption model or transfer rules (see `private
 
 ### Modified Capabilities
 
-- `private-rooms/file-operations`: "Create new file in a private room" (no PDF form), "New PDF form entry present in private rooms" (removed), "PDF creation on mobile" (removed), "Feeds show opaque names" (becomes resolved names), "No decrypted folder download" (becomes decrypted folder download), "Download without decryption" (bulk header menu), "Errors on encrypted paths are localized" (added).
+- `private-rooms/file-operations`: "Create new file in a private room" (no PDF form), "New PDF form entry present in private rooms" (removed), "PDF creation on mobile" (removed), "Feeds show opaque names" (becomes resolved names), "No decrypted folder download" (becomes decrypted folder download), "Download without decryption" (bulk header menu), "Errors on encrypted paths are localized", "Pickers show resolved names" and "No decryption warning in a Move that stays in the room" (added).
 - `private-rooms/key-management`: "Delete a key" (lists affected rooms), "All key dialogs are modal" (becomes accessible dialogs with an aside variant).
 
 ## Impact

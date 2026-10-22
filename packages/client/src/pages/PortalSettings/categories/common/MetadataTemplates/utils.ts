@@ -321,4 +321,5 @@ export const canSaveTemplate = (
   draft: TTemplateDraft,
 ) =>
   !!draft.name.trim() &&
+  draft.fields.length > 0 &&
   (!template || hasTemplateChanges(getTemplateChanges(template, draft)));

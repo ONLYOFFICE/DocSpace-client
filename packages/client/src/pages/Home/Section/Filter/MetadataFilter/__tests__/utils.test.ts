@@ -383,12 +383,13 @@ describe("panel group", () => {
     ]);
   });
 
-  it("shows only with a visible template or a metadata filter already set", () => {
+  it("shows only with a visible template with fields or a metadata filter already set", () => {
     const visible = { ...template, visible: true } as TMetadataTemplate;
     const hidden = { ...template, visible: false } as TMetadataTemplate;
+    const empty: TMetadataTemplate = { ...visible, fields: [] };
 
     expect(canFilterByMetadata([], false)).toBe(false);
-    expect(canFilterByMetadata([hidden], false)).toBe(false);
+    expect(canFilterByMetadata([hidden, empty], false)).toBe(false);
     expect(canFilterByMetadata([hidden, visible], false)).toBe(true);
     expect(canFilterByMetadata([hidden], true)).toBe(true);
   });

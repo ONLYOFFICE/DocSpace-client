@@ -81,14 +81,21 @@ const file = (Edit: boolean) =>
   asSelection({ id: 3, fileExst: ".docx", security: { Edit } });
 
 const template = (id: number, name: string) =>
-  ({ id, name, visible: true }) as TMetadataTemplate;
+  ({
+    id,
+    name,
+    visible: true,
+    fields: [
+      { id, templateId: id, name, type: MetadataFieldType.String, order: 0 },
+    ],
+  }) as TMetadataTemplate;
 
 const entryTemplate = (id: number, name: string): TEntryMetadataTemplate => ({
   id,
   name,
   visible: true,
   cascade: false,
-  fields: [],
+  fields: [{ id, name, type: MetadataFieldType.String, order: 0 }],
 });
 
 const field = (
@@ -132,14 +139,20 @@ describe("canEditMetadata", () => {
 });
 
 describe("entry metadata state", () => {
-  it("is empty without visible templates and custom fields", () => {
+  it("is empty without visible templates with fields and custom fields", () => {
     expect(isEmptyMetadata({ templates: [], customFields: [] })).toBe(true);
     expect(
       isEmptyMetadata({
-        templates: [{ ...entryTemplate(1, "Sync"), visible: false }],
+        templates: [
+          { ...entryTemplate(1, "Sync"), visible: false },
+          { ...entryTemplate(2, "Empty"), fields: [] },
+        ],
         customFields: [],
       }),
     ).toBe(true);
+    expect(
+      isEmptyMetadata({ templates: [entryTemplate(1, "Sync")], customFields: [] }),
+    ).toBe(false);
     expect(
       isEmptyMetadata({
         templates: [],
@@ -155,18 +168,23 @@ describe("entry metadata state", () => {
 });
 
 describe("templates", () => {
-  it("shows only visible templates, sorted by name", () => {
+  it("shows only visible templates with fields, sorted by name", () => {
     const shown = getVisibleTemplates([
       entryTemplate(1, "Invoice"),
       { ...entryTemplate(3, "Sync"), visible: false },
+      { ...entryTemplate(4, "Empty"), fields: [] },
       entryTemplate(2, "Case file"),
     ]);
 
     expect(shown.map((item) => item.name)).toEqual(["Case file", "Invoice"]);
   });
 
-  it("offers only templates that are not assigned yet", () => {
-    const all = [template(1, "Case file"), template(2, "Invoice")];
+  it("offers only templates with fields that are not assigned yet", () => {
+    const all = [
+      template(1, "Case file"),
+      template(2, "Invoice"),
+      { ...template(3, "Empty"), fields: [] },
+    ];
 
     const assigned = [entryTemplate(1, "Case file")];
 

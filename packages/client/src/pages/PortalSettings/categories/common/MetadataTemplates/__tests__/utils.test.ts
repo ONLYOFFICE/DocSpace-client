@@ -367,11 +367,18 @@ describe("getTemplateChanges", () => {
 });
 
 describe("canSaveTemplate", () => {
-  it("requires a name for a new template", () => {
+  it("requires a name and at least one field for a new template", () => {
+    const named = { ...toTemplateDraft(null), name: "Tax" };
+
     expect(canSaveTemplate(null, toTemplateDraft(null))).toBe(false);
+    expect(canSaveTemplate(null, named)).toBe(false);
     expect(
-      canSaveTemplate(null, { ...toTemplateDraft(null), name: "Tax" }),
+      canSaveTemplate(null, { ...named, fields: [caseNumber] }),
     ).toBe(true);
+  });
+
+  it("does not save an existing template with every field removed", () => {
+    expect(canSaveTemplate(template, { ...draft, fields: [] })).toBe(false);
   });
 
   it("requires a change for an existing template", () => {

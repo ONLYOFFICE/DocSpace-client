@@ -85,8 +85,11 @@ export const canEditMetadata = (item: TMetadataSelection) => {
   return !!item.security?.Create;
 };
 
+const isShownTemplate = ({ visible, fields }: TEntryMetadataTemplate) =>
+  visible && fields.length > 0;
+
 export const isEmptyMetadata = ({ templates, customFields }: TEntryMetadata) =>
-  !templates.some(({ visible }) => visible) && !customFields.length;
+  !templates.some(isShownTemplate) && !customFields.length;
 
 export const getCascadeState = (
   operation: TMetadataOperation | null,
@@ -114,7 +117,7 @@ export const canAddCustomField = (count: number) =>
 
 export const getVisibleTemplates = (templates: TEntryMetadataTemplate[]) =>
   templates
-    .filter(({ visible }) => visible)
+    .filter(isShownTemplate)
     .sort((a, b) => a.name.localeCompare(b.name));
 
 export const getUnassignedTemplates = (
@@ -123,7 +126,9 @@ export const getUnassignedTemplates = (
 ) => {
   const assignedIds = new Set(assigned.map((template) => template.id));
 
-  return templates.filter((template) => !assignedIds.has(template.id));
+  return templates.filter(
+    (template) => template.fields?.length && !assignedIds.has(template.id),
+  );
 };
 
 export const filterTemplatesByName = (

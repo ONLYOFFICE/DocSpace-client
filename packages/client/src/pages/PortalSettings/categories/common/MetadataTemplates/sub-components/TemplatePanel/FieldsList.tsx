@@ -102,7 +102,11 @@ const FieldsList = ({
             />
           ))}
         </div>
-      ) : null}
+      ) : (
+        <Text className={styles.hint} lineHeight="20px">
+          {t("Metadata:TemplateFieldsRequired")}
+        </Text>
+      )}
     </div>
   );
 };

@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Items that already have {{template}} values stay unchanged",
   "SuggestMetadata": "Suggest metadata",
   "TemplateDeleted": "Template deleted",
+  "TemplateFieldsRequired": "Add at least one field to save the template",
   "TemplateValue": "Template: {{template}}",
   "Visibility": "Visibility",
   "Visible": "Visible",

@@ -300,10 +300,16 @@ export const dropMetadataChip = (
   applyMetadataFilter(filter, state && removeMetadataChip(state, chipKey));
 };
 
+export const isFilterableTemplate = ({
+  visible,
+  fields,
+}: Pick<TMetadataTemplate, "visible" | "fields">) =>
+  visible && !!fields?.length;
+
 export const canFilterByMetadata = (
   templates: TMetadataTemplate[],
   isActive: boolean,
-) => isActive || templates.some(({ visible }) => visible);
+) => isActive || templates.some(isFilterableTemplate);
 
 export const addMetadataGroup = (options: TFilterOption[], label: string) => {
   options.forEach((option) => {

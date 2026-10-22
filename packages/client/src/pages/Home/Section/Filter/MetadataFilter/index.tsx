@@ -50,6 +50,7 @@ import ConditionsPanel from "./sub-components/ConditionsPanel";
 import type { TMetadataFilterState } from "./types";
 import {
   getMetadataSelectedItem,
+  isFilterableTemplate,
   parseMetadataFilter,
   removeMetadataChip,
   serializeMetadataFilter,
@@ -93,7 +94,8 @@ const MetadataFilterSection = ({
     openPanel(() => (
       <ConditionsPanel
         templates={templates.filter(
-          ({ id, visible }) => visible || id === state?.templateId,
+          (template) =>
+            isFilterableTemplate(template) || template.id === state?.templateId,
         )}
         state={state}
         onApply={(next) => {

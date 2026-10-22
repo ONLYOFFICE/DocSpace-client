@@ -129,7 +129,6 @@ async function checkSectionAddress(
       !!appsStore &&
       !appsStore.isInstalled("ai-rooms") &&
       !appsStore.isInstalled("ai-forms"),
-    isFrame: !!self.settingsStore.isFrame,
     isDecided: !!(address.state as Nullable<Record<string, unknown>>)?.[
       SECTION_DECIDED_STATE
     ],

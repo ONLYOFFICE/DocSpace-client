@@ -36,11 +36,16 @@
 import { describe, expect, it } from "vitest";
 
 import { CategoryType } from "@docspace/shared/constants";
-import { FolderType } from "@docspace/shared/enums";
+import {
+  FolderType,
+  RoomPrivacyFilter,
+  RoomSearchArea,
+} from "@docspace/shared/enums";
 import {
   getCategoryType,
   isPrivateRoomsRoute,
 } from "@docspace/shared/utils/common";
+import { getRoomsRequestScope } from "@docspace/shared/utils/rooms";
 
 import { getClientActiveId } from "../articleNavigation";
 import {
@@ -188,6 +193,29 @@ describe("Private section of a room opened from elsewhere", () => {
   });
 });
 
+describe("Frame opened in the Private section", () => {
+  // The address the SDK JS manager builds from its root path:
+  // `{rootPath}{id}/filter?...`, the id also given as `folder`.
+  const managerAddress = (rootPath: string, id?: number) =>
+    `${rootPath}${id ? `${id}/` : ""}filter`;
+
+  it("opens the Private list from the root path /private/ with the Private scope", () => {
+    const categoryType = categoryOf(managerAddress("/private/"));
+
+    expect(categoryType).toBe(CategoryType.PrivateRooms);
+    expect(getRoomsRequestScope(categoryType, undefined, true)).toEqual({
+      privacyFilter: RoomPrivacyFilter.Private,
+      searchArea: RoomSearchArea.Active,
+    });
+  });
+
+  it("opens a private room the host names under the root path /private/", () => {
+    expect(categoryOf(managerAddress("/private/", 12))).toBe(
+      CategoryType.PrivateRoom,
+    );
+  });
+});
+
 describe("Private list root, as the header title reads it", () => {
   it("is the list address with the rooms root loaded", () => {
     expect(isPrivateRoomsListRoot({ pathname: "/private/filter" }, true)).toBe(
@@ -218,7 +246,6 @@ describe("Section decided before the folder is shown", () => {
       isPrivate: true,
       isSectionAvailable: true,
       isRoomsAppOff: false,
-      isFrame: false,
       isDecided: false,
       ...decision,
     });
@@ -264,7 +291,6 @@ describe("Section decided before the folder is shown", () => {
 
   it.each([
     ["the section is not available", { isSectionAvailable: false }],
-    ["the client runs in a frame", { isFrame: true }],
     ["the address was decided already", { isDecided: true }],
   ])("keeps the address while %s", (_, decision) => {
     expect(decide(decision)).toBeNull();

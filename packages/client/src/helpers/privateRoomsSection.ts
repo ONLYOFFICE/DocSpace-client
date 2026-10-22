@@ -126,7 +126,6 @@ export type TSectionDecision = {
   isSectionAvailable: boolean;
   /** Neither the Rooms nor the Forms app is on. */
   isRoomsAppOff: boolean;
-  isFrame: boolean;
   /** The address is the result of an earlier correction. */
   isDecided: boolean;
 };
@@ -138,10 +137,9 @@ export type TSectionDecision = {
 export const getSectionAddressCorrection = (
   decision: TSectionDecision,
 ): string | null => {
-  const { isPrivate, isSectionAvailable, isRoomsAppOff, isFrame, isDecided } =
-    decision;
+  const { isPrivate, isSectionAvailable, isRoomsAppOff, isDecided } = decision;
 
-  if (!isSectionAvailable || isFrame || isDecided) return null;
+  if (!isSectionAvailable || isDecided) return null;
 
   const categoryType = getCategoryType(decision);
   const isPrivateAddress = PRIVATE_CATEGORIES.includes(categoryType);

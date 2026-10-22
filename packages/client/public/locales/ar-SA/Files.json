@@ -100,7 +100,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "سيتم حذف الروابط إلى جميع الملفات في الغرفة. وستصبح الروابط السابقة إلى ملفات الغرفة والمستندات المضمنة غير متاحة.",
   "RevokeSharedLinkDescriptionFormRoom": "سيتم إعادة إنشاء الروابط إلى جميع الملفات في المساحة. وستصبح الروابط السابقة إلى ملفات المساحة والمستندات المضمنة غير متاحة.",
   "RevokeSharedLinkDescriptionPublicRoom": "سيتم إعادة إنشاء الروابط إلى جميع الملفات في الغرفة. وستصبح الروابط السابقة إلى ملفات الغرفة والمستندات المضمنة غير متاحة.",
-  "RoomAccessRedirectNote": "سيتم إعادة توجيهكم تلقائيًا إلى {{sectionName}} في غضون 5 ثوانٍ.",
+  "RoomAccessRedirectNote": "سيتم إعادة توجيهكم تلقائيًا إلى قسم {{sectionName}} في غضون 5 ثوانٍ.",
   "RoomAvailableViaExternalLink": "الغرفة متاحة بواسطة رابط خارجي",
   "RoomAvailableViaSharedLink": "المساحة متاحة بواسطة رابط المشاركة",
   "RoomCreated": "تم إنشاء الغرفة",

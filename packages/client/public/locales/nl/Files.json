@@ -100,7 +100,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "Links naar alle bestanden in de ruimte worden verwijderd. Eerdere links naar bestanden in de kamer en ingesloten documenten zullen niet meer beschikbaar zijn.",
   "RevokeSharedLinkDescriptionFormRoom": "Links naar alle formulieren in de ruimte worden opnieuw gegenereerd. Eerdere links naar formulieren in de ruimte en ingesloten formulieren zullen niet meer beschikbaar zijn.",
   "RevokeSharedLinkDescriptionPublicRoom": "Links naar alle bestanden in de kamer worden opnieuw gegenereerd. Eerdere links naar bestanden in de kamer en ingesloten documenten zullen niet meer beschikbaar zijn.",
-  "RoomAccessRedirectNote": "U wordt automatisch doorgestuurd naar de {{sectionName}} in 5 seconden.",
+  "RoomAccessRedirectNote": "U wordt automatisch doorgestuurd naar de sectie {{sectionName}} in 5 seconden.",
   "RoomAvailableViaExternalLink": "Kamer beschikbaar via externe link",
   "RoomAvailableViaSharedLink": "Ruimte beschikbaar via gedeelde link",
   "RoomCreated": "Kamer aangemaakt",

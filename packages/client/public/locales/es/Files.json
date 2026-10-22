@@ -100,7 +100,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "Se eliminarán los enlaces a todos los archivos de la sala. Los enlaces anteriores a los archivos de la sala y a los documentos incrustados dejarán de estar disponibles.",
   "RevokeSharedLinkDescriptionFormRoom": "Se volverán a generar enlaces a todos los formularios del espacio. Los enlaces anteriores a los formularios del espacio y a los formularios incrustados dejarán de estar disponibles.",
   "RevokeSharedLinkDescriptionPublicRoom": "Se volverán a generar enlaces a todos los archivos de la sala. Los enlaces anteriores a los archivos de la sala y a los documentos incrustados dejarán de estar disponibles.",
-  "RoomAccessRedirectNote": "Será redirigido automáticamente a {{sectionName}} en 5 segundos.",
+  "RoomAccessRedirectNote": "Será redirigido automáticamente a la sección {{sectionName}} en 5 segundos.",
   "RoomAvailableViaExternalLink": "Sala disponible a través de enlace externo",
   "RoomAvailableViaSharedLink": "Espacio disponible a través de enlace compartido",
   "RoomCreated": "La sala se ha creado",

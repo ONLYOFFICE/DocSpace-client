@@ -100,7 +100,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "Links to all files in the room will be deleted. Previous links to room files and embedded documents will become unavailable.",
   "RevokeSharedLinkDescriptionFormRoom": "Links to all forms in the space will be re-generated. Previous links to space forms and embedded forms will become unavailable.",
   "RevokeSharedLinkDescriptionPublicRoom": "Links to all files in the room will be re-generated. Previous links to room files and embedded documents will become unavailable.",
-  "RoomAccessRedirectNote": "You will be redirected to the {{sectionName}} automatically in 5 seconds.",
+  "RoomAccessRedirectNote": "You will be redirected to the {{sectionName}} section automatically in 5 seconds.",
   "RoomAvailableViaExternalLink": "Room available via external link",
   "RoomAvailableViaSharedLink": "Space available via shared link",
   "RoomCreated": "Room created",

@@ -832,9 +832,10 @@ test.describe("Private section — ways out stay in it", () => {
     );
 
     const view = page.getByTestId("empty-view");
-    await expect(view).toContainText("redirected to the Private", {
-      timeout: 15000,
-    });
+    await expect(view).toContainText(
+      "redirected to the Private section automatically",
+      { timeout: 15000 },
+    );
     await view.getByText("Go to Private").click();
 
     await expect
@@ -855,9 +856,10 @@ test.describe("Private section — ways out stay in it", () => {
       page,
       `/private/${GONE_ROOM_ID}/filter?folder=${GONE_ROOM_ID}`,
     );
-    await expect(page.getByTestId("empty-view")).toBeVisible({
-      timeout: 15000,
-    });
+    await expect(page.getByTestId("empty-view")).toContainText(
+      "You will be redirected to the Private section automatically in 5 seconds.",
+      { timeout: 15000 },
+    );
 
     await expect(page.getByTestId("quick-actions")).toHaveCount(0);
     for (const tile of [

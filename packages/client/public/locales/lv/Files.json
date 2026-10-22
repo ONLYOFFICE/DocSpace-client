@@ -100,7 +100,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "Saites uz visiem telpā esošajiem failiem tiks izdzēstas. Iepriekšējās saites uz telpu failiem un iegultiem dokumentiem nebūs pieejamas.",
   "RevokeSharedLinkDescriptionFormRoom": "Saites uz visām telpā esošajām veidlapām tiks atkārtoti ģenerētas. Iepriekšējās saites uz telpu veidlapām un iegultām veidlapām nebūs pieejamas.",
   "RevokeSharedLinkDescriptionPublicRoom": "Saites uz visām telpā esošajiem failiem tiks atkārtoti ģenerētas. Iepriekšējās saites uz telpu failiem un iegultiem dokumentiem nebūs pieejamas.",
-  "RoomAccessRedirectNote": "Jūs tiksiet automātiski novirzīts uz {{sectionName}} pēc 5 sekundēm.",
+  "RoomAccessRedirectNote": "Jūs tiksiet automātiski novirzīts uz sadaļu {{sectionName}} pēc 5 sekundēm.",
   "RoomAvailableViaExternalLink": "Numurs ir pieejams, izmantojot ārējo saiti",
   "RoomAvailableViaSharedLink": "Telpa ir pieejama, izmantojot koplietoto saiti",
   "RoomCreated": "Telpa ir izveidota",

@@ -100,7 +100,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "Liên kết đến tất cả các tập tin trong phòng sẽ bị xóa. Các liên kết trước đó đến phòng có tập tin và tài liệu nhúng sẽ không khả dụng.",
   "RevokeSharedLinkDescriptionFormRoom": "Liên kết đến tất cả các biểu mẫu trong không gian sẽ được tạo lại. Các liên kết trước đó đến biểu mẫu của không gian và biểu mẫu nhúng sẽ không khả dụng.",
   "RevokeSharedLinkDescriptionPublicRoom": "Liên kết đến tất cả các tập tin trong phòng sẽ được tạo lại. Các liên kết trước đó đến phòng có tập tin và tài liệu nhúng sẽ không khả dụng.",
-  "RoomAccessRedirectNote": "Bạn sẽ được chuyển đến {{sectionName}} tự động trong 5 giây.",
+  "RoomAccessRedirectNote": "Bạn sẽ được chuyển đến phần {{sectionName}} tự động trong 5 giây.",
   "RoomAvailableViaExternalLink": "Phòng khả dụng thông qua liên kết bên ngoài",
   "RoomAvailableViaSharedLink": "Không gian khả dụng thông qua liên kết được chia sẻ",
   "RoomCreated": "Đã tạo phòng",

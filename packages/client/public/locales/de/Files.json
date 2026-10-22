@@ -100,7 +100,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "Links zu allen Dateien im Raum werden gelöscht. Vorherige Links zu Raumdateien und eingebetteten Dokumenten sind dann nicht mehr verfügbar.",
   "RevokeSharedLinkDescriptionFormRoom": "Links zu allen Formularen im Space werden neu generiert. Vorherige Links zu Space-Formularen und eingebetteten Formularen sind nicht mehr verfügbar.",
   "RevokeSharedLinkDescriptionPublicRoom": "Links zu allen Dateien im Raum werden neu generiert. Vorherige Links zu Raumdateien und eingebetteten Dokumenten sind nicht mehr verfügbar.",
-  "RoomAccessRedirectNote": "Sie werden in 5 Sekunden automatisch zu {{sectionName}} weitergeleitet.",
+  "RoomAccessRedirectNote": "Sie werden in 5 Sekunden automatisch zum Bereich {{sectionName}} weitergeleitet.",
   "RoomAvailableViaExternalLink": "Raum verfügbar über externen Link",
   "RoomAvailableViaSharedLink": "Space verfügbar über freigegebenen Link",
   "RoomCreated": "Raum erstellt",

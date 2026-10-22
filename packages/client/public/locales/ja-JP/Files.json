@@ -100,7 +100,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "ルーム内のすべてのファイルへのリンクが削除されます。ルーム内のファイルおよび埋め込み文書への以前のリンクは利用できなくなります。",
   "RevokeSharedLinkDescriptionFormRoom": "スペース内のすべてのフォームへのリンクが再生成されます。スペースフォームおよび埋め込みフォームへの以前のリンクは利用できなくなります。",
   "RevokeSharedLinkDescriptionPublicRoom": "ルーム内のすべてのファイルへのリンクが再生成されます。ルームファイルおよび埋め込み文書への以前のリンクは利用できなくなります。",
-  "RoomAccessRedirectNote": "5秒後に自動的に{{sectionName}}にリダイレクトされます。",
+  "RoomAccessRedirectNote": "5秒後に自動的に{{sectionName}}セクションにリダイレクトされます。",
   "RoomAvailableViaExternalLink": "外部リンクから利用可能なルーム",
   "RoomAvailableViaSharedLink": "共有リンクから利用可能なスペース",
   "RoomCreated": "ルームが作成されました",

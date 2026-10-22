@@ -100,7 +100,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "房间内所有文件的链接将被删除。之前的房间文件和嵌入式文档的链接将失效。",
   "RevokeSharedLinkDescriptionFormRoom": "空间内所有表单的链接将重新生成。之前的空间表单和嵌入式表单的链接将失效。",
   "RevokeSharedLinkDescriptionPublicRoom": "房间内所有文件的链接将重新生成。之前的房间文件和嵌入式文档的链接将失效。",
-  "RoomAccessRedirectNote": "将在5秒后自动跳转到{{sectionName}}。",
+  "RoomAccessRedirectNote": "将在5秒后自动跳转到{{sectionName}}部分。",
   "RoomAvailableViaExternalLink": "可通过外部链接访问的房间",
   "RoomAvailableViaSharedLink": "可通过共享链接访问的空间",
   "RoomCreated": "房间已创建",

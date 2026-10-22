@@ -100,7 +100,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "I collegamenti a tutti i file della stanza verranno eliminati. I collegamenti precedenti ai file della stanza e ai documenti incorporati non saranno più disponibili.",
   "RevokeSharedLinkDescriptionFormRoom": "I collegamenti a tutti i moduli dello spazio verranno rigenerati. I collegamenti precedenti ai moduli dello spazio e ai moduli incorporati non saranno più disponibili.",
   "RevokeSharedLinkDescriptionPublicRoom": "I collegamenti a tutti i file della stanza verranno rigenerati. I collegamenti precedenti ai file della stanza e ai documenti incorporati non saranno più disponibili.",
-  "RoomAccessRedirectNote": "Verrai reindirizzato automaticamente a {{sectionName}} tra 5 secondi.",
+  "RoomAccessRedirectNote": "Verrai reindirizzato automaticamente alla sezione {{sectionName}} tra 5 secondi.",
   "RoomAvailableViaExternalLink": "Stanza disponibile tramite collegamento esterno",
   "RoomAvailableViaSharedLink": "Spazio disponibile tramite collegamento condiviso",
   "RoomCreated": "La stanza è stata creata",

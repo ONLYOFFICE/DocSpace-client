@@ -100,7 +100,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "Lidhjet për të gjithë skedarët në dhomë do të fshihen. Lidhjet e mëparshme me skedarët e dhomës dhe dokumentet e integruara do të bëhen të padisponueshme.",
   "RevokeSharedLinkDescriptionFormRoom": "Lidhjet me të gjitha format në hapësirë do të rigjenerohen. Lidhjet e mëparshme me formularët e hapësirës dhe formularët e integruar do të bëhen të padisponueshme.",
   "RevokeSharedLinkDescriptionPublicRoom": "Lidhjet për të gjithë skedarët në dhomë do të rigjenerohen. Lidhjet e mëparshme me skedarët e dhomës dhe dokumentet e integruara do të bëhen të padisponueshme.",
-  "RoomAccessRedirectNote": "Do të ridrejtoheni te {{sectionName}} automatikisht për 5 sekonda.",
+  "RoomAccessRedirectNote": "Do të ridrejtoheni te seksioni {{sectionName}} automatikisht për 5 sekonda.",
   "RoomAvailableViaExternalLink": "Dhoma në dispozicion përmes lidhjes së jashtme",
   "RoomAvailableViaSharedLink": "Hapësira në dispozicion përmes lidhjes së shpërndarë",
   "RoomCreated": "Dhoma u krijua",

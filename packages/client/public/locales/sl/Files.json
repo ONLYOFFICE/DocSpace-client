@@ -100,7 +100,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "Povezave do vseh datotek v sobi bodo izbrisane. Prejšnje povezave do datotek sobe in vdelanih dokumentov ne bodo več na voljo.",
   "RevokeSharedLinkDescriptionFormRoom": "Povezave do vseh obrazcev v prostoru bodo ponovno ustvarjene. Prejšnje povezave do obrazcev prostora in vdelanih obrazcev ne bodo več na voljo.",
   "RevokeSharedLinkDescriptionPublicRoom": "Povezave do vseh datotek v sobi bodo znova ustvarjene. Prejšnje povezave do datotek sobe in vdelanih dokumentov ne bodo več na voljo.",
-  "RoomAccessRedirectNote": "Samodejno vas čez 5 sekund preusmerimo na {{sectionName}}.",
+  "RoomAccessRedirectNote": "Samodejno vas čez 5 sekund preusmerimo na razdelek {{sectionName}}.",
   "RoomAvailableViaExternalLink": "Soba na voljo preko zunanje povezave",
   "RoomAvailableViaSharedLink": "Prostor na voljo preko povezave v skupni rabi",
   "RoomCreated": "Soba ustvarjena",

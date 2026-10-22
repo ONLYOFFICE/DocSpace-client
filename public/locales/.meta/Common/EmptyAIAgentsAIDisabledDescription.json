@@ -3,7 +3,7 @@
   "content": "This section allows users to work with AI agents — smart assistants for handling documents and other tasks. \nTo start using them, the AI agents & tools service must be enabled by the Full admin.",
   "content_en_sha1_hash": "efd37d41864fb9d950e1fcc8a31e56bef607ee43",
   "created_at": "2026-10-16T12:03:01.927Z",
-  "updated_at": "2026-10-16T12:03:59.839Z",
+  "updated_at": "2026-10-22T13:13:49.561Z",
   "comment": {
     "text": "Description on the empty AI agents screen when AI agents & tools are not enabled, explaining what AI agents are and that the Full admin must enable the service.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 319,
-      "context": "{t(\"Common:EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n </>\n ))\n .with([true, false], () =>\n t(\"Common:EmptyAIAgentsAIDisabledDescription\"),\n )\n .otherwise(() => t(\"Common:EmptyAIDisabledContactAdminDesc\"));\n };\n \n const getAIAgentsAIEnabledDescription = (",
+      "line_number": 318,
+      "context": "<Text as=\"span\" style={{ display: \"block\", marginTop: \"8px\" }}>\n {t(\"Common:EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n </>\n ))\n .with([true, false], () => t(\"Common:EmptyAIAgentsAIDisabledDescription\"))\n .otherwise(() => t(\"Common:EmptyAIDisabledContactAdminDesc\"));\n };\n \n const getAIAgentsAIEnabledDescription = (\n t: TTranslation,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 171,
+      "line_number": 173,
       "context": "? t(\"Common:EmptyAIAgentsAIDisabledSaasAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue:\n \"AI agents are not yet enabled in this {{productName}} portal.\",\n })\n : t(\"Common:EmptyAIAgentsAIDisabledDescription\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue:\n \"Ask your portal admin to enable AI agents in {{productName}}.\",\n });",
       "module": "/packages/sdk"
     }

@@ -3,7 +3,7 @@
   "content": "Connect your wallet and enable AI agents & tools",
   "content_en_sha1_hash": "c7a45b0ef5338ef690afae4acdc999ed22a3a45d",
   "created_at": "2026-10-21T10:17:08.603Z",
-  "updated_at": "2026-10-21T10:17:45.851Z",
+  "updated_at": "2026-10-22T13:13:49.871Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 140,
+      "line_number": 142,
       "context": "defaultValue: \"AI Provider\",\n }),\n defaultValue: \"Configure {{aiProvider}} to start\",\n })\n : isAdminOrOwner\n ? t(\"Common:EmptyAIAgentsAIDisabledSaasAdminTitle\", {\n defaultValue: \"AI agents are unavailable\",\n })\n : t(\"Common:EmptyAIAgentsAIDisabledUserTitle\", {\n defaultValue: \"AI agents are unavailable\",\n });",
       "module": "/packages/sdk"
     }

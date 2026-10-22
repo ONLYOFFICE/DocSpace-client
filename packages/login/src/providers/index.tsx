@@ -39,6 +39,7 @@ import React from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import ForeignTextGuard from "@docspace/shared/components/foreign-text-guard";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -135,6 +136,7 @@ export const Providers = ({
           firebaseHelper={firebaseHelper}
         >
           <RootTooltip />
+          <ForeignTextGuard />
           {shouldRedirect && redirectURL && pathName !== redirectURL
             ? null
             : children}

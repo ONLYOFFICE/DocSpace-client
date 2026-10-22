@@ -3,7 +3,7 @@
   "content": "is any of",
   "content_en_sha1_hash": "e7805d298e68152753b0464e69fb12a9c18eaf9c",
   "created_at": "2026-10-21T10:17:41.286Z",
-  "updated_at": "2026-10-21T10:20:42.121Z",
+  "updated_at": "2026-10-22T13:13:49.710Z",
   "comment": {
     "text": "Operator in the metadata filter for Multi select fields (value matches at least one of the chosen options); lowercase, inserted as {{operator}} into a chip like Tags: is any of · A, B.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/MetadataFilter/utils.ts",
-      "line_number": 319,
+      "line_number": 357,
       "context": ") => {\n switch (operator) {\n case \"contains\":\n return t(\"Metadata:OperatorContains\");\n case \"isAnyOf\":\n return t(\"Metadata:OperatorIsAnyOf\");\n case \"equals\":\n return t(\"Metadata:OperatorEquals\");\n case \"greaterThan\":\n return t(\"Metadata:OperatorGreaterThan\");\n case \"lessThan\":",
       "module": "/packages/client"
     }

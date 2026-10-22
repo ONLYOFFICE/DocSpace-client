@@ -3,7 +3,7 @@
   "content": "AI agents & tools aren't active",
   "content_en_sha1_hash": "343d4462e5f4a9267c7b723afa0612fcc53b4d20",
   "created_at": "2026-10-21T10:16:57.342Z",
-  "updated_at": "2026-10-21T10:17:45.663Z",
+  "updated_at": "2026-10-22T13:13:49.548Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 293,
-      "context": "// standalone user\n .with([true, false], () =>\n t(\"Common:EmptyAIAgentsAIDisabledUserTitle\"),\n )\n // saas user\n .otherwise(() => t(\"Common:AIFeaturesNotActive\"))\n );\n };\n \n const getAIAgentsAIDisabledDescription = (\n t: TTranslation,",
+      "context": ")\n .with([false, true], () => t(\"Common:EmptyAIAgentsNotActiveYetTitle\"))\n // standalone user\n .with([true, false], () => t(\"Common:EmptyAIAgentsAIDisabledUserTitle\"))\n // saas user\n .otherwise(() => t(\"Common:AIFeaturesNotActive\"))\n );\n };\n \n const getAIAgentsAIDisabledDescription = (\n t: TTranslation,",
       "module": "/packages/client"
     }
   ],

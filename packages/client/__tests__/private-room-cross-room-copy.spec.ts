@@ -68,6 +68,9 @@ const BOB_ID = "22222222-2222-2222-2222-222222222222";
 
 const PLAN = { id: 8951, name: "plan.txt", text: "Plan of record." };
 
+const MOVE_REFUSAL =
+  /can't be moved to another private room|CannotMoveToAnotherPrivateRoom/;
+
 type TRooms = {
   sourceHandle: EncryptedFilesHandlerHandle;
   destHandle: EncryptedFilesHandlerHandle;
@@ -268,6 +271,15 @@ const copyToDestinationRoom = async (page: Page) => {
   await picker.getByRole("button", { name: "Copy here" }).click();
 };
 
+/** Records every request the page sends, as "METHOD pathname". */
+const recordRequests = (page: Page) => {
+  const seen: string[] = [];
+  page.on("request", (req) => {
+    seen.push(`${req.method()} ${new URL(req.url()).pathname}`);
+  });
+  return seen;
+};
+
 /** Checks the copy stored in the destination room. */
 const expectReencryptedCopy = async (rooms: TRooms) => {
   await expect
@@ -338,5 +350,53 @@ test.describe("Private room — copy into another private room", () => {
     await unlockIfPrompted(page, rooms.passphrase);
 
     await expectReencryptedCopy(rooms);
+  });
+
+  test("Paste into another private room", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl);
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+
+    await page.keyboard.press("Control+a");
+    await page.keyboard.press("Control+x");
+    await expect(
+      page.getByTestId("toast-content").filter({ hasText: /: 1$/ }),
+    ).toBeVisible({ timeout: 5000 });
+
+    await openRoomInApp(page, DEST_ROOM_ID, activeRoomUrl(DEST_ROOM_ID));
+    await expect(
+      page.getByRole("heading", { name: DEST_ROOM_TITLE, level: 1 }),
+    ).toBeVisible({ timeout: 15000 });
+    const seen = recordRequests(page);
+    await page.keyboard.press("Control+v");
+
+    await expect(
+      page.getByTestId("toast-content").filter({ hasText: MOVE_REFUSAL }),
+    ).toBeVisible({ timeout: 10000 });
+    expect(seen.filter((r) => r.includes("/fileops/"))).toEqual([]);
+    expect(seen.filter((r) => /\/session(\/|$)/.test(r))).toEqual([]);
+    expect(rooms.destHandle.getFiles()).toEqual([]);
+    expect(rooms.sourceHandle.getFile(PLAN.id)).toBeTruthy();
+  });
+
+  test("Move dialog", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    await serveTwoPrivateRooms(page, mockRequest, baseUrl);
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+
+    await openTransferDialog(page, "move");
+
+    const picker = selector(page);
+    await expect(picker.getByText(SOURCE_ROOM_TITLE).first()).toBeVisible({
+      timeout: 10000,
+    });
+    await expect(picker.getByText("Apps", { exact: true })).toHaveCount(0);
+    await expect(picker.getByText(DEST_ROOM_TITLE)).toHaveCount(0);
   });
 });

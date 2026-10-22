@@ -34,14 +34,14 @@
  */
 
 import { useEffect } from "react";
-import { Navigate, useLocation, useParams } from "react-router";
+import { Navigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 
 type ProtectedAppRouteProps = {
   // Several ids let a route shared by two apps through as long as either of
   // them is on.
   appId: string | string[];
-  // Also admits a room or folder address while the Private section is
+  // Also admits an address that names a folder while the Private section is
   // available: it may hold a private room.
   admitPrivateRooms?: boolean;
   isPrivateRoomsSectionAvailable: boolean;
@@ -69,7 +69,6 @@ const ProtectedAppRoute = ({
   children,
 }: ProtectedAppRouteProps) => {
   const location = useLocation();
-  const { room } = useParams();
 
   useEffect(() => {
     ensureAppsLoaded();
@@ -87,8 +86,7 @@ const ProtectedAppRoute = ({
 
   if (appIds.some(isInstalled)) return children;
 
-  const isFolderAddress =
-    !!room || new URLSearchParams(location.search).has("folder");
+  const isFolderAddress = new URLSearchParams(location.search).has("folder");
 
   // Spec: private-rooms/sidebar-section, "Private rooms open inside the section"
   if (admitPrivateRooms && isPrivateRoomsSectionAvailable && isFolderAddress)

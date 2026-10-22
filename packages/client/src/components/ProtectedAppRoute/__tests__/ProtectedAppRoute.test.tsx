@@ -139,8 +139,9 @@ describe("ProtectedAppRoute", () => {
       isInstalled: () => false,
     } as Partial<Props>;
 
-    it("admits a room address while the Private section is available", () => {
+    it("admits a room address with its folder while the Private section is available", () => {
       router.params = { room: "12" };
+      router.search = "?folder=12";
 
       renderRoute({ ...roomsOff, isPrivateRoomsSectionAvailable: true });
 
@@ -155,14 +156,23 @@ describe("ProtectedAppRoute", () => {
       expect(screen.getByTestId("section")).toBeInTheDocument();
     });
 
-    it("keeps the list out", () => {
+    it.each([
+      ["the list", {}],
+      ["a room address without folder", { room: "12" }],
+    ])("Rooms list with the Rooms app off: keeps %s out", (_, params) => {
+      router.params = params;
+
       renderRoute({ ...roomsOff, isPrivateRoomsSectionAvailable: true });
 
-      expect(screen.getByTestId("redirect")).toBeInTheDocument();
+      expect(screen.getByTestId("redirect")).toHaveAttribute(
+        "data-to",
+        "/dashboard",
+      );
     });
 
     it("keeps a room address out without the Private section", () => {
       router.params = { room: "12" };
+      router.search = "?folder=12";
 
       renderRoute({ ...roomsOff, isPrivateRoomsSectionAvailable: false });
 
@@ -171,6 +181,7 @@ describe("ProtectedAppRoute", () => {
 
     it("keeps a room address out of a route that does not admit private rooms", () => {
       router.params = { room: "12" };
+      router.search = "?folder=12";
 
       renderRoute({
         ...roomsOff,

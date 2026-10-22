@@ -74,15 +74,23 @@ import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 
-const dropDeletedMetadata = async (filter: FilesFilter | RoomsFilter) => {
+const dropDeletedMetadata = async (
+  filter: FilesFilter | RoomsFilter,
+  checked: React.RefObject<string>,
+) => {
   const state = getMetadataFilterState(filter);
   if (!state) return false;
+
+  const key = JSON.stringify(state);
+  if (key === checked.current) return false;
 
   const templates = await getMetadataTemplates().catch(() => null);
   if (!templates) return false;
 
   const pruned = pruneMetadataFilter(state, templates);
-  if (JSON.stringify(pruned) === JSON.stringify(state)) return false;
+  checked.current = JSON.stringify(pruned);
+
+  if (checked.current === key) return false;
 
   applyMetadataFilter(filter, pruned);
   return true;
@@ -133,6 +141,7 @@ const useFiles = ({
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
+  const checkedMetadata = React.useRef("");
 
   const fetchDefaultFiles = (categoryType: ValueOf<typeof CategoryType>) => {
     const filter = FilesFilter.getDefault({
@@ -367,7 +376,7 @@ const useFiles = ({
           : FilesFilter.getDefault({ categoryType });
 
     const href = window.location.href;
-    const isPruned = await dropDeletedMetadata(newFilter);
+    const isPruned = await dropDeletedMetadata(newFilter, checkedMetadata);
 
     if (window.location.href !== href) return;
 

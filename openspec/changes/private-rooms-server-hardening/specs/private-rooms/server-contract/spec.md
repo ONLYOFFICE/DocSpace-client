@@ -84,6 +84,17 @@ The server SHALL send the socket events of a private room, active or archived, a
 
 ## MODIFIED Requirements
 
+### Requirement: File public keys
+The server SHALL return, for one file in a private room, active or archived, the keys of every user with a direct user share on the file, its parent folders or its room, plus the owner, skipping groups and users without stored keys, with the private half only on the caller's own entries; it SHALL answer 415 for a file outside a private room. Existing access entries are not consulted.
+
+#### Scenario: Keys of a file
+- **WHEN** a reader of the file requests its public keys
+- **THEN** every user who reaches the file through a user share and has stored keys is returned, whether or not an access entry exists for them
+
+#### Scenario: File in an archived private room
+- **WHEN** a reader requests the public keys of a file in an archived private room
+- **THEN** the keys are returned as for a file in an active private room, and the server MUST NOT answer 415
+
 ### Requirement: Copy right inside archived private rooms
 The server SHALL deny the copy right on a file inside a private room, and on a subfolder of one, to every user, room owner included, whether the room is active or archived. In an archived private room the other rights follow the rules of every archived room.
 

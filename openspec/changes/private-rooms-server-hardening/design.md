@@ -137,6 +137,8 @@ without them.
    strip the title from the event payload; rejected because a member's client
    needs it to refresh the list.
 
+9. **Files of archived private rooms get their public keys (found on a local portal, 2026-10-22).** `SecurityController.GetEncryptionAccess` -> `EncryptionKeyPairDtoHelper.GetKeyPairAsync(fileId)` (`products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs:212-218`) treats a file as private only when `file.RootFolderType == FolderType.VirtualRooms` and throws `NotSupportedException` (415) otherwise, while `GetKeyPairForRoomAsync` in the same file (`:260`) accepts `VirtualRooms or Archive`. A copy out of an archived private room on the local portal received 415 from `files/file/{fileId}/publickeys` and still decrypted, because the client also looks the sender up in the room roster. The fallback the file-operations requirement "Sender keys of files leaving a private room" relies on, the file's own public keys where the source room is not known, therefore fails in Archive today. The fix applies the room check's `VirtualRooms or Archive` condition to the file check.
+
 ## Risks / Trade-offs
 
 - [Backend schedule] → every server task is independent; the client lands

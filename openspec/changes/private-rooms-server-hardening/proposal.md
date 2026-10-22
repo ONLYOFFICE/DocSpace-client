@@ -50,6 +50,7 @@ the file to change so the backend team can pick them up; nothing here is
   an archived private room is traced first (design.md, Open Questions).
 - Socket events of a private room reach its members only, not every
   administrator.
+- Found on a local portal on 2026-10-22: the public keys of a file in an archived private room are answered 415, because the file check knows only the VirtualRooms section; the server applies the room check's VirtualRooms-or-Archive condition (design decision 9).
 
 ## Capabilities
 
@@ -61,7 +62,8 @@ None.
 
 - `private-rooms/server-contract`: owner change, edition gate, invitation
   e-mail, audit scope, recovery/offboarding
-  endpoints and the copy right in archived private rooms change; new
+  endpoints, the copy right in archived private rooms and the public keys
+  of files in archived private rooms change; new
   requirements for metadata guards, title validation, upload-session abort,
   access history, the administrator bypass in archived private rooms and
   private-room event recipients.

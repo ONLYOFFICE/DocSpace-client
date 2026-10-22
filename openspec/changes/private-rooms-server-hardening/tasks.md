@@ -45,11 +45,5 @@ Withdrawn: the client operates with one key per user (`private-rooms-single-key`
 - [ ] 9.2 Backend: trace a batch copy of a subfolder out of an archived private room (`CopyPermissionsCheck.cs:467` reads the folder's own private setting; the Archive branch grants Copy on subfolders) and record in design.md whether the folder or its encrypted files can land outside the room; if they can, add a requirement and a backend task to this section. Verified by the result recorded in design.md
 - [ ] 9.3 Backend: leave administrators who are not members out of the socket recipients of a private room in `SocketManager.WhoCanRead` (`../server/products/ASC.Files/Core/Utils/SocketManager.cs`) (design decision 8); verify with a server unit test
 - [ ] 9.4 Client: once 9.1 has merged, set Copy to false for the files and folders of the `archived` variant of `encryptedFilesHandlers` (`packages/shared/__mocks__/handlers/files/encryptedFiles.ts`) and update the contract case "File in an archived private room" in `encrypted-files-contract.test.ts`; client behaviour does not change, because Ctrl+C is already withheld and copy-out already decrypts; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files` and `cd packages/client && pnpm test:e2e:docker:dev __tests__/private-room-archived.spec.ts`
-
-## 10. Integration
-
-- [ ] 10.1 Run the client E2E private-room suite against the updated mocks and the pre-push gate; verify with `pnpm test:e2e:docker:start` and `openspec validate --all --strict`
-
-## Workflow follow-up
-
-- Archive only after every backend task has merged on `../server`; until then the delta describes the agreed contract, not the branch.
+- [ ] 9.5 Backend: accept files of archived private rooms in `EncryptionKeyPairDtoHelper.GetKeyPairAsync(fileId)` (`products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs:212`), as `GetKeyPairForRoomAsync` does (`:260`), design decision 9; verify with a server unit test that the public keys of a file in an archived private room are returned and a file outside private rooms still gets 415
+- [ ] 9.6 Client: until 9.5 merges, let the archived variant of `encryptedFilesHandlers` answer 415 on `files/file/{fileId}/publickeys`, as the server does today, and add the contract case "File in an archived private room answers 415 today"; then flip it back with 9.5. Verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files` and the archived private-room E2E spec in Docker (copies out of the archive still decrypt through the room roster)

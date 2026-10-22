@@ -58,7 +58,6 @@ import {
   formatPeriodEnd,
   getCurrencySymbol,
   getLimitUsagePercent,
-  getPeriodEnd,
   isAmountOutOfRange,
   isCurrencySymbolAfter,
   parseAmount,
@@ -134,8 +133,7 @@ const ChangeAILimitDialog = ({
   const canSave = amount !== null && !isOutOfRange && isDirty && !isLoading;
 
   const isSamePeriod = Boolean(limit && period === limit.period);
-  const periodEnd =
-    isSamePeriod && limit ? limit.periodEnd : getPeriodEnd(period);
+  const periodEnd = isSamePeriod && limit ? limit.periodEnd : null;
   const date = formatPeriodEnd(periodEnd, i18n.language);
   const spentValue = limit?.amountConsumed ?? 0;
   const isSpentKnown = isSamePeriod;

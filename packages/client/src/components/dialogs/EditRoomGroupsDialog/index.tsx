@@ -101,7 +101,10 @@ const EditRoomGroupsDialog = ({
         const ids = isFormsSection ? [] : await getPrivateSectionRoomIds();
         if (isCurrent) setPrivateRoomIds(ids);
       } catch (error) {
+        // Spec: private-rooms/sidebar-section, "Rooms section excludes private rooms while the section is available".
+        if (!isCurrent) return;
         toastr.error(error as Error);
+        setEditRoomGroupsDialogVisible(false);
       }
     };
 
@@ -110,7 +113,7 @@ const EditRoomGroupsDialog = ({
     return () => {
       isCurrent = false;
     };
-  }, [isFormsSection, getPrivateSectionRoomIds]);
+  }, [isFormsSection, getPrivateSectionRoomIds, setEditRoomGroupsDialogVisible]);
 
   const [isOpenRoomList, setIsOpenRoomList] = useState(
     () => !!openInCreateMode,

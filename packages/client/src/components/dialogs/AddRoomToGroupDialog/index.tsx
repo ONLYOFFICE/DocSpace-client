@@ -39,6 +39,7 @@ import { useTranslation } from "react-i18next";
 
 import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
 import { Aside } from "@onlyoffice/apps-ui-kit/components/aside";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
 import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector/Selector.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
@@ -91,7 +92,10 @@ const AddRoomToGroupDialog = ({
             : await getPrivateSectionRoomIds();
         if (isCurrent) setPrivateRoomIds(ids);
       } catch (error) {
-        console.error("Error fetching private rooms:", error);
+        // Spec: private-rooms/sidebar-section, "Rooms section excludes private rooms while the section is available".
+        if (!isCurrent) return;
+        toastr.error(error as Error);
+        setAddRoomToGroupDialogVisible?.(false);
       }
     };
 
@@ -101,7 +105,12 @@ const AddRoomToGroupDialog = ({
       isCurrent = false;
       setPrivateRoomIds(null);
     };
-  }, [visible, isFormsSection, getPrivateSectionRoomIds]);
+  }, [
+    visible,
+    isFormsSection,
+    getPrivateSectionRoomIds,
+    setAddRoomToGroupDialogVisible,
+  ]);
 
   const groupRooms = (groupData?.rooms || []).filter(
     (room) => !privateRoomIds?.includes(room.id),

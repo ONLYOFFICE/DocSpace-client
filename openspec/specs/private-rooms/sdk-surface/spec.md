@@ -12,17 +12,6 @@ The SDK SHALL serve a private-rooms list, a room contents page addressed by room
 - **WHEN** a user opens the private list, a private room by id, or the private archive in the SDK
 - **THEN** the matching page renders inside the private layout
 
-### Requirement: Client app embeds the SDK surface
-The client's E2E rooms app SHALL render the SDK private list or archive in an iframe, choosing the archive address when the archive section is requested.
-
-#### Scenario: Rooms section
-- **WHEN** the E2E rooms app opens without a section
-- **THEN** the iframe loads the SDK private list
-
-#### Scenario: Archive section
-- **WHEN** the E2E rooms app opens the archive section
-- **THEN** the iframe loads the SDK private archive
-
 ### Requirement: Encryption shell wraps the private pages
 The private layout SHALL wrap its pages in the encryption provider together with the passphrase modal and the key-change dialog, so unlock and trust-on-first-use prompts work without the client application.
 
@@ -162,3 +151,14 @@ The SDK SHALL apply a content security policy to the private routes that allows 
 #### Scenario: Private page served
 - **WHEN** a private route is requested through the SDK proxy
 - **THEN** the response carries the private-surface content security policy
+
+### Requirement: Private list header uses the section label
+The SDK private rooms list SHALL show Common:Private as its header title, the same label as the client's Private section. The archive page SHALL keep Common:Archive.
+
+#### Scenario: List header
+- **WHEN** a signed-in user opens the SDK private rooms list
+- **THEN** the header title is Common:Private
+
+#### Scenario: Archive header
+- **WHEN** a signed-in user opens the SDK private archive
+- **THEN** the header title is Common:Archive

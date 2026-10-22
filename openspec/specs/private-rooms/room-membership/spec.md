@@ -7,10 +7,10 @@ Covers how a private (end-to-end encrypted) room is created and edited, who can 
 ## Requirements
 
 ### Requirement: Private room is a flagged Custom room
-The system SHALL present "Private room" as its own room type in the create-room chooser while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag. This rule is enforced by the client only: the server accepts the private flag with any room type.
+The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag. This rule is enforced by the client only: the server accepts the private flag with any room type.
 
 #### Scenario: Private card chosen
-- **WHEN** the user picks the Private room card and confirms creation
+- **WHEN** the user creates a room from the Private section, where the dialog shows the Private room type, and confirms creation
 - **THEN** the create request carries room type Custom and the private flag set to true
 
 #### Scenario: Other room type
@@ -32,30 +32,30 @@ The system SHALL refuse to create a private room for a user who has no registere
 - **WHEN** the user confirms creation and at least one encryption key is registered
 - **THEN** the room is created with the private flag
 
-### Requirement: Choosing the Private card without a key starts key generation
-The system SHALL, when a user with no encryption key selects the Private room card, offer to generate a key first; the Private type SHALL be applied only after generation succeeds, and cancelling SHALL close the private-room creation.
+### Requirement: Starting private room creation without a key starts key generation
+The system SHALL offer to generate a key first when a user with no encryption key starts creating a private room from the Private section. The dialog SHALL open on the Private type only after generation succeeds. Cancelling SHALL close the private-room creation, and no dialog SHALL be left open.
 
 #### Scenario: User accepts key generation
-- **WHEN** a key-less user selects the Private card and confirms the key-generation prompt
-- **THEN** the key-generation flow runs and, on success, the Private type is applied to the dialog
+- **WHEN** a key-less user presses create in the Private section and confirms the key-generation prompt
+- **THEN** the key-generation flow runs and, on success, the create-room dialog opens on the Private type
 
 #### Scenario: User cancels key generation
-- **WHEN** a key-less user selects the Private card and cancels the prompt
-- **THEN** the Private type is not applied and, if the dialog was opened for a private room, the dialog closes
+- **WHEN** a key-less user presses create in the Private section and cancels the prompt
+- **THEN** no create-room dialog is left open and no room is created
 
 ### Requirement: Private rooms need a secure context
-The system SHALL refuse to select or auto-prompt the Private room type when the browser does not expose WebCrypto, showing Common:EncryptionRequiresHttps.
+The system SHALL refuse to start private room creation, or to auto-prompt for a key, when the browser does not expose WebCrypto, and SHALL show Common:EncryptionRequiresHttps.
 
 #### Scenario: Plain HTTP origin
-- **WHEN** the user selects the Private card on an origin without WebCrypto
-- **THEN** the selection is rejected and Common:EncryptionRequiresHttps is shown
+- **WHEN** the user presses create in the Private section on an origin without WebCrypto
+- **THEN** no create-room dialog is opened and Common:EncryptionRequiresHttps is shown
 
 ### Requirement: Navigation into the new private room
-The system SHALL navigate into a newly created private room immediately after creation, the same way it does for other rooms.
+The system SHALL navigate into a newly created private room immediately after creation, the same way it does for other rooms, and SHALL open it under the Private section.
 
 #### Scenario: Creation succeeds
 - **WHEN** a private room is created successfully
-- **THEN** the current view becomes the root folder of the new room
+- **THEN** the current view becomes the root folder of the new room at `/private/{roomId}/filter`, with the Private item highlighted
 
 ### Requirement: Room type and privacy are immutable
 The system SHALL NOT allow the room type or the private flag to be changed after creation; the edit dialog SHALL show the type selector disabled and SHALL NOT send the private flag on update.
@@ -228,11 +228,15 @@ The system SHALL NOT offer index editing, index export, save as template, duplic
 - **THEN** edit-index, export-room-index, save-as-template, duplicate-room and download are absent
 
 ### Requirement: Standard room management stays available
-The system SHALL keep archiving, quota, tags, logo and cover for a private room on the standard room flows.
+The system SHALL keep archiving, quota, tags, logo and cover for a private room on the standard room flows. An archived private room SHALL be listed in the Archive of the Private section while that section is available.
 
 #### Scenario: Archive a private room
-- **WHEN** the owner archives a private room
-- **THEN** the standard archive flow runs and the room appears in Archive with its private badge
+- **WHEN** the owner archives a private room while the Private section is available
+- **THEN** the standard archive flow runs, the room leaves the Private section list and appears in Private → Archive, not in Rooms → Archive
+
+#### Scenario: Restore a private room
+- **WHEN** the owner restores a private room from Private → Archive
+- **THEN** the room returns to the Private section list
 
 ### Requirement: AI and plugin actions withheld
 The system SHALL NOT offer AI actions or plugin actions for a private room, its folders or its files.

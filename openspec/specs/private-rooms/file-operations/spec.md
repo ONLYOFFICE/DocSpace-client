@@ -33,10 +33,14 @@ The system SHALL NOT offer or perform upload-time format conversion for files up
 - **THEN** the conversion prompt does not appear and the file is uploaded as is
 
 ### Requirement: Folder upload disabled in private rooms
-The system SHALL NOT offer the "Upload folder" action or the Shift+U hotkey inside a private room. It SHALL refuse folder trees dropped into an open private room, or onto one of its folders, with Common:FolderUploadNotSupportedInPrivateRoom, deciding from the drop's target and not from the folder that is open when the files are queued. Drops onto a private room from outside it are refused as a whole by "Drops onto a private room from outside it are refused".
+The system SHALL NOT offer the "Upload folder" action or the Shift+I hotkey inside a private room. It SHALL refuse folder trees dropped into an open private room, or onto one of its folders, with Common:FolderUploadNotSupportedInPrivateRoom, deciding from the drop's target and not from the folder that is open when the files are queued. Drops onto a private room from outside it are refused as a whole by "Drops onto a private room from outside it are refused".
 
 #### Scenario: Shift+U pressed
 - **WHEN** the user presses Shift+U while a private room is open
+- **THEN** the file picker opens, never the folder picker
+
+#### Scenario: Shift+I pressed
+- **WHEN** the user presses Shift+I while a private room is open
 - **THEN** no folder picker opens
 
 #### Scenario: Folders dropped on the view
@@ -111,6 +115,10 @@ The system SHALL refuse files dropped from the computer onto a private room, or 
 - **WHEN** files are dropped onto the row of a folder while the private room that contains it is open
 - **THEN** they are encrypted and uploaded into that folder
 
+#### Scenario: Another room opened during the directory read
+- **WHEN** a folder tree is dropped onto a folder row inside the open private room and the user opens an ordinary room before the browser has finished reading the dropped directories
+- **THEN** the drop keeps the privacy of the row's room: folder trees are refused there as in the private room, and no file of the drop is sent unencrypted
+
 ### Requirement: Upload target is fixed when the user starts the upload
 The system SHALL fix, for every uploaded file, its target folder and whether that folder lies inside a private room, with that room's type and identity, at the moment the user drops, pastes or picks the files. Every later step SHALL use only this fixed target. Opening another folder, leaving the files section or the open folder being cleared SHALL NOT change where a file is sent or whether it is encrypted.
 
@@ -148,6 +156,10 @@ The system SHALL send a file whose fixed target lies inside a private room only 
 - **WHEN** the encryption step returns a file queued for a private room unencrypted
 - **THEN** no upload session is started and the item fails with Common:EncryptionPrepareFailed
 
+#### Scenario: Private target with another room type
+- **WHEN** a file's fixed target lies in a private room but names a room type other than the custom room type
+- **THEN** the file is refused and no bytes are sent, rather than being sent unencrypted
+
 ### Requirement: Retry keeps the fixed target
 The system SHALL retry a failed upload, from the upload panel or after a quota failure, against the target fixed when the file was first queued, never against the open folder. It SHALL apply the private-room upload rules to the file again before sending any byte, including the unlock prompt.
 
@@ -166,6 +178,10 @@ The system SHALL retry a failed upload, from the upload panel or after a quota f
 #### Scenario: Retry after a quota failure
 - **WHEN** files queued for a private room failed with a quota error and the user retries them after leaving the room
 - **THEN** they are sent encrypted into the private room
+
+#### Scenario: Retry while another upload is running
+- **WHEN** the user retries a file fixed for a private room while other files of the queue are still uploading and the unlock prompt is open
+- **THEN** no upload session is started for the retried file until the prompt is answered; if it is declined the file fails with Common:EncryptionLockedUpload, and it is never uploaded twice
 
 ### Requirement: Create new file in a private room
 The system SHALL allow creating only docx, xlsx, pptx and pdf files inside a private room, each produced and encrypted on the client, and SHALL hide the create entries when the user has no encryption key.
@@ -586,3 +602,14 @@ The system SHALL NOT move files or folders from a private room into another priv
 #### Scenario: Move dialog
 - **WHEN** the Move dialog is opened for items of a private room
 - **THEN** only folders of that same room are selectable as destination
+
+### Requirement: Name clashes in a private room are checked on the client
+The system SHALL compare the decrypted names of files uploaded or copied into a private room with the decrypted names of the destination folder before sending anything. On a clash it SHALL offer to keep both, giving the new file a copy suffix, or to cancel; it SHALL NOT offer to overwrite the existing file or to add a version. Names not cached yet are recovered first while the identity is unlocked.
+
+#### Scenario: Copy into a room holding a file of the same name
+- **WHEN** an encrypted file named "New document.docx" is copied into a private room folder that already holds a file whose decrypted name is "New document.docx"
+- **THEN** the user is asked before anything is sent; keeping both stores the copy under a suffixed decrypted name, and no overwrite or version option is offered
+
+#### Scenario: Upload without a clash
+- **WHEN** files whose decrypted names do not occur in the destination folder are uploaded into a private room
+- **THEN** no conflict dialog is shown and nothing about the names is sent to the server

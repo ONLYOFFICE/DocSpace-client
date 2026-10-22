@@ -131,6 +131,10 @@ The system SHALL upload every encrypted file under an opaque random UUID name th
 - **WHEN** an encrypted upload is attempted under a non-UUID name
 - **THEN** the upload is refused before any bytes are sent
 
+#### Scenario: Conflict check
+- **WHEN** files are uploaded or copied into a private room
+- **THEN** their original names are not sent to the server's upload conflict check, and MUST NOT appear in any request before or during the upload
+
 ### Requirement: PDF form flag in the header
 The system SHALL set the IS_FORM header flag when the plaintext is detected as a PDF form, so the server can classify the encrypted file as a form without decrypting it.
 

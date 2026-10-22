@@ -29,12 +29,12 @@ No stashed design document covers these points.
 
 **D1. Skip the server conflict check for private targets.** `handleUploadConflictsImpl` takes the conflict decision from each item's fixed target. A private target never calls `checkIsFileExist`, and the AI-room skip reads the target too. Alternative: send opaque names. Rejected: the server would still report nothing (encrypted files are never reported) and the request would serve no purpose.
 
-**D2. Name clashes in a private target (decision needed, task 3.0).** With the server check gone, nothing tells the user that a file of the same decrypted name exists. On the portal a copy produced two "New document" files side by side. Options:
+**D2. Name clashes in a private target: checked on the client, "keep both" only (decided with the user on 2026-10-22, option (a)).** With the server check gone, nothing tells the user that a file of the same decrypted name exists. On the portal a copy produced two "New document" files side by side. Options:
 - (a) a client-side check against the decrypted names of the destination folder, from the filename cache plus recovery for names not cached, offering only "keep both" with a copy suffix (versions are withheld for encrypted files). Recommended.
 - (b) no check: duplicates of a decrypted name are allowed, written down as a SHALL NOT limitation.
 - (c) a server route that compares encrypted name headers. Rejected: the server cannot read them.
 
-The answer decides whether a requirement and a locale key are added. Tasks after 3.0 are written for (a) and are dropped for (b).
+Option (a) was chosen. Before an upload or copy into a private room the client compares the decrypted names of the files with the decrypted names of the destination folder, recovering names that are not cached while the identity is unlocked. A clash offers "keep both", which gives the new file a copy suffix, or cancel; overwriting and new versions are not offered.
 
 **D3. Retry unlocks first, then resets.** `retryUploadFilesImpl` awaits the batch unlock for retried private items before it clears their error and `inAction`. On decline it sets `Common:EncryptionLockedUpload` on them directly. `startSessionFuncImpl` returns early for an item already in action, so a duplicate start cannot happen whichever path triggers it.
 
@@ -55,4 +55,4 @@ Client-only, behind the `privateRooms` flag. Rollback is a revert.
 
 ## Open Questions
 
-- D2: how name clashes are handled in a private target. Owner: product owner. Blocks task 3.1.
+None.

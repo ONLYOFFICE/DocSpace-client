@@ -21,7 +21,7 @@ Out of scope:
 - server-side validation of encrypted titles (`private-rooms-server-hardening` 4.1);
 - the upload abort route (`private-rooms-server-hardening` 7.1).
 
-Decision needed from a human (task 3.0): how name clashes are handled in a private target once the server check is gone. The options are listed in design.md D2; the recommendation is a client-side check against decrypted names that offers only "keep both" with a copy suffix.
+Decided with the user on 2026-10-22 (task 3.0): name clashes in a private target are checked on the client against decrypted names, offering only "keep both" with a copy suffix (design.md D2).
 
 Server dependency: none. The facts relied on are in design.md, cited from `../server`.
 
@@ -37,7 +37,8 @@ None.
 - `private-rooms/file-operations`:
   - "Retry keeps the fixed target" gains retry during a running queue;
   - "Drops onto a private room from outside it are refused" gains navigation during the directory read;
-  - "Queued private uploads are sent only as ciphertext" gains the inconsistent target.
+  - "Queued private uploads are sent only as ciphertext" gains the inconsistent target;
+  - new requirement: name clashes in a private room are checked on the client.
 
 ## Impact
 

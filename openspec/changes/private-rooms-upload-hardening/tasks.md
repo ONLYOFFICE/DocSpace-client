@@ -12,8 +12,8 @@
 
 ## 3. Name clashes in a private target
 
-- [ ] 3.0 Decide with the product owner how name clashes are handled (design D2: client-side check with "keep both", or duplicates allowed as a limitation); record the decision and its date in design.md and, for (a), add the requirement to the file-operations delta before implementing it
-- [ ] 3.1 BLOCKED on 3.0. Implement the chosen handling; for (a), check the decrypted names of the destination (filename cache plus recovery) and offer "keep both" with a copy suffix, with any new locale key run through `/translate-comments` and `/translate-locales`; verify with unit tests named after the new scenarios and an E2E case copying into a private room that already holds a file of the same name
+- [x] 3.0 Decide with the product owner how name clashes are handled (design D2: client-side check with "keep both", or duplicates allowed as a limitation); record the decision and its date in design.md and, for (a), add the requirement to the file-operations delta before implementing it
+- [ ] 3.1 Implement option (a), decided on 2026-10-22: check the decrypted names of the destination (filename cache plus recovery) and offer "keep both" with a copy suffix, with any new locale key run through `/translate-comments` and `/translate-locales`; verify with unit tests named after the new scenarios and an E2E case copying into a private room that already holds a file of the same name
 
 ## 4. Leftovers
 

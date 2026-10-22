@@ -1,5 +1,18 @@
 # Spec Delta
 
+## ADDED Requirements
+
+### Requirement: Name clashes in a private room are checked on the client
+The system SHALL compare the decrypted names of files uploaded or copied into a private room with the decrypted names of the destination folder before sending anything. On a clash it SHALL offer to keep both, giving the new file a copy suffix, or to cancel; it SHALL NOT offer to overwrite the existing file or to add a version. Names not cached yet are recovered first while the identity is unlocked.
+
+#### Scenario: Copy into a room holding a file of the same name
+- **WHEN** an encrypted file named "New document.docx" is copied into a private room folder that already holds a file whose decrypted name is "New document.docx"
+- **THEN** the user is asked before anything is sent; keeping both stores the copy under a suffixed decrypted name, and no overwrite or version option is offered
+
+#### Scenario: Upload without a clash
+- **WHEN** files whose decrypted names do not occur in the destination folder are uploaded into a private room
+- **THEN** no conflict dialog is shown and nothing about the names is sent to the server
+
 ## MODIFIED Requirements
 
 ### Requirement: Retry keeps the fixed target

@@ -131,6 +131,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     const isPaymentsUrl =
       location.pathname === "/portal-settings/payments/portal-payments" ||
       location.pathname === "/billing/tariff-plan";
+    const isPaymentCompleteUrl =
+      location.pathname === "/billing/payment-complete";
     const isBackupUrl =
       location.pathname === "/portal-settings/backup/data-backup";
 
@@ -285,6 +287,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       isLoaded &&
       (user?.isOwner || user?.isAdmin) &&
       !isPaymentsUrl &&
+      !isPaymentCompleteUrl &&
       !isBackupUrl &&
       !isPortalDeletionUrl &&
       !location.pathname.includes("wallet")

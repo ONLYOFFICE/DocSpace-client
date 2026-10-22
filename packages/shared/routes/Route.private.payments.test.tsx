@@ -154,6 +154,27 @@ describe("PrivateRoute on the payments section", () => {
     expect(view.rendered()).toBe(true);
   });
 
+  it("lets a not-paid admin finish the Stripe callback", () => {
+    const view = renderAt("/billing/payment-complete", {
+      standalone: false,
+      isNotPaidPeriod: true,
+      user: admin,
+    });
+
+    expect(view.pathname()).toBe("/billing/payment-complete");
+    expect(view.rendered()).toBe(true);
+  });
+
+  it("still sends a not-paid admin from other billing pages to the tariff plan", () => {
+    const view = renderAt("/billing/addons", {
+      standalone: false,
+      isNotPaidPeriod: true,
+      user: admin,
+    });
+
+    expect(view.pathname()).toBe("/billing/tariff-plan");
+  });
+
   it("bounces a member off restricted SaaS billing to 401", () => {
     const view = renderAt("/billing/wallet", {
       standalone: false,

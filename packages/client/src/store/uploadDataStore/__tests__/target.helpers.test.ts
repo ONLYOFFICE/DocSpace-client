@@ -43,6 +43,7 @@ import TreeFoldersStore from "../../TreeFoldersStore";
 import {
   isDropRefused,
   resolveDropTarget,
+  resolveFolderTarget,
   resolveOpenFolderTarget,
   type TDropRow,
 } from "../target.helpers";
@@ -342,6 +343,57 @@ describe("resolveDropTarget", () => {
       encryptionRoomId: null,
     });
     expect(getFolderPath).not.toHaveBeenCalled();
+  });
+});
+
+describe("resolveFolderTarget", () => {
+  it("takes the room on the folder's path", async () => {
+    vi.mocked(getFolderPath).mockResolvedValue(
+      pathThrough({
+        id: PRIVATE_ROOM_ID,
+        private: true,
+        roomType: RoomsType.CustomRoom,
+      }),
+    );
+
+    await expect(
+      resolveFolderTarget({ id: 60, rootFolderType: FolderType.Rooms }),
+    ).resolves.toEqual({ ...privateRoomOpen, folderId: 60 });
+    expect(vi.mocked(getFolderPath).mock.calls).toEqual([[60]]);
+  });
+
+  it("is not private for a folder outside the rooms sections, without a lookup", async () => {
+    await expect(
+      resolveFolderTarget({ id: 60, rootFolderType: FolderType.USER }),
+    ).resolves.toEqual({
+      folderId: 60,
+      isPrivate: false,
+      roomType: null,
+      encryptionRoomId: null,
+    });
+    expect(getFolderPath).not.toHaveBeenCalled();
+  });
+
+  it("looks up a folder whose section is unknown", async () => {
+    vi.mocked(getFolderPath).mockResolvedValue([
+      { id: 60, title: "Folder", private: false },
+    ] as never);
+
+    await expect(resolveFolderTarget({ id: 60 })).resolves.toEqual({
+      folderId: 60,
+      isPrivate: false,
+      roomType: null,
+      encryptionRoomId: null,
+    });
+    expect(vi.mocked(getFolderPath).mock.calls).toEqual([[60]]);
+  });
+
+  it("rejects when the path cannot be loaded", async () => {
+    vi.mocked(getFolderPath).mockRejectedValueOnce(new Error("403"));
+
+    await expect(
+      resolveFolderTarget({ id: 60, rootFolderType: FolderType.Archive }),
+    ).rejects.toThrow("403");
   });
 });
 

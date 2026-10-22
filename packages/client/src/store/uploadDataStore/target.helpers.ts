@@ -130,24 +130,49 @@ export async function resolveDropTarget(
     row.rootFolderType === FolderType.Rooms ||
     row.rootFolderType === FolderType.Archive
   ) {
-    const path = await getFolderPath(row.id as number);
-    const room = path.find((folder) => !!folder.roomType);
-    if (!room) {
+    const target = await resolveFolderTarget(row);
+    if (target.encryptionRoomId === null) {
       throw new Error(`The room of folder ${row.id} is not in its path`);
     }
-    return {
-      folderId: row.id,
-      isPrivate: !!room.private,
-      roomType: room.roomType ?? null,
-      encryptionRoomId: room.id,
-    };
+    return target;
   }
 
+  return plainFolderTarget(row.id);
+}
+
+const plainFolderTarget = (folderId: number | string): TUploadTarget => ({
+  folderId,
+  isPrivate: false,
+  roomType: null,
+  encryptionRoomId: null,
+});
+
+/**
+ * Where uploads into a folder go, decided by the room on the folder's own
+ * path. A folder outside the rooms sections is never looked up; one whose
+ * section is unknown is. Rejects when the path cannot be loaded.
+ */
+export async function resolveFolderTarget(folder: {
+  id: number | string;
+  rootFolderType?: FolderType | null;
+}): Promise<TUploadTarget> {
+  const { id, rootFolderType } = folder;
+  const outsideRooms =
+    rootFolderType !== undefined &&
+    rootFolderType !== null &&
+    rootFolderType !== FolderType.Rooms &&
+    rootFolderType !== FolderType.Archive;
+  if (outsideRooms) return plainFolderTarget(id);
+
+  const path = await getFolderPath(id as number);
+  const room = path.find((entry) => !!entry.roomType);
+  if (!room) return plainFolderTarget(id);
+
   return {
-    folderId: row.id,
-    isPrivate: false,
-    roomType: null,
-    encryptionRoomId: null,
+    folderId: id,
+    isPrivate: !!room.private,
+    roomType: room.roomType ?? null,
+    encryptionRoomId: room.id,
   };
 }
 

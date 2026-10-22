@@ -259,6 +259,10 @@ The system SHALL take the user from a private room to the Private list, or to Pr
 - **WHEN** a `/private` address leads to a room that no longer exists or cannot be opened
 - **THEN** the no-access view names the Private section (Common:Private), and both its button and its automatic redirect lead to the Private list
 
+#### Scenario: No-access view offers no room types
+- **WHEN** the no-access view of a private room is shown under `/private`
+- **THEN** no tile or option for creating a room of the Rooms room types (Collaboration, Public, Custom, Virtual Data Room, from a template) is shown above it, and the redirect note reads as a sentence with the section name (Files:RoomAccessRedirectNote)
+
 ### Requirement: Non-private locations do not open inside the section
 The system SHALL open a room without the private setting, or a folder outside private rooms, under its Rooms or Files address even when the link starts inside the Private section. A `/private` address that holds such a location SHALL be replaced with the matching Rooms address.
 

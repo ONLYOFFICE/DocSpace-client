@@ -312,6 +312,7 @@ export const buildFilesListItems = (
       id,
       isFolder,
       isPrivateRoom: !!isPrivateRoom,
+      private: !!isPrivateRoom,
       logo,
       locked,
       lockedBy,

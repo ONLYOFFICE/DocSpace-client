@@ -145,6 +145,18 @@ describe("FilesStore.getFilesListItems — characterization", () => {
     expect(item.defaultRoomIcon).toBe("icon.svg");
   });
 
+  it("keeps the server's private flag on a private room next to isPrivateRoom", () => {
+    const [item] = store.getFilesListItems([
+      { ...customRoom(), private: true } as TItem,
+    ]);
+    expect(item.private).toBe(true);
+    expect(item.isPrivateRoom).toBe(true);
+
+    const [ordinary] = store.getFilesListItems([customRoom()]);
+    expect(ordinary.private).toBe(false);
+    expect(ordinary.isPrivateRoom).toBe(false);
+  });
+
   it("marks an AI agent room and applies the aiConfig security transform", () => {
     // With aiReadyNeedReset undefined, EditAccess/EditRoom/ChangeOwner stay truthy.
     const [item] = store.getFilesListItems([aiAgentRoom()]);

@@ -2,7 +2,7 @@
 
 ## 1. List items keep the private flag
 
-- [ ] 1.1 Return `private: !!isPrivateRoom` from `buildFilesListItems` in `packages/client/src/store/filesStore/filesList.helpers.ts` (design D1); verify with a case in the `filesList.helpers` tests that a private room DTO yields an item with `private: true` and `isPrivateRoom: true`, and update only the affected snapshot keys
+- [x] 1.1 Return `private: !!isPrivateRoom` from `buildFilesListItems` in `packages/client/src/store/filesStore/filesList.helpers.ts` (design D1); verify with a case in the `filesList.helpers` tests that a private room DTO yields an item with `private: true` and `isPrivateRoom: true`, and update only the affected snapshot keys
 
 ## 2. Consumers, tested from a list item
 

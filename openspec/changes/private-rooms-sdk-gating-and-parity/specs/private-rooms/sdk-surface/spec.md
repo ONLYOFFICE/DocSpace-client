@@ -63,7 +63,7 @@ A folder move within the same private room SHALL be executed by the server witho
 - **THEN** the operation is refused with Common:CannotTransferFolderFromPrivateRoom and nothing is transferred
 
 ### Requirement: SDK private surface honours the opt-in
-The SDK private routes SHALL render the private-rooms list, room and archive pages only when the host has passed the private-rooms opt-in (frame configuration, with a query parameter fallback); without it they SHALL render the "feature not available" view. The opt-in SHALL be removed together with the client flag at release.
+The SDK private routes SHALL render the private-rooms list, room and archive pages only when the host has passed the private-rooms opt-in (the `privateRooms` property of the frame configuration); without it they SHALL render the "feature not available" view. The opt-in SHALL be removed together with the client flag at release.
 
 #### Scenario: Host passes the opt-in
 - **WHEN** the host configuration enables private rooms and a signed-in user opens `/sdk/private`

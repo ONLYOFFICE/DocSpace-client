@@ -27,9 +27,20 @@ See proposal.md for motivation. Observed state on the branch:
 
 ## Decisions
 
-**D1. Opt-in source: frame configuration property, query fallback (needs user confirmation).** The SDK reads `frameConfig.privateRooms === true` (host embedding) or `?privateRooms=1`. The query fallback was meant for the client iframe, which `private-rooms-sidebar-section` removes; whether to keep it without that consumer is part of the confirmation in task 1.1. Both feed `isPrivateRoomsEnabled()` through an injectable source so the shared utility stays the single truth. Alternative: read the same localStorage key in the SDK origin. Rejected: the SDK may run on a different origin than the host, and localStorage is not shared across origins. At release both the client flag and this opt-in are deleted together (`private-rooms-release-gate`).
+**D1. Opt-in source: the `privateRooms` property of the frame configuration, with no separate fallback (decided 2026-10-22).**
+- The host sets `privateRooms: true` in its frame configuration. That property is the only opt-in of the SDK private surface.
+- The hand-typed `?privateRooms=1` fallback is dropped. Its only consumer was the client iframe of `/e2e-rooms`, which `private-rooms-sidebar-section` removed.
+- How the property reaches the SDK:
+  - The private pages load rooms on the server (`packages/sdk/src/app/(private)/private/page.tsx` calls `getRooms`), while `setConfig` reaches `SDKConfigProvider` only after the first render.
+  - So the SDK JS has to write the property into the frame URL, as its builders already do for the other properties of each mode.
+  - The private layout reads it from the request (`FILTER_HEADER`, as the forms and AI agents layouts read `showMenu`), and the client side also sees it in `setConfig`.
+  - The URL parameter is therefore the transport of the frame property, not a second contract.
+- Both apps feed `isPrivateRoomsEnabled()` through an injectable source, so the shared utility stays the single truth.
+- Dependency: the bundled `public/scripts/sdk/2.2.0/api.js` has no mode that builds a `/sdk/private` URL. The manager builder makes `{rootPath}{id}/filter`, and the other modes have fixed paths, so a host cannot open the private pages through the SDK JS yet. A `private` mode that writes `privateRooms` is needed in the separate sdk-js repository (task 1.5).
+- Alternative: read the same localStorage key in the SDK origin. Rejected: the SDK may run on a different origin than the host, and localStorage is not shared across origins.
+- At release both the client flag and this opt-in are deleted together (`private-rooms-release-gate`).
 
-**D2. Keys-management deep link carries the opt-in.** The client route table is built once per load from the flag; the link `/profile/keys-management?privateRooms=1` makes the client set the flag before building routes (one-line change in the client bootstrap), so the page renders even on a browser without the flag. When `window.open` is blocked or the client origin is unknown (`frameConfig` without a portal URL), the hint shows `Common:EncryptionKeysManagedInProfile` instead.
+**D2. Keys-management deep link carries the opt-in.** This link is a different consumer from D1 and stays: the SDK opens a client page in a new top-level tab, where the browser-local flag may be missing. The client route table is built once per load from the flag; the link `/profile/keys-management?privateRooms=1` makes the client set the flag before building routes (one-line change in the client bootstrap), so the page renders even on a browser without the flag. When `window.open` is blocked or the client origin is unknown (`frameConfig` without a portal URL), the hint shows `Common:EncryptionKeysManagedInProfile` instead.
 
 **D3. Document creation reuses the shared encrypted-creation service.** The SDK create menu calls the same empty-template encryption path the client uses, so the DSE3 output and the file naming are identical; PDF forms stay excluded (same decision as `private-rooms-ux-gaps`). Alternative: port the client store helper into the SDK store. Rejected: two implementations of the same crypto path.
 
@@ -38,6 +49,12 @@ See proposal.md for motivation. Observed state on the branch:
 **D5. Folder transfers across rooms are withheld, not re-encrypted.** Re-encrypting a folder tree client-side is the same work as the decrypted folder download plus upload, and the client itself withholds folder moves out of a private room. Same-room moves stay server-side (wraps are per file, unaffected by the path: the server keys access entries by tenant, file and user, with no folder). Same-room folder copy is refused by the server today (see Context), so the SDK cannot keep it "server-side"; how the SDK presents it is open (see Open Questions). Alternative: implement tree re-encryption. Deferred until a user asks for it.
 
 **D6. Hint gating uses a loaded signal from the encryption context.** The context exposes `keysLoaded` (true once the envelope list request settled, success or failure); the hint and the create-key auto-prompt key on `keysLoaded && !hasConfiguredKey`. This also fixes the stashed checkpoint's F-3 item (empty list on a network error) without a separate state machine.
+
+**D8. The client in a manager frame takes the same host opt-in.**
+- `private-rooms-sidebar-section` (D15 there) makes the Private section work inside an embedded frame under the browser-local flag. A frame on another site gets partitioned storage in Chromium, so that flag rarely reaches it.
+- The client therefore also accepts `privateRooms: true` from the frame configuration as the opt-in while it runs in a frame. One host-side switch then serves both the manager frame and the SDK private pages.
+- The configuration arrives through `setConfig` after the page loads (`pages/Home/Hooks/useSDK.js:98-101` → `SettingsStore.setFrameConfig`). The opt-in captured when `AppsStore` is constructed cannot see it. The availability predicate therefore takes the frame property as a second input, read once when the configuration arrives. Task 1.4 checks that the first list request in a frame waits for it, so a framed Rooms list never loads unscoped and then flips.
+- The manager mode's routes need no change; the host opens the section with the root path `/private/`.
 
 **D7. E2E: seed the session and reuse the crypto fixture.** The SDK Playwright base fixture gains a seeded `asc_auth_key` cookie and the pre-serialised identity from `fixtures/crypto.ts`; seven of the eight fixme tests then run (unlock, upload, download, preview, duplicate, copy/move cross-room, copy-out blocked, invite). The editor-open test stays `fixme` with a reference to `private-rooms-editor-contract`.
 

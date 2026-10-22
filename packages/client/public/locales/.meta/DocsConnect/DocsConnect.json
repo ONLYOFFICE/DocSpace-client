@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-10-21T10:17:45.655Z",
+  "updated_at": "2026-10-22T13:13:49.524Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -163,7 +163,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 113,
+      "line_number": 119,
       "context": "<div className={styles.grid}>\n {canOpenDocsConnect ? (\n <Card\n className={styles.featured}\n icon={<DocsConnectSvg />}\n title={t(\"DocsConnect:DocsConnect\")}\n description={t(\"DocsConnect:CardDescription\", {\n productName: docsName,\n })}\n url=\"/developer-tools/docs-connect\"\n color={globalColors.docsConnectAccent}",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Forms you've recently opened show up here and stick around for 90 days.",
   "content_en_sha1_hash": "62081664b33302e757a37bd64232f8e0b7ea0e0a",
   "created_at": "2026-08-21T15:04:01.878Z",
-  "updated_at": "2026-08-21T15:08:49.964Z",
+  "updated_at": "2026-10-22T13:13:49.556Z",
   "comment": {
     "text": "Placeholder text in an empty state view for the \"Recent Forms\" section, informing users that recently opened forms will appear here and persist for 90 days.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 173,
+      "line_number": 175,
       "context": "const getRecentDescription = (\n t: TTranslation,\n isFormsScope: boolean,\n filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsScope) return t(\"Common:EmptyRecentFormsDescription\");\n if (isAgentsSectionScope(filterFolderType))\n return t(\"Common:EmptyRecentAgentsDescription\");\n if (isRoomsSectionScope(filterFolderType))\n return t(\"Common:EmptyRecentRoomsDescription\");",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "No AI agent",
   "content_en_sha1_hash": "8fec51905e0dd6abdafc7c7e3e6569839a73a45d",
   "created_at": "2026-06-02T22:17:47.998Z",
-  "updated_at": "2026-10-21T10:17:45.743Z",
+  "updated_at": "2026-10-22T13:13:49.688Z",
   "comment": {
     "text": "Alt text for an image in an empty state screen when no AI agents are present. It contains a variable representing the AI agent.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoAgentItem.tsx",
-      "line_number": 65,
-      "context": ")}\n >\n <div className=\"no-thumbnail-img-wrapper\">\n <img\n src={imageSrc}\n alt={t(\"Common:NoAgent\")}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"Common:AIAgentsEmptyScreenTent\")}\n </Text>",
+      "line_number": 63,
+      "context": "styles.noItemContainer,\n \"info-panel_gallery-empty-screen\",\n )}\n >\n <div className=\"no-thumbnail-img-wrapper\">\n <ImageIcon aria-label={t(\"Common:NoAgent\")} role=\"img\" />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"Common:AIAgentsEmptyScreenTent\")}\n </Text>\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/no-agent-item/index.tsx",
-      "line_number": 107,
-      "context": ">\n <div className=\"no-thumbnail-img-wrapper\">\n {/* biome-ignore lint/performance/noImgElement: static SVG asset; next/image is unnecessary here */}\n <img\n src={imageSrc}\n alt={t(\"Common:NoAgent\", {\n defaultValue: \"No AI agent\",\n })}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">",
+      "line_number": 105,
+      "context": "\"info-panel_gallery-empty-screen\",\n )}\n >\n <div className=\"no-thumbnail-img-wrapper\">\n <ImageIcon\n aria-label={t(\"Common:NoAgent\", {\n defaultValue: \"No AI agent\",\n })}\n role=\"img\"\n />\n </div>",
       "module": "/packages/sdk"
     }
   ],

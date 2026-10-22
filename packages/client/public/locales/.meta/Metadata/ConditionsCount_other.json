@@ -3,7 +3,7 @@
   "content": "Metadata · {{count}} conditions",
   "content_en_sha1_hash": "e16ba13a7ef14942d5874780b1263eb93a7212bb",
   "created_at": "2026-10-21T10:17:41.264Z",
-  "updated_at": "2026-10-21T10:20:42.121Z",
+  "updated_at": "2026-10-22T13:13:49.710Z",
   "comment": {
     "text": "Plural heading of the metadata section in the files filter; Metadata is the section name and {{count}} is the number of conditions set. Keep the middle dot.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/MetadataFilter/index.tsx",
-      "line_number": 115,
-      "context": "<Heading size={HeadingSize.xsmall} level={HeadingLevel.h1}>\n {!state?.conditions.length\n ? t(\"Common:SubmenuMetadata\")\n : state.conditions.length === 1\n ? t(\"Metadata:ConditionsCount_one\", { count: 1 })\n : t(\"Metadata:ConditionsCount_other\", {\n count: state.conditions.length,\n })}\n </Heading>\n </div>",
+      "line_number": 116,
+      "context": "<Heading size={HeadingSize.xsmall} level={HeadingLevel.h1}>\n {!conditionCount\n ? t(\"Common:SubmenuMetadata\")\n : conditionCount === 1\n ? t(\"Metadata:ConditionsCount_one\", { count: 1 })\n : t(\"Metadata:ConditionsCount_other\", { count: conditionCount })}\n </Heading>\n </div>\n \n {isTemplateOnly ? null : (\n <Text className={styles.hint} fontSize=\"13px\" lineHeight=\"20px\">",
       "module": "/packages/client"
     }
   ],

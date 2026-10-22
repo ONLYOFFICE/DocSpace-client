@@ -3,7 +3,7 @@
   "content": "No favorite files yet",
   "content_en_sha1_hash": "614c09a6884e886ac76ce69b77564f11bd7cade9",
   "created_at": "2026-08-21T15:04:01.528Z",
-  "updated_at": "2026-10-21T10:17:45.674Z",
+  "updated_at": "2026-10-22T13:13:49.565Z",
   "comment": {
     "text": "Title for an empty state view, appearing when the Favorites folder or section contains no items.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 514,
+      "line_number": 512,
       "context": ")\n .with([FolderType.SHARE, P._], () => t(\"Common:EmptyShareTitle\"))\n .with([FolderType.Favorites, P._], () =>\n isFormsScope\n ? t(\"Common:EmptyFavoritesFormsTitle\")\n : t(\"Common:EmptyFavoritesTitle\"),\n )\n .with([FolderType.Recent, P._], () =>\n isFormsScope\n ? t(\"Common:NoRecentFormsHereYet\")\n : t(\"Common:NoRecentFilesHereYet\"),",
       "module": "/packages/client"
     },

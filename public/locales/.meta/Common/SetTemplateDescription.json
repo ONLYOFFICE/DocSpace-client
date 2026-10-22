@@ -3,7 +3,7 @@
   "content": "Create a space from a template. Settings, users, folders, and forms will be copied from the selected template.",
   "content_en_sha1_hash": "7fe73cf40e6a2ee94c5012524bba8b6c2946b1ad",
   "created_at": "2026-06-25T19:30:50.943Z",
-  "updated_at": "2026-10-21T10:17:45.669Z",
+  "updated_at": "2026-10-22T13:13:49.554Z",
   "comment": {
     "text": "Instructional text in a form section explaining that settings, users, folders, and forms are cloned when creating a new set from a template.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 430,
+      "line_number": 432,
       "context": "// The same two ways in as the Forms quick actions, so a form space can still\n // be started from a template when those tiles are turned off.\n const createFormSpaceFromTemplate = {\n title: t(\"Common:FromTemplate\"),\n description: t(\"Common:SetTemplateDescription\"),\n icon: <CreateFromTemplateIcon />,\n key: \"create-form-space-from-template\",\n onClick: actions.onCreateRoomFromTemplate,\n disabled: false,\n };",
       "module": "/packages/client"
     },

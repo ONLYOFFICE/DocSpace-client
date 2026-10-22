@@ -1007,6 +1007,34 @@ describe("UploadDataStore — upload target fixed when the user starts the uploa
     expect(store.files[0].encrypted).toBeFalsy();
   });
 
+  it("Private target with another room type", async () => {
+    const { store } = createTestUploadDataStore({
+      ...privateRoomOpen,
+      userStore: userWithKeys(),
+    });
+    replaceAction(store, "finishUploadFiles");
+    const handleUploadConflicts = vi.fn();
+    store.handleUploadConflicts = handleUploadConflicts as never;
+
+    store.startUpload(
+      [makeBrowserFile("report-0.docx", 100, { parentFolderId: PRIVATE_ROOM_ID })],
+      {
+        folderId: PRIVATE_ROOM_ID,
+        isPrivate: true,
+        roomType: RoomsType.PublicRoom,
+        encryptionRoomId: PRIVATE_ROOM_ID,
+      },
+      t,
+    );
+    store.handleFilesUpload(handleUploadConflicts.mock.calls[0][2], t);
+    await vi.waitFor(() =>
+      expect(store.files[0].error).toBe("Common:EncryptionPrepareFailed"),
+    );
+
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+  });
+
   it("Unlock declined for a queued batch", async () => {
     const { store } = createTestUploadDataStore({
       ...privateRoomOpen,

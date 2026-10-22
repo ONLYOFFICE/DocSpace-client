@@ -119,8 +119,12 @@ export type UploadGateParams = {
   userId?: string | null;
 };
 
-/** `no-key`: no usable key on this device; `locked`: unlock was declined. */
-export type UploadRefusalReason = "no-key" | "locked";
+/**
+ * `no-key`: no usable key on this device; `locked`: unlock was declined;
+ * `unsupported-room-type`: a private target names a room type that is never
+ * encrypted.
+ */
+export type UploadRefusalReason = "no-key" | "locked" | "unsupported-room-type";
 
 /**
  * `encrypt` before sending, send `plain` bytes as they are (non-private
@@ -141,12 +145,16 @@ export function resolveUploadGate(
     params.uploadContext,
     target,
   );
-  const privateTarget =
-    roomType !== null &&
-    roomType !== undefined &&
-    shouldEncryptUpload(roomType, isPrivate);
 
-  if (!privateTarget) return { action: "plain" };
+  if (!isPrivate) return { action: "plain" };
+  // Spec: private-rooms/file-operations, "Queued private uploads are sent only as ciphertext".
+  if (
+    roomType === null ||
+    roomType === undefined ||
+    !isEncryptableRoomType(roomType)
+  ) {
+    return { action: "refuse", reason: "unsupported-room-type" };
+  }
   if (!params.publicKey || !params.userId) {
     return { action: "refuse", reason: "no-key" };
   }

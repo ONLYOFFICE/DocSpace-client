@@ -8,7 +8,7 @@
 
 - [x] 2.1 Unlock before resetting retried private items, fail them with `Common:EncryptionLockedUpload` on decline, and guard `startSessionFuncImpl` against an item already in action (design D3); verify with a case named "Retry while another upload is running" in `src/store/uploadDataStore/__tests__/UploadDataStore.retry.test.ts` (no session before the prompt is answered, one session after it is accepted)
 - [x] 2.2 Limit case (b) of `resolveDropTarget` to rows of the snapshot's folder and take the snapshot on the native drop event in `HOCs/withFileActions.js` and `pages/Home/index.js` (design D4); verify with a case named "Another room opened during the directory read" in `target.helpers.test.ts` and wiring tests for the row lookup (toast, failed lookup sends nothing) and the section drop
-- [ ] 2.3 Refuse a private target with another room type in `resolveUploadGate` (`packages/shared/services/private-room/encrypted-upload.ts`, design D5); verify with a case named "Private target with another room type" in `packages/shared/services/private-room/__tests__/upload-encryption-gate.test.ts`
+- [x] 2.3 Refuse a private target with another room type in `resolveUploadGate` (`packages/shared/services/private-room/encrypted-upload.ts`, design D5); verify with a case named "Private target with another room type" in `packages/shared/services/private-room/__tests__/upload-encryption-gate.test.ts`
 
 ## 3. Name clashes in a private target
 

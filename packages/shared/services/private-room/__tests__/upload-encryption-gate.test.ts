@@ -86,17 +86,30 @@ describe("resolveUploadGate", () => {
     ).toEqual({ action: "plain" });
   });
 
-  it("sends plaintext into a non-encryptable room type even when private", () => {
+  it("Private target with another room type", () => {
+    const refused = {
+      action: "refuse",
+      reason: "unsupported-room-type",
+    };
+
     expect(
       resolveUploadGate(
         {
-          publicKey: null,
-          userId: null,
+          ...KEYS,
           uploadContext: { roomType: RoomsType.PublicRoom, isPrivate: true },
         },
         plainTarget,
       ),
-    ).toEqual({ action: "plain" });
+    ).toEqual(refused);
+    expect(
+      resolveUploadGate({ ...KEYS }, { isPrivate: true, roomType: null }),
+    ).toEqual(refused);
+    expect(
+      resolveUploadGate(
+        { ...KEYS, alreadyEncrypted: true },
+        { isPrivate: true, roomType: RoomsType.EditingRoom },
+      ),
+    ).toEqual(refused);
   });
 });
 

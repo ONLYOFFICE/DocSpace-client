@@ -658,7 +658,9 @@ export async function startSessionFuncImpl(
       indexOfFile,
       gate.reason === "locked"
         ? i18n.t("Common:EncryptionLockedUpload")
-        : i18n.t("Common:EncryptionKeysRequiredForUpload"),
+        : gate.reason === "unsupported-room-type"
+          ? i18n.t("Common:EncryptionPrepareFailed")
+          : i18n.t("Common:EncryptionKeysRequiredForUpload"),
       t,
       createNewIfExist,
     );

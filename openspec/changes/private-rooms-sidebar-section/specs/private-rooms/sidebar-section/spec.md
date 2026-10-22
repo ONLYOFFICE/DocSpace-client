@@ -271,11 +271,15 @@ The system SHALL open a room without the private setting, or a folder outside pr
 - **THEN** the file's folder opens under its Rooms address directly, without passing through `/private`
 
 ### Requirement: Section titles and path labels
-The system SHALL show Common:Private as the header title of the section list. The section's Archive SHALL show the same header as Rooms → Archive. Inside the section, the breadcrumb root SHALL read Common:Private instead of the title of the Rooms folder. Folders inside a private room SHALL keep the room's title row in the header, as in Rooms.
+The system SHALL show Common:Private as the header title of the section list, and as the page title the browser shows for it. The section's Archive SHALL show the same header as Rooms → Archive. Inside the section, the breadcrumb root SHALL read Common:Private instead of the title of the Rooms folder. Folders inside a private room SHALL keep the room's title row in the header, as in Rooms.
 
 #### Scenario: Section list header
 - **WHEN** the Private list is shown
 - **THEN** the header title is Common:Private
+
+#### Scenario: Browser tab title
+- **WHEN** the Private list is shown
+- **THEN** the browser tab reads Common:Private, not the title of the Rooms section
 
 #### Scenario: Breadcrumb root in a private room
 - **WHEN** the user opens the breadcrumbs of a folder inside a private room

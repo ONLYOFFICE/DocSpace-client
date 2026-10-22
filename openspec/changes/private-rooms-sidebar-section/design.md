@@ -234,6 +234,7 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 
 ## Risks / Trade-offs
 
+- [Destination pickers list private rooms under Rooms: their root shows Files, Rooms, Forms and AI agents, with no Private entry (seen on the local portal, 2026-10-22).] → Accepted for this change: the picker is the ui-kit FilesSelector, which builds its tree from the server sections, and Private is a client-side section. A Private root in pickers needs ui-kit work and a product decision; it is not part of this change.
 - [The base E2E fixture enables the opt-in and the apps mock reports `e2e-rooms` on, so every frame that shows the sidebar gains an item. The suite has 734 PNG baselines.] → Regenerate in Docker with `--update-snapshots=changed` in one task. Review the list of rewritten frames: only sidebar frames and lists that showed a private room may change.
 - [Optimistic apps load. On standalone with the app off, Rooms first requests `NotPrivate` and private rooms are missing until the apps list arrives.] → The D2 reaction refetches. The route guard and the D5 decision wait for the list.
 - [Deciding inside `fetchFiles` touches the most central loading path of the client.] → The decision is a pure function with its own unit tests. The fetch change is limited to "decide, then commit or replace". The existing `FilesStore.fetchFiles` tests run unchanged.

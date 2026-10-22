@@ -17,6 +17,8 @@
 - [ ] 3.1 Record `{ roomId, userId, missingFileIds }` in the Members store after a partial failure and clear it on success; verify with a store unit test.
 - [ ] 3.2 Render Common:EncryptedAccessPending on the member row and add a retry context item (edit rights only) that calls the helper from 1.2 and verifies the result against the server access lists; verify with a component test in `packages/client/src/pages/Home/InfoPanel/Body/views/Members/` and an E2E case in `private-room-members.spec.ts`.
 
+- [ ] 3.3 After "Trust new key", re-run the wraps for that member over the files skipped for them in this session (reuse the helper from 1.2 with the skipped file ids), seen on the local portal on 2026-10-22: files uploaded while the key was refused stayed unreadable for the member until the next session's backfill; verify with a case named "Key trusted after a refusal" in `room-encryption.integration.test.ts` and in the upload store tests
+
 ## 4. Upload guard covers subfolders
 
 - [ ] 4.1 Capture the room id for every queued upload item at start (reuse the existing `encryptionRoomId` capture) and make `countActiveUploadsForRoom` in `packages/shared/utils/uploadErrors.ts` match on it; verify with new cases in `packages/shared/utils/uploadErrors.test.ts` for root and subfolder uploads.

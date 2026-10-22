@@ -1,5 +1,14 @@
 # Spec Delta
 
+## ADDED Requirements
+
+### Requirement: Trusting a changed key wraps what the member missed
+The system SHALL, when the user accepts a member's changed key, wrap the file keys that were skipped for that member while the key was refused, in the rooms the user can manage, without waiting for the next backfill sweep.
+
+#### Scenario: Key trusted after a refusal
+- **WHEN** files were uploaded into a private room while a member's changed key was refused, and the user later accepts that key
+- **THEN** the member gets access entries for those files right away, and can open them without the uploader re-entering the room in a new session
+
 ## MODIFIED Requirements
 
 ### Requirement: Invited members receive re-wrapped file keys

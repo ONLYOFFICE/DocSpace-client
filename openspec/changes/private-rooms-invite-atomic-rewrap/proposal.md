@@ -12,6 +12,8 @@ Inviting members to a private room today grants room access first and re-wraps t
 - The member-removal upload guard counts uploads into any folder inside the room, not only the room root.
 - Backfill after invite stays best-effort but its outcome is surfaced in the same pending-access state.
 
+- Found on a local portal on 2026-10-22: after a refused key change, files uploaded meanwhile stay without the member's wraps until the next backfill sweep, which runs once per room and page session; accepting the key now wraps them right away.
+
 ## Capabilities
 
 ### New Capabilities

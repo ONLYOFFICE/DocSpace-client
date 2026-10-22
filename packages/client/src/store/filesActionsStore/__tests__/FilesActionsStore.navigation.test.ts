@@ -136,26 +136,39 @@ describe("FilesActionsStore — exits from the Private section", () => {
       selectedFolderStore: { roomType, navigationPath: [] },
     });
 
-  it.each([
-    ["/private/12/filter", "?folder=12", "/private/filter?", RoomSearchArea.Active],
-    [
+  it("moveToRoomsPage from a private room returns to the Private list", () => {
+    openAddress("/private/12/filter", "?folder=12");
+
+    backStore(5).moveToRoomsPage();
+
+    const [url] = navigate.mock.calls[0];
+    expect(url.startsWith("/private/filter?")).toBe(true);
+    expect(url).toContain(`searchArea=${RoomSearchArea.Active}`);
+  });
+
+  it("Restore from the archive", () => {
+    openAddress(
       "/private/archived/filter",
-      "?folder=12",
-      "/private/archived/filter?",
-      RoomSearchArea.Archive,
-    ],
-  ])(
-    "moveToRoomsPage from %s%s returns to %s",
-    (pathname, search, list, searchArea) => {
-      openAddress(pathname, search);
+      `?searchArea=${RoomSearchArea.Archive}`,
+    );
 
-      backStore(5).moveToRoomsPage();
+    backStore().moveToRoomsPage();
 
-      const [url] = navigate.mock.calls[0];
-      expect(url.startsWith(list)).toBe(true);
-      expect(url).toContain(`searchArea=${searchArea}`);
-    },
-  );
+    const [url] = navigate.mock.calls[0];
+    expect(url.startsWith("/private/archived/filter?")).toBe(true);
+    expect(url).toContain(`searchArea=${RoomSearchArea.Archive}`);
+    expect(url).not.toContain("privacyFilter");
+  });
+
+  it("moveToRoomsPage from an archived private room returns to Private → Archive", () => {
+    openAddress("/private/archived/filter", "?folder=12");
+
+    backStore(5).moveToRoomsPage();
+
+    const [url] = navigate.mock.calls[0];
+    expect(url.startsWith("/private/archived/filter?")).toBe(true);
+    expect(url).toContain(`searchArea=${RoomSearchArea.Archive}`);
+  });
 
   it("Back from a private room: back at the room's root opens the Private list", () => {
     openAddress("/private/12/filter", "?folder=12");

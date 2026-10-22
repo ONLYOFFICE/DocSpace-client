@@ -54,8 +54,11 @@ import {
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
 import { rootResolve } from "@docspace/shared/__mocks__/handlers/files/root";
-import { roomListResolver } from "@docspace/shared/__mocks__/handlers/files/roomList";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import {
+  roomListResolver,
+  withRoomPrivacyFilter,
+} from "@docspace/shared/__mocks__/handlers/files/roomList";
+import { RoomPrivacyFilter, ShareAccessRights } from "@docspace/shared/enums";
 import { API_PREFIX, BASE_URL } from "@docspace/shared/__mocks__/e2e";
 import { PRIVATE_ROOMS_FLAG_KEY } from "@docspace/shared/utils/privateRooms";
 import { http } from "msw";
@@ -1112,6 +1115,127 @@ test.describe("Private section — empty states", () => {
   });
 });
 
+/**
+ * Private → Archive holding one archived private room until it is restored.
+ *
+ * - The list mirrors VirtualRoomsCommonController.GetRoomsFolder for
+ *   searchArea=Archive: the Archive root (FolderType.Archive = 20) is
+ *   `current`, and the room lies under it. withRoomPrivacyFilter applies the
+ *   privacyFilter of the request.
+ * - Restore mirrors OperationController.MoveBatchItems (HttpPut
+ *   "fileops/move"), which the client calls with the Rooms root as the
+ *   destination: it answers with the caller's move operation
+ *   (FileOperationType.Move = 0), already finished, so the client does not
+ *   poll `fileops`, and the room leaves the archive.
+ */
+const restorableArchive = () => {
+  let restored = false;
+  const archiveRequests: URLSearchParams[] = [];
+
+  const list = http.get(apiAddress("files/rooms*"), async ({ request }) => {
+    const { response } = await roomListResolver(
+      TypeRoomList.IsDefault,
+      undefined,
+      request,
+    ).json();
+    const params = new URL(request.url).searchParams;
+    if (params.get("searchArea") !== "Archive") return Response.json({ response });
+    if (restored) archiveRequests.push(params);
+
+    // A room of the unfiltered default list lends the archived room its fields.
+    const unfiltered = await roomListResolver(TypeRoomList.IsDefault).json();
+    const [template] = unfiltered.response.folders;
+    const folders = restored
+      ? []
+      : [
+          {
+            ...template,
+            id: ARCHIVED_ROOM_ID,
+            title: "Archived Private Room",
+            roomType: 5,
+            private: true,
+            parentId: ARCHIVE_SECTION_ID,
+            rootFolderId: ARCHIVE_SECTION_ID,
+            rootFolderType: 20,
+            security: { ...template.security, Read: true, Move: true },
+          },
+        ];
+
+    return Response.json({
+      response: withRoomPrivacyFilter(
+        {
+          ...response,
+          folders,
+          count: folders.length,
+          total: folders.length,
+          current: {
+            ...response.current,
+            id: ARCHIVE_SECTION_ID,
+            rootFolderId: ARCHIVE_SECTION_ID,
+            title: "Archive",
+            rootFolderType: 20,
+            folderType: 20,
+          },
+        },
+        request,
+      ),
+    });
+  });
+
+  const move = http.put(apiAddress("files/fileops/move"), async () => {
+    restored = true;
+    return Response.json({
+      response: [
+        {
+          id: "mock-restore",
+          Operation: 0,
+          progress: 100,
+          error: "",
+          processed: "1",
+          finished: true,
+          status: 2,
+        },
+      ],
+    });
+  });
+
+  return { handlers: [list, move], archiveRequests };
+};
+
+test.describe("Private section — restore", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Restore from the archive", async ({ page, mockRequest, baseUrl }) => {
+    const archive = restorableArchive();
+    mockRequest.use(...archive.handlers);
+
+    await page.goto(`${baseUrl}/private/archived/filter`);
+    const archivedRow = fileRow(page, "Archived Private Room");
+    await expect(archivedRow).toBeVisible({ timeout: 15000 });
+
+    await archivedRow.getByTestId("context-menu-button").first().click();
+    await page.getByTestId("option_unarchive-room").click();
+    await page.getByTestId("restore_room_dialog_submit").click();
+
+    await expect(archivedRow).toHaveCount(0, { timeout: 15000 });
+    expect(pathOf(page)).toBe("/private/archived/filter");
+    expect(archive.archiveRequests.length).toBeGreaterThan(0);
+    for (const params of archive.archiveRequests) {
+      expect(params.get("searchArea")).toBe("Archive");
+      expect(params.get("privacyFilter")).toBe(
+        String(RoomPrivacyFilter.Private),
+      );
+    }
+  });
+});
 
 test.describe("Private section — creation", () => {
   test.beforeEach(({ mockRequest }) => {

@@ -525,6 +525,13 @@ test.describe("Private section — rooms open inside it", () => {
     ).toHaveCount(0);
   });
 
+  test("Browser tab title", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await expect(page).toHaveTitle(/^Private - /);
+  });
+
   test("Folder inside a private room", async ({ page, baseUrl }) => {
     await page.goto(
       `${baseUrl}/private/${SUBFOLDER_ID}/filter?folder=${SUBFOLDER_ID}`,

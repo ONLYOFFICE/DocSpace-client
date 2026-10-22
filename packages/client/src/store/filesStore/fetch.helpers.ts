@@ -70,6 +70,7 @@ import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
   getCategoryTypeByFolderTypeInSection,
+  setDocumentTitle,
 } from "SRC_DIR/helpers/utils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
 import {
@@ -922,6 +923,10 @@ export function fetchRoomsImpl(
             navigationPath: EMPTY_ARRAY,
             ...{ new: data.new },
           });
+
+          // Spec: private-rooms/sidebar-section, "Section titles and path labels"
+          if (self.categoryType === CategoryType.PrivateRooms)
+            setDocumentTitle(i18n.t("Common:Private"));
 
           const isEmptyList = data.folders.length === 0;
           if (filter && isEmptyList) {

@@ -189,58 +189,71 @@ export type TPrivateTransferPlan =
   | { kind: "refuse-into" }
   | { kind: "same-room" }
   | { kind: "refuse-folder-out" }
+  | { kind: "refuse-move-into" }
   | {
       kind: "decrypt-out";
+      files: TActionItem[];
+      refusedFolders: TActionItem[];
+    }
+  | {
+      kind: "reencrypt-into";
       files: TActionItem[];
       refusedFolders: TActionItem[];
     };
 
 // Spec: private-rooms/file-operations, "Transfer into a private room is refused",
-// "Folders cannot leave a private room", "Files leaving a private room are decrypted".
+// "Folders cannot leave a private room", "Files leaving a private room are decrypted",
+// "Copy into another private room is re-encrypted", "Move into another private room is refused".
 export type TPrivateTransferParams = {
   items: TActionItem[];
   sourceInPrivateRoom: boolean;
-  sourceRootFolderId?: number | string | null;
+  /** The private room the items are in, when the caller knows it. */
+  sourceRoomId?: number | string | null;
+  move?: boolean;
   dest:
     | (TEncryptedTransferDest & {
         /**
          * Whether the destination lies inside a private room, when the caller
          * knows it (current folder, picker). Without it the plan falls back to
-         * `private`, which only a room row carries, and the root folder id,
-         * which is the Rooms section id and cannot tell rooms apart.
+         * `private`, which only a room row carries.
          */
         insidePrivateRoom?: boolean;
+        /** The private room that contains the destination, when known. */
+        roomId?: number | string | null;
       })
     | null
     | undefined;
 };
 
+const isSameId = (
+  a: number | string | null | undefined,
+  b: number | string | null | undefined,
+) =>
+  a !== undefined && a !== null && b !== undefined && b !== null
+    ? String(a) === String(b)
+    : false;
+
 export const planPrivateTransfer = (
   params: TPrivateTransferParams,
 ): TPrivateTransferPlan => {
-  const { items, sourceInPrivateRoom, sourceRootFolderId, dest } = params;
+  const { items, sourceInPrivateRoom, sourceRoomId, move, dest } = params;
 
-  const destRootKnown =
-    dest?.rootFolderId !== undefined &&
-    dest?.rootFolderId !== null &&
-    sourceRootFolderId !== undefined &&
-    sourceRootFolderId !== null;
-  const destInsideSameRoom =
-    sourceInPrivateRoom &&
-    (destRootKnown
-      ? dest?.rootFolderId === sourceRootFolderId
-      : dest?.rootFolderType === FolderType.Rooms);
-  const destPrivate =
-    dest?.insidePrivateRoom ?? (dest?.private === true || destInsideSameRoom);
+  const destPrivate = dest?.insidePrivateRoom ?? dest?.private === true;
 
   if (destPrivate && !sourceInPrivateRoom) return { kind: "refuse-into" };
   if (!sourceInPrivateRoom) return { kind: "generic" };
-  if (destPrivate) return { kind: "same-room" };
+  if (destPrivate && isSameId(dest?.roomId, sourceRoomId)) {
+    return { kind: "same-room" };
+  }
+  // An unknown destination room counts as another room.
+  if (destPrivate && move) return { kind: "refuse-move-into" };
 
   const files = items.filter((el) => !el.isFolder);
   const refusedFolders = items.filter((el) => !!el.isFolder);
   if (files.length === 0) return { kind: "refuse-folder-out" };
-  return { kind: "decrypt-out", files, refusedFolders };
+  return destPrivate
+    ? { kind: "reencrypt-into", files, refusedFolders }
+    : { kind: "decrypt-out", files, refusedFolders };
 };
 
 /**
@@ -265,15 +278,20 @@ self: FilesActionStore,
     case "refuse-folder-out":
       toastr.error(i18n.t("Common:CannotTransferFolderFromPrivateRoom"));
       return true;
+    case "refuse-move-into":
+      toastr.error(i18n.t("Common:CannotMoveToAnotherPrivateRoom"));
+      return true;
     case "decrypt-out":
+    case "reencrypt-into":
       if (plan.refusedFolders.length > 0) {
         toastr.error(i18n.t("Common:CannotTransferFolderFromPrivateRoom"));
       }
       void self.copyEncryptedFilesToFolder(plan.files, destFolderId, {
-        private: false,
+        private: plan.kind === "reencrypt-into",
         rootFolderId: dest?.rootFolderId,
+        rootFolderType: dest?.rootFolderType,
         roomType: dest?.roomType,
-        deleteSourceOnSuccess: options.move,
+        deleteSourceOnSuccess: plan.kind === "decrypt-out" && options.move,
         sourceRoomId: options.sourceRoomId,
       });
       return true;
@@ -615,17 +633,38 @@ self: FilesActionStore,
     dragBufferSelection ? [dragBufferSelection] : self.filesStore.selection
   ).filter((el) => !el.isFolder || el.id !== destFolderId);
 
+  // A drop target is a row or a breadcrumb of the open folder, or a room row.
+  const openRoomId = sourceInPrivateRoom ? self.resolveRoomIdForFile(null) : null;
+  const { id: openFolderId, navigationPath } = self.selectedFolderStore;
+  const destInOpenRoom =
+    openRoomId !== null &&
+    (isSameId(destFolderId, openRoomId) ||
+      isSameId(destFolderId, openFolderId) ||
+      isSameId(destFolderInfo?.parentId, openFolderId) ||
+      !!navigationPath?.some(
+        (item) => !item.isRootRoom && isSameId(item.id, destFolderId),
+      ));
+  let destRoomId: number | string | null = null;
+  if (destFolderInfo?.isRoom) destRoomId = destFolderId;
+  else if (destInOpenRoom) destRoomId = openRoomId;
+
+  const dragIsMove =
+    dragSelection.length > 0 && dragSelection.every((f) => f.security?.Move);
   const plan = planPrivateTransfer({
     items: dragSelection,
     sourceInPrivateRoom,
-    sourceRootFolderId: self.selectedFolderStore.rootFolderId,
-    dest: destFolderInfo,
+    sourceRoomId: openRoomId,
+    move: dragIsMove,
+    dest: {
+      ...destFolderInfo,
+      insidePrivateRoom: destInOpenRoom || undefined,
+      roomId: destRoomId,
+    },
   });
-  const dragIsMove =
-    dragSelection.length > 0 && dragSelection.every((f) => f.security?.Move);
   if (
     self.runPrivateTransferPlan(plan, destFolderId, destFolderInfo, {
       move: dragIsMove,
+      sourceRoomId: openRoomId,
     })
   ) {
     return;

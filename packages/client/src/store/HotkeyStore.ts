@@ -180,7 +180,6 @@ class HotkeyStore {
   /** Where the clipboard items were taken from, for the private-room rules. */
   hotkeysClipboardSource: {
     inPrivateRoom: boolean;
-    rootFolderId: number | string | null;
     roomId: number | string | null;
   } | null = null;
 
@@ -771,7 +770,6 @@ class HotkeyStore {
     this.hotkeysClipboardAction = isCut ? "move" : "copy";
     this.hotkeysClipboardSource = {
       inPrivateRoom: !!this.treeFoldersStore.isPrivacyFolder,
-      rootFolderId: this.selectedFolderStore.rootFolderId ?? null,
       roomId: this.filesActionsStore.resolveRoomIdForFile(null),
     };
 
@@ -813,13 +811,18 @@ class HotkeyStore {
     const dest = {
       private: destInPrivateRoom,
       insidePrivateRoom: destInPrivateRoom,
+      roomId: destInPrivateRoom
+        ? this.filesActionsStore.resolveRoomIdForFile(null)
+        : null,
       rootFolderId: this.selectedFolderStore.rootFolderId,
+      rootFolderType: this.selectedFolderStore.rootFolderType ?? undefined,
       roomType,
     };
     const plan = this.filesActionsStore.planPrivateTransfer({
       items: selections as TPrivateTransferParams["items"],
       sourceInPrivateRoom: !!source?.inPrivateRoom,
-      sourceRootFolderId: source?.rootFolderId,
+      sourceRoomId: source?.roomId,
+      move: !isCopy,
       dest,
     });
     if (

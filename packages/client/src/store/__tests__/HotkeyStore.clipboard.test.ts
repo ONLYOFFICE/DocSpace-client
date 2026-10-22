@@ -301,6 +301,21 @@ describe("HotkeyStore - clipboard paste and private rooms", () => {
     );
   });
 
+  it("Paste into another private room: nothing is transferred", async () => {
+    const s = setup();
+    s.goTo(location.privateRoom(7));
+    s.clip([privateFile(1), privateFolder(3)], true);
+    s.goTo(location.privateRoom(8, 9));
+    await s.paste();
+
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:CannotMoveToAnotherPrivateRoom",
+    );
+    expect(s.itemOperationToFolder).not.toHaveBeenCalled();
+    expect(s.copyEncryptedFilesToFolder).not.toHaveBeenCalled();
+    expect(s.filesStore.hotkeysClipboard).toEqual([]);
+  });
+
   it("paste between non-private folders keeps the server-side transfer", async () => {
     const s = setup();
     s.goTo(location.myDocuments(5));

@@ -330,6 +330,8 @@ const FilesSelectorWrapper = ({
       const destInfo = {
         private: destInPrivateRoom,
         insidePrivateRoom: destInPrivateRoom,
+        // A move from a private room is pinned to that room.
+        roomId: isMove && sourceInPrivateRoom ? privateRoomId : undefined,
         rootFolderId: (selectedTreeNode as unknown as { rootFolderId?: number })
           ?.rootFolderId,
         roomType: (selectedTreeNode as unknown as { roomType?: number })
@@ -341,6 +343,8 @@ const FilesSelectorWrapper = ({
           typeof planPrivateTransfer
         >[0]["items"],
         sourceInPrivateRoom: !!sourceInPrivateRoom,
+        sourceRoomId: privateRoomId,
+        move: !!isMove,
         dest: destInfo,
       });
       const transfer = getSelectorTransfer({

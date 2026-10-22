@@ -210,7 +210,11 @@ export const getSelectorTransfer = (params: {
 }): TSelectorTransfer => {
   const { plan, selection, selectedItemId, isCopy, isMove } = params;
 
-  if (plan.kind === "refuse-into" || plan.kind === "refuse-folder-out") {
+  if (
+    plan.kind === "refuse-into" ||
+    plan.kind === "refuse-folder-out" ||
+    plan.kind === "refuse-move-into"
+  ) {
     return { kind: "refuse" };
   }
 
@@ -221,10 +225,11 @@ export const getSelectorTransfer = (params: {
     (item) => isFileItem(item) && (item as TFile).encrypted === true,
   ) as TFile[];
 
-  const decryptOut = plan.kind === "decrypt-out";
+  const leavesRoom =
+    plan.kind === "decrypt-out" || plan.kind === "reencrypt-into";
   const sameRoomCopy =
     plan.kind === "same-room" && !!isCopy && encryptedFiles.length > 0;
-  if (!decryptOut && !sameRoomCopy) return { kind: "generic" };
+  if (!leavesRoom && !sameRoomCopy) return { kind: "generic" };
 
   const fileIds: number[] = [];
   const folderIds: number[] = [];
@@ -234,7 +239,7 @@ export const getSelectorTransfer = (params: {
       if ((item as TFile).encrypted !== true) fileIds.push(item.id as number);
     } else if (item.id === selectedItemId) {
       movesIntoItself = true;
-    } else if (!decryptOut) {
+    } else if (!leavesRoom) {
       folderIds.push(item.id as number);
     }
   }
@@ -245,7 +250,7 @@ export const getSelectorTransfer = (params: {
     fileIds,
     folderIds,
     movesIntoItself,
-    refusedFolders: decryptOut && plan.refusedFolders.length > 0,
-    deleteSourceOnSuccess: decryptOut && !!isMove,
+    refusedFolders: leavesRoom && plan.refusedFolders.length > 0,
+    deleteSourceOnSuccess: plan.kind === "decrypt-out" && !!isMove,
   };
 };

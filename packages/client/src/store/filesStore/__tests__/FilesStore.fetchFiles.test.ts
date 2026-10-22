@@ -244,20 +244,34 @@ describe("FilesStore.fetchFiles — Private section address", () => {
     expect(store.files.map((f) => f.id)).toEqual([70]);
   });
 
-  it("does not move a room whose navigation was superseded", async () => {
+  it("commits nothing and moves no room when its fetch was superseded", async () => {
     openAddress("/rooms/shared/6/filter", "?folder=6");
     const store = sectionStore();
     vi.spyOn(api.files, "getFolder").mockResolvedValue(
       roomContents(true, true) as never,
     );
-    vi.spyOn(api.files, "getFolderInfo").mockImplementation(async () => {
-      store.filesController = new AbortController();
-      return { ...ROOM, private: true, security: {} } as never;
-    });
+    let roomLookupSignal: AbortSignal | undefined;
+    vi.spyOn(api.files, "getFolderInfo").mockImplementation(
+      async (_id, _skipRedirect, _share, signal) => {
+        roomLookupSignal = signal;
+        store.filesController = new AbortController();
+        return { ...ROOM, private: true, security: {} } as never;
+      },
+    );
+    const { categoryType, filter } = store;
+    const selectedFolderId = store.selectedFolderStore.id;
 
-    await store.fetchFiles(6);
+    const fetching = store.fetchFiles(6);
+    const fetchSignal = store.filesController!.signal;
+    await fetching;
 
     expect(navigate).not.toHaveBeenCalled();
+    expect(roomLookupSignal).toBe(fetchSignal);
+    expect(store.files).toEqual([]);
+    expect(store.folders).toEqual([]);
+    expect(store.categoryType).toBe(categoryType);
+    expect(store.filter).toBe(filter);
+    expect(store.selectedFolderStore.id).toBe(selectedFolderId);
   });
 
   it("leaves the address alone while the section is not available", async () => {

@@ -148,6 +148,7 @@ export async function getFolderInfo(
   folderId: number | string,
   skipRedirect = false,
   share?: string,
+  signal?: AbortSignal,
 ) {
   const headers = share
     ? {
@@ -159,6 +160,7 @@ export async function getFolderInfo(
     method: "get",
     url: `/files/folder/${folderId}`,
     headers,
+    signal,
   };
 
   const res = (await request(options, skipRedirect)) as TFolder;

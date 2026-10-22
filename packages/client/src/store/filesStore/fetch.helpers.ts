@@ -112,7 +112,12 @@ async function checkSectionAddress(
   data: { current: TFolder; pathParts: TPathParts[] },
   address: TFetchAddress,
   controller: Nullable<AbortController>,
-): Promise<{ correction: string | null; room: Nullable<TItem> }> {
+): Promise<{
+  correction: string | null;
+  room: Nullable<TItem>;
+  /** A later fetchFiles has taken over; this one must commit nothing. */
+  isSuperseded: boolean;
+}> {
   const { appsStore } = self;
   const decision = {
     pathname: address.pathname,
@@ -142,16 +147,23 @@ async function checkSectionAddress(
 
   const room: Nullable<TItem> =
     !decision.isPrivate && isInRoom && privacyDecides
-      ? await api.files.getFolderInfo(roomPart.id)
+      ? await api.files.getFolderInfo(
+          roomPart.id,
+          false,
+          undefined,
+          controller?.signal,
+        )
       : null;
 
-  const current = window.DocSpace?.location ?? window.location;
-  const isStale =
-    self.filesController !== controller ||
-    current.pathname !== address.pathname ||
-    current.search !== address.search;
+  if (self.filesController !== controller)
+    return { correction: null, room, isSuperseded: true };
 
-  if (isStale) return { correction: null, room };
+  const current = window.DocSpace?.location ?? window.location;
+  if (
+    current.pathname !== address.pathname ||
+    current.search !== address.search
+  )
+    return { correction: null, room, isSuperseded: false };
 
   return {
     correction: getSectionAddressCorrection({
@@ -159,6 +171,7 @@ async function checkSectionAddress(
       isPrivate: decision.isPrivate || !!room?.private,
     }),
     room,
+    isSuperseded: false,
   };
 }
 
@@ -270,6 +283,8 @@ export function fetchFilesImpl(
         address,
         controller,
       );
+
+      if (sectionCheck.isSuperseded) return;
 
       if (sectionCheck.correction) {
         isAddressCorrected = true;

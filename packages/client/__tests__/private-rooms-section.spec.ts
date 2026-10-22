@@ -894,6 +894,81 @@ test.describe("Private section — info panel", () => {
     await expect(page.getByText("See rooms details here")).toBeVisible();
   });
 
+  /**
+   * Opens a room from a list, shows a file of it in the info panel through
+   * the file's Info option and goes back to the list with the browser's Back.
+   */
+  const backToListAfterAFileShown = async (
+    page: Page,
+    room: string,
+    file: string,
+  ) => {
+    await page
+      .locator(`[data-title="${room}"] [data-testid="link"]`)
+      .first()
+      .click();
+    await expect(fileRow(page, file)).toBeVisible({ timeout: 15000 });
+
+    await fileRow(page, file).click({ button: "right" });
+    await page.getByTestId("option_show-info").click();
+    await expect(page.locator(".info-panel_header-text")).toContainText(
+      file.replace(/\.txt$/, ""),
+    );
+
+    await page.goBack();
+    await expect(page.locator(`[data-title="${room}"]`).first()).toBeVisible({
+      timeout: 15000,
+    });
+  };
+
+  test("Nothing selected on the list: back from a private room", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        title: ROOM_TITLE,
+        initialFiles: [
+          { id: 9501, title: FILE_TITLE, size: 4, encrypted: false },
+        ],
+      }),
+    );
+    await page.goto(`${baseUrl}/private/filter`);
+
+    await backToListAfterAFileShown(page, ROOM_TITLE, FILE_TITLE);
+
+    await expect(page.getByText("See rooms details here")).toBeVisible();
+  });
+
+  test("Nothing selected on the Rooms list: back from a room", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        title: ROOM_TITLE,
+        ordinaryRooms: [{ roomId: ORDINARY_ROOM_ID, title: "Team Room" }],
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ORDINARY_ROOM_ID,
+        title: "Team Room",
+        isPrivate: false,
+        initialFiles: [
+          { id: 9601, title: ORDINARY_FILE_TITLE, size: 4, encrypted: false },
+        ],
+      }),
+    );
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+
+    await backToListAfterAFileShown(page, "Team Room", ORDINARY_FILE_TITLE);
+
+    await expect(page.getByText("See rooms details here")).toBeVisible();
+  });
+
   test("Private room selected", async ({ page, baseUrl }) => {
     await page.goto(`${baseUrl}/private/filter`);
     await expect(roomLink(page)).toBeVisible({ timeout: 15000 });

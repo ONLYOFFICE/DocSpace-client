@@ -44,6 +44,7 @@ import {
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
+import { CategoryType } from "@docspace/shared/constants";
 
 import { createTestFilesStore } from "./testHarness";
 import type { TItem } from "../types";
@@ -405,4 +406,36 @@ describe("FilesStore rooms requests — Private section scope", () => {
       expect(getRooms).not.toHaveBeenCalled();
     },
   );
+});
+
+describe("FilesStore.fetchRooms — selection carried into the list", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  // useFiles fetches the rooms list without clearing the selection.
+  const fetchListShowing = async (shownFolderId: number) => {
+    const store = createTestFilesStore();
+    vi.spyOn(api.rooms, "getRooms").mockResolvedValue(
+      roomsPayload([room(1), room(2)]) as never,
+    );
+    store.selectedFolderStore.id = shownFolderId;
+    store.categoryType = CategoryType.Shared;
+    store.setBufferSelection(file(30));
+
+    await store.fetchRooms(null, null, undefined, undefined, false);
+
+    return store;
+  };
+
+  it("keeps the selection when the list on screen is fetched again", async () => {
+    const store = await fetchListShowing(7);
+
+    expect(store.bufferSelection?.id).toBe(30);
+  });
+
+  it("Nothing selected on the list: drops the selection of the room it was opened from", async () => {
+    const store = await fetchListShowing(12);
+
+    expect(store.bufferSelection).toBeNull();
+    expect(store.selection).toEqual([]);
+  });
 });

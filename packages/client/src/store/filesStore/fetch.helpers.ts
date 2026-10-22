@@ -869,6 +869,9 @@ export function fetchRoomsImpl(
   self.aiRoomStore.setResultId(null);
   self.aiRoomStore.setCurrentTab(null);
 
+  const shownFolderId = self.selectedFolderStore.id;
+  const shownCategoryType = self.categoryType;
+
   // The Rooms/Forms split is enforced server-side by the room's folder type:
   // `searchArea=Active` never returns Form Filling Rooms, and the Forms
   // section requests `searchArea=Forms`. The filter (carrying searchArea)
@@ -965,10 +968,14 @@ export function fetchRoomsImpl(
           self.setFiles(EMPTY_ARRAY);
         });
 
-        if (clearFilter) {
-          if (clearSelection) {
-            self.setSelected("close");
-          }
+        // Only a refetch of the list on screen keeps its selection (bug
+        // 75150); a list opened from a room or another list starts with none.
+        const isListShown =
+          shownFolderId === data.current.id &&
+          shownCategoryType === self.categoryType;
+
+        if (clearFilter && (clearSelection || !isListShown)) {
+          self.setSelected("close");
         }
 
         setInfoPanelSelectedRoom(null);

@@ -3,14 +3,20 @@
   "content": "Archive",
   "content_en_sha1_hash": "2621c6fd51a58e1d1d5c491aac71488647b20224",
   "created_at": "2025-05-19T21:30:43.051Z",
-  "updated_at": "2026-09-14T20:38:41.355Z",
+  "updated_at": "2026-10-22T15:29:24.311Z",
   "comment": {
-    "text": "This is a noun referring to the archive section. It appears in dialog titles, confirmation messages, and activity feed descriptions when moving items to or from the archive.",
+    "text": "Noun used in two senses: the Archive section of archived rooms (sidebar item under Rooms and under Private, section and header title, archive and empty-archive dialogs, history entries), and the file type name shown in the Type column for compressed archive files such as ZIP. Use one noun that fits both.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:59:08.000Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-10-22T15:29:24.311Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 525,
+      "context": "icon: CatalogPrivateReactSvgUrl,\n ...nav(searchAreaUrl(\"/private/filter\", RoomSearchArea.Active)),\n children: [\n {\n id: \"private-rooms-archive\",\n label: t(\"Common:Archive\"),\n icon: getCatalogIconUrlByType(FolderType.Archive),\n ...nav(\n searchAreaUrl(\"/private/archived/filter\", RoomSearchArea.Archive),\n ),\n },",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
       "line_number": 105,
@@ -37,8 +43,8 @@
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 250,
-      "context": "}),\n t(\"RoomsTour:RoomsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),\n t(\"RoomsTour:RoomsPlacesArchive\", {\n archive: t(\"Common:Archive\"),\n }),\n ],\n }),\n callbacks,\n LOG_LABEL,",
+      "line_number": 252,
+      "context": "}),\n canUseTemplates &&\n t(\"RoomsTour:RoomsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),\n t(\"RoomsTour:RoomsPlacesArchive\", { archive: t(\"Common:Archive\") }),\n ].filter(Boolean) as string[],\n callbacks,\n ROOMS_TOUR_LABEL,\n ),",
       "module": "/packages/client"
     },
     {
@@ -91,8 +97,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/private/page.client.tsx",
-      "line_number": 127,
-      "context": "},\n [dialogsStore],\n );\n \n const headerTitle = isArchive\n ? t(\"Common:Archive\")\n : t(\"Common:DashboardE2eRoomsTitle\");\n const currentWithTitle = React.useMemo(\n () => ({ ...folderData.current, title: headerTitle }),\n [folderData.current, headerTitle],\n );",
+      "line_number": 126,
+      "context": "});\n },\n [dialogsStore],\n );\n \n const headerTitle = isArchive ? t(\"Common:Archive\") : t(\"Common:Private\");\n const currentWithTitle = React.useMemo(\n () => ({ ...folderData.current, title: headerTitle }),\n [folderData.current, headerTitle],\n );",
       "module": "/packages/sdk"
     },
     {

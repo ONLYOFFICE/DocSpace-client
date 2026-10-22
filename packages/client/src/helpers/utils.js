@@ -160,10 +160,8 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
  * pathname is the fallback for folders *inside* a form room, which carry no
  * room type of their own.
  *
- * Private rooms open in the Private section while it is available. The caller
- * says so with `isPrivate`: the target is a private room, or lies inside the
- * private room open now. The route alone is not a signal, since links from the
- * section to ordinary folders must not pass through it.
+ * `isPrivate` marks a target that is a private room or lies inside the open one.
+ * Spec: private-rooms/sidebar-section, "Private rooms open inside the section"
  *
  * @param {import("@docspace/shared/enums").FolderType|null} [folderType]
  * @param {number|string|null} [parentId]

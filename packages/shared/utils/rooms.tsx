@@ -84,11 +84,7 @@ export const ROOMS_SECTION_FOLDER_TYPES = [
 
 /**
  * Room types the create-room chooser may offer, in catalog order.
- *
- * Never the Private type: private rooms are created from the Private section,
- * which opens the dialog on that type directly.
- * Spec: private-rooms/feature-gating, "Private room card is gated in the
- * create-room chooser"
+ * Spec: private-rooms/sidebar-section, "Generic chooser does not offer the Private type"
  */
 export const getCreateRoomTypes = () =>
   RoomsTypeValues.filter((type) => type !== RoomsTypePrivate);

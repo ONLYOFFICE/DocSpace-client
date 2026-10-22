@@ -93,8 +93,7 @@ class AppsStore {
 
   settingsStore: SettingsStore;
 
-  // Read once, like the route tables: a flag flipped from the console must
-  // not make Rooms drop private rooms before a section is there to list them.
+  // Spec: private-rooms/sidebar-section, "Section availability"
   privateRoomsOptIn = isPrivateRoomsEnabled();
 
   constructor(settingsStore: SettingsStore) {

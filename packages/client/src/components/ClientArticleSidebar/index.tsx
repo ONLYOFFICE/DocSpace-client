@@ -512,8 +512,7 @@ const ClientArticleSidebar = ({
       });
     }
 
-    // Private rooms are listed apart from Rooms, by the rooms' privacy filter;
-    // there is no folder of their own to count new items against.
+    // Spec: private-rooms/sidebar-section, "No new-items counter on the section item"
     if (roomsFolder && privateRoomsSectionAvailable) {
       mainItems.push({
         id: "private-rooms",

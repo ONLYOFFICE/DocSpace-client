@@ -45,7 +45,7 @@
     "@docspace/shared": "workspace:*",
     "@google/genai": "catalog:",
     "@mistralai/mistralai": "catalog:",
-    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-1.0.2-progress.11.tgz",
+    "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-1.0.2-progress.12.tgz",
     "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tgz",
     "@onlyoffice/docspace-sdk-js": "^2.2.0",
     "@onlyoffice/document-editor-react": "2.1.1",

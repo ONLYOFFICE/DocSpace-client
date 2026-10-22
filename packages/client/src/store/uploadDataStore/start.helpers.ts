@@ -396,17 +396,31 @@ export function startUploadImpl(
   }
 }
 
-/** Retried files go through the batch unlock again before any byte is sent. */
-async function sendRetriedFiles(
+/**
+ * Asks for the unlock before any retried file is reset, so the running queue
+ * cannot pick one up while the prompt is open. Returns the files to reset; on
+ * decline the encrypted ones fail instead.
+ */
+async function unlockRetriedFiles(
+  self: UploadDataStore,
+  retryFiles: TUploadFile[],
+) {
+  if (await self.ensureEncryptionUnlockedForBatch(retryFiles)) {
+    return retryFiles;
+  }
+
+  const plainFiles = retryFiles.filter((f) => !self.willEncryptItem(f));
+  self.cancelEncryptedBatchUpload(
+    retryFiles.filter((f) => !plainFiles.includes(f)),
+  );
+  return plainFiles;
+}
+
+function sendRetriedFiles(
   self: UploadDataStore,
   retryFiles: TUploadFile[],
   t: TTranslation,
 ) {
-  const canProceed = await self.ensureEncryptionUnlockedForBatch();
-  if (!canProceed) {
-    self.cancelEncryptedBatchUpload();
-  }
-
   const filesToSend = retryFiles.filter((f) => !f.error);
   if (filesToSend.length === 0) {
     finishUploadIfSettled(self, t);
@@ -434,6 +448,16 @@ export async function retryUploadFilesImpl(
     return;
   }
 
+  const [resetFile] = await unlockRetriedFiles(self, [retryFile]);
+
+  self.quotaErrorRaised = false;
+  self.finishUploadFilesCalled = false;
+
+  if (!resetFile) {
+    finishUploadIfSettled(self, t);
+    return;
+  }
+
   retryFile.action = "upload";
   retryFile.error = "";
   retryFile.isQuotaError = false;
@@ -446,9 +470,6 @@ export async function retryUploadFilesImpl(
   retryFileUploaded.inAction = false;
   retryFileUploaded.errorShown = false;
   retryFileUploaded.percent = 0;
-
-  self.quotaErrorRaised = false;
-  self.finishUploadFilesCalled = false;
 
   if (self.uploaded) {
     const newUploadData = {
@@ -470,7 +491,7 @@ export async function retryUploadFilesImpl(
     self.primaryProgressDataStore.setPrimaryProgressBarData(progressData);
   }
 
-  await sendRetriedFiles(self, [retryFile], t);
+  sendRetriedFiles(self, [retryFile], t);
 }
 
 export async function retryQuotaFailedFilesImpl(
@@ -480,9 +501,11 @@ export async function retryQuotaFailedFilesImpl(
   const failed = self.files.filter((f) => f.isQuotaError);
   if (failed.length === 0) return;
 
+  const resetFiles = await unlockRetriedFiles(self, failed);
+
   self.quotaErrorRaised = false;
   self.finishUploadFilesCalled = false;
-  failed.forEach((retryFile) => {
+  resetFiles.forEach((retryFile) => {
     const fileIndex = self.files.findIndex(
       (f) => f.uniqueId === retryFile.uniqueId,
     );
@@ -505,7 +528,7 @@ export async function retryQuotaFailedFilesImpl(
     }
   });
 
-  if (self.uploaded) {
+  if (self.uploaded && resetFiles.length > 0) {
     const newUploadData = {
       filesSize: self.convertFilesSize,
       uploadedFiles: self.uploadedFiles,
@@ -523,7 +546,7 @@ export async function retryQuotaFailedFilesImpl(
   }
 
   const retryFiles = self.files.filter((f) =>
-    failed.some((rf) => rf.uniqueId === f.uniqueId),
+    resetFiles.some((rf) => rf.uniqueId === f.uniqueId),
   );
-  await sendRetriedFiles(self, retryFiles, t);
+  sendRetriedFiles(self, retryFiles, t);
 }

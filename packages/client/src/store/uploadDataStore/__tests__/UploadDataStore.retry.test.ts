@@ -630,4 +630,77 @@ describe("UploadDataStore retry — the private-room rules run again on the fixe
     expect(vi.mocked(requireUnlock).mock.calls).toEqual([["user-1"]]);
     expectEncryptedIntoRoom();
   });
+
+  describe("Retry while another upload is running", () => {
+    const answerLater = () => {
+      let answer!: (identity: unknown) => void;
+      vi.mocked(requireUnlock).mockReturnValue(
+        new Promise((resolve) => {
+          answer = resolve;
+        }) as never,
+      );
+      return (identity: unknown) => answer(identity);
+    };
+
+    /** What the queue does when one of its files finishes. */
+    const queueMovesOn = (store: UploadDataStore) => {
+      const next = store.files.findIndex((f) => !f.inAction);
+      if (next !== -1) store.startSessionFunc(next, t);
+    };
+
+    const settle = () => new Promise((resolve) => setTimeout(resolve, 50));
+
+    const storeWithRunningQueue = () => {
+      const store = storeWithFailed([
+        makeUploadFile({ uniqueId: "running", action: "upload", inAction: true }),
+        failedPrivateItem("a"),
+      ]);
+      store.uploaded = false;
+      return store;
+    };
+
+    it("starts no session before the prompt is answered and one after it is accepted", async () => {
+      const store = storeWithRunningQueue();
+      const answer = answerLater();
+
+      const retry = store.retryUploadFiles(t, "a");
+      await vi.waitFor(() => expect(requireUnlock).toHaveBeenCalled());
+      queueMovesOn(store);
+      await settle();
+
+      expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+      expect(sessionCalls()).toHaveLength(0);
+
+      answer({ pub: "x" });
+      await retry;
+      await vi.waitFor(() => expect(sessionCalls()).toHaveLength(1));
+
+      queueMovesOn(store);
+      store.startSessionFunc(1, t);
+      await settle();
+
+      expect(sessionCalls()).toHaveLength(1);
+      expectEncryptedIntoRoom();
+    });
+
+    it("fails the file with Common:EncryptionLockedUpload when the prompt is declined", async () => {
+      const store = storeWithRunningQueue();
+      const answer = answerLater();
+
+      const retry = store.retryUploadFiles(t, "a");
+      await vi.waitFor(() => expect(requireUnlock).toHaveBeenCalled());
+      queueMovesOn(store);
+      answer(null);
+      await retry;
+      queueMovesOn(store);
+      await settle();
+
+      expect(store.files[1].error).toBe("Common:EncryptionLockedUpload");
+      expect(store.uploadedFilesHistory[1].error).toBe(
+        "Common:EncryptionLockedUpload",
+      );
+      expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+      expect(sessionCalls()).toHaveLength(0);
+    });
+  });
 });

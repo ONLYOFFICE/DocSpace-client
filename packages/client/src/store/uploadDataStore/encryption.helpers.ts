@@ -64,7 +64,11 @@ import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types
 
 import i18n from "../../i18n";
 
-import type { TUploadBrowserFile, TUploadTarget } from "./helpers";
+import type {
+  TUploadBrowserFile,
+  TUploadFile,
+  TUploadTarget,
+} from "./helpers";
 import type { default as UploadDataStore } from "../UploadDataStore";
 
 // Spec: private-rooms/file-operations, "Files leaving a private room are decrypted".
@@ -275,19 +279,26 @@ export async function reportSkippedMembersImpl(
   return named;
 }
 
-export async function ensureEncryptionUnlockedForBatchImpl(
-  self: UploadDataStore,
-) {
-  const { userId } = self.getUserEncryptionKeys();
-  if (!userId) return true;
-
-  const needsUnlock = self.files.some(
+/** The given items, or the uploads of the queue that have not started yet. */
+const batchItems = (self: UploadDataStore, items?: TUploadFile[]) =>
+  items ??
+  self.files.filter(
     (item) =>
       !item.inAction &&
       !item.error &&
       !item.cancel &&
-      item.action === "upload" &&
-      self.willEncryptItem(item),
+      item.action === "upload",
+  );
+
+export async function ensureEncryptionUnlockedForBatchImpl(
+  self: UploadDataStore,
+  items?: TUploadFile[],
+) {
+  const { userId } = self.getUserEncryptionKeys();
+  if (!userId) return true;
+
+  const needsUnlock = batchItems(self, items).some((item) =>
+    self.willEncryptItem(item),
   );
 
   if (!needsUnlock) return true;
@@ -297,28 +308,26 @@ export async function ensureEncryptionUnlockedForBatchImpl(
 }
 
 // Spec: private-rooms/file-operations, "Uploads into a private room are encrypted on the client".
-export function cancelEncryptedBatchUploadImpl(self: UploadDataStore) {
+export function cancelEncryptedBatchUploadImpl(
+  self: UploadDataStore,
+  items?: TUploadFile[],
+) {
   const errorMessage = i18n.t("Common:EncryptionLockedUpload");
 
   runInAction(() => {
-    self.files.forEach((item) => {
-      if (
-        item.inAction ||
-        item.error ||
-        item.cancel ||
-        item.action !== "upload" ||
-        !self.willEncryptItem(item)
-      )
-        return;
+    batchItems(self, items).forEach((item) => {
+      if (!self.willEncryptItem(item)) return;
 
       item.inAction = true;
       item.error = errorMessage;
+      item.isQuotaError = false;
       item.percent = 0;
       const historyItem = self.uploadedFilesHistory.find(
         (f) => f.uniqueId === item.uniqueId,
       );
       if (historyItem) {
         historyItem.error = errorMessage;
+        historyItem.isQuotaError = false;
         historyItem.percent = 0;
       }
     });

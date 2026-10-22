@@ -396,10 +396,11 @@ class UploadDataStore {
   willEncryptItem = (item: TUploadFile | null | undefined) =>
     willEncryptItemImpl(this, item);
 
-  ensureEncryptionUnlockedForBatch = () =>
-    ensureEncryptionUnlockedForBatchImpl(this);
+  ensureEncryptionUnlockedForBatch = (items?: TUploadFile[]) =>
+    ensureEncryptionUnlockedForBatchImpl(this, items);
 
-  cancelEncryptedBatchUpload = () => cancelEncryptedBatchUploadImpl(this);
+  cancelEncryptedBatchUpload = (items?: TUploadFile[]) =>
+    cancelEncryptedBatchUploadImpl(this, items);
 
   prepareFileForEncryptedUpload = (
     file: TUploadBrowserFile,

@@ -96,7 +96,7 @@ export function parallelUploadingImpl(
         (f) => f.uniqueId === notUploadedFiles[i].uniqueId,
       );
 
-      if (fileIndex !== -1) {
+      if (fileIndex !== -1 && !self.files[fileIndex].inAction) {
         self.currentUploadNumber += 1;
         self.startSessionFunc(fileIndex, t, createNewIfExist);
       }
@@ -609,12 +609,14 @@ export async function startSessionFuncImpl(
 
   const item = self.files[indexOfFile];
 
-  self.files[indexOfFile].inAction = true;
-
   if (!item) {
     console.error("Empty files");
     return Promise.resolve();
   }
+
+  if (item.inAction) return Promise.resolve();
+
+  self.files[indexOfFile].inAction = true;
 
   if (
     item.action === "uploaded" ||

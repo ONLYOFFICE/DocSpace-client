@@ -77,14 +77,26 @@ const MetadataTemplates = () => {
         {t("Metadata:MetadataTemplatesDescription")}
       </Text>
 
-      <Button
-        primary
-        scale={isMobile()}
-        size={isMobile() ? ButtonSize.normal : ButtonSize.small}
-        label={t("Files:CreateTemplate")}
-        onClick={() => setEditingTemplate(null)}
-        testId="metadata_create_template_button"
-      />
+      {isMobile() ? (
+        <div className={styles.buttonSeating}>
+          <Button
+            className={styles.createButton}
+            primary
+            size={ButtonSize.normal}
+            label={t("Files:CreateTemplate")}
+            onClick={() => setEditingTemplate(null)}
+            testId="metadata_create_template_button"
+          />
+        </div>
+      ) : (
+        <Button
+          primary
+          size={ButtonSize.small}
+          label={t("Files:CreateTemplate")}
+          onClick={() => setEditingTemplate(null)}
+          testId="metadata_create_template_button"
+        />
+      )}
 
       {templates.length ? (
         <TemplatesView

@@ -43,3 +43,20 @@
   line-height: 20px;
   color: var(--settings-common-description-color);
 }
+
+.buttonSeating {
+  position: fixed;
+  z-index: 2;
+  width: 100vw;
+  height: 73px;
+  bottom: 0;
+  inset-inline-start: 0;
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.createButton {
+  width: calc(100% - 32px);
+}

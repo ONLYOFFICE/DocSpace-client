@@ -34,6 +34,7 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
   - the Archive offers no way back to Rooms.
 
   The section also gets info panel support and live updates that respect the split.
+- The section works inside an embedded SDK frame as it does outside one: framed Rooms addresses of private rooms move to `/private`, a host opens the section with the root path `/private/`, and a frame that shows the menu has the Private item (decided 2026-10-22, replacing the earlier frame exemption).
 - **BREAKING** (tester-facing, behind the flag): the iframe page behind `/e2e-rooms` is removed. `/e2e-rooms` and `/e2e-rooms?section=archive` redirect to the section, and the app launcher opens the section.
 - The product name changes from "Rooms E2E" to "Private" everywhere it is shown: the apps catalog entry and the header of the SDK private rooms list use `Common:Private`, like Forms uses `Common:Forms` in both places. The `Common:DashboardE2eRoomsTitle` key is then unused and is removed from every language. The app id `e2e-rooms` and its description stay.
 - The E2E suite enables the flag for every page, so the new sidebar item appears in every screenshot that shows the sidebar, and those baselines are regenerated.

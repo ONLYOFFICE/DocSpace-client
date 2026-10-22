@@ -138,7 +138,7 @@ The system SHALL apply the section's privacy filter and search area to every roo
 
 #### Scenario: Restore from the archive
 - **WHEN** the user restores a private room from Private → Archive
-- **THEN** the Private list that opens requests `searchArea=Active` with `privacyFilter=Private`
+- **THEN** the user stays in Private → Archive, whose refreshed list requests `searchArea=Archive` with `privacyFilter=Private` and no longer contains the room
 
 ### Requirement: No Recent, Favorites, Templates or Trash under the section
 The system SHALL NOT offer Recent, Favorites, Templates or Trash under the Private section, because private content never reaches them:
@@ -184,6 +184,10 @@ The system SHALL open a private room, and every folder inside it, under the sect
 - **WHEN** `/rooms/archived/filter?folder={roomId}` is opened for an archived private room while the section is available
 - **THEN** the address is replaced with `/private/archived/filter?folder={roomId}`
 
+#### Scenario: Row link of the Rooms list
+- **WHEN** `/rooms/shared/filter?folder={roomId}`, the row link form of the Rooms list, is opened for a private room while the section is available
+- **THEN** the address is replaced with `/private/{roomId}/filter`, and the header shows the room's title, not the section name
+
 #### Scenario: Open location from a feed
 - **WHEN** the user picks "Open location" on a file that lies in a folder of a private room
 - **THEN** the folder opens under `/private/{folderId}/filter` with the Private item highlighted and the file highlighted
@@ -196,6 +200,10 @@ The system SHALL open a private room, and every folder inside it, under the sect
 - **WHEN** an e-mail link to a private room under `/rooms/shared` is opened on a standalone portal where the Rooms app is off and the section is available
 - **THEN** the room opens under `/private` instead of the dashboard
 
+#### Scenario: Rooms list with the Rooms app off
+- **WHEN** a Rooms address that names no folder, such as `/rooms/shared/filter` or `/rooms/shared/{id}/filter` without `folder`, is opened on a standalone portal where the Rooms app is off and the section is available
+- **THEN** the dashboard opens, as it does without the section, and the Rooms list is not shown
+
 ### Requirement: Section addresses are decided before the folder is shown
 The system SHALL decide whether an address belongs to the Rooms or the Private section before showing the folder. A corrected address therefore:
 - shows no Rooms state first;
@@ -203,7 +211,7 @@ The system SHALL decide whether an address belongs to the Rooms or the Private s
 - keeps the highlight that the entry point asked for;
 - never alternates between the two sections.
 
-Addresses inside an embedded frame SHALL NOT be corrected.
+Addresses inside an embedded frame SHALL be decided the same way.
 
 #### Scenario: Cold link to a private room
 - **WHEN** a member opens `/rooms/shared/{roomId}/filter` for a private room without keys on this device
@@ -214,8 +222,19 @@ Addresses inside an embedded frame SHALL NOT be corrected.
 - **THEN** the room opens under Rooms and the address is not changed again
 
 #### Scenario: Embedded frame
-- **WHEN** a private room is opened in the client inside an embedded frame
-- **THEN** its address is not rewritten to `/private`
+- **WHEN** a Rooms address of a private room is opened in the client inside an embedded frame while the section is available
+- **THEN** the address is replaced with its `/private` counterpart and the room opens there, as outside a frame
+
+### Requirement: Private section in an embedded frame
+The system SHALL offer the Private section to the client running inside an embedded frame under the same availability as outside a frame. A frame opened at a `/private` address SHALL show the Private list or the private room it names, and a frame that shows the menu SHALL show the Private item in it.
+
+#### Scenario: Frame opened in the Private section
+- **WHEN** a host embeds the client with the root path `/private/` while the section is available
+- **THEN** the frame shows the Private list and its requests carry `privacyFilter=Private`
+
+#### Scenario: Frame showing the menu
+- **WHEN** a host embeds the client with the menu shown while the section is available
+- **THEN** the frame's menu contains the Private item
 
 ### Requirement: Navigation up and out stays in the section
 The system SHALL take the user from a private room to the Private list, or to Private → Archive for an archived private room, whenever they go up or are sent away. That covers breadcrumbs, the back button and Backspace, leaving the room, losing access, and the no-access view. It SHALL NOT take them to the Rooms section.
@@ -359,7 +378,7 @@ The system SHALL NOT offer a way to the Rooms section in the empty state of Priv
 
 #### Scenario: Empty Private archive
 - **WHEN** the user opens an empty Private → Archive
-- **THEN** no option leads to the Rooms section; an option to go back, if offered, opens the Private list
+- **THEN** no option leads to the Rooms section; an option to go back, if offered, reads Common:GoToSection with the section name Common:Private and opens the Private list
 
 ### Requirement: No onboarding tour in the section
 The system SHALL NOT start the Rooms onboarding tour, or show its stand-in rooms, on a Private section address.

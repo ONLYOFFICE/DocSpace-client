@@ -82,7 +82,7 @@ No stashed design document covers a private-rooms section. The decisions below f
   - the refill after rooms leave a list (`store/filesStore/mutations.helpers.ts:165-172`);
   - the Rooms refetch in `store/contacts/UsersStore.ts:297-307`.
 - It overrides any `privacyFilter` and `searchArea` the address carries. It is never written back to `roomsFilter`, so the URL, the filter chips and `isFiltered` stay clean. This is the pattern of the first Forms pass (`972667a8531`).
-- Forcing the search area also fixes "Restore" in Private → Archive, which calls `moveToRoomsPage` and would otherwise land on an archive address with `searchArea=Active` (`filesActionsStore/navigation.helpers.ts:117-119`, `rooms.helpers.ts:380`).
+- "Restore" in Private → Archive calls `moveToRoomsPage` (`rooms.helpers.ts:383`), which keeps the user in Private → Archive with `searchArea=Archive` (`filesActionsStore/navigation.helpers.ts:119-124`), exactly as Restore in Rooms → Archive keeps the user there. The forced scope adds `privacyFilter=Private` to that refresh.
 - Templates, Forms and AI agents searches are not scoped. Private rooms cannot be saved as templates, and the client never sets the private flag on a form-filling or AI room (`room-membership`, "Private room is a flagged Custom room").
 - Room-group dialogs opened in Rooms (`EditRoomGroupsDialog`, `AddRoomToGroupDialog`) filter `private` rooms out of their room lists while the section is available. The server cannot do this (see Context), so a group's room count still includes them. That is accepted.
 - Alternative rejected: carrying `privacyFilter` in the URL. Old bookmarks and links from other sections would bypass it, and the user would see a filter they cannot clear.
@@ -113,7 +113,7 @@ What each existing helper does with them:
 
 Two guards:
 - A guard element on the `/private` routes waits for the apps list (as `ProtectedAppRoute` does). When the section is not available, it renders `<Navigate replace>` to the Rooms counterpart, keeping the query string.
-- The Rooms routes `rooms/shared/:room` and `rooms/archived/*` sit behind `ProtectedAppRoute` for the Rooms app (`routes/client.js:280-298`, `:400-438`). Their guard also admits the address while the Private section is available, so the D5 decision can run before the dashboard redirect. This is how e-mail links and the editor's back link reach a private room on a standalone portal with the Rooms app off.
+- The Rooms routes `rooms/shared/:room` and `rooms/archived/*` sit behind `ProtectedAppRoute` for the Rooms app (`routes/client.js:280-298`, `:400-438`). Their guard also admits the address while the Private section is available, if it names a folder (a `:room` segment with a `folder` query, or a `folder` query), so the D5 decision can run before the dashboard redirect. Server-built links always carry `folder` (server-contract, "Server-built room links"). An address that names no folder would only load the Rooms list, so it still goes to the dashboard. This is how e-mail links and the editor's back link reach a private room on a standalone portal with the Rooms app off.
 
 Every place that switches on `CategoryType.Shared/SharedRoom/Archive/ArchivedRoom` is reviewed for the new categories (task 2.6). Known consequences of missing one:
 - the sort key falls back to My documents (`store/filesStore/filter.helpers.ts:70-80`), so sorting inside a private room overwrites the My documents sort;
@@ -153,7 +153,8 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
   The bare "route is under `/private`" signal is not used: links from the section to ordinary folders, such as Open location of a new file of an ordinary room from the new-items panel, would otherwise detour through `/private`. Copying a file out of a private room is a client upload and offers no link to its destination. The callers pass the item: `createFolderNavigation.js:81`, `openLocationActionImpl` (`navigation.helpers.ts:229`), `navigateToNewFolderLocationImpl` (`uploadDataStore/operations.helpers.ts:405`), `fetch.helpers.ts:262`, `socket.helpers.ts:583` and the breadcrumbs (`Header/index.js:441-443`).
 - For entry points that cannot know privacy beforehand (typed and e-mail links, Open location from feeds, the editor's back link, the `?folder=` forms of list links), `fetchFiles` decides before it commits any state. If the loaded folder or a `navigationPath` entry is private and the address belongs to Rooms, or the other way round, it stops without committing and replaces the address with its counterpart.
 - The replace keeps `location.state`, so Open location's highlight survives. It carries a marker so the follow-up load does not decide again.
-- The decision runs only while the section is available, never inside an embedded frame (`ClientConfig.isFrame`), and only if the navigation that started it is still current.
+- The `?folder=` row link of the Rooms list (`/rooms/shared/filter?folder={id}`) is replaced with `/private/{id}/filter`, the path form of the section, so every check that reads the category from the route sees a room and not the list root.
+- The decision runs only while the section is available, inside an embedded frame too (D15), and only if the navigation that started it is still current. A fetch that finds itself superseded returns without committing anything, and the extra `getFolderInfo` takes the fetch's abort signal.
 - Because nothing is committed before the decision, the missing-key warning (`fetch.helpers.ts:210-214`), the backfill sweep and the sidebar highlight run once, on the final address.
 - Alternative rejected: correcting in `useFiles` after the folder loads. It caused a full second `fetchFiles`, double notices and a visible flip from Rooms to Private, and it could loop with the `/private` guard.
 
@@ -187,13 +188,14 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 - Empty view: the matchers in `EmptyViewContainer.{utils,helpers}.tsx` key by folder type, and the private list root reports Rooms. They get a route-derived discriminator, as `isFormsSectionScope` does, with:
   - three new `EmptyView` keys;
   - a create button as the only option on the list;
-  - on the private Archive, the "Go to my rooms" option (`EmptyViewContainer.helpers.tsx:639-646`, `hooks.ts:306-325`) pointed at `/private/filter`.
+  - on the private Archive, the "Go to my rooms" option (`EmptyViewContainer.helpers.tsx:639-646`, `hooks.ts:306-325`) pointed at `/private/filter` and labelled `Common:GoToSection` with `Common:Private`, as the no-access view labels it.
 - The Type column shows the same value on every row and stays, as it did for Forms. Column sets, widths and the room sort keys are shared with Rooms through `isRoomsFolder` / `isArchiveFolder` (`TableStore.ts:963-972`), as for Forms.
 
 **D9. Live updates.**
 - The socket create-folder path (`store/filesStore/socket.helpers.ts:208-223`) decides insertion from `isInSelectedFolder`, which is true for both lists because both have the VirtualRooms root selected.
 - The socket payload has no private flag (see Context), so after `getFolderInfo` a room is inserted only if `folderInfo.private` matches the open list's scope (the D1 helper).
-- The same predicate guards the restore and "shared with me" insert paths in that file. Archive and unarchive arrive as delete plus create, so they go through the same check.
+- One guard in the create path (`socket.helpers.ts:234`) covers restore and "shared with me" too: both arrive there, and archive and unarchive arrive as delete plus create, so every insertion goes through the same check.
+- The socket "removed from room" redirect of an archived private room goes to Private → Archive, also when the room was opened through its active-form `/private/{id}` address (`socket.helpers.ts:551-556`).
 
 **D10. `/e2e-rooms`.**
 - The route keeps `ProtectedAppRoute appId="e2e-rooms"`, which sends users to the dashboard while the app is unavailable. Its element becomes `<Navigate replace>` to `/private/filter`, or to `/private/archived/filter` when `section=archive`.
@@ -224,6 +226,12 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 - `Shell.jsx:760-771` hides the chat while `isPrivacyFolder` is true, which covers active and archived private rooms. It also hides it on the private categories, which covers both list roots. `aiSuggestions.ts` is not consulted there.
 - `RoomsTour` (`components/RoomsTour/index.tsx:227-238`, `:383`) starts on `isRoomsFolderRoot`. It also requires a non-private category, so its stand-in rooms are never swapped into the Private list.
 
+**D15. The section works inside an embedded frame (decided 2026-10-22).**
+- The client in an SDK manager frame offers the section under the same availability predicate (D2) as outside a frame. The address decision (D5) no longer skips frames, so a private room that a host opens through a Rooms address moves to `/private`, consistent with the frame's Rooms list, which leaves private rooms out.
+- A host opens the section with the root path `/private/`. The SDK JS manager builder makes `{rootPath}{id}/filter` (`public/scripts/sdk/2.2.0/api.js`), which lands on the existing `/private` routes. A frame that shows the menu gets the Private item from `ClientArticleSidebar`.
+- The opt-in is the same browser-local flag. A host-side opt-in for the frame (`privateRooms` in the frame configuration) belongs to `private-rooms-sdk-gating-and-parity`, which defines that property for the SDK pages too.
+- Alternative rejected: switching the section off in frames. Private rooms would then vanish from a framed Rooms list with no way to reach them, or need a second, frame-only scope.
+
 ## Risks / Trade-offs
 
 - [The base E2E fixture enables the opt-in and the apps mock reports `e2e-rooms` on, so every frame that shows the sidebar gains an item. The suite has 734 PNG baselines.] → Regenerate in Docker with `--update-snapshots=changed` in one task. Review the list of rewritten frames: only sidebar frames and lists that showed a private room may change.
@@ -232,6 +240,8 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 - [The Rooms counter and its panel still include private news, and a Rooms group's room count includes private rooms.] → Accepted v1 limitations, written as requirements. Both are removed only by the server-backed follow-up.
 - [A drop onto a private room row, and a queued or retried upload after leaving the room, were sent in plaintext.] → Closed by `private-rooms-upload-target-context` (archived 2026-10-21). Task 0.2 confirms it before group 2 adds the exits that made the second case more likely.
 - [Two archives (Rooms → Archive and Private → Archive) may confuse users who archived a private room before the section existed.] → Each room shows up in exactly one of them.
+- [A frame on another site gets partitioned storage in Chromium, so the opt-in set on the portal itself does not reach it.] → Testers set the flag inside the frame's context, or embed from the portal's own JavaScript SDK page (same origin). The host-side opt-in in `private-rooms-sdk-gating-and-parity` removes the need.
+- [Room-group dialogs need the ids of private rooms before they can list rooms.] → On a failed lookup they close with an error toast instead of leaving an empty aside. They never list rooms before those ids are known, so a private room is never offered for grouping.
 - [Coordination with `private-rooms-sdk-gating-and-parity` (its iframe task and scenarios) and with `private-rooms-release-gate` (it removes requirements this change modifies).] → Task 0.1 reconciles the SDK change before either is applied. The release-gate revision is noted in its proposal when it is picked up.
 
 ## Migration Plan

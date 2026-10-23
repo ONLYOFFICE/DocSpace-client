@@ -50,10 +50,14 @@ vi.mock("../encrypted-filename-recovery", () => ({
 vi.mock("../../encryption/filename-cache", () => ({
   getCachedEncryptedFilename: vi.fn(),
 }));
+vi.mock("../room-member-keys", () => ({
+  loadRoomMemberKeysSafe: vi.fn(async () => []),
+}));
 
 import { getFolder } from "../../../api/files";
 import { recoverEncryptedFilenames } from "../encrypted-filename-recovery";
 import { getCachedEncryptedFilename } from "../../encryption/filename-cache";
+import { loadRoomMemberKeysSafe } from "../room-member-keys";
 
 const identity = {} as IdentityKeyPair;
 
@@ -148,10 +152,32 @@ describe("listDecryptedFileNames", () => {
       ],
     );
     expect(recoverEncryptedFilenames).toHaveBeenCalledWith(
-      [1, 2, 3].map((id) => ({ id, viewUrl: `/files/${id}/view` })),
+      [{ id: 2, viewUrl: "/files/2/view" }],
       "user-1",
       identity,
       50,
     );
+  });
+
+  it("loads no member keys when every name is cached", async () => {
+    vi.mocked(getFolder).mockResolvedValueOnce({
+      files: [encryptedFile(1), encryptedFile(2)],
+      folders: [],
+      total: 2,
+    } as never);
+    vi.mocked(getCachedEncryptedFilename).mockImplementation(
+      (id) => `name-${id}.docx`,
+    );
+    const actual = await vi.importActual<
+      typeof import("../encrypted-filename-recovery")
+    >("../encrypted-filename-recovery");
+    vi.mocked(recoverEncryptedFilenames).mockImplementationOnce(
+      actual.recoverEncryptedFilenames,
+    );
+
+    const names = await listDecryptedFileNames(50, 50, "user-1", identity);
+
+    expect(names).toEqual(["name-1.docx", "name-2.docx"]);
+    expect(loadRoomMemberKeysSafe).not.toHaveBeenCalled();
   });
 });

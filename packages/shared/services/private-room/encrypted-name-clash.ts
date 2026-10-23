@@ -75,7 +75,12 @@ export async function listDecryptedFileNames(
 
   await recoverEncryptedFilenames(
     files
-      .filter((file) => file.encrypted && file.viewUrl)
+      .filter(
+        (file) =>
+          file.encrypted &&
+          file.viewUrl &&
+          !getCachedEncryptedFilename(file.id),
+      )
       .map((file) => ({ id: file.id, viewUrl: file.viewUrl })),
     userId,
     identity,

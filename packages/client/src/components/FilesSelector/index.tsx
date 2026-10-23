@@ -41,6 +41,7 @@ import { Events, FilterType, FolderType } from "@docspace/shared/enums";
 import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { UserStore } from "@docspace/shared/store/UserStore";
 import {
   TFile,
   TFileSecurity,
@@ -72,6 +73,7 @@ import { FILES_SELECTOR_AGENT_CONTEXT } from "SRC_DIR/store/CreateEditAgentStore
 import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
+import { usePickerFileTitles } from "./usePickerFileTitles";
 import {
   getAcceptButtonLabel,
   getIsDisabled,
@@ -140,6 +142,7 @@ const FilesSelectorWrapper = ({
   runPrivateTransferPlan,
   sourceInPrivateRoom,
   privateRoomId,
+  userId,
   clearActiveOperations,
   setSelected,
   setMoveToPanelVisible,
@@ -303,6 +306,8 @@ const FilesSelectorWrapper = ({
       isRoomFormAccessible,
     };
   }, [selection, isCopy, isMove, isFormRoom, t]);
+
+  const pickerFileTitles = usePickerFileTitles(userId);
 
   const showEncryptedTransferBanner = getShowEncryptedTransferBanner({
     selection: selection as Array<TFile | TFolder>,
@@ -592,6 +597,7 @@ const FilesSelectorWrapper = ({
 
   return (
     <FilesSelector
+      {...pickerFileTitles}
       openRoot={openRootVar}
       disabledItems={disabledItems}
       isRoomDisabled={isRoomDisabled}
@@ -710,6 +716,7 @@ export default inject(
       dialogsStore,
       filesStore,
       infoPanelStore,
+      userStore,
     }: {
       settingsStore: SettingsStore;
       selectedFolderStore: SelectedFolderStore;
@@ -719,6 +726,7 @@ export default inject(
       dialogsStore: DialogsStore;
       filesStore: FilesStore;
       infoPanelStore: InfoPanelStore;
+      userStore: UserStore;
     },
     {
       isCopy,
@@ -900,6 +908,7 @@ export default inject(
       runPrivateTransferPlan,
       sourceInPrivateRoom: treeFoldersStore.isPrivacyFolder,
       privateRoomId,
+      userId: userStore.user?.id,
 
       setMoveToPublicRoomVisible,
       setBackupToPublicRoomVisible,

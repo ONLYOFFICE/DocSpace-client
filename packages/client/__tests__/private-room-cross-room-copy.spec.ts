@@ -405,6 +405,32 @@ test.describe("Private room — copy into another private room", () => {
     expect(rooms.destHandle.getFiles()[0].folderId).toBe(DEST_FOLDER_ID);
   });
 
+  test("Destination picker in a private room", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl, {
+      destHoldsPlan: true,
+    });
+    const opaqueTitle = rooms.destHandle
+      .getFile(OLDER_PLAN.id)
+      .serverTitle.replace(/\.txt$/, "");
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+
+    await openTransferDialog(page, "copy");
+    const picker = selector(page);
+    await expect(selectorItem(page, /^plan$/)).toBeVisible({ timeout: 10000 });
+    await picker.getByText("Apps", { exact: true }).first().click();
+    await selectorItem(page, /^Rooms$/).click();
+    await selectorItem(page, DEST_ROOM_TITLE).click();
+
+    await expect(selectorItem(page, /^plan$/)).toBeVisible({ timeout: 15000 });
+    await expect(picker.getByText(opaqueTitle)).toHaveCount(0);
+  });
+
   test("Copy into a room holding a file of the same name", async ({
     page,
     mockRequest,

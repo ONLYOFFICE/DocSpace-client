@@ -98,6 +98,7 @@ export type TContextItem = {
   canOpenPlayer?: boolean;
   locked?: boolean;
   encrypted?: boolean;
+  private?: boolean;
   isFolder?: boolean;
   isRoom?: boolean;
   isAIAgent?: boolean;

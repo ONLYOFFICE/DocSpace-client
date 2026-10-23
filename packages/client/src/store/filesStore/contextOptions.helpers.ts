@@ -902,7 +902,6 @@ export const buildContextOptions = (
         "export-room-index",
         "save-as-template",
         "duplicate-room",
-        "download",
       ]);
     }
 
@@ -1158,7 +1157,6 @@ export const buildContextOptions = (
       "edit-index",
       "copy-to",
       "duplicate",
-      "download",
     ]);
 
     if (!canMove) {

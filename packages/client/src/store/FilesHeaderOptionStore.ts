@@ -94,6 +94,18 @@ export default class FilesHeaderOptionStore {
   private downloadAsHandle = () =>
     this.dialogsStore.setDownloadDialogVisible(true);
 
+  private downloadEncryptedHandle = () => {
+    const selection = this.filesStore.selection as unknown as TActionItem[];
+    const fileIds = selection.filter((i) => i.fileExst).map((i) => i.id);
+    const folderIds = selection.filter((i) => !i.fileExst).map((i) => i.id);
+
+    return this.filesActionsStore
+      .downloadFiles(fileIds, folderIds, {
+        label: this.t("Common:ArchivingData"),
+      })
+      ?.catch((err) => toastr.error(err));
+  };
+
   private moveToHandle = () => this.dialogsStore.setMoveToPanelVisible(true);
 
   private pinHandle = () => this.filesActionsStore.pinRooms(this.t);
@@ -282,6 +294,15 @@ export default class FilesHeaderOptionStore {
           id: "menu-download",
           label: t("Common:Download"),
           onClick: this.downloadHandle,
+          iconUrl: DownloadReactSvgUrl,
+        };
+
+      case "downloadEncrypted":
+        if (!this.isAvailableOption("download")) return null;
+        return {
+          id: "menu-download-encrypted",
+          label: t("Common:DownloadWithoutDecryption"),
+          onClick: this.downloadEncryptedHandle,
           iconUrl: DownloadReactSvgUrl,
         };
 

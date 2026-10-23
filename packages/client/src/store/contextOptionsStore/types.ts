@@ -122,6 +122,7 @@ export type TFilesActionsStore = {
     folderIds: (number | string)[],
     translations: { label: string },
   ) => Promise<unknown>;
+  downloadEncryptedFolder: (folder: TContextItem) => Promise<unknown>;
   changeCustomFilter: (item: TContextItem, t: TTranslation) => Promise<unknown>;
   duplicateAction: (item: TContextItem) => Promise<unknown>;
   setThirdpartyInfo: (providerKey?: string) => void;

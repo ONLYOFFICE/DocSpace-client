@@ -248,10 +248,12 @@ self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
   const moveTo = self.getOption("moveTo", t);
   const deleteOption = self.getOption("delete", t);
   const download = self.getOption("download", t);
+  const downloadEncrypted = self.getOption("downloadEncrypted", t);
   const showInfo = self.getOption("showInfo", t);
 
   itemsCollection
     .set("download", download)
+    .set("downloadEncrypted", downloadEncrypted)
     .set("moveTo", moveTo)
     .set("delete", deleteOption)
     .set("showInfo", showInfo);

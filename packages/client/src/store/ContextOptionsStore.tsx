@@ -485,6 +485,15 @@ class ContextOptionsStore {
       downloadAction("", item).catch((err: unknown) =>
         toastr.error(getEncryptedOperationErrorMessage(i18n.t, err)),
       );
+    } else if (
+      !isFile &&
+      (this.treeFoldersStore.isPrivacyFolder || item.private)
+    ) {
+      this.filesActionsStore
+        .downloadEncryptedFolder(item)
+        .catch((err: unknown) =>
+          toastr.error(getEncryptedOperationErrorMessage(i18n.t, err)),
+        );
     } else if (isFile) {
       // the original .js passed viewUrl through unchecked
       // (files always carry it) — the non-null assertion keeps that behavior.

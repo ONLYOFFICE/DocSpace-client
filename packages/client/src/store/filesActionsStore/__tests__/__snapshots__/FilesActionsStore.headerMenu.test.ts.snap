@@ -99,6 +99,10 @@ exports[`FilesActionsStore.getHeaderMenu — dispatch by folder type > privacy 1
     "label": "Common:Download",
   },
   {
+    "id": "menu-download-encrypted",
+    "label": "Common:DownloadWithoutDecryption",
+  },
+  {
     "id": "menu-move-to",
     "label": "Common:MoveTo",
   },

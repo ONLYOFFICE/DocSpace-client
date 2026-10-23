@@ -52,6 +52,29 @@ describe("ContextOptionsStore — action handler delegation (batch 6)", () => {
     expect(downloadAction).toHaveBeenCalledTimes(1);
   });
 
+  it("Folder download in a private room -> filesActionsStore.downloadEncryptedFolder", () => {
+    const downloadAction = vi.fn(async () => {});
+    const downloadEncryptedFolder = vi.fn(async () => {});
+    const store = createTestContextOptionsStore({
+      filesActionsStore: { downloadAction, downloadEncryptedFolder },
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+    const folder = item({ isFolder: true, fileExst: undefined });
+    store.onClickDownload(folder, t);
+    expect(downloadEncryptedFolder).toHaveBeenCalledWith(folder);
+    expect(downloadAction).not.toHaveBeenCalled();
+  });
+
+  it("Room download in the Private section -> filesActionsStore.downloadEncryptedFolder", () => {
+    const downloadEncryptedFolder = vi.fn(async () => {});
+    const store = createTestContextOptionsStore({
+      filesActionsStore: { downloadEncryptedFolder },
+    });
+    const room = item({ isFolder: true, private: true, fileExst: undefined });
+    store.onClickDownload(room, t);
+    expect(downloadEncryptedFolder).toHaveBeenCalledWith(room);
+  });
+
   it("onClickDownload (file) -> settingsStore.openUrl", () => {
     const openUrl = vi.fn();
     const store = createTestContextOptionsStore({

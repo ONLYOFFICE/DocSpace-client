@@ -1,6 +1,6 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
-import { afterEach, describe, it, expect } from "vitest";
+import { afterEach, describe, it, expect, vi } from "vitest";
 import { createTestFilesActionsStore, t } from "./testHarness";
 
 // Recursive {id,label} projection excluding onClick/handlers.
@@ -107,5 +107,42 @@ describe("FilesActionsStore.getHeaderMenu — Private section", () => {
     expect(inPrivate).toEqual(
       inRooms.filter((id) => !ROOM_GROUP_ITEMS.includes(id as string)),
     );
+  });
+});
+
+describe("FilesActionsStore.getHeaderMenu — private room", () => {
+  const security = { Download: true, Move: true, Delete: true };
+
+  it("Bulk header menu", () => {
+    const store = createTestFilesActionsStore({
+      ...enabling,
+      filesStore: {
+        ...enabling.filesStore,
+        selection: [
+          { id: 1, fileExst: ".docx", encrypted: true, security },
+          { id: 2, fileExst: ".xlsx", encrypted: true, security },
+          { id: 3, isFolder: true, security },
+        ],
+      },
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+    const downloadFiles = vi.fn(async () => undefined);
+    store.downloadFiles = downloadFiles;
+
+    const menu = store.getHeaderMenu(t) as {
+      id?: string;
+      onClick?: () => unknown;
+    }[];
+    const menuIds = menu.map((item) => item.id);
+
+    expect(menuIds.indexOf("menu-download-encrypted")).toBe(
+      menuIds.indexOf("menu-download") + 1,
+    );
+
+    menu.find((item) => item.id === "menu-download-encrypted")!.onClick!();
+
+    expect(downloadFiles).toHaveBeenCalledWith([1, 2], [3], {
+      label: "Common:ArchivingData",
+    });
   });
 });

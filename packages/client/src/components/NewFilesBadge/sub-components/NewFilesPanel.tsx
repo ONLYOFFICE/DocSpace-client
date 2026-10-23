@@ -109,6 +109,7 @@ export const NewFilesPanelComponent = ({
 
   culture,
   markAsRead,
+  openRoomId,
 }: NewFilesPanelProps) => {
   const { t } = useTranslation(["Files"]);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -267,6 +268,7 @@ export const NewFilesPanelComponent = ({
           isFirst={index === 0}
           culture={culture}
           onClose={onClose}
+          roomId={isRoom ? folderId : openRoomId}
         />
       );
     })
@@ -318,11 +320,20 @@ export const NewFilesPanelComponent = ({
 };
 
 export const NewFilesPanel = inject(
-  ({ settingsStore, filesActionsStore }: NewFilesPanelInjectStore) => {
+  ({
+    settingsStore,
+    filesActionsStore,
+    selectedFolderStore,
+  }: NewFilesPanelInjectStore) => {
     const { culture } = settingsStore;
     const { markAsRead } = filesActionsStore;
+    const { navigationPath, isRoom, id } = selectedFolderStore;
 
-    return { culture, markAsRead };
+    return {
+      culture,
+      markAsRead,
+      openRoomId: navigationPath?.find((r) => r.isRoom)?.id ?? (isRoom ? id : null),
+    };
   },
 )(observer(NewFilesPanelComponent));
 

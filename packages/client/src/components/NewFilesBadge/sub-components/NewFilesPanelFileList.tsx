@@ -46,6 +46,7 @@ export const NewFilesPanelFileList = ({
   items,
   isRooms,
   onClose,
+  roomId,
 }: NewFilesPanelFileListProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -93,6 +94,7 @@ export const NewFilesPanelFileList = ({
             item={item}
             onClose={onClose}
             isRooms={isRooms}
+            roomId={roomId}
           />
         );
       })}

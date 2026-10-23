@@ -120,7 +120,7 @@ The system SHALL refuse files dropped from the computer onto a private room, or 
 - **THEN** the drop keeps the privacy of the row's room: folder trees are refused there as in the private room, and no file of the drop is sent unencrypted
 
 ### Requirement: Upload target is fixed when the user starts the upload
-The system SHALL fix, for every uploaded file, its target folder and whether that folder lies inside a private room, with that room's type and identity, at the moment the user drops, pastes or picks the files. Every later step SHALL use only this fixed target. Opening another folder, leaving the files section or the open folder being cleared SHALL NOT change where a file is sent or whether it is encrypted.
+The system SHALL fix, for every uploaded file, its target folder, whether that folder takes uploads, and whether it lies inside a private room, with that room's type and identity, at the moment the user drops, pastes or picks the files. Every later step SHALL use only this fixed target. Opening another folder, leaving the files section or the open folder being cleared SHALL NOT change where a file is sent, whether it is sent, or whether it is encrypted.
 
 #### Scenario: Room left while files are queued
 - **WHEN** a user uploads more files into a private room than are sent at once, and opens the Rooms list before the last of them has started
@@ -137,6 +137,10 @@ The system SHALL fix, for every uploaded file, its target folder and whether tha
 #### Scenario: Private room opened while a plain upload is queued
 - **WHEN** files queued for a folder outside any private room are still waiting and the user opens a private room
 - **THEN** those files are sent unencrypted into the folder they were queued for, and nothing is sent into the private room
+
+#### Scenario: Folder without the upload right opened during the directory read
+- **WHEN** a folder tree is dropped on the list of a folder the user may upload into, and the user opens a folder without that right before the browser has finished reading the dropped directories
+- **THEN** the files are uploaded into the folder they were dropped on; a drop on a folder without the right sends nothing, even if a folder with the right is opened meanwhile
 
 ### Requirement: Queued private uploads are sent only as ciphertext
 The system SHALL send a file whose fixed target lies inside a private room only after encrypting it for that room, whatever folder is open when its turn comes. If the file cannot be encrypted then, the system SHALL mark it failed and SHALL NOT send any of its bytes:
@@ -159,6 +163,10 @@ The system SHALL send a file whose fixed target lies inside a private room only 
 #### Scenario: Private target with another room type
 - **WHEN** a file's fixed target lies in a private room but names a room type other than the custom room type
 - **THEN** the file is refused and no bytes are sent, rather than being sent unencrypted
+
+#### Scenario: Copy into a private room with another room type
+- **WHEN** the path of the destination folder of a copy into a private room names a room type other than the custom room type
+- **THEN** the copy is refused with Common:EncryptionPrepareFailed and no bytes are sent, as for an upload with such a target
 
 ### Requirement: Retry keeps the fixed target
 The system SHALL retry a failed upload, from the upload panel or after a quota failure, against the target fixed when the file was first queued, never against the open folder. It SHALL apply the private-room upload rules to the file again before sending any byte, including the unlock prompt.
@@ -261,11 +269,15 @@ The system SHALL, when files are copied or moved out of a private room to a dest
 - **THEN** no file is transferred and no source is deleted
 
 ### Requirement: Copy within the same private room
-The system SHALL allow copying an encrypted file to the root of the same private room and SHALL give the copy a copy suffix in its name.
+The system SHALL allow copying an encrypted file to the root of the same private room and SHALL give the copy the first copy suffix that no file of the destination carries, without asking.
 
 #### Scenario: Same-room copy
 - **WHEN** an encrypted file is copied to the root of its own room
 - **THEN** a second encrypted file with a suffixed name appears
+
+#### Scenario: Copy of a name that already has a copy
+- **WHEN** the room root holds "Report.docx" and "Report (1).docx", and "Report.docx" is copied to the root
+- **THEN** the copy is stored as "Report (2).docx" and no conflict dialog is shown
 
 ### Requirement: Download decrypts on the client
 The system SHALL download an encrypted file by fetching the ciphertext, decrypting it in the browser with the unlocked identity and saving it under its original name, reporting progress and surfacing a localized error on failure.
@@ -574,8 +586,8 @@ The system SHALL copy encrypted files from a private room, active or archived, i
 - **THEN** the copy's key is wrapped for the destination room's members, and MUST NOT be wrapped for members of the source room who are not in the destination
 
 #### Scenario: Destination member without a key
-- **WHEN** a member of the destination room has no usable key at the time of the copy
-- **THEN** the copy is uploaded encrypted for the other members and the skipped member is reported as for an upload into that room
+- **WHEN** a member of the destination room has no key at the time of the copy
+- **THEN** the copy is uploaded encrypted with its key wrapped for the members who have one; the member without a key gets no wrap and, as with an upload into that room, is not named in a skipped-member report
 
 #### Scenario: Identity locked
 - **WHEN** the user declines to unlock when the copy starts

@@ -186,7 +186,7 @@ The system SHALL open a private room, and every folder inside it, under the sect
 
 #### Scenario: Row link of the Rooms list
 - **WHEN** `/rooms/shared/filter?folder={roomId}`, the row link form of the Rooms list, is opened for a private room while the section is available
-- **THEN** the address is replaced with `/private/{roomId}/filter`, and the header shows the room's title, not the section name
+- **THEN** the address is replaced with `/private/{roomId}/filter?folder={roomId}`, keeping the query, and the header shows the room's title, not the section name
 
 #### Scenario: Open location from a feed
 - **WHEN** the user picks "Open location" on a file that lies in a folder of a private room
@@ -224,6 +224,10 @@ Addresses inside an embedded frame SHALL be decided the same way.
 #### Scenario: Embedded frame
 - **WHEN** a Rooms address of a private room is opened in the client inside an embedded frame while the section is available
 - **THEN** the address is replaced with its `/private` counterpart and the room opens there, as outside a frame
+
+#### Scenario: Superseded load
+- **WHEN** the user navigates again before the folder behind a Rooms or Private address has been checked
+- **THEN** the superseded load commits nothing, neither folder state nor loading state nor a highlighted file, and only the newer load ends the loading
 
 ### Requirement: Private section in an embedded frame
 The system SHALL offer the Private section to the client running inside an embedded frame under the same availability as outside a frame. A frame opened at a `/private` address SHALL show the Private list or the private room it names, and a frame that shows the menu SHALL show the Private item in it.

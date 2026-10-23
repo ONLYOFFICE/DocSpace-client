@@ -36,6 +36,8 @@
 import { describe, it, expect, vi } from "vitest";
 
 import { createTestContextOptionsStore, t } from "./testHarness";
+// After the harness, which mocks the toast module.
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 const item = (over: Record<string, unknown> = {}) =>
   ({ id: 1, isFolder: false, fileExst: ".docx", ...over }) as never;
@@ -75,6 +77,28 @@ describe("ContextOptionsStore — action handler delegation (batch 6)", () => {
     });
     store.onClickDownloadEncrypted(item({ isFolder: true }), t);
     expect(downloadFiles).toHaveBeenCalledTimes(1);
+  });
+
+  it("Error text is localized", async () => {
+    const downloadAction = vi.fn(async () => {
+      throw new Error("decrypt pipeline broke");
+    });
+    const downloadFiles = vi.fn(async () => {
+      throw { response: { data: { error: { message: "Server says no" } } } };
+    });
+    const store = createTestContextOptionsStore({
+      filesActionsStore: { downloadAction, downloadFiles },
+    });
+
+    store.onClickDownload(item({ encrypted: true }), t);
+    store.onClickDownloadEncrypted(item({ isFolder: true }), t);
+
+    await vi.waitFor(() =>
+      expect(vi.mocked(toastr.error).mock.calls).toEqual([
+        ["Common:EncryptedOperationFailed"],
+        ["Server says no"],
+      ]),
+    );
   });
 
   it("onDownloadAllAction -> filesActionsStore.downloadAction", () => {

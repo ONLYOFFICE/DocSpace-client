@@ -850,6 +850,7 @@
   "EncryptedCopyFailed": "Failed to copy encrypted files: {{names}}",
   "EncryptedFile": "Encrypted file",
   "EncryptedMovePartialFailure": "These files could not be moved out of the private room and remain in it: {{names}}",
+  "EncryptedOperationFailed": "The operation on the encrypted file failed. Try again.",
   "EncryptedReencryptFailed": "Failed to share existing encrypted files with the new members. Try again from the Members panel.",
   "EncryptedReencryptPartialFailure": "{{count}} encrypted file(s) could not be shared with new members. Try again later or share them manually.",
   "EncryptedRevokeCompleted": "User removed and their access to existing encrypted files has been revoked.",

@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect, vi } from "vitest";
 import { createTestFilesActionsStore } from "./testHarness";
+// After the harness, which mocks the toast module.
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 // The default harness userStore has no encryptionKeys, so every encrypted
 // operation hits its "keys not configured" guard and returns without touching
@@ -60,5 +62,29 @@ describe("FilesActionsStore — encrypted ops guard (batch 18)", () => {
     });
     await store.duplicateEncryptedFile({ id: 1, folderId: 2 } as never);
     expect(itemOperationToFolder).not.toHaveBeenCalled();
+  });
+});
+
+describe("FilesActionsStore — opening an encrypted file", () => {
+  it("Error text is localized", async () => {
+    const store = createTestFilesActionsStore({
+      filesStore: { setSelection: vi.fn(), categoryType: 0 },
+    });
+    store.downloadEncryptedFile = vi.fn(async () => {
+      throw new Error("decrypt pipeline broke");
+    });
+
+    await store.openItemAction({
+      id: 1,
+      title: "archive.zip",
+      fileExst: ".zip",
+      isFolder: false,
+      encrypted: true,
+      viewUrl: "http://x/1",
+      security: { Download: true },
+      viewAccessibility: {},
+    } as never);
+
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedOperationFailed");
   });
 });

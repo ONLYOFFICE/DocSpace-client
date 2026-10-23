@@ -70,6 +70,7 @@ import {
 } from "@docspace/shared/enums";
 import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 import i18n from "../i18n";
+import { getEncryptedOperationErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import {
   isFolder,
   isRoom as isRoomUtil,
@@ -482,7 +483,7 @@ class ContextOptionsStore {
 
     if (isFile && encrypted) {
       downloadAction("", item).catch((err: unknown) =>
-        toastr.error(err as string),
+        toastr.error(getEncryptedOperationErrorMessage(i18n.t, err)),
       );
     } else if (isFile) {
       // the original .js passed viewUrl through unchecked
@@ -501,7 +502,9 @@ class ContextOptionsStore {
     if (item.isFolder || item.roomType) {
       return this.filesActionsStore
         .downloadFiles([], [item.id], { label: t("Common:ArchivingData") })
-        .catch((err: unknown) => toastr.error(err as string));
+        .catch((err: unknown) =>
+          toastr.error(getEncryptedOperationErrorMessage(i18n.t, err)),
+        );
     }
 
     openUrl(item.viewUrl!, UrlActionType.Download);

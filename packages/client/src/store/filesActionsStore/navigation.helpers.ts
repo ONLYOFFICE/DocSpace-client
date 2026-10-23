@@ -40,6 +40,8 @@ import {
   RoomSearchArea,
 } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getEncryptedOperationErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
+import i18n from "../../i18n";
 import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
@@ -729,7 +731,7 @@ self: FilesActionStore,
 
     if (item.encrypted) {
       return self.downloadEncryptedFile(item).catch((err) =>
-        toastr.error(err as string),
+        toastr.error(getEncryptedOperationErrorMessage(i18n.t, err)),
       );
     }
 

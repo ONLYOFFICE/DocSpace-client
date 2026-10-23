@@ -105,7 +105,7 @@ test.describe("Tariff plan recalculation", () => {
     useSaasBilling(mockRequest, { user: "owner", payer: "self-owner" });
     mockRequest.use(
       walletTariffHandler(),
-      // 93.5 pins the Math.ceil: the pill must show 94.
+      // 93.5 pins the exact amount: the pill shows $93.50, only the top-up rounds up to 44.
       calculateWalletHandler(93.5),
       walletServicesHandler(),
     );
@@ -128,13 +128,13 @@ test.describe("Tariff plan recalculation", () => {
 
     await expect(page.getByText("Total due today")).toBeVisible();
     await expect(
-      page.getByText("$94", { exact: true }),
+      page.getByText("$93.50", { exact: true }),
     ).toBeVisible(AFTER_ESTIMATE);
     await expect(page.getByText("$7,040").first()).toBeVisible();
 
     await expect(planButton(page)).toBeEnabled();
     await expect(planButton(page)).toContainText(
-      "Pay $94 & Upgrade",
+      "Pay $93.50 & Upgrade",
       AFTER_ESTIMATE,
     );
 
@@ -155,7 +155,7 @@ test.describe("Tariff plan recalculation", () => {
     await page.getByTestId("quantity_picker_plus_icon").click();
 
     await expect(
-      page.getByText("$94", { exact: true }),
+      page.getByText("$93.50", { exact: true }),
     ).toBeVisible(AFTER_ESTIMATE);
     await expect(planButton(page)).toBeEnabled();
     await expect(planButton(page)).toContainText(
@@ -182,7 +182,7 @@ test.describe("Tariff plan recalculation", () => {
     await page.getByTestId("quantity_picker_plus_icon").click();
 
     await expect(
-      page.getByText("$94", { exact: true }),
+      page.getByText("$93.50", { exact: true }),
     ).toBeVisible(AFTER_ESTIMATE);
     await expect(planButton(page)).toBeEnabled();
     await expect(planButton(page)).toHaveText("Top up wallet", AFTER_ESTIMATE);
@@ -268,7 +268,7 @@ test.describe("Tariff plan recalculation", () => {
     await expect(page.getByTestId("quantity_picker_input")).toBeVisible();
     await page.getByTestId("quantity_picker_plus_icon").click();
     await expect(
-      page.getByText("$94", { exact: true }),
+      page.getByText("$93.50", { exact: true }),
     ).toBeVisible(AFTER_ESTIMATE);
 
     const pageButtonLabel = ((await planButton(page).textContent()) ?? "").trim();
@@ -287,7 +287,7 @@ test.describe("Tariff plan recalculation", () => {
     await expect(dialog).toContainText("Remaining period");
     await expect(dialog).toContainText("until January 5, 2026");
     await expect(dialog).toContainText("Total due today");
-    await expect(dialog).toContainText("$94");
+    await expect(dialog).toContainText("$93.50");
     await expect(dialog).toContainText(
       "Your next monthly bill will be $7,040 starting from January 5, 2026",
     );
@@ -327,7 +327,7 @@ test.describe("Tariff plan recalculation", () => {
     await expect(page.getByTestId("quantity_picker_input")).toBeVisible();
     await page.getByTestId("quantity_picker_plus_icon").click();
     await expect(
-      page.getByText("$94", { exact: true }),
+      page.getByText("$93.50", { exact: true }),
     ).toBeVisible(AFTER_ESTIMATE);
 
     await page.getByTestId("due_today_info_button").click();

@@ -556,7 +556,7 @@ test.describe("Payment complete page", () => {
     await page.waitForURL("**/billing/addons/backup");
   });
 
-  test("a failed Docs Connect top-up points back to Docs Connect", async ({
+  test("a failed Docs Connect top-up points back to the Docs Connect add-on page", async ({
     page,
     baseUrl,
     mockRequest,
@@ -573,13 +573,13 @@ test.describe("Payment complete page", () => {
     await expect(
       page.getByText("You can retry from Docs Connect."),
     ).toBeVisible();
-    await expect(errorButton(page)).toHaveText("Go to Docs Connect");
+    await expect(errorButton(page)).toHaveText("Try again in Wallet");
 
     await expectScreenshot(page, shot("error-docs-connect.png"));
 
     await errorButton(page).click();
 
-    await page.waitForURL("**/developer-tools/docs-connect");
+    await page.waitForURL("**/billing/addons/docs-connect");
   });
 
   test("a failed Docs Connect purchase keeps the top-up and offers a retry", async ({
@@ -600,7 +600,7 @@ test.describe("Payment complete page", () => {
 
     await errorButton(page).click();
 
-    await page.waitForURL("**/developer-tools/docs-connect");
+    await page.waitForURL("**/billing/addons/docs-connect");
   });
 
   // The page falls back to the paywall start amount instead of refusing a broken amount.

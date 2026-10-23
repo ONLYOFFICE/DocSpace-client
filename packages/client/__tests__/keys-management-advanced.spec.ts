@@ -43,6 +43,8 @@ import {
   filesSettingsHandler,
   privacyroomAccessHandlers,
   privacyroomKeysHandlers,
+  privateRoomListHandler,
+  roomListHandler,
   rootHandler,
   selfActivationStatusHandler,
   settingsHandler,
@@ -181,6 +183,8 @@ test.describe("Keys management — advanced flows", () => {
         handle: handleRef,
         userId: TEST_USER_ID,
       }),
+      // No private room in the list: the warning names none.
+      roomListHandler(TEST_PORT),
     );
 
     await page.goto(`${baseUrl}/profile/keys-management`);
@@ -198,6 +202,12 @@ test.describe("Keys management — advanced flows", () => {
       .filter({ hasText: "Delete encryption keyWarning" });
     await expect(deleteDialog).toBeVisible({ timeout: 5000 });
     await expect(deleteDialog.getByText(/inaccessible/i)).toBeVisible();
+    await expect(
+      deleteDialog.getByText(
+        "None of your private rooms has files encrypted for you, so no room is affected.",
+        { exact: true },
+      ),
+    ).toBeVisible({ timeout: 10000 });
 
     await deleteDialog.getByLabel("Cancel", { exact: true }).click();
 
@@ -214,7 +224,12 @@ test.describe("Keys management — advanced flows", () => {
         req.url().endsWith("/privacyroom/keys/99"),
       { timeout: 30000 },
     );
-    await deleteDialog.getByLabel("Confirm", { exact: true }).click();
+    const confirmButton = deleteDialog.getByRole("button", {
+      name: "Confirm",
+      exact: true,
+    });
+    await expect(confirmButton).toBeEnabled({ timeout: 10000 });
+    await confirmButton.click();
 
     // Confirming no longer deletes immediately: a passphrase-verification
     // modal appears, and the DELETE fires only once the passphrase unlocks
@@ -234,6 +249,62 @@ test.describe("Keys management — advanced flows", () => {
     await expect
       .poll(() => handleRef.current!.getKeys().length, { timeout: 5000 })
       .toBe(0);
+  });
+
+  test("Affected rooms listed", async ({ page, mockRequest, baseUrl }) => {
+    const affectedRoomId = 9460;
+    const envelope = { ...(await realEnvelope()), id: "99" };
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [envelope],
+        userId: TEST_USER_ID,
+      }),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: affectedRoomId,
+        title: "Board minutes",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: affectedRoomId,
+        title: "Board minutes",
+        initialFiles: [
+          {
+            id: 8900,
+            title: "minutes.docx",
+            encrypted: true,
+            fileKeys: [
+              {
+                userId: TEST_USER_ID,
+                publicKeyId: "99",
+                privateKeyEnc: "WRAPPED_DEK_FIXTURE",
+              },
+            ],
+          },
+        ],
+      }),
+    );
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const deleteBtn = page
+      .locator("[class*='keyItemActions']")
+      .first()
+      .getByTestId("icon-button")
+      .nth(2);
+    await expect(deleteBtn).toBeVisible({ timeout: 10000 });
+    await deleteBtn.click();
+
+    const deleteDialog = page
+      .getByRole("dialog")
+      .filter({ hasText: "Delete encryption keyWarning" });
+    await expect(
+      deleteDialog.getByText(
+        "You will no longer be able to open the files of these private rooms: Board minutes",
+        { exact: true },
+      ),
+    ).toBeVisible({ timeout: 10000 });
+    await expect(
+      deleteDialog.getByRole("button", { name: "Confirm", exact: true }),
+    ).toBeEnabled();
   });
 
   test("change passphrase posts new envelope under the new passphrase", async ({

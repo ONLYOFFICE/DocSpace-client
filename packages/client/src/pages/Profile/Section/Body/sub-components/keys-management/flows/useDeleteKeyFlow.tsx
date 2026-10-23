@@ -33,10 +33,17 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useState, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { unlockWithPassphrase } from "@docspace/shared/services/encryption/identity";
@@ -44,6 +51,10 @@ import { InvalidPassphraseError } from "@docspace/shared/services/encryption/err
 import { getTofuStore } from "@docspace/shared/services/encryption/tofu-store";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
+import {
+  findRoomsWithOwnAccess,
+  type TRoomRef,
+} from "@docspace/shared/services/private-room/rooms-with-own-access";
 
 import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
 import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
@@ -55,6 +66,12 @@ type Deps = {
   refreshKeysFromServer: () => Promise<void>;
   onForgotPassphrase?: (target?: TEncryptionKeyPair) => void;
 };
+
+// The private rooms the warning names; "failed" leaves only the warning.
+type TAffectedRooms =
+  | { status: "loading" }
+  | { status: "done"; rooms: TRoomRef[] }
+  | { status: "failed" };
 
 export type DeleteKeyFlow = {
   request: (keyData: TEncryptionKeyPair) => void;
@@ -74,10 +91,38 @@ export function useDeleteKeyFlow({
   const [verifying, setVerifying] = useState<TEncryptionKeyPair | null>(null);
   const [passphraseError, setPassphraseError] = useState<string | null>(null);
   const [isPending, setIsPending] = useState(false);
+  const [affectedRooms, setAffectedRooms] = useState<TAffectedRooms>({
+    status: "failed",
+  });
+  const scanRef = useRef<AbortController | null>(null);
 
-  const request = useCallback((keyData: TEncryptionKeyPair) => {
-    setConfirming(keyData);
-  }, []);
+  useEffect(() => () => scanRef.current?.abort(), []);
+
+  // Spec: private-rooms/key-management, "Delete a key".
+  const request = useCallback(
+    (keyData: TEncryptionKeyPair) => {
+      setConfirming(keyData);
+      scanRef.current?.abort();
+      if (!userId) {
+        setAffectedRooms({ status: "failed" });
+        return;
+      }
+
+      const scan = new AbortController();
+      scanRef.current = scan;
+      setAffectedRooms({ status: "loading" });
+      findRoomsWithOwnAccess(userId, scan.signal)
+        .then((rooms) => {
+          if (!scan.signal.aborted) setAffectedRooms({ status: "done", rooms });
+        })
+        .catch((error: unknown) => {
+          if (scan.signal.aborted) return;
+          console.error("Listing the rooms of the key failed:", error);
+          setAffectedRooms({ status: "failed" });
+        });
+    },
+    [userId],
+  );
 
   const onConfirm = useCallback(() => {
     if (!confirming) return;
@@ -85,6 +130,20 @@ export function useDeleteKeyFlow({
     setConfirming(null);
     setPassphraseError(null);
   }, [confirming]);
+
+  const onCancelConfirm = useCallback(() => {
+    scanRef.current?.abort();
+    setConfirming(null);
+  }, []);
+
+  let affectedRoomsText: string | null = null;
+  if (affectedRooms.status === "done") {
+    affectedRoomsText = affectedRooms.rooms.length
+      ? t("Common:DeleteKeyAffectedRooms", {
+          rooms: affectedRooms.rooms.map((room) => room.title).join(", "),
+        })
+      : t("Common:DeleteKeyNoAffectedRooms");
+  }
 
   const onPassphraseSubmit = useCallback(
     async (passphrase: string) => {
@@ -132,8 +191,16 @@ export function useDeleteKeyFlow({
           visible
           title={t("Common:DeleteKey")}
           message={t("Common:DeleteKeyWarning")}
+          details={
+            affectedRoomsText ? (
+              <Text fontSize="13px" fontWeight={600}>
+                {affectedRoomsText}
+              </Text>
+            ) : null
+          }
+          isLoading={affectedRooms.status === "loading"}
           onConfirm={onConfirm}
-          onCancel={() => setConfirming(null)}
+          onCancel={onCancelConfirm}
         />
       ) : null}
       {verifying !== null ? (

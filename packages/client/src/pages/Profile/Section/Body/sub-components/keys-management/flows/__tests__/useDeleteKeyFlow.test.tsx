@@ -75,12 +75,23 @@ vi.mock("@docspace/shared/services/encryption/identity", () => ({
 vi.mock("@docspace/shared/api/privacy", () => ({
   deleteEncryptionKey: vi.fn(),
 }));
+vi.mock("@docspace/shared/services/private-room/rooms-with-own-access", () => ({
+  findRoomsWithOwnAccess: vi.fn(),
+}));
+// The shared mock drops interpolation; the warning's room names live in it.
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string, options?: Record<string, unknown>) =>
+      options ? `${key} ${JSON.stringify(options)}` : key,
+  }),
+}));
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { unlockWithPassphrase } from "@docspace/shared/services/encryption/identity";
 import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
+import { findRoomsWithOwnAccess } from "@docspace/shared/services/private-room/rooms-with-own-access";
 
 import {
   useDeleteKeyFlow,
@@ -252,5 +263,79 @@ describe("useDeleteKeyFlow", () => {
     });
 
     expect(callOrder).toEqual(["unlock", "api", "lock", "refresh"]);
+  });
+
+  describe("rooms named in the warning", () => {
+    const detailsText = () =>
+      (
+        captured.confirmation?.details as {
+          props: { children: string };
+        } | null
+      )?.props.children ?? null;
+
+    it("Affected rooms listed", async () => {
+      let resolveRooms!: (rooms: { id: number; title: string }[]) => void;
+      vi.mocked(findRoomsWithOwnAccess).mockReturnValueOnce(
+        new Promise((resolve) => {
+          resolveRooms = resolve;
+        }),
+      );
+      render(<Harness userId="user-1" refreshKeysFromServer={vi.fn()} />);
+      act(() => latest.request(sampleKey));
+
+      expect(findRoomsWithOwnAccess).toHaveBeenCalledWith(
+        "user-1",
+        expect.any(AbortSignal),
+      );
+      expect(captured.confirmation?.isLoading).toBe(true);
+      expect(detailsText()).toBeNull();
+
+      await act(async () => {
+        resolveRooms([
+          { id: 1, title: "Alpha" },
+          { id: 2, title: "Beta" },
+          { id: 3, title: "Gamma" },
+        ]);
+      });
+
+      expect(captured.confirmation?.isLoading).toBe(false);
+      expect(detailsText()).toBe(
+          `Common:DeleteKeyAffectedRooms ${JSON.stringify({ rooms: "Alpha, Beta, Gamma" })}`,
+      );
+    });
+
+    it("No affected rooms", async () => {
+      vi.mocked(findRoomsWithOwnAccess).mockResolvedValueOnce([]);
+      render(<Harness userId="user-1" refreshKeysFromServer={vi.fn()} />);
+      await act(async () => latest.request(sampleKey));
+
+      expect(captured.confirmation?.isLoading).toBe(false);
+      expect(detailsText()).toBe("Common:DeleteKeyNoAffectedRooms");
+    });
+
+    it("a failed listing leaves the warning alone and the confirm action open", async () => {
+      const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+      vi.mocked(findRoomsWithOwnAccess).mockRejectedValueOnce(new Error("500"));
+      render(<Harness userId="user-1" refreshKeysFromServer={vi.fn()} />);
+      await act(async () => latest.request(sampleKey));
+
+      expect(captured.confirmation?.isLoading).toBe(false);
+      expect(detailsText()).toBeNull();
+      errorSpy.mockRestore();
+    });
+
+    it("cancelling the warning stops the listing", () => {
+      vi.mocked(findRoomsWithOwnAccess).mockReturnValueOnce(
+        new Promise(() => {}),
+      );
+      render(<Harness userId="user-1" refreshKeysFromServer={vi.fn()} />);
+      act(() => latest.request(sampleKey));
+      const signal = vi.mocked(findRoomsWithOwnAccess).mock.calls[0][1]!;
+
+      act(() => (captured.confirmation!.onCancel as () => void)());
+
+      expect(signal.aborted).toBe(true);
+      expect(captured.confirmation).toBeNull();
+    });
   });
 });

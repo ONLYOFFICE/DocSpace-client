@@ -43,10 +43,16 @@ import {
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
+import styles from "./ConfirmationModal.module.scss";
+
 export type ConfirmationModalProps = {
   visible: boolean;
   title: string;
   message: string;
+  /** Shown under the message. */
+  details?: React.ReactNode;
+  /** Holds the confirm action until what the dialog shows is ready. */
+  isLoading?: boolean;
   onConfirm: () => void;
   onCancel: () => void;
   confirmLabel?: string;
@@ -57,6 +63,8 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   visible,
   title,
   message,
+  details,
+  isLoading,
   onConfirm,
   onCancel,
   confirmLabel,
@@ -73,7 +81,10 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text fontSize="13px">{message}</Text>
+        <div className={styles.body}>
+          <Text fontSize="13px">{message}</Text>
+          {details}
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -81,6 +92,8 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
           size={ButtonSize.normal}
           label={confirmLabel ?? t("Common:Confirm")}
           onClick={onConfirm}
+          isLoading={isLoading}
+          isDisabled={isLoading}
         />
         <Button
           size={ButtonSize.normal}

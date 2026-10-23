@@ -638,6 +638,8 @@
   "DeleteItemForever": "This item will be permanently deleted. Are you sure?",
   "DeleteItemsForever": "These {{itemCount}} items will be permanently deleted. Are you sure?",
   "DeleteKey": "Delete encryption key",
+  "DeleteKeyAffectedRooms": "You will no longer be able to open the files of these private rooms: {{rooms}}",
+  "DeleteKeyNoAffectedRooms": "None of your private rooms has files encrypted for you, so no room is affected.",
   "DeleteKeyWarning": "Warning: Deleting this encryption key will make files encrypted with this key inaccessible. Make sure you have a backup before deleting. Are you sure you want to continue?",
   "DeletePermanently": "Delete permanently",
   "DeletePortal": "Delete workspace",

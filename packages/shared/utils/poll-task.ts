@@ -61,6 +61,15 @@ type TPollTaskOptions<T extends TPolledTask> = {
  * form responses before a report) is alive while its percentage grows, and a
  * stuck one is still caught. A task the server no longer has is an error, as
  * in getOperationProgress.
+ *
+ * There is deliberately no ceiling on the total time. Only a strict growth
+ * counts as progress, and the server sends the percentage as an integer from
+ * 0 to 100, so it can grow at most 101 times: the polling is bounded, and runs
+ * long only while the server keeps moving the task. A task stuck at 100 that
+ * never completes times out like any other stalled one. A fixed ceiling would
+ * cut short a long honest run (e.g. a recovery of a thousand responses takes
+ * over half an hour), which is the failure this function exists to avoid; the
+ * file operations in loopFilesOperationsImpl have no ceiling either.
  */
 export const pollTask = <T extends TPolledTask>({
   name,
@@ -85,6 +94,7 @@ export const pollTask = <T extends TPolledTask>({
       return task;
     },
     (task) => {
+      // Strictly greater: a percentage that holds or falls is no progress.
       if (task.percentage > lastPercentage) {
         lastPercentage = task.percentage;
         stalledPolls = 0;

@@ -1161,7 +1161,7 @@ export const getFilesContextOptionsImpl = (
     });
   }
 
-  if (showInfoOption && showVersionHistoryOption) {
+  if (showVersionHistoryOption && (showInfoOption || isInfoPanel)) {
     menuGroupsConfig.push({
       groupKey: "info",
       groupLabel: t("Common:MoreOptions"),
@@ -1174,7 +1174,7 @@ export const getFilesContextOptionsImpl = (
         ],
       ],
       needsGrouping: true,
-      minItemsCount: 1,
+      minItemsCount: showInfoOption ? 1 : 0,
     });
   }
 

@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Prosím, načítajte stránku znova alebo sa vráťte neskôr.",
   "ServerSideEncryptionMethod": "Metóda šifrovania na strane servera",
   "ServiceIsDisabled": "Služba je deaktivovaná",
-  "ServiceLimitsDescription": "Nastavte limity výdavkov pre celý pracovný priestor aj pre jednotlivých používateľov. <1>Jeden limit pokrýva AI agentov a nástroje aj vyhľadávanie AI.</1>",
   "ServiceManagementUnavailable": "Správa doplnkov nie je počas doby odkladu platby dostupná a počas tejto doby nebudú za doplnky účtované žiadne poplatky. Ak chcete obnoviť plnú funkčnosť, prejdite na plán {{planName}}.",
   "ServiceUrl": "URL adresa služby",
   "Sessions": "Relácie",

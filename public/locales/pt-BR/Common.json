@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Recarregue a página ou volte mais tarde.",
   "ServerSideEncryptionMethod": "Método de Criptografia do Lado do Servidor",
   "ServiceIsDisabled": "Serviço desativado",
-  "ServiceLimitsDescription": "Defina limites de gastos para todo o portal e por usuário. <1>Um único limite cobre tanto os agentes e ferramentas de IA quanto a pesquisa com IA.</1>",
   "ServiceManagementUnavailable": "O gerenciamento de add-ons não estará disponível durante o período de carência e nenhuma cobrança será aplicada aos add-ons durante esse período. Para recuperar a funcionalidade completa, atualize para um plano {{planName}}.",
   "ServiceUrl": "URL de serviço",
   "Sessions": "Sessões",

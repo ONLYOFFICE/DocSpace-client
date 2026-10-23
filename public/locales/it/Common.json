@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Ricarica la pagina o torna più tardi.",
   "ServerSideEncryptionMethod": "Metodo di crittografia lato server",
   "ServiceIsDisabled": "Il servizio è disabilitato",
-  "ServiceLimitsDescription": "Imposta limiti di spesa per l'intero portale e per utente. <1>Un unico limite copre sia gli agenti e strumenti IA sia la ricerca IA.</1>",
   "ServiceManagementUnavailable": "La gestione dei componenti aggiuntivi non è disponibile durante il periodo di tolleranza e in questo periodo non verranno applicati addebiti per i componenti aggiuntivi. Per ripristinare la piena funzionalità, effettua l’upgrade al piano {{planName}}.",
   "ServiceUrl": "URL di servizio",
   "Sessions": "Sessioni",

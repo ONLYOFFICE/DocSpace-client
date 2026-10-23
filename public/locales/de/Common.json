@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Bitte laden Sie die Seite neu oder kommen Sie später noch einmal vorbei.",
   "ServerSideEncryptionMethod": "Methode der Server-seitigen Verschlüsselung",
   "ServiceIsDisabled": "Dienst ist deaktiviert",
-  "ServiceLimitsDescription": "Legen Sie Ausgabenlimits für das gesamte Portal und pro Benutzer fest. <1>Ein Limit gilt sowohl für KI-Agenten und Tools als auch für die KI-Suche.</1>",
   "ServiceManagementUnavailable": "Die Verwaltung von Add-ons ist während der Übergangsfrist nicht verfügbar. Für die Add-ons fallen in dieser Zeit keine Gebühren an. Um die volle Funktionalität wiederherzustellen, führen Sie bitte ein Upgrade auf einen {{planName}}-Plan durch.",
   "ServiceUrl": "URL des Dienstes",
   "Sessions": "Sitzungen",

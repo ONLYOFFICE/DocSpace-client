@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Proszę odświeżyć stronę lub wrócić później.",
   "ServerSideEncryptionMethod": "Metoda szyfrowania po stronie serwera",
   "ServiceIsDisabled": "Usługa jest wyłączona",
-  "ServiceLimitsDescription": "Ustaw limity wydatków dla całej przestrzeni roboczej i dla każdego użytkownika. <1>Jeden limit obejmuje zarówno agentów i narzędzia AI, jak i wyszukiwanie AI.</1>",
   "ServiceManagementUnavailable": "Zarządzanie dodatkami jest niedostępne w okresie karencji, a w tym czasie nie będą naliczane żadne opłaty za dodatki. Aby odzyskać pełną funkcjonalność, prosimy o przejście na plan {{planName}}.",
   "ServiceUrl": "URL usługi",
   "Sessions": "Sesje",

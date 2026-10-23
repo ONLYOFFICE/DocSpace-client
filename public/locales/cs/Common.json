@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Zkuste stránku načíst znovu nebo se později vraťte.",
   "ServerSideEncryptionMethod": "Metoda šifrování na straně serveru",
   "ServiceIsDisabled": "Služba je zakázána",
-  "ServiceLimitsDescription": "Nastavte limity útraty pro celý pracovní prostor i pro jednotlivé uživatele. <1>Jeden limit pokrývá AI agenty a nástroje i vyhledávání AI.</1>",
   "ServiceManagementUnavailable": "Správa doplňků není během doby odkladu dostupná a v tomto období nebudou za doplňky účtovány žádné poplatky. Pro obnovení plné funkčnosti prosím přejděte na plán {{planName}}.",
   "ServiceUrl": "URL adresa služby",
   "Sessions": "Sezení",

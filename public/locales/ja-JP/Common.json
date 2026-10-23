@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "ページを再読み込みするか、後でもう一度お越しください。",
   "ServerSideEncryptionMethod": "サーバー側暗号化方法",
   "ServiceIsDisabled": "サービスが無効になっています",
-  "ServiceLimitsDescription": "ワークスペース全体とユーザーごとの支出上限を設定します。<1>1つの上限でAI機能とAI検索の両方が対象になります。</1>",
   "ServiceManagementUnavailable": "猶予期間中はアドオンの管理をご利用いただけず、この期間中はアドオンに対する料金は発生しません。全機能を回復するには、{{planName}}プランにアップグレードしてください。",
   "ServiceUrl": "サービスURL",
   "Sessions": "セッション",

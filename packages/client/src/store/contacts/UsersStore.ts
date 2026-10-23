@@ -634,6 +634,7 @@ class UsersStore {
     statusType: ReturnType<typeof getUserStatus>,
     userRole: ReturnType<typeof getUserType>,
     status: EmployeeStatus,
+    hasAILimit: boolean,
   ) => {
     if (!this.userStore.user) return;
 
@@ -652,7 +653,7 @@ class UsersStore {
         if (isAdmin || isOwner) {
           options.push("room-list");
 
-          if (!isGuest) options.push("change-ai-limit");
+          if (!isGuest && hasAILimit) options.push("change-ai-limit");
         }
 
         if (isMySelf) {
@@ -751,7 +752,7 @@ class UsersStore {
           if (isAdmin || isOwner) {
             options.push("room-list");
 
-            if (!isGuest) options.push("change-ai-limit");
+            if (!isGuest && hasAILimit) options.push("change-ai-limit");
           }
 
           if (
@@ -883,6 +884,7 @@ class UsersStore {
       statusType,
       role,
       status,
+      !!aiServicesLimit,
     );
 
     const locale = getCookie(LANGUAGE) ?? this.settingsStore.culture;

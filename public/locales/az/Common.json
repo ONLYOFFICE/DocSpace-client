@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Lütfən səhifəni yenidən yükləyin və ya daha sonra geri qayıdın.",
   "ServerSideEncryptionMethod": "Server Tərəfində Şifrələmə Metodu",
   "ServiceIsDisabled": "Xidmət deaktivləşdirilib",
-  "ServiceLimitsDescription": "Bütün portal və hər istifadəçi üçün xərc limitləri təyin edin. <1>Bir limit həm AI funksiyalarını, həm də AI axtarışını əhatə edir.</1>",
   "ServiceManagementUnavailable": "Əlavələrin idarə edilməsi güzəşt dövründə mövcud deyil və bu müddət ərzində əlavələrə görə heç bir ödəniş tutulmayacaq. Tam funksionallığı bərpa etmək üçün {{planName}} planına keçin.",
   "ServiceUrl": "Xidmət URL-si",
   "Sessions": "Sessiyalar",

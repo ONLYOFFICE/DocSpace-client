@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Por favor, recargue la página o vuelva más tarde.",
   "ServerSideEncryptionMethod": "Método de cifrado del lado del servidor",
   "ServiceIsDisabled": "Servicio deshabilitado",
-  "ServiceLimitsDescription": "Establezca límites de gasto para todo el portal y por usuario. <1>Un mismo límite cubre tanto los agentes y herramientas de IA como la búsqueda con IA.</1>",
   "ServiceManagementUnavailable": "La gestión de complementos no está disponible durante el periodo de gracia, y no se aplicarán cargos a los complementos durante este tiempo. Para recuperar la funcionalidad completa, actualice a un plan {{planName}}.",
   "ServiceUrl": "URL de servicio",
   "Sessions": "Sesiones",

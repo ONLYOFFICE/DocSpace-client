@@ -3,7 +3,7 @@
 ## MODIFIED Requirements
 
 ### Requirement: Create new file in a private room
-The system SHALL allow creating only docx, xlsx and pptx files inside a private room, each produced and encrypted on the client, and SHALL hide the create entries when the user has no encryption key. Creation errors SHALL be reported through localized messages.
+The system SHALL allow creating only docx, xlsx, pptx and pdf files inside a private room, each produced and encrypted on the client, and SHALL hide the create entries when the user has no encryption key. Creation errors SHALL be reported through localized messages.
 
 #### Scenario: Create document with keys
 - **WHEN** a user with keys chooses "New document" in a private room
@@ -16,10 +16,6 @@ The system SHALL allow creating only docx, xlsx and pptx files inside a private 
 #### Scenario: No keys
 - **WHEN** the user has no encryption key
 - **THEN** the "+ New" menu, the empty-view tiles, the quick-action tiles and the create hotkeys offer no file creation, only folder creation and upload
-
-#### Scenario: Create menu opened
-- **WHEN** a user with keys opens the "+ New" menu in a private room
-- **THEN** the entries are document, spreadsheet, presentation, folder and upload files, and no PDF form entry is present
 
 ### Requirement: Download without decryption
 The system SHALL offer "Download without decryption" for encrypted files and for folders in a private room, in the item context menu and in the bulk header menu of a private room; for a file it SHALL save the ciphertext container, for a folder it SHALL request a server archive of the ciphertext.
@@ -100,13 +96,3 @@ The system SHALL take every message of an encrypted copy, download or open from 
 
 - FROM: `### Requirement: No decrypted folder download`
 - TO: `### Requirement: Decrypted folder download`
-
-## REMOVED Requirements
-
-### Requirement: New PDF form entry present in private rooms
-**Reason**: PDF forms cannot be filled, started or submitted inside a private room, so offering their creation produces files that can only be downloaded.
-**Migration**: The create menu, empty-view tiles, quick actions and hotkeys drop the PDF form entry in private rooms; existing PDF files stay listed and downloadable.
-
-### Requirement: PDF creation on mobile
-**Reason**: The mobile PDF tile exists only for the PDF form entry, which is removed in private rooms.
-**Migration**: None; the toast Common:MobileEditPdfNotAvailableInfo is no longer reachable from a private room.

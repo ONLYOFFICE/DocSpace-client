@@ -15,11 +15,11 @@
 - [ ] 2.4 BLOCKED on 2.3. Pass the filename cache to the picker in `packages/client/src/components/FilesSelector/index.tsx` (`resolveDisplayTitle`, recovery scheduled when unlocked, no prompt when locked, design D7); verify with cases named "Destination picker in a private room" and "Picker while locked" in `src/components/FilesSelector/__tests__` and an E2E case in `private-room-cross-room-copy.spec.ts`
 - [x] 2.5 Hide the decryption warning of the picker for a Move from a private room (`getShowEncryptedTransferBanner` in `packages/client/src/components/FilesSelector/utils.ts`, design D8); verify with the case "Move dialog of a private room" in `src/components/FilesSelector/__tests__/utils.test.ts`
 
-## 3. Remove the PDF form dead end
+## 3. PDF creation and the empty view
 
-- [ ] 3.1 Drop the PDF form entry for private rooms in `packages/client/src/store/contextOptionsStore/folderModel.helpers.ts`, `packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx`, `packages/client/src/helpers/quickActions.ts` and the create hotkeys; verify with the contextOptionsStore snapshot tests and `cd packages/client && pnpm exec vitest run quickActions folderModel`
+- [ ] 3.1 Keep PDF creation in private rooms (design D3): pin it with cases named "Create menu opened" for the "+ New" model (`src/store/contextOptionsStore/__tests__/ContextOptionsStore.models.test.ts`) and the quick-action tiles (`src/pages/Home/Hooks/__tests__/useQuickActions.test.tsx`) of a private room, both listing the PDF entry, and correct the translator comment of Common:PrivateRoomCreateNotSupported, which says only documents, spreadsheets and presentations can be created; verify with `cd packages/client && pnpm exec vitest run quickActions folderModel src/store/contextOptionsStore`
 - [ ] 3.2 Render the bullet list of the empty private room view outside the paragraph element in `packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx` (a `<ul>` inside the description `<p>`, reported by React on the local portal, 2026-10-22); verify with a component test asserting the list is not inside a `p` and no console error
-- [ ] 3.3 Update `packages/client/__tests__/encrypted-file-ui.spec.ts` for the new create menu; verify with `cd packages/client && pnpm exec playwright test encrypted-file-ui.spec.ts`
+- [ ] 3.3 Add the case "Create menu opened" to `packages/client/__tests__/encrypted-file-ui.spec.ts`: the "+ New" menu of a private room offers document, spreadsheet, presentation, PDF form, folder and upload; verify with the spec in Docker (`tests-dev`)
 
 ## 4. Decrypted folder download and bulk menu
 
@@ -42,4 +42,4 @@
 
 ## Workflow follow-up
 
-- Archive the change after review; archiving applies the RENAMED and REMOVED operations to the main specs.
+- Archive the change after review; archiving applies the RENAMED operations to the main specs.

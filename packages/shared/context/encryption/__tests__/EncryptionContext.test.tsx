@@ -77,6 +77,11 @@ vi.mock("../../../services/encryption/auto-lock-preference", () => ({
   AUTO_LOCK_OPTIONS: [],
 }));
 
+vi.mock("../../../api/people", () => ({
+  getUserById: vi.fn(),
+}));
+
+import { getUserById } from "../../../api/people";
 import { unlockWithPassphrase } from "../../../services/encryption/identity";
 import { getAutoLockTimeoutSeconds } from "../../../services/encryption/auto-lock-preference";
 import {
@@ -827,6 +832,42 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(await Promise.all([firstPromise, secondPromise, thirdPromise]))
         .toEqual(["accept", "accept", "accept"]);
       expect(captured.keyChange).toBeNull();
+    });
+
+    it("Peer named in the dialog", async () => {
+      vi.mocked(getUserById).mockResolvedValue({
+        displayName: "Alice Smith",
+      } as Awaited<ReturnType<typeof getUserById>>);
+      renderTree();
+      await act(async () => {
+        void latest.resolveKeyMismatch({
+          ...sampleInfo,
+          displayName: undefined,
+        });
+      });
+      expect(getUserById).toHaveBeenCalledWith("peer-1");
+      expect(captured.keyChange!.displayName).toBe("Alice Smith");
+    });
+
+    it("Peer named in the dialog: a known name is not looked up", async () => {
+      renderTree();
+      await act(async () => {
+        void latest.resolveKeyMismatch(sampleInfo);
+      });
+      expect(getUserById).not.toHaveBeenCalled();
+      expect(captured.keyChange!.displayName).toBe("Alice");
+    });
+
+    it("Peer named in the dialog: the user id stands in when the lookup fails", async () => {
+      vi.mocked(getUserById).mockRejectedValue(new Error("404"));
+      renderTree();
+      await act(async () => {
+        void latest.resolveKeyMismatch({
+          ...sampleInfo,
+          displayName: undefined,
+        });
+      });
+      expect(captured.keyChange!.displayName).toBe("peer-1");
     });
   });
 

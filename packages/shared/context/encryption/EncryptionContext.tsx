@@ -45,6 +45,7 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 
+import { getUserById } from "../../api/people";
 import {
   SecretStorage,
   registerUnlockHandler,
@@ -402,6 +403,29 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     };
   }, [resolveKeyMismatch]);
 
+  // A request without the peer's name waits for it, so the dialog never names
+  // the peer by user id unless the lookup fails, as the skipped-member toast.
+  // Spec: private-rooms/key-management, "Peer named in the dialog".
+  useEffect(() => {
+    if (!keyChangeRequest || keyChangeRequest.displayName) return undefined;
+    const request = keyChangeRequest;
+    let cancelled = false;
+    getUserById(request.userId)
+      .then((user) => user?.displayName)
+      .catch(() => undefined)
+      .then((name) => {
+        if (cancelled) return;
+        setKeyChangeRequest((current) =>
+          current === request
+            ? { ...request, displayName: name || request.userId }
+            : current,
+        );
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [keyChangeRequest]);
+
   const settleKeyChange = useCallback((decision: KeyMismatchDecision) => {
     const queue = keyChangeQueueRef.current;
     const current = queue.shift();
@@ -499,7 +523,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
           onUnlocked={handlePassphraseUnlocked}
         />
       )}
-      {KeyChangeDialog && keyChangeRequest && (
+      {KeyChangeDialog && keyChangeRequest?.displayName && (
         <KeyChangeDialog
           visible
           userId={keyChangeRequest.userId}

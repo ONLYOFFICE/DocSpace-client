@@ -11,6 +11,10 @@ import api from "@docspace/shared/api";
 import { markAsRead } from "@docspace/shared/api/files";
 import { FileStatus } from "@docspace/shared/enums";
 import { createTestFilesActionsStore, t } from "./testHarness";
+import {
+  listItemOf,
+  privateRoomDto,
+} from "../../filesStore/__tests__/listItem.fixture";
 
 beforeEach(() => {
   (window as unknown as { DocSpace: unknown }).DocSpace = {
@@ -100,6 +104,27 @@ describe("FilesActionsStore — open/leave/owner (batch 16)", () => {
 // on a file, so this path hands the file to the plugin without any menu. For an
 // encrypted file the plugin can only ship ciphertext to a third party, and the
 // file must open normally instead.
+describe("FilesActionsStore — a private room opened from the list", () => {
+  it("Room clicked in the section", async () => {
+    const store = createTestFilesActionsStore({
+      filesStore: {
+        isPrivateRoomsSectionAvailable: true,
+        setSelection: vi.fn(),
+        categoryType: 0,
+      },
+    });
+    const room = listItemOf(privateRoomDto({ id: 14 }));
+
+    await store.openItemAction(room as never, t);
+
+    const navigate = (
+      window as unknown as { DocSpace: { navigate: ReturnType<typeof vi.fn> } }
+    ).DocSpace.navigate;
+    expect(navigate).toHaveBeenCalledTimes(1);
+    expect(navigate.mock.calls[0][0]).toMatch(/^\/private\/14\/filter\?/);
+  });
+});
+
 describe("FilesActionsStore — plugin file items vs encrypted files", () => {
   const docx = (encrypted: boolean) =>
     ({

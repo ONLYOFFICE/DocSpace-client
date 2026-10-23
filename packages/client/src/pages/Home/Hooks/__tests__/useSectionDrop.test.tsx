@@ -65,25 +65,30 @@ const renderSectionDrop = (canUpload = true) => {
   const createFoldersTree = vi.fn(async () => files);
   const startUpload = vi.fn();
 
-  const { result } = renderHook(() =>
-    useSectionDrop({
-      t,
-      canUpload,
-      disableDrag: false,
-      dragging: false,
-      setDragging: vi.fn(),
-      resolveOpenFolderTarget: () => open,
-      createFoldersTree: createFoldersTree as never,
-      startUpload,
-    }),
+  const { result, rerender } = renderHook(
+    (props: { canUpload: boolean }) =>
+      useSectionDrop({
+        t,
+        canUpload: props.canUpload,
+        disableDrag: false,
+        dragging: false,
+        setDragging: vi.fn(),
+        resolveOpenFolderTarget: () => open,
+        createFoldersTree: createFoldersTree as never,
+        startUpload,
+      }),
+    { initialProps: { canUpload } },
   );
 
   return {
-    ...result.current,
+    onDropCapture: () => result.current.onDropCapture(),
+    onDrop: (dropped: typeof files) => result.current.onDrop(dropped),
     createFoldersTree,
     startUpload,
-    openFolder: (next: TUploadTarget) => {
+    /** Opens another folder, which takes uploads as `nextCanUpload` says. */
+    openFolder: (next: TUploadTarget, nextCanUpload = canUpload) => {
       open = next;
+      rerender({ canUpload: nextCanUpload });
     },
   };
 };
@@ -124,6 +129,31 @@ describe("useSectionDrop", () => {
       privateRoomOpen,
       ordinaryRoomOpen,
     ]);
+  });
+
+  it("Folder without the upload right opened during the directory read", async () => {
+    const section = renderSectionDrop();
+
+    section.onDropCapture();
+    section.openFolder(ordinaryRoomOpen, false);
+    section.onDrop(files);
+
+    await vi.waitFor(() =>
+      expect(section.startUpload).toHaveBeenCalledWith(
+        files,
+        privateRoomOpen,
+        t,
+      ),
+    );
+
+    const refused = renderSectionDrop(false);
+
+    refused.onDropCapture();
+    refused.openFolder(ordinaryRoomOpen, true);
+    refused.onDrop(files);
+
+    expect(refused.createFoldersTree).not.toHaveBeenCalled();
+    expect(refused.startUpload).not.toHaveBeenCalled();
   });
 
   it("uploads nothing where the open folder takes no uploads", () => {

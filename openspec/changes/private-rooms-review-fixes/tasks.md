@@ -13,7 +13,7 @@
 
 ## 3. Section drop right
 
-- [ ] 3.1 Capture `canUpload` in `onDropCapture` together with the target in `packages/client/src/pages/Home/Hooks/useSectionDrop.ts` (design D3); verify with the case "Folder without the upload right opened during the directory read" in `src/pages/Home/Hooks/__tests__/useSectionDrop.test.tsx`, covering both directions of the scenario
+- [x] 3.1 Capture `canUpload` in `onDropCapture` together with the target in `packages/client/src/pages/Home/Hooks/useSectionDrop.ts` (design D3); verify with the case "Folder without the upload right opened during the directory read" in `src/pages/Home/Hooks/__tests__/useSectionDrop.test.tsx`, covering both directions of the scenario
 
 ## 4. Superseded folder load
 

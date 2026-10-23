@@ -56,9 +56,10 @@ type UseSectionDropProps = {
 };
 
 /**
- * Uploads files dropped on the section into the open folder as it was at the
- * native drop event: the browser reads dropped directories before `onDrop`
- * runs, and the user may open another folder meanwhile.
+ * Uploads files dropped on the section into the open folder, with its upload
+ * right, as it was at the native drop event: the browser reads dropped
+ * directories before `onDrop` runs, and the user may open another folder
+ * meanwhile.
  */
 export const useSectionDrop = ({
   t,
@@ -70,18 +71,25 @@ export const useSectionDrop = ({
   createFoldersTree,
   startUpload,
 }: UseSectionDropProps) => {
-  const dropSnapshot = useRef<TUploadTarget | null>(null);
+  const dropSnapshot = useRef<{
+    target: TUploadTarget;
+    canUpload: boolean;
+  } | null>(null);
 
   const onDropCapture = useEventCallback(() => {
-    dropSnapshot.current = resolveOpenFolderTarget();
+    dropSnapshot.current = { target: resolveOpenFolderTarget(), canUpload };
   });
 
   const onDrop = useEventCallback(
     (files: Parameters<FilesActionsStore["createFoldersTree"]>[1]) => {
-      const target = dropSnapshot.current ?? resolveOpenFolderTarget();
+      const snapshot = dropSnapshot.current ?? {
+        target: resolveOpenFolderTarget(),
+        canUpload,
+      };
       dropSnapshot.current = null;
 
-      if (!canUpload) return;
+      if (!snapshot.canUpload) return;
+      const { target } = snapshot;
 
       const dragged = dragging;
       if (dragging) setDragging(false);

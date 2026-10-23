@@ -479,6 +479,28 @@ describe("ManualBackup", () => {
       expect(portalApi.startBackup).not.toHaveBeenCalled();
     });
 
+    it("does not top up again when the balance refresh fails after a top-up", async () => {
+      const saveDeposite = vi
+        .spyOn(portalApi, "saveDeposite")
+        .mockResolvedValue("ok");
+      const fetchWalletBalance = vi
+        .fn()
+        .mockRejectedValue(new Error("Internal error"));
+
+      render(
+        <ManualBackup
+          {...paidProps}
+          fetchWalletBalance={fetchWalletBalance}
+        />,
+      );
+
+      await userEvent.click(screen.getByText("Common:TopUpAndMakeCopy"));
+      await userEvent.click(screen.getByText("Common:TopUpAndMakeCopy"));
+
+      expect(saveDeposite).toHaveBeenCalledTimes(1);
+      expect(portalApi.startBackup).toHaveBeenCalledTimes(2);
+    });
+
     it("keeps the plain button when the balance is enough", () => {
       render(<ManualBackup {...paidProps} walletBalance={12} />);
 

@@ -198,7 +198,7 @@ describe("FilesSelector destination in another private room", () => {
   ];
   const pickedPlan = (roomId: number) =>
     planPrivateTransfer({
-      items: [{ id: 1, isFolder: false }],
+      items: [{ id: 1, title: "plan.docx", isFolder: false }],
       sourceInPrivateRoom: true,
       sourceRoomId: 7,
       dest: {

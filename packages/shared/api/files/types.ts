@@ -132,6 +132,7 @@ export type TShareSettings = {
 
 export type TOpenEditRequest = {
   documentType: string;
+  editorConfig: { mode: string };
   editorUrl: string;
   token: string;
   type: string;

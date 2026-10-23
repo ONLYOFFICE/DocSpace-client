@@ -126,7 +126,7 @@ export async function openEdit(
   const res = (await request(options)) as TOpenEditRequest;
 
   if (action === "view") {
-    res.config.editorConfig.mode = "view";
+    res.editorConfig.mode = "view";
   }
 
   return res;

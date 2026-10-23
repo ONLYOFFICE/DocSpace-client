@@ -1,0 +1,29 @@
+{
+  "key_path": "AINoChanges",
+  "content": "AI found no new values in the content.",
+  "content_en_sha1_hash": "211ad63a8ed00f0a35e119bbec888ccf1993f147",
+  "created_at": "2026-10-21T10:17:41.253Z",
+  "updated_at": "2026-10-21T10:20:42.121Z",
+  "comment": {
+    "text": "Summary at the top of the AI metadata review step when AI returned no new values.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/sub-components/ReviewNotes.tsx",
+      "line_number": 53,
+      "context": "const ReviewNotes = ({ mode, summary }: ReviewNotesProps) => {\n const { t } = useTranslation([\"Metadata\"]);\n const { count, notFound, skipped } = summary;\n \n const getResult = () => {\n if (!count) return t(\"Metadata:AINoChanges\");\n \n if (mode === \"fill\") {\n return count === 1\n ? t(\"Metadata:AIFilledFields_one\", { count })\n : t(\"Metadata:AIFilledFields_other\", { count });",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

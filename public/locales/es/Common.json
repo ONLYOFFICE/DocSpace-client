@@ -2120,6 +2120,7 @@
   "StorageWarning": "Podrá mantener su acceso completo a {{amount}} hasta el final del periodo de facturación pagado. Si su almacenamiento supera el nuevo límite al inicio del siguiente periodo, se le cobrará el uso real, redondeado a la {{storageUnit}} más cercana.",
   "SubmenuDetails": "Detalles",
   "SubmenuHistory": "Historial",
+  "SubmenuMetadata": "Metadatos",
   "SubmitToGallery": "Enviar a la Galería",
   "SubmitToTemplateGallery": "Enviar a la Galería de Plantillas",
   "Subscribe": "Suscribirse",

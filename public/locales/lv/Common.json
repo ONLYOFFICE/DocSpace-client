@@ -2120,6 +2120,7 @@
   "StorageWarning": "Jūs saglabāsiet pilnu {{amount}} piekļuvi līdz jūsu apmaksātā rēķina perioda beigām. Ja jūsu krātuves apjoms pārsniegs jauno limitu nākamā perioda sākumā, jums tiks izrēķināta maksa par faktisko lietojumu, noapaļotu līdz tuvākajam {{storageUnit}}.",
   "SubmenuDetails": "Detaļas",
   "SubmenuHistory": "Vēsture",
+  "SubmenuMetadata": "Metadati",
   "SubmitToGallery": "Iesniegt galerijā",
   "SubmitToTemplateGallery": "Iesniegt uz šablonu galeriju",
   "Subscribe": "Abonēt",

@@ -213,6 +213,11 @@ class InfoPanelStore {
     this.isVisible = true;
   };
 
+  openMetadataTab = () => {
+    this.setView(InfoPanelView.infoMetadata);
+    this.isVisible = true;
+  };
+
   setInfoPanelRoom = (infoPanelRoom: Nullable<TRoom>, withCheck?: boolean) => {
     if (withCheck && infoPanelRoom?.id !== this.infoPanelRoom?.id) return;
 

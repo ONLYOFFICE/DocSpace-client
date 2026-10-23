@@ -2120,6 +2120,7 @@
   "StorageWarning": "Do të ruani aksesin tuaj të plotë të {{amount}} deri në fund të periudhës së faturimit me pagesë. Nëse hapësira juaj ruajtëse e kalon kufirin e ri në fillim të periudhës së ardhshme, do të tarifoheni për përdorimin aktual, të rrumbullakosur në {{storageUnit}} më të afërt.",
   "SubmenuDetails": "Detaje",
   "SubmenuHistory": "Histori",
+  "SubmenuMetadata": "Meta të dhënat",
   "SubmitToGallery": "Dorëzojeni në Galeri",
   "SubmitToTemplateGallery": "Dërgo në Galerinë e Shablloneve",
   "Subscribe": "Abonohuni",

@@ -89,11 +89,25 @@ import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
 import { FilterLoader } from "@onlyoffice/apps-ui-kit/components/filter/skeletons";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
+import { getMetadataTemplates } from "@docspace/shared/api/metadata";
+import { isMetadataRootSupported } from "@docspace/shared/utils/metadata";
 
 import { useContactsFilter } from "./useContacts";
+import MetadataFilterSection from "./MetadataFilter";
+import {
+  METADATA_FILTER_GROUP,
+  addMetadataGroup,
+  applyMetadataFilter,
+  canFilterByMetadata,
+  dropMetadataChip,
+  getMetadataFilterState,
+  getMetadataFilterValue,
+  getMetadataSelectedItem,
+} from "./MetadataFilter/utils";
 
 const SectionFilterContent = ({
   t,
+  i18n,
   filter,
   roomsFilter,
   isRecentFolder,
@@ -233,6 +247,37 @@ const SectionFilterContent = ({
 
   const isDesktopView = currentDeviceType === DeviceType.desktop;
 
+  const isMetadataFilterAvailable =
+    !isPublicRoom &&
+    !getSelectedFolder()?.providerKey &&
+    !getSelectedFolder()?.private &&
+    isMetadataRootSupported(getSelectedFolder()?.rootFolderType);
+
+  const hasMetadataFilter = isRooms
+    ? roomsFilter.hasMetadataFilter()
+    : filter.hasMetadataFilter();
+
+  const metadataTemplates = React.useRef([]);
+
+  const metadataFiltersKey = JSON.stringify(filter.metadataFilters ?? null);
+  const roomsMetadataFiltersKey = JSON.stringify(
+    roomsFilter.metadataFilters ?? null,
+  );
+
+  const getMetadataItem = async (listFilter) => {
+    if (!isMetadataFilterAvailable) return null;
+
+    const metadataState = getMetadataFilterState(listFilter);
+    if (!metadataState) return null;
+
+    const templates = await getMetadataTemplates().catch(() => []);
+    const template = templates.find(
+      ({ id }) => id === metadataState.templateId,
+    );
+
+    return getMetadataSelectedItem(t, metadataState, template, i18n.language);
+  };
+
   // Check if any filter or search is active (excluding sorting and groupId)
   // Room grouping should be hidden when filters/search are active
   const isFilterOrSearchActive = React.useMemo(() => {
@@ -245,7 +290,8 @@ const SectionFilterContent = ({
       roomsFilter.provider ||
       roomsFilter.quotaFilter ||
       (roomsFilter.tags && roomsFilter.tags.length > 0) ||
-      roomsFilter.withoutTags
+      roomsFilter.withoutTags ||
+      roomsFilter.hasMetadataFilter()
     );
   }, [
     isRooms,
@@ -257,6 +303,8 @@ const SectionFilterContent = ({
     roomsFilter.quotaFilter,
     roomsFilter.tags,
     roomsFilter.withoutTags,
+    roomsFilter.metadataTemplateId,
+    roomsFilter.metadataFilters,
   ]);
 
   const {
@@ -322,6 +370,8 @@ const SectionFilterContent = ({
         newFilter.subjectOwnerId = null;
 
         newFilter.quotaFilter = quota;
+
+        applyMetadataFilter(newFilter, getMetadataFilterValue(data));
 
         if (subjectId) {
           newFilter.subjectId = subjectId;
@@ -423,6 +473,8 @@ const SectionFilterContent = ({
         }
 
         newFilter.sharedBy = sharedBy;
+
+        applyMetadataFilter(newFilter, getMetadataFilterValue(data));
 
         newFilter.withSubfolders =
           withSubfolders === FilterKeys.excludeSubfolders ? null : "true";
@@ -809,6 +861,9 @@ const SectionFilterContent = ({
           group: FilterGroups.roomFilterProviderType,
         });
       }
+
+      const metadataItem = await getMetadataItem(roomsFilter);
+      if (metadataItem) filterValues.push(metadataItem);
     } else if (isAIAgentsFolder) {
       if (roomsFilter.subjectId) {
         const user = await getUser(roomsFilter.subjectId);
@@ -954,6 +1009,9 @@ const SectionFilterContent = ({
           label,
         });
       }
+
+      const metadataItem = await getMetadataItem(filter);
+      if (metadataItem) filterValues.push(metadataItem);
     }
 
     return filterValues;
@@ -963,6 +1021,11 @@ const SectionFilterContent = ({
     filter.roomId,
     filter.filterType,
     filter.excludeSubject,
+    filter.metadataTemplateId,
+    metadataFiltersKey,
+    roomsFilter.metadataTemplateId,
+    roomsMetadataFiltersKey,
+    i18n.language,
     roomsFilter.provider,
     roomsFilter.type,
     roomsFilter.subjectId,
@@ -1094,6 +1157,10 @@ const SectionFilterContent = ({
 
     if (isContactsPage) return getContactsFilterData(quotaFilter);
 
+    const templatesRequest = isMetadataFilterAvailable
+      ? getMetadataTemplates().catch(() => [])
+      : null;
+
     let tags = null;
     let providers = [];
 
@@ -1106,6 +1173,13 @@ const SectionFilterContent = ({
       tags = res[0];
       providers = res[1];
     }
+
+    metadataTemplates.current = (await templatesRequest) ?? [];
+
+    const withMetadataFilter =
+      isMetadataFilterAvailable &&
+      canFilterByMetadata(metadataTemplates.current, hasMetadataFilter);
+
     const connectedThirdParty = [];
 
     providers.forEach((item) => {
@@ -1466,6 +1540,10 @@ const SectionFilterContent = ({
       showStorageInfo &&
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
+
+      if (withMetadataFilter) {
+        addMetadataGroup(filterOptions, t("Common:SubmenuMetadata"));
+      }
     } else if (isAIAgentsFolder) {
       filterOptions.push(...subjectOptions);
       filterOptions.push(...ownerOptions);
@@ -1527,6 +1605,10 @@ const SectionFilterContent = ({
         filterOptions.push(...roomOption);
       }
 
+      if (withMetadataFilter) {
+        addMetadataGroup(filterOptions, t("Common:SubmenuMetadata"));
+      }
+
       if (!withTypeOptions) {
         const lastHeader = filterOptions.findLast((option) => option.isHeader);
 
@@ -1549,10 +1631,23 @@ const SectionFilterContent = ({
     isTemplatesFolder,
     isCollaborator,
     isVisitor,
+    isMetadataFilterAvailable,
+    hasMetadataFilter,
     getContactsFilterData,
     getAuthorFilter,
     getSharedByFilter,
   ]);
+
+  const renderCustomItem = React.useCallback(
+    ({ group, ...props }) =>
+      group === METADATA_FILTER_GROUP ? (
+        <MetadataFilterSection
+          {...props}
+          templates={metadataTemplates.current}
+        />
+      ) : null,
+    [],
+  );
 
   const getViewSettingsData = React.useCallback(() => {
     const viewSettings = [
@@ -1691,6 +1786,10 @@ const SectionFilterContent = ({
           newFilter.provider = null;
         }
 
+        if (group === METADATA_FILTER_GROUP) {
+          dropMetadataChip(newFilter, key);
+        }
+
         if (group === FilterGroups.roomFilterType) {
           newFilter.type = null;
         }
@@ -1793,6 +1892,10 @@ const SectionFilterContent = ({
 
         if (group === FilterGroups.filterRoom) {
           newFilter.roomId = null;
+        }
+
+        if (group === METADATA_FILTER_GROUP) {
+          dropMetadataChip(newFilter, key);
         }
 
         newFilter.page = 0;
@@ -1951,6 +2054,7 @@ const SectionFilterContent = ({
       isContactsGuestsPage={isContactsGuestsPage}
       isRecentFolder={isRecentFolder}
       renderSelector={renderFilterSelector}
+      renderCustomItem={renderCustomItem}
       setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
       getAllRoomGroups={getRoomGroupsForSection}
       roomGroups={roomGroups}
@@ -2161,6 +2265,7 @@ export default inject(
       "Files",
       "Settings",
       "Common",
+      "Metadata",
       "InfoPanel",
       "People",
       "PeopleTranslations",

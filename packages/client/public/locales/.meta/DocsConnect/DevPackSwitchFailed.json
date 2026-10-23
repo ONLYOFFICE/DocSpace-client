@@ -3,7 +3,7 @@
   "content": "Couldn't switch to Dev Pack. Try again later or contact support.",
   "content_en_sha1_hash": "ff245fe4ba44ef16dbefbeca13dec79be849a0ab",
   "created_at": "2026-10-10T12:49:51.051Z",
-  "updated_at": "2026-10-10T12:52:08.719Z",
+  "updated_at": "2026-10-21T10:17:45.817Z",
   "comment": {
     "text": "Error toast shown in the Docs Connect plan panel when the billing service declines switching the subscription to the Dev Pack plan. Full sentence; write Dev Pack the same way as the DocsConnect:DevPack plan name in this language.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/DocsConnectStore.ts",
-      "line_number": 100,
+      "line_number": 101,
       "context": "case \"cancelScheduledChange\":\n return i18n.t(\"DocsConnect:ScheduledChangeCancellationFailed\");\n case \"buyPlan\":\n return i18n.t(\"DocsConnect:PlanUpdateFailed\");\n case \"switchToDevPack\":\n return i18n.t(\"DocsConnect:DevPackSwitchFailed\");\n }\n };\n \n const localizeDeclinedError = (error: unknown) =>\n error instanceof DocsConnectDeclinedError",
       "module": "/packages/client"
     }

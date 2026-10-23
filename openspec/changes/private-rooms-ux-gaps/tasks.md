@@ -13,7 +13,7 @@
 - [x] 2.2 Resolve the name in socket-driven new-file notifications for private rooms; verify with a case in `packages/client/src/store/filesStore/__tests__/FilesStore.encryption.test.ts`
 - [ ] 2.3 External, in `docspace-ui-kit-react`: give `FilesSelector` a way for the app to supply the displayed title of an item (for example `resolveItemTitle?: (item) => string`) and to re-render when the app's name cache changes; record the ui-kit release that ships it in design.md; verified by that record (blocks 2.4)
 - [ ] 2.4 BLOCKED on 2.3. Pass the filename cache to the picker in `packages/client/src/components/FilesSelector/index.tsx` (`resolveDisplayTitle`, recovery scheduled when unlocked, no prompt when locked, design D7); verify with cases named "Destination picker in a private room" and "Picker while locked" in `src/components/FilesSelector/__tests__` and an E2E case in `private-room-cross-room-copy.spec.ts`
-- [ ] 2.5 Hide the decryption warning of the picker for a Move from a private room (`getShowEncryptedTransferBanner` in `packages/client/src/components/FilesSelector/utils.ts`, design D8); verify with the case "Move dialog of a private room" in `src/components/FilesSelector/__tests__/utils.test.ts`
+- [x] 2.5 Hide the decryption warning of the picker for a Move from a private room (`getShowEncryptedTransferBanner` in `packages/client/src/components/FilesSelector/utils.ts`, design D8); verify with the case "Move dialog of a private room" in `src/components/FilesSelector/__tests__/utils.test.ts`
 
 ## 3. Remove the PDF form dead end
 

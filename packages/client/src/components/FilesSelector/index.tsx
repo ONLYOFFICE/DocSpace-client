@@ -308,7 +308,6 @@ const FilesSelectorWrapper = ({
     selection: selection as Array<TFile | TFolder>,
     sourceInPrivateRoom,
     isCopy,
-    isMove,
   });
 
   const onAccept = async (

@@ -223,21 +223,24 @@ describe("FilesSelector destination in another private room", () => {
 });
 
 describe("FilesSelector getShowEncryptedTransferBanner", () => {
-  it.each([
-    ["copy", { isCopy: true }],
-    ["move", { isMove: true }],
-  ])(
-    "Warning in the destination picker: a %s of encrypted files out of a private room warns",
-    (_, operation) => {
-      expect(
-        getShowEncryptedTransferBanner({
-          selection: [encrypted(1), plain(2)],
-          sourceInPrivateRoom: true,
-          ...operation,
-        }),
-      ).toBe(true);
-    },
-  );
+  it("Warning in the destination picker: a copy of encrypted files out of a private room warns", () => {
+    expect(
+      getShowEncryptedTransferBanner({
+        selection: [encrypted(1), plain(2)],
+        sourceInPrivateRoom: true,
+        isCopy: true,
+      }),
+    ).toBe(true);
+  });
+
+  it("Move dialog of a private room", () => {
+    expect(
+      getShowEncryptedTransferBanner({
+        selection: [encrypted(1), plain(2)],
+        sourceInPrivateRoom: true,
+      }),
+    ).toBe(false);
+  });
 
   it("warns from a subfolder too, whose own private flag is false", () => {
     expect(
@@ -264,12 +267,12 @@ describe("FilesSelector getShowEncryptedTransferBanner", () => {
       getShowEncryptedTransferBanner({
         selection: [plain(1), folder(3)],
         sourceInPrivateRoom: true,
-        isMove: true,
+        isCopy: true,
       }),
     ).toBe(false);
   });
 
-  it("does not warn outside a copy or a move", () => {
+  it("does not warn outside a copy", () => {
     expect(
       getShowEncryptedTransferBanner({
         selection: [encrypted(1)],

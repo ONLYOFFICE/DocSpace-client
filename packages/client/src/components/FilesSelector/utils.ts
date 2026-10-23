@@ -167,15 +167,15 @@ export const getIsDisabled = (
 /**
  * Whether the picker warns that encrypted files leaving a private room are
  * saved in decrypted form.
+ * Spec: private-rooms/file-operations, "No decryption warning in a Move that stays in the room".
  */
 export const getShowEncryptedTransferBanner = (params: {
   selection: (TFile | TFolder | { id: number | string })[];
   sourceInPrivateRoom?: boolean;
   isCopy?: boolean;
-  isMove?: boolean;
 }): boolean => {
-  const { selection, sourceInPrivateRoom, isCopy, isMove } = params;
-  if (!(isCopy || isMove) || !sourceInPrivateRoom) return false;
+  const { selection, sourceInPrivateRoom, isCopy } = params;
+  if (!isCopy || !sourceInPrivateRoom) return false;
   return selection.some(
     (item) =>
       "fileExst" in item &&

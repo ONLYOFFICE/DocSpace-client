@@ -65,6 +65,7 @@ const CompanyInfoSettingsComponent = (props) => {
     getCompanyInfoSettings,
     standalone,
     licenseAgreementsUrl,
+    privacyPolicyUrl,
     isEnterprise,
   } = props;
 
@@ -134,6 +135,7 @@ const CompanyInfoSettingsComponent = (props) => {
       buildVersionInfo={buildVersionInfo}
       standalone={standalone}
       licenseAgreementsUrl={licenseAgreementsUrl}
+      privacyPolicyUrl={privacyPolicyUrl}
       isBrandingAvailable={isBrandingAvailable}
       displayAbout={displayAbout}
       isEnterprise={isEnterprise}
@@ -163,6 +165,7 @@ export const CompanyInfoSettings = inject(
       displayAbout,
       standalone,
       licenseAgreementsUrl,
+      privacyPolicyUrl,
     } = settingsStore;
 
     const { isCustomizationAvailable, isBrandingAvailable } = currentQuotaStore;
@@ -184,6 +187,7 @@ export const CompanyInfoSettings = inject(
       getCompanyInfoSettings,
       standalone,
       licenseAgreementsUrl,
+      privacyPolicyUrl,
       isEnterprise,
     };
   },

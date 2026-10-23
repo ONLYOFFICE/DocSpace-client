@@ -66,6 +66,7 @@ export const CompanyInfo = ({
 	buildVersionInfo,
 	standalone,
 	licenseAgreementsUrl,
+	privacyPolicyUrl,
 	isEnterprise,
 	logoText,
 }: ICompanyInfo) => {
@@ -134,6 +135,7 @@ export const CompanyInfo = ({
 				companyInfoSettingsData={companySettings}
 				standalone={standalone}
 				licenseAgreementsUrl={licenseAgreementsUrl}
+				privacyPolicyUrl={privacyPolicyUrl}
 				isEnterprise={isEnterprise}
 				logoText={logoText}
 			/>

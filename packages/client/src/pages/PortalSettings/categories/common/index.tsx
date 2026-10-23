@@ -55,6 +55,7 @@ import Customization from "./customization";
 import Branding from "./branding";
 import Appearance from "./appearance";
 import DefaultTemplates from "./DefaultTemplates";
+import MetadataTemplates from "./MetadataTemplates";
 
 import LoaderTabs from "./sub-components/loaderTabs";
 import useCommon from "./useCommon";
@@ -135,6 +136,12 @@ const TabsCommon = (props: TabsCommonProps) => {
         clearAbortControllerArr();
         await getTemplatesData();
       },
+    },
+    {
+      id: "metadata-templates",
+      name: t("MetadataTemplates"),
+      content: <MetadataTemplates />,
+      onClick: () => {},
     },
   ];
 

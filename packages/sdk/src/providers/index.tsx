@@ -39,6 +39,7 @@ import React from "react";
 
 import { Toast } from "@onlyoffice/apps-ui-kit/components/toast";
 import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import ForeignTextGuard from "@docspace/shared/components/foreign-text-guard";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type {
   TGetColorTheme,
@@ -208,6 +209,7 @@ const Providers = ({ children, contextData, oauthFrame }: TProviders) => {
                   {children}
                   <Toast isSSR />
                   <RootTooltip />
+                  <ForeignTextGuard />
                 </SdkCustomActionsProvider>
               </SDKConfigProvider>
             </ErrorProvider>

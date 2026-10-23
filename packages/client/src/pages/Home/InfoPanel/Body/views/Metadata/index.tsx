@@ -1,0 +1,254 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import type { TEntryMetadataTemplate } from "@docspace/shared/api/metadata/types";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+
+import ConfirmDeleteDialog from "SRC_DIR/components/ConfirmDeleteDialog";
+
+import { useLoader } from "../../helpers/useLoader";
+
+import { useEntryMetadata } from "./hooks/useEntryMetadata";
+import { useMetadataCascade } from "./hooks/useMetadataCascade";
+import type {
+  TAddMetadataActions,
+  TCardActions,
+  TCascadeConflict,
+  TMetadataDeletion,
+  TMetadataPanel,
+  TMetadataSelection,
+} from "./types";
+import {
+  canAddCustomField,
+  canEditMetadata,
+  getMetadataItemType,
+  getVisibleTemplates,
+  isEmptyMetadata,
+} from "./utils";
+import CascadeBlock from "./sub-components/CascadeBlock";
+import CustomFieldsCard from "./sub-components/CustomFieldsCard";
+import CustomFieldsPanel from "./sub-components/CustomFieldsPanel";
+import MetadataEmpty from "./sub-components/MetadataEmpty";
+import MetadataHeader from "./sub-components/MetadataHeader";
+import TemplateCard from "./sub-components/TemplateCard";
+import TemplatePanel from "./sub-components/TemplatePanel";
+import styles from "./Metadata.module.scss";
+
+type MetadataProps = {
+  selection: TMetadataSelection;
+};
+
+const Metadata = ({ selection }: MetadataProps) => {
+  const { t } = useTranslation(["Metadata", "Common"]);
+
+  const {
+    metadata,
+    isLoading,
+    reload,
+    saveTemplate,
+    deleteTemplate,
+    saveCustomFields,
+  } = useEntryMetadata(selection);
+
+  const canEdit = canEditMetadata(selection);
+  const itemType = getMetadataItemType(selection);
+  const isCascadable = itemType !== "file" && canEdit;
+
+  const cascade = useMetadataCascade(
+    isCascadable ? Number(selection.id) : null,
+    reload,
+  );
+
+  const [panel, setPanel] = useState<TMetadataPanel | null>(null);
+  const [deletion, setDeletion] = useState<TMetadataDeletion | null>(null);
+
+  const { showLoading } = useLoader({ isFirstLoading: isLoading });
+
+  if (showLoading) return <InfoPanelViewLoader view="metadata" />;
+  if (isLoading) return null;
+
+  if (!metadata) {
+    return (
+      <Text className={styles.error}>{t("Common:SomethingWentWrong")}</Text>
+    );
+  }
+
+  const addActions: TAddMetadataActions | undefined = canEdit
+    ? {
+        onAddTemplate: () => setPanel({ type: "template" }),
+        onAddCustomField: () =>
+          setPanel({ type: "customFields", withNewField: true }),
+        isCustomFieldDisabled: !canAddCustomField(
+          metadata.customFields.length,
+        ),
+      }
+    : undefined;
+
+  const onDelete = async () => {
+    if (deletion?.type === "template") {
+      return deleteTemplate(deletion.templateId);
+    }
+
+    if (deletion?.type === "customFields") {
+      return saveCustomFields(
+        metadata.customFields.map(({ name }) => ({ name, value: null })),
+      );
+    }
+
+    return true;
+  };
+
+  const closePanel = () => setPanel(null);
+
+  const closeDeletion = () => setDeletion(null);
+
+  const enableCascade = (
+    template: TEntryMetadataTemplate,
+    conflictResolveType: TCascadeConflict,
+  ) =>
+    cascade.setCascade(
+      template.id,
+      { cascade: true, conflictResolveType },
+      t("Metadata:MetadataAppliedToItems", {
+        template: template.name,
+        title: selection.title,
+      }),
+    );
+
+  const disableCascade = (template: TEntryMetadataTemplate) =>
+    cascade.setCascade(template.id, { cascade: false });
+
+  const getTemplateActions = (
+    template: TEntryMetadataTemplate,
+  ): TCardActions | undefined =>
+    canEdit
+      ? {
+          onEdit: () => setPanel({ type: "template", template }),
+          onDelete: () =>
+            setDeletion({ type: "template", templateId: template.id }),
+        }
+      : undefined;
+
+  const customFieldsActions: TCardActions | undefined = canEdit
+    ? {
+        onEdit: () => setPanel({ type: "customFields", withNewField: false }),
+        onDelete: () => setDeletion({ type: "customFields" }),
+      }
+    : undefined;
+
+  const getDeletionDescription = () => {
+    if (deletion?.type === "customFields") {
+      return t("Metadata:DeleteCustomFieldsDescription");
+    }
+
+    return itemType === "file"
+      ? t("Metadata:DeleteTemplateMetadataDescription")
+      : t("Metadata:DeleteFolderTemplateMetadataDescription");
+  };
+
+  return (
+    <div className={styles.metadata} data-testid="info_panel_metadata">
+      {isEmptyMetadata(metadata) ? (
+        <MetadataEmpty itemType={itemType} addActions={addActions} />
+      ) : (
+        <>
+          <MetadataHeader addActions={addActions} />
+
+          <div className={styles.blocks}>
+            {getVisibleTemplates(metadata.templates).map((template) => (
+              <TemplateCard
+                key={template.id}
+                template={template}
+                actions={getTemplateActions(template)}
+                cascade={
+                  isCascadable ? (
+                    <CascadeBlock
+                      itemType={itemType}
+                      templateName={template.name}
+                      isApplied={template.cascade}
+                      {...cascade.getTemplateState(template.id)}
+                      onApply={(conflict) => enableCascade(template, conflict)}
+                      onDisable={() => disableCascade(template)}
+                    />
+                  ) : undefined
+                }
+              />
+            ))}
+
+            {metadata.customFields.length ? (
+              <CustomFieldsCard
+                fields={metadata.customFields}
+                actions={customFieldsActions}
+              />
+            ) : null}
+          </div>
+        </>
+      )}
+
+      {panel?.type === "template" ? (
+        <TemplatePanel
+          template={panel.template}
+          assigned={metadata.templates}
+          onSubmit={saveTemplate}
+          onClose={closePanel}
+        />
+      ) : null}
+
+      {panel?.type === "customFields" ? (
+        <CustomFieldsPanel
+          fields={metadata.customFields}
+          withNewField={panel.withNewField}
+          onSubmit={saveCustomFields}
+          onClose={closePanel}
+        />
+      ) : null}
+
+      {deletion ? (
+        <ConfirmDeleteDialog
+          title={t("Metadata:DeleteMetadataTitle")}
+          description={getDeletionDescription()}
+          onDelete={onDelete}
+          onClose={closeDeletion}
+        />
+      ) : null}
+    </div>
+  );
+};
+
+export default Metadata;

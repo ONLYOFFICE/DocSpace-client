@@ -1,0 +1,29 @@
+{
+  "key_path": "OperatorContains",
+  "content": "contains",
+  "content_en_sha1_hash": "caeb909ae4ff4ee25a0ff0d476946ed256f2aee1",
+  "created_at": "2026-10-21T10:17:41.284Z",
+  "updated_at": "2026-10-22T13:13:49.710Z",
+  "comment": {
+    "text": "Operator in the metadata filter for Text fields (value contains the text); lowercase, inserted as {{operator}} into a chip like Title: contains · draft.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/MetadataFilter/utils.ts",
+      "line_number": 355,
+      "context": "t: TTranslation,\n operator: TFilterOperator,\n ) => {\n switch (operator) {\n case \"contains\":\n return t(\"Metadata:OperatorContains\");\n case \"isAnyOf\":\n return t(\"Metadata:OperatorIsAnyOf\");\n case \"equals\":\n return t(\"Metadata:OperatorEquals\");\n case \"greaterThan\":",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

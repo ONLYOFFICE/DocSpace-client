@@ -39,6 +39,7 @@ export interface IBuildInfo {
   docSpace: string;
   communityServer: string;
   documentServer: string;
+  aiTools?: string;
 }
 
 export interface IDialogProps {
@@ -48,7 +49,10 @@ export interface IDialogProps {
   previewData: TCompanyInfo;
   companyInfoSettingsData: TCompanyInfo;
   standalone: boolean;
+  /** `entries.license`: the server license agreement, SaaS terms of use. */
   licenseAgreementsUrl: string;
+  /** `entries.legalterms`: SaaS only. */
+  privacyPolicyUrl?: string;
   isEnterprise: boolean;
   logoText: string;
 }
@@ -59,6 +63,7 @@ export interface IContentProps {
   previewData: TCompanyInfo;
   standalone: boolean;
   licenseAgreementsUrl: string;
+  privacyPolicyUrl?: string;
   isEnterprise: boolean;
   logoText: string;
 }

@@ -3,7 +3,7 @@
   "content": "Explore your apps",
   "content_en_sha1_hash": "cdfe888a8f13d91cac3cef276684eebd91a9faae",
   "created_at": "2026-08-31T18:23:46.745Z",
-  "updated_at": "2026-08-31T19:53:13.407Z",
+  "updated_at": "2026-10-21T10:17:45.661Z",
   "comment": {
     "text": "Title for a step in the dashboard onboarding tour that introduces the apps section.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
-      "line_number": 168,
-      "context": "// to get something done.\n appIds.length > 0 &&\n elementGroupStep(\n APPS_SECTION_SELECTOR,\n appIds.map(appCardSelector),\n t(\"DashboardTour:DashboardAppsTitle\"),\n t(\"DashboardTour:DashboardApps\"),\n callbacks,\n LOG_LABEL,\n ),",
+      "line_number": 164,
+      "context": "// section: the section's heading would push it up over the create tiles.\n appIds.length > 0 &&\n elementGroupStep(\n APPS_SECTION_SELECTOR,\n appIds.map(appCardSelector),\n t(\"DashboardTour:DashboardAppsTitle\"),\n t(\"DashboardTour:DashboardApps\"),\n callbacks,\n DASHBOARD_TOUR_LABEL,\n 6,\n undefined,",
       "module": "/packages/client"
     }
   ],

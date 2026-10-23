@@ -95,6 +95,12 @@ export {
   AiActionType,
 } from "./chatStores";
 export type { AiChatProfile, AssignmentMap } from "./chatStores";
+export {
+  META_FILL_RESULT,
+  META_GENERATE_RESULT,
+  aiMetaFillHandler,
+  aiMetaGenerateHandler,
+} from "./meta";
 
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),

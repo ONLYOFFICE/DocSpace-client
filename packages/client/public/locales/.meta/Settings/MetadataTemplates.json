@@ -1,0 +1,53 @@
+{
+  "key_path": "MetadataTemplates",
+  "content": "Metadata templates",
+  "content_en_sha1_hash": "0579ab7bd875e70575b1c488824d5601339d6067",
+  "created_at": "2026-10-21T10:17:40.226Z",
+  "updated_at": "2026-10-21T10:20:42.121Z",
+  "comment": {
+    "text": "Name of the Metadata templates page in the portal settings (menu item and page heading), also a link to it from the info panel template picker.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/index.tsx",
+      "line_number": 96,
+      "context": "onBackClick={closeForm}\n onClose={onClose}\n dataTestId=\"metadata_template_panel\"\n >\n <ModalDialog.Header>\n {form ? form.template.name : t(\"Settings:MetadataTemplates\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n {form ? (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.tsx",
+      "line_number": 142,
+      "context": "await getTemplatesData();\n },\n },\n {\n id: \"metadata-templates\",\n name: t(\"MetadataTemplates\"),\n content: <MetadataTemplates />,\n onClick: () => {},\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/index.tsx",
+      "line_number": 64,
+      "context": "useState<TMetadataTemplate | null>();\n const [deletingTemplate, setDeletingTemplate] =\n useState<TMetadataTemplate | null>(null);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:MetadataTemplates\"));\n }, [ready]);\n \n const closePanel = () => setEditingTemplate(undefined);\n \n const onSaved = () => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 190,
+      "context": "{\n id: \"portal-settings_catalog-metadata-templates\",\n key: \"0-4\",\n icon: \"\",\n link: \"metadata-templates\",\n tKey: \"MetadataTemplates\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-metadata-templates_subLink\",\n key: \"0-4-0\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 190,
+      "context": "{\n id: \"portal-settings_catalog-metadata-templates\",\n key: \"0-4\",\n icon: \"\",\n link: \"metadata-templates\",\n tKey: \"MetadataTemplates\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-metadata-templates_subLink\",\n key: \"0-4-0\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

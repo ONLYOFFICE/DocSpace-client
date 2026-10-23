@@ -3,7 +3,7 @@
   "content": "AI Arbiter",
   "content_en_sha1_hash": "542571c512268a0755f7361f633efe00b416b5cf",
   "created_at": "2026-05-20T10:00:00.000Z",
-  "updated_at": "2026-08-14T14:58:32.669Z",
+  "updated_at": "2026-10-21T10:17:45.684Z",
   "comment": {
     "text": "Title for the AI Arbiter app catalog entry on the Dashboard modules page.",
     "is_auto": true,
@@ -19,20 +19,20 @@
     },
     {
       "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 135,
-      "context": "alwaysOn: false,\n },\n {\n id: \"ai-arbiter\",\n icon: <CatalogAiArbiterIcon />,\n title: t(\"Common:DashboardAIArbiterTitle\"),\n description: t(\"Common:DashboardAIArbiterDescription\"),\n href: \"/ai-arbiter\",\n supported: true,\n alwaysOn: false,\n },",
+      "line_number": 140,
+      "context": "]\n : []),\n {\n id: \"ai-arbiter\",\n icon: <CatalogAiArbiterIcon />,\n title: t(\"Common:DashboardAIArbiterTitle\"),\n description: t(\"Common:DashboardAIArbiterDescription\"),\n alwaysOn: false,\n },\n {\n id: \"e2e-rooms\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/AiArbiter/index.tsx",
-      "line_number": 70,
-      "context": "fetchAppSettings,\n canManageAgents,\n theme,\n }: AiArbiterProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:DashboardAIArbiterTitle\");\n const [settingsChecked, setSettingsChecked] = React.useState(false);\n const [showSetupDialog, setShowSetupDialog] = React.useState(false);\n \n // Show the frame only once configuration is verified, the user can manage\n // agents, and setup is complete; otherwise the page renders its gating UI",
+      "line_number": 72,
+      "context": "canManageAgents,\n theme,\n logoText,\n }: AiArbiterProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:DashboardAIArbiterTitle\", logoText);\n const [settingsChecked, setSettingsChecked] = React.useState(false);\n const [showSetupDialog, setShowSetupDialog] = React.useState(false);\n \n // Show the frame only once configuration is verified, the user can manage\n // agents, and setup is complete; otherwise the page renders its gating UI",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/AiArbiter/index.tsx",
-      "line_number": 70,
-      "context": "fetchAppSettings,\n canManageAgents,\n theme,\n }: AiArbiterProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:DashboardAIArbiterTitle\");\n const [settingsChecked, setSettingsChecked] = React.useState(false);\n const [showSetupDialog, setShowSetupDialog] = React.useState(false);\n \n // Show the frame only once configuration is verified, the user can manage\n // agents, and setup is complete; otherwise the page renders its gating UI",
+      "line_number": 72,
+      "context": "canManageAgents,\n theme,\n logoText,\n }: AiArbiterProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:DashboardAIArbiterTitle\", logoText);\n const [settingsChecked, setSettingsChecked] = React.useState(false);\n const [showSetupDialog, setShowSetupDialog] = React.useState(false);\n \n // Show the frame only once configuration is verified, the user can manage\n // agents, and setup is complete; otherwise the page renders its gating UI",
       "module": "/packages/client"
     },
     {

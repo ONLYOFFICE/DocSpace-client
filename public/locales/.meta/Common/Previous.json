@@ -3,7 +3,7 @@
   "content": "Previous",
   "content_en_sha1_hash": "50f94286ba30706a19070d3ec0a0c8d34d6cf6eb",
   "created_at": "2025-05-19T21:30:47.476Z",
-  "updated_at": "2026-10-01T08:23:21.796Z",
+  "updated_at": "2026-10-21T10:17:45.740Z",
   "comment": {
     "text": "Button label. Navigates to the previous page in a paginated list of items, such as user accounts.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 346,
+      "line_number": 366,
       "context": "/>\n ) : null}\n <QuickActions\n items={createItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n </section>\n \n {moduleItems.length > 0 ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/index.js",
-      "line_number": 751,
+      "line_number": 760,
       "context": "items={quickActions.items}\n className={styles.quickActions}\n isLoading={showFilterLoader}\n onClose={onHideQuickActions}\n closeLabel={t(\"Common:DisableQuickActionsOnAllPages\")}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n dataTestId=\"quick-actions\"\n />\n </Section.SectionBanner>\n ) : null}",
       "module": "/packages/client"
     },

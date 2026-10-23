@@ -130,6 +130,30 @@ describe("ContextOptionsStore.getFilesContextOptions — characterization", () =
     expect(keys).not.toContain("select");
     expect(keys).not.toContain("show-info");
   });
+
+  it("keeps version history under More options in info-panel mode", () => {
+    const store = createTestContextOptionsStore();
+    const menu = menuShape(
+      store.getFilesContextOptions(
+        fileItem([
+          "show-info",
+          "show-version-history",
+          "mark-as-favorite",
+          "delete",
+        ]) as never,
+        t,
+        true, // isInfoPanel
+      ),
+    );
+    const keys = menu.map((m) => m.key);
+    const moreOptions = menu.find((m) => m.key === "info");
+
+    expect(keys).not.toContain("show-version-history");
+    expect(moreOptions?.items).toEqual([
+      expect.objectContaining({ key: "show-version-history" }),
+    ]);
+    expect(keys.indexOf("info")).toBeLessThan(keys.indexOf("delete"));
+  });
 });
 
 describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {

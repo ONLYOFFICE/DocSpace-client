@@ -1,0 +1,29 @@
+{
+  "key_path": "MoveUp",
+  "content": "Move up",
+  "content_en_sha1_hash": "b4f57cd0cd5c7d88461c1718646713dea47a36c9",
+  "created_at": "2026-10-21T10:17:41.278Z",
+  "updated_at": "2026-10-21T10:20:42.121Z",
+  "comment": {
+    "text": "Menu item or button on a field in the metadata template editor that moves the field one position up. Imperative verb.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/FieldRow.tsx",
+      "line_number": 83,
+      "context": "const getContextOptions = (): ContextMenuModel[] => [\n { key: \"edit\", label: t(\"Common:EditButton\"), onClick: onEdit },\n {\n key: \"move-up\",\n label: t(\"Metadata:MoveUp\"),\n disabled: isFirst,\n onClick: onMoveUp,\n },\n {\n key: \"move-down\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Filter",
   "content_en_sha1_hash": "d7decf1aa22b02ae8abf9a96849ee423eee838e4",
   "created_at": "2025-05-19T21:30:55.685Z",
-  "updated_at": "2026-10-06T10:42:37.509Z",
+  "updated_at": "2026-10-22T13:13:49.590Z",
   "comment": {
     "text": "This is a button label or dialog title that allows users to narrow down a list of items (e.g., transactions, files, webhooks) by specific criteria.",
     "is_auto": true,
@@ -25,8 +25,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1936,
+      "line_number": 2040,
       "context": "isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}\n clearAll={clearAll}\n filterTitle={t(\"Common:Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n clearSearch={clearSearch}\n setClearSearch={setClearSearch}\n onSortButtonClick={onSortButtonClick}\n currentDeviceType={currentDeviceType}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/MetadataFilter/sub-components/ConditionsPanel.tsx",
+      "line_number": 108,
+      "context": "setDrafts((current) => ({ ...current, [fieldId]: draft }));\n \n return (\n <div className={styles.panel} data-testid=\"metadata_filter_panel\">\n <AsideHeader\n header={t(\"Common:Filter\")}\n isBackButton\n onBackClick={onBack}\n isCloseable\n onCloseClick={onClose}\n />",
       "module": "/packages/client"
     },
     {

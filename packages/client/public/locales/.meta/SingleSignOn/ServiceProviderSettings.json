@@ -3,7 +3,7 @@
   "content": "{{organizationName}} service provider settings",
   "content_en_sha1_hash": "899059b35af11c8ca39f86632747330e35ddf70c",
   "created_at": "2026-08-31T18:23:40.074Z",
-  "updated_at": "2026-08-31T21:00:08.941Z",
+  "updated_at": "2026-10-21T10:17:45.805Z",
   "comment": {
     "text": "Button label and category title in the settings menu that identifies the service provider settings for the organization represented by {{organizationName}}.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 405,
+      "line_number": 422,
       "context": "{\n id: \"portal-settings_catalog-sso-settings\",\n key: \"4-2-0\",\n icon: \"\",\n link: \"settings\",\n tKey: \"SingleSignOn:ServiceProviderSettings\",\n },\n {\n id: \"portal-settings_catalog-sso-metadata\",\n key: \"4-2-1\",\n icon: \"\",",
       "module": "/packages/client"
     }

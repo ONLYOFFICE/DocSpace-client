@@ -1,0 +1,41 @@
+{
+  "key_path": "EnterValue",
+  "content": "Enter value",
+  "content_en_sha1_hash": "3b77dd997a74a5df565010153bcadda6eb69018e",
+  "created_at": "2026-10-21T10:17:41.271Z",
+  "updated_at": "2026-10-22T13:13:49.705Z",
+  "comment": {
+    "text": "Placeholder of a text value input for a metadata field or custom field.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/CustomFieldForm.tsx",
+      "line_number": 96,
+      "context": ">\n <TextInput\n type={InputType.text}\n value={draft.value}\n onChange={(e) => onChange({ ...draft, value: e.target.value })}\n placeholder={t(\"Metadata:EnterValue\")}\n maxLength={METADATA_VALUE_MAX_LENGTH}\n scale\n testId=\"metadata_custom_field_form_value_input\"\n />\n </FieldContainer>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/CustomFieldRow.tsx",
+      "line_number": 90,
+      "context": "const valueInput = (\n <TextInput\n type={InputType.text}\n value={draft.value}\n onChange={(e) => onChange({ ...draft, value: e.target.value })}\n placeholder={t(\"Metadata:EnterValue\")}\n maxLength={METADATA_VALUE_MAX_LENGTH}\n hasError={!!valueError}\n scale\n testId=\"metadata_custom_field_value_input\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/FieldInput/TextValueInput.tsx",
+      "line_number": 59,
+      "context": "return (\n <TextInput\n type={InputType.text}\n value={value}\n onChange={(e) => onChange(e.target.value)}\n placeholder={t(\"Metadata:EnterValue\")}\n maxLength={METADATA_VALUE_MAX_LENGTH}\n hasError={isNumber && !isValidNumberInput(value)}\n scale\n testId=\"metadata_value_input\"\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

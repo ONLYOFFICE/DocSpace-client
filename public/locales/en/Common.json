@@ -2030,6 +2030,7 @@
   "ServerSideEncryptionMethod": "Server Side Encryption Method",
   "ServiceIsDisabled": "Service is disabled",
   "ServiceLimitsDescription": "Set spending limits for the whole portal and per user. <1>One limit covers both AI features and AI search.</1>",
+  "ServiceLimitsNoPaymentMethod": "Activate AI features or AI search to set spending limits. Activation requires a payment method.",
   "ServiceManagementUnavailable": "Add-on management is unavailable during the grace period, and no charges will apply to the add-ons during this time. To regain full functionality, please upgrade to a {{planName}} plan.",
   "ServiceUrl": "Service URL",
   "Sessions": "Sessions",

@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Prosim, osvežite stran ali se vrnite kasneje.",
   "ServerSideEncryptionMethod": "Šifrirna metoda na strani strežnika",
   "ServiceIsDisabled": "Služba je onemogočena",
-  "ServiceLimitsDescription": "Nastavite omejitve porabe za celoten delovni prostor in za posamezne uporabnike. <1>Ena omejitev velja tako za AI agente in orodja kot za iskanje z AI.</1>",
   "ServiceManagementUnavailable": "Upravljanje dodatkov med odložnim obdobjem ni na voljo in v tem času se za dodatke ne zaračunavajo stroški. Za ponovno pridobitev polne funkcionalnosti nadgradite na načrt {{planName}}.",
   "ServiceUrl": "URL storitve",
   "Sessions": "Seje",

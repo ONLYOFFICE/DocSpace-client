@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Lütfen sayfayı yeniden yükleyin veya daha sonra tekrar deneyin.",
   "ServerSideEncryptionMethod": "Sunucu Tarafı Şifreleme Yöntemi",
   "ServiceIsDisabled": "Hizmet devre dışı",
-  "ServiceLimitsDescription": "Tüm portal ve kullanıcı başına harcama limitleri belirleyin. <1>Tek bir limit hem AI özelliklerini hem de AI aramasını kapsar.</1>",
   "ServiceManagementUnavailable": "Eklenti yönetimi ek süre boyunca kullanılamaz ve bu süre zarfında eklentiler için herhangi bir ücret uygulanmaz. Tam işlevselliği geri kazanmak için lütfen {{planName}} planına yükseltin.",
   "ServiceUrl": "Hizmet Url'si",
   "Sessions": "Oturumlar",

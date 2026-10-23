@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "请重新加载页面或稍后重试。",
   "ServerSideEncryptionMethod": "服务器端加密方法",
   "ServiceIsDisabled": "服务已禁用",
-  "ServiceLimitsDescription": "为整个工作区和每位用户设置支出限额。<1>同一限额同时涵盖 AI 功能和 AI 搜索。</1>",
   "ServiceManagementUnavailable": "宽限期内无法管理附加组件，且在此期间附加组件不收取费用。如需恢复完整功能，请升级至{{planName}}套餐。",
   "ServiceUrl": "服务URL",
   "Sessions": "会话",

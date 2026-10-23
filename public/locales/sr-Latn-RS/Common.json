@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Molimo osveži stranicu ili se vrati kasnije.",
   "ServerSideEncryptionMethod": "Metod šifrovanja na serverskoj strani",
   "ServiceIsDisabled": "Usluga je onemogućena",
-  "ServiceLimitsDescription": "Postavite limite potrošnje za ceo radni prostor i po korisniku. <1>Jedan limit obuhvata i AI agente i alate i AI pretragu.</1>",
   "ServiceManagementUnavailable": "Upravljanje dodacima nije dostupno tokom grejs perioda i u tom periodu se dodaci ne naplaćuju. Da biste ponovo imali punu funkcionalnost, nadogradite se na plan {{planName}}.",
   "ServiceUrl": "URL servisa",
   "Sessions": "Sesije",

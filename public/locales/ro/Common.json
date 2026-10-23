@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Vă rugăm să reîncărcați pagina sau să reveniți mai târziu.",
   "ServerSideEncryptionMethod": "Metoda de criptare pe partea de server",
   "ServiceIsDisabled": "Serviciul este dezactivat",
-  "ServiceLimitsDescription": "Setați limite de cheltuieli pentru întregul spațiu de lucru și per utilizator. <1>O singură limită acoperă atât agenții și instrumentele IA, cât și căutarea IA.</1>",
   "ServiceManagementUnavailable": "Administrarea suplimentelor nu este disponibilă în timpul perioadei de grație și nu va fi percepută nicio taxă pentru suplimente în această perioadă. Pentru a restabili funcționalitatea completă, treceți la un plan {{planName}}.",
   "ServiceUrl": "URL-ul serviciului",
   "Sessions": "Sesiuni",

@@ -2029,7 +2029,6 @@
   "ServerErrorEmptyDescription": "Vui lòng tải lại trang hoặc quay lại sau.",
   "ServerSideEncryptionMethod": "Phương pháp mã hóa phía máy chủ",
   "ServiceIsDisabled": "Dịch vụ đã bị vô hiệu hóa",
-  "ServiceLimitsDescription": "Đặt giới hạn chi tiêu cho toàn bộ không gian làm việc và cho từng người dùng. <1>Một giới hạn áp dụng cho cả tính năng AI và tìm kiếm AI.</1>",
   "ServiceManagementUnavailable": "Việc quản lý tiện ích bổ sung không khả dụng trong thời gian ân hạn, và bạn sẽ không phải chịu bất kỳ khoản phí nào cho các tiện ích bổ sung trong thời gian này. Để khôi phục đầy đủ chức năng, vui lòng nâng cấp lên gói {{planName}}.",
   "ServiceUrl": "Url dịch vụ",
   "Sessions": "Phiên",

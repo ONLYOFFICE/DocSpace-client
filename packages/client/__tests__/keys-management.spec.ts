@@ -33,9 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { Page } from "@playwright/test";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   capabilitiesHandler,
   privacyroomKeysHandlers,
+  roomListHandler,
   selfActivationStatusHandler,
   settingsHandler,
   type PrivacyroomHandlerHandle,
@@ -228,5 +231,133 @@ test.describe("Profile > Keys Management", () => {
     ).toHaveCount(0);
     await expect(page.getByTestId("import_key_link")).toHaveCount(0);
     await expect(page.getByTestId("unused_keys_notice")).toBeVisible();
+  });
+});
+
+// Spec: private-rooms/key-management, "Key dialogs are accessible and adapt
+// to narrow screens". The passphrase dialog opens as a centred modal on a wide
+// screen and as an aside panel on a narrow one.
+test.describe("Profile > Keys Management: key dialogs on screen", () => {
+  test.use({ locale: "en-US", timezoneId: "UTC" });
+
+  const MOBILE = { width: 390, height: 844 };
+  const USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+
+  test.beforeEach(async ({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      // No private room in the list: the delete warning names none.
+      roomListHandler(TEST_PORT),
+    );
+  });
+
+  const openPassphraseDialog = async (
+    page: Page,
+    baseUrl: string,
+  ) => {
+    await page.goto(`${baseUrl}/profile/keys-management`);
+    await page
+      .getByRole("button", { name: "Generate new key", exact: true })
+      .click({ timeout: 15_000 });
+    const dialog = page.getByRole("dialog", { name: "Create passphrase" });
+    await expect(dialog).toBeVisible({ timeout: 5_000 });
+    return dialog;
+  };
+
+  const openDeleteWarning = async (
+    page: Page,
+    baseUrl: string,
+  ) => {
+    await page.goto(`${baseUrl}/profile/keys-management`);
+    await page
+      .locator("[class*='keyItemActions']")
+      .first()
+      .getByTestId("icon-button")
+      .nth(2)
+      .click({ timeout: 15_000 });
+    const dialog = page
+      .getByRole("dialog")
+      .filter({ hasText: "Delete encryption keyWarning" });
+    await expect(
+      dialog.getByText(
+        "None of your private rooms has files encrypted for you, so no room is affected.",
+        { exact: true },
+      ),
+    ).toBeVisible({ timeout: 10_000 });
+    return dialog;
+  };
+
+  const oneKey = () =>
+    privacyroomKeysHandlers(TEST_PORT, {
+      initial: [
+        {
+          id: "22222222-2222-2222-2222-222222222222",
+          userId: USER_ID,
+          publicKey: "BASE64_PUBLIC_KEY_NEW",
+          privateKeyEnc: "BASE64_PRIVATE_KEY_ENC_NEW",
+          date: "2026-10-01T00:00:00",
+        },
+      ],
+    });
+
+  test("Passphrase dialog on a wide screen", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await openPassphraseDialog(page, baseUrl);
+    await expectScreenshot(page, [
+      "desktop",
+      "keys-management",
+      "passphrase-create.png",
+    ]);
+  });
+
+  test("Mobile viewport: the passphrase dialog opens as an aside panel", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await page.setViewportSize(MOBILE);
+    const dialog = await openPassphraseDialog(page, baseUrl);
+    await expect(dialog.getByRole("button", { name: "Continue" })).toBeVisible();
+    await expectScreenshot(page, [
+      "mobile",
+      "keys-management",
+      "passphrase-create.png",
+    ]);
+  });
+
+  test("Delete warning on a wide screen", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...oneKey());
+    await openDeleteWarning(page, baseUrl);
+    await expectScreenshot(page, [
+      "desktop",
+      "keys-management",
+      "delete-key-warning.png",
+    ]);
+  });
+
+  test("Delete warning on a narrow screen", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...oneKey());
+    await page.setViewportSize(MOBILE);
+    await openDeleteWarning(page, baseUrl);
+    await expectScreenshot(page, [
+      "mobile",
+      "keys-management",
+      "delete-key-warning.png",
+    ]);
   });
 });

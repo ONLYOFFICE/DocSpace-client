@@ -688,7 +688,7 @@
   "DocsConnectCallbackProcessingTitle": "Processing your payment",
   "DocsConnectCallbackStepActivate": "Activating Docs Connect",
   "DocsConnectCallbackSuccess": "Docs Connect activated",
-  "DocsConnectCurrentTariffPlan": "Current subscription: {{price}}/month (Users:{{count}})",
+  "DocsConnectCurrentTariffPlan": "Current subscription: {{price}}/month (Users: {{count}})",
   "DocsConnectPricePerMonth": "{{price}} per month",
   "DocsConnectTrialAvailable": "Free trial available | Then from {{price}} per user / month",
   "DocsConnectTrialDaysLeft": "{{count}} Free days left",

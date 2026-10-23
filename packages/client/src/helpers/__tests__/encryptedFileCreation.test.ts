@@ -35,6 +35,7 @@
 
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { createEncryptedFile } from "@docspace/shared/services/private-room/encrypted-file-creation";
 
@@ -159,14 +160,36 @@ describe("runEncryptedFileCreation", () => {
     expect(createEncryptedFile).not.toHaveBeenCalled();
   });
 
-  it("rejects unsupported extensions before unlocking", async () => {
-    await expect(
-      runEncryptedFileCreation({
-        ...baseParams(),
-        extension: "exe" as never,
-      }),
-    ).rejects.toThrow();
+  it("Unsupported extension requested", async () => {
+    const error = await runEncryptedFileCreation({
+      ...baseParams(),
+      extension: "exe" as never,
+    }).catch((e: unknown) => e);
 
+    expect(error).toMatchObject({
+      code: "UNSUPPORTED_EXTENSION",
+      extension: "exe",
+    });
     expect(requireUnlock).not.toHaveBeenCalled();
+
+    const t = vi.fn((key: string) => key);
+    expect(getEncryptionErrorMessage(t as never, error)).toBe(
+      "Common:PrivateRoomCreateNotSupported",
+    );
+    expect(t).toHaveBeenCalledWith("Common:PrivateRoomCreateNotSupported", {
+      extension: "exe",
+    });
+  });
+
+  it("names the missing keys through a locale key", async () => {
+    const error = await runEncryptedFileCreation({
+      ...baseParams(),
+      publicKey: null,
+    }).catch((e: unknown) => e);
+
+    expect(error).toMatchObject({ code: "KEYS_UNAVAILABLE" });
+    expect(
+      getEncryptionErrorMessage(((key: string) => key) as never, error),
+    ).toBe("Common:EncryptionKeysNotConfigured");
   });
 });

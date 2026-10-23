@@ -39,6 +39,7 @@ import {
   AuthenticationError,
   CryptoError,
   DecryptionError,
+  EncryptedCreateError,
   InvalidFormatError,
   InvalidPassphraseError,
   InvalidRecoveryPhraseError,
@@ -53,6 +54,13 @@ export function getEncryptionErrorMessage(
   t: TFunction,
   error: unknown,
 ): string {
+  if (error instanceof EncryptedCreateError) {
+    return error.code === "UNSUPPORTED_EXTENSION"
+      ? t("Common:PrivateRoomCreateNotSupported", {
+          extension: error.extension,
+        })
+      : t("Common:EncryptionKeysNotConfigured");
+  }
   if (error instanceof WebCryptoUnavailableError) {
     return t("Common:EncryptionRequiresHttps");
   }

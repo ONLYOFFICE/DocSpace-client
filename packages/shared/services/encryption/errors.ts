@@ -124,6 +124,22 @@ export class WebCryptoUnavailableError extends CryptoError {
   }
 }
 
+/** A file in a private room could not be created; nothing was encrypted. */
+export class EncryptedCreateError extends CryptoError {
+  constructor(
+    code: "UNSUPPORTED_EXTENSION" | "KEYS_UNAVAILABLE",
+    public readonly extension?: string,
+  ) {
+    super(
+      code === "UNSUPPORTED_EXTENSION"
+        ? `Creating "${extension}" files is not supported in private rooms`
+        : "Encryption keys are not available",
+      code,
+    );
+    this.name = "EncryptedCreateError";
+  }
+}
+
 export class KeyNotFoundError extends CryptoError {
   constructor(keyId?: string) {
     super(`Key not found${keyId ? `: ${keyId}` : ""}`, "KEY_NOT_FOUND");

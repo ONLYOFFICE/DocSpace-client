@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { EncryptedCreateError } from "@docspace/shared/services/encryption/errors";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 import { createEncryptedFile } from "@docspace/shared/services/private-room/encrypted-file-creation";
@@ -112,15 +113,11 @@ export async function runEncryptedFileCreation(
   } = params;
 
   if (!isEncryptedCreateExtension(extension)) {
-    throw new Error(
-      `Creating "${extension}" files is not supported in private rooms`,
-    );
+    throw new EncryptedCreateError("UNSUPPORTED_EXTENSION", extension);
   }
 
   if (!userId || !publicKey || !publicKeyId || !roomId) {
-    throw new Error(
-      "Encryption keys are not available — cannot create a file in a private room",
-    );
+    throw new EncryptedCreateError("KEYS_UNAVAILABLE");
   }
 
   const identity = await requireUnlock(userId);

@@ -57,6 +57,8 @@ import {
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { frameCallEvent } from "@docspace/shared/utils/common";
+import { CryptoError } from "@docspace/shared/services/encryption/errors";
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import Dialog from "./sub-components/Dialog";
 
 const CreateEvent = ({
@@ -222,7 +224,11 @@ const CreateEvent = ({
         } catch (error) {
           editorWindow?.close();
           isPaymentRequiredError(error);
-          toastr.error(error);
+          toastr.error(
+            error instanceof CryptoError
+              ? getEncryptionErrorMessage(t, error)
+              : error,
+          );
         } finally {
           onCloseAction();
         }

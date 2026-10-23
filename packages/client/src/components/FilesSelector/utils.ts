@@ -197,9 +197,13 @@ export type TSelectorTransfer =
       deleteSourceOnSuccess: boolean;
     };
 
-/** The room that contains the folder the picker points at, if it is known. */
+/**
+ * The room that contains the folder the picker points at, if it is known.
+ * ui-kit flags the section root with `isRoom`; only the room crumb carries a
+ * room type.
+ */
 export const getPickedRoomId = (breadCrumbs: TBreadCrumb[] | undefined) =>
-  breadCrumbs?.find((crumb) => crumb.isRoom)?.id;
+  breadCrumbs?.find((crumb) => typeof crumb.roomType !== "undefined")?.id;
 
 /**
  * Splits the picker selection for a copy or move according to the

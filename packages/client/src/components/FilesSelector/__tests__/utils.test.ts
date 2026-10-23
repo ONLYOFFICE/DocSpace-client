@@ -1,8 +1,13 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+vi.mock("SRC_DIR/i18n", () => ({
+  default: { t: (key: string) => key },
+}));
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { RoomsType } from "@docspace/shared/enums";
 
 import {
   getIsDisabled,
@@ -10,6 +15,7 @@ import {
   getSelectorTransfer,
   getShowEncryptedTransferBanner,
 } from "../utils";
+import { planPrivateTransfer } from "SRC_DIR/store/filesActionsStore/copyMove.helpers";
 
 const encrypted = (id: number) =>
   ({ id, title: `e${id}.docx`, fileExst: ".docx", encrypted: true }) as TFile;
@@ -183,15 +189,36 @@ describe("FilesSelector destination in another private room", () => {
     ).toBe(false);
   });
 
+  // Crumbs as ui-kit builds them: `isRoom` on the section root, `roomType`
+  // on the room, neither on folders.
+  const pickedCrumbs = (roomId: number) => [
+    { id: 10, label: "Rooms", isRoom: true },
+    { id: roomId, label: "Room", roomType: RoomsType.CustomRoom },
+    { id: 80, label: "Folder" },
+  ];
+  const pickedPlan = (roomId: number) =>
+    planPrivateTransfer({
+      items: [{ id: 1, isFolder: false }],
+      sourceInPrivateRoom: true,
+      sourceRoomId: 7,
+      dest: {
+        private: true,
+        insidePrivateRoom: true,
+        roomId: getPickedRoomId(pickedCrumbs(roomId)),
+      },
+    });
+
   it("Subfolder of another private room", () => {
+    expect(getPickedRoomId(pickedCrumbs(8))).toBe(8);
+    expect(pickedPlan(8).kind).toBe("reencrypt-into");
     expect(
-      getPickedRoomId([
-        { id: 10, label: "Rooms" },
-        { id: 8, label: "Room B", isRoom: true },
-        { id: 80, label: "Folder" },
-      ]),
-    ).toBe(8);
-    expect(getPickedRoomId([{ id: 10, label: "Rooms" }])).toBeUndefined();
+      getPickedRoomId([{ id: 10, label: "Rooms", isRoom: true }]),
+    ).toBeUndefined();
+  });
+
+  it("Subfolder of the same private room", () => {
+    expect(getPickedRoomId(pickedCrumbs(7))).toBe(7);
+    expect(pickedPlan(7)).toEqual({ kind: "same-room" });
   });
 });
 

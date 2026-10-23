@@ -119,7 +119,10 @@ export async function refreshFilesImpl(
     };
 
     const isFiltered =
-      filter.filterType || filter.authorType || filter.search;
+      filter.filterType ||
+      filter.authorType ||
+      filter.search ||
+      filter.hasMetadataFilter();
 
     if ((!currentFile && !folderInfo) || isFiltered) return;
     if (folderInfo && self.selectedFolderStore.id === folderInfo.id) return;

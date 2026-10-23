@@ -2128,6 +2128,7 @@
   "StorageWarning": "Zadržaćete pun pristup od {{amount}} do kraja plaćenog obračunskog perioda. Ako vaš prostor premaši novi limit na početku narednog perioda, bićete naplaćeni za stvarnu upotrebu, zaokruženu na najbližu vrednost u {{storageUnit}}.",
   "SubmenuDetails": "Detalji",
   "SubmenuHistory": "Istorija",
+  "SubmenuMetadata": "Metapodaci",
   "SubmitToGallery": "Podnesi u Galeriju",
   "SubmitToTemplateGallery": "Pošalji u Galeriju predložaka",
   "Subscribe": "Pretplati se",

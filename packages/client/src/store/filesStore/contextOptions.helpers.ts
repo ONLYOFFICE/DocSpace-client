@@ -45,6 +45,11 @@ import { EMPTY_ARRAY } from "@docspace/shared/constants";
 
 import { removeOptions, removeSeparator } from "SRC_DIR/helpers/filesUtils";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
+import type { TMetadataAIItem } from "SRC_DIR/components/panels/MetadataAIPanel/types";
+import {
+  getMetadataAIOptions,
+  METADATA_AI_OPTIONS,
+} from "SRC_DIR/components/panels/MetadataAIPanel/utils";
 
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 
@@ -71,6 +76,7 @@ export type BuildContextOptionsDeps = {
   roomsFilter: FilesStore["roomsFilter"];
   filterType: FilesStore["filterType"];
   filterSearch: FilesStore["filterSearch"];
+  filter: FilesStore["filter"];
 };
 
 export const buildContextOptions = (
@@ -97,6 +103,19 @@ export const buildContextOptions = (
   const canConvert = item.viewAccessibility?.CanConvert;
   const mustConvert = item.viewAccessibility?.MustConvert;
   const isEncrypted = item.encrypted;
+  const metadataAIOptions = getMetadataAIOptions(
+    item as unknown as TMetadataAIItem,
+    {
+      isAIEnabled: deps.settingsStore.aiServicesEnabled,
+      isAIReady: !!deps.settingsStore.aiConfig?.aiReady,
+      isGuest: !!deps.userStore.user?.isVisitor,
+      isPublicRoom: deps.publicRoomStore.isPublicRoom,
+      extsConvertible: deps.filesSettingsStore.extsConvertible,
+    },
+  );
+  const hiddenMetadataAIOptions = METADATA_AI_OPTIONS.filter(
+    (key) => !metadataAIOptions.includes(key),
+  );
   const isDocuSign = false; // TODO: need this prop;
   const isEditing = false; // (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
@@ -204,6 +223,8 @@ export const buildContextOptions = (
       "separator0",
       "ask-ai",
       "analyze-responses",
+      "fill-metadata-ai",
+      "suggest-metadata-ai",
       "separator6",
       "filling-status",
       "start-filling",
@@ -290,7 +311,9 @@ export const buildContextOptions = (
       fileOptions = removeOptions(fileOptions, ["ask-ai"]);
     }
 
-    if (!canAskAi && !canAnalyzeResponses) {
+    fileOptions = removeOptions(fileOptions, hiddenMetadataAIOptions);
+
+    if (!canAskAi && !canAnalyzeResponses && !metadataAIOptions.length) {
       fileOptions = removeOptions(fileOptions, ["separator6"]);
     }
 
@@ -647,7 +670,9 @@ export const buildContextOptions = (
         isRecentFolder ||
         isFavoritesFolder ||
         ((isMyFolder || isRoomsSection) &&
-          (deps.filterType || deps.filterSearch))
+          (deps.filterType ||
+            deps.filterSearch ||
+            deps.filter.hasMetadataFilter()))
       )
     ) {
       fileOptions = removeOptions(fileOptions, ["open-location"]);
@@ -806,6 +831,10 @@ export const buildContextOptions = (
       "open",
       "separator0",
       "link-for-room-members",
+      "separator-metadata-ai",
+      "fill-metadata-ai",
+      "suggest-metadata-ai",
+      "separator6",
       "reconnect-storage",
       "edit-room",
       "invite-users-to-room",
@@ -837,6 +866,13 @@ export const buildContextOptions = (
     if (!item.private) {
       roomOptions = removeOptions(roomOptions, ["download-encrypted"]);
     }
+
+    roomOptions = removeOptions(
+      roomOptions,
+      metadataAIOptions.length
+        ? hiddenMetadataAIOptions
+        : [...METADATA_AI_OPTIONS, "separator-metadata-ai", "separator6"],
+    );
 
     if (!item.external) {
       roomOptions = removeOptions(roomOptions, ["remove-shared-room"]);
@@ -1004,6 +1040,8 @@ export const buildContextOptions = (
     "select",
     "open",
     // "separator0",
+    "fill-metadata-ai",
+    "suggest-metadata-ai",
     "update-xlsx-data",
     "sharing-settings",
     "copy-shared-link",
@@ -1033,6 +1071,8 @@ export const buildContextOptions = (
     "remove-shared-folder-or-file",
     "delete",
   ];
+
+  folderOptions = removeOptions(folderOptions, hiddenMetadataAIOptions);
 
   if (item.external && item.isLinkExpired) {
     folderOptions = ["select", "separator0", "remove-shared-folder-or-file"];
@@ -1205,7 +1245,9 @@ export const buildContextOptions = (
       isRecentFolder ||
       isFavoritesFolder ||
       ((isMyFolder || isRoomsSection) &&
-        (deps.filterType || deps.filterSearch))
+        (deps.filterType ||
+          deps.filterSearch ||
+          deps.filter.hasMetadataFilter()))
     )
   ) {
     folderOptions = removeOptions(folderOptions, ["open-location"]);

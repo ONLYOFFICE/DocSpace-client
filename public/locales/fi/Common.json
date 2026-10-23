@@ -2128,6 +2128,7 @@
   "StorageWarning": "Pidät täydet {{amount}} käyttöoikeutesi voimassa maksetun tilausjakson loppuun asti. Jos tallennustilasi ylittää uuden rajan seuraavan jakson alussa, sinulta veloitetaan todellisen käytön mukaisesti, pyöristettynä lähimpään {{storageUnit}}.",
   "SubmenuDetails": "Yksityiskohdat",
   "SubmenuHistory": "Historia",
+  "SubmenuMetadata": "Metatiedot",
   "SubmitToGallery": "Lähetä Galleriaan",
   "SubmitToTemplateGallery": "Lähetä malligalleriaan",
   "Subscribe": "Tilaa",

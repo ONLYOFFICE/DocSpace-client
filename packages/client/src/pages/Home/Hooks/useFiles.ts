@@ -39,6 +39,7 @@ import { useNavigate, useLocation, useParams } from "react-router";
 
 import { getFolder } from "@docspace/shared/api/files";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { getMetadataTemplates } from "@docspace/shared/api/metadata";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import {
   CREATED_FORM_KEY,
@@ -61,12 +62,39 @@ import type { ValueOf } from "@docspace/shared/types";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { getSectionTrashUrl } from "SRC_DIR/helpers/articleNavigation";
+import {
+  applyMetadataFilter,
+  getMetadataFilterState,
+  pruneMetadataFilter,
+} from "SRC_DIR/pages/Home/Section/Filter/MetadataFilter/utils";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
+
+const dropDeletedMetadata = async (
+  filter: FilesFilter | RoomsFilter,
+  checked: React.RefObject<string>,
+) => {
+  const state = getMetadataFilterState(filter);
+  if (!state) return false;
+
+  const key = JSON.stringify(state);
+  if (key === checked.current) return false;
+
+  const templates = await getMetadataTemplates().catch(() => null);
+  if (!templates) return false;
+
+  const pruned = pruneMetadataFilter(state, templates);
+  checked.current = JSON.stringify(pruned);
+
+  if (checked.current === key) return false;
+
+  applyMetadataFilter(filter, pruned);
+  return true;
+};
 
 export type UseFilesProps = {
   fetchFiles: FilesStore["fetchFiles"];
@@ -113,6 +141,7 @@ const useFiles = ({
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
+  const checkedMetadata = React.useRef("");
 
   const fetchDefaultFiles = (categoryType: ValueOf<typeof CategoryType>) => {
     const filter = FilesFilter.getDefault({
@@ -349,6 +378,22 @@ const useFiles = ({
         : isRooms
           ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
           : FilesFilter.getDefault({ categoryType });
+
+    const href = window.location.href;
+    const isPruned = await dropDeletedMetadata(newFilter, checkedMetadata);
+
+    if (window.location.href !== href) return;
+
+    if (isPruned) {
+      const params =
+        newFilter instanceof RoomsFilter
+          ? newFilter.toUrlParams(userId)
+          : newFilter.toUrlParams();
+
+      navigate(`${location.pathname}?${params}`, { replace: true });
+      return;
+    }
+
     const requests = [Promise.resolve(newFilter)];
 
     await axios

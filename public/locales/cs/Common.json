@@ -2128,6 +2128,7 @@
   "StorageWarning": "Uchováte si plný přístup {{amount}} až do konce placené fakturační období. Pokud vaše úložiště překročí nové limity na začátku dalšího období, bude vám účtována skutečná spotřeba, zaokrouhlená na nejbližší {{storageUnit}}.",
   "SubmenuDetails": "Podrobnosti",
   "SubmenuHistory": "Historie",
+  "SubmenuMetadata": "Metadata",
   "SubmitToGallery": "Odeslat do galerie",
   "SubmitToTemplateGallery": "Odeslat do galerie šablon",
   "Subscribe": "Přihlásit k odběru",

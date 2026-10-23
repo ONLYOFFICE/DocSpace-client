@@ -3,7 +3,7 @@
   "content": "Subscribe",
   "content_en_sha1_hash": "d6981f74767d6c63d6062ad21b3bdfcd0d0d6602",
   "created_at": "2026-08-26T16:05:49.933Z",
-  "updated_at": "2026-08-26T16:06:23.112Z",
+  "updated_at": "2026-10-21T10:17:45.786Z",
   "comment": {
     "text": "Button label in a banner used to initiate the plan upgrade process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 296,
+      "line_number": 297,
       "context": "</div>\n <Button\n primary\n className={styles.bannerButton}\n size={ButtonSize.small}\n label={t(\"Common:Subscribe\")}\n onClick={() => openBuyPlan?.(\"trial\")}\n testId=\"docs_connect_trial_upgrade_button\"\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     }

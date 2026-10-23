@@ -1,0 +1,29 @@
+{
+  "key_path": "ApplyToRoomItemsDescription",
+  "content": "The template and its values will be applied to all new and existing items in this room and its folders.",
+  "content_en_sha1_hash": "11d1e8ee4fcecfa51ee4720d9611768e9e881834",
+  "created_at": "2026-10-21T10:17:41.262Z",
+  "updated_at": "2026-10-21T10:20:42.121Z",
+  "comment": {
+    "text": "Hint under the Apply to all items in this room toggle in the Metadata tab of the info panel.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CascadeBlock/index.tsx",
+      "line_number": 76,
+      "context": "room: t(\"Metadata:ApplyToRoomItems\"),\n };\n \n const descriptions: Record<TCascadeItemType, string> = {\n folder: t(\"Metadata:ApplyToFolderItemsDescription\"),\n room: t(\"Metadata:ApplyToRoomItemsDescription\"),\n };\n \n return (\n <div\n className={styles.cascadeBlock}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

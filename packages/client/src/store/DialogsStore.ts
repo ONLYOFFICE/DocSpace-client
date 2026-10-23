@@ -90,6 +90,7 @@ import type {
   IUpdateRoomGroup,
 } from "SRC_DIR/components/dialogs/EditRoomGroupsDialog/EditRoomGroupsDialog.types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
+import type { TMetadataAIPanelData } from "SRC_DIR/components/panels/MetadataAIPanel/types";
 import type { TModel } from "@onlyoffice/apps-ui-kit/components/room-icon";
 
 import type InfoPanelStore from "./InfoPanelStore";
@@ -339,6 +340,8 @@ class DialogsStore {
     visible: false,
     item: null,
   };
+
+  metadataAIPanelData: TMetadataAIPanelData = { visible: false };
 
   submitToGalleryDialogVisible = false;
 
@@ -1127,6 +1130,10 @@ class DialogsStore {
     item?: unknown;
   }) => {
     this.embeddingPanelData = embeddingPanelData;
+  };
+
+  setMetadataAIPanelData = (metadataAIPanelData: TMetadataAIPanelData) => {
+    this.metadataAIPanelData = metadataAIPanelData;
   };
 
   setMoveToPublicRoomVisible = (visible: boolean, data: unknown = null) => {

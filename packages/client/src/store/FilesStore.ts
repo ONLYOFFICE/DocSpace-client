@@ -1449,6 +1449,7 @@ class FilesStore {
       roomsFilter: this.roomsFilter,
       filterType: this.filterType,
       filterSearch: this.filterSearch,
+      filter: this.filter,
     });
 
   createFile = async (
@@ -2375,14 +2376,16 @@ class FilesStore {
           subjectOwnerId ||
           tags ||
           withoutTags ||
-          quotaFilter
+          quotaFilter ||
+          this.roomsFilter.hasMetadataFilter()
         : authorType ||
           roomId ||
           search ||
           withSubfolders ||
           filterType ||
           searchInContent ||
-          sharedBy;
+          sharedBy ||
+          this.filter.hasMetadataFilter();
 
     return isFiltered;
   }

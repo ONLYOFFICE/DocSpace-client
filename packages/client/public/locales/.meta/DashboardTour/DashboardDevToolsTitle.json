@@ -3,7 +3,7 @@
   "content": "Build with {{organizationName}}",
   "content_en_sha1_hash": "57f6b7253bdb61d642327a73629abc19f33c126d",
   "created_at": "2026-08-31T18:23:46.758Z",
-  "updated_at": "2026-08-31T19:49:23.412Z",
+  "updated_at": "2026-10-21T10:17:45.661Z",
   "comment": {
     "text": "Title for a step in the dashboard onboarding tour introducing developer tools. The {{organizationName}} variable represents the organization's name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
-      "line_number": 195,
+      "line_number": 194,
       "context": "// move on; the one who does now knows the portal has an API side at all,\n // which is the whole point of stopping here.\n hasDevTools &&\n elementStep(\n DEVTOOLS_SELECTOR,\n t(\"DashboardTour:DashboardDevToolsTitle\", {\n organizationName: getBrandName(\"OrganizationName\"),\n }),\n t(\"DashboardTour:DashboardDevTools\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     }

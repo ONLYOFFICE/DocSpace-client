@@ -629,7 +629,8 @@ export function fetchFilesImpl(
             filter.withSubfolders ||
             filter.filterType ||
             filter.searchInContent ||
-            filter.location;
+            filter.location ||
+            filter.hasMetadataFilter();
 
           if (isFiltered) {
             self.setIsEmptyPage(false);
@@ -958,7 +959,8 @@ export function fetchRoomsImpl(
               searchInContentRooms ||
               tags ||
               withoutTags ||
-              filter.quotaFilter;
+              filter.quotaFilter ||
+              filter.hasMetadataFilter();
 
             if (isFiltered) {
               self.setIsEmptyPage(false);

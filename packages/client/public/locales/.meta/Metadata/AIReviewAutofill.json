@@ -1,0 +1,29 @@
+{
+  "key_path": "AIReviewAutofill",
+  "content": "Review autofill",
+  "content_en_sha1_hash": "0c19fb48591e5be4c6d0955b0673fc7d6c8554f9",
+  "created_at": "2026-10-21T10:17:41.256Z",
+  "updated_at": "2026-10-22T13:13:49.652Z",
+  "comment": {
+    "text": "Title of the Fill metadata with AI panel in its review step, where the user checks the values AI filled before saving. Short heading; Review is an imperative verb.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
+      "line_number": 124,
+      "context": ") : null;\n \n const getTitle = () => {\n if (isFill) {\n if (isAnalyzing) return t(\"Metadata:AIFillingTitle\");\n if (isReview) return t(\"Metadata:AIReviewAutofill\");\n \n return t(\"Files:FillMetadataWithAI\");\n }\n \n return isReview",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

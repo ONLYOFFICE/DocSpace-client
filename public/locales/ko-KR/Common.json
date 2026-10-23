@@ -2128,6 +2128,7 @@
   "StorageWarning": "{{amount}}만큼 전체 액세스는 유료 청구 기간이 끝날 때까지 유지됩니다. 다음 기간 시작 시 저장 공간이 새 제한을 초과하면, 가장 가까운 {{storageUnit}} 단위로 반올림하여 실제 사용량에 따라 요금이 부과됩니다.",
   "SubmenuDetails": "세부 정보",
   "SubmenuHistory": "기록",
+  "SubmenuMetadata": "메타데이터",
   "SubmitToGallery": "갤러리에 제출",
   "SubmitToTemplateGallery": "템플릿 갤러리에 제출",
   "Subscribe": "구독하기",

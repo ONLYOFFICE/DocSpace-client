@@ -3,7 +3,7 @@
   "content": "Couldn't cancel the subscription. Try again later or contact support.",
   "content_en_sha1_hash": "a235cdb35873d937b2b32033b0749821bbebc5c7",
   "created_at": "2026-10-10T12:49:51.527Z",
-  "updated_at": "2026-10-10T12:52:08.719Z",
+  "updated_at": "2026-10-21T10:17:45.817Z",
   "comment": {
     "text": "Error toast shown when the billing service declines cancelling or removing the Docs Connect subscription from the Cancel subscription or Remove subscription dialog (Developer tools and Payments add-ons pages). Full sentence; subscription means the paid Docs Connect plan.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/DocsConnectStore.ts",
-      "line_number": 94,
+      "line_number": 95,
       "context": "export type BuyPlanMode = \"trial\" | \"edit\";\n \n const getDeclinedMessage = (action: TDocsConnectDeclinedAction) => {\n switch (action) {\n case \"cancelPlan\":\n return i18n.t(\"DocsConnect:PlanCancellationFailed\");\n case \"cancelScheduledChange\":\n return i18n.t(\"DocsConnect:ScheduledChangeCancellationFailed\");\n case \"buyPlan\":\n return i18n.t(\"DocsConnect:PlanUpdateFailed\");\n case \"switchToDevPack\":",
       "module": "/packages/client"
     }

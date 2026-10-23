@@ -71,6 +71,8 @@ const BOB_ID = "22222222-2222-2222-2222-222222222222";
 const PLAN = { id: 8951, name: "plan.txt", text: "Plan of record." };
 /** A file of the destination room whose decrypted name is the same as PLAN's. */
 const OLDER_PLAN = { id: 8961, name: "plan.txt", text: "Older plan." };
+/** An earlier copy of PLAN next to it in the source room. */
+const PLAN_COPY = { id: 8952, name: "plan (1).txt", text: "First copy." };
 
 type TKeyHolder = {
   userId: string;
@@ -123,7 +125,12 @@ const serveTwoPrivateRooms = async (
   page: Page,
   mockRequest: WorkerFixture,
   baseUrl: string,
-  { sourceArchived = false, destHoldsPlan = false, destHoldsFolder = false } = {},
+  {
+    sourceArchived = false,
+    sourceHoldsCopy = false,
+    destHoldsPlan = false,
+    destHoldsFolder = false,
+  } = {},
 ): Promise<TRooms> => {
   const { keysHandle, passphrase } = await bootstrapEncryption(
     page,
@@ -147,6 +154,9 @@ const serveTwoPrivateRooms = async (
   };
 
   const seed = await encryptedSeed(PLAN, alice, [alice, memberRecipient]);
+  const sourceFiles = sourceHoldsCopy
+    ? [seed, await encryptedSeed(PLAN_COPY, alice, [alice, memberRecipient])]
+    : [seed];
   const destFiles = destHoldsPlan
     ? [await encryptedSeed(OLDER_PLAN, bob, [bob, memberRecipient])]
     : [];
@@ -166,7 +176,7 @@ const serveTwoPrivateRooms = async (
       title: SOURCE_ROOM_TITLE,
       ownerId: ALICE_ID,
       archived: sourceArchived,
-      initialFiles: [seed],
+      initialFiles: sourceFiles,
       withOtherRooms: true,
       handle: sourceHandle,
     }),
@@ -261,8 +271,12 @@ const row = (page: Page, title: string) =>
  * Opens Copy or Move from the file's menu. With both rights the two sit
  * under "Move or copy"; with one of them the entry stands on its own.
  */
-const openTransferDialog = async (page: Page, action: "copy" | "move") => {
-  await row(page, PLAN.name).getByTestId("context-menu-button").first().click();
+const openTransferDialog = async (
+  page: Page,
+  action: "copy" | "move",
+  fileRow = row(page, PLAN.name),
+) => {
+  await fileRow.getByTestId("context-menu-button").first().click();
   const submenu = page.getByTestId("option_move-or-copy");
   const entry = page.getByTestId(`option_${action}-to`);
   await expect(submenu.or(entry).first()).toBeVisible({ timeout: 10000 });
@@ -295,15 +309,18 @@ const selectorItem = (page: Page, title: string | RegExp) =>
     .filter({ hasText: title });
 
 /**
- * Picks the destination room from Rooms at the picker's root, or a folder of
- * it, and confirms.
+ * Picks a room from Rooms at the picker's root, the destination room unless
+ * another is named, or a folder of it, and confirms.
  */
-const copyToDestinationRoom = async (page: Page, folderTitle?: string) => {
+const copyToDestinationRoom = async (
+  page: Page,
+  { room = DEST_ROOM_TITLE, folder }: { room?: string; folder?: string } = {},
+) => {
   const picker = selector(page);
   await picker.getByText("Apps", { exact: true }).first().click();
   await selectorItem(page, /^Rooms$/).click();
-  await selectorItem(page, DEST_ROOM_TITLE).click();
-  if (folderTitle) await selectorItem(page, folderTitle).click();
+  await selectorItem(page, room).click();
+  if (folder) await selectorItem(page, folder).click();
   await picker.getByRole("button", { name: "Copy here" }).click();
 };
 
@@ -378,7 +395,7 @@ test.describe("Private room — copy into another private room", () => {
     await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
 
     await openTransferDialog(page, "copy");
-    await copyToDestinationRoom(page, DEST_FOLDER_TITLE);
+    await copyToDestinationRoom(page, { folder: DEST_FOLDER_TITLE });
     await unlockIfPrompted(page, rooms.passphrase);
 
     await expectReencryptedCopy(rooms);
@@ -426,6 +443,39 @@ test.describe("Private room — copy into another private room", () => {
       timeout: 15000,
     });
     await expect(rows).toHaveCount(2);
+  });
+
+  test("Copy of a name that already has a copy", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl, {
+      sourceHoldsCopy: true,
+    });
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    const original = row(page, PLAN.name).filter({ hasNotText: "plan (1)" });
+    await expect(original).toBeVisible({ timeout: 15000 });
+
+    await openTransferDialog(page, "copy", original);
+    await copyToDestinationRoom(page, { room: SOURCE_ROOM_TITLE });
+    await unlockIfPrompted(page, rooms.passphrase);
+
+    await expect
+      .poll(() => rooms.sourceHandle.getFiles().length, { timeout: 30000 })
+      .toBe(3);
+    expect(rooms.sourceHandle.getSessions().map((s) => s.encrypted)).toEqual([
+      true,
+    ]);
+    await expect(
+      page.getByRole("dialog").filter({ hasText: "Action required" }),
+    ).toHaveCount(0);
+    await expect(
+      page
+        .locator('[data-testid^="table-row-"]')
+        .filter({ hasText: "plan (2)" }),
+    ).toHaveCount(1, { timeout: 15000 });
   });
 
   test("Copy from an archived private room", async ({

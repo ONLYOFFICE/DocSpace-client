@@ -46,12 +46,16 @@ import {
 } from "@docspace/shared/utils/typeGuards";
 import {
   decryptEncryptedItemToFile,
-  addCopySuffix,
   tagFileForCopy,
 } from "@docspace/shared/services/private-room/encrypted-copy";
 import {
+  listDecryptedFileNames,
+  resolveNameClashes,
+} from "@docspace/shared/services/private-room/encrypted-name-clash";
+import {
   requireUnlock,
 } from "@docspace/shared/services/encryption/secret-storage";
+import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
@@ -370,7 +374,7 @@ self: FilesActionStore,
   };
   const target: TUploadTarget = { ...destTarget, ...destContext };
 
-  const filesToUpload: ReturnType<typeof tagFileForCopy>[] = [];
+  const decrypted: { item: TActionItem; file: File }[] = [];
   const failed: string[] = [];
 
   for (const item of items) {
@@ -389,21 +393,7 @@ self: FilesActionStore,
         identity,
         sourceRoomId as number | string,
       );
-
-      const newName = sameRoom
-        ? addCopySuffix(decryptedFile.name)
-        : decryptedFile.name;
-      const tagged = tagFileForCopy(
-        new File([decryptedFile], newName, { type: decryptedFile.type }),
-        destFolderId as number | string,
-        deleteSourceOnSuccess
-          ? {
-              ...destContext,
-              moveSource: { fileId: item.id, title: item.title },
-            }
-          : destContext,
-      );
-      filesToUpload.push(tagged);
+      decrypted.push({ item, file: decryptedFile });
     } catch (error) {
       console.error(
         `[ENCRYPTION] client copy failed for file ${item.id}:`,
@@ -412,6 +402,29 @@ self: FilesActionStore,
       failed.push(item.title);
     }
   }
+
+  const copyNames =
+    sameRoom && decrypted.length > 0
+      ? await sameRoomCopyNames(
+          decrypted,
+          destFolderId as number | string,
+          destTarget.encryptionRoomId as number | string,
+          String(userId),
+          identity,
+        )
+      : new Map<TActionItem, string>();
+  const filesToUpload = decrypted.map(({ item, file }) =>
+    tagFileForCopy(
+      new File([file], copyNames.get(item) ?? file.name, { type: file.type }),
+      destFolderId as number | string,
+      deleteSourceOnSuccess
+        ? {
+            ...destContext,
+            moveSource: { fileId: item.id, title: item.title },
+          }
+        : destContext,
+    ),
+  );
 
   if (filesToUpload.length > 0) {
     self.uploadDataStore.startUpload(filesToUpload, target, i18n.t);
@@ -428,6 +441,32 @@ self: FilesActionStore,
       reportFailed(failed);
     }
   }
+};
+
+// Spec: private-rooms/file-operations, "Copy within the same private room".
+const sameRoomCopyNames = async (
+  decrypted: { item: TActionItem; file: File }[],
+  destFolderId: number | string,
+  roomId: number | string,
+  userId: string,
+  identity: IdentityKeyPair,
+): Promise<Map<TActionItem, string>> => {
+  let existingNames: string[] = [];
+  try {
+    existingNames = await listDecryptedFileNames(
+      destFolderId,
+      roomId,
+      userId,
+      identity,
+    );
+  } catch (error) {
+    console.error("[ENCRYPTION] same-room copy names not listed:", error);
+  }
+  const clashes = resolveNameClashes(
+    decrypted.map(({ item, file }) => ({ item, name: file.name })),
+    [...existingNames, ...decrypted.map(({ file }) => file.name)],
+  );
+  return new Map(clashes.map(({ item, renamed }) => [item, renamed]));
 };
 
 /**

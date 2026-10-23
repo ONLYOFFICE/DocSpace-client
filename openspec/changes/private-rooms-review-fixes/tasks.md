@@ -9,7 +9,7 @@
 
 ## 2. Same-room copy suffix
 
-- [ ] 2.1 Name same-room copies with the first free suffix of the destination in `copyEncryptedFilesToFolderImpl` (design D4); verify with the case "Copy of a name that already has a copy" in `FilesActionsStore.encryptedMove.test.ts` (destination holds "Report.docx" and "Report (1).docx", the copy is "Report (2).docx", no clash prompt) and an E2E case of that name in `private-room-cross-room-copy.spec.ts` in Docker
+- [x] 2.1 Name same-room copies with the first free suffix of the destination in `copyEncryptedFilesToFolderImpl` (design D4); verify with the case "Copy of a name that already has a copy" in `FilesActionsStore.encryptedMove.test.ts` (destination holds "Report.docx" and "Report (1).docx", the copy is "Report (2).docx", no clash prompt) and an E2E case of that name in `private-room-cross-room-copy.spec.ts` in Docker
 
 ## 3. Section drop right
 

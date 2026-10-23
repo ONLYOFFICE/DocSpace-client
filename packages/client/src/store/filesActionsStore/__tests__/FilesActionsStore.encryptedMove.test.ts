@@ -15,6 +15,11 @@ vi.mock("@docspace/shared/services/private-room/encrypted-copy", async (io) => (
   }),
 }));
 
+vi.mock("@docspace/shared/services/private-room/encrypted-name-clash", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  listDecryptedFileNames: vi.fn(async () => []),
+}));
+
 vi.mock("@docspace/shared/api/files", async (io) => ({
   ...((await io()) as Record<string, unknown>),
   getFolderPath: vi.fn(),
@@ -27,6 +32,10 @@ import { getFolderPath } from "@docspace/shared/api/files";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { decryptEncryptedItemToFile } from "@docspace/shared/services/private-room/encrypted-copy";
+import {
+  listDecryptedFileNames,
+  resolveNameClashes,
+} from "@docspace/shared/services/private-room/encrypted-name-clash";
 
 declare function allowConsoleError(matcher: RegExp | string): void;
 
@@ -285,5 +294,25 @@ describe("FilesActionsStore - encrypted files copied into another private room",
     expect(target()).toEqual(roomTarget(SOURCE_ROOM));
     expect(uploaded()[0].name).not.toBe("ok.docx");
     expect(uploaded()[0].name).toMatch(/^ok.*\.docx$/);
+  });
+
+  it("Copy of a name that already has a copy", async () => {
+    const existing = ["Report.docx", "Report (1).docx"];
+    vi.mocked(listDecryptedFileNames).mockResolvedValueOnce(existing);
+    const { store, uploaded } = setupFrom("active");
+
+    await store.copyEncryptedFilesToFolder(
+      [{ ...ok, title: "Report.docx" }] as never,
+      SOURCE_ROOM,
+      { private: true, sourceRoomId: SOURCE_ROOM },
+    );
+
+    expect(vi.mocked(listDecryptedFileNames).mock.calls).toEqual([
+      [SOURCE_ROOM, SOURCE_ROOM, "user-1", { publicKey: "pk", privateKey: "sk" }],
+    ]);
+    expect(uploaded().map((f) => f.name)).toEqual(["Report (2).docx"]);
+    expect(
+      resolveNameClashes([{ item: 0, name: uploaded()[0].name }], existing),
+    ).toEqual([]);
   });
 });

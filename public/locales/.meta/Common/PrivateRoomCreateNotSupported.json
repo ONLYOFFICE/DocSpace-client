@@ -3,11 +3,11 @@
   "content": "Files with the .{{extension}} extension cannot be created in a private room.",
   "content_en_sha1_hash": "77127c8ab5451aaaf926a69292202f02c86ca2b6",
   "created_at": "2026-10-23T12:00:17.555Z",
-  "updated_at": "2026-10-23T12:02:01.690Z",
+  "updated_at": "2026-10-23T12:27:49.801Z",
   "comment": {
-    "text": "Error toast shown when a file of a type that cannot be encrypted is about to be created inside a private room (only documents, spreadsheets and presentations can be); {{extension}} is the file extension without the dot, such as pdf, so keep the dot written before it.",
+    "text": "Error toast shown when a file of a type a private room cannot create is about to be created inside one (documents, spreadsheets, presentations and PDF files can be); {{extension}} is the file extension without the dot, such as exe, so keep the dot written before it.",
     "is_auto": true,
-    "updated_at": "2026-10-23T12:02:01.690Z",
+    "updated_at": "2026-10-23T12:27:49.801Z",
     "model": "claude-opus-5-5"
   },
   "usage": [

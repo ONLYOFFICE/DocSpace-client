@@ -361,9 +361,10 @@ self: FilesActionStore,
   const deleteSourceOnSuccess =
     destInfo?.deleteSourceOnSuccess === true && !sameRoom;
 
+  // Spec: private-rooms/file-operations, "Queued private uploads are sent only as ciphertext".
   const destContext = {
     roomType: destTarget.isPrivate
-      ? RoomsType.CustomRoom
+      ? (destTarget.roomType ?? undefined)
       : (destTarget.roomType ?? destInfo?.roomType ?? RoomsType.CustomRoom),
     isPrivate: destTarget.isPrivate,
   };

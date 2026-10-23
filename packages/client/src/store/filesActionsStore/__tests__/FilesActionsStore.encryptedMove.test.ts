@@ -128,15 +128,14 @@ describe("FilesActionsStore - encrypted files copied into another private room",
   const DEST_FOLDER = 80;
 
   /** A GET folder/{id}/path answer: the section root, the room, the folder. */
-  const pathTo = (roomId: number, isPrivate: boolean) =>
+  const pathTo = (
+    roomId: number,
+    isPrivate: boolean,
+    roomType = RoomsType.CustomRoom,
+  ) =>
     [
       { id: 10, title: "Rooms", private: false },
-      {
-        id: roomId,
-        title: "Room",
-        roomType: RoomsType.CustomRoom,
-        private: isPrivate,
-      },
+      { id: roomId, title: "Room", roomType, private: isPrivate },
       { id: DEST_FOLDER, title: "Folder", private: false },
     ] as never;
 
@@ -192,6 +191,25 @@ describe("FilesActionsStore - encrypted files copied into another private room",
     expect(uploaded().map((f) => f.name)).toEqual(["ok.docx"]);
     expect(uploaded()[0].uploadContext).toEqual({
       roomType: RoomsType.CustomRoom,
+      isPrivate: true,
+    });
+  });
+
+  it("Copy into a private room with another room type", async () => {
+    vi.mocked(getFolderPath).mockResolvedValue(
+      pathTo(DEST_ROOM, true, RoomsType.PublicRoom),
+    );
+    const { store, uploaded, target } = setupFrom("active");
+
+    await copyToDest(store);
+
+    expect(target()).toEqual({
+      ...roomTarget(DEST_ROOM),
+      folderId: DEST_FOLDER,
+      roomType: RoomsType.PublicRoom,
+    });
+    expect(uploaded()[0].uploadContext).toEqual({
+      roomType: RoomsType.PublicRoom,
       isPrivate: true,
     });
   });

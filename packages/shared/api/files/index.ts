@@ -98,7 +98,6 @@ export async function openEdit(
   fileId: number | string,
   version?: string | number,
   doc?: string,
-  view?: string,
   headers?: Record<string, string>,
   shareKey?: string,
   editorType?: string,

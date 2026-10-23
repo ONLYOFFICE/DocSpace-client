@@ -33,7 +33,7 @@ describe("openEdit", () => {
   });
 
   it("passes the action as a flag next to the other params", async () => {
-    await openEdit(1, undefined, "doc", undefined, undefined, "key", "2", "fill");
+    await openEdit(1, undefined, "doc", undefined, "key", "2", "fill");
 
     expect(getUrl()).toBe(
       "/files/file/1/openedit?doc=doc&share=key&editorType=2&fill=true",
@@ -41,7 +41,7 @@ describe("openEdit", () => {
   });
 
   it("keeps the mode the server returned for an action other than view", async () => {
-    const res = await openEdit(1, undefined, undefined, undefined, undefined, undefined, undefined, "edit");
+    const res = await openEdit(1, undefined, undefined, undefined, undefined, undefined, "edit");
 
     expect(res.editorConfig.mode).toBe("edit");
   });
@@ -49,7 +49,7 @@ describe("openEdit", () => {
   // editorConfig sits at the top level of the response: the mode used to be
   // set on res.config, which threw and left the editor without a refresh
   it("forces the view mode for the view action", async () => {
-    const res = await openEdit(1, undefined, undefined, undefined, undefined, undefined, undefined, "view");
+    const res = await openEdit(1, undefined, undefined, undefined, undefined, undefined, "view");
 
     expect(getUrl()).toBe("/files/file/1/openedit?view=true");
     expect(res.editorConfig.mode).toBe("view");

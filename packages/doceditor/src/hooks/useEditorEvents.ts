@@ -1146,7 +1146,6 @@ const useEditorEvents = ({
       fileInfo.id,
       undefined,
       doc,
-      config?.editorConfig.mode,
       undefined,
       shareKey,
       config?.editorType,

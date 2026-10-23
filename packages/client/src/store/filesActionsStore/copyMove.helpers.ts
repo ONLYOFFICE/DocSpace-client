@@ -366,13 +366,14 @@ self: FilesActionStore,
     destInfo?.deleteSourceOnSuccess === true && !sameRoom;
 
   // Spec: private-rooms/file-operations, "Queued private uploads are sent only as ciphertext".
+  const roomType = destTarget.isPrivate
+    ? destTarget.roomType
+    : (destTarget.roomType ?? destInfo?.roomType ?? RoomsType.CustomRoom);
   const destContext = {
-    roomType: destTarget.isPrivate
-      ? (destTarget.roomType ?? undefined)
-      : (destTarget.roomType ?? destInfo?.roomType ?? RoomsType.CustomRoom),
+    roomType: roomType ?? undefined,
     isPrivate: destTarget.isPrivate,
   };
-  const target: TUploadTarget = { ...destTarget, ...destContext };
+  const target: TUploadTarget = { ...destTarget, roomType };
 
   const decrypted: { item: TActionItem; file: File }[] = [];
   const failed: string[] = [];

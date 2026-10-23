@@ -39,6 +39,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
+  useId,
 } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -46,6 +47,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import {
@@ -117,6 +119,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   description,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
+  const titleId = useId();
   const inputRef = useRef<PasswordInputHandle>(null);
 
   const [passphrase, setPassphrase] = useState("");
@@ -213,12 +216,18 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
       visible={visible}
       onClose={handleCancel}
       displayType={ModalDialogType.modal}
+      displayTypeDetailed={KEY_DIALOG_DISPLAY_TYPE}
+      aria-labelledby={titleId}
       isLoading={!ready}
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {title ??
-          (isNew ? t("Common:CreatePassphrase") : t("Common:EnterPassphrase"))}
+        <span id={titleId}>
+          {title ??
+            (isNew
+              ? t("Common:CreatePassphrase")
+              : t("Common:EnterPassphrase"))}
+        </span>
       </ModalDialog.Header>
 
       <ModalDialog.Body>

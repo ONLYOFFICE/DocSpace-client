@@ -33,13 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useState, useCallback, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -73,6 +74,7 @@ export const RecoveryPhraseDisplayModal: React.FC<
   accountLabel,
 }) => {
   const { t, ready, i18n } = useTranslation(["Common"]);
+  const titleId = useId();
   const [acknowledged, setAcknowledged] = useState(false);
   const [hasSaved, setHasSaved] = useState(false);
 
@@ -151,11 +153,13 @@ export const RecoveryPhraseDisplayModal: React.FC<
       visible={visible}
       onClose={handleCancel}
       displayType={ModalDialogType.modal}
+      displayTypeDetailed={KEY_DIALOG_DISPLAY_TYPE}
+      aria-labelledby={titleId}
       isLoading={!ready}
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {t("Common:RecoveryPhraseTitle")}
+        <span id={titleId}>{t("Common:RecoveryPhraseTitle")}</span>
       </ModalDialog.Header>
 
       <ModalDialog.Body>

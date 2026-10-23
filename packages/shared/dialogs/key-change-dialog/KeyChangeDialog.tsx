@@ -33,13 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
@@ -91,6 +92,7 @@ const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
   onRefuse,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
+  const titleId = useId();
   const [knownFp, setKnownFp] = useState<string>("");
   const [newFp, setNewFp] = useState<string>("");
 
@@ -117,11 +119,13 @@ const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
       visible={visible}
       onClose={onRefuse}
       displayType={ModalDialogType.modal}
+      displayTypeDetailed={KEY_DIALOG_DISPLAY_TYPE}
+      aria-labelledby={titleId}
       isLoading={!ready}
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {t("Common:KeyChangedTitle")}
+        <span id={titleId}>{t("Common:KeyChangedTitle")}</span>
       </ModalDialog.Header>
 
       <ModalDialog.Body>

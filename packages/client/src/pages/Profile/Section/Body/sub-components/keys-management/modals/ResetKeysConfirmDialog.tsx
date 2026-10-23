@@ -33,13 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { KEY_DIALOG_DISPLAY_TYPE } from "@docspace/shared/dialogs/key-dialog-display";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
@@ -62,6 +63,7 @@ export const ResetKeysConfirmDialog: React.FC<ResetKeysConfirmDialogProps> = ({
   isPending,
 }) => {
   const { t } = useTranslation(["Common"]);
+  const titleId = useId();
   const expectedToken = t("Common:ResetEncryptionKeysConfirmationToken");
   const [typed, setTyped] = useState("");
 
@@ -76,10 +78,12 @@ export const ResetKeysConfirmDialog: React.FC<ResetKeysConfirmDialogProps> = ({
       visible={visible}
       onClose={onCancel}
       displayType={ModalDialogType.modal}
+      displayTypeDetailed={KEY_DIALOG_DISPLAY_TYPE}
+      aria-labelledby={titleId}
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {t("Common:ResetEncryptionKeysTitle")}
+        <span id={titleId}>{t("Common:ResetEncryptionKeysTitle")}</span>
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div
@@ -110,7 +114,8 @@ export const ResetKeysConfirmDialog: React.FC<ResetKeysConfirmDialogProps> = ({
             autoFocus
             scale
             isDisabled={isPending}
-            aria-describedby="reset-keys-warning reset-keys-confirmation"
+            aria-labelledby="reset-keys-confirmation"
+            aria-describedby="reset-keys-warning"
             aria-required="true"
           />
         </div>

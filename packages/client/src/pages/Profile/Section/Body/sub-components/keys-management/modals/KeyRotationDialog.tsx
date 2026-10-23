@@ -33,13 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { KEY_DIALOG_DISPLAY_TYPE } from "@docspace/shared/dialogs/key-dialog-display";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
 import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
@@ -69,6 +70,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
   onForgotPassphrase,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
+  const titleId = useId();
 
   const [currentPassphrase, setCurrentPassphrase] = useState("");
   const [newPassphrase, setNewPassphrase] = useState("");
@@ -138,10 +140,14 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
       visible={visible}
       onClose={handleCancel}
       displayType={ModalDialogType.modal}
+      displayTypeDetailed={KEY_DIALOG_DISPLAY_TYPE}
+      aria-labelledby={titleId}
       isLoading={!ready}
       autoMaxHeight
     >
-      <ModalDialog.Header>{t("Common:ChangePassphrase")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        <span id={titleId}>{t("Common:ChangePassphrase")}</span>
+      </ModalDialog.Header>
 
       <ModalDialog.Body>
         <div className={styles.container}>

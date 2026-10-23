@@ -35,13 +35,14 @@
 
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -64,6 +65,8 @@ export const RecoveryPhraseInputModal: React.FC<
   RecoveryPhraseInputModalProps
 > = ({ visible, onSubmit, onCancel, error: externalError, isLoading = false }) => {
   const { t, ready } = useTranslation(["Common"]);
+  const titleId = useId();
+  const hintId = useId();
 
   const [phrase, setPhrase] = useState("");
   const [localError, setLocalError] = useState("");
@@ -118,18 +121,22 @@ export const RecoveryPhraseInputModal: React.FC<
       visible={visible}
       onClose={handleCancel}
       displayType={ModalDialogType.modal}
+      displayTypeDetailed={KEY_DIALOG_DISPLAY_TYPE}
+      aria-labelledby={titleId}
       isLoading={!ready}
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {t("Common:UseRecoveryPhrase")}
+        <span id={titleId}>{t("Common:UseRecoveryPhrase")}</span>
       </ModalDialog.Header>
 
       <ModalDialog.Body>
         <div className={styles.container}>
-          <Text className={styles.description}>
-            {t("Common:RecoveryPhraseInputHint")}
-          </Text>
+          <div id={hintId}>
+            <Text className={styles.description}>
+              {t("Common:RecoveryPhraseInputHint")}
+            </Text>
+          </div>
 
           {error ? (
             <div className={styles.errorBox}>
@@ -148,6 +155,7 @@ export const RecoveryPhraseInputModal: React.FC<
               setLocalError("");
             }}
             placeholder={t("Common:RecoveryPhrasePlaceholder")}
+            aria-labelledby={hintId}
             heightTextArea="120px"
             isDisabled={isLoading || isValidating}
             hasError={!!error}

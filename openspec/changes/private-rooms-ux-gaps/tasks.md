@@ -25,7 +25,7 @@
 
 - [x] 4.1 Implement decrypted folder download in `packages/client/src/store/filesActionsStore/download.helpers.ts` (recursive listing, per-file decrypt, relative paths in the zip, skipped files reported with `Common:EncryptedDownloadPartial`); verify with new cases in `packages/client/src/store/filesActionsStore/__tests__/FilesActionsStore.deleteDownload.test.ts`
 - [x] 4.2 Offer "Download" for folders and the room in `packages/client/src/store/filesStore/contextOptions.helpers.ts` and `packages/client/src/store/ContextOptionsStore.tsx`, and "Download without decryption" in the private-room header menu in `packages/client/src/store/filesActionsStore/menu.helpers.ts`; verify with the headerMenu and contextOptions snapshot tests
-- [ ] 4.3 Add an E2E case for folder download with the decrypted zip to `packages/client/__tests__/private-room-cross-user-download.spec.ts`; verify with Playwright
+- [x] 4.3 Add an E2E case for folder download with the decrypted zip to `packages/client/__tests__/private-room-cross-user-download.spec.ts`; verify with Playwright
 
 ## 5. Keys management dialogs
 

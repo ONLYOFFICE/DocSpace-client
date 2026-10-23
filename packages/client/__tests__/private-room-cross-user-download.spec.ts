@@ -50,6 +50,7 @@ import { encryptFile } from "@docspace/shared/services/encryption/file-keys";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
+import { unzipSync } from "fflate";
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { bootstrapEncryption } from "./fixtures/encryption-helpers";
@@ -59,6 +60,8 @@ const ALICE_ID = "11111111-1111-1111-1111-111111111111";
 const ROOM_ID = 9700;
 const FILE_ID = 8700;
 const ORIGINAL_TEXT = "Cross-user encrypted memo. If you can read this, the unwrap path picked the right roomMemberKeys.";
+const FOLDER_ID = 9710;
+const FOLDER_TITLE = "Reports";
 
 function pubB64(kp: IdentityKeyPair): string {
   return arrayBufferToBase64(kp.publicKey.buffer as ArrayBuffer);
@@ -234,5 +237,148 @@ test.describe("Private room — cross-user file exchange", () => {
     const buf = await fs.readFile(downloadPath as string);
     const decryptedText = new TextDecoder().decode(buf);
     expect(decryptedText).toBe(ORIGINAL_TEXT);
+  });
+
+  test("Folder download", async ({ page, mockRequest, baseUrl }) => {
+    const { keysHandle: bobKeysHandle, passphrase: bobPassphrase } =
+      await bootstrapEncryption(page, mockRequest, baseUrl);
+    const bobPublicKeyB64 = bobKeysHandle.getKeys()[0].publicKey;
+    const alice = await generateIdentityKeyPair();
+
+    // Two files Bob can open and one wrapped for Alice alone, which the zip
+    // leaves out and the partial-download warning names by its server title.
+    const seeds = [
+      { id: 8710, name: "memo.txt", text: "First memo", forBob: true },
+      { id: 8711, name: "plan.txt", text: "Second plan", forBob: true },
+      { id: 8712, name: "secret.txt", text: "Alice only", forBob: false },
+    ];
+    const initialFiles = await Promise.all(
+      seeds.map(async ({ id, name, text, forBob }) => {
+        const plainBytes = new TextEncoder().encode(text);
+        const { encryptedBlob, dek } = await encryptFile(plainBytes, {
+          fileName: name,
+        });
+        const fileKeys = await wrapDekForRecipients({
+          dek,
+          senderIdentity: alice,
+          senderUserId: ALICE_ID,
+          recipients: [
+            { userId: ALICE_ID, publicKey: pubB64(alice) },
+            ...(forBob ? [{ userId: BOB_ID, publicKey: bobPublicKeyB64 }] : []),
+          ],
+          fileId: id,
+        });
+        return {
+          id,
+          title: name,
+          serverTitle: `obfuscated-${id}.txt`,
+          size: plainBytes.byteLength,
+          encrypted: true,
+          fileKeys,
+          bytes: await blobToUint8Array(encryptedBlob),
+          folderId: FOLDER_ID,
+        };
+      }),
+    );
+
+    const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: ALICE_ID,
+        folders: [{ id: FOLDER_ID, title: FOLDER_TITLE }],
+        initialFiles,
+        roomUserKeys: [
+          {
+            id: "bob-1",
+            userId: BOB_ID,
+            publicKey: bobPublicKeyB64,
+            privateKeyEnc: "",
+            date: "2026-01-01T00:00:00.000Z",
+            cryptoEngineId: "",
+          },
+        ],
+      }),
+      ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
+    );
+    accessHandle.current!.setRoomKeys(ROOM_ID, [
+      {
+        id: "alice-1",
+        userId: ALICE_ID,
+        publicKey: pubB64(alice),
+        privateKeyEnc: "",
+      },
+      {
+        id: "bob-1",
+        userId: BOB_ID,
+        publicKey: bobPublicKeyB64,
+        privateKeyEnc: "",
+      },
+    ]);
+
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toContainText(FOLDER_TITLE, { timeout: 15000 });
+
+    const passphrasePrompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    if (await passphrasePrompt.isVisible().catch(() => false)) {
+      await passphrasePrompt
+        .getByRole("button", { name: "Cancel", exact: true })
+        .click();
+      await expect(passphrasePrompt).toBeHidden();
+    }
+
+    const downloadPromise = page.waitForEvent("download", { timeout: 20000 });
+
+    await row.getByTestId("context-menu-button").first().click();
+    const downloadGroup = page.locator("#option_download");
+    await expect(downloadGroup).toBeVisible({ timeout: 5000 });
+    await downloadGroup.hover();
+    await expect(
+      page.getByRole("menuitem", {
+        name: "Download without decryption",
+        exact: true,
+      }),
+    ).toBeVisible({ timeout: 5000 });
+    await page
+      .getByRole("menuitem", { name: "Original format", exact: true })
+      .click();
+
+    try {
+      await passphrasePrompt.waitFor({ state: "visible", timeout: 5000 });
+      await passphrasePrompt
+        .locator('input[name="passphrase"], #passphrase input')
+        .first()
+        .fill(bobPassphrase);
+      await passphrasePrompt.getByRole("button", { name: "Confirm" }).click();
+    } catch {}
+
+    const download = await downloadPromise;
+    expect(download.suggestedFilename()).toBe(`${FOLDER_TITLE}.zip`);
+
+    const fs = await import("node:fs/promises");
+    const entries = unzipSync(
+      new Uint8Array(await fs.readFile((await download.path()) as string)),
+    );
+    const decoded = Object.fromEntries(
+      Object.entries(entries).map(([name, data]) => [
+        name,
+        new TextDecoder().decode(data),
+      ]),
+    );
+    expect(decoded).toEqual({
+      "memo.txt": "First memo",
+      "plan.txt": "Second plan",
+    });
+
+    await expect(
+      page
+        .getByTestId("toast-content")
+        .filter({ hasText: "were left out of the archive" }),
+    ).toContainText("obfuscated-8712.txt", { timeout: 5000 });
   });
 });

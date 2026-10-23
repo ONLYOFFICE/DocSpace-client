@@ -3,7 +3,7 @@
   "content": "Delete template",
   "content_en_sha1_hash": "399bf72aa291de43b5c1c104b4f9d4aacf6ea977",
   "created_at": "2025-05-19T21:30:55.439Z",
-  "updated_at": "2026-10-21T10:17:45.710Z",
+  "updated_at": "2026-10-23T12:28:45.544Z",
   "comment": {
     "text": "This is a button label or part of a dialog title. It appears when a user is prompted to confirm the deletion of a template.",
     "is_auto": true,

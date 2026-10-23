@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2026-07-27T13:07:48.497Z",
-  "updated_at": "2026-10-21T10:17:45.787Z",
+  "updated_at": "2026-10-22T16:09:36.928Z",
   "comment": {
     "text": "Label in a statistics details row indicating the server package type.",
     "is_auto": true,

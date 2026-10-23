@@ -1,0 +1,21 @@
+{
+  "key_path": "ServiceLimitsDescription",
+  "content": "Set spending limits for the whole portal and per user. <1>One limit covers both AI agents & tools and AI search.</1>",
+  "content_en_sha1_hash": "903bed77ba0f92b812292df4e577bc1ce7ac3ca6",
+  "created_at": "2026-10-23T12:28:28.664Z",
+  "updated_at": "2026-10-23T12:28:28.664Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Previous",
   "content_en_sha1_hash": "50f94286ba30706a19070d3ec0a0c8d34d6cf6eb",
   "created_at": "2025-05-19T21:30:47.476Z",
-  "updated_at": "2026-10-21T10:17:45.740Z",
+  "updated_at": "2026-10-22T16:09:36.888Z",
   "comment": {
     "text": "Button label. Navigates to the previous page in a paginated list of items, such as user accounts.",
     "is_auto": true,

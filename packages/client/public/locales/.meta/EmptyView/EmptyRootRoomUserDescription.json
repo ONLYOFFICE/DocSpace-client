@@ -3,7 +3,7 @@
   "content": "The shared room will appear here.",
   "content_en_sha1_hash": "ec24ff68dc23489ef8e9a00fbca2dd55df242e5f",
   "created_at": "2025-05-19T21:30:56.494Z",
-  "updated_at": "2026-10-22T13:13:49.562Z",
+  "updated_at": "2026-10-22T16:09:36.820Z",
   "comment": {
     "text": "This text appears in an empty room that the user does not have access to. It informs the user that shared rooms will be displayed here once they are granted access.",
     "is_auto": true,

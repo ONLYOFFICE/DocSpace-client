@@ -3,7 +3,7 @@
   "content": "LDAP",
   "content_en_sha1_hash": "d8343c683ae1584c96390fa627005bc1bb0719cd",
   "created_at": "2026-08-31T18:23:43.819Z",
-  "updated_at": "2026-10-21T10:17:45.764Z",
+  "updated_at": "2026-10-23T12:28:45.611Z",
   "comment": {
     "text": "Page title and category item title for the LDAP integration settings section.",
     "is_auto": true,

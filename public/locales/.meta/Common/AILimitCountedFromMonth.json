@@ -1,0 +1,29 @@
+{
+  "key_path": "AILimitCountedFromMonth",
+  "content": "Counted from the 1st of the month.",
+  "content_en_sha1_hash": "0d122ea84da0748f9de6c57d475c357f273a099c",
+  "created_at": "2026-10-22T16:08:49.214Z",
+  "updated_at": "2026-10-22T16:10:38.032Z",
+  "comment": {
+    "text": "Hint under the amount and period fields of the Change AI limit dialog when the period is 'per month': explains that monthly spending is counted from the 1st day of the current month.",
+    "is_auto": true,
+    "updated_at": "2026-10-22T16:10:38.032Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeAILimitDialog/index.tsx",
+      "line_number": 147,
+      "context": "const getCountedFromHint = () => {\n switch (period) {\n case \"Week\":\n return t(\"Common:AILimitCountedFromWeek\");\n case \"Month\":\n return t(\"Common:AILimitCountedFromMonth\");\n case \"Lifetime\":\n return t(\"Common:AILimitCountedFromLifetime\");\n default:\n return t(\"Common:AILimitCountedFromDay\");\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

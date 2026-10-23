@@ -81,26 +81,40 @@ export const META_GENERATE_RESULT = {
   skipped: [],
 };
 
-type MetaOptions = { status?: number; result?: JsonBodyType };
+export const META_SERVICE_LIMIT_ERROR = {
+  error: "The model request failed",
+  code: "auth",
+  providerMessage:
+    "403 Service limit exceeded: Service limit exceeded for customer No.10000001. " +
+    "Service group 'ai-services', amount limit 1.2000000000, available -0.1026610350 until 2026-10-23 23:59:59Z",
+};
+
+type MetaOptions = {
+  status?: number;
+  result?: JsonBodyType;
+  /** The body of a failed answer, when `status` is set. */
+  error?: JsonBodyType;
+};
 
 const metaHandler = (
   port: string,
   route: "fill" | "generate",
   result: JsonBodyType,
   status?: number,
+  error: JsonBodyType = { error: "Mocked failure" },
 ) =>
   http.post(`${BASE_URL}:${port}/${API_PREFIX}/ai/meta/${route}`, () =>
     status
-      ? HttpResponse.json({ error: "Mocked failure" }, { status })
+      ? HttpResponse.json(error, { status })
       : HttpResponse.json(result),
   );
 
 export const aiMetaFillHandler = (
   port: string,
-  { status, result = META_FILL_RESULT }: MetaOptions = {},
-) => metaHandler(port, "fill", result, status);
+  { status, result = META_FILL_RESULT, error }: MetaOptions = {},
+) => metaHandler(port, "fill", result, status, error);
 
 export const aiMetaGenerateHandler = (
   port: string,
-  { status, result = META_GENERATE_RESULT }: MetaOptions = {},
-) => metaHandler(port, "generate", result, status);
+  { status, result = META_GENERATE_RESULT, error }: MetaOptions = {},
+) => metaHandler(port, "generate", result, status, error);

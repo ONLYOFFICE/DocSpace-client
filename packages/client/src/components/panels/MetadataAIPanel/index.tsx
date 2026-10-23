@@ -35,6 +35,7 @@
 
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
@@ -44,6 +45,7 @@ import {
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date";
 
 import type { TMetadataSelection } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
 import { useStore } from "SRC_DIR/store/useStore";
@@ -55,6 +57,7 @@ import AICallout from "./sub-components/AICallout";
 import CustomFieldList from "./sub-components/CustomFieldList";
 import FillForms from "./sub-components/FillForms";
 import ReviewNotes from "./sub-components/ReviewNotes";
+import ServiceLimitNotice from "./sub-components/ServiceLimitNotice";
 import styles from "./MetadataAIPanel.module.scss";
 
 type MetadataAIDialogProps = {
@@ -71,6 +74,8 @@ const MetadataAIDialog = ({
   onSaved,
 }: MetadataAIDialogProps) => {
   const { t } = useTranslation(["Metadata", "Files", "Common"]);
+  const { isAdmin, language } = useStore("authStore");
+  const navigate = useNavigate();
 
   const {
     phase,
@@ -79,6 +84,7 @@ const MetadataAIDialog = ({
     drafts,
     summary,
     error,
+    serviceLimit,
     isSaving,
     canSave,
     prompt,
@@ -107,6 +113,30 @@ const MetadataAIDialog = ({
     if (hasNothingToFill) return t("Metadata:AINothingToFill");
 
     return "";
+  };
+
+  const getServiceLimitNotice = () => {
+    if (!serviceLimit) return undefined;
+
+    const date = getCorrectDate(language, serviceLimit.until);
+
+    const openLimits = () => {
+      onClose();
+      navigate("/portal-settings/ai-settings/limits");
+    };
+
+    return (
+      <ServiceLimitNotice
+        title={t("Common:AILimitReached")}
+        description={
+          isAdmin
+            ? t("Common:AILimitReachedResetsOn", { date })
+            : t("Common:AILimitReachedContactAdminResetsOn", { date })
+        }
+        buttonLabel={t("Common:ChangeAILimit")}
+        onClick={isAdmin ? openLimits : undefined}
+      />
+    );
   };
 
   const customFields = metadata ? (
@@ -175,6 +205,7 @@ const MetadataAIDialog = ({
                       : t("Metadata:SuggestMetadata")
                   }
                   error={getCalloutError()}
+                  notice={getServiceLimitNotice()}
                   isDisabled={
                     isAnalyzing ||
                     isSaving ||

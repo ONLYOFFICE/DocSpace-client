@@ -23,10 +23,10 @@ The system SHALL show a dialog when a peer's public key differs from its pin, na
 
 #### Scenario: Peer named in the dialog
 - **WHEN** the key-change dialog opens for a room member whose key changed
-- **THEN** the dialog names the member by display name, as the skipped-member toast does, never by user id
+- **THEN** the dialog names the member by display name, as the skipped-member toast does; the user id stands in only when the name cannot be loaded
 
 ### Requirement: Delete a key
-The system SHALL delete a registered key only after a warning (Common:DeleteKeyWarning) that lists the private rooms in which the user holds file access entries, all of which become unreadable without the user's only key, followed by passphrase confirmation, confirming with Common:EncryptionKeyDeleted.
+The system SHALL delete a registered key only after a warning (Common:DeleteKeyWarning) that lists the private rooms in which the user holds file access entries, all of which become unreadable without the user's only key, followed by passphrase confirmation, confirming with Common:EncryptionKeyDeleted. The confirm action SHALL wait for the list; when the rooms cannot be listed, the warning is shown without it.
 
 #### Scenario: Delete
 - **WHEN** the user confirms the warning and enters the key's passphrase

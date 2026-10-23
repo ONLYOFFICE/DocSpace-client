@@ -29,8 +29,8 @@ Out of scope: any change to the encryption model or transfer rules (see `private
 
 ### Modified Capabilities
 
-- `private-rooms/file-operations`: "Create new file in a private room" (localized creation errors), "Feeds show opaque names" (becomes resolved names), "No decrypted folder download" (becomes decrypted folder download), "Download without decryption" (bulk header menu), "Errors on encrypted paths are localized", "Pickers show resolved names" and "No decryption warning in a Move that stays in the room" (added).
-- `private-rooms/key-management`: "Delete a key" (lists affected rooms), "All key dialogs are modal" (becomes accessible dialogs with an aside variant).
+- `private-rooms/file-operations`: "Create new file in a private room" (localized creation errors), "Feeds show opaque names" (becomes resolved names), "No decrypted folder download" (becomes decrypted folder download), "Download without decryption" (bulk header menu), "Multiple encrypted files download as a decrypted zip" (clashing names get a free suffix), "Context-menu entries withheld for folders in private rooms" (download no longer withheld), "No decrypted folder download in an archived private room" (becomes decrypted folder download there too), "Errors on encrypted paths are localized", "Pickers show resolved names" and "No decryption warning in a Move that stays in the room" (added).
+- `private-rooms/key-management`: "Key-change dialog" (names the peer by display name), "Delete a key" (lists affected rooms), "All key dialogs are modal" (becomes accessible dialogs with an aside variant).
 
 ## Impact
 

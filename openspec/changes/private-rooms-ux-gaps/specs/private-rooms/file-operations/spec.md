@@ -48,7 +48,7 @@ The system SHALL show the decrypted display name of encrypted files in Recent, H
 - **THEN** the opaque names are shown and no unlock prompt is raised by the feed itself
 
 ### Requirement: Decrypted folder download
-The system SHALL offer "Download" for a folder inside a private room and for the room itself; it SHALL decrypt every file in the subtree on the client and save them as one zip with original names, using the same progress and error reporting as the multi-file decrypted download.
+The system SHALL offer "Download" for a folder inside a private room and for the room itself; it SHALL decrypt every file in the subtree on the client and save them as one zip with original names, each under its path inside the folder, a name that clashes inside its folder taking the lowest numbered suffix no other entry has, using the same progress and error reporting as the multi-file decrypted download.
 
 #### Scenario: Folder context menu
 - **WHEN** the context menu of a folder in a private room is opened
@@ -61,6 +61,31 @@ The system SHALL offer "Download" for a folder inside a private room and for the
 #### Scenario: A file cannot be decrypted
 - **WHEN** one file in the subtree has no access entry for the user
 - **THEN** the zip is produced without it and Common:EncryptedDownloadPartial names the skipped file
+
+### Requirement: Multiple encrypted files download as a decrypted zip
+The system SHALL decrypt each selected encrypted file and deliver them together as Files.zip, a decrypted name that clashes with another taking the lowest numbered suffix no other entry has, downloading non-encrypted items of the same selection through the standard path.
+
+#### Scenario: Several encrypted files selected
+- **WHEN** the user downloads a selection of encrypted files
+- **THEN** a single Files.zip containing the decrypted files is saved
+
+#### Scenario: Decrypted names clash
+- **WHEN** two selected files decrypt to the same name and a third already carries that name with the suffix (1)
+- **THEN** the zip holds all three, the clashing one under the suffix (2)
+
+### Requirement: Context-menu entries withheld for folders in private rooms
+The system SHALL NOT show sharing-settings, copy-shared-link, manage-links, link-for-room-members, create-room, favorites, edit-index, copy-to or duplicate for a folder inside a private room, and SHALL add download-encrypted when the folder is downloadable; the standard download decrypts the folder on the client (Decrypted folder download).
+
+#### Scenario: Folder menu in a private room
+- **WHEN** the context menu of a folder inside a private room is built
+- **THEN** none of the listed entries is present
+
+### Requirement: Decrypted folder download in an archived private room
+The system SHALL offer the standard "Download" for a folder inside an archived private room and decrypt it on the client as in an active private room, so no server archive of its ciphertext is offered as a plain download. It SHALL offer download-encrypted for the folder when it is downloadable, and SHALL withhold the other folder entries withheld in an active private room.
+
+#### Scenario: Folder menu in an archived private room
+- **WHEN** the context menu of a folder inside an archived private room is built
+- **THEN** download and download-encrypted are present, and sharing-settings, copy-shared-link, manage-links, link-for-room-members, mark-as-favorite, copy-to and duplicate are absent
 
 ## ADDED Requirements
 
@@ -96,3 +121,6 @@ The system SHALL take every message of an encrypted copy, download or open from 
 
 - FROM: `### Requirement: No decrypted folder download`
 - TO: `### Requirement: Decrypted folder download`
+
+- FROM: `### Requirement: No decrypted folder download in an archived private room`
+- TO: `### Requirement: Decrypted folder download in an archived private room`

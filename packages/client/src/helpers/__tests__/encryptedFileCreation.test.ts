@@ -83,7 +83,7 @@ describe("isEncryptedCreateExtension", () => {
     expect(isEncryptedCreateExtension("docx")).toBe(true);
     expect(isEncryptedCreateExtension("xlsx")).toBe(true);
     expect(isEncryptedCreateExtension("pptx")).toBe(true);
-    expect(isEncryptedCreateExtension("pdf")).toBe(true);
+    expect(isEncryptedCreateExtension("pdf")).toBe(false);
     expect(isEncryptedCreateExtension("docxf")).toBe(false);
     expect(isEncryptedCreateExtension("")).toBe(false);
     expect(isEncryptedCreateExtension(null)).toBe(false);

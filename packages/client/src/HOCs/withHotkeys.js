@@ -157,7 +157,12 @@ const withHotkeys = (Component) => {
       )
         return;
 
-      if (isPrivacyFolder && extension && !canCreateEncrypted) return;
+      if (
+        isPrivacyFolder &&
+        extension &&
+        (!canCreateEncrypted || extension === "pdf")
+      )
+        return;
 
       const event = new CustomEvent(Events.CREATE, {
         detail: { parentId: currentFolderId, context: "hotkey", extension },

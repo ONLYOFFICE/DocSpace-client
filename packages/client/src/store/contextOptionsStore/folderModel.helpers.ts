@@ -386,22 +386,9 @@ export const getFolderModelImpl = (
 
   const canCreateEncrypted = self.uploadDataStore.shouldEncryptCurrentUpload();
 
-  const createNewPdfForm: TContextOption = {
-    id: "personal_new-pdf-form",
-    key: "new-pdf-form",
-    label: t("Translations:NewForm"),
-    icon: FormReactSvgUrl,
-    onClick: () => self.onCreate("pdf", t),
-  };
-
   const privateFolderActions = [
     ...(canCreateEncrypted
-      ? [
-          createNewDoc,
-          createNewSpreadsheet,
-          createNewPresentation,
-          createNewPdfForm,
-        ]
+      ? [createNewDoc, createNewSpreadsheet, createNewPresentation]
       : []),
     createNewFolder,
     { key: "separator", isSeparator: true },

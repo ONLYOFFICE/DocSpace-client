@@ -81,6 +81,23 @@ describe("useQuickActions — Private section", () => {
     expect(result.current.show).toBe(false);
   });
 
+  it("Create menu opened", () => {
+    const { result } = renderHook(() =>
+      useQuickActions({
+        currentFolderId: 50,
+        isPrivacyFolder: true,
+        canCreateFiles: true,
+        canCreateEncrypted: true,
+      }),
+    );
+
+    expect(result.current.items.map((item) => item.id)).toEqual([
+      "quick-docx",
+      "quick-xlsx",
+      "quick-pptx",
+    ]);
+  });
+
   it("keeps the room tiles and the AI tile of the Rooms list", () => {
     const { result } = renderHook(() =>
       useQuickActions({ ...privateList, canCreateRooms: true }),

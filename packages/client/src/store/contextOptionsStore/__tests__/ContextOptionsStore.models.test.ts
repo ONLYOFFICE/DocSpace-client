@@ -58,6 +58,24 @@ describe("ContextOptionsStore.getFolderModel — characterization", () => {
     expect(Array.isArray(model)).toBe(true);
     expect(menuShape(model as unknown[])).toMatchSnapshot();
   });
+
+  it("Create menu opened", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: { security: { Create: true } },
+      treeFoldersStore: { isPrivacyFolder: true },
+      uploadDataStore: { shouldEncryptCurrentUpload: () => true },
+    });
+    const model = store.getFolderModel(t) as { key: string }[];
+
+    expect(model.map((option) => option.key)).toEqual([
+      "new-document",
+      "new-spreadsheet",
+      "new-presentation",
+      "new-folder",
+      "separator",
+      "upload-files",
+    ]);
+  });
 });
 
 describe("ContextOptionsStore.getGroupContextOptions — characterization", () => {

@@ -43,7 +43,7 @@ import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/
 const mocks = vi.hoisted(() => ({
   getCached: vi.fn(),
   requireUnlock: vi.fn(),
-  ensureDecryptedFilename: vi.fn(async () => {}),
+  recoverEncryptedFilenames: vi.fn(async () => {}),
   getFileInfo: vi.fn(),
 }));
 
@@ -62,7 +62,7 @@ vi.mock(
   "@docspace/shared/services/private-room/encrypted-filename-recovery",
   async (io) => ({
     ...((await io()) as Record<string, unknown>),
-    ensureDecryptedFilename: mocks.ensureDecryptedFilename,
+    recoverEncryptedFilenames: mocks.recoverEncryptedFilenames,
   }),
 );
 
@@ -118,8 +118,8 @@ describe("History — encrypted names", () => {
     renderHistory(701);
 
     await waitFor(() =>
-      expect(mocks.ensureDecryptedFilename).toHaveBeenCalledWith(
-        { id: 701, viewUrl: "http://x/701", encrypted: true },
+      expect(mocks.recoverEncryptedFilenames).toHaveBeenCalledWith(
+        [{ id: 701, viewUrl: "http://x/701" }],
         "user-1",
         identity,
         ROOM_ID,
@@ -137,7 +137,7 @@ describe("History — encrypted names", () => {
 
     expect(screen.getByText("opaque-702")).toBeInTheDocument();
     expect(mocks.getFileInfo).not.toHaveBeenCalled();
-    expect(mocks.ensureDecryptedFilename).not.toHaveBeenCalled();
+    expect(mocks.recoverEncryptedFilenames).not.toHaveBeenCalled();
     expect(mocks.requireUnlock).not.toHaveBeenCalled();
   });
 });

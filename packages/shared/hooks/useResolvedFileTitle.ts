@@ -43,7 +43,7 @@ import {
 } from "../services/encryption/filename-cache";
 import { useEncryptionOptional } from "../context/encryption/EncryptionContext";
 import { SecretStorage } from "../services/encryption/secret-storage";
-import { ensureDecryptedFilename } from "../services/private-room/encrypted-filename-recovery";
+import { recoverEncryptedFilenames } from "../services/private-room/encrypted-filename-recovery";
 
 type ResolvableFile =
   | {
@@ -101,22 +101,26 @@ export function useEncryptedFilenameRecovery(
     if (!identity) return;
 
     const { pending: files, recovery: current } = latest.current;
-    for (const file of files) {
-      const fileId = file.id as number | string;
-      attempted.current.add(String(fileId));
-      void (async () => {
-        const viewUrl =
-          file.viewUrl ??
-          (await current?.loadViewUrl?.(fileId).catch(() => null));
-        if (!viewUrl) return;
-        await ensureDecryptedFilename(
-          { id: Number(fileId), viewUrl, encrypted: true },
-          userId,
-          identity,
-          roomId,
-        );
-      })();
-    }
+    for (const file of files) attempted.current.add(String(file.id));
+
+    // One batch per list, so the room's member keys load once.
+    void (async () => {
+      const candidates = await Promise.all(
+        files.map(async (file) => {
+          const fileId = file.id as number | string;
+          const viewUrl =
+            file.viewUrl ??
+            (await current?.loadViewUrl?.(fileId).catch(() => null));
+          return viewUrl ? { id: Number(fileId), viewUrl } : null;
+        }),
+      );
+      await recoverEncryptedFilenames(
+        candidates.filter((candidate) => candidate !== null),
+        userId,
+        identity,
+        roomId,
+      );
+    })();
   }, [pendingKey, userId, roomId, isUnlocked]);
 }
 

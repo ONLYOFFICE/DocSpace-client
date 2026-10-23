@@ -40,7 +40,7 @@ import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@onlyoffice/apps-ui-kit";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { formatPeriodEnd } from "@onlyoffice/apps-ui-kit/billing/shared/service-limits/common/utils";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date";
 import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import {
   PORTAL_BASE_THEME_ID,
@@ -79,7 +79,7 @@ const FormsAiChatProviders = ({
         return {
           title: t("Common:AILimitReached"),
           description: t("Common:AILimitReachedContactAdminResetsOn", {
-            date: formatPeriodEnd(serviceLimit.until, i18n.language),
+            date: getCorrectDate(i18n.language, serviceLimit.until),
           }),
           action: null,
         };

@@ -54,6 +54,7 @@ import {
   parseToDateTime,
   formatDate,
   formatDateLocalized,
+  getCorrectDate,
   isBefore,
   isAfter,
 } from "@onlyoffice/apps-ui-kit/utils/date";
@@ -71,7 +72,6 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/toast";
 import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
-import { formatPeriodEnd } from "@onlyoffice/apps-ui-kit/billing/shared/service-limits/common/utils";
 import { getCookie, deleteCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 
 import {
@@ -928,7 +928,7 @@ const Shell = ({ page = "home", ...rest }) => {
 
       const serviceLimit = getServiceLimitChatError(payload);
       if (serviceLimit) {
-        const date = formatPeriodEnd(serviceLimit.until, language);
+        const date = getCorrectDate(language, serviceLimit.until);
 
         return {
           title: t("Common:AILimitReached"),

@@ -54,6 +54,9 @@ services:
       - ../../packages/shared/services:/app/packages/shared/services
       - ../../packages/shared/skeletons:/app/packages/shared/skeletons
       - ../../packages/shared/store:/app/packages/shared/store
+      # Theme tokens (theme.scss) - without this a new CSS variable resolves
+      # to nothing and the text falls back to its inherited color.
+      - ../../packages/shared/styles:/app/packages/shared/styles
       - ../../packages/shared/themes:/app/packages/shared/themes
       - ../../packages/shared/types:/app/packages/shared/types
       - ../../packages/shared/utils:/app/packages/shared/utils

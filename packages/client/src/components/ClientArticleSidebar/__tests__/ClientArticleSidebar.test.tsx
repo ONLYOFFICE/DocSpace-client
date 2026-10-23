@@ -72,7 +72,7 @@ const ClientArticleSidebar = (await import("../index"))
   .default as unknown as React.ComponentType;
 
 describe("ClientArticleSidebar — Private section", () => {
-  it("Frame showing the menu", () => {
+  it("Private item rendered", () => {
     render(
       <Provider
         authStore={{ isAdmin: true, isRoomAdmin: false }}
@@ -94,11 +94,7 @@ describe("ClientArticleSidebar — Private section", () => {
           showArticleLoader: false,
           setIsSectionBodyLoading: vi.fn(),
         }}
-        settingsStore={{
-          aiServicesEnabled: true,
-          isFrame: true,
-          frameConfig: { showMenu: true },
-        }}
+        settingsStore={{ aiServicesEnabled: true }}
         appsStore={{
           isInstalled: () => true,
           isPrivateRoomsSectionAvailable: true,

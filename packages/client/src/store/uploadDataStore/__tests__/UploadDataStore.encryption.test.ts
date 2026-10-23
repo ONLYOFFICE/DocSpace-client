@@ -38,12 +38,14 @@ import {
 } from "./testHarness";
 
 import * as filesApi from "@docspace/shared/api/files";
+import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { requestDeviceSetupHint } from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
+import { tagFileForCopy } from "@docspace/shared/services/private-room/encrypted-copy";
 import {
   EncryptedReimportError,
   makeOpaqueUploadName,
@@ -1054,5 +1056,110 @@ describe("UploadDataStore — upload target fixed when the user starts the uploa
       "Common:EncryptionLockedUpload",
       "Common:EncryptionLockedUpload",
     ]);
+  });
+});
+
+describe("UploadDataStore — copy into another private room", () => {
+  const DEST_ROOM_ID = 60;
+
+  const memberKey = (userId: string, publicKey: string) => ({
+    id: `${userId}-key`,
+    userId,
+    publicKey,
+    privateKeyEnc: "",
+    date: "2026-01-01T00:00:00",
+  });
+
+  it("Destination member without a key", async () => {
+    const { store } = createTestUploadDataStore({ userStore: userWithKeys() });
+    vi.mocked(requireUnlock).mockResolvedValue({ publicKey: "id-pub" } as never);
+    vi.mocked(sniffDse3Upload).mockResolvedValue(null);
+    vi.mocked(prepareEncryptedUpload).mockImplementation(
+      async (config) =>
+        ({
+          data: new Blob([new Uint8Array(config.file.size + 100)]),
+          encrypted: true,
+          dek: makeDek(),
+          uploadFileName: makeOpaqueUploadName(config.file.name),
+          originalFileType: "application/octet-stream",
+          originalFileSize: config.file.size,
+          originalFileName: config.file.name,
+        }) as never,
+    );
+    vi.mocked(filesApi.startUploadSession).mockReturnValue(
+      new Promise(() => {}) as never,
+    );
+    replaceAction(store, "refreshFiles");
+    replaceAction(store, "finishUploadFiles");
+    const handleUploadConflicts = vi.fn();
+    store.handleUploadConflicts = handleUploadConflicts as never;
+
+    store.startUpload(
+      [
+        tagFileForCopy(makeBrowserFile("plan.docx", 100), DEST_ROOM_ID, {
+          roomType: RoomsType.CustomRoom,
+          isPrivate: true,
+        }),
+      ],
+      makePrivateUploadTarget({
+        folderId: DEST_ROOM_ID,
+        encryptionRoomId: DEST_ROOM_ID,
+      }),
+      t,
+    );
+    store.handleFilesUpload(handleUploadConflicts.mock.calls[0][2], t);
+    await vi.waitFor(() =>
+      expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1),
+    );
+
+    const [folderId, , , , encrypted] = vi.mocked(filesApi.startUploadSession)
+      .mock.calls[0];
+    expect([folderId, encrypted]).toEqual([DEST_ROOM_ID, true]);
+
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
+      memberKey("user-1", "pub-b64"),
+      memberKey("bob", "pk-bob"),
+      memberKey("carol", ""),
+    ] as never);
+    vi.mocked(filesApi.getFileEncryptionAccess).mockResolvedValue({
+      fileKeys: [],
+    } as never);
+    vi.mocked(wrapDekForRecipients).mockImplementation(
+      async ({ recipients }) =>
+        recipients.map((r) => ({
+          userId: r.userId,
+          publicKeyId: r.publicKeyId ?? "",
+          privateKeyEnc: `wrap-${r.userId}`,
+        })) as never,
+    );
+    vi.mocked(filesApi.setFileEncryptionKeys).mockResolvedValue(
+      undefined as never,
+    );
+
+    callCheckChunkUpload(store, {
+      res: {
+        uploaded: true,
+        id: 555,
+        file: makeFileInfo({ id: 555, folderId: DEST_ROOM_ID }),
+      },
+      index: 1,
+      indexOfFile: 0,
+      chunksLength: 1,
+      resolve: vi.fn(),
+    });
+
+    await vi.waitFor(() =>
+      expect(filesApi.setFileEncryptionKeys).toHaveBeenCalledTimes(2),
+    );
+    expect(
+      vi
+        .mocked(wrapDekForRecipients)
+        .mock.calls.map(([{ recipients }]) => recipients.map((r) => r.userId)),
+    ).toEqual([["user-1"], ["bob"]]);
+    expect(vi.mocked(getRoomEncryptionKeys).mock.calls).toEqual([
+      [DEST_ROOM_ID],
+    ]);
+    expect(store.files[0].skippedMembers).toBeUndefined();
+    expect(toastr.warning).not.toHaveBeenCalled();
   });
 });

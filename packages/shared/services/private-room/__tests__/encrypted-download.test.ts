@@ -166,6 +166,30 @@ describe("encryptedDownload", () => {
       ).toEqual(["doc.pdf", "doc (1).pdf", "doc (2).pdf"]);
     });
 
+    it("skips a suffix that another name in the list already has", () => {
+      expect(
+        deduplicateFileNames([
+          "New document (2).docx",
+          "New document (1).docx",
+          "New document.docx",
+          "New document.docx",
+        ]),
+      ).toEqual([
+        "New document (2).docx",
+        "New document (1).docx",
+        "New document.docx",
+        "New document (3).docx",
+      ]);
+    });
+
+    it("never takes the name of a later entry", () => {
+      expect(deduplicateFileNames(["a.txt", "a.txt", "a (1).txt"])).toEqual([
+        "a.txt",
+        "a (2).txt",
+        "a (1).txt",
+      ]);
+    });
+
     it("splits on the LAST dot for multi-dot names", () => {
       expect(deduplicateFileNames(["a.b.c", "a.b.c"])).toEqual([
         "a.b.c",

@@ -560,7 +560,11 @@ self: FilesActionStore,encryptedFiles: TActionItem[]
       operationId,
     });
 
-    const zipData = createZipFromBuffers(results);
+    // Decrypted names can clash where the opaque server titles did not.
+    const zipNames = deduplicateFileNames(results.map((r) => r.name));
+    const zipData = createZipFromBuffers(
+      results.map(({ data }, i) => ({ name: zipNames[i], data })),
+    );
     const zipBlob = new Blob([zipData as unknown as BlobPart], {
       type: "application/zip",
     });

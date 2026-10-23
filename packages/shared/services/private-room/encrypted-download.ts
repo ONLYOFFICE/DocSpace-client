@@ -229,28 +229,32 @@ export function createZipFromBuffers(
   return result;
 }
 
+/**
+ * Unique names, in order: the first occurrence of a name keeps it, a later one
+ * gets the lowest " (n)" before the extension that is neither in the list nor
+ * given out already, so "a.txt", "a (1).txt", "a.txt" ends in "a (2).txt".
+ */
 export function deduplicateFileNames(names: string[]): string[] {
-  const counts = new Map<string, number>();
-  const result: string[] = [];
+  const listed = new Set(names);
+  const used = new Set<string>();
 
-  for (const name of names) {
-    const count = counts.get(name) ?? 0;
-    counts.set(name, count + 1);
+  return names.map((name) => {
+    if (!used.has(name)) {
+      used.add(name);
+      return name;
+    }
 
-    if (count === 0) {
-      result.push(name);
-    } else {
-      const dotIdx = name.lastIndexOf(".");
-      if (dotIdx > 0) {
-        const base = name.slice(0, dotIdx);
-        const ext = name.slice(dotIdx);
-        result.push(`${base} (${count})${ext}`);
-      } else {
-        result.push(`${name} (${count})`);
+    const dotIdx = name.lastIndexOf(".");
+    const base = dotIdx > 0 ? name.slice(0, dotIdx) : name;
+    const ext = dotIdx > 0 ? name.slice(dotIdx) : "";
+    for (let n = 1; ; n += 1) {
+      const candidate = `${base} (${n})${ext}`;
+      if (!listed.has(candidate) && !used.has(candidate)) {
+        used.add(candidate);
+        return candidate;
       }
     }
-  }
-  return result;
+  });
 }
 
 export function canUserDecrypt(

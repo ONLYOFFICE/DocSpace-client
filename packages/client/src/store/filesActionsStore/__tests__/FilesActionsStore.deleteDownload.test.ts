@@ -266,3 +266,50 @@ describe("FilesActionsStore — decrypted folder download", () => {
     );
   });
 });
+
+describe("FilesActionsStore — decrypted download of several files", () => {
+  it("names files whose decrypted names clash apart in the zip", async () => {
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
+    } as never);
+    const decrypted: Record<number, string> = {
+      1: "New document (1).docx",
+      2: "New document.docx",
+      3: "New document.docx",
+    };
+    vi.mocked(downloadAndDecryptFileToBuffer).mockImplementation(
+      async ({ fileId }) =>
+        ({
+          success: true,
+          data: new Uint8Array([fileId as number]),
+          fileName: decrypted[fileId as number],
+        }) as never,
+    );
+    const { store: uploadDataStore } = progress();
+    const store = createTestFilesActionsStore({
+      userStore: { user: { id: "user-1" }, encryptionKeys: [{ id: "k1" }] },
+      selectedFolderStore: { id: 10, isRoom: true, navigationPath: [] },
+      uploadDataStore,
+    });
+
+    await store.downloadEncryptedFilesAsZip(
+      [1, 2, 3].map((id) => ({
+        id,
+        title: `opaque-${id}.docx`,
+        encrypted: true,
+        viewUrl: `http://x/${id}`,
+      })) as never,
+    );
+
+    expect(
+      vi.mocked(createZipFromBuffers).mock.calls.at(-1)![0].map((e) => e.name),
+    ).toEqual([
+      "New document (1).docx",
+      "New document.docx",
+      "New document (2).docx",
+    ]);
+    expect(vi.mocked(triggerFileDownload).mock.calls.at(-1)![1]).toBe(
+      "Files.zip",
+    );
+  });
+});

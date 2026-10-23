@@ -34,6 +34,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import axios from "axios";
 import api from "@docspace/shared/api";
 import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
 
@@ -156,8 +157,11 @@ describe("FilesStore.fetchFiles — Private section address", () => {
     };
   };
 
-  const sectionStore = (isPrivateRoomsSectionAvailable = true) => {
-    const store = createTestFilesStore();
+  const sectionStore = (
+    isPrivateRoomsSectionAvailable = true,
+    overrides: Parameters<typeof createTestFilesStore>[0] = {},
+  ) => {
+    const store = createTestFilesStore(overrides);
     store.appsStore = {
       isPrivateRoomsSectionAvailable,
       isInstalled: () => true,
@@ -166,6 +170,12 @@ describe("FilesStore.fetchFiles — Private section address", () => {
     store.maybeBackfillEncryptedRoom = vi.fn();
     return store;
   };
+
+  /** The section loading setters, kept to assert on what the store calls. */
+  const sectionLoading = () => ({
+    setIsSectionHeaderLoading: vi.fn(),
+    setIsSectionFilterLoading: vi.fn(),
+  });
 
   beforeEach(() => {
     navigate = vi.fn();
@@ -289,6 +299,72 @@ describe("FilesStore.fetchFiles — Private section address", () => {
     expect(store.categoryType).toBe(categoryType);
     expect(store.filter).toBe(filter);
     expect(store.selectedFolderStore.id).toBe(selectedFolderId);
+  });
+
+  it("Superseded load", async () => {
+    openAddress("/rooms/shared/6/filter", "?folder=6", { highlightFileId: 70 });
+    const clientLoadingStore = sectionLoading();
+    const store = sectionStore(true, { clientLoadingStore });
+    vi.spyOn(api.files, "getFolder").mockResolvedValue(
+      roomContents(true, true) as never,
+    );
+    vi.spyOn(api.files, "getFolderInfo").mockImplementation(async () => {
+      store.filesController = new AbortController();
+      return { ...ROOM, private: true, security: {} } as never;
+    });
+    const setIsLoadedFetchFiles = vi.fn();
+    const setHighlightFile = vi.fn();
+    store.setIsLoadedFetchFiles = setIsLoadedFetchFiles;
+    store.setHighlightFile = setHighlightFile;
+
+    await store.fetchFiles(6);
+
+    expect(setIsLoadedFetchFiles).not.toHaveBeenCalledWith(true);
+    expect(clientLoadingStore.setIsSectionHeaderLoading).not.toHaveBeenCalled();
+    expect(clientLoadingStore.setIsSectionFilterLoading).not.toHaveBeenCalled();
+    expect(setHighlightFile).not.toHaveBeenCalled();
+  });
+
+  it("Superseded load: a cancelled fetch whose successor took the controller", async () => {
+    openAddress("/private/5/filter", "?folder=5", { highlightFileId: 70 });
+    const clientLoadingStore = sectionLoading();
+    const store = sectionStore(true, { clientLoadingStore });
+    vi.spyOn(api.files, "getFolder").mockImplementation(async () => {
+      store.filesController = new AbortController();
+      throw new axios.Cancel("superseded");
+    });
+    const setIsLoadedFetchFiles = vi.fn();
+    const setHighlightFile = vi.fn();
+    store.setIsLoadedFetchFiles = setIsLoadedFetchFiles;
+    store.setHighlightFile = setHighlightFile;
+
+    await expect(store.fetchFiles(5)).rejects.toBeInstanceOf(axios.Cancel);
+
+    expect(setIsLoadedFetchFiles).not.toHaveBeenCalledWith(true);
+    expect(clientLoadingStore.setIsSectionHeaderLoading).not.toHaveBeenCalled();
+    expect(clientLoadingStore.setIsSectionFilterLoading).not.toHaveBeenCalled();
+    expect(setHighlightFile).not.toHaveBeenCalled();
+  });
+
+  it("Cancelled without a successor", async () => {
+    openAddress("/private/5/filter", "?folder=5");
+    const clientLoadingStore = sectionLoading();
+    const store = sectionStore(true, { clientLoadingStore });
+    vi.spyOn(api.files, "getFolder").mockImplementation(async () => {
+      throw new axios.Cancel("left the page");
+    });
+    const setIsLoadedFetchFiles = vi.fn();
+    store.setIsLoadedFetchFiles = setIsLoadedFetchFiles;
+
+    await expect(store.fetchFiles(5)).rejects.toBeInstanceOf(axios.Cancel);
+
+    expect(setIsLoadedFetchFiles).toHaveBeenLastCalledWith(true);
+    expect(clientLoadingStore.setIsSectionHeaderLoading).toHaveBeenCalledWith(
+      false,
+    );
+    expect(clientLoadingStore.setIsSectionFilterLoading).toHaveBeenCalledWith(
+      false,
+    );
   });
 
   it("leaves the address alone while the section is not available", async () => {

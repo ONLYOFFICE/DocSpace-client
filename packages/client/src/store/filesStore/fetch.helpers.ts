@@ -266,7 +266,8 @@ export function fetchFilesImpl(
   let room: Nullable<TItem> = null;
 
   const controller = self.filesController;
-  let isAddressCorrected = false;
+  // Set when a corrected address or a newer fetch takes the loading over.
+  let isLoadingHandedOver = false;
   const routerLocation = window.DocSpace?.location;
   const address: TFetchAddress = {
     pathname: (routerLocation ?? window.location).pathname,
@@ -284,10 +285,13 @@ export function fetchFilesImpl(
         controller,
       );
 
-      if (sectionCheck.isSuperseded) return;
+      if (sectionCheck.isSuperseded) {
+        isLoadingHandedOver = true;
+        return;
+      }
 
       if (sectionCheck.correction) {
-        isAddressCorrected = true;
+        isLoadingHandedOver = true;
         window.DocSpace.navigate(sectionCheck.correction, {
           replace: true,
           state: {
@@ -735,6 +739,7 @@ export function fetchFilesImpl(
 
       if (axios.isCancel(err)) {
         console.log("Request canceled", err.message);
+        if (controller !== self.filesController) isLoadingHandedOver = true;
 
         throw err;
       }
@@ -788,8 +793,8 @@ export function fetchFilesImpl(
       }
     })
     .finally(() => {
-      // The corrected address loads the folder again and ends the loading.
-      if (isAddressCorrected) return;
+      // Spec: private-rooms/sidebar-section, "Section addresses are decided before the folder is shown".
+      if (isLoadingHandedOver) return;
 
       self.setIsLoadedFetchFiles(true);
 

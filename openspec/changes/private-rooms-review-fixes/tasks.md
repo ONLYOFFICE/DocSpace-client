@@ -17,7 +17,7 @@
 
 ## 4. Superseded folder load
 
-- [ ] 4.1 Leave the loading state to the newer fetch when `checkSectionAddress` reports a superseded fetch, and when a cancelled fetch has a successor, in `packages/client/src/store/filesStore/fetch.helpers.ts` (design D2); verify with the case "Superseded load" in `src/store/filesStore/__tests__/FilesStore.fetchFiles.test.ts` asserting that `setIsLoadedFetchFiles`, the section loading setters and `setHighlightFile` are not called, and a case "Cancelled without a successor" asserting the loading still ends
+- [x] 4.1 Leave the loading state to the newer fetch when `checkSectionAddress` reports a superseded fetch, and when a cancelled fetch has a successor, in `packages/client/src/store/filesStore/fetch.helpers.ts` (design D2); verify with the case "Superseded load" in `src/store/filesStore/__tests__/FilesStore.fetchFiles.test.ts` asserting that `setIsLoadedFetchFiles`, the section loading setters and `setHighlightFile` are not called, and a case "Cancelled without a successor" asserting the loading still ends
 
 ## 5. Tests owed by the specs, comments and the cached-name check
 

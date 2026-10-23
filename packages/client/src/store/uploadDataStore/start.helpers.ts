@@ -321,7 +321,7 @@ export async function handleUploadConflictsImpl(
   toFolderId: number | string | null,
   uploadData: TStartUploadData,
 ) {
-  // Spec: encryption-core, "Opaque upload name with visible extension".
+  // Spec: private-rooms/encryption-core, "Opaque upload name with visible extension".
   const checkedFiles = uploadData.files.filter(
     (f) => !f.target.isPrivate && f.target.roomType !== RoomsType.AIRoom,
   );

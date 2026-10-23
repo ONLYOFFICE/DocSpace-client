@@ -251,7 +251,7 @@ export const planPrivateTransfer = (
   if (destPrivate && isSameId(dest?.roomId, sourceRoomId)) {
     return { kind: "same-room" };
   }
-  // An unknown destination room counts as another room.
+  // Spec: private-rooms/file-operations, "Move into another private room is refused".
   if (destPrivate && move) return { kind: "refuse-move-into" };
 
   const files = items.filter((el) => !el.isFolder);
@@ -723,7 +723,7 @@ self: FilesActionStore,
     dragBufferSelection ? [dragBufferSelection] : self.filesStore.selection
   ).filter((el) => !el.isFolder || el.id !== destFolderId);
 
-  // A drop target is a row or a breadcrumb of the open folder, or a room row.
+  // Spec: private-rooms/file-operations, "Move into another private room is refused".
   const openRoomId = sourceInPrivateRoom ? self.resolveRoomIdForFile(null) : null;
   const { id: openFolderId, navigationPath } = self.selectedFolderStore;
   const destInOpenRoom =

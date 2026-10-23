@@ -973,8 +973,7 @@ export function fetchRoomsImpl(
           self.setFiles(EMPTY_ARRAY);
         });
 
-        // Only a refetch of the list on screen keeps its selection (bug
-        // 75150); a list opened from a room or another list starts with none.
+        // Spec: private-rooms/sidebar-section, "Info panel in the section".
         const isListShown =
           shownFolderId === data.current.id &&
           shownCategoryType === self.categoryType;

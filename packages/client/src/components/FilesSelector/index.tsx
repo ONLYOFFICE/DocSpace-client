@@ -331,8 +331,7 @@ const FilesSelectorWrapper = ({
       const destInfo = {
         private: destInPrivateRoom,
         insidePrivateRoom: destInPrivateRoom,
-        // A move from a private room is pinned to that room. The copy itself
-        // resolves the destination room again before it uploads.
+        // Spec: private-rooms/file-operations, "Move into another private room is refused", "Copy into another private room needs access to it".
         roomId:
           getPickedRoomId(breadCrumbs) ??
           (isMove && sourceInPrivateRoom ? privateRoomId : undefined),

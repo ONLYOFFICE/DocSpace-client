@@ -150,6 +150,25 @@ describe("FilesStore.recoverEncryptedFilenamesForCurrentView — characterizatio
   });
 });
 
+describe("FilesStore — a file created by another member", () => {
+  it("recovers the name of a file that arrives through the socket while unlocked", () => {
+    const store = createTestFilesStore({
+      selectedFolderStore: { id: 50, isRoom: true, navigationPath: [] },
+    });
+    vi.mocked(SecretStorage.getCached).mockReturnValue(IDENTITY as never);
+    store.files = [] as never;
+
+    store.onResolveNewFile({
+      fileInfo: { ...encFile(3), folderId: 50, title: "uuid.docx" } as never,
+    });
+
+    expect(store.files.map((f) => f.id)).toEqual([3]);
+    expect(vi.mocked(recoverEncryptedFilenames).mock.calls).toEqual([
+      [[{ id: 3, viewUrl: "http://x/3" }], "user-1", IDENTITY, 50],
+    ]);
+  });
+});
+
 describe("FilesStore.ensureEncryptedFilenameForFile — characterization", () => {
   it("decrypts an encrypted file's name when unlocked in a room", () => {
     const store = createTestFilesStore({

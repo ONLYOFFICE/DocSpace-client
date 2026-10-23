@@ -439,40 +439,49 @@ class DocsConnectStore {
 
     let isDelayedPaymentMethod = false;
 
-    await pollUntil(async () => {
-      const payer = await this.currentTariffStatusStore?.fetchPayerInfo(true);
-      isDelayedPaymentMethod = payer?.isDelayedPaymentMethod === true;
-      return !!payer?.email;
-    }, signal);
+    try {
+      await pollUntil(async () => {
+        const payer =
+          await this.currentTariffStatusStore?.fetchPayerInfo(true);
+        isDelayedPaymentMethod = payer?.isDelayedPaymentMethod === true;
+        return !!payer?.email;
+      }, signal);
 
-    if (signal.aborted) return null;
+      if (signal.aborted) return null;
 
-    if (isDelayedPaymentMethod) {
-      this.closeBuyPlan();
-      this.refreshPortalState();
-      return { isDelayedPaymentMethod };
+      if (isDelayedPaymentMethod) {
+        this.closeBuyPlan();
+        this.refreshPortalState();
+        return { isDelayedPaymentMethod };
+      }
+
+      await pollUntil(async () => {
+        let info: Nullable<TDocsConnectInfo> = null;
+        try {
+          info = await getDocsConnectInfo(true);
+        } catch {
+          return false;
+        }
+        const activated =
+          !!info &&
+          isDocsConnectPaid(info) &&
+          !info.deactivated &&
+          (info.tenant.payment?.quantity ?? 0) >= users &&
+          (!devPack || info.devPackEnabled === true);
+        if (activated) {
+          runInAction(() => {
+            this.info = info;
+          });
+        }
+        return activated;
+      }, signal);
+    } catch (error) {
+      if (!signal.aborted) {
+        await this.refreshInfo();
+        this.refreshPortalState();
+      }
+      throw error;
     }
-
-    await pollUntil(async () => {
-      let info: Nullable<TDocsConnectInfo> = null;
-      try {
-        info = await getDocsConnectInfo(true);
-      } catch {
-        return false;
-      }
-      const activated =
-        !!info &&
-        isDocsConnectPaid(info) &&
-        !info.deactivated &&
-        (info.tenant.payment?.quantity ?? 0) >= users &&
-        (!devPack || info.devPackEnabled === true);
-      if (activated) {
-        runInAction(() => {
-          this.info = info;
-        });
-      }
-      return activated;
-    }, signal);
 
     if (signal.aborted) return null;
 

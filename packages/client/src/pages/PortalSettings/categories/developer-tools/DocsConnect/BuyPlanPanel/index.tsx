@@ -485,6 +485,9 @@ const BuyPlanPanel = ({
               : t("Common:InsufficientFundsContactPayerShort"),
             t("Common:InsufficientFunds"),
           );
+        } else if (controller) {
+          toastr.error(t("Common:UnexpectedError"));
+          closeBuyPlan?.();
         } else {
           toastr.error(error as Error);
         }

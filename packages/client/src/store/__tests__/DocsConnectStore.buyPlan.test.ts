@@ -94,6 +94,7 @@ import {
   switchDocsConnectToDevPack,
 } from "@docspace/shared/api/docs-connect";
 import { saveDeposite } from "@docspace/shared/api/portal";
+import { pollUntil } from "@onlyoffice/apps-ui-kit/billing/utils/stripe-flow";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
@@ -459,6 +460,20 @@ describe("DocsConnectStore.buyPlanViaStripe", () => {
 
     expect(result).toBeNull();
     expect(store.buyPlanPanelVisible).toBe(true);
+  });
+
+  it("reloads the plan when the wait times out", async () => {
+    const fetchPortalTariff = vi.fn().mockResolvedValue(null);
+    const store = createStore(makeInfo(), { fetchPortalTariff });
+    vi.mocked(pollUntil).mockRejectedValueOnce(new Error("Polling timeout"));
+    mockedGetInfo.mockResolvedValue(makeInfo({ quantity: USERS + 10 }));
+
+    await expect(
+      store.buyPlanViaStripe(stripeArgs(new AbortController().signal)),
+    ).rejects.toThrow("Polling timeout");
+
+    expect(store.info?.tenant.payment?.quantity).toBe(USERS + 10);
+    expect(fetchPortalTariff).toHaveBeenCalledWith(true);
   });
 });
 

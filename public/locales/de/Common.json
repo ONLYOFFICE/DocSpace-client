@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "Für {{month}}",
   "AISearchUsedInMonth": "Keine KI-Suche im {{month}} verwendet",
   "AIServices": "KI-Dienste",
-  "AISpending": "KI-Ausgaben",
   "AIServiceToppedUp": "Der KI-Dienst von {{organizationName}} wurde erfolgreich aktiviert.",
+  "AISpending": "KI-Ausgaben",
   "AISpentOfLimit": "{{spent}} von {{limit}} ausgegeben ({{percent}} %).",
   "AITextModels": "Textmodelle",
   "AIToolsEnabled": "KI-Tools erfolgreich aktiviert",
@@ -2037,6 +2037,7 @@
   "SetDiskSpaceQuota": "Legen Sie die Speicherquote fest, um den maximalen Speicherplatz für diesen Arbeitsbereich zu definieren.",
   "SetPassword": "Passwort festlegen",
   "SetQuotaStorageLimit": "Legen Sie die Quota fest, um den Speicherplatz zu definieren.",
+  "SetSpendingLimit": "Ausgabenlimit festlegen",
   "SetTemplateDescription": "Erstellen Sie einen Space aus einer Vorlage. Einstellungen, Benutzer, Ordner und Formulare werden aus der ausgewählten Vorlage übernommen.",
   "Settings": "Einstellungen",
   "SettingsGeneral": "Allgemein",
@@ -2517,6 +2518,5 @@
   "YourOwnPlatform": "Ihre eigene Plattform",
   "YourPrice": "Ihr Preis",
   "YourTurn": "Jetzt sind Sie dran",
-  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren.",
-  "SetSpendingLimit": "Ausgabenlimit festlegen"
+  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren."
 }

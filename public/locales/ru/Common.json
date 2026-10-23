@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "За {{month}}",
   "AISearchUsedInMonth": "В {{month}} ИИ-поиск не использовался",
   "AIServices": "ИИ-сервисы",
-  "AISpending": "Расходы на ИИ",
   "AIServiceToppedUp": "ИИ-сервис {{organizationName}} успешно включен.",
+  "AISpending": "Расходы на ИИ",
   "AISpentOfLimit": "Потрачено {{spent}} из {{limit}} ({{percent}}%).",
   "AITextModels": "Текстовые модели",
   "AIToolsEnabled": "Сервис ИИ-инструментов успешно включен.",
@@ -2037,6 +2037,7 @@
   "SetDiskSpaceQuota": "Установите квоту хранилища, чтобы определить максимальное дисковое пространство для этого рабочего пространства.",
   "SetPassword": "Задать пароль",
   "SetQuotaStorageLimit": "Установите квоту, чтобы определить лимит хранилища.",
+  "SetSpendingLimit": "Установить лимит расходов",
   "SetTemplateDescription": "Создайте пространство на основе шаблона. Настройки, пользователи, папки и формы будут скопированы из выбранного шаблона.",
   "Settings": "Настройки",
   "SettingsGeneral": "Общие",
@@ -2517,6 +2518,5 @@
   "YourOwnPlatform": "Собственная платформа",
   "YourPrice": "Ваша стоимость",
   "YourTurn": "Ваша очередь",
-  "YouWillBeContacted": "Отдел продаж свяжется с вами после создания запроса.",
-  "SetSpendingLimit": "Установить лимит расходов"
+  "YouWillBeContacted": "Отдел продаж свяжется с вами после создания запроса."
 }

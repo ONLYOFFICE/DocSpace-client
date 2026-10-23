@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "لـ {{month}}",
   "AISearchUsedInMonth": "لم يتم استخدام بحث الذكاء الاصطناعي في {{month}}",
   "AIServices": "خدمات الذكاء الاصطناعي",
-  "AISpending": "إنفاق الذكاء الاصطناعي",
   "AIServiceToppedUp": "{{organizationName}}، تم تفعيل خدمة الذكاء الاصطناعي بنجاح.",
+  "AISpending": "إنفاق الذكاء الاصطناعي",
   "AISpentOfLimit": "تم إنفاق {{spent}} من {{limit}} ({{percent}}%).",
   "AITextModels": "النماذج النصية",
   "AIToolsEnabled": "تم تمكين خدمة أدوات الذكاء الاصطناعي بنجاح.",
@@ -2037,6 +2037,7 @@
   "SetDiskSpaceQuota": "قم بتعيين حصة التخزين لتحديد الحد الأقصى لمساحة القرص لمساحة العمل هذه.",
   "SetPassword": "تعيين كلمة المرور",
   "SetQuotaStorageLimit": "قم بتعيين الحصة لتحديد حد التخزين.",
+  "SetSpendingLimit": "تعيين حد الإنفاق",
   "SetTemplateDescription": "أنشئ مساحة من قالب. سيتم نسخ الإعدادات والمستخدمين والمجلدات والنماذج من القالب المحدد.",
   "Settings": "الإعدادات",
   "SettingsGeneral": "عام",
@@ -2517,6 +2518,5 @@
   "YourOwnPlatform": "منصتك الخاصة",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
-  "SetSpendingLimit": "تعيين حد الإنفاق"
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
 }

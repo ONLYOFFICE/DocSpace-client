@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "Pentru {{month}}",
   "AISearchUsedInMonth": "Nicio căutare IA utilizată în {{month}}",
   "AIServices": "Servicii IA",
-  "AISpending": "Cheltuieli IA",
   "AIServiceToppedUp": "Serviciul IA {{organizationName}} a fost activat cu succes.",
+  "AISpending": "Cheltuieli IA",
   "AISpentOfLimit": "Cheltuit {{spent}} din {{limit}} ({{percent}}%).",
   "AITextModels": "Modele de text",
   "AIToolsEnabled": "Instrumente de IA au fost activate cu succes.",
@@ -2037,6 +2037,7 @@
   "SetDiskSpaceQuota": "Setați cota de stocare pentru a defini spațiul maxim de disc pentru acest spațiu de lucru.",
   "SetPassword": "Setați parola",
   "SetQuotaStorageLimit": "Setați cota pentru a defini limita spațiului de stocare.",
+  "SetSpendingLimit": "Setare limită de cheltuieli",
   "SetTemplateDescription": "Creați un spațiu dintr-un șablon. Setările, utilizatorii, folderele și formularele vor fi copiate din șablonul selectat.",
   "Settings": "Setări",
   "SettingsGeneral": "General",
@@ -2517,6 +2518,5 @@
   "YourOwnPlatform": "Propria dvs. platformă",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
-  "SetSpendingLimit": "Setare limită de cheltuieli"
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
 }

@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "Par {{month}}",
   "AISearchUsedInMonth": "Mēnesī {{month}} MI meklēšana netika izmantota",
   "AIServices": "MI pakalpojumi",
-  "AISpending": "MI izdevumi",
   "AIServiceToppedUp": "{{organizationName}} MI dienests veiksmīgi iespējots.",
+  "AISpending": "MI izdevumi",
   "AISpentOfLimit": "Iztērēti {{spent}} no {{limit}} ({{percent}}%).",
   "AITextModels": "Teksta modeļi",
   "AIToolsEnabled": "MI rīku pakalpojums veiksmīgi aktivizēts.",
@@ -2037,6 +2037,7 @@
   "SetDiskSpaceQuota": "Iestatiet krātuves kvotu, lai definētu maksimālo diska vietu šai darbvietai.",
   "SetPassword": "Iestatīt paroli",
   "SetQuotaStorageLimit": "Iestatiet kvotu, lai definētu krātuves ierobežojumu.",
+  "SetSpendingLimit": "Iestatīt izdevumu limitu",
   "SetTemplateDescription": "Izveidojiet telpu no veidnes. Iestatījumi, lietotāji, mapes un veidlapas tiks kopēti no atlasītās veidnes.",
   "Settings": "Iestatījumi",
   "SettingsGeneral": "Vispārīgi",
@@ -2517,6 +2518,5 @@
   "YourOwnPlatform": "Jūsu pašu platforma",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
-  "SetSpendingLimit": "Iestatīt izdevumu limitu"
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
 }

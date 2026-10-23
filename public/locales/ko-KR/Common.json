@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "{{month}} 기준",
   "AISearchUsedInMonth": "{{month}}에 사용된 AI 검색이 없습니다",
   "AIServices": "인공지능 서비스",
-  "AISpending": "AI 지출",
   "AIServiceToppedUp": "{{organizationName}} AI 서비스가 성공적으로 활성화되었습니다.",
+  "AISpending": "AI 지출",
   "AISpentOfLimit": "{{limit}} 중 {{spent}} 사용({{percent}}%).",
   "AITextModels": "텍스트 모델",
   "AIToolsEnabled": "AI 도구 서비스 활성화되었습니다.",
@@ -2037,6 +2037,7 @@
   "SetDiskSpaceQuota": "이 워크스페이스에 대한 최대 디스크 공간을 정의하려면 스토리지 할당량을 설정하세요.",
   "SetPassword": "비밀번호 설정",
   "SetQuotaStorageLimit": "스토리지 제한을 정의하려면 할당량을 설정하세요.",
+  "SetSpendingLimit": "지출 한도 설정",
   "SetTemplateDescription": "템플릿으로 공간을 만드세요. 선택한 템플릿에서 설정, 사용자, 폴더 및 양식이 복사됩니다.",
   "Settings": "설정",
   "SettingsGeneral": "일반",
@@ -2517,6 +2518,5 @@
   "YourOwnPlatform": "자체 플랫폼",
   "YourPrice": "귀하의 요금",
   "YourTurn": "고객님의 차례입니다",
-  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다.",
-  "SetSpendingLimit": "지출 한도 설정"
+  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다."
 }

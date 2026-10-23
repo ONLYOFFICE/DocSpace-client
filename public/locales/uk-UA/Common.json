@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "За {{month}}",
   "AISearchUsedInMonth": "У {{month}} AI-пошук не використовувався",
   "AIServices": "Послуги AI",
-  "AISpending": "Витрати на AI",
   "AIServiceToppedUp": "Сервіс AI {{organizationName}} успішно увімкнено.",
+  "AISpending": "Витрати на AI",
   "AISpentOfLimit": "Витрачено {{spent}} з {{limit}} ({{percent}}%).",
   "AITextModels": "Текстові моделі",
   "AIToolsEnabled": "Успішно активовано сервіс інструментів на основі штучного інтелекту.",
@@ -2037,6 +2037,7 @@
   "SetDiskSpaceQuota": "Встановіть квоту сховища, щоб визначити максимальний дисковий простір для цього робочого простору.",
   "SetPassword": "Встановити пароль",
   "SetQuotaStorageLimit": "Встановіть квоту, щоб визначити обмеження сховища.",
+  "SetSpendingLimit": "Встановити ліміт витрат",
   "SetTemplateDescription": "Створіть простір на основі шаблону. Параметри, користувачі, папки та форми будуть скопійовані з обраного шаблону.",
   "Settings": "Параметри",
   "SettingsGeneral": "Загальні",
@@ -2517,6 +2518,5 @@
   "YourOwnPlatform": "Власна платформа",
   "YourPrice": "Ваша ціна",
   "YourTurn": "Ваша черга",
-  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів.",
-  "SetSpendingLimit": "Встановити ліміт витрат"
+  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів."
 }

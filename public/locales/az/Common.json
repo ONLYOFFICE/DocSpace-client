@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "{{month}} üçün",
   "AISearchUsedInMonth": "{{month}} ayında süni intellekt axtarışı istifadə olunmayıb",
   "AIServices": "Süni intellekt xidmətləri",
-  "AISpending": "AI xərcləri",
   "AIServiceToppedUp": "{{organizationName}} Süni intellekt xidməti uğurla aktivləşdirildi.",
+  "AISpending": "AI xərcləri",
   "AISpentOfLimit": "{{limit}} məbləğindən {{spent}} xərclənib ({{percent}}%).",
   "AITextModels": "Mətn modelləri",
   "AIToolsEnabled": "Süni intellekt alətləri xidməti uğurla aktivləşdirildi.",
@@ -2037,6 +2037,7 @@
   "SetDiskSpaceQuota": "Bu iş sahəsi üçün maksimum disk yerini müəyyən etmək üçün yaddaş kvotasını təyin edin.",
   "SetPassword": "Şifrə təyin edin",
   "SetQuotaStorageLimit": "Yaddaş limitini müəyyənləşdirmək üçün kvota təyin edin.",
+  "SetSpendingLimit": "Xərc limiti təyin edin",
   "SetTemplateDescription": "Şablondan sahə yaradın. Parametrlər, istifadəçilər, qovluqlar və formalar seçilmiş şablondan kopyalanacaq.",
   "Settings": "Ayarlar",
   "SettingsGeneral": "Ümumi",
@@ -2517,6 +2518,5 @@
   "YourOwnPlatform": "Öz platformanız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
-  "SetSpendingLimit": "Xərc limiti təyin edin"
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
 }

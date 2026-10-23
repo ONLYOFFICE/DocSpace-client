@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "За {{month}}",
   "AISearchUsedInMonth": "Нема коришћене АИ претраге у {{month}}",
   "AIServices": "АИ услуге",
-  "AISpending": "АИ потрошња",
   "AIServiceToppedUp": "{{organizationName}} АИ услуга успешно активирана.",
+  "AISpending": "АИ потрошња",
   "AISpentOfLimit": "Потрошено {{spent}} од {{limit}} ({{percent}}%).",
   "AITextModels": "Текстуални модели",
   "AIToolsEnabled": "Услуга АИ алата је успешно омогућена.",
@@ -2037,6 +2037,7 @@
   "SetDiskSpaceQuota": "Поставите складишну квоту да бисте дефинисали максимални простор на диску за овај радни простор.",
   "SetPassword": "Постави лозинку",
   "SetQuotaStorageLimit": "Поставите квоту да дефинишете лимит складишта.",
+  "SetSpendingLimit": "Постави лимит потрошње",
   "SetTemplateDescription": "Креирајте простор из шаблона. Подешавања, корисници, фасцикле и обрасци биће копирани из изабраног шаблона.",
   "Settings": "Подешавања",
   "SettingsGeneral": "Опште",
@@ -2517,6 +2518,5 @@
   "YourOwnPlatform": "Сопствена платформа",
   "YourPrice": "Ваша цена",
   "YourTurn": "Ваш ред",
-  "YouWillBeContacted": "Продајни тим ће вас контактирати након креирања захтева.",
-  "SetSpendingLimit": "Постави лимит потрошње"
+  "YouWillBeContacted": "Продајни тим ће вас контактирати након креирања захтева."
 }

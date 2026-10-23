@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "Cho {{month}}",
   "AISearchUsedInMonth": "Không có tìm kiếm AI nào được sử dụng trong {{month}}",
   "AIServices": "Dịch vụ AI",
-  "AISpending": "Chi tiêu AI",
   "AIServiceToppedUp": "Dịch vụ AI {{organizationName}} đã được kích hoạt thành công.",
+  "AISpending": "Chi tiêu AI",
   "AISpentOfLimit": "Đã chi {{spent}} trên {{limit}} ({{percent}}%).",
   "AITextModels": "Mô hình văn bản",
   "AIToolsEnabled": "Các công cụ hỗ trợ AI đã được kích hoạt thành công.",
@@ -2037,6 +2037,7 @@
   "SetDiskSpaceQuota": "Đặt hạn mức lưu trữ để xác định dung lượng ổ đĩa tối đa cho không gian làm việc này.",
   "SetPassword": "Đặt mật khẩu",
   "SetQuotaStorageLimit": "Đặt hạn mức để xác định giới hạn lưu trữ.",
+  "SetSpendingLimit": "Đặt giới hạn chi tiêu",
   "SetTemplateDescription": "Tạo một không gian từ mẫu. Cài đặt, người dùng, thư mục và biểu mẫu sẽ được sao chép từ mẫu đã chọn.",
   "Settings": "Cài đặt",
   "SettingsGeneral": "Cài đặt chung",
@@ -2517,6 +2518,5 @@
   "YourOwnPlatform": "Nền tảng của riêng bạn",
   "YourPrice": "Giá của bạn",
   "YourTurn": "Phiên của bạn",
-  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu.",
-  "SetSpendingLimit": "Đặt giới hạn chi tiêu"
+  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu."
 }

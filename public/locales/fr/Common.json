@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "Pour {{month}}",
   "AISearchUsedInMonth": "Aucune recherche IA utilisée en {{month}}",
   "AIServices": "Services IA",
-  "AISpending": "Dépenses IA",
   "AIServiceToppedUp": "Service IA de {{organizationName}} activé avec succès.",
+  "AISpending": "Dépenses IA",
   "AISpentOfLimit": "{{spent}} dépensés sur {{limit}} ({{percent}} %).",
   "AITextModels": "Modèles de texte",
   "AIToolsEnabled": "Service d'outils IA activé avec succès.",
@@ -2037,6 +2037,7 @@
   "SetDiskSpaceQuota": "Définissez le quota de stockage pour définir l'espace de stockage maximum pour cet espace de travail.",
   "SetPassword": "Définir le mot de passe",
   "SetQuotaStorageLimit": "Définissez un quota pour définir la limite de stockage.",
+  "SetSpendingLimit": "Définir une limite de dépenses",
   "SetTemplateDescription": "Créez un espace à partir d'un modèle. Les paramètres, les utilisateurs, les dossiers et les formulaires seront copiés depuis le modèle sélectionné.",
   "Settings": "Paramètres",
   "SettingsGeneral": "Général",
@@ -2517,6 +2518,5 @@
   "YourOwnPlatform": "Votre propre plateforme",
   "YourPrice": "Votre prix",
   "YourTurn": "Votre tour",
-  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande.",
-  "SetSpendingLimit": "Définir une limite de dépenses"
+  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande."
 }

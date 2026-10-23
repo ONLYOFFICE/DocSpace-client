@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "Za {{month}}",
   "AISearchUsedInMonth": "Nie użyto wyszukiwania AI w {{month}}",
   "AIServices": "Usługi AI",
-  "AISpending": "Wydatki na AI",
   "AIServiceToppedUp": "Usługa AI dla {{organizationName}} została pomyślnie włączona.",
+  "AISpending": "Wydatki na AI",
   "AISpentOfLimit": "Wydano {{spent}} z {{limit}} ({{percent}}%).",
   "AITextModels": "Modele tekstowe",
   "AIToolsEnabled": "Usługa narzędzi AI włączona pomyślnie.",
@@ -2037,6 +2037,7 @@
   "SetDiskSpaceQuota": "Ustaw limit pamięci, aby zdefiniować maksymalną przestrzeń dyskową dla tej przestrzeni roboczej.",
   "SetPassword": "Ustaw hasło",
   "SetQuotaStorageLimit": "Ustaw limit pamięci, aby zdefiniować maksymalną przestrzeń dyskową.",
+  "SetSpendingLimit": "Ustaw limit wydatków",
   "SetTemplateDescription": "Utwórz obszar z szablonu. Ustawienia, użytkownicy, foldery i formularze zostaną skopiowane z wybranego szablonu.",
   "Settings": "Ustawienia",
   "SettingsGeneral": "Ogólne",
@@ -2517,6 +2518,5 @@
   "YourOwnPlatform": "Własna platforma",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
-  "SetSpendingLimit": "Ustaw limit wydatków"
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby."
 }

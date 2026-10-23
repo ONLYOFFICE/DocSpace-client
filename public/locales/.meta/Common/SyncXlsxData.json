@@ -3,7 +3,7 @@
   "content": "Sync responses",
   "content_en_sha1_hash": "69c29f831fa2105be7e339c599a8caf76bf70fe8",
   "created_at": "2026-10-01T08:23:09.584Z",
-  "updated_at": "2026-10-22T16:09:36.964Z",
+  "updated_at": "2026-10-23T12:28:45.659Z",
   "comment": {
     "text": "Context menu option label used to trigger the synchronization of data or responses from an XLSX spreadsheet.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 342,
+      "line_number": 343,
       "context": "Boolean(item.external && item.isLinkExpired),\n },\n {\n id: \"option_sync_xlsx_data\",\n key: \"update-xlsx-data\",\n label: t(\"Common:SyncXlsxData\"),\n icon: spreadsheetUrl,\n onClick: () => self.onSyncXlsxData(item, t),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },

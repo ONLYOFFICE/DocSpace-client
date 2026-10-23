@@ -3,7 +3,7 @@
   "content": "Storage management",
   "content_en_sha1_hash": "aee08f8d5281c4277ee7ebdfe0a0f452865e73b5",
   "created_at": "2025-05-19T21:30:52.780Z",
-  "updated_at": "2026-10-22T16:09:36.837Z",
+  "updated_at": "2026-10-23T12:28:45.522Z",
   "comment": {
     "text": "This is a section title in the portal settings. It refers to the management of storage space within ONLYOFFICE DocSpace.",
     "is_auto": true,
@@ -31,13 +31,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 471,
+      "line_number": 488,
       "context": "{\n id: \"portal-settings_catalog-portal-storageManagement\",\n key: \"6\",\n type: PageType.storageManagement,\n link: \"management\",\n tKey: \"StorageManagement\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-storageManagement\",\n key: \"6-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 471,
+      "line_number": 488,
       "context": "{\n id: \"portal-settings_catalog-portal-storageManagement\",\n key: \"6\",\n type: PageType.storageManagement,\n link: \"management\",\n tKey: \"StorageManagement\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-storageManagement\",\n key: \"6-0\",",
       "module": "/packages/client"
     }

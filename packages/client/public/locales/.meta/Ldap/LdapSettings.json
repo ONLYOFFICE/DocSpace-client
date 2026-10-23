@@ -3,7 +3,7 @@
   "content": "LDAP",
   "content_en_sha1_hash": "d8343c683ae1584c96390fa627005bc1bb0719cd",
   "created_at": "2026-08-31T18:23:43.819Z",
-  "updated_at": "2026-10-22T16:09:36.907Z",
+  "updated_at": "2026-10-23T12:28:45.611Z",
   "comment": {
     "text": "Page title and category item title for the LDAP integration settings section.",
     "is_auto": true,
@@ -37,13 +37,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 365,
+      "line_number": 382,
       "context": "{\n id: \"portal-settings_catalog-ldap\",\n key: \"4-0\",\n icon: \"\",\n link: \"ldap\",\n tKey: \"LdapSettings\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-ldap-settings\",\n key: \"4-0-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 373,
+      "line_number": 390,
       "context": "{\n id: \"portal-settings_catalog-ldap-settings\",\n key: \"4-0-0\",\n icon: \"\",\n link: \"settings\",\n tKey: \"Ldap:LdapSettings\",\n },\n {\n id: \"portal-settings_catalog-ldap-sync-data\",\n key: \"4-0-1\",\n icon: \"\",",
       "module": "/packages/client"
     }

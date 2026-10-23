@@ -3,7 +3,7 @@
   "content": "is",
   "content_en_sha1_hash": "b47f363e2b430c0647f14deea3eced9b0ef300ce",
   "created_at": "2026-10-21T10:17:41.286Z",
-  "updated_at": "2026-10-22T13:13:49.711Z",
+  "updated_at": "2026-10-23T12:28:45.607Z",
   "comment": {
     "text": "Operator in the metadata filter for Single select fields (value is the chosen option); lowercase, inserted as {{operator}} into a chip like Status: is · Approved.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/MetadataFilter/utils.ts",
-      "line_number": 371,
+      "line_number": 377,
       "context": "case \"before\":\n return t(\"Metadata:OperatorBefore\");\n case \"after\":\n return t(\"Metadata:OperatorAfter\");\n default:\n return t(\"Metadata:OperatorIs\");\n }\n };\n \n export const getInputLabel = (\n { type, options }: Pick<TMetadataField, \"type\" | \"options\">,",
       "module": "/packages/client"
     }

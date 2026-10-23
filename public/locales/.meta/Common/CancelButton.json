@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-10-22T16:09:36.832Z",
+  "updated_at": "2026-10-23T12:28:45.492Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -172,6 +172,12 @@
       "line_number": 314,
       "context": ": {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton: true,\n cancelButtonLabel: cancelButtonLabel || t(\"CancelButton\"),\n onCancel,\n }\n : {};\n \n const searchSelectorProps: TSelectorSearch = withSearch",
       "module": "@onlyoffice/apps-ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/ConfirmDeleteDialog/index.tsx",
+      "line_number": 101,
+      "context": "testId=\"confirm_delete_button\"\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n isDisabled={isLoading}\n onClick={onClose}\n />\n </ModalDialog.Footer>\n </ModalDialog>",
+      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",
@@ -576,6 +582,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
+      "line_number": 242,
+      "context": "testId=\"metadata_ai_save_button\"\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={isReview ? t(\"Metadata:Discard\") : t(\"Common:CancelButton\")}\n isDisabled={isSaving}\n onClick={isReview ? discard : onClose}\n testId=\"metadata_ai_cancel_button\"\n />\n </ModalDialog.Footer>",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
       "line_number": 409,
       "context": "className=\"cancel-button\"\n scale\n size={ButtonSize.normal}\n isDisabled={isLoading}\n onClick={onCloseAccessSettings}\n label={t(\"Common:CancelButton\")}\n testId=\"template_access_settings_footer_cancel_button\"\n />\n </div>\n </div>\n );",
@@ -648,6 +660,30 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CascadeBlock/ApplyMetadataDialog.tsx",
+      "line_number": 162,
+      "context": "onClick={apply}\n testId=\"metadata_apply_button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n isDisabled={isApplying}\n onClick={onClose}\n testId=\"metadata_apply_cancel_button\"\n />\n </ModalDialog.Footer>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/index.tsx",
+      "line_number": 162,
+      "context": "/>\n )}\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n isDisabled={isSaving}\n onClick={newField ? closeNewField : onClose}\n testId=\"metadata_custom_fields_cancel_button\"\n />\n </ModalDialog.Footer>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/index.tsx",
+      "line_number": 140,
+      "context": "/>\n )}\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n isDisabled={isSaving}\n onClick={onClose}\n testId=\"metadata_template_cancel_button\"\n />\n </ModalDialog.Footer>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/MetadataFilter/sub-components/ConditionsPanel.tsx",
+      "line_number": 166,
+      "context": "testId=\"metadata_filter_apply\"\n />\n <Button\n size={ButtonSize.normal}\n scale\n label={t(\"Common:CancelButton\")}\n onClick={onBack}\n testId=\"metadata_filter_cancel\"\n />\n </div>\n </div>",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/dialogs/reset/index.tsx",
       "line_number": 103,
       "context": "isLoading={loading}\n testId=\"reset-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
@@ -711,6 +747,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
       "line_number": 420,
       "context": "id=\"buttonsPortalRenaming\"\n className=\"save-cancel-buttons\"\n onSaveClick={onOpenModal}\n onCancelClick={onCancelPortalName}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n hasScroll={hasScroll}\n saveButtonDisabled={!!errorValue}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
+      "line_number": 174,
+      "context": "/>\n )}\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={fieldForm ? closeField : onClose}\n testId=\"metadata_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/client"
     },
     {

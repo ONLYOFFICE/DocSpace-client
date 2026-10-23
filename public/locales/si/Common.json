@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "{{month}} සඳහා",
   "AISearchUsedInMonth": "{{month}} හි AI සෙවීමක් භාවිත කර නැත",
   "AIServices": "AI සේවා",
-  "AISpending": "AI වියදම",
   "AIServiceToppedUp": "{{organizationName}} AI සේවාව සාර්ථකව සක්‍රිය කරන ලදී.",
+  "AISpending": "AI වියදම",
   "AISpentOfLimit": "{{limit}} න් {{spent}} ක් වැය කර ඇත ({{percent}}%).",
   "AITextModels": "පෙළ මාදිලි",
   "AIToolsEnabled": "AI මෙවලම් සේවාව සාර්ථකව සක්‍රීය කරන ලදී.",
@@ -2036,6 +2036,7 @@
   "SetDiskSpaceQuota": "මෙම වැඩ අවකාශය සඳහා උපරිම තැටියේ ඉඩ ප්‍රමාණය නිර්වචනය කිරීමට ආචයන සලාකය සකසන්න.",
   "SetPassword": "මුරපදය සකසන්න",
   "SetQuotaStorageLimit": "ආචයන සීමාව නිර්වචනය කිරීමට කෝටාව සකසන්න.",
+  "SetSpendingLimit": "වියදම් සීමාව සකසන්න",
   "SetTemplateDescription": "සැකිල්ලකින් අවකාශයක් සාදන්න. තෝරාගත් සැකිල්ලෙන් සැකසුම්, පරිශීලකයින්, ෆෝල්ඩර සහ පෝරම පිටපත් කරනු ලැබේ.",
   "Settings": "සැකසුම්",
   "SettingsGeneral": "සාමාන්‍ය",
@@ -2516,6 +2517,5 @@
   "YourOwnPlatform": "ඔබේම වේදිකාව",
   "YourPrice": "ඔබගේ මිල",
   "YourTurn": "ඔබේ වාරය.",
-  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත.",
-  "SetSpendingLimit": "වියදම් සීමාව සකසන්න"
+  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත."
 }

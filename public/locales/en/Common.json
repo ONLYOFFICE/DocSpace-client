@@ -176,8 +176,8 @@
   "AISearchSpendMonth": "For {{month}}",
   "AISearchUsedInMonth": "No AI search used in {{month}}",
   "AIServices": "AI services",
-  "AISpending": "AI spending",
   "AIServiceToppedUp": "{{organizationName}} AI service successfully enabled.",
+  "AISpending": "AI spending",
   "AISpentOfLimit": "Spent {{spent}} of {{limit}} ({{percent}}%).",
   "AITextModels": "Text models",
   "AIToolsEnabled": "AI tools service successfully enabled.",
@@ -2041,6 +2041,7 @@
   "SetDiskSpaceQuota": "Set storage quota to define the maximum disk space for this workspace.",
   "SetPassword": "Set password",
   "SetQuotaStorageLimit": "Set quota to define storage limit.",
+  "SetSpendingLimit": "Set spending limit",
   "SetTemplateDescription": "Create a space from a template. Settings, users, folders, and forms will be copied from the selected template.",
   "Settings": "Settings",
   "SettingsGeneral": "General",
@@ -2521,6 +2522,5 @@
   "YourOwnPlatform": "Your own platform",
   "YourPrice": "Your price",
   "YourTurn": "Your turn",
-  "YouWillBeContacted": "The sales team will contact you after creating the request.",
-  "SetSpendingLimit": "Set spending limit"
+  "YouWillBeContacted": "The sales team will contact you after creating the request."
 }

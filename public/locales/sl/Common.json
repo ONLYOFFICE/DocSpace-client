@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "Za {{month}}",
   "AISearchUsedInMonth": "V mesecu {{month}} ni bilo uporabljeno iskanje z AI",
   "AIServices": "AI storitve",
-  "AISpending": "Poraba za AI",
   "AIServiceToppedUp": "AI storitev {{organizationName}} uspešno vključena.",
+  "AISpending": "Poraba za AI",
   "AISpentOfLimit": "Porabljeno {{spent}} od {{limit}} ({{percent}}%).",
   "AITextModels": "Besedilni modeli",
   "AIToolsEnabled": "Orodja umetne inteligence so bila uspešno omogočena.",
@@ -2036,6 +2036,7 @@
   "SetDiskSpaceQuota": "Nastavite kvoto shranjevanja, da določite največji prostor na disku za ta delovni prostor.",
   "SetPassword": "Nastavi geslo",
   "SetQuotaStorageLimit": "Nastavite kvoto, da določite omejitev prostora za shranjevanje.",
+  "SetSpendingLimit": "Nastavi omejitev porabe",
   "SetTemplateDescription": "Ustvarite prostor iz predloge. Nastavitve, uporabniki, mape in obrazci bodo kopirani iz izbrane predloge.",
   "Settings": "Nastavitve",
   "SettingsGeneral": "Splošno",
@@ -2516,6 +2517,5 @@
   "YourOwnPlatform": "Lastna platforma",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
-  "SetSpendingLimit": "Nastavi omejitev porabe"
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala."
 }

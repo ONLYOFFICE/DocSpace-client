@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "Za {{month}}",
   "AISearchUsedInMonth": "V mesiaci {{month}} sa nepoužilo žiadne vyhľadávanie AI",
   "AIServices": "Služby AI",
-  "AISpending": "Výdavky na AI",
   "AIServiceToppedUp": "{{organizationName}} služba AI bola úspešne zapnutá.",
+  "AISpending": "Výdavky na AI",
   "AISpentOfLimit": "Minuté {{spent}} z {{limit}} ({{percent}}%).",
   "AITextModels": "Textové modely",
   "AIToolsEnabled": "Služba nástrojov AI bola úspešne povolená.",
@@ -2036,6 +2036,7 @@
   "SetDiskSpaceQuota": "Nastavte kvótu úložiska, aby ste vymedzili maximálny priestor na disku pre tento pracovný priestor.",
   "SetPassword": "Nastaviť heslo",
   "SetQuotaStorageLimit": "Nastavte kvótu, aby ste vymedzili limit úložiska.",
+  "SetSpendingLimit": "Nastaviť limit výdavkov",
   "SetTemplateDescription": "Vytvorte priestor zo šablóny. Nastavenia, používatelia, priečinky a formuláre sa skopírujú z vybranej šablóny.",
   "Settings": "Nastavenia",
   "SettingsGeneral": "Všeobecné",
@@ -2516,6 +2517,5 @@
   "YourOwnPlatform": "Vlastná platforma",
   "YourPrice": "Vaša cena",
   "YourTurn": "Ste na rade",
-  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím.",
-  "SetSpendingLimit": "Nastaviť limit výdavkov"
+  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím."
 }

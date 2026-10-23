@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "Për {{month}}",
   "AISearchUsedInMonth": "Asnjë kërkim me AI i përdorur në {{month}}",
   "AIServices": "Shërbimet e IA",
-  "AISpending": "Shpenzimet e AI",
   "AIServiceToppedUp": "Shërbimi IA i {{organizationName}} u aktivizua me sukses.",
+  "AISpending": "Shpenzimet e AI",
   "AISpentOfLimit": "U shpenzuan {{spent}} nga {{limit}} ({{percent}}%).",
   "AITextModels": "Modelet e tekstit",
   "AIToolsEnabled": "Shërbimi i mjeteve të inteligjencës artificiale u aktivizua me sukses.",
@@ -2036,6 +2036,7 @@
   "SetDiskSpaceQuota": "Caktoni kuotën e ruajtjes për të përcaktuar hapësirën maksimale të diskut për këtë hapësirë pune.",
   "SetPassword": "Vendos fjalëkalimin",
   "SetQuotaStorageLimit": "Caktoni kuotën për të përcaktuar kufirin e ruajtjes.",
+  "SetSpendingLimit": "Caktoni kufirin e shpenzimeve",
   "SetTemplateDescription": "Krijoni një hapësirë nga një model. Cilësimet, përdoruesit, dosjet dhe formularët do të kopjohen nga modeli i zgjedhur.",
   "Settings": "Cilësimet",
   "SettingsGeneral": "Gjenerale",
@@ -2516,6 +2517,5 @@
   "YourOwnPlatform": "Platforma juaj",
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
-  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
-  "SetSpendingLimit": "Caktoni kufirin e shpenzimeve"
+  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës."
 }

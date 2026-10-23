@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "Voor {{month}}",
   "AISearchUsedInMonth": "Geen AI-zoekopdrachten gebruikt in {{month}}",
   "AIServices": "AI services",
-  "AISpending": "AI-uitgaven",
   "AIServiceToppedUp": "{{organizationName}} AI-service succesvol ingeschakeld.",
+  "AISpending": "AI-uitgaven",
   "AISpentOfLimit": "{{spent}} van {{limit}} besteed ({{percent}}%).",
   "AITextModels": "Tekstmodellen",
   "AIToolsEnabled": "AI-tools service succesvol ingeschakeld.",
@@ -2036,6 +2036,7 @@
   "SetDiskSpaceQuota": "Stel opslagquota in om de maximale schijfruimte voor deze werkruimte te bepalen.",
   "SetPassword": "Wachtwoord instellen",
   "SetQuotaStorageLimit": "Stel quota in om de opslaglimiet te bepalen.",
+  "SetSpendingLimit": "Uitgavenlimiet instellen",
   "SetTemplateDescription": "Maak een ruimte op basis van een sjabloon. Instellingen, gebruikers, mappen en formulieren worden gekopieerd van het geselecteerde sjabloon.",
   "Settings": "Instellingen",
   "SettingsGeneral": "Algemeen",
@@ -2516,6 +2517,5 @@
   "YourOwnPlatform": "Uw eigen platform",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
-  "SetSpendingLimit": "Uitgavenlimiet instellen"
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
 }

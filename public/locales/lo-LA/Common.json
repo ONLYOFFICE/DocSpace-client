@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "ສຳລັບ {{month}}",
   "AISearchUsedInMonth": "ບໍ່ໄດ້ໃຊ້ການຄົ້ນຫາ AI ໃນ {{month}}",
   "AIServices": "ບໍລິການ AI",
-  "AISpending": "ການໃຊ້ຈ່າຍ AI",
   "AIServiceToppedUp": "ການບໍລິການ AI ຂອງ {{organizationName}} ໄດ້ຖືກເປີດໃຊ້ແລ້ວ.",
+  "AISpending": "ການໃຊ້ຈ່າຍ AI",
   "AISpentOfLimit": "ໃຊ້ໄປແລ້ວ {{spent}} ຈາກ {{limit}} ({{percent}}%).",
   "AITextModels": "ຮູບແບບຂໍ້ຄວາມ",
   "AIToolsEnabled": "ເປີດໃຊ້ບໍລິການເຄື່ອງມື AI ສຳເລັດແລ້ວ.",
@@ -2036,6 +2036,7 @@
   "SetDiskSpaceQuota": "ກຳນົດໂກຕ້າການເກັບຮັກສາເພື່ອຕັ້ງຄ່າຂະໜາດສູງສຸດຂອງເນື້ອທີ່ໃນພື້ນທີ່ເຮັດວຽກນີ້.",
   "SetPassword": "ຕັ້ງລະຫັດຜ່ານ",
   "SetQuotaStorageLimit": "ກຳນົດໂກຕ້າເພື່ອຄຸ້ມຄອງຂີດຈຳກັດການເກັບຮັກສາ.",
+  "SetSpendingLimit": "ຕັ້ງຂີດຈຳກັດການໃຊ້ຈ່າຍ",
   "SetTemplateDescription": "ສ້າງສະເປສຈາກແມ່ແບບ. ການຕັ້ງຄ່າ, ຜູ້ໃຊ້, ໂຟນເດີ ແລະ ແບບຟອມ ຈະຖືກສຳເນົາຈາກແມ່ແບບທີ່ເລືອກ.",
   "Settings": "ຕັ້ງຄ່າ",
   "SettingsGeneral": "ທົ່ວໄປ",
@@ -2516,6 +2517,5 @@
   "YourOwnPlatform": "ແພລດຟອມຂອງທ່ານເອງ",
   "YourPrice": "ລາຄາຂອງເຈົ້າ",
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
-  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ.",
-  "SetSpendingLimit": "ຕັ້ງຂີດຈຳກັດການໃຊ້ຈ່າຍ"
+  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ."
 }

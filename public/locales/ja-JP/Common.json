@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "{{month}}分",
   "AISearchUsedInMonth": "{{month}}にAI検索は使用されていません",
   "AIServices": "AIサービス",
-  "AISpending": "AI支出",
   "AIServiceToppedUp": "{{organizationName}} の AI サービスが正常に有効になりました。",
+  "AISpending": "AI支出",
   "AISpentOfLimit": "{{limit}}中{{spent}}を使用済み（{{percent}}%）。",
   "AITextModels": "テキストモデル",
   "AIToolsEnabled": "AIツールサービスが正常に有効化されました。",
@@ -2036,6 +2036,7 @@
   "SetDiskSpaceQuota": "このワークスペースの最大ディスク容量を定義するために、ストレージ容量制限を設定してください。",
   "SetPassword": "パスワードを設定する",
   "SetQuotaStorageLimit": "ストレージ容量を定義するために、容量制限を設定してください。",
+  "SetSpendingLimit": "支出上限を設定",
   "SetTemplateDescription": "テンプレートからスペースを作成します。設定、ユーザー、フォルダ、フォームは選択したテンプレートからコピーされます。",
   "Settings": "設定",
   "SettingsGeneral": "一般",
@@ -2516,6 +2517,5 @@
   "YourOwnPlatform": "独自のプラットフォーム",
   "YourPrice": "価格",
   "YourTurn": "あなたの番です",
-  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。",
-  "SetSpendingLimit": "支出上限を設定"
+  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。"
 }

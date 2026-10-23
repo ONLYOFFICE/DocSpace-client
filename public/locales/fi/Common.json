@@ -173,8 +173,8 @@
   "AISearchSpendMonth": "Kuukaudelle {{month}}",
   "AISearchUsedInMonth": "AI-hakua ei käytetty kuussa {{month}}",
   "AIServices": "AI-palvelut",
-  "AISpending": "AI-kulut",
   "AIServiceToppedUp": "{{organizationName}} AI-palvelu onnistuneesti kytketty päälle.",
+  "AISpending": "AI-kulut",
   "AISpentOfLimit": "Käytetty {{spent}} / {{limit}} ({{percent}} %).",
   "AITextModels": "Tekstimallit",
   "AIToolsEnabled": "AI-työkalupalvelu otettu onnistuneesti käyttöön.",
@@ -2036,6 +2036,7 @@
   "SetDiskSpaceQuota": "Aseta tallennuskiintiö määrittääksesi maksimilevytilan tälle työtilalle.",
   "SetPassword": "Aseta salasana",
   "SetQuotaStorageLimit": "Aseta kiintiö määrittääksesi tallennustilan rajan.",
+  "SetSpendingLimit": "Aseta kuluraja",
   "SetTemplateDescription": "Luo tila mallista. Asetukset, käyttäjät, kansiot ja lomakkeet kopioidaan valitusta mallista.",
   "Settings": "Asetukset",
   "SettingsGeneral": "Yleistä",
@@ -2516,6 +2517,5 @@
   "YourOwnPlatform": "Oma alustasi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
-  "SetSpendingLimit": "Aseta kuluraja"
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
 }

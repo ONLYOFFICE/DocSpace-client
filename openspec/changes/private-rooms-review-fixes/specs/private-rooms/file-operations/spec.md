@@ -61,3 +61,26 @@ The system SHALL allow copying an encrypted file to the root of the same private
 #### Scenario: Copy of a name that already has a copy
 - **WHEN** the room root holds "Report.docx" and "Report (1).docx", and "Report.docx" is copied to the root
 - **THEN** the copy is stored as "Report (2).docx" and no conflict dialog is shown
+
+### Requirement: Copy into another private room is re-encrypted
+The system SHALL copy encrypted files from a private room, active or archived, into another private room only by decrypting each file on the client and uploading it encrypted for the destination room. The file key SHALL be wrapped for the user and the destination room's members, with the same key checks and skipped-member report as an upload into that room. The source SHALL stay in place.
+
+#### Scenario: Copy to another private room
+- **WHEN** a member of two private rooms copies an encrypted file from the first into the second and confirms
+- **THEN** an encrypted copy with the original name appears in the second room, its members with keys can open it, and the source stays in the first room
+
+#### Scenario: Copy from an archived private room
+- **WHEN** a member copies an encrypted file from an archived private room into an active private room
+- **THEN** an encrypted copy appears in the active room, and no upload into that room is sent without encryption
+
+#### Scenario: Key wrapped for the destination room
+- **WHEN** an encrypted file is copied into another private room whose members differ from the source room's
+- **THEN** the copy's key is wrapped for the destination room's members, and MUST NOT be wrapped for members of the source room who are not in the destination
+
+#### Scenario: Destination member without a key
+- **WHEN** a member of the destination room has no key at the time of the copy
+- **THEN** the copy is uploaded encrypted with its key wrapped for the members who have one; the member without a key gets no wrap and, as with an upload into that room, is not named in a skipped-member report
+
+#### Scenario: Identity locked
+- **WHEN** the user declines to unlock when the copy starts
+- **THEN** no file is copied

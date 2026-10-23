@@ -9,7 +9,7 @@ The review of the four changes archived on 2026-10-22 (`private-rooms-cross-room
 - **Section drop.** The target of a drop on the section is fixed at the native drop event, but whether the open folder takes uploads at all is read after the browser has read the dropped directories, from whatever folder is open by then.
 - **Same-room copy suffix.** A same-room copy always takes "(1)"; when "(1)" already exists the clash check asks and offers "(1) (1)" instead of "(2)".
 - **Fail-closed gate bypassed by the copy.** The re-encrypting copy forces the custom room type on its upload target, so the gate that refuses a private target of another room type can never fire for a copy.
-- **Tests owed by the specs.** "Destination member without a key" has no test carrying its name; the row click of a private room in a list reads a field that list items gained only with `private-rooms-list-item-privacy` and has no test from a list item; "Frame showing the menu" is tested with props the sidebar never reads.
+- **Tests owed by the specs.** "Destination member without a key" has no test carrying its name, and its scenario promises a skipped-member report that neither a copy nor an upload makes for a member without a key; the row click of a private room in a list reads a field that list items gained only with `private-rooms-list-item-privacy` and has no test from a list item; "Frame showing the menu" is tested with props the sidebar never reads.
 - **Records.** Two archived designs describe code that differs from the branch (cross-room-copy D1 on the picker crumbs, upload-hardening D4 on the row-drop snapshot), one scenario names an address form the code does not produce, four comments restate requirements, and the clash check loads member keys even when every name is cached.
 
 ## What Changes
@@ -19,6 +19,7 @@ The review of the four changes archived on 2026-10-22 (`private-rooms-cross-room
 - A drop on the section keeps, together with its target, whether that folder takes uploads.
 - A same-room copy takes the first copy suffix that no file of the destination carries, with no clash prompt.
 - The re-encrypting copy passes the destination's room type through, so a private destination of another room type is refused as an upload with such a target is.
+- The scenario "Destination member without a key" says what a copy does for a member without a key, as an upload does: no wrap and no skipped-member report.
 - The missing named tests are added, the frame-menu scenario is tested where the frame decision is made, the comments that restate requirements become `Spec:` pointers, and the clash check skips the member-keys request when every name is cached.
 - The scenario "Row link of the Rooms list" names the address form the code produces, `/private/{roomId}/filter?folder={roomId}`.
 - design.md records what the archived designs got wrong and what the branch does.
@@ -43,7 +44,8 @@ None.
 - `private-rooms/file-operations`:
   - "Upload target is fixed when the user starts the upload" also fixes whether the folder takes uploads, with the scenario "Folder without the upload right opened during the directory read";
   - "Copy within the same private room" takes the first free suffix, with the scenario "Copy of a name that already has a copy";
-  - "Queued private uploads are sent only as ciphertext" gains the scenario "Copy into a private room with another room type".
+  - "Queued private uploads are sent only as ciphertext" gains the scenario "Copy into a private room with another room type";
+  - "Copy into another private room is re-encrypted": the scenario "Destination member without a key" names no skipped-member report for a member without a key.
 - `private-rooms/sidebar-section`:
   - "Section addresses are decided before the folder is shown" gains the scenario "Superseded load";
   - "Private rooms open inside the section": the scenario "Row link of the Rooms list" names the address with its query.

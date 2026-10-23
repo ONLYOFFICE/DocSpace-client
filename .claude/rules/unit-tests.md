@@ -4,6 +4,7 @@ paths:
   - "packages/client/src/**/__tests__/**"
   - "packages/shared/**/*.test.*"
   - "packages/shared/**/__tests__/**"
+  - "packages/doceditor/src/**/*.test.*"
   - "packages/*/vitest.config.ts"
   - "packages/*/vitest/**"
 ---
@@ -19,6 +20,12 @@ paths:
   E2E** — never put unit tests there.
 - **shared**: co-located next to the component
   (`SaveCancelButtons.test.tsx`), a few `__tests__/` dirs.
+- **doceditor**: co-located under `packages/doceditor/src/**` (vitest
+  `include` is `src/**/*.test.{ts,tsx}`). `packages/doceditor/__tests__/` is
+  **Playwright E2E**. The suite runs in the `node` environment with no setup
+  file and none of the always-on mocks below — it is meant for pure logic
+  pulled out of hooks and components; switch to `jsdom` and add a setup
+  before testing anything that renders.
 - **ui-kit** is a third, separate suite living in its own repository, with its own setup and
   mocks; shared's setup does not apply there, and its `include` is an explicit
   directory list — a test outside those dirs silently does not run.
@@ -93,10 +100,11 @@ client: `SRC_DIR`, `PUBLIC_DIR`, `ASSETS_DIR`, `COMMON_DIR`, `PACKAGE_FILE`,
 ```bash
 pnpm test          # shared          pnpm test:client   # client
 pnpm test:sdk      # sdk             pnpm test:store    # client src/store only
+pnpm test:doceditor   # doceditor
 cd packages/client && pnpm exec vitest run src/store/filesStore   # single path
 ```
 
-All three suites are part of the blocking lefthook pre-push gate.
+All four suites are part of the blocking lefthook pre-push gate.
 
 ## Snapshots
 

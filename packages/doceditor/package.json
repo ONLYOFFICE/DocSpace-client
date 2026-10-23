@@ -18,6 +18,8 @@
     "test:e2e:docker:dev:update-screenshots": "docker-compose run --rm tests-dev pnpm exec playwright test --update-snapshots",
     "test:e2e:docker:clear": "docker rmi doceditor-tests",
     "test:e2e:ui": "pnpm run test:build && pnpm exec playwright test --ui",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "biome lint ./src",
     "lint:fix": "biome lint --write ./src",
     "format": "prettier --check ./src",
@@ -70,7 +72,8 @@
     "sass": "1.79.6",
     "shx": "0.4.0",
     "terser-webpack-plugin": "5.3.16",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "4.1.11"
   },
   "nx": {
     "targets": {

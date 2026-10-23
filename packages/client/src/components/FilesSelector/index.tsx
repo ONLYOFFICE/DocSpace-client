@@ -691,13 +691,8 @@ const FilesSelectorWrapper = ({
       infoBarData={
         showEncryptedTransferBanner
           ? {
-              title: t("Common:EncryptedTransferBannerTitle", {
-                defaultValue: "Encrypted files",
-              }),
-              description: t("Common:EncryptedTransferBannerDescription", {
-                defaultValue:
-                  "If you move or copy encrypted files outside this private room, they will be saved in decrypted form.",
-              }),
+              title: t("Common:EncryptedTransferBannerTitle"),
+              description: t("Common:EncryptedTransferBannerDescription"),
             }
           : undefined
       }

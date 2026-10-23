@@ -328,10 +328,7 @@ self: FilesActionStore,
 
   const reportFailed = (names: string[]) =>
     toastr.error(
-      i18n.t("Common:EncryptedCopyFailed", {
-        defaultValue: "Failed to copy encrypted files: {{names}}",
-        names: names.join(", "),
-      }),
+      i18n.t("Common:EncryptedCopyFailed", { names: names.join(", ") }),
     );
 
   // Spec: private-rooms/file-operations, "Copy into another private room needs access to it".

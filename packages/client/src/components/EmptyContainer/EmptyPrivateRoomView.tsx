@@ -36,8 +36,10 @@
 import { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { isMobile } from "react-device-detect";
 
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Events } from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import type { EmptyViewOptionsType } from "@docspace/shared/components/empty-view";
@@ -53,6 +55,7 @@ import SecurityShieldIcon from "PUBLIC_DIR/images/icons/16/security.react.svg";
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import PresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
+import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 
 import styles from "./EmptyPrivateRoomView.module.scss";
@@ -78,14 +81,20 @@ const EmptyPrivateRoomView = ({
 
   const dispatchCreate = useCallback(
     (extension?: string) => {
+      if (extension === "pdf" && isMobile) {
+        toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
+        return;
+      }
+
       const event: Event & { payload?: unknown } = new Event(Events.CREATE);
       (event as Event & { payload?: object }).payload = {
         id: -1,
         extension,
+        edit: extension === "pdf",
       };
       window.dispatchEvent(event);
     },
-    [],
+    [t],
   );
 
   const onUploadFiles = useCallback(() => {
@@ -124,6 +133,12 @@ const EmptyPrivateRoomView = ({
             label: t("Common:Presentation"),
             icon: PresentationReactSvgUrl,
             onClick: () => dispatchCreate("pptx"),
+          },
+          {
+            key: "create-pdf-form",
+            label: t("Translations:NewForm"),
+            icon: FormReactSvgUrl,
+            onClick: () => dispatchCreate("pdf"),
           },
           { isSeparator: true, key: "separator" },
           {

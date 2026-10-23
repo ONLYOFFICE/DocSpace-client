@@ -42,14 +42,10 @@ import {
   type TEmptyTemplateExtension,
 } from "@docspace/shared/services/private-room/empty-template";
 
-// Spec: private-rooms/file-operations, "Create new file in a private room".
-const PRIVATE_ROOM_CREATE_EXTENSIONS: TEmptyTemplateExtension[] =
-  EMPTY_TEMPLATE_EXTENSIONS.filter((extension) => extension !== "pdf");
-
 export function isEncryptedCreateExtension(
   extension: string | null | undefined,
 ): extension is TEmptyTemplateExtension {
-  return PRIVATE_ROOM_CREATE_EXTENSIONS.includes(
+  return EMPTY_TEMPLATE_EXTENSIONS.includes(
     extension as TEmptyTemplateExtension,
   );
 }

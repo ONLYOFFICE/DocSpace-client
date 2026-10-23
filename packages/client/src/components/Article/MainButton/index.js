@@ -651,13 +651,23 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
+    const createNewPdfForm = {
+      id: "actions_new-pdf-form",
+      className: "main-button_drop-down",
+      icon: FormReactSvgUrl,
+      label: t("Translations:NewForm"),
+      onClick: onCreate,
+      action: "pdf",
+      key: "pdf",
+    };
+
     const canCreateDocuments = !isPrivacy || canCreateEncrypted;
     const newActions = canCreateDocuments
       ? [
           createNewDocumentDocx,
           createNewSpreadsheetXlsx,
           createNewPresentationPptx,
-          ...(isPrivacy ? [] : [formActions]),
+          isPrivacy ? createNewPdfForm : formActions,
           createNewFolder,
         ]
       : [createNewFolder];

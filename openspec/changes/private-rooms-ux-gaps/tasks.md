@@ -17,7 +17,7 @@
 
 ## 3. Remove the PDF form dead end
 
-- [x] 3.1 Drop the PDF form entry for private rooms in `packages/client/src/store/contextOptionsStore/folderModel.helpers.ts`, `packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx`, `packages/client/src/helpers/quickActions.ts` and the create hotkeys; verify with the contextOptionsStore snapshot tests and `cd packages/client && pnpm exec vitest run quickActions folderModel`
+- [ ] 3.1 Drop the PDF form entry for private rooms in `packages/client/src/store/contextOptionsStore/folderModel.helpers.ts`, `packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx`, `packages/client/src/helpers/quickActions.ts` and the create hotkeys; verify with the contextOptionsStore snapshot tests and `cd packages/client && pnpm exec vitest run quickActions folderModel`
 - [ ] 3.2 Render the bullet list of the empty private room view outside the paragraph element in `packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx` (a `<ul>` inside the description `<p>`, reported by React on the local portal, 2026-10-22); verify with a component test asserting the list is not inside a `p` and no console error
 - [ ] 3.3 Update `packages/client/__tests__/encrypted-file-ui.spec.ts` for the new create menu; verify with `cd packages/client && pnpm exec playwright test encrypted-file-ui.spec.ts`
 

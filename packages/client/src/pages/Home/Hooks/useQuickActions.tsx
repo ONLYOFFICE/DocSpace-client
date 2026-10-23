@@ -238,12 +238,6 @@ export const useQuickActions = (
     [t, currentFolderId],
   );
 
-  // Spec: private-rooms/file-operations, "Create new file in a private room".
-  const privateFileTiles = React.useMemo<QuickActionItem[]>(
-    () => createFileTiles.filter((tile) => tile.id !== "quick-pdf"),
-    [createFileTiles],
-  );
-
   const fileItems = React.useMemo<QuickActionItem[]>(
     () => [
       ...createFileTiles,
@@ -443,7 +437,7 @@ export const useQuickActions = (
     return { show: true, items: agentItems };
 
   if (section === "private" && canCreateFiles && canCreateEncrypted)
-    return { show: true, items: privateFileTiles };
+    return { show: true, items: createFileTiles };
 
   return { show: false, items: [] };
 };

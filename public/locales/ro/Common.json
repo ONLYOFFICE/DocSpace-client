@@ -688,7 +688,7 @@
   "DocsConnectCallbackProcessingTitle": "Se procesează plata dvs.",
   "DocsConnectCallbackStepActivate": "Se activează Docs Connect",
   "DocsConnectCallbackSuccess": "Docs Connect a fost activat",
-  "DocsConnectCurrentTariffPlan": "Abonament curent: {{price}}/lună (Utilizatori:{{count}})",
+  "DocsConnectCurrentTariffPlan": "Abonament curent: {{price}}/lună (Utilizatori: {{count}})",
   "DocsConnectPricePerMonth": "{{price}} pe lună",
   "DocsConnectTrialAvailable": "Versiune de încercare gratuită disponibilă | Apoi de la {{price}} per utilizator / lună",
   "DocsConnectTrialDaysLeft": "{{count}} zile gratuite rămase",

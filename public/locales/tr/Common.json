@@ -688,7 +688,7 @@
   "DocsConnectCallbackProcessingTitle": "Ödemeniz işleniyor",
   "DocsConnectCallbackStepActivate": "Docs Connect etkinleştiriliyor",
   "DocsConnectCallbackSuccess": "Docs Connect etkinleştirildi",
-  "DocsConnectCurrentTariffPlan": "Mevcut abonelik: {{price}}/ay (Kullanıcı:{{count}})",
+  "DocsConnectCurrentTariffPlan": "Mevcut abonelik: {{price}}/ay (Kullanıcı: {{count}})",
   "DocsConnectPricePerMonth": "{{price}}/ay",
   "DocsConnectTrialAvailable": "Ücretsiz deneme mevcut | Sonrasında kullanıcı başına {{price}}/ay'dan itibaren",
   "DocsConnectTrialDaysLeft": "{{count}} ücretsiz gün kaldı",

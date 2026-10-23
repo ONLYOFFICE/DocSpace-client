@@ -688,7 +688,7 @@
   "DocsConnectCallbackProcessingTitle": "Επεξεργασία της πληρωμής σας",
   "DocsConnectCallbackStepActivate": "Ενεργοποίηση του Docs Connect",
   "DocsConnectCallbackSuccess": "Το Docs Connect ενεργοποιήθηκε",
-  "DocsConnectCurrentTariffPlan": "Τρέχουσα συνδρομή: {{price}}/μήνα (Χρήστες:{{count}})",
+  "DocsConnectCurrentTariffPlan": "Τρέχουσα συνδρομή: {{price}}/μήνα (Χρήστες: {{count}})",
   "DocsConnectPricePerMonth": "{{price}} ανά μήνα",
   "DocsConnectTrialAvailable": "Διαθέσιμη δωρεάν δοκιμή | Στη συνέχεια από {{price}} ανά χρήστη / μήνα",
   "DocsConnectTrialDaysLeft": "{{count}} δωρεάν ημέρες απομένουν",

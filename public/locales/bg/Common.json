@@ -688,7 +688,7 @@
   "DocsConnectCallbackProcessingTitle": "Обработваме плащането ви",
   "DocsConnectCallbackStepActivate": "Активиране на Docs Connect",
   "DocsConnectCallbackSuccess": "Docs Connect е активиран",
-  "DocsConnectCurrentTariffPlan": "Текущ абонамент: {{price}}/месец (Потребители:{{count}})",
+  "DocsConnectCurrentTariffPlan": "Текущ абонамент: {{price}}/месец (Потребители: {{count}})",
   "DocsConnectPricePerMonth": "{{price}} на месец",
   "DocsConnectTrialAvailable": "Безплатен пробен период | След това от {{price}} на потребител / месец",
   "DocsConnectTrialDaysLeft": "{{count}} безплатни дни остават",

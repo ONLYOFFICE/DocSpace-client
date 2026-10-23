@@ -2157,6 +2157,7 @@
   "StorageWarning": "在付费计费周期结束前，您将继续享有完整的{{amount}}访问权限。若下一周期开始时存储空间超过新限额，系统将按实际使用量收费，费用将四舍五入至最近的{{storageUnit}}。",
   "SubmenuDetails": "详情",
   "SubmenuHistory": "历史记录",
+  "SubmenuMetadata": "元数据",
   "SubmitToGallery": "提交至图库",
   "SubmitToTemplateGallery": "提交到模板库",
   "Subscribe": "订阅",

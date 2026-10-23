@@ -2157,6 +2157,7 @@
   "StorageWarning": "Zachowasz pełny dostęp {{amount}} do końca okresu płatnego rozliczenia. Jeśli Twoje zużycie pamięci przekroczy nowy limit na początku kolejnego okresu, zostaniesz obciążony za rzeczywiste zużycie, zaokrąglone do najbliższej jednostki {{storageUnit}}.",
   "SubmenuDetails": "Szczegóły",
   "SubmenuHistory": "Historia",
+  "SubmenuMetadata": "Metadane",
   "SubmitToGallery": "Prześlij do galerii",
   "SubmitToTemplateGallery": "Prześlij do Galerii Szablonów",
   "Subscribe": "Subskrybuj",

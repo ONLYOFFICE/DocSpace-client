@@ -2157,6 +2157,7 @@
   "StorageWarning": "Veți păstra accesul complet de {{amount}} până la sfârșitul perioadei active de facturare plătite. Dacă spațiul de stocare depășește noua limită la începutul următoarei perioade, veți fi facturat pentru utilizarea efectivă, rotunjită la cea mai apropiată valoare exprimată în {{storageUnit}}.",
   "SubmenuDetails": "Detalii",
   "SubmenuHistory": "Istoric",
+  "SubmenuMetadata": "Metadate",
   "SubmitToGallery": "Trimite la Galerie",
   "SubmitToTemplateGallery": "Trimite în Galeria de Șabloane",
   "Subscribe": "Abonare",

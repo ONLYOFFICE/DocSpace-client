@@ -2157,6 +2157,7 @@
   "StorageWarning": "Tam {{amount}} girişiniz ödənişli hesablaşma dövrünüzün sonuna qədər saxlanılacaq. Növbəti dövrün əvvəlində saxlama həcməniz yeni limitə çatsa, faktiki istifadəyə görə ödəniş ediləcək, yaxın olan {{storageUnit}} vahidinə yuvarlaqlaşdırılmaqla.",
   "SubmenuDetails": "Detallar",
   "SubmenuHistory": "Tarixçə",
+  "SubmenuMetadata": "Metadata",
   "SubmitToGallery": "Qalereyaya göndərin",
   "SubmitToTemplateGallery": "Şablon Qalereyasına Göndər",
   "Subscribe": "Abunə olun",

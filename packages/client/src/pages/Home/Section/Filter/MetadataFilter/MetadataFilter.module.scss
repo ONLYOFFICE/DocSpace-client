@@ -1,0 +1,123 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+.section {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 16px;
+  line-height: 16px;
+  margin-block: 4px;
+}
+
+.hint,
+.label {
+  color: var(--settings-common-description-color);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-block-end: 4px;
+}
+
+.chip {
+  max-width: 100%;
+
+  :global(.selected-item_label) {
+    max-width: none;
+    min-width: 0;
+  }
+
+  :global(.selected-tag-removed) {
+    flex-shrink: 0;
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.panelScroll {
+  flex: 1;
+  min-height: 0;
+}
+
+.panelBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.controls {
+  position: relative;
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+
+  > input {
+    margin-block-start: 4px;
+  }
+}
+
+.error {
+  position: absolute;
+  top: 100%;
+  inset-inline-start: 138px;
+  color: var(--input-error-color);
+  line-height: 16px;
+}
+
+.panelFooter {
+  display: flex;
+  gap: 8px;
+  padding: 16px;
+  border-top: 1px solid var(--modal-dialog-header-border-color);
+}

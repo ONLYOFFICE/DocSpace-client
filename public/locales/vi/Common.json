@@ -2157,6 +2157,7 @@
   "StorageWarning": "Bạn sẽ giữ quyền truy cập đầy đủ {{amount}} cho đến khi kết thúc chu kỳ thanh toán đã trả. Nếu dung lượng lưu trữ của bạn vượt quá giới hạn mới khi bắt đầu chu kỳ tiếp theo, bạn sẽ bị tính phí cho lượng sử dụng thực tế, làm tròn đến đơn vị {{storageUnit}} gần nhất.",
   "SubmenuDetails": "Chi tiết",
   "SubmenuHistory": "Lịch sử",
+  "SubmenuMetadata": "Siêu dữ liệu",
   "SubmitToGallery": "Gửi đến Bộ Sưu Tập",
   "SubmitToTemplateGallery": "Gửi đến Thư viện Mẫu",
   "Subscribe": "Đăng ký",

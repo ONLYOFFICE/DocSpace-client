@@ -2162,6 +2162,7 @@
   "StorageWarning": "You will keep your full {{amount}} access until the end of your paid billing period. If your storage exceeds the new limit at the start of the next period, you’ll be charged for the actual usage, rounded to the nearest {{storageUnit}}.",
   "SubmenuDetails": "Details",
   "SubmenuHistory": "History",
+  "SubmenuMetadata": "Metadata",
   "SubmitToGallery": "Submit to Gallery",
   "SubmitToTemplateGallery": "Submit to Template Gallery",
   "Subscribe": "Subscribe",

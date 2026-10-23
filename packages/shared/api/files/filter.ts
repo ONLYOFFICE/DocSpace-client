@@ -46,6 +46,11 @@ import {
   toUrlParams,
   getCategoryType,
 } from "../../utils/common";
+import {
+  parseMetadataFilters,
+  parseMetadataTemplateId,
+} from "../../utils/metadata";
+import type { TMetadataFilterCondition } from "../metadata/types";
 import { TViewAs, TSortOrder, TSortBy, ValueOf } from "../../types";
 import { validateAndFixObject } from "../../utils/filterValidator";
 import { CategoryType } from "../../constants";
@@ -96,6 +101,8 @@ const LOCATION = "location";
 const AREA = "area";
 const PARENT_ID = "parentId";
 const FOLDER_TYPE = "folderType";
+const METADATA_TEMPLATE_ID = "metadataTemplateId";
+const METADATA_FILTERS = "metadataFilters";
 
 // TODO: add next params
 // subjectGroup bool
@@ -142,6 +149,8 @@ const getOtherSearchParams = () => {
     AREA,
     PARENT_ID,
     FOLDER_TYPE,
+    METADATA_TEMPLATE_ID,
+    METADATA_FILTERS,
   ];
 
   filterSearchParams.forEach((param) => {
@@ -218,6 +227,10 @@ class FilesFilter {
   parentId: number | string | null;
 
   folderType: number[] | null = null;
+
+  metadataTemplateId: number | null = null;
+
+  metadataFilters: TMetadataFilterCondition[] | null = null;
 
   static getDefault(
     options: {
@@ -331,6 +344,12 @@ class FilesFilter {
 
     if (urlFilter[PARENT_ID]) newFilter.parentId = urlFilter[PARENT_ID];
     newFilter.folderType = parseFolderTypes(urlFilter[FOLDER_TYPE]);
+    newFilter.metadataTemplateId = parseMetadataTemplateId(
+      urlFilter[METADATA_TEMPLATE_ID],
+    );
+    newFilter.metadataFilters = parseMetadataFilters(
+      urlFilter[METADATA_FILTERS],
+    );
 
     return newFilter;
   }
@@ -420,6 +439,7 @@ class FilesFilter {
       filterType ||
       (search ?? "").trim() ||
       authorType ||
+      this.hasMetadataFilter() ||
       (applyFilterOption != null && applyFilterOption !== ApplyFilterOption.All)
         ? (withSubfolders ?? "false")
         : "false";
@@ -449,6 +469,10 @@ class FilesFilter {
       sharedBy,
       parentId: this.parentId,
       folderType: this.folderType,
+      metadataTemplateId: this.metadataTemplateId,
+      metadataFilters: this.metadataFilters?.length
+        ? this.metadataFilters
+        : null,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -504,6 +528,12 @@ class FilesFilter {
     if (location) dtoFilter[LOCATION] = location;
     if (this.parentId != null) dtoFilter[PARENT_ID] = this.parentId;
     if (this.folderType != null) dtoFilter[FOLDER_TYPE] = this.folderType;
+    if (this.metadataTemplateId) {
+      dtoFilter[METADATA_TEMPLATE_ID] = this.metadataTemplateId;
+    }
+    if (this.metadataFilters?.length) {
+      dtoFilter[METADATA_FILTERS] = this.metadataFilters;
+    }
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -520,8 +550,13 @@ class FilesFilter {
     return Math.ceil(this.total / this.pageCount) - 1;
   }
 
+  hasMetadataFilter() {
+    return Boolean(this.metadataTemplateId || this.metadataFilters?.length);
+  }
+
   isFiltered() {
     return Boolean(
+      this.hasMetadataFilter() ||
       this.filterType ||
         this.withSubfolders ||
         this.search ||
@@ -562,6 +597,10 @@ class FilesFilter {
     );
 
     filter.folderType = this.folderType ? [...this.folderType] : null;
+    filter.metadataTemplateId = this.metadataTemplateId;
+    filter.metadataFilters = this.metadataFilters
+      ? [...this.metadataFilters]
+      : null;
 
     return filter;
   }
@@ -586,7 +625,10 @@ class FilesFilter {
       this.searchArea === filter.searchArea &&
       this.location === filter.location &&
       this.sharedBy === filter.sharedBy &&
-      String(this.folderType ?? "") === String(filter.folderType ?? "");
+      String(this.folderType ?? "") === String(filter.folderType ?? "") &&
+      this.metadataTemplateId === filter.metadataTemplateId &&
+      JSON.stringify(this.metadataFilters ?? null) ===
+        JSON.stringify(filter.metadataFilters ?? null);
 
     return equals;
   }

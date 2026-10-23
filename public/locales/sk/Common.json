@@ -2157,6 +2157,7 @@
   "StorageWarning": "Udržíte si plný prístup {{amount}} až do konca svojho plateného fakturačného obdobia. Ak vaše úložisko presiahne nové obmedzenie na začiatku nasledujúceho obdobia, zaplatíte za skutočné využitie, zaokrúhlené na najbližšiu {{storageUnit}}.",
   "SubmenuDetails": "Podrobnosti",
   "SubmenuHistory": "História",
+  "SubmenuMetadata": "Metadáta",
   "SubmitToGallery": "Odoslať do galérie",
   "SubmitToTemplateGallery": "Odoslať do galérie šablón",
   "Subscribe": "Odoberať",

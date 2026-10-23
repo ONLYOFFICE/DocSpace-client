@@ -2157,6 +2157,7 @@
   "StorageWarning": "Manterrai il tuo accesso completo a {{amount}} fino alla fine del periodo di fatturazione. Se all’inizio del prossimo periodo superi il nuovo limite, ti verrà addebitato l’utilizzo effettivo, arrotondato all’unità {{storageUnit}} più vicina.",
   "SubmenuDetails": "Dettagli",
   "SubmenuHistory": "Cronologia",
+  "SubmenuMetadata": "Metadati",
   "SubmitToGallery": "Invia alla Galleria",
   "SubmitToTemplateGallery": "Invia alla Galleria Modelli",
   "Subscribe": "Abbonati",

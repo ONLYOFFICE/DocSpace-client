@@ -2157,6 +2157,7 @@
   "StorageWarning": "Tamamen {{amount}} erişiminiz, ücretli faturalandırma sürenizin sonuna kadar devam edecektir. Bir sonraki dönemin başlangıcında depolama alanınız yeni limite aşarsa, en yakın {{storageUnit}} değerine yuvarlanmış gerçek kullanımınız için ücretlendirileceksiniz.",
   "SubmenuDetails": "Ayrıntılar",
   "SubmenuHistory": "Geçmiş",
+  "SubmenuMetadata": "Meta veri",
   "SubmitToGallery": "Galeriye Gönder",
   "SubmitToTemplateGallery": "Şablon Galerisine Gönder",
   "Subscribe": "Abone ol",

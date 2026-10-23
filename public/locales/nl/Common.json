@@ -2157,6 +2157,7 @@
   "StorageWarning": "Je behoudt je volledige {{amount}} toegang tot het einde van je betaalde factuurperiode. Als je opslag aan het begin van de volgende periode de nieuwe limiet overschrijdt, word je in rekening gebracht voor het daadwerkelijke gebruik, afgerond naar de dichtstbijzijnde {{storageUnit}}.",
   "SubmenuDetails": "Details",
   "SubmenuHistory": "Geschiedenis",
+  "SubmenuMetadata": "Metadata",
   "SubmitToGallery": "Indienen bij Galerij",
   "SubmitToTemplateGallery": "Indienen bij de sjabloongalerij",
   "Subscribe": "Abonneren",

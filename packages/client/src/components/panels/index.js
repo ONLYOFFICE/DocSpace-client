@@ -41,6 +41,7 @@ import InvitePanel from "./InvitePanel";
 import EditLinkPanel from "./EditLinkPanel";
 import ConversionPanel from "./ConversionPanel";
 import ShareFormPanel from "./ShareFormPanel";
+import MetadataAIPanel from "./MetadataAIPanel";
 
 export {
   EmbeddingPanel,
@@ -51,6 +52,7 @@ export {
   EditLinkPanel,
   ConversionPanel,
   ShareFormPanel,
+  MetadataAIPanel,
 };
 
 export default ConversionPanel;

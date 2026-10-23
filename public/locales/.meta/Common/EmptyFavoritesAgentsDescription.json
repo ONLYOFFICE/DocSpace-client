@@ -3,7 +3,7 @@
   "content": "Star files generated in AI agent chats to keep them close at hand.",
   "content_en_sha1_hash": "5b4cfcc8192963ca7b85e2ffd36b92986deeaf37",
   "created_at": "2026-08-21T15:04:01.441Z",
-  "updated_at": "2026-08-21T15:13:43.321Z",
+  "updated_at": "2026-10-22T13:13:49.558Z",
   "comment": {
     "text": "Description text in an empty state view, appearing when no files are marked as favorites in the AI agents section. It explains the purpose of starring files for quick access.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 193,
+      "line_number": 195,
       "context": "isFormsScope: boolean,\n filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsScope) return t(\"Common:EmptyFavoritesFormsDescription\");\n if (isAgentsSectionScope(filterFolderType))\n return t(\"Common:EmptyFavoritesAgentsDescription\");\n if (isRoomsSectionScope(filterFolderType))\n return t(\"Common:EmptyFavoritesRoomsDescription\");\n \n return t(\"Common:EmptyFavoritesDescription\");\n };",
       "module": "/packages/client"
     },

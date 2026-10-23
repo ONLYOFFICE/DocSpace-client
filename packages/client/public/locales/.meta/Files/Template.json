@@ -3,7 +3,7 @@
   "content": "Template",
   "content_en_sha1_hash": "3ec1ae061c27325c7ecb543adf91235e22cbc9ed",
   "created_at": "2025-05-19T21:30:56.219Z",
-  "updated_at": "2026-08-21T15:49:57.246Z",
+  "updated_at": "2026-10-21T10:17:45.758Z",
   "comment": {
     "text": "This is a badge label that appears next to a file or folder name to indicate it is a template.",
     "is_auto": true,
@@ -12,8 +12,14 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/MetadataFilter/sub-components/ConditionsPanel.tsx",
+      "line_number": 123,
+      "context": "<Heading size={HeadingSize.xsmall} level={HeadingLevel.h3}>\n {t(\"Common:SubmenuMetadata\")}\n </Heading>\n </div>\n \n <FilterField label={t(\"Files:Template\")}>\n <ComboBox\n options={templateOptions}\n selectedOption={\n templateOptions.find(({ key }) => key === template?.id) ?? {\n key: \"\",",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 935,
+      "line_number": 938,
       "context": "? { isCloseable: true, onCloseClick: onCloseIndexMenu }\n : {},\n [isIndexEditingMode, onCloseIndexMenu],\n );\n \n const badgeLabel = showTemplateBadge ? t(\"Files:Template\") : \"\";\n \n const warningText = getWarningText({\n t,\n isRecycleBinFolder,\n isPersonalReadOnly,",
       "module": "/packages/client"
     }

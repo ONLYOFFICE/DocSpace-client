@@ -3,7 +3,7 @@
   "content": "Space grouping is enabled",
   "content_en_sha1_hash": "48a86b61126598dd1e606ecd6fb6b214f9bc568b",
   "created_at": "2026-10-07T14:48:34.918Z",
-  "updated_at": "2026-10-07T14:48:38.565Z",
+  "updated_at": "2026-10-21T10:17:45.818Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesSettingsStore.ts",
-      "line_number": 448,
+      "line_number": 451,
       "context": "const res = await setOrganizeGrouping(data);\n this.setFilesSetting(\"organizeRoomsGrouping\", res);\n \n const message = isSpaces\n ? res\n ? i18n.t(\"GroupingRooms:SpaceGroupingEnabled\")\n : i18n.t(\"GroupingRooms:SpaceGroupingDisabled\")\n : res\n ? i18n.t(\"GroupingRooms:RoomGroupingEnabled\")\n : i18n.t(\"GroupingRooms:RoomGroupingDisabled\");\n toastr.success(message);",
       "module": "/packages/client"
     }

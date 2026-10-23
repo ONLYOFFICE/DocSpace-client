@@ -3,7 +3,7 @@
   "content": "During the grace period, admins cannot create new rooms and add new users. After the due date of the grace period, the workspace will become unavailable until the payment is made.",
   "content_en_sha1_hash": "dd4d64acf15ae868f7dd2632008d3f0500dc4d52",
   "created_at": "2026-08-12T11:00:23.969Z",
-  "updated_at": "2026-08-26T14:08:33.009Z",
+  "updated_at": "2026-10-21T10:17:45.714Z",
   "comment": {
     "text": "Informational text within a modal or warning dialog that describes the restrictions on admin actions and the consequences of non-payment during a billing grace period.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 164,
+      "line_number": 166,
       "context": "</Text>\n <br />\n <Text>\n {standalone\n ? t(\"LicenseGracePeriodInfo\")\n : t(\"Common:GracePeriodActivatedDescription\")}\n </Text>\n </>\n );\n \n return (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/quota-warning-dialog/index.tsx",
-      "line_number": 156,
+      "line_number": 158,
       "context": "</Text>\n <br />\n <Text>\n {standalone\n ? t(\"LicenseGracePeriodInfo\")\n : t(\"Common:GracePeriodActivatedDescription\")}\n </Text>\n </>\n );\n \n const chooseNewPlan = (",
       "module": "/packages/sdk"
     }

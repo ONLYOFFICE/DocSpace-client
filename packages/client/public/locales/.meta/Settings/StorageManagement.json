@@ -3,7 +3,7 @@
   "content": "Storage management",
   "content_en_sha1_hash": "aee08f8d5281c4277ee7ebdfe0a0f452865e73b5",
   "created_at": "2025-05-19T21:30:52.780Z",
-  "updated_at": "2026-09-29T10:21:07.591Z",
+  "updated_at": "2026-10-21T10:17:45.687Z",
   "comment": {
     "text": "This is a section title in the portal settings. It refers to the management of storage space within ONLYOFFICE DocSpace.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/PortalSettingsSidebar/index.tsx",
-      "line_number": 126,
-      "context": "case \"ManagementCategoryIntegration\":\n return t(\"Settings:ManagementCategoryIntegration\");\n case \"DataImport\":\n return t(\"Settings:DataImport\");\n case \"StorageManagement\":\n return t(\"Settings:StorageManagement\");\n case \"Services\":\n return t(\"Settings:Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n case \"PortalDeletion\":",
+      "line_number": 128,
+      "context": "case \"ManagementCategoryIntegration\":\n return t(\"Settings:ManagementCategoryIntegration\");\n case \"DataImport\":\n return t(\"Settings:DataImport\");\n case \"StorageManagement\":\n return t(\"Settings:StorageManagement\");\n case \"Services\":\n return t(\"Settings:Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n case \"Common:AppsSectionTitle\":",
       "module": "/packages/client"
     },
     {
@@ -25,19 +25,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 241,
+      "line_number": 245,
       "context": "return t(\"Common:Upgrade\");\n case \"Common:UpgradePageTitle\":\n return \"Common:UpgradePageTitle\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 471,
+      "line_number": 488,
       "context": "{\n id: \"portal-settings_catalog-portal-storageManagement\",\n key: \"6\",\n type: PageType.storageManagement,\n link: \"management\",\n tKey: \"StorageManagement\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-storageManagement\",\n key: \"6-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 471,
+      "line_number": 488,
       "context": "{\n id: \"portal-settings_catalog-portal-storageManagement\",\n key: \"6\",\n type: PageType.storageManagement,\n link: \"management\",\n tKey: \"StorageManagement\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-storageManagement\",\n key: \"6-0\",",
       "module": "/packages/client"
     }

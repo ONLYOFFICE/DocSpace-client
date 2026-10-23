@@ -3,7 +3,7 @@
   "content": "Now make it yours",
   "content_en_sha1_hash": "53971ce5983bffd660e85f87c0abb8f730a36b76",
   "created_at": "2026-08-06T14:20:52.335Z",
-  "updated_at": "2026-10-12T10:51:06.449Z",
+  "updated_at": "2026-10-21T10:17:45.654Z",
   "comment": {
     "text": "A title for a step in the Rooms onboarding tour, appearing when guiding users to create their first room.",
     "is_auto": true,
@@ -12,21 +12,39 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 268,
-      "context": "// 7. Closing action: the empty screen's options, or the \"New\" button.\n isDemo && demoHooks\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"RoomsTour:RoomsCreateFirstTitle\"),\n t(\"FilesTour:TourCreateFirstEmpty\"),\n callbacks,\n FILES_TOUR_LABEL,\n demoHooks,\n )",
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 322,
+      "context": "isStandIn && demoHooks\n ? emptyScreenAction\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n emptyScreenAction === \"create\"\n ? t(\"RoomsTour:RoomsCreateFirstTitle\")\n : t(\"AiAgentsTour:AgentSwitchOnTitle\"),\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStart\")\n : t(\"AiAgentsTour:AgentSwitchOn\"),\n callbacks,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 322,
+      "context": "isStandIn && demoHooks\n ? emptyScreenAction\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n emptyScreenAction === \"create\"\n ? t(\"RoomsTour:RoomsCreateFirstTitle\")\n : t(\"AiAgentsTour:AgentSwitchOnTitle\"),\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStart\")\n : t(\"AiAgentsTour:AgentSwitchOn\"),\n callbacks,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 268,
-      "context": "// 7. Closing action: the empty screen's options, or the \"New\" button.\n isDemo && demoHooks\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"RoomsTour:RoomsCreateFirstTitle\"),\n t(\"FilesTour:TourCreateFirstEmpty\"),\n callbacks,\n FILES_TOUR_LABEL,\n demoHooks,\n )",
+      "line_number": 312,
+      "context": "// 7. Closing action: the empty screen's options, or the \"New\" button.\n isDemo && demoHooks\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"RoomsTour:RoomsCreateFirstTitle\"),\n t(\"FilesTour:TourCreateFirst\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n FILES_TOUR_LABEL,\n demoHooks,\n )",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 312,
+      "context": "// 7. Closing action: the empty screen's options, or the \"New\" button.\n isDemo && demoHooks\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"RoomsTour:RoomsCreateFirstTitle\"),\n t(\"FilesTour:TourCreateFirst\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n FILES_TOUR_LABEL,\n demoHooks,\n )",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 296,
-      "context": "isDemo &&\n demoHooks &&\n (canCreate\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"RoomsTour:RoomsCreateFirstTitle\"),\n t(\"RoomsTour:RoomsCreateFirst\"),\n callbacks,\n ROOMS_TOUR_LABEL,\n demoHooks,\n )",
+      "line_number": 264,
+      "context": "// are dropped (`restore` puts them back), or the \"New room\" button.\n isDemo && demoHooks\n ? canCreate\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"RoomsTour:RoomsCreateFirstTitle\"),\n t(\"RoomsTour:RoomsCreateFirst\"),\n callbacks,\n ROOMS_TOUR_LABEL,\n demoHooks,\n )",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 264,
+      "context": "// are dropped (`restore` puts them back), or the \"New room\" button.\n isDemo && demoHooks\n ? canCreate\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"RoomsTour:RoomsCreateFirstTitle\"),\n t(\"RoomsTour:RoomsCreateFirst\"),\n callbacks,\n ROOMS_TOUR_LABEL,\n demoHooks,\n )",
       "module": "/packages/client"
     }
   ],

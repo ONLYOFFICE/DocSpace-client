@@ -3,7 +3,7 @@
   "content": "IP security",
   "content_en_sha1_hash": "6373496dcb03feb4f857fa380152a9422d28f180",
   "created_at": "2026-08-31T18:23:41.476Z",
-  "updated_at": "2026-08-31T20:31:25.050Z",
+  "updated_at": "2026-10-21T10:17:45.808Z",
   "comment": {
     "text": "Section title for the IP security configuration category within the Portal Settings security menu.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 236,
+      "line_number": 253,
       "context": "{\n id: \"portal-settings_catalog-ip-security\",\n key: \"1-0-4\",\n icon: \"\",\n link: \"ip\",\n tKey: \"IPSecurity\",\n },\n {\n id: \"portal-settings_catalog-invitation-settings\",\n key: \"1-0-5\",\n icon: \"\",",
       "module": "/packages/client"
     }

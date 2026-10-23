@@ -51,6 +51,11 @@ import {
 import { getUserFilter, setUserFilter } from "../../utils/userFilterUtils";
 import { TSortOrder, TSortBy, Nullable } from "../../types";
 import { validateAndFixObject } from "../../utils/filterValidator";
+import {
+  parseMetadataFilters,
+  parseMetadataTemplateId,
+} from "../../utils/metadata";
+import type { TMetadataFilterCondition } from "../metadata/types";
 import { typeDefinition } from "./typeDefinition";
 
 const DEFAULT_EXCLUDE_SUBJECT: Nullable<string | boolean> = false;
@@ -96,6 +101,8 @@ const GROUP_ID = "groupId";
 const START_INDEX = "startIndex";
 const SUBJECT_OWNER_ID = "subjectOwnerId";
 const PRIVACY_FILTER = "privacyFilter";
+const METADATA_TEMPLATE_ID = "metadataTemplateId";
+const METADATA_FILTERS = "metadataFilters";
 
 class RoomsFilter {
   page: number;
@@ -139,6 +146,10 @@ class RoomsFilter {
   subjectOwnerId: Nullable<string>;
 
   privacyFilter: Nullable<string | number>;
+
+  metadataTemplateId: Nullable<number> = null;
+
+  metadataFilters: Nullable<TMetadataFilterCondition[]> = null;
 
   static getDefault(userId?: string, searchArea: string = DEFAULT_SEARCH_AREA) {
     const defaultFilter = new RoomsFilter(
@@ -277,6 +288,13 @@ class RoomsFilter {
       privacyFilter,
     );
 
+    newFilter.metadataTemplateId = parseMetadataTemplateId(
+      urlFilter[METADATA_TEMPLATE_ID],
+    );
+    newFilter.metadataFilters = parseMetadataFilters(
+      urlFilter[METADATA_FILTERS],
+    );
+
     return newFilter;
   }
 
@@ -387,6 +405,10 @@ class RoomsFilter {
       [GROUP_ID]: groupId,
       [SUBJECT_OWNER_ID]: subjectOwnerId,
       [PRIVACY_FILTER]: privacyFilter,
+      [METADATA_TEMPLATE_ID]: this.metadataTemplateId,
+      [METADATA_FILTERS]: this.metadataFilters?.length
+        ? this.metadataFilters
+        : null,
     };
 
     return toUrlParams(dtoFilter, true);
@@ -437,6 +459,12 @@ class RoomsFilter {
       ...(groupId && { [GROUP_ID]: groupId }),
       ...(subjectOwnerId && { [SUBJECT_OWNER_ID]: subjectOwnerId }),
       ...(privacyFilter && { [PRIVACY_FILTER]: privacyFilter }),
+      ...(this.metadataTemplateId && {
+        [METADATA_TEMPLATE_ID]: this.metadataTemplateId,
+      }),
+      ...(this.metadataFilters?.length && {
+        [METADATA_FILTERS]: this.metadataFilters,
+      }),
       [PAGE]: page + 1,
       [SORT_BY]: sortBy,
       [SORT_ORDER]: sortOrder,
@@ -513,8 +541,12 @@ class RoomsFilter {
     return Math.ceil(this.total / this.pageCount) - 1;
   }
 
+  hasMetadataFilter() {
+    return Boolean(this.metadataTemplateId || this.metadataFilters?.length);
+  }
+
   clone() {
-    return new RoomsFilter(
+    const filter = new RoomsFilter(
       this.page,
       this.pageCount,
       this.total,
@@ -537,6 +569,13 @@ class RoomsFilter {
       this.subjectOwnerId,
       this.privacyFilter,
     );
+
+    filter.metadataTemplateId = this.metadataTemplateId;
+    filter.metadataFilters = this.metadataFilters
+      ? [...this.metadataFilters]
+      : null;
+
+    return filter;
   }
 
   equals(filter: RoomsFilter) {
@@ -565,6 +604,9 @@ class RoomsFilter {
       this.groupId === filter.groupId &&
       this.subjectOwnerId === filter.subjectOwnerId &&
       this.privacyFilter === filter.privacyFilter &&
+      this.metadataTemplateId === filter.metadataTemplateId &&
+      JSON.stringify(this.metadataFilters ?? null) ===
+        JSON.stringify(filter.metadataFilters ?? null) &&
       typeEqual &&
       tagsEqual;
 

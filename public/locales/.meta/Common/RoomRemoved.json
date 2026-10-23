@@ -3,7 +3,7 @@
   "content": "Room removed",
   "content_en_sha1_hash": "650e240a06004bc3edb792413633404c35651205",
   "created_at": "2025-05-19T21:30:56.119Z",
-  "updated_at": "2026-10-02T12:15:32.418Z",
+  "updated_at": "2026-10-21T10:17:45.709Z",
   "comment": {
     "text": "This is a toast message confirming the successful removal of a single room.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 134,
-      "context": "const onDeleteRoom = async () => {\n const translations = {\n successRemoveRoom: isAIAgent\n ? t(\"Common:AgentRemoved\")\n : t(\"Common:RoomRemoved\"),\n successRemoveRooms: isAIAgent\n ? t(\"Common:AgentsRemoved\")\n : t(\"Common:RoomsRemoved\"),\n };",
+      "line_number": 136,
+      "context": "const translations = {\n successRemoveRoom: isAIAgent\n ? t(\"Common:AgentRemoved\")\n : isFormSpace\n ? t(\"Common:SpaceRemoved\")\n : t(\"Common:RoomRemoved\"),\n successRemoveRooms: isAIAgent\n ? t(\"Common:AgentsRemoved\")\n : isFormSpace\n ? t(\"Common:SpacesRemoved\")\n : t(\"Common:RoomsRemoved\"),",
       "module": "/packages/client"
     },
     {

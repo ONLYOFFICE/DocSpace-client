@@ -3,7 +3,7 @@
   "content": "{{organizationName}} service provider metadata",
   "content_en_sha1_hash": "6aa751e43dea0ae4033a5a4f1d8af7b517a5af23",
   "created_at": "2026-08-31T18:23:40.152Z",
-  "updated_at": "2026-08-31T20:58:42.443Z",
+  "updated_at": "2026-10-21T10:17:45.805Z",
   "comment": {
     "text": "Button label and category title in the Single Sign-On settings that identifies the service provider's metadata, using {{organizationName}} to represent the organization's name.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 412,
+      "line_number": 429,
       "context": "{\n id: \"portal-settings_catalog-sso-metadata\",\n key: \"4-2-1\",\n icon: \"\",\n link: \"metadata\",\n tKey: \"SingleSignOn:SpMetadata\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-plugins\",",
       "module": "/packages/client"
     }

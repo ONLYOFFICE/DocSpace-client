@@ -3,7 +3,7 @@
   "content": "Move",
   "content_en_sha1_hash": "76cdb950721642b6b8596d36d5a39f7705028b99",
   "created_at": "2026-10-06T13:35:11.998Z",
-  "updated_at": "2026-10-06T13:35:38.851Z",
+  "updated_at": "2026-10-21T10:17:45.710Z",
   "comment": {
     "text": "Confirm button label in the delete dialog when the selected files or folders are moved to Trash (not deleted permanently). Short imperative verb \"Move\" with no object; the dialog title and text already say the items go to Trash.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 210,
+      "line_number": 214,
       "context": "if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:Move\");\n };\n \n const getDialogTitle = () => {\n if (isAIAgent) {\n return selection.length > 1",
       "module": "/packages/client"
     }

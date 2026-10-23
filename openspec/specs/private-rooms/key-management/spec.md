@@ -172,11 +172,19 @@ The system SHALL let the user restore access on this device by entering the 24-w
 - **THEN** the identity is unlocked and sealed under the new passphrase
 
 ### Requirement: Delete a key
-The system SHALL delete a registered key only after a warning (Common:DeleteKeyWarning) and passphrase confirmation, confirming with Common:EncryptionKeyDeleted.
+The system SHALL delete a registered key only after a warning (Common:DeleteKeyWarning) that lists the private rooms in which the user holds file access entries, all of which become unreadable without the user's only key, followed by passphrase confirmation, confirming with Common:EncryptionKeyDeleted. The confirm action SHALL wait for the list; when the rooms cannot be listed, the warning is shown without it.
 
 #### Scenario: Delete
 - **WHEN** the user confirms the warning and enters the key's passphrase
 - **THEN** the key is removed from the server and from the list
+
+#### Scenario: Affected rooms listed
+- **WHEN** the delete-key warning opens for a user who holds access entries in three private rooms
+- **THEN** the warning names those three rooms (Common:DeleteKeyAffectedRooms) before the user can confirm
+
+#### Scenario: No affected rooms
+- **WHEN** the user holds no access entry in any private room
+- **THEN** the warning states that no room is affected (Common:DeleteKeyNoAffectedRooms)
 
 ### Requirement: Reset all keys with a typed token
 The system SHALL offer Common:ResetEncryptionKeysCta to a user who lost both passphrase and recovery phrase; it SHALL require typing the localized token (Common:ResetEncryptionKeysConfirmationToken, compared trimmed and case-insensitively), then delete every envelope the server lists for the user, unused ones included, lock the identity and refresh the list.
@@ -208,7 +216,7 @@ The system SHALL show, once per session, a toast (Common:GhostStateDetected) lin
 - **THEN** the ghost-state toast appears once, later failures in the session stay silent
 
 ### Requirement: Key-change dialog
-The system SHALL show a dialog when a peer's public key differs from its pin, stating how long the previous key was active, listing possible causes and an out-of-band verification tip, with accept and refuse actions. Concurrent mismatches SHALL wait for the open dialog and be shown one after another; requests for the same user and key SHALL share the user's one decision. The system SHALL NOT answer a request on the user's behalf.
+The system SHALL show a dialog when a peer's public key differs from its pin, naming the peer by display name, stating how long the previous key was active, listing possible causes and an out-of-band verification tip, with accept and refuse actions. Concurrent mismatches SHALL wait for the open dialog and be shown one after another; requests for the same user and key SHALL share the user's one decision. The system SHALL NOT answer a request on the user's behalf.
 
 #### Scenario: Refuse
 - **WHEN** the user refuses the changed key
@@ -226,12 +234,20 @@ The system SHALL show a dialog when a peer's public key differs from its pin, st
 - **WHEN** a new mismatch request arrives while a dialog is open
 - **THEN** the pending request MUST NOT be resolved as refused by the arrival alone
 
-### Requirement: All key dialogs are modal
-The system SHALL present the passphrase, recovery-phrase, key-change, key-rotation and reset dialogs as centred modals; no aside or full-screen variant exists.
+#### Scenario: Peer named in the dialog
+- **WHEN** the key-change dialog opens for a room member whose key changed
+- **THEN** the dialog names the member by display name, as the skipped-member toast does; the user id stands in only when the name cannot be loaded
+
+### Requirement: Key dialogs are accessible and adapt to narrow screens
+The system SHALL present the passphrase, recovery-phrase, key-change, passphrase-change and reset dialogs as centred modals on wide screens and as aside panels on narrow screens; each dialog SHALL expose a dialog role, an accessible name and labelled inputs so screen readers announce it.
 
 #### Scenario: Mobile viewport
 - **WHEN** a key dialog opens on a narrow screen
-- **THEN** it renders as a modal dialog
+- **THEN** it renders as an aside panel with the same content and actions
+
+#### Scenario: Screen reader
+- **WHEN** a key dialog opens
+- **THEN** it is announced with its title, and every input and action has an accessible label
 
 ### Requirement: Unused keys on the server can be deleted
 The system SHALL show in Keys management how many of the user's envelopes on the server are not the selected key (Common:UnusedEncryptionKeysNotice) and SHALL offer to delete them (Common:DeleteUnusedEncryptionKeys) after a warning and passphrase confirmation of the selected key; the selected key is never deleted by this action.

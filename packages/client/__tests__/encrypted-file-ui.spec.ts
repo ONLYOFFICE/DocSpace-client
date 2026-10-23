@@ -141,6 +141,52 @@ test.describe("Encrypted file UI in private room", () => {
     await expect(badge).not.toHaveClass(/noAccessIcon/);
   });
 
+  test("Create menu opened", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [seedUserKey],
+        userId: TEST_USER_ID,
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        initialFiles: [seedEncryptedFile],
+        roomSecurity: { Read: true, Create: true },
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await expect(page.getByTestId("table-row-0")).toBeVisible({
+      timeout: 15000,
+    });
+
+    // The seeded key is a fixture, so name recovery asks for the passphrase
+    // once the list is in; the menu does not depend on it.
+    const passphrasePrompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    await passphrasePrompt.waitFor({ timeout: 5000 }).catch(() => {});
+    if (await passphrasePrompt.isVisible()) {
+      await passphrasePrompt
+        .getByRole("button", { name: "Cancel", exact: true })
+        .click();
+      await expect(passphrasePrompt).toBeHidden();
+    }
+
+    await page.getByTestId("main-button").first().click();
+
+    for (const id of [
+      "personal_new-document",
+      "personal_new-spreadsheet",
+      "personal_new-presentation",
+      "personal_new-pdf-form",
+      "personal_new-folder",
+    ]) {
+      await expect(page.locator(`#${id}`)).toBeVisible({ timeout: 5000 });
+    }
+    await expect(page.getByText("Upload files", { exact: true })).toBeVisible();
+  });
+
   test("shows the no-access badge when user has NO keys", async ({
     page,
     mockRequest,

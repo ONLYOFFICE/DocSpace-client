@@ -19,7 +19,7 @@
 
 - [x] 3.1 Keep PDF creation in private rooms (design D3): pin it with cases named "Create menu opened" for the "+ New" model (`src/store/contextOptionsStore/__tests__/ContextOptionsStore.models.test.ts`) and the quick-action tiles (`src/pages/Home/Hooks/__tests__/useQuickActions.test.tsx`) of a private room, both listing the PDF entry, and correct the translator comment of Common:PrivateRoomCreateNotSupported, which says only documents, spreadsheets and presentations can be created; verify with `cd packages/client && pnpm exec vitest run quickActions folderModel src/store/contextOptionsStore`
 - [x] 3.2 Render the bullet list of the empty private room view outside the paragraph element in `packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx` (a `<ul>` inside the description `<p>`, reported by React on the local portal, 2026-10-22); verify with a component test asserting the list is not inside a `p` and no console error
-- [ ] 3.3 Add the case "Create menu opened" to `packages/client/__tests__/encrypted-file-ui.spec.ts`: the "+ New" menu of a private room offers document, spreadsheet, presentation, PDF form, folder and upload; verify with the spec in Docker (`tests-dev`)
+- [x] 3.3 Add the case "Create menu opened" to `packages/client/__tests__/encrypted-file-ui.spec.ts`: the "+ New" menu of a private room offers document, spreadsheet, presentation, PDF form, folder and upload; verify with the spec in Docker (`tests-dev`)
 
 ## 4. Decrypted folder download and bulk menu
 

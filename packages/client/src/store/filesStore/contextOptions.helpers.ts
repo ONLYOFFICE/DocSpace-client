@@ -106,6 +106,7 @@ export const buildContextOptions = (
     item as unknown as TMetadataAIItem,
     {
       isAIEnabled: deps.settingsStore.aiServicesEnabled,
+      isAIReady: !!deps.settingsStore.aiConfig?.aiReady,
       isGuest: !!deps.userStore.user?.isVisitor,
       isPublicRoom: deps.publicRoomStore.isPublicRoom,
       extsConvertible: deps.filesSettingsStore.extsConvertible,

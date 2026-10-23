@@ -108,6 +108,7 @@ const metadata = {
 
 const context: TMetadataAIContext = {
   isAIEnabled: true,
+  isAIReady: true,
   isGuest: false,
   isPublicRoom: false,
   extsConvertible: { ".docx": [".pdf", ".txt"], ".png": [".jpg"] },
@@ -156,6 +157,7 @@ describe("context menu options", () => {
       getMetadataAIOptions(file({ encrypted: true }), context),
       getMetadataAIOptions(room({ rootFolderType: FolderType.Archive }), context),
       getMetadataAIOptions(file(), { ...context, isAIEnabled: false }),
+      getMetadataAIOptions(file(), { ...context, isAIReady: false }),
       getMetadataAIOptions(file(), { ...context, isGuest: true }),
       getMetadataAIOptions(file(), { ...context, isPublicRoom: true }),
     ];

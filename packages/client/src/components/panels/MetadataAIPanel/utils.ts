@@ -99,10 +99,17 @@ export const canReadAsText = (
 
 export const getMetadataAIOptions = (
   item: TMetadataAIItem,
-  { isAIEnabled, isGuest, isPublicRoom, extsConvertible }: TMetadataAIContext,
+  {
+    isAIEnabled,
+    isAIReady,
+    isGuest,
+    isPublicRoom,
+    extsConvertible,
+  }: TMetadataAIContext,
 ) => {
   const isAvailable =
     isAIEnabled &&
+    isAIReady &&
     !isGuest &&
     !isPublicRoom &&
     isMetadataSupported(item) &&

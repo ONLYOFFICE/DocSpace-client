@@ -53,6 +53,7 @@ export type TMetadataAIItem = TMetadataSelection & {
 
 export type TMetadataAIContext = {
   isAIEnabled: boolean;
+  isAIReady: boolean;
   isGuest: boolean;
   isPublicRoom: boolean;
   extsConvertible?: Record<string, string[]> | string[];

@@ -168,22 +168,27 @@ const EmptyPrivateRoomView = ({
     });
   }
 
-  const description = (
-    <ul className={styles.list}>
-      {items.map((text) => (
-        <li key={text} className={styles.listItem}>
-          <SecurityShieldIcon />
-          <span>{text}</span>
-        </li>
-      ))}
-    </ul>
+  // EmptyView renders its description inside a paragraph, which cannot hold
+  // a list; the list goes below the header instead.
+  const benefits = (
+    <div className={styles.benefits}>
+      <ul className={styles.list}>
+        {items.map((text) => (
+          <li key={text} className={styles.listItem}>
+            <SecurityShieldIcon />
+            <span>{text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 
   return (
     <EmptyView
       icon={isBase ? <EmptyPrivateRoomLightIcon /> : <EmptyPrivateRoomDarkIcon />}
       title={t("Common:PrivateRoomEmptyTitle")}
-      description={description}
+      description={null}
+      extraContent={benefits}
       options={options}
     />
   );

@@ -35,6 +35,11 @@
 
 @use "@onlyoffice/apps-ui-kit/styles/variables/colors" as colors;
 
+.benefits {
+  display: flex;
+  justify-content: center;
+}
+
 .list {
   margin: 0;
   padding: 0;

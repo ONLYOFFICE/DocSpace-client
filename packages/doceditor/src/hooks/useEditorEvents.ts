@@ -80,7 +80,7 @@ import {
 import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 import type { Nullable } from "@docspace/shared/types";
-import { IS_DESKTOP_EDITOR } from "@/utils/constants";
+import { IS_DESKTOP_EDITOR, isActionType } from "@/utils/constants";
 
 import { isMobile } from "react-device-detect";
 
@@ -1136,6 +1136,16 @@ const useEditorEvents = ({
   const onRequestRefreshFile = React.useCallback(async () => {
     if (!fileInfo?.id) return;
 
+    // re-request the configuration with the action the page was opened with:
+    // editorConfig.mode is "edit" while filling a form too, and sending it as
+    // an action would take the form off filling
+    const pageAction = searchParams.get("action");
+    const action = isActionType(pageAction)
+      ? pageAction
+      : config?.editorConfig.mode === "view"
+        ? "view"
+        : undefined;
+
     const res = await openEdit(
       fileInfo.id,
       undefined,
@@ -1144,7 +1154,7 @@ const useEditorEvents = ({
       undefined,
       shareKey,
       config?.editorType,
-      config?.editorConfig.mode,
+      action,
     );
 
     getDocEditor()?.refreshFile(res);
@@ -1152,6 +1162,7 @@ const useEditorEvents = ({
     fileInfo?.id,
     doc,
     shareKey,
+    searchParams,
     config?.editorType,
     config?.editorConfig.mode,
   ]);

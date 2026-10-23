@@ -55,3 +55,6 @@ export const availableActions: Record<ActionType, boolean> = {
   fill: true,
   view: true,
 };
+
+export const isActionType = (value: string | null): value is ActionType =>
+  value !== null && Object.hasOwn(availableActions, value);

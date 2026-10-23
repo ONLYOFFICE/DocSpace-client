@@ -744,6 +744,7 @@ describe("encryptedFiles mock — GET /files/folder/{folderId}/path (mirrors Fol
 
 describe("encryptedFiles mock — a second room in the same spec (withOtherRooms)", () => {
   const OTHER_ROOM_ID = 9300;
+  const OTHER_FOLDER_ID = 9301;
   const otherHandle: { current: EncryptedFilesHandlerHandle | null } = {
     current: null,
   };
@@ -754,6 +755,7 @@ describe("encryptedFiles mock — a second room in the same spec (withOtherRooms
         roomId: OTHER_ROOM_ID,
         ownerId: ALICE_ID,
         currentUserId: ALICE_ID,
+        folders: [{ id: OTHER_FOLDER_ID, title: "Drafts" }],
         withOtherRooms: true,
         handle: otherHandle,
       }),
@@ -801,5 +803,45 @@ describe("encryptedFiles mock — a second room in the same spec (withOtherRooms
     expect(handle.current!.getSessions().map((s) => s.folderId)).toEqual([
       ROOM_ID,
     ]);
+  });
+
+  it("serves a folder of the second room: the room counts it, its path runs through the room and a session in it ends with the folder", async () => {
+    const api = `${BASE_URL}:${PORT}/${API_PREFIX}`;
+
+    const room = (await (await fetch(`${api}/files/folder/${OTHER_ROOM_ID}`)).json()) as {
+      response: Record<string, unknown>;
+    };
+    const path = (await (
+      await fetch(`${api}/files/folder/${OTHER_FOLDER_ID}/path`)
+    ).json()) as { response: Record<string, unknown>[] };
+    const session = (await (
+      await fetch(`${api}/files/${OTHER_FOLDER_ID}/session`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fileName: "blob.bin",
+          fileSize: 4,
+          encrypted: true,
+        }),
+      })
+    ).json()) as { response: { path: number[] } };
+
+    expect(room.response).toMatchObject({ foldersCount: 1, private: true });
+    expect(path.response.map((entry) => entry.id)).toEqual([
+      2002,
+      OTHER_ROOM_ID,
+      OTHER_FOLDER_ID,
+    ]);
+    expect(path.response[1]).toMatchObject({ roomType: 5, private: true });
+    expect(path.response[2]).toMatchObject({
+      parentId: OTHER_ROOM_ID,
+      private: false,
+    });
+    expect(session.response.path).toEqual([
+      2002,
+      OTHER_ROOM_ID,
+      OTHER_FOLDER_ID,
+    ]);
+    expect(handle.current!.getRequests()).toEqual([]);
   });
 });

@@ -130,6 +130,28 @@ describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonCo
     },
   );
 
+  it("a further private room carries the count of the folders below it", async () => {
+    server.use(
+      privateRoomListHandler(PORT, {
+        roomId: PRIVATE_ROOM_ID,
+        otherPrivateRooms: [
+          { roomId: 9310, title: "Second", foldersCount: 1 },
+        ],
+      }),
+    );
+
+    const list = (await getRooms("?searchArea=Active")) as unknown as {
+      folders: { id: number; foldersCount: number }[];
+    };
+
+    expect(
+      list.folders.map(({ id, foldersCount }) => ({ id, foldersCount })),
+    ).toEqual([
+      { id: PRIVATE_ROOM_ID, foldersCount: 0 },
+      { id: 9310, foldersCount: 1 },
+    ]);
+  });
+
   it("NotPrivate leaves the private room out", async () => {
     useList();
 

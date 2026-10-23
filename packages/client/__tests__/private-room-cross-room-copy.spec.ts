@@ -62,6 +62,8 @@ const SOURCE_ROOM_ID = 9520;
 const SOURCE_ROOM_TITLE = "Source Private Room";
 const DEST_ROOM_ID = 9530;
 const DEST_ROOM_TITLE = "Destination Private Room";
+const DEST_FOLDER_ID = 9531;
+const DEST_FOLDER_TITLE = "Drafts";
 const TEST_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";
 const BOB_ID = "22222222-2222-2222-2222-222222222222";
@@ -121,7 +123,7 @@ const serveTwoPrivateRooms = async (
   page: Page,
   mockRequest: WorkerFixture,
   baseUrl: string,
-  { sourceArchived = false, destHoldsPlan = false } = {},
+  { sourceArchived = false, destHoldsPlan = false, destHoldsFolder = false } = {},
 ): Promise<TRooms> => {
   const { keysHandle, passphrase } = await bootstrapEncryption(
     page,
@@ -177,7 +179,11 @@ const serveTwoPrivateRooms = async (
             roomId: SOURCE_ROOM_ID,
             title: SOURCE_ROOM_TITLE,
             otherPrivateRooms: [
-              { roomId: DEST_ROOM_ID, title: DEST_ROOM_TITLE },
+              {
+                roomId: DEST_ROOM_ID,
+                title: DEST_ROOM_TITLE,
+                foldersCount: destHoldsFolder ? 1 : 0,
+              },
             ],
           },
     ),
@@ -196,6 +202,9 @@ const serveTwoPrivateRooms = async (
         EditRoom: true,
       },
       initialFiles: destFiles,
+      folders: destHoldsFolder
+        ? [{ id: DEST_FOLDER_ID, title: DEST_FOLDER_TITLE }]
+        : [],
       withOtherRooms: true,
       handle: destHandle,
     }),
@@ -285,12 +294,16 @@ const selectorItem = (page: Page, title: string | RegExp) =>
     .locator('[data-testid^="selector-item-"]')
     .filter({ hasText: title });
 
-/** Picks the destination room from Rooms at the picker's root and confirms. */
-const copyToDestinationRoom = async (page: Page) => {
+/**
+ * Picks the destination room from Rooms at the picker's root, or a folder of
+ * it, and confirms.
+ */
+const copyToDestinationRoom = async (page: Page, folderTitle?: string) => {
   const picker = selector(page);
   await picker.getByText("Apps", { exact: true }).first().click();
   await selectorItem(page, /^Rooms$/).click();
   await selectorItem(page, DEST_ROOM_TITLE).click();
+  if (folderTitle) await selectorItem(page, folderTitle).click();
   await picker.getByRole("button", { name: "Copy here" }).click();
 };
 
@@ -350,6 +363,29 @@ test.describe("Private room — copy into another private room", () => {
     await unlockIfPrompted(page, rooms.passphrase);
 
     await expectReencryptedCopy(rooms);
+  });
+
+  test("Subfolder of another private room", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl, {
+      destHoldsFolder: true,
+    });
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+
+    await openTransferDialog(page, "copy");
+    await copyToDestinationRoom(page, DEST_FOLDER_TITLE);
+    await unlockIfPrompted(page, rooms.passphrase);
+
+    await expectReencryptedCopy(rooms);
+    expect(rooms.destHandle.getSessions().map((s) => s.folderId)).toEqual([
+      DEST_FOLDER_ID,
+    ]);
+    expect(rooms.destHandle.getFiles()[0].folderId).toBe(DEST_FOLDER_ID);
   });
 
   test("Copy into a room holding a file of the same name", async ({

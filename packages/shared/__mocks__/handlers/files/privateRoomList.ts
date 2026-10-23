@@ -42,8 +42,12 @@ export type PrivateRoomListOptions = {
   roomId: number;
   title?: string;
   ownerId?: string;
-  /** More private rooms, listed right after the first one. */
-  otherPrivateRooms?: { roomId: number; title: string }[];
+  /**
+   * More private rooms, listed right after the first one. `foldersCount` is
+   * the number of folders below the room, as FolderDtoHelper copies it from
+   * the stored counter (FolderQueries.UpdateFoldersCountAsync).
+   */
+  otherPrivateRooms?: { roomId: number; title: string; foldersCount?: number }[];
   /** Rooms listed after the private ones, with `private: false`. */
   ordinaryRooms?: { roomId: number; title: string }[];
   /** The new-items count (`new`) of the first private room. */
@@ -101,10 +105,11 @@ export const privateRoomListHandler = (
     roomTitle: string,
     isPrivate: boolean,
     newItems = 0,
+    foldersCount = 0,
   ) => ({
     parentId: 2002,
     filesCount: 0,
-    foldersCount: 0,
+    foldersCount,
     new: newItems,
     mute: false,
     tags: [],
@@ -144,7 +149,7 @@ export const privateRoomListHandler = (
   const folders = [
     roomDto(opts.roomId, title, true, opts.newItems),
     ...(opts.otherPrivateRooms ?? []).map((room) =>
-      roomDto(room.roomId, room.title, true),
+      roomDto(room.roomId, room.title, true, 0, room.foldersCount),
     ),
     ...(opts.ordinaryRooms ?? []).map((room) =>
       roomDto(room.roomId, room.title, false),

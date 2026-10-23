@@ -282,11 +282,17 @@ const buildFileDto = (
   };
 };
 
+/**
+ * The room as FolderDtoHelper.GetAsync builds it. `foldersCount` is the
+ * stored count of folders below it (FolderQueries.UpdateFoldersCountAsync);
+ * the mock's folders all sit directly in the room.
+ */
 const buildFolderDto = (
   roomId: number,
   archived = false,
   isPrivate = true,
   title = "Private Room",
+  foldersCount = 0,
 ) => {
   const section = sectionOf(archived);
   return {
@@ -294,7 +300,7 @@ const buildFolderDto = (
     title,
     parentId: section.id,
     filesCount: 0,
-    foldersCount: 0,
+    foldersCount,
     rootFolderId: section.id,
     rootFolderType: section.folderType,
     roomType: 5,
@@ -389,7 +395,7 @@ export const encryptedFilesHandlers = (
   const holdsFolder = (folderId: number) =>
     folderId === roomId || folders.some((f) => f.id === folderId);
   const roomDto = () => ({
-    ...buildFolderDto(roomId, archived, isPrivate, roomTitle),
+    ...buildFolderDto(roomId, archived, isPrivate, roomTitle, folders.length),
     ...(!archived && opts.roomSecurity && { security: opts.roomSecurity }),
   });
   const ownerId =

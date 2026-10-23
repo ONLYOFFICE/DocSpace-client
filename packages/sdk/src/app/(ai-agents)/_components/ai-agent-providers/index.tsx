@@ -41,6 +41,7 @@ import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@onlyoffice/apps-ui-kit";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { formatPeriodEnd } from "@onlyoffice/apps-ui-kit/billing/shared/service-limits/common/utils";
 import AiAgentProviders, {
   useStores,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
@@ -50,6 +51,7 @@ import {
   PORTAL_DARK_THEME_ID,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import { editAIAgent } from "@docspace/shared/api/ai";
+import { getServiceLimitChatError } from "@docspace/shared/utils/ai";
 
 import {
   useAgentsAIConfigStore,
@@ -148,6 +150,20 @@ const AiAgentsAiChatProviders = ({
     NonNullable<AiAgentProvidersProps["formatChatError"]>
   >(
     (payload) => {
+      // A spending limit reached arrives as a 403 relayed by the AI gateway
+      // (see getServiceLimitChatError); the SDK has no settings to send the
+      // user to, so both cases end in a plain message without Retry.
+      const serviceLimit = getServiceLimitChatError(payload);
+      if (serviceLimit) {
+        return {
+          title: t("Common:AILimitReached"),
+          description: t("Common:AILimitReachedContactAdminResetsOn", {
+            date: formatPeriodEnd(serviceLimit.until, i18n.language),
+          }),
+          action: null,
+        };
+      }
+
       if (payload?.code !== "insufficient_funds") return null;
 
       return {
@@ -156,7 +172,7 @@ const AiAgentsAiChatProviders = ({
         action: null,
       };
     },
-    [t],
+    [t, i18n.language],
   );
 
   const callbacks = React.useMemo<AiAgentProvidersProps["callbacks"]>(

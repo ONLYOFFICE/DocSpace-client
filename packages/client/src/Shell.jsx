@@ -71,6 +71,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/toast";
 import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { formatPeriodEnd } from "@onlyoffice/apps-ui-kit/billing/shared/service-limits/common/utils";
 import { getCookie, deleteCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 
 import {
@@ -96,6 +97,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { handleCopy } from "@docspace/shared/utils/copy";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { getServiceLimitChatError } from "@docspace/shared/utils/ai";
 
 import "@docspace/shared/styles/theme.scss";
 
@@ -914,13 +916,35 @@ const Shell = ({ page = "home", ...rest }) => {
   // Only the Payer can actually top the wallet up, so the button to
   // Billing -> Wallet is theirs alone; everyone else is pointed to the Payer
   // (`action: null` also drops the default Retry, which would just fail
-  // again on an empty wallet). Every other code keeps the library default
-  // (localized text + Retry).
+  // again on an empty wallet). A spending limit reached (relayed as a 403, see
+  // getServiceLimitChatError) is handled the same way: admins get a button to
+  // AI settings -> Limits, everyone else is pointed to an admin. Every other
+  // code keeps the library default (localized text + Retry).
   const formatChatError = useCallback(
     (payload) => {
-      // Standalone pays its AI provider directly: no wallet, nothing to top up,
-      // so the library default (localized text + Retry) stands.
-      if (payload?.code !== "insufficient_funds" || standalone) return null;
+      // Standalone pays its AI provider directly: no wallet and no spending
+      // limits, so the library default (localized text + Retry) stands.
+      if (standalone) return null;
+
+      const serviceLimit = getServiceLimitChatError(payload);
+      if (serviceLimit) {
+        const date = formatPeriodEnd(serviceLimit.until, language);
+
+        return {
+          title: t("Common:AILimitReached"),
+          description: isAdmin
+            ? t("Common:AILimitReachedResetsOn", { date })
+            : t("Common:AILimitReachedContactAdminResetsOn", { date }),
+          action: isAdmin
+            ? {
+                text: t("Common:ChangeAILimit"),
+                onClick: () => navigate("/portal-settings/ai-settings/limits"),
+              }
+            : null,
+        };
+      }
+
+      if (payload?.code !== "insufficient_funds") return null;
 
       return {
         title: t("Common:WalletBalanceTooLow"),
@@ -935,7 +959,7 @@ const Shell = ({ page = "home", ...rest }) => {
           : null,
       };
     },
-    [t, isPayer, navigate, standalone],
+    [t, isAdmin, isPayer, navigate, standalone, language],
   );
 
   // AI chat host callbacks. Web Search settings save on an explicit button

@@ -54,6 +54,7 @@ import {
   getFillNotFound,
   getMetadataAIError,
   getMetadataAIOptions,
+  getMetadataAIServiceLimit,
   getSkippedTitles,
   getSuggestNotFound,
   getTemplateForms,
@@ -359,5 +360,28 @@ describe("service answers", () => {
     expect(getMetadataAIError(t, new Error("offline"))).toBe(
       "Common:SomethingWentWrong",
     );
+  });
+
+  it("tells a reached spending limit from other failed model requests", () => {
+    const limitError = {
+      status: 502,
+      code: "auth",
+      providerMessage:
+        "403 Service limit exceeded: Service limit exceeded for customer No.10000001. " +
+        "Service group 'ai-services', amount limit 1.2000000000, available -0.1026610350 until 2026-10-23 23:59:59Z",
+    };
+
+    expect(getMetadataAIServiceLimit(limitError)).toEqual({
+      until: "2026-10-23T23:59:59Z",
+    });
+    expect(
+      getMetadataAIServiceLimit({
+        status: 502,
+        code: "auth",
+        providerMessage: "403 Access denied",
+      }),
+    ).toBeNull();
+    expect(getMetadataAIServiceLimit({ status: 502 })).toBeNull();
+    expect(getMetadataAIServiceLimit(new Error("offline"))).toBeNull();
   });
 });

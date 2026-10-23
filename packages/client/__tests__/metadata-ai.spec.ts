@@ -41,6 +41,7 @@ import {
   aiConfigHandler,
   aiMetaFillHandler,
   aiMetaGenerateHandler,
+  META_SERVICE_LIMIT_ERROR,
   entryMetadataHandler,
   entryMetadataSaveHandlers,
   filesSettingsHandler,
@@ -48,6 +49,7 @@ import {
   myHandler,
   rootHandler,
   selfActivationStatusHandler,
+  selfByTypeHandler,
   settingsHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
@@ -220,5 +222,79 @@ test.describe("Metadata AI", () => {
 
     await expect(panel.getByText("Something went wrong.")).toBeVisible();
     await expect(panel.getByTestId("metadata_ai_review_notes")).toHaveCount(0);
+  });
+
+  test.describe("spending limit reached", () => {
+    // The reset time is rendered in the portal's timezone, which the mocked
+    // settings leave unset, so the browser's own zone decides it.
+    test.use({ timezoneId: "UTC" });
+
+    /** The mocked reset instant the standard way, for an en-US account in UTC. */
+    const RESET_AT_SHOWN = "10/23/2026 11:59 PM";
+
+    test.beforeEach(({ mockRequest }) => {
+      mockRequest.use(
+        // Spending limits exist on SaaS only; a standalone portal has no
+        // Limits tab to lead to.
+        settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+        selfByTypeHandler(TEST_PORT, "owner", "en-US"),
+        aiMetaFillHandler(TEST_PORT, {
+          status: 502,
+          error: META_SERVICE_LIMIT_ERROR,
+        }),
+        aiMetaGenerateHandler(TEST_PORT, {
+          status: 502,
+          error: META_SERVICE_LIMIT_ERROR,
+        }),
+      );
+    });
+
+    const runIntoLimit = async (
+      page: Page,
+      baseUrl: string,
+      mode: "fill" | "suggest",
+    ) => {
+      const panel = await openAIPanel(page, baseUrl, mode);
+
+      await panel.getByTestId("metadata_ai_run_button").click();
+
+      const notice = panel.getByTestId("metadata_ai_limit_notice");
+      await expect(notice).toContainText("AI spending limit reached");
+      await expect(notice).toContainText(
+        `AI requests are paused until ${RESET_AT_SHOWN}. Raise the limit in the AI settings to continue now.`,
+      );
+      // The limit can be raised in another tab, so a second run stays possible.
+      await expect(panel.getByTestId("metadata_ai_run_button")).toBeEnabled();
+
+      return panel;
+    };
+
+    test("suggest shows when it resets", async ({ page, baseUrl }) => {
+      await runIntoLimit(page, baseUrl, "suggest");
+
+      await expectScreenshot(page, [
+        "desktop",
+        "metadata",
+        "metadata-ai_suggest-limit.png",
+      ]);
+    });
+
+    test("fill shows when it resets and leads to the limits", async ({
+      page,
+      baseUrl,
+    }) => {
+      const panel = await runIntoLimit(page, baseUrl, "fill");
+
+      await expectScreenshot(page, [
+        "desktop",
+        "metadata",
+        "metadata-ai_fill-limit.png",
+      ]);
+
+      await panel.getByTestId("metadata_ai_change_limit_button").click();
+
+      await expect(page).toHaveURL(/\/portal-settings\/ai-settings\/limits$/);
+      await expect(page.getByTestId("metadata_ai_panel")).toHaveCount(0);
+    });
   });
 });

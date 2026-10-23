@@ -532,6 +532,8 @@ const postMetadataAI = async <T>(
     throw Object.assign(new Error(body?.error ?? response.statusText), {
       status: response.status,
       skipped: body?.skipped,
+      code: body?.code,
+      providerMessage: body?.providerMessage,
     });
   }
 

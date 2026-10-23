@@ -127,6 +127,7 @@ import {
   resolveRoomIdForFileImpl,
   downloadEncryptedFileImpl,
   downloadEncryptedFilesAsZipImpl,
+  downloadEncryptedFolderImpl,
 } from "./filesActionsStore/download.helpers";
 import {
   duplicateActionImpl,
@@ -589,6 +590,8 @@ class FilesActionStore {
   downloadEncryptedFile = async (file: TActionItem)=> downloadEncryptedFileImpl(this, file);
 
   downloadEncryptedFilesAsZip = async (encryptedFiles: TActionItem[])=> downloadEncryptedFilesAsZipImpl(this, encryptedFiles);
+
+  downloadEncryptedFolder = async (folder: TActionItem)=> downloadEncryptedFolderImpl(this, folder);
 
   completeAction = async (
     selectedItem: { id: number; isFolder?: boolean },

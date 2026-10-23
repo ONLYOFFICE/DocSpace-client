@@ -848,6 +848,7 @@
   "EncryptedChangeOwnerKeyMismatch": "Cannot transfer ownership to {{user}}: their encryption key has changed and was not trusted. Re-verify the key and try again.",
   "EncryptedChangeOwnerNoKeys": "Cannot transfer ownership to {{user}}: they have not set up encryption keys yet. Ask them to generate keys in their profile, then try again.",
   "EncryptedCopyFailed": "Failed to copy encrypted files: {{names}}",
+  "EncryptedDownloadPartial": "These files could not be decrypted and were left out of the archive: {{fileNames}}",
   "EncryptedFile": "Encrypted file",
   "EncryptedMovePartialFailure": "These files could not be moved out of the private room and remain in it: {{names}}",
   "EncryptedOperationFailed": "The operation on the encrypted file failed. Try again.",

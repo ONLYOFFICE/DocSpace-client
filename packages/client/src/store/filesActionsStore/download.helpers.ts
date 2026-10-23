@@ -36,7 +36,10 @@
 import {
   downloadFiles,
   getFileEncryptionAccess,
+  getFolder,
 } from "@docspace/shared/api/files";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 import {
   loadRoomMemberKeysSafe,
 } from "@docspace/shared/services/private-room/room-member-keys";
@@ -59,7 +62,7 @@ import type { Nullable } from "@docspace/shared/types";
 import type {
   TFileConvertId,
 } from "@docspace/shared/dialogs/download-dialog/DownloadDialog.types";
-import type { TOperation } from "@docspace/shared/api/files/types";
+import type { TFile, TOperation } from "@docspace/shared/api/files/types";
 import i18n from "../../i18n";
 import type FilesActionStore from "../FilesActionsStore";
 import type { TActionItem, TDownloadTranslations } from "../FilesActionsStore";
@@ -596,3 +599,196 @@ self: FilesActionStore,encryptedFiles: TActionItem[]
   }
 };
 
+const FOLDER_PAGE_SIZE = 100;
+
+type TFolderTreeFile = { file: TFile; dir: string };
+
+/** Every file under a folder, each with the path of its folder inside it. */
+const listFolderTree = async (
+  folderId: number | string,
+  dir = "",
+): Promise<TFolderTreeFile[]> => {
+  const files: TFolderTreeFile[] = [];
+  let loaded = 0;
+  for (let page = 0; ; page += 1) {
+    const filter = FilesFilter.getDefault();
+    filter.page = page;
+    filter.pageCount = FOLDER_PAGE_SIZE;
+
+    const data = await getFolder(folderId, filter);
+    for (const file of data.files) files.push({ file, dir });
+    for (const folder of data.folders) {
+      files.push(...(await listFolderTree(folder.id, `${dir}${folder.title}/`)));
+    }
+
+    const count = data.files.length + data.folders.length;
+    loaded += count;
+    if (count === 0 || loaded >= data.total) break;
+  }
+  return files;
+};
+
+/** Zip entry names, with clashes renamed inside their own folder only. */
+const toZipEntries = (
+  entries: { dir: string; name: string; data: Uint8Array }[],
+) => {
+  const byDir = new Map<string, number[]>();
+  entries.forEach(({ dir }, index) => {
+    byDir.set(dir, [...(byDir.get(dir) ?? []), index]);
+  });
+
+  const names: string[] = new Array(entries.length);
+  for (const [dir, indexes] of byDir) {
+    deduplicateFileNames(indexes.map((i) => entries[i].name)).forEach(
+      (name, k) => {
+        names[indexes[k]] = `${dir}${name}`;
+      },
+    );
+  }
+  return entries.map(({ data }, i) => ({ name: names[i], data }));
+};
+
+/**
+ * Downloads a folder of a private room, or the room itself, as one zip of
+ * its decrypted files, keeping their paths inside it.
+ * Spec: private-rooms/file-operations, "Decrypted folder download".
+ */
+export const downloadEncryptedFolderImpl = async (
+  self: FilesActionStore,
+  folder: TActionItem,
+) => {
+  const { encryptionKeys, user } = self.userStore;
+
+  if (!encryptionKeys || encryptionKeys.length === 0) {
+    toastr.error(i18n.t("Common:EncryptionKeysNotConfigured"));
+    return;
+  }
+
+  const userId = user?.id;
+  if (!userId) return;
+
+  const { setSecondaryProgressBarData } =
+    self.uploadDataStore.secondaryProgressDataStore;
+  const operationId = uniqueid("operation_");
+  const finish = (alert: boolean) =>
+    setSecondaryProgressBarData({
+      operation: OPERATIONS_NAME.download,
+      percent: 100,
+      completed: true,
+      alert,
+      operationId,
+    });
+
+  try {
+    const identity = await requireUnlock(String(userId));
+    if (!identity) return;
+
+    setSecondaryProgressBarData({
+      operation: OPERATIONS_NAME.download,
+      percent: 0,
+      label: i18n.t("Common:ArchivingData"),
+      operationId,
+    });
+
+    const roomId =
+      folder.isRoom || folder.roomType
+        ? folder.id
+        : self.resolveRoomIdForFile(null);
+    const [tree, roomMemberKeys] = await Promise.all([
+      listFolderTree(folder.id),
+      loadRoomMemberKeysSafe(roomId),
+    ]);
+
+    const results: { dir: string; name: string; data: Uint8Array }[] = [];
+    const failures: string[] = [];
+
+    for (let i = 0; i < tree.length; i++) {
+      const { file, dir } = tree[i];
+      const shownName = resolveDisplayTitle(file);
+      const fileShare = 100 / tree.length;
+
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: Math.floor(fileShare * i),
+        label: `${i18n.t("Files:Downloading")} (${i + 1}/${tree.length})`,
+        operationId,
+      });
+
+      try {
+        if (!file.encrypted) {
+          const response = await fetch(file.viewUrl);
+          if (!response.ok) throw new Error(`${response.status}`);
+          results.push({
+            dir,
+            name: file.title,
+            data: new Uint8Array(await response.arrayBuffer()),
+          });
+          continue;
+        }
+
+        const encryptionInfo = await getFileEncryptionAccess(file.id);
+        const hasOwnEntry = !!encryptionInfo?.fileKeys?.some(
+          (k) => String(k.userId) === String(userId),
+        );
+        if (!hasOwnEntry) {
+          failures.push(`${dir}${shownName}`);
+          continue;
+        }
+
+        const result = await downloadAndDecryptFileToBuffer({
+          downloadUrl: file.viewUrl,
+          fileId: file.id,
+          fileKeys: encryptionInfo.fileKeys!,
+          roomMemberKeys,
+          userId: String(userId),
+          identity,
+          originalFileName: shownName,
+          originalFileType: "application/octet-stream",
+        });
+
+        if (result.success && result.data) {
+          results.push({ dir, name: result.fileName, data: result.data });
+        } else {
+          failures.push(`${dir}${shownName}`);
+        }
+      } catch {
+        failures.push(`${dir}${shownName}`);
+      }
+    }
+
+    if (results.length === 0 && failures.length > 0) {
+      finish(true);
+      toastr.error(i18n.t("Files:DecryptAllFailed"));
+      return;
+    }
+
+    setSecondaryProgressBarData({
+      operation: OPERATIONS_NAME.download,
+      percent: 95,
+      label: i18n.t("Files:CompressingFiles"),
+      operationId,
+    });
+
+    const zipData = createZipFromBuffers(toZipEntries(results));
+    triggerFileDownload(
+      new Blob([zipData as unknown as BlobPart], { type: "application/zip" }),
+      `${folder.title}.zip`,
+    );
+    finish(failures.length > 0);
+
+    if (failures.length > 0) {
+      toastr.warning(
+        i18n.t("Common:EncryptedDownloadPartial", {
+          fileNames: failures.join(", "),
+        }),
+        null,
+        0,
+        true,
+      );
+    }
+  } catch (error) {
+    finish(true);
+    console.error("[ENCRYPTION] downloadEncryptedFolder threw:", error);
+    toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
+  }
+};

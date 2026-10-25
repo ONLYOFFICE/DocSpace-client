@@ -130,7 +130,7 @@ const TabsCommon = (props: TabsCommonProps) => {
     },
     {
       id: "default-templates",
-      name: t("DefaultTemplates"),
+      name: t("DocumentTemplates"),
       content: <DefaultTemplates />,
       onClick: async () => {
         clearAbortControllerArr();

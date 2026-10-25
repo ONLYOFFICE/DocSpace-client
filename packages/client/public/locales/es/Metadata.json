@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Los elementos que ya tienen valores de {{template}} no cambian",
   "SuggestMetadata": "Sugerir metadatos",
   "TemplateDeleted": "Plantilla eliminada",
+  "TemplateFieldsRequired": "Añada al menos un campo para guardar la plantilla",
   "TemplateValue": "Plantilla: {{template}}",
   "Visibility": "Visibilidad",
   "Visible": "Visible",

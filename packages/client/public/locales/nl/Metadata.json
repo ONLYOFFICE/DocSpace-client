@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Items die al waarden van {{template}} hebben, blijven ongewijzigd",
   "SuggestMetadata": "Metadata voorstellen",
   "TemplateDeleted": "Sjabloon verwijderd",
+  "TemplateFieldsRequired": "Voeg ten minste één veld toe om het sjabloon op te slaan",
   "TemplateValue": "Sjabloon: {{template}}",
   "Visibility": "Zichtbaarheid",
   "Visible": "Zichtbaar",

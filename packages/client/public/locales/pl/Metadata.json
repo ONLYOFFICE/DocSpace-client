@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Elementy, które mają już wartości {{template}}, pozostaną bez zmian",
   "SuggestMetadata": "Zaproponuj metadane",
   "TemplateDeleted": "Szablon usunięty",
+  "TemplateFieldsRequired": "Dodaj co najmniej jedno pole, aby zapisać szablon",
   "TemplateValue": "Szablon: {{template}}",
   "Visibility": "Widoczność",
   "Visible": "Widoczny",

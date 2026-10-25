@@ -53,7 +53,7 @@ const DefaultTemplates = ({ templates }: Props) => {
   const { t } = useTranslation("Settings");
 
   useEffect(() => {
-    setDocumentTitle(t("DefaultTemplates"));
+    setDocumentTitle(t("DocumentTemplates"));
   }, []);
 
   return (

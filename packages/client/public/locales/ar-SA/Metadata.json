@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "تبقى العناصر التي تحتوي بالفعل على قيم {{template}} دون تغيير",
   "SuggestMetadata": "اقتراح البيانات الوصفية",
   "TemplateDeleted": "تم حذف القالب",
+  "TemplateFieldsRequired": "أضف حقلاً واحدًا على الأقل لحفظ القالب",
   "TemplateValue": "القالب: {{template}}",
   "Visibility": "الظهور",
   "Visible": "ظاهر",

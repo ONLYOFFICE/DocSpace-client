@@ -21,7 +21,7 @@
 
 ## 5. Integration
 
-- [ ] 5.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`), the private-room E2E specs in Docker and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify everything is green
+- [x] 5.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`), the private-room E2E specs in Docker and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify everything is green
 
 ## Workflow follow-up
 

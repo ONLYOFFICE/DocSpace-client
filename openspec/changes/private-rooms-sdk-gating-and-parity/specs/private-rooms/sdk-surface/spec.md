@@ -87,7 +87,7 @@ The SDK SHALL ship every translation key the private surface renders; no private
 ## ADDED Requirements
 
 ### Requirement: Archive page follows private-room rules
-The SDK archive page for private rooms SHALL apply the same rules as the active room page: no Share tab, encrypted download path, key check before listing encrypted files, and the private empty view when there are no archived rooms.
+The SDK archive page for private rooms SHALL apply the same rules as the active room page: no Share tab, encrypted download path and key check before listing encrypted files. With no archived rooms it SHALL show the archive empty view, whose action leads back to the private rooms list.
 
 #### Scenario: Archived private room opened
 - **WHEN** the user opens an archived private room in the SDK
@@ -95,7 +95,7 @@ The SDK archive page for private rooms SHALL apply the same rules as the active 
 
 #### Scenario: No archived rooms
 - **WHEN** the archive list is empty
-- **THEN** the private empty view is shown
+- **THEN** Common:ArchiveEmptyScreenHeader is shown, and its action opens the private rooms list rather than the other rooms
 
 ## RENAMED Requirements
 

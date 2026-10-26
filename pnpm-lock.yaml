@@ -3567,11 +3567,11 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-H6q1l24HQSCOfRnUU4qq6f/pnpkyUpLRUuvm5S3Llpyo5WP5fYtJKFDRlddGVYEkR/7a9QU8oPg3F5hq0FhVWA==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-fyc/xxZ/WPl7B0LUmT8TngKqX4ngIkUD9j9bbSUWjUiRfeD/uQLpsFZZbnoKcfpQrtk3uJHgLz9fEL4nho5sBg==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.0.2
     engines: {node: '>=22'}
     peerDependencies:
-      '@onlyoffice/ai-chat': ^1.0.4
+      '@onlyoffice/ai-chat': '>=1.0.2-20261022'
       '@onlyoffice/doceditor-types': '>=9.3.1'
       '@onlyoffice/document-editor-react': 2.3.0
       '@socket.io/component-emitter': 3.1.2
@@ -11808,7 +11808,6 @@ snapshots:
       react-dom: 19.2.8(react@19.2.8)
       react-draggable: 4.4.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-dropzone: 11.7.1(react@19.2.8)
-      react-hotkeys-hook: 3.4.7(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-i18next: 15.7.4(i18next@25.10.10(typescript@5.9.3))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3)
       react-svg: 16.4.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-text-mask: 5.5.0(react@19.2.8)

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { useHotkeys, Options } from "react-hotkeys-hook";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
@@ -74,10 +74,14 @@ const useAccountsHotkeys = ({
   selection,
   openContextMenu,
 }: AccountsHotkeysProps) => {
-  const [isEnabled, setIsEnabled] = useState(true);
-
   const hotkeysFilter = {
     filter: (ev) => {
+      if (
+        checkDialogsOpen() ||
+        document.getElementsByClassName("p-contextmenu").length
+      )
+        return false;
+
       const eElement = ev.target as HTMLElement;
       const eInputElement = ev.target as HTMLInputElement;
       return (
@@ -86,14 +90,11 @@ const useAccountsHotkeys = ({
     },
     filterPreventDefault: false,
     enableOnTags: ["INPUT"],
-    enabled: enabledHotkeys && !isUsersLoading && isEnabled,
+    enabled: enabledHotkeys && !isUsersLoading,
   } as Options;
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      const someDialogIsOpen = checkDialogsOpen();
-      setIsEnabled(!someDialogIsOpen);
-
       activateHotkeys(e);
     },
     [activateHotkeys],
@@ -115,11 +116,6 @@ const useAccountsHotkeys = ({
   useHotkeys(
     "*",
     (e) => {
-      const someDialogIsOpen = checkDialogsOpen();
-      const contextMenuIsOpen =
-        document.getElementsByClassName("p-contextmenu").length;
-      if (someDialogIsOpen || contextMenuIsOpen) return;
-
       if (
         (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
         ((e.key === "Meta" || e.key === "Control") && e.altKey)

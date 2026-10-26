@@ -892,6 +892,7 @@
   "EncryptionKeyGenerated": "Đã tạo khoá mã hoá thành công",
   "EncryptionKeyImported": "Đã nhập khoá mã hoá thành công",
   "EncryptionKeys": "Khoá mã hoá",
+  "EncryptionKeysManagedInProfile": "Khoá mã hoá được quản lý trong hồ sơ {{productName}} của bạn, tại tab Quản lý khoá.",
   "EncryptionKeysNotConfigured": "Khoá mã hoá chưa được cấu hình trên thiết bị này. Hãy thiết lập khoá trong Cài đặt hồ sơ để làm việc với các tập tin được mã hoá.",
   "EncryptionKeysReload": "Phải nhập lại các khóa mã hóa",
   "EncryptionKeysRequiredForPrivateRoom": "Thiết lập khóa mã hóa của bạn trong Hồ sơ trước khi tạo phòng riêng tư.",

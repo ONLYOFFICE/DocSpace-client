@@ -892,6 +892,7 @@
   "EncryptionKeyGenerated": "Clé de chiffrement générée avec succès",
   "EncryptionKeyImported": "Clé de chiffrement importée avec succès",
   "EncryptionKeys": "Clés de chiffrement",
+  "EncryptionKeysManagedInProfile": "Les clés de chiffrement se gèrent dans votre profil {{productName}}, dans l'onglet Gestion des clés.",
   "EncryptionKeysNotConfigured": "Les clés de chiffrement ne sont pas configurées sur cet appareil. Configurez vos clés dans les paramètres du profil pour travailler avec les fichiers chiffrés.",
   "EncryptionKeysReload": "Les clés de chiffrement doivent être saisies à nouveau",
   "EncryptionKeysRequiredForPrivateRoom": "Configurez vos clés de chiffrement dans le Profil avant de créer une salle privée.",

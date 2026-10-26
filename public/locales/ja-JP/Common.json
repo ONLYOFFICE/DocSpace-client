@@ -892,6 +892,7 @@
   "EncryptionKeyGenerated": "暗号化キーを正常に生成しました",
   "EncryptionKeyImported": "暗号化キーを正常にインポートしました",
   "EncryptionKeys": "暗号化キー",
+  "EncryptionKeysManagedInProfile": "暗号化キーは、{{productName}}のプロフィールの「キー管理」タブで管理します。",
   "EncryptionKeysNotConfigured": "このデバイスに暗号化キーが設定されていません。プロフィール設定でキーを設定して、暗号化ファイルを操作してください。",
   "EncryptionKeysReload": "暗号化キーの再入力が必要",
   "EncryptionKeysRequiredForPrivateRoom": "プライベートルームを作成する前に、プロフィールで暗号化キーを設定してください。",

@@ -47,6 +47,7 @@ import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
 
 import { useEncryptionIdentityStore } from "./EncryptionIdentityStore";
+import { useKeysManagementLink } from "../_hooks/useKeysManagementLink";
 import GhostStateToastEffect from "../_components/private-shell/GhostStateToastEffect";
 import DeviceSetupHintEffect from "../_components/private-shell/DeviceSetupHintEffect";
 import BroadcastLockSync from "../_components/private-shell/BroadcastLockSync";
@@ -56,7 +57,7 @@ import BackfillEncryptedRoomEffect from "../_components/private-shell/BackfillEn
 import PostUnlockGateResetEffect from "../_components/private-shell/PostUnlockGateResetEffect";
 import { DisclosureBanner } from "../_components/private-shell/DisclosureBanner";
 
-const PassphraseDialogAdapter: React.FC<PassphraseDialogProps> = ({
+export const PassphraseDialogAdapter: React.FC<PassphraseDialogProps> = ({
   visible,
   isLoading,
   error,
@@ -64,10 +65,11 @@ const PassphraseDialogAdapter: React.FC<PassphraseDialogProps> = ({
   onCancel,
 }) => {
   const { t } = useTranslation(["Common"]);
+  const { open: openKeysManagement } = useKeysManagementLink();
   const handleForgotPassphrase = React.useCallback(() => {
     onCancel();
-    window.open("/profile/keys-management", "_blank");
-  }, [onCancel]);
+    openKeysManagement();
+  }, [onCancel, openKeysManagement]);
 
   return (
     <PassphraseModal

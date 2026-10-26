@@ -892,6 +892,7 @@
   "EncryptionKeyGenerated": "암호화 키가 성공적으로 생성되었습니다",
   "EncryptionKeyImported": "암호화 키가 성공적으로 가져와졌습니다",
   "EncryptionKeys": "암호화 키",
+  "EncryptionKeysManagedInProfile": "암호화 키는 {{productName}} 프로필의 키 관리 탭에서 관리됩니다.",
   "EncryptionKeysNotConfigured": "이 기기에 암호화 키가 구성되지 않았습니다. 프로필 설정에서 키를 설정하여 암호화된 파일을 사용하세요.",
   "EncryptionKeysReload": "암호화 키를 다시 입력해야 합니다",
   "EncryptionKeysRequiredForPrivateRoom": "비공개 방을 만들기 전에 프로필에서 암호화 키를 설정하세요.",

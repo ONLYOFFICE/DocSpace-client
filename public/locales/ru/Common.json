@@ -892,6 +892,7 @@
   "EncryptionKeyGenerated": "Ключ шифрования успешно создан",
   "EncryptionKeyImported": "Ключ шифрования успешно импортирован",
   "EncryptionKeys": "Ключи шифрования",
+  "EncryptionKeysManagedInProfile": "Ключами шифрования можно управлять в вашем профиле {{productName}} на вкладке «Управление ключами».",
   "EncryptionKeysNotConfigured": "Ключи шифрования не настроены на этом устройстве. Настройте ключи в настройках профиля для работы с зашифрованными файлами.",
   "EncryptionKeysReload": "Ключи шифрования необходимо ввести повторно",
   "EncryptionKeysRequiredForPrivateRoom": "Настройте ключи шифрования в профиле перед созданием приватной комнаты.",

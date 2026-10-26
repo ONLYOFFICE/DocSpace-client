@@ -45,6 +45,8 @@ import { useEncryption } from "@docspace/shared/context/encryption";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
+import { useKeysManagementLink } from "../../_hooks/useKeysManagementLink";
+
 const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 
 // In (private) the whole route is encryption-aware, so we don't gate by
@@ -53,6 +55,7 @@ const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 const DeviceSetupHintEffect: React.FC = () => {
   const { hasConfiguredKey, keysLoaded } = useEncryption();
   const { t } = useTranslation(["Common"]);
+  const { url, open, explain } = useKeysManagementLink();
 
   React.useEffect(() => {
     if (!keysLoaded || hasConfiguredKey) return;
@@ -61,6 +64,11 @@ const DeviceSetupHintEffect: React.FC = () => {
       sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
     } catch {
       // sessionStorage throws in private-mode Safari; fall through.
+    }
+
+    if (!url) {
+      explain();
+      return;
     }
 
     toastr.info(
@@ -75,7 +83,7 @@ const DeviceSetupHintEffect: React.FC = () => {
             color="accent"
             onClick={() => {
               toastr.clear();
-              window.open("/profile/keys-management", "_blank");
+              open();
             }}
           />,
         ]}
@@ -84,7 +92,7 @@ const DeviceSetupHintEffect: React.FC = () => {
       30000,
       true,
     );
-  }, [keysLoaded, hasConfiguredKey, t]);
+  }, [keysLoaded, hasConfiguredKey, t, url, open, explain]);
 
   return null;
 };

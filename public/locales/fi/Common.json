@@ -892,6 +892,7 @@
   "EncryptionKeyGenerated": "Salausavain luotu onnistuneesti",
   "EncryptionKeyImported": "Salausavain tuotu onnistuneesti",
   "EncryptionKeys": "Salausavaimet",
+  "EncryptionKeysManagedInProfile": "Salausavaimia hallitaan {{productName}}-profiilissasi Avainten hallinta -välilehdellä.",
   "EncryptionKeysNotConfigured": "Salausavaimia ei ole määritetty tällä laitteella. Määritä avaimesi Profiiliasetuksissa käyttääksesi salattuja tiedostoja.",
   "EncryptionKeysReload": "Salausavaimet on syötettävä uudelleen",
   "EncryptionKeysRequiredForPrivateRoom": "Määritä salausavaimet profiilissa ennen yksityisen huoneen luomista.",

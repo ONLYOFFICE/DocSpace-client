@@ -892,6 +892,7 @@
   "EncryptionKeyGenerated": "Šifrēšanas atslēga veiksmīgi ģenerēta",
   "EncryptionKeyImported": "Šifrēšanas atslēga veiksmīgi importēta",
   "EncryptionKeys": "Šifrēšanas atslēgas",
+  "EncryptionKeysManagedInProfile": "Šifrēšanas atslēgas tiek pārvaldītas jūsu {{productName}} profilā, cilnē Atslēgu pārvaldība.",
   "EncryptionKeysNotConfigured": "Šifrēšanas atslēgas nav konfigurētas šajā ierīcē. Iestatiet savas atslēgas Profila iestatījumos, lai strādātu ar šifrētajiem failiem.",
   "EncryptionKeysReload": "Šifrēšanas atslēgas jāievada atkārtoti",
   "EncryptionKeysRequiredForPrivateRoom": "Pirms privātas istabas izveides iestatiet šifrēšanas atslēgas profilā.",

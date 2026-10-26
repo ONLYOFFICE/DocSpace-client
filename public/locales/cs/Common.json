@@ -892,6 +892,7 @@
   "EncryptionKeyGenerated": "Šifrovací klíč byl úspěšně vygenerován",
   "EncryptionKeyImported": "Šifrovací klíč byl úspěšně importován",
   "EncryptionKeys": "Šifrovací klíče",
+  "EncryptionKeysManagedInProfile": "Šifrovací klíče se spravují ve vašem profilu {{productName}} na kartě Správa klíčů.",
   "EncryptionKeysNotConfigured": "Šifrovací klíče nejsou na tomto zařízení nakonfigurovány. Nastavte své klíče v nastavení profilu, abyste mohli pracovat se zašifrovanými soubory.",
   "EncryptionKeysReload": "Šifrovací klíče musí být zadány znovu",
   "EncryptionKeysRequiredForPrivateRoom": "Před vytvořením soukromé místnosti nastavte v Profilu šifrovací klíče.",

@@ -11,7 +11,7 @@
 ## 2. Keys management reachability and hint gating
 
 - [x] 2.1 Expose `keysLoaded` from `packages/shared/context/encryption/EncryptionContext.tsx` and gate `DeviceSetupHintEffect.tsx` and the create-key auto-prompt on it; verify with `packages/shared/context/encryption/__tests__/EncryptionContext.test.tsx` and the SDK private-shell unit tests
-- [ ] 2.2 Point the forgot-passphrase and device-setup links at the deep link from 1.3 and show `Common:EncryptionKeysManagedInProfile` when the client origin is unknown; verify with SDK unit tests on `EncryptionShell.tsx` and `DeviceSetupHintEffect.tsx`
+- [x] 2.2 Point the forgot-passphrase and device-setup links at the deep link from 1.3 and show `Common:EncryptionKeysManagedInProfile` when the client origin is unknown; verify with SDK unit tests on `EncryptionShell.tsx` and `DeviceSetupHintEffect.tsx`
 
 ## 3. Document creation in SDK private rooms
 

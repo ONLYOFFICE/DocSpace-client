@@ -6,7 +6,7 @@ Inviting members to a private room today grants room access first and re-wraps t
 
 ## What Changes
 
-- Every granted invitee either holds an access entry for every encrypted file in the room or is visibly marked as pending access. The originally proposed order (wrap **before** the room security update) is not possible against today's server, which refuses access entries for users who cannot yet read the file; the order is an open decision (see below). Invitees whose keys were skipped are not granted access and are left out of the security update.
+- Every granted invitee either holds an access entry for every encrypted file in the room or is visibly marked as pending access. The room security update runs first and the wraps follow (decided 2026-10-26, design decision 1): wrapping first is refused by today's server, which takes no access entries for users who cannot yet read the file, and the pending-access state with its retry, backed by the backfill sweep, makes the gap between the two visible. Invitees whose keys were skipped are not granted access and are left out of the security update.
 - When the re-wrap fails for a subset of files after access was granted, the member is shown in the Members panel in a "pending access" state with a retry action that re-runs the wrap for the missing files.
 - The invite panel reports skipped invitees inline (name and reason), in addition to the toast, and offers to re-run the invitation once they have a key.
 - The member-removal upload guard counts uploads into any folder inside the room, not only the room root.
@@ -22,12 +22,12 @@ Inviting members to a private room today grants room access first and re-wraps t
 
 ### Modified Capabilities
 
-- `private-rooms/room-membership`: "Invited members receive re-wrapped file keys" (no granted invitee is left silently without entries; the order of operations is an open decision), "Invitees without usable keys are skipped with a warning" (skipped invitees are not granted access and are listed inline), "Partial re-encryption failure is reported" (pending-access state with retry), "Member removal is blocked during active uploads" (subfolder uploads count).
+- `private-rooms/room-membership`: "Invited members receive re-wrapped file keys" (no granted invitee is left silently without entries; access is granted before the wraps), "Invitees without usable keys are skipped with a warning" (skipped invitees are not granted access and are listed inline), "Partial re-encryption failure is reported" (pending-access state with retry), "Member removal is blocked during active uploads" (subfolder uploads count).
 
 ## Impact
 
 - Client: invite panel (`packages/client/src/components/panels/InvitePanel/index.js`), Members view and its user row (`packages/client/src/pages/Home/InfoPanel/Body/views/Members/**`), shared membership service (`packages/shared/services/private-room/room-encryption.ts`), upload counter helper (`packages/shared/utils/uploadErrors.ts`).
-- Server contract: unchanged if grant-first is kept. Wrap-first needs a server change, because the access-entry write (`PUT files/{fileId}/access`) refuses entries for users without read access to the file and rejects the whole request when one entry fails; the server options (relaxed authorization for pending invitees, or a transactional grant-and-keys endpoint) are recorded in design.md and, if chosen, in `private-rooms-server-hardening`.
+- Server contract: unchanged. A transactional endpoint that grants access and stores the wraps in one request would close the gap between the two; it is recorded as a later target in `private-rooms-server-hardening` and is not a release prerequisite.
 - Locale: new Common keys for the pending state, the retry action and the inline skipped list.
 - Tests: unit tests for the invite ordering and the counter; E2E `packages/client/__tests__/private-room-invite.spec.ts` and `private-room-members.spec.ts`.
 
@@ -39,4 +39,4 @@ Inviting members to a private room today grants room access first and re-wraps t
 
 ## Decisions needed
 
-- Order of grant and wrap (open). Client-side wrap-first, previously recommended, is infeasible against today's server (it refuses access entries for invitees who cannot read the file yet). Options: keep grant-first and rely on the pending-access state (no server change), wrap-first after a server change to the access-entry authorization, or a server endpoint that grants access and stores the wraps in one transaction. Design.md lists all three; the specs are written to hold under any of them.
+None. Decided on 2026-10-26: access is granted first and the wraps follow, with the pending-access state and retry; the backfill sweep re-wraps for every member when a room manager opens the room. A transactional grant-and-keys endpoint is the later target (`private-rooms-server-hardening`); wrap-first after a change to the server's access-entry authorization was not taken.

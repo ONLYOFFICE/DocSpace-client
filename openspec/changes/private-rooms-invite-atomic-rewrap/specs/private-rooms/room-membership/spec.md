@@ -19,8 +19,8 @@ The system SHALL wrap the key of every encrypted file in the room for each newly
 - **THEN** each invitee is granted access, every encrypted file in the room gains an access entry for each of them, and Common:UsersInvited is shown
 
 #### Scenario: Order of operations
-- **WHEN** an invitation to a private room completes, whichever of the security update and the re-encryption ran first
-- **THEN** each granted invitee holds an access entry for every encrypted file in the room or is shown as pending access
+- **WHEN** an invitation to a private room is sent
+- **THEN** room access is granted to the verified invitees before their file keys are wrapped, and each granted invitee ends up holding an access entry for every encrypted file in the room or shown as pending access
 
 #### Scenario: Written list is not read back
 - **WHEN** the re-encryption of a file completes

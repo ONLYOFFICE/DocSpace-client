@@ -1,3 +1,3 @@
 # private-rooms-invite-atomic-rewrap
 
-Re-wrap file keys before granting room access and surface skipped members
+Grant room access, then re-wrap file keys, with a visible pending-access state and the skipped members listed

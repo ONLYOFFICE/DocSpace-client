@@ -25,19 +25,14 @@ Server constraints that bound the ordering (`../server` on `hotfix/v4.0.1`):
 
 ## Decisions
 
-1. **Order of grant and wrap: open (see Open Questions).** The originally proposed client-side reorder (wrap first, then grant) cannot work against today's server: the access-entry write refuses entries for users who cannot read the file, and an invitee cannot read it until the security update has granted them the room (see Context). The candidates are:
-   - (a) keep grant-first (today's order) and rely on the pending-access state and retry from decision 2 to make a partial result visible;
-   - (b) wrap-first after a server change that accepts entries for invitees named in a pending grant;
-   - (c) a server endpoint that accepts `{ invitees, fileKeys[] }` and writes the grant and the entries in one transaction.
-   (b) and (c) need backend work with no owner yet and belong to `private-rooms-server-hardening`. Whatever is chosen, wraps written for a user who is then not granted are not cleaned up by the server, because it has no removal path for access entries.
+1. **Grant first, then wrap (decided 2026-10-26).** The client sends the room security update for the verified invitees only and then wraps every encrypted file for those it granted; if the security update fails, no wrap is written. A partial wrap result shows as the pending-access state with a retry (decision 2), and the backfill sweep re-wraps for every member when a room manager opens the room. The originally proposed client-side reorder (wrap first, then grant) cannot work against today's server: the access-entry write refuses entries for users who cannot read the file, and an invitee cannot read it until the security update has granted them the room (see Context). Alternatives: (b) wrap-first after a server change that accepts entries for invitees named in a pending grant, not taken because it needs a new authorization concept on the server; (c) a server endpoint that accepts `{ invitees, fileKeys[] }` and writes the grant and the entries in one transaction, the later target, recorded in `private-rooms-server-hardening` and not a release prerequisite.
 2. **Pending-access state lives on the client, keyed by member and room.** The panel records `{ roomId, userId, missingFileIds }` in the Members store after a partial failure; the Members view renders Common:EncryptedAccessPending and a retry item that re-runs the wrap for `missingFileIds`. Alternative: derive the state on every Members load by diffing file access lists against the member list. Rejected as O(files) per open; it is kept as the retry's verification step only.
 3. **Skipped invitees stay in the panel.** Instead of closing on send, the panel shows the result list (granted / pending / skipped with reason) and closes on an explicit button; this is what the SDK parity plan called "F-6 invite re-encrypt progress terminal". Alternative: keep the toasts. Rejected because the toasts are the current, insufficient behaviour.
 4. **Upload guard uses the room membership of the target folder.** `countActiveUploadsForRoom` receives the room id of each queued item (captured at upload start, the same way `encryptionRoomId` already is) and counts matches regardless of folder depth. Alternative: walk the navigation path per item. Rejected: the id is already captured at start.
 
 ## Risks / Trade-offs
 
-- [Grant-first (option a) leaves a window in which a granted member has no entries] → the pending-access marker and retry make it visible; options (b) and (c) close it but need the server.
-- [Wrap-first (options b, c) takes longer before the invitee sees the room] → progress is already shown; the security update follows immediately after the wraps.
+- [Grant first leaves a window in which a granted member has no entries] → the pending-access marker and retry make it visible, and the backfill sweep closes it on a room manager's next visit; the transactional endpoint (c) would close it on the server.
 - [An invitee who never registered a key makes the server fail the security update at that invitee, after earlier invitees may already have been added] → the client must leave skipped invitees out of the request in every option.
 - [Pending state is per device] → the retry verifies against the server's access lists, so another device sees the real state on open; the client marker is a hint, not the source of truth.
 - [Changing the panel close behaviour affects the non-private invite flow] → the result view is rendered only for private rooms; the non-private branch keeps the current close.
@@ -48,5 +43,4 @@ No data migration. Behind the `privateRooms` flag. Rollback by revert.
 
 ## Open Questions
 
-- Order of grant and wrap (decision 1): (a) grant-first with pending-access state, (b) wrap-first after a server change to the access-entry authorization, or (c) a transactional grant-and-keys endpoint. Owner: product owner with the backend team. Blocks tasks 2.1 and the "Order of operations" behaviour; the specs below are written so they hold under any option.
 - Whether the backfill should also mark members as pending when it fails (it runs for earlier members, not the invitees). Can be decided during implementation without changing the specs.

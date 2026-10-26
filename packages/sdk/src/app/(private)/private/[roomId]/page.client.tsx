@@ -68,6 +68,10 @@ import { useEncryptedFileCreation } from "../../_hooks/useEncryptedFileCreation"
 import { useEncryptedDownload } from "../../_hooks/useEncryptedDownload";
 import { useEncryptedCopyMove } from "../../_hooks/useEncryptedCopyMove";
 import {
+  resolvePrivateDropFolder,
+  splitPrivateDrop,
+} from "../../_utils/private-drop-zone";
+import {
   PrivateInfoPanelBody,
   PrivateInfoPanelHeader,
 } from "../../_components/info-panel";
@@ -160,15 +164,42 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
 
   // folderId is read at call time so subfolder navigation keeps working.
   const handleEncryptedUpload = React.useCallback(
-    async (input: FileList | File[]) => {
-      const fileArray = Array.from(input);
-      if (fileArray.length === 0) return;
-      const folderId =
+    async (input: FileList | File[], targetFolderId?: number | string) => {
+      // Spec: private-rooms/sdk-surface, "Dropped folders and drop targets".
+      const { files, refusedFolders } = splitPrivateDrop(Array.from(input));
+      if (refusedFolders) {
+        toastr.warning(t("Common:FolderUploadNotSupportedInPrivateRoom"));
+      }
+      if (files.length === 0) return;
+      const openFolderId =
         navigationStore.currentFolderId ?? folderData.current?.id;
-      if (folderId === undefined || folderId === null) return;
-      await uploadFiles({ files: fileArray, folderId, roomId });
+      if (openFolderId === undefined || openFolderId === null) return;
+
+      const target = await resolvePrivateDropFolder(
+        {
+          folderId: openFolderId,
+          isPrivate: true,
+          roomType: folderData.current?.roomType ?? null,
+          encryptionRoomId: roomId,
+        },
+        targetFolderId,
+        folderData.current?.rootFolderType,
+      ).catch(() => null);
+      if (target?.folderId === undefined || target?.folderId === null) {
+        toastr.error(t("Common:OpenPrivateRoomToUpload"));
+        return;
+      }
+      await uploadFiles({ files, folderId: target.folderId, roomId });
     },
-    [uploadFiles, navigationStore, folderData.current?.id, roomId],
+    [
+      uploadFiles,
+      navigationStore,
+      folderData.current?.id,
+      folderData.current?.roomType,
+      folderData.current?.rootFolderType,
+      roomId,
+      t,
+    ],
   );
 
   const encryptedFileActions = React.useMemo<EncryptedFileActions>(

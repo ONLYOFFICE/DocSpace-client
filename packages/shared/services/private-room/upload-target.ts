@@ -49,6 +49,17 @@ export type TUploadTarget = {
   encryptionRoomId: number | string | null;
 };
 
+/** An entry of a drop or a picked folder tree, as the uploader receives it. */
+export type TDroppedEntry = { path?: string; isEmptyDirectory?: boolean };
+
+/**
+ * Whether a dropped entry is a folder or lies inside one.
+ * Spec: private-rooms/file-operations, "Folder upload disabled in private rooms".
+ */
+export const isFolderEntry = (entry: TDroppedEntry) =>
+  !!entry.isEmptyDirectory ||
+  (entry.path ?? "").split("/").filter((name) => name !== "").length > 1;
+
 /** The part of a list row that decides where files dropped on it go. */
 export type TDropRow = {
   id: number | string;

@@ -40,6 +40,7 @@ import { FolderType, RoomsType } from "../../../enums";
 
 import {
   isDropRefused,
+  isFolderEntry,
   resolveDropTarget,
   resolveFolderTarget,
   type TDropRow,
@@ -337,5 +338,16 @@ describe("isDropRefused", () => {
         encryptionRoomId: String(PRIVATE_ROOM_ID),
       }),
     ).toBe(false);
+  });
+});
+
+describe("isFolderEntry", () => {
+  it("Files and folders dropped together: only the entries of a folder count as folders", () => {
+    expect(isFolderEntry({ path: "notes.txt" })).toBe(false);
+    expect(isFolderEntry({ path: "/notes.txt" })).toBe(false);
+    expect(isFolderEntry({})).toBe(false);
+    expect(isFolderEntry({ path: "/Drafts/notes.txt" })).toBe(true);
+    expect(isFolderEntry({ path: "Drafts/notes.txt" })).toBe(true);
+    expect(isFolderEntry({ path: "Empty", isEmptyDirectory: true })).toBe(true);
   });
 });

@@ -186,8 +186,14 @@ type DocsLayoutProps = {
    * Only meaningful when `isPrivate` is also true.
    */
   isArchive?: boolean;
-  /** Override the upload pipeline (private rooms swap in encrypted upload). */
-  uploadFilesToFolder?: (files: FileList | File[]) => Promise<void>;
+  /**
+   * Override the upload pipeline (private rooms swap in encrypted upload);
+   * gets the folder row the files were dropped on, if any.
+   */
+  uploadFilesToFolder?: (
+    files: FileList | File[],
+    targetFolderId?: number | string,
+  ) => Promise<void>;
   /** Creates documents in place of the editor (private rooms create them encrypted). */
   createFileInFolder?: (
     folderId: number | string,

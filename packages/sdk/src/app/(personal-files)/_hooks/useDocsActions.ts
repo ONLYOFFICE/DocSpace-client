@@ -99,8 +99,14 @@ const isDocumentType = (
 export type TPrivateCreate = { canCreateFiles: boolean };
 
 type UseDocsActionsOptions = {
-  /** Replaces the default chunked upload (e.g., encrypted upload). */
-  uploadFilesToFolderOverride?: (files: FileList | File[]) => Promise<void>;
+  /**
+   * Replaces the default chunked upload (e.g., encrypted upload); gets the
+   * folder row the files were dropped on, if any.
+   */
+  uploadFilesToFolderOverride?: (
+    files: FileList | File[],
+    targetFolderId?: number | string,
+  ) => Promise<void>;
   /**
    * Creates documents in place of the editor's create route (private rooms
    * create them encrypted); resolves to whether the file was created.
@@ -471,7 +477,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
   const uploadFilesToFolder = useCallback(
     (files: FileList | File[], targetFolderId?: number | string) =>
       options?.uploadFilesToFolderOverride
-        ? options.uploadFilesToFolderOverride(files)
+        ? options.uploadFilesToFolderOverride(files, targetFolderId)
         : defaultUploadFilesToFolder(files, targetFolderId),
     [options?.uploadFilesToFolderOverride, defaultUploadFilesToFolder],
   );

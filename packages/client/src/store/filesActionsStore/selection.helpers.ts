@@ -57,6 +57,7 @@ import {
 } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import { createLoader } from "@docspace/shared/utils/createLoader";
+import { isFolderEntry } from "@docspace/shared/services/private-room/upload-target";
 import api from "@docspace/shared/api";
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import type { TTranslation } from "@docspace/shared/types";
@@ -238,11 +239,7 @@ self: FilesActionStore,
     return !isHidden;
   });
 
-  // Spec: private-rooms/file-operations, "Folder upload disabled in private rooms".
   if (target.isPrivate) {
-    const isFolderEntry = (f: TUploadTreeFile) =>
-      !!f.isEmptyDirectory ||
-      (f.path ?? "").split("/").filter((name) => name !== "").length > 1;
     const fileEntries = withoutHiddenFiles.filter((f) => !isFolderEntry(f));
     if (fileEntries.length !== withoutHiddenFiles.length) {
       toastr.warning(t("Common:FolderUploadNotSupportedInPrivateRoom"));

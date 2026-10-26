@@ -101,10 +101,15 @@ describe("useDocsActions in a private room", () => {
   let root: Root | null = null;
   let actions: ReturnType<typeof useDocsActions>;
   const createFileOverride = vi.fn(async () => true);
+  const uploadFilesToFolderOverride = vi.fn(async () => {});
 
   const render = (privateCreate: TPrivateCreate) => {
     const Probe = () => {
-      actions = useDocsActions({ createFileOverride, privateCreate });
+      actions = useDocsActions({
+        createFileOverride,
+        privateCreate,
+        uploadFilesToFolderOverride,
+      });
       return null;
     };
     root = createRoot(document.createElement("div"));
@@ -115,6 +120,7 @@ describe("useDocsActions in a private room", () => {
     env.keepNewFileName = true;
     env.items = [];
     createFileOverride.mockClear();
+    uploadFilesToFolderOverride.mockClear();
     vi.mocked(openDocEditor).mockClear();
   });
 
@@ -143,6 +149,19 @@ describe("useDocsActions in a private room", () => {
       "NewDocument (1)",
       "docx",
     );
+  });
+
+  it("Files dropped on a folder row: the private upload gets that folder", async () => {
+    render({ canCreateFiles: true });
+    const files = [new File(["x"], "notes.txt")];
+
+    await act(async () => actions.uploadFilesToFolder(files, 12));
+    await act(async () => actions.uploadFilesToFolder(files));
+
+    expect(uploadFilesToFolderOverride.mock.calls).toEqual([
+      [files, 12],
+      [files, undefined],
+    ]);
   });
 
   it("Create menu opened without keys", async () => {

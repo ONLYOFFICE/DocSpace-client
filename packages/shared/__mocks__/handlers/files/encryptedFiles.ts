@@ -705,11 +705,15 @@ export const encryptedFilesHandlers = (
             .filter((f) => !f.encrypted && (f.folderId ?? roomId) === folderId)
             .map((f) => f.serverTitle.toLowerCase()),
         );
-        return okResponse([
-          ...new Set(
-            body.filesTitle.filter((title) => taken.has(title.toLowerCase())),
+        return okResponse(
+          Array.from(
+            new Set(
+              body.filesTitle.filter((title) =>
+                taken.has(title.toLowerCase()),
+              ),
+            ),
           ),
-        ]);
+        );
       },
     ),
 

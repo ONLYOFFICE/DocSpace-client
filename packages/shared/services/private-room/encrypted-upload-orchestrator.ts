@@ -984,6 +984,6 @@ async function runEncryptedUploadBatch(
     results,
     quotaErrorRaised: !!quotaError,
     aborted,
-    skippedMembers: [...skippedMembers.values()],
+    skippedMembers: Array.from(skippedMembers.values()),
   };
 }

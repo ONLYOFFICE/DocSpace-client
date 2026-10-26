@@ -135,4 +135,4 @@ export const PRIVATE_ROOM_WITHHELD: ReadonlySet<TPrivateMenuIntent> = new Set([
 export const withheldMenuKeys = (
   withheld: ReadonlySet<TPrivateMenuIntent>,
   keys: Partial<Record<TPrivateMenuIntent, readonly string[]>>,
-): string[] => [...withheld].flatMap((intent) => keys[intent] ?? []);
+): string[] => Array.from(withheld).flatMap((intent) => keys[intent] ?? []);

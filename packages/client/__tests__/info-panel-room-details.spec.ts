@@ -166,6 +166,8 @@ test.describe("Rooms — info panel details", () => {
       http.post(`${API}/files/${ROOM_ID}/upload/check`, () =>
         HttpResponse.json({ response: [] }),
       ),
+      // no counts here, so the server sync after the socket event leaves
+      // them alone and the test sees the local counting only
       http.get(`${API}/files/folder/${ROOM_ID}`, () =>
         HttpResponse.json({ response: { id: ROOM_ID, title: "Public Room" } }),
       ),
@@ -233,6 +235,50 @@ test.describe("Rooms — info panel details", () => {
       page.getByTestId("table-body").getByText("Uploaded", { exact: false }),
     ).toBeVisible();
     await expect(content).toHaveText("Folders: 0 | Files: 2");
+
+    wsMock.closeConnection();
+  });
+
+  // A file outside the loaded list cannot be counted locally, so after the
+  // socket events settle the counts are taken from the server.
+  test("should take the room's counts from the server after a socket event", async ({
+    page,
+    baseUrl,
+    mockRequest,
+    wsMock,
+  }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
+      roomContentHandler(TEST_PORT, ROOM_ID, ROOM_FILE_ID),
+      http.get(`${API}/files/folder/${ROOM_ID}`, () =>
+        HttpResponse.json({
+          response: {
+            id: ROOM_ID,
+            title: "Public Room",
+            filesCount: 0,
+            foldersCount: 0,
+          },
+        }),
+      ),
+    );
+    await wsMock.setupWebSocketMock();
+
+    await page.goto(`${baseUrl}${ROOM_CONTENT_URL}`);
+    await expect(page.getByTestId("table-body")).toBeVisible();
+
+    await openDetails(page);
+
+    const content = page.getByText(/Folders: \d+ \| Files: \d+/);
+    await expect(content).toHaveText("Folders: 0 | Files: 1");
+
+    wsMock.emitModifyFolder({
+      cmd: "delete",
+      type: "file",
+      id: 555,
+      data: JSON.stringify({ id: 555, folderId: ROOM_ID }),
+    });
+
+    await expect(content).toHaveText("Folders: 0 | Files: 0");
 
     wsMock.closeConnection();
   });

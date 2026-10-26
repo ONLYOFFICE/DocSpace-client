@@ -39,6 +39,7 @@ export const fakeSelectedFolderStore = (): FakeStore => ({
   setSelectedFolder: vi.fn(),
   setFilesCount: vi.fn(),
   countFileCreated: vi.fn(),
+  countFileDeleted: vi.fn(),
   setFoldersCount: vi.fn(),
 });
 

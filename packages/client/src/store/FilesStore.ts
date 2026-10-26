@@ -168,6 +168,7 @@ import {
   wsCreatedPDFFormImpl,
   wsChangeFolderAccessRightsImpl,
   redirectToParentImpl,
+  syncSelectedFolderCountsImpl,
 } from "./filesStore/socket.helpers";
 import { removeFilesImpl } from "./filesStore/mutations.helpers";
 import {
@@ -449,9 +450,9 @@ class FilesStore {
     SocketHelper?.on(SocketEvents.ModifyFolder, async (opt) => {
       const { socketSubscribers } = SocketHelper!;
 
-      if (opt && opt.data) {
-        const data = JSON.parse(opt.data);
+      const data = opt?.data ? JSON.parse(opt.data) : null;
 
+      if (data) {
         const pathParts = data.folderId
           ? `DIR-${data.folderId}`
           : `DIR-${data.parentId}`;
@@ -466,6 +467,18 @@ class FilesStore {
       }
 
       console.log("[WS] s:modify-folder", opt);
+
+      // the event may concern a parent folder, which is subscribed too
+      if (opt?.cmd === "create" || opt?.cmd === "delete") {
+        const parentId = data?.folderId ?? data?.parentId;
+
+        if (
+          parentId === undefined ||
+          String(parentId) === String(this.selectedFolderStore.id)
+        ) {
+          this.debounceSyncSelectedFolderCounts();
+        }
+      }
 
       if (opt?.cmd === "create" && !this.showNewFilesInList) {
         const newFilter = this.filter;
@@ -654,6 +667,10 @@ class FilesStore {
 
   debounceRemoveFolders = debounce(() => {
     this.removeFiles(null, this.tempActionFoldersIds);
+  }, 1000);
+
+  debounceSyncSelectedFolderCounts = debounce(() => {
+    syncSelectedFolderCountsImpl(this);
   }, 1000);
 
   wsModifyFolderCreate = async (opt?: TOptSocket) =>

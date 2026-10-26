@@ -119,6 +119,19 @@ describe("SelectedFolderStore.countFileCreated", () => {
     expect(store.filesCount).toBe(38);
   });
 
+  it("counts a file again when it comes back after being deleted", () => {
+    const store = createStore();
+
+    store.setSelectedFolder({ id: 42, title: "Room", filesCount: 36 });
+
+    store.countFileCreated(100);
+    store.countFileDeleted(100);
+    // restored from the trash with the same id
+    store.countFileCreated(100);
+
+    expect(store.filesCount).toBe(37);
+  });
+
   it("counts the same id again after the folder is loaded anew", () => {
     const store = createStore();
 

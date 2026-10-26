@@ -413,6 +413,13 @@ class SelectedFolderStore {
     this.filesCount += 1;
   };
 
+  // A file restored from the trash or moved back keeps its id, so it has to
+  // be countable again once it is gone.
+  countFileDeleted = (fileId: number | string) => {
+    this.countedCreatedFileIds.delete(fileId);
+    this.filesCount -= 1;
+  };
+
   setFoldersCount = (foldersCount: number) => {
     this.foldersCount = foldersCount;
   };

@@ -68,10 +68,9 @@ const BackupToPublicRoom = ({
 
   const onKeyUp = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
       if (e.key === "Enter") onBackupTo();
     },
-    [onBackupTo, onClose],
+    [onBackupTo],
   );
 
   useEffect(() => {

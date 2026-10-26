@@ -76,7 +76,7 @@ const AvatarEditorDialog = (props) => {
   const avatarTitle = isProfileUpload
     ? t("Ldap:LdapAvatar")
     : isAIAgentsFolderRoot
-      ? t("RoomLogoCover:AgentCover")
+      ? t("Common:AgentCover")
       : t("Common:RoomCover");
 
   const onCloseModal = () => {

@@ -107,7 +107,17 @@ export type SelectorInitData = {
 const resolveDestination = (folderId: number | string) =>
   resolveFolderTarget({ id: folderId }).catch(() => null);
 
-export default function useFileOperations() {
+type UseFileOperationsOptions = {
+  /** The standard upload, with its conflict check, for decrypted copies. */
+  uploadDecryptedFiles: (
+    files: File[],
+    folderId: number | string,
+  ) => Promise<void>;
+};
+
+export default function useFileOperations({
+  uploadDecryptedFiles,
+}: UseFileOperationsOptions) {
   const { t } = useTranslation(["Common"]);
   const router = useRouter();
   const { showCopyToast, showMoveToast } = useOperationToast();
@@ -465,6 +475,7 @@ export default function useFileOperations() {
               await encryptedActions.copyFiles(
                 transfer.encryptedFiles as unknown as TFileItem[],
                 destFolderId,
+                uploadDecryptedFiles,
               );
             } catch (error) {
               toastr.error(
@@ -524,7 +535,14 @@ export default function useFileOperations() {
 
       setPendingItems([]);
     },
-    [selectorMode, pendingItems, executeOperation, encryptedActions, t],
+    [
+      selectorMode,
+      pendingItems,
+      executeOperation,
+      encryptedActions,
+      uploadDecryptedFiles,
+      t,
+    ],
   );
 
   const confirmConflict = useCallback(

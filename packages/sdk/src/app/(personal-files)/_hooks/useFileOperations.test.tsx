@@ -44,6 +44,7 @@ const env = vi.hoisted(() => ({
   folders: new Map<number, unknown>(),
   paths: new Map<number, unknown[]>(),
   actions: { roomId: 10, copyFiles: vi.fn() },
+  uploadDecrypted: vi.fn(async () => {}),
 }));
 
 vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
@@ -116,7 +117,7 @@ describe("useFileOperations in a private room", () => {
   let ops: ReturnType<typeof useFileOperations>;
 
   const Probe = () => {
-    ops = useFileOperations();
+    ops = useFileOperations({ uploadDecryptedFiles: env.uploadDecrypted });
     return null;
   };
 
@@ -252,6 +253,30 @@ describe("useFileOperations in a private room", () => {
 
     expect(isDisabled({ Create: false, CopyTo: true })).toBe(true);
     expect(isDisabled({ Create: true, CopyTo: true })).toBe(false);
+  });
+
+  it("Destination outside private rooms", async () => {
+    const file = {
+      id: 7,
+      isFolder: false,
+      encrypted: true,
+      title: "memo.txt",
+      fileExst: ".txt",
+    };
+
+    await act(async () => {
+      await ops.requestCopy(file as never);
+    });
+    await act(async () => {
+      await ops.confirmOperation(30, "My documents");
+    });
+
+    expect(env.actions.copyFiles).toHaveBeenCalledWith(
+      [expect.objectContaining({ id: 7 })],
+      30,
+      env.uploadDecrypted,
+    );
+    expect(toastr.error).not.toHaveBeenCalled();
   });
 
   it("Folder transferred out of the room", async () => {

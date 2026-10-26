@@ -44,6 +44,7 @@ const env = vi.hoisted(() => ({
   paths: new Map<number, unknown[]>(),
   requireIdentity: vi.fn(async () => ({ publicKey: new Uint8Array() })),
   uploadFiles: vi.fn(async () => ({ ok: true })),
+  uploadDecrypted: vi.fn(async () => {}),
 }));
 
 vi.mock("react-i18next", () => ({
@@ -67,10 +68,6 @@ vi.mock("@docspace/shared/api/files", () => ({
     if (!path) throw new Error(`no path for folder ${folderId}`);
     return path;
   }),
-  deleteFile: vi.fn(),
-  startUploadSession: vi.fn(),
-  uploadChunkSequential: vi.fn(),
-  finalizeUploadSession: vi.fn(),
 }));
 
 vi.mock("@docspace/shared/services/private-room/encrypted-copy", () => ({
@@ -78,10 +75,6 @@ vi.mock("@docspace/shared/services/private-room/encrypted-copy", () => ({
     async () => new File(["plain"], "memo.txt", { type: "text/plain" }),
   ),
   addCopySuffix: (name: string) => name.replace(/(\.[^.]+)$/, " (1)$1"),
-}));
-
-vi.mock("@/app/(docspace)/_store/FilesListStore", () => ({
-  useFilesListStore: () => ({ removeItem: vi.fn() }),
 }));
 
 vi.mock("../_store/EncryptionIdentityStore", () => ({
@@ -92,7 +85,6 @@ vi.mock("./useEncryptedUpload", () => ({
   useEncryptedUpload: () => ({ uploadFiles: env.uploadFiles }),
 }));
 
-import { startUploadSession } from "@docspace/shared/api/files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useEncryptedCopyMove } from "./useEncryptedCopyMove";
@@ -101,6 +93,7 @@ import { useEncryptedCopyMove } from "./useEncryptedCopyMove";
 const SECTION = { id: 2, title: "Rooms" };
 const OTHER_ROOM = { id: 20, title: "Other", roomType: 5, private: true };
 const OTHER_ROOM_FOLDER = { id: 21, title: "Drafts", private: false };
+const SHARED_ROOM = { id: 30, title: "Shared", roomType: 6, private: false };
 
 const MEMO = { id: 7, title: "memo.txt", viewUrl: "/memo", fileExst: ".txt" };
 
@@ -116,6 +109,7 @@ describe("useEncryptedCopyMove", () => {
   beforeEach(() => {
     env.paths.clear();
     env.paths.set(21, [SECTION, OTHER_ROOM, OTHER_ROOM_FOLDER]);
+    env.paths.set(30, [SECTION, SHARED_ROOM]);
     root = createRoot(document.createElement("div"));
     act(() => root?.render(<Probe />));
   });
@@ -125,25 +119,47 @@ describe("useEncryptedCopyMove", () => {
     root = null;
   });
 
-  it("Copy into a folder of another private room", async () => {
-    await act(() =>
-      actions.copyFiles({ files: [MEMO], destFolderId: 21, sourceRoomId: 10 }),
+  const copyTo = (destFolderId: number) =>
+    act(() =>
+      actions.copyFiles({
+        files: [MEMO],
+        destFolderId,
+        sourceRoomId: 10,
+        uploadDecrypted: env.uploadDecrypted,
+      }),
     );
+
+  it("Copy into a folder of another private room", async () => {
+    await copyTo(21);
 
     expect(env.uploadFiles).toHaveBeenCalledWith(
       expect.objectContaining({ folderId: 21, roomId: 20 }),
     );
-    expect(startUploadSession).not.toHaveBeenCalled();
+    expect(env.uploadDecrypted).not.toHaveBeenCalled();
+    expect(toastr.error).not.toHaveBeenCalled();
+  });
+
+  it("Destination outside private rooms", async () => {
+    await copyTo(30);
+
+    expect(env.uploadDecrypted).toHaveBeenCalledTimes(1);
+    const [uploaded, folderId] = env.uploadDecrypted.mock.calls[0] as unknown as [
+      File[],
+      number,
+    ];
+    expect(uploaded.map((f) => f.name)).toEqual(["memo.txt"]);
+    expect(folderId).toBe(30);
+    expect(env.uploadFiles).not.toHaveBeenCalled();
     expect(toastr.error).not.toHaveBeenCalled();
   });
 
   it("Destination unknown", async () => {
-    await act(() =>
-      actions.copyFiles({ files: [MEMO], destFolderId: 99, sourceRoomId: 10 }),
-    );
+    await copyTo(99);
+
 
     expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedCopyFailed:memo.txt");
     expect(env.requireIdentity).not.toHaveBeenCalled();
     expect(env.uploadFiles).not.toHaveBeenCalled();
+    expect(env.uploadDecrypted).not.toHaveBeenCalled();
   });
 });

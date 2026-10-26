@@ -43,7 +43,14 @@ export type EncryptedFileActions = {
   downloadFile: (file: TFileItem) => Promise<void>;
   downloadZip: (files: TFileItem[]) => Promise<void>;
   duplicateFile: (file: TFileItem) => Promise<void>;
-  copyFiles: (files: TFileItem[], destFolderId: number | string) => Promise<void>;
+  copyFiles: (
+    files: TFileItem[],
+    destFolderId: number | string,
+    uploadDecrypted: (
+      files: File[],
+      folderId: number | string,
+    ) => Promise<void>,
+  ) => Promise<void>;
 };
 
 export const EncryptedFileActionsContext =

@@ -765,6 +765,8 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     const { room, sharedRoom } = await serveRooms(mockBoth, port, {
       sharedRoom: true,
     });
+    const existing = { id: 7301, title: MEMO.name, encrypted: false };
+    sharedRoom!.setFiles([existing]);
     await openRoom(page, baseUrl);
 
     await chooseTransfer(page, row(page, MEMO.serverTitle), "copy");
@@ -777,9 +779,17 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     await pickRoom(page, SHARED_ROOM_TITLE, "Copy here");
     await unlock(page);
 
-    await expect.poll(() => sharedRoom!.getFiles().length).toBe(1);
-    const [copy] = sharedRoom!.getFiles();
-    expect(copy.serverTitle).toBe(MEMO.name);
+    const conflict = page
+      .getByRole("dialog")
+      .filter({ hasText: "Action required" });
+    await expect(conflict).toBeVisible();
+    await expect(conflict).toContainText(MEMO.name);
+    expect(sharedRoom!.getSessions()).toEqual([]);
+    await conflict.getByText("Create file copy", { exact: true }).click();
+    await conflict.getByRole("button", { name: "OK" }).click();
+
+    await expect.poll(() => sharedRoom!.getFiles().length).toBe(2);
+    const copy = sharedRoom!.getFiles().find((f) => f.id !== existing.id)!;
     expect(copy.encrypted).toBe(false);
     expect(copy.bytes).toEqual(MEMO.bytes);
     expect(sharedRoom!.getSessions().map((s) => s.encrypted)).toEqual([false]);

@@ -651,21 +651,36 @@ export const encryptedFilesHandlers = (
     ),
 
     /**
-     * Mirrors UploadController.CheckUpload — preflight collision check; returns
-     * the list of files in the destination folder that would conflict.
+     * Mirrors UploadController.CheckUploadAsync
+     * (HttpPost "{folderId}/upload/check"): the submitted titles that already
+     * belong to a file in the folder, without repetitions, matched by title
+     * ignoring case. An encrypted file is left out, since an upload cannot
+     * take it over; a body without `filesTitle` is a 400.
      */
     http.post(
       `${apiBase}/files/:folderId(\\d+)/upload/check`,
       async ({ params, request }) => {
         const folderId = Number(params.folderId);
-        if (folderId !== roomId) return undefined;
+        if (!holdsFolder(folderId)) return undefined;
         const body = (await request.json()) as { filesTitle?: string[] };
         requests.push({
           method: "POST",
           url: new URL(request.url).pathname,
           body,
         });
-        return okResponse([]);
+        if (!body.filesTitle) {
+          return errorResponse(400, "filesTitle is required");
+        }
+        const taken = new Set(
+          Array.from(files.values())
+            .filter((f) => !f.encrypted && (f.folderId ?? roomId) === folderId)
+            .map((f) => f.serverTitle.toLowerCase()),
+        );
+        return okResponse([
+          ...new Set(
+            body.filesTitle.filter((title) => taken.has(title.toLowerCase())),
+          ),
+        ]);
       },
     ),
 

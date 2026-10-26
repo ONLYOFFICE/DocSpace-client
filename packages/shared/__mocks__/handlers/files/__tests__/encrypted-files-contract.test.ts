@@ -915,6 +915,39 @@ describe("encryptedFiles mock — a second room in the same spec (withOtherRooms
   });
 });
 
+describe("encryptedFiles mock — POST /files/{folderId}/upload/check (mirrors UploadController.CheckUploadAsync)", () => {
+  const CHECK_URL = `${BASE_URL}:${PORT}/${API_PREFIX}/files/${MOVING_FOLDER_ID}/upload/check`;
+
+  const check = (body: object) =>
+    fetch(CHECK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+  it("answers the submitted titles a plain file of the folder holds, once each, ignoring case and encrypted files", async () => {
+    movingHandle.current!.setFiles([
+      { id: 41, title: "Report.docx", encrypted: false, folderId: MOVING_FOLDER_ID },
+      { id: 42, title: "secret.docx", encrypted: true, folderId: MOVING_FOLDER_ID },
+      { id: 43, title: "root.docx", encrypted: false },
+    ]);
+
+    const res = await check({
+      filesTitle: ["report.docx", "secret.docx", "root.docx", "report.docx"],
+    });
+    const body = (await res.json()) as { response: string[] };
+
+    expect(res.status).toBe(200);
+    expect(body.response).toEqual(["report.docx"]);
+  });
+
+  it("answers 400 for a body without filesTitle", async () => {
+    const res = await check({});
+
+    expect(res.status).toBe(400);
+  });
+});
+
 describe("encryptedFiles mock — moves inside a private room (mirrors OperationController)", () => {
   const FILEOPS = `${BASE_URL}:${PORT}/${API_PREFIX}/files/fileops`;
 

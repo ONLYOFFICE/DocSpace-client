@@ -380,7 +380,9 @@ const DocsLayoutCore = observer(
       conflictItems,
       closeConflictDialog,
       confirmConflict,
-    } = useFileOperations();
+    } = useFileOperations({
+      uploadDecryptedFiles: docsActions.defaultUploadFilesToFolder,
+    });
 
     const {
       isTrash,

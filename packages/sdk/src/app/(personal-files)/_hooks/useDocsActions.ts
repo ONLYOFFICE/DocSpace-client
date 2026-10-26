@@ -557,6 +557,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     onUploadFiles,
     onUploadFolder,
     uploadFilesToFolder,
+    defaultUploadFilesToFolder,
     uploadConflictDialogVisible,
     uploadConflictItems,
     confirmUploadConflict,

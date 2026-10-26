@@ -43,11 +43,6 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { CryptoError } from "@docspace/shared/services/encryption/errors";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import {
-  startUploadSession,
-  uploadChunkSequential,
-  finalizeUploadSession,
-} from "@docspace/shared/api/files";
-import {
   resolveFolderTarget,
   type TUploadTarget,
 } from "@docspace/shared/services/private-room/upload-target";
@@ -78,6 +73,8 @@ type CopyMoveArgs = {
   destFolderId: number | string;
   // The room the files currently live in — needed to unwrap their DEKs.
   sourceRoomId: number | string;
+  /** The standard upload, with its conflict check, for decrypted copies. */
+  uploadDecrypted: (files: File[], folderId: number | string) => Promise<void>;
 };
 
 type UseEncryptedCopyMoveReturn = {
@@ -87,47 +84,6 @@ type UseEncryptedCopyMoveReturn = {
 
 const loadCopyModule = () =>
   import("@docspace/shared/services/private-room/encrypted-copy");
-
-const PLAINTEXT_CHUNK_SIZE = 10 * 1024 * 1024;
-
-const uploadPlaintextFile = async (
-  file: File,
-  folderId: number | string,
-  signal: AbortSignal,
-): Promise<void> => {
-  const session = await startUploadSession(
-    folderId,
-    file.name,
-    file.size,
-    "",
-    false,
-    undefined,
-    true,
-  );
-  const sessionId = session?.id;
-  if (!sessionId) {
-    throw new Error("startUploadSession returned no session id");
-  }
-
-  const total = file.size;
-  let anyChunkSent = false;
-  for (let offset = 0; offset < total; offset += PLAINTEXT_CHUNK_SIZE) {
-    if (signal.aborted) return;
-    const end = Math.min(offset + PLAINTEXT_CHUNK_SIZE, total);
-    const formData = new FormData();
-    formData.append("file", file.slice(offset, end), file.name);
-    await uploadChunkSequential(folderId, sessionId, formData);
-    anyChunkSent = true;
-  }
-
-  if (signal.aborted) return;
-
-  if (anyChunkSent) {
-    await finalizeUploadSession(folderId, sessionId).catch(() => {});
-  } else {
-    await finalizeUploadSession(folderId, sessionId);
-  }
-};
 
 export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
   const { t } = useTranslation(["Common"]);
@@ -190,7 +146,12 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
   );
 
   const copyFiles = React.useCallback(
-    async ({ files, destFolderId, sourceRoomId }: CopyMoveArgs) => {
+    async ({
+      files,
+      destFolderId,
+      sourceRoomId,
+      uploadDecrypted,
+    }: CopyMoveArgs) => {
       if (files.length === 0) return;
 
       const userId = identityStore.userKeys?.userId;
@@ -220,6 +181,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
       const controller = registerCryptoOperation();
       const failed: { title: string; error: unknown }[] = [];
+      const decryptedOut: File[] = [];
       try {
         const { decryptEncryptedItemToFile, addCopySuffix } =
           await loadCopyModule();
@@ -243,34 +205,30 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
             if (controller.signal.aborted) return;
 
-            let uploaded = false;
             if (!dest.isPrivate) {
-              await uploadPlaintextFile(
-                decrypted,
-                destFolderId,
-                controller.signal,
-              );
-              uploaded = !controller.signal.aborted;
-            } else {
-              const sameRoom =
-                String(dest.encryptionRoomId) === String(sourceRoomId);
-              const fileToUpload = sameRoom
-                ? new File([decrypted], addCopySuffix(decrypted.name), {
-                    type: decrypted.type || "application/octet-stream",
-                  })
-                : decrypted;
-
-              const uploadResult = await uploadFiles({
-                files: [fileToUpload],
-                folderId: destFolderId,
-                roomId: dest.encryptionRoomId as number | string,
-              });
-              uploaded = uploadResult.ok;
+              decryptedOut.push(decrypted);
+              continue;
             }
+
+            const sameRoom =
+              String(dest.encryptionRoomId) === String(sourceRoomId);
+            const fileToUpload = sameRoom
+              ? new File([decrypted], addCopySuffix(decrypted.name), {
+                  type: decrypted.type || "application/octet-stream",
+                })
+              : decrypted;
+
+            const uploadResult = await uploadFiles({
+              files: [fileToUpload],
+              folderId: destFolderId,
+              roomId: dest.encryptionRoomId as number | string,
+            });
 
             if (controller.signal.aborted) return;
 
-            if (!uploaded) failed.push({ title: item.title, error: null });
+            if (!uploadResult.ok) {
+              failed.push({ title: item.title, error: null });
+            }
           } catch (error) {
             if (controller.signal.aborted) return;
             failed.push({ title: item.title, error });
@@ -278,6 +236,10 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         }
 
         if (controller.signal.aborted) return;
+
+        if (decryptedOut.length > 0) {
+          await uploadDecrypted(decryptedOut, destFolderId);
+        }
 
         if (failed.length === 1 && failed[0].error instanceof CryptoError) {
           toastr.error(getEncryptionErrorMessage(t, failed[0].error));

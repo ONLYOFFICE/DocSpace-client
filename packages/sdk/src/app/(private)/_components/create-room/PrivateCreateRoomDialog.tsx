@@ -40,6 +40,7 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import type { TUser } from "@docspace/shared/api/people/types";
+import { useEncryption } from "@docspace/shared/context/encryption";
 import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -73,7 +74,7 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
   const userId = user?.id ? String(user.id) : undefined;
 
   const hasKeys = identityStore.hasKeys;
-  const keysLoaded = identityStore.keys !== null;
+  const { keysLoaded } = useEncryption();
 
   const [keyConfirmVisible, setKeyConfirmVisible] = React.useState(false);
   const autoPromptedRef = React.useRef(false);

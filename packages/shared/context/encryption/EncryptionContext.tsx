@@ -84,6 +84,11 @@ export type EncryptionUserKeys = SerializedIdentity & { userId: string };
 export type EncryptionContextValue = {
   isUnlocked: boolean;
   hasConfiguredKey: boolean;
+  /**
+   * Whether the user's key list has been loaded, or failed to load; until
+   * then `hasConfiguredKey` being false says nothing.
+   */
+  keysLoaded: boolean;
   isUnlocking: boolean;
   unlockError: string | null;
   /**
@@ -105,6 +110,8 @@ export type EncryptionContextValue = {
 type EncryptionProviderProps = {
   children: ReactNode;
   userKeys: EncryptionUserKeys | null;
+  /** False while the wrapper is still loading the user's key list. */
+  keysLoaded?: boolean;
   PassphraseDialog?: React.ComponentType<PassphraseDialogProps>;
   KeyChangeDialog?: React.ComponentType<KeyChangeDialogModalProps>;
 };
@@ -135,6 +142,7 @@ const EncryptionContext = createContext<EncryptionContextValue | null>(null);
 export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   children,
   userKeys,
+  keysLoaded = true,
   PassphraseDialog,
   KeyChangeDialog,
 }) => {
@@ -483,6 +491,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     () => ({
       isUnlocked,
       hasConfiguredKey,
+      keysLoaded,
       isUnlocking,
       unlockError,
       publicKey,
@@ -497,6 +506,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     [
       isUnlocked,
       hasConfiguredKey,
+      keysLoaded,
       isUnlocking,
       unlockError,
       publicKey,

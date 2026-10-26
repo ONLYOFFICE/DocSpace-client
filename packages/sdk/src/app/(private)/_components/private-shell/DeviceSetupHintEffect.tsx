@@ -51,11 +51,11 @@ const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 // selectedFolderStore.private the way the main-client wrapper does. We only
 // suppress the toast once the user already has a configured envelope.
 const DeviceSetupHintEffect: React.FC = () => {
-  const { hasConfiguredKey } = useEncryption();
+  const { hasConfiguredKey, keysLoaded } = useEncryption();
   const { t } = useTranslation(["Common"]);
 
   React.useEffect(() => {
-    if (hasConfiguredKey) return;
+    if (!keysLoaded || hasConfiguredKey) return;
     try {
       if (sessionStorage.getItem(DEVICE_SETUP_HINT_SESSION_KEY) === "1") return;
       sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
@@ -84,7 +84,7 @@ const DeviceSetupHintEffect: React.FC = () => {
       30000,
       true,
     );
-  }, [hasConfiguredKey, t]);
+  }, [keysLoaded, hasConfiguredKey, t]);
 
   return null;
 };

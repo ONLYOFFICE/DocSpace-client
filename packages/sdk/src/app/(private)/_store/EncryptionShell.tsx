@@ -92,6 +92,7 @@ const EncryptionShellInner: React.FC<EncryptionShellProps> = ({ children }) => {
   return (
     <EncryptionProvider
       userKeys={userKeys}
+      keysLoaded={identityStore.keys !== null}
       PassphraseDialog={PassphraseDialogAdapter}
       KeyChangeDialog={KeyChangeDialog}
     >

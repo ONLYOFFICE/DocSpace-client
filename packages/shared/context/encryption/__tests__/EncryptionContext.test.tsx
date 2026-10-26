@@ -129,18 +129,21 @@ const Consumer: React.FC = () => {
 
 type RenderOpts = {
   userKeys?: EncryptionUserKeys | null;
+  keysLoaded?: boolean;
   withPassphraseDialog?: boolean;
   withKeyChangeDialog?: boolean;
 };
 
 const renderTree = ({
   userKeys = userKeysFixture,
+  keysLoaded,
   withPassphraseDialog = true,
   withKeyChangeDialog = true,
 }: RenderOpts = {}) => {
   return render(
     <EncryptionProvider
       userKeys={userKeys}
+      keysLoaded={keysLoaded}
       PassphraseDialog={withPassphraseDialog ? MockPassphraseDialog : undefined}
       KeyChangeDialog={withKeyChangeDialog ? MockKeyChangeDialog : undefined}
     >
@@ -168,6 +171,15 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(lockSpy).toHaveBeenCalled();
       expect(latest.hasConfiguredKey).toBe(false);
       expect(latest.isUnlocked).toBe(false);
+    });
+
+    it("reports the key list as loaded unless the wrapper says it is still loading", () => {
+      renderTree({ userKeys: null });
+      expect(latest.keysLoaded).toBe(true);
+
+      renderTree({ userKeys: null, keysLoaded: false });
+      expect(latest.keysLoaded).toBe(false);
+      expect(latest.hasConfiguredKey).toBe(false);
     });
 
     it("treats partial userKeys (missing privateKeyEnc) as not configured", () => {

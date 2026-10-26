@@ -57,6 +57,7 @@ import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?u
 import { isDesktop } from "@docspace/shared/utils";
 import { RoomSearchArea } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getEncryptedOperationErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import type { TRoomGroup } from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
 
@@ -103,7 +104,9 @@ export default class FilesHeaderOptionStore {
       .downloadFiles(fileIds, folderIds, {
         label: this.t("Common:ArchivingData"),
       })
-      ?.catch((err) => toastr.error(err));
+      ?.catch((err) =>
+        toastr.error(getEncryptedOperationErrorMessage(this.t, err)),
+      );
   };
 
   private moveToHandle = () => this.dialogsStore.setMoveToPanelVisible(true);

@@ -12,7 +12,7 @@
 
 ## 3. Header-menu error
 
-- [ ] 3.1 Map the error of `downloadEncryptedHandle` in `packages/client/src/store/FilesHeaderOptionStore.ts` through `getEncryptedOperationErrorMessage` (design D4); verify with the case "Download without decryption fails" in `FilesActionsStore.headerMenu.test.ts` (clicking `menu-download-encrypted` while `downloadFiles` rejects with an error without a message toasts `Common:EncryptedOperationFailed`, never the error object), run with `cd packages/client && pnpm exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.headerMenu.test.ts`
+- [x] 3.1 Map the error of `downloadEncryptedHandle` in `packages/client/src/store/FilesHeaderOptionStore.ts` through `getEncryptedOperationErrorMessage` (design D4); verify with the case "Download without decryption fails" in `FilesActionsStore.headerMenu.test.ts` (clicking `menu-download-encrypted` while `downloadFiles` rejects with an error without a message toasts `Common:EncryptedOperationFailed`, never the error object), run with `cd packages/client && pnpm exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.headerMenu.test.ts`
 
 ## 4. Spec wording and test names
 

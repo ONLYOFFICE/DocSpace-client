@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 import { afterEach, describe, it, expect, vi } from "vitest";
 import { createTestFilesActionsStore, t } from "./testHarness";
+// After the harness, which mocks the toast module.
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 // Recursive {id,label} projection excluding onClick/handlers.
 type Node = { id?: unknown; key?: unknown; label?: unknown; items?: Node[] };
@@ -166,5 +168,32 @@ describe("FilesActionsStore.getHeaderMenu — private room", () => {
 
     expect(downloadEncryptedFolder).toHaveBeenCalledWith(folder);
     expect(downloadFiles).not.toHaveBeenCalled();
+  });
+
+  it("Download without decryption fails", async () => {
+    const store = createTestFilesActionsStore({
+      ...enabling,
+      filesStore: {
+        ...enabling.filesStore,
+        selection: [
+          { id: 1, fileExst: ".docx", encrypted: true, security },
+          { id: 3, isFolder: true, security },
+        ],
+      },
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+    const error = new Error();
+    store.downloadFiles = vi.fn(async () => {
+      throw error;
+    });
+
+    const menu = store.getHeaderMenu(t) as {
+      id?: string;
+      onClick?: () => unknown;
+    }[];
+    await menu.find((item) => item.id === "menu-download-encrypted")!.onClick!();
+
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedOperationFailed");
+    expect(toastr.error).not.toHaveBeenCalledWith(error);
   });
 });

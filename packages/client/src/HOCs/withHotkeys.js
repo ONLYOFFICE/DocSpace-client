@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router";
@@ -115,26 +115,19 @@ const withHotkeys = (Component) => {
 
     const navigate = useNavigate();
 
-    const [isEnabled, setIsEnabled] = useState(true);
-
     const hotkeysFilter = {
       filter: (ev) =>
-        ev.target?.type === "checkbox" || ev.target?.tagName !== "INPUT",
+        !checkDialogsOpen() &&
+        !document.getElementsByClassName("p-contextmenu").length &&
+        (ev.target?.type === "checkbox" || ev.target?.tagName !== "INPUT"),
       filterPreventDefault: false,
       enableOnTags: ["INPUT"],
-      enabled:
-        enabledHotkeys && !mediaViewerIsVisible && !filesIsLoading && isEnabled,
+      enabled: enabledHotkeys && !mediaViewerIsVisible && !filesIsLoading,
       // keyup: true,
       // keydown: false,
     };
 
     const onKeyDown = (e) => {
-      const contextMenuIsOpen =
-        document.getElementsByClassName("p-contextmenu").length;
-
-      const someDialogIsOpen = checkDialogsOpen();
-      setIsEnabled(!someDialogIsOpen || !contextMenuIsOpen);
-
       if (isIndexEditingMode) return;
 
       activateHotkeys(e);
@@ -245,17 +238,11 @@ const withHotkeys = (Component) => {
     });
 
     // Select/deselect item
-    useHotkeys("x", selectFile);
+    useHotkeys("x", selectFile, hotkeysFilter);
 
     useHotkeys(
       "*",
       (e) => {
-        const contextMenuIsOpen =
-          document.getElementsByClassName("p-contextmenu").length;
-        const someDialogIsOpen = checkDialogsOpen();
-
-        if (someDialogIsOpen || contextMenuIsOpen) return e;
-
         if (
           (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
           ((e.key === "Meta" || e.key === "Control") && e.altKey)
@@ -350,14 +337,7 @@ const withHotkeys = (Component) => {
     // useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     // Back to parent folder
-    useHotkeys(
-      "Backspace",
-      () => {
-        const someDialogIsOpen = checkDialogsOpen();
-        if (!someDialogIsOpen) onClickBack();
-      },
-      hotkeysFilter,
-    );
+    useHotkeys("Backspace", onClickBack, hotkeysFilter);
 
     // Change viewAs
     useHotkeys(

@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useState } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -47,6 +48,7 @@ import {
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date";
 
+import TemplatePanel from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel";
 import type { TMetadataSelection } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
 import { useStore } from "SRC_DIR/store/useStore";
 
@@ -56,20 +58,21 @@ import { isSameEntry, METADATA_AI_PROMPT_MAX_LENGTH } from "./utils";
 import AICallout from "./sub-components/AICallout";
 import CustomFieldList from "./sub-components/CustomFieldList";
 import FillForms from "./sub-components/FillForms";
+import NothingToFill from "./sub-components/NothingToFill";
 import ReviewNotes from "./sub-components/ReviewNotes";
 import ServiceLimitNotice from "./sub-components/ServiceLimitNotice";
 import styles from "./MetadataAIPanel.module.scss";
 
 type MetadataAIDialogProps = {
   item: TMetadataSelection;
-  mode: TMetadataAIMode;
+  initialMode: TMetadataAIMode;
   onClose: () => void;
   onSaved: () => void;
 };
 
 const MetadataAIDialog = ({
   item,
-  mode,
+  initialMode,
   onClose,
   onSaved,
 }: MetadataAIDialogProps) => {
@@ -77,7 +80,10 @@ const MetadataAIDialog = ({
   const { isAdmin, language } = useStore("authStore");
   const navigate = useNavigate();
 
+  const [isTemplatePanelVisible, setIsTemplatePanelVisible] = useState(false);
+
   const {
+    mode,
     phase,
     metadata,
     forms,
@@ -98,19 +104,21 @@ const MetadataAIDialog = ({
     removeDraft,
     discard,
     save,
-  } = useMetadataAIPanel({ item, mode, onSaved });
+    saveTemplate,
+    switchMode,
+  } = useMetadataAIPanel({ item, initialMode, onSaved });
 
   const isFill = mode === "fill";
+  const canGoBack = mode !== initialMode;
   const isAnalyzing = phase === "analyzing";
   const isReview = phase === "review" && !!summary;
   const hasNothingToFill =
-    isFill && phase !== "loading" && !forms.length && !drafts.length;
+    isFill && !!metadata && !forms.length && !drafts.length;
   const hasNoModel = model === null;
 
   const getCalloutError = () => {
     if (error) return error;
     if (hasNoModel) return t("Metadata:AINoModel");
-    if (hasNothingToFill) return t("Metadata:AINothingToFill");
 
     return "";
   };
@@ -168,115 +176,130 @@ const MetadataAIDialog = ({
   );
 
   return (
-    <ModalDialog
-      visible
-      withBodyScroll
-      withoutPadding
-      displayType={ModalDialogType.aside}
-      onClose={onClose}
-      dataTestId="metadata_ai_panel"
-    >
-      <ModalDialog.Header>{getTitle()}</ModalDialog.Header>
+    <>
+      <ModalDialog
+        visible
+        withBodyScroll
+        withoutPadding
+        displayType={ModalDialogType.aside}
+        isBackButton={canGoBack}
+        onBackClick={canGoBack ? () => switchMode(initialMode) : undefined}
+        isCloseable={!isTemplatePanelVisible}
+        onClose={onClose}
+        dataTestId="metadata_ai_panel"
+      >
+        <ModalDialog.Header>{getTitle()}</ModalDialog.Header>
 
-      <ModalDialog.Body>
-        {phase === "loading" ? (
-          loader
-        ) : (
-          <div className={styles.body}>
-            <div className={styles.top}>
-              {isReview ? (
-                <ReviewNotes mode={mode} summary={summary} />
-              ) : (
-                <AICallout
-                  title={
-                    isFill
-                      ? t("Files:FillMetadataWithAI")
-                      : t("Files:SuggestMetadataWithAI")
-                  }
-                  description={
-                    isFill
-                      ? t("Metadata:AIFillDescription")
-                      : t("Metadata:AISuggestDescription")
-                  }
-                  model={model ? t("Metadata:AIModel", { model }) : undefined}
-                  buttonLabel={
-                    isFill
-                      ? t("Metadata:FillWithAI")
-                      : t("Metadata:SuggestMetadata")
-                  }
-                  error={getCalloutError()}
-                  notice={getServiceLimitNotice()}
-                  isDisabled={
-                    isAnalyzing ||
-                    isSaving ||
-                    hasNothingToFill ||
-                    hasNoModel ||
-                    !metadata
-                  }
-                  onClick={runAI}
-                >
-                  <Textarea
-                    wrapperClassName={styles.prompt}
-                    className={styles.promptField}
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    placeholder={t("Metadata:AIPromptPlaceholder")}
-                    maxLength={METADATA_AI_PROMPT_MAX_LENGTH}
-                    heightTextArea="64px"
-                    fontSize={13}
-                    isDisabled={isAnalyzing}
-                    dataTestId="metadata_ai_prompt_textarea"
-                  />
-                  {isFill ? (
-                    <Checkbox
-                      label={t("Metadata:OverwriteExistingValues")}
-                      isChecked={overwrite}
+        <ModalDialog.Body>
+          {phase === "loading" ? (
+            loader
+          ) : hasNothingToFill ? (
+            <NothingToFill
+              onSuggest={() => switchMode("suggest")}
+              onAddTemplate={() => setIsTemplatePanelVisible(true)}
+            />
+          ) : (
+            <div className={styles.body}>
+              <div className={styles.top}>
+                {isReview ? (
+                  <ReviewNotes mode={mode} summary={summary} />
+                ) : (
+                  <AICallout
+                    title={
+                      isFill
+                        ? t("Files:FillMetadataWithAI")
+                        : t("Files:SuggestMetadataWithAI")
+                    }
+                    description={
+                      isFill
+                        ? t("Metadata:AIFillDescription")
+                        : t("Metadata:AISuggestDescription")
+                    }
+                    model={model ? t("Metadata:AIModel", { model }) : undefined}
+                    buttonLabel={
+                      isFill
+                        ? t("Metadata:FillWithAI")
+                        : t("Metadata:SuggestMetadata")
+                    }
+                    error={getCalloutError()}
+                    notice={getServiceLimitNotice()}
+                    isDisabled={
+                      isAnalyzing || isSaving || hasNoModel || !metadata
+                    }
+                    onClick={runAI}
+                  >
+                    <Textarea
+                      wrapperClassName={styles.prompt}
+                      className={styles.promptField}
+                      value={prompt}
+                      onChange={(e) => setPrompt(e.target.value)}
+                      placeholder={t("Metadata:AIPromptPlaceholder")}
+                      maxLength={METADATA_AI_PROMPT_MAX_LENGTH}
+                      heightTextArea="64px"
+                      fontSize={13}
                       isDisabled={isAnalyzing}
-                      onChange={() => setOverwrite(!overwrite)}
-                      dataTestId="metadata_ai_overwrite_checkbox"
+                      dataTestId="metadata_ai_prompt_textarea"
                     />
-                  ) : null}
-                </AICallout>
-              )}
+                    {isFill ? (
+                      <Checkbox
+                        label={t("Metadata:OverwriteExistingValues")}
+                        isChecked={overwrite}
+                        isDisabled={isAnalyzing}
+                        onChange={() => setOverwrite(!overwrite)}
+                        dataTestId="metadata_ai_overwrite_checkbox"
+                      />
+                    ) : null}
+                  </AICallout>
+                )}
+              </div>
+
+              {isFill ? (
+                <FillForms
+                  forms={forms}
+                  customFields={drafts.length ? customFields : null}
+                  isAnalyzing={isAnalyzing}
+                  onChange={setInput}
+                />
+              ) : null}
+
+              {!isFill && isAnalyzing ? loader : null}
+
+              {!isFill && isReview ? customFields : null}
             </div>
+          )}
+        </ModalDialog.Body>
 
-            {isFill ? (
-              <FillForms
-                forms={forms}
-                customFields={drafts.length ? customFields : null}
-                isAnalyzing={isAnalyzing}
-                onChange={setInput}
-              />
-            ) : null}
+        <ModalDialog.Footer>
+          <Button
+            primary
+            scale
+            size={ButtonSize.normal}
+            label={t("Metadata:SaveChanges")}
+            isDisabled={!canSave}
+            isLoading={isSaving}
+            onClick={save}
+            testId="metadata_ai_save_button"
+          />
+          <Button
+            scale
+            size={ButtonSize.normal}
+            label={isReview ? t("Metadata:Discard") : t("Common:CancelButton")}
+            isDisabled={isSaving}
+            onClick={isReview ? discard : onClose}
+            testId="metadata_ai_cancel_button"
+          />
+        </ModalDialog.Footer>
+      </ModalDialog>
 
-            {!isFill && isAnalyzing ? loader : null}
-
-            {!isFill && isReview ? customFields : null}
-          </div>
-        )}
-      </ModalDialog.Body>
-
-      <ModalDialog.Footer>
-        <Button
-          primary
-          scale
-          size={ButtonSize.normal}
-          label={t("Metadata:SaveChanges")}
-          isDisabled={!canSave}
-          isLoading={isSaving}
-          onClick={save}
-          testId="metadata_ai_save_button"
+      {isTemplatePanelVisible && metadata ? (
+        <TemplatePanel
+          assigned={metadata.templates}
+          onSubmit={saveTemplate}
+          onClose={() => setIsTemplatePanelVisible(false)}
+          onGoToSettings={onClose}
         />
-        <Button
-          scale
-          size={ButtonSize.normal}
-          label={isReview ? t("Metadata:Discard") : t("Common:CancelButton")}
-          isDisabled={isSaving}
-          onClick={isReview ? discard : onClose}
-          testId="metadata_ai_cancel_button"
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
+      ) : null}
+    </>
   );
 };
 
@@ -302,7 +325,7 @@ const MetadataAIPanel = () => {
   return (
     <MetadataAIDialog
       item={item}
-      mode={metadataAIPanelData.mode}
+      initialMode={metadataAIPanelData.mode}
       onClose={close}
       onSaved={onSaved}
     />

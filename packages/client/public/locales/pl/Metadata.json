@@ -12,6 +12,7 @@
   "AIFillingTitle": "Uzupełnianie metadanych za pomocą AI",
   "AIModel": "Model: {{model}}",
   "AINoChanges": "AI nie znalazła nowych wartości w zawartości.",
+  "AINoMetadataDescription": "AI może zaproponować pola na podstawie zawartości pliku lub uzupełnić dodany szablon.",
   "AINoModel": "Nie wybrano modelu AI dla metadanych. Poproś administratora o wybranie go w ustawieniach AI.",
   "AINotFound": "<strong>Nie znaleziono wartości dla:</strong> {{fields}}",
   "AINothingToFill": "Najpierw dodaj szablon lub pola niestandardowe do tego elementu, a następnie uzupełnij go za pomocą AI.",

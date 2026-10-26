@@ -12,6 +12,7 @@
   "AIFillingTitle": "正在使用 AI 填写元数据",
   "AIModel": "模型：{{model}}",
   "AINoChanges": "AI 未在内容中找到新值。",
+  "AINoMetadataDescription": "AI 可以根据文件内容建议字段，或填写您添加的模板。",
   "AINoModel": "未为元数据选择 AI 模型。请联系管理员在 AI 设置中选择一个模型。",
   "AINotFound": "<strong>未找到以下字段的值：</strong>{{fields}}",
   "AINothingToFill": "请先为此项目添加模板或自定义字段，然后再使用 AI 填写。",

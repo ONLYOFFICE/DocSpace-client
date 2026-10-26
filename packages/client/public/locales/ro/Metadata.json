@@ -12,6 +12,7 @@
   "AIFillingTitle": "Completarea metadatelor cu IA",
   "AIModel": "Model: {{model}}",
   "AINoChanges": "IA nu a găsit valori noi în conținut.",
+  "AINoMetadataDescription": "IA poate sugera câmpuri pe baza conținutului fișierului sau poate completa un șablon pe care îl adăugați.",
   "AINoModel": "Niciun model IA nu este selectat pentru metadate. Solicitați administratorului să aleagă unul în setările IA.",
   "AINotFound": "<strong>Nu s-au găsit valori pentru:</strong> {{fields}}",
   "AINothingToFill": "Mai întâi adăugați un șablon sau câmpuri particularizate la acest element, apoi completați-l cu IA.",

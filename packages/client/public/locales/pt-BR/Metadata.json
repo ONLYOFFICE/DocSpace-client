@@ -12,6 +12,7 @@
   "AIFillingTitle": "Preenchendo metadados com IA",
   "AIModel": "Modelo: {{model}}",
   "AINoChanges": "A IA não encontrou novos valores no conteúdo.",
+  "AINoMetadataDescription": "A IA pode sugerir campos com base no conteúdo do arquivo ou preencher um modelo que você adicionar.",
   "AINoModel": "Nenhum modelo de IA está selecionado para metadados. Peça ao administrador para escolher um nas configurações de IA.",
   "AINotFound": "<strong>Nenhum valor encontrado para:</strong> {{fields}}",
   "AINothingToFill": "Primeiro adicione um modelo ou campos personalizados a este item e depois preencha-o com IA.",

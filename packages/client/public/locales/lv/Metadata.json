@@ -12,6 +12,7 @@
   "AIFillingTitle": "Metadatu aizpildīšana ar MI",
   "AIModel": "Modelis: {{model}}",
   "AINoChanges": "MI saturā neatrada jaunas vērtības.",
+  "AINoMetadataDescription": "MI var ieteikt laukus no faila satura vai aizpildīt jūsu pievienoto veidni.",
   "AINoModel": "Metadatiem nav atlasīts neviens MI modelis. Lūdziet administratoru to izvēlēties MI iestatījumos.",
   "AINotFound": "<strong>Vērtības netika atrastas laukiem:</strong> {{fields}}",
   "AINothingToFill": "Vispirms pievienojiet šim vienumam veidni vai pielāgotus laukus, pēc tam aizpildiet to ar MI.",

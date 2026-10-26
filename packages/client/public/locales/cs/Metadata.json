@@ -12,6 +12,7 @@
   "AIFillingTitle": "Vyplňování metadat pomocí AI",
   "AIModel": "Model: {{model}}",
   "AINoChanges": "AI v obsahu nenašla žádné nové hodnoty.",
+  "AINoMetadataDescription": "AI může navrhnout pole podle obsahu souboru nebo vyplnit šablonu, kterou přidáte.",
   "AINoModel": "Pro metadata není vybrán žádný model AI. Požádejte správce, aby jej vybral v nastavení AI.",
   "AINotFound": "<strong>Nenalezeny hodnoty pro:</strong> {{fields}}",
   "AINothingToFill": "Nejprve k této položce přidejte šablonu nebo vlastní pole a poté ji vyplňte pomocí AI.",

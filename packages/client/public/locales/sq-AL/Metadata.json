@@ -12,6 +12,7 @@
   "AIFillingTitle": "Po plotësohen meta të dhënat me IA",
   "AIModel": "Modeli: {{model}}",
   "AINoChanges": "IA nuk gjeti vlera të reja në përmbajtje.",
+  "AINoMetadataDescription": "IA mund të sugjerojë fusha nga përmbajtja e skedarit ose të plotësojë një model që shtoni.",
   "AINoModel": "Nuk është zgjedhur asnjë model IA për meta të dhënat. Kërkojini administratorit ta zgjedhë një në cilësimet e IA.",
   "AINotFound": "<strong>Nuk u gjetën vlera për:</strong> {{fields}}",
   "AINothingToFill": "Fillimisht shtoni një model ose fusha të personalizuara te ky element, pastaj plotësojeni me IA.",

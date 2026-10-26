@@ -12,6 +12,7 @@
   "AIFillingTitle": "Meta veri AI ile dolduruluyor",
   "AIModel": "Model: {{model}}",
   "AINoChanges": "AI içerikte yeni değer bulamadı.",
+  "AINoMetadataDescription": "AI, dosya içeriğine göre alanlar önerebilir veya eklediğiniz bir şablonu doldurabilir.",
   "AINoModel": "Meta veri için AI modeli seçilmedi. Yöneticiden AI ayarlarında bir model seçmesini isteyin.",
   "AINotFound": "<strong>Değer bulunamayan alanlar:</strong> {{fields}}",
   "AINothingToFill": "Önce bu öğeye bir şablon veya özel alanlar ekleyin, ardından AI ile doldurun.",

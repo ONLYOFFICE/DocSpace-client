@@ -12,6 +12,7 @@
   "AIFillingTitle": "Izpolnjevanje metapodatkov z AI",
   "AIModel": "Model: {{model}}",
   "AINoChanges": "AI v vsebini ni našla novih vrednosti.",
+  "AINoMetadataDescription": "AI lahko predlaga polja na podlagi vsebine datoteke ali izpolni predlogo, ki jo dodate.",
   "AINoModel": "Za metapodatke ni izbran noben model AI. Prosite skrbnika, da ga izbere v nastavitvah AI.",
   "AINotFound": "<strong>Ni najdenih vrednosti za:</strong> {{fields}}",
   "AINothingToFill": "Temu elementu najprej dodajte predlogo ali polja po meri, nato ga izpolnite z AI.",

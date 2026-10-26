@@ -49,6 +49,7 @@ import {
 import type {
   TCustomFieldRequest,
   TEntryMetadata,
+  TMetadataEntryKind,
   TMetadataValueRequest,
 } from "@docspace/shared/api/metadata/types";
 
@@ -64,6 +65,28 @@ type TEntryUpdate = {
   cmd?: string;
   type?: string;
   id?: string | number;
+};
+
+export const saveEntryTemplate = async (
+  kind: TMetadataEntryKind,
+  entryId: number,
+  metadata: TEntryMetadata | null,
+  templateId: number,
+  values: TMetadataValueRequest[],
+) => {
+  const isAssigned = metadata?.templates.some(
+    (template) => template.id === templateId,
+  );
+
+  if (!isAssigned) {
+    await assignMetadataTemplates(kind, entryId, {
+      templateIds: [templateId],
+    });
+  }
+
+  return values.length
+    ? setMetadataValues(kind, entryId, values)
+    : getEntryMetadata(kind, entryId);
 };
 
 export const useEntryMetadata = (item: TMetadataSelection) => {
@@ -128,21 +151,7 @@ export const useEntryMetadata = (item: TMetadataSelection) => {
   };
 
   const saveTemplate = (templateId: number, values: TMetadataValueRequest[]) =>
-    mutate(async () => {
-      const isAssigned = metadata?.templates.some(
-        (template) => template.id === templateId,
-      );
-
-      if (!isAssigned) {
-        await assignMetadataTemplates(kind, entryId, {
-          templateIds: [templateId],
-        });
-      }
-
-      return values.length
-        ? setMetadataValues(kind, entryId, values)
-        : getEntryMetadata(kind, entryId);
-    });
+    mutate(() => saveEntryTemplate(kind, entryId, metadata, templateId, values));
 
   const deleteTemplate = (templateId: number) =>
     mutate(async () => {

@@ -12,6 +12,7 @@
   "AIFillingTitle": "AIでメタデータを入力中",
   "AIModel": "モデル: {{model}}",
   "AINoChanges": "AIはコンテンツから新しい値を見つけられませんでした。",
+  "AINoMetadataDescription": "AIはファイルのコンテンツからフィールドを提案したり、追加したテンプレートに入力したりできます。",
   "AINoModel": "メタデータ用のAIモデルが選択されていません。AI設定でモデルを選択するよう管理者に依頼してください。",
   "AINotFound": "<strong>値が見つからなかったフィールド:</strong> {{fields}}",
   "AINothingToFill": "まずこのアイテムにテンプレートまたはカスタムフィールドを追加してから、AIで入力してください。",

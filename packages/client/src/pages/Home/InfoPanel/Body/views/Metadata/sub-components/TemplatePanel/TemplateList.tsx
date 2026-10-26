@@ -67,6 +67,7 @@ type TemplateListProps = {
   selected: TMetadataTemplate | null;
   onSelect: (template: TMetadataTemplate) => void;
   onOpen: (template: TMetadataTemplate) => void;
+  onGoToSettings?: () => void;
 };
 
 const TemplateList = ({
@@ -74,6 +75,7 @@ const TemplateList = ({
   selected,
   onSelect,
   onOpen,
+  onGoToSettings,
 }: TemplateListProps) => {
   const { t } = useTranslation(["Metadata", "Common"]);
   const { isBase } = useTheme();
@@ -109,6 +111,7 @@ const TemplateList = ({
               icon={<SettingsSvg />}
               label={t("Common:GoToSettings")}
               to="/portal-settings/customization/metadata-templates"
+              onClick={onGoToSettings}
               data-testid="metadata_templates_settings_link"
             />
           ) : null

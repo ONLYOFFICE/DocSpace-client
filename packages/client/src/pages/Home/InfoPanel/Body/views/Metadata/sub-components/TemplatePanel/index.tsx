@@ -58,6 +58,7 @@ type TemplatePanelProps = {
     values: TMetadataValueRequest[],
   ) => Promise<boolean>;
   onClose: () => void;
+  onGoToSettings?: () => void;
 };
 
 const TemplatePanel = ({
@@ -65,6 +66,7 @@ const TemplatePanel = ({
   assigned,
   onSubmit,
   onClose,
+  onGoToSettings,
 }: TemplatePanelProps) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -106,6 +108,7 @@ const TemplatePanel = ({
               selected={selected}
               onSelect={setSelected}
               onOpen={openForm}
+              onGoToSettings={onGoToSettings}
             />
           )}
         </div>

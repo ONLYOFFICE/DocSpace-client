@@ -48,9 +48,13 @@ import {
   setMetadataCustomFields,
   setMetadataValues,
 } from "@docspace/shared/api/metadata";
-import type { TEntryMetadata } from "@docspace/shared/api/metadata/types";
+import type {
+  TEntryMetadata,
+  TMetadataValueRequest,
+} from "@docspace/shared/api/metadata/types";
 import type { TMetadataInput } from "@docspace/shared/utils/metadata";
 
+import { saveEntryTemplate } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/hooks/useEntryMetadata";
 import type {
   TCustomFieldDraft,
   TMetadataSelection,
@@ -86,17 +90,18 @@ import {
 
 type TUseMetadataAIPanel = {
   item: TMetadataSelection;
-  mode: TMetadataAIMode;
+  initialMode: TMetadataAIMode;
   onSaved: () => void;
 };
 
 export const useMetadataAIPanel = ({
   item,
-  mode,
+  initialMode,
   onSaved,
 }: TUseMetadataAIPanel) => {
   const { t } = useTranslation(["Metadata", "Common"]);
 
+  const [mode, setMode] = useState(initialMode);
   const [phase, setPhase] = useState<TMetadataAIPhase>("loading");
   const [metadata, setMetadata] = useState<TEntryMetadata | null>(null);
   const [forms, setForms] = useState<TTemplateForm[]>([]);
@@ -119,16 +124,22 @@ export const useMetadataAIPanel = ({
   const kind = getEntryKind(item);
   const id = Number(item.id);
 
+  const applyMetadata = (data: TEntryMetadata, nextMode = mode) => {
+    setMetadata(data);
+    setForms(getTemplateForms(data));
+    setDrafts(
+      nextMode === "fill" ? toCustomFieldDrafts(data.customFields) : [],
+    );
+  };
+
+  const loadMetadata = (signal?: AbortSignal) =>
+    getEntryMetadata(kind, id, signal).then(applyMetadata);
+
   useEffect(() => {
     const abort = new AbortController();
     controller.current = abort;
 
-    getEntryMetadata(kind, id, abort.signal)
-      .then((data) => {
-        setMetadata(data);
-        setForms(getTemplateForms(data));
-        if (mode === "fill") setDrafts(toCustomFieldDrafts(data.customFields));
-      })
+    loadMetadata(abort.signal)
       .catch(() => {
         if (!abort.signal.aborted) setError(t("Common:SomethingWentWrong"));
       })
@@ -236,6 +247,35 @@ export const useMetadataAIPanel = ({
   const removeDraft = (key: string) =>
     setDrafts((prev) => prev.filter((draft) => draft.key !== key));
 
+  const saveTemplate = async (
+    templateId: number,
+    values: TMetadataValueRequest[],
+  ) => {
+    try {
+      applyMetadata(
+        await saveEntryTemplate(kind, id, metadata, templateId, values),
+      );
+      return true;
+    } catch (e) {
+      toastr.error(e as string);
+      await loadMetadata().catch(() => {});
+      return false;
+    }
+  };
+
+  const switchMode = (nextMode: TMetadataAIMode) => {
+    controller.current?.abort();
+    beforeRun.current = null;
+
+    setMode(nextMode);
+    setSummary(null);
+    setError("");
+    setServiceLimit(null);
+    setPrompt("");
+    setPhase("ready");
+    if (metadata) applyMetadata(metadata, nextMode);
+  };
+
   const discard = () => {
     if (!beforeRun.current) return;
 
@@ -282,6 +322,7 @@ export const useMetadataAIPanel = ({
   };
 
   return {
+    mode,
     phase,
     metadata,
     forms,
@@ -302,5 +343,7 @@ export const useMetadataAIPanel = ({
     removeDraft,
     discard,
     save,
+    saveTemplate,
+    switchMode,
   };
 };

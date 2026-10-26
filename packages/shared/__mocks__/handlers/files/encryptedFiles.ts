@@ -450,6 +450,8 @@ export const encryptedFilesHandlers = (
   };
   let nextFileId = 1000;
   let nextSessionId = 1;
+  /** FileOperationDto entries of the moves this room ran, for fileops. */
+  const operations: Record<string, unknown>[] = [];
 
   const sessionBytes = (session: UploadSessionRecord) =>
     session.chunks.reduce((acc, c) => acc + c.byteLength, 0);
@@ -539,6 +541,7 @@ export const encryptedFilesHandlers = (
       roomUserKeys = [];
       nextFileId = 1000;
       nextSessionId = 1;
+      operations.length = 0;
       currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
     },
   };
@@ -976,11 +979,18 @@ export const encryptedFilesHandlers = (
      * `folders` for a delete.
      */
     http.put(`${apiBase}/files/fileops/delete`, async ({ request }) => {
-      const body = (await request.json()) as {
+      const body = (await request.clone().json()) as {
         fileIds?: (number | string)[];
         folderIds?: (number | string)[];
         immediately?: boolean;
       };
+      if (
+        withOtherRooms &&
+        (body.fileIds ?? []).length > 0 &&
+        (body.fileIds ?? []).every((id) => !files.has(Number(id)))
+      ) {
+        return undefined;
+      }
       requests.push({
         method: "PUT",
         url: new URL(request.url).pathname,
@@ -1031,5 +1041,96 @@ export const encryptedFilesHandlers = (
         ]);
       },
     ),
+
+    /**
+     * Mirrors OperationController.CheckMoveOrCopyBatchItems (HttpGet
+     * "fileops/move") -> FileStorageService.MoveOrCopyFilesCheckAsync: the
+     * listed files whose title the destination folder already holds, as
+     * FileEntryBaseDto entries. An encrypted file is never listed (the check
+     * skips Encrypted files), and only project folders are compared, which a
+     * room does not hold.
+     */
+    http.get(`${apiBase}/files/fileops/move`, ({ request }) => {
+      const query = new URL(request.url).searchParams;
+      const destFolderId = Number(query.get("destFolderId"));
+      if (!holdsFolder(destFolderId)) {
+        return withOtherRooms ? undefined : errorResponse(404, "folder not found");
+      }
+      requests.push({ method: "GET", url: new URL(request.url).pathname });
+      const inDest = Array.from(files.values()).filter(
+        (f) => (f.folderId ?? roomId) === destFolderId,
+      );
+      const clashing = query
+        .getAll("fileIds")
+        .map((id) => files.get(Number(id)))
+        .filter(
+          (f): f is EncryptedFileRecord =>
+            !!f &&
+            !f.encrypted &&
+            inDest.some((d) => d.serverTitle === f.serverTitle),
+        );
+      return okResponse(
+        clashing.map((f) => buildFileDto(f, roomId, ownerId, port, archived)),
+      );
+    }),
+
+    /**
+     * Mirrors OperationController.MoveBatchItems (HttpPut "fileops/move"):
+     * queues the move and answers the move operations, here one already
+     * finished (FileOperationType.Move = 0, DistributedTaskStatus.Completed
+     * = 2) listing the moved files. Within one private room the server's
+     * CompliesPrivateRoomRulesAsync lets a move pass; the mock moves files
+     * between the room and its folders and does not model folder moves.
+     */
+    http.put(`${apiBase}/files/fileops/move`, async ({ request }) => {
+      const body = (await request.clone().json()) as {
+        destFolderId?: number | string;
+        fileIds?: (number | string)[];
+        folderIds?: (number | string)[];
+      };
+      const destFolderId = Number(body.destFolderId);
+      const fileIds = (body.fileIds ?? []).map(Number);
+      if (!holdsFolder(destFolderId) || fileIds.some((id) => !files.has(id))) {
+        return withOtherRooms
+          ? undefined
+          : errorResponse(403, "You don't have enough permission to move the file");
+      }
+      requests.push({
+        method: "PUT",
+        url: new URL(request.url).pathname,
+        body,
+      });
+      const moved = fileIds.map((id) => {
+        const record = files.get(id) as EncryptedFileRecord;
+        record.folderId = destFolderId === roomId ? undefined : destFolderId;
+        return record;
+      });
+      const operation = {
+        id: `mock-move-${requests.length}`,
+        Operation: 0,
+        progress: 100,
+        error: "",
+        processed: String(moved.length),
+        finished: true,
+        status: 2,
+        files: moved.map((f) =>
+          buildFileDto(f, roomId, ownerId, port, archived),
+        ),
+        folders: [],
+      };
+      operations.push(operation);
+      return okResponse([operation]);
+    }),
+
+    /**
+     * Mirrors OperationController.GetOperationStatuses (HttpGet "fileops"):
+     * the caller's operations, only the one named by `id` when it is given.
+     */
+    http.get(`${apiBase}/files/fileops`, ({ request }) => {
+      const id = new URL(request.url).searchParams.get("id");
+      const found = operations.filter((o) => !id || o.id === id);
+      if (found.length === 0 && withOtherRooms) return undefined;
+      return okResponse(found);
+    }),
   ];
 };

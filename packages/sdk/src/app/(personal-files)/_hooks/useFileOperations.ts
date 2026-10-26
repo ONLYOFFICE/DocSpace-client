@@ -51,8 +51,11 @@ import { getApps } from "@docspace/shared/api/apps";
 import type {
   TFolder,
   TFile,
+  TFileSecurity,
+  TFolderSecurity,
   TGetFolder,
 } from "@docspace/shared/api/files/types";
+import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { ConflictResolveType, FolderType } from "@docspace/shared/enums";
@@ -64,6 +67,12 @@ import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionSt
 import { useEncryptedFileActions } from "@/app/(docspace)/_contexts/EncryptedFileActionsContext";
 import { PAGE_COUNT } from "@/utils/constants";
 import { resolveFolderTarget } from "@docspace/shared/services/private-room/upload-target";
+import {
+  getSelectorTransfer,
+  getShowEncryptedTransferBanner,
+  planPrivateTransfer,
+} from "@docspace/shared/services/private-room/private-transfer";
+import { getIsDisabled } from "@docspace/shared/utils/filesSelector";
 import useOperationToast from "./useOperationToast";
 import type {
   TFileItem,
@@ -407,53 +416,63 @@ export default function useFileOperations() {
       setSelectorInitData(null);
 
       let serverItems: (TFileItem | TFolderItem)[] = pendingItems;
-      const destination = encryptedActions
-        ? await resolveDestination(destFolderId)
-        : null;
-      const isSameRoom =
-        !!destination?.isPrivate &&
-        String(destination.encryptionRoomId) ===
-          String(encryptedActions?.roomId);
-
-      // Spec: private-rooms/sdk-surface, "Copy and move destination resolved fail-closed"
-      if (
-        isMove &&
-        destination?.isPrivate &&
-        !isSameRoom &&
-        serverItems.some((i) => !i.isFolder)
-      ) {
-        toastr.error(t("Common:CannotMoveToAnotherPrivateRoom"));
-        serverItems = serverItems.filter((i) => i.isFolder);
-      }
-
       if (encryptedActions) {
-        const encryptedFiles = serverItems.filter(
-          (i) => !i.isFolder && (i as TFileItem).encrypted,
-        ) as TFileItem[];
-        if (encryptedFiles.length) {
-          serverItems = serverItems.filter(
-            (i) => !(!i.isFolder && (i as TFileItem).encrypted),
-          );
-          try {
-            if (isMove)
-              await encryptedActions.moveFiles(encryptedFiles, destFolderId);
-            else await encryptedActions.copyFiles(encryptedFiles, destFolderId);
-          } catch (error) {
-            toastr.error(
-              error instanceof Error ? error.message : String(error),
+        const destination = await resolveDestination(destFolderId);
+        // Spec: private-rooms/sdk-surface, "Moves stay inside the private room"
+        const plan = planPrivateTransfer({
+          items: pendingItems,
+          sourceInPrivateRoom: true,
+          sourceRoomId: encryptedActions.roomId,
+          move: isMove,
+          dest: destination
+            ? {
+                insidePrivateRoom: destination.isPrivate,
+                roomId: destination.encryptionRoomId,
+              }
+            : null,
+        });
+
+        if (plan.kind === "refuse-into") {
+          toastr.error(t("Common:CannotTransferToPrivateRoom"));
+          serverItems = [];
+        } else if (plan.kind === "refuse-folder-out") {
+          toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
+          serverItems = [];
+        } else if (plan.kind === "refuse-move-into") {
+          toastr.error(t("Common:CannotMoveToAnotherPrivateRoom"));
+          serverItems = [];
+        } else {
+          const transfer = getSelectorTransfer({
+            plan,
+            selection: pendingItems,
+            selectedItemId: destFolderId,
+            isCopy: !isMove,
+            isMove,
+          });
+          if (transfer.kind === "encrypted") {
+            if (transfer.movesIntoItself) {
+              toastr.error(t("Common:MoveToFolderMessage"));
+            }
+            if (transfer.refusedFolders) {
+              toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
+            }
+            serverItems = pendingItems.filter((i) =>
+              i.isFolder
+                ? transfer.folderIds.includes(i.id as number)
+                : transfer.fileIds.includes(i.id as number),
             );
+            try {
+              await encryptedActions.copyFiles(
+                transfer.encryptedFiles as unknown as TFileItem[],
+                destFolderId,
+              );
+            } catch (error) {
+              toastr.error(
+                error instanceof Error ? error.message : String(error),
+              );
+            }
           }
         }
-      }
-
-      // Spec: private-rooms/sdk-surface, "Folder operations use the server path"
-      if (
-        encryptedActions &&
-        !isSameRoom &&
-        serverItems.some((i) => i.isFolder)
-      ) {
-        toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
-        serverItems = serverItems.filter((i) => !i.isFolder);
       }
 
       if (!serverItems.length) {
@@ -546,10 +565,62 @@ export default function useFileOperations() {
     .filter((i) => i.isFolder)
     .map((i) => i.id as number);
 
-  // True when at least one pending file is encrypted; drives the info-bar
-  // warning shown in FilesSelector when source is a private room.
-  const pendingHasEncrypted = pendingItems.some(
-    (i) => !i.isFolder && (i as TFileItem).encrypted,
+  // Spec: private-rooms/sdk-surface, "Moves stay inside the private room"
+  const selectorPinnedRootId =
+    encryptedActions && selectorMode === "move"
+      ? encryptedActions.roomId
+      : undefined;
+
+  const showEncryptedTransferBanner =
+    !!encryptedActions &&
+    getShowEncryptedTransferBanner({
+      selection: pendingItems as unknown as Parameters<
+        typeof getShowEncryptedTransferBanner
+      >[0]["selection"],
+      sourceInPrivateRoom: true,
+      isCopy: selectorMode === "copy",
+    });
+
+  /** The client's destination rules when the picker opens in a private room. */
+  const getSelectorIsDisabled = useCallback(
+    (
+      isFirstLoad: boolean,
+      isSelectedParentFolder: boolean,
+      selectedItemId: string | number | undefined,
+      selectedItemType: "rooms" | "files" | "agents" | undefined,
+      isRoot: boolean,
+      selectedItemSecurity?: TFileSecurity | TFolderSecurity | TRoomSecurity,
+      selectedFileInfo?: unknown,
+      isDisabledFolder?: boolean,
+      isInsideKnowledge?: boolean,
+      isInsideResultStorage?: boolean,
+      isInsidePrivateRoom?: boolean,
+    ) =>
+      encryptedActions
+        ? getIsDisabled(
+            isFirstLoad,
+            isSelectedParentFolder,
+            String(filesListStore.currentFolder?.id) === String(selectedItemId),
+            selectedItemType === "rooms",
+            isRoot,
+            selectorMode === "copy",
+            selectorMode === "move",
+            false,
+            false,
+            selectedItemSecurity,
+            undefined,
+            !!selectedFileInfo,
+            pendingItems.some((i) => i.isFolder),
+            selectorMode === "restore",
+            isDisabledFolder,
+            isInsideKnowledge,
+            isInsideResultStorage,
+            selectedItemType === "agents",
+            isInsidePrivateRoom,
+            true,
+          )
+        : isFirstLoad || isRoot,
+    [encryptedActions, filesListStore, selectorMode, pendingItems],
   );
 
   return {
@@ -557,7 +628,9 @@ export default function useFileOperations() {
     selectorMode,
     hasRooms,
     pendingItemCount: pendingItems.length,
-    pendingHasEncrypted,
+    selectorPinnedRootId,
+    showEncryptedTransferBanner,
+    getSelectorIsDisabled,
     foldersTree,
     selectorInitData,
     disabledItems,

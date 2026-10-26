@@ -44,7 +44,6 @@ export type EncryptedFileActions = {
   downloadZip: (files: TFileItem[]) => Promise<void>;
   duplicateFile: (file: TFileItem) => Promise<void>;
   copyFiles: (files: TFileItem[], destFolderId: number | string) => Promise<void>;
-  moveFiles: (files: TFileItem[], destFolderId: number | string) => Promise<void>;
 };
 
 export const EncryptedFileActionsContext =

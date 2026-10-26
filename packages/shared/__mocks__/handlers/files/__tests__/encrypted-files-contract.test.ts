@@ -61,6 +61,8 @@ const PORT = "3200";
 const ROOM_ID = 9100;
 const ARCHIVED_ROOM_ID = 9200;
 const ARCHIVED_FOLDER_ID = 9201;
+const MOVING_ROOM_ID = 9300;
+const MOVING_FOLDER_ID = 9301;
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";
 const BOB_ID = "22222222-2222-2222-2222-222222222222";
 
@@ -76,8 +78,19 @@ const handle: { current: EncryptedFilesHandlerHandle | null } = {
 const archivedHandle: { current: EncryptedFilesHandlerHandle | null } = {
   current: null,
 };
+const movingHandle: { current: EncryptedFilesHandlerHandle | null } = {
+  current: null,
+};
 
 const server = setupServer(
+  ...encryptedFilesHandlers(PORT, {
+    roomId: MOVING_ROOM_ID,
+    ownerId: ALICE_ID,
+    currentUserId: ALICE_ID,
+    folders: [{ id: MOVING_FOLDER_ID, title: "Drafts" }],
+    withOtherRooms: true,
+    handle: movingHandle,
+  }),
   ...encryptedFilesHandlers(PORT, {
     roomId: ROOM_ID,
     ownerId: ALICE_ID,
@@ -104,6 +117,7 @@ afterAll(() => server.close());
 beforeEach(() => {
   handle.current?.reset();
   archivedHandle.current?.reset();
+  movingHandle.current?.reset();
 });
 
 describe("encryptedFiles mock — GET /files/{fileId}/access (mirrors FilesController.GetEncryptionInfoAsync)", () => {
@@ -898,5 +912,59 @@ describe("encryptedFiles mock — a second room in the same spec (withOtherRooms
       OTHER_FOLDER_ID,
     ]);
     expect(handle.current!.getRequests()).toEqual([]);
+  });
+});
+
+describe("encryptedFiles mock — moves inside a private room (mirrors OperationController)", () => {
+  const FILEOPS = `${BASE_URL}:${PORT}/${API_PREFIX}/files/fileops`;
+
+  it("CheckMoveOrCopyBatchItems lists a plain file whose title the destination holds, never an encrypted one", async () => {
+    movingHandle.current!.setFiles([
+      { id: 31, title: "a.txt", encrypted: false, folderId: MOVING_FOLDER_ID },
+      { id: 32, title: "a.txt", encrypted: false },
+      { id: 33, title: "b.txt", encrypted: true, folderId: MOVING_FOLDER_ID },
+      { id: 34, title: "b.txt", encrypted: true },
+    ]);
+
+    const res = await fetch(
+      `${FILEOPS}/move?destFolderId=${MOVING_FOLDER_ID}&fileIds=32&fileIds=34`,
+    );
+    const body = (await res.json()) as { response: { id: number }[] };
+
+    expect(body.response.map((entry) => entry.id)).toEqual([32]);
+  });
+
+  it("MoveBatchItems moves the files and answers a finished move operation that fileops reports", async () => {
+    movingHandle.current!.setFiles([{ id: 35, title: "c.txt", encrypted: true }]);
+
+    const res = await fetch(`${FILEOPS}/move`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        destFolderId: MOVING_FOLDER_ID,
+        folderIds: [],
+        fileIds: [35],
+        conflictResolveType: 0,
+        deleteAfter: false,
+        returnSingleOperation: true,
+      }),
+    });
+    const body = (await res.json()) as {
+      response: Array<Record<string, unknown>>;
+    };
+
+    expect(body.response).toHaveLength(1);
+    expect(body.response[0]).toMatchObject({
+      Operation: 0,
+      finished: true,
+      error: "",
+      status: 2,
+    });
+    expect(movingHandle.current!.getFile(35).folderId).toBe(MOVING_FOLDER_ID);
+
+    const status = (await (
+      await fetch(`${FILEOPS}?id=${body.response[0].id}`)
+    ).json()) as { response: { id: string }[] };
+    expect(status.response.map((o) => o.id)).toEqual([body.response[0].id]);
   });
 });

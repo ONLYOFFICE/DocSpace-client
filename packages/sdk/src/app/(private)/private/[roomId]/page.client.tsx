@@ -107,7 +107,6 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   const {
     duplicateFile: duplicateEncryptedFile,
     copyFiles: copyEncryptedFiles,
-    moveFiles: moveEncryptedFiles,
   } = useEncryptedCopyMove();
 
   const isReady = usePrivateRoomsPageInit({
@@ -215,24 +214,12 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
           destFolderId,
           sourceRoomId: roomId,
         }),
-      moveFiles: (items, destFolderId) =>
-        moveEncryptedFiles({
-          files: items.map((it: TFileItem) => ({
-            id: Number(it.id),
-            title: it.title,
-            viewUrl: it.viewUrl,
-            fileExst: it.fileExst ?? "",
-          })),
-          destFolderId,
-          sourceRoomId: roomId,
-        }),
     }),
     [
       decryptAndSaveFile,
       decryptAndSaveZip,
       duplicateEncryptedFile,
       copyEncryptedFiles,
-      moveEncryptedFiles,
       navigationStore,
       folderData.current?.id,
       roomId,

@@ -43,7 +43,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 const env = vi.hoisted(() => ({
   folders: new Map<number, unknown>(),
   paths: new Map<number, unknown[]>(),
-  actions: { roomId: 10, copyFiles: vi.fn(), moveFiles: vi.fn() },
+  actions: { roomId: 10, copyFiles: vi.fn() },
 }));
 
 vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
@@ -135,7 +135,7 @@ describe("useFileOperations in a private room", () => {
   beforeEach(() => {
     vi.mocked(moveToFolder).mockClear();
     vi.mocked(toastr.error).mockClear();
-    env.actions.moveFiles.mockClear();
+    env.actions.copyFiles.mockClear();
     env.folders.clear();
     env.paths.clear();
     env.folders.set(10, folderData({ id: 10, private: true, roomType: 5 }));
@@ -158,37 +158,103 @@ describe("useFileOperations in a private room", () => {
     expect(toastr.error).not.toHaveBeenCalled();
   });
 
-  it("Folder moved to another room", async () => {
+  it("Folder moved to another private room", async () => {
     await moveFolderTo(20);
 
-    expect(moveToFolder).not.toHaveBeenCalled();
-    expect(toastr.error).toHaveBeenCalledWith(
-      "Common:CannotTransferFolderFromPrivateRoom",
-    );
-  });
-
-  it("Move into another private room", async () => {
-    const file = { id: 7, isFolder: false, encrypted: true, title: "memo.txt" };
-
-    await moveTo(file, 20);
-
-    expect(env.actions.moveFiles).not.toHaveBeenCalled();
     expect(moveToFolder).not.toHaveBeenCalled();
     expect(toastr.error).toHaveBeenCalledWith(
       "Common:CannotMoveToAnotherPrivateRoom",
     );
   });
 
-  it("moves an encrypted file within its private room", async () => {
-    const file = { id: 7, isFolder: false, encrypted: true, title: "memo.txt" };
+  it("Move into another private room", async () => {
+    const file = {
+      id: 7,
+      isFolder: false,
+      encrypted: true,
+      title: "memo.txt",
+      fileExst: ".txt",
+    };
+
+    await moveTo(file, 20);
+
+    expect(env.actions.copyFiles).not.toHaveBeenCalled();
+    expect(moveToFolder).not.toHaveBeenCalled();
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:CannotMoveToAnotherPrivateRoom",
+    );
+  });
+
+  it("File moved within the room", async () => {
+    const file = {
+      id: 7,
+      isFolder: false,
+      encrypted: true,
+      title: "memo.txt",
+      fileExst: ".txt",
+    };
 
     await moveTo(file, 11);
 
-    expect(env.actions.moveFiles).toHaveBeenCalledWith([file], 11);
+    expect(moveToFolder).toHaveBeenCalledWith(11, [], [7], expect.anything(), false);
+    expect(env.actions.copyFiles).not.toHaveBeenCalled();
     expect(toastr.error).not.toHaveBeenCalled();
   });
 
-  it("refuses a folder moved out of the private rooms", async () => {
+  it("Move dialog", async () => {
+    const file = {
+      id: 7,
+      isFolder: false,
+      encrypted: true,
+      title: "memo.txt",
+      fileExst: ".txt",
+    };
+
+    await act(async () => {
+      await ops.requestMove(file as never);
+    });
+    expect(ops.selectorPinnedRootId).toBe(10);
+    expect(ops.showEncryptedTransferBanner).toBe(false);
+
+    await act(async () => {
+      await ops.requestCopy(file as never);
+    });
+    expect(ops.selectorPinnedRootId).toBeUndefined();
+    expect(ops.showEncryptedTransferBanner).toBe(true);
+  });
+
+  it("Destination without the create right", async () => {
+    const file = {
+      id: 7,
+      isFolder: false,
+      encrypted: true,
+      title: "memo.txt",
+      fileExst: ".txt",
+    };
+    await act(async () => {
+      await ops.requestCopy(file as never);
+    });
+
+    const isDisabled = (security: object) =>
+      ops.getSelectorIsDisabled(
+        false,
+        false,
+        21,
+        "files",
+        false,
+        security as never,
+        undefined,
+        false,
+        false,
+        false,
+        true,
+      );
+
+    expect(isDisabled({ Create: false, CopyTo: true })).toBe(true);
+    expect(isDisabled({ Create: true, CopyTo: true })).toBe(false);
+  });
+
+  it("Folder transferred out of the room", async () => {
     await moveFolderTo(30);
 
     expect(moveToFolder).not.toHaveBeenCalled();

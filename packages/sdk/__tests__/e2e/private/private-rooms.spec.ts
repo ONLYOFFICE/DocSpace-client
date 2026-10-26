@@ -90,6 +90,7 @@ const ROOM_TITLE = "Private Test Room";
 const SECOND_ROOM_ID = 7002;
 const SECOND_ROOM_TITLE = "Second Private Room";
 const SECOND_ROOM_FOLDER = { id: 7020, title: "Drafts" };
+const ROOM_FOLDER = { id: 7010, title: "Reports" };
 const SHARED_ROOM_ID = 7003;
 const SHARED_ROOM_TITLE = "Shared Room";
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";
@@ -198,11 +199,13 @@ const serveRooms = async (
     secondRoom = false,
     sharedRoom = false,
     memberKeys = [],
+    folders = [],
   }: {
     files?: TPlainFile[];
     secondRoom?: boolean;
     sharedRoom?: boolean;
     memberKeys?: TEncryptionKeyPair[];
+    folders?: { id: number; title: string }[];
   } = {},
 ): Promise<TRooms> => {
   const alice = await generateIdentityKeyPair();
@@ -233,6 +236,7 @@ const serveRooms = async (
       roomSecurity: OWNER_ROOM_SECURITY,
       roomUserKeys: [MY_KEY],
       initialFiles,
+      folders,
       withOtherRooms,
       handle: roomHandle,
     }),
@@ -654,6 +658,37 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
       .toEqual([ALICE_ID, FIXTURE_USER_ID].sort());
   });
 
+  test("File moved within the room", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    const { room } = await serveRooms(mockBoth, port, {
+      folders: [ROOM_FOLDER],
+    });
+    await openRoom(page, baseUrl);
+
+    await chooseTransfer(page, row(page, MEMO.serverTitle), "move-to");
+    const picker = page.getByTestId("aside").first();
+    await picker
+      .locator("[data-testid^='selector-item-']")
+      .filter({ hasText: ROOM_FOLDER.title })
+      .click();
+    await picker.getByRole("button", { name: "Move here" }).click();
+
+    await expect
+      .poll(() => room.getFile(MEMO.id).folderId)
+      .toBe(ROOM_FOLDER.id);
+    expect(
+      room
+        .getRequests()
+        .filter((r) => r.method === "PUT" && r.url.endsWith("/fileops/move")),
+    ).toHaveLength(1);
+    expect(room.getSessions()).toEqual([]);
+    await expect(passphrasePrompt(page)).toHaveCount(0);
+  });
+
   test("Copy into another private room", async ({
     page,
     baseUrl,
@@ -700,29 +735,25 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     expect(secondRoom!.getSessions().map((s) => s.encrypted)).toEqual([true]);
   });
 
-  test("Move into another private room", async ({
-    page,
-    baseUrl,
-    port,
-    mockBoth,
-  }) => {
+  test("Move dialog", async ({ page, baseUrl, port, mockBoth }) => {
     const { room, secondRoom } = await serveRooms(mockBoth, port, {
       secondRoom: true,
     });
     await openRoom(page, baseUrl);
 
     await chooseTransfer(page, row(page, MEMO.serverTitle), "move-to");
-    await pickRoom(page, SECOND_ROOM_TITLE, "Move here");
-
+    const picker = page.getByTestId("aside").first();
+    await expect(picker.getByText(ROOM_TITLE, { exact: true })).toBeVisible();
+    await expect(picker.getByText("Rooms", { exact: true })).toHaveCount(0);
+    await expect(picker.getByText(SECOND_ROOM_TITLE)).toHaveCount(0);
     await expect(
-      page.getByText(
-        "Files can't be moved to another private room. Copy them instead.",
-      ),
-    ).toBeVisible();
+      picker.getByText("Encrypted files", { exact: true }),
+    ).toHaveCount(0);
+    await picker.getByRole("button", { name: "Cancel" }).click();
+
     await expect(passphrasePrompt(page)).toHaveCount(0);
     expect(secondRoom!.getSessions()).toEqual([]);
     expect(room.getFiles().map((f) => f.id)).toEqual([MEMO.id]);
-    await expect(row(page, MEMO.serverTitle)).toBeVisible();
   });
 
   test("Destination outside private rooms", async ({

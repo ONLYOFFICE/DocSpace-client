@@ -362,7 +362,9 @@ const DocsLayoutCore = observer(
       foldersTree,
       selectorInitData,
       disabledItems,
-      pendingHasEncrypted,
+      selectorPinnedRootId,
+      showEncryptedTransferBanner,
+      getSelectorIsDisabled,
       operationProgress,
       trackOperation,
       requestCopy,
@@ -379,14 +381,6 @@ const DocsLayoutCore = observer(
       closeConflictDialog,
       confirmConflict,
     } = useFileOperations();
-
-    // Show the encrypted-transfer warning when move/copy is in progress from a
-    // private room and at least one pending item is an encrypted file.
-    // Matches the reference: packages/client/src/components/FilesSelector ~286.
-    const showEncryptedTransferBanner =
-      !!(selectorMode === "copy" || selectorMode === "move") &&
-      pendingHasEncrypted &&
-      !!isPrivate;
 
     const {
       isTrash,
@@ -840,15 +834,10 @@ const DocsLayoutCore = observer(
                                       : undefined
                                   }
                                   getFilesArchiveError={() => ""}
-                                  getIsDisabled={(
-                                    isFirstLoad: boolean,
-                                    _isSelectedParentFolder: boolean,
-                                    _selectedItemId:
-                                      string | number | undefined,
-                                    _selectedItemType:
-                                      "rooms" | "files" | "agents" | undefined,
-                                    isRoot: boolean,
-                                  ) => isFirstLoad || isRoot}
+                                  pinnedRootId={selectorPinnedRootId}
+                                  getIsDisabled={
+                                    getSelectorIsDisabled as unknown as FilesSelectorProps["getIsDisabled"]
+                                  }
                                   onCancel={closeSelectorDialog}
                                   onSubmit={(
                                     selectedItemId: string | number | undefined,

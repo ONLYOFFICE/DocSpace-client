@@ -43,18 +43,14 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { CryptoError } from "@docspace/shared/services/encryption/errors";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import {
-  deleteFile,
   startUploadSession,
   uploadChunkSequential,
   finalizeUploadSession,
 } from "@docspace/shared/api/files";
-import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import {
   resolveFolderTarget,
   type TUploadTarget,
 } from "@docspace/shared/services/private-room/upload-target";
-
-import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
 import {
@@ -87,7 +83,6 @@ type CopyMoveArgs = {
 type UseEncryptedCopyMoveReturn = {
   duplicateFile: (args: DuplicateArgs) => Promise<void>;
   copyFiles: (args: CopyMoveArgs) => Promise<void>;
-  moveFiles: (args: CopyMoveArgs) => Promise<void>;
 };
 
 const loadCopyModule = () =>
@@ -138,7 +133,6 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
   const { t } = useTranslation(["Common"]);
   const { requireIdentity } = useEncryption();
   const identityStore = useEncryptionIdentityStore();
-  const filesListStore = useFilesListStore();
   const { uploadFiles } = useEncryptedUpload();
 
   const duplicateFile = React.useCallback(
@@ -195,11 +189,8 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
     [requireIdentity, identityStore, uploadFiles, t],
   );
 
-  const runCopyMove = React.useCallback(
-    async (
-      { files, destFolderId, sourceRoomId }: CopyMoveArgs,
-      isMove: boolean,
-    ) => {
+  const copyFiles = React.useCallback(
+    async ({ files, destFolderId, sourceRoomId }: CopyMoveArgs) => {
       if (files.length === 0) return;
 
       const userId = identityStore.userKeys?.userId;
@@ -263,12 +254,11 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
             } else {
               const sameRoom =
                 String(dest.encryptionRoomId) === String(sourceRoomId);
-              const fileToUpload =
-                !isMove && sameRoom
-                  ? new File([decrypted], addCopySuffix(decrypted.name), {
-                      type: decrypted.type || "application/octet-stream",
-                    })
-                  : decrypted;
+              const fileToUpload = sameRoom
+                ? new File([decrypted], addCopySuffix(decrypted.name), {
+                    type: decrypted.type || "application/octet-stream",
+                  })
+                : decrypted;
 
               const uploadResult = await uploadFiles({
                 files: [fileToUpload],
@@ -280,16 +270,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
             if (controller.signal.aborted) return;
 
-            if (!uploaded) {
-              failed.push({ title: item.title, error: null });
-              continue;
-            }
-
-            if (isMove && dest.isPrivate) {
-              await deleteFile(item.id, false, true);
-              forgetEncryptedFilename(item.id);
-              filesListStore.removeItem(item.id);
-            }
+            if (!uploaded) failed.push({ title: item.title, error: null });
           } catch (error) {
             if (controller.signal.aborted) return;
             failed.push({ title: item.title, error });
@@ -320,18 +301,8 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         releaseCryptoOperation(controller);
       }
     },
-    [requireIdentity, identityStore, uploadFiles, filesListStore, t],
+    [requireIdentity, identityStore, uploadFiles, t],
   );
 
-  const copyFiles = React.useCallback(
-    (args: CopyMoveArgs) => runCopyMove(args, false),
-    [runCopyMove],
-  );
-
-  const moveFiles = React.useCallback(
-    (args: CopyMoveArgs) => runCopyMove(args, true),
-    [runCopyMove],
-  );
-
-  return { duplicateFile, copyFiles, moveFiles };
+  return { duplicateFile, copyFiles };
 };

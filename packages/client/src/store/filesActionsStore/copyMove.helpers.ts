@@ -71,7 +71,7 @@ import i18n from "../../i18n";
 import type FilesActionStore from "../FilesActionsStore";
 import type DialogsStore from "../DialogsStore";
 import type { TUploadTarget } from "../uploadDataStore/helpers";
-import { resolveFolderTarget } from "../uploadDataStore/target.helpers";
+import { resolveFolderTarget } from "@docspace/shared/services/private-room/upload-target";
 import type { TActionItem, TOperationDataPayload } from "../FilesActionsStore";
 
 export const duplicateActionImpl = async (

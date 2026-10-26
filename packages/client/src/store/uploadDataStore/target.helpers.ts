@@ -33,8 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { getFolderPath } from "@docspace/shared/api/files";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 
 import type { ItemUploadContext } from "@docspace/shared/services/private-room/encrypted-upload";
 
@@ -96,111 +95,4 @@ export function withItemUploadContext(
         ? !!uploadContext.isPrivate
         : target.isPrivate,
   };
-}
-
-/** The part of a list row that decides where files dropped on it go. */
-export type TDropRow = {
-  id: number | string;
-  parentId?: number | string;
-  isFolder?: boolean;
-  fileExst?: string;
-  isRoom?: boolean;
-  roomType?: RoomsType | null;
-  isPrivateRoom?: boolean;
-  rootFolderType?: FolderType;
-};
-
-/**
- * Where files dropped on a row go, given a snapshot of the open folder taken
- * before the drop is handled. Rejects when a folder's room cannot be loaded.
- */
-export async function resolveDropTarget(
-  open: TUploadTarget,
-  row: TDropRow | null | undefined,
-): Promise<TUploadTarget> {
-  if (!row || row.fileExst || !row.isFolder) return { ...open };
-
-  if (row.isRoom) {
-    return {
-      folderId: row.id,
-      isPrivate: !!row.isPrivateRoom,
-      roomType: row.roomType ?? null,
-      encryptionRoomId: row.id,
-    };
-  }
-
-  const inRoomsSections =
-    row.rootFolderType === FolderType.Rooms ||
-    row.rootFolderType === FolderType.Archive;
-
-  // Spec: private-rooms/file-operations, "Drops onto a private room from outside it are refused".
-  if (
-    open.encryptionRoomId !== null &&
-    (!inRoomsSections || String(row.parentId) === String(open.folderId))
-  ) {
-    return { ...open, folderId: row.id };
-  }
-
-  if (inRoomsSections) {
-    const target = await resolveFolderTarget(row);
-    if (target.encryptionRoomId === null) {
-      throw new Error(`The room of folder ${row.id} is not in its path`);
-    }
-    return target;
-  }
-
-  return plainFolderTarget(row.id);
-}
-
-const plainFolderTarget = (folderId: number | string): TUploadTarget => ({
-  folderId,
-  isPrivate: false,
-  roomType: null,
-  encryptionRoomId: null,
-});
-
-/**
- * Where uploads into a folder go, decided by the room on the folder's own
- * path. A folder outside the rooms sections is never looked up; one whose
- * section is unknown is. Rejects when the path cannot be loaded.
- */
-export async function resolveFolderTarget(folder: {
-  id: number | string;
-  rootFolderType?: FolderType | null;
-}): Promise<TUploadTarget> {
-  const { id, rootFolderType } = folder;
-  const outsideRooms =
-    rootFolderType !== undefined &&
-    rootFolderType !== null &&
-    rootFolderType !== FolderType.Rooms &&
-    rootFolderType !== FolderType.Archive;
-  if (outsideRooms) return plainFolderTarget(id);
-
-  const path = await getFolderPath(id as number);
-  const room = path.find((entry) => !!entry.roomType);
-  if (!room) return plainFolderTarget(id);
-
-  return {
-    folderId: id,
-    isPrivate: !!room.private,
-    roomType: room.roomType ?? null,
-    encryptionRoomId: room.id,
-  };
-}
-
-/**
- * `target` is `null` when it could not be resolved.
- * Spec: private-rooms/file-operations, "Drops onto a private room from outside it are refused".
- */
-export function isDropRefused(
-  open: TUploadTarget,
-  target: TUploadTarget | null,
-): boolean {
-  if (!target) return true;
-  if (!target.isPrivate) return false;
-  return (
-    target.encryptionRoomId === null ||
-    open.encryptionRoomId === null ||
-    String(target.encryptionRoomId) !== String(open.encryptionRoomId)
-  );
 }

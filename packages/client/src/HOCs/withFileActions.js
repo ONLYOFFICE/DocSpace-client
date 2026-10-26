@@ -45,7 +45,7 @@ import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import {
   isDropRefused,
   resolveDropTarget,
-} from "SRC_DIR/store/uploadDataStore/target.helpers";
+} from "@docspace/shared/services/private-room/upload-target";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {

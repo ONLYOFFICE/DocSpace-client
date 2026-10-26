@@ -38,22 +38,11 @@ import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { suspendAutoLock } from "@docspace/shared/services/encryption/secret-storage";
 
 import type { TFile } from "@docspace/shared/api/files/types";
-import type { RoomsType } from "@docspace/shared/enums";
 import type { ItemUploadContext } from "@docspace/shared/services/private-room/encrypted-upload";
 import type { SkippedMemberKey } from "@docspace/shared/services/private-room/member-key-verification";
+import type { TUploadTarget } from "@docspace/shared/services/private-room/upload-target";
 
-/**
- * Where an upload goes.
- * Spec: private-rooms/file-operations, "Upload target is fixed when the user
- * starts the upload".
- */
-export type TUploadTarget = {
-  folderId: number | string | null;
-  isPrivate: boolean;
-  roomType: RoomsType | null;
-  /** The room whose members get key wraps. */
-  encryptionRoomId: number | string | null;
-};
+export type { TUploadTarget };
 
 export type TUploadBrowserFile = File & {
   parentFolderId?: number | string;

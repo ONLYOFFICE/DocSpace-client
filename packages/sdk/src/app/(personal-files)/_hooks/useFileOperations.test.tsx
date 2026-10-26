@@ -42,6 +42,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const env = vi.hoisted(() => ({
   folders: new Map<number, unknown>(),
+  paths: new Map<number, unknown[]>(),
   actions: { roomId: 10, copyFiles: vi.fn(), moveFiles: vi.fn() },
 }));
 
@@ -58,6 +59,11 @@ vi.mock("@docspace/shared/api/files", () => ({
   getFoldersTree: vi.fn(async () => []),
   checkFileConflicts: vi.fn(async () => []),
   getFolder: vi.fn(async (folderId: number) => env.folders.get(folderId)),
+  getFolderPath: vi.fn(async (folderId: number) => {
+    const path = env.paths.get(folderId);
+    if (!path) throw new Error(`no path for folder ${folderId}`);
+    return path;
+  }),
 }));
 
 vi.mock("@docspace/shared/api/apps", () => ({ getApps: vi.fn(async () => []) }));
@@ -91,13 +97,19 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import useFileOperations from "./useFileOperations";
 
-const folderData = (current: object, pathParts: object[] = []) => ({
+const folderData = (current: object) => ({
   folders: [],
   files: [],
   total: 0,
   current,
-  pathParts,
+  pathParts: [],
 });
+
+// GET folder/{id}/path answers: a folder inside a room reads private: false.
+const SECTION = { id: 2, title: "Rooms" };
+const OWN_ROOM = { id: 10, title: "Room", roomType: 5, private: true };
+const OTHER_ROOM = { id: 20, title: "Other", roomType: 5, private: true };
+const SUBFOLDER = { id: 11, title: "Drafts", private: false };
 
 describe("useFileOperations in a private room", () => {
   let root: Root | null = null;
@@ -125,7 +137,11 @@ describe("useFileOperations in a private room", () => {
     vi.mocked(toastr.error).mockClear();
     env.actions.moveFiles.mockClear();
     env.folders.clear();
+    env.paths.clear();
     env.folders.set(10, folderData({ id: 10, private: true, roomType: 5 }));
+    env.paths.set(11, [SECTION, OWN_ROOM, SUBFOLDER]);
+    env.paths.set(20, [SECTION, OTHER_ROOM]);
+    env.paths.set(30, [{ id: 30, title: "My documents" }]);
     root = createRoot(document.createElement("div"));
     act(() => root?.render(<Probe />));
   });
@@ -136,11 +152,6 @@ describe("useFileOperations in a private room", () => {
   });
 
   it("Folder moved within a private room", async () => {
-    env.folders.set(
-      11,
-      folderData({ id: 11, private: true }, [{ id: 2 }, { id: 10 }]),
-    );
-
     await moveFolderTo(11);
 
     expect(moveToFolder).toHaveBeenCalledWith(11, [5], [], expect.anything(), false);
@@ -148,8 +159,6 @@ describe("useFileOperations in a private room", () => {
   });
 
   it("Folder moved to another room", async () => {
-    env.folders.set(20, folderData({ id: 20, private: true, roomType: 5 }));
-
     await moveFolderTo(20);
 
     expect(moveToFolder).not.toHaveBeenCalled();
@@ -159,8 +168,6 @@ describe("useFileOperations in a private room", () => {
   });
 
   it("Move into another private room", async () => {
-    env.folders.set(20, folderData({ id: 20, private: true, roomType: 5 }));
-
     const file = { id: 7, isFolder: false, encrypted: true, title: "memo.txt" };
 
     await moveTo(file, 20);
@@ -173,10 +180,6 @@ describe("useFileOperations in a private room", () => {
   });
 
   it("moves an encrypted file within its private room", async () => {
-    env.folders.set(
-      11,
-      folderData({ id: 11, private: true }, [{ id: 2 }, { id: 10 }]),
-    );
     const file = { id: 7, isFolder: false, encrypted: true, title: "memo.txt" };
 
     await moveTo(file, 11);
@@ -186,8 +189,6 @@ describe("useFileOperations in a private room", () => {
   });
 
   it("refuses a folder moved out of the private rooms", async () => {
-    env.folders.set(30, folderData({ id: 30, private: false }));
-
     await moveFolderTo(30);
 
     expect(moveToFolder).not.toHaveBeenCalled();

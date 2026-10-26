@@ -43,15 +43,16 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { CryptoError } from "@docspace/shared/services/encryption/errors";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import {
-  getFolder,
   deleteFile,
   startUploadSession,
   uploadChunkSequential,
   finalizeUploadSession,
 } from "@docspace/shared/api/files";
 import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
-import FilesFilter from "@docspace/shared/api/files/filter";
-import type { TGetFolder } from "@docspace/shared/api/files/types";
+import {
+  resolveFolderTarget,
+  type TUploadTarget,
+} from "@docspace/shared/services/private-room/upload-target";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
@@ -60,7 +61,6 @@ import {
   registerCryptoOperation,
   releaseCryptoOperation,
 } from "../_utils/abort-registry";
-import { resolveEncryptedCopyDest } from "../_utils/encrypted-copy-dest";
 import { useEncryptedUpload } from "./useEncryptedUpload";
 
 type EncryptedSourceItem = {
@@ -207,6 +207,20 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         toastr.error(t("Common:EncryptionKeysNotConfigured"));
         return;
       }
+
+      // Spec: private-rooms/sdk-surface, "Copy and move destination resolved fail-closed"
+      let dest: TUploadTarget;
+      try {
+        dest = await resolveFolderTarget({ id: destFolderId });
+      } catch {
+        toastr.error(
+          t("Common:EncryptedCopyFailed", {
+            names: files.map((f) => f.title).join(", "),
+          }),
+        );
+        return;
+      }
+
       const identity = await requireIdentity();
       if (!identity) {
         toastr.error(t("Common:EncryptionLockedAddMembers"));
@@ -216,17 +230,6 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
       const controller = registerCryptoOperation();
       const failed: { title: string; error: unknown }[] = [];
       try {
-        const destFolderData = (await getFolder(
-          destFolderId as number,
-          FilesFilter.getDefault(),
-        )) as TGetFolder;
-        const dest = resolveEncryptedCopyDest(destFolderData);
-
-        if (dest.mode === "blocked") {
-          toastr.error(t("Common:UnexpectedError"));
-          return;
-        }
-
         const { decryptEncryptedItemToFile, addCopySuffix } =
           await loadCopyModule();
 
@@ -250,7 +253,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
             if (controller.signal.aborted) return;
 
             let uploaded = false;
-            if (dest.mode === "plaintext") {
+            if (!dest.isPrivate) {
               await uploadPlaintextFile(
                 decrypted,
                 destFolderId,
@@ -258,7 +261,8 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
               );
               uploaded = !controller.signal.aborted;
             } else {
-              const sameRoom = String(dest.roomId) === String(sourceRoomId);
+              const sameRoom =
+                String(dest.encryptionRoomId) === String(sourceRoomId);
               const fileToUpload =
                 !isMove && sameRoom
                   ? new File([decrypted], addCopySuffix(decrypted.name), {
@@ -269,7 +273,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
               const uploadResult = await uploadFiles({
                 files: [fileToUpload],
                 folderId: destFolderId,
-                roomId: dest.roomId,
+                roomId: dest.encryptionRoomId as number | string,
               });
               uploaded = uploadResult.ok;
             }
@@ -281,7 +285,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
               continue;
             }
 
-            if (isMove && dest.mode !== "plaintext") {
+            if (isMove && dest.isPrivate) {
               await deleteFile(item.id, false, true);
               forgetEncryptedFilename(item.id);
               filesListStore.removeItem(item.id);

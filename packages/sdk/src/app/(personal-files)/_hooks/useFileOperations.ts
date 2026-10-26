@@ -63,7 +63,7 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useEncryptedFileActions } from "@/app/(docspace)/_contexts/EncryptedFileActionsContext";
 import { PAGE_COUNT } from "@/utils/constants";
-import { resolveEncryptedCopyDest } from "@/app/(private)/_utils/encrypted-copy-dest";
+import { resolveFolderTarget } from "@docspace/shared/services/private-room/upload-target";
 import useOperationToast from "./useOperationToast";
 import type {
   TFileItem,
@@ -94,18 +94,9 @@ export type SelectorInitData = {
   hasNextPage: boolean;
 };
 
-/** Where a transfer to the folder lands; null when the folder cannot be read. */
-const resolveDestination = async (folderId: number | string) => {
-  const filter = FilesFilter.getDefault();
-  filter.pageCount = 1;
-  try {
-    return resolveEncryptedCopyDest(
-      (await getFolder(folderId, filter)) as TGetFolder,
-    );
-  } catch {
-    return null;
-  }
-};
+/** Where a transfer to the folder lands; null when its path cannot be read. */
+const resolveDestination = (folderId: number | string) =>
+  resolveFolderTarget({ id: folderId }).catch(() => null);
 
 export default function useFileOperations() {
   const { t } = useTranslation(["Common"]);
@@ -420,13 +411,14 @@ export default function useFileOperations() {
         ? await resolveDestination(destFolderId)
         : null;
       const isSameRoom =
-        destination?.mode === "re-encrypt" &&
-        String(destination.roomId) === String(encryptedActions?.roomId);
+        !!destination?.isPrivate &&
+        String(destination.encryptionRoomId) ===
+          String(encryptedActions?.roomId);
 
       // Spec: private-rooms/sdk-surface, "Copy and move destination resolved fail-closed"
       if (
         isMove &&
-        destination?.mode === "re-encrypt" &&
+        destination?.isPrivate &&
         !isSameRoom &&
         serverItems.some((i) => !i.isFolder)
       ) {

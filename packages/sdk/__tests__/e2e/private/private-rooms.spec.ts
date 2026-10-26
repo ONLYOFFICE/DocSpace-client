@@ -72,6 +72,8 @@ import { test, expect } from "./fixtures";
 
 const PRIVATE_LIST = "/sdk/private";
 const PRIVATE_ARCHIVE = "/sdk/private/archive";
+// The host opt-in the private pages require until the feature is released.
+const OPT_IN = "?privateRooms=true";
 
 test.describe("(private) — rooms list & unlock", () => {
   // §17.2 #11
@@ -127,7 +129,7 @@ test.describe("(private) — rooms list & unlock", () => {
       // createNextTestServer) — run `pnpm build` in packages/sdk after source
       // changes, otherwise routes added since the last build 404 via the
       // [...not-found] catch-all.
-      await page.goto(`${baseUrl}${PRIVATE_LIST}`);
+      await page.goto(`${baseUrl}${PRIVATE_LIST}${OPT_IN}`);
 
       await expect(page.getByText("Private Test Room")).toBeVisible();
     },
@@ -144,7 +146,7 @@ test.describe("(private) — rooms list & unlock", () => {
     serverRequestInterceptor.use(privateRoomListHandler(port, opts));
     clientRequestInterceptor.use(privateRoomListHandler(port, opts));
 
-    await page.goto(`${baseUrl}${PRIVATE_LIST}`);
+    await page.goto(`${baseUrl}${PRIVATE_LIST}${OPT_IN}`);
     await expect(page.getByText("Private Test Room")).toBeVisible();
 
     const header = page.locator(".header-container");
@@ -165,7 +167,7 @@ test.describe("(private) — rooms list & unlock", () => {
     serverRequestInterceptor.use(privateRoomListHandler(port, opts));
     clientRequestInterceptor.use(privateRoomListHandler(port, opts));
 
-    await page.goto(`${baseUrl}${PRIVATE_ARCHIVE}`);
+    await page.goto(`${baseUrl}${PRIVATE_ARCHIVE}${OPT_IN}`);
     await expect(page.getByText("Private Test Room")).toBeVisible();
 
     const header = page.locator(".header-container");

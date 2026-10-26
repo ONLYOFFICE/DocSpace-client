@@ -54,6 +54,7 @@ import EmptyPrivateRoomsList from "@docspace/shared/components/empty-views/empty
 import type { TFolder } from "@docspace/shared/api/files/types";
 
 import { usePrivateRoomsPageInit } from "../_hooks/usePrivateRoomsPageInit";
+import { usePrivateRoute } from "../_hooks/usePrivateRoute";
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
 import { usePrivateDialogsStore } from "../_store/PrivateDialogsStore";
 import {
@@ -82,6 +83,7 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
   isArchive,
 }) => {
   const router = useRouter();
+  const privateRoute = usePrivateRoute();
   const { t } = useTranslation(["Common"]);
   const identityStore = useEncryptionIdentityStore();
   const dialogsStore = usePrivateDialogsStore();
@@ -94,10 +96,10 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
 
   const openRoom = React.useCallback(
     (roomId: number | string) => {
-      router.push(`/private/${roomId}`);
+      router.push(privateRoute(`/private/${roomId}`));
       return true;
     },
-    [router],
+    [router, privateRoute],
   );
 
   const handlePrivateInviteRoom = React.useCallback(

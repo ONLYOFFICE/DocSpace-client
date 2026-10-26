@@ -60,6 +60,7 @@ import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import DocsLayout from "@/app/(personal-files)/_components/docs-layout";
 
 import { usePrivateRoomsPageInit } from "../../_hooks/usePrivateRoomsPageInit";
+import { usePrivateRoute } from "../../_hooks/usePrivateRoute";
 import { usePrivateRoomFilesStore } from "../../_store/PrivateRoomFilesStore";
 import { useEncryptionIdentityStore } from "../../_store/EncryptionIdentityStore";
 import { useEncryptedUpload } from "../../_hooks/useEncryptedUpload";
@@ -93,6 +94,7 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   isArchive = false,
 }) => {
   const router = useRouter();
+  const privateRoute = usePrivateRoute();
   const { t } = useTranslation(["Common"]);
   const filesStore = usePrivateRoomFilesStore();
   const identityStore = useEncryptionIdentityStore();
@@ -147,12 +149,12 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
     (folderId: number | string) => {
       const roomsRootId = folderData.pathParts?.[0]?.id;
       if (roomsRootId !== undefined && folderId === roomsRootId) {
-        router.push("/private");
+        router.push(privateRoute("/private"));
         return true;
       }
       return false;
     },
-    [router, folderData.pathParts],
+    [router, privateRoute, folderData.pathParts],
   );
 
   // folderId is read at call time so subfolder navigation keeps working.

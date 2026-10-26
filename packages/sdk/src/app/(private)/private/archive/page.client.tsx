@@ -50,6 +50,7 @@ import { OpenFolderContext } from "@/app/(docspace)/_contexts/OpenFolderContext"
 import RoomsLayout from "@/app/(rooms)/_components/rooms-layout";
 
 import { usePrivateRoomsPageInit } from "../../_hooks/usePrivateRoomsPageInit";
+import { usePrivateRoute } from "../../_hooks/usePrivateRoute";
 
 type PrivateArchivePageProps = {
   authToken: string;
@@ -69,6 +70,7 @@ const PrivateArchivePage: React.FC<PrivateArchivePageProps> = ({
   user,
 }) => {
   const router = useRouter();
+  const privateRoute = usePrivateRoute();
   const isReady = usePrivateRoomsPageInit({
     authToken,
     filesSettings,
@@ -81,10 +83,10 @@ const PrivateArchivePage: React.FC<PrivateArchivePageProps> = ({
   // disabling all mutating actions (M3.5 usePrivateRoomContextMenu).
   const openRoom = React.useCallback(
     (roomId: number | string) => {
-      router.push(`/private/${roomId}`);
+      router.push(privateRoute(`/private/${roomId}`));
       return true;
     },
-    [router],
+    [router, privateRoute],
   );
 
   if (!isReady) {

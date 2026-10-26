@@ -39,6 +39,13 @@ import { redirect } from "next/navigation";
 import { getSelf } from "@/api/people";
 import { FILTER_HEADER, PATHNAME_HEADER } from "@/utils/constants";
 
+import PrivateRoomsNotAvailable from "./_components/not-available";
+import PrivateRoomsOptInSource from "./_components/opt-in/PrivateRoomsOptInSource";
+import {
+  hasPrivateRoomsOptIn,
+  PRIVATE_ROOMS_PARAM,
+} from "./_utils/private-rooms-opt-in";
+
 export const dynamic = "force-dynamic";
 
 const FORWARDED_PARAMS = [
@@ -57,6 +64,7 @@ const FORWARDED_PARAMS = [
   "theme",
   "locale",
   "stylesUrl",
+  PRIVATE_ROOMS_PARAM,
 ];
 
 export default async function PrivateLayout({
@@ -68,6 +76,10 @@ export default async function PrivateLayout({
 
   const filterHeader = hdrs.get(FILTER_HEADER) || "";
   const filterParams = new URLSearchParams(filterHeader);
+
+  // Spec: private-rooms/sdk-surface, "SDK private surface honours the opt-in"
+  if (!hasPrivateRoomsOptIn(filterParams)) return <PrivateRoomsNotAvailable />;
+
   const providerName = filterParams.get("providerName") || "";
 
   const user = await getSelf();
@@ -99,5 +111,5 @@ export default async function PrivateLayout({
     redirect(`/auth?${authParams.toString()}`);
   }
 
-  return <>{children}</>;
+  return <PrivateRoomsOptInSource>{children}</PrivateRoomsOptInSource>;
 }

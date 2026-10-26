@@ -58,17 +58,44 @@
  *
  * The flag is read on demand, but the routing table and the Private section
  * are fixed once per page load, so flipping it requires a reload.
+ *
+ * The embeddable SDK cannot see that flag (it may run on another origin), so
+ * it takes the opt-in from its host instead: the `privateRooms` property of
+ * the frame configuration, carried in the frame URL under the same name, and
+ * installed with `setPrivateRoomsOptInSource`.
  */
 export const PRIVATE_ROOMS_FLAG_KEY = "privateRooms";
 
-export const isPrivateRoomsEnabled = (): boolean => {
+type TPrivateRoomsOptInSource = () => boolean;
+
+const readBrowserFlag: TPrivateRoomsOptInSource = () => {
   if (typeof window === "undefined") return false;
 
+  return Boolean(window.localStorage.getItem(PRIVATE_ROOMS_FLAG_KEY));
+};
+
+let optInSource = readBrowserFlag;
+
+/**
+ * Replaces the browser-local flag as the source of the opt-in; `null` goes
+ * back to the flag.
+ */
+export const setPrivateRoomsOptInSource = (
+  source: TPrivateRoomsOptInSource | null,
+) => {
+  optInSource = source ?? readBrowserFlag;
+};
+
+export const isPrivateRoomsEnabled = (): boolean => {
   try {
-    return Boolean(window.localStorage.getItem(PRIVATE_ROOMS_FLAG_KEY));
+    return optInSource();
   } catch {
     // Storage can throw in a sandboxed iframe or with cookies disabled;
     // an unreadable flag means the feature stays hidden.
     return false;
   }
 };
+
+/** Whether a frame property or URL parameter value turns the opt-in on. */
+export const isPrivateRoomsOptInValue = (value: unknown): boolean =>
+  value === true || value === "true" || value === "1";

@@ -39,11 +39,53 @@ import { RoomsTypePrivate } from "../enums";
 
 import { RoomsTypeValues } from "./common";
 import { getCreateRoomTypes } from "./rooms";
-import { isPrivateRoomsEnabled, PRIVATE_ROOMS_FLAG_KEY } from "./privateRooms";
+import {
+  isPrivateRoomsEnabled,
+  isPrivateRoomsOptInValue,
+  PRIVATE_ROOMS_FLAG_KEY,
+  setPrivateRoomsOptInSource,
+} from "./privateRooms";
 
 describe("private rooms feature flag", () => {
   beforeEach(() => {
     localStorage.clear();
+    setPrivateRoomsOptInSource(null);
+  });
+
+  it("takes the opt-in from an installed source instead of the flag", () => {
+    localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
+    setPrivateRoomsOptInSource(() => false);
+    expect(isPrivateRoomsEnabled()).toBe(false);
+
+    localStorage.clear();
+    setPrivateRoomsOptInSource(() => true);
+    expect(isPrivateRoomsEnabled()).toBe(true);
+  });
+
+  it("goes back to the flag when the source is removed", () => {
+    setPrivateRoomsOptInSource(() => true);
+    setPrivateRoomsOptInSource(null);
+
+    expect(isPrivateRoomsEnabled()).toBe(false);
+  });
+
+  it("is off when the installed source throws", () => {
+    setPrivateRoomsOptInSource(() => {
+      throw new Error("no config");
+    });
+
+    expect(isPrivateRoomsEnabled()).toBe(false);
+  });
+
+  it("reads true and 1 as an opt-in and nothing else", () => {
+    expect([true, "true", "1"].map(isPrivateRoomsOptInValue)).toEqual([
+      true,
+      true,
+      true,
+    ]);
+    expect(
+      [false, "false", "0", "", null, undefined].map(isPrivateRoomsOptInValue),
+    ).toEqual([false, false, false, false, false, false]);
   });
 
   it("is off when the flag was never set", () => {

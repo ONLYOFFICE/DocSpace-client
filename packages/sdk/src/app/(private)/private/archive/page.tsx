@@ -50,6 +50,7 @@ import {
   getPrivateRoomsDefaultFilter,
   isPrivateRoomEntry,
 } from "../../_utils/private-rooms-filter";
+import { hasPrivateRoomsOptIn } from "../../_utils/private-rooms-opt-in";
 import PrivateArchivePage from "./page.client";
 
 export const dynamic = "force-dynamic";
@@ -90,6 +91,8 @@ export default async function PrivateArchive({
   const cookieStore = await cookies();
   const authToken = cookieStore.get("asc_auth_key")?.value || "";
   const params = await searchParams;
+
+  if (!hasPrivateRoomsOptIn(params)) return null;
 
   const filter = getPrivateRoomsDefaultFilter(RoomSearchArea.Archive);
   filter.pageCount = params.pageCount ? Number(params.pageCount) : PAGE_COUNT;

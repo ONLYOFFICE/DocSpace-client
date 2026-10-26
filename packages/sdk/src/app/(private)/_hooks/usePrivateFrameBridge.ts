@@ -42,6 +42,8 @@ import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 
 import { useSdkMethods } from "@/providers/sdkMethods";
 
+import { withPrivateRoomsOptIn } from "../_utils/private-rooms-opt-in";
+
 export type PrivateFrameSection = "rooms" | "archive";
 
 export const sectionFromPathname = (pathname: string): PrivateFrameSection =>
@@ -76,9 +78,9 @@ export const usePrivateFrameBridge = () => {
     navigateSection: (data) => {
       const sec = (data as { section?: string } | undefined)?.section;
       if (sec === "archive") {
-        router.replace("/private/archive");
+        router.replace(withPrivateRoomsOptIn("/private/archive", searchParams));
       } else if (sec === "rooms") {
-        router.replace("/private");
+        router.replace(withPrivateRoomsOptIn("/private", searchParams));
       } else {
         throw new Error(`Unknown section: ${String(sec)}`);
       }

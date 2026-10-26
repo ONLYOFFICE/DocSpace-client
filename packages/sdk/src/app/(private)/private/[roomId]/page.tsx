@@ -44,6 +44,7 @@ import { getSettings } from "@/api/settings";
 import { getSelf } from "@/api/people";
 import { PAGE_COUNT } from "@/utils/constants";
 
+import { hasPrivateRoomsOptIn } from "../../_utils/private-rooms-opt-in";
 import PrivateRoomFilesPage from "./page.client";
 
 export const dynamic = "force-dynamic";
@@ -81,6 +82,8 @@ export default async function PrivateRoomFiles({
   const authToken = cookieStore.get("asc_auth_key")?.value || "";
   const { roomId } = await params;
   const sp = await searchParams;
+
+  if (!hasPrivateRoomsOptIn(sp)) return null;
 
   const filter = FilesFilter.getDefault();
   filter.folder = sp.folder || roomId;

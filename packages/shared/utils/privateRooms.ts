@@ -71,6 +71,8 @@ type TPrivateRoomsOptInSource = () => boolean;
 const readBrowserFlag: TPrivateRoomsOptInSource = () => {
   if (typeof window === "undefined") return false;
 
+  applyPrivateRoomsOptInFromUrl();
+
   return Boolean(window.localStorage.getItem(PRIVATE_ROOMS_FLAG_KEY));
 };
 
@@ -99,3 +101,24 @@ export const isPrivateRoomsEnabled = (): boolean => {
 /** Whether a frame property or URL parameter value turns the opt-in on. */
 export const isPrivateRoomsOptInValue = (value: unknown): boolean =>
   value === true || value === "true" || value === "1";
+
+/**
+ * Sets the browser-local flag when the page was opened with the opt-in in its
+ * URL, as the keys-management link from the SDK is. Every read of the flag
+ * runs it first, so the routes, built from the flag once per page load, see
+ * it whichever module reads the flag first.
+ */
+function applyPrivateRoomsOptInFromUrl() {
+  if (typeof window === "undefined") return;
+
+  const value = new URLSearchParams(window.location.search).get(
+    PRIVATE_ROOMS_FLAG_KEY,
+  );
+  if (!isPrivateRoomsOptInValue(value)) return;
+
+  try {
+    window.localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
+  } catch {
+    // Unwritable storage leaves the page as gated as before.
+  }
+}

@@ -38,6 +38,7 @@ import {
   capabilitiesHandler,
   filesSettingsHandler,
   privateRoomListHandler,
+  privacyroomKeysHandlers,
   roomListHandler,
   rootHandler,
   selfActivationStatusHandler,
@@ -222,6 +223,22 @@ test.describe("Private rooms behind the localStorage flag", () => {
     await expect(page.getByTestId("main-profile")).toBeVisible();
 
     await expect(page.getByTestId("keys-management_tab")).toHaveCount(0);
+  });
+
+  test("Forgot passphrase: the deep link renders keys management without the flag", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await disablePrivateRooms(page);
+
+    await page.goto(`${baseUrl}/profile/keys-management?privateRooms=1`);
+
+    await expect(
+      page.getByRole("button", { name: "Generate new key", exact: true }),
+    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByTestId("keys-management_tab")).toBeVisible();
   });
 
   test("profile shows the Keys management tab with the flag", async ({

@@ -77,6 +77,22 @@ describe("private rooms feature flag", () => {
     expect(isPrivateRoomsEnabled()).toBe(false);
   });
 
+  it("sets the flag from the opt-in in the page URL", () => {
+    window.history.pushState({}, "", "/profile/keys-management?privateRooms=1");
+    expect(isPrivateRoomsEnabled()).toBe(true);
+
+    window.history.pushState({}, "", "/profile/login");
+    expect(isPrivateRoomsEnabled()).toBe(true);
+    window.history.pushState({}, "", "/");
+  });
+
+  it("leaves the flag alone without the opt-in in the page URL", () => {
+    window.history.pushState({}, "", "/profile/keys-management?privateRooms=0");
+
+    expect(isPrivateRoomsEnabled()).toBe(false);
+    window.history.pushState({}, "", "/");
+  });
+
   it("reads true and 1 as an opt-in and nothing else", () => {
     expect([true, "true", "1"].map(isPrivateRoomsOptInValue)).toEqual([
       true,

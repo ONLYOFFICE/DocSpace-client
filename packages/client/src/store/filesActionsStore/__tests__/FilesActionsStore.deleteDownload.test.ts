@@ -8,6 +8,7 @@ vi.mock("@docspace/shared/api/files", async (io) => ({
   duplicate: vi.fn(async () => [{}]),
   getFolder: vi.fn(),
   getFileEncryptionAccess: vi.fn(),
+  downloadFiles: vi.fn(),
 }));
 
 vi.mock("@docspace/shared/services/encryption/secret-storage", async (io) => ({
@@ -30,7 +31,11 @@ vi.mock("@docspace/shared/services/private-room/encrypted-download", async (io) 
 import { createTestFilesActionsStore, t } from "./testHarness";
 // After the harness, which mocks the toast module.
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { getFileEncryptionAccess, getFolder } from "@docspace/shared/api/files";
+import {
+  downloadFiles,
+  getFileEncryptionAccess,
+  getFolder,
+} from "@docspace/shared/api/files";
 import {
   createZipFromBuffers,
   downloadAndDecryptFileToBuffer,
@@ -264,6 +269,25 @@ describe("FilesActionsStore — decrypted folder download", () => {
       0,
       true,
     );
+  });
+
+  it("Files and folders selected", async () => {
+    vi.mocked(getFolder).mockResolvedValue(listing([encrypted(2)]) as never);
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
+    } as never);
+    decryptsTo({ 1: "budget.xlsx", 2: "plan.txt" });
+
+    await setup().downloadEncryptedFilesAsZip(
+      [encrypted(1)] as never,
+      [{ id: 20, title: "Reports", isFolder: true }] as never,
+    );
+
+    expect(
+      vi.mocked(createZipFromBuffers).mock.calls[0][0].map((e) => e.name),
+    ).toEqual(["budget.xlsx", "Reports/plan.txt"]);
+    expect(vi.mocked(triggerFileDownload).mock.calls[0][1]).toBe("Files.zip");
+    expect(downloadFiles).not.toHaveBeenCalled();
   });
 });
 

@@ -589,7 +589,10 @@ class FilesActionStore {
 
   downloadEncryptedFile = async (file: TActionItem)=> downloadEncryptedFileImpl(this, file);
 
-  downloadEncryptedFilesAsZip = async (encryptedFiles: TActionItem[])=> downloadEncryptedFilesAsZipImpl(this, encryptedFiles);
+  downloadEncryptedFilesAsZip = async (
+    encryptedFiles: TActionItem[],
+    folders: TActionItem[] = [],
+  ) => downloadEncryptedFilesAsZipImpl(this, encryptedFiles, folders);
 
   downloadEncryptedFolder = async (folder: TActionItem)=> downloadEncryptedFolderImpl(this, folder);
 

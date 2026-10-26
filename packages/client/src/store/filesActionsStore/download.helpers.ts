@@ -424,185 +424,6 @@ self: FilesActionStore,file: TActionItem
 };
 
 
-export const downloadEncryptedFilesAsZipImpl = async (
-self: FilesActionStore,encryptedFiles: TActionItem[]
-)=> {
-  const { encryptionKeys, user } = self.userStore;
-
-  if (!encryptionKeys || encryptionKeys.length === 0) {
-    toastr.error(i18n.t("Common:EncryptionKeysNotConfigured"));
-    return;
-  }
-
-  const userId = user?.id;
-  if (!userId) return;
-
-  const { setSecondaryProgressBarData } =
-    self.uploadDataStore.secondaryProgressDataStore;
-  const operationId = uniqueid("operation_");
-
-  try {
-    const identity = await requireUnlock(String(userId));
-    if (!identity) {
-      return;
-    }
-
-    const fileNames = deduplicateFileNames(
-      encryptedFiles.map((f) => f.title),
-    );
-    const totalFiles = encryptedFiles.length;
-    const results: { name: string; data: Uint8Array }[] = [];
-    const failures: string[] = [];
-    const roomMemberKeysCache = new Map<
-      string,
-      Awaited<ReturnType<typeof loadRoomMemberKeysSafe>>
-    >();
-
-    setSecondaryProgressBarData({
-      operation: OPERATIONS_NAME.download,
-      percent: 0,
-      operationId,
-    });
-
-    for (let i = 0; i < totalFiles; i++) {
-      const file = encryptedFiles[i];
-      const fileName = fileNames[i];
-      const fileShare = 100 / totalFiles;
-      const fileBase = fileShare * i;
-
-      try {
-        setSecondaryProgressBarData({
-          operation: OPERATIONS_NAME.download,
-          percent: Math.floor(fileBase),
-          label: `${i18n.t("Files:Downloading")} (${i + 1}/${totalFiles})`,
-          operationId,
-        });
-
-        const encryptionInfo = await getFileEncryptionAccess(file.id);
-
-        if (!encryptionInfo?.fileKeys) {
-          failures.push(fileName);
-          continue;
-        }
-
-        const hasOwnEntry = encryptionInfo.fileKeys.some(
-          (k) => String(k.userId) === String(userId),
-        );
-        if (!hasOwnEntry) {
-          failures.push(fileName);
-          continue;
-        }
-
-        const roomId = self.resolveRoomIdForFile(file);
-        let roomMemberKeys = roomMemberKeysCache.get(String(roomId));
-        if (!roomMemberKeys) {
-          roomMemberKeys = await loadRoomMemberKeysSafe(roomId);
-          roomMemberKeysCache.set(String(roomId), roomMemberKeys);
-        }
-
-        // viewUrl is optional on the .js view-model; the
-        // old JS passed it through unchecked, the `!` keeps that behavior.
-        const result = await downloadAndDecryptFileToBuffer({
-          downloadUrl: file.viewUrl!,
-          fileId: file.id,
-          fileKeys: encryptionInfo.fileKeys,
-          roomMemberKeys,
-          userId: String(userId),
-          identity,
-          originalFileName: fileName,
-          originalFileType: file.contentType || "application/octet-stream",
-          onDownloadProgress: (progress) => {
-            setSecondaryProgressBarData({
-              operation: OPERATIONS_NAME.download,
-              percent: Math.floor(fileBase + progress * fileShare * 0.6),
-              label: `${i18n.t("Files:Downloading")} (${i + 1}/${totalFiles})`,
-              operationId,
-            });
-          },
-          onProgress: (progress) => {
-            setSecondaryProgressBarData({
-              operation: OPERATIONS_NAME.download,
-              percent: Math.floor(
-                fileBase + fileShare * 0.6 + progress * fileShare * 0.3,
-              ),
-              label: `${i18n.t("Files:Decrypting")} (${i + 1}/${totalFiles})`,
-              operationId,
-            });
-          },
-        });
-
-        if (result.success && result.data) {
-          results.push({ name: result.fileName, data: result.data });
-        } else {
-          failures.push(fileName);
-        }
-      } catch {
-        failures.push(fileName);
-      }
-    }
-
-    if (results.length === 0) {
-      setSecondaryProgressBarData({
-        operation: OPERATIONS_NAME.download,
-        percent: 100,
-        completed: true,
-        alert: true,
-        operationId,
-      });
-      toastr.error(i18n.t("Files:DecryptAllFailed"));
-      return;
-    }
-
-    setSecondaryProgressBarData({
-      operation: OPERATIONS_NAME.download,
-      percent: 95,
-      label: i18n.t("Files:CompressingFiles"),
-      operationId,
-    });
-
-    // Decrypted names can clash where the opaque server titles did not.
-    const zipNames = deduplicateFileNames(results.map((r) => r.name));
-    const zipData = createZipFromBuffers(
-      results.map(({ data }, i) => ({ name: zipNames[i], data })),
-    );
-    const zipBlob = new Blob([zipData as unknown as BlobPart], {
-      type: "application/zip",
-    });
-
-    triggerFileDownload(zipBlob, "Files.zip");
-
-    setSecondaryProgressBarData({
-      operation: OPERATIONS_NAME.download,
-      percent: 100,
-      completed: true,
-      alert: failures.length > 0,
-      operationId,
-    });
-
-    if (failures.length > 0) {
-      toastr.warning(
-        i18n.t("Files:DecryptPartialFailed", {
-          fileNames: failures.join(", "),
-        }),
-        null,
-        0,
-        true,
-      );
-    }
-  } catch (error) {
-    setSecondaryProgressBarData({
-      operation: OPERATIONS_NAME.download,
-      percent: 100,
-      completed: true,
-      alert: true,
-      operationId,
-    });
-
-    console.error("[ENCRYPTION] downloadEncryptedFilesAsZip threw:", error);
-    toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
-  }
-};
-
 const FOLDER_PAGE_SIZE = 100;
 
 type TFolderTreeFile = { file: TFile; dir: string };
@@ -652,14 +473,40 @@ const toZipEntries = (
   return entries.map(({ data }, i) => ({ name: names[i], data }));
 };
 
-/**
- * Downloads a folder of a private room, or the room itself, as one zip of
- * its decrypted files, keeping their paths inside it.
- * Spec: private-rooms/file-operations, "Decrypted folder download".
- */
-export const downloadEncryptedFolderImpl = async (
+type TDecryptedZipEntry = {
+  file: Pick<
+    TActionItem,
+    "id" | "title" | "encrypted" | "viewUrl" | "contentType"
+  >;
+  dir: string;
+  roomId: ReturnType<FilesActionStore["resolveRoomIdForFile"]>;
+};
+
+const resolveRoomIdForFolder = (self: FilesActionStore, folder: TActionItem) =>
+  folder.isRoom || folder.roomType
+    ? folder.id
+    : self.resolveRoomIdForFile(null);
+
+/** The files under a folder, each with its path inside the zip. */
+const listFolderEntries = async (
   self: FilesActionStore,
   folder: TActionItem,
+  dir = "",
+): Promise<TDecryptedZipEntry[]> => {
+  const roomId = resolveRoomIdForFolder(self, folder);
+  const tree = await listFolderTree(folder.id, dir);
+  return tree.map((entry) => ({ ...entry, roomId }));
+};
+
+/**
+ * Decrypts the listed files on the client and saves them as one zip, each
+ * under its directory; plain files of the list are added as they are.
+ */
+const downloadDecryptedZipImpl = async (
+  self: FilesActionStore,
+  zipName: string,
+  listEntries: () => Promise<TDecryptedZipEntry[]>,
+  partialWarning: (fileNames: string) => string,
 ) => {
   const { encryptionKeys, user } = self.userStore;
 
@@ -694,33 +541,33 @@ export const downloadEncryptedFolderImpl = async (
       operationId,
     });
 
-    const roomId =
-      folder.isRoom || folder.roomType
-        ? folder.id
-        : self.resolveRoomIdForFile(null);
-    const [tree, roomMemberKeys] = await Promise.all([
-      listFolderTree(folder.id),
-      loadRoomMemberKeysSafe(roomId),
-    ]);
-
+    const entries = await listEntries();
+    const total = entries.length;
     const results: { dir: string; name: string; data: Uint8Array }[] = [];
     const failures: string[] = [];
+    const roomMemberKeysCache = new Map<
+      string,
+      Awaited<ReturnType<typeof loadRoomMemberKeysSafe>>
+    >();
 
-    for (let i = 0; i < tree.length; i++) {
-      const { file, dir } = tree[i];
+    for (let i = 0; i < total; i++) {
+      const { file, dir, roomId } = entries[i];
       const shownName = resolveDisplayTitle(file);
-      const fileShare = 100 / tree.length;
+      const fileShare = 100 / total;
+      const fileBase = fileShare * i;
+      const counter = `(${i + 1}/${total})`;
 
       setSecondaryProgressBarData({
         operation: OPERATIONS_NAME.download,
-        percent: Math.floor(fileShare * i),
-        label: `${i18n.t("Files:Downloading")} (${i + 1}/${tree.length})`,
+        percent: Math.floor(fileBase),
+        label: `${i18n.t("Files:Downloading")} ${counter}`,
         operationId,
       });
 
       try {
+        // viewUrl is optional on the .js view-model; files always carry it.
         if (!file.encrypted) {
-          const response = await fetch(file.viewUrl);
+          const response = await fetch(file.viewUrl!);
           if (!response.ok) throw new Error(`${response.status}`);
           results.push({
             dir,
@@ -739,15 +586,39 @@ export const downloadEncryptedFolderImpl = async (
           continue;
         }
 
+        let roomMemberKeys = roomMemberKeysCache.get(String(roomId));
+        if (!roomMemberKeys) {
+          roomMemberKeys = await loadRoomMemberKeysSafe(roomId);
+          roomMemberKeysCache.set(String(roomId), roomMemberKeys);
+        }
+
         const result = await downloadAndDecryptFileToBuffer({
-          downloadUrl: file.viewUrl,
+          downloadUrl: file.viewUrl!,
           fileId: file.id,
           fileKeys: encryptionInfo.fileKeys!,
           roomMemberKeys,
           userId: String(userId),
           identity,
           originalFileName: shownName,
-          originalFileType: "application/octet-stream",
+          originalFileType: file.contentType || "application/octet-stream",
+          onDownloadProgress: (progress) => {
+            setSecondaryProgressBarData({
+              operation: OPERATIONS_NAME.download,
+              percent: Math.floor(fileBase + progress * fileShare * 0.6),
+              label: `${i18n.t("Files:Downloading")} ${counter}`,
+              operationId,
+            });
+          },
+          onProgress: (progress) => {
+            setSecondaryProgressBarData({
+              operation: OPERATIONS_NAME.download,
+              percent: Math.floor(
+                fileBase + fileShare * 0.6 + progress * fileShare * 0.3,
+              ),
+              label: `${i18n.t("Files:Decrypting")} ${counter}`,
+              operationId,
+            });
+          },
         });
 
         if (result.success && result.data) {
@@ -773,26 +644,64 @@ export const downloadEncryptedFolderImpl = async (
       operationId,
     });
 
+    // Decrypted names can clash where the opaque server titles did not.
     const zipData = createZipFromBuffers(toZipEntries(results));
     triggerFileDownload(
       new Blob([zipData as unknown as BlobPart], { type: "application/zip" }),
-      `${folder.title}.zip`,
+      zipName,
     );
     finish(failures.length > 0);
 
     if (failures.length > 0) {
-      toastr.warning(
-        i18n.t("Common:EncryptedDownloadPartial", {
-          fileNames: failures.join(", "),
-        }),
-        null,
-        0,
-        true,
-      );
+      toastr.warning(partialWarning(failures.join(", ")), null, 0, true);
     }
   } catch (error) {
     finish(true);
-    console.error("[ENCRYPTION] downloadEncryptedFolder threw:", error);
+    console.error("[ENCRYPTION] downloadDecryptedZip threw:", error);
     toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
   }
 };
+
+/**
+ * Downloads the selected encrypted files, and the selected folders of a
+ * private room with their subtrees, as one decrypted Files.zip.
+ */
+export const downloadEncryptedFilesAsZipImpl = async (
+  self: FilesActionStore,
+  encryptedFiles: TActionItem[],
+  folders: TActionItem[] = [],
+) =>
+  downloadDecryptedZipImpl(
+    self,
+    "Files.zip",
+    async () => {
+      const entries: TDecryptedZipEntry[] = encryptedFiles.map((file) => ({
+        file,
+        dir: "",
+        roomId: self.resolveRoomIdForFile(file),
+      }));
+      for (const folder of folders) {
+        entries.push(
+          ...(await listFolderEntries(self, folder, `${folder.title}/`)),
+        );
+      }
+      return entries;
+    },
+    (fileNames) => i18n.t("Files:DecryptPartialFailed", { fileNames }),
+  );
+
+/**
+ * Downloads a folder of a private room, or the room itself, as one zip of
+ * its decrypted files, keeping their paths inside it.
+ * Spec: private-rooms/file-operations, "Decrypted folder download".
+ */
+export const downloadEncryptedFolderImpl = async (
+  self: FilesActionStore,
+  folder: TActionItem,
+) =>
+  downloadDecryptedZipImpl(
+    self,
+    `${folder.title}.zip`,
+    () => listFolderEntries(self, folder),
+    (fileNames) => i18n.t("Common:EncryptedDownloadPartial", { fileNames }),
+  );

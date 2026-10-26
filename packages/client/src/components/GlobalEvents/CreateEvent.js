@@ -49,11 +49,11 @@ import {
   getDefaultFileName,
   getDefaultFileTestIdPrefix,
 } from "SRC_DIR/helpers/filesUtils";
+import { runEncryptedFileCreation } from "SRC_DIR/helpers/encryptedFileCreation";
 import {
   getDisplayFileNames,
   getUniqueFileTitle,
-  runEncryptedFileCreation,
-} from "SRC_DIR/helpers/encryptedFileCreation";
+} from "@docspace/shared/services/private-room/encrypted-create-rules";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { frameCallEvent } from "@docspace/shared/utils/common";

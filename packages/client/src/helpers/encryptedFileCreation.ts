@@ -35,54 +35,9 @@
 
 import { EncryptedCreateError } from "@docspace/shared/services/encryption/errors";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
-import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 import { createEncryptedFile } from "@docspace/shared/services/private-room/encrypted-file-creation";
-import {
-  EMPTY_TEMPLATE_EXTENSIONS,
-  type TEmptyTemplateExtension,
-} from "@docspace/shared/services/private-room/empty-template";
-
-export function isEncryptedCreateExtension(
-  extension: string | null | undefined,
-): extension is TEmptyTemplateExtension {
-  return EMPTY_TEMPLATE_EXTENSIONS.includes(
-    extension as TEmptyTemplateExtension,
-  );
-}
-
-export function getUniqueFileTitle(
-  baseTitle: string,
-  extension: string,
-  existingFileNames: Iterable<string>,
-): string {
-  const taken = new Set<string>();
-  for (const name of existingFileNames) {
-    taken.add(name.toLowerCase());
-  }
-
-  let candidate = baseTitle;
-  let index = 1;
-  while (taken.has(`${candidate}.${extension}`.toLowerCase())) {
-    candidate = `${baseTitle} (${index})`;
-    index += 1;
-  }
-  return candidate;
-}
-
-export function getDisplayFileNames(
-  files: Iterable<{
-    id?: number | string | null;
-    title?: string | null;
-    encrypted?: boolean | null;
-  }>,
-): string[] {
-  const names: string[] = [];
-  for (const file of files) {
-    const name = resolveDisplayTitle(file);
-    if (name) names.push(name);
-  }
-  return names;
-}
+import type { TEmptyTemplateExtension } from "@docspace/shared/services/private-room/empty-template";
+import { isEncryptedCreateExtension } from "@docspace/shared/services/private-room/encrypted-create-rules";
 
 export type RunEncryptedFileCreationParams = {
   extension: TEmptyTemplateExtension;

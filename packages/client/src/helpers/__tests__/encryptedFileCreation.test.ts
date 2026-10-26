@@ -39,11 +39,7 @@ import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { createEncryptedFile } from "@docspace/shared/services/private-room/encrypted-file-creation";
 
-import {
-  getUniqueFileTitle,
-  isEncryptedCreateExtension,
-  runEncryptedFileCreation,
-} from "../encryptedFileCreation";
+import { runEncryptedFileCreation } from "../encryptedFileCreation";
 
 vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
   requireUnlock: vi.fn(async () => ({
@@ -76,49 +72,6 @@ function baseParams() {
 
 beforeEach(() => {
   vi.clearAllMocks();
-});
-
-describe("isEncryptedCreateExtension", () => {
-  it("accepts only the supported template extensions", () => {
-    expect(isEncryptedCreateExtension("docx")).toBe(true);
-    expect(isEncryptedCreateExtension("xlsx")).toBe(true);
-    expect(isEncryptedCreateExtension("pptx")).toBe(true);
-    expect(isEncryptedCreateExtension("pdf")).toBe(true);
-    expect(isEncryptedCreateExtension("docxf")).toBe(false);
-    expect(isEncryptedCreateExtension("")).toBe(false);
-    expect(isEncryptedCreateExtension(null)).toBe(false);
-    expect(isEncryptedCreateExtension(undefined)).toBe(false);
-  });
-});
-
-describe("getUniqueFileTitle", () => {
-  it("returns the base title when the folder has no clash", () => {
-    expect(getUniqueFileTitle("New document", "docx", [])).toBe("New document");
-    expect(
-      getUniqueFileTitle("New document", "docx", ["Other.docx", "New.xlsx"]),
-    ).toBe("New document");
-  });
-
-  it("appends an index until the name is free", () => {
-    const existing = [
-      "New document.docx",
-      "New document (1).docx",
-      "budget.xlsx",
-    ];
-    expect(getUniqueFileTitle("New document", "docx", existing)).toBe(
-      "New document (2)",
-    );
-  });
-
-  it("compares case-insensitively", () => {
-    expect(getUniqueFileTitle("New document", "docx", ["new document.DOCX"]))
-      .toBe("New document (1)");
-  });
-
-  it("does not clash across different extensions", () => {
-    expect(getUniqueFileTitle("New document", "docx", ["New document.xlsx"]))
-      .toBe("New document");
-  });
 });
 
 describe("runEncryptedFileCreation", () => {

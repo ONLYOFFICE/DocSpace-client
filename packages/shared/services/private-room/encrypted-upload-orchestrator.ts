@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { TFunction } from "i18next";
+
 import { RoomsType } from "../../enums";
 import {
   finalizeUploadSession,
@@ -42,6 +44,7 @@ import {
   uploadChunkSequential,
 } from "../../api/files";
 import { getRoomEncryptionKeys } from "../../api/privacy";
+import { requestDeviceSetupHint } from "../encryption/device-setup-hint-notifier";
 import { rememberEncryptedFilename } from "../encryption/filename-cache";
 import { wipeDek } from "../encryption/file-keys";
 import { wrapDekForRecipients } from "../encryption/room-file-access";
@@ -60,6 +63,7 @@ import {
   assertEncryptedUploadName,
   prepareEncryptedUpload,
   type PreparedUpload,
+  type UploadRefusalReason,
 } from "./encrypted-upload";
 
 // ---------------------------------------------------------------------------
@@ -79,10 +83,21 @@ export interface OrchestratorUploadStore {
    * Optional — callers that do not need labels may omit this.
    */
   setItemLabel?: (uploadId: string, label: string | undefined) => void;
+  /** Fail a row the batch gate refused; nothing of it was sent. Optional. */
+  markRefused?: (uploadId: string, refusal: EncryptedUploadRefusal) => void;
 }
 
-export interface OrchestrateEncryptedUploadArgs {
-  files: File[];
+/**
+ * Why the gate refuses a batch before any byte is sent: `no-key` when the
+ * uploader has no key, `locked` when they decline to unlock.
+ */
+export type EncryptedUploadRefusal = Extract<
+  UploadRefusalReason,
+  "no-key" | "locked"
+>;
+
+/** One file of an encrypted upload, for callers that run their own queue. */
+export interface EncryptedFileUploadArgs {
   /** Target folder id — for top-level uploads, equals the private room id. */
   folderId: number | string;
   /**
@@ -105,9 +120,6 @@ export interface OrchestrateEncryptedUploadArgs {
    */
   uploadStore?: OrchestratorUploadStore;
   signal?: AbortSignal;
-  onQuotaError?: (error: unknown) => void;
-  onFileError?: (file: File, error: unknown) => void;
-  onFileComplete?: (file: File, result: UploadFileResult) => void;
   /**
    * Chunk size in bytes. Files smaller than this are uploaded in a single
    * request. Defaults to 5 MiB to mirror UploadDataStore's default.
@@ -120,6 +132,28 @@ export interface OrchestrateEncryptedUploadArgs {
   memberKeyRefusals?: Set<string>;
 }
 
+export interface OrchestrateEncryptedUploadArgs
+  extends Omit<
+    EncryptedFileUploadArgs,
+    "identity" | "userId" | "publicKeyId" | "publicKey"
+  > {
+  files: File[];
+  /** The upload-panel ids of `files`, in order; generated when left out. */
+  uploadIds?: string[];
+  userId?: string | null;
+  publicKeyId?: string | null;
+  publicKey?: string | null;
+  /**
+   * The unlocked identity; when left out, the batch asks for it through
+   * `requireIdentity` once the key check has passed.
+   */
+  identity?: IdentityKeyPair;
+  requireIdentity?: () => Promise<IdentityKeyPair | null>;
+  onQuotaError?: (error: unknown) => void;
+  onFileError?: (file: File, error: unknown) => void;
+  onFileComplete?: (file: File, result: UploadFileResult) => void;
+}
+
 export interface UploadFileResult {
   ok: boolean;
   fileId?: number | string;
@@ -129,13 +163,28 @@ export interface UploadFileResult {
   aborted?: boolean;
   /** Room members whose key failed the pin check and got no wrap. */
   skippedMembers?: SkippedMemberKey[];
+  /** Set when the batch gate refused the file before any byte was sent. */
+  refused?: EncryptedUploadRefusal;
 }
 
 export interface OrchestrateResult {
   results: UploadFileResult[];
   quotaErrorRaised: boolean;
   aborted: boolean;
+  /** Set when the gate refused the batch; no file of it was sent. */
+  refused?: EncryptedUploadRefusal;
+  /** Members left out of the access list of any file of the batch, once each. */
+  skippedMembers: SkippedMemberKey[];
 }
+
+export type EncryptedUploadGate =
+  | {
+      identity: IdentityKeyPair;
+      userId: string;
+      publicKeyId: string;
+      publicKey: string;
+    }
+  | { refused: EncryptedUploadRefusal };
 
 const DEFAULT_CHUNK_SIZE = 5 * 1024 * 1024;
 
@@ -150,6 +199,43 @@ export function countActiveEncryptedUploadsForRoom(
   if (!uploadStore) return 0;
   return countActiveUploadsForRoomBase(uploadStore.files, roomId);
 }
+
+/**
+ * The gate of a batch into a private room: an uploader without a key is
+ * refused without an unlock prompt and the device-setup hint is requested;
+ * one who declines to unlock is refused as locked.
+ * Spec: private-rooms/file-operations, "Uploads into a private room are encrypted on the client".
+ */
+export async function openEncryptedUploadBatch(params: {
+  userId?: string | null;
+  publicKeyId?: string | null;
+  publicKey?: string | null;
+  requireIdentity: () => Promise<IdentityKeyPair | null>;
+}): Promise<EncryptedUploadGate> {
+  const { userId, publicKeyId, publicKey, requireIdentity } = params;
+  if (!userId || !publicKeyId || !publicKey) {
+    requestDeviceSetupHint();
+    return { refused: "no-key" };
+  }
+  const identity = await requireIdentity();
+  if (!identity) return { refused: "locked" };
+  return { identity, userId, publicKeyId, publicKey };
+}
+
+/** The message a row refused by the batch gate fails with. */
+export const getEncryptedUploadRefusalMessage = (
+  t: TFunction,
+  refusal: EncryptedUploadRefusal,
+) =>
+  refusal === "locked"
+    ? t("Common:EncryptionLockedUpload")
+    : t("Common:EncryptionKeysRequiredForUpload");
+
+/** The notice a refused batch shows besides its failed rows, if any. */
+export const getEncryptedUploadRefusalNotice = (
+  t: TFunction,
+  refusal: EncryptedUploadRefusal,
+) => (refusal === "locked" ? t("Common:EncryptionUploadCancelled") : null);
 
 // ---------------------------------------------------------------------------
 // Internal
@@ -322,9 +408,14 @@ async function wrapDekForSelfAndRoom(args: {
   }
 }
 
-async function uploadOneFile(
+/**
+ * Encrypts and uploads one file into a private room: prepare, encrypted
+ * session, chunks, then the self-then-room wrap. The batch gate is the
+ * caller's (see openEncryptedUploadBatch).
+ */
+export async function uploadEncryptedFile(
   file: File,
-  args: OrchestrateEncryptedUploadArgs,
+  args: EncryptedFileUploadArgs,
   uploadId: string,
 ): Promise<UploadFileResult> {
   const {
@@ -467,20 +558,58 @@ async function uploadOneFile(
 export async function orchestrateEncryptedUpload(
   callerArgs: OrchestrateEncryptedUploadArgs,
 ): Promise<OrchestrateResult> {
-  const args: OrchestrateEncryptedUploadArgs = {
+  const { files, uploadStore } = callerArgs;
+  const uploadIds = files.map(
+    (_, index) => callerArgs.uploadIds?.[index] ?? generateUploadId(),
+  );
+
+  const gate = await openEncryptedUploadBatch({
+    userId: callerArgs.userId,
+    publicKeyId: callerArgs.publicKeyId,
+    publicKey: callerArgs.publicKey,
+    requireIdentity: callerArgs.identity
+      ? async () => callerArgs.identity ?? null
+      : (callerArgs.requireIdentity ?? (async () => null)),
+  });
+  if ("refused" in gate) {
+    for (const uploadId of uploadIds) {
+      uploadStore?.markRefused?.(uploadId, gate.refused);
+    }
+    return {
+      results: files.map((file, index) => ({
+        ok: false,
+        uploadId: uploadIds[index],
+        originalName: file.name,
+        refused: gate.refused,
+      })),
+      quotaErrorRaised: false,
+      aborted: false,
+      refused: gate.refused,
+      skippedMembers: [],
+    };
+  }
+
+  const args: EncryptedFileUploadArgs &
+    Pick<
+      OrchestrateEncryptedUploadArgs,
+      "onQuotaError" | "onFileError" | "onFileComplete"
+    > = {
     ...callerArgs,
+    ...gate,
     memberKeyRefusals: callerArgs.memberKeyRefusals ?? new Set<string>(),
   };
   const results: UploadFileResult[] = [];
+  const skippedMembers = new Map<string, SkippedMemberKey>();
   let quotaErrorRaised = false;
   let aborted = false;
 
-  for (const file of args.files) {
+  for (const [index, file] of files.entries()) {
+    const uploadId = uploadIds[index];
     if (args.signal?.aborted) {
       aborted = true;
       results.push({
         ok: false,
-        uploadId: generateUploadId(),
+        uploadId,
         originalName: file.name,
         aborted: true,
         error: new AbortedError(),
@@ -488,9 +617,13 @@ export async function orchestrateEncryptedUpload(
       continue;
     }
 
-    const uploadId = generateUploadId();
-    const result = await uploadOneFile(file, args, uploadId);
+    const result = await uploadEncryptedFile(file, args, uploadId);
     results.push(result);
+    for (const member of result.skippedMembers ?? []) {
+      if (!skippedMembers.has(member.userId)) {
+        skippedMembers.set(member.userId, member);
+      }
+    }
 
     if (result.aborted) {
       aborted = true;
@@ -513,5 +646,10 @@ export async function orchestrateEncryptedUpload(
     }
   }
 
-  return { results, quotaErrorRaised, aborted };
+  return {
+    results,
+    quotaErrorRaised,
+    aborted,
+    skippedMembers: [...skippedMembers.values()],
+  };
 }

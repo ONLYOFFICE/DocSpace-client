@@ -36,7 +36,16 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AES_KEY_SIZE_BYTES } from "../../encryption/types";
-import { orchestrateEncryptedUpload } from "../encrypted-upload-orchestrator";
+import {
+  getEncryptedUploadRefusalMessage,
+  getEncryptedUploadRefusalNotice,
+  orchestrateEncryptedUpload,
+  uploadEncryptedFile,
+} from "../encrypted-upload-orchestrator";
+import {
+  clearDeviceSetupHintHandler,
+  registerDeviceSetupHintHandler,
+} from "../../encryption/device-setup-hint-notifier";
 import {
   getTofuStore,
   registerKeyMismatchHandler,
@@ -258,6 +267,144 @@ describe("orchestrateEncryptedUpload — setItemLabel (encrypting phase)", () =>
   });
 });
 
+describe("orchestrateEncryptedUpload - batch gate", () => {
+  const deviceSetupHint = vi.fn();
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    registerDeviceSetupHintHandler(deviceSetupHint);
+  });
+
+  afterEach(() => {
+    clearDeviceSetupHintHandler();
+  });
+
+  const gatedUpload = (keys: {
+    publicKey: string | null;
+    requireIdentity: () => Promise<unknown>;
+  }) => {
+    const markRefused = vi.fn();
+    const result = orchestrateEncryptedUpload({
+      files: [makeFile("one.docx", 16), makeFile("two.docx", 16)],
+      uploadIds: ["row-1", "row-2"],
+      folderId: 1,
+      roomId: 10,
+      userId: "user-1",
+      publicKey: keys.publicKey,
+      publicKeyId: keys.publicKey ? "key-1" : null,
+      requireIdentity: keys.requireIdentity as never,
+      uploadStore: { files: [], markRefused },
+    });
+    return { result, markRefused };
+  };
+
+  it("Uploader without a key: the rows fail before any byte is sent and the device-setup hint is requested", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    const requireIdentity = vi.fn();
+
+    const { result, markRefused } = gatedUpload({
+      publicKey: null,
+      requireIdentity,
+    });
+
+    expect(await result).toMatchObject({
+      refused: "no-key",
+      results: [
+        { ok: false, uploadId: "row-1", refused: "no-key" },
+        { ok: false, uploadId: "row-2", refused: "no-key" },
+      ],
+    });
+    expect(markRefused.mock.calls).toEqual([
+      ["row-1", "no-key"],
+      ["row-2", "no-key"],
+    ]);
+    expect(requireIdentity).not.toHaveBeenCalled();
+    expect(deviceSetupHint).toHaveBeenCalledTimes(1);
+    expect(startUploadSession).not.toHaveBeenCalled();
+  });
+
+  it("Uploader declines to unlock: the rows fail as locked and nothing is sent", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+
+    const { result, markRefused } = gatedUpload({
+      publicKey: "pk-own",
+      requireIdentity: async () => null,
+    });
+
+    expect((await result).refused).toBe("locked");
+    expect(markRefused.mock.calls).toEqual([
+      ["row-1", "locked"],
+      ["row-2", "locked"],
+    ]);
+    expect(deviceSetupHint).not.toHaveBeenCalled();
+    expect(startUploadSession).not.toHaveBeenCalled();
+  });
+
+  it("an unlocked uploader's files go out under the panel's ids", async () => {
+    const reportProgress = vi.fn();
+
+    const { results, refused } = await orchestrateEncryptedUpload({
+      files: [makeFile("one.docx", 16)],
+      uploadIds: ["row-1"],
+      folderId: 1,
+      roomId: 10,
+      userId: "user-1",
+      publicKey: "pk-own",
+      publicKeyId: "key-1",
+      requireIdentity: async () => makeIdentity() as never,
+      uploadStore: { files: [], reportProgress },
+    });
+
+    expect(refused).toBeUndefined();
+    expect(results).toMatchObject([{ ok: true, uploadId: "row-1" }]);
+    expect(reportProgress).toHaveBeenCalledWith("row-1", expect.any(Number));
+  });
+
+  it("names the refusals with the client's keys", () => {
+    const t = ((key: string) => key) as never;
+
+    expect(getEncryptedUploadRefusalMessage(t, "no-key")).toBe(
+      "Common:EncryptionKeysRequiredForUpload",
+    );
+    expect(getEncryptedUploadRefusalMessage(t, "locked")).toBe(
+      "Common:EncryptionLockedUpload",
+    );
+    expect(getEncryptedUploadRefusalNotice(t, "locked")).toBe(
+      "Common:EncryptionUploadCancelled",
+    );
+    expect(getEncryptedUploadRefusalNotice(t, "no-key")).toBeNull();
+  });
+});
+
+describe("uploadEncryptedFile", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("uploads one file under the caller's id, with no gate of its own", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    const reportProgress = vi.fn();
+
+    const result = await uploadEncryptedFile(
+      makeFile("one.docx", 16),
+      {
+        folderId: 1,
+        roomId: 10,
+        identity: makeIdentity() as never,
+        userId: "user-1",
+        publicKey: "pk-own",
+        publicKeyId: "key-1",
+        uploadStore: { files: [], reportProgress },
+      },
+      "row-9",
+    );
+
+    expect(result).toMatchObject({ ok: true, uploadId: "row-9" });
+    expect(vi.mocked(startUploadSession).mock.calls[0][4]).toBe(true);
+    expect(reportProgress).toHaveBeenCalledWith("row-9", expect.any(Number));
+  });
+});
+
 describe("orchestrateEncryptedUpload - room fan-out", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -330,6 +477,33 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     expect(results.map((r) => r.skippedMembers?.map((m) => m.userId))).toEqual([
       ["bob"],
       ["bob"],
+    ]);
+  });
+
+  it("Member left out: the batch names the member once", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");
+    registerKeyMismatchHandler(vi.fn(async () => "refuse" as const));
+    const swapped = [
+      { id: "b-2", userId: "bob", publicKey: "pk-b-swapped", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never;
+    vi.mocked(getRoomEncryptionKeys)
+      .mockResolvedValueOnce(swapped)
+      .mockResolvedValueOnce(swapped);
+
+    const { results, skippedMembers } = await orchestrateEncryptedUpload({
+      files: [makeFile("one.docx", 16), makeFile("two.docx", 16)],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      userId: "user-1",
+      publicKey: "pk-own",
+      publicKeyId: "key-1",
+    });
+
+    expect(results.every((r) => r.ok)).toBe(true);
+    expect(skippedMembers).toEqual([
+      { userId: "bob", displayName: undefined, reason: "key-mismatch-refused" },
     ]);
   });
 

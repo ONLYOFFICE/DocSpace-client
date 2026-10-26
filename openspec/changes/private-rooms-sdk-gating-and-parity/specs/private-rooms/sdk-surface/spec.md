@@ -52,7 +52,7 @@ Inside a private room in the SDK, the create menu SHALL offer "new document", "n
 - **THEN** an encrypted empty document appears in the list under the chosen name
 
 ### Requirement: Folder operations use the server path
-A folder move within the same private room SHALL be executed by the server without client-side re-encryption. A folder copy or move across rooms, into a private room or out of a private room SHALL be withheld with Common:CannotTransferFolderFromPrivateRoom, so no folder transfer can leave files unreadable or unencrypted.
+A folder move within the same private room SHALL be executed by the server without client-side re-encryption. A folder copy or move across rooms, into a private room or out of a private room SHALL be withheld with Common:CannotTransferFolderFromPrivateRoom, so no folder transfer can leave files unreadable or unencrypted. A folder copy SHALL NOT be offered inside a private room in this version.
 
 #### Scenario: Folder moved within a private room
 - **WHEN** the user moves a folder inside the same private room
@@ -61,6 +61,10 @@ A folder move within the same private room SHALL be executed by the server witho
 #### Scenario: Folder moved to another room
 - **WHEN** the user tries to move or copy a folder from a private room to any other room or folder
 - **THEN** the operation is refused with Common:CannotTransferFolderFromPrivateRoom and nothing is transferred
+
+#### Scenario: Folder copied within a private room
+- **WHEN** the user opens the context menu of a folder in a private room
+- **THEN** no copy action is offered, whatever rights the folder reports
 
 ### Requirement: SDK private surface honours the opt-in
 The SDK private routes SHALL render the private-rooms list, room and archive pages only when the host has passed the private-rooms opt-in (the `privateRooms` property of the frame configuration); without it they SHALL render the "feature not available" view. The opt-in SHALL be removed together with the client flag at release.

@@ -22,7 +22,7 @@
 
 - [x] 4.1 Apply the private-room rules to `packages/sdk/src/app/(private)/private/archive/**` (no Share tab, encrypted download path, key check, the archive empty view with its action leading back to the private rooms list); verify with SDK unit tests for the archive page and an E2E case in `private-rooms.spec.ts`
 - [x] 4.2 Withhold cross-room folder copy/move in `packages/sdk/src/app/(docspace)/_hooks/useFileOperations.ts` with `Common:CannotTransferFolderFromPrivateRoom`, keeping same-room moves server-side; verify with `cd packages/sdk && pnpm exec vitest run useFileOperations useEncryptedCopyMove`
-- [ ] 4.3 Decide how the SDK handles a folder copy within the same private room, which the server refuses today (design.md Open Questions: withhold with a localized message, client-side re-encrypting copy, or a backend change); record the decision in design.md and, if it adds behaviour, add the scenario to the sdk-surface delta before implementing it
+- [ ] 4.3 Decide how the SDK handles a folder copy within the same private room, which the server refuses today (design.md Open Questions: withhold with a localized message, client-side re-encrypting copy, or a backend change); record the decision in design.md and, if it adds behaviour, add the scenario to the sdk-surface delta before implementing it (decided 2026-10-26: not offered, design D9; verify with the case "Folder copied within a private room" in `packages/sdk/src/app/(private)/_hooks/usePrivateRoomContextMenu.test.ts`)
 
 ## 5. Translations
 

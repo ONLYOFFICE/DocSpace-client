@@ -48,7 +48,7 @@ See proposal.md for motivation. Observed state on the branch:
 
 **D4. Translations: move the few keys into Common.** The private surface uses under ten keys from `People`, `UploadPanel` and `Files`. Moving them (with `translate-stale` to confirm the other languages follow) is cheaper and safer than bundling three namespaces into the SDK, which would grow every host page. If more keys are needed later, bundle the namespace then.
 
-**D5. Folder transfers across rooms are withheld, not re-encrypted.** Re-encrypting a folder tree client-side is the same work as the decrypted folder download plus upload, and the client itself withholds folder moves out of a private room. Same-room moves stay server-side (wraps are per file, unaffected by the path: the server keys access entries by tenant, file and user, with no folder). Same-room folder copy is refused by the server today (see Context), so the SDK cannot keep it "server-side"; how the SDK presents it is open (see Open Questions). Alternative: implement tree re-encryption. Deferred until a user asks for it.
+**D5. Folder transfers across rooms are withheld, not re-encrypted.** Re-encrypting a folder tree client-side is the same work as the decrypted folder download plus upload, and the client itself withholds folder moves out of a private room. Same-room moves stay server-side (wraps are per file, unaffected by the path: the server keys access entries by tenant, file and user, with no folder). Same-room folder copy is refused by the server today (see Context), so the SDK cannot keep it "server-side"; it is not offered (D9). Alternative: implement tree re-encryption. Deferred until a user asks for it.
 
 **D6. Hint gating uses a loaded signal from the encryption context.** The context exposes `keysLoaded` (true once the envelope list request settled, success or failure); the hint and the create-key auto-prompt key on `keysLoaded && !hasConfiguredKey`. This also fixes the stashed checkpoint's F-3 item (empty list on a network error) without a separate state machine.
 
@@ -57,6 +57,8 @@ See proposal.md for motivation. Observed state on the branch:
 - The client therefore also accepts `privateRooms: true` from the frame configuration as the opt-in while it runs in a frame. One host-side switch then serves both the manager frame and the SDK private pages.
 - The configuration arrives through `setConfig` after the page loads (`pages/Home/Hooks/useSDK.js:98-101` → `SettingsStore.setFrameConfig`). The opt-in captured when `AppsStore` is constructed cannot see it. The availability predicate therefore takes the frame property as a second input, read once when the configuration arrives. Task 1.4 checks that the first list request in a frame waits for it, so a framed Rooms list never loads unscoped and then flips.
 - The manager mode's routes need no change; the host opens the section with the root path `/private/`.
+
+**D9. A folder copy is not offered inside a private room (decided 2026-10-26).** The server refuses a copy with a private-room source and removes the Copy right from folders inside a private room, and D5 withholds a copy across rooms, so no folder copy can succeed from a private room in this version. The SDK leaves `copy` out of the context options of a folder in a private room, whatever rights the folder reports, and the requirement states it as a limitation. Alternatives: a client-side re-encrypting copy of the tree, deferred with D5; a backend change allowing same-room copy, rejected because the copied files would carry no access entries until the client re-wrapped them.
 
 **D7. E2E: seed the session and reuse the crypto fixture.** The SDK Playwright base fixture gains a seeded `asc_auth_key` cookie and the pre-serialised identity from `fixtures/crypto.ts`; seven of the eight fixme tests then run (unlock, upload, download, preview, duplicate, copy/move cross-room, copy-out blocked, invite). The editor-open test stays `fixme` with a reference to `private-rooms-editor-contract`.
 
@@ -72,5 +74,4 @@ Ships behind the opt-in; no data migration. Removing the opt-in later is part of
 
 ## Open Questions
 
-- Folder copy within the same private room: the server refuses it (copy is never allowed with a private-room source). Options: withhold the action in the SDK with a localized message, implement a client-side re-encrypting copy, or ask the backend to allow same-room copy (the copied files would carry no access entries, since the server cannot create wraps). Owner: product owner. The delta spec covers same-room move and cross-room transfers only until this is decided.
 - Whether the host should also be able to pass a pre-unlocked identity (postMessage bridge). Does not change this design; tracked in the stashed SDK plan as P2.

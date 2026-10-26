@@ -203,6 +203,7 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
           roomId,
           folderId: navigationStore.currentFolderId ?? folderData.current?.id ?? roomId,
         }),
+      roomId,
       copyFiles: (items, destFolderId) =>
         copyEncryptedFiles({
           files: items.map((it: TFileItem) => ({

@@ -37,6 +37,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 import {
   copyToFolder,
@@ -62,6 +63,7 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useEncryptedFileActions } from "@/app/(docspace)/_contexts/EncryptedFileActionsContext";
 import { PAGE_COUNT } from "@/utils/constants";
+import { resolveEncryptedCopyDest } from "@/app/(private)/_utils/encrypted-copy-dest";
 import useOperationToast from "./useOperationToast";
 import type {
   TFileItem,
@@ -92,7 +94,21 @@ export type SelectorInitData = {
   hasNextPage: boolean;
 };
 
+/** Whether a folder lies in the given private room. */
+const isInPrivateRoom = async (
+  folderId: number | string,
+  roomId: number | string,
+) => {
+  const filter = FilesFilter.getDefault();
+  filter.pageCount = 1;
+  const dest = resolveEncryptedCopyDest(
+    (await getFolder(folderId, filter)) as TGetFolder,
+  );
+  return dest.mode === "re-encrypt" && String(dest.roomId) === String(roomId);
+};
+
 export default function useFileOperations() {
+  const { t } = useTranslation(["Common"]);
   const router = useRouter();
   const { showCopyToast, showMoveToast } = useOperationToast();
   const filesListStore = useFilesListStore();
@@ -420,6 +436,20 @@ export default function useFileOperations() {
         }
       }
 
+      // Spec: private-rooms/sdk-surface, "Folder operations use the server path"
+      if (encryptedActions && serverItems.some((i) => i.isFolder)) {
+        let sameRoom = false;
+        try {
+          sameRoom = await isInPrivateRoom(destFolderId, encryptedActions.roomId);
+        } catch {
+          sameRoom = false;
+        }
+        if (!sameRoom) {
+          toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
+          serverItems = serverItems.filter((i) => !i.isFolder);
+        }
+      }
+
       if (!serverItems.length) {
         setPendingItems([]);
         return;
@@ -469,7 +499,7 @@ export default function useFileOperations() {
 
       setPendingItems([]);
     },
-    [selectorMode, pendingItems, executeOperation, encryptedActions],
+    [selectorMode, pendingItems, executeOperation, encryptedActions, t],
   );
 
   const confirmConflict = useCallback(

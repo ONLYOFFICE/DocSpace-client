@@ -1200,6 +1200,7 @@
   "InviteViaLinkDescriptionRoomGuest": "Create a universal link for self-authorization in the room as a guest.",
   "InviteViaLinkDescriptionRoomMembers": "Create a universal link for members for self-authorization in the room.",
   "InvoiceHistory": "Invoice history",
+  "InvoiceHistoryDescription": "View invoices for your completed wallet top-ups.",
   "IpAlreadyAdded": "This IP address has already been added",
   "ItemsSelected": "Items selected",
   "ItemsSuccessfullyUploaded": "Uploaded elements: {{count}}",

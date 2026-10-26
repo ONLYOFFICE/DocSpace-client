@@ -71,6 +71,7 @@ import type {
   ButtonOption,
 } from "@onlyoffice/apps-ui-kit/components/main-button-mobile/MainButtonMobile.types";
 import type { QuickActionItem } from "@onlyoffice/apps-ui-kit/components/quick-actions";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   CreateDocumentIcon,
   CreateSpreadsheetIcon,
@@ -78,8 +79,6 @@ import {
   BlankPdfIcon,
 } from "@onlyoffice/apps-ui-kit/components/quick-actions/icons";
 
-import CreateNewFolderIllustration from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
-import UploadDeviceIllustration from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
@@ -99,17 +98,22 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { docsSectionFromRootFolderType } from "@/utils/frameEntity";
 
 import type { CreateFileDialogType } from "../_components/create-file-dialog";
+import { getPrivateCreateMenu } from "../_components/docs-layout/private-menu";
+import type { TPrivateCreate } from "./useDocsActions";
 
 type MenuActions = {
   openCreateDialog: (type: CreateFileDialogType) => void;
   onUploadFiles: () => void;
   onUploadFolder: () => void;
+  /** Set inside a private room; see useDocsActions. */
+  privateCreate?: TPrivateCreate;
 };
 
 export function useDocsMenuModels({
   openCreateDialog,
   onUploadFiles,
   onUploadFolder,
+  privateCreate,
 }: MenuActions) {
   const { t } = useTranslation(["Common"]);
   const { customActions } = useSdkCustomActions();
@@ -131,8 +135,8 @@ export function useDocsMenuModels({
     [customActions, rootFolderType, folderId],
   );
 
-  const desktopModel = React.useMemo<ContextMenuModel[]>(
-    () => [
+  const desktopModel = React.useMemo<ContextMenuModel[]>(() => {
+    const model: ContextMenuModel[] = [
       {
         id: "actions_new-document",
         key: "docx",
@@ -195,12 +199,21 @@ export function useDocsMenuModels({
             })),
           ]
         : []),
-    ],
-    [t, openCreateDialog, onUploadFiles, onUploadFolder, customCreateActions],
-  );
+    ];
+    return privateCreate
+      ? getPrivateCreateMenu(model, privateCreate.canCreateFiles)
+      : model;
+  }, [
+    t,
+    openCreateDialog,
+    onUploadFiles,
+    onUploadFolder,
+    customCreateActions,
+    privateCreate,
+  ]);
 
-  const actionOptions = React.useMemo<ActionOption[]>(
-    () => [
+  const actionOptions = React.useMemo<ActionOption[]>(() => {
+    const options: ActionOption[] = [
       {
         key: "docx",
         label: t("Common:Document"),
@@ -223,7 +236,11 @@ export function useDocsMenuModels({
         key: "pdf",
         label: t("Common:NewPDFForm"),
         icon: FormBlankReactSvgUrl,
-        onClick: () => openCreateDialog("pdf"),
+        // Spec: private-rooms/sdk-surface, "Create menu inside a private room"
+        onClick: () =>
+          privateCreate
+            ? toastr.info(t("Common:MobileEditPdfNotAvailableInfo"))
+            : openCreateDialog("pdf"),
       },
       {
         key: "new-folder",
@@ -241,9 +258,11 @@ export function useDocsMenuModels({
             ...customCreateActions,
           ]
         : []),
-    ],
-    [t, openCreateDialog, customCreateActions],
-  );
+    ];
+    return privateCreate
+      ? getPrivateCreateMenu(options, privateCreate.canCreateFiles)
+      : options;
+  }, [t, openCreateDialog, customCreateActions, privateCreate]);
 
   const buttonOptions = React.useMemo<ButtonOption[]>(
     () => [
@@ -257,8 +276,9 @@ export function useDocsMenuModels({
     [t, onUploadFiles],
   );
 
-  const quickActionItems = React.useMemo<QuickActionItem[]>(
-    () => [
+  const quickActionItems = React.useMemo<QuickActionItem[]>(() => {
+    if (privateCreate && !privateCreate.canCreateFiles) return [];
+    return [
       {
         id: "quick-docx",
         icon: <CreateDocumentIcon />,
@@ -283,36 +303,13 @@ export function useDocsMenuModels({
         label: getConstName("PDF"),
         onClick: () => openCreateDialog("pdf"),
       },
-    ],
-    [t, openCreateDialog],
-  );
-
-  // Private rooms hide the document/spreadsheet/PDF quick actions (encrypted
-  // rooms only allow folders and uploads). The banner mirrors the two actions
-  // offered by the private-room empty view, reusing the same illustrations.
-  const privateQuickActionItems = React.useMemo<QuickActionItem[]>(
-    () => [
-      {
-        id: "quick-new-folder",
-        icon: <CreateNewFolderIllustration />,
-        label: t("Common:NewFolder"),
-        onClick: () => openCreateDialog("folder"),
-      },
-      {
-        id: "quick-upload-files",
-        icon: <UploadDeviceIllustration />,
-        label: t("Common:UploadFiles"),
-        onClick: onUploadFiles,
-      },
-    ],
-    [t, openCreateDialog, onUploadFiles],
-  );
+    ];
+  }, [t, openCreateDialog, privateCreate]);
 
   return {
     desktopModel,
     actionOptions,
     buttonOptions,
     quickActionItems,
-    privateQuickActionItems,
   };
 }

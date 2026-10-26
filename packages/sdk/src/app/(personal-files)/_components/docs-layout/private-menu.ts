@@ -33,19 +33,17 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
-
-const DOCUMENT_KEYS = ["docx", "xlsx", "pptx"];
+const DOCUMENT_KEYS = ["docx", "xlsx", "pptx", "pdf"];
 const BASE_KEYS = ["new-folder", "separator-1", "upload-files"];
 
 /**
- * The create menu inside a private room: documents for a user who can
- * create them encrypted, folder and upload for everyone, never PDF forms.
+ * The create menu inside a private room: documents and PDF forms for a user
+ * who can create them encrypted, folder and upload for everyone.
  */
-export const getPrivateCreateMenu = (
-  model: ContextMenuModel[],
+export const getPrivateCreateMenu = <T extends { key?: unknown }>(
+  model: T[],
   canCreateDocuments: boolean,
-) => {
+): T[] => {
   const allowed = new Set(
     canCreateDocuments ? [...DOCUMENT_KEYS, ...BASE_KEYS] : BASE_KEYS,
   );

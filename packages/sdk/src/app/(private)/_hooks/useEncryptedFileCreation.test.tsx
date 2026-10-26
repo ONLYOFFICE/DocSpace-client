@@ -124,6 +124,28 @@ describe("useEncryptedFileCreation", () => {
     expect(env.release).toHaveBeenCalledTimes(1);
   });
 
+  it("PDF form created", async () => {
+    vi.mocked(createEncryptedFile).mockResolvedValue({
+      fileId: 8,
+      fileName: "Form.pdf",
+    });
+
+    expect(await createFile(15, "Form", "pdf")).toBe(true);
+
+    expect(createEncryptedFile).toHaveBeenCalledWith(
+      expect.objectContaining({ extension: "pdf", title: "Form" }),
+    );
+  });
+
+  it("Unsupported extension requested", async () => {
+    expect(await createFile(15, "Notes", "txt" as never)).toBe(false);
+
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomCreateNotSupported",
+    );
+    expect(createEncryptedFile).not.toHaveBeenCalled();
+  });
+
   it("creates nothing when the passphrase prompt is cancelled", async () => {
     env.identity = null;
 

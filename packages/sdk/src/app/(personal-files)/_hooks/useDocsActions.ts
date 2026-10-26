@@ -53,7 +53,13 @@ import { createChunks, runWithConcurrency } from "@onlyoffice/apps-ui-kit/upload
 
 import { useTranslation } from "react-i18next";
 
+import {
+  getDisplayFileNames,
+  getUniqueFileTitle,
+} from "@docspace/shared/services/private-room/encrypted-create-rules";
+
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
@@ -82,12 +88,15 @@ const getDefaultFileName = (
 const DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
 const DEFAULT_UPLOAD_THREADS = 3;
 
-export type TDocumentExtension = "docx" | "xlsx" | "pptx";
+export type TDocumentExtension = "docx" | "xlsx" | "pptx" | "pdf";
 
 const isDocumentType = (
   type: CreateFileDialogType,
 ): type is TDocumentExtension =>
-  type === "docx" || type === "xlsx" || type === "pptx";
+  type === "docx" || type === "xlsx" || type === "pptx" || type === "pdf";
+
+/** Files a private room creates, when it may create them. */
+export type TPrivateCreate = { canCreateFiles: boolean };
 
 type UseDocsActionsOptions = {
   /** Replaces the default chunked upload (e.g., encrypted upload). */
@@ -101,11 +110,17 @@ type UseDocsActionsOptions = {
     title: string,
     extension: TDocumentExtension,
   ) => Promise<boolean>;
+  /**
+   * Set inside a private room: files are created only through
+   * createFileOverride, and only by a user with encryption keys.
+   */
+  privateCreate?: TPrivateCreate;
 };
 
 export default function useDocsActions(options?: UseDocsActionsOptions) {
   const router = useRouter();
   const navigationStore = useNavigationStore();
+  const filesListStore = useFilesListStore();
   const { filesSettings } = useFilesSettingsStore();
   const uploadStore = useUploadStore();
   const { sdkConfig } = useSDKConfig();
@@ -183,6 +198,10 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
   }, [navigationStore]);
 
   const createFileOverride = options?.createFileOverride;
+  const privateCreate = options?.privateCreate;
+  // Spec: private-rooms/sdk-surface, "Create menu inside a private room"
+  const isFileCreationWithheld =
+    !!privateCreate && (!createFileOverride || !privateCreate.canCreateFiles);
 
   const createDocument = useCallback(
     async (
@@ -206,11 +225,22 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     (type: CreateFileDialogType) => {
       const folderId = getFolderId();
       if (!folderId) return;
+      if (type !== "folder" && isFileCreationWithheld) return;
 
       if (filesSettings?.keepNewFileName) {
         const name = getDefaultFileName(type, t);
         if (createFileOverride && isDocumentType(type)) {
-          void createDocument(folderId, name, type);
+          void createDocument(
+            folderId,
+            privateCreate
+              ? getUniqueFileTitle(
+                  name,
+                  type,
+                  getDisplayFileNames(filesListStore.items),
+                )
+              : name,
+            type,
+          );
         } else if (type === "folder") {
           setIsCreating(true);
           createFolder(folderId, name)
@@ -238,6 +268,9 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
       navigateToCreate,
       createFileOverride,
       createDocument,
+      isFileCreationWithheld,
+      privateCreate,
+      filesListStore,
     ],
   );
 
@@ -528,6 +561,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     uploadConflictItems,
     confirmUploadConflict,
     closeUploadConflictDialog,
+    privateCreate,
   };
 }
 

@@ -119,7 +119,6 @@ import useDocsActions, {
 } from "../../_hooks/useDocsActions";
 import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
 
-import { getPrivateCreateMenu } from "./private-menu";
 import useTrashActions from "../../_hooks/useTrashActions";
 import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
@@ -267,9 +266,16 @@ const DocsLayoutCore = observer(
       isCanCreate &&
       !(isPrivate && isArchive);
 
+    const privateCreate = React.useMemo(
+      () =>
+        isPrivate ? { canCreateFiles: !!hasEncryptionKeys } : undefined,
+      [isPrivate, hasEncryptionKeys],
+    );
+
     const docsActions = useDocsActions({
       uploadFilesToFolderOverride,
       createFileOverride: createFileInFolder,
+      privateCreate,
     });
     const {
       uploadFilesToFolder,
@@ -290,29 +296,14 @@ const DocsLayoutCore = observer(
     const isAiChatPanelVisible = ai?.isChatPanelVisible ?? false;
     const isAiChatPanelFullscreen = ai?.isChatPanelFullscreen ?? false;
 
-    const {
-      desktopModel: defaultDesktopModel,
-      quickActionItems: defaultQuickActionItems,
-      privateQuickActionItems,
-    } = useDocsMenuModels({
+    const { desktopModel, quickActionItems } = useDocsMenuModels({
       openCreateDialog,
       onUploadFiles,
       onUploadFolder,
+      privateCreate,
     });
-
-    const desktopModel = React.useMemo(() => {
-      if (!isPrivate) return defaultDesktopModel;
-      return getPrivateCreateMenu(
-        defaultDesktopModel,
-        !!hasEncryptionKeys && !!createFileInFolder,
-      );
-    }, [isPrivate, defaultDesktopModel, hasEncryptionKeys, createFileInFolder]);
-    // Private rooms swap the document/PDF tiles for the encrypted-room set
-    // (new folder + upload). Archived private rooms are read-only, so the
-    // banner is hidden upstream via `isActionButtonEnabled`.
-    const quickActionItems = isPrivate
-      ? privateQuickActionItems
-      : defaultQuickActionItems;
+    const showQuickActions =
+      isActionButtonEnabled && quickActionItems.length > 0;
 
     // Archived private rooms get the narrower read-only whitelist; active
     // private rooms use the full whitelist; non-private rooms have no filter.
@@ -616,9 +607,9 @@ const DocsLayoutCore = observer(
                                       />
                                     }
                                     stickyTableHeader
-                                    scrollableBanner={isActionButtonEnabled}
+                                    scrollableBanner={showQuickActions}
                                     sectionBannerContent={
-                                      isActionButtonEnabled ? (
+                                      showQuickActions ? (
                                         <div
                                           className={styles.createNewSection}
                                         >

@@ -72,6 +72,18 @@ describe("emptyTemplateHandler (mirrors FileHandlerService.EmptyFile)", () => {
     expect(Array.from(bytes.slice(0, 4))).toEqual([0x50, 0x4b, 0x03, 0x04]);
   });
 
+  it("streams the PDF form template", async () => {
+    const res = await getEmpty(".pdf");
+    const bytes = new Uint8Array(await res.arrayBuffer());
+
+    expect(res.status).toBe(200);
+    expect(res.headers.get("Content-Type")).toBe("application/pdf");
+    expect(res.headers.get("Content-Disposition")).toBe(
+      "attachment; filename=new.pdf",
+    );
+    expect(Array.from(bytes.slice(0, 4))).toEqual([0x25, 0x50, 0x44, 0x46]);
+  });
+
   it("answers 404 for an extension without a template", async () => {
     const res = await getEmpty(".abc");
 

@@ -57,6 +57,7 @@ describe("private create menu", () => {
       "docx",
       "xlsx",
       "pptx",
+      "pdf",
       "new-folder",
       "separator-1",
       "upload-files",

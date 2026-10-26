@@ -68,6 +68,7 @@ const DocsMainButton = ({ mode, isDisabled, actions }: DocsMainButtonProps) => {
     openCreateDialog: resolved.openCreateDialog,
     onUploadFiles: resolved.onUploadFiles,
     onUploadFolder: resolved.onUploadFolder,
+    privateCreate: resolved.privateCreate,
   });
 
   const [isOpenButton, setIsOpenButton] = React.useState(false);

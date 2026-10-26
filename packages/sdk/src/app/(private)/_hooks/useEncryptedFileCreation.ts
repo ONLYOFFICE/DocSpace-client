@@ -42,6 +42,7 @@ import { useEncryption } from "@docspace/shared/context/encryption";
 import { getEncryptedOperationErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import { createEncryptedFile } from "@docspace/shared/services/private-room/encrypted-file-creation";
+import { isEncryptedCreateExtension } from "@docspace/shared/services/private-room/encrypted-create-rules";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import type { TDocumentExtension } from "@/app/(personal-files)/_hooks/useDocsActions";
@@ -60,6 +61,11 @@ export const useEncryptedFileCreation = (roomId: number | string) => {
       title: string,
       extension: TDocumentExtension,
     ) => {
+      if (!isEncryptedCreateExtension(extension)) {
+        toastr.error(t("Common:PrivateRoomCreateNotSupported", { extension }));
+        return false;
+      }
+
       const userId = identityStore.userKeys?.userId;
       const publicKey = identityStore.userKeys?.publicKey;
       const publicKeyId = selectUserKey(identityStore.keys)?.id ?? null;

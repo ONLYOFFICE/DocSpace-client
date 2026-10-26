@@ -512,6 +512,51 @@ test.describe("(private) — create / upload / download / preview", () => {
     await expect(row(page, "Plan.docx")).toBeVisible();
   });
 
+  test("Create menu opened", async ({ page, baseUrl, port, mockBoth }) => {
+    await serveRooms(mockBoth, port, { files: [] });
+    await openRoom(page, baseUrl);
+
+    await page.getByTestId("main-button").click();
+
+    for (const id of [
+      "actions_new-document",
+      "actions_new-spreadsheet",
+      "actions_new-presentation",
+      "actions_new-form",
+      "actions_new-folder",
+      "actions_upload-files",
+    ]) {
+      await expect(page.getByTestId(id).first()).toBeVisible();
+    }
+    await expect(page.getByTestId("actions_upload-folder")).toHaveCount(0);
+  });
+
+  test("PDF form hotkey", async ({ page, baseUrl, port, mockBoth }) => {
+    const { room } = await serveRooms(mockBoth, port, { files: [] });
+    mockBoth(emptyTemplateHandler(port));
+    await openRoom(page, baseUrl);
+    await expect(page.getByTestId("main-button")).toBeVisible();
+
+    const editorPages: string[] = [];
+    page.on("request", (request) => {
+      if (request.url().includes("/doceditor")) editorPages.push(request.url());
+    });
+    await page.keyboard.press("Shift+O");
+    const createDialog = page.getByRole("dialog").filter({ hasText: "PDF" });
+    await createDialog.getByRole("textbox").fill("Form");
+    await createDialog
+      .getByRole("button", { name: "Create", exact: true })
+      .click();
+    await unlock(page);
+
+    await expect.poll(() => room.getFiles().length).toBe(1);
+    const [created] = room.getFiles();
+    expect(created.serverTitle.endsWith(".pdf")).toBe(true);
+    expect(created.serverTitle).not.toContain("Form");
+    expect(isDSE3Format(created.bytes!)).toBe(true);
+    expect(editorPages).toEqual([]);
+  });
+
   test("Member uploads a file", async ({ page, baseUrl, port, mockBoth }) => {
     const { room } = await serveRooms(mockBoth, port, { files: [] });
     const notes = new TextEncoder().encode("Notes that stay encrypted.");

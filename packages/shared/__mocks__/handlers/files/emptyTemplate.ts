@@ -38,25 +38,31 @@ import { strToU8, zipSync } from "fflate";
 
 import { BASE_URL } from "../../e2e/utils";
 
-/** MimeMapping of the templates the mock serves (new.docx, new.xlsx, new.pptx). */
+/**
+ * MimeMapping of the templates the mock serves: the server ships new.docx,
+ * new.xlsx, new.pptx and new.pdf in common/resources/DocStore/new.
+ */
 const TEMPLATE_MIME_TYPES: Record<string, string> = {
   ".docx":
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   ".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
   ".pptx":
     "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  ".pdf": "application/pdf",
 };
 
 /**
- * Mock-only body: a minimal OOXML package in place of the stored template,
- * enough for a client that checks the package signature.
+ * Mock-only body: a minimal OOXML package or PDF in place of the stored
+ * template, enough for a client that checks the file signature.
  */
-const templateBytes = () =>
-  zipSync({
-    "[Content_Types].xml": strToU8(
-      '<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"/>',
-    ),
-  });
+const templateBytes = (extension: string) =>
+  extension === ".pdf"
+    ? strToU8("%PDF-1.7\n%%EOF\n")
+    : zipSync({
+        "[Content_Types].xml": strToU8(
+          '<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"/>',
+        ),
+      });
 
 /**
  * Mirrors FileHandlerService.EmptyFile (filehandler.ashx?action=empty):
@@ -77,7 +83,7 @@ export const emptyTemplateHandler = (port: string) =>
     const mimeType = TEMPLATE_MIME_TYPES[extension];
     if (!mimeType) return new Response("The required file was not found", { status: 404 });
 
-    const body = templateBytes();
+    const body = templateBytes(extension);
     return new Response(body.slice().buffer, {
       headers: {
         "Content-Disposition": `attachment; filename=new${extension}`,

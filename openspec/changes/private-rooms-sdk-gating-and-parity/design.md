@@ -35,6 +35,8 @@ See proposal.md for motivation. Observed state on the branch:
   - So the SDK JS has to write the property into the frame URL, as its builders already do for the other properties of each mode.
   - The private layout reads it from the request (`FILTER_HEADER`, as the forms and AI agents layouts read `showMenu`), and the client side also sees it in `setConfig`.
   - The URL parameter is therefore the transport of the frame property, not a second contract.
+  - Navigation inside the SDK keeps it (decided 2026-10-26): the private pages build their internal URLs (`router.push` to a room, back to the list, the frame bridge's `router.replace`) through one helper that carries `privateRooms` over from the current URL, because each server page reads the opt-in from its own request. A session cookie set by the proxy was rejected: it would leak the opt-in to another host embedding the portal in the same browser session, and third-party cookies in frames may be blocked.
+  - The check runs in the private layout and in every private server page before any request: Next.js renders a layout and its page in parallel, so a gate in the layout alone does not keep the page from loading rooms or keys.
 - Both apps feed `isPrivateRoomsEnabled()` through an injectable source, so the shared utility stays the single truth.
 - Dependency: the bundled `public/scripts/sdk/2.2.0/api.js` has no mode that builds a `/sdk/private` URL. The manager builder makes `{rootPath}{id}/filter`, and the other modes have fixed paths, so a host cannot open the private pages through the SDK JS yet. A `private` mode that writes `privateRooms` is needed in the separate sdk-js repository (task 1.5).
 - Alternative: read the same localStorage key in the SDK origin. Rejected: the SDK may run on a different origin than the host, and localStorage is not shared across origins.
@@ -60,7 +62,7 @@ See proposal.md for motivation. Observed state on the branch:
 
 ## Risks / Trade-offs
 
-- [A host forgets to pass the opt-in and reports the feature as missing] → the not-available view names the configuration property.
+- [A host forgets to pass the opt-in and reports the feature as missing] → the not-available view shows Common:UnderDevelopment, and the SDK names the `privateRooms` configuration property in a console message for the host developer; no new locale key (decided 2026-10-26).
 - [Moving locale keys breaks client call sites] → `translate-stale` and the locale tests run in the same task group; call sites are updated by the same change.
 - [Seeded cookie in SDK E2E drifts from the real login flow] → the cookie only unblocks the private tests; login itself is covered by the login package tests.
 

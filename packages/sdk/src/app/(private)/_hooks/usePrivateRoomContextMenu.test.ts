@@ -147,11 +147,15 @@ describe("private-room context-menu whitelist", () => {
       }
     });
 
-    it("differs from PRIVATE_FILE_CONTEXT_OPTIONS only by the absence of 'duplicate'", () => {
+    it("Folder copied within a private room", () => {
+      expect(PRIVATE_FOLDER_CONTEXT_OPTIONS.has(C.copy)).toBe(false);
+    });
+
+    it("differs from PRIVATE_FILE_CONTEXT_OPTIONS only by the absence of 'copy' and 'duplicate'", () => {
       const fileOnly = [...PRIVATE_FILE_CONTEXT_OPTIONS].filter(
         (k) => !PRIVATE_FOLDER_CONTEXT_OPTIONS.has(k),
       );
-      expect(fileOnly).toEqual([C.duplicate]);
+      expect(fileOnly.sort()).toEqual([C.copy, C.duplicate].sort());
     });
 
     // Folders in a private room still need the core operations.

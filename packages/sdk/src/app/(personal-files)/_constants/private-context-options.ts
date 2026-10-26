@@ -72,9 +72,12 @@ export const PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS: ReadonlySet<string> = new Set
 // create an unencrypted copy of the folder tree. Reference: client
 // FilesActionsStore.js duplicateAction — silent return for folders in a
 // privacy folder.
+// Spec: private-rooms/sdk-surface, "Folder operations use the server path"
 export const PRIVATE_FOLDER_CONTEXT_OPTIONS: ReadonlySet<string> = new Set(
   [...PRIVATE_FILE_CONTEXT_OPTIONS].filter(
-    (key) => key !== AVAILABLE_CONTEXT_ITEMS.duplicate,
+    (key) =>
+      key !== AVAILABLE_CONTEXT_ITEMS.duplicate &&
+      key !== AVAILABLE_CONTEXT_ITEMS.copy,
   ),
 );
 

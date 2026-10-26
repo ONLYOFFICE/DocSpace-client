@@ -39,6 +39,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import { TABLE_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/table/Table.constants";
+import { isContextMenuOpen, isKeyOwnedByFocus } from "SRC_DIR/helpers/hotkeys";
 import GroupsStore from "./GroupsStore";
 
 type UsersStore = TStore["peopleStore"]["usersStore"];
@@ -297,6 +298,8 @@ class ContactsHotkeysStore {
 
     if (
       someDialogIsOpen ||
+      isContextMenuOpen() ||
+      isKeyOwnedByFocus(e) ||
       (elementTarget?.tagName === "INPUT" &&
         inputTarget?.type !== "checkbox") ||
       elementTarget?.tagName === "TEXTAREA"

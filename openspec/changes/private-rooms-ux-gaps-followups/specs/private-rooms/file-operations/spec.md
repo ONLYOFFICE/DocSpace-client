@@ -44,5 +44,5 @@ The system SHALL take every message of an encrypted copy, download or open from 
 - **THEN** the toast shows Common:EncryptedOperationFailed in the user's language, never the raw error object
 
 #### Scenario: Download without decryption fails
-- **WHEN** "Download without decryption" is picked in the header menu of a private room and the server archive request fails without a specific message
+- **WHEN** "Download without decryption" is picked in the header menu of a private room or in the context menu of a folder in one, and the server archive request fails without a specific message
 - **THEN** the toast shows Common:EncryptedOperationFailed, never the raw error object

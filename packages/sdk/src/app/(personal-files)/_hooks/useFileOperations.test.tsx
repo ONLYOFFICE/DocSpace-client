@@ -42,6 +42,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const env = vi.hoisted(() => ({
   folders: new Map<number, unknown>(),
+  actions: { roomId: 10, copyFiles: vi.fn(), moveFiles: vi.fn() },
 }));
 
 vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
@@ -78,11 +79,7 @@ vi.mock("@/app/(docspace)/_store/FilesSelectionStore", () => ({
 }));
 
 vi.mock("@/app/(docspace)/_contexts/EncryptedFileActionsContext", () => ({
-  useEncryptedFileActions: () => ({
-    roomId: 10,
-    copyFiles: vi.fn(),
-    moveFiles: vi.fn(),
-  }),
+  useEncryptedFileActions: () => env.actions,
 }));
 
 vi.mock("./useOperationToast", () => ({
@@ -111,18 +108,22 @@ describe("useFileOperations in a private room", () => {
     return null;
   };
 
-  const moveFolderTo = async (destFolderId: number) => {
+  const moveTo = async (item: object, destFolderId: number) => {
     await act(async () => {
-      await ops.requestMove({ id: 5, isFolder: true, title: "Drafts" } as never);
+      await ops.requestMove(item as never);
     });
     await act(async () => {
       await ops.confirmOperation(destFolderId, "Destination");
     });
   };
 
+  const moveFolderTo = (destFolderId: number) =>
+    moveTo({ id: 5, isFolder: true, title: "Drafts" }, destFolderId);
+
   beforeEach(() => {
     vi.mocked(moveToFolder).mockClear();
     vi.mocked(toastr.error).mockClear();
+    env.actions.moveFiles.mockClear();
     env.folders.clear();
     env.folders.set(10, folderData({ id: 10, private: true, roomType: 5 }));
     root = createRoot(document.createElement("div"));
@@ -155,6 +156,33 @@ describe("useFileOperations in a private room", () => {
     expect(toastr.error).toHaveBeenCalledWith(
       "Common:CannotTransferFolderFromPrivateRoom",
     );
+  });
+
+  it("Move into another private room", async () => {
+    env.folders.set(20, folderData({ id: 20, private: true, roomType: 5 }));
+
+    const file = { id: 7, isFolder: false, encrypted: true, title: "memo.txt" };
+
+    await moveTo(file, 20);
+
+    expect(env.actions.moveFiles).not.toHaveBeenCalled();
+    expect(moveToFolder).not.toHaveBeenCalled();
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:CannotMoveToAnotherPrivateRoom",
+    );
+  });
+
+  it("moves an encrypted file within its private room", async () => {
+    env.folders.set(
+      11,
+      folderData({ id: 11, private: true }, [{ id: 2 }, { id: 10 }]),
+    );
+    const file = { id: 7, isFolder: false, encrypted: true, title: "memo.txt" };
+
+    await moveTo(file, 11);
+
+    expect(env.actions.moveFiles).toHaveBeenCalledWith([file], 11);
+    expect(toastr.error).not.toHaveBeenCalled();
   });
 
   it("refuses a folder moved out of the private rooms", async () => {

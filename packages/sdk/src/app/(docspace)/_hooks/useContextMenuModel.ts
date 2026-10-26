@@ -631,7 +631,9 @@ export default function useContextMenuModel({
   );
 
   const getGroupCopyItem = useCallback(() => {
-    const canCopy = filesSelectionStore.selection.every((i) => i.security.Copy);
+    const canCopy = filesSelectionStore.selection.every(
+      (i) => i.security.Copy || (!i.isFolder && (i as TFileItem).encrypted),
+    );
     return {
       id: "option_copy",
       key: "copy",

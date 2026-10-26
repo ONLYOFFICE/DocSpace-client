@@ -94,17 +94,17 @@ export type SelectorInitData = {
   hasNextPage: boolean;
 };
 
-/** Whether a folder lies in the given private room. */
-const isInPrivateRoom = async (
-  folderId: number | string,
-  roomId: number | string,
-) => {
+/** Where a transfer to the folder lands; null when the folder cannot be read. */
+const resolveDestination = async (folderId: number | string) => {
   const filter = FilesFilter.getDefault();
   filter.pageCount = 1;
-  const dest = resolveEncryptedCopyDest(
-    (await getFolder(folderId, filter)) as TGetFolder,
-  );
-  return dest.mode === "re-encrypt" && String(dest.roomId) === String(roomId);
+  try {
+    return resolveEncryptedCopyDest(
+      (await getFolder(folderId, filter)) as TGetFolder,
+    );
+  } catch {
+    return null;
+  }
 };
 
 export default function useFileOperations() {
@@ -416,12 +416,30 @@ export default function useFileOperations() {
       setSelectorInitData(null);
 
       let serverItems: (TFileItem | TFolderItem)[] = pendingItems;
+      const destination = encryptedActions
+        ? await resolveDestination(destFolderId)
+        : null;
+      const isSameRoom =
+        destination?.mode === "re-encrypt" &&
+        String(destination.roomId) === String(encryptedActions?.roomId);
+
+      // Spec: private-rooms/sdk-surface, "Copy and move destination resolved fail-closed"
+      if (
+        isMove &&
+        destination?.mode === "re-encrypt" &&
+        !isSameRoom &&
+        serverItems.some((i) => !i.isFolder)
+      ) {
+        toastr.error(t("Common:CannotMoveToAnotherPrivateRoom"));
+        serverItems = serverItems.filter((i) => i.isFolder);
+      }
+
       if (encryptedActions) {
-        const encryptedFiles = pendingItems.filter(
+        const encryptedFiles = serverItems.filter(
           (i) => !i.isFolder && (i as TFileItem).encrypted,
         ) as TFileItem[];
         if (encryptedFiles.length) {
-          serverItems = pendingItems.filter(
+          serverItems = serverItems.filter(
             (i) => !(!i.isFolder && (i as TFileItem).encrypted),
           );
           try {
@@ -437,17 +455,13 @@ export default function useFileOperations() {
       }
 
       // Spec: private-rooms/sdk-surface, "Folder operations use the server path"
-      if (encryptedActions && serverItems.some((i) => i.isFolder)) {
-        let sameRoom = false;
-        try {
-          sameRoom = await isInPrivateRoom(destFolderId, encryptedActions.roomId);
-        } catch {
-          sameRoom = false;
-        }
-        if (!sameRoom) {
-          toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
-          serverItems = serverItems.filter((i) => !i.isFolder);
-        }
+      if (
+        encryptedActions &&
+        !isSameRoom &&
+        serverItems.some((i) => i.isFolder)
+      ) {
+        toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
+        serverItems = serverItems.filter((i) => !i.isFolder);
       }
 
       if (!serverItems.length) {

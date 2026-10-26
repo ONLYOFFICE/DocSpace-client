@@ -711,6 +711,61 @@ describe("PUT /files/fileops/delete", () => {
   });
 });
 
+describe("encryptedFiles mock — DELETE /files/file/{fileId} (mirrors FilesController.DeleteFile)", () => {
+  it("removes the file and answers with the finished delete operation of that file", async () => {
+    handle.current!.setFiles([
+      { id: 5, title: "gone.txt", encrypted: true, fileKeys: [] },
+      { id: 6, title: "kept.txt", encrypted: true, fileKeys: [] },
+    ]);
+
+    const res = await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/file/5`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        deleteAfter: false,
+        immediately: true,
+        returnSingleOperation: true,
+      }),
+    });
+    const body = (await res.json()) as {
+      response: Array<Record<string, unknown>>;
+    };
+
+    expect(body.response).toHaveLength(1);
+    expect(body.response[0]).toMatchObject({
+      Operation: 2,
+      finished: true,
+      error: "",
+      status: 2,
+    });
+    expect(handle.current!.getFiles().map((f) => f.id)).toEqual([6]);
+  });
+});
+
+describe("encryptedFiles mock — viewAccessibility (mirrors FileUtility.GetAccessibility)", () => {
+  it("lets an image title open in the image viewer and keeps other titles out of it", async () => {
+    handle.current!.setFiles([
+      { id: 7, title: "photo.png", serverTitle: "a1b2.png", fileKeys: [] },
+      { id: 8, title: "memo.txt", serverTitle: "c3d4.txt", fileKeys: [] },
+    ]);
+
+    const res = await fetch(
+      `${BASE_URL}:${PORT}/${API_PREFIX}/files/${ROOM_ID}`,
+    );
+    const body = (await res.json()) as {
+      response: {
+        files: { id: number; viewAccessibility: Record<string, boolean> }[];
+      };
+    };
+    const access = Object.fromEntries(
+      body.response.files.map((f) => [f.id, f.viewAccessibility]),
+    );
+
+    expect(access[7]).toMatchObject({ ImageView: true, MediaView: false });
+    expect(access[8]).toMatchObject({ ImageView: false, MediaView: false });
+  });
+});
+
 describe("encryptedFiles mock — GET /files/folder/{folderId}/path (mirrors FoldersController.GetFolderPath)", () => {
   type PathEntry = Record<string, unknown>;
   const getPath = async (folderId: number) =>

@@ -154,6 +154,36 @@ const sectionOf = (archived: boolean) =>
     : { id: ROOMS_SECTION_ID, title: "Rooms", folderType: 14 };
 /** ChunkedUploadSessionHolder.SlidingExpiration. */
 const SESSION_SLIDING_EXPIRATION_MS = 12 * 60 * 60 * 1000;
+/** The `files:viewed-images` setting of appsettings.json. */
+const VIEWED_IMAGES = [
+  ".svg",
+  ".bmp",
+  ".gif",
+  ".jpeg",
+  ".jpg",
+  ".png",
+  ".ico",
+  ".tif",
+  ".tiff",
+  ".webp",
+  ".heic",
+];
+/** The `files:viewed-media` setting of appsettings.json. */
+const VIEWED_MEDIA = [
+  ".aac",
+  ".flac",
+  ".m4a",
+  ".mp3",
+  ".oga",
+  ".ogg",
+  ".wav",
+  ".f4v",
+  ".m4v",
+  ".mov",
+  ".mp4",
+  ".ogv",
+  ".webm",
+];
 
 const okResponse = <T>(response: T, statusCode = 200): Response =>
   new Response(
@@ -235,9 +265,11 @@ const buildFileDto = (
     updated: new Date().toISOString(),
     createdBy: creator,
     updatedBy: creator,
+    // FileUtility.GetAccessibility reads ImageView and MediaView from the
+    // title's extension; the mock keeps the other entries off.
     viewAccessibility: {
-      ImageView: false,
-      MediaView: false,
+      ImageView: VIEWED_IMAGES.includes(fileExst.toLowerCase()),
+      MediaView: VIEWED_MEDIA.includes(fileExst.toLowerCase()),
       WebView: false,
       WebEdit: false,
       WebReview: false,
@@ -968,5 +1000,36 @@ export const encryptedFilesHandlers = (
         },
       ]);
     }),
+
+    /**
+     * Mirrors FilesController.DeleteFile (HttpDelete "file/{fileId}"), which
+     * publishes the same delete operation for the one file; answered like
+     * fileops/delete above.
+     */
+    http.delete(
+      `${apiBase}/files/file/:fileId(\\d+)`,
+      async ({ params, request }) => {
+        const fileId = Number(params.fileId);
+        if (!files.has(fileId) && withOtherRooms) return undefined;
+        const body = await request.json().catch(() => ({}));
+        requests.push({
+          method: "DELETE",
+          url: new URL(request.url).pathname,
+          body,
+        });
+        files.delete(fileId);
+        return okResponse([
+          {
+            id: `mock-delete-${requests.length}`,
+            Operation: 2,
+            progress: 100,
+            error: "",
+            processed: "1",
+            finished: true,
+            status: 2,
+          },
+        ]);
+      },
+    ),
   ];
 };

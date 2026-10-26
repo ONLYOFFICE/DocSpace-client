@@ -33,16 +33,38 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { test as base } from "../fixtures/base";
+import type { Page } from "@playwright/test";
+import type { SetupServer } from "@docspace/shared/__mocks__/e2e";
+import {
+  privacyroomKeysHandlers,
+  type PrivacyroomHandlerHandle,
+} from "@docspace/shared/__mocks__/handlers";
+
+import { test as base, expect } from "../fixtures/base";
+import { FIXTURE_IDENTITY, FIXTURE_PASSPHRASE } from "../fixtures/crypto";
+
+type THandler = Parameters<SetupServer["use"]>[number];
+
+export type TMockBoth = (...handlers: THandler[]) => void;
 
 /**
  * Private-rooms e2e fixture: extends the shared base with an automatic
- * `asc_auth_key` cookie so the Next.js server components under /sdk/private
- * do not treat the session as anonymous (BLOCKER B in the spec-file header).
- * Kept separate from the base fixture so suites that intentionally test the
- * anonymous flow remain unaffected.
+ * `asc_auth_key` cookie, so the Next.js server components under /sdk/private
+ * do not treat the session as anonymous, and with the crypto fixture identity
+ * as the signed-in user's stored key. Kept separate from the base fixture so
+ * suites that intentionally test the anonymous flow remain unaffected.
  */
-export const test = base.extend<{ authCookie: void }>({
+export const test = base.extend<{
+  authCookie: void;
+  /**
+   * Installs handlers for the server-rendered pages and for the browser at
+   * once. Both get the same instances, so a file the browser uploads is
+   * listed by the next server render.
+   */
+  mockBoth: TMockBoth;
+  /** The key list of the signed-in user, holding FIXTURE_IDENTITY. */
+  identityKeys: PrivacyroomHandlerHandle;
+}>({
   authCookie: [
     async ({ page, baseUrl }, use) => {
       await page.context().addCookies([
@@ -52,6 +74,48 @@ export const test = base.extend<{ authCookie: void }>({
     },
     { auto: true },
   ],
+  mockBoth: async (
+    { serverRequestInterceptor, clientRequestInterceptor },
+    use,
+  ) => {
+    await use((...handlers) => {
+      serverRequestInterceptor.use(...handlers);
+      clientRequestInterceptor.use(...handlers);
+    });
+  },
+  identityKeys: [
+    // Waits for resetHandlersServer, whose default handlers would otherwise
+    // shadow the seeded key list on the server.
+    async ({ port, mockBoth, resetHandlersServer: _reset }, use) => {
+      const handle: { current: PrivacyroomHandlerHandle | null } = {
+        current: null,
+      };
+      mockBoth(
+        ...privacyroomKeysHandlers(port, {
+          initial: [FIXTURE_IDENTITY],
+          handle,
+        }),
+      );
+      await use(handle.current!);
+    },
+    { auto: true },
+  ],
 });
 
-export { expect } from "../fixtures/base";
+/** The SDK's own passphrase modal. */
+export const passphrasePrompt = (page: Page) =>
+  page.getByRole("dialog").filter({ hasText: "Enter passphrase" });
+
+/** Answers the passphrase modal with the fixture identity's passphrase. */
+export const unlock = async (page: Page) => {
+  const prompt = passphrasePrompt(page);
+  await expect(prompt).toBeVisible({ timeout: 15000 });
+  await prompt
+    .locator('input[name="passphrase"], #passphrase input')
+    .first()
+    .fill(FIXTURE_PASSPHRASE);
+  await prompt.getByRole("button", { name: "Confirm" }).click();
+  await expect(prompt).toBeHidden({ timeout: 15000 });
+};
+
+export { expect };

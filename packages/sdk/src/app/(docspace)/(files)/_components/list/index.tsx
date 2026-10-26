@@ -313,8 +313,13 @@ const List = ({
     fetchCurrentFolder,
   );
 
+  // Until the store holds this list's items the list renders its own state;
+  // afterwards the store leads, also once an action has emptied it.
+  const [isStoreSynced, setIsStoreSynced] = React.useState(false);
+
   React.useEffect(() => {
     setItems(filesList);
+    setIsStoreSynced(true);
   }, [filesList, setItems]);
 
   React.useEffect(() => {
@@ -325,8 +330,7 @@ const List = ({
     setCurrentFolder(current);
   }, [current, setCurrentFolder]);
 
-  const visibleItems =
-    filesListStore.items.length > 0 ? filesListStore.items : filesList;
+  const visibleItems = isStoreSynced ? filesListStore.items : filesList;
 
   if (visibleItems.length === 0) {
     // Filtered searches always use the standard EmptyView ("no results"

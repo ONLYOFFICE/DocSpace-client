@@ -160,14 +160,17 @@ const ClientArticleSidebar = ({
   // Every sidebar entry is described by the URL it opens, so the same target
   // can be rendered as a real <a href> (Ctrl/Cmd-click and "Open link in new
   // tab" work) and still navigate in-app on a plain click. `nav()` builds the
-  // { linkData, onClick } pair every item spreads in.
+  // { linkData, onClick } pair every item spreads in. An entry drawn as a link
+  // navigates by itself (`meta.isLink`); navigating here too pushed the same
+  // history entry twice. A section header with a sub-menu is a button and
+  // still needs it.
   const nav = React.useCallback(
     (path: string): Pick<NavSubItem, "linkData" | "onClick"> => ({
       linkData: { path },
-      onClick: () => {
+      onClick: (_item: unknown, meta?: { isLink?: boolean }) => {
         aiChatStore?.setFullscreen(false);
         onFolderNavigateRef.current?.();
-        navigate(path);
+        if (!meta?.isLink) navigate(path);
       },
     }),
     [navigate],

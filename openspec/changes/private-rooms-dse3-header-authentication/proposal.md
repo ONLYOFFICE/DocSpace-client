@@ -10,7 +10,7 @@ The DSE3 container authenticates the chunk payloads (file nonce, chunk count, in
 - Because the associated data changes, the container format version is bumped (DSE3 version 3). Version-2 containers stay readable; new uploads write version 3.
 - The parser rejects a version-3 header whose flags or sizes were altered, with the existing authentication error.
 - Re-import of a downloaded ciphertext (already supported) carries the container's version through unchanged.
-- **Decision required** before implementation: whether to migrate existing version-2 files (re-encrypt on next write, or a background re-upload) or to accept that files uploaded before the change keep unauthenticated headers. The artifacts assume "read both, write v3, no forced migration".
+- Existing version-2 files are not migrated (decided 2026-10-26): they stay readable with unauthenticated headers, and a re-import writes them as version 3.
 
 ## Capabilities
 
@@ -26,7 +26,7 @@ The DSE3 container authenticates the chunk payloads (file nonce, chunk count, in
 
 - Shared: `packages/shared/services/encryption/streaming-encryption.ts` (header builder, parser, associated-data builders), `types.ts` (version constant, flags), the DSE3 tamper tests and wire-format tests.
 - Server: the form classifier reads flag byte 0x02 at offset 6 of the unencrypted header (`FileChecker.cs`); the header layout up to the flags byte is unchanged, so the server keeps working. Any server-side parser that checks the version byte must accept 3; recorded for `private-rooms-server-hardening`.
-- SDK and doceditor: they consume the shared format code; no separate change, but the Document Server side of the editor contract must accept version 3 (see `private-rooms-editor-contract`).
+- SDK and doceditor: they consume the shared format code; no separate change, and the editor contract requires the Document Server to read versions 2 and 3 and write version 3 (`private-rooms-editor-contract`, decided 2026-10-26). Whether the desktop crypto engine parses DSE3 is asked together with task 2.0 of `private-rooms-remove-dead-api-calls`.
 - Tests: `packages/shared/services/encryption/__tests__/{dse3-tampering,wire-format,streaming-encryption}.test.ts`, upload/download integration tests.
 
 ## Out of scope
@@ -36,6 +36,8 @@ The DSE3 container authenticates the chunk payloads (file nonce, chunk count, in
 
 ## Decisions needed
 
-1. Approve the version bump to DSE3 v3 (versus extending v2 associated data in place, which would make every existing v2 file unreadable).
-2. Migration policy for existing version-2 files: none (recommended for a flagged, unreleased feature), rewrite on next edit, or background re-upload.
-3. Confirm the Document Server build that will decrypt DSE3 accepts version 3 before this ships.
+None. Decided on 2026-10-26:
+
+1. The container version is bumped to 3; extending the version-2 associated data in place would make every existing file unreadable.
+2. Existing version-2 files are not migrated.
+3. Document Server support is a requirement of `private-rooms-editor-contract` (read versions 2 and 3, write version 3), not a precondition of this change: no Document Server build decrypts DSE3 yet, so the format changes before any external consumer exists.

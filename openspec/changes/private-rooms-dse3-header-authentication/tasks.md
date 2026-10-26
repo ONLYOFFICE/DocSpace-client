@@ -2,7 +2,7 @@
 
 ## 0. Decisions (before any code)
 
-- [ ] 0.1 Record the answers to the three decisions in proposal.md (version bump, migration policy, Document Server acceptance of version 3) in design.md; verify design.md has no remaining "assumed" wording for them.
+- [x] 0.1 Record the answers to the three decisions (version bump, migration policy, Document Server acceptance of version 3): decided 2026-10-26, bump to 3, no migration, Document Server support required by `private-rooms-editor-contract`; recorded in proposal.md and design.md.
 
 ## 1. Format constants and associated data
 
@@ -23,7 +23,8 @@
 ## 4. Server and editor compatibility
 
 - [ ] 4.1 Grep `../server` for any DSE3 version check (`grep -rn "DSE3" ../server --include=*.cs`) and record the result in design.md; if a check exists, open a task in `private-rooms-server-hardening`; verify the note is present.
-- [ ] 4.2 Confirm with the Document Server team that their DSE3 parser accepts version 3 (tracked in `private-rooms-editor-contract`); verify by a recorded answer in that change's design.md before merging this change.
+- [x] 4.2 Record in `private-rooms-editor-contract` that the Document Server reads DSE3 versions 2 and 3 and writes version 3 (2026-10-26); verified by the requirement "Versioned Document Server encryption contract" and its scenario "Container versions" there.
+- [ ] 4.3 Ask the desktop developer, together with task 2.0 of `private-rooms-remove-dead-api-calls`, whether the new desktop crypto engine parses DSE3 and accepts version 3; record the answer and its date in design.md before merging.
 
 ## 5. Integration check
 
@@ -32,5 +33,5 @@
 
 ## Workflow follow-up
 
-- Do not archive before task 4.2 is answered; the archived spec would otherwise describe a format the editor cannot open.
+- Do not merge the version bump before task 4.3 is answered; the Document Server side is a requirement of `private-rooms-editor-contract` and does not hold this change.
 - Archive with `/opsx:archive private-rooms-dse3-header-authentication` after review.

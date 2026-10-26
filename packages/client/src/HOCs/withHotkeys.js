@@ -434,7 +434,7 @@ const withHotkeys = (Component) => {
         }
 
         if (isArchiveFolder) {
-          isAvailableOption("unarchive") && deleteRooms(t);
+          isAvailableOption("delete-room") && deleteRooms(t);
           return;
         }
 

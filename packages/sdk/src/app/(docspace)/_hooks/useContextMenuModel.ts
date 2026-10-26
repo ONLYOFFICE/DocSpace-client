@@ -74,6 +74,7 @@ import DotsHorizontalReactSvgUrl from "PUBLIC_DIR/images/icons/16/dots-horizonta
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
+import { ENCRYPTED_FILE_WITHHELD } from "@docspace/shared/services/private-room/private-menu-rules";
 
 import { TFileItem, TFolderItem } from "./useItemList";
 import useFolderActions from "./useFolderActions";
@@ -809,11 +810,30 @@ export default function useContextMenuModel({
       const deleteItem =
         deleteIndex >= 0 ? base.splice(deleteIndex, 1)[0] : null;
 
-      const favItem = singleFile.isFavorite
-        ? getRemoveFromFavoritesItem(singleFile)
-        : getMarkAsFavoriteItem(singleFile);
+      // Spec: private-rooms/sdk-surface, "Menu entries withheld for encrypted items".
+      if (singleFile.encrypted) {
+        const offers = (key: AVAILABLE_CONTEXT_ITEMS) =>
+          singleFile.contextOptions.includes(key);
+        const downloadIndex = base.findIndex((i) => i.key === "download");
+        if (downloadIndex >= 0 && !offers(AVAILABLE_CONTEXT_ITEMS.download)) {
+          base.splice(downloadIndex, 1);
+        }
+        if (offers(AVAILABLE_CONTEXT_ITEMS.downloadEncrypted)) {
+          base.splice(
+            base.findIndex((i) => i.key === "download") + 1,
+            0,
+            getDownloadEncryptedItem(singleFile),
+          );
+        }
+      }
 
-      base.push(favItem);
+      if (!(singleFile.encrypted && ENCRYPTED_FILE_WITHHELD.has("favorites"))) {
+        base.push(
+          singleFile.isFavorite
+            ? getRemoveFromFavoritesItem(singleFile)
+            : getMarkAsFavoriteItem(singleFile),
+        );
+      }
 
       if (
         singleFile.contextOptions.includes(
@@ -846,6 +866,7 @@ export default function useContextMenuModel({
     isRoomsFolder,
     getRoomsFolderOptions,
     getGroupContextMenuModel,
+    getDownloadEncryptedItem,
     getMarkAsFavoriteItem,
     getRemoveFromFavoritesItem,
     getRemoveFromRecentItem,

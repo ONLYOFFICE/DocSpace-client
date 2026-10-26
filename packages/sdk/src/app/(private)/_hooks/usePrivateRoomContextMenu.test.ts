@@ -141,10 +141,9 @@ describe("private-room context-menu whitelist", () => {
       expect(PRIVATE_FOLDER_CONTEXT_OPTIONS.has(C.duplicate)).toBe(false);
     });
 
-    it("is a strict subset of PRIVATE_FILE_CONTEXT_OPTIONS", () => {
-      for (const action of PRIVATE_FOLDER_CONTEXT_OPTIONS) {
-        expect(PRIVATE_FILE_CONTEXT_OPTIONS.has(action)).toBe(true);
-      }
+    it("keeps rename, which an encrypted file loses", () => {
+      expect(PRIVATE_FOLDER_CONTEXT_OPTIONS.has(C.rename)).toBe(true);
+      expect(PRIVATE_FILE_CONTEXT_OPTIONS.has(C.rename)).toBe(false);
     });
 
     it("Folder copied within a private room", () => {

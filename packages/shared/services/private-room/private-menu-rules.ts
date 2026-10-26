@@ -61,20 +61,13 @@ export type TPrivateMenuIntent =
   | "room-template";
 
 /**
- * Withheld for an encrypted file: the server only ever holds its ciphertext,
- * and nothing it would hand to a third party may leave the browser.
+ * Withheld for every encrypted file: the server only ever holds its
+ * ciphertext, and nothing it would hand to a third party may leave the
+ * browser.
  * Spec: private-rooms/file-operations, "Context-menu entries withheld for encrypted files".
  */
-export const getEncryptedFileWithheld = ({
-  mustConvert,
-  hasKeys,
-}: {
-  /** The file opens only after a server conversion. */
-  mustConvert?: boolean;
-  /** The user has an encryption key on the server. */
-  hasKeys: boolean;
-}): ReadonlySet<TPrivateMenuIntent> => {
-  const withheld = new Set<TPrivateMenuIntent>([
+export const ENCRYPTED_FILE_WITHHELD: ReadonlySet<TPrivateMenuIntent> = new Set(
+  [
     "share",
     "create-room",
     "ai",
@@ -89,7 +82,20 @@ export const getEncryptedFileWithheld = ({
     "index",
     "versions",
     "plugins",
-  ]);
+  ],
+);
+
+/** Withheld for an encrypted file, given whether it can be opened at all. */
+export const getEncryptedFileWithheld = ({
+  mustConvert,
+  hasKeys,
+}: {
+  /** The file opens only after a server conversion. */
+  mustConvert?: boolean;
+  /** The user has an encryption key on the server. */
+  hasKeys: boolean;
+}): ReadonlySet<TPrivateMenuIntent> => {
+  const withheld = new Set<TPrivateMenuIntent>(ENCRYPTED_FILE_WITHHELD);
   // Conversion runs on the server, which only ever holds the ciphertext.
   if (mustConvert || !hasKeys) withheld.add("open");
   if (!hasKeys) withheld.add("download");

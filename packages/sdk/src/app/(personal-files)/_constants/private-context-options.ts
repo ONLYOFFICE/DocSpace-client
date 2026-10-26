@@ -34,10 +34,52 @@
  */
 
 import { AVAILABLE_CONTEXT_ITEMS } from "@/app/(docspace)/_enums/context-items";
+import {
+  getEncryptedFileWithheld,
+  PRIVATE_FOLDER_WITHHELD,
+  withheldMenuKeys,
+  type TPrivateMenuIntent,
+} from "@docspace/shared/services/private-room/private-menu-rules";
 
 // Lives in (personal-files) so DocsLayout can import without inverting the
 // (personal-files) → (private) dependency direction.
-export const PRIVATE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([
+
+/** The SDK menu keys of the entries a private room withholds. */
+export const PRIVATE_MENU_KEYS: Partial<
+  Record<TPrivateMenuIntent, readonly string[]>
+> = {
+  share: [AVAILABLE_CONTEXT_ITEMS.share, AVAILABLE_CONTEXT_ITEMS.copyLink],
+  ai: [AVAILABLE_CONTEXT_ITEMS.vectorization],
+  forms: [AVAILABLE_CONTEXT_ITEMS.fillForm],
+  "custom-filter": [AVAILABLE_CONTEXT_ITEMS.customFilter],
+  "download-as": [AVAILABLE_CONTEXT_ITEMS.downloadAs],
+  favorites: [
+    AVAILABLE_CONTEXT_ITEMS.markAsFavorite,
+    AVAILABLE_CONTEXT_ITEMS.removeFromFavorites,
+  ],
+  rename: [AVAILABLE_CONTEXT_ITEMS.rename],
+  versions: [
+    AVAILABLE_CONTEXT_ITEMS.showVersionHistory,
+    AVAILABLE_CONTEXT_ITEMS.blockUnblockVersion,
+  ],
+  open: [
+    AVAILABLE_CONTEXT_ITEMS.view,
+    AVAILABLE_CONTEXT_ITEMS.pdfView,
+    AVAILABLE_CONTEXT_ITEMS.preview,
+    AVAILABLE_CONTEXT_ITEMS.openPDF,
+    AVAILABLE_CONTEXT_ITEMS.edit,
+    AVAILABLE_CONTEXT_ITEMS.editPDF,
+  ],
+  download: [AVAILABLE_CONTEXT_ITEMS.download],
+  copy: [AVAILABLE_CONTEXT_ITEMS.copy],
+  duplicate: [AVAILABLE_CONTEXT_ITEMS.duplicate],
+};
+
+/**
+ * What the SDK offers at all for an item of a private room; the light client
+ * leaves editing, sharing and forms out.
+ */
+const PRIVATE_LIGHT_CLIENT_OPTIONS = [
   AVAILABLE_CONTEXT_ITEMS.select,
   AVAILABLE_CONTEXT_ITEMS.open,
   AVAILABLE_CONTEXT_ITEMS.openLocation,
@@ -52,33 +94,26 @@ export const PRIVATE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([
   AVAILABLE_CONTEXT_ITEMS.moveTo,
   AVAILABLE_CONTEXT_ITEMS.rename,
   AVAILABLE_CONTEXT_ITEMS.delete,
-]);
+];
 
-// Members without encryption keys cannot decrypt files, so hide every action
-// that triggers a decrypt path (view/preview/open PDF/download). They keep
-// "download without decryption" (downloadEncrypted). Reference: client
-// FilesStore.js:3169-3175.
-export const PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS: ReadonlySet<string> = new Set(
-  [...PRIVATE_FILE_CONTEXT_OPTIONS].filter(
-    (key) =>
-      key !== AVAILABLE_CONTEXT_ITEMS.view &&
-      key !== AVAILABLE_CONTEXT_ITEMS.preview &&
-      key !== AVAILABLE_CONTEXT_ITEMS.openPDF &&
-      key !== AVAILABLE_CONTEXT_ITEMS.download,
-  ),
+const offeredWithout = (
+  withheld: ReadonlySet<TPrivateMenuIntent>,
+): ReadonlySet<string> => {
+  const keys = new Set(withheldMenuKeys(withheld, PRIVATE_MENU_KEYS));
+  return new Set(PRIVATE_LIGHT_CLIENT_OPTIONS.filter((key) => !keys.has(key)));
+};
+
+export const PRIVATE_FILE_CONTEXT_OPTIONS = offeredWithout(
+  getEncryptedFileWithheld({ hasKeys: true }),
 );
 
-// Folders inside a private room must not expose "duplicate": the server would
-// create an unencrypted copy of the folder tree. Reference: client
-// FilesActionsStore.js duplicateAction — silent return for folders in a
-// privacy folder.
+export const PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS = offeredWithout(
+  getEncryptedFileWithheld({ hasKeys: false }),
+);
+
 // Spec: private-rooms/sdk-surface, "Folder operations use the server path"
-export const PRIVATE_FOLDER_CONTEXT_OPTIONS: ReadonlySet<string> = new Set(
-  [...PRIVATE_FILE_CONTEXT_OPTIONS].filter(
-    (key) =>
-      key !== AVAILABLE_CONTEXT_ITEMS.duplicate &&
-      key !== AVAILABLE_CONTEXT_ITEMS.copy,
-  ),
+export const PRIVATE_FOLDER_CONTEXT_OPTIONS = offeredWithout(
+  PRIVATE_FOLDER_WITHHELD,
 );
 
 export const PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([

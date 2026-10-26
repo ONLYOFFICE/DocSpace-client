@@ -112,6 +112,28 @@ describe("RoomType", () => {
       fireEvent.keyDown(listItem, { key: "Enter" });
       expect(defaultProps.onClick).not.toHaveBeenCalled();
     });
+
+    // Enter on a disabled type swallowed the keyup that followed anywhere
+    // on the page, though nothing was chosen.
+    it("leaves the keyup to the page when a disabled type ignores the key", () => {
+      render(
+        <RoomType
+          {...defaultProps}
+          roomType={RoomsType.PublicRoom}
+          disabledPublicRoom
+        />,
+      );
+      const onWindowKeyUp = vi.fn();
+      window.addEventListener("keyup", onWindowKeyUp);
+
+      fireEvent.keyDown(screen.getByTestId("room-type-list-item"), {
+        key: "Enter",
+      });
+      fireEvent.keyUp(document.body, { key: "Enter" });
+
+      window.removeEventListener("keyup", onWindowKeyUp);
+      expect(onWindowKeyUp).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe("Dropdown Button Type", () => {

@@ -113,6 +113,8 @@ const RoomType = ({
     if (e.key !== "Enter" && e.key !== " ") return;
     if (e.target !== e.currentTarget) return;
     e.preventDefault();
+    // A disabled type does nothing, so it must not take the next keyup either.
+    if (disabled) return;
     consumeKey(e);
     e.currentTarget.click();
   };

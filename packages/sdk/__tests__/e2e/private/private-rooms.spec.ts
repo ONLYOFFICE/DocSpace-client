@@ -463,6 +463,23 @@ test.describe("(private) — rooms list & unlock", () => {
     await expect(page.getByText(SHARED_ROOM_TITLE)).toBeVisible();
     await expect(page.getByText(ROOM_TITLE)).toHaveCount(0);
   });
+
+  test("Private room opened by its generic address", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveRooms(mockBoth, port);
+
+    await page.goto(`${baseUrl}/sdk/rooms/${ROOM_ID}${OPT_IN}`);
+
+    await page.waitForURL(
+      (url) =>
+        url.pathname === `${PRIVATE_LIST}/${ROOM_ID}` && url.search === OPT_IN,
+    );
+    await expect(row(page, MEMO.serverTitle)).toBeVisible();
+  });
 });
 
 test.describe("(private) — create / upload / download / preview", () => {

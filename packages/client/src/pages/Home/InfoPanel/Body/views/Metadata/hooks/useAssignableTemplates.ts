@@ -58,6 +58,7 @@ export const useAssignableTemplates = (assigned: TEntryMetadataTemplate[]) => {
 
   return {
     templates: templates ? getUnassignedTemplates(templates, assigned) : [],
+    hasTemplates: !!templates?.some((template) => template.fields?.length),
     isLoading: templates === null,
   };
 };

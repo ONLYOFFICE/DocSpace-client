@@ -61,6 +61,8 @@
 }
 
 .emptyScreen {
+  --empty-screen-link-color: var(--accent-main);
+
   box-sizing: border-box;
   width: 100%;
   padding: 45px 16px 0;

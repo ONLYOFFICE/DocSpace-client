@@ -37,12 +37,16 @@ import EmptyFilterLightSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.r
 import EmptyFilterDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.dark.svg?url";
 import EmptyFolderLightSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg?url";
 import EmptyFolderDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg?url";
+import SettingsSvg from "PUBLIC_DIR/images/settings.desc.react.svg";
 
 import { useState } from "react";
+import { Link } from "react-router";
+import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { ActionButton } from "@onlyoffice/apps-ui-kit/components/action-button";
 import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
 import { SearchInput } from "@onlyoffice/apps-ui-kit/components/search-input";
 import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
@@ -51,6 +55,8 @@ import type {
   TEntryMetadataTemplate,
   TMetadataTemplate,
 } from "@docspace/shared/api/metadata/types";
+
+import { useStore } from "SRC_DIR/store/useStore";
 
 import { useAssignableTemplates } from "../../hooks/useAssignableTemplates";
 import { filterTemplatesByName } from "../../utils";
@@ -71,19 +77,42 @@ const TemplateList = ({
 }: TemplateListProps) => {
   const { t } = useTranslation(["Metadata", "Common"]);
   const { isBase } = useTheme();
-  const { templates, isLoading } = useAssignableTemplates(assigned);
+  const { user } = useStore("userStore");
+  const { templates, hasTemplates, isLoading } =
+    useAssignableTemplates(assigned);
   const [search, setSearch] = useState("");
 
   if (isLoading) return null;
 
   if (!templates.length) {
+    const isAdmin = !!(user?.isAdmin || user?.isOwner);
+
     return (
       <EmptyScreenContainer
         className={styles.emptyScreen}
         imageSrc={isBase ? EmptyFolderLightSvgUrl : EmptyFolderDarkSvgUrl}
         imageAlt=""
-        headerText={t("Metadata:NoTemplatesToAdd")}
-        descriptionText={t("Metadata:NoTemplatesToAddDescription")}
+        headerText={
+          hasTemplates
+            ? t("Metadata:AllTemplatesAdded")
+            : t("Metadata:NoTemplatesAvailable")
+        }
+        descriptionText={
+          isAdmin
+            ? t("Metadata:CreateTemplateInSettings")
+            : t("Metadata:AskAdminToCreateTemplate")
+        }
+        buttons={
+          isAdmin ? (
+            <ActionButton
+              as={Link}
+              icon={<SettingsSvg />}
+              label={t("Common:GoToSettings")}
+              to="/portal-settings/customization/metadata-templates"
+              data-testid="metadata_templates_settings_link"
+            />
+          ) : null
+        }
       />
     );
   }
@@ -150,4 +179,4 @@ const TemplateList = ({
   );
 };
 
-export default TemplateList;
+export default observer(TemplateList);

@@ -46,6 +46,7 @@ import {
   resolveFolderTarget,
   type TUploadTarget,
 } from "@docspace/shared/services/private-room/upload-target";
+import { sameRoomCopyNames } from "@docspace/shared/services/private-room/private-transfer";
 
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
 import {
@@ -85,6 +86,11 @@ type UseEncryptedCopyMoveReturn = {
 const loadCopyModule = () =>
   import("@docspace/shared/services/private-room/encrypted-copy");
 
+const renamed = (file: File, name: string | undefined) =>
+  new File([file], name ?? file.name, {
+    type: file.type || "application/octet-stream",
+  });
+
 export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
   const { t } = useTranslation(["Common"]);
   const { requireIdentity } = useEncryption();
@@ -106,8 +112,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
       const controller = registerCryptoOperation();
       try {
-        const { decryptEncryptedItemToFile, addCopySuffix } =
-          await loadCopyModule();
+        const { decryptEncryptedItemToFile } = await loadCopyModule();
 
         const decrypted = await decryptEncryptedItemToFile(
           {
@@ -124,11 +129,21 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
         if (controller.signal.aborted) return;
 
-        const copyFile = new File([decrypted], addCopySuffix(decrypted.name), {
-          type: decrypted.type || "application/octet-stream",
-        });
+        const copyNames = await sameRoomCopyNames(
+          [{ item, file: decrypted }],
+          folderId,
+          roomId,
+          userId,
+          identity,
+        );
 
-        await uploadFiles({ files: [copyFile], folderId, roomId });
+        if (controller.signal.aborted) return;
+
+        await uploadFiles({
+          files: [renamed(decrypted, copyNames.get(item))],
+          folderId,
+          roomId,
+        });
       } catch (error) {
         if (controller.signal.aborted) return;
         // Typed crypto errors carry precise diagnostic messages; untyped errors
@@ -182,9 +197,9 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
       const controller = registerCryptoOperation();
       const failed: { title: string; error: unknown }[] = [];
       const decryptedOut: File[] = [];
+      const decryptedIn: { item: EncryptedSourceItem; file: File }[] = [];
       try {
-        const { decryptEncryptedItemToFile, addCopySuffix } =
-          await loadCopyModule();
+        const { decryptEncryptedItemToFile } = await loadCopyModule();
 
         for (const item of files) {
           if (controller.signal.aborted) return;
@@ -205,23 +220,41 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
             if (controller.signal.aborted) return;
 
-            if (!dest.isPrivate) {
-              decryptedOut.push(decrypted);
-              continue;
-            }
+            if (dest.isPrivate) decryptedIn.push({ item, file: decrypted });
+            else decryptedOut.push(decrypted);
+          } catch (error) {
+            if (controller.signal.aborted) return;
+            failed.push({ title: item.title, error });
+          }
+        }
 
-            const sameRoom =
-              String(dest.encryptionRoomId) === String(sourceRoomId);
-            const fileToUpload = sameRoom
-              ? new File([decrypted], addCopySuffix(decrypted.name), {
-                  type: decrypted.type || "application/octet-stream",
-                })
-              : decrypted;
+        if (controller.signal.aborted) return;
 
+        if (decryptedOut.length > 0) {
+          await uploadDecrypted(decryptedOut, destFolderId);
+        }
+
+        const destRoomId = dest.encryptionRoomId as number | string;
+        const copyNames =
+          decryptedIn.length > 0 &&
+          String(destRoomId) === String(sourceRoomId)
+            ? await sameRoomCopyNames(
+                decryptedIn,
+                destFolderId,
+                destRoomId,
+                userId,
+                identity,
+              )
+            : new Map<EncryptedSourceItem, string>();
+
+        for (const { item, file } of decryptedIn) {
+          if (controller.signal.aborted) return;
+
+          try {
             const uploadResult = await uploadFiles({
-              files: [fileToUpload],
+              files: [renamed(file, copyNames.get(item))],
               folderId: destFolderId,
-              roomId: dest.encryptionRoomId as number | string,
+              roomId: destRoomId,
             });
 
             if (controller.signal.aborted) return;
@@ -236,10 +269,6 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         }
 
         if (controller.signal.aborted) return;
-
-        if (decryptedOut.length > 0) {
-          await uploadDecrypted(decryptedOut, destFolderId);
-        }
 
         if (failed.length === 1 && failed[0].error instanceof CryptoError) {
           toastr.error(getEncryptionErrorMessage(t, failed[0].error));

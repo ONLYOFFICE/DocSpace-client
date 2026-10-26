@@ -136,6 +136,20 @@ const PHOTO: TPlainFile = {
   bytes: new Uint8Array(PNG_1X1),
 };
 
+const REPORT: TPlainFile = {
+  id: 8103,
+  name: "Report.docx",
+  serverTitle: "3d8f2a61-9c47-4b1e-8a05-6f2c4e7d1b93.docx",
+  bytes: new TextEncoder().encode("Annual report, readable by the room only."),
+};
+
+const REPORT_COPY: TPlainFile = {
+  id: 8104,
+  name: "Report (1).docx",
+  serverTitle: "a71c5e08-2b94-4d3f-b6e2-91d0c8f4a527.docx",
+  bytes: new TextEncoder().encode("Annual report, its first copy."),
+};
+
 type TKeyHolder = { userId: string; publicKey: string };
 
 /** The signed-in user's key as the room access lists return it. */
@@ -656,6 +670,30 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     await expect
       .poll(() => keyHolders(room, copy.id))
       .toEqual([ALICE_ID, FIXTURE_USER_ID].sort());
+  });
+
+  test("Copy of a name that already has a copy", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    const { room } = await serveRooms(mockBoth, port, {
+      files: [REPORT, REPORT_COPY],
+    });
+    await openRoom(page, baseUrl);
+
+    await chooseTransfer(page, row(page, REPORT.serverTitle), "duplicate");
+    await unlock(page);
+
+    await expect.poll(() => room.getFiles().length).toBe(3);
+    const copy = room
+      .getFiles()
+      .find((f) => f.id !== REPORT.id && f.id !== REPORT_COPY.id)!;
+    expectStoredEncrypted(copy, REPORT.bytes);
+    await expect(
+      page.getByText("Report (2).docx", { exact: true }),
+    ).toBeVisible();
   });
 
   test("File moved within the room", async ({

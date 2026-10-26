@@ -45,6 +45,8 @@ const env = vi.hoisted(() => ({
   requireIdentity: vi.fn(async () => ({ publicKey: new Uint8Array() })),
   uploadFiles: vi.fn(async () => ({ ok: true })),
   uploadDecrypted: vi.fn(async () => {}),
+  existingNames: [] as string[],
+  decryptedName: "memo.txt",
 }));
 
 vi.mock("react-i18next", () => ({
@@ -72,10 +74,19 @@ vi.mock("@docspace/shared/api/files", () => ({
 
 vi.mock("@docspace/shared/services/private-room/encrypted-copy", () => ({
   decryptEncryptedItemToFile: vi.fn(
-    async () => new File(["plain"], "memo.txt", { type: "text/plain" }),
+    async () => new File(["plain"], env.decryptedName, { type: "text/plain" }),
   ),
-  addCopySuffix: (name: string) => name.replace(/(\.[^.]+)$/, " (1)$1"),
+  addCopySuffix: (name: string, n = 1) =>
+    name.replace(/(\.[^.]+)$/, ` (${n})$1`),
 }));
+
+vi.mock(
+  "@docspace/shared/services/private-room/encrypted-name-clash",
+  async (io) => ({
+    ...((await io()) as Record<string, unknown>),
+    listDecryptedFileNames: vi.fn(async () => env.existingNames),
+  }),
+);
 
 vi.mock("../_store/EncryptionIdentityStore", () => ({
   useEncryptionIdentityStore: () => ({ userKeys: { userId: "me" } }),
@@ -94,6 +105,7 @@ const SECTION = { id: 2, title: "Rooms" };
 const OTHER_ROOM = { id: 20, title: "Other", roomType: 5, private: true };
 const OTHER_ROOM_FOLDER = { id: 21, title: "Drafts", private: false };
 const SHARED_ROOM = { id: 30, title: "Shared", roomType: 6, private: false };
+const OWN_ROOM = { id: 10, title: "Room", roomType: 5, private: true };
 
 const MEMO = { id: 7, title: "memo.txt", viewUrl: "/memo", fileExst: ".txt" };
 
@@ -110,6 +122,9 @@ describe("useEncryptedCopyMove", () => {
     env.paths.clear();
     env.paths.set(21, [SECTION, OTHER_ROOM, OTHER_ROOM_FOLDER]);
     env.paths.set(30, [SECTION, SHARED_ROOM]);
+    env.paths.set(10, [SECTION, OWN_ROOM]);
+    env.existingNames = [];
+    env.decryptedName = "memo.txt";
     root = createRoot(document.createElement("div"));
     act(() => root?.render(<Probe />));
   });
@@ -150,6 +165,41 @@ describe("useEncryptedCopyMove", () => {
     expect(uploaded.map((f) => f.name)).toEqual(["memo.txt"]);
     expect(folderId).toBe(30);
     expect(env.uploadFiles).not.toHaveBeenCalled();
+    expect(toastr.error).not.toHaveBeenCalled();
+  });
+
+  it("Copy of a name that already has a copy", async () => {
+    env.existingNames = ["Report.docx", "Report (1).docx"];
+    env.decryptedName = "Report.docx";
+    const report = { ...MEMO, title: "Report.docx", fileExst: ".docx" };
+
+    await act(() =>
+      actions.duplicateFile({ item: report, roomId: 10, folderId: 10 }),
+    );
+    await act(() =>
+      actions.copyFiles({
+        files: [report],
+        destFolderId: 10,
+        sourceRoomId: 10,
+        uploadDecrypted: env.uploadDecrypted,
+      }),
+    );
+
+    const uploads = env.uploadFiles.mock.calls.map(
+      (call) =>
+        (call as unknown as [{ files: File[]; folderId: number; roomId: number }])[0],
+    );
+    expect(
+      uploads.map(({ files, folderId, roomId }) => ({
+        names: files.map((f) => f.name),
+        folderId,
+        roomId,
+      })),
+    ).toEqual([
+      { names: ["Report (2).docx"], folderId: 10, roomId: 10 },
+      { names: ["Report (2).docx"], folderId: 10, roomId: 10 },
+    ]);
+    expect(env.uploadDecrypted).not.toHaveBeenCalled();
     expect(toastr.error).not.toHaveBeenCalled();
   });
 

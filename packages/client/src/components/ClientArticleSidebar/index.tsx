@@ -63,6 +63,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
 
 import type {
   NavMenuGroup,
@@ -80,6 +81,7 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
+import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 import {
@@ -89,6 +91,8 @@ import {
   type FolderIds,
 } from "SRC_DIR/helpers/articleNavigation";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
+
+import styles from "./ClientArticleSidebar.module.scss";
 
 type ClientArticleSidebarProps = FolderIds & {
   userId?: string;
@@ -110,6 +114,10 @@ type ClientArticleSidebarProps = FolderIds & {
   formsInstalled?: boolean;
   agentsInstalled?: boolean;
   ensureAppsLoaded?: () => void;
+  // The Trash item offers "Empty trash" while there is something to empty.
+  trashIsEmpty?: boolean;
+  emptyTrashInProgress?: boolean;
+  setEmptyTrashDialogVisible?: (visible: boolean) => void;
   onFolderNavigate: () => void;
 };
 
@@ -126,6 +134,9 @@ const ClientArticleSidebar = ({
   formsInstalled = true,
   agentsInstalled = true,
   ensureAppsLoaded,
+  trashIsEmpty = true,
+  emptyTrashInProgress,
+  setEmptyTrashDialogVisible,
   onFolderNavigate,
   ...folderIds
 }: ClientArticleSidebarProps) => {
@@ -336,13 +347,32 @@ const ClientArticleSidebar = ({
       // Guests can't view or manage Files (their own files/Trash), so
       // that section is dropped and the top-level item opens Shared with me
       // instead of the (inaccessible) Files folder.
-      if (!isVisitor && myDocsFolder && trashFolder)
+      if (!isVisitor && myDocsFolder && trashFolder) {
+        const canEmptyTrash =
+          !trashIsEmpty && !emptyTrashInProgress && !!setEmptyTrashDialogVisible;
         children.push(
           navItem(trashFolder, {
             withTopSeparator: true,
-            ...sectionBadge(trashFolder.id, newCount(trashFolder)),
+            ...(canEmptyTrash
+              ? {
+                  showBadge: true,
+                  badgeComponent: (
+                    <button
+                      type="button"
+                      className={styles.emptyTrashBadge}
+                      title={t("Common:EmptyTrash")}
+                      aria-label={t("Common:EmptyTrash")}
+                      onClick={() => setEmptyTrashDialogVisible?.(true)}
+                      data-testid="empty-trash-badge"
+                    >
+                      <ReactSVG src={ClearTrashReactSvgUrl} aria-hidden="true" />
+                    </button>
+                  ),
+                }
+              : sectionBadge(trashFolder.id, newCount(trashFolder))),
           }),
         );
+      }
 
       const primaryFolder = myDocsFolder ?? sharedFolder;
 
@@ -601,6 +631,9 @@ const ClientArticleSidebar = ({
     favoritesFolderId,
     recycleBinFolderId,
     userId,
+    trashIsEmpty,
+    emptyTrashInProgress,
+    setEmptyTrashDialogVisible,
   ]);
 
   return (
@@ -619,6 +652,8 @@ const ClientArticleSidebarConnected = inject<TStore>(
     userStore,
     treeFoldersStore,
     filesStore,
+    filesActionsStore,
+    dialogsStore,
     clientLoadingStore,
     settingsStore,
     appsStore,
@@ -643,6 +678,9 @@ const ClientArticleSidebarConnected = inject<TStore>(
     formsInstalled: appsStore.isInstalled("ai-forms"),
     agentsInstalled: appsStore.isInstalled("ai-agents"),
     ensureAppsLoaded: appsStore.ensureLoaded,
+    trashIsEmpty: filesStore.trashIsEmpty,
+    emptyTrashInProgress: filesActionsStore.emptyTrashInProgress,
+    setEmptyTrashDialogVisible: dialogsStore.setEmptyTrashDialogVisible,
     // Same signal the old article used to show <ArticleFolderLoader />.
     isNavLoading: clientLoadingStore.showArticleLoader,
     onFolderNavigate: () => {

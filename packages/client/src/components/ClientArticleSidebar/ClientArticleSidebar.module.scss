@@ -1,0 +1,27 @@
+// The "Empty trash" badge of the Trash item: shown, as on the old article
+// item, while the pointer is over the item, and while the keyboard is on it.
+.emptyTrashBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  opacity: 0;
+
+  svg path {
+    fill: var(--nav-menu-item-icon-color, var(--icon-button-color));
+  }
+
+  :global(li:hover) &,
+  :global(li:focus-within) & {
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--nav-menu-item-icon-active-color);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+}

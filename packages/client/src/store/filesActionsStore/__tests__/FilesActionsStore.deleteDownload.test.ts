@@ -311,7 +311,7 @@ describe("FilesActionsStore — decrypted folder download", () => {
 });
 
 describe("FilesActionsStore — decrypted download of several files", () => {
-  it("names files whose decrypted names clash apart in the zip", async () => {
+  it("Decrypted names clash", async () => {
     vi.mocked(getFileEncryptionAccess).mockResolvedValue({
       fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
     } as never);

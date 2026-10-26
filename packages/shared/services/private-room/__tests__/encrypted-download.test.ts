@@ -166,7 +166,7 @@ describe("encryptedDownload", () => {
       ).toEqual(["doc.pdf", "doc (1).pdf", "doc (2).pdf"]);
     });
 
-    it("skips a suffix that another name in the list already has", () => {
+    it("Decrypted names clash: skips a suffix that another name in the list already has", () => {
       expect(
         deduplicateFileNames([
           "New document (2).docx",
@@ -182,7 +182,7 @@ describe("encryptedDownload", () => {
       ]);
     });
 
-    it("never takes the name of a later entry", () => {
+    it("Decrypted names clash: never takes the name of a later entry", () => {
       expect(deduplicateFileNames(["a.txt", "a.txt", "a (1).txt"])).toEqual([
         "a.txt",
         "a (2).txt",

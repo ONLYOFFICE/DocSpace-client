@@ -81,9 +81,15 @@ import FolderReactSvg from "PUBLIC_DIR/images/folder.react.svg";
 type RoomsEmptyViewProps = {
   isFiltered: boolean;
   isArchive?: boolean;
+  /** Where the archive's "go to rooms" action leads. */
+  roomsPath?: string;
 };
 
-const RoomsEmptyView = ({ isFiltered, isArchive }: RoomsEmptyViewProps) => {
+const RoomsEmptyView = ({
+  isFiltered,
+  isArchive,
+  roomsPath = "/rooms",
+}: RoomsEmptyViewProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase: isBaseTheme } = useTheme();
   const router = useRouter();
@@ -125,7 +131,7 @@ const RoomsEmptyView = ({ isFiltered, isArchive }: RoomsEmptyViewProps) => {
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => {
     e.preventDefault();
-    router.push("/rooms");
+    router.push(roomsPath);
   };
 
   const archiveOptions = [

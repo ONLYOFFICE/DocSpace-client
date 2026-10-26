@@ -52,6 +52,8 @@ export type PrivateRoomListOptions = {
   ordinaryRooms?: { roomId: number; title: string }[];
   /** The new-items count (`new`) of the first private room. */
   newItems?: number;
+  /** Leaves the first private room out, for an area with no private rooms. */
+  withoutPrivateRoom?: boolean;
 };
 
 const okResponse = <T>(response: T): Response =>
@@ -147,7 +149,9 @@ export const privateRoomListHandler = (
   });
 
   const folders = [
-    roomDto(opts.roomId, title, true, opts.newItems),
+    ...(opts.withoutPrivateRoom
+      ? []
+      : [roomDto(opts.roomId, title, true, opts.newItems)]),
     ...(opts.otherPrivateRooms ?? []).map((room) =>
       roomDto(room.roomId, room.title, true, 0, room.foldersCount),
     ),

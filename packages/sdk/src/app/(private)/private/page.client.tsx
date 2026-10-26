@@ -51,6 +51,7 @@ import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { OpenFolderContext } from "@/app/(docspace)/_contexts/OpenFolderContext";
 import RoomsLayout from "@/app/(rooms)/_components/rooms-layout";
 import EmptyPrivateRoomsList from "@docspace/shared/components/empty-views/empty-private-rooms-list";
+import RoomsEmptyView from "@/app/(rooms)/_components/empty-view";
 import type { TFolder } from "@docspace/shared/api/files/types";
 
 import { usePrivateRoomsPageInit } from "../_hooks/usePrivateRoomsPageInit";
@@ -167,7 +168,17 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
         titleOverride={headerTitle}
         infoPanelHeader={<PrivateInfoPanelHeader />}
         infoPanelBody={<PrivateInfoPanelBody />}
-        emptyView={<EmptyPrivateRoomsList />}
+        emptyView={
+          isArchive ? (
+            <RoomsEmptyView
+              isFiltered={false}
+              isArchive
+              roomsPath={privateRoute("/private")}
+            />
+          ) : (
+            <EmptyPrivateRoomsList />
+          )
+        }
         onPrivateInviteRoom={handlePrivateInviteRoom}
         onPrivateChangeOwner={handlePrivateChangeOwner}
         refreshRef={refreshRef}

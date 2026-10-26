@@ -36,94 +36,17 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
 
-import type {
-  TFilesSettings,
-  TGetFolder,
-} from "@docspace/shared/api/files/types";
-import type { TSettings } from "@docspace/shared/api/settings/types";
-import type { TUser } from "@docspace/shared/api/people/types";
-import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import PrivateRoomsPage from "../page.client";
 
-import { OpenFolderContext } from "@/app/(docspace)/_contexts/OpenFolderContext";
-import RoomsLayout from "@/app/(rooms)/_components/rooms-layout";
+type PrivateArchivePageProps = Omit<
+  React.ComponentProps<typeof PrivateRoomsPage>,
+  "isArchive"
+>;
 
-import { usePrivateRoomsPageInit } from "../../_hooks/usePrivateRoomsPageInit";
-import { usePrivateRoute } from "../../_hooks/usePrivateRoute";
-
-type PrivateArchivePageProps = {
-  authToken: string;
-  filesSettings: TFilesSettings;
-  folderData: TGetFolder;
-  portalSettings: TSettings;
-  filesFilter: string;
-  user?: TUser;
-};
-
-const PrivateArchivePage: React.FC<PrivateArchivePageProps> = ({
-  authToken,
-  filesSettings,
-  folderData,
-  portalSettings,
-  filesFilter,
-  user,
-}) => {
-  const router = useRouter();
-  const privateRoute = usePrivateRoute();
-  const isReady = usePrivateRoomsPageInit({
-    authToken,
-    filesSettings,
-    portalSettings,
-    user,
-  });
-
-  // Archived rooms are read-only — clicking on a folder navigates to the
-  // standard private-room files view but with archive-aware context-menu
-  // disabling all mutating actions (M3.5 usePrivateRoomContextMenu).
-  const openRoom = React.useCallback(
-    (roomId: number | string) => {
-      router.push(privateRoute(`/private/${roomId}`));
-      return true;
-    },
-    [router, privateRoute],
-  );
-
-  if (!isReady) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        <Loader type={LoaderTypes.dualRing} size="40px" />
-      </div>
-    );
-  }
-
-  const { folders, files, total, current, pathParts } = folderData;
-
-  return (
-    <OpenFolderContext.Provider value={openRoom}>
-      <RoomsLayout
-        folders={folders}
-        files={files}
-        total={total}
-        current={current}
-        pathParts={pathParts}
-        filesSettings={filesSettings}
-        portalSettings={portalSettings}
-        filesFilter={filesFilter}
-        user={user}
-        isArchive
-        isPrivate
-      />
-    </OpenFolderContext.Provider>
-  );
-};
+/** The private rooms list in its archive mode, with every private-room rule. */
+const PrivateArchivePage: React.FC<PrivateArchivePageProps> = (props) => (
+  <PrivateRoomsPage {...props} isArchive />
+);
 
 export default PrivateArchivePage;

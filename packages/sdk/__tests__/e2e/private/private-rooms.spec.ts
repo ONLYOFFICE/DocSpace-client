@@ -178,6 +178,27 @@ test.describe("(private) — rooms list & unlock", () => {
       header.getByRole("heading", { name: "Private", exact: true }),
     ).toHaveCount(0);
   });
+
+  test("No archived rooms", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+  }) => {
+    const opts = { roomId: 7001, withoutPrivateRoom: true };
+    serverRequestInterceptor.use(privateRoomListHandler(port, opts));
+    clientRequestInterceptor.use(privateRoomListHandler(port, opts));
+
+    await page.goto(`${baseUrl}${PRIVATE_ARCHIVE}${OPT_IN}`);
+    await expect(page.getByText("No archived rooms here yet")).toBeVisible();
+
+    await page.getByText("Go to rooms", { exact: true }).click();
+
+    await page.waitForURL(
+      (url) => url.pathname === PRIVATE_LIST && url.search === OPT_IN,
+    );
+  });
 });
 
 test.describe("(private) — encrypted upload / download / preview", () => {

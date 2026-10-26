@@ -166,9 +166,7 @@ export async function wsModifyFolderCreateImpl(
       file_type: getFileExtension(file.title).replace(".", ""),
     });
 
-    self.selectedFolderStore.setFilesCount(
-      self.selectedFolderStore.filesCount + 1,
-    );
+    self.selectedFolderStore.countFileCreated(file.id);
 
     setTimeout(() => {
       if (self.getFileIndex(file.id) > -1) {

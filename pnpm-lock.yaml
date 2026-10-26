@@ -3564,7 +3564,7 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-HIKuVCxfRcJEJgnUAR9gXE+U0Yeu0lmCs5wevXnqeTvUTVBkUp3fdo+qZuyaFIYQpJ0ltf4XIKUSwuDagzL6Ig==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-Nt4hd3F3hI+b2/hEZiQEub5XUbmUxWszLz1ypiihdU4Ct+i4QuCfI3/jXi05hleUWW2l3LfFV7vmSaq9XziH/w==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.0.2
     engines: {node: '>=22'}
     peerDependencies:

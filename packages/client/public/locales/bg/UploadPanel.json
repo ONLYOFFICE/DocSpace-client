@@ -2,8 +2,6 @@
   "HideInput": "Скрий",
   "QuotaExceededDuringUpload": "<0>{{uploaded}} от {{total}}</0> качени. Надвишена е квотата за съхранение — <1>вижте подробностите</1>.",
   "Ready": "Готово",
-  "RetryAfterQuotaUpgrade": "Опитайте отново след надграждане на квотата",
-  "RetryUpload": "Повторен опит",
   "UploadingAndConversion": "Качване и Преобразуване",
   "UploadingError": "Грешка при качване"
 }

@@ -90,6 +90,11 @@ export type EncryptedFilesHandlerHandle = {
   setFileOutsidePrivateRoom: (fileId: number) => void;
   /** Answers as another signed-in user until `reset`. */
   setCurrentUserId: (userId: string) => void;
+  /**
+   * The bytes a new upload may take (the room's free space); a session for a
+   * larger file is refused as the server refuses it. Null lifts the limit.
+   */
+  setFreeSpace: (bytes: number | null) => void;
   getSessions: () => UploadSessionRecord[];
   getRequests: () => RequestLog[];
   reset: () => void;
@@ -191,15 +196,34 @@ const okResponse = <T>(response: T, statusCode = 200): Response =>
     { status: statusCode, headers: { "Content-Type": "application/json" } },
   );
 
-const errorResponse = (status: number, message: string): Response =>
+const errorResponse = (
+  status: number,
+  message: string,
+  type?: string,
+): Response =>
   new Response(
     JSON.stringify({
-      error: { message },
+      error: { message, ...(type && { type }) },
       status: 1,
       statusCode: status,
     }),
     { status, headers: { "Content-Type": "application/json" } },
   );
+
+/** Mirrors CommonFileSizeComment.FilesSizeToString with the English postfixes. */
+const filesSizeToString = (size: number) => {
+  const names = ["bytes", "KB", "MB", "GB", "TB"];
+  let power = 0;
+  let result = size;
+  if (result >= 1024) {
+    power = Math.min(
+      Math.floor(Math.log(result) / Math.log(1024)),
+      names.length - 1,
+    );
+    result /= 1024 ** power;
+  }
+  return `${result.toLocaleString("en-US", { maximumFractionDigits: 2 })} ${names[power]}`;
+};
 
 const seedToRecord = (seed: EncryptedFileSeed): EncryptedFileRecord => ({
   id: seed.id,
@@ -440,6 +464,7 @@ export const encryptedFilesHandlers = (
   const requests: RequestLog[] = [];
   let roomUserKeys: RoomMemberKeyEntry[] = [...(opts.roomUserKeys ?? [])];
   let currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
+  let freeSpace: number | null = null;
   const createdOn = new Map<string, string>();
   const outsidePrivateRoom = new Set<number>();
   /** files_file_keys.create_on: set when the row is written. */
@@ -530,6 +555,9 @@ export const encryptedFilesHandlers = (
     setCurrentUserId: (userId) => {
       currentUserId = userId;
     },
+    setFreeSpace: (bytes) => {
+      freeSpace = bytes;
+    },
     getSessions: () => Array.from(sessions.values()),
     getRequests: () => [...requests],
     reset: () => {
@@ -543,6 +571,7 @@ export const encryptedFilesHandlers = (
       nextSessionId = 1;
       operations.length = 0;
       currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
+      freeSpace = null;
     },
   };
   if (opts.handle) opts.handle.current = handle;
@@ -839,6 +868,10 @@ export const encryptedFilesHandlers = (
      * .ToResponseObjectAsync(session, appendBreadCrumbs: true): a
      * ChunkedUploadSessionDto whose `path` is the breadcrumb chain of folder
      * ids, from the Rooms section down to the target folder.
+     * FileUploader.VerifyChunkedUploadAsync first refuses a file larger than
+     * the folder's maximum upload size, the room's free space included, with
+     * FileSizeComment.GetFileSizeException: a TenantQuotaException, which
+     * UnhandledExceptionMiddleware answers with 402 and the exception type.
      */
     http.post(
       `${apiBase}/files/:folderId(\\d+)/session`,
@@ -855,6 +888,14 @@ export const encryptedFilesHandlers = (
           url: new URL(request.url).pathname,
           body,
         });
+
+        if (freeSpace !== null && body.fileSize > freeSpace) {
+          return errorResponse(
+            402,
+            `The maximum file size is exceeded (${filesSizeToString(freeSpace)}).`,
+            "ASC.Core.Tenants.TenantQuotaException",
+          );
+        }
 
         const sessionId = `mock-session-${nextSessionId++}`;
         const created = new Date();

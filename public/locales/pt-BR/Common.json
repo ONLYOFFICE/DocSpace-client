@@ -1879,6 +1879,7 @@
   "Restricted": "Restrito",
   "RestrictionDownloadCopyRoom": "Não é possível desabilitar a restrição de download e cópia de dados porque essa configuração é aplicada no nível da sala para todos os arquivos.",
   "ResultStorage": "Saídas do chat",
+  "RetryAfterQuotaUpgrade": "Tentar novamente após atualizar a cota",
   "Review": "Revisão",
   "ReviewDescriptionDocument": "Visualizando, revisando, comentando.",
   "Reviewing": "revisando",

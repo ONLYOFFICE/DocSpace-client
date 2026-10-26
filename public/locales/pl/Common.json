@@ -1879,6 +1879,7 @@
   "Restricted": "Ograniczone",
   "RestrictionDownloadCopyRoom": "Nie można wyłączyć ograniczenia pobierania i kopiowania danych, ponieważ to ustawienie jest wymuszane na poziomie pokoju dla wszystkich plików.",
   "ResultStorage": "Wyniki czatu",
+  "RetryAfterQuotaUpgrade": "Ponów po uaktualnieniu limitu",
   "Review": "Recenzja",
   "ReviewDescriptionDocument": "Oglądanie, przeglądanie, komentowanie.",
   "Reviewing": "recenzowanie",

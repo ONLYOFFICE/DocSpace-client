@@ -2,8 +2,6 @@
   "HideInput": "Ocultar",
   "QuotaExceededDuringUpload": "<0>{{uploaded}} de {{total}}</0> carregado(s). Cota de armazenamento excedida — <1>ver detalhes</1>.",
   "Ready": "Concluído",
-  "RetryAfterQuotaUpgrade": "Tentar novamente após atualizar a cota",
-  "RetryUpload": "Tentar novamente",
   "UploadingAndConversion": "Upload e conversão",
   "UploadingError": "Erro de upload"
 }

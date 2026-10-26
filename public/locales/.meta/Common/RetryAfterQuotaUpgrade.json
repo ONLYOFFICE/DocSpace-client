@@ -1,21 +1,27 @@
 {
-  "key_path": "RetryUpload",
-  "content": "Retry",
-  "content_en_sha1_hash": "9f5cd8a2e8807d73efa02c844bfbca9fe552b283",
-  "created_at": "2026-05-24T17:27:44.547Z",
-  "updated_at": "2026-05-24T19:05:32.819Z",
+  "key_path": "RetryAfterQuotaUpgrade",
+  "content": "Retry after upgrading quota",
+  "content_en_sha1_hash": "5df85eae3509d58d34e4f4696553c5c13ca97064",
+  "created_at": "2026-05-24T17:27:44.548Z",
+  "updated_at": "2026-10-26T13:44:40.973Z",
   "comment": {
-    "text": "Button label in the upload panel used to re-attempt a failed file upload.",
+    "text": "Button label shown in the upload panel when a file upload fails because the storage quota has been exceeded.",
     "is_auto": true,
-    "updated_at": "2026-05-24T19:05:32.819Z",
+    "updated_at": "2026-05-24T19:05:56.683Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/PanelComponents/ErrorFile.js",
-      "line_number": 59,
-      "context": "? t(\"QuotaExceededTooltip\")\n : item.error || t(\"UploadingError\");\n \n const retryLabel = item.isQuotaError\n ? t(\"RetryAfterQuotaUpgrade\")\n : t(\"RetryUpload\");\n \n return (\n <div\n className=\"upload_panel-icon\"\n data-tooltip-id=\"system-tooltip\"",
+      "line_number": 58,
+      "context": "const tooltipContent = item.isQuotaError\n ? t(\"Common:QuotaExceededTooltip\")\n : item.error || t(\"UploadingError\");\n \n const retryLabel = item.isQuotaError\n ? t(\"Common:RetryAfterQuotaUpgrade\")\n : t(\"Common:ArbiterRetry\");\n \n return (\n <div\n className=\"upload_panel-icon\"",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/upload-panel/file-row.tsx",
+      "line_number": 137,
+      "context": "type={LinkType.action}\n className={styles.retryLink}\n onClick={item.retry}\n >\n {item.isQuotaError\n ? t(\"Common:RetryAfterQuotaUpgrade\")\n : t(\"Common:ArbiterRetry\")}\n </Link>\n ) : null}\n </>\n ) : (",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -149,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

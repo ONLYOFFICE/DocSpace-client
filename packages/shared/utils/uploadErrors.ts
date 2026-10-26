@@ -93,7 +93,11 @@ const extractType = (error: unknown): string => {
     response?: { data?: { error?: { type?: unknown } } };
   };
   const raw = candidate.response?.data?.error?.type ?? candidate.type;
-  return typeof raw === "string" ? raw.toLowerCase() : "";
+  // The server names the exception with its namespace
+  // (ASC.Core.Tenants.TenantQuotaException); compare the class name only.
+  return typeof raw === "string"
+    ? (raw.toLowerCase().split(".").pop() ?? "")
+    : "";
 };
 
 export const isQuotaError = (error: unknown): boolean => {

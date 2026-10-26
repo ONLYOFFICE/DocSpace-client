@@ -43,6 +43,7 @@ import {
   startUploadSession,
   uploadChunkSequential,
 } from "../../api/files";
+import { getUserById } from "../../api/people";
 import { getRoomEncryptionKeys } from "../../api/privacy";
 import { requestDeviceSetupHint } from "../encryption/device-setup-hint-notifier";
 import { rememberEncryptedFilename } from "../encryption/filename-cache";
@@ -160,8 +161,10 @@ export interface OrchestrateEncryptedUploadArgs
    */
   identity?: IdentityKeyPair;
   requireIdentity?: () => Promise<IdentityKeyPair | null>;
+  /** Cancels one file of the batch; the batch `signal` still cancels all. */
+  fileSignal?: (uploadId: string) => AbortSignal | undefined;
   onQuotaError?: (error: unknown) => void;
-  onFileError?: (file: File, error: unknown) => void;
+  onFileError?: (file: File, error: unknown, uploadId: string) => void;
   onFileComplete?: (file: File, result: UploadFileResult) => void;
   /**
    * Asked once, before any byte is sent, when files of the batch clash with
@@ -268,6 +271,23 @@ export const getEncryptedUploadRefusalMessage = (
     ? t("Common:EncryptionLockedUpload")
     : t("Common:EncryptionKeysRequiredForUpload");
 
+/** The members left out, each with a display name to show. */
+export async function nameSkippedMembers(
+  skipped: SkippedMemberKey[],
+): Promise<SkippedMemberKey[]> {
+  return Promise.all(
+    skipped.map(async (member) => {
+      if (member.displayName) return member;
+      try {
+        const user = await getUserById(member.userId);
+        return { ...member, displayName: user?.displayName || member.userId };
+      } catch {
+        return { ...member, displayName: member.userId };
+      }
+    }),
+  );
+}
+
 /** The message a row whose upload failed is marked with. */
 export const getEncryptedUploadErrorMessage = (t: TFunction, error: unknown) => {
   if (error instanceof EncryptedReimportError) {
@@ -292,6 +312,21 @@ class AbortedError extends Error {
     super("Aborted");
     this.name = "AbortError";
   }
+}
+
+/** A signal that aborts when either of the two does. */
+function eitherSignal(
+  a: AbortSignal | undefined,
+  b: AbortSignal | undefined,
+): AbortSignal | undefined {
+  if (!a || !b) return a ?? b;
+  if (a.aborted) return a;
+  if (b.aborted) return b;
+  const controller = new AbortController();
+  const abort = () => controller.abort();
+  a.addEventListener("abort", abort, { once: true });
+  b.addEventListener("abort", abort, { once: true });
+  return controller.signal;
 }
 
 function throwIfAborted(signal: AbortSignal | undefined): void {
@@ -776,7 +811,11 @@ async function runEncryptedUploadBatch(
   let aborted = false;
 
   for (const { file, uploadId, folderId, roomId } of entries) {
-    if (fileArgs.signal?.aborted) {
+    const signal = eitherSignal(
+      fileArgs.signal,
+      options.fileSignal?.(uploadId),
+    );
+    if (signal?.aborted) {
       aborted = true;
       results.push({
         ok: false,
@@ -808,7 +847,7 @@ async function runEncryptedUploadBatch(
             lastModified: file.lastModified,
           })
         : file,
-      { ...fileArgs, folderId, roomId },
+      { ...fileArgs, folderId, roomId, signal },
       uploadId,
     );
     results.push(result);
@@ -824,7 +863,7 @@ async function runEncryptedUploadBatch(
     }
 
     if (!result.ok && result.error) {
-      options.onFileError?.(file, result.error);
+      options.onFileError?.(file, result.error, uploadId);
       if (isQuotaError(result.error)) {
         if (!quotaError) {
           quotaError = result.error;

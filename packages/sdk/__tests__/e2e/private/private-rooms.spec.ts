@@ -600,6 +600,80 @@ test.describe("(private) — create / upload / download / preview", () => {
       .toEqual([ALICE_ID, FIXTURE_USER_ID].sort());
   });
 
+  test("Uploader declines to unlock", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    const { room } = await serveRooms(mockBoth, port, { files: [] });
+    await openRoom(page, baseUrl);
+
+    const chooser = page.waitForEvent("filechooser");
+    await page.getByTestId("main-button").click();
+    await page.getByTestId("actions_upload-files").first().click();
+    await (await chooser).setFiles({
+      name: "notes.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from("Notes that stay encrypted."),
+    });
+    const prompt = passphrasePrompt(page);
+    await expect(prompt).toBeVisible({ timeout: 15000 });
+    await prompt.getByRole("button", { name: "Cancel" }).click();
+
+    await expect(
+      page.getByText(
+        "Upload canceled: the encryption key was not unlocked. The file was not sent.",
+      ),
+    ).toBeVisible();
+    await page
+      .getByRole("dialog")
+      .filter({ hasText: "Uploading" })
+      .getByText("Error", { exact: true })
+      .hover();
+    await expect(
+      page.getByText(
+        "The file was not uploaded because your encryption key is locked. Unlock it and try again.",
+      ),
+    ).toBeVisible();
+    expect(room.getSessions()).toEqual([]);
+    expect(room.getFiles()).toEqual([]);
+  });
+
+  test("Quota exceeded mid-batch", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    const { room } = await serveRooms(mockBoth, port, { files: [] });
+    room.setFreeSpace(4096);
+    await openRoom(page, baseUrl);
+
+    const chooser = page.waitForEvent("filechooser");
+    await page.getByTestId("main-button").click();
+    await page.getByTestId("actions_upload-files").first().click();
+    await (await chooser).setFiles([
+      { name: "first.txt", mimeType: "text/plain", buffer: Buffer.from("first") },
+      {
+        name: "large.txt",
+        mimeType: "text/plain",
+        buffer: Buffer.alloc(8192, 0x62),
+      },
+      { name: "third.txt", mimeType: "text/plain", buffer: Buffer.from("third") },
+    ]);
+    await unlock(page);
+
+    await expect(page.getByText("Retry after upgrading quota")).toHaveCount(2);
+    await expect.poll(() => room.getFiles().length).toBe(1);
+    expect(
+      room
+        .getRequests()
+        .filter((r) => r.method === "POST" && r.url.endsWith("/session")),
+    ).toHaveLength(2);
+    expect(room.getSessions()).toHaveLength(1);
+  });
+
   test("Download from a private room", async ({
     page,
     baseUrl,

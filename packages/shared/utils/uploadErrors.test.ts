@@ -57,6 +57,32 @@ describe("isQuotaError", () => {
     expect(isQuotaError({ type: "RoomQuotaException" })).toBe(true);
   });
 
+  it("matches the server's quota response, its exception named with the namespace", () => {
+    expect(
+      isQuotaError({
+        response: {
+          status: 402,
+          data: {
+            status: 1,
+            statusCode: 402,
+            error: {
+              message: "The maximum file size is exceeded (1 MB).",
+              type: "ASC.Core.Tenants.TenantQuotaException",
+            },
+          },
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isQuotaError({
+        response: {
+          status: 402,
+          data: { error: { type: "ASC.Core.Billing.BillingException" } },
+        },
+      }),
+    ).toBe(false);
+  });
+
   it("matches quota-related text in response message", () => {
     expect(
       isQuotaError({

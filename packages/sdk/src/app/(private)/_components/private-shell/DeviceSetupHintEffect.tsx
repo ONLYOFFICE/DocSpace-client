@@ -42,6 +42,10 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
+import {
+  clearDeviceSetupHintHandler,
+  registerDeviceSetupHintHandler,
+} from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
@@ -57,15 +61,7 @@ const DeviceSetupHintEffect: React.FC = () => {
   const { t } = useTranslation(["Common"]);
   const { url, open, explain } = useKeysManagementLink();
 
-  React.useEffect(() => {
-    if (!keysLoaded || hasConfiguredKey) return;
-    try {
-      if (sessionStorage.getItem(DEVICE_SETUP_HINT_SESSION_KEY) === "1") return;
-      sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
-    } catch {
-      // sessionStorage throws in private-mode Safari; fall through.
-    }
-
+  const showHint = React.useCallback(() => {
     if (!url) {
       explain();
       return;
@@ -92,7 +88,24 @@ const DeviceSetupHintEffect: React.FC = () => {
       30000,
       true,
     );
-  }, [keysLoaded, hasConfiguredKey, t, url, open, explain]);
+  }, [t, url, open, explain]);
+
+  // The upload gate asks for the hint when a key-less upload is refused.
+  React.useEffect(() => {
+    registerDeviceSetupHintHandler(showHint);
+    return () => clearDeviceSetupHintHandler();
+  }, [showHint]);
+
+  React.useEffect(() => {
+    if (!keysLoaded || hasConfiguredKey) return;
+    try {
+      if (sessionStorage.getItem(DEVICE_SETUP_HINT_SESSION_KEY) === "1") return;
+      sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
+    } catch {
+      // sessionStorage throws in private-mode Safari; fall through.
+    }
+    showHint();
+  }, [keysLoaded, hasConfiguredKey, showHint]);
 
   return null;
 };

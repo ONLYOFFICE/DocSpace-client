@@ -1879,6 +1879,7 @@
   "Restricted": "制限された",
   "RestrictionDownloadCopyRoom": "この設定はすべてのファイルに対してルームレベルで強制されているため、データのダウンロードおよびコピーの制限を無効にすることはできません。",
   "ResultStorage": "チャットの出力",
+  "RetryAfterQuotaUpgrade": "容量をアップグレードしてから再試行",
   "Review": "レビュー",
   "ReviewDescriptionDocument": "閲覧、レビュー、コメント。",
   "Reviewing": "レビュー",

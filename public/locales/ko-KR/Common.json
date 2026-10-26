@@ -1879,6 +1879,7 @@
   "Restricted": "제한됨",
   "RestrictionDownloadCopyRoom": "데이터 다운로드 및 복사 제한을 해제할 수 없습니다. 이 설정은 모든 파일에 대해 방(room) 수준에서 적용되기 때문입니다.",
   "ResultStorage": "채팅 결과물",
+  "RetryAfterQuotaUpgrade": "할당량 업그레이드 후 재시도",
   "Review": "리뷰",
   "ReviewDescriptionDocument": "보기, 검토, 댓글 달기.",
   "Reviewing": "검토 중",

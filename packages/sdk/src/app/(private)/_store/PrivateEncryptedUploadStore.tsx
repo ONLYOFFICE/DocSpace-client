@@ -56,6 +56,8 @@ import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 class PrivateEncryptedUploadStore {
   quotaErrorRaised = false;
   inFlightControllers: Set<AbortController> = new Set();
+  /** Members already named in a left-out warning this session. */
+  reportedSkippedMemberIds: Set<string> = new Set();
 
   constructor() {
     makeAutoObservable(this);

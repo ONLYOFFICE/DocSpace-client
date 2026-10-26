@@ -2,8 +2,6 @@
   "HideInput": "Skrýt",
   "QuotaExceededDuringUpload": "<0>{{uploaded}} z {{total}}</0> nahráno. Překročena kvóta úložiště — <1>zobrazit podrobnosti</1>.",
   "Ready": "Hotovo",
-  "RetryAfterQuotaUpgrade": "Opakovat po upgradu kvóty",
-  "RetryUpload": "Opakovat",
   "UploadingAndConversion": "Nahrávání a konverze",
   "UploadingError": "Chyba při nahrávání"
 }

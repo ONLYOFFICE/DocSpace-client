@@ -611,6 +611,26 @@ describe("encryptedFiles mock — upload sessions (mirrors UploadController)", (
     expect(inFolder.path).toEqual([ROOMS_SECTION_ID, ROOM_ID, 9101]);
   });
 
+  it("session create refuses a file larger than the free space with 402 and the TenantQuotaException type", async () => {
+    handle.current!.setFreeSpace(1536);
+
+    const res = await fetch(SESSION_URL(ROOM_ID), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fileName: "blob.bin", fileSize: 4096, encrypted: true }),
+    });
+    const body = (await res.json()) as { error: unknown; statusCode: number };
+
+    expect(res.status).toBe(402);
+    expect(body.statusCode).toBe(402);
+    expect(body.error).toEqual({
+      message: "The maximum file size is exceeded (1.5 KB).",
+      type: "ASC.Core.Tenants.TenantQuotaException",
+    });
+    expect(handle.current!.getSessions()).toEqual([]);
+    expect((await createSession(ROOM_ID, 1024)).id).toBeTruthy();
+  });
+
   it("numbered upload answers the session DTO and never builds the file", async () => {
     const session = await createSession(ROOM_ID, 2);
 

@@ -2,8 +2,6 @@
   "HideInput": "Скрыть",
   "QuotaExceededDuringUpload": "<0>{{uploaded}} из {{total}}</0> загружено. Квота хранилища превышена — <1>подробнее</1>.",
   "Ready": "Готово",
-  "RetryAfterQuotaUpgrade": "Повторить после расширения квоты",
-  "RetryUpload": "Повторить",
   "UploadingAndConversion": "Загрузка и конвертация",
   "UploadingError": "Ошибка загрузки"
 }

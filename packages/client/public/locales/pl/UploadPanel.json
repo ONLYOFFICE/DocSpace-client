@@ -2,8 +2,6 @@
   "HideInput": "Ukryj",
   "QuotaExceededDuringUpload": "<0>{{uploaded}} z {{total}}</0> przesłano. Przekroczono limit miejsca — <1>wyświetl szczegóły</1>.",
   "Ready": "Gotowe",
-  "RetryAfterQuotaUpgrade": "Ponów po uaktualnieniu limitu",
-  "RetryUpload": "Ponów",
   "UploadingAndConversion": "Przesyłanie i konwersja",
   "UploadingError": "Błąd przesyłania"
 }

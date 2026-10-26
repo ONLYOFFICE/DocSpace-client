@@ -2,8 +2,6 @@
   "HideInput": "Paslēpt",
   "QuotaExceededDuringUpload": "<0>{{uploaded}} no {{total}}</0> augšupielādēts. Krātuves kvota pārsniegta — <1>skatīt detaļas</1>.",
   "Ready": "Pabeigts",
-  "RetryAfterQuotaUpgrade": "Mēģināt vēlreiz pēc kvotas jaunināšanas",
-  "RetryUpload": "Mēģināt vēlreiz",
   "UploadingAndConversion": "Augšupielāde un konvertēšana",
   "UploadingError": "Kļūda augšupielādē"
 }

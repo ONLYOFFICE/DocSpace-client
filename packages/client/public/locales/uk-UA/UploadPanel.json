@@ -2,8 +2,6 @@
   "HideInput": "Сховати",
   "QuotaExceededDuringUpload": "<0>{{uploaded}} із {{total}}</0> завантажено. Перевищено квоту сховища — <1>переглянути деталі</1>.",
   "Ready": "Готово",
-  "RetryAfterQuotaUpgrade": "Повторити після збільшення квоти",
-  "RetryUpload": "Повторити",
   "UploadingAndConversion": "Передавання та перетворення",
   "UploadingError": "Помилка передавання"
 }

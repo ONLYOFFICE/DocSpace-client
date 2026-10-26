@@ -43,6 +43,11 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import { CryptoError } from "@docspace/shared/services/encryption/errors";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
+import type {
+  EncryptedUploadRetryItem,
+  OrchestrateResult,
+} from "@docspace/shared/services/private-room/encrypted-upload-orchestrator";
+import type { SkippedMemberKey } from "@docspace/shared/services/private-room/member-key-verification";
 
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 
@@ -75,6 +80,11 @@ const loadOrchestrator = () =>
     "@docspace/shared/services/private-room/encrypted-upload-orchestrator"
   );
 
+const newUploadId = () =>
+  typeof crypto !== "undefined" && crypto.randomUUID
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+
 export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
   const { t } = useTranslation(["Common"]);
   const { requireIdentity, suspendAutoLock } = useEncryption();
@@ -82,102 +92,118 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
   const uploadStore = useUploadStore();
   const privateUploadStore = usePrivateEncryptedUploadStore();
   const [isUploading, setIsUploading] = React.useState(false);
+  const sendRef = React.useRef<
+    (items: EncryptedUploadRetryItem[], isRetry: boolean) => Promise<boolean>
+  >(async () => false);
 
-  const uploadFiles = React.useCallback(
-    async ({ files, folderId, roomId }: UploadFilesArgs) => {
-      if (files.length === 0) return { ok: false };
+  const reportSkippedMembers = React.useCallback(
+    async (
+      skipped: SkippedMemberKey[],
+      nameSkippedMembers: (
+        members: SkippedMemberKey[],
+      ) => Promise<SkippedMemberKey[]>,
+    ) => {
+      const reported = privateUploadStore.reportedSkippedMemberIds;
+      const fresh = (await nameSkippedMembers(skipped)).filter(
+        (member) => !reported.has(member.userId),
+      );
+      if (fresh.length === 0) return;
+      for (const member of fresh) reported.add(member.userId);
+      toastr.warning(
+        t("Common:EncryptedUploadNotSharedWith", {
+          names: fresh.map((m) => m.displayName ?? m.userId).join(", "),
+        }),
+      );
+    },
+    [privateUploadStore, t],
+  );
 
-      const userId = identityStore.userKeys?.userId;
-      const publicKey = identityStore.userKeys?.publicKey;
-      const keys = identityStore.keys;
-      const activeKey = selectUserKey(keys);
-      const publicKeyId = activeKey?.id ?? null;
-
-      if (!userId || !publicKey || !publicKeyId) {
-        toastr.error(t("Common:EncryptionKeysNotConfigured"));
-        return { ok: false };
-      }
-
-      // requireIdentity surfaces the PassphraseDialog when locked. A null
-      // return means the user cancelled — silently no-op (no toast).
-      const identity = await requireIdentity();
-      if (!identity) return { ok: false };
-
+  const send = React.useCallback(
+    async (items: EncryptedUploadRetryItem[], isRetry: boolean) => {
       const releaseAutoLock = suspendAutoLock();
-
       const controller = registerCryptoOperation();
       privateUploadStore.registerController(controller);
       privateUploadStore.setQuotaErrorRaised(false);
-
-      const initItems = files.map((f) => ({
-        uniqueId:
-          typeof crypto !== "undefined" && crypto.randomUUID
-            ? crypto.randomUUID()
-            : `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
-        fileName: f.name,
-        fileSize: f.size,
-        folderId,
-      }));
-      uploadStore.startBatch(initItems);
-      uploadStore.setPanelVisible(true);
-
       setIsUploading(true);
-      let ok = false;
+
+      const fail = (uploadId: string, message: string, isQuota = false) => {
+        if (isQuota) uploadStore.setItemQuotaError(uploadId, message);
+        else uploadStore.setItemError(uploadId, message);
+        const item = items.find((i) => i.uploadId === uploadId);
+        if (!item) return;
+        uploadStore.setItemRetry(uploadId, () => {
+          uploadStore.resetItemForRetry(uploadId);
+          void sendRef.current([item], true);
+        });
+      };
+      const quotaMessage = (error: unknown) =>
+        (error as { response?: { data?: { error?: { message?: string } } } })
+          ?.response?.data?.error?.message || t("Common:QuotaExceededTooltip");
+
       try {
-        const { orchestrateEncryptedUpload } = await loadOrchestrator();
-        const result = await orchestrateEncryptedUpload({
-          files,
-          folderId,
-          roomId,
-          identity,
-          userId,
-          publicKey,
-          publicKeyId,
+        const orchestrator = await loadOrchestrator();
+        const options = {
+          userId: identityStore.userKeys?.userId,
+          publicKey: identityStore.userKeys?.publicKey,
+          publicKeyId: selectUserKey(identityStore.keys)?.id ?? null,
+          requireIdentity,
           signal: controller.signal,
+          fileSignal: (uploadId: string) =>
+            uploadStore.items.find((i) => i.uniqueId === uploadId)
+              ?.abortController.signal,
           uploadStore: {
             files: [],
-            reportProgress: (uploadId, percent) =>
+            reportProgress: (uploadId: string, percent: number) =>
               uploadStore.updateItemProgress(uploadId, percent),
             // Translate the raw phase marker into a localised label before
             // storing it so the orchestrator stays UI-agnostic.
-            setItemLabel: (uploadId, phase) =>
+            setItemLabel: (uploadId: string, phase: string | undefined) =>
               uploadStore.setItemLabel(
                 uploadId,
                 phase === "encrypting"
                   ? t("Common:EncryptingFile")
                   : undefined,
               ),
+            markRefused: (
+              uploadId: string,
+              refusal: Parameters<
+                typeof orchestrator.getEncryptedUploadRefusalMessage
+              >[1],
+            ) =>
+              fail(
+                uploadId,
+                orchestrator.getEncryptedUploadRefusalMessage(t, refusal),
+              ),
+            markQuotaError: (uploadId: string, error: unknown) =>
+              fail(uploadId, quotaMessage(error), true),
           },
-          onQuotaError: (error) => {
+          onQuotaError: (error: unknown) => {
             privateUploadStore.setQuotaErrorRaised(true);
-            // Quota errors are server-side, not crypto: keep the server
-            // message when present, fall back to the quota tooltip.
-            const msg =
-              error instanceof Error
-                ? error.message
-                : t("Common:QuotaExceededTooltip");
-            toastr.error(msg);
+            toastr.error(quotaMessage(error));
           },
-          onFileError: (file, error) => {
-            const idx = files.indexOf(file);
-            const init = initItems[idx];
-            if (init) {
-              // Typed crypto errors carry precise diagnostic messages; untyped
-              // errors (prepare/wrap/network failures) use the prepare key since
-              // we cannot distinguish prepare vs wrap at this callback boundary.
-              const msg =
-                error instanceof CryptoError
-                  ? getEncryptionErrorMessage(t, error)
-                  : t("Common:EncryptionPrepareFailed");
-              uploadStore.setItemError(init.uniqueId, msg);
-            }
-          },
-          onFileComplete: (file) => {
-            const idx = files.indexOf(file);
-            const init = initItems[idx];
-            if (init) uploadStore.setItemUploaded(init.uniqueId);
-          },
-        });
+          onFileError: (_file: File, error: unknown, uploadId: string) =>
+            fail(uploadId, orchestrator.getEncryptedUploadErrorMessage(t, error)),
+          onFileComplete: (_file: File, fileResult: { uploadId: string }) =>
+            uploadStore.setItemUploaded(fileResult.uploadId),
+        };
+
+        const result: OrchestrateResult = isRetry
+          ? await orchestrator.retryEncryptedUploads({ ...options, items })
+          : await orchestrator.orchestrateEncryptedUpload({
+              ...options,
+              files: items.map((i) => i.file),
+              uploadIds: items.map((i) => i.uploadId),
+              folderId: items[0].folderId,
+              roomId: items[0].roomId,
+            });
+
+        if (result.refused) {
+          const notice = orchestrator.getEncryptedUploadRefusalNotice(
+            t,
+            result.refused,
+          );
+          if (notice) toastr.info(notice);
+        }
 
         if (result.aborted && !privateUploadStore.quotaErrorRaised) {
           for (const r of result.results) {
@@ -185,27 +211,39 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
           }
         }
 
-        ok =
+        if (result.skippedMembers.length > 0) {
+          await reportSkippedMembers(
+            result.skippedMembers,
+            orchestrator.nameSkippedMembers,
+          );
+        }
+
+        return (
           !result.aborted &&
+          !result.refused &&
           result.results.length > 0 &&
-          result.results.every((r) => r.ok);
+          result.results.every((r) => r.ok)
+        );
       } catch (error) {
         // Typed crypto errors carry precise diagnostic messages; untyped errors
         // (unexpected orchestrator / session failures) use the prepare key since
         // they most likely originate in the pre-upload preparation phase.
-        toastr.error(
+        const message =
           error instanceof CryptoError
             ? getEncryptionErrorMessage(t, error)
-            : t("Common:EncryptionPrepareFailed"),
-        );
+            : t("Common:EncryptionPrepareFailed");
+        toastr.error(message);
+        for (const { uploadId } of items) {
+          const row = uploadStore.items.find((i) => i.uniqueId === uploadId);
+          if (row?.status === "uploading") fail(uploadId, message);
+        }
+        return false;
       } finally {
         releaseAutoLock();
         privateUploadStore.releaseController(controller);
         releaseCryptoOperation(controller);
         setIsUploading(false);
       }
-
-      return { ok };
     },
     [
       requireIdentity,
@@ -213,8 +251,35 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
       identityStore,
       uploadStore,
       privateUploadStore,
+      reportSkippedMembers,
       t,
     ],
+  );
+  sendRef.current = send;
+
+  const uploadFiles = React.useCallback(
+    async ({ files, folderId, roomId }: UploadFilesArgs) => {
+      if (files.length === 0) return { ok: false };
+
+      const items = files.map((file) => ({
+        file,
+        uploadId: newUploadId(),
+        folderId,
+        roomId,
+      }));
+      uploadStore.startBatch(
+        items.map(({ file, uploadId }) => ({
+          uniqueId: uploadId,
+          fileName: file.name,
+          fileSize: file.size,
+          folderId,
+        })),
+      );
+      uploadStore.setPanelVisible(true);
+
+      return { ok: await send(items, false) };
+    },
+    [uploadStore, send],
   );
 
   return { uploadFiles, isUploading };

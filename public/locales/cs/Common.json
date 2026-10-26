@@ -1879,6 +1879,7 @@
   "Restricted": "Omezené",
   "RestrictionDownloadCopyRoom": "Nelze zakázat omezení stahování a kopírování dat, protože toto nastavení je vynucováno na úrovni místnosti pro všechny soubory.",
   "ResultStorage": "Výstupy chatu",
+  "RetryAfterQuotaUpgrade": "Opakovat po upgradu kvóty",
   "Review": "Prověřit",
   "ReviewDescriptionDocument": "Prohlížení, revize, komentování.",
   "Reviewing": "Prověřování",

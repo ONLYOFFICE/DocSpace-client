@@ -1879,6 +1879,7 @@
   "Restricted": "Omejeno",
   "RestrictionDownloadCopyRoom": "Prepovedi prenosa in kopiranja podatkov ni mogoče onemogočiti, saj je ta nastavitev prisiljena na ravni sobe za vse datoteke.",
   "ResultStorage": "Rezultati klepetov",
+  "RetryAfterQuotaUpgrade": "Ponovni poskus po nadgradnji kvote",
   "Review": "Preglej",
   "ReviewDescriptionDocument": "Ogled, pregled, komentiranje.",
   "Reviewing": "pregledovanje",

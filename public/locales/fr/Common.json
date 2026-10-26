@@ -1879,6 +1879,7 @@
   "Restricted": "Restreint",
   "RestrictionDownloadCopyRoom": "Vous ne pouvez pas désactiver la restriction de téléchargement et de copie des données, car ce paramètre est appliqué au niveau de la salle pour tous les fichiers.",
   "ResultStorage": "Résultats du chat",
+  "RetryAfterQuotaUpgrade": "Réessayer après la mise à niveau du quota",
   "Review": "Révision",
   "ReviewDescriptionDocument": "Lecture, révision, commentaires.",
   "Reviewing": "révision",

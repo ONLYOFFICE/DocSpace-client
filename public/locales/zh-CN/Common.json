@@ -1879,6 +1879,7 @@
   "Restricted": "受到限制",
   "RestrictionDownloadCopyRoom": "您无法关闭对下载和复制数据的限制，因为该设置已在房间内对所有文件统一生效。",
   "ResultStorage": "聊天输出",
+  "RetryAfterQuotaUpgrade": "升级配额后重试",
   "Review": "审阅",
   "ReviewDescriptionDocument": "查看、审阅、评论。",
   "Reviewing": "审阅中",

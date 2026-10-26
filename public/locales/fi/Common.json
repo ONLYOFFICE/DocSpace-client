@@ -1879,6 +1879,7 @@
   "Restricted": "Rajoitettu",
   "RestrictionDownloadCopyRoom": "Et voi poistaa rajoitusta tiedon lataamiseen ja kopiointiin, koska tämä asetus on pakotettu huoneen tasolla kaikille tiedostoille.",
   "ResultStorage": "Chat-tulokset",
+  "RetryAfterQuotaUpgrade": "Yritä uudelleen kiintiön päivityksen jälkeen",
   "Review": "Tarkastelu",
   "ReviewDescriptionDocument": "Katselu, tarkastelu, kommentointi.",
   "Reviewing": "Tarkistaminen",

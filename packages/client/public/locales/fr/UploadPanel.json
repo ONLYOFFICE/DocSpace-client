@@ -2,8 +2,6 @@
   "HideInput": "Masquer",
   "QuotaExceededDuringUpload": "<0>{{uploaded}} sur {{total}}</0> téléversés. Quota de stockage dépassé — <1>voir les détails</1>.",
   "Ready": "Effectué",
-  "RetryAfterQuotaUpgrade": "Réessayer après la mise à niveau du quota",
-  "RetryUpload": "Réessayer",
   "UploadingAndConversion": "Téléchargement et conversion",
   "UploadingError": "Erreur de téléchargement"
 }

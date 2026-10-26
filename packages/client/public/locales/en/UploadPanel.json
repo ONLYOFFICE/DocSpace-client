@@ -2,8 +2,6 @@
   "HideInput": "Hide",
   "QuotaExceededDuringUpload": "<0>{{uploaded}} of {{total}}</0> uploaded. Storage quota exceeded — <1>view details</1>.",
   "Ready": "Done",
-  "RetryAfterQuotaUpgrade": "Retry after upgrading quota",
-  "RetryUpload": "Retry",
   "UploadingAndConversion": "Uploading & Conversion",
   "UploadingError": "Uploading error"
 }

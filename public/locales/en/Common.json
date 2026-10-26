@@ -1882,6 +1882,7 @@
   "Restricted": "Restricted",
   "RestrictionDownloadCopyRoom": "You cannot disable the restriction on downloading and copying data because this setting is enforced at the room level for all files.",
   "ResultStorage": "Chat outputs",
+  "RetryAfterQuotaUpgrade": "Retry after upgrading quota",
   "Review": "Review",
   "ReviewDescriptionDocument": "Viewing, reviewing, commenting.",
   "Reviewing": "reviewing",

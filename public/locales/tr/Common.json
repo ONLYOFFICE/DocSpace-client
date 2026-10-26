@@ -1879,6 +1879,7 @@
   "Restricted": "Kısıtlı",
   "RestrictionDownloadCopyRoom": "Veri indirme ve kopyalama kısıtlamasını devre dışı bırakamazsınız çünkü bu ayar tüm dosyalar için oda düzeyinde zorunludur.",
   "ResultStorage": "Sohbet çıktıları",
+  "RetryAfterQuotaUpgrade": "Kota yükseltildikten sonra yeniden dene",
   "Review": "İnceleme",
   "ReviewDescriptionDocument": "İzleme, gözden geçirme, yorum yapma.",
   "Reviewing": "Gözden geçiriliyor",

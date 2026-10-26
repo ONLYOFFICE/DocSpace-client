@@ -1577,6 +1577,7 @@
   "OperationStopped": "De bewerking is gestopt",
   "Or": "of",
   "OrConnectDocs": "<1>of verbind {{docsName}}</1> met uw bestaande platform",
+  "QuotaExceededTooltip": "Opslagquotum overschreden. Maak ruimte vrij of upgrade uw abonnement en probeer het opnieuw.",
   "UnusedEncryptionKeysDeleted": "Ongebruikte versleutelingssleutels verwijderd",
   "UnusedEncryptionKeysNotice": "Voor uw account zijn nog {{count}} versleutelingssleutel(s) opgeslagen die niet worden gebruikt. Bestanden die alleen met deze sleutels zijn gedeeld, kunnen niet worden geopend.",
   "UnusedEncryptionKeysPartialFailure": "{{count}} ongebruikte sleutel(s) konden niet worden verwijderd. Probeer het later opnieuw.",

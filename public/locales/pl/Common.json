@@ -1577,6 +1577,7 @@
   "OperationStopped": "Operacja została zatrzymana",
   "Or": "lub",
   "OrConnectDocs": "<1>lub podłącz {{docsName}}</1> do swojej istniejącej platformy",
+  "QuotaExceededTooltip": "Przekroczono limit miejsca. Zwolnij miejsce lub uaktualnij plan, a następnie spróbuj ponownie.",
   "UnusedEncryptionKeysDeleted": "Nieużywane klucze szyfrowania zostały usunięte",
   "UnusedEncryptionKeysNotice": "Dla Twojego konta przechowywanych jest jeszcze {{count}} kluczy szyfrowania, które nie są używane. Plików udostępnionych tylko tym kluczom nie można otworzyć.",
   "UnusedEncryptionKeysPartialFailure": "Nie udało się usunąć {{count}} nieużywanych kluczy. Spróbuj ponownie później.",

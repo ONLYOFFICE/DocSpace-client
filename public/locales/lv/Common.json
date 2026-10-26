@@ -1577,6 +1577,7 @@
   "OperationStopped": "Darbība ir pārtraukta",
   "Or": "vai",
   "OrConnectDocs": "<1>vai savienojiet {{docsName}}</1> ar savu esošo platformu",
+  "QuotaExceededTooltip": "Krātuves kvota pārsniegta. Atbrīvojiet vietu vai jauniniet savu plānu, pēc tam mēģiniet vēlreiz.",
   "UnusedEncryptionKeysDeleted": "Neizmantotās šifrēšanas atslēgas ir dzēstas",
   "UnusedEncryptionKeysNotice": "Jūsu kontam ir saglabātas vēl {{count}} šifrēšanas atslēgas, kas netiek izmantotas. Failus, kas kopīgoti tikai ar tām, nevar atvērt.",
   "UnusedEncryptionKeysPartialFailure": "Neizdevās dzēst {{count}} neizmantotās atslēgas. Mēģiniet vēlreiz vēlāk.",

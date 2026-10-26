@@ -1577,6 +1577,7 @@
   "OperationStopped": "操作が停止されました",
   "Or": "または",
   "OrConnectDocs": "<1>または{{docsName}}を接続</1>して既存のプラットフォームで利用できます",
+  "QuotaExceededTooltip": "ストレージの容量制限を超えました。空き容量を確保するかプランをアップグレードしてから再試行してください。",
   "UnusedEncryptionKeysDeleted": "未使用の暗号化キーを削除しました",
   "UnusedEncryptionKeysNotice": "このアカウントには、使用されていない暗号化キーがさらに{{count}}個保存されています。それらのキーとのみ共有されたファイルは開けません。",
   "UnusedEncryptionKeysPartialFailure": "{{count}}個の未使用キーを削除できませんでした。後でもう一度お試しください。",

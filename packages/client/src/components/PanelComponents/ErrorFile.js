@@ -51,7 +51,7 @@ const ErrorFile = ({
   const placeTooltip = isRTL ? "right" : "left";
 
   const tooltipContent = item.isQuotaError
-    ? t("QuotaExceededTooltip")
+    ? t("Common:QuotaExceededTooltip")
     : item.error || t("UploadingError");
 
   const retryLabel = item.isQuotaError

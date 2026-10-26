@@ -1577,6 +1577,7 @@
   "OperationStopped": "L'opération a été arrêtée",
   "Or": "ou",
   "OrConnectDocs": "<1>ou connectez {{docsName}}</1> à votre plateforme existante",
+  "QuotaExceededTooltip": "Quota de stockage dépassé. Libérez de l'espace ou améliorez votre abonnement, puis réessayez.",
   "UnusedEncryptionKeysDeleted": "Clés de chiffrement inutilisées supprimées",
   "UnusedEncryptionKeysNotice": "{{count}} clé(s) de chiffrement supplémentaire(s) sont enregistrées pour votre compte mais ne sont pas utilisées. Les fichiers partagés uniquement avec elles ne peuvent pas être ouverts.",
   "UnusedEncryptionKeysPartialFailure": "{{count}} clé(s) inutilisée(s) n'ont pas pu être supprimées. Réessayez plus tard.",

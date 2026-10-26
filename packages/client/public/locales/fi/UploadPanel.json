@@ -1,7 +1,6 @@
 {
   "HideInput": "Piilota",
   "QuotaExceededDuringUpload": "<0>{{uploaded}} / {{total}}</0> ladattu. Tallennustilan kiintiö ylitetty — <1>näytä tiedot</1>.",
-  "QuotaExceededTooltip": "Tallennustilan kiintiö ylitetty. Vapauta tilaa tai päivitä suunnitelmasi ja yritä uudelleen.",
   "Ready": "Valmis",
   "RetryAfterQuotaUpgrade": "Yritä uudelleen kiintiön päivityksen jälkeen",
   "RetryUpload": "Yritä uudelleen",

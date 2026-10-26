@@ -1577,6 +1577,7 @@
   "OperationStopped": "La operación ha sido detenida",
   "Or": "o",
   "OrConnectDocs": "<1>o conecte {{docsName}}</1> a su plataforma actual",
+  "QuotaExceededTooltip": "Se ha superado la cuota de almacenamiento. Libere espacio o actualice su plan e inténtelo de nuevo.",
   "UnusedEncryptionKeysDeleted": "Se han eliminado las claves de cifrado no utilizadas",
   "UnusedEncryptionKeysNotice": "Su cuenta tiene {{count}} clave(s) de cifrado más almacenada(s) que no se utiliza(n). Los archivos compartidos solo con ellas no se pueden abrir.",
   "UnusedEncryptionKeysPartialFailure": "No se han podido eliminar {{count}} clave(s) no utilizada(s). Inténtelo de nuevo más tarde.",

@@ -1577,6 +1577,7 @@
   "OperationStopped": "මෙහෙයුම නැවතී ඇත",
   "Or": "හෝ",
   "OrConnectDocs": "<1>නැතහොත් {{docsName}} සම්බන්ධ කරන්න</1> ඔබේ පවතින වේදිකාවට",
+  "QuotaExceededTooltip": "ගබඩා කෝටාව ඉක්මවා ඇත. ඉඩ හළ කරන්න හෝ ඔබගේ සැලැස්ම උසස් කර නැවත උත්සාහ කරන්න.",
   "UnusedEncryptionKeysDeleted": "භාවිත නොකළ සංකේතන යතුරු මකා දමන ලදී",
   "UnusedEncryptionKeysNotice": "ඔබේ ගිණුම සඳහා භාවිත නොකරන තවත් සංකේතන යතුරු {{count}} ක් ගබඩා කර ඇත. ඒවා සමඟ පමණක් බෙදාගත් ගොනු විවෘත කළ නොහැක.",
   "UnusedEncryptionKeysPartialFailure": "භාවිත නොකළ යතුරු {{count}} ක් මැකීමට නොහැකි විය. පසුව නැවත උත්සාහ කරන්න.",

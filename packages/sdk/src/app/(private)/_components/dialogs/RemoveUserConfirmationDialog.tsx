@@ -59,7 +59,7 @@ export type RemoveUserConfirmationDialogProps = {
 const RemoveUserConfirmationDialog: React.FC<
   RemoveUserConfirmationDialogProps
 > = ({ visible, displayName, onConfirm, onClose }) => {
-  const { t, ready } = useTranslation(["People", "Common"]);
+  const { t, ready } = useTranslation(["Common"]);
   const [isLoading, setIsLoading] = React.useState(false);
 
   const handleClose = React.useCallback(() => {
@@ -81,7 +81,7 @@ const RemoveUserConfirmationDialog: React.FC<
 
   return (
     <ModalDialog isLoading={!ready} visible={visible} onClose={handleClose}>
-      <ModalDialog.Header>{t("People:RemoveUser")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:RoomMembersRemoveUser")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>
           {t("Common:RemoveUserFromEncryptedRoomWarning", { displayName })}

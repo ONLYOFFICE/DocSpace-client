@@ -113,7 +113,7 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
   onRemoved,
   onRoleChanged,
 }) => {
-  const { t } = useTranslation(["Common", "People"]);
+  const { t } = useTranslation(["Common"]);
   const { remove, guardReason, isLoading } = usePrivateRemoveMemberFlow(roomId);
   const dialogs = usePrivateDialogsStore();
   const [isRoleChanging, setIsRoleChanging] = React.useState(false);
@@ -283,7 +283,7 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
           isClickable={!isLoading}
           isDisabled={!!guardReason || isLoading}
           onClick={handleRemoveClick}
-          title={guardReason ?? t("People:RemoveUser")}
+          title={guardReason ?? t("Common:RoomMembersRemoveUser")}
         />
       ) : null}
     </div>

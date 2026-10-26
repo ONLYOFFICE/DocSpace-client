@@ -76,7 +76,7 @@ const loadOrchestrator = () =>
   );
 
 export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
-  const { t } = useTranslation(["Common", "UploadPanel"]);
+  const { t } = useTranslation(["Common"]);
   const { requireIdentity, suspendAutoLock } = useEncryption();
   const identityStore = useEncryptionIdentityStore();
   const uploadStore = useUploadStore();
@@ -155,7 +155,7 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
             const msg =
               error instanceof Error
                 ? error.message
-                : t("UploadPanel:QuotaExceededTooltip");
+                : t("Common:QuotaExceededTooltip");
             toastr.error(msg);
           },
           onFileError: (file, error) => {

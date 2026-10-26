@@ -1577,6 +1577,7 @@
   "OperationStopped": "Operace byla zastavena",
   "Or": "nebo",
   "OrConnectDocs": "<1>nebo propojte {{docsName}}</1> se svou existující platformou",
+  "QuotaExceededTooltip": "Překročena kvóta úložiště. Uvolněte místo nebo upgradujte svůj plán, a poté to zkuste znovu.",
   "UnusedEncryptionKeysDeleted": "Nepoužívané šifrovací klíče byly odstraněny",
   "UnusedEncryptionKeysNotice": "Pro váš účet je uloženo ještě {{count}} šifrovacích klíčů, které se nepoužívají. Soubory sdílené pouze s nimi nelze otevřít.",
   "UnusedEncryptionKeysPartialFailure": "{{count}} nepoužívaných klíčů nebylo možné odstranit. Zkuste to později.",

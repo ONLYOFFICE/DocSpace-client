@@ -1577,6 +1577,7 @@
   "OperationStopped": "Operácia bola zastavená",
   "Or": "alebo",
   "OrConnectDocs": "<1>alebo prepojte {{docsName}}</1> so svojou existujúcou platformou",
+  "QuotaExceededTooltip": "Kvóta úložiska bola prekročená. Uvoľnite miesto alebo upgradujte plán a potom to skúste znova.",
   "UnusedEncryptionKeysDeleted": "Nepoužívané šifrovacie kľúče boli odstránené",
   "UnusedEncryptionKeysNotice": "Pre váš účet je uložených ešte {{count}} šifrovacích kľúčov, ktoré sa nepoužívajú. Súbory zdieľané iba s nimi nie je možné otvoriť.",
   "UnusedEncryptionKeysPartialFailure": "{{count}} nepoužívaných kľúčov sa nepodarilo odstrániť. Skúste to neskôr.",

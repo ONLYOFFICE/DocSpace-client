@@ -1577,6 +1577,7 @@
   "OperationStopped": "Operacija je bila ustavljena",
   "Or": "ali",
   "OrConnectDocs": "<1>ali povežite {{docsName}}</1> s svojo obstoječo platformo",
+  "QuotaExceededTooltip": "Presežena kvota za shranjevanje. Sprostite prostor ali nadgradite načrt, nato poskusite znova.",
   "UnusedEncryptionKeysDeleted": "Neuporabljeni šifrirni ključi so izbrisani",
   "UnusedEncryptionKeysNotice": "Za vaš račun je shranjenih še {{count}} šifrirnih ključev, ki se ne uporabljajo. Datotek, ki so bile deljene samo z njimi, ni mogoče odpreti.",
   "UnusedEncryptionKeysPartialFailure": "{{count}} neuporabljenih ključev ni bilo mogoče izbrisati. Poskusite znova pozneje.",

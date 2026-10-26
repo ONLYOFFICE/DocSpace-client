@@ -1577,6 +1577,7 @@
   "OperationStopped": "Əməliyyat dayandırıldı",
   "Or": "və ya",
   "OrConnectDocs": "<1>ya da {{docsName}} qoşun</1> mövcud platformanıza",
+  "QuotaExceededTooltip": "Yaddaş kvotası aşıldı. Yer boşaldın və ya planı təkmilləşdirin, sonra yenidən cəhd edin.",
   "UnusedEncryptionKeysDeleted": "İstifadə olunmayan şifrələmə açarları silindi",
   "UnusedEncryptionKeysNotice": "Hesabınız üçün daha {{count}} şifrələmə açarı saxlanılır, lakin istifadə olunmur. Yalnız onlarla paylaşılan faylları açmaq mümkün deyil.",
   "UnusedEncryptionKeysPartialFailure": "İstifadə olunmayan {{count}} açarı silmək mümkün olmadı. Bir az sonra yenidən cəhd edin.",

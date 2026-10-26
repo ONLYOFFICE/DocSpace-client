@@ -1577,6 +1577,7 @@
   "OperationStopped": "Operațiunea a fost oprită",
   "Or": "sau",
   "OrConnectDocs": "<1>sau conectați {{docsName}}</1> la platforma dvs. existentă",
+  "QuotaExceededTooltip": "Cota de stocare a fost depășită. Eliberați spațiu sau actualizați planul, apoi reîncercați.",
   "UnusedEncryptionKeysDeleted": "Cheile de criptare neutilizate au fost șterse",
   "UnusedEncryptionKeysNotice": "Pentru contul dvs. sunt stocate încă {{count}} chei de criptare care nu sunt utilizate. Fișierele partajate doar cu ele nu pot fi deschise.",
   "UnusedEncryptionKeysPartialFailure": "{{count}} chei neutilizate nu au putut fi șterse. Încercați din nou mai târziu.",

@@ -26,7 +26,7 @@
 
 ## 5. Translations
 
-- [ ] 5.1 Move the `People`, `UploadPanel` and `Files` keys the private surface renders into Common, update the client and SDK call sites, run `translate-stale` and `translate-locales`, then `cd common/tests && npx vitest run test/locales.test.js`; verify green for all 31 languages and no raw key in the SDK private pages (unit test asserting translated text)
+- [x] 5.1 Move the `People`, `UploadPanel` and `Files` keys the private surface renders into Common, update the client and SDK call sites, run `translate-stale` and `translate-locales`, then `cd common/tests && npx vitest run test/locales.test.js`; verify green for all 31 languages and no raw key in the SDK private pages (unit test asserting translated text)
 
 ## 6. End-to-end coverage
 

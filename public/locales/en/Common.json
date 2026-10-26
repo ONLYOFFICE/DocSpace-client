@@ -1580,6 +1580,7 @@
   "OperationStopped": "The operation has been stopped",
   "Or": "or",
   "OrConnectDocs": "<1>or connect {{docsName}}</1> to your existing platform",
+  "QuotaExceededTooltip": "Storage quota exceeded. Free up space or upgrade your plan, then retry.",
   "UnusedEncryptionKeysDeleted": "Unused encryption keys deleted",
   "UnusedEncryptionKeysNotice": "{{count}} more encryption key(s) are stored for your account but not used. Files shared only with them cannot be opened.",
   "UnusedEncryptionKeysPartialFailure": "{{count}} unused key(s) could not be deleted. Try again later.",

@@ -1577,6 +1577,7 @@
   "OperationStopped": "Der Vorgang wurde gestoppt",
   "Or": "oder",
   "OrConnectDocs": "<1>oder verbinden Sie {{docsName}}</1> mit Ihrer bestehenden Plattform",
+  "QuotaExceededTooltip": "Speicherplatz überschritten. Geben Sie Speicherplatz frei oder upgraden Sie Ihren Plan, und versuchen Sie es dann erneut.",
   "UnusedEncryptionKeysDeleted": "Ungenutzte Verschlüsselungsschlüssel gelöscht",
   "UnusedEncryptionKeysNotice": "Für Ihr Konto sind {{count}} weitere Verschlüsselungsschlüssel gespeichert, die nicht verwendet werden. Dateien, die nur mit ihnen geteilt wurden, können nicht geöffnet werden.",
   "UnusedEncryptionKeysPartialFailure": "{{count}} ungenutzte Schlüssel konnten nicht gelöscht werden. Versuchen Sie es später erneut.",

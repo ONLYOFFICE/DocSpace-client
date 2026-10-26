@@ -1577,6 +1577,7 @@
   "OperationStopped": "İşlem durduruldu",
   "Or": "veya",
   "OrConnectDocs": "<1>ya da {{docsName}} bağlayın</1> mevcut platformunuza",
+  "QuotaExceededTooltip": "Depolama kotası aşıldı. Alan açın veya planınızı yükseltin, ardından tekrar deneyin.",
   "UnusedEncryptionKeysDeleted": "Kullanılmayan şifreleme anahtarları silindi",
   "UnusedEncryptionKeysNotice": "Hesabınız için kullanılmayan {{count}} şifreleme anahtarı daha depolanıyor. Yalnızca bu anahtarlarla paylaşılan dosyalar açılamaz.",
   "UnusedEncryptionKeysPartialFailure": "Kullanılmayan {{count}} anahtar silinemedi. Daha sonra tekrar deneyin.",

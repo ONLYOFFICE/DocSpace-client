@@ -1577,6 +1577,7 @@
   "OperationStopped": "تم إيقاف العملية",
   "Or": "أو",
   "OrConnectDocs": "<1>أو قم بتوصيل {{docsName}}</1> بمنصتك الحالية",
+  "QuotaExceededTooltip": "تم تجاوز حصة التخزين. أفرغ مساحة أو قم بترقية خطتك، ثم أعد المحاولة.",
   "UnusedEncryptionKeysDeleted": "تم حذف مفاتيح التشفير غير المستخدمة",
   "UnusedEncryptionKeysNotice": "يوجد {{count}} مفتاح (مفاتيح) تشفير إضافي مخزّن لحسابك ولكنه غير مستخدم. لا يمكن فتح الملفات التي تمت مشاركتها معها فقط.",
   "UnusedEncryptionKeysPartialFailure": "تعذر حذف {{count}} مفتاح (مفاتيح) غير مستخدم. حاول مرة أخرى لاحقًا.",

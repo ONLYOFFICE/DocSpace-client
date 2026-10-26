@@ -1577,6 +1577,7 @@
   "OperationStopped": "Operacioni është ndaluar",
   "Or": "ose",
   "OrConnectDocs": "<1>ose lidhni {{docsName}}</1> me platformën tuaj ekzistuese",
+  "QuotaExceededTooltip": "Kuota e ruajtjes u tejkalua. Lironi hapësirë ose përmirësoni planin tuaj, pastaj provoni përsëri.",
   "UnusedEncryptionKeysDeleted": "Çelësat e papërdorur të kriptimit u fshinë",
   "UnusedEncryptionKeysNotice": "Për llogarinë tuaj ruhen edhe {{count}} çelës kriptimi që nuk përdoren. Skedarët e ndarë vetëm me ta nuk mund të hapen.",
   "UnusedEncryptionKeysPartialFailure": "{{count}} çelës të papërdorur nuk mund të fshiheshin. Provoni përsëri më vonë.",

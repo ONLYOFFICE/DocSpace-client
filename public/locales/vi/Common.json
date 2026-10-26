@@ -1577,6 +1577,7 @@
   "OperationStopped": "Thao tác đã bị dừng",
   "Or": "hoặc",
   "OrConnectDocs": "<1>hoặc kết nối {{docsName}}</1> với nền tảng hiện có của bạn",
+  "QuotaExceededTooltip": "Đã vượt quá hạn ngạch lưu trữ. Hãy giải phóng dung lượng hoặc nâng cấp gói, rồi thử lại.",
   "UnusedEncryptionKeysDeleted": "Đã xóa các khóa mã hóa không dùng",
   "UnusedEncryptionKeysNotice": "Tài khoản của bạn còn lưu thêm {{count}} khóa mã hóa không được sử dụng. Không thể mở các tệp chỉ được chia sẻ với những khóa này.",
   "UnusedEncryptionKeysPartialFailure": "Không thể xóa {{count}} khóa không dùng. Vui lòng thử lại sau.",

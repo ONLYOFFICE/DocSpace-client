@@ -1577,6 +1577,7 @@
   "OperationStopped": "Toiminto on pysäytetty",
   "Or": "tai",
   "OrConnectDocs": "<1>tai yhdistä {{docsName}}</1> nykyiseen alustaasi",
+  "QuotaExceededTooltip": "Tallennustilan kiintiö ylitetty. Vapauta tilaa tai päivitä suunnitelmasi ja yritä uudelleen.",
   "UnusedEncryptionKeysDeleted": "Käyttämättömät salausavaimet poistettu",
   "UnusedEncryptionKeysNotice": "Tilillesi on tallennettu vielä {{count}} salausavainta, joita ei käytetä. Vain niiden kanssa jaettuja tiedostoja ei voi avata.",
   "UnusedEncryptionKeysPartialFailure": "{{count}} käyttämätöntä avainta ei voitu poistaa. Yritä myöhemmin uudelleen.",

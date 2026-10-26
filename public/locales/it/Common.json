@@ -1577,6 +1577,7 @@
   "OperationStopped": "L'operazione è stata interrotta",
   "Or": "o",
   "OrConnectDocs": "<1>oppure collega {{docsName}}</1> alla tua piattaforma esistente",
+  "QuotaExceededTooltip": "Quota di archiviazione superata. Liberare spazio o aggiornare il piano, quindi riprovare.",
   "UnusedEncryptionKeysDeleted": "Chiavi di crittografia inutilizzate eliminate",
   "UnusedEncryptionKeysNotice": "Per il tuo account sono memorizzate altre {{count}} chiavi di crittografia non utilizzate. I file condivisi solo con esse non possono essere aperti.",
   "UnusedEncryptionKeysPartialFailure": "Impossibile eliminare {{count}} chiavi inutilizzate. Riprova più tardi.",

@@ -1577,6 +1577,7 @@
   "OperationStopped": "操作已停止",
   "Or": "或",
   "OrConnectDocs": "<1>或接入{{docsName}}</1>到您现有的平台",
+  "QuotaExceededTooltip": "存储配额已超限。请释放空间或升级套餐，然后重试。",
   "UnusedEncryptionKeysDeleted": "已删除未使用的加密密钥",
   "UnusedEncryptionKeysNotice": "您的账户还存储了 {{count}} 个未使用的加密密钥。仅与这些密钥共享的文件无法打开。",
   "UnusedEncryptionKeysPartialFailure": "有 {{count}} 个未使用的密钥无法删除。请稍后重试。",

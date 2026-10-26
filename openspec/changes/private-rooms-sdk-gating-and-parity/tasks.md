@@ -16,7 +16,7 @@
 ## 3. Document creation in SDK private rooms
 
 - [x] 3.1 Offer document, spreadsheet and presentation in `packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx` for private rooms when keys exist, calling `packages/shared/services/private-room/encrypted-file-creation.ts`; verify with a unit test on the private menu model and `cd packages/sdk && pnpm exec vitest run docs-layout`
-- [ ] 3.2 Enable the SDK E2E case for creating a document in a private room in `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`; verify with `cd packages/sdk && pnpm exec playwright test e2e/private`
+- [x] 3.2 Enable the SDK E2E case for creating a document in a private room in `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`; verify with `cd packages/sdk && pnpm exec playwright test e2e/private`
 
 ## 4. Archive page and folder transfers
 

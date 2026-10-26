@@ -54,6 +54,7 @@
 import type { Locator, Page } from "@playwright/test";
 
 import {
+  emptyTemplateHandler,
   encryptedFilesHandlers,
   privacyroomAccessHandlers,
   privateRoomListHandler,
@@ -440,6 +441,35 @@ test.describe("(private) — rooms list & unlock", () => {
 });
 
 test.describe("(private) — create / upload / download / preview", () => {
+  test("Document created", async ({ page, baseUrl, port, mockBoth }) => {
+    const { room } = await serveRooms(mockBoth, port, { files: [] });
+    mockBoth(emptyTemplateHandler(port));
+    await openRoom(page, baseUrl);
+
+    await page.getByTestId("main-button").click();
+    await page.getByTestId("actions_new-document").first().click();
+    const createDialog = page
+      .getByRole("dialog")
+      .filter({ hasText: "Document" });
+    await createDialog.getByRole("textbox").fill("Plan");
+    await createDialog
+      .getByRole("button", { name: "Create", exact: true })
+      .click();
+    await unlock(page);
+
+    await expect.poll(() => room.getFiles().length).toBe(1);
+    const [created] = room.getFiles();
+    expect(created.serverTitle).not.toContain("Plan");
+    expect(created.serverTitle.endsWith(".docx")).toBe(true);
+    expect(created.encrypted).toBe(true);
+    expect(isDSE3Format(created.bytes!)).toBe(true);
+    await expect
+      .poll(() => keyHolders(room, created.id))
+      .toEqual([ALICE_ID, FIXTURE_USER_ID].sort());
+
+    await expect(row(page, "Plan.docx")).toBeVisible();
+  });
+
   test("Member uploads a file", async ({ page, baseUrl, port, mockBoth }) => {
     const { room } = await serveRooms(mockBoth, port, { files: [] });
     const notes = new TextEncoder().encode("Notes that stay encrypted.");

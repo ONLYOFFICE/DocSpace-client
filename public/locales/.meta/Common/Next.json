@@ -3,7 +3,7 @@
   "content": "Next",
   "content_en_sha1_hash": "bc981983e7f547dc62e19a1e383acfe00782a6d5",
   "created_at": "2025-05-19T21:30:46.809Z",
-  "updated_at": "2026-10-01T08:23:21.760Z",
+  "updated_at": "2026-10-23T12:28:45.526Z",
   "comment": {
     "text": "This is a button label that advances the user to the next step in a multi-step process, such as a wizard, pagination, or a guided tour.",
     "is_auto": true,
@@ -13,20 +13,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Tour/useTour.ts",
-      "line_number": 180,
+      "line_number": 184,
       "context": "},\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n },\n });\n \n useEffect(() => {\n if (isMobileView && tourStore.isRunning) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 347,
+      "line_number": 367,
       "context": ") : null}\n <QuickActions\n items={createItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n </section>\n \n {moduleItems.length > 0 ? (\n <section data-tour-id=\"dashboard-apps\" className={styles.section}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/index.js",
-      "line_number": 752,
+      "line_number": 761,
       "context": "className={styles.quickActions}\n isLoading={showFilterLoader}\n onClose={onHideQuickActions}\n closeLabel={t(\"Common:DisableQuickActionsOnAllPages\")}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n dataTestId=\"quick-actions\"\n />\n </Section.SectionBanner>\n ) : null}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/index.tsx",
+      "line_number": 131,
+      "context": ") : (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:Next\")}\n isDisabled={!selected}\n onClick={() => openForm()}\n testId=\"metadata_template_next_button\"\n />\n )}",
       "module": "/packages/client"
     },
     {

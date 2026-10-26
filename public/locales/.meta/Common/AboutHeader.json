@@ -3,7 +3,7 @@
   "content": "About this program",
   "content_en_sha1_hash": "56fb7336f231f3007d1a564b2c67ede83691a9e3",
   "created_at": "2025-05-26T07:15:39.902Z",
-  "updated_at": "2026-05-15T15:37:40.214Z",
+  "updated_at": "2026-10-22T16:09:36.886Z",
   "comment": {
     "text": "This is the title of the \"About\" dialog, which displays information about the program.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/components/about-dialog/index.tsx",
-      "line_number": 66,
+      "line_number": 67,
       "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n isLarge\n >\n <ModalDialog.Header>{t(\"AboutHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.bodyContent}>\n <AboutContent\n buildVersionInfo={buildVersionInfo}\n previewData={previewData}",
       "module": "/packages/shared"
     }

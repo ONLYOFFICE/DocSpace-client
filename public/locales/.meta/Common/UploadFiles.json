@@ -3,7 +3,7 @@
   "content": "Upload files",
   "content_en_sha1_hash": "41aca16f905ad31d0eec695b710915a4892e116f",
   "created_at": "2026-04-03T21:51:34.730Z",
-  "updated_at": "2026-10-01T08:23:21.737Z",
+  "updated_at": "2026-10-22T16:09:36.803Z",
   "comment": {
     "text": "This is a button label that initiates the process of uploading files to the system.",
     "is_auto": true,
@@ -37,19 +37,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 177,
+      "line_number": 178,
       "context": "isSeparator: true,\n },\n {\n id: \"actions_upload-files\",\n key: \"upload-files\",\n label: t(\"Common:UploadFiles\"),\n icon: ActionsUploadReactSvgUrl,\n onClick: onUploadFiles,\n },\n {\n id: \"actions_upload-folder\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 177,
+      "line_number": 178,
       "context": "isSeparator: true,\n },\n {\n id: \"actions_upload-files\",\n key: \"upload-files\",\n label: t(\"Common:UploadFiles\"),\n icon: ActionsUploadReactSvgUrl,\n onClick: onUploadFiles,\n },\n {\n id: \"actions_upload-folder\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 177,
+      "line_number": 178,
       "context": "isSeparator: true,\n },\n {\n id: \"actions_upload-files\",\n key: \"upload-files\",\n label: t(\"Common:UploadFiles\"),\n icon: ActionsUploadReactSvgUrl,\n onClick: onUploadFiles,\n },\n {\n id: \"actions_upload-folder\",",
       "module": "/packages/sdk"
     }

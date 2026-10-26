@@ -1,0 +1,29 @@
+{
+  "key_path": "LimitBelowSpentLifetime",
+  "content": "<1>Spent {{spent}} so far.</1> Saving a {{amount}} limit pauses AI requests until it is raised.",
+  "content_en_sha1_hash": "3365cb39ca12f07a80fac77ad20d17873fe349c9",
+  "created_at": "2026-10-22T16:09:09.399Z",
+  "updated_at": "2026-10-22T16:10:38.032Z",
+  "comment": {
+    "text": "Warning under an AI spending limit form with the 'lifetime' period when the entered amount is lower than what was already spent; <1></1> wraps the bold first sentence. {{spent}} and {{amount}} are money amounts. AI requests stay paused until the limit is raised.",
+    "is_auto": true,
+    "updated_at": "2026-10-22T16:10:38.032Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeAILimitDialog/index.tsx",
+      "line_number": 177,
+      "context": "components={components}\n />\n ) : (\n <Trans\n t={t}\n i18nKey=\"Common:LimitBelowSpentLifetime\"\n values={values}\n components={components}\n />\n )}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

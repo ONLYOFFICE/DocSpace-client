@@ -3,7 +3,7 @@
   "content": "Commercial",
   "content_en_sha1_hash": "b48513e4d112b083333d204170e504fdb1a362c0",
   "created_at": "2025-05-19T21:30:43.578Z",
-  "updated_at": "2026-05-15T14:00:06.923Z",
+  "updated_at": "2026-10-22T16:09:36.975Z",
   "comment": {
     "text": "This is a label indicating the license type of the software. It appears in the \"About\" dialog to specify that the current DocSpace instance is a commercial version.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/about-dialog/About.content.tsx",
-      "line_number": 63,
-      "context": "logoText,\n }: IContentProps) => {\n const { t } = useTranslation(\"Common\");\n const { isBase } = useTheme();\n const isCommercial = !standalone || isEnterprise;\n const license = isCommercial ? t(\"Common:Commercial\") : \"AGPL-3.0\";\n const linkRepo = \"https://github.com/ONLYOFFICE/DocSpace\";\n const linkDocs = \"https://github.com/ONLYOFFICE/DocumentServer\";\n \n const companyName = previewData\n ? previewData.companyName",
+      "line_number": 90,
+      "context": "const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !isBase, true);\n \n const secondaryColor = \"var(--about-secondary-text-color)\";\n \n const isCommercial = !standalone || isEnterprise;\n const license = isCommercial ? t(\"Common:Commercial\") : \"AGPL-3.0\";\n \n // SaaS links its legal pages next to the logo, the same two entries the\n // sign-up page uses; a server shows its software license there instead.\n // A page without a configured URL is left out.\n const legalLinks = [",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Modified",
   "content_en_sha1_hash": "19a532c8bc61c311f583455c80ffe37067bbc9bb",
   "created_at": "2025-05-19T21:30:55.319Z",
-  "updated_at": "2026-06-03T09:30:05.060Z",
+  "updated_at": "2026-10-21T10:17:45.757Z",
   "comment": {
     "text": "This is a column header in a table view, indicating the last modification date of an item. It appears as a short label.",
     "is_auto": true,
@@ -33,6 +33,12 @@
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 308,
       "context": "// onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Modified\",\n title: t(\"Common:ByLastModified\"),\n enable: modifiedColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TableView/TableHeader.tsx",
+      "line_number": 78,
+      "context": "enable: true,\n resizable: true,\n },\n {\n key: \"Modified\",\n title: t(\"Common:ByLastModified\"),\n enable: true,\n resizable: true,\n },\n {\n key: \"Visibility\",",
       "module": "/packages/client"
     },
     {

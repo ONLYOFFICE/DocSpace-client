@@ -38,8 +38,8 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
-import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
+import KnowledgeNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.knowledge.disabled.dark.svg";
+import KnowledgeNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.knowledge.disabled.light.svg";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { Text } from "@onlyoffice/apps-ui-kit/components";
@@ -167,9 +167,9 @@ const KnowledgeDisabledContainer = (props) => {
     title: titleRoomNoAccess,
     description: isFrame ? "" : descriptionRoomNoAccess,
     icon: theme.isBase ? (
-      <ChatNoAccessRightsLightIcon />
+      <KnowledgeNoAccessRightsLightIcon />
     ) : (
-      <ChatNoAccessRightsDarkIcon />
+      <KnowledgeNoAccessRightsDarkIcon />
     ),
     options: getOptions(),
   };
@@ -213,4 +213,3 @@ export default inject(
     };
   },
 )(withTranslation(["Common"])(observer(KnowledgeDisabledContainer)));
-

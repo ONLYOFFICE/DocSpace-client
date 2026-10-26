@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-10-07T14:48:38.448Z",
+  "updated_at": "2026-10-22T16:09:36.807Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -37,8 +37,8 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 426,
-      "context": "// Active rooms listing), so the item points at the dedicated /forms route\n // scoped to that search area.\n if (roomsFolder) {\n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n ...nav(searchAreaUrl(\"/forms/filter\", RoomSearchArea.Forms)),\n ...(formsFolder\n ? sectionBadge(panelFolderId(formsFolder), newCount(formsFolder))\n : {}),",
+      "line_number": 449,
+      "context": "// Active rooms listing), so the item points at the dedicated /forms route\n // scoped to that search area.\n if (roomsFolder && formsInstalled) {\n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n ...nav(searchAreaUrl(\"/forms/filter\", RoomSearchArea.Forms)),\n ...(formsFolder\n ? sectionBadge(panelFolderId(formsFolder), newCount(formsFolder))\n : {}),",
       "module": "/packages/client"
     },
     {
@@ -49,19 +49,19 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 652,
+      "line_number": 659,
       "context": "sectionName: t(\"Common:Rooms\"),\n },\n forms: {\n link: actions.onGoToForms(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:Forms\"),\n },\n agents: {\n link: actions.onGoToAgents(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:AIAgents\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 652,
+      "line_number": 659,
       "context": "sectionName: t(\"Common:Rooms\"),\n },\n forms: {\n link: actions.onGoToForms(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:Forms\"),\n },\n agents: {\n link: actions.onGoToAgents(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:AIAgents\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 210,
+      "line_number": 212,
       "context": "*/\n export const getSectionAppName = (\n t: TTranslation,\n filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isAgentsSectionScope(filterFolderType)) return t(\"Common:AIAgents\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };",
       "module": "/packages/client"
     },
@@ -73,20 +73,20 @@
     },
     {
       "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 117,
-      "context": "alwaysOn: false,\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n href: \"/ai-forms\",\n supported: true,\n alwaysOn: false,\n },",
+      "line_number": 122,
+      "context": "alwaysOn: false,\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n alwaysOn: false,\n },\n ...(aiServicesEnabled\n ? [",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/AiForms/index.tsx",
-      "line_number": 109,
-      "context": "roomId,\n ensureAppsLoaded,\n fetchAppSettings,\n }: AiFormsProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:Forms\");\n const [searchParams, setSearchParams] = useSearchParams();\n const [settingsChecked, setSettingsChecked] = React.useState(false);\n const [showSetupDialog, setShowSetupDialog] = React.useState(false);\n const lastSdkSectionRef = React.useRef<string | null>(null);",
+      "line_number": 111,
+      "context": "ensureAppsLoaded,\n fetchAppSettings,\n logoText,\n }: AiFormsProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:Forms\", logoText);\n const [searchParams, setSearchParams] = useSearchParams();\n const [settingsChecked, setSettingsChecked] = React.useState(false);\n const [showSetupDialog, setShowSetupDialog] = React.useState(false);\n const lastSdkSectionRef = React.useRef<string | null>(null);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 181,
-      "context": "),\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n installed: true,\n href: \"/forms/filter\",\n // A form set is a form-filling room, so it goes through the same\n // create-room dialog, opened on the FormRoom type.",
+      "line_number": 227,
+      "context": "),\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n href: \"/forms/filter\",\n // A form set is a form-filling room, so it goes through the same\n // create-room dialog, opened on the FormRoom type.\n ...withInstallState(",
       "module": "/packages/client"
     },
     {
@@ -97,13 +97,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/LocationCell.tsx",
-      "line_number": 129,
+      "line_number": 130,
       "context": "/>\n ) : (\n path.map((pathPart, i) => {\n const partTitle =\n i === 0 && isFormsSectionRoot\n ? t(\"Common:Forms\")\n : pathPart.title;\n \n return (\n <Text\n key={pathPart.id}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 784,
+      "line_number": 785,
       "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (getCategoryType(location) === CategoryType.Forms)\n return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");",
       "module": "/packages/client"
     },
@@ -116,31 +116,31 @@
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
       "line_number": 98,
-      "context": "</div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n </div>\n );",
+      "context": "</div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
       "line_number": 80,
-      "context": "<div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"",
+      "context": "<div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
       "line_number": 80,
-      "context": "<div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"",
+      "context": "<div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesStore/fetch.helpers.ts",
-      "line_number": 304,
+      "line_number": 310,
       "context": "// root path part \"Rooms\". On the /forms route that crumb already\n // navigates to the Forms list (see onClickFolder -> moveToRoomsPage),\n // so it must be labelled Forms to match where it leads.\n const crumbTitle =\n isRootRoom && window.location.pathname.startsWith(\"/forms\")\n ? i18n.t(\"Common:Forms\")\n : title;\n \n let shared: boolean | undefined;\n let quotaLimit: number | undefined;\n let usedSpace: number | undefined;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
       "line_number": 175,
-      "context": "defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n defaultValue:\n \"Add files from {{files}}, {{rooms}}, {{forms}}, or other {{aiAgents}}\",\n }),\n icon: <UploadPDFFormIcon />,",
+      "context": "defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n defaultValue:\n \"Add files from {{files}}, {{rooms}}, {{forms}}, or other AI agents\",\n }),\n icon: <UploadPDFFormIcon />,\n onClick: onUploadFromDocSpace,",
       "module": "/packages/sdk"
     },
     {

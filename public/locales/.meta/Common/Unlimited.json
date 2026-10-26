@@ -3,7 +3,7 @@
   "content": "Unlimited",
   "content_en_sha1_hash": "b8bef37b7153b5665e94cf9b212c8708eb06db1f",
   "created_at": "2025-05-19T21:30:49.415Z",
-  "updated_at": "2026-10-01T08:23:21.757Z",
+  "updated_at": "2026-10-22T16:09:36.797Z",
   "comment": {
     "text": "This is a label for an option in a dropdown or a button that indicates a feature or setting has no limits.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/AILimit/index.tsx",
+      "line_number": 112,
+      "context": "const spent = limit && currency ? format(limit.amountConsumed) : \"\";\n \n const current =\n limit && currency && limit.amountValue !== null\n ? getLimitLabel(t, limit.period, format(limit.amountValue))\n : t(\"Common:Unlimited\");\n \n const options: TOption[] = [\n { key: CHANGE_KEY, label: t(\"Common:ChangeAILimit\") },\n { key: CURRENT_KEY, label: current },\n ];",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/SpaceQuota/index.js",
       "line_number": 71,
@@ -37,7 +43,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 798,
+      "line_number": 801,
       "context": "export const getConvertedQuota = (\n t: (key: string) => string,\n bytes: number,\n withoutSizeName: boolean = false,\n ) => {\n if (bytes === -1) return t(\"Common:Unlimited\");\n return getConvertedSize(t, bytes, withoutSizeName);\n };\n \n export const getSpaceQuotaAsText = (\n t: (key: string) => string,",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Failed to load the editor preview. Check the instance address and secret key.",
   "content_en_sha1_hash": "63f2e2a3a0a84e56db9a52bd1361c493c251de7b",
   "created_at": "2026-08-24T22:29:57.012Z",
-  "updated_at": "2026-08-24T22:37:04.680Z",
+  "updated_at": "2026-10-22T16:09:36.923Z",
   "comment": {
     "text": "Error text in an empty state container that appears when the editor preview fails to sign. It instructs the user to verify the instance address and secret key.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Preview.tsx",
-      "line_number": 196,
+      "line_number": 198,
       "context": "{editorError ? (\n <EmptyServerErrorContainer\n withReload={editorError === \"load\"}\n description={\n editorError === \"sign\"\n ? t(\"DocsConnect:EditorPreviewFailed\")\n : undefined\n }\n />\n ) : (\n <>",
       "module": "/packages/client"
     }

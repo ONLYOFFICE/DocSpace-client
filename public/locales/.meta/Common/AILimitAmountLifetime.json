@@ -1,0 +1,29 @@
+{
+  "key_path": "AILimitAmountLifetime",
+  "content": "{{amount}} lifetime",
+  "content_en_sha1_hash": "e02423eaf94c2349435038efe366726a4c228afd",
+  "created_at": "2026-10-22T16:08:49.061Z",
+  "updated_at": "2026-10-22T16:10:38.032Z",
+  "comment": {
+    "text": "Option in the AI limit dropdown of a user row in Contacts showing the user's current AI spending limit; {{amount}} is a formatted money amount (e.g. $5.00). Short label meaning a one-time total limit for the whole time, with no reset.",
+    "is_auto": true,
+    "updated_at": "2026-10-22T16:10:38.032Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AILimit/index.tsx",
+      "line_number": 68,
+      "context": "case \"Week\":\n return t(\"Common:AILimitAmountPerWeek\", { amount });\n case \"Month\":\n return t(\"Common:AILimitAmountPerMonth\", { amount });\n case \"Lifetime\":\n return t(\"Common:AILimitAmountLifetime\", { amount });\n default:\n return t(\"Common:AILimitAmountPerDay\", { amount });\n }\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

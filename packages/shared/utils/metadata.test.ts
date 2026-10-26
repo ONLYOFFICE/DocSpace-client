@@ -1,0 +1,254 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { describe, it, expect, beforeAll, afterAll, vi } from "vitest";
+import { Settings } from "luxon";
+
+import { FolderType, MetadataFieldType } from "../enums";
+import type { TMetadataValue } from "../api/metadata/types";
+import {
+  getMetadataDate,
+  getMetadataInput,
+  isMetadataNumber,
+  isMetadataRootSupported,
+  isMetadataSupported,
+  parseMetadataFilters,
+  parseMetadataTemplateId,
+  toMetadataValue,
+} from "./metadata";
+
+const field = (type: MetadataFieldType, value?: TMetadataValue) => ({
+  id: 7,
+  type,
+  value,
+});
+
+describe("getMetadataDate", () => {
+  beforeAll(() => {
+    Settings.defaultZone = "America/New_York";
+  });
+
+  afterAll(() => {
+    Settings.defaultZone = "system";
+  });
+
+  it("keeps the stored UTC day whatever the tenant offset", () => {
+    expect(getMetadataDate("2026-09-15T03:00:00.0000000+03:00")).toBe(
+      "2026-09-15",
+    );
+    expect(getMetadataDate("2026-09-14T19:00:00.0000000-05:00")).toBe(
+      "2026-09-15",
+    );
+    expect(getMetadataDate("2026-09-15T00:00:00.000Z")).toBe("2026-09-15");
+  });
+
+  it("returns an empty string for a missing date", () => {
+    expect(getMetadataDate(undefined)).toBe("");
+    expect(getMetadataDate("")).toBe("");
+  });
+});
+
+describe("isMetadataNumber", () => {
+  it("accepts safe integers only", () => {
+    expect(isMetadataNumber("1250000")).toBe(true);
+    expect(isMetadataNumber("-5")).toBe(true);
+    expect(isMetadataNumber("1.5")).toBe(false);
+    expect(isMetadataNumber("1e3")).toBe(false);
+    expect(isMetadataNumber("abc")).toBe(false);
+    expect(isMetadataNumber("")).toBe(false);
+    expect(isMetadataNumber("9007199254740993")).toBe(false);
+  });
+});
+
+describe("toMetadataValue / getMetadataInput", () => {
+  it("round-trips a date through the server time zone", () => {
+    const date = field(MetadataFieldType.Date);
+
+    expect(toMetadataValue(date, "2026-09-15")).toEqual({
+      fieldId: 7,
+      dateValue: "2026-09-15T00:00:00.000Z",
+    });
+    expect(
+      getMetadataInput(
+        field(MetadataFieldType.Date, {
+          dateValue: "2026-09-15T03:00:00.0000000+03:00",
+        }),
+      ),
+    ).toBe("2026-09-15");
+  });
+
+  it("converts numbers and text", () => {
+    const number = field(MetadataFieldType.Number);
+
+    expect(toMetadataValue(number, "1250000")).toEqual({
+      fieldId: 7,
+      numberValue: 1250000,
+    });
+    expect(
+      getMetadataInput(field(MetadataFieldType.Number, { numberValue: 42 })),
+    ).toBe("42");
+    expect(toMetadataValue(field(MetadataFieldType.String), "ACME")).toEqual({
+      fieldId: 7,
+      stringValue: "ACME",
+    });
+  });
+
+  it("sends only the field id to clear an empty scalar", () => {
+    for (const type of [
+      MetadataFieldType.String,
+      MetadataFieldType.Number,
+      MetadataFieldType.Date,
+    ]) {
+      expect(toMetadataValue(field(type), "")).toEqual({ fieldId: 7 });
+      expect(toMetadataValue(field(type), "  ")).toEqual({ fieldId: 7 });
+    }
+  });
+
+  it("passes option ids through for choice fields", () => {
+    const multi = field(MetadataFieldType.MultiChoice);
+
+    expect(toMetadataValue(multi, ["a", "b"])).toEqual({
+      fieldId: 7,
+      optionIds: ["a", "b"],
+    });
+    expect(toMetadataValue(multi, [])).toEqual({ fieldId: 7, optionIds: [] });
+    expect(
+      getMetadataInput(
+        field(MetadataFieldType.SingleChoice, { optionIds: ["a"] }),
+      ),
+    ).toEqual(["a"]);
+  });
+
+  it("reads missing values as empty inputs", () => {
+    expect(getMetadataInput(field(MetadataFieldType.String))).toBe("");
+    expect(getMetadataInput(field(MetadataFieldType.Number))).toBe("");
+    expect(getMetadataInput(field(MetadataFieldType.Date))).toBe("");
+    expect(getMetadataInput(field(MetadataFieldType.MultiChoice))).toEqual([]);
+  });
+});
+
+describe("isMetadataSupported", () => {
+  it("accepts portal entries outside the trash", () => {
+    expect(
+      isMetadataSupported({ id: 5, rootFolderType: FolderType.USER }),
+    ).toBe(true);
+    expect(
+      isMetadataSupported({ id: 5, rootFolderType: FolderType.Rooms }),
+    ).toBe(true);
+  });
+
+  it("rejects third-party, trash, private and AI agent entries", () => {
+    expect(isMetadataSupported({ id: "box-1" })).toBe(false);
+    expect(isMetadataSupported({ id: 5, providerKey: "Box" })).toBe(false);
+    expect(
+      isMetadataSupported({ id: 5, rootFolderType: FolderType.TRASH }),
+    ).toBe(false);
+    expect(
+      isMetadataSupported({ id: 5, rootFolderType: FolderType.Privacy }),
+    ).toBe(false);
+    expect(
+      isMetadataSupported({ id: 5, rootFolderType: FolderType.AIAgents }),
+    ).toBe(false);
+  });
+
+  it("rejects private rooms, their folders and encrypted files", () => {
+    expect(
+      isMetadataSupported({
+        id: 5,
+        rootFolderType: FolderType.Rooms,
+        private: true,
+      }),
+    ).toBe(false);
+    expect(
+      isMetadataSupported({
+        id: 6,
+        rootFolderType: FolderType.Rooms,
+        encrypted: true,
+      }),
+    ).toBe(false);
+  });
+
+  it("leaves section roots to the listings, which filter there", () => {
+    expect(isMetadataRootSupported(FolderType.USER)).toBe(true);
+    expect(isMetadataRootSupported(FolderType.AIAgents)).toBe(false);
+  });
+
+  it("rejects section roots", () => {
+    expect(
+      isMetadataSupported({
+        id: 5,
+        parentId: 0,
+        rootFolderType: FolderType.USER,
+      }),
+    ).toBe(false);
+    expect(
+      isMetadataSupported({
+        id: 6,
+        parentId: 5,
+        rootFolderType: FolderType.USER,
+      }),
+    ).toBe(true);
+  });
+});
+
+describe("metadata filter URL values", () => {
+  it("reads a template id only when it is a positive integer", () => {
+    expect(parseMetadataTemplateId("5")).toBe(5);
+    expect(parseMetadataTemplateId(undefined)).toBeNull();
+    expect(parseMetadataTemplateId("abc")).toBeNull();
+    expect(parseMetadataTemplateId("0")).toBeNull();
+  });
+
+  it("reads conditions from JSON and drops empty or broken lists", () => {
+    const conditions = [{ fieldId: 1, op: "eq", value: "ACME" }];
+
+    expect(parseMetadataFilters(JSON.stringify(conditions))).toEqual(
+      conditions,
+    );
+    expect(parseMetadataFilters("[]")).toBeNull();
+    expect(parseMetadataFilters(JSON.stringify([null, 5, ...conditions]))).toEqual(
+      conditions,
+    );
+    expect(parseMetadataFilters("[null]")).toBeNull();
+    expect(parseMetadataFilters(undefined)).toBeNull();
+
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      expect(parseMetadataFilters("not json")).toBeNull();
+    } finally {
+      error.mockRestore();
+    }
+  });
+});

@@ -114,8 +114,12 @@ import DocsMainButton from "../main-button";
 import VersionHistoryPanel from "../version-history-panel";
 import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";
 
-import useDocsActions from "../../_hooks/useDocsActions";
+import useDocsActions, {
+  type TDocumentExtension,
+} from "../../_hooks/useDocsActions";
 import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
+
+import { getPrivateCreateMenu } from "./private-menu";
 import useTrashActions from "../../_hooks/useTrashActions";
 import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
@@ -185,6 +189,12 @@ type DocsLayoutProps = {
   isArchive?: boolean;
   /** Override the upload pipeline (private rooms swap in encrypted upload). */
   uploadFilesToFolder?: (files: FileList | File[]) => Promise<void>;
+  /** Creates documents in place of the editor (private rooms create them encrypted). */
+  createFileInFolder?: (
+    folderId: number | string,
+    title: string,
+    extension: TDocumentExtension,
+  ) => Promise<boolean>;
   /** Root-room id for HPKE-Auth unwrap of encrypted previews. */
   currentRoomId?: number | string | null;
   /** Whether the current user has loaded their E2EE key pair. */
@@ -219,6 +229,7 @@ const DocsLayoutCore = observer(
     isPrivate,
     isArchive,
     uploadFilesToFolder: uploadFilesToFolderOverride,
+    createFileInFolder,
     currentRoomId,
     hasEncryptionKeys,
     ai,
@@ -258,6 +269,7 @@ const DocsLayoutCore = observer(
 
     const docsActions = useDocsActions({
       uploadFilesToFolderOverride,
+      createFileOverride: createFileInFolder,
     });
     const {
       uploadFilesToFolder,
@@ -290,11 +302,11 @@ const DocsLayoutCore = observer(
 
     const desktopModel = React.useMemo(() => {
       if (!isPrivate) return defaultDesktopModel;
-      const allowed = new Set(["new-folder", "separator-1", "upload-files"]);
-      return defaultDesktopModel.filter((item) =>
-        allowed.has(String(item.key)),
+      return getPrivateCreateMenu(
+        defaultDesktopModel,
+        !!hasEncryptionKeys && !!createFileInFolder,
       );
-    }, [isPrivate, defaultDesktopModel]);
+    }, [isPrivate, defaultDesktopModel, hasEncryptionKeys, createFileInFolder]);
     // Private rooms swap the document/PDF tiles for the encrypted-room set
     // (new folder + upload). Archived private rooms are read-only, so the
     // banner is hidden upstream via `isActionButtonEnabled`.

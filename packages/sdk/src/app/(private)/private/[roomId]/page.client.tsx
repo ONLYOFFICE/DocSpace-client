@@ -64,6 +64,7 @@ import { usePrivateRoute } from "../../_hooks/usePrivateRoute";
 import { usePrivateRoomFilesStore } from "../../_store/PrivateRoomFilesStore";
 import { useEncryptionIdentityStore } from "../../_store/EncryptionIdentityStore";
 import { useEncryptedUpload } from "../../_hooks/useEncryptedUpload";
+import { useEncryptedFileCreation } from "../../_hooks/useEncryptedFileCreation";
 import { useEncryptedDownload } from "../../_hooks/useEncryptedDownload";
 import { useEncryptedCopyMove } from "../../_hooks/useEncryptedCopyMove";
 import {
@@ -100,6 +101,7 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   const identityStore = useEncryptionIdentityStore();
   const navigationStore = useNavigationStore();
   const { uploadFiles } = useEncryptedUpload();
+  const { createFile } = useEncryptedFileCreation(roomId);
   const { downloadFile: decryptAndSaveFile, downloadZip: decryptAndSaveZip } =
     useEncryptedDownload();
   const {
@@ -273,6 +275,7 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
           uploadFilesToFolder={
             isArchive ? undefined : handleEncryptedUpload
           }
+          createFileInFolder={isArchive ? undefined : createFile}
           currentRoomId={roomId}
           infoPanelHeader={<PrivateInfoPanelHeader />}
           infoPanelBody={<PrivateInfoPanelBody />}

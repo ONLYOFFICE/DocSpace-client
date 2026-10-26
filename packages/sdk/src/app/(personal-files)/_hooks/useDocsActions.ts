@@ -82,9 +82,25 @@ const getDefaultFileName = (
 const DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
 const DEFAULT_UPLOAD_THREADS = 3;
 
+export type TDocumentExtension = "docx" | "xlsx" | "pptx";
+
+const isDocumentType = (
+  type: CreateFileDialogType,
+): type is TDocumentExtension =>
+  type === "docx" || type === "xlsx" || type === "pptx";
+
 type UseDocsActionsOptions = {
   /** Replaces the default chunked upload (e.g., encrypted upload). */
   uploadFilesToFolderOverride?: (files: FileList | File[]) => Promise<void>;
+  /**
+   * Creates documents in place of the editor's create route (private rooms
+   * create them encrypted); resolves to whether the file was created.
+   */
+  createFileOverride?: (
+    folderId: number | string,
+    title: string,
+    extension: TDocumentExtension,
+  ) => Promise<boolean>;
 };
 
 export default function useDocsActions(options?: UseDocsActionsOptions) {
@@ -166,6 +182,26 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     return navigationStore.currentFolderId;
   }, [navigationStore]);
 
+  const createFileOverride = options?.createFileOverride;
+
+  const createDocument = useCallback(
+    async (
+      folderId: number | string,
+      title: string,
+      extension: TDocumentExtension,
+    ) => {
+      if (!createFileOverride) return;
+      setIsCreating(true);
+      try {
+        if (await createFileOverride(folderId, title, extension))
+          router.refresh();
+      } finally {
+        setIsCreating(false);
+      }
+    },
+    [createFileOverride, router],
+  );
+
   const openCreateDialog = useCallback(
     (type: CreateFileDialogType) => {
       const folderId = getFolderId();
@@ -173,7 +209,9 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
 
       if (filesSettings?.keepNewFileName) {
         const name = getDefaultFileName(type, t);
-        if (type === "folder") {
+        if (createFileOverride && isDocumentType(type)) {
+          void createDocument(folderId, name, type);
+        } else if (type === "folder") {
           setIsCreating(true);
           createFolder(folderId, name)
             .then(() => router.refresh())
@@ -192,7 +230,15 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
       setDialogType(type);
       setDialogVisible(true);
     },
-    [getFolderId, t, filesSettings?.keepNewFileName, router, navigateToCreate],
+    [
+      getFolderId,
+      t,
+      filesSettings?.keepNewFileName,
+      router,
+      navigateToCreate,
+      createFileOverride,
+      createDocument,
+    ],
   );
 
   const closeCreateDialog = useCallback(() => {
@@ -203,6 +249,12 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     async (name: string) => {
       const folderId = getFolderId();
       if (!folderId) return;
+
+      if (createFileOverride && isDocumentType(dialogType)) {
+        setDialogVisible(false);
+        await createDocument(folderId, name, dialogType);
+        return;
+      }
 
       if (dialogType !== "folder") {
         setDialogVisible(false);
@@ -221,7 +273,14 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
         setIsCreating(false);
       }
     },
-    [getFolderId, dialogType, router, navigateToCreate],
+    [
+      getFolderId,
+      dialogType,
+      router,
+      navigateToCreate,
+      createFileOverride,
+      createDocument,
+    ],
   );
 
   const doUpload = useCallback(

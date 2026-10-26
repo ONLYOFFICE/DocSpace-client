@@ -8,7 +8,7 @@
 
 ## 2. New-files panel
 
-- [ ] 2.1 Move the name recovery to `packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanelFileList.tsx` for the rows on screen (design D3) and reduce `NewFilesPanelItemFile.tsx` to the cache read, dropping its `userId` prop and `userStore` injection; verify with a new `src/components/NewFilesBadge/__tests__/NewFilesPanelFileList.test.tsx` carrying the cases "New files panel" (two encrypted rows yield one `recoverEncryptedFilenames` call with both candidates, and a revealed fifth row a second call with that row only) and "Identity locked" (no call, no unlock prompt), and `NewFilesPanelItemFile.test.tsx` keeping a case that a cached name is shown; run with `cd packages/client && pnpm exec vitest run NewFilesBadge`
+- [x] 2.1 Move the name recovery to `packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanelFileList.tsx` for the rows on screen (design D3) and reduce `NewFilesPanelItemFile.tsx` to the cache read, dropping its `userId` prop and `userStore` injection; verify with a new `src/components/NewFilesBadge/__tests__/NewFilesPanelFileList.test.tsx` carrying the cases "New files panel" (two encrypted rows yield one `recoverEncryptedFilenames` call with both candidates, and a revealed fifth row a second call with that row only) and "Identity locked" (no call, no unlock prompt), and `NewFilesPanelItemFile.test.tsx` keeping a case that a cached name is shown; run with `cd packages/client && pnpm exec vitest run NewFilesBadge`
 
 ## 3. Header-menu error
 

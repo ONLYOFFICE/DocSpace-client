@@ -126,7 +126,6 @@ export type NewFilesPanelItemFileInjectStore = {
   filesSettingsStore: FilesSettingsStore;
   filesActionsStore: FilesActionStore;
   filesStore: FilesStore;
-  userStore: UserStore;
 };
 
 type GetIcon = FilesSettingsStore["getIcon"];
@@ -135,9 +134,6 @@ export type NewFilesPanelItemFileProps = {
   item: TFile;
   isRooms: boolean;
   onClose: VoidFunction;
-  /** The room that holds the file. */
-  roomId?: Nullable<string | number>;
-  userId?: string;
 
   getIcon?: GetIcon;
   checkAndOpenLocationAction?: CheckAndOpenLocationAction;
@@ -150,10 +146,15 @@ export type NewFilesPanelItemFileProps = {
   displayFileExtension?: boolean;
 };
 
+export type NewFilesPanelFileListInjectStore = {
+  userStore: UserStore;
+};
+
 export type NewFilesPanelFileListProps = {
   items: TFile[];
   isRooms: boolean;
   onClose: VoidFunction;
   /** The room that holds the files. */
   roomId?: Nullable<string | number>;
+  userId?: string;
 };

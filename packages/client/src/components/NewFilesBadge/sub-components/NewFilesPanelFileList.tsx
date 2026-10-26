@@ -34,23 +34,34 @@
  */
 
 import React from "react";
+import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useEncryptedFilenameRecovery } from "@docspace/shared/hooks/useResolvedFileTitle";
 
 import { NewFilesPanelItemFile } from "./NewFilesPanelItemFile";
-import { NewFilesPanelFileListProps } from "../NewFilesBadge.types";
+import {
+  NewFilesPanelFileListInjectStore,
+  NewFilesPanelFileListProps,
+} from "../NewFilesBadge.types";
 
-export const NewFilesPanelFileList = ({
+const NewFilesPanelFileListComponent = ({
   items,
   isRooms,
   onClose,
   roomId,
+  userId,
 }: NewFilesPanelFileListProps) => {
   const { t } = useTranslation(["Common"]);
 
   const [showMore, setShowMore] = React.useState(false);
+
+  useEncryptedFilenameRecovery(showMore ? items : items.slice(0, 3), {
+    userId,
+    roomId,
+  });
 
   return (
     <div className="file-items-container">
@@ -94,10 +105,15 @@ export const NewFilesPanelFileList = ({
             item={item}
             onClose={onClose}
             isRooms={isRooms}
-            roomId={roomId}
           />
         );
       })}
     </div>
   );
 };
+
+export const NewFilesPanelFileList = inject(
+  ({ userStore }: NewFilesPanelFileListInjectStore) => ({
+    userId: userStore.user?.id,
+  }),
+)(observer(NewFilesPanelFileListComponent));

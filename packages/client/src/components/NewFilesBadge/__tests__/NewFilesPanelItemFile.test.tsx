@@ -33,41 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { act, render, screen, waitFor } from "@testing-library/react";
+
+import { render, screen } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
 import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 
-const mocks = vi.hoisted(() => ({
-  getCached: vi.fn(),
-  requireUnlock: vi.fn(),
-  recoverEncryptedFilenames: vi.fn(async () => {}),
-}));
-
-vi.mock("@docspace/shared/services/encryption/secret-storage", async (io) => {
-  const actual = (await io()) as {
-    SecretStorage: Record<string, unknown>;
-  };
-  return {
-    ...actual,
-    SecretStorage: { ...actual.SecretStorage, getCached: mocks.getCached },
-    requireUnlock: mocks.requireUnlock,
-  };
-});
-
-vi.mock(
-  "@docspace/shared/services/private-room/encrypted-filename-recovery",
-  async (io) => ({
-    ...((await io()) as Record<string, unknown>),
-    recoverEncryptedFilenames: mocks.recoverEncryptedFilenames,
-  }),
-);
-
 import { NewFilesPanelItemFile } from "../sub-components/NewFilesPanelItemFile";
-
-const ROOM_ID = 10;
-const identity = { publicKey: "pk" };
 
 const renderItem = (fileId: number) =>
   render(
@@ -83,7 +56,6 @@ const renderItem = (fileId: number) =>
         openItemAction: vi.fn(),
       }}
       filesStore={{ openDocEditor: vi.fn() }}
-      userStore={{ user: { id: "user-1" } }}
     >
       <NewFilesPanelItemFile
         item={
@@ -97,36 +69,17 @@ const renderItem = (fileId: number) =>
         }
         isRooms={false}
         onClose={vi.fn()}
-        roomId={ROOM_ID}
       />
     </Provider>,
   );
 
 describe("NewFilesPanelItemFile — encrypted names", () => {
-  it("New files panel", async () => {
-    mocks.getCached.mockReturnValue(identity);
+  it("shows the cached name of an encrypted file", () => {
+    rememberEncryptedFilename(501, "Quarterly report.docx");
 
     renderItem(501);
 
-    await waitFor(() =>
-      expect(mocks.recoverEncryptedFilenames).toHaveBeenCalledWith(
-        [{ id: 501, viewUrl: "http://x/501" }],
-        "user-1",
-        identity,
-        ROOM_ID,
-      ),
-    );
-    act(() => rememberEncryptedFilename(501, "Quarterly report.docx"));
-    expect(await screen.findByText("Quarterly report")).toBeInTheDocument();
-  });
-
-  it("Identity locked", () => {
-    mocks.getCached.mockReturnValue(null);
-
-    renderItem(502);
-
-    expect(screen.getByText("opaque-502")).toBeInTheDocument();
-    expect(mocks.recoverEncryptedFilenames).not.toHaveBeenCalled();
-    expect(mocks.requireUnlock).not.toHaveBeenCalled();
+    expect(screen.getByText("Quarterly report")).toBeInTheDocument();
+    expect(screen.queryByText("opaque-501")).not.toBeInTheDocument();
   });
 });

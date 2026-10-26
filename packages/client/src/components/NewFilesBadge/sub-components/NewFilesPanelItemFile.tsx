@@ -59,8 +59,6 @@ const NewFilesPanelItemFileComponent = ({
   item,
   isRooms,
   onClose,
-  roomId,
-  userId,
 
   getIcon,
   checkAndOpenLocationAction,
@@ -73,7 +71,7 @@ const NewFilesPanelItemFileComponent = ({
 }: NewFilesPanelItemFileProps) => {
   const icon = getIcon?.(24, item.fileExst);
 
-  const resolvedTitle = useResolvedFileTitle(item, { userId, roomId });
+  const resolvedTitle = useResolvedFileTitle(item);
 
   // On mobile the panel is opened from the article, which overlays the content
   // and stays open on its own. Navigating away has to close it too.
@@ -156,7 +154,6 @@ export const NewFilesPanelItemFile = inject(
     filesSettingsStore,
     filesActionsStore,
     filesStore,
-    userStore,
   }: NewFilesPanelItemFileInjectStore) => {
     const { displayFileExtension, getIcon } = filesSettingsStore;
     const { checkAndOpenLocationAction, markAsRead, openItemAction } =
@@ -173,7 +170,6 @@ export const NewFilesPanelItemFile = inject(
       openItemAction,
       currentDeviceType,
       setArticleOpen,
-      userId: userStore.user?.id,
     };
   },
 )(observer(NewFilesPanelItemFileComponent));

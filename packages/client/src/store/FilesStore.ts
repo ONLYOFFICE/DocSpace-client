@@ -1266,6 +1266,17 @@ class FilesStore {
     this.filter = filter;
   };
 
+  // A 403 inside a room usually means the user's role in it was lowered while
+  // the tab missed the socket event. Re-reading the open folder brings its
+  // rights up to date, or shows the "room not available" page if access is
+  // gone. fetchFiles reads the folder with skipRedirect, so this cannot
+  // trigger the 403 handler again.
+  refreshRightsAfterForbidden = () => {
+    if (this.selectedFolderStore.isRootFolder) return;
+
+    this.refreshFiles().catch((e) => console.error(e));
+  };
+
   refreshFiles = async () => {
     const res = await this.fetchFiles(this.selectedFolderStore.id, this.filter);
     return res;

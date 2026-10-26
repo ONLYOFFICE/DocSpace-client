@@ -28,6 +28,8 @@
   "UserTariffLimitHeader": "Đã đạt đến giới hạn số lượng quản trị viên: {{currentValue}}/ {{maxValue}}",
   "UserTariffReached": "Tất cả người dùng sẽ chỉ được thêm với quyền Người dùng. Để có thể thêm quản trị viên khác, hãy liên hệ với siêu quản trị viên để nâng cấp gói cước.",
   "UserTariffReachedForAdmins": "Tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên, hãy <1>nhấp vào đây</1> để nâng cấp gói dịch vụ của bạn.",
+  "UserTypeLoweredDescription": "Một số thao tác trên trang này có thể không còn khả dụng với bạn.",
+  "UserTypeLoweredHeader": "Loại người dùng của bạn đã được thay đổi",
   "WalletLowBalanceContactPayer": "Hãy liên hệ với Bên thanh toán (<1>{{payerContact}}</1>) để nạp tiền vào ví và tránh gián đoạn các dịch vụ trả phí.",
   "WalletLowBalanceDescription": "Nạp tiền vào ví để tránh gián đoạn các dịch vụ trả phí. <1>Nạp tiền</1>",
   "WalletLowBalanceHeader": "Tín dụng của bạn sắp hết: {{balance}}"

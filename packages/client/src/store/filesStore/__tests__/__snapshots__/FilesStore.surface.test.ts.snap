@@ -143,6 +143,7 @@ exports[`FilesStore — public surface > exposes a stable set of public members 
   "redirectToParent",
   "refreshFiles",
   "refreshFolder",
+  "refreshRightsAfterForbidden",
   "removeActiveItem",
   "removeFiles",
   "removeStaleItemFromSelection",

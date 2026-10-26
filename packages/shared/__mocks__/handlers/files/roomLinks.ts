@@ -100,10 +100,13 @@ export const roomContentHandler = (
   fileId: number | string,
   {
     security: securityOverrides,
+    pathParts: pathPartsOverride,
     ...currentOverrides
   }: Record<string, unknown> & {
     // null drops the room's security from the response altogether
     security?: Record<string, boolean> | null;
+    // serves a folder inside a room instead of the room itself
+    pathParts?: { id: number | string; title: string; folderType: number }[];
   } = {},
 ) =>
   http.get(
@@ -249,7 +252,7 @@ export const roomContentHandler = (
             updatedBy: makeUser(),
             ...currentOverrides,
           },
-          pathParts: [
+          pathParts: pathPartsOverride ?? [
             { id: 2002, title: "Rooms", folderType: 14 },
             { id: roomId, title: "Public Room", folderType: 14 },
           ],

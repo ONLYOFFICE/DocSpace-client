@@ -45,12 +45,7 @@ import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { isOAuthFrame, onAuthTokenPush, requestAuthToken } from "./oauthToken";
-import { CategoryType } from "../constants";
-import {
-  frameCallEvent,
-  getCategoryType,
-  isPrivateRoomsRoute,
-} from "./common";
+import { frameCallEvent, isPrivateRoomsRoute } from "./common";
 import { isPortalNotFoundRedirectClaimed } from "./portalNotFound";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
@@ -132,6 +127,8 @@ class AxiosClient {
   private oauthUnavailable = false;
 
   private oauthSignedOut = false;
+
+  private forbiddenHandler: (() => void) | null = null;
 
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
@@ -394,6 +391,16 @@ class AxiosClient {
     if (this.client) this.client.defaults.withCredentials = state;
   };
 
+  /**
+   * Called when a room-section request answers 403 Forbidden. The app decides
+   * how to tell the user; the client itself no longer navigates away, since a
+   * single denied side request used to throw every open room tab back to the
+   * default page (e.g. after the user's type was lowered).
+   */
+  setForbiddenHandler = (handler: (() => void) | null) => {
+    this.forbiddenHandler = handler;
+  };
+
   setClientBasePath = (path: string) => {
     if (!path || !this.client) return;
 
@@ -576,31 +583,18 @@ class AxiosClient {
             const { pathname } = window.location;
 
             const isPrivate = isPrivateRoomsRoute(pathname);
-            const isPrivateArchive =
-              isPrivate &&
-              getCategoryType({ pathname }) === CategoryType.PrivateArchive;
 
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 
             const isRooms =
               pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
-            const target = isPrivate
-              ? isPrivateArchive
-                ? "/private/archived"
-                : "/private"
-              : isArchived
-                ? "/archived"
-                : "/";
-
             if (
               (isRooms || isPrivate) &&
               !skipRedirect &&
               !window?.ClientConfig?.isFrame
             ) {
-              setTimeout(() => {
-                window.DocSpace.navigate(target);
-              }, 1000);
+              this.forbiddenHandler?.();
             }
 
             break;

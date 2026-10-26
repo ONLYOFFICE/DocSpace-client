@@ -137,14 +137,19 @@ describe("AxiosClient error redirects", () => {
   });
 });
 
-describe("AxiosClient 403 redirect", () => {
+// A 403 inside a room section used to navigate to the section's root a second
+// later, which threw every open room tab back to the default page once the
+// user's rights were lowered. It is now handed to the app, which reports it.
+describe("AxiosClient 403 handling", () => {
   let navigate: ReturnType<typeof vi.fn>;
+  let onForbidden: ReturnType<typeof vi.fn<() => void>>;
 
   beforeEach(() => {
     flags().__redirectToLogin = undefined;
     resetPortalNotFoundRedirect();
     vi.useFakeTimers();
     navigate = vi.fn();
+    onForbidden = vi.fn<() => void>();
     (window as unknown as { DocSpace: unknown }).DocSpace = { navigate };
   });
 
@@ -152,21 +157,63 @@ describe("AxiosClient 403 redirect", () => {
     vi.useRealTimers();
   });
 
-  it.each([
-    ["/rooms/shared/12/filter", "/"],
-    ["/rooms/archived/filter", "/archived"],
-    ["/private/12/filter", "/private"],
-    ["/private/archived/filter", "/private/archived"],
-  ])("sends the user from %s to %s", async (pathname, target) => {
+  const failWith403 = async (
+    pathname: string,
+    options: { skipForbidden?: boolean } = {},
+    skipRedirect = false,
+  ) => {
     stubLocation().pathname = pathname;
     const client = createFailingClient(403);
+    client.setForbiddenHandler(onForbidden);
 
     await client
-      .request({ method: "get", url: "/files/12" })
+      .request({ method: "get", url: "/files/12", ...options }, skipRedirect)
       ?.catch(() => undefined);
+    // The old redirect fired after one second.
     await vi.advanceTimersByTimeAsync(1000);
+  };
 
-    expect(navigate).toHaveBeenCalledWith(target);
+  it.each([
+    "/rooms/shared/12/filter",
+    "/rooms/archived/filter",
+    "/private/12/filter",
+    "/private/archived/filter",
+  ])(
+    "reports a 403 on %s and stays on the page",
+    async (pathname) => {
+      await failWith403(pathname);
+
+      expect(onForbidden).toHaveBeenCalledTimes(1);
+      expect(navigate).not.toHaveBeenCalled();
+    },
+  );
+
+  it("leaves a 403 outside the room sections to the caller", async () => {
+    await failWith403("/accounts/people/filter");
+
+    expect(onForbidden).not.toHaveBeenCalled();
+    expect(navigate).not.toHaveBeenCalled();
+  });
+
+  it("leaves a 403 to a caller that passed skipRedirect", async () => {
+    await failWith403("/rooms/shared/12/filter", {}, true);
+
+    expect(onForbidden).not.toHaveBeenCalled();
+  });
+
+  it("leaves a 403 to a caller that passed skipForbidden", async () => {
+    await failWith403("/rooms/shared/12/filter", { skipForbidden: true });
+
+    expect(onForbidden).not.toHaveBeenCalled();
+  });
+
+  it("still rejects the request, so the caller can react", async () => {
+    stubLocation().pathname = "/rooms/shared/12/filter";
+    const client = createFailingClient(403);
+    client.setForbiddenHandler(onForbidden);
+
+    await expect(
+      client.request({ method: "get", url: "/files/12" }),
+    ).rejects.toMatchObject({ response: { status: 403 } });
   });
 });
-

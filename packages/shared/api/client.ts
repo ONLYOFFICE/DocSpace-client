@@ -63,6 +63,10 @@ export const setWithCredentialsStatus = (state: boolean) => {
   return client.setWithCredentialsStatus(state);
 };
 
+export const setForbiddenHandler = (handler: (() => void) | null) => {
+  client.setForbiddenHandler(handler);
+};
+
 export const setAuthToken = (token: string | null) => {
   client.setAuthToken(token);
 };

@@ -63,6 +63,7 @@ import {
   PORTAL_DARK_THEME_ID,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import { getAiAccessSettings } from "@docspace/shared/api/settings";
+import { setForbiddenHandler } from "@docspace/shared/api/client";
 import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
 import {
@@ -129,8 +130,14 @@ import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
 
+// How long a denied request's caller has to show its own error toast before
+// the generic "Access denied" one is shown in its place.
+const FORBIDDEN_TOAST_DELAY = 500;
+
 const Shell = ({ page = "home", ...rest }) => {
   const {
+    checkUserTypeLowered,
+    refreshRightsAfterForbidden,
     isLoaded,
     isAuthenticated,
     loadBaseInfo,
@@ -264,6 +271,51 @@ const Shell = ({ page = "home", ...rest }) => {
       toastr.error(err);
     }
   }, []);
+
+  // A denied request in a room section is only reported: navigating away
+  // threw every open room tab back to the default page. A burst of denied
+  // requests is handled once: it checks whether the user's type or room role
+  // was lowered while the tab missed the socket event, and gets one toast.
+  //
+  // That toast waits a moment, because the request is still rejected to its
+  // caller, and a caller that reports errors shows a toast of its own; a
+  // second "Access denied" next to it would only be noise.
+  useEffect(() => {
+    let toastId = null;
+    let pendingTimer = null;
+    let callerReported = false;
+
+    const unsubscribe = toastify.onChange((payload) => {
+      if (
+        pendingTimer !== null &&
+        payload.status === "added" &&
+        payload.type === ToastType.error
+      ) {
+        callerReported = true;
+      }
+    });
+
+    setForbiddenHandler(() => {
+      if (pendingTimer !== null) return;
+      if (toastId !== null && toastr.isActive(toastId)) return;
+
+      checkUserTypeLowered();
+      refreshRightsAfterForbidden();
+
+      callerReported = false;
+      pendingTimer = setTimeout(() => {
+        pendingTimer = null;
+
+        if (!callerReported) toastId = toastr.error(t("Common:AccessDenied"));
+      }, FORBIDDEN_TOAST_DELAY);
+    });
+
+    return () => {
+      setForbiddenHandler(null);
+      unsubscribe();
+      if (pendingTimer !== null) clearTimeout(pendingTimer);
+    };
+  }, [t, checkUserTypeLowered, refreshRightsAfterForbidden]);
 
   // Locale is handled by Luxon date utilities - no global locale setup needed
 
@@ -1078,6 +1130,8 @@ const ShellWrapper = inject(
     aiRoomStore,
     paymentStore,
     accessRightsStore,
+    peopleStore,
+    filesStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -1145,6 +1199,8 @@ const ShellWrapper = inject(
       (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
 
     return {
+      checkUserTypeLowered: peopleStore.usersStore.checkUserTypeLowered,
+      refreshRightsAfterForbidden: filesStore.refreshRightsAfterForbidden,
       loadBaseInfo: async () => {
         await init(false, i18n);
 

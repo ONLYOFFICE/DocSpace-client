@@ -459,7 +459,13 @@ export function wsChangeFolderAccessRightsImpl(
   const folderId = option.id;
   const memberAccess = JSON.parse(option.data);
 
-  if (self.selectedFolderStore.id !== folderId) return;
+  // The event names the room, while the user may be deep inside it: the
+  // subfolders inherit the room's rights, so they are re-read just the same.
+  const { id: selectedId, pathParts } = self.selectedFolderStore;
+  const isInside =
+    selectedId === folderId || !!pathParts?.some((p) => p.id === folderId);
+
+  if (!isInside) return;
   if (!memberAccess[self.userStore.user!.id]) return;
 
   console.log("[WS] change folder access rights for current user", {
@@ -467,7 +473,7 @@ export function wsChangeFolderAccessRightsImpl(
     memberAccess,
   });
 
-  self.refreshFolder(folderId);
+  self.refreshFolder(selectedId!);
   self.refreshFiles();
 }
 

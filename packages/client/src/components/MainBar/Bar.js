@@ -57,6 +57,7 @@ import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-compo
 
 import QuotasBar from "./QuotasBar";
 import ConfirmEmailBar from "./ConfirmEmailBar";
+import UserTypeLoweredBar from "./UserTypeLoweredBar";
 
 const WALLET_LOW_BALANCE_CLOSED = "walletLowBalanceClosed";
 
@@ -107,6 +108,9 @@ const Bar = (props) => {
     walletCustomerEmail,
     walletCustomerDisplayName,
     language,
+
+    isUserTypeLoweredBarVisible,
+    setIsUserTypeLoweredBarVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -543,6 +547,7 @@ const Bar = (props) => {
 
   React.useEffect(() => {
     const newValue =
+      (isUserTypeLoweredBarVisible && tReady) ||
       showQuotasBar ||
       (withActivationBar && barVisible.confirmEmail && tReady) ||
       (htmlLink && !firstLoad && tReady);
@@ -553,6 +558,7 @@ const Bar = (props) => {
       setMainBarVisible(false);
     };
   }, [
+    isUserTypeLoweredBarVisible,
     showQuotasBar,
     withActivationBar,
     barVisible.confirmEmail,
@@ -574,6 +580,11 @@ const Bar = (props) => {
     setMaintenanceExist(true);
   };
 
+  const onCloseUserTypeLoweredBar = () => {
+    setIsUserTypeLoweredBarVisible(false);
+    setMaintenanceExist(false);
+  };
+
   const topUpDialog = isTopUpVisible ? (
     <ClientSimpleTopUpDialog
       visible={isTopUpVisible}
@@ -582,6 +593,18 @@ const Bar = (props) => {
       service=""
     />
   ) : null;
+
+  // A lowered user type outranks every other bar: until the page is reloaded,
+  // parts of it keep acting on rights the user no longer has.
+  if (isUserTypeLoweredBarVisible && tReady) {
+    return (
+      <UserTypeLoweredBar
+        currentColorScheme={currentColorScheme}
+        onLoad={onLoad}
+        onClose={onCloseUserTypeLoweredBar}
+      />
+    );
+  }
 
   return showQuotasBar ? (
     <>
@@ -626,6 +649,7 @@ export default inject(
     currentTariffStatusStore,
     paymentStore,
     authStore,
+    peopleStore,
   }) => {
     const { user, withActivationBar, sendActivationLink } = userStore;
 
@@ -660,6 +684,8 @@ export default inject(
     const { language } = authStore;
     const { walletCustomerEmail, walletCustomerInfo } =
       currentTariffStatusStore;
+    const { isUserTypeLoweredBarVisible, setIsUserTypeLoweredBarVisible } =
+      peopleStore.usersStore;
 
     return {
       isAdmin: user?.isAdmin || user?.isOwner,
@@ -702,6 +728,9 @@ export default inject(
       isPayer,
       walletCustomerEmail,
       walletCustomerDisplayName: walletCustomerInfo?.displayName,
+
+      isUserTypeLoweredBarVisible,
+      setIsUserTypeLoweredBarVisible,
     };
   },
 )(withTranslation(["Profile", "Common"])(observer(Bar)));

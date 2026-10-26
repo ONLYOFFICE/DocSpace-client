@@ -128,6 +128,8 @@ class AxiosClient {
 
   private oauthSignedOut = false;
 
+  private forbiddenHandler: (() => void) | null = null;
+
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
   }
@@ -389,6 +391,16 @@ class AxiosClient {
     if (this.client) this.client.defaults.withCredentials = state;
   };
 
+  /**
+   * Called when a room-section request answers 403 Forbidden. The app decides
+   * how to tell the user; the client itself no longer navigates away, since a
+   * single denied side request used to throw every open room tab back to the
+   * default page (e.g. after the user's type was lowered).
+   */
+  setForbiddenHandler = (handler: (() => void) | null) => {
+    this.forbiddenHandler = handler;
+  };
+
   setClientBasePath = (path: string) => {
     if (!path || !this.client) return;
 
@@ -576,9 +588,7 @@ class AxiosClient {
               pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
             if (isRooms && !skipRedirect && !window?.ClientConfig?.isFrame) {
-              setTimeout(() => {
-                window.DocSpace.navigate(isArchived ? "/archived" : "/");
-              }, 1000);
+              this.forbiddenHandler?.();
             }
 
             break;

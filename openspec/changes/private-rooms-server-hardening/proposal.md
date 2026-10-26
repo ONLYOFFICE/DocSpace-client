@@ -89,6 +89,10 @@ None.
 ## Out of scope
 
 - The Document Server contract (`private-rooms-editor-contract`).
+- A transactional endpoint that grants private-room access to invitees and
+  stores their file-key wraps in one request: the later target for
+  `private-rooms-invite-atomic-rewrap`, which ships grant-first (decided
+  2026-10-26). Not a release prerequisite.
 - Client-side TOFU and fail-closed fixes (separate changes).
 - The audit log viewer UI in the management app (follows once events exist).
 

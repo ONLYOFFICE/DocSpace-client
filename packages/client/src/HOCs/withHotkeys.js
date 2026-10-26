@@ -42,6 +42,21 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { copySelectedText } from "@docspace/shared/utils/copy";
 
+const suppressKeyRepeat = (code) => {
+  const onRepeat = (e) => {
+    if (e.code === code && e.repeat) e.preventDefault();
+  };
+
+  const onRelease = (e) => {
+    if (e.code !== code) return;
+    window.removeEventListener("keydown", onRepeat, true);
+    window.removeEventListener("keyup", onRelease, true);
+  };
+
+  window.addEventListener("keydown", onRepeat, true);
+  window.addEventListener("keyup", onRelease, true);
+};
+
 const withHotkeys = (Component) => {
   const WithHotkeys = (props) => {
     const {
@@ -219,6 +234,13 @@ const withHotkeys = (Component) => {
       }
     };
 
+    const onShiftHotkey = (action) => (e) => {
+      if (e.repeat) return;
+      e.preventDefault();
+      suppressKeyRepeat(e.code);
+      action();
+    };
+
     const onPaste = async (e) => {
       const someDialogIsOpen = checkDialogsOpen();
 
@@ -347,28 +369,32 @@ const withHotkeys = (Component) => {
     );
 
     // Crete document
-    useHotkeys("Shift+d", () => onCreate("docx"), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys(
+      "Shift+d",
+      onShiftHotkey(() => onCreate("docx")),
+      hotkeysFilter,
+    );
 
     // Crete spreadsheet
-    useHotkeys("Shift+s", () => onCreate("xlsx"), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys(
+      "Shift+s",
+      onShiftHotkey(() => onCreate("xlsx")),
+      hotkeysFilter,
+    );
 
     // Crete presentation
-    useHotkeys("Shift+p", () => onCreate("pptx"), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys(
+      "Shift+p",
+      onShiftHotkey(() => onCreate("pptx")),
+      hotkeysFilter,
+    );
 
     // Crete form template
-    useHotkeys("Shift+o", () => onCreate("pdf"), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys(
+      "Shift+o",
+      onShiftHotkey(() => onCreate("pdf")),
+      hotkeysFilter,
+    );
 
     // Crete form template from file
     useHotkeys(
@@ -382,27 +408,19 @@ const withHotkeys = (Component) => {
     );
 
     // Crete folder
-    useHotkeys("Shift+f", () => onCreate(null), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys(
+      "Shift+f",
+      onShiftHotkey(() => onCreate(null)),
+      hotkeysFilter,
+    );
 
     // Crete room
-    useHotkeys("Shift+r", () => onCreateRoom(), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys("Shift+r", onShiftHotkey(onCreateRoom), hotkeysFilter);
 
-    useHotkeys("Shift+c", openContextMenu, {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys("Shift+c", onShiftHotkey(openContextMenu), hotkeysFilter);
 
     // Create AI agent
-    useHotkeys("Shift+a", () => onCreateAIAgent(), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys("Shift+a", onShiftHotkey(onCreateAIAgent), hotkeysFilter);
 
     // Delete selection
     useHotkeys(

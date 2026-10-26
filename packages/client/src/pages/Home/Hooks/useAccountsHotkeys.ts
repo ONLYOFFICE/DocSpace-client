@@ -177,10 +177,15 @@ const useAccountsHotkeys = ({
   );
 
   // Open context menu
-  useHotkeys("Shift+c", openContextMenu, {
-    ...hotkeysFilter,
-    ...{ keyup: true },
-  });
+  useHotkeys(
+    "Shift+c",
+    (e) => {
+      if (e.repeat) return;
+      e.preventDefault();
+      openContextMenu();
+    },
+    hotkeysFilter,
+  );
 };
 
 export default useAccountsHotkeys;

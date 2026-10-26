@@ -38,6 +38,7 @@ import { describe, it, expect, vi } from "vitest";
 import { createTestContextOptionsStore, t } from "./testHarness";
 // After the harness, which mocks the toast module.
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import type { TDownloadTranslations } from "SRC_DIR/store/FilesActionsStore";
 
 const item = (over: Record<string, unknown> = {}) =>
   ({ id: 1, isFolder: false, fileExst: ".docx", ...over }) as never;
@@ -121,6 +122,26 @@ describe("ContextOptionsStore — action handler delegation (batch 6)", () => {
         ["Common:EncryptedOperationFailed"],
         ["Server says no"],
       ]),
+    );
+  });
+
+  it("Download without decryption fails", () => {
+    const downloadFiles = vi.fn(async () => {});
+    const store = createTestContextOptionsStore({
+      filesActionsStore: { downloadFiles },
+    });
+
+    store.onClickDownloadEncrypted(item({ isFolder: true }), t);
+
+    const translations = (
+      downloadFiles.mock.calls[0] as unknown as [
+        number[],
+        number[],
+        TDownloadTranslations,
+      ]
+    )[2];
+    expect(translations.errorMessage!(new Error("Network Error"))).toBe(
+      "Common:EncryptedOperationFailed",
     );
   });
 

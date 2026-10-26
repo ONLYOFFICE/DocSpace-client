@@ -269,6 +269,8 @@ export type TDownloadTranslations = {
   label?: string;
   error?: string;
   passwordError?: string;
+  /** The toast of a failed request that is not the server's own message. */
+  errorMessage?: (error: unknown) => string;
 };
 export type TRemoveTranslations = {
   successRemoveTemplate?: string;

@@ -84,7 +84,8 @@ self: FilesActionStore,
   const { openUrl } = self.settingsStore;
 
   const { addActiveItems } = self.filesStore;
-  const { label, passwordError } = translations as TDownloadTranslations;
+  const { label, passwordError, errorMessage } =
+    translations as TDownloadTranslations;
   const {
     setDownloadItems,
     setDownloadDialogVisible,
@@ -224,7 +225,9 @@ self: FilesActionStore,
       setDownloadItems([]);
 
       return toastr.error(
-        (err as string) || i18n.t("Common:UnexpectedError"),
+        errorMessage && typeof err !== "string"
+          ? errorMessage(err)
+          : (err as string) || i18n.t("Common:UnexpectedError"),
         null,
         0,
         true,

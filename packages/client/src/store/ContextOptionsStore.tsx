@@ -510,7 +510,10 @@ class ContextOptionsStore {
 
     if (item.isFolder || item.roomType) {
       return this.filesActionsStore
-        .downloadFiles([], [item.id], { label: t("Common:ArchivingData") })
+        .downloadFiles([], [item.id], {
+          label: t("Common:ArchivingData"),
+          errorMessage: (err) => getEncryptedOperationErrorMessage(i18n.t, err),
+        })
         .catch((err: unknown) =>
           toastr.error(getEncryptedOperationErrorMessage(i18n.t, err)),
         );

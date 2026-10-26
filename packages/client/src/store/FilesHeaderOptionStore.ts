@@ -103,6 +103,7 @@ export default class FilesHeaderOptionStore {
     return this.filesActionsStore
       .downloadFiles(fileIds, folderIds, {
         label: this.t("Common:ArchivingData"),
+        errorMessage: (err) => getEncryptedOperationErrorMessage(this.t, err),
       })
       ?.catch((err) =>
         toastr.error(getEncryptedOperationErrorMessage(this.t, err)),

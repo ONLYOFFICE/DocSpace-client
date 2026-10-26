@@ -1,7 +1,14 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 import { afterEach, describe, it, expect, vi } from "vitest";
+
+vi.mock("@docspace/shared/api/files", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  downloadFiles: vi.fn(),
+}));
+
 import { createTestFilesActionsStore, t } from "./testHarness";
+import { downloadFiles as downloadFilesApi } from "@docspace/shared/api/files";
 // After the harness, which mocks the toast module.
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
@@ -145,6 +152,7 @@ describe("FilesActionsStore.getHeaderMenu — private room", () => {
 
     expect(downloadFiles).toHaveBeenCalledWith([1, 2], [3], {
       label: "Common:ArchivingData",
+      errorMessage: expect.any(Function),
     });
   });
 
@@ -180,12 +188,15 @@ describe("FilesActionsStore.getHeaderMenu — private room", () => {
           { id: 3, isFolder: true, security },
         ],
       },
+      dialogsStore: {
+        ...enabling.dialogsStore,
+        downloadItems: [],
+        setDownloadItems: vi.fn(),
+      },
       treeFoldersStore: { isPrivacyFolder: true },
     });
-    const error = new Error();
-    store.downloadFiles = vi.fn(async () => {
-      throw error;
-    });
+    const error = new Error("Network Error");
+    vi.mocked(downloadFilesApi).mockRejectedValue(error);
 
     const menu = store.getHeaderMenu(t) as {
       id?: string;
@@ -193,7 +204,12 @@ describe("FilesActionsStore.getHeaderMenu — private room", () => {
     }[];
     await menu.find((item) => item.id === "menu-download-encrypted")!.onClick!();
 
-    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedOperationFailed");
-    expect(toastr.error).not.toHaveBeenCalledWith(error);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedOperationFailed",
+      null,
+      0,
+      true,
+    );
+    expect(vi.mocked(toastr.error).mock.calls.flat()).not.toContain(error);
   });
 });

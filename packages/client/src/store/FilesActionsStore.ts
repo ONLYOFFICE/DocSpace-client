@@ -133,7 +133,6 @@ import {
   duplicateActionImpl,
   duplicateEncryptedFileImpl,
   copyEncryptedFilesToFolderImpl,
-  planPrivateTransfer,
   runPrivateTransferPlanImpl,
   getItemsInfoImpl,
   checkFileConflictsImpl,
@@ -145,6 +144,7 @@ import {
   moveDragItemsImpl,
   getPublicKeyImpl,
 } from "./filesActionsStore/copyMove.helpers";
+import { planPrivateTransfer } from "@docspace/shared/services/private-room/private-transfer";
 import type {
   TEncryptedTransferDest,
   TPrivateTransferParams,

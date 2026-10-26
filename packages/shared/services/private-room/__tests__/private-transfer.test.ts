@@ -1,21 +1,17 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 
-vi.mock("SRC_DIR/i18n", () => ({
-  default: { t: (key: string) => key },
-}));
-
-import type { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { RoomsType } from "@docspace/shared/enums";
+import type { TFile, TFolder } from "../../../api/files/types";
+import { RoomsType } from "../../../enums";
+import { getIsDisabled } from "../../../utils/filesSelector";
 
 import {
-  getIsDisabled,
   getPickedRoomId,
   getSelectorTransfer,
   getShowEncryptedTransferBanner,
-} from "../utils";
-import { planPrivateTransfer } from "SRC_DIR/store/filesActionsStore/copyMove.helpers";
+  planPrivateTransfer,
+} from "../private-transfer";
 
 const encrypted = (id: number) =>
   ({ id, title: `e${id}.docx`, fileExst: ".docx", encrypted: true }) as TFile;

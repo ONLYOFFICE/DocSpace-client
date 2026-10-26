@@ -49,13 +49,8 @@ import {
   tagFileForCopy,
 } from "@docspace/shared/services/private-room/encrypted-copy";
 import {
-  listDecryptedFileNames,
-  resolveNameClashes,
-} from "@docspace/shared/services/private-room/encrypted-name-clash";
-import {
   requireUnlock,
 } from "@docspace/shared/services/encryption/secret-storage";
-import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
@@ -72,6 +67,14 @@ import type FilesActionStore from "../FilesActionsStore";
 import type DialogsStore from "../DialogsStore";
 import type { TUploadTarget } from "../uploadDataStore/helpers";
 import { resolveFolderTarget } from "@docspace/shared/services/private-room/upload-target";
+import {
+  isSameId,
+  planPrivateTransfer,
+  sameRoomCopyNames,
+  type TEncryptedTransferDest,
+  type TPrivateTransferParams as TSharedPrivateTransferParams,
+  type TPrivateTransferPlan as TSharedPrivateTransferPlan,
+} from "@docspace/shared/services/private-room/private-transfer";
 import type { TActionItem, TOperationDataPayload } from "../FilesActionsStore";
 
 export const duplicateActionImpl = async (
@@ -183,84 +186,9 @@ self: FilesActionStore,item: TActionItem
 };
 
 
-export type TEncryptedTransferDest = {
-  private?: boolean;
-  rootFolderId?: number | string;
-  roomType?: Nullable<RoomsType>;
-  rootFolderType?: FolderType;
-};
-
-export type TPrivateTransferPlan =
-  | { kind: "generic" }
-  | { kind: "refuse-into" }
-  | { kind: "same-room" }
-  | { kind: "refuse-folder-out" }
-  | { kind: "refuse-move-into" }
-  | {
-      kind: "decrypt-out";
-      files: TActionItem[];
-      refusedFolders: TActionItem[];
-    }
-  | {
-      kind: "reencrypt-into";
-      files: TActionItem[];
-      refusedFolders: TActionItem[];
-    };
-
-// Spec: private-rooms/file-operations, "Transfer into a private room is refused",
-// "Folders cannot leave a private room", "Files leaving a private room are decrypted",
-// "Copy into another private room is re-encrypted", "Move into another private room is refused".
-export type TPrivateTransferParams = {
-  items: TActionItem[];
-  sourceInPrivateRoom: boolean;
-  /** The private room the items are in, when the caller knows it. */
-  sourceRoomId?: number | string | null;
-  move?: boolean;
-  dest:
-    | (TEncryptedTransferDest & {
-        /**
-         * Whether the destination lies inside a private room, when the caller
-         * knows it (current folder, picker). Without it the plan falls back to
-         * `private`, which only a room row carries.
-         */
-        insidePrivateRoom?: boolean;
-        /** The private room that contains the destination, when known. */
-        roomId?: number | string | null;
-      })
-    | null
-    | undefined;
-};
-
-const isSameId = (
-  a: number | string | null | undefined,
-  b: number | string | null | undefined,
-) =>
-  a !== undefined && a !== null && b !== undefined && b !== null
-    ? String(a) === String(b)
-    : false;
-
-export const planPrivateTransfer = (
-  params: TPrivateTransferParams,
-): TPrivateTransferPlan => {
-  const { items, sourceInPrivateRoom, sourceRoomId, move, dest } = params;
-
-  const destPrivate = dest?.insidePrivateRoom ?? dest?.private === true;
-
-  if (destPrivate && !sourceInPrivateRoom) return { kind: "refuse-into" };
-  if (!sourceInPrivateRoom) return { kind: "generic" };
-  if (destPrivate && isSameId(dest?.roomId, sourceRoomId)) {
-    return { kind: "same-room" };
-  }
-  // Spec: private-rooms/file-operations, "Move into another private room is refused".
-  if (destPrivate && move) return { kind: "refuse-move-into" };
-
-  const files = items.filter((el) => !el.isFolder);
-  const refusedFolders = items.filter((el) => !!el.isFolder);
-  if (files.length === 0) return { kind: "refuse-folder-out" };
-  return destPrivate
-    ? { kind: "reencrypt-into", files, refusedFolders }
-    : { kind: "decrypt-out", files, refusedFolders };
-};
+export type { TEncryptedTransferDest };
+export type TPrivateTransferPlan = TSharedPrivateTransferPlan<TActionItem>;
+export type TPrivateTransferParams = TSharedPrivateTransferParams<TActionItem>;
 
 /**
  * Apply a transfer plan. Returns true when the plan was handled here and the
@@ -439,32 +367,6 @@ self: FilesActionStore,
       reportFailed(failed);
     }
   }
-};
-
-// Spec: private-rooms/file-operations, "Copy within the same private room".
-const sameRoomCopyNames = async (
-  decrypted: { item: TActionItem; file: File }[],
-  destFolderId: number | string,
-  roomId: number | string,
-  userId: string,
-  identity: IdentityKeyPair,
-): Promise<Map<TActionItem, string>> => {
-  let existingNames: string[] = [];
-  try {
-    existingNames = await listDecryptedFileNames(
-      destFolderId,
-      roomId,
-      userId,
-      identity,
-    );
-  } catch (error) {
-    console.error("[ENCRYPTION] same-room copy names not listed:", error);
-  }
-  const clashes = resolveNameClashes(
-    decrypted.map(({ item, file }) => ({ item, name: file.name })),
-    [...existingNames, ...decrypted.map(({ file }) => file.name)],
-  );
-  return new Map(clashes.map(({ item, renamed }) => [item, renamed]));
 };
 
 /**

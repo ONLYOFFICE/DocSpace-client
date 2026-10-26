@@ -74,13 +74,13 @@ import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
 import { usePickerFileTitles } from "./usePickerFileTitles";
+import { getAcceptButtonLabel } from "./utils";
+import { getIsDisabled } from "@docspace/shared/utils/filesSelector";
 import {
-  getAcceptButtonLabel,
-  getIsDisabled,
   getPickedRoomId,
   getSelectorTransfer,
   getShowEncryptedTransferBanner,
-} from "./utils";
+} from "@docspace/shared/services/private-room/private-transfer";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 // The selector cannot create an agent itself: its "New agent" item opens the

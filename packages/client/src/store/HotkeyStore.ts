@@ -49,7 +49,11 @@ import { clearTextSelection } from "@docspace/shared/utils/copy";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { isContextMenuOpen, isKeyOwnedByFocus } from "SRC_DIR/helpers/hotkeys";
+import {
+  focusListOnSelectionKey,
+  isContextMenuOpen,
+  isKeyOwnedByFocus,
+} from "SRC_DIR/helpers/hotkeys";
 import { TABLE_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/table/Table.constants";
 
 import type FilesSettingsStore from "./FilesSettingsStore";
@@ -255,6 +259,8 @@ class HotkeyStore {
     ) {
       e.preventDefault();
     }
+
+    focusListOnSelectionKey(e);
 
     const { selection: s, hotkeyCaret, filesList } = this.filesStore;
     const selection = s.length ? s : filesList;

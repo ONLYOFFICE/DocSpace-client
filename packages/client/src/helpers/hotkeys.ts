@@ -77,6 +77,24 @@ const NAVIGATION_KEYS = [
   "PageDown",
 ];
 
+const SELECTION_KEYS = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+
+/**
+ * Hands the focus to the list once its hotkeys have taken an arrow key from
+ * another element. A closed menu gives the focus back to its "..." button; if
+ * it stayed there while the arrows moved the selection to another item, the
+ * next Enter would reopen that menu instead of opening the selected item.
+ */
+export const focusListOnSelectionKey = (e: KeyboardEvent) => {
+  if (!SELECTION_KEYS.includes(e.key)) return;
+
+  const list =
+    document.getElementsByClassName("section-scroll")[0]?.firstElementChild;
+
+  if (list instanceof HTMLElement && document.activeElement !== list)
+    list.focus({ preventScroll: true });
+};
+
 /**
  * Whether a context menu is on screen. While it is, every key is the menu's:
  * Escape closes it rather than clearing the selection it was opened for.

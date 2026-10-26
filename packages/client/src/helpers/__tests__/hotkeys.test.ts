@@ -35,7 +35,11 @@
 
 import { afterEach, describe, expect, it } from "vitest";
 
-import { isContextMenuOpen, isKeyOwnedByFocus } from "../hotkeys";
+import {
+  focusListOnSelectionKey,
+  isContextMenuOpen,
+  isKeyOwnedByFocus,
+} from "../hotkeys";
 
 // Dispatches a keydown on the element and reports what the helper says.
 const owns = (target: Element, key: string) => {
@@ -118,5 +122,41 @@ describe("isContextMenuOpen", () => {
     document.body.innerHTML = '<div class="p-contextmenu"></div>';
     expect(isContextMenuOpen()).toBe(true);
     document.body.innerHTML = "";
+  });
+});
+
+describe("focusListOnSelectionKey", () => {
+  afterEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  const mountList = () => {
+    document.body.innerHTML =
+      '<div class="section-scroll"><div id="list" tabindex="-1"><div class="row"><button id="more">...</button></div></div></div>';
+    return {
+      list: document.getElementById("list")!,
+      more: document.getElementById("more")!,
+    };
+  };
+
+  // A closed menu gave the focus back to a row's "..." button; the arrows
+  // then moved the selection, and Enter reopened that menu.
+  it("takes the focus off a row's button once the arrows move the selection", () => {
+    const { list, more } = mountList();
+    more.focus();
+
+    focusListOnSelectionKey(new KeyboardEvent("keydown", { key: "ArrowDown" }));
+
+    expect(document.activeElement).toBe(list);
+  });
+
+  it("leaves the focus alone for any other key", () => {
+    const { more } = mountList();
+    more.focus();
+
+    focusListOnSelectionKey(new KeyboardEvent("keydown", { key: "Enter" }));
+    focusListOnSelectionKey(new KeyboardEvent("keydown", { key: "x" }));
+
+    expect(document.activeElement).toBe(more);
   });
 });

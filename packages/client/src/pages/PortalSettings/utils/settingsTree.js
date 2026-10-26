@@ -182,6 +182,23 @@ export const settingsTree = [
           },
         ],
       },
+      {
+        id: "portal-settings_catalog-metadata-templates",
+        key: "0-4",
+        icon: "",
+        link: "metadata-templates",
+        tKey: "MetadataTemplates",
+        isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-metadata-templates_subLink",
+            key: "0-4-0",
+            icon: "",
+            link: "metadata-templates",
+            tKey: "MetadataTemplates",
+          },
+        ],
+      },
     ],
   },
   {
@@ -545,6 +562,13 @@ export const settingsTree = [
         key: "7-4",
         link: "knowledge",
         tKey: "Common:Knowledge",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-ai-settings-limits",
+        key: "7-5",
+        link: "limits",
+        tKey: "Common:AILimits",
         isCategory: true,
       },
     ],

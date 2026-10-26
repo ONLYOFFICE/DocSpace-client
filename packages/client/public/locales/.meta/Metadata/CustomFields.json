@@ -1,0 +1,41 @@
+{
+  "key_path": "CustomFields",
+  "content": "Custom fields",
+  "content_en_sha1_hash": "d1f86d5227e987ad9feec36387a01f71ac50987e",
+  "created_at": "2026-10-21T10:17:41.265Z",
+  "updated_at": "2026-10-23T12:28:45.579Z",
+  "comment": {
+    "text": "Heading of the block of custom metadata fields of an item (free name-value pairs outside templates) in the info panel and in the AI metadata panel; also title of the panel listing them.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/sub-components/FillForms.tsx",
+      "line_number": 95,
+      "context": "</div>\n ))}\n {customFields ? (\n <div>\n {forms.length ? (\n <SectionTitle>{t(\"Metadata:CustomFields\")}</SectionTitle>\n ) : null}\n {customFields}\n </div>\n ) : null}\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsCard.tsx",
+      "line_number": 55,
+      "context": "const CustomFieldsCard = ({ fields, actions }: CustomFieldsCardProps) => {\n const { t } = useTranslation([\"Metadata\"]);\n \n return (\n <MetadataCard title={t(\"Metadata:CustomFields\")} actions={actions}>\n {fields.map(({ name, value }) => (\n <MetadataProperty key={name} label={name}>\n <Text\n className={styles.value}\n fontSize=\"13px\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/index.tsx",
+      "line_number": 100,
+      "context": "onBackClick={closeNewField}\n onClose={newField ? closeNewField : onClose}\n dataTestId=\"metadata_custom_fields_panel\"\n >\n <ModalDialog.Header>\n {newField ? t(\"Metadata:AddField\") : t(\"Metadata:CustomFields\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n {newField ? (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -62,6 +62,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 	getIcon: (size: number, fileExst: string) => string;
 	isExternalShareEnabled: boolean;
 	disabledCreatePublicRoom?: boolean;
+	standalone?: boolean;
 
 	onClose?: () => void;
 

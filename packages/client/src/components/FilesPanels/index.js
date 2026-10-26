@@ -54,6 +54,7 @@ import {
   EmbeddingPanel,
   ConversionPanel,
   ShareFormPanel,
+  MetadataAIPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -148,6 +149,7 @@ const Panels = (props) => {
     editLinkPanelIsVisible,
     deleteLinkDialogVisible,
     embeddingPanelData,
+    metadataAIPanelData,
     moveToPublicRoomVisible,
     settingsPluginDialogVisible,
     pluginDialogVisible,
@@ -380,6 +382,7 @@ const Panels = (props) => {
     editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
     deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
     embeddingPanelData.visible && <EmbeddingPanel key="embedding-panel" />,
+    metadataAIPanelData.visible && <MetadataAIPanel key="metadata-ai-panel" />,
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
@@ -518,6 +521,7 @@ export default inject(
       editLinkPanelIsVisible,
       deleteLinkDialogVisible,
       embeddingPanelData,
+      metadataAIPanelData,
       moveToPublicRoomVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
@@ -641,6 +645,7 @@ export default inject(
       editLinkPanelIsVisible,
       deleteLinkDialogVisible,
       embeddingPanelData,
+      metadataAIPanelData,
       moveToPublicRoomVisible,
       settingsPluginDialogVisible,
       pluginDialogVisible,

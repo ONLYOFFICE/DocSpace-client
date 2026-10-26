@@ -3,7 +3,7 @@
   "content": "{{sectionName}} — starred files.",
   "content_en_sha1_hash": "4ef8f15da2b19e47cb69624e6c981efed19d1b91",
   "created_at": "2026-08-06T14:20:53.791Z",
-  "updated_at": "2026-08-07T15:05:26.422Z",
+  "updated_at": "2026-10-22T16:09:36.799Z",
   "comment": {
     "text": "A text description in a feature tour step that explains the contents of a highlighted section, where {{sectionName}} represents the name of that section.",
     "is_auto": true,
@@ -12,9 +12,27 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 153,
+      "context": "// One bullet per sub-item the sidebar built, worded as in the Files tour.\n const places = [\n hasRecent &&\n t(\"FilesTour:TourPlacesRecent\", { sectionName: t(\"Common:Recent\") }),\n hasFavorites &&\n t(\"FilesTour:TourPlacesFavorites\", {\n sectionName: t(\"Common:Favorites\"),\n }),\n hasTrash &&\n t(\"FilesTour:TourPlacesTrash\", { sectionName: t(\"Common:TrashSection\") }),\n ].filter(Boolean) as string[];",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 199,
+      "line_number": 182,
       "context": "sectionName: t(\"Common:SharedWithMe\"),\n }),\n recentId &&\n t(\"FilesTour:TourPlacesRecent\", { sectionName: t(\"Common:Recent\") }),\n favoritesId &&\n t(\"FilesTour:TourPlacesFavorites\", {\n sectionName: t(\"Common:Favorites\"),\n }),\n trashId &&\n t(\"FilesTour:TourPlacesTrash\", {\n sectionName: t(\"Common:TrashSection\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 130,
+      "context": "// One bullet per sub-item, named by the sidebar's own labels; Templates is\n // admin-only there too.\n const places = [\n t(\"FilesTour:TourPlacesRecent\", { sectionName: t(\"Common:Recent\") }),\n t(\"FilesTour:TourPlacesFavorites\", { sectionName: t(\"Common:Favorites\") }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),\n t(\"FilesTour:TourPlacesTrash\", { sectionName: t(\"Common:TrashSection\") }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 242,
+      "context": "sidebarListStep(\n \"rooms-recent\",\n t(\"RoomsTour:RoomsPlacesTitle\"),\n [\n t(\"FilesTour:TourPlacesRecent\", { sectionName: t(\"Common:Recent\") }),\n t(\"FilesTour:TourPlacesFavorites\", {\n sectionName: t(\"Common:Favorites\"),\n }),\n t(\"FilesTour:TourPlacesTrash\", {\n sectionName: t(\"Common:TrashSection\"),\n }),",
       "module": "/packages/client"
     }
   ],

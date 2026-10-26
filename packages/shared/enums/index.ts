@@ -260,6 +260,14 @@ export const enum ConflictResolveType {
   Duplicate = 2,
 }
 
+export const enum MetadataFieldType {
+  String = 0,
+  Date = 1,
+  Number = 2,
+  SingleChoice = 3,
+  MultiChoice = 4,
+}
+
 /**
  * Enum for third-party storages.
  * @readonly
@@ -323,6 +331,7 @@ export const enum Events {
   CHANGE_COLUMN = "change_column",
   CHANGE_USER_TYPE = "change_user_type",
   CHANGE_QUOTA = "change_quota",
+  CHANGE_AI_LIMIT = "change_ai_limit",
   CREATE_PLUGIN_FILE = "create_plugin_file",
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
   SAVE_AS_TEMPLATE = "save_as_template",

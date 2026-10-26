@@ -68,8 +68,8 @@ import classNames from "classnames";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import InfoPanelRoomEmptyScreenSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.light.svg?url";
-import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.dark.svg?url";
+import InfoPanelAgentsEmptyScreenSvg from "@onlyoffice/apps-ui-kit/assets/emptyview/empty.agents.info.light.svg";
+import InfoPanelAgentsEmptyScreenDarkSvg from "@onlyoffice/apps-ui-kit/assets/emptyview/empty.agents.info.dark.svg";
 
 import styles from "./NoAgentItem.module.scss";
 
@@ -89,9 +89,9 @@ const NoAgentItem = () => {
   }, []);
   const useLightIcon = !mounted || isBase;
 
-  const imageSrc = useLightIcon
-    ? InfoPanelRoomEmptyScreenSvgUrl
-    : InfoPanelRoomEmptyScreenDarkSvgUrl;
+  const ImageIcon = useLightIcon
+    ? InfoPanelAgentsEmptyScreenSvg
+    : InfoPanelAgentsEmptyScreenDarkSvg;
 
   return (
     <div
@@ -101,12 +101,11 @@ const NoAgentItem = () => {
       )}
     >
       <div className="no-thumbnail-img-wrapper">
-        {/* biome-ignore lint/performance/noImgElement: static SVG asset; next/image is unnecessary here */}
-        <img
-          src={imageSrc}
-          alt={t("Common:NoAgent", {
+        <ImageIcon
+          aria-label={t("Common:NoAgent", {
             defaultValue: "No AI agent",
           })}
+          role="img"
         />
       </div>
       <Text className="no-item-text" textAlign="center">

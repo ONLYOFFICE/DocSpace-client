@@ -87,6 +87,7 @@ import { Knowledge } from "./knowledge";
 import WebSearchSaas from "./search/WebSearchSaas";
 import KnowledgeBaseSaas from "./knowledge/KnowledgeBaseSaas";
 import AiModelsSaas from "./models/AiModelsSaas";
+import AILimits from "./limits";
 import AIFeaturesBanner from "./sub-components/AIFeaturesBanner";
 
 const BASE_PATH = "/portal-settings/ai-settings";
@@ -97,6 +98,7 @@ const TAB_IDS = {
   MCP_SERVERS: "mcp-servers",
   WEB_SEARCH: "web-search",
   KNOWLEDGE: "knowledge",
+  LIMITS: "limits",
 } as const;
 
 const detectTabFromPath = (pathname: string) => {
@@ -104,6 +106,7 @@ const detectTabFromPath = (pathname: string) => {
   if (pathname.includes("mcp-servers")) return TAB_IDS.MCP_SERVERS;
   if (pathname.includes("web-search")) return TAB_IDS.WEB_SEARCH;
   if (pathname.includes("knowledge")) return TAB_IDS.KNOWLEDGE;
+  if (pathname.includes("limits")) return TAB_IDS.LIMITS;
   return TAB_IDS.AI_MODELS;
 };
 
@@ -228,6 +231,16 @@ const AISettings = ({
       onClick: makeOnClick(TAB_IDS.KNOWLEDGE),
       isDisabled: disableNonAiModels,
     },
+    ...(standalone
+      ? []
+      : [
+          {
+            id: TAB_IDS.LIMITS,
+            name: t("Common:AILimits"),
+            content: <AILimits />,
+            onClick: makeOnClick(TAB_IDS.LIMITS),
+          },
+        ]),
   ];
 
   const tabsStickyTop = SECTION_HEADER_HEIGHT[currentDeviceType!];

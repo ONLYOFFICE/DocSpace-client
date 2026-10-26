@@ -251,11 +251,13 @@ export const getIcon = (
   isKnowledgeTab?: boolean,
   isAIRoom?: boolean,
   isPublicRoom: boolean = false,
+  aiReady: boolean = false,
 ): JSX.Element => {
   if (isRootEmptyPage && isPublicRoom)
     return isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />;
 
-  if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
+  if (isRootEmptyPage)
+    return getRootIcon(rootFolderType, access, isBaseTheme, aiReady);
 
   // The knowledge tab shows a folder whose `folderType` isn't a default-folder
   // type, so `getFolderIcon` would fall through to its empty `<div />` and the
@@ -821,4 +823,3 @@ export const getOptions = (
       return [];
   }
 };
-

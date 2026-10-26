@@ -76,13 +76,15 @@ const PaymentsRedirect = inject(({ settingsStore }) => ({
 
 const ProtectedAISettingsRoute = inject(({ settingsStore }) => ({
   aiServicesEnabled: settingsStore.aiServicesEnabled,
+  standalone: settingsStore.standalone,
 }))(
-  observer(({ aiServicesEnabled, children }) => {
-    return aiServicesEnabled ? (
-      children
-    ) : (
-      <Navigate to="/portal-settings" replace />
-    );
+  observer(({ aiServicesEnabled, standalone, hideOnStandalone, children }) => {
+    if (!aiServicesEnabled) return <Navigate to="/portal-settings" replace />;
+
+    if (hideOnStandalone && standalone)
+      return <Navigate to="/portal-settings/ai-settings/ai-models" replace />;
+
+    return children;
   }),
 );
 
@@ -131,6 +133,10 @@ const PortalSettingsRoutes = {
     },
     {
       path: "customization/default-templates",
+      element: <ViewComponent />,
+    },
+    {
+      path: "customization/metadata-templates",
       element: <ViewComponent />,
     },
     {
@@ -424,6 +430,14 @@ const PortalSettingsRoutes = {
       path: "ai-settings/knowledge",
       element: (
         <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
+      path: "ai-settings/limits",
+      element: (
+        <ProtectedAISettingsRoute hideOnStandalone>
           <ViewComponent />
         </ProtectedAISettingsRoute>
       ),

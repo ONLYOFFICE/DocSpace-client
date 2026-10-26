@@ -34,6 +34,7 @@
  */
 
 import { Toast } from "@onlyoffice/apps-ui-kit/components/toast";
+import ForeignTextGuard from "@docspace/shared/components/foreign-text-guard";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type {
   TGetColorTheme,
@@ -98,6 +99,7 @@ const Providers = ({ children, contextData }: TProviders) => {
               {children}
             </EncryptionProviderWrapper>
             <Toast isSSR />
+            <ForeignTextGuard />
           </ErrorProvider>
         </ThemeProvider>
       </TranslationProvider>

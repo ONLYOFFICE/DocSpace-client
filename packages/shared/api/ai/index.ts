@@ -61,6 +61,10 @@ import type {
   TGetAgents,
   TAIUserConfig,
   TProfilesList,
+  TMetadataAIFillRequest,
+  TMetadataAIFillResult,
+  TMetadataAIGenerateRequest,
+  TMetadataAIGenerateResult,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -507,3 +511,41 @@ export const updateAIUserConfig = async (data: TAIUserConfig) => {
 
   return res as TAIUserConfig;
 };
+
+const postMetadataAI = async <T>(
+  route: "fill" | "generate",
+  data: TMetadataAIFillRequest | TMetadataAIGenerateRequest,
+  signal?: AbortSignal,
+) => {
+  const response = await authFetch(`/api/2.0/ai/meta/${route}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+    signal,
+  });
+
+  const body = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw Object.assign(new Error(body?.error ?? response.statusText), {
+      status: response.status,
+      skipped: body?.skipped,
+      code: body?.code,
+      providerMessage: body?.providerMessage,
+    });
+  }
+
+  return body as T;
+};
+
+export const fillMetadataWithAI = (
+  data: TMetadataAIFillRequest,
+  signal?: AbortSignal,
+) => postMetadataAI<TMetadataAIFillResult>("fill", data, signal);
+
+export const generateMetadataWithAI = (
+  data: TMetadataAIGenerateRequest,
+  signal?: AbortSignal,
+) => postMetadataAI<TMetadataAIGenerateResult>("generate", data, signal);

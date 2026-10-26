@@ -3,7 +3,7 @@
   "content": "Favorite files",
   "content_en_sha1_hash": "2c3e71c8bc44fde8dff5efc87b140e933c09d30e",
   "created_at": "2025-08-29T14:33:19.030Z",
-  "updated_at": "2026-09-14T20:38:41.337Z",
+  "updated_at": "2026-10-22T16:09:36.799Z",
   "comment": {
     "text": "This is a label for a folder or section in the file management interface, indicating items that have been marked as favorites. It appears in navigation menus and settings for default page display.",
     "is_auto": true,
@@ -19,32 +19,32 @@
     },
     {
       "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 167,
-      "context": "// are named.\n const places = [\n (hasRecent || hasFavorites) &&\n t(\"AiAgentsTour:AgentPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n hasTrash &&\n t(\"AiAgentsTour:AgentPlacesTrash\", { trash: t(\"Common:TrashSection\") }),\n ].filter(Boolean) as string[];",
+      "line_number": 154,
+      "context": "const places = [\n hasRecent &&\n t(\"FilesTour:TourPlacesRecent\", { sectionName: t(\"Common:Recent\") }),\n hasFavorites &&\n t(\"FilesTour:TourPlacesFavorites\", {\n sectionName: t(\"Common:Favorites\"),\n }),\n hasTrash &&\n t(\"FilesTour:TourPlacesTrash\", { sectionName: t(\"Common:TrashSection\") }),\n ].filter(Boolean) as string[];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 368,
+      "line_number": 391,
       "context": "),\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n ...nav(\n scopedUrl(\n CategoryType.Favorite,\n \"/rooms/favorite\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 368,
+      "line_number": 391,
       "context": "),\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n ...nav(\n scopedUrl(\n CategoryType.Favorite,\n \"/rooms/favorite\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 200,
+      "line_number": 183,
       "context": "}),\n recentId &&\n t(\"FilesTour:TourPlacesRecent\", { sectionName: t(\"Common:Recent\") }),\n favoritesId &&\n t(\"FilesTour:TourPlacesFavorites\", {\n sectionName: t(\"Common:Favorites\"),\n }),\n trashId &&\n t(\"FilesTour:TourPlacesTrash\", {\n sectionName: t(\"Common:TrashSection\"),\n }),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 149,
-      "context": "// here, so for everyone else its bullet drops rather than pointing at an item\n // they do not have.\n const places = [\n t(\"FormsTour:FormsPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),",
+      "line_number": 130,
+      "context": "// One bullet per sub-item, named by the sidebar's own labels; Templates is\n // admin-only there too.\n const places = [\n t(\"FilesTour:TourPlacesRecent\", { sectionName: t(\"Common:Recent\") }),\n t(\"FilesTour:TourPlacesFavorites\", { sectionName: t(\"Common:Favorites\") }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),\n t(\"FilesTour:TourPlacesTrash\", { sectionName: t(\"Common:TrashSection\") }),",
       "module": "/packages/client"
     },
     {
@@ -74,7 +74,7 @@
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
       "line_number": 243,
-      "context": "t(\"RoomsTour:RoomsPlacesTitle\"),\n createElement(TourList, {\n items: [\n t(\"RoomsTour:RoomsPlacesFiles\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n trash: t(\"Common:TrashSection\"),\n }),\n t(\"RoomsTour:RoomsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),",
+      "context": "\"rooms-recent\",\n t(\"RoomsTour:RoomsPlacesTitle\"),\n [\n t(\"FilesTour:TourPlacesRecent\", { sectionName: t(\"Common:Recent\") }),\n t(\"FilesTour:TourPlacesFavorites\", {\n sectionName: t(\"Common:Favorites\"),\n }),\n t(\"FilesTour:TourPlacesTrash\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n canUseTemplates &&",
       "module": "/packages/client"
     },
     {

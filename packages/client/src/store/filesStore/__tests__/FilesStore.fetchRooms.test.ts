@@ -224,6 +224,33 @@ describe("FilesStore rooms requests — Private section scope", () => {
     vi.restoreAllMocks();
   });
 
+  it("Host enables private rooms in a frame: the rooms request waits for the frame configuration", async () => {
+    openAddress("/private/filter");
+    const store = storeOnRoomsList(true);
+    let settle = () => {};
+    store.appsStore = {
+      isPrivateRoomsSectionAvailable: true,
+      isInstalled: () => true,
+      waitForFrameOptIn: () =>
+        new Promise<void>((resolve) => {
+          settle = resolve;
+        }),
+    };
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+
+    const pending = store.fetchRooms(0);
+    await Promise.resolve();
+
+    expect(getRooms).not.toHaveBeenCalled();
+
+    settle();
+    await pending;
+
+    expect(getRooms).toHaveBeenCalledTimes(1);
+  });
+
   it.each([
     ["/private/filter", RoomSearchArea.Active],
     ["/private/12/filter", RoomSearchArea.Active],

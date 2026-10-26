@@ -41,6 +41,7 @@ import { getRoomsAddressOfPrivateAddress } from "SRC_DIR/helpers/privateRoomsSec
 
 type PrivateRoomsSectionRouteProps = {
   isSectionAvailable: boolean;
+  isFrameOptInSettled: boolean;
   isAppsLoaded: boolean;
   isAppsLoadFailed: boolean;
   ensureAppsLoaded: () => void;
@@ -51,6 +52,7 @@ type PrivateRoomsSectionRouteProps = {
 /** Opens a Private section address, or its Rooms counterpart without the section. */
 const PrivateRoomsSectionRoute = ({
   isSectionAvailable,
+  isFrameOptInSettled,
   isAppsLoaded,
   isAppsLoadFailed,
   ensureAppsLoaded,
@@ -62,6 +64,8 @@ const PrivateRoomsSectionRoute = ({
   useEffect(() => {
     ensureAppsLoaded();
   }, [ensureAppsLoaded]);
+
+  if (!isFrameOptInSettled) return null;
 
   if (!isSectionAvailable)
     return (
@@ -80,6 +84,7 @@ const PrivateRoomsSectionRoute = ({
 
 export default inject<TStore>(({ appsStore }) => ({
   isSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
+  isFrameOptInSettled: appsStore.isFrameOptInSettled,
   isAppsLoaded: appsStore.isLoaded,
   isAppsLoadFailed: appsStore.isLoadFailed,
   ensureAppsLoaded: appsStore.ensureLoaded,

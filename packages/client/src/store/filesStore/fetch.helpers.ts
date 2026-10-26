@@ -883,11 +883,14 @@ export function fetchRoomsImpl(
   // section requests `searchArea=Forms`. The filter (carrying searchArea)
   // maps directly to the request — no client-side room-type scoping needed.
   // The Rooms/Private split is client-side: scopeRoomsRequest adds it.
+  const { signal } = self.roomsController;
+
+  // The scope depends on the Private section, which an SDK frame knows only
+  // once its configuration has arrived.
   const request = () =>
-    api.rooms
-      .getRooms(
-        scopeRoomsRequest(self, filterData),
-        self.roomsController!.signal,
+    Promise.resolve(self.appsStore?.waitForFrameOptIn?.())
+      .then(() =>
+        api.rooms.getRooms(scopeRoomsRequest(self, filterData), signal),
       )
       .then(async (data) => {
         if (!folderId) setSelectedNode([`${data.current.id}`]);

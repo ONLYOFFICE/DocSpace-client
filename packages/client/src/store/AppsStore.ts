@@ -59,7 +59,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, runInAction, when } from "mobx";
 
 import SocketHelper, {
   SocketCommands,
@@ -74,10 +74,18 @@ import {
 } from "@docspace/shared/api/apps";
 import type { TApp } from "@docspace/shared/api/apps/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
+import {
+  isPrivateRoomsEnabled,
+  isPrivateRoomsOptInValue,
+} from "@docspace/shared/utils/privateRooms";
+import { isSdkFrameWindow } from "@docspace/shared/utils/common";
 import { isAppTemporarilyDisabled } from "SRC_DIR/helpers/disabled-apps";
 
 const PRIVATE_ROOMS_APP_ID = "e2e-rooms";
+
+// How long an SDK frame waits for its configuration before it treats the
+// host as not opted in.
+const FRAME_CONFIG_TIMEOUT = 5000;
 
 class AppsStore {
   apps: TApp[] = [];
@@ -96,13 +104,40 @@ class AppsStore {
   // Spec: private-rooms/sidebar-section, "Section availability"
   privateRoomsOptIn = isPrivateRoomsEnabled();
 
+  // Spec: private-rooms/feature-gating, "Client in an embedded frame takes the host opt-in"
+  framePrivateRoomsOptIn = false;
+
+  // An SDK frame learns the host's opt-in only from its configuration.
+  isFrameOptInSettled = !isSdkFrameWindow();
+
   constructor(settingsStore: SettingsStore) {
     this.settingsStore = settingsStore;
 
     makeAutoObservable(this);
 
     this.subscribeToSocket();
+
+    if (!this.isFrameOptInSettled) {
+      when(() => !!this.settingsStore.frameConfig, {
+        timeout: FRAME_CONFIG_TIMEOUT,
+      })
+        .then(() =>
+          this.settleFrameOptIn(this.settingsStore.frameConfig?.privateRooms),
+        )
+        .catch(() => this.settleFrameOptIn(false));
+    }
   }
+
+  settleFrameOptIn = (value: unknown) => {
+    this.framePrivateRoomsOptIn = isPrivateRoomsOptInValue(value);
+    this.isFrameOptInSettled = true;
+  };
+
+  /** Resolves once an SDK frame knows whether its host opted in. */
+  waitForFrameOptIn = async () => {
+    if (this.isFrameOptInSettled) return;
+    await when(() => this.isFrameOptInSettled);
+  };
 
   private subscribeToSocket = () => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
@@ -184,7 +219,7 @@ class AppsStore {
   // The Private section: the opt-in captured at load, and the E2E rooms app
   // read as `isInstalled` reads it, without asking the flag again.
   get isPrivateRoomsSectionAvailable() {
-    if (!this.privateRoomsOptIn) return false;
+    if (!this.privateRoomsOptIn && !this.framePrivateRoomsOptIn) return false;
     if (!this.canManageApps || !this.isLoaded) return true;
     return (
       this.apps.find((a) => a.id === PRIVATE_ROOMS_APP_ID)?.enabled ?? false

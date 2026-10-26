@@ -652,6 +652,12 @@ export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
 
+/** Whether this window is a frame the SDK opened, known before its configuration arrives. */
+export const isSdkFrameWindow = () =>
+  typeof window !== "undefined" &&
+  window.self !== window.parent &&
+  window.name.startsWith(`${FRAME_NAME}__#`);
+
 export const getFrameInitialTheme = (): ThemeKeys | null => {
   if (typeof window === "undefined" || !window.name.includes(FRAME_NAME))
     return null;

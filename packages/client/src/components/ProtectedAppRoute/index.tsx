@@ -45,6 +45,7 @@ type ProtectedAppRouteProps = {
   // available: it may hold a private room.
   admitPrivateRooms?: boolean;
   isPrivateRoomsSectionAvailable: boolean;
+  isFrameOptInSettled: boolean;
   isInstalled: (id: string) => boolean;
   isAppsLoaded: boolean;
   isAppsLoadFailed: boolean;
@@ -60,6 +61,7 @@ const ProtectedAppRoute = ({
   appId,
   admitPrivateRooms = false,
   isPrivateRoomsSectionAvailable,
+  isFrameOptInSettled,
   isInstalled,
   isAppsLoaded,
   isAppsLoadFailed,
@@ -89,6 +91,8 @@ const ProtectedAppRoute = ({
   const isFolderAddress = new URLSearchParams(location.search).has("folder");
 
   // Spec: private-rooms/sidebar-section, "Private rooms open inside the section"
+  if (admitPrivateRooms && isFolderAddress && !isFrameOptInSettled)
+    return null;
   if (admitPrivateRooms && isPrivateRoomsSectionAvailable && isFolderAddress)
     return children;
 
@@ -97,6 +101,7 @@ const ProtectedAppRoute = ({
 
 export default inject<TStore>(({ appsStore, userStore }) => ({
   isPrivateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
+  isFrameOptInSettled: appsStore.isFrameOptInSettled,
   isInstalled: appsStore.isInstalled,
   isAppsLoaded: appsStore.isLoaded,
   isAppsLoadFailed: appsStore.isLoadFailed,

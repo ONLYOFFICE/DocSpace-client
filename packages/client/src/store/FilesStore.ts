@@ -389,7 +389,8 @@ class FilesStore {
   // watchPrivateRoomsSection; read for the Private section's request scope
   // and address.
   appsStore: Nullable<
-    Pick<AppsStore, "isPrivateRoomsSectionAvailable" | "isInstalled">
+    Pick<AppsStore, "isPrivateRoomsSectionAvailable" | "isInstalled"> &
+      Partial<Pick<AppsStore, "waitForFrameOptIn">>
   > = null;
 
   arrRoomGroups: unknown[] = [];

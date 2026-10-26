@@ -70,6 +70,7 @@ const renderRoute = (props: Partial<Props> = {}) =>
       canManageApps
       isGuest={false}
       isPrivateRoomsSectionAvailable={false}
+      isFrameOptInSettled
       {...(props as object)}
     >
       <div data-testid="section" />
@@ -146,6 +147,15 @@ describe("ProtectedAppRoute", () => {
       renderRoute({ ...roomsOff, isPrivateRoomsSectionAvailable: true });
 
       expect(screen.getByTestId("section")).toBeInTheDocument();
+    });
+
+    it("waits for the frame configuration in an SDK frame before turning a folder address away", () => {
+      router.search = "?folder=12";
+
+      renderRoute({ ...roomsOff, isFrameOptInSettled: false });
+
+      expect(screen.queryByTestId("section")).toBeNull();
+      expect(screen.queryByTestId("redirect")).toBeNull();
     });
 
     it("admits a folder address while the Private section is available", () => {

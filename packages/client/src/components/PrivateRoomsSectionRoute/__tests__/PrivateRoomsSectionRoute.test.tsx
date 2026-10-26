@@ -66,6 +66,7 @@ const renderRoute = (props: Partial<Props> = {}) =>
   render(
     <PrivateRoomsSectionRoute
       isSectionAvailable
+      isFrameOptInSettled
       isAppsLoaded
       isAppsLoadFailed={false}
       ensureAppsLoaded={vi.fn()}
@@ -108,6 +109,13 @@ describe("PrivateRoomsSectionRoute", () => {
     renderRoute({ isAppsLoaded: false, isSectionAvailable: false });
 
     expect(screen.getByTestId("redirect")).toBeInTheDocument();
+  });
+
+  it("waits for the frame configuration in an SDK frame instead of leaving the section", () => {
+    renderRoute({ isFrameOptInSettled: false, isSectionAvailable: false });
+
+    expect(screen.queryByTestId("section")).toBeNull();
+    expect(screen.queryByTestId("redirect")).toBeNull();
   });
 
   it("asks for the apps list on mount", () => {

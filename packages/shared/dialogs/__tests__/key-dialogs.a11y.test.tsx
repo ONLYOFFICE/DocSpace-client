@@ -9,8 +9,7 @@ import { RecoveryPhraseInputModal } from "../key-recovery/RecoveryPhraseInputMod
 import { PassphraseModal } from "../passphrase-modal/PassphraseModal";
 
 // Spec: private-rooms/key-management, "Key dialogs are accessible and adapt
-// to narrow screens". The passphrase fields are named by their placeholder
-// (design D5): the kit's PasswordInput does not forward aria attributes.
+// to narrow screens".
 
 const KEY = btoa(String.fromCharCode(...new Uint8Array(32).fill(7)));
 const MNEMONIC = Array.from({ length: 24 }, () => "abandon").join(" ");
@@ -113,13 +112,29 @@ describe("key dialogs", () => {
     });
   }
 
-  it("Screen reader: the passphrase dialog labels its field and actions", () => {
-    render(dialogs[0].element());
-    const dialog = screen.getByRole("dialog", { name: "Common:EnterPassphrase" });
+  it("Passphrase field", () => {
+    render(
+      <PassphraseModal visible isNew onSubmit={vi.fn()} onCancel={vi.fn()} />,
+    );
+    const dialog = screen.getByRole("dialog", {
+      name: "Common:CreatePassphrase",
+    });
 
-    expect(
-      dialog.querySelector("input[name='passphrase']"),
-    ).toHaveAttribute("placeholder", "Common:Passphrase");
+    for (const [name, placeholder] of [
+      ["passphrase", "Common:Passphrase"],
+      ["confirmPassphrase", "Common:ConfirmPassphrase"],
+    ]) {
+      const field = dialog.querySelector<HTMLInputElement>(
+        `input[name='${name}']`,
+      );
+      expect(field).toHaveAttribute("placeholder", placeholder);
+      expect(field!.labels).toHaveLength(0);
+    }
+  });
+
+  it("Screen reader: the passphrase dialog names its actions", () => {
+    render(dialogs[0].element());
+
     expect(
       screen.getByRole("checkbox", { name: "Common:RememberDeviceLabel" }),
     ).toBeInTheDocument();

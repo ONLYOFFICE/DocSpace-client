@@ -16,7 +16,7 @@
 
 ## 4. Spec wording and test names
 
-- [ ] 4.1 Rename the passphrase case of `packages/shared/dialogs/__tests__/key-dialogs.a11y.test.tsx` to "Passphrase field" and assert both placeholders, `Common:Passphrase` and `Common:ConfirmPassphrase`, on the create variant of the dialog (design D2; the spec wording itself lands with the archive); verify with `cd packages/shared && pnpm exec vitest run dialogs`
+- [x] 4.1 Rename the passphrase case of `packages/shared/dialogs/__tests__/key-dialogs.a11y.test.tsx` to "Passphrase field" and assert both placeholders, `Common:Passphrase` and `Common:ConfirmPassphrase`, on the create variant of the dialog (design D2; the spec wording itself lands with the archive); verify with `cd packages/shared && pnpm exec vitest run dialogs`
 - [ ] 4.2 Rename the dedupe cases to the scenario name "Decrypted names clash" (design D5): `src/store/filesActionsStore/__tests__/FilesActionsStore.deleteDownload.test.ts` line 271, and the two `deduplicateFileNames` cases of `packages/shared/services/private-room/__tests__/encrypted-download.test.ts` lines 169 and 185 with their qualifiers after the prefix; verify with `cd packages/client && pnpm exec vitest run FilesActionsStore.deleteDownload` and `cd packages/shared && pnpm exec vitest run encrypted-download`
 
 ## 5. Integration

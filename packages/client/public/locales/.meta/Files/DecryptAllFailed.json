@@ -3,7 +3,7 @@
   "content": "Failed to decrypt all selected files",
   "content_en_sha1_hash": "62dbd07438816ef485c9068348c3f5c97a97f1cc",
   "created_at": "2026-05-24T17:27:47.382Z",
-  "updated_at": "2026-10-21T10:17:45.825Z",
+  "updated_at": "2026-10-22T16:09:36.966Z",
   "comment": {
     "text": "Error toast message appearing when the decryption of all selected files fails.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Access",
   "content_en_sha1_hash": "2f81a22de0af5e9eab19326e19693f86ce612518",
   "created_at": "2026-08-31T18:23:41.713Z",
-  "updated_at": "2026-10-21T10:17:45.764Z",
+  "updated_at": "2026-10-23T12:28:45.610Z",
   "comment": {
     "text": "Page title and menu item label for the section managing portal access permissions within security settings.",
     "is_auto": true,

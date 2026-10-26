@@ -3,7 +3,7 @@
   "content": "New documents are saved to {{sectionName}} by default",
   "content_en_sha1_hash": "62bd21983c1f3e6af1be9238cd22b45e431bf4da",
   "created_at": "2026-08-21T00:00:00.000Z",
-  "updated_at": "2026-10-21T10:17:45.740Z",
+  "updated_at": "2026-10-22T16:09:36.888Z",
   "comment": {
     "text": "Subtitle under the Dashboard's \"Create or upload a file\" heading, telling the user where newly created documents end up. `{{sectionName}}` is the name of the Files section.",
     "is_auto": false,

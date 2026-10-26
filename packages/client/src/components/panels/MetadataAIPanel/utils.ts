@@ -48,6 +48,7 @@ import type {
   TEntryMetadata,
 } from "@docspace/shared/api/metadata/types";
 import type { TTranslation } from "@docspace/shared/types";
+import { getServiceLimitChatError } from "@docspace/shared/utils/ai";
 import {
   getMetadataInput,
   isMetadataSupported,
@@ -286,6 +287,12 @@ export const getSkippedTitles = (skipped: TMetadataAISkipped[]) =>
   skipped
     .filter(({ reason }) => reason !== "limit")
     .map(({ id, title }) => title ?? id);
+
+export const getMetadataAIServiceLimit = (error: unknown) => {
+  const { code, providerMessage } = (error ?? {}) as TMetadataAIError;
+
+  return getServiceLimitChatError({ code, message: providerMessage });
+};
 
 export const getMetadataAIError = (t: TTranslation, error: unknown) => {
   const { status, skipped } = (error ?? {}) as TMetadataAIError;

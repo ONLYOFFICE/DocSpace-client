@@ -3,7 +3,7 @@
   "content": "Archive",
   "content_en_sha1_hash": "2621c6fd51a58e1d1d5c491aac71488647b20224",
   "created_at": "2025-05-19T21:30:43.051Z",
-  "updated_at": "2026-10-22T15:29:24.311Z",
+  "updated_at": "2026-10-22T16:09:36.835Z",
   "comment": {
     "text": "Noun used in two senses: the Archive section of archived rooms (sidebar item under Rooms and under Private, section and header title, archive and empty-archive dialogs, history entries), and the file type name shown in the Type column for compressed archive files such as ZIP. Use one noun that fits both.",
     "is_auto": true,

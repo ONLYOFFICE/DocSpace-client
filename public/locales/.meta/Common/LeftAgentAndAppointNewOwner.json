@@ -3,7 +3,7 @@
   "content": "You have left the agent and appointed a new owner",
   "content_en_sha1_hash": "6a1b20156398d38d926af0af3b0c1e2d66f8c3c8",
   "created_at": "2025-10-27T16:14:30.390Z",
-  "updated_at": "2026-10-21T10:17:45.826Z",
+  "updated_at": "2026-10-22T16:09:36.968Z",
   "comment": {
     "text": "Toast message. This message confirms that the user, who was an agent, has successfully left the agent role and transferred ownership to another user.",
     "is_auto": true,

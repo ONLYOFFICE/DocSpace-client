@@ -3,7 +3,7 @@
   "content": "Your previous {{service}} plan",
   "content_en_sha1_hash": "52fea8dc23e905809ef7bab6e47425bb69b4b840",
   "created_at": "2026-08-12T11:00:48.750Z",
-  "updated_at": "2026-10-21T10:17:45.779Z",
+  "updated_at": "2026-10-22T16:09:36.920Z",
   "comment": {
     "text": "A heading in the plan renewal panel that identifies the user's prior subscription, where {{service}} represents the name of the service.",
     "is_auto": true,

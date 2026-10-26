@@ -3,7 +3,7 @@
   "content": "Guests cannot be assigned as Content creator.\nOnly Room admins, Full admins and Users are eligible for this role.",
   "content_en_sha1_hash": "e21f3e636f2b0d1a18825e95caf57242921a972c",
   "created_at": "2026-08-13T14:36:53.405Z",
-  "updated_at": "2026-10-21T10:17:45.725Z",
+  "updated_at": "2026-10-22T16:09:36.874Z",
   "comment": {
     "text": "Tooltip or warning text in the Invite or Members panel that appears when attempting to assign the \"Content creator\" role to a guest user.",
     "is_auto": true,

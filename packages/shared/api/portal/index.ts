@@ -658,3 +658,23 @@ export const setAiModelRestrictions = async (
   });
 };
 
+export async function setUserAILimits(
+  userIds: string[],
+  amountValue: number,
+  period: string,
+) {
+  const res = (await request({
+    method: "put",
+    url: "/portal/payment/servicelimit/participants",
+    data: { userIds, amountValue, period },
+  })) as number;
+
+  return res;
+}
+
+export async function deleteServiceLimit(id: number) {
+  await request({
+    method: "delete",
+    url: `/portal/payment/servicelimit/${id}`,
+  });
+}

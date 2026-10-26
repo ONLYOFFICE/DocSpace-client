@@ -3,7 +3,7 @@
   "content": "Couldn't switch to Dev Pack. Try again later or contact support.",
   "content_en_sha1_hash": "ff245fe4ba44ef16dbefbeca13dec79be849a0ab",
   "created_at": "2026-10-10T12:49:51.051Z",
-  "updated_at": "2026-10-21T10:17:45.817Z",
+  "updated_at": "2026-10-22T16:09:36.960Z",
   "comment": {
     "text": "Error toast shown in the Docs Connect plan panel when the billing service declines switching the subscription to the Dev Pack plan. Full sentence; write Dev Pack the same way as the DocsConnect:DevPack plan name in this language.",
     "is_auto": true,

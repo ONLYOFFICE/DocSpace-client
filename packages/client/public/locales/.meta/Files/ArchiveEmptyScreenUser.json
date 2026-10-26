@@ -3,7 +3,7 @@
   "content": "Rooms that have been archived will appear here.",
   "content_en_sha1_hash": "05ac670d31c702deb65adabc6bd0d48ebe2ed0bc",
   "created_at": "2025-05-19T21:30:55.286Z",
-  "updated_at": "2026-10-22T13:13:49.563Z",
+  "updated_at": "2026-10-22T16:09:36.820Z",
   "comment": {
     "text": "This text appears on an empty screen in the \"Archive\" section for users without full access rights. It informs them that archived rooms will be listed there once available.",
     "is_auto": true,

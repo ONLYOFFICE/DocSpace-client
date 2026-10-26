@@ -257,5 +257,7 @@ export type TMetadataAIGenerateResult = {
 export type TMetadataAIError = Error & {
   status?: number;
   skipped?: TMetadataAISkipped[];
+  code?: string;
+  providerMessage?: string;
 };
 

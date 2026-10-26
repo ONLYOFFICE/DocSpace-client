@@ -2,8 +2,8 @@
   "key_path": "AiServicesManagementDescription",
   "content": "Turn AI agents & tools on or off across {{productName}} and {{organizationName}} editors. When disabled, the {{aiSettings}} section is hidden, AI agents become unavailable to all users, and paid {{organizationName}} {{aiServices}} can no longer be accessed. Your interaction history is kept safe and fully restored if you turn {{aiServices}} back on.",
   "content_en_sha1_hash": "0329ae9b8eb30ac3bf05d13164ca3fa034c3231a",
-  "created_at": "2026-10-21T10:17:39.450Z",
-  "updated_at": "2026-10-21T10:17:45.767Z",
+  "created_at": "2026-10-22T16:09:30.922Z",
+  "updated_at": "2026-10-22T16:09:36.911Z",
   "comment": {
     "text": "",
     "is_auto": false,

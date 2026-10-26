@@ -69,6 +69,7 @@ export type RowViewProps = {
 
   showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
   isDefaultUsersQuotaSet?: CurrentQuotasStore["isDefaultUsersQuotaSet"];
+  showAISpendingInfo?: UsersStore["showAISpendingInfo"];
 
   isRoomAdmin?: TUser["isRoomAdmin"];
   withContentSelection?: ContactsHotkeysStore["withContentSelection"];
@@ -112,6 +113,7 @@ export type SimpleUserRowProps = {
   contactsTab: UsersStore["contactsTab"];
   showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
   isDefaultUsersQuotaSet?: CurrentQuotasStore["isDefaultUsersQuotaSet"];
+  showAISpendingInfo?: UsersStore["showAISpendingInfo"];
 
   inProgress?: boolean;
   itemIndex?: number;
@@ -126,6 +128,7 @@ export type UserContentProps = {
   contactsTab: UsersStore["contactsTab"];
   showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
   isDefaultUsersQuotaSet?: CurrentQuotasStore["isDefaultUsersQuotaSet"];
+  showAISpendingInfo?: UsersStore["showAISpendingInfo"];
 
   standalone?: boolean;
 

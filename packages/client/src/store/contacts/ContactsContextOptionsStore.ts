@@ -78,9 +78,11 @@ import PersonShareReactSvgUrl from "PUBLIC_DIR/images/person.share.react.svg?url
 import PersonInviteReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
 import CatalogGuestReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.guest.react.svg?url";
 import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
+import AIReactSvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import {
+  changeUserAILimit,
   createGroup,
   onDeletePersonalDataClick,
   onInviteAgainClick,
@@ -321,6 +323,14 @@ class ContactsConextOptionsStore {
                 : null,
             withDropDown: !isRoomAdmin,
             items: isRoomAdmin ? null : this.getUsersChangeTypeOptions(t, item),
+          };
+        case "change-ai-limit":
+          return {
+            id: "option_change-ai-limit",
+            key: option,
+            icon: AIReactSvgUrl,
+            label: t("Common:ChangeAILimit"),
+            onClick: () => changeUserAILimit([item]),
           };
         case "remove-guest":
           return {

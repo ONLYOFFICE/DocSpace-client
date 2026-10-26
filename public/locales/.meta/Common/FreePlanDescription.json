@@ -3,7 +3,7 @@
   "content": "You are on the free {{planName}} plan.",
   "content_en_sha1_hash": "e564225dded8baa0ce1b9e19d7ffdc309174eb2c",
   "created_at": "2026-08-20T20:04:44.643Z",
-  "updated_at": "2026-10-21T10:17:45.741Z",
+  "updated_at": "2026-10-22T16:09:36.890Z",
   "comment": {
     "text": "Subline text in the Dashboard Header indicating the user's current free subscription status, including the {{planName}} variable for the plan name.",
     "is_auto": true,

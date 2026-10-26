@@ -51,6 +51,7 @@ The server does not stop any of these, since it accepts an upload session withou
   - "Create menu inside a private room": PDF form offered, every create entry encrypted.
   - "Mixed and folder downloads refused": folder selections and private room downloads refused as well.
   - "Decrypted titles in lists and history": recovered on every list update, shown in pickers and recent files.
+  - "Folder operations use the server path": a folder move into another private room gets the move refusal, as in the client.
 
   New requirements: private rooms only through the private pages; same-room moves by the server; the shared upload rules; the shared menu rules; localized errors; membership from every entry point; leaving revokes own entries; archive rules; the light-client limits.
 

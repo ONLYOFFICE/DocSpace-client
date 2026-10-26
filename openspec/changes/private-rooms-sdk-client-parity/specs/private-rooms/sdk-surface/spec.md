@@ -82,6 +82,25 @@ The SDK SHALL recover the decrypted names of encrypted files whenever the file l
 - **WHEN** an encrypted file appears in the open folder through a socket event or a navigation while the identity is unlocked
 - **THEN** its decrypted name is recovered and shown without reloading the page
 
+### Requirement: Folder operations use the server path
+A folder move within one private room, into any of its folders, SHALL be executed by the server without client-side re-encryption. A folder copied out of a private room or into another room, or moved out of private rooms, SHALL be withheld with Common:CannotTransferFolderFromPrivateRoom; a folder move into another private room is refused like any move there, with Common:CannotMoveToAnotherPrivateRoom. A folder copy SHALL NOT be offered inside a private room in this version.
+
+#### Scenario: Folder moved within a private room
+- **WHEN** the user moves a folder into another folder of the same private room
+- **THEN** the server moves the folder and the files keep their existing wraps
+
+#### Scenario: Folder transferred out of the room
+- **WHEN** the user copies a folder of a private room to any other room or folder, or moves it out of the private rooms
+- **THEN** the operation is refused with Common:CannotTransferFolderFromPrivateRoom and nothing is transferred
+
+#### Scenario: Folder moved to another private room
+- **WHEN** a move of a folder of a private room into another private room is requested
+- **THEN** it is refused with Common:CannotMoveToAnotherPrivateRoom and nothing is transferred
+
+#### Scenario: Folder copied within a private room
+- **WHEN** the user opens the context menu of a folder in a private room
+- **THEN** no copy action is offered, whatever rights the folder reports
+
 ## ADDED Requirements
 
 ### Requirement: Private rooms only through the private pages

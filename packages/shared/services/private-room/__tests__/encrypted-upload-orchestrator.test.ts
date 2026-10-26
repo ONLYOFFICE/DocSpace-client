@@ -37,11 +37,19 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AES_KEY_SIZE_BYTES } from "../../encryption/types";
 import {
+  getEncryptedUploadErrorMessage,
   getEncryptedUploadRefusalMessage,
   getEncryptedUploadRefusalNotice,
   orchestrateEncryptedUpload,
+  retryEncryptedUploads,
   uploadEncryptedFile,
 } from "../encrypted-upload-orchestrator";
+import {
+  EncryptedReimportError,
+  recoverDekForReimport,
+  sniffDse3Upload,
+} from "../encrypted-upload";
+import { listDecryptedFileNames } from "../encrypted-name-clash";
 import {
   clearDeviceSetupHintHandler,
   registerDeviceSetupHintHandler,
@@ -97,6 +105,17 @@ vi.mock("../../encryption/room-file-access", () => ({
 
 vi.mock("../encryption/filename-cache", () => ({
   rememberEncryptedFilename: vi.fn(),
+}));
+
+vi.mock("../encrypted-upload", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  sniffDse3Upload: vi.fn(async () => null),
+  recoverDekForReimport: vi.fn(),
+}));
+
+vi.mock("../encrypted-name-clash", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  listDecryptedFileNames: vi.fn(async () => []),
 }));
 
 vi.mock("../encrypted-filename-recovery", () => ({
@@ -373,6 +392,187 @@ describe("orchestrateEncryptedUpload - batch gate", () => {
       "Common:EncryptionUploadCancelled",
     );
     expect(getEncryptedUploadRefusalNotice(t, "no-key")).toBeNull();
+  });
+});
+
+describe("orchestrateEncryptedUpload - batch rules", () => {
+  const KEYS = { userId: "user-1", publicKey: "pk-own", publicKeyId: "key-1" };
+  const t = ((key: string) => key) as never;
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("Quota exceeded mid-batch: the files not started fail as quota failures", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    const quota = Object.assign(new Error("Quota exceeded"), {
+      response: { status: 507 },
+    });
+    vi.mocked(startUploadSession)
+      .mockResolvedValueOnce({ id: "session-1" } as never)
+      .mockRejectedValueOnce(quota);
+    const markQuotaError = vi.fn();
+    const onQuotaError = vi.fn();
+
+    const { results, quotaErrorRaised } = await orchestrateEncryptedUpload({
+      files: [
+        makeFile("a.docx", 16),
+        makeFile("b.docx", 16),
+        makeFile("c.docx", 16),
+      ],
+      uploadIds: ["row-1", "row-2", "row-3"],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+      uploadStore: { files: [], markQuotaError },
+      onQuotaError,
+    });
+
+    expect(startUploadSession).toHaveBeenCalledTimes(2);
+    expect(results.map((r) => r.ok)).toEqual([true, false, false]);
+    expect(markQuotaError.mock.calls).toEqual([
+      ["row-2", quota],
+      ["row-3", quota],
+    ]);
+    expect(onQuotaError).toHaveBeenCalledTimes(1);
+    expect(quotaErrorRaised).toBe(true);
+  });
+
+  it("Retry after navigation: the file goes to the folder it was first queued for, after the unlock prompt", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    const requireIdentity = vi.fn(async () => makeIdentity() as never);
+
+    const { results } = await retryEncryptedUploads({
+      items: [
+        { file: makeFile("b.docx", 16), uploadId: "row-2", folderId: 5, roomId: 10 },
+      ],
+      ...KEYS,
+      requireIdentity,
+    });
+
+    expect(requireIdentity).toHaveBeenCalledTimes(1);
+    expect(vi.mocked(startUploadSession).mock.calls[0][0]).toBe(5);
+    expect(vi.mocked(startUploadSession).mock.calls[0][4]).toBe(true);
+    expect(results).toMatchObject([{ ok: true, uploadId: "row-2" }]);
+  });
+
+  it("Ciphertext re-uploaded: the file goes as it is, under its recovered key and name", async () => {
+    const { startUploadSession, uploadChunkSequential } = await import(
+      "../../../api/files"
+    );
+    const { encryptFile } = await import("../../encryption/file-keys");
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+    const dek = new Uint8Array(AES_KEY_SIZE_BYTES).fill(7);
+    vi.mocked(sniffDse3Upload).mockResolvedValueOnce({} as never);
+    vi.mocked(recoverDekForReimport).mockResolvedValueOnce({
+      dek,
+      realName: "Report.docx",
+      sourceFileId: 77,
+    });
+    const downloaded = makeFile("5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx", 48);
+
+    const { results } = await orchestrateEncryptedUpload({
+      files: [downloaded],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+    });
+
+    expect(results).toMatchObject([{ ok: true, originalName: "Report.docx" }]);
+    expect(encryptFile).not.toHaveBeenCalled();
+    const [, uploadName, size, , encrypted] =
+      vi.mocked(startUploadSession).mock.calls[0];
+    expect(uploadName).not.toBe(downloaded.name);
+    expect(uploadName).toMatch(/\.docx$/);
+    expect([size, encrypted]).toEqual([48, true]);
+    const form = vi.mocked(uploadChunkSequential).mock.calls[0][2] as FormData;
+    expect((form.get("file") as Blob).size).toBe(48);
+    expect(vi.mocked(wrapDekForRecipients).mock.calls[0][0]).toMatchObject({
+      dek,
+    });
+  });
+
+  it("Ciphertext re-uploaded without a recoverable key: nothing is sent and the row names the re-import failure", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    vi.mocked(sniffDse3Upload).mockResolvedValueOnce({} as never);
+    vi.mocked(recoverDekForReimport).mockRejectedValueOnce(
+      new EncryptedReimportError("no source file decrypts the blob"),
+    );
+
+    const { results } = await orchestrateEncryptedUpload({
+      files: [makeFile("5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx", 48)],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+    });
+
+    expect(startUploadSession).not.toHaveBeenCalled();
+    expect(results[0].ok).toBe(false);
+    expect(getEncryptedUploadErrorMessage(t, results[0].error)).toBe(
+      "Common:EncryptionReimportFailed",
+    );
+    expect(getEncryptedUploadErrorMessage(t, new Error("network"))).toBe(
+      "Common:EncryptionPrepareFailed",
+    );
+  });
+
+  it("Upload with a clashing name: asked before any byte is sent; the kept file takes the first free suffix", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    const { encryptFile } = await import("../../encryption/file-keys");
+    vi.mocked(listDecryptedFileNames).mockResolvedValueOnce([
+      "Report.docx",
+      "Report (1).docx",
+    ]);
+    let sessionsAtPrompt = -1;
+    const onNameClash = vi.fn(async () => {
+      sessionsAtPrompt = vi.mocked(startUploadSession).mock.calls.length;
+      return true;
+    });
+
+    const { results } = await orchestrateEncryptedUpload({
+      files: [makeFile("Report.docx", 16), makeFile("notes.txt", 16)],
+      uploadIds: ["row-1", "row-2"],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+      onNameClash,
+    });
+
+    expect(onNameClash).toHaveBeenCalledWith([
+      { uploadId: "row-1", file: expect.any(File), renamed: "Report (2).docx" },
+    ]);
+    expect(sessionsAtPrompt).toBe(0);
+    expect(
+      vi.mocked(encryptFile).mock.calls.map(([, opts]) => opts?.fileName),
+    ).toEqual(["Report (2).docx", "notes.txt"]);
+    expect(results.map((r) => r.originalName)).toEqual([
+      "Report (2).docx",
+      "notes.txt",
+    ]);
+  });
+
+  it("Upload with a clashing name, cancelled: nothing is sent", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    vi.mocked(listDecryptedFileNames).mockResolvedValueOnce(["Report.docx"]);
+
+    const { results, aborted } = await orchestrateEncryptedUpload({
+      files: [makeFile("Report.docx", 16), makeFile("notes.txt", 16)],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+      onNameClash: async () => false,
+    });
+
+    expect(startUploadSession).not.toHaveBeenCalled();
+    expect(aborted).toBe(true);
+    expect(results.every((r) => r.aborted)).toBe(true);
   });
 });
 

@@ -48,7 +48,9 @@ import { requestDeviceSetupHint } from "../encryption/device-setup-hint-notifier
 import { rememberEncryptedFilename } from "../encryption/filename-cache";
 import { wipeDek } from "../encryption/file-keys";
 import { wrapDekForRecipients } from "../encryption/room-file-access";
-import type { IdentityKeyPair } from "../encryption/types";
+import { getEncryptionErrorMessage } from "../encryption/error-i18n";
+import { CryptoError } from "../encryption/errors";
+import type { DSE3Header, IdentityKeyPair } from "../encryption/types";
 import { selectMemberKeys } from "./room-member-keys";
 import {
   verifyMemberKeys,
@@ -61,10 +63,19 @@ import {
 } from "../../utils/uploadErrors";
 import {
   assertEncryptedUploadName,
+  EncryptedReimportError,
+  makeOpaqueUploadName,
   prepareEncryptedUpload,
+  recoverDekForReimport,
+  sniffDse3Upload,
   type PreparedUpload,
   type UploadRefusalReason,
 } from "./encrypted-upload";
+import {
+  listDecryptedFileNames,
+  resolveNameClashes,
+  type TNameClash,
+} from "./encrypted-name-clash";
 
 // ---------------------------------------------------------------------------
 // Public types
@@ -152,7 +163,33 @@ export interface OrchestrateEncryptedUploadArgs
   onQuotaError?: (error: unknown) => void;
   onFileError?: (file: File, error: unknown) => void;
   onFileComplete?: (file: File, result: UploadFileResult) => void;
+  /**
+   * Asked once, before any byte is sent, when files of the batch clash with
+   * decrypted names in their folder: true keeps both, the new file taking the
+   * first free copy suffix; false cancels the batch. Without it no names are
+   * compared.
+   */
+  onNameClash?: (clashes: EncryptedUploadNameClash[]) => Promise<boolean>;
 }
+
+export type EncryptedUploadBatchOptions = Omit<
+  OrchestrateEncryptedUploadArgs,
+  "files" | "uploadIds" | "folderId" | "roomId"
+>;
+
+/** A file of a batch and the folder it was queued for. */
+export type EncryptedUploadRetryItem = {
+  file: File;
+  uploadId: string;
+  folderId: number | string;
+  roomId: number | string;
+};
+
+export type EncryptedUploadNameClash = {
+  uploadId: string;
+  file: File;
+  renamed: string;
+};
 
 export interface UploadFileResult {
   ok: boolean;
@@ -230,6 +267,15 @@ export const getEncryptedUploadRefusalMessage = (
   refusal === "locked"
     ? t("Common:EncryptionLockedUpload")
     : t("Common:EncryptionKeysRequiredForUpload");
+
+/** The message a row whose upload failed is marked with. */
+export const getEncryptedUploadErrorMessage = (t: TFunction, error: unknown) => {
+  if (error instanceof EncryptedReimportError) {
+    return t("Common:EncryptionReimportFailed");
+  }
+  if (error instanceof CryptoError) return getEncryptionErrorMessage(t, error);
+  return t("Common:EncryptionPrepareFailed");
+};
 
 /** The notice a refused batch shows besides its failed rows, if any. */
 export const getEncryptedUploadRefusalNotice = (
@@ -408,6 +454,30 @@ async function wrapDekForSelfAndRoom(args: {
   }
 }
 
+/** A file downloaded without decryption goes back under its original key. */
+async function prepareReimport(
+  file: File,
+  header: DSE3Header,
+  { roomId, userId, identity }: EncryptedFileUploadArgs,
+): Promise<PreparedUpload> {
+  const { dek, realName } = await recoverDekForReimport({
+    file,
+    header,
+    roomId,
+    userId,
+    identity,
+  });
+  return {
+    data: file,
+    encrypted: true,
+    dek,
+    uploadFileName: makeOpaqueUploadName(file.name),
+    originalFileType: file.type || "application/octet-stream",
+    originalFileSize: file.size,
+    originalFileName: realName,
+  };
+}
+
 /**
  * Encrypts and uploads one file into a private room: prepare, encrypted
  * session, chunks, then the self-then-room wrap. The batch gate is the
@@ -439,12 +509,16 @@ export async function uploadEncryptedFile(
     // Signal the encryption phase so the upload-panel row can show a label.
     uploadStore?.setItemLabel?.(uploadId, "encrypting");
     try {
-      prepared = await prepareEncryptedUpload({
-        file,
-        folderId: typeof folderId === "number" ? folderId : Number(folderId),
-        roomType: RoomsType.CustomRoom,
-        isPrivate: true,
-      });
+      const reimportHeader = await sniffDse3Upload(file);
+      prepared = reimportHeader
+        ? await prepareReimport(file, reimportHeader, args)
+        : await prepareEncryptedUpload({
+            file,
+            folderId:
+              typeof folderId === "number" ? folderId : Number(folderId),
+            roomType: RoomsType.CustomRoom,
+            isPrivate: true,
+          });
     } finally {
       // Always clear the label whether encryption succeeded or failed.
       uploadStore?.setItemLabel?.(uploadId, undefined);
@@ -549,8 +623,11 @@ export async function uploadEncryptedFile(
  * design — parallel uploads share the room ACL and we don't want concurrent
  * `setFileEncryptionKeys` writes racing against each other.
  *
+ * Before any byte is sent the batch passes the gate (see
+ * openEncryptedUploadBatch) and, when the caller asks for it, the name-clash
+ * check. A quota error stops the files that have not started.
+ *
  * Caller is responsible for:
- *   - calling `requireUnlock` before invoking this (identity argument)
  *   - mounting an AbortController whose `abort()` fires on lock/logout/401
  *   - displaying progress via `uploadStore.reportProgress`
  *   - displaying quota errors via `onQuotaError` (per-file or batch-level)
@@ -558,27 +635,104 @@ export async function uploadEncryptedFile(
 export async function orchestrateEncryptedUpload(
   callerArgs: OrchestrateEncryptedUploadArgs,
 ): Promise<OrchestrateResult> {
-  const { files, uploadStore } = callerArgs;
-  const uploadIds = files.map(
-    (_, index) => callerArgs.uploadIds?.[index] ?? generateUploadId(),
+  const { files, uploadIds, folderId, roomId, ...options } = callerArgs;
+  return runEncryptedUploadBatch(
+    files.map((file, index) => ({
+      file,
+      uploadId: uploadIds?.[index] ?? generateUploadId(),
+      folderId,
+      roomId,
+    })),
+    options,
   );
+}
+
+/**
+ * Sends failed uploads again, each to the folder it was first queued for,
+ * through the batch gate again, the unlock prompt included.
+ */
+export async function retryEncryptedUploads(
+  args: EncryptedUploadBatchOptions & { items: EncryptedUploadRetryItem[] },
+): Promise<OrchestrateResult> {
+  const { items, ...options } = args;
+  return runEncryptedUploadBatch(items, options);
+}
+
+/**
+ * The batch's files whose decrypted names clash with names in their folder,
+ * each with the first free copy suffix; null when the caller cancels.
+ */
+async function checkUploadNameClashes(
+  entries: EncryptedUploadRetryItem[],
+  userId: string,
+  identity: IdentityKeyPair,
+  onNameClash: (clashes: EncryptedUploadNameClash[]) => Promise<boolean>,
+): Promise<Map<string, string> | null> {
+  const byFolder = new Map<string, EncryptedUploadRetryItem[]>();
+  for (const entry of entries) {
+    const key = String(entry.folderId);
+    byFolder.set(key, [...(byFolder.get(key) ?? []), entry]);
+  }
+
+  const clashes: TNameClash<EncryptedUploadRetryItem>[] = [];
+  for (const folderEntries of byFolder.values()) {
+    const { folderId, roomId } = folderEntries[0];
+    let existingNames: string[];
+    try {
+      existingNames = await listDecryptedFileNames(
+        folderId,
+        roomId,
+        userId,
+        identity,
+      );
+    } catch (error) {
+      // biome-ignore lint/suspicious/noConsole: the upload goes on without the check; the failure is logged for triage.
+      console.error("[ENCRYPTION] upload name clashes not checked:", error);
+      continue;
+    }
+    clashes.push(
+      ...resolveNameClashes(
+        folderEntries.map((entry) => ({ item: entry, name: entry.file.name })),
+        existingNames,
+      ),
+    );
+  }
+
+  if (clashes.length === 0) return new Map();
+  const keepBoth = await onNameClash(
+    clashes.map(({ item, renamed }) => ({
+      uploadId: item.uploadId,
+      file: item.file,
+      renamed,
+    })),
+  );
+  return keepBoth
+    ? new Map(clashes.map(({ item, renamed }) => [item.uploadId, renamed]))
+    : null;
+}
+
+async function runEncryptedUploadBatch(
+  entries: EncryptedUploadRetryItem[],
+  options: EncryptedUploadBatchOptions,
+): Promise<OrchestrateResult> {
+  const { uploadStore } = options;
 
   const gate = await openEncryptedUploadBatch({
-    userId: callerArgs.userId,
-    publicKeyId: callerArgs.publicKeyId,
-    publicKey: callerArgs.publicKey,
-    requireIdentity: callerArgs.identity
-      ? async () => callerArgs.identity ?? null
-      : (callerArgs.requireIdentity ?? (async () => null)),
+    userId: options.userId,
+    publicKeyId: options.publicKeyId,
+    publicKey: options.publicKey,
+    requireIdentity: options.identity
+      ? async () => options.identity ?? null
+      : (options.requireIdentity ?? (async () => null)),
   });
   if ("refused" in gate) {
-    for (const uploadId of uploadIds) {
+    for (const { uploadId } of entries) {
       uploadStore?.markRefused?.(uploadId, gate.refused);
     }
     return {
-      results: files.map((file, index) => ({
+      results: entries.map(({ file, uploadId }) => ({
         ok: false,
-        uploadId: uploadIds[index],
+        uploadId,
         originalName: file.name,
         refused: gate.refused,
       })),
@@ -589,23 +743,40 @@ export async function orchestrateEncryptedUpload(
     };
   }
 
-  const args: EncryptedFileUploadArgs &
-    Pick<
-      OrchestrateEncryptedUploadArgs,
-      "onQuotaError" | "onFileError" | "onFileComplete"
-    > = {
-    ...callerArgs,
+  const renames = options.onNameClash
+    ? await checkUploadNameClashes(
+        entries,
+        gate.userId,
+        gate.identity,
+        options.onNameClash,
+      )
+    : new Map<string, string>();
+  if (!renames) {
+    return {
+      results: entries.map(({ file, uploadId }) => ({
+        ok: false,
+        uploadId,
+        originalName: file.name,
+        aborted: true,
+      })),
+      quotaErrorRaised: false,
+      aborted: true,
+      skippedMembers: [],
+    };
+  }
+
+  const fileArgs = {
+    ...options,
     ...gate,
-    memberKeyRefusals: callerArgs.memberKeyRefusals ?? new Set<string>(),
+    memberKeyRefusals: options.memberKeyRefusals ?? new Set<string>(),
   };
   const results: UploadFileResult[] = [];
   const skippedMembers = new Map<string, SkippedMemberKey>();
-  let quotaErrorRaised = false;
+  let quotaError: unknown = null;
   let aborted = false;
 
-  for (const [index, file] of files.entries()) {
-    const uploadId = uploadIds[index];
-    if (args.signal?.aborted) {
+  for (const { file, uploadId, folderId, roomId } of entries) {
+    if (fileArgs.signal?.aborted) {
       aborted = true;
       results.push({
         ok: false,
@@ -617,7 +788,29 @@ export async function orchestrateEncryptedUpload(
       continue;
     }
 
-    const result = await uploadEncryptedFile(file, args, uploadId);
+    // Spec: private-rooms/file-operations, "Quota errors stop the batch".
+    if (quotaError) {
+      uploadStore?.markQuotaError?.(uploadId, quotaError);
+      results.push({
+        ok: false,
+        uploadId,
+        originalName: file.name,
+        error: quotaError,
+      });
+      continue;
+    }
+
+    const renamed = renames.get(uploadId);
+    const result = await uploadEncryptedFile(
+      renamed
+        ? new File([file], renamed, {
+            type: file.type,
+            lastModified: file.lastModified,
+          })
+        : file,
+      { ...fileArgs, folderId, roomId },
+      uploadId,
+    );
     results.push(result);
     for (const member of result.skippedMembers ?? []) {
       if (!skippedMembers.has(member.userId)) {
@@ -631,24 +824,24 @@ export async function orchestrateEncryptedUpload(
     }
 
     if (!result.ok && result.error) {
-      args.onFileError?.(file, result.error);
+      options.onFileError?.(file, result.error);
       if (isQuotaError(result.error)) {
-        if (!quotaErrorRaised) {
-          quotaErrorRaised = true;
-          args.onQuotaError?.(result.error);
+        if (!quotaError) {
+          quotaError = result.error;
+          options.onQuotaError?.(result.error);
         }
-        args.uploadStore?.markQuotaError?.(uploadId, result.error);
+        uploadStore?.markQuotaError?.(uploadId, result.error);
       }
     }
 
     if (result.ok) {
-      args.onFileComplete?.(file, result);
+      options.onFileComplete?.(file, result);
     }
   }
 
   return {
     results,
-    quotaErrorRaised,
+    quotaErrorRaised: !!quotaError,
     aborted,
     skippedMembers: [...skippedMembers.values()],
   };

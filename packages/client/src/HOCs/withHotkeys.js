@@ -428,7 +428,8 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "delete, shift+3, command+delete, command+Backspace",
       () => {
-        if (isAIAgentsFolder && selection?.length > 1) {
+        if (isAIAgentsFolder) {
+          isAvailableOption("delete-room") && deleteRooms(t);
           return;
         }
 

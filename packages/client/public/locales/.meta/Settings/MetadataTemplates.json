@@ -3,7 +3,7 @@
   "content": "Metadata templates",
   "content_en_sha1_hash": "0579ab7bd875e70575b1c488824d5601339d6067",
   "created_at": "2026-10-21T10:17:40.226Z",
-  "updated_at": "2026-10-21T10:20:42.121Z",
+  "updated_at": "2026-10-26T10:24:24.471Z",
   "comment": {
     "text": "Name of the Metadata templates page in the portal settings (menu item and page heading), also a link to it from the info panel template picker.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/index.tsx",
-      "line_number": 96,
+      "line_number": 98,
       "context": "onBackClick={closeForm}\n onClose={onClose}\n dataTestId=\"metadata_template_panel\"\n >\n <ModalDialog.Header>\n {form ? form.template.name : t(\"Settings:MetadataTemplates\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n {form ? (",
       "module": "/packages/client"
     },

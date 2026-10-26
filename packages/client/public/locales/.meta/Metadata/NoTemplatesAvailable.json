@@ -3,7 +3,7 @@
   "content": "No templates available",
   "content_en_sha1_hash": "2a0bf9aa71c34eaaedc2271818a90a98aef14552",
   "created_at": "2026-10-25T18:11:08.499Z",
-  "updated_at": "2026-10-25T18:12:04.181Z",
+  "updated_at": "2026-10-26T10:24:24.474Z",
   "comment": {
     "text": "Heading of the empty state in the Metadata templates side panel (info panel, Metadata tab, Add metadata > From template), shown when the portal has no templates that can be assigned: none were created, or they are hidden or have no fields. Short heading, no trailing period.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/TemplateList.tsx",
-      "line_number": 98,
+      "line_number": 100,
       "context": "imageSrc={isBase ? EmptyFolderLightSvgUrl : EmptyFolderDarkSvgUrl}\n imageAlt=\"\"\n headerText={\n hasTemplates\n ? t(\"Metadata:AllTemplatesAdded\")\n : t(\"Metadata:NoTemplatesAvailable\")\n }\n descriptionText={\n isAdmin\n ? t(\"Metadata:CreateTemplateInSettings\")\n : t(\"Metadata:AskAdminToCreateTemplate\")",
       "module": "/packages/client"
     }

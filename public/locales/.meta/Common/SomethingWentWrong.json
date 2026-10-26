@@ -3,7 +3,7 @@
   "content": "Something went wrong.",
   "content_en_sha1_hash": "bee54c9cc30c539ab2ed15c0c936e055cf8ef67e",
   "created_at": "2025-05-19T21:30:48.934Z",
-  "updated_at": "2026-10-23T12:28:45.494Z",
+  "updated_at": "2026-10-26T10:24:23.691Z",
   "comment": {
     "text": "This is an error message displayed in a toast notification or as a title in an empty state view. It appears when an unexpected error occurs during an operation, such as submitting to a form gallery, server communication, or data import.",
     "is_auto": true,
@@ -61,13 +61,13 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/hooks/useMetadataAIPanel.ts",
-      "line_number": 130,
-      "context": "setMetadata(data);\n setForms(getTemplateForms(data));\n if (mode === \"fill\") setDrafts(toCustomFieldDrafts(data.customFields));\n })\n .catch(() => {\n if (!abort.signal.aborted) setError(t(\"Common:SomethingWentWrong\"));\n })\n .finally(() => {\n if (!abort.signal.aborted) setPhase(\"ready\");\n });",
+      "line_number": 144,
+      "context": "const abort = new AbortController();\n controller.current = abort;\n \n loadMetadata(abort.signal)\n .catch(() => {\n if (!abort.signal.aborted) setError(t(\"Common:SomethingWentWrong\"));\n })\n .finally(() => {\n if (!abort.signal.aborted) setPhase(\"ready\");\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/utils.ts",
-      "line_number": 309,
+      "line_number": 316,
       "context": "case 503:\n return t(\"Metadata:AINoModel\");\n case 504:\n return t(\"Metadata:AITimeout\");\n default:\n return t(\"Common:SomethingWentWrong\");\n }\n };",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-10-23T12:28:45.506Z",
+  "updated_at": "2026-10-26T10:24:23.310Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -127,7 +127,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/index.tsx",
-      "line_number": 120,
+      "line_number": 123,
       "context": "{form ? (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={!canSave}\n isLoading={isSaving}\n onClick={save}\n testId=\"metadata_template_save_button\"\n />",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Ask the portal administrator to create a template.",
   "content_en_sha1_hash": "884b211a93a931317eeea0f5d623e11cc0f8f2fb",
   "created_at": "2026-10-25T18:11:08.190Z",
-  "updated_at": "2026-10-25T18:12:04.181Z",
+  "updated_at": "2026-10-26T10:24:24.475Z",
   "comment": {
     "text": "Description under the empty-state heading of the Metadata templates side panel in the info panel, shown to users who are not portal administrators and therefore cannot create metadata templates. Imperative instruction telling the user to ask the portal administrator.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/TemplateList.tsx",
-      "line_number": 103,
+      "line_number": 105,
       "context": ": t(\"Metadata:NoTemplatesAvailable\")\n }\n descriptionText={\n isAdmin\n ? t(\"Metadata:CreateTemplateInSettings\")\n : t(\"Metadata:AskAdminToCreateTemplate\")\n }\n buttons={\n isAdmin ? (\n <ActionButton\n as={Link}",
       "module": "/packages/client"
     }

@@ -56,6 +56,81 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { default as FilesStore } from "../FilesStore";
 
 import type { TClientConfigWithPdfViewer, TItem } from "./types";
+import {
+  getEncryptedFileWithheld,
+  PRIVATE_FOLDER_WITHHELD,
+  PRIVATE_ROOM_WITHHELD,
+  withheldMenuKeys,
+  type TPrivateMenuIntent,
+} from "@docspace/shared/services/private-room/private-menu-rules";
+
+type TPrivateMenuKeys = Partial<Record<TPrivateMenuIntent, readonly string[]>>;
+
+/** The file menu keys of the intents a private room withholds. */
+const PRIVATE_FILE_MENU_KEYS: TPrivateMenuKeys = {
+  share: [
+    "link-for-room-members",
+    "sharing-settings",
+    "copy-shared-link",
+    "manage-links",
+    "copy-general-link",
+    "send-by-email",
+  ],
+  "create-room": ["create-room", "create-room-separator"],
+  ai: ["ask-ai", "separator6", "vectorization", "embedding-settings"],
+  forms: [
+    "make-form",
+    "submit-to-gallery",
+    "separator-SubmitToGallery",
+    "fill-form",
+    "filling-status",
+    "start-filling",
+    "reset-and-start-filling",
+    "separate-stop-filling",
+    "stop-filling",
+  ],
+  "docu-sign": ["docu-sign"],
+  "custom-filter": ["custom-filter"],
+  "spreadsheet-data": ["update-xlsx-data"],
+  convert: ["convert"],
+  "download-as": ["download-as"],
+  favorites: ["mark-as-favorite"],
+  rename: ["rename"],
+  index: ["edit-index"],
+  versions: [
+    "show-version-history",
+    "finalize-version",
+    "version",
+    "block-unblock-version",
+  ],
+  open: ["view", "pdf-view", "preview", "edit", "open-pdf", "edit-pdf"],
+  download: ["download"],
+};
+
+/** The folder menu keys of the intents a private room withholds. */
+const PRIVATE_FOLDER_MENU_KEYS: TPrivateMenuKeys = {
+  share: [
+    "sharing-settings",
+    "copy-shared-link",
+    "manage-links",
+    "link-for-room-members",
+  ],
+  "create-room": ["create-room-separator", "create-room"],
+  favorites: ["mark-as-favorite", "remove-from-favorites"],
+  index: ["edit-index"],
+  copy: ["copy-to"],
+  duplicate: ["duplicate"],
+};
+
+/** The room menu keys of the intents a private room withholds. */
+const PRIVATE_ROOM_MENU_KEYS: TPrivateMenuKeys = {
+  share: ["link-for-room-members"],
+  "external-link": ["external-link"],
+  embedding: ["embedding-settings"],
+  index: ["edit-index", "export-room-index"],
+  "room-template": ["save-as-template"],
+  duplicate: ["duplicate-room"],
+};
 
 // Everything getFilesContextOptions reads off `this`, passed as live store
 // references so the branch logic is a pure function of (item, optionsToRemove,
@@ -533,72 +608,19 @@ export const buildContextOptions = (
     }
 
     if (isEncrypted) {
-      fileOptions = removeOptions(fileOptions, [
-        "link-for-room-members",
-        "sharing-settings",
-        "copy-shared-link",
-        "manage-links",
-        "copy-general-link",
-        "send-by-email",
-        "create-room",
-        "create-room-separator",
-        "ask-ai",
-        "separator6",
-        "make-form",
-        "submit-to-gallery",
-        "separator-SubmitToGallery",
-        "docu-sign",
-        "custom-filter",
-        "update-xlsx-data",
-        "vectorization",
-        "embedding-settings",
-        "convert",
-        "download-as",
-        "mark-as-favorite",
-        "rename",
-        "edit-index",
-        "show-version-history",
-        "finalize-version",
-        "version",
-        "fill-form",
-        "filling-status",
-        "start-filling",
-        "reset-and-start-filling",
-        "separate-stop-filling",
-        "stop-filling",
-        "block-unblock-version",
-      ]);
+      const userKeys = deps.userStore?.encryptionKeys;
+      fileOptions = removeOptions(
+        fileOptions,
+        withheldMenuKeys(
+          getEncryptedFileWithheld({
+            mustConvert,
+            hasKeys: Array.isArray(userKeys) && userKeys.length > 0,
+          }),
+          PRIVATE_FILE_MENU_KEYS,
+        ),
+      );
 
       fileOptions.push("download-encrypted");
-
-      // Conversion runs on the server, which only ever sees ciphertext here,
-      // so such a file cannot be opened from a private room by any route.
-      if (mustConvert) {
-        fileOptions = removeOptions(fileOptions, [
-          "view",
-          "pdf-view",
-          "preview",
-          "edit",
-          "open-pdf",
-          "edit-pdf",
-        ]);
-      }
-
-      const userKeys = deps.userStore?.encryptionKeys;
-      const hasEncryptionKeys =
-        Array.isArray(userKeys) && userKeys.length > 0;
-
-      if (!hasEncryptionKeys) {
-        fileOptions = removeOptions(fileOptions, [
-          "view",
-          "pdf-view",
-          "download",
-          "preview",
-          "edit",
-          "open-pdf",
-          "edit-pdf",
-        ]);
-      }
     }
 
     // if (isFavoritesFolder || isRecentFolder) {
@@ -894,15 +916,10 @@ export const buildContextOptions = (
     }
 
     if (item.private) {
-      roomOptions = removeOptions(roomOptions, [
-        "external-link",
-        "link-for-room-members",
-        "embedding-settings",
-        "edit-index",
-        "export-room-index",
-        "save-as-template",
-        "duplicate-room",
-      ]);
+      roomOptions = removeOptions(
+        roomOptions,
+        withheldMenuKeys(PRIVATE_ROOM_WITHHELD, PRIVATE_ROOM_MENU_KEYS),
+      );
     }
 
     if (!canEditRoom) {
@@ -1145,19 +1162,10 @@ export const buildContextOptions = (
   // }
 
   if (isPrivacyFolder || item.private) {
-    folderOptions = removeOptions(folderOptions, [
-      "sharing-settings",
-      "copy-shared-link",
-      "manage-links",
-      "link-for-room-members",
-      "create-room-separator",
-      "create-room",
-      "mark-as-favorite",
-      "remove-from-favorites",
-      "edit-index",
-      "copy-to",
-      "duplicate",
-    ]);
+    folderOptions = removeOptions(
+      folderOptions,
+      withheldMenuKeys(PRIVATE_FOLDER_WITHHELD, PRIVATE_FOLDER_MENU_KEYS),
+    );
 
     if (!canMove) {
       folderOptions = removeOptions(folderOptions, ["move", "move-to"]);

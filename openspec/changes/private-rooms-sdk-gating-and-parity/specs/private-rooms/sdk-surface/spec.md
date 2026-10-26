@@ -66,6 +66,33 @@ A folder move within the same private room SHALL be executed by the server witho
 - **WHEN** the user opens the context menu of a folder in a private room
 - **THEN** no copy action is offered, whatever rights the folder reports
 
+### Requirement: Copy and move destination resolved fail-closed
+The SDK SHALL offer the copy action for an encrypted file of a private room although the server withholds the Copy right from it, because the copy runs in the browser. It SHALL decide per destination whether an encrypted copy or move re-encrypts (destination in a private room), decrypts to plaintext (destination outside private rooms), or is blocked (destination room cannot be resolved). It SHALL refuse a move of files into another private room with Common:CannotMoveToAnotherPrivateRoom before anything is decrypted or transferred.
+
+#### Scenario: Copy offered for an encrypted file
+- **WHEN** the user opens the context menu of an encrypted file in an active private room
+- **THEN** the copy action is offered although the server reports no Copy right for the file
+
+#### Scenario: Copy into another private room
+- **WHEN** the user copies an encrypted file into another private room
+- **THEN** the file is decrypted in the browser and uploaded encrypted for the destination room, and the source stays in place
+
+#### Scenario: Move into another private room
+- **WHEN** the user moves an encrypted file of a private room into another private room
+- **THEN** Common:CannotMoveToAnotherPrivateRoom is shown and nothing is transferred
+
+#### Scenario: Destination outside private rooms
+- **WHEN** an encrypted file is copied or moved to a non-private folder
+- **THEN** it is decrypted and uploaded as plaintext
+
+#### Scenario: Destination unknown
+- **WHEN** the destination room cannot be resolved
+- **THEN** the operation is blocked and nothing is transferred
+
+#### Scenario: Locked identity
+- **WHEN** the identity is locked and the user cancels the unlock prompt
+- **THEN** the copy or move is cancelled with the locked-operation toast
+
 ### Requirement: SDK private surface honours the opt-in
 The SDK private routes SHALL render the private-rooms list, room and archive pages only when the host has passed the private-rooms opt-in (the `privateRooms` property of the frame configuration); without it they SHALL render the "feature not available" view. The opt-in SHALL be removed together with the client flag at release.
 

@@ -60,6 +60,11 @@ See proposal.md for motivation. Observed state on the branch:
 
 **D9. A folder copy is not offered inside a private room (decided 2026-10-26).** The server refuses a copy with a private-room source and removes the Copy right from folders inside a private room, and D5 withholds a copy across rooms, so no folder copy can succeed from a private room in this version. The SDK leaves `copy` out of the context options of a folder in a private room, whatever rights the folder reports, and the requirement states it as a limitation. Alternatives: a client-side re-encrypting copy of the tree, deferred with D5; a backend change allowing same-room copy, rejected because the copied files would carry no access entries until the client re-wrapped them.
 
+**D10. Encrypted file transfers follow the client's rules (decided 2026-10-26).**
+- The server withholds the Copy right from every file inside an active private room (`../server/products/ASC.Files/Core/Core/Security/FileSecurity.cs:1894-1903`). The SDK built its context menu from that right (`packages/sdk/src/app/(docspace)/_hooks/useItemContextMenu.ts`), so it offered no copy of an encrypted file at all, although the copy runs in the browser. It now offers copy for an encrypted file, as the client does (`!canCopy && !isEncrypted` in `packages/client/src/store/filesStore/contextOptions.helpers.ts`).
+- A move of files into another private room is refused with Common:CannotMoveToAnotherPrivateRoom, as in the client (`private-rooms/file-operations`, "Move into another private room is refused"). The SDK used to decrypt the file, upload it into the other room and delete the source. Folders keep Common:CannotTransferFolderFromPrivateRoom (D5).
+- Alternative: keep the SDK's re-encrypting move. Rejected: one product with two rules for the same action.
+
 **D7. E2E: seed the session and reuse the crypto fixture.** The SDK Playwright base fixture gains a seeded `asc_auth_key` cookie and the pre-serialised identity from `fixtures/crypto.ts`; seven of the eight fixme tests then run (unlock, upload, download, preview, duplicate, copy/move cross-room, copy-out blocked, invite). The editor-open test stays `fixme` with a reference to `private-rooms-editor-contract`.
 
 ## Risks / Trade-offs

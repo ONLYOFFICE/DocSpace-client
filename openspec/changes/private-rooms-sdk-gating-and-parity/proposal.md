@@ -13,6 +13,7 @@ The embeddable SDK carries its own private-rooms surface (`/sdk/private*`, also 
 - Key management becomes reachable from the SDK: the forgot-passphrase and device-setup links open the client keys-management page through a route that works while the client is flag-gated (the link carries the opt-in), and the SDK shows an in-place explanation when the client is not reachable from the host.
 - The locale namespaces the private surface needs are available in the SDK, by moving the handful of `People`, `UploadPanel`, `Files` keys it uses into Common (preferred) or bundling those namespaces.
 - Folder copy and move inside the SDK private surface go through re-encryption-aware logic for cross-room moves, or are withheld with a toast; same-room moves stay server-side. Same-room folder copy is refused by the server today (it allows only a move inside one private room); how the SDK handles it is an open decision recorded in design.md.
+- Encrypted files follow the client's transfer rules: copy is offered although the server withholds the Copy right inside a private room, and a move into another private room is refused (design D10).
 - The device-setup hint waits for the key list to load before deciding the user has no keys.
 - The `test.fixme` SDK E2E tests that only lacked a logged-in session and the crypto fixture are enabled (unlock, upload, download, preview, duplicate, copy/move, copy-out blocked, invite); the editor-open test stays `fixme` until `private-rooms-editor-contract` lands.
 
@@ -26,7 +27,7 @@ Out of scope: opening encrypted files in the editor from the SDK (editor contrac
 
 ### Modified Capabilities
 
-- `private-rooms/sdk-surface`: "No feature-flag gating in the SDK" → "SDK private surface honours the opt-in"; "Create menu inside a private room" (documents offered); "Folder operations use the server path" (cross-room moves re-encrypt or are withheld); "Only the Common namespace is bundled" → "Translations needed by the private surface are bundled"; "Forgot passphrase and device setup link out to the client" (links work while gated); "Shell side effects" (hint waits for keys to load); new "Archive page follows private-room rules".
+- `private-rooms/sdk-surface`: "No feature-flag gating in the SDK" → "SDK private surface honours the opt-in"; "Create menu inside a private room" (documents offered); "Folder operations use the server path" (cross-room moves re-encrypt or are withheld); "Copy and move destination resolved fail-closed" (copy offered for encrypted files, move into another private room refused); "Only the Common namespace is bundled" → "Translations needed by the private surface are bundled"; "Forgot passphrase and device setup link out to the client" (links work while gated); "Shell side effects" (hint waits for keys to load); new "Archive page follows private-room rules".
 - `private-rooms/feature-gating`: "SDK private routes are not gated by the flag" → "SDK private routes honour the host opt-in"; new "Client in an embedded frame takes the host opt-in".
 
 ## Impact

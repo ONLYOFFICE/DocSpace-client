@@ -145,4 +145,26 @@ describe("FilesActionsStore.getHeaderMenu — private room", () => {
       label: "Common:ArchivingData",
     });
   });
+
+  it("Folder selected in the header menu", async () => {
+    const folder = { id: 3, isFolder: true, security };
+    const store = createTestFilesActionsStore({
+      ...enabling,
+      filesStore: { ...enabling.filesStore, selection: [folder] },
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+    const downloadFiles = vi.fn(async () => undefined);
+    const downloadEncryptedFolder = vi.fn(async () => undefined);
+    store.downloadFiles = downloadFiles;
+    store.downloadEncryptedFolder = downloadEncryptedFolder;
+
+    const menu = store.getHeaderMenu(t) as {
+      id?: string;
+      onClick?: () => unknown;
+    }[];
+    await menu.find((item) => item.id === "menu-download")!.onClick!();
+
+    expect(downloadEncryptedFolder).toHaveBeenCalledWith(folder);
+    expect(downloadFiles).not.toHaveBeenCalled();
+  });
 });

@@ -272,10 +272,21 @@ self: FilesActionStore,label: string, item?: Nullable<TActionItem>
     return Promise.resolve();
   }
 
+  const { isPrivacyFolder } = self.treeFoldersStore;
+  const isPrivateFolder = (elem: TActionItem) =>
+    !elem.fileExst && elem.isFolder && (elem.private || isPrivacyFolder);
+
+  if (selection.length === 1 && isPrivateFolder(selection[0])) {
+    return self.downloadEncryptedFolder(selection[0]);
+  }
+
   const encryptedFiles: TActionItem[] = [];
+  const encryptedFolders: TActionItem[] = [];
 
   selection.forEach((elem) => {
-    if (!elem.fileExst && elem.isFolder) {
+    if (isPrivateFolder(elem)) {
+      encryptedFolders.push(elem);
+    } else if (!elem.fileExst && elem.isFolder) {
       folderIds.push(elem.id);
       items.push({ id: elem.id });
     } else if (elem.encrypted) {
@@ -290,8 +301,10 @@ self: FilesActionStore,label: string, item?: Nullable<TActionItem>
 
   const promises = [];
 
-  if (encryptedFiles.length > 0) {
-    promises.push(self.downloadEncryptedFilesAsZip(encryptedFiles));
+  if (encryptedFiles.length > 0 || encryptedFolders.length > 0) {
+    promises.push(
+      self.downloadEncryptedFilesAsZip(encryptedFiles, encryptedFolders),
+    );
   }
 
   if (fileIds.length > 0 || folderIds.length > 0) {

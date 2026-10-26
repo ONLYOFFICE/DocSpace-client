@@ -194,14 +194,16 @@ describe("FilesActionsStore — decrypted folder download", () => {
     total: files.length + folders.length,
   });
 
-  const setup = () => {
+  const setup = (selection: unknown[] = []) => {
     const { store: uploadDataStore } = progress();
     return createTestFilesActionsStore({
       userStore: { user: { id: "user-1" }, encryptionKeys: [{ id: "k1" }] },
       selectedFolderStore: { id: ROOM_ID, isRoom: true, navigationPath: [] },
+      filesStore: { selection, bufferSelection: null },
       uploadDataStore,
     });
   };
+  const reports = { id: 20, title: "Reports", isFolder: true, private: true };
 
   const decryptsTo = (names: Record<number, string>) =>
     vi.mocked(downloadAndDecryptFileToBuffer).mockImplementation(
@@ -278,15 +280,32 @@ describe("FilesActionsStore — decrypted folder download", () => {
     } as never);
     decryptsTo({ 1: "budget.xlsx", 2: "plan.txt" });
 
-    await setup().downloadEncryptedFilesAsZip(
-      [encrypted(1)] as never,
-      [{ id: 20, title: "Reports", isFolder: true }] as never,
+    await setup([{ ...encrypted(1), fileExst: ".xlsx" }, reports]).downloadAction(
+      "label",
     );
 
     expect(
       vi.mocked(createZipFromBuffers).mock.calls[0][0].map((e) => e.name),
     ).toEqual(["budget.xlsx", "Reports/plan.txt"]);
     expect(vi.mocked(triggerFileDownload).mock.calls[0][1]).toBe("Files.zip");
+    expect(downloadFiles).not.toHaveBeenCalled();
+  });
+
+  it("Folder selected in the header menu", async () => {
+    vi.mocked(getFolder).mockResolvedValue(listing([encrypted(2)]) as never);
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
+    } as never);
+    decryptsTo({ 2: "plan.txt" });
+
+    await setup([reports]).downloadAction("label");
+
+    expect(
+      vi.mocked(createZipFromBuffers).mock.calls[0][0].map((e) => e.name),
+    ).toEqual(["plan.txt"]);
+    expect(vi.mocked(triggerFileDownload).mock.calls[0][1]).toBe(
+      "Reports.zip",
+    );
     expect(downloadFiles).not.toHaveBeenCalled();
   });
 });

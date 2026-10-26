@@ -533,12 +533,6 @@ describe("UploadDataStore retry — the private-room rules run again on the fixe
     }
   };
 
-  const spyOnWrap = (store: UploadDataStore) => {
-    const wrap = vi.fn();
-    store.wrapForSelfThenRoom = wrap as never;
-    return wrap;
-  };
-
   beforeEach(() => {
     vi.mocked(sniffDse3Upload).mockResolvedValue(null);
     vi.mocked(filesApi.startUploadSession).mockReturnValue(
@@ -565,7 +559,9 @@ describe("UploadDataStore retry — the private-room rules run again on the fixe
     await store.retryUploadFiles(t, "a");
     await vi.waitFor(() => expect(sessionCalls()).toHaveLength(1));
 
-    expect(vi.mocked(requireUnlock).mock.calls).toEqual([["user-1"]]);
+    expect(
+      new Set(vi.mocked(requireUnlock).mock.calls.map(([userId]) => userId)),
+    ).toEqual(new Set(["user-1"]));
     expect(
       vi.mocked(requireUnlock).mock.invocationCallOrder[0],
     ).toBeLessThan(
@@ -602,7 +598,6 @@ describe("UploadDataStore retry — the private-room rules run again on the fixe
   it("Retry while locked", async () => {
     const store = storeWithFailed([failedPrivateItem("a")]);
     vi.mocked(requireUnlock).mockResolvedValue(null as never);
-    const wrap = spyOnWrap(store);
     const finishUploadFiles = stubStoreMethod(store, "finishUploadFiles");
 
     await store.retryUploadFiles(t, "a");
@@ -613,7 +608,7 @@ describe("UploadDataStore retry — the private-room rules run again on the fixe
     );
     expect(filesApi.startUploadSession).not.toHaveBeenCalled();
     expect(prepareEncryptedUpload).not.toHaveBeenCalled();
-    expect(wrap).not.toHaveBeenCalled();
+    expect(filesApi.setFileEncryptionKeys).not.toHaveBeenCalled();
     expect(finishUploadFiles).toHaveBeenCalledTimes(1);
   });
 
@@ -627,7 +622,9 @@ describe("UploadDataStore retry — the private-room rules run again on the fixe
     await store.retryQuotaFailedFiles(t);
     await vi.waitFor(() => expect(sessionCalls()).toHaveLength(2));
 
-    expect(vi.mocked(requireUnlock).mock.calls).toEqual([["user-1"]]);
+    expect(
+      new Set(vi.mocked(requireUnlock).mock.calls.map(([userId]) => userId)),
+    ).toEqual(new Set(["user-1"]));
     expectEncryptedIntoRoom();
   });
 

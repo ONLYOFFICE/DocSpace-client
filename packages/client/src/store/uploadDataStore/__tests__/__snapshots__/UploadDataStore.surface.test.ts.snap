@@ -32,7 +32,6 @@ exports[`UploadDataStore — public surface > exposes a stable set of public mem
   "deleteMovedEncryptedSource",
   "dialogsStore",
   "displayedConversionFiles",
-  "encryptKeysForRoomMembers",
   "ensureEncryptionUnlockedForBatch",
   "errors",
   "files",
@@ -62,8 +61,8 @@ exports[`UploadDataStore — public surface > exposes a stable set of public mem
   "navigateToNewFolderLocation",
   "parallelUploading",
   "percent",
-  "prepareFileForEncryptedUpload",
   "primaryProgressDataStore",
+  "queueMemberFanOut",
   "quotaErrorRaised",
   "refreshFiles",
   "removeFiles",
@@ -103,6 +102,5 @@ exports[`UploadDataStore — public surface > exposes a stable set of public mem
   "uploadedFilesSize",
   "userStore",
   "willEncryptItem",
-  "wrapForSelfThenRoom",
 ]
 `;

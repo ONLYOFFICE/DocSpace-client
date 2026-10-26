@@ -34,41 +34,23 @@
  */
 
 import { runInAction } from "mobx";
-import { RoomsType } from "@docspace/shared/enums";
-import {
-  setFileEncryptionKeys,
-  getFileEncryptionAccess,
-  removeFiles,
-} from "@docspace/shared/api/files";
-import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
-import { getUserById } from "@docspace/shared/api/people";
-import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
-import { selectMemberKeys } from "@docspace/shared/services/private-room/room-member-keys";
-import {
-  verifyMemberKeys,
-  type SkippedMemberKey,
-} from "@docspace/shared/services/private-room/member-key-verification";
-import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
+import { removeFiles } from "@docspace/shared/api/files";
+import type { SkippedMemberKey } from "@docspace/shared/services/private-room/member-key-verification";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
-import {
-  prepareEncryptedUpload,
-  resolveItemRoomContext,
-} from "@docspace/shared/services/private-room/encrypted-upload";
 import type { MoveSourceRef } from "@docspace/shared/services/private-room/encrypted-upload";
+import {
+  getEncryptedUploadRefusalMessage,
+  getEncryptedUploadRefusalNotice,
+  nameSkippedMembers,
+} from "@docspace/shared/services/private-room/encrypted-upload-orchestrator";
 import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import uniqueid from "lodash/uniqueId";
 
-import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
-
 import i18n from "../../i18n";
 
-import type {
-  TUploadBrowserFile,
-  TUploadFile,
-  TUploadTarget,
-} from "./helpers";
+import type { TUploadFile } from "./helpers";
 import type { default as UploadDataStore } from "../UploadDataStore";
 
 // Spec: private-rooms/file-operations, "Files leaving a private room are decrypted".
@@ -115,135 +97,6 @@ export async function deleteMovedEncryptedSourceImpl(
   }
 }
 
-export async function wrapForSelfThenRoomImpl(
-  self: UploadDataStore,
-  fileId: number,
-  currentUserId: string,
-  publicKeyBase64: string,
-  publicKeyId: string,
-  dek: Uint8Array,
-  roomId: number | string | null,
-) {
-  try {
-    const identity = await requireUnlock(currentUserId);
-    if (!identity) {
-      throw new Error(
-        "Encryption identity is locked — cannot wrap DEK for upload",
-      );
-    }
-    const ownWraps = await wrapDekForRecipients({
-      dek,
-      senderIdentity: identity,
-      senderUserId: currentUserId,
-      recipients: [
-        {
-          userId: currentUserId,
-          publicKey: publicKeyBase64,
-          publicKeyId,
-        },
-      ],
-      fileId,
-    });
-    await setFileEncryptionKeys(fileId, ownWraps);
-    // Spec: private-rooms/encryption-core, "File access list holds one wrap per member".
-    const fanOut = () =>
-      self.encryptKeysForRoomMembers(
-        fileId,
-        currentUserId,
-        roomId,
-        dek,
-        identity,
-      );
-    const result = self.memberFanOutChain.then(fanOut, fanOut);
-    self.memberFanOutChain = result.then(
-      () => undefined,
-      () => undefined,
-    );
-    return await result;
-  } finally {
-    wipeDek(dek);
-  }
-}
-
-export async function encryptKeysForRoomMembersImpl(
-  self: UploadDataStore,
-  fileId: number,
-  currentUserId: string,
-  roomId: number | string | null,
-  dek: Uint8Array,
-  identity: IdentityKeyPair,
-): Promise<SkippedMemberKey[]> {
-  try {
-    if (!roomId) {
-      console.error(
-        "[ENCRYPTION] encryptKeysForRoomMembers called without roomId",
-      );
-      return [];
-    }
-    if (!dek || !identity) {
-      console.error(
-        "[ENCRYPTION] encryptKeysForRoomMembers called without dek/identity",
-      );
-      return [];
-    }
-    const [publicKeys, encryptionInfo] = await Promise.all([
-      getRoomEncryptionKeys(roomId),
-      getFileEncryptionAccess(fileId),
-    ]);
-
-    const existingFileKeys = encryptionInfo.fileKeys ?? [];
-
-    // Spec: private-rooms/encryption-core, "One access-list entry per user".
-    const recipients: {
-      userId: string;
-      publicKey: string;
-      publicKeyId: string;
-    }[] = [];
-    for (const [uid, key] of selectMemberKeys(publicKeys)) {
-      if (uid === String(currentUserId)) continue;
-      recipients.push({
-        userId: uid,
-        publicKey: key.publicKey,
-        publicKeyId: key.publicKeyId || "",
-      });
-    }
-    if (recipients.length === 0) return [];
-
-    const { verified, skipped } = await verifyMemberKeys(recipients, {
-      scopeUserId: String(currentUserId),
-      refusals: self.memberKeyRefusals,
-    });
-    if (verified.length === 0) return skipped;
-
-    const newKeys = await wrapDekForRecipients({
-      dek,
-      senderIdentity: identity,
-      senderUserId: String(currentUserId),
-      recipients: verified,
-      fileId,
-    });
-
-    if (newKeys.length > 0) {
-      const allKeys = [
-        ...existingFileKeys.map((k) => ({
-          userId: k.userId,
-          publicKeyId: k.publicKeyId || "",
-          privateKeyEnc: k.privateKeyEnc,
-        })),
-        ...newKeys,
-      ];
-      await setFileEncryptionKeys(fileId, allKeys);
-    }
-    return skipped;
-  } catch (error) {
-    console.error(
-      "[ENCRYPTION] Failed to encrypt keys for room members:",
-      error,
-    );
-    return [];
-  }
-}
-
 /**
  * Names the members a file's fan-out left out and warns once per member and
  * session; returns the members with their display names for the panel row.
@@ -253,17 +106,7 @@ export async function reportSkippedMembersImpl(
   self: UploadDataStore,
   skipped: SkippedMemberKey[],
 ): Promise<SkippedMemberKey[]> {
-  const named = await Promise.all(
-    skipped.map(async (member) => {
-      if (member.displayName) return member;
-      try {
-        const user = await getUserById(member.userId);
-        return { ...member, displayName: user?.displayName || member.userId };
-      } catch {
-        return { ...member, displayName: member.userId };
-      }
-    }),
-  );
+  const named = await nameSkippedMembers(skipped);
 
   const fresh = named.filter(
     (m) => !self.reportedSkippedMemberIds.has(m.userId),
@@ -312,7 +155,7 @@ export function cancelEncryptedBatchUploadImpl(
   self: UploadDataStore,
   items?: TUploadFile[],
 ) {
-  const errorMessage = i18n.t("Common:EncryptionLockedUpload");
+  const errorMessage = getEncryptedUploadRefusalMessage(i18n.t, "locked");
 
   runInAction(() => {
     batchItems(self, items).forEach((item) => {
@@ -336,25 +179,7 @@ export function cancelEncryptedBatchUploadImpl(
   });
 
   try {
-    toastr.info(i18n.t("Common:EncryptionUploadCancelled"));
+    toastr.info(getEncryptedUploadRefusalNotice(i18n.t, "locked"));
   } catch {
   }
-}
-
-export async function prepareFileForEncryptedUploadImpl(
-  file: TUploadBrowserFile,
-  target: TUploadTarget,
-  onProgress?: (progress: number) => void,
-) {
-  const { roomType, isPrivate } = resolveItemRoomContext(
-    file?.uploadContext,
-    target,
-  );
-  return prepareEncryptedUpload({
-    file,
-    folderId: target.folderId as number,
-    roomType: roomType || RoomsType.CustomRoom,
-    isPrivate,
-    onProgress,
-  });
 }

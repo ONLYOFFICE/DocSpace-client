@@ -34,7 +34,6 @@
  */
 
 import { getFileConversationProgress } from "@docspace/shared/api/files";
-import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { suspendAutoLock } from "@docspace/shared/services/encryption/secret-storage";
 
 import type { TFile } from "@docspace/shared/api/files/types";
@@ -64,7 +63,6 @@ export type TUploadFile = {
   needConvert?: boolean;
   encrypted?: boolean;
   encryptionRoomId?: number | string | null;
-  reimportRealName?: string | null;
   /** Room members left out of the file's access list by the pin check. */
   skippedMembers?: SkippedMemberKey[];
   percent: number;
@@ -98,35 +96,7 @@ export const removeDuplicate = <T extends { uniqueId?: string }>(
   });
 };
 
-const dekByFileEntry = new WeakMap<object, Uint8Array | null>();
-
 let uploadAutoLockRelease: (() => void) | null = null;
-
-export function setFileDek(
-  entry: TUploadFile | null | undefined,
-  dek: Uint8Array | null,
-) {
-  if (!entry) return;
-  const previous = dekByFileEntry.get(entry);
-  if (previous && previous !== dek) {
-    wipeDek(previous);
-  }
-  dekByFileEntry.set(entry, dek);
-}
-
-export function takeFileDek(entry: TUploadFile | null | undefined) {
-  if (!entry) return null;
-  const dek = dekByFileEntry.get(entry);
-  if (dek) {
-    dekByFileEntry.delete(entry);
-    return dek;
-  }
-  return null;
-}
-
-export function hasFileDek(entry: TUploadFile | null | undefined) {
-  return !!entry && dekByFileEntry.has(entry);
-}
 
 export const acquireUploadAutoLockSuspension = () => {
   if (uploadAutoLockRelease) return;

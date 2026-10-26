@@ -41,8 +41,10 @@ import {
   getFileEncryptionAccess,
   setFileEncryptionKeys,
   startUploadSession,
+  uploadChunkParallel,
   uploadChunkSequential,
 } from "../../api/files";
+import type { TFile } from "../../api/files/types";
 import { getUserById } from "../../api/people";
 import { getRoomEncryptionKeys } from "../../api/privacy";
 import { requestDeviceSetupHint } from "../encryption/device-setup-hint-notifier";
@@ -95,6 +97,8 @@ export interface OrchestratorUploadStore {
    * Optional — callers that do not need labels may omit this.
    */
   setItemLabel?: (uploadId: string, label: string | undefined) => void;
+  /** How far the encryption of a file has got, from 0 to 1. Optional. */
+  reportEncryptionProgress?: (uploadId: string, fraction: number) => void;
   /** Fail a row the batch gate refused; nothing of it was sent. Optional. */
   markRefused?: (uploadId: string, refusal: EncryptedUploadRefusal) => void;
 }
@@ -142,6 +146,16 @@ export interface EncryptedFileUploadArgs {
    * kept for this call, so one batch asks once per changed key.
    */
   memberKeyRefusals?: Set<string>;
+  /**
+   * Parts sent at once. Above 1 the parts go as numbered chunks and the
+   * session is finalised afterwards; 1, the default, sends them in order.
+   */
+  uploadThreads?: number;
+  /**
+   * Runs the room fan-out of a file. A caller uploading several files at once
+   * queues the fan-outs, so a changed member key is asked about once.
+   */
+  serializeFanOut?: <T>(fanOut: () => Promise<T>) => Promise<T>;
 }
 
 export interface OrchestrateEncryptedUploadArgs
@@ -205,6 +219,24 @@ export interface UploadFileResult {
   skippedMembers?: SkippedMemberKey[];
   /** Set when the batch gate refused the file before any byte was sent. */
   refused?: EncryptedUploadRefusal;
+  /** The stored file as the server answered it, once the upload went through. */
+  file?: TFile;
+  /** The folder ids from the section root down to the target, as the session answered them. */
+  path?: (number | string)[];
+  /**
+   * Where a failed upload stopped: preparing the ciphertext, sending it, or
+   * writing the access list of the stored file.
+   */
+  failedAt?: "prepare" | "upload" | "wrap";
+}
+
+/** The file was stored but its access list could not be written. */
+export class EncryptedWrapError extends Error {
+  constructor(cause: unknown) {
+    super("The uploaded file's access list could not be written");
+    this.name = "EncryptedWrapError";
+    this.cause = cause;
+  }
 }
 
 export interface OrchestrateResult {
@@ -293,6 +325,9 @@ export const getEncryptedUploadErrorMessage = (t: TFunction, error: unknown) => 
   if (error instanceof EncryptedReimportError) {
     return t("Common:EncryptionReimportFailed");
   }
+  if (error instanceof EncryptedWrapError) {
+    return t("Common:EncryptionUploadWrapFailed");
+  }
   if (error instanceof CryptoError) return getEncryptionErrorMessage(t, error);
   return t("Common:EncryptionPrepareFailed");
 };
@@ -346,26 +381,65 @@ async function uploadInChunks(
   encryptedBlob: Blob,
   uploadFileName: string,
   chunkSize: number,
+  threads: number,
   signal: AbortSignal | undefined,
   onProgress: (percent: number) => void,
-): Promise<{ fileId: number | string }> {
+): Promise<{ fileId: number | string; file?: TFile }> {
   const total = encryptedBlob.size;
-  let uploaded = 0;
-  let lastResponse: unknown = null;
-
+  const parts: Blob[] = [];
   for (let offset = 0; offset < total; offset += chunkSize) {
-    throwIfAborted(signal);
-    const end = Math.min(offset + chunkSize, total);
-    const chunkBlob = encryptedBlob.slice(offset, end);
-
+    parts.push(encryptedBlob.slice(offset, Math.min(offset + chunkSize, total)));
+  }
+  const formOf = (part: Blob) => {
     const formData = new FormData();
-    formData.append("file", chunkBlob, uploadFileName);
+    formData.append("file", part, uploadFileName);
     formData.append("encrypted", "true");
+    return formData;
+  };
+  let sent = 0;
+  const reportSent = (part: Blob) => {
+    sent += part.size;
+    onProgress(Math.min(100, Math.floor((sent / total) * 100)));
+  };
 
-    lastResponse = await uploadChunkSequential(folderId, sessionId, formData);
-
-    uploaded = end;
-    onProgress(Math.min(100, Math.floor((uploaded / total) * 100)));
+  let lastResponse: unknown = null;
+  if (threads > 1) {
+    let next = 0;
+    await Promise.all(
+      Array.from({ length: Math.min(threads, parts.length) }, async () => {
+        while (next < parts.length) {
+          const index = next++;
+          throwIfAborted(signal);
+          await uploadChunkParallel(
+            folderId,
+            sessionId,
+            index + 1,
+            formOf(parts[index]),
+            signal,
+          );
+          reportSent(parts[index]);
+        }
+      }),
+    );
+    throwIfAborted(signal);
+    lastResponse = await finalizeUploadSession(folderId, sessionId, signal);
+  } else {
+    for (const part of parts) {
+      throwIfAborted(signal);
+      lastResponse = await uploadChunkSequential(
+        folderId,
+        sessionId,
+        formOf(part),
+      );
+      reportSent(part);
+    }
+    throwIfAborted(signal);
+    try {
+      await finalizeUploadSession(folderId, sessionId);
+    } catch {
+      // Finalize is idempotent on the server; some deployments auto-finalize
+      // on the last chunk and return 404 here. Ignore — the file was written.
+    }
   }
 
   // Server returns the created file descriptor in the final chunk's response.
@@ -376,7 +450,7 @@ async function uploadInChunks(
       "Upload session completed but server response had no file id",
     );
   }
-  return { fileId };
+  return { fileId, file: extractFileFromUploadResponse(lastResponse) };
 }
 
 function extractFileIdFromUploadResponse(res: unknown): number | string | null {
@@ -391,6 +465,16 @@ function extractFileIdFromUploadResponse(res: unknown): number | string | null {
   return null;
 }
 
+function extractFileFromUploadResponse(res: unknown): TFile | undefined {
+  if (!res || typeof res !== "object") return undefined;
+  const candidate = res as {
+    data?: { file?: TFile };
+    file?: TFile;
+    response?: { file?: TFile };
+  };
+  return candidate.data?.file ?? candidate.file ?? candidate.response?.file;
+}
+
 async function wrapDekForSelfAndRoom(args: {
   fileId: number | string;
   dek: Uint8Array;
@@ -401,6 +485,7 @@ async function wrapDekForSelfAndRoom(args: {
   roomId: number | string;
   signal: AbortSignal | undefined;
   refusals: Set<string> | undefined;
+  serializeFanOut: EncryptedFileUploadArgs["serializeFanOut"];
 }): Promise<SkippedMemberKey[]> {
   const {
     fileId,
@@ -412,6 +497,7 @@ async function wrapDekForSelfAndRoom(args: {
     roomId,
     signal,
     refusals,
+    serializeFanOut,
   } = args;
 
   throwIfAborted(signal);
@@ -428,65 +514,69 @@ async function wrapDekForSelfAndRoom(args: {
   });
   await setFileEncryptionKeys(fileId, ownWraps);
 
-  try {
-    throwIfAborted(signal);
+  const fanOutToRoom = async (): Promise<SkippedMemberKey[]> => {
+    try {
+      throwIfAborted(signal);
 
-    const [publicKeys, encryptionInfo] = await Promise.all([
-      getRoomEncryptionKeys(roomId),
-      getFileEncryptionAccess(fileId),
-    ]);
+      const [publicKeys, encryptionInfo] = await Promise.all([
+        getRoomEncryptionKeys(roomId),
+        getFileEncryptionAccess(fileId),
+      ]);
 
-    const existingFileKeys = encryptionInfo?.fileKeys ?? [];
+      const existingFileKeys = encryptionInfo?.fileKeys ?? [];
 
-    // Spec: private-rooms/encryption-core, "One access-list entry per user".
-    const recipients: Array<{
-      userId: string;
-      publicKey: string;
-      publicKeyId: string;
-    }> = [];
-    for (const [uid, key] of selectMemberKeys(publicKeys)) {
-      if (uid === userId) continue;
-      recipients.push({
-        userId: uid,
-        publicKey: key.publicKey,
-        publicKeyId: key.publicKeyId || "",
+      // Spec: private-rooms/encryption-core, "One access-list entry per user".
+      const recipients: Array<{
+        userId: string;
+        publicKey: string;
+        publicKeyId: string;
+      }> = [];
+      for (const [uid, key] of selectMemberKeys(publicKeys)) {
+        if (uid === userId) continue;
+        recipients.push({
+          userId: uid,
+          publicKey: key.publicKey,
+          publicKeyId: key.publicKeyId || "",
+        });
+      }
+
+      if (recipients.length === 0) return [];
+
+      const { verified, skipped } = await verifyMemberKeys(recipients, {
+        scopeUserId: userId,
+        refusals,
       });
+      if (verified.length === 0) return skipped;
+
+      throwIfAborted(signal);
+
+      const newKeys = await wrapDekForRecipients({
+        dek,
+        senderIdentity: identity,
+        senderUserId: userId,
+        recipients: verified,
+        fileId: fileIdNumeric,
+      });
+
+      if (newKeys.length === 0) return skipped;
+
+      const allKeys = [
+        ...existingFileKeys.map((k) => ({
+          userId: k.userId,
+          publicKeyId: k.publicKeyId || "",
+          privateKeyEnc: k.privateKeyEnc,
+        })),
+        ...newKeys,
+      ];
+      await setFileEncryptionKeys(fileId, allKeys);
+      return skipped;
+    } catch (error) {
+      if (error instanceof AbortedError) throw error;
+      return [];
     }
+  };
 
-    if (recipients.length === 0) return [];
-
-    const { verified, skipped } = await verifyMemberKeys(recipients, {
-      scopeUserId: userId,
-      refusals,
-    });
-    if (verified.length === 0) return skipped;
-
-    throwIfAborted(signal);
-
-    const newKeys = await wrapDekForRecipients({
-      dek,
-      senderIdentity: identity,
-      senderUserId: userId,
-      recipients: verified,
-      fileId: fileIdNumeric,
-    });
-
-    if (newKeys.length === 0) return skipped;
-
-    const allKeys = [
-      ...existingFileKeys.map((k) => ({
-        userId: k.userId,
-        publicKeyId: k.publicKeyId || "",
-        privateKeyEnc: k.privateKeyEnc,
-      })),
-      ...newKeys,
-    ];
-    await setFileEncryptionKeys(fileId, allKeys);
-    return skipped;
-  } catch (error) {
-    if (error instanceof AbortedError) throw error;
-    return [];
-  }
+  return serializeFanOut ? serializeFanOut(fanOutToRoom) : fanOutToRoom();
 }
 
 /** A file downloaded without decryption goes back under its original key. */
@@ -534,9 +624,13 @@ export async function uploadEncryptedFile(
     signal,
     chunkSize = DEFAULT_CHUNK_SIZE,
     memberKeyRefusals,
+    uploadThreads = 1,
+    serializeFanOut,
   } = args;
 
   let prepared: PreparedUpload | null = null;
+  let stored: Pick<UploadFileResult, "fileId" | "file" | "path"> = {};
+  let stage: NonNullable<UploadFileResult["failedAt"]> = "prepare";
 
   try {
     throwIfAborted(signal);
@@ -553,6 +647,8 @@ export async function uploadEncryptedFile(
               typeof folderId === "number" ? folderId : Number(folderId),
             roomType: RoomsType.CustomRoom,
             isPrivate: true,
+            onProgress: (fraction) =>
+              uploadStore?.reportEncryptionProgress?.(uploadId, fraction),
           });
     } finally {
       // Always clear the label whether encryption succeeded or failed.
@@ -573,6 +669,7 @@ export async function uploadEncryptedFile(
 
     throwIfAborted(signal);
 
+    stage = "upload";
     const session = await startUploadSession(
       folderId,
       prepared.uploadFileName,
@@ -588,42 +685,44 @@ export async function uploadEncryptedFile(
       throw new Error("startUploadSession did not return a session id");
     }
 
-    const { fileId } = await uploadInChunks(
+    const { fileId, file: storedFile } = await uploadInChunks(
       folderId,
       sessionId,
       prepared.data as Blob,
       prepared.uploadFileName,
       chunkSize,
+      uploadThreads,
       signal,
       (percent) => uploadStore?.reportProgress?.(uploadId, percent),
     );
+    stored = { fileId, file: storedFile, path: session?.path };
+    rememberEncryptedFilename(fileId, prepared.originalFileName);
+    stage = "wrap";
 
     throwIfAborted(signal);
 
+    let skippedMembers: SkippedMemberKey[];
     try {
-      await finalizeUploadSession(folderId, sessionId);
-    } catch {
-      // Finalize is idempotent on the server; some deployments auto-finalize
-      // on the last chunk and return 404 here. Ignore — the file was written.
+      skippedMembers = await wrapDekForSelfAndRoom({
+        fileId,
+        dek: prepared.dek,
+        identity,
+        userId,
+        publicKey,
+        publicKeyId,
+        roomId,
+        signal,
+        refusals: memberKeyRefusals,
+        serializeFanOut,
+      });
+    } catch (error) {
+      if (error instanceof AbortedError) throw error;
+      throw new EncryptedWrapError(error);
     }
-
-    const skippedMembers = await wrapDekForSelfAndRoom({
-      fileId,
-      dek: prepared.dek,
-      identity,
-      userId,
-      publicKey,
-      publicKeyId,
-      roomId,
-      signal,
-      refusals: memberKeyRefusals,
-    });
-
-    rememberEncryptedFilename(fileId, prepared.originalFileName);
 
     return {
       ok: true,
-      fileId,
+      ...stored,
       uploadId,
       originalName: prepared.originalFileName,
       ...(skippedMembers.length > 0 ? { skippedMembers } : {}),
@@ -632,6 +731,7 @@ export async function uploadEncryptedFile(
     if (error instanceof AbortedError) {
       return {
         ok: false,
+        ...stored,
         uploadId,
         originalName: prepared?.originalFileName ?? file.name,
         aborted: true,
@@ -640,9 +740,11 @@ export async function uploadEncryptedFile(
     }
     return {
       ok: false,
+      ...stored,
       uploadId,
       originalName: prepared?.originalFileName ?? file.name,
       error,
+      failedAt: stage,
     };
   } finally {
     if (prepared?.dek) wipeDek(prepared.dek);

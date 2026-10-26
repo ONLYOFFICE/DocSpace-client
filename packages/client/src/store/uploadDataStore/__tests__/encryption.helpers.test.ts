@@ -37,12 +37,10 @@ import {
 
 import {
   cancelEncryptedBatchUploadImpl,
-  encryptKeysForRoomMembersImpl,
   ensureEncryptionUnlockedForBatchImpl,
   reportSkippedMembersImpl,
-  wrapForSelfThenRoomImpl,
 } from "../encryption.helpers";
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
+import { uploadEncryptedFile } from "@docspace/shared/services/private-room/encrypted-upload-orchestrator";
 import i18n from "SRC_DIR/i18n";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getUserById } from "@docspace/shared/api/people";
@@ -50,6 +48,8 @@ import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import {
   getFileEncryptionAccess,
   setFileEncryptionKeys,
+  startUploadSession,
+  uploadChunkSequential,
 } from "@docspace/shared/api/files";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import {
@@ -74,6 +74,18 @@ vi.mock("@docspace/shared/api/files", async (io) => ({
   ...((await io()) as Record<string, unknown>),
   getFileEncryptionAccess: vi.fn(),
   setFileEncryptionKeys: vi.fn(),
+  startUploadSession: vi.fn(),
+  uploadChunkSequential: vi.fn(),
+  finalizeUploadSession: vi.fn(),
+}));
+
+vi.mock("@docspace/shared/services/encryption/file-keys", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  encryptFile: vi.fn(async () => ({
+    encryptedBlob: new Blob([new Uint8Array(64)]),
+    dek: new Uint8Array(32),
+  })),
+  wipeDek: vi.fn(),
 }));
 
 vi.mock(
@@ -187,89 +199,7 @@ describe("ensureEncryptionUnlockedForBatchImpl", () => {
   });
 });
 
-describe("encryptKeysForRoomMembersImpl", () => {
-  const identity = {} as IdentityKeyPair;
-  const dek = new Uint8Array([1, 2, 3]);
-  const memberKey = (userId: string, publicKey: string) => ({
-    id: `${userId}-key`,
-    userId,
-    publicKey,
-    privateKeyEnc: "",
-    date: "2026-01-01T00:00:00",
-  });
-
-  beforeEach(() => {
-    resetTofuStores();
-    unregisterKeyMismatchHandler();
-    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
-      fileKeys: [{ userId: "user-1", publicKeyId: "key-1", privateKeyEnc: "own" }],
-    } as never);
-    vi.mocked(setFileEncryptionKeys).mockResolvedValue(undefined as never);
-  });
-
-  const run = () => {
-    const { store } = createTestUploadDataStore();
-    return encryptKeysForRoomMembersImpl(store, 555, "user-1", 7, dek, identity);
-  };
-
-  it("Member key mismatch on upload: a refused key gets no wrap and is returned as skipped", async () => {
-    await getTofuStore("user-1").checkKey("bob", "pk-bob-pinned");
-    const refuse = vi.fn(async () => "refuse" as const);
-    registerKeyMismatchHandler(refuse);
-    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
-      memberKey("alice", "pk-alice"),
-      memberKey("bob", "pk-bob-swapped"),
-    ] as never);
-
-    const skipped = await run();
-
-    expect(refuse).toHaveBeenCalledTimes(1);
-    expect(skipped).toEqual([
-      { userId: "bob", displayName: undefined, reason: "key-mismatch-refused" },
-    ]);
-    expect(
-      vi.mocked(wrapDekForRecipients).mock.calls[0][0].recipients.map(
-        (r) => r.userId,
-      ),
-    ).toEqual(["alice"]);
-    const written = vi.mocked(setFileEncryptionKeys).mock.calls[0][1] as {
-      userId: string;
-    }[];
-    expect(written.map((k) => k.userId)).toEqual(["user-1", "alice"]);
-  });
-
-  it("asks once per refused key change across the files of one batch", async () => {
-    await getTofuStore("user-1").checkKey("bob", "pk-bob-pinned");
-    const refuse = vi.fn(async () => "refuse" as const);
-    registerKeyMismatchHandler(refuse);
-    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
-      memberKey("bob", "pk-bob-swapped"),
-    ] as never);
-    const { store } = createTestUploadDataStore();
-
-    const first = await encryptKeysForRoomMembersImpl(store, 555, "user-1", 7, dek, identity);
-    const second = await encryptKeysForRoomMembersImpl(store, 556, "user-1", 7, dek, identity);
-
-    expect(refuse).toHaveBeenCalledTimes(1);
-    expect(first.map((m) => m.userId)).toEqual(["bob"]);
-    expect(second.map((m) => m.userId)).toEqual(["bob"]);
-  });
-
-  it("Unpinned member at upload: the key is pinned and the wrap is produced", async () => {
-    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
-      memberKey("alice", "pk-alice"),
-    ] as never);
-
-    const skipped = await run();
-
-    expect(skipped).toEqual([]);
-    const pinned = await getTofuStore("user-1").getKeys("alice");
-    expect(pinned.map((k) => k.publicKey)).toEqual(["pk-alice"]);
-    expect(vi.mocked(setFileEncryptionKeys)).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe("wrapForSelfThenRoomImpl", () => {
+describe("UploadDataStore.queueMemberFanOut", () => {
   const identity = {
     publicKey: new Uint8Array(32).fill(1),
     privateKey: new Uint8Array(32).fill(2),
@@ -287,7 +217,10 @@ describe("wrapForSelfThenRoomImpl", () => {
   beforeEach(async () => {
     resetTofuStores();
     unregisterKeyMismatchHandler();
-    SecretStorage.cacheUnlocked("user-1", identity);
+    vi.mocked(startUploadSession).mockResolvedValue({ id: "session" } as never);
+    vi.mocked(uploadChunkSequential)
+      .mockResolvedValueOnce({ id: 555 } as never)
+      .mockResolvedValueOnce({ id: 556 } as never);
     vi.mocked(getFileEncryptionAccess).mockResolvedValue({
       fileKeys: [{ userId: "user-1", publicKeyId: "key-1", privateKeyEnc: "own" }],
     } as never);
@@ -308,19 +241,28 @@ describe("wrapForSelfThenRoomImpl", () => {
   });
 
   afterEach(() => {
-    SecretStorage.lock();
     unregisterKeyMismatchHandler();
   });
 
+  /** Two encrypted uploads of one batch, their fan-outs through the store's queue. */
   const startTwo = () => {
     const { store } = createTestUploadDataStore();
-    const first = wrapForSelfThenRoomImpl(
-      store, 555, "user-1", "pk-base64-1", "key-1", new Uint8Array([1]), 7,
-    );
-    const second = wrapForSelfThenRoomImpl(
-      store, 556, "user-1", "pk-base64-1", "key-1", new Uint8Array([2]), 7,
-    );
-    return { store, first, second };
+    const upload = (name: string) =>
+      uploadEncryptedFile(
+        new File(["x"], name),
+        {
+          folderId: 7,
+          roomId: 7,
+          identity,
+          userId: "user-1",
+          publicKey: "pk-base64-1",
+          publicKeyId: "key-1",
+          memberKeyRefusals: store.memberKeyRefusals,
+          serializeFanOut: store.queueMemberFanOut,
+        },
+        name,
+      );
+    return { store, first: upload("a.docx"), second: upload("b.docx") };
   };
 
   it("Batch meets one changed key: two fan-outs ask once and both files get the wrap on accept", async () => {
@@ -331,7 +273,10 @@ describe("wrapForSelfThenRoomImpl", () => {
     const results = await Promise.all([first, second]);
 
     expect(handler).toHaveBeenCalledTimes(1);
-    expect(results).toEqual([[], []]);
+    expect(results.map((r) => [r.ok, r.skippedMembers])).toEqual([
+      [true, undefined],
+      [true, undefined],
+    ]);
     const memberWrites = vi
       .mocked(setFileEncryptionKeys)
       .mock.calls.filter(([, keys]) =>

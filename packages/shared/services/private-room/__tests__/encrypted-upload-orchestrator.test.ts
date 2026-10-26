@@ -37,6 +37,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AES_KEY_SIZE_BYTES } from "../../encryption/types";
 import {
+  EncryptedWrapError,
   getEncryptedUploadErrorMessage,
   getEncryptedUploadRefusalMessage,
   getEncryptedUploadRefusalNotice,
@@ -68,6 +69,7 @@ import {
 vi.mock("../../../api/files", () => ({
   startUploadSession: vi.fn().mockResolvedValue({ id: "session-1" }),
   uploadChunkSequential: vi.fn().mockResolvedValue({ data: { id: 42 } }),
+  uploadChunkParallel: vi.fn().mockResolvedValue({ id: 0 }),
   finalizeUploadSession: vi.fn().mockResolvedValue(undefined),
   getFileEncryptionAccess: vi
     .fn()
@@ -602,6 +604,116 @@ describe("uploadEncryptedFile", () => {
     expect(result).toMatchObject({ ok: true, uploadId: "row-9" });
     expect(vi.mocked(startUploadSession).mock.calls[0][4]).toBe(true);
     expect(reportProgress).toHaveBeenCalledWith("row-9", expect.any(Number));
+  });
+});
+
+describe("uploadEncryptedFile for a caller with its own queue", () => {
+  const ARGS = {
+    folderId: 1,
+    roomId: 10,
+    identity: makeIdentity() as never,
+    userId: "user-1",
+    publicKey: "pk-own",
+    publicKeyId: "key-1",
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("sends the parts as numbered chunks in parallel and answers the stored file and its path", async () => {
+    const api = await import("../../../api/files");
+    const stored = { id: 42, title: "5f0c9a52.docx", folderId: 1 };
+    vi.mocked(api.startUploadSession).mockResolvedValueOnce({
+      id: "session-1",
+      path: [2, 10, 1],
+    } as never);
+    vi.mocked(api.finalizeUploadSession).mockResolvedValueOnce({
+      id: 42,
+      uploaded: true,
+      file: stored,
+    } as never);
+    const reportProgress = vi.fn();
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      {
+        ...ARGS,
+        chunkSize: 24,
+        uploadThreads: 2,
+        uploadStore: { files: [], reportProgress },
+      },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({
+      ok: true,
+      fileId: 42,
+      file: stored,
+      path: [2, 10, 1],
+    });
+    const parts = vi.mocked(api.uploadChunkParallel).mock.calls;
+    expect(parts.map((call) => call[2]).sort()).toEqual([1, 2, 3]);
+    expect(api.uploadChunkSequential).not.toHaveBeenCalled();
+    expect(api.finalizeUploadSession).toHaveBeenCalledTimes(1);
+    expect(reportProgress).toHaveBeenLastCalledWith("row-1", 100);
+  });
+
+  it("reports the encryption progress and names the stage a failure stopped at", async () => {
+    const api = await import("../../../api/files");
+    const { wipeDek } = await import("../../encryption/file-keys");
+    vi.mocked(api.startUploadSession).mockRejectedValueOnce(
+      new Error("session down"),
+    );
+    const reportEncryptionProgress = vi.fn();
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, uploadStore: { files: [], reportEncryptionProgress } },
+      "row-1",
+    );
+
+    expect(reportEncryptionProgress).toHaveBeenCalledWith("row-1", 1);
+    expect(result).toMatchObject({ ok: false, failedAt: "upload" });
+    expect(result.fileId).toBeUndefined();
+    expect(wipeDek).toHaveBeenCalledTimes(1);
+  });
+
+  it("runs the room fan-out through the caller's queue", async () => {
+    let queued = 0;
+    const serializeFanOut = <T>(fanOut: () => Promise<T>) => {
+      queued += 1;
+      return fanOut();
+    };
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, serializeFanOut },
+      "row-1",
+    );
+
+    expect(result.ok).toBe(true);
+    expect(queued).toBe(1);
+  });
+
+  it("a file stored without its access list fails with the wrap failure and keeps its id", async () => {
+    const api = await import("../../../api/files");
+    vi.mocked(api.setFileEncryptionKeys).mockRejectedValueOnce(
+      new Error("403"),
+    );
+    const t = ((key: string) => key) as never;
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      ARGS,
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: false, fileId: 42, failedAt: "wrap" });
+    expect(result.error).toBeInstanceOf(EncryptedWrapError);
+    expect(getEncryptedUploadErrorMessage(t, result.error)).toBe(
+      "Common:EncryptionUploadWrapFailed",
+    );
   });
 });
 

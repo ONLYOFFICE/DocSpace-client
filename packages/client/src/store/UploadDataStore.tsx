@@ -47,7 +47,6 @@ import type {
   TOperation,
 } from "@docspace/shared/api/files/types";
 import type FilesFilter from "@docspace/shared/api/files/filter";
-import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
@@ -93,11 +92,8 @@ import {
 import {
   cancelEncryptedBatchUploadImpl,
   deleteMovedEncryptedSourceImpl,
-  encryptKeysForRoomMembersImpl,
   reportSkippedMembersImpl,
   ensureEncryptionUnlockedForBatchImpl,
-  prepareFileForEncryptedUploadImpl,
-  wrapForSelfThenRoomImpl,
 } from "./uploadDataStore/encryption.helpers";
 import {
   cancelUploadActionImpl,
@@ -354,42 +350,22 @@ class UploadDataStore {
   deleteMovedEncryptedSource = (moveSource: MoveSourceRef) =>
     deleteMovedEncryptedSourceImpl(this, moveSource);
 
-  wrapForSelfThenRoom = (
-    fileId: number,
-    currentUserId: string,
-    publicKeyBase64: string,
-    publicKeyId: string,
-    dek: Uint8Array,
-    roomId: number | string | null,
-  ) =>
-    wrapForSelfThenRoomImpl(
-      this,
-      fileId,
-      currentUserId,
-      publicKeyBase64,
-      publicKeyId,
-      dek,
-      roomId,
-    );
-
-  encryptKeysForRoomMembers = (
-    fileId: number,
-    currentUserId: string,
-    roomId: number | string | null,
-    dek: Uint8Array,
-    identity: IdentityKeyPair,
-  ) =>
-    encryptKeysForRoomMembersImpl(
-      this,
-      fileId,
-      currentUserId,
-      roomId,
-      dek,
-      identity,
-    );
-
   reportSkippedMembers = (skipped: SkippedMemberKey[]) =>
     reportSkippedMembersImpl(this, skipped);
+
+  /**
+   * Runs the room fan-outs of parallel uploads one at a time, so a changed
+   * member key is asked about once.
+   * Spec: private-rooms/encryption-core, "File access list holds one wrap per member".
+   */
+  queueMemberFanOut = <T,>(fanOut: () => Promise<T>): Promise<T> => {
+    const run = this.memberFanOutChain.then(fanOut, fanOut);
+    this.memberFanOutChain = run.then(
+      () => undefined,
+      () => undefined,
+    );
+    return run;
+  };
 
   getUserEncryptionKeys = () => getUserEncryptionKeysImpl(this);
 
@@ -403,12 +379,6 @@ class UploadDataStore {
 
   cancelEncryptedBatchUpload = (items?: TUploadFile[]) =>
     cancelEncryptedBatchUploadImpl(this, items);
-
-  prepareFileForEncryptedUpload = (
-    file: TUploadBrowserFile,
-    target: TUploadTarget,
-    onProgress?: (progress: number) => void,
-  ) => prepareFileForEncryptedUploadImpl(file, target, onProgress);
 
   removeFiles = (fileIds: number[]) => {
     fileIds.forEach((id) => {

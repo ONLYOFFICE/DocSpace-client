@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { runInAction } from "mobx";
+import { runInAction, when } from "mobx";
 import { AnalyticsEvents, RoomsType } from "@docspace/shared/enums";
 import {
   startUploadSession,
@@ -42,16 +42,16 @@ import {
   finalizeUploadSession,
 } from "@docspace/shared/api/files";
 import {
-  EncryptedReimportError,
-  makeOpaqueUploadName,
-  recoverDekForReimport,
   resolveUploadGate,
   sniffDse3Upload,
 } from "@docspace/shared/services/private-room/encrypted-upload";
+import {
+  getEncryptedUploadErrorMessage,
+  getEncryptedUploadRefusalMessage,
+  uploadEncryptedFile,
+} from "@docspace/shared/services/private-room/encrypted-upload-orchestrator";
 import { requestDeviceSetupHint } from "@docspace/shared/services/encryption/device-setup-hint-notifier";
-import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
-import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isQuotaError } from "@docspace/shared/utils/uploadErrors";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
@@ -60,12 +60,7 @@ import type { TTranslation } from "@docspace/shared/types";
 
 import i18n from "../../i18n";
 
-import {
-  acquireUploadAutoLockSuspension,
-  hasFileDek,
-  setFileDek,
-  takeFileDek,
-} from "./helpers";
+import { acquireUploadAutoLockSuspension } from "./helpers";
 import type { TUploadBrowserFile, TUploadFile } from "./helpers";
 import type {
   default as UploadDataStore,
@@ -161,73 +156,6 @@ export function checkChunkUploadImpl(
     });
 
     const currentFileData = self.files[indexOfFile];
-    if (currentFileData?.encrypted && hasFileDek(currentFileData)) {
-      const displayName =
-        currentFileData.reimportRealName || currentFileData.file?.name;
-      if (displayName) {
-        rememberEncryptedFilename(fileId, displayName);
-      }
-
-      const { publicKey, userId, publicKeyId } = self.getUserEncryptionKeys();
-      if (!userId || !publicKey) {
-        console.error(
-          "[ENCRYPTION] Cannot wrap DEK: encryption keys missing for current user",
-        );
-        const orphanDek = takeFileDek(currentFileData);
-        if (orphanDek) wipeDek(orphanDek);
-      } else {
-        const dekForWrap = takeFileDek(currentFileData);
-        const roomIdForWrap = currentFileData?.encryptionRoomId ?? null;
-        self.wrapForSelfThenRoom(
-          fileId,
-          String(userId),
-          publicKey,
-          publicKeyId || "",
-          dekForWrap!,
-          roomIdForWrap,
-        )
-          .then(async (skipped) => {
-            if (!skipped?.length) return;
-            const skippedMembers = await self.reportSkippedMembers(skipped);
-            runInAction(() => {
-              const uniqueId = self.files[indexOfFile]?.uniqueId;
-              if (self.files[indexOfFile]) {
-                self.files[indexOfFile].skippedMembers = skippedMembers;
-              }
-              const historyIndex = self.uploadedFilesHistory.findIndex(
-                (f) => f.uniqueId === uniqueId,
-              );
-              if (historyIndex > -1) {
-                self.uploadedFilesHistory[historyIndex].skippedMembers =
-                  skippedMembers;
-              }
-            });
-          })
-          .catch((error: TAxiosLikeError) => {
-            const wrapMessage = i18n.t("Common:EncryptionUploadWrapFailed");
-            console.error("[ENCRYPTION] Failed to set file encryption keys", {
-              fileId,
-              status: error?.response?.status,
-              message: error?.message,
-            });
-            runInAction(() => {
-              if (self.files[indexOfFile]) {
-                self.files[indexOfFile].error = wrapMessage;
-              }
-              const historyIndex = self.uploadedFilesHistory.findIndex(
-                (f) => f.uniqueId === self.files[indexOfFile]?.uniqueId,
-              );
-              if (historyIndex > -1) {
-                self.uploadedFilesHistory[historyIndex].error = wrapMessage;
-              }
-            });
-            try {
-              toastr.error(wrapMessage);
-            } catch {
-            }
-          });
-      }
-    }
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: AnalyticsEvents.FileUploaded,
@@ -633,11 +561,9 @@ export async function startSessionFuncImpl(
   const { chunkUploadSize } = self.filesSettingsStore;
 
   const { file, toFolderId } = item;
-  let fileToUpload = file;
-  let fileName = file.name;
-
-  let uploadDEK: Uint8Array | null = null;
-  let isEncrypted = file.encrypted || false;
+  const fileToUpload = file;
+  const fileName = file.name;
+  const isEncrypted = file.encrypted || false;
 
   const { publicKey, userId } = self.getUserEncryptionKeys();
   const gate = resolveUploadGate(
@@ -656,11 +582,9 @@ export async function startSessionFuncImpl(
     failUploadItem(
       self,
       indexOfFile,
-      gate.reason === "locked"
-        ? i18n.t("Common:EncryptionLockedUpload")
-        : gate.reason === "unsupported-room-type"
-          ? i18n.t("Common:EncryptionPrepareFailed")
-          : i18n.t("Common:EncryptionKeysRequiredForUpload"),
+      gate.reason === "unsupported-room-type"
+        ? i18n.t("Common:EncryptionPrepareFailed")
+        : getEncryptedUploadRefusalMessage(i18n.t, gate.reason),
       t,
       createNewIfExist,
     );
@@ -668,90 +592,7 @@ export async function startSessionFuncImpl(
   }
 
   if (gate.action === "encrypt") {
-    try {
-      const dse3Header = await sniffDse3Upload(file);
-      if (dse3Header) {
-        const identity = await requireUnlock(String(userId));
-        if (!identity) {
-          throw new EncryptedReimportError(
-            "encryption identity is locked — cannot recover the DEK",
-          );
-        }
-        const roomId = item.encryptionRoomId;
-        if (roomId === null || roomId === undefined) {
-          throw new EncryptedReimportError(
-            "upload item carries no room context for re-import",
-          );
-        }
-        const recovery = await recoverDekForReimport({
-          file,
-          header: dse3Header,
-          roomId,
-          userId: String(userId),
-          identity,
-        });
-
-        fileName = makeOpaqueUploadName(file.name);
-        uploadDEK = recovery.dek;
-        isEncrypted = true;
-
-        setFileDek(self.files[indexOfFile], uploadDEK);
-        runInAction(() => {
-          self.files[indexOfFile].encrypted = true;
-          self.files[indexOfFile].reimportRealName = recovery.realName;
-        });
-      } else {
-        const prepared = await self.prepareFileForEncryptedUpload(
-          file,
-          item.target,
-          (progress) => {
-            const fileIndex = self.uploadedFilesHistory.findIndex(
-              (f) => f.uniqueId === self.files[indexOfFile].uniqueId,
-            );
-            if (fileIndex > -1) {
-              self.uploadedFilesHistory[fileIndex].percent = Math.floor(
-                progress * 20,
-              );
-            }
-            const newPercent = self.getFilesPercent();
-            self.percent = newPercent;
-            self.primaryProgressDataStore.setPrimaryProgressBarData({
-              operation: OPERATIONS_NAME.upload,
-              percent: newPercent,
-              label: i18n.t("Files:Encrypting"),
-            });
-          },
-        );
-
-        if (!prepared.encrypted) {
-          // Spec: private-rooms/file-operations, "Queued private uploads are sent only as ciphertext".
-          throw new Error("encryption returned no ciphertext");
-        }
-        fileName = prepared.uploadFileName;
-        fileToUpload = new File([prepared.data], prepared.uploadFileName, {
-          type: "application/octet-stream",
-          lastModified: file.lastModified,
-        });
-        uploadDEK = prepared.dek;
-        isEncrypted = true;
-
-        setFileDek(self.files[indexOfFile], uploadDEK);
-        self.files[indexOfFile].encrypted = true;
-      }
-    } catch (error) {
-      console.error("[ENCRYPTION] prepareFileForEncryptedUpload failed", {
-        uniqueId: self.files[indexOfFile]?.uniqueId,
-        message: (error as Error)?.message,
-      });
-      const orphanDek = takeFileDek(self.files[indexOfFile]);
-      if (orphanDek) wipeDek(orphanDek);
-      const errorMessage =
-        error instanceof EncryptedReimportError
-          ? i18n.t("Common:EncryptionReimportFailed")
-          : i18n.t("Common:EncryptionPrepareFailed");
-      failUploadItem(self, indexOfFile, errorMessage, t, createNewIfExist);
-      return;
-    }
+    return uploadEncryptedItem(self, indexOfFile, t, createNewIfExist);
   }
 
   const fileSize = fileToUpload.size;
@@ -814,124 +655,294 @@ export async function startSessionFuncImpl(
         createNewIfExist,
       );
     })
-    .catch((error: unknown) => {
-      const orphanDek = takeFileDek(self.files[indexOfFile]);
-      if (orphanDek) wipeDek(orphanDek);
+    .catch((error: unknown) =>
+      failUploadSession(self, indexOfFile, error, t, createNewIfExist),
+    )
+    .finally(() => settleUploadQueue(self, t));
+}
 
-      if (self.files[indexOfFile] === undefined) {
-        self.primaryProgressDataStore.setPrimaryProgressBarData({
-          operation: OPERATIONS_NAME.upload,
-          completed: true,
-          alert: true,
-        });
-        return Promise.resolve();
-      }
-      let errorMessage = "";
-      if (typeof error === "object") {
-        const axiosErr = error as TAxiosLikeError;
-        errorMessage =
-          axiosErr?.response?.data?.error?.message ||
-          axiosErr?.statusText ||
-          axiosErr?.message ||
-          "";
-      } else {
-        errorMessage = error as string;
-      }
-
-      const isQuota = isQuotaError(error);
-
-      runInAction(() => {
-        self.files[indexOfFile].error = errorMessage;
-        self.files[indexOfFile].isQuotaError = isQuota;
-        const fileIndex = self.uploadedFilesHistory.findIndex(
-          (f) => f.uniqueId === self.files[indexOfFile].uniqueId,
-        );
-        if (fileIndex > -1) {
-          self.uploadedFilesHistory[fileIndex].error = errorMessage;
-          self.uploadedFilesHistory[fileIndex].isQuotaError = isQuota;
-        }
-
-        if (isQuota && !self.quotaErrorRaised) {
-          self.quotaErrorRaised = true;
-          const currentUniqueId = self.files[indexOfFile].uniqueId;
-          self.files.forEach((queued, idx) => {
-            if (
-              queued.uniqueId === currentUniqueId ||
-              queued.inAction ||
-              queued.error ||
-              queued.cancel ||
-              queued.action !== "upload"
-            )
-              return;
-
-            self.files[idx].error = errorMessage;
-            self.files[idx].isQuotaError = true;
-            self.files[idx].inAction = true;
-            const historyIndex = self.uploadedFilesHistory.findIndex(
-              (h) => h.uniqueId === queued.uniqueId,
-            );
-            if (historyIndex > -1) {
-              self.uploadedFilesHistory[historyIndex].error = errorMessage;
-              self.uploadedFilesHistory[historyIndex].isQuotaError = true;
-            }
-          });
-        }
-      });
-
-      const newPercent = self.getFilesPercent();
-      self.percent = newPercent;
-
-      const allFilesIsUploaded =
-        self.files.findIndex(
-          (f) =>
-            f.action !== "uploaded" &&
-            f.action !== "convert" &&
-            f.action !== "converted" &&
-            !f.error &&
-            !f.cancel,
-        ) === -1;
-
-      self.primaryProgressDataStore.setPrimaryProgressBarData({
-        operation: OPERATIONS_NAME.upload,
-        percent: newPercent,
-        completed: allFilesIsUploaded,
-        alert: true,
-      });
-
-      self.currentUploadNumber -= 1;
-
-      if (!self.quotaErrorRaised) {
-        const nextFileIndex = self.files.findIndex((f) => !f.inAction);
-
-        if (nextFileIndex !== -1) {
-          self.startSessionFunc(nextFileIndex, t, createNewIfExist);
-        }
-      }
-
-      return Promise.resolve();
-    })
-    .finally(() => {
-      const allFilesIsUploaded =
-        self.files.findIndex(
-          (f) =>
-            f.action !== "uploaded" &&
-            f.action !== "convert" &&
-            f.action !== "converted" &&
-            !f.error &&
-            !f.cancel,
-        ) === -1;
-
-      if (allFilesIsUploaded && !self.finishUploadFilesCalled) {
-        self.finishUploadFilesCalled = true;
-
-        if (!self.filesToConversion.length) {
-          self.finishUploadFiles(t, !!self.tempConversionFiles.length);
-        } else {
-          runInAction(() => {
-            self.uploaded = true;
-            self.asyncUploadObj = {};
-          });
-        }
-      }
+/** Fails a file whose upload session or chunks were refused, quota included. */
+function failUploadSession(
+  self: UploadDataStore,
+  indexOfFile: number,
+  error: unknown,
+  t: TTranslation,
+  createNewIfExist: boolean,
+) {
+  if (self.files[indexOfFile] === undefined) {
+    self.primaryProgressDataStore.setPrimaryProgressBarData({
+      operation: OPERATIONS_NAME.upload,
+      completed: true,
+      alert: true,
     });
+    return Promise.resolve();
+  }
+  let errorMessage = "";
+  if (typeof error === "object") {
+    const axiosErr = error as TAxiosLikeError;
+    errorMessage =
+      axiosErr?.response?.data?.error?.message ||
+      axiosErr?.statusText ||
+      axiosErr?.message ||
+      "";
+  } else {
+    errorMessage = error as string;
+  }
+
+  const isQuota = isQuotaError(error);
+
+  runInAction(() => {
+    self.files[indexOfFile].error = errorMessage;
+    self.files[indexOfFile].isQuotaError = isQuota;
+    const fileIndex = self.uploadedFilesHistory.findIndex(
+      (f) => f.uniqueId === self.files[indexOfFile].uniqueId,
+    );
+    if (fileIndex > -1) {
+      self.uploadedFilesHistory[fileIndex].error = errorMessage;
+      self.uploadedFilesHistory[fileIndex].isQuotaError = isQuota;
+    }
+
+    if (isQuota && !self.quotaErrorRaised) {
+      self.quotaErrorRaised = true;
+      const currentUniqueId = self.files[indexOfFile].uniqueId;
+      self.files.forEach((queued, idx) => {
+        if (
+          queued.uniqueId === currentUniqueId ||
+          queued.inAction ||
+          queued.error ||
+          queued.cancel ||
+          queued.action !== "upload"
+        )
+          return;
+
+        self.files[idx].error = errorMessage;
+        self.files[idx].isQuotaError = true;
+        self.files[idx].inAction = true;
+        const historyIndex = self.uploadedFilesHistory.findIndex(
+          (h) => h.uniqueId === queued.uniqueId,
+        );
+        if (historyIndex > -1) {
+          self.uploadedFilesHistory[historyIndex].error = errorMessage;
+          self.uploadedFilesHistory[historyIndex].isQuotaError = true;
+        }
+      });
+    }
+  });
+
+  const newPercent = self.getFilesPercent();
+  self.percent = newPercent;
+
+  const allFilesIsUploaded =
+    self.files.findIndex(
+      (f) =>
+        f.action !== "uploaded" &&
+        f.action !== "convert" &&
+        f.action !== "converted" &&
+        !f.error &&
+        !f.cancel,
+    ) === -1;
+
+  self.primaryProgressDataStore.setPrimaryProgressBarData({
+    operation: OPERATIONS_NAME.upload,
+    percent: newPercent,
+    completed: allFilesIsUploaded,
+    alert: true,
+  });
+
+  self.currentUploadNumber -= 1;
+
+  if (!self.quotaErrorRaised) {
+    const nextFileIndex = self.files.findIndex((f) => !f.inAction);
+
+    if (nextFileIndex !== -1) {
+      self.startSessionFunc(nextFileIndex, t, createNewIfExist);
+    }
+  }
+
+  return Promise.resolve();
+}
+
+/** Finishes the upload once no file is left to send. */
+function settleUploadQueue(self: UploadDataStore, t: TTranslation) {
+  const allFilesIsUploaded =
+    self.files.findIndex(
+      (f) =>
+        f.action !== "uploaded" &&
+        f.action !== "convert" &&
+        f.action !== "converted" &&
+        !f.error &&
+        !f.cancel,
+    ) === -1;
+
+  if (allFilesIsUploaded && !self.finishUploadFilesCalled) {
+    self.finishUploadFilesCalled = true;
+
+    if (!self.filesToConversion.length) {
+      self.finishUploadFiles(t, !!self.tempConversionFiles.length);
+    } else {
+      runInAction(() => {
+        self.uploaded = true;
+        self.asyncUploadObj = {};
+      });
+    }
+  }
+}
+
+/**
+ * Sends an item the gate encrypts through the shared encrypted upload, under
+ * the queue's own id, then hands the stored file to the queue as an upload.
+ */
+async function uploadEncryptedItem(
+  self: UploadDataStore,
+  indexOfFile: number,
+  t: TTranslation,
+  createNewIfExist: boolean,
+) {
+  const item = self.files[indexOfFile];
+  const { uniqueId, file, toFolderId } = item;
+  const { publicKey, userId, publicKeyId } = self.getUserEncryptionKeys();
+
+  const identity = await requireUnlock(String(userId));
+  if (!identity) {
+    // Spec: private-rooms/file-operations, "Re-import of a file downloaded without decryption".
+    const isReimport = await sniffDse3Upload(file).then(
+      (header) => !!header,
+      () => true,
+    );
+    failUploadItem(
+      self,
+      indexOfFile,
+      isReimport
+        ? i18n.t("Common:EncryptionReimportFailed")
+        : getEncryptedUploadRefusalMessage(i18n.t, "locked"),
+      t,
+      createNewIfExist,
+    );
+    return;
+  }
+  runInAction(() => {
+    item.encrypted = true;
+  });
+
+  const { chunkUploadSize, uploadThreadCount } = self.filesSettingsStore;
+  const controller = new AbortController();
+  const stopWatchingCancel = when(
+    () =>
+      self.uploaded ||
+      !!self.files.find((f) => f.uniqueId === uniqueId)?.cancel,
+    () => controller.abort(),
+  );
+  const setProgress = (percent: number, label?: string) => {
+    runInAction(() => {
+      const history = self.uploadedFilesHistory.find(
+        (f) => f.uniqueId === uniqueId,
+      );
+      if (history && history.percent < percent) history.percent = percent;
+      self.percent = self.getFilesPercent();
+    });
+    self.primaryProgressDataStore.setPrimaryProgressBarData({
+      operation: OPERATIONS_NAME.upload,
+      percent: self.percent,
+      ...(label && { label }),
+    });
+  };
+
+  try {
+    const result = await uploadEncryptedFile(
+      file,
+      {
+        folderId: toFolderId as number | string,
+        roomId: item.encryptionRoomId as number | string,
+        identity,
+        userId: String(userId),
+        publicKey: publicKey as string,
+        publicKeyId: publicKeyId || "",
+        chunkSize: chunkUploadSize,
+        uploadThreads: typeof toFolderId === "string" ? 1 : uploadThreadCount,
+        signal: controller.signal,
+        memberKeyRefusals: self.memberKeyRefusals,
+        serializeFanOut: self.queueMemberFanOut,
+        uploadStore: {
+          files: [],
+          reportEncryptionProgress: (_uploadId, fraction) =>
+            setProgress(Math.floor(fraction * 20), i18n.t("Files:Encrypting")),
+          reportProgress: (_uploadId, percent) => setProgress(percent),
+        },
+      },
+      uniqueId,
+    );
+
+    if (result.aborted) return;
+    if (result.failedAt === "prepare") {
+      runInAction(() => {
+        item.encrypted = false;
+      });
+    }
+
+    if (result.fileId !== undefined) {
+      self.checkChunkUpload({
+        t,
+        res: {
+          uploaded: true,
+          id: result.fileId,
+          file: result.file,
+        } as TChunkUploadResponse,
+        index: 1,
+        indexOfFile,
+        path: (result.path ?? []) as number[],
+        chunksLength: 1,
+        resolve: () => Promise.resolve(),
+        createNewIfExist,
+      });
+    }
+
+    if (!result.ok) {
+      const message = getEncryptedUploadErrorMessage(i18n.t, result.error);
+      if (result.failedAt === "wrap") {
+        markUploadedWithError(self, uniqueId, message);
+        toastr.error(message);
+      } else if (result.failedAt === "upload") {
+        failUploadSession(self, indexOfFile, result.error, t, createNewIfExist);
+      } else {
+        console.error("[ENCRYPTION] encrypted upload preparation failed", {
+          uniqueId,
+          message: (result.error as Error)?.message,
+        });
+        failUploadItem(self, indexOfFile, message, t, createNewIfExist);
+      }
+      return;
+    }
+
+    if (result.skippedMembers?.length) {
+      const skippedMembers = await self.reportSkippedMembers(
+        result.skippedMembers,
+      );
+      runInAction(() => {
+        item.skippedMembers = skippedMembers;
+        const history = self.uploadedFilesHistory.find(
+          (f) => f.uniqueId === uniqueId,
+        );
+        if (history) history.skippedMembers = skippedMembers;
+      });
+    }
+  } finally {
+    stopWatchingCancel();
+    settleUploadQueue(self, t);
+  }
+}
+
+/** A stored file whose access list could not be written keeps the error. */
+function markUploadedWithError(
+  self: UploadDataStore,
+  uniqueId: string,
+  message: string,
+) {
+  runInAction(() => {
+    const queued = self.files.find((f) => f.uniqueId === uniqueId);
+    if (queued) queued.error = message;
+    const history = self.uploadedFilesHistory.find(
+      (f) => f.uniqueId === uniqueId,
+    );
+    if (history) history.error = message;
+  });
 }

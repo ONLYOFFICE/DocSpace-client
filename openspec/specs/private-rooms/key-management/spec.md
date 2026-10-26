@@ -239,7 +239,7 @@ The system SHALL show a dialog when a peer's public key differs from its pin, na
 - **THEN** the dialog names the member by display name, as the skipped-member toast does; the user id stands in only when the name cannot be loaded
 
 ### Requirement: Key dialogs are accessible and adapt to narrow screens
-The system SHALL present the passphrase, recovery-phrase, key-change, passphrase-change and reset dialogs as centred modals on wide screens and as aside panels on narrow screens; each dialog SHALL expose a dialog role, an accessible name and labelled inputs so screen readers announce it.
+The system SHALL present the passphrase, recovery-phrase, key-change, passphrase-change and reset dialogs as centred modals on wide screens and as aside panels on narrow screens; each dialog SHALL expose a dialog role and an accessible name, and every input and action SHALL have an accessible name, so screen readers announce them. The passphrase fields SHALL NOT be given a label of their own in this version; their placeholder is their accessible name.
 
 #### Scenario: Mobile viewport
 - **WHEN** a key dialog opens on a narrow screen
@@ -247,7 +247,11 @@ The system SHALL present the passphrase, recovery-phrase, key-change, passphrase
 
 #### Scenario: Screen reader
 - **WHEN** a key dialog opens
-- **THEN** it is announced with its title, and every input and action has an accessible label
+- **THEN** it is announced with its title, every action has an accessible label and every input an accessible name
+
+#### Scenario: Passphrase field
+- **WHEN** the passphrase dialog opens
+- **THEN** its passphrase and confirmation fields are named by their placeholders, Common:Passphrase and Common:ConfirmPassphrase, and no separate label is rendered for them
 
 ### Requirement: Unused keys on the server can be deleted
 The system SHALL show in Keys management how many of the user's envelopes on the server are not the selected key (Common:UnusedEncryptionKeysNotice) and SHALL offer to delete them (Common:DeleteUnusedEncryptionKeys) after a warning and passphrase confirmation of the selected key; the selected key is never deleted by this action.

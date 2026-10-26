@@ -18,7 +18,7 @@ The system SHALL decrypt each selected encrypted file and deliver them together 
 - **THEN** one Files.zip is saved with the file under its decrypted name at the root and the folder's files under their decrypted names inside a directory named after the folder, and no server archive is requested
 
 ### Requirement: Decrypted folder download
-The system SHALL offer "Download" for a folder inside a private room and for the room itself; it SHALL decrypt every file in the subtree on the client and save them as one zip with original names, each under its path inside the folder, a name that clashes inside its folder taking the lowest numbered suffix no other entry has, using the same progress and error reporting as the multi-file decrypted download. This SHALL hold whether the folder is downloaded from its context menu or selected alone in the header menu.
+The system SHALL offer "Download" for a folder inside a private room and for the room itself, from its context menu or with the folder selected alone in the header menu; it SHALL decrypt every file in the subtree on the client and save them as one zip with original names, each under its path inside the folder, a name that clashes inside its folder taking the lowest numbered suffix no other entry has, with the same progress and error reporting as the multi-file decrypted download.
 
 #### Scenario: Folder context menu
 - **WHEN** the context menu of a folder in a private room is opened

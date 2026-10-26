@@ -3,7 +3,7 @@
 ## ADDED Requirements
 
 ### Requirement: Versioned Document Server encryption contract
-The client SHALL rely on a written, versioned contract with the Document Server for encrypted files. The contract SHALL state how the encryption keys entry of the editor configuration is read in a web session, how the DSE3 container is decrypted for editing and re-encrypted on save, what the save callback returns, how the signed token treats the entry, and the first Document Server version that implements it.
+The client SHALL rely on a written, versioned contract with the Document Server for encrypted files. The contract SHALL state how the encryption keys entry of the editor configuration is read in a web session, how the DSE3 container is decrypted for editing and re-encrypted on save, with versions 2 and 3 read and version 3 written, what the save callback returns, how the signed token treats the entry, and the first Document Server version that implements it.
 
 #### Scenario: Contract referenced by version
 - **WHEN** the client builds the editor configuration for an encrypted file
@@ -12,6 +12,10 @@ The client SHALL rely on a written, versioned contract with the Document Server 
 #### Scenario: Save round-trip
 - **WHEN** the Document Server saves an encrypted document
 - **THEN** the callback delivers a DSE3 container encrypted with the same DEK and the server stores it as a new encrypted version
+
+#### Scenario: Container versions
+- **WHEN** the Document Server opens a file stored as a DSE3 version-2 or version-3 container and saves it
+- **THEN** it decrypts either version and the saved container is version 3
 
 ### Requirement: Document Server capability check before opening
 The client SHALL learn from the server whether the connected Document Server declares encrypted-editing support, and SHALL NOT mount the editor for an encrypted file when the capability is absent. The user SHALL see Common:PrivateRoomEditorNotSupported instead of the editor.

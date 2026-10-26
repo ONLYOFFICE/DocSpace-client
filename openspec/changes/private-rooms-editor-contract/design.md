@@ -119,6 +119,12 @@ the server:
 5. **Contract version travels in the configuration.** A small integer next to
    `dek` and `cryptoEngineId`; the Document Server ignores versions it does
    not know and reports an error instead of opening ciphertext.
+6. **The Document Server reads DSE3 versions 2 and 3 and writes version 3
+   (decided 2026-10-26).** `private-rooms-dse3-header-authentication`
+   authenticates the header fields in a version-3 container and keeps
+   version-2 files readable without migration. No Document Server build
+   decrypts DSE3 yet, so the contract asks for both versions from the start
+   instead of adding version 3 to a shipped parser later.
 
 ## Risks / Trade-offs
 

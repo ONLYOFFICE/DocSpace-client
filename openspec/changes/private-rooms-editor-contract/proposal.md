@@ -17,7 +17,9 @@ this as the reason the feature is hidden; the last editor-side commit is
 
 - Write down and version the Document Server contract for encrypted files:
   how `editorConfig.encryptionKeys` is consumed, how the DSE3 container is
-  decrypted and re-encrypted on save, what the callback returns, how the JWT
+  decrypted and re-encrypted on save, which container versions it reads (2
+  and 3) and writes (3, decided 2026-10-26 with
+  `private-rooms-dse3-header-authentication`), what the callback returns, how the JWT
   treats the field, and the minimum Document Server version or capability.
 - Add a Document Server capability check: the client refuses to open an
   encrypted file (with a localized message) when the connected Document

@@ -81,12 +81,12 @@ import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import {
   DeviceType,
   FolderType,
-  RoomPrivacyFilter,
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
+import { scopeRoomsRequest } from "@/utils/roomsRequestScope";
 
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
@@ -229,7 +229,6 @@ const RoomsList = ({
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
     f.type = String(RoomsType.CustomRoom);
-    if (isPrivate) f.privacyFilter = RoomPrivacyFilter.Private;
     const sp = new URLSearchParams(filesFilter);
     if (sp.get("page")) f.page = Number(sp.get("page"));
     if (sp.get("pageCount")) f.pageCount = Number(sp.get("pageCount"));
@@ -580,7 +579,6 @@ const RoomsList = ({
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
     newFilter.type = String(RoomsType.CustomRoom);
-    if (isPrivate) newFilter.privacyFilter = RoomPrivacyFilter.Private;
     const sp = new URLSearchParams(window.location.search);
     if (sp.get("page")) newFilter.page = Number(sp.get("page"));
     if (sp.get("sortBy"))
@@ -605,7 +603,10 @@ const RoomsList = ({
     newFilter.pageCount = PAGE_COUNT;
 
     try {
-      const res = await api.rooms.getRooms(newFilter, controller.signal);
+      const res = await api.rooms.getRooms(
+        scopeRoomsRequest(newFilter, { isPrivate, isArchive }),
+        controller.signal,
+      );
 
       if (controller.signal.aborted) return;
 
@@ -757,7 +758,10 @@ const RoomsList = ({
     filter.pageCount = PAGE_COUNT;
 
     try {
-      const res = await api.rooms.getRooms(filter, controller.signal);
+      const res = await api.rooms.getRooms(
+        scopeRoomsRequest(filter, { isPrivate, isArchive }),
+        controller.signal,
+      );
 
       if (controller.signal.aborted) return;
 
@@ -783,6 +787,8 @@ const RoomsList = ({
     convertFolderToItem,
     convertFileToItem,
     filesListStore,
+    isPrivate,
+    isArchive,
   ]);
 
   React.useEffect(() => {

@@ -448,6 +448,21 @@ test.describe("(private) — rooms list & unlock", () => {
       (url) => url.pathname === PRIVATE_LIST && url.search === OPT_IN,
     );
   });
+
+  test("Generic rooms list", async ({ page, baseUrl, port, mockBoth }) => {
+    mockBoth(
+      privateRoomListHandler(port, {
+        roomId: ROOM_ID,
+        title: ROOM_TITLE,
+        ordinaryRooms: [{ roomId: SHARED_ROOM_ID, title: SHARED_ROOM_TITLE }],
+      }),
+    );
+
+    await page.goto(`${baseUrl}/sdk/rooms${OPT_IN}`);
+
+    await expect(page.getByText(SHARED_ROOM_TITLE)).toBeVisible();
+    await expect(page.getByText(ROOM_TITLE)).toHaveCount(0);
+  });
 });
 
 test.describe("(private) — create / upload / download / preview", () => {

@@ -35,6 +35,7 @@
 
 import { useState, useCallback, useEffect, useRef } from "react";
 import { getCountTilesInRow } from "@docspace/shared/utils";
+import { getHotkeyLetter } from "@docspace/shared/utils/getHotkeyLetter";
 
 interface UseTemplateGalleryHotkeysProps {
   itemsCount: number;
@@ -193,7 +194,7 @@ const useTemplateGalleryHotkeys = ({
       const currentIndex = pendingIndexRef.current ?? focusedIndexRef.current;
       const isFocusedValid = currentIndex >= 0 && currentIndex < itemsCount;
 
-      switch (e.key) {
+      switch (getHotkeyLetter(e)) {
         case "ArrowDown":
           e.preventDefault();
           e.stopPropagation();
@@ -220,7 +221,6 @@ const useTemplateGalleryHotkeys = ({
           if (isFocusedValid) onSelect?.(currentIndex);
           break;
         case "i":
-        case "I":
           e.preventDefault();
           e.stopPropagation();
           if (isFocusedValid) onInfoSelect?.(currentIndex);

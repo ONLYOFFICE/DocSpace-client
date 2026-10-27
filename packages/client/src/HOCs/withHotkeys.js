@@ -41,6 +41,7 @@ import { isMobile } from "react-device-detect";
 import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { getHotkeyLetter } from "@docspace/shared/utils/getHotkeyLetter";
 import { copySelectedText } from "@docspace/shared/utils/copy";
 
 const suppressKeyRepeat = (code) => {
@@ -293,7 +294,7 @@ const withHotkeys = (Component) => {
         if (e.shiftKey || e.ctrlKey || isIndexEditingMode || e.type === "keyup")
           return;
 
-        switch (e.key) {
+        switch (getHotkeyLetter(e)) {
           case "ArrowDown":
           case "j": {
             return selectBottom();

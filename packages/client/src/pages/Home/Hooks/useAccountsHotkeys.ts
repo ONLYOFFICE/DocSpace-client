@@ -36,6 +36,7 @@
 import { useEffect, useCallback } from "react";
 import { useHotkeys, Options } from "react-hotkeys-hook";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { getHotkeyLetter } from "@docspace/shared/utils/getHotkeyLetter";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 import { copySelectedText } from "@docspace/shared/utils/copy";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
@@ -129,7 +130,7 @@ const useAccountsHotkeys = ({
 
       if (e.shiftKey || e.ctrlKey || e.type === "keyup") return;
 
-      switch (e.key) {
+      switch (getHotkeyLetter(e)) {
         case "ArrowDown":
         case "j": {
           return selectBottom();

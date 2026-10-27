@@ -335,6 +335,36 @@ const List = ({
     setIsStoreSynced(true);
   }, [filesList, setItems]);
 
+  // Spec: private-rooms/sdk-surface, "Files list follows encrypted operations".
+  const storedFilesCount = filesListStore.storedFiles.length;
+  React.useEffect(() => {
+    if (!isStoreSynced || storedFilesCount === 0) return;
+
+    const listed = new Set(
+      filesListStore.items.filter((i) => !i.isFolder).map((i) => String(i.id)),
+    );
+    const added = filesListStore
+      .takeStoredFiles()
+      .filter(
+        (file) =>
+          String(file.folderId) === String(currentFolderId) &&
+          !listed.has(String(file.id)),
+      )
+      .map((file) => convertFileToItem(file));
+    if (added.length === 0) return;
+
+    filesListStore.prependFiles(added);
+    setTotal((count) => count + added.length);
+    setIsEmptyList(false);
+  }, [
+    isStoreSynced,
+    storedFilesCount,
+    filesListStore,
+    currentFolderId,
+    convertFileToItem,
+    setIsEmptyList,
+  ]);
+
   React.useEffect(() => {
     setRootFolderType(current.rootFolderType);
   }, [current.rootFolderType, setRootFolderType]);

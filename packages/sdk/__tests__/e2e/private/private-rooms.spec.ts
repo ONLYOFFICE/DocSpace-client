@@ -676,6 +676,7 @@ test.describe("(private) — create / upload / download / preview", () => {
     await expect
       .poll(() => keyHolders(room, uploaded.id))
       .toEqual([ALICE_ID, FIXTURE_USER_ID].sort());
+    await expect(row(page, "notes.txt")).toBeVisible();
   });
 
   /** Uploads a file named like MEMO and waits for the name-clash dialog. */
@@ -902,9 +903,7 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
       .getFiles()
       .find((f) => f.id !== REPORT.id && f.id !== REPORT_COPY.id)!;
     expectStoredEncrypted(copy, REPORT.bytes);
-    await expect(
-      page.getByText("Report (2).docx", { exact: true }),
-    ).toBeVisible();
+    await expect(row(page, "Report (2).docx")).toBeVisible();
   });
 
   test("File moved within the room", async ({

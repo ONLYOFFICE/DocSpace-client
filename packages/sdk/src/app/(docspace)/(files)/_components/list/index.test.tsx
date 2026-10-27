@@ -153,6 +153,26 @@ describe("List", () => {
     expect(container.textContent).not.toContain("memo.txt");
     expect(container.textContent).toContain("empty folder");
   });
+
+  it("Upload without a socket connection: a file stored in the open folder is listed", () => {
+    act(() => {
+      store.addStoredFile({ id: 8102, title: "notes.txt", folderId: 7001 } as never);
+      store.addStoredFile({ id: 8103, title: "elsewhere.txt", folderId: 9999 } as never);
+    });
+
+    expect(container.textContent).toContain("notes.txt");
+    expect(container.textContent).toContain("memo.txt");
+    expect(container.textContent).not.toContain("elsewhere.txt");
+    expect(store.storedFiles).toEqual([]);
+  });
+
+  it("lists a stored file once when the list already shows it", () => {
+    act(() =>
+      store.addStoredFile({ id: 8101, title: "memo.txt", folderId: 7001 } as never),
+    );
+
+    expect(store.items.filter((i) => i.id === 8101)).toHaveLength(1);
+  });
 });
 
 describe("List in a private room", () => {

@@ -53,7 +53,10 @@ type TBatchOptions = {
   };
   onQuotaError: (error: unknown) => void;
   onFileError: (file: File, error: unknown, uploadId: string) => void;
-  onFileComplete: (file: File, result: { uploadId: string }) => void;
+  onFileComplete: (
+    file: File,
+    result: { uploadId: string; file?: { id: number; folderId: number } },
+  ) => void;
   onNameClash: (
     clashes: { uploadId: string; file: File; renamed: string }[],
   ) => Promise<boolean>;
@@ -113,6 +116,10 @@ import {
 
 import { PrivateEncryptedUploadStoreProvider } from "../_store/PrivateEncryptedUploadStore";
 import {
+  FilesListStore,
+  FilesListStoreContext,
+} from "@/app/(docspace)/_store/FilesListStore";
+import {
   PrivateDialogsStoreProvider,
   usePrivateDialogsStore,
 } from "../_store/PrivateDialogsStore";
@@ -138,6 +145,7 @@ describe("useEncryptedUpload", () => {
   let uploadFiles: ReturnType<typeof useEncryptedUpload>["uploadFiles"];
   let store: ReturnType<typeof useUploadStore>;
   let dialogs: ReturnType<typeof usePrivateDialogsStore>;
+  let filesList: FilesListStore;
 
   const Probe = () => {
     uploadFiles = useEncryptedUpload().uploadFiles;
@@ -172,16 +180,19 @@ describe("useEncryptedUpload", () => {
     vi.mocked(toastr.error).mockClear();
     vi.mocked(toastr.info).mockClear();
     vi.mocked(toastr.warning).mockClear();
+    filesList = new FilesListStore();
     root = createRoot(document.createElement("div"));
     act(() =>
       root?.render(
-        <UploadStoreContextProvider>
-          <PrivateEncryptedUploadStoreProvider>
-            <PrivateDialogsStoreProvider>
-              <Probe />
-            </PrivateDialogsStoreProvider>
-          </PrivateEncryptedUploadStoreProvider>
-        </UploadStoreContextProvider>,
+        <FilesListStoreContext.Provider value={filesList}>
+          <UploadStoreContextProvider>
+            <PrivateEncryptedUploadStoreProvider>
+              <PrivateDialogsStoreProvider>
+                <Probe />
+              </PrivateDialogsStoreProvider>
+            </PrivateEncryptedUploadStoreProvider>
+          </UploadStoreContextProvider>
+        </FilesListStoreContext.Provider>,
       ),
     );
   });
@@ -358,6 +369,19 @@ describe("useEncryptedUpload", () => {
 
     expect(abortedDuring).toBe(true);
     expect(store.items[0].status).toBe("cancelled");
+  });
+
+  it("Upload without a socket connection: the stored file goes to the files list", async () => {
+    const stored = { id: 8201, folderId: 5 };
+    env.orchestrate.mockImplementation(async (options: TBatchOptions) => {
+      const [uploadId] = options.uploadIds;
+      options.onFileComplete(options.files[0], { uploadId, file: stored });
+      return batchResult(options.uploadIds);
+    });
+
+    await upload(["notes.txt"]);
+
+    expect(filesList.storedFiles).toEqual([stored]);
   });
 
   describe("Upload with a clashing name", () => {

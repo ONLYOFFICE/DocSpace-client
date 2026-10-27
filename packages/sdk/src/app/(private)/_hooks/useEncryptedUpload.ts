@@ -48,8 +48,10 @@ import type {
   OrchestrateResult,
 } from "@docspace/shared/services/private-room/encrypted-upload-orchestrator";
 import type { SkippedMemberKey } from "@docspace/shared/services/private-room/member-key-verification";
+import type { TFile } from "@docspace/shared/api/files/types";
 
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
 import { usePrivateEncryptedUploadStore } from "../_store/PrivateEncryptedUploadStore";
@@ -91,6 +93,7 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
   const { requireIdentity, suspendAutoLock } = useEncryption();
   const identityStore = useEncryptionIdentityStore();
   const uploadStore = useUploadStore();
+  const filesListStore = useFilesListStore();
   const privateUploadStore = usePrivateEncryptedUploadStore();
   const privateDialogs = usePrivateDialogsStore();
   const [isUploading, setIsUploading] = React.useState(false);
@@ -185,8 +188,13 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
           },
           onFileError: (_file: File, error: unknown, uploadId: string) =>
             fail(uploadId, orchestrator.getEncryptedUploadErrorMessage(t, error)),
-          onFileComplete: (_file: File, fileResult: { uploadId: string }) =>
-            uploadStore.setItemUploaded(fileResult.uploadId),
+          onFileComplete: (
+            _file: File,
+            fileResult: { uploadId: string; file?: TFile },
+          ) => {
+            uploadStore.setItemUploaded(fileResult.uploadId);
+            if (fileResult.file) filesListStore.addStoredFile(fileResult.file);
+          },
           onNameClash: (clashes: { file: File }[]) =>
             privateDialogs.askNameClash(clashes.map(({ file }) => file.name)),
         };
@@ -254,6 +262,7 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
       suspendAutoLock,
       identityStore,
       uploadStore,
+      filesListStore,
       privateUploadStore,
       privateDialogs,
       reportSkippedMembers,

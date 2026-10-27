@@ -66,6 +66,8 @@ export const getRoomTypeTitleTranslation = (
       return t("Common:InstructionsRoomTitle");
     case RoomsType.KnowledgeRoom:
       return t("Common:KnowledgeRoomTitle");
+    case RoomsType.AiProjectRoom:
+      return t("Common:AIProjectRoomTitle");
     default:
       return "";
   }
@@ -103,6 +105,8 @@ export const getRoomTypeDescriptionTranslation = (
       return t("Common:InstructionsRoomDescription");
     case RoomsType.KnowledgeRoom:
       return t("Common:KnowledgeRoomDescription");
+    case RoomsType.AiProjectRoom:
+      return t("Common:AIProjectRoomDescription");
     default:
       return "";
   }

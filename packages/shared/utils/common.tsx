@@ -1115,10 +1115,14 @@ export function tryParseArray(str: string) {
   }
 }
 
+// AI agents and AI projects are rooms for the API, but they are created from
+// their own sections, never from the room type chooser or the Rooms filter.
 export const RoomsTypeValues = [
   ...Object.values(RoomsType).filter(
     (item): item is number =>
-      typeof item === "number" && item !== RoomsType.AIRoom,
+      typeof item === "number" &&
+      item !== RoomsType.AIRoom &&
+      item !== RoomsType.AiProjectRoom,
   ),
   RoomsTypePrivate,
 ];

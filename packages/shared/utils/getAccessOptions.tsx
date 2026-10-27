@@ -196,6 +196,22 @@ export const getAccessOptions = (
 			access: ShareAccessRights.Comment,
 			type: EmployeeType.User,
 		},
+		projectManager: {
+			key: "projectManager",
+			label: t("Common:AIProjectManager"),
+			description: t("Common:AIProjectManagerDescription"),
+			tooltip: t("Common:UserMaxAvailableRoleWarning"),
+			color: globalColors.favoritesStatus,
+			access: ShareAccessRights.RoomManager,
+			type: EmployeeType.RoomAdmin,
+		},
+		projectMember: {
+			key: "projectMember",
+			label: t("Common:Member"),
+			description: t("Common:AIProjectMemberDescription"),
+			access: ShareAccessRights.Collaborator,
+			type: EmployeeType.User,
+		},
 		viewer: {
 			key: "viewer",
 			label: t("Common:RoleViewer"),
@@ -289,6 +305,12 @@ export const getAccessOptions = (
 				{ key: "s1", isSeparator: withSeparator },
 				accesses.viewer,
 			];
+			break;
+
+		// An AI project: the manager role is paid (room admins and up), so the
+		// invite panel leaves users and guests with Member only.
+		case RoomsType.AiProjectRoom:
+			options = [accesses.projectManager, accesses.projectMember];
 			break;
 
 		case None:

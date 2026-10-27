@@ -35,7 +35,7 @@
   "ApplyToFolderItemsDescription": "سيتم تطبيق القالب وقيمه على جميع العناصر الجديدة والحالية في هذا المجلد ومجلداته الفرعية.",
   "ApplyToRoomItems": "تطبيق على جميع العناصر في هذه الغرفة",
   "ApplyToRoomItemsDescription": "سيتم تطبيق القالب وقيمه على جميع العناصر الجديدة والحالية في هذه الغرفة ومجلداتها.",
-  "AskAdminToCreateTemplate": "اطلب من مسؤول مساحة العمل إنشاء قالب بيانات وصفية.",
+  "AskAdminToCreateTemplate": "اطلب من المسؤول العام إنشاء قالب بيانات وصفية.",
   "ConditionLabel": "{{field}}: {{operator}} · {{value}}",
   "ConditionsCount_one": "البيانات الوصفية · {{count}} شرط",
   "ConditionsCount_other": "البيانات الوصفية · {{count}} شروط",

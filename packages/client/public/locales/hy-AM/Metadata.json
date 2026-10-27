@@ -35,7 +35,7 @@
   "ApplyToFolderItemsDescription": "Կաղապարը և դրա արժեքները կկիրառվեն այս պանակի և դրա ենթապանակների բոլոր նոր և առկա տարրերի նկատմամբ։",
   "ApplyToRoomItems": "Կիրառել այս սենյակի բոլոր տարրերի նկատմամբ",
   "ApplyToRoomItemsDescription": "Կաղապարը և դրա արժեքները կկիրառվեն այս սենյակի և դրա պանակների բոլոր նոր և առկա տարրերի նկատմամբ։",
-  "AskAdminToCreateTemplate": "Խնդրեք աշխատանքային տարածքի ադմինիստրատորին ստեղծել մետատվյալների կաղապար։",
+  "AskAdminToCreateTemplate": "Խնդրեք գերադմինիստրատորին ստեղծել մետատվյալների կաղապար։",
   "ConditionLabel": "{{field}}: {{operator}} · {{value}}",
   "ConditionsCount_one": "Մետատվյալներ · {{count}} պայման",
   "ConditionsCount_other": "Մետատվյալներ · {{count}} պայման",

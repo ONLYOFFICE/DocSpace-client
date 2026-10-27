@@ -35,7 +35,7 @@
   "ApplyToFolderItemsDescription": "Malli ja sen arvot otetaan käyttöön kaikissa tämän kansion ja sen alikansioiden uusissa ja nykyisissä kohteissa.",
   "ApplyToRoomItems": "Käytä kaikkiin tämän huoneen kohteisiin",
   "ApplyToRoomItemsDescription": "Malli ja sen arvot otetaan käyttöön kaikissa tämän huoneen ja sen kansioiden uusissa ja nykyisissä kohteissa.",
-  "AskAdminToCreateTemplate": "Pyydä työtilan järjestelmänvalvojaa luomaan metatietomalli.",
+  "AskAdminToCreateTemplate": "Pyydä pääjärjestelmänvalvojaa luomaan metatietomalli.",
   "ConditionLabel": "{{field}}: {{operator}} · {{value}}",
   "ConditionsCount_one": "Metatiedot · {{count}} ehto",
   "ConditionsCount_other": "Metatiedot · {{count}} ehtoa",

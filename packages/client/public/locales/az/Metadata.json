@@ -35,7 +35,7 @@
   "ApplyToFolderItemsDescription": "Şablon və onun dəyərləri bu qovluqdakı və onun alt qovluqlarındakı bütün yeni və mövcud elementlərə tətbiq olunacaq.",
   "ApplyToRoomItems": "Bu otaqdakı bütün elementlərə tətbiq edin",
   "ApplyToRoomItemsDescription": "Şablon və onun dəyərləri bu otaqdakı və onun qovluqlarındakı bütün yeni və mövcud elementlərə tətbiq olunacaq.",
-  "AskAdminToCreateTemplate": "İş sahəsinin administratorundan metadata şablonu yaratmasını xahiş edin.",
+  "AskAdminToCreateTemplate": "Super administratordan metadata şablonu yaratmasını xahiş edin.",
   "ConditionLabel": "{{field}}: {{operator}} · {{value}}",
   "ConditionsCount_one": "Metadata · {{count}} şərt",
   "ConditionsCount_other": "Metadata · {{count}} şərt",

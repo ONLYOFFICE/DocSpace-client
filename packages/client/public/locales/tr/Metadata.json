@@ -35,7 +35,7 @@
   "ApplyToFolderItemsDescription": "Şablon ve değerleri, bu klasördeki ve alt klasörlerindeki tüm yeni ve mevcut öğelere uygulanacak.",
   "ApplyToRoomItems": "Bu odadaki tüm öğelere uygula",
   "ApplyToRoomItemsDescription": "Şablon ve değerleri, bu odadaki ve klasörlerindeki tüm yeni ve mevcut öğelere uygulanacak.",
-  "AskAdminToCreateTemplate": "Çalışma alanı yöneticisinden bir meta veri şablonu oluşturmasını isteyin.",
+  "AskAdminToCreateTemplate": "Süper yöneticiden bir meta veri şablonu oluşturmasını isteyin.",
   "ConditionLabel": "{{field}}: {{operator}} · {{value}}",
   "ConditionsCount_one": "Meta veri · {{count}} koşul",
   "ConditionsCount_other": "Meta veri · {{count}} koşul",

@@ -35,7 +35,7 @@
   "ApplyToFolderItemsDescription": "Šablon i njegove vrednosti biće primenjeni na sve nove i postojeće stavke u ovom folderu i njegovim podfolderima.",
   "ApplyToRoomItems": "Primeni na sve stavke u ovoj sobi",
   "ApplyToRoomItemsDescription": "Šablon i njegove vrednosti biće primenjeni na sve nove i postojeće stavke u ovoj sobi i njenim folderima.",
-  "AskAdminToCreateTemplate": "Zamolite administratora radnog prostora da kreira šablon metapodataka.",
+  "AskAdminToCreateTemplate": "Zamolite superadministratora da kreira šablon metapodataka.",
   "ConditionLabel": "{{field}}: {{operator}} · {{value}}",
   "ConditionsCount_one": "Metapodaci · {{count}} uslov",
   "ConditionsCount_other": "Metapodaci · {{count}} uslova",

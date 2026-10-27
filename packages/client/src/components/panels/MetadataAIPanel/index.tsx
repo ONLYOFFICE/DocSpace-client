@@ -153,12 +153,12 @@ const MetadataAIDialog = ({
       if (isAnalyzing) return t("Metadata:AIFillingTitle");
       if (isReview) return t("Metadata:AIReviewAutofill");
 
-      return t("Files:FillMetadataWithAI");
+      return t("Files:FillMetadata");
     }
 
     return isReview
       ? t("Metadata:AIReviewSuggestions")
-      : t("Files:SuggestMetadataWithAI");
+      : t("Files:GenerateMetadata");
   };
 
   const loader = (

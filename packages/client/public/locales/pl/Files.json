@@ -124,7 +124,7 @@
   "ShareRoom": "Udostępnij pokój",
   "ShareSpace": "Udostępnij obszar",
   "ShowLinkActions": "Pokaż działania linku",
-  "SuggestMetadataWithAI": "Zaproponuj metadane za pomocą AI",
+  "SuggestMetadataWithAI": "Wygeneruj metadane za pomocą AI",
   "SyncWithDatabase": "Synchronizacja z bazą danych",
   "SyncWithDatabaseError": "Błąd synchronizacji z bazą danych",
   "SyncWithDatabasePending": "{{count}} tabel zostanie utwor po przesłaniu pierws formularza",

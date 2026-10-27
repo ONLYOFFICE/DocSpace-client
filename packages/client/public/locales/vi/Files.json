@@ -124,7 +124,7 @@
   "ShareRoom": "Chia sẻ phòng",
   "ShareSpace": "Chia sẻ không gian",
   "ShowLinkActions": "Hiển thị hành động với liên kết",
-  "SuggestMetadataWithAI": "Đề xuất siêu dữ liệu bằng AI",
+  "SuggestMetadataWithAI": "Tạo siêu dữ liệu bằng AI",
   "SyncWithDatabase": "Đồng bộ hóa với cơ sở dữ liệu",
   "SyncWithDatabaseError": "Lỗi đồng bộ hóa với cơ sở dữ liệu",
   "SyncWithDatabasePending": "{{count}} bảng sẽ được tạo sau khi gửi biểu mẫu đầu tiên",

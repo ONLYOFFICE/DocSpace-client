@@ -124,7 +124,7 @@
   "ShareRoom": "ແບ່ງປັນຫ້ອງ",
   "ShareSpace": "ແບ່ງປັນສະເປສ",
   "ShowLinkActions": "ສະແດງການດໍາເນີນການເຊື່ອມຕໍ່",
-  "SuggestMetadataWithAI": "ແນະນຳຂໍ້ມູນເມຕາດ້ວຍ AI",
+  "SuggestMetadataWithAI": "ສ້າງຂໍ້ມູນເມຕາດ້ວຍ AI",
   "SyncWithDatabase": "ການຊິງໂຄຣໄນສ໌ກັບຖານຂໍ້ມູນ",
   "SyncWithDatabaseError": "ການຊິງໂຄຣນຖານຂໍ້ມູນລ້ມຫຼວ",
   "SyncWithDatabasePending": "{{count}} ຕາຕະລາງຈະຖືກສ້າງຂຶ້ນຫຼັງຈາກການສົ່ງຟອມຄັ້ງທຳອິດ",

@@ -124,7 +124,7 @@
   "ShareRoom": "Kopīgot telpu",
   "ShareSpace": "Kopīgot veidlapu telpu",
   "ShowLinkActions": "Rādīt saites darbības",
-  "SuggestMetadataWithAI": "Ieteikt metadatus ar MI",
+  "SuggestMetadataWithAI": "Ģenerēt metadatus ar MI",
   "SyncWithDatabase": "Sinhronizācija ar datubāzi",
   "SyncWithDatabaseError": "Neizās sinhroniz ar datubā",
   "SyncWithDatabasePending": "{{count}} tabulas tiks izveidotas pēc pirmā velaplnotaūtīšanas",

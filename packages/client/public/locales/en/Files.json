@@ -124,7 +124,7 @@
   "ShareRoom": "Share room",
   "ShareSpace": "Share space",
   "ShowLinkActions": "Show link actions",
-  "SuggestMetadataWithAI": "Suggest metadata with AI",
+  "SuggestMetadataWithAI": "Generate metadata with AI",
   "SyncWithDatabase": "Synchronization with database",
   "SyncWithDatabaseError": "Failed to sync with database",
   "SyncWithDatabasePending": "{{count}} tables will be created after the first form submission",

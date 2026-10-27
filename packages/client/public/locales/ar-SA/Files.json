@@ -124,7 +124,7 @@
   "ShareRoom": "مشاركة الغرفة",
   "ShareSpace": "مشاركة المساحة",
   "ShowLinkActions": "عرض إجراءات الرابط",
-  "SuggestMetadataWithAI": "اقتراح البيانات الوصفية باستخدام AI",
+  "SuggestMetadataWithAI": "توليد البيانات الوصفية باستخدام AI",
   "SyncWithDatabase": "مزامنة مع قاعدة البيانات",
   "SyncWithDatabaseError": "فشل المزامنة مع قاعدة البيانات",
   "SyncWithDatabasePending": "{{count}} جداول سيتم إنشاؤها بعد أول عملية إرسال للنموذج",

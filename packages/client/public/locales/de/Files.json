@@ -124,7 +124,7 @@
   "ShareRoom": "Raum freigeben",
   "ShareSpace": "Space freigeben",
   "ShowLinkActions": "Link-Optionen anzeigen",
-  "SuggestMetadataWithAI": "Metadaten mit KI vorschlagen",
+  "SuggestMetadataWithAI": "Metadaten mit KI generieren",
   "SyncWithDatabase": "Synchronisierung mit der Datenbank",
   "SyncWithDatabaseError": "Synchronisierung mit der Datenbank fehlgeschlagen",
   "SyncWithDatabasePending": "{{count}} Tabellen werden nach dem ersten Absenden des Formulars erstellt",

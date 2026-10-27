@@ -124,7 +124,7 @@
   "ShareRoom": "Partilhar sala",
   "ShareSpace": "Partilhar espaço",
   "ShowLinkActions": "Mostrar ações de link",
-  "SuggestMetadataWithAI": "Sugerir metadados com IA",
+  "SuggestMetadataWithAI": "Gerar metadados com IA",
   "SyncWithDatabase": "Sincronização com o banco de dados",
   "SyncWithDatabaseError": "Falha na sincronização com o banco de dados",
   "SyncWithDatabasePending": "{{count}} tabelas serão criadas após o envio do primeiro formulário",

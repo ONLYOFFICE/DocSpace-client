@@ -124,7 +124,7 @@
   "ShareRoom": "Kamer delen",
   "ShareSpace": "Ruimte delen",
   "ShowLinkActions": "Link acties tonen",
-  "SuggestMetadataWithAI": "Metadata voorstellen met AI",
+  "SuggestMetadataWithAI": "Metadata genereren met AI",
   "SyncWithDatabase": "Synchronisatie met database",
   "SyncWithDatabaseError": "Synchroniseren mislukt",
   "SyncWithDatabasePending": "{{count}} tabellen worden aangemaakt na de eerste formulierverzending",

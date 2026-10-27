@@ -124,7 +124,7 @@
   "ShareRoom": "Condividi stanza",
   "ShareSpace": "Condividi spazio",
   "ShowLinkActions": "Mostra azioni di link",
-  "SuggestMetadataWithAI": "Suggerisci metadati con l'IA",
+  "SuggestMetadataWithAI": "Genera metadati con l'IA",
   "SyncWithDatabase": "Sron con il database",
   "SyncWithDatabaseError": "Sincizzazione il database fallita",
   "SyncWithDatabasePending": "{{count}} tabelle verranno create dopo l'invio del primo modulo",

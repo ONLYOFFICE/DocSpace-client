@@ -124,7 +124,7 @@
   "ShareRoom": "Sdílet místnost",
   "ShareSpace": "Sdílet prostor",
   "ShowLinkActions": "Zobrazit akce odkazu",
-  "SuggestMetadataWithAI": "Navrhnout metadata pomocí AI",
+  "SuggestMetadataWithAI": "Vygenerovat metadata pomocí AI",
   "SyncWithDatabase": "Synchronizace s databází",
   "SyncWithDatabaseError": "Nepodařilo se synchronizovat s databází",
   "SyncWithDatabasePending": "{{count}} tabulek bude vytvořeno po prvním odeslání formuláře",

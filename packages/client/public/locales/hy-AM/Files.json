@@ -124,7 +124,7 @@
   "ShareRoom": "Կիսվեք սենյակով",
   "ShareSpace": "Կիսվեք տարածքով",
   "ShowLinkActions": "Ցույց տալ հղման գործողությունները",
-  "SuggestMetadataWithAI": "Առաջարկել մետատվյալներ ԱԲ-ի միջոցով",
+  "SuggestMetadataWithAI": "Ստեղծել մետատվյալներ ԱԲ-ի միջոցով",
   "SyncWithDatabase": "Սինխրոնացում տվյալների բազայի հետ",
   "SyncWithDatabaseError": "Տվյալների բազայի հետ սինխրոնացումը ձախողվեց",
   "SyncWithDatabasePending": "{{count}} աղյուսակ կստեղծվեն առաջին ձևաթղթի ուղարկումից հետո",

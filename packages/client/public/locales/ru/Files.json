@@ -124,7 +124,7 @@
   "ShareRoom": "Предоставить доступ к комнате",
   "ShareSpace": "Предоставить доступ к пространству",
   "ShowLinkActions": "Показать действия со ссылками",
-  "SuggestMetadataWithAI": "Предложить метаданные с помощью ИИ",
+  "SuggestMetadataWithAI": "Сгенерировать метаданные с помощью ИИ",
   "SyncWithDatabase": "Схзация базой данных",
   "SyncWithDatabaseError": "Ошибка синхронизации с базой данных",
   "SyncWithDatabasePending": "{{count}} таблиц будут созданы после первой отправки формы",

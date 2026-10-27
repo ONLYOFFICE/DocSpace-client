@@ -124,7 +124,7 @@
   "ShareRoom": "Ndani dhomën",
   "ShareSpace": "Ndani hapësirën",
   "ShowLinkActions": "Shfaqni veprimet e lidhjes",
-  "SuggestMetadataWithAI": "Sugjeroni meta të dhëna me IA",
+  "SuggestMetadataWithAI": "Gjeneroni meta të dhëna me IA",
   "SyncWithDatabase": "Sinkronizimi me bazën e të dhënave",
   "SyncWithDatabaseError": "Dësincronizimi me databazën dështoi",
   "SyncWithDatabasePending": "{{count}} tabela do të krijohen pas dorëzimit të formularit të parë",

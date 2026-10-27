@@ -124,7 +124,7 @@
   "ShareRoom": "Κοινή χρήση δωματίου",
   "ShareSpace": "Κοινή χρήση χώρου",
   "ShowLinkActions": "Εμφάνιση ενεργειών συνδέσμου",
-  "SuggestMetadataWithAI": "Πρόταση μεταδεδομένων με AI",
+  "SuggestMetadataWithAI": "Δημιουργία μεταδεδομένων με AI",
   "SyncWithDatabase": "Συγχρονισμός με τη βάση δεδομένων",
   "SyncWithDatabaseError": "Αποτυχία συγχρονισμού με τη βάση δεδομένων",
   "SyncWithDatabasePending": "{{count}} πίνακες θα δημιουργηθούν μετά την πρώτη υποβολή φόρμας",

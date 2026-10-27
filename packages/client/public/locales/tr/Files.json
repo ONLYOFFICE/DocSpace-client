@@ -124,7 +124,7 @@
   "ShareRoom": "Odayı paylaş",
   "ShareSpace": "Alanı paylaş",
   "ShowLinkActions": "Bağlantı işlemlerini göster",
-  "SuggestMetadataWithAI": "AI ile meta veri öner",
+  "SuggestMetadataWithAI": "AI ile meta veri oluştur",
   "SyncWithDatabase": "Veritabanı ile senkronizasyon",
   "SyncWithDatabaseError": "Veritabanı ile senkronizasyon başarısız oldu",
   "SyncWithDatabasePending": "İlk form gönderiminden sonra {{count}} tablo oluşturulacak",

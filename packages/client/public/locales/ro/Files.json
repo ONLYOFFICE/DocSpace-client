@@ -124,7 +124,7 @@
   "ShareRoom": "Partajare sală",
   "ShareSpace": "Partajare spațiu",
   "ShowLinkActions": "Afișare acțiuni asupra link-ului",
-  "SuggestMetadataWithAI": "Sugerare metadate cu IA",
+  "SuggestMetadataWithAI": "Generare metadate cu IA",
   "SyncWithDatabase": "Sincronizarea cu baza de date",
   "SyncWithDatabaseError": "Sincronizarea cu baza de date a eșuat",
   "SyncWithDatabasePending": "{{count}} tabele vor fi create după prima trimitere a formularului",

@@ -124,7 +124,7 @@
   "ShareRoom": "Дели собу",
   "ShareSpace": "Дели простор",
   "ShowLinkActions": "Прикажи радње линка",
-  "SuggestMetadataWithAI": "Предложи метаподатке помоћу АИ",
+  "SuggestMetadataWithAI": "Генериши метаподатке помоћу АИ",
   "SyncWithDatabase": "Синхронизација са базом података",
   "SyncWithDatabaseError": "Неуспешна синхронизација са базом података",
   "SyncWithDatabasePending": "{{count}} табела ће бити креирано након првог слања форме",

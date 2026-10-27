@@ -124,7 +124,7 @@
   "ShareRoom": "Jaa huone",
   "ShareSpace": "Jaa tila",
   "ShowLinkActions": "Näytä linkin toiminnot",
-  "SuggestMetadataWithAI": "Ehdota metatietoja AI:n avulla",
+  "SuggestMetadataWithAI": "Luo metatiedot AI:n avulla",
   "SyncWithDatabase": "Synointi tietok kanssa",
   "SyncWithDatabaseError": "Tietokannan synkronointi epäonnistui",
   "SyncWithDatabasePending": "{{count}}ulukodaan ensimmäisenakkeen lähettämisen",

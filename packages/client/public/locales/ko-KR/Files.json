@@ -124,7 +124,7 @@
   "ShareRoom": "방 공유",
   "ShareSpace": "공간 공유",
   "ShowLinkActions": "링크 작업 표시",
-  "SuggestMetadataWithAI": "AI로 메타데이터 제안",
+  "SuggestMetadataWithAI": "AI로 메타데이터 생성",
   "SyncWithDatabase": "데이터베이스와 동기화 중",
   "SyncWithDatabaseError": "데이터화 실패했습니다.",
   "SyncWithDatabasePending": "첫 번째 양식 제출 후 {{count}}개의 테이블이 생성됩니다",

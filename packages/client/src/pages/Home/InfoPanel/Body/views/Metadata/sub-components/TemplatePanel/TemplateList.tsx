@@ -35,8 +35,6 @@
 
 import EmptyFilterLightSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg?url";
 import EmptyFilterDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.dark.svg?url";
-import EmptyFolderLightSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg?url";
-import EmptyFolderDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg?url";
 import SettingsSvg from "PUBLIC_DIR/images/settings.desc.react.svg";
 
 import { useState } from "react";
@@ -90,7 +88,7 @@ const TemplateList = ({
     return (
       <EmptyScreenContainer
         className={styles.emptyScreen}
-        imageSrc={isBase ? EmptyFolderLightSvgUrl : EmptyFolderDarkSvgUrl}
+        imageSrc={isBase ? EmptyFilterLightSvgUrl : EmptyFilterDarkSvgUrl}
         imageAlt=""
         headerText={
           hasTemplates

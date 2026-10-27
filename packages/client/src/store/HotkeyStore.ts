@@ -37,7 +37,6 @@ import { makeAutoObservable } from "mobx";
 import type { NavigateFunction } from "react-router";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { RoomsType } from "@docspace/shared/enums";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import type FilesFilter from "@docspace/shared/api/files/filter";
 import type { TTranslation } from "@docspace/shared/types";
@@ -159,6 +158,8 @@ class HotkeyStore {
   elemOffset = 0;
 
   hotkeysClipboardAction: "move" | "copy" | null = null;
+
+  hotkeysClipboardFromShared = false;
 
   selectionAreaIsEnabled = true;
 
@@ -732,6 +733,11 @@ class HotkeyStore {
     }
   };
 
+  get isInSharedFolder() {
+    const { shared, navigationPath } = this.selectedFolderStore;
+    return shared || navigationPath.some((item) => item.shared);
+  }
+
   copyToClipboard = (t: TTranslation, isCut?: boolean) => {
     const { selection, setHotkeysClipboard } = this.filesStore;
 
@@ -742,6 +748,7 @@ class HotkeyStore {
 
     setHotkeysClipboard();
     this.hotkeysClipboardAction = isCut ? "move" : "copy";
+    this.hotkeysClipboardFromShared = this.isInSharedFolder;
 
     const copyText = `${t("AddedToClipboard")}: ${selection.length}`;
     toastr.success(copyText);
@@ -753,7 +760,6 @@ class HotkeyStore {
 
     const {
       id: selectedItemId,
-      roomType,
       security,
       getSelectedFolder,
     } = this.selectedFolderStore;
@@ -775,7 +781,6 @@ class HotkeyStore {
     // keep runtime identical.
     if (!security!.CopyTo || !security!.MoveTo) return;
 
-    const isPublic = roomType === RoomsType.PublicRoom;
     let isPastedIntoItself = false;
 
     selections.forEach((item) => {
@@ -813,14 +818,10 @@ class HotkeyStore {
         }),
       };
 
-      // `selections` is an array, so `selections.rootFolderType`
-      // is always undefined at runtime (looks like a latent bug — probably
-      // meant `selections[0].rootFolderType`); the cast keeps the original
-      // runtime behavior.
       if (
-        isPublic &&
-        !(selections as TFilesItem[] & { rootFolderType?: unknown })
-          .rootFolderType
+        this.filesSettingsStore.externalShare &&
+        this.isInSharedFolder &&
+        !this.hotkeysClipboardFromShared
       ) {
         this.dialogsStore.setMoveToPublicRoomVisible(true, operationData);
         return;

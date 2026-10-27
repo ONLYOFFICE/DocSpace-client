@@ -59,10 +59,15 @@ import {
   getSuggestNotFound,
   getTemplateForms,
   getMetadataAIModel,
+  getUndoShortcut,
   isSameEntry,
+  isTextEditable,
   isValidSuggestion,
+  revertAICustomValue,
+  revertAIValue,
   toCustomFieldRequests,
   toSuggestionDrafts,
+  withoutAIChange,
 } from "../utils";
 
 const metadata = {
@@ -264,6 +269,85 @@ describe("fill", () => {
 
     expect(keys).toEqual(["Reviewer"]);
     expect(filled.map(({ value }) => value)).toEqual(["Bob", "Superior"]);
+  });
+
+  it("puts back the saved value of one field AI changed", () => {
+    const { forms: filled } = applyAIValues(
+      forms,
+      [
+        { fieldId: 12, name: "Client", value: { stringValue: "Globex" } },
+        { fieldId: 15, name: "Claim amount", value: { numberValue: 1248500 } },
+      ],
+      true,
+    );
+    const reverted = revertAIValue(filled, 1, 12);
+
+    expect(reverted[0].inputs[12]).toBe("ACME");
+    expect(reverted[0].inputs[15]).toBe("1248500");
+    expect(revertAIValue(filled, 2, 12)).toEqual(filled);
+  });
+
+  it("puts back the saved value of a custom field AI changed", () => {
+    const drafts = toCustomFieldDrafts(metadata.customFields).map((draft) => ({
+      ...draft,
+      value: "Bob",
+    }));
+
+    expect(
+      revertAICustomValue(drafts, metadata.customFields, "Reviewer")[0].value,
+    ).toBe("Ann");
+  });
+
+  it("reads Ctrl+Z as undo and Ctrl+Shift+Z as redo in any keyboard layout", () => {
+    const key = (patch: Partial<KeyboardEvent> = {}) => ({
+      code: "KeyZ",
+      ctrlKey: true,
+      metaKey: false,
+      shiftKey: false,
+      altKey: false,
+      ...patch,
+    });
+
+    expect(getUndoShortcut(key())).toBe("undo");
+    expect(getUndoShortcut(key({ ctrlKey: false, metaKey: true }))).toBe(
+      "undo",
+    );
+    expect(getUndoShortcut(key({ shiftKey: true }))).toBe("redo");
+    expect(getUndoShortcut(key({ altKey: true }))).toBeNull();
+    expect(getUndoShortcut(key({ ctrlKey: false }))).toBeNull();
+    expect(getUndoShortcut(key({ code: "KeyY" }))).toBeNull();
+  });
+
+  it("leaves Ctrl+Z to the text fields", () => {
+    const input = (type: string) =>
+      Object.assign(document.createElement("input"), { type });
+
+    expect(isTextEditable(input("text"))).toBe(true);
+    expect(isTextEditable(document.createElement("textarea"))).toBe(true);
+    expect(isTextEditable(input("checkbox"))).toBe(false);
+    expect(isTextEditable(document.createElement("button"))).toBe(false);
+    expect(isTextEditable(null)).toBe(false);
+  });
+
+  it("stops counting a change once it is undone", () => {
+    const summary = {
+      count: 3,
+      notFound: [],
+      skipped: [],
+      filledFieldIds: [12, 15],
+      filledCustomKeys: ["Reviewer"],
+    };
+
+    expect(withoutAIChange(summary, { fieldId: 12 })).toMatchObject({
+      count: 2,
+      filledFieldIds: [15],
+      filledCustomKeys: ["Reviewer"],
+    });
+    expect(withoutAIChange(summary, { customKey: "Reviewer" })).toMatchObject({
+      count: 2,
+      filledFieldIds: [12, 15],
+      filledCustomKeys: [],
+    });
   });
 
   it("names the empty visible fields AI found nothing for", () => {

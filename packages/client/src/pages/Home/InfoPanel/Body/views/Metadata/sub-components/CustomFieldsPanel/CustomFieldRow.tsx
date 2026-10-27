@@ -51,6 +51,7 @@ import {
 import type { TCustomFieldDraft } from "../../types";
 import { isCaseOnlyRename } from "../../utils";
 import AIFilledLabel from "../AIFilledLabel";
+import AIPreviousValue from "../AIPreviousValue";
 import styles from "../Panel.module.scss";
 
 type CustomFieldRowProps = {
@@ -59,8 +60,10 @@ type CustomFieldRowProps = {
   canRename?: boolean;
   isValueRequired?: boolean;
   isAIFilled?: boolean;
+  previousValue?: string;
   onChange: (draft: TCustomFieldDraft) => void;
   onRemove?: () => void;
+  onRevert?: () => void;
 };
 
 const CustomFieldRow = ({
@@ -69,8 +72,10 @@ const CustomFieldRow = ({
   canRename = false,
   isValueRequired = false,
   isAIFilled = false,
+  previousValue,
   onChange,
   onRemove,
+  onRevert,
 }: CustomFieldRowProps) => {
   const { t } = useTranslation(["Metadata", "Common"]);
 
@@ -116,7 +121,11 @@ const CustomFieldRow = ({
         isVertical
         removeMargin
         labelText={
-          isAIFilled ? <AIFilledLabel>{draft.name}</AIFilledLabel> : draft.name
+          isAIFilled ? (
+            <AIFilledLabel onUndo={onRevert}>{draft.name}</AIFilledLabel>
+          ) : (
+            draft.name
+          )
         }
         hasError={!!valueError}
         errorMessage={valueError}
@@ -129,6 +138,7 @@ const CustomFieldRow = ({
         ) : (
           valueInput
         )}
+        {isAIFilled ? <AIPreviousValue value={previousValue} /> : null}
       </FieldContainer>
     );
   }

@@ -68,7 +68,11 @@ import {
   isSameInput,
 } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/utils";
 
-import type { TMetadataAIContext, TMetadataAIItem } from "./types";
+import type {
+  TMetadataAIContext,
+  TMetadataAIItem,
+  TMetadataAISummary,
+} from "./types";
 
 export const FILL_METADATA_AI = "fill-metadata-ai";
 export const SUGGEST_METADATA_AI = "suggest-metadata-ai";
@@ -198,6 +202,86 @@ export const applyAICustomValues = (
   });
 
   return { drafts: next, keys };
+};
+
+export const revertAIValue = (
+  forms: TTemplateForm[],
+  templateId: number,
+  fieldId: number,
+) =>
+  forms.map((form) => {
+    const field = form.template.fields.find(({ id }) => id === fieldId);
+
+    if (form.template.id !== templateId || !field) return form;
+
+    return {
+      ...form,
+      inputs: { ...form.inputs, [fieldId]: getMetadataInput(field) },
+    };
+  });
+
+export const revertAICustomValue = (
+  drafts: TCustomFieldDraft[],
+  customFields: TCustomField[],
+  key: string,
+) =>
+  drafts.map((draft) =>
+    draft.key === key
+      ? {
+          ...draft,
+          value: customFields.find(({ name }) => name === key)?.value ?? "",
+        }
+      : draft,
+  );
+
+const TEXT_INPUT_TYPES = new Set([
+  "text",
+  "search",
+  "email",
+  "url",
+  "tel",
+  "password",
+  "number",
+]);
+
+export const getUndoShortcut = ({
+  code,
+  ctrlKey,
+  metaKey,
+  shiftKey,
+  altKey,
+}: Pick<
+  KeyboardEvent,
+  "code" | "ctrlKey" | "metaKey" | "shiftKey" | "altKey"
+>): "undo" | "redo" | null => {
+  if (code !== "KeyZ" || !(ctrlKey || metaKey) || altKey) return null;
+
+  return shiftKey ? "redo" : "undo";
+};
+
+export const isTextEditable = (target: EventTarget | null) =>
+  target instanceof HTMLElement &&
+  (target.isContentEditable ||
+    target instanceof HTMLTextAreaElement ||
+    (target instanceof HTMLInputElement && TEXT_INPUT_TYPES.has(target.type)));
+
+export const withoutAIChange = (
+  summary: TMetadataAISummary,
+  { fieldId, customKey }: { fieldId?: number; customKey?: string },
+): TMetadataAISummary => {
+  const filledFieldIds = (summary.filledFieldIds ?? []).filter(
+    (id) => id !== fieldId,
+  );
+  const filledCustomKeys = (summary.filledCustomKeys ?? []).filter(
+    (key) => key !== customKey,
+  );
+
+  return {
+    ...summary,
+    count: filledFieldIds.length + filledCustomKeys.length,
+    filledFieldIds,
+    filledCustomKeys,
+  };
 };
 
 export const getFillCustomFieldChanges = (

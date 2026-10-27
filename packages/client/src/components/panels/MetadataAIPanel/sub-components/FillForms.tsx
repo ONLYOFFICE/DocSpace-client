@@ -56,6 +56,7 @@ type FillFormsProps = {
   isAnalyzing: boolean;
   isReadOnly: boolean;
   onChange: (templateId: number, fieldId: number, input: TMetadataInput) => void;
+  onRevert: (templateId: number, fieldId: number) => void;
 };
 
 const SectionTitle = ({ children }: { children: string }) => (
@@ -78,6 +79,7 @@ const FillForms = ({
   isAnalyzing,
   isReadOnly,
   onChange,
+  onRevert,
 }: FillFormsProps) => {
   const { t } = useTranslation(["Metadata"]);
 
@@ -99,6 +101,7 @@ const FillForms = ({
               onChange={(fieldId, input) =>
                 onChange(form.template.id, fieldId, input)
               }
+              onRevert={(fieldId) => onRevert(form.template.id, fieldId)}
             />
           </div>
         ))}

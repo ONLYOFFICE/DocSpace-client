@@ -34,18 +34,25 @@
  */
 
 import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
+import UndoReactSvgUrl from "PUBLIC_DIR/images/media.rotateleft.react.svg?url";
 
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
 import styles from "./Panel.module.scss";
 
-const AIFilledLabel = ({ children }: { children: string }) => {
+type AIFilledLabelProps = {
+  children: string;
+  onUndo?: () => void;
+};
+
+const AIFilledLabel = ({ children, onUndo }: AIFilledLabelProps) => {
   const { t } = useTranslation(["Metadata"]);
 
-  return (
+  const label = (
     <TooltipContainer
       as="span"
       className={styles.aiFilledLabel}
@@ -60,6 +67,22 @@ const AIFilledLabel = ({ children }: { children: string }) => {
       />
       {children}
     </TooltipContainer>
+  );
+
+  if (!onUndo) return label;
+
+  return (
+    <span className={styles.aiFilledRow}>
+      {label}
+      <IconButton
+        iconName={UndoReactSvgUrl}
+        size={12}
+        isClickable
+        title={t("Metadata:AIUndoChange")}
+        onClick={onUndo}
+        dataTestId="metadata_ai_undo_button"
+      />
+    </span>
   );
 };
 

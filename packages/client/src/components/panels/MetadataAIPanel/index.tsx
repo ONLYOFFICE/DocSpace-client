@@ -96,6 +96,8 @@ const MetadataAIDialog = ({
     setInput,
     changeDraft,
     removeDraft,
+    revertField,
+    revertCustomField,
     discard,
     save,
   } = useMetadataAIPanel({ item, mode, onSaved });
@@ -146,6 +148,7 @@ const MetadataAIDialog = ({
       filledKeys={summary?.filledCustomKeys}
       onChange={changeDraft}
       onRemove={isFill ? undefined : removeDraft}
+      onRevert={isFill ? revertCustomField : undefined}
     />
   ) : null;
 
@@ -259,6 +262,7 @@ const MetadataAIDialog = ({
                 isAnalyzing={isAnalyzing}
                 isReadOnly={!isReview}
                 onChange={setInput}
+                onRevert={revertField}
               />
             ) : null}
 

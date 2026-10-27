@@ -219,6 +219,23 @@
   color: var(--param-description-color);
 }
 
+.aiFilledRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.aiPreviousValue {
+  margin-top: 4px;
+  color: var(--param-description-color);
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
 .aiFilledLabel {
   display: inline-flex;
   align-items: center;

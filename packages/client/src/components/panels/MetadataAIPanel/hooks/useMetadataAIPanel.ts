@@ -80,9 +80,14 @@ import {
   getSuggestNotFound,
   getTemplateForms,
   isValidSuggestion,
+  revertAICustomValue,
+  revertAIValue,
   toCustomFieldRequests,
   toSuggestionDrafts,
+  withoutAIChange,
 } from "../utils";
+import { useUndoHistory } from "./useUndoHistory";
+import { useUndoShortcut } from "./useUndoShortcut";
 
 type TUseMetadataAIPanel = {
   item: TMetadataSelection;
@@ -115,6 +120,15 @@ export const useMetadataAIPanel = ({
     forms: TTemplateForm[];
     drafts: TCustomFieldDraft[];
   } | null>(null);
+  const history = useUndoHistory<{
+    forms: TTemplateForm[];
+    drafts: TCustomFieldDraft[];
+    summary: TMetadataAISummary | null;
+  }>();
+  const resetHistory = history.reset;
+
+  const recordStep = (key: string | null = null) =>
+    history.record({ forms, drafts, summary }, key);
 
   const kind = getEntryKind(item);
   const id = Number(item.id);
@@ -202,6 +216,7 @@ export const useMetadataAIPanel = ({
     const abort = new AbortController();
     controller.current = abort;
     beforeRun.current = { forms, drafts };
+    resetHistory();
 
     setError("");
     setServiceLimit(null);
@@ -221,7 +236,12 @@ export const useMetadataAIPanel = ({
     }
   };
 
-  const setInput = (templateId: number, fieldId: number, input: TMetadataInput) =>
+  const setInput = (
+    templateId: number,
+    fieldId: number,
+    input: TMetadataInput,
+  ) => {
+    recordStep(`field:${fieldId}`);
     setForms((prev) =>
       prev.map((form) =>
         form.template.id === templateId
@@ -229,18 +249,52 @@ export const useMetadataAIPanel = ({
           : form,
       ),
     );
+  };
 
-  const changeDraft = (draft: TCustomFieldDraft) =>
+  const changeDraft = (draft: TCustomFieldDraft) => {
+    recordStep(`custom:${draft.key}`);
     setDrafts((prev) =>
       prev.map((current) => (current.key === draft.key ? draft : current)),
     );
+  };
 
-  const removeDraft = (key: string) =>
+  const removeDraft = (key: string) => {
+    recordStep();
     setDrafts((prev) => prev.filter((draft) => draft.key !== key));
+  };
+
+  const revertField = (templateId: number, fieldId: number) => {
+    recordStep();
+    setForms((prev) => revertAIValue(prev, templateId, fieldId));
+    setSummary((prev) => prev && withoutAIChange(prev, { fieldId }));
+  };
+
+  const revertCustomField = (key: string) => {
+    if (!metadata) return;
+
+    recordStep();
+    setDrafts((prev) => revertAICustomValue(prev, metadata.customFields, key));
+    setSummary((prev) => prev && withoutAIChange(prev, { customKey: key }));
+  };
+
+  const restore = (step: ReturnType<typeof history.undo>) => {
+    if (!step) return;
+
+    setForms(step.forms);
+    setDrafts(step.drafts);
+    setSummary(step.summary);
+  };
+
+  useUndoShortcut(
+    phase === "review" && !isSaving,
+    () => restore(history.undo({ forms, drafts, summary })),
+    () => restore(history.redo({ forms, drafts, summary })),
+  );
 
   const discard = () => {
     if (!beforeRun.current) return;
 
+    resetHistory();
     setForms(beforeRun.current.forms);
     setDrafts(beforeRun.current.drafts);
     setSummary(null);
@@ -302,6 +356,8 @@ export const useMetadataAIPanel = ({
     setInput,
     changeDraft,
     removeDraft,
+    revertField,
+    revertCustomField,
     discard,
     save,
   };

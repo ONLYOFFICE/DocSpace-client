@@ -5,6 +5,7 @@
   "AddOption": "Optie toevoegen",
   "AIAllFieldsSet": "Alle velden hebben al een waarde. Selecteer Bestaande waarden overschrijven om ze te vervangen.",
   "AIBusy": "De AI-provider is bezet. Probeer het over een minuut opnieuw.",
+  "AIChangesUndone": "Alle wijzigingen van AI zijn ongedaan gemaakt.",
   "AIFailed": "AI kon het verzoek niet verwerken. Probeer het later opnieuw.",
   "AIFillDescription": "AI analyseert de inhoud en stelt waarden voor lege velden voor. Controleer de suggesties voordat u opslaat.",
   "AIFilled": "Ingevuld door AI",

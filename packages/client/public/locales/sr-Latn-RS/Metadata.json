@@ -5,6 +5,7 @@
   "AddOption": "Dodaj opciju",
   "AIAllFieldsSet": "Sva polja već imaju vrednosti. Izaberite Prepiši postojeće vrednosti da biste ih zamenili.",
   "AIBusy": "AI provajder je zauzet. Pokušajte ponovo za minut.",
+  "AIChangesUndone": "Sve izmene AI su poništene.",
   "AIFailed": "AI nije mogao da obradi zahtev. Pokušajte ponovo kasnije.",
   "AIFillDescription": "AI će analizirati sadržaj i predložiti vrednosti za prazna polja. Pregledajte predloge pre čuvanja.",
   "AIFilled": "Popunio AI",

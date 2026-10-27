@@ -5,6 +5,7 @@
   "AddOption": "Ajouter une option",
   "AIAllFieldsSet": "Tous les champs ont déjà des valeurs. Sélectionnez « Écraser les valeurs existantes » pour les remplacer.",
   "AIBusy": "Le fournisseur d'IA est occupé. Réessayez dans une minute.",
+  "AIChangesUndone": "Toutes les modifications de l'IA ont été annulées.",
   "AIFailed": "L'IA n'a pas pu traiter la demande. Réessayez plus tard.",
   "AIFillDescription": "L'IA analysera le contenu et suggérera des valeurs pour les champs vides. Vérifiez les suggestions avant d'enregistrer.",
   "AIFilled": "Rempli par l'IA",

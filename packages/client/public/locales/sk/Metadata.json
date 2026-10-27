@@ -5,6 +5,7 @@
   "AddOption": "Pridať možnosť",
   "AIAllFieldsSet": "Všetky polia už majú hodnoty. Ak ich chcete nahradiť, vyberte Prepísať existujúce hodnoty.",
   "AIBusy": "Poskytovateľ AI je zaneprázdnený. Skúste to znova o minútu.",
+  "AIChangesUndone": "Všetky zmeny vykonané AI boli vrátené.",
   "AIFailed": "AI nemohla spracovať požiadavku. Skúste to neskôr.",
   "AIFillDescription": "AI analyzuje obsah a navrhne hodnoty pre prázdne polia. Pred uložením návrhy skontrolujte.",
   "AIFilled": "Vyplnené pomocou AI",

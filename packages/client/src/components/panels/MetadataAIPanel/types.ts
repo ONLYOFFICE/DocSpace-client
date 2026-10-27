@@ -67,4 +67,5 @@ export type TMetadataAISummary = {
   skipped: string[];
   filledFieldIds?: number[];
   filledCustomKeys?: string[];
+  hasUndone?: boolean;
 };

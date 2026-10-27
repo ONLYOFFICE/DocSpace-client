@@ -5,6 +5,7 @@
   "AddOption": "添加选项",
   "AIAllFieldsSet": "所有字段均已有值。选择“覆盖现有值”以替换它们。",
   "AIBusy": "AI 提供商繁忙。请一分钟后重试。",
+  "AIChangesUndone": "已撤销 AI 所做的所有更改。",
   "AIFailed": "AI 无法处理该请求。请稍后重试。",
   "AIFillDescription": "AI 将分析内容并为空字段建议值。保存前请检查建议内容。",
   "AIFilled": "由 AI 填写",

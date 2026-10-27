@@ -5,6 +5,7 @@
   "AddOption": "Lisää vaihtoehto",
   "AIAllFieldsSet": "Kaikilla kentillä on jo arvot. Valitse Korvaa nykyiset arvot korvataksesi ne.",
   "AIBusy": "AI-palveluntarjoaja on varattu. Yritä uudelleen minuutin kuluttua.",
+  "AIChangesUndone": "Kaikki AI:n tekemät muutokset on kumottu.",
   "AIFailed": "AI ei pystynyt käsittelemään pyyntöä. Yritä myöhemmin uudelleen.",
   "AIFillDescription": "AI analysoi sisällön ja ehdottaa arvoja tyhjiin kenttiin. Tarkista ehdotukset ennen tallentamista.",
   "AIFilled": "AI:n täyttämä",

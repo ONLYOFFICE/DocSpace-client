@@ -281,6 +281,7 @@ export const withoutAIChange = (
     count: filledFieldIds.length + filledCustomKeys.length,
     filledFieldIds,
     filledCustomKeys,
+    hasUndone: true,
   };
 };
 

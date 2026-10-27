@@ -220,9 +220,14 @@
 }
 
 .aiFilledRow {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
+}
+
+.aiUndoButton {
+  flex-shrink: 0;
 }
 
 .aiPreviousValue {
@@ -240,6 +245,8 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-width: 0;
+  max-width: 100%;
   color: var(--accent-main);
 
   span,
@@ -255,4 +262,14 @@
   svg path {
     fill: currentColor;
   }
+}
+
+.aiFilledIcon {
+  flex-shrink: 0;
+}
+
+.aiFilledName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

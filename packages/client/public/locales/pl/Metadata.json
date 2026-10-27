@@ -5,6 +5,7 @@
   "AddOption": "Dodaj opcję",
   "AIAllFieldsSet": "Wszystkie pola mają już wartości. Wybierz opcję Nadpisz istniejące wartości, aby je zastąpić.",
   "AIBusy": "Dostawca AI jest zajęty. Spróbuj ponownie za minutę.",
+  "AIChangesUndone": "Wszystkie zmiany wprowadzone przez AI zostały cofnięte.",
   "AIFailed": "AI nie mogła przetworzyć żądania. Spróbuj ponownie później.",
   "AIFillDescription": "AI przeanalizuje zawartość i zaproponuje wartości dla pustych pól. Przejrzyj propozycje przed zapisaniem.",
   "AIFilled": "Uzupełnione przez AI",

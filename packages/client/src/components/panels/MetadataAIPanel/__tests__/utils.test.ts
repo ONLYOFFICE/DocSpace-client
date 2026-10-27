@@ -342,6 +342,7 @@ describe("fill", () => {
       count: 2,
       filledFieldIds: [15],
       filledCustomKeys: ["Reviewer"],
+      hasUndone: true,
     });
     expect(withoutAIChange(summary, { customKey: "Reviewer" })).toMatchObject({
       count: 2,

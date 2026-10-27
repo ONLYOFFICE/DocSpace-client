@@ -47,10 +47,14 @@ type ReviewNotesProps = {
 
 const ReviewNotes = ({ mode, summary }: ReviewNotesProps) => {
   const { t } = useTranslation(["Metadata"]);
-  const { count, notFound, skipped } = summary;
+  const { count, notFound, skipped, hasUndone } = summary;
 
   const getResult = () => {
-    if (!count) return t("Metadata:AINoChanges");
+    if (!count) {
+      return hasUndone
+        ? t("Metadata:AIChangesUndone")
+        : t("Metadata:AINoChanges");
+    }
 
     if (mode === "fill") {
       return count === 1

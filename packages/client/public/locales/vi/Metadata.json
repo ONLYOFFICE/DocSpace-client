@@ -5,6 +5,7 @@
   "AddOption": "Thêm tùy chọn",
   "AIAllFieldsSet": "Tất cả các trường đã có giá trị. Chọn Ghi đè giá trị hiện có để thay thế chúng.",
   "AIBusy": "Nhà cung cấp AI đang bận. Hãy thử lại sau một phút.",
+  "AIChangesUndone": "Đã hoàn tác tất cả thay đổi của AI.",
   "AIFailed": "AI không thể xử lý yêu cầu. Hãy thử lại sau.",
   "AIFillDescription": "AI sẽ phân tích nội dung và đề xuất giá trị cho các trường trống. Hãy xem lại các đề xuất trước khi lưu.",
   "AIFilled": "Được điền bởi AI",

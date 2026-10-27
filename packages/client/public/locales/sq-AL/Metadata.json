@@ -5,6 +5,7 @@
   "AddOption": "Shtoni opsion",
   "AIAllFieldsSet": "Të gjitha fushat kanë tashmë vlera. Zgjidhni Mbishkruani vlerat ekzistuese për t'i zëvendësuar.",
   "AIBusy": "Ofruesi i IA është i zënë. Provoni përsëri pas një minute.",
+  "AIChangesUndone": "Të gjitha ndryshimet e IA-së u zhbënë.",
   "AIFailed": "IA nuk mundi ta përpunonte kërkesën. Provoni përsëri më vonë.",
   "AIFillDescription": "IA do të analizojë përmbajtjen dhe do të sugjerojë vlera për fushat boshe. Rishikoni sugjerimet përpara se t'i ruani.",
   "AIFilled": "Plotësuar nga IA",

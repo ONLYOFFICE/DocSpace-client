@@ -62,10 +62,11 @@ const AIFilledLabel = ({ children, onUndo }: AIFilledLabelProps) => {
       <ReactSVG
         src={AISvgUrl}
         wrapper="span"
+        className={styles.aiFilledIcon}
         role="img"
         aria-label={t("Metadata:AIFilled")}
       />
-      {children}
+      <span className={styles.aiFilledName}>{children}</span>
     </TooltipContainer>
   );
 
@@ -75,6 +76,7 @@ const AIFilledLabel = ({ children, onUndo }: AIFilledLabelProps) => {
     <span className={styles.aiFilledRow}>
       {label}
       <IconButton
+        className={styles.aiUndoButton}
         iconName={UndoReactSvgUrl}
         size={12}
         isClickable

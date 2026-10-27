@@ -189,6 +189,41 @@ test.describe("Metadata AI", () => {
     await expect(panel.getByTestId("metadata_ai_save_button")).toBeHidden();
   });
 
+  test("undoes the AI changes field by field and with the keyboard", async ({
+    page,
+    baseUrl,
+  }) => {
+    const panel = await openAIPanel(page, baseUrl, "fill");
+    const marks = panel.getByTestId("metadata_ai_filled_mark");
+    const undoButtons = panel.getByTestId("metadata_ai_undo_button");
+
+    await panel.getByTestId("metadata_ai_run_button").click();
+
+    await expect(marks).toHaveCount(4);
+    await expect(panel.getByTestId("metadata_ai_previous_value")).toHaveText(
+      "Previously: Apollo",
+    );
+
+    await undoButtons.first().click();
+    await expect(marks).toHaveCount(3);
+
+    await page.keyboard.press("Control+z");
+    await expect(marks).toHaveCount(4);
+
+    await page.keyboard.press("Control+Shift+z");
+    await expect(marks).toHaveCount(3);
+
+    for (const left of [2, 1, 0]) {
+      await undoButtons.first().click();
+      await expect(marks).toHaveCount(left);
+    }
+
+    await expect(panel.getByTestId("metadata_ai_review_notes")).toContainText(
+      "All AI changes are undone.",
+    );
+    await expect(panel.getByTestId("metadata_ai_save_button")).toBeDisabled();
+  });
+
   test("suggests custom fields", async ({ page, baseUrl }) => {
     const panel = await openAIPanel(page, baseUrl, "suggest");
 

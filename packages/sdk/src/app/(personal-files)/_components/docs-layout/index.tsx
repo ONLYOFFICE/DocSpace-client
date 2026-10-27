@@ -642,6 +642,7 @@ const DocsLayoutCore = observer(
                                       <Filter
                                         filesFilter={filesFilter}
                                         currentFolderId={current.id}
+                                        hideSearch={isPrivate}
                                         showMainButton={
                                           isActionButtonEnabled && !isMobile
                                         }

@@ -121,6 +121,20 @@ describe("useDocsHotkeys", () => {
     expect(handlers.onCreateFile).not.toHaveBeenCalled();
   });
 
+  it("Ctrl+C pressed: no copy, cut or paste hotkey is bound in a private room", () => {
+    mocks.encryptedActions = {};
+    mocks.filesList.currentFolder = { security: { Create: true } };
+    render();
+
+    const bound = Array.from(mocks.bindings.keys()).flatMap((keys) =>
+      keys.split(",").map((key) => key.trim().toLowerCase()),
+    );
+    expect(bound.length).toBeGreaterThan(0);
+    for (const key of bound) {
+      expect(key).not.toMatch(/^(ctrl|meta|cmd|command|mod)\+[cxv]$/);
+    }
+  });
+
   it("starts creates and uploads in a private room folder that grants the create right", () => {
     mocks.encryptedActions = {};
     mocks.filesList.currentFolder = { security: { Create: true } };

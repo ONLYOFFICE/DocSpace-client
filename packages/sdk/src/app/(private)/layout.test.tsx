@@ -53,6 +53,8 @@ vi.mock("./_components/opt-in/PrivateRoomsOptInSource", () => ({
   default: ({ children }: { children: ReactNode }) => children,
 }));
 
+import { redirect } from "next/navigation";
+
 import { getSelf } from "@/api/people";
 
 import PrivateRoomsNotAvailable from "./_components/not-available";
@@ -80,5 +82,20 @@ describe("private layout opt-in gate", () => {
 
     expect(element.type).toBe(PrivateRoomsOptInSource);
     expect(element.props.children).toBe("page");
+  });
+
+  test("Private room opened: the sign-in return address carries no search", async () => {
+    (getSelf as Mock).mockResolvedValue(null);
+    request.filter =
+      "privateRooms=true&providerName=google&search=salaries&sortBy=Title";
+
+    await PrivateLayout({ children: "page" });
+
+    const [target] = (redirect as unknown as Mock).mock.calls[0];
+    const signIn = new URL(target, "https://portal.example");
+    const returnUrl = new URL(signIn.searchParams.get("successRedirectURL") ?? "");
+    expect(returnUrl.searchParams.get("sortBy")).toBe("Title");
+    expect(returnUrl.searchParams.has("search")).toBe(false);
+    expect(target).not.toContain("salaries");
   });
 });

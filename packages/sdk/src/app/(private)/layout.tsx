@@ -58,7 +58,6 @@ const FORWARDED_PARAMS = [
   "headerHeight",
   "sortBy",
   "sortOrder",
-  "search",
   "count",
   "page",
   "theme",

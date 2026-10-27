@@ -64,6 +64,8 @@ type useFilesFiltersProps = {
   filesViewAs: TViewAs | null;
   setFilesViewAs: (viewAs: TViewAs) => void;
   setClearSearch: (value: boolean) => void;
+  /** Drops a search text the address carries, so no request repeats it. */
+  withoutSearch?: boolean;
 };
 
 export default function useFilesFilter({
@@ -73,6 +75,7 @@ export default function useFilesFilter({
   filesViewAs,
   setFilesViewAs,
   setClearSearch,
+  withoutSearch,
 }: useFilesFiltersProps) {
   const { t } = useTranslation(["Common"]);
   const searchParams = useSearchParams();
@@ -84,9 +87,10 @@ export default function useFilesFilter({
       if (currentFolderId != null) {
         next.folder = String(currentFolderId);
       }
+      if (withoutSearch) next.search = "";
       return next;
     },
-    [currentFolderId],
+    [currentFolderId, withoutSearch],
   );
 
   const [filter, setFilter] = React.useState<FilesFilter>(() =>

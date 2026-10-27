@@ -45,4 +45,5 @@ export type FilterProps = {
   showMainButton?: boolean;
   mainButtonProps?: MainButtonProps;
   mainButtonIcon?: React.ReactNode;
+  hideSearch?: boolean;
 };

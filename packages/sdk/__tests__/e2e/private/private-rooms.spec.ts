@@ -461,6 +461,34 @@ test.describe("(private) — rooms list & unlock", () => {
     }
   });
 
+  test("Private room opened", async ({ page, baseUrl, port, mockBoth }) => {
+    await serveRooms(mockBoth, port);
+    const folderRequests: string[] = [];
+    page.on("request", (request) => {
+      if (/\/api\/2\.0\/files\/\d+(\?|$)/.test(request.url())) {
+        folderRequests.push(request.url());
+      }
+    });
+
+    await page.goto(`${baseUrl}${PRIVATE_LIST}/${ROOM_ID}${OPT_IN}&search=memo`);
+    await expect(row(page, MEMO.serverTitle)).toBeVisible();
+    const filterBar = page.getByTestId("filter_container");
+    await expect(filterBar).toBeVisible();
+    await expect(filterBar.getByRole("textbox")).toHaveCount(0);
+
+    await filterBar.locator("#filter-button").click();
+    await page.locator("#filter_type-documents").click();
+    await page.locator("#filter_apply-button").click();
+
+    await expect.poll(() => folderRequests.length).toBeGreaterThan(0);
+    for (const url of folderRequests) {
+      expect(new URL(url).searchParams.get("filterValue") ?? "").toBe("");
+    }
+    const address = new URL(page.url()).searchParams;
+    expect(address.has("filterType")).toBe(true);
+    expect(address.has("search")).toBe(false);
+  });
+
   test(
     "rooms list renders the private room from the mock",
     async ({

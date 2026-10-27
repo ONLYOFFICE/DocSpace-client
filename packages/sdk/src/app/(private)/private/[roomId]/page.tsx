@@ -59,7 +59,6 @@ const serializeFilter = (filter: FilesFilter) => {
     ["sortBy", filter.sortBy],
     ["sortOrder", filter.sortOrder],
     ["filterType", filter.filterType?.toString()],
-    ["search", filter.search],
   ];
 
   for (const [key, value] of entries) {
@@ -85,13 +84,13 @@ export default async function PrivateRoomFiles({
 
   if (!hasPrivateRoomsOptIn(sp)) return null;
 
+  // Spec: private-rooms/sdk-surface, "No search in private rooms"
   const filter = FilesFilter.getDefault();
   filter.folder = sp.folder || roomId;
   filter.pageCount = sp.pageCount ? Number(sp.pageCount) : PAGE_COUNT;
   if (sp.page) filter.page = Math.max(0, Number(sp.page) - 1);
   if (sp.sortBy) filter.sortBy = sp.sortBy as typeof filter.sortBy;
   if (sp.sortOrder) filter.sortOrder = sp.sortOrder as typeof filter.sortOrder;
-  if (sp.search) filter.search = sp.search;
 
   const filesFilter = serializeFilter(filter);
 

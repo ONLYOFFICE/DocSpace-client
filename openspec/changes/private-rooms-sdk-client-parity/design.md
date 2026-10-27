@@ -147,7 +147,7 @@ Shared helpers the SDK does not call yet:
 - Recent files are left out: the server never marks an encrypted file as recent (Context).
 - A file stored by an encrypted upload, duplicate or copy is added to the open folder's list from the orchestrator's result (the stored file and its path), as the client does, without waiting for a socket event.
 - Whether an open folder is private, and whether it is archived, comes from its path through the shared target (D3), not from the route. A room without the private setting opened at a private address goes to its generic room page.
-- The archive keeps the active-room predicates (D7), filtered by the rights the server sends for an archived room. The header and info panel room menus get the archive state.
+- The archive keeps the active-room predicates (D7), filtered by the rights the server sends for an archived room. Copy of an encrypted file is offered whatever copy right the server reports, as in an active room; `private-rooms-server-hardening` 9.1 turns that right off in the archive as well. The header and info panel room menus get the archive state.
 
 **D11. Light-client limits.**
 - In a private room the SDK filter bar hides search, and the private room server page and the sign-in return address ignore a `search` parameter. The folder list drops `search` from its own requests on private pages.
@@ -170,7 +170,7 @@ Shared helpers the SDK does not call yet:
 - [SDK E2E builds take minutes] → Run E2E per task group in a long-lived container (build once, run many), as done for `private-rooms-sdk-gating-and-parity` 6.1.
 - [Hiding search depends on a ui-kit change in another repository] → The server-side and request-side parts of the search limit do not depend on it; the hidden field lands through a local ui-kit pack and switches to the published version once released.
 - [The client code moved in the membership task has few tests] → Characterization tests for the owner-candidate filter, the key re-fetch and the cancel close of the create dialog are added before the move.
-- [Server: an uninvited DocSpace administrator keeps Read, Copy and Download on an archived private room, because the administrator bypass of the archive branch (`FileSecurity.cs:1949-1983`) lacks the private-room exclusion of the rooms branch (`FileSecurity.cs:1643-1653`)] → Out of scope here; recorded for `private-rooms-server-hardening`.
+- [Server: an uninvited DocSpace administrator keeps Read, Copy and Download on an archived private room, because the administrator bypass of the archive branch (`FileSecurity.cs:1949-1983`) lacks the private-room exclusion of the rooms branch (`FileSecurity.cs:1643-1653`)] → Out of scope here; already covered by `private-rooms-server-hardening` (requirement "Administrator bypass excludes archived private rooms", task 9.1).
 
 ## Migration Plan
 

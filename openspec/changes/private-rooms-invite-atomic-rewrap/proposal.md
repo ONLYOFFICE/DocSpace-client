@@ -11,6 +11,7 @@ Inviting members to a private room today grants room access first and re-wraps t
 - The invite panel reports skipped invitees inline (name and reason), in addition to the toast, and offers to re-run the invitation once they have a key.
 - The member-removal upload guard counts uploads into any folder inside the room, not only the room root.
 - Backfill after invite stays best-effort but its outcome is surfaced in the same pending-access state.
+- The SDK follows the same rules: its private invite panel shows the same result view, its private members list shows the pending-access state with the retry, and its member-removal guard counts uploads into subfolders. Both apps run the shared invite orchestration that `private-rooms-sdk-client-parity` task 5.1 moves into `packages/shared`.
 
 - Found on a local portal on 2026-10-22: after a refused key change, files uploaded meanwhile stay without the member's wraps until the next backfill sweep, which runs once per room and page session; accepting the key now wraps them right away.
 
@@ -23,20 +24,24 @@ Inviting members to a private room today grants room access first and re-wraps t
 ### Modified Capabilities
 
 - `private-rooms/room-membership`: "Invited members receive re-wrapped file keys" (no granted invitee is left silently without entries; access is granted before the wraps), "Invitees without usable keys are skipped with a warning" (skipped invitees are not granted access and are listed inline), "Partial re-encryption failure is reported" (pending-access state with retry), "Member removal is blocked during active uploads" (subfolder uploads count).
+- `private-rooms/sdk-surface`: "Invite panel offers people only and closes before re-encryption", renamed "Invite panel offers people only and reports the invitation result" (the panel stays open with the result), "Member removal is blocked during active uploads" (subfolder uploads count); new "Pending access in the SDK members list". These requirements come from `private-rooms-sdk-client-parity`.
 
 ## Impact
 
-- Client: invite panel (`packages/client/src/components/panels/InvitePanel/index.js`), Members view and its user row (`packages/client/src/pages/Home/InfoPanel/Body/views/Members/**`), shared membership service (`packages/shared/services/private-room/room-encryption.ts`), upload counter helper (`packages/shared/utils/uploadErrors.ts`).
+- Client: invite panel (`packages/client/src/components/panels/InvitePanel/index.js`), Members view and its user row (`packages/client/src/pages/Home/InfoPanel/Body/views/Members/**`), shared membership service (`packages/shared/services/private-room/room-encryption.ts`), upload counter helper (`packages/shared/utils/uploadErrors.ts`). After `private-rooms-sdk-client-parity` 5.1 the invite orchestration lives in `packages/shared/services/private-room`.
+- SDK: private invite panel and flow (`packages/sdk/src/app/(private)/_components/invite-panel`, `_hooks/usePrivateInviteFlow.ts`), private members list (`_components/members/PrivateMemberUser.tsx`), upload items and the counter adapter (`(docspace)/_store/UploadStore.tsx`, `(private)/_store/PrivateEncryptedUploadStore.tsx`).
 - Server contract: unchanged. A transactional endpoint that grants access and stores the wraps in one request would close the gap between the two; it is recorded as a later target in `private-rooms-server-hardening` and is not a release prerequisite.
 - Locale: new Common keys for the pending state, the retry action and the inline skipped list.
-- Tests: unit tests for the invite ordering and the counter; E2E `packages/client/__tests__/private-room-invite.spec.ts` and `private-room-members.spec.ts`.
+- Tests: unit tests for the invite ordering and the counter; E2E `packages/client/__tests__/private-room-invite.spec.ts` and `private-room-members.spec.ts`; SDK unit tests and the SDK private E2E spec `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`.
 
 ## Out of scope
 
-- The SDK invite flow (parity tracked in `private-rooms-sdk-gating-and-parity`).
+- An SDK requirement for the key-trust re-wrap: the re-wrap runs in the shared service both apps call.
 - Rotating file keys when a member is removed (an accepted v1 limitation in `private-rooms/encryption-core`).
 - Cross-device races on removal (needs server-side locking; see `private-rooms-server-hardening`).
 
 ## Decisions needed
 
 None. Decided on 2026-10-26: access is granted first and the wraps follow, with the pending-access state and retry; the backfill sweep re-wraps for every member when a room manager opens the room. A transactional grant-and-keys endpoint is the later target (`private-rooms-server-hardening`); wrap-first after a change to the server's access-entry authorization was not taken.
+
+Decided on 2026-10-27, with `private-rooms-sdk-client-parity`: the SDK is in scope. This change is implemented after that change's tasks 5.1 (the shared invite orchestration) and 5.3 (the SDK invite panel), and archived after it, because its sdk-surface delta modifies and renames requirements that change adds.

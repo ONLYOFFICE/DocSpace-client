@@ -37,6 +37,7 @@ import { useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router";
+import { isMobile } from "react-device-detect";
 import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
@@ -170,6 +171,13 @@ const withHotkeys = (Component) => {
 
       if (isPrivacyFolder && extension && !canCreateEncrypted) return;
 
+      const isPDF = extension === "pdf";
+
+      if (isPDF && isMobile) {
+        toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
+        return;
+      }
+
       const event = new CustomEvent(Events.CREATE, {
         detail: { parentId: currentFolderId, context: "hotkey", extension },
       });
@@ -177,6 +185,7 @@ const withHotkeys = (Component) => {
       const payload = {
         extension,
         id: -1,
+        edit: isPDF,
       };
 
       event.payload = payload;

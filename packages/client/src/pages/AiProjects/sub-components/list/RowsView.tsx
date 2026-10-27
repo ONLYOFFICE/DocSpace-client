@@ -76,12 +76,14 @@ export const RowsView = observer(({ store, onOpen, getContextModel }: RowsViewPr
   return (
     <FilesRowContainer
       className={classNames("files-row-container", styles.rows)}
-      useReactWindow={false}
+      // Infinite scroll as in Files: the total sizes the list, the next page
+      // loads as its end comes into view.
+      useReactWindow
       filesLength={store.projects.length}
-      hasMoreFiles={false}
-      itemCount={store.projects.length}
+      hasMoreFiles={store.hasMoreProjects}
+      itemCount={store.total}
       itemHeight={58}
-      fetchMoreFiles={async () => {}}
+      fetchMoreFiles={store.fetchMoreProjects}
     >
       {store.projects.map((project, index) => {
         const { instructionsRooms, knowledgeRooms } = project.aiProject;

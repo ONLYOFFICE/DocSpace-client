@@ -206,10 +206,12 @@ export const TableView = observer(
           columnStorageName={columnStorageName}
           columnInfoPanelStorageName={columnInfoPanelStorageName}
           infoPanelVisible={infoPanelVisible}
-          fetchMoreFiles={async () => {}}
+          // Infinite scroll as in Files: the total sizes the list, the next
+          // page loads as its end comes into view.
+          fetchMoreFiles={store.fetchMoreProjects}
           filesLength={store.projects.length}
-          hasMoreFiles={false}
-          itemCount={store.projects.length}
+          hasMoreFiles={store.hasMoreProjects}
+          itemCount={store.total}
           itemHeight={ROW_HEIGHT}
           useReactWindow
         >

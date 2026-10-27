@@ -99,6 +99,9 @@ const errorMessage = (e: unknown): string => {
  * itself is handed the project through `AiPresetsStore.activePreset`, the
  * same hook a saved preset used, so the Shell wiring stays as it is.
  */
+/** Projects per list page, as Files pages its lists. */
+const PAGE_COUNT = 100;
+
 class AiProjectsStore {
   aiPresetsStore: AiPresetsStore;
 
@@ -109,6 +112,9 @@ class AiProjectsStore {
   isLoading = false;
 
   isLoaded = false;
+
+  /** A further page of the list is on its way (infinite scroll). */
+  isFetchingMore = false;
 
   filterValue = "";
 
@@ -169,19 +175,27 @@ class AiProjectsStore {
 
   /* ------------------------------- List -------------------------------- */
 
+  /** The list query of the current search, filters and sort. */
+  private listQuery = () => ({
+    filterValue: this.filterValue.trim() || undefined,
+    role: this.roleFilter !== AiProjectAccess.None ? this.roleFilter : undefined,
+    hasInstructions: this.hasInstructionsFilter || undefined,
+    hasKnowledge: this.hasKnowledgeFilter || undefined,
+    sortBy: this.sortBy,
+    sortOrder: this.sortOrder,
+  });
+
+  /** Whether the server holds projects past the loaded ones (Files' hasMoreFiles). */
+  get hasMoreProjects() {
+    return this.isLoaded && this.projects.length < this.total;
+  }
+
+  /** The first page; the rest comes from fetchMoreProjects as the list scrolls. */
   fetchProjects = async () => {
     const id = ++this.requestId;
     this.isLoading = true;
     try {
-      const page = await getAiProjects({
-        filterValue: this.filterValue.trim() || undefined,
-        role: this.roleFilter !== AiProjectAccess.None ? this.roleFilter : undefined,
-        hasInstructions: this.hasInstructionsFilter || undefined,
-        hasKnowledge: this.hasKnowledgeFilter || undefined,
-        sortBy: this.sortBy,
-        sortOrder: this.sortOrder,
-        count: 100,
-      });
+      const page = await getAiProjects({ ...this.listQuery(), startIndex: 0, count: PAGE_COUNT });
       if (id !== this.requestId) return;
       runInAction(() => {
         this.projects = page.folders;
@@ -192,6 +206,33 @@ class AiProjectsStore {
       if (id === this.requestId) toastr.error(errorMessage(e));
     } finally {
       if (id === this.requestId) runInAction(() => (this.isLoading = false));
+    }
+  };
+
+  /**
+   * The next page, appended without duplicates, as Files' fetchMoreFiles does.
+   * A new search (fetchProjects) wins over a page still on its way.
+   */
+  fetchMoreProjects = async () => {
+    if (!this.hasMoreProjects || this.isLoading || this.isFetchingMore) return;
+    const id = this.requestId;
+    this.isFetchingMore = true;
+    try {
+      const page = await getAiProjects({
+        ...this.listQuery(),
+        startIndex: this.projects.length,
+        count: PAGE_COUNT,
+      });
+      if (id !== this.requestId) return;
+      runInAction(() => {
+        const known = new Set(this.projects.map((p) => p.id));
+        this.projects = [...this.projects, ...page.folders.filter((p) => !known.has(p.id))];
+        this.total = page.total;
+      });
+    } catch (e) {
+      if (id === this.requestId) toastr.error(errorMessage(e));
+    } finally {
+      runInAction(() => (this.isFetchingMore = false));
     }
   };
 

@@ -33,9 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import React from "react";
 import { observer } from "mobx-react";
 
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import type { TAiProject } from "@docspace/shared/api/ai/projects";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
@@ -49,18 +51,52 @@ type TilesViewProps = {
   getContextModel: (project: TAiProject) => ContextMenuModel[];
 };
 
-/** The tiles view: the project cards of the mockups in a responsive grid. */
-export const TilesView = observer(({ store, onOpen, getContextModel }: TilesViewProps) => (
-  <div className={styles.tiles} data-testid="ai-projects-tiles">
-    {store.projects.map((project) => (
-      <ProjectTile
-        key={project.id}
-        project={project}
-        onOpen={onOpen}
-        getContextModel={() => getContextModel(project)}
-      />
-    ))}
-  </div>
-));
+/** Skeleton tiles shown after the loaded ones while more pages remain. */
+const LOADER_TILES = 4;
+
+/**
+ * The tiles view: the project cards of the mockups in a responsive grid.
+ * Infinite scroll as in Files: while the server holds more projects a row
+ * of tile skeletons closes the grid, and the next page loads once it nears
+ * the viewport. Files' virtualized tile grid is not used: it sizes its rows
+ * for its own tiles, which the project cards are taller than.
+ */
+export const TilesView = observer(({ store, onOpen, getContextModel }: TilesViewProps) => {
+  const loaderRef = React.useRef<HTMLDivElement>(null);
+  const hasMore = store.hasMoreProjects;
+
+  React.useEffect(() => {
+    const node = loaderRef.current;
+    if (!hasMore || !node) return undefined;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) void store.fetchMoreProjects();
+      },
+      { rootMargin: "0px 0px 400px 0px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [hasMore, store, store.projects.length]);
+
+  return (
+    <div className={styles.tiles} data-testid="ai-projects-tiles">
+      {store.projects.map((project) => (
+        <ProjectTile
+          key={project.id}
+          project={project}
+          onOpen={onOpen}
+          getContextModel={() => getContextModel(project)}
+        />
+      ))}
+      {hasMore
+        ? Array.from({ length: LOADER_TILES }, (_, index) => (
+            <div key={`tiles-loader_${index}`} ref={index === 0 ? loaderRef : undefined}>
+              <TileSkeleton isRoom />
+            </div>
+          ))
+        : null}
+    </div>
+  );
+});
 
 export default TilesView;

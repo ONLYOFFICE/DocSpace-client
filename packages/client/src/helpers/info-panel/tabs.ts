@@ -106,6 +106,14 @@ export function getAvailableInfoPanelTabs({
     };
   }
 
+  // An AI project (the projects page): its members and details, no history.
+  if ("isAIProject" in selection && selection.isAIProject === true) {
+    return {
+      tabs: [InfoPanelView.infoMembers, InfoPanelView.infoDetails],
+      useRoomsView: true,
+    };
+  }
+
   const isRoomsType =
     !isRecentFolder &&
     isRoomUtil(selection) &&

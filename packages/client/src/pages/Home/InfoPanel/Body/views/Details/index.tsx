@@ -233,6 +233,7 @@ const Details = ({
     "roomType" in selection && selection.roomType === RoomsType.FormRoom;
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
+  const isAIProject = "isAIProject" in selection && !!selection.isAIProject;
   const resolvedTitle = useResolvedFileTitle(
     selection as { id?: number | string; title?: string; encrypted?: boolean },
   );
@@ -314,8 +315,10 @@ const Details = ({
             tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
             // When EditRoom is true, RoomIcon hides the badge in favour of the edit affordance.
+            // An AI project changes its logo in its own edit dialog: the
+            // room cover flow here would save it as a room's.
             withEditing={
-              "isRoom" in selection && selection.isRoom
+              "isRoom" in selection && selection.isRoom && !isAIProject
                 ? selection.security.EditRoom
                 : false
             }

@@ -213,6 +213,13 @@ const RoomsItemHeader = ({
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
+  // An AI project changes its logo in its own edit dialog, not here.
+  const canEditLogo =
+    isRoom &&
+    !("isAIProject" in selection && selection.isAIProject) &&
+    !!selection?.security &&
+    "EditRoom" in selection.security &&
+    !!selection.security.EditRoom;
 
   useEffect(() => {
     setCoverSelection?.(selection);
@@ -250,16 +257,9 @@ const RoomsItemHeader = ({
           badgeUrl={badgeUrl || ""}
           badgeIconColor={badgeIconColor}
           tooltipContent={tooltipContent ?? undefined}
-          hoverSrc={
-            isRoom &&
-            selection?.security &&
-            "EditRoom" in selection.security &&
-            selection.security?.EditRoom
-              ? Camera10ReactSvgUrl
-              : undefined
-          }
-          model={model}
-          onChangeFile={onChangeFileContext}
+          hoverSrc={canEditLogo ? Camera10ReactSvgUrl : undefined}
+          model={canEditLogo ? model : undefined}
+          onChangeFile={canEditLogo ? onChangeFileContext : undefined}
           tooltipId="info-panel-title_icon-tooltip"
         />
       </div>

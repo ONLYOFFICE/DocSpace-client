@@ -112,6 +112,7 @@ const User = ({
   const userRole = membersHelper.getOptionByUserAccess(
     user.access,
     isAIAgentsFolderRoot,
+    room.roomType,
   );
 
   const guestInAgent =

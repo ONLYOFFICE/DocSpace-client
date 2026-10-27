@@ -65,6 +65,19 @@ class MembersHelper {
         access: ShareAccessRights.RoomManager,
         type: "manager",
       },
+      projectManager: {
+        key: "projectManager",
+        label: this.t("Common:AIProjectManager"),
+        tooltip: this.t("Common:UserMaxAvailableRoleWarning"),
+        access: ShareAccessRights.RoomManager,
+        type: "manager",
+      },
+      projectMember: {
+        key: "projectMember",
+        label: this.t("Common:Member"),
+        access: ShareAccessRights.Collaborator,
+        type: "collaborator",
+      },
       collaborator: {
         key: "collaborator",
         label: this.t("Common:ContentCreator"),
@@ -167,6 +180,8 @@ class MembersHelper {
           options.viewer,
           ...deleteOption,
         ];
+      case RoomsType.AiProjectRoom:
+        return [options.projectManager, options.projectMember, ...deleteOption];
       default:
         return [];
     }
@@ -175,6 +190,7 @@ class MembersHelper {
   getOptionByUserAccess = (
     access: ShareAccessRights,
     isAIAgentsFolderRoot?: boolean,
+    roomType?: RoomsType,
   ) => {
     if (!access) return;
 
@@ -182,6 +198,14 @@ class MembersHelper {
 
     if (isAIAgentsFolderRoot && access === ShareAccessRights.RoomManager)
       return options.agentAdmin;
+
+    // A project names its two roles after itself.
+    if (roomType === RoomsType.AiProjectRoom) {
+      if (access === ShareAccessRights.RoomManager)
+        return options.projectManager;
+      if (access === ShareAccessRights.Collaborator)
+        return options.projectMember;
+    }
 
     const [userOption] = Object.values(options).filter(
       (opt) => opt.access === access,

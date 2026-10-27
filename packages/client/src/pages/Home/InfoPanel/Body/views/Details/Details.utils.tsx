@@ -177,27 +177,33 @@ class DetailsHelper {
   };
 
   getNeededProperties = () => {
+    // An AI project shows as a room, but has no room type of its own to name
+    // and its files live in the linked rooms, not in it.
+    const isAIProject = "isAIProject" in this.item && !!this.item.isAIProject;
     return (
       "isRoom" in this.item && this.item.isRoom
         ? [
             "Owner",
             (this.item as TRoom).providerKey && "Storage Type",
-            "Type",
-            "Content",
+            !isAIProject && "Type",
+            !isAIProject && "Content",
             "Date modified",
-            "Last modified by",
-            "Creation date",
+            // A project keeps no editor or creation date of its own to show,
+            // and tags are not a project feature.
+            !isAIProject && "Last modified by",
+            !isAIProject && "Creation date",
             // Also for a room with no tags yet, as long as the user could
             // add one - otherwise the info panel has no way to attach the
             // first tag at all.
-            ((this.item as TRoom).tags?.length ||
-              getTagManagementAccess(
-                this.item.access,
-                this.isAdmin,
-                this.isArchiveFolder,
-              ).canCreate) &&
+            !isAIProject &&
+              ((this.item as TRoom).tags?.length ||
+                getTagManagementAccess(
+                  this.item.access,
+                  this.isAdmin,
+                  this.isArchiveFolder,
+                ).canCreate) &&
               "Tags",
-            "Storage",
+            !isAIProject && "Storage",
           ]
         : "isFolder" in this.item && this.item.isFolder
           ? [

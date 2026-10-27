@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import classnames from "classnames";
-import { reaction } from "mobx";
+import { comparer, reaction } from "mobx";
 
 import Section from "@onlyoffice/apps-ui-kit/components/section";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -61,7 +61,7 @@ import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
 import { DeviceType } from "@docspace/shared/enums";
 import type { TAiProject } from "@docspace/shared/api/ai/projects";
-import { interceptAiProjectRoutes } from "@docspace/shared/api/ai/projectsRouteMock";
+import { aiProjectToRoom, interceptAiProjectRoutes } from "@docspace/shared/api/ai/projectsRouteMock";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import {
@@ -74,6 +74,7 @@ import type DialogsStore from "SRC_DIR/store/DialogsStore";
 import { useHideQuickActions } from "SRC_DIR/pages/Home/Hooks/useHideQuickActions";
 import { usePanelExclusivity } from "SRC_DIR/pages/Home/View/usePanelExclusivity";
 import type InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import { useStore } from "SRC_DIR/store/useStore";
 import {
   mapChatNoAccessStores,
   useChatNoAccess,
@@ -236,6 +237,49 @@ const AiProjects = ({
         },
       ),
     [store, aiChatPanel, navigate, projectId],
+  );
+
+  // The info panel reads the project from the Files selection, which only
+  // the Info actions set. Keep it in step with the store: the open project
+  // when another one is opened, the fresh copy after an edit, pin or owner
+  // change, and nothing (panel closed) once the project is deleted or left.
+  const filesStore = useStore("filesStore");
+  React.useEffect(
+    () =>
+      reaction(
+        () => {
+          const selection = filesStore.bufferSelection as { id?: number; isAIProject?: boolean } | null;
+          const selectedId = selection?.isAIProject ? selection.id : undefined;
+          const source =
+            selectedId === undefined
+              ? undefined
+              : store.activeProject?.id === selectedId
+                ? store.activeProject
+                : store.projects.find((p) => p.id === selectedId);
+          return [store.activeProject, selectedId, source, infoPanelStore.isVisible] as const;
+        },
+        ([active, selectedId, source, visible], previous) => {
+          if (active && visible && selectedId !== active.id) {
+            filesStore.setBufferSelection(aiProjectToRoom(active) as never);
+            return;
+          }
+          if (selectedId === undefined) return;
+          if (!source) {
+            filesStore.setBufferSelection(null);
+            if (visible) infoPanelStore.setIsVisible(false);
+            return;
+          }
+          filesStore.setBufferSelection(aiProjectToRoom(source) as never);
+          // The same project, changed (an owner change re-roles its members):
+          // the Contacts tab reloads, as Files does after a share change.
+          const [, previousId, previousSource] = previous ?? [];
+          if (visible && previousId === selectedId && previousSource && previousSource !== source) {
+            infoPanelStore.refreshInfoPanel();
+          }
+        },
+        { equals: comparer.shallow },
+      ),
+    [store, filesStore, infoPanelStore],
   );
 
   // Leaving the page drops the open project with it, and the project's chat:

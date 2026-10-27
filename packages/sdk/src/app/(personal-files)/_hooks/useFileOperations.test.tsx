@@ -43,7 +43,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 const env = vi.hoisted(() => ({
   folders: new Map<number, unknown>(),
   paths: new Map<number, unknown[]>(),
-  actions: { roomId: 10, copyFiles: vi.fn() },
+  actions: { roomId: 10, copyFiles: vi.fn(), duplicateFile: vi.fn() },
   uploadDecrypted: vi.fn(async () => {}),
 }));
 
@@ -68,6 +68,10 @@ vi.mock("@docspace/shared/api/files", () => ({
 }));
 
 vi.mock("@docspace/shared/api/apps", () => ({ getApps: vi.fn(async () => []) }));
+
+vi.mock("@docspace/shared/utils/getOperationProgress", () => ({
+  getOperationProgress: vi.fn(),
+}));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { error: vi.fn() },
@@ -94,6 +98,7 @@ vi.mock("./useOperationToast", () => ({
 }));
 
 import { moveToFolder } from "@docspace/shared/api/files";
+import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import useFileOperations from "./useFileOperations";
@@ -134,9 +139,11 @@ describe("useFileOperations in a private room", () => {
     moveTo({ id: 5, isFolder: true, title: "Drafts" }, destFolderId);
 
   beforeEach(() => {
-    vi.mocked(moveToFolder).mockClear();
+    vi.mocked(moveToFolder).mockReset();
+    vi.mocked(getOperationProgress).mockReset();
     vi.mocked(toastr.error).mockClear();
-    env.actions.copyFiles.mockClear();
+    env.actions.copyFiles.mockReset();
+    env.actions.duplicateFile.mockReset();
     env.folders.clear();
     env.paths.clear();
     env.folders.set(10, folderData({ id: 10, private: true, roomType: 5 }));
@@ -286,5 +293,64 @@ describe("useFileOperations in a private room", () => {
     expect(toastr.error).toHaveBeenCalledWith(
       "Common:CannotTransferFolderFromPrivateRoom",
     );
+  });
+
+  describe("Encrypted errors are localized", () => {
+    const file = {
+      id: 7,
+      isFolder: false,
+      encrypted: true,
+      title: "memo.txt",
+      fileExst: ".txt",
+    };
+
+    it("a failed encrypted copy shows no raw error text", async () => {
+      env.actions.copyFiles.mockRejectedValueOnce(new TypeError("Failed to fetch"));
+
+      await act(async () => {
+        await ops.requestCopy(file as never);
+      });
+      await act(async () => {
+        await ops.confirmOperation(20, "Other");
+      });
+
+      expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedOperationFailed");
+      expect(toastr.error).not.toHaveBeenCalledWith("Failed to fetch");
+    });
+
+    it("a refused move within the room shows the server's message", async () => {
+      vi.mocked(moveToFolder).mockRejectedValueOnce(
+        Object.assign(new Error("Request failed with status code 403"), {
+          response: { data: { error: { message: "Access denied" } } },
+        }),
+      );
+
+      await moveTo(file, 11);
+
+      expect(toastr.error).toHaveBeenCalledWith("Access denied");
+    });
+
+    it("a failed move operation within the room shows no English fallback", async () => {
+      vi.mocked(moveToFolder).mockResolvedValueOnce([{ id: "op-1" }] as never);
+      vi.mocked(getOperationProgress).mockImplementationOnce(
+        (_id: string, fallback: string) => Promise.reject(fallback),
+      );
+
+      await moveTo(file, 11);
+
+      expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedOperationFailed");
+    });
+
+    it("a failed duplicate shows no raw error text", async () => {
+      env.actions.duplicateFile.mockRejectedValueOnce(
+        new TypeError("Failed to fetch"),
+      );
+
+      await act(async () => {
+        await ops.requestDuplicate(file as never);
+      });
+
+      expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedOperationFailed");
+    });
   });
 });

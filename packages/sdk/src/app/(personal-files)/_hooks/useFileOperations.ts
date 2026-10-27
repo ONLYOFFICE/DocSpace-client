@@ -73,6 +73,7 @@ import {
   planPrivateTransfer,
 } from "@docspace/shared/services/private-room/private-transfer";
 import { getIsDisabled } from "@docspace/shared/utils/filesSelector";
+import { getEncryptedOperationErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import useOperationToast from "./useOperationToast";
 import type {
   TFileItem,
@@ -160,6 +161,16 @@ export default function useFileOperations({
     setOperationProgress(null);
   }, []);
 
+  // Spec: private-rooms/sdk-surface, "Encrypted errors are localized"
+  const toErrorText = useCallback(
+    (error: unknown) => {
+      if (typeof error === "string" && error) return error;
+      if (encryptedActions) return getEncryptedOperationErrorMessage(t, error);
+      return error instanceof Error ? error.message : String(error);
+    },
+    [encryptedActions, t],
+  );
+
   const trackOperation = useCallback(
     async (
       operationId: string,
@@ -178,7 +189,9 @@ export default function useFileOperations({
         while (!finished) {
           const result = await getOperationProgress(
             operationId,
-            "Operation failed",
+            encryptedActions
+              ? t("Common:EncryptedOperationFailed")
+              : "Operation failed",
             true,
           );
           if (result) {
@@ -200,11 +213,11 @@ export default function useFileOperations({
         setOperationProgress((prev) =>
           prev ? { ...prev, alert: true } : prev,
         );
-        toastr.error(error instanceof Error ? error.message : String(error));
+        toastr.error(toErrorText(error));
         progressTimerRef.current = setTimeout(clearProgress, 5000);
       }
     },
-    [clearProgress],
+    [clearProgress, encryptedActions, t, toErrorText],
   );
 
   const openSelector = useCallback(
@@ -256,10 +269,10 @@ export default function useFileOperations({
 
         setSelectorDialogVisible(true);
       } catch (error) {
-        toastr.error(error instanceof Error ? error.message : String(error));
+        toastr.error(toErrorText(error));
       }
     },
-    [],
+    [toErrorText],
   );
 
   const requestCopy = useCallback(
@@ -299,7 +312,11 @@ export default function useFileOperations({
         !item.isFolder &&
         (item as TFileItem).encrypted
       ) {
-        await encryptedActions.duplicateFile(item as TFileItem);
+        try {
+          await encryptedActions.duplicateFile(item as TFileItem);
+        } catch (error) {
+          toastr.error(toErrorText(error));
+        }
         return;
       }
 
@@ -324,10 +341,10 @@ export default function useFileOperations({
           router.refresh();
         }
       } catch (error) {
-        toastr.error(error instanceof Error ? error.message : String(error));
+        toastr.error(toErrorText(error));
       }
     },
-    [router, trackOperation, encryptedActions],
+    [router, trackOperation, encryptedActions, toErrorText],
   );
 
   const closeSelectorDialog = useCallback(() => {
@@ -478,9 +495,7 @@ export default function useFileOperations({
                 uploadDecryptedFiles,
               );
             } catch (error) {
-              toastr.error(
-                error instanceof Error ? error.message : String(error),
-              );
+              toastr.error(toErrorText(error));
             }
           }
         }
@@ -530,7 +545,7 @@ export default function useFileOperations({
           destFolderTitle,
         );
       } catch (error) {
-        toastr.error(error instanceof Error ? error.message : String(error));
+        toastr.error(toErrorText(error));
       }
 
       setPendingItems([]);
@@ -542,6 +557,7 @@ export default function useFileOperations({
       encryptedActions,
       uploadDecryptedFiles,
       t,
+      toErrorText,
     ],
   );
 
@@ -562,13 +578,13 @@ export default function useFileOperations({
           dest.destFolderTitle,
         );
       } catch (error) {
-        toastr.error(error instanceof Error ? error.message : String(error));
+        toastr.error(toErrorText(error));
       } finally {
         setPendingItems([]);
         setConflictItems([]);
       }
     },
-    [pendingItems, executeOperation],
+    [pendingItems, executeOperation, toErrorText],
   );
 
   const closeConflictDialog = useCallback(() => {

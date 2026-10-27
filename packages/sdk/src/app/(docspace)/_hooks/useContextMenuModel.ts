@@ -82,6 +82,7 @@ import useFilesActions from "./useFilesActions";
 import useDownloadActions from "./useDownloadActions";
 import useFavoritesActions from "./useFavoritesActions";
 import useSdkCustomContextActions from "./useSdkCustomContextActions";
+import { useEncryptedFileActions } from "../_contexts/EncryptedFileActionsContext";
 
 // Files the AI chat can ingest as an attachment: the document set the chat
 // supports (CHAT_SUPPORTED_FORMATS) plus any image. Gates the "Ask AI" entry.
@@ -169,6 +170,7 @@ export default function useContextMenuModel({
   const { t } = useTranslation(["Common"]);
 
   const filesSelectionStore = useFilesSelectionStore();
+  const insidePrivateRoom = useEncryptedFileActions() !== null;
 
   const { openFolder, copyFolderLink, openLocation } = useFolderActions({ t });
   const { openFile, copyFileLink, lockFile, changeCustomFilter } =
@@ -745,11 +747,13 @@ export default function useContextMenuModel({
 
     items.push(getDownloadItem());
 
+    // Spec: private-rooms/sdk-surface, "Mixed and folder downloads refused"
     if (
       filesSelectionStore.selection.some((i) => "fileExst" in i && i.fileExst) &&
       !filesSelectionStore.selection.some(
         (i) => (i as TFileItem).encrypted === true,
-      )
+      ) &&
+      !(insidePrivateRoom && filesSelectionStore.selection.some((i) => i.isFolder))
     ) {
       items.push(getDownloadAsItem());
     }
@@ -775,6 +779,7 @@ export default function useContextMenuModel({
     return items;
   }, [
     filesSelectionStore.selection,
+    insidePrivateRoom,
     getGroupCustomActions,
     getDownloadAsItem,
     getDownloadItem,

@@ -38,6 +38,7 @@ import { useTranslation } from "react-i18next";
 import { openUrl } from "@docspace/shared/utils/common";
 import { UrlActionType } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getEncryptedOperationErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
@@ -77,13 +78,17 @@ export default function useDownloadActions() {
     if (!data) return;
 
     if (encryptedActions) {
+      // Spec: private-rooms/sdk-surface, "Mixed and folder downloads refused"
+      if (data.some((item) => item.isFolder)) {
+        toastr.error(t("Common:PrivateRoomFolderDownloadNotSupported"));
+        return;
+      }
       const encryptedFiles = (data.filter(
         (item) => !item.isFolder && (item as TFileItem).encrypted,
       ) as TFileItem[]);
       if (encryptedFiles.length === data.length) {
         encryptedActions.downloadZip(encryptedFiles).catch((error) => {
-          const msg = error instanceof Error ? error.message : String(error);
-          toastr.error(msg);
+          toastr.error(getEncryptedOperationErrorMessage(t, error));
         });
         return;
       }
@@ -122,8 +127,7 @@ export default function useDownloadActions() {
         return encryptedActions
           .downloadFile(item as TFileItem)
           .catch((error) => {
-            const msg = error instanceof Error ? error.message : String(error);
-            toastr.error(msg);
+            toastr.error(getEncryptedOperationErrorMessage(t, error));
           });
       }
 
@@ -166,10 +170,13 @@ export default function useDownloadActions() {
   const downloadEncryptedAction = useCallback(
     (item: TFileItem | TFolderItem) => {
       if (item.isFolder) {
-        return downloadFiles([], [item.id]).catch((error) => {
-          const msg = error instanceof Error ? error.message : String(error);
-          toastr.error(msg);
-        });
+        const errorMessage = (error: unknown) =>
+          getEncryptedOperationErrorMessage(t, error);
+        return downloadFiles([], [item.id], { errorMessage }).catch(
+          (error) => {
+            toastr.error(errorMessage(error));
+          },
+        );
       }
 
       openUrl({
@@ -179,7 +186,7 @@ export default function useDownloadActions() {
         frameConfig: sdkConfig,
       });
     },
-    [downloadFiles, sdkConfig],
+    [downloadFiles, sdkConfig, t],
   );
 
   return { downloadAction, downloadAsAction, downloadEncryptedAction };

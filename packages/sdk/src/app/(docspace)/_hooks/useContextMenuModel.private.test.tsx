@@ -72,6 +72,10 @@ vi.mock("./useSdkCustomContextActions", () => ({
 }));
 
 import { AVAILABLE_CONTEXT_ITEMS as C } from "../_enums/context-items";
+import {
+  EncryptedFileActionsContext,
+  type EncryptedFileActions,
+} from "../_contexts/EncryptedFileActionsContext";
 import useContextMenuModel from "./useContextMenuModel";
 
 const encryptedFile = (contextOptions: string[]) => ({
@@ -87,8 +91,8 @@ const encryptedFile = (contextOptions: string[]) => ({
 describe("useContextMenuModel in a private room", () => {
   let root: Root | null = null;
 
-  const headerKeys = (contextOptions: string[]) => {
-    env.selection = [encryptedFile(contextOptions)];
+  const selectionHeaderKeys = (selection: unknown[]) => {
+    env.selection = selection;
     let model: ReturnType<
       ReturnType<typeof useContextMenuModel>["getHeaderContextMenuModel"]
     > = [];
@@ -100,10 +104,21 @@ describe("useContextMenuModel in a private room", () => {
       }).getHeaderContextMenuModel();
       return null;
     };
+    const encryptedActions = { roomId: 10 } as EncryptedFileActions;
+    act(() => root?.unmount());
     root = createRoot(document.createElement("div"));
-    act(() => root?.render(<Probe />));
+    act(() =>
+      root?.render(
+        <EncryptedFileActionsContext.Provider value={encryptedActions}>
+          <Probe />
+        </EncryptedFileActionsContext.Provider>,
+      ),
+    );
     return model.map((item) => String(item.key));
   };
+
+  const headerKeys = (contextOptions: string[]) =>
+    selectionHeaderKeys([encryptedFile(contextOptions)]);
 
   afterEach(() => {
     act(() => root?.unmount());
@@ -126,5 +141,26 @@ describe("useContextMenuModel in a private room", () => {
 
     expect(keys).not.toContain("download");
     expect(keys).toContain("download-encrypted");
+  });
+
+  it("Folder in a private room: no download-as for a selection holding a folder", () => {
+    const plainFile = {
+      ...encryptedFile([C.download, C.delete]),
+      id: 8,
+      title: "notes.docx",
+      encrypted: false,
+    };
+    const folder = {
+      id: 5,
+      isFolder: true,
+      title: "Drafts",
+      security: { Download: true, Copy: true, Move: true, Delete: true },
+      contextOptions: [C.download, C.delete],
+    };
+
+    expect(selectionHeaderKeys([plainFile])).toContain("download-as");
+    expect(selectionHeaderKeys([plainFile, folder])).not.toContain(
+      "download-as",
+    );
   });
 });

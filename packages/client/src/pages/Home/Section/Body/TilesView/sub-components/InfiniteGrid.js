@@ -34,7 +34,7 @@
  */
 
 import { inject, observer } from "mobx-react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useLayoutEffect, useRef } from "react";
 import uniqueid from "lodash/uniqueId";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
@@ -104,6 +104,12 @@ const Item = ({ children, className, ...rest }) => {
   );
 };
 
+const getGridColumns = (row) => {
+  const columns = window.getComputedStyle(row).gridTemplateColumns;
+  if (!columns || columns === "none") return 0;
+  return columns.split(" ").length;
+};
+
 const InfiniteGrid = (props) => {
   const {
     children,
@@ -114,17 +120,57 @@ const InfiniteGrid = (props) => {
     currentFolderId,
     isRooms,
     isTemplates,
+    tilesGridColumns,
+    setTilesGridColumns,
     ...rest
   } = props;
 
-  const [countTilesInRow, setCountTilesInRow] = useState();
+  const countTilesInRow =
+    tilesGridColumns || getCountTilesInGrid(isRooms, isTemplates);
+
+  const rowsRef = useRef(new Set());
+  const resizeObserverRef = useRef(null);
+
+  const measureColumns = useCallback(() => {
+    const row = Array.from(rowsRef.current).find((node) => node.isConnected);
+    if (!row) return;
+
+    const columns = getGridColumns(row);
+    if (columns) setTilesGridColumns(columns);
+  }, [setTilesGridColumns]);
+
+  const observeRow = useCallback(
+    (node) => {
+      if (!resizeObserverRef.current)
+        resizeObserverRef.current = new ResizeObserver(measureColumns);
+
+      const observer = resizeObserverRef.current;
+
+      rowsRef.current.add(node);
+      observer.observe(node);
+
+      return () => {
+        rowsRef.current.delete(node);
+        observer.unobserve(node);
+      };
+    },
+    [measureColumns],
+  );
+
+  useLayoutEffect(() => {
+    measureColumns();
+  });
+
+  useLayoutEffect(() => {
+    return () => resizeObserverRef.current?.disconnect();
+  }, []);
 
   let cards = [];
   const list = [];
 
   const addItemToList = (key, cls, clear) => {
     list.push(
-      <Item key={key} className={cls}>
+      <Item key={key} className={cls} ref={observeRow}>
         {cards}
       </Item>,
     );
@@ -155,25 +201,6 @@ const InfiniteGrid = (props) => {
 
     return "isRoom";
   };
-
-  const setTilesCount = () => {
-    const newCount = getCountTilesInGrid(isRooms, isTemplates);
-    if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
-  };
-
-  const onResize = () => {
-    setTilesCount();
-  };
-
-  useEffect(() => {
-    onResize();
-
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  });
 
   React.Children.map(children.props.children, (child) => {
     if (child) {
@@ -275,9 +302,11 @@ export default inject(
     treeFoldersStore,
     clientLoadingStore,
     selectedFolderStore,
+    hotkeyStore,
   }) => {
     const { filesList, hasMoreFiles, filter, fetchMoreFiles, roomsFilter } =
       filesStore;
+    const { tilesGridColumns, setTilesGridColumns } = hotkeyStore;
 
     const { isLoading } = clientLoadingStore;
     const { isRoomsFolder, isArchiveFolder, isFormsFolder } = treeFoldersStore;
@@ -295,6 +324,8 @@ export default inject(
       filesLength,
       isLoading,
       currentFolderId,
+      tilesGridColumns,
+      setTilesGridColumns,
     };
   },
 )(observer(InfiniteGrid));

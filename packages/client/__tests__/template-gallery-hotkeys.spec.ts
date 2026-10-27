@@ -181,7 +181,12 @@ test.describe("Hotkeys in the Forms template gallery", () => {
     await page.getByText("From template gallery", { exact: true }).click();
     await expect(gallery(page).locator("[class*=nameText]").first()).toBeVisible();
 
-    await page.keyboard.press("ArrowRight");
+    await expect(async () => {
+      await page.keyboard.press("ArrowRight");
+      await expect(gallery(page).locator("[class*=focused]")).toHaveCount(1, {
+        timeout: 1000,
+      });
+    }).toPass();
     await page.keyboard.press("Enter");
 
     await expect(page.getByTestId("create_room_dialog_save")).toBeVisible();

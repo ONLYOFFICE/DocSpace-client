@@ -73,6 +73,61 @@ const filesListHandler = http.get(
   },
 );
 
+const FOLDER_IDS = [2001, 2002];
+
+const twoFoldersHandler = http.get(
+  `${BASE_URL}:${TEST_PORT}/api/2.0/files/${FOLDER_ID}`,
+  async () => {
+    const body = await myDocumentsResolver(true).json();
+    const [template] = body.response.folders;
+
+    body.response.current.id = FOLDER_ID;
+    body.response.files = [];
+    body.response.folders = FOLDER_IDS.map((id, index) => ({
+      ...template,
+      id,
+      parentId: FOLDER_ID,
+      title: `Folder ${index + 1}`,
+    }));
+    body.response.count = FOLDER_IDS.length;
+    body.response.total = FOLDER_IDS.length;
+
+    return new Response(JSON.stringify(body));
+  },
+);
+
+const finishedOperation = {
+  id: "delete-operation",
+  operation: 1,
+  progress: 100,
+  error: "",
+  processed: "1",
+  finished: true,
+  files: [],
+  folders: [],
+};
+
+const deleteOperationHandlers = [
+  http.put(`${BASE_URL}:${TEST_PORT}/api/2.0/files/fileops/delete`, () =>
+    Response.json({ response: [finishedOperation], status: 0 }),
+  ),
+  http.get(`${BASE_URL}:${TEST_PORT}/api/2.0/files/fileops`, () =>
+    Response.json({ response: [finishedOperation], status: 0 }),
+  ),
+];
+
+const selectedFolders = (page: Page) =>
+  page.evaluate(
+    (ids) =>
+      ids.filter(
+        (id) =>
+          document.querySelector<HTMLInputElement>(
+            `#folder_${id} input[type=checkbox]`,
+          )?.checked,
+      ),
+    FOLDER_IDS,
+  );
+
 const selectedFiles = (page: Page) =>
   page.evaluate(
     ({ count, offset }) =>
@@ -104,6 +159,14 @@ const tilesInRow = (page: Page) =>
       document.querySelectorAll('[data-testid^="tile_"]'),
     ).map((el) => Math.round(el.getBoundingClientRect().top));
     return tops.filter((top) => top === tops[0]).length;
+  });
+
+const gridColumns = (page: Page) =>
+  page.evaluate(() => {
+    const row = document.querySelector(".Item.isFile");
+    return row
+      ? window.getComputedStyle(row).gridTemplateColumns.split(" ").length
+      : 0;
   });
 
 const press = async (page: Page, keys: string[]) => {
@@ -412,6 +475,70 @@ test.describe("Hotkeys in the files list", () => {
         await expect.poll(() => selectedFiles(page)).toEqual([1]);
       });
     }
+
+    test("Down follows the grid when the info panel narrows it", async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width: 1600, height: 1024 });
+      await switchToTiles(page);
+      const columnsBefore = await tilesInRow(page);
+
+      await page.locator("#info-panel-toggle--open").click();
+      await expect.poll(() => tilesInRow(page)).toBeLessThan(columnsBefore);
+
+      const columns = await tilesInRow(page);
+      expect(await gridColumns(page)).toBe(columns);
+
+      await page.keyboard.press("Shift");
+      await expect.poll(() => caretFile(page)).toBe(1);
+
+      await page.keyboard.press("ArrowDown");
+      await expect.poll(() => selectedFiles(page)).toEqual([columns + 1]);
+    });
+
+    test("Down follows the grid after the window is resized", async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width: 1600, height: 1024 });
+      await switchToTiles(page);
+      const columnsBefore = await tilesInRow(page);
+
+      await page.setViewportSize({ width: 1150, height: 1024 });
+      await expect.poll(() => tilesInRow(page)).toBeLessThan(columnsBefore);
+
+      const columns = await tilesInRow(page);
+      expect(await gridColumns(page)).toBe(columns);
+      await expect.poll(() => caretFile(page)).toBe(1);
+
+      await page.keyboard.press("ArrowDown");
+      await expect.poll(() => selectedFiles(page)).toEqual([columns + 1]);
+    });
+
+    test("Down after deleting the caret folder moves to the folder left", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      const pageErrors: string[] = [];
+      page.on("pageerror", (error) => pageErrors.push(error.message));
+
+      mockRequest.use(...deleteOperationHandlers, twoFoldersHandler);
+      await page.goto(`${baseUrl}/rooms/personal/filter?folder=${FOLDER_ID}`);
+      await expect(page.locator(`#folder_${FOLDER_IDS[1]}`)).toBeVisible();
+      if (!(await page.getByTestId("tile_0").isVisible()))
+        await switchToTiles(page);
+
+      await press(page, ["ArrowRight", "ArrowRight"]);
+      await expect.poll(() => selectedFolders(page)).toEqual([FOLDER_IDS[1]]);
+
+      await page.keyboard.press("Delete");
+      await page.getByTestId("delete_dialog_modal_submit").click();
+      await expect(page.locator(`#folder_${FOLDER_IDS[1]}`)).toBeHidden();
+
+      await page.keyboard.press("ArrowDown");
+      await expect.poll(() => selectedFolders(page)).toEqual([FOLDER_IDS[0]]);
+      expect(pageErrors).toEqual([]);
+    });
 
     test("Shift+Down after Esc selects from the caret to the tile below", async ({
       page,

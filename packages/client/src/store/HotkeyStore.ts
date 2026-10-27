@@ -166,6 +166,8 @@ class HotkeyStore {
 
   withContentSelection = false;
 
+  tilesGridColumns: number | null = null;
+
   constructor(
     filesStore: TFilesStore,
     dialogsStore: TDialogsStore,
@@ -387,7 +389,20 @@ class HotkeyStore {
     } else this.selectFirstFile();
   };
 
+  dropCaretOutsideList = () => {
+    const { hotkeyCaret, filesList, setHotkeyCaret } = this.filesStore;
+
+    if (
+      hotkeyCaret &&
+      !filesList.some(
+        (f) => f.id === hotkeyCaret.id && f.isFolder === hotkeyCaret.isFolder,
+      )
+    )
+      setHotkeyCaret(null);
+  };
+
   selectBottom = () => {
+    this.dropCaretOutsideList();
     const { viewAs, hotkeyCaret, selection } = this.filesStore;
 
     if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
@@ -396,6 +411,7 @@ class HotkeyStore {
   };
 
   selectUpper = () => {
+    this.dropCaretOutsideList();
     const { hotkeyCaret, viewAs, selection } = this.filesStore;
 
     if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
@@ -404,6 +420,7 @@ class HotkeyStore {
   };
 
   selectLeft = () => {
+    this.dropCaretOutsideList();
     const { hotkeyCaret, filesList, setHotkeyCaretStart, selection, viewAs } =
       this.filesStore;
     if (viewAs !== "tile") return;
@@ -418,6 +435,7 @@ class HotkeyStore {
   };
 
   selectRight = () => {
+    this.dropCaretOutsideList();
     const { hotkeyCaret, filesList, setHotkeyCaretStart, selection, viewAs } =
       this.filesStore;
     if (viewAs !== "tile") return;
@@ -431,6 +449,7 @@ class HotkeyStore {
   };
 
   selectCaretIfNothingSelected = () => {
+    this.dropCaretOutsideList();
     const { selection, hotkeyCaret, setSelection } = this.filesStore;
 
     if (!selection.length && hotkeyCaret) setSelection([hotkeyCaret]);
@@ -542,6 +561,7 @@ class HotkeyStore {
   };
 
   multiSelectRight = () => {
+    this.dropCaretOutsideList();
     const {
       selection,
       setSelection,
@@ -606,6 +626,7 @@ class HotkeyStore {
   };
 
   multiSelectLeft = () => {
+    this.dropCaretOutsideList();
     const {
       selection,
       setSelection,
@@ -916,6 +937,10 @@ class HotkeyStore {
     this.withContentSelection = withContentSelection;
   };
 
+  setTilesGridColumns = (tilesGridColumns: number) => {
+    this.tilesGridColumns = tilesGridColumns;
+  };
+
   enableSelection = (e: KeyboardEvent) => {
     if (e.type === "keydown" && this.selectionAreaIsEnabled) {
       clearTextSelection();
@@ -984,6 +1009,8 @@ class HotkeyStore {
   };
 
   get countTilesInRow() {
+    if (this.tilesGridColumns) return this.tilesGridColumns;
+
     const { filesList } = this.filesStore;
     const isRooms = filesList.some((item) => item.isRoom && !item.isTemplate);
     const isTemplates = filesList.some((item) => item.isTemplate);

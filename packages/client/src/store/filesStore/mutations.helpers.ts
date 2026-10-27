@@ -44,6 +44,37 @@ import type { default as TRoomsFilter } from "@docspace/shared/api/rooms/filter"
 
 import type { default as FilesStore } from "../FilesStore";
 
+function moveHotkeyCaretOffRemovedItems(
+  self: FilesStore,
+  fileIds?: Nullable<(number | string)[]>,
+  folderIds?: Nullable<(number | string)[]>,
+) {
+  const { hotkeyCaret, filesList } = self;
+  if (!hotkeyCaret) return;
+
+  const isRemoved = (item: (typeof filesList)[number]) =>
+    item.isFolder
+      ? !!folderIds?.includes(item.id!)
+      : !!fileIds?.includes(item.id!);
+
+  const caretIndex = filesList.findIndex(
+    (item) =>
+      item.id === hotkeyCaret.id && item.isFolder === hotkeyCaret.isFolder,
+  );
+  if (caretIndex === -1 || !isRemoved(filesList[caretIndex])) return;
+
+  const nextCaret =
+    filesList.slice(caretIndex + 1).find((item) => !isRemoved(item)) ??
+    filesList
+      .slice(0, caretIndex)
+      .reverse()
+      .find((item) => !isRemoved(item)) ??
+    null;
+
+  self.setHotkeyCaret(nextCaret);
+  self.setHotkeyCaretStart(nextCaret);
+}
+
 // State-mutation actions extracted from FilesStore. Side-effectful (not
 // computeds); moved verbatim into free functions over `self: FilesStore`.
 // noImplicitThis guarantees the this->self rewrite is complete.
@@ -98,6 +129,8 @@ export function removeFilesImpl(
     self.fetchFiles(destFolderId, self.filter, true, true, false);
     return;
   }
+
+  moveHotkeyCaretOffRemovedItems(self, fileIds, folderIds);
 
   if (newFilter.total <= self.filesList.length) {
     const files = fileIds

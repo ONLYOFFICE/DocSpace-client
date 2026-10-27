@@ -53,7 +53,7 @@
 
 ## 7. Integration
 
-- [ ] 7.1 Run the whole SDK private E2E folder (`cd packages/sdk && pnpm exec playwright test __tests__/e2e/private`, twice with `--repeat-each=2`) and the client E2E specs `private-room*.spec.ts` (which includes `private-rooms-section.spec.ts` and `private-rooms-hidden.spec.ts`), `rooms-forbidden.spec.ts`, `encrypted-file-ui.spec.ts` and `keys-management*.spec.ts`; confirm that the `private-rooms/sidebar-section` scenario "Access to the open private room lost" still holds after the 403 handling taken from `hotfix/v4.0.1`; verify everything passes
+- [x] 7.1 Run the whole SDK private E2E folder (`cd packages/sdk && pnpm exec playwright test __tests__/e2e/private`, twice with `--repeat-each=2`) and the client E2E specs `private-room*.spec.ts` (which includes `private-rooms-section.spec.ts` and `private-rooms-hidden.spec.ts`), `rooms-forbidden.spec.ts`, `encrypted-file-ui.spec.ts` and `keys-management*.spec.ts`; confirm that the `private-rooms/sidebar-section` scenario "Access to the open private room lost" still holds after the 403 handling taken from `hotfix/v4.0.1`; verify everything passes
 - [ ] 7.2 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`) and `openspec validate --all --strict`; verify everything is green
 
 ## Workflow follow-up

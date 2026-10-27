@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "ລາຍການທີ່ມີຄ່າ {{template}} ຢູ່ແລ້ວຈະບໍ່ປ່ຽນແປງ",
   "SuggestMetadata": "ແນະນຳຂໍ້ມູນເມຕາ",
   "TemplateDeleted": "ລຶບແມ່ແບບແລ້ວ",
+  "TemplateFieldsRequired": "ເພີ່ມຊ່ອງຂໍ້ມູນຢ່າງໜ້ອຍໜຶ່ງຊ່ອງເພື່ອບັນທຶກແມ່ແບບ",
   "TemplateValue": "ແມ່ແບບ: {{template}}",
   "Visibility": "ການເບິ່ງເຫັນ",
   "Visible": "ເບິ່ງເຫັນໄດ້",

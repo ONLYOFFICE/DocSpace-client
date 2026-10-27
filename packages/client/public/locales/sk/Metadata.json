@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Položky, ktoré už majú hodnoty {{template}}, zostanú nezmenené",
   "SuggestMetadata": "Navrhnúť metadáta",
   "TemplateDeleted": "Šablóna odstránená",
+  "TemplateFieldsRequired": "Ak chcete uložiť šablónu, pridajte aspoň jedno pole",
   "TemplateValue": "Šablóna: {{template}}",
   "Visibility": "Viditeľnosť",
   "Visible": "Viditeľná",

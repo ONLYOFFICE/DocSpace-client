@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Elementi, ki že imajo vrednosti {{template}}, ostanejo nespremenjeni",
   "SuggestMetadata": "Predlagaj metapodatke",
   "TemplateDeleted": "Predloga izbrisana",
+  "TemplateFieldsRequired": "Za shranjevanje predloge dodajte vsaj eno polje",
   "TemplateValue": "Predloga: {{template}}",
   "Visibility": "Vidnost",
   "Visible": "Vidna",

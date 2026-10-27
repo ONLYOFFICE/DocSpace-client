@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Elemente, die bereits Werte aus {{template}} haben, bleiben unverändert",
   "SuggestMetadata": "Metadaten vorschlagen",
   "TemplateDeleted": "Vorlage gelöscht",
+  "TemplateFieldsRequired": "Fügen Sie mindestens ein Feld hinzu, um die Vorlage zu speichern",
   "TemplateValue": "Vorlage: {{template}}",
   "Visibility": "Sichtbarkeit",
   "Visible": "Sichtbar",

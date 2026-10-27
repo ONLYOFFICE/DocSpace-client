@@ -55,6 +55,7 @@ import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { validateMembersForEncryption } from "@docspace/shared/services/private-room/room-encryption";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ChangeRoomOwner = (props) => {
   const {
@@ -69,6 +70,8 @@ const ChangeRoomOwner = (props) => {
     userId,
     useModal = true,
     isAIAgent,
+    isAIProject,
+    changeAiProjectOwner,
     isFormSpace,
     updateInfoPanelMembers,
     roomId,
@@ -123,8 +126,14 @@ const ChangeRoomOwner = (props) => {
       }
     }
 
-    await changeRoomOwner(t, candidate.id, isChecked);
-    updateInfoPanelMembers();
+    if (isAIProject) {
+      // The checkbox reads "leave the project": unchecked keeps the former
+      // owner in it as a project manager.
+      await changeAiProjectOwner(candidate.id, !isChecked);
+    } else {
+      await changeRoomOwner(t, candidate.id, isChecked);
+      updateInfoPanelMembers();
+    }
     handleClosePanel();
   };
 
@@ -193,17 +202,23 @@ const ChangeRoomOwner = (props) => {
 
   const ownerIsCurrentUser = roomOwnerId === userId;
 
-  const headerLabel = isAIAgent
-    ? t("Files:ChangeTheAgentOwner")
-    : t("Common:ChangeTheRoomOwner");
+  const headerLabel = isAIProject
+    ? t("Common:AIProjectChangeOwner")
+    : isAIAgent
+      ? t("Files:ChangeTheAgentOwner")
+      : t("Common:ChangeTheRoomOwner");
 
-  const infoText = isAIAgent
-    ? t("Files:ChangeAgentOwnerSelectorInfo")
-    : t("Common:PeopleSelectorInfo");
+  const infoText = isAIProject
+    ? t("Common:AIProjectChangeOwnerInfo", { productName: getBrandName("ProductName") })
+    : isAIAgent
+      ? t("Files:ChangeAgentOwnerSelectorInfo")
+      : t("Common:PeopleSelectorInfo");
 
-  const footerCheckboxLabel = isAIAgent
-    ? t("Common:LeaveTheAgent")
-    : isFormSpace
+  const footerCheckboxLabel = isAIProject
+    ? t("Common:AIProjectLeave")
+    : isAIAgent
+      ? t("Common:LeaveTheAgent")
+      : isFormSpace
       ? t("Common:LeaveTheFormSpace")
       : t("Common:LeaveTheRoom");
 
@@ -225,7 +240,7 @@ const ChangeRoomOwner = (props) => {
       filter={filter}
       withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
       footerCheckboxLabel={footerCheckboxLabel}
-      isChecked={!showBackButton}
+      isChecked={!showBackButton && !isAIProject}
       withOutCurrentAuthorizedUser
       filterUserId={roomOwnerId}
       currentUserId={userId}
@@ -279,6 +294,7 @@ export default inject(
     filesActionsStore,
     userStore,
     infoPanelStore,
+    aiProjectsStore,
   }) => {
     const { changeRoomOwnerIsVisible, setChangeRoomOwnerIsVisible } =
       dialogsStore;
@@ -299,6 +315,9 @@ export default inject(
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
       isAIAgent: room?.isAIAgent,
+      isAIProject: room?.isAIProject,
+      changeAiProjectOwner: (newOwnerId, keepAsManager) =>
+        aiProjectsStore.changeOwner(room, newOwnerId, keepAsManager),
       isFormSpace: room?.roomType === RoomsType.FormRoom,
       updateInfoPanelMembers,
       roomId: room?.id,

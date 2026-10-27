@@ -103,6 +103,7 @@ import OAuthStore from "./OAuthStore";
 import DocsConnectStore from "./DocsConnectStore";
 import AiRoomStore from "./AiRoomStore";
 import AiPresetsStore from "./AiPresetsStore";
+import AiProjectsStore from "./AiProjectsStore";
 import AppsStore from "./AppsStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
@@ -116,6 +117,8 @@ import TelegramStore from "./TelegramStore";
 const aiRoomStore = new AiRoomStore();
 
 const aiPresetsStore = new AiPresetsStore();
+
+const aiProjectsStore = new AiProjectsStore(aiPresetsStore);
 
 const appsStore = new AppsStore();
 
@@ -507,6 +510,7 @@ const store = {
 
   aiRoomStore,
   aiPresetsStore,
+  aiProjectsStore,
   appsStore,
   aiSettingsStore,
   telegramStore,

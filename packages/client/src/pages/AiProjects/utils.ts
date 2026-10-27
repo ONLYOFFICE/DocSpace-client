@@ -33,58 +33,21 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TAiPreset } from "SRC_DIR/store/AiPresetsStore";
+import { AiProjectAccess, type TAiProject } from "@docspace/shared/api/ai/projects";
 
-export type TProjectsSortId = "AZ" | "DateAndTime";
+export const isManager = (project: TAiProject) =>
+  project.access === AiProjectAccess.Owner ||
+  project.access === AiProjectAccess.ProjectManager;
 
-export type TProjectsQuery = {
-  search: string;
-  withSkills: boolean;
-  withKnowledge: boolean;
-  sortId: TProjectsSortId;
-  sortDirection: "asc" | "desc";
-};
+export const isOwner = (project: TAiProject) =>
+  project.access === AiProjectAccess.Owner;
 
-/** Newest first, nothing filtered: what the page opens with. */
-export const DEFAULT_PROJECTS_QUERY: TProjectsQuery = {
-  search: "",
-  withSkills: false,
-  withKnowledge: false,
-  sortId: "DateAndTime",
-  sortDirection: "desc",
-};
+/** Who may create projects and hold the owner / manager roles. */
+export const canManageProjects = (user?: {
+  isOwner?: boolean;
+  isAdmin?: boolean;
+  isRoomAdmin?: boolean;
+} | null) => !!user && (!!user.isOwner || !!user.isAdmin || !!user.isRoomAdmin);
 
-/** Filter keys of the "Sources" group in the filter panel. */
-export const SKILLS_FILTER_KEY = "with-skills";
-export const KNOWLEDGE_FILTER_KEY = "with-knowledge";
-
-/**
- * The projects the page lists for a query: the name search and the source
- * filters narrow the saved list, the sort orders what is left. Projects live
- * in the browser, so all of it happens here rather than on a server.
- */
-export const queryProjects = (
-  projects: TAiPreset[],
-  query: TProjectsQuery,
-): TAiPreset[] => {
-  const needle = query.search.trim().toLocaleLowerCase();
-
-  const filtered = projects.filter(
-    (project) =>
-      (!needle || project.name.toLocaleLowerCase().includes(needle)) &&
-      (!query.withSkills || !!project.contextRoom) &&
-      (!query.withKnowledge || !!project.knowledgeRoom),
-  );
-
-  const sign = query.sortDirection === "asc" ? 1 : -1;
-
-  return [...filtered].sort((a, b) =>
-    query.sortId === "AZ"
-      ? sign * a.name.localeCompare(b.name)
-      : sign * a.createdAt.localeCompare(b.createdAt),
-  );
-};
-
-/** Whether the query hides any project, i.e. an empty result means "no match". */
-export const isProjectsQueryFiltered = (query: TProjectsQuery): boolean =>
-  !!query.search.trim() || query.withSkills || query.withKnowledge;
+export const projectLink = (project: TAiProject) =>
+  `${window.location.origin}/ai-projects/${project.id}`;

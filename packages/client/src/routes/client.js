@@ -689,7 +689,7 @@ const ClientRoutes = [
         },
       },
       {
-        path: "/ai-projects",
+        path: "/ai-projects/:projectId?",
         async lazy() {
           const { AiProjects } = await componentLoader(
             () => import("SRC_DIR/pages/AiProjects"),

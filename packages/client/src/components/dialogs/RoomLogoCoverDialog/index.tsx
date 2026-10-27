@@ -73,6 +73,7 @@ const RoomLogoCoverDialog = ({
   roomLogoCoverDialogVisible,
   setEnabledHotkeys,
   createAgentDialogVisible,
+  aiProjectDialogVisible,
   editAgentDialogVisible,
   uploadedFile,
   setUploadedFile,
@@ -188,6 +189,7 @@ const RoomLogoCoverDialog = ({
       editRoomDialogPropsVisible ||
       createAgentDialogVisible ||
       editAgentDialogVisible ||
+      aiProjectDialogVisible ||
       templateEventVisible
     ) {
       onCloseRoomLogo(undefined, false);
@@ -290,7 +292,13 @@ const RoomLogoCoverDialog = ({
 };
 
 export default inject<TStore>(
-  ({ dialogsStore, filesStore, avatarEditorDialogStore, treeFoldersStore }) => {
+  ({
+    dialogsStore,
+    filesStore,
+    avatarEditorDialogStore,
+    treeFoldersStore,
+    aiProjectsStore,
+  }) => {
     const {
       setCover,
       getCovers,
@@ -328,6 +336,7 @@ export default inject<TStore>(
       editRoomDialogPropsVisible: editRoomDialogProps.visible,
       createAgentDialogVisible: createAgentDialogProps.visible,
       editAgentDialogVisible: editAgentDialogProps.visible,
+      aiProjectDialogVisible: aiProjectsStore.projectDialog !== null,
       templateEventVisible,
       setEnabledHotkeys: filesStore.setEnabledHotkeys,
       uploadedFile,

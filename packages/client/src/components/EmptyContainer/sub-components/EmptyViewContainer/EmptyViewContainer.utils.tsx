@@ -276,7 +276,7 @@ const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
       });
 };
 
-const getAIAgentsAIDisabledTitle = (
+export const getAIAgentsAIDisabledTitle = (
   t: TTranslation,
   standalone: boolean,
   isPortalAdmin: boolean,
@@ -300,7 +300,7 @@ const getAIAgentsAIDisabledTitle = (
   );
 };
 
-const getAIAgentsAIDisabledDescription = (
+export const getAIAgentsAIDisabledDescription = (
   t: TTranslation,
   standalone: boolean,
   isPortalAdmin: boolean,

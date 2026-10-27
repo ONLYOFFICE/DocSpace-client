@@ -93,6 +93,7 @@ import "@docspace/shared/styles/theme.scss";
 import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
 import { getAiContextRoom } from "SRC_DIR/helpers/aiContextRoom";
 import AiPresetsBridge from "SRC_DIR/components/AiPresetsBridge";
+import ProjectIntro from "SRC_DIR/pages/AiProjects/sub-components/project/ProjectIntro";
 import {
   isAiPresetActionId,
   useAiPresetsPickerActions,
@@ -120,6 +121,9 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
+
+// Stable empty list, so the chat provider's memo is not re-run each render.
+const NO_SUGGESTIONS = [];
 
 const Shell = ({ page = "home", ...rest }) => {
   const {
@@ -181,10 +185,12 @@ const Shell = ({ page = "home", ...rest }) => {
     isFormRoomRoot,
     isAIReady,
     aiContextRoom,
-    aiPresetContextRoom,
+    aiPresetContextRooms,
     aiPresets,
     requestPresetApply,
     setActiveAiPreset,
+    isAiProjectOpen,
+    aiActiveProject,
   } = rest;
 
   const [searchParams] = useSearchParams();
@@ -243,6 +249,11 @@ const Shell = ({ page = "home", ...rest }) => {
     ],
   );
 
+  // Inside an AI project (the projects page with a project open) the chat
+  // is the project's: its model is fixed and the welcome chips are the
+  // project's own rather than the section's.
+  const isInsideAiProject =
+    isAiProjectOpen && location.pathname.startsWith("/ai-projects");
   useCreateFileError({
     setPortalTariff,
     setFormCreationInfo,
@@ -1009,7 +1020,9 @@ const Shell = ({ page = "home", ...rest }) => {
           // picker is no longer hidden there.
           formatChatError={formatChatError}
           hideProfilePicker={false}
-          profilePickerReadOnly={isInsideAgentRoom && !canEditAgentRoom}
+          profilePickerReadOnly={
+            (isInsideAgentRoom && !canEditAgentRoom) || isInsideAiProject
+          }
           isAgentRoom={isInsideAgentRoom}
           profilePickerActions={
             isInsideAgentRoom ? undefined : profilePickerActions
@@ -1022,14 +1035,25 @@ const Shell = ({ page = "home", ...rest }) => {
           closeEditorPanel={closeEditorPanel}
           composerHeader={standalone ? undefined : composerHeader}
           composerDisabled={standalone ? undefined : !isAIReady}
-          suggestions={aiSuggestions}
+          // A chat opened from an AI preset or inside a project starts with
+          // no suggestion chips: its sources are the subject, not the page.
+          suggestions={
+            isInsideAiProject || aiPresetContextRooms ? NO_SUGGESTIONS : aiSuggestions
+          }
+          // An empty project chat opens with the project's logo, name and
+          // sources instead of the default illustration.
+          chatIntro={
+            isInsideAiProject && aiActiveProject ? (
+              <ProjectIntro project={aiActiveProject} />
+            ) : undefined
+          }
           // The room the user is in, connected as chat context (with the
           // skills of its .ai folder) when the chat opens — see
           // ContextRoomSync in ui-kit.
-          // A chat opened from an AI preset takes the preset's skills room
-          // instead, until the panel closes (see AiPresetsBridge).
+          // A chat opened from an AI preset or project takes its skills
+          // rooms instead, until the panel closes (see AiPresetsBridge).
           contextRoom={
-            canUseAi ? (aiPresetContextRoom ?? aiContextRoom) : undefined
+            canUseAi ? (aiPresetContextRooms ?? aiContextRoom) : undefined
           }
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
@@ -1063,6 +1087,7 @@ const ShellWrapper = inject(
     treeFoldersStore,
     aiRoomStore,
     aiPresetsStore,
+    aiProjectsStore,
     paymentStore,
     accessRightsStore,
   }) => {
@@ -1207,7 +1232,9 @@ const ShellWrapper = inject(
       // The current room as a chat-context candidate; a new object per
       // render, the ui-kit provider memoizes it by id and name.
       aiContextRoom: getAiContextRoom(selectedFolderStore),
-      aiPresetContextRoom: aiPresetsStore.activePresetContextRoom,
+      aiPresetContextRooms: aiPresetsStore.activePresetContextRooms,
+      isAiProjectOpen: aiProjectsStore.activeProject !== null,
+      aiActiveProject: aiProjectsStore.activeProject,
       aiPresets: aiPresetsStore.presets,
       requestPresetApply: aiPresetsStore.requestApply,
       setActiveAiPreset: aiPresetsStore.setActivePreset,

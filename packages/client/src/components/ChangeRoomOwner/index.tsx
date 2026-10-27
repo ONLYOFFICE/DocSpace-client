@@ -56,6 +56,8 @@ type ChangeRoomOwnerProps = {
   currentColorScheme?: SettingsStore["currentColorScheme"];
   canChangeOwner: boolean;
   isAgent?: boolean;
+  /** Replaces the "Room owner" / "Agent owner" heading. */
+  label?: string;
 };
 
 const ChangeRoomOwner = ({
@@ -65,6 +67,7 @@ const ChangeRoomOwner = ({
   currentColorScheme,
   canChangeOwner,
   isAgent,
+  label,
 }: ChangeRoomOwnerProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -76,7 +79,7 @@ const ChangeRoomOwner = ({
   return (
     <div>
       <Text className="change-owner-label" fontWeight={600} fontSize="13px">
-        {isAgent ? t("Common:AgentOwner") : t("Common:RoomOwner")}
+        {label ?? (isAgent ? t("Common:AgentOwner") : t("Common:RoomOwner"))}
       </Text>
 
       <div className={styles.changeOwnerDisplayWrapper}>

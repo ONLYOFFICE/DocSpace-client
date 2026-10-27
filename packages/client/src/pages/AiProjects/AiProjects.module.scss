@@ -45,6 +45,34 @@
   height: 100%;
 }
 
+// With the quick-actions banner the Section runs in `stickyTableHeader` mode:
+// the banner scrolls under the header and the filter sticks below it. The
+// Section reads the geometry from these variables (same values as Home).
+.stickyBannerVars {
+  --section-filter-height: 60px;
+  --section-filter-top: var(
+    --section-header-size,
+    var(--section-header-height, 69px)
+  );
+  --section-filter-bottom: calc(
+    var(--section-filter-top) + var(--section-filter-height)
+  );
+
+  @include mixins.tablet-and-below {
+    --section-filter-top: var(
+      --section-header-tablet-size,
+      var(--section-header-height-tablet, 61px)
+    );
+  }
+
+  @include mixins.mobile {
+    --section-filter-top: var(
+      --section-header-mobile-size,
+      var(--section-header-height-mobile, 53px)
+    );
+  }
+}
+
 @include mixins.tablet-and-below {
   .layout :global(.chat-panel) {
     inset-inline-start: auto;
@@ -61,8 +89,7 @@
 
 // Chat fullscreen: the section collapses (it stays mounted, inert) and the
 // panel fills it, leaving the article sidebar visible.
-.layout[data-layout-mode="ai-fullscreen"],
-.layout[data-layout-mode="ai-project"] {
+.layout[data-layout-mode="ai-fullscreen"] {
   .page {
     flex: 0 0 0;
     width: 0;
@@ -79,9 +106,37 @@
 }
 
 @include mixins.not-mobile {
-  .layout[data-layout-mode="ai-fullscreen"] :global(.chat-panel),
-  .layout[data-layout-mode="ai-project"] :global(.chat-panel) {
+  .layout[data-layout-mode="ai-fullscreen"] :global(.chat-panel) {
     width: calc(100% - var(--ai-sidebar-width, 0px));
+  }
+}
+
+// An open project's chat in the section body: the agent chat's container
+// (Home/View/AIAgentView.module.scss) — edge to edge under the Navigation,
+// a hairline between the two, the body's own padding cancelled.
+.projectChat {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  margin-inline: -20px -3px;
+  border-top: 1px solid var(--files-section-table-view-row-border-color);
+  --chat-header-top: calc(
+    var(--section-header-height) + var(--section-submenu-height, 0px)
+  );
+
+  @include mixins.tablet-and-below {
+    margin-inline: -24px 0;
+    --chat-header-top: calc(
+      var(--section-header-height-tablet) + var(--section-submenu-height, 0px)
+    );
+  }
+
+  @include mixins.mobile {
+    margin-inline: -16px -8px;
+    --chat-header-top: calc(
+      var(--section-header-height-mobile) + var(--section-submenu-height, 0px)
+    );
   }
 }
 
@@ -101,6 +156,18 @@
   flex: 1 1 0;
   min-width: 0;
   min-height: 0;
+}
+
+// Inside a project the body keeps the section's side gutters (as the Files
+// section does); the conversation sits to the right of the sources column
+// with a gap and no divider, as the mockup draws it.
+.projectBody {
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  @include mixins.tablet-and-below {
+    padding: 0 16px;
+  }
 }
 
 // Width of the article sidebar the fullscreen chat leaves visible; a copy of
@@ -127,102 +194,154 @@
   }
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-  margin: 0;
-  padding: 4px 0 24px;
-  list-style: none;
+// Table / rows / tiles of projects, reusing the room list components.
+.table {
+  width: 100%;
 }
 
-.gridItem {
+// The row styles of the Files / Contacts tables: cells carry the separator,
+// the whole row highlights on hover, and the context cell keeps its "..."
+// at the end of the row, under the cog of the header.
+.tableRow {
+  cursor: pointer;
+
+  :global(.table-container_cell) {
+    border-top: 1px solid var(--files-section-table-view-row-border-color);
+    margin-top: -1px;
+    border-inline: 0; // for Safari
+    height: auto !important;
+    max-height: 48px;
+  }
+
+  :global(.table-container_row-context-menu-wrapper) {
+    height: 49px !important;
+    max-height: none !important;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    padding-inline-end: 0;
+  }
+
+  &:hover {
+    :global(.table-container_cell) {
+      background: var(--files-section-table-view-row-background-active) !important;
+    }
+
+    :global(.table-container_file-name-cell) {
+      margin-inline-start: -24px;
+      padding-inline-start: 24px;
+    }
+
+    :global(.table-container_row-context-menu-wrapper) {
+      margin-inline-end: -20px;
+      padding-inline-end: 20px;
+    }
+  }
+}
+
+.nameCell {
   display: flex;
+  align-items: center;
+  gap: 12px;
   min-width: 0;
 }
 
-.card {
+.nameLink {
+  min-width: 0;
+  cursor: pointer;
+}
+
+.dim {
+  color: var(--text-secondary);
+}
+
+.rows {
+  width: 100%;
+}
+
+.row {
+  cursor: pointer;
+}
+
+.rowContent {
+  min-width: 0;
+}
+
+// The tiles view of the mockups: cards in a 4-column grid on a wide screen,
+// fewer columns as the section narrows.
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  padding: 8px 0 24px;
+}
+
+.projectTile {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px;
+  border: var(--tile-room-border);
+  border-radius: var(--tile-room-border-radius, 12px);
+  background: var(--tile-background-color);
+  cursor: pointer;
+  box-sizing: border-box;
+
+  &:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.projectTileTop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.projectTileName {
   flex: 1 1 auto;
   min-width: 0;
 }
 
-.cardRows {
+.projectTileMenu {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-}
-
-.cardRow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-  // The height of a room pill, so a row without one keeps the same slot.
-  min-height: 28px;
-}
-
-.cardRowEmpty {
-  color: var(--text-secondary);
-}
-
-.cardRowLabel {
-  flex: 0 0 112px;
-  white-space: nowrap;
-  color: var(--text-secondary);
-}
-
-// A connected room: a tinted pill, purple for skills and green for the
-// knowledge base, with the source's glyph.
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 0;
-  max-width: 100%;
-  height: 28px;
-  padding: 0 12px 0 8px;
-  box-sizing: border-box;
-  border-radius: 14px;
-  background-color: var(--ai-project-chip-bg);
-  color: var(--ai-project-chip-text);
-}
-
-.chipIcon {
   flex: 0 0 auto;
 }
 
-.chipLabel {
+.projectTileRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   min-width: 0;
-  font-size: 13px;
-  font-weight: 600;
-  color: inherit;
 }
 
-.chipSkills {
-  --ai-project-chip-bg: #{$portal-purple};
-  --ai-project-chip-icon: #{$purple};
-  --ai-project-chip-text: #{$black};
-
-  :global(.dark) & {
-    --ai-project-chip-bg: #{$second-purple-dark};
-    --ai-project-chip-icon: #{$white};
-    --ai-project-chip-text: #{$white};
-  }
+.projectTileLabel {
+  flex: 0 0 76px;
+  color: var(--text-secondary);
 }
 
-.chipKnowledge {
-  --ai-project-chip-bg: #{$portal-green};
-  --ai-project-chip-icon: #{$editor-green-color};
-  --ai-project-chip-text: #{$black};
-
-  :global(.dark) & {
-    --ai-project-chip-bg: #{$second-green-dark};
-    --ai-project-chip-icon: #{$white};
-    --ai-project-chip-text: #{$white};
-  }
+// No `overflow: hidden` here: the "..." tag anchors its dropdown of the
+// hidden rooms inside this box, and a clip would cut the list off.
+.projectTileTags {
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .empty {
   margin: 0 auto;
+}
+
+// The floating "New project" button of the phone and tablet list.
+.mobileButton {
+  position: fixed;
+  z-index: 200;
+  inset-inline-end: 24px;
+  bottom: 24px;
+
+  @include mixins.mobile {
+    position: absolute;
+    inset-inline-end: 16px;
+    bottom: 16px;
+  }
 }

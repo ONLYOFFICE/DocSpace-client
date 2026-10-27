@@ -741,6 +741,8 @@ const ArticleMainButtonContent = (props) => {
   ]);
 
   const isProfile = location.pathname.includes("/profile");
+  // The AI projects page draws its own floating button.
+  const isAiProjectsPage = location.pathname.startsWith("/ai-projects");
 
   const getMainButtonVisible = () => {
     let visibilityValue = true;
@@ -768,6 +770,8 @@ const ArticleMainButtonContent = (props) => {
     if (!isAccountsPage) visibilityValue = security?.Create;
 
     if (!isMobileArticle) visibilityValue = false;
+
+    if (isAiProjectsPage) visibilityValue = false;
 
     if (isAIRoom && (isChatTab || isResultTab)) visibilityValue = false;
 

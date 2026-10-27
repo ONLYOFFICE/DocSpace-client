@@ -45,6 +45,8 @@ import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 
 type ProjectsHeaderProps = {
   currentDeviceType: DeviceType;
+  /** Hides the AI Chat toggle, e.g. while AI is not enabled on the portal. */
+  hideChatButton?: boolean;
 };
 
 const noop = () => {};
@@ -55,7 +57,10 @@ const noOptions = () => [];
  * section renders, with the page title and the AI Chat toggle. A flat page,
  * so no breadcrumbs, no "+" menu and no info panel toggle.
  */
-const ProjectsHeader = ({ currentDeviceType }: ProjectsHeaderProps) => {
+const ProjectsHeader = ({
+  currentDeviceType,
+  hideChatButton = false,
+}: ProjectsHeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const aiChatStore = useAiChatStore();
   const isAiChatAvailable = useIsAiChatAvailable();
@@ -95,7 +100,7 @@ const ProjectsHeader = ({ currentDeviceType }: ProjectsHeaderProps) => {
           hideInfoPanel={noop}
           toggleChatPanel={aiChatStore.toggle}
           isChatPanelVisible={aiChatStore.isVisible}
-          hideChatButton={!isAiChatAvailable}
+          hideChatButton={hideChatButton || !isAiChatAvailable}
           titles={{ aiChat: t("Common:AIChatButton") }}
           withLogo=""
           burgerLogo=""

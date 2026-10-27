@@ -33,32 +33,33 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { ReactNode } from "react";
+import { Tags } from "@onlyoffice/apps-ui-kit/components/tags";
+import type { TAiProjectSource } from "@docspace/shared/api/ai/projects";
 
-import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-
-import styles from "./ProjectSources.module.scss";
-
-type SourceCardTitleProps = {
-  icon: string;
-  label: string;
-  name: ReactNode;
+type SourceTagsProps = {
+  rooms: TAiProjectSource[];
+  /** How many tags fit before the rest fold into the "+N" tag. */
+  columnCount?: number;
+  className?: string;
 };
 
-/**
- * The header of a source card: the source's 32px tile (the same as its room
- * type's, so a card reads like the room it shows) and its kind over its name.
- */
-export const SourceCardTitle = ({ icon, label, name }: SourceCardTitleProps) => (
-  <div className={styles.title}>
-    <img className={styles.titleIcon} src={icon} alt="" width={32} height={32} />
-    <div className={styles.titleText}>
-      <Text className={styles.titleLabel}>{label}</Text>
-      <Text fontWeight={600} truncate>
-        {name}
-      </Text>
-    </div>
-  </div>
-);
+const noop = () => {};
 
-export default SourceCardTitle;
+/** The linked rooms as the tags of a room render in the rooms list. */
+export const SourceTags = ({ rooms, columnCount = 2, className }: SourceTagsProps) => {
+  if (rooms.length === 0) return null;
+  return (
+    <Tags
+      className={className}
+      tags={rooms.map((room) => room.title)}
+      columnCount={columnCount}
+      onSelectTag={noop}
+    />
+  );
+};
+
+/** The rooms as one line of names, for the row view's side info. */
+export const sourceNames = (rooms: TAiProjectSource[]) =>
+  rooms.map((room) => room.title).join(", ");
+
+export default SourceTags;

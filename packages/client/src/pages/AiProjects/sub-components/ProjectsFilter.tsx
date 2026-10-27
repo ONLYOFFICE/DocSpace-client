@@ -34,23 +34,25 @@
  */
 
 import React from "react";
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import FilterInput from "@onlyoffice/apps-ui-kit/components/filter";
-import type { TGroupItem, TItem } from "@onlyoffice/apps-ui-kit/components/filter";
+import type { FilterProps, TItem } from "@onlyoffice/apps-ui-kit/components/filter";
 import { FilterGroups } from "@onlyoffice/apps-ui-kit/enums";
 import type { DeviceType } from "@docspace/shared/enums";
+import { AiProjectAccess } from "@docspace/shared/api/ai/projects";
+import type { TAiProjectAccess } from "@docspace/shared/api/ai/projects";
+import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
+import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
-import {
-  KNOWLEDGE_FILTER_KEY,
-  SKILLS_FILTER_KEY,
-  type TProjectsQuery,
-  type TProjectsSortId,
-} from "../utils";
+import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
+
+const HAS_INSTRUCTIONS = "hasInstructions";
+const HAS_KNOWLEDGE = "hasKnowledge";
 
 type ProjectsFilterProps = {
-  query: TProjectsQuery;
-  onChange: (query: TProjectsQuery) => void;
+  store: AiProjectsStore;
   onCreate: () => void;
   canCreate: boolean;
   userId: string;
@@ -58,206 +60,226 @@ type ProjectsFilterProps = {
   isDesktop: boolean;
 };
 
-const SOURCES_GROUP = FilterGroups.filterOther;
+const ProjectsFilter = observer(
+  ({ store, onCreate, canCreate, userId, currentDeviceType, isDesktop }: ProjectsFilterProps) => {
+    const { t } = useTranslation(["Common"]);
+    const [clearSearch, setClearSearch] = React.useState(false);
 
-/**
- * The filter row of the AI Projects page: the portal's FilterInput with the
- * "New project" main button, a name search, a "Sources" filter (projects
- * with a skills room, with a knowledge base) and a sort by name or date.
- * The page owns the query; this only translates it to and from the bar.
- */
-const ProjectsFilter = ({
-  query,
-  onChange,
-  onCreate,
-  canCreate,
-  userId,
-  currentDeviceType,
-  isDesktop,
-}: ProjectsFilterProps) => {
-  const { t } = useTranslation(["Common"]);
-  const [clearSearch, setClearSearch] = React.useState(false);
+    const noop = React.useCallback(() => {}, []);
 
-  // The bar re-reads its getters whenever their identity changes, so they
-  // read the latest query through a ref and stay stable otherwise.
-  const queryRef = React.useRef(query);
-  queryRef.current = query;
-  const onChangeRef = React.useRef(onChange);
-  onChangeRef.current = onChange;
+    // Three groups: the caller's role (one of), and the two room kinds (each
+    // a yes/no). The groups reuse the Rooms filter's own group ids.
+    const roleLabels = React.useMemo<Record<string, string>>(
+      () => ({
+        [AiProjectAccess.Owner]: t("Common:Owner"),
+        [AiProjectAccess.ProjectManager]: t("Common:AIProjectManager"),
+        [AiProjectAccess.Member]: t("Common:Member"),
+      }),
+      [t],
+    );
 
-  const update = React.useCallback((patch: Partial<TProjectsQuery>) => {
-    onChangeRef.current({ ...queryRef.current, ...patch });
-  }, []);
+    const getFilterData = React.useCallback(
+      async (): Promise<TItem[]> => [
+        {
+          key: FilterGroups.roomFilterSubject,
+          group: FilterGroups.roomFilterSubject,
+          label: t("Common:AIProjectMyRole"),
+          isHeader: true,
+        },
+        ...Object.entries(roleLabels).map(([access, label]) => ({
+          id: `filter_role-${access}`,
+          key: access,
+          group: FilterGroups.roomFilterSubject,
+          label,
+        })),
+        // The bar keeps one key per group (several only for tags), so each
+        // yes/no flag is a group of its own.
+        {
+          key: FilterGroups.roomFilterContent,
+          group: FilterGroups.roomFilterContent,
+          label: t("Common:AIProjectInstructions"),
+          isHeader: true,
+          withoutSeparator: true,
+        },
+        {
+          id: "filter_has-instructions",
+          key: HAS_INSTRUCTIONS,
+          group: FilterGroups.roomFilterContent,
+          label: t("Common:AIProjectHasInstructions"),
+        },
+        {
+          key: FilterGroups.roomFilterFolders,
+          group: FilterGroups.roomFilterFolders,
+          label: t("Common:Knowledge"),
+          isHeader: true,
+          isLast: true,
+        },
+        {
+          id: "filter_has-knowledge",
+          key: HAS_KNOWLEDGE,
+          group: FilterGroups.roomFilterFolders,
+          label: t("Common:AIProjectHasKnowledge"),
+        },
+      ],
+      [t, roleLabels],
+    );
 
-  const skillsLabel = t("Common:AIProjectSkills");
-  const knowledgeLabel = t("Common:Knowledge");
-
-  const getFilterData = React.useCallback(
-    async (): Promise<TItem[]> => [
-      {
-        key: SOURCES_GROUP,
-        group: SOURCES_GROUP,
-        label: t("Common:AIProjectSources"),
-        isHeader: true,
-        isLast: true,
-      },
-      {
-        id: "filter_ai-projects-skills",
-        key: SKILLS_FILTER_KEY,
-        group: SOURCES_GROUP,
-        label: skillsLabel,
-        isMultiSelect: true,
-      },
-      {
-        id: "filter_ai-projects-knowledge",
-        key: KNOWLEDGE_FILTER_KEY,
-        group: SOURCES_GROUP,
-        label: knowledgeLabel,
-        isMultiSelect: true,
-      },
-    ],
-    [t, skillsLabel, knowledgeLabel],
-  );
-
-  const { withSkills, withKnowledge } = query;
-  const getSelectedFilterData = React.useCallback((): TItem[] => {
-    const items: TItem[] = [];
-    if (withSkills) {
-      items.push({
-        key: SKILLS_FILTER_KEY,
-        group: SOURCES_GROUP,
-        label: skillsLabel,
-        isMultiSelect: true,
-      });
-    }
-    if (withKnowledge) {
-      items.push({
-        key: KNOWLEDGE_FILTER_KEY,
-        group: SOURCES_GROUP,
-        label: knowledgeLabel,
-        isMultiSelect: true,
-      });
-    }
-    return items;
-  }, [withSkills, withKnowledge, skillsLabel, knowledgeLabel]);
-
-  const onFilter = React.useCallback(
-    (items: TItem[] | TGroupItem[]) => {
-      const keys = new Set<unknown>();
-      for (const item of items) {
-        if (Array.isArray(item.key)) item.key.forEach((key) => keys.add(key));
-        else keys.add(item.key);
+    const { roleFilter, hasInstructionsFilter, hasKnowledgeFilter } = store;
+    const getSelectedFilterData = React.useCallback((): TItem[] => {
+      const selected: TItem[] = [];
+      if (roleFilter !== AiProjectAccess.None) {
+        selected.push({
+          key: String(roleFilter),
+          group: FilterGroups.roomFilterSubject,
+          label: roleLabels[roleFilter] ?? "",
+        });
       }
-      update({
-        withSkills: keys.has(SKILLS_FILTER_KEY),
-        withKnowledge: keys.has(KNOWLEDGE_FILTER_KEY),
-      });
-    },
-    [update],
-  );
+      if (hasInstructionsFilter) {
+        selected.push({
+          key: HAS_INSTRUCTIONS,
+          group: FilterGroups.roomFilterContent,
+          label: t("Common:AIProjectHasInstructions"),
+        });
+      }
+      if (hasKnowledgeFilter) {
+        selected.push({
+          key: HAS_KNOWLEDGE,
+          group: FilterGroups.roomFilterFolders,
+          label: t("Common:AIProjectHasKnowledge"),
+        });
+      }
+      return selected;
+    }, [roleFilter, hasInstructionsFilter, hasKnowledgeFilter, roleLabels, t]);
 
-  const removeSelectedItem = React.useCallback(
-    ({ key }: { key: string | number }) => {
-      if (key === SKILLS_FILTER_KEY) update({ withSkills: false });
-      if (key === KNOWLEDGE_FILTER_KEY) update({ withKnowledge: false });
-    },
-    [update],
-  );
+    // The bar hands over the whole selection: one item per group at most.
+    const onFilter = React.useCallback(
+      (data: TItem[]) => {
+        const has = (group: FilterGroups, key: string) =>
+          data.some((item) => item.group === group && String(item.key) === key);
+        const role = data.find((item) => item.group === FilterGroups.roomFilterSubject);
+        store.setFilterOptions({
+          role: role ? (Number(role.key) as TAiProjectAccess) : undefined,
+          hasInstructions: has(FilterGroups.roomFilterContent, HAS_INSTRUCTIONS),
+          hasKnowledge: has(FilterGroups.roomFilterFolders, HAS_KNOWLEDGE),
+        });
+      },
+      [store],
+    );
 
-  const clearAll = React.useCallback(() => {
-    update({ withSkills: false, withKnowledge: false, search: "" });
-    setClearSearch(true);
-  }, [update]);
+    const removeSelectedItem = React.useCallback(
+      ({ key, group }: { key: string | number | string[]; group?: FilterGroups }) => {
+        store.setFilterOptions({
+          role: group === FilterGroups.roomFilterSubject ? undefined : roleFilter,
+          hasInstructions: key === HAS_INSTRUCTIONS ? false : hasInstructionsFilter,
+          hasKnowledge: key === HAS_KNOWLEDGE ? false : hasKnowledgeFilter,
+        });
+      },
+      [store, roleFilter, hasInstructionsFilter, hasKnowledgeFilter],
+    );
 
-  const getSortData = React.useCallback(
-    () => [
-      { id: "sort-by_name", key: "AZ", label: t("Common:Name") },
-      { id: "sort-by_created", key: "DateAndTime", label: t("Common:ByCreation") },
-    ],
-    [t],
-  );
+    const getSortData = React.useCallback(
+      () => [
+        { id: "sort-by_name", key: "AZ", label: t("Common:Name") },
+        { id: "sort-by_activity", key: "DateAndTime", label: t("Common:AIProjectLastActivity") },
+        { id: "sort-by_created", key: "DateAndTimeCreation", label: t("Common:ByCreation") },
+      ],
+      [t],
+    );
+    const { sortBy, sortOrder } = store;
+    const getSelectedSortData = React.useCallback(
+      () =>
+        ({
+          sortId: sortBy,
+          sortDirection: sortOrder === "ascending" ? "asc" : "desc",
+        }) as unknown as ReturnType<FilterProps["getSelectedSortData"]>,
+      [sortBy, sortOrder],
+    );
+    const onSort = React.useCallback(
+      (nextSortId: string, nextDirection: string) => {
+        store.setSort(
+          nextSortId === "AZ" || nextSortId === "DateAndTimeCreation" ? nextSortId : "DateAndTime",
+          nextDirection === "asc" ? "ascending" : "descending",
+        );
+      },
+      [store],
+    );
 
-  const { sortId, sortDirection } = query;
-  const getSelectedSortData = React.useCallback(
-    () => ({ sortId, sortDirection }),
-    [sortId, sortDirection],
-  );
+    const { filterValue } = store;
+    const getSelectedInputValue = React.useCallback(() => filterValue, [filterValue]);
+    const onSearch = React.useCallback((value: string) => store.setFilterValue(value), [store]);
+    const onClearFilter = React.useCallback(() => store.clearFilter(), [store]);
+    const clearAll = React.useCallback(() => {
+      store.clearFilter();
+      setClearSearch(true);
+    }, [store]);
 
-  const onSort = React.useCallback(
-    (nextSortId: string, nextDirection: string) => {
-      update({
-        sortId: nextSortId as TProjectsSortId,
-        sortDirection: nextDirection === "asc" ? "asc" : "desc",
-      });
-    },
-    [update],
-  );
+    // The bar names the views "row" and "tile" (FilterInput maps "table" to
+    // "row" itself, and in the filter it shows the one icon whose value is
+    // not the current view); "row" means the table on a desktop, as in Rooms.
+    const getViewSettingsData = React.useCallback(
+      () => [
+        { id: "view-switch_rows", value: "row", icon: ViewRowsReactSvgUrl },
+        { id: "view-switch_tiles", value: "tile", icon: ViewTilesReactSvgUrl },
+      ],
+      [],
+    );
+    // Typed `() => void` in ui-kit 4.0.2 though it is called with the view;
+    // the cast goes once the published type says `(view: string) => void`.
+    const onChangeViewAs = React.useCallback(
+      (view: string) => {
+        if (view === "row") store.setViewAs(isDesktop ? "table" : "row");
+        else if (view === "tile") store.setViewAs("tile");
+      },
+      [isDesktop, store],
+    );
 
-  const search = query.search;
-  const getSelectedInputValue = React.useCallback(() => search, [search]);
-  const onSearch = React.useCallback(
-    (value: string) => update({ search: value }),
-    [update],
-  );
-  const onClearFilter = React.useCallback(
-    () => update({ search: "" }),
-    [update],
-  );
+    const mainButtonProps = React.useMemo(
+      () => ({ isDropdown: false, model: [], onAction: onCreate, text: t("Common:NewAIProject") }),
+      [onCreate, t],
+    );
 
-  const getViewSettingsData = React.useCallback(() => [], []);
-  const noop = React.useCallback(() => {}, []);
-
-  const mainButtonProps = React.useMemo(
-    () => ({
-      isDropdown: false,
-      model: [],
-      onAction: onCreate,
-      text: t("Common:NewAIProject"),
-    }),
-    [onCreate, t],
-  );
-
-  return (
-    <FilterInput
-      onFilter={onFilter}
-      getFilterData={getFilterData}
-      getSelectedFilterData={getSelectedFilterData}
-      onSort={onSort}
-      getSortData={getSortData}
-      getSelectedSortData={getSelectedSortData}
-      viewAs="tile"
-      viewSelectorVisible={false}
-      onChangeViewAs={noop}
-      getViewSettingsData={getViewSettingsData}
-      onSearch={onSearch}
-      onClearFilter={onClearFilter}
-      getSelectedInputValue={getSelectedInputValue}
-      filterHeader={t("Common:AdvancedFilter")}
-      placeholder={t("Common:Search")}
-      view={t("Common:View")}
-      removeSelectedItem={removeSelectedItem}
-      clearAll={clearAll}
-      filterTitle={t("Common:Filter")}
-      sortByTitle={t("Common:SortBy")}
-      clearSearch={clearSearch}
-      setClearSearch={setClearSearch}
-      onSortButtonClick={noop}
-      currentDeviceType={currentDeviceType}
-      userId={userId}
-      isIndexing={false}
-      isIndexEditingMode={false}
-      isRecentFolder={false}
-      isRooms={false}
-      isContactsPage={false}
-      isContactsPeoplePage={false}
-      isContactsGroupsPage={false}
-      isContactsInsideGroupPage={false}
-      isContactsGuestsPage={false}
-      selectorLabel=""
-      showMainButton={canCreate && isDesktop}
-      mainButtonProps={mainButtonProps}
-    />
-  );
-};
+    return (
+      <FilterInput
+        onFilter={onFilter as FilterProps["onFilter"]}
+        getFilterData={getFilterData}
+        getSelectedFilterData={getSelectedFilterData}
+        onSort={onSort}
+        getSortData={getSortData}
+        getSelectedSortData={getSelectedSortData}
+        viewAs={store.viewAs}
+        viewSelectorVisible
+        onChangeViewAs={onChangeViewAs as FilterProps["onChangeViewAs"]}
+        getViewSettingsData={getViewSettingsData}
+        onSearch={onSearch}
+        onClearFilter={onClearFilter}
+        getSelectedInputValue={getSelectedInputValue}
+        filterHeader={t("Common:AdvancedFilter")}
+        placeholder={t("Common:Search")}
+        view={t("Common:View")}
+        removeSelectedItem={removeSelectedItem as FilterProps["removeSelectedItem"]}
+        clearAll={clearAll}
+        filterTitle={t("Common:Filter")}
+        sortByTitle={t("Common:SortBy")}
+        clearSearch={clearSearch}
+        setClearSearch={setClearSearch}
+        onSortButtonClick={noop}
+        currentDeviceType={currentDeviceType}
+        userId={userId}
+        isIndexing={false}
+        isIndexEditingMode={false}
+        isRecentFolder={false}
+        isRooms={false}
+        isContactsPage={false}
+        isContactsPeoplePage={false}
+        isContactsGroupsPage={false}
+        isContactsInsideGroupPage={false}
+        isContactsGuestsPage={false}
+        selectorLabel=""
+        showMainButton={canCreate && isDesktop}
+        mainButtonProps={mainButtonProps}
+      />
+    );
+  },
+);
 
 export default ProjectsFilter;

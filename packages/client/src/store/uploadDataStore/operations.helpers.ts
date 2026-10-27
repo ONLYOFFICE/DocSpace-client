@@ -250,6 +250,18 @@ export function itemOperationToFolderImpl(
 
   const operation = isCopy ? OPERATIONS_NAME.copy : OPERATIONS_NAME.move;
 
+  if (!isCopy) {
+    const { hotkeysClipboard, setHotkeysClipboard } = self.filesStore;
+
+    setHotkeysClipboard(
+      hotkeysClipboard.filter((item) =>
+        item.isFolder
+          ? !folderIds.includes(item.id)
+          : !fileIds.includes(item.id),
+      ),
+    );
+  }
+
   setSecondaryProgressBarData({
     operation,
     percent: 0,

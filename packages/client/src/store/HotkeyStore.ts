@@ -849,9 +849,6 @@ class HotkeyStore {
         })
         .catch(() => {
           clearActiveOperations(fileIds, folderIds);
-        })
-        .finally(() => {
-          this.filesStore.setHotkeysClipboard([]);
         });
     } else if (!isPastedIntoItself && !isPastedIntoSameFolder) {
       toastr.error(t("Common:ErrorEmptyList"));

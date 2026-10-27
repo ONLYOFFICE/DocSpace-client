@@ -38,7 +38,7 @@ import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
-import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 
 import type { TileContentProps } from "../TileView.types";
 
@@ -49,11 +49,7 @@ const TileContent = ({
 }: TileContentProps) => {
   const { isBase } = useTheme();
 
-  const title = useDecryptedFilename(
-    item.id,
-    item.title,
-    "encrypted" in item ? item.encrypted : false,
-  );
+  const title = useResolvedFileTitle(item);
 
   const titleWithoutExt = item.isFolder
     ? title

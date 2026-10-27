@@ -39,11 +39,11 @@ import type {
   TFilesSelectorFile,
   TFilesSelectorLoadedFiles,
 } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
-import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
+import { resolveDisplayTitle } from "../services/encryption/filename-cache";
 import {
   useEncryptedFilenameRecovery,
   useFilenameCacheVersion,
-} from "@docspace/shared/hooks/useResolvedFileTitle";
+} from "./useResolvedFileTitle";
 
 type TLoadedPrivateFiles = {
   files: TFilesSelectorFile[];

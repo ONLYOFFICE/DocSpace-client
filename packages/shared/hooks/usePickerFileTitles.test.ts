@@ -63,7 +63,7 @@ vi.mock(
   }),
 );
 
-import { usePickerFileTitles } from "../usePickerFileTitles";
+import { usePickerFileTitles } from "./usePickerFileTitles";
 
 const DEST_ROOM_ID = 60;
 const identity = { publicKey: "pk" };

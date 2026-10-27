@@ -73,7 +73,7 @@ import { FILES_SELECTOR_AGENT_CONTEXT } from "SRC_DIR/store/CreateEditAgentStore
 import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
-import { usePickerFileTitles } from "./usePickerFileTitles";
+import { usePickerFileTitles } from "@docspace/shared/hooks/usePickerFileTitles";
 import { getAcceptButtonLabel } from "./utils";
 import { getIsDisabled } from "@docspace/shared/utils/filesSelector";
 import {

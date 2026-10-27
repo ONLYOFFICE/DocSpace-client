@@ -48,7 +48,7 @@ import { SortByFieldName } from "@docspace/shared/enums";
 
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
-import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 
 import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
 
@@ -63,18 +63,14 @@ const RowContent = observer(
     displayFileExtension,
     badgesComponent,
   }: RowContentProps) => {
-    const { title: rawTitle, createdBy, created, updated } = item;
+    const { createdBy, created, updated } = item;
 
     const { t, i18n } = useTranslation(["Common"]);
 
     const { openFolder } = useFolderActions({ t });
     const { openFile } = useFilesActions({ t });
 
-    const title = useDecryptedFilename(
-      item.id,
-      rawTitle,
-      "encrypted" in item ? item.encrypted : false,
-    );
+    const title = useResolvedFileTitle(item);
 
     const titleWithoutExt =
       "fileExst" in item ? getTitleWithoutExt(title, item.fileExst) : title;

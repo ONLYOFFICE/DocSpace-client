@@ -49,7 +49,7 @@ import {
 import { DragAndDrop } from "@onlyoffice/apps-ui-kit/components/drag-and-drop";
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
-import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import EditorsTooltip from "../../editors-tooltip";
@@ -107,11 +107,7 @@ const Row = observer(
     const storeItem = filesListStore.items.find((i) => i.id === item.id);
     const observableItem = storeItem ?? item;
 
-    const decryptedTitle = useDecryptedFilename(
-      item.id,
-      item.title,
-      "encrypted" in item ? item.encrypted : false,
-    );
+    const decryptedTitle = useResolvedFileTitle(item);
 
     const { t } = useTranslation(["Common"]);
     const { isBase } = useTheme();

@@ -38,18 +38,11 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import { recoverEncryptedFilenames } from "@docspace/shared/services/private-room/encrypted-filename-recovery";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 
-// Holds per-room private-files context (roomId, isPrivateRoomFolder) and
-// orchestrates filename recovery after unlock. The actual list of items
-// lives in FilesListStore; we pull it in here on-demand to avoid coupling.
-
-type RecoveryItem = {
-  id: number | string;
-  encrypted?: boolean;
-  viewUrl?: string;
-};
+// Holds per-room private-files context (roomId, isPrivateRoomFolder) and the
+// backfill of a room's file keys. Filename recovery follows the files list in
+// FilenameRecoveryEffect.
 
 const loadRoomEncryption = () =>
   import("@docspace/shared/services/private-room/room-encryption");
@@ -101,24 +94,6 @@ export class PrivateRoomFilesStore {
     } catch {
       this._backfilledRooms.delete(roomId);
     }
-  };
-
-  recoverEncryptedFilenamesForCurrentView = async (
-    items: ReadonlyArray<RecoveryItem>,
-    userId: string,
-    identity: IdentityKeyPair,
-  ): Promise<void> => {
-    if (!this.roomId) return;
-    const candidates = items
-      .filter(
-        (f): f is RecoveryItem & { id: number; viewUrl: string } =>
-          !!f.encrypted &&
-          (typeof f.id === "number" || typeof f.id === "string") &&
-          !!f.viewUrl,
-      )
-      .map((f) => ({ id: Number(f.id), viewUrl: f.viewUrl }));
-    if (candidates.length === 0) return;
-    await recoverEncryptedFilenames(candidates, userId, identity, this.roomId);
   };
 }
 

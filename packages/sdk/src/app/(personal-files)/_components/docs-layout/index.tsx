@@ -48,6 +48,7 @@ import type { TPathParts } from "@docspace/shared/types";
 import { FolderType, DeviceType } from "@docspace/shared/enums";
 import { RoomsType } from "@docspace/shared/enums";
 import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
+import { usePickerFileTitles } from "@docspace/shared/hooks/usePickerFileTitles";
 import type {
   FilesSelectorProps,
   FolderDtoInteger,
@@ -246,6 +247,8 @@ const DocsLayoutCore = observer(
     const versionHistoryStore = useVersionHistoryStore();
     const docsUserStore = useDocsUserStore();
     const { sdkConfig } = useSDKConfig();
+    // Spec: private-rooms/sdk-surface, "Decrypted titles in lists and history"
+    const pickerFileTitles = usePickerFileTitles(docsUserStore.user?.id);
 
     const { roomChanged } = useRoomActions();
 
@@ -767,6 +770,7 @@ const DocsLayoutCore = observer(
                               />
                               {selectorDialogVisible && selectorInitData && (
                                 <FilesSelector
+                                  {...pickerFileTitles}
                                   isPanelVisible={selectorDialogVisible}
                                   embedded={false}
                                   currentDeviceType={DeviceType.desktop}

@@ -45,7 +45,7 @@ import { DragAndDrop } from "@onlyoffice/apps-ui-kit/components/drag-and-drop";
 
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
-import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { FolderType } from "@docspace/shared/enums";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
@@ -105,11 +105,7 @@ const Tile = ({
   const { filesSettings } = useFilesSettingsStore();
   const filesListStore = useFilesListStore();
 
-  const decryptedTitle = useDecryptedFilename(
-    item.id,
-    item.title,
-    "encrypted" in item ? item.encrypted : false,
-  );
+  const decryptedTitle = useResolvedFileTitle(item);
 
   const {
     isCheckedItem,

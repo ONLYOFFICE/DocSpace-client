@@ -121,6 +121,8 @@ type TPlainFile = {
   name: string;
   serverTitle: string;
   bytes: Uint8Array;
+  /** One of the room's folders; the room itself when left out. */
+  folderId?: number;
 };
 
 const MEMO: TPlainFile = {
@@ -181,6 +183,7 @@ const encryptedSeed = async (
     id: file.id,
     title: file.name,
     serverTitle: file.serverTitle,
+    folderId: file.folderId,
     size: file.bytes.byteLength,
     encrypted: true,
     fileKeys: await wrapDekForRecipients({
@@ -385,6 +388,31 @@ test.describe("(private) — rooms list & unlock", () => {
 
     await expect(row(page, MEMO.name)).toBeVisible();
     await expect(page.getByText(MEMO.serverTitle)).toHaveCount(0);
+  });
+
+  test("File added by a list update: a subfolder opened after unlock shows decrypted names", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveRooms(mockBoth, port, {
+      files: [MEMO, { ...REPORT, folderId: ROOM_FOLDER.id }],
+      folders: [ROOM_FOLDER],
+    });
+    await openRoom(page, baseUrl);
+
+    await openContextMenu(row(page, MEMO.serverTitle));
+    await page.locator("#option_download").click();
+    await unlock(page);
+    await expect(row(page, MEMO.name)).toBeVisible();
+
+    await row(page, ROOM_FOLDER.title)
+      .getByText(ROOM_FOLDER.title, { exact: true })
+      .click();
+
+    await expect(row(page, REPORT.name)).toBeVisible();
+    await expect(page.getByText(REPORT.serverTitle)).toHaveCount(0);
   });
 
   test("Open location from the history", async ({

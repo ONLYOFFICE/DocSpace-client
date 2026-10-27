@@ -115,6 +115,7 @@ const withHotkeys = (Component) => {
       deleteRooms,
       archiveRooms,
       isWarningRoomsDialog,
+      isGracePeriod,
       setQuotaWarningDialogVisible,
 
       security,
@@ -234,6 +235,11 @@ const withHotkeys = (Component) => {
 
     const onCreateAIAgent = () => {
       if (!isVisitor && isAIAgentsFolder && security?.Create) {
+        if (isGracePeriod) {
+          setQuotaWarningDialogVisible(true);
+          return;
+        }
+
         const event = new CustomEvent(Events.AGENT_CREATE, {
           detail: { parentId: currentFolderId, context: "hotkey" },
         });
@@ -576,6 +582,7 @@ const withHotkeys = (Component) => {
       userStore,
       indexingStore,
       currentQuotaStore,
+      currentTariffStatusStore,
       uploadDataStore,
     }) => {
       const {
@@ -711,6 +718,7 @@ const withHotkeys = (Component) => {
         archiveRooms,
 
         isWarningRoomsDialog,
+        isGracePeriod: currentTariffStatusStore.isGracePeriod,
         setQuotaWarningDialogVisible,
 
         security,

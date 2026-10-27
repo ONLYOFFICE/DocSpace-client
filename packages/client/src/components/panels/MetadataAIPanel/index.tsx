@@ -195,7 +195,7 @@ const MetadataAIDialog = ({
         {phase === "loading" ? (
           loader
         ) : (
-          <div className={styles.body}>
+          <div className={styles.body} inert={isSaving}>
             <div className={styles.top}>
               {isReview ? (
                 <ReviewNotes mode={mode} summary={summary} />

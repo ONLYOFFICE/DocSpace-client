@@ -57,7 +57,7 @@ export const AccessTypeIcon: FC<AccessTypeIconProps> = ({
 }) => {
   if (isLoaded) {
     return (
-      <Loader className={styles.loader} size="20px" type={LoaderTypes.track} />
+      <Loader className={styles.loader} size="20px" type={LoaderTypes.track} isDecorative />
     );
   }
 

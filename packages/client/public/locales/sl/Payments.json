@@ -11,7 +11,7 @@
   "NotPossibleRoomRestoring": "Obnovitev te sobe ni mogoča, ker je dosežena omejitev števila sob, ki je določena za vaš trenutni tarifni načrt.",
   "NumberOfRoomsAccordingToTariff": "Število sob, določeno z vašim tarifnim načrtom: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Število skrbnikov, ki je določeno z vašim trenutnim tarifnim načrtom: {{currentValue}}/{{maxValue}}",
-  "PlanPaymentOverdue": "Nisem lahko dodal novih uporabnikov, ustvarjal novih sob ali agentov AI. Plačilo za plan {{planName}} je overdue.",
+  "PlanPaymentOverdue": "Nisem lahko dodal novih uporabnikov, ustvarjal novih sob ali AI agentov. Plačilo za plan {{planName}} je overdue.",
   "RoomsQuotaAlmostExhausted": "Kvota sob je skoraj dosežena.",
   "UsersQuotaAlmostExhausted": "Kvota plačljivih uporabnikov je skoraj dosežena."
 }

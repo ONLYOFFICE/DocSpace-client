@@ -24,9 +24,8 @@
   "AgentRowMember": "Rolunuzun icazə verdiyi bölmələrdən istifadə etmək üçün agenti açın. Yalnız baxış girişi ilə Söhbət çıxışları bölməsindəki saxlanılan nəticələri oxuya bilərsiniz. Agenti sabitləmək və ya artıq girişi olan şəxs üçün linki kopyalamaq üçün üç nöqtədən istifadə edin.",
   "AgentRowTitle": "Bir sətir, bir agent",
   "AgentStart": "Təkrarlanan tapşırıq üçün model və təlimatlarla agent yaradın. Onun Bilik bazasına istinad faylları əlavə edin, sonra sorğunu sınamaq və quraşdırmanı dəqiqləşdirmək üçün Süni İntellekt-Çat bölməsini açın.",
-  "AgentSwitchOn": "Bu səyahətdəki agentlər nümunə idi. AI agentlərini və alətləri aktivləşdirin, sonra ilk agentinizi hazırlamaq üçün Süni İntellekt parametrləri bölməsində mövcud modelləri yoxlayın.",
+  "AgentSwitchOn": "Bu səyahətdəki agentlər nümunə idi. AI agentlərini və alətləri aktivləşdirin, sonra ilk agentinizi hazırlamaq üçün AI parametrləri bölməsində mövcud modelləri yoxlayın.",
   "AgentSwitchOnTitle": "Qoşun və əsl halını görün",
-  "AgentWhatIs": "Süni intellekt agenti təkrarlanan tapşırıq üçün qurduğunuz köməkçidir. Onun təlimatları cavabları istiqamətləndirir, Bilik bazası sənəd kontekstini təmin edir, Söhbət çıxışları isə saxlanılan nəticələri özündə toplayır.",
-  "AgentWhatIsShared": "Süni intellekt agenti tapşırıq üçün konfiqurasiya edilmiş köməkçidir. Onun söhbətindən istifadə edə bilməyinizi, Bilik bazasına fayl əlavə edə bilməyinizi və ya Söhbət çıxışları bölməsində saxlanılan nəticələrə baxa bilməyinizi rolunuz müəyyən edir.",
+  "AgentWhatIsShared": "AI agenti tapşırıq üçün konfiqurasiya edilmiş köməkçidir. Onun söhbətindən istifadə edə bilməyinizi, Bilik bazasına fayl əlavə edə bilməyinizi və ya Söhbət çıxışları bölməsində saxlanılan nəticələrə baxa bilməyinizi rolunuz müəyyən edir.",
   "AgentWhatIsTitle": "Tapşırıqlarınız üçün köməkçi"
 }

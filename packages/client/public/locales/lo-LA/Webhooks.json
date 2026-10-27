@@ -1,6 +1,6 @@
 {
-  "AgentCreated": "AI Agent ໄດ້ຖືກສ້າງຂຶ້ນ",
-  "AgentDeleted": "AI Agent ຖືກລຶບ",
+  "AgentCreated": "ຕົວແທນ AI ໄດ້ຖືກສ້າງຂຶ້ນ",
+  "AgentDeleted": "ຕົວແທນ AI ຖືກລຶບ",
   "AgentUpdated": "ຕົວແທນ AI ໄດ້ຮັບການອັບເດດແລ້ວ",
   "Before": "ກ່ອນ",
   "CreateWebhook": "ສ້າງ webhook",

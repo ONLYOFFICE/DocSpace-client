@@ -26,7 +26,6 @@
   "AgentStart": "Create an agent with a model and instructions for a recurring task. Add reference files to its Knowledge base, then open AI Chat to try a request and refine the setup.",
   "AgentSwitchOn": "The agents in this tour were examples. Enable AI agents & tools, then check the available models in AI settings to get your first agent ready.",
   "AgentSwitchOnTitle": "Switch it on and see for real",
-  "AgentWhatIs": "An AI agent is an assistant you set up for a recurring task. Its instructions guide the replies, its Knowledge base provides document context, and Chat outputs holds saved results.",
   "AgentWhatIsShared": "An AI agent is an assistant configured for a task. Your role determines whether you can use its chat, add files to its Knowledge base or view saved results in Chat outputs.",
   "AgentWhatIsTitle": "An assistant for your tasks"
 }

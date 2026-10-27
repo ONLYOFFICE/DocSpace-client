@@ -26,7 +26,6 @@
   "AgentStart": "Vytvořte agenta s modelem a pokyny pro opakující se úkol. Přidejte referenční soubory do jeho Znalostní báze, pak otevřete AI-Chat, vyzkoušejte požadavek a dolaďte nastavení.",
   "AgentSwitchOn": "Agenti v této prohlídce byli jen ukázky. Zapněte AI agenty a nástroje a pak v Nastavení AI zkontrolujte dostupné modely, abyste připravili svého prvního agenta.",
   "AgentSwitchOnTitle": "Zapněte to a uvidíte doopravdy",
-  "AgentWhatIs": "AI agent je asistent, kterého nastavíte pro opakující se úkol. Jeho pokyny řídí odpovědi, Znalostní báze poskytuje kontext z dokumentů a Výstupy chatu uchovávají uložené výsledky.",
   "AgentWhatIsShared": "AI agent je asistent nastavený pro určitý úkol. Vaše role určuje, zda můžete používat jeho chat, přidávat soubory do jeho Znalostní báze nebo prohlížet uložené výsledky ve Výstupech chatu.",
   "AgentWhatIsTitle": "Asistent pro vaše úkoly"
 }

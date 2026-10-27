@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Distinktivët theksojnë aktivitetet e skedarëve, si ngarkimet, redaktimet dhe ndarjet, në aplikacionet {{files}}, {{rooms}}, {{forms}} dhe agjentët IA.",
+  "ActionsWithFilesDescription": "Distinktivët theksojnë aktivitetet e skedarëve, si ngarkimet, redaktimet dhe ndarjet, në aplikacionet {{files}}, {{rooms}}, {{forms}} dhe agjentët AI.",
   "AdminSetupRequired": "Kërkohet konfigurim nga administratori",
   "Badges": "Distinktivët",
   "DailyFeed": "Furnizimi ditor i {{organizationName}} {{productName}}",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "Kjo llogari është e ngarkuar nga LDAP. Email-i nuk është specifikuar dhe është gjeneruar automatikisht, nuk mund të përdoret për të dërguar njoftime.",
   "NotConfigured": "Nuk është konfiguruar",
   "Notifications": "Njoftimet",
-  "RoomsActivityDescription": "Merrni njoftime të menjëhershme me email për skedarët dhe dosjet e reja të ndara dhe për aktivitetin në {{files}}, {{rooms}}, {{forms}} dhe agjentët IA.",
-  "RoomUpdateNotify": "Aktiviteti në {{files}}, {{rooms}}, {{forms}} dhe agjentët IA",
+  "RoomsActivityDescription": "Merrni njoftime të menjëhershme me email për skedarët dhe dosjet e reja të ndara dhe për aktivitetin në {{files}}, {{rooms}}, {{forms}} dhe agjentët AI.",
+  "RoomUpdateNotify": "Aktiviteti në {{files}}, {{rooms}}, {{forms}} dhe agjentët AI",
   "SettingUpNotifications": "Cilësimet e njoftimeve",
   "SuccessConnected": "{{serviceName}} është lidhur me sukses si kanal njoftimi. Tani do të merrni përditësime atje.",
   "SuccessDisconnected": "{{serviceName}} është shkëputur me sukses. Njoftimet nuk do të dërgohen më atje.",

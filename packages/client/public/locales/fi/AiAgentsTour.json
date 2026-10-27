@@ -26,7 +26,6 @@
   "AgentStart": "Luo agentti, jolla on malli ja ohjeet toistuvaa tehtävää varten. Lisää viitetiedostoja sen Tietokanta-osioon ja avaa sitten AI-Chat kokeillaksesi pyyntöä ja hioaksesi asetuksia.",
   "AgentSwitchOn": "Tämän kierroksen agentit olivat esimerkkejä. Ota AI-agentit ja -työkalut käyttöön ja tarkista sitten käytettävissä olevat mallit AI-asetuksista, jotta saat ensimmäisen agenttisi valmiiksi.",
   "AgentSwitchOnTitle": "Kytke se päälle ja näe oikeasti",
-  "AgentWhatIs": "AI-agentti on avustaja, jonka määrität toistuvaa tehtävää varten. Sen ohjeet ohjaavat vastauksia, sen Tietokanta antaa kontekstia asiakirjoista ja Chat-tulokset-osioon tallentuvat tulokset.",
   "AgentWhatIsShared": "AI-agentti on tehtävää varten määritetty avustaja. Roolisi ratkaisee, voitko käyttää sen keskustelua, lisätä tiedostoja sen Tietokanta-osioon tai tarkastella tallennettuja tuloksia Chat-tulokset-osiossa.",
   "AgentWhatIsTitle": "Avustaja tehtäviisi"
 }

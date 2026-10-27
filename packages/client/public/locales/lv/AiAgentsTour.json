@@ -26,7 +26,6 @@
   "AgentStart": "Izveidojiet aģentu ar modeli un norādījumiem regulāram uzdevumam. Pievienojiet atsauces failus tā sadaļai Zināšanu bāze, pēc tam atveriet MI čatu, lai izmēģinātu pieprasījumu un pilnveidotu iestatījumus.",
   "AgentSwitchOn": "Šajā apskatē redzamie aģenti bija piemēri. Ieslēdziet MI aģentus un rīkus, pēc tam pārbaudiet pieejamos modeļus sadaļā MI iestatījumi, lai sagatavotu savu pirmo aģentu.",
   "AgentSwitchOnTitle": "Ieslēdziet un ieraugiet pa īstam",
-  "AgentWhatIs": "MI aģents ir palīgs, ko iestatāt regulāram uzdevumam. Tā norādījumi nosaka atbildes, Zināšanu bāze sniedz dokumentu kontekstu, bet sadaļā Tērzēšanas rezultāti glabājas saglabātie rezultāti.",
   "AgentWhatIsShared": "MI aģents ir palīgs, kas konfigurēts konkrētam uzdevumam. Jūsu loma nosaka, vai varat izmantot tā tērzēšanu, pievienot failus tā sadaļai Zināšanu bāze vai skatīt saglabātos rezultātus sadaļā Tērzēšanas rezultāti.",
   "AgentWhatIsTitle": "Palīgs jūsu uzdevumiem"
 }

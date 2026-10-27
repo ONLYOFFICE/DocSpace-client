@@ -148,6 +148,7 @@ Shared helpers the SDK does not call yet:
 - A file stored by an encrypted upload, duplicate or copy is added to the open folder's list from the orchestrator's result (the stored file and its path), as the client does, without waiting for a socket event.
 - Whether an open folder is private, and whether it is archived, comes from its path through the shared target (D3), not from the route. A room without the private setting opened at a private address goes to its generic room page.
 - The archive keeps the active-room predicates (D7), filtered by the rights the server sends for an archived room. Copy of an encrypted file is offered whatever copy right the server reports, as in an active room; `private-rooms-server-hardening` 9.1 turns that right off in the archive as well. The header and info panel room menus get the archive state.
+- The private info panel renders the generic info panel header, whose tabs include Share for a file, while its body offers only History and Details (found while implementing 1.7). The header takes the private tabs, as the client's "Share tab hidden for private items" (`private-rooms/room-membership`) requires.
 
 **D11. Light-client limits.**
 - In a private room the SDK filter bar hides search, and the private room server page and the sign-in return address ignore a `search` parameter. The folder list drops `search` from its own requests on private pages.

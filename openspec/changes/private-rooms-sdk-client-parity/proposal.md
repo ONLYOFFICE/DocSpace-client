@@ -59,7 +59,7 @@ A second pass over the open tasks on 2026-10-27 found two more places where name
   - "Folder operations use the server path": a folder move into another private room gets the move refusal, as in the client.
   - "Download without decryption": offered for folders inside a private room as well, as a server archive of the ciphertext, as in the client.
 
-  New requirements: private rooms only through the private pages; same-room moves by the server; the shared upload rules; no upload or creation without the create right; the files list follows encrypted operations; the shared menu rules; localized errors; membership from every entry point; leaving revokes own entries; archive rules; the light-client limits.
+  New requirements: private rooms only through the private pages; same-room moves by the server; the shared upload rules; no upload or creation without the create right; the files list follows encrypted operations; the shared menu rules; localized errors; membership from every entry point; leaving revokes own entries; archive rules; the Share tab hidden for private items; the light-client limits.
 
 The client's own behaviour (`private-rooms/file-operations`, `private-rooms/room-membership`) does not change. Moving its logic into `packages/shared` is a refactor that its existing tests keep in place.
 

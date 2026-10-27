@@ -305,6 +305,17 @@ The SDK SHALL treat a folder as inside a private room when any folder on its pat
 - **WHEN** an archived private room is opened
 - **THEN** copy, download without decryption and preview behave as in an active private room, within the archived room's rights
 
+### Requirement: Share tab hidden for private items
+The SDK SHALL NOT show the Share tab of the info panel for a private room, a folder inside it, or an encrypted file, whether the room is active or archived, as the client does. The info panel header SHALL offer only the tabs its body shows.
+
+#### Scenario: Encrypted file selected
+- **WHEN** an encrypted file of a private room is selected and the info panel opens
+- **THEN** the tabs are History and Details, and no Share tab is shown
+
+#### Scenario: Private room selected
+- **WHEN** a private room is selected in the private rooms list or its archive and the info panel opens
+- **THEN** the tabs do not include Share
+
 ### Requirement: No search in private rooms
 The SDK SHALL NOT offer search inside a private room, active or archived, and SHALL NOT send a search text for a private room to the server. Opening the location of an encrypted file SHALL NOT put its name in a search, the address or a message to the host.
 

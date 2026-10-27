@@ -185,7 +185,11 @@ const Metadata = ({ selection }: MetadataProps) => {
   return (
     <div className={styles.metadata} data-testid="info_panel_metadata">
       {isEmptyMetadata(metadata) ? (
-        <MetadataEmpty itemType={itemType} addActions={addActions} />
+        <MetadataEmpty
+          selection={selection}
+          itemType={itemType}
+          addActions={addActions}
+        />
       ) : (
         <>
           <MetadataHeader addActions={addActions} />

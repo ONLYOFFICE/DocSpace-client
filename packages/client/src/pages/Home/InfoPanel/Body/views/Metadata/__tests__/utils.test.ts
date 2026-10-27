@@ -59,6 +59,7 @@ import {
   getCustomFieldChanges,
   getEntryKind,
   getFieldInputError,
+  getMetadataEmptyHint,
   getMetadataItemType,
   getUnassignedTemplates,
   getVisibleTemplates,
@@ -124,6 +125,18 @@ describe("getEntryKind", () => {
     expect(getMetadataItemType(file(true))).toBe("file");
     expect(getMetadataItemType(folder(true))).toBe("folder");
     expect(getMetadataItemType(room(true))).toBe("room");
+  });
+});
+
+describe("getMetadataEmptyHint", () => {
+  it("promises AI autofill only for files where AI is available", () => {
+    expect(getMetadataEmptyHint("file", true)).toBe("fileWithAI");
+    expect(getMetadataEmptyHint("file", false)).toBe("file");
+  });
+
+  it("never promises AI for folders and rooms", () => {
+    expect(getMetadataEmptyHint("folder", true)).toBe("folder");
+    expect(getMetadataEmptyHint("room", true)).toBe("room");
   });
 });
 

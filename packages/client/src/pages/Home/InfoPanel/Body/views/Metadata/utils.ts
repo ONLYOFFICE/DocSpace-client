@@ -62,6 +62,7 @@ import { isFile, isRoom } from "@docspace/shared/utils/typeGuards";
 import type {
   TCustomFieldDraft,
   TLaunchResult,
+  TMetadataEmptyHint,
   TMetadataItemType,
   TMetadataSelection,
   TTemplateForm,
@@ -77,6 +78,12 @@ export const getMetadataItemType = (
 
   return isRoom(item) ? "room" : "folder";
 };
+
+export const getMetadataEmptyHint = (
+  itemType: TMetadataItemType,
+  isAIAvailable: boolean,
+): TMetadataEmptyHint =>
+  itemType === "file" && isAIAvailable ? "fileWithAI" : itemType;
 
 export const canEditMetadata = (item: TMetadataSelection) => {
   if (isRoom(item)) return !!item.security?.EditRoom;

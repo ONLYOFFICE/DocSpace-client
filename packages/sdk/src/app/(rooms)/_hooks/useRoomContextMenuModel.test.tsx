@@ -92,6 +92,7 @@ vi.mock("../_store/RoomsOperationsStore", () => ({
   }),
 }));
 
+import { RoomActionsOverrideContext } from "../_contexts/RoomActionsOverrideContext";
 import useRoomContextMenuModel from "./useRoomContextMenuModel";
 
 /** Every right a room's `security` can carry, all granted. */
@@ -217,6 +218,36 @@ describe("useRoomContextMenuModel", () => {
     expect(keysOf(model)).not.toContain("download");
     expect(keysOf(model)).toContain("archive-rooms");
     expectTidySeparators(model);
+  });
+
+  it("opens the private leave dialog on the private pages", () => {
+    const override = {
+      editRoom: vi.fn(),
+      inviteRoom: vi.fn(),
+      changeOwner: vi.fn(),
+      leaveRoom: vi.fn(),
+    };
+    const item = room({ private: true, inRoom: true });
+    let model: ContextMenuModel[] = [];
+    const Probe = () => {
+      model = useRoomContextMenuModel().getContextModel(item, true);
+      return null;
+    };
+    root = createRoot(document.createElement("div"));
+    act(() =>
+      root?.render(
+        <RoomActionsOverrideContext.Provider value={override}>
+          <Probe />
+        </RoomActionsOverrideContext.Provider>,
+      ),
+    );
+
+    const leave = model.find((entry) => entry.key === "leave-room") as unknown as {
+      onClick: () => void;
+    };
+    act(() => leave.onClick());
+
+    expect(override.leaveRoom).toHaveBeenCalledWith(item);
   });
 
   it("leaves the menu of a room without the private setting as it was", () => {

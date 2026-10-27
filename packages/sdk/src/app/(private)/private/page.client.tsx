@@ -49,6 +49,7 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 
 import { OpenFolderContext } from "@/app/(docspace)/_contexts/OpenFolderContext";
+import { RoomActionsOverrideContext } from "@/app/(rooms)/_contexts/RoomActionsOverrideContext";
 import RoomsLayout from "@/app/(rooms)/_components/rooms-layout";
 import EmptyPrivateRoomsList from "@docspace/shared/components/empty-views/empty-private-rooms-list";
 import RoomsEmptyView from "@/app/(rooms)/_components/empty-view";
@@ -56,6 +57,7 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 
 import { usePrivateRoomsPageInit } from "../_hooks/usePrivateRoomsPageInit";
 import { usePrivateRoute } from "../_hooks/usePrivateRoute";
+import { usePrivateRoomActions } from "../_hooks/usePrivateRoomActions";
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
 import { usePrivateDialogsStore } from "../_store/PrivateDialogsStore";
 import {
@@ -111,6 +113,11 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
   );
 
   const refreshRef = React.useRef<(() => void) | null>(null);
+  const refreshRooms = React.useCallback(() => refreshRef.current?.(), []);
+  // Spec: private-rooms/sdk-surface, "Membership from every entry point"
+  const privateRoomActions = usePrivateRoomActions({
+    onRoomChanged: refreshRooms,
+  });
 
   const handlePrivateChangeOwner = React.useCallback(
     (room: TFolder) => {
@@ -152,50 +159,52 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
 
   return (
     <OpenFolderContext.Provider value={openRoom}>
-      <RoomsLayout
-        folders={folders}
-        files={files}
-        total={total}
-        current={currentWithTitle}
-        pathParts={pathParts}
-        filesSettings={filesSettings}
-        portalSettings={portalSettings}
-        filesFilter={filesFilter}
-        user={user}
-        isArchive={isArchive}
-        isPrivate
-        hasEncryptionKeys={identityStore.hasKeys}
-        titleOverride={headerTitle}
-        infoPanelHeader={<PrivateInfoPanelHeader />}
-        infoPanelBody={<PrivateInfoPanelBody />}
-        emptyView={
-          isArchive ? (
-            <RoomsEmptyView
-              isFiltered={false}
-              isArchive
-              roomsPath={privateRoute("/private")}
+      <RoomActionsOverrideContext.Provider value={privateRoomActions}>
+        <RoomsLayout
+          folders={folders}
+          files={files}
+          total={total}
+          current={currentWithTitle}
+          pathParts={pathParts}
+          filesSettings={filesSettings}
+          portalSettings={portalSettings}
+          filesFilter={filesFilter}
+          user={user}
+          isArchive={isArchive}
+          isPrivate
+          hasEncryptionKeys={identityStore.hasKeys}
+          titleOverride={headerTitle}
+          infoPanelHeader={<PrivateInfoPanelHeader />}
+          infoPanelBody={<PrivateInfoPanelBody />}
+          emptyView={
+            isArchive ? (
+              <RoomsEmptyView
+                isFiltered={false}
+                isArchive
+                roomsPath={privateRoute("/private")}
+              />
+            ) : (
+              <EmptyPrivateRoomsList />
+            )
+          }
+          onPrivateInviteRoom={handlePrivateInviteRoom}
+          onPrivateChangeOwner={handlePrivateChangeOwner}
+          refreshRef={refreshRef}
+          renderCreateRoomDialog={({ visible, onClose, onRoomCreated }) => (
+            <PrivateCreateRoomDialog
+              visible={visible}
+              onClose={onClose}
+              onCreated={(roomId) => {
+                if (roomId != null) {
+                  openRoom(roomId);
+                  return;
+                }
+                onRoomCreated();
+              }}
             />
-          ) : (
-            <EmptyPrivateRoomsList />
-          )
-        }
-        onPrivateInviteRoom={handlePrivateInviteRoom}
-        onPrivateChangeOwner={handlePrivateChangeOwner}
-        refreshRef={refreshRef}
-        renderCreateRoomDialog={({ visible, onClose, onRoomCreated }) => (
-          <PrivateCreateRoomDialog
-            visible={visible}
-            onClose={onClose}
-            onCreated={(roomId) => {
-              if (roomId != null) {
-                openRoom(roomId);
-                return;
-              }
-              onRoomCreated();
-            }}
-          />
-        )}
-      />
+          )}
+        />
+      </RoomActionsOverrideContext.Provider>
     </OpenFolderContext.Provider>
   );
 };

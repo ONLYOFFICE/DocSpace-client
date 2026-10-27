@@ -40,10 +40,18 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT =
   true;
 
-const mocks = vi.hoisted(() => ({ openEditRoomDialog: vi.fn() }));
+const mocks = vi.hoisted(() => ({
+  openEditRoomDialog: vi.fn(),
+  openInviteDialog: vi.fn(),
+  openChangeOwnerDialog: vi.fn(),
+}));
 
 vi.mock("@/app/(docspace)/_store/DialogsStore", () => ({
-  useDialogsStore: () => ({ openEditRoomDialog: mocks.openEditRoomDialog }),
+  useDialogsStore: () => ({
+    openEditRoomDialog: mocks.openEditRoomDialog,
+    openInviteDialog: mocks.openInviteDialog,
+    openChangeOwnerDialog: mocks.openChangeOwnerDialog,
+  }),
 }));
 vi.mock("@/app/(docspace)/_store/InfoPanelStore", () => ({
   useInfoPanelStore: () => ({}),
@@ -52,6 +60,10 @@ vi.mock("@/app/(docspace)/_store/FilesListStore", () => ({
   useFilesListStore: () => ({}),
 }));
 
+import {
+  RoomActionsOverrideContext,
+  type RoomActionsOverride,
+} from "../_contexts/RoomActionsOverrideContext";
 import useRoomActions from "./useRoomActions";
 
 describe("useRoomActions", () => {
@@ -60,6 +72,57 @@ describe("useRoomActions", () => {
   afterEach(() => {
     act(() => root?.unmount());
     root = null;
+  });
+
+  const render = (override: RoomActionsOverride | null = null) => {
+    let actions: ReturnType<typeof useRoomActions> | null = null;
+    const Probe = () => {
+      actions = useRoomActions();
+      return null;
+    };
+    root = createRoot(document.createElement("div"));
+    act(() =>
+      root?.render(
+        <RoomActionsOverrideContext.Provider value={override}>
+          <Probe />
+        </RoomActionsOverrideContext.Provider>,
+      ),
+    );
+    return actions!;
+  };
+
+  it("Invite from the header of an open room: the private dialogs take every room action", () => {
+    const override = {
+      editRoom: vi.fn(),
+      inviteRoom: vi.fn(),
+      changeOwner: vi.fn(),
+      leaveRoom: vi.fn(),
+    };
+    const actions = render(override);
+    const room = { id: 10, title: "Vault", private: true } as never;
+
+    act(() => {
+      actions.inviteRoom(room);
+      actions.editRoom(room);
+      actions.changeOwner(room);
+    });
+
+    expect(override.inviteRoom).toHaveBeenCalledWith(room);
+    expect(override.editRoom).toHaveBeenCalledWith(room);
+    expect(override.changeOwner).toHaveBeenCalledWith(room);
+    expect(mocks.openInviteDialog).not.toHaveBeenCalled();
+    expect(mocks.openEditRoomDialog).not.toHaveBeenCalled();
+    expect(mocks.openChangeOwnerDialog).not.toHaveBeenCalled();
+  });
+
+  it("opens the generic invite outside the private pages", () => {
+    const actions = render();
+
+    act(() => actions.inviteRoom({ id: 11, title: "Team" } as never));
+
+    expect(mocks.openInviteDialog).toHaveBeenCalledWith(
+      expect.objectContaining({ roomId: 11 }),
+    );
   });
 
   it("opens the edit dialog of a private room as private", () => {

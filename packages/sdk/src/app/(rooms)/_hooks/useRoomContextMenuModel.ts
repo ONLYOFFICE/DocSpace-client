@@ -107,6 +107,7 @@ import type {
 } from "@/app/(docspace)/_hooks/useItemList";
 
 import { RoomsRefreshContext } from "../_contexts/RoomsRefreshContext";
+import { RoomActionsOverrideContext } from "../_contexts/RoomActionsOverrideContext";
 import { useRoomsOperationsStore } from "../_store/RoomsOperationsStore";
 import { trackRoomOperation } from "../_utils/trackRoomOperation";
 import { withoutMenuEntries } from "../_utils/menu-model";
@@ -172,6 +173,7 @@ export default function useRoomContextMenuModel(
   const { downloadAction } = useDownloadActions();
   const { showDuplicateToast } = useOperationToast();
   const operationsStore = useRoomsOperationsStore();
+  const actionsOverride = useContext(RoomActionsOverrideContext);
 
   const getContextMenuModel = useCallback(
     (item: TFolderItem | TFileItem): ContextMenuModel[] => {
@@ -206,6 +208,10 @@ export default function useRoomContextMenuModel(
         }
       };
       const handleLeave = () => {
+        if (actionsOverride) {
+          actionsOverride.leaveRoom(room);
+          return;
+        }
         filesSelectionStore.setBufferSelection(room);
         dialogsStore.openDialog(SDKDialogs.LeaveRoom);
       };
@@ -491,6 +497,7 @@ export default function useRoomContextMenuModel(
       infoPanelStore,
       operationsStore,
       showDuplicateToast,
+      actionsOverride,
     ],
   );
 

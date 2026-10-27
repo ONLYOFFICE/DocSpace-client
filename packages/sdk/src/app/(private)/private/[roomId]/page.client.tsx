@@ -57,6 +57,9 @@ import {
   type TFileItem,
 } from "@/app/(docspace)/_contexts/EncryptedFileActionsContext";
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
+import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
+import useRoomActions from "@/app/(rooms)/_hooks/useRoomActions";
+import { RoomActionsOverrideContext } from "@/app/(rooms)/_contexts/RoomActionsOverrideContext";
 import DocsLayout from "@/app/(personal-files)/_components/docs-layout";
 
 import { usePrivateRoomsPageInit } from "../../_hooks/usePrivateRoomsPageInit";
@@ -67,6 +70,7 @@ import { useEncryptedUpload } from "../../_hooks/useEncryptedUpload";
 import { useEncryptedFileCreation } from "../../_hooks/useEncryptedFileCreation";
 import { useEncryptedDownload } from "../../_hooks/useEncryptedDownload";
 import { useEncryptedCopyMove } from "../../_hooks/useEncryptedCopyMove";
+import { usePrivateRoomActions } from "../../_hooks/usePrivateRoomActions";
 import {
   resolvePrivateDropFolder,
   splitPrivateDrop,
@@ -104,6 +108,17 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   const filesStore = usePrivateRoomFilesStore();
   const identityStore = useEncryptionIdentityStore();
   const navigationStore = useNavigationStore();
+  const infoPanelStore = useInfoPanelStore();
+  const { roomChanged } = useRoomActions();
+  const onMembersUpdated = React.useCallback(
+    () => infoPanelStore.setIsMembersPanelUpdating(true),
+    [infoPanelStore],
+  );
+  // Spec: private-rooms/sdk-surface, "Membership from every entry point"
+  const privateRoomActions = usePrivateRoomActions({
+    onRoomChanged: roomChanged,
+    onMembersUpdated,
+  });
   const { uploadFiles } = useEncryptedUpload();
   const { createFile } = useEncryptedFileCreation(roomId);
   const { downloadFile: decryptAndSaveFile, downloadZip: decryptAndSaveZip } =
@@ -279,27 +294,29 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   return (
     <OpenFolderContext.Provider value={handleOpenFolder}>
       <EncryptedFileActionsContext.Provider value={encryptedFileActions}>
-        <DocsLayout
-          folders={folders}
-          files={files}
-          total={total}
-          current={current}
-          pathParts={pathParts}
-          filesSettings={filesSettings}
-          portalSettings={portalSettings}
-          filesFilter={filesFilter}
-          withoutFavorite
-          isPrivate
-          isArchive={isArchive}
-          hasEncryptionKeys={identityStore.hasKeys}
-          uploadFilesToFolder={
-            isArchive ? undefined : handleEncryptedUpload
-          }
-          createFileInFolder={isArchive ? undefined : createFile}
-          currentRoomId={roomId}
-          infoPanelHeader={<PrivateInfoPanelHeader />}
-          infoPanelBody={<PrivateInfoPanelBody />}
-        />
+        <RoomActionsOverrideContext.Provider value={privateRoomActions}>
+          <DocsLayout
+            folders={folders}
+            files={files}
+            total={total}
+            current={current}
+            pathParts={pathParts}
+            filesSettings={filesSettings}
+            portalSettings={portalSettings}
+            filesFilter={filesFilter}
+            withoutFavorite
+            isPrivate
+            isArchive={isArchive}
+            hasEncryptionKeys={identityStore.hasKeys}
+            uploadFilesToFolder={
+              isArchive ? undefined : handleEncryptedUpload
+            }
+            createFileInFolder={isArchive ? undefined : createFile}
+            currentRoomId={roomId}
+            infoPanelHeader={<PrivateInfoPanelHeader />}
+            infoPanelBody={<PrivateInfoPanelBody />}
+          />
+        </RoomActionsOverrideContext.Provider>
       </EncryptedFileActionsContext.Provider>
     </OpenFolderContext.Provider>
   );

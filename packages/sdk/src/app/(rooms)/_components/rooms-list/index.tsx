@@ -118,6 +118,7 @@ import RestoreRoomDialog from "../restore-room-dialog";
 import DeleteRoomDialog from "../delete-room-dialog";
 import MoveToArchiveDialog from "../move-to-archive-dialog";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
+import { RoomActionsOverrideContext } from "../../_contexts/RoomActionsOverrideContext";
 import { useRoomsTagsStore } from "../../_store/RoomsTagsStore";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
@@ -308,9 +309,18 @@ const RoomsList = ({
     (TFolderItem | TFileItem)[] | null
   >(null);
 
-  const onEditRoom = React.useCallback((item: TFolderItem | TFileItem) => {
-    setEditingRoom(item);
-  }, []);
+  const actionsOverride = React.useContext(RoomActionsOverrideContext);
+
+  const onEditRoom = React.useCallback(
+    (item: TFolderItem | TFileItem) => {
+      if (actionsOverride) {
+        actionsOverride.editRoom(item);
+        return;
+      }
+      setEditingRoom(item);
+    },
+    [actionsOverride],
+  );
 
   const onChangeOwner = React.useCallback(
     (item: TFolderItem | TFileItem) => {
@@ -922,13 +932,15 @@ const RoomsList = ({
   return (
     <RoomsRefreshContext.Provider value={fetchCurrentRooms}>
       {content}
-      <CreateEditRoomDialog
-        visible={!!editingRoom}
-        onClose={() => setEditingRoom(null)}
-        room={editingRoomData}
-        onRoomEdited={refreshSingleRoom}
-      />
-      {changingOwnerRoom ? (
+      {actionsOverride ? null : (
+        <CreateEditRoomDialog
+          visible={!!editingRoom}
+          onClose={() => setEditingRoom(null)}
+          room={editingRoomData}
+          onRoomEdited={refreshSingleRoom}
+        />
+      )}
+      {changingOwnerRoom && !actionsOverride ? (
         <ChangeRoomOwnerDialog
           visible
           onClose={() => setChangingOwnerRoom(null)}
@@ -940,18 +952,20 @@ const RoomsList = ({
           onChanged={refreshSingleRoom}
         />
       ) : null}
-      <LeaveRoomDialog
-        currentUserId={user?.id}
-        onTransferOwnership={(room) => {
-          const isPrivate = (room as { private?: boolean }).private === true;
-          if (isPrivate && onPrivateChangeOwner) {
-            onPrivateChangeOwner(room as TFolder);
-            return;
-          }
-          setChangingOwnerRoom(room);
-        }}
-      />
-      {invitingRoom ? (
+      {actionsOverride ? null : (
+        <LeaveRoomDialog
+          currentUserId={user?.id}
+          onTransferOwnership={(room) => {
+            const isPrivate = (room as { private?: boolean }).private === true;
+            if (isPrivate && onPrivateChangeOwner) {
+              onPrivateChangeOwner(room as TFolder);
+              return;
+            }
+            setChangingOwnerRoom(room);
+          }}
+        />
+      )}
+      {invitingRoom && !actionsOverride ? (
         <InvitePanel
           visible
           onClose={() => setInvitingRoom(null)}

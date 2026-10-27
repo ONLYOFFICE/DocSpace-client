@@ -59,7 +59,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 
 import api from "@docspace/shared/api";
 import { RoomsType } from "@docspace/shared/enums";
@@ -67,7 +67,10 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TCreatedBy } from "@docspace/shared/types";
 import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 
-import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
+import {
+  useDialogsStore,
+  type TEditableRoom,
+} from "@/app/(docspace)/_store/DialogsStore";
 import {
   InfoPanelView,
   useInfoPanelStore,
@@ -79,7 +82,24 @@ import type {
   TFolderItem,
 } from "@/app/(docspace)/_hooks/useItemList";
 
+import { RoomActionsOverrideContext } from "../_contexts/RoomActionsOverrideContext";
+
 type RoomItem = TFolderItem | TFileItem;
+
+/** The data the room edit dialog starts from. */
+export const getEditableRoom = (item: RoomItem): TEditableRoom => {
+  const logo = (item as unknown as { logo?: TLogo }).logo;
+  return {
+    id: item.id as number,
+    title: item.title,
+    tags: (item as unknown as { tags?: string[] }).tags ?? [],
+    roomLogo: logo?.cover ? undefined : logo?.original,
+    roomIconColor: logo?.color,
+    roomCover: logo?.cover,
+    createdBy: (item as unknown as { createdBy?: TCreatedBy }).createdBy,
+    private: (item as unknown as { private?: boolean }).private,
+  };
+};
 
 /**
  * Single-room action handlers (edit/invite/change-owner/archive/delete/info),
@@ -90,27 +110,26 @@ type RoomItem = TFolderItem | TFileItem;
 export default function useRoomActions() {
   const dialogsStore = useDialogsStore();
   const infoPanelStore = useInfoPanelStore();
+  const actionsOverride = useContext(RoomActionsOverrideContext);
   const filesListStore = useFilesListStore();
 
   const editRoom = useCallback(
     (item: RoomItem) => {
-      const logo = (item as unknown as { logo?: TLogo }).logo;
-      dialogsStore.openEditRoomDialog({
-        id: item.id as number,
-        title: item.title,
-        tags: (item as unknown as { tags?: string[] }).tags ?? [],
-        roomLogo: logo?.cover ? undefined : logo?.original,
-        roomIconColor: logo?.color,
-        roomCover: logo?.cover,
-        createdBy: (item as unknown as { createdBy?: TCreatedBy }).createdBy,
-        private: (item as unknown as { private?: boolean }).private,
-      });
+      if (actionsOverride) {
+        actionsOverride.editRoom(item);
+        return;
+      }
+      dialogsStore.openEditRoomDialog(getEditableRoom(item));
     },
-    [dialogsStore],
+    [dialogsStore, actionsOverride],
   );
 
   const inviteRoom = useCallback(
     (item: RoomItem) => {
+      if (actionsOverride) {
+        actionsOverride.inviteRoom(item);
+        return;
+      }
       dialogsStore.openInviteDialog({
         roomId: item.id as number,
         roomType:
@@ -120,18 +139,22 @@ export default function useRoomActions() {
           (item as unknown as { private?: boolean }).private ?? false,
       });
     },
-    [dialogsStore],
+    [dialogsStore, actionsOverride],
   );
 
   const changeOwner = useCallback(
     (item: RoomItem) => {
+      if (actionsOverride) {
+        actionsOverride.changeOwner(item);
+        return;
+      }
       dialogsStore.openChangeOwnerDialog({
         roomId: item.id as number,
         roomOwnerId: (item as unknown as { createdBy?: { id?: string } })
           .createdBy?.id,
       });
     },
-    [dialogsStore],
+    [dialogsStore, actionsOverride],
   );
 
   const archiveRoom = useCallback(

@@ -118,12 +118,18 @@ describe("LeaveRoomDialog", () => {
   let root: Root | null = null;
   let container: HTMLDivElement;
 
-  const leave = async () => {
+  const leave = async (
+    props: Partial<React.ComponentProps<typeof LeaveRoomDialog>> = {},
+  ) => {
     container = document.createElement("div");
     root = createRoot(container);
     await act(async () => {
       root?.render(
-        <LeaveRoomDialog currentUserId="me" onTransferOwnership={vi.fn()} />,
+        <LeaveRoomDialog
+          currentUserId="me"
+          onTransferOwnership={vi.fn()}
+          {...props}
+        />,
       );
     });
     await act(async () => {
@@ -171,6 +177,18 @@ describe("LeaveRoomDialog", () => {
     await leave();
 
     expect(mocks.revokeOwnAccessOnLeave).toHaveBeenCalledTimes(1);
+    expect(mocks.openFolder).not.toHaveBeenCalled();
+  });
+
+  it("leaves the room the private dialogs hand over and returns through their handler", async () => {
+    const onLeftOpenRoom = vi.fn();
+    const room = { ...mocks.room };
+    mocks.room = {};
+
+    await leave({ room: room as never, onClose: vi.fn(), onLeftOpenRoom });
+
+    expect(mocks.revokeOwnAccessOnLeave).toHaveBeenCalledWith(ROOM_ID, "me");
+    expect(onLeftOpenRoom).toHaveBeenCalledTimes(1);
     expect(mocks.openFolder).not.toHaveBeenCalled();
   });
 

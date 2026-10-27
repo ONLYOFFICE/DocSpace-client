@@ -1129,6 +1129,44 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
     await expect(page.getByText("Users invited")).toBeVisible();
   });
 
+  test("Invite from the header of an open room", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    const carol = await generateIdentityKeyPair();
+    const { room } = await serveRooms(mockBoth, port, {
+      memberKeys: [
+        {
+          id: "carol-1",
+          userId: CAROL.id,
+          publicKey: arrayBufferToBase64(carol.publicKey.buffer as ArrayBuffer),
+          privateKeyEnc: "",
+        },
+      ],
+    });
+    mockBoth(
+      usersWithRoomSharedHandler(port, ROOM_ID, [CAROL]),
+      ...roomMembersHandlers(port, ROOM_ID),
+    );
+    await openRoom(page, baseUrl);
+    await expect(row(page, MEMO.serverTitle)).toBeVisible();
+
+    await page.locator("#header_optional-button").click();
+    await page.locator("#option_invite-users-to-room").click();
+    await page.getByTestId("invite_panel_choose_from_list_link").click();
+    const people = page.getByTestId("invite_panel_people_selector");
+    await people.getByTestId("selector-item-0").click();
+    await people.getByTestId("selector_submit_button").click();
+    await page.getByTestId("invite_panel_send_button").click();
+    await unlock(page);
+
+    await expect
+      .poll(() => keyHolders(room, MEMO.id))
+      .toEqual([ALICE_ID, CAROL.id, FIXTURE_USER_ID].sort());
+  });
+
   // §17.2 #15
   test.fixme(
     "revoke-member: blocked while uploads are in flight, otherwise revokes",

@@ -737,7 +737,7 @@ const DocsLayoutCore = observer(
                                   )
                                 }
                               />
-                              {isInRooms ? <RoomDialogs /> : null}
+                              {isInRooms && !isPrivate ? <RoomDialogs /> : null}
                               <ShareSelector />
                               <VersionHistoryPanel />
                               <CreateFileDialog

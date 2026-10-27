@@ -57,6 +57,7 @@ import useHeaderMenu from "../../_hooks/useHeaderMenu";
 import { DeleteContext } from "../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../_contexts/FileOperationsContext";
 import { RoomActionsContext } from "@/app/(rooms)/_contexts/RoomActionsContext";
+import { RoomActionsOverrideContext } from "@/app/(rooms)/_contexts/RoomActionsOverrideContext";
 import { useHeaderContextMenu } from "../../_hooks/useHeaderContextMenu";
 import useContextMenuModel from "../../_hooks/useContextMenuModel";
 import LeaveRoomDialog from "@/app/(rooms)/_components/leave-room-dialog";
@@ -93,6 +94,7 @@ const Header = ({
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
   const roomActionsCtx = React.useContext(RoomActionsContext);
+  const roomActionsOverride = React.useContext(RoomActionsOverrideContext);
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
 
   const { getContextOptionsFolder, isRoom, changeOwner, user } =
@@ -302,10 +304,12 @@ const Header = ({
           </div>
         )}
       </div>
-      <LeaveRoomDialog
-        currentUserId={user?.id}
-        onTransferOwnership={(room) => changeOwner(room)}
-      />
+      {roomActionsOverride ? null : (
+        <LeaveRoomDialog
+          currentUserId={user?.id}
+          onTransferOwnership={(room) => changeOwner(room)}
+        />
+      )}
     </>
   );
 };

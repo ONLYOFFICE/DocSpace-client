@@ -35,7 +35,7 @@
 
 import DangerReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
@@ -99,6 +99,21 @@ const ApplyMetadataDialog = ({
     if (await onApply(conflict)) onClose();
     else setIsApplying(false);
   };
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Enter" || isApplying) return;
+      if ((e.target as Element | null)?.closest("button, a, [role='button']"))
+        return;
+
+      e.preventDefault();
+      apply();
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => document.removeEventListener("keydown", onKeyDown);
+  });
 
   return (
     <ModalDialog

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
+import { type SyntheticEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { AsideHeader } from "@onlyoffice/apps-ui-kit/components/aside";
@@ -102,8 +102,18 @@ const ConditionsPanel = ({
   const changeDraft = (fieldId: number, draft: TConditionDraft) =>
     setDrafts((current) => ({ ...current, [fieldId]: draft }));
 
+  const apply = (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    if (isValid && template) onApply(toFilterState(template, drafts));
+  };
+
   return (
-    <div className={styles.panel} data-testid="metadata_filter_panel">
+    <form
+      className={styles.panel}
+      onSubmit={apply}
+      data-testid="metadata_filter_panel"
+    >
       <AsideHeader
         header={t("Common:Filter")}
         isBackButton
@@ -157,7 +167,7 @@ const ConditionsPanel = ({
           scale
           label={t("Metadata:ApplyFilter")}
           isDisabled={!isValid}
-          onClick={() => template && onApply(toFilterState(template, drafts))}
+          type="submit"
           testId="metadata_filter_apply"
         />
         <Button
@@ -168,7 +178,7 @@ const ConditionsPanel = ({
           testId="metadata_filter_cancel"
         />
       </div>
-    </div>
+    </form>
   );
 };
 

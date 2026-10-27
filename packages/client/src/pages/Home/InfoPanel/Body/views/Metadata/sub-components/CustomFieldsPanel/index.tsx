@@ -85,15 +85,26 @@ const CustomFieldsPanel = ({
     save,
   } = useCustomFieldsForm({ fields, withNewField, onSubmit, onClose });
 
+  const submit = () => {
+    if (newField) {
+      if (canSubmitNewField) submitNewField();
+      return;
+    }
+
+    if (canSave && !isSaving) save();
+  };
+
   return (
     <ModalDialog
       visible
       withBodyScroll
       withoutPadding
+      withForm
       displayType={ModalDialogType.aside}
       isBackButton={!!newField}
       onBackClick={closeNewField}
       onClose={newField ? closeNewField : onClose}
+      onSubmit={submit}
       dataTestId="metadata_custom_fields_panel"
     >
       <ModalDialog.Header>
@@ -141,7 +152,7 @@ const CustomFieldsPanel = ({
             size={ButtonSize.normal}
             label={t("Common:AddButton")}
             isDisabled={!canSubmitNewField}
-            onClick={submitNewField}
+            type="submit"
             testId="metadata_custom_field_submit_button"
           />
         ) : (
@@ -152,7 +163,7 @@ const CustomFieldsPanel = ({
             label={t("Common:SaveButton")}
             isDisabled={!canSave}
             isLoading={isSaving}
-            onClick={save}
+            type="submit"
             testId="metadata_custom_fields_save_button"
           />
         )}

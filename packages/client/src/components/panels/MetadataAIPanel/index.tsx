@@ -162,6 +162,10 @@ const MetadataAIDialog = ({
       : t("Files:GenerateMetadata");
   };
 
+  const submit = () => {
+    if (canSave && !isSaving) save();
+  };
+
   const loader = (
     <div className={styles.loader}>
       <Loader type={LoaderTypes.track} size="64px" />
@@ -173,8 +177,12 @@ const MetadataAIDialog = ({
       visible
       withBodyScroll
       withoutPadding
+      withForm
       displayType={ModalDialogType.aside}
-      onClose={onClose}
+      isBackButton={isReview}
+      onBackClick={discard}
+      onClose={isReview ? discard : onClose}
+      onSubmit={submit}
       dataTestId="metadata_ai_panel"
     >
       <ModalDialog.Header>{getTitle()}</ModalDialog.Header>
@@ -268,7 +276,7 @@ const MetadataAIDialog = ({
           label={t("Metadata:SaveChanges")}
           isDisabled={!canSave}
           isLoading={isSaving}
-          onClick={save}
+          type="submit"
           testId="metadata_ai_save_button"
         />
         <Button

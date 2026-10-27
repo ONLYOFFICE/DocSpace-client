@@ -118,6 +118,15 @@ const TemplatePanel = ({
     ? t("Metadata:TemplateNameExists")
     : "";
 
+  const submit = () => {
+    if (fieldForm) {
+      if (isValidField(fieldForm) && !nameError) submitField();
+      return;
+    }
+
+    if (canSave && !templateNameError && !isSaving) onSave();
+  };
+
   const getTitle = () => {
     if (fieldForm)
       return isNewField ? t("Metadata:AddField") : t("Metadata:EditField");
@@ -130,11 +139,13 @@ const TemplatePanel = ({
       <ModalDialog
         visible
         withBodyScroll
+        withForm
         displayType={ModalDialogType.aside}
         isBackButton={!!fieldForm}
         isCloseable={!isDeleteConfirmVisible}
         onBackClick={closeField}
         onClose={fieldForm ? closeField : onClose}
+        onSubmit={submit}
         dataTestId="metadata_template_panel"
       >
         <ModalDialog.Header>{getTitle()}</ModalDialog.Header>
@@ -169,7 +180,7 @@ const TemplatePanel = ({
                 isNewField ? t("Common:AddButton") : t("Common:SaveButton")
               }
               isDisabled={!isValidField(fieldForm) || !!nameError}
-              onClick={submitField}
+              type="submit"
               testId="metadata_field_submit_button"
             />
           ) : (
@@ -180,7 +191,7 @@ const TemplatePanel = ({
               label={t("Common:SaveButton")}
               isDisabled={!canSave || !!templateNameError}
               isLoading={isSaving}
-              onClick={onSave}
+              type="submit"
               testId="metadata_template_save_button"
             />
           )}

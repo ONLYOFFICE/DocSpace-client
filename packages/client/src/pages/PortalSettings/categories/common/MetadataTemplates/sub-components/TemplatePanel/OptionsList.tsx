@@ -88,6 +88,9 @@ const OptionsList = ({
                   value={option.value}
                   hasError={duplicates[index]}
                   onChange={(e) => onChange(index, e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") e.preventDefault();
+                  }}
                   placeholder={t("Metadata:OptionValue")}
                   maxLength={METADATA_NAME_MAX_LENGTH}
                   scale

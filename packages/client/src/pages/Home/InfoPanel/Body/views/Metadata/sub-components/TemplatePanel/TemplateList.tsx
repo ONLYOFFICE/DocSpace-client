@@ -143,6 +143,12 @@ const TemplateList = ({
             })}
             onClick={() => onSelect(template)}
             onDoubleClick={() => onOpen(template)}
+            onKeyDown={(e) => {
+              if (e.key !== "Enter") return;
+
+              e.preventDefault();
+              onOpen(template);
+            }}
             data-testid={`metadata_template_item_${template.id}`}
           >
             <Text

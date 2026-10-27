@@ -177,8 +177,9 @@ pre-bundling would freeze the files being edited. The Next apps share
 `scripts/ui-kit-dev.cjs`, which each `next.config.js` calls twice: once to
 refuse a production build while the variable is set, once from its `webpack`
 hook to alias the package to the checkout, pin ui-kit's peers to the app's own
-copies, and add the checkout to the `next-swc-loader` rules so its TypeScript
-compiles. The CSS rules need nothing -- they key off the extension, so the
+copies, salt webpack's persistent cache with the checkout path (so switching
+modes never serves modules compiled in the other one), and add the checkout to
+the `next-swc-loader` rules so its TypeScript compiles. The CSS rules need nothing -- they key off the extension, so the
 checkout's `*.module.scss` go through the app's own CSS Modules pipeline and
 come out named by it rather than by ui-kit's rollup config.
 
@@ -211,8 +212,12 @@ Four properties keep it honest:
   variable before publishing a ui-kit release.
 
 Both halves read the checkout's own `peerDependencies` rather than a hand-picked
-list -- Vite through `resolve.dedupe`, webpack by aliasing each peer to the
-app's copy. Every peer is a package both trees resolve separately, and a second
+list -- Vite through `resolve.dedupe`, webpack by resolving a peer imported
+from inside the checkout as if the app imported it (a `beforeResolve` hook that
+swaps the request context to the app directory). Not by aliasing the package
+directory: an absolute alias skips `exports`, so a package with nothing else
+(react-router) stops resolving, and a peer whose `package.json` is not exported
+used to be skipped silently, leaving a second copy. Every peer is a package both trees resolve separately, and a second
 copy of anything holding module state (a context, a store, a socket) is a silent
 behaviour change. A hand-picked subset rots on the next bump either side.
 

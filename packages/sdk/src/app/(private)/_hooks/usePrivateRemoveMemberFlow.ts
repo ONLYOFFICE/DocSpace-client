@@ -39,7 +39,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
-import { getGroupById } from "@docspace/shared/api/groups";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
@@ -72,8 +71,8 @@ type UsePrivateRemoveMemberFlowReturn = {
   isLoading: boolean;
 };
 
-const loadRoomEncryption = () =>
-  import("@docspace/shared/services/private-room/room-encryption");
+const loadMemberFlows = () =>
+  import("@docspace/shared/services/private-room/room-member-flows");
 
 export const usePrivateRemoveMemberFlow = (
   roomId: number | string,
@@ -110,47 +109,17 @@ export const usePrivateRemoveMemberFlow = (
 
         if (controller.signal.aborted) return;
 
-        // 2. Resolve the set of user IDs whose DEK wraps must be removed.
-        // For a group, expand to its member list (includeMembers=true).
-        // Mirrors: packages/client/.../Members/sub-components/User.tsx:165-171
-        let revokedIds: string[] = [userId];
-        if (isGroup) {
-          const group = await getGroupById(userId, true);
-          revokedIds = (group.members ?? []).map((m) => String(m.id));
-          // Empty group: nothing to revoke on the encryption side.
-          if (revokedIds.length === 0) return;
-        }
+        // 2. Strip the removed member, or a group's members, from every
+        // file_keys ACL in the room. Best-effort: failures leave dangling wraps
+        // but grant no decryption ability, as membership is already gone.
+        const { revokeRemovedMemberAccess } = await loadMemberFlows();
+        const notice = await revokeRemovedMemberAccess(t, targetRoomId, {
+          id: userId,
+          isGroup,
+        });
 
         if (controller.signal.aborted) return;
-
-        // 3. Strip the revoked user(s) from every file_keys ACL in the room.
-        // Best-effort: failures here leave dangling wraps but don't grant
-        // decryption ability (the user lost room membership in step 1).
-        try {
-          const { revokeMemberFromEncryptedRoom } = await loadRoomEncryption();
-          const results = await revokeMemberFromEncryptedRoom(
-            Number(targetRoomId),
-            revokedIds,
-            {},
-          );
-
-          if (controller.signal.aborted) return;
-
-          const failures = results.filter((r) => !r.success);
-          if (failures.length > 0) {
-            toastr.warning(
-              t("Common:EncryptedRevokePartialFailure", {
-                count: failures.length,
-              }),
-            );
-            return;
-          }
-          if (results.length > 0) {
-            toastr.success(t("Common:EncryptedRevokeCompleted"));
-          }
-        } catch {
-          toastr.error(t("Common:EncryptedRevokeFailed"));
-        }
+        if (notice) toastr[notice.level](notice.text);
       } catch (error) {
         // Step 1 (server ACL) failure: surface a localized encryption error.
         toastr.error(getEncryptionErrorMessage(t, error));

@@ -39,6 +39,7 @@
 "use client";
 
 import React from "react";
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly, isMobile } from "react-device-detect";
 
@@ -186,7 +187,12 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
   );
 
   const handleRemoveClick = React.useCallback(() => {
-    if (guardReason || isLoading) return;
+    // Spec: private-rooms/sdk-surface, "Member removal is blocked during active uploads"
+    if (guardReason) {
+      toastr.warning(guardReason);
+      return;
+    }
+    if (isLoading) return;
     dialogs.openRemoveUser({
       roomId,
       userId,
@@ -281,13 +287,14 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
           iconName={RemoveSvgUrl}
           size={16}
           isClickable={!isLoading}
-          isDisabled={!!guardReason || isLoading}
+          isDisabled={isLoading}
           onClick={handleRemoveClick}
-          title={guardReason ?? t("Common:RoomMembersRemoveUser")}
+          title={t("Common:RoomMembersRemoveUser")}
+          dataTestId="private_member_remove_button"
         />
       ) : null}
     </div>
   );
 };
 
-export default PrivateMemberUser;
+export default observer(PrivateMemberUser);

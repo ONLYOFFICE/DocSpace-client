@@ -3,7 +3,7 @@
   "content": "AI filled {{count}} fields. Review the values before saving.",
   "content_en_sha1_hash": "af04851d3075fdf713a1507042f7e789fa3888ff",
   "created_at": "2026-10-21T10:17:41.252Z",
-  "updated_at": "2026-10-21T10:20:42.121Z",
+  "updated_at": "2026-10-27T19:13:18.306Z",
   "comment": {
     "text": "Plural summary at the top of the AI metadata review step after AI filled fields; {{count}} is the number of fields.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/sub-components/ReviewNotes.tsx",
-      "line_number": 58,
-      "context": "if (!count) return t(\"Metadata:AINoChanges\");\n \n if (mode === \"fill\") {\n return count === 1\n ? t(\"Metadata:AIFilledFields_one\", { count })\n : t(\"Metadata:AIFilledFields_other\", { count });\n }\n \n return count === 1\n ? t(\"Metadata:AISuggestedFields_one\", { count })\n : t(\"Metadata:AISuggestedFields_other\", { count });",
+      "line_number": 62,
+      "context": "}\n \n if (mode === \"fill\") {\n return count === 1\n ? t(\"Metadata:AIFilledFields_one\", { count })\n : t(\"Metadata:AIFilledFields_other\", { count });\n }\n \n return count === 1\n ? t(\"Metadata:AISuggestedFields_one\", { count })\n : t(\"Metadata:AISuggestedFields_other\", { count });",
       "module": "/packages/client"
     }
   ],

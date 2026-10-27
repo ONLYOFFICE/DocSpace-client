@@ -3,7 +3,7 @@
   "content": "AI requests are paused until {{date}}. Raise the limit in the AI settings to continue now.",
   "content_en_sha1_hash": "3b3f1385a458c62f9a63c7ebaa7e088a438a4b9c",
   "created_at": "2026-10-23T12:27:54.771Z",
-  "updated_at": "2026-10-27T11:04:31.086Z",
+  "updated_at": "2026-10-27T19:13:18.281Z",
   "comment": {
     "text": "Description under the AI spending limit notice, shown to administrators; {{date}} is the localized date when the limit resets. A button below leads to the AI settings spending limits page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
-      "line_number": 133,
+      "line_number": 135,
       "context": "return (\n <ServiceLimitNotice\n title={t(\"Common:AILimitReached\")}\n description={\n isAdmin\n ? t(\"Common:AILimitReachedResetsOn\", { date })\n : t(\"Common:AILimitReachedContactAdminResetsOn\", { date })\n }\n buttonLabel={t(\"Common:ChangeAILimit\")}\n onClick={isAdmin ? openLimits : undefined}\n />",
       "module": "/packages/client"
     },

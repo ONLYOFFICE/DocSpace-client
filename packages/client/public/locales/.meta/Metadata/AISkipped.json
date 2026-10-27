@@ -3,7 +3,7 @@
   "content": "<strong>Not read:</strong> {{files}}",
   "content_en_sha1_hash": "3ae9f65fe6487c16e52083d3b27ffaefb4e4f4f9",
   "created_at": "2026-10-21T10:17:41.257Z",
-  "updated_at": "2026-10-21T10:20:42.121Z",
+  "updated_at": "2026-10-27T19:13:18.311Z",
   "comment": {
     "text": "Note in the AI metadata review step; {{files}} is a comma-separated list of file names AI could not read. <strong> wraps the bold lead-in; keep the tags and the colon inside them.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/sub-components/ReviewNotes.tsx",
-      "line_number": 92,
+      "line_number": 96,
       "context": "{skipped.length ? (\n <Text className={styles.notesText} fontSize=\"12px\" lineHeight=\"16px\">\n <Trans\n t={t}\n ns=\"Metadata\"\n i18nKey=\"AISkipped\"\n values={{ files: skipped.join(\", \") }}\n components={{ strong: <strong /> }}\n />\n </Text>\n ) : null}",
       "module": "/packages/client"
     }

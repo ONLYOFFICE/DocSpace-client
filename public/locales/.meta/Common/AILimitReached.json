@@ -3,7 +3,7 @@
   "content": "AI spending limit reached",
   "content_en_sha1_hash": "ce3224f6b0e14dd5decae190689dfd7df99f3abf",
   "created_at": "2026-10-23T12:27:54.735Z",
-  "updated_at": "2026-10-27T11:04:31.086Z",
+  "updated_at": "2026-10-27T19:13:18.280Z",
   "comment": {
     "text": "Title of the notice shown in the AI chat, AI agent and metadata AI panel when an AI request is blocked because the AI spending limit set for the portal or user has been reached. Short heading, no trailing period.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
-      "line_number": 130,
+      "line_number": 132,
       "context": "navigate(\"/portal-settings/ai-settings/limits\");\n };\n \n return (\n <ServiceLimitNotice\n title={t(\"Common:AILimitReached\")}\n description={\n isAdmin\n ? t(\"Common:AILimitReachedResetsOn\", { date })\n : t(\"Common:AILimitReachedContactAdminResetsOn\", { date })\n }",
       "module": "/packages/client"
     },

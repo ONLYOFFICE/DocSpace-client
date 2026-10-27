@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-10-27T14:49:14.570Z",
+  "updated_at": "2026-10-27T19:13:17.731Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -583,7 +583,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
-      "line_number": 286,
+      "line_number": 290,
       "context": "testId=\"metadata_ai_save_button\"\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={isReview ? t(\"Metadata:Discard\") : t(\"Common:CancelButton\")}\n isDisabled={isSaving}\n onClick={isReview ? discard : onClose}\n testId=\"metadata_ai_cancel_button\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -661,8 +661,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CascadeBlock/ApplyMetadataDialog.tsx",
-      "line_number": 177,
-      "context": "onClick={apply}\n testId=\"metadata_apply_button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n isDisabled={isApplying}\n onClick={onClose}\n testId=\"metadata_apply_cancel_button\"\n />\n </ModalDialog.Footer>",
+      "line_number": 170,
+      "context": "type=\"submit\"\n testId=\"metadata_apply_button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n isDisabled={isApplying}\n onClick={onClose}\n testId=\"metadata_apply_cancel_button\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
     {
@@ -752,7 +752,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
       "line_number": 201,
-      "context": "/>\n )}\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={fieldForm ? closeField : onClose}\n testId=\"metadata_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
+      "context": "/>\n )}\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n isDisabled={isSaving}\n onClick={fieldForm ? closeField : onClose}\n testId=\"metadata_cancel_button\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
     {

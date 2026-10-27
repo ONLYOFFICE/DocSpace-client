@@ -3,7 +3,7 @@
   "content": "No metadata templates found",
   "content_en_sha1_hash": "e0bcd5f30721678dc177131fd3eb8c309275205a",
   "created_at": "2026-10-27T14:48:36.792Z",
-  "updated_at": "2026-10-27T14:50:50.092Z",
+  "updated_at": "2026-10-27T19:13:18.740Z",
   "comment": {
     "text": "Empty-state title of the template picker in the info panel when the search matches nothing. Keep the full term metadata template: the product also has document templates and room templates.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/TemplateList.tsx",
-      "line_number": 180,
+      "line_number": 178,
       "context": ") : (\n <EmptyScreenContainer\n className={styles.emptyScreen}\n imageSrc={isBase ? EmptyFilterLightSvgUrl : EmptyFilterDarkSvgUrl}\n imageAlt=\"\"\n headerText={t(\"Metadata:NotFoundTemplates\")}\n descriptionText={t(\"Metadata:NotFoundTemplatesDescription\")}\n />\n )}\n </div>\n );",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Enter field name",
   "content_en_sha1_hash": "affef163fedd9049335c1af11a3e976801e2dc73",
   "created_at": "2026-10-21T10:17:41.270Z",
-  "updated_at": "2026-10-27T14:49:15.584Z",
+  "updated_at": "2026-10-27T19:13:18.722Z",
   "comment": {
     "text": "Placeholder of the field name input in the metadata template field editor and in the custom field form.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/CustomFieldRow.tsx",
-      "line_number": 151,
+      "line_number": 161,
       "context": "<div className={styles.inputRow}>\n <TextInput\n type={InputType.text}\n value={draft.name}\n onChange={(e) => onChange({ ...draft, name: e.target.value })}\n placeholder={t(\"Metadata:EnterFieldName\")}\n maxLength={METADATA_NAME_MAX_LENGTH}\n hasError={!!nameError}\n scale\n testId=\"metadata_custom_field_name_input\"\n />",
       "module": "/packages/client"
     },

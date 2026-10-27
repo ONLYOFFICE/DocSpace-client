@@ -3,7 +3,7 @@
   "content": "Field name",
   "content_en_sha1_hash": "f08ab394a08fab914fec4dcbe3d645010ddc09f8",
   "created_at": "2026-10-21T10:17:41.265Z",
-  "updated_at": "2026-10-27T14:49:15.582Z",
+  "updated_at": "2026-10-27T19:13:18.719Z",
   "comment": {
     "text": "Label of the name input for a custom metadata field (a free field added to one item, outside any template), in the info panel.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/CustomFieldRow.tsx",
-      "line_number": 142,
+      "line_number": 152,
       "context": "<div className={styles.newField}>\n <FieldContainer\n labelVisible\n isVertical\n removeMargin\n labelText={t(\"Metadata:CustomFieldName\")}\n hasError={!!nameError}\n errorMessage={nameError}\n >\n <div className={styles.inputRow}>\n <TextInput",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "<strong>No values found for:</strong> {{fields}}",
   "content_en_sha1_hash": "b7a7604c487e763d93a6fa8b6acd80a90eef0455",
   "created_at": "2026-10-21T10:17:41.254Z",
-  "updated_at": "2026-10-21T10:20:42.121Z",
+  "updated_at": "2026-10-27T19:13:18.310Z",
   "comment": {
     "text": "Note in the AI metadata review step; {{fields}} is a comma-separated list of field names AI found no value for. <strong> wraps the bold lead-in; keep the tags and the colon inside them.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/sub-components/ReviewNotes.tsx",
-      "line_number": 81,
+      "line_number": 85,
       "context": "{notFound.length ? (\n <Text className={styles.notesText} fontSize=\"12px\" lineHeight=\"16px\">\n <Trans\n t={t}\n ns=\"Metadata\"\n i18nKey=\"AINotFound\"\n values={{ fields: notFound.join(\", \") }}\n components={{ strong: <strong /> }}\n />\n </Text>\n ) : null}",
       "module": "/packages/client"
     }

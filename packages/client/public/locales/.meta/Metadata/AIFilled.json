@@ -3,7 +3,7 @@
   "content": "Filled by AI",
   "content_en_sha1_hash": "b460eb37bc119544e0bab6245a895575c7357d2c",
   "created_at": "2026-10-27T14:48:36.254Z",
-  "updated_at": "2026-10-27T14:50:50.153Z",
+  "updated_at": "2026-10-27T19:13:18.705Z",
   "comment": {
     "text": "Tooltip and screen reader label of the AI icon next to a field name in the review step of the Fill metadata side panel; marks the fields whose values AI has just filled, so the user knows what to check. Short past participle phrase.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/AIFilledLabel.tsx",
-      "line_number": 52,
-      "context": "return (\n <TooltipContainer\n as=\"span\"\n className={styles.aiFilledLabel}\n title={t(\"Metadata:AIFilled\")}\n data-testid=\"metadata_ai_filled_mark\"\n >\n <ReactSVG\n src={AISvgUrl}\n wrapper=\"span\"",
+      "line_number": 59,
+      "context": "const label = (\n <TooltipContainer\n as=\"span\"\n className={styles.aiFilledLabel}\n title={t(\"Metadata:AIFilled\")}\n data-testid=\"metadata_ai_filled_mark\"\n >\n <ReactSVG\n src={AISvgUrl}\n wrapper=\"span\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/AIFilledLabel.tsx",
-      "line_number": 52,
-      "context": "return (\n <TooltipContainer\n as=\"span\"\n className={styles.aiFilledLabel}\n title={t(\"Metadata:AIFilled\")}\n data-testid=\"metadata_ai_filled_mark\"\n >\n <ReactSVG\n src={AISvgUrl}\n wrapper=\"span\"",
+      "line_number": 59,
+      "context": "const label = (\n <TooltipContainer\n as=\"span\"\n className={styles.aiFilledLabel}\n title={t(\"Metadata:AIFilled\")}\n data-testid=\"metadata_ai_filled_mark\"\n >\n <ReactSVG\n src={AISvgUrl}\n wrapper=\"span\"",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Ask the Full admin to create a metadata template.",
   "content_en_sha1_hash": "6abc7d296f120725c5ca8bb1ffce2ca049a3d013",
   "created_at": "2026-10-27T14:48:36.458Z",
-  "updated_at": "2026-10-27T14:50:50.092Z",
+  "updated_at": "2026-10-27T19:13:18.737Z",
   "comment": {
     "text": "Description under the empty-state heading of the Metadata templates side panel in the info panel, shown to users who are neither the owner nor a Full admin and therefore cannot create metadata templates. Imperative instruction to ask the Full admin; use the language's super-admin term, never workspace administrator or a plain administrator. Keep the full term metadata template: the product also has document templates and room templates.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/TemplateList.tsx",
-      "line_number": 103,
+      "line_number": 101,
       "context": ": t(\"Metadata:NoTemplatesAvailable\")\n }\n descriptionText={\n isAdmin\n ? t(\"Metadata:CreateTemplateInSettings\")\n : t(\"Metadata:AskAdminToCreateTemplate\")\n }\n buttons={\n isAdmin ? (\n <ActionButton\n as={Link}",
       "module": "/packages/client"
     }

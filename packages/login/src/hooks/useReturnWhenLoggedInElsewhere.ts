@@ -48,6 +48,9 @@ export const useReturnWhenLoggedInElsewhere = (enabled: boolean) => {
     if (!enabled) return;
 
     let checking = false;
+    // Set on cleanup: a check still in flight then must not navigate, or it
+    // would override where the login form itself is taking the user.
+    let cancelled = false;
 
     const check = async () => {
       if (checking || document.visibilityState !== "visible") return;
@@ -61,7 +64,8 @@ export const useReturnWhenLoggedInElsewhere = (enabled: boolean) => {
           skipUnauthorized: true,
         });
 
-        if (isAuthenticated === true) window.location.replace("/");
+        if (isAuthenticated === true && !cancelled)
+          window.location.replace("/");
       } catch {
         // No answer about the session: stay on the form.
       } finally {
@@ -73,6 +77,7 @@ export const useReturnWhenLoggedInElsewhere = (enabled: boolean) => {
     window.addEventListener("focus", check);
 
     return () => {
+      cancelled = true;
       document.removeEventListener("visibilitychange", check);
       window.removeEventListener("focus", check);
     };

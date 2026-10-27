@@ -7,6 +7,7 @@
   "AIBusy": "AI provayderi məşğuldur. Bir dəqiqədən sonra yenidən cəhd edin.",
   "AIFailed": "AI sorğunu emal edə bilmədi. Daha sonra yenidən cəhd edin.",
   "AIFillDescription": "AI məzmunu təhlil edəcək və boş sahələr üçün dəyərlər təklif edəcək. Yadda saxlamazdan əvvəl təklifləri nəzərdən keçirin.",
+  "AIFilled": "AI tərəfindən dolduruldu",
   "AIFilledFields_one": "AI {{count}} sahəni doldurdu. Yadda saxlamazdan əvvəl dəyərləri nəzərdən keçirin.",
   "AIFilledFields_other": "AI {{count}} sahəni doldurdu. Yadda saxlamazdan əvvəl dəyərləri nəzərdən keçirin.",
   "AIFillingTitle": "Metadata doldurulur",

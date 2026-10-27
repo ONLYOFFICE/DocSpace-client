@@ -40,15 +40,17 @@ import type { TMetadataInput } from "@docspace/shared/utils/metadata";
 
 import type { TTemplateForm } from "../../types";
 import { getFieldInputError } from "../../utils";
+import AIFilledLabel from "../AIFilledLabel";
 import FieldInput from "../FieldInput";
 import styles from "../Panel.module.scss";
 
 type TemplateFormProps = {
   form: TTemplateForm;
+  filledFieldIds?: number[];
   onChange: (fieldId: number, input: TMetadataInput) => void;
 };
 
-const TemplateForm = ({ form, onChange }: TemplateFormProps) => {
+const TemplateForm = ({ form, filledFieldIds, onChange }: TemplateFormProps) => {
   const { t, i18n } = useTranslation(["Metadata", "Common"]);
 
   return (
@@ -67,7 +69,13 @@ const TemplateForm = ({ form, onChange }: TemplateFormProps) => {
             labelVisible
             isVertical
             removeMargin
-            labelText={field.name}
+            labelText={
+              filledFieldIds?.includes(field.id) ? (
+                <AIFilledLabel>{field.name}</AIFilledLabel>
+              ) : (
+                field.name
+              )
+            }
             hasError={!!error}
             errorMessage={error ?? undefined}
           >

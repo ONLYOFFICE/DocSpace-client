@@ -171,9 +171,11 @@ export const useMetadataAIPanel = ({
     setForms(nextForms.forms);
     setDrafts(nextDrafts.drafts);
     setSummary({
-      count: nextForms.count + nextDrafts.count,
+      count: nextForms.fieldIds.length + nextDrafts.keys.length,
       notFound: getFillNotFound(result.unresolved, forms),
       skipped: getSkippedTitles(result.skipped),
+      filledFieldIds: nextForms.fieldIds,
+      filledCustomKeys: nextDrafts.keys,
     });
     setPhase("review");
   };

@@ -7,6 +7,7 @@
   "AIBusy": "Poskytovateľ AI je zaneprázdnený. Skúste to znova o minútu.",
   "AIFailed": "AI nemohla spracovať požiadavku. Skúste to neskôr.",
   "AIFillDescription": "AI analyzuje obsah a navrhne hodnoty pre prázdne polia. Pred uložením návrhy skontrolujte.",
+  "AIFilled": "Vyplnené pomocou AI",
   "AIFilledFields_one": "AI vyplnila {{count}} pole. Pred uložením hodnoty skontrolujte.",
   "AIFilledFields_other": "Polia vyplnené AI: {{count}}. Pred uložením hodnoty skontrolujte.",
   "AIFillingTitle": "Vypĺňanie metadát",

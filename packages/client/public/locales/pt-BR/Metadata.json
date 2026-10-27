@@ -7,6 +7,7 @@
   "AIBusy": "O provedor de IA está ocupado. Tente novamente em um minuto.",
   "AIFailed": "A IA não conseguiu processar a solicitação. Tente novamente mais tarde.",
   "AIFillDescription": "A IA analisará o conteúdo e sugerirá valores para os campos vazios. Revise as sugestões antes de salvar.",
+  "AIFilled": "Preenchido pela IA",
   "AIFilledFields_one": "A IA preencheu {{count}} campo. Revise os valores antes de salvar.",
   "AIFilledFields_other": "A IA preencheu {{count}} campos. Revise os valores antes de salvar.",
   "AIFillingTitle": "Preenchendo metadados",

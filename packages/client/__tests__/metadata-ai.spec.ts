@@ -163,6 +163,7 @@ test.describe("Metadata AI", () => {
 
     await expect(panel.getByTestId("metadata_ai_review_notes")).toBeVisible();
     await expect(panel.getByTestId("metadata_ai_saved_metadata")).toHaveCount(0);
+    await expect(panel.getByTestId("metadata_ai_filled_mark")).toHaveCount(4);
     await expect(panel.getByTestId("metadata_ai_save_button")).toBeEnabled();
 
     await expectScreenshot(page, [

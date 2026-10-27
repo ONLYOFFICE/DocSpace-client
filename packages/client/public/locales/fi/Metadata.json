@@ -7,6 +7,7 @@
   "AIBusy": "AI-palveluntarjoaja on varattu. Yritä uudelleen minuutin kuluttua.",
   "AIFailed": "AI ei pystynyt käsittelemään pyyntöä. Yritä myöhemmin uudelleen.",
   "AIFillDescription": "AI analysoi sisällön ja ehdottaa arvoja tyhjiin kenttiin. Tarkista ehdotukset ennen tallentamista.",
+  "AIFilled": "AI:n täyttämä",
   "AIFilledFields_one": "AI täytti {{count}} kentän. Tarkista arvot ennen tallentamista.",
   "AIFilledFields_other": "AI täytti {{count}} kenttää. Tarkista arvot ennen tallentamista.",
   "AIFillingTitle": "Täytetään metatietoja",

@@ -51,6 +51,7 @@ import styles from "../MetadataAIPanel.module.scss";
 type FillFormsProps = {
   metadata: TEntryMetadata | null;
   forms: TTemplateForm[];
+  filledFieldIds?: number[];
   customFields: ReactNode;
   isAnalyzing: boolean;
   isReadOnly: boolean;
@@ -72,6 +73,7 @@ const SectionTitle = ({ children }: { children: string }) => (
 const FillForms = ({
   metadata,
   forms,
+  filledFieldIds,
   customFields,
   isAnalyzing,
   isReadOnly,
@@ -93,6 +95,7 @@ const FillForms = ({
             {withTitles ? <SectionTitle>{form.template.name}</SectionTitle> : null}
             <TemplateForm
               form={form}
+              filledFieldIds={filledFieldIds}
               onChange={(fieldId, input) =>
                 onChange(form.template.id, fieldId, input)
               }

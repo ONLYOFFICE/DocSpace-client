@@ -7,6 +7,7 @@
   "AIBusy": "AI sağlayıcısı meşgul. Bir dakika sonra tekrar deneyin.",
   "AIFailed": "AI isteği işleyemedi. Daha sonra tekrar deneyin.",
   "AIFillDescription": "AI içeriği analiz edecek ve boş alanlar için değerler önerecek. Kaydetmeden önce önerileri gözden geçirin.",
+  "AIFilled": "AI tarafından dolduruldu",
   "AIFilledFields_one": "AI {{count}} alanı doldurdu. Kaydetmeden önce değerleri gözden geçirin.",
   "AIFilledFields_other": "AI {{count}} alanı doldurdu. Kaydetmeden önce değerleri gözden geçirin.",
   "AIFillingTitle": "Meta veri dolduruluyor",

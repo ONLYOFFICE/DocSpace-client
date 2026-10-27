@@ -7,6 +7,7 @@
   "AIBusy": "AI provajder je zauzet. Pokušajte ponovo za minut.",
   "AIFailed": "AI nije mogao da obradi zahtev. Pokušajte ponovo kasnije.",
   "AIFillDescription": "AI će analizirati sadržaj i predložiti vrednosti za prazna polja. Pregledajte predloge pre čuvanja.",
+  "AIFilled": "Popunio AI",
   "AIFilledFields_one": "AI je popunio {{count}} polje. Pregledajte vrednosti pre čuvanja.",
   "AIFilledFields_other": "AI je popunio {{count}} polja. Pregledajte vrednosti pre čuvanja.",
   "AIFillingTitle": "Popunjavanje metapodataka",

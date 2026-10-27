@@ -143,6 +143,7 @@ const MetadataAIDialog = ({
     <CustomFieldList
       drafts={drafts}
       metadata={metadata}
+      filledKeys={summary?.filledCustomKeys}
       onChange={changeDraft}
       onRemove={isFill ? undefined : removeDraft}
     />
@@ -244,6 +245,7 @@ const MetadataAIDialog = ({
               <FillForms
                 metadata={metadata}
                 forms={forms}
+                filledFieldIds={summary?.filledFieldIds}
                 customFields={drafts.length ? customFields : null}
                 isAnalyzing={isAnalyzing}
                 isReadOnly={!isReview}

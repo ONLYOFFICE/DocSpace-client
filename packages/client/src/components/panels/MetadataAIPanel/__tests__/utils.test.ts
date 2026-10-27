@@ -216,7 +216,7 @@ describe("fill", () => {
   });
 
   it("puts the values AI found into the form and saves only those", () => {
-    const { forms: filled, count } = applyAIValues(
+    const { forms: filled, fieldIds } = applyAIValues(
       forms,
       [
         { fieldId: 12, name: "Client", value: { stringValue: "ACME" } },
@@ -228,7 +228,7 @@ describe("fill", () => {
       false,
     );
 
-    expect(count).toBe(2);
+    expect(fieldIds).toEqual([13, 15]);
     expect(filled.flatMap(getChangedValues)).toEqual([
       { fieldId: 13, optionIds: ["b"] },
       { fieldId: 15, numberValue: 1248500 },
@@ -244,7 +244,7 @@ describe("fill", () => {
       { fieldId: 15, name: "Claim amount", value: { numberValue: 1248500 } },
     ];
 
-    expect(applyAIValues(typed, found, false).count).toBe(0);
+    expect(applyAIValues(typed, found, false).fieldIds).toEqual([]);
     expect(applyAIValues(typed, found, true).forms[0].inputs[15]).toBe(
       "1248500",
     );
@@ -256,13 +256,13 @@ describe("fill", () => {
       { key: "Court", name: "Court", value: "Superior", isNew: false },
     ];
 
-    const { drafts: filled, count } = applyAICustomValues(drafts, [
+    const { drafts: filled, keys } = applyAICustomValues(drafts, [
       { fieldId: 12, name: "Reviewer", value: { stringValue: "Bob" } },
       { name: "reviewer", value: " Bob " },
       { name: "Court", value: "Superior" },
     ]);
 
-    expect(count).toBe(1);
+    expect(keys).toEqual(["Reviewer"]);
     expect(filled.map(({ value }) => value)).toEqual(["Bob", "Superior"]);
   });
 

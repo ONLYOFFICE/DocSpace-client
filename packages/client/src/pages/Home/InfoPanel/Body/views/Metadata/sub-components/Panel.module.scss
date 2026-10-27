@@ -218,3 +218,24 @@
   padding-inline-start: 24px;
   color: var(--param-description-color);
 }
+
+.aiFilledLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent-main);
+
+  span,
+  svg {
+    display: block;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  svg path {
+    fill: currentColor;
+  }
+}

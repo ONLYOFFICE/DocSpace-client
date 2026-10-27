@@ -7,6 +7,7 @@
   "AIBusy": "AI 공급자가 사용 중입니다. 1분 후에 다시 시도하세요.",
   "AIFailed": "AI가 요청을 처리할 수 없습니다. 나중에 다시 시도하세요.",
   "AIFillDescription": "AI가 콘텐츠를 분석하여 빈 필드의 값을 제안합니다. 저장하기 전에 제안을 검토하세요.",
+  "AIFilled": "AI가 채움",
   "AIFilledFields_one": "AI가 필드 {{count}}개를 채웠습니다. 저장하기 전에 값을 검토하세요.",
   "AIFilledFields_other": "AI가 필드 {{count}}개를 채웠습니다. 저장하기 전에 값을 검토하세요.",
   "AIFillingTitle": "메타데이터 채우는 중",

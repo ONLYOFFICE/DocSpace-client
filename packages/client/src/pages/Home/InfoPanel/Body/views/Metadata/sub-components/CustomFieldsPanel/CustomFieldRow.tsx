@@ -50,6 +50,7 @@ import {
 
 import type { TCustomFieldDraft } from "../../types";
 import { isCaseOnlyRename } from "../../utils";
+import AIFilledLabel from "../AIFilledLabel";
 import styles from "../Panel.module.scss";
 
 type CustomFieldRowProps = {
@@ -57,6 +58,7 @@ type CustomFieldRowProps = {
   isNameTaken: boolean;
   canRename?: boolean;
   isValueRequired?: boolean;
+  isAIFilled?: boolean;
   onChange: (draft: TCustomFieldDraft) => void;
   onRemove?: () => void;
 };
@@ -66,6 +68,7 @@ const CustomFieldRow = ({
   isNameTaken,
   canRename = false,
   isValueRequired = false,
+  isAIFilled = false,
   onChange,
   onRemove,
 }: CustomFieldRowProps) => {
@@ -112,7 +115,9 @@ const CustomFieldRow = ({
         labelVisible
         isVertical
         removeMargin
-        labelText={draft.name}
+        labelText={
+          isAIFilled ? <AIFilledLabel>{draft.name}</AIFilledLabel> : draft.name
+        }
         hasError={!!valueError}
         errorMessage={valueError}
       >

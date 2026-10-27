@@ -7,6 +7,7 @@
   "AIBusy": "Dostawca AI jest zajęty. Spróbuj ponownie za minutę.",
   "AIFailed": "AI nie mogła przetworzyć żądania. Spróbuj ponownie później.",
   "AIFillDescription": "AI przeanalizuje zawartość i zaproponuje wartości dla pustych pól. Przejrzyj propozycje przed zapisaniem.",
+  "AIFilled": "Uzupełnione przez AI",
   "AIFilledFields_one": "AI uzupełniła {{count}} pole. Przejrzyj wartości przed zapisaniem.",
   "AIFilledFields_other": "Pola uzupełnione przez AI: {{count}}. Przejrzyj wartości przed zapisaniem.",
   "AIFillingTitle": "Uzupełnianie metadanych",

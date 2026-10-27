@@ -7,6 +7,7 @@
   "AIBusy": "The AI provider is busy. Try again in a minute.",
   "AIFailed": "AI could not process the request. Try again later.",
   "AIFillDescription": "AI will analyze the content and suggest values for empty fields. Review the suggestions before saving.",
+  "AIFilled": "Filled by AI",
   "AIFilledFields_one": "AI filled {{count}} field. Review the values before saving.",
   "AIFilledFields_other": "AI filled {{count}} fields. Review the values before saving.",
   "AIFillingTitle": "Filling metadata",

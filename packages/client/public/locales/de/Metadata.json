@@ -7,6 +7,7 @@
   "AIBusy": "Der KI-Anbieter ist ausgelastet. Versuchen Sie es in einer Minute erneut.",
   "AIFailed": "Die KI konnte die Anfrage nicht verarbeiten. Versuchen Sie es später erneut.",
   "AIFillDescription": "Die KI analysiert den Inhalt und schlägt Werte für leere Felder vor. Prüfen Sie die Vorschläge vor dem Speichern.",
+  "AIFilled": "Von KI ausgefüllt",
   "AIFilledFields_one": "Die KI hat {{count}} Feld ausgefüllt. Prüfen Sie die Werte vor dem Speichern.",
   "AIFilledFields_other": "Die KI hat {{count}} Felder ausgefüllt. Prüfen Sie die Werte vor dem Speichern.",
   "AIFillingTitle": "Metadaten werden ausgefüllt",

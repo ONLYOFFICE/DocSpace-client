@@ -151,7 +151,7 @@ export const applyAIValues = (
   filled: TMetadataAIFilledField[],
   overwrite: boolean,
 ) => {
-  let count = 0;
+  const fieldIds: number[] = [];
 
   const next = forms.map((form) => {
     const inputs = { ...form.inputs };
@@ -168,20 +168,20 @@ export const applyAIValues = (
       if (isSameInput(input, inputs[field.id])) return;
 
       inputs[field.id] = input;
-      count += 1;
+      fieldIds.push(field.id);
     });
 
     return { ...form, inputs };
   });
 
-  return { forms: next, count };
+  return { forms: next, fieldIds };
 };
 
 export const applyAICustomValues = (
   drafts: TCustomFieldDraft[],
   filled: TMetadataAIFilledField[],
 ) => {
-  let count = 0;
+  const keys: string[] = [];
 
   const next = drafts.map((draft) => {
     const value = filled.find(
@@ -192,12 +192,12 @@ export const applyAICustomValues = (
 
     if (!text || text === draft.value) return draft;
 
-    count += 1;
+    keys.push(draft.key);
 
     return { ...draft, value: text };
   });
 
-  return { drafts: next, count };
+  return { drafts: next, keys };
 };
 
 export const getFillCustomFieldChanges = (

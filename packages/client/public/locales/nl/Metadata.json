@@ -7,6 +7,7 @@
   "AIBusy": "De AI-provider is bezet. Probeer het over een minuut opnieuw.",
   "AIFailed": "AI kon het verzoek niet verwerken. Probeer het later opnieuw.",
   "AIFillDescription": "AI analyseert de inhoud en stelt waarden voor lege velden voor. Controleer de suggesties voordat u opslaat.",
+  "AIFilled": "Ingevuld door AI",
   "AIFilledFields_one": "AI heeft {{count}} veld ingevuld. Controleer de waarden voordat u opslaat.",
   "AIFilledFields_other": "AI heeft {{count}} velden ingevuld. Controleer de waarden voordat u opslaat.",
   "AIFillingTitle": "Metadata invullen",

@@ -7,6 +7,7 @@
   "AIBusy": "MI pakalpojumu sniedzējs ir aizņemts. Mēģiniet vēlreiz pēc minūtes.",
   "AIFailed": "MI nevarēja apstrādāt pieprasījumu. Mēģiniet vēlreiz vēlāk.",
   "AIFillDescription": "MI analizēs saturu un ieteiks vērtības tukšajiem laukiem. Pirms saglabāšanas pārskatiet ieteikumus.",
+  "AIFilled": "Aizpildīja MI",
   "AIFilledFields_one": "MI aizpildīja {{count}} lauku. Pirms saglabāšanas pārskatiet vērtības.",
   "AIFilledFields_other": "MI aizpildīja {{count}} laukus. Pirms saglabāšanas pārskatiet vērtības.",
   "AIFillingTitle": "Metadatu aizpildīšana",

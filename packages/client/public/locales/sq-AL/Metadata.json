@@ -7,6 +7,7 @@
   "AIBusy": "Ofruesi i IA është i zënë. Provoni përsëri pas një minute.",
   "AIFailed": "IA nuk mundi ta përpunonte kërkesën. Provoni përsëri më vonë.",
   "AIFillDescription": "IA do të analizojë përmbajtjen dhe do të sugjerojë vlera për fushat boshe. Rishikoni sugjerimet përpara se t'i ruani.",
+  "AIFilled": "Plotësuar nga IA",
   "AIFilledFields_one": "IA plotësoi {{count}} fushë. Rishikoni vlerat përpara se t'i ruani.",
   "AIFilledFields_other": "IA plotësoi {{count}} fusha. Rishikoni vlerat përpara se t'i ruani.",
   "AIFillingTitle": "Po plotësohen meta të dhënat",

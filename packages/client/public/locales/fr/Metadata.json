@@ -7,6 +7,7 @@
   "AIBusy": "Le fournisseur d'IA est occupé. Réessayez dans une minute.",
   "AIFailed": "L'IA n'a pas pu traiter la demande. Réessayez plus tard.",
   "AIFillDescription": "L'IA analysera le contenu et suggérera des valeurs pour les champs vides. Vérifiez les suggestions avant d'enregistrer.",
+  "AIFilled": "Rempli par l'IA",
   "AIFilledFields_one": "L'IA a rempli {{count}} champ. Vérifiez les valeurs avant d'enregistrer.",
   "AIFilledFields_other": "L'IA a rempli {{count}} champs. Vérifiez les valeurs avant d'enregistrer.",
   "AIFillingTitle": "Remplissage des métadonnées",

@@ -7,6 +7,7 @@
   "AIBusy": "Ponudnik AI je zaseden. Poskusite znova čez minuto.",
   "AIFailed": "AI ni mogla obdelati zahteve. Poskusite znova pozneje.",
   "AIFillDescription": "AI bo analizirala vsebino in predlagala vrednosti za prazna polja. Pred shranjevanjem preglejte predlagane vrednosti.",
+  "AIFilled": "Izpolnila AI",
   "AIFilledFields_one": "AI je izpolnila {{count}} polje. Pred shranjevanjem preglejte vrednosti.",
   "AIFilledFields_other": "Polja, ki jih je izpolnila AI: {{count}}. Pred shranjevanjem preglejte vrednosti.",
   "AIFillingTitle": "Izpolnjevanje metapodatkov",

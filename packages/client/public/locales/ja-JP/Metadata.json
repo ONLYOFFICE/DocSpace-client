@@ -7,6 +7,7 @@
   "AIBusy": "AIプロバイダーが混み合っています。1分後にもう一度お試しください。",
   "AIFailed": "AIがリクエストを処理できませんでした。後でもう一度お試しください。",
   "AIFillDescription": "AIがコンテンツを分析し、空のフィールドに値を提案します。保存する前に提案内容を確認してください。",
+  "AIFilled": "AIが入力",
   "AIFilledFields_one": "AIが{{count}}個のフィールドを入力しました。保存する前に値を確認してください。",
   "AIFilledFields_other": "AIが{{count}}個のフィールドを入力しました。保存する前に値を確認してください。",
   "AIFillingTitle": "メタデータを入力中",

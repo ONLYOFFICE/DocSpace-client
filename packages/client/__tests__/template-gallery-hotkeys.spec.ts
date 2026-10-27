@@ -34,6 +34,8 @@
  */
 
 import type { Page } from "@playwright/test";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "@docspace/shared/__mocks__/e2e";
 import {
   filesSettingsHandler,
   myDocumentsHandler,
@@ -48,6 +50,37 @@ import {
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 const PERSONAL_FOLDER_URL = "/rooms/personal/filter?folder=12764";
+const FORMS_URL = "/forms/filter";
+const FORMS_ROOT_ID = 36;
+
+const formsRootHandler = () =>
+  http.get(`${BASE_URL}:${TEST_PORT}/${API_PREFIX}/files/rooms*`, () =>
+    Response.json({
+      response: {
+        files: [],
+        folders: [],
+        current: {
+          id: FORMS_ROOT_ID,
+          parentId: 0,
+          rootFolderId: FORMS_ROOT_ID,
+          rootFolderType: FORMS_ROOT_ID,
+          parentRoomType: FORMS_ROOT_ID,
+          title: "Forms",
+          filesCount: 0,
+          foldersCount: 0,
+          security: { Read: true, Create: true },
+          access: 0,
+          created: "2025-01-15T12:00:00.000Z",
+          updated: "2025-01-15T12:00:00.000Z",
+        },
+        pathParts: [{ id: FORMS_ROOT_ID, title: "Forms" }],
+        startIndex: 0,
+        count: 0,
+        total: 0,
+        new: 0,
+      },
+    }),
+  );
 
 const gallery = (page: Page) => page.locator("#scroll-template-gallery");
 
@@ -113,5 +146,46 @@ test.describe("Hotkeys with the template gallery open", () => {
 
     await page.keyboard.press("Escape");
     await expect(gallery(page)).toBeHidden();
+  });
+});
+
+test.describe("Hotkeys in the Forms template gallery", () => {
+  test("Enter on a template opens the space dialog without creating it", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      settingsHandler(
+        TEST_PORT,
+        TypeSettings.Authenticated,
+        oformsFormGallerySettings(TEST_PORT),
+      ),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      formsRootHandler(),
+      ...oformsHandlers(TEST_PORT),
+    );
+
+    const createRequests: string[] = [];
+    page.on("request", (request) => {
+      if (
+        request.method() === "POST" &&
+        /\/files\/rooms(\?|$)/.test(request.url())
+      )
+        createRequests.push(request.url());
+    });
+
+    await page.goto(`${baseUrl}${FORMS_URL}`);
+    await page.getByText("From template gallery", { exact: true }).click();
+    await expect(gallery(page).locator("[class*=nameText]").first()).toBeVisible();
+
+    await page.keyboard.press("ArrowRight");
+    await page.keyboard.press("Enter");
+
+    await expect(page.getByTestId("create_room_dialog_save")).toBeVisible();
+    await page.waitForTimeout(500);
+    expect(createRequests).toEqual([]);
   });
 });

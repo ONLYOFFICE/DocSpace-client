@@ -94,7 +94,10 @@ export function removeFilesImpl(
   const newFilter = isRooms ? self.roomsFilter.clone() : self.filter.clone();
   newFilter.total -= deleteCount;
 
-  if (destFolderId && destFolderId === self.selectedFolderStore.id) return;
+  if (destFolderId && destFolderId === self.selectedFolderStore.id) {
+    self.fetchFiles(destFolderId, self.filter, true, true, false);
+    return;
+  }
 
   if (newFilter.total <= self.filesList.length) {
     const files = fileIds

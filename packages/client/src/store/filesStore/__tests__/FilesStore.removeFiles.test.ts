@@ -100,8 +100,19 @@ describe("FilesStore.removeFiles — characterization", () => {
     expect(toast).toHaveBeenCalledTimes(1);
   });
 
-  it("no-ops when destFolderId equals the current folder", () => {
+  it("refetches the current folder when it is the destination", () => {
+    const fetchFiles = vi.fn(async () => undefined);
+    store.fetchFiles = fetchFiles;
+
     store.removeFiles([1], null, undefined, store.selectedFolderStore.id);
-    expect(store.files.map((f) => f.id)).toEqual([1, 2]); // unchanged
+
+    expect(store.files.map((f) => f.id)).toEqual([1, 2]);
+    expect(fetchFiles).toHaveBeenCalledWith(
+      store.selectedFolderStore.id,
+      store.filter,
+      true,
+      true,
+      false,
+    );
   });
 });

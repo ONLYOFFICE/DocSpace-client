@@ -39,7 +39,9 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import type { TUser } from "@docspace/shared/api/people/types";
+import { ConflictResolveType } from "@docspace/shared/enums";
 
+import ConflictResolveDialog from "@/app/(personal-files)/_components/conflict-resolve-dialog";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 
 import { usePrivateDialogsStore } from "../../_store/PrivateDialogsStore";
@@ -93,6 +95,20 @@ const PrivateDialogsInner: React.FC = () => {
           room={dialogs.createEditRoom.room}
           onCreated={dialogs.createEditRoom.onCreated}
           onEdited={dialogs.createEditRoom.onEdited}
+        />
+      ) : null}
+      {dialogs.nameClash ? (
+        <ConflictResolveDialog
+          visible
+          withOverwrite={false}
+          conflictItems={dialogs.nameClash.names.map((title) => ({
+            title,
+            isFile: true,
+          }))}
+          onClose={() => dialogs.answerNameClash(false)}
+          onSubmit={(type) =>
+            dialogs.answerNameClash(type === ConflictResolveType.Duplicate)
+          }
         />
       ) : null}
     </>

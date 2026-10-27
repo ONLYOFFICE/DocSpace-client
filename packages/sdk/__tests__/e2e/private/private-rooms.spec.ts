@@ -678,6 +678,65 @@ test.describe("(private) — create / upload / download / preview", () => {
       .toEqual([ALICE_ID, FIXTURE_USER_ID].sort());
   });
 
+  /** Uploads a file named like MEMO and waits for the name-clash dialog. */
+  const uploadClashingMemo = async (page: Page) => {
+    const chooser = page.waitForEvent("filechooser");
+    await page.getByTestId("main-button").click();
+    await page.getByTestId("actions_upload-files").first().click();
+    await (await chooser).setFiles({
+      name: MEMO.name,
+      mimeType: "text/plain",
+      buffer: Buffer.from("A second memo."),
+    });
+    await unlock(page);
+    const dialog = page
+      .getByRole("dialog")
+      .filter({ hasText: "Action required" })
+      .filter({ hasText: MEMO.name });
+    await expect(dialog).toBeVisible();
+    return dialog;
+  };
+
+  test("Upload with a clashing name: cancel sends nothing", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    const { room } = await serveRooms(mockBoth, port);
+    await openRoom(page, baseUrl);
+
+    const dialog = await uploadClashingMemo(page);
+    await dialog.getByRole("button", { name: "Cancel", exact: true }).click();
+
+    await expect(dialog).toBeHidden();
+    expect(room.getSessions()).toEqual([]);
+    expect(room.getFiles()).toHaveLength(1);
+  });
+
+  test("Upload with a clashing name: keep both stores the first free copy suffix", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    const { room } = await serveRooms(mockBoth, port);
+    await openRoom(page, baseUrl);
+
+    const dialog = await uploadClashingMemo(page);
+    await dialog.getByRole("button", { name: "OK", exact: true }).click();
+
+    await expect.poll(() => room.getFiles().length).toBe(2);
+    const stored = room.getFiles().find((f) => f.id !== MEMO.id)!;
+    expect(stored.serverTitle).not.toContain("memo");
+
+    await page.reload();
+    await openContextMenu(row(page, MEMO.serverTitle));
+    await page.locator("#option_download").click();
+    await unlock(page);
+    await expect(row(page, "memo (1).txt")).toBeVisible();
+  });
+
   test("Uploader declines to unlock", async ({
     page,
     baseUrl,

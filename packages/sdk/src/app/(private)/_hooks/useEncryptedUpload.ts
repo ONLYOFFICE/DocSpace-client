@@ -53,6 +53,7 @@ import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
 import { usePrivateEncryptedUploadStore } from "../_store/PrivateEncryptedUploadStore";
+import { usePrivateDialogsStore } from "../_store/PrivateDialogsStore";
 import {
   registerCryptoOperation,
   releaseCryptoOperation,
@@ -91,6 +92,7 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
   const identityStore = useEncryptionIdentityStore();
   const uploadStore = useUploadStore();
   const privateUploadStore = usePrivateEncryptedUploadStore();
+  const privateDialogs = usePrivateDialogsStore();
   const [isUploading, setIsUploading] = React.useState(false);
   const sendRef = React.useRef<
     (items: EncryptedUploadRetryItem[], isRetry: boolean) => Promise<boolean>
@@ -185,6 +187,8 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
             fail(uploadId, orchestrator.getEncryptedUploadErrorMessage(t, error)),
           onFileComplete: (_file: File, fileResult: { uploadId: string }) =>
             uploadStore.setItemUploaded(fileResult.uploadId),
+          onNameClash: (clashes: { file: File }[]) =>
+            privateDialogs.askNameClash(clashes.map(({ file }) => file.name)),
         };
 
         const result: OrchestrateResult = isRetry
@@ -251,6 +255,7 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
       identityStore,
       uploadStore,
       privateUploadStore,
+      privateDialogs,
       reportSkippedMembers,
       t,
     ],

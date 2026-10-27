@@ -62,6 +62,12 @@ export type InvitePanelPayload = {
   onMembersUpdated?: () => void;
 };
 
+export type NameClashPayload = {
+  /** The names of the files whose decrypted names clash in their folder. */
+  names: string[];
+  resolve: (keepBoth: boolean) => void;
+};
+
 export type CreateEditRoomPayload = {
   /** Edit mode when `room` is set; otherwise create mode. */
   room?: EditableRoom;
@@ -74,6 +80,8 @@ class PrivateDialogsStore {
   changeOwner: ChangeOwnerDialogPayload | null = null;
   invitePanel: InvitePanelPayload | null = null;
   createEditRoom: CreateEditRoomPayload | null = null;
+
+  nameClash: NameClashPayload | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -111,11 +119,25 @@ class PrivateDialogsStore {
     this.createEditRoom = null;
   };
 
+  /** Resolves true to keep both files, false to cancel the upload. */
+  askNameClash = (names: string[]) =>
+    new Promise<boolean>((resolve) => {
+      this.nameClash?.resolve(false);
+      this.nameClash = { names, resolve };
+    });
+
+  answerNameClash = (keepBoth: boolean) => {
+    const pending = this.nameClash;
+    this.nameClash = null;
+    pending?.resolve(keepBoth);
+  };
+
   reset = () => {
     this.removeUser = null;
     this.changeOwner = null;
     this.invitePanel = null;
     this.createEditRoom = null;
+    this.answerNameClash(false);
   };
 }
 

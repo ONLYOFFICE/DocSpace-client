@@ -54,6 +54,9 @@ type TBatchOptions = {
   onQuotaError: (error: unknown) => void;
   onFileError: (file: File, error: unknown, uploadId: string) => void;
   onFileComplete: (file: File, result: { uploadId: string }) => void;
+  onNameClash: (
+    clashes: { uploadId: string; file: File; renamed: string }[],
+  ) => Promise<boolean>;
 };
 
 const env = vi.hoisted(() => ({
@@ -109,6 +112,10 @@ import {
 } from "@/app/(docspace)/_store/UploadStore";
 
 import { PrivateEncryptedUploadStoreProvider } from "../_store/PrivateEncryptedUploadStore";
+import {
+  PrivateDialogsStoreProvider,
+  usePrivateDialogsStore,
+} from "../_store/PrivateDialogsStore";
 import { useEncryptedUpload } from "./useEncryptedUpload";
 
 const batchResult = (
@@ -130,10 +137,12 @@ describe("useEncryptedUpload", () => {
   let root: Root | null = null;
   let uploadFiles: ReturnType<typeof useEncryptedUpload>["uploadFiles"];
   let store: ReturnType<typeof useUploadStore>;
+  let dialogs: ReturnType<typeof usePrivateDialogsStore>;
 
   const Probe = () => {
     uploadFiles = useEncryptedUpload().uploadFiles;
     store = useUploadStore();
+    dialogs = usePrivateDialogsStore();
     return null;
   };
 
@@ -168,7 +177,9 @@ describe("useEncryptedUpload", () => {
       root?.render(
         <UploadStoreContextProvider>
           <PrivateEncryptedUploadStoreProvider>
-            <Probe />
+            <PrivateDialogsStoreProvider>
+              <Probe />
+            </PrivateDialogsStoreProvider>
           </PrivateEncryptedUploadStoreProvider>
         </UploadStoreContextProvider>,
       ),
@@ -347,6 +358,67 @@ describe("useEncryptedUpload", () => {
 
     expect(abortedDuring).toBe(true);
     expect(store.items[0].status).toBe("cancelled");
+  });
+
+  describe("Upload with a clashing name", () => {
+    const clashingUpload = () => {
+      env.orchestrate.mockImplementation(async (options: TBatchOptions) => {
+        const [uploadId] = options.uploadIds;
+        const keepBoth = await options.onNameClash([
+          { uploadId, file: options.files[0], renamed: "Report (1).docx" },
+        ]);
+        if (keepBoth) {
+          options.onFileComplete(options.files[0], { uploadId });
+          return batchResult(options.uploadIds);
+        }
+        return batchResult(options.uploadIds, {
+              aborted: true,
+              results: [
+                {
+                  ok: false,
+                  uploadId,
+                  originalName: "Report.docx",
+                  aborted: true,
+                },
+              ],
+            });
+      });
+      let ok: boolean | undefined;
+      const done = act(async () => {
+        ({ ok } = await uploadFiles({
+          files: [new File(["x"], "Report.docx")],
+          folderId: 5,
+          roomId: 10,
+        }));
+      });
+      return { done, ok: () => ok };
+    };
+
+    it("asks before sending and cancels the upload when the user cancels", async () => {
+      const { done, ok } = clashingUpload();
+      await vi.waitFor(() => expect(dialogs.nameClash).not.toBeNull());
+      expect(dialogs.nameClash?.names).toEqual(["Report.docx"]);
+
+      act(() => dialogs.answerNameClash(false));
+      await done;
+
+      expect(ok()).toBe(false);
+      expect(dialogs.nameClash).toBeNull();
+      expect(rows()).toEqual([
+        { status: "cancelled", error: undefined, isQuotaError: false, retry: false },
+      ]);
+    });
+
+    it("keeps both files when the user chooses to keep both", async () => {
+      const { done, ok } = clashingUpload();
+      await vi.waitFor(() => expect(dialogs.nameClash).not.toBeNull());
+
+      act(() => dialogs.answerNameClash(true));
+      await done;
+
+      expect(ok()).toBe(true);
+      expect(rows().map((r) => r.status)).toEqual(["uploaded"]);
+    });
   });
 
   it("Member left out: the member is named once per session", async () => {

@@ -365,7 +365,10 @@ const ClientArticleSidebar = ({
                       className={styles.emptyTrashBadge}
                       title={t("Common:EmptyTrash")}
                       aria-label={t("Common:EmptyTrash")}
-                      onClick={() => setEmptyTrashDialogVisible?.(true)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setEmptyTrashDialogVisible?.(true);
+                      }}
                       data-testid="empty-trash-badge"
                     >
                       <ReactSVG src={ClearTrashReactSvgUrl} aria-hidden="true" />

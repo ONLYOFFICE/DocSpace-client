@@ -561,6 +561,14 @@ class AxiosClient {
             };
 
             w.__redirectToLogin = true;
+
+            // The page the session ran out on, so logging in again brings the
+            // user back to it rather than to the default page. The login page
+            // itself is not kept: it would only send the user back there.
+            if (!window.location.pathname.startsWith("/login")) {
+              sessionStorage.setItem("referenceUrl", window.location.href);
+            }
+
             this.request(opt)?.then(() => {
               // Re-check: the guard at the top of onError ran before the
               // logout roundtrip, and /settings may have answered 404 in the

@@ -66,6 +66,11 @@ import api from "@docspace/shared/api";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { RoomsType } from "@docspace/shared/enums";
+import {
+  PRIVATE_ROOM_WITHHELD,
+  withheldMenuKeys,
+  type TPrivateMenuIntent,
+} from "@docspace/shared/services/private-room/private-menu-rules";
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
@@ -104,6 +109,24 @@ import type {
 import { RoomsRefreshContext } from "../_contexts/RoomsRefreshContext";
 import { useRoomsOperationsStore } from "../_store/RoomsOperationsStore";
 import { trackRoomOperation } from "../_utils/trackRoomOperation";
+import { withoutMenuEntries } from "../_utils/menu-model";
+
+/** The room-menu keys of the entries a private room withholds. */
+const PRIVATE_ROOM_MENU_KEYS: Partial<
+  Record<TPrivateMenuIntent, readonly string[]>
+> = {
+  share: ["link-for-room-members"],
+  "external-link": ["external-link"],
+  embedding: ["embedding-settings"],
+  duplicate: ["duplicate"],
+};
+
+// Spec: private-rooms/sdk-surface, "Room menu of a private room".
+const PRIVATE_ROOM_WITHHELD_KEYS: ReadonlySet<string> = new Set([
+  ...withheldMenuKeys(PRIVATE_ROOM_WITHHELD, PRIVATE_ROOM_MENU_KEYS),
+  // The light client has no decrypted room download.
+  "download",
+]);
 
 type TRoomItem = TFolderItem & {
   pinned?: boolean;
@@ -214,7 +237,7 @@ export default function useRoomContextMenuModel(
       };
 
       if (isArchive) {
-        return [
+        const archiveItems: ContextMenuModel[] = [
           {
             id: "option_select",
             key: "select",
@@ -254,6 +277,9 @@ export default function useRoomContextMenuModel(
             onClick: () => onDeleteRoom?.(room),
           },
         ];
+        return room.private
+          ? withoutMenuEntries(archiveItems, PRIVATE_ROOM_WITHHELD_KEYS)
+          : archiveItems;
       }
 
       const moreOptionsItems: ContextMenuModel[] = [
@@ -378,7 +404,7 @@ export default function useRoomContextMenuModel(
           onClick: handleMute,
           disabled: !room.security?.Mute || !room.inRoom,
         },
-        ...(!room.private ? [copyLinkItem] : []),
+        copyLinkItem,
         { key: "separator-mute", isSeparator: true },
         {
           id: "option_edit-room",
@@ -394,7 +420,9 @@ export default function useRoomContextMenuModel(
           label: t("Common:InviteContacts"),
           icon: PersonReactSvgUrl,
           onClick: () => onInviteRoom?.(room),
-          disabled: !room.security?.EditAccess,
+          disabled: room.private
+            ? !room.security?.EditRoom
+            : !room.security?.EditAccess,
         },
         {
           id: "option_more-options",
@@ -440,7 +468,9 @@ export default function useRoomContextMenuModel(
         }
       }
 
-      return mainItems;
+      return room.private
+        ? withoutMenuEntries(mainItems, PRIVATE_ROOM_WITHHELD_KEYS)
+        : mainItems;
     },
     [
       t,
@@ -486,7 +516,7 @@ export default function useRoomContextMenuModel(
       ];
     }
 
-    return [
+    const selectionItems: ContextMenuModel[] = [
       {
         id: "option_download",
         key: "download",
@@ -512,6 +542,12 @@ export default function useRoomContextMenuModel(
           onDeleteSelected?.(filesSelectionStore.selection as TRoomItem[]),
       },
     ];
+    const hasPrivateRoom = (filesSelectionStore.selection as TRoomItem[]).some(
+      (room) => room.private,
+    );
+    return hasPrivateRoom
+      ? withoutMenuEntries(selectionItems, PRIVATE_ROOM_WITHHELD_KEYS)
+      : selectionItems;
   }, [
     t,
     downloadAction,

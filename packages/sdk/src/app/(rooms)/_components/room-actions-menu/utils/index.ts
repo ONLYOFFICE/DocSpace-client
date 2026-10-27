@@ -33,6 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+
+import { withoutMenuEntries } from "../../../_utils/menu-model";
+
 const EXCLUDED_KEYS = new Set([
   "open",
   "select",
@@ -46,22 +50,6 @@ const EXCLUDED_KEYS = new Set([
 
 const filterInfoPanelModel = (
   model: ContextMenuModel[],
-): ContextMenuModel[] => {
-  const isExcluded = (item: ContextMenuModel) =>
-    item.key != null && EXCLUDED_KEYS.has(String(item.key));
-
-  const result = model
-    .filter((item) => !isExcluded(item))
-    .map((item) =>
-      "items" in item && item.items
-        ? { ...item, items: item.items.filter((sub) => !isExcluded(sub)) }
-        : item,
-    );
-
-  while (result[0]?.isSeparator) result.shift();
-  while (result[result.length - 1]?.isSeparator) result.pop();
-
-  return result;
-};
+): ContextMenuModel[] => withoutMenuEntries(model, EXCLUDED_KEYS);
 
 export { filterInfoPanelModel };

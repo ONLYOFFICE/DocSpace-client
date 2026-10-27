@@ -338,7 +338,7 @@ class GroupsStore {
     this.bufferSelection = null;
     this.selected = selected;
 
-    setHotkeyCaret(this.selection.at(-1) ?? hotkeyCaret);
+    if (!hotkeyCaret) setHotkeyCaret(this.selection.at(-1) ?? null);
     this.setSelection(this.getGroupsBySelected(selected));
 
     return selected;

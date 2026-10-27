@@ -1165,7 +1165,7 @@ class UsersStore {
     this.bufferSelection = null;
     this.selected = selected;
 
-    setHotkeyCaret(this.selection.at(-1) ?? hotkeyCaret);
+    if (!hotkeyCaret) setHotkeyCaret(this.selection.at(-1) ?? null);
     const selectedUser = this.getUsersBySelected(this.peopleList, selected);
     this.setSelection(selectedUser);
 

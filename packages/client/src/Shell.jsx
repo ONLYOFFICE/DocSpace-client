@@ -765,17 +765,24 @@ const Shell = ({ page = "home", ...rest }) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
+  // The AI projects page is a section of its own: the client view and the
+  // selected folder are only set by Home, so on this page they still hold
+  // whatever the previous page left (contacts, profile, an agent's chat or
+  // folder) and must not switch the chat off.
+  const isAiProjectsPage = location.pathname.startsWith("/ai-projects");
+
   const isAiChatAvailable =
     aiServicesEnabled &&
-    currentClientView !== "users" &&
-    currentClientView !== "groups" &&
-    currentClientView !== "profile" &&
-    currentClientView !== "chat" &&
     !isSettingsPage &&
-    !isPrivacyFolder &&
-    selectedFolderType !== FolderType.Knowledge &&
-    selectedFolderType !== FolderType.ResultStorage &&
-    selectedRootFolderType !== FolderType.AIAgents;
+    (isAiProjectsPage ||
+      (currentClientView !== "users" &&
+        currentClientView !== "groups" &&
+        currentClientView !== "profile" &&
+        currentClientView !== "chat" &&
+        !isPrivacyFolder &&
+        selectedFolderType !== FolderType.Knowledge &&
+        selectedFolderType !== FolderType.ResultStorage &&
+        selectedRootFolderType !== FolderType.AIAgents));
 
   // The Forms section takes a single attachment: a question there is about one
   // form and the responses collected in it, and two forms in one message

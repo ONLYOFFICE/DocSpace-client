@@ -318,6 +318,34 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
       expect(askAI).toHaveBeenCalledWith(expect.objectContaining({ id: 1 }));
     });
 
+    it("nests several AI entries under AI tools", () => {
+      const store = createTestContextOptionsStore();
+      const shape = menuShape(
+        store.getFilesContextOptions(
+          fileItem([
+            "ask-ai",
+            "fill-metadata-ai",
+            "suggest-metadata-ai",
+            "rename",
+          ]) as never,
+          t,
+        ),
+      ).filter((option) => !String(option.key).startsWith("separator"));
+
+      expect(shape).toEqual([
+        {
+          key: "ai-tools",
+          label: "Files:AITools",
+          items: [
+            { key: "ask-ai", label: "Common:AskAI" },
+            { key: "fill-metadata-ai", label: "Files:FillMetadata" },
+            { key: "suggest-metadata-ai", label: "Files:GenerateMetadata" },
+          ],
+        },
+        { key: "rename", label: "Common:Rename" },
+      ]);
+    });
+
     it("renders analyze-responses as its own entry, asking for the mode", () => {
       const { entry, askAI } = entryOf("analyze-responses");
       expect(entry?.id).toBe("option_analyze_responses");

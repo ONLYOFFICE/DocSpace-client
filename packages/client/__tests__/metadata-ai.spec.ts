@@ -83,6 +83,7 @@ const openAIPanel = async (
   mode: "fill" | "suggest",
 ) => {
   await openDocxContextMenu(page, baseUrl);
+  await page.getByTestId("option_ai-tools").hover();
   await page.getByTestId(`option_${mode}-metadata-ai`).click();
 
   const panel = page.getByTestId("metadata_ai_panel");
@@ -121,6 +122,7 @@ test.describe("Metadata AI", () => {
     await openDocxContextMenu(page, baseUrl);
 
     await expect(page.getByTestId("option_share")).toBeVisible();
+    await expect(page.getByTestId("option_ai-tools")).toHaveCount(0);
     await expect(page.getByTestId("option_fill-metadata-ai")).toHaveCount(0);
     await expect(page.getByTestId("option_suggest-metadata-ai")).toHaveCount(0);
   });

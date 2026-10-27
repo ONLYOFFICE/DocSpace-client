@@ -35,6 +35,9 @@
 
 // The "Empty trash" badge of the Trash item: shown, as on the old article
 // item, while the pointer is over the item, and while the keyboard is on it.
+// Hidden it must not take a tap either: `opacity` alone left an invisible
+// button at the end of the row, and a touch there opened the dialog instead
+// of the Trash. The link's own focus still reveals it for the keyboard.
 .emptyTrashBadge {
   display: flex;
   align-items: center;
@@ -44,6 +47,7 @@
   background: none;
   cursor: pointer;
   opacity: 0;
+  visibility: hidden;
 
   svg path {
     fill: var(--nav-menu-item-icon-color, var(--icon-button-color));
@@ -52,6 +56,7 @@
   :global(li:hover) &,
   :global(li:focus-within) & {
     opacity: 1;
+    visibility: visible;
   }
 
   &:focus-visible {

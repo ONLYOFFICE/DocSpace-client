@@ -99,6 +99,32 @@ describe("AxiosClient error redirects", () => {
     expect(location.href).toContain("/login?authError=true");
   });
 
+  it("remembers the page the session ran out on for the login form", async () => {
+    sessionStorage.removeItem("referenceUrl");
+    location.pathname = "/rooms/shared/12/filter";
+    location.href = "http://localhost/rooms/shared/12/filter?folder=12";
+    const client = createFailingClient(401);
+
+    await client.request({ method: "get", url: "/files/12" });
+    await flushPending();
+
+    expect(sessionStorage.getItem("referenceUrl")).toBe(
+      "http://localhost/rooms/shared/12/filter?folder=12",
+    );
+  });
+
+  it("does not remember the login page itself", async () => {
+    sessionStorage.removeItem("referenceUrl");
+    location.pathname = "/login";
+    location.href = "http://localhost/login";
+    const client = createFailingClient(401);
+
+    await client.request({ method: "get", url: "/settings" });
+    await flushPending();
+
+    expect(sessionStorage.getItem("referenceUrl")).toBeNull();
+  });
+
   it("keeps a redirect claimed while the logout roundtrip was in flight", async () => {
     const client = createFailingClient(401);
 

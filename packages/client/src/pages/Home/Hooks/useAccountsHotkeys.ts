@@ -48,6 +48,8 @@ interface AccountsHotkeysProps {
 
   selectBottom: () => void;
   selectUpper: () => void;
+  multiSelectBottom: () => void;
+  multiSelectUpper: () => void;
   activateHotkeys: (e: KeyboardEvent) => void;
   selectAll: () => void;
   deselectAll: () => void;
@@ -64,6 +66,8 @@ const useAccountsHotkeys = ({
   isUsersLoading,
   selectBottom,
   selectUpper,
+  multiSelectBottom,
+  multiSelectUpper,
   activateHotkeys,
   selectAll,
   deselectAll,
@@ -142,6 +146,12 @@ const useAccountsHotkeys = ({
     },
     { ...hotkeysFilter, keyup: true, keydown: true },
   );
+
+  // Expand selection down
+  useHotkeys("shift+DOWN", multiSelectBottom, hotkeysFilter);
+
+  // Expand selection up
+  useHotkeys("shift+UP", multiSelectUpper, hotkeysFilter);
 
   // Select all accounts
   useHotkeys(

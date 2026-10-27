@@ -129,6 +129,39 @@ class ContactsHotkeysStore {
         | GroupsStore["selection"]);
   };
 
+  multiSelect = (step: 1 | -1) => {
+    if (!this.hotkeyCaret && !this.contactsSelection.length)
+      return this.selectFirstFile();
+
+    const caretIndex = this.caretIndex;
+    if (caretIndex === null) return;
+
+    const nextIndex = caretIndex + step;
+    const next = this.contactsList[nextIndex];
+    if (!next) return;
+
+    const startIndex = this.contactsList.findIndex(
+      (item) => item.id === this.hotkeyCaretStart?.id,
+    );
+    const anchorIndex = startIndex === -1 ? caretIndex : startIndex;
+
+    if (startIndex === -1) {
+      this.setHotkeyCaretStart(this.contactsList[caretIndex]);
+    }
+
+    this.setSelection(
+      this.contactsList.slice(
+        Math.min(anchorIndex, nextIndex),
+        Math.max(anchorIndex, nextIndex) + 1,
+      ),
+    );
+    this.setCaret(next);
+  };
+
+  multiSelectBottom = () => this.multiSelect(1);
+
+  multiSelectUpper = () => this.multiSelect(-1);
+
   setSelection = (
     selection: GroupsStore["selection"] | UsersStore["selection"],
   ) => {

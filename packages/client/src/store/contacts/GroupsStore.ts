@@ -332,13 +332,14 @@ class GroupsStore {
   };
 
   setSelected = (selected: "all" | "none") => {
-    const { hotkeyCaret, setHotkeyCaret } =
+    const { hotkeyCaret, setHotkeyCaret, setHotkeyCaretStart } =
       this.peopleStore.contactsHotkeysStore!;
 
     this.bufferSelection = null;
     this.selected = selected;
 
     if (!hotkeyCaret) setHotkeyCaret(this.selection.at(-1) ?? null);
+    if (hotkeyCaret && selected === "none") setHotkeyCaretStart(hotkeyCaret);
     this.setSelection(this.getGroupsBySelected(selected));
 
     return selected;

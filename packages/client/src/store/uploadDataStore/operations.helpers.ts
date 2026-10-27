@@ -256,8 +256,8 @@ export function itemOperationToFolderImpl(
     setHotkeysClipboard(
       hotkeysClipboard.filter((item) =>
         item.isFolder
-          ? !folderIds.includes(item.id)
-          : !fileIds.includes(item.id),
+          ? !folderIds.some((id) => id === item.id)
+          : !fileIds.some((id) => id === item.id),
       ),
     );
   }

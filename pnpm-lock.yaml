@@ -371,7 +371,7 @@ importers:
         version: file:onlyoffice-ai-chat-1.0.4.tgz(3ed44bc3a246f6a415a55d7ef3dc1b7b)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(65a3ef662b841ec4d1bcc965702f74fd)
+        version: file:onlyoffice-apps-ui-kit.tgz(fc7a61631329defdb8013f1f1881245a)
       '@onlyoffice/doceditor-types':
         specifier: ^10.0.0
         version: 10.0.0
@@ -717,7 +717,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(65a3ef662b841ec4d1bcc965702f74fd)
+        version: file:onlyoffice-apps-ui-kit.tgz(fc7a61631329defdb8013f1f1881245a)
       '@onlyoffice/doceditor-types':
         specifier: ^10.0.0
         version: 10.0.0
@@ -844,7 +844,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(65a3ef662b841ec4d1bcc965702f74fd)
+        version: file:onlyoffice-apps-ui-kit.tgz(fc7a61631329defdb8013f1f1881245a)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -965,7 +965,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(65a3ef662b841ec4d1bcc965702f74fd)
+        version: file:onlyoffice-apps-ui-kit.tgz(fc7a61631329defdb8013f1f1881245a)
       axios:
         specifier: '>=1.15.2'
         version: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -1134,7 +1134,7 @@ importers:
         version: file:onlyoffice-ai-chat-1.0.4.tgz(3ed44bc3a246f6a415a55d7ef3dc1b7b)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(65a3ef662b841ec4d1bcc965702f74fd)
+        version: file:onlyoffice-apps-ui-kit.tgz(fc7a61631329defdb8013f1f1881245a)
       '@radix-ui/react-dialog':
         specifier: 'catalog:'
         version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1393,7 +1393,7 @@ importers:
         version: 2.4.0
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(65a3ef662b841ec4d1bcc965702f74fd)
+        version: file:onlyoffice-apps-ui-kit.tgz(fc7a61631329defdb8013f1f1881245a)
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -3564,7 +3564,7 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-Nt4hd3F3hI+b2/hEZiQEub5XUbmUxWszLz1ypiihdU4Ct+i4QuCfI3/jXi05hleUWW2l3LfFV7vmSaq9XziH/w==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-yEPHyMmRH9v2UiTcOefjMW7n+mb9gqYFEeXYClJrTiRhVC2ti4AfJ89fIRWAKDmjoRIVi9Ztj5RLY2fkPHZRwA==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.0.2
     engines: {node: '>=22'}
     peerDependencies:
@@ -11779,7 +11779,7 @@ snapshots:
       tailwind-merge: 3.6.0
       zustand: 5.0.7(@types/react@19.2.10)(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
 
-  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(65a3ef662b841ec4d1bcc965702f74fd)':
+  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(fc7a61631329defdb8013f1f1881245a)':
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@onlyoffice/docspace-api-sdk': 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)

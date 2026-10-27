@@ -3,7 +3,7 @@
   "content": "Something went wrong.",
   "content_en_sha1_hash": "bee54c9cc30c539ab2ed15c0c936e055cf8ef67e",
   "created_at": "2025-05-19T21:30:48.934Z",
-  "updated_at": "2026-10-06T10:42:37.455Z",
+  "updated_at": "2026-10-27T11:03:20.524Z",
   "comment": {
     "text": "This is an error message displayed in a toast notification or as a title in an empty state view. It appears when an unexpected error occurs during an operation, such as submitting to a form gallery, server communication, or data import.",
     "is_auto": true,
@@ -60,9 +60,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleLauncher.tsx",
-      "line_number": 113,
-      "context": "const activated = await activate(id);\n if (activated) navigate(href);\n else openDialog();\n } catch (err) {\n console.error(`Failed to activate ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n },\n [activate, navigate, t],\n );",
+      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/hooks/useMetadataAIPanel.ts",
+      "line_number": 133,
+      "context": "setMetadata(data);\n setForms(getTemplateForms(data));\n if (mode === \"fill\") setDrafts(toCustomFieldDrafts(data.customFields));\n })\n .catch(() => {\n if (!abort.signal.aborted) setError(t(\"Common:SomethingWentWrong\"));\n })\n .finally(() => {\n if (!abort.signal.aborted) setPhase(\"ready\");\n });",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/utils.ts",
+      "line_number": 316,
+      "context": "case 503:\n return t(\"Metadata:AINoModel\");\n case 504:\n return t(\"Metadata:AITimeout\");\n default:\n return t(\"Common:SomethingWentWrong\");\n }\n };",
       "module": "/packages/client"
     },
     {
@@ -87,6 +93,18 @@
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleLauncher.tsx",
       "line_number": 113,
       "context": "const activated = await activate(id);\n if (activated) navigate(href);\n else openDialog();\n } catch (err) {\n console.error(`Failed to activate ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n },\n [activate, navigate, t],\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleLauncher.tsx",
+      "line_number": 113,
+      "context": "const activated = await activate(id);\n if (activated) navigate(href);\n else openDialog();\n } catch (err) {\n console.error(`Failed to activate ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n },\n [activate, navigate, t],\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/index.tsx",
+      "line_number": 108,
+      "context": "if (showLoading) return <InfoPanelViewLoader view=\"metadata\" />;\n if (isLoading) return null;\n \n if (!metadata) {\n return (\n <Text className={styles.error}>{t(\"Common:SomethingWentWrong\")}</Text>\n );\n }\n \n const addActions: TAddMetadataActions | undefined = canEdit\n ? {",
       "module": "/packages/client"
     },
     {
@@ -105,6 +123,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/WebSearchSaas.tsx",
       "line_number": 90,
       "context": ");\n \n return (\n <EmptyView\n icon={icon}\n title={t(\"Common:SomethingWentWrong\")}\n description={t(\"Common:ServerErrorEmptyDescription\")}\n options={[\n {\n to: \"\",\n key: \"reload\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/apps/index.tsx",
+      "line_number": 87,
+      "context": "setPendingId(id);\n try {\n await enable?.(id, next);\n } catch (err) {\n console.error(`Failed to ${next ? \"enable\" : \"disable\"} app ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setPendingId(null);\n }\n };",
       "module": "/packages/client"
     },
     {
@@ -163,7 +187,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 389,
+      "line_number": 402,
       "context": "textAlign: \"center\",\n padding: \"24px\",\n }}\n >\n {encryption.status === \"error\"\n ? t(\"Common:SomethingWentWrong\")\n : t(\"Common:LoadingProcessing\")}\n </div>\n </div>\n );\n }",
       "module": "/packages/doceditor"
     },

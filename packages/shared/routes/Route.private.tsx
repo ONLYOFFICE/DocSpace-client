@@ -112,7 +112,17 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       const loggedOutUserId = sessionStorage.getItem("loggedOutUserId");
       const redirectPath = sessionStorage.getItem("referenceUrl");
 
-      if (loggedOutUserId && redirectPath && loggedOutUserId === user.id) {
+      // A tab sent to the login page keeps its address in referenceUrl.
+      // Logging in in another tab sends such a tab to the portal root, so it
+      // is brought back from here. The address is followed for the user who
+      // was there, and also when nothing names that user (the session ran
+      // out, an open document lost its session); only another user's page
+      // is never opened.
+      if (
+        redirectPath &&
+        (!loggedOutUserId || loggedOutUserId === user.id) &&
+        redirectPath !== window.location.href
+      ) {
         window.location.href = redirectPath;
       }
 

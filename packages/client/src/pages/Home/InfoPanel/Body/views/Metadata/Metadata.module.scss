@@ -1,0 +1,221 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+.metadata {
+  display: flex;
+  flex-direction: column;
+  padding-block: 0 16px;
+}
+
+.blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-block-start: 8px;
+}
+
+.hint {
+  color: var(--info-panel-subtitle-color);
+}
+
+.error {
+  padding-block: 16px;
+  color: var(--info-panel-subtitle-color);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 80px 0;
+}
+
+.emptyImage {
+  width: 150px;
+  height: 105px;
+  margin-block-end: 32px;
+}
+
+.emptyText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.emptyDescription {
+  color: var(--empty-view-description-color);
+}
+
+.addLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-block-start: 20px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--accent-main);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15px;
+  cursor: pointer;
+
+  svg path {
+    fill: currentColor;
+  }
+
+  &:hover {
+    background: var(--empty-view-link-bg-color-hover);
+  }
+
+  &:active {
+    background: var(--empty-view-link-bg-color-press);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding-block: 8px 12px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 16px;
+  border-radius: 6px;
+  background-color: var(--info-block-background);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 16px;
+  margin-block-end: 8px;
+}
+
+.property {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.value {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.tags {
+  --tag-height: 24px;
+  --tag-spacing-end: 0;
+  --tag-border-style: 1px solid var(--template-tile-container-border);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.cascadeBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-inline: -4px;
+  margin-block-end: 4px;
+  padding-block-end: 16px;
+  border-block-end: 1px solid var(--info-panel-border-color);
+}
+
+.cascadeToggle {
+  display: flex;
+  flex-shrink: 0;
+  padding-block: 2px;
+
+  .toggle {
+    position: static;
+    gap: 0;
+  }
+}
+
+.cascadeContent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.cascadeText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cascadeProgress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progressTrack {
+  position: relative;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 2px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--icon-button-color);
+    opacity: 0.4;
+  }
+}
+
+.progressFill {
+  position: relative;
+  height: 100%;
+  border-radius: 2px;
+  background-color: var(--accent-main);
+  transition: width 0.3s ease-out;
+}

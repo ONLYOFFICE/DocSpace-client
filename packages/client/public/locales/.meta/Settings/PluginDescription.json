@@ -3,7 +3,7 @@
   "content": "Extend your workspace functionality, connect third-party services or enhance the existing user experience.",
   "content_en_sha1_hash": "29f04a02cc8dc7e10c6a0c0fd4cd9e9da73a7d06",
   "created_at": "2026-08-12T11:00:46.172Z",
-  "updated_at": "2026-08-27T15:37:55.718Z",
+  "updated_at": "2026-10-22T16:09:36.889Z",
   "comment": {
     "text": "Description text within a card explaining the purpose of the Plugin SDK; includes a `{productName}` variable representing the application name.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 145,
+      "line_number": 151,
       "context": "linkTitle={t(\"Settings:StartEmbedding\")}\n />\n <Card\n icon={<PluginSvg />}\n title={t(\"WebPlugins:PluginSDK\")}\n description={t(\"Settings:PluginDescription\")}\n url=\"/developer-tools/plugin-sdk\"\n color={globalColors.secondGreen}\n linkTitle={t(\"Common:ReadInstructions\")}\n />\n <Card",
       "module": "/packages/client"
     }

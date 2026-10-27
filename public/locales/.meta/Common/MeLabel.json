@@ -3,7 +3,7 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2026-10-02T12:15:32.377Z",
+  "updated_at": "2026-10-23T12:28:45.483Z",
   "comment": {
     "text": "This label appears next to a user's name to indicate that the user is the current user. It is displayed in parentheses.",
     "is_auto": true,
@@ -55,61 +55,61 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/Users/RowView/UserContent.tsx",
-      "line_number": 137,
+      "line_number": 142,
       "context": ": displayName?.trim()\n ? displayName\n : email}\n {isMe?.(id) ? (\n <Text as=\"div\" className=\"me-label\" fontWeight=\"600\" fontSize=\"13px\">\n ({t(\"Common:MeLabel\")})\n </Text>\n ) : null}\n </Link>\n <Badges\n statusType={statusType}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/Users/TableView/TableRow.tsx",
-      "line_number": 337,
+      "line_number": 340,
       "context": ": displayName?.trim()\n ? displayName\n : email}\n {isMe?.(id) ? (\n <Text className=\"me-label\" fontWeight=\"600\" fontSize=\"13px\">\n ({t(\"Common:MeLabel\")})\n </Text>\n ) : null}\n </Text>\n <Badges\n statusType={statusType}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 729,
+      "line_number": 781,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 729,
+      "line_number": 781,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 729,
+      "line_number": 781,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 729,
+      "line_number": 781,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 729,
+      "line_number": 781,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 729,
+      "line_number": 781,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 729,
+      "line_number": 781,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 729,
+      "line_number": 781,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },

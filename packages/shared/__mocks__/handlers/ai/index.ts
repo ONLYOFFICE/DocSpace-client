@@ -56,6 +56,8 @@ import {
   aiChatThreadGetByIdHandler,
   aiChatPromptsListHandler,
   aiChatReasoningLevelHandler,
+  aiChatSendWithStreamHandler,
+  aiChatServiceLimitExceededEvent,
   aiChatStoreHandlers,
   aiChatSystemToolsHandler,
   aiChatThreadsListHandler,
@@ -82,6 +84,8 @@ export {
   aiChatThreadGetByIdHandler,
   aiChatPromptsListHandler,
   aiChatReasoningLevelHandler,
+  aiChatSendWithStreamHandler,
+  aiChatServiceLimitExceededEvent,
   aiChatStoreHandlers,
   aiChatSystemToolsHandler,
   aiChatThreadsListHandler,
@@ -95,6 +99,13 @@ export {
   AiActionType,
 } from "./chatStores";
 export type { AiChatProfile, AssignmentMap } from "./chatStores";
+export {
+  META_FILL_RESULT,
+  META_GENERATE_RESULT,
+  META_SERVICE_LIMIT_ERROR,
+  aiMetaFillHandler,
+  aiMetaGenerateHandler,
+} from "./meta";
 
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),

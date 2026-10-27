@@ -1,0 +1,22 @@
+{
+  "key_path": "LimitLifetime",
+  "content": "lifetime",
+  "content_en_sha1_hash": "ba1d32fcf830168f963462f731e4546b662bcec6",
+  "created_at": "2026-10-22T16:09:09.433Z",
+  "updated_at": "2026-10-22T16:10:38.032Z",
+  "comment": {
+    "text": "Option in the period dropdown next to the AI spending limit amount, for a one-time total limit that never resets. Lowercase fragment read after the amount: '$10 lifetime' (i.e. for all time).",
+    "is_auto": true,
+    "updated_at": "2026-10-22T16:10:38.032Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

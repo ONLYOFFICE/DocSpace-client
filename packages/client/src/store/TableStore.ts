@@ -208,6 +208,8 @@ class TableStore {
 
   storagePeopleColumnIsEnabled = true;
 
+  aiSpendingPeopleColumnIsEnabled = false;
+
   inviterGuestsColumnIsEnabled = true;
 
   emailGuestsColumnIsEnabled = true;
@@ -221,6 +223,8 @@ class TableStore {
   emailInsideGroupColumnIsEnabled = true;
 
   storageInsideGroupColumnIsEnabled = true;
+
+  aiSpendingInsideGroupColumnIsEnabled = false;
 
   indexVDRColumnIsEnabled = true; // always true
 
@@ -457,6 +461,9 @@ class TableStore {
   setPeopleColumnStorage = (enable: boolean) =>
     (this.storagePeopleColumnIsEnabled = enable);
 
+  setPeopleColumnAiSpending = (enable: boolean) =>
+    (this.aiSpendingPeopleColumnIsEnabled = enable);
+
   setGuestsColumnInviter = (enable: boolean) =>
     (this.inviterGuestsColumnIsEnabled = enable);
 
@@ -477,6 +484,9 @@ class TableStore {
 
   setInsideGroupColumnStorage = (enable: boolean) =>
     (this.storageInsideGroupColumnIsEnabled = enable);
+
+  setInsideGroupColumnAiSpending = (enable: boolean) =>
+    (this.aiSpendingInsideGroupColumnIsEnabled = enable);
 
   setColumnsEnable = (frameTableColumns: string | null) => {
     const { contactsTab } = this.peopleStore.usersStore;
@@ -587,6 +597,7 @@ class TableStore {
         this.setPeopleColumnEmail(splitColumns.includes("Mail"));
         this.setPeopleColumnGroup(splitColumns.includes("Department"));
         this.setPeopleColumnStorage(splitColumns.includes("Storage"));
+        this.setPeopleColumnAiSpending(splitColumns.includes("AISpending"));
         return;
       }
 
@@ -603,6 +614,9 @@ class TableStore {
         this.setInsideGroupColumnEmail(splitColumns.includes("Mail"));
         this.setInsideGroupColumnGroup(splitColumns.includes("Department"));
         this.setInsideGroupColumnStorage(splitColumns.includes("Storage"));
+        this.setInsideGroupColumnAiSpending(
+          splitColumns.includes("AISpending"),
+        );
         return;
       }
 
@@ -875,6 +889,15 @@ class TableStore {
 
       case "StorageTemplates":
         this.setTemplateRoomColumnQuota(!this.templateRoomQuotaColumnIsEnable);
+        return;
+
+      case "AISpending":
+        if (isContactsPeople)
+          this.setPeopleColumnAiSpending(!this.aiSpendingPeopleColumnIsEnabled);
+        else if (isContactsInsideGroup)
+          this.setInsideGroupColumnAiSpending(
+            !this.aiSpendingInsideGroupColumnIsEnabled,
+          );
         return;
 
       case "StorageAIAgents":

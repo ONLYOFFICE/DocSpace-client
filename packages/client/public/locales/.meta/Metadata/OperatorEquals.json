@@ -1,0 +1,29 @@
+{
+  "key_path": "OperatorEquals",
+  "content": "equals",
+  "content_en_sha1_hash": "80b2f559a14748525776894e12e1216b49b5b558",
+  "created_at": "2026-10-21T10:17:41.285Z",
+  "updated_at": "2026-10-23T12:28:45.607Z",
+  "comment": {
+    "text": "Operator in the metadata filter for Number fields (value is equal to); lowercase, inserted as {{operator}} into a chip like Amount: equals · 100.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/MetadataFilter/utils.ts",
+      "line_number": 365,
+      "context": "case \"contains\":\n return t(\"Metadata:OperatorContains\");\n case \"isAnyOf\":\n return t(\"Metadata:OperatorIsAnyOf\");\n case \"equals\":\n return t(\"Metadata:OperatorEquals\");\n case \"greaterThan\":\n return t(\"Metadata:OperatorGreaterThan\");\n case \"lessThan\":\n return t(\"Metadata:OperatorLessThan\");\n case \"on\":",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

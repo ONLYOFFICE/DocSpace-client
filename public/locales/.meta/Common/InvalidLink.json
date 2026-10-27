@@ -3,7 +3,7 @@
   "content": "Invalid link",
   "content_en_sha1_hash": "3aaeaeb6ec3f8154506ce18b333531c275dcb035",
   "created_at": "2025-05-19T21:30:45.936Z",
-  "updated_at": "2026-09-09T15:42:08.570Z",
+  "updated_at": "2026-10-22T16:09:36.905Z",
   "comment": {
     "text": "This is an error message displayed when a link is malformed or no longer valid, such as a share link or a link to a document. It appears in various contexts, including a dedicated error page, a toast notification, or a message within the document editor.",
     "is_auto": true,
@@ -25,9 +25,15 @@
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 234,
-      "context": "docEditor = window.DocEditor.instances[EDITOR_ID];\n \n fixSize();\n \n if (errorMessage || isSkipError)\n return docEditor?.showMessage?.(errorMessage || t(\"Common:InvalidLink\"));\n \n console.log(\"ONLYOFFICE Document Editor is ready\", docEditor);\n const url = window.location.href;\n \n const index = url.indexOf(\"#message/\");",
+      "line_number": 232,
+      "context": "docEditor = getDocEditor() ?? null;\n \n fixSize();\n \n if (errorMessage || isSkipError)\n return docEditor?.showMessage?.(errorMessage || t(\"Common:InvalidLink\"));\n \n console.log(\"ONLYOFFICE Document Editor is ready\", docEditor);\n const url = window.location.href;\n \n const index = url.indexOf(\"#message/\");",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/PortalUnblock/page.client.tsx",
+      "line_number": 82,
+      "context": "console.error(error);\n \n // 401: the link was mailed for an earlier block, or the portal is no\n // longer blocked - unblocked from another tab or by support meanwhile.\n if (status === 401) {\n setLinkError(new Error(t(\"Common:InvalidLink\")));\n return;\n }\n \n // 403 means the call went out with a sign-in token instead of the link,\n // which this page never does, so it gets the generic error with the rest.",
+      "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",

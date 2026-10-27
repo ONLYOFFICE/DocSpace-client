@@ -44,6 +44,14 @@ import { pollTask } from "../utils/poll-task";
 
 type XlsxTask = UpdateXlsxResponse["task"];
 
+// Polls (seconds) the percentage of a report may hold before the update gives
+// up. The report shows the recovery of the form's responses first, and the
+// server holds the percentage there for long: while it waits for another
+// user's recovery of the same form, between its 25 integer steps, and while it
+// builds an older version of the report, which may take up to 10 minutes and
+// is retried once. Hence twice that build time and a margin, not the default.
+const XLSX_MAX_STALLED_POLLS = 25 * 60;
+
 export class XlsxUpdateService {
   /**
    * Starts an XLSX update for a file or folder.
@@ -72,7 +80,7 @@ export class XlsxUpdateService {
   static poll(
     formId: number,
     onProgress: (task: XlsxTask) => void,
-    maxStalledPolls?: number,
+    maxStalledPolls = XLSX_MAX_STALLED_POLLS,
   ): Promise<XlsxTask> {
     return pollTask({
       name: "XLSX update",

@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-
 import { pipe, delay, stopWhen } from "@onlyoffice/apps-ui-kit/utils/pipe";
 
 type TPolledTask = {

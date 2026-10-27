@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Елементите, които вече имат стойности от „{{template}}“, остават непроменени",
   "SuggestMetadata": "Предложи метаданни",
   "TemplateDeleted": "Шаблонът е изтрит",
+  "TemplateFieldsRequired": "Добавете поне едно поле, за да запазите шаблона",
   "TemplateValue": "Шаблон: {{template}}",
   "Visibility": "Видимост",
   "Visible": "Видим",

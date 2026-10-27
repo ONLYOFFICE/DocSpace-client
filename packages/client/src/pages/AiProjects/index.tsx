@@ -238,8 +238,19 @@ const AiProjects = ({
     [store, aiChatPanel, navigate, projectId],
   );
 
-  // Leaving the page drops the open project with it.
-  React.useEffect(() => () => store.closeProject(), [store]);
+  // Leaving the page drops the open project with it, and the project's chat:
+  // it was opened fullscreen for the project and would otherwise cover the
+  // next page. A chat opened from the list is left as it is. The project goes
+  // first, so the "closing the chat leaves the project" reaction below finds
+  // none and does not navigate back here.
+  React.useEffect(
+    () => () => {
+      const hadProject = store.activeProject !== null;
+      store.closeProject();
+      if (hadProject) aiChatStore.close();
+    },
+    [store, aiChatStore],
+  );
 
   // Closing the chat leaves the project.
   React.useEffect(

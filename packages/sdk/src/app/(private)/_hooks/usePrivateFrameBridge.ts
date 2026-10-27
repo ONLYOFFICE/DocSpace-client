@@ -49,6 +49,15 @@ export type PrivateFrameSection = "rooms" | "archive";
 export const sectionFromPathname = (pathname: string): PrivateFrameSection =>
   pathname.startsWith("/private/archive") ? "archive" : "rooms";
 
+// Spec: private-rooms/sdk-surface, "No search in private rooms".
+export const withoutSearchText = (query: string): string => {
+  const params = new URLSearchParams(query);
+  if (!params.has("search")) return query;
+  params.delete("search");
+  const rest = params.toString();
+  return rest ? `?${rest}` : "";
+};
+
 export const usePrivateFrameBridge = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -69,7 +78,7 @@ export const usePrivateFrameBridge = () => {
       data: {
         section,
         pathname: window.location.pathname,
-        search: window.location.search,
+        search: withoutSearchText(window.location.search),
       },
     });
   }, [section, pathname, searchParams]);

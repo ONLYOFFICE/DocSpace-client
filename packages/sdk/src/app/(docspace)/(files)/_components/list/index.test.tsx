@@ -105,6 +105,8 @@ vi.mock("../tile-view", () => ({ default: () => null }));
 vi.mock("../row-view", () => ({ default: () => null }));
 vi.mock("../empty-view", () => ({ default: () => <p>empty folder</p> }));
 
+import api from "@docspace/shared/api";
+import useFilesSocket from "@/app/(docspace)/_hooks/useFilesSocket";
 import {
   FilesListStore,
   FilesListStoreContext,
@@ -150,5 +152,61 @@ describe("List", () => {
 
     expect(container.textContent).not.toContain("memo.txt");
     expect(container.textContent).toContain("empty folder");
+  });
+});
+
+describe("List in a private room", () => {
+  let root: Root | null = null;
+
+  afterEach(() => {
+    act(() => root?.unmount());
+    root = null;
+    window.history.replaceState({}, "", "/");
+  });
+
+  it("Open location from the history: the folder request carries no search text", async () => {
+    vi.mocked(api.files.getFolder).mockResolvedValue({
+      files: [],
+      folders: [],
+      total: 0,
+      current: { id: 7002, title: "Drafts", rootFolderType: 14 },
+      pathParts: [],
+    } as never);
+
+    root = createRoot(document.createElement("div"));
+    act(() =>
+      root?.render(
+        <FilesListStoreContext.Provider value={new FilesListStore()}>
+          <List
+            total={0}
+            folders={[]}
+            files={[]}
+            filesSettings={{ displayFileExtension: true } as never}
+            filesFilter="folder=7001&search=Quarterly"
+            portalSettings={{ timezone: "UTC", socketUrl: "" } as never}
+            current={{ id: 7001, title: "Room", rootFolderType: 14 } as never}
+            isPrivate
+          />
+        </FilesListStoreContext.Provider>,
+      ),
+    );
+
+    window.history.replaceState(
+      {},
+      "",
+      "/private/7001?folder=7002&search=Quarterly",
+    );
+    const refetch = vi.mocked(useFilesSocket).mock.lastCall?.[2] as
+      | (() => Promise<void>)
+      | undefined;
+    await act(async () => {
+      await refetch?.();
+    });
+
+    expect(api.files.getFolder).toHaveBeenCalledTimes(1);
+    const [folderId, sentFilter] = vi.mocked(api.files.getFolder).mock
+      .calls[0];
+    expect(folderId).toBe("7002");
+    expect(sentFilter?.search ?? null).toBeNull();
   });
 });

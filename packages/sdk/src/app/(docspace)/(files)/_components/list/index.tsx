@@ -62,6 +62,12 @@ import EmptyView from "../empty-view";
 import { ListProps } from "./List.types";
 import useResetSelectionClick from "./hooks/useResetSelectionClick";
 
+// Spec: private-rooms/sdk-surface, "No search in private rooms".
+const withoutPrivateSearch = (filter: FilesFilter, isPrivate?: boolean) => {
+  if (isPrivate) filter.search = null;
+  return filter;
+};
+
 const List = ({
   folders,
   files,
@@ -127,10 +133,13 @@ const List = ({
   });
 
   const [filter, setFilter] = React.useState<FilesFilter>(
-    FilesFilter.getFilter({
-      search: `?${filesFilter}`,
-      pathname,
-    } as Location)!,
+    withoutPrivateSearch(
+      FilesFilter.getFilter({
+        search: `?${filesFilter}`,
+        pathname,
+      } as Location)!,
+      isPrivate,
+    ),
   );
   const [filesList, setFilesList] = React.useState<(TFolderItem | TFileItem)[]>(
     [
@@ -166,7 +175,10 @@ const List = ({
     fetchFolderAbortRef.current = controller;
 
     requestRunning.current = true;
-    const newFilter = FilesFilter.getFilter(window.location)!;
+    const newFilter = withoutPrivateSearch(
+      FilesFilter.getFilter(window.location)!,
+      isPrivate,
+    );
 
     const urlHasFolder = new URLSearchParams(window.location.search).has(
       "folder",
@@ -236,6 +248,7 @@ const List = ({
       requestRunning.current = false;
     }
   }, [
+    isPrivate,
     shareKey,
     setIsEmptyList,
     convertFolderToItem,

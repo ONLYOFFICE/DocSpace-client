@@ -56,6 +56,7 @@ import type { Locator, Page } from "@playwright/test";
 import {
   emptyTemplateHandler,
   encryptedFilesHandlers,
+  folderHistoryHandler,
   privacyroomAccessHandlers,
   privateRoomListHandler,
   roomMembersHandlers,
@@ -381,6 +382,80 @@ test.describe("(private) — rooms list & unlock", () => {
 
     await expect(row(page, MEMO.name)).toBeVisible();
     await expect(page.getByText(MEMO.serverTitle)).toHaveCount(0);
+  });
+
+  test("Open location from the history", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveRooms(mockBoth, port);
+    mockBoth(
+      folderHistoryHandler(port, ROOM_ID, {
+        feeds: [
+          {
+            id: MEMO.id,
+            date: "2026-10-20T09:00:00.000Z",
+            title: MEMO.serverTitle,
+          },
+        ],
+      }),
+    );
+    await page.addInitScript(() => {
+      const messages: string[] = [];
+      (window as unknown as { hostMessages: string[] }).hostMessages =
+        messages;
+      window.addEventListener("message", (event) => {
+        if (typeof event.data === "string") messages.push(event.data);
+      });
+    });
+    const folderRequests: string[] = [];
+    page.on("request", (request) => {
+      if (/\/api\/2\.0\/files\/\d+(\?|$)/.test(request.url())) {
+        folderRequests.push(request.url());
+      }
+    });
+
+    await openRoom(page, baseUrl);
+    await openContextMenu(row(page, MEMO.serverTitle));
+    await page.locator("#option_download").click();
+    await unlock(page);
+    const memoRow = row(page, MEMO.name);
+    await expect(memoRow).toBeVisible();
+
+    // A press on an empty spot of the list drops the selection, so the panel
+    // shows the room.
+    const dropped = await page.evaluate(() => {
+      const body = document.querySelector("[role='grid']")?.closest(".scroll-body");
+      body?.dispatchEvent(new MouseEvent("mousedown", { bubbles: true, button: 0 }));
+      return !!body;
+    });
+    expect(dropped).toBe(true);
+    await page.locator(".info-panel-toggle").click();
+    await page.getByText("History", { exact: true }).click();
+    const location = page.getByTestId("history_item_location");
+    await expect(location).toBeVisible();
+
+    folderRequests.length = 0;
+    await location.click();
+
+    await expect.poll(() => folderRequests.length).toBeGreaterThan(0);
+    const address = new URL(page.url());
+    expect(address.searchParams.get("folder")).toBe(String(ROOM_ID));
+    expect(address.searchParams.has("search")).toBe(false);
+    for (const url of folderRequests) {
+      expect(new URL(url).searchParams.get("filterValue") ?? "").toBe("");
+      expect(url.toLowerCase()).not.toContain("memo");
+    }
+    const hostMessages = await page.evaluate(
+      () => (window as unknown as { hostMessages: string[] }).hostMessages,
+    );
+    const navigations = hostMessages.filter((m) => m.includes("onNavigate"));
+    expect(navigations.length).toBeGreaterThan(0);
+    for (const message of navigations) {
+      expect(message.toLowerCase()).not.toContain("memo");
+    }
   });
 
   test(

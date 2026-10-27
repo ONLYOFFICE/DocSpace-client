@@ -135,6 +135,8 @@ test.describe("Metadata AI", () => {
       `Model: ${AI_CHAT_ASSIGNED.name}`,
     );
     await expect(panel.getByTestId("metadata_ai_save_button")).toBeDisabled();
+    await expect(panel.getByTestId("metadata_ai_saved_metadata")).toBeVisible();
+    await expect(panel.getByTestId("metadata_value_input")).toHaveCount(0);
 
     await expectScreenshot(page, [
       "desktop",
@@ -145,6 +147,7 @@ test.describe("Metadata AI", () => {
     await panel.getByTestId("metadata_ai_run_button").click();
 
     await expect(panel.getByTestId("metadata_ai_review_notes")).toBeVisible();
+    await expect(panel.getByTestId("metadata_ai_saved_metadata")).toHaveCount(0);
     await expect(panel.getByTestId("metadata_ai_save_button")).toBeEnabled();
 
     await expectScreenshot(page, [

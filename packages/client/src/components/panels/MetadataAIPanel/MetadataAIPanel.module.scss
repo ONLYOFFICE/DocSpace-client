@@ -138,6 +138,13 @@
   position: relative;
 }
 
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 16px;
+}
+
 .disabled {
   opacity: 0.45;
   pointer-events: none;

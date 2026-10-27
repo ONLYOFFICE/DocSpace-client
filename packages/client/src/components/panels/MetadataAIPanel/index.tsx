@@ -242,9 +242,11 @@ const MetadataAIDialog = ({
 
             {isFill ? (
               <FillForms
+                metadata={metadata}
                 forms={forms}
                 customFields={drafts.length ? customFields : null}
                 isAnalyzing={isAnalyzing}
+                isReadOnly={!isReview}
                 onChange={setInput}
               />
             ) : null}

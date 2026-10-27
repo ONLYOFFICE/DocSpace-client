@@ -28,6 +28,8 @@
   "UserTariffLimitHeader": "Das Limit für die Anzahl der Administratoren ist erreicht: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Alle Benutzer werden nur mit Benutzerberechtigungen hinzugefügt. Um weitere Administratoren hinzufügen zu können, wenden Sie sich an den Super-Administrator, um den Tarifplan zu erweitern.",
   "UserTariffReachedForAdmins": "Alle Benutzer werden nur mit Benutzerberechtigungen hinzugefügt. Um weitere Administratoren hinzufügen zu können, <1>klicken Sie hier</1>, um Ihren Tarifplan zu aktualisieren.",
+  "UserTypeLoweredDescription": "Einige Aktionen auf dieser Seite stehen Ihnen möglicherweise nicht mehr zur Verfügung.",
+  "UserTypeLoweredHeader": "Ihr Benutzertyp wurde geändert",
   "WalletLowBalanceContactPayer": "Wenden Sie sich an den Zahler (<1>{{payerContact}}</1>), um das Wallet aufzuladen und Unterbrechungen kostenpflichtiger Dienste zu vermeiden.",
   "WalletLowBalanceDescription": "Laden Sie Ihr Wallet auf, um Unterbrechungen kostenpflichtiger Dienste zu vermeiden. <1>Aufladen</1>",
   "WalletLowBalanceHeader": "Ihr Guthaben wird knapp: {{balance}}"

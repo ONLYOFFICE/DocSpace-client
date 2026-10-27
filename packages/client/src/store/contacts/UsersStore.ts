@@ -68,6 +68,7 @@ import SocketHelper, {
   SocketCommands,
   SocketEvents,
 } from "@onlyoffice/apps-ui-kit/utils/socket";
+import type { TUnmappedSocketListener } from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   downgradeUserType,
   getReassignmentProgress,
@@ -109,6 +110,22 @@ import FilesStore from "../FilesStore";
 import DialogsStore from "../DialogsStore";
 import SelectedFolderStore from "../SelectedFolderStore";
 
+type TUserTypeFlags = Partial<
+  Pick<TUser, "isOwner" | "isAdmin" | "isRoomAdmin" | "isCollaborator">
+>;
+
+const getUserTypeRank = (user: TUserTypeFlags) => {
+  if (user.isOwner) return 4;
+  if (user.isAdmin) return 3;
+  if (user.isRoomAdmin) return 2;
+  if (user.isCollaborator) return 1;
+  return 0;
+};
+
+// UsersStore is a singleton, so one flag is enough to keep a burst of
+// triggers down to one request.
+let isUserTypeCheckRunning = false;
+
 class UsersStore {
   filter = Filter.getDefault();
 
@@ -140,6 +157,8 @@ class UsersStore {
   roomParts: string = "";
 
   activeUsers: TPeopleListItem[] = [];
+
+  isUserTypeLoweredBarVisible = false;
 
   constructor(
     public settingsStore: SettingsStore,
@@ -248,6 +267,15 @@ class UsersStore {
 
       const userData = { ...data, hasPersonalFolder };
 
+      // What is already on screen was loaded with the old rights, and parts of
+      // it start answering 403. Offer a reload instead of navigating away.
+      if (
+        this.userStore.user &&
+        getUserTypeRank(userData) < getUserTypeRank(this.userStore.user)
+      ) {
+        this.setIsUserTypeLoweredBarVisible(true);
+      }
+
       setUser(userData as TUser);
 
       fetchTreeFolders();
@@ -295,18 +323,26 @@ class UsersStore {
       }
 
       const isArchive = pathname.includes("rooms/archived");
-      if (isArchive || pathname.includes("rooms/shared")) {
-        const { fetchRooms } = this.filesStore;
+      if (!isArchive && !pathname.includes("rooms/shared")) return;
 
-        const roomsFilter = RoomsFilter.getDefault(
-          id,
-          isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
-        );
-        // fetchRooms(folderId, filter) — this caller has
-        // always passed the filter in the folderId slot (the filter argument
-        // falls back to the default); erased cast preserves that behavior.
-        fetchRooms(roomsFilter as unknown as string);
+      // Inside an open room only its own rights are re-read (the type can
+      // change the user's role in it): fetchRooms there replaced the room's
+      // content with the list.
+      if (!this.selectedFolderStore.isRootFolder) {
+        this.filesStore.refreshFiles().catch((e) => console.error(e));
+        return;
       }
+
+      const { fetchRooms } = this.filesStore;
+
+      const roomsFilter = RoomsFilter.getDefault(
+        id,
+        isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
+      );
+      // fetchRooms(folderId, filter) — this caller has
+      // always passed the filter in the folderId slot (the filter argument
+      // falls back to the default); erased cast preserves that behavior.
+      fetchRooms(roomsFilter as unknown as string);
     };
 
     SocketHelper?.on(SocketEvents.AddUser, addUser);
@@ -316,6 +352,17 @@ class UsersStore {
     SocketHelper?.on(SocketEvents.DeleteUser, deleteUser);
     SocketHelper?.on(SocketEvents.DeleteGuest, deleteUser);
     SocketHelper?.on(SocketEvents.ChangeMyType, changeMyType);
+
+    // s:change-my-type only reaches a tab that is connected at that moment.
+    // socket.io fires "connect" again on every reconnect (the first one is
+    // over before listeners are registered), so a missed change is caught up
+    // here.
+    SocketHelper?.on(
+      "connect" as SocketEvents,
+      (() => {
+        this.checkUserTypeLowered();
+      }) as unknown as TUnmappedSocketListener,
+    );
 
     SocketHelper?.on(SocketEvents.UpdateGroup, async (value) => {
       console.log(
@@ -339,6 +386,33 @@ class UsersStore {
       });
     });
   }
+
+  setIsUserTypeLoweredBarVisible = (visible: boolean) => {
+    this.isUserTypeLoweredBarVisible = visible;
+  };
+
+  // Re-reads the current user for a tab that may have missed
+  // s:change-my-type, and offers a reload if the type went down meanwhile.
+  checkUserTypeLowered = async () => {
+    const { user } = this.userStore;
+
+    if (!user || this.isUserTypeLoweredBarVisible || isUserTypeCheckRunning)
+      return;
+
+    isUserTypeCheckRunning = true;
+
+    try {
+      const self = await api.people.getUser();
+
+      if (self && getUserTypeRank(self) < getUserTypeRank(user)) {
+        this.setIsUserTypeLoweredBarVisible(true);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      isUserTypeCheckRunning = false;
+    }
+  };
 
   setContactsTab = (contactsTab: TContactsTab) => {
     if (contactsTab) {

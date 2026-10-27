@@ -56,7 +56,8 @@ import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
 import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
-import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
+import { usePrivateRoomKeyGate } from "@docspace/shared/hooks/usePrivateRoomKeyGate";
+import { hasPrivateRoomSecureContext } from "@docspace/shared/services/private-room/create-room-gate";
 
 const CreateRoomDialog = ({
   t,
@@ -97,7 +98,6 @@ const CreateRoomDialog = ({
   const [templateDialogIsVisible, setTemplateDialogIsVisible] = useState(
     !!withTemplateSelector,
   );
-  const [keyConfirmVisible, setKeyConfirmVisible] = useState(false);
   const isMountRef = React.useRef(true);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
@@ -165,17 +165,16 @@ const CreateRoomDialog = ({
     }
   }, [setUserEncryptionKeys]);
 
-  const generateKey = useGenerateKeyFlow({
+  const keyGate = usePrivateRoomKeyGate({
+    t,
     userId,
     accountLabel: accountEmail,
     refreshKeysFromServer,
-    onSuccess: () => {
+    onKeyGenerated: () => {
       if (!isMountRef.current) return;
       if (!roomParams.isPrivate) applyPrivateRoomType();
     },
-    onError: () => {
-      onCloseRef.current?.();
-    },
+    onClose,
   });
 
   const keyAutoPromptedRef = useRef(false);
@@ -185,22 +184,17 @@ const CreateRoomDialog = ({
     if (encryptionKeys && encryptionKeys.length > 0) return;
     if (keyAutoPromptedRef.current) return;
     keyAutoPromptedRef.current = true;
-    if (!globalThis.crypto?.subtle) {
-      toastr.error(t("Common:EncryptionRequiresHttps"));
-      onCloseRef.current?.();
-      return;
-    }
-    setKeyConfirmVisible(true);
+    if (!keyGate.offerKeyGeneration()) onCloseRef.current?.();
   }, [isTemplateItem, isPrivateStart, roomParams.isPrivate, encryptionKeys, t]);
 
   const setRoomType = (newRoomType) => {
     if (newRoomType === RoomsTypePrivate) {
-      if (!globalThis.crypto?.subtle) {
+      if (!hasPrivateRoomSecureContext()) {
         toastr.error(t("Common:EncryptionRequiresHttps"));
         return;
       }
       if (!encryptionKeys || encryptionKeys.length === 0) {
-        setKeyConfirmVisible(true);
+        keyGate.offerKeyGeneration();
         return;
       }
     }
@@ -218,14 +212,10 @@ const CreateRoomDialog = ({
     }));
   };
 
-  const onConfirmGenerateKey = () => {
-    setKeyConfirmVisible(false);
-    generateKey.request();
-  };
+  const onConfirmGenerateKey = keyGate.confirmKeyGeneration;
 
   const onCancelGenerateKey = () => {
-    setKeyConfirmVisible(false);
-    if (roomParams.isPrivate) onCloseRef.current?.();
+    keyGate.cancelKeyGeneration(!!roomParams.isPrivate);
   };
 
   const isRoomTitleChanged = roomParams?.title?.trim() === "";
@@ -353,7 +343,7 @@ const CreateRoomDialog = ({
   return (
     <>
       <ConfirmationModal
-        visible={keyConfirmVisible}
+        visible={keyGate.keyConfirmVisible}
         title={t("Common:PrivateRoomKeyRequiredTitle")}
         message={t("Common:PrivateRoomKeyRequiredDescription")}
         confirmLabel={t("Common:ContinueButton")}
@@ -361,7 +351,7 @@ const CreateRoomDialog = ({
         onCancel={onCancelGenerateKey}
         zIndex={410}
       />
-      {generateKey.modals}
+      {keyGate.keyGenerationModals}
       <ModalDialog
         displayType="aside"
         withBodyScroll

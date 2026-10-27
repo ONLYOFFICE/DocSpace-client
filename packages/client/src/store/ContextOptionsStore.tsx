@@ -71,6 +71,7 @@ import {
 import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 import i18n from "../i18n";
 import { getEncryptedOperationErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
+import { hasPrivateRoomSecureContext } from "@docspace/shared/services/private-room/create-room-gate";
 import {
   isFolder,
   isRoom as isRoomUtil,
@@ -1001,7 +1002,7 @@ class ContextOptionsStore {
       !fromItem && isPrivateRoomsRoute(window.location.pathname);
 
     // Spec: private-rooms/room-membership, "Private rooms need a secure context"
-    if (isPrivateSection && !globalThis.crypto?.subtle) {
+    if (isPrivateSection && !hasPrivateRoomSecureContext()) {
       toastr.error(i18n.t("Common:EncryptionRequiresHttps"));
       return;
     }

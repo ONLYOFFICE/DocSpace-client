@@ -53,9 +53,9 @@ import {
 import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
 import uniqueid from "lodash/uniqueId";
 import {
-  addMembersToEncryptedRoom,
-  backfillEncryptedFilesForRoomMembers,
-} from "@docspace/shared/services/private-room/room-encryption";
+  getMembersToRewrap,
+  rewrapForInvitedMembers,
+} from "@docspace/shared/services/private-room/room-member-flows";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
@@ -456,14 +456,7 @@ const InvitePanel = ({
       const isRooms = roomId !== -1;
       const isPrivateInvite = isRooms && !!selectedRoom?.private;
 
-      const newMembers = isPrivateInvite
-        ? inviteItems
-            .filter((item) => item.id && !item.isGroup)
-            .map((item) => ({
-              id: item.id,
-              displayName: item.displayName || item.email,
-            }))
-        : [];
+      const newMembers = isPrivateInvite ? getMembersToRewrap(inviteItems) : [];
 
       let identity = null;
       if (isPrivateInvite && newMembers.length > 0) {
@@ -518,95 +511,21 @@ const InvitePanel = ({
           operationId,
         });
 
-        addMembersToEncryptedRoom(roomId, newMembers, {
+        rewrapForInvitedMembers({
+          t,
+          roomId,
+          newMembers,
           currentUserId: String(currentUserId),
           identity,
-          onProgress: (processed, total) => {
-            const percent = Math.floor((processed / total) * 100);
+          onProgress: (progress) =>
             setSecondaryProgressBarData({
               operation: OPERATIONS_NAME.roomReencryption,
-              percent,
+              ...progress,
               operationId,
-            });
-          },
-        })
-          .then(({ fileResults, skippedMembers }) => {
-            const failures = fileResults.filter((r) => !r.success);
-            const hasAlert =
-              failures.length > 0 || skippedMembers.length > 0;
-            setSecondaryProgressBarData({
-              operation: OPERATIONS_NAME.roomReencryption,
-              percent: 100,
-              completed: true,
-              alert: hasAlert,
-              operationId,
-            });
-
-            if (skippedMembers.length > 0) {
-              const formatName = (m) =>
-                m.displayName ||
-                newMembers.find((n) => n.id === m.id)?.displayName ||
-                m.id;
-              const noKeyNames = skippedMembers
-                .filter((m) => m.reason === "no-key")
-                .map(formatName);
-              const mismatchNames = skippedMembers
-                .filter((m) => m.reason === "key-mismatch-refused")
-                .map(formatName);
-              if (noKeyNames.length > 0) {
-                toastr.warning(
-                  t("Common:EncryptedSkippedNoKeys", {
-                    users: noKeyNames.join(", "),
-                  }),
-                );
-              }
-              if (mismatchNames.length > 0) {
-                toastr.warning(
-                  t("Common:EncryptedSkippedKeyMismatch", {
-                    users: mismatchNames.join(", "),
-                  }),
-                );
-              }
-            }
-
-            if (failures.length > 0) {
-              toastr.warning(
-                t("Common:EncryptedReencryptPartialFailure", {
-                  count: failures.length,
-                }),
-              );
-            } else if (skippedMembers.length === 0) {
-              toastr.success(t("Common:UsersInvited"));
-            }
-
-            // Silent follow-up: also re-wrap for any previously-invited
-            // members who registered their keypair after the fact (their old
-            // files would otherwise stay locked out indefinitely).
-            void backfillEncryptedFilesForRoomMembers(roomId, {
-              currentUserId: String(currentUserId),
-              identity,
-              onKeyChange: async () => "refuse",
-            }).catch((error) => {
-              console.error(
-                "[ENCRYPTION] Post-invite backfill failed:",
-                error,
-              );
-            });
-          })
-          .catch((error) => {
-            console.error(
-              "Failed to re-encrypt file keys for new members:",
-              error,
-            );
-            toastr.error(t("Common:EncryptedReencryptFailed"));
-            setSecondaryProgressBarData({
-              operation: OPERATIONS_NAME.roomReencryption,
-              percent: 100,
-              completed: true,
-              alert: true,
-              operationId,
-            });
-          });
+            }),
+        }).then((notices) => {
+          notices.forEach(({ level, text }) => toastr[level](text));
+        });
       } else if (isPrivateInvite) {
         toastr.success(t("Common:UsersInvited"));
       }

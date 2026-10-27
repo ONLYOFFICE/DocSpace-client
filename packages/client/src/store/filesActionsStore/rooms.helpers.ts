@@ -46,7 +46,7 @@ import {
   isPrivateRoomsRoute,
   splitFileAndFolderIds,
 } from "@docspace/shared/utils/common";
-import { revokeMemberFromEncryptedRoom } from "@docspace/shared/services/private-room/room-encryption";
+import { revokeOwnAccessOnLeave } from "@docspace/shared/services/private-room/room-member-flows";
 import uniqueid from "lodash/uniqueId";
 import api from "@docspace/shared/api";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
@@ -703,27 +703,7 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
 
   if (!isPrivateRoom) return leave();
 
-  // Must run before the role change drops access to files/{id}/access;
-  // best-effort - a failed cleanup must not trap the user in the room.
-  const revokeOwnEncryptedAccess = async () => {
-    try {
-      const results = await revokeMemberFromEncryptedRoom(
-        Number(roomId),
-        String(user?.id),
-        {},
-      );
-      const failures = results.filter((r) => !r.success);
-      if (failures.length > 0) {
-        console.error(
-          `[ENCRYPTION] ${failures.length} file(s) kept the leaver's wrap entries`,
-        );
-      }
-    } catch (err) {
-      console.error("[ENCRYPTION] revoke own access on leave failed:", err);
-    }
-  };
-
-  return revokeOwnEncryptedAccess().then(leave);
+  return revokeOwnAccessOnLeave(roomId, String(user?.id)).then(leave);
 };
 
 

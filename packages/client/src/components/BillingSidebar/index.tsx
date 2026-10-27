@@ -48,12 +48,14 @@ import WalletReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/wallet.react.s
 import TariffReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/tariff-plan.react.svg?url";
 import AddonsReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/addons.react.svg?url";
 import PaymentMethodReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/payment-method.react.svg?url";
+import InvoiceHistoryReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/invoice-history.react.svg?url";
 import UsageReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/usage.react.svg?url";
 
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 
 type BillingSidebarProps = {
   isNotPaidPeriod: boolean;
+  isStripePortalAvailable: boolean;
 };
 
 const ITEMS = [
@@ -91,6 +93,13 @@ const ITEMS = [
     hideWhenNotPaid: true,
   },
   {
+    id: "billing-invoice-history",
+    path: "/billing/invoice-history",
+    icon: InvoiceHistoryReactSvgUrl,
+    translationKey: "Common:InvoiceHistory" as const,
+    ownerOrPayerOnly: true,
+  },
+  {
     id: "billing-usage",
     path: "/billing/usage",
     icon: UsageReactSvgUrl,
@@ -99,13 +108,18 @@ const ITEMS = [
   },
 ];
 
-const BillingSidebar = ({ isNotPaidPeriod }: BillingSidebarProps) => {
+const BillingSidebar = ({
+  isNotPaidPeriod,
+  isStripePortalAvailable,
+}: BillingSidebarProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
 
   const visibleItems = ITEMS.filter(
-    (item) => !item.hideWhenNotPaid || !isNotPaidPeriod,
+    (item) =>
+      (!item.hideWhenNotPaid || !isNotPaidPeriod) &&
+      (!item.ownerOrPayerOnly || isStripePortalAvailable),
   );
 
   const activeId = React.useMemo(() => {
@@ -150,7 +164,13 @@ const BillingSidebar = ({ isNotPaidPeriod }: BillingSidebarProps) => {
   );
 };
 
-export default inject(({ currentTariffStatusStore }: TStore) => ({
-  isNotPaidPeriod: currentTariffStatusStore?.isNotPaidPeriod ?? false,
-}))(observer(BillingSidebar));
+export default inject(({ currentTariffStatusStore, paymentStore }: TStore) => {
+  const { isNotPaidPeriod } = currentTariffStatusStore;
+  const { isStripePortalAvailable } = paymentStore;
+
+  return {
+    isNotPaidPeriod,
+    isStripePortalAvailable,
+  };
+})(observer(BillingSidebar));
 

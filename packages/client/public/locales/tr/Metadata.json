@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Zaten {{template}} değerleri olan öğeler değişmeden kalır",
   "SuggestMetadata": "Meta veri öner",
   "TemplateDeleted": "Şablon silindi",
+  "TemplateFieldsRequired": "Şablonu kaydetmek için en az bir alan ekleyin",
   "TemplateValue": "Şablon: {{template}}",
   "Visibility": "Görünürlük",
   "Visible": "Görünür",

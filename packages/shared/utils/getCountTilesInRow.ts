@@ -44,6 +44,40 @@ function getTileWidth(
   return Math.max(min, Math.min(preferred, max));
 }
 
+function getSectionContentWidth() {
+  const elem = document.getElementsByClassName("section-wrapper-content")[0];
+  if (!elem) return 0;
+
+  const elemPadding = window.getComputedStyle(elem)?.getPropertyValue("padding");
+  if (!elemPadding) return 0;
+
+  const paddingValues = elemPadding.split("px");
+  if (paddingValues.length < 4) return 0;
+
+  return (
+    (elem.clientWidth || 0) -
+    (parseInt(paddingValues[1], 10) || 0) -
+    (parseInt(paddingValues[3], 10) || 0)
+  );
+}
+
+export const getCountTilesInGrid = (
+  isRooms?: boolean,
+  isTemplates?: boolean,
+) => {
+  const isDesktopView = isDesktop();
+  const gridWidth = getSectionContentWidth() + (isDesktopView ? -1 : 1);
+  const tileGap = isDesktopView || isRooms ? 16 : 14;
+  const tileWidth =
+    isRooms || isTemplates ? getTileWidth(275, 350) : getTileWidth(216, 360);
+  const minTileWidth = Math.floor(tileWidth * 64) / 64;
+
+  return Math.max(
+    1,
+    Math.floor((gridWidth + tileGap) / (minTileWidth + tileGap)),
+  );
+};
+
 // Used to update the number of tiles in a row after the window is resized.
 export const getCountTilesInRow = (
   isRooms?: boolean,
@@ -69,23 +103,7 @@ export const getCountTilesInRow = (
   const isMobileView = isMobile();
   const tileGap = 16;
 
-  const elem = document.getElementsByClassName("section-wrapper-content")[0];
-  let containerWidth = 0;
-  if (elem) {
-    const elemPadding = window
-      .getComputedStyle(elem)
-      ?.getPropertyValue("padding");
-
-    if (elemPadding) {
-      const paddingValues = elemPadding.split("px");
-      if (paddingValues.length >= 4) {
-        containerWidth =
-          (elem.clientWidth || 0) -
-          (parseInt(paddingValues[1], 10) || 0) -
-          (parseInt(paddingValues[3], 10) || 0);
-      }
-    }
-  }
+  let containerWidth = getSectionContentWidth();
 
   containerWidth += tileGap;
   if (!isMobileView) containerWidth -= 1;

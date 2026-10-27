@@ -90,7 +90,7 @@ import type { TRoom } from "../api/rooms/types";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
 import { getFromLocalStorage } from "./getFromLocalStorage";
-import { getCountTilesInRow } from "./getCountTilesInRow";
+import { getCountTilesInRow, getCountTilesInGrid } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 import * as userFilterUtils from "./userFilterUtils";
 import * as filterConstants from "./filterConstants";
@@ -139,6 +139,7 @@ export {
   saveToSessionStorage,
   getFromLocalStorage,
   getCountTilesInRow,
+  getCountTilesInGrid,
   getSelectFormatTranslation,
   userFilterUtils,
   filterConstants,

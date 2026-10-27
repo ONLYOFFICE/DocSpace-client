@@ -774,6 +774,7 @@ class HotkeyStore {
     if (!security!.CopyTo || !security!.MoveTo) return;
 
     const isPublic = roomType === RoomsType.PublicRoom;
+    let isPastedIntoItself = false;
 
     selections.forEach((item) => {
       if (item.fileExst || item.contentLength) {
@@ -782,6 +783,7 @@ class HotkeyStore {
           fileIds.push(item.id);
         }
       } else if (item.id === selectedItemId) {
+        isPastedIntoItself = true;
         toastr.error(t("Common:MoveToFolderMessage"));
       } else {
         const folderInAction = activeFolders.includes(item.id);
@@ -839,7 +841,7 @@ class HotkeyStore {
         .finally(() => {
           this.filesStore.setHotkeysClipboard([]);
         });
-    } else {
+    } else if (!isPastedIntoItself) {
       toastr.error(t("Common:ErrorEmptyList"));
     }
   };

@@ -62,6 +62,7 @@ type TFilesItem = {
   fileExst?: string;
   contentLength?: string | number;
   parentId?: number | string;
+  folderId?: number | string;
   isFolder?: boolean;
   isRoom?: boolean;
   isTemplate?: boolean;
@@ -782,9 +783,15 @@ class HotkeyStore {
     if (!security!.CopyTo || !security!.MoveTo) return;
 
     let isPastedIntoItself = false;
+    let isPastedIntoSameFolder = false;
 
     selections.forEach((item) => {
       if (item.fileExst || item.contentLength) {
+        if (!isCopy && item.folderId === selectedItemId) {
+          isPastedIntoSameFolder = true;
+          return;
+        }
+
         const fileInAction = activeFiles.includes(item.id);
         if (!fileInAction) {
           fileIds.push(item.id);
@@ -792,6 +799,8 @@ class HotkeyStore {
       } else if (item.id === selectedItemId) {
         isPastedIntoItself = true;
         toastr.error(t("Common:MoveToFolderMessage"));
+      } else if (item.parentId === selectedItemId) {
+        isPastedIntoSameFolder = true;
       } else {
         const folderInAction = activeFolders.includes(item.id);
 
@@ -844,7 +853,7 @@ class HotkeyStore {
         .finally(() => {
           this.filesStore.setHotkeysClipboard([]);
         });
-    } else if (!isPastedIntoItself) {
+    } else if (!isPastedIntoItself && !isPastedIntoSameFolder) {
       toastr.error(t("Common:ErrorEmptyList"));
     }
   };

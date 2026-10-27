@@ -26,6 +26,7 @@
   "AgentStart": "Kreirajte agenta sa modelom i uputstvima za zadatak koji se ponavlja. Dodajte referentne datoteke u njegovu Bazu znanja, zatim otvorite AI razgovor da isprobate zahtev i doradite podešavanje.",
   "AgentSwitchOn": "Agenti u ovom obilasku bili su primeri. Uključite AI agente i alate, zatim u AI podešavanjima proverite dostupne modele da biste pripremili svog prvog agenta.",
   "AgentSwitchOnTitle": "Uključite ga i vidite uživo",
+  "AgentWhatIs": "AI agent je pomoćnik koga podešavate za zadatak koji se ponavlja. Njegova uputstva usmeravaju odgovore, Baza znanja pruža kontekst iz dokumenata, a Izlazi razgovora čuvaju sačuvane rezultate.",
   "AgentWhatIsShared": "AI agent je pomoćnik podešen za određeni zadatak. Vaša uloga određuje da li možete da koristite njegov razgovor, dodajete datoteke u njegovu Bazu znanja ili pregledate sačuvane rezultate u Izlazima razgovora.",
   "AgentWhatIsTitle": "Pomoćnik za vaše zadatke"
 }

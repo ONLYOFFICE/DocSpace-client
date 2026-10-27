@@ -26,6 +26,7 @@
   "AgentStart": "Erstellen Sie einen Agenten mit einem Modell und Anweisungen für eine wiederkehrende Aufgabe. Fügen Sie Referenzdateien zu seiner Wissensdatenbank hinzu und öffnen Sie dann den KI-Chat, um eine Anfrage auszuprobieren und die Einrichtung zu verfeinern.",
   "AgentSwitchOn": "Die Agenten in dieser Tour waren Beispiele. Aktivieren Sie die KI-Agenten und Tools und prüfen Sie dann die verfügbaren Modelle in den KI-Einstellungen, um Ihren ersten Agenten startklar zu machen.",
   "AgentSwitchOnTitle": "Schalten Sie sie ein und sehen Sie es in echt",
+  "AgentWhatIs": "Ein KI-Agent ist ein Assistent, den Sie für eine wiederkehrende Aufgabe einrichten. Seine Anweisungen steuern die Antworten, seine Wissensdatenbank liefert Kontext aus Dokumenten, und in Chat-Ausgaben werden die gespeicherten Ergebnisse abgelegt.",
   "AgentWhatIsShared": "Ein KI-Agent ist ein Assistent, der für eine Aufgabe konfiguriert ist. Ihre Rolle bestimmt, ob Sie seinen Chat nutzen, Dateien zu seiner Wissensdatenbank hinzufügen oder gespeicherte Ergebnisse in Chat-Ausgaben ansehen können.",
   "AgentWhatIsTitle": "Ein Assistent für Ihre Aufgaben"
 }

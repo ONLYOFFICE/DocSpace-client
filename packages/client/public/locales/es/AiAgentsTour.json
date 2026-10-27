@@ -26,6 +26,7 @@
   "AgentStart": "Cree un agente con un modelo e instrucciones para una tarea recurrente. Añada archivos de referencia a su Base de conocimientos y, después, abra Chat con IA para probar una solicitud y ajustar la configuración.",
   "AgentSwitchOn": "Los agentes de este recorrido eran ejemplos. Active los agentes y herramientas de IA y, después, compruebe los modelos disponibles en la configuración de IA para preparar su primer agente.",
   "AgentSwitchOnTitle": "Actívela y véalo de verdad",
+  "AgentWhatIs": "Un agente de IA es un asistente que usted configura para una tarea recurrente. Sus instrucciones guían las respuestas, su Base de conocimientos aporta el contexto de los documentos y Resultados del chat conserva los resultados guardados.",
   "AgentWhatIsShared": "Un agente de IA es un asistente configurado para una tarea. Su rol determina si puede usar su chat, añadir archivos a su Base de conocimientos o ver los resultados guardados en Resultados del chat.",
   "AgentWhatIsTitle": "Un asistente para sus tareas"
 }

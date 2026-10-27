@@ -26,6 +26,7 @@
   "AgentStart": "Utwórz agenta z modelem i instrukcjami do powtarzalnego zadania. Dodaj pliki referencyjne do jego Bazy wiedzy, a następnie otwórz Czat AI, aby wypróbować prośbę i dopracować konfigurację.",
   "AgentSwitchOn": "Agenci w tym oprowadzaniu byli przykładami. Włącz agentów i narzędzia AI, a następnie sprawdź dostępne modele w Ustawieniach AI, aby przygotować swojego pierwszego agenta.",
   "AgentSwitchOnTitle": "Włącz i zobacz na żywo",
+  "AgentWhatIs": "Agent AI to asystent, którego konfigurujesz do powtarzalnego zadania. Jego instrukcje kierują odpowiedziami, Baza wiedzy zapewnia kontekst z dokumentów, a w sekcji Wyniki czatu przechowywane są zapisane rezultaty.",
   "AgentWhatIsShared": "Agent AI to asystent skonfigurowany do określonego zadania. Twoja rola decyduje o tym, czy możesz korzystać z jego czatu, dodawać pliki do jego Bazy wiedzy lub przeglądać zapisane wyniki w sekcji Wyniki czatu.",
   "AgentWhatIsTitle": "Asystent do twoich zadań"
 }

@@ -26,6 +26,7 @@
   "AgentStart": "Ustvarite agenta z modelom in navodili za ponavljajočo se nalogo. Dodajte referenčne datoteke v njegovo Zbirko znanja, nato odprite AI klepet, preizkusite zahtevo in izpopolnite nastavitev.",
   "AgentSwitchOn": "Agenti v tem ogledu so bili primeri. Vklopite AI agente in orodja, nato v AI nastavitvah preverite razpoložljive modele, da pripravite svojega prvega agenta.",
   "AgentSwitchOnTitle": "Vklopite in poglejte v živo",
+  "AgentWhatIs": "Agent AI je pomočnik, ki ga nastavite za ponavljajočo se nalogo. Njegova navodila usmerjajo odgovore, Zbirka znanja zagotavlja kontekst iz dokumentov, Rezultati klepetov pa hranijo shranjene rezultate.",
   "AgentWhatIsShared": "AI agent je pomočnik, nastavljen za določeno nalogo. Vaša vloga določa, ali lahko uporabljate njegov klepet, dodajate datoteke v njegovo Zbirko znanja ali si ogledujete shranjene rezultate v Rezultatih klepetov.",
   "AgentWhatIsTitle": "Pomočnik za vaše naloge"
 }

@@ -26,6 +26,7 @@
   "AgentStart": "Tạo một tác nhân với mô hình và hướng dẫn cho một nhiệm vụ lặp lại. Thêm tệp tham khảo vào “Cơ sở kiến thức” của nó, sau đó mở “Trò chuyện AI” để thử một yêu cầu và tinh chỉnh thiết lập.",
   "AgentSwitchOn": "Các tác nhân trong chuyến tham quan này chỉ là ví dụ. Hãy bật tác nhân và công cụ AI, sau đó kiểm tra các mô hình khả dụng trong “Cài đặt AI” để chuẩn bị tác nhân đầu tiên của bạn.",
   "AgentSwitchOnTitle": "Bật lên và xem thực tế",
+  "AgentWhatIs": "Tác nhân AI là trợ lý mà bạn thiết lập cho một nhiệm vụ lặp lại. Hướng dẫn của nó định hướng các câu trả lời, “Cơ sở kiến thức” cung cấp ngữ cảnh tài liệu, và “Kết quả trò chuyện” lưu giữ các kết quả đã lưu.",
   "AgentWhatIsShared": "Tác nhân AI là trợ lý được cấu hình cho một nhiệm vụ. Vai trò của bạn quyết định bạn có thể sử dụng cuộc trò chuyện của nó, thêm tệp vào “Cơ sở kiến thức” hay xem các kết quả đã lưu trong “Kết quả trò chuyện” hay không.",
   "AgentWhatIsTitle": "Trợ lý cho các nhiệm vụ của bạn"
 }

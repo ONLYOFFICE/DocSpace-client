@@ -26,6 +26,7 @@
   "AgentStart": "Təkrarlanan tapşırıq üçün model və təlimatlarla agent yaradın. Onun Bilik bazasına istinad faylları əlavə edin, sonra sorğunu sınamaq və quraşdırmanı dəqiqləşdirmək üçün Süni İntellekt-Çat bölməsini açın.",
   "AgentSwitchOn": "Bu səyahətdəki agentlər nümunə idi. AI agentlərini və alətləri aktivləşdirin, sonra ilk agentinizi hazırlamaq üçün AI parametrləri bölməsində mövcud modelləri yoxlayın.",
   "AgentSwitchOnTitle": "Qoşun və əsl halını görün",
+  "AgentWhatIs": "AI agenti təkrarlanan tapşırıq üçün qurduğunuz köməkçidir. Onun təlimatları cavabları istiqamətləndirir, Bilik bazası sənəd kontekstini təmin edir, Söhbət çıxışları isə saxlanılan nəticələri özündə toplayır.",
   "AgentWhatIsShared": "AI agenti tapşırıq üçün konfiqurasiya edilmiş köməkçidir. Onun söhbətindən istifadə edə bilməyinizi, Bilik bazasına fayl əlavə edə bilməyinizi və ya Söhbət çıxışları bölməsində saxlanılan nəticələrə baxa bilməyinizi rolunuz müəyyən edir.",
   "AgentWhatIsTitle": "Tapşırıqlarınız üçün köməkçi"
 }

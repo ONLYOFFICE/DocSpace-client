@@ -26,6 +26,7 @@
   "AgentStart": "Maak een agent aan met een model en instructies voor een terugkerende taak. Voeg referentiebestanden toe aan zijn Kennisbank en open daarna de AI-Chat om een verzoek uit te proberen en de configuratie te verfijnen.",
   "AgentSwitchOn": "De agenten in deze tour waren voorbeelden. Schakel de AI-agenten en -tools in en controleer daarna de beschikbare modellen in de AI-instellingen om uw eerste agent klaar te maken.",
   "AgentSwitchOnTitle": "Zet het aan en zie het echt",
+  "AgentWhatIs": "Een AI-agent is een assistent die u instelt voor een terugkerende taak. Zijn instructies sturen de antwoorden, zijn Kennisbank levert context uit documenten en in Chatuitvoer worden opgeslagen resultaten bewaard.",
   "AgentWhatIsShared": "Een AI-agent is een assistent die voor een taak is geconfigureerd. Uw rol bepaalt of u de chat kunt gebruiken, bestanden aan de Kennisbank kunt toevoegen of opgeslagen resultaten in Chatuitvoer kunt bekijken.",
   "AgentWhatIsTitle": "Een assistent voor uw taken"
 }

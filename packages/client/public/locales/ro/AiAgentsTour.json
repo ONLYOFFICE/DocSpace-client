@@ -26,6 +26,7 @@
   "AgentStart": "Creați un agent cu un model și instrucțiuni pentru o sarcină recurentă. Adăugați fișiere de referință în Baza de cunoștințe a acestuia, apoi deschideți Chat IA pentru a încerca o solicitare și a rafina configurarea.",
   "AgentSwitchOn": "Agenții din acest tur au fost exemple. Activați agenții și instrumentele IA, apoi verificați modelele disponibile în Setări IA pentru a vă pregăti primul agent.",
   "AgentSwitchOnTitle": "Activați-o și vedeți pe bune",
+  "AgentWhatIs": "Un agent IA este un asistent pe care îl configurați pentru o sarcină recurentă. Instrucțiunile sale ghidează răspunsurile, Baza de cunoștințe oferă context din documente, iar Rezultate din chat păstrează rezultatele salvate.",
   "AgentWhatIsShared": "Un agent IA este un asistent configurat pentru o sarcină. Rolul dumneavoastră determină dacă puteți folosi chatul său, adăuga fișiere în Baza de cunoștințe a acestuia sau vizualiza rezultatele salvate în Rezultate din chat.",
   "AgentWhatIsTitle": "Un asistent pentru sarcinile dumneavoastră"
 }

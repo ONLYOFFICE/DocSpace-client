@@ -35,6 +35,7 @@
 
 import AccessFormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import EditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
+import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 
 import { useRef, type MouseEvent, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
@@ -48,6 +49,7 @@ import {
 import type { TAddMetadataActions } from "../types";
 
 type AddMetadataMenuProps = TAddMetadataActions & {
+  onGenerate?: () => void;
   children: (openMenu: (e: MouseEvent) => void) => ReactNode;
 };
 
@@ -55,9 +57,10 @@ const AddMetadataMenu = ({
   onAddTemplate,
   onAddCustomField,
   isCustomFieldDisabled,
+  onGenerate,
   children,
 }: AddMetadataMenuProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "Files"]);
   const menuRef = useRef<ContextMenuRefType>(null);
 
   const model: ContextMenuModel[] = [
@@ -74,6 +77,17 @@ const AddMetadataMenu = ({
       disabled: isCustomFieldDisabled,
       onClick: onAddCustomField,
     },
+    ...(onGenerate
+      ? [
+          { key: "metadata-generate-separator", isSeparator: true },
+          {
+            key: "metadata-generate",
+            label: t("Files:GenerateMetadata"),
+            icon: AISvgUrl,
+            onClick: onGenerate,
+          },
+        ]
+      : []),
   ];
 
   return (

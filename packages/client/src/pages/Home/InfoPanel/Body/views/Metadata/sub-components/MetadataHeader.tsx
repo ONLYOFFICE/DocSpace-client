@@ -35,21 +35,28 @@
 
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import type { TAddMetadataActions } from "../types";
+import { useMetadataAIAvailable } from "../hooks/useMetadataAIAvailable";
+import { useOpenMetadataAI } from "../hooks/useOpenMetadataAI";
+import type { TAddMetadataActions, TMetadataSelection } from "../types";
 import AddMetadataMenu from "./AddMetadataMenu";
+import MetadataAIMenu from "./MetadataAIMenu";
 import styles from "../Metadata.module.scss";
 
 type MetadataHeaderProps = {
+  selection: TMetadataSelection;
   addActions?: TAddMetadataActions;
 };
 
-const MetadataHeader = ({ addActions }: MetadataHeaderProps) => {
+const MetadataHeader = ({ selection, addActions }: MetadataHeaderProps) => {
   const { t } = useTranslation(["Metadata", "Common"]);
+  const isAIAvailable = useMetadataAIAvailable(selection);
+  const openAI = useOpenMetadataAI(selection);
 
   return (
     <div className={styles.header}>
@@ -62,21 +69,29 @@ const MetadataHeader = ({ addActions }: MetadataHeaderProps) => {
         {t("Common:SubmenuMetadata")}
       </Text>
       {addActions ? (
-        <AddMetadataMenu {...addActions}>
-          {(openMenu) => (
-            <IconButton
-              iconName={FormFileReactSvgUrl}
-              size={16}
-              isFill
-              title={t("Metadata:AddMetadata")}
-              onClick={openMenu}
-              dataTestId="info_panel_metadata_add_button"
+        <div className={styles.headerActions}>
+          {isAIAvailable ? (
+            <MetadataAIMenu
+              onFill={() => openAI("fill")}
+              onGenerate={() => openAI("suggest")}
             />
-          )}
-        </AddMetadataMenu>
+          ) : null}
+          <AddMetadataMenu {...addActions}>
+            {(openMenu) => (
+              <IconButton
+                iconName={FormFileReactSvgUrl}
+                size={16}
+                isFill
+                title={t("Metadata:AddMetadata")}
+                onClick={openMenu}
+                dataTestId="info_panel_metadata_add_button"
+              />
+            )}
+          </AddMetadataMenu>
+        </div>
       ) : null}
     </div>
   );
 };
 
-export default MetadataHeader;
+export default observer(MetadataHeader);

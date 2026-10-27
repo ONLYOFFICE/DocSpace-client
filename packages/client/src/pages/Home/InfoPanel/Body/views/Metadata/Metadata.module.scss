@@ -116,6 +116,12 @@
   padding-block: 8px 12px;
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .card {
   display: flex;
   flex-direction: column;

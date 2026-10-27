@@ -41,6 +41,7 @@ import {
   aiConfigHandler,
   aiMetaFillHandler,
   aiMetaGenerateHandler,
+  EMPTY_ENTRY_METADATA,
   META_SERVICE_LIMIT_ERROR,
   entryMetadataHandler,
   entryMetadataSaveHandlers,
@@ -90,6 +91,18 @@ const openAIPanel = async (
   await expect(panel.getByTestId("metadata_ai_callout")).toBeVisible();
 
   return panel;
+};
+
+const openMetadataTab = async (page: Page, baseUrl: string) => {
+  await openDocxContextMenu(page, baseUrl);
+  await page.getByTestId("option_info").hover();
+  await page.getByTestId("option_show-info").click();
+  await page.getByTestId("info_metadata_tab").click();
+
+  const metadata = page.getByTestId("info_panel_metadata");
+  await expect(metadata).toBeVisible();
+
+  return metadata;
 };
 
 test.describe("Metadata AI", () => {
@@ -189,6 +202,38 @@ test.describe("Metadata AI", () => {
       "metadata",
       "metadata-ai_suggest-review.png",
     ]);
+  });
+
+  test("opens the AI actions from the Metadata tab header", async ({
+    page,
+    baseUrl,
+  }) => {
+    const metadata = await openMetadataTab(page, baseUrl);
+
+    await metadata.getByTestId("info_panel_metadata_ai_button").click();
+    await expect(page.getByTestId("metadata-ai-fill")).toBeVisible();
+    await page.getByTestId("metadata-ai-generate").click();
+
+    await expect(
+      page.getByTestId("metadata_ai_panel").getByTestId("metadata_ai_callout"),
+    ).toContainText("Generate metadata with AI");
+  });
+
+  test("offers generation in the empty Metadata tab", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(entryMetadataHandler(TEST_PORT, EMPTY_ENTRY_METADATA));
+
+    const metadata = await openMetadataTab(page, baseUrl);
+
+    await metadata.getByTestId("info_panel_metadata_add_link").click();
+    await page.getByTestId("metadata-generate").click();
+
+    await expect(
+      page.getByTestId("metadata_ai_panel").getByTestId("metadata_ai_callout"),
+    ).toContainText("Generate metadata with AI");
   });
 
   test("explains that no model is selected", async ({

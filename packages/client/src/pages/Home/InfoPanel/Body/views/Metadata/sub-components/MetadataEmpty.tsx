@@ -44,6 +44,7 @@ import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { useMetadataAIAvailable } from "../hooks/useMetadataAIAvailable";
+import { useOpenMetadataAI } from "../hooks/useOpenMetadataAI";
 import type {
   TAddMetadataActions,
   TMetadataEmptyHint,
@@ -68,6 +69,7 @@ const MetadataEmpty = ({
   const { t } = useTranslation(["Metadata"]);
   const { isBase } = useTheme();
   const isAIAvailable = useMetadataAIAvailable(selection);
+  const openAI = useOpenMetadataAI(selection);
 
   const titles: Record<TMetadataItemType, string> = {
     file: t("Metadata:NoFileMetadata"),
@@ -110,7 +112,10 @@ const MetadataEmpty = ({
         ) : null}
       </div>
       {addActions ? (
-        <AddMetadataMenu {...addActions}>
+        <AddMetadataMenu
+          {...addActions}
+          onGenerate={isAIAvailable ? () => openAI("suggest") : undefined}
+        >
           {(openMenu) => (
             <button
               type="button"

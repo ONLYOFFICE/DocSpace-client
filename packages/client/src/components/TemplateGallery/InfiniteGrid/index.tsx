@@ -178,7 +178,6 @@ const InfiniteGrid: FC<InfiniteGridInjectedProps> = (props) => {
         const cardKey = uniqueid("card-item_");
         cards.push(
           <Card
-            countTilesInRow={countTilesInRow}
             smallPreview={smallPreview}
             key={cardKey}
           >

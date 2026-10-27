@@ -37,9 +37,11 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import type { TUser } from "@docspace/shared/api/people/types";
 import { ConflictResolveType } from "@docspace/shared/enums";
+import { ProgressBar } from "@onlyoffice/apps-ui-kit/components/progress-bar";
 
 import ConflictResolveDialog from "@/app/(personal-files)/_components/conflict-resolve-dialog";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
@@ -51,6 +53,7 @@ import PrivateChangeOwnerDialog from "../owner-change/PrivateChangeOwnerDialog";
 import PrivateCreateRoomDialog from "../create-room/PrivateCreateRoomDialog";
 
 const PrivateDialogsInner: React.FC = () => {
+  const { t } = useTranslation(["Common"]);
   const dialogs = usePrivateDialogsStore();
   const docsUser = useDocsUserStore();
   const user = docsUser.user as TUser | null;
@@ -75,6 +78,15 @@ const PrivateDialogsInner: React.FC = () => {
           defaultAccess={dialogs.invitePanel.defaultAccess}
           onMembersUpdated={dialogs.invitePanel.onMembersUpdated}
         />
+      ) : null}
+
+      {dialogs.reencryptPercent !== null ? (
+        <div data-testid="reencrypt-progress-bar">
+          <ProgressBar
+            percent={dialogs.reencryptPercent}
+            label={t("Common:ReEncryptingFiles")}
+          />
+        </div>
       ) : null}
 
       {dialogs.changeOwner ? (

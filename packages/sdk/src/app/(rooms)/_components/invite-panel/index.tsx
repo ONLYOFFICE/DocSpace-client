@@ -189,10 +189,9 @@ type InvitePanelProps = {
   culture?: string;
   onMembersUpdated?: () => void;
   /**
-   * Invoked after `setRoomSecurity` resolves successfully but BEFORE the panel
-   * closes. Private rooms use this hook to run `addMembersToEncryptedRoom`,
-   * which wraps file DEKs for the new recipients. The panel surfaces thrown
-   * errors as toasts and stays open on failure.
+   * Invoked once `setRoomSecurity` has resolved and the panel has closed.
+   * Private rooms use it to wrap the file keys for the new members; a
+   * rejection is shown as a toast.
    */
   onInviteSubmitted?: (
     memberIds: string[],
@@ -654,25 +653,6 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         data,
       )) as SetRoomSecurityResult;
 
-      if (onInviteSubmitted) {
-        const memberIds = invitations
-          .map((inv) => inv.id)
-          .filter((id): id is string => typeof id === "string" && id.length > 0);
-        const displayNames: Record<string, string> = {};
-        for (const item of inviteItems) {
-          const id = item.id;
-          const name = item.displayName ?? item.email;
-          if (typeof id === "string" && name) displayNames[id] = name;
-        }
-        try {
-          await onInviteSubmitted(memberIds, displayNames);
-        } catch (encryptError) {
-          setIsLoading(false);
-          toastr.error(encryptError as string | Error);
-          return;
-        }
-      }
-
       setIsLoading(false);
 
       handleClose();
@@ -685,6 +665,22 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
       }
 
       onMembersUpdated?.();
+
+      // Spec: private-rooms/sdk-surface, "Invite panel offers people only and closes before re-encryption"
+      if (onInviteSubmitted) {
+        const memberIds = invitations
+          .map((inv) => inv.id)
+          .filter((id): id is string => typeof id === "string" && id.length > 0);
+        const displayNames: Record<string, string> = {};
+        for (const item of inviteItems) {
+          const id = item.id;
+          const name = item.displayName ?? item.email;
+          if (typeof id === "string" && name) displayNames[id] = name;
+        }
+        onInviteSubmitted(memberIds, displayNames).catch((encryptError) => {
+          toastr.error(encryptError as string | Error);
+        });
+      }
     } catch (err) {
       const error = err as {
         response?: {
@@ -1004,7 +1000,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
               roomId={roomId}
               isAgent={roomTypeResolved === RoomsType.AIRoom}
               disableInvitedUsers={invitedUsersArray}
-              withGuests={showGuestsTab}
+              withGuests={false}
               withHeader
               data-test-id="invite_panel_people_selector"
               headerProps={{

@@ -1106,12 +1106,25 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
     const people = page.getByTestId("invite_panel_people_selector");
     await people.getByTestId("selector-item-0").click();
     await people.getByTestId("selector_submit_button").click();
+    // The key writes wait until the panel is seen closed.
+    let releaseKeyWrites = () => {};
+    const keyWritesHeld = new Promise<void>((resolve) => {
+      releaseKeyWrites = resolve;
+    });
+    await page.route(/\/api\/2\.0\/files\/\d+\/access/, async (route) => {
+      if (route.request().method() === "PUT") await keyWritesHeld;
+      await route.fallback();
+    });
     await page.getByTestId("invite_panel_send_button").click();
     await unlock(page);
 
+    await expect(page.getByTestId("invite_panel_send_button")).toBeHidden();
+    await expect(page.getByTestId("reencrypt-progress-bar")).toBeVisible();
+    releaseKeyWrites();
     await expect
       .poll(() => keyHolders(room, MEMO.id))
       .toEqual([ALICE_ID, CAROL.id, FIXTURE_USER_ID].sort());
+    await expect(page.getByTestId("reencrypt-progress-bar")).toBeHidden();
     expect(members.current!.getMembers().map((m) => m.id)).toEqual([CAROL.id]);
     await expect(page.getByText("Users invited")).toBeVisible();
   });

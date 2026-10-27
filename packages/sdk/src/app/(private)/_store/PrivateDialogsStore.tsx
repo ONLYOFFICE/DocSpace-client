@@ -83,6 +83,9 @@ class PrivateDialogsStore {
 
   nameClash: NameClashPayload | null = null;
 
+  /** The re-encryption of an invite, in percent; null when none runs. */
+  reencryptPercent: number | null = null;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -125,6 +128,10 @@ class PrivateDialogsStore {
       this.nameClash?.resolve(false);
       this.nameClash = { names, resolve };
     });
+
+  setReencryptPercent = (percent: number | null) => {
+    this.reencryptPercent = percent;
+  };
 
   answerNameClash = (keepBoth: boolean) => {
     const pending = this.nameClash;

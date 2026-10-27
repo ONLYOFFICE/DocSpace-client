@@ -41,6 +41,15 @@ Shared helpers the SDK does not call yet:
 - The server withholds Copy from files inside an active private room (`../server/products/ASC.Files/Core/Core/Security/FileSecurity.cs:1894-1903`).
 - The empty-file handler serves the default template `new` plus the internal extension of the requested title (`FileHandlerService.EmptyFile`, `../server/products/ASC.Files/Core/HttpHandlers/FileHandler.ashx.cs:759-829`). PDF maps to `.pdf` (`FileUtility.cs:116-121`), and `common/resources/DocStore/new/<culture>/new.pdf` exists, so a PDF template is served.
 
+**Plan audit of 2026-10-27.** A second pass checked the open tasks against the SDK and client code and the server (read through CodeGraph):
+- History "Open location" in the SDK puts the decrypted name of an encrypted file into the folder filter's `search`, which reaches the address, the folder request and the host bridge. The client leaves `search` empty for an encrypted file.
+- An archived private room has no encrypted upload override, so the SDK upload hotkey takes the plaintext path. The conflict check `POST files/{folderId}/upload/check` receives the file titles and only then refuses a folder without the Create right (`UploadController.CheckUploadAsync`, `../server/products/ASC.Files/Server/Api/UploadController.cs:421-445`); an upload session is refused the same way (`FileUploader.GetFolderIdAsync`, `../server/products/ASC.Files/Core/Utils/FileUploader.cs:163`). No content is stored, but the names leave the browser.
+- In an archived room the server allows only Read, Delete, ReadHistory, Copy, Move, Download, ReadLinks and IndexExport (`FileSecurity.cs:1929-1947`, under `../server/products/ASC.Files/Core/Core/Security/`). Its private-room withholding of Copy, CopyTo and EditAccess sits in the VirtualRooms branch only (`FileSecurity.cs:1894-1922`), so an archived private room reports Copy for its encrypted files.
+- EditRoom and EditAccess are both granted by the RoomManager share (`FileSecurity.cs:2274-2287`, `2447-2461`), and an invite checks `CanEditAccessAsync` (`../server/products/ASC.Files/Core/Utils/FileSharing.cs:647`). Offering invite on EditRoom follows the client and changes nothing visible today.
+- Finalizing an upload session emits a socket "create" (`UploadController.cs:357`). The SDK's encrypted path adds no row itself, so without a socket event the list stays stale; the client inserts the row from the upload result.
+- `EntryManager.MarkAsRecent` returns early for an encrypted file (`../server/products/ASC.Files/Core/Utils/EntryManager.cs:2117-2122`), so encrypted files never appear in recent files.
+- `GET files/{fileId}/access` returns only the caller's own entries (`FilesController.GetEncryptionInfoAsync`, `../server/products/ASC.Files/Server/Api/FilesController.cs:1229-1251`), and `FileDao.SetFileKey` replaces only the users it is given (`../server/products/ASC.Files/Core/Core/Dao/TeamlabDao/FileDao.cs:2400-2432`). The leave-time revocation therefore deletes nothing, as the main spec `private-rooms/room-membership` already records.
+
 **Stashed documents.** No stashed design document covers this. The SDK plan in the author's stash predates the parity work; where it disagrees with the code, the code wins.
 
 ## Goals / Non-Goals
@@ -107,37 +116,49 @@ Shared helpers the SDK does not call yet:
 - The editor's create route is never reached from a private room.
 - The PDF form entry replaces the exclusion recorded in `private-rooms-sdk-gating-and-parity` D3.
 - The empty-template mock serves `new.pdf` with the PDF signature (server facts above).
+- An upload or create entry, hotkeys included, starts only when the open folder grants Create. An archived private room offers neither, so no plaintext path and no file name request is reachable there (audit of 2026-10-27).
 
 **D7. Shared menu predicates.**
 - What the client withholds for an encrypted file, a folder inside a private room, and a private room becomes shared predicates. The client's `contextOptions.helpers.ts` and the SDK's item, header, selection and room menus all call them, and the SDK's private whitelists in `private-context-options.ts` are derived from them.
 - The client's menu snapshots (see `.claude/rules/source-checks.md`) must stay unchanged; that is the check that the move did not change the client.
 - The SDK adds download-encrypted to the header menu and withholds integrator custom actions for encrypted items, as the client withholds plugins.
+- The predicates apply per item, so an encrypted file that opens only after a conversion loses open and preview, as in the client.
+- The room menu nests download, duplicate and embedding in "More options", so the withheld keys are removed recursively. Doubled, leading and trailing separators and an empty submenu are dropped. The selection menu of private rooms withholds download as well.
 
 **D8. Downloads and errors.**
-- The SDK refuses a download of any folder inside a private room, from every menu and from a selection, before any request.
-- It never offers the room download of a private room (the decrypted folder download is not part of the light client).
-- Every encrypted catch goes through the shared `getEncryptedOperationErrorMessage`.
+- The SDK refuses a download of any folder inside a private room, from every menu and from any selection holding one (download-as included), before any request.
+- It never offers the room download of a private room (the decrypted folder download is not part of the light client). The client still offers it; this is a deliberate light-client divergence, see proposal.md.
+- Download without decryption of a folder stays a server archive of the ciphertext files, as in the client (`private-rooms/file-operations`, "Download without decryption"). User decision 2026-10-27.
+- No encrypted path shows a raw error text. Specific keys stay (`Common:EncryptedCopyFailed`, `Common:EncryptionDownloadFailed`); an error without one goes through the shared `getEncryptedOperationErrorMessage`.
 
 **D9. Membership from every entry point.**
 - The private pages stop mounting the generic room dialogs. The header ⋮ actions of an open private room open the private dialogs through `PrivateDialogsStore`: invite with re-wrap, owner change with key checks, edit with the private badge, leave.
 - Leave-time revocation, the invite result reporting, the owner-candidate filter, the group expansion and the create-room gate move to `packages/shared` from the client.
 - The removal guard uses the client's counter from `packages/shared/utils/uploadErrors.ts` and the client's toast.
-- The invite panel closes after the room security update and reports the re-wrap progress afterwards, as the client does.
-- `private-rooms-invite-atomic-rewrap` later changes the shared invite orchestration once, for both apps.
+- The invite panel closes after the room security update and reports the re-wrap progress afterwards, as the client does today. The progress lives outside the panel, which unmounts on close. User decision 2026-10-27: `private-rooms-invite-atomic-rewrap` later changes the shared invite orchestration and the panel once, for both apps, and takes the SDK into its scope.
+- The entry points routed to the private dialogs are the header ⋮ of an open private room, the info panel ⋮ of an open private room (no room actions reach it today) and edit and leave in the private rooms list. `PrivateDialogsStore` gains a leave entry. This routing lands last, after the private flows it opens are complete.
+- The units moved to shared are: the leave-time revocation, the invite re-wrap with its result reporting, the owner-candidate filter, the new owner's key validation, the revocation of removed members with the group expansion, and the create-room gate (secure-context check, key re-fetch, key-generation gate). Known client quirks move unchanged: the 100-member page of the owner-candidate filter, its fail-open on error.
+- The leave-time revocation is ported as the main spec describes it, although the server keeps the entries (Context). User decision 2026-10-27. Leaving matches the client otherwise: the leave option of an owner change is checked by default, and the result toast and the return to the private rooms list are the client's.
 
 **D10. Names and archive.**
-- The SDK name recovery reacts to the files-list store (an observer on its items), so socket and navigation updates are covered.
-- The SDK's reduced `useDecryptedFilename` is replaced by the shared `useResolvedFileTitle`.
+- The SDK name recovery reacts to the files-list store (an observer on its items) through the shared `useEncryptedFilenameRecovery`, which skips cached and already attempted files, so socket, paging and navigation updates are covered without a room-keys request per change.
+- The SDK's reduced `useDecryptedFilename` is replaced by the shared `useResolvedFileTitle` in rows, tiles and table; the info panel history recovers the names of its entries, related entries included, as the client does.
 - The pickers get the client's `usePickerFileTitles`, moved to shared.
-- Whether an open folder is private, and whether it is archived, comes from its path through the shared target (D3), not from the route.
-- The archive keeps the active-room predicates (D7), filtered by the rights the server sends for an archived room.
+- Recent files are left out: the server never marks an encrypted file as recent (Context).
+- A file stored by an encrypted upload, duplicate or copy is added to the open folder's list from the orchestrator's result (the stored file and its path), as the client does, without waiting for a socket event.
+- Whether an open folder is private, and whether it is archived, comes from its path through the shared target (D3), not from the route. A room without the private setting opened at a private address goes to its generic room page.
+- The archive keeps the active-room predicates (D7), filtered by the rights the server sends for an archived room. The header and info panel room menus get the archive state.
 
 **D11. Light-client limits.**
-- In a private room the SDK filter bar hides search, and the private server pages ignore a `search` parameter.
+- In a private room the SDK filter bar hides search, and the private room server page and the sign-in return address ignore a `search` parameter. The folder list drops `search` from its own requests on private pages.
+- The ui-kit Filter cannot hide its search field today, and the desktop main button is drawn inside it. User decision 2026-10-27: `docspace-ui-kit-react` gains a Filter prop that hides the search field and keeps the main button; until that release the apps take it through `pnpm run update-ui-kit`.
+- Opening the location of an encrypted file opens its folder without a search, so its name never reaches the server, the address or the host.
 - The SDK gets no clipboard hotkeys.
-- Both are SHALL NOT requirements in the sdk-surface delta, so a later change has to lift them explicitly.
+- These are SHALL NOT requirements in the sdk-surface delta, so a later change has to lift them explicitly.
 
-**D12. Security fixes first.** D3, D2 and D6 close the three plaintext leaks and come before the refactors. Each lands with an SDK E2E case in `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts` showing that no plaintext reaches the room.
+**D12. Security fixes first.** D3, D2 and D6 close the three plaintext leaks and come before the refactors. The audit of 2026-10-27 added two name leaks (History "Open location", uploads in an archived private room); they come next, before the remaining refactors. Each lands with an SDK E2E case in `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts` showing that no plaintext reaches the server.
+
+**D13. Name clash prompt.** The orchestrator's name-clash check runs only when its caller passes an answer. The SDK passes one through the shared conflict-resolve dialog without the overwrite option: keep both uploads with the first free copy suffix, and skip or cancel sends nothing. Without it, a second file with the same decrypted name is stored silently.
 
 ## Risks / Trade-offs
 
@@ -147,6 +168,9 @@ Shared helpers the SDK does not call yet:
 - [Overlap with `private-rooms-invite-atomic-rewrap`] → This change only moves today's invite orchestration to shared and fixes the SDK's order of operations; the pending-access work stays in that change.
 - [Leaving private rooms out of generic lists without the opt-in hides them from hosts that relied on seeing them] → Recorded as a review decision in proposal.md; the not-available view names the opt-in.
 - [SDK E2E builds take minutes] → Run E2E per task group in a long-lived container (build once, run many), as done for `private-rooms-sdk-gating-and-parity` 6.1.
+- [Hiding search depends on a ui-kit change in another repository] → The server-side and request-side parts of the search limit do not depend on it; the hidden field lands through a local ui-kit pack and switches to the published version once released.
+- [The client code moved in the membership task has few tests] → Characterization tests for the owner-candidate filter, the key re-fetch and the cancel close of the create dialog are added before the move.
+- [Server: an uninvited DocSpace administrator keeps Read, Copy and Download on an archived private room, because the administrator bypass of the archive branch (`FileSecurity.cs:1949-1983`) lacks the private-room exclusion of the rooms branch (`FileSecurity.cs:1643-1653`)] → Out of scope here; recorded for `private-rooms-server-hardening`.
 
 ## Migration Plan
 

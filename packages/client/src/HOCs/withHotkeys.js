@@ -426,6 +426,12 @@ const withHotkeys = (Component) => {
       "Alt+Shift+o",
       () => {
         if (folderWithNoAction || isFormRoom || isParentFolderFormRoom) return;
+
+        if (isMobile) {
+          toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
+          return;
+        }
+
         setSelectFileDialogVisible(true);
       },
 

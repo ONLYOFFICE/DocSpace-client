@@ -215,12 +215,14 @@ const serveRooms = async (
     sharedRoom = false,
     memberKeys = [],
     folders = [],
+    archived = false,
   }: {
     files?: TPlainFile[];
     secondRoom?: boolean;
     sharedRoom?: boolean;
     memberKeys?: TEncryptionKeyPair[];
     folders?: { id: number; title: string }[];
+    archived?: boolean;
   } = {},
 ): Promise<TRooms> => {
   const alice = await generateIdentityKeyPair();
@@ -252,6 +254,7 @@ const serveRooms = async (
       roomUserKeys: [MY_KEY],
       initialFiles,
       folders,
+      archived,
       withOtherRooms,
       handle: roomHandle,
     }),
@@ -1083,6 +1086,32 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
 });
 
 test.describe("(private) — archive", () => {
+  test("Upload hotkey in an archived room", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveRooms(mockBoth, port, { archived: true });
+    const uploadRequests: string[] = [];
+    page.on("request", (request) => {
+      if (/\/upload\/|\/session/.test(request.url())) {
+        uploadRequests.push(request.url());
+      }
+    });
+
+    await openRoom(page, baseUrl);
+    await expect(row(page, MEMO.serverTitle)).toBeVisible();
+
+    const chooser = page
+      .waitForEvent("filechooser", { timeout: 2000 })
+      .catch(() => null);
+    await page.keyboard.press("Shift+U");
+
+    expect(await chooser).toBeNull();
+    expect(uploadRequests).toEqual([]);
+  });
+
   // §17.2 #17
   // Converted from test.fixme: this test body only asserts compile-time
   // constants and does not navigate to any URL or interact with the browser.

@@ -73,6 +73,10 @@ export default function useDocsHotkeys({
     return !checkDialogsOpen();
   }, []);
 
+  // Spec: private-rooms/sdk-surface, "No upload or creation without the create right".
+  const canCreateHere = () =>
+    !encryptedActions || !!filesListStore.currentFolder?.security?.Create;
+
   const hotkeysOptions = {
     filter: (ev: KeyboardEvent) =>
       (ev.target as HTMLElement)?.tagName !== "INPUT" &&
@@ -186,7 +190,7 @@ export default function useDocsHotkeys({
   useHotkeys(
     "shift+d",
     () => {
-      if (!isEnabled()) return;
+      if (!isEnabled() || !canCreateHere()) return;
       onCreateFile("docx");
     },
     { ...hotkeysOptions, keyup: true },
@@ -196,7 +200,7 @@ export default function useDocsHotkeys({
   useHotkeys(
     "shift+s",
     () => {
-      if (!isEnabled()) return;
+      if (!isEnabled() || !canCreateHere()) return;
       onCreateFile("xlsx");
     },
     { ...hotkeysOptions, keyup: true },
@@ -206,7 +210,7 @@ export default function useDocsHotkeys({
   useHotkeys(
     "shift+p",
     () => {
-      if (!isEnabled()) return;
+      if (!isEnabled() || !canCreateHere()) return;
       onCreateFile("pptx");
     },
     { ...hotkeysOptions, keyup: true },
@@ -216,7 +220,7 @@ export default function useDocsHotkeys({
   useHotkeys(
     "shift+o",
     () => {
-      if (!isEnabled()) return;
+      if (!isEnabled() || !canCreateHere()) return;
       onCreateFile("pdf");
     },
     { ...hotkeysOptions, keyup: true },
@@ -226,7 +230,7 @@ export default function useDocsHotkeys({
   useHotkeys(
     "shift+f",
     () => {
-      if (!isEnabled()) return;
+      if (!isEnabled() || !canCreateHere()) return;
       onCreateFile("folder");
     },
     { ...hotkeysOptions, keyup: true },
@@ -236,7 +240,7 @@ export default function useDocsHotkeys({
   useHotkeys(
     "shift+u",
     () => {
-      if (!isEnabled()) return;
+      if (!isEnabled() || !canCreateHere()) return;
       onUploadFiles();
     },
     { ...hotkeysOptions, keyup: true },

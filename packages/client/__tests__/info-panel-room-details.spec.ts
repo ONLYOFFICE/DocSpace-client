@@ -33,7 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { Page } from "@playwright/test";
+import { http, HttpResponse } from "msw";
 import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
+import { API_PREFIX, BASE_URL } from "@docspace/shared/__mocks__/e2e/utils";
 import {
   settingsHandler,
   TypeSettings,
@@ -53,6 +56,45 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
 const ROOM_ID = 33;
 const ROOM_FILE_ID = 200;
 const ROOM_CONTENT_URL = `/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`;
+
+const API = `${BASE_URL}:${TEST_PORT}/${API_PREFIX}`;
+const ADMIN_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+const UPLOADED_FILE_ID = 999;
+const UPLOAD_SESSION_ID = "upload-session";
+
+const openDetails = async (page: Page) => {
+  const detailsTab = page.getByTestId("info_details_tab");
+
+  if (!(await detailsTab.isVisible().catch(() => false))) {
+    await page.locator(".info-panel-toggle").click();
+    await expect(detailsTab).toBeVisible({ timeout: 10000 });
+  }
+
+  await detailsTab.click();
+};
+
+const uploadedFile = {
+  id: UPLOADED_FILE_ID,
+  folderId: ROOM_ID,
+  title: "Uploaded.docx",
+  fileExst: ".docx",
+  fileType: 7,
+  version: 1,
+  versionGroup: 1,
+  contentLength: "1 byte",
+  pureContentLength: 1,
+  fileStatus: 0,
+  fileEntryType: 2,
+  rootFolderId: ROOM_ID,
+  rootFolderType: 14,
+  access: 0,
+  security: { Read: true, Edit: true, Delete: true, Download: true },
+  viewAccessibility: { WebView: true, WebEdit: true },
+  created: "2026-01-01T00:00:00.000Z",
+  updated: "2026-01-01T00:00:00.000Z",
+  createdBy: { id: ADMIN_ID, displayName: "Administrator" },
+  updatedBy: { id: ADMIN_ID, displayName: "Administrator" },
+};
 
 test.describe("Rooms — info panel details", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -91,19 +133,153 @@ test.describe("Rooms — info panel details", () => {
     await page.goto(`${baseUrl}${ROOM_CONTENT_URL}`);
     await expect(page.getByTestId("table-body")).toBeVisible();
 
-    const detailsTab = page.getByTestId("info_details_tab");
-
-    if (!(await detailsTab.isVisible().catch(() => false))) {
-      await page.locator(".info-panel-toggle").click();
-      await expect(detailsTab).toBeVisible({ timeout: 10000 });
-    }
-
-    await detailsTab.click();
+    await openDetails(page);
 
     await expect(
       page.getByTestId("info_panel_details_room_icon"),
     ).toBeVisible();
 
     expect(pageErrors.filter((m) => m.includes("EditRoom"))).toEqual([]);
+  });
+
+  // Production report (4.0.1): uploading one file into a room raised the
+  // "Content" counter by two. The upload finish and the socket "create"
+  // event both counted the file when the socket came first.
+  test("should count an uploaded file once when the socket event arrives first", async ({
+    page,
+    baseUrl,
+    mockRequest,
+    wsMock,
+  }) => {
+    let releaseFinalize!: () => void;
+    const finalizeGate = new Promise<void>((resolve) => {
+      releaseFinalize = resolve;
+    });
+    let onFinalizeRequested!: () => void;
+    const finalizeRequested = new Promise<void>((resolve) => {
+      onFinalizeRequested = resolve;
+    });
+
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
+      roomContentHandler(TEST_PORT, ROOM_ID, ROOM_FILE_ID),
+      http.post(`${API}/files/${ROOM_ID}/upload/check`, () =>
+        HttpResponse.json({ response: [] }),
+      ),
+      // no counts here, so the server sync after the socket event leaves
+      // them alone and the test sees the local counting only
+      http.get(`${API}/files/folder/${ROOM_ID}`, () =>
+        HttpResponse.json({ response: { id: ROOM_ID, title: "Public Room" } }),
+      ),
+      http.post(`${API}/files/${ROOM_ID}/session`, () =>
+        HttpResponse.json({
+          response: { id: UPLOAD_SESSION_ID, path: [ROOM_ID] },
+        }),
+      ),
+      http.post(
+        `${API}/files/${ROOM_ID}/session/${UPLOAD_SESSION_ID}/upload`,
+        () => HttpResponse.json({ response: { uploaded: false } }),
+      ),
+      http.put(
+        `${API}/files/${ROOM_ID}/session/${UPLOAD_SESSION_ID}/finalize`,
+        async () => {
+          onFinalizeRequested();
+          await finalizeGate;
+          return HttpResponse.json({
+            response: {
+              uploaded: true,
+              id: UPLOADED_FILE_ID,
+              file: uploadedFile,
+            },
+          });
+        },
+      ),
+      // the socket handler fetches the new file to list it; held back so
+      // the upload is the one that lists it, as when the backend is slow
+      http.get(`${API}/files/file/${UPLOADED_FILE_ID}`, async () => {
+        await finalizeGate;
+        return HttpResponse.json({ response: uploadedFile });
+      }),
+    );
+    await wsMock.setupWebSocketMock();
+
+    await page.goto(`${baseUrl}${ROOM_CONTENT_URL}`);
+    await expect(page.getByTestId("table-body")).toBeVisible();
+
+    await openDetails(page);
+
+    const content = page.getByText(/Folders: \d+ \| Files: \d+/);
+    await expect(content).toHaveText("Folders: 0 | Files: 1");
+
+    await page.locator(".custom-file-input-article").setInputFiles({
+      name: uploadedFile.title,
+      mimeType:
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      buffer: Buffer.from("x"),
+    });
+
+    await finalizeRequested;
+
+    wsMock.emitModifyFolder({
+      cmd: "create",
+      type: "file",
+      id: UPLOADED_FILE_ID,
+      data: JSON.stringify(uploadedFile),
+    });
+
+    await expect(content).toHaveText("Folders: 0 | Files: 2");
+
+    releaseFinalize();
+
+    await expect(
+      page.getByTestId("table-body").getByText("Uploaded", { exact: false }),
+    ).toBeVisible();
+    await expect(content).toHaveText("Folders: 0 | Files: 2");
+
+    wsMock.closeConnection();
+  });
+
+  // A file outside the loaded list cannot be counted locally, so after the
+  // socket events settle the counts are taken from the server.
+  test("should take the room's counts from the server after a socket event", async ({
+    page,
+    baseUrl,
+    mockRequest,
+    wsMock,
+  }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
+      roomContentHandler(TEST_PORT, ROOM_ID, ROOM_FILE_ID),
+      http.get(`${API}/files/folder/${ROOM_ID}`, () =>
+        HttpResponse.json({
+          response: {
+            id: ROOM_ID,
+            title: "Public Room",
+            filesCount: 0,
+            foldersCount: 0,
+          },
+        }),
+      ),
+    );
+    await wsMock.setupWebSocketMock();
+
+    await page.goto(`${baseUrl}${ROOM_CONTENT_URL}`);
+    await expect(page.getByTestId("table-body")).toBeVisible();
+
+    await openDetails(page);
+
+    const content = page.getByText(/Folders: \d+ \| Files: \d+/);
+    await expect(content).toHaveText("Folders: 0 | Files: 1");
+
+    wsMock.emitModifyFolder({
+      cmd: "delete",
+      type: "file",
+      id: 555,
+      data: JSON.stringify({ id: 555, folderId: ROOM_ID }),
+    });
+
+    await expect(content).toHaveText("Folders: 0 | Files: 0");
+
+    wsMock.closeConnection();
   });
 });

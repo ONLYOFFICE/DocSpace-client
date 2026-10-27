@@ -1,0 +1,35 @@
+{
+  "key_path": "UserTypeLoweredDescription",
+  "content": "Some actions on this page may no longer be available to you.",
+  "content_en_sha1_hash": "a96cc8b11154f8b122d9305d687f8d7b00583537",
+  "created_at": "2026-10-26T15:55:48.604Z",
+  "updated_at": "2026-10-26T15:56:03.597Z",
+  "comment": {
+    "text": "Text under the heading of the warning bar shown after the current user's type was lowered while the page was open; it is followed by a separate Reload page link. Explains that buttons and menus still on screen may refer to actions the user is no longer allowed to perform.",
+    "is_auto": true,
+    "updated_at": "2026-10-26T15:56:03.597Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/MainBar/UserTypeLoweredBar.js",
+      "line_number": 58,
+      "context": "tReady && (\n <SnackBar\n headerText={t(\"UserTypeLoweredHeader\")}\n text={\n <>\n {t(\"UserTypeLoweredDescription\")}{\" \"}\n <Link\n fontSize=\"12px\"\n fontWeight=\"400\"\n color={currentColorScheme?.main?.accent}\n onClick={onReload}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -108,7 +108,7 @@
   "SkipExistingValuesDescription": "Kohteet, joilla on jo mallin {{template}} arvoja, pysyvät ennallaan",
   "SuggestMetadata": "Luo metatiedot",
   "TemplateDeleted": "Malli poistettu",
-  "TemplateFieldsRequired": "Lisää vähintään yksi kenttä, jotta voit tallentaa mallin",
+  "TemplateFieldsRequired": "Lisää vähintään yksi kenttä tallentaaksesi mallin",
   "TemplateNameExists": "Tämänniminen malli on jo olemassa",
   "TemplateValue": "Metatietomalli: {{template}}",
   "Visibility": "Näkyvyys",

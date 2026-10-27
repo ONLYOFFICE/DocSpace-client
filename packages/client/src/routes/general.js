@@ -407,6 +407,13 @@ export const generalClientRoutes = [
           ).then((m) => ({ Component: m.default })),
       },
       {
+        path: "invoice-history",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/InvoiceHistoryPage"
+          ).then((m) => ({ Component: m.default })),
+      },
+      {
         path: "usage",
         lazy: () =>
           import(

@@ -56,6 +56,33 @@ In order of preference:
 Never run `npm audit fix --force` / `pnpm audit --fix` unattended — they happily
 cross majors in the manifest.
 
+The script already sorts findings into these buckets:
+
+- `direct dependency - bump it ... in:` lists every manifest that pins the
+  package (a `catalog:` spec points at the `catalog:` block of
+  `pnpm-workspace.yaml`). Bump all of them, plus the packages released in
+  lockstep with it — `next` comes with `@next/bundle-analyzer` /
+  `eslint-config-next`, `vitest` with `@vitest/ui` / `@vitest/coverage-v8`.
+  After the bump, drop any version-pinned `minimumReleaseAgeExclude` entry
+  for the old version.
+- `documented exception` means the advisory id is already explained in the
+  overrides file. Leave it alone unless the reasoning there no longer holds,
+  and it does not count toward the exit code. A new advisory you decide not to
+  fix gets the same treatment: write its GHSA id and the reason next to the
+  overrides, and add the id to `auditConfig.ignoreGhsas` in
+  `pnpm-workspace.yaml` so a plain `pnpm audit` agrees.
+- `also pulled in by:` names parents that bring their own copy. A manifest
+  bump leaves those alone; add a bounded override and name the parent in its
+  comment. A declaration whose range already excludes every vulnerable
+  version is not listed as direct.
+- An inclusive upper bound (`<=16.4.0`) is itself vulnerable; the script looks
+  up the first release after it. Under 0.x every minor is breaking, so
+  katex 0.17 -> 0.18 is reported as crossing a major.
+
+When the audit came from a security bulletin, also check the trees the
+bulletin names that this script cannot see: the Node runtime in the build
+images and packages lives in `../buildtools`, ui-kit in its own repository.
+
 ## Step 3 — the override trap (read before writing the line)
 
 A pnpm override key can carry a selector — `"nanoid@^3"` — but the selector only
@@ -102,6 +129,12 @@ npm --prefix <dir> install
 ```
 
 Both lockfiles are committed — a fix that only lives in a manifest is not a fix.
+
+**Order matters: refresh the npm trees before the root `pnpm install`.** The
+root `prepare` script runs `npm --prefix ./common/tests ci`, which fails
+whenever `common/tests/package.json` has moved ahead of its lockfile. Run
+`npm --prefix common/tests install --package-lock-only` first; if the root
+install has already failed, run it and repeat `pnpm install`.
 
 If pnpm refuses the new version because of the release-age policy, the version
 is younger than the configured `minimumReleaseAge`. Either wait, or add a

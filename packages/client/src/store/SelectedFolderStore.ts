@@ -122,6 +122,8 @@ class SelectedFolderStore {
 
   filesCount = 0;
 
+  private countedCreatedFileIds = new Set<number | string>();
+
   foldersCount = 0;
 
   isShareable = false;
@@ -344,6 +346,7 @@ class SelectedFolderStore {
     this.folders = null;
     this.parentId = 0;
     this.filesCount = 0;
+    this.countedCreatedFileIds = new Set();
     this.foldersCount = 0;
     this.isShareable = false;
     this.new = 0;
@@ -398,6 +401,23 @@ class SelectedFolderStore {
 
   setFilesCount = (filesCount: number) => {
     this.filesCount = filesCount;
+  };
+
+  // An uploaded file reaches the folder twice - through the upload finish and
+  // through the socket "create" event - in either order, so each id may raise
+  // the count only once until the folder is loaded again.
+  countFileCreated = (fileId: number | string) => {
+    if (this.countedCreatedFileIds.has(fileId)) return;
+
+    this.countedCreatedFileIds.add(fileId);
+    this.filesCount += 1;
+  };
+
+  // A file restored from the trash or moved back keeps its id, so it has to
+  // be countable again once it is gone.
+  countFileDeleted = (fileId: number | string) => {
+    this.countedCreatedFileIds.delete(fileId);
+    this.filesCount -= 1;
   };
 
   setFoldersCount = (foldersCount: number) => {

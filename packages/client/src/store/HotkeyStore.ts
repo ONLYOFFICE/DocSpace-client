@@ -257,8 +257,22 @@ class HotkeyStore {
       e.preventDefault();
     }
 
-    const { selection: s, hotkeyCaret, filesList } = this.filesStore;
-    const selection = s.length ? s : filesList;
+    const {
+      selection: s,
+      hotkeyCaret,
+      hotkeyCaretStart,
+      filesList,
+    } = this.filesStore;
+    const caretStartItem = filesList.find(
+      (f) =>
+        f.id === hotkeyCaretStart?.id &&
+        f.isFolder === hotkeyCaretStart?.isFolder,
+    );
+    const selection = s.length
+      ? s
+      : caretStartItem
+        ? [caretStartItem]
+        : filesList;
 
     if (!hotkeyCaret) {
       const scroll = document.getElementsByClassName("section-scroll");

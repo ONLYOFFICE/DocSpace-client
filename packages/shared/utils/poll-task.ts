@@ -33,84 +33,105 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { pipe, delay, stopWhen } from "@onlyoffice/apps-ui-kit/utils/pipe";
+import { delay } from "@onlyoffice/apps-ui-kit/utils/pipe";
 
 type TPolledTask = {
   percentage: number;
   isCompleted: boolean;
 };
 
+/**
+ * How a task shows it is alive between polls -- part of the contract with the
+ * server behind it, so each caller states the one its server keeps.
+ *
+ * - "progress": the percentage grows at least once per stallTimeoutMs. A
+ *   missing task is a failure at once, as in getOperationProgress.
+ * - "presence": the server keeps the task published for as long as it runs,
+ *   whatever its percentage does, so a task that is there and not completed
+ *   is alive. It fails once it has been missing for longer than
+ *   missingTimeoutMs in a row: the server may drop it briefly between
+ *   publications.
+ */
+export type TTaskLiveness =
+  | { kind: "progress"; stallTimeoutMs: number }
+  | { kind: "presence"; missingTimeoutMs: number };
+
 type TPollTaskOptions<T extends TPolledTask> = {
   /** Names the task in the errors, e.g. "XLSX update". */
   name: string;
-  /** Resolves to null or undefined once the server no longer has the task. */
+  /** Resolves to null or undefined while the server has no such task. */
   fetchTask: () => Promise<T | null | undefined>;
   onProgress: (task: T) => void;
   /** Throws if the completed task ended in a failed or cancelled state. */
   assertSucceeded: (task: T) => void;
-  /** Polls in a row without progress before giving up. */
-  maxStalledPolls?: number;
+  liveness: TTaskLiveness;
 };
 
 /**
- * Polls a distributed task once a second until it completes.
+ * The polling lost the task: it went missing, or stopped showing it is alive.
+ * Unlike a failure the server reports for the task, its message is not meant
+ * for the user, so callers show their own.
+ */
+export class TaskPollingError extends Error {
+  name = "TaskPollingError";
+}
+
+export const POLL_INTERVAL_MS = 1000;
+
+/**
+ * Polls a distributed task once a second until it completes, and gives up only
+ * when the task stops showing it is alive (see TTaskLiveness).
  *
- * Gives up only after maxStalledPolls polls in which the percentage did not
- * grow, not after a fixed number of polls: a long run (e.g. the recovery of
- * form responses before a report) is alive while its percentage grows, and a
- * stuck one is still caught. A task the server no longer has is an error, as
- * in getOperationProgress.
- *
- * There is deliberately no ceiling on the total time. Only a strict growth
- * counts as progress, and the server sends the percentage as an integer from
- * 0 to 100, so it can grow at most 101 times: the polling is bounded, and runs
- * long only while the server keeps moving the task. A task stuck at 100 that
- * never completes times out like any other stalled one. A fixed ceiling would
- * cut short a long honest run (e.g. a recovery of a thousand responses takes
- * over half an hour), which is the failure this function exists to avoid; the
- * file operations in loopFilesOperationsImpl have no ceiling either.
+ * There is deliberately no ceiling on the total time: a run may honestly take
+ * hours (a recovery of a thousand responses before a report takes over half an
+ * hour), and cutting it short is the failure this function exists to avoid;
+ * the file operations in loopFilesOperationsImpl have no ceiling either.
  */
 export const pollTask = <T extends TPolledTask>({
   name,
   fetchTask,
   onProgress,
   assertSucceeded,
-  maxStalledPolls = 120,
+  liveness,
 }: TPollTaskOptions<T>): Promise<T> => {
-  let stalledPolls = 0;
   let lastPercentage = -1;
+  let lastSignOfLife = Date.now();
 
-  const step: () => Promise<T> = pipe<T>(
-    delay(1000),
-    async () => {
-      if (++stalledPolls > maxStalledPolls) {
-        throw new Error(`${name} timed out`);
+  // Calls itself for the next poll; every await unwinds the call, so the
+  // stack does not grow however long the task runs.
+  const poll = async (): Promise<T> => {
+    await delay(POLL_INTERVAL_MS)(undefined);
+
+    const task = await fetchTask();
+    const silentFor = Date.now() - lastSignOfLife;
+
+    if (!task) {
+      if (
+        liveness.kind === "progress" ||
+        silentFor > liveness.missingTimeoutMs
+      ) {
+        throw new TaskPollingError(`${name} task not found`);
       }
+      return poll();
+    }
 
-      const task = await fetchTask();
-      if (!task) throw new Error(`${name} task not found`);
+    // Strictly greater: a percentage that holds or falls is no progress.
+    const grew = task.percentage > lastPercentage;
+    if (grew) lastPercentage = task.percentage;
 
-      return task;
-    },
-    (task) => {
-      // Strictly greater: a percentage that holds or falls is no progress.
-      if (task.percentage > lastPercentage) {
-        lastPercentage = task.percentage;
-        stalledPolls = 0;
-      }
+    if (liveness.kind === "presence" || grew) {
+      lastSignOfLife = Date.now();
+    } else if (silentFor > liveness.stallTimeoutMs) {
+      throw new TaskPollingError(`${name} timed out`);
+    }
 
-      onProgress(task);
-      return task;
-    },
-    stopWhen(
-      (task) => task.isCompleted,
-      (task) => {
-        assertSucceeded(task);
-        return task;
-      },
-      () => step(),
-    ),
-  );
+    onProgress(task);
 
-  return step();
+    if (!task.isCompleted) return poll();
+
+    assertSucceeded(task);
+    return task;
+  };
+
+  return poll();
 };

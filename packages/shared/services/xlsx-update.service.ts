@@ -40,17 +40,20 @@ import {
 } from "../api/files";
 import { DistributedTaskStatus } from "../enums";
 import type { UpdateXlsxResponse } from "../api/files/types";
-import { pollTask } from "../utils/poll-task";
+import { pollTask, type TTaskLiveness } from "../utils/poll-task";
 
 type XlsxTask = UpdateXlsxResponse["task"];
 
-// Polls (seconds) the percentage of a report may hold before the update gives
-// up. The report shows the recovery of the form's responses first, and the
-// server holds the percentage there for long: while it waits for another
-// user's recovery of the same form, between its 25 integer steps, and while it
-// builds an older version of the report, which may take up to 10 minutes and
-// is retried once. Hence twice that build time and a margin, not the default.
-const XLSX_MAX_STALLED_POLLS = 25 * 60;
+// A report shows the recovery of the form's responses first, and its
+// percentage may hold for as long as the recovery takes (queued behind other
+// recoveries, waiting for another user's one, building older versions). The
+// server keeps the report published all the while instead, so -- as agreed
+// with it -- a report that is there and not completed is alive, and one
+// missing for longer than 70 seconds has failed.
+const XLSX_UPDATE_LIVENESS: TTaskLiveness = {
+  kind: "presence",
+  missingTimeoutMs: 75 * 1000,
+};
 
 export class XlsxUpdateService {
   /**
@@ -80,14 +83,13 @@ export class XlsxUpdateService {
   static poll(
     formId: number,
     onProgress: (task: XlsxTask) => void,
-    maxStalledPolls = XLSX_MAX_STALLED_POLLS,
   ): Promise<XlsxTask> {
     return pollTask({
       name: "XLSX update",
       fetchTask: () => getProgressXlsx(formId),
       onProgress,
       assertSucceeded: XlsxUpdateService.assertTaskSucceeded,
-      maxStalledPolls,
+      liveness: XLSX_UPDATE_LIVENESS,
     });
   }
 }

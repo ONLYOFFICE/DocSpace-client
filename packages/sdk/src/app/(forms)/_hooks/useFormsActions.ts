@@ -51,6 +51,7 @@ import { frameCallEvent } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
+import { TaskPollingError } from "@docspace/shared/utils/poll-task";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -288,7 +289,13 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         );
       } catch (error) {
         if (progressStarted) progressStore.error();
-        toastr.error(error as string);
+        // A failure the server reports for the task carries its own message;
+        // one of the polling itself does not, and is not shown as is.
+        toastr.error(
+          error instanceof TaskPollingError
+            ? t("Common:UnexpectedError")
+            : (error as string),
+        );
         console.error(error);
       }
     },

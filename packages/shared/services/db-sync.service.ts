@@ -36,7 +36,14 @@
 import { externalDbSync } from "../api/rooms";
 import { DistributedTaskStatus } from "../enums";
 import type { ExternalSyncDB } from "../api/rooms/types";
-import { pollTask } from "../utils/poll-task";
+import { pollTask, type TTaskLiveness } from "../utils/poll-task";
+
+// The sync publishes its percentage after every ten forms it goes through, and
+// nothing keeps it published in between.
+const DB_SYNC_LIVENESS: TTaskLiveness = {
+  kind: "progress",
+  stallTimeoutMs: 2 * 60 * 1000,
+};
 
 export class DbSyncService {
   static assertTaskSucceeded(task: ExternalSyncDB): void {
@@ -51,14 +58,13 @@ export class DbSyncService {
   static poll(
     roomId: number,
     onProgress: (task: ExternalSyncDB) => void,
-    maxStalledPolls?: number,
   ): Promise<ExternalSyncDB> {
     return pollTask({
       name: "DB sync",
       fetchTask: () => externalDbSync(roomId),
       onProgress,
       assertSucceeded: DbSyncService.assertTaskSucceeded,
-      maxStalledPolls,
+      liveness: DB_SYNC_LIVENESS,
     });
   }
 }

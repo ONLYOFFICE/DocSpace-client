@@ -36,7 +36,12 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { pollTask } from "./poll-task";
+import {
+  pollTask,
+  POLL_INTERVAL_MS,
+  TaskPollingError,
+  type TTaskLiveness,
+} from "./poll-task";
 
 type TTask = { percentage: number; isCompleted: boolean; failed?: boolean };
 
@@ -45,9 +50,18 @@ const task = (percentage: number, isCompleted = false): TTask => ({
   isCompleted,
 });
 
+const PROGRESS: TTaskLiveness = {
+  kind: "progress",
+  stallTimeoutMs: 3 * POLL_INTERVAL_MS,
+};
+const PRESENCE: TTaskLiveness = {
+  kind: "presence",
+  missingTimeoutMs: 3 * POLL_INTERVAL_MS,
+};
+
 const startPolling = (
   fetchTask: () => Promise<TTask | null | undefined>,
-  maxStalledPolls = 3,
+  liveness: TTaskLiveness = PROGRESS,
 ) => {
   const onProgress = vi.fn();
   const assertSucceeded = vi.fn((t: TTask) => {
@@ -59,7 +73,7 @@ const startPolling = (
     fetchTask,
     onProgress,
     assertSucceeded,
-    maxStalledPolls,
+    liveness,
   });
   // Keeps an early rejection from being reported as unhandled while the
   // timers are advanced; the test awaits the same promise.
@@ -67,6 +81,9 @@ const startPolling = (
 
   return { result, onProgress, assertSucceeded };
 };
+
+const polls = (count: number) =>
+  vi.advanceTimersByTimeAsync(count * POLL_INTERVAL_MS);
 
 describe("pollTask", () => {
   beforeEach(() => {
@@ -77,95 +94,175 @@ describe("pollTask", () => {
     vi.useRealTimers();
   });
 
-  it("resolves with the completed task after checking it succeeded", async () => {
-    const fetchTask = vi
-      .fn()
-      .mockResolvedValueOnce(task(30))
-      .mockResolvedValueOnce(task(100, true));
+  it.each([PROGRESS, PRESENCE])(
+    "resolves with the completed task after checking it succeeded (%o)",
+    async (liveness) => {
+      const fetchTask = vi
+        .fn()
+        .mockResolvedValueOnce(task(30))
+        .mockResolvedValueOnce(task(100, true));
 
-    const { result, onProgress, assertSucceeded } = startPolling(fetchTask);
-    await vi.advanceTimersByTimeAsync(2000);
+      const { result, onProgress, assertSucceeded } = startPolling(
+        fetchTask,
+        liveness,
+      );
+      await polls(2);
 
-    await expect(result).resolves.toEqual(task(100, true));
-    expect(onProgress).toHaveBeenCalledTimes(2);
-    expect(assertSucceeded).toHaveBeenCalledWith(task(100, true));
-  });
-
-  it("times out after maxStalledPolls polls without progress", async () => {
-    const fetchTask = vi.fn().mockResolvedValue(task(10));
-
-    const { result } = startPolling(fetchTask);
-    // The first poll is progress (from nothing), then 3 polls stall.
-    await vi.advanceTimersByTimeAsync(5000);
-
-    await expect(result).rejects.toThrow("Test task timed out");
-    expect(fetchTask).toHaveBeenCalledTimes(4);
-  });
-
-  it("keeps waiting past maxStalledPolls while the percentage grows", async () => {
-    let percentage = 0;
-    const fetchTask = vi.fn(async () => {
-      percentage += 1;
-      return task(percentage, percentage === 10);
-    });
-
-    const { result } = startPolling(fetchTask);
-    await vi.advanceTimersByTimeAsync(10000);
-
-    await expect(result).resolves.toEqual(task(10, true));
-    expect(fetchTask).toHaveBeenCalledTimes(10);
-  });
-
-  it("counts the stall from the last progress, not from the start", async () => {
-    const fetchTask = vi
-      .fn()
-      .mockResolvedValueOnce(task(0))
-      .mockResolvedValueOnce(task(0))
-      .mockResolvedValueOnce(task(0))
-      .mockResolvedValueOnce(task(25))
-      .mockResolvedValueOnce(task(25))
-      .mockResolvedValueOnce(task(25))
-      .mockResolvedValueOnce(task(100, true));
-
-    const { result } = startPolling(fetchTask);
-    await vi.advanceTimersByTimeAsync(7000);
-
-    await expect(result).resolves.toEqual(task(100, true));
-  });
-
-  it("does not count a falling percentage as progress", async () => {
-    const fetchTask = vi
-      .fn()
-      .mockResolvedValueOnce(task(50))
-      .mockResolvedValue(task(40));
-
-    const { result } = startPolling(fetchTask);
-    await vi.advanceTimersByTimeAsync(5000);
-
-    await expect(result).rejects.toThrow("Test task timed out");
-  });
-
-  it.each([null, undefined])(
-    "rejects when the server no longer has the task (%s)",
-    async (missing) => {
-      const fetchTask = vi.fn().mockResolvedValue(missing);
-
-      const { result, onProgress } = startPolling(fetchTask);
-      await vi.advanceTimersByTimeAsync(1000);
-
-      await expect(result).rejects.toThrow("Test task task not found");
-      expect(onProgress).not.toHaveBeenCalled();
+      await expect(result).resolves.toEqual(task(100, true));
+      expect(onProgress).toHaveBeenCalledTimes(2);
+      expect(assertSucceeded).toHaveBeenCalledWith(task(100, true));
     },
   );
 
-  it("rejects when the completed task failed", async () => {
+  it.each([PROGRESS, PRESENCE])(
+    "rejects when the completed task failed (%o)",
+    async (liveness) => {
+      const fetchTask = vi
+        .fn()
+        .mockResolvedValue({ ...task(100, true), failed: true });
+
+      const { result } = startPolling(fetchTask, liveness);
+      await polls(1);
+
+      await expect(result).rejects.toThrow("failed");
+    },
+  );
+
+  // Callers show their own message for these, and the server's for the rest.
+  it("throws a TaskPollingError when the polling loses the task", async () => {
+    const lost = startPolling(vi.fn().mockResolvedValue(null)).result;
+    const stalled = startPolling(vi.fn().mockResolvedValue(task(10))).result;
+    await polls(5);
+
+    await expect(lost).rejects.toBeInstanceOf(TaskPollingError);
+    await expect(stalled).rejects.toBeInstanceOf(TaskPollingError);
+  });
+
+  it("passes a failure of the task itself through as is", async () => {
     const fetchTask = vi
       .fn()
       .mockResolvedValue({ ...task(100, true), failed: true });
 
     const { result } = startPolling(fetchTask);
-    await vi.advanceTimersByTimeAsync(1000);
+    await polls(1);
 
-    await expect(result).rejects.toThrow("failed");
+    await expect(result).rejects.not.toBeInstanceOf(TaskPollingError);
+  });
+
+  describe("progress liveness", () => {
+    it("times out once the percentage has not grown for stallTimeoutMs", async () => {
+      const fetchTask = vi.fn().mockResolvedValue(task(10));
+
+      const { result } = startPolling(fetchTask);
+      await polls(5);
+
+      await expect(result).rejects.toThrow("Test task timed out");
+      // Grew on the first poll, then held past 3 seconds.
+      expect(fetchTask).toHaveBeenCalledTimes(5);
+    });
+
+    it("keeps waiting past stallTimeoutMs while the percentage grows", async () => {
+      let percentage = 0;
+      const fetchTask = vi.fn(async () => {
+        percentage += 1;
+        return task(percentage, percentage === 10);
+      });
+
+      const { result } = startPolling(fetchTask);
+      await polls(10);
+
+      await expect(result).resolves.toEqual(task(10, true));
+    });
+
+    it("counts the stall from the last growth, not from the start", async () => {
+      const fetchTask = vi
+        .fn()
+        .mockResolvedValueOnce(task(0))
+        .mockResolvedValueOnce(task(0))
+        .mockResolvedValueOnce(task(0))
+        .mockResolvedValueOnce(task(25))
+        .mockResolvedValueOnce(task(25))
+        .mockResolvedValueOnce(task(25))
+        .mockResolvedValueOnce(task(100, true));
+
+      const { result } = startPolling(fetchTask);
+      await polls(7);
+
+      await expect(result).resolves.toEqual(task(100, true));
+    });
+
+    it("does not count a falling percentage as progress", async () => {
+      const fetchTask = vi
+        .fn()
+        .mockResolvedValueOnce(task(50))
+        .mockResolvedValue(task(40));
+
+      const { result } = startPolling(fetchTask);
+      await polls(5);
+
+      await expect(result).rejects.toThrow("Test task timed out");
+    });
+
+    it.each([null, undefined])(
+      "rejects at once when the server has no task (%s)",
+      async (missing) => {
+        const fetchTask = vi.fn().mockResolvedValue(missing);
+
+        const { result, onProgress } = startPolling(fetchTask);
+        await polls(1);
+
+        await expect(result).rejects.toThrow("Test task task not found");
+        expect(onProgress).not.toHaveBeenCalled();
+      },
+    );
+  });
+
+  describe("presence liveness", () => {
+    it("keeps waiting while the task is there, whatever its percentage", async () => {
+      // Far past any stall limit: a report queued behind other recoveries.
+      const fetchTask = vi
+        .fn()
+        .mockImplementation(async () =>
+          fetchTask.mock.calls.length < 600 ? task(0) : task(100, true),
+        );
+
+      const { result } = startPolling(fetchTask, PRESENCE);
+      await polls(600);
+
+      await expect(result).resolves.toEqual(task(100, true));
+    });
+
+    it("rides out a task missing for up to missingTimeoutMs in a row", async () => {
+      const fetchTask = vi
+        .fn()
+        .mockResolvedValueOnce(task(10))
+        .mockResolvedValueOnce(null)
+        .mockResolvedValueOnce(undefined)
+        .mockResolvedValueOnce(null)
+        .mockResolvedValueOnce(task(10))
+        .mockResolvedValueOnce(null)
+        .mockResolvedValueOnce(task(100, true));
+
+      const { result, onProgress } = startPolling(fetchTask, PRESENCE);
+      await polls(7);
+
+      await expect(result).resolves.toEqual(task(100, true));
+      // Only the answers that had the task reach the progress.
+      expect(onProgress).toHaveBeenCalledTimes(3);
+    });
+
+    it("rejects once the task has been missing for longer than missingTimeoutMs", async () => {
+      const fetchTask = vi
+        .fn()
+        .mockResolvedValueOnce(task(10))
+        .mockResolvedValue(null);
+
+      const { result } = startPolling(fetchTask, PRESENCE);
+      await polls(5);
+
+      await expect(result).rejects.toThrow("Test task task not found");
+      // Last seen on the first poll, missing for 4 seconds on the fifth.
+      expect(fetchTask).toHaveBeenCalledTimes(5);
+    });
   });
 });

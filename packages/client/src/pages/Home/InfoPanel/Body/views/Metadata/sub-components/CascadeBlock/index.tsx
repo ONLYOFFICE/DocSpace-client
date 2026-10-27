@@ -39,6 +39,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
+import { useDelayedVisibility } from "../../hooks/useDelayedVisibility";
 import type { TCascadeConflict, TCascadeItemType } from "../../types";
 import ApplyMetadataDialog from "./ApplyMetadataDialog";
 import CascadeProgress from "./CascadeProgress";
@@ -65,6 +66,7 @@ const CascadeBlock = ({
 }: CascadeBlockProps) => {
   const { t } = useTranslation(["Metadata"]);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
+  const isProgressVisible = useDelayedVisibility(isRunning);
 
   const titles: Record<TCascadeItemType, string> = {
     folder: t("Metadata:ApplyToFolderItems"),
@@ -98,7 +100,9 @@ const CascadeBlock = ({
             {descriptions[itemType]}
           </Text>
         </div>
-        {isRunning ? <CascadeProgress progress={progress} /> : null}
+        {isProgressVisible ? (
+          <CascadeProgress progress={isRunning ? progress : 100} />
+        ) : null}
       </div>
 
       {isDialogVisible ? (

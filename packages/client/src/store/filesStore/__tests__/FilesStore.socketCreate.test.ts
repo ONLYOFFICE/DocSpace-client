@@ -143,6 +143,33 @@ describe("FilesStore.wsModifyFolderCreate — form rooms", () => {
     expect(store.folders.map((f) => f.id)).toEqual([100]);
   });
 
+  // A form room is listed in Forms, though its parent is the Rooms folder: it
+  // is counted where it is listed, or deleting it later would take the count
+  // of Forms below its real value.
+  it("counts a form room in the Forms list it is added to", async () => {
+    const setFoldersCount = vi.fn();
+    const store = createTestFilesStore({
+      selectedFolderStore: { id: formsFolderId, foldersCount: 0, setFoldersCount },
+      treeFoldersStore: { isFormsFolder: true },
+    });
+
+    await createRoom(store, RoomsType.FormRoom);
+
+    expect(setFoldersCount).toHaveBeenCalledWith(1);
+  });
+
+  it("does not count a form room in the Rooms list it is left out of", async () => {
+    const setFoldersCount = vi.fn();
+    const store = createTestFilesStore({
+      selectedFolderStore: { id: roomsFolderId, foldersCount: 0, setFoldersCount },
+      treeFoldersStore: { isFormsFolder: false },
+    });
+
+    await createRoom(store, RoomsType.FormRoom);
+
+    expect(setFoldersCount).not.toHaveBeenCalled();
+  });
+
   it("does not add a regular room created by another user to the Forms list", async () => {
     const store = createTestFilesStore({
       selectedFolderStore: { id: formsFolderId },

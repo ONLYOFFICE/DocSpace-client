@@ -53,6 +53,7 @@ export type TEditableRoom = {
   roomIconColor?: string;
   roomCover?: ICover;
   createdBy?: TCreatedBy;
+  private?: boolean;
 };
 
 /** Minimal room data needed for archive/delete confirmation dialogs. */

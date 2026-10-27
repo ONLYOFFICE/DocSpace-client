@@ -914,6 +914,7 @@ const RoomsList = ({
           roomIconColor: folder.roomIconColor,
           roomCover: logo?.cover,
           createdBy: folder.createdBy as TCreatedBy | undefined,
+          private: (folder as unknown as { private?: boolean }).private,
         };
       })()
     : undefined;

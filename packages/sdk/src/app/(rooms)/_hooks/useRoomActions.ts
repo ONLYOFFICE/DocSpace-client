@@ -103,6 +103,7 @@ export default function useRoomActions() {
         roomIconColor: logo?.color,
         roomCover: logo?.cover,
         createdBy: (item as unknown as { createdBy?: TCreatedBy }).createdBy,
+        private: (item as unknown as { private?: boolean }).private,
       });
     },
     [dialogsStore],

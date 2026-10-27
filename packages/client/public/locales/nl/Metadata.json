@@ -108,6 +108,7 @@
   "SuggestMetadata": "Metadata genereren",
   "TemplateDeleted": "Sjabloon verwijderd",
   "TemplateFieldsRequired": "Voeg ten minste één veld toe om het sjabloon op te slaan",
+  "TemplateNameExists": "Er bestaat al een sjabloon met deze naam",
   "TemplateValue": "Metadatasjabloon: {{template}}",
   "Visibility": "Zichtbaarheid",
   "Visible": "Zichtbaar",

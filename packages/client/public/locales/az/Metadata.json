@@ -108,6 +108,7 @@
   "SuggestMetadata": "Metadata yaradın",
   "TemplateDeleted": "Şablon silindi",
   "TemplateFieldsRequired": "Şablonu yadda saxlamaq üçün ən azı bir sahə əlavə edin",
+  "TemplateNameExists": "Bu adda şablon artıq mövcuddur",
   "TemplateValue": "Metadata şablonu: {{template}}",
   "Visibility": "Görünmə",
   "Visible": "Görünən",

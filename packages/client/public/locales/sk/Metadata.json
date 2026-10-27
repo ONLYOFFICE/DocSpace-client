@@ -108,6 +108,7 @@
   "SuggestMetadata": "Vygenerovať metadáta",
   "TemplateDeleted": "Šablóna odstránená",
   "TemplateFieldsRequired": "Pridajte aspoň jedno pole, aby ste mohli šablónu uložiť",
+  "TemplateNameExists": "Šablóna s týmto názvom už existuje",
   "TemplateValue": "Šablóna metadát: {{template}}",
   "Visibility": "Viditeľnosť",
   "Visible": "Viditeľná",

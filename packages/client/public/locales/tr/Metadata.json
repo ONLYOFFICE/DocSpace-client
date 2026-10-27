@@ -108,6 +108,7 @@
   "SuggestMetadata": "Meta veri oluştur",
   "TemplateDeleted": "Şablon silindi",
   "TemplateFieldsRequired": "Şablonu kaydetmek için en az bir alan ekleyin",
+  "TemplateNameExists": "Bu ada sahip bir şablon zaten var",
   "TemplateValue": "Meta veri şablonu: {{template}}",
   "Visibility": "Görünürlük",
   "Visible": "Görünür",

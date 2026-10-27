@@ -108,6 +108,7 @@
   "SuggestMetadata": "Сгенерировать метаданные",
   "TemplateDeleted": "Шаблон удален",
   "TemplateFieldsRequired": "Добавьте хотя бы одно поле, чтобы сохранить шаблон",
+  "TemplateNameExists": "Шаблон с таким названием уже существует",
   "TemplateValue": "Шаблон метаданных: {{template}}",
   "Visibility": "Видимость",
   "Visible": "Видимый",

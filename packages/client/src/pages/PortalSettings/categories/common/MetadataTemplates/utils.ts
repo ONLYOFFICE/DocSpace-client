@@ -43,6 +43,7 @@ import type {
 } from "@docspace/shared/api/metadata/types";
 import type { TTranslation } from "@docspace/shared/types";
 
+import { SYSTEM_TEMPLATE_NAME } from "./constants";
 import type {
   TDragState,
   TDropLine,
@@ -207,6 +208,24 @@ export const isFieldNameTaken = (fields: TFieldDraft[], form: TFieldForm) => {
       (field) =>
         field.key !== form.key && field.name.trim().toLowerCase() === name,
     )
+  );
+};
+
+export const isTemplateNameTaken = (
+  templates: TMetadataTemplate[],
+  name: string,
+  templateId?: number,
+) => {
+  const normalized = name.trim().toLowerCase();
+
+  return (
+    !!normalized &&
+    (normalized === SYSTEM_TEMPLATE_NAME.toLowerCase() ||
+      templates.some(
+        (template) =>
+          template.id !== templateId &&
+          template.name.trim().toLowerCase() === normalized,
+      ))
   );
 };
 

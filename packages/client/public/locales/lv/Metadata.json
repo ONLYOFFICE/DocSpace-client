@@ -108,6 +108,7 @@
   "SuggestMetadata": "Ģenerēt metadatus",
   "TemplateDeleted": "Veidne izdzēsta",
   "TemplateFieldsRequired": "Pievienojiet vismaz vienu lauku, lai saglabātu veidni",
+  "TemplateNameExists": "Veidne ar šādu nosaukumu jau pastāv",
   "TemplateValue": "Metadatu veidne: {{template}}",
   "Visibility": "Redzamība",
   "Visible": "Redzama",

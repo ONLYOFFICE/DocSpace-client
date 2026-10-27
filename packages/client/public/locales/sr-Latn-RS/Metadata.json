@@ -108,6 +108,7 @@
   "SuggestMetadata": "Generiši metapodatke",
   "TemplateDeleted": "Šablon je obrisan",
   "TemplateFieldsRequired": "Dodajte bar jedno polje da biste sačuvali šablon",
+  "TemplateNameExists": "Šablon sa ovim nazivom već postoji",
   "TemplateValue": "Šablon metapodataka: {{template}}",
   "Visibility": "Vidljivost",
   "Visible": "Vidljiv",

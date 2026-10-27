@@ -108,6 +108,7 @@
   "SuggestMetadata": "Δημιουργία μεταδεδομένων",
   "TemplateDeleted": "Το πρότυπο διαγράφηκε",
   "TemplateFieldsRequired": "Προσθέστε τουλάχιστον ένα πεδίο για να αποθηκεύσετε το πρότυπο",
+  "TemplateNameExists": "Υπάρχει ήδη πρότυπο με αυτό το όνομα",
   "TemplateValue": "Πρότυπο μεταδεδομένων: {{template}}",
   "Visibility": "Ορατότητα",
   "Visible": "Ορατό",

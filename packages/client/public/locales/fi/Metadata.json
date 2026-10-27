@@ -108,6 +108,7 @@
   "SuggestMetadata": "Luo metatiedot",
   "TemplateDeleted": "Malli poistettu",
   "TemplateFieldsRequired": "Lisää vähintään yksi kenttä, jotta voit tallentaa mallin",
+  "TemplateNameExists": "Tämänniminen malli on jo olemassa",
   "TemplateValue": "Metatietomalli: {{template}}",
   "Visibility": "Näkyvyys",
   "Visible": "Näkyvissä",

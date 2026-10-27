@@ -108,6 +108,7 @@
   "SuggestMetadata": "Генерирай метаданни",
   "TemplateDeleted": "Шаблонът е изтрит",
   "TemplateFieldsRequired": "Добавете поне едно поле, за да запазите шаблона",
+  "TemplateNameExists": "Вече съществува шаблон с това име",
   "TemplateValue": "Шаблон за метаданни: {{template}}",
   "Visibility": "Видимост",
   "Visible": "Видим",

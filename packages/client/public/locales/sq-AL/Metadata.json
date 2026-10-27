@@ -108,6 +108,7 @@
   "SuggestMetadata": "Gjeneroni meta të dhëna",
   "TemplateDeleted": "Modeli u fshi",
   "TemplateFieldsRequired": "Shtoni të paktën një fushë për të ruajtur shabllonin",
+  "TemplateNameExists": "Një model me këtë emër ekziston tashmë",
   "TemplateValue": "Modeli i meta të dhënave: {{template}}",
   "Visibility": "Dukshmëria",
   "Visible": "I dukshëm",

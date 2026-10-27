@@ -108,6 +108,7 @@
   "SuggestMetadata": "Générer des métadonnées",
   "TemplateDeleted": "Modèle supprimé",
   "TemplateFieldsRequired": "Ajoutez au moins un champ pour enregistrer le modèle",
+  "TemplateNameExists": "Un modèle portant ce nom existe déjà",
   "TemplateValue": "Modèle de métadonnées : {{template}}",
   "Visibility": "Visibilité",
   "Visible": "Visible",

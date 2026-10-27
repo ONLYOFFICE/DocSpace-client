@@ -108,6 +108,7 @@
   "SuggestMetadata": "පාරදත්ත ජනනය කරන්න",
   "TemplateDeleted": "සැකිල්ල මකා දමන ලදී",
   "TemplateFieldsRequired": "සැකිල්ල සුරැකීමට අවම වශයෙන් එක් ක්ෂේත්‍රයක් එක් කරන්න",
+  "TemplateNameExists": "මෙම නම සහිත සැකිල්ලක් දැනටමත් පවතී",
   "TemplateValue": "පාරදත්ත සැකිල්ල: {{template}}",
   "Visibility": "දෘශ්‍යතාව",
   "Visible": "දෘශ්‍යමාන",

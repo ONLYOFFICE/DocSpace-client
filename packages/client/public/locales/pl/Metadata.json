@@ -108,6 +108,7 @@
   "SuggestMetadata": "Wygeneruj metadane",
   "TemplateDeleted": "Szablon usunięty",
   "TemplateFieldsRequired": "Dodaj co najmniej jedno pole, aby zapisać szablon",
+  "TemplateNameExists": "Szablon o tej nazwie już istnieje",
   "TemplateValue": "Szablon metadanych: {{template}}",
   "Visibility": "Widoczność",
   "Visible": "Widoczny",

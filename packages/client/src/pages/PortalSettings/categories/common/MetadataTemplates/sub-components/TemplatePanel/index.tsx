@@ -46,12 +46,18 @@ import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
 import ConfirmDeleteDialog from "SRC_DIR/components/ConfirmDeleteDialog";
 
 import { useTemplateEditor } from "../../hooks/useTemplateEditor";
-import { isFieldNameTaken, isNameFreedOnSave, isValidField } from "../../utils";
+import {
+  isFieldNameTaken,
+  isNameFreedOnSave,
+  isTemplateNameTaken,
+  isValidField,
+} from "../../utils";
 import FieldForm from "./FieldForm";
 import TemplateForm from "./TemplateForm";
 
 type TemplatePanelProps = {
   template: TMetadataTemplate | null;
+  templates: TMetadataTemplate[];
   onClose: () => void;
   onSaved: () => void;
   onApplied: () => void;
@@ -59,6 +65,7 @@ type TemplatePanelProps = {
 
 const TemplatePanel = ({
   template,
+  templates,
   onClose,
   onSaved,
   onApplied,
@@ -103,6 +110,14 @@ const TemplatePanel = ({
 
   const nameError = getNameError();
 
+  const templateNameError = isTemplateNameTaken(
+    templates,
+    draft.name,
+    template?.id,
+  )
+    ? t("Metadata:TemplateNameExists")
+    : "";
+
   const getTitle = () => {
     if (fieldForm)
       return isNewField ? t("Metadata:AddField") : t("Metadata:EditField");
@@ -134,6 +149,7 @@ const TemplatePanel = ({
           ) : (
             <TemplateForm
               draft={draft}
+              nameError={templateNameError}
               onChange={changeDraft}
               onAddField={addField}
               onEditField={setFieldForm}
@@ -162,7 +178,7 @@ const TemplatePanel = ({
               scale
               size={ButtonSize.normal}
               label={t("Common:SaveButton")}
-              isDisabled={!canSave}
+              isDisabled={!canSave || !!templateNameError}
               isLoading={isSaving}
               onClick={onSave}
               testId="metadata_template_save_button"

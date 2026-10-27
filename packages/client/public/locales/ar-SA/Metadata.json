@@ -108,6 +108,7 @@
   "SuggestMetadata": "توليد البيانات الوصفية",
   "TemplateDeleted": "تم حذف القالب",
   "TemplateFieldsRequired": "أضف حقلاً واحدًا على الأقل لحفظ القالب",
+  "TemplateNameExists": "يوجد قالب بهذا الاسم بالفعل",
   "TemplateValue": "قالب البيانات الوصفية: {{template}}",
   "Visibility": "الظهور",
   "Visible": "ظاهر",

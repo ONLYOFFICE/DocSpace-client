@@ -108,6 +108,7 @@
   "SuggestMetadata": "Metadaten generieren",
   "TemplateDeleted": "Vorlage gelöscht",
   "TemplateFieldsRequired": "Fügen Sie mindestens ein Feld hinzu, um die Vorlage zu speichern",
+  "TemplateNameExists": "Eine Vorlage mit diesem Namen ist bereits vorhanden",
   "TemplateValue": "Metadatenvorlage: {{template}}",
   "Visibility": "Sichtbarkeit",
   "Visible": "Sichtbar",

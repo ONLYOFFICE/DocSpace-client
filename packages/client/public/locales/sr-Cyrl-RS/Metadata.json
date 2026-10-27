@@ -108,6 +108,7 @@
   "SuggestMetadata": "Генериши метаподатке",
   "TemplateDeleted": "Шаблон је обрисан",
   "TemplateFieldsRequired": "Додајте бар једно поље да бисте сачували шаблон",
+  "TemplateNameExists": "Шаблон са овим називом већ постоји",
   "TemplateValue": "Шаблон метаподатака: {{template}}",
   "Visibility": "Видљивост",
   "Visible": "Видљив",

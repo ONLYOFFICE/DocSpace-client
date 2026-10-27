@@ -108,6 +108,7 @@
   "SuggestMetadata": "Generar metadatos",
   "TemplateDeleted": "Plantilla eliminada",
   "TemplateFieldsRequired": "Añada al menos un campo para guardar la plantilla",
+  "TemplateNameExists": "Ya existe una plantilla con este nombre",
   "TemplateValue": "Plantilla de metadatos: {{template}}",
   "Visibility": "Visibilidad",
   "Visible": "Visible",

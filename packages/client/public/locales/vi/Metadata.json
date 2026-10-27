@@ -108,6 +108,7 @@
   "SuggestMetadata": "Tạo siêu dữ liệu",
   "TemplateDeleted": "Đã xóa mẫu",
   "TemplateFieldsRequired": "Thêm ít nhất một trường để lưu mẫu",
+  "TemplateNameExists": "Đã tồn tại mẫu có tên này",
   "TemplateValue": "Mẫu siêu dữ liệu: {{template}}",
   "Visibility": "Khả năng hiển thị",
   "Visible": "Hiển thị",

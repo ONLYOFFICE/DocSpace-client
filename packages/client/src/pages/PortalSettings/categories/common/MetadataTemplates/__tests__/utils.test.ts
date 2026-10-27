@@ -49,6 +49,7 @@ import {
   isFieldNameTaken,
   isNameFreedOnSave,
   isRowControlClick,
+  isTemplateNameTaken,
   isValidField,
   moveItem,
   removeOption,
@@ -429,6 +430,31 @@ describe("isFieldNameTaken", () => {
     expect(
       isFieldNameTaken(fields, { ...createFieldForm("a"), name: "Court" }),
     ).toBe(false);
+  });
+});
+
+describe("isTemplateNameTaken", () => {
+  const templates = [
+    { id: 1, name: "Contract" },
+    { id: 2, name: "Invoice" },
+  ] as TMetadataTemplate[];
+
+  it("rejects a name another template already has, ignoring case", () => {
+    expect(isTemplateNameTaken(templates, " contract ")).toBe(true);
+    expect(isTemplateNameTaken(templates, "Invoice", 1)).toBe(true);
+    expect(isTemplateNameTaken(templates, "Report")).toBe(false);
+  });
+
+  it("lets a template keep its own name", () => {
+    expect(isTemplateNameTaken(templates, "CONTRACT", 1)).toBe(false);
+  });
+
+  it("treats the name reserved for custom fields as taken", () => {
+    expect(isTemplateNameTaken([], "system")).toBe(true);
+  });
+
+  it("does not flag an empty name", () => {
+    expect(isTemplateNameTaken(templates, "  ")).toBe(false);
   });
 });
 

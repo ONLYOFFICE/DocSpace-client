@@ -108,6 +108,7 @@
   "SuggestMetadata": "Generează metadate",
   "TemplateDeleted": "Șablonul a fost șters",
   "TemplateFieldsRequired": "Adăugați cel puțin un câmp pentru a salva șablonul",
+  "TemplateNameExists": "Un șablon cu acest nume există deja",
   "TemplateValue": "Șablon de metadate: {{template}}",
   "Visibility": "Vizibilitate",
   "Visible": "Vizibil",

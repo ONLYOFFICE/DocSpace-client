@@ -108,6 +108,7 @@
   "SuggestMetadata": "Gerar metadados",
   "TemplateDeleted": "Template eliminado",
   "TemplateFieldsRequired": "Adicione pelo menos um campo para guardar o template",
+  "TemplateNameExists": "Já existe um template com este nome",
   "TemplateValue": "Template de metadados: {{template}}",
   "Visibility": "Visibilidade",
   "Visible": "Visível",

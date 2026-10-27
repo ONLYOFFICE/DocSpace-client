@@ -108,6 +108,7 @@
   "SuggestMetadata": "生成元数据",
   "TemplateDeleted": "模板已删除",
   "TemplateFieldsRequired": "请至少添加一个字段以保存模板",
+  "TemplateNameExists": "已存在同名模板",
   "TemplateValue": "元数据模板：{{template}}",
   "Visibility": "可见性",
   "Visible": "可见",

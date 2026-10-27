@@ -108,6 +108,7 @@
   "SuggestMetadata": "Ustvari metapodatke",
   "TemplateDeleted": "Predloga izbrisana",
   "TemplateFieldsRequired": "Dodajte vsaj eno polje, da lahko shranite predlogo",
+  "TemplateNameExists": "Predloga s tem imenom že obstaja",
   "TemplateValue": "Predloga metapodatkov: {{template}}",
   "Visibility": "Vidnost",
   "Visible": "Vidna",

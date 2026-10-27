@@ -108,6 +108,7 @@
   "SuggestMetadata": "메타데이터 생성",
   "TemplateDeleted": "템플릿이 삭제되었습니다",
   "TemplateFieldsRequired": "템플릿을 저장하려면 필드를 하나 이상 추가하세요",
+  "TemplateNameExists": "이 이름의 템플릿이 이미 있습니다",
   "TemplateValue": "메타데이터 템플릿: {{template}}",
   "Visibility": "표시 여부",
   "Visible": "표시",

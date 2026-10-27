@@ -108,6 +108,7 @@
   "SuggestMetadata": "メタデータを生成",
   "TemplateDeleted": "テンプレートが削除されました",
   "TemplateFieldsRequired": "テンプレートを保存するには、フィールドを1つ以上追加してください",
+  "TemplateNameExists": "この名前のテンプレートはすでに存在します",
   "TemplateValue": "メタデータテンプレート: {{template}}",
   "Visibility": "表示状態",
   "Visible": "表示",

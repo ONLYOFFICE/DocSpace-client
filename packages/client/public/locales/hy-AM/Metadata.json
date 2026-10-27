@@ -108,6 +108,7 @@
   "SuggestMetadata": "Ստեղծել մետատվյալներ",
   "TemplateDeleted": "Կաղապարը ջնջվեց",
   "TemplateFieldsRequired": "Ավելացրեք առնվազն մեկ դաշտ՝ կաղապարը պահպանելու համար",
+  "TemplateNameExists": "Այս անունով կաղապար արդեն գոյություն ունի",
   "TemplateValue": "Մետատվյալների կաղապար՝ {{template}}",
   "Visibility": "Տեսանելիություն",
   "Visible": "Տեսանելի",

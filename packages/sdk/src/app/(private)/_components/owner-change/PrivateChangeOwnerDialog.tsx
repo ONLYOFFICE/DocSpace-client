@@ -35,11 +35,8 @@
 
 // PARITY-SOURCE: packages/sdk/src/app/(rooms)/_components/change-room-owner-dialog/index.tsx
 // PARITY-REVIEW: Required when source changes. Last reviewed: 2026-05-27 by Ilya Oleshko
-// NOTE: Adds validateMembersForEncryption pre-check before setFileOwner so we
-// don't transfer ownership to a user whose envelope can't unwrap room DEKs.
-// NOTE: Excludes portal admins who are not room members from owner candidates
-// (non-member admins lack DEK access in private rooms — parity with
-// ChangeRoomOwnerPanel in packages/client).
+// NOTE: Takes the owner candidates and the new owner's key check from shared,
+// moved there from ChangeRoomOwnerPanel in packages/client.
 
 "use client";
 
@@ -56,14 +53,9 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import {
-  EmployeeType,
-  EmployeeStatus,
-  MembersSubjectType,
-} from "@docspace/shared/enums";
-import Filter from "@docspace/shared/api/people/filter";
-import { getUserList } from "@docspace/shared/api/people";
-import { getRoomMembers } from "@docspace/shared/api/rooms";
+import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
+import { usePrivateRoomOwnerExclusions } from "@docspace/shared/hooks/usePrivateRoomOwnerExclusions";
+import { getNewOwnerKeyRefusal } from "@docspace/shared/services/private-room/room-member-flows";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
@@ -91,8 +83,7 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
   const router = useRouter();
   const privateRoute = usePrivateRoute();
   const filesListStore = useFilesListStore();
-  const { validateCandidates, changeOwner, leaveRoom, isLoading } =
-    usePrivateOwnerChangeFlow();
+  const { changeOwner, leaveRoom, isLoading } = usePrivateOwnerChangeFlow();
 
   // Show the leave-room checkbox only when the current user is the room owner.
   // Parity: ChangeRoomOwnerPanel — withFooterCheckbox={ownerIsCurrentUser}.
@@ -107,64 +98,12 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
     [],
   );
 
-  // ----- non-member admin exclusion (parity: ChangeRoomOwnerPanel) -----
-  // Portal admins who are NOT room members cannot own a private room because
-  // they have no DEK envelope. We build the exclusion list by fetching room
-  // members and all admins in parallel, then subtracting the member set.
-
-  const baseExclude = React.useMemo<string[]>(
-    () => (currentUserId ? [currentUserId] : []),
-    [currentUserId],
-  );
-
-  const [excludeItems, setExcludeItems] = React.useState<string[]>(baseExclude);
-  const [excludeReady, setExcludeReady] = React.useState(false);
-
-  React.useEffect(() => {
-    setExcludeItems(baseExclude);
-    setExcludeReady(false);
-
-    const controller = new AbortController();
-    let cancelled = false;
-
-    const adminsFilter = Filter.getDefault();
-    adminsFilter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
-    adminsFilter.employeeStatus = EmployeeStatus.Active;
-    adminsFilter.pageCount = 100;
-
-    Promise.all([
-      getRoomMembers(roomId, { count: 100 }, controller.signal),
-      getUserList(adminsFilter, controller.signal),
-    ])
-      .then(([members, admins]) => {
-        if (cancelled) return;
-
-        const memberIds = new Set(
-          (members?.items ?? [])
-            .filter((m) => m?.subjectType === MembersSubjectType.User)
-            .map((m) => m?.sharedTo?.id)
-            .filter(Boolean) as string[],
-        );
-
-        const nonMemberAdmins = (admins?.items ?? [])
-          .map((a) => a.id)
-          .filter((id): id is string => Boolean(id) && !memberIds.has(id));
-
-        const merged = new Set([...baseExclude, ...nonMemberAdmins]);
-        setExcludeItems([...merged]);
-        setExcludeReady(true);
-      })
-      .catch(() => {
-        if (cancelled) return;
-        // On fetch failure fall back to baseExclude so the dialog still works.
-        setExcludeReady(true);
-      });
-
-    return () => {
-      cancelled = true;
-      controller.abort();
-    };
-  }, [roomId, baseExclude]);
+  // Spec: private-rooms/sdk-surface, "Membership from every entry point"
+  const { excludeItems, excludeReady } = usePrivateRoomOwnerExclusions({
+    isPrivateRoom: true,
+    roomId,
+    userId: currentUserId,
+  });
 
   const headerLabel = t("Common:ChangeTheRoomOwner");
   const infoText = t("Common:PrivateOwnerEncryptionHint");
@@ -180,31 +119,18 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
     if (!newOwnerId || typeof newOwnerId !== "string") return;
 
     try {
-      const { validIds, skipped } = await validateCandidates({
+      const refusal = await getNewOwnerKeyRefusal(
+        t,
         roomId,
-        candidateIds: [newOwnerId],
-        displayNames: candidate.displayName
-          ? { [newOwnerId]: candidate.displayName }
-          : undefined,
-      });
-
-      if (!validIds.includes(newOwnerId)) {
-        const entry = skipped[0];
-        const reason = entry?.reason ?? "no-key";
-        // Resolve the display name the same way the reference panel does:
-        // prefer the validated entry name, fall back to the selector item,
-        // then the raw id.
-        const name =
-          entry?.displayName ||
-          candidate.displayName ||
-          newOwnerId;
-        toastr.error(
-          reason === "no-key"
-            ? t("Common:EncryptedChangeOwnerNoKeys", { user: name })
-            : t("Common:EncryptedChangeOwnerKeyMismatch", {
-                user: name,
-              }),
-        );
+        {
+          id: newOwnerId,
+          label: candidate.label,
+          displayName: candidate.displayName,
+        },
+        currentUserId ?? "",
+      );
+      if (refusal) {
+        toastr.error(refusal);
         return;
       }
 

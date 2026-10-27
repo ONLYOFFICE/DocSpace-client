@@ -42,6 +42,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 type TSelectorProps = {
   isChecked?: boolean;
+  excludeItems?: string[];
   onSubmit: (
     users: { id: string; displayName?: string }[],
     access: unknown,
@@ -58,6 +59,9 @@ const mocks = vi.hoisted(() => ({
   push: vi.fn(),
   leaveRoom: vi.fn(async () => {}),
   changeOwner: vi.fn(async () => true),
+  validateMembersForEncryption: vi.fn(),
+  getRoomMembers: vi.fn(),
+  getUserList: vi.fn(),
   toastr: { success: vi.fn(), error: vi.fn() },
 }));
 
@@ -91,10 +95,13 @@ vi.mock("@onlyoffice/apps-ui-kit/selectors/People", () => ({
 }));
 
 vi.mock("@docspace/shared/api/rooms", () => ({
-  getRoomMembers: vi.fn(async () => ({ items: [] })),
+  getRoomMembers: mocks.getRoomMembers,
 }));
 vi.mock("@docspace/shared/api/people", () => ({
-  getUserList: vi.fn(async () => ({ items: [] })),
+  getUserList: mocks.getUserList,
+}));
+vi.mock("@docspace/shared/services/private-room/room-encryption", () => ({
+  validateMembersForEncryption: mocks.validateMembersForEncryption,
 }));
 
 vi.mock("@/app/(docspace)/_store/FilesListStore", () => ({
@@ -107,10 +114,6 @@ vi.mock("../../_hooks/usePrivateRoute", () => ({
 
 vi.mock("../../_hooks/usePrivateOwnerChangeFlow", () => ({
   usePrivateOwnerChangeFlow: () => ({
-    validateCandidates: async ({ candidateIds }: { candidateIds: string[] }) => ({
-      validIds: candidateIds,
-      skipped: [],
-    }),
     changeOwner: mocks.changeOwner,
     leaveRoom: mocks.leaveRoom,
     isLoading: false,
@@ -145,11 +148,45 @@ describe("PrivateChangeOwnerDialog", () => {
   beforeEach(() => {
     mocks.selector = null;
     mocks.currentFolder = { id: ROOM_ID };
+    mocks.getRoomMembers.mockImplementation(async () => ({
+      items: [{ subjectType: 0, sharedTo: { id: "bob" } }],
+    }));
+    mocks.getUserList.mockImplementation(async () => ({
+      items: [{ id: "bob" }, { id: "carol" }, { id: "me" }],
+    }));
+    mocks.validateMembersForEncryption.mockImplementation(async () => ({
+      valid: [],
+      skipped: [],
+    }));
   });
 
   afterEach(() => {
     act(() => root?.unmount());
     root = null;
+  });
+
+  it("Owner change from the header of an open room: only current members are candidates and a candidate without a verified key is refused", async () => {
+    mocks.validateMembersForEncryption.mockImplementation(async () => ({
+      valid: [],
+      skipped: [{ id: "bob", reason: "no-key", displayName: "Bob" }],
+    }));
+    await open();
+
+    expect(mocks.selector?.excludeItems).toEqual(["me", "carol"]);
+
+    await submit(false);
+
+    expect(mocks.validateMembersForEncryption).toHaveBeenCalledWith(
+      ROOM_ID,
+      ["bob"],
+      "me",
+      undefined,
+      { bob: undefined },
+    );
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedChangeOwnerNoKeys",
+    );
+    expect(mocks.changeOwner).not.toHaveBeenCalled();
   });
 
   it("offers the leave option checked by default to the owner", async () => {

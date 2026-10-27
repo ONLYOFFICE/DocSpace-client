@@ -430,7 +430,15 @@ class HotkeyStore {
     }
   };
 
+  selectCaretIfNothingSelected = () => {
+    const { selection, hotkeyCaret, setSelection } = this.filesStore;
+
+    if (!selection.length && hotkeyCaret) setSelection([hotkeyCaret]);
+  };
+
   multiSelectBottom = () => {
+    this.selectCaretIfNothingSelected();
+
     const {
       selection,
       setSelection,
@@ -478,6 +486,8 @@ class HotkeyStore {
   };
 
   multiSelectUpper = () => {
+    this.selectCaretIfNothingSelected();
+
     const {
       selection,
       setSelection,

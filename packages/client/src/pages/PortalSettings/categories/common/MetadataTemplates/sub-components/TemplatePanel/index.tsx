@@ -199,6 +199,7 @@ const TemplatePanel = ({
             scale
             size={ButtonSize.normal}
             label={t("Common:CancelButton")}
+            isDisabled={isSaving}
             onClick={fieldForm ? closeField : onClose}
             testId="metadata_cancel_button"
           />

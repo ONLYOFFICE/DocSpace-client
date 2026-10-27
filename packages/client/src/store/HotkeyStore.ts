@@ -43,7 +43,7 @@ import type FilesFilter from "@docspace/shared/api/files/filter";
 import type { TTranslation } from "@docspace/shared/types";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { isMobile, getCountTilesInRow } from "@docspace/shared/utils";
+import { isMobile, getCountTilesInGrid } from "@docspace/shared/utils";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 
@@ -64,6 +64,8 @@ type TFilesItem = {
   contentLength?: string | number;
   parentId?: number | string;
   isFolder?: boolean;
+  isRoom?: boolean;
+  isTemplate?: boolean;
   isEditing?: boolean;
   security?: { Copy?: boolean; Move?: boolean };
 };
@@ -951,7 +953,10 @@ class HotkeyStore {
   };
 
   get countTilesInRow() {
-    return getCountTilesInRow(this.treeFoldersStore?.isRoomsFolder);
+    const { filesList } = this.filesStore;
+    const isRooms = filesList.some((item) => item.isRoom && !item.isTemplate);
+    const isTemplates = filesList.some((item) => item.isTemplate);
+    return getCountTilesInGrid(isRooms, isTemplates);
   }
 
   get division() {

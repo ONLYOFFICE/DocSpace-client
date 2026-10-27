@@ -38,7 +38,7 @@ import React, { useEffect, useState } from "react";
 import uniqueid from "lodash/uniqueId";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
-import { getCountTilesInRow } from "@docspace/shared/utils";
+import { getCountTilesInGrid } from "@docspace/shared/utils";
 
 import {
   StyledCard,
@@ -157,7 +157,7 @@ const InfiniteGrid = (props) => {
   };
 
   const setTilesCount = () => {
-    const newCount = getCountTilesInRow(isRooms, isTemplates);
+    const newCount = getCountTilesInGrid(isRooms, isTemplates);
     if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
   };
 

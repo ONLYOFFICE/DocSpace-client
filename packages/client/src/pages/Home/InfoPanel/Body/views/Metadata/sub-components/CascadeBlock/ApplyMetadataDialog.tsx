@@ -35,7 +35,7 @@
 
 import DangerReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
@@ -100,28 +100,20 @@ const ApplyMetadataDialog = ({
     else setIsApplying(false);
   };
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== "Enter" || isApplying) return;
-      if ((e.target as Element | null)?.closest("button, a, [role='button']"))
-        return;
-
-      e.preventDefault();
-      apply();
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-
-    return () => document.removeEventListener("keydown", onKeyDown);
-  });
+  const submit = () => {
+    if (!isApplying) apply();
+  };
 
   return (
     <ModalDialog
       visible
       isLarge
+      withForm
       zIndex={312}
       displayType={ModalDialogType.modal}
+      isCloseable={!isApplying}
       onClose={onClose}
+      onSubmit={submit}
       dataTestId="metadata_apply_dialog"
     >
       <ModalDialog.Header>{t("Metadata:ApplyMetadata")}</ModalDialog.Header>
@@ -148,6 +140,7 @@ const ApplyMetadataDialog = ({
                   label={option.title}
                   fontWeight={600}
                   isChecked={conflict === option.value}
+                  autoFocus={conflict === option.value}
                   onChange={() => setConflict(option.value)}
                   testId={`metadata_apply_conflict_${option.value}`}
                 />
@@ -169,7 +162,7 @@ const ApplyMetadataDialog = ({
           size={ButtonSize.normal}
           label={t("Common:ApplyButton")}
           isLoading={isApplying}
-          onClick={apply}
+          type="submit"
           testId="metadata_apply_button"
         />
         <Button

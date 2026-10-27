@@ -44,6 +44,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
@@ -64,7 +65,10 @@ import Filter from "@docspace/shared/api/people/filter";
 import { getUserList } from "@docspace/shared/api/people";
 import { getRoomMembers } from "@docspace/shared/api/rooms";
 
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+
 import { usePrivateOwnerChangeFlow } from "../../_hooks/usePrivateOwnerChangeFlow";
+import { usePrivateRoute } from "../../_hooks/usePrivateRoute";
 
 type PrivateChangeOwnerDialogProps = {
   visible: boolean;
@@ -84,6 +88,9 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
   onChanged,
 }) => {
   const { t } = useTranslation(["Common"]);
+  const router = useRouter();
+  const privateRoute = usePrivateRoute();
+  const filesListStore = useFilesListStore();
   const { validateCandidates, changeOwner, leaveRoom, isLoading } =
     usePrivateOwnerChangeFlow();
 
@@ -204,17 +211,21 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
       const ok = await changeOwner({ roomId, newOwnerId });
       if (!ok) return;
 
-      // Parity: FilesActionsStore.changeRoomOwner — when isLeaveChecked,
-      // revoke current user's membership; otherwise show AppointNewOwner
-      // toast. DEK wraps are NOT revoked (intentional reference parity).
-      if (isLeaveChecked && currentUserId) {
-        await leaveRoom({ roomId, userId: currentUserId });
+      // Parity: FilesActionsStore.changeRoomOwner, which leaves through
+      // onLeaveRoom when the leave option is checked.
+      const leaving = !!isLeaveChecked && !!currentUserId;
+      const leftOpenRoom =
+        leaving && String(filesListStore.currentFolder?.id) === String(roomId);
+      if (leaving) {
+        await leaveRoom({ roomId, userId: currentUserId as string });
+        toastr.success(t("Common:YouLeftTheRoom"));
       } else {
         toastr.success(t("Common:AppointNewOwner"));
       }
 
       onChanged?.(roomId);
       onClose();
+      if (leftOpenRoom) router.push(privateRoute("/private"));
     } catch (error) {
       const msg = error instanceof Error ? error.message : String(error);
       toastr.error(msg);
@@ -227,7 +238,7 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
     ? ({
         withFooterCheckbox: true as const,
         footerCheckboxLabel: t("Common:LeaveTheRoom"),
-        isChecked: false,
+        isChecked: true,
       } as const)
     : {};
 

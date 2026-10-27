@@ -47,12 +47,14 @@ import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import api from "@docspace/shared/api";
+import { revokeOwnAccessOnLeave } from "@docspace/shared/services/private-room/room-member-flows";
 import { ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
+import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import type { TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
 
 type LeaveRoomDialogProps = {
@@ -66,6 +68,7 @@ const LeaveRoomDialog = observer(
     const dialogsStore = useDialogsStore();
     const filesListStore = useFilesListStore();
     const filesSelectionStore = useFilesSelectionStore();
+    const { openFolder } = useFolderActions({ t });
 
     const visible = dialogsStore.isDialogOpen(SDKDialogs.LeaveRoom);
 
@@ -99,8 +102,13 @@ const LeaveRoomDialog = observer(
       if (!currentUserId) return;
 
       const roomId = room.id as number;
+      const isPrivate = (room as { private?: boolean }).private === true;
+      const leftOpenRoom =
+        String(filesListStore.currentFolder?.id) === String(roomId);
       setIsLoading(true);
       try {
+        // Spec: private-rooms/sdk-surface, "Leaving a private room revokes own access first"
+        if (isPrivate) await revokeOwnAccessOnLeave(roomId, currentUserId);
         await api.rooms.updateRoomMemberRole(roomId, {
           invitations: [{ id: currentUserId, access: ShareAccessRights.None }],
           force: false,
@@ -110,6 +118,10 @@ const LeaveRoomDialog = observer(
         filesSelectionStore.setBufferSelection(null);
         toastr.success(t("Common:YouLeftTheRoom"));
         onClose();
+        const sectionRootId = filesListStore.pathParts?.[0]?.id;
+        if (isPrivate && leftOpenRoom && sectionRootId !== undefined) {
+          openFolder(sectionRootId, "");
+        }
       } catch (e) {
         toastr.error(e as Error);
       } finally {

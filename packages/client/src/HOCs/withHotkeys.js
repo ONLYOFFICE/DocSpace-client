@@ -99,6 +99,7 @@ const withHotkeys = (Component) => {
       isTrashFolder,
       isArchiveFolder,
       isRoomsFolder,
+      isFormsFolder,
       isAIAgentsFolder,
       isPrivacyFolder,
       canCreateEncrypted,
@@ -154,6 +155,7 @@ const withHotkeys = (Component) => {
       isTrashFolder ||
       isArchiveFolder ||
       isRoomsFolder ||
+      isFormsFolder ||
       isVisitor ||
       isAIAgentsFolder ||
       isAIRoom ||
@@ -200,7 +202,11 @@ const withHotkeys = (Component) => {
     };
 
     const onCreateRoom = () => {
-      if (!isVisitor && isRoomsFolder && security?.Create) {
+      if (
+        !isVisitor &&
+        (isRoomsFolder || isFormsFolder) &&
+        security?.Create
+      ) {
         if (isWarningRoomsDialog) {
           setQuotaWarningDialogVisible(true);
           return;
@@ -209,6 +215,9 @@ const withHotkeys = (Component) => {
         const event = new CustomEvent(Events.ROOM_CREATE, {
           detail: { parentId: currentFolderId, context: "hotkey" },
         });
+        if (isFormsFolder) {
+          event.payload = { isFormsCreate: true };
+        }
         window.dispatchEvent(event);
       }
     };
@@ -620,6 +629,7 @@ const withHotkeys = (Component) => {
         isTrashFolder,
         isArchiveFolder,
         isRoomsFolder,
+        isFormsFolder,
         isAIAgentsFolder,
         isPrivacyFolder,
       } = treeFoldersStore;
@@ -675,6 +685,7 @@ const withHotkeys = (Component) => {
         isTrashFolder,
         isArchiveFolder,
         isRoomsFolder,
+        isFormsFolder,
         isAIAgentsFolder,
         isPrivacyFolder,
         canCreateEncrypted,

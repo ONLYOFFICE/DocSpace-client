@@ -167,16 +167,3 @@
   justify-content: center;
   padding-block: 48px;
 }
-
-.empty {
-  --empty-screen-link-color: var(--accent-main);
-
-  box-sizing: border-box;
-  width: 100%;
-  max-width: none;
-  padding: 45px 16px 0;
-
-  :global(.ec-buttons) {
-    max-width: none;
-  }
-}

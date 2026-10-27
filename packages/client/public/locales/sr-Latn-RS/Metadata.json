@@ -12,7 +12,6 @@
   "AIFillingTitle": "Popunjavanje metapodataka pomoću AI",
   "AIModel": "Model: {{model}}",
   "AINoChanges": "AI nije pronašao nove vrednosti u sadržaju.",
-  "AINoMetadataDescription": "AI može da predloži polja na osnovu sadržaja datoteke ili da popuni šablon koji dodate.",
   "AINoModel": "Nije izabran nijedan AI model za metapodatke. Zamolite administratora da ga izabere u AI podešavanjima.",
   "AINotFound": "<strong>Nisu pronađene vrednosti za:</strong> {{fields}}",
   "AINothingToFill": "Najpre dodajte šablon ili prilagođena polja ovoj stavci, a zatim je popunite pomoću AI.",

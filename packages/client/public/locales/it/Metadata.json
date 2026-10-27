@@ -12,7 +12,6 @@
   "AIFillingTitle": "Compilazione dei metadati con l'IA",
   "AIModel": "Modello: {{model}}",
   "AINoChanges": "L'IA non ha trovato nuovi valori nel contenuto.",
-  "AINoMetadataDescription": "L'IA può suggerire campi a partire dal contenuto del file o compilare un modello che aggiungi.",
   "AINoModel": "Nessun modello IA selezionato per i metadati. Chiedi all'amministratore di sceglierne uno nelle impostazioni IA.",
   "AINotFound": "<strong>Nessun valore trovato per:</strong> {{fields}}",
   "AINothingToFill": "Aggiungi prima un modello o dei campi personalizzati a questo elemento, poi compilalo con l'IA.",

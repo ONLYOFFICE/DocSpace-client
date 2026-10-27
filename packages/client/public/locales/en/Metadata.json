@@ -12,7 +12,6 @@
   "AIFillingTitle": "Filling metadata with AI",
   "AIModel": "Model: {{model}}",
   "AINoChanges": "AI found no new values in the content.",
-  "AINoMetadataDescription": "AI can suggest fields from the file content or fill in a template you add.",
   "AINoModel": "No AI model is selected for metadata. Ask the administrator to choose one in the AI settings.",
   "AINotFound": "<strong>No values found for:</strong> {{fields}}",
   "AINothingToFill": "Add a template or custom fields to this item first, then fill it with AI.",

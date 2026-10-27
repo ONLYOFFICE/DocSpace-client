@@ -12,7 +12,6 @@
   "AIFillingTitle": "Metadata invullen met AI",
   "AIModel": "Model: {{model}}",
   "AINoChanges": "AI heeft geen nieuwe waarden in de inhoud gevonden.",
-  "AINoMetadataDescription": "AI kan velden voorstellen op basis van de inhoud van het bestand of een toegevoegd sjabloon invullen.",
   "AINoModel": "Er is geen AI-model geselecteerd voor metadata. Vraag de beheerder om er een te kiezen in de AI-instellingen.",
   "AINotFound": "<strong>Geen waarden gevonden voor:</strong> {{fields}}",
   "AINothingToFill": "Voeg eerst een sjabloon of aangepaste velden aan dit item toe en vul het daarna in met AI.",

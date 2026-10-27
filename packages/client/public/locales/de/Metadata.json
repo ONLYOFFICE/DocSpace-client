@@ -12,7 +12,6 @@
   "AIFillingTitle": "Metadaten werden mit KI ausgefüllt",
   "AIModel": "Modell: {{model}}",
   "AINoChanges": "Die KI hat im Inhalt keine neuen Werte gefunden.",
-  "AINoMetadataDescription": "Die KI kann Felder anhand des Dateiinhalts vorschlagen oder eine hinzugefügte Vorlage ausfüllen.",
   "AINoModel": "Für Metadaten ist kein KI-Modell ausgewählt. Bitten Sie den Administrator, eines in den KI-Einstellungen auszuwählen.",
   "AINotFound": "<strong>Keine Werte gefunden für:</strong> {{fields}}",
   "AINothingToFill": "Fügen Sie diesem Element zuerst eine Vorlage oder benutzerdefinierte Felder hinzu und füllen Sie es dann mit KI aus.",

@@ -12,7 +12,6 @@
   "AIFillingTitle": "Täytetään metatietoja AI:n avulla",
   "AIModel": "Malli: {{model}}",
   "AINoChanges": "AI ei löytänyt sisällöstä uusia arvoja.",
-  "AINoMetadataDescription": "AI voi ehdottaa kenttiä tiedoston sisällön perusteella tai täyttää lisäämäsi mallin.",
   "AINoModel": "Metatiedoille ei ole valittu AI-mallia. Pyydä järjestelmänvalvojaa valitsemaan se AI-asetuksissa.",
   "AINotFound": "<strong>Arvoja ei löytynyt kentille:</strong> {{fields}}",
   "AINothingToFill": "Lisää ensin tälle kohteelle malli tai mukautettuja kenttiä ja täytä se sitten AI:n avulla.",

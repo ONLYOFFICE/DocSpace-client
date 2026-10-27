@@ -12,7 +12,6 @@
   "AIFillingTitle": "AI로 메타데이터 채우는 중",
   "AIModel": "모델: {{model}}",
   "AINoChanges": "AI가 콘텐츠에서 새 값을 찾지 못했습니다.",
-  "AINoMetadataDescription": "AI가 파일 콘텐츠를 바탕으로 필드를 제안하거나 추가한 템플릿을 채울 수 있습니다.",
   "AINoModel": "메타데이터용 AI 모델이 선택되지 않았습니다. 관리자에게 AI 설정에서 모델을 선택하도록 요청하세요.",
   "AINotFound": "<strong>값을 찾지 못한 필드:</strong> {{fields}}",
   "AINothingToFill": "먼저 이 항목에 템플릿이나 사용자 지정 필드를 추가한 다음 AI로 채우세요.",

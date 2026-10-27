@@ -12,7 +12,6 @@
   "AIFillingTitle": "Metadata AI ilə doldurulur",
   "AIModel": "Model: {{model}}",
   "AINoChanges": "AI məzmunda yeni dəyər tapmadı.",
-  "AINoMetadataDescription": "AI faylın məzmununa əsasən sahələr təklif edə və ya əlavə etdiyiniz şablonu doldura bilər.",
   "AINoModel": "Metadata üçün AI modeli seçilməyib. Administratordan AI ayarlarında model seçməsini xahiş edin.",
   "AINotFound": "<strong>Dəyər tapılmayan sahələr:</strong> {{fields}}",
   "AINothingToFill": "Əvvəlcə bu elementə şablon və ya fərdi sahələr əlavə edin, sonra onu AI ilə doldurun.",

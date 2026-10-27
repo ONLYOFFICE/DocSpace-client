@@ -42,13 +42,9 @@ import {
   aiMetaFillHandler,
   aiMetaGenerateHandler,
   META_SERVICE_LIMIT_ERROR,
-  EMPTY_ENTRY_METADATA,
-  ENTRY_METADATA,
   entryMetadataHandler,
   entryMetadataSaveHandlers,
-  entryTemplateHandlers,
   filesSettingsHandler,
-  metadataTemplatesHandlers,
   myDocumentsHandler,
   myHandler,
   rootHandler,
@@ -226,115 +222,6 @@ test.describe("Metadata AI", () => {
 
     await expect(panel.getByText("Something went wrong.")).toBeVisible();
     await expect(panel.getByTestId("metadata_ai_review_notes")).toHaveCount(0);
-  });
-
-  test.describe("file without metadata", () => {
-    test.beforeEach(({ mockRequest }) => {
-      mockRequest.use(entryMetadataHandler(TEST_PORT, EMPTY_ENTRY_METADATA));
-    });
-
-    const openEmptyFill = async (page: Page, baseUrl: string) => {
-      await openDocxContextMenu(page, baseUrl);
-      await page.getByTestId("option_fill-metadata-ai").click();
-
-      const panel = page.getByTestId("metadata_ai_panel");
-      await expect(
-        panel.getByText("No metadata on this file yet"),
-      ).toBeVisible();
-      await expect(panel.getByTestId("metadata_ai_run_button")).toHaveCount(0);
-
-      return panel;
-    };
-
-    test("fill switches to suggest and back without reloading", async ({
-      page,
-      baseUrl,
-    }) => {
-      const panel = await openEmptyFill(page, baseUrl);
-
-      let reloads = 0;
-      page.on("request", (req) => {
-        if (req.method() === "GET" && req.url().endsWith("/metadata/file/10")) {
-          reloads += 1;
-        }
-      });
-
-      await panel.getByTestId("metadata_ai_suggest_button").click();
-
-      await expect(panel.getByTestId("metadata_ai_callout")).toContainText(
-        "Suggest metadata with AI",
-      );
-      await expect(panel.getByTestId("metadata_ai_run_button")).toBeEnabled();
-
-      await panel.getByTestId("aside_header_back_icon_button").click();
-
-      await expect(
-        panel.getByText("No metadata on this file yet"),
-      ).toBeVisible();
-      await expect(panel.getByTestId("metadata_ai_run_button")).toHaveCount(0);
-      expect(reloads).toBe(0);
-    });
-
-    test("fill adds a template and stays open to fill it", async ({
-      page,
-      baseUrl,
-      mockRequest,
-    }) => {
-      mockRequest.use(
-        ...entryTemplateHandlers(TEST_PORT),
-        ...metadataTemplatesHandlers(TEST_PORT),
-      );
-
-      const panel = await openEmptyFill(page, baseUrl);
-
-      await panel.getByTestId("metadata_ai_add_metadata_button").click();
-
-      const templatePanel = page.getByTestId("metadata_template_panel");
-      await templatePanel.getByTestId("metadata_template_item_1").click();
-      await templatePanel.getByTestId("metadata_template_next_button").click();
-
-      mockRequest.use(
-        entryMetadataHandler(TEST_PORT, {
-          ...ENTRY_METADATA,
-          customFields: [],
-        }),
-      );
-
-      const templatesAssigned = page.waitForRequest(
-        (req) =>
-          req.method() === "PUT" && req.url().endsWith("/file/10/templates"),
-      );
-
-      await templatePanel.getByTestId("metadata_template_save_button").click();
-
-      expect((await templatesAssigned).postDataJSON()).toEqual({
-        templateIds: [1],
-      });
-      await expect(templatePanel).toHaveCount(0);
-      await expect(panel.getByText("Counterparty")).toBeVisible();
-      await expect(panel.getByTestId("metadata_ai_run_button")).toBeEnabled();
-    });
-
-    test("closes when the template picker leads to the settings", async ({
-      page,
-      baseUrl,
-      mockRequest,
-    }) => {
-      mockRequest.use(
-        selfByTypeHandler(TEST_PORT, "owner", "en-US"),
-        ...metadataTemplatesHandlers(TEST_PORT, []),
-      );
-
-      const panel = await openEmptyFill(page, baseUrl);
-
-      await panel.getByTestId("metadata_ai_add_metadata_button").click();
-      await page.getByTestId("metadata_templates_settings_link").click();
-
-      await expect(page).toHaveURL(
-        /\/portal-settings\/customization\/metadata-templates$/,
-      );
-      await expect(page.getByTestId("metadata_ai_panel")).toHaveCount(0);
-    });
   });
 
   test.describe("spending limit reached", () => {

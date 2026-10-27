@@ -3,7 +3,7 @@
   "content": "No metadata on this file yet",
   "content_en_sha1_hash": "8f86917d5291ac6bf6c676b17caeced4a9d20a70",
   "created_at": "2026-10-21T10:17:41.278Z",
-  "updated_at": "2026-10-26T10:24:24.036Z",
+  "updated_at": "2026-10-27T14:49:15.592Z",
   "comment": {
     "text": "Empty-state title in the Metadata tab of the info panel when the selected file has no metadata.",
     "is_auto": true,
@@ -12,15 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/sub-components/NothingToFill.tsx",
-      "line_number": 63,
-      "context": "return (\n <EmptyScreenContainer\n className={styles.empty}\n imageSrc={isBase ? EmptyLightSvgUrl : EmptyDarkSvgUrl}\n imageAlt=\"\"\n headerText={t(\"Metadata:NoFileMetadata\")}\n descriptionText={t(\"Metadata:AINoMetadataDescription\")}\n buttons={\n <>\n <ActionButton\n icon={<AIReactSvg />}",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/MetadataEmpty.tsx",
-      "line_number": 59,
-      "context": "const MetadataEmpty = ({ itemType, addActions }: MetadataEmptyProps) => {\n const { t } = useTranslation([\"Metadata\"]);\n const { isBase } = useTheme();\n \n const titles: Record<TMetadataItemType, string> = {\n file: t(\"Metadata:NoFileMetadata\"),\n folder: t(\"Metadata:NoFolderMetadata\"),\n room: t(\"Metadata:NoRoomMetadata\"),\n };\n \n const descriptions: Record<TMetadataItemType, string> = {",
+      "line_number": 75,
+      "context": "const { isBase } = useTheme();\n const isAIAvailable = useMetadataAIAvailable(selection);\n const openAI = useOpenMetadataAI(selection);\n \n const titles: Record<TMetadataItemType, string> = {\n file: t(\"Metadata:NoFileMetadata\"),\n folder: t(\"Metadata:NoFolderMetadata\"),\n room: t(\"Metadata:NoRoomMetadata\"),\n };\n \n const descriptions: Record<TMetadataEmptyHint, string> = {",
       "module": "/packages/client"
     }
   ],

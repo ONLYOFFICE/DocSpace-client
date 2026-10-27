@@ -3,7 +3,7 @@
   "content": "Visible",
   "content_en_sha1_hash": "1fe59390acc1640dd7cbaedd750e69948a7f13d8",
   "created_at": "2026-10-21T10:17:41.293Z",
-  "updated_at": "2026-10-21T10:20:42.121Z",
+  "updated_at": "2026-10-27T14:49:15.787Z",
   "comment": {
     "text": "Label of the toggle in the metadata template editor that shows the template in pickers and on items. Adjective.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/TemplateForm.tsx",
-      "line_number": 77,
+      "line_number": 79,
       "context": "dataTestId=\"metadata_template_visible_toggle\"\n />\n </div>\n <div className={styles.visibleText}>\n <Text fontWeight={600} lineHeight=\"20px\">\n {t(\"Metadata:Visible\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Metadata:HiddenTemplateHint\")}\n </Text>\n </div>",
       "module": "/packages/client"
     }

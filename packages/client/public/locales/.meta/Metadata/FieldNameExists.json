@@ -3,7 +3,7 @@
   "content": "A field with this name already exists",
   "content_en_sha1_hash": "467875a29e4c0cf4506147a1453cb19e3ce1fdc8",
   "created_at": "2026-10-21T10:17:41.272Z",
-  "updated_at": "2026-10-22T13:13:49.705Z",
+  "updated_at": "2026-10-27T14:49:15.583Z",
   "comment": {
     "text": "Validation error under the field name input when the template or item already has a field with the same name.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/CustomFieldRow.tsx",
-      "line_number": 75,
+      "line_number": 78,
       "context": "onRemove,\n }: CustomFieldRowProps) => {\n const { t } = useTranslation([\"Metadata\", \"Common\"]);\n \n const getNameError = () => {\n if (isNameTaken) return t(\"Metadata:FieldNameExists\");\n if (isCaseOnlyRename(draft)) return t(\"Metadata:FieldNameCaseOnly\");\n \n return \"\";\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
-      "line_number": 97,
+      "line_number": 104,
       "context": "save().finally(() => setIsDeleteConfirmVisible(false));\n \n const getNameError = () => {\n if (!fieldForm) return \"\";\n if (isFieldNameTaken(draft.fields, fieldForm))\n return t(\"Metadata:FieldNameExists\");\n if (isNameFreedOnSave(original, draft, fieldForm))\n return t(\"Metadata:FieldNameFreedOnSave\");\n \n return \"\";\n };",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "An option with this value already exists",
   "content_en_sha1_hash": "e5172282bb5b989ec5dca42370bbfca37daae4da",
   "created_at": "2026-10-21T10:17:41.287Z",
-  "updated_at": "2026-10-21T10:20:42.121Z",
+  "updated_at": "2026-10-27T14:49:15.786Z",
   "comment": {
     "text": "Validation error under an option input of a select field when the same option value is already in the list.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/OptionsList.tsx",
-      "line_number": 104,
+      "line_number": 107,
       "context": "onClick={() => onRemove(index)}\n />\n </div>\n {duplicates[index] ? (\n <Text className={styles.optionError} fontSize=\"12px\">\n {t(\"Metadata:OptionExists\")}\n </Text>\n ) : null}\n </div>\n ))}\n </div>",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Option value",
   "content_en_sha1_hash": "58021baf579317a7e271f80ef460722ee7375c33",
   "created_at": "2026-10-21T10:17:41.288Z",
-  "updated_at": "2026-10-21T10:20:42.121Z",
+  "updated_at": "2026-10-27T14:49:15.784Z",
   "comment": {
     "text": "Placeholder of an option input in the options list of a Single or Multi select field in the metadata template editor.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/OptionsList.tsx",
-      "line_number": 91,
-      "context": "<TextInput\n type={InputType.text}\n value={option.value}\n hasError={duplicates[index]}\n onChange={(e) => onChange(index, e.target.value)}\n placeholder={t(\"Metadata:OptionValue\")}\n maxLength={METADATA_NAME_MAX_LENGTH}\n scale\n />\n <IconButton\n iconName={CatalogTrashReactSvgUrl}",
+      "line_number": 94,
+      "context": "hasError={duplicates[index]}\n onChange={(e) => onChange(index, e.target.value)}\n onKeyDown={(e) => {\n if (e.key === \"Enter\") e.preventDefault();\n }}\n placeholder={t(\"Metadata:OptionValue\")}\n maxLength={METADATA_NAME_MAX_LENGTH}\n scale\n />\n <IconButton\n iconName={CatalogTrashReactSvgUrl}",
       "module": "/packages/client"
     }
   ],

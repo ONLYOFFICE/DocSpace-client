@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-10-26T10:24:23.310Z",
+  "updated_at": "2026-10-27T14:49:14.609Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -121,14 +121,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/index.tsx",
-      "line_number": 152,
-      "context": ") : (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={!canSave}\n isLoading={isSaving}\n onClick={save}\n testId=\"metadata_custom_fields_save_button\"\n />",
+      "line_number": 164,
+      "context": ") : (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={!canSave}\n isLoading={isSaving}\n type=\"submit\"\n testId=\"metadata_custom_fields_save_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/index.tsx",
-      "line_number": 123,
-      "context": "{form ? (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={!canSave}\n isLoading={isSaving}\n onClick={save}\n testId=\"metadata_template_save_button\"\n />",
+      "line_number": 134,
+      "context": "{form ? (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={!canSave}\n isLoading={isSaving}\n type=\"submit\"\n testId=\"metadata_template_save_button\"\n />",
       "module": "/packages/client"
     },
     {
@@ -187,14 +187,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
-      "line_number": 153,
-      "context": "<Button\n primary\n scale\n size={ButtonSize.normal}\n label={\n isNewField ? t(\"Common:AddButton\") : t(\"Common:SaveButton\")\n }\n isDisabled={!isValidField(fieldForm) || !!nameError}\n onClick={submitField}\n testId=\"metadata_field_submit_button\"\n />",
+      "line_number": 180,
+      "context": "<Button\n primary\n scale\n size={ButtonSize.normal}\n label={\n isNewField ? t(\"Common:AddButton\") : t(\"Common:SaveButton\")\n }\n isDisabled={!isValidField(fieldForm) || !!nameError}\n type=\"submit\"\n testId=\"metadata_field_submit_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
-      "line_number": 153,
-      "context": "<Button\n primary\n scale\n size={ButtonSize.normal}\n label={\n isNewField ? t(\"Common:AddButton\") : t(\"Common:SaveButton\")\n }\n isDisabled={!isValidField(fieldForm) || !!nameError}\n onClick={submitField}\n testId=\"metadata_field_submit_button\"\n />",
+      "line_number": 180,
+      "context": "<Button\n primary\n scale\n size={ButtonSize.normal}\n label={\n isNewField ? t(\"Common:AddButton\") : t(\"Common:SaveButton\")\n }\n isDisabled={!isValidField(fieldForm) || !!nameError}\n type=\"submit\"\n testId=\"metadata_field_submit_button\"\n />",
       "module": "/packages/client"
     },
     {

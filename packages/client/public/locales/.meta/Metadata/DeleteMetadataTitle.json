@@ -3,7 +3,7 @@
   "content": "Delete metadata?",
   "content_en_sha1_hash": "66f651db221e898b4deaeb48125c81b50c051ec9",
   "created_at": "2026-10-21T10:17:41.268Z",
-  "updated_at": "2026-10-21T10:20:42.121Z",
+  "updated_at": "2026-10-27T14:49:15.568Z",
   "comment": {
     "text": "Title of the confirmation dialog for removing a metadata template or the custom fields from a file, folder or room in the info panel.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/index.tsx",
-      "line_number": 244,
+      "line_number": 248,
       "context": "/>\n ) : null}\n \n {deletion ? (\n <ConfirmDeleteDialog\n title={t(\"Metadata:DeleteMetadataTitle\")}\n description={getDeletionDescription()}\n onDelete={onDelete}\n onClose={closeDeletion}\n />\n ) : null}",
       "module": "/packages/client"
     }

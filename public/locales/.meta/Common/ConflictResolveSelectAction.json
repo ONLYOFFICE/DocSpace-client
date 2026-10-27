@@ -3,7 +3,7 @@
   "content": "Please select the action:",
   "content_en_sha1_hash": "690f45f13bb9e035ca831a55006b8db7f845025e",
   "created_at": "2025-05-19T21:30:43.643Z",
-  "updated_at": "2026-10-21T10:17:45.701Z",
+  "updated_at": "2026-10-27T14:49:14.642Z",
   "comment": {
     "text": "This is a label for a dropdown menu or radio button group within a conflict resolution dialog. It prompts the user to choose how to handle a file conflict (e.g., overwrite, create a copy, skip).",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CascadeBlock/ApplyMetadataDialog.tsx",
-      "line_number": 126,
+      "line_number": 141,
       "context": "{t(\"Metadata:NotImmediateOperation\")}\n </Text>\n </div>\n <div className={styles.conflictActions}>\n <Text lineHeight=\"20px\">\n {t(\"Common:ConflictResolveSelectAction\")}\n </Text>\n {options.map((option) => (\n <div key={option.value} className={styles.conflictOption}>\n <RadioButton\n name=\"metadata-cascade-conflict\"",
       "module": "/packages/client"
     },

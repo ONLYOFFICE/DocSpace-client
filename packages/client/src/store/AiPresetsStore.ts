@@ -40,7 +40,7 @@ import type {
   AiChatPresetSettings,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 
-/** A saved AI chat setup: the model, the skills room and the knowledge base. */
+/** A saved AI chat setup: the model, the skills rooms and the knowledge bases. */
 export type TAiPreset = AiChatPresetSettings & {
   id: string;
   name: string;
@@ -60,15 +60,39 @@ const isRoom = (value: unknown): value is AiChatPresetRoom =>
   typeof (value as AiChatPresetRoom).name === "string" &&
   typeof (value as AiChatPresetRoom).cloud === "string";
 
-const isPreset = (value: unknown): value is TAiPreset => {
-  if (typeof value !== "object" || value === null) return false;
+const isRoomList = (value: unknown): value is AiChatPresetRoom[] =>
+  Array.isArray(value) && value.every(isRoom);
+
+/**
+ * A stored preset, in today's shape (room lists) or the first one (one
+ * room of each kind, or `null`); anything else is dropped. The old shape
+ * is read as lists of one, so a preset saved before survives the change.
+ */
+const readPreset = (value: unknown): TAiPreset | null => {
+  if (typeof value !== "object" || value === null) return null;
   const preset = value as Record<string, unknown>;
-  return (
-    typeof preset.id === "string" &&
-    typeof preset.name === "string" &&
-    (preset.contextRoom === null || isRoom(preset.contextRoom)) &&
-    (preset.knowledgeRoom === null || isRoom(preset.knowledgeRoom))
-  );
+  if (typeof preset.id !== "string" || typeof preset.name !== "string") {
+    return null;
+  }
+  const rooms = (list: unknown, single: unknown): AiChatPresetRoom[] | null => {
+    if (isRoomList(list)) return list;
+    if (list !== undefined) return null;
+    if (single === null || single === undefined) return [];
+    return isRoom(single) ? [single] : null;
+  };
+  const contextRooms = rooms(preset.contextRooms, preset.contextRoom);
+  const knowledgeRooms = rooms(preset.knowledgeRooms, preset.knowledgeRoom);
+  if (!contextRooms || !knowledgeRooms) return null;
+  return {
+    id: preset.id,
+    name: preset.name,
+    createdAt: typeof preset.createdAt === "string" ? preset.createdAt : "",
+    profileId: typeof preset.profileId === "string" ? preset.profileId : null,
+    profileName:
+      typeof preset.profileName === "string" ? preset.profileName : null,
+    contextRooms,
+    knowledgeRooms,
+  };
 };
 
 const readPresets = (key: string): TAiPreset[] => {
@@ -76,7 +100,10 @@ const readPresets = (key: string): TAiPreset[] => {
     const raw = window.localStorage.getItem(key);
     if (!raw) return [];
     const parsed: unknown = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed.filter(isPreset) : [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .map(readPreset)
+      .filter((preset): preset is TAiPreset => preset !== null);
   } catch {
     return [];
   }
@@ -106,8 +133,8 @@ class AiPresetsStore {
   pendingSettings: AiChatPresetSettings | null = null;
 
   /**
-   * The preset the open chat was started from. Its skills room is handed to
-   * the chat as the context room instead of the room the user stands in,
+   * The preset the open chat was started from. Its skills rooms are handed
+   * to the chat as the context rooms instead of the room the user stands in,
    * until the panel closes.
    */
   activePreset: TAiPreset | null = null;
@@ -161,12 +188,12 @@ class AiPresetsStore {
   };
 
   /**
-   * Changes a room of the project the open chat runs on, from the project
-   * view's sources column: the active project and its saved copy both take
-   * the change, so the project reopens the same way.
+   * Changes the rooms of the project the open chat runs on, from the
+   * project view's sources column: the active project and its saved copy
+   * both take the change, so the project reopens the same way.
    */
   updateActiveProject = (
-    patch: Partial<Pick<TAiPreset, "contextRoom" | "knowledgeRoom">>,
+    patch: Partial<Pick<TAiPreset, "contextRooms" | "knowledgeRooms">>,
   ) => {
     const active = this.activePreset;
     if (!active) return;
@@ -188,9 +215,10 @@ class AiPresetsStore {
     return preset;
   };
 
-  get activePresetContextRoom(): { id: string; name: string } | null {
-    const room = this.activePreset?.contextRoom;
-    return room ? { id: room.id, name: room.name } : null;
+  /** The active preset's skills rooms as the chat's context rooms; `null` outside a preset. */
+  get activePresetContextRooms(): { id: string; name: string }[] | null {
+    const rooms = this.activePreset?.contextRooms;
+    return rooms ? rooms.map((room) => ({ id: room.id, name: room.name })) : null;
   }
 }
 

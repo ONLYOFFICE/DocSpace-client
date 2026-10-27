@@ -115,8 +115,8 @@ const AiPresetsBridge = ({ aiPresetsStore, userId }: AiPresetsBridgeProps) => {
   }, [aiChatStore, aiPresetsStore]);
 
   // A preset picked in the model picker: applied to the open chat as it
-  // stands, and made the active preset so its skills room reaches the chat
-  // as the context room (see Shell's `contextRoom`).
+  // stands, and made the active preset so its skills rooms reach the chat
+  // as the context rooms (see Shell's `contextRoom`).
   React.useEffect(
     () =>
       reaction(
@@ -129,8 +129,8 @@ const AiPresetsBridge = ({ aiPresetsStore, userId }: AiPresetsBridgeProps) => {
           aiChatStore.applyPreset({
             profileId: preset.profileId,
             profileName: preset.profileName,
-            contextRoom: preset.contextRoom,
-            knowledgeRoom: preset.knowledgeRoom,
+            contextRooms: preset.contextRooms,
+            knowledgeRooms: preset.knowledgeRooms,
           });
         },
       ),

@@ -17,8 +17,8 @@ const preset = (id: string, name: string, profileId: string | null): TAiPreset =
   name,
   profileId,
   profileName: profileId ? `Model ${profileId}` : null,
-  contextRoom: null,
-  knowledgeRoom: null,
+  contextRooms: [],
+  knowledgeRooms: [],
   createdAt: "2026-10-21T00:00:00.000Z",
 });
 

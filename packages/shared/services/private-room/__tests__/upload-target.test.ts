@@ -93,6 +93,7 @@ const pathThrough = (room: {
   id: number;
   private: boolean;
   roomType: RoomsType;
+  rootFolderType?: FolderType;
 }) =>
   [
     { id: ROOMS_SECTION_ID, title: "Rooms", private: false },
@@ -101,6 +102,7 @@ const pathThrough = (room: {
       title: "Room",
       roomType: room.roomType,
       private: room.private,
+      rootFolderType: room.rootFolderType,
     },
     { id: 60, title: "Folder", private: false },
   ] as never;
@@ -284,6 +286,37 @@ describe("resolveFolderTarget", () => {
       resolveFolderTarget({ id: 60, rootFolderType: FolderType.Rooms }),
     ).resolves.toEqual({ ...privateRoomOpen, folderId: 60 });
     expect(vi.mocked(getFolderPath).mock.calls).toEqual([[60]]);
+  });
+
+  it("marks a folder of an archived room as archived", async () => {
+    vi.mocked(getFolderPath).mockResolvedValue(
+      pathThrough({
+        id: PRIVATE_ROOM_ID,
+        private: true,
+        roomType: RoomsType.CustomRoom,
+        rootFolderType: FolderType.Archive,
+      }),
+    );
+
+    await expect(
+      resolveFolderTarget({ id: 60, rootFolderType: FolderType.Archive }),
+    ).resolves.toEqual({ ...privateRoomOpen, folderId: 60, isArchived: true });
+  });
+
+  it("reads the path through the loader it is given", async () => {
+    const loadPath = vi.fn(async () =>
+      pathThrough({
+        id: PRIVATE_ROOM_ID,
+        private: true,
+        roomType: RoomsType.CustomRoom,
+      }),
+    );
+
+    await expect(
+      resolveFolderTarget({ id: 60, rootFolderType: FolderType.Rooms }, loadPath),
+    ).resolves.toEqual({ ...privateRoomOpen, folderId: 60 });
+    expect(loadPath).toHaveBeenCalledWith(60);
+    expect(getFolderPath).not.toHaveBeenCalled();
   });
 
   it("is not private for a folder outside the rooms sections, without a lookup", async () => {

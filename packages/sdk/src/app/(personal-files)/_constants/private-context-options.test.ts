@@ -33,47 +33,41 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+import { describe, expect, it } from "vitest";
 
-import React from "react";
+import { AVAILABLE_CONTEXT_ITEMS as C } from "@/app/(docspace)/_enums/context-items";
 
-import {
-  PRIVATE_FILE_CONTEXT_OPTIONS,
-  PRIVATE_FOLDER_CONTEXT_OPTIONS,
-  PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS,
-} from "@/app/(personal-files)/_constants/private-context-options";
+import { getPrivateFileContextOptions } from "./private-context-options";
 
-export {
-  PRIVATE_FILE_CONTEXT_OPTIONS,
-  PRIVATE_FOLDER_CONTEXT_OPTIONS,
-  PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS,
-};
+describe("getPrivateFileContextOptions", () => {
+  it("Encrypted file that must be converted: no open or preview entry", () => {
+    const options = getPrivateFileContextOptions({
+      mustConvert: true,
+      hasKeys: true,
+    });
 
-type PrivateRoomContextMenuItem = {
-  key: string;
-};
+    for (const key of [C.preview, C.view, C.openPDF, C.edit]) {
+      expect(options.has(key)).toBe(false);
+    }
+    expect(options.has(C.downloadEncrypted)).toBe(true);
+  });
 
-type UsePrivateRoomContextMenuOptions = {
-  isArchive?: boolean;
-};
+  it("Archived private room opened: copy, download without decryption and preview as in an active room", () => {
+    const options = getPrivateFileContextOptions({ hasKeys: true });
 
-export const usePrivateRoomContextMenu = ({
-  isArchive = false,
-}: UsePrivateRoomContextMenuOptions = {}) => {
-  const allowed = isArchive
-    ? PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS
-    : PRIVATE_FILE_CONTEXT_OPTIONS;
+    for (const key of [C.copy, C.downloadEncrypted, C.preview, C.download]) {
+      expect(options.has(key)).toBe(true);
+    }
+    for (const key of [C.rename, C.downloadAs, C.markAsFavorite]) {
+      expect(options.has(key)).toBe(false);
+    }
+  });
 
-  const filterModel = React.useCallback(
-    <T extends PrivateRoomContextMenuItem>(model: T[]): T[] =>
-      model.filter((item) => allowed.has(item.key)),
-    [allowed],
-  );
+  it("offers neither opening nor decrypted download without keys", () => {
+    const options = getPrivateFileContextOptions({ hasKeys: false });
 
-  const isActionAllowed = React.useCallback(
-    (action: string): boolean => allowed.has(action),
-    [allowed],
-  );
-
-  return { filterModel, isActionAllowed, allowedActions: allowed };
-};
+    expect(options.has(C.preview)).toBe(false);
+    expect(options.has(C.download)).toBe(false);
+    expect(options.has(C.downloadEncrypted)).toBe(true);
+  });
+});

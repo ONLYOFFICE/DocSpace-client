@@ -35,7 +35,7 @@
 
 import React, { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { FolderType } from "@docspace/shared/enums";
 import type { TFolder } from "@docspace/shared/api/files/types";
@@ -43,12 +43,17 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT =
   true;
 
+const env = vi.hoisted(() => ({
+  rootFolderType: 0,
+  roomMenuArgs: [] as unknown[],
+}));
+
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 
 vi.mock("../_store/FilesListStore", () => ({
-  useFilesListStore: () => ({ rootFolderType: FolderType.Rooms, items: [] }),
+  useFilesListStore: () => ({ rootFolderType: env.rootFolderType, items: [] }),
 }));
 
 vi.mock("../_store/FilesSettingsStore", () => ({
@@ -60,7 +65,10 @@ vi.mock("./useContextMenuModel", () => ({
 }));
 
 vi.mock("@/app/(rooms)/_hooks/useRoomContextMenuModel", () => ({
-  default: () => ({ getContextModel: () => [] }),
+  default: (...args: unknown[]) => {
+    env.roomMenuArgs = args;
+    return { getContextModel: () => [] };
+  },
 }));
 
 vi.mock("@/app/(rooms)/_hooks/useRoomActions", () => ({ default: () => ({}) }));
@@ -101,6 +109,10 @@ describe("useHeaderContextMenu in a private room", () => {
     root = null;
   });
 
+  beforeEach(() => {
+    env.rootFolderType = FolderType.Rooms;
+  });
+
   const headerOptions = (actions: EncryptedFileActions | null) => {
     let options: string[] = [];
     const Probe = () => {
@@ -128,6 +140,17 @@ describe("useHeaderContextMenu in a private room", () => {
     expect(options).toContain(C.downloadEncrypted);
     expect(options).toContain(C.rename);
     expect(options).toContain(C.moveTo);
+  });
+
+  it("Archived private room opened: the room menu is the archive one and the folder keeps the active-room rules", () => {
+    env.rootFolderType = FolderType.Archive;
+
+    const options = headerOptions({ roomId: 10 } as EncryptedFileActions);
+
+    expect(env.roomMenuArgs[3]).toBe(true);
+    expect(options).toContain(C.downloadEncrypted);
+    expect(options).toContain(C.download);
+    expect(options).not.toContain(C.copy);
   });
 
   it("leaves the header of a folder outside private rooms as it was", () => {

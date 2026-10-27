@@ -34,6 +34,7 @@
  */
 
 import { getFolderPath } from "../../api/files";
+import type { TFolder } from "../../api/files/types";
 import { FolderType, RoomsType } from "../../enums";
 
 /**
@@ -47,6 +48,8 @@ export type TUploadTarget = {
   roomType: RoomsType | null;
   /** The room whose members get key wraps. */
   encryptionRoomId: number | string | null;
+  /** Set when the room on the path has been archived. */
+  isArchived?: true;
 };
 
 /** An entry of a drop or a picked folder tree, as the uploader receives it. */
@@ -126,10 +129,13 @@ const plainFolderTarget = (folderId: number | string): TUploadTarget => ({
  * path. A folder outside the rooms sections is never looked up; one whose
  * section is unknown is. Rejects when the path cannot be loaded.
  */
-export async function resolveFolderTarget(folder: {
-  id: number | string;
-  rootFolderType?: FolderType | null;
-}): Promise<TUploadTarget> {
+export async function resolveFolderTarget(
+  folder: {
+    id: number | string;
+    rootFolderType?: FolderType | null;
+  },
+  loadPath: (folderId: number) => Promise<TFolder[]> = getFolderPath,
+): Promise<TUploadTarget> {
   const { id, rootFolderType } = folder;
   const outsideRooms =
     rootFolderType !== undefined &&
@@ -138,7 +144,7 @@ export async function resolveFolderTarget(folder: {
     rootFolderType !== FolderType.Archive;
   if (outsideRooms) return plainFolderTarget(id);
 
-  const path = await getFolderPath(id as number);
+  const path = await loadPath(id as number);
   const room = path.find((entry) => !!entry.roomType);
   if (!room) return plainFolderTarget(id);
 
@@ -147,6 +153,7 @@ export async function resolveFolderTarget(folder: {
     isPrivate: !!room.private,
     roomType: room.roomType ?? null,
     encryptionRoomId: room.id,
+    ...(room.rootFolderType === FolderType.Archive && { isArchived: true }),
   };
 }
 

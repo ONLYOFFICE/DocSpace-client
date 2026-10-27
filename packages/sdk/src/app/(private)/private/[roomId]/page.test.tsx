@@ -33,17 +33,32 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { expect, test, vi } from "vitest";
+import { beforeEach, expect, test, vi } from "vitest";
+
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+
+const paths = vi.hoisted(() => ({ room: {} as Record<string, unknown> }));
 
 vi.mock("next/headers", () => ({
   cookies: async () => ({ get: () => undefined }),
 }));
-vi.mock("next/navigation", () => ({ notFound: vi.fn() }));
+vi.mock("next/navigation", () => ({
+  notFound: vi.fn(() => {
+    throw new Error("NEXT_NOT_FOUND");
+  }),
+  redirect: vi.fn((address: string) => {
+    throw new Error(`NEXT_REDIRECT ${address}`);
+  }),
+}));
 
 vi.mock("@/api/files", () => ({
   getFilesSettings: vi.fn(async () => ({})),
+  getFolderPath: vi.fn(async () => [
+    { id: 2, title: "Rooms", rootFolderType: FolderType.Rooms },
+    paths.room,
+  ]),
   getFolder: vi.fn(async () => ({
-    current: { id: 10 },
+    current: { id: 10, rootFolderType: FolderType.Rooms },
     folders: [],
     files: [],
     pathParts: [],
@@ -58,6 +73,19 @@ vi.mock("./page.client", () => ({ default: () => null }));
 import { getFolder } from "@/api/files";
 
 import PrivateRoomFiles from "./page";
+
+const room = (over: Record<string, unknown>) => ({
+  id: 10,
+  title: "Vault",
+  roomType: RoomsType.CustomRoom,
+  private: true,
+  rootFolderType: FolderType.Rooms,
+  ...over,
+});
+
+beforeEach(() => {
+  paths.room = room({});
+});
 
 test("Private room opened: a search parameter reaches neither the folder request nor the page", async () => {
   const element = await PrivateRoomFiles({
@@ -75,4 +103,38 @@ test("Private room opened: a search parameter reaches neither the folder request
   expect(filter.sortBy).toBe("Title");
   expect(element?.props.filesFilter).toContain("sortBy=Title");
   expect(element?.props.filesFilter).not.toContain("salaries");
+});
+
+test("Archived private room opened", async () => {
+  paths.room = room({ rootFolderType: FolderType.Archive });
+
+  const element = await PrivateRoomFiles({
+    params: Promise.resolve({ roomId: "10" }),
+    searchParams: Promise.resolve({ privateRooms: "true" }),
+  });
+
+  expect(element?.props.isArchive).toBe(true);
+  expect(element?.props.roomId).toBe("10");
+});
+
+test("Non-private room at a private address", async () => {
+  paths.room = room({ private: false });
+
+  await expect(
+    PrivateRoomFiles({
+      params: Promise.resolve({ roomId: "10" }),
+      searchParams: Promise.resolve({ privateRooms: "true" }),
+    }),
+  ).rejects.toThrow("NEXT_REDIRECT /rooms/10?privateRooms=true");
+});
+
+test("opens nothing for a folder outside the rooms", async () => {
+  paths.room = { id: 10, title: "Docs", rootFolderType: FolderType.USER };
+
+  await expect(
+    PrivateRoomFiles({
+      params: Promise.resolve({ roomId: "10" }),
+      searchParams: Promise.resolve({ privateRooms: "true" }),
+    }),
+  ).rejects.toThrow("NEXT_NOT_FOUND");
 });

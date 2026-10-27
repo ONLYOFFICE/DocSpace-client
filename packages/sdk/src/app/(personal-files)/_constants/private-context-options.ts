@@ -103,22 +103,30 @@ const offeredWithout = (
   return new Set(PRIVATE_LIGHT_CLIENT_OPTIONS.filter((key) => !keys.has(key)));
 };
 
-export const PRIVATE_FILE_CONTEXT_OPTIONS = offeredWithout(
-  getEncryptedFileWithheld({ hasKeys: true }),
-);
+const PRIVATE_FILE_CONTEXT_OPTIONS = new Map<string, ReadonlySet<string>>();
 
-export const PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS = offeredWithout(
-  getEncryptedFileWithheld({ hasKeys: false }),
-);
+/**
+ * What a file of a private room may offer, active or archived alike; the
+ * server's rights for the file narrow it further.
+ * Spec: private-rooms/sdk-surface, "Archive follows the active-room rules"
+ */
+export const getPrivateFileContextOptions = ({
+  mustConvert,
+  hasKeys,
+}: {
+  mustConvert?: boolean;
+  hasKeys: boolean;
+}): ReadonlySet<string> => {
+  const key = `${!!mustConvert}:${hasKeys}`;
+  let options = PRIVATE_FILE_CONTEXT_OPTIONS.get(key);
+  if (!options) {
+    options = offeredWithout(getEncryptedFileWithheld({ mustConvert, hasKeys }));
+    PRIVATE_FILE_CONTEXT_OPTIONS.set(key, options);
+  }
+  return options;
+};
 
 // Spec: private-rooms/sdk-surface, "Folder operations use the server path"
 export const PRIVATE_FOLDER_CONTEXT_OPTIONS = offeredWithout(
   PRIVATE_FOLDER_WITHHELD,
 );
-
-export const PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([
-  AVAILABLE_CONTEXT_ITEMS.select,
-  AVAILABLE_CONTEXT_ITEMS.showInfo,
-  AVAILABLE_CONTEXT_ITEMS.download,
-  AVAILABLE_CONTEXT_ITEMS.delete,
-]);

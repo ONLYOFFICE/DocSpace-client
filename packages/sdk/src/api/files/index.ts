@@ -235,6 +235,35 @@ export async function getFolderInfo(
 	}
 }
 
+/** The folders from the section root down to the folder (GET files/folder/{id}/path). */
+export async function getFolderPath(folderId: string | number): Promise<TFolder[]> {
+	logger.debug(`Start GET /files/folder/${folderId}/path`);
+
+	try {
+		const [req] = await createRequest(
+			[`/files/folder/${folderId}/path`],
+			[["", ""]],
+			"GET",
+		);
+
+		const res = await fetch(req, {
+			cache: "no-store",
+			signal: AbortSignal.timeout(8000),
+		});
+
+		if (!res.ok) {
+			logger.error(`GET /files/folder/${folderId}/path failed: ${res.status}`);
+			throw new Error("Failed to get folder path");
+		}
+
+		const resJson = await res.json();
+		return resJson.response as TFolder[];
+	} catch (error) {
+		logger.error(`Error in getFolderPath: ${error}`);
+		throw error;
+	}
+}
+
 export async function validateShareFolder(share: string) {
 	logger.debug(`Start GET /files/share/${share}`);
 

@@ -34,12 +34,13 @@
  */
 
 import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TSettings } from "@docspace/shared/api/settings/types";
+import { resolveFolderTarget } from "@docspace/shared/services/private-room/upload-target";
 
-import { getFilesSettings, getFolder } from "@/api/files";
+import { getFilesSettings, getFolder, getFolderPath } from "@/api/files";
 import { getSettings } from "@/api/settings";
 import { getSelf } from "@/api/people";
 import { PAGE_COUNT } from "@/utils/constants";
@@ -117,7 +118,27 @@ export default async function PrivateRoomFiles({
     notFound();
   }
 
-  const isArchive = folderData.current.isArchive === true;
+  // Spec: private-rooms/sdk-surface, "Archive follows the active-room rules"
+  const target = await resolveFolderTarget(
+    { id: folderData.current.id, rootFolderType: folderData.current.rootFolderType },
+    getFolderPath,
+  ).catch(() => null);
+  if (!target || target.encryptionRoomId === null) notFound();
+
+  // Spec: private-rooms/sdk-surface, "Private rooms only through the private pages"
+  if (!target.isPrivate) {
+    const params = new URLSearchParams(sp);
+    if (String(target.folderId) === String(target.encryptionRoomId)) {
+      params.delete("folder");
+    } else {
+      params.set("folder", String(target.folderId));
+    }
+    const query = params.toString();
+    const section = target.isArchived ? "/archive" : "/rooms";
+    redirect(
+      `${section}/${target.encryptionRoomId}${query ? `?${query}` : ""}`,
+    );
+  }
 
   return (
     <PrivateRoomFilesPage
@@ -127,8 +148,8 @@ export default async function PrivateRoomFiles({
       portalSettings={portalSettings as TSettings}
       filesFilter={filesFilter}
       user={user}
-      roomId={roomId}
-      isArchive={isArchive}
+      roomId={String(target.encryptionRoomId)}
+      isArchive={!!target.isArchived}
     />
   );
 }

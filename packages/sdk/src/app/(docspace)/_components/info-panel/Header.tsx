@@ -78,15 +78,20 @@ import {
 import { getAvailableTabs } from "./helpers/tabs";
 import styles from "./Header.module.scss";
 
-const InfoPanelHeader = observer(() => {
+type InfoPanelHeaderProps = {
+  /** The tabs the panel offers for a selection; the generic set by default. */
+  getTabs?: typeof getAvailableTabs;
+};
+
+const InfoPanelHeader = observer(({ getTabs }: InfoPanelHeaderProps) => {
   const { t } = useTranslation(["Common"]);
 
   const infoPanelStore = useInfoPanelStore();
   const { selection, fileView, setView, close } = infoPanelStore;
 
   const availableTabs = React.useMemo(
-    () => getAvailableTabs(selection),
-    [selection],
+    () => (getTabs ?? getAvailableTabs)(selection),
+    [getTabs, selection],
   );
 
   const withTabs = !!selection && availableTabs.length > 1;

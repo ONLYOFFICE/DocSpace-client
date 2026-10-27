@@ -142,10 +142,8 @@ import { DragContext } from "@/app/(docspace)/_contexts/DragContext";
 import DragTooltip from "../drag-tooltip";
 
 import {
-  PRIVATE_FILE_CONTEXT_OPTIONS,
-  PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS,
+  getPrivateFileContextOptions,
   PRIVATE_FOLDER_CONTEXT_OPTIONS,
-  PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS,
 } from "../../_constants/private-context-options";
 
 import {
@@ -314,20 +312,21 @@ const DocsLayoutCore = observer(
     const showQuickActions =
       isActionButtonEnabled && quickActionItems.length > 0;
 
-    // Archived private rooms get the narrower read-only whitelist; active
-    // private rooms use the full whitelist; non-private rooms have no filter.
-    const allowedContextOptions = isPrivate
-      ? isArchive
-        ? PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS
-        : hasEncryptionKeys
-          ? PRIVATE_FILE_CONTEXT_OPTIONS
-          : PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS
-      : undefined;
-    // Archive folders use the same read-only whitelist as files.
+    // Private rooms, active and archived alike, filter each item's options;
+    // non-private rooms have no filter.
+    const allowedContextOptions = React.useMemo(
+      () =>
+        isPrivate
+          ? (file: TFile) =>
+              getPrivateFileContextOptions({
+                mustConvert: file.viewAccessibility?.MustConvert,
+                hasKeys: !!hasEncryptionKeys,
+              })
+          : undefined,
+      [isPrivate, hasEncryptionKeys],
+    );
     const allowedFolderContextOptions = isPrivate
-      ? isArchive
-        ? PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS
-        : PRIVATE_FOLDER_CONTEXT_OPTIONS
+      ? PRIVATE_FOLDER_CONTEXT_OPTIONS
       : undefined;
 
     const handleCreateFolder = React.useCallback(

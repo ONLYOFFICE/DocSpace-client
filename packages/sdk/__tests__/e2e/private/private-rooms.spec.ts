@@ -1251,6 +1251,29 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
 });
 
 test.describe("(private) — archive", () => {
+  test("Archived private room opened", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveRooms(mockBoth, port, { files: [PHOTO], archived: true });
+    await openRoom(page, baseUrl);
+    const photoRow = row(page, PHOTO.serverTitle);
+    await expect(photoRow).toBeVisible();
+
+    await openContextMenu(photoRow);
+    await expect(page.locator("#option_download-encrypted")).toBeVisible();
+    await expect(page.locator("#option_copy")).toBeVisible();
+    await page.locator("#option_view").click();
+    await unlock(page);
+
+    const viewer = page.getByRole("dialog", {
+      name: `image viewer - ${PHOTO.name}`,
+    });
+    await expect(viewer.locator("img[src^='blob:']")).toBeVisible();
+  });
+
   test("Upload hotkey in an archived room", async ({
     page,
     baseUrl,

@@ -73,7 +73,7 @@ import RoomHeader from "@/app/(docspace)/_components/info-panel/sub-components/R
 import PrivateMembersView from "../members/PrivateMembersView";
 import { usePrivateDialogsStore } from "../../_store/PrivateDialogsStore";
 
-function getPrivateAvailableTabs(
+export function getPrivateAvailableTabs(
   selection: TFile | TFolder | null,
 ): InfoPanelViewType[] {
   if (!selection) return [InfoPanelView.infoDetails];
@@ -251,6 +251,11 @@ const PrivateInfoPanelBody = observer(
   },
 );
 
-export { InfoPanelHeader as PrivateInfoPanelHeader };
+// Spec: private-rooms/sdk-surface, "Share tab hidden for private items"
+const PrivateInfoPanelHeader = () => (
+  <InfoPanelHeader getTabs={getPrivateAvailableTabs} />
+);
+
+export { PrivateInfoPanelHeader };
 export { PrivateInfoPanelBody };
 export default PrivateInfoPanelBody;

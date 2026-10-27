@@ -57,10 +57,7 @@ import useContextMenuModel from "./useContextMenuModel";
 import useRoomContextMenuModel from "@/app/(rooms)/_hooks/useRoomContextMenuModel";
 import useRoomActions from "@/app/(rooms)/_hooks/useRoomActions";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
-import {
-  PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS,
-  PRIVATE_FOLDER_CONTEXT_OPTIONS,
-} from "@/app/(personal-files)/_constants/private-context-options";
+import { PRIVATE_FOLDER_CONTEXT_OPTIONS } from "@/app/(personal-files)/_constants/private-context-options";
 import { useEncryptedFileActions } from "../_contexts/EncryptedFileActionsContext";
 import type { TFolderItem } from "./useItemList";
 
@@ -104,7 +101,7 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     editRoom,
     roomChanged,
     changeOwner,
-    false,        // isArchive
+    filesListStore.rootFolderType === FolderType.Archive,
     undefined,    // onRestoreRoom
     deleteRoom,
     undefined,    // onDeleteSelected
@@ -121,13 +118,9 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     // isHeader: true — "open" is excluded at the source (see useItemContextMenu)
     const allOptions = getFoldersContextMenu(current, { isHeader: true });
     // Spec: private-rooms/sdk-surface, "Menu entries withheld for encrypted items".
-    const privateOptions =
-      filesListStore.rootFolderType === FolderType.Archive
-        ? PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS
-        : PRIVATE_FOLDER_CONTEXT_OPTIONS;
     const contextOptions =
       insidePrivateRoom && !isRoom
-        ? allOptions.filter((key) => privateOptions.has(key))
+        ? allOptions.filter((key) => PRIVATE_FOLDER_CONTEXT_OPTIONS.has(key))
         : allOptions;
 
     const rawLogo = (current as unknown as { logo?: TLogo }).logo;
@@ -149,7 +142,6 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     getFoldersContextMenu,
     isRoom,
     insidePrivateRoom,
-    filesListStore.rootFolderType,
   ]);
 
   const { getContextMenuModel: getFolderHeaderContextMenuModel } =

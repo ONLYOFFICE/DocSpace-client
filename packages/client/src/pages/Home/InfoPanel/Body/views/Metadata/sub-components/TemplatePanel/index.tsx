@@ -100,7 +100,8 @@ const TemplatePanel = ({
       withForm
       displayType={ModalDialogType.aside}
       isBackButton={isFormStep}
-      onBackClick={closeForm}
+      isCloseable={!isSaving}
+      onBackClick={isSaving ? undefined : closeForm}
       onClose={isFormStep ? closeForm : onClose}
       onSubmit={submit}
       dataTestId="metadata_template_panel"

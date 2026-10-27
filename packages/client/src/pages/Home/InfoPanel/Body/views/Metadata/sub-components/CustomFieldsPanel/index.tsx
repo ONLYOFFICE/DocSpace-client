@@ -102,6 +102,7 @@ const CustomFieldsPanel = ({
       withForm
       displayType={ModalDialogType.aside}
       isBackButton={!!newField}
+      isCloseable={!isSaving}
       onBackClick={closeNewField}
       onClose={newField ? closeNewField : onClose}
       onSubmit={submit}

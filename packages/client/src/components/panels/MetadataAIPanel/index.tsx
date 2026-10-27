@@ -180,7 +180,8 @@ const MetadataAIDialog = ({
       withForm
       displayType={ModalDialogType.aside}
       isBackButton={isReview}
-      onBackClick={discard}
+      isCloseable={!isSaving}
+      onBackClick={isSaving ? undefined : discard}
       onClose={isReview ? discard : onClose}
       onSubmit={submit}
       dataTestId="metadata_ai_panel"

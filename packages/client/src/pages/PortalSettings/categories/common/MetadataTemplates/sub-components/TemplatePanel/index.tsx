@@ -142,7 +142,7 @@ const TemplatePanel = ({
         withForm
         displayType={ModalDialogType.aside}
         isBackButton={!!fieldForm}
-        isCloseable={!isDeleteConfirmVisible}
+        isCloseable={!isDeleteConfirmVisible && !isSaving}
         onBackClick={closeField}
         onClose={fieldForm ? closeField : onClose}
         onSubmit={submit}

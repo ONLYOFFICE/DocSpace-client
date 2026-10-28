@@ -68,6 +68,9 @@ const withoutPrivateSearch = (filter: FilesFilter, isPrivate?: boolean) => {
   return filter;
 };
 
+const itemKey = (item: TFolderItem | TFileItem) =>
+  `${item.isFolder ? "folder" : "file"}_${item.id}`;
+
 const List = ({
   folders,
   files,
@@ -292,23 +295,28 @@ const List = ({
         ...newFiles.map((f) => convertFileToItem(f, sectionOverrides)),
       ];
 
-      let hasNext = false;
-      setFilesList((val) => {
-        const newVal = [...val, ...newItems];
-
-        hasNext = newTotal > newVal.length;
-
-        return newVal;
-      });
+      // The store leads once synced, so a page joins what it lists and
+      // keeps the items an action or an encrypted operation put there.
+      const listed = new Set(filesListStore.items.map(itemKey));
+      filesListStore.appendItems(
+        newItems.filter((item) => !listed.has(itemKey(item))),
+      );
       setTotal(newTotal);
-      setHasNextPage(hasNext);
+      setHasNextPage(newTotal > filesListStore.items.length);
       setFilter(filter);
     } catch (e) {
       if (!controller.signal.aborted) throw e;
     } finally {
       requestRunning.current = false;
     }
-  }, [filter, shareKey, hasNextPage, convertFolderToItem, convertFileToItem]);
+  }, [
+    filter,
+    shareKey,
+    hasNextPage,
+    filesListStore,
+    convertFolderToItem,
+    convertFileToItem,
+  ]);
 
   React.useEffect(() => {
     if (!isInit.current || requestRunning.current) {

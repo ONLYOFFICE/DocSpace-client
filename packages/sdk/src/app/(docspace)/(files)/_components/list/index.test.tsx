@@ -56,6 +56,7 @@ const mocks = vi.hoisted(() => ({
     convertFileToItem: (file: object) => ({ ...file, isFolder: false }),
     convertFolderToItem: (folder: object) => ({ ...folder, isFolder: true }),
   },
+  fetchMoreFiles: null as (() => Promise<void>) | null,
 }));
 
 vi.mock("next/navigation", () => ({
@@ -92,13 +93,22 @@ vi.mock("@/app/(docspace)/_hooks/useFilesSocket", () => ({ default: vi.fn() }));
 vi.mock("./hooks/useResetSelectionClick", () => ({ default: vi.fn() }));
 
 vi.mock("../table-view", () => ({
-  default: ({ items }: { items: { id: number; title: string }[] }) => (
-    <ul>
-      {items.map((item) => (
-        <li key={item.id}>{item.title}</li>
-      ))}
-    </ul>
-  ),
+  default: ({
+    items,
+    fetchMoreFiles,
+  }: {
+    items: { id: number; title: string }[];
+    fetchMoreFiles: () => Promise<void>;
+  }) => {
+    mocks.fetchMoreFiles = fetchMoreFiles;
+    return (
+      <ul>
+        {items.map((item) => (
+          <li key={item.id}>{item.title}</li>
+        ))}
+      </ul>
+    );
+  },
 }));
 
 vi.mock("../tile-view", () => ({ default: () => null }));
@@ -172,6 +182,57 @@ describe("List", () => {
     );
 
     expect(store.items.filter((i) => i.id === 8101)).toHaveLength(1);
+  });
+});
+
+describe("List with a further page", () => {
+  let root: Root | null = null;
+
+  afterEach(() => {
+    act(() => root?.unmount());
+    root = null;
+  });
+
+  it("Upload without a socket connection, then load more: the stored file stays listed once", async () => {
+    vi.mocked(api.files.getFolder).mockResolvedValue({
+      files: [
+        { id: 8104, title: "agenda.txt" },
+        { id: 8102, title: "notes.txt" },
+      ],
+      folders: [],
+      total: 3,
+    } as never);
+    const store = new FilesListStore();
+    const container = document.createElement("div");
+    root = createRoot(container);
+    act(() =>
+      root?.render(
+        <FilesListStoreContext.Provider value={store}>
+          <List
+            total={2}
+            folders={[]}
+            files={[{ id: 8101, title: "memo.txt" } as never]}
+            filesSettings={{ displayFileExtension: true } as never}
+            filesFilter=""
+            portalSettings={{ timezone: "UTC", socketUrl: "" } as never}
+            current={{ id: 7001, title: "Room", rootFolderType: 14 } as never}
+          />
+        </FilesListStoreContext.Provider>,
+      ),
+    );
+    act(() =>
+      store.addStoredFile({ id: 8102, title: "notes.txt", folderId: 7001 } as never),
+    );
+    expect(container.textContent).toContain("notes.txt");
+
+    await act(async () => {
+      await mocks.fetchMoreFiles?.();
+    });
+
+    expect(api.files.getFolder).toHaveBeenCalledTimes(1);
+    expect(store.items.map((item) => item.id)).toEqual([8102, 8101, 8104]);
+    expect(container.textContent).toContain("notes.txt");
+    expect(container.textContent).toContain("agenda.txt");
   });
 });
 

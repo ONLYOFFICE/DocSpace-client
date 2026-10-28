@@ -109,12 +109,12 @@ The system SHALL NOT hide rooms that are already private, or files that are alre
 - **WHEN** the flag is enabled but an administrator switched the E2E rooms app off
 - **THEN** the private room is listed in Rooms with its private badge and can be opened
 
-### Requirement: SDK private routes are not gated by the flag
-The system SHALL serve the embeddable SDK private-room pages under `/sdk/private*` regardless of the flag; the flag is read only by the client application.
+### Requirement: SDK private routes honour the host opt-in
+The system SHALL serve the embeddable SDK private-room pages under `/sdk/private*` only when the embedding host passes the private-rooms opt-in. Without the opt-in the pages render the not-available view.
 
 #### Scenario: SDK route without the flag
-- **WHEN** a signed-in user opens `/sdk/private` with the flag disabled
-- **THEN** the SDK private rooms list renders
+- **WHEN** a signed-in user opens `/sdk/private` and the host has not enabled private rooms
+- **THEN** the not-available view renders and no private-room data is requested
 
 ### Requirement: Server API is not gated by the flag
 The system SHALL NOT rely on the flag for security: the server applies its own authorisation to the private-room endpoints whether or not the flag is set (own keys only, guests refused for key writes, room membership and an own key for room access, read access for file access), and the flag MUST be treated as a discoverability control only.
@@ -137,3 +137,14 @@ The system SHALL enable the flag for every Playwright page in the client E2E bas
 #### Scenario: Hidden-surfaces spec
 - **WHEN** the hidden-surfaces spec clears the flag
 - **THEN** the Private room card and the Keys management tab are absent, and present again once the flag is restored
+
+### Requirement: Client in an embedded frame takes the host opt-in
+The client SHALL treat the `privateRooms` property of the frame configuration as the private-rooms opt-in while it runs inside an embedded frame, in addition to the browser-local flag. A framed list SHALL be requested only after that configuration has arrived, so it is scoped once.
+
+#### Scenario: Host enables private rooms in a frame
+- **WHEN** a host embeds the client with `privateRooms: true` in a browser without the flag, on a portal where the E2E rooms app is on
+- **THEN** the Private section is available in the frame
+
+#### Scenario: Frame without the property
+- **WHEN** a host embeds the client without the property in a browser without the flag
+- **THEN** the Private section is not available in the frame and the Rooms list carries no privacy filter

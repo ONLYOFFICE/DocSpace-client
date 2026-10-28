@@ -37,7 +37,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
+import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import ArticleLiveChat from "@onlyoffice/apps-ui-kit/components/article/sub-components/LiveChat";
+import { getInfoPanelWidth } from "@onlyoffice/apps-ui-kit/components/section/Section.utils";
 
 type LiveChatBlockProps = {
   isLiveChatAvailable: boolean;
@@ -58,10 +60,27 @@ type LiveChatBlockProps = {
  * shares the bottom corner with the create button and the progress button,
  * and the two flags below are what move it aside while one of those is there.
  */
-const LiveChatBlock = ({ isLiveChatAvailable, ...rest }: LiveChatBlockProps) => {
+const LiveChatBlock = ({
+  isLiveChatAvailable,
+  infoPanelWidth,
+  ...rest
+}: LiveChatBlockProps) => {
+  const aiChatStore = useAiChatStoreOptional();
+
   if (isMobile || !isLiveChatAvailable) return null;
 
-  return <ArticleLiveChat {...rest} />;
+  return (
+    <ArticleLiveChat
+      {...rest}
+      infoPanelWidth={getInfoPanelWidth({
+        isInfoPanelVisible: rest.isInfoPanelVisible,
+        infoPanelWidth,
+        isChatPanelVisible: aiChatStore?.isVisible,
+        isChatPanelFullscreen: aiChatStore?.effectiveFullscreen,
+        chatPanelWidth: aiChatStore?.panelWidth,
+      })}
+    />
+  );
 };
 
 // Every field comes from the stores, so the public component takes no props.

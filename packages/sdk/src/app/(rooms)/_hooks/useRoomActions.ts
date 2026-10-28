@@ -76,6 +76,7 @@ import {
   useInfoPanelStore,
 } from "@/app/(docspace)/_store/InfoPanelStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import type {
   TFileItem,
@@ -113,6 +114,7 @@ export default function useRoomActions() {
   const infoPanelStore = useInfoPanelStore();
   const actionsOverride = useContext(RoomActionsOverrideContext);
   const filesListStore = useFilesListStore();
+  const navigationStore = useNavigationStore();
 
   const editRoom = useCallback(
     (item: RoomItem) => {
@@ -209,6 +211,7 @@ export default function useRoomActions() {
         } as unknown as TFolder;
         if (filesListStore.currentFolder?.id === id) {
           filesListStore.setCurrentFolder(fresh);
+          navigationStore.setCurrentTitle(updated.title);
         }
         if (infoPanelStore.selection?.id === id) {
           infoPanelStore.setSelection(fresh);
@@ -217,7 +220,7 @@ export default function useRoomActions() {
         // ignore — stale data is tolerable until the next navigation
       }
     },
-    [filesListStore, infoPanelStore],
+    [filesListStore, infoPanelStore, navigationStore],
   );
 
   return {

@@ -40,6 +40,26 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT =
   true;
 
+vi.mock("@docspace/shared/api", () => ({
+  default: {
+    rooms: {
+      getRoomInfo: vi.fn(async () => ({ id: 10, title: "Renamed vault" })),
+    },
+  },
+}));
+
+import {
+  FilesListStore,
+  FilesListStoreContext,
+} from "@/app/(docspace)/_store/FilesListStore";
+import { InfoPanelStoreContextProvider } from "@/app/(docspace)/_store/InfoPanelStore";
+import {
+  NavigationStoreContextProvider,
+  useNavigationStore,
+} from "@/app/(docspace)/_store/NavigationStore";
+import { RoomActionsOverrideContext } from "@/app/(rooms)/_contexts/RoomActionsOverrideContext";
+import useRoomActions from "@/app/(rooms)/_hooks/useRoomActions";
+
 import {
   PrivateDialogsStoreProvider,
   usePrivateDialogsStore,
@@ -98,5 +118,56 @@ describe("usePrivateRoomActions", () => {
 
     act(() => dialogs!.changeOwner?.onChanged?.());
     expect(onRoomChanged).toHaveBeenCalledWith(10);
+  });
+
+  it("Rename from the header of an open room: the header title takes the new name", async () => {
+    const filesListStore = new FilesListStore();
+    filesListStore.setCurrentFolder({ id: 10, title: "Vault" } as never);
+    let headerActions: ReturnType<typeof useRoomActions> | null = null;
+    let dialogs: ReturnType<typeof usePrivateDialogsStore> | null = null;
+    let navigation: ReturnType<typeof useNavigationStore> | null = null;
+    // The private room page passes the generic roomChanged as onRoomChanged.
+    const PrivatePage = ({ children }: { children: React.ReactNode }) => {
+      const { roomChanged } = useRoomActions();
+      const actions = usePrivateRoomActions({ onRoomChanged: roomChanged });
+      return (
+        <RoomActionsOverrideContext.Provider value={actions}>
+          {children}
+        </RoomActionsOverrideContext.Provider>
+      );
+    };
+    const Header = () => {
+      headerActions = useRoomActions();
+      dialogs = usePrivateDialogsStore();
+      navigation = useNavigationStore();
+      return null;
+    };
+    root = createRoot(document.createElement("div"));
+    act(() =>
+      root?.render(
+        <FilesListStoreContext.Provider value={filesListStore}>
+          <NavigationStoreContextProvider>
+            <InfoPanelStoreContextProvider>
+              <PrivateDialogsStoreProvider>
+                <PrivatePage>
+                  <Header />
+                </PrivatePage>
+              </PrivateDialogsStoreProvider>
+            </InfoPanelStoreContextProvider>
+          </NavigationStoreContextProvider>
+        </FilesListStoreContext.Provider>,
+      ),
+    );
+    act(() => navigation!.setCurrentTitle("Vault"));
+
+    act(() =>
+      headerActions!.editRoom({ id: 10, title: "Vault", private: true } as never),
+    );
+    await act(async () => {
+      await dialogs!.createEditRoom?.onEdited?.(10);
+    });
+
+    expect(navigation!.currentTitle).toBe("Renamed vault");
+    expect(filesListStore.currentFolder?.title).toBe("Renamed vault");
   });
 });

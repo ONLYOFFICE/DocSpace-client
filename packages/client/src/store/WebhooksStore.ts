@@ -296,9 +296,8 @@ class WebhooksStore {
 
   fetchEventData = async (eventId: number) => {
     const data = (await getWebhooksJournal({ eventId })) as TJournalData;
-    this.eventDetails = data.items.find(
-      (item) => Number(item.id) === Number(eventId),
-    );
+    this.eventDetails =
+      data.items.find((item) => Number(item.id) === Number(eventId)) ?? {};
   };
 
   get hasMoreItems() {

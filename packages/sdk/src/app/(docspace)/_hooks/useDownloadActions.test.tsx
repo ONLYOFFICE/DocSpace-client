@@ -88,6 +88,7 @@ vi.mock("@/app/(docspace)/_store/ActiveItemsStore", () => ({
 vi.mock("./useFileType", () => ({ default: () => ({}) }));
 
 import { downloadFiles as downloadFilesApi } from "@docspace/shared/api/files";
+import { UrlActionType } from "@docspace/shared/enums";
 import { openUrl } from "@docspace/shared/utils/common";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
@@ -104,6 +105,13 @@ const encryptedFile = {
   title: "memo.docx",
   fileExst: ".docx",
   viewUrl: "/view/7",
+};
+const plainFile = {
+  id: 8,
+  isFolder: false,
+  title: "notes.txt",
+  fileExst: ".txt",
+  viewUrl: "/view/8",
 };
 const folder = { id: 5, isFolder: true, title: "Drafts" };
 
@@ -185,6 +193,39 @@ describe("useDownloadActions in a private room", () => {
     expect(toastr.error).toHaveBeenCalledWith(
       "Common:PrivateRoomFolderDownloadNotSupported",
     );
+    expect(encryptedActions.downloadZip).not.toHaveBeenCalled();
+    expect(downloadFilesApi).not.toHaveBeenCalled();
+  });
+
+  it("Mixed selection: encrypted and plain files are refused before any request", async () => {
+    render([encryptedFile, plainFile]);
+
+    await act(async () => {
+      await actions.downloadAction();
+    });
+
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomMixedDownloadNotSupported",
+    );
+    expect(encryptedActions.downloadZip).not.toHaveBeenCalled();
+    expect(downloadFilesApi).not.toHaveBeenCalled();
+    expect(openUrl).not.toHaveBeenCalled();
+  });
+
+  it("Ciphertext download: an encrypted file is saved as stored, without the decrypting path", async () => {
+    render();
+
+    await act(async () => {
+      await actions.downloadEncryptedAction(encryptedFile as never);
+    });
+
+    expect(openUrl).toHaveBeenCalledWith(
+      expect.objectContaining({
+        url: "/view/7",
+        action: UrlActionType.Download,
+      }),
+    );
+    expect(encryptedActions.downloadFile).not.toHaveBeenCalled();
     expect(encryptedActions.downloadZip).not.toHaveBeenCalled();
     expect(downloadFilesApi).not.toHaveBeenCalled();
   });

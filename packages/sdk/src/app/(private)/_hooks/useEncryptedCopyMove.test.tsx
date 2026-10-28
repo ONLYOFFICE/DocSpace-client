@@ -97,6 +97,7 @@ vi.mock("./useEncryptedUpload", () => ({
 }));
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { decryptEncryptedItemToFile } from "@docspace/shared/services/private-room/encrypted-copy";
 
 import { useEncryptedCopyMove } from "./useEncryptedCopyMove";
 
@@ -201,6 +202,19 @@ describe("useEncryptedCopyMove", () => {
     ]);
     expect(env.uploadDecrypted).not.toHaveBeenCalled();
     expect(toastr.error).not.toHaveBeenCalled();
+  });
+
+  it("Locked identity: the copy is cancelled with the locked-operation toast", async () => {
+    env.requireIdentity.mockResolvedValueOnce(null as never);
+
+    await copyTo(21);
+
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptionLockedAddMembers",
+    );
+    expect(decryptEncryptedItemToFile).not.toHaveBeenCalled();
+    expect(env.uploadFiles).not.toHaveBeenCalled();
+    expect(env.uploadDecrypted).not.toHaveBeenCalled();
   });
 
   it("Destination unknown", async () => {

@@ -86,8 +86,14 @@ export default inject(
       showText,
     } = settingsStore;
 
-    const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
-      infoPanelStore;
+    const {
+      isVisible,
+      isMobileHidden,
+      setIsVisible,
+      getCanDisplay,
+      width: infoPanelWidth,
+      setWidth: setInfoPanelWidth,
+    } = infoPanelStore;
 
     const { isIndexEditingMode } = indexingStore;
 
@@ -112,6 +118,9 @@ export default inject(
       isInfoPanelVisible: isVisible && !isIndexEditingMode,
       isMobileHidden,
       setIsInfoPanelVisible: setIsVisible,
+      isInfoPanelResizable: true,
+      infoPanelWidth,
+      setInfoPanelWidth,
       canDisplay,
       anotherDialogOpen,
       isHeaderVisible,

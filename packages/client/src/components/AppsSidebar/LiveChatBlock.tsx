@@ -46,6 +46,7 @@ type LiveChatBlockProps = {
   isShowLiveChat: boolean;
   withFloatingButton: boolean;
   isInfoPanelVisible: boolean;
+  infoPanelWidth: number;
 };
 
 /**
@@ -92,6 +93,7 @@ const LiveChatBlockConnected = inject<TStore>(
       // when that button or the progress button is there.
       withFloatingButton: filesStore.mainButtonVisible || showProgress,
       isInfoPanelVisible: infoPanelStore.isVisible,
+      infoPanelWidth: infoPanelStore.width,
     };
   },
 )(observer(LiveChatBlock)) as unknown as React.ComponentType;

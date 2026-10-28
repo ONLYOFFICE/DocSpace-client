@@ -52,6 +52,7 @@ the file to change so the backend team can pick them up; nothing here is
   administrator.
 - Found on a local portal on 2026-10-22: the public keys of a file in an archived private room are answered 415, because the file check knows only the VirtualRooms section; the server applies the room check's VirtualRooms-or-Archive condition (design decision 9).
 - A caller who may change the access of a private room can read the public keys of named users who are not members yet, so the client verifies invitees' keys before granting access (`private-rooms-invite-atomic-rewrap`, decided 2026-10-28; design decision 10). Today the room access keys cover members only.
+- Found when the server was re-checked on 2026-10-28 (`e618acc6c0`): saving a user's keys can delete another sign-in link of that user, such as Google or SSO; a private room accepts external and invitation links and can be duplicated, saved as a template or index-exported, each guarded by the client only; an empty key set passes every key check; the private flag is accepted with any room type; and a third-party room created as private is not key-checked. The server refuses or fixes each of these (design decisions 11-13).
 
 ## Capabilities
 
@@ -64,10 +65,13 @@ None.
 - `private-rooms/server-contract`: owner change, edition gate, invitation
   e-mail, audit scope, recovery/offboarding
   endpoints, the copy right in archived private rooms and the public keys
-  of files in archived private rooms change; new
+  of files in archived private rooms, and private room creation (empty key
+  sets, room type, third-party rooms) change; new
   requirements for metadata guards, title validation, upload-session abort,
   access history, the administrator bypass in archived private rooms,
-  private-room event recipients and the public keys of prospective members.
+  private-room event recipients, the public keys of prospective members,
+  sign-in links kept on a key save, no links on a private room and refused
+  room-level copies.
 
 ## Impact
 
@@ -78,7 +82,11 @@ None.
   new recovery and SCIM controllers, the Archive branch of
   `FileSecurity.FilterEntryAsync`, `CopyPermissionsCheck.cs` (traced only),
   `SocketManager.cs`, and `PrivacyRoomController.cs` with
-  `EncryptionKeyPairDto.cs` (invitee keys).
+  `EncryptionKeyPairDto.cs` (invitee keys); `EncryptionLoginProvider.cs`
+  (key save, empty key sets), `CreateThirdPartyRoomAsync` and the room-level
+  private denials of `FileSecurity.cs`, the room link routes
+  (`VirtualRoomsController.cs`), and the other notifiers that carry a room
+  title (`ResendEmailInvitationsAsync`, `NotifyClient.cs`).
 - Client: `packages/shared/api/privacy`, `packages/shared/api/files`,
   `packages/shared/services/private-room/room-encryption.ts` (owner hand-over
   backfill), `packages/client/src/components/panels/ChangeRoomOwnerPanel`,
@@ -98,6 +106,14 @@ None.
   2026-10-26). Not a release prerequisite.
 - Client-side TOFU and fail-closed fixes (separate changes).
 - The audit log viewer UI in the management app (follows once events exist).
+- A route that tells a room manager which members lack an access entry on
+  which files. It would make the backfill exact
+  (`private-rooms-fanout-dialog-and-backfill`, archived) and let the
+  pending-access marker of `private-rooms-invite-atomic-rewrap` survive a
+  reload and reach other devices; today the server reads back the caller's
+  own entries only. A later target, not a release prerequisite.
+- A server-side Private section with its own root, search area and new-items
+  routing (`private-rooms-sidebar-section`, archived): a later target.
 
 ## Decisions needed
 
@@ -119,3 +135,12 @@ None.
    unencrypted uploads and `copyas` conversion output currently land in a
    private room unchecked. Whether this change adds a requirement for it is
    undecided; `private-rooms-upload-fail-closed` defers its server guard here.
+6. Third-party private rooms (open): key-check them like every private room
+   (the spec assumes this, design decision 13) or refuse the private flag on
+   third-party storage.
+7. Member removal racing an upload on another device (open): the access
+   write refuses the whole request when one listed user can no longer read
+   the file, so such an upload stores no entry for anyone. Options: the write
+   stores the entries of the users who can read and reports the others, or
+   the server blocks a member's removal while uploads naming them are open.
+   `private-rooms-invite-atomic-rewrap` leaves this race to this change.

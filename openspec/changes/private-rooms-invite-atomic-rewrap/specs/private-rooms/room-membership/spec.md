@@ -46,11 +46,15 @@ The system SHALL skip an invitee who has no encryption key or whose key changed 
 - **THEN** only the verified invitees are granted access and the skipped ones are listed inline without closing the panel
 
 ### Requirement: Partial re-encryption failure is reported
-The system SHALL report Common:EncryptedReencryptPartialFailure with the failure count when some files could not be re-wrapped, and Common:EncryptedReencryptFailed when the whole re-encryption fails. A member for whom some files could not be re-wrapped SHALL be shown in the Members panel as pending access (Common:EncryptedAccessPending) with a retry action that re-wraps the missing files.
+The system SHALL report Common:EncryptedReencryptPartialFailure with the failure count when some files could not be re-wrapped, and Common:EncryptedReencryptFailed when the whole re-encryption fails. A member for whom some or all files could not be re-wrapped SHALL be shown in the Members panel as pending access (Common:EncryptedAccessPending) with a retry action that re-wraps the missing files, or every encrypted file of the room when the re-encryption failed as a whole.
 
 #### Scenario: Some files fail
 - **WHEN** re-wrapping fails for a subset of files after an invitation
 - **THEN** Common:EncryptedReencryptPartialFailure is shown with the number of failed files and the member row shows Common:EncryptedAccessPending
+
+#### Scenario: Re-encryption fails as a whole
+- **WHEN** the re-wrap after an invitation fails as a whole
+- **THEN** Common:EncryptedReencryptFailed is shown, every invitee's member row shows Common:EncryptedAccessPending, and their retry re-wraps every encrypted file in the room
 
 #### Scenario: Retry succeeds
 - **WHEN** an inviter with edit rights triggers the retry on a pending member and every missing file is re-wrapped

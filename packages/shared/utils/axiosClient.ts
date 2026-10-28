@@ -567,6 +567,14 @@ class AxiosClient {
             // itself is not kept: it would only send the user back there.
             if (!window.location.pathname.startsWith("/login")) {
               sessionStorage.setItem("referenceUrl", window.location.href);
+
+              // Named after the user the tab was showing (PrivateRoute keeps
+              // it), so the page is reopened for that user alone and not for
+              // whoever logs in next in this tab.
+              const sessionUserId = sessionStorage.getItem("sessionUserId");
+              if (sessionUserId) {
+                sessionStorage.setItem("loggedOutUserId", sessionUserId);
+              }
             }
 
             this.request(opt)?.then(() => {

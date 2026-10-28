@@ -103,18 +103,22 @@ export const ExportMenu = ({
         })}
         onClick={() => setIsPopupOpen((isOpen) => !isOpen)}
         disabled={isReportGenerating}
+        aria-busy={isReportGenerating || undefined}
         data-testid="info_history_export"
       >
         <span className={styles.label}>{t("InfoPanel:ExportHistory")}</span>
 
         <span className={styles.indicator}>
           {isReportGenerating ? (
+            // The button says it is busy; the loader's own status label
+            // would otherwise become part of the button's name.
             <Loader
               id="info_history-export-loader"
               className={styles.loader}
               color=""
               size="16px"
               type={LoaderTypes.track}
+              isDecorative
             />
           ) : (
             <ExpanderDownIcon className={styles.icon} />

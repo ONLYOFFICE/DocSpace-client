@@ -70,7 +70,7 @@ describe("AboutDialog", () => {
 
   it("calls onClose callback when dialog is closed", () => {
     render(<AboutDialog {...testProps} />);
-    const closeButton = screen.getByLabelText("close");
+    const closeButton = screen.getByTestId("aside_header_close_icon_button");
     fireEvent.click(closeButton);
     expect(testProps.onClose).toHaveBeenCalled();
   });

@@ -150,6 +150,16 @@ describe("focusListOnSelectionKey", () => {
     expect(document.activeElement).toBe(list);
   });
 
+  it("focuses the section's list, not the info panel's scroller before it", () => {
+    document.body.innerHTML =
+      '<div class="section-scroll info-panel-scroll"><div id="panel" tabindex="-1"></div></div>' +
+      '<div class="section-scroll"><div id="list" tabindex="-1"></div></div>';
+
+    focusListOnSelectionKey(new KeyboardEvent("keydown", { key: "ArrowDown" }));
+
+    expect(document.activeElement).toBe(document.getElementById("list"));
+  });
+
   it("leaves the focus alone for any other key", () => {
     const { more } = mountList();
     more.focus();

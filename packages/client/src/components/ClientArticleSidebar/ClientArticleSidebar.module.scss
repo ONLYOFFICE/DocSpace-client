@@ -53,8 +53,18 @@
     fill: var(--nav-menu-item-icon-color, var(--icon-button-color));
   }
 
-  :global(li:hover) &,
-  :global(li:focus-within) & {
+  // Only the Trash item's own row: it sits in the Files section's `li`, and a
+  // bare `li:hover` matched that one too, so hovering or focusing any entry
+  // of the section showed the badge. The section's `li` holds a sub-list.
+  :global(li:not(:has(ul)):hover) &,
+  :global(li:not(:has(ul)):focus-within) & {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // A touch screen has no hover to reveal it, and a tap on the item opens the
+  // Trash, so there the badge stays on.
+  @media (hover: none) {
     opacity: 1;
     visibility: visible;
   }

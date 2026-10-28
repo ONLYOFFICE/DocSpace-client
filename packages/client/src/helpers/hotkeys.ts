@@ -88,8 +88,10 @@ const SELECTION_KEYS = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
 export const focusListOnSelectionKey = (e: KeyboardEvent) => {
   if (!SELECTION_KEYS.includes(e.key)) return;
 
-  const list =
-    document.getElementsByClassName("section-scroll")[0]?.firstElementChild;
+  // The info panel's scroller carries the section's class too.
+  const list = document.querySelector(
+    ".section-scroll:not(.info-panel-scroll)",
+  )?.firstElementChild;
 
   if (list instanceof HTMLElement && document.activeElement !== list)
     list.focus({ preventScroll: true });

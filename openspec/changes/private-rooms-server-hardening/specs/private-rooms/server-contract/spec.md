@@ -14,7 +14,7 @@ The server SHALL refuse watermark, content indexing and data lifetime settings o
 - **THEN** the server refuses the request
 
 ### Requirement: Encrypted file titles are validated
-The server SHALL accept a file marked encrypted only when its title is an opaque identifier followed by an extension, so that no plaintext file name is stored for an encrypted file.
+The server SHALL accept a file marked encrypted only when its title is an opaque identifier, a lowercase UUID optionally followed by a dot and a lowercase alphanumeric extension, so that no plaintext file name is stored for an encrypted file.
 
 #### Scenario: Plaintext title on an encrypted upload
 - **WHEN** an upload session with the encrypted flag carries a human-readable title
@@ -22,6 +22,10 @@ The server SHALL accept a file marked encrypted only when its title is an opaque
 
 #### Scenario: Opaque title
 - **WHEN** the title is a UUID followed by an extension
+- **THEN** the upload is accepted
+
+#### Scenario: Opaque title without an extension
+- **WHEN** a file without an extension is uploaded encrypted under a bare UUID
 - **THEN** the upload is accepted
 
 ### Requirement: Upload session abort

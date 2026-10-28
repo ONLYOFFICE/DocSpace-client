@@ -255,11 +255,23 @@ keys before that update and needs those keys first.
     private room is key-checked. Alternative for third-party rooms: refuse the
     private flag on them (proposal decision 6).
 
+14. **The opaque title form is the one the client sends (found 2026-10-28).**
+    The client names every encrypted upload `makeOpaqueUploadName`: a
+    lowercase UUID plus the original extension lower-cased, and a bare UUID
+    for a file without one (`ENCRYPTED_UPLOAD_NAME_RE` in
+    `packages/shared/services/private-room/encrypted-upload.ts`). The server
+    has no extension check on upload today (`FileUploader.VerifyFileUploadAsync`,
+    `InitiateUploadAsync`), so such a file is accepted. The title check of
+    task 4.1 accepts exactly that form, an extension optional. Alternative:
+    require an extension; rejected because a file without one could no longer
+    be uploaded into a private room.
+
 ## Risks / Trade-offs
 
-- [Backend schedule] → every server task is independent; the client lands
-  mocks and contract tests first so the backend work can be verified against
-  them.
+- [Backend schedule] → every server task is independent, and each client
+  task waits only for the server task it names. Its mock follows the merged
+  server code, never a planned shape (main spec "E2E mocks mirror the server
+  contract"), so the client side of an item lands after the backend one.
 - [Edition rule misconfigured on upgrade] → default allow preserves current
   behaviour.
 - [Owner-change loop when backfill keeps failing] → the client shows the
@@ -267,9 +279,10 @@ keys before that update and needs those keys first.
 
 ## Migration Plan
 
-1. Land MSW handlers and contract tests for every new or changed route.
-2. Backend lands items in any order; each flips its contract test from
-   "expected failure" to passing.
+1. Backend lands items in any order.
+2. Once an item has merged, the client mirrors it in the MSW handlers with a
+   contract test read from the merged source, then lands the client code
+   that uses it.
 3. Client reads the new fields behind presence checks (missing field = old
    server), so old and new servers both work during rollout.
 4. Rollback: server items are individually revertible.

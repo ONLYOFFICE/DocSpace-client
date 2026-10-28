@@ -32,7 +32,8 @@ the file to change so the backend team can pick them up; nothing here is
 - Private-room availability becomes an explicit server decision (edition or
   tariff rule, default allow) with a distinct error code the client shows.
 - Watermark, indexing and lifetime settings are refused on private rooms.
-- Encrypted file titles are validated to the opaque UUID-plus-extension form.
+- Encrypted file titles are validated to the opaque form: a UUID, plus the
+  file's extension when it has one.
 - Invitation e-mails for private rooms stop carrying the plaintext room title.
 - Audit events are written for file access-entry writes and member
   revocations, and a per-file access history is exposed. The server has no

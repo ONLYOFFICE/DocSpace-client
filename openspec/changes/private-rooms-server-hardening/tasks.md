@@ -1,24 +1,25 @@
 # Tasks
 
-## 1. Contract mirrors (client first)
+## 1. Contract mirrors
 
-- [ ] 1.1 Extend the MSW handlers in `packages/shared/__mocks__/handlers/files/encryptedFiles.ts` and `handlers/privacyroom/index.ts` with: owner-change missing-entries response, private-rooms-unavailable 403, metadata-guard validation errors, encrypted title validation, upload-session abort, access history, recovery enrol/retrieve, offboarding; verify with the contract tests in `packages/shared/__mocks__/handlers/*/__tests__` extended for each route
+No mock runs ahead of the server (main spec `private-rooms/server-contract`, "E2E mocks mirror the server contract"): each client task below adds the MSW handler and contract test of its route once the server task it names has merged, read in `../server` through CodeGraph. The upload-session abort route exists today and is mirrored by 7.1.
 
 ## 2. Owner change
 
 - [ ] 2.1 Backend: in `FileStorageService.ChangeOwnerAsync` (`../server/products/ASC.Files/Core/Core/FileStorageService.cs`) return the encrypted files lacking an entry for the new owner and refuse the change until none remain; verify with a server unit test
-- [ ] 2.2 Client: in `packages/client/src/components/panels/ChangeRoomOwnerPanel` read the missing-files response, run the backfill from `packages/shared/services/private-room/room-encryption.ts` for the candidate, retry, and show the unreadable files on failure; verify with a client unit test and `packages/client/__tests__/private-room-members.spec.ts`
+- [ ] 2.2 Client: once 2.1 has merged, mirror the owner-change response in the MSW handlers with a contract test; in `packages/client/src/components/panels/ChangeRoomOwnerPanel` read the missing-files response, run the backfill from `packages/shared/services/private-room/room-encryption.ts` for the candidate, retry, and show the unreadable files on failure; verify with a client unit test and `packages/client/__tests__/private-room-members.spec.ts`
 
 ## 3. Availability rule and metadata guards
 
 - [ ] 3.1 Backend: add the private-room availability rule (default allow) and the distinct 403 error code in room creation; refuse watermark, indexing and lifetime on private rooms in `CreateRoomAsync` / `UpdateRoomAsync`; verify with server unit tests
-- [ ] 3.2 Client: map the error code to a new Common key in `packages/client/src/store/CreateEditRoomStore.ts` and hide the watermark/indexing/lifetime controls for private rooms in `CreateEditRoomDialog`; add the key with `translate-comments` and `translate-locales`; verify with a client unit test and `cd common/tests && npx vitest run test/locales.test.js`
+- [ ] 3.2 Client: once 3.1 has merged, mirror the private-rooms-unavailable 403 and the metadata-guard validation errors in the room creation and update MSW handlers with contract tests, and map the error code to a new Common key in `packages/client/src/store/CreateEditRoomStore.ts`; add the key with `translate-comments` and `translate-locales`; verify with a client unit test, `cd packages/shared && pnpm exec vitest run __mocks__/handlers` and `cd common/tests && npx vitest run test/locales.test.js`. The watermark, indexing and lifetime controls need no change: `SetRoomParams` renders them for the VirtualDataRoom type only (`isVDRRoom`), and a private room is created and edited as a Custom room
 
 ## 4. Titles and e-mails
 
-- [ ] 4.1 Backend: validate encrypted upload titles against the opaque form in the upload session (`UploadController.cs` / `FileUploader.cs`); verify with a server unit test
+- [ ] 4.1 Backend: validate encrypted upload titles in the upload session (`UploadController.cs` / `FileUploader.cs`) against the opaque form, a lowercase UUID optionally followed by a dot and a lowercase alphanumeric extension (design decision 14); verify with server unit tests for a plaintext title, a UUID with an extension and a bare UUID
 - [ ] 4.2 Backend: drop the plaintext room title from private-room invitation and notification e-mails (both call sites in `FileSharing.cs`: the new-address invite at lines 429-431 and the existing-user notice at line 443; the resend in `FileStorageService.ResendEmailInvitationsAsync` at lines 5504 and 5539; the room notices of `NotifyClient.cs`, such as `SendRoomRemovedAsync` at line 352; and the notify templates, of which `pattern_saas_room_invite_existing_user` prints the title); verify with a server unit test on the notification arguments
-- [ ] 4.3 Client: assert the title sent for encrypted uploads already matches the opaque form in `packages/shared/services/private-room/__tests__/encrypted-upload.test.ts` (no behaviour change expected)
+- [ ] 4.3 Client: assert the title sent for encrypted uploads already matches the opaque form of the requirement "Encrypted file titles are validated", with and without an extension, in `packages/shared/services/private-room/__tests__/encrypted-upload.test.ts` (no behaviour change expected)
+- [ ] 4.4 Client: once 4.1 has merged, mirror the title check in the upload session handler of `encryptedFilesHandlers` with a contract case; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`
 
 ## 5. Multi-device file keys (BL-8)
 
@@ -28,17 +29,17 @@ Withdrawn: the client operates with one key per user (`private-rooms-single-key`
 
 - [ ] 6.0 Decide the revocation primitive (proposal decision 4, design Open Questions): server-side removal of a user's access entries when they leave a private room or are deprovisioned, or a route for room managers to remove named users' entries; no removal operation exists today. Verified by the decision recorded in design.md and a backend task for the chosen operation added to this section
 - [ ] 6.1 Backend: write audit events for `SetEncryptionInfoAsync` (`DocumentsActionMapper.cs`, `FileStorageService.cs`) and expose the per-file access history route; the revocation audit event is BLOCKED on 6.0 and is added to the operation it decides; verify with server unit tests
-- [ ] 6.2 Client: add the access-history request to `packages/shared/api/privacy` with its MSW handler and contract test; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/privacyroom`
+- [ ] 6.2 Client: once 6.1 has merged, add the access-history request to `packages/shared/api/privacy` with its MSW handler and contract test; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/privacyroom`
 
 ## 7. Upload abort
 
-- [ ] 7.1 Client: call the session abort route from the encrypted upload cancel path in `packages/client/src/store/uploadDataStore` and the shared orchestrator; verify with `packages/client/src/store/uploadDataStore/__tests__/UploadDataStore.encryption.test.ts`
+- [ ] 7.1 Client: mirror the abort route as the server implements it today (`UploadController.AbortUploadSession`, HttpDelete "{folderId}/session/{sessionId}": 200 without a `response`, 403 for a session another account opened, 404 for one that is unknown, finalised, aborted or expired, the folder segment unmatched until 7.2) in `encryptedFilesHandlers` with contract cases, add the request to `packages/shared/api/files`, and call it when an encrypted upload is cancelled after its session opened, in the shared orchestrator (`packages/shared/services/private-room/encrypted-upload-orchestrator.ts`) that the client upload store and the SDK both run; verify with `encrypted-upload-orchestrator.test.ts`, `packages/client/src/store/uploadDataStore/__tests__/UploadDataStore.encryption.test.ts` and `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`
 - [ ] 7.2 Backend: match the folder segment of `DELETE {folderId}/session/{sessionId}` against the session and correct the route's documentation remark, which still says the account is not checked (`UploadController.cs:152-161`); verify with a server unit test that an abort through another folder id is refused
 
 ## 8. Recovery and offboarding (B2B launch)
 
 - [ ] 8.1 Backend: recovery-administrator enrolment and retrieval routes with audit, and the deprovisioning hook that blocks owner deprovisioning; the part of the hook that revokes entries is BLOCKED on 6.0 (no removal operation exists today); verify with server unit tests
-- [ ] 8.2 Client: enrolment step in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management` (opt-in by policy) and a recovery action for administrators, with locale keys translated; verify with hook unit tests next to the existing flows and `packages/client/__tests__/keys-management.spec.ts`
+- [ ] 8.2 Client: once 8.1 has merged, add the enrolment, recovery and offboarding requests with their MSW handlers and contract tests, an enrolment step in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management` (opt-in by policy) and a recovery action for administrators, with locale keys translated; verify with hook unit tests next to the existing flows and `packages/client/__tests__/keys-management.spec.ts`
 
 ## 9. Archived private rooms and room events
 

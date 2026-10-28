@@ -158,6 +158,12 @@
   justify-content: center;
 }
 
+.overlayLoader {
+  position: sticky;
+  top: calc(50% - 32px);
+  bottom: calc(50% - 32px);
+}
+
 .templateName {
   padding: 20px 16px 0;
 }

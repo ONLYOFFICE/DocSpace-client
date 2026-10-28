@@ -124,7 +124,9 @@ const FillForms = ({
       </div>
       {isAnalyzing ? (
         <div className={styles.overlay} data-testid="metadata_ai_analyzing">
-          <Loader type={LoaderTypes.track} size="64px" />
+          <div className={styles.overlayLoader}>
+            <Loader type={LoaderTypes.track} size="64px" />
+          </div>
         </div>
       ) : null}
     </div>

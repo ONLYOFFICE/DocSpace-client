@@ -91,6 +91,42 @@ describe("pendingAccessStore", () => {
     ]);
   });
 
+  it("adds the files a later skip left out to the member's record", () => {
+    pendingAccessStore.addMissingFiles(ROOM_ID, "u-bob", [2]);
+    pendingAccessStore.addMissingFiles(ROOM_ID, "u-bob", [2, 3]);
+
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")?.missingFileIds).toEqual([
+      2, 3,
+    ]);
+  });
+
+  it("keeps a record of every file when more files are added", () => {
+    pendingAccessStore.record({
+      roomId: ROOM_ID,
+      userId: "u-bob",
+      missingFileIds: "all",
+    });
+
+    pendingAccessStore.addMissingFiles(ROOM_ID, "u-bob", [2]);
+
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")?.missingFileIds).toBe(
+      "all",
+    );
+  });
+
+  it("lists the records of one member across rooms", () => {
+    pendingAccessStore.addMissingFiles(ROOM_ID, "u-bob", [2]);
+    pendingAccessStore.addMissingFiles(ROOM_ID + 1, "u-bob", [5]);
+
+    expect(
+      pendingAccessStore
+        .listForUser("u-bob")
+        .map((entry) => entry.roomId)
+        .sort(),
+    ).toEqual([ROOM_ID, ROOM_ID + 1]);
+    expect(pendingAccessStore.listForUser("u-ann")).toEqual([]);
+  });
+
   it("clears the record on success, and observers see both changes", () => {
     const seen: (number[] | "all" | undefined)[] = [];
     const dispose = autorun(() => {

@@ -55,6 +55,7 @@ import { getEncryptionErrorMessage } from "../encryption/error-i18n";
 import { CryptoError } from "../encryption/errors";
 import type { DSE3Header, IdentityKeyPair } from "../encryption/types";
 import { selectMemberKeys } from "./room-member-keys";
+import { pendingAccessStore } from "./pending-access";
 import {
   verifyMemberKeys,
   type SkippedMemberKey,
@@ -718,6 +719,12 @@ export async function uploadEncryptedFile(
     } catch (error) {
       if (error instanceof AbortedError) throw error;
       throw new EncryptedWrapError(error);
+    }
+    // Spec: private-rooms/room-membership, "Trusting a changed key wraps what the member missed"
+    for (const member of skippedMembers) {
+      pendingAccessStore.addMissingFiles(Number(roomId), member.userId, [
+        Number(fileId),
+      ]);
     }
 
     return {

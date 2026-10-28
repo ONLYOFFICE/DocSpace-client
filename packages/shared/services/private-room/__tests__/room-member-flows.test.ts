@@ -59,6 +59,7 @@ import {
   retryPendingAccess,
   revokeRemovedMemberAccess,
   rewrapForInvitedMembers,
+  rewrapPendingAccessOfMember,
 } from "../room-member-flows";
 import { pendingAccessStore } from "../pending-access";
 
@@ -457,6 +458,78 @@ describe("retryPendingAccess", () => {
     expect(notice).toBeNull();
     expect(rewrapMissingFilesForMember).not.toHaveBeenCalled();
     expect(addMembersToEncryptedRoom).not.toHaveBeenCalled();
+  });
+});
+
+describe("rewrapPendingAccessOfMember", () => {
+  const bob = { id: "u-bob", displayName: "Bob" };
+
+  afterEach(() => {
+    pendingAccessStore.clear(ROOM_ID, "u-bob");
+    pendingAccessStore.clear(ROOM_ID + 1, "u-bob");
+    vi.resetAllMocks();
+  });
+
+  it("Key trusted after a refusal: the files the member missed are wrapped again in every room they are recorded for", async () => {
+    pendingAccessStore.addMissingFiles(ROOM_ID, "u-bob", [2]);
+    pendingAccessStore.addMissingFiles(ROOM_ID + 1, "u-bob", [5]);
+    vi.mocked(rewrapMissingFilesForMember).mockImplementation(
+      async (_roomId, _userId, fileIds) => ({
+        fileResults: fileIds.map(ok),
+        skippedMembers: [],
+        missingFileIdsByMember: {},
+      }),
+    );
+
+    const notices = await rewrapPendingAccessOfMember({
+      t,
+      member: bob,
+      currentUserId: "u-me",
+      identity,
+    });
+
+    expect(vi.mocked(rewrapMissingFilesForMember).mock.calls).toEqual([
+      [ROOM_ID, "u-bob", [2], expect.objectContaining({ currentUserId: "u-me" })],
+      [ROOM_ID + 1, "u-bob", [5], expect.objectContaining({ currentUserId: "u-me" })],
+    ]);
+    expect(notices.map((notice) => notice.level)).toEqual([
+      "success",
+      "success",
+    ]);
+    expect(pendingAccessStore.listForUser("u-bob")).toEqual([]);
+  });
+
+  it("runs one retry at a time for a member in a room", async () => {
+    pendingAccessStore.addMissingFiles(ROOM_ID, "u-bob", [2]);
+    let finish: () => void = () => {};
+    vi.mocked(rewrapMissingFilesForMember).mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          finish = () =>
+            resolve({
+              fileResults: [ok(2)],
+              skippedMembers: [],
+              missingFileIdsByMember: {},
+            });
+        }),
+    );
+    const retry = () =>
+      retryPendingAccess({
+        t,
+        roomId: ROOM_ID,
+        member: bob,
+        currentUserId: "u-me",
+        identity,
+        onProgress: () => {},
+      });
+
+    const first = retry();
+    const second = await retry();
+    finish();
+
+    expect(second).toBeNull();
+    expect((await first)?.level).toBe("success");
+    expect(rewrapMissingFilesForMember).toHaveBeenCalledTimes(1);
   });
 });
 

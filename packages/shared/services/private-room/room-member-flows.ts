@@ -296,10 +296,14 @@ export async function rewrapForInvitedMembers({
     });
 }
 
+/** Retries in progress, by `roomId:userId`; a second one for the same pair does nothing. */
+const retriesInFlight = new Set<string>();
+
 /**
  * Wraps again the files an invitation left the member without, as recorded
  * for them on this device, and keeps the record of whatever still failed.
- * Resolves with the notice to show, or null when nothing is recorded.
+ * Resolves with the notice to show, or null when nothing is recorded or a
+ * retry for the member is already running.
  */
 // Spec: private-rooms/room-membership, "Partial re-encryption failure is reported"
 export async function retryPendingAccess({
@@ -318,7 +322,9 @@ export async function retryPendingAccess({
   onProgress: (progress: TInviteRewrapProgress) => void;
 }): Promise<TMemberFlowNotice | null> {
   const pending = pendingAccessStore.get(roomId, member.id);
-  if (!pending) return null;
+  const retryKey = `${roomId}:${member.id}`;
+  if (!pending || retriesInFlight.has(retryKey)) return null;
+  retriesInFlight.add(retryKey);
 
   const options = {
     currentUserId,
@@ -380,7 +386,41 @@ export async function retryPendingAccess({
     console.error("Failed to restore access to encrypted files:", error);
     onProgress({ percent: 100, completed: true, alert: true });
     return { level: "error", text: t("Common:EncryptedReencryptFailed") };
+  } finally {
+    retriesInFlight.delete(retryKey);
   }
+}
+
+/**
+ * Retries the pending access of a member in every room it is recorded for,
+ * once the user trusted the member's changed key. Resolves with the notices
+ * to show, one per room.
+ */
+// Spec: private-rooms/room-membership, "Trusting a changed key wraps what the member missed"
+export async function rewrapPendingAccessOfMember({
+  t,
+  member,
+  currentUserId,
+  identity,
+}: {
+  t: TFunction;
+  member: NewRoomMember;
+  currentUserId: string;
+  identity: IdentityKeyPair;
+}): Promise<TMemberFlowNotice[]> {
+  const notices: TMemberFlowNotice[] = [];
+  for (const { roomId } of pendingAccessStore.listForUser(member.id)) {
+    const notice = await retryPendingAccess({
+      t,
+      roomId,
+      member,
+      currentUserId,
+      identity,
+      onProgress: () => {},
+    });
+    if (notice) notices.push(notice);
+  }
+  return notices;
 }
 
 /**

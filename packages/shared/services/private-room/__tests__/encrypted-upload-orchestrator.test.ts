@@ -61,6 +61,7 @@ import {
   resetTofuStores,
   unregisterKeyMismatchHandler,
 } from "../../encryption/tofu-store";
+import { pendingAccessStore } from "../pending-access";
 
 // ---------------------------------------------------------------------------
 // Module mocks
@@ -722,6 +723,7 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     vi.clearAllMocks();
     resetTofuStores();
     unregisterKeyMismatchHandler();
+    pendingAccessStore.clear(10, "bob");
   });
 
   afterEach(() => {
@@ -761,6 +763,21 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     ]);
     const fanOut = vi.mocked(wrapDekForRecipients).mock.calls[1][0];
     expect(fanOut.recipients.map((r) => r.userId)).toEqual(["alice"]);
+  });
+
+  it("Key trusted after a refusal: the file a refused key was left out of is recorded for the member", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");
+    registerKeyMismatchHandler(vi.fn(async () => "refuse" as const));
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "b-2", userId: "bob", publicKey: "pk-b-swapped", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+
+    const { results } = await upload();
+
+    expect(pendingAccessStore.get(10, "bob")?.missingFileIds).toEqual([
+      Number(results[0].fileId),
+    ]);
   });
 
   it("asks once per refused key change across the files of one call", async () => {

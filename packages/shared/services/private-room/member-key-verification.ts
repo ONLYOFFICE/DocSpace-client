@@ -49,6 +49,23 @@ export interface MemberKeyRecipient {
   displayName?: string;
 }
 
+type MemberKeyTrustedListener = (userId: string, scopeUserId: string) => void;
+
+const trustedListeners = new Set<MemberKeyTrustedListener>();
+
+/**
+ * Subscribes to changed member keys the user chose to trust; returns the
+ * unsubscribe.
+ */
+export function onMemberKeyTrusted(
+  listener: MemberKeyTrustedListener,
+): () => void {
+  trustedListeners.add(listener);
+  return () => {
+    trustedListeners.delete(listener);
+  };
+}
+
 export interface SkippedMemberKey {
   userId: string;
   displayName?: string;
@@ -101,6 +118,7 @@ export async function verifyMemberKey(args: {
     return { kind: "key-mismatch-refused" };
   }
   await tofu.acceptKey(userId, publicKey);
+  for (const listener of trustedListeners) listener(userId, scopeUserId);
   return { kind: "ok", publicKey };
 }
 

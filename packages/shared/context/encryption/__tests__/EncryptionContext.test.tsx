@@ -81,7 +81,33 @@ vi.mock("../../../api/people", () => ({
   getUserById: vi.fn(),
 }));
 
+const trustMocks = vi.hoisted(() => ({
+  listener: null as null | ((userId: string, scopeUserId: string) => void),
+  rewrap: vi.fn(),
+  toastr: { success: vi.fn(), warning: vi.fn(), error: vi.fn() },
+}));
+
+vi.mock("../../../services/private-room/member-key-verification", () => ({
+  onMemberKeyTrusted: vi.fn(
+    (listener: (userId: string, scopeUserId: string) => void) => {
+      trustMocks.listener = listener;
+      return () => {
+        trustMocks.listener = null;
+      };
+    },
+  ),
+}));
+
+vi.mock("../../../services/private-room/room-member-flows", () => ({
+  rewrapPendingAccessOfMember: trustMocks.rewrap,
+}));
+
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
+  toastr: trustMocks.toastr,
+}));
+
 import { getUserById } from "../../../api/people";
+import { pendingAccessStore } from "../../../services/private-room/pending-access";
 import { unlockWithPassphrase } from "../../../services/encryption/identity";
 import { getAutoLockTimeoutSeconds } from "../../../services/encryption/auto-lock-preference";
 import {
@@ -931,6 +957,61 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(ok).toBe(false);
       expect(latest.unlockError).toBe("Common:EncryptionError");
       expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+  });
+
+  describe("trusted member keys", () => {
+    afterEach(() => {
+      pendingAccessStore.clear(7, "bob");
+    });
+
+    it("Key trusted after a refusal: the files the member missed are wrapped again and the result is shown", async () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      pendingAccessStore.addMissingFiles(7, "bob", [5]);
+      vi.mocked(getUserById).mockResolvedValue({ displayName: "Bob" } as never);
+      trustMocks.rewrap.mockResolvedValue([
+        { level: "success", text: "Common:EncryptedAccessRestored" },
+      ]);
+      renderTree();
+
+      await act(async () => {
+        trustMocks.listener?.("bob", "user-42");
+      });
+
+      await vi.waitFor(() =>
+        expect(trustMocks.toastr.success).toHaveBeenCalledWith(
+          "Common:EncryptedAccessRestored",
+        ),
+      );
+      expect(trustMocks.rewrap).toHaveBeenCalledWith({
+        t: expect.any(Function),
+        member: { id: "bob", displayName: "Bob" },
+        currentUserId: "user-42",
+        identity: dummyKeyPair,
+      });
+    });
+
+    it("re-wraps nothing for a member without recorded files", async () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      await act(async () => {
+        trustMocks.listener?.("bob", "user-42");
+      });
+
+      expect(trustMocks.rewrap).not.toHaveBeenCalled();
+      expect(getUserById).not.toHaveBeenCalled();
+    });
+
+    it("re-wraps nothing while the identity is locked", async () => {
+      pendingAccessStore.addMissingFiles(7, "bob", [5]);
+      renderTree();
+
+      await act(async () => {
+        trustMocks.listener?.("bob", "user-42");
+      });
+
+      expect(trustMocks.rewrap).not.toHaveBeenCalled();
     });
   });
 });

@@ -57,12 +57,27 @@ class PendingAccessStore {
     this.entries.set(keyOf(entry.roomId, entry.userId), entry);
   };
 
+  /** Adds files to what the member misses; a record of every file stays so. */
+  addMissingFiles = (roomId: number, userId: string, fileIds: number[]) => {
+    const current = this.get(roomId, userId)?.missingFileIds ?? [];
+    if (current === "all") return;
+    this.record({
+      roomId,
+      userId,
+      missingFileIds: [...new Set([...current, ...fileIds])],
+    });
+  };
+
   clear = (roomId: number, userId: string) => {
     this.entries.delete(keyOf(roomId, userId));
   };
 
   get = (roomId: number, userId: string): TPendingAccess | undefined =>
     this.entries.get(keyOf(roomId, userId));
+
+  /** The records of one member, one per room. */
+  listForUser = (userId: string): TPendingAccess[] =>
+    [...this.entries.values()].filter((entry) => entry.userId === userId);
 }
 
 export const pendingAccessStore = new PendingAccessStore();

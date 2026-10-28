@@ -46,6 +46,7 @@ import { requireUnlock } from "@docspace/shared/services/encryption/secret-stora
 import { requestDeviceSetupHint } from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { verifyMemberKeys } from "@docspace/shared/services/private-room/member-key-verification";
+import { pendingAccessStore } from "@docspace/shared/services/private-room/pending-access";
 import { tagFileForCopy } from "@docspace/shared/services/private-room/encrypted-copy";
 import {
   EncryptedReimportError,
@@ -296,6 +297,27 @@ describe("UploadDataStore.startSessionFunc — encrypted upload through the shar
     expect(store.files[0].skippedMembers).toEqual(named);
     expect(store.uploadedFilesHistory[0].skippedMembers).toEqual(named);
     expect(store.files[0].error).toBeFalsy();
+  });
+
+  it("Key trusted after a refusal: the uploaded file is recorded as missing for the member whose key was refused", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload(555);
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
+      memberKey("bob", "pk-bob"),
+    ] as never);
+    vi.mocked(verifyMemberKeys).mockResolvedValueOnce({
+      verified: [],
+      skipped: [{ userId: "bob", reason: "key-mismatch-refused" }],
+    } as never);
+    replaceAction(store, "reportSkippedMembers");
+
+    await store.startSessionFunc(0, t);
+
+    expect(pendingAccessStore.get(7, "bob")?.missingFileIds).toEqual([555]);
+    pendingAccessStore.clear(7, "bob");
   });
 
   it("marks the file and its history entry when wrapping rejects after upload", async () => {

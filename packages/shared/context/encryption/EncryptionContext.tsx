@@ -74,6 +74,9 @@ import {
   setFilenameCacheScope,
 } from "../../services/encryption/filename-cache";
 import { getEncryptionErrorMessage } from "../../services/encryption/error-i18n";
+import { onMemberKeyTrusted } from "../../services/private-room/member-key-verification";
+import { pendingAccessStore } from "../../services/private-room/pending-access";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type {
   IdentityKeyPair,
   SerializedIdentity,
@@ -433,6 +436,34 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       cancelled = true;
     };
   }, [keyChangeRequest]);
+
+  // Spec: private-rooms/room-membership, "Trusting a changed key wraps what the member missed"
+  useEffect(
+    () =>
+      onMemberKeyTrusted((memberId, scopeUserId) => {
+        const identity = SecretStorage.getCached(scopeUserId);
+        if (!identity || pendingAccessStore.listForUser(memberId).length === 0)
+          return;
+        void Promise.all([
+          import("../../services/private-room/room-member-flows"),
+          getUserById(memberId)
+            .then((user) => user?.displayName)
+            .catch(() => undefined),
+        ])
+          .then(([{ rewrapPendingAccessOfMember }, displayName]) =>
+            rewrapPendingAccessOfMember({
+              t,
+              member: { id: memberId, displayName },
+              currentUserId: scopeUserId,
+              identity,
+            }),
+          )
+          .then((notices) => {
+            for (const { level, text } of notices) toastr[level](text);
+          });
+      }),
+    [t],
+  );
 
   const settleKeyChange = useCallback((decision: KeyMismatchDecision) => {
     const queue = keyChangeQueueRef.current;

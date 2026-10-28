@@ -60,6 +60,14 @@ vi.mock("../../_store/PrivateEncryptedUploadStore", () => ({
   useActiveEncryptedUploadsForRoom: () => mocks.uploads!.count,
 }));
 
+vi.mock("@docspace/shared/context/encryption", () => ({
+  useEncryption: () => ({ requireIdentity: vi.fn() }),
+}));
+
+vi.mock("../../_store/EncryptionIdentityStore", () => ({
+  useEncryptionIdentityStore: () => ({ userKeys: { userId: "me" } }),
+}));
+
 import {
   PrivateDialogsStoreProvider,
   usePrivateDialogsStore,

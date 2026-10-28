@@ -35,6 +35,8 @@
 
 import { describe, it, expect, vi } from "vitest";
 
+import { RoomsType } from "@docspace/shared/enums";
+
 import { createTestContextOptionsStore, t } from "./testHarness";
 // After the harness, which mocks the toast module.
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -66,14 +68,34 @@ describe("ContextOptionsStore — action handler delegation (batch 6)", () => {
     expect(downloadAction).not.toHaveBeenCalled();
   });
 
-  it("Room download in the Private section -> filesActionsStore.downloadEncryptedFolder", () => {
+  it("Room downloaded: a private room is decrypted into a zip on the client", () => {
     const downloadEncryptedFolder = vi.fn(async () => {});
+    const downloadFiles = vi.fn(async () => {});
     const store = createTestContextOptionsStore({
-      filesActionsStore: { downloadEncryptedFolder },
+      filesActionsStore: { downloadEncryptedFolder, downloadFiles },
     });
     const room = item({ isFolder: true, private: true, fileExst: undefined });
     store.onClickDownload(room, t);
     expect(downloadEncryptedFolder).toHaveBeenCalledWith(room);
+    expect(downloadFiles).not.toHaveBeenCalled();
+  });
+
+  it("Room downloaded without decryption: a private room is requested as the server archive of its ciphertext", () => {
+    const downloadEncryptedFolder = vi.fn(async () => {});
+    const downloadFiles = vi.fn(async () => {});
+    const store = createTestContextOptionsStore({
+      filesActionsStore: { downloadEncryptedFolder, downloadFiles },
+    });
+    const room = item({
+      id: 7,
+      isFolder: true,
+      private: true,
+      roomType: RoomsType.CustomRoom,
+      fileExst: undefined,
+    });
+    store.onClickDownloadEncrypted(room, t);
+    expect(downloadFiles).toHaveBeenCalledWith([], [7], expect.anything());
+    expect(downloadEncryptedFolder).not.toHaveBeenCalled();
   });
 
   it("onClickDownload (file) -> settingsStore.openUrl", () => {

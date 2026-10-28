@@ -3,7 +3,7 @@
 ## 1. Unit cases named after the scenarios
 
 - [x] 1.1 In `packages/client/src/store/filesStore/__tests__/FilesStore.contextOptions.branches.test.ts`, rename the private room case "Room context menu" to the scenario "Private room with the download right". Add a case "Private room context menu" asserting that edit-index, export-room-index, save-as-template and duplicate-room are absent for a private room whose rights would grant them, while download stays present. Verify with `cd packages/client && pnpm exec vitest run src/store/filesStore`, with the menu snapshots unchanged.
-- [ ] 1.2 In `packages/client/src/store/contextOptionsStore/__tests__/ContextOptionsStore.actions3.test.ts`, rename the case "Room download in the Private section" to the scenario "Room downloaded". Add a case "Room downloaded without decryption" asserting that "Download without decryption" on a private room requests the server archive of that room (`downloadFiles` with the room's id among the folder ids) and does not start the decrypted zip. Verify with `cd packages/client && pnpm exec vitest run src/store/contextOptionsStore`.
+- [x] 1.2 In `packages/client/src/store/contextOptionsStore/__tests__/ContextOptionsStore.actions3.test.ts`, rename the case "Room download in the Private section" to the scenario "Room downloaded". Add a case "Room downloaded without decryption" asserting that "Download without decryption" on a private room requests the server archive of that room (`downloadFiles` with the room's id among the folder ids) and does not start the decrypted zip. Verify with `cd packages/client && pnpm exec vitest run src/store/contextOptionsStore`.
 
 ## 2. Integration check
 

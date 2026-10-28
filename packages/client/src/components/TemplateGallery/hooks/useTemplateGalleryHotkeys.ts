@@ -34,12 +34,11 @@
  */
 
 import { useState, useCallback, useEffect, useRef } from "react";
-import { getCountTilesInRow } from "@docspace/shared/utils";
 import { getHotkeyLetter } from "@docspace/shared/utils/getHotkeyLetter";
 
 interface UseTemplateGalleryHotkeysProps {
   itemsCount: number;
-  isShowOneTile?: boolean;
+  columnsCount: number;
   onSelect?: (index: number) => void;
   onInfoSelect?: (index: number) => void;
   enabled?: boolean;
@@ -54,7 +53,7 @@ interface UseTemplateGalleryHotkeysReturn {
 
 const useTemplateGalleryHotkeys = ({
   itemsCount,
-  isShowOneTile = false,
+  columnsCount,
   onSelect,
   onInfoSelect,
   enabled = true,
@@ -64,10 +63,6 @@ const useTemplateGalleryHotkeys = ({
   const focusedIndexRef = useRef<number>(-1);
   const rafIdRef = useRef<number | null>(null);
   const pendingIndexRef = useRef<number | null>(null);
-
-  const getColumnsCount = useCallback(() => {
-    return getCountTilesInRow(false, false, true, isShowOneTile);
-  }, [isShowOneTile]);
 
   const resetFocus = useCallback(() => {
     setFocusedIndex(-1);
@@ -167,7 +162,6 @@ const useTemplateGalleryHotkeys = ({
     };
 
     const moveFocus = (rowDelta: number, colDelta: number) => {
-      const columnsCount = getColumnsCount();
       const currentIndex = pendingIndexRef.current ?? focusedIndexRef.current;
 
       let newIndex = 0;
@@ -254,7 +248,7 @@ const useTemplateGalleryHotkeys = ({
   }, [
     enabled,
     itemsCount,
-    getColumnsCount,
+    columnsCount,
     scheduleFocusUpdate,
     onSelect,
     onInfoSelect,

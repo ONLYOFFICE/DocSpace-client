@@ -34,11 +34,12 @@
  */
 
 import { inject, observer } from "mobx-react";
-import React, { useCallback, useLayoutEffect, useRef } from "react";
+import React from "react";
 import uniqueid from "lodash/uniqueId";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { getCountTilesInGrid } from "@docspace/shared/utils";
+import { useGridColumns } from "@docspace/shared/hooks/useGridColumns";
 
 import {
   StyledCard,
@@ -104,12 +105,6 @@ const Item = ({ children, className, ...rest }) => {
   );
 };
 
-const getGridColumns = (row) => {
-  const columns = window.getComputedStyle(row).gridTemplateColumns;
-  if (!columns || columns === "none") return 0;
-  return columns.split(" ").length;
-};
-
 const InfiniteGrid = (props) => {
   const {
     children,
@@ -128,42 +123,7 @@ const InfiniteGrid = (props) => {
   const countTilesInRow =
     tilesGridColumns || getCountTilesInGrid(isRooms, isTemplates);
 
-  const rowsRef = useRef(new Set());
-  const resizeObserverRef = useRef(null);
-
-  const measureColumns = useCallback(() => {
-    const row = Array.from(rowsRef.current).find((node) => node.isConnected);
-    if (!row) return;
-
-    const columns = getGridColumns(row);
-    if (columns) setTilesGridColumns(columns);
-  }, [setTilesGridColumns]);
-
-  const observeRow = useCallback(
-    (node) => {
-      if (!resizeObserverRef.current)
-        resizeObserverRef.current = new ResizeObserver(measureColumns);
-
-      const observer = resizeObserverRef.current;
-
-      rowsRef.current.add(node);
-      observer.observe(node);
-
-      return () => {
-        rowsRef.current.delete(node);
-        observer.unobserve(node);
-      };
-    },
-    [measureColumns],
-  );
-
-  useLayoutEffect(() => {
-    measureColumns();
-  });
-
-  useLayoutEffect(() => {
-    return () => resizeObserverRef.current?.disconnect();
-  }, []);
+  const observeRow = useGridColumns(setTilesGridColumns);
 
   let cards = [];
   const list = [];

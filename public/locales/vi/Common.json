@@ -866,6 +866,7 @@
   "EnableThirdPartyIntegration": "Vui lòng đề nghị chủ sở hữu hoặc siêu quản trị viên bật dịch vụ tương ứng trong mục Tích hợp của cài đặt không gian làm việc.",
   "EnableWebSearchInBilling": "Bật tìm kiếm web trong phần Thanh toán",
   "EncryptedAccessPending": "Đang chờ quyền truy cập",
+  "EncryptedAccessRestored": "{{user}} hiện đã có quyền truy cập vào tất cả các tập tin được mã hoá trong phòng.",
   "EncryptedChangeOwnerKeyMismatch": "Không thể chuyển quyền sở hữu cho {{user}}: khoá mã hoá của họ đã thay đổi và chưa được tin cậy. Hãy xác minh lại khoá và thử lại.",
   "EncryptedChangeOwnerNoKeys": "Không thể chuyển quyền sở hữu cho {{user}}: họ chưa thiết lập khoá mã hoá. Hãy yêu cầu họ tạo khoá trong hồ sơ cá nhân, rồi thử lại.",
   "EncryptedCopyFailed": "Không thể sao chép các tập tin được mã hoá: {{names}}",

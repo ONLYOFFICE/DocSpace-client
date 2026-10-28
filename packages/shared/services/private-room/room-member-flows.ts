@@ -41,6 +41,7 @@ import {
   addMembersToEncryptedRoom,
   backfillEncryptedFilesForRoomMembers,
   revokeMemberFromEncryptedRoom,
+  rewrapMissingFilesForMember,
   validateMembersForEncryption,
   type NewRoomMember,
   type SkippedRoomMember,
@@ -293,6 +294,93 @@ export async function rewrapForInvitedMembers({
         { level: "error", text: t("Common:EncryptedReencryptFailed") },
       ];
     });
+}
+
+/**
+ * Wraps again the files an invitation left the member without, as recorded
+ * for them on this device, and keeps the record of whatever still failed.
+ * Resolves with the notice to show, or null when nothing is recorded.
+ */
+// Spec: private-rooms/room-membership, "Partial re-encryption failure is reported"
+export async function retryPendingAccess({
+  t,
+  roomId,
+  member,
+  currentUserId,
+  identity,
+  onProgress,
+}: {
+  t: TFunction;
+  roomId: number;
+  member: NewRoomMember;
+  currentUserId: string;
+  identity: IdentityKeyPair;
+  onProgress: (progress: TInviteRewrapProgress) => void;
+}): Promise<TMemberFlowNotice | null> {
+  const pending = pendingAccessStore.get(roomId, member.id);
+  if (!pending) return null;
+
+  const options = {
+    currentUserId,
+    identity,
+    onProgress: (processed: number, total: number) => {
+      const percent = Math.floor((processed / total) * 100);
+      onProgress({ percent });
+    },
+  };
+
+  try {
+    const { skippedMembers, missingFileIdsByMember } =
+      pending.missingFileIds === "all"
+        ? await addMembersToEncryptedRoom(roomId, [member], options)
+        : await rewrapMissingFilesForMember(
+            roomId,
+            member.id,
+            pending.missingFileIds,
+            options,
+          );
+    const skipped = skippedMembers.find((m) => m.id === member.id);
+    const missingFileIds = missingFileIdsByMember[member.id] ?? [];
+    onProgress({
+      percent: 100,
+      completed: true,
+      alert: !!skipped || missingFileIds.length > 0,
+    });
+
+    const users = member.displayName || member.id;
+    if (skipped?.reason === "no-key") {
+      return {
+        level: "warning",
+        text: t("Common:EncryptedSkippedNoKeys", { users }),
+      };
+    }
+    if (skipped) {
+      return {
+        level: "warning",
+        text: t("Common:EncryptedSkippedKeyMismatch", { users }),
+      };
+    }
+    if (missingFileIds.length > 0) {
+      pendingAccessStore.record({ roomId, userId: member.id, missingFileIds });
+      return {
+        level: "warning",
+        text: t("Common:EncryptedReencryptPartialFailure", {
+          count: missingFileIds.length,
+        }),
+      };
+    }
+
+    pendingAccessStore.clear(roomId, member.id);
+    return {
+      level: "success",
+      text: t("Common:EncryptedAccessRestored", { user: users }),
+    };
+  } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: the member stays pending; the failed retry is logged for triage.
+    console.error("Failed to restore access to encrypted files:", error);
+    onProgress({ percent: 100, completed: true, alert: true });
+    return { level: "error", text: t("Common:EncryptedReencryptFailed") };
+  }
 }
 
 /**

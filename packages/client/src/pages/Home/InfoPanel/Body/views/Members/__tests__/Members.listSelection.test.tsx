@@ -164,7 +164,10 @@ const renderMembersOf = (room: TRoom) => {
         setIsMembersPanelUpdating: vi.fn(),
         updateInfoPanelMembers: vi.fn(),
       }}
-      uploadDataStore={{ getActiveUploadCountForRoom: () => 0 }}
+      uploadDataStore={{
+        getActiveUploadCountForRoom: () => 0,
+        secondaryProgressDataStore: { setSecondaryProgressBarData: vi.fn() },
+      }}
     >
       <Members
         members={members()}

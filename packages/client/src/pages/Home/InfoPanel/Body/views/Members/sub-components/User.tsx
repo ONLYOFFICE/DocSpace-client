@@ -35,6 +35,7 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import uniqueid from "lodash/uniqueId";
 
 import api from "@docspace/shared/api";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -52,7 +53,13 @@ import type { TGroup } from "@docspace/shared/api/groups/types";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 
-import { revokeRemovedMemberAccess } from "@docspace/shared/services/private-room/room-member-flows";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import { pendingAccessStore } from "@docspace/shared/services/private-room/pending-access";
+import {
+  retryPendingAccess,
+  revokeRemovedMemberAccess,
+} from "@docspace/shared/services/private-room/room-member-flows";
 
 import MembersHelper from "../Members.utils";
 import type { UserProps } from "../Members.types";
@@ -72,6 +79,8 @@ const User = ({
   setRemoveUserConfirmation,
   isAIAgentsFolderRoot,
   getActiveUploadCountForRoom,
+  setSecondaryProgressBarData,
+  selfId,
 }: UserProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -167,6 +176,44 @@ const User = ({
     if (notice) toastr[notice.level](notice.text);
   };
 
+  const isGroup = "isGroup" in user && !!user.isGroup;
+  const isAccessPending =
+    !!room.private &&
+    !isGroup &&
+    !!pendingAccessStore.get(room.id, String(user.id));
+
+  const onRetryAccess = async () => {
+    const identity = await requireUnlock(String(selfId));
+    if (!identity) {
+      toastr.error(t("Common:EncryptionUnlockRequired"));
+      return;
+    }
+
+    const operationId = uniqueid("operation_");
+    setSecondaryProgressBarData?.({
+      operation: OPERATIONS_NAME.roomReencryption,
+      percent: 0,
+      operationId,
+    });
+    const notice = await retryPendingAccess({
+      t,
+      roomId: room.id,
+      member: {
+        id: String(user.id),
+        displayName: "displayName" in user ? user.displayName : undefined,
+      },
+      currentUserId: String(selfId),
+      identity,
+      onProgress: (progress) =>
+        setSecondaryProgressBarData?.({
+          operation: OPERATIONS_NAME.roomReencryption,
+          ...progress,
+          operationId,
+        }),
+    });
+    if (notice) toastr[notice.level](notice.text);
+  };
+
   const onOptionClick = async (option: TOption) => {
     if (option.access === userRole?.access) return;
 
@@ -213,12 +260,14 @@ const User = ({
       onClickGroup={onOpenGroup}
       onRepeatInvitation={onRepeatInvitation}
       showInviteIcon={showInviteIcon}
+      isAccessPending={isAccessPending}
+      onRetryAccess={security?.EditAccess ? onRetryAccess : undefined}
     />
   );
 };
 
 export default inject(
-  ({ dialogsStore, treeFoldersStore, uploadDataStore }: TStore) => {
+  ({ dialogsStore, treeFoldersStore, uploadDataStore, userStore }: TStore) => {
     const {
       setEditMembersGroup,
       setEditGroupMembersDialogVisible,
@@ -227,6 +276,8 @@ export default inject(
 
     const { isAIAgentsFolderRoot } = treeFoldersStore;
     const { getActiveUploadCountForRoom } = uploadDataStore;
+    const { setSecondaryProgressBarData } =
+      uploadDataStore.secondaryProgressDataStore;
 
     return {
       setEditMembersGroup,
@@ -234,6 +285,8 @@ export default inject(
       setRemoveUserConfirmation,
       isAIAgentsFolderRoot,
       getActiveUploadCountForRoom,
+      setSecondaryProgressBarData,
+      selfId: userStore.user?.id,
     };
   },
 )(observer(User));

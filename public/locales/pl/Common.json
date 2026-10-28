@@ -866,6 +866,7 @@
   "EnableThirdPartyIntegration": "Poproś właściciela lub superadministratora o włączenie odpowiedniej usługi w sekcji Integracja w ustawieniach przestrzeni roboczej.",
   "EnableWebSearchInBilling": "Włącz wyszukiwanie w sieci w sekcji Rozliczenia",
   "EncryptedAccessPending": "Oczekiwanie na dostęp",
+  "EncryptedAccessRestored": "Użytkownik {{user}} ma teraz dostęp do wszystkich zaszyfrowanych plików w pokoju.",
   "EncryptedChangeOwnerKeyMismatch": "Nie można przenieść własności do {{user}}: klucz szyfrowania tej osoby uległ zmianie i nie był zaufany. Zweryfikuj ponownie klucz i spróbuj jeszcze raz.",
   "EncryptedChangeOwnerNoKeys": "Nie można przenieść własności do {{user}}: ta osoba nie skonfigurowała jeszcze kluczy szyfrowania. Poproś ją o wygenerowanie kluczy w profilu, a następnie spróbuj ponownie.",
   "EncryptedCopyFailed": "Nie udało się skopiować zaszyfrowanych plików: {{names}}",

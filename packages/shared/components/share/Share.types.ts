@@ -255,6 +255,9 @@ export interface UserProps {
 
   onClickGroup?: (group: TGroup) => void;
 
+  isAccessPending?: boolean;
+  onRetryAccess?: () => Promise<void>;
+
   index?: number;
 }
 

@@ -866,6 +866,7 @@
   "EnableThirdPartyIntegration": "Veuillez demander au propriétaire ou au super-administrateur d'activer le service correspondant dans la section Intégration des paramètres de l'espace de travail.",
   "EnableWebSearchInBilling": "Activez la recherche web dans Facturation",
   "EncryptedAccessPending": "Accès en attente",
+  "EncryptedAccessRestored": "{{user}} a désormais accès à tous les fichiers chiffrés de la salle.",
   "EncryptedChangeOwnerKeyMismatch": "Impossible de transférer la propriété à {{user}} : sa clé de chiffrement a changé et n'a pas été approuvée. Vérifiez à nouveau la clé et réessayez.",
   "EncryptedChangeOwnerNoKeys": "Impossible de transférer la propriété à {{user}} : il n'a pas encore configuré de clés de chiffrement. Demandez-lui de générer des clés dans son profil, puis réessayez.",
   "EncryptedCopyFailed": "Échec de la copie des fichiers chiffrés : {{names}}",

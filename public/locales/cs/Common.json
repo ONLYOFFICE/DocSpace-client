@@ -866,6 +866,7 @@
   "EnableThirdPartyIntegration": "Požádejte prosím vlastníka nebo supersprávce, aby zapnul příslušnou službu v sekci Integrace v nastavení pracovního prostoru.",
   "EnableWebSearchInBilling": "Povolte vyhledávání webu v sekci Fakturace",
   "EncryptedAccessPending": "Přístup čeká na vyřízení",
+  "EncryptedAccessRestored": "Uživatel {{user}} nyní má přístup ke všem zašifrovaným souborům v místnosti.",
   "EncryptedChangeOwnerKeyMismatch": "Nelze převést vlastnictví na {{user}}: jejich šifrovací klíč se změnil a nebyl důvěryhodný. Znovu ověřte klíč a zkuste to znovu.",
   "EncryptedChangeOwnerNoKeys": "Nelze převést vlastnictví na {{user}}: dosud nemají nastaveny šifrovací klíče. Požádejte je, aby vygenerovali klíče ve svém profilu, a zkuste to znovu.",
   "EncryptedCopyFailed": "Nepodařilo se zkopírovat zašifrované soubory: {{names}}",

@@ -866,6 +866,7 @@
   "EnableThirdPartyIntegration": "Lūdziet īpašniekam vai superadministratoram iespējot attiecīgo pakalpojumu darbvietas iestatījumu sadaļā Integrācija.",
   "EnableWebSearchInBilling": "Iespējojiet tīmekļa meklēšanu sadaļā Maksājumi",
   "EncryptedAccessPending": "Piekļuve tiek gaidīta",
+  "EncryptedAccessRestored": "Lietotājam {{user}} tagad ir piekļuve visiem telpas šifrētajiem failiem.",
   "EncryptedChangeOwnerKeyMismatch": "Nevar nodot īpašumtiesības {{user}}: viņu šifrēšanas atslēga ir mainīta un nav uzticēta. Atkārtoti verificējiet atslēgu un mēģiniet vēlreiz.",
   "EncryptedChangeOwnerNoKeys": "Nevar nodot īpašumtiesības {{user}}: viņi vēl nav iestatījuši šifrēšanas atslēgas. Palūdziet viņiem ģenerēt atslēgas savā profilā, pēc tam mēģiniet vēlreiz.",
   "EncryptedCopyFailed": "Neizdevās kopēt šifrētos failus: {{names}}",

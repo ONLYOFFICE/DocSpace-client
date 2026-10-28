@@ -40,6 +40,7 @@ vi.mock("../room-encryption", () => ({
   addMembersToEncryptedRoom: vi.fn(),
   backfillEncryptedFilesForRoomMembers: vi.fn(),
   revokeMemberFromEncryptedRoom: vi.fn(),
+  rewrapMissingFilesForMember: vi.fn(),
   validateMembersForEncryption: vi.fn(),
 }));
 vi.mock("../../../api/groups", () => ({
@@ -52,8 +53,10 @@ import {
   addMembersToEncryptedRoom,
   backfillEncryptedFilesForRoomMembers,
   revokeMemberFromEncryptedRoom,
+  rewrapMissingFilesForMember,
 } from "../room-encryption";
 import {
+  retryPendingAccess,
   revokeRemovedMemberAccess,
   rewrapForInvitedMembers,
 } from "../room-member-flows";
@@ -322,6 +325,138 @@ describe("rewrapForInvitedMembers", () => {
     await expect(rewrap()).resolves.toEqual([
       { level: "success", text: "Common:UsersInvited" },
     ]);
+  });
+});
+
+describe("retryPendingAccess", () => {
+  const bob = { id: "u-bob", displayName: "Bob" };
+  const onProgress = vi.fn();
+  const retry = () =>
+    retryPendingAccess({
+      t,
+      roomId: ROOM_ID,
+      member: bob,
+      currentUserId: "u-me",
+      identity,
+      onProgress,
+    });
+  const recordBob = (missingFileIds: number[] | "all") =>
+    pendingAccessStore.record({ roomId: ROOM_ID, userId: "u-bob", missingFileIds });
+
+  afterEach(() => {
+    pendingAccessStore.clear(ROOM_ID, "u-bob");
+    vi.resetAllMocks();
+  });
+
+  it("Retry succeeds: every missing file is wrapped again, the record is cleared and access is reported restored", async () => {
+    recordBob([2, 3]);
+    vi.mocked(rewrapMissingFilesForMember).mockResolvedValue({
+      fileResults: [ok(2), ok(3)],
+      skippedMembers: [],
+      missingFileIdsByMember: {},
+    });
+
+    const notice = await retry();
+
+    expect(rewrapMissingFilesForMember).toHaveBeenCalledWith(
+      ROOM_ID,
+      "u-bob",
+      [2, 3],
+      expect.objectContaining({ currentUserId: "u-me", identity }),
+    );
+    expect(notice).toEqual({
+      level: "success",
+      text: `Common:EncryptedAccessRestored ${JSON.stringify({ user: "Bob" })}`,
+    });
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")).toBeUndefined();
+    expect(onProgress).toHaveBeenLastCalledWith({
+      percent: 100,
+      completed: true,
+      alert: false,
+    });
+  });
+
+  it("Retry still fails: the record keeps the files still missing and the partial failure is reported with their count", async () => {
+    recordBob([2, 3]);
+    vi.mocked(rewrapMissingFilesForMember).mockResolvedValue({
+      fileResults: [ok(2), failed(3)],
+      skippedMembers: [],
+      missingFileIdsByMember: { "u-bob": [3] },
+    });
+
+    const notice = await retry();
+
+    expect(notice).toEqual({
+      level: "warning",
+      text: `Common:EncryptedReencryptPartialFailure ${JSON.stringify({ count: 1 })}`,
+    });
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")?.missingFileIds).toEqual([
+      3,
+    ]);
+  });
+
+  it("Re-encryption fails as a whole: the retry wraps every encrypted file of the room for the member", async () => {
+    recordBob("all");
+    vi.mocked(addMembersToEncryptedRoom).mockResolvedValue({
+      fileResults: [ok(1)],
+      skippedMembers: [],
+      missingFileIdsByMember: {},
+    });
+
+    const notice = await retry();
+
+    expect(addMembersToEncryptedRoom).toHaveBeenCalledWith(
+      ROOM_ID,
+      [bob],
+      expect.objectContaining({ currentUserId: "u-me", identity }),
+    );
+    expect(rewrapMissingFilesForMember).not.toHaveBeenCalled();
+    expect(notice?.level).toBe("success");
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")).toBeUndefined();
+  });
+
+  it("keeps the record when the member's changed key is refused", async () => {
+    recordBob([2]);
+    vi.mocked(rewrapMissingFilesForMember).mockResolvedValue({
+      fileResults: [ok(2)],
+      skippedMembers: [{ id: "u-bob", reason: "key-mismatch-refused" }],
+      missingFileIdsByMember: {},
+    });
+
+    const notice = await retry();
+
+    expect(notice).toEqual({
+      level: "warning",
+      text: `Common:EncryptedSkippedKeyMismatch ${JSON.stringify({ users: "Bob" })}`,
+    });
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")?.missingFileIds).toEqual([
+      2,
+    ]);
+  });
+
+  it("keeps the record and reports the failure when the retry rejects", async () => {
+    recordBob([2]);
+    vi.mocked(rewrapMissingFilesForMember).mockRejectedValue(new Error("down"));
+    const consoleError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
+    const notice = await retry();
+
+    expect(notice).toEqual({
+      level: "error",
+      text: "Common:EncryptedReencryptFailed",
+    });
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")).toBeDefined();
+    consoleError.mockRestore();
+  });
+
+  it("does nothing for a member without a record", async () => {
+    const notice = await retry();
+
+    expect(notice).toBeNull();
+    expect(rewrapMissingFilesForMember).not.toHaveBeenCalled();
+    expect(addMembersToEncryptedRoom).not.toHaveBeenCalled();
   });
 });
 

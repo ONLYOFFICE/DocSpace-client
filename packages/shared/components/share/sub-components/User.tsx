@@ -83,11 +83,15 @@ export const User = ({
 	hideCombobox,
 	selectedOption,
 	onSelectOption,
+
+	isAccessPending,
+	onRetryAccess,
 }: UserProps) => {
 	const id = useId();
 	const { t } = useTranslation(["Common"]);
 
 	const [isLoading, setIsLoading] = useState(false);
+	const [isRetrying, setIsRetrying] = useState(false);
 
 	const handleSelectOption = async (option: TOption) => {
 		if (!onSelectOption) return;
@@ -102,6 +106,15 @@ export const User = ({
 			endLoader(() => {
 				setIsLoading(false);
 			});
+		});
+	};
+
+	const handleRetryAccess = () => {
+		if (!onRetryAccess || isRetrying) return;
+
+		setIsRetrying(true);
+		onRetryAccess().finally(() => {
+			setIsRetrying(false);
 		});
 	};
 
@@ -225,7 +238,15 @@ export const User = ({
 					) : null}
 				</div>
 				{!("isGroup" in user && user.isGroup) ? (
-					<div className="role-email" style={{ display: "flex" }}>
+					<div
+						className="role-email"
+						style={{ display: "flex", columnGap: "4px" }}
+						data-testid={
+							isAccessPending
+								? "info_panel_members_user_access_pending"
+								: undefined
+						}
+					>
 						<Text
 							className="label"
 							fontWeight={400}
@@ -234,8 +255,21 @@ export const User = ({
 							color="var(--info-panel-members-subtitle-color)"
 							dir="auto"
 						>
-							{`${typeLabel} | ${(user as TUser).email}`}
+							{isAccessPending
+								? `${t("Common:EncryptedAccessPending")}${onRetryAccess ? " |" : ""}`
+								: `${typeLabel} | ${(user as TUser).email}`}
 						</Text>
+						{isAccessPending && onRetryAccess ? (
+							<Link
+								type={LinkType.action}
+								fontSize="12px"
+								isSemitransparent={isRetrying}
+								onClick={handleRetryAccess}
+								dataTestId="info_panel_members_user_retry_access"
+							>
+								{t("Common:TryAgain")}
+							</Link>
+						) : null}
 					</div>
 				) : null}
 			</div>

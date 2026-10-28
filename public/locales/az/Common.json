@@ -866,6 +866,7 @@
   "EnableThirdPartyIntegration": "Zəhmət olmasa, sahibdən və ya super administratorndan iş sahəsi parametrlərinin İnteqrasiya bölməsində müvafiq xidməti aktivləşdirməsini xahiş edin.",
   "EnableWebSearchInBilling": "Veb axtarışı Ödəniş bölməsində aktivləşdirin",
   "EncryptedAccessPending": "Giriş gözləmədədir",
+  "EncryptedAccessRestored": "{{user}} artıq otaqdakı bütün şifrəli fayllara giriş imkanına malikdir.",
   "EncryptedChangeOwnerKeyMismatch": "Sahibliyi {{user}}-ə ötürmək mümkün deyil: onların şifrələmə açarı dəyişib və etibarlı sayılmayıb. Açarı yenidən yoxlayın və cəhd edin.",
   "EncryptedChangeOwnerNoKeys": "Sahibliyi {{user}}-ə ötürmək mümkün deyil: onlar hələ şifrələmə açarlarını qurmayıblar. Onlardan profillərində açar yaratmalarını xahiş edin, sonra yenidən cəhd edin.",
   "EncryptedCopyFailed": "Şifrəli faylları kopyalamaq alınmadı: {{names}}",

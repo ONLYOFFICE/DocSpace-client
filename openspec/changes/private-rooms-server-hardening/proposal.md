@@ -51,6 +51,7 @@ the file to change so the backend team can pick them up; nothing here is
 - Socket events of a private room reach its members only, not every
   administrator.
 - Found on a local portal on 2026-10-22: the public keys of a file in an archived private room are answered 415, because the file check knows only the VirtualRooms section; the server applies the room check's VirtualRooms-or-Archive condition (design decision 9).
+- A caller who may change the access of a private room can read the public keys of named users who are not members yet, so the client verifies invitees' keys before granting access (`private-rooms-invite-atomic-rewrap`, decided 2026-10-28; design decision 10). Today the room access keys cover members only.
 
 ## Capabilities
 
@@ -65,8 +66,8 @@ None.
   endpoints, the copy right in archived private rooms and the public keys
   of files in archived private rooms change; new
   requirements for metadata guards, title validation, upload-session abort,
-  access history, the administrator bypass in archived private rooms and
-  private-room event recipients.
+  access history, the administrator bypass in archived private rooms,
+  private-room event recipients and the public keys of prospective members.
 
 ## Impact
 
@@ -75,15 +76,17 @@ None.
   `FileSharing.cs` / `StudioNotifyService` (invite e-mails),
   `DocumentsActionMapper.cs` and the audit pipeline, `VirtualRoomsController.cs`,
   new recovery and SCIM controllers, the Archive branch of
-  `FileSecurity.FilterEntryAsync`, `CopyPermissionsCheck.cs` (traced only) and
-  `SocketManager.cs`.
+  `FileSecurity.FilterEntryAsync`, `CopyPermissionsCheck.cs` (traced only),
+  `SocketManager.cs`, and `PrivacyRoomController.cs` with
+  `EncryptionKeyPairDto.cs` (invitee keys).
 - Client: `packages/shared/api/privacy`, `packages/shared/api/files`,
   `packages/shared/services/private-room/room-encryption.ts` (owner hand-over
   backfill), `packages/client/src/components/panels/ChangeRoomOwnerPanel`,
   keys-management enrolment UI, MSW handlers and contract tests under
   `packages/shared/__mocks__/handlers/{privacyroom,files}` (the archived
   variant of `encryptedFilesHandlers` follows the copy right once the server
-  changes).
+  changes), and the invitee keys request in `packages/shared/api/privacy`
+  with its mock.
 - No Document Server dependency.
 
 ## Out of scope

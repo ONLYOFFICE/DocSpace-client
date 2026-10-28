@@ -82,6 +82,21 @@ The server SHALL send the socket events of a private room, active or archived, a
 - **WHEN** a private room is renamed or a file is added to it
 - **THEN** members receive the event and a portal administrator who is not a member receives none
 
+### Requirement: Public keys of prospective members
+The server SHALL return, to a caller who may change the access of a private room, the public keys of named portal users whether or not they are members of the room, without the private half, so the client can verify an invitee's key before granting access. A named user without stored keys SHALL be absent from the answer. It SHALL answer 404 for an unknown room, 400 for a room that is not private, and 403 for a caller who may not change the room's access.
+
+#### Scenario: Invitee with a key
+- **WHEN** a caller who may change the access of a private room asks for the keys of a portal user who is not a member and has stored keys
+- **THEN** the user's public keys are returned with their ids, without the encrypted private half
+
+#### Scenario: Invitee without a key
+- **WHEN** a named user has never stored a key
+- **THEN** the user is absent from the answer and the request still succeeds
+
+#### Scenario: Caller who may not invite
+- **WHEN** a caller who may not change the room's access asks for keys
+- **THEN** the request is refused with 403 and no key is returned
+
 ## MODIFIED Requirements
 
 ### Requirement: File public keys

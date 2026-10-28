@@ -52,6 +52,11 @@ Withdrawn: the client operates with one key per user (`private-rooms-single-key`
 
 - [ ] 10.1 Run the client E2E private-room suite against the updated mocks and the pre-push gate; verify with `pnpm test:e2e:docker:start` and `openspec validate --all --strict`
 
+## 11. Invitee keys
+
+- [ ] 11.1 Backend: add the invitee keys route to `PrivacyRoomController` (`products/ASC.Files/Server/Api/PrivacyRoomController.cs`) with a helper next to `GetKeyPairForRoomAsync` (`products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs`), as design decision 10 describes: callers admitted by `FileSharingHelper.CanSetAccessAsync` on the room, keys read with `encryptionLoginProvider.GetKeysAsync(userId)`, entries without `privateKeyEnc`, users without keys absent, 404 for an unknown room, 400 for a room that is not private, 403 otherwise; verify with server unit tests that a non-member with keys is returned without `privateKeyEnc`, a user without keys is absent and a caller who may not change the room's access gets 403
+- [ ] 11.2 Client: once 11.1 has merged, add the request to `packages/shared/api/privacy` and an MSW handler in `packages/shared/__mocks__/handlers/privacyroom` mirroring the merged route, with its contract test; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/privacyroom`. `private-rooms-invite-atomic-rewrap` 2.1 uses it to verify invitees before the room security update
+
 ## Workflow follow-up
 
 - Archive only after every backend task has merged on `../server`; until then the delta describes the agreed contract, not the branch.

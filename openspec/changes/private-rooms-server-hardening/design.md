@@ -75,6 +75,21 @@ spec. `V1_RELEASE_PROGRESS.md` set admin recovery (#55), audit log (#56) and
 SCIM (#57) as P0 for B2B and explicitly allowed an individuals/SMB launch
 without them.
 
+Invitee keys (read through CodeGraph and in the source, 2026-10-28). The room
+access keys (`PrivacyRoomController.GetUserKeysForRoom`, `HttpGet
+"{roomId:int}/access"` -> `EncryptionKeyPairDtoHelper.GetKeyPairForRoomAsync`,
+`products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs:245-296`) are
+collected for the users with a share on the room (`fileSharing.GetSharedInfoAsync`),
+each read with `encryptionLoginProvider.GetKeysAsync(share.Id)`, and
+`SanitizeAccessKeys` (`:303`) strips another user's private half. No route
+returns the public key of a user who is not yet a member: the others are the
+caller's own keys (`privacyroom/keys`) and the users with access to a file
+(`files/file/{fileId}/publickeys`). The room security update
+(`FileSharing.SetAceObjectAsync`, `products/ASC.Files/Core/Utils/FileSharing.cs:64`)
+admits a caller who passes `FileSharingHelper.CanSetAccessAsync` (`:101`,
+defined at `:624`). `private-rooms-invite-atomic-rewrap` verifies invitees'
+keys before that update and needs those keys first.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -138,6 +153,22 @@ without them.
    needs it to refresh the list.
 
 9. **Files of archived private rooms get their public keys (found on a local portal, 2026-10-22).** `SecurityController.GetEncryptionAccess` -> `EncryptionKeyPairDtoHelper.GetKeyPairAsync(fileId)` (`products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs:212-218`) treats a file as private only when `file.RootFolderType == FolderType.VirtualRooms` and throws `NotSupportedException` (415) otherwise, while `GetKeyPairForRoomAsync` in the same file (`:260`) accepts `VirtualRooms or Archive`. A copy out of an archived private room on the local portal received 415 from `files/file/{fileId}/publickeys` and still decrypted, because the client also looks the sender up in the room roster. The fallback the file-operations requirement "Sender keys of files leaving a private room" relies on, the file's own public keys where the source room is not known, therefore fails in Archive today. The fix applies the room check's `VirtualRooms or Archive` condition to the file check.
+
+10. **Invitee keys through a dedicated route (decided 2026-10-28).** A
+    read-only route on `PrivacyRoomController`, for example `GET
+    api/2.0/privacyroom/{roomId}/access/candidates?userIds=…` (the backend team
+    settles the name), returns the public keys of the named users for a
+    private room. It admits the callers the room security update admits
+    (`FileSharingHelper.CanSetAccessAsync` on the room), so whoever may invite
+    may read, reads each user's keys with
+    `encryptionLoginProvider.GetKeysAsync(userId)`, and answers
+    `EncryptionKeyDto` entries without `privateKeyEnc`, as `SanitizeAccessKeys`
+    does; a user without stored keys is absent. Alternatives: a `userIds`
+    parameter on `privacyroom/{roomId}/access`, rejected because that roster
+    of members is what unwrapping and sender lookup rely on; a portal-wide
+    route for any user's keys, rejected because it would tell anyone whether
+    a user has keys, where the room scope limits it to people the caller is
+    about to share with.
 
 ## Risks / Trade-offs
 

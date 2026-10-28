@@ -113,7 +113,6 @@ export const RowsView = observer(({ store, onOpen, getContextModel }: RowsViewPr
                   isTextOverflow
                   truncate
                   dir="auto"
-                  onClick={() => onOpen(project)}
                 >
                   {project.title}
                 </Link>

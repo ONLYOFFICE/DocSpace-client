@@ -64,6 +64,7 @@ import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
 import { StyledParam } from "SRC_DIR/components/CreateEditDialogParams/StyledParam";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
+import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import { coverLogo } from "../list/ProjectLogo";
@@ -164,6 +165,13 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
   );
   const selectedProfileOption =
     profileOptions.find((option) => option.key === (profileId ?? "default")) ?? (profileOptions[0] as TOption);
+  // A stored model that is gone (removed, disabled, no longer chat-capable)
+  // shows as the default, so the default is what gets saved.
+  const savedProfileId = selectedProfileOption
+    ? selectedProfileOption.key === "default"
+      ? null
+      : String(selectedProfileOption.key)
+    : profileId;
 
   if (!state) return null;
 
@@ -181,7 +189,7 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
         // the built-in icon or "" for the initials, and the colour.
         logo: { color: `#${color}`, cover: coverIcon?.id ?? "" },
         aiProject: {
-          profileId,
+          profileId: savedProfileId,
           instructionsRoomIds: instructions.map((r) => r.id),
           knowledgeRoomIds: knowledge.map((r) => r.id),
         },
@@ -194,7 +202,7 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
       }
       store.closeProjectDialog();
     } catch (e) {
-      toastr.error((e as Error).message);
+      toastr.error(errorMessage(e));
     } finally {
       setIsSaving(false);
     }
@@ -234,23 +242,32 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
       <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
         {label}
       </Text>
-      <div className="ai-mcp-group">
-        <AddButton onClick={() => setSelector(type)} isDisabled={isSaving} testId={`ai-project-add-rooms-${type}`} />
-        {rooms.map((room) => (
-          <div className={classnames("ai-mcp-item", styles.roomItem)} key={room.id} data-testid="ai-project-room-item">
-            <img src={iconSize32.get(ROOM_ICONS[type])} alt="" />
-            <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect truncate>
-              {room.title}
-            </Text>
-            <IconButton
-              iconName={CrossReactSvgUrl}
-              size={12}
-              onClick={() => setRooms(rooms.filter((r) => r.id !== room.id))}
-              dataTestId="ai-project-remove-room"
-            />
-          </div>
-        ))}
+      <div className={styles.addRow}>
+        <AddButton
+          label={t("Common:SelectRoom")}
+          onClick={() => setSelector(type)}
+          isDisabled={isSaving}
+          testId={`ai-project-add-rooms-${type}`}
+        />
       </div>
+      {rooms.length > 0 ? (
+        <div className="ai-mcp-group">
+          {rooms.map((room) => (
+            <div className={classnames("ai-mcp-item", styles.roomItem)} key={room.id} data-testid="ai-project-room-item">
+              <img src={iconSize32.get(ROOM_ICONS[type])} alt="" />
+              <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect truncate>
+                {room.title}
+              </Text>
+              <IconButton
+                iconName={CrossReactSvgUrl}
+                size={12}
+                onClick={() => setRooms(rooms.filter((r) => r.id !== room.id))}
+                dataTestId="ai-project-remove-room"
+              />
+            </div>
+          ))}
+        </div>
+      ) : null}
       <Text className={styles.hint} fontSize="12px" lineHeight="16px" noSelect>
         {hint}
       </Text>

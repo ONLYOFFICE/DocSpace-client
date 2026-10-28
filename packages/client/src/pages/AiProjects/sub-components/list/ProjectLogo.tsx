@@ -33,9 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import classNames from "classnames";
+
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import type { TAiProject, TAiProjectCover } from "@docspace/shared/api/ai/projects";
+
+import styles from "../../AiProjects.module.scss";
 
 /** The ui-kit logo object for a built-in cover: no uploaded sizes, the cover and its colour. */
 export const coverLogo = (cover: TAiProjectCover, color: string): TLogo => ({
@@ -62,7 +66,7 @@ export const ProjectLogo = ({ project, size = "32px", className }: ProjectLogoPr
     radius="6px"
     showDefault={!project.logo.cover}
     logo={project.logo.cover ? coverLogo(project.logo.cover, project.logo.color.replace("#", "")) : undefined}
-    className={className}
+    className={classNames(styles.projectLogo, className)}
     dataTestId="ai-project-logo"
   />
 );

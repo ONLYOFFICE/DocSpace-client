@@ -105,7 +105,8 @@ export const TableView = observer(
     const containerRef = React.useRef<HTMLDivElement | null>(null);
     const [hideColumns, setHideColumns] = React.useState(false);
 
-    const sortBy = store.sortBy === "AZ" ? "AZ" : "DateAndTime";
+    // "Created" has no column: then no header shows itself as the sort.
+    const sortBy = store.sortBy;
     const onSort = (key: string) => {
       const next = key === "AZ" ? "AZ" : "DateAndTime";
       const flip = store.sortBy === next;

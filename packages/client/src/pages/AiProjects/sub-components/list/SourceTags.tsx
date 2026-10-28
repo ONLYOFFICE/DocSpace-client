@@ -33,7 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import React from "react";
+
 import { Tags } from "@onlyoffice/apps-ui-kit/components/tags";
+import type { TagClickEvent, TagType } from "@onlyoffice/apps-ui-kit/components/tag";
 import type { TAiProjectSource } from "@docspace/shared/api/ai/projects";
 
 type SourceTagsProps = {
@@ -45,21 +48,58 @@ type SourceTagsProps = {
 
 const noop = () => {};
 
+// A room the caller can no longer read (gone, or access lost) comes without
+// a title, so it has nothing to show: the lists name the readable rooms only.
+// An archived room keeps its title and stays listed.
+const titledRooms = (rooms: TAiProjectSource[]) => rooms.filter((room) => room.available && room.title);
+
 /** The linked rooms as the tags of a room render in the rooms list. */
 export const SourceTags = ({ rooms, columnCount = 2, className }: SourceTagsProps) => {
-  if (rooms.length === 0) return null;
+  const shown = titledRooms(rooms);
+  if (shown.length === 0) return null;
   return (
     <Tags
       className={className}
-      tags={rooms.map((room) => room.title)}
+      tags={shown.map((room) => room.title)}
       columnCount={columnCount}
       onSelectTag={noop}
     />
   );
 };
 
+/** How many rooms a wrapped list shows before the rest fold into "+N". */
+const VISIBLE_ROOMS = 3;
+const MORE_KEY = "ai-project-more-rooms";
+
+/**
+ * The linked rooms as wrapped tags (the info panel): the first three, then a
+ * "+N" tag that shows the others in place.
+ */
+export const SourceTagList = ({ rooms, className }: { rooms: TAiProjectSource[]; className?: string }) => {
+  const [expanded, setExpanded] = React.useState(false);
+  const titles = React.useMemo(() => titledRooms(rooms).map((room) => room.title), [rooms]);
+  const hidden = titles.length - VISIBLE_ROOMS;
+  const more = `+${hidden}`;
+  // A stable array: the tags are laid out again whenever it changes.
+  const tags = React.useMemo<(string | TagType)[]>(
+    () =>
+      expanded || hidden <= 0 ? titles : [...titles.slice(0, VISIBLE_ROOMS), { key: MORE_KEY, label: more }],
+    [expanded, hidden, titles, more],
+  );
+  const onSelectTag = React.useCallback(
+    (tag: TagClickEvent) => {
+      if (tag.label === more) setExpanded(true);
+    },
+    [more],
+  );
+  if (titles.length === 0) return null;
+  return <Tags className={className} tags={tags} columnCount={-1} onSelectTag={onSelectTag} />;
+};
+
 /** The rooms as one line of names, for the row view's side info. */
 export const sourceNames = (rooms: TAiProjectSource[]) =>
-  rooms.map((room) => room.title).join(", ");
+  titledRooms(rooms)
+    .map((room) => room.title)
+    .join(", ");
 
 export default SourceTags;

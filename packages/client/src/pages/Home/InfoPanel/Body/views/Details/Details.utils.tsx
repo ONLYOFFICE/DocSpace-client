@@ -51,6 +51,8 @@ import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TAiProjectSettings } from "@docspace/shared/api/ai/projects";
 
+import { SourceTagList } from "SRC_DIR/pages/AiProjects/sub-components/list/SourceTags";
+
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
   getRoomTypeName,
@@ -400,13 +402,22 @@ class DetailsHelper {
       ? (this.item.aiProject as TAiProjectSettings | undefined)
       : undefined;
 
-  /** The linked rooms of one kind, by title, or a note when there is none. */
+  /**
+   * The linked rooms of one kind as tags (three, then "+N"), or a note when
+   * none is readable.
+   */
   getAiProjectRooms = (key: "instructionsRooms" | "knowledgeRooms") => {
-    const rooms = this.getAiProjectSettings()?.[key] ?? [];
-    return text(
-      rooms.length
-        ? rooms.map((room) => room.title).join(", ")
-        : this.t("Common:AIProjectNoRooms"),
+    const rooms = (this.getAiProjectSettings()?.[key] ?? []).filter(
+      (room) => room.available && room.title,
+    );
+    if (!rooms.length) return text(this.t("Common:AIProjectNoRooms"));
+    return (
+      <div
+        className="property-tag_list"
+        data-testid={`info_panel_details_ai_project_${key}`}
+      >
+        <SourceTagList key={this.item.id} rooms={rooms} className="tags" />
+      </div>
     );
   };
 

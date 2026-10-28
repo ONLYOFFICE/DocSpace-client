@@ -47,6 +47,11 @@
   gap: 6px;
 }
 
+// "Select room" on a row of its own; the chosen rooms wrap below it.
+.addRow {
+  display: flex;
+}
+
 .hint {
   color: var(--text-secondary);
 }

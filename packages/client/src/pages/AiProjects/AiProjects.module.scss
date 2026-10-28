@@ -245,6 +245,12 @@
   min-width: 0;
 }
 
+// A logo keeps its size beside a title of any length: the title is what
+// gives way and truncates.
+.projectLogo {
+  flex-shrink: 0;
+}
+
 .nameLink {
   min-width: 0;
   cursor: pointer;

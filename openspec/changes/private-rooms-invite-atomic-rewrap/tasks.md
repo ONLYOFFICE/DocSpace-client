@@ -14,7 +14,7 @@
 
 ## 3. Pending-access state and retry in the Members panel
 
-- [ ] 3.1 Record `{ roomId, userId, missingFileIds }` in a shared in-memory store in `packages/shared/services/private-room` after a partial failure of the invite re-wrap, and clear it on success (design decision 2); verify with a store unit test and a case in `room-member-flows.test.ts`.
+- [x] 3.1 Record `{ roomId, userId, missingFileIds }` in a shared in-memory store in `packages/shared/services/private-room` after a partial failure of the invite re-wrap, and clear it on success (design decision 2); verify with a store unit test and a case in `room-member-flows.test.ts`.
 - [ ] 3.2 Render Common:EncryptedAccessPending on the member row and add a retry context item (edit rights only) that calls the helper from 1.2 and verifies the result against the server access lists; verify with a component test in `packages/client/src/pages/Home/InfoPanel/Body/views/Members/` and an E2E case in `private-room-members.spec.ts`; add `EncryptedAccessRestored` in the same commit, with `/translate-comments`, `/translate-locales` and `cd common/tests && npx vitest run test/locales.test.js`.
 
 - [ ] 3.3 After "Trust new key", re-run the wraps for that member over the files skipped for them in this session (reuse the helper from 1.2 with the skipped file ids), seen on the local portal on 2026-10-22: files uploaded while the key was refused stayed unreadable for the member until the next session's backfill; verify with a case named "Key trusted after a refusal" in `room-encryption.integration.test.ts` and in the upload store tests

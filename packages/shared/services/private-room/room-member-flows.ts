@@ -45,6 +45,7 @@ import {
   type NewRoomMember,
   type SkippedRoomMember,
 } from "./room-encryption";
+import { pendingAccessStore } from "./pending-access";
 
 /** A message a membership flow asks its caller to show. */
 export type TMemberFlowNotice = {
@@ -207,9 +208,18 @@ export async function rewrapForInvitedMembers({
       const failures = fileResults.filter((r) => !r.success);
       const hasAlert = failures.length > 0 || skippedMembers.length > 0;
       onProgress({ percent: 100, completed: true, alert: hasAlert });
-      onOutcome?.(
-        getInviteOutcome(newMembers, skippedMembers, missingFileIdsByMember),
+      const outcome = getInviteOutcome(
+        newMembers,
+        skippedMembers,
+        missingFileIdsByMember,
       );
+      for (const member of outcome.granted) {
+        pendingAccessStore.clear(roomId, member.id);
+      }
+      for (const { member, missingFileIds } of outcome.pending) {
+        pendingAccessStore.record({ roomId, userId: member.id, missingFileIds });
+      }
+      onOutcome?.(outcome);
 
       if (skippedMembers.length > 0) {
         const formatName = (m: { id: string; displayName?: string }) =>

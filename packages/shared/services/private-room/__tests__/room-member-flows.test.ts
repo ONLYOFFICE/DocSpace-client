@@ -57,6 +57,7 @@ import {
   revokeRemovedMemberAccess,
   rewrapForInvitedMembers,
 } from "../room-member-flows";
+import { pendingAccessStore } from "../pending-access";
 
 declare global {
   // eslint-disable-next-line no-var
@@ -239,6 +240,39 @@ describe("rewrapForInvitedMembers", () => {
       ],
       skipped: [{ id: "u-cid", displayName: "Cid", reason: "no-key" }],
     });
+  });
+
+  it("Some files fail: the invitee left without some files is recorded as pending access, and a granted one is cleared", async () => {
+    pendingAccessStore.record({
+      roomId: ROOM_ID,
+      userId: "u-ann",
+      missingFileIds: [1],
+    });
+    vi.mocked(addMembersToEncryptedRoom).mockResolvedValue({
+      fileResults: [ok(1), failed(2)],
+      skippedMembers: [],
+      missingFileIdsByMember: { "u-bob": [2] },
+    } as never);
+
+    await rewrapForInvitedMembers({
+      t,
+      roomId: ROOM_ID,
+      newMembers: [
+        { id: "u-ann", displayName: "Ann" },
+        { id: "u-bob", displayName: "Bob" },
+      ],
+      currentUserId: "u-me",
+      identity,
+      onProgress,
+    });
+
+    expect(pendingAccessStore.get(ROOM_ID, "u-ann")).toBeUndefined();
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")).toEqual({
+      roomId: ROOM_ID,
+      userId: "u-bob",
+      missingFileIds: [2],
+    });
+    pendingAccessStore.clear(ROOM_ID, "u-bob");
   });
 
   it("marks every invitee pending when the re-wrap fails as a whole", async () => {

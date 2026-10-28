@@ -806,6 +806,58 @@ describe("encryptedFiles mock — upload sessions (mirrors UploadController)", (
       ).status,
     ).toBe(404);
   });
+
+  const abort = (folderId: number, sessionId: string) =>
+    fetch(`${SESSION_URL(folderId)}/${sessionId}`, { method: "DELETE" });
+
+  it("abort discards an open session and answers without a response", async () => {
+    const session = await createSession(ROOM_ID, 4);
+    const chunkUrl = `${SESSION_URL(ROOM_ID)}/${session.id}/upload`;
+    await postChunk(chunkUrl, [1, 2]);
+
+    const res = await abort(ROOM_ID, session.id);
+
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ status: 0, statusCode: 200 });
+    expect(handle.current!.getSessions()).toEqual([]);
+    expect((await postChunk(chunkUrl, [3, 4])).status).toBe(404);
+  });
+
+  it("abort answers 404 for an unknown, finalised or already aborted session", async () => {
+    const finalised = await createSession(ROOM_ID, 2);
+    await postChunk(`${SESSION_URL(ROOM_ID)}/${finalised.id}/upload`, [7, 8]);
+    await fetch(`${SESSION_URL(ROOM_ID)}/${finalised.id}/finalize`, {
+      method: "PUT",
+    });
+    const aborted = await createSession(ROOM_ID, 2);
+    await abort(ROOM_ID, aborted.id);
+
+    const statuses = [];
+    for (const id of ["mock-session-404", finalised.id, aborted.id]) {
+      statuses.push((await abort(ROOM_ID, id)).status);
+    }
+
+    expect(statuses).toEqual([404, 404, 404]);
+  });
+
+  it("abort answers 403 for a session another account opened", async () => {
+    const session = await createSession(ROOM_ID, 2);
+    handle.current!.setCurrentUserId(BOB_ID);
+
+    const res = await abort(ROOM_ID, session.id);
+
+    expect(res.status).toBe(403);
+    expect(handle.current!.getSessions()).toHaveLength(1);
+  });
+
+  it("abort finds the session by its id whatever folder the path names", async () => {
+    const session = await createSession(ROOM_ID, 2);
+
+    const res = await abort(ARCHIVED_ROOM_ID, session.id);
+
+    expect(res.status).toBe(200);
+    expect(handle.current!.getSessions()).toEqual([]);
+  });
 });
 
 describe("PUT /files/fileops/delete", () => {

@@ -37,6 +37,7 @@ import type { TFunction } from "i18next";
 
 import { RoomsType } from "../../enums";
 import {
+  abortUploadSession,
   finalizeUploadSession,
   getFileEncryptionAccess,
   setFileEncryptionKeys,
@@ -686,16 +687,25 @@ export async function uploadEncryptedFile(
       throw new Error("startUploadSession did not return a session id");
     }
 
-    const { fileId, file: storedFile } = await uploadInChunks(
-      folderId,
-      sessionId,
-      prepared.data as Blob,
-      prepared.uploadFileName,
-      chunkSize,
-      uploadThreads,
-      signal,
-      (percent) => uploadStore?.reportProgress?.(uploadId, percent),
-    );
+    let uploaded: Awaited<ReturnType<typeof uploadInChunks>>;
+    try {
+      uploaded = await uploadInChunks(
+        folderId,
+        sessionId,
+        prepared.data as Blob,
+        prepared.uploadFileName,
+        chunkSize,
+        uploadThreads,
+        signal,
+        (percent) => uploadStore?.reportProgress?.(uploadId, percent),
+      );
+    } catch (error) {
+      if (signal?.aborted) {
+        await abortUploadSession(folderId, sessionId).catch(() => {});
+      }
+      throw error;
+    }
+    const { fileId, file: storedFile } = uploaded;
     stored = { fileId, file: storedFile, path: session?.path };
     rememberEncryptedFilename(fileId, prepared.originalFileName);
     stage = "wrap";

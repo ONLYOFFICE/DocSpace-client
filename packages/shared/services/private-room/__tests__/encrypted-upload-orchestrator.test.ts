@@ -72,6 +72,7 @@ vi.mock("../../../api/files", () => ({
   uploadChunkSequential: vi.fn().mockResolvedValue({ data: { id: 42 } }),
   uploadChunkParallel: vi.fn().mockResolvedValue({ id: 0 }),
   finalizeUploadSession: vi.fn().mockResolvedValue(undefined),
+  abortUploadSession: vi.fn().mockResolvedValue(undefined),
   getFileEncryptionAccess: vi
     .fn()
     .mockResolvedValue({ fileKeys: [] }),
@@ -678,6 +679,64 @@ describe("uploadEncryptedFile for a caller with its own queue", () => {
     expect(result).toMatchObject({ ok: false, failedAt: "upload" });
     expect(result.fileId).toBeUndefined();
     expect(wipeDek).toHaveBeenCalledTimes(1);
+  });
+
+  it("Cancelled encrypted upload", async () => {
+    const api = await import("../../../api/files");
+    const controller = new AbortController();
+    vi.mocked(api.uploadChunkSequential).mockImplementationOnce(async () => {
+      controller.abort();
+      return {} as never;
+    });
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, chunkSize: 24, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: false, aborted: true });
+    expect(api.uploadChunkSequential).toHaveBeenCalledTimes(1);
+    expect(api.abortUploadSession).toHaveBeenCalledWith(1, "session-1");
+  });
+
+  it("cancelled before the session opened: there is nothing to abort", async () => {
+    const api = await import("../../../api/files");
+    const { encryptFile } = await import("../../encryption/file-keys");
+    const controller = new AbortController();
+    vi.mocked(encryptFile).mockImplementationOnce(async () => {
+      controller.abort();
+      return {
+        encryptedBlob: new Blob([new Uint8Array(64)]),
+        dek: new Uint8Array(AES_KEY_SIZE_BYTES),
+      };
+    });
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: false, aborted: true });
+    expect(api.startUploadSession).not.toHaveBeenCalled();
+    expect(api.abortUploadSession).not.toHaveBeenCalled();
+  });
+
+  it("a chunk that fails without a cancel leaves the session to expire", async () => {
+    const api = await import("../../../api/files");
+    vi.mocked(api.uploadChunkSequential).mockRejectedValueOnce(
+      new Error("network down"),
+    );
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      ARGS,
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: false, failedAt: "upload" });
+    expect(api.abortUploadSession).not.toHaveBeenCalled();
   });
 
   it("runs the room fan-out through the caller's queue", async () => {

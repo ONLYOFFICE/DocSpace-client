@@ -344,6 +344,26 @@ describe("UploadDataStore.startSessionFunc — encrypted upload through the shar
     );
   });
 
+  it("Cancelled encrypted upload", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload();
+    vi.mocked(filesApi.uploadChunkParallel).mockImplementation(async () => {
+      store.cancelCurrentUpload("enc-pending", t);
+      return {} as never;
+    });
+    vi.mocked(filesApi.abortUploadSession).mockResolvedValue(
+      undefined as never,
+    );
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.abortUploadSession).toHaveBeenCalledWith(7, "session-1");
+    expect(filesApi.finalizeUploadSession).not.toHaveBeenCalled();
+  });
+
   it("wipes the DEK when the upload session fails after encryption", async () => {
     const { store } = setupEncryptedPendingFile();
     const dek = makeDek();

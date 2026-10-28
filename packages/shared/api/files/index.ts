@@ -839,6 +839,16 @@ export async function finalizeUploadSession(
   return res;
 }
 
+export async function abortUploadSession(
+  folderId: string | number,
+  sessionId: string,
+) {
+  return request({
+    method: "delete",
+    url: `/files/${folderId}/session/${sessionId}`,
+  });
+}
+
 // TODO: Need update res type and remove unknown
 export function uploadFile(url: string, data: unknown) {
   return axios.post(url, data);

@@ -37,6 +37,7 @@ vi.mock("@docspace/shared/api/files", async (importOriginal) => {
     uploadChunkSequential: vi.fn(),
     uploadChunkParallel: vi.fn(),
     finalizeUploadSession: vi.fn(),
+    abortUploadSession: vi.fn(),
     copyToFolder: vi.fn(),
     moveToFolder: vi.fn(),
     fileCopyAs: vi.fn(),

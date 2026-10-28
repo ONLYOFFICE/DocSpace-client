@@ -69,6 +69,8 @@ export type EncryptedFolderSeed = { id: number; title: string };
 
 export type UploadSessionRecord = {
   id: string;
+  /** The account that opened the session. */
+  userId: string;
   folderId: number;
   fileName: string;
   fileSize: number;
@@ -909,6 +911,7 @@ export const encryptedFilesHandlers = (
         const created = new Date();
         const session: UploadSessionRecord = {
           id: sessionId,
+          userId: currentUserId,
           folderId,
           fileName: body.fileName,
           fileSize: body.fileSize,
@@ -1029,6 +1032,40 @@ export const encryptedFilesHandlers = (
           return errorResponse(404, "session not found");
         }
         return okResponse(completeSession(session), 201);
+      },
+    ),
+
+    /**
+     * Mirrors UploadController.AbortUploadSession
+     * (HttpDelete "{folderId}/session/{sessionId}") ->
+     * FileUploader.AbortUploadAsync: discards the session and the parts it
+     * received. The session is found by its id alone, the folder segment is
+     * not matched. ChunkedUploadSessionHolder.GetSessionAsync throws
+     * ItemNotFoundException, so 404, for a session that is unknown,
+     * finalised or already aborted (expiry is not modelled); a session
+     * another account opened is a SecurityException, so 403. The action
+     * returns nothing, so the envelope has no `response`.
+     */
+    http.delete(
+      `${apiBase}/files/:folderId(\\d+)/session/:sessionId`,
+      ({ params, request }) => {
+        const sessionId = String(params.sessionId);
+        const session = sessions.get(sessionId);
+        if (!session && withOtherRooms) return undefined;
+        requests.push({
+          method: "DELETE",
+          url: new URL(request.url).pathname,
+        });
+        if (!session || session.completed) {
+          return errorResponse(404, "session not found");
+        }
+        if (session.userId !== currentUserId) {
+          return errorResponse(403, "Access denied");
+        }
+        sessions.delete(sessionId);
+        return new Response(JSON.stringify({ status: 0, statusCode: 200 }), {
+          headers: { "Content-Type": "application/json" },
+        });
       },
     ),
 

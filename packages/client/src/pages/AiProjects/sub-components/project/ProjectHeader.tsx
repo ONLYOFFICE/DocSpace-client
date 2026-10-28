@@ -108,7 +108,7 @@ const ProjectHeader = ({ store, project, currentDeviceType, onBack }: ProjectHea
           toggleInfoPanel={() => showInfo(!infoPanelStore.isVisible)}
           hideChatButton
           // The chat's own toolbar (history, new chat) after the project menu.
-          analyzeResponsesButton={<ChatToolbar className={styles.chatToolbar} />}
+          analyzeResponsesButton={<ChatToolbar className={styles.chatToolbar} keepSessionProfile />}
           titles={{ infoPanel: t("Common:Info"), contextMenu: t("Common:Actions") }}
           withLogo=""
           burgerLogo=""

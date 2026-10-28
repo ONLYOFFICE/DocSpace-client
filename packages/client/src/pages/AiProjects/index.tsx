@@ -70,6 +70,7 @@ import {
   InfoPanelHeaderContent as InfoPanelHeaderContentConnected,
 } from "SRC_DIR/pages/Home/InfoPanel";
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
+import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
 import type DialogsStore from "SRC_DIR/store/DialogsStore";
 import { useHideQuickActions } from "SRC_DIR/pages/Home/Hooks/useHideQuickActions";
 import { usePanelExclusivity } from "SRC_DIR/pages/Home/View/usePanelExclusivity";
@@ -98,6 +99,13 @@ import styles from "./AiProjects.module.scss";
 // prop, as on the Home page, so none is passed here.
 const InfoPanelHeaderContent = InfoPanelHeaderContentConnected as unknown as React.FC;
 const InfoPanelBodyContent = InfoPanelBodyContentConnected as unknown as React.FC;
+
+// The chat's shape of a project's linked rooms. A room the caller can no
+// longer read is not connected.
+const toChatRooms = (rooms: TAiProject["aiProject"]["knowledgeRooms"]) =>
+  rooms
+    .filter((room) => room.available)
+    .map((room) => ({ cloud: "docspace", id: String(room.id), name: room.title }));
 
 type AiProjectsProps = {
   aiProjectsStore: AiProjectsStore;
@@ -181,16 +189,11 @@ const AiProjects = ({
     (project: TAiProject) => {
       void store.openProject(project).then(() => {
         const { profile, instructionsRooms, knowledgeRooms } = project.aiProject;
-        // A linked room the caller can no longer read is not connected.
-        const toRooms = (rooms: TAiProject["aiProject"]["knowledgeRooms"]) =>
-          rooms
-            .filter((room) => room.available)
-            .map((room) => ({ cloud: "docspace", id: String(room.id), name: room.title }));
         aiChatStore.openProject({
           profileId: profile?.id ?? null,
           profileName: profile?.name ?? null,
-          instructionsRooms: toRooms(instructionsRooms),
-          knowledgeRooms: toRooms(knowledgeRooms),
+          instructionsRooms: toChatRooms(instructionsRooms),
+          knowledgeRooms: toChatRooms(knowledgeRooms),
         });
       });
       if (String(project.id) !== projectId) navigate(`/ai-projects/${project.id}`);
@@ -306,6 +309,61 @@ const AiProjects = ({
     [store, aiChatStore],
   );
 
+  // Leaving a project, however it happens (Back, closing the chat, a deleted
+  // or lost project, leaving the page), takes its settings out of the chat:
+  // the model goes back to the default and its Instructions and Knowledge
+  // rooms are disconnected, so a chat opened elsewhere starts clean. A switch
+  // to another project replaces them on its own (openProject). On unmount the
+  // project may still be open (the cleanup above runs either side of this
+  // one), so the reset is made there too, once.
+  React.useEffect(() => {
+    const reset = () =>
+      aiChatStore.applyPreset({ profileId: null, profileName: null, contextRooms: [], knowledgeRooms: [] });
+    const dispose = reaction(
+      () => store.activeProject?.id ?? null,
+      (id, previous) => {
+        if (id === null && previous !== null) reset();
+      },
+    );
+    return () => {
+      dispose();
+      if (store.activeProject) reset();
+    };
+  }, [aiChatStore, store]);
+
+  // An edit of the open project (here or by someone else) reaches its chat in
+  // place: the model and the connected rooms follow, the thread stays.
+  React.useEffect(
+    () =>
+      reaction(
+        () => {
+          const project = store.activeProject;
+          if (!project) return null;
+          const { profile, instructionsRooms, knowledgeRooms } = project.aiProject;
+          const ids = (rooms: typeof knowledgeRooms) =>
+            rooms
+              .filter((room) => room.available)
+              .map((room) => `${room.id}:${room.title}`)
+              .join(",");
+          return `${project.id}|${profile?.id ?? ""}|${ids(instructionsRooms)}|${ids(knowledgeRooms)}`;
+        },
+        (key, previous) => {
+          const project = store.activeProject;
+          if (!key || !previous || !project) return;
+          // Opening another project applies its settings itself.
+          if (key.split("|")[0] !== previous.split("|")[0]) return;
+          const { profile, instructionsRooms, knowledgeRooms } = project.aiProject;
+          aiChatStore.applyPreset({
+            profileId: profile?.id ?? null,
+            profileName: profile?.name ?? null,
+            contextRooms: toChatRooms(instructionsRooms),
+            knowledgeRooms: toChatRooms(knowledgeRooms),
+          });
+        },
+      ),
+    [aiChatStore, store],
+  );
+
   // Closing the chat leaves the project.
   React.useEffect(
     () =>
@@ -352,7 +410,7 @@ const AiProjects = ({
       await store.removeProject(project);
       toastr.success(t("Common:AIProjectDeleted", { name: project.title }));
     } catch (e) {
-      toastr.error((e as Error).message);
+      toastr.error(errorMessage(e));
     } finally {
       store.closeDelete();
     }
@@ -365,7 +423,7 @@ const AiProjects = ({
       await store.leaveProject(project);
       toastr.success(t("Common:AIProjectLeft", { name: project.title }));
     } catch (e) {
-      toastr.error((e as Error).message);
+      toastr.error(errorMessage(e));
     } finally {
       store.closeLeave();
     }
@@ -459,7 +517,9 @@ const AiProjects = ({
           withoutFooter={isProjectView}
         >
           <Section.SectionHeader>
-            {activeProject ? (
+            {/* The header follows the body: with AI off an open project is
+                not drawn, the page shows the list's AI-off state. */}
+            {isProjectView && activeProject ? (
               <ProjectHeader
                 store={store}
                 project={activeProject}

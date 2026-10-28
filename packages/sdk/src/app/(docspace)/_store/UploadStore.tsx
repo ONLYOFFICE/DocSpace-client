@@ -49,6 +49,8 @@ export type TUploadItem = {
   fileName: string;
   fileSize: number;
   folderId: number | string;
+  /** The room the file uploads into, whatever folder of it is the target. */
+  roomId?: number | string;
   percent: number;
   status: TUploadItemStatus;
   error?: string;
@@ -66,6 +68,7 @@ export type TUploadItemInit = {
   fileName: string;
   fileSize: number;
   folderId: number | string;
+  roomId?: number | string;
 };
 
 class UploadStore {
@@ -95,6 +98,7 @@ class UploadStore {
         fileName: init.fileName,
         fileSize: init.fileSize,
         folderId: init.folderId,
+        roomId: init.roomId,
         percent: 0,
         status: "uploading",
         abortController: fileAbort,

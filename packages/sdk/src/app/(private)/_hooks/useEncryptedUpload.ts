@@ -287,6 +287,7 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
           fileName: file.name,
           fileSize: file.size,
           folderId,
+          roomId,
         })),
       );
       uploadStore.setPanelVisible(true);

@@ -167,6 +167,28 @@ describe("countActiveUploadsForRoom", () => {
     expect(countActiveUploadsForRoom(files, 99)).toBe(1);
   });
 
+  it("Uploads in flight: an upload into the room counts for the room", () => {
+    expect(
+      countActiveUploadsForRoom([queued(42, { encryptionRoomId: 42 })], 42),
+    ).toBe(1);
+  });
+
+  it("Uploads into a subfolder: an upload into a folder inside the room counts for the room", () => {
+    const files = [
+      queued(55, { encryptionRoomId: 42 }),
+      queued(77, { encryptionRoomId: "42" }),
+    ];
+
+    expect(countActiveUploadsForRoom(files, 42)).toBe(2);
+    expect(countActiveUploadsForRoom(files, 55)).toBe(0);
+  });
+
+  it("does not count an upload into a subfolder of another room", () => {
+    expect(
+      countActiveUploadsForRoom([queued(55, { encryptionRoomId: 99 })], 42),
+    ).toBe(0);
+  });
+
   it("matches roomId across number vs string", () => {
     expect(countActiveUploadsForRoom([queued("42")], 42)).toBe(1);
     expect(countActiveUploadsForRoom([queued(42)], "42")).toBe(1);

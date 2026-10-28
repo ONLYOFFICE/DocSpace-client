@@ -129,6 +129,7 @@ export const useActiveEncryptedUploadsForRoom = (
       get files(): ReadonlyArray<UploadQueueItem> {
         return uploadStore.items.map((i) => ({
           toFolderId: i.folderId,
+          encryptionRoomId: i.roomId,
           action:
             i.status === "uploaded"
               ? "uploaded"

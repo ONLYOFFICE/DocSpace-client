@@ -151,6 +151,18 @@ describe("getActiveUploadCountForRoomImpl", () => {
     expect(getActiveUploadCountForRoomImpl(999, deps)).toBe(0);
   });
 
+  it("Uploads into a subfolder: an upload into a folder inside the room counts for the room it was queued in", () => {
+    const deps = {
+      files: [
+        makeUploadFile({ toFolderId: 55, encryptionRoomId: 42, action: "upload" }),
+        makeUploadFile({ toFolderId: 77, encryptionRoomId: 43, action: "upload" }),
+      ],
+    };
+
+    expect(getActiveUploadCountForRoomImpl(42, deps)).toBe(1);
+    expect(getActiveUploadCountForRoomImpl(55, deps)).toBe(0);
+  });
+
   it("matches room ids across string/number forms and returns 0 for null", () => {
     const deps = {
       files: [

@@ -29,6 +29,7 @@ Out of scope: opening encrypted files in the editor from the SDK (editor contrac
 
 - `private-rooms/sdk-surface`: "No feature-flag gating in the SDK" → "SDK private surface honours the opt-in"; "Create menu inside a private room" (documents offered); "Folder operations use the server path" (cross-room moves re-encrypt or are withheld); "Copy and move destination resolved fail-closed" (copy offered for encrypted files, move into another private room refused); "Only the Common namespace is bundled" → "Translations needed by the private surface are bundled"; "Forgot passphrase and device setup link out to the client" (links work while gated); "Shell side effects" (hint waits for keys to load); new "Archive page follows private-room rules".
 - `private-rooms/feature-gating`: "SDK private routes are not gated by the flag" → "SDK private routes honour the host opt-in"; new "Client in an embedded frame takes the host opt-in".
+- `private-rooms/sidebar-section`: "Section availability" names the frame opt-in of task 1.4 next to the browser-local flag.
 
 ## Impact
 

@@ -37,4 +37,4 @@
 
 - Archive the change after review; archiving applies the RENAMED operations to `sdk-surface` and `feature-gating`.
 - `private-rooms-release-gate` removes the opt-in introduced here together with the client flag.
-- Once `private-rooms-sidebar-section` is archived, add a MODIFIED "Section availability" of `private-rooms/sidebar-section` to this change, so the main spec names the frame opt-in of task 1.4 next to the browser-local flag.
+- `private-rooms-sidebar-section` was archived on 2026-10-22; the MODIFIED "Section availability" of `private-rooms/sidebar-section` was added on 2026-10-28, so the main spec names the frame opt-in of task 1.4 next to the browser-local flag.

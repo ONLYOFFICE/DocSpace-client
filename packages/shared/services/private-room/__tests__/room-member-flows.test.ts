@@ -275,7 +275,7 @@ describe("rewrapForInvitedMembers", () => {
     pendingAccessStore.clear(ROOM_ID, "u-bob");
   });
 
-  it("marks every invitee pending when the re-wrap fails as a whole", async () => {
+  it("Re-encryption fails as a whole: every invitee is marked pending and recorded as missing all files", async () => {
     vi.mocked(addMembersToEncryptedRoom).mockRejectedValue(new Error("down"));
     const consoleError = vi
       .spyOn(console, "error")
@@ -300,6 +300,12 @@ describe("rewrapForInvitedMembers", () => {
       skipped: [],
       failed: true,
     });
+    expect(pendingAccessStore.get(ROOM_ID, "u-ann")).toEqual({
+      roomId: ROOM_ID,
+      userId: "u-ann",
+      missingFileIds: "all",
+    });
+    pendingAccessStore.clear(ROOM_ID, "u-ann");
     consoleError.mockRestore();
   });
 

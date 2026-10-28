@@ -62,6 +62,18 @@ describe("pendingAccessStore", () => {
     expect(pendingAccessStore.get(ROOM_ID, "u-ann")).toBeUndefined();
   });
 
+  it("records a member missing every file of the room", () => {
+    pendingAccessStore.record({
+      roomId: ROOM_ID,
+      userId: "u-bob",
+      missingFileIds: "all",
+    });
+
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")?.missingFileIds).toBe(
+      "all",
+    );
+  });
+
   it("replaces the record with the files still missing", () => {
     pendingAccessStore.record({
       roomId: ROOM_ID,
@@ -80,7 +92,7 @@ describe("pendingAccessStore", () => {
   });
 
   it("clears the record on success, and observers see both changes", () => {
-    const seen: (number[] | undefined)[] = [];
+    const seen: (number[] | "all" | undefined)[] = [];
     const dispose = autorun(() => {
       seen.push(pendingAccessStore.get(ROOM_ID, "u-bob")?.missingFileIds);
     });

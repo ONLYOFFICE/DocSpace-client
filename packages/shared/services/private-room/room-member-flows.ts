@@ -276,6 +276,13 @@ export async function rewrapForInvitedMembers({
       // biome-ignore lint/suspicious/noConsole: the invite stands; the failed re-wrap is logged for triage.
       console.error("Failed to re-encrypt file keys for new members:", error);
       onProgress({ percent: 100, completed: true, alert: true });
+      for (const member of newMembers) {
+        pendingAccessStore.record({
+          roomId,
+          userId: member.id,
+          missingFileIds: "all",
+        });
+      }
       onOutcome?.({
         granted: [],
         pending: newMembers.map((member) => ({ member, missingFileIds: [] })),

@@ -39,7 +39,8 @@ import { makeAutoObservable } from "mobx";
 export type TPendingAccess = {
   roomId: number;
   userId: string;
-  missingFileIds: number[];
+  /** `"all"` when the re-wrap failed before telling which files it missed. */
+  missingFileIds: number[] | "all";
 };
 
 const keyOf = (roomId: number, userId: string) => `${roomId}:${userId}`;

@@ -37,7 +37,10 @@ import { describe, expect, it } from "vitest";
 
 import { AVAILABLE_CONTEXT_ITEMS as C } from "@/app/(docspace)/_enums/context-items";
 
-import { getPrivateFileContextOptions } from "./private-context-options";
+import {
+  getPrivateFileContextOptions,
+  PRIVATE_FOLDER_CONTEXT_OPTIONS,
+} from "./private-context-options";
 
 describe("getPrivateFileContextOptions", () => {
   it("Encrypted file that must be converted: no open or preview entry", () => {
@@ -69,5 +72,13 @@ describe("getPrivateFileContextOptions", () => {
     expect(options.has(C.preview)).toBe(false);
     expect(options.has(C.download)).toBe(false);
     expect(options.has(C.downloadEncrypted)).toBe(true);
+  });
+});
+
+describe("PRIVATE_FOLDER_CONTEXT_OPTIONS", () => {
+  it("Folder copied within a private room: no copy entry is offered, the server move is", () => {
+    expect(PRIVATE_FOLDER_CONTEXT_OPTIONS.has(C.copy)).toBe(false);
+    expect(PRIVATE_FOLDER_CONTEXT_OPTIONS.has(C.duplicate)).toBe(false);
+    expect(PRIVATE_FOLDER_CONTEXT_OPTIONS.has(C.moveTo)).toBe(true);
   });
 });

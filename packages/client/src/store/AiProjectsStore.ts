@@ -42,7 +42,6 @@ import SocketHelper, {
   type TOptSocket,
 } from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
-  AiProjectAccess,
   changeAiProjectOwner,
   createAiProject,
   deleteAiProject,
@@ -58,7 +57,6 @@ import {
 } from "@docspace/shared/api/ai/projects";
 import type {
   TAiProject,
-  TAiProjectAccess,
   TAiProjectKnowledgeRoom,
   TAiProjectRequest,
   TAiProjectSkillsRoom,
@@ -72,6 +70,9 @@ import type AiPresetsStore from "./AiPresetsStore";
 
 export type TAiProjectsViewAs = "table" | "row" | "tile";
 export type TAiProjectsSortBy = NonNullable<TAiProjectsQuery["sortBy"]>;
+
+/** A user or room a list filter is set to: its id, and the name its chip shows. */
+export type TAiProjectsFilterEntity = { id: string; label: string };
 
 export type TProjectDialogState =
   | { mode: "create" }
@@ -88,10 +89,16 @@ const readViewAs = (): TAiProjectsViewAs => {
   }
 };
 
-const errorMessage = (e: unknown): string => {
+/** The server's text of a failed request (Node `{error}` or C# `{error: {message}}`), else the error's own. */
+export const errorMessage = (e: unknown): string => {
   if (typeof e === "object" && e !== null) {
-    const err = e as { message?: string; response?: { data?: { error?: string } } };
-    return err.response?.data?.error ?? err.message ?? String(e);
+    const err = e as {
+      message?: string;
+      response?: { data?: { error?: string | { message?: string } } };
+    };
+    const error = err.response?.data?.error;
+    const serverText = typeof error === "string" ? error : error?.message;
+    return serverText || err.message || String(e);
   }
   return String(e);
 };
@@ -152,12 +159,15 @@ class AiProjectsStore {
 
   filterValue = "";
 
-  /** The role filter: `None` means any role. */
-  roleFilter: TAiProjectAccess = AiProjectAccess.None;
 
-  hasInstructionsFilter = false;
+  /** The owner filter, with the name its chip shows; `null`: any owner. */
+  ownerFilter: TAiProjectsFilterEntity | null = null;
 
-  hasKnowledgeFilter = false;
+  /** One linked Instructions room to filter by, with the title its chip shows; `null`: any. */
+  instructionsRoomFilter: TAiProjectsFilterEntity | null = null;
+
+  /** One linked Knowledge room to filter by, with the title its chip shows; `null`: any. */
+  knowledgeRoomFilter: TAiProjectsFilterEntity | null = null;
 
   sortBy: TAiProjectsSortBy = "DateAndTime";
 
@@ -214,12 +224,12 @@ class AiProjectsStore {
     return this.filterValue.trim().length > 0 || this.hasFilterOptions;
   }
 
-  /** Whether a filter option (role, rooms) is applied, apart from the search. */
+  /** Whether a filter option (owner, rooms) is applied, apart from the search. */
   get hasFilterOptions() {
     return (
-      this.roleFilter !== AiProjectAccess.None ||
-      this.hasInstructionsFilter ||
-      this.hasKnowledgeFilter
+      this.ownerFilter !== null ||
+      this.instructionsRoomFilter !== null ||
+      this.knowledgeRoomFilter !== null
     );
   }
 
@@ -228,9 +238,9 @@ class AiProjectsStore {
   /** The list query of the current search, filters and sort. */
   private listQuery = () => ({
     filterValue: this.filterValue.trim() || undefined,
-    role: this.roleFilter !== AiProjectAccess.None ? this.roleFilter : undefined,
-    hasInstructions: this.hasInstructionsFilter || undefined,
-    hasKnowledge: this.hasKnowledgeFilter || undefined,
+    subjectId: this.ownerFilter?.id,
+    instructionsRoomId: this.instructionsRoomFilter ? Number(this.instructionsRoomFilter.id) : undefined,
+    knowledgeRoomId: this.knowledgeRoomFilter ? Number(this.knowledgeRoomFilter.id) : undefined,
     sortBy: this.sortBy,
     sortOrder: this.sortOrder,
   });
@@ -300,21 +310,21 @@ class AiProjectsStore {
   };
 
   setFilterOptions = (options: {
-    role?: TAiProjectAccess;
-    hasInstructions?: boolean;
-    hasKnowledge?: boolean;
+    owner?: TAiProjectsFilterEntity | null;
+    instructionsRoom?: TAiProjectsFilterEntity | null;
+    knowledgeRoom?: TAiProjectsFilterEntity | null;
   }) => {
-    this.roleFilter = options.role ?? AiProjectAccess.None;
-    this.hasInstructionsFilter = !!options.hasInstructions;
-    this.hasKnowledgeFilter = !!options.hasKnowledge;
+    this.ownerFilter = options.owner ?? null;
+    this.instructionsRoomFilter = options.instructionsRoom ?? null;
+    this.knowledgeRoomFilter = options.knowledgeRoom ?? null;
     void this.fetchProjects();
   };
 
   clearFilter = () => {
     this.filterValue = "";
-    this.roleFilter = AiProjectAccess.None;
-    this.hasInstructionsFilter = false;
-    this.hasKnowledgeFilter = false;
+    this.ownerFilter = null;
+    this.instructionsRoomFilter = null;
+    this.knowledgeRoomFilter = null;
     void this.fetchProjects();
   };
 
@@ -343,6 +353,10 @@ class AiProjectsStore {
       this.total = Math.max(0, this.total - 1);
     }
     if (this.activeProject?.id === id) this.closeProject();
+    // Handed over and left from its own Edit dialog: nothing is left to save.
+    if (this.projectDialog?.mode === "edit" && this.projectDialog.project.id === id) {
+      this.projectDialog = null;
+    }
   };
 
   /* ---------------------------- Live updates ---------------------------- */

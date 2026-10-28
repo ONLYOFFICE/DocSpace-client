@@ -231,6 +231,12 @@ export type TAiProjectsQuery = {
   role?: TAiProjectAccess;
   hasInstructions?: boolean;
   hasKnowledge?: boolean;
+  /** Keeps the projects this user owns. */
+  subjectId?: string;
+  /** Keeps the projects that link this room as an Instructions room. */
+  instructionsRoomId?: number;
+  /** Keeps the projects that link this room as a Knowledge room. */
+  knowledgeRoomId?: number;
   startIndex?: number;
   count?: number;
 };

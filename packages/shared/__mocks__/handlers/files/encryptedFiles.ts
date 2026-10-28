@@ -443,7 +443,8 @@ export const encryptedFilesHandlers = (
   opts: EncryptedFilesHandlerOptions,
 ) => {
   const roomId = opts.roomId;
-  const archived = !!opts.archived;
+  // Restoring the room from Archive (PUT fileops/move) moves it to Rooms.
+  let archived = !!opts.archived;
   const isPrivate = opts.isPrivate ?? true;
   const roomTitle = opts.title ?? "Private Room";
   const folders = opts.folders ?? [];
@@ -572,6 +573,7 @@ export const encryptedFilesHandlers = (
       operations.length = 0;
       currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
       freeSpace = null;
+      archived = !!opts.archived;
     },
   };
   if (opts.handle) opts.handle.current = handle;
@@ -1141,6 +1143,13 @@ export const encryptedFilesHandlers = (
      * = 2) listing the moved files. Within one private room the server's
      * CompliesPrivateRoomRulesAsync lets a move pass; the mock moves files
      * between the room and its folders and does not model folder moves.
+     *
+     * The archived room itself moved to the Rooms section is restored: the
+     * room branch of FileMoveCopyOperation.MoveOrCopyFoldersAsync checks
+     * CanMoveAsync on the room, which the Archive branch of
+     * FileSecurity.FilterEntryAsync grants the room's full-access users, and
+     * moves it (MessageAction.RoomUnarchived). The finished operation lists
+     * the room in `folders`; the server lists the Rooms section there too.
      */
     http.put(`${apiBase}/files/fileops/move`, async ({ request }) => {
       const body = (await request.clone().json()) as {
@@ -1150,6 +1159,34 @@ export const encryptedFilesHandlers = (
       };
       const destFolderId = Number(body.destFolderId);
       const fileIds = (body.fileIds ?? []).map(Number);
+      const folderIds = (body.folderIds ?? []).map(Number);
+      if (
+        archived &&
+        destFolderId === ROOMS_SECTION_ID &&
+        folderIds.length === 1 &&
+        folderIds[0] === roomId &&
+        fileIds.length === 0
+      ) {
+        requests.push({
+          method: "PUT",
+          url: new URL(request.url).pathname,
+          body,
+        });
+        archived = false;
+        const operation = {
+          id: `mock-move-${requests.length}`,
+          Operation: 0,
+          progress: 100,
+          error: "",
+          processed: "1",
+          finished: true,
+          status: 2,
+          files: [],
+          folders: [roomDto()],
+        };
+        operations.push(operation);
+        return okResponse([operation]);
+      }
       if (!holdsFolder(destFolderId) || fileIds.some((id) => !files.has(id))) {
         return withOtherRooms
           ? undefined

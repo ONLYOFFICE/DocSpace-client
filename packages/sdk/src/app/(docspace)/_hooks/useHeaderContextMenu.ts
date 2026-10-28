@@ -88,6 +88,7 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     changeOwner,
     archiveRoom,
     deleteRoom,
+    restoreRoom,
     infoRoom,
     roomChanged,
   } = useRoomActions();
@@ -102,7 +103,7 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     roomChanged,
     changeOwner,
     filesListStore.rootFolderType === FolderType.Archive,
-    undefined,    // onRestoreRoom
+    restoreRoom,
     deleteRoom,
     undefined,    // onDeleteSelected
     undefined,    // onRestoreSelected

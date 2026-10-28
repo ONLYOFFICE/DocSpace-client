@@ -544,6 +544,81 @@ describe("encryptedFiles mock — an archived room and its folders (mirrors Fold
   });
 });
 
+describe("encryptedFiles mock — restoring an archived room (mirrors OperationController.MoveBatchItems)", () => {
+  const RESTORED_ROOM_ID = 9400;
+  /** The Rooms section folder of the room mocks. */
+  const ROOMS_SECTION_ID = 2002;
+  const restoredHandle: { current: EncryptedFilesHandlerHandle | null } = {
+    current: null,
+  };
+  const restoreRoom = () =>
+    fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/fileops/move`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        destFolderId: ROOMS_SECTION_ID,
+        folderIds: [RESTORED_ROOM_ID],
+        fileIds: [],
+        conflictResolveType: 0,
+        deleteAfter: false,
+        returnSingleOperation: true,
+      }),
+    });
+  const getRoom = async () =>
+    (
+      (await (
+        await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/${RESTORED_ROOM_ID}`)
+      ).json()) as { response: { current: Record<string, unknown> } }
+    ).response.current;
+
+  beforeEach(() => {
+    server.use(
+      ...encryptedFilesHandlers(PORT, {
+        roomId: RESTORED_ROOM_ID,
+        ownerId: ALICE_ID,
+        currentUserId: ALICE_ID,
+        archived: true,
+        handle: restoredHandle,
+      }),
+    );
+  });
+
+  afterEach(() => server.resetHandlers());
+
+  it("moves the room to the Rooms section and answers a finished move operation listing it", async () => {
+    expect(await getRoom()).toMatchObject({ rootFolderType: 20 });
+
+    const res = await restoreRoom();
+    const body = (await res.json()) as {
+      response: Array<{ folders: Record<string, unknown>[] }>;
+    };
+
+    expect(body.response).toHaveLength(1);
+    expect(body.response[0]).toMatchObject({
+      Operation: 0,
+      finished: true,
+      error: "",
+      status: 2,
+    });
+    expect(body.response[0].folders).toMatchObject([
+      { id: RESTORED_ROOM_ID, rootFolderType: 14, parentId: ROOMS_SECTION_ID },
+    ]);
+    expect(await getRoom()).toMatchObject({
+      rootFolderType: 14,
+      parentRoomType: 19,
+    });
+  });
+
+  it("puts a restored room back in Archive on reset", async () => {
+    await restoreRoom();
+    expect(await getRoom()).toMatchObject({ rootFolderType: 14 });
+
+    restoredHandle.current!.reset();
+
+    expect(await getRoom()).toMatchObject({ rootFolderType: 20 });
+  });
+});
+
 describe("encryptedFiles mock — upload sessions (mirrors UploadController)", () => {
   const ROOMS_SECTION_ID = 2002;
   const SESSION_URL = (folderId: number) =>

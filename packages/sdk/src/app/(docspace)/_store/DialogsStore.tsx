@@ -56,10 +56,11 @@ export type TEditableRoom = {
   private?: boolean;
 };
 
-/** Minimal room data needed for archive/delete confirmation dialogs. */
+/** Minimal room data needed for archive/delete/restore confirmation dialogs. */
 export type TRoomTarget = {
   id: number;
   title: string;
+  roomType?: RoomsType;
 };
 
 /** Room data the invite panel needs to open for a single room. */
@@ -85,6 +86,7 @@ class DialogsStore {
   editingRoomData: TEditableRoom | null = null;
   archivingRoomData: TRoomTarget | null = null;
   deletingRoomData: TRoomTarget | null = null;
+  restoringRoomData: TRoomTarget | null = null;
   invitingRoomData: TInviteTarget | null = null;
   changingOwnerRoomData: TChangeOwnerTarget | null = null;
 
@@ -132,6 +134,16 @@ class DialogsStore {
   closeDeleteRoomDialog = () => {
     this.closeDialog(SDKDialogs.DeleteRoom);
     this.deletingRoomData = null;
+  };
+
+  openRestoreRoomDialog = (room: TRoomTarget) => {
+    this.restoringRoomData = room;
+    this.openDialog(SDKDialogs.RestoreRoom);
+  };
+
+  closeRestoreRoomDialog = () => {
+    this.closeDialog(SDKDialogs.RestoreRoom);
+    this.restoringRoomData = null;
   };
 
   openInviteDialog = (room: TInviteTarget) => {

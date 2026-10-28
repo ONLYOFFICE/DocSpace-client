@@ -139,6 +139,7 @@ const InfoPanelBody = observer(
         changeOwner: roomActions.changeOwner,
         archiveRoom: roomActions.archiveRoom,
         deleteRoom: roomActions.deleteRoom,
+        restoreRoom: roomActions.restoreRoom,
         infoRoom: roomActions.infoRoom,
         roomChanged: roomActions.roomChanged,
       }),

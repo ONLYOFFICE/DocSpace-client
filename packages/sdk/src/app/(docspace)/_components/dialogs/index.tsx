@@ -50,6 +50,7 @@ import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import MoveToArchiveDialog from "@/app/(rooms)/_components/move-to-archive-dialog";
 import DeleteRoomDialog from "@/app/(rooms)/_components/delete-room-dialog";
+import RestoreRoomDialog from "@/app/(rooms)/_components/restore-room-dialog";
 
 import DownloadDialog from "./components/download-dialog";
 
@@ -106,6 +107,34 @@ export const Dialogs = () => {
     }
   }, [dialogsStore, activeItemsStore, navigateToParent]);
 
+  const onRestoreConfirm = React.useCallback(async () => {
+    const room = dialogsStore.restoringRoomData;
+    if (!room) return;
+    activeItemsStore.addActiveItems([], [room.id]);
+    try {
+      const tree = await api.files.getFoldersTree();
+      const roomsFolderId = (
+        tree as unknown as { rootFolderType: number; id: number }[]
+      ).find((f) => f.rootFolderType === FolderType.Rooms)?.id;
+      if (roomsFolderId == null) throw new Error("Rooms folder not found");
+      await api.files.moveToFolder(
+        roomsFolderId,
+        [room.id],
+        [],
+        0,
+        false,
+        false,
+        true,
+      );
+      toastr.success(t("Common:UnarchivedRoomAction", { name: room.title }));
+      navigateToParent();
+    } catch (e) {
+      toastr.error(e as Error);
+    } finally {
+      activeItemsStore.removeActiveItems([], [room.id]);
+    }
+  }, [dialogsStore, activeItemsStore, navigateToParent, t]);
+
   return (
     <>
       {dialogsStore.isDialogOpen(SDKDialogs.DownloadDialog) && (
@@ -124,6 +153,14 @@ export const Dialogs = () => {
           onClose={dialogsStore.closeDeleteRoomDialog}
           roomName={dialogsStore.deletingRoomData.title}
           onConfirm={onDeleteConfirm}
+        />
+      )}
+      {dialogsStore.restoringRoomData && (
+        <RestoreRoomDialog
+          visible={dialogsStore.isDialogOpen(SDKDialogs.RestoreRoom)}
+          onClose={dialogsStore.closeRestoreRoomDialog}
+          roomType={dialogsStore.restoringRoomData.roomType}
+          onConfirm={onRestoreConfirm}
         />
       )}
     </>

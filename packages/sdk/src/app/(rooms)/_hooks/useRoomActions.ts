@@ -102,7 +102,8 @@ export const getEditableRoom = (item: RoomItem): TEditableRoom => {
 };
 
 /**
- * Single-room action handlers (edit/invite/change-owner/archive/delete/info),
+ * Single-room action handlers (edit/invite/change-owner/archive/delete/
+ * restore/info),
  * all routed through `dialogsStore`/`infoPanelStore`. The matching dialogs are
  * mounted once at the layout level, so these handlers work from any consumer
  * (header `⋮`, info-panel `⋮`) without lifting dialog state up.
@@ -177,6 +178,17 @@ export default function useRoomActions() {
     [dialogsStore],
   );
 
+  const restoreRoom = useCallback(
+    (item: RoomItem) => {
+      dialogsStore.openRestoreRoomDialog({
+        id: item.id as number,
+        title: item.title,
+        roomType: (item as unknown as { roomType?: RoomsType }).roomType,
+      });
+    },
+    [dialogsStore],
+  );
+
   const infoRoom = useCallback(
     (item: RoomItem) => {
       infoPanelStore.open(item as unknown as TFolder);
@@ -214,6 +226,7 @@ export default function useRoomActions() {
     changeOwner,
     archiveRoom,
     deleteRoom,
+    restoreRoom,
     infoRoom,
     roomChanged,
   };

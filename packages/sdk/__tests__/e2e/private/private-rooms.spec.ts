@@ -92,6 +92,8 @@ const SECOND_ROOM_ID = 7002;
 const SECOND_ROOM_TITLE = "Second Private Room";
 const SECOND_ROOM_FOLDER = { id: 7020, title: "Drafts" };
 const ROOM_FOLDER = { id: 7010, title: "Reports" };
+/** The Rooms section folder of the root mock. */
+const ROOMS_SECTION_ID = 2002;
 const SHARED_ROOM_ID = 7003;
 const SHARED_ROOM_TITLE = "Shared Room";
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";
@@ -1298,6 +1300,32 @@ test.describe("(private) — archive", () => {
 
     expect(await chooser).toBeNull();
     expect(uploadRequests).toEqual([]);
+  });
+
+  test("Restore from the header of an archived room", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    const { room } = await serveRooms(mockBoth, port, { archived: true });
+    await openRoom(page, baseUrl);
+    await expect(row(page, MEMO.serverTitle)).toBeVisible();
+
+    await page.locator("#header_optional-button").click();
+    await page.locator("#option_unarchive-room").click();
+    await page.getByTestId("restore_room_dialog_submit").click();
+
+    await expect(
+      page.getByText(`The room '${ROOM_TITLE}' is unarchived.`),
+    ).toBeVisible();
+    expect(
+      room
+        .getRequests()
+        .filter((request) => request.method === "PUT")
+        .map((request) => request.body),
+    ).toMatchObject([{ destFolderId: ROOMS_SECTION_ID, folderIds: [ROOM_ID] }]);
+    await expect(page).toHaveURL(/\/sdk\/private(\?|$)/);
   });
 
   // §17.2 #17

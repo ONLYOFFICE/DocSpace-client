@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Элементы, у которых уже есть значения «{{template}}», останутся без изменений",
   "SuggestMetadata": "Предложить метаданные",
   "TemplateDeleted": "Шаблон удален",
+  "TemplateFieldsRequired": "Добавьте хотя бы одно поле, чтобы сохранить шаблон",
   "TemplateValue": "Шаблон: {{template}}",
   "Visibility": "Видимость",
   "Visible": "Видимый",

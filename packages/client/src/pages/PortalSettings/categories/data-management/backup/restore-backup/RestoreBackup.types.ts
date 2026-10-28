@@ -38,6 +38,7 @@ import type { RestoreBackupProps } from "@docspace/shared/pages/backup/restore-b
 export interface InjectedRestoreBackupWrapperProps
   extends Omit<RestoreBackupProps, "navigate"> {
   resetDownloadingProgress: VoidFunction;
+  ensureAppsLoaded: VoidFunction;
 }
 
 export type RestoreBackupWrapperProps = InjectedRestoreBackupWrapperProps;

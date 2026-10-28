@@ -3,7 +3,7 @@
   "content": "Fill metadata with AI",
   "content_en_sha1_hash": "0640633ec8ab22af1741dfba7b97434b9f0b1058",
   "created_at": "2026-10-21T10:17:42.475Z",
-  "updated_at": "2026-10-22T13:13:49.653Z",
+  "updated_at": "2026-10-27T11:03:20.719Z",
   "comment": {
     "text": "Context menu item for a file, folder or room, also title of the side panel it opens: AI reads the item's content and fills the empty fields of its metadata templates.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
-      "line_number": 126,
+      "line_number": 156,
       "context": "const getTitle = () => {\n if (isFill) {\n if (isAnalyzing) return t(\"Metadata:AIFillingTitle\");\n if (isReview) return t(\"Metadata:AIReviewAutofill\");\n \n return t(\"Files:FillMetadataWithAI\");\n }\n \n return isReview\n ? t(\"Metadata:AIReviewSuggestions\")\n : t(\"Files:SuggestMetadataWithAI\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
-      "line_number": 126,
+      "line_number": 156,
       "context": "const getTitle = () => {\n if (isFill) {\n if (isAnalyzing) return t(\"Metadata:AIFillingTitle\");\n if (isReview) return t(\"Metadata:AIReviewAutofill\");\n \n return t(\"Files:FillMetadataWithAI\");\n }\n \n return isReview\n ? t(\"Metadata:AIReviewSuggestions\")\n : t(\"Files:SuggestMetadataWithAI\");",
       "module": "/packages/client"
     },

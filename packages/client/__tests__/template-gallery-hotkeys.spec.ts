@@ -42,6 +42,7 @@ import {
   myHandler,
   oformsFormGallerySettings,
   oformsHandlers,
+  roomTagsHandler,
   rootHandler,
   selfActivationStatusHandler,
   settingsHandler,
@@ -165,6 +166,7 @@ test.describe("Hotkeys in the Forms template gallery", () => {
       ),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       formsRootHandler(),
+      roomTagsHandler(TEST_PORT),
       ...oformsHandlers(TEST_PORT),
     );
 

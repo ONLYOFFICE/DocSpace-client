@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Gli elementi che hanno già valori di {{template}} restano invariati",
   "SuggestMetadata": "Suggerisci metadati",
   "TemplateDeleted": "Modello eliminato",
+  "TemplateFieldsRequired": "Aggiungi almeno un campo per salvare il modello",
   "TemplateValue": "Modello: {{template}}",
   "Visibility": "Visibilità",
   "Visible": "Visibile",

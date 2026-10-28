@@ -38,6 +38,7 @@ import api from "@docspace/shared/api";
 import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
+import { syncSelectedFolderCountsImpl } from "../socket.helpers";
 import type { TItem } from "../types";
 
 let navigate: ReturnType<typeof vi.fn>;
@@ -234,5 +235,84 @@ describe("FilesStore.wsModifyFolderCreate — deferred queue add", () => {
     await vi.advanceTimersByTimeAsync(500);
 
     expect(getFileInfo).toHaveBeenCalledWith(7, undefined);
+  });
+});
+
+// The harness wraps its fakes in MobX, so spies are kept by reference here.
+const createCountingStore = () => {
+  const counts = { setFilesCount: vi.fn(), setFoldersCount: vi.fn() };
+  const store = createTestFilesStore({
+    selectedFolderStore: { id: 1, filesCount: 0, foldersCount: 0, ...counts },
+  });
+  return { store, ...counts };
+};
+
+describe("FilesStore.wsModifyFolderCreate — folders count", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it("counts a folder created in the current folder", async () => {
+    const { store, setFoldersCount } = createCountingStore();
+    store.folders = [{ id: 60 } as TItem] as never;
+
+    await store.wsModifyFolderCreate({
+      type: "folder",
+      id: 60,
+      data: JSON.stringify({ id: 60, parentId: 1 }),
+    } as never);
+
+    expect(setFoldersCount).toHaveBeenCalledWith(1);
+  });
+
+  // The parent folders are subscribed too, so their events reach the store.
+  it("does not count a folder created in a parent folder", async () => {
+    const { store, setFoldersCount } = createCountingStore();
+
+    await store.wsModifyFolderCreate({
+      type: "folder",
+      id: 60,
+      data: JSON.stringify({ id: 60, parentId: 50 }),
+    } as never);
+
+    expect(setFoldersCount).not.toHaveBeenCalled();
+  });
+});
+
+describe("syncSelectedFolderCounts", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it("takes the current folder's counts from the server", async () => {
+    const { store, setFilesCount, setFoldersCount } = createCountingStore();
+    vi.spyOn(api.files, "getFolderInfo").mockResolvedValue({
+      id: 1,
+      filesCount: 6,
+      foldersCount: 2,
+    } as never);
+
+    await syncSelectedFolderCountsImpl(store);
+
+    expect(api.files.getFolderInfo).toHaveBeenCalledWith(1, true);
+    expect(setFilesCount).toHaveBeenCalledWith(6);
+    expect(setFoldersCount).toHaveBeenCalledWith(2);
+  });
+
+  it("drops the answer when the user has left the folder meanwhile", async () => {
+    const { store, setFilesCount } = createCountingStore();
+    vi.spyOn(api.files, "getFolderInfo").mockImplementation(async () => {
+      store.selectedFolderStore.id = 2;
+      return { id: 1, filesCount: 6, foldersCount: 2 } as never;
+    });
+
+    await syncSelectedFolderCountsImpl(store);
+
+    expect(setFilesCount).not.toHaveBeenCalled();
+  });
+
+  it("keeps the local counts when the request fails", async () => {
+    const { store, setFilesCount } = createCountingStore();
+    vi.spyOn(api.files, "getFolderInfo").mockRejectedValue(new Error("403"));
+
+    await syncSelectedFolderCountsImpl(store);
+
+    expect(setFilesCount).not.toHaveBeenCalled();
   });
 });

@@ -299,6 +299,7 @@ const Panels = (props) => {
         isRestoreAll={restoreAllPanelVisible}
         withAIAgentsTreeFolder
         disableBySecurity="UseChat"
+        isPortalView
       />
     ),
     connectDialogVisible && <ConnectDialog key="connect-dialog" />,
@@ -326,6 +327,7 @@ const Panels = (props) => {
         withRecentTreeFolder
         withFavoritesTreeFolder
         withAIAgentsTreeFolder
+        isPortalView
       />
     ),
     selectFileFormRoomDialogVisible && (
@@ -341,6 +343,7 @@ const Panels = (props) => {
         withRecentTreeFolder
         withFavoritesTreeFolder
         withAIAgentsTreeFolder
+        isPortalView
       />
     ),
     selectFileAiKnowledgeDialogVisible && (
@@ -357,6 +360,7 @@ const Panels = (props) => {
         withRecentTreeFolder
         withFavoritesTreeFolder
         withAIAgentsTreeFolder
+        isPortalView
       />
     ),
     hotkeyPanelVisible && <HotkeysPanel key="hotkey-panel" />,

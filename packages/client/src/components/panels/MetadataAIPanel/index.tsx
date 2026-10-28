@@ -51,6 +51,7 @@ import type { TMetadataSelection } from "SRC_DIR/pages/Home/InfoPanel/Body/views
 import { useStore } from "SRC_DIR/store/useStore";
 
 import { useMetadataAIPanel } from "./hooks/useMetadataAIPanel";
+import { useScrollToTop } from "./hooks/useScrollToTop";
 import type { TMetadataAIMode } from "./types";
 import { isSameEntry, METADATA_AI_PROMPT_MAX_LENGTH } from "./utils";
 import AICallout from "./sub-components/AICallout";
@@ -105,6 +106,7 @@ const MetadataAIDialog = ({
   const isFill = mode === "fill";
   const isAnalyzing = phase === "analyzing";
   const isReview = phase === "review" && !!summary;
+  const bodyRef = useScrollToTop(isReview);
   const hasNothingToFill =
     isFill && phase !== "loading" && !forms.length && !drafts.length;
   const hasNoModel = model === null;
@@ -195,7 +197,7 @@ const MetadataAIDialog = ({
         {phase === "loading" ? (
           loader
         ) : (
-          <div className={styles.body} inert={isSaving}>
+          <div ref={bodyRef} className={styles.body} inert={isSaving}>
             <div className={styles.top}>
               {isReview ? (
                 <ReviewNotes mode={mode} summary={summary} />

@@ -76,9 +76,14 @@ export interface SkippedRoomMember {
   reason: SkippedMemberReason;
 }
 
-export interface AddMembersResult {
+export interface RoomRewrapResult {
   fileResults: FileEncryptionOpResult[];
   skippedMembers: SkippedRoomMember[];
+}
+
+export interface AddMembersResult extends RoomRewrapResult {
+  /** The files each invitee with a verified key got no wrap for. */
+  missingFileIdsByMember: Record<string, number[]>;
 }
 
 export interface RoomEncryptionOptions {
@@ -123,10 +128,14 @@ export async function addMembersToEncryptedRoom(
   const { currentUserId, identity, onProgress, onKeyChange } = options;
 
   const validMembers = newMembers.filter((m) => m.id);
-  if (validMembers.length === 0) return { fileResults, skippedMembers: [] };
+  if (validMembers.length === 0) {
+    return { fileResults, skippedMembers: [], missingFileIdsByMember: {} };
+  }
 
   const encryptedFiles = await getEncryptedFilesInRoom(roomId);
-  if (encryptedFiles.length === 0) return { fileResults, skippedMembers: [] };
+  if (encryptedFiles.length === 0) {
+    return { fileResults, skippedMembers: [], missingFileIdsByMember: {} };
+  }
 
   const { keyByUserId, list: roomMemberKeys } =
     await loadRoomMemberKeys(roomId);
@@ -269,7 +278,21 @@ export async function addMembersToEncryptedRoom(
     }
   }
 
-  return { fileResults, skippedMembers };
+  // A file's entries are written in one request, so a failed file left
+  // every verified invitee without a wrap for it.
+  const failedFileIds = fileResults
+    .filter((result) => !result.success)
+    .map((result) => result.fileId);
+  const missingFileIdsByMember: Record<string, number[]> = {};
+  if (failedFileIds.length > 0) {
+    for (const m of validMembers) {
+      if (String(m.id) === String(currentUserId)) continue;
+      if (skippedReasons.has(m.id)) continue;
+      missingFileIdsByMember[m.id] = [...failedFileIds];
+    }
+  }
+
+  return { fileResults, skippedMembers, missingFileIdsByMember };
 }
 
 /**
@@ -287,7 +310,7 @@ export async function addMembersToEncryptedRoom(
 export async function backfillEncryptedFilesForRoomMembers(
   roomId: number,
   options: RoomEncryptionOptions,
-): Promise<AddMembersResult> {
+): Promise<RoomRewrapResult> {
   const fileResults: FileEncryptionOpResult[] = [];
   const { currentUserId, identity, onProgress, onKeyChange } = options;
 

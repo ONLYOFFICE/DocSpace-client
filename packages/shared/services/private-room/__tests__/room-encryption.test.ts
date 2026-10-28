@@ -324,6 +324,7 @@ describe("addMembersToEncryptedRoom", () => {
     expect(result.fileResults).toEqual([
       { fileId: FILE_ID, success: true },
     ]);
+    expect(result.missingFileIdsByMember).toEqual({});
     expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
     const [, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
     expect(keysPosted).toHaveLength(2);
@@ -583,6 +584,51 @@ describe("addMembersToEncryptedRoom", () => {
     expect(result.fileResults[0]?.error?.toLowerCase()).toMatch(
       /request failed|forbidden|403|failed/,
     );
+  });
+
+  it("Some files fail: each invitee with a verified key lists the files left without a wrap, a skipped invitee none", async () => {
+    const SECOND_FILE_ID = FILE_ID + 1;
+    const secondOwnWrap = await wrapDekForRecipients({
+      dek,
+      senderIdentity: alice,
+      senderUserId: ALICE,
+      recipients: [{ userId: ALICE, publicKey: pubB64(alice) }],
+      fileId: SECOND_FILE_ID,
+    });
+    getFolderMock.mockResolvedValue({
+      files: [...singleFile(FILE_ID), ...singleFile(SECOND_FILE_ID)],
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockImplementation(async (fileId: number) => ({
+      fileKeys: fileId === FILE_ID ? aliceOwnWrap : secondOwnWrap,
+      userKeys: [],
+    }));
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    setFileEncryptionKeysMock.mockImplementation(async (fileId: number) => {
+      if (fileId === SECOND_FILE_ID) throw new Error("Request failed");
+      return {};
+    });
+
+    const result = await addMembersToEncryptedRoom(
+      ROOM_ID,
+      [
+        { id: BOB, displayName: "Bob" },
+        { id: CAROL, displayName: "Carol" },
+      ],
+      { currentUserId: ALICE, identity: alice },
+    );
+
+    expect(result.fileResults.map((r) => [r.fileId, r.success])).toEqual([
+      [FILE_ID, true],
+      [SECOND_FILE_ID, false],
+    ]);
+    expect(result.skippedMembers.map((m) => [m.id, m.reason])).toEqual([
+      [CAROL, "no-key"],
+    ]);
+    expect(result.missingFileIdsByMember).toEqual({ [BOB]: [SECOND_FILE_ID] });
   });
 
   it("sweeps the FIRST page (page=0), not skipping past small rooms (regression)", async () => {

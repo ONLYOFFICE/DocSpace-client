@@ -107,7 +107,11 @@ describe("rewrapForInvitedMembers", () => {
     vi.mocked(addMembersToEncryptedRoom).mockImplementation(
       async (_roomId, _members, options) => {
         options?.onProgress?.(1, 3);
-        return { fileResults: [ok(1), ok(2), ok(3)], skippedMembers: [] };
+        return {
+          fileResults: [ok(1), ok(2), ok(3)],
+          skippedMembers: [],
+          missingFileIdsByMember: {},
+        };
       },
     );
 

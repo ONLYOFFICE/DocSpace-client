@@ -29,11 +29,19 @@ The server SHALL accept a file marked encrypted only when its title is an opaque
 - **THEN** the upload is accepted
 
 ### Requirement: Upload session abort
-The server SHALL abort an open upload session on request, discarding the chunks received so far, and SHALL answer 404 for a session that does not exist, was finalised or expired. The client SHALL call it when an encrypted upload is cancelled.
+The server SHALL abort an open upload session on request, discarding the chunks received so far, and SHALL answer 404 for a session that does not exist, was finalised, aborted or expired. It SHALL refuse with 403 to abort a session another account opened, and SHALL refuse an abort whose folder segment is not the folder the session uploads into. The client SHALL call it when an encrypted upload is cancelled after its session opened.
 
 #### Scenario: Cancelled encrypted upload
 - **WHEN** the user cancels an encrypted upload after the first chunk was sent
 - **THEN** the client aborts the session and no partial file remains in the room
+
+#### Scenario: Session of another account
+- **WHEN** a user asks to abort an upload session another account opened
+- **THEN** the server answers 403 and the session stays open
+
+#### Scenario: Abort through another folder
+- **WHEN** an abort request names a folder other than the one the session uploads into
+- **THEN** the server refuses it and the session stays open
 
 ### Requirement: Per-file access history
 The server SHALL expose, to room managers, the history of access-entry writes and revocations for a file: who wrote which user's entry and when, without the wrap content.

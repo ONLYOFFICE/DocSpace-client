@@ -48,6 +48,7 @@ export const PAYMENT_ROUTES = {
   diskStorage: `/billing/addons/disk-storage`,
   docsConnect: `/billing/addons/docs-connect`,
   paymentMethod: `/billing/payment-method`,
+  invoiceHistory: `/billing/invoice-history`,
   wallet: `/billing/wallet`,
   usage: `/billing/usage`,
 } as const;
@@ -64,6 +65,8 @@ export const getBillingPageTitle = (
   if (pathname.includes("/billing/tariff-plan")) return t("Common:TariffPlan");
   if (pathname.includes("/billing/payment-method"))
     return t("Common:PaymentMethod");
+  if (pathname.includes("/billing/invoice-history"))
+    return t("Common:InvoiceHistory");
   if (pathname.includes("/billing/usage")) return t("Common:Usage");
   if (pathname.includes("/billing/addons/ai-services"))
     return t("Common:AIFeatures");

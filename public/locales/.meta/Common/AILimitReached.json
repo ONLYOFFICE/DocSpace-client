@@ -3,16 +3,23 @@
   "content": "AI spending limit reached",
   "content_en_sha1_hash": "ce3224f6b0e14dd5decae190689dfd7df99f3abf",
   "created_at": "2026-10-23T12:27:54.735Z",
-  "updated_at": "2026-10-23T12:28:45.485Z",
+  "updated_at": "2026-10-27T11:04:31.086Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Title of the notice shown in the AI chat, AI agent and metadata AI panel when an AI request is blocked because the AI spending limit set for the portal or user has been reached. Short heading, no trailing period.",
+    "is_auto": true,
+    "updated_at": "2026-10-27T11:04:31.086Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
+      "line_number": 130,
+      "context": "navigate(\"/portal-settings/ai-settings/limits\");\n };\n \n return (\n <ServiceLimitNotice\n title={t(\"Common:AILimitReached\")}\n description={\n isAdmin\n ? t(\"Common:AILimitReachedResetsOn\", { date })\n : t(\"Common:AILimitReachedContactAdminResetsOn\", { date })\n }",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 934,
+      "line_number": 986,
       "context": "const serviceLimit = getServiceLimitChatError(payload);\n if (serviceLimit) {\n const date = getCorrectDate(language, serviceLimit.until);\n \n return {\n title: t(\"Common:AILimitReached\"),\n description: isAdmin\n ? t(\"Common:AILimitReachedResetsOn\", { date })\n : t(\"Common:AILimitReachedContactAdminResetsOn\", { date }),\n action: isAdmin\n ? {",
       "module": "/packages/client"
     },

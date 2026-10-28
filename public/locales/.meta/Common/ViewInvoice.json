@@ -1,0 +1,22 @@
+{
+  "key_path": "ViewInvoice",
+  "content": "View invoice",
+  "content_en_sha1_hash": "b260431aa90b2d4af42ceea95190c441746468f9",
+  "created_at": "2026-10-27T09:16:08.708Z",
+  "updated_at": "2026-10-27T09:17:14.880Z",
+  "comment": {
+    "text": "Link label in each row of the invoice table on the Invoice history page in Billing, followed by an external-link icon; opens that invoice in a new tab. Imperative verb, keep it short.",
+    "is_auto": true,
+    "updated_at": "2026-10-27T09:17:14.880Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

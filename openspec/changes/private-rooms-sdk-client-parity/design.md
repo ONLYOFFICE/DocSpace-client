@@ -84,6 +84,7 @@ Shared helpers the SDK does not call yet:
 - `useFileOperations.confirmOperation` uses the same target for the same-room check. That check was added by `private-rooms-sdk-gating-and-parity` 4.2 and D10 and is wrong today for any folder inside a room.
 - The resolution happens before the unlock prompt.
 - An unresolved destination copies nothing and reports `Common:EncryptedCopyFailed`, as in the client.
+- The MODIFIED "Copy and move destination resolved fail-closed" replaces the text `private-rooms-sdk-gating-and-parity` gives it, so its scenario "Copy into another private room" is dropped: "Copy into a folder of another private room" covers it, since a room root is the room entry of its own path. The E2E case "Copy into another private room" in `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts` stays, as the room-root variant of the same rule. The scenario "Move into another private room" moves to the ADDED "Moves stay inside the private room".
 
 **D4. Transfers follow the client's plan.**
 - `confirmOperation` asks the shared `planPrivateTransfer` what to do and follows it:

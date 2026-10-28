@@ -254,6 +254,8 @@ describe("encryptedFiles mock — PUT /files/{fileId}/access (mirrors FilesContr
 });
 
 describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors SecurityController.GetEncryptionAccess)", () => {
+  afterEach(() => server.resetHandlers());
+
   it("returns identity public keys of users with file access", async () => {
     handle.current!.setFiles([
       {
@@ -302,6 +304,29 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors S
     handle.current!.setFiles([{ id: 6, title: "plain.txt", encrypted: false }]);
     handle.current!.setFileOutsidePrivateRoom(6);
     const res = await fetch(PUBLIC_KEYS_URL(6));
+    expect(res.status).toBe(415);
+  });
+
+  it("File in an archived private room answers 415 today", async () => {
+    const keysHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+    server.use(
+      ...encryptedFilesHandlers(PORT, {
+        roomId: 9500,
+        ownerId: ALICE_ID,
+        currentUserId: ALICE_ID,
+        archived: true,
+        handle: keysHandle,
+      }),
+    );
+    keysHandle.current!.setFiles([{ id: 8, title: "s.txt", encrypted: true }]);
+    keysHandle.current!.setRoomUserKeys([
+      { id: "a", userId: ALICE_ID, publicKey: "PK-A", privateKeyEnc: "ENC-A", date: "", cryptoEngineId: "" },
+    ]);
+
+    const res = await fetch(PUBLIC_KEYS_URL(8));
+
     expect(res.status).toBe(415);
   });
 

@@ -289,6 +289,26 @@ test.describe("Hotkeys in the files list", () => {
       await expect.poll(() => selectedFiles(page)).toEqual([1, 2, 3]);
     });
 
+    for (const modifier of ["Control", "Meta"]) {
+      test(`${modifier}+arrows move the caret and keep the selection`, async ({
+        page,
+      }) => {
+        await page.keyboard.press("ArrowDown");
+        await expect.poll(() => selectedFiles(page)).toEqual([1]);
+
+        await press(page, [`${modifier}+ArrowDown`, `${modifier}+ArrowDown`]);
+        await expect.poll(() => caretFile(page)).toBe(3);
+        await expect.poll(() => selectedFiles(page)).toEqual([1]);
+
+        await page.keyboard.press(`${modifier}+ArrowUp`);
+        await expect.poll(() => caretFile(page)).toBe(2);
+        await expect.poll(() => selectedFiles(page)).toEqual([1]);
+
+        await page.keyboard.press("KeyX");
+        await expect.poll(() => selectedFiles(page)).toEqual([1, 2]);
+      });
+    }
+
     test("j/k work on a non-Latin keyboard layout", async ({ page }) => {
       const cdp = await page.context().newCDPSession(page);
       const pressPhysical = async (key: string, code: string, vk: number) => {

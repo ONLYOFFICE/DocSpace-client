@@ -297,7 +297,13 @@ const withHotkeys = (Component) => {
           return enableSelection(e);
         }
 
-        if (e.shiftKey || e.ctrlKey || isIndexEditingMode || e.type === "keyup")
+        if (
+          e.shiftKey ||
+          e.ctrlKey ||
+          e.metaKey ||
+          isIndexEditingMode ||
+          e.type === "keyup"
+        )
           return;
 
         switch (getHotkeyLetter(e)) {

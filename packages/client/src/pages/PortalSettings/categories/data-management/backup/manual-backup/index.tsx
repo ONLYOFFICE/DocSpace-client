@@ -66,6 +66,7 @@ const ManualBackupWrapper = ({
   language,
   refreshPayerInfo,
   refreshBackupService,
+  ensureAppsLoaded,
   ...props
 }: ManualBackupWrapperProps) => {
   const { t } = useTranslation(["Settings", "Common"]);
@@ -75,6 +76,10 @@ const ManualBackupWrapper = ({
   useLayoutEffect(() => {
     setDocumentTitle(t("Common:DataBackup"));
   }, [setDocumentTitle, t]);
+
+  useEffect(() => {
+    ensureAppsLoaded();
+  }, [ensureAppsLoaded]);
 
   useEffect(() => {
     if (isNotPaidPeriod) return setIsEmptyContentBeforeLoader(false);
@@ -141,6 +146,7 @@ export default inject(
     paymentStore,
     clientLoadingStore,
     authStore,
+    appsStore,
   }: TStore) => {
     const {
       accounts,
@@ -253,7 +259,12 @@ export default inject(
       storeItem ??
       {}) as ThirdPartyAccountType;
 
-    const settingsFileSelector = { getIcon, filesSettings };
+    const settingsFileSelector = {
+      getIcon,
+      filesSettings,
+      withRoomsTreeFolder: appsStore.isInstalled("ai-rooms"),
+      withFormsTreeFolder: appsStore.isInstalled("ai-forms"),
+    };
 
     const defaultRegion =
       defaultFormSettings && "region" in defaultFormSettings
@@ -266,6 +277,8 @@ export default inject(
     const isFreeBackupsLimitReached =
       maxFreeBackups > 0 ? backupCount >= maxFreeBackups : true;
     return {
+      ensureAppsLoaded: appsStore.ensureLoaded,
+
       // backup
       accounts,
       isValidForm,

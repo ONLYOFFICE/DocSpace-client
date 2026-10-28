@@ -48,6 +48,7 @@ import {
   type EncryptedFilesHandlerHandle,
   type PrivacyroomAccessHandlerHandle,
 } from "@docspace/shared/__mocks__/handlers";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { generateIdentityKeyPair } from "@docspace/shared/services/encryption/identity";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
 import type { Page } from "@playwright/test";
@@ -62,6 +63,7 @@ const CAROL = {
   displayName: "Carol Jones",
   email: "carol@example.com",
 };
+const SUBFOLDER_ID = 9201;
 
 // In-app navigation keeps the identity unlocked after the key setup.
 const navigateInApp = (page: Page, url: string) =>
@@ -271,5 +273,118 @@ test.describe("Private room — pending access", () => {
           .sort(),
       )
       .toEqual([CAROL.id, TEST_USER_ID].sort());
+  });
+});
+
+test.describe("Private room — member removal during uploads", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Uploads into a subfolder: removing a member is refused while the upload runs", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const { keysHandle, passphrase } = await bootstrapEncryption(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+    const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      // Ahead of the rooms list, whose files/rooms* pattern also matches
+      // files/rooms/{id}/share.
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID, {
+        initial: [
+          {
+            id: CAROL.id,
+            displayName: CAROL.displayName,
+            email: CAROL.email,
+            access: ShareAccessRights.Editing,
+          },
+        ],
+      }),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        handle: filesHandle,
+        folders: [{ id: SUBFOLDER_ID, title: "Drafts" }],
+      }),
+      ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
+    );
+    accessHandle.current!.setRoomKeys(ROOM_ID, [
+      { ...keysHandle.getKeys()[0], userId: TEST_USER_ID },
+    ]);
+
+    // The parts of the upload wait until the removal was tried.
+    let releaseParts = () => {};
+    const partsHeld = new Promise<void>((resolve) => {
+      releaseParts = resolve;
+    });
+    await page.route(/\/session\/[^/]+\/upload/, async (route) => {
+      await partsHeld;
+      await route.fallback();
+    });
+
+    await navigateInApp(
+      page,
+      `/private/${ROOM_ID}/filter?folder=${SUBFOLDER_ID}`,
+    );
+    await page.waitForResponse(
+      (res) =>
+        res.request().method() === "GET" &&
+        new URL(res.url()).pathname.endsWith(`/files/${SUBFOLDER_ID}`) &&
+        res.ok(),
+      { timeout: 15000 },
+    );
+    await page.locator("#customFileInput").first().setInputFiles({
+      name: "memo.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from("memo"),
+    });
+    await unlockIfPrompted(page, passphrase);
+    await expect
+      .poll(() => filesHandle.current!.getSessions().length, { timeout: 30000 })
+      .toBe(1);
+
+    await navigateInApp(page, "/private/filter");
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+    await page.locator(".info-panel-toggle").click();
+    await row.click();
+    await page.getByTestId("info_members_tab").click();
+    await page
+      .getByTestId("info_panel_members_user_role_combobox")
+      .first()
+      .click();
+    await page.getByText("Remove", { exact: true }).last().click();
+
+    await expect(
+      page.getByText("Cannot remove member while uploads are in progress (1)"),
+    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+
+    releaseParts();
+    await expect
+      .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
+      .toBe(1);
   });
 });

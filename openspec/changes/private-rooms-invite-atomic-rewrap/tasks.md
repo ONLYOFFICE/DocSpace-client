@@ -23,7 +23,7 @@
 ## 4. Upload guard covers subfolders
 
 - [x] 4.1 Capture the room id for every queued upload item at start (reuse the existing `encryptionRoomId` capture), for the client queue (counted through `getActiveUploadCountForRoomImpl` in `packages/client/src/store/uploadDataStore/selectors.helpers.ts`) and for the SDK upload items (`packages/sdk/src/app/(docspace)/_store/UploadStore.tsx`, passed on by the SDK counter adapter in `packages/sdk/src/app/(private)/_store/PrivateEncryptedUploadStore.tsx`, which maps the target folder id to `toFolderId` today), and make `countActiveUploadsForRoom` in `packages/shared/utils/uploadErrors.ts` match on it; verify with new cases in `packages/shared/utils/uploadErrors.test.ts` for root and subfolder uploads, and an SDK case "Uploads into a subfolder" in `cd packages/sdk && pnpm exec vitest run usePrivateRemoveMemberFlow PrivateMemberUser`.
-- [ ] 4.2 Confirm the Members removal guard uses the new counter; verify with the existing `User.tsx` test and an E2E case uploading into a subfolder then attempting removal.
+- [x] 4.2 Confirm the Members removal guard uses the new counter; verify with the existing `User.tsx` test and an E2E case uploading into a subfolder then attempting removal.
 
 ## 5. Integration check
 

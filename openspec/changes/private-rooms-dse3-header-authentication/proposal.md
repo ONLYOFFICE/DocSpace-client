@@ -25,7 +25,7 @@ The DSE3 container authenticates the chunk payloads (file nonce, chunk count, in
 ## Impact
 
 - Shared: `packages/shared/services/encryption/streaming-encryption.ts` (header builder, parser, associated-data builders), `types.ts` (version constant, flags), the DSE3 tamper tests and wire-format tests.
-- Server: the form classifier reads flag byte 0x02 at offset 6 of the unencrypted header (`FileChecker.cs`); the header layout up to the flags byte is unchanged, so the server keeps working. Any server-side parser that checks the version byte must accept 3; recorded for `private-rooms-server-hardening`.
+- Server: the form classifier reads flag byte 0x02 at offset 6 of the unencrypted header (`FileChecker.cs`); the header layout up to the flags byte is unchanged, so the server keeps working. No server code checks the version byte (design.md, Migration Plan), so the server needs no change.
 - SDK and doceditor: they consume the shared format code; no separate change, and the editor contract requires the Document Server to read versions 2 and 3 and write version 3 (`private-rooms-editor-contract`, decided 2026-10-26). Whether the desktop crypto engine parses DSE3 is asked together with task 2.0 of `private-rooms-remove-dead-api-calls`.
 - Tests: `packages/shared/services/encryption/__tests__/{dse3-tampering,wire-format,streaming-encryption}.test.ts`, upload/download integration tests.
 

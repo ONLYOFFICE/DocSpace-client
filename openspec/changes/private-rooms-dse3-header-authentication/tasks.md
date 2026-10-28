@@ -22,7 +22,7 @@
 
 ## 4. Server and editor compatibility
 
-- [ ] 4.1 Grep `../server` for any DSE3 version check (`grep -rn "DSE3" ../server --include=*.cs`) and record the result in design.md; if a check exists, open a task in `private-rooms-server-hardening`; verify the note is present.
+- [x] 4.1 Grep `../server` for any DSE3 version check (`grep -rn "DSE3" ../server --include=*.cs`) and record the result in design.md; if a check exists, open a task in `private-rooms-server-hardening`; verify the note is present.
 - [x] 4.2 Record in `private-rooms-editor-contract` that the Document Server reads DSE3 versions 2 and 3 and writes version 3 (2026-10-26); verified by the requirement "Versioned Document Server encryption contract" and its scenario "Container versions" there.
 - [ ] 4.3 Ask the desktop developer, together with task 2.0 of `private-rooms-remove-dead-api-calls`, whether the new desktop crypto engine parses DSE3 and accepts version 3; record the answer and its date in design.md before merging.
 

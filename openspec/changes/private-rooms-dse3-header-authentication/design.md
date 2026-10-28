@@ -33,7 +33,7 @@ The stashed FORMAT.md §4 ("AAD binding") lists exactly the fields the code bind
 ## Migration Plan
 
 1. Land the format change behind the existing `privateRooms` flag; new uploads write v3.
-2. Server: no change for classification; confirm no version check elsewhere (`private-rooms-server-hardening` task).
+2. Server: no change. Checked on 2026-10-28 (`../server` at `e618acc6c0`, task 4.1): `grep -rn "DSE3" ../server --include=*.cs` finds one reader, `FileChecker.CheckExtendedPDFstream` (`products/ASC.Files/Core/Utils/FileChecker.cs:42-67`), which matches the magic and reads the form flag at offset 6 and leaves the version byte alone on purpose ("the byte is read independently of the version byte", `:42-44`). No server task is needed.
 3. Rollback: revert the client; v3 files written in between stay readable only by clients with the change, so the rollback window must be short or the migration policy must be "none" (decision 2).
 
 ## Open Questions

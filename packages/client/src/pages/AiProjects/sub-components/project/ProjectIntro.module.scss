@@ -26,8 +26,8 @@
 
 @use "@onlyoffice/apps-ui-kit/styles/variables/colors" as *;
 
-// The intro of an empty project chat: logo, name and one line on the
-// sources, centred above the suggestion chips like the default illustration.
+// The intro of an empty project chat: logo, name, the model line and the
+// linked rooms, centred like the default illustration.
 .intro {
   display: flex;
   flex-direction: column;
@@ -57,25 +57,73 @@
   color: var(--text-color);
 }
 
-// A linked room in the line: the text of a strong word, a button to open it.
-.room {
-  display: inline;
-  padding: 0;
-  border: none;
+// The linked rooms under the model line: one group per kind.
+.sources {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.groupLabel {
+  color: var(--text-secondary);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100%;
+}
+
+// A room: its logo and name, the name truncated past the chip's width.
+.chip {
+  display: flex;
+  align-items: center;
+  max-width: 220px;
+  min-width: 0;
+  height: 32px;
+  padding-inline: 8px 10px;
+  border: 1px solid var(--files-section-table-view-row-border-color);
+  border-radius: 16px;
+  box-sizing: border-box;
+
+  // The room row keeps its own spacing out of the chip.
+  > * {
+    min-width: 0;
+    margin-bottom: 0;
+  }
+}
+
+.instructions :global(.room-item-title) {
+  color: #{$ai-purple};
+}
+
+.knowledge :global(.room-item-title) {
+  color: #{$main-green};
+}
+
+// The "+N" chip that unfolds the rest of a group.
+.more {
+  padding-inline: 12px;
   background: none;
+  color: var(--text-secondary);
   font: inherit;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
 
   &:hover {
-    text-decoration: underline dashed;
+    color: var(--text-color);
   }
-}
-
-.skills {
-  color: #{$ai-purple};
-}
-
-.knowledge {
-  color: #{$main-green};
 }

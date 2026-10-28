@@ -53,7 +53,7 @@ import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
 import { INSTRUCTIONS_ROOM_TYPE, KNOWLEDGE_ROOM_TYPE } from "@docspace/shared/api/ai/projects";
 import type { TAiProjectCover, TAiProjectSource } from "@docspace/shared/api/ai/projects";
-import { aiProjectToRoom } from "@docspace/shared/api/ai/projectsRouteMock";
+import { aiProjectToRoom } from "@docspace/shared/api/ai/projects";
 import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 import { ROOM_ACTION_KEYS } from "@docspace/shared/constants";
 
@@ -212,6 +212,8 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
       id: Number(item.id),
       title: item.label,
       roomType: selector,
+      available: true,
+      archived: false,
     }));
     if (selector === INSTRUCTIONS_ROOM_TYPE) setInstructions(rooms);
     else setKnowledge(rooms);

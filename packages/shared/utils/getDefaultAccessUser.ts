@@ -45,6 +45,10 @@ export const getDefaultAccessUser = (
     case RoomsType.PublicRoom:
       return ShareAccessRights.Collaborator;
 
+    // A project invites members; Viewer is not one of its roles.
+    case RoomsType.AiProjectRoom:
+      return ShareAccessRights.Collaborator;
+
     default:
       return ShareAccessRights.ReadOnly;
   }

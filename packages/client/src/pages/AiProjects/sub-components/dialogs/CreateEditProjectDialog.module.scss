@@ -29,6 +29,10 @@
 // The spacing of the agent and room dialogs (top margin, gap between blocks).
 .body {
   @include dialog-params-layout;
+
+  // The last block (the owner row, or the rooms when creating) keeps the
+  // same distance from the footer as the first one from the header.
+  padding-bottom: 20px;
 }
 
 // The owner row closes the form (edit only), set off from the rooms above it.

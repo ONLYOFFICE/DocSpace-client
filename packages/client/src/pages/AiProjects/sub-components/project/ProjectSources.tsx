@@ -41,6 +41,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
+import { Tabs, TabsTypes, type TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -56,6 +57,9 @@ import type { TAiProject, TAiProjectLogo } from "@docspace/shared/api/ai/project
 
 
 import config from "PACKAGE_FILE";
+import LampReactSvgUrl from "PUBLIC_DIR/images/lamp.react.svg?url";
+import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?url";
+import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
@@ -72,30 +76,40 @@ type SectionProps = {
   children: React.ReactNode;
   note?: string;
   testId: string;
+  /** Under the phone and tablet tabs, which already name it: no title, the menu beside the rooms. */
+  headless?: boolean;
 };
 
 /** One source of the project, as the mockup draws it: a bordered card with its title, one menu and the rooms below. */
-const Section = ({ title, menu, menuTitle, children, note, testId }: SectionProps) => (
-  <section className={styles.section} data-testid={testId}>
-    <div className={styles.sectionHead}>
-      <Text fontSize="13px" lineHeight="20px" fontWeight={700} truncate noSelect>
-        {title}
-      </Text>
-      {menu ? (
-        <ContextMenuButton
-          className={styles.sectionMenu}
-          displayType={ContextMenuButtonDisplayType.dropdown}
-          getData={() => menu}
-          directionX="right"
-          title={menuTitle}
-        />
-      ) : null}
-    </div>
-    {/* The rooms scroll inside the card, so the three cards always fit the column. */}
-    <div className={styles.cards}>{children}</div>
-    {note ? <Text className={styles.note}>{note}</Text> : null}
-  </section>
-);
+const Section = ({ title, menu, menuTitle, children, note, testId, headless = false }: SectionProps) => {
+  const menuButton = menu ? (
+    <ContextMenuButton
+      className={headless ? styles.sectionMenuFloating : styles.sectionMenu}
+      displayType={ContextMenuButtonDisplayType.dropdown}
+      getData={() => menu}
+      directionX="right"
+      title={menuTitle}
+    />
+  ) : null;
+
+  return (
+    <section className={classNames(styles.section, { [styles.headless]: headless })} data-testid={testId}>
+      {headless ? (
+        menuButton
+      ) : (
+        <div className={styles.sectionHead}>
+          <Text fontSize="13px" lineHeight="20px" fontWeight={700} truncate noSelect>
+            {title}
+          </Text>
+          {menuButton}
+        </div>
+      )}
+      {/* The rooms scroll inside the card, so the three cards always fit the column. */}
+      <div className={styles.cards}>{children}</div>
+      {note ? <Text className={styles.note}>{note}</Text> : null}
+    </section>
+  );
+};
 
 /** The editor's address for a file, as Files builds it (`openDocEditor`). */
 const editorUrl = (fileId: number) =>
@@ -162,13 +176,21 @@ const RoomCard = ({ id, name, logo, icon, hint, onClick, isExpanded, onToggle, c
 type ProjectSourcesProps = {
   store: AiProjectsStore;
   project: TAiProject;
+  /**
+   * Phone and tablet: no room for the column, so the cards sit behind a row
+   * of tabs above the conversation; a tap opens one under them, a tap on the
+   * open one's tab closes it.
+   */
+  compact?: boolean;
 };
+
+type SectionKey = "instructions" | "knowledge" | "context";
 
 /**
  * The three sources of a project, each with one menu: Instructions rooms
  * (skills), Knowledge rooms (search) and the user's own context folder.
  */
-export const ProjectSources = observer(({ store, project }: ProjectSourcesProps) => {
+export const ProjectSources = observer(({ store, project, compact = false }: ProjectSourcesProps) => {
   const { t } = useTranslation(["Common"]);
   const { useCloudsStore } = useStores();
   const folderContext = useCloudsStore((s) => s.selectedFolderContext);
@@ -176,6 +198,7 @@ export const ProjectSources = observer(({ store, project }: ProjectSourcesProps)
   const [isPickerVisible, setIsPickerVisible] = React.useState(false);
   const [contextPath, setContextPath] = React.useState("");
   const [contextFolder, setContextFolder] = React.useState<TFolder | null>(null);
+  const [openSection, setOpenSection] = React.useState<SectionKey | null>(null);
   const filesSettingsStore = useStore("filesSettingsStore");
   const filesActionsStore = useStore("filesActionsStore");
   // Rooms start collapsed; each opens to its skills or its files on demand.
@@ -223,131 +246,181 @@ export const ProjectSources = observer(({ store, project }: ProjectSourcesProps)
       ]
     : undefined;
 
-  const body = (
-    <div className={styles.sections}>
-      <Section
-        title={t("Common:AIProjectInstructions")}
-        menuTitle={t("Common:AIProjectInstructions")}
-        testId="ai-project-instructions"
-      >
-        {instructionsRooms.length === 0 ? (
-          <Text className={styles.note}>{t("Common:AIProjectNoRooms")}</Text>
-        ) : (
-          instructionsRooms.map((room) => {
-            const skills = store.skills.find((loaded) => loaded.id === room.id)?.skills ?? [];
-            return (
-              <RoomCard
-                key={room.id}
-                id={room.id}
-                name={room.title}
-                logo={room.logo}
-                icon="instructionsRoom.svg"
-                isExpanded={expanded.has(`i-${room.id}`)}
-                onToggle={() => toggle(`i-${room.id}`)}
-              >
-                {skills.length === 0 ? (
-                  <Text className={classNames(styles.note, styles.nested)}>{t("Common:AIProjectSkillsEmpty")}</Text>
-                ) : (
-                  <ul className={classNames(styles.list, styles.nested)}>
-                    {skills.map((skill) => (
-                      // A skill is the room's Markdown file.
-                      <FileRow
-                        key={skill.id}
-                        id={skill.id}
-                        title={skill.title}
-                        fileExst={skill.title.slice(skill.title.lastIndexOf(".")) || ".md"}
-                        getIcon={filesSettingsStore.getIcon}
-                        hint={skill.description}
-                      />
-                    ))}
-                  </ul>
-                )}
-              </RoomCard>
-            );
-          })
-        )}
-      </Section>
-      <Section
-        title={t("Common:Knowledge")}
-        menuTitle={t("Common:Knowledge")}
-        testId="ai-project-knowledge"
-      >
-        {knowledgeRooms.length === 0 ? (
-          <Text className={styles.note}>{t("Common:AIProjectNoRooms")}</Text>
-        ) : (
-          knowledgeRooms.map((room) => {
-            // Only vectorized files are searched, so only they are listed.
-            const files = (store.knowledge.find((loaded) => loaded.id === room.id)?.files ?? []).filter(
-              (file) => file.indexed,
-            );
-            return (
-              <RoomCard
-                key={room.id}
-                id={room.id}
-                name={room.title}
-                logo={room.logo}
-                icon="knowledgeRoom.svg"
-                isExpanded={expanded.has(`k-${room.id}`)}
-                onToggle={() => toggle(`k-${room.id}`)}
-              >
+  const instructionsSection = (
+    <Section
+      title={t("Common:AIProjectInstructions")}
+      menuTitle={t("Common:AIProjectInstructions")}
+      testId="ai-project-instructions"
+      headless={compact}
+    >
+      {instructionsRooms.length === 0 ? (
+        <Text className={styles.note}>{t("Common:AIProjectNoRooms")}</Text>
+      ) : (
+        instructionsRooms.map((room) => {
+          const skills = store.skills.find((loaded) => loaded.id === room.id)?.skills ?? [];
+          return (
+            <RoomCard
+              key={room.id}
+              id={room.id}
+              name={room.title}
+              logo={room.logo}
+              icon="instructionsRoom.svg"
+              isExpanded={expanded.has(`i-${room.id}`)}
+              onToggle={() => toggle(`i-${room.id}`)}
+            >
+              {skills.length === 0 ? (
+                <Text className={classNames(styles.note, styles.nested)}>{t("Common:AIProjectSkillsEmpty")}</Text>
+              ) : (
                 <ul className={classNames(styles.list, styles.nested)}>
-                  {files.map((file) => (
+                  {skills.map((skill) => (
+                    // A skill is the room's Markdown file, shown by its frontmatter name.
                     <FileRow
-                      key={file.id}
-                      id={file.id}
-                      title={file.title}
-                      fileExst={file.fileExst}
+                      key={skill.id}
+                      id={Number(skill.id)}
+                      title={skill.name}
+                      fileExst=".md"
                       getIcon={filesSettingsStore.getIcon}
+                      hint={skill.description}
                     />
                   ))}
                 </ul>
-              </RoomCard>
-            );
-          })
-        )}
-      </Section>
-      <Section
-        title={t("Common:AIProjectContext")}
-        menu={contextMenu}
-        menuTitle={t("Common:AIProjectContext")}
-        note={canEdit ? undefined : t("Common:AIProjectContextNote")}
-        testId="ai-project-context"
-      >
-        {folderContext ? (
-          <RoomCard
-            id={folderContext.room.id}
-            name={folderContext.room.name}
-            logo={contextFolder?.isRoom && contextLogo ? { ...contextLogo, color: contextLogo.color ?? "" } : undefined}
-            icon="folder.svg"
-            hint={contextPath || undefined}
-            onClick={
-              contextFolder
-                ? () => filesActionsStore.openItemAction({ ...contextFolder, isFolder: true } as never)
-                : undefined
-            }
-          />
-        ) : (
-          <>
-            <AddButton
-              className={styles.addRoom}
-              label={t("Common:AIProjectAddRoom")}
-              titleText={t("Common:AIProjectAddRoom")}
-              onClick={() => setIsPickerVisible(true)}
-              noSelect
-              testId="ai-project-context-add"
-            />
-            <Text className={styles.note}>{t("Common:AIProjectContextHint")}</Text>
-          </>
-        )}
-      </Section>
-    </div>
+              )}
+            </RoomCard>
+          );
+        })
+      )}
+    </Section>
   );
+
+  const knowledgeSection = (
+    <Section
+      title={t("Common:Knowledge")}
+      menuTitle={t("Common:Knowledge")}
+      testId="ai-project-knowledge"
+      headless={compact}
+    >
+      {knowledgeRooms.length === 0 ? (
+        <Text className={styles.note}>{t("Common:AIProjectNoRooms")}</Text>
+      ) : (
+        knowledgeRooms.map((room) => {
+          // Only vectorized files are searched, so only they are listed.
+          const files = (store.knowledge.find((loaded) => loaded.id === room.id)?.files ?? []).filter(
+            (file) => file.indexed,
+          );
+          return (
+            <RoomCard
+              key={room.id}
+              id={room.id}
+              name={room.title}
+              logo={room.logo}
+              icon="knowledgeRoom.svg"
+              isExpanded={expanded.has(`k-${room.id}`)}
+              onToggle={() => toggle(`k-${room.id}`)}
+            >
+              <ul className={classNames(styles.list, styles.nested)}>
+                {files.map((file) => (
+                  <FileRow
+                    key={file.id}
+                    id={file.id}
+                    title={file.title}
+                    fileExst={file.fileExst}
+                    getIcon={filesSettingsStore.getIcon}
+                  />
+                ))}
+              </ul>
+            </RoomCard>
+          );
+        })
+      )}
+    </Section>
+  );
+
+  const contextSection = (
+    <Section
+      title={t("Common:AIProjectContext")}
+      menu={contextMenu}
+      menuTitle={t("Common:AIProjectContext")}
+      note={canEdit ? undefined : t("Common:AIProjectContextNote")}
+      testId="ai-project-context"
+      headless={compact}
+    >
+      {folderContext ? (
+        <RoomCard
+          id={folderContext.room.id}
+          name={folderContext.room.name}
+          logo={contextFolder?.isRoom && contextLogo ? { ...contextLogo, color: contextLogo.color ?? "" } : undefined}
+          icon="folder.svg"
+          hint={contextPath || undefined}
+          onClick={
+            contextFolder
+              ? () => filesActionsStore.openItemAction({ ...contextFolder, isFolder: true } as never)
+              : undefined
+          }
+        />
+      ) : (
+        <>
+          <AddButton
+            className={styles.addRoom}
+            label={t("Common:AIProjectAddRoom")}
+            titleText={t("Common:AIProjectAddRoom")}
+            onClick={() => setIsPickerVisible(true)}
+            noSelect
+            testId="ai-project-context-add"
+          />
+          <Text className={styles.note}>{t("Common:AIProjectContextHint")}</Text>
+        </>
+      )}
+    </Section>
+  );
+
+  // The cards are drawn under the tabs by us, not as the tabs' content, so
+  // they take the full width and nothing has to be selected.
+  const tabs: TTabItem[] = [
+    { id: "instructions", name: t("Common:AIProjectInstructions"), iconName: LampReactSvgUrl, content: null },
+    { id: "knowledge", name: t("Common:Knowledge"), iconName: BookTrainingReactSvgUrl, content: null },
+    { id: "context", name: t("Common:AIProjectContext"), iconName: FolderReactSvgUrl, content: null },
+  ];
+  const openedCard = { instructions: instructionsSection, knowledge: knowledgeSection, context: contextSection };
+
+  // Tabs ignore a click on the selected tab, so closing it is caught here,
+  // once the click has bubbled past the tab. Not in the capture phase: React
+  // commits a capture-phase update before the bubble phase, so the tab would
+  // see itself unselected and open again.
+  const onTabsClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!openSection) return;
+    const tab = event.currentTarget.querySelector<HTMLElement>(`[data-testid='${openSection}_subtab']`);
+    if (tab && event.target instanceof Node && tab.contains(event.target)) setOpenSection(null);
+  };
 
   return (
     <>
-      <aside className={styles.column} aria-label={t("Common:AIProjectSources")}>
-        {body}
-      </aside>
+      {compact ? (
+        <div className={styles.compact} aria-label={t("Common:AIProjectSources")} data-testid="ai-project-sources-strip">
+          <div onClick={onTabsClick}>
+            <Tabs
+              type={TabsTypes.Secondary}
+              items={tabs}
+              // An id no tab has selects none; an empty one would select the first.
+              selectedItemId={openSection ?? "none"}
+              onSelect={(tab) => setOpenSection(tab.id as SectionKey)}
+              // The three share the width, which centres them and widens each tap target.
+              scaled
+              // Tabs that do not fit scroll, without the arrow buttons.
+              withoutArrows
+              withoutStickyIntend
+            />
+          </div>
+          {openSection ? <div className={styles.compactCard}>{openedCard[openSection]}</div> : null}
+        </div>
+      ) : (
+        <aside className={styles.column} aria-label={t("Common:AIProjectSources")}>
+          <div className={styles.sections}>
+            {instructionsSection}
+            {knowledgeSection}
+            {contextSection}
+          </div>
+        </aside>
+      )}
       {isPickerVisible ? <ContextFolderDialog onClose={() => setIsPickerVisible(false)} /> : null}
     </>
   );

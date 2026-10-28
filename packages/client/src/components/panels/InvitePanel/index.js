@@ -62,6 +62,13 @@ import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
+import {
+  aiProjectToRoom,
+  getAiProjectLinks,
+  isAiProjectRoom,
+  setAiProjectLink,
+  setAiProjectMembers,
+} from "@docspace/shared/api/ai/projects";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -97,6 +104,7 @@ import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 const InvitePanel = ({
   folders,
   getFolderInfo,
+  findAiProject,
   inviteItems,
   roomId,
   setInviteItems,
@@ -213,7 +221,20 @@ const InvitePanel = ({
     },
   ];
 
+  // An AI project is not in the Files list: it comes from the projects page,
+  // and its members and invitation link go through `ai/projects/{id}`.
+  const aiProject = roomId !== -1 ? findAiProject(roomId) : null;
+  const isAiProject = !!aiProject || isAiProjectRoom(selectedRoom);
+  const setInvitationLink = isAiProject
+    ? setAiProjectLink
+    : api.rooms.setInvitationLinks;
+
   const selectRoom = () => {
+    if (aiProject) {
+      setSelectedRoom(aiProjectToRoom(aiProject));
+      return Promise.resolve();
+    }
+
     const room = folders.find((folder) => folder.id === roomId);
 
     if (room) {
@@ -226,8 +247,11 @@ const InvitePanel = ({
   };
 
   const getInfo = () => {
-    return api.rooms
-      .getRoomSecurityInfo(roomId)
+    return (
+      isAiProject
+        ? getAiProjectLinks(roomId)
+        : api.rooms.getRoomSecurityInfo(roomId)
+    )
       .then((res) => res.items)
       .then((links) => {
         const link = links && links[0];
@@ -477,7 +501,9 @@ const InvitePanel = ({
 
       const result = !isRooms
         ? await api.people.inviteUsers(data)
-        : await api.rooms.setRoomSecurity(roomId, data);
+        : isAiProject
+          ? await setAiProjectMembers(roomId, data)
+          : await api.rooms.setRoomSecurity(roomId, data);
 
       if (!isRooms) {
         setIsNewUserByCurrentUser(true);
@@ -508,6 +534,10 @@ const InvitePanel = ({
       if (result?.warning) {
         toastr.warning(result?.warning);
       }
+
+      result?.aiProjectWarnings?.forEach((warning) =>
+        toastr.warning(warning.message),
+      );
 
       if (isPrivateInvite && identity && newMembers.length > 0) {
         const operationId = uniqueid("operation_");
@@ -713,7 +743,7 @@ const InvitePanel = ({
 
     try {
       setIsLinksToggling(true);
-      link = await api.rooms.setInvitationLinks(
+      link = await setInvitationLink(
         roomId,
         "Invite",
         type,
@@ -795,7 +825,7 @@ const InvitePanel = ({
             ? access.maxUseCount
             : activeLink?.maxUseCount;
 
-        const newLink = await api.rooms.setInvitationLinks(
+        const newLink = await setInvitationLink(
           roomId,
           "Invite",
           +selectedAccess,
@@ -885,6 +915,7 @@ const InvitePanel = ({
             setShareLinks={setShareLinks}
             getInfo={getInfo}
             roomType={roomType}
+            isAiProject={isAiProject}
             onChangeExternalLinksVisible={onChangeExternalLinksVisible}
             externalLinksVisible={externalLinksVisible}
             setActiveLink={setActiveLink}
@@ -1193,6 +1224,7 @@ export default inject(
     userStore,
     peopleStore,
     uploadDataStore,
+    aiProjectsStore,
   }) => {
     const { theme, standalone, allowInvitingGuests, checkGuests, hasGuests } =
       settingsStore;
@@ -1213,6 +1245,12 @@ export default inject(
 
     const { getFolderInfo, folders } = filesStore;
 
+    const findAiProject = (id) =>
+      aiProjectsStore.projects.find((project) => project.id === id) ??
+      (aiProjectsStore.activeProject?.id === id
+        ? aiProjectsStore.activeProject
+        : null);
+
     const { isRoomAdmin } = authStore;
 
     const { isUserTariffLimit } = currentQuotaStore;
@@ -1231,6 +1269,7 @@ export default inject(
       isVisible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,
       getFolderInfo,
+      findAiProject,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
       isRoomAdmin,

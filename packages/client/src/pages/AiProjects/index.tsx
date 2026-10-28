@@ -61,7 +61,7 @@ import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
 import { DeviceType } from "@docspace/shared/enums";
 import type { TAiProject } from "@docspace/shared/api/ai/projects";
-import { aiProjectToRoom, interceptAiProjectRoutes } from "@docspace/shared/api/ai/projectsRouteMock";
+import { aiProjectToRoom } from "@docspace/shared/api/ai/projects";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import {
@@ -89,7 +89,6 @@ import { RowsView } from "./sub-components/list/RowsView";
 import { TilesView } from "./sub-components/list/TilesView";
 import { useProjectContextMenu } from "./sub-components/useProjectContextMenu";
 import ProjectHeader from "./sub-components/project/ProjectHeader";
-import SourcesStrip from "./sub-components/project/SourcesStrip";
 import { ProjectSources } from "./sub-components/project/ProjectSources";
 import CreateEditProjectDialog from "./sub-components/dialogs/CreateEditProjectDialog";
 import { canManageProjects } from "./utils";
@@ -154,10 +153,11 @@ const AiProjects = ({
 
   useDocumentTitle("Common:AIProjects");
 
-  // The room dialogs and panels (invite, members, owner, leave) call the
-  // Files API for the project; while the page is up those calls are served
-  // by the projects service.
-  React.useEffect(() => interceptAiProjectRoutes(userId), [userId]);
+  // Changes made by others reach the page over the socket, as in the rooms.
+  React.useEffect(() => {
+    store.startLiveUpdates();
+    return () => store.stopLiveUpdates();
+  }, [store]);
 
   React.useEffect(() => {
     void store.fetchProjects().then(() => {
@@ -181,22 +181,32 @@ const AiProjects = ({
     (project: TAiProject) => {
       void store.openProject(project).then(() => {
         const { profile, instructionsRooms, knowledgeRooms } = project.aiProject;
-        const toRoom = (room: { id: number; title: string }) => ({
-          cloud: "docspace",
-          id: String(room.id),
-          name: room.title,
-        });
+        // A linked room the caller can no longer read is not connected.
+        const toRooms = (rooms: TAiProject["aiProject"]["knowledgeRooms"]) =>
+          rooms
+            .filter((room) => room.available)
+            .map((room) => ({ cloud: "docspace", id: String(room.id), name: room.title }));
         aiChatStore.openProject({
           profileId: profile?.id ?? null,
           profileName: profile?.name ?? null,
-          instructionsRooms: instructionsRooms.map(toRoom),
-          knowledgeRooms: knowledgeRooms.map(toRoom),
+          instructionsRooms: toRooms(instructionsRooms),
+          knowledgeRooms: toRooms(knowledgeRooms),
         });
       });
       if (String(project.id) !== projectId) navigate(`/ai-projects/${project.id}`);
     },
     [store, aiChatStore, navigate, projectId],
   );
+
+  // The open project was deleted, or the caller was removed from it.
+  const { lostProjectId } = store;
+  React.useEffect(() => {
+    if (lostProjectId === null) return;
+    store.clearLostProject();
+    aiChatPanel.closeChatPanel();
+    toastr.info(t("Common:AIProjectNotAvailable"));
+    navigate("/ai-projects");
+  }, [lostProjectId, store, aiChatPanel, navigate, t]);
 
   const closeProject = React.useCallback(() => {
     store.closeProject();
@@ -367,7 +377,6 @@ const AiProjects = ({
   const hasProjects = !showAiOff && store.projects.length > 0;
   const showEmpty = showAiOff || (store.isLoaded && !hasProjects);
   const canCreate = canManage && isAiChatAvailable && aiReady;
-  const isMobile = currentDeviceType === DeviceType.mobile;
 
   const quickActions = React.useMemo(
     () => [
@@ -493,8 +502,8 @@ const AiProjects = ({
               // `chat-container` drops the body's vertical padding while the
               // chat shows, as for an agent's chat.
               <div className={classnames(styles.projectChat, "chat-container")}>
-                {isMobile && !isHistoryOpen && !infoPanelVisible ? (
-                  <SourcesStrip project={activeProject} />
+                {!isDesktop && !isHistoryOpen && !infoPanelVisible ? (
+                  <ProjectSources store={store} project={activeProject} compact />
                 ) : null}
                 <div className={classnames(styles.panelBody, styles.projectBody)}>
                   {/* The history and the info panel each take the sources' place. */}

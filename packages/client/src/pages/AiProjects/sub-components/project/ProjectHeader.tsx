@@ -34,6 +34,7 @@
  */
 
 import { observer } from "mobx-react";
+import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import Navigation from "@onlyoffice/apps-ui-kit/components/navigation";
@@ -45,7 +46,7 @@ import sectionStyles from "@docspace/shared/styles/SectionHeader.module.scss";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
-import { aiProjectToRoom } from "@docspace/shared/api/ai/projectsRouteMock";
+import { aiProjectToRoom } from "@docspace/shared/api/ai/projects";
 
 import { useProjectContextMenu } from "../useProjectContextMenu";
 import styles from "./ProjectSources.module.scss";
@@ -77,7 +78,7 @@ const ProjectHeader = ({ store, project, currentDeviceType, onBack }: ProjectHea
 
   return (
     <div className={sectionStyles.headerContainer}>
-      <div className="header-container">
+      <div className={classNames("header-container", styles.projectHeader)}>
         <Navigation
           showText
           isRootFolder={false}

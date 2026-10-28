@@ -127,9 +127,11 @@ self: FilesActionStore,action: string, item: TActionItem, t: TTranslation
   const folderIndex = id && folders.findIndex((x) => x.id == id);
   if (folderIndex > -1) updateRoomMute(folderIndex, muteStatus);
 
+  // A room outside the tree (an AI project's root is not in it) has no
+  // counter to adjust.
   const treeIndex = treeFolders.findIndex((x) => x.id == rootFolderId);
-  const count = treeFolders[treeIndex].newItems;
-  if (treeIndex) {
+  if (treeIndex > -1) {
+    const count = treeFolders[treeIndex].newItems;
     // `new`/`newItems` are optional on the view-models; the
     // old JS did unchecked arithmetic (NaN when missing), the erased casts
     // keep that behavior.

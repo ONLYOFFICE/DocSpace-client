@@ -106,10 +106,14 @@ export function getAvailableInfoPanelTabs({
     };
   }
 
-  // An AI project (the projects page): its members and details, no history.
+  // An AI project (the projects page): its members, history and details.
   if ("isAIProject" in selection && selection.isAIProject === true) {
     return {
-      tabs: [InfoPanelView.infoMembers, InfoPanelView.infoDetails],
+      tabs: [
+        InfoPanelView.infoMembers,
+        InfoPanelView.infoHistory,
+        InfoPanelView.infoDetails,
+      ],
       useRoomsView: true,
     };
   }

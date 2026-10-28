@@ -57,6 +57,7 @@ import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import api from "@docspace/shared/api";
+import { setAiProjectLink } from "@docspace/shared/api/ai/projects";
 import { RoomsType } from "@docspace/shared/enums";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
@@ -94,6 +95,7 @@ const ExternalLinks = ({
   setInviteContactsLink,
   hideSelector,
   setInvitePanelOptions,
+  isAiProject,
 }) => {
   const showUsersJoinedBlock = !!activeLink?.maxUseCount;
   const showLifetimeBlock = !!activeLink?.expirationDate;
@@ -110,7 +112,7 @@ const ExternalLinks = ({
 
   const disableLink = async () => {
     shareLinks?.length &&
-      (await api.rooms.setInvitationLinks(
+      (await (isAiProject ? setAiProjectLink : api.rooms.setInvitationLinks)(
         roomId,
         "Invite",
         0,
@@ -186,11 +188,15 @@ const ExternalLinks = ({
         ? allowInvitingGuests
           ? t("Common:InviteViaLinkDescriptionAgentGuest")
           : t("Common:InviteViaLinkDescriptionAgentMembers")
-        : allowInvitingGuests
-          ? roomType === RoomsType.FormRoom
-            ? t("Common:InviteViaLinkDescriptionFormSpaceGuest")
-            : t("Common:InviteViaLinkDescriptionRoomGuest")
-          : t("Common:InviteViaLinkDescriptionRoomMembers");
+        : roomType === RoomsType.AiProjectRoom
+          ? allowInvitingGuests
+            ? t("Common:InviteViaLinkDescriptionAIProjectGuest")
+            : t("Common:InviteViaLinkDescriptionAIProjectMembers")
+          : allowInvitingGuests
+            ? roomType === RoomsType.FormRoom
+              ? t("Common:InviteViaLinkDescriptionFormSpaceGuest")
+              : t("Common:InviteViaLinkDescriptionRoomGuest")
+            : t("Common:InviteViaLinkDescriptionRoomMembers");
 
   return (
     <div className={styles.externalLink} ref={inputsRef}>

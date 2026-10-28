@@ -40,10 +40,13 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { AiProjectAccess, type TAiProject } from "@docspace/shared/api/ai/projects";
-import { aiProjectToRoom } from "@docspace/shared/api/ai/projectsRouteMock";
+import { aiProjectToRoom } from "@docspace/shared/api/ai/projects";
 
 import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
+import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
+import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
+import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 // The icons of the matching items of the rooms context menu
 // (filesContextOptions.helpers / folderModel.helpers), so the two menus read alike.
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
@@ -69,7 +72,7 @@ type Options = {
 /**
  * The context menu of a project, by the caller's role: the owner gets
  * everything, a project manager everything but ownership and deletion, a
- * member only pin, link, info and leave. The dialogs are the room ones
+ * member only pin, notifications, link, info and leave. The dialogs are the room ones
  * (invite panel, change owner, leave, info panel), opened through the
  * stores on the project put into the files selection as a room.
  */
@@ -107,6 +110,27 @@ export const useProjectContextMenu = (
         });
       }
 
+      if (security.Mute) {
+        model.push({
+          key: project.mute ? "unmute" : "mute",
+          label: project.mute ? t("Common:EnableNotifications") : t("Common:DisableNotifications"),
+          icon: project.mute ? UnmuteReactSvgUrl : MuteReactSvgUrl,
+          onClick: () => {
+            const muting = !project.mute;
+            store
+              .toggleMute(project)
+              .then(() =>
+                toastr.success(
+                  muting
+                    ? t("Common:AIProjectNotificationsDisabled")
+                    : t("Common:AIProjectNotificationsEnabled"),
+                ),
+              )
+              .catch((e: unknown) => toastr.error(e instanceof Error ? e.message : String(e)));
+          },
+        });
+      }
+
       if (security.EditRoom) {
         model.push({ key: "sep-edit", isSeparator: true });
         model.push({
@@ -114,6 +138,14 @@ export const useProjectContextMenu = (
           label: t("Common:AIProjectEdit"),
           icon: SettingsReactSvgUrl,
           onClick: () => store.openEditDialog(project),
+        });
+      }
+      if (security.Duplicate) {
+        model.push({
+          key: "duplicate",
+          label: t("Common:Duplicate"),
+          icon: DuplicateReactSvgUrl,
+          onClick: () => void store.duplicateProject(project),
         });
       }
       if (security.EditAccess) {

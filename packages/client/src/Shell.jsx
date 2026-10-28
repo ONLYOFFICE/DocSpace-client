@@ -929,6 +929,14 @@ const Shell = ({ page = "home", ...rest }) => {
   const chatContextEntityId =
     !isInsideAgentRoom && pickedAgent ? pickedAgent.entityId : undefined;
 
+  // Inside an AI project the chat is scoped to the project: the AI service
+  // recognises the project by this id and takes the round's model and
+  // linked rooms from the project itself (`ai/projects/{id}/chat-context`).
+  const chatEntityId =
+    isInsideAiProject && aiActiveProject
+      ? String(aiActiveProject.id)
+      : agentEntityId;
+
   const chatPickerAlias = useMemo(
     () =>
       !isInsideAgentRoom && pickedAgent?.profileId && pickedAgent?.title
@@ -1015,7 +1023,7 @@ const Shell = ({ page = "home", ...rest }) => {
           // handled by `accessRightsStore.canUseChat` in AIAgentView.
           canUseAi={canUseAi}
           callbacks={aiChatCallbacks}
-          entityId={agentEntityId}
+          entityId={chatEntityId}
           contextEntityId={chatContextEntityId}
           // The picker area is always present (an explicit `false` also
           // overrides the lib's entityId default-hide heuristic — the chat

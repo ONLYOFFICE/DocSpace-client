@@ -130,6 +130,7 @@ const ChangeRoomOwner = (props) => {
       // The checkbox reads "leave the project": unchecked keeps the former
       // owner in it as a project manager.
       await changeAiProjectOwner(candidate.id, !isChecked);
+      updateInfoPanelMembers();
     } else {
       await changeRoomOwner(t, candidate.id, isChecked);
       updateInfoPanelMembers();

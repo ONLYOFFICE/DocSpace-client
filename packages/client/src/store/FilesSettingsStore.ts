@@ -711,6 +711,9 @@ class FilesSettingsStore {
         case RoomsType.KnowledgeRoom:
           path = "knowledgeRoom.svg";
           break;
+        case RoomsType.AiProjectRoom:
+          path = "aiProjectRoom.svg";
+          break;
         default:
           path = "customRoom.svg";
       }

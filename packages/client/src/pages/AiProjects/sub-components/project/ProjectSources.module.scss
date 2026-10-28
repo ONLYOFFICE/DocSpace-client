@@ -92,12 +92,39 @@
   flex: 0 0 auto;
 }
 
+// A headless card keeps its menu at the end of its first row; the rows
+// leave it the room.
+.headless {
+  position: relative;
+
+  .cards {
+    padding-inline-end: 28px;
+  }
+
+  // Every row is as tall as the floating menu, so the menu stays centred on
+  // the first one also when it has no expander (the Context folder).
+  .roomItem {
+    height: 40px;
+  }
+}
+
+.sectionMenuFloating {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 12px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
 .cards {
   display: flex;
   flex-direction: column;
   flex: 0 1 auto;
   min-height: 0;
   gap: 10px;
+  // Rooms scroll down only: a long title is truncated, never scrolled to.
+  overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: thin;
 }
@@ -138,6 +165,10 @@
   }
 
   :global(.room-icon) {
+    // The logo's colour square is absolutely positioned: anchored here, it
+    // scrolls with its row and is clipped by the card instead of staying
+    // where the row first was.
+    position: relative;
     min-width: 24px;
 
     :global(.room-image) {
@@ -157,6 +188,8 @@
   cursor: pointer;
 
   .roomItem {
+    flex: 0 1 auto;
+    min-width: 0;
     margin-bottom: 0;
   }
 }
@@ -253,17 +286,40 @@
   flex: 0 0 auto;
 }
 
+// The Navigation's buttons are a size container (`container: buttons /
+// inline-size`, SectionHeader.module.scss), and that containment makes their
+// width ignore their content: the column falls back to its 90px floor, which
+// is less than the project menu plus the chat toolbar, and the toolbar's
+// start (the history button) is clipped. The project header queries nothing
+// there, so the buttons are sized by their content again; the title gives way.
+.projectHeader :global(#control-buttons-container) {
+  container-type: normal;
+  min-width: max-content;
+}
 
-// Phone: the linked rooms as one scrolling row above the conversation.
-.strip {
-  display: flex;
-  gap: 4px;
-  overflow-x: auto;
-  padding: 0 16px 8px;
+
+
+// Phone and tablet: the cards behind a row of tabs above the conversation;
+// the shown one is capped in height and its rooms scroll inside.
+// The row lines up with the Navigation above it: the chat container
+// cancels the body's padding, so it is given back here.
+.compact {
   flex: 0 0 auto;
-  scrollbar-width: none;
+  padding: 16px 0 0 24px;
+  box-sizing: border-box;
 
-  > * {
-    flex: 0 0 auto;
+  @include mixins.mobile {
+    padding: 16px 16px 0;
+  }
+}
+
+.compactCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 12px;
+
+  .section {
+    max-height: 25dvh;
   }
 }

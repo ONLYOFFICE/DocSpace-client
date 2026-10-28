@@ -49,6 +49,7 @@ import type { ShareAccessRights } from "@docspace/shared/enums";
 import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { TAiProjectSettings } from "@docspace/shared/api/ai/projects";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
@@ -204,6 +205,10 @@ class DetailsHelper {
                 ).canCreate) &&
               "Tags",
             !isAIProject && "Storage",
+            // What the project chats with, from its settings block.
+            isAIProject && this.getAiProjectSettings()?.profile?.name && "Model",
+            isAIProject && "Instructions",
+            isAIProject && "Knowledge",
           ]
         : "isFolder" in this.item && this.item.isFolder
           ? [
@@ -301,6 +306,13 @@ class DetailsHelper {
       case "externalDbTableName":
         return this.t("Files:TableName");
 
+      case "Model":
+        return this.t("Common:AIAgentModel");
+      case "Instructions":
+        return this.t("Common:AIProjectInstructions");
+      case "Knowledge":
+        return this.t("Common:AIProjectKnowledgeRooms");
+
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
           const isDefaultQuotaSet = this.isAIAgentsFolder
@@ -371,9 +383,31 @@ class DetailsHelper {
         return this.getItemAccessLevel();
       case "externalDbTableName":
         return this.getExternalDbTableName();
+      case "Model":
+        return text(this.getAiProjectSettings()?.profile?.name);
+      case "Instructions":
+        return this.getAiProjectRooms("instructionsRooms");
+      case "Knowledge":
+        return this.getAiProjectRooms("knowledgeRooms");
       default:
         break;
     }
+  };
+
+  /** The settings block of an AI project (`aiProject`), if the item is one. */
+  getAiProjectSettings = () =>
+    "aiProject" in this.item
+      ? (this.item.aiProject as TAiProjectSettings | undefined)
+      : undefined;
+
+  /** The linked rooms of one kind, by title, or a note when there is none. */
+  getAiProjectRooms = (key: "instructionsRooms" | "knowledgeRooms") => {
+    const rooms = this.getAiProjectSettings()?.[key] ?? [];
+    return text(
+      rooms.length
+        ? rooms.map((room) => room.title).join(", ")
+        : this.t("Common:AIProjectNoRooms"),
+    );
   };
 
   getExternalDbTableName = () => {

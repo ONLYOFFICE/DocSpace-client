@@ -36,34 +36,37 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+  type TOptSocket,
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   AiProjectAccess,
   changeAiProjectOwner,
   createAiProject,
   deleteAiProject,
+  duplicateAiProject,
   getAiProject,
   getAiProjectKnowledge,
-  getAiProjectLinks,
-  getAiProjectMembers,
   getAiProjects,
   getAiProjectSkills,
   leaveAiProject,
+  muteAiProject,
   pinAiProject,
-  setAiProjectLink,
-  setAiProjectMembers,
   updateAiProject,
 } from "@docspace/shared/api/ai/projects";
 import type {
   TAiProject,
   TAiProjectAccess,
-  TAiProjectInvitation,
   TAiProjectKnowledgeRoom,
-  TAiProjectLink,
-  TAiProjectMember,
   TAiProjectRequest,
   TAiProjectSkillsRoom,
+  TAiProjectSource,
   TAiProjectsQuery,
 } from "@docspace/shared/api/ai/projects";
+import type { TOperation } from "@docspace/shared/api/files/types";
+import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
 import type AiPresetsStore from "./AiPresetsStore";
 
@@ -93,14 +96,45 @@ const errorMessage = (e: unknown): string => {
   return String(e);
 };
 
+/** The non-fatal problems the server reports on a changed project (a skipped Viewer grant, ...). */
+const showWarnings = (project: TAiProject) => {
+  project.aiProject.warnings?.forEach((warning) => toastr.warning(warning.message));
+};
+
+/** Follows a file operation (delete, duplicate) until it is finished. */
+const waitForOperation = async (operation: TOperation | undefined) => {
+  let current = operation;
+  while (current && !current.finished) {
+    current = await getOperationProgress(current.id, "", true);
+  }
+  if (current?.error) throw new Error(current.error);
+};
+
 /**
  * AI Projects: the list the page shows, the project opened in the chat and
- * the dialogs around them. Talks to `/api/2.0/ai/projects` only; the chat
+ * the dialogs around them. Talks to `/api/2.0/ai/projects`; members, roles
+ * and the invitation link go through the room panels. The chat
  * itself is handed the project through `AiPresetsStore.activePreset`, the
  * same hook a saved preset used, so the Shell wiring stays as it is.
  */
 /** Projects per list page, as Files pages its lists. */
 const PAGE_COUNT = 100;
+
+// Socket changes are coalesced over this window, as the agents picker does:
+// one change (a create with its logo, an update with its members) lands as
+// several events, and each one costs a request.
+const SOCKET_RELOAD_DELAY_MS = 300;
+
+/** The JSON a `s:modify-folder` event carries, or `undefined` when it has none. */
+const socketData = (opt: TOptSocket): { id?: unknown; parentId?: unknown } | undefined => {
+  if (!opt.data) return undefined;
+  try {
+    const data: unknown = JSON.parse(opt.data);
+    return data && typeof data === "object" ? (data as { id?: unknown; parentId?: unknown }) : undefined;
+  } catch {
+    return undefined;
+  }
+};
 
 class AiProjectsStore {
   aiPresetsStore: AiPresetsStore;
@@ -134,10 +168,6 @@ class AiProjectsStore {
   /** The project open in the chat; `null` on the list. */
   activeProject: TAiProject | null = null;
 
-  members: TAiProjectMember[] = [];
-
-  links: TAiProjectLink[] = [];
-
   skills: TAiProjectSkillsRoom[] = [];
 
   knowledge: TAiProjectKnowledgeRoom[] = [];
@@ -151,9 +181,33 @@ class AiProjectsStore {
 
   private requestId = 0;
 
+  /** The projects root (`current.id` of the list), whose channel carries created projects. */
+  rootId: number | null = null;
+
+  /**
+   * The open project when it was deleted or the caller lost access to it
+   * while it was open, for the page to leave it; `null` otherwise.
+   */
+  lostProjectId: number | null = null;
+
+  /** The page is mounted: the socket channels are held and listened to. */
+  private isLive = false;
+
+  /** The `DIR-{id}` channels this store subscribed to (and so may drop). */
+  private ownedChannels: string[] = [];
+
+  private listReloadTimer: ReturnType<typeof setTimeout> | null = null;
+
+  private projectReloadTimers = new Map<number, ReturnType<typeof setTimeout>>();
+
   constructor(aiPresetsStore: AiPresetsStore) {
     this.aiPresetsStore = aiPresetsStore;
-    makeAutoObservable(this, { aiPresetsStore: false });
+    makeAutoObservable(this, {
+      aiPresetsStore: false,
+      ownedChannels: false,
+      listReloadTimer: false,
+      projectReloadTimers: false,
+    } as never);
   }
 
   get isFiltered() {
@@ -167,10 +221,6 @@ class AiProjectsStore {
       this.hasInstructionsFilter ||
       this.hasKnowledgeFilter
     );
-  }
-
-  get activeMembersCount() {
-    return this.members.length;
   }
 
   /* ------------------------------- List -------------------------------- */
@@ -201,7 +251,9 @@ class AiProjectsStore {
         this.projects = page.folders;
         this.total = page.total;
         this.isLoaded = true;
+        if (page.current?.id) this.rootId = page.current.id;
       });
+      this.syncChannels();
     } catch (e) {
       if (id === this.requestId) toastr.error(errorMessage(e));
     } finally {
@@ -285,18 +337,143 @@ class AiProjectsStore {
   };
 
   private dropProject = (id: number) => {
-    this.projects = this.projects.filter((p) => p.id !== id);
-    this.total = Math.max(0, this.total - 1);
+    // A socket event can follow the caller's own delete or leave: count once.
+    if (this.projects.some((p) => p.id === id)) {
+      this.projects = this.projects.filter((p) => p.id !== id);
+      this.total = Math.max(0, this.total - 1);
+    }
     if (this.activeProject?.id === id) this.closeProject();
+  };
+
+  /* ---------------------------- Live updates ---------------------------- */
+
+  /**
+   * Holds the socket channels of the page and listens to `s:modify-folder`,
+   * as the rooms do: the projects root (a project created, renamed, deleted
+   * by someone else) and the open project. Called when the page mounts.
+   */
+  startLiveUpdates = () => {
+    if (this.isLive) return;
+    this.isLive = true;
+    SocketHelper?.on(SocketEvents.ModifyFolder, this.onModifyFolder);
+    this.syncChannels();
+  };
+
+  /** Drops the page's channels and stops listening; called when the page unmounts. */
+  stopLiveUpdates = () => {
+    if (!this.isLive) return;
+    this.isLive = false;
+    SocketHelper?.off(SocketEvents.ModifyFolder, this.onModifyFolder);
+    if (this.listReloadTimer) clearTimeout(this.listReloadTimer);
+    this.listReloadTimer = null;
+    this.projectReloadTimers.forEach((timer) => clearTimeout(timer));
+    this.projectReloadTimers.clear();
+    this.syncChannels();
+  };
+
+  clearLostProject = () => {
+    this.lostProjectId = null;
+  };
+
+  /**
+   * Subscribes to the channels the page needs now and unsubscribes from the
+   * ones it no longer does. A channel someone else already holds (the rooms
+   * hold theirs while they are open) is used, never taken over or dropped.
+   */
+  private syncChannels = () => {
+    const wanted = this.isLive
+      ? [this.rootId, this.activeProject?.id]
+          .filter((id): id is number => typeof id === "number")
+          .map((id) => `DIR-${id}`)
+      : [];
+    const drop = this.ownedChannels.filter((channel) => !wanted.includes(channel));
+    const add = wanted.filter(
+      (channel) =>
+        !this.ownedChannels.includes(channel) && !SocketHelper?.socketSubscribers.has(channel),
+    );
+    if (drop.length > 0) {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, { roomParts: drop, individual: true });
+    }
+    if (add.length > 0) {
+      SocketHelper?.emit(SocketCommands.Subscribe, { roomParts: add, individual: true });
+    }
+    this.ownedChannels = [...this.ownedChannels.filter((channel) => !drop.includes(channel)), ...add];
+  };
+
+  private onModifyFolder = (opt?: TOptSocket) => {
+    if (!opt || opt.type !== "folder") return;
+    const data = socketData(opt);
+    const id = Number(opt.id ?? data?.id);
+    if (!Number.isInteger(id)) return;
+    const inRoot = this.rootId !== null && Number(data?.parentId) === this.rootId;
+    const known = this.activeProject?.id === id || this.projects.some((p) => p.id === id);
+    if (!inRoot && !known) return;
+
+    if (opt.cmd === "delete") {
+      runInAction(() => {
+        if (this.activeProject?.id === id) this.lostProjectId = id;
+        this.dropProject(id);
+      });
+      return;
+    }
+    if (opt.cmd === "create" || !known) {
+      this.scheduleListReload();
+      return;
+    }
+    this.scheduleProjectReload(id);
+  };
+
+  private scheduleListReload = () => {
+    if (this.listReloadTimer) clearTimeout(this.listReloadTimer);
+    this.listReloadTimer = setTimeout(() => {
+      this.listReloadTimer = null;
+      void this.fetchProjects();
+    }, SOCKET_RELOAD_DELAY_MS);
+  };
+
+  private scheduleProjectReload = (id: number) => {
+    const pending = this.projectReloadTimers.get(id);
+    if (pending) clearTimeout(pending);
+    this.projectReloadTimers.set(
+      id,
+      setTimeout(() => {
+        this.projectReloadTimers.delete(id);
+        void this.reloadProject(id);
+      }, SOCKET_RELOAD_DELAY_MS),
+    );
+  };
+
+  /**
+   * Re-reads a project another user changed. The open one also re-syncs the
+   * chat and its sources; a project the caller can no longer see (404) is
+   * dropped, and an open one is left.
+   */
+  private reloadProject = async (id: number) => {
+    try {
+      const project = await getAiProject(id);
+      const isActive = this.activeProject?.id === id;
+      runInAction(() => this.replaceProject(project));
+      if (isActive) {
+        this.syncPreset(project);
+        await Promise.all([this.fetchSkills(id), this.fetchKnowledge(id)]);
+      }
+    } catch (e) {
+      const status = (e as { response?: { status?: number } })?.response?.status;
+      if (status !== 404 && status !== 403) return;
+      runInAction(() => {
+        if (this.activeProject?.id === id) this.lostProjectId = id;
+        this.dropProject(id);
+      });
+    }
   };
 
   /* ------------------------------ Project ------------------------------ */
 
   openProject = async (project: TAiProject) => {
     this.activeProject = project;
+    this.syncChannels();
     this.skills = [];
     this.knowledge = [];
-    this.members = [];
     this.syncPreset(project);
     await Promise.all([this.fetchSkills(project.id), this.fetchKnowledge(project.id)]);
   };
@@ -314,6 +491,7 @@ class AiProjectsStore {
 
   closeProject = () => {
     this.activeProject = null;
+    this.syncChannels();
     this.aiPresetsStore.setActivePreset(null);
   };
 
@@ -324,19 +502,18 @@ class AiProjectsStore {
    */
   private syncPreset = (project: TAiProject) => {
     const { profile, instructionsRooms, knowledgeRooms } = project.aiProject;
-    const toRoom = (room: { id: number; title: string }) => ({
-      cloud: "docspace",
-      id: String(room.id),
-      name: room.title,
-    });
+    const toRooms = (rooms: TAiProjectSource[]) =>
+      rooms
+        .filter((room) => room.available)
+        .map((room) => ({ cloud: "docspace", id: String(room.id), name: room.title }));
     this.aiPresetsStore.setActivePreset({
       id: String(project.id),
       name: project.title,
       createdAt: project.created,
       profileId: profile?.id ?? null,
       profileName: profile?.name ?? null,
-      contextRooms: instructionsRooms.map(toRoom),
-      knowledgeRooms: knowledgeRooms.map(toRoom),
+      contextRooms: toRooms(instructionsRooms),
+      knowledgeRooms: toRooms(knowledgeRooms),
     });
   };
 
@@ -376,6 +553,7 @@ class AiProjectsStore {
 
   createProject = async (data: TAiProjectRequest) => {
     const project = await createAiProject(data);
+    showWarnings(project);
     runInAction(() => {
       this.projects = [project, ...this.projects];
       this.total += 1;
@@ -386,6 +564,7 @@ class AiProjectsStore {
 
   updateProject = async (id: number, data: TAiProjectRequest) => {
     const project = await updateAiProject(id, data);
+    showWarnings(project);
     runInAction(() => this.replaceProject(project));
     if (this.activeProject?.id === id) {
       this.syncPreset(project);
@@ -395,8 +574,25 @@ class AiProjectsStore {
   };
 
   removeProject = async (project: TAiProject) => {
-    await deleteAiProject(project.id);
+    await waitForOperation(await deleteAiProject(project.id));
     runInAction(() => this.dropProject(project.id));
+  };
+
+  /** Copies the project (without its members); the copy shows on the list once made. */
+  duplicateProject = async (project: TAiProject) => {
+    try {
+      await waitForOperation(await duplicateAiProject(project.id));
+      await this.fetchProjects();
+    } catch (e) {
+      toastr.error(errorMessage(e));
+    }
+  };
+
+  /** Turns the project's notifications off or back on for the caller. */
+  toggleMute = async (project: TAiProject) => {
+    const mute = !project.mute;
+    await muteAiProject(project.id, mute);
+    runInAction(() => this.replaceProject({ ...project, mute }));
   };
 
   togglePin = async (project: TAiProject) => {
@@ -415,61 +611,18 @@ class AiProjectsStore {
   };
 
   changeOwner = async (project: TAiProject, userId: string, keepAsManager: boolean) => {
-    const updated = await changeAiProjectOwner(project.id, userId, keepAsManager);
-    runInAction(() => {
-      if (keepAsManager) this.replaceProject(updated);
-      else this.dropProject(project.id);
-    });
-    if (this.activeProject?.id === project.id) await this.fetchMembers(project.id);
-  };
-
-  /* ------------------------------ Members ------------------------------ */
-
-  fetchMembers = async (id: number) => {
+    await changeAiProjectOwner(project.id, userId, keepAsManager);
+    if (!keepAsManager) {
+      runInAction(() => this.dropProject(project.id));
+      return;
+    }
     try {
-      const members = await getAiProjectMembers(id);
-      runInAction(() => (this.members = members));
+      const updated = await getAiProject(project.id);
+      runInAction(() => this.replaceProject(updated));
     } catch (e) {
       toastr.error(errorMessage(e));
     }
   };
-
-  setMembers = async (
-    project: TAiProject,
-    invitations: TAiProjectInvitation[],
-    notify = false,
-    message = "",
-  ) => {
-    const result = await setAiProjectMembers(project.id, invitations, notify, message);
-    runInAction(() => (this.members = result.members));
-    if (result.warning) toastr.warning(result.warning);
-    await this.refreshActiveProject();
-    return result;
-  };
-
-  fetchLinks = async (id: number) => {
-    try {
-      const links = await getAiProjectLinks(id);
-      runInAction(() => (this.links = links));
-    } catch (e) {
-      toastr.error(errorMessage(e));
-    }
-  };
-
-  setLink = async (id: number, enabled: boolean) => {
-    const link = await setAiProjectLink(id, enabled);
-    runInAction(() => (this.links = link ? [link] : []));
-    return link;
-  };
-
-  isMember = (userId: string | undefined, project: TAiProject | null) =>
-    !!project && !!userId && project.inRoom;
-
-  roleOf = (project: TAiProject) => project.access;
-
-  isManagerOf = (project: TAiProject) =>
-    project.access === AiProjectAccess.Owner ||
-    project.access === AiProjectAccess.ProjectManager;
 
   /* ------------------------------ Dialogs ------------------------------ */
 

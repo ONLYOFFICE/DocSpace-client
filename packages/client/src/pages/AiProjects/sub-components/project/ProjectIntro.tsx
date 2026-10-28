@@ -36,7 +36,6 @@
 import React from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
-import { useNavigate } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -44,35 +43,55 @@ import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import type { TAiProject, TAiProjectSource } from "@docspace/shared/api/ai/projects";
 
 import { ProjectLogo } from "../list/ProjectLogo";
-import { sourceNames } from "../list/SourceTags";
+import RoomItem from "./RoomItem";
 import styles from "./ProjectIntro.module.scss";
 
-type RoomLinksProps = {
+/** Rooms of a kind shown before the rest fold into a "+N" chip. */
+const VISIBLE_ROOMS = 3;
+
+type SourceGroupProps = {
+  label: string;
   rooms: TAiProjectSource[];
-  className: string;
-  /** Filled by `Trans` with the joined names; the links replace them. */
-  children?: React.ReactNode;
+  kind: "instructions" | "knowledge";
 };
 
-/** The rooms named in the intro, each a link that opens the room. */
-const RoomLinks = ({ rooms, className }: RoomLinksProps) => {
-  const navigate = useNavigate();
+/**
+ * One kind of linked rooms as a row of chips: each opens its room. A long
+ * list shows its first rooms and a "+N" chip that unfolds the rest.
+ */
+const SourceGroup = ({ label, rooms, kind }: SourceGroupProps) => {
+  const [expanded, setExpanded] = React.useState(false);
+  const shown = expanded ? rooms : rooms.slice(0, VISIBLE_ROOMS);
+  const hidden = rooms.length - shown.length;
+
   return (
-    <>
-      {rooms.map((room, index) => (
-        <React.Fragment key={room.id}>
-          {index > 0 ? ", " : null}
+    <div className={styles.group} data-testid={`ai-project-intro-${kind}`}>
+      <Text fontSize="12px" lineHeight="16px" className={styles.groupLabel}>
+        {label}
+      </Text>
+      <div className={styles.chips}>
+        {shown.map((room) => (
+          <div key={room.id} className={classNames(styles.chip, styles[kind])}>
+            <RoomItem
+              id={room.id}
+              title={room.title}
+              logo={room.logo}
+              icon={kind === "instructions" ? "instructionsRoom.svg" : "knowledgeRoom.svg"}
+            />
+          </div>
+        ))}
+        {hidden > 0 ? (
           <button
             type="button"
-            className={className}
-            onClick={() => navigate(`/rooms/shared/${room.id}`)}
-            data-testid={`ai-project-intro-room-${room.id}`}
+            className={classNames(styles.chip, styles.more)}
+            onClick={() => setExpanded(true)}
+            data-testid={`ai-project-intro-${kind}-more`}
           >
-            {room.title}
+            {`+${hidden}`}
           </button>
-        </React.Fragment>
-      ))}
-    </>
+        ) : null}
+      </div>
+    </div>
   );
 };
 
@@ -81,9 +100,9 @@ type ProjectIntroProps = {
 };
 
 /**
- * What an empty project chat shows above the suggestion chips, as the
- * mockup draws it: the project logo and name, and one line naming the
- * model, the Instructions rooms and the Knowledge bases it chats with.
+ * What an empty project chat shows above the composer: the project logo and
+ * name, the model it chats with, and the rooms it draws on as chips, one row
+ * for the Instructions rooms and one for the Knowledge bases.
  */
 export const ProjectIntro = observer(({ project }: ProjectIntroProps) => {
   const { t } = useTranslation(["Common"]);
@@ -91,28 +110,11 @@ export const ProjectIntro = observer(({ project }: ProjectIntroProps) => {
   // The model the composer shows: the one picked for this chat, else the
   // chat default, else the portal default (ai-chat's current chat profile).
   const currentModel = useProfilesStore((s) => (s.sessionChatProfile ?? s.chatProfile ?? s.defaultProfile)?.name);
-  const { instructionsRooms, knowledgeRooms } = project.aiProject;
+  // A room the caller can no longer read is not offered.
+  const instructionsRooms = project.aiProject.instructionsRooms.filter((room) => room.available);
+  const knowledgeRooms = project.aiProject.knowledgeRooms.filter((room) => room.available);
 
   const model = currentModel ?? project.aiProject.profile?.name ?? "";
-  const instructions = sourceNames(instructionsRooms);
-  const knowledge = sourceNames(knowledgeRooms);
-  const components = {
-    1: <strong className={styles.model} />,
-    2: <RoomLinks rooms={instructionsRooms} className={classNames(styles.room, styles.skills)} />,
-    3: <RoomLinks rooms={knowledgeRooms} className={classNames(styles.room, styles.knowledge)} />,
-  };
-  const values = { model, instructions, knowledge };
-  // Literal keys, one per combination of sources, so the locale checks see them.
-  const line =
-    instructionsRooms.length > 0 && knowledgeRooms.length > 0 ? (
-      <Trans t={t} i18nKey="Common:AIProjectIntroBoth" values={values} components={components} />
-    ) : instructionsRooms.length > 0 ? (
-      <Trans t={t} i18nKey="Common:AIProjectIntroInstructions" values={values} components={components} />
-    ) : knowledgeRooms.length > 0 ? (
-      <Trans t={t} i18nKey="Common:AIProjectIntroKnowledge" values={values} components={components} />
-    ) : (
-      <Trans t={t} i18nKey="Common:AIProjectIntroModel" values={values} components={components} />
-    );
 
   return (
     <div className={styles.intro} data-testid="ai-project-intro">
@@ -121,8 +123,23 @@ export const ProjectIntro = observer(({ project }: ProjectIntroProps) => {
         {project.title}
       </Text>
       <Text fontSize="13px" lineHeight="20px" className={styles.description}>
-        {line}
+        <Trans
+          t={t}
+          i18nKey="Common:AIProjectIntroModel"
+          values={{ model }}
+          components={{ 1: <strong className={styles.model} /> }}
+        />
       </Text>
+      {instructionsRooms.length > 0 || knowledgeRooms.length > 0 ? (
+        <div className={styles.sources}>
+          {instructionsRooms.length > 0 ? (
+            <SourceGroup label={t("Common:AIProjectInstructions")} rooms={instructionsRooms} kind="instructions" />
+          ) : null}
+          {knowledgeRooms.length > 0 ? (
+            <SourceGroup label={t("Common:Knowledge")} rooms={knowledgeRooms} kind="knowledge" />
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 });

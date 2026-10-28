@@ -37,6 +37,10 @@ import React from "react";
 import axios from "axios";
 
 import api from "@docspace/shared/api";
+import {
+  getAiProjectHistory,
+  isAiProjectRoom,
+} from "@docspace/shared/api/ai/projects";
 import { formatDate, parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { RoomsType } from "@docspace/shared/enums";
@@ -61,6 +65,32 @@ import { TSelectionHistory } from "../../History/History.types";
 import { useLoader } from "../../../helpers/useLoader";
 
 const PAGE_COUNT = 100;
+
+// An AI project reads its history through `ai/projects/{id}/history`; every
+// other selection through the Files log.
+const getHistory = (
+  selectionType: "file" | "folder",
+  selection: TRoom | TFile | TFolder,
+  filter: Parameters<typeof api.rooms.getHistory>[2],
+  signal: AbortSignal,
+  requestToken?: string,
+) => {
+  if ("roomType" in selection && isAiProjectRoom(selection)) {
+    const { startIndex, count, fromDate, toDate } = filter;
+    return getAiProjectHistory(
+      selection.id,
+      { startIndex, count, fromDate, toDate },
+      signal,
+    );
+  }
+  return api.rooms.getHistory(
+    selectionType,
+    selection.id,
+    filter,
+    signal,
+    requestToken,
+  );
+};
 
 const addLinksToHistory = (fetchedHistory: TFeed, links: RoomMember[]) => {
   const historyWithLinks: TFeedAction<TFeedData | RoomMember>[] =
@@ -195,9 +225,9 @@ export const useHistory = ({
     const dayFilter = getDayFilter(day === undefined ? historyDay : day);
 
     try {
-      const response = await api.rooms.getHistory(
+      const response = await getHistory(
         selectionType,
-        selection.id,
+        selection,
         { page: 0, startIndex: 0, count: PAGE_COUNT, ...dayFilter },
         abortController.current.signal,
         selectionRequestToken,
@@ -294,9 +324,9 @@ export const useHistory = ({
     const startIndex = filter.startIndex + PAGE_COUNT;
 
     try {
-      const data = await api.rooms.getHistory(
+      const data = await getHistory(
         selectionType,
-        selection.id,
+        selection,
         { page, startIndex, count: PAGE_COUNT, ...getDayFilter(historyDay) },
         abortController.current.signal,
         requestToken,

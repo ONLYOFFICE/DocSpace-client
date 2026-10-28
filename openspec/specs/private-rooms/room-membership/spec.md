@@ -221,11 +221,11 @@ The system SHALL NOT show the Share tab of the info panel for a private room, a 
 - **THEN** the tabs do not include Share
 
 ### Requirement: Room-level operations withheld for private rooms
-The system SHALL NOT offer index editing, index export, save as template, duplicate or room download in the context menu of a private room.
+The system SHALL NOT offer index editing, index export, save as template or duplicate in the context menu of a private room.
 
 #### Scenario: Private room context menu
 - **WHEN** the context menu of a private room is opened
-- **THEN** edit-index, export-room-index, save-as-template, duplicate-room and download are absent
+- **THEN** edit-index, export-room-index, save-as-template and duplicate-room are absent
 
 ### Requirement: Standard room management stays available
 The system SHALL keep archiving, quota, tags, logo and cover for a private room on the standard room flows. An archived private room SHALL be listed in the Archive of the Private section while that section is available.
@@ -289,3 +289,18 @@ The system SHALL NOT offer AI actions or plugin actions for the folders and file
 #### Scenario: Encrypted file in an archived private room
 - **WHEN** the context menu of an encrypted file in an archived private room is opened
 - **THEN** ask-ai and plugin entries are absent
+
+### Requirement: Room download offered for private rooms
+The system SHALL offer "Download" and "Download without decryption" in the context menu of a private room that grants the download right. "Download" saves the room as one zip of its decrypted files and "Download without decryption" requests a server archive of the room's ciphertext, as `private-rooms/file-operations` describes them for a folder of the room.
+
+#### Scenario: Private room with the download right
+- **WHEN** the context menu of a private room that grants the download right is opened
+- **THEN** download and download-encrypted are present
+
+#### Scenario: Room downloaded
+- **WHEN** the user picks "Download" on a private room holding encrypted files
+- **THEN** a zip with the decrypted files under their original names is saved, and no server archive of the room's ciphertext is requested
+
+#### Scenario: Room downloaded without decryption
+- **WHEN** the user picks "Download without decryption" on a private room
+- **THEN** the server archive of the room's ciphertext files is downloaded, and nothing is decrypted

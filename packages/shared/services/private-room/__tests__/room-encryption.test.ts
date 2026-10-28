@@ -54,6 +54,7 @@ import {
   addMembersToEncryptedRoom,
   backfillEncryptedFilesForRoomMembers,
   revokeMemberFromEncryptedRoom,
+  rewrapMissingFilesForMember,
   validateMembersForEncryption,
 } from "../room-encryption";
 import { verifyMemberKeys } from "../member-key-verification";
@@ -687,6 +688,98 @@ describe("addMembersToEncryptedRoom", () => {
     );
     expect(bobEntry?.publicKeyId).toBe(BOB_KEY_ID);
     expect(bobEntry?.publicKeyId).not.toBe("");
+  });
+});
+
+describe("rewrapMissingFilesForMember", () => {
+  const SECOND_FILE_ID = FILE_ID + 1;
+  let alice: IdentityKeyPair;
+  let bob: IdentityKeyPair;
+  let secondOwnWrap: ServerAccessKeyDto[];
+
+  beforeEach(async () => {
+    alice = await generateIdentityKeyPair();
+    bob = await generateIdentityKeyPair();
+    secondOwnWrap = await wrapDekForRecipients({
+      dek: generateDEK(),
+      senderIdentity: alice,
+      senderUserId: ALICE,
+      recipients: [{ userId: ALICE, publicKey: pubB64(alice) }],
+      fileId: SECOND_FILE_ID,
+    });
+
+    getFolderMock.mockReset();
+    getFileEncryptionAccessMock.mockReset();
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: secondOwnWrap,
+      userKeys: [],
+    });
+    setFileEncryptionKeysMock.mockReset();
+    setFileEncryptionKeysMock.mockResolvedValue({});
+    getRoomEncryptionKeysMock.mockReset();
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+
+    resetMockIDB();
+    resetTofuStores();
+    vi.stubGlobal("indexedDB", mockIDB);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("Retry succeeds: only the named files are wrapped for the member", async () => {
+    const result = await rewrapMissingFilesForMember(
+      ROOM_ID,
+      BOB,
+      [SECOND_FILE_ID],
+      { currentUserId: ALICE, identity: alice },
+    );
+
+    expect(getFolderMock).not.toHaveBeenCalled();
+    expect(getFileEncryptionAccessMock).toHaveBeenCalledTimes(1);
+    expect(getFileEncryptionAccessMock).toHaveBeenCalledWith(SECOND_FILE_ID);
+    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    const [fileId, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
+    expect(fileId).toBe(SECOND_FILE_ID);
+    expect(
+      (keysPosted as ServerAccessKeyDto[]).map((k) => String(k.userId)).sort(),
+    ).toEqual([ALICE, BOB].sort());
+    expect(result.fileResults).toEqual([
+      { fileId: SECOND_FILE_ID, success: true },
+    ]);
+    expect(result.missingFileIdsByMember).toEqual({});
+  });
+
+  it("Retry still fails: a file that could not be wrapped stays missing for the member", async () => {
+    setFileEncryptionKeysMock.mockRejectedValue(new Error("Request failed"));
+
+    const result = await rewrapMissingFilesForMember(
+      ROOM_ID,
+      BOB,
+      [SECOND_FILE_ID],
+      { currentUserId: ALICE, identity: alice },
+    );
+
+    expect(result.missingFileIdsByMember).toEqual({ [BOB]: [SECOND_FILE_ID] });
+  });
+
+  it("requests nothing without files to wrap", async () => {
+    const result = await rewrapMissingFilesForMember(ROOM_ID, BOB, [], {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(result).toEqual({
+      fileResults: [],
+      skippedMembers: [],
+      missingFileIdsByMember: {},
+    });
+    expect(getFileEncryptionAccessMock).not.toHaveBeenCalled();
+    expect(getRoomEncryptionKeysMock).not.toHaveBeenCalled();
   });
 });
 

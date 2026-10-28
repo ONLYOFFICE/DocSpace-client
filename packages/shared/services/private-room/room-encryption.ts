@@ -124,23 +124,57 @@ export async function addMembersToEncryptedRoom(
   newMembers: NewRoomMember[],
   options: RoomEncryptionOptions,
 ): Promise<AddMembersResult> {
-  const fileResults: FileEncryptionOpResult[] = [];
-  const { currentUserId, identity, onProgress, onKeyChange } = options;
-
   const validMembers = newMembers.filter((m) => m.id);
-  if (validMembers.length === 0) {
-    return { fileResults, skippedMembers: [], missingFileIdsByMember: {} };
-  }
+  if (validMembers.length === 0) return emptyAddMembersResult();
 
   const encryptedFiles = await getEncryptedFilesInRoom(roomId);
-  if (encryptedFiles.length === 0) {
-    return { fileResults, skippedMembers: [], missingFileIdsByMember: {} };
-  }
+  if (encryptedFiles.length === 0) return emptyAddMembersResult();
+
+  return wrapFilesForMembers(
+    roomId,
+    encryptedFiles.map((file) => file.id),
+    validMembers,
+    options,
+  );
+}
+
+/**
+ * Wraps the given files of the room for one member again, after an invite
+ * or an earlier retry left the member without an entry for them.
+ */
+export async function rewrapMissingFilesForMember(
+  roomId: number,
+  userId: string,
+  fileIds: number[],
+  options: RoomEncryptionOptions,
+): Promise<AddMembersResult> {
+  if (!userId || fileIds.length === 0) return emptyAddMembersResult();
+  return wrapFilesForMembers(roomId, fileIds, [{ id: userId }], options);
+}
+
+const emptyAddMembersResult = (): AddMembersResult => ({
+  fileResults: [],
+  skippedMembers: [],
+  missingFileIdsByMember: {},
+});
+
+/**
+ * Wraps the given files of the room for the members whose key passes
+ * verification, the caller unwrapping each file with its own entry.
+ */
+async function wrapFilesForMembers(
+  roomId: number,
+  fileIds: number[],
+  validMembers: NewRoomMember[],
+  options: RoomEncryptionOptions,
+): Promise<AddMembersResult> {
+  const fileResults: FileEncryptionOpResult[] = [];
+  const { currentUserId, identity, onProgress, onKeyChange } = options;
 
   const { keyByUserId, list: roomMemberKeys } =
     await loadRoomMemberKeys(roomId);
 
-  onProgress?.(0, encryptedFiles.length);
+  onProgress?.(0, fileIds.length);
 
   const memberKeyCache = new Map<string, RoomMemberPublicKey | null>();
   const skippedReasons = new Map<string, SkippedMemberReason>();
@@ -177,13 +211,13 @@ export async function addMembersToEncryptedRoom(
     return resolved;
   };
 
-  for (let i = 0; i < encryptedFiles.length; i++) {
-    const file = encryptedFiles[i];
+  for (let i = 0; i < fileIds.length; i++) {
+    const fileId = fileIds[i];
     try {
-      const info = await getFileEncryptionAccess(file.id);
+      const info = await getFileEncryptionAccess(fileId);
       if (!info?.fileKeys || info.fileKeys.length === 0) {
         fileResults.push({
-          fileId: file.id,
+          fileId,
           success: false,
           error: "no encryption keys for file",
         });
@@ -197,11 +231,11 @@ export async function addMembersToEncryptedRoom(
           roomMemberKeys,
           currentUserId,
           currentIdentity: identity,
-          fileId: file.id,
+          fileId,
         });
       } catch (e) {
         fileResults.push({
-          fileId: file.id,
+          fileId,
           success: false,
           error: e instanceof Error ? e.message : "unwrap failed",
         });
@@ -223,7 +257,7 @@ export async function addMembersToEncryptedRoom(
 
       if (recipients.length === 0) {
         wipeDek(dek);
-        fileResults.push({ fileId: file.id, success: true });
+        fileResults.push({ fileId, success: true });
         continue;
       }
 
@@ -234,7 +268,7 @@ export async function addMembersToEncryptedRoom(
           senderIdentity: identity,
           senderUserId: currentUserId,
           recipients,
-          fileId: file.id,
+          fileId,
         });
       } finally {
         wipeDek(dek);
@@ -248,17 +282,17 @@ export async function addMembersToEncryptedRoom(
         })),
         ...newKeys,
       ];
-      await setFileEncryptionKeys(file.id, allKeys);
+      await setFileEncryptionKeys(fileId, allKeys);
 
-      fileResults.push({ fileId: file.id, success: true });
+      fileResults.push({ fileId, success: true });
     } catch (error) {
       fileResults.push({
-        fileId: file.id,
+        fileId,
         success: false,
         error: error instanceof Error ? error.message : "unknown error",
       });
     }
-    onProgress?.(i + 1, encryptedFiles.length);
+    onProgress?.(i + 1, fileIds.length);
   }
 
   for (const m of validMembers) {

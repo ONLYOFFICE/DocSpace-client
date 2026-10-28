@@ -69,6 +69,7 @@ import {
   addMembersToEncryptedRoom,
   backfillEncryptedFilesForRoomMembers,
   revokeMemberFromEncryptedRoom,
+  rewrapMissingFilesForMember,
 } from "../room-encryption";
 import { loadFileSenderKeysSafe } from "../room-member-keys";
 
@@ -272,6 +273,87 @@ describe("addMembersToEncryptedRoom — integration via MSW", () => {
       .getRequests()
       .filter((r) => r.method === "PUT");
     expect(puts).toHaveLength(0);
+  });
+});
+
+describe("rewrapMissingFilesForMember — integration via MSW", () => {
+  it("Retry succeeds: the member gets an entry for the named file only, and unwraps it", async () => {
+    const alice = await generateIdentityKeyPair();
+    const bob = await generateIdentityKeyPair();
+    const dek1 = generateDEK();
+    const dek2 = generateDEK();
+    const aliceWrap = (dek: Uint8Array, fileId: number) =>
+      wrapDekForRecipients({
+        dek,
+        senderIdentity: alice,
+        senderUserId: ALICE_ID,
+        recipients: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+        fileId,
+      });
+
+    filesHandle.current!.setFiles([
+      {
+        id: 101,
+        title: "doc1.docx",
+        serverTitle: "uuid-101.docx",
+        encrypted: true,
+        fileKeys: await aliceWrap(dek1, 101),
+      },
+      {
+        id: 102,
+        title: "doc2.docx",
+        serverTitle: "uuid-102.docx",
+        encrypted: true,
+        fileKeys: await aliceWrap(dek2, 102),
+      },
+    ]);
+    accessHandle.current!.setRoomKeys(ROOM_ID, [
+      {
+        id: "1",
+        userId: ALICE_ID,
+        publicKey: pubB64(alice),
+        privateKeyEnc: "",
+      },
+      {
+        id: "2",
+        userId: BOB_ID,
+        publicKey: pubB64(bob),
+        privateKeyEnc: "",
+      },
+    ]);
+
+    const result = await rewrapMissingFilesForMember(ROOM_ID, BOB_ID, [102], {
+      currentUserId: ALICE_ID,
+      identity: alice,
+    });
+
+    expect(result.fileResults).toEqual([{ fileId: 102, success: true }]);
+    expect(result.missingFileIdsByMember).toEqual({});
+    expect(
+      filesHandle.current!.getFile(101).fileKeys.map((k) => k.userId),
+    ).toEqual([ALICE_ID]);
+    const stored = filesHandle.current!.getFile(102);
+    expect(stored.fileKeys.map((k) => k.userId).sort()).toEqual(
+      [ALICE_ID, BOB_ID].sort(),
+    );
+
+    const unwrapped = await unwrapDekForCurrentUser({
+      fileKeys: stored.fileKeys,
+      roomMemberKeys: [
+        { userId: ALICE_ID, publicKey: pubB64(alice) },
+        { userId: BOB_ID, publicKey: pubB64(bob) },
+      ],
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: 102,
+    });
+    expect(Array.from(unwrapped)).toEqual(Array.from(dek2));
+
+    const puts = filesHandle.current!
+      .getRequests()
+      .filter((r) => r.method === "PUT");
+    expect(puts).toHaveLength(1);
+    expect(puts[0].url).toMatch(/\/files\/102\/access$/);
   });
 });
 

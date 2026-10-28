@@ -3,7 +3,7 @@
 ## 1. Shared service returns per-invitee wrap results
 
 - [x] 1.1 Make `addMembersToEncryptedRoom` in `packages/shared/services/private-room/room-encryption.ts` return, per invitee, the set of file ids that could not be wrapped in addition to the skipped list; verify with new cases in `packages/shared/services/private-room/__tests__/room-encryption.test.ts`.
-- [ ] 1.2 Add a `rewrapMissingFilesForMember(roomId, userId, fileIds)` helper that re-runs the wrap for a given file subset; verify with a unit test in the same file and an MSW integration case in `room-encryption.integration.test.ts`.
+- [x] 1.2 Add a `rewrapMissingFilesForMember(roomId, userId, fileIds)` helper that re-runs the wrap for a given file subset; verify with a unit test in the same file and an MSW integration case in `room-encryption.integration.test.ts`.
 
 ## 2. Invite panel order and result view
 

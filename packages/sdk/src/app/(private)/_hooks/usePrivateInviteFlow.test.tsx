@@ -44,6 +44,13 @@ type TRewrapArgs = {
   newMembers: { id: string; displayName?: string }[];
   currentUserId: string;
   onProgress: (progress: { percent: number; completed?: boolean }) => void;
+  onOutcome: (outcome: unknown) => void;
+};
+
+const BOB_GRANTED = {
+  granted: [{ id: "bob", displayName: "Bob" }],
+  pending: [],
+  skipped: [],
 };
 
 const identity = { publicKey: new Uint8Array() };
@@ -128,15 +135,18 @@ describe("usePrivateInviteFlow", () => {
   it("Order of operations: the re-encryption progress is shown until the file keys are wrapped", async () => {
     let finish: (notices: unknown[]) => void = () => {};
     mocks.rewrapForInvitedMembers.mockImplementation(
-      ({ onProgress }: TRewrapArgs) => {
+      ({ onProgress, onOutcome }: TRewrapArgs) => {
         onProgress({ percent: 40 });
         return new Promise((resolve) => {
-          finish = resolve;
+          finish = (notices) => {
+            onOutcome(BOB_GRANTED);
+            resolve(notices);
+          };
         });
       },
     );
 
-    let pending: Promise<void> = Promise.resolve();
+    let pending: ReturnType<typeof invite> = Promise.resolve(null);
     await act(async () => {
       pending = invite();
     });
@@ -153,11 +163,29 @@ describe("usePrivateInviteFlow", () => {
 
     await act(async () => {
       finish([{ level: "success", text: "Common:UsersInvited" }]);
-      await pending;
+      await expect(pending).resolves.toEqual(BOB_GRANTED);
     });
 
     expect(dialogs.reencryptPercent).toBeNull();
     expect(mocks.toastr.success).toHaveBeenCalledWith("Common:UsersInvited");
+  });
+
+  it("Mixed invitation: resolves with the skipped invitees the shared flow reports", async () => {
+    const outcome = {
+      granted: [{ id: "bob", displayName: "Bob" }],
+      pending: [],
+      skipped: [{ id: "dan", displayName: "Dan", reason: "no-key" }],
+    };
+    mocks.rewrapForInvitedMembers.mockImplementation(
+      async ({ onOutcome }: TRewrapArgs) => {
+        onOutcome(outcome);
+        return [{ level: "warning", text: "Common:EncryptedSkippedNoKeys" }];
+      },
+    );
+
+    await act(async () => {
+      await expect(invite()).resolves.toEqual(outcome);
+    });
   });
 
   it("reports the skipped members the shared flow names", async () => {
@@ -174,12 +202,17 @@ describe("usePrivateInviteFlow", () => {
   });
 
   it("reports nothing once a lock or a navigation aborted the re-encryption", async () => {
-    mocks.rewrapForInvitedMembers.mockImplementation(async () => {
-      abortAllCryptoOperations("lock");
-      return [{ level: "error", text: "Common:EncryptedReencryptFailed" }];
-    });
+    mocks.rewrapForInvitedMembers.mockImplementation(
+      async ({ onOutcome }: TRewrapArgs) => {
+        abortAllCryptoOperations("lock");
+        onOutcome(BOB_GRANTED);
+        return [{ level: "error", text: "Common:EncryptedReencryptFailed" }];
+      },
+    );
 
-    await act(() => invite());
+    await act(async () => {
+      await expect(invite()).resolves.toBeNull();
+    });
 
     expect(mocks.toastr.error).not.toHaveBeenCalled();
     expect(dialogs.reencryptPercent).toBeNull();

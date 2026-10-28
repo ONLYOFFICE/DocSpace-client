@@ -41,10 +41,26 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
   true;
 
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import type { TInviteOutcome } from "@docspace/shared/services/private-room/room-member-flows";
 
 type TInviteInputProps = {
   setAddUsersPanelVisible: (visible: boolean) => void;
   setInviteItems: (items: unknown[]) => void;
+};
+
+const BOB = {
+  id: "bob",
+  avatar: "/avatar.png",
+  displayName: "Bob",
+  email: "bob@example.com",
+  access: ShareAccessRights.Editing,
+};
+const DAN = {
+  id: "dan",
+  avatar: "/avatar.png",
+  displayName: "Dan",
+  email: "dan@example.com",
+  access: ShareAccessRights.Editing,
 };
 
 const mocks = vi.hoisted(() => ({
@@ -106,17 +122,12 @@ vi.mock("./sub-components/InviteInput", () => ({
       <button
         type="button"
         data-testid="add_bob"
-        onClick={() =>
-          setInviteItems([
-            {
-              id: "bob",
-              avatar: "/avatar.png",
-              displayName: "Bob",
-              email: "bob@example.com",
-              access: ShareAccessRights.Editing,
-            },
-          ])
-        }
+        onClick={() => setInviteItems([BOB])}
+      />
+      <button
+        type="button"
+        data-testid="add_bob_and_dan"
+        onClick={() => setInviteItems([BOB, DAN])}
       />
     </>
   ),
@@ -157,6 +168,9 @@ const click = (testId: string) =>
       ?.click();
   });
 
+const find = (testId: string) =>
+  container.querySelector<HTMLElement>(`[data-testid="${testId}"]`);
+
 describe("InvitePanel of a private room", () => {
   afterEach(() => {
     act(() => root?.unmount());
@@ -186,9 +200,15 @@ describe("InvitePanel of a private room", () => {
     expect(mocks.selector?.withGroups).toBe(true);
   });
 
-  it("Order of operations: the panel closes once the security update succeeds, then the keys are re-wrapped", async () => {
+  it("Order of operations: the keys are re-wrapped after the security update, and the panel stays open with the result until closed", async () => {
     const onBeforeSubmit = vi.fn(async () => true);
-    const onInviteSubmitted = vi.fn(async () => {});
+    let finish: (outcome: TInviteOutcome) => void = () => {};
+    const onInviteSubmitted = vi.fn(
+      () =>
+        new Promise<TInviteOutcome | null>((resolve) => {
+          finish = resolve;
+        }),
+    );
     const { onClose } = await renderPanel({
       isPrivateRoom: true,
       onBeforeSubmit,
@@ -202,13 +222,84 @@ describe("InvitePanel of a private room", () => {
     const order = [
       onBeforeSubmit,
       mocks.setRoomSecurity,
-      onClose,
       onInviteSubmitted,
     ].map((fn) => fn.mock.invocationCallOrder[0]);
     expect(order).toEqual([...order].sort((a, b) => a - b));
+    expect(onClose).not.toHaveBeenCalled();
+    expect(find("invite_panel_result")).toBeNull();
+
+    await act(async () => {
+      finish({
+        granted: [{ id: "bob", displayName: "Bob" }],
+        pending: [],
+        skipped: [],
+      });
+    });
+
+    expect(find("invite_panel_result_granted")?.textContent).toContain("Bob");
+    expect(find("invite_panel_invite_again_button")).toBeNull();
+    expect(onClose).not.toHaveBeenCalled();
+
+    await click("invite_panel_close_button");
+
+    expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it("shows a failed re-wrap as a toast after the panel has closed", async () => {
+  it("Mixed invitation: the panel stays open listing the skipped invitee with the reason, and Invite again sends only them", async () => {
+    const onInviteSubmitted = vi.fn(async () => ({
+      granted: [{ id: "bob", displayName: "Bob" }],
+      pending: [],
+      skipped: [{ id: "dan", displayName: "Dan", reason: "no-key" as const }],
+    }));
+    const { onClose } = await renderPanel({
+      isPrivateRoom: true,
+      onBeforeSubmit: async () => true,
+      onInviteSubmitted,
+    });
+
+    await click("add_bob_and_dan");
+    await click("invite_panel_send_button");
+
+    expect(find("invite_panel_result_granted")?.textContent).toContain("Bob");
+    expect(find("invite_panel_result_skipped")?.textContent).toContain(
+      "Common:EncryptedSkippedNoKeys",
+    );
+    expect(onClose).not.toHaveBeenCalled();
+
+    await click("invite_panel_invite_again_button");
+
+    expect(find("invite_panel_result")).toBeNull();
+    await click("invite_panel_send_button");
+
+    expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(2);
+    expect(mocks.setRoomSecurity.mock.calls[1][1].invitations).toEqual([
+      { id: "dan", access: ShareAccessRights.Editing },
+    ]);
+  });
+
+  it("Some files fail: the panel lists the invitee as pending with the failed file count", async () => {
+    await renderPanel({
+      isPrivateRoom: true,
+      onBeforeSubmit: async () => true,
+      onInviteSubmitted: async () => ({
+        granted: [],
+        pending: [
+          { member: { id: "bob", displayName: "Bob" }, missingFileIds: [7] },
+        ],
+        skipped: [],
+      }),
+    });
+
+    await click("add_bob");
+    await click("invite_panel_send_button");
+
+    const pending = find("invite_panel_result_pending")?.textContent;
+    expect(pending).toContain("Common:EncryptedAccessPending");
+    expect(pending).toContain("Bob");
+    expect(pending).toContain("Common:EncryptedReencryptPartialFailure");
+  });
+
+  it("shows a failed re-wrap as a toast and closes the panel", async () => {
     const onInviteSubmitted = vi.fn(async () => {
       throw new Error("Common:EncryptionUnlockRequired");
     });

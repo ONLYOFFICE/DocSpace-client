@@ -39,6 +39,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
+import type { TInviteOutcome } from "@docspace/shared/services/private-room/room-member-flows";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
@@ -56,11 +57,15 @@ type InviteAfterSubmitArgs = {
 
 type UsePrivateInviteFlowReturn = {
   /**
-   * Invoked once the room security update has succeeded and the panel has
-   * closed: wraps the room's file keys for the new members through the
-   * shared flow, with the re-encryption progress in the dialogs store.
+   * Invoked once the room security update has succeeded: wraps the room's
+   * file keys for the new members through the shared flow, with the
+   * re-encryption progress in the dialogs store, and resolves with how the
+   * invitation ended for each of them, or `null` when there is nothing to
+   * report.
    */
-  onInviteSubmitted: (args: InviteAfterSubmitArgs) => Promise<void>;
+  onInviteSubmitted: (
+    args: InviteAfterSubmitArgs,
+  ) => Promise<TInviteOutcome | null>;
   /**
    * Pre-submit identity gate for InvitePanel's `onBeforeSubmit`: unlocks
    * before the server grants room access, and refuses with
@@ -80,7 +85,7 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
 
   const onInviteSubmitted = React.useCallback(
     async ({ roomId, memberIds, displayNames }: InviteAfterSubmitArgs) => {
-      if (memberIds.length === 0) return;
+      if (memberIds.length === 0) return null;
 
       const userId = identityStore.userKeys?.userId;
       if (!userId) {
@@ -96,6 +101,7 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
       dialogs.setReencryptPercent(0);
       try {
         const { rewrapForInvitedMembers } = await loadMemberFlows();
+        let outcome: TInviteOutcome | null = null;
         const notices = await rewrapForInvitedMembers({
           t,
           roomId,
@@ -108,10 +114,14 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
           onProgress: ({ percent, completed }) => {
             if (!completed) dialogs.setReencryptPercent(percent);
           },
+          onOutcome: (value) => {
+            outcome = value;
+          },
         });
         // A lock or a navigation aborts the operation; nothing is reported.
-        if (controller.signal.aborted) return;
+        if (controller.signal.aborted) return null;
         for (const { level, text } of notices) toastr[level](text);
+        return outcome;
       } finally {
         releaseCryptoOperation(controller);
         dialogs.setReencryptPercent(null);

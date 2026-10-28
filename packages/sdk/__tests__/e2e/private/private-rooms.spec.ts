@@ -1136,7 +1136,7 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
     const people = page.getByTestId("invite_panel_people_selector");
     await people.getByTestId("selector-item-0").click();
     await people.getByTestId("selector_submit_button").click();
-    // The key writes wait until the panel is seen closed.
+    // The key writes wait until the re-encryption is seen in progress.
     let releaseKeyWrites = () => {};
     const keyWritesHeld = new Promise<void>((resolve) => {
       releaseKeyWrites = resolve;
@@ -1148,8 +1148,9 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
     await page.getByTestId("invite_panel_send_button").click();
     await unlock(page);
 
-    await expect(page.getByTestId("invite_panel_send_button")).toBeHidden();
     await expect(page.getByTestId("reencrypt-progress-bar")).toBeVisible();
+    await expect(page.getByTestId("invite_panel_send_button")).toBeVisible();
+    await expect(page.getByTestId("invite_panel_result")).toBeHidden();
     releaseKeyWrites();
     await expect
       .poll(() => keyHolders(room, MEMO.id))
@@ -1157,6 +1158,15 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
     await expect(page.getByTestId("reencrypt-progress-bar")).toBeHidden();
     expect(members.current!.getMembers().map((m) => m.id)).toEqual([CAROL.id]);
     await expect(page.getByText("Users invited")).toBeVisible();
+    await expect(page.getByTestId("invite_panel_result_granted")).toContainText(
+      CAROL.displayName,
+    );
+    await expect(page.getByTestId("invite_panel_result_skipped")).toHaveCount(0);
+
+    await page.getByTestId("invite_panel_close_button").click();
+
+    await expect(page.getByTestId("invite_panel_result")).toBeHidden();
+    await expect(page.getByTestId("invite_panel_close_button")).toBeHidden();
   });
 
   test("Invite from the header of an open room", async ({

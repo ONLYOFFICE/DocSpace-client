@@ -82,6 +82,7 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
+import type { TInviteOutcome } from "@docspace/shared/services/private-room/room-member-flows";
 
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button/Button.enums";
@@ -107,6 +108,7 @@ import { getDate } from "@docspace/shared/components/share/Share.helpers";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
+import InviteResult from "./sub-components/InviteResult";
 import LinkSettingsPanel from "../link-settings-panel";
 import type { LinkSettingsSubmitOption } from "../link-settings-panel/LinkSettingsPanel.types";
 import { fixAccess } from "./utils";
@@ -189,14 +191,15 @@ type InvitePanelProps = {
   culture?: string;
   onMembersUpdated?: () => void;
   /**
-   * Invoked once `setRoomSecurity` has resolved and the panel has closed.
-   * Private rooms use it to wrap the file keys for the new members; a
-   * rejection is shown as a toast.
+   * Invoked once `setRoomSecurity` has resolved. Private rooms use it to
+   * wrap the file keys for the new members; the panel stays open until it
+   * settles and shows the outcome it resolves with, or closes on `null`.
+   * A rejection is shown as a toast.
    */
   onInviteSubmitted?: (
     memberIds: string[],
     displayNamesByMemberId: Record<string, string>,
-  ) => Promise<void>;
+  ) => Promise<TInviteOutcome | null>;
   /**
    * Optional async gate called BEFORE `setRoomSecurity`. Return `true` to
    * proceed, `false` to abort the submission without error (the callee is
@@ -251,6 +254,11 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   const [hasErrors, setHasErrors] = useState(false);
   const [shareLinks, setShareLinks] = useState<ShareLink[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [inviteOutcome, setInviteOutcome] = useState<TInviteOutcome | null>(
+    null,
+  );
+  // Counts sends and closes, so a re-wrap that ends after a close shows nothing.
+  const sendRunRef = useRef(0);
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
   const [activeLink, setActiveLink] = useState<ShareLink>({});
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
@@ -270,6 +278,8 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   // ─── Handlers ───────────────────────────────────────────────────────────────
 
   const handleClose = () => {
+    sendRunRef.current += 1;
+    setInviteOutcome(null);
     setInviteItems([]);
     onClose();
   };
@@ -653,9 +663,15 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         data,
       )) as SetRoomSecurityResult;
 
-      setIsLoading(false);
+      const memberIds = invitations
+        .map((inv) => inv.id)
+        .filter((id): id is string => typeof id === "string" && id.length > 0);
+      const showsResult = !!onInviteSubmitted && memberIds.length > 0;
 
-      handleClose();
+      if (!showsResult) {
+        setIsLoading(false);
+        handleClose();
+      }
       if (!onInviteSubmitted) {
         toastr.success(t("Common:UsersInvited"));
       }
@@ -666,20 +682,27 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
 
       onMembersUpdated?.();
 
-      // Spec: private-rooms/sdk-surface, "Invite panel offers people only and closes before re-encryption"
-      if (onInviteSubmitted) {
-        const memberIds = invitations
-          .map((inv) => inv.id)
-          .filter((id): id is string => typeof id === "string" && id.length > 0);
+      // Spec: private-rooms/sdk-surface, "Invite panel offers people only and reports the invitation result"
+      if (showsResult) {
+        const run = ++sendRunRef.current;
         const displayNames: Record<string, string> = {};
         for (const item of inviteItems) {
           const id = item.id;
           const name = item.displayName ?? item.email;
           if (typeof id === "string" && name) displayNames[id] = name;
         }
-        onInviteSubmitted(memberIds, displayNames).catch((encryptError) => {
+
+        let outcome: TInviteOutcome | null = null;
+        try {
+          outcome = await onInviteSubmitted(memberIds, displayNames);
+        } catch (encryptError) {
           toastr.error(encryptError as string | Error);
-        });
+        }
+
+        setIsLoading(false);
+        if (run !== sendRunRef.current) return;
+        if (outcome) setInviteOutcome(outcome);
+        else handleClose();
       }
     } catch (err) {
       const error = err as {
@@ -727,6 +750,19 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
 
   const closeUsersPanel = () => {
     setAddUsersPanelVisible(false);
+  };
+
+  const onInviteAgain = () => {
+    if (!inviteOutcome) return;
+    const skippedIds = new Set(
+      inviteOutcome.skipped.map((member) => member.id),
+    );
+    setInviteItems(
+      inviteItems.filter(
+        (item) => typeof item.id === "string" && skippedIds.has(item.id),
+      ),
+    );
+    setInviteOutcome(null);
   };
 
   type TSelectorItemArg = {
@@ -1043,30 +1079,67 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
       ) : null}
 
       <ModalDialog.Header>
-        <div className={styles.invitePanelHeader}>{t("Common:Invite")}</div>
+        <div className={styles.invitePanelHeader}>
+          {inviteOutcome
+            ? t("Common:EncryptedInviteResultTitle")
+            : t("Common:Invite")}
+        </div>
       </ModalDialog.Header>
-      <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
+      <ModalDialog.Body>
+        {inviteOutcome ? (
+          <InviteResult t={t} outcome={inviteOutcome} />
+        ) : (
+          bodyInvitePanel
+        )}
+      </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          className="send-invitation"
-          scale
-          size={ButtonSize.normal}
-          isDisabled={hasErrors || !hasInvitedUsers}
-          primary
-          onClick={onClickSend}
-          label={t("Common:SendInvitation")}
-          isLoading={isLoading}
-          testId="invite_panel_send_button"
-        />
-        <Button
-          className="cancel-button"
-          scale
-          size={ButtonSize.normal}
-          onClick={handleClose}
-          label={t("Common:CancelButton")}
-          isDisabled={isLoading}
-          testId="invite_panel_cancel_button"
-        />
+        {inviteOutcome ? (
+          <>
+            {inviteOutcome.skipped.length ? (
+              <Button
+                className="invite-again"
+                scale
+                size={ButtonSize.normal}
+                primary
+                onClick={onInviteAgain}
+                label={t("Common:InviteAgain")}
+                testId="invite_panel_invite_again_button"
+              />
+            ) : null}
+            <Button
+              className="close-button"
+              scale
+              size={ButtonSize.normal}
+              primary={!inviteOutcome.skipped.length}
+              onClick={handleClose}
+              label={t("Common:CloseButton")}
+              testId="invite_panel_close_button"
+            />
+          </>
+        ) : (
+          <>
+            <Button
+              className="send-invitation"
+              scale
+              size={ButtonSize.normal}
+              isDisabled={hasErrors || !hasInvitedUsers}
+              primary
+              onClick={onClickSend}
+              label={t("Common:SendInvitation")}
+              isLoading={isLoading}
+              testId="invite_panel_send_button"
+            />
+            <Button
+              className="cancel-button"
+              scale
+              size={ButtonSize.normal}
+              onClick={handleClose}
+              label={t("Common:CancelButton")}
+              isDisabled={isLoading}
+              testId="invite_panel_cancel_button"
+            />
+          </>
+        )}
       </ModalDialog.Footer>
     </ModalDialog>
   );

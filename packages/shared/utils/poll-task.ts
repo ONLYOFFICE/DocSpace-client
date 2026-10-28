@@ -50,9 +50,11 @@ type TPolledTask = {
  *   missingTimeoutMs in a row: the server may drop it briefly between
  *   publications.
  *
- * A poll whose request fails says nothing of the task, so under either kind it
- * is no sign of life, and the polling gives up only once the task has shown
- * none for the timeout of its kind.
+ * A poll whose request fails for a while (no answer, a 5xx, a 408 or 429) says
+ * nothing of the task, so under either kind it is no sign of life, and the
+ * polling gives up only once the task has shown none for the timeout of its
+ * kind. Any other failed answer (a 403 for lost access, a 404 for a deleted
+ * item) will not change on a retry, so it ends the polling at once, as is.
  */
 export type TTaskLiveness =
   | { kind: "progress"; stallTimeoutMs: number }
@@ -79,6 +81,27 @@ export class TaskPollingError extends Error {
 }
 
 export const POLL_INTERVAL_MS = 1000;
+
+const getResponseStatus = (error: unknown): number | undefined => {
+  if (typeof error !== "object" || error === null || !("response" in error))
+    return undefined;
+
+  const { response } = error;
+  if (typeof response !== "object" || response === null) return undefined;
+  if (!("status" in response) || typeof response.status !== "number")
+    return undefined;
+
+  return response.status;
+};
+
+// No answer at all (the network dropped, the request timed out) or one the
+// server may well give differently a moment later.
+const isTransientRequestError = (error: unknown) => {
+  const status = getResponseStatus(error);
+  return (
+    status === undefined || status >= 500 || status === 408 || status === 429
+  );
+};
 
 const wait = (ms: number) =>
   new Promise<void>((resolve) => {
@@ -120,6 +143,10 @@ export const pollTask = async <T extends TPolledTask>({
     try {
       task = await fetchTask();
     } catch (error) {
+      // An answer that will not change on a retry carries the server's own
+      // message for the user, so it is passed through at once.
+      if (!isTransientRequestError(error)) throw error;
+
       // The server restarting or the network dropping for a moment must not
       // cut short a run that has been going for half an hour.
       if (isSilentTooLong()) {

@@ -188,6 +188,45 @@ describe("pollTask", () => {
         expect(fetchTask).toHaveBeenCalledTimes(5);
       },
     );
+
+    it.each([500, 503, 408, 429])(
+      "rides out an answer of %i as a failed request",
+      async (status) => {
+        const fetchTask = vi
+          .fn()
+          .mockRejectedValueOnce({ response: { status } })
+          .mockResolvedValueOnce(task(100, true));
+
+        const { result } = startPolling(fetchTask, PRESENCE);
+        await polls(2);
+
+        await expect(result).resolves.toEqual(task(100, true));
+      },
+    );
+
+    // A DB sync checks the room on every poll: the right to edit it taken away
+    // mid-run answers 403, the room deleted mid-run 404.
+    it.each([
+      [403, PROGRESS],
+      [403, PRESENCE],
+      [404, PROGRESS],
+      [404, PRESENCE],
+    ])(
+      "passes an answer of %i through at once (%o)",
+      async (status, liveness) => {
+        const refused = { response: { status, data: {} } };
+        const fetchTask = vi
+          .fn()
+          .mockResolvedValueOnce(task(10))
+          .mockRejectedValue(refused);
+
+        const { result } = startPolling(fetchTask, liveness);
+        await polls(2);
+
+        await expect(result).rejects.toBe(refused);
+        expect(fetchTask).toHaveBeenCalledTimes(2);
+      },
+    );
   });
 
   describe("progress liveness", () => {

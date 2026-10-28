@@ -43,6 +43,7 @@ import {
   revokeMemberFromEncryptedRoom,
   validateMembersForEncryption,
   type NewRoomMember,
+  type SkippedRoomMember,
 } from "./room-encryption";
 
 /** A message a membership flow asks its caller to show. */
@@ -144,6 +145,37 @@ export type TInviteRewrapProgress = {
   alert?: boolean;
 };
 
+/** How an invitation ended for each invitee the re-wrap covered. */
+export type TInviteOutcome = {
+  granted: NewRoomMember[];
+  pending: { member: NewRoomMember; missingFileIds: number[] }[];
+  skipped: SkippedRoomMember[];
+  /** The re-wrap failed as a whole, so every invitee it covered is pending. */
+  failed?: true;
+};
+
+const getInviteOutcome = (
+  newMembers: NewRoomMember[],
+  skippedMembers: SkippedRoomMember[],
+  missingFileIdsByMember: Record<string, number[]>,
+): TInviteOutcome => {
+  const memberOf = (id: string): NewRoomMember =>
+    newMembers.find((m) => m.id === id) ?? { id };
+  const skippedIds = new Set(skippedMembers.map((m) => m.id));
+  return {
+    granted: newMembers.filter(
+      (m) => !skippedIds.has(m.id) && !missingFileIdsByMember[m.id],
+    ),
+    pending: Object.entries(missingFileIdsByMember).map(
+      ([id, missingFileIds]) => ({ member: memberOf(id), missingFileIds }),
+    ),
+    skipped: skippedMembers.map((m) => ({
+      ...m,
+      displayName: m.displayName || memberOf(m.id).displayName,
+    })),
+  };
+};
+
 // Spec: private-rooms/room-membership, "Invited members receive re-wrapped file keys"
 export async function rewrapForInvitedMembers({
   t,
@@ -152,6 +184,7 @@ export async function rewrapForInvitedMembers({
   currentUserId,
   identity,
   onProgress,
+  onOutcome,
 }: {
   t: TFunction;
   roomId: number;
@@ -159,6 +192,7 @@ export async function rewrapForInvitedMembers({
   currentUserId: string;
   identity: IdentityKeyPair;
   onProgress: (progress: TInviteRewrapProgress) => void;
+  onOutcome?: (outcome: TInviteOutcome) => void;
 }): Promise<TMemberFlowNotice[]> {
   return addMembersToEncryptedRoom(roomId, newMembers, {
     currentUserId,
@@ -168,11 +202,14 @@ export async function rewrapForInvitedMembers({
       onProgress({ percent });
     },
   })
-    .then(({ fileResults, skippedMembers }) => {
+    .then(({ fileResults, skippedMembers, missingFileIdsByMember = {} }) => {
       const notices: TMemberFlowNotice[] = [];
       const failures = fileResults.filter((r) => !r.success);
       const hasAlert = failures.length > 0 || skippedMembers.length > 0;
       onProgress({ percent: 100, completed: true, alert: hasAlert });
+      onOutcome?.(
+        getInviteOutcome(newMembers, skippedMembers, missingFileIdsByMember),
+      );
 
       if (skippedMembers.length > 0) {
         const formatName = (m: { id: string; displayName?: string }) =>
@@ -229,6 +266,12 @@ export async function rewrapForInvitedMembers({
       // biome-ignore lint/suspicious/noConsole: the invite stands; the failed re-wrap is logged for triage.
       console.error("Failed to re-encrypt file keys for new members:", error);
       onProgress({ percent: 100, completed: true, alert: true });
+      onOutcome?.({
+        granted: [],
+        pending: newMembers.map((member) => ({ member, missingFileIds: [] })),
+        skipped: [],
+        failed: true,
+      });
       return [
         { level: "error", text: t("Common:EncryptedReencryptFailed") },
       ];

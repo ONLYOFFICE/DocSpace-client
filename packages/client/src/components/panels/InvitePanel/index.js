@@ -79,6 +79,7 @@ import { fixAccess } from "./utils";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
+import InviteResult from "./sub-components/InviteResult";
 import LinkSettingsPanel from "../LinkSettingsPanel";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
@@ -132,6 +133,9 @@ const InvitePanel = ({
   const [hasErrors, setHasErrors] = useState(false);
   const [shareLinks, setShareLinks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [inviteOutcome, setInviteOutcome] = useState(null);
+  // Counts sends and closes, so a re-wrap that ends after a close shows nothing.
+  const sendRunRef = useRef(0);
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [activeLink, setActiveLink] = useState({});
@@ -157,6 +161,8 @@ const InvitePanel = ({
   const { isRTL } = useInterfaceDirection();
 
   const onClose = () => {
+    sendRunRef.current += 1;
+    setInviteOutcome(null);
     setInviteLanguage({ key: "", label: "" });
     setInfoPanelIsMobileHidden(false);
     setInvitePanelOptions({
@@ -490,9 +496,12 @@ const InvitePanel = ({
           parentId: selectedRoom?.parentId,
         });
       }
-      setIsLoading(false);
+      const showsResult = isPrivateInvite && identity && newMembers.length > 0;
 
-      onClose();
+      if (!showsResult) {
+        setIsLoading(false);
+        onClose();
+      }
 
       if (!isPrivateInvite) {
         toastr.success(t("Common:UsersInvited"));
@@ -502,16 +511,19 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      if (isPrivateInvite && identity && newMembers.length > 0) {
+      if (showsResult) {
+        const run = ++sendRunRef.current;
         const operationId = uniqueid("operation_");
 
+        updateInfoPanelMembers();
         setSecondaryProgressBarData({
           operation: OPERATIONS_NAME.roomReencryption,
           percent: 0,
           operationId,
         });
 
-        rewrapForInvitedMembers({
+        let outcome = null;
+        const notices = await rewrapForInvitedMembers({
           t,
           roomId,
           newMembers,
@@ -523,10 +535,18 @@ const InvitePanel = ({
               ...progress,
               operationId,
             }),
-        }).then((notices) => {
-          notices.forEach(({ level, text }) => toastr[level](text));
+          onOutcome: (value) => {
+            outcome = value;
+          },
         });
-      } else if (isPrivateInvite) {
+        notices.forEach(({ level, text }) => toastr[level](text));
+
+        setIsLoading(false);
+        if (run === sendRunRef.current) setInviteOutcome(outcome);
+        return;
+      }
+
+      if (isPrivateInvite) {
         toastr.success(t("Common:UsersInvited"));
       }
 
@@ -576,6 +596,14 @@ const InvitePanel = ({
     if (items.length > filtered.length) toastr.warning(t("Common:UsersAlreadyAdded"));
 
     return filtered;
+  };
+
+  const onInviteAgain = () => {
+    const skippedIds = new Set(
+      inviteOutcome.skipped.map((member) => member.id),
+    );
+    setInviteItems(inviteItems.filter((item) => skippedIds.has(item.id)));
+    setInviteOutcome(null);
   };
 
   const onCloseLinkSettingsPanel = () => {
@@ -991,7 +1019,7 @@ const InvitePanel = ({
             disableInvitedUsers={invitedUsersArray}
             withGuests={showGuestsTab}
             withHeader
-            dataTestId="invite_panel_people_selector"
+            data-test-id="invite_panel_people_selector"
             headerProps={{
               // Todo: Update groups empty screen texts when they are ready
               headerLabel: t("Common:Contacts"),
@@ -1033,7 +1061,13 @@ const InvitePanel = ({
 
       <ModalDialog.Header>
         <div className={styles.invitePanelHeader}>
-          {t("Common:Invite")} {roomId === -1 ? currentAccess?.label : ""}
+          {inviteOutcome ? (
+            t("Common:EncryptedInviteResultTitle")
+          ) : (
+            <>
+              {t("Common:Invite")} {roomId === -1 ? currentAccess?.label : ""}
+            </>
+          )}
           {roomId === -1 ? (
             <HelpButton
               tooltipMaxWidth="448px"
@@ -1073,28 +1107,61 @@ const InvitePanel = ({
           ) : null}
         </div>
       </ModalDialog.Header>
-      <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
+      <ModalDialog.Body>
+        {inviteOutcome ? (
+          <InviteResult t={t} outcome={inviteOutcome} />
+        ) : (
+          bodyInvitePanel
+        )}
+      </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          className="send-invitation"
-          scale
-          size="normal"
-          isDisabled={hasErrors || !hasInvitedUsers}
-          primary
-          onClick={onClickSend}
-          label={t("Common:SendInvitation")}
-          isLoading={isLoading}
-          testId="invite_panel_send_button"
-        />
-        <Button
-          className="cancel-button"
-          scale
-          size="normal"
-          onClick={onClose}
-          label={t("Common:CancelButton")}
-          isDisabled={isLoading}
-          testId="invite_panel_cancel_button"
-        />
+        {inviteOutcome ? (
+          <>
+            {inviteOutcome.skipped.length ? (
+              <Button
+                className="invite-again"
+                scale
+                size="normal"
+                primary
+                onClick={onInviteAgain}
+                label={t("Common:InviteAgain")}
+                testId="invite_panel_invite_again_button"
+              />
+            ) : null}
+            <Button
+              className="close-button"
+              scale
+              size="normal"
+              primary={!inviteOutcome.skipped.length}
+              onClick={onClose}
+              label={t("Common:CloseButton")}
+              testId="invite_panel_close_button"
+            />
+          </>
+        ) : (
+          <>
+            <Button
+              className="send-invitation"
+              scale
+              size="normal"
+              isDisabled={hasErrors || !hasInvitedUsers}
+              primary
+              onClick={onClickSend}
+              label={t("Common:SendInvitation")}
+              isLoading={isLoading}
+              testId="invite_panel_send_button"
+            />
+            <Button
+              className="cancel-button"
+              scale
+              size="normal"
+              onClick={onClose}
+              label={t("Common:CancelButton")}
+              isDisabled={isLoading}
+              testId="invite_panel_cancel_button"
+            />
+          </>
+        )}
       </ModalDialog.Footer>
     </ModalDialog>
   );

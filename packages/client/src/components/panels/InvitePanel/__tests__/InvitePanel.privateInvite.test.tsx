@@ -155,8 +155,18 @@ const InvitePanel = (await import("../index"))
 
 const ROOM_ID = 10;
 
+const BOB_ITEM = {
+  id: "bob",
+  avatar: "/avatar.png",
+  displayName: "bob tester",
+  email: "bob@example.com",
+  access: ShareAccessRights.Editing,
+};
+
 const renderInviteFromList = (room: TRoom) => {
   const getFolderInfo = vi.fn();
+  const setInviteItems = vi.fn();
+  const setInvitePanelOptions = vi.fn();
 
   render(
     <Provider
@@ -170,23 +180,15 @@ const renderInviteFromList = (room: TRoom) => {
       }}
       filesStore={{ folders: [room], getFolderInfo }}
       dialogsStore={{
-        inviteItems: [
-          {
-            id: "bob",
-            avatar: "/avatar.png",
-            displayName: "bob tester",
-            email: "bob@example.com",
-            access: ShareAccessRights.Editing,
-          },
-        ],
+        inviteItems: [BOB_ITEM],
         invitePanelOptions: {
           visible: true,
           roomId: ROOM_ID,
           hideSelector: false,
           defaultAccess: ShareAccessRights.ReadOnly,
         },
-        setInviteItems: vi.fn(),
-        setInvitePanelOptions: vi.fn(),
+        setInviteItems,
+        setInvitePanelOptions,
         setInviteLanguage: vi.fn(),
         setIsNewUserByCurrentUser: vi.fn(),
       }}
@@ -207,8 +209,10 @@ const renderInviteFromList = (room: TRoom) => {
     </Provider>,
   );
 
-  return { getFolderInfo };
+  return { getFolderInfo, setInviteItems, setInvitePanelOptions };
 };
+
+const closedPanel = expect.objectContaining({ visible: false });
 
 describe("Invite opened from the list", () => {
   const identity = { userId: "admin" };
@@ -267,8 +271,84 @@ describe("Invite opened from the list", () => {
     );
   });
 
+  it("All invitees have verified keys: the panel lists them as invited and closes on Close", async () => {
+    mocks.requireUnlock.mockImplementation(async () => identity);
+    mocks.addMembersToEncryptedRoom.mockImplementation(async () => ({
+      fileResults: [{ fileId: 1, success: true }],
+      skippedMembers: [],
+      missingFileIdsByMember: {},
+    }));
+    const { setInvitePanelOptions } = renderInviteFromList(
+      privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+    );
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    expect(
+      await screen.findByTestId("invite_panel_result_granted"),
+    ).toHaveTextContent("bob tester");
+    expect(setInvitePanelOptions).not.toHaveBeenCalledWith(closedPanel);
+    expect(
+      screen.queryByTestId("invite_panel_invite_again_button"),
+    ).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId("invite_panel_close_button"));
+
+    expect(setInvitePanelOptions).toHaveBeenCalledWith(closedPanel);
+  });
+
+  it("Mixed invitation: the panel stays open listing the skipped invitee with the reason", async () => {
+    mocks.requireUnlock.mockImplementation(async () => identity);
+    mocks.addMembersToEncryptedRoom.mockImplementation(async () => ({
+      fileResults: [],
+      skippedMembers: [{ id: "bob", reason: "no-key" }],
+      missingFileIdsByMember: {},
+    }));
+    const { setInviteItems, setInvitePanelOptions } = renderInviteFromList(
+      privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+    );
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    expect(
+      await screen.findByTestId("invite_panel_result_skipped"),
+    ).toHaveTextContent("Common:EncryptedSkippedNoKeys");
+    expect(setInvitePanelOptions).not.toHaveBeenCalledWith(closedPanel);
+
+    fireEvent.click(screen.getByTestId("invite_panel_invite_again_button"));
+
+    expect(setInviteItems).toHaveBeenCalledWith([BOB_ITEM]);
+    expect(screen.queryByTestId("invite_panel_result")).not.toBeInTheDocument();
+    expect(screen.getByTestId("invite_panel_send_button")).toBeInTheDocument();
+  });
+
+  it("Some files fail: the panel lists the invitee as pending with the failed file count", async () => {
+    mocks.requireUnlock.mockImplementation(async () => identity);
+    mocks.addMembersToEncryptedRoom.mockImplementation(async () => ({
+      fileResults: [
+        { fileId: 1, success: true },
+        { fileId: 2, success: false },
+      ],
+      skippedMembers: [],
+      missingFileIdsByMember: { bob: [2] },
+    }));
+    renderInviteFromList(privateRoomDto({ id: ROOM_ID, title: "Pirate room" }));
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    const pending = await screen.findByTestId("invite_panel_result_pending");
+    expect(pending).toHaveTextContent("Common:EncryptedAccessPending");
+    expect(pending).toHaveTextContent("bob tester");
+    expect(pending).toHaveTextContent("Common:EncryptedReencryptPartialFailure");
+    expect(
+      screen.queryByTestId("invite_panel_result_granted"),
+    ).not.toBeInTheDocument();
+  });
+
   it("sends an ordinary room's invitations without unlocking", async () => {
-    renderInviteFromList(roomDto({ id: ROOM_ID }));
+    const { setInvitePanelOptions } = renderInviteFromList(
+      roomDto({ id: ROOM_ID }),
+    );
 
     fireEvent.click(screen.getByTestId("invite_panel_send_button"));
 
@@ -278,5 +358,7 @@ describe("Invite opened from the list", () => {
     expect(mocks.setRoomSecurity).toHaveBeenCalled();
     expect(mocks.requireUnlock).not.toHaveBeenCalled();
     expect(mocks.addMembersToEncryptedRoom).not.toHaveBeenCalled();
+    expect(setInvitePanelOptions).toHaveBeenCalledWith(closedPanel);
+    expect(screen.queryByTestId("invite_panel_result")).not.toBeInTheDocument();
   });
 });

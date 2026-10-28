@@ -210,6 +210,65 @@ describe("rewrapForInvitedMembers", () => {
     consoleError.mockRestore();
   });
 
+  it("Mixed invitation: the outcome sorts the invitees into granted, pending and skipped", async () => {
+    vi.mocked(addMembersToEncryptedRoom).mockResolvedValue({
+      fileResults: [ok(1), failed(2)],
+      skippedMembers: [{ id: "u-cid", reason: "no-key" }],
+      missingFileIdsByMember: { "u-bob": [2] },
+    } as never);
+    const onOutcome = vi.fn();
+
+    await rewrapForInvitedMembers({
+      t,
+      roomId: ROOM_ID,
+      newMembers: [
+        { id: "u-ann", displayName: "Ann" },
+        { id: "u-bob", displayName: "Bob" },
+        { id: "u-cid", displayName: "Cid" },
+      ],
+      currentUserId: "u-me",
+      identity,
+      onProgress,
+      onOutcome,
+    });
+
+    expect(onOutcome).toHaveBeenCalledWith({
+      granted: [{ id: "u-ann", displayName: "Ann" }],
+      pending: [
+        { member: { id: "u-bob", displayName: "Bob" }, missingFileIds: [2] },
+      ],
+      skipped: [{ id: "u-cid", displayName: "Cid", reason: "no-key" }],
+    });
+  });
+
+  it("marks every invitee pending when the re-wrap fails as a whole", async () => {
+    vi.mocked(addMembersToEncryptedRoom).mockRejectedValue(new Error("down"));
+    const consoleError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+    const onOutcome = vi.fn();
+
+    await rewrapForInvitedMembers({
+      t,
+      roomId: ROOM_ID,
+      newMembers: [{ id: "u-ann", displayName: "Ann" }],
+      currentUserId: "u-me",
+      identity,
+      onProgress,
+      onOutcome,
+    });
+
+    expect(onOutcome).toHaveBeenCalledWith({
+      granted: [],
+      pending: [
+        { member: { id: "u-ann", displayName: "Ann" }, missingFileIds: [] },
+      ],
+      skipped: [],
+      failed: true,
+    });
+    consoleError.mockRestore();
+  });
+
   it("keeps the notices when the backfill fails", async () => {
     allowConsoleError(/Post-invite backfill failed/);
     vi.mocked(addMembersToEncryptedRoom).mockResolvedValue({

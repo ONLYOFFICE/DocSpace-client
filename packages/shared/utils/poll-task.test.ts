@@ -149,6 +149,47 @@ describe("pollTask", () => {
     await expect(result).rejects.not.toBeInstanceOf(TaskPollingError);
   });
 
+  describe("failed requests", () => {
+    it.each([PROGRESS, PRESENCE])(
+      "rides out requests failing for up to the timeout (%o)",
+      async (liveness) => {
+        const fetchTask = vi
+          .fn()
+          .mockResolvedValueOnce(task(10))
+          .mockRejectedValueOnce(new Error("502"))
+          .mockRejectedValueOnce(new Error("502"))
+          .mockResolvedValueOnce(task(20))
+          .mockResolvedValueOnce(task(100, true));
+
+        const { result, onProgress } = startPolling(fetchTask, liveness);
+        await polls(5);
+
+        await expect(result).resolves.toEqual(task(100, true));
+        expect(onProgress).toHaveBeenCalledTimes(3);
+      },
+    );
+
+    it.each([PROGRESS, PRESENCE])(
+      "gives up with a TaskPollingError once they outlast the timeout (%o)",
+      async (liveness) => {
+        const cause = new Error("Network Error");
+        const fetchTask = vi
+          .fn()
+          .mockResolvedValueOnce(task(10))
+          .mockRejectedValue(cause);
+
+        const { result } = startPolling(fetchTask, liveness);
+        await polls(5);
+
+        await expect(result).rejects.toThrow("Test task could not be polled");
+        await expect(result).rejects.toBeInstanceOf(TaskPollingError);
+        await expect(result).rejects.toHaveProperty("cause", cause);
+        // Last seen on the first poll, silent for 4 seconds on the fifth.
+        expect(fetchTask).toHaveBeenCalledTimes(5);
+      },
+    );
+  });
+
   describe("progress liveness", () => {
     it("times out once the percentage has not grown for stallTimeoutMs", async () => {
       const fetchTask = vi.fn().mockResolvedValue(task(10));

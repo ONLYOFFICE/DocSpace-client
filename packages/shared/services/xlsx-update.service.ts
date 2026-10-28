@@ -49,7 +49,8 @@ type XlsxTask = UpdateXlsxResponse["task"];
 // recoveries, waiting for another user's one, building older versions). The
 // server keeps the report published all the while instead, so -- as agreed
 // with it -- a report that is there and not completed is alive, and one
-// missing for longer than 70 seconds has failed.
+// missing for longer than its queue's one-minute unregister window, with a
+// margin, has failed.
 const XLSX_UPDATE_LIVENESS: TTaskLiveness = {
   kind: "presence",
   missingTimeoutMs: 75 * 1000,

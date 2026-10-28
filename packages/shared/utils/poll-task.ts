@@ -33,8 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { delay } from "@onlyoffice/apps-ui-kit/utils/pipe";
-
 type TPolledTask = {
   percentage: number;
   isCompleted: boolean;
@@ -51,6 +49,10 @@ type TPolledTask = {
  *   is alive. It fails once it has been missing for longer than
  *   missingTimeoutMs in a row: the server may drop it briefly between
  *   publications.
+ *
+ * A poll whose request fails says nothing of the task, so under either kind it
+ * is no sign of life, and the polling gives up only once the task has shown
+ * none for the timeout of its kind.
  */
 export type TTaskLiveness =
   | { kind: "progress"; stallTimeoutMs: number }
@@ -78,6 +80,11 @@ export class TaskPollingError extends Error {
 
 export const POLL_INTERVAL_MS = 1000;
 
+const wait = (ms: number) =>
+  new Promise<void>((resolve) => {
+    setTimeout(resolve, ms);
+  });
+
 /**
  * Polls a distributed task once a second until it completes, and gives up only
  * when the task stops showing it is alive (see TTaskLiveness).
@@ -87,32 +94,47 @@ export const POLL_INTERVAL_MS = 1000;
  * hour), and cutting it short is the failure this function exists to avoid;
  * the file operations in loopFilesOperationsImpl have no ceiling either.
  */
-export const pollTask = <T extends TPolledTask>({
+export const pollTask = async <T extends TPolledTask>({
   name,
   fetchTask,
   onProgress,
   assertSucceeded,
   liveness,
 }: TPollTaskOptions<T>): Promise<T> => {
+  const silenceTimeoutMs =
+    liveness.kind === "progress"
+      ? liveness.stallTimeoutMs
+      : liveness.missingTimeoutMs;
+
   let lastPercentage = -1;
   let lastSignOfLife = Date.now();
 
-  // Calls itself for the next poll; every await unwinds the call, so the
-  // stack does not grow however long the task runs.
-  const poll = async (): Promise<T> => {
-    await delay(POLL_INTERVAL_MS)(undefined);
+  const isSilentTooLong = () => Date.now() - lastSignOfLife > silenceTimeoutMs;
 
-    const task = await fetchTask();
-    const silentFor = Date.now() - lastSignOfLife;
+  // A loop rather than a poll calling itself: a run of hours would otherwise
+  // keep a chain of thousands of pending promises alive.
+  for (;;) {
+    await wait(POLL_INTERVAL_MS);
+
+    let task: T | null | undefined;
+    try {
+      task = await fetchTask();
+    } catch (error) {
+      // The server restarting or the network dropping for a moment must not
+      // cut short a run that has been going for half an hour.
+      if (isSilentTooLong()) {
+        throw new TaskPollingError(`${name} could not be polled`, {
+          cause: error,
+        });
+      }
+      continue;
+    }
 
     if (!task) {
-      if (
-        liveness.kind === "progress" ||
-        silentFor > liveness.missingTimeoutMs
-      ) {
+      if (liveness.kind === "progress" || isSilentTooLong()) {
         throw new TaskPollingError(`${name} task not found`);
       }
-      return poll();
+      continue;
     }
 
     // Strictly greater: a percentage that holds or falls is no progress.
@@ -121,17 +143,15 @@ export const pollTask = <T extends TPolledTask>({
 
     if (liveness.kind === "presence" || grew) {
       lastSignOfLife = Date.now();
-    } else if (silentFor > liveness.stallTimeoutMs) {
+    } else if (isSilentTooLong()) {
       throw new TaskPollingError(`${name} timed out`);
     }
 
     onProgress(task);
 
-    if (!task.isCompleted) return poll();
-
-    assertSucceeded(task);
-    return task;
-  };
-
-  return poll();
+    if (task.isCompleted) {
+      assertSucceeded(task);
+      return task;
+    }
+  }
 };

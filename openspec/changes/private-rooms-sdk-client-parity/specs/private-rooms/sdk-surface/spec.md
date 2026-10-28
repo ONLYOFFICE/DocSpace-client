@@ -9,6 +9,10 @@ The SDK SHALL take the room of a copy or move destination from the destination f
 - **WHEN** the user copies an encrypted file into a folder inside another private room
 - **THEN** the file is uploaded encrypted for that room's members, and no plaintext is ever sent into the private room
 
+#### Scenario: Copy into another private room
+- **WHEN** the user copies an encrypted file into another private room
+- **THEN** the file is decrypted in the browser and uploaded encrypted for that room's members, and the source stays in place
+
 #### Scenario: Copy offered for an encrypted file
 - **WHEN** the user opens the context menu of an encrypted file in an active private room
 - **THEN** the copy action is offered although the server reports no Copy right for the file
@@ -24,6 +28,10 @@ The SDK SHALL take the room of a copy or move destination from the destination f
 #### Scenario: Destination without the create right
 - **WHEN** the copy dialog is opened for encrypted files of a private room
 - **THEN** rooms and folders where the user cannot create files are not selectable
+
+#### Scenario: Move into another private room
+- **WHEN** a move of encrypted files of a private room into another private room is requested
+- **THEN** Common:CannotMoveToAnotherPrivateRoom is shown and nothing is transferred
 
 #### Scenario: Locked identity
 - **WHEN** the identity is locked and the user cancels the unlock prompt
@@ -89,7 +97,7 @@ A folder move within one private room, into any of its folders, SHALL be execute
 - **WHEN** the user moves a folder into another folder of the same private room
 - **THEN** the server moves the folder and the files keep their existing wraps
 
-#### Scenario: Folder transferred out of the room
+#### Scenario: Folder moved to another room
 - **WHEN** the user copies a folder of a private room to any other room or folder, or moves it out of the private rooms
 - **THEN** the operation is refused with Common:CannotTransferFolderFromPrivateRoom and nothing is transferred
 
@@ -111,6 +119,17 @@ The SDK SHALL offer download without decryption for an encrypted file, saving th
 #### Scenario: Folder downloaded without decryption
 - **WHEN** the user chooses download without decryption on a folder of a private room
 - **THEN** the server archive of the folder's ciphertext files is downloaded, and nothing is decrypted
+
+### Requirement: Archive page follows private-room rules
+The SDK SHALL treat a folder as inside a private room when any folder on its path belongs to a private room, whether the room is active or archived, and SHALL apply every private-room rule an archived room still allows exactly as in an active one. With no archived rooms the private archive page SHALL show the archive empty view, whose action leads back to the private rooms list.
+
+#### Scenario: Archived private room opened
+- **WHEN** an archived private room is opened
+- **THEN** copy, download, download without decryption and preview behave as in an active private room, within the archived room's rights
+
+#### Scenario: No archived rooms
+- **WHEN** the archive list is empty
+- **THEN** Common:ArchiveEmptyScreenHeader is shown, and its action opens the private rooms list rather than the other rooms
 
 ## ADDED Requirements
 
@@ -297,13 +316,6 @@ The SDK SHALL refuse to start private room creation when the browser does not ex
 #### Scenario: Key generation cancelled
 - **WHEN** a user without keys starts creating a private room and cancels key generation
 - **THEN** no creation dialog is left open
-
-### Requirement: Archive follows the active-room rules
-The SDK SHALL treat a folder as inside a private room when any folder on its path belongs to a private room, whether the room is active or archived, and SHALL apply every private-room rule an archived room still allows exactly as in an active one.
-
-#### Scenario: Archived private room opened
-- **WHEN** an archived private room is opened
-- **THEN** copy, download without decryption and preview behave as in an active private room, within the archived room's rights
 
 ### Requirement: Share tab hidden for private items
 The SDK SHALL NOT show the Share tab of the info panel for a private room, a folder inside it, or an encrypted file, whether the room is active or archived, as the client does. The info panel header SHALL offer only the tabs its body shows.

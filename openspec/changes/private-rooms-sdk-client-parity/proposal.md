@@ -58,8 +58,9 @@ A second pass over the open tasks on 2026-10-27 found two more places where name
   - "Decrypted titles in lists and history": recovered on every list update, shown in the list, the history and the pickers; recent files never hold encrypted files.
   - "Folder operations use the server path": a folder move into another private room gets the move refusal, as in the client.
   - "Download without decryption": offered for folders inside a private room as well, as a server archive of the ciphertext, as in the client.
+  - "Archive page follows private-room rules": the open folder's path decides whether it is private and archived, and the archive keeps every active-room rule within the archived room's rights.
 
-  New requirements: private rooms only through the private pages; same-room moves by the server; the shared upload rules; no upload or creation without the create right; the files list follows encrypted operations; the shared menu rules; localized errors; membership from every entry point; leaving revokes own entries; archive rules; the Share tab hidden for private items; the light-client limits.
+  New requirements: private rooms only through the private pages; same-room moves by the server; the shared upload rules; no upload or creation without the create right; the files list follows encrypted operations; the shared menu rules; localized errors; membership from every entry point; leaving revokes own entries; the Share tab hidden for private items; the light-client limits.
 
 The client's own behaviour (`private-rooms/file-operations`, `private-rooms/room-membership`) does not change. Moving its logic into `packages/shared` is a refactor that its existing tests keep in place.
 

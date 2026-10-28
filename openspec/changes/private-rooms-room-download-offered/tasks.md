@@ -7,7 +7,7 @@
 
 ## 2. Integration check
 
-- [ ] 2.1 Run `pnpm run test:client` and `npx -y @fission-ai/openspec@latest validate private-rooms-room-download-offered --strict`; verify both pass.
+- [x] 2.1 Run `pnpm run test:client` and `npx -y @fission-ai/openspec@latest validate private-rooms-room-download-offered --strict`; verify both pass.
 
 ## Workflow follow-up
 

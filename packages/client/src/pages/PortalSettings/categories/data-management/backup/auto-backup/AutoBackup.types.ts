@@ -56,6 +56,7 @@ export interface InjectedAutoBackupWrapperProps
   resetDownloadingProgress: VoidFunction;
   setterSelectedEnableSchedule: (enable: boolean) => void;
   setIsInited: (inited: boolean) => void;
+  ensureAppsLoaded: VoidFunction;
 }
 
 export type AutoBackupWrapperProps = InjectedAutoBackupWrapperProps &

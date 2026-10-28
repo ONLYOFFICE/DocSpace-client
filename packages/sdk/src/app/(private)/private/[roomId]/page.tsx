@@ -37,6 +37,7 @@ import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
+import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import { resolveFolderTarget } from "@docspace/shared/services/private-room/upload-target";
 
@@ -119,11 +120,18 @@ export default async function PrivateRoomFiles({
   }
 
   // Spec: private-rooms/sdk-surface, "Archive follows the active-room rules"
+  let path: TFolder[] = [];
   const target = await resolveFolderTarget(
     { id: folderData.current.id, rootFolderType: folderData.current.rootFolderType },
-    getFolderPath,
+    async (folderId) => {
+      path = await getFolderPath(folderId);
+      return path;
+    },
   ).catch(() => null);
   if (!target || target.encryptionRoomId === null) notFound();
+  const room = path.find(
+    (entry) => String(entry.id) === String(target.encryptionRoomId),
+  );
 
   // Spec: private-rooms/sdk-surface, "Private rooms only through the private pages"
   if (!target.isPrivate) {
@@ -150,6 +158,8 @@ export default async function PrivateRoomFiles({
       user={user}
       roomId={String(target.encryptionRoomId)}
       isArchive={!!target.isArchived}
+      isPrivate={target.isPrivate}
+      canEditRoom={room?.security?.EditRoom === true}
     />
   );
 }

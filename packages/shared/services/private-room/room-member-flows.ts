@@ -51,11 +51,7 @@ export type TMemberFlowNotice = {
   text: string;
 };
 
-/**
- * Removes the leaver's own entries from the room's file keys. Runs before the
- * role change drops access to `files/{id}/access`; best-effort, never throws,
- * so a failed cleanup does not trap the user in the room.
- */
+// Spec: private-rooms/room-membership, "Leaving a room revokes own access first"
 export async function revokeOwnAccessOnLeave(
   roomId: number | string,
   userId: string,
@@ -148,12 +144,7 @@ export type TInviteRewrapProgress = {
   alert?: boolean;
 };
 
-/**
- * Wraps the room's file keys for the invited members once the room security
- * update has succeeded, then re-wraps in the background for members who
- * registered a key after they were invited. Resolves with the notices to
- * show; never rejects.
- */
+// Spec: private-rooms/room-membership, "Invited members receive re-wrapped file keys"
 export async function rewrapForInvitedMembers({
   t,
   roomId,

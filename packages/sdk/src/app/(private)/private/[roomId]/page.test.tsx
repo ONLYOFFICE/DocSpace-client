@@ -70,7 +70,7 @@ vi.mock("@/api/people", () => ({ getSelf: vi.fn(async () => ({ id: "me" })) }));
 
 vi.mock("./page.client", () => ({ default: () => null }));
 
-import { getFolder } from "@/api/files";
+import { getFolder, getFolderPath } from "@/api/files";
 
 import PrivateRoomFiles from "./page";
 
@@ -115,6 +115,39 @@ test("Archived private room opened", async () => {
 
   expect(element?.props.isArchive).toBe(true);
   expect(element?.props.roomId).toBe("10");
+});
+
+test("Deep link into a subfolder: privacy and the edit right come from the room on its path", async () => {
+  const subfolder = {
+    id: 11,
+    title: "Drafts",
+    parentId: 10,
+    private: false,
+    rootFolderType: FolderType.Rooms,
+    security: { Read: true, Create: true },
+  };
+  vi.mocked(getFolder).mockResolvedValueOnce({
+    current: subfolder,
+    folders: [],
+    files: [],
+    pathParts: [],
+    total: 0,
+  } as never);
+  vi.mocked(getFolderPath).mockResolvedValueOnce([
+    { id: 2, title: "Rooms", rootFolderType: FolderType.Rooms },
+    room({ security: { Read: true, EditRoom: true } }),
+    subfolder,
+  ] as never);
+
+  const element = await PrivateRoomFiles({
+    params: Promise.resolve({ roomId: "10" }),
+    searchParams: Promise.resolve({ privateRooms: "true", folder: "11" }),
+  });
+
+  expect(getFolderPath).toHaveBeenCalledWith(11);
+  expect(element?.props.roomId).toBe("10");
+  expect(element?.props.isPrivate).toBe(true);
+  expect(element?.props.canEditRoom).toBe(true);
 });
 
 test("Non-private room at a private address", async () => {

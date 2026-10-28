@@ -105,11 +105,7 @@ const offeredWithout = (
 
 const PRIVATE_FILE_CONTEXT_OPTIONS = new Map<string, ReadonlySet<string>>();
 
-/**
- * What a file of a private room may offer, active or archived alike; the
- * server's rights for the file narrow it further.
- * Spec: private-rooms/sdk-surface, "Archive follows the active-room rules"
- */
+// Spec: private-rooms/sdk-surface, "Archive follows the active-room rules"
 export const getPrivateFileContextOptions = ({
   mustConvert,
   hasKeys,

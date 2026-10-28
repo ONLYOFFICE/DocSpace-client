@@ -154,9 +154,6 @@ type RoomsListProps = {
   isPrivate?: boolean;
   /** Picks shield vs padlock icon on private-room cards. */
   hasEncryptionKeys?: boolean;
-  /** Private-only override; falls through to public dialogs otherwise. */
-  onPrivateInviteRoom?: (room: TFolder) => void;
-  onPrivateChangeOwner?: (room: TFolder) => void;
   // Populated by RoomsList so RoomsLayout can hand the same handlers to the
   // shared Header's TableGroupMenu without lifting the dialog state out of
   // RoomsList. Mirrors the existing `refreshRef` pattern.
@@ -179,8 +176,6 @@ const RoomsList = ({
   titleOverride,
   isPrivate,
   hasEncryptionKeys,
-  onPrivateInviteRoom,
-  onPrivateChangeOwner,
   roomActionsRef,
   infoPanelVisible,
 }: RoomsListProps) => {
@@ -293,23 +288,22 @@ const RoomsList = ({
     (TFolderItem | TFileItem) | null
   >(null);
 
+  const actionsOverride = React.useContext(RoomActionsOverrideContext);
+
   const onInviteRoom = React.useCallback(
     (item: TFolderItem | TFileItem) => {
-      const isPrivate = (item as { private?: boolean }).private === true;
-      if (isPrivate && onPrivateInviteRoom) {
-        onPrivateInviteRoom(item as TFolder);
+      if (actionsOverride) {
+        actionsOverride.inviteRoom(item);
         return;
       }
       setInvitingRoom(item);
     },
-    [onPrivateInviteRoom],
+    [actionsOverride],
   );
 
   const [restoringItems, setRestoringItems] = React.useState<
     (TFolderItem | TFileItem)[] | null
   >(null);
-
-  const actionsOverride = React.useContext(RoomActionsOverrideContext);
 
   const onEditRoom = React.useCallback(
     (item: TFolderItem | TFileItem) => {
@@ -324,14 +318,13 @@ const RoomsList = ({
 
   const onChangeOwner = React.useCallback(
     (item: TFolderItem | TFileItem) => {
-      const isPrivate = (item as { private?: boolean }).private === true;
-      if (isPrivate && onPrivateChangeOwner) {
-        onPrivateChangeOwner(item as TFolder);
+      if (actionsOverride) {
+        actionsOverride.changeOwner(item);
         return;
       }
       setChangingOwnerRoom(item);
     },
-    [onPrivateChangeOwner],
+    [actionsOverride],
   );
 
   const onTagClick = React.useCallback(
@@ -955,14 +948,7 @@ const RoomsList = ({
       {actionsOverride ? null : (
         <LeaveRoomDialog
           currentUserId={user?.id}
-          onTransferOwnership={(room) => {
-            const isPrivate = (room as { private?: boolean }).private === true;
-            if (isPrivate && onPrivateChangeOwner) {
-              onPrivateChangeOwner(room as TFolder);
-              return;
-            }
-            setChangingOwnerRoom(room);
-          }}
+          onTransferOwnership={setChangingOwnerRoom}
         />
       )}
       {invitingRoom && !actionsOverride ? (

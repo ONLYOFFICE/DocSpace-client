@@ -53,13 +53,11 @@ import { RoomActionsOverrideContext } from "@/app/(rooms)/_contexts/RoomActionsO
 import RoomsLayout from "@/app/(rooms)/_components/rooms-layout";
 import EmptyPrivateRoomsList from "@docspace/shared/components/empty-views/empty-private-rooms-list";
 import RoomsEmptyView from "@/app/(rooms)/_components/empty-view";
-import type { TFolder } from "@docspace/shared/api/files/types";
 
 import { usePrivateRoomsPageInit } from "../_hooks/usePrivateRoomsPageInit";
 import { usePrivateRoute } from "../_hooks/usePrivateRoute";
 import { usePrivateRoomActions } from "../_hooks/usePrivateRoomActions";
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
-import { usePrivateDialogsStore } from "../_store/PrivateDialogsStore";
 import {
   PrivateInfoPanelBody,
   PrivateInfoPanelHeader,
@@ -89,7 +87,6 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
   const privateRoute = usePrivateRoute();
   const { t } = useTranslation(["Common"]);
   const identityStore = useEncryptionIdentityStore();
-  const dialogsStore = usePrivateDialogsStore();
   const isReady = usePrivateRoomsPageInit({
     authToken,
     filesSettings,
@@ -105,33 +102,12 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
     [router, privateRoute],
   );
 
-  const handlePrivateInviteRoom = React.useCallback(
-    (room: TFolder) => {
-      dialogsStore.openInvitePanel({ roomId: Number(room.id) });
-    },
-    [dialogsStore],
-  );
-
   const refreshRef = React.useRef<(() => void) | null>(null);
   const refreshRooms = React.useCallback(() => refreshRef.current?.(), []);
   // Spec: private-rooms/sdk-surface, "Membership from every entry point"
   const privateRoomActions = usePrivateRoomActions({
     onRoomChanged: refreshRooms,
   });
-
-  const handlePrivateChangeOwner = React.useCallback(
-    (room: TFolder) => {
-      const ownerId =
-        (room as TFolder & { createdBy?: { id?: string } }).createdBy?.id ??
-        undefined;
-      dialogsStore.openChangeOwner({
-        roomId: Number(room.id),
-        roomOwnerId: ownerId,
-        onChanged: () => refreshRef.current?.(),
-      });
-    },
-    [dialogsStore],
-  );
 
   const headerTitle = isArchive ? t("Common:Archive") : t("Common:Private");
   const currentWithTitle = React.useMemo(
@@ -187,8 +163,6 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
               <EmptyPrivateRoomsList />
             )
           }
-          onPrivateInviteRoom={handlePrivateInviteRoom}
-          onPrivateChangeOwner={handlePrivateChangeOwner}
           refreshRef={refreshRef}
           renderCreateRoomDialog={({ visible, onClose, onRoomCreated }) => (
             <PrivateCreateRoomDialog

@@ -90,6 +90,10 @@ type PrivateRoomFilesPageProps = {
   roomId: string;
   /** True when this room lives in the Archive section (read-only). */
   isArchive?: boolean;
+  /** Whether the room on the open folder's path is private. */
+  isPrivate?: boolean;
+  /** Whether the user may edit the room on the open folder's path. */
+  canEditRoom?: boolean;
 };
 
 const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
@@ -101,6 +105,8 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   user,
   roomId,
   isArchive = false,
+  isPrivate = false,
+  canEditRoom = false,
 }) => {
   const router = useRouter();
   const privateRoute = usePrivateRoute();
@@ -136,21 +142,14 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   });
 
   React.useEffect(() => {
-    const isPrivate = folderData?.current?.private === true;
-    const canEditRoom = folderData?.current?.security?.EditRoom === true;
     filesStore.setRoomContext(roomId, isPrivate, canEditRoom);
     return () => filesStore.reset();
-  }, [
-    filesStore,
-    roomId,
-    folderData?.current?.private,
-    folderData?.current?.security?.EditRoom,
-  ]);
+  }, [filesStore, roomId, isPrivate, canEditRoom]);
 
   const warnedRoomRef = React.useRef<string | null>(null);
   React.useEffect(() => {
     if (!isReady) return;
-    if (folderData?.current?.private !== true) return;
+    if (!isPrivate) return;
     if (identityStore.keys === null) return;
     if (identityStore.hasKeys) return;
     if (warnedRoomRef.current === roomId) return;
@@ -161,7 +160,7 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
     roomId,
     identityStore.keys,
     identityStore.hasKeys,
-    folderData?.current?.private,
+    isPrivate,
     t,
   ]);
 

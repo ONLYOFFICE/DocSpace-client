@@ -27,13 +27,13 @@
 
 ## 5. Integration check
 
-- [ ] 5.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`), the client private-room E2E specs and the SDK private E2E folder (`cd packages/sdk && pnpm exec playwright test __tests__/e2e/private`); verify green.
-- [ ] 5.2 Confirm `openspec validate private-rooms-invite-atomic-rewrap --strict` passes.
+- [ ] 5.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`), the client private-room E2E specs and the SDK private E2E folder (`cd packages/sdk && pnpm exec playwright test __tests__/e2e/private`); verify green. NEEDS A RE-RUN after the server change: green on 2026-10-28 without task 2.1 (gate, client private-room E2E 138 passed, SDK private E2E 33 passed and 15 skipped), to be run again once `private-rooms-server-hardening` 11.1 has merged on `../server` and 2.1 is done.
+- [ ] 5.2 Confirm `openspec validate private-rooms-invite-atomic-rewrap --strict` passes. NEEDS A RE-RUN after the server change: passed on 2026-10-28 without task 2.1, to be run again after 2.1 and any artifact edits it brings.
 
 ## Workflow follow-up
 
 - Locale keys are added by the task that first uses them (decided 2026-10-28): the locale tests refuse a key the code uses that `en` lacks, and an `en` key no code uses, so a task that only adds keys cannot land on its own. The former task 2.3 is folded into 2.2 and 3.2.
 - The transactional grant-and-keys endpoint is tracked in `private-rooms-server-hardening` as a later target; it does not block archiving this change.
-- Task 2.1 waits for `private-rooms-server-hardening` 11.1 and 11.2 (decided 2026-10-28): the invitees' keys are not readable before the grant otherwise. The other tasks do not wait for it.
+- Task 2.1 waits for `private-rooms-server-hardening` 11.1 and 11.2 (decided 2026-10-28): the invitees' keys are not readable before the grant otherwise. The other tasks do not wait for it. Tasks 5.1 and 5.2 stay open until 2.1 is done: they passed on 2026-10-28 for every other task and are run again after the server change.
 - `private-rooms-sdk-client-parity` was archived on 2026-10-28 with its 5.1 (the shared invite re-wrap) and 5.3 (the SDK invite panel) done, so the requirements the sdk-surface delta here modifies and renames are in the main spec, and `openspec validate private-rooms-invite-atomic-rewrap --strict` passes against them.
 - Archive with `/opsx:archive private-rooms-invite-atomic-rewrap` after review.

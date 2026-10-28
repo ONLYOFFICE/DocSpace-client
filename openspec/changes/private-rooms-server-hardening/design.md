@@ -71,8 +71,21 @@ See proposal.md. Server state on `hotfix/v4.0.1` (`../server`):
   of the copy check reads the folder's own private setting
   (`products/ASC.Files/Core/Services/WCFService/FileOperations/CopyPermissionsCheck.cs:479`),
   which only a room carries, and the Archive branch grants Copy on
-  subfolders. How the copy operation then treats the files inside was not
-  traced.
+  subfolders. Traced on 2026-10-28 (task 9.2): the general check passes on
+  the folder's copy right (`:241`); the folder-level private rule never
+  applies to a subfolder, because settings rows exist for room folder types
+  only (`FolderDao.cs:755-761`, `:811-817`); and a copy returns before the
+  subtree file check (`:564-569`). `FileMoveCopyOperation.MoveOrCopyFoldersAsync`
+  (`:246-381`) then creates the folder outside the room through
+  `FolderDao.CopyFolderAsync` (`:306`), with its title, tags and metadata but
+  without the private setting (`FolderDao.cs:1406-1449`), and recurses
+  (`FolderDao.cs:1739-1752`); `CompliesPrivateRoomRulesAsync` refuses each
+  encrypted file (`CopyPermissionsCheck.cs:823-845`). An empty copy of the
+  folder tree, titles included, lands outside the room, for members and,
+  through the bypass, for administrators who are not members. Once task 9.1
+  denies Copy on subfolders in Archive, the copy right check at `:241`
+  refuses the request, as it does in an active private room, so no separate
+  requirement is needed.
 - Room events: `SocketManager.WhoCanRead`
   (`products/ASC.Files/Core/Utils/SocketManager.cs:411-419`) adds every
   administrator to the recipients for VirtualRooms and Archive entries, and
@@ -288,9 +301,3 @@ keys before that update and needs those keys first.
 - Third-party private rooms (proposal decision 6): key-check them like every
   private room (decision 13, what the spec assumes) or refuse the private
   flag on third-party storage. Owner: product.
-- Folder copy out of an archived private room (see Context): whether a batch
-  copy of a subfolder creates the folder outside the room, and what happens
-  to the encrypted files in it. The client never requests one
-  (file-operations, "Folders cannot leave an archived private room"). Owner:
-  backend team; task 9.2 traces it and decides whether a requirement is
-  needed.

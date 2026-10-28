@@ -46,8 +46,9 @@ the file to change so the backend team can pick them up; nothing here is
   client when an encrypted upload is cancelled.
 - Archived private rooms keep the private-room guards of active ones: no copy
   right on their files and subfolders, and no administrator bypass for
-  administrators who are not members. Whether a folder can be copied out of
-  an archived private room is traced first (design.md, Open Questions).
+  administrators who are not members. A subfolder copied out of an
+  archived private room lands outside as an empty folder tree today; the
+  copy denial closes it (design.md, Context).
 - Socket events of a private room reach its members only, not every
   administrator.
 - Found on a local portal on 2026-10-22: the public keys of a file in an archived private room are answered 415, because the file check knows only the VirtualRooms section; the server applies the room check's VirtualRooms-or-Archive condition (design decision 9).

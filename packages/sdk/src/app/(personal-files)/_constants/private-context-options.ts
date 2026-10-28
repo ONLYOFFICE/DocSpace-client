@@ -105,7 +105,7 @@ const offeredWithout = (
 
 const PRIVATE_FILE_CONTEXT_OPTIONS = new Map<string, ReadonlySet<string>>();
 
-// Spec: private-rooms/sdk-surface, "Archive follows the active-room rules"
+// Spec: private-rooms/sdk-surface, "Archive page follows private-room rules"
 export const getPrivateFileContextOptions = ({
   mustConvert,
   hasKeys,

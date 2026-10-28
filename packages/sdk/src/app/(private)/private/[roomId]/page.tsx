@@ -119,7 +119,7 @@ export default async function PrivateRoomFiles({
     notFound();
   }
 
-  // Spec: private-rooms/sdk-surface, "Archive follows the active-room rules"
+  // Spec: private-rooms/sdk-surface, "Archive page follows private-room rules"
   let path: TFolder[] = [];
   const target = await resolveFolderTarget(
     { id: folderData.current.id, rootFolderType: folderData.current.rootFolderType },

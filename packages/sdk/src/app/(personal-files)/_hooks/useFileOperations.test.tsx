@@ -286,7 +286,7 @@ describe("useFileOperations in a private room", () => {
     expect(toastr.error).not.toHaveBeenCalled();
   });
 
-  it("Folder transferred out of the room", async () => {
+  it("Folder moved to another room", async () => {
     await moveFolderTo(30);
 
     expect(moveToFolder).not.toHaveBeenCalled();

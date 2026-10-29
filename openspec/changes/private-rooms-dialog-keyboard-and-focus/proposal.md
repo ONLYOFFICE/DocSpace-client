@@ -107,13 +107,17 @@ None.
 - Test-id and locator clean-up across the private-rooms E2E suite beyond the
   dialogs this change touches.
 
-## Decisions that need a human
+## Decisions taken
 
-- Which dialogs ask before closing with typed data. Proposed: passphrase
+Confirmed by the feature owner on 2026-10-29, before implementation:
+
+- The dialogs that ask before closing with typed data are passphrase
   creation, passphrase change, recovery phrase input, and the recovery phrase
-  display before acknowledgement; not the unlock prompt, the reset-token
-  dialog or the key-change dialog.
-- Whether the generic unsaved-changes wording (Common:UnsavedChanges,
-  Common:UnsavedChangesDescription) is acceptable for those dialogs, or a
-  dedicated text is wanted, which adds locale keys and translation work.
-- Confirming that focus stays untrapped in this version.
+  display before acknowledgement; the unlock prompt, the reset-token dialog
+  and the key-change dialog close without a question.
+- The confirmation reuses the generic unsaved-changes wording
+  (Common:UnsavedChanges, Common:UnsavedChangesDescription); no new locale
+  keys.
+- Focus stays untrapped in this version; the spec records it as a SHALL NOT.
+- Enter confirms every key dialog from its text fields, not only the
+  passphrase prompt.

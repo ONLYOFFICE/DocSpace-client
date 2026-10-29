@@ -97,9 +97,8 @@ requests while the confirmation is visible, and it reads that flag from a ref,
 since both keyup listeners run on the same event before React re-renders.
 Enter from a field is likewise ignored while the confirmation is open.
 
-The confirmation keeps the generic Common:UnsavedChanges texts; whether a
-dedicated wording is wanted is listed as a human decision in the proposal and
-swaps one key in the spec and the dialog without touching this design.
+The confirmation keeps the generic Common:UnsavedChanges texts, as confirmed
+in the proposal's "Decisions taken".
 
 Alternative considered: a prop on `ModalDialog` in the kit ("confirm before
 close"). Rejected: the dirtiness rule is per dialog and the kit has no notion
@@ -224,8 +223,5 @@ needs no migration.
 
 ## Open Questions
 
-- Wording of the confirmation for the key dialogs: generic
-  Common:UnsavedChanges texts (current plan) or dedicated ones. Deferrable:
-  changes one key in the spec and the dialog plus a locale task.
 - Whether the kit PR also exports `useLiveRegionText` from its barrel.
   Deferrable: only the import path changes.

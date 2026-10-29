@@ -3,19 +3,23 @@
 ## ADDED Requirements
 
 ### Requirement: Versioned Document Server encryption contract
-The client SHALL rely on a written, versioned contract with the Document Server for encrypted files. The contract SHALL state how the encryption keys entry of the editor configuration is read in a web session, how the DSE3 container is decrypted for editing and re-encrypted on save, with versions 2 and 3 read and version 3 written, what the save callback returns, how the signed token treats the entry, and the first Document Server version that implements it.
+The client SHALL rely on a written, versioned contract with the Document Server for encrypted files. It SHALL state how the editor's web client reads the encryption keys entry, that the DSE3 container is decrypted and re-encrypted in the browser with the crypto library the Document Server ships, which container versions are read (2 and 3) and written (3), which library build ships, how the signed token treats the entry, and the first Document Server version.
 
 #### Scenario: Contract referenced by version
 - **WHEN** the client builds the editor configuration for an encrypted file
 - **THEN** the configuration carries the contract version the client implements
 
 #### Scenario: Save round-trip
-- **WHEN** the Document Server saves an encrypted document
-- **THEN** the callback delivers a DSE3 container encrypted with the same DEK and the server stores it as a new encrypted version
+- **WHEN** the user saves an encrypted document in the editor
+- **THEN** the editor encrypts it in the browser with the same DEK, the server stores it as a new encrypted version, and no new key wraps are written
 
 #### Scenario: Container versions
 - **WHEN** the Document Server opens a file stored as a DSE3 version-2 or version-3 container and saves it
 - **THEN** it decrypts either version and the saved container is version 3
+
+#### Scenario: Plaintext stays in the browser
+- **WHEN** an encrypted document is opened, edited and saved in the editor
+- **THEN** neither the DEK nor the document's plaintext MUST be sent to the Document Server or to the portal
 
 ### Requirement: Document Server capability check before opening
 The client SHALL learn from the server whether the connected Document Server declares encrypted-editing support, and SHALL NOT mount the editor for an encrypted file when the capability is absent. The user SHALL see Common:PrivateRoomEditorNotSupported instead of the editor.
@@ -28,37 +32,52 @@ The client SHALL learn from the server whether the connected Document Server dec
 - **WHEN** the Document Server declares the capability
 - **THEN** the key flow runs as specified and the editor is mounted when keys are ready
 
-### Requirement: Co-editing disabled for encrypted files
-The server SHALL emit a co-editing configuration for an encrypted file that forbids concurrent editing sessions, and the Document Server SHALL open the file in single-user mode. A second user opening the same encrypted file for editing SHALL get view-only access while the first session is open.
+### Requirement: Encrypted files can be co-edited
+The system SHALL let several members edit an encrypted file at the same time. Each co-editor's editor SHALL obtain the DEK from that member's own access entry, and the Document Server SHALL relay and store only changes encrypted with the DEK.
 
 #### Scenario: Second editor
-- **WHEN** an encrypted file is already open for editing by one user and another member opens it
-- **THEN** the second user receives the file in view mode with a notice that it is being edited
+- **WHEN** a member with an access entry opens an encrypted file that another member is editing
+- **THEN** both edit the file and each sees the other's changes
 
-#### Scenario: Configuration content
-- **WHEN** the editor configuration of an encrypted file is requested
-- **THEN** the co-editing section forbids fast and strict co-editing
+#### Scenario: Changes encrypted at the Document Server
+- **WHEN** co-editing changes of an encrypted file reach the Document Server
+- **THEN** every stored change is ciphertext and the typed text MUST NOT be readable there
 
-### Requirement: Save-as withheld for encrypted files
-The editor SHALL NOT offer save-as for an encrypted file in v1, because the Document Server output address would deliver plaintext into a destination folder.
+### Requirement: Saved encrypted file reopens without replaying its changes
+After the editor saves an encrypted document, the system SHALL open it again from a base that matches the editing session: a later open SHALL NOT apply changes that the saved version already contains, so a saved encrypted file always opens.
 
-#### Scenario: Save-as hidden
-- **WHEN** an encrypted file is open in the editor
-- **THEN** the save-as action is absent from the editor menu
+#### Scenario: Reopen after save
+- **WHEN** a user saves an encrypted document in the editor, everyone closes it, and the user opens it again
+- **THEN** the saved version opens with the saved content and no change error
 
-### Requirement: Download-as withheld for encrypted files
-The editor SHALL NOT offer download-as for an encrypted file in v1; users download the original through the client, which decrypts it locally.
+#### Scenario: Rejoin after a save
+- **WHEN** a member saves an encrypted document and opens it again while another member is still editing it
+- **THEN** the member rejoins the same session and sees the current content without a change error
 
-#### Scenario: Download-as hidden
-- **WHEN** an encrypted file is open in the editor
-- **THEN** the download-as action is absent and the client download path remains available
+### Requirement: Document address reachable from the browser
+For an encrypted file, the document address in the editor configuration SHALL be reachable from the user's browser, because the editor downloads and decrypts the file there. An address meant only for requests from the Document Server to the portal SHALL NOT be used for it.
+
+#### Scenario: Internal address for the Document Server
+- **WHEN** the portal uses an internal address for requests from the Document Server that the user's browser cannot reach
+- **THEN** the document address of an encrypted file uses an address the browser reaches, and the editor opens the file
+
+### Requirement: Decrypted copies only on the user's device
+The editor SHALL offer download-as and save-copy-as for an encrypted file only as a copy built in the browser and saved to the user's device, decrypted, as DOCX or PDF. Such a copy SHALL NOT be stored in a portal folder and SHALL NOT be produced by Document Server conversion.
+
+#### Scenario: Download as DOCX
+- **WHEN** the user downloads an encrypted document as DOCX from the editor
+- **THEN** a decrypted DOCX is saved on the user's device and no conversion request reaches the Document Server
+
+#### Scenario: Save copy as
+- **WHEN** the user chooses save-copy-as for an encrypted document
+- **THEN** a decrypted copy is saved on the user's device and no file MUST be created in any portal folder
 
 ### Requirement: Print allowed for encrypted files
-The editor SHALL allow printing an encrypted document from the editor; printing happens from the decrypted document already loaded in the editor session.
+The editor SHALL allow printing an encrypted document; the printable PDF is built in the browser from the decrypted document already loaded in the editor session.
 
 #### Scenario: Print
 - **WHEN** the user prints an encrypted document from the editor
-- **THEN** the print dialog opens with the decrypted content
+- **THEN** the print dialog opens with the decrypted content and nothing is sent to the Document Server for conversion
 
 ### Requirement: Version history withheld in the editor for encrypted files
 The editor SHALL NOT attach version-history events for an encrypted file, matching the client, where version operations are withheld for encrypted files.
@@ -77,7 +96,7 @@ The editor SHALL open an encrypted PDF form for editing of the form itself but S
 ## MODIFIED Requirements
 
 ### Requirement: DEK handed to the editor configuration
-The editor SHALL pass the base64-encoded DEK, a crypto engine identifier and the contract version to the editor configuration under the encryption keys entry, keeping the document address pointing at the ciphertext stored on the server. The entry SHALL be typed in the editor configuration types and SHALL be included in, or explicitly excluded from, the signed token as the contract states.
+The editor SHALL pass the base64-encoded DEK, a crypto engine identifier and the contract version to the editor configuration under the encryption keys entry, keeping the document address pointing at the ciphertext stored on the server. The entry SHALL be typed in the editor configuration types, and the DEK SHALL stay outside the signed token, so that it never reaches the portal or the Document Server.
 
 #### Scenario: Configuration extended
 - **WHEN** keys reach the ready state
@@ -89,16 +108,8 @@ The editor SHALL pass the base64-encoded DEK, a crypto engine identifier and the
 - **THEN** that engine id is used; otherwise the client default is used
 
 #### Scenario: Token handling
-- **WHEN** the editor configuration is signed by the server
-- **THEN** the encryption keys entry is treated exactly as the contract version specifies, and the Document Server does not drop it
-
-### Requirement: Co-authoring flag cleared for encrypted files
-The editor SHALL set the co-authoring flag of the editor configuration to false for an encrypted file, and SHALL rely on the server-emitted co-editing configuration for the actual restriction.
-
-#### Scenario: Encrypted configuration received
-- **WHEN** the editor configuration for an encrypted file is received from the server
-- **THEN** the co-authoring flag is false in the configuration passed to the editor
-- **AND** the co-editing section from the server forbids concurrent sessions
+- **WHEN** the server signs the editor configuration of an encrypted file
+- **THEN** the DEK is not part of the signed payload, and the Document Server accepts the configuration with the DEK beside it
 
 ### Requirement: SDK does not open encrypted files in the editor
 The SDK file list SHALL refuse to open an encrypted file in the editor while the Document Server capability is absent and SHALL show Common:PrivateRoomEditorNotSupported; when the capability is present it SHALL open the file through the same key flow as the client.
@@ -113,8 +124,12 @@ The SDK file list SHALL refuse to open an encrypted file in the editor while the
 
 ## REMOVED Requirements
 
+### Requirement: Co-authoring flag cleared for encrypted files
+**Reason**: Co-editing of encrypted files is allowed (decided 2026-10-29), and the Document Server does not read the flag.
+**Migration**: Stop clearing `canCoAuthoring` for encrypted files; the generic co-editing configuration applies.
+
 ### Requirement: Editor actions without encrypted-specific handling
-**Reason**: Replaced by explicit per-action policies (save-as, download-as, print, version history, form submission).
+**Reason**: Replaced by explicit per-action policies (decrypted copies on the device, print, version history, form submission).
 **Migration**: Implement the policies above; the generic flows stay for non-encrypted files.
 
 ### Requirement: No Document Server version is declared

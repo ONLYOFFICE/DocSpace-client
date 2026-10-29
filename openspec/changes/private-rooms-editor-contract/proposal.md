@@ -3,43 +3,58 @@
 ## Why
 
 Private rooms cannot be released because the editor half of the feature has no
-written, tested contract: the browser hands the file's data encryption key (DEK)
-to the editor configuration, but nothing in this repository or the server
-proves that a Document Server build consumes it in a web session, co-editing is
-"disabled" only by a configuration flag that nobody reads, and save-as,
-download-as, print, version history and form submission have no encrypted
-branch at all. The SDK already refuses to open encrypted files for this reason
-(Common:PrivateRoomEditorNotSupported). The gating commit of 2026-08-14 named
-this as the reason the feature is hidden; the last editor-side commit is
-2026-08-12, so the gap is not closing by itself.
+written, tested contract. A live run on 2026-10-29 against Document Server
+10.0.0 build 133 (developer edition) showed that the editor's web client does
+consume the DEK the browser hands it: it downloads the DSE3 container in the
+browser, decrypts and re-encrypts it there, and relays co-editing changes
+encrypted with the DEK. The same run showed what is still missing: once a
+user saves an encrypted document, the file no longer opens, because the
+editing session is never closed and its changes are replayed on top of the
+saved version; the document address must be reachable from the browser,
+which nothing guarantees; the Document Server declares no capability the
+portal could check; and the Document Server ships its own copy of the
+crypto library, which fixes the container version it writes. The SDK still
+refuses to open encrypted files (Common:PrivateRoomEditorNotSupported). The
+gating commit of 2026-08-14 named the editor as the reason the feature is
+hidden.
 
 ## What Changes
 
-- Write down and version the Document Server contract for encrypted files:
-  how `editorConfig.encryptionKeys` is consumed, how the DSE3 container is
-  decrypted and re-encrypted on save, which container versions it reads (2
-  and 3) and writes (3, decided 2026-10-26 with
-  `private-rooms-dse3-header-authentication`), what the callback returns, how the JWT
-  treats the field, and the minimum Document Server version or capability.
+- Write down and version the Document Server contract for encrypted files as
+  it works: the editor's web client reads the DEK from
+  `editorConfig.encryptionKeys`, decrypts the DSE3 container in the browser
+  with the crypto library the Document Server ships, saves by uploading a
+  container it encrypted with the same DEK, and encrypts every co-editing
+  change with the DEK. The contract names the container versions read (2 and
+  3) and written (3, decided 2026-10-26 with
+  `private-rooms-dse3-header-authentication`), the library build the
+  Document Server ships, how the signed token treats the entry, and the
+  first Document Server version that implements it.
 - Add a Document Server capability check: the client refuses to open an
   encrypted file (with a localized message) when the connected Document
-  Server does not declare encrypted-editing support, instead of showing
-  ciphertext.
-- Disable co-editing for encrypted files for real: the server emits a
-  co-editing configuration that forbids concurrent sessions, and the client
-  stops relying on the unconsumed `canCoAuthoring` flag.
-- Define the policy for every editor action on an encrypted file: save-as,
-  download-as, print, version history and form filling each either run
-  through an encrypted path or are withheld in the editor UI. The proposed
-  policy withholds save-as, download-as and version history in v1, keeps
-  print, and withholds form submission.
+  Server does not support encrypted editing, instead of showing ciphertext.
+- Allow co-editing of encrypted files (decided 2026-10-29): each co-editor
+  unwraps the DEK from their own access entry, and the Document Server relays
+  and stores only encrypted changes. The client stops clearing the
+  unconsumed `canCoAuthoring` flag.
+- Make a saved encrypted file open again: after the editor saves an encrypted
+  document, the next open starts from the saved version without replaying
+  the changes it already contains.
+- Keep the document address of an encrypted file reachable from the user's
+  browser, since the editor downloads it there.
+- Define the policy for every editor action on an encrypted file. Download-as
+  and save-copy-as are allowed (decided 2026-10-29): the editor builds a DOCX
+  or PDF in the browser and saves a decrypted copy on the user's device, and
+  no copy is stored in the portal or converted by the Document Server. Print
+  is allowed; version history and form submission are withheld in v1.
 - Let the SDK open encrypted files once the capability check passes.
 - Add the missing test coverage: an MSW `openedit` mock for an encrypted
-  file, a doceditor unit test for the key path, a client E2E that opens an
-  encrypted file, and the SDK editor E2E un-fixmed.
+  file, doceditor unit tests for the key path and the action policy, a client
+  E2E that opens an encrypted file, the SDK editor E2E un-fixmed, and a
+  recorded run of save, reopen and co-editing against a real Document Server.
 
 **BREAKING** for testers: an encrypted file no longer opens against a
-Document Server that does not declare the capability.
+Document Server that does not support encrypted editing.
 
 ## Capabilities
 
@@ -50,26 +65,28 @@ None.
 ### Modified Capabilities
 
 - `private-rooms/editor-integration`: the DEK hand-off gets a declared
-  contract and capability check; the co-authoring requirement becomes a real
-  co-editing restriction; the "no encrypted-specific handling" requirement
-  and the "no Document Server version" requirement are replaced by explicit
-  action policies and a capability requirement; the SDK refusal becomes
-  conditional on the capability.
+  contract and capability check; co-editing of encrypted files is allowed
+  and the co-authoring flag requirement is removed; a saved encrypted file
+  reopens without replaying its changes; the document address stays
+  reachable from the browser; the "no encrypted-specific handling" and "no
+  Document Server version" requirements are replaced by explicit action
+  policies and a capability requirement; the SDK refusal becomes conditional
+  on the capability.
 
 ## Impact
 
 - Client: `packages/doceditor/src` (key hook, editor config, editor events,
-  actions), `packages/sdk/src/app/(personal-files)` docs layout, shared
-  settings store (Document Server capability), locales.
-- Server (`../server`): editor configuration (`EditorController`,
-  `Configuration.cs` co-editing), Document Server version/capability probe,
-  callback handling for encrypted saves, and whether the signed configuration
-  keeps the caller's key-pair list. The server already refuses to convert
-  encrypted or private-room files, but it does not keep converted or
-  plaintext output out of a destination folder, including a private room.
-- Document Server team: owns the contract itself. Nothing in this change can
-  be marked done until that team confirms how `encryptionKeys.dek` is read in
-  a web session, what the save callback returns and which version ships it.
+  save-as handling, actions), `packages/sdk/src/app/(personal-files)` docs
+  layout, shared settings store (Document Server capability), locales.
+- Server (`../server`): editor configuration (the document address of an
+  encrypted file, the document key after an encrypted save), the Document
+  Server capability, and whether the signed configuration keeps the caller's
+  key-pair list. The server already refuses to convert encrypted or
+  private-room files.
+- Document Server team: owns the contract, the end of an encrypted editing
+  session, and the crypto library build each release ships. Nothing in this
+  change can be archived until that team confirms the contract and names the
+  release that ships it.
 - Tests: `packages/shared/__mocks__/handlers/files/encryptedFiles.ts`,
   `packages/doceditor/__tests__`, `packages/client/__tests__`,
   `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`.
@@ -77,13 +94,22 @@ None.
 ## Out of scope
 
 - Changing the DSE3 wire format (see `private-rooms-dse3-header-authentication`).
-- Any new editor features for encrypted files beyond the v1 policy above.
+- Storing an editor copy (save-as) in a portal folder; copies go to the
+  user's device only.
 - Removing the `privateRooms` flag (see `private-rooms-release-gate`).
+
+## Decisions taken
+
+Confirmed by the feature owner on 2026-10-29, after the live run:
+
+- Co-editing of encrypted files is allowed.
+- Download-as and save-copy-as are allowed as decrypted copies on the user's
+  device.
 
 ## Decisions needed
 
-1. The v1 action policy (withhold save-as / download-as / version history /
-   form submit, keep print). Product owner decides; the specs below assume it.
+1. The rest of the v1 action policy: print allowed, version history and form
+   submission withheld. Product owner confirms; the specs below assume it.
 2. Whether a Document Server without the capability should block only
    encrypted files or disable private-room creation altogether. The specs
    assume per-file refusal.

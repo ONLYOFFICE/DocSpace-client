@@ -29,8 +29,10 @@ DocumentService / the editor", SDK_PRIVATE_PLAN §3 decision #8 "the editor
 decrypts in its own (future) encryption infrastructure". The ARCHITECTURE.md
 and DEVELOPMENT_PLAN_V2 design of an in-browser buffer mode
 (`docEditor.openDocument(buffer)`, `document.url = "__data__"`,
-`encryptedEditBuffer.ts`) was implemented and later removed; the branch now
-assumes Document Server-side decryption, a contract nobody has written down.
+`encryptedEditBuffer.ts`) was implemented in this repository and later
+removed. The branch then assumed Document Server-side decryption; the run
+below shows that the decryption happens in the browser after all, inside
+the Document Server's own web client rather than in this repository's page.
 
 The editor developers received the private-rooms crypto on 2026-07-01 as
 `onlyoffice-crypto.js` (the IIFE bundle built from
@@ -55,6 +57,74 @@ the server:
   without an id replaces only that pair; it answers 404 for a pair the web
   client created with its own id.
 
+### Observed on 2026-10-29
+
+A live run on the local Aspire stack against Document Server 10.0.0 build 133,
+developer edition (`onlyoffice/4testing-documentserver-de:10.0.0.133`), with
+JWT enabled for the browser and for requests. The editor code was read in
+the deployed bundles: `web-apps/apps/documenteditor/main/app.js` and the
+crypto add-on in `sdkjs/word/sdk-all-min.js` (`Asc.Addons.crypto`). The public
+`ONLYOFFICE/sdkjs` `develop` branch on GitHub (last commit 2026-05-26) does
+not contain this code.
+
+- **Key hand-over.** `web-apps` passes `editorConfig.encryptionKeys` to the
+  core as the document info's encrypted info. The add-on sets `userId` on it
+  and, in a browser or whenever `dek` is present, starts its web crypto path,
+  which reads only `dek` (base64) and imports it as an AES-GCM key.
+  `cryptoEngineId` is not read. In the desktop application without `dek` it
+  hands the whole entry to the application with the command
+  `portal:cryptoinfo` instead.
+- **Crypto library.** The add-on calls `window.OnlyofficeCrypto`
+  (`decryptFile`, `encryptFile`, `isDSE3Format`), which the Document Server
+  ships as its own copy of this repository's library at
+  `sdkjs/common/crypto/onlyoffice-crypto.js`. That copy reports
+  `VERSION_DSE3_FILE = 2`. Without the library or WebCrypto the add-on stays
+  off without an error.
+- **Open.** The editor frame downloads `document.url` itself
+  (`filehandler.ashx?action=stream`, with `stream_auth` and `origin`) and
+  decrypts it in the browser; the file name comes from the container header.
+  In the run `document.url` was built from the portal address for requests
+  from the Document Server (`docServicePortalUrl`,
+  `http://host.docker.internal:8092/` on the local stack, read from
+  `GET files/docservice` and the `openedit` response), which the browser
+  could not reach until the host mapped that name to loopback.
+- **Token.** The Document Server accepted the configuration although the
+  signed `encryptionKeys` (the key-pair list) differs from the
+  `{ dek, cryptoEngineId }` beside it, and it read the DEK from the unsigned
+  part. In the bundle the entry is read only when the add-on starts and is
+  not part of any message to the Document Server server (read in the code;
+  the socket traffic was not captured). The signed token carries the key
+  pairs, `privateKeyEnc` included, to the Document Server.
+- **Save.** Ctrl+S and the Save button in the header both build the file in
+  the browser, encrypt it with `encryptFile` under the same DEK and the real
+  file name, and post it to the Document Server's `savefile` endpoint
+  (`forcesavetype=1`). The portal stored a new version: DSE3, version byte 2,
+  encrypted flag set, readable with the existing access entries.
+- **Co-editing.** Two sessions edited the same encrypted file in real time.
+  Each change is sent as `ENCRYPTED;` plus base64 of a random 12-byte IV and
+  the AES-GCM ciphertext of `DECRYPTED;` plus the change. The Document
+  Server's change store held 26 of 26 and 38 of 38 changes with that marker,
+  and none contained the typed text.
+- **Session end.** After a save and closing every editor, the Document
+  Server kept the session (task status 0) and all its changes for more than
+  three minutes and logged no assembly; the portal kept returning the same
+  document key from `openedit`. Opening the file again downloaded the saved
+  version as the base and replayed the kept changes on it: the editor
+  reported "An error has occurred while opening the file" and the Document
+  Server logged `clientLog: changesError`. Reproduced on two files, with both
+  ways of saving. The edit history (`files/file/{id}/edit/history`) listed
+  only version 1, and `edit/diff` returned no `changesUrl` for either
+  version.
+- **Download-as and save-copy-as.** The editor offers DOCX and PDF only.
+  The core's download-as checks the add-on first: for those formats the
+  add-on builds the file in the browser and saves it to the device, so
+  neither the Document Server conversion nor `onRequestSaveAs` is reached
+  (read in the bundle, not executed). Print builds the PDF in the browser too.
+- **Capability.** The Document Server publishes no capability endpoint
+  (`info/info.json` answers 404). Two signals exist: `Asc.Addons.crypto` in
+  the editor frame, and `sdkjs/common/crypto/onlyoffice-crypto.js` under the
+  Document Server address, which answers 200 with and without the build hash.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -62,88 +132,115 @@ the server:
   versioned, referenced from the editor configuration.
 - The client never shows ciphertext: it refuses to open when the capability
   is missing.
-- Co-editing genuinely restricted, not flagged.
+- Encrypted files co-edit through encrypted changes, and a saved encrypted
+  file opens again.
 - Every editor action has a decided behaviour for encrypted files.
-- Test coverage exists for the key path and the open flow.
+- Test coverage exists for the key path and the open flow, and the parts
+  only a real Document Server can show are recorded runs.
 
 **Non-Goals:**
-- Multi-user encrypted co-editing (requires per-session key exchange in the
-  Document Server; v2 at the earliest).
-- Encrypted save-as / download-as / version diffs (withheld in v1).
+- Storing an editor copy (save-as) in a portal folder.
+- Encrypted version diffs.
 - Changing the DSE3 format.
 
 ## Decisions
 
-1. **Decryption stays in the Document Server (not the browser buffer mode).**
-   Alternatives: (a) restore the removed buffer mode, where the browser
-   decrypts and feeds bytes to the editor; (b) Document Server decrypts with
-   the DEK from the configuration. (b) is what the branch and the server
-   callback already assume (`DocumentServiceTracker.cs` accepts
-   `fileData.Encrypted`), and it keeps co-editing possible later. (a) would
-   need re-encryption on every save in the browser and a new save channel.
-   Chosen: (b), with the explicit caveat that the Document Server team must
-   confirm it.
+1. **Decryption happens in the Document Server's web client, in the
+   browser.** Observed on 2026-10-29: the editor frame decrypts and
+   re-encrypts with the library copy the Document Server ships, and neither
+   the DEK nor plaintext reaches the Document Server server. The branch had
+   assumed server-side decryption (`DocumentServiceTracker.cs` accepts
+   `fileData.Encrypted`); the callback flag still holds, since the saved
+   container arrives encrypted. Alternative: restore this repository's buffer
+   mode; unnecessary, the editor already does it.
 
 2. **Capability declared by the server, not probed by the client.** The server
-   already knows the Document Server version it talks to; it exposes a boolean
-   (for example in the files settings payload) that the client reads once.
-   Alternative: the client probes the Document Server directly, which breaks
-   with proxies and the SDK. Chosen: server-declared capability.
+   already knows the Document Server it talks to; it exposes a boolean (for
+   example in the files settings payload) that the client reads once. Until
+   the Document Server team publishes a signal, the server derives it from the
+   crypto library path (`sdkjs/common/crypto/onlyoffice-crypto.js` answering
+   200 under the Document Server address). Alternative: the client probes the
+   Document Server directly, which breaks with proxies and the SDK.
 
-3. **Co-editing restriction via the server co-editing configuration.** The
-   server emits a single-user co-editing mode for encrypted files; the
-   Document Server then grants view mode to a second session. Alternative:
-   client-side lock on the file record; rejected because it cannot stop a
-   second client. The `canCoAuthoring` flag stays only for backward
-   compatibility.
+3. **Co-editing allowed (decided 2026-10-29).** The Document Server encrypts
+   every change with the DEK and stores only ciphertext, and each co-editor's
+   doceditor unwraps the DEK from that member's own access entry, so
+   co-editing keeps the end-to-end property. Alternative considered and
+   dropped: a single-user co-editing configuration from the server, which
+   would only remove a working feature. The client stops clearing
+   `canCoAuthoring`, which the Document Server does not read.
 
-4. **Action policy in v1: withhold save-as, download-as, version history and
-   form submission; keep print.** Save-as and download-as would route
-   plaintext through the Document Server output address into arbitrary
-   folders (the save-as handler posts a Document Server URL to the file
-   creation endpoint). The server refuses to convert an encrypted file or a
-   file in a private room (`FileSecurity.cs:1894-1914` deny `Convert` there,
-   `FileConverter.cs:306-309` disables conversion of encrypted files), but it
-   does not stop converted or plaintext output from being written into a
-   folder: `POST files/file/{fileId}/copyas` converts a readable source and
-   inserts the result into the destination (`FilesControllerHelper.cs:263-280`)
-   with only a create-rights check (`FileConverter.cs:643-654`), and the
-   upload path has no private-room check (`FileUploader.cs:61-125`). Nothing
-   on the server therefore keeps the Document Server's plaintext output out
-   of an ordinary folder or out of a private room, which is why both actions
-   are withheld in the editor. Print is local to the session. Version history is withheld in the
-   client already, so the editor follows. Alternative: implement encrypted
-   save-as (decrypt, re-encrypt with a new DEK, upload through the encrypted
-   session); deferred to a later change.
+4. **Action policy in v1: decrypted copies on the device, print, no history,
+   no form submission.** Download-as and save-copy-as are allowed (decided
+   2026-10-29) because the editor builds them in the browser and saves them to
+   the device; nothing plaintext reaches the portal or the Document Server.
+   The doceditor still refuses `onRequestSaveAs` for an encrypted file, so a
+   Document Server build that ever converted on the server could not post a
+   plaintext copy into a folder: the server refuses to convert an encrypted
+   or private-room file (`FileSecurity.cs:1894-1914`,
+   `FileConverter.cs:306-309`), but `POST files/file/{fileId}/copyas` inserts
+   a converted copy with only a create-rights check
+   (`FilesControllerHelper.cs:263-280`, `FileConverter.cs:643-654`). Print is
+   local to the session. Version history is withheld: the client withholds
+   version operations for encrypted files, the edit history lists no saved
+   version, and there is no `changesUrl` to show. Form submission is withheld.
 
 5. **Contract version travels in the configuration.** A small integer next to
    `dek` and `cryptoEngineId`; the Document Server ignores versions it does
    not know and reports an error instead of opening ciphertext.
+
 6. **The Document Server reads DSE3 versions 2 and 3 and writes version 3
    (decided 2026-10-26).** `private-rooms-dse3-header-authentication`
    authenticates the header fields in a version-3 container and keeps
-   version-2 files readable without migration. No Document Server build
-   decrypts DSE3 yet, so the contract asks for both versions from the start
-   instead of adding version 3 to a shipped parser later.
+   version-2 files readable without migration. The Document Server decrypts
+   and encrypts with its own copy of this repository's library, which writes
+   version 2 in build 10.0.0.133, so the container version is a property of
+   the library build each Document Server release ships. The contract names
+   that build; a portal that writes version 3 needs a Document Server that
+   ships a library reading it, or the editor cannot open those files.
+
+7. **A saved encrypted document reopens from a matching base.** The editor
+   takes its base from `document.url` while the Document Server replays the
+   session's changes, so the base must be the version the session started
+   from, and the session must end once its changes are saved. Options:
+   (a) the server binds `document.url` of a session to the version it started
+   from, so a member who rejoins after a save gets a consistent base, and the
+   Document Server closes the session once the last editor leaves and drops
+   the changes an encrypted save already contains, after which the server
+   issues a new document key; (b) the server issues a new document key right
+   after storing an encrypted save, which fixes a reopen but splits members
+   still editing into two sessions. Chosen: (a), with the Document Server team
+   for the session end; the backend looks up how the document key and
+   `document.url` are produced (CodeGraph) before choosing the mechanism.
+
+8. **The document address of an encrypted file is a public address.** The
+   editor downloads it in the browser, so the server builds it from the
+   portal's public address, not from the address meant for requests from the
+   Document Server. The backend looks up where the address is built
+   (CodeGraph) before changing it.
 
 ## Risks / Trade-offs
 
 - [Document Server does not implement the contract on the planned release
   train] → the capability check keeps encrypted files closed; private rooms
   remain usable as encrypted storage, and the release gate stays shut.
-- [JWT signed before the client injects `encryptionKeys`] → today the server
-  signs the field as the caller's key-pair list, including the encrypted
-  private half, so a Document Server that validates the token against the
-  configuration sees a different value than the `{ dek, cryptoEngineId }`
-  the client sends, and the token itself hands the encrypted private key to
-  the Document Server. The contract must state whether the field is outside
-  the signed payload; if the Document
-  Server validates the whole configuration, the server would have to sign
-  after the client supplies the DEK, which moves the DEK through the server
-  (unacceptable) or requires a two-step token. Open question below.
+- [JWT signed before the client injects `encryptionKeys`] → observed: the
+  Document Server accepts the configuration and reads the DEK from the
+  unsigned part, so the DEK stays out of the token and off the Document Server
+  server. The token still hands the key pairs, `privateKeyEnc` included, to
+  the Document Server; whether the server keeps them there is an open
+  question below.
 - [DEK handed as a base64 string to a third-party iframe] → accepted for v1,
   recorded in `private-rooms/encryption-core`; the editor runs same-origin
   through the Document Server proxy.
+- [Decrypted copies on users' devices] → accepted by the feature owner on
+  2026-10-29; the copy is what the user already sees in the editor.
+- [The library copy in the Document Server drifts from this repository] →
+  the contract names the build; `private-rooms-dse3-header-authentication`
+  waits for a Document Server that reads version 3.
+- [Edits left unsaved when the last editor leaves exist only as encrypted
+  changes in the Document Server, which cannot build a file from them] →
+  open question below; until it is answered, users save explicitly.
 - [Withholding actions confuses users] → menu items are absent, not greyed;
   the room header shows the private badge.
 
@@ -153,7 +250,7 @@ the server:
 2. Land the client refusal path; behind the feature flag nothing changes for
    ordinary users.
 3. When the Document Server version ships, flip the capability on staging,
-   run the new E2E suite, then production.
+   run the new E2E suite and the recorded runs, then production.
 4. Rollback: turn the capability off; encrypted files stop opening in the
    editor but remain downloadable.
 
@@ -162,21 +259,26 @@ the server:
 - Desktop application: the desktop's new crypto engine
   (`{DC522726-5E0E-43E5-AA02-8EA156BECBC5}`, see
   `private-rooms-remove-dead-api-calls` design) runs the editor inside the
-  desktop. Does it take the editor configuration's `{ dek, cryptoEngineId }`
-  hand-over as a web session does, or unwrap the DEK itself from the key pair
-  the desktop bridge passes at login? Owner: the desktop developer. Until it
-  is answered the editor page runs the same key path in the desktop as in the
-  browser.
-
-- How does the Document Server read `editorConfig.encryptionKeys` in a web
-  session, and does it validate the field against the token? Owner: Document
-  Server team. The answer changes the token-handling scenario only. (On the
-  portal side the field is signed today, as the key-pair list; see Context.)
+  desktop. Observed on 2026-10-29: without `dek` the editor hands the key
+  pairs to the application (`portal:cryptoinfo`); with `dek` it takes the
+  web path. Which of the two the new engine expects is for the desktop
+  developer. Until it is answered the editor page runs the same key path in
+  the desktop as in the browser.
 - Should the server keep the caller's key-pair list, with `privateKeyEnc`, in
   `editorConfig.encryptionKeys` and in the signed token at all, given that the
-  client replaces the field and the Document Server does not need the
-  encrypted private key? Owner: backend team with the Document Server team.
-- Does the save callback return a container encrypted with the same DEK or a
-  new one? Owner: Document Server team. If a new DEK, the server must receive
-  a new wrap set from the client, which is a larger change.
-- Minimum Document Server version. Owner: Document Server team.
+  web editor reads only `dek` and the Document Server server does not need
+  the encrypted private key? Owner: backend team with the Document Server team.
+- How does the Document Server end an encrypted editing session: does it
+  close it after the last editor leaves, drop changes that a save already
+  contains, and send a final callback? What happens to unsaved encrypted
+  changes when the session cache expires (`expire.files` is 86400 seconds in
+  build 133)? Owner: Document Server team.
+- Which build of the crypto library does each Document Server release ship,
+  and when does a build that reads and writes DSE3 version 3 ship? Owner:
+  Document Server team, together with
+  `private-rooms-dse3-header-authentication`.
+- Does the community or enterprise edition carry the crypto add-on, or only
+  the developer edition, and from which release? This sets the minimum
+  Document Server version. Owner: Document Server team.
+- Will the Document Server publish a capability signal (health check or
+  settings) to replace the library-path probe? Owner: Document Server team.

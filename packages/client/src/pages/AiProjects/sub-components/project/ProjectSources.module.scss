@@ -41,13 +41,13 @@
     var(--info-panel-border-color, var(--files-section-table-view-row-border-color));
 }
 
-// The three cards share the column's height. Grid rows grow from 0 in
-// equal shares up to their content, so a short card keeps its full height
-// and a long one takes what is left and scrolls inside; Context keeps its
-// own height. `align-content: start` stops the rows from stretching.
+// The cards share the column's height (a kind without rooms has none).
+// Grid rows grow from 0 in equal shares up to their content, so a short
+// card keeps its full height and a long one takes what is left and scrolls
+// inside. `align-content: start` stops the rows from stretching.
 .sections {
   display: grid;
-  grid-template-rows: minmax(0, max-content) minmax(0, max-content) max-content;
+  grid-auto-rows: minmax(0, max-content);
   align-content: start;
   gap: 12px;
   height: 100%;

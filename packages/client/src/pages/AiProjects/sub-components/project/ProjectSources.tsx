@@ -246,17 +246,16 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
       ]
     : undefined;
 
-  const instructionsSection = (
+  // A kind with no linked room has no card and no tab: the rooms are linked
+  // in Edit project, and an empty card would only say so.
+  const instructionsSection = instructionsRooms.length === 0 ? null : (
     <Section
       title={t("Common:AIProjectInstructions")}
       menuTitle={t("Common:AIProjectInstructions")}
       testId="ai-project-instructions"
       headless={compact}
     >
-      {instructionsRooms.length === 0 ? (
-        <Text className={styles.note}>{t("Common:AIProjectNoRooms")}</Text>
-      ) : (
-        instructionsRooms.map((room) => {
+      {instructionsRooms.map((room) => {
           const skills = store.skills.find((loaded) => loaded.id === room.id)?.skills ?? [];
           return (
             <RoomCard
@@ -287,22 +286,18 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
               )}
             </RoomCard>
           );
-        })
-      )}
+        })}
     </Section>
   );
 
-  const knowledgeSection = (
+  const knowledgeSection = knowledgeRooms.length === 0 ? null : (
     <Section
       title={t("Common:Knowledge")}
       menuTitle={t("Common:Knowledge")}
       testId="ai-project-knowledge"
       headless={compact}
     >
-      {knowledgeRooms.length === 0 ? (
-        <Text className={styles.note}>{t("Common:AIProjectNoRooms")}</Text>
-      ) : (
-        knowledgeRooms.map((room) => {
+      {knowledgeRooms.map((room) => {
           // Only vectorized files are searched, so only they are listed.
           const files = (store.knowledge.find((loaded) => loaded.id === room.id)?.files ?? []).filter(
             (file) => file.indexed,
@@ -330,8 +325,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
               </ul>
             </RoomCard>
           );
-        })
-      )}
+        })}
     </Section>
   );
 
@@ -376,8 +370,12 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   // The cards are drawn under the tabs by us, not as the tabs' content, so
   // they take the full width and nothing has to be selected.
   const tabs: TTabItem[] = [
-    { id: "instructions", name: t("Common:AIProjectInstructions"), iconName: LampReactSvgUrl, content: null },
-    { id: "knowledge", name: t("Common:Knowledge"), iconName: BookTrainingReactSvgUrl, content: null },
+    ...(instructionsSection
+      ? [{ id: "instructions", name: t("Common:AIProjectInstructions"), iconName: LampReactSvgUrl, content: null }]
+      : []),
+    ...(knowledgeSection
+      ? [{ id: "knowledge", name: t("Common:Knowledge"), iconName: BookTrainingReactSvgUrl, content: null }]
+      : []),
     { id: "context", name: t("Common:AIProjectContext"), iconName: FolderReactSvgUrl, content: null },
   ];
   const openedCard = { instructions: instructionsSection, knowledge: knowledgeSection, context: contextSection };

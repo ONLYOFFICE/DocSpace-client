@@ -44,8 +44,10 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { useKeyDialogCloseGuard } from "../key-dialog-close-guard";
+import { KeyDialogAnnouncement } from "../key-dialog-announcement";
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
@@ -148,32 +150,34 @@ export const RecoveryPhraseInputModal: React.FC<
               </Text>
             </div>
 
-            {error ? (
-              <div className={styles.errorBox}>
-                <Text fontSize="13px" fontWeight={600} color="var(--color-error)">
-                  {error}
-                </Text>
-              </div>
-            ) : null}
-
-            <Textarea
-              id="recoveryPhraseInput"
-              name="recoveryPhraseInput"
-              value={phrase}
-              onChange={(e) => {
-                setPhrase(e.target.value);
-                setLocalError("");
-              }}
-              placeholder={t("Common:RecoveryPhrasePlaceholder")}
-              aria-labelledby={hintId}
-              heightTextArea="120px"
-              isDisabled={isLoading || isValidating}
+            <FieldContainer
+              isVertical
+              labelFor="recoveryPhraseInput"
+              removeMargin
               hasError={!!error}
-              autoFocus
-              fontSize={13}
-              tabIndex={1}
-            />
+              errorMessage={error ?? ""}
+              errorMessageWidth="100%"
+            >
+              <Textarea
+                id="recoveryPhraseInput"
+                name="recoveryPhraseInput"
+                value={phrase}
+                onChange={(e) => {
+                  setPhrase(e.target.value);
+                  setLocalError("");
+                }}
+                placeholder={t("Common:RecoveryPhrasePlaceholder")}
+                aria-labelledby={hintId}
+                heightTextArea="120px"
+                isDisabled={isLoading || isValidating}
+                hasError={!!error}
+                autoFocus
+                fontSize={13}
+                tabIndex={1}
+              />
+            </FieldContainer>
           </div>
+          <KeyDialogAnnouncement text={error ?? ""} />
         </ModalDialog.Body>
 
         <ModalDialog.Footer>

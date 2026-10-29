@@ -49,6 +49,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { useKeyDialogCloseGuard } from "../key-dialog-close-guard";
+import { KeyDialogAnnouncement } from "../key-dialog-announcement";
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
@@ -217,6 +218,10 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   const passphraseHasError =
     !!displayedError ||
     (isNew && passphrase.length >= MIN_LENGTH && !rulesPassed);
+
+  const confirmMismatch = !!confirmPassphrase && passphrase !== confirmPassphrase;
+  const announcedError =
+    displayedError || (confirmMismatch ? t("Common:PassphraseMismatch") : "");
 
   return (
     <>
@@ -422,6 +427,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
               </FieldContainer>
             )}
           </div>
+          <KeyDialogAnnouncement text={announcedError} />
         </ModalDialog.Body>
 
         <ModalDialog.Footer>

@@ -42,6 +42,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { KEY_DIALOG_DISPLAY_TYPE } from "@docspace/shared/dialogs/key-dialog-display";
 import { useKeyDialogCloseGuard } from "@docspace/shared/dialogs/key-dialog-close-guard";
+import { KeyDialogAnnouncement } from "@docspace/shared/dialogs/key-dialog-announcement";
 import UnsavedChangesDialog from "@docspace/shared/dialogs/unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
@@ -277,6 +278,9 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
               </FieldContainer>
             </div>
           </div>
+          <KeyDialogAnnouncement
+            text={currentFieldError || newFieldError || confirmFieldError || ""}
+          />
         </ModalDialog.Body>
 
         <ModalDialog.Footer>

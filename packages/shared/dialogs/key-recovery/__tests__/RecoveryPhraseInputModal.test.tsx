@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
@@ -86,5 +86,24 @@ describe("RecoveryPhraseInputModal", () => {
     expect(queryConfirmation()).toBeNull();
     expect(onCancel).not.toHaveBeenCalled();
     expect(getPhraseField()).toHaveValue("abandon abandon abandon");
+  });
+
+  it("Wrong recovery phrase", async () => {
+    renderModal({ error: "Common:InvalidRecoveryPhrase" });
+    const field = getPhraseField();
+
+    expect(field).toHaveAttribute("aria-invalid", "true");
+    const described = (field.getAttribute("aria-describedby") ?? "")
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((id) => document.getElementById(id)?.textContent ?? "")
+      .join(" ");
+    expect(described).toContain("Common:InvalidRecoveryPhrase");
+    expect(field).toHaveAccessibleName("Common:RecoveryPhraseInputHint");
+    await waitFor(() =>
+      expect(screen.getByTestId("key-dialog-announcement")).toHaveTextContent(
+        "Common:InvalidRecoveryPhrase",
+      ),
+    );
   });
 });

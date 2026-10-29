@@ -33,7 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 
@@ -71,6 +77,19 @@ const renderModal = (props: Partial<ModalProps> = {}) => {
 
 const getPassphraseInput = () =>
   screen.getByPlaceholderText("Common:Passphrase") as HTMLInputElement;
+
+const getConfirmInput = () =>
+  screen.getByPlaceholderText("Common:ConfirmPassphrase") as HTMLInputElement;
+
+const getAnnouncement = () => screen.getByTestId("key-dialog-announcement");
+
+// The text assistive technology reads together with the field.
+const describedText = (field: HTMLElement) =>
+  (field.getAttribute("aria-describedby") ?? "")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((id) => document.getElementById(id)?.textContent ?? "")
+    .join(" ");
 
 // A closed ModalDialog stays mounted, hidden from assistive technology, so the
 // confirmation is looked up among the dialogs that are actually open.
@@ -215,5 +234,60 @@ describe("PassphraseModal", () => {
 
     expect(queryConfirmation()).toBeNull();
     expect(onCancel).toHaveBeenCalledTimes(1);
+  });
+
+  it("Mismatched confirmation", async () => {
+    const user = userEvent.setup();
+    renderModal({ isNew: true });
+
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.type(getConfirmInput(), "Different1horse!battery");
+
+    expect(getConfirmInput()).toHaveAttribute("aria-invalid", "true");
+    expect(describedText(getConfirmInput())).toContain(
+      "Common:PassphraseMismatch",
+    );
+    await waitFor(() =>
+      expect(getAnnouncement()).toHaveTextContent("Common:PassphraseMismatch"),
+    );
+  });
+
+  it("Wrong passphrase announced", async () => {
+    const user = userEvent.setup();
+    renderModal({ externalError: "Common:InvalidPassphrase" });
+
+    expect(getPassphraseInput()).toHaveAttribute("aria-invalid", "true");
+    expect(describedText(getPassphraseInput())).toContain(
+      "Common:InvalidPassphrase",
+    );
+    await waitFor(() =>
+      expect(getAnnouncement()).toHaveTextContent("Common:InvalidPassphrase"),
+    );
+    const announcement = getAnnouncement();
+
+    await user.type(getPassphraseInput(), "again");
+
+    expect(getAnnouncement()).toBe(announcement);
+    expect(announcement).toHaveTextContent("Common:InvalidPassphrase");
+  });
+
+  it("Error cleared", async () => {
+    const user = userEvent.setup();
+    renderModal({ isNew: true });
+
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.type(getConfirmInput(), "Different1horse!battery");
+    await waitFor(() =>
+      expect(getAnnouncement()).toHaveTextContent("Common:PassphraseMismatch"),
+    );
+
+    await user.clear(getConfirmInput());
+    await user.type(getConfirmInput(), "Correct1horse!battery");
+
+    expect(getConfirmInput()).not.toHaveAttribute("aria-invalid", "true");
+    expect(describedText(getConfirmInput())).not.toContain(
+      "Common:PassphraseMismatch",
+    );
+    expect(getAnnouncement()).toHaveTextContent("");
   });
 });

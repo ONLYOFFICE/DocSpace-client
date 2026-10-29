@@ -52,6 +52,8 @@ import {
   CachePriceTooltip,
   type TCachePriceBreakdown,
 } from "../CachePriceTooltip";
+import { ByokBadge } from "../sub-components/ByokBadge";
+import { isByokModel } from "../utils";
 
 import styles from "./ModelSettingsRowView.module.scss";
 
@@ -60,6 +62,7 @@ type TModelRow = {
   alias: string;
   image: string;
   link?: string;
+  byok: boolean;
   prices: string[];
   breakdown: TCachePriceBreakdown | null;
 };
@@ -97,6 +100,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
     alias: m.alias,
     image: m.image,
     link: m.link,
+    byok: isByokModel(m),
     prices: [
       t("Common:AIModelPrice", {
         inputPrice: formatAiModelPrice(m.price?.prompt),
@@ -115,6 +119,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
     alias: m.alias,
     image: m.image,
     link: m.link,
+    byok: isByokModel(m),
     prices: [
       t("Common:AIImageModelPrice", {
         inputPrice: formatAiModelPrice(m.price?.prompt),
@@ -169,6 +174,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
                 <Text fontSize="14px" fontWeight={600} className={styles.title}>
                   {row.alias}
                 </Text>
+                {row.byok ? <ByokBadge /> : null}
                 {row.link ? (
                   <ExternalLinkIcon className={styles.detailsIcon} />
                 ) : null}
@@ -186,16 +192,21 @@ const RowView = (props: ModelSettingsRowViewProps) => {
               ))}
             </div>
 
-            <div className={styles.toggle} onClick={(e) => e.stopPropagation()}>
-              <ToggleButton
-                isChecked={enabled}
-                onChange={() =>
-                  requestToggle({ id: row.id, title: row.alias }, !enabled)
-                }
-                isDisabled={isUpdating || !isAiToolsServiceOn}
-                dataTestId={`ai_model_toggle_${row.id}`}
-              />
-            </div>
+            {row.byok ? null : (
+              <div
+                className={styles.toggle}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ToggleButton
+                  isChecked={enabled}
+                  onChange={() =>
+                    requestToggle({ id: row.id, title: row.alias }, !enabled)
+                  }
+                  isDisabled={isUpdating || !isAiToolsServiceOn}
+                  dataTestId={`ai_model_toggle_${row.id}`}
+                />
+              </div>
+            )}
           </div>
         );
       })}

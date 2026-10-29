@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M ielietotājiem tokeniem | {{outputPrice}}/M izplatītiem tokeniem",
   "AIModels": "MI modeļi",
   "AIModelsAndKnowledgeBase": "Modeļi un zināšanu bāze",
-  "AIModelsDescription": "Piekļūstiet plašam MI modeļu klāstam, izmantojot OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Visi MI modeļi šajā darbvietā ir atspējoti. Lai turpinātu, iespējojiet šī aģenta modeli AI iestatījumos.",
   "AIModelsDisabledChatAdminDescription": "Visi MI modeļi šajā darbvietā ir atspējoti. Lai turpinātu, iespējojiet vismaz vienu modeli AI iestatījumos.",
   "AIModelsDisabledTitle": "MI modeļi ir atspējoti",

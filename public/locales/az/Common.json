@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M giriş tokenləri | {{outputPrice}}/M çıxış tokenləri",
   "AIModels": "AI modelləri",
   "AIModelsAndKnowledgeBase": "Modellər və bilik bazası",
-  "AIModelsDescription": "OpenRouter vasitəsilə geniş çeşidli AI modellərinə giriş əldə edin",
   "AIModelsDisabledAgentAdminDescription": "Bu iş sahəsindəki bütün AI modellər deaktiv edilib. Davam etmək üçün bu agentin modelini AI parametrlərində aktiv edin.",
   "AIModelsDisabledChatAdminDescription": "Bu iş sahəsindəki bütün AI modellər deaktiv edilib. Davam etmək üçün AI parametrlərində ən azı bir modeli aktiv edin.",
   "AIModelsDisabledTitle": "AI modellər deaktiv edilib",

@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M tokens εισόδου | {{outputPrice}}/M tokens εξόδου",
   "AIModels": "Μοντέλα AI",
   "AIModelsAndKnowledgeBase": "Μοντέλα & Βάση Γνώσης",
-  "AIModelsDescription": "Αποκτήστε πρόσβαση σε ένα ευρύ φάσμα μοντέλων AI μέσω του OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Όλα τα μοντέλα AI σε αυτόν τον χώρο εργασίας είναι απενεργοποιημένα. Ενεργοποιήστε το μοντέλο αυτού του πράκτορα στις ρυθμίσεις AI για να συνεχίσετε.",
   "AIModelsDisabledChatAdminDescription": "Όλα τα μοντέλα AI σε αυτόν τον χώρο εργασίας είναι απενεργοποιημένα. Ενεργοποιήστε τουλάχιστον ένα μοντέλο στις ρυθμίσεις AI για να συνεχίσετε.",
   "AIModelsDisabledTitle": "Τα μοντέλα AI είναι απενεργοποιημένα",

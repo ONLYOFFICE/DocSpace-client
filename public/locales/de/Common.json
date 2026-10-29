@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M Input-Tokens | {{outputPrice}}/M Ausgabe-Tokens",
   "AIModels": "KI-Modelle",
   "AIModelsAndKnowledgeBase": "Modelle & Wissensdatenbank",
-  "AIModelsDescription": "Greifen Sie über OpenRouter auf eine breite Palette von KI-Modellen zu",
   "AIModelsDisabledAgentAdminDescription": "Alle KI-Modelle in diesem Arbeitsbereich sind deaktiviert. Aktivieren Sie das Modell dieses Agenten in den KI-Einstellungen, um fortzufahren.",
   "AIModelsDisabledChatAdminDescription": "Alle KI-Modelle in diesem Arbeitsbereich sind deaktiviert. Aktivieren Sie mindestens ein Modell in den KI-Einstellungen, um fortzufahren.",
   "AIModelsDisabledTitle": "KI-Modelle sind deaktiviert",

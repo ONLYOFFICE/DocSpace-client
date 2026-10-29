@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M 入力トークン | {{outputPrice}}/M 出力トークン",
   "AIModels": "AIモデル",
   "AIModelsAndKnowledgeBase": "モデルとナレッジベース",
-  "AIModelsDescription": "OpenRouterを通じて幅広いAIモデルにアクセスできます",
   "AIModelsDisabledAgentAdminDescription": "このワークスペースのすべてのAIモデルが無効になっています。続行するには、AIの設定でこのエージェントのモデルを有効にしてください。",
   "AIModelsDisabledChatAdminDescription": "このワークスペースのすべてのAIモデルが無効になっています。続行するには、AIの設定で少なくとも1つのモデルを有効にしてください。",
   "AIModelsDisabledTitle": "AIモデルが無効になっています",

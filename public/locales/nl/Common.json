@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M invoer-tokens | {{outputPrice}}/M uitvoer-tokens",
   "AIModels": "AI-modellen",
   "AIModelsAndKnowledgeBase": "Modellen & kennisbank",
-  "AIModelsDescription": "Krijg toegang tot een breed scala aan AI-modellen via OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Alle AI-modellen in deze werkruimte zijn uitgeschakeld. Schakel het model van deze agent in via de AI-instellingen om door te gaan.",
   "AIModelsDisabledChatAdminDescription": "Alle AI-modellen in deze werkruimte zijn uitgeschakeld. Schakel ten minste één model in via de AI-instellingen om door te gaan.",
   "AIModelsDisabledTitle": "AI-modellen zijn uitgeschakeld",

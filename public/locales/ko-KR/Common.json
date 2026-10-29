@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M 입력 토큰 | {{outputPrice}}/M 출력 토큰",
   "AIModels": "AI 모델",
   "AIModelsAndKnowledgeBase": "모델 및 지식 기반",
-  "AIModelsDescription": "OpenRouter를 통해 다양한 AI 모델에 액세스하세요",
   "AIModelsDisabledAgentAdminDescription": "이 작업 공간의 모든 AI 모델이 비활성화되어 있습니다. 계속하려면 AI 설정에서 이 에이전트의 모델을 활성화하세요.",
   "AIModelsDisabledChatAdminDescription": "이 작업 공간의 모든 AI 모델이 비활성화되어 있습니다. 계속하려면 AI 설정에서 최소 하나의 모델을 활성화하세요.",
   "AIModelsDisabledTitle": "AI 모델이 비활성화되어 있습니다",

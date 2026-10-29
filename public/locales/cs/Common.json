@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M vstupní tokeny | {{outputPrice}}/M výstupní tokeny",
   "AIModels": "AI modely",
   "AIModelsAndKnowledgeBase": "Modely a znalostní báze",
-  "AIModelsDescription": "Získejte přístup k široké škále modelů AI prostřednictvím OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Všechny AI modely v tomto pracovním prostoru jsou deaktivovány. Aktivujte model tohoto agenta v nastavení AI a pokračujte.",
   "AIModelsDisabledChatAdminDescription": "Všechny AI modely v tomto pracovním prostoru jsou deaktivovány. Aktivujte alespoň jeden model v nastavení AI a pokračujte.",
   "AIModelsDisabledTitle": "AI modely jsou deaktivovány",

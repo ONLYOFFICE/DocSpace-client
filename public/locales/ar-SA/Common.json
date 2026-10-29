@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M رموز الإدخال | {{outputPrice}}/M رموز الإخراج",
   "AIModels": "نماذج الذكاء الاصطناعي",
   "AIModelsAndKnowledgeBase": "النماذج وقاعدة المعرفة",
-  "AIModelsDescription": "يمكنك الوصول إلى مجموعة واسعة من نماذج الذكاء الاصطناعي عبر OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "جميع نماذج الذكاء الاصطناعي في مساحة العمل هذه معطلة. قم بتفعيل نموذج هذا الوكيل في إعدادات الذكاء الاصطناعي للمتابعة.",
   "AIModelsDisabledChatAdminDescription": "جميع نماذج الذكاء الاصطناعي في مساحة العمل هذه معطلة. قم بتفعيل نموذج واحد على الأقل في إعدادات الذكاء الاصطناعي للمتابعة.",
   "AIModelsDisabledTitle": "نماذج الذكاء الاصطناعي معطلة",

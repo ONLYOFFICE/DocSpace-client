@@ -54,6 +54,7 @@ import {
 } from "../CachePriceTooltip";
 import { ByokBadge } from "../sub-components/ByokBadge";
 import { isByokModel } from "../utils";
+import ModelsDescription from "../ModelsDescription";
 
 import styles from "./ModelSettingsRowView.module.scss";
 
@@ -215,9 +216,10 @@ const RowView = (props: ModelSettingsRowViewProps) => {
 
   return (
     <div className={styles.rowContainer}>
-      <Text className={styles.introText}>
-        {t("Common:AIModelsDescription")}
-      </Text>
+      <ModelsDescription
+        className={styles.introText}
+        hasByok={[...chatRows, ...imageRows].some((row) => row.byok)}
+      />
 
       {chatRows.length ? (
         <React.Fragment>

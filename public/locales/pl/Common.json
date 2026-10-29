@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M tokenów wejściowych | {{outputPrice}}/M tokenów wyjściowych",
   "AIModels": "Modele AI",
   "AIModelsAndKnowledgeBase": "Modele i baza wiedzy",
-  "AIModelsDescription": "Uzyskaj dostęp do szerokiej gamy modeli AI za pośrednictwem OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Wszystkie modele AI w tym obszarze roboczym są wyłączone. Włącz model tego agenta w ustawieniach AI, aby kontynuować.",
   "AIModelsDisabledChatAdminDescription": "Wszystkie modele AI w tym obszarze roboczym są wyłączone. Włącz co najmniej jeden model w ustawieniach AI, aby kontynuować.",
   "AIModelsDisabledTitle": "Modele AI są wyłączone",

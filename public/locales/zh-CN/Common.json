@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M 输入令牌 | {{outputPrice}}/M 输出令牌",
   "AIModels": "AI 模型",
   "AIModelsAndKnowledgeBase": "模型和知识库",
-  "AIModelsDescription": "通过 OpenRouter 访问广泛的 AI 模型",
   "AIModelsDisabledAgentAdminDescription": "此工作区中的所有 AI 模型均已禁用。请在 AI 设置中启用此智能体的模型以继续。",
   "AIModelsDisabledChatAdminDescription": "此工作区中的所有 AI 模型均已禁用。请在 AI 设置中启用至少一个模型以继续。",
   "AIModelsDisabledTitle": "AI 模型已禁用",

@@ -51,6 +51,7 @@ import {
   type TCachePriceBreakdown,
 } from "../CachePriceTooltip";
 import { isByokModel } from "../utils";
+import ModelsDescription from "../ModelsDescription";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import styles from "./ModelSettingsTable.module.scss";
@@ -201,9 +202,10 @@ const TableView = (props: ModelSettingsTableViewProps) => {
 
   return (
     <div className={styles.tableWrapper}>
-      <Text className={styles.introText}>
-        {t("Common:AIModelsDescription")}
-      </Text>
+      <ModelsDescription
+        className={styles.introText}
+        hasByok={[...chatRows, ...imageRows].some((row) => row.byok)}
+      />
 
       {chatRows.length ? (
         <React.Fragment>

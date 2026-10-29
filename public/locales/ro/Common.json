@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M tokeni de intrare | {{outputPrice}}/M tokeni de ieșire",
   "AIModels": "Modele IA",
   "AIModelsAndKnowledgeBase": "Modele și bază de cunoștințe",
-  "AIModelsDescription": "Accesați o gamă largă de modele IA prin OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Toate modelele IA din acest spațiu de lucru sunt dezactivate. Activați modelul acestui agent în setările IA pentru a continua.",
   "AIModelsDisabledChatAdminDescription": "Toate modelele IA din acest spațiu de lucru sunt dezactivate. Activați cel puțin un model în setările IA pentru a continua.",
   "AIModelsDisabledTitle": "Modelele IA sunt dezactivate",

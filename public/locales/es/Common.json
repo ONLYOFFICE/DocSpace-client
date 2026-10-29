@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M tokens de entrada | {{outputPrice}}/M tokens de salida",
   "AIModels": "Modelos de IA",
   "AIModelsAndKnowledgeBase": "Modelos y base de conocimientos",
-  "AIModelsDescription": "Acceda a una amplia gama de modelos de IA a través de OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Todos los modelos de IA en este espacio de trabajo están desactivados. Active el modelo de este agente en la configuración de IA para continuar.",
   "AIModelsDisabledChatAdminDescription": "Todos los modelos de IA en este espacio de trabajo están desactivados. Active al menos un modelo en la configuración de IA para continuar.",
   "AIModelsDisabledTitle": "Los modelos de IA están desactivados",

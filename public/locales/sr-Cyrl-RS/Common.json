@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M улазних токена | {{outputPrice}}/M излазних токена",
   "AIModels": "АИ модели",
   "AIModelsAndKnowledgeBase": "Модели и база знања",
-  "AIModelsDescription": "Приступите широком спектру АИ модела кроз OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Сви АИ модели у овом радном простору су онемогућени. Омогућите модел овог агента у АИ поставкама да бисте наставили.",
   "AIModelsDisabledChatAdminDescription": "Сви АИ модели у овом радном простору су онемогућени. Омогућите барем један модел у АИ поставкама да бисте наставили.",
   "AIModelsDisabledTitle": "АИ модели су онемогућени",

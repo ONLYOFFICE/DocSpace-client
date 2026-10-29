@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M входни токени | {{outputPrice}}/M изходни токени",
   "AIModels": "ИИ модели",
   "AIModelsAndKnowledgeBase": "Модели и база знания",
-  "AIModelsDescription": "Получете достъп до широк набор от ИИ модели чрез OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Всички ИИ модели в това работно пространство са деактивирани. Активирайте модела на този агент в ИИ настройките, за да продължите.",
   "AIModelsDisabledChatAdminDescription": "Всички ИИ модели в това работно пространство са деактивирани. Активирайте поне един модел в ИИ настройките, за да продължите.",
   "AIModelsDisabledTitle": "ИИ моделите са деактивирани",

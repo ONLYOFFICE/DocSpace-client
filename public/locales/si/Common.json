@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M ආදාන ටෝකන | {{outputPrice}}/M ප්‍රතිදාන ටෝකන",
   "AIModels": "AI මාදිලි",
   "AIModelsAndKnowledgeBase": "මාදිලි සහ දැනුම් පදනම",
-  "AIModelsDescription": "OpenRouter හරහා පුළුල් පරාසයක AI ආකෘති වෙත ප්‍රවේශ වන්න",
   "AIModelsDisabledAgentAdminDescription": "මෙම වැඩකරන අවකාශයේ සියලු AI ආකෘති අක්‍රිය කර ඇත. ඉදිරියට යාමට AI සැකසුම්වල මෙම නියෝජිතයාගේ ආකෘතිය සක්‍රිය කරන්න.",
   "AIModelsDisabledChatAdminDescription": "මෙම වැඩකරන අවකාශයේ සියලු AI ආකෘති අක්‍රිය කර ඇත. ඉදිරියට යාමට AI සැකසුම්වල අවම වශයෙන් එක් ආකෘතියක් සක්‍රිය කරන්න.",
   "AIModelsDisabledTitle": "AI ආකෘති අක්‍රිය කර ඇත",

@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/М вхідних токенів | {{outputPrice}}/М вихідних токенів",
   "AIModels": "Моделі AI",
   "AIModelsAndKnowledgeBase": "Моделі та база знань",
-  "AIModelsDescription": "Отримайте доступ до широкого спектра моделей AI через OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Усі моделі AI в цьому робочому просторі вимкнені. Увімкніть модель цього агента в налаштуваннях AI, щоб продовжити.",
   "AIModelsDisabledChatAdminDescription": "Усі моделі AI в цьому робочому просторі вимкнені. Увімкніть принаймні одну модель у налаштуваннях AI, щоб продовжити.",
   "AIModelsDisabledTitle": "Моделі AI вимкнені",

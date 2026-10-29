@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/Triệu token đầu vào | {{outputPrice}}/Triệu token đầu ra",
   "AIModels": "Mô hình AI",
   "AIModelsAndKnowledgeBase": "Mô hình & Cơ sở kiến thức",
-  "AIModelsDescription": "Truy cập nhiều mô hình AI thông qua OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Tất cả các mô hình AI trong không gian làm việc này đã bị vô hiệu hóa. Bật mô hình của tác nhân này trong cài đặt AI để tiếp tục.",
   "AIModelsDisabledChatAdminDescription": "Tất cả các mô hình AI trong không gian làm việc này đã bị vô hiệu hóa. Bật ít nhất một mô hình trong cài đặt AI để tiếp tục.",
   "AIModelsDisabledTitle": "Các mô hình AI đã bị vô hiệu hóa",

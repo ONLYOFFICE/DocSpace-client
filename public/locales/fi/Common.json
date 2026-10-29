@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M syöte-tokenit | {{outputPrice}}/M tulostokenit",
   "AIModels": "AI-mallit",
   "AIModelsAndKnowledgeBase": "Mallit ja tietämyskanta",
-  "AIModelsDescription": "Käytä laajaa valikoimaa AI-malleja OpenRouterin kautta",
   "AIModelsDisabledAgentAdminDescription": "Kaikki AI-mallit tässä työtilassa on poistettu käytöstä. Ota tämän agentin malli käyttöön AI-asetuksissa jatkaaksesi.",
   "AIModelsDisabledChatAdminDescription": "Kaikki AI-mallit tässä työtilassa on poistettu käytöstä. Ota käyttöön vähintään yksi malli AI-asetuksissa jatkaaksesi.",
   "AIModelsDisabledTitle": "AI-mallit on poistettu käytöstä",

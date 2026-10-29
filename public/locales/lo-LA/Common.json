@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M ໂຕເຄັນປ້ອນເຂົ້າ | {{outputPrice}}/M ໂຕເຄັນຜົນອອກ",
   "AIModels": "ຮູບແບບ AI",
   "AIModelsAndKnowledgeBase": "ຮູບແບບ ແລະ ຖານຄວາມຮູ້",
-  "AIModelsDescription": "ເຂົ້າເຖິງ AI ຮຸ່ນຫຼາກຫຼາຍຜ່ານ OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "AI ໂມເດລທັງໝົດໃນພື້ນທີ່ເຮັດວຽກນີ້ຖືກປິດໃຊ້ງານ. ເປີດໃຊ້ໂມເດລຂອງຕົວແທນນີ້ໃນການຕັ້ງຄ່າ AI ເພື່ອດຳເນີນການຕໍ່.",
   "AIModelsDisabledChatAdminDescription": "AI ໂມເດລທັງໝົດໃນພື້ນທີ່ເຮັດວຽກນີ້ຖືກປິດໃຊ້ງານ. ເປີດໃຊ້ຢ່າງໜ້ອຍໜຶ່ງໂມເດລໃນການຕັ້ງຄ່າ AI ເພື່ອດຳເນີນການຕໍ່.",
   "AIModelsDisabledTitle": "AI ໂມເດລຖືກປິດໃຊ້ງານ",

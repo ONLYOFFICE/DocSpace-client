@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M tokenë hyrëse | {{outputPrice}}/M tokenë dalëse",
   "AIModels": "Modelet e IA",
   "AIModelsAndKnowledgeBase": "Modelet dhe baza e njohurive",
-  "AIModelsDescription": "Përfitoni akses në një gamë të gjerë modelesh IA përmes OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Të gjitha modelet e AI në këtë hapësirë pune janë çaktivizuara. Aktivizoni modelin e këtij agjenti në cilësimet e AI për të vazhduar.",
   "AIModelsDisabledChatAdminDescription": "Të gjitha modelet e AI në këtë hapësirë pune janë çaktivizuara. Aktivizoni të paktën një model në cilësimet e AI për të vazhduar.",
   "AIModelsDisabledTitle": "Modelet e AI janë çaktivizuara",

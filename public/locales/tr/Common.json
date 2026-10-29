@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M giriş belirteçleri | {{outputPrice}}/M çıkış belirteçleri",
   "AIModels": "AI modelleri",
   "AIModelsAndKnowledgeBase": "Modeller ve bilgi tabanı",
-  "AIModelsDescription": "OpenRouter aracılığıyla çok çeşitli AI modellerine erişin",
   "AIModelsDisabledAgentAdminDescription": "Bu çalışma alanındaki tüm AI modelleri devre dışı bırakıldı. Devam etmek için bu aracının modelini AI ayarlarında etkinleştirin.",
   "AIModelsDisabledChatAdminDescription": "Bu çalışma alanındaki tüm AI modelleri devre dışı bırakıldı. Devam etmek için AI ayarlarında en az bir modeli etkinleştirin.",
   "AIModelsDisabledTitle": "AI modelleri devre dışı",

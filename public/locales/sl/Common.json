@@ -152,7 +152,6 @@
   "AIModelPrice": "{{inputPrice}}/M vstopnih tokenov | {{outputPrice}}/M izstopnih tokenov",
   "AIModels": "Modeli umetne inteligence",
   "AIModelsAndKnowledgeBase": "Modeli in zbirka znanja",
-  "AIModelsDescription": "Dostopajte do širokega nabora modelov AI prek OpenRouter",
   "AIModelsDisabledAgentAdminDescription": "Vsi AI modeli v tem delovnem prostoru so onemogočeni. Omogočite model tega agenta v nastavitvah AI za nadaljevanje.",
   "AIModelsDisabledChatAdminDescription": "Vsi AI modeli v tem delovnem prostoru so onemogočeni. Omogočite vsaj en model v nastavitvah AI za nadaljevanje.",
   "AIModelsDisabledTitle": "AI modeli so onemogočeni",

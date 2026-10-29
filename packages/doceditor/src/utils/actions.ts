@@ -63,7 +63,7 @@ import type {
   TResponse,
 } from "@/types";
 
-import { availableActions, REPLACED_URL_PATH } from "./constants";
+import { isActionType, REPLACED_URL_PATH } from "./constants";
 
 export async function getFillingSession(
   fillingSessionId: string,
@@ -771,7 +771,7 @@ export async function getData(
   try {
     const searchParams = new URLSearchParams();
 
-    if (action && availableActions[action]) searchParams.append(action, "true");
+    if (action && isActionType(action)) searchParams.append(action, "true");
 
     if (version) {
       searchParams.append("version", version);

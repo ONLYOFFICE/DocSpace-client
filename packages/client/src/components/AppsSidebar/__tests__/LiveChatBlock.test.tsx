@@ -47,6 +47,19 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
+const mocks = vi.hoisted(() => ({
+  chat: null as { isVisible: boolean; effectiveFullscreen: boolean } | null,
+  addChanges: vi.fn(),
+}));
+
+vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store", () => ({
+  useAiChatStoreOptional: () => mocks.chat,
+}));
+
+vi.mock("@onlyoffice/apps-ui-kit/components/article/zendesk/Zendesk.utils", () => ({
+  zendeskAPI: { addChanges: mocks.addChanges },
+}));
+
 vi.mock(
   "@onlyoffice/apps-ui-kit/components/article/sub-components/LiveChat",
   () => ({
@@ -83,12 +96,18 @@ const renderComponent = (
     isSecondaryProgressVisbile = false,
     downloadingProgress = 0,
     shownWidth = 0,
+    currentDeviceType = "desktop",
+    isShowLiveChat = true,
+    chat = null as { isVisible: boolean; effectiveFullscreen: boolean } | null,
   } = {},
-) =>
-  render(
+) => {
+  mocks.chat = chat;
+  mocks.addChanges.mockClear();
+
+  return render(
     <Provider
       authStore={{ isLiveChatAvailable, languageBaseName: "en" }}
-      settingsStore={{ zendeskKey: "zendesk-key" }}
+      settingsStore={{ zendeskKey: "zendesk-key", currentDeviceType }}
       filesStore={{ mainButtonVisible }}
       uploadDataStore={{
         primaryProgressDataStore: { isPrimaryProgressVisbile },
@@ -96,11 +115,12 @@ const renderComponent = (
       }}
       infoPanelStore={{ shownWidth }}
       backup={{ downloadingProgress }}
-      profileActionsStore={{ isShowLiveChat: true }}
+      profileActionsStore={{ isShowLiveChat }}
     >
       <LiveChatBlock />
     </Provider>,
   );
+};
 
 describe("AppsSidebar LiveChatBlock", () => {
   it("mounts the Zendesk widget with the current live chat state", () => {
@@ -158,6 +178,43 @@ describe("AppsSidebar LiveChatBlock", () => {
       "data-info-panel-width",
       String(width),
     );
+  });
+
+  const docked = { isVisible: true, effectiveFullscreen: false };
+
+  it.each([
+    ["shows the widget on a desktop", {}, "show"],
+    ["shows it on a tablet without the AI chat", { currentDeviceType: "tablet" }, "show"],
+    ["keeps it beside a docked AI chat", { chat: docked }, "show"],
+    [
+      "hides it under a fullscreen AI chat",
+      { chat: { isVisible: true, effectiveFullscreen: true } },
+      "hide",
+    ],
+    [
+      "hides it under the AI chat on a tablet",
+      { currentDeviceType: "tablet", chat: docked },
+      "hide",
+    ],
+    [
+      "hides it under the AI chat on a phone",
+      { currentDeviceType: "mobile", chat: docked },
+      "hide",
+    ],
+  ])("%s", (_, options, command) => {
+    renderComponent(true, false, options);
+
+    expect(mocks.addChanges).toHaveBeenLastCalledWith("messenger", command);
+  });
+
+  it("leaves the widget alone while the live chat switch is off", () => {
+    renderComponent(true, false, {
+      currentDeviceType: "tablet",
+      isShowLiveChat: false,
+      chat: docked,
+    });
+
+    expect(mocks.addChanges).not.toHaveBeenCalled();
   });
 
   it("stays out of the page when live chat is not available", () => {

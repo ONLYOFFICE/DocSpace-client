@@ -33,14 +33,18 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
+import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import ArticleLiveChat from "@onlyoffice/apps-ui-kit/components/article/sub-components/LiveChat";
+import { zendeskAPI } from "@onlyoffice/apps-ui-kit/components/article/zendesk/Zendesk.utils";
+import { DeviceType } from "@onlyoffice/apps-ui-kit/enums";
 
 type LiveChatBlockProps = {
   isLiveChatAvailable: boolean;
+  isDesktop: boolean;
   languageBaseName: string;
   zendeskKey: string;
   isShowLiveChat: boolean;
@@ -57,11 +61,30 @@ type LiveChatBlockProps = {
  * shares the bottom corner with the create button and the progress button,
  * and the flag below moves it aside while one of those is there. The width
  * below moves it clear of the open info panel, or of the AI chat in its place.
+ * While the AI chat covers the whole page, fullscreen on a desktop and open at
+ * all below it, the widget is hidden, and it comes back once the chat stops
+ * covering it, as long as the switch is on.
  */
-const LiveChatBlock = ({ isLiveChatAvailable, ...rest }: LiveChatBlockProps) => {
+const LiveChatBlock = ({
+  isLiveChatAvailable,
+  isDesktop,
+  isShowLiveChat,
+  ...rest
+}: LiveChatBlockProps) => {
+  const aiChatStore = useAiChatStoreOptional();
+  const isHidden =
+    !!aiChatStore?.isVisible &&
+    (!isDesktop || !!aiChatStore.effectiveFullscreen);
+
+  useEffect(() => {
+    if (!isLiveChatAvailable || !isShowLiveChat) return;
+
+    zendeskAPI.addChanges("messenger", isHidden ? "hide" : "show");
+  }, [isLiveChatAvailable, isShowLiveChat, isHidden]);
+
   if (isMobile || !isLiveChatAvailable) return null;
 
-  return <ArticleLiveChat {...rest} />;
+  return <ArticleLiveChat {...rest} isShowLiveChat={isShowLiveChat} />;
 };
 
 // Every field comes from the stores, so the public component takes no props.
@@ -85,6 +108,7 @@ const LiveChatBlockConnected = inject<TStore>(
 
     return {
       isLiveChatAvailable: authStore.isLiveChatAvailable,
+      isDesktop: settingsStore.currentDeviceType === DeviceType.desktop,
       languageBaseName: authStore.languageBaseName,
       zendeskKey: settingsStore.zendeskKey,
       isShowLiveChat: profileActionsStore.isShowLiveChat,

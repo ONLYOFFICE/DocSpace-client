@@ -404,6 +404,14 @@ const PortalSettingsRoutes = {
       ),
     },
     {
+      path: "ai-settings/byok",
+      element: (
+        <ProtectedAISettingsRoute hideOnStandalone>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
       path: "ai-settings/model-assignment",
       element: (
         <ProtectedAISettingsRoute>

@@ -88,12 +88,14 @@ import WebSearchSaas from "./search/WebSearchSaas";
 import KnowledgeBaseSaas from "./knowledge/KnowledgeBaseSaas";
 import AiModelsSaas from "./models/AiModelsSaas";
 import AILimits from "./limits";
+import ByokKeys from "./byok";
 import AIFeaturesBanner from "./sub-components/AIFeaturesBanner";
 
 const BASE_PATH = "/portal-settings/ai-settings";
 
 const TAB_IDS = {
   AI_MODELS: "ai-models",
+  BYOK: "byok",
   MODEL_ASSIGNMENT: "model-assignment",
   MCP_SERVERS: "mcp-servers",
   WEB_SEARCH: "web-search",
@@ -102,6 +104,7 @@ const TAB_IDS = {
 } as const;
 
 const detectTabFromPath = (pathname: string) => {
+  if (pathname.includes("byok")) return TAB_IDS.BYOK;
   if (pathname.includes("model-assignment")) return TAB_IDS.MODEL_ASSIGNMENT;
   if (pathname.includes("mcp-servers")) return TAB_IDS.MCP_SERVERS;
   if (pathname.includes("web-search")) return TAB_IDS.WEB_SEARCH;
@@ -201,6 +204,16 @@ const AISettings = ({
       content: standalone ? <AiModels /> : <AiModelsSaas />,
       onClick: makeOnClick(TAB_IDS.AI_MODELS),
     },
+    ...(standalone
+      ? []
+      : [
+          {
+            id: TAB_IDS.BYOK,
+            name: t("Common:AIByok"),
+            content: <ByokKeys />,
+            onClick: makeOnClick(TAB_IDS.BYOK),
+          },
+        ]),
     {
       id: TAB_IDS.MODEL_ASSIGNMENT,
       name: t("Common:ModelAssignment"),

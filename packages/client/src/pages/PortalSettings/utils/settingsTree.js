@@ -571,6 +571,13 @@ export const settingsTree = [
         tKey: "Common:AILimits",
         isCategory: true,
       },
+      {
+        id: "portal-settings_catalog-ai-settings-byok",
+        key: "7-6",
+        link: "byok",
+        tKey: "Common:AIByok",
+        isCategory: true,
+      },
     ],
   },
   {

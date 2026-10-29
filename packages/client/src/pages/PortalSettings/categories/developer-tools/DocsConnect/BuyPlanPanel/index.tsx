@@ -55,6 +55,7 @@ import StorageWarning from "@onlyoffice/apps-ui-kit/billing/services/panels/addi
 import SalesDepartmentRequestDialog from "@onlyoffice/apps-ui-kit/billing/dialogs/SalesDepartmentRequestDialog";
 import { formatDateLocalized } from "@onlyoffice/apps-ui-kit/utils/date";
 import { isInsufficientFundsError } from "@onlyoffice/apps-ui-kit/billing/utils/insufficientFunds";
+import { isPollingTimeoutError } from "@onlyoffice/apps-ui-kit/billing/utils/stripe-flow";
 import { usePaymentStore } from "@onlyoffice/apps-ui-kit/billing/store/PaymentStoreProvider";
 import { DOCS_CONNECT_SERVICE } from "@onlyoffice/apps-ui-kit/billing/constants";
 
@@ -485,7 +486,9 @@ const BuyPlanPanel = ({
               : t("Common:InsufficientFundsContactPayerShort"),
             t("Common:InsufficientFunds"),
           );
-        } else if (controller) {
+        } else if (isPollingTimeoutError(error)) {
+          // The store has already re-read the plan; keep the raw error for
+          // anything thrown before the checkout opened.
           toastr.error(t("Common:UnexpectedError"));
           closeBuyPlan?.();
         } else {

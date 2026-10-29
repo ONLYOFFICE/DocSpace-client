@@ -290,4 +290,49 @@ describe("PassphraseModal", () => {
     );
     expect(getAnnouncement()).toHaveTextContent("");
   });
+
+  it("Forward through the creation dialog", async () => {
+    const user = userEvent.setup();
+    renderModal({ isNew: true });
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.type(getConfirmInput(), "Correct1horse!battery");
+
+    getPassphraseInput().focus();
+    await user.tab();
+    expect(getConfirmInput()).toHaveFocus();
+    await user.tab();
+    expect(
+      screen.getByRole("button", { name: "Common:ContinueButton" }),
+    ).toHaveFocus();
+    await user.tab();
+    expect(
+      screen.getByRole("button", { name: "Common:CancelButton" }),
+    ).toHaveFocus();
+  });
+
+  it("Backwards from the primary action", async () => {
+    const user = userEvent.setup();
+    renderModal({ isNew: true });
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.type(getConfirmInput(), "Correct1horse!battery");
+
+    screen.getByRole("button", { name: "Common:ContinueButton" }).focus();
+    await user.tab({ shift: true });
+
+    expect(getConfirmInput()).toHaveFocus();
+  });
+
+  // Spec: private-rooms/key-management, "Tab order in key dialogs follows the visual order"
+  it("No trap", async () => {
+    const user = userEvent.setup();
+    renderModal({ isNew: true });
+    const dialog = screen.getByRole("dialog", {
+      name: "Common:CreatePassphrase",
+    });
+
+    screen.getByRole("button", { name: "Common:CancelButton" }).focus();
+    await user.tab();
+
+    expect(dialog).not.toContainElement(document.activeElement as HTMLElement);
+  });
 });

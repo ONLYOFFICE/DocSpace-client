@@ -49,6 +49,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { useKeyDialogCloseGuard } from "../key-dialog-close-guard";
+import { activateOnEnter } from "../key-dialog-keys";
 import { KeyDialogAnnouncement } from "../key-dialog-announcement";
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
@@ -259,12 +260,14 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 <div className={styles.generateRow}>
                   <Link
                     type={LinkType.action}
+                    role="button"
+                    tabIndex={0}
                     fontWeight="600"
                     fontSize="13px"
                     isHovered
                     onClick={handleGeneratePassword}
+                    onKeyDown={activateOnEnter}
                     dataTestId="generate_passphrase_link"
-                    tabIndex={1}
                   >
                     {t("Common:GenerateLogoButton")}
                   </Link>
@@ -312,7 +315,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   isAutoFocussed
                   autoComplete="new-password"
                   onKeyDown={handleKeyDown}
-                  tabIndex={2}
+                  tabIndex={0}
                 />
               </FieldContainer>
 
@@ -340,12 +343,14 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 <div className={styles.forgotRow}>
                   <Link
                     type={LinkType.action}
+                    role="button"
+                    tabIndex={0}
                     fontWeight="600"
                     fontSize="12px"
                     isHovered
                     onClick={onForgotPassphrase}
+                    onKeyDown={activateOnEnter}
                     dataTestId="forgot_passphrase_link"
-                    tabIndex={3}
                   >
                     {t("Common:ForgotPassphrase")}
                   </Link>
@@ -360,7 +365,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                     isDisabled={isLoading}
                     onChange={(e) => setRememberDevice(e.target.checked)}
                     label={t("Common:RememberDeviceLabel")}
-                    tabIndex={4}
                   />
                   <Text fontSize="12px" color="var(--text-secondary)">
                     {t("Common:RememberDeviceHint")}
@@ -372,14 +376,16 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 <div className={styles.passkeyRow}>
                   <Link
                     type={LinkType.action}
+                    role="button"
+                    tabIndex={0}
                     fontWeight="600"
                     fontSize="12px"
                     isHovered
                     onClick={() => {
                       if (!isLoading && !isPasskeyUnlocking) onPasskeyUnlock();
                     }}
+                    onKeyDown={activateOnEnter}
                     dataTestId="passkey_unlock_link"
-                    tabIndex={2}
                   >
                     {t("Common:PasskeyUnlockButton")}
                   </Link>
@@ -422,7 +428,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   }
                   autoComplete="new-password"
                   onKeyDown={handleKeyDown}
-                  tabIndex={3}
+                  tabIndex={0}
                 />
               </FieldContainer>
             )}
@@ -440,7 +446,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
             label={submitLabel ?? t("Common:ContinueButton")}
             isDisabled={isDisabled}
             isLoading={isLoading}
-            tabIndex={4}
           />
           <Button
             scale
@@ -449,7 +454,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
             size={ButtonSize.normal}
             label={t("Common:CancelButton")}
             isDisabled={isLoading}
-            tabIndex={5}
           />
         </ModalDialog.Footer>
       </ModalDialog>

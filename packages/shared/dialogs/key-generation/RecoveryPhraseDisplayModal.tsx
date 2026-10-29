@@ -219,7 +219,6 @@ export const RecoveryPhraseDisplayModal: React.FC<
                 isDisabled={isLoading || !hasSaved}
                 onChange={(e) => setAcknowledged(e.target.checked)}
                 label={t("Common:RecoveryPhraseAcknowledge")}
-                tabIndex={1}
               />
             </div>
             {!hasSaved ? (
@@ -240,7 +239,6 @@ export const RecoveryPhraseDisplayModal: React.FC<
             label={t("Common:ContinueButton")}
             isDisabled={!acknowledged || isLoading}
             isLoading={isLoading}
-            tabIndex={2}
           />
           <Button
             scale
@@ -249,7 +247,6 @@ export const RecoveryPhraseDisplayModal: React.FC<
             size={ButtonSize.normal}
             label={t("Common:CancelButton")}
             isDisabled={isLoading}
-            tabIndex={3}
           />
         </ModalDialog.Footer>
       </ModalDialog>

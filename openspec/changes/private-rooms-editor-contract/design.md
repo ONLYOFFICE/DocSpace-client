@@ -79,7 +79,15 @@ not contain this code.
   ships as its own copy of this repository's library at
   `sdkjs/common/crypto/onlyoffice-crypto.js`. That copy reports
   `VERSION_DSE3_FILE = 2`. Without the library or WebCrypto the add-on stays
-  off without an error.
+  off without an error. The copy is the bundle handed to the editor
+  developers on 2026-07-01, built from commit 8d6e613ce12: every function
+  that commit added is in it and nothing later is, and it differs from the
+  handed-over file only by a removed class-field declaration (`code;` in
+  `CryptoError`), which does not change behaviour. Since then the bundled
+  sources changed in three commits: c059f17c3bc (2026-07-22, recovery kit,
+  not used by the editor), ff9f51aeffb (2026-09-01, the DSE3 form flag) and
+  9f73ecc9094 (2026-10-23, an error class the client alone uses). The bundle
+  carries no version stamp; it was identified by comparison with the history.
 - **Open.** The editor frame downloads `document.url` itself
   (`filehandler.ashx?action=stream`, with `stream_auth` and `origin`) and
   decrypts it in the browser; the file name comes from the container header.
@@ -131,8 +139,10 @@ not contain this code.
   responses) and "Recipient role-based filling" (a virtual data room); both
   take the form out of the private room. A field added in the edit mode and
   saved produced a new encrypted version whose header flags were `0x01`: the
-  add-on calls `encryptFile` with `dek` and `fileName` only, so the form bit
-  is lost on every save, while the API still reported `isForm: true`.
+  add-on calls `encryptFile` with `dek` and `fileName` only, and its library
+  copy predates the form flag (ff9f51aeffb), so the form bit is lost on every
+  save, while the API still reported `isForm: true`. Reading is unaffected:
+  the copy opened the form whose header flags were `0x03`.
 - **Capability.** The Document Server publishes no capability endpoint
   (`info/info.json` answers 404). Two signals exist: `Asc.Addons.crypto` in
   the editor frame, and `sdkjs/common/crypto/onlyoffice-crypto.js` under the
@@ -245,7 +255,10 @@ the last index were read on disk):
    version 2 in build 10.0.0.133, so the container version is a property of
    the library build each Document Server release ships. The contract names
    that build; a portal that writes version 3 needs a Document Server that
-   ships a library reading it, or the editor cannot open those files.
+   ships a library reading it, or the editor cannot open those files. Build
+   10.0.0.133 ships the bundle of 2026-07-01 (commit 8d6e613ce12). The bundle
+   gets a build stamp (library version and source commit), so the contract
+   and a running editor can name the build instead of comparing files.
 
 7. **A saved encrypted document reopens from a matching base.** The editor
    takes its base from `document.url` while the Document Server replays the
@@ -277,7 +290,9 @@ the last index were read on disk):
    form-filling room, after reading the code). "Share to fill out" is hidden in
    a private room (decided 2026-10-29), since both its destinations take the
    form out of the room. The editor's save must keep the form flag; that is a
-   contract item for the Document Server team, since the add-on drops it.
+   contract item for the Document Server team, in two parts: a bundle built
+   after ff9f51aeffb, and the add-on passing the form flag of the container it
+   opened to `encryptFile` when it saves.
    Role-based filling in a private virtual data room is server-compatible but
    unverified in the editor, and stays an open question.
 

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState, useCallback, useEffect, useId } from "react";
+import React, { useState, useCallback, useEffect, useId, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -42,7 +42,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { KEY_DIALOG_DISPLAY_TYPE } from "@docspace/shared/dialogs/key-dialog-display";
 import { useKeyDialogCloseGuard } from "@docspace/shared/dialogs/key-dialog-close-guard";
-import { activateOnEnter } from "@docspace/shared/dialogs/key-dialog-keys";
+import { activateOnEnter, submitOnEnter } from "@docspace/shared/dialogs/key-dialog-keys";
 import { KeyDialogAnnouncement } from "@docspace/shared/dialogs/key-dialog-announcement";
 import UnsavedChangesDialog from "@docspace/shared/dialogs/unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
@@ -130,7 +130,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
     onCancel();
   }, [onCancel]);
 
-  const { requestClose, confirmation } = useKeyDialogCloseGuard({
+  const { requestClose, confirming, confirmation } = useKeyDialogCloseGuard({
     visible,
     dirty:
       currentPassphrase !== "" ||
@@ -146,6 +146,14 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
     currentPassphrase !== newPassphrase;
 
   const isDisabled = !isValid || isLoading;
+
+  const handleKeyDown = useMemo(
+    () =>
+      submitOnEnter(() => {
+        void handleSubmit();
+      }, !isDisabled && !confirming),
+    [handleSubmit, isDisabled, confirming],
+  );
 
   return (
     <>
@@ -197,6 +205,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   hasError={!!currentFieldError}
                   isAutoFocussed
                   autoComplete="new-password"
+                  onKeyDown={handleKeyDown}
                   tabIndex={0}
                 />
               </FieldContainer>
@@ -245,6 +254,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   isDisabled={isLoading}
                   hasError={!!newFieldError}
                   autoComplete="new-password"
+                  onKeyDown={handleKeyDown}
                   tabIndex={0}
                 />
               </FieldContainer>
@@ -276,6 +286,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   isDisabled={isLoading}
                   hasError={!!confirmFieldError}
                   autoComplete="new-password"
+                  onKeyDown={handleKeyDown}
                   tabIndex={0}
                 />
               </FieldContainer>

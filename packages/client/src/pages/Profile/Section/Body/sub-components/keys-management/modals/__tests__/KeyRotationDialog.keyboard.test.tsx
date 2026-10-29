@@ -109,4 +109,58 @@ describe("KeyRotationDialog", () => {
     expect(onCancel).not.toHaveBeenCalled();
     expect(current).toHaveValue("old horse battery");
   });
+
+  it("Passphrase change on Enter", async () => {
+    const user = userEvent.setup();
+    const { onSubmit } = renderDialog();
+
+    await user.type(
+      screen.getByLabelText("Common:CurrentPassphrase"),
+      "old horse battery",
+    );
+    await user.type(
+      screen.getByLabelText("Common:NewPassphrase"),
+      "Correct1horse!battery",
+    );
+    await user.type(
+      screen.getByLabelText("Common:ConfirmNewPassphrase"),
+      "Correct1horse!battery",
+    );
+    await user.keyboard("{Enter}");
+
+    expect(onSubmit).toHaveBeenCalledWith(
+      "old horse battery",
+      "Correct1horse!battery",
+    );
+  });
+
+  it("Enter while the action is disabled", async () => {
+    const user = userEvent.setup();
+    const { onSubmit } = renderDialog();
+
+    await user.type(
+      screen.getByLabelText("Common:CurrentPassphrase"),
+      "old horse battery",
+    );
+    await user.type(screen.getByLabelText("Common:NewPassphrase"), "short");
+    await user.type(
+      screen.getByLabelText("Common:ConfirmNewPassphrase"),
+      "short",
+    );
+    await user.keyboard("{Enter}");
+
+    expect(onSubmit).not.toHaveBeenCalled();
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("Enter on the cancel action", async () => {
+    const user = userEvent.setup();
+    const { onSubmit, onCancel } = renderDialog();
+
+    screen.getByRole("button", { name: "Common:CancelButton" }).focus();
+    await user.keyboard("{Enter}");
+
+    expect(onCancel).toHaveBeenCalledTimes(1);
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
 });

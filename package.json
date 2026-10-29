@@ -56,7 +56,7 @@
     "@types/node": "24.10.7",
     "@types/react-text-mask": "5.4.14",
     "babel-plugin-react-compiler": "^1.0.0",
-    "fallow": "^2.104.0",
+    "fallow": "^3.34.0",
     "he": "1.2.0",
     "lefthook": "^2.1.10",
     "madge": "8.0.0",

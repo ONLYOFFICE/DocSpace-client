@@ -65,7 +65,6 @@ const FavoritesRowDataComponent = (props) => {
     checkedProps,
     element,
     inProgress,
-    showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
     tableStorageName,
@@ -104,7 +103,7 @@ const FavoritesRowDataComponent = (props) => {
           inProgress={inProgress}
           {...props}
         />
-        <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
+        <StyledBadgesContainer>
           {badgesComponent}
         </StyledBadgesContainer>
         {lastColumn === "Name" ? quickButtonsComponentNode : null}

@@ -88,7 +88,14 @@ const TabClient = observer(({ tab }: Props) => {
       if (standalone) return null;
       return <BillingForm user={user} />;
     case "servers":
-      return <McpServers />;
+      // Every user reaches this tab, but only an administrator may edit the
+      // list that applies to the whole portal (Bug 84381); anyone else edits
+      // their own.
+      return (
+        <McpServers
+          toolPrefsScope={user?.isAdmin || user?.isOwner ? "tenant" : undefined}
+        />
+      );
     case "search":
       return <WebSearch />;
     case "knowledge":

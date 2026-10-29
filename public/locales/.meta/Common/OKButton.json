@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2026-10-06T13:35:38.828Z",
+  "updated_at": "2026-10-22T16:09:36.842Z",
   "comment": {
     "text": "This is the label for an \"OK\" button, typically used to confirm an action or close a dialog box.",
     "is_auto": true,
@@ -30,6 +30,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/dialogs/ChangeAILimitDialog/index.tsx",
+      "line_number": 278,
+      "context": "</div>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onSave}\n isLoading={isLoading}\n isDisabled={!canSave}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/ChangeQuotaDialog/index.js",
       "line_number": 75,
       "context": "/>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n onClick={onSaveClick}\n isLoading={isLoading}\n isDisabled={initialSize == size || size.trim() === \"\"}",
@@ -49,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 206,
+      "line_number": 210,
       "context": "}\n \n if (isRecycleBinFolder) return t(\"Common:DeleteForeverButton\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:Move\");\n };",
       "module": "/packages/client"
     },
@@ -61,8 +67,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 191,
-      "context": ")}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={canUpgrade ? t(\"Common:UpgradePlan\") : t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n onClick={canUpgrade ? onUpgradePlan : onClose}\n scale\n />",
+      "line_number": 195,
+      "context": ")}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={canUpgrade ? t(\"Common:UpgradePlan\") : t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n onClick={canUpgrade ? onUpgradePlan : onClose}\n scale\n testId=\"invite-quota-warning-primary\"",
       "module": "/packages/client"
     },
     {
@@ -181,7 +187,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/quota-warning-dialog/index.tsx",
-      "line_number": 211,
+      "line_number": 214,
       "context": "<Button\n key=\"OKButton\"\n label={\n isPaymentPageAvailable\n ? t(\"Common:UpgradePlan\")\n : t(\"Common:OKButton\")\n }\n size={ButtonSize.normal}\n primary\n onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}\n scale",
       "module": "/packages/sdk"
     },

@@ -44,8 +44,8 @@ import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/emp
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
-import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
-import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
+import KnowledgeNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.knowledge.disabled.dark.svg";
+import KnowledgeNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.knowledge.disabled.light.svg";
 
 import { useAgentsUserStore } from "../../../_store";
 
@@ -82,15 +82,13 @@ const KnowledgeDisabledContainer = observer(() => {
   const description = isAdmin
     ? t("Common:KnowledgeUnavailableDescription", {
         productName: getBrandName("ProductName"),
-        aiAgents: t("Common:AIAgents"),
         defaultValue:
-          "Configure a vectorization provider in {{productName}} to use Knowledge in {{aiAgents}}.",
+          "Configure a vectorization provider in {{productName}} to use Knowledge in AI agents.",
       })
     : t("Common:KnowledgeUnavailableDescriptionUser", {
         productName: getBrandName("ProductName"),
-        aiAgents: t("Common:AIAgents"),
         defaultValue:
-          "Ask your {{productName}} admin to enable vectorization to use Knowledge in {{aiAgents}}.",
+          "Ask your {{productName}} admin to enable vectorization to use Knowledge in AI agents.",
       });
 
   const goToSettings = (event: React.MouseEvent<HTMLElement>) => {
@@ -109,9 +107,9 @@ const KnowledgeDisabledContainer = observer(() => {
       description={description}
       icon={
         useLightIcon ? (
-          <ChatNoAccessRightsLightIcon />
+          <KnowledgeNoAccessRightsLightIcon />
         ) : (
-          <ChatNoAccessRightsDarkIcon />
+          <KnowledgeNoAccessRightsDarkIcon />
         )
       }
       options={

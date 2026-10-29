@@ -63,6 +63,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
 
 import type {
   NavMenuGroup,
@@ -80,6 +81,7 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
+import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 import {
@@ -89,6 +91,8 @@ import {
   type FolderIds,
 } from "SRC_DIR/helpers/articleNavigation";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
+
+import styles from "./ClientArticleSidebar.module.scss";
 
 type ClientArticleSidebarProps = FolderIds & {
   userId?: string;
@@ -104,6 +108,16 @@ type ClientArticleSidebarProps = FolderIds & {
   // off there is no AI in the portal at all, so the AI Agents app is dropped
   // from the catalog rather than left pointing at a section that cannot work.
   aiServicesEnabled?: boolean;
+  // Settings -> Apps (standalone only): a switched-off app is not on offer, so
+  // its section is left out of the sidebar altogether.
+  roomsInstalled?: boolean;
+  formsInstalled?: boolean;
+  agentsInstalled?: boolean;
+  ensureAppsLoaded?: () => void;
+  // The Trash item offers "Empty trash" while there is something to empty.
+  trashIsEmpty?: boolean;
+  emptyTrashInProgress?: boolean;
+  setEmptyTrashDialogVisible?: (visible: boolean) => void;
   onFolderNavigate: () => void;
 };
 
@@ -116,6 +130,13 @@ const ClientArticleSidebar = ({
   isDocumentsFolder,
   isNavLoading,
   aiServicesEnabled = true,
+  roomsInstalled = true,
+  formsInstalled = true,
+  agentsInstalled = true,
+  ensureAppsLoaded,
+  trashIsEmpty = true,
+  emptyTrashInProgress,
+  setEmptyTrashDialogVisible,
   onFolderNavigate,
   ...folderIds
 }: ClientArticleSidebarProps) => {
@@ -132,17 +153,24 @@ const ClientArticleSidebar = ({
 
   const aiChatStore = useAiChatStoreOptional();
 
+  React.useEffect(() => {
+    ensureAppsLoaded?.();
+  }, [ensureAppsLoaded]);
+
   // Every sidebar entry is described by the URL it opens, so the same target
   // can be rendered as a real <a href> (Ctrl/Cmd-click and "Open link in new
   // tab" work) and still navigate in-app on a plain click. `nav()` builds the
-  // { linkData, onClick } pair every item spreads in.
+  // { linkData, onClick } pair every item spreads in. An entry drawn as a link
+  // navigates by itself (`meta.isLink`); navigating here too pushed the same
+  // history entry twice. A section header with a sub-menu is a button and
+  // still needs it.
   const nav = React.useCallback(
     (path: string): Pick<NavSubItem, "linkData" | "onClick"> => ({
       linkData: { path },
-      onClick: () => {
+      onClick: (_item: unknown, meta?: { isLink?: boolean }) => {
         aiChatStore?.setFullscreen(false);
         onFolderNavigateRef.current?.();
-        navigate(path);
+        if (!meta?.isLink) navigate(path);
       },
     }),
     [navigate],
@@ -313,13 +341,32 @@ const ClientArticleSidebar = ({
       // Guests can't view or manage Files (their own files/Trash), so
       // that section is dropped and the top-level item opens Shared with me
       // instead of the (inaccessible) Files folder.
-      if (!isVisitor && myDocsFolder && trashFolder)
+      if (!isVisitor && myDocsFolder && trashFolder) {
+        const canEmptyTrash =
+          !trashIsEmpty && !emptyTrashInProgress && !!setEmptyTrashDialogVisible;
         children.push(
           navItem(trashFolder, {
             withTopSeparator: true,
-            ...sectionBadge(trashFolder.id, newCount(trashFolder)),
+            ...(canEmptyTrash
+              ? {
+                  showBadge: true,
+                  badgeComponent: (
+                    <button
+                      type="button"
+                      className={styles.emptyTrashBadge}
+                      title={t("Common:EmptyTrash")}
+                      aria-label={t("Common:EmptyTrash")}
+                      onClick={() => setEmptyTrashDialogVisible?.(true)}
+                      data-testid="empty-trash-badge"
+                    >
+                      <ReactSVG src={ClearTrashReactSvgUrl} aria-hidden="true" />
+                    </button>
+                  ),
+                }
+              : sectionBadge(trashFolder.id, newCount(trashFolder))),
           }),
         );
+      }
 
       const primaryFolder = myDocsFolder ?? sharedFolder;
 
@@ -342,7 +389,7 @@ const ClientArticleSidebar = ({
       });
     }
 
-    if (roomsFolder) {
+    if (roomsFolder && roomsInstalled) {
       mainItems.push({
         ...navItem(roomsFolder),
         ...sectionBadge(panelFolderId(roomsFolder), newCount(roomsFolder)),
@@ -420,7 +467,7 @@ const ClientArticleSidebar = ({
     // The backend serves them via `searchArea=Forms` (they are excluded from the
     // Active rooms listing), so the item points at the dedicated /forms route
     // scoped to that search area.
-    if (roomsFolder) {
+    if (roomsFolder && formsInstalled) {
       mainItems.push({
         id: "forms",
         label: t("Common:Forms"),
@@ -526,10 +573,16 @@ const ClientArticleSidebar = ({
     isVisitor,
     canUseTemplates,
     aiServicesEnabled,
+    roomsInstalled,
+    formsInstalled,
+    agentsInstalled,
     recentFolderId,
     favoritesFolderId,
     recycleBinFolderId,
     userId,
+    trashIsEmpty,
+    emptyTrashInProgress,
+    setEmptyTrashDialogVisible,
   ]);
 
   return (
@@ -548,8 +601,11 @@ const ClientArticleSidebarConnected = inject<TStore>(
     userStore,
     treeFoldersStore,
     filesStore,
+    filesActionsStore,
+    dialogsStore,
     clientLoadingStore,
     settingsStore,
+    appsStore,
   }) => ({
     userId: userStore.user?.id,
     treeFolders: treeFoldersStore.treeFolders,
@@ -567,6 +623,13 @@ const ClientArticleSidebarConnected = inject<TStore>(
     isTemplatesFolderRoot: treeFoldersStore.isTemplatesFolderRoot,
     isDocumentsFolder: treeFoldersStore.isDocumentsFolder,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
+    roomsInstalled: appsStore.isInstalled("ai-rooms"),
+    formsInstalled: appsStore.isInstalled("ai-forms"),
+    agentsInstalled: appsStore.isInstalled("ai-agents"),
+    ensureAppsLoaded: appsStore.ensureLoaded,
+    trashIsEmpty: filesStore.trashIsEmpty,
+    emptyTrashInProgress: filesActionsStore.emptyTrashInProgress,
+    setEmptyTrashDialogVisible: dialogsStore.setEmptyTrashDialogVisible,
     // Same signal the old article used to show <ArticleFolderLoader />.
     isNavLoading: clientLoadingStore.showArticleLoader,
     onFolderNavigate: () => {

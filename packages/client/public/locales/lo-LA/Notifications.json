@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "ປ້າຍເນັ້ນກິດຈະກໍາຂອງໄຟລ໌ ເຊັ່ນ ການອັບໂຫຼດ, ການແກ້ໄຂ ແລະ ການແບ່ງປັນ ໃນແອັບ {{files}}, {{rooms}}, {{forms}} ແລະ {{aiAgents}}.",
+  "ActionsWithFilesDescription": "ປ້າຍເນັ້ນກິດຈະກໍາຂອງໄຟລ໌ ເຊັ່ນ ການອັບໂຫຼດ, ການແກ້ໄຂ ແລະ ການແບ່ງປັນ ໃນແອັບ {{files}}, {{rooms}}, {{forms}} ແລະ ຕົວແທນ AI.",
   "AdminSetupRequired": "ຕ້ອງຕັ້ງຄ່າຜູ້ເບິ່ງແຍງລະບົບ",
   "Badges": "ປ້າຍ",
   "DailyFeed": "ຟີດ {{organizationName}} {{productName}} ປະຈໍາວັນ",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "ບັນຊີຜູ້ໃຊ້ນີ້ຖືກໂຫລດມາຈາກ LDAP. ທີ່ຢູ່ອີເມວຂອງຜູ້ໃຊ້ບໍ່ໄດ້ລະບຸ, ແລະອັນປັດຈຸບັນແມ່ນຖືກສ້າງຂຶ້ນໂດຍອັດຕະໂນມັດ ແລະບໍ່ສາມາດໃຊ້ເພື່ອສົ່ງການແຈ້ງເຕືອນໄດ້.",
   "NotConfigured": "ບໍ່ໄດ້ຕັ້ງຄ່າ",
   "Notifications": "ການແຈ້ງເຕືອນ",
-  "RoomsActivityDescription": "ຮັບການແຈ້ງເຕືອນທາງອີເມວທັນທີກ່ຽວກັບໄຟລ໌ ແລະ ໂຟນເດີທີ່ແບ່ງປັນໃໝ່ ແລະ ກິດຈະກໍາໃນ {{files}}, {{rooms}}, {{forms}} ແລະ {{aiAgents}}.",
-  "RoomUpdateNotify": "ກິດຈະກໍາໃນ {{files}}, {{rooms}}, {{forms}} ແລະ {{aiAgents}}",
+  "RoomsActivityDescription": "ຮັບການແຈ້ງເຕືອນທາງອີເມວທັນທີກ່ຽວກັບໄຟລ໌ ແລະ ໂຟນເດີທີ່ແບ່ງປັນໃໝ່ ແລະ ກິດຈະກໍາໃນ {{files}}, {{rooms}}, {{forms}} ແລະ ຕົວແທນ AI.",
+  "RoomUpdateNotify": "ກິດຈະກໍາໃນ {{files}}, {{rooms}}, {{forms}} ແລະ ຕົວແທນ AI",
   "SettingUpNotifications": "ການ​ຕັ້ງ​ຄ່າ​ການ​ແຈ້ງ​ເຕືອນ",
   "SuccessConnected": "{{serviceName}} ໄດ້ຖືກເຊື່ອມຕໍ່ສຳເລັດເປັນຊ່ອງການແຈ້ງເຕືອນແລ້ວ. ໃນປັດຈຸບັນທ່ານຈະໄດ້ຮັບການປັບປຸງຢູ່ທີ່ນັ້ນ.",
   "SuccessDisconnected": "{{serviceName}} ຖືກຕັດການເຊື່ອມຕໍ່ເປັນຊ່ອງທາງການແຈ້ງເຕືອນສຳເລັດແລ້ວ. ການແຈ້ງເຕືອນຈະບໍ່ຖືກສົ່ງໄປບ່ອນນັ້ນອີກຕໍ່ໄປ.",

@@ -58,7 +58,7 @@ export async function refreshFilesImpl(
   const { files, setFiles, folders, setFolders, filter, setFilter } =
     self.filesStore;
 
-  const { filesCount, setFilesCount } = self.selectedFolderStore;
+  const { countFileCreated } = self.selectedFolderStore;
 
   if (window.location.pathname.indexOf("/history") === -1) {
     const newFiles = files;
@@ -109,7 +109,7 @@ export async function refreshFilesImpl(
           setFiles(newFiles);
           const newFilter = filter;
           newFilter.total += 1;
-          setFilesCount(filesCount + 1);
+          countFileCreated(currentFile.fileInfo.id);
           setFilter(newFilter);
         } else if (!self.filesSettingsStore.storeOriginalFiles) {
           newFiles[fileIndex] = currentFile.fileInfo;
@@ -119,7 +119,10 @@ export async function refreshFilesImpl(
     };
 
     const isFiltered =
-      filter.filterType || filter.authorType || filter.search;
+      filter.filterType ||
+      filter.authorType ||
+      filter.search ||
+      filter.hasMetadataFilter();
 
     if ((!currentFile && !folderInfo) || isFiltered) return;
     if (folderInfo && self.selectedFolderStore.id === folderInfo.id) return;

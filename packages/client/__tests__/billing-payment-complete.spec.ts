@@ -206,7 +206,7 @@ test.describe("Payment complete page", () => {
     await page.goto(`${baseUrl}${completeUrl({ service: "ai-tools" })}`);
 
     await expect(step(page, "active")).toContainText(
-      "Activating AI features",
+      "Activating AI agents & tools",
       FIRST_RENDER,
     );
     await expect(step(page, "done")).toHaveCount(2);
@@ -216,7 +216,7 @@ test.describe("Payment complete page", () => {
 
     await processingShot(page, "processing-ai.png");
 
-    await expect(page.getByText("AI features activated")).toBeVisible({
+    await expect(page.getByText("AI agents & tools activated")).toBeVisible({
       timeout: SLOW_STEP_MS * 3,
     });
     expect(changes).toHaveLength(2);
@@ -240,7 +240,7 @@ test.describe("Payment complete page", () => {
       `${baseUrl}${completeUrl({ service: "ai-tools", skipAiSearch: "1" })}`,
     );
 
-    await expect(page.getByText("AI features activated")).toBeVisible(
+    await expect(page.getByText("AI agents & tools activated")).toBeVisible(
       FIRST_RENDER,
     );
     expect(changes).toHaveLength(1);
@@ -255,7 +255,7 @@ test.describe("Payment complete page", () => {
 
     await page.goto(`${baseUrl}${completeUrl({ service: "ai-search" })}`);
 
-    await expect(page.getByText("AI features activated")).toBeVisible(
+    await expect(page.getByText("AI agents & tools activated")).toBeVisible(
       FIRST_RENDER,
     );
     expect(changes).toHaveLength(2);
@@ -715,8 +715,8 @@ test.describe("Payment complete page", () => {
       "SEPA transfer sent",
       FIRST_RENDER,
     );
-    await expect(page.getByText("Activating AI features")).toBeHidden();
-    await expect(page.getByText("AI features activated")).toBeHidden();
+    await expect(page.getByText("Activating AI agents & tools")).toBeHidden();
+    await expect(page.getByText("AI agents & tools activated")).toBeHidden();
     // the funds are not in the wallet yet, so nothing can be activated
     expect(changes).toHaveLength(0);
 

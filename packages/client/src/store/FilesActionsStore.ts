@@ -344,7 +344,6 @@ type TFilesStore = {
     withSubfolders?: boolean,
     clearFilter?: boolean,
   ) => Promise<unknown>;
-  fetchFavoritesFolder: (folderId: number | string) => Promise<unknown>;
   setPendingClientSearch: (
     pending: Nullable<{ folderId: number | string; query: string }>,
   ) => void;

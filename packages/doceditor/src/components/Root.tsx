@@ -203,6 +203,7 @@ const Root = ({
     onSDKRequestReferenceSource,
     onSDKRequestSelectDocument,
     onSDKRequestSelectSpreadsheet,
+    onAIRequestStorageFile,
     onCloseSelectFileDialog,
     onSubmitSelectFileDialog,
     getIsDisabledSelectFileDialog,
@@ -370,6 +371,7 @@ const Root = ({
           onSDKRequestReferenceSource={onSDKRequestReferenceSource}
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
+          onAIRequestStorageFile={onAIRequestStorageFile}
           organizationName={organizationName}
           onOpenRoleMappingPanel={onOpenRoleMappingPanel}
           setFillingStatusDialogVisible={setFillingStatusDialogVisible}

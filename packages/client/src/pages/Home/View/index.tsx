@@ -546,7 +546,7 @@ const View = ({
           components={{
             strong: <strong />,
           }}
-          values={{ aiAgent: t("Common:AIAgent"), aiChat: t("Common:AIChat") }}
+          values={{ aiChat: t("Common:AIChat") }}
         />,
       );
     }

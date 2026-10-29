@@ -251,12 +251,21 @@ export const enum PageType {
   groups = "groups",
   guests = "guests",
   aiSettings = "aiSettings",
+  apps = "apps",
 }
 
 export const enum ConflictResolveType {
   Skip = 0,
   Overwrite = 1,
   Duplicate = 2,
+}
+
+export const enum MetadataFieldType {
+  String = 0,
+  Date = 1,
+  Number = 2,
+  SingleChoice = 3,
+  MultiChoice = 4,
 }
 
 /**
@@ -305,6 +314,7 @@ export const enum TenantStatus {
   PortalDeactivate = 1,
   PortalRestore = 4,
   EncryptionProcess = 6,
+  PortalBlocked = 7,
 }
 
 /**
@@ -321,6 +331,7 @@ export const enum Events {
   CHANGE_COLUMN = "change_column",
   CHANGE_USER_TYPE = "change_user_type",
   CHANGE_QUOTA = "change_quota",
+  CHANGE_AI_LIMIT = "change_ai_limit",
   CREATE_PLUGIN_FILE = "create_plugin_file",
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
   SAVE_AS_TEMPLATE = "save_as_template",

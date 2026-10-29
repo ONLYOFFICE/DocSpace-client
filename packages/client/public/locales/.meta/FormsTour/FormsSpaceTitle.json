@@ -1,20 +1,20 @@
 {
   "key_path": "FormsSpaceTitle",
-  "content": "One space per form",
-  "content_en_sha1_hash": "235ef1502c980fa89937a2d4bc4d8de58e113eac",
-  "created_at": "2026-08-06T14:20:53.759Z",
-  "updated_at": "2026-08-13T10:58:03.049Z",
+  "content": "Forms and answers, together",
+  "content_en_sha1_hash": "01a01c50b1aa85dca97be9e9bb37b022b9ab55fa",
+  "created_at": "2026-10-16T12:15:09.365Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
   "comment": {
-    "text": "Title for an onboarding tour step that appears when highlighting the tile used to create a new space.",
+    "text": "Title of the Forms onboarding tour step that highlights the create form space tile; short heading, noun phrase (forms and their responses kept in one place).",
     "is_auto": true,
-    "updated_at": "2026-08-06T14:39:01.713Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 174,
-      "context": "// that says so is the one pointing at the tile that creates one.\n canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-form-room\"]',\n t(\"FormsTour:FormsSpaceTitle\"),\n t(\"FormsTour:FormsSpace\"),\n callbacks,\n LOG_LABEL,\n 6,\n leaveSpace,",
+      "line_number": 159,
+      "context": "// 1. What a form space is, on the tile that creates one.\n canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-form-room\"]',\n t(\"FormsTour:FormsSpaceTitle\"),\n t(\"FormsTour:FormsSpace\"),\n callbacks,\n FORMS_TOUR_LABEL,\n 6,\n leaveSpace,",
       "module": "/packages/client"
     }
   ],

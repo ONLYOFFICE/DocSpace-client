@@ -61,9 +61,7 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
 		case RoomsType.FormRoom:
 			return t("Common:RoleRoomAdminFormRoomDescription");
 		case RoomsType.AIRoom:
-			return t("Common:RoleAIAgentManagerDescription", {
-				aiAgent: t("Common:AIAgent"),
-			});
+			return t("Common:RoleAIAgentManagerDescription");
 		case None:
 			return t("Common:RoleRoomAdminDescription", {
 				sectionName: t("Common:Files"),

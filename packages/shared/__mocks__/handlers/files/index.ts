@@ -120,6 +120,19 @@ import {
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";
 export {
+  EMPTY_ENTRY_METADATA,
+  ENTRY_METADATA,
+  METADATA_FIELD,
+  METADATA_OPTION,
+  METADATA_TEMPLATES,
+  entryMetadataHandler,
+  entryMetadataSaveHandlers,
+  entryTemplateHandlers,
+  metadataCascadeHandlers,
+  metadataTemplatesHandlers,
+  myDocumentsMetadataFilterHandler,
+} from "./metadata";
+export {
   encryptedFilesHandlers,
   type EncryptedFileKey,
   type EncryptedFileSeed,

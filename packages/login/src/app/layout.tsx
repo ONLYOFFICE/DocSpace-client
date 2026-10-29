@@ -155,7 +155,8 @@ export default async function RootLayout({
 
   if (
     typeof settings !== "string" &&
-    settings?.tenantStatus === TenantStatus.PortalDeactivate
+    (settings?.tenantStatus === TenantStatus.PortalDeactivate ||
+      settings?.tenantStatus === TenantStatus.PortalBlocked)
   ) {
     redirectUrl = `/unavailable`;
   }

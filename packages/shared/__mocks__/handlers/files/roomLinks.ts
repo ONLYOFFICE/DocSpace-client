@@ -100,9 +100,13 @@ export const roomContentHandler = (
   fileId: number | string,
   {
     security: securityOverrides,
+    pathParts: pathPartsOverride,
     ...currentOverrides
   }: Record<string, unknown> & {
-    security?: Record<string, boolean>;
+    // null drops the room's security from the response altogether
+    security?: Record<string, boolean> | null;
+    // serves a folder inside a room instead of the room itself
+    pathParts?: { id: number | string; title: string; folderType: number }[];
   } = {},
 ) =>
   http.get(
@@ -207,32 +211,35 @@ export const roomContentHandler = (
             roomType: 6,
             canShare: true,
             shareSettings: { ExternalLink: 6, PrimaryExternalLink: 1 },
-            security: {
-              Read: true,
-              Create: true,
-              Delete: false,
-              EditRoom: true,
-              Rename: true,
-              CopyTo: true,
-              Copy: true,
-              MoveTo: true,
-              Move: true,
-              Pin: true,
-              Mute: true,
-              EditAccess: true,
-              Duplicate: true,
-              Download: true,
-              CopySharedLink: true,
-              Reconnect: false,
-              CreateRoomFrom: false,
-              CopyLink: true,
-              Embed: true,
-              ChangeOwner: true,
-              IndexExport: false,
-              HistoryExport: true,
-              UseChat: false,
-              ...securityOverrides,
-            },
+            security:
+              securityOverrides === null
+                ? undefined
+                : {
+                    Read: true,
+                    Create: true,
+                    Delete: false,
+                    EditRoom: true,
+                    Rename: true,
+                    CopyTo: true,
+                    Copy: true,
+                    MoveTo: true,
+                    Move: true,
+                    Pin: true,
+                    Mute: true,
+                    EditAccess: true,
+                    Duplicate: true,
+                    Download: true,
+                    CopySharedLink: true,
+                    Reconnect: false,
+                    CreateRoomFrom: false,
+                    CopyLink: true,
+                    Embed: true,
+                    ChangeOwner: true,
+                    IndexExport: false,
+                    HistoryExport: true,
+                    UseChat: false,
+                    ...securityOverrides,
+                  },
             title: "Public Room",
             access: 0,
             shared: true,
@@ -245,7 +252,7 @@ export const roomContentHandler = (
             updatedBy: makeUser(),
             ...currentOverrides,
           },
-          pathParts: [
+          pathParts: pathPartsOverride ?? [
             { id: 2002, title: "Rooms", folderType: 14 },
             { id: roomId, title: "Public Room", folderType: 14 },
           ],

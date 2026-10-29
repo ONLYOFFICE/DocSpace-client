@@ -242,7 +242,6 @@ const AiServicesManagementComponent = ({
       <Text className="category-item-description" fontSize="13px">
         {t("AiServicesManagementDescription", {
           productName: getBrandName("ProductName"),
-          aiAgents: t("Common:AIAgents"),
           aiSettings: t("AISettings"),
           aiServices: t("Common:AIServices"),
           organizationName: getBrandName("OrganizationName"),

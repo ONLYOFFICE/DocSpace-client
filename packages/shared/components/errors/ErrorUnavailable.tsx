@@ -38,16 +38,22 @@ import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@onlyoffice/apps-ui-kit/components/error-container/ErrorContainer";
 import styles from "./Errors.module.scss";
+import type { ErrorUnavailableProps } from "./Errors.types";
 
-const ErrorUnavailable = () => {
+const ErrorUnavailable = ({ isPortalBlocked }: ErrorUnavailableProps) => {
   const { t, ready } = useTranslation("Common");
 
   return (
     ready && (
       <div className={styles.errorUnavailableWrapper}>
-        <ErrorContainer
-          headerText={t("ErrorDeactivatedText")}
-        />
+        {isPortalBlocked ? (
+          <ErrorContainer
+            headerText={t("ErrorBlockedText")}
+            bodyText={t("ErrorBlockedDescription")}
+          />
+        ) : (
+          <ErrorContainer headerText={t("ErrorDeactivatedText")} />
+        )}
       </div>
     )
   );

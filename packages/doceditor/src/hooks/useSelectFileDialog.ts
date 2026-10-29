@@ -43,7 +43,7 @@ import {
 	TPresignedUri,
 } from "@docspace/shared/api/files/types";
 import { getPresignedUri, getReferenceData } from "@docspace/shared/api/files";
-import { EDITOR_ID } from "@docspace/shared/constants";
+import { getDocEditor } from "@/utils";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TSelectedFileInfo } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
@@ -55,6 +55,7 @@ export const insertImageAction = "imageFileType";
 export const mailMergeAction = "mailMergeFileType";
 export const compareFilesAction = "documentsFileType";
 export const setReferenceSourceAction = "referenceSourceType";
+export const aiAttachFileAction = "aiAttachFileType";
 
 const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 	const [isVisible, setIsVisible] = React.useState(false);
@@ -66,6 +67,27 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 	});
 
 	const requestRunning = React.useRef(false);
+	// Pending "Add file from storage" pick of the editor's AI chat: settled
+	// with the selected file, or with null when the dialog closes without one.
+	const aiFileResolverRef = React.useRef<
+		((file: TSelectedFileInfo | null) => void) | null
+	>(null);
+
+	const settleAIFileRequest = useCallback((file: TSelectedFileInfo | null) => {
+		const resolve = aiFileResolverRef.current;
+		aiFileResolverRef.current = null;
+		resolve?.(file);
+	}, []);
+
+	const onAIRequestStorageFile = useCallback(() => {
+		settleAIFileRequest(null);
+		return new Promise<TSelectedFileInfo | null>((resolve) => {
+			aiFileResolverRef.current = resolve;
+			setActionEvent({} as TEvent);
+			setFilesType(aiAttachFileAction);
+			setIsVisible(true);
+		});
+	}, [settleAIFileRequest]);
 
 	const onSDKRequestSelectDocument = useCallback((event: object) => {
 		// console.log("onSDKRequestSelectDocument", { event });
@@ -99,8 +121,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		(link: TPresignedUri) => {
 			const token = link.token;
 
-			const docEditor =
-				typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+			const docEditor = getDocEditor();
 
 			docEditor?.insertImage({
 				...actionEvent.data,
@@ -116,8 +137,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		(link: TPresignedUri) => {
 			const token = link.token;
 
-			const docEditor =
-				typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+			const docEditor = getDocEditor();
 
 			docEditor?.setRequestedSpreadsheet({
 				...actionEvent.data,
@@ -133,8 +153,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		(link: TPresignedUri) => {
 			const token = link.token;
 
-			const docEditor =
-				typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+			const docEditor = getDocEditor();
 
 			docEditor?.setRequestedDocument({
 				...actionEvent.data,
@@ -147,8 +166,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 	);
 
 	const setReferenceSource = useCallback((data: TGetReferenceDataRequest) => {
-		const docEditor =
-			typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+		const docEditor = getDocEditor();
 
 		docEditor?.setReferenceSource(data);
 	}, []);
@@ -158,7 +176,9 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 			try {
 				if (!file) return;
 
-				if (filesType === setReferenceSourceAction) {
+				if (filesType === aiAttachFileAction) {
+					settleAIFileRequest(file);
+				} else if (filesType === setReferenceSourceAction) {
 					const data = await getReferenceData({
 						fileKey: file.id,
 						instanceId,
@@ -183,10 +203,18 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 			insertImage,
 			mailMerge,
 			compareFiles,
+			settleAIFileRequest,
 		],
 	);
 
 	const getFileTypeDetection = React.useCallback(() => {
+		// The AI chat takes any file: images inline, documents as text.
+		if (filesType === aiAttachFileAction) {
+			return {
+				isSelect: true,
+				filterParam: FilesSelectorFilterTypes.ALL,
+			};
+		}
 		if (filesType === insertImageAction) {
 			return {
 				isSelect: true,
@@ -227,7 +255,8 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		if (requestRunning.current) return;
 		setIsVisible(false);
 		setActionEvent({} as TEvent);
-	}, []);
+		settleAIFileRequest(null);
+	}, [settleAIFileRequest]);
 
 	const onSubmit = useCallback(
 		async (
@@ -276,6 +305,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		onSDKRequestInsertImage,
 		onSDKRequestReferenceSource,
 		onSDKRequestSelectSpreadsheet,
+		onAIRequestStorageFile,
 
 		onSubmitSelectFileDialog: onSubmit,
 		onCloseSelectFileDialog: onClose,

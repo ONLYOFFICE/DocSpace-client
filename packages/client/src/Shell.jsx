@@ -34,7 +34,12 @@
  */
 
 import React, { useEffect, useMemo, useCallback, useState } from "react";
-import { Outlet, useLocation, useNavigate, useSearchParams } from "react-router";
+import {
+  Outlet,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
@@ -49,6 +54,7 @@ import {
   parseToDateTime,
   formatDate,
   formatDateLocalized,
+  getCorrectDate,
   isBefore,
   isAfter,
 } from "@onlyoffice/apps-ui-kit/utils/date";
@@ -57,9 +63,14 @@ import {
   PORTAL_DARK_THEME_ID,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import { getAiAccessSettings } from "@docspace/shared/api/settings";
+import { setForbiddenHandler } from "@docspace/shared/api/client";
 import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
-import { Toast, toastr, ToastType } from "@onlyoffice/apps-ui-kit/components/toast";
+import {
+  Toast,
+  toastr,
+  ToastType,
+} from "@onlyoffice/apps-ui-kit/components/toast";
 import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { getCookie, deleteCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
@@ -87,6 +98,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { handleCopy } from "@docspace/shared/utils/copy";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { getServiceLimitChatError } from "@docspace/shared/utils/ai";
 
 import "@docspace/shared/styles/theme.scss";
 
@@ -116,6 +128,7 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import { AskAIChatBridge } from "./components/AskAIChatBridge";
+import { AiChatVisibilityBridge } from "./components/AiChatVisibilityBridge";
 import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
@@ -124,8 +137,14 @@ import ReactSmartBanner from "./components/SmartBanner";
 // Stable empty list, so the chat provider's memo is not re-run each render.
 const NO_SUGGESTIONS = [];
 
+// How long a denied request's caller has to show its own error toast before
+// the generic "Access denied" one is shown in its place.
+const FORBIDDEN_TOAST_DELAY = 500;
+
 const Shell = ({ page = "home", ...rest }) => {
   const {
+    checkUserTypeLowered,
+    refreshRightsAfterForbidden,
     isLoaded,
     isAuthenticated,
     loadBaseInfo,
@@ -269,6 +288,51 @@ const Shell = ({ page = "home", ...rest }) => {
       toastr.error(err);
     }
   }, []);
+
+  // A denied request in a room section is only reported: navigating away
+  // threw every open room tab back to the default page. A burst of denied
+  // requests is handled once: it checks whether the user's type or room role
+  // was lowered while the tab missed the socket event, and gets one toast.
+  //
+  // That toast waits a moment, because the request is still rejected to its
+  // caller, and a caller that reports errors shows a toast of its own; a
+  // second "Access denied" next to it would only be noise.
+  useEffect(() => {
+    let toastId = null;
+    let pendingTimer = null;
+    let callerReported = false;
+
+    const unsubscribe = toastify.onChange((payload) => {
+      if (
+        pendingTimer !== null &&
+        payload.status === "added" &&
+        payload.type === ToastType.error
+      ) {
+        callerReported = true;
+      }
+    });
+
+    setForbiddenHandler(() => {
+      if (pendingTimer !== null) return;
+      if (toastId !== null && toastr.isActive(toastId)) return;
+
+      checkUserTypeLowered();
+      refreshRightsAfterForbidden();
+
+      callerReported = false;
+      pendingTimer = setTimeout(() => {
+        pendingTimer = null;
+
+        if (!callerReported) toastId = toastr.error(t("Common:AccessDenied"));
+      }, FORBIDDEN_TOAST_DELAY);
+    });
+
+    return () => {
+      setForbiddenHandler(null);
+      unsubscribe();
+      if (pendingTimer !== null) clearTimeout(pendingTimer);
+    };
+  }, [t, checkUserTypeLowered, refreshRightsAfterForbidden]);
 
   // Locale is handled by Luxon date utilities - no global locale setup needed
 
@@ -420,7 +484,10 @@ const Shell = ({ page = "home", ...rest }) => {
       fetchTreeFolders?.();
     };
 
-    SocketHelper?.on(SocketEvents.ChangeAiAccessSettings, handleAiAccessChanged);
+    SocketHelper?.on(
+      SocketEvents.ChangeAiAccessSettings,
+      handleAiAccessChanged,
+    );
 
     return () => {
       SocketHelper?.off(
@@ -842,6 +909,16 @@ const Shell = ({ page = "home", ...rest }) => {
   const canUseAi =
     isAuthenticated && !isGuest && !isNotPaidPeriod && aiServicesEnabled;
 
+  // Whether the side chat panel is open — reported from inside the providers
+  // by AiChatVisibilityBridge, since the panel store lives there.
+  const [isChatPanelVisible, setIsChatPanelVisible] = useState(false);
+
+  // The chat is on screen either in the side panel or inline, as the body of
+  // an AI agent room. While it is not, the providers only remember the scope
+  // (entityId) and the agents list below is not refreshed: entering a folder
+  // must not cost AI requests — they wait for the chat to open.
+  const isChatOpen = isChatPanelVisible || isInsideAgentRoom;
+
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.
   const {
@@ -851,6 +928,7 @@ const Shell = ({ page = "home", ...rest }) => {
   } =
     useAiAgentsPickerActions(
       isLoaded && isAiChatAvailable && canUseAi,
+      isChatOpen,
       setPickedAgent,
     );
 
@@ -957,13 +1035,35 @@ const Shell = ({ page = "home", ...rest }) => {
   // Only the Payer can actually top the wallet up, so the button to
   // Billing -> Wallet is theirs alone; everyone else is pointed to the Payer
   // (`action: null` also drops the default Retry, which would just fail
-  // again on an empty wallet). Every other code keeps the library default
-  // (localized text + Retry).
+  // again on an empty wallet). A spending limit reached (relayed as a 403, see
+  // getServiceLimitChatError) is handled the same way: admins get a button to
+  // AI settings -> Limits, everyone else is pointed to an admin. Every other
+  // code keeps the library default (localized text + Retry).
   const formatChatError = useCallback(
     (payload) => {
-      // Standalone pays its AI provider directly: no wallet, nothing to top up,
-      // so the library default (localized text + Retry) stands.
-      if (payload?.code !== "insufficient_funds" || standalone) return null;
+      // Standalone pays its AI provider directly: no wallet and no spending
+      // limits, so the library default (localized text + Retry) stands.
+      if (standalone) return null;
+
+      const serviceLimit = getServiceLimitChatError(payload);
+      if (serviceLimit) {
+        const date = getCorrectDate(language, serviceLimit.until);
+
+        return {
+          title: t("Common:AILimitReached"),
+          description: isAdmin
+            ? t("Common:AILimitReachedResetsOn", { date })
+            : t("Common:AILimitReachedContactAdminResetsOn", { date }),
+          action: isAdmin
+            ? {
+                text: t("Common:ChangeAILimit"),
+                onClick: () => navigate("/portal-settings/ai-settings/limits"),
+              }
+            : null,
+        };
+      }
+
+      if (payload?.code !== "insufficient_funds") return null;
 
       return {
         title: t("Common:WalletBalanceTooLow"),
@@ -978,7 +1078,7 @@ const Shell = ({ page = "home", ...rest }) => {
           : null,
       };
     },
-    [t, isPayer, navigate, standalone],
+    [t, isAdmin, isPayer, navigate, standalone, language],
   );
 
   // AI chat host callbacks. Web Search settings save on an explicit button
@@ -1046,6 +1146,7 @@ const Shell = ({ page = "home", ...rest }) => {
             (isInsideAgentRoom && !canEditAgentRoom) || isInsideAiProject
           }
           isAgentRoom={isInsideAgentRoom}
+          isChatOpen={isChatOpen}
           profilePickerActions={
             isInsideAgentRoom ? undefined : profilePickerActions
           }
@@ -1078,6 +1179,8 @@ const Shell = ({ page = "home", ...rest }) => {
         >
           <AskAIChatBridge />
           <AiPresetsBridge />
+
+          <AiChatVisibilityBridge onChange={setIsChatPanelVisible} />
           <ModelUpdatedBanner
             key={agentEntityId}
             entityId={agentEntityId}
@@ -1109,6 +1212,8 @@ const ShellWrapper = inject(
     aiProjectsStore,
     paymentStore,
     accessRightsStore,
+    peopleStore,
+    filesStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -1134,6 +1239,7 @@ const ShellWrapper = inject(
       isFrame,
       frameConfig,
       isPortalDeactivate,
+      isPortalBlocked,
       isPortalRestoring,
       logoText,
       setLogoText,
@@ -1170,14 +1276,21 @@ const ShellWrapper = inject(
     const pagesWithoutNavMenu =
       clientError ||
       isPortalDeactivate ||
+      isPortalBlocked ||
       isPortalRestoring ||
       (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
 
     return {
+      checkUserTypeLowered: peopleStore.usersStore.checkUserTypeLowered,
+      refreshRightsAfterForbidden: filesStore.refreshRightsAfterForbidden,
       loadBaseInfo: async () => {
         await init(false, i18n);
 
-        if (settingsStore.walletLowBalance) {
+        if (
+          settingsStore.walletLowBalance &&
+          !settingsStore.isPortalDeactivate &&
+          !settingsStore.isPortalBlocked
+        ) {
           paymentStore.fetchWalletBalance().catch((e) => console.error(e));
         }
 
@@ -1277,10 +1390,15 @@ const ShellWrapper = inject(
       // room the server has never heard of, so every scoped AI request made
       // for it comes back 404 ("Entity not found") — the demo answers what the
       // section asks about the space, and the AI service is no part of that.
+      // And for a location whose id is not a room id (a third-party storage
+      // folder carries a string id): the AI service accepts only integer room
+      // ids as a scope, reads included (Bug 84417), and folds any other
+      // location to the global scope anyway, so send that scope outright.
       agentEntityId:
         (selectedFolderStore.isAIRoom && !accessRightsStore.canUseChat) ||
         !chatScopeId ||
-        isTourDemoId(chatScopeId)
+        isTourDemoId(chatScopeId) ||
+        !/^\d+$/.test(String(chatScopeId))
           ? undefined
           : String(chatScopeId),
       // Inside AI agent rooms the model is fixed by the agent's assigned
@@ -1327,3 +1445,4 @@ const Root = () => (
 );
 
 export default Root;
+

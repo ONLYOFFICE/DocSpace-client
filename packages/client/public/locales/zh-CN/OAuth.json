@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "多个应用已启用",
   "AppName": "应用名称",
   "Apps": "应用",
+  "AppsLimitReached": "您创建的应用数量已达上限。请删除不再需要的应用，以添加新应用。",
+  "AppsLimitReachedWorkspace": "此工作区的应用数量已达上限。请删除不再需要的应用，以添加新应用。",
   "AuthButton": "身份验证按钮",
   "AuthenticationMethod": "身份验证方式",
   "AuthorizedApps": "已认证的应用",

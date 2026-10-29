@@ -663,7 +663,8 @@ class CreateEditRoomStore {
         },
       }),
       saveFormAsXLSX,
-      sendFormToExternalDB,
+      sendFormToExternalDB:
+        sendFormToExternalDB && this.settingsStore.externalDbEnabled,
     };
 
     this.setIsLoading(true);
@@ -906,8 +907,8 @@ class CreateEditRoomStore {
       const finalTask = await DbSyncService.poll(roomId, (progress) => {
         setSecondaryProgressBarData({
           ...basePayload,
-          percent: progress.percentage ?? 0,
-          completed: progress.isCompleted ?? false,
+          percent: progress.percentage,
+          completed: progress.isCompleted,
           alert: false,
         });
       }).catch((error) => {

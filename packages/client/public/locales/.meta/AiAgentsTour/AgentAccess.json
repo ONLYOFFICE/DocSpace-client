@@ -1,20 +1,20 @@
 {
   "key_path": "AgentAccess",
-  "content": "The info panel is where an agent stops being yours alone. Invite people to it, or give view-only access so they can read what it produced without touching how it works. The history says what changed in the agent, and when.",
-  "content_en_sha1_hash": "a83bde21b2ca5841e1d20cc61ea6390df307b5fe",
-  "created_at": "2026-08-06T14:20:56.243Z",
-  "updated_at": "2026-08-07T15:05:26.409Z",
+  "content": "Invite people from the Info panel when you can manage access. Viewers can open files in Chat outputs, but they can't access the agent's chats. Check Contacts for members and roles, and History for recent activity.",
+  "content_en_sha1_hash": "33d56cfde3ffe52d7eb423c39b8ecff39fee2b78",
+  "created_at": "2026-10-16T12:15:11.872Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
   "comment": {
-    "text": "Description text for an onboarding tour step explaining how the Info Panel manages agent sharing, access permissions, and activity history.",
+    "text": "Body of the AI Agents onboarding tour step that highlights the members list in the Info panel opened on the first agent; admin variant (non-admins see AgentAccessMember). Info panel, Chat outputs, Contacts and History are UI names of a panel, a section and two tabs and should match their translations.",
     "is_auto": true,
-    "updated_at": "2026-08-06T14:29:39.502Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 234,
-      "context": "INFO_PANEL_SELECTOR,\n isAdmin\n ? t(\"AiAgentsTour:AgentAccessTitle\")\n : t(\"AiAgentsTour:AgentAccessMemberTitle\"),\n isAdmin\n ? t(\"AiAgentsTour:AgentAccess\")\n : t(\"AiAgentsTour:AgentAccessMember\"),\n callbacks,\n LOG_LABEL,\n infoPanelHooks,\n [FIRST_ITEM_SELECTOR],",
+      "line_number": 277,
+      "context": "MEMBER_ROW_SELECTOR,\n isAdmin\n ? t(\"RoomsTour:RoomsMembersTitle\")\n : t(\"AiAgentsTour:AgentAccessMemberTitle\"),\n isAdmin\n ? t(\"AiAgentsTour:AgentAccess\")\n : t(\"AiAgentsTour:AgentAccessMember\"),\n callbacks,\n AI_AGENTS_TOUR_LABEL,\n infoPanelHooks,\n [MEMBERS_TAB_SELECTOR, MEMBERS_LIST_SELECTOR],",
       "module": "/packages/client"
     }
   ],

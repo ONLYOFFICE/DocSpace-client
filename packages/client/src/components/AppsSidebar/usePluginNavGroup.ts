@@ -85,14 +85,17 @@ export const usePluginNavGroup = ({
     if (sectionItems.length === 0) return EMPTY_RESULT;
 
     const navItems = sectionItems.map<NavMenuItem>(({ key, value }) => {
-      const { label, icon } = value;
+      const { label, icon, badge } = value;
       const path = getPluginSectionPath(section, key);
+      const showBadge = badge !== undefined && badge !== 0 && badge !== "";
 
       return {
         id: getNavItemId(key),
         label,
         icon,
         onClick: () => navigate(path),
+        showBadge,
+        labelBadge: showBadge ? badge : undefined,
       };
     });
 

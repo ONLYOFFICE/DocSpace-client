@@ -200,7 +200,9 @@ const ClientRoutes = [
             path: "rooms/recent",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-rooms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -208,7 +210,9 @@ const ClientRoutes = [
             path: "rooms/recent/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-rooms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -216,7 +220,9 @@ const ClientRoutes = [
             path: "rooms/favorite",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-rooms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -224,7 +230,9 @@ const ClientRoutes = [
             path: "rooms/favorite/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-rooms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -232,7 +240,9 @@ const ClientRoutes = [
             path: "rooms/trash",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-rooms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -240,7 +250,9 @@ const ClientRoutes = [
             path: "rooms/trash/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-rooms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -248,7 +260,9 @@ const ClientRoutes = [
             path: "rooms/shared",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-rooms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -256,7 +270,9 @@ const ClientRoutes = [
             path: "rooms/shared/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-rooms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -264,7 +280,9 @@ const ClientRoutes = [
             path: "rooms/shared/:room",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -272,7 +290,9 @@ const ClientRoutes = [
             path: "rooms/shared/:room/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -280,7 +300,9 @@ const ClientRoutes = [
             path: "forms",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-forms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -288,7 +310,9 @@ const ClientRoutes = [
             path: "forms/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-forms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -296,7 +320,9 @@ const ClientRoutes = [
             path: "forms/:room",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-forms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -304,7 +330,9 @@ const ClientRoutes = [
             path: "forms/:room/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-forms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -312,7 +340,9 @@ const ClientRoutes = [
             path: "forms/recent",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-forms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -320,7 +350,9 @@ const ClientRoutes = [
             path: "forms/recent/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-forms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -328,7 +360,9 @@ const ClientRoutes = [
             path: "forms/favorites",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-forms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -336,7 +370,9 @@ const ClientRoutes = [
             path: "forms/favorites/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-forms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -344,7 +380,9 @@ const ClientRoutes = [
             path: "forms/trash",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-forms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -352,7 +390,9 @@ const ClientRoutes = [
             path: "forms/trash/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-forms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -360,7 +400,9 @@ const ClientRoutes = [
             path: "rooms/archived",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-rooms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -368,7 +410,9 @@ const ClientRoutes = [
             path: "rooms/archived/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-rooms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -376,7 +420,9 @@ const ClientRoutes = [
             path: "rooms/archived/:room",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -384,7 +430,9 @@ const ClientRoutes = [
             path: "rooms/archived/:room/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -393,7 +441,9 @@ const ClientRoutes = [
 
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-rooms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -401,7 +451,9 @@ const ClientRoutes = [
             path: "rooms/templates/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-rooms">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -409,7 +461,9 @@ const ClientRoutes = [
             path: "rooms/templates/:room",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -417,7 +471,9 @@ const ClientRoutes = [
             path: "rooms/templates/:room/filter",
             element: (
               <PrivateRoute>
-                <ViewComponent />
+                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -439,7 +495,9 @@ const ClientRoutes = [
             path: "ai-agents",
             element: (
               <PrivateRoute requireAIServices>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-agents">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -447,7 +505,9 @@ const ClientRoutes = [
             path: "ai-agents/filter",
             element: (
               <PrivateRoute requireAIServices>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-agents">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -455,7 +515,9 @@ const ClientRoutes = [
             path: "ai-agents/recent",
             element: (
               <PrivateRoute requireAIServices>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-agents">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -463,7 +525,9 @@ const ClientRoutes = [
             path: "ai-agents/recent/filter",
             element: (
               <PrivateRoute requireAIServices>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-agents">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -471,7 +535,9 @@ const ClientRoutes = [
             path: "ai-agents/favorites",
             element: (
               <PrivateRoute requireAIServices>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-agents">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -479,7 +545,9 @@ const ClientRoutes = [
             path: "ai-agents/favorites/filter",
             element: (
               <PrivateRoute requireAIServices>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-agents">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -487,7 +555,9 @@ const ClientRoutes = [
             path: "ai-agents/trash",
             element: (
               <PrivateRoute requireAIServices>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-agents">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -495,7 +565,9 @@ const ClientRoutes = [
             path: "ai-agents/trash/filter",
             element: (
               <PrivateRoute requireAIServices>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-agents">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -503,7 +575,9 @@ const ClientRoutes = [
             path: "ai-agents/:id",
             element: (
               <PrivateRoute requireAIServices>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-agents">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -511,7 +585,9 @@ const ClientRoutes = [
             path: "ai-agents/:id/filter",
             element: (
               <PrivateRoute requireAIServices>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-agents">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -519,7 +595,9 @@ const ClientRoutes = [
             path: "ai-agents/:id/chat",
             element: (
               <PrivateRoute requireAIServices>
-                <ViewComponent />
+                <ProtectedAppRoute appId="ai-agents">
+                  <ViewComponent />
+                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },

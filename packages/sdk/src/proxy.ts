@@ -177,7 +177,8 @@ export async function proxy(request: NextRequest) {
     const isDev = process.env.NODE_ENV !== "production";
 
     // 'wasm-unsafe-eval' is required for hash-wasm's Argon2 implementation.
-    // 'unsafe-inline' for styles is needed by styled-components 5.
+    // 'unsafe-inline' for styles is needed by Next's inline style tags and
+    // server-rendered style attributes.
     // Dev additionally allows 'unsafe-eval' for React Refresh runtime.
     const scriptSrc = isDev
       ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' 'wasm-unsafe-eval'"

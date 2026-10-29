@@ -65,6 +65,7 @@ import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
@@ -227,6 +228,7 @@ const PureHome = observer((props) => {
     canCreateRooms,
     isDocumentsFolder,
     isRoom,
+    isFormRoomFolder,
     isRoomsFolder,
     isFormsFolder,
     isPrivacyFolder,
@@ -328,7 +330,14 @@ const PureHome = observer((props) => {
   // asynchronously, so during navigation `isRoom` flips true before the form
   // type is known and the banner briefly flashes the regular-room file tiles.
   // The pathname changes atomically with the route, so this never lags.
-  const isFormRoom = getCategoryType(location) === CategoryType.Form;
+  //
+  // The URL alone is not enough, though: a form room can also be opened under
+  // `/rooms/shared/{id}` (the server reports its rootFolderType as Rooms), and
+  // there the banner offered the regular file tiles, which the server then
+  // refused with "only PDF forms can be uploaded to this room". So the store
+  // is consulted as well once it has loaded.
+  const isFormRoom =
+    getCategoryType(location) === CategoryType.Form || isFormRoomFolder;
 
   // AI-agents create gating: AI must be ready and the user able to manage
   // agents (admins / owners / room admins — same set as canCreateRooms).
@@ -1151,6 +1160,9 @@ export const Component = inject(
       canCreateRooms: isAdmin || isRoomAdmin,
       isDocumentsFolder,
       isRoom,
+      isFormRoomFolder:
+        selectedFolderStore.roomType === RoomsType.FormRoom ||
+        selectedFolderStore.parentRoomType === FolderType.FormRoom,
       isPrivacyFolder,
       isTemplatesFolder,
       isFavoritesFolder,

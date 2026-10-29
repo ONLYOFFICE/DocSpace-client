@@ -166,9 +166,7 @@ export async function wsModifyFolderCreateImpl(
       file_type: getFileExtension(file.title).replace(".", ""),
     });
 
-    self.selectedFolderStore.setFilesCount(
-      self.selectedFolderStore.filesCount + 1,
-    );
+    self.selectedFolderStore.countFileCreated(file.id);
 
     setTimeout(() => {
       if (self.getFileIndex(file.id) > -1) {
@@ -190,15 +188,27 @@ export async function wsModifyFolderCreateImpl(
       }) as unknown as () => Promise<unknown>);
     }, 300);
   } else if (opt?.type === "folder" && opt?.id) {
-    self.selectedFolderStore.setFoldersCount(
-      self.selectedFolderStore.foldersCount + 1,
-    );
+    const folder = opt.data ? JSON.parse(opt.data) : null;
+
+    // A form room is listed in Forms, not in the Rooms folder it belongs to.
+    const isFormRoom = folder?.roomType === RoomsType.FormRoom;
+    const isInSelectedFolder = (parentId: number | string) =>
+      isFormRoom
+        ? self.treeFoldersStore.isFormsFolder
+        : self.selectedFolderStore.id == parentId;
+
+    // the parent folders are subscribed too, so a folder created in one of
+    // them must not be counted here; a folder is counted where it is listed,
+    // as its deletion is
+    if (!folder || isInSelectedFolder(folder.parentId)) {
+      self.selectedFolderStore.setFoldersCount(
+        self.selectedFolderStore.foldersCount + 1,
+      );
+    }
 
     const foundIndex = self.folders.findIndex((x) => x.id == opt?.id);
 
-    if (foundIndex > -1) return;
-
-    const folder = JSON.parse(opt?.data as string);
+    if (foundIndex > -1 || !folder) return;
 
     if (self.selectedFolderStore.id != folder.parentId) {
       const movedToIndex = self.getFolderIndex(folder.parentId);
@@ -206,7 +216,7 @@ export async function wsModifyFolderCreateImpl(
     }
 
     if (
-      self.selectedFolderStore.id != folder.parentId ||
+      !isInSelectedFolder(folder.parentId) ||
       (folder.roomType &&
         folder.createdBy.id === self.userStore.user!.id &&
         self.roomCreated)
@@ -218,7 +228,7 @@ export async function wsModifyFolderCreateImpl(
 
     console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
 
-    if (!folderInfo || folderInfo.parentId !== self.selectedFolderStore.id) {
+    if (!folderInfo || !isInSelectedFolder(folderInfo.parentId)) {
       console.log("Skip UNSUBSCRIBED folder creation");
       return;
     }
@@ -233,6 +243,29 @@ export async function wsModifyFolderCreateImpl(
       self.setFolders(newFolders);
     });
   }
+}
+
+// The counts above are kept up to date from socket events, which miss files
+// outside the loaded page, a filter or a partly listed indexed folder, so the
+// current folder's counts are re-read from the server once the events settle.
+export async function syncSelectedFolderCountsImpl(self: FilesStore) {
+  const { id } = self.selectedFolderStore;
+  if (!id) return;
+
+  const folder = await api.files.getFolderInfo(id, true).catch(() => null);
+
+  if (
+    !folder ||
+    self.selectedFolderStore.id !== id ||
+    typeof folder.filesCount !== "number" ||
+    typeof folder.foldersCount !== "number"
+  )
+    return;
+
+  runInAction(() => {
+    self.selectedFolderStore.setFilesCount(folder.filesCount);
+    self.selectedFolderStore.setFoldersCount(folder.foldersCount);
+  });
 }
 
 export async function wsModifyFolderUpdateImpl(
@@ -342,9 +375,7 @@ export function wsModifyFolderDeleteImpl(self: FilesStore, opt?: TOptSocket) {
 
     const foundFile = self.files[foundIndex];
 
-    self.selectedFolderStore.setFilesCount(
-      self.selectedFolderStore.filesCount - 1,
-    );
+    self.selectedFolderStore.countFileDeleted(foundFile.id);
 
     console.log("[WS] delete file", foundFile.id, foundFile.title);
 
@@ -453,7 +484,13 @@ export function wsChangeFolderAccessRightsImpl(
   const folderId = option.id;
   const memberAccess = JSON.parse(option.data);
 
-  if (self.selectedFolderStore.id !== folderId) return;
+  // The event names the room, while the user may be deep inside it: the
+  // subfolders inherit the room's rights, so they are re-read just the same.
+  const { id: selectedId, pathParts } = self.selectedFolderStore;
+  const isInside =
+    selectedId === folderId || !!pathParts?.some((p) => p.id === folderId);
+
+  if (!isInside) return;
   if (!memberAccess[self.userStore.user!.id]) return;
 
   console.log("[WS] change folder access rights for current user", {
@@ -461,7 +498,7 @@ export function wsChangeFolderAccessRightsImpl(
     memberAccess,
   });
 
-  self.refreshFolder(folderId);
+  self.refreshFolder(selectedId!);
   self.refreshFiles();
 }
 

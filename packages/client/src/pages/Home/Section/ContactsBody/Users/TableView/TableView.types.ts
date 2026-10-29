@@ -83,6 +83,7 @@ export type TableColumns = {
   emailColumnIsEnabled: boolean;
   groupColumnIsEnabled: boolean;
   storageColumnIsEnabled: boolean;
+  aiSpendingColumnIsEnabled: boolean;
   inviterColumnIsEnabled: boolean;
   invitedDateColumnIsEnabled: boolean;
 };
@@ -91,12 +92,12 @@ export type TableHeaderColumn = {
   key: string;
   title: string;
   enable: boolean;
-  sortBy: TFilterSortBy;
+  sortBy?: TFilterSortBy;
   resizable: boolean;
   default?: boolean;
   minWidth?: number;
   onChange?: (key: string) => void;
-  onClick: (sortBy: TFilterSortBy) => void;
+  onClick?: (sortBy: TFilterSortBy) => void;
 };
 
 export type TableViewProps = {
@@ -109,6 +110,7 @@ export type TableViewProps = {
   filterTotal?: UsersStore["filterTotal"];
   isUsersEmptyView?: UsersStore["isUsersEmptyView"];
   contactsTab?: UsersStore["contactsTab"];
+  showAISpendingInfo?: UsersStore["showAISpendingInfo"];
 
   viewAs?: PeopleStore["viewAs"];
   setViewAs?: PeopleStore["setViewAs"];
@@ -129,6 +131,7 @@ export type TableViewProps = {
   emailPeopleColumnIsEnabled?: TableStore["emailPeopleColumnIsEnabled"];
   groupPeopleColumnIsEnabled?: TableStore["groupPeopleColumnIsEnabled"];
   storagePeopleColumnIsEnabled?: TableStore["storagePeopleColumnIsEnabled"];
+  aiSpendingPeopleColumnIsEnabled?: TableStore["aiSpendingPeopleColumnIsEnabled"];
   inviterGuestsColumnIsEnabled?: TableStore["inviterGuestsColumnIsEnabled"];
   emailGuestsColumnIsEnabled?: TableStore["emailGuestsColumnIsEnabled"];
   invitedDateGuestsColumnIsEnabled?: TableStore["invitedDateGuestsColumnIsEnabled"];
@@ -136,6 +139,7 @@ export type TableViewProps = {
   emailInsideGroupColumnIsEnabled?: TableStore["emailInsideGroupColumnIsEnabled"];
   groupInsideGroupColumnIsEnabled?: TableStore["groupInsideGroupColumnIsEnabled"];
   storageInsideGroupColumnIsEnabled?: TableStore["storageInsideGroupColumnIsEnabled"];
+  aiSpendingInsideGroupColumnIsEnabled?: TableStore["aiSpendingInsideGroupColumnIsEnabled"];
   columnStorageName?: TableStore["columnStorageName"];
   columnInfoPanelStorageName?: TableStore["columnInfoPanelStorageName"];
   withContentSelection?: ContactsHotkeysStore["withContentSelection"];
@@ -173,6 +177,7 @@ export type TableHeaderProps = {
 
   isDefaultUsersQuotaSet?: CurrentQuotasStore["isDefaultUsersQuotaSet"];
   showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
+  showAISpendingInfo?: UsersStore["showAISpendingInfo"];
 
   getColumns?: TableStore["getColumns"];
   setColumnEnable?: TableStore["setColumnEnable"];
@@ -219,5 +224,6 @@ export type TableRowProps = {
   ) => void;
 
   showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
+  showAISpendingInfo?: UsersStore["showAISpendingInfo"];
   isMe?: UserStore["isMe"];
 } & TableColumns;

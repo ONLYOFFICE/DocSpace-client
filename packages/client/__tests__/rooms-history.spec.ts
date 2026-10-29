@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 import {
   settingsHandler,
@@ -132,10 +132,19 @@ async function openCalendar(page: Page) {
   return datePicker;
 }
 
+// Day buttons are named by the full date, so the neighbouring months' days,
+// which repeat the same numbers, are told apart
+function dayButton(datePicker: Locator, day: string) {
+  return datePicker.getByRole("button", {
+    name: `${day} March 2026`,
+    exact: true,
+  });
+}
+
 async function selectDay(page: Page, day: string) {
   const datePicker = await openCalendar(page);
 
-  await datePicker.getByRole("button", { name: day, exact: true }).click();
+  await dayButton(datePicker, day).click();
 }
 
 async function selectDateRangeScope(page: Page) {
@@ -293,14 +302,8 @@ test.describe("Rooms — info panel history", () => {
       await openHistoryPanel(page, baseUrl);
 
       const datePicker = await openCalendar(page);
-      const dayBefore = datePicker.getByRole("button", {
-        name: "9",
-        exact: true,
-      });
-      const creationDay = datePicker.getByRole("button", {
-        name: "10",
-        exact: true,
-      });
+      const dayBefore = dayButton(datePicker, "9");
+      const creationDay = dayButton(datePicker, "10");
 
       await expect(dayBefore).toBeDisabled();
       await expect(creationDay).toBeEnabled();
@@ -409,13 +412,9 @@ test.describe("Rooms — info panel history", () => {
 
       const datePicker = await openCalendar(page);
 
-      await expect(
-        datePicker.getByRole("button", { name: "18", exact: true }),
-      ).toBeEnabled();
+      await expect(dayButton(datePicker, "18")).toBeEnabled();
 
-      await expect(
-        datePicker.getByRole("button", { name: "19", exact: true }),
-      ).toBeDisabled();
+      await expect(dayButton(datePicker, "19")).toBeDisabled();
 
       await expectScreenshot(page, [
         "desktop",

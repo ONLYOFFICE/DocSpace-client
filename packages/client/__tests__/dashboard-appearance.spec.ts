@@ -110,6 +110,10 @@ const APP_CARDS = '[data-tour-id^="dashboard-app-card-"]';
 // `title` into a custom tooltip in the browser, so no title attribute is left
 // to match on.
 const PROFILE_RENAME_BUTTON = '[data-testid="dashboard-profile-rename"]';
+// The reader's portal type on the profile card, and the help icon whose tooltip
+// describes it.
+const PROFILE_TYPE = '[data-testid="dashboard-profile-type"]';
+const PROFILE_TYPE_HELP = '[data-testid="dashboard-profile-type-help"]';
 
 /**
  * The sidebar's AI Agents entry, matched by its label rather than by its
@@ -134,6 +138,8 @@ type Role = {
   /** Names the case, in the test title and in the screenshot file name. */
   key: string;
   userType: UserType;
+  /** What the profile card names the type, in English. */
+  typeName: string;
   /** Portal admins and the owner: the profile card and the plan line. */
   isAdminOrOwner: boolean;
   /** The set allowed to create rooms — room admins are in it, users are not. */
@@ -145,6 +151,7 @@ const ROLES: Role[] = [
   {
     key: "owner",
     userType: "owner",
+    typeName: "Owner",
     isAdminOrOwner: true,
     canCreateRooms: true,
     isGuest: false,
@@ -152,6 +159,7 @@ const ROLES: Role[] = [
   {
     key: "full-admin",
     userType: "admin",
+    typeName: "Full admin",
     isAdminOrOwner: true,
     canCreateRooms: true,
     isGuest: false,
@@ -160,6 +168,7 @@ const ROLES: Role[] = [
     // Rooms are theirs to create, but the portal's settings and plan are not.
     key: "room-admin",
     userType: "roomAdmin",
+    typeName: "Room admin",
     isAdminOrOwner: false,
     canCreateRooms: true,
     isGuest: false,
@@ -167,6 +176,7 @@ const ROLES: Role[] = [
   {
     key: "user",
     userType: "regular",
+    typeName: "User",
     isAdminOrOwner: false,
     canCreateRooms: false,
     isGuest: false,
@@ -175,6 +185,7 @@ const ROLES: Role[] = [
     // Cannot create or upload anywhere, and holds no AI-capable role.
     key: "guest",
     userType: "visitor",
+    typeName: "Guest",
     isAdminOrOwner: false,
     canCreateRooms: false,
     isGuest: true,
@@ -524,6 +535,14 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     await expect(page.locator(PROFILE_CARD)).toHaveCount(1);
     await expect(page.locator(PROFILE_RENAME_BUTTON)).toHaveCount(
       role.isAdminOrOwner ? 1 : 0,
+    );
+
+    // The card names the reader's type, as the profile page does, with a help
+    // icon describing it - for every type but the owner's, which has no
+    // description to show.
+    await expect(page.locator(PROFILE_TYPE)).toHaveText(role.typeName);
+    await expect(page.locator(PROFILE_TYPE_HELP)).toHaveCount(
+      role.userType === "owner" ? 0 : 1,
     );
 
     // The plan line is the admin/owner-only part of the header, and it names

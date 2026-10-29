@@ -96,7 +96,7 @@ import {
 } from "../constants";
 
 import { TI18n, TTranslation, ValueOf } from "../types";
-import { TUser } from "../api/people/types";
+import { TUser, TUserServiceLimit } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
 import {
@@ -786,7 +786,10 @@ export const frameHandlePing = (eventData: {
   return false;
 };
 
-import { getConvertedSize } from "@onlyoffice/apps-ui-kit/billing/utils/common";
+import {
+  formatCurrencyValue,
+  getConvertedSize,
+} from "@onlyoffice/apps-ui-kit/billing/utils/common";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { getConstName } from "@docspace/shared/constants/consts";
 
@@ -814,6 +817,35 @@ export const getSpaceQuotaAsText = (
   const quotaValue = getConvertedQuota(t, quotaLimit);
 
   return `${usedValue} / ${quotaValue}`;
+};
+
+export const formatAiAmount = (
+  language: string,
+  amount: number,
+  currency: string | null | undefined,
+  fractionDigits: number = 2,
+) => {
+  if (!currency) return amount.toFixed(fractionDigits);
+
+  return formatCurrencyValue(language, amount, currency, fractionDigits);
+};
+
+export const getAiSpendingAsText = (
+  language: string,
+  limit: TUserServiceLimit | null | undefined,
+) => {
+  const currency = limit?.currency;
+
+  if (!limit || !currency) return "";
+
+  const format = (amount: number) => formatAiAmount(language, amount, currency);
+
+  const spent = format(limit.amountConsumed);
+
+  if (limit.amountValue === null || limit.amountValue === undefined)
+    return spent;
+
+  return `${spent} / ${format(limit.amountValue)}`;
 };
 
 export const conversionToBytes = (size: number, power: number) => {

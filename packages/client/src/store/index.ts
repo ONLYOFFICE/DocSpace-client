@@ -120,7 +120,7 @@ const aiPresetsStore = new AiPresetsStore();
 
 const aiProjectsStore = new AiProjectsStore(aiPresetsStore);
 
-const appsStore = new AppsStore();
+const appsStore = new AppsStore(settingsStore);
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 

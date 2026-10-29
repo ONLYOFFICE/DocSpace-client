@@ -1,0 +1,29 @@
+{
+  "key_path": "MetadataTemplatesDescription",
+  "content": "Create and manage metadata templates — named sets of typed fields (Text, Number, Date, Single and Multi select) assigned to files, folders and rooms. Field values power list filtering, global search and AI autofill.",
+  "content_en_sha1_hash": "dba42097ba8985172efc41a474a0f9750ee5b234",
+  "created_at": "2026-10-21T10:17:41.277Z",
+  "updated_at": "2026-10-23T12:28:45.615Z",
+  "comment": {
+    "text": "Description at the top of the Metadata templates page in the portal settings. Text, Number, Date, Single select and Multi select are the field type names; translate them as in the field type selector.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/index.tsx",
+      "line_number": 77,
+      "context": "};\n \n return (\n <div className={styles.metadataTemplates} data-testid=\"metadata-templates\">\n <Text className={styles.description}>\n {t(\"Metadata:MetadataTemplatesDescription\")}\n </Text>\n \n {isMobile() ? (\n <div className={styles.buttonSeating}>\n <Button",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

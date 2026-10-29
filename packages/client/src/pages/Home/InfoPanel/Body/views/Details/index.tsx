@@ -319,7 +319,7 @@ const Details = ({
             // room cover flow here would save it as a room's.
             withEditing={
               "isRoom" in selection && selection.isRoom && !isAIProject
-                ? selection.security.EditRoom
+                ? Boolean(selection.security?.EditRoom)
                 : false
             }
             dataTestId="info_panel_details_room_icon"

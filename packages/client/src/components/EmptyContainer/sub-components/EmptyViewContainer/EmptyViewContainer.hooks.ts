@@ -159,6 +159,7 @@ export const useEmptyView = (
       standalone,
       isPortalAdmin,
       isFormsScope,
+      isPublicRoom,
     );
     const icon = getIcon(
       type,
@@ -173,6 +174,8 @@ export const useEmptyView = (
       isResultsTab,
       isKnowledgeTab,
       isAIRoom,
+      isPublicRoom,
+      isAiReady,
     );
 
     return { description, title, icon };
@@ -439,7 +442,11 @@ export const useOptions = (
     }
 
     onShowTemplateGallery(true);
-  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, onShowTemplateGallery]);
+  }, [
+    isWarningRoomsDialog,
+    setQuotaWarningDialogVisible,
+    onShowTemplateGallery,
+  ]);
 
   const onCreateAIAgent = useCallback(() => {
     if (isGracePeriod) {

@@ -64,6 +64,7 @@ import i18n from "../../i18n";
 import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
+  getCategoryTypeByFolderTypeInSection,
 } from "SRC_DIR/helpers/utils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
 
@@ -254,9 +255,14 @@ export function fetchFilesImpl(
 
       runInAction(() => {
         if (!self.publicRoomStore.isPublicRoom) {
-          self.categoryType = getCategoryTypeByFolderType(
+          const isInFormRoom =
+            data.current.roomType === RoomsType.FormRoom ||
+            data.current.parentRoomType === FolderType.FormRoom;
+
+          self.categoryType = getCategoryTypeByFolderTypeInSection(
             data.current.rootFolderType,
             data.current.parentId,
+            { roomType: isInFormRoom ? RoomsType.FormRoom : undefined },
           );
         }
       });
@@ -495,7 +501,8 @@ export function fetchFilesImpl(
             filter.withSubfolders ||
             filter.filterType ||
             filter.searchInContent ||
-            filter.location;
+            filter.location ||
+            filter.hasMetadataFilter();
 
           if (isFiltered) {
             self.setIsEmptyPage(false);
@@ -804,7 +811,8 @@ export function fetchRoomsImpl(
               searchInContentRooms ||
               tags ||
               withoutTags ||
-              filter.quotaFilter;
+              filter.quotaFilter ||
+              filter.hasMetadataFilter();
 
             if (isFiltered) {
               self.setIsEmptyPage(false);
@@ -1061,10 +1069,16 @@ export async function fetchMoreFilesImpl(self: FilesStore) {
   )
     return;
 
-  const { isRoomsFolder, isArchiveFolder, isAIAgentsFolder, isFormsFolder } =
-    self.treeFoldersStore;
+  const {
+    isRoomsFolder,
+    isArchiveFolder,
+    isTemplatesFolder,
+    isAIAgentsFolder,
+    isFormsFolder,
+  } = self.treeFoldersStore;
 
-  const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+  const isRooms =
+    isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
 
   self.setFilesIsLoading(true);
   // console.log("fetchMoreFiles");

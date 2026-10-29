@@ -39,6 +39,7 @@ import React from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import ForeignTextGuard from "@docspace/shared/components/foreign-text-guard";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -78,7 +79,12 @@ export const Providers = ({
   const confirmType = searchParams?.get("type");
 
   let shouldRedirect = true;
-  if (redirectURL === "/unavailable" && confirmType === "PortalContinue") {
+  // The links that bring a deactivated or a blocked portal back must open
+  // their confirmation page instead of the unavailable one.
+  if (
+    redirectURL === "/unavailable" &&
+    (confirmType === "PortalContinue" || confirmType === "PortalUnblock")
+  ) {
     shouldRedirect = false;
   }
 
@@ -130,6 +136,7 @@ export const Providers = ({
           firebaseHelper={firebaseHelper}
         >
           <RootTooltip />
+          <ForeignTextGuard />
           {shouldRedirect && redirectURL && pathName !== redirectURL
             ? null
             : children}

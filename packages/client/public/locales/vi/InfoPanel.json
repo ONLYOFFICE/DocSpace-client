@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "từ «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Phòng «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Phần «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Không gian «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Ph phản hồi bằng AI",
   "FormRoomAIModalConnect": "Kết cơ dữ liệu",
   "FormRoomAIModalDescription": "Kết nối cơ sở dữ liệu để phân tích tất cả các phản hồi đã thu thập bằng \"Hỏi AI\". Bạn có thể tiếp tục mà không cần kết nối và chỉ hỏi về biểu mẫu này.",

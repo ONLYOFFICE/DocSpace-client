@@ -1,26 +1,26 @@
 {
   "key_path": "EmptyAIAgentsUserTitle",
-  "content": "No {{aiAgents}} available yet",
-  "content_en_sha1_hash": "4331963c254d9449870c6ee9b9137fa979134fc7",
-  "created_at": "2025-12-19T13:03:52.836Z",
-  "updated_at": "2026-08-21T15:04:37.049Z",
+  "content": "No AI agents available yet",
+  "content_en_sha1_hash": "f17b97907f44cdd4598cd4333119a9c7a1e7292b",
+  "created_at": "2026-10-16T12:03:02.154Z",
+  "updated_at": "2026-10-22T16:09:36.818Z",
   "comment": {
-    "text": "This is a message displayed when no AI agents are configured for the current user. It appears in an empty state view and includes a variable `{{aiAgents}}` which will be replaced by the localized term for \"AI Agents\".",
+    "text": "Title on the empty AI agents screen when the user has no AI agents yet; inflect \"AI agents\" as the negation requires.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:07:06.291Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-10-16T12:03:59.839Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 271,
-      "context": "return t(\"EmptyView:EmptyViewDescription\");\n };\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });",
+      "line_number": 273,
+      "context": "return t(\"EmptyView:EmptyViewDescription\");\n };\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\")\n : t(\"Common:EmptyAIAgentsTitle\");\n };\n \n const getAIAgentsAIDisabledTitle = (\n t: TTranslation,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 126,
-      "context": "// SDK is embedded and always behaves as standalone w.r.t. AI configuration.\n const standalone = true;\n \n const title = aiReady\n ? isVisitor\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue: \"No {{aiAgents}} yet\",\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),",
+      "line_number": 128,
+      "context": "// SDK is embedded and always behaves as standalone w.r.t. AI configuration.\n const standalone = true;\n \n const title = aiReady\n ? isVisitor\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n defaultValue: \"No AI agents yet\",\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n defaultValue: \"Create your first AI agent\",\n })",
       "module": "/packages/sdk"
     }
   ],
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

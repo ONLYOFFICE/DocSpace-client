@@ -1,32 +1,26 @@
 {
   "key_path": "EmptyAIAgentsAIDisabledDescription",
-  "content": "This section allows users to work with {{aiAgents}} — smart assistants for handling documents and other tasks. \nTo start using them, the AI features service must be enabled by the Full admin.",
-  "content_en_sha1_hash": "ef22e271d5428e2252d7c0887307bd00438b88a4",
-  "created_at": "2026-08-13T14:36:48.030Z",
-  "updated_at": "2026-08-21T15:04:37.050Z",
+  "content": "This section allows users to work with AI agents — smart assistants for handling documents and other tasks. \nTo start using them, the AI agents & tools service must be enabled by the Full admin.",
+  "content_en_sha1_hash": "efd37d41864fb9d950e1fcc8a31e56bef607ee43",
+  "created_at": "2026-10-16T12:03:01.927Z",
+  "updated_at": "2026-10-22T16:09:36.819Z",
   "comment": {
-    "text": "Informational text in an empty state or \"no access\" screen explaining that AI features are disabled until activated by an admin. Includes a variable {{aiAgents}} representing the name of the smart assistants.",
+    "text": "Description on the empty AI agents screen when AI agents & tools are not enabled, explaining what AI agents are and that the Full admin must enable the service.",
     "is_auto": true,
-    "updated_at": "2026-08-13T14:52:59.613Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-16T12:03:59.839Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
-      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
-      "line_number": 93,
-      "context": "</Text>\n </>\n ))\n // standalone user\n .with([true, false], () =>\n t(\"EmptyAIAgentsAIDisabledDescription\", {\n aiAgents: t(\"AIAgents\"),\n }),\n )\n // saas user\n .otherwise(() => t(\"EmptyAIDisabledContactAdminDesc\"));",
-      "module": "@onlyoffice/apps-ui-kit"
-    },
-    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 325,
-      "context": "{t(\"Common:EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n </>\n ))\n .with([true, false], () =>\n t(\"Common:EmptyAIAgentsAIDisabledDescription\", {\n aiAgents: t(\"Common:AIAgents\"),\n }),\n )\n .otherwise(() => t(\"Common:EmptyAIDisabledContactAdminDesc\"));\n };",
+      "line_number": 318,
+      "context": "<Text as=\"span\" style={{ display: \"block\", marginTop: \"8px\" }}>\n {t(\"Common:EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n </>\n ))\n .with([true, false], () => t(\"Common:EmptyAIAgentsAIDisabledDescription\"))\n .otherwise(() => t(\"Common:EmptyAIDisabledContactAdminDesc\"));\n };\n \n const getAIAgentsAIEnabledDescription = (\n t: TTranslation,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 176,
-      "context": "productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue:\n \"{{aiAgents}} are not yet enabled in this {{productName}} portal.\",\n })\n : t(\"Common:EmptyAIAgentsAIDisabledDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue:\n \"Ask your portal admin to enable {{aiAgents}} in {{productName}}.\",\n });",
+      "line_number": 173,
+      "context": "? t(\"Common:EmptyAIAgentsAIDisabledSaasAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue:\n \"AI agents are not yet enabled in this {{productName}} portal.\",\n })\n : t(\"Common:EmptyAIAgentsAIDisabledDescription\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue:\n \"Ask your portal admin to enable AI agents in {{productName}}.\",\n });",
       "module": "/packages/sdk"
     }
   ],

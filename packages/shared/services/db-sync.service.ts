@@ -33,11 +33,17 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { pipe, delay, stopWhen } from "@onlyoffice/apps-ui-kit/utils/pipe";
-
 import { externalDbSync } from "../api/rooms";
 import { DistributedTaskStatus } from "../enums";
 import type { ExternalSyncDB } from "../api/rooms/types";
+import { pollTask, type TTaskLiveness } from "../utils/poll-task";
+
+// The sync publishes its percentage after every ten forms it goes through, and
+// nothing keeps it published in between.
+const DB_SYNC_LIVENESS: TTaskLiveness = {
+  kind: "progress",
+  stallTimeoutMs: 2 * 60 * 1000,
+};
 
 export class DbSyncService {
   static assertTaskSucceeded(task: ExternalSyncDB): void {
@@ -52,30 +58,13 @@ export class DbSyncService {
   static poll(
     roomId: number,
     onProgress: (task: ExternalSyncDB) => void,
-    maxAttempts = 120,
   ): Promise<ExternalSyncDB> {
-    let attempts = 0;
-
-    const step: () => Promise<ExternalSyncDB> = pipe(
-      delay(1000),
-      () => {
-        if (++attempts > maxAttempts) throw new Error("DB sync timed out");
-        return externalDbSync(roomId) as Promise<ExternalSyncDB>;
-      },
-      (task) => {
-        onProgress(task);
-        return task;
-      },
-      stopWhen(
-        (task) => task.isCompleted,
-        (task) => {
-          DbSyncService.assertTaskSucceeded(task);
-          return task;
-        },
-        () => step(),
-      ),
-    );
-
-    return step();
+    return pollTask({
+      name: "DB sync",
+      fetchTask: () => externalDbSync(roomId),
+      onProgress,
+      assertSucceeded: DbSyncService.assertTaskSucceeded,
+      liveness: DB_SYNC_LIVENESS,
+    });
   }
 }

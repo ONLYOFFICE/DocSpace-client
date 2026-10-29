@@ -53,6 +53,7 @@ import type { TDocsConnectPageState } from "@onlyoffice/apps-ui-kit/billing/type
 import config from "PACKAGE_FILE";
 
 import {
+  getDocsConnectPlanDevPack,
   getDocsConnectPricePerUser,
   getDocsConnectScheduledState,
   getDocsConnectTrialState,
@@ -121,6 +122,9 @@ const ServicePage = (props: ServicePageProps) => {
 
   const onViewUsage = () => navigateToRoute("/billing/usage");
 
+  const onOpenLimits = () =>
+    navigateToRoute("/portal-settings/ai-settings/limits");
+
   const renderDocsConnect = () => {
     if (docsConnectLoading) return <BackupPageLoader />;
 
@@ -151,7 +155,7 @@ const ServicePage = (props: ServicePageProps) => {
       planUsers,
       pricePerUser,
       basePricePerUser: docsConnectInfo.prices?.pricePerUser ?? 0,
-      devPackEnabled: docsConnectInfo.devPackEnabled ?? false,
+      devPackEnabled: getDocsConnectPlanDevPack(docsConnectInfo),
       monthlyCharge: planUsers * pricePerUser,
       scheduledChange:
         scheduled.scheduledUsers == null
@@ -211,6 +215,7 @@ const ServicePage = (props: ServicePageProps) => {
           onOpenSupportedModels={() =>
             navigateToRoute("/portal-settings/ai-settings/ai-models")
           }
+          onOpenLimits={onOpenLimits}
         />
       ) : null}
       {pathname.includes("ai-search") ? (
@@ -221,6 +226,7 @@ const ServicePage = (props: ServicePageProps) => {
           onOpenWebSearch={() =>
             navigateToRoute("/portal-settings/ai-settings/web-search")
           }
+          onOpenLimits={onOpenLimits}
         />
       ) : null}
       {pathname.includes("backup") ? (

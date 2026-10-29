@@ -99,6 +99,20 @@ const TRANSACTIONS = [
   },
 ];
 
+const AI_TOKEN_TRANSACTION = {
+  ...TRANSACTIONS[0],
+  service: "ai-tools",
+  tokenUsage: {
+    totalTokens: 1500,
+    promptTokens: 1000,
+    completionTokens: 500,
+    cachedTokens: 400,
+    cacheWriteTokens: 100,
+    reasoningTokens: 0,
+    imageTokens: 0,
+  },
+};
+
 // The selector drops the signed-in user and reads a flat { response: [...] }.
 const CONTACT = {
   id: "contact-user-id",
@@ -294,6 +308,26 @@ test.describe("Billing wallet", () => {
     await expectScreenshot(page, ["desktop", "wallet", "transactions.png"]);
   });
 
+  test("an AI charge shows its token usage in the wallet history", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(operationsHandler([AI_TOKEN_TRANSACTION, TRANSACTIONS[1]]));
+
+    await openWallet(page, baseUrl);
+
+    const anchor = page.getByTestId("transaction_token_usage");
+    await expect(anchor).toHaveAttribute("data-cached", "true");
+    await anchor.click();
+
+    const tooltip = page.getByTestId("token_usage_content");
+    await expect(tooltip).toContainText("Token usage: 1,500");
+    await expect(tooltip).toContainText("400 (40%)");
+
+    await expectScreenshot(page, ["desktop", "wallet", "token-usage.png"]);
+  });
+
   test("an untouched wallet says the history is still empty", async ({
     page,
     baseUrl,
@@ -480,9 +514,11 @@ test.describe("Billing wallet", () => {
 
     await page.getByTestId("upcoming-payments_tab").click();
 
-    await expect(page.getByText("No upcoming payments")).toBeVisible();
     await expect(
-      page.getByText("You don’t have any active subscriptions"),
+      page.getByRole("heading", { name: "No upcoming payments" }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("No active subscriptions or scheduled payments yet"),
     ).toBeVisible();
   });
 

@@ -490,6 +490,12 @@ class SettingsStore {
     return this.externalResources?.common?.entries.license;
   }
 
+  // The sign-up page links the same two entries: `license` as the terms,
+  // `legalterms` as the privacy statement.
+  get privacyPolicyUrl() {
+    return this.externalResources?.common?.entries.legalterms;
+  }
+
   get ldapSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.ldap
       ? `${this.helpCenterDomain}${this.helpCenterEntries.ldap}`
@@ -1170,6 +1176,13 @@ class SettingsStore {
     return this.tenantStatus === TenantStatus.PortalDeactivate;
   }
 
+  // A portal blocked by the retention policy refuses every API request but
+  // settings, the confirm-link check and its own unblocking, and nobody can
+  // sign in to it, so the client treats it like a deactivated one.
+  get isPortalBlocked() {
+    return this.tenantStatus === TenantStatus.PortalBlocked;
+  }
+
   get isPortalRestoring() {
     return this.tenantStatus === TenantStatus.PortalRestore;
   }
@@ -1180,7 +1193,7 @@ class SettingsStore {
     try {
       await Promise.all([this.getPortalSettings(), this.getAppearanceTheme()]);
 
-      if (!this.isPortalDeactivate) {
+      if (!this.isPortalDeactivate && !this.isPortalBlocked) {
         await this.getBuildVersionInfo();
       }
     } catch (error) {

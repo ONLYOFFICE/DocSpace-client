@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Баджовете открояват активността по файловете, като качвания, редакции и споделяния, в приложенията {{files}}, {{rooms}}, {{forms}} и {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Баджовете открояват активността по файловете, като качвания, редакции и споделяния, в приложенията {{files}}, {{rooms}}, {{forms}} и ИИ агенти.",
   "AdminSetupRequired": "Необходима е административна настройка",
   "Badges": "Баджове",
   "DailyFeed": "Ежедневен {{organizationName}} {{productName}} фийд",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "Този потребителски акаунт е зареден от LDAP. Имейл адресът на потребителя не е посочен и текущият е генериран автоматично и не може да се използва за изпращане на известия.",
   "NotConfigured": "Не е конфигурирано",
   "Notifications": "Известия",
-  "RoomsActivityDescription": "Получавайте незабавни известия по имейл за нови споделени файлове и папки и за активността в {{files}}, {{rooms}}, {{forms}} и {{aiAgents}}.",
-  "RoomUpdateNotify": "Активност в {{files}}, {{rooms}}, {{forms}} и {{aiAgents}}",
+  "RoomsActivityDescription": "Получавайте незабавни известия по имейл за нови споделени файлове и папки и за активността в {{files}}, {{rooms}}, {{forms}} и ИИ агенти.",
+  "RoomUpdateNotify": "Активност в {{files}}, {{rooms}}, {{forms}} и ИИ агенти",
   "SettingUpNotifications": "Настройки на известия",
   "SuccessConnected": "{{serviceName}} беше успешно свързан като канал за известия. Сега ще получавате актуализации там.",
   "SuccessDisconnected": "{{serviceName}} беше успешно премахнат като канал за известия. Известия вече няма да се изпращат там.",

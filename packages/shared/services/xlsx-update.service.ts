@@ -33,8 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { pipe, delay, stopWhen } from "@onlyoffice/apps-ui-kit/utils/pipe";
-
 import {
   getProgressXlsx,
   updateXlsxFile,
@@ -42,8 +40,21 @@ import {
 } from "../api/files";
 import { DistributedTaskStatus } from "../enums";
 import type { UpdateXlsxResponse } from "../api/files/types";
+import { pollTask, type TTaskLiveness } from "../utils/poll-task";
 
 type XlsxTask = UpdateXlsxResponse["task"];
+
+// A report shows the recovery of the form's responses first, and its
+// percentage may hold for as long as the recovery takes (queued behind other
+// recoveries, waiting for another user's one, building older versions). The
+// server keeps the report published all the while instead, so -- as agreed
+// with it -- a report that is there and not completed is alive, and one
+// missing for longer than its queue's one-minute unregister window, with a
+// margin, has failed.
+const XLSX_UPDATE_LIVENESS: TTaskLiveness = {
+  kind: "presence",
+  missingTimeoutMs: 75 * 1000,
+};
 
 export class XlsxUpdateService {
   /**
@@ -67,36 +78,19 @@ export class XlsxUpdateService {
   }
 
   /**
-   * Polls task progress until completion, calling onProgress on each tick.
+   * Polls the task of the form until completion, calling onProgress on each
+   * tick. The server keeps one task per form, so the form id finds it.
    */
   static poll(
-    itemId: number,
-    taskId: string,
+    formId: number,
     onProgress: (task: XlsxTask) => void,
-    maxAttempts = 120,
   ): Promise<XlsxTask> {
-    let attempts = 0;
-
-    const step: () => Promise<XlsxTask> = pipe(
-      delay(1000),
-      () => {
-        if (++attempts > maxAttempts) throw new Error("XLSX update timed out");
-        return getProgressXlsx(itemId) as Promise<XlsxTask>;
-      },
-      (task) => {
-        onProgress(task);
-        return task;
-      },
-      stopWhen(
-        (task) => task.isCompleted,
-        (task) => {
-          XlsxUpdateService.assertTaskSucceeded(task);
-          return task;
-        },
-        () => step(),
-      ),
-    );
-
-    return step();
+    return pollTask({
+      name: "XLSX update",
+      fetchTask: () => getProgressXlsx(formId),
+      onProgress,
+      assertSucceeded: XlsxUpdateService.assertTaskSucceeded,
+      liveness: XLSX_UPDATE_LIVENESS,
+    });
   }
 }

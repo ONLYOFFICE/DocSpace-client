@@ -1,0 +1,29 @@
+{
+  "key_path": "DeleteFieldsDescription",
+  "content": "The removed fields will be deleted together with their values in all files, folders and rooms. This action cannot be undone.",
+  "content_en_sha1_hash": "e163b3ade623a8dbeb333ca1b4e5cd9bcc5a3164",
+  "created_at": "2026-10-21T10:17:41.266Z",
+  "updated_at": "2026-10-22T13:13:49.728Z",
+  "comment": {
+    "text": "Body of the Delete fields? dialog shown when saving a metadata template from which fields were removed, warning that their values are erased everywhere.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
+      "line_number": 184,
+      "context": "</ModalDialog>\n \n {isDeleteConfirmVisible ? (\n <ConfirmDeleteDialog\n title={t(\"Metadata:DeleteFieldsTitle\")}\n description={t(\"Metadata:DeleteFieldsDescription\")}\n onDelete={saveAfterConfirm}\n onClose={() => setIsDeleteConfirmVisible(false)}\n />\n ) : null}\n </>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

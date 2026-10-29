@@ -131,10 +131,14 @@ const DeleteDialogComponent = (props) => {
     const translations = {
       successRemoveRoom: isAIAgent
         ? t("Common:AgentRemoved")
-        : t("Common:RoomRemoved"),
+        : isFormSpace
+          ? t("Common:SpaceRemoved")
+          : t("Common:RoomRemoved"),
       successRemoveRooms: isAIAgent
         ? t("Common:AgentsRemoved")
-        : t("Common:RoomsRemoved"),
+        : isFormSpace
+          ? t("Common:SpacesRemoved")
+          : t("Common:RoomsRemoved"),
     };
 
     if (isTemplate) {

@@ -444,6 +444,7 @@ describe("UploadDataStore.loopFilesOperations — polling", () => {
       operationId: "cli-4",
       completed: true,
       alert: false,
+      stopped: true,
     });
   });
 
@@ -655,7 +656,7 @@ describe("UploadDataStore.clearActiveOperations", () => {
 });
 
 describe("UploadDataStore.refreshFiles — mutating the real FilesStore (§3.4.1 foreign state)", () => {
-  it("unshifts a newly uploaded file, bumps filter.total by exactly 1 and setFilesCount by 1", async () => {
+  it("unshifts a newly uploaded file, bumps filter.total by exactly 1 and counts the file once", async () => {
     const { store, fakes, filesStore } = createTestUploadDataStore({
       selectedFolderStore: { filesCount: 5 },
     });
@@ -680,8 +681,8 @@ describe("UploadDataStore.refreshFiles — mutating the real FilesStore (§3.4.1
     expect(filesStore.files[1]).toMatchObject({ id: 11, title: f1.title });
     expect(filesStore.files[2]).toMatchObject({ id: 12, title: f2.title });
     expect(filesStore.filter.total).toBe(3);
-    expect(fakes.selectedFolderStore.setFilesCount).toHaveBeenCalledTimes(1);
-    expect(fakes.selectedFolderStore.setFilesCount).toHaveBeenCalledWith(6);
+    expect(fakes.selectedFolderStore.countFileCreated).toHaveBeenCalledTimes(1);
+    expect(fakes.selectedFolderStore.countFileCreated).toHaveBeenCalledWith(999);
   });
 
   it("replaces the existing entry in place when the file is already listed and storeOriginalFiles is false", async () => {
@@ -703,7 +704,7 @@ describe("UploadDataStore.refreshFiles — mutating the real FilesStore (§3.4.1
     });
     expect(filesStore.files[0]).toMatchObject({ id: 11, title: f1.title });
     expect(filesStore.filter.total).toBe(2);
-    expect(fakes.selectedFolderStore.setFilesCount).not.toHaveBeenCalled();
+    expect(fakes.selectedFolderStore.countFileCreated).not.toHaveBeenCalled();
   });
 
   it("is a no-op when the current view is filtered (filter.search)", async () => {
@@ -718,7 +719,7 @@ describe("UploadDataStore.refreshFiles — mutating the real FilesStore (§3.4.1
 
     expect(filesStore.files.map((f) => f.id)).toEqual([11]);
     expect(filesStore.filter.total).toBe(1);
-    expect(fakes.selectedFolderStore.setFilesCount).not.toHaveBeenCalled();
+    expect(fakes.selectedFolderStore.countFileCreated).not.toHaveBeenCalled();
   });
 
   it("is a no-op when filesStore.showNewFilesInList is false (indexed folder not fully listed)", async () => {
@@ -738,6 +739,6 @@ describe("UploadDataStore.refreshFiles — mutating the real FilesStore (§3.4.1
 
     expect(filesStore.files.map((f) => f.id)).toEqual([5, 6]);
     expect(filesStore.filter.total).toBe(10);
-    expect(fakes.selectedFolderStore.setFilesCount).not.toHaveBeenCalled();
+    expect(fakes.selectedFolderStore.countFileCreated).not.toHaveBeenCalled();
   });
 });

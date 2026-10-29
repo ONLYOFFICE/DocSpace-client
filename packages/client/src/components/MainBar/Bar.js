@@ -45,6 +45,10 @@ import { AnalyticsEvents } from "@onlyoffice/apps-ui-kit/enums";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getBannerAttribute } from "@docspace/shared/utils";
+import {
+  getBannerTheme,
+  withBannerTheme,
+} from "@docspace/shared/utils/banner";
 import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
@@ -53,6 +57,7 @@ import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-compo
 
 import QuotasBar from "./QuotasBar";
 import ConfirmEmailBar from "./ConfirmEmailBar";
+import UserTypeLoweredBar from "./UserTypeLoweredBar";
 
 const WALLET_LOW_BALANCE_CLOSED = "walletLowBalanceClosed";
 
@@ -85,6 +90,7 @@ const Bar = (props) => {
     isUserTariffAlmostLimit,
 
     currentColorScheme,
+    isBaseTheme,
 
     setMainBarVisible,
     isPersonalQuotaLimit,
@@ -102,6 +108,9 @@ const Bar = (props) => {
     walletCustomerEmail,
     walletCustomerDisplayName,
     language,
+
+    isUserTypeLoweredBarVisible,
+    setIsUserTypeLoweredBarVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -129,6 +138,9 @@ const Bar = (props) => {
   const [campaigns, setCampaigns] = useState();
 
   const { loadLanguagePath } = getBannerAttribute();
+
+  const isBaseThemeRef = React.useRef(isBaseTheme);
+  isBaseThemeRef.current = isBaseTheme;
 
   const onCloseQuota = (currentBar) => {
     // The tariff bars stay closed for good — they are resolved by an upgrade.
@@ -332,9 +344,12 @@ const Bar = (props) => {
     }
 
     try {
-      const [htmlUrl, currentBar] = await loadLanguagePath();
+      const [htmlUrl, currentBar] = await loadLanguagePath(
+        getBannerTheme(isBaseThemeRef.current),
+      );
 
-      setHtmlLink(htmlUrl);
+      // The theme may have flipped while the page was being checked.
+      setHtmlLink(withBannerTheme(htmlUrl, isBaseThemeRef.current));
       setCampaigns(currentBar);
     } catch (e) {
       console.error(e);
@@ -356,6 +371,12 @@ const Bar = (props) => {
   useEffect(() => {
     updateBanner();
   }, [t]);
+
+  // A theme switch re-themes the campaign on screen rather than calling
+  // updateBanner, which would advance the rotation to the next campaign.
+  useEffect(() => {
+    setHtmlLink((link) => withBannerTheme(link, isBaseTheme));
+  }, [isBaseTheme]);
 
   // The backend re-arms its own notification once the balance recovers, so the
   // dismissal is dropped on the same edge. Guarded on the true -> false
@@ -526,6 +547,7 @@ const Bar = (props) => {
 
   React.useEffect(() => {
     const newValue =
+      (isUserTypeLoweredBarVisible && tReady) ||
       showQuotasBar ||
       (withActivationBar && barVisible.confirmEmail && tReady) ||
       (htmlLink && !firstLoad && tReady);
@@ -536,6 +558,7 @@ const Bar = (props) => {
       setMainBarVisible(false);
     };
   }, [
+    isUserTypeLoweredBarVisible,
     showQuotasBar,
     withActivationBar,
     barVisible.confirmEmail,
@@ -557,6 +580,11 @@ const Bar = (props) => {
     setMaintenanceExist(true);
   };
 
+  const onCloseUserTypeLoweredBar = () => {
+    setIsUserTypeLoweredBarVisible(false);
+    setMaintenanceExist(false);
+  };
+
   const topUpDialog = isTopUpVisible ? (
     <ClientSimpleTopUpDialog
       visible={isTopUpVisible}
@@ -565,6 +593,18 @@ const Bar = (props) => {
       service=""
     />
   ) : null;
+
+  // A lowered user type outranks every other bar: until the page is reloaded,
+  // parts of it keep acting on rights the user no longer has.
+  if (isUserTypeLoweredBarVisible && tReady) {
+    return (
+      <UserTypeLoweredBar
+        currentColorScheme={currentColorScheme}
+        onLoad={onLoad}
+        onClose={onCloseUserTypeLoweredBar}
+      />
+    );
+  }
 
   return showQuotasBar ? (
     <>
@@ -609,6 +649,7 @@ export default inject(
     currentTariffStatusStore,
     paymentStore,
     authStore,
+    peopleStore,
   }) => {
     const { user, withActivationBar, sendActivationLink } = userStore;
 
@@ -636,13 +677,15 @@ export default inject(
       isRoomsTariffLimit,
     } = currentQuotaStore;
 
-    const { currentColorScheme, setMainBarVisible } = settingsStore;
+    const { currentColorScheme, setMainBarVisible, theme } = settingsStore;
 
     const { formatWalletCurrency, isPayer } = paymentStore;
     const { walletLowBalance } = settingsStore;
     const { language } = authStore;
     const { walletCustomerEmail, walletCustomerInfo } =
       currentTariffStatusStore;
+    const { isUserTypeLoweredBarVisible, setIsUserTypeLoweredBarVisible } =
+      peopleStore.usersStore;
 
     return {
       isAdmin: user?.isAdmin || user?.isOwner,
@@ -667,6 +710,7 @@ export default inject(
       isUserTariffAlmostLimit,
 
       currentColorScheme,
+      isBaseTheme: theme?.isBase,
       setMainBarVisible,
 
       isPersonalQuotaLimit,
@@ -684,6 +728,9 @@ export default inject(
       isPayer,
       walletCustomerEmail,
       walletCustomerDisplayName: walletCustomerInfo?.displayName,
+
+      isUserTypeLoweredBarVisible,
+      setIsUserTypeLoweredBarVisible,
     };
   },
 )(withTranslation(["Profile", "Common"])(observer(Bar)));

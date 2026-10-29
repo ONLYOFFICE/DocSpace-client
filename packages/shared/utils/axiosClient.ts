@@ -128,6 +128,8 @@ class AxiosClient {
 
   private oauthSignedOut = false;
 
+  private forbiddenHandler: (() => void) | null = null;
+
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
   }
@@ -389,6 +391,16 @@ class AxiosClient {
     if (this.client) this.client.defaults.withCredentials = state;
   };
 
+  /**
+   * Called when a room-section request answers 403 Forbidden. The app decides
+   * how to tell the user; the client itself no longer navigates away, since a
+   * single denied side request used to throw every open room tab back to the
+   * default page (e.g. after the user's type was lowered).
+   */
+  setForbiddenHandler = (handler: (() => void) | null) => {
+    this.forbiddenHandler = handler;
+  };
+
   setClientBasePath = (path: string) => {
     if (!path || !this.client) return;
 
@@ -473,6 +485,26 @@ class AxiosClient {
         };
       }
 
+      // The OAuth service answers with an RFC 7807 problem detail instead of
+      // the { error: { message } } envelope that toastr reads, so its
+      // explanation used to be replaced by axios's "status code 400" text.
+      const problem = error?.response?.data as
+        | { detail?: unknown; error?: unknown }
+        | undefined;
+      if (
+        isOAuth &&
+        error.response &&
+        problem &&
+        !problem.error &&
+        typeof problem.detail === "string" &&
+        problem.detail
+      ) {
+        error.response.data = {
+          ...problem,
+          error: { message: problem.detail },
+        };
+      }
+
       const loginURL = combineUrl(proxyURL, "/login");
 
       if (!this.isSSR) {
@@ -529,6 +561,22 @@ class AxiosClient {
             };
 
             w.__redirectToLogin = true;
+
+            // The page the session ran out on, so logging in again brings the
+            // user back to it rather than to the default page. The login page
+            // itself is not kept: it would only send the user back there.
+            if (!window.location.pathname.startsWith("/login")) {
+              sessionStorage.setItem("referenceUrl", window.location.href);
+
+              // Named after the user the tab was showing (PrivateRoute keeps
+              // it), so the page is reopened for that user alone and not for
+              // whoever logs in next in this tab.
+              const sessionUserId = sessionStorage.getItem("sessionUserId");
+              if (sessionUserId) {
+                sessionStorage.setItem("loggedOutUserId", sessionUserId);
+              }
+            }
+
             this.request(opt)?.then(() => {
               // Re-check: the guard at the top of onError ran before the
               // logout roundtrip, and /settings may have answered 404 in the
@@ -556,9 +604,7 @@ class AxiosClient {
               pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
             if (isRooms && !skipRedirect && !window?.ClientConfig?.isFrame) {
-              setTimeout(() => {
-                window.DocSpace.navigate(isArchived ? "/archived" : "/");
-              }, 1000);
+              this.forbiddenHandler?.();
             }
 
             break;

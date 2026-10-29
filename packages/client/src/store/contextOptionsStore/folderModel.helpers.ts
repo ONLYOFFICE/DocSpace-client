@@ -348,6 +348,34 @@ export const getFolderModelImpl = (
     });
   }
 
+  // Instructions and Knowledge rooms are flat and hold one kind of file: no
+  // folders and no folder upload. An Instructions room creates Markdown
+  // only (its files are the skills); a Knowledge room only uploads (its
+  // files are indexed, never edited), and not at all while vectorization
+  // is off.
+  if (
+    roomType === RoomsType.InstructionsRoom ||
+    roomType === RoomsType.KnowledgeRoom
+  ) {
+    const vectorizationEnabled =
+      self.settingsStore.aiConfig?.vectorizationEnabled !== false;
+    const createNewMarkdown: TContextOption = {
+      id: "personal_new-markdown",
+      key: "new-markdown",
+      label: t("Common:MarkdownFile"),
+      icon: ActionsDocumentsReactSvgUrl,
+      onClick: () => self.onCreate("md", t),
+    };
+    const sourceRoomOptions: TContextOption[] =
+      roomType === RoomsType.InstructionsRoom
+        ? [createNewMarkdown, { key: "separator", isSeparator: true }, uploadFiles]
+        : vectorizationEnabled
+          ? [uploadFiles]
+          : [];
+
+    return sourceRoomOptions.length > 0 ? sourceRoomOptions : null;
+  }
+
   const showUploadFolder = !(isMobile || isTablet);
 
   const canCreateEncrypted = self.uploadDataStore.shouldEncryptCurrentUpload();

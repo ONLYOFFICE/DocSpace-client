@@ -39,11 +39,14 @@ import { observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import type { TAiProject, TAiProjectSource } from "@docspace/shared/api/ai/projects";
+import { useStore } from "SRC_DIR/store/useStore";
 
 import { ProjectLogo } from "../list/ProjectLogo";
 import RoomItem from "./RoomItem";
+import { isManager } from "../../utils";
 import styles from "./ProjectIntro.module.scss";
 
 /** Rooms of a kind shown before the rest fold into a "+N" chip. */
@@ -107,6 +110,12 @@ type ProjectIntroProps = {
 export const ProjectIntro = observer(({ project }: ProjectIntroProps) => {
   const { t } = useTranslation(["Common"]);
   const { useProfilesStore } = useStores();
+  const aiProjectsStore = useStore("aiProjectsStore");
+  // The stored model is gone or cannot chat: no round can run until it is
+  // changed, so the intro says so instead of the model line. Owner and
+  // managers get the Edit project action, members are told to ask one.
+  const modelUnavailable = project.aiProject.profile?.available === false;
+  const canEdit = isManager(project);
   // The model the composer shows: the one picked for this chat, else the
   // chat default, else the portal default (ai-chat's current chat profile).
   const currentModel = useProfilesStore((s) => (s.sessionChatProfile ?? s.chatProfile ?? s.defaultProfile)?.name);
@@ -122,14 +131,34 @@ export const ProjectIntro = observer(({ project }: ProjectIntroProps) => {
       <Text fontSize="16px" fontWeight={700} lineHeight="22px" className={styles.title} truncate>
         {project.title}
       </Text>
-      <Text fontSize="13px" lineHeight="20px" className={styles.description}>
-        <Trans
-          t={t}
-          i18nKey="Common:AIProjectIntroModel"
-          values={{ model }}
-          components={{ 1: <strong className={styles.model} /> }}
-        />
-      </Text>
+      {modelUnavailable ? (
+        <div className={styles.modelError} role="alert" data-testid="ai-project-model-unavailable">
+          <Text fontSize="13px" fontWeight={600} lineHeight="20px">
+            {t("Common:AIProjectModelUnavailableTitle")}
+          </Text>
+          <Text fontSize="13px" lineHeight="20px" className={styles.description}>
+            {canEdit ? t("Common:AIProjectModelUnavailableManager") : t("Common:AIProjectModelUnavailableMember")}
+          </Text>
+          {canEdit ? (
+            <Button
+              size={ButtonSize.small}
+              primary
+              label={t("Common:AIProjectEdit")}
+              onClick={() => aiProjectsStore.openEditDialog(project)}
+              testId="ai-project-model-unavailable-edit"
+            />
+          ) : null}
+        </div>
+      ) : (
+        <Text fontSize="13px" lineHeight="20px" className={styles.description}>
+          <Trans
+            t={t}
+            i18nKey="Common:AIProjectIntroModel"
+            values={{ model }}
+            components={{ 1: <strong className={styles.model} /> }}
+          />
+        </Text>
+      )}
       {instructionsRooms.length > 0 || knowledgeRooms.length > 0 ? (
         <div className={styles.sources}>
           {instructionsRooms.length > 0 ? (

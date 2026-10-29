@@ -149,7 +149,8 @@ const AiProjects = ({
   // Same readiness rule and activation flow as the AI agents section: on a
   // standalone portal AI is ready once a chat profile exists, on SaaS once the
   // AI service is on. Until the profiles are loaded the state is unknown, so
-  // the page keeps its loader instead of flashing the "AI is off" view.
+  // the "AI is off" view is held back (the list or the empty state shows
+  // meanwhile, without its create action) instead of flashing.
   const { aiReady, activation, topUpDialog } = useChatNoAccess(aiNoAccessStores);
   const { useProfilesStore, useRouter } = useStores();
   const profilesInitialized = useProfilesStore((s) => s.initialized);
@@ -459,6 +460,7 @@ const AiProjects = ({
         <EmptyProjects
           kind={showAiOff ? "ai-off" : store.isFiltered ? "filter" : "empty"}
           canManage={canManage}
+          canCreate={canCreate}
           isAdmin={isAdmin}
           standalone={!!aiNoAccessStores.standalone}
           isCardLinkedToPortal={!!aiNoAccessStores.isCardLinkedToPortal}

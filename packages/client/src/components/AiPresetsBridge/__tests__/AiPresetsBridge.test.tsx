@@ -30,6 +30,8 @@ class FakeAiChatStore {
 
   folderContextPickerEnabled = false;
 
+  knowledgePickerHidden = false;
+
   applyPreset = vi.fn();
 
   constructor() {
@@ -42,6 +44,10 @@ class FakeAiChatStore {
 
   setOnSavePreset = (hook: unknown) => {
     this.onSavePreset = hook;
+  };
+
+  setKnowledgePickerHidden = (value: boolean) => {
+    this.knowledgePickerHidden = value;
   };
 
   setProjectTitle = (title: string | null) => {
@@ -112,11 +118,15 @@ const settings = {
 
 const renderBridge = (
   aiPresetsStore: AiPresetsStore,
-  { path = "/rooms/shared", user = { id: "u1", isAdmin: true } as object | null } = {},
+  {
+    path = "/rooms/shared",
+    user = { id: "u1", isAdmin: true } as object | null,
+    aiConfig = null as { vectorizationEnabled: boolean } | null,
+  } = {},
 ) =>
   render(
     <MemoryRouter initialEntries={[path]}>
-      <Provider aiPresetsStore={aiPresetsStore} userStore={{ user }}>
+      <Provider aiPresetsStore={aiPresetsStore} userStore={{ user }} settingsStore={{ aiConfig }}>
         <AiPresetsBridge />
       </Provider>
     </MemoryRouter>,
@@ -229,5 +239,38 @@ describe("AiPresetsBridge", () => {
     act(() => aiChatStore.setIsVisible(false));
     expect(store.activePreset).toBeNull();
     expect(aiChatStore.projectTitle).toBeNull();
+    // The model and every room of the project go too.
+    expect(aiChatStore.applyPreset).toHaveBeenLastCalledWith({
+      profileId: null,
+      profileName: null,
+      contextRooms: [],
+      knowledgeRooms: [],
+    });
+  });
+
+  it("hides the composer's knowledge base picker while vectorization is off", async () => {
+    const store = new AiPresetsStore();
+    const { unmount } = renderBridge(store, { aiConfig: { vectorizationEnabled: false } });
+    await flush();
+    expect(aiChatStore.knowledgePickerHidden).toBe(true);
+    unmount();
+    expect(aiChatStore.knowledgePickerHidden).toBe(false);
+  });
+
+  it("keeps the knowledge base picker while vectorization is on or unknown", async () => {
+    const store = new AiPresetsStore();
+    renderBridge(store, { aiConfig: { vectorizationEnabled: true } });
+    await flush();
+    expect(aiChatStore.knowledgePickerHidden).toBe(false);
+  });
+
+  it("leaves a chat no project was applied to as it is when it closes", async () => {
+    const store = new AiPresetsStore();
+    renderBridge(store);
+    await flush();
+
+    act(() => aiChatStore.setIsVisible(true));
+    act(() => aiChatStore.setIsVisible(false));
+    expect(aiChatStore.applyPreset).not.toHaveBeenCalled();
   });
 });

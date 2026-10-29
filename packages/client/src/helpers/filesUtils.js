@@ -93,6 +93,8 @@ export const getDefaultFileName = (format) => {
       return i18n.t("Common:NewPresentation");
     case "pdf":
       return i18n.t("Common:NewPDFForm");
+    case "md":
+      return i18n.t("Common:NewMarkdown");
     default:
       return i18n.t("Common:NewFolder");
   }
@@ -108,6 +110,8 @@ export const getDefaultFileTestIdPrefix = (format) => {
       return "new_presentation";
     case "pdf":
       return "new_pdf_form";
+    case "md":
+      return "new_markdown";
     default:
       return "new_folder";
   }

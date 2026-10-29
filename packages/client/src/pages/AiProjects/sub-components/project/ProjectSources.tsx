@@ -202,11 +202,16 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   const filesSettingsStore = useStore("filesSettingsStore");
   const filesActionsStore = useStore("filesActionsStore");
   // Rooms start collapsed; each opens to its skills or its files on demand.
+  // The list is read from the server when the row opens and stays as read
+  // while it is open: the next expand reads it again.
   const [expanded, setExpanded] = React.useState<ReadonlySet<string>>(new Set());
-  const toggle = (key: string) =>
+  const toggle = (key: string, onExpand: () => void) =>
     setExpanded((prev) => {
       const next = new Set(prev);
-      if (!next.delete(key)) next.add(key);
+      if (!next.delete(key)) {
+        next.add(key);
+        onExpand();
+      }
       return next;
     });
 
@@ -236,7 +241,10 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   const contextLogo = contextFolder ? (contextFolder as Partial<TRoom>).logo : undefined;
 
   const canEdit = isManager(project);
-  const { instructionsRooms, knowledgeRooms } = project.aiProject;
+  // A linked room the caller can no longer read is not connected to the chat
+  // and not drawn in the intro, so the cards leave it out as well.
+  const instructionsRooms = project.aiProject.instructionsRooms.filter((room) => room.available);
+  const knowledgeRooms = project.aiProject.knowledgeRooms.filter((room) => room.available);
 
   // Only a chosen folder has a menu; an empty Context is its add button.
   const contextMenu: ContextMenuModel[] | undefined = folderContext
@@ -246,8 +254,8 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
       ]
     : undefined;
 
-  // A kind with no linked room has no card and no tab: the rooms are linked
-  // in Edit project, and an empty card would only say so.
+  // A kind with no available linked room has no card and no tab: the rooms
+  // are linked in Edit project, and an empty card would only say so.
   const instructionsSection = instructionsRooms.length === 0 ? null : (
     <Section
       title={t("Common:AIProjectInstructions")}
@@ -265,7 +273,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
               logo={room.logo}
               icon="instructionsRoom.svg"
               isExpanded={expanded.has(`i-${room.id}`)}
-              onToggle={() => toggle(`i-${room.id}`)}
+              onToggle={() => toggle(`i-${room.id}`, () => void store.fetchSkills(project.id))}
             >
               {skills.length === 0 ? (
                 <Text className={classNames(styles.note, styles.nested)}>{t("Common:AIProjectSkillsEmpty")}</Text>
@@ -310,7 +318,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
               logo={room.logo}
               icon="knowledgeRoom.svg"
               isExpanded={expanded.has(`k-${room.id}`)}
-              onToggle={() => toggle(`k-${room.id}`)}
+              onToggle={() => toggle(`k-${room.id}`, () => void store.fetchKnowledge(project.id))}
             >
               <ul className={classNames(styles.list, styles.nested)}>
                 {files.map((file) => (

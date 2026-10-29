@@ -189,6 +189,7 @@ const Shell = ({ page = "home", ...rest }) => {
     requestPresetApply,
     isAiProjectOpen,
     aiActiveProject,
+    openEditAiProject,
   } = rest;
 
   const [searchParams] = useSearchParams();
@@ -924,6 +925,27 @@ const Shell = ({ page = "home", ...rest }) => {
   // code keeps the library default (localized text + Retry).
   const formatChatError = useCallback(
     (payload) => {
+      // The project's model is gone or cannot chat (409 from the AI
+      // service): the round is refused until someone changes the model.
+      // Owner and managers get the Edit project action, members are told
+      // to ask one of them.
+      if (payload?.code === "projectModelUnavailable") {
+        const canEdit = !!aiActiveProject?.security?.EditRoom;
+        return {
+          title: t("Common:AIProjectModelUnavailableTitle"),
+          description: canEdit
+            ? t("Common:AIProjectModelUnavailableManager")
+            : t("Common:AIProjectModelUnavailableMember"),
+          action:
+            canEdit && aiActiveProject
+              ? {
+                  text: t("Common:AIProjectEdit"),
+                  onClick: () => openEditAiProject(aiActiveProject),
+                }
+              : null,
+        };
+      }
+
       // Standalone pays its AI provider directly: no wallet and no spending
       // limits, so the library default (localized text + Retry) stands.
       if (standalone) return null;
@@ -961,8 +983,13 @@ const Shell = ({ page = "home", ...rest }) => {
           : null,
       };
     },
-    [t, isAdmin, isPayer, navigate, standalone, language],
+    [t, isAdmin, isPayer, navigate, standalone, language, aiActiveProject, openEditAiProject],
   );
+
+  // Inside a project whose model is unavailable nothing can be sent until
+  // the model is changed; the intro says so and offers the change.
+  const isProjectModelUnavailable =
+    isInsideAiProject && aiActiveProject?.aiProject.profile?.available === false;
 
   // AI chat host callbacks. Web Search settings save on an explicit button
   // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.
@@ -1023,7 +1050,9 @@ const Shell = ({ page = "home", ...rest }) => {
           isChatOpen={isChatOpen}
           profilePickerActions={profilePickerActions}
           composerHeader={standalone ? undefined : composerHeader}
-          composerDisabled={standalone ? undefined : !isAIReady}
+          composerDisabled={
+            isProjectModelUnavailable || (standalone ? undefined : !isAIReady)
+          }
           // A chat opened from an AI preset or inside a project starts with
           // no suggestion chips: its sources are the subject, not the page.
           suggestions={
@@ -1219,11 +1248,13 @@ const ShellWrapper = inject(
       // rights of the opened folder / room do not allow are filtered out.
       selectedSecurity: selectedFolderStore.security,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
-      // The current room as a chat-context candidate; a new object per
-      // render, the ui-kit provider memoizes it by id and name.
+      // The Instructions rooms of the project the chat runs on, as its
+      // context rooms; a new array per render, the ui-kit provider memoizes
+      // it by id and name.
       aiPresetContextRooms: aiPresetsStore.activePresetContextRooms,
       isAiProjectOpen: aiProjectsStore.activeProject !== null,
       aiActiveProject: aiProjectsStore.activeProject,
+      openEditAiProject: aiProjectsStore.openEditDialog,
       aiPresets: aiPresetsStore.presets,
       requestPresetApply: aiPresetsStore.requestApply,
       // The Forms section, in both its shapes: the bare Forms root, and a

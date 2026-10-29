@@ -45,6 +45,7 @@ import {
   FileStatus,
   ValidationStatus,
   VectorizationStatus,
+  RoomsType,
 } from "@docspace/shared/enums";
 import { runInAction } from "mobx";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -204,6 +205,31 @@ self: FilesActionStore,
 
     return !isHidden;
   });
+
+  // Instructions and Knowledge rooms are flat, and an Instructions room
+  // holds Markdown only: a dropped or picked folder, or another format, is
+  // refused here before anything is queued (the server refuses them too).
+  const roomType =
+    roomFolder && "roomType" in roomFolder ? roomFolder.roomType : undefined;
+  if (
+    roomType === RoomsType.InstructionsRoom ||
+    roomType === RoomsType.KnowledgeRoom
+  ) {
+    const isInstructions = roomType === RoomsType.InstructionsRoom;
+    const bringsFolder = withoutHiddenFiles.some(
+      (f) => f.isEmptyDirectory || (f.path ?? "").replace(/^\/+/, "").includes("/"),
+    );
+    if (bringsFolder) {
+      throw new Error(
+        isInstructions
+          ? t("Common:InstructionsRoomNoFolders")
+          : t("Common:KnowledgeRoomNoFolders"),
+      );
+    }
+    if (isInstructions && withoutHiddenFiles.some((f) => !f.name.toLowerCase().endsWith(".md"))) {
+      throw new Error(t("Common:InstructionsRoomMarkdownOnly"));
+    }
+  }
 
   const operationId = uniqueid("operation_");
 

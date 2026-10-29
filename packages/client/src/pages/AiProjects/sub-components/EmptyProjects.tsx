@@ -58,6 +58,8 @@ type EmptyProjectsProps = {
   /** `filter`: nothing matches; `ai-off`: AI is not configured; `empty`: no projects. */
   kind: "empty" | "filter" | "ai-off";
   canManage: boolean;
+  /** The page's create check: may manage, the chat is available and AI is ready. */
+  canCreate: boolean;
   isAdmin: boolean;
   onCreate: () => void;
   onClearFilter: () => void;
@@ -79,6 +81,7 @@ type EmptyProjectsProps = {
 export const EmptyProjects = ({
   kind,
   canManage,
+  canCreate,
   isAdmin,
   onCreate,
   onClearFilter,
@@ -140,15 +143,22 @@ export const EmptyProjects = ({
     );
   }
 
+  // The create option follows the page's own create check, as the filter's
+  // button and the quick actions do: while AI is not ready (or its state is
+  // still loading) a manager is only pointed to Rooms.
   const options: EmptyViewOptionsType = canManage
     ? [
-        {
-          key: "create-project",
-          title: t("Common:AIProjectCreate"),
-          description: t("Common:AIProjectCreateDescription"),
-          icon: <CreateProjectIcon />,
-          onClick: onCreate,
-        },
+        ...(canCreate
+          ? [
+              {
+                key: "create-project",
+                title: t("Common:AIProjectCreate"),
+                description: t("Common:AIProjectCreateDescription"),
+                icon: <CreateProjectIcon />,
+                onClick: onCreate,
+              },
+            ]
+          : []),
         {
           key: "go-to-rooms",
           title: t("Common:AIProjectsGoToRooms"),

@@ -55,6 +55,7 @@ export type ExtensionType =
   | "xlsx"
   | "pptx"
   | "pdf"
+  | "md"
   | FolderExtensionType;
 
 export type CreateEvent = Event & {
@@ -122,6 +123,8 @@ export interface InjectedEmptyViewContainerProps
   language?: string;
   templateGalleryAvailable: boolean;
   onShowTemplateGallery: TStore["contextOptionsStore"]["onShowTemplateGallery"];
+  /** Vectorization is on for the portal: a Knowledge room takes uploads. */
+  vectorizationEnabled?: boolean;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

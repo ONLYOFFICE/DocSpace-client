@@ -232,9 +232,18 @@ export const getAccessOptions = (
 		//     accesses.viewer,
 		//   ];
 		//   break;
+		// A Knowledge room has no Editor: its files are sources to index, read
+		// or replaced by an upload, never edited in place.
+		case RoomsType.KnowledgeRoom:
+			options = [
+				accesses.roomManager,
+				{ key: "s1", isSeparator: withSeparator },
+				accesses.contentCreator,
+				accesses.viewer,
+			];
+			break;
 		case RoomsType.EditingRoom:
 		case RoomsType.InstructionsRoom:
-		case RoomsType.KnowledgeRoom:
 			options = [
 				accesses.roomManager,
 				{ key: "s1", isSeparator: withSeparator },

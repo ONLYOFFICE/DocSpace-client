@@ -67,9 +67,16 @@ export const getUserRoleOptionsByRoomType = (
         options.viewer,
         ...deleteOption,
       ];
+    // A Knowledge room has no Editor: its files are only read or uploaded.
+    case RoomsType.KnowledgeRoom:
+      return [
+        options.roomAdmin,
+        options.collaborator,
+        options.viewer,
+        ...deleteOption,
+      ];
     case RoomsType.EditingRoom:
     case RoomsType.InstructionsRoom:
-    case RoomsType.KnowledgeRoom:
       return [
         options.roomAdmin,
         options.collaborator,

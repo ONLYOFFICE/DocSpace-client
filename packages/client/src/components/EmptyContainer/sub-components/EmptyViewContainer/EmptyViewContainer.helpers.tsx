@@ -212,6 +212,7 @@ export const getOptions = (
   trashSection: "personal" | "rooms" | "forms" = "personal",
   isAiChatAvailable: boolean = false,
   isTemplateGalleryAvailable: boolean = false,
+  vectorizationEnabled: boolean = true,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -420,6 +421,23 @@ export const getOptions = (
         ],
       };
 
+  // The flat AI source rooms: an Instructions room holds Markdown skills,
+  // a Knowledge room holds files to index. Neither takes a folder.
+  const createMarkdown: EmptyViewItemType = {
+    title: t("EmptyView:CreateNewFileTitle"),
+    description: t("Common:InstructionsRoomMarkdownOnly"),
+    icon: <CreateNewFormIcon />,
+    key: "create-markdown",
+    disabled: !security?.Create,
+    onClick: () => actions.onCreate("md"),
+  };
+
+  const uploadFilesFromDevice = createUploadFromDeviceOption(
+    t("EmptyView:UploadDeviceOptionTitle"),
+    t("EmptyView:UploadDeviceOptionDescription"),
+    "file",
+  );
+
   const migrationData = {
     title: t("EmptyView:MigrationDataTitle"),
     description: t("EmptyView:MigrationDataDescription", {
@@ -623,8 +641,6 @@ export const getOptions = (
       ];
 
     case RoomsType.CustomRoom:
-    case RoomsType.InstructionsRoom:
-    case RoomsType.KnowledgeRoom:
       if (isNotAdmin) return [];
 
       if (isCollaborator)
@@ -636,6 +652,26 @@ export const getOptions = (
         uploadAllFromDocSpace,
         uploadFromDeviceAnyFile,
       ];
+
+    // Markdown only: created here or uploaded from the device (a pick from
+    // the workspace could bring any format).
+    case RoomsType.InstructionsRoom:
+      if (isNotAdmin) return [];
+
+      if (isCollaborator) return [createMarkdown, uploadFilesFromDevice];
+
+      return [createMarkdown, inviteUser, uploadFilesFromDevice];
+
+    // Files to index: uploaded, never created or edited; nothing at all
+    // while vectorization is off.
+    case RoomsType.KnowledgeRoom:
+      if (isNotAdmin) return [];
+
+      if (!vectorizationEnabled) return isCollaborator ? [] : [inviteUser];
+
+      if (isCollaborator) return [uploadAllFromDocSpace, uploadFilesFromDevice];
+
+      return [inviteUser, uploadAllFromDocSpace, uploadFilesFromDevice];
     default:
       return [];
   }

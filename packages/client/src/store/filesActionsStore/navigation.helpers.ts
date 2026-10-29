@@ -645,7 +645,13 @@ self: FilesActionStore,
           item.security?.EditForm &&
           !item.startFilling;
 
-      return openDocEditor(id, false, shareKey, canEditForm);
+      // A Knowledge room's files are sources to index: read or replaced by
+      // an upload, never edited, whatever the caller's role.
+      const readOnlyRoom =
+        self.selectedFolderStore.roomType === RoomsType.KnowledgeRoom ||
+        self.selectedFolderStore.parentRoomType === FolderType.KnowledgeRoom;
+
+      return openDocEditor(id, readOnlyRoom, shareKey, canEditForm && !readOnlyRoom);
     }
 
     if (isMediaOrImage) {

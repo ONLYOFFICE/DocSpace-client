@@ -56,6 +56,7 @@ import {
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import ClientSearchProgress from "./ClientSearchProgress";
+import KnowledgeVectorizationBar from "./KnowledgeVectorizationBar";
 import { NoAccessContainerType } from "../../../../components/EmptyContainer/NoAccessContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
 import EmptyRoomGroupContainer from "../../../../components/EmptyContainer/EmptyRoomGroupContainer";
@@ -508,13 +509,19 @@ const SectionBodyContent = (props) => {
         />
       );
     }
-    return <EmptyContainer isEmptyPage={isEmptyPage} />;
+    return (
+      <>
+        <KnowledgeVectorizationBar />
+        <EmptyContainer isEmptyPage={isEmptyPage} />
+      </>
+    );
   }
 
   const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
   return (
     <>
+      <KnowledgeVectorizationBar />
       <ClientSearchProgress />
       <FileViewComponent />
     </>

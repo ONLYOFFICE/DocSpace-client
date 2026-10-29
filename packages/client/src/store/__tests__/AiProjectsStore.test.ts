@@ -210,7 +210,7 @@ describe("AiProjectsStore", () => {
   });
 
   describe("the open project", () => {
-    it("hands the project to the chat as the preset and loads its sources", async () => {
+    it("hands the project to the chat as the preset; the sources are read on demand", async () => {
       const store = createStore();
       await store.openProject(project(1));
       expect(presets.setActivePreset).toHaveBeenCalledWith(
@@ -220,6 +220,11 @@ describe("AiProjectsStore", () => {
           contextRooms: [{ cloud: "docspace", id: "12", name: "Skills" }],
         }),
       );
+      // Opening reads no sources: a card reads its room's list when expanded.
+      expect(api.getAiProjectSkills).not.toHaveBeenCalled();
+      expect(api.getAiProjectKnowledge).not.toHaveBeenCalled();
+      expect(store.skills).toEqual([]);
+      await store.fetchSkills(1);
       expect(store.skills).toEqual([{ id: 12, title: "Skills", skills: [] }]);
       expect(store.knowledge).toEqual([]);
 
@@ -251,8 +256,10 @@ describe("AiProjectsStore", () => {
         () => new Promise((resolve) => (resolveSkills = resolve)),
       );
       const store = createStore();
-      const first = store.openProject(project(1));
+      await store.openProject(project(1));
+      const first = store.fetchSkills(1);
       await store.openProject(project(2));
+      await store.fetchSkills(2);
       resolveSkills([{ id: 99, title: "Stale" }]);
       await first;
       expect(store.skills).toEqual([{ id: 12, title: "Skills", skills: [] }]);
@@ -295,7 +302,8 @@ describe("AiProjectsStore", () => {
       expect(store.activeProject?.title).toBe("Renamed");
       expect(store.projectDialog).toEqual({ mode: "edit", project: store.projects[0] });
       expect(presets.setActivePreset).toHaveBeenCalledWith(expect.objectContaining({ name: "Renamed" }));
-      expect(api.getAiProjectSkills).toHaveBeenCalledWith(1);
+      // The sources are not re-read: an open card reads them again on its next expand.
+      expect(api.getAiProjectSkills).not.toHaveBeenCalled();
     });
 
     it("follows the delete operation, then drops the project and closes it", async () => {
@@ -465,7 +473,8 @@ describe("AiProjectsStore", () => {
       expect(api.getAiProject).toHaveBeenCalledWith(1);
       expect(store.activeProject?.title).toBe("Renamed");
       expect(presets.setActivePreset).toHaveBeenCalledWith(expect.objectContaining({ name: "Renamed" }));
-      expect(api.getAiProjectSkills).toHaveBeenCalledWith(1);
+      // The sources are not re-read: an open card reads them again on its next expand.
+      expect(api.getAiProjectSkills).not.toHaveBeenCalled();
     });
 
     it("drops a deleted project and flags the open one as lost", async () => {

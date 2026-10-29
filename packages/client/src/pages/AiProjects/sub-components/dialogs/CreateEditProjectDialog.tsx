@@ -93,6 +93,10 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
   const { t } = useTranslation(["Common"]);
   const dialogsStore = useStore("dialogsStore");
   const filesStore = useStore("filesStore");
+  const settingsStore = useStore("settingsStore");
+  // With vectorization off a Knowledge room cannot be searched, so none can
+  // be linked: the selector lists them greyed out, with the reason.
+  const vectorizationEnabled = settingsStore.aiConfig?.vectorizationEnabled !== false;
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
   const defaultProfile = useProfilesStore((s) => s.defaultProfile);
@@ -300,6 +304,12 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
               // as the "add rooms to a group" dialog does.
               forceIsMultiSelect
               roomType={selector}
+              isRoomDisabled={() => selector === KNOWLEDGE_ROOM_TYPE && !vectorizationEnabled}
+              getRoomDisabledText={() =>
+                selector === KNOWLEDGE_ROOM_TYPE && !vectorizationEnabled
+                  ? t("Common:KnowledgeRoomsNeedVectorization")
+                  : undefined
+              }
               withSearch
               withHeader
               headerProps={{

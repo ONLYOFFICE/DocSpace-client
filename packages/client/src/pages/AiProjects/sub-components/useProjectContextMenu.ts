@@ -59,6 +59,7 @@ import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import LeaveReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
+import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import { isOwner, projectLink } from "../utils";
@@ -126,7 +127,7 @@ export const useProjectContextMenu = (
                     : t("Common:AIProjectNotificationsEnabled"),
                 ),
               )
-              .catch((e: unknown) => toastr.error(e instanceof Error ? e.message : String(e)));
+              .catch((e: unknown) => toastr.error(errorMessage(e)));
           },
         });
       }

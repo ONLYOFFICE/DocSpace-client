@@ -199,6 +199,7 @@ const InjectedEmptyViewContainer = inject<
       refreshPaymentInfo: authStore.getPaymentInfo,
       language,
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
+      vectorizationEnabled: settingsStore.aiConfig?.vectorizationEnabled !== false,
       onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
     };
   },

@@ -107,6 +107,7 @@ const ArticleMainButtonContent = (props) => {
 
     currentFolderId,
     currentRoomType,
+    vectorizationEnabled,
     isRoomsFolder,
     isArchiveFolder,
 
@@ -533,6 +534,47 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
+    // Instructions and Knowledge rooms are flat and hold one kind of file:
+    // no folders and no folder upload. An Instructions room creates
+    // Markdown only (its files are the skills); a Knowledge room only
+    // uploads (its files are indexed, never edited), and not at all while
+    // vectorization is off.
+    if (
+      currentRoomType === RoomsType.InstructionsRoom ||
+      currentRoomType === RoomsType.KnowledgeRoom
+    ) {
+      const isKnowledgeRoom = currentRoomType === RoomsType.KnowledgeRoom;
+      const uploadFilesOnly = newUploadActions.filter(
+        (action) => action.key !== "upload-folder",
+      );
+      const sourceUploadActions =
+        isKnowledgeRoom && !vectorizationEnabled ? [] : uploadFilesOnly;
+      const createNewMarkdown = {
+        id: "actions_new-markdown",
+        className: "main-button_drop-down",
+        icon: ActionsDocumentsReactSvgUrl,
+        label: t("Common:MarkdownFile"),
+        onClick: onCreate,
+        action: "md",
+        key: "md",
+      };
+      const sourceActions = isKnowledgeRoom ? [] : [createNewMarkdown];
+      const sourceModel =
+        sourceActions.length > 0 && sourceUploadActions.length > 0
+          ? [
+              ...sourceActions,
+              { isSeparator: true, key: "separator" },
+              ...sourceUploadActions,
+            ]
+          : [...sourceActions, ...sourceUploadActions];
+
+      setUploadActions(sourceUploadActions);
+      setActions(sourceActions);
+      setModel(sourceModel);
+
+      return;
+    }
+
     const createNewPdfForm = {
       id: "actions_new-pdf-form",
       className: "main-button_drop-down",
@@ -599,6 +641,7 @@ const ArticleMainButtonContent = (props) => {
     enablePlugins,
     mainButtonItemsList,
     currentRoomType,
+    vectorizationEnabled,
     isRoomsFolder,
     isOwner,
     isAdmin,
@@ -647,6 +690,11 @@ const ArticleMainButtonContent = (props) => {
     }
 
     if (!isAccountsPage) visibilityValue = security?.Create;
+
+    // A Knowledge room with vectorization off has nothing to offer: no
+    // upload, no create.
+    if (currentRoomType === RoomsType.KnowledgeRoom && !vectorizationEnabled)
+      visibilityValue = false;
 
     if (!isMobileArticle) visibilityValue = false;
 
@@ -821,6 +869,10 @@ export default inject(
 
     const currentFolderId = selectedFolderStore.id;
     const currentRoomType = selectedFolderStore.roomType;
+    // Read only while AI services are on; until then a Knowledge room keeps
+    // its upload, the server refuses what it must.
+    const vectorizationEnabled =
+      settingsStore.aiConfig?.vectorizationEnabled !== false;
     const { parentRoomType } = selectedFolderStore;
     const { isFolder } = selectedFolderStore;
 
@@ -861,6 +913,7 @@ export default inject(
 
       currentFolderId,
       currentRoomType,
+    vectorizationEnabled,
 
       setOformFromFolderId,
       oformsFilter,

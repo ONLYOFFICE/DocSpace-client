@@ -200,6 +200,7 @@ export const useOptions = (
     refreshPaymentInfo,
     templateGalleryAvailable,
     onShowTemplateGallery,
+    vectorizationEnabled = true,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -471,6 +472,7 @@ export const useOptions = (
         trashSection,
         isAiChatAvailable,
         templateGalleryAvailable,
+        vectorizationEnabled,
       ),
     [
       type,
@@ -505,6 +507,7 @@ export const useOptions = (
       onOpenAiChat,
       isAiChatAvailable,
       templateGalleryAvailable,
+      vectorizationEnabled,
     ],
   );
 

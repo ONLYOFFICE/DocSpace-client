@@ -467,10 +467,7 @@ class AiProjectsStore {
       const project = await getAiProject(id);
       const isActive = this.activeProject?.id === id;
       runInAction(() => this.replaceProject(project));
-      if (isActive) {
-        this.syncPreset(project);
-        await Promise.all([this.fetchSkills(id), this.fetchKnowledge(id)]);
-      }
+      if (isActive) this.syncPreset(project);
     } catch (e) {
       const status = (e as { response?: { status?: number } })?.response?.status;
       if (status !== 404 && status !== 403) return;
@@ -483,13 +480,15 @@ class AiProjectsStore {
 
   /* ------------------------------ Project ------------------------------ */
 
+  // The sources (skills, knowledge files) are not read here: the cards read
+  // a room's list when its row is expanded (fetchSkills / fetchKnowledge),
+  // and the chat takes the current skills from the server on every round.
   openProject = async (project: TAiProject) => {
     this.activeProject = project;
     this.syncChannels();
     this.skills = [];
     this.knowledge = [];
     this.syncPreset(project);
-    await Promise.all([this.fetchSkills(project.id), this.fetchKnowledge(project.id)]);
   };
 
   openProjectById = async (id: number) => {
@@ -567,10 +566,7 @@ class AiProjectsStore {
     const project = await updateAiProject(id, data);
     showWarnings(project);
     runInAction(() => this.replaceProject(project));
-    if (this.activeProject?.id === id) {
-      this.syncPreset(project);
-      await Promise.all([this.fetchSkills(id), this.fetchKnowledge(id)]);
-    }
+    if (this.activeProject?.id === id) this.syncPreset(project);
     return project;
   };
 

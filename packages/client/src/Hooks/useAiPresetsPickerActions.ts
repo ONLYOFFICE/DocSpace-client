@@ -40,18 +40,17 @@ import type { ProfilePickerAction } from "@onlyoffice/apps-ui-kit/ai-agent/provi
 
 import type { TAiPreset } from "SRC_DIR/store/AiPresetsStore";
 
-/** Prefix of the picker row ids, so a pick is told apart from an agent's. */
+/** Prefix of the picker row ids, so a project pick is told apart from a model's. */
 export const AI_PRESET_ACTION_PREFIX = "ai-preset:";
 
 export const isAiPresetActionId = (actionId?: string): boolean =>
   actionId !== undefined && actionId.startsWith(AI_PRESET_ACTION_PREFIX);
 
 /**
- * Builds the "Choose AI Preset" entry for the chat model picker, next to
- * "Choose AI Agent": a submenu of the user's AI projects. Picking one hands
- * the preset to `onPresetPick`; a preset with a model also carries its
- * `profileId`, so the picker switches the model itself. Empty while the user
- * has no presets.
+ * Builds the "Choose AI Project" entry for the chat model picker: a submenu
+ * of the user's AI projects. Picking one hands the project (as a preset) to
+ * `onPresetPick`; a project with a model also carries its `profileId`, so
+ * the picker switches the model itself. Empty while the user has no projects.
  */
 export const useAiPresetsPickerActions = (
   presets: TAiPreset[],

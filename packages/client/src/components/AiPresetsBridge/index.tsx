@@ -70,6 +70,8 @@ type AiPresetsBridgeProps = {
   userId: string | null;
   /** The user may create AI projects (owner, admins, room admins). */
   canCreateProjects: boolean;
+  /** Vectorization is on for the portal: Knowledge rooms can be picked as a knowledge base. */
+  vectorizationEnabled: boolean;
 };
 
 /**
@@ -80,7 +82,12 @@ type AiPresetsBridgeProps = {
  * the panel closes. Lives inside AiAgentProviders, where the panel store is
  * reachable.
  */
-const AiPresetsBridge = ({ aiPresetsStore, userId, canCreateProjects }: AiPresetsBridgeProps) => {
+const AiPresetsBridge = ({
+  aiPresetsStore,
+  userId,
+  canCreateProjects,
+  vectorizationEnabled,
+}: AiPresetsBridgeProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const aiChatStore = useAiChatStore();
@@ -120,6 +127,14 @@ const AiPresetsBridge = ({ aiPresetsStore, userId, canCreateProjects }: AiPreset
     return () => aiChatStore.setFolderContextPickerEnabled(false);
   }, [aiChatStore, isProjectsPage]);
 
+  // With vectorization off no Knowledge room can be searched, so the
+  // composer loses its knowledge base picker; a base connected earlier
+  // keeps its pill and can still be disconnected.
+  React.useEffect(() => {
+    aiChatStore.setKnowledgePickerHidden(!vectorizationEnabled);
+    return () => aiChatStore.setKnowledgePickerHidden(false);
+  }, [aiChatStore, vectorizationEnabled]);
+
   // A chat started from a project carries the project's name as its title.
   React.useEffect(() => {
     const dispose = reaction(
@@ -156,12 +171,24 @@ const AiPresetsBridge = ({ aiPresetsStore, userId, canCreateProjects }: AiPreset
     [aiChatStore, aiPresetsStore],
   );
 
+  // Closing the chat drops the project it runs on, all of it: the model goes
+  // back to the default and the project's Instructions and Knowledge rooms
+  // are disconnected, so the chat opens clean next time (as the projects page
+  // resets it when a project is left). A chat no project was applied to keeps
+  // the model and rooms the user chose.
   React.useEffect(
     () =>
       reaction(
         () => aiChatStore.isVisible,
         (visible) => {
-          if (!visible) aiPresetsStore.setActivePreset(null);
+          if (visible || !aiPresetsStore.activePreset) return;
+          aiPresetsStore.setActivePreset(null);
+          aiChatStore.applyPreset({
+            profileId: null,
+            profileName: null,
+            contextRooms: [],
+            knowledgeRooms: [],
+          });
         },
       ),
     [aiChatStore, aiPresetsStore],
@@ -196,8 +223,11 @@ const AiPresetsBridge = ({ aiPresetsStore, userId, canCreateProjects }: AiPreset
   );
 };
 
-export default inject(({ aiPresetsStore, userStore }: TStore) => ({
+export default inject(({ aiPresetsStore, userStore, settingsStore }: TStore) => ({
   aiPresetsStore,
   userId: userStore.user?.id ?? null,
   canCreateProjects: canManageProjects(userStore.user),
+  // The AI config is read only while AI services are on; until it arrives
+  // the picker stays, as the server refuses to link a room anyway.
+  vectorizationEnabled: settingsStore.aiConfig?.vectorizationEnabled !== false,
 }))(observer(AiPresetsBridge));

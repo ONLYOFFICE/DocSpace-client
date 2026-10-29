@@ -367,6 +367,8 @@ test.describe("Profile > Keys Management: keyboard only", () => {
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       capabilitiesHandler(TEST_PORT, true),
+      // No private room in the list: the delete warning names none.
+      roomListHandler(TEST_PORT),
     );
   });
 
@@ -457,14 +459,20 @@ test.describe("Profile > Keys Management: keyboard only", () => {
         })
         .toBe(1);
 
-      // The key card's actions are not keyboard controls, so only the
-      // prompt itself is driven from the keyboard. Export is the second one.
+      const exportKey = page.getByRole("button", {
+        name: "Export key",
+        exact: true,
+      });
       await page
-        .locator("[class*='keyItemActions']")
-        .first()
-        .getByTestId("icon-button")
-        .nth(1)
-        .click();
+        .getByRole("button", { name: "Change passphrase", exact: true })
+        .focus();
+      await page.keyboard.press("Tab");
+      await expect(exportKey).toBeFocused();
+      expect(
+        await exportKey.evaluate((el) => getComputedStyle(el).outlineStyle),
+      ).not.toBe("none");
+
+      await page.keyboard.press("Enter");
       const prompt = page.getByRole("dialog", { name: "Enter passphrase" });
       await expect(
         prompt.getByLabel("Passphrase", { exact: true }),
@@ -474,6 +482,56 @@ test.describe("Profile > Keys Management: keyboard only", () => {
       await page.keyboard.press("Enter");
       await exported;
       await expect(prompt).toBeHidden({ timeout: 5_000 });
+      await expect(exportKey).toBeFocused();
+
+      await page.getByRole("button", { name: "Delete", exact: true }).focus();
+      await page.keyboard.press("Space");
+      const warning = page
+        .getByRole("dialog")
+        .filter({ hasText: "Delete encryption key" });
+      await expect(warning).toBeVisible({ timeout: 5_000 });
+      await page.keyboard.press("Escape");
+      await expect(warning).toBeHidden();
+      expect(
+        handleRef
+          .current!.getRequests()
+          .filter((r) => r.method === "DELETE"),
+      ).toHaveLength(0);
+
+      const lockNow = page.getByRole("button", {
+        name: "Lock now",
+        exact: true,
+      });
+      await lockNow.focus();
+      await page.keyboard.press("Space");
+      await expect(page.getByText("Encryption locked")).toBeVisible();
+      await expect(lockNow).toBeHidden();
     });
   }
+
+  test("Import a key from the keyboard", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const generateBtn = page.getByRole("button", {
+      name: "Generate new key",
+      exact: true,
+    });
+    await expect(generateBtn).toBeVisible({ timeout: 15_000 });
+    await generateBtn.focus();
+    await page.keyboard.press("Tab");
+    const importKey = page.getByRole("button", {
+      name: "Import key",
+      exact: true,
+    });
+    await expect(importKey).toBeFocused();
+
+    const chooser = page.waitForEvent("filechooser");
+    await page.keyboard.press("Enter");
+    await chooser;
+  });
 });

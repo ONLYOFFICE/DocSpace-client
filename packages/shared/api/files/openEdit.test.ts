@@ -10,7 +10,6 @@ vi.mock("../client", () => ({
   request: (options: unknown) => request(options),
 }));
 
-// eslint-disable-next-line import/first
 import { openEdit } from ".";
 
 const getUrl = () => {

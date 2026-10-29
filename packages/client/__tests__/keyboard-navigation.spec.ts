@@ -41,6 +41,8 @@ import {
   selfActivationStatusHandler,
   roomListHandler,
   TypeRoomList,
+  filesSettingsHandler,
+  roomGroupsHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { ShareAccessRights } from "@docspace/shared/enums";
 
@@ -155,6 +157,25 @@ const openRooms = async (page: Page, baseUrl: string) => {
   await page.mouse.click(1, 1);
 };
 
+// Every stop is visible, outside hidden content, and draws a ring nothing
+// clips.
+const expectUsableStops = (stops: TabStop[]) => {
+  expect(
+    stops.filter((s) => !s.visible || s.hidden).map((s) => s.name),
+    "focus landed on hidden elements",
+  ).toEqual([]);
+  expect(
+    stops.filter((s) => !s.ring).map((s) => `${s.name} [${s.testId}]`),
+    "focused elements without a visible focus indicator",
+  ).toEqual([]);
+  expect(
+    stops
+      .filter((s) => s.clipped.length)
+      .map((s) => `${s.name} [${s.testId}] cut: ${s.clipped.join(",")}`),
+    "focus rings cut off by an ancestor's overflow",
+  ).toEqual([]);
+};
+
 // Tabs forward until `predicate` holds for the focused element.
 const tabTo = async (
   page: Page,
@@ -189,20 +210,7 @@ test.describe("Keyboard navigation: rooms", () => {
     const stops = await walk(page, "Tab");
 
     expect(stops.length).toBeGreaterThan(10);
-    expect(
-      stops.filter((s) => !s.visible || s.hidden).map((s) => s.name),
-      "focus landed on hidden elements",
-    ).toEqual([]);
-    expect(
-      stops.filter((s) => !s.ring).map((s) => `${s.name} [${s.testId}]`),
-      "focused elements without a visible focus indicator",
-    ).toEqual([]);
-    expect(
-      stops
-        .filter((s) => s.clipped.length)
-        .map((s) => `${s.name} [${s.testId}] cut: ${s.clipped.join(",")}`),
-      "focus rings cut off by an ancestor's overflow",
-    ).toEqual([]);
+    expectUsableStops(stops);
   });
 
   test("the controls a mouse uses are all reachable by Tab", async ({
@@ -366,6 +374,36 @@ test.describe("Keyboard navigation: rooms", () => {
     await request;
   });
 
+  for (const key of ["Enter", "Space"]) {
+    test(`the sort list opens with ${key} and sorts from the keyboard`, async ({
+      page,
+      baseUrl,
+    }) => {
+      await openRooms(page, baseUrl);
+
+      await tabTo(page, (s) => s.testId === "filter_sort_combobox");
+      await page.keyboard.press(key);
+
+      const options = page.locator('[data-testid^="filter_sort_option_"]');
+      await expect(options.first()).toBeVisible();
+
+      const request = page.waitForRequest((r) => /sortby=/i.test(r.url()));
+      await page.keyboard.press("ArrowDown");
+      await page.keyboard.press("Enter");
+      await request;
+    });
+  }
+
+  test("the view switches from the keyboard", async ({ page, baseUrl }) => {
+    await openRooms(page, baseUrl);
+
+    const icon = await tabTo(page, (s) => s.testId === "view-selector-icon");
+    expect(icon.ring).toBe(true);
+
+    await page.keyboard.press("Enter");
+    await expect(page.getByTestId("table-body")).toBeHidden();
+  });
+
   test("the sidebar collapse button works from the keyboard", async ({
     page,
     baseUrl,
@@ -384,5 +422,58 @@ test.describe("Keyboard navigation: rooms", () => {
     await expect
       .poll(async () => (await home.boundingBox())?.width ?? 0)
       .toBeLessThan(before);
+  });
+});
+
+test.describe("Keyboard navigation: room groups", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault),
+      filesSettingsHandler(TEST_PORT, { organizeRoomsGrouping: true }),
+      roomGroupsHandler(TEST_PORT, true),
+    );
+  });
+
+  test("group tabs are Tab stops that show focus and switch the group", async ({
+    page,
+    baseUrl,
+  }) => {
+    await openRooms(page, baseUrl);
+    const allRooms = page.getByTestId("all_rooms_tags_measure");
+    await expect(allRooms).toBeVisible();
+
+    const stops = await walk(page, "Tab");
+    expectUsableStops(stops);
+
+    // Every group tab on screen is a stop.
+    const testIds = stops.map((s) => s.testId);
+    const tabs = page.locator(
+      '.group-tags [data-testid="all_rooms_tags_measure"], .group-tags [data-testid="create_group_tag"], .group-tags [data-testid^="room_group_tag_"]',
+    );
+    const visibleTabs = await tabs.evaluateAll((nodes) =>
+      nodes
+        .filter((node) => node.getBoundingClientRect().width > 0)
+        .map((node) => node.getAttribute("data-testid")),
+    );
+    expect(visibleTabs.length).toBeGreaterThan(1);
+    for (const tab of visibleTabs) expect(testIds).toContain(tab);
+    // The hidden copies used to measure the tabs stay out of the order.
+    expect(
+      stops.filter((s) => s.name.includes("All rooms")),
+      "the measuring copy of All rooms is a stop",
+    ).toHaveLength(1);
+
+    await page.mouse.click(1, 1);
+    const { testId } = await tabTo(page, (s) =>
+      (s.testId ?? "").startsWith("room_group_tag_"),
+    );
+    const group = page.getByTestId(testId ?? "");
+    await expect(group).toHaveAttribute("aria-pressed", "false");
+
+    await page.keyboard.press("Enter");
+    await expect(group).toHaveAttribute("aria-pressed", "true");
+    await expect(allRooms).toHaveAttribute("aria-pressed", "false");
   });
 });

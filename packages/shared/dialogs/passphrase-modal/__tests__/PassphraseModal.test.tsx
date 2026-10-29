@@ -41,6 +41,7 @@ import {
   within,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useState } from "react";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 
 import { PassphraseModal } from "../PassphraseModal";
@@ -295,6 +296,45 @@ describe("PassphraseModal", () => {
     renderModal();
 
     expect(getPassphraseInput()).toHaveFocus();
+  });
+
+  it("Unlock completed", async () => {
+    const user = userEvent.setup();
+    const onSubmit = vi.fn();
+    // The prompt is mounted only while an operation waits for the passphrase,
+    // the way the encryption context hosts it.
+    const Host = () => {
+      const [open, setOpen] = useState(false);
+      return (
+        <>
+          <button type="button" onClick={() => setOpen(true)}>
+            Open
+          </button>
+          {open ? (
+            <PassphraseModal
+              visible
+              isNew={false}
+              onSubmit={(...args) => {
+                onSubmit(...args);
+                setOpen(false);
+              }}
+              onCancel={() => setOpen(false)}
+            />
+          ) : null}
+        </>
+      );
+    };
+    render(<Host />);
+    const trigger = screen.getByRole("button", { name: "Open" });
+
+    await user.click(trigger);
+    expect(getPassphraseInput()).toHaveFocus();
+    await user.type(getPassphraseInput(), "correct horse battery");
+    await user.keyboard("{Enter}");
+
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(trigger).toHaveFocus();
   });
 
   it("Forward through the creation dialog", async () => {

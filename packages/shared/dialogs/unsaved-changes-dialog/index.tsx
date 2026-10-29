@@ -53,7 +53,10 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
   const { t, ready } = useTranslation(["Files", "Settings", "Common"]);
 
   useEventListener("keydown", (e: KeyboardEvent) => {
-    if (e.key === "Enter" && visible) {
+    if (e.key === "Enter" && visible && !e.defaultPrevented) {
+      // Acted on: otherwise the same key goes on to press whatever receives
+      // the focus when this dialog closes.
+      e.preventDefault();
       onConfirm();
     }
   });

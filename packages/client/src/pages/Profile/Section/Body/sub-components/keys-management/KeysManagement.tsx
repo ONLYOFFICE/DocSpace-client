@@ -44,6 +44,7 @@ import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
+import { activateAsButton } from "@docspace/shared/dialogs/key-dialog-keys";
 import {
   DEVICE_UNLOCK_MAX_AGE_MS,
   forgetDeviceUnlock,
@@ -309,6 +310,9 @@ const KeysManagement = ({
               onClick={() => {
                 if (!busy) importFlow.request();
               }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={activateAsButton}
               dataTestId="import_key_link"
             >
               {t("Common:ImportKey")}
@@ -323,6 +327,9 @@ const KeysManagement = ({
               onClick={() => {
                 if (!busy) recover.request();
               }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={activateAsButton}
               dataTestId="use_recovery_phrase_link"
             >
               {t("Common:UseRecoveryPhrase")}
@@ -367,6 +374,9 @@ const KeysManagement = ({
                 onClick={() => {
                   if (!busy) handleForgetDevice();
                 }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={activateAsButton}
                 dataTestId="forget_device_link"
               >
                 {t("Common:ForgetDeviceButton")}
@@ -386,6 +396,9 @@ const KeysManagement = ({
                   setRememberedUntil(null);
                   toastr.success(t("Common:EncryptionLocked"));
                 }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={activateAsButton}
                 dataTestId="lock_now_link"
               >
                 {t("Common:LockNow")}

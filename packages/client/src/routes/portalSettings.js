@@ -98,14 +98,6 @@ const ProtectedAppsSettingsRoute = inject(({ appsStore }) => ({
   }),
 );
 
-// Wraps a lazily loaded settings section in the AI switch guard, so a
-// bookmark or an old link cannot open a page the portal no longer has.
-const withAIServicesGuard = (Component) => () => (
-  <ProtectedAISettingsRoute>
-    <Component />
-  </ProtectedAISettingsRoute>
-);
-
 const PortalSettingsRoutes = {
   path: "portal-settings/",
   lazy: () => componentLoader(() => import("SRC_DIR/pages/PortalSettings")),
@@ -565,19 +557,6 @@ const PortalSettingsRoutes = {
         );
 
         return { Component: QuotaPerUserComponentSection };
-      },
-    },
-    {
-      path: "management/disk-space/quota-per-ai-agent",
-      async lazy() {
-        const { QuotaPerAIAgentComponentSection } = await componentLoader(
-          () =>
-            import("SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent"),
-        );
-
-        return {
-          Component: withAIServicesGuard(QuotaPerAIAgentComponentSection),
-        };
       },
     },
     {

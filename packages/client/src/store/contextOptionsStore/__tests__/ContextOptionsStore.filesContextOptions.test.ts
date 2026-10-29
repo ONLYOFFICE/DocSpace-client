@@ -260,21 +260,6 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
     expect(menuShape(store.getFilesContextOptions(enc as never, t))).toMatchSnapshot();
   });
 
-  it("maps an AI agent room", () => {
-    const store = createTestContextOptionsStore();
-    store.dialogsStore = { roomGroups: [] } as never;
-    const agent = {
-      id: 4,
-      title: "Agent",
-      roomType: RoomsType.AIRoom,
-      rootFolderType: FolderType.AIAgents,
-      security: {},
-      viewAccessibility: {},
-      contextOptions: ["room-info", "edit-room", "delete"],
-    };
-    expect(menuShape(store.getFilesContextOptions(agent as never, t))).toMatchSnapshot();
-  });
-
   it("maps a room template", () => {
     const store = createTestContextOptionsStore();
     store.dialogsStore = { roomGroups: [] } as never;

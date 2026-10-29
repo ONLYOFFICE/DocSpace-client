@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "Đã tạo tác nhân AI",
-  "AgentDeleted": "Tác nhân AI đã bị xóa",
-  "AgentUpdated": "Tác nhân AI đã được cập nhật",
   "Before": "Trước",
   "CreateWebhook": "Tạo webhook",
   "DeleteHint": "Webhook sẽ bị xóa vĩnh viễn.\nBạn sẽ không thể hoàn tác thao tác này.",

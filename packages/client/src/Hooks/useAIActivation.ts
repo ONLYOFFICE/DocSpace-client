@@ -35,23 +35,17 @@
 
 import { useCallback, useState } from "react";
 
-import { Events } from "@docspace/shared/enums";
-
 type UseAIActivationProps = {
   enableAIService?: (onSuccess?: () => void | Promise<void>) => Promise<void>;
   getAIConfig?: () => Promise<unknown> | void;
   refreshCurrentFolder?: () => Promise<void> | void;
   refreshPaymentInfo?: () => Promise<void> | void;
   isCardLinkedToPortal?: boolean;
-  parentId?: string | number | null;
-  context?: string;
-  /** Dispatch AGENT_CREATE after activation (opens the create dialog). Off inside the chat. */
-  createAgentOnActivate?: boolean;
 };
 
 /**
  * Shared AI activation logic (activate / top up / benefits) reused by the
- * empty view and the AI agent chat no-access screen. Renders nothing — the
+ * empty view and the AI chat no-access screen. Renders nothing — the
  * caller wires the returned handlers and renders the dialogs.
  */
 export const useAIActivation = ({
@@ -60,9 +54,6 @@ export const useAIActivation = ({
   refreshCurrentFolder,
   refreshPaymentInfo,
   isCardLinkedToPortal,
-  parentId,
-  context = "empty_state",
-  createAgentOnActivate = true,
 }: UseAIActivationProps) => {
   const [aiFeaturesDialogVisible, setAiFeaturesDialogVisible] = useState(false);
   const [simpleTopUpDialogVisible, setSimpleTopUpDialogVisible] =
@@ -86,17 +77,10 @@ export const useAIActivation = ({
     try {
       setIsActivating(true);
       await enableAIService?.(onAIActivated);
-
-      if (!createAgentOnActivate) return;
-
-      const event = new CustomEvent(Events.AGENT_CREATE, {
-        detail: { parentId, context },
-      });
-      window.dispatchEvent(event);
     } finally {
       setIsActivating(false);
     }
-  }, [enableAIService, onAIActivated, parentId, context, createAgentOnActivate]);
+  }, [enableAIService, onAIActivated]);
 
   const onShowAIBenefits = useCallback(
     () => setAiFeaturesDialogVisible(true),
@@ -124,24 +108,10 @@ export const useAIActivation = ({
       setIsActivating(true);
       await enableAIService?.(onAIActivated);
       setAiFeaturesDialogVisible(false);
-
-      if (!createAgentOnActivate) return;
-
-      const event = new CustomEvent(Events.AGENT_CREATE, {
-        detail: { parentId, context },
-      });
-      window.dispatchEvent(event);
     } finally {
       setIsActivating(false);
     }
-  }, [
-    isCardLinkedToPortal,
-    enableAIService,
-    onAIActivated,
-    parentId,
-    context,
-    createAgentOnActivate,
-  ]);
+  }, [isCardLinkedToPortal, enableAIService, onAIActivated]);
 
   return {
     onActivateAI,

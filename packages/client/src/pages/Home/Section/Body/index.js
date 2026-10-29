@@ -57,7 +57,6 @@ import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import ClientSearchProgress from "./ClientSearchProgress";
 import { NoAccessContainerType } from "../../../../components/EmptyContainer/NoAccessContainer";
-import KnowledgeDisabledContainer from "../../../../components/EmptyContainer/KnowledgeDisabledContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
 import EmptyRoomGroupContainer from "../../../../components/EmptyContainer/EmptyRoomGroupContainer";
 import withLoader from "../../../../HOCs/withLoader";
@@ -113,10 +112,6 @@ const SectionBodyContent = (props) => {
     isErrorRoomNotAvailable,
     getSelectedFolder,
     setDropTargetPreview,
-    aiConfig,
-    isInsideKnowledge,
-    isErrorAIAgentNotAvailable,
-    selectedFolderChatSettings,
     roomsFilterGroupId,
     setEditRoomGroupsDialogVisible,
     isFilterOrSearchActive,
@@ -493,18 +488,8 @@ const SectionBodyContent = (props) => {
     filesList,
   ]);
 
-  if (isErrorAIAgentNotAvailable)
-    return <NoAccessContainer type={NoAccessContainerType.Agent} />;
-
   if (isErrorRoomNotAvailable)
     return <NoAccessContainer type={NoAccessContainerType.Room} />;
-
-  if (
-    isInsideKnowledge &&
-    !aiConfig?.vectorizationEnabled &&
-    !selectedFolderChatSettings?.internal
-  )
-    return <KnowledgeDisabledContainer />;
 
   if (isEmptyFilesList) {
     if (
@@ -566,7 +551,6 @@ export default inject(
       filesList,
       isEmptyPage,
       isErrorRoomNotAvailable,
-      isErrorAIAgentNotAvailable,
       draggedFiles,
       setIsChatDropTarget,
     } = filesStore;
@@ -586,7 +570,6 @@ export default inject(
       isEmptyFilesList,
       setDragging,
       folderId: selectedFolderStore.id,
-      selectedFolderChatSettings: selectedFolderStore.chatSettings,
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
       isRoomsFolder: treeFoldersStore.isRoomsFolder,
@@ -608,13 +591,10 @@ export default inject(
       uploaded,
       onClickBack: filesActionsStore.onClickBack,
       currentDeviceType: settingsStore.currentDeviceType,
-      aiConfig: settingsStore.aiConfig,
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
-      isErrorAIAgentNotAvailable,
       getSelectedFolder: selectedFolderStore.getSelectedFolder,
-      isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
       setDropTargetPreview,
       roomsFilterGroupId: roomsFilter?.groupId,
       setEditRoomGroupsDialogVisible,

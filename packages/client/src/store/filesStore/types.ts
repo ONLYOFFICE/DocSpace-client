@@ -56,7 +56,6 @@ import type {
   TShareSettings,
 } from "@docspace/shared/api/files/types";
 import type {
-  TAIRoomChatSettings,
   TRoomLifetime,
   TRoomSecurity,
   TWatermark,
@@ -137,7 +136,6 @@ export type TItem = {
   canShare?: boolean;
   canEdit?: boolean;
   roomType?: RoomsType;
-  rootRoomType?: RoomsType;
   isArchive?: boolean;
   tags?: string[];
   pinned?: boolean;
@@ -165,7 +163,6 @@ export type TItem = {
   formFillingStatus?: FileFillingFormStatus;
   customFilterEnabled?: boolean;
   customFilterEnabledBy?: string;
-  chatSettings?: TAIRoomChatSettings;
   location?: unknown;
   new?: number;
   isFolder?: boolean;
@@ -200,7 +197,6 @@ export type TItem = {
   href?: Nullable<string> | false;
   isThirdPartyFolder?: boolean | string;
   isEditing?: boolean;
-  isAIAgent?: boolean;
   thirdPartyIcon?: string;
   providerType?: RoomsProviderType;
   fileTypeName?: string;

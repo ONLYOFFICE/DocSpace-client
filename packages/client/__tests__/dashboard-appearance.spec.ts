@@ -101,7 +101,6 @@ test.use({ timezoneId: "UTC" });
 const PROFILE_CARD = '[data-tour-id="dashboard-profile"]';
 const CREATE_SECTION = '[data-tour-id="dashboard-create"]';
 const INTEGRATIONS_CARD = '[data-tour-id="dashboard-integrations"]';
-const AGENTS_CARD_BUTTON = '[data-testid="dashboard-app-open-ai-agents"]';
 const DEVTOOLS_CARD = '[data-tour-id="dashboard-devtools"]';
 const APPS_SECTION = '[data-tour-id="dashboard-apps"]';
 const APP_CARDS = '[data-tour-id^="dashboard-app-card-"]';
@@ -114,17 +113,6 @@ const PROFILE_RENAME_BUTTON = '[data-testid="dashboard-profile-rename"]';
 // describes it.
 const PROFILE_TYPE = '[data-testid="dashboard-profile-type"]';
 const PROFILE_TYPE_HELP = '[data-testid="dashboard-profile-type-help"]';
-
-/**
- * The sidebar's AI Agents entry, matched by its label rather than by its
- * `data-item-id` — that id is the tree folder's, which says nothing about which
- * app it is. A plain string rather than an anchored regex: the item's text
- * content carries the newlines of its inlined icon markup, and only the string
- * form of `hasText` normalizes those away. Nothing else in the sidebar is
- * labelled with it, and the agents sub-items carry their own labels.
- */
-const sidebarAgentsItem = (page: Page) =>
-  page.locator("[data-item-id]").filter({ hasText: "AI agents" });
 
 /** The plan line, in either of the two wordings the header has for it. */
 const planLine = (page: Page) =>
@@ -604,22 +592,9 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       page.getByRole("button", { name: "AI Chat", exact: true }),
     ).toHaveCount(ai.enabled && !role.isGuest ? 1 : 0);
 
-    // A portal with AI switched off has no agents to open either, so the app is
-    // dropped from both the dashboard and the sidebar catalog rather than left
-    // pointing at a dead end. With AI on it is there for everyone, and only its
-    // button is worded by the create right.
-    if (viewport.withSidebar)
-      await expect(sidebarAgentsItem(page)).toHaveCount(ai.enabled ? 1 : 0);
-
-    if (ai.enabled) {
-      await expect(page.locator(AGENTS_CARD_BUTTON)).toHaveText(
-        role.canCreateRooms ? "Create AI agent" : "Open",
-      );
-    } else {
-      await expect(page.locator(AGENTS_CARD_BUTTON)).toHaveCount(0);
-    }
-
-    await expect(page.locator(APP_CARDS)).toHaveCount(ai.enabled ? 4 : 3);
+    // None of the remaining app cards is gated on AI, so the catalog is the
+    // same size whether AI is on or off.
+    await expect(page.locator(APP_CARDS)).toHaveCount(3);
     await expectFilledRows(page, viewport.columns);
 
     if (!withScreenshot) return;

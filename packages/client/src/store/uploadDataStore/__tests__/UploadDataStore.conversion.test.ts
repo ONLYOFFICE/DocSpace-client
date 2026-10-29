@@ -317,35 +317,6 @@ describe("UploadDataStore.handleUploadConflicts — characterization", () => {
     ).not.toHaveBeenCalled();
   });
 
-  it("skips the existence check entirely inside an AI room", async () => {
-    const { store } = createTestUploadDataStore({
-      selectedFolderStore: { isAIRoom: true },
-    });
-    const data = makeStartUploadData({
-      files: [makeUploadFile({ toFolderId: 5 })],
-    });
-
-    vi.mocked(filesApi.checkIsFileExist).mockResolvedValue([
-      "document.docx",
-    ] as never);
-    vi.mocked(filesApi.getFolderInfo).mockResolvedValue({
-      title: "AI room",
-    } as never);
-
-    const handleUploadAndOptionalConversion = vi.fn();
-    store.handleUploadAndOptionalConversion =
-      handleUploadAndOptionalConversion as never;
-
-    await store.handleUploadConflicts(t, 5, data as never);
-
-    expect(filesApi.checkIsFileExist).not.toHaveBeenCalled();
-    expect(handleUploadAndOptionalConversion).toHaveBeenCalledWith(
-      data,
-      t,
-      true,
-    );
-  });
-
   it("surfaces API failures via toastr and completes the progress bar", async () => {
     const { store, fakes } = createTestUploadDataStore();
     const data = makeStartUploadData({

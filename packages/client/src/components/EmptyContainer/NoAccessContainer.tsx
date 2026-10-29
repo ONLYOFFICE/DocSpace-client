@@ -34,7 +34,6 @@
  */
 
 import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
-import AIAgentsIcon from "PUBLIC_DIR/images/icons/12/AI.svg";
 import ManageAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg";
 import ManageAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.light.svg";
 
@@ -56,7 +55,6 @@ import { EmptyViewProps } from "@onlyoffice/apps-ui-kit/components/empty-view";
 
 export enum NoAccessContainerType {
   Room,
-  Agent,
   Account,
 }
 
@@ -90,16 +88,6 @@ const NoAccessContainer = (props: Props) => {
           const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
           filterParamsStr = filter.toUrlParams();
           path = getCategoryUrl(CategoryType.Shared);
-        }
-        break;
-      case NoAccessContainerType.Agent:
-        {
-          const filter = RoomsFilter.getDefault(
-            userId,
-            RoomSearchArea.AIAgents,
-          );
-          filterParamsStr = filter.toUrlParams();
-          path = getCategoryUrl(CategoryType.AIAgents);
         }
         break;
     }
@@ -139,33 +127,6 @@ const NoAccessContainer = (props: Props) => {
                 onClick: onGoTo,
                 key: "empty-view-goto-rooms",
                 description: t("Common:GoToMyRooms"),
-              },
-            ],
-      };
-      break;
-    // TODO: for AI agents
-    case NoAccessContainerType.Agent:
-      emptyViewProps = {
-        title: t("Common:NoAccessAIAgentTitle"),
-        description: t("Common:AIAgentAccessRedirectNote", {
-          sectionName: t("Common:AIAgents"),
-        }),
-        icon: theme.isBase ? (
-          <ManageAccessRightsLightIcon />
-        ) : (
-          <ManageAccessRightsDarkIcon />
-        ),
-        options: isFrame
-          ? []
-          : [
-              {
-                to: "",
-                icon: <AIAgentsIcon />,
-                onClick: onGoTo,
-                key: "empty-view-goto-agents",
-                description: t("Common:GoToSection", {
-                  sectionName: t("Common:AIAgents"),
-                }),
               },
             ],
       };

@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "AI නියෝජිතයෙකු නිර්මාණය කරන ලදී",
-  "AgentDeleted": "AI Agent මකා ඇත",
-  "AgentUpdated": "AI Agent යාවත්කාලීන කරන ලදී",
   "Before": "පෙර",
   "CreateWebhook": "webhook සාදන්න",
   "DeleteHint": "webhook සදහටම මැකෙනු ඇත.\nමෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි.",

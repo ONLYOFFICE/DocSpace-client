@@ -297,8 +297,6 @@ export const onCopyLinkImpl = async (
     item.isRoom || item.isFolder,
     needConvert,
     canOpenPlayer,
-    "",
-    item.roomType === RoomsType.AIRoom,
   );
 
   copy(url);

@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Phân tích phản hồi",
   "ArchiveAction": "Làm trống kho lưu trữ",
   "ArchiveEmptyScreenUser": "Các phòng đã được sao lưu sẽ xuất hiện ở đây.",
-  "ChangeAgentOwnerSelectorInfo": "Chỉ quản trị viên phòng hoặc siêu quản trị viên có thể trở thành chủ sở hữu của tác nhân",
-  "ChangeTheAgentOwner": "Thay đổi chủ sở hữu đại lý",
   "ClientSearchDecryptingNames": "Đang giải mã tên tệp… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Thư mục quá lớn. Kết quả tìm kiếm có thể không đầy đủ.",
   "CompressingFiles": "Đang nén tệp",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Không thể di chuyển tập tin đến không gian này. Xin hãy thử di chuyển biểu mẫu PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Không hỗ trợ di chuyển một số tập tin vào không gian Điền Biểu mẫu. Hãy di chuyển từng biểu mẫu PDF {{ organizationName }} mỗi lần.",
   "WillBeDeletedPermanently": "{{date}} sẽ bị xóa vĩnh viễn",
-  "YouLeftTheAgent": "Bạn đã rời khỏi tác nhân.",
   "YourUserTypeHasChanged": "Loại người dùng của bạn đã được siêu quản trị viên <1>{{adminName}}</1> thay đổi thành <1>“{{userType}}”</1>."
 }

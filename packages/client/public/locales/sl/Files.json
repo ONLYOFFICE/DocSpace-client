@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Analiziraj odzive",
   "ArchiveAction": "Izprazni arhiv",
   "ArchiveEmptyScreenUser": "Tukaj bodo prikazane sobe, ki so bile arhivirane.",
-  "ChangeAgentOwnerSelectorInfo": "Lastnik agenta lahko postane samo skrbnik sobe ali superskrbnik",
-  "ChangeTheAgentOwner": "Spremenite lastnika agenta",
   "ClientSearchDecryptingNames": "Dešifriranje imen datotek… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Mapa je prevelika. Rezultati iskanja so morda nepopolni.",
   "CompressingFiles": "Stiskanje datotek",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Datoteke ni mogoče premakniti v ta prostor. Poskusite premakniti obrazec PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Premikanje več datotek v prostor za izpolnjevanje obrazcev ni podprto. Premaknite po en obrazec PDF {{ organizationName }} naenkrat.",
   "WillBeDeletedPermanently": "{{date}} bo trajno izbrisan",
-  "YouLeftTheAgent": "Zapustili ste agenta.",
   "YourUserTypeHasChanged": "Superskrbnik <1>{{adminName}}</1> je vaš tip uporabnika spremenil na <1>„{{userType}}“</1>."
 }

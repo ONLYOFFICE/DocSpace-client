@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Analizza le risposte",
   "ArchiveAction": "Svuota archivio",
   "ArchiveEmptyScreenUser": "Le stanze che sono state archiviate appariranno qui.",
-  "ChangeAgentOwnerSelectorInfo": "Solo un amministratore della stanza o superamministratore può diventare proprietario dell'agente",
-  "ChangeTheAgentOwner": "Cambia il proprietario dell’agente",
   "ClientSearchDecryptingNames": "Decrittografia dei nomi dei file… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "La cartella è troppo grande. I risultati della ricerca potrebbero essere incompleti.",
   "CompressingFiles": "Compressione dei file",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Non è possibile spostare il file in questo spazio. Provare a spostare un modulo PDF {{ organizationName }} alla volta.",
   "WarningMoveToFormRoomServal": "Lo spostamento di più file nello spazio di compilazione dei moduli non è supportato. Sposta un modulo PDF {{ organizationName }} alla volta.",
   "WillBeDeletedPermanently": "{{date}} verrà eliminato definitivamente",
-  "YouLeftTheAgent": "Hai lasciato l'agente",
   "YourUserTypeHasChanged": "Il tuo tipo di utente è stato modificato in <1>“{{userType}}”</1> dal superamministratore <1>{{adminName}}</1>."
 }

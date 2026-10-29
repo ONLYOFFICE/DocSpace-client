@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Analizuj odpowiedzi",
   "ArchiveAction": "Opróżnij archiwum",
   "ArchiveEmptyScreenUser": "Tutaj pojawią się zarchiwizowane pokoje.",
-  "ChangeAgentOwnerSelectorInfo": "Tylko administrator pokoju lub superadministrator może zostać właścicielem agenta",
-  "ChangeTheAgentOwner": "Zmień właściciela agenta",
   "ClientSearchDecryptingNames": "Odszyfrowywanie nazw plików… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Folder jest zbyt duży. Wyniki wyszukiwania mogą być niepełne.",
   "CompressingFiles": "Kompresowanie plików",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Plik nie może zostać przeniesiony do tego obszaru. Spróbuj przenieść formularz PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Przenoszenie kilku plików do Obszaru do wypełniania formularzy nie jest obsługiwane. Przenoś po jednym formularzu PDF {{ organizationName }} na raz.",
   "WillBeDeletedPermanently": "{{date}} nastąpi trwałe usunięcie",
-  "YouLeftTheAgent": "Zostawiłeś agenta.",
   "YourUserTypeHasChanged": "Twój rodzaj użytkownika został zmieniony na <1>„{{userType}}”</1> przez superadministratora <1>{{adminName}}</1>."
 }

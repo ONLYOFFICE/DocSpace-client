@@ -64,10 +64,8 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
     onChangeFile,
     setImage,
     checkIsExpiredLinkAsync,
-    getIsAIAgent,
     getIsTrash,
     infoPanelItemsList,
-    editAgentDialogProps,
     enablePlugins,
     isRecentFolder,
   } = restProps as Exclude<InfoPanelBodyContentProps, { isGallery: true }>;
@@ -92,10 +90,8 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
       onChangeFile={onChangeFile}
       setImage={setImage}
       checkIsExpiredLinkAsync={checkIsExpiredLinkAsync}
-      getIsAIAgent={getIsAIAgent}
       getIsTrash={getIsTrash}
       infoPanelItemsList={infoPanelItemsList}
-      editAgentDialogProps={editAgentDialogProps}
       enablePlugins={enablePlugins}
       isRecentFolder={isRecentFolder}
     />
@@ -112,7 +108,6 @@ export default inject(
     filesActionsStore,
     pluginStore,
     treeFoldersStore,
-    aiRoomStore,
   }: TStore) => {
     const { contactsTab } = peopleStore.usersStore;
 
@@ -125,14 +120,12 @@ export default inject(
       getIsFiles,
       getIsRooms,
       getIsForms,
-      getIsAIAgent,
       getIsTrash,
     } = infoPanelStore;
 
     const { isExpiredLinkAsync } = filesActionsStore;
     const {
       editRoomDialogProps,
-      editAgentDialogProps,
       createRoomDialogProps,
       templateEventVisible,
     } = dialogsStore;
@@ -158,7 +151,6 @@ export default inject(
       getIsFiles,
       getIsRooms,
       getIsForms,
-      getIsAIAgent,
       getIsTrash,
 
       infoPanelItemsList,
@@ -169,7 +161,6 @@ export default inject(
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 
       editRoomDialogProps,
-      editAgentDialogProps,
       createRoomDialogProps,
       templateEventVisible,
 

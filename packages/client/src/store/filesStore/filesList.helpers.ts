@@ -37,13 +37,11 @@ import {
   FileType,
   FileStatus,
   FolderType,
-  RoomsType,
   RoomsProviderType,
 } from "@docspace/shared/enums";
 import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
 
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
@@ -63,7 +61,6 @@ import type { TItem } from "./types";
 export type BuildFilesListItemsDeps = {
   fileItemsList: PluginStore["fileItemsList"];
   enablePlugins: boolean;
-  aiReadyNeedReset: boolean | undefined;
   getIcon: FilesSettingsStore["getIcon"];
   getThirdPartyIcon: ThirdPartyStore["getThirdPartyIcon"];
   getItemUrl: FilesStore["getItemUrl"];
@@ -80,7 +77,6 @@ export const buildFilesListItems = (
   const {
     fileItemsList,
     enablePlugins,
-    aiReadyNeedReset,
     getIcon,
     getThirdPartyIcon,
     getItemUrl,
@@ -159,7 +155,6 @@ export const buildFilesListItems = (
       watermark,
       formFillingStatus,
       customFilterEnabled,
-      chatSettings,
       customFilterEnabledBy,
       lockedBy,
       location,
@@ -193,32 +188,12 @@ export const buildFilesListItems = (
     const contextOptions = getFilesContextOptions(item);
     const isThirdPartyFolder = providerKey && id === rootFolderId;
 
-    const isAIAgent =
-      item.rootFolderType === FolderType.AIAgents &&
-      item.roomType === RoomsType.AIRoom;
-
-    const newSecurity = {
-      ...security,
-      EditAccess: item.security?.EditAccess && !aiReadyNeedReset,
-      EditRoom: item.security?.EditRoom && !aiReadyNeedReset,
-      ChangeOwner: item.security?.ChangeOwner && !aiReadyNeedReset,
-    };
-
     let isFolder = item.isFolder ?? false;
     folders.forEach((x) => {
       if (x.id === item.id && x.parentId === item.parentId) isFolder = true;
     });
 
-    const folderUrl =
-      isFolder &&
-      getItemUrl(
-        id,
-        isFolder,
-        false,
-        false,
-        "",
-        roomType === RoomsType.AIRoom,
-      );
+    const folderUrl = isFolder && getItemUrl(id, isFolder, false, false);
 
     const docUrl =
       !canOpenPlayer &&
@@ -269,7 +244,7 @@ export const buildFilesListItems = (
       fileTileIcon?: string;
     } = {};
 
-    if (!isAIAgents() && enablePlugins && fileItemsList) {
+    if (enablePlugins && fileItemsList) {
       fileItemsList.forEach(({ value }) => {
         if (value.extension === fileExst) {
           if (value.fileTypeName)
@@ -349,13 +324,12 @@ export const buildFilesListItems = (
       roomType,
       isRoom,
       isTemplate,
-      isAIAgent,
       isArchive,
       tags,
       pinned,
       thirdPartyIcon,
       providerType,
-      security: isAIAgent ? newSecurity : security,
+      security,
       viewAccessibility,
       ...pluginOptions,
       inRoom,
@@ -381,7 +355,6 @@ export const buildFilesListItems = (
       watermark,
       formFillingStatus,
       customFilterEnabled,
-      chatSettings,
       customFilterEnabledBy,
       location,
       ...rest,

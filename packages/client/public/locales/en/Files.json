@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Analyze responses",
   "ArchiveAction": "Empty archive",
   "ArchiveEmptyScreenUser": "Rooms that have been archived will appear here.",
-  "ChangeAgentOwnerSelectorInfo": "Only a room admin or Full admin can become the owner of the agent",
-  "ChangeTheAgentOwner": "Change the agent owner",
   "ClientSearchDecryptingNames": "Decrypting file names… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "The folder is too large. Search results may be incomplete.",
   "CompressingFiles": "Compressing files",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "The file cannot be moved to this space. Please try to move the {{ organizationName }} PDF form.",
   "WarningMoveToFormRoomServal": "Moving several files to the Form Filling space is not supported. Move one {{ organizationName }} PDF form at a time.",
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
-  "YouLeftTheAgent": "You have left the agent",
   "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the Full admin <1>{{adminName}}</1>."
 }

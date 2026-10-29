@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Проанализировать ответы",
   "ArchiveAction": "Очистить архив",
   "ArchiveEmptyScreenUser": "Здесь появятся комнаты, которые были заархивированы.",
-  "ChangeAgentOwnerSelectorInfo": "Владельцем агента может стать только администратор комнаты или суперадминистратор",
-  "ChangeTheAgentOwner": "Изменить владельца агента",
   "ClientSearchDecryptingNames": "Расшифровка имён файлов… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Папка слишком большая. Результаты поиска могут быть неполными.",
   "CompressingFiles": "Сжатие файлов",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Файл не может быть перемещен в это пространство. Пожалуйста, попробуйте переместить PDF-форму {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Перемещение нескольких файлов в пространство заполнения форм не поддерживается. Перемещайте по одной PDF-форме {{ organizationName }}.",
   "WillBeDeletedPermanently": "{{date}} будет удален навсегда",
-  "YouLeftTheAgent": "Вы покинули агента",
   "YourUserTypeHasChanged": "Ваш тип пользователя был изменен на <1>«{{userType}}»</1> суперадминистратором <1>{{adminName}}</1>."
 }

@@ -36,10 +36,9 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
-import { Navigate, useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 import { getCategoryType } from "@docspace/shared/utils/common";
-import componentLoader from "@docspace/shared/utils/component-loader";
 import { CategoryType } from "@docspace/shared/constants";
 import { Consumer } from "@onlyoffice/apps-ui-kit/utils";
 import type { Nullable } from "@docspace/shared/types";
@@ -57,14 +56,10 @@ import { TOAST_FOLDER_PUBLIC_KEY } from "@docspace/shared/constants";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { SearchArea } from "@docspace/shared/enums";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
-import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";
@@ -76,22 +71,6 @@ import useContacts, { type UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { type UseFilesProps } from "../Hooks/useFiles";
 import OformsStore from "SRC_DIR/store/OformsStore";
 
-// Loaded on demand: AIAgentView statically pulls in the whole
-// @onlyoffice/ai-chat UI (assistant-ui runtime, markdown pipeline, …), and
-// this file itself sits in the entry graph — routes/client.js imports
-// ViewComponent statically — so a static import here would put all of that
-// on the initial-load critical path. The chunk is fetched only when the
-// chat view actually renders.
-// componentLoader, not a bare import: a stale chunk hash after a deploy (or
-// an aborted request in a throttled background tab) rejects the import, and
-// with nothing catching it the chat view just never renders. The loader
-// reloads the page once to pick up the new manifest.
-const AIAgentView = React.lazy(() =>
-  componentLoader(() => import("SRC_DIR/pages/Home/View/AIAgentView")).then(
-    (m) => ({ default: m.AIAgentView }),
-  ),
-);
-
 type ViewProps = UseContactsProps &
   UseFilesProps &
   UseProfileBodyProps & {
@@ -99,7 +78,6 @@ type ViewProps = UseContactsProps &
     setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
     setCurrentClientView: ClientLoadingStore["setCurrentClientView"];
     setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
-    showBodyLoader: ClientLoadingStore["showBodyLoader"];
 
     clearFiles: FilesStore["clearFiles"];
 
@@ -108,11 +86,8 @@ type ViewProps = UseContactsProps &
 
     filesAbortController: Nullable<AbortController>;
     roomsAbortController: Nullable<AbortController>;
-    aiAgentsAbortController: Nullable<AbortController>;
 
     showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
-
-    canUseChat: AccessRightsStore["canUseChat"];
 
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
     currentExtensionGallery: OformsStore["currentExtensionGallery"];
@@ -137,11 +112,9 @@ const View = ({
 
   filesAbortController,
   roomsAbortController,
-  aiAgentsAbortController,
 
   fetchFiles,
   fetchRooms,
-  fetchAgents,
 
   playlist,
 
@@ -163,7 +136,6 @@ const View = ({
 
   setIsSectionHeaderLoading,
 
-  showBodyLoader,
   showHeaderLoader,
 
   getFilesSettings,
@@ -183,8 +155,6 @@ const View = ({
   setNotificationChannels,
   checkTg,
   getEncryptionKeys,
-
-  canUseChat,
 }: ViewProps) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -192,16 +162,9 @@ const View = ({
 
   const isContactsPage = location.pathname.includes("accounts");
   const isProfilePage = location.pathname.includes("profile");
-  const isChatPage =
-    location.pathname.includes("chat") &&
-    location.pathname.includes("ai-agents");
 
   const [currentView, setCurrentView] = React.useState(() => {
     const type = getCategoryType(location);
-
-    if (type === CategoryType.Chat) {
-      return "chat";
-    }
 
     if (type === CategoryType.Accounts) {
       return "users";
@@ -247,7 +210,6 @@ const View = ({
   const { getFiles } = useFiles({
     fetchFiles,
     fetchRooms,
-    fetchAgents,
 
     playlist,
 
@@ -294,7 +256,6 @@ const View = ({
   const abortControllers = React.useRef({
     filesAbortController,
     roomsAbortController,
-    aiAgentsAbortController,
     usersAbortController,
     groupsAbortController,
   });
@@ -318,13 +279,11 @@ const View = ({
   React.useEffect(() => {
     abortControllers.current.filesAbortController = filesAbortController;
     abortControllers.current.roomsAbortController = roomsAbortController;
-    abortControllers.current.aiAgentsAbortController = aiAgentsAbortController;
     abortControllers.current.usersAbortController = usersAbortController;
     abortControllers.current.groupsAbortController = groupsAbortController;
   }, [
     filesAbortController,
     roomsAbortController,
-    aiAgentsAbortController,
     usersAbortController,
     groupsAbortController,
   ]);
@@ -426,11 +385,10 @@ const View = ({
         abortControllers.current.groupsAbortController?.abort();
         abortControllers.current.filesAbortController?.abort();
         abortControllers.current.roomsAbortController?.abort();
-        abortControllers.current.aiAgentsAbortController?.abort();
 
         setIsLoading(true);
         setIsChangePageRequestRunning(true);
-        let view: void | "groups" | "files" | "users" | "profile" | "chat" =
+        let view: void | "groups" | "files" | "users" | "profile" =
           await fetchContactsRef.current();
 
         if (isProfilePage) {
@@ -440,18 +398,6 @@ const View = ({
           setContactsTab(false);
 
           view = "profile";
-        } else if (isChatPage) {
-          try {
-            await getFilesRef.current();
-          } catch {
-            // chat renders without file data
-          }
-
-          view = "chat";
-
-          prevCategoryType.current = getCategoryType(location);
-
-          setContactsTab(false);
         } else if (!isContactsPage) {
           await getFilesRef.current();
 
@@ -512,13 +458,11 @@ const View = ({
     location.search,
     isContactsPage,
     isProfilePage,
-    isChatPage,
     showToastAccess,
   ]);
 
   React.useEffect(() => {
-    if (isLoading || currentView === "chat" || currentView === "profile")
-      return;
+    if (isLoading || currentView === "profile") return;
 
     const scroll = document.getElementsByClassName("section-body");
 
@@ -532,49 +476,6 @@ const View = ({
     scrollToTop();
   }, [isLoading, currentView, scrollToTop]);
 
-  React.useEffect(() => {
-    if (
-      selectedFolderStore.isInsideResultStorage &&
-      !canUseChat &&
-      !showBodyLoader
-    ) {
-      toastr.info(
-        <Trans
-          t={t}
-          ns="Common"
-          i18nKey="AgentInViewModeWarning"
-          components={{
-            strong: <strong />,
-          }}
-          values={{ aiChat: t("Common:AIChat") }}
-        />,
-      );
-    }
-  }, [
-    selectedFolderStore.isInsideResultStorage,
-    canUseChat,
-    showBodyLoader,
-    t,
-  ]);
-
-  const shouldRedirectToResultStorage =
-    currentView === "chat" &&
-    selectedFolderStore.isAIRoom &&
-    !canUseChat &&
-    !showBodyLoader;
-
-  if (shouldRedirectToResultStorage) {
-    const agentId = selectedFolderStore.id || "";
-
-    const filesFilter = FilesFilter.getDefault();
-    filesFilter.folder = agentId.toString();
-    filesFilter.searchArea = SearchArea.ResultStorage;
-
-    const path = getCategoryUrl(CategoryType.AIAgent, agentId);
-
-    return <Navigate to={`${path}?${filesFilter.toUrlParams()}`} />;
-  }
-
   return (
     <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>
       <Consumer>
@@ -584,12 +485,6 @@ const View = ({
               sectionWidth={context.sectionWidth}
               currentView={currentView}
             />
-          ) : currentView === "chat" || selectedFolderStore.isAIRoom ? (
-            // No fallback: LoaderWrapper above already covers loading states,
-            // and the chat shows its own skeleton once mounted.
-            <React.Suspense fallback={null}>
-              <AIAgentView currentView={currentView} />
-            </React.Suspense>
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
           ) : (
@@ -618,10 +513,7 @@ export const ViewComponent = inject(
     setup,
     authStore,
     telegramStore,
-    accessRightsStore,
   }: TStore) => {
-    const { canUseChat } = accessRightsStore;
-
     const { usersStore, groupsStore } = peopleStore;
 
     const {
@@ -642,7 +534,6 @@ export const ViewComponent = inject(
       scrollToTop,
       fetchFiles,
       fetchRooms,
-      fetchAgents,
       getFileInfo,
       setIsPreview,
       setIsUpdatingRowItem,
@@ -651,7 +542,6 @@ export const ViewComponent = inject(
 
       filesController,
       roomsController,
-      aiAgentsController,
 
       clearFiles,
     } = filesStore;
@@ -703,7 +593,6 @@ export const ViewComponent = inject(
       scrollToTop,
       fetchFiles,
       fetchRooms,
-      fetchAgents,
       getFileInfo,
       setIsPreview,
       setIsUpdatingRowItem,
@@ -718,7 +607,6 @@ export const ViewComponent = inject(
 
       filesAbortController: filesController,
       roomsAbortController: roomsController,
-      aiAgentsAbortController: aiAgentsController,
 
       playlist,
       setToPreviewFile,
@@ -736,7 +624,6 @@ export const ViewComponent = inject(
 
       setIsSectionHeaderLoading,
 
-      showBodyLoader: clientLoadingStore.showBodyLoader,
       showHeaderLoader,
 
       getFilesSettings,
@@ -755,7 +642,6 @@ export const ViewComponent = inject(
       setNotificationChannels,
       checkTg,
 
-      canUseChat,
     };
   },
 )(observer(View));

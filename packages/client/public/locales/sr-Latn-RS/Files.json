@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Analiraj odgovore",
   "ArchiveAction": "Isprazni arhivu",
   "ArchiveEmptyScreenUser": "Sobe koje su arhivirane će se pojaviti ovde.",
-  "ChangeAgentOwnerSelectorInfo": "Samo administrator sobe ili superadministrator može postati vlasnik agenta",
-  "ChangeTheAgentOwner": "Promenite vlasnika agenta",
   "ClientSearchDecryptingNames": "Dešifrovanje naziva datoteka… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Fascikla je prevelika. Rezultati pretrage mogu biti nepotpuni.",
   "CompressingFiles": "Kompresovanje datoteka",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Fajl ne može biti premešten u ovaj prostor. Pokušajte da premestite {{ organizationName }} PDF obrazac.",
   "WarningMoveToFormRoomServal": "Premeštanje više fajlova u prostor za popunjavanje obrazaca nije podržano. Premestite jedan {{ organizationName }} PDF obrazac u isto vreme.",
   "WillBeDeletedPermanently": "{{date}} će biti trajno obrisan",
-  "YouLeftTheAgent": "Ostavili ste agenta",
   "YourUserTypeHasChanged": "Vaš tip korisnika je promenio superadministrator <1>{{adminName}}</1> u <1>„{{userType}}“</1>."
 }

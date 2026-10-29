@@ -394,7 +394,6 @@ class InfoPanelStore {
   getCanDisplay = () => {
     if (isPluginPage()) return false;
 
-    const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
     const isForms = this.getIsForms();
@@ -407,7 +406,6 @@ class InfoPanelStore {
       isFiles ||
       isForms ||
       isAccounts ||
-      isAIAgent ||
       this.getIsAiProjects()
     );
   };
@@ -415,11 +413,6 @@ class InfoPanelStore {
   /** The AI projects page shows a project in the panel as a room. */
   getIsAiProjects = () =>
     window.location.pathname.toLowerCase().startsWith("/ai-projects");
-
-  getIsAIAgent = () => {
-    const pathname = window.location.pathname.toLowerCase();
-    return pathname.indexOf("ai-agent") !== -1;
-  };
 
   getIsForms = () => {
     const pathname = window.location.pathname.toLowerCase();

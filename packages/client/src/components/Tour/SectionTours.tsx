@@ -73,7 +73,6 @@ const lazyTour = (load: () => Promise<{ default: unknown }>) =>
 const FilesTour = lazyTour(() => import("SRC_DIR/components/FilesTour"));
 const RoomsTour = lazyTour(() => import("SRC_DIR/components/RoomsTour"));
 const FormsTour = lazyTour(() => import("SRC_DIR/components/FormsTour"));
-const AiAgentsTour = lazyTour(() => import("SRC_DIR/components/AiAgentsTour"));
 
 type SectionToursProps = {
   tourStores: TourStore[];
@@ -116,7 +115,6 @@ const SectionTours = ({ tourStores, isWanted }: SectionToursProps) => {
       <FilesTour />
       <RoomsTour />
       <FormsTour />
-      <AiAgentsTour />
     </Suspense>
   );
 };
@@ -126,14 +124,8 @@ export default inject(
     filesTourStore,
     roomsTourStore,
     formsTourStore,
-    aiAgentsTourStore,
   }: TStore) => {
-    const tourStores = [
-      filesTourStore,
-      roomsTourStore,
-      formsTourStore,
-      aiAgentsTourStore,
-    ];
+    const tourStores = [filesTourStore, roomsTourStore, formsTourStore];
 
     return {
       tourStores,

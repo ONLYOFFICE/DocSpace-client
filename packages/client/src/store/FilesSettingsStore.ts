@@ -64,7 +64,6 @@ import {
   insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -690,9 +689,6 @@ class FilesSettingsStore {
         case RoomsType.CustomRoom:
           path = "customRoom.svg";
           break;
-        case RoomsType.AIRoom:
-          path = "aiRoom.svg";
-          break;
         case RoomsType.EditingRoom:
           path = "editingRoom.svg";
           break;
@@ -735,7 +731,7 @@ class FilesSettingsStore {
     const { enablePlugins } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
 
-    if (!isAIAgents() && enablePlugins && fileItemsList) {
+    if (enablePlugins && fileItemsList) {
       const fileItem = fileItemsList.find(
         ({ value }) => value.extension === extension && value.fileIcon,
       );

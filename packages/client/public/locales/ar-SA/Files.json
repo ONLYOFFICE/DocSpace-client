@@ -14,8 +14,6 @@
   "AnalyzeResponses": "تحليل الاستجابات",
   "ArchiveAction": "إفراغ الأرشيف",
   "ArchiveEmptyScreenUser": "ستظهر هنا الغرف التي تم أرشفتها.",
-  "ChangeAgentOwnerSelectorInfo": "يمكن لمسؤول الغرفة أو المسؤول العام فقط أن يصبح مالكًا للوكيل",
-  "ChangeTheAgentOwner": "تغيير مالك الوكيل",
   "ClientSearchDecryptingNames": "جارٍ فك تشفير أسماء الملفات… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "المجلد كبير جدًا. قد تكون نتائج البحث غير مكتملة.",
   "CompressingFiles": "ضغط الملفات",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "لا يمكن نقل الملف إلى هذه المساحة. يُرجى محاولة نقل نموذج PDF الخاص بـ {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "لا يُسمح بنقل أكثر من ملف واحد إلى مساحة تعبئة النماذج. يرجى نقل نماذج PDF من {{ organizationName }} بشكل فردي.",
   "WillBeDeletedPermanently": "سيتم حذف {{date}} نهائيًا",
-  "YouLeftTheAgent": "لقد غادرتم الوكيل",
   "YourUserTypeHasChanged": "تم تغيير نوع المستخدم الخاص بك إلى <1>«{{userType}}»</1> بواسطة المسؤول العام <1>{{adminName}}</1>."
 }

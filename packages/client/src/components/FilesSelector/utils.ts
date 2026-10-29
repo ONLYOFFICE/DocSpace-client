@@ -116,9 +116,6 @@ export const getIsDisabled = (
   includeFolder?: boolean,
   isRestore?: boolean,
   isDisabledFolder?: boolean,
-  isInsideKnowledge?: boolean,
-  isInsideResultStorage?: boolean,
-  isAgents?: boolean,
   isInsidePrivateRoom?: boolean,
   sourceIsPrivate?: boolean,
 ) => {
@@ -138,8 +135,6 @@ export const getIsDisabled = (
   )
     return true;
   if (isCopy) {
-    if (isInsideResultStorage || isAgents) return true;
-
     if (sourceIsPrivate && isInsidePrivateRoom) {
       return security && "Create" in security ? !security.Create : false;
     }
@@ -149,8 +144,6 @@ export const getIsDisabled = (
       : !security?.Copy;
   }
   if (isMove || isRestoreAll || isRestore) {
-    if (isInsideResultStorage || isAgents) return true;
-
     return security && "MoveTo" in security
       ? !security?.MoveTo || !security?.Create
       : !security?.Move;

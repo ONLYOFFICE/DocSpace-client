@@ -33,11 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import {
-	ShareAccessRights,
-	EmployeeType,
-	RoomsType,
-} from "@docspace/shared/enums";
+import { ShareAccessRights, EmployeeType } from "@docspace/shared/enums";
 
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
@@ -49,12 +45,6 @@ export const getTopFreeRole = (t, roomType) => {
 		(item) => !checkIfAccessPaid(item.access) && item.key !== "s1",
 	);
 	return freeAccesses[0];
-};
-
-export const getViewerRole = (t, roomType) => {
-	const accesses = getAccessOptions(t, roomType);
-
-	return accesses.find((item) => item.key === "viewer");
 };
 
 export const isPaidUserRole = (selectedAccess) => {
@@ -91,24 +81,7 @@ export const makeFreeRole = (item, t, freeRole) => {
 	return item;
 };
 
-export const makeViewerRole = (item, t, viewerRole) => {
-	if (!viewerRole) return item;
-
-	item.warning =
-		item.access === ShareAccessRights.RoomManager
-			? t("Common:UserAgentMaxAvailableRoleWarning")
-			: t("Common:GuestAgentMaxAvailableRoleWarning");
-	item.access = viewerRole.access;
-
-	return item;
-};
-
 export const fixAccess = (item, t, roomType) => {
-	if (item.isVisitor && roomType === RoomsType.AIRoom) {
-		const viewerRole = getViewerRole(t, roomType);
-		return makeViewerRole(item, t, viewerRole);
-	} else {
-		const topFreeRole = getTopFreeRole(t, roomType);
-		return makeFreeRole(item, t, topFreeRole);
-	}
+	const topFreeRole = getTopFreeRole(t, roomType);
+	return makeFreeRole(item, t, topFreeRole);
 };

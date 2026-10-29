@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Анализ на отговорите",
   "ArchiveAction": "Изпразни архива",
   "ArchiveEmptyScreenUser": "Стаите, които са били архивирани, ще се покажат тук.",
-  "ChangeAgentOwnerSelectorInfo": "Само администратор на стая или суперадминистратор може да стане собственик на агента",
-  "ChangeTheAgentOwner": "Променете собственика на агента",
   "ClientSearchDecryptingNames": "Дешифриране на имената на файловете… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Папката е твърде голяма. Резултатите от търсенето може да са непълни.",
   "CompressingFiles": "Компресиране на файлове",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Файлът не може да бъде преместен в това пространство. Моля, опитайте да преместите {{ organizationName }} PDF формуляра.",
   "WarningMoveToFormRoomServal": "Преместването на няколко файла в пространството за попълване на формуляри не се поддържа. Премествайте по един {{ organizationName }} PDF формуляр.",
   "WillBeDeletedPermanently": "{{date}} ще бъде изтрита окончателно",
-  "YouLeftTheAgent": "Напуснали сте агента.",
   "YourUserTypeHasChanged": "Вашият тип потребител беше променен на <1>„{{userType}}“</1> от суперадминистратора <1>{{adminName}}</1>."
 }

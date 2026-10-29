@@ -90,23 +90,6 @@ describe("FilesStore.fetchRooms — characterization", () => {
   });
 });
 
-describe("FilesStore.fetchAgents — characterization", () => {
-  afterEach(() => vi.restoreAllMocks());
-
-  it("requests AI agents via api.ai.getAIAgents and fills folders", async () => {
-    const store = createTestFilesStore();
-    const getAgents = vi
-      .spyOn(api.ai, "getAIAgents")
-      .mockResolvedValue(roomsPayload([room(3)]) as never);
-
-    await store.fetchAgents(0);
-
-    expect(getAgents).toHaveBeenCalledTimes(1);
-    expect(store.folders.map((f) => f.id)).toEqual([3]);
-    expect(store.files).toEqual([]);
-  });
-});
-
 describe("FilesStore.fetchMoreFiles — characterization", () => {
   afterEach(() => vi.restoreAllMocks());
 
@@ -151,7 +134,7 @@ const highTotalPayload = () => ({
   current: { id: 7, parentId: 0, rootFolderType: FolderType.Rooms, security: {} },
 });
 
-describe("FilesStore.fetchRooms / fetchAgents — last-page clamp", () => {
+describe("FilesStore.fetchRooms — last-page clamp", () => {
   afterEach(() => vi.restoreAllMocks());
 
   it("fetchRooms re-requests when the page is beyond the last page", async () => {
@@ -168,20 +151,5 @@ describe("FilesStore.fetchRooms / fetchAgents — last-page clamp", () => {
 
     // once for the out-of-range page, once for the clamped page
     expect(getRooms).toHaveBeenCalledTimes(2);
-  });
-
-  it("fetchAgents re-requests when the page is beyond the last page", async () => {
-    const store = createTestFilesStore();
-    const getAgents = vi
-      .spyOn(api.ai, "getAIAgents")
-      .mockResolvedValue(highTotalPayload() as never);
-
-    const filter = store.roomsFilter.clone();
-    filter.page = 5;
-    filter.pageCount = 50;
-
-    await store.fetchAgents(0, filter);
-
-    expect(getAgents).toHaveBeenCalledTimes(2);
   });
 });

@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Ανάλυση απαντήσεων",
   "ArchiveAction": "Άδειασμα αρχείου",
   "ArchiveEmptyScreenUser": "Τα δωμάτια που έχουν αρχειοθετηθεί θα εμφανίζονται εδώ.",
-  "ChangeAgentOwnerSelectorInfo": "Μόνο ένας διαχειριστής δωματίου ή υπερδιαχειριστής μπορεί να γίνει κάτοχος του πράκτορα",
-  "ChangeTheAgentOwner": "Αλλαγή του ιδιοκτήτη του πράκτορα",
   "ClientSearchDecryptingNames": "Αποκρυπτογράφηση ονομάτων αρχείων… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Ο φάκελος είναι πολύ μεγάλος. Τα αποτελέσματα αναζήτησης ενδέχεται να είναι ελλιπή.",
   "CompressingFiles": "Συμπίεση αρχείων",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Δεν είναι δυνατή η μετακίνηση του αρχείου σε αυτόν τον χώρο. Δοκιμάστε να μετακινήσετε τη φόρμα PDF του {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Η μετακίνηση πολλών αρχείων στον χώρο συμπλήρωσης φορμών δεν υποστηρίζεται. Μετακινήστε μία φόρμα PDF του {{ organizationName }} τη φορά.",
   "WillBeDeletedPermanently": "Το αρχείο {{date}} θα διαγραφεί μόνιμα",
-  "YouLeftTheAgent": "Έχετε αποχωρήσει από τον πράκτορα",
   "YourUserTypeHasChanged": "Ο τύπος χρήστη σας άλλαξε σε <1>«{{userType}}»</1> από τον υπερδιαχειριστή <1>{{adminName}}</1>."
 }

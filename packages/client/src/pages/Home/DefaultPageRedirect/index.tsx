@@ -42,19 +42,14 @@ import { getDefaultStartPageUrl } from "SRC_DIR/helpers/defaultStartPage";
 
 type Props = {
   defaultFolderType?: SettingsStore["defaultFolderType"];
-  aiServicesEnabled?: SettingsStore["aiServicesEnabled"];
   isGuest?: boolean;
 };
 
 const DefaultPageRedirectComponent = ({
   defaultFolderType,
-  aiServicesEnabled,
   isGuest,
 }: Props) => {
-  const defaultUrl = getDefaultStartPageUrl(defaultFolderType, {
-    aiServicesEnabled,
-    isGuest,
-  });
+  const defaultUrl = getDefaultStartPageUrl(defaultFolderType, { isGuest });
 
   return <Navigate to={defaultUrl} replace />;
 };
@@ -62,7 +57,6 @@ const DefaultPageRedirectComponent = ({
 export const DefaultPageRedirect = inject(
   ({ settingsStore, userStore }: TStore) => ({
     defaultFolderType: settingsStore.defaultFolderType,
-    aiServicesEnabled: settingsStore.aiServicesEnabled,
     isGuest: userStore.user?.isVisitor ?? false,
   }),
 )(observer(DefaultPageRedirectComponent));

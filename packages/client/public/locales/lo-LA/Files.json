@@ -14,8 +14,6 @@
   "AnalyzeResponses": "ວິເຄາະຄຳຕອບ",
   "ArchiveAction": "ລ້າງບັງຄັບເກັບ",
   "ArchiveEmptyScreenUser": "ຫ້ອງທີ່ຖືກເກັບໄວ້ຈະປາກົດຢູ່ທີ່ນີ້.",
-  "ChangeAgentOwnerSelectorInfo": "ມີພຽງຜູ້ດູແລຫ້ອງ ຫຼື ຜູ້ດູແລລະບົບສູງສຸດເທົ່ານັ້ນທີ່ສາມາດເປັນເຈົ້າຂອງຕົວແທນໄດ້",
-  "ChangeTheAgentOwner": "ປ່ຽນເຈົ້າຂອງຕົວແທນ",
   "ClientSearchDecryptingNames": "ກຳລັງຖອດລະຫັດຊື່ໄຟລ໌… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "ໂຟນເດີໃຫຍ່ເກີນໄປ. ຜົນການຄົ້ນຫາອາດຈະບໍ່ຄົບຖ້ວນ.",
   "CompressingFiles": "ກຳລັງບີບອັດໄຟລ໌",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "ເອກະສານບໍ່ສາມາດຍ້າຍໄປຍັງສະເປສນີ້ໄດ້ ກະລຸນາພະຍາຍາມຍ້າຍແບບຟອມ PDF ຂອງ {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "ການເຄື່ອນໄຟລ໌ຫຼາຍໆລູກເຂົ້າສະເປສຕື່ມແບບຟອມບໍ່ຖືກສະຫນັບສະຫນູນ ໃຫ້ເຄື່ອນແບບຟອມ PDF {{ organizationName }} ຫນຶ່ງຢ່າງຄັ້ງລະຫນຶ່ງ.",
   "WillBeDeletedPermanently": "{{date}} ຈະຖືກລົບອອກຢ່າງຖາວອນ",
-  "YouLeftTheAgent": "ທ່ານໄດ້ອອກຈາກຕົວແທນແລ້ວ",
   "YourUserTypeHasChanged": "ປະເພດຜູ້ໃຊ້ຂອງທ່ານຖືກປ່ຽນເປັນ <1>“{{userType}}”</1> ໂດຍຜູ້ດູແລລະບົບສູງສຸດ <1>{{adminName}}</1>."
 }

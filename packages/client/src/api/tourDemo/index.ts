@@ -36,7 +36,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import { interceptRoute } from "@docspace/shared/api/client";
-import { SearchArea } from "@docspace/shared/enums";
 import type { TGetRooms, TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFolder, TGetFolder } from "@docspace/shared/api/files/types";
 
@@ -46,7 +45,6 @@ import {
   buildDemoPersonalFiles,
   buildDemoSharedFiles,
   buildDemoSpaceContents,
-  buildDemoAgentContents,
   type TourDemoConfig,
 } from "./data";
 
@@ -60,14 +58,6 @@ const route = (pattern: string) => new RegExp(`(?:^|/)files/${pattern}`);
 
 /** `files/rooms` — the room list of the section the tour walks through. */
 const ROOMS_LIST_ROUTE = route("rooms(\\?|$)");
-
-/**
- * `ai/agents` — the same list, for the one section that does not come off the
- * files API: the agents are served by the Node AI service. The envelope is the
- * room list's own (`{ response: { current, folders, count, total } }`), so the
- * two routes share a transform and only the pattern differs.
- */
-const AGENTS_LIST_ROUTE = /(?:^|\/)ai\/agents(\?|$)/;
 
 /**
  * Everything else is claimed for negative ids only. Every id the server hands
@@ -119,7 +109,7 @@ const idFromRoute = (route: RegExp, url?: string) => {
 /**
  * A section tour on a portal that has nothing in that section yet.
  *
- * Every list-backed section — Rooms, Forms, AI Agents, and the Shared with me
+ * Every list-backed section — Rooms, Forms, and the Shared with me
  * a guest gets in place of a personal space — renders neither the
  * quick-actions banner nor the filter bar while it is empty (`isEmptyPage`
  * gates both), so a tour there would be reduced to its sidebar steps — nothing
@@ -212,7 +202,7 @@ class TourDemo {
   };
 
   /**
-   * A section whose list is rooms: Rooms, Forms and AI Agents. Everything a
+   * A section whose list is rooms: Rooms and Forms. Everything a
    * stand-in room can be asked about is answered here, because a room the
    * server has never heard of cannot be asked about anywhere else.
    */
@@ -226,9 +216,7 @@ class TourDemo {
       // only when the tour is standing in for the list at all. The rooms are
       // built either way: that is where the space a tour walks into comes from.
       interceptRoute({
-        match: matches(
-          config.list === "agents" ? AGENTS_LIST_ROUTE : ROOMS_LIST_ROUTE,
-        ),
+        match: matches(ROOMS_LIST_ROUTE),
         transform: (data) => {
           const envelope = data as { response?: TGetRooms } | null;
           const rooms = envelope?.response;
@@ -303,25 +291,6 @@ class TourDemo {
           const room = this.rooms.find((item) => item.id === id);
 
           if (!room || !this.sectionRoot) return { response: null };
-
-          if (config.list === "agents") {
-            const area = request.url?.match(/[?&]searchArea=(\d+)/)?.[1];
-            const tab =
-              area === String(SearchArea.ResultStorage)
-                ? "outputs"
-                : area === String(SearchArea.Knowledge)
-                  ? "knowledge"
-                  : "chat";
-
-            return {
-              response: buildDemoAgentContents(
-                room,
-                this.sectionRoot,
-                config,
-                tab,
-              ),
-            };
-          }
 
           return {
             response: buildDemoSpaceContents(room, this.sectionRoot, config),

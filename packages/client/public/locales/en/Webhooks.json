@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "AI agent created",
-  "AgentDeleted": "AI agent deleted",
-  "AgentUpdated": "AI agent updated",
   "Before": "Before",
   "CreateWebhook": "Create webhook",
   "DeleteHint": "The webhook will be deleted permanently.\nYou will not be able to undo this action.",

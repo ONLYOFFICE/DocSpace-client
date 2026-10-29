@@ -20,9 +20,9 @@ is a generated matrix rather than a set of hand-written cases.
 | role | owner, full-admin, room-admin, user, guest | profile-card pencil, plan line, create rights, guest restrictions |
 | edition | SaaS, standalone | integrations card and Docs Connect exist in SaaS only; standalone is offered no SaaS billing at all |
 | plan | SaaS: paid / free · standalone: community / enterprise / developer | plan line and apps subtitle name Startup or Business (SaaS only); standalone Community admins/owner get the "Unlock more with Enterprise or Developer" line instead |
-| AI | on / off | AI Chat quick action, AI Agents card and sidebar item |
+| AI | on / off | AI Chat quick action and the AI Projects sidebar item (the apps grid itself has no AI card) |
 | Developer Tools | offered / limited to admins | Developer Tools and integrations cards |
-| width | desktop 1440, tablet 900, mobile 390 | apps grid re-flows 4 → 2 → 1 |
+| width | desktop 1440, tablet 900, mobile 390 | apps grid re-flows 3 → 2 → 1 |
 
 The width axis is a block of its own (owner + guest, both AI states): what a
 narrower window changes is the same for every audience, and what does interact

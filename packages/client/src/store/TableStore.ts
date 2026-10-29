@@ -41,7 +41,6 @@ import {
   TableVersions,
   TABLE_ROOMS_COLUMNS,
   TABLE_PEOPLE_COLUMNS,
-  TABLE_AI_AGENTS_COLUMNS,
 } from "SRC_DIR/helpers/constants";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
@@ -70,7 +69,6 @@ const TABLE_IN_SHARED_FOLDER_COLUMNS = `inSharedFolderTableColumns_ver-${TableVe
 
 const COLUMNS_SIZE = `filesColumnsSize_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE = `roomsColumnsSize_ver-${TableVersions.Rooms}`;
-const COLUMNS_AI_AGENTS_SIZE = `aiAgentsColumnsSize_ver-${TableVersions.AIAgents}`;
 const COLUMNS_TRASH_SIZE = `trashColumnsSize_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE = `recentColumnsSize_ver-${TableVersions.Recent}`;
 const COLUMNS_FAVORITES_SIZE = `favoritesColumnsSize_ver-${TableVersions.Favorites}`;
@@ -85,7 +83,6 @@ const COLUMNS_IN_SHARED_FOLDER_SIZE = `inSharedFolderColumnsSize_ver-${TableVers
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
-const COLUMNS_AI_AGENTS_SIZE_INFO_PANEL = `aiAgentsColumnsSizeInfoPanel_ver-${TableVersions.AIAgents}`;
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
 const COLUMNS_FAVORITES_SIZE_INFO_PANEL = `favoritesColumnsSizeInfoPanel_ver-${TableVersions.Favorites}`;
@@ -129,16 +126,6 @@ class TableStore {
   roomColumnActivityIsEnabled = true;
 
   roomQuotaColumnIsEnable = false;
-
-  aiAgentColumnNameIsEnabled = true; // always true
-
-  aiAgentColumnTagsIsEnabled = true;
-
-  aiAgentColumnOwnerIsEnabled = false;
-
-  aiAgentColumnActivityIsEnabled = true;
-
-  aiAgentColumnQuotaIsEnable = false;
 
   nameColumnIsEnabled = true; // always true
 
@@ -286,22 +273,6 @@ class TableStore {
 
   setRoomColumnActivity = (enable: boolean) => {
     this.roomColumnActivityIsEnabled = enable;
-  };
-
-  setAIAgentColumnTags = (enable: boolean) => {
-    this.aiAgentColumnTagsIsEnabled = enable;
-  };
-
-  setAIAgentColumnOwner = (enable: boolean) => {
-    this.aiAgentColumnOwnerIsEnabled = enable;
-  };
-
-  setAIAgentColumnActivity = (enable: boolean) => {
-    this.aiAgentColumnActivityIsEnabled = enable;
-  };
-
-  setAIAgentColumnQuota = (enable: boolean) => {
-    this.aiAgentColumnQuotaIsEnable = enable;
   };
 
   setTemplateRoomColumnActivity = (enable: boolean) => {
@@ -508,7 +479,6 @@ class TableStore {
         isFavoritesFolder,
         isSharedWithMeFolder,
         isInSharedFolder,
-        isAIAgentsFolder,
         isFormsFolder,
       } = this.treeFoldersStore;
 
@@ -573,16 +543,6 @@ class TableStore {
         this.setRoomColumnOwner(splitColumns.includes("Owner"));
         this.setRoomColumnActivity(splitColumns.includes("Activity"));
         this.setRoomColumnQuota(splitColumns.includes("Storage"));
-        return;
-      }
-
-      if (isAIAgentsFolder) {
-        this.setAIAgentColumnTags(splitColumns.includes("TagsAIAgents"));
-        this.setAIAgentColumnOwner(splitColumns.includes("OwnerAIAgents"));
-        this.setAIAgentColumnActivity(
-          splitColumns.includes("ActivityAIAgents"),
-        );
-        this.setAIAgentColumnQuota(splitColumns.includes("StorageAIAgents"));
         return;
       }
 
@@ -796,10 +756,6 @@ class TableStore {
         this.setRoomColumnOwner(!this.roomColumnOwnerIsEnabled);
         return;
 
-      case "OwnerAIAgents":
-        this.setAIAgentColumnOwner(!this.aiAgentColumnOwnerIsEnabled);
-        return;
-
       case "TypeTemplates":
         this.setTypeTemplatesColumn(!this.templatesRoomColumnTypeIsEnabled);
         return;
@@ -812,16 +768,8 @@ class TableStore {
         this.setTemplateRoomColumnTags(!this.templateRoomColumnTagsIsEnabled);
         return;
 
-      case "TagsAIAgents":
-        this.setAIAgentColumnTags(!this.aiAgentColumnTagsIsEnabled);
-        return;
-
       case "Activity":
         this.setRoomColumnActivity(!this.roomColumnActivityIsEnabled);
-        return;
-
-      case "ActivityAIAgents":
-        this.setAIAgentColumnActivity(!this.aiAgentColumnActivityIsEnabled);
         return;
 
       case "AuthorShareWithMe":
@@ -900,10 +848,6 @@ class TableStore {
           );
         return;
 
-      case "StorageAIAgents":
-        this.setAIAgentColumnQuota(!this.aiAgentColumnQuotaIsEnable);
-        return;
-
       case "Inviter":
         this.setGuestsColumnInviter(!this.inviterGuestsColumnIsEnabled);
         return;
@@ -961,7 +905,6 @@ class TableStore {
       isFavoritesFolder,
       isSharedWithMeFolder,
       isInSharedFolder,
-      isAIAgentsFolder,
       isFormsFolder,
     } = this.treeFoldersStore;
 
@@ -986,15 +929,13 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
     const userId = this.userStore.user?.id ?? GUEST_ID;
     const isFrame = this.settingsStore.isFrame;
-    const isDocumentsFolder = !isRooms && !isAIAgentsFolder;
+    const isDocumentsFolder = !isRooms;
 
     let tableStorageName: string;
 
     if (isTemplatesFolder)
       tableStorageName = `${TABLE_TEMPLATES_ROOM_COLUMNS}=${userId}`;
     else if (isRooms) tableStorageName = `${TABLE_ROOMS_COLUMNS}=${userId}`;
-    else if (isAIAgentsFolder)
-      tableStorageName = `${TABLE_AI_AGENTS_COLUMNS}=${userId}`;
     else if (isContactsPeople)
       tableStorageName = `${TABLE_PEOPLE_COLUMNS}=${userId}`;
     else if (isContactsGuests)
@@ -1034,7 +975,6 @@ class TableStore {
       isFavoritesFolder,
       isSharedWithMeFolder,
       isInSharedFolder,
-      isAIAgentsFolder,
       isFormsFolder,
     } = this.treeFoldersStore;
 
@@ -1059,15 +999,13 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
     const userId = this.userStore.user?.id ?? GUEST_ID;
     const isFrame = this.settingsStore.isFrame;
-    const isDocumentsFolder = !isRooms && !isAIAgentsFolder;
+    const isDocumentsFolder = !isRooms;
 
     let columnStorageName: string;
 
     if (isTemplatesFolder)
       columnStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE}=${userId}`;
     else if (isRooms) columnStorageName = `${COLUMNS_ROOMS_SIZE}=${userId}`;
-    else if (isAIAgentsFolder)
-      columnStorageName = `${COLUMNS_AI_AGENTS_SIZE}=${userId}`;
     else if (isTrashFolder)
       columnStorageName = `${COLUMNS_TRASH_SIZE}=${userId}`;
     else if (isRecentFolder)
@@ -1107,7 +1045,6 @@ class TableStore {
       isFavoritesFolder,
       isSharedWithMeFolder,
       isInSharedFolder,
-      isAIAgentsFolder,
       isFormsFolder,
     } = this.treeFoldersStore;
 
@@ -1132,7 +1069,7 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
     const userId = this.userStore.user?.id ?? GUEST_ID;
     const isFrame = this.settingsStore.isFrame;
-    const isDocumentsFolder = !isRooms && !isAIAgentsFolder;
+    const isDocumentsFolder = !isRooms;
 
     let columnInfoPanelStorageName: string;
 
@@ -1140,8 +1077,6 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL}=${userId}`;
     else if (isRooms)
       columnInfoPanelStorageName = `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`;
-    else if (isAIAgentsFolder)
-      columnInfoPanelStorageName = `${COLUMNS_AI_AGENTS_SIZE_INFO_PANEL}=${userId}`;
     else if (isTrashFolder)
       columnInfoPanelStorageName = `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`;
     else if (isRecentFolder)

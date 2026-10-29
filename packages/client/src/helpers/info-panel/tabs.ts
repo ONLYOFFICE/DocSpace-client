@@ -126,18 +126,7 @@ export function getAvailableInfoPanelTabs({
     (selection.rootFolderType === FolderType.Rooms ||
       selection.rootFolderType === FolderType.Archive);
 
-  const isAgentType =
-    !isRecentFolder &&
-    "rootFolderType" in selection &&
-    "roomType" in selection &&
-    !!selection.roomType &&
-    selection.rootFolderType === FolderType.AIAgents;
-
-  const isAIAgentsSection =
-    "rootFolderType" in selection &&
-    selection.rootFolderType === FolderType.AIAgents;
-
-  const useRoomsView = isRoomsType || isAgentType;
+  const useRoomsView = isRoomsType;
 
   const tabs: InfoPanelViewType[] = [];
 
@@ -158,11 +147,11 @@ export function getAvailableInfoPanelTabs({
 
   tabs.push(InfoPanelView.infoHistory, InfoPanelView.infoDetails);
 
-  if (!isAIAgentsSection && isMetadataSupported(selection)) {
+  if (isMetadataSupported(selection)) {
     tabs.push(InfoPanelView.infoMetadata);
   }
 
-  if (!isAIAgentsSection && enablePlugins && infoPanelItemsList.length > 0) {
+  if (enablePlugins && infoPanelItemsList.length > 0) {
     const isRoomSelection = isRoomUtil(selection);
     const isFileSelection = isFileUtil(selection);
 

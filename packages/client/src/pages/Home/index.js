@@ -48,10 +48,7 @@ import {
   useChatNoAccess,
   mapChatNoAccessStores,
 } from "SRC_DIR/Hooks/useChatNoAccess";
-import {
-  useIsAiChatAvailable,
-  useStores,
-} from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import {
   addTagsToRoom,
@@ -148,7 +145,6 @@ const PureHome = observer((props) => {
 
     isRecycleBinFolder,
     isErrorRoomNotAvailable,
-    isErrorAIAgentNotAvailable,
     isIndexEditingMode,
 
     isSecondaryProgressVisbile,
@@ -212,9 +208,6 @@ const PureHome = observer((props) => {
     canCreateSecurity,
     startDropPreview,
 
-    aiConfig,
-    currentTab,
-    selectedResultFileId,
     setIsAboutDialogVisible,
 
     pluginFloatingOperationsArray,
@@ -236,7 +229,6 @@ const PureHome = observer((props) => {
     isTemplatesFolder,
     isFavoritesFolder,
     isRecentFolder,
-    isAIAgentsFolder,
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
@@ -285,7 +277,6 @@ const PureHome = observer((props) => {
   const isProfile = currentClientView === "profile";
   const isContactsEmptyView =
     contactsTab === "groups" ? isEmptyGroups : isUsersEmptyView;
-  const isChat = currentClientView === "chat";
 
   // Availability is computed once by the host (Shell) and shared through
   // AiAgentProviders' context.
@@ -339,16 +330,6 @@ const PureHome = observer((props) => {
   const isFormRoom =
     getCategoryType(location) === CategoryType.Form || isFormRoomFolder;
 
-  // AI-agents create gating: AI must be ready and the user able to manage
-  // agents (admins / owners / room admins — same set as canCreateRooms).
-  // `aiReady` (portal /ai/config) can lag behind the chat-lib profiles, so
-  // treat the presence of profiles as ready too — same signal the agents
-  // EmptyView uses to decide whether to offer agent creation.
-  const { useProfilesStore } = useStores();
-  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
-  const canCreateAgents =
-    (aiConfig?.aiReady || hasAiProfiles) && canCreateRooms;
-
   // Quick-actions banner (ported from the SDK): create tiles above the
   // files/rooms list. The hook resolves which tile set applies (or none) from
   // the current section + create permission.
@@ -357,7 +338,6 @@ const PureHome = observer((props) => {
     canCreateFiles,
     canCreateEncrypted,
     canCreateRooms,
-    canCreateAgents,
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
@@ -372,14 +352,13 @@ const PureHome = observer((props) => {
     isTemplatesFolder,
     isFavoritesFolder,
     isRecentFolder,
-    isAIAgentsFolder,
     isFormsSection,
     isContactsPage,
     isProfile,
     isSettingsPage,
   });
   const showQuickActions =
-    quickActionsEnabled && quickActions.show && !isChat && !isEmptyPage;
+    quickActionsEnabled && quickActions.show && !isEmptyPage;
 
   const onHideQuickActions = useHideQuickActions({ t, setShowQuickActions });
 
@@ -549,7 +528,7 @@ const PureHome = observer((props) => {
 
     if (!isContactsPage) {
       sectionProps.dragging = dragging;
-      sectionProps.uploadFiles = !isChat;
+      sectionProps.uploadFiles = true;
       sectionProps.onDrop = isRecycleBinFolder ? null : onDrop;
 
       sectionProps.viewAs = viewAs;
@@ -558,7 +537,6 @@ const PureHome = observer((props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
-      sectionProps.fullHeightBody = isChat || !!selectedResultFileId;
     } else {
       sectionProps.isAccounts = isContactsPage;
     }
@@ -602,7 +580,7 @@ const PureHome = observer((props) => {
 
   // sectionProps.onOpenUploadPanel = showUploadPanel;
 
-  sectionProps.getContextModel = isChat ? null : getContextModel;
+  sectionProps.getContextModel = getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
 
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
@@ -674,11 +652,7 @@ const PureHome = observer((props) => {
     setShouldShowFilter(shouldRenderSectionFilter);
   }, [shouldRenderSectionFilter, isChangePageRequestRunning]);
 
-  const isDisabledKnowledge =
-    !aiConfig?.vectorizationEnabled && currentTab === "knowledge";
-
-  const isErrorAvailable =
-    isErrorRoomNotAvailable || isErrorAIAgentNotAvailable;
+  const isErrorAvailable = isErrorRoomNotAvailable;
 
   return (
     <>
@@ -713,7 +687,6 @@ const PureHome = observer((props) => {
       >
         <SectionWrapper
           {...sectionProps}
-          withoutFooter={isChat}
           scrollableBanner={showQuickActions}
           stickyTableHeader={showQuickActions}
         >
@@ -737,12 +710,9 @@ const PureHome = observer((props) => {
           </Section.SectionWarning>
 
           {!isPluginSection &&
-          !isChat &&
           !isErrorAvailable &&
-          !isDisabledKnowledge &&
           shouldShowFilter &&
           !isProfile &&
-          !selectedResultFileId &&
           (!isFrame || showFilter) ? (
             <Section.SectionFilter>
               <SectionFilterContent />
@@ -827,7 +797,6 @@ export const Component = inject(
     indexingStore,
     dialogsStore,
     filesSettingsStore,
-    aiRoomStore,
     profileActionsStore,
     pluginStore,
     infoPanelStore,
@@ -839,7 +808,6 @@ export const Component = inject(
       setSelectedFolder,
       security: folderSecurity,
       title: selectedFolderTitle,
-      chatSettings: selectedFolderChatSettings,
     } = selectedFolderStore;
 
     const canCreateSecurity = folderSecurity?.Create;
@@ -896,7 +864,6 @@ export const Component = inject(
 
       disableDrag,
       isErrorRoomNotAvailable,
-      isErrorAIAgentNotAvailable,
       setIsPreview,
       getRooms,
       scrollToTop,
@@ -923,7 +890,6 @@ export const Component = inject(
       isPrivacyFolder,
       isFavoritesFolder,
       isRecentFolder,
-      isAIAgentsFolder,
       isFormsFolder,
     } = treeFoldersStore;
 
@@ -1147,7 +1113,6 @@ export const Component = inject(
       dropTargetPreview,
       setDropTargetPreview,
       selectedFolderTitle,
-      selectedFolderChatSettings,
       clearDropPreviewLocation,
       canCreateSecurity,
       startDropPreview,
@@ -1167,16 +1132,11 @@ export const Component = inject(
       isTemplatesFolder,
       isFavoritesFolder,
       isRecentFolder,
-      isAIAgentsFolder,
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
       setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
       setOformFromFolderId: oformsStore.setOformFromFolderId,
       setCreateRoomFromTemplate: oformsStore.setCreateRoomFromTemplate,
 
-      isErrorAIAgentNotAvailable,
-      currentTab: aiRoomStore.currentTab,
-      selectedResultFileId: aiRoomStore.selectedResultFileId,
-      aiConfig: settingsStore.aiConfig,
 
       setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
 

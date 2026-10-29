@@ -99,7 +99,6 @@ const dropDeletedMetadata = async (
 export type UseFilesProps = {
   fetchFiles: FilesStore["fetchFiles"];
   fetchRooms: FilesStore["fetchRooms"];
-  fetchAgents: FilesStore["fetchAgents"];
   getFileInfo: FilesStore["getFileInfo"];
   setIsPreview: FilesStore["setIsPreview"];
   setIsUpdatingRowItem: FilesStore["setIsUpdatingRowItem"];
@@ -121,7 +120,6 @@ export type UseFilesProps = {
 const useFiles = ({
   fetchFiles,
   fetchRooms,
-  fetchAgents,
   getFileInfo,
   setIsPreview,
   setIsUpdatingRowItem,
@@ -177,16 +175,6 @@ const useFiles = ({
     }
 
     filter.searchArea = searchArea;
-
-    navigate(`${url}?${filter.toUrlParams()}`);
-  };
-
-  const fetchDefaultAgents = () => {
-    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents);
-
-    const categoryType = getCategoryType(location) as number;
-
-    const url = getCategoryUrl(categoryType);
 
     navigate(`${url}?${filter.toUrlParams()}`);
   };
@@ -254,18 +242,9 @@ const useFiles = ({
     }
 
     const isRoomFolder = getObjectByLocation(location)?.folder;
-    const isAIAgents = categoryType === CategoryType.AIAgents;
     const isForms = categoryType === CategoryType.Forms;
 
-    if (isAIAgents) {
-      filterObj = RoomsFilter.getFilter(window.location);
-
-      if (!filterObj) {
-        fetchDefaultAgents();
-
-        return;
-      }
-    } else if (isForms && !isRoomFolder) {
+    if (isForms && !isRoomFolder) {
       filterObj = RoomsFilter.getFilter(window.location);
 
       isRooms = true;
@@ -369,11 +348,9 @@ const useFiles = ({
     const { filter } = dataObj;
     let newFilter = filter
       ? filter.clone()
-      : isAIAgents
-        ? RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents)
-        : isRooms
-          ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
-          : FilesFilter.getDefault({ categoryType });
+      : isRooms
+        ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
+        : FilesFilter.getDefault({ categoryType });
 
     const href = window.location.href;
     const isPruned = await dropDeletedMetadata(newFilter, checkedMetadata);
@@ -409,9 +386,6 @@ const useFiles = ({
         newFilter = data[0];
 
         if (newFilter) {
-          if (isAIAgents) {
-            return fetchAgents(null, newFilter as RoomsFilter, false, false);
-          }
           if (isRooms) {
             return fetchRooms(
               null,
@@ -466,7 +440,6 @@ const useFiles = ({
     location.search,
     fetchFiles,
     fetchRooms,
-    fetchAgents,
     getFileInfo,
     setIsPreview,
     setIsUpdatingRowItem,

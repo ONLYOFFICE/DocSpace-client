@@ -523,8 +523,6 @@ export async function startSessionFuncImpl(
   t: TTranslation,
   createNewIfExist = true,
 ) {
-  const { isAIRoom } = self.selectedFolderStore;
-  const { knowledgeId } = self.aiRoomStore;
   if (!self.uploaded && self.files.length === 0) {
     self.uploaded = true;
     self.asyncUploadObj = {};
@@ -558,8 +556,6 @@ export async function startSessionFuncImpl(
   const { file, toFolderId } = item;
   let fileToUpload = file;
   let fileName = file.name;
-
-  const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
 
   let uploadDEK: Uint8Array | null = null;
   let isEncrypted = file.encrypted || false;
@@ -699,7 +695,7 @@ export async function startSessionFuncImpl(
   const chunks = fileSize === 0 ? 1 : Math.ceil(fileSize / chunkUploadSize);
 
   return startUploadSession(
-    actualFolderId!,
+    toFolderId!,
     fileName,
     fileSize,
     "",
@@ -728,7 +724,7 @@ export async function startSessionFuncImpl(
 
       return {
         sessionId,
-        folderId: actualFolderId,
+        folderId: toFolderId,
         requestsDataArray,
         path,
         operationId,

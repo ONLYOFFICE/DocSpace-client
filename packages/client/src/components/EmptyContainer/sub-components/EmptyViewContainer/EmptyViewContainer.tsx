@@ -123,20 +123,12 @@ const InjectedEmptyViewContainer = inject<
     paymentStore,
     settingsStore,
     authStore,
-    currentTariffStatusStore,
-    uploadDataStore,
-    filesActionsStore,
-    aiRoomStore,
     filesStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
-    const { isGracePeriod } = currentTariffStatusStore;
-    const { startUpload } = uploadDataStore;
-    const { createFoldersTree } = filesActionsStore;
-    const { knowledgeId } = aiRoomStore;
 
     const { isPublicRoom } = publicRoomStore;
-    const { isFrame, logoText, standalone } = settingsStore;
+    const { isFrame, logoText } = settingsStore;
     const language = authStore.language ?? "en";
 
     const { myFolderId, myFolder, roomsFolder, isPrivacyFolder } =
@@ -158,17 +150,10 @@ const InjectedEmptyViewContainer = inject<
     const {
       setSelectFileFormRoomDialogVisible,
       setQuotaWarningDialogVisible,
-      setSelectFileAiKnowledgeDialogVisible,
       setTemplateAccessSettingsVisible,
     } = dialogsStore;
 
-    const {
-      security,
-      access,
-      rootFolderType,
-      isInsideKnowledge,
-      isInsideResultStorage,
-    } = selectedFolderStore;
+    const { security, access, rootFolderType } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
@@ -201,28 +186,18 @@ const InjectedEmptyViewContainer = inject<
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
       setQuotaWarningDialogVisible,
-      setSelectFileAiKnowledgeDialogVisible,
       setTemplateAccessSettingsVisible,
       isVisitor: userStore?.user?.isVisitor,
       isFrame,
       logoText,
-      isKnowledgeTab: isInsideKnowledge,
-      isResultsTab: isInsideResultStorage,
       filterFolderType: filesStore.filter.folderType,
       roomsFilterSearchArea: filesStore.roomsFilter.searchArea,
-      isPortalAdmin: authStore.isAdmin,
-      aiReady: paymentStore.isAIReady,
-      standalone,
       isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
       enableAIService: paymentStore.enableAIService,
       getAIConfig: settingsStore.getAIConfig,
       refreshCurrentFolder,
       refreshPaymentInfo: authStore.getPaymentInfo,
       language,
-      isGracePeriod,
-      knowledgeId,
-      startUpload,
-      createFoldersTree,
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
       onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
     };

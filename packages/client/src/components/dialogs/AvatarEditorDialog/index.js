@@ -66,7 +66,6 @@ const AvatarEditorDialog = (props) => {
     isProfileUpload,
     setPreview,
     dataTestId,
-    isAIAgentsFolderRoot,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -75,9 +74,7 @@ const AvatarEditorDialog = (props) => {
 
   const avatarTitle = isProfileUpload
     ? t("Ldap:LdapAvatar")
-    : isAIAgentsFolderRoot
-      ? t("Common:AgentCover")
-      : t("Common:RoomCover");
+    : t("Common:RoomCover");
 
   const onCloseModal = () => {
     onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
@@ -140,21 +137,19 @@ const AvatarEditorDialog = (props) => {
 };
 
 export default inject(
-  ({ peopleStore, settingsStore, userStore, treeFoldersStore }) => {
+  ({ peopleStore, settingsStore, userStore }) => {
     const { targetUserStore } = peopleStore;
     const { maxImageUploadSize } = settingsStore;
 
     const { user: profile } = userStore;
 
     const { updateCreatedAvatar, setHasAvatar } = targetUserStore;
-    const { isAIAgentsFolderRoot } = treeFoldersStore;
 
     return {
       profile,
       setHasAvatar,
       updateCreatedAvatar,
       maxImageUploadSize,
-      isAIAgentsFolderRoot,
     };
   },
 )(observer(AvatarEditorDialog));

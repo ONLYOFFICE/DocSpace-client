@@ -49,15 +49,11 @@ const FOLDER_INPUT_ATTRS = {
 type UploadFileInputsProps = {
   startUpload?: (files: File[], folderId: null, t: TTranslation) => void;
   createFoldersTree?: (t: TTranslation, files: File[]) => Promise<File[]>;
-  isAIRoom?: boolean;
-  extsFilesVectorized?: string[];
 };
 
 const UploadFileInputs = ({
   startUpload,
   createFoldersTree,
-  isAIRoom,
-  extsFilesVectorized,
 }: UploadFileInputsProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -93,9 +89,6 @@ const UploadFileInputs = ({
         style={{ display: "none" }}
         onChange={onFileChange}
         onClick={onInputClick}
-        {...(isAIRoom && extsFilesVectorized
-          ? { accept: extsFilesVectorized.join(",") }
-          : {})}
       />
       <input
         id="customPDFInput"
@@ -120,16 +113,7 @@ const UploadFileInputs = ({
   );
 };
 
-export default inject(
-  ({
-    uploadDataStore,
-    filesActionsStore,
-    selectedFolderStore,
-    filesSettingsStore,
-  }: TStore) => ({
-    startUpload: uploadDataStore.startUpload,
-    createFoldersTree: filesActionsStore.createFoldersTree,
-    isAIRoom: selectedFolderStore.isAIRoom,
-    extsFilesVectorized: filesSettingsStore.extsFilesVectorized,
-  }),
-)(observer(UploadFileInputs));
+export default inject(({ uploadDataStore, filesActionsStore }: TStore) => ({
+  startUpload: uploadDataStore.startUpload,
+  createFoldersTree: filesActionsStore.createFoldersTree,
+}))(observer(UploadFileInputs));

@@ -101,9 +101,6 @@ class TreeFoldersStore {
 
     treeFolders.forEach((folder) => {
       switch (folder.rootFolderType) {
-        case FolderType.AIAgents:
-          folder.title = i18n.t("Common:AIAgents");
-          break;
         case FolderType.USER:
           folder.title = i18n.t("Common:Files");
           break;
@@ -293,12 +290,6 @@ class TreeFoldersStore {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Recent);
   }
 
-  get aiAgentsFolder() {
-    return this.treeFolders.find(
-      (x) => x.rootFolderType === FolderType.AIAgents,
-    );
-  }
-
   get roomsFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Rooms);
   }
@@ -349,10 +340,6 @@ class TreeFoldersStore {
 
   get recentFolderId() {
     return this.recentFolder ? this.recentFolder.id : null;
-  }
-
-  get aiAgentsFolderId() {
-    return this.aiAgentsFolder ? this.aiAgentsFolder.id : null;
   }
 
   get sharedWithMeFolderId() {
@@ -433,17 +420,6 @@ class TreeFoldersStore {
     return (
       this.roomsFolder && this.selectedFolderStore.id === this.roomsFolder.id
     );
-  }
-
-  get isAIAgentsFolder() {
-    return (
-      this.aiAgentsFolder &&
-      this.selectedFolderStore.id === this.aiAgentsFolder.id
-    );
-  }
-
-  get isAIAgentsFolderRoot() {
-    return FolderType.AIAgents === this.selectedFolderStore.rootFolderType;
   }
 
   get isFormsFolderRoot() {

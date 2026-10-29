@@ -47,13 +47,14 @@ import {
   aiChatServiceLimitExceededEvent,
   rootHandler,
   filesSettingsHandler,
-  agentFolderChatHandler,
+  roomListHandler,
+  TypeRoomList,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 /**
- * The chat error box when a round is refused by an AI spending limit, in an
- * agent room's AI Chat tab.
+ * The chat error box when a round is refused by an AI spending limit, in the
+ * AI Chat panel opened from the rooms list header.
  *
  * The AI gateway relays the accounting service's 403 inside the stream, the
  * chat library turns it into a generic "auth" error, and Shell's
@@ -63,8 +64,8 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
  * Retry would only hit the same limit again).
  */
 
-/** `folder=2` scopes the section to the mock agent room (agentFolderChatHandler). */
-const AGENT_CHAT_URL = "/ai-agents/2/chat?folder=2";
+/** The rooms list (roomListHandler); its header carries the AI Chat button. */
+const ROOMS_URL = "/rooms/shared/";
 const LIMITS_URL = "/portal-settings/ai-settings/limits";
 const DESKTOP = { width: 1440, height: 1024 };
 
@@ -80,20 +81,27 @@ const REGULAR_USER_ID = "regular-user-id";
 const errorBox = (page: Page) => page.getByTestId("chat-error");
 
 /**
- * The agent has no model of its own, which raises the "Model updated" notice
- * over the picker; it has nothing to do with the limit, so it is marked as
- * already dismissed for the account (ModelUpdatedBanner's per-account flag).
+ * A chat without a remembered model raises the "Model updated" notice over the
+ * picker; it has nothing to do with the limit, so it is marked as already
+ * dismissed for the account (ModelUpdatedBanner's per-account flag).
  */
 const dismissModelUpdatedNotice = (page: Page, userId: string) =>
   page.addInitScript((key) => {
     window.localStorage.setItem(key, "true");
   }, `ai_chat_model_updated_bar_dismissed_${userId}`);
 
-const openAgentChatAndSend = async (page: Page, baseUrl: string) => {
+/** Opens the rooms list, docks the AI Chat panel from the header and sends. */
+const openChatAndSend = async (page: Page, baseUrl: string) => {
   await page.setViewportSize(DESKTOP);
-  await page.goto(`${baseUrl}${AGENT_CHAT_URL}`);
+  await page.goto(`${baseUrl}${ROOMS_URL}`);
 
-  await page.getByTestId("composer-input").fill("Summarize this room");
+  await page.getByTestId("ai-chat-button").click();
+  await expect(page.getByTestId("ai-chat-slot")).toHaveAttribute(
+    "data-open",
+    "true",
+  );
+
+  await page.getByTestId("composer-input").fill("Summarize my rooms");
   await page.getByTestId("send-button").click();
 
   await expect(errorBox(page)).toBeVisible();
@@ -125,7 +133,7 @@ const waitToSettle = async (page: Page, locator: Locator) => {
   }
 };
 
-/** The whole desktop window: navigation, the agent room and its chat. */
+/** The whole desktop window: navigation, the rooms list and the chat panel. */
 const shootDesktop = async (page: Page, name: string) => {
   await waitToSettle(page, errorBox(page));
   await expectScreenshot(page, ["desktop", "ai-chat-service-limit", name]);
@@ -143,7 +151,7 @@ test.describe("AI chat: spending limit reached", () => {
       settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       aiConfigHandler(TEST_PORT),
-      agentFolderChatHandler(TEST_PORT),
+      roomListHandler(TEST_PORT, TypeRoomList.ContextMenu),
       ...aiChatStoreHandlers(TEST_PORT),
       aiChatSendWithStreamHandler(TEST_PORT, [
         aiChatServiceLimitExceededEvent(RESET_AT),
@@ -159,7 +167,7 @@ test.describe("AI chat: spending limit reached", () => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "owner", "en-US"));
     await dismissModelUpdatedNotice(page, OWNER_ID);
 
-    await openAgentChatAndSend(page, baseUrl);
+    await openChatAndSend(page, baseUrl);
 
     await expect(page.getByTestId("chat-error-title")).toHaveText(
       "AI spending limit reached",
@@ -188,7 +196,7 @@ test.describe("AI chat: spending limit reached", () => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "regular", "en-US"));
     await dismissModelUpdatedNotice(page, REGULAR_USER_ID);
 
-    await openAgentChatAndSend(page, baseUrl);
+    await openChatAndSend(page, baseUrl);
 
     await expect(page.getByTestId("chat-error-title")).toHaveText(
       "AI spending limit reached",

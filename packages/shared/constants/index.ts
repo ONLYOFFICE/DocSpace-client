@@ -257,7 +257,6 @@ export const CategoryType = Object.freeze({
   Groups: 13,
   Guests: 14,
   AIAgents: 15,
-  AIAgent: 16,
   Forms: 17,
   Form: 18,
 });

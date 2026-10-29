@@ -87,9 +87,6 @@ export const buildContextOptions = (
   const isRoom = !!item.roomType;
   const isTemplate =
     item.rootFolderType === FolderType.RoomTemplates && isRoom;
-  const isAIAgent =
-    item.rootFolderType === FolderType.AIAgents &&
-    item.roomType === RoomsType.AIRoom;
 
   // the non-null assertions in this method keep the old
   // unchecked reads of optional item fields (new/fileStatus/security/
@@ -279,19 +276,8 @@ export const buildContextOptions = (
     // list keeps stale `true` values after an admin disables AI portal-wide —
     // check the live switch as well. Privacy and encryption rule the chat out
     // whatever the rights say.
-    //
-    // Inside an AI agent room "Ask AI" does not raise the side panel (disabled
-    // there — see `isAiChatAvailable` in Shell) but navigates to the room's
-    // chat tab, which a member without `UseChat` is redirected away from. Its
-    // files still carry `AskAi: true`, so without this the entry is offered to
-    // a Viewer and leads straight back to where they came from. The same holds
-    // for "Analyze responses", which opens that very chat.
-    const noAgentChatAccess =
-      deps.selectedFolderStore.isAIRoom && !deps.accessRightsStore.canUseChat;
-
     const noAi =
       !deps.settingsStore.aiServicesEnabled ||
-      noAgentChatAccess ||
       isPrivacyFolder ||
       item.private ||
       isEncrypted;
@@ -709,99 +695,6 @@ export const buildContextOptions = (
     }
 
     return templateOptions;
-  } else if (isAIAgent) {
-    const canInviteUserInAgent =
-      item.security?.EditAccess &&
-      !deps.settingsStore.aiConfig?.aiReadyNeedReset;
-    const canRemoveAgent = item.security?.Delete;
-
-    const canPinAgent = item.security?.Pin;
-
-    const canEditAgent =
-      item.security?.EditRoom &&
-      !deps.settingsStore.aiConfig?.aiReadyNeedReset;
-
-    const canViewAgentInfo = item.security?.Read;
-    const canMuteAgent = item.security?.Mute;
-
-    const canChangeOwner =
-      item.security?.ChangeOwner &&
-      !deps.settingsStore.aiConfig?.aiReadyNeedReset;
-
-    let agentOptions = [
-      "select",
-      "open",
-      "separator0",
-      "edit-agent",
-      "invite-users-to-room",
-      "link-for-room-members",
-      "room-info",
-      "pin-room",
-      "unpin-room",
-      "mute-room",
-      "unmute-room",
-      "separator1",
-      "duplicate-room",
-      "download",
-      "change-agent-owner",
-      "leave-room",
-      "delete",
-    ];
-
-    if (optionsToRemove.length) {
-      agentOptions = removeOptions(agentOptions, optionsToRemove);
-    }
-
-    if (!canEditAgent) {
-      agentOptions = removeOptions(agentOptions, ["edit-agent"]);
-    }
-
-    if (!canInviteUserInAgent) {
-      agentOptions = removeOptions(agentOptions, ["invite-users-to-room"]);
-    }
-
-    if (!canChangeOwner) {
-      agentOptions = removeOptions(agentOptions, ["change-agent-owner"]);
-    }
-
-    if (!canRemoveAgent) {
-      agentOptions = removeOptions(agentOptions, ["delete"]);
-    }
-
-    if (!canDuplicate) {
-      agentOptions = removeOptions(agentOptions, ["duplicate-room"]);
-    }
-
-    if (!canDownload) {
-      agentOptions = removeOptions(agentOptions, ["download"]);
-    }
-
-    if (!canPinAgent) {
-      agentOptions = removeOptions(agentOptions, ["unpin-room", "pin-room"]);
-    } else {
-      agentOptions = item.pinned
-        ? removeOptions(agentOptions, ["pin-room"])
-        : removeOptions(agentOptions, ["unpin-room"]);
-    }
-
-    if (!canMuteAgent) {
-      agentOptions = removeOptions(agentOptions, [
-        "unmute-room",
-        "mute-room",
-      ]);
-    } else {
-      agentOptions = item.mute
-        ? removeOptions(agentOptions, ["mute-room"])
-        : removeOptions(agentOptions, ["unmute-room"]);
-    }
-
-    if (!canViewAgentInfo) {
-      agentOptions = removeOptions(agentOptions, ["room-info"]);
-    }
-
-    agentOptions = removeSeparator(agentOptions);
-
-    return agentOptions;
   }
   if (isRoom) {
     const canInviteUserInRoom = item.private
@@ -988,7 +881,6 @@ export const buildContextOptions = (
       !organizeRoomsGrouping ||
       isArchiveFolder ||
       item.rootFolderType === FolderType.Archive ||
-      deps.treeFoldersStore.isAIAgentsFolder ||
       itemGroupsArea !== sectionGroupsArea
     ) {
       roomOptions = removeOptions(roomOptions, [

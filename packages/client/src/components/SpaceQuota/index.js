@@ -259,12 +259,10 @@ export default inject(
 		const { usersStore } = peopleStore;
 		const { needResetUserSelection, setSelected: setUsersSelected } =
 			usersStore;
-		const { changeRoomQuota, changeAIAgentsQuota } = filesActionsStore;
+		const { changeRoomQuota } = filesActionsStore;
 		const {
 			setCustomRoomQuota,
-			setCustomAIAgentQuota,
 			resetRoomQuota,
-			resetAIAgentQuota,
 			setSelected: setRoomsSelected,
 			needResetFilesSelection,
 		} = filesStore;
@@ -272,48 +270,26 @@ export default inject(
 		const {
 			isDefaultUsersQuotaSet,
 			isDefaultRoomsQuotaSet,
-			isDefaultAIAgentsQuotaSet,
 			defaultUsersQuota,
 			defaultRoomsQuota,
-			defaultAIAgentsQuota,
 		} = currentQuotaStore;
 
 		const { inRoom, isVisible: infoPanelVisible } = infoPanelStore;
 
 		const changeQuota =
-			type === "user"
-				? changeUserQuota
-				: type === "agent"
-					? changeAIAgentsQuota
-					: changeRoomQuota;
+			type === "user" ? changeUserQuota : changeRoomQuota;
 
 		const updateQuota =
-			type === "user"
-				? api.people.setCustomUserQuota
-				: type === "agent"
-					? setCustomAIAgentQuota
-					: setCustomRoomQuota;
+			type === "user" ? api.people.setCustomUserQuota : setCustomRoomQuota;
 
 		const resetQuota =
-			type === "user"
-				? api.people.resetUserQuota
-				: type === "agent"
-					? resetAIAgentQuota
-					: resetRoomQuota;
+			type === "user" ? api.people.resetUserQuota : resetRoomQuota;
 
 		const withoutLimitQuota =
-			type === "user"
-				? !isDefaultUsersQuotaSet
-				: type === "agent"
-					? !isDefaultAIAgentsQuotaSet
-					: !isDefaultRoomsQuotaSet;
+			type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;
 
 		const defaultSize =
-			type === "user"
-				? defaultUsersQuota
-				: type === "agent"
-					? defaultAIAgentsQuota
-					: defaultRoomsQuota;
+			type === "user" ? defaultUsersQuota : defaultRoomsQuota;
 
 		const needResetSelection =
 			type === "user" ? needResetUserSelection : needResetFilesSelection;

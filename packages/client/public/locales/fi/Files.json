@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Analysoi vastaukset",
   "ArchiveAction": "Tyhjennä arkisto",
   "ArchiveEmptyScreenUser": "Arkistoidut huoneet ilmestyvät tähän.",
-  "ChangeAgentOwnerSelectorInfo": "Vain huoneen tai pääjärjestelmänvalvoja voi tulla agentin omistajaksi",
-  "ChangeTheAgentOwner": "Vaihda agentin omistaja",
   "ClientSearchDecryptingNames": "Puretaan tiedostonimien salausta… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Kansio on liian suuri. Hakutulokset voivat olla puutteelliset.",
   "CompressingFiles": "Pakataan tiedostoja",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Tiedostoa ei voi siirtää tähän tilaan. Ole hyvä ja siirrä {{ organizationName }} PDF-lomake.",
   "WarningMoveToFormRoomServal": "Useiden tiedostojen siirtämistä lomakkeentäyttötilaan ei tueta. Siirrä yksi {{ organizationName }} PDF-lomake kerrallaan.",
   "WillBeDeletedPermanently": "{{date}} poistetaan lopullisesti",
-  "YouLeftTheAgent": "Olet jättänyt agentin.",
   "YourUserTypeHasChanged": "Pääjärjestelmänvalvoja <1>{{adminName}}</1> vaihtoi käyttäjätyyppisi arvoon <1>”{{userType}}”</1>."
 }

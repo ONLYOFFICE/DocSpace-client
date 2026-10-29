@@ -81,8 +81,8 @@ export const SectionNavigationProvider = ({
 
     if (currentSection !== prevSectionRef.current) {
       // Store the full previous path (not just the section prefix) so that
-      // "Back" returns to the exact page we left — e.g. a specific agent
-      // chat (/ai-agents/:id/chat) or the agents list (/ai-agents/filter),
+      // "Back" returns to the exact page we left — e.g. a specific AI
+      // project (/ai-projects/:id) or the projects list (/ai-projects),
       // instead of collapsing every non-prefixed route to "/".
       stackRef.current.push(prevPathRef.current);
       prevSectionRef.current = currentSection;

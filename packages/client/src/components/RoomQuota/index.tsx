@@ -39,16 +39,14 @@ import { inject, observer } from "mobx-react";
 
 import { QuotaForm } from "@docspace/shared/components/quota-form";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
-import { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 type RoomQuotaProps = {
-  setRoomParams: (roomParams: TAgentParams | TRoomParams) => void;
-  roomParams: TRoomParams | TAgentParams;
+  setRoomParams: (roomParams: TRoomParams) => void;
+  roomParams: TRoomParams;
   defaultQuota?: number;
   isEdit?: boolean;
   isTemplate?: boolean;
   isLoading: boolean;
-  isAgent?: boolean;
   isFormSpace?: boolean;
 };
 
@@ -59,7 +57,6 @@ const RoomQuota = ({
   isEdit,
   isTemplate,
   isLoading,
-  isAgent,
   isFormSpace,
 }: RoomQuotaProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
@@ -74,18 +71,12 @@ const RoomQuota = ({
     <QuotaForm
       label={t("Common:StorageQuota")}
       description={
-        isAgent
-          ? t("StorageDescriptionAgent")
-          : isFormSpace
-            ? t("StorageDescriptionFormSpace")
-            : t("StorageDescription")
+        isFormSpace
+          ? t("StorageDescriptionFormSpace")
+          : t("StorageDescription")
       }
       checkboxLabel={
-        isAgent
-          ? t("DisableRoomQuotaAgent")
-          : isFormSpace
-            ? t("DisableRoomQuotaFormSpace")
-            : t("DisableRoomQuota")
+        isFormSpace ? t("DisableRoomQuotaFormSpace") : t("DisableRoomQuota")
       }
       onSetQuotaBytesSize={onSetQuotaBytesSize}
       initialSize={isEdit || isTemplate ? defaultValue.current : defaultQuota!}
@@ -100,10 +91,8 @@ const RoomQuota = ({
   );
 };
 
-export default inject(
-  ({ currentQuotaStore }: TStore, { isAgent }: { isAgent?: boolean }) => {
-    const { defaultRoomsQuota, defaultAIAgentsQuota } = currentQuotaStore;
+export default inject(({ currentQuotaStore }: TStore) => {
+  const { defaultRoomsQuota } = currentQuotaStore;
 
-    return { defaultQuota: isAgent ? defaultAIAgentsQuota : defaultRoomsQuota };
-  },
-)(observer(RoomQuota));
+  return { defaultQuota: defaultRoomsQuota };
+})(observer(RoomQuota));

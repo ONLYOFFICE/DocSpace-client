@@ -69,7 +69,6 @@ const ChangeRoomOwner = (props) => {
     changeRoomOwner,
     userId,
     useModal = true,
-    isAIAgent,
     isAIProject,
     changeAiProjectOwner,
     isFormSpace,
@@ -205,21 +204,15 @@ const ChangeRoomOwner = (props) => {
 
   const headerLabel = isAIProject
     ? t("Common:AIProjectChangeOwner")
-    : isAIAgent
-      ? t("Files:ChangeTheAgentOwner")
-      : t("Common:ChangeTheRoomOwner");
+    : t("Common:ChangeTheRoomOwner");
 
   const infoText = isAIProject
     ? t("Common:AIProjectChangeOwnerInfo", { productName: getBrandName("ProductName") })
-    : isAIAgent
-      ? t("Files:ChangeAgentOwnerSelectorInfo")
-      : t("Common:PeopleSelectorInfo");
+    : t("Common:PeopleSelectorInfo");
 
   const footerCheckboxLabel = isAIProject
     ? t("Common:AIProjectLeave")
-    : isAIAgent
-      ? t("Common:LeaveTheAgent")
-      : isFormSpace
+    : isFormSpace
       ? t("Common:LeaveTheFormSpace")
       : t("Common:LeaveTheRoom");
 
@@ -315,7 +308,6 @@ export default inject(
       roomOwnerId: room?.createdBy?.id,
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
-      isAIAgent: room?.isAIAgent,
       isAIProject: room?.isAIProject,
       changeAiProjectOwner: (newOwnerId, keepAsManager) =>
         aiProjectsStore.changeOwner(room, newOwnerId, keepAsManager),

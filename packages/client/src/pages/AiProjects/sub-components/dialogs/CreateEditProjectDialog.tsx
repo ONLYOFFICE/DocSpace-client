@@ -382,7 +382,6 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
                   roomOwner={project.createdBy as never}
                   canChangeOwner={project.security.ChangeOwner}
                   onOwnerChange={onOwnerChange}
-                  isAgent={false}
                   label={t("Common:AIProjectOwner")}
                 />
               </div>

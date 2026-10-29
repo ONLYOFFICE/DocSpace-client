@@ -452,31 +452,6 @@ self: FilesActionStore,fileInfo: TFile
 };
 
 
-export const copyFileToAiKnowledgeImpl = async (
-self: FilesActionStore,filesInfo: TActionItem[]
-)=> {
-  const selectedItemId = self.aiRoomStore.knowledgeId;
-  const fileIds = filesInfo.map((f) => f.id);
-
-  const operationData = {
-    destFolderId: selectedItemId,
-    folderIds: [],
-    fileIds,
-    deleteAfter: false,
-    isCopy: true,
-    isAI: true,
-    folderTitle: self.selectedFolderStore.title,
-  };
-
-  self.uploadDataStore.secondaryProgressDataStore.setItemsSelectionTitle(
-    filesInfo[0].title,
-  );
-
-  self.uploadDataStore
-    .itemOperationToFolder(operationData)
-    .catch((error) => toastr.error(error));
-};
-
 
 export const moveDragItemsImpl = (
 self: FilesActionStore,

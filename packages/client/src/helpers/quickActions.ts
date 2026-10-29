@@ -50,8 +50,6 @@ export type QuickActionsSection =
   // Inside a Form Filling room (or its subfolders): only PDF forms can be
   // created here, so offer the single blank-PDF-form tile.
   | "form-room"
-  // AI-agents list root: offer the create-agent tile.
-  | "ai-agents"
   // Private room: file-creation tiles wired to the client-side encryption flow.
   | "private"
   // Archive / trash / templates / favorites / recent / contacts / profile /
@@ -70,7 +68,6 @@ export type SectionFlags = {
   isTemplatesFolder?: boolean;
   isFavoritesFolder?: boolean;
   isRecentFolder?: boolean;
-  isAIAgentsFolder?: boolean;
   // View-level flags (already computed in Home/Header).
   isFormsSection?: boolean; // the "Forms" section root (CategoryType.Forms)
   isContactsPage?: boolean;
@@ -93,7 +90,6 @@ export const getQuickActionsSection = (
     isTemplatesFolder,
     isFavoritesFolder,
     isRecentFolder,
-    isAIAgentsFolder,
     isFormsSection,
     isContactsPage,
     isProfile,
@@ -110,9 +106,6 @@ export const getQuickActionsSection = (
     isRecentFolder
   )
     return null;
-
-  // AI-agents list root → create-agent tile.
-  if (isAIAgentsFolder) return "ai-agents";
 
   // Forms section root → collect-forms + from-template tiles.
   if (isFormsSection) return "forms";
@@ -139,11 +132,9 @@ export const getQuickActionsSection = (
 // templates / favorites / recent), per product decision — the quick-actions
 // tiles replace creation there.
 export const isFilesRoomsArea = (flags: SectionFlags): boolean => {
-  const { isContactsPage, isProfile, isSettingsPage, isAIAgentsFolder } = flags;
+  const { isContactsPage, isProfile, isSettingsPage } = flags;
 
   if (isContactsPage || isProfile || isSettingsPage) return false;
-  // AI-agents keeps its own dedicated create button.
-  if (isAIAgentsFolder) return false;
 
   return true;
 };

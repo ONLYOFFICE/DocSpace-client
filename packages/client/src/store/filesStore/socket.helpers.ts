@@ -89,8 +89,6 @@ export function onResolveNewFileImpl(
 
   if (
     self.selectedFolderStore.id !== fileInfo.folderId &&
-    self.aiRoomStore.knowledgeId !== fileInfo.folderId &&
-    self.aiRoomStore.resultId !== fileInfo.folderId &&
     self.selectedFolderStore.rootFolderType !== FolderType.Recent &&
     self.selectedFolderStore.rootFolderType !== FolderType.Favorites
   )
@@ -123,11 +121,7 @@ export async function wsModifyFolderCreateImpl(
     // (JSON.parse of possibly-undefined data, user possibly null).
     const file = JSON.parse(opt?.data as string);
 
-    if (
-      self.selectedFolderStore.id !== file.folderId &&
-      self.aiRoomStore.knowledgeId !== file.folderId &&
-      self.aiRoomStore.resultId !== file.folderId
-    ) {
+    if (self.selectedFolderStore.id !== file.folderId) {
       const movedToIndex = self.getFolderIndex(file.folderId);
       if (movedToIndex > -1) self.folders[movedToIndex].filesCount++;
       return;
@@ -541,19 +535,6 @@ export function redirectToParentImpl(
   const userId = self.userStore.user && self.userStore.user.id;
 
   switch (rootFolderType) {
-    case FolderType.AIAgents: {
-      // RoomsFilter.getDefault/toUrlParams type userId as
-      // `string | undefined` but the old JS passes `null` when there is no
-      // user; erased casts keep the exact runtime value.
-      const aiAgentsFilter = RoomsFilter.getDefault(
-        userId as string,
-        RoomSearchArea.AIAgents,
-      );
-      const params = aiAgentsFilter.toUrlParams(userId as string, true);
-      const path = getCategoryUrl(CategoryType.AIAgents);
-
-      return window.DocSpace.navigate(`${path}?${params}`);
-    }
     case FolderType.Archive: {
       const archiveFilter = RoomsFilter.getDefault(
         userId as string,

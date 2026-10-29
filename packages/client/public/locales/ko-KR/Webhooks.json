@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "AI 에이전트 생성됨",
-  "AgentDeleted": "AI 에이전트 삭제됨",
-  "AgentUpdated": "AI 에이전트 업데이트됨",
   "Before": "이전",
   "CreateWebhook": "웹훅 생성",
   "DeleteHint": "웹훅이 영구적으로 삭제됩니다.\n이 작업은 취소할 수 없습니다.",

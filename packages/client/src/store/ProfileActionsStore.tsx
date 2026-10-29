@@ -92,7 +92,6 @@ import AccountsFilter from "@docspace/shared/api/people/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { PEOPLE_ROUTE_WITH_FILTER } from "SRC_DIR/helpers/contacts";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import type { IProfileMenuItemClient } from "SRC_DIR/helpers/plugins/types";
 import i18n from "SRC_DIR/i18n";
 
@@ -677,11 +676,7 @@ class ProfileActionsStore {
       });
     }
 
-    if (
-      !isAIAgents() &&
-      this.pluginStore.profileMenuItemsList &&
-      enablePlugins
-    ) {
+    if (this.pluginStore.profileMenuItemsList && enablePlugins) {
       actions.unshift(
         ...this.pluginStore.profileMenuItemsList.map((option) => ({
           key: option.key,

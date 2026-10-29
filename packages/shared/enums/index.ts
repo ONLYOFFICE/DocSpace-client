@@ -336,8 +336,6 @@ export const enum Events {
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
   SAVE_AS_TEMPLATE = "save_as_template",
   Share_PDF_Form = "share_pdf_form",
-  AGENT_CREATE = "create_agent",
-  AGENT_EDIT = "edit_agent",
 }
 
 /**
@@ -643,9 +641,6 @@ export enum WebhookTriggers {
   RoomDeleted = 33554432,
   RoomRestored = 67108864,
   RoomCopied = 134217728,
-  AgentCreated = 2147483648,
-  AgentUpdated = 4294967296,
-  AgentDeleted = 8589934592,
   FileDownloaded = 17179869184,
   FolderDownloaded = 34359738368,
 }
@@ -697,8 +692,6 @@ export const enum SearchArea {
   Any,
   RecentByLinks,
   Templates,
-  Knowledge,
-  ResultStorage,
 }
 
 export const enum LinkSharingEntityType {

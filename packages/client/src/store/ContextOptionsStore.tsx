@@ -754,13 +754,8 @@ class ContextOptionsStore {
     }
   };
 
-  onClickPin = (
-    action: "pin" | "unpin",
-    id: number,
-    t: TTranslation,
-    isAIAgent = false,
-  ) => {
-    this.filesActionsStore.setPinAction(action, id, t, isAIAgent);
+  onClickPin = (action: "pin" | "unpin", id: number, t: TTranslation) => {
+    this.filesActionsStore.setPinAction(action, id, t);
   };
 
   onClickArchive = (action: "archive" | "unarchive") => {
@@ -997,24 +992,6 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onCreateAgent = () => {
-    // TODO: AI: Add quota if it needed
-
-    // if (this.currentQuotaStore.isWarningRoomsDialog) {
-    //   this.dialogsStore.setQuotaWarningDialogVisible(true);
-    //   return;
-    // }
-
-    const event = new CustomEvent(Events.AGENT_CREATE, {
-      detail: {
-        parentId: this.selectedFolderStore.id,
-        context: "context_menu",
-      },
-    });
-
-    window.dispatchEvent(event);
-  };
-
   // `t` is omitted by non-PDF call sites; the original .js
   // only dereferences it in the mobile-PDF branch where it is always passed —
   // the non-null assertion keeps that behavior.
@@ -1073,10 +1050,6 @@ class ContextOptionsStore {
       FilesSelectorFilterTypes | FilterType = FilesSelectorFilterTypes.DOCX,
   ) => {
     this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter, true);
-  };
-
-  onShowAiKnowledgeSelectFileDialog = () => {
-    this.dialogsStore.setSelectFileAiKnowledgeDialogVisible(true);
   };
 
   getContextOptionsPlusFormRoom = (

@@ -45,8 +45,6 @@ import type {
 } from "@docspace/shared/enums";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOptionsStore";
-import { AuthStore } from "@docspace/shared/store/AuthStore";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 export type UploadType = "pdf" | "file" | "folder";
 
@@ -91,7 +89,6 @@ export interface InjectedEmptyViewContainerProps
       TStore["dialogsStore"],
       | "setSelectFileFormRoomDialogVisible"
       | "setQuotaWarningDialogVisible"
-      | "setSelectFileAiKnowledgeDialogVisible"
       | "setTemplateAccessSettingsVisible"
     >,
     Pick<
@@ -115,24 +112,14 @@ export interface InjectedEmptyViewContainerProps
   isVisitor?: boolean;
   isFrame?: boolean;
   logoText: string;
-  isKnowledgeTab?: boolean;
-  isResultsTab?: boolean;
-  isAIRoom?: boolean;
   filterFolderType: Nullable<number[]>;
   roomsFilterSearchArea: RoomSearchArea | string;
-  isPortalAdmin: AuthStore["isAdmin"];
-  aiReady?: boolean;
-  standalone: SettingsStore["standalone"];
   isCardLinkedToPortal?: boolean;
   enableAIService?: (onSuccess?: () => void | Promise<void>) => Promise<void>;
   getAIConfig?: () => Promise<void>;
   refreshCurrentFolder?: () => Promise<void>;
   refreshPaymentInfo?: () => Promise<void>;
   language?: string;
-  isGracePeriod: boolean;
-  knowledgeId: number | null;
-  startUpload: TStore["uploadDataStore"]["startUpload"];
-  createFoldersTree: TStore["filesActionsStore"]["createFoldersTree"];
   templateGalleryAvailable: boolean;
   onShowTemplateGallery: TStore["contextOptionsStore"]["onShowTemplateGallery"];
 }
@@ -153,8 +140,6 @@ export type OptionActions = {
     filterParam: FilesSelectorFilterTypes | FilterType | string,
     openRoot?: boolean,
   ) => void;
-  uploadFromDocspaceAiKnowledge: VoidFunction;
-  uploadFromDeviceAiKnowledge: VoidFunction;
   onUploadAction: (type: UploadType) => void;
   createAndCopySharedLink: VoidFunction;
   openInfoPanel: VoidFunction;
@@ -165,10 +150,7 @@ export type OptionActions = {
   onGoToPersonal: () => LinkProps;
   onGoToShared: () => LinkProps;
   onGoToForms: () => LinkProps;
-  onGoToAgents: () => LinkProps;
-  onCreateAIAgent: VoidFunction;
   onOpenAiChat: VoidFunction;
-  onStartNewChat: VoidFunction;
   onGoToServices: VoidFunction;
   onGoToAIProviderSettings: VoidFunction;
   onTopUpAndActivateAI: VoidFunction;

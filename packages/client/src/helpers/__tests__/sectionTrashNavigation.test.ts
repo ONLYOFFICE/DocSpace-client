@@ -76,15 +76,6 @@ describe("getSectionTrashUrl", () => {
     expect(folderType).toEqual([FolderType.FormRoom]);
   });
 
-  it("opens the AI agents trash for an item deleted inside an AI room", () => {
-    const { path, folderType } = parse(
-      getSectionTrashUrl(TRASH_FOLDER_ID, "/ai-agents/12345/filter"),
-    );
-
-    expect(path).toBe("/ai-agents/trash/filter");
-    expect(folderType).toEqual([FolderType.AIAgent]);
-  });
-
   it("opens the My Documents trash for an item deleted in the personal section", () => {
     const { path, folderType } = parse(
       getSectionTrashUrl(TRASH_FOLDER_ID, "/rooms/personal/filter"),

@@ -45,7 +45,7 @@ import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-butto
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { DeviceType, FolderType } from "@docspace/shared/enums";
+import { DeviceType } from "@docspace/shared/enums";
 import { setAiAccessSettings } from "@docspace/shared/api/settings";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import CommonStore from "SRC_DIR/store/CommonStore";
@@ -73,8 +73,6 @@ interface AiServicesManagementProps {
   fetchTreeFolders: TreeFoldersStore["fetchTreeFolders"];
   handleServiceQuota: (serviceName?: string) => Promise<unknown>;
   standalone: boolean;
-  defaultFolderType: SettingsStore["defaultFolderType"];
-  updateDefaultFolderType: SettingsStore["updateDefaultFolderType"];
   getAIConfig: SettingsStore["getAIConfig"];
 }
 
@@ -92,8 +90,6 @@ const AiServicesManagementComponent = ({
   fetchTreeFolders,
   handleServiceQuota,
   standalone,
-  defaultFolderType,
-  updateDefaultFolderType,
   getAIConfig,
 }: AiServicesManagementProps) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
@@ -201,10 +197,6 @@ const AiServicesManagementComponent = ({
       setIsSaving(true);
       await setAiAccessSettings(false);
       setAiServicesEnabled(false);
-
-      if (defaultFolderType === FolderType.AIAgents) {
-        await updateDefaultFolderType(FolderType.DEFAULT);
-      }
 
       await fetchTreeFolders();
       setShowReminder(false);
@@ -322,8 +314,6 @@ export const AiServicesManagement = inject<TStore>(
       deviceType,
       currentColorScheme,
       aiServicesManagementUrl,
-      defaultFolderType,
-      updateDefaultFolderType,
       standalone,
       getAIConfig,
     } = settingsStore;
@@ -347,8 +337,6 @@ export const AiServicesManagement = inject<TStore>(
       fetchTreeFolders,
       handleServiceQuota,
       standalone,
-      defaultFolderType,
-      updateDefaultFolderType,
       getAIConfig,
     };
   },

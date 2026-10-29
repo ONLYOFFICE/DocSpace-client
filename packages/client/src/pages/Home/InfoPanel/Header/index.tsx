@@ -82,7 +82,6 @@ export default inject(
     infoPanelStore,
     pluginStore,
     treeFoldersStore,
-    aiRoomStore,
   }: TStore) => {
     const { infoPanelItemsList } = pluginStore;
 

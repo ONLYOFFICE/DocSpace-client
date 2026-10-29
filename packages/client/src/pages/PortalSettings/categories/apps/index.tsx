@@ -52,7 +52,6 @@ type AppsProps = {
   isLoaded?: boolean;
   enable?: AppsStore["enable"];
   ensureLoaded?: AppsStore["ensureLoaded"];
-  aiServicesEnabled?: boolean;
 };
 
 // Settings -> Apps (standalone only): switches the sidebar sections on and off
@@ -63,10 +62,9 @@ const Apps = ({
   isLoaded = false,
   enable,
   ensureLoaded,
-  aiServicesEnabled = true,
 }: AppsProps) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
-  const apps = useAppsCatalog({ aiServicesEnabled });
+  const apps = useAppsCatalog();
   // The app whose switch is being saved, so it cannot be flipped twice.
   const [pendingId, setPendingId] = React.useState<string | null>(null);
 
@@ -136,12 +134,11 @@ const Apps = ({
   );
 };
 
-export const Component = inject(({ appsStore, settingsStore }: TStore) => ({
+export const Component = inject(({ appsStore }: TStore) => ({
   isInstalled: appsStore.isInstalled,
   isLoaded: appsStore.isLoaded,
   enable: appsStore.enable,
   ensureLoaded: appsStore.ensureLoaded,
-  aiServicesEnabled: settingsStore.aiServicesEnabled,
 }))(observer(Apps));
 
 export default Component;

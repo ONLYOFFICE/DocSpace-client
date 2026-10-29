@@ -63,7 +63,6 @@ const FilesRowContent = ({
   quickButtons,
   theme,
   isRooms,
-  isAIAgentsFolder,
   isTrashFolder,
   filterSortBy,
   createdDate,
@@ -169,7 +168,7 @@ const FilesRowContent = ({
       </Link>
       <div className="badges">
         {badgesComponent}
-        {!isRoom && !isRooms && !isAIAgentsFolder ? quickButtons : null}
+        {!isRoom && !isRooms ? quickButtons : null}
       </div>
 
       {isIndexing ? (
@@ -213,15 +212,13 @@ export default inject(
       isArchiveFolder,
       isTemplatesFolder,
       isPersonalReadOnly,
-      isAIAgentsFolder,
       isFormsFolder,
     } = treeFoldersStore;
     const { isIndexedFolder } = selectedFolderStore;
 
     const isRooms =
       isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
-    const filterSortBy =
-      isRooms || isAIAgentsFolder ? roomsFilter.sortBy : filter.sortBy;
+    const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 

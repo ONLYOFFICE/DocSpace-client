@@ -35,14 +35,12 @@
 
 import { useMemo, useCallback, useRef } from "react";
 import { useNavigate, useLocation, LinkProps } from "react-router";
-import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 import { isMobile } from "react-device-detect";
 
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
-import { useStores as useAiChatStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import {
   Events,
   FileExtensions,
@@ -51,11 +49,9 @@ import {
   FolderType,
   RoomSearchArea,
   RoomsType,
-  SearchArea,
 } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import type { TTranslation } from "@docspace/shared/types";
 import { CategoryType } from "@docspace/shared/constants";
 
@@ -91,13 +87,6 @@ export const useEmptyView = (
     rootFolderType,
     isPublicRoom,
     security,
-    selectedFolder,
-    isKnowledgeTab,
-    isResultsTab,
-    isPortalAdmin,
-    aiReady,
-    standalone,
-    isCardLinkedToPortal,
     filterFolderType,
     roomsFilterSearchArea,
   }: EmptyViewContainerProps,
@@ -106,18 +95,10 @@ export const useEmptyView = (
 ) => {
   const { isBase } = useTheme();
 
-  const hasAiProfiles = useHasAiProfiles();
-  const isAiReady = standalone ? hasAiProfiles : aiReady;
-
   const isFormsScope =
     rootFolderType === FolderType.RoomTemplates
       ? roomsFilterSearchArea === RoomSearchArea.FormTemplates
       : isFormsSectionScope(filterFolderType);
-
-  const isAIRoom =
-    selectedFolder?.roomType === RoomsType.AIRoom ||
-    isKnowledgeTab ||
-    isResultsTab;
 
   const emptyViewOptions = useMemo(() => {
     const description = getDescription(
@@ -132,12 +113,6 @@ export const useEmptyView = (
       rootFolderType,
       isPublicRoom,
       security,
-      isKnowledgeTab,
-      isResultsTab,
-      isAIRoom,
-      isAiReady,
-      standalone,
-      isPortalAdmin,
       isFormsScope,
       filterFolderType,
     );
@@ -151,13 +126,6 @@ export const useEmptyView = (
       isArchiveFolderRoot,
       isRootEmptyPage,
       rootFolderType,
-      security,
-      isKnowledgeTab,
-      isResultsTab,
-      isAIRoom,
-      isAiReady,
-      standalone,
-      isPortalAdmin,
       isFormsScope,
       isPublicRoom,
     );
@@ -170,12 +138,7 @@ export const useEmptyView = (
       parentRoomType,
       isRootEmptyPage,
       rootFolderType,
-      security,
-      isResultsTab,
-      isKnowledgeTab,
-      isAIRoom,
       isPublicRoom,
-      isAiReady,
     );
 
     return { description, title, icon };
@@ -191,12 +154,7 @@ export const useEmptyView = (
     isArchiveFolderRoot,
     rootFolderType,
     isPublicRoom,
-    isAIRoom,
-    isKnowledgeTab,
-    isResultsTab,
-    isAiReady,
-    standalone,
-    isPortalAdmin,
+    security,
     isFormsScope,
     filterFolderType,
   ]);
@@ -229,22 +187,12 @@ export const useOptions = (
     onCreateAndCopySharedLink,
     setQuotaWarningDialogVisible,
     setSelectFileFormRoomDialogVisible,
-    setSelectFileAiKnowledgeDialogVisible,
     inviteUser: inviteRootUser,
     setTemplateAccessSettingsVisible,
 
     isVisitor,
     isFrame,
     logoText,
-    isKnowledgeTab,
-    isResultsTab,
-    aiReady,
-    standalone,
-    isPortalAdmin,
-    isGracePeriod,
-    knowledgeId,
-    startUpload,
-    createFoldersTree,
     isCardLinkedToPortal,
     enableAIService,
     getAIConfig,
@@ -259,50 +207,17 @@ export const useOptions = (
   const { pathname } = useLocation();
 
   const getTrashSection = () => {
-    if (pathname.includes("/ai-agents/trash")) return "agents";
     if (pathname.includes("/forms/trash")) return "forms";
     if (pathname.includes("/rooms/trash")) return "rooms";
     return "personal";
   };
 
-  const trashSectionRef = useRef<"personal" | "rooms" | "forms" | "agents">(
-    "personal",
-  );
+  const trashSectionRef = useRef<"personal" | "rooms" | "forms">("personal");
   if (pathname.includes("/trash")) trashSectionRef.current = getTrashSection();
   const trashSection = trashSectionRef.current;
 
-  const hasAiProfiles = useHasAiProfiles();
-  const isAiReady = standalone ? hasAiProfiles : aiReady;
-
   const onOpenAiChat = useOpenAiChat();
   const isAiChatAvailable = useIsAiChatAvailable();
-
-  // `useThreadsStore` / `useRouter` are Zustand stores (callable as hooks
-  // elsewhere); here only their imperative `.getState()` API is needed, so the
-  // `use` prefix is aliased away to avoid implying a hook call in a callback.
-  const { useThreadsStore: threadsStore, useRouter: chatRouterStore } =
-    useAiChatStores();
-
-  // The agent room's chat tab keeps the thread from the previous visit, so
-  // reset it before navigating — the Results tab option must always land on a
-  // fresh conversation.
-  const onStartNewChat = useCallback(() => {
-    threadsStore.getState().onSwitchToNewThread();
-    chatRouterStore.getState().setCurrentPage("chat");
-
-    const filesFilter = FilesFilter.getFilter(window.location);
-
-    filesFilter.searchArea = SearchArea.Any;
-
-    const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);
-
-    navigate(`${path}?${filesFilter.toUrlParams()}`);
-  }, [threadsStore, chatRouterStore, navigate]);
-
-  const isAIRoom =
-    selectedFolder?.roomType === RoomsType.AIRoom ||
-    isKnowledgeTab ||
-    isResultsTab;
 
   const onGoToShared = useCallback(() => {
     const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
@@ -337,18 +252,6 @@ export const useOptions = (
     };
   }, [userId]);
 
-  const onGoToAgents = useCallback((): LinkProps => {
-    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents);
-    newFilter.searchArea = RoomSearchArea.AIAgents;
-
-    return {
-      to: {
-        pathname: getCategoryUrl(CategoryType.AIAgents),
-        search: newFilter.toUrlParams(userId, false),
-      },
-    };
-  }, [userId]);
-
   const onGoToServices = useCallback(() => {
     return navigate("/portal-settings/payments/services");
   }, []);
@@ -374,8 +277,6 @@ export const useOptions = (
     refreshCurrentFolder,
     refreshPaymentInfo,
     isCardLinkedToPortal,
-    parentId: selectedFolder?.id,
-    context: "empty_state",
   });
 
   const onGoToPersonal = useCallback((): LinkProps => {
@@ -448,18 +349,6 @@ export const useOptions = (
     onShowTemplateGallery,
   ]);
 
-  const onCreateAIAgent = useCallback(() => {
-    if (isGracePeriod) {
-      setQuotaWarningDialogVisible(true);
-      return;
-    }
-
-    const event = new CustomEvent(Events.AGENT_CREATE, {
-      detail: { parentId: selectedFolder?.id, context: "empty_state" },
-    });
-    window.dispatchEvent(event);
-  }, [isGracePeriod, setQuotaWarningDialogVisible, selectedFolder?.id]);
-
   const openInfoPanel = useCallback(() => {
     if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);
 
@@ -497,39 +386,6 @@ export const useOptions = (
     },
     [setSelectFileFormRoomDialogVisible],
   );
-
-  const uploadFromDocspaceAiKnowledge = useCallback(() => {
-    setSelectFileAiKnowledgeDialogVisible?.(true);
-  }, [setSelectFileAiKnowledgeDialogVisible]);
-
-  // Device upload for the agent knowledge tab. The new-concept client has no
-  // article main button (its hidden `.custom-file-input-article` that
-  // `onUploadAction` relies on), so build a transient file input and upload
-  // straight into the knowledge folder (`knowledgeId`) — same target the SDK
-  // knowledge device upload uses.
-  const uploadFromDeviceAiKnowledge = useCallback(() => {
-    if (!knowledgeId) return;
-
-    const input = document.createElement("input");
-    input.type = "file";
-    input.multiple = true;
-    input.style.display = "none";
-
-    input.onchange = async (e) => {
-      try {
-        const files = await getFilesFromEvent(e);
-        const tree = await createFoldersTree(t, files);
-        if (tree.length > 0) startUpload(tree, knowledgeId, t);
-      } catch (err) {
-        toastr.error(err as string, undefined, 0, true);
-      } finally {
-        input.remove();
-      }
-    };
-
-    document.body.appendChild(input);
-    input.click();
-  }, [knowledgeId, createFoldersTree, startUpload, t]);
 
   const onCreate = useCallback(
     (extension: ExtensionType, withoutDialog?: boolean) => {
@@ -590,8 +446,6 @@ export const useOptions = (
           inviteUser,
           onCreate,
           uploadFromDocspace,
-          uploadFromDocspaceAiKnowledge,
-          uploadFromDeviceAiKnowledge,
           onUploadAction,
           createAndCopySharedLink,
           openInfoPanel,
@@ -603,11 +457,8 @@ export const useOptions = (
           onGoToPersonal,
           onGoToShared,
           onGoToForms,
-          onGoToAgents,
           onOpenAccessSettings,
-          onCreateAIAgent,
           onOpenAiChat,
-          onStartNewChat,
           onGoToServices,
           onGoToAIProviderSettings,
           onTopUpAndActivateAI,
@@ -617,15 +468,7 @@ export const useOptions = (
         logoText,
         isVisitor,
         isFrame,
-        isKnowledgeTab,
-        isResultsTab,
-        isAIRoom,
-        isAiReady,
-        standalone,
-        isPortalAdmin,
         trashSection,
-        isCardLinkedToPortal,
-        isActivating,
         isAiChatAvailable,
         templateGalleryAvailable,
       ),
@@ -643,8 +486,6 @@ export const useOptions = (
       inviteUser,
       onOpenAccessSettings,
       uploadFromDocspace,
-      uploadFromDocspaceAiKnowledge,
-      uploadFromDeviceAiKnowledge,
       onUploadAction,
       createAndCopySharedLink,
       onCreate,
@@ -657,21 +498,11 @@ export const useOptions = (
       onGoToPersonal,
       onGoToShared,
       onGoToForms,
-      onGoToAgents,
       trashSection,
       isVisitor,
       isFrame,
       logoText,
-      isKnowledgeTab,
-      isResultsTab,
-      isAIRoom,
-      isAiReady,
-      standalone,
-      isPortalAdmin,
-      isCardLinkedToPortal,
-      isActivating,
       onOpenAiChat,
-      onStartNewChat,
       isAiChatAvailable,
       templateGalleryAvailable,
     ],

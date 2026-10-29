@@ -264,9 +264,6 @@ class CreateEditRoomStore {
       invitations,
       roomId,
       isAvailable,
-      prompt,
-      providerId,
-      modelId,
       sendFormToExternalDB,
       saveFormAsXLSX,
     } = newParams;
@@ -329,13 +326,6 @@ class CreateEditRoomStore {
               },
         }),
       logo: undefined as unknown,
-      ...((prompt || providerId || modelId) && {
-        chatSettings: {
-          prompt,
-          providerId,
-          modelId,
-        },
-      }),
     };
 
     const isDeleteLogo = !!room.logo.original && !icon.uploadedFile;
@@ -578,9 +568,6 @@ class CreateEditRoomStore {
       isTemplate,
       roomId,
       logo,
-      prompt,
-      providerId,
-      modelId,
       isPrivate,
       saveFormAsXLSX,
       sendFormToExternalDB,
@@ -655,13 +642,6 @@ class CreateEditRoomStore {
           watermark: await this.getWatermarkRequest(watermark),
         }),
       logo: undefined as unknown,
-      ...((prompt || providerId || modelId) && {
-        chatSettings: {
-          prompt,
-          providerId,
-          modelId,
-        },
-      }),
       saveFormAsXLSX,
       sendFormToExternalDB:
         sendFormToExternalDB && this.settingsStore.externalDbEnabled,

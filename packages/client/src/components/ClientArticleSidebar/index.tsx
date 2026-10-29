@@ -81,6 +81,7 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
+import CatalogAiProjectsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
@@ -105,7 +106,7 @@ type ClientArticleSidebarProps = FolderIds & {
   isDocumentsFolder?: boolean;
   isNavLoading?: boolean;
   // The portal-wide AI switch (Settings -> Integration -> AI services). With it
-  // off there is no AI in the portal at all, so the AI Agents app is dropped
+  // off there is no AI in the portal at all, so the AI Projects app is dropped
   // from the catalog rather than left pointing at a section that cannot work.
   aiServicesEnabled?: boolean;
   // Settings -> Apps (standalone only): a switched-off app is not on offer, so
@@ -251,7 +252,6 @@ const ClientArticleSidebar = ({
 
     const panelFolderId = (folder: TTreeFolder): string | number => {
       if (folder.rootFolderType === FolderType.Rooms) return "rooms";
-      if (folder.rootFolderType === FolderType.AIAgents) return "agents";
       if (folder.rootFolderType === FolderType.Forms) return "forms";
       return folder.id;
     };
@@ -533,15 +533,13 @@ const ClientArticleSidebar = ({
 
     // AI Projects closes the apps: the saved AI chat setups, each opening a
     // fullscreen chat with its model, skills room and knowledge base. It
-    // takes the AI Agents icon and place, and is on offer only while the
+    // takes the former AI Agents icon and place, and is on offer only while the
     // portal has AI switched on.
     if (aiServicesEnabled) {
       mainItems.push({
         id: "ai-projects",
         label: t("Common:AIProjects"),
-        icon:
-          getCatalogIconUrlByType(FolderType.AIAgents) ??
-          CatalogOverviewReactSvgUrl,
+        icon: CatalogAiProjectsReactSvgUrl,
         ...nav("/ai-projects"),
       });
     }
@@ -613,7 +611,6 @@ const ClientArticleSidebarConnected = inject<TStore>(
     favoritesFolderId: treeFoldersStore.favoritesFolderId,
     recycleBinFolderId: treeFoldersStore.recycleBinFolderId,
     sharedWithMeFolderId: treeFoldersStore.sharedWithMeFolderId,
-    aiAgentsFolderId: treeFoldersStore.aiAgentsFolderId,
     isVisitor: userStore.user?.isVisitor,
     // Matches Home's canCreateRooms — room admins and admins can use templates.
     canUseTemplates: authStore.isAdmin || authStore.isRoomAdmin,

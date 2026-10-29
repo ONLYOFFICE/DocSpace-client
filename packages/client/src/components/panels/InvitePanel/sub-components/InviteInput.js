@@ -60,8 +60,6 @@ import {
   AccountsSearchArea,
   EmployeeStatus,
   EmployeeType,
-  RoomsType,
-  ShareAccessRights,
 } from "@docspace/shared/enums";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
@@ -82,10 +80,8 @@ import AccessSelector from "../../../AccessSelector";
 import {
   fixAccess,
   getTopFreeRole,
-  getViewerRole,
   isPaidUserRole,
   makeFreeRole,
-  makeViewerRole,
 } from "../utils";
 
 const minSearchValue = 2;
@@ -330,14 +326,7 @@ const InviteInput = ({
   };
 
   const addUser = (item) => {
-    const {
-      shared,
-      status,
-      roomType,
-      access,
-      isVisitor,
-      isGroup = false,
-    } = item;
+    const { shared, status, roomType, access, isGroup = false } = item;
     const isDisabled = status === EmployeeStatus.Disabled;
 
     if (isDisabled) {
@@ -345,24 +334,11 @@ const InviteInput = ({
     } else if (shared) {
       toastr.warning(t("Common:UsersAlreadyAdded"));
     } else {
-      const guestWrongRoleInAgent =
-        isVisitor &&
-        roomType === RoomsType.AIRoom &&
-        access !== ShareAccessRights.ReadOnly;
-
       if (isGroup && checkIfAccessPaid(access)) {
         item = fixAccess(item, t, roomType);
       }
 
-      if (guestWrongRoleInAgent) {
-        item = makeViewerRole(item, t, getViewerRole(t, roomType));
-      }
-
-      if (
-        !guestWrongRoleInAgent &&
-        isPaidUserRole(access) &&
-        (item.isVisitor || item.isCollaborator)
-      ) {
+      if (isPaidUserRole(access) && (item.isVisitor || item.isCollaborator)) {
         const topFreeRole = getTopFreeRole(t, roomType);
 
         if (access !== topFreeRole.access) {
@@ -483,16 +459,6 @@ const InviteInput = ({
               ? isPaidUserAccess(item.access)
               : isPaidUserRole(item.access);
 
-          const shouldMakeViewerRole =
-            roomType === RoomsType.AIRoom &&
-            item.isEmailInvite &&
-            item.access !== ShareAccessRights.ReadOnly;
-
-          if (shouldMakeViewerRole) {
-            item = makeViewerRole(item, t, getViewerRole(t, roomType));
-            return item;
-          }
-
           if (isRolePaid && item.isEmailInvite) {
             const topFreeRole =
               roomId === -1 ? EmployeeType.User : getTopFreeRole(t, roomType);
@@ -512,12 +478,7 @@ const InviteInput = ({
           checkIfAccessPaid(userItem.access) &&
           (userItem.isGroup || userItem.isVisitor || userItem.isCollaborator);
 
-        const shouldMakeViewerRole =
-          roomType === RoomsType.AIRoom &&
-          userItem.isVisitor &&
-          userItem.access !== ShareAccessRights.ReadOnly;
-
-        if (shouldMakeFreeRole || shouldMakeViewerRole) {
+        if (shouldMakeFreeRole) {
           userItem = fixAccess(userItem, t, roomType);
 
           if (isUserTariffLimit) {

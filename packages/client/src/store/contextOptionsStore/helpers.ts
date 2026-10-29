@@ -100,7 +100,6 @@ export type TContextItem = {
   encrypted?: boolean;
   isFolder?: boolean;
   isRoom?: boolean;
-  isAIAgent?: boolean;
   isTemplate?: boolean;
   isEdit?: boolean;
   isEditing?: boolean;
@@ -112,8 +111,6 @@ export type TContextItem = {
   customFilterEnabled?: boolean;
   customFilterEnabledBy?: string;
   indexing?: boolean;
-  isInsideKnowledge?: boolean;
-  isInsideResultStorage?: boolean;
   sendFormToExternalDB?: boolean;
 };
 
@@ -227,14 +224,6 @@ export const onShowInfoPanel = (item?: TContextItem, view?: string) => {
 
 export const onClickEditRoom = (item: TContextItem) => {
   const event: TStoreCustomEvent = new CustomEvent(Events.ROOM_EDIT, {
-    detail: { context: "context_menu" },
-  });
-  event.item = item;
-  window.dispatchEvent(event);
-};
-
-export const onClickEditAgent = (item: TContextItem) => {
-  const event: TStoreCustomEvent = new CustomEvent(Events.AGENT_EDIT, {
     detail: { context: "context_menu" },
   });
   event.item = item;

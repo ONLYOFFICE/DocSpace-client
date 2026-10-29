@@ -901,12 +901,6 @@ export const getFileExtension = (fileTitleParam: string) => {
 export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   const sorted = [];
 
-  const aiAgentsFolder = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.AIAgents,
-  );
-  if (aiAgentsFolder) sorted.push(aiAgentsFolder);
-
   const myFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.USER,
@@ -978,8 +972,6 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
 
 export const getFolderClassNameByType = (folderType: FolderType) => {
   switch (folderType) {
-    case FolderType.AIAgents:
-      return "tree-node-ai-agents";
     case FolderType.USER:
       return "tree-node-my";
     case FolderType.SHARE:
@@ -1608,7 +1600,7 @@ export const getErrorInfo = (
 };
 
 /**
- * A room or agent id in a route.
+ * A room id in a route.
  *
  * Negative ids are matched on purpose. A section tour can walk the user into a
  * stand-in room whose id is negative by design (client's `api/tourDemo`, where
@@ -1617,9 +1609,8 @@ export const getErrorInfo = (
  * which leaves the list's own title, create button and quick-actions on a page
  * that is standing inside a room.
  *
- * Only the forms tour walks into a stand-in room today; the rooms and agents
- * patterns are written the same way so that adding such a step there is not a
- * silent trap.
+ * Only the forms tour walks into a stand-in room today; the rooms pattern is
+ * written the same way so that adding such a step there is not a silent trap.
  */
 const ROUTE_ID = "-?\\d+";
 
@@ -1675,27 +1666,6 @@ export const getCategoryType = (location: { pathname: string }) => {
     categoryType = CategoryType.Accounts;
   } else if (pathname.startsWith("/shared-with-me")) {
     categoryType = CategoryType.SharedWithMe;
-  } else if (pathname.startsWith("/ai-agents")) {
-    const agentRegexp = new RegExp(`(ai-agents)/(${ROUTE_ID})`);
-    const chatRegexp = new RegExp(`(ai-agents)/(${ROUTE_ID})/chat`);
-
-    // Agent-scoped alias sections reuse the file recent/favorites/trash data
-    // (same as the global sections), but live under /ai-agents/* so the
-    // sidebar keeps them under AI Agents. Detect them before the agent-detail
-    // patterns.
-    if (pathname.startsWith("/ai-agents/recent")) {
-      categoryType = CategoryType.Recent;
-    } else if (pathname.startsWith("/ai-agents/favorites")) {
-      categoryType = CategoryType.Favorite;
-    } else if (pathname.startsWith("/ai-agents/trash")) {
-      categoryType = CategoryType.Trash;
-    } else if (chatRegexp.test(location.pathname)) {
-      categoryType = CategoryType.Chat;
-    } else if (agentRegexp.test(location.pathname)) {
-      categoryType = CategoryType.AIAgent;
-    } else {
-      categoryType = CategoryType.AIAgents;
-    }
   }
 
   return categoryType;

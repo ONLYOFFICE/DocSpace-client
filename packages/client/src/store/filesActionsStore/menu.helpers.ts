@@ -54,9 +54,6 @@ self: FilesActionStore,option: string
     hasRoomsToResetQuota,
     hasRoomsToDisableQuota,
     hasRoomsToChangeQuota,
-    hasAIAgentsToChangeQuota,
-    hasAIAgentsToDisableQuota,
-    hasAIAgentsToResetQuota,
   } = self.filesStore;
 
   const { rootFolderType } = self.selectedFolderStore;
@@ -150,16 +147,10 @@ self: FilesActionStore,option: string
     }
     case "change-quota":
       return hasRoomsToChangeQuota;
-    case "change-agent-quota":
-      return hasAIAgentsToChangeQuota;
     case "disable-quota":
       return hasRoomsToDisableQuota;
-    case "disable-agent-quota":
-      return hasAIAgentsToDisableQuota;
     case "default-quota":
       return hasRoomsToResetQuota;
-    case "default-agent-quota":
-      return hasAIAgentsToResetQuota;
     case "vectorization":
       return selection.some((s) => s.security?.Vectorization);
     default:
@@ -373,32 +364,6 @@ self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
 };
 
 
-export const getAIAgentsFolderOptionsImpl = (
-self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
-)=> {
-  let pinName = "unpin";
-  const { selection } = self.filesStore;
-
-  selection.forEach((item) => {
-    if (!item.pinned) pinName = "pin";
-  });
-
-  const pin = self.getOption(pinName, t);
-  const changeQuota = self.getOption("change-agent-quota", t);
-  const disableQuota = self.getOption("disable-agent-quota", t);
-  const defaultQuota = self.getOption("default-agent-quota", t);
-  const deleteOption = self.getOption("delete-room", t);
-
-  itemsCollection
-    .set(pinName, pin)
-    .set("change-agent-quota", changeQuota)
-    .set("default-agent-quota", defaultQuota)
-    .set("disable-agent-quota", disableQuota)
-    .set("delete", deleteOption);
-
-  return convertToArray(itemsCollection);
-};
-
 
 export const getAnotherFolderOptionsImpl = (
 self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
@@ -438,7 +403,6 @@ self: FilesActionStore,t: TTranslation
     isArchiveFolder,
     isRecentFolder,
     isTemplatesFolder,
-    isAIAgentsFolder,
     isFormsFolder,
   } = self.treeFoldersStore;
 
@@ -465,9 +429,6 @@ self: FilesActionStore,t: TTranslation
 
   if (isTemplatesFolder)
     return self.getTemplatesFolderOptions(itemsCollection, t);
-
-  if (isAIAgentsFolder)
-    return self.getAIAgentsFolderOptions(itemsCollection, t);
 
   return self.getAnotherFolderOptions(itemsCollection, t);
 };

@@ -117,9 +117,6 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
     case FolderType.RoomTemplates:
       return parentId > 0 ? CategoryType.SharedRoom : CategoryType.Shared;
 
-    case FolderType.AIAgents:
-      return parentId > 0 ? CategoryType.AIAgent : CategoryType.AIAgents;
-
     case FolderType.Forms:
       return parentId > 0 ? CategoryType.Form : CategoryType.Forms;
 
@@ -186,12 +183,6 @@ export const getCategoryUrl = (categoryType, folderId) => {
   const cType = categoryType;
 
   switch (cType) {
-    case CategoryType.AIAgents:
-      return "/ai-agents/filter";
-
-    case CategoryType.AIAgent:
-      return `/ai-agents/${folderId}/filter`;
-
     case CategoryType.Recent:
       return "/recent/filter";
 
@@ -209,9 +200,6 @@ export const getCategoryUrl = (categoryType, folderId) => {
 
     case CategoryType.SharedRoom:
       return `/rooms/shared/${folderId}/filter`;
-
-    case CategoryType.Chat:
-      return `/ai-agents/${folderId}/chat`;
 
     case CategoryType.Archive:
       return "/rooms/archived/filter";
@@ -272,8 +260,6 @@ export const getNewViewUrlByFolderType = (folderType) => {
       return "/ai-rooms?section=rooms";
     case FolderType.Archive:
       return "/ai-rooms?section=archive";
-    case FolderType.AIAgents:
-      return "/agents";
     default:
       return "/ai-files";
   }

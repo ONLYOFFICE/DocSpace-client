@@ -42,11 +42,9 @@ import {
   FolderType,
   RoomsType,
   RoomSearchArea,
-  SearchArea,
 } from "@docspace/shared/enums";
 import {
   frameCallEvent,
-  getCategoryType,
   isPublicRoom,
 } from "@docspace/shared/utils/common";
 import { isDesktop } from "@docspace/shared/utils";
@@ -136,7 +134,6 @@ export function fetchFilesImpl(
     ) as unknown as Promise<unknown>;
   }
 
-  self.setIsErrorAIAgentNotAvailable(false);
   self.setIsErrorRoomNotAvailable(false);
   self.setIsLoadedFetchFiles(false);
 
@@ -173,11 +170,9 @@ export function fetchFilesImpl(
 
   self.filesController?.abort();
   self.roomsController?.abort();
-  self.aiAgentsController?.abort();
 
   self.filesController = new AbortController();
   self.roomsController = null;
-  self.aiAgentsController = null;
 
   let room: Nullable<TItem> = null;
 
@@ -224,20 +219,6 @@ export function fetchFilesImpl(
         );
       }
 
-      if (
-        data.current.roomType === RoomsType.AIRoom &&
-        self.categoryType !== CategoryType.Chat
-      ) {
-        self.categoryType = CategoryType.Chat;
-        filterData.searchArea = SearchArea.Active;
-        const newUrl = getCategoryUrl(CategoryType.Chat, folderId);
-
-        history.replaceState(
-          null,
-          "",
-          `${newUrl}?${filterData.toUrlParams()}`,
-        );
-      }
 
       if (newTotal > 0) {
         const lastPage = filterData.getLastPage();
@@ -270,13 +251,11 @@ export function fetchFilesImpl(
       const isPrivacyFolder =
         data.current.rootFolderType === FolderType.Privacy;
 
-      let currentFolder: TItem = data.current;
+      const currentFolder: TItem = data.current;
 
-      let isChatTab = false;
-
-      let navigationPath = await Promise.all(
+      const navigationPath = await Promise.all(
         data.pathParts.map(async (folder, idx) => {
-          const { Rooms, Archive, AIAgents } = FolderType;
+          const { Rooms, Archive } = FolderType;
 
           // if (
           //   data.current.providerKey &&
@@ -292,14 +271,12 @@ export function fetchFilesImpl(
             ? data.current
             : { ...folder, id: folder.id };
 
-          const { title, roomType, folderType } = folderInfo as TFolder &
-            TPathParts;
+          const { title, roomType } = folderInfo as TFolder & TPathParts;
 
           const isRootRoom =
             idx === 0 &&
             (data.current.rootFolderType === Rooms ||
-              data.current.rootFolderType === Archive ||
-              data.current.rootFolderType === AIAgents);
+              data.current.rootFolderType === Archive);
 
           // Form rooms live in the VirtualRooms tree, so the server names the
           // root path part "Rooms". On the /forms route that crumb already
@@ -361,109 +338,16 @@ export function fetchFilesImpl(
             quotaLimit,
             usedSpace,
             isRootTemplates,
-            folderType,
             private: isPrivate,
           };
         }),
       ).then((res) => {
         return res
-          .filter(
-            (item) =>
-              item.folderType !== FolderType.Knowledge &&
-              item.folderType !== FolderType.ResultStorage,
-          )
           .filter((item, index, arr) => {
             return index !== arr.length - 1;
           })
           .reverse();
       });
-
-      if (
-        currentFolder.type === FolderType.ResultStorage ||
-        currentFolder.type === FolderType.Knowledge
-      ) {
-        if (currentFolder.type === FolderType.Knowledge) {
-          self.aiRoomStore.setKnowledgeId(currentFolder.id as number);
-          self.aiRoomStore.setResultId(null);
-        } else if (currentFolder.type === FolderType.ResultStorage) {
-          self.aiRoomStore.setKnowledgeId(null);
-          self.aiRoomStore.setResultId(currentFolder.id as number);
-        }
-
-        // `room` is assigned inside the Promise.all map
-        // above; the non-null assertions keep the old unchecked access.
-        const aiRoom: TItem =
-          room!.id === currentFolder.parentId
-            ? room!
-            : await api.files.getFolderInfo(currentFolder.parentId as number);
-
-        self.aiRoomStore.setCurrentTab(
-          currentFolder.type === FolderType.Knowledge
-            ? "knowledge"
-            : "result",
-        );
-
-        navigationPath = navigationPath.filter(
-          (item) => item.folderType !== FolderType.AIAgent,
-        );
-
-        const currentFolderType: TItem["type"] = currentFolder.type;
-
-        currentFolder = {
-          ...aiRoom,
-          security: {
-            ...currentFolder.security,
-            Create:
-              currentFolder.security!.Create &&
-              !self.settingsStore.aiConfig?.aiReadyNeedReset,
-            Download: aiRoom.security!.Download,
-            // Membership and room-management rights belong to the AI room
-            // itself, not to the Knowledge/ResultStorage subfolder the user
-            // is standing in -- read them from `aiRoom`, like Download/Pin
-            // below. Reading them off `currentFolder` yielded undefined and
-            // hid the info panel's Contacts actions on these tabs.
-            EditAccess:
-              aiRoom.security!.EditAccess &&
-              !self.settingsStore.aiConfig?.aiReadyNeedReset,
-            EditRoom:
-              aiRoom.security!.EditRoom &&
-              !self.settingsStore.aiConfig?.aiReadyNeedReset,
-            ChangeOwner:
-              aiRoom.security!.ChangeOwner &&
-              !self.settingsStore.aiConfig?.aiReadyNeedReset,
-            Delete: aiRoom.security!.Delete,
-
-            Pin: aiRoom.security!.Pin,
-            UseChat: aiRoom.security!.UseChat,
-          },
-          isRoom: true,
-          type: currentFolderType,
-        };
-      } else if (currentFolder.roomType === RoomsType.AIRoom) {
-        isChatTab = true;
-        self.aiRoomStore.setCurrentTab("chat");
-        self.aiRoomStore.setKnowledgeId(null);
-        self.aiRoomStore.setResultId(null);
-      } else if (currentFolder.rootFolderType === FolderType.AIAgents) {
-        const parentId = navigationPath.find((item) => item.isRoom);
-        const aiRoom: TItem = await api.files.getFolderInfo(parentId!.id);
-
-        currentFolder = {
-          ...currentFolder,
-          security: {
-            ...currentFolder.security,
-            UseChat: aiRoom.security!.UseChat,
-          },
-        };
-
-        self.aiRoomStore.setKnowledgeId(null);
-        self.aiRoomStore.setResultId(null);
-        self.aiRoomStore.setCurrentTab("result");
-      } else {
-        self.aiRoomStore.setKnowledgeId(null);
-        self.aiRoomStore.setResultId(null);
-        self.aiRoomStore.setCurrentTab(null);
-      }
 
       runInAction(() => {
         if (self.isPreview) {
@@ -513,14 +397,12 @@ export function fetchFilesImpl(
           self.setIsEmptyPage(isEmptyList);
         }
 
-        if (!isChatTab) {
-          self.setFolders(
-            isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.folders,
-          );
-          self.setFiles(
-            isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.files,
-          );
-        }
+        self.setFolders(
+          isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.folders,
+        );
+        self.setFiles(
+          isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.files,
+        );
       });
 
       const pendingSearch = self.pendingClientSearch;
@@ -635,16 +517,7 @@ export function fetchFilesImpl(
           frameCallEvent({ event: "onNoAccess" });
         }
 
-        const categoryType = getCategoryType(window.location);
-
-        if (
-          categoryType === CategoryType.Chat ||
-          categoryType === CategoryType.AIAgent
-        ) {
-          self.setIsErrorAIAgentNotAvailable(true);
-        } else {
-          self.setIsErrorRoomNotAvailable(true);
-        }
+        self.setIsErrorRoomNotAvailable(true);
       } else {
         toastr.error(err);
         if (isThirdPartyError) {
@@ -733,15 +606,9 @@ export function fetchRoomsImpl(
 
   self.filesController?.abort();
   self.roomsController?.abort();
-  self.aiAgentsController?.abort();
 
   self.roomsController = new AbortController();
   self.filesController = null;
-  self.aiAgentsController = null;
-
-  self.aiRoomStore.setKnowledgeId(null);
-  self.aiRoomStore.setResultId(null);
-  self.aiRoomStore.setCurrentTab(null);
 
   // The Rooms/Forms split is enforced server-side by the room's folder type:
   // `searchArea=Active` never returns Form Filling Rooms, and the Forms
@@ -885,182 +752,6 @@ export function fetchRoomsImpl(
   return request();
 }
 
-export function fetchAgentsImpl(
-  self: FilesStore,
-  folderId: Nullable<number | string>,
-  filter?: Nullable<TRoomsFilter>,
-  clearFilter = true,
-  clearSelection = true,
-): Promise<unknown> {
-  const { setSelectedNode } = self.treeFoldersStore;
-
-  const filterData = filter
-    ? filter.clone()
-    : RoomsFilter.getDefault(
-        self.userStore.user?.id,
-        RoomSearchArea.AIAgents,
-      );
-
-  const isCustomCountPage =
-    filter && filter.pageCount !== 100 && filter.pageCount !== 25;
-
-  if (!isCustomCountPage) {
-    filterData.page = 0;
-    filterData.pageCount = 100;
-  }
-
-  if (folderId) setSelectedNode([`${folderId}`]);
-
-  self.filesController?.abort();
-  self.roomsController?.abort();
-  self.aiAgentsController?.abort();
-
-  self.roomsController = null;
-  self.filesController = null;
-  self.aiAgentsController = new AbortController();
-
-  self.aiRoomStore.setKnowledgeId(null);
-  self.aiRoomStore.setResultId(null);
-
-  self.aiRoomStore.setCurrentTab(null);
-
-  const request = () =>
-    api.ai
-      .getAIAgents(filterData, self.aiAgentsController!.signal)
-      .then(async (data) => {
-        if (!folderId) setSelectedNode([`${data.current.id}`]);
-
-        filterData.total = data.total;
-
-        if (data.total > 0) {
-          const lastPage = filterData.getLastPage();
-
-          if (filterData.page > lastPage) {
-            filterData.page = lastPage;
-
-            return self.fetchAgents(folderId, filterData);
-          }
-        }
-
-        runInAction(() => {
-          self.categoryType = getCategoryTypeByFolderType(
-            data.current.rootFolderType,
-            data.current.parentId,
-          );
-        });
-
-        self.setRoomsFilter(filterData);
-
-        runInAction(() => {
-          self.selectedFolderStore.setSelectedFolder({
-            folders: data.folders,
-            ...data.current,
-            pathParts: data.pathParts,
-            navigationPath: EMPTY_ARRAY,
-            ...{ new: data.new },
-            security: {
-              ...data.current.security,
-              Create:
-                data.current.security.Create &&
-                !self.settingsStore.aiConfig?.aiReadyNeedReset,
-            },
-          });
-
-          const isEmptyList = data.folders.length === 0;
-          if (filter && isEmptyList) {
-            const {
-              subjectId,
-              filterValue,
-              type,
-              withSubfolders: withRoomsSubfolders,
-              searchInContent: searchInContentRooms,
-              tags,
-              withoutTags,
-            } = filter;
-
-            const isFiltered =
-              subjectId ||
-              filter.subjectOwnerId ||
-              filterValue ||
-              type ||
-              filter.provider ||
-              withRoomsSubfolders ||
-              searchInContentRooms ||
-              tags ||
-              withoutTags ||
-              filter.quotaFilter;
-
-            if (isFiltered) {
-              self.setIsEmptyPage(false);
-            } else {
-              self.setIsEmptyPage(isEmptyList);
-            }
-          } else {
-            self.setIsEmptyPage(isEmptyList);
-          }
-
-          self.setFolders(data.folders);
-          self.setFiles(EMPTY_ARRAY);
-        });
-
-        if (clearFilter) {
-          if (clearSelection) {
-            self.setSelected("close");
-          }
-        }
-
-        setInfoPanelSelectedRoom(null);
-
-        const selectedFolder = {
-          selectedFolder: { ...self.selectedFolderStore },
-        };
-
-        if (self.createdItem) {
-          const newItem = self.filesList.find(
-            (item) => item.id === self.createdItem!.id,
-          );
-
-          if (newItem) {
-            self.setBufferSelection(newItem);
-            self.setScrollToItem({
-              id: newItem.id as number,
-              type: self.createdItem!.type,
-            });
-          }
-
-          self.setCreatedItem(null);
-        }
-
-        runInAction(() => {
-          self.roomsController = null;
-        });
-
-        self.setIsErrorAIAgentNotAvailable(false);
-        return Promise.resolve(selectedFolder);
-      })
-      .catch((err) => {
-        if (err?.response?.status === 402)
-          (
-            self.currentTariffStatusStore as unknown as {
-              setPortalTariff: () => void;
-            }
-          ).setPortalTariff();
-
-        if (axios.isCancel(err)) {
-          console.log("Request canceled", err.message);
-          throw err;
-        } else {
-          toastr.error(err);
-        }
-      })
-      .finally(() => {
-        self.clientLoadingStore.setIsSectionHeaderLoading(false);
-        self.clientLoadingStore.setIsSectionFilterLoading(false);
-      });
-
-  return request();
-}
-
 export async function fetchMoreFilesImpl(self: FilesStore) {
   if (
     !self.hasMoreFiles ||
@@ -1073,7 +764,6 @@ export async function fetchMoreFilesImpl(self: FilesStore) {
     isRoomsFolder,
     isArchiveFolder,
     isTemplatesFolder,
-    isAIAgentsFolder,
     isFormsFolder,
   } = self.treeFoldersStore;
 
@@ -1083,23 +773,17 @@ export async function fetchMoreFilesImpl(self: FilesStore) {
   self.setFilesIsLoading(true);
   // console.log("fetchMoreFiles");
 
-  const newFilter =
-    isRooms || isAIAgentsFolder
-      ? self.roomsFilter.clone()
-      : self.filter.clone();
+  const newFilter = isRooms ? self.roomsFilter.clone() : self.filter.clone();
   newFilter.page += 1;
-  if (isRooms || isAIAgentsFolder)
-    self.setRoomsFilter(newFilter as TRoomsFilter);
+  if (isRooms) self.setRoomsFilter(newFilter as TRoomsFilter);
   else self.setFilter(newFilter as TFilesFilter);
 
   const newFilesData = isRooms
     ? await api.rooms.getRooms(newFilter as TRoomsFilter)
-    : isAIAgentsFolder
-      ? await api.ai.getAIAgents(newFilter as TRoomsFilter)
-      : await api.files.getFolder(
-          (newFilter as TFilesFilter).folder,
-          newFilter as TFilesFilter,
-        );
+    : await api.files.getFolder(
+        (newFilter as TFilesFilter).folder,
+        newFilter as TFilesFilter,
+      );
 
   const newFiles = [...self.files, ...newFilesData.files].filter(
     (x, index, self) => index === self.findIndex((i) => i.id === x.id),

@@ -55,7 +55,6 @@ type CreateButtonMobileProps = {
   currentClientView?: string;
   contactsTab?: string;
   isRoomsFolder?: boolean;
-  isAIAgentsFolder?: boolean;
   isFormsFolder?: boolean;
   selectedFolderId?: number | string;
   currentDeviceType?: DeviceType;
@@ -63,7 +62,6 @@ type CreateButtonMobileProps = {
   getFolderModel: GetCreateModel;
   getContactsModel: GetCreateModel;
   onCreateRoom: () => void;
-  onCreateAgent: () => void;
   setMainButtonVisible?: (visible: boolean) => void;
 };
 
@@ -71,7 +69,6 @@ const CreateButtonMobile = ({
   currentClientView,
   contactsTab,
   isRoomsFolder,
-  isAIAgentsFolder,
   isFormsFolder,
   selectedFolderId,
   currentDeviceType,
@@ -79,7 +76,6 @@ const CreateButtonMobile = ({
   getFolderModel,
   getContactsModel,
   onCreateRoom,
-  onCreateAgent,
   setMainButtonVisible,
 }: CreateButtonMobileProps) => {
   const { t } = useTranslation(["Common", "Translations", "EmptyView"]);
@@ -97,14 +93,12 @@ const CreateButtonMobile = ({
     isContactsGroupsPage,
     isContactsGuestsPage,
     isRoomsFolder: !!isRoomsFolder,
-    isAIAgentsFolder: !!isAIAgentsFolder,
     isFormsSection,
     isFormsFolder: !!isFormsFolder,
     selectedFolderId,
     getFolderModel,
     getContactsModel,
     onCreateRoom,
-    onCreateAgent,
     createGroup,
   });
 
@@ -140,7 +134,6 @@ export default inject(
     currentClientView: clientLoadingStore.currentClientView,
     contactsTab: peopleStore.usersStore.contactsTab,
     isRoomsFolder: treeFoldersStore.isRoomsFolder,
-    isAIAgentsFolder: treeFoldersStore.isAIAgentsFolder,
     isFormsFolder: treeFoldersStore.isFormsFolder,
     selectedFolderId: selectedFolderStore.id,
     currentDeviceType: settingsStore.currentDeviceType,
@@ -148,7 +141,6 @@ export default inject(
     getFolderModel: contextOptionsStore.getFolderModel,
     getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
     onCreateRoom: contextOptionsStore.onCreateRoom,
-    onCreateAgent: contextOptionsStore.onCreateAgent,
     setMainButtonVisible: filesStore.setMainButtonVisible,
   }),
 )(observer(CreateButtonMobile));

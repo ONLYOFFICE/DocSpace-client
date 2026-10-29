@@ -83,7 +83,6 @@ const Table = ({
   isFavoritesFolder,
   isSharedWithMeFolder,
   isInSharedFolder,
-  isAIAgentsFolder,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -135,8 +134,8 @@ const Table = ({
   }, []);
 
   React.useEffect(() => {
-    if (!isRooms && !isAIAgentsFolder) setTagCount(0);
-  }, [isRooms, isAIAgentsFolder]);
+    if (!isRooms) setTagCount(0);
+  }, [isRooms]);
 
   const filesListNode = useMemo(() => {
     return list.map((item, index) => (
@@ -161,7 +160,6 @@ const Table = ({
         isFavoritesFolder={isFavoritesFolder}
         isSharedWithMeFolder={isSharedWithMeFolder}
         isInSharedFolder={isInSharedFolder}
-        isAIAgentsFolder={isAIAgentsFolder}
         hideColumns={hideColumns}
         isHighlight={
           highlightFile.id == item.id
@@ -181,7 +179,6 @@ const Table = ({
     theme,
     tagCount,
     isRooms,
-    isAIAgentsFolder,
     hideColumns,
     highlightFile.id,
     highlightFile.isExst,
@@ -254,7 +251,6 @@ export default inject(
       isFavoritesFolder,
       isSharedWithMeFolder,
       isInSharedFolder,
-      isAIAgentsFolder,
       isFormsFolder,
     } = treeFoldersStore;
     const isRooms =
@@ -302,8 +298,7 @@ export default inject(
       infoPanelVisible,
       fetchMoreFiles,
       hasMoreFiles,
-      filterTotal:
-        isRooms || isAIAgentsFolder ? roomsFilter.total : filter.total,
+      filterTotal: isRooms ? roomsFilter.total : filter.total,
       isRooms,
       isTrashFolder,
       isIndexEditingMode,
@@ -322,7 +317,6 @@ export default inject(
       isFavoritesFolder,
       isSharedWithMeFolder,
       isInSharedFolder,
-      isAIAgentsFolder,
     };
   },
 )(observer(Table));

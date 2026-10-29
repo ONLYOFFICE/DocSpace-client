@@ -123,8 +123,6 @@ type DetailsHelperProps = {
   isVisitor: boolean;
   isCollaborator: boolean;
   isDefaultRoomsQuotaSet: boolean;
-  isDefaultAIAgentsQuotaSet: boolean;
-  isAIAgentsFolder: boolean;
   isAdmin: boolean;
   isArchiveFolder: boolean;
   roomLifetime: TRoomLifetime;
@@ -145,10 +143,6 @@ class DetailsHelper {
 
   isDefaultRoomsQuotaSet: boolean;
 
-  isDefaultAIAgentsQuotaSet: boolean;
-
-  isAIAgentsFolder: boolean;
-
   isAdmin: boolean;
 
   isArchiveFolder: boolean;
@@ -163,8 +157,6 @@ class DetailsHelper {
     this.isVisitor = props.isVisitor;
     this.isCollaborator = props.isCollaborator;
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
-    this.isDefaultAIAgentsQuotaSet = props.isDefaultAIAgentsQuotaSet;
-    this.isAIAgentsFolder = props.isAIAgentsFolder;
     this.isAdmin = props.isAdmin;
     this.isArchiveFolder = props.isArchiveFolder;
     this.roomLifetime = props.roomLifetime;
@@ -317,11 +309,8 @@ class DetailsHelper {
 
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
-          const isDefaultQuotaSet = this.isAIAgentsFolder
-            ? this.isDefaultAIAgentsQuotaSet
-            : this.isDefaultRoomsQuotaSet;
-
-          return isDefaultQuotaSet && this.item.quotaLimit !== undefined
+          return this.isDefaultRoomsQuotaSet &&
+            this.item.quotaLimit !== undefined
             ? this.t("Common:StorageAndQuota")
             : this.t("Common:Storage");
         }
@@ -552,7 +541,7 @@ class DetailsHelper {
         <SpaceQuota
           item={this.item}
           isReadOnly={!this.item?.security?.EditRoom}
-          type={this.isAIAgentsFolder ? "agent" : "room"}
+          type="room"
         />
       );
     }

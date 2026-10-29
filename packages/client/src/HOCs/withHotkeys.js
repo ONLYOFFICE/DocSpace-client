@@ -85,10 +85,8 @@ const withHotkeys = (Component) => {
       isTrashFolder,
       isArchiveFolder,
       isRoomsFolder,
-      isAIAgentsFolder,
       isPrivacyFolder,
       canCreateEncrypted,
-      isAIRoom,
 
       getSelection,
       setFavoriteAction,
@@ -150,8 +148,6 @@ const withHotkeys = (Component) => {
       isArchiveFolder ||
       isRoomsFolder ||
       isVisitor ||
-      isAIAgentsFolder ||
-      isAIRoom ||
       !security?.Create;
 
     const onCreate = (extension) => {
@@ -202,15 +198,6 @@ const withHotkeys = (Component) => {
         }
 
         const event = new CustomEvent(Events.ROOM_CREATE, {
-          detail: { parentId: currentFolderId, context: "hotkey" },
-        });
-        window.dispatchEvent(event);
-      }
-    };
-
-    const onCreateAIAgent = () => {
-      if (!isVisitor && isAIAgentsFolder && security?.Create) {
-        const event = new CustomEvent(Events.AGENT_CREATE, {
           detail: { parentId: currentFolderId, context: "hotkey" },
         });
         window.dispatchEvent(event);
@@ -421,20 +408,10 @@ const withHotkeys = (Component) => {
       ...{ keyup: true },
     });
 
-    // Create AI agent
-    useHotkeys("Shift+a", () => onCreateAIAgent(), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
-
     // Delete selection
     useHotkeys(
       "delete, shift+3, command+delete, command+Backspace",
       () => {
-        if (isAIAgentsFolder && selection?.length > 1) {
-          return;
-        }
-
         if (isArchiveFolder) {
           isAvailableOption("unarchive") && deleteRooms(t);
           return;
@@ -624,7 +601,6 @@ const withHotkeys = (Component) => {
         isTrashFolder,
         isArchiveFolder,
         isRoomsFolder,
-        isAIAgentsFolder,
         isPrivacyFolder,
       } = treeFoldersStore;
 
@@ -679,10 +655,8 @@ const withHotkeys = (Component) => {
         isTrashFolder,
         isArchiveFolder,
         isRoomsFolder,
-        isAIAgentsFolder,
         isPrivacyFolder,
         canCreateEncrypted,
-        isAIRoom: selectedFolderStore.isAIRoom,
         isIndexEditingMode: indexingStore.isIndexEditingMode,
 
         getSelection,

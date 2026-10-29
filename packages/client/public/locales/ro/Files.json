@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Analizează răspunsurile",
   "ArchiveAction": "Golire arhivă",
   "ArchiveEmptyScreenUser": "Sălile care au fost arhivate vor apărea aici.",
-  "ChangeAgentOwnerSelectorInfo": "Doar un administrator al sălii sau superadministrator poate deveni proprietarul agentului",
-  "ChangeTheAgentOwner": "Schimbare proprietar al agentului",
   "ClientSearchDecryptingNames": "Se decriptează numele fișierelor… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Dosarul este prea mare. Rezultatele căutării pot fi incomplete.",
   "CompressingFiles": "Comprimare fișiere",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Imposibil de mutat fișierul în acest spațiu. Încercați să deplasați formularul PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Deplasarea mai multor fișiere în Spațiul de completare a formularelor nu este acceptată. Deplasați câte un formular PDF {{ organizationName }}.",
   "WillBeDeletedPermanently": "{{date}} va fi şters definitiv",
-  "YouLeftTheAgent": "Dvs ați părăsit agentul",
   "YourUserTypeHasChanged": "Tipul dvs. de utilizator a fost schimbat în <1>„{{userType}}”</1> de către superadministratorul <1>{{adminName}}</1>."
 }

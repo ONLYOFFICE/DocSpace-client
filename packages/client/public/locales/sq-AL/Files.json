@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Analizo përgjigjet",
   "ArchiveAction": "Zbraz arkivin",
   "ArchiveEmptyScreenUser": "Dhomat që janë akrivuar do të shfaqen këtu.",
-  "ChangeAgentOwnerSelectorInfo": "Vetëm një administrator i dhomës ose superadministrator mund të bëhet pronar i agjentit",
-  "ChangeTheAgentOwner": "Ndryshoni pronarin e agjentit",
   "ClientSearchDecryptingNames": "Po deshifrohen emrat e skedarëve… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Dosja është shumë e madhe. Rezultatet e kërkimit mund të jenë të paplota.",
   "CompressingFiles": "Po kompresohen skedarët",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Skedari nuk mund të zhvendoset në këtë hapësirë. Ju lutemi provoni të zhvendosni formularin PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Zhvendosja e disa skedarëve në hapësirën e plotësimit të formularit nuk mbështetet. Lëvizni një formular PDF {{ organizationName }} në të njëjtën kohë.",
   "WillBeDeletedPermanently": "{{date}} do të fshihet përgjithmonë",
-  "YouLeftTheAgent": "Ju e keni lënë agjentin",
   "YourUserTypeHasChanged": "Tipi i përdoruesit tuaj u ndryshua në <1>“{{userType}}”</1> nga superadministratori <1>{{adminName}}</1>."
 }

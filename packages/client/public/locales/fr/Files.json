@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Analyser les réponses",
   "ArchiveAction": "Vider l'archive",
   "ArchiveEmptyScreenUser": "Les salles qui ont été archivées apparaîtront ici.",
-  "ChangeAgentOwnerSelectorInfo": "Seul un administrateur de salle ou super-administrateur peut devenir propriétaire de l'agent",
-  "ChangeTheAgentOwner": "Modifier le propriétaire de l'agent",
   "ClientSearchDecryptingNames": "Déchiffrement des noms de fichiers… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Le dossier est trop volumineux. Les résultats de recherche peuvent être incomplets.",
   "CompressingFiles": "Compression des fichiers",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Le fichier ne peut pas être déplacé dans cet espace. Veuillez essayer de déplacer le formulaire PDF de {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Le déplacement de plusieurs fichiers vers l'espace de remplissage des formulaires n'est pas pris en charge. Déplacez un formulaire PDF {{ organizationName }} à la fois.",
   "WillBeDeletedPermanently": "{{date}} sera supprimé définitivement",
-  "YouLeftTheAgent": "Vous avez quitté l'agent",
   "YourUserTypeHasChanged": "Votre type d'utilisateur a été modifié en <1>« {{userType}} »</1> par le super-administrateur <1>{{adminName}}</1>."
 }

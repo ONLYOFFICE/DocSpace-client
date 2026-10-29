@@ -251,39 +251,6 @@ export const deleteAIAgent = async (id: TAgent["id"]) => {
   await request({ method: "DELETE", url: `${baseUrl}/agents/${id}`, data: {} });
 };
 
-export const resetAIAgentQuota = async (
-  roomIds: TAgent["id"] | TAgent["id"][],
-) => {
-  const data = {
-    roomIds,
-  };
-  const options = {
-    method: "put",
-    url: `${baseUrl}/agents/resetquota`,
-    data,
-  };
-
-  return request(options);
-};
-
-export function setCustomAIAgentQuota(
-  roomIds: TAgent["id"] | TAgent["id"][],
-  quota: number,
-) {
-  const data = {
-    roomIds,
-    quota,
-  };
-
-  const options = {
-    method: "put",
-    url: `${baseUrl}/agents/agentquota`,
-    data,
-  };
-
-  return request(options);
-}
-
 export const getProfilesList = async () => {
   const response = await authFetch(`/api/2.0/ai/profiles/list`, {
     method: "GET",

@@ -120,7 +120,6 @@ import {
   showFinishUploadToastrImpl,
 } from "./uploadDataStore/finish.helpers";
 
-import type AiRoomStore from "./AiRoomStore";
 import type DialogsStore from "./DialogsStore";
 import type FilesSettingsStore from "./FilesSettingsStore";
 import type PrimaryProgressDataStore from "./PrimaryProgressDataStore";
@@ -254,8 +253,6 @@ class UploadDataStore {
 
   filesSettingsStore: FilesSettingsStore;
 
-  aiRoomStore: AiRoomStore;
-
   userStore: UserStore;
 
   files: TUploadFile[] = [];
@@ -319,7 +316,6 @@ class UploadDataStore {
     primaryProgressDataStore: PrimaryProgressDataStore,
     dialogsStore: DialogsStore,
     filesSettingsStore: FilesSettingsStore,
-    aiRoomStore: AiRoomStore,
     userStore: UserStore,
   ) {
     makeAutoObservable(this);
@@ -331,7 +327,6 @@ class UploadDataStore {
     this.primaryProgressDataStore = primaryProgressDataStore;
     this.dialogsStore = dialogsStore;
     this.filesSettingsStore = filesSettingsStore;
-    this.aiRoomStore = aiRoomStore;
     this.userStore = userStore;
   }
 

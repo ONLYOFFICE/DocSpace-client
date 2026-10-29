@@ -567,66 +567,6 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
-    aiRoom: [
-      {
-        name: t("AiSuggestions:AiRoomWhatCanIAsk"),
-        prompt: t("AiSuggestions:AiRoomWhatCanIAskPrompt"),
-      },
-      {
-        name: t("AiSuggestions:AiRoomSummarizeTheKnowledgeBase"),
-        prompt: t("AiSuggestions:AiRoomSummarizeTheKnowledgeBasePrompt"),
-      },
-      {
-        name: t("AiSuggestions:AiRoomShowSourceDocuments"),
-        prompt: t("AiSuggestions:AiRoomShowSourceDocumentsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:AiRoomFindADocument"),
-        prompt: t("AiSuggestions:AiRoomFindADocumentPrompt"),
-      },
-      {
-        name: t("AiSuggestions:AiRoomFindTasksAndDeadlines"),
-        prompt: t("AiSuggestions:AiRoomFindTasksAndDeadlinesPrompt"),
-      },
-      {
-        name: t("AiSuggestions:AiRoomCompareDocuments"),
-        prompt: t("AiSuggestions:AiRoomCompareDocumentsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:AiRoomFindContradictions"),
-        prompt: t("AiSuggestions:AiRoomFindContradictionsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:AiRoomCreateAReport"),
-        prompt: t("AiSuggestions:AiRoomCreateAReportPrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:AiRoomCreateAPresentation"),
-        prompt: t("AiSuggestions:AiRoomCreateAPresentationPrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:AiRoomCollectDataIntoATable"),
-        prompt: t("AiSuggestions:AiRoomCollectDataIntoATablePrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:AiRoomTranslateADocument"),
-        prompt: t("AiSuggestions:AiRoomTranslateADocumentPrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:AiRoomShowSavedResults"),
-        prompt: t("AiSuggestions:AiRoomShowSavedResultsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:AiRoomAddToTheKnowledgeBase"),
-        prompt: t("AiSuggestions:AiRoomAddToTheKnowledgeBasePrompt"),
-        requires: "create",
-      },
-    ],
-
     customRoom: insideRoom,
     // +
     collaborationRoom: insideRoom,
@@ -972,8 +912,6 @@ const sectionFromRoomType = (
       return "vdrRoom";
     case RoomsType.FormRoom:
       return "formSpace";
-    case RoomsType.AIRoom:
-      return "aiRoom";
     default:
       return "default";
   }

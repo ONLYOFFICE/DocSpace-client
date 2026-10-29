@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "AI Agent kreiran",
-  "AgentDeleted": "AI Agent obrisan",
-  "AgentUpdated": "Agent AI ažuriran",
   "Before": "Pre",
   "CreateWebhook": "Kreiraj webhook",
   "DeleteHint": "Webhook će biti trajno obrisan.\nNećete moći da poništite ovu akciju.",

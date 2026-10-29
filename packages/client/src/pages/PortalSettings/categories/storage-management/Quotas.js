@@ -47,22 +47,15 @@ import styles from "./StyledComponent.module.scss";
 import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
 import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
-import { QuotaPerAIAgentComponentSection } from "./sub-components/QuotaPerAIAgent";
 
-const QuotaPerItemsComponent = ({ isStatisticsAvailable, aiServicesEnabled }) => {
+const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
   if (isMobile())
-    return (
-      <MobileQuotasComponent
-        isDisabled={!isStatisticsAvailable}
-        aiServicesEnabled={aiServicesEnabled}
-      />
-    );
+    return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;
 
   return (
     <>
       <QuotaPerRoomComponentSection />
       <QuotaPerUserComponentSection />
-      {aiServicesEnabled ? <QuotaPerAIAgentComponentSection /> : null}
     </>
   );
 };
@@ -71,8 +64,7 @@ const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
   const { isBase } = useTheme();
 
-  const { isStatisticsAvailable, storageManagementUrl, aiServicesEnabled } =
-    props;
+  const { isStatisticsAvailable, storageManagementUrl } = props;
 
   return (
     <div className={styles.baseQuotaComponent}>
@@ -110,21 +102,17 @@ const QuotasComponent = (props) => {
         ) : null}
       </Text>
 
-      <QuotaPerItemsComponent
-        isStatisticsAvailable={isStatisticsAvailable}
-        aiServicesEnabled={aiServicesEnabled}
-      />
+      <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />
     </div>
   );
 };
 
 export default inject(({ currentQuotaStore, settingsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
-  const { storageManagementUrl, aiServicesEnabled } = settingsStore;
+  const { storageManagementUrl } = settingsStore;
 
   return {
     isStatisticsAvailable,
     storageManagementUrl,
-    aiServicesEnabled,
   };
 })(observer(QuotasComponent));

@@ -196,18 +196,6 @@ describe("FilesStore.wsModifyFolderCreate — add branches", () => {
 describe("FilesStore.redirectToParent — routing", () => {
   const pathPart = (id: number) => ({ id }) as never;
 
-  it("routes an AI-agents room removal to the agents listing", () => {
-    const store = createTestFilesStore();
-    store.redirectToParent(
-      { id: 5 } as never,
-      [pathPart(1), pathPart(5)],
-      false,
-      false,
-      FolderType.AIAgents,
-    );
-    expect(navigate).toHaveBeenCalledTimes(1);
-  });
-
   it("routes a personal-folder removal to the parent folder listing", () => {
     const store = createTestFilesStore();
     store.redirectToParent(

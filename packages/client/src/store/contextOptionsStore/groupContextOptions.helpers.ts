@@ -68,13 +68,12 @@ self: ContextOptionsStore,t: TTranslation
     isRecycleBinFolder,
     isRoomsFolder,
     isArchiveFolder,
-    isAIAgentsFolder,
     isFormsFolder,
   } = self.treeFoldersStore;
 
   const { pinRooms, unpinRooms, deleteRooms } = self.filesActionsStore;
 
-  if (isRoomsFolder || isArchiveFolder || isAIAgentsFolder || isFormsFolder) {
+  if (isRoomsFolder || isArchiveFolder || isFormsFolder) {
     const isPinOption = selection.filter((item) => !item.pinned).length > 0;
 
     let canDelete: boolean | undefined;
@@ -138,7 +137,7 @@ self: ContextOptionsStore,t: TTranslation
     const { organizeRoomsGrouping } = self.filesSettingsStore;
     const { setEditRoomGroupsDialogVisible, roomGroups } = self.dialogsStore;
 
-    if (organizeRoomsGrouping && !isArchiveFolder && !isAIAgentsFolder) {
+    if (organizeRoomsGrouping && !isArchiveFolder) {
       const roomIds = selection.map((room) => room.id);
       options.push({
         key: "create-group",

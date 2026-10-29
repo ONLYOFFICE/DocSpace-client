@@ -49,7 +49,6 @@ export type GetSectionCreateButtonParams = {
   isContactsGroupsPage: boolean;
   isContactsGuestsPage: boolean;
   isRoomsFolder: boolean;
-  isAIAgentsFolder: boolean;
   isFormsSection: boolean;
   isFormsFolder: boolean;
 
@@ -58,7 +57,6 @@ export type GetSectionCreateButtonParams = {
   getFolderModel: TGetCreateModel;
   getContactsModel: TGetCreateModel;
   onCreateRoom: () => void;
-  onCreateAgent: () => void;
   createGroup: (parentId?: number | string, context?: string) => void;
 };
 
@@ -75,14 +73,12 @@ export const getSectionCreateButton = ({
   isContactsGroupsPage,
   isContactsGuestsPage,
   isRoomsFolder,
-  isAIAgentsFolder,
   isFormsSection,
   isFormsFolder,
   selectedFolderId,
   getFolderModel,
   getContactsModel,
   onCreateRoom,
-  onCreateAgent,
   createGroup,
 }: GetSectionCreateButtonParams): SectionCreateButtonResult => {
   if (isFormsSection && isFormsFolder) {
@@ -96,21 +92,6 @@ export const getSectionCreateButton = ({
         isDropdown: false,
         model: [],
         onAction: () => onCreateRoom(),
-      },
-    };
-  }
-
-  if (isAIAgentsFolder) {
-    const model = getFolderModel(t);
-    if (!model || model.length === 0) return HIDDEN;
-
-    return {
-      showMainButton: true,
-      mainButtonProps: {
-        text: t("Common:NewAgent"),
-        isDropdown: false,
-        model: [],
-        onAction: () => onCreateAgent(),
       },
     };
   }

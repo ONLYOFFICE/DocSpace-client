@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Analisar respostas",
   "ArchiveAction": "Esvaziar arquivo",
   "ArchiveEmptyScreenUser": "As salas que foram arquivados, aparecerão aqui.",
-  "ChangeAgentOwnerSelectorInfo": "Apenas um administrador de sala ou superadministrador pode tornar-se proprietário do agente",
-  "ChangeTheAgentOwner": "Mude o proprietário do agente",
   "ClientSearchDecryptingNames": "A desencriptar nomes de ficheiros… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "A pasta é demasiado grande. Os resultados da pesquisa podem estar incompletos.",
   "CompressingFiles": "A comprimir ficheiros",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "O ficheiro não pode ser movido para este espaço. Tente mover o formulário PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Não há suporte para mover vários arquivos para o espaço de preenchimento de formulários. Mova um formulário PDF {{ organizationName }} de cada vez.",
   "WillBeDeletedPermanently": "{{date}} será eliminado permanentemente",
-  "YouLeftTheAgent": "Você saiu do agente",
   "YourUserTypeHasChanged": "O seu tipo de utilizador foi alterado para <1>“{{userType}}”</1> pelo superadministrador <1>{{adminName}}</1>."
 }

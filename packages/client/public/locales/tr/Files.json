@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Yanıt analiz et",
   "ArchiveAction": "Arşivi boşalt",
   "ArchiveEmptyScreenUser": "Arşivlenen odalar burada görünecektir.",
-  "ChangeAgentOwnerSelectorInfo": "Ajanın sahibi yalnızca bir oda yöneticisi veya süper yönetici olabilir",
-  "ChangeTheAgentOwner": "Ajan sahibini değiştir",
   "ClientSearchDecryptingNames": "Dosya adlarının şifresi çözülüyor… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Klasör çok büyük. Arama sonuçları eksik olabilir.",
   "CompressingFiles": "Dosyalar sıkıştırılıyor",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Dosya bu alana taşınamıyor. Lütfen {{ organizationName }} PDF formunu taşımayı deneyin.",
   "WarningMoveToFormRoomServal": "Birden fazla dosyanın Form Doldurma alanına taşınması desteklenmiyor. Tek seferde bir {{ organizationName }} PDF formu taşıyın.",
   "WillBeDeletedPermanently": "{{date}} kalıcı olarak silinecek",
-  "YouLeftTheAgent": "Ajanı terk ettiniz.",
   "YourUserTypeHasChanged": "Kullanıcı türünüz süper yönetici <1>{{adminName}}</1> tarafından <1>“{{userType}}”</1> olarak değiştirildi."
 }

@@ -48,7 +48,6 @@ import styles from "./StyledComponent.module.scss";
 
 import RoomsList from "./sub-components/RoomsList";
 import UsersList from "./sub-components/UsersList";
-import AIAgentList from "./sub-components/AIAgentList.js";
 
 const buttonProps = {
   className: "button-element",
@@ -57,7 +56,7 @@ const buttonProps = {
 const StatisticsComponent = (props) => {
   const { t } = useTranslation("Settings");
   const { isBase } = useTheme();
-  const { isStatisticsAvailable, aiServicesEnabled } = props;
+  const { isStatisticsAvailable } = props;
 
   const iconElement = (
     id,
@@ -131,26 +130,16 @@ const StatisticsComponent = (props) => {
             quotaElement={quotaElement}
             iconElement={iconElement}
           />
-          {aiServicesEnabled ? (
-            <AIAgentList
-              buttonProps={buttonProps}
-              textElement={textElement}
-              quotaElement={quotaElement}
-              iconElement={iconElement}
-            />
-          ) : null}
         </>
       ) : null}
     </div>
   );
 };
 
-export default inject(({ currentQuotaStore, settingsStore }) => {
+export default inject(({ currentQuotaStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
-  const { aiServicesEnabled } = settingsStore;
 
   return {
     isStatisticsAvailable,
-    aiServicesEnabled,
   };
 })(observer(StatisticsComponent));

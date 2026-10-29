@@ -55,7 +55,6 @@ import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
-import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import api from "@docspace/shared/api";
 import { setAiProjectLink } from "@docspace/shared/api/ai/projects";
 import { RoomsType } from "@docspace/shared/enums";
@@ -168,27 +167,13 @@ const ExternalLinks = ({
     standalone,
   );
 
-  const getAgentAccesses = () => {
-    return filterNotReadOnlyOptions(accesses).filter(
-      (o) => !o.isSeparator && !o.disabled,
-    );
-  };
-
   const filteredAccesses =
-    roomType === -1
-      ? accesses
-      : roomType === RoomsType.AIRoom
-        ? getAgentAccesses()
-        : filterPaidRoleOptions(accesses);
+    roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
 
   const description =
     roomId === -1
       ? t("InviteViaLinkDescriptionAccounts")
-      : roomType === RoomsType.AIRoom
-        ? allowInvitingGuests
-          ? t("Common:InviteViaLinkDescriptionAgentGuest")
-          : t("Common:InviteViaLinkDescriptionAgentMembers")
-        : roomType === RoomsType.AiProjectRoom
+      : roomType === RoomsType.AiProjectRoom
           ? allowInvitingGuests
             ? t("Common:InviteViaLinkDescriptionAIProjectGuest")
             : t("Common:InviteViaLinkDescriptionAIProjectMembers")

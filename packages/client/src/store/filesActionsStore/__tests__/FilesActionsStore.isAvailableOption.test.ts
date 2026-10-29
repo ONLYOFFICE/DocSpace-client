@@ -166,13 +166,11 @@ describe("FilesActionsStore.isAvailableOption — characterization", () => {
     const store = createTestFilesActionsStore({
       filesStore: {
         hasRoomsToChangeQuota: true,
-        hasAIAgentsToChangeQuota: false,
         hasRoomsToDisableQuota: true,
         hasRoomsToResetQuota: false,
       },
     });
     expect(store.isAvailableOption("change-quota")).toBe(true);
-    expect(store.isAvailableOption("change-agent-quota")).toBe(false);
     expect(store.isAvailableOption("disable-quota")).toBe(true);
     expect(store.isAvailableOption("default-quota")).toBe(false);
   });

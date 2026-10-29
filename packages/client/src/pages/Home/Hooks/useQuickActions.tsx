@@ -53,7 +53,6 @@ import {
   QuickCustomRoomIcon,
   QuickFormRoomIcon,
   CreateFromTemplateIcon,
-  CreateAgentIcon,
   AIChatIcon,
 } from "@onlyoffice/apps-ui-kit/components/quick-actions/icons";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -123,16 +122,6 @@ const dispatchCreateRoomFromTemplate = (
   window.dispatchEvent(event);
 };
 
-// Opens the create-agent dialog scoped to the current folder, via the same
-// AGENT_CREATE event the agents header button fires (consumed by GlobalEvents
-// / CreateAgentEvent).
-const dispatchCreateAgent = (parentId: number | string | null) => {
-  const event = new CustomEvent(Events.AGENT_CREATE, {
-    detail: { parentId, context: "sidebar" },
-  });
-  window.dispatchEvent(event);
-};
-
 export type UseQuickActionsProps = SectionFlags & {
   currentFolderId: number | string | null;
   // selectedFolderStore.security?.Create — folder-level create permission.
@@ -141,8 +130,6 @@ export type UseQuickActionsProps = SectionFlags & {
   canCreateEncrypted?: boolean;
   // SDK's canCreateRooms: admins / owners / room admins.
   canCreateRooms?: boolean;
-  // AI is ready and the user can manage agents (admins / owners / room admins).
-  canCreateAgents?: boolean;
   // Whether the OForms template gallery is reachable (settingsStore). The
   // FormRoom "from template" tile is only offered when it is.
   templateGalleryAvailable?: boolean;
@@ -173,7 +160,6 @@ export const useQuickActions = (
     canCreateFiles,
     canCreateEncrypted,
     canCreateRooms,
-    canCreateAgents,
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
@@ -387,19 +373,6 @@ export const useQuickActions = (
     isAiChatAvailable,
   ]);
 
-  const agentItems = React.useMemo<QuickActionItem[]>(
-    () => [
-      {
-        id: "quick-new-agent",
-        dataTestId: "quick-new-agent",
-        icon: <CreateAgentIcon />,
-        label: t("Common:NewAgent"),
-        onClick: () => dispatchCreateAgent(currentFolderId),
-      },
-    ],
-    [t, currentFolderId],
-  );
-
   if (section === "files" && canCreateFiles)
     return { show: true, items: fileItems };
 
@@ -411,9 +384,6 @@ export const useQuickActions = (
 
   if (section === "form-room" && canCreateFiles)
     return { show: true, items: formRoomItems };
-
-  if (section === "ai-agents" && canCreateAgents)
-    return { show: true, items: agentItems };
 
   if (section === "private" && canCreateFiles && canCreateEncrypted)
     return { show: true, items: createFileTiles };

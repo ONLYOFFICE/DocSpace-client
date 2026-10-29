@@ -48,7 +48,6 @@ import {
   AnalyticsEvents,
   EmployeeType,
   ShareAccessRights,
-  RoomsType,
 } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
 import uniqueid from "lodash/uniqueId";
@@ -81,7 +80,6 @@ import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions"
 import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
-import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import { fixAccess } from "./utils";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
@@ -986,12 +984,8 @@ const InvitePanel = ({
       const shouldMakeFreeRole =
         checkIfAccessPaid(u.access) &&
         (u.isGroup || u.isVisitor || u.isCollaborator);
-      const shouldMakeViewerRole =
-        roomType === RoomsType.AIRoom &&
-        u.isVisitor &&
-        u.access !== ShareAccessRights.ReadOnly;
 
-      if (shouldMakeFreeRole || shouldMakeViewerRole) {
+      if (shouldMakeFreeRole) {
         u = fixAccess(u, t, roomType);
 
         if (isUserTariffLimit) {
@@ -1033,13 +1027,7 @@ const InvitePanel = ({
   const access = defaultAccess ?? ShareAccessRights.ReadOnly;
 
   const filteredAccesses =
-    roomType === -1
-      ? accessOptions
-      : roomType === RoomsType.AIRoom
-        ? filterNotReadOnlyOptions(accessOptions).filter(
-            (o) => !o.isSeparator && !o.disabled,
-          )
-        : filterPaidRoleOptions(accessOptions);
+    roomType === -1 ? accessOptions : filterPaidRoleOptions(accessOptions);
 
   const onSubmitLinkSettingsPanel = (defaultLink) => {
     if (roomId === -1) {
@@ -1099,7 +1087,6 @@ const InvitePanel = ({
             disableDisabledUsers
             withGroups={!isPrivateRoom}
             roomId={roomId}
-            isAgent={roomType === RoomsType.AIRoom}
             disableInvitedUsers={invitedUsersArray}
             withGuests={showGuestsTab}
             withHeader

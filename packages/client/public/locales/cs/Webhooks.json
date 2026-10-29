@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "AI agent vytvořen",
-  "AgentDeleted": "AI agent smazán",
-  "AgentUpdated": "AI Agent aktualizován",
   "Before": "Před",
   "CreateWebhook": "Vytvoření webhooku",
   "DeleteHint": "Webhook bude trvale odstraněn.\nTuto akci nelze vrátit zpět.",

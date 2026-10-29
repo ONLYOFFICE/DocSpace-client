@@ -80,8 +80,8 @@ type SdkIframeProps = {
   src: string;
   title: string;
   // `extra` carries `pathname` / `search` so consumers that need the full
-  // iframe location (e.g. ai-agents distinguishing `/123?tab=chat` vs a
-  // section) can read them. Section-only consumers (ai-forms) ignore it.
+  // iframe location (an item route such as `/123?tab=chat` vs a section)
+  // can read them. Section-only consumers (ai-forms) ignore it.
   onNavigate?: (section: string, extra?: SdkNavigateExtra) => void;
   onFilterSearch?: (search: string) => void;
   // Fired once the SDK app inside the iframe finishes bootstrapping (the
@@ -167,10 +167,9 @@ export const SdkIframe = ({
         | { section?: string | null; pathname?: string; search?: string }
         | undefined;
       const section = typeof data?.section === "string" ? data.section : "";
-      // ai-agents may emit onNavigate without a `section` (the section
-      // field carries the agent's current tab and is null outside agent
-      // detail). Forward the event anyway when `pathname` is present so
-      // host wrappers that read pathname can react.
+      // An SDK app may emit onNavigate without a `section` (the field is
+      // null outside a section view). Forward the event anyway when
+      // `pathname` is present so host wrappers that read pathname can react.
       if (section || data?.pathname) {
         // A settled in-iframe section change == the destination finished
         // loading: undim the content and complete the sidebar's progress

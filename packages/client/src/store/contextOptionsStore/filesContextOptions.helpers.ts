@@ -100,7 +100,6 @@ import { isFolder } from "@docspace/shared/utils/typeGuards";
 import {
   createMenuGroup,
   filterModel,
-  onClickEditAgent,
   onClickLinkForPortal,
   onEditRoomTemplate,
   onShowEditingToast,
@@ -299,14 +298,7 @@ export const getFilesContextOptionsImpl = (
   }
 
   const isArchive = item.rootFolderType === FolderType.Archive;
-  const isAIAgent =
-    item.isAIAgent ??
-    (item.rootFolderType === FolderType.AIAgents &&
-      item.roomType === RoomsType.AIRoom);
   const isFormSpace = item.roomType === RoomsType.FormRoom;
-
-  const isKnowledgeOrResult =
-    item.isAIAgent && (item.isInsideKnowledge || item.isInsideResultStorage);
 
   const hasShareLinkRights = isPublicRoom
     ? item.security?.Read
@@ -473,14 +465,6 @@ export const getFilesContextOptionsImpl = (
       label: isFormSpace ? t("Common:EditFormSpace") : t("Common:EditRoom"),
       icon: SettingsReactSvgUrl,
       onClick: () => self.onClickEditRoom(item),
-      disabled: false,
-    },
-    {
-      id: "option_edit-agent",
-      key: "edit-agent",
-      label: t("Common:EditAgent"),
-      icon: SettingsReactSvgUrl,
-      onClick: () => onClickEditAgent(item),
       disabled: false,
     },
     {
@@ -707,7 +691,7 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_room-info",
       key: "room-info",
-      label: item.isAIAgent ? t("Common:AgentInfo") : t("Common:RoomInfo"),
+      label: t("Common:RoomInfo"),
       icon: InfoOutlineReactSvgUrl,
       onClick: () => self.onShowInfoPanel(item),
       disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),
@@ -813,7 +797,7 @@ export const getFilesContextOptionsImpl = (
         : t("Common:ChangeRoomOwner"),
       icon: ReconnectSvgUrl,
       onClick: self.onChangeRoomOwner,
-      disabled: isAIAgent,
+      disabled: false,
     },
     {
       id: "option_remove-from-group",
@@ -941,26 +925,15 @@ export const getFilesContextOptionsImpl = (
       disabled: false,
     },
     {
-      id: "option_change-room-owner",
-      key: "change-agent-owner",
-      label: t("Common:OwnerChange"),
-      icon: ReconnectSvgUrl,
-      onClick: self.onChangeRoomOwner,
-      disabled: !isAIAgent,
-    },
-    {
       id: "option_leave-room",
       key: "leave-room",
-      label: isAIAgent
-        ? t("Common:LeaveTheAgent")
-        : isFormSpace
-          ? t("Common:LeaveTheFormSpace")
-          : t("Common:LeaveTheRoom"),
+      label: isFormSpace
+        ? t("Common:LeaveTheFormSpace")
+        : t("Common:LeaveTheRoom"),
       icon: LeaveRoomSvgUrl,
       onClick: self.onLeaveRoom,
-      disabled: isKnowledgeOrResult
-        ? false
-        : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
+      disabled:
+        isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
     },
     {
       id: "option_archive-room",
@@ -995,16 +968,14 @@ export const getFilesContextOptionsImpl = (
       key: "delete",
       label: isRootThirdPartyFolder
         ? t("Common:Disconnect")
-        : isAIAgent
-          ? t("Common:DeleteAgent")
-          : item.isTemplate
-            ? t("Files:DeleteTemplateAction")
-            : item.isRoom
-              ? isFormSpace
-                ? t("Common:DeleteFormSpace")
-                : t("Common:DeleteRoom")
-              : t("Common:Delete"),
-      icon: item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
+        : item.isTemplate
+          ? t("Files:DeleteTemplateAction")
+          : item.isRoom
+            ? isFormSpace
+              ? t("Common:DeleteFormSpace")
+              : t("Common:DeleteRoom")
+            : t("Common:Delete"),
+      icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
       onClick: () => self.onDelete(item, t),
       disabled: item.isTemplate ? !isTemplateOwner : false,
     },
@@ -1077,22 +1048,7 @@ export const getFilesContextOptionsImpl = (
       !(isCollaborator && option.key === "create-room"),
   );
 
-  let minItemsCount = 3;
-  if (item.isAIAgent && item.inRoom) {
-    if (self.userStore?.user?.isAdmin || self.userStore?.user?.isOwner) {
-      if (
-        item.access === ShareAccessRights.RoomManager ||
-        item.access === ShareAccessRights.None
-      ) {
-        minItemsCount = 1;
-      }
-    } else if (
-      item.access === ShareAccessRights.RoomManager ||
-      item.access === ShareAccessRights.None
-    ) {
-      minItemsCount = 1;
-    }
-  }
+  const minItemsCount = 3;
 
   const showInfoOption = newOptions.find(
     (option) => option.key === "show-info",

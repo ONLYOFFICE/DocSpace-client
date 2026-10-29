@@ -53,7 +53,6 @@ import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presen
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
 import CreateFromTemplateIcon from "PUBLIC_DIR/images/emptyview/create.from.template.svg";
 import CreateFromGalleryIcon from "PUBLIC_DIR/images/emptyview/create.from.gallery.svg";
-import CreateAIAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
 import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
 import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
@@ -73,7 +72,6 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
-import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import type {
   EmptyViewItemType,
@@ -111,43 +109,10 @@ export const getDescription = (
   security: Nullable<
     TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
   >,
-  isKnowledgeTab?: boolean,
-  isResultsTab?: boolean,
-  isAIRoom?: boolean,
-  aiReady: boolean = false,
-  standalone: boolean = false,
-  isPortalAdmin: boolean = false,
   isFormsScope: boolean = false,
   filterFolderType: Nullable<number[]> = null,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
-
-  if (isAIRoom) {
-    if (isKnowledgeTab)
-      return (
-        <>
-          {t("Common:EmptyKnowledgeDescription", {
-            aiChat: t("Common:AIChat"),
-          })}
-          <Text
-            as="span"
-            fontSize="12px"
-            style={{ display: "block", marginTop: "8px" }}
-          >
-            {t("Common:EmptyKnowledgeDescriptionActions")}
-          </Text>
-        </>
-      );
-
-    if (isResultsTab)
-      return security && "UseChat" in security && security.UseChat
-        ? t("Common:EmptyResultsDescription", {
-            aiChat: t("Common:AIChat"),
-          })
-        : t("Common:EmptyResultsViewerDescription", {
-            aiChat: t("Common:AIChat"),
-          });
-  }
 
   if (isRootEmptyPage)
     return getRootDescription(
@@ -156,9 +121,6 @@ export const getDescription = (
       rootFolderType,
       isPublicRoom,
       security,
-      standalone,
-      aiReady,
-      isPortalAdmin,
       isFormsScope,
       filterFolderType,
     );
@@ -186,41 +148,15 @@ export const getTitle = (
   isArchiveFolderRoot: boolean,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
-  security: Nullable<
-    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
-  >,
-  isKnowledgeTab?: boolean,
-  isResultsTab?: boolean,
-  isAIRoom?: boolean,
-  aiReady: boolean = false,
-  standalone: boolean = false,
-  isPortalAdmin: boolean = false,
   isFormsScope: boolean = false,
   isPublicRoom: boolean = false,
 ): string => {
   const isNotAdmin = isUser(access);
 
-  if (isAIRoom) {
-    if (isKnowledgeTab) return t("Common:EmptyKnowledgeTitle");
-
-    if (isResultsTab)
-      return security && "UseChat" in security && security.UseChat
-        ? t("Common:EmptyResultsTitle")
-        : t("Common:NothingToShowYet");
-  }
-
   if (isRootEmptyPage && isPublicRoom) return t("Common:EmptyScreenFolder");
 
   if (isRootEmptyPage)
-    return getRootTitle(
-      t,
-      access,
-      rootFolderType,
-      aiReady,
-      standalone,
-      isPortalAdmin,
-      isFormsScope,
-    );
+    return getRootTitle(t, access, rootFolderType, isFormsScope);
 
   if (isFolder)
     return getFolderTitle(
@@ -244,38 +180,16 @@ export const getIcon = (
   parentRoomType: Nullable<FolderType>,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
-  security: Nullable<
-    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
-  >,
-  isResultsTab?: boolean,
-  isKnowledgeTab?: boolean,
-  isAIRoom?: boolean,
   isPublicRoom: boolean = false,
-  aiReady: boolean = false,
 ): JSX.Element => {
   if (isRootEmptyPage && isPublicRoom)
     return isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />;
 
-  if (isRootEmptyPage)
-    return getRootIcon(rootFolderType, access, isBaseTheme, aiReady);
-
-  // The knowledge tab shows a folder whose `folderType` isn't a default-folder
-  // type, so `getFolderIcon` would fall through to its empty `<div />` and the
-  // empty screen would render with no illustration. Use the same default
-  // folder icon the SDK agents knowledge empty view uses.
-  if (isAIRoom && isKnowledgeTab)
-    return isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />;
+  if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
 
   return isFolder
-    ? getFolderIcon(
-        parentRoomType,
-        isBaseTheme,
-        access,
-        folderType,
-        security,
-        isResultsTab,
-      )
-    : getRoomIcon(type, isBaseTheme, access, security, isResultsTab)!;
+    ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
+    : getRoomIcon(type, isBaseTheme, access)!;
 };
 
 export const getOptions = (
@@ -295,15 +209,7 @@ export const getOptions = (
   logoText: string,
   isVisitor: boolean = true,
   isFrame: boolean = false,
-  isKnowledgeTab?: boolean,
-  isResultsTab?: boolean,
-  isAIRoom?: boolean,
-  aiReady: boolean = false,
-  standalone: boolean = false,
-  isPortalAdmin: boolean = false,
-  trashSection: "personal" | "rooms" | "forms" | "agents" = "personal",
-  isCardLinkedToPortal: boolean = false,
-  isActivating: boolean = false,
+  trashSection: "personal" | "rooms" | "forms" = "personal",
   isAiChatAvailable: boolean = false,
   isTemplateGalleryAvailable: boolean = false,
 ): EmptyViewOptionsType => {
@@ -311,7 +217,6 @@ export const getOptions = (
   const isCollaborator = access === ShareAccessRights.Collaborator;
   const isTemplateFolder = rootFolderType === FolderType.RoomTemplates;
   const isNotAdmin = isUser(access);
-  const canUseChat = !!security && "UseChat" in security && security.UseChat;
 
   const {
     createInviteOption,
@@ -449,16 +354,6 @@ export const getOptions = (
     ? [createFormSpaceFromGallery]
     : [];
 
-  const createAIAgent = {
-    title: t("Common:CreateAIAgentTitle"),
-    description: t("Common:CreateAIAgentDescription"),
-    icon: <CreateAIAgentIcon />,
-    key: "create-ai-agent",
-    onClick: actions.onCreateAIAgent,
-    //disabled: !security?.Create,
-    disabled: false,
-  };
-
   // Opens the AI chat panel — the same action the quick-action tiles and the
   // dashboard use. Only offered where the chat is actually reachable
   // (`isAiChatAvailable` already covers guests and portals without AI).
@@ -488,29 +383,6 @@ export const getOptions = (
   //   key: "go-to-services",
   //   onClick: actions.onGoToServices,
   // } as const;
-
-  const goToAIProviderSettings = {
-    type: "button",
-    title: t("Common:GoToSettings"),
-    key: "go-to-ai-provider-settings",
-    onClick: actions.onGoToAIProviderSettings,
-  } as const;
-
-  const activateOrTopUpAI = isCardLinkedToPortal
-    ? ({
-        type: "button",
-        title: t("Common:Activate"),
-        key: "activate-ai",
-        onClick: actions.onActivateAI,
-        isLoading: isActivating,
-      } as const)
-    : ({
-        type: "button",
-        title: t("Common:TopUpAndActivate"),
-        key: "top-up-and-activate-ai",
-        onClick: actions.onTopUpAndActivateAI,
-        isLoading: isActivating,
-      } as const);
 
   // const aiBenefits = {
   //   type: "button",
@@ -601,22 +473,9 @@ export const getOptions = (
     ],
   };
 
-  // The knowledge/results tabs view the agent room itself, which lives at the
-  // section root (`parentId === 0`) and so trips `isRootEmptyPage`. Without
-  // this guard the root branch below (FolderType.AIAgents → create-agent)
-  // would win and the knowledge/results upload actions never render. Title and
-  // description already special-case `isAIRoom` first, so options must too.
-  const isAIAliasTab = !!(isAIRoom && (isKnowledgeTab || isResultsTab));
-
-  if (isRootEmptyPage && !isAIAliasTab) {
+  if (isRootEmptyPage) {
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
-      .with([FolderType.AIAgents, P._, P._], () => {
-        if (aiReady) return isPortalAdmin ? [createAIAgent] : [];
-        if (!isPortalAdmin) return [];
-        if (standalone) return [goToAIProviderSettings];
-        return [activateOrTopUpAI];
-      })
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,
         inviteRootRoom,
@@ -658,11 +517,6 @@ export const getOptions = (
             icon: <FolderIcon />,
             sectionName: t("Common:Forms"),
           },
-          agents: {
-            link: actions.onGoToAgents(),
-            icon: <FolderIcon />,
-            sectionName: t("Common:AIAgents"),
-          },
           personal: {
             link: actions.onGoToPersonal(),
             icon: <PersonIcon />,
@@ -685,44 +539,6 @@ export const getOptions = (
   }
 
   if (isArchiveFolderRoot) return [];
-
-  if (isAIRoom) {
-    if (isKnowledgeTab) {
-      const uploadFilesFromDocSpace = createUploadFromDocSpace(
-        t("EmptyView:UploadFromPortalTitle"),
-        t("Common:UploadFilesPortal", {
-          files: t("Common:Files"),
-          rooms: t("Common:Rooms"),
-          forms: t("Common:Forms"),
-        }),
-        "",
-        true,
-      );
-
-      const uploadFilesFromDevice = createUploadFromDeviceOption(
-        t("EmptyView:UploadDeviceOptionTitle"),
-        t("Common:UploadFilesDevice"),
-        "file",
-        true,
-      );
-
-      return [uploadFilesFromDocSpace, uploadFilesFromDevice];
-    }
-
-    if (isResultsTab)
-      return [
-        {
-          key: "open-chat",
-          title: t("Common:CreateChat"),
-          icon: <CreateChatIcon />,
-          onClick: actions.onStartNewChat,
-          description: t("Common:CreateChatDescription", {
-            aiChat: t("Common:AIChat"),
-          }),
-          disabled: !canUseChat,
-        },
-      ];
-  }
 
   if (isFolder) {
     return match([parentRoomType, folderType, access])
@@ -807,7 +623,6 @@ export const getOptions = (
       ];
 
     case RoomsType.CustomRoom:
-    case RoomsType.AIRoom:
     case RoomsType.InstructionsRoom:
     case RoomsType.KnowledgeRoom:
       if (isNotAdmin) return [];

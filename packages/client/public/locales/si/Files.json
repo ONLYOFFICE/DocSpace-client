@@ -14,8 +14,6 @@
   "AnalyzeResponses": "ප්‍රතිචාර විශ්ලේෂණය කරන්න",
   "ArchiveAction": "සංරක්‍ෂණය හිස් කරන්න",
   "ArchiveEmptyScreenUser": "සංරක්‍ෂිත කාමර මෙහි දිස් වනු ඇත.",
-  "ChangeAgentOwnerSelectorInfo": "නියෝජිතයාගේ හිමිකරු විය හැක්කේ කාමර පරිපාලකයෙකුට හෝ සුපිරි පරිපාලකයෙකුට පමණි",
-  "ChangeTheAgentOwner": "නියෝජිත හිමිකරු වෙනස් කරන්න",
   "ClientSearchDecryptingNames": "ගොනු නාම විකේතනය කරමින්… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "ෆෝල්ඩරය ඉතා විශාලයි. සෙවුම් ප්‍රතිඵල අසම්පූර්ණ විය හැක.",
   "CompressingFiles": "ගොනු සම්පීඩනය කරමින්",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "මෙම අවකාශයට ගොනුව තල්ලු කිරීමට හැකියාවක් නැත. කරුණාකර {{ organizationName }} PDF ආකෘතියක් තල්ලු කිරීමට උත්සාහ කරන්න.",
   "WarningMoveToFormRoomServal": "පෝරම් පිරවුම් අවකාශයට බොහෝ ගොනු යැවීම සහය නොදක්වයි. එක {{ organizationName }} PDF ආකෘතියක් පමණක් එකවරක් යවන්න.",
   "WillBeDeletedPermanently": "{{date}} ස්ථිරව මකා දැමෙනු ඇත.",
-  "YouLeftTheAgent": "ඔබ නියෝජිතයා හැර ගොස් ඇත.",
   "YourUserTypeHasChanged": "සුපිරි පරිපාලක <1>{{adminName}}</1> විසින් ඔබේ පරිශීලක වර්ගය <1>“{{userType}}”</1> ලෙස වෙනස් කර ඇත."
 }

@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Վերլծասխանները",
   "ArchiveAction": "Դատարկել արխիվը",
   "ArchiveEmptyScreenUser": "Սենյակները, որոնք արխիվացված են, կհայտնվեն այստեղ:",
-  "ChangeAgentOwnerSelectorInfo": "Միայն սենյակի կամ գերադմինիստրատորը կարող է դառնալ գործակալի սեփականատեր",
-  "ChangeTheAgentOwner": "Փոխել գործակալի սեփականատիրոջը",
   "ClientSearchDecryptingNames": "Ֆայլերի անունների վերծանում… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Պանակը չափազանց մեծ է։ Որոնման արդյունքները կարող են թերի լինել։",
   "CompressingFiles": "Ֆայլերի սեղմում",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Ֆայլը չի կարող տեղափոխվել այս տարածք: Խնդրում ենք, փորձել տեղափոխել {{ organizationName }} PDF ձևը:",
   "WarningMoveToFormRoomServal": "Մի քանի ֆայլ տեղափոխելը Ձևաթղթերի լրացման տարածք չի աջակցվում: Միանգամից տեղափոխեք մեկ {{ organizationName }} PDF ձև:",
   "WillBeDeletedPermanently": "{{date}}-ն ընդմիշտ կջնջվի",
-  "YouLeftTheAgent": "Դուք լքել եք գործակալին",
   "YourUserTypeHasChanged": "Ձեր օգտագործողի տեսակը փոխվել է <1>«{{userType}}»</1>-ի՝ գերադմինիստրատոր <1>{{adminName}}</1>-ի կողմից։"
 }

@@ -90,8 +90,6 @@ export const isFileChecked = (
       return roomType === (RoomsType as TRemovedRoomsTypes).FillingFormsRoom;
     case `room-${RoomsType.CustomRoom}`:
       return roomType === RoomsType.CustomRoom;
-    case `room-${RoomsType.AIRoom}`:
-      return roomType === RoomsType.AIRoom;
     case `room-${RoomsType.EditingRoom}`:
       return roomType === RoomsType.EditingRoom;
     case `room-${(RoomsType as TRemovedRoomsTypes).ReviewRoom}`:

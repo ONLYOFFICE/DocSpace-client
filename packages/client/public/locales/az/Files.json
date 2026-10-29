@@ -14,8 +14,6 @@
   "AnalyzeResponses": "Cavabları analiz et",
   "ArchiveAction": "Arxivi boşalt",
   "ArchiveEmptyScreenUser": "Arxivlənmiş otaqlar burada görünəcək.",
-  "ChangeAgentOwnerSelectorInfo": "Agentin sahibi yalnız otaq və ya super administrator ola bilər",
-  "ChangeTheAgentOwner": "Agent sahibi dəyişdir",
   "ClientSearchDecryptingNames": "Fayl adlarının şifrəsi açılır… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Qovluq çox böyükdür. Axtarış nəticələri natamam ola bilər.",
   "CompressingFiles": "Fayllar sıxılır",
@@ -145,6 +143,5 @@
   "WarningMoveToFormRoom": "Fayl bu sahəyə köçürülə bilməz. {{ organizationName }} PDF formasını köçürməyə cəhd edin.",
   "WarningMoveToFormRoomServal": "Birdən çox faylın Forma Doldurma sahəsinə köçürülməsi dəstəklənmir. Eyni anda bir {{ organizationName }} PDF formasını köçürün.",
   "WillBeDeletedPermanently": "{{date}} həmişəlik silinəcək",
-  "YouLeftTheAgent": "Siz agentdən ayrılıbsınız.",
   "YourUserTypeHasChanged": "İstifadəçi növünüz super administrator <1>{{adminName}}</1> tərəfindən <1>“{{userType}}”</1> olaraq dəyişdirildi."
 }

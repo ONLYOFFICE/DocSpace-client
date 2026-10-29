@@ -110,17 +110,16 @@ self: FilesActionStore,
   action: string,
   id: number | number[],
   t: TTranslation,
-  isAIAgent = false,
 
 )=> {
-  return setPinActionHelper(action, id, t, isAIAgent);
+  return setPinActionHelper(action, id, t);
 };
 
 
 export const setMuteActionImpl = (
 self: FilesActionStore,action: string, item: TActionItem, t: TTranslation
 )=> {
-  const { id, new: newCount, rootFolderId, isAIAgent } = item;
+  const { id, new: newCount, rootFolderId } = item;
   const { treeFolders } = self.treeFoldersStore;
   const { folders, updateRoomMute } = self.filesStore;
 
@@ -147,13 +146,8 @@ self: FilesActionStore,action: string, item: TActionItem, t: TTranslation
         (count as number) + (newCount as number);
   }
 
-  let notificationsDisabled = t("Common:RoomNotificationsDisabled");
-  let notificationsEnabled = t("Common:RoomNotificationsEnabled");
-
-  if (isAIAgent) {
-    notificationsDisabled = t("Common:AIAgentNotificationsDisabled");
-    notificationsEnabled = t("Common:AIAgentNotificationsEnabled");
-  }
+  const notificationsDisabled = t("Common:RoomNotificationsDisabled");
+  const notificationsEnabled = t("Common:RoomNotificationsEnabled");
 
   (muteRoomNotification(id, muteStatus) as Promise<unknown>)
     .then(() =>
@@ -416,13 +410,11 @@ self: FilesActionStore,t: TTranslation
 
   const items: number[] = [];
 
-  const isAIAgent = selection.some((s) => s.isAIAgent);
-
   selection.forEach((item) => {
     if (!item.pinned) items.push(item.id);
   });
 
-  self.setPinAction("pin", items, t, isAIAgent);
+  self.setPinAction("pin", items, t);
 };
 
 
@@ -433,13 +425,11 @@ self: FilesActionStore,t: TTranslation
 
   const items: number[] = [];
 
-  const isAIAgent = selection.some((s) => s.isAIAgent);
-
   selection.forEach((item) => {
     if (item.pinned) items.push(item.id);
   });
 
-  self.setPinAction("unpin", items, t, isAIAgent);
+  self.setPinAction("unpin", items, t);
 };
 
 
@@ -532,75 +522,7 @@ self: FilesActionStore,items: (TActionItem | number)[], t: TTranslation
 };
 
 
-export const changeAIAgentsQuotaImpl = (
-self: FilesActionStore,
-  items: (TActionItem | number)[],
-  successCallback?: (...args: unknown[]) => unknown,
-  abortCallback?: (...args: unknown[]) => unknown,
 
-)=> {
-  const event = new Event(Events.CHANGE_QUOTA);
-
-  const itemsIDs = items.map((item) => {
-    return (item as TActionItem)?.id ? (item as TActionItem).id : item;
-  });
-
-  const payload = {
-    visible: true,
-    type: "agent",
-    ids: itemsIDs,
-    successCallback,
-    abortCallback,
-  };
-
-  // the still-.js GlobalEvents component reads this extra
-  // field off the dispatched Event.
-  (event as Event & { payload?: typeof payload }).payload = payload;
-
-  window.dispatchEvent(event);
-};
-
-
-export const disableAIAgentQuotaImpl = async (
-self: FilesActionStore,
-  items: (TActionItem | number)[],
-  t: TTranslation,
-
-)=> {
-  const { setCustomAIAgentQuota } = self.filesStore;
-
-  const agentIDs = items.map((item) => {
-    return (item as TActionItem)?.id ? (item as TActionItem).id : item;
-  }) as number[];
-
-  try {
-    await setCustomAIAgentQuota(agentIDs, -1);
-    toastr.success(t("Common:StorageQuotaDisabled"));
-  } catch (e) {
-    toastr.error(e as string);
-  }
-};
-
-
-export const resetAIAgentQuotaImpl = async (
-self: FilesActionStore,
-  items: (TActionItem | number)[],
-  t: TTranslation,
-
-)=> {
-  const { resetAIAgentQuota } = self.filesStore;
-
-  const userIDs = items.map((item) => {
-    return (item as TActionItem)?.id ? (item as TActionItem).id : item;
-  }) as number[];
-
-  try {
-    await resetAIAgentQuota(userIDs);
-    toastr.success(t("Common:StorageQuotaReset"));
-  } catch (e) {
-    toastr.error(e as string);
-  }
-};
 
 
 export const onClickCreateRoomImpl = (
@@ -641,7 +563,7 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
   const { user } = self.userStore;
 
   // the fallback is the selected-folder store snapshot; only
-  // id/isAIAgent/private are read from it, matching the old JS duck typing.
+  // id/private are read from it, matching the old JS duck typing.
   const room = (
     selection.length
       ? selection[0]
@@ -651,7 +573,6 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
   ) as TActionItem;
 
   const roomId = room.id;
-  const isAIAgent = room.isAIAgent;
   const isPrivateRoom = room.private === true;
 
   // user is nullable on UserStore; the old JS read the
@@ -659,13 +580,9 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
   const isAdmin = user!.isOwner || user!.isAdmin;
   const isRoot = self.selectedFolderStore.isRootFolder;
 
-  const roomSuccessText = isOwner
+  const successText = isOwner
     ? t("Common:LeftAndAppointNewOwner")
     : t("Common:YouLeftTheRoom");
-  const agentSuccessText = isOwner
-    ? t("Common:LeftAgentAndAppointNewOwner")
-    : t("Files:YouLeftTheAgent");
-  const successText = isAIAgent ? agentSuccessText : roomSuccessText;
 
   const leave = () =>
     (

@@ -105,7 +105,6 @@ const FilesMediaViewer = (props) => {
     isPublicRoom,
     openUrl,
     autoPlay,
-    aiPlaylistImages,
     pluginMediaViewerVisible,
     pluginMediaViewerProps,
     pluginContextMenuItemsList,
@@ -288,11 +287,6 @@ const FilesMediaViewer = (props) => {
       setToPreviewFile(null);
     }
 
-    if (aiPlaylistImages.length > 0) {
-      setMediaViewerData({ visible: false });
-      return;
-    }
-
     setMediaViewerData({ visible: false, id: null });
 
     const targetFile = files.find((item) =>
@@ -309,8 +303,6 @@ const FilesMediaViewer = (props) => {
     isPreview,
     previewFile,
 
-    aiPlaylistImages.length,
-
     resetUrl,
     navigate,
     removeViewerHistoryEntry,
@@ -324,8 +316,7 @@ const FilesMediaViewer = (props) => {
   ]);
 
   useEffect(() => {
-    const isPlaylistEmpty =
-      playlist.length === 0 && aiPlaylistImages.length === 0;
+    const isPlaylistEmpty = playlist.length === 0;
 
     if (!isOpenMediaViewer || !isPlaylistEmpty) return;
 
@@ -337,7 +328,6 @@ const FilesMediaViewer = (props) => {
     isPluginFileOutsidePlaylist,
     onMediaViewerClose,
     playlist.length,
-    aiPlaylistImages.length,
   ]);
 
   return (
@@ -352,7 +342,7 @@ const FilesMediaViewer = (props) => {
               getIcon={getIcon}
               visible={visible}
               autoPlay={autoPlay}
-              playlist={aiPlaylistImages.length ? aiPlaylistImages : playlist}
+              playlist={playlist}
               prevMedia={prevMedia}
               nextMedia={nextMedia}
               onCopyLink={onCopyLink}
@@ -374,7 +364,7 @@ const FilesMediaViewer = (props) => {
               onClickDownload={onClickDownload}
               onShowInfoPanel={onShowInfoPanel}
               playlistPos={currentPostionIndex}
-              currentFileId={currentMediaFileId ?? aiPlaylistImages[0]?.fileId}
+              currentFileId={currentMediaFileId}
               onClickDownloadAs={onClickDownloadAs}
               currentDeviceType={currentDeviceType}
               extsImagePreviewed={extsImagePreviewed}
@@ -408,7 +398,6 @@ export default inject(
     pluginStore,
     settingsStore,
     publicRoomStore,
-    aiRoomStore,
     userStore,
     selectedFolderStore,
   }) => {
@@ -424,8 +413,6 @@ export default inject(
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
     };
-
-    const { aiPlaylistImages } = aiRoomStore;
 
     const {
       files,
@@ -497,7 +484,7 @@ export default inject(
       dispatchMessage,
     } = pluginStore;
 
-    const hasPlaylist = playlist.length > 0 || aiPlaylistImages.length > 0;
+    const hasPlaylist = playlist.length > 0;
     const isOpen = visible && !isPluginViewerClosing;
     const isPluginViewerShown =
       isPluginViewerActive && !isPluginFileOutsidePlaylist;
@@ -564,7 +551,6 @@ export default inject(
       fetchPublicRoom,
       isPublicRoom,
       openUrl,
-      aiPlaylistImages,
       pluginMediaViewerVisible: isPluginViewerActive,
       pluginMediaViewerProps,
       setPluginMediaViewerVisible,

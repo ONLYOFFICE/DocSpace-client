@@ -72,7 +72,6 @@ import { CategoryType } from "@docspace/shared/constants";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import { SECTION_ROOT_FOLDER_TYPES } from "./helpers";
 import type FilesActionStore from "../FilesActionsStore";
 import type {
@@ -91,8 +90,7 @@ self: FilesActionStore
   const filter = RoomsFilter.getDefault();
 
   const correctCategoryType =
-    categoryType === CategoryType.SharedRoom ||
-    categoryType === CategoryType.Chat
+    categoryType === CategoryType.SharedRoom
       ? CategoryType.Shared
       : categoryType === CategoryType.Form
         ? CategoryType.Forms
@@ -135,10 +133,6 @@ self: FilesActionStore
         : RoomSearchArea.Templates;
   }
 
-  if (categoryType === CategoryType.Chat) {
-    self.clientLoadingStore.setIsSectionBodyLoading(true, false);
-  }
-
   window.DocSpace.navigate(
     `${path}?${filter.toUrlParams(self.userStore?.user?.id, true)}`,
     {
@@ -148,41 +142,6 @@ self: FilesActionStore
   );
 };
 
-
-export const moveToAIAgentsPageImpl = (
-self: FilesActionStore
-)=> {
-  const categoryType = getCategoryType(window.DocSpace.location);
-
-  const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AIAgents);
-
-  const path = getCategoryUrl(CategoryType.AIAgents);
-
-  const state = {
-    title:
-      (self.selectedFolderStore?.navigationPath &&
-        self.selectedFolderStore?.navigationPath.length > 0 &&
-        self.selectedFolderStore?.navigationPath[
-          self.selectedFolderStore.navigationPath.length - 1
-        ]?.title) ||
-      "",
-    isRoot: true,
-    isPublicRoomType: false,
-    rootFolderType: self.selectedFolderStore.rootFolderType,
-  };
-
-  if (categoryType === CategoryType.Chat) {
-    self.clientLoadingStore.setIsSectionBodyLoading(true, false);
-  }
-
-  window.DocSpace.navigate(
-    `${path}?${filter.toUrlParams(self.userStore?.user?.id, true)}`,
-    {
-      state,
-      replace: true,
-    },
-  );
-};
 
 
 export const moveToPublicRoomImpl = (
@@ -214,7 +173,6 @@ self: FilesActionStore,item: {
   id: number | string;
   isRoom?: boolean;
   isTemplate?: boolean;
-  isAIAgent?: boolean;
   title?: string;
   rootFolderType?: FolderType;
   roomType?: RoomsType;
@@ -223,12 +181,13 @@ self: FilesActionStore,item: {
   if (self.publicRoomStore.isPublicRoom)
     return self.moveToPublicRoom(item.id);
 
-  const { id, isRoom, isTemplate, isAIAgent, title, rootFolderType, roomType } =
-    item;
+  const { id, isRoom, isTemplate, title, rootFolderType, roomType } = item;
 
-  const categoryType = isAIAgent
-    ? CategoryType.Chat
-    : getCategoryTypeByFolderTypeInSection(rootFolderType, id, { roomType });
+  const categoryType = getCategoryTypeByFolderTypeInSection(
+    rootFolderType,
+    id,
+    { roomType },
+  );
 
   const state = { title, rootFolderType, isRoot: false, isRoom };
   const filter = FilesFilter.getDefault();
@@ -237,7 +196,7 @@ self: FilesActionStore,item: {
   // JS assigns raw numeric ids; toUrlParams only serializes it.
   filter.folder = id as string;
 
-  if (!isAIAgent && (isRoom || isTemplate)) {
+  if (isRoom || isTemplate) {
     if (self.userStore.user?.id) {
       const key =
         categoryType === CategoryType.Archive
@@ -397,15 +356,6 @@ self: FilesActionStore,fromHotkeys = true
   const isArchivedRoom = !!(
     CategoryType.Trash !== (categoryType as TCategoryType) && urlFilter?.folder
   );
-
-  if (
-    roomType === RoomsType.AIRoom ||
-    categoryType === CategoryType.Chat ||
-    categoryType === CategoryType.AIAgent ||
-    categoryType === CategoryType.AIAgents
-  ) {
-    return self.moveToAIAgentsPage();
-  }
 
   if (self.publicRoomStore.isPublicRoom) {
     return self.backToParentFolder();
@@ -630,7 +580,7 @@ self: FilesActionStore,
 
     // an encrypted file stays on the normal open path: the plugin registered
     // for this extension could only pass ciphertext outside the room
-    if (!isAIAgents() && fileItemsList && enablePlugins && !item.encrypted) {
+    if (fileItemsList && enablePlugins && !item.encrypted) {
       // TS cannot track the assignment inside the forEach
       // callback; the erased casts keep the old unchecked reads.
       let currPluginItem: Nullable<TPluginFileItem> = null;

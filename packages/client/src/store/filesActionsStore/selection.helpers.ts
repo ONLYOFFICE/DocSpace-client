@@ -82,7 +82,6 @@ self: FilesActionStore,
   const {
     fetchFiles,
     fetchRooms,
-    fetchAgents,
     filter,
     roomsFilter,
     scrollToTop,
@@ -93,7 +92,6 @@ self: FilesActionStore,
     isArchiveFolder,
     isArchiveFolderRoot,
     isTemplatesFolder,
-    isAIAgentsFolder,
     isFormsFolder,
   } = self.treeFoldersStore;
 
@@ -108,14 +106,7 @@ self: FilesActionStore,
   try {
     if (skipFetch) return;
 
-    if (isAIAgentsFolder) {
-      fetchAgents(
-        updatedFolder,
-        newFilter || roomsFilter.clone(),
-        false,
-        false,
-      );
-    } else if (
+    if (
       isRoomsFolder ||
       isArchiveFolder ||
       isArchiveFolderRoot ||
@@ -201,7 +192,6 @@ self: FilesActionStore,
   //  console.log("createFoldersTree", files, folderId);
   const { uploaded, percent } = self.uploadDataStore;
 
-  const { isAIAgentsFolderRoot } = self.treeFoldersStore;
   const { setPrimaryProgressBarData } =
     self.uploadDataStore.primaryProgressDataStore;
 
@@ -242,13 +232,9 @@ self: FilesActionStore,
 
       const size = getConvertedSize(t, roomFolder.quotaLimit);
 
-      const error = isAIAgentsFolderRoot
-        ? t("Common:AIAgentSpaceQuotaExceeded", {
-            size,
-          })
-        : t("Common:RoomSpaceQuotaExceeded", {
-            size,
-          });
+      const error = t("Common:RoomSpaceQuotaExceeded", {
+        size,
+      });
       throw new Error(error);
     }
   }
@@ -376,8 +362,6 @@ self: FilesActionStore,tag: {
 
   const { setIsSectionBodyLoading } = self.clientLoadingStore;
 
-  const categoryType = getCategoryType(window.DocSpace.location);
-
   const setIsLoading = (param: boolean) => {
     setIsSectionBodyLoading(param);
   };
@@ -416,14 +400,7 @@ self: FilesActionStore,tag: {
     newFilter.withoutTags = true;
   }
 
-  let pathName = window.DocSpace.location.pathname;
-
-  if (
-    categoryType === CategoryType.Chat ||
-    categoryType === CategoryType.AIAgent
-  ) {
-    pathName = getCategoryUrl(CategoryType.AIAgents);
-  }
+  const pathName = window.DocSpace.location.pathname;
 
   setIsLoading(true);
   window.DocSpace.navigate(

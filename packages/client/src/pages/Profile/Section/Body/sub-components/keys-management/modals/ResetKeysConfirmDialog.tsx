@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useState, useId } from "react";
+import React, { useEffect, useMemo, useState, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -41,6 +41,7 @@ import {
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { KEY_DIALOG_DISPLAY_TYPE } from "@docspace/shared/dialogs/key-dialog-display";
+import { submitOnEnter } from "@docspace/shared/dialogs/key-dialog-keys";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
@@ -72,6 +73,11 @@ export const ResetKeysConfirmDialog: React.FC<ResetKeysConfirmDialogProps> = ({
   }, [visible]);
 
   const matches = typed.trim().toUpperCase() === expectedToken.toUpperCase();
+
+  const handleKeyDown = useMemo(
+    () => submitOnEnter(onConfirm, matches && !isPending),
+    [onConfirm, matches, isPending],
+  );
 
   return (
     <ModalDialog
@@ -111,6 +117,7 @@ export const ResetKeysConfirmDialog: React.FC<ResetKeysConfirmDialogProps> = ({
             size={InputSize.base}
             value={typed}
             onChange={(e) => setTyped(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder={expectedToken}
             autoFocus
             scale

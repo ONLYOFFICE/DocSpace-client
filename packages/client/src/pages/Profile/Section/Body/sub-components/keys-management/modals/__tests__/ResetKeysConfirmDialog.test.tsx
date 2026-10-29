@@ -34,6 +34,7 @@
  */
 
 import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 import { ResetKeysConfirmDialog } from "../ResetKeysConfirmDialog";
@@ -66,5 +67,22 @@ describe("ResetKeysConfirmDialog", () => {
     expect(onCancel).not.toHaveBeenCalled();
     expect(onConfirm).not.toHaveBeenCalled();
     expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("Reset token on Enter", async () => {
+    const user = userEvent.setup();
+    const { onConfirm } = renderDialog();
+    const field = screen.getByRole("textbox", {
+      name: "Common:ResetEncryptionKeysConfirmation",
+    });
+
+    await user.type(field, "Common:ResetEncryptionKeysConfirmationToke");
+    await user.keyboard("{Enter}");
+    expect(onConfirm).not.toHaveBeenCalled();
+
+    await user.type(field, "n");
+    await user.keyboard("{Enter}");
+
+    expect(onConfirm).toHaveBeenCalledTimes(1);
   });
 });

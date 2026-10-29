@@ -548,6 +548,39 @@ test.describe("Tariff plan downgrade refused by quota", () => {
   });
 });
 
+test.describe("Not-paid portal", () => {
+  // A linked but expired card cannot be charged: a deposit is refused with 403
+  // "Customer payment method is not set", so the repurchase has to go through Stripe.
+  test("an inactive card sends the repurchase to Stripe checkout instead of a deposit", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, { tariff: "unpaid", card: "expired" });
+    // Enough credits: only the card decides that Stripe is needed.
+    mockRequest.use(walletServicesHandler(), balanceHandler(10_000));
+    const deposits: string[] = [];
+    const purchases: string[] = [];
+    page.on("request", (request) => {
+      const path = new URL(request.url()).pathname;
+      if (path.endsWith("/portal/payment/deposit")) deposits.push(path);
+      if (path.endsWith("/portal/payment/updatewallet")) purchases.push(path);
+    });
+    await page.clock.setSystemTime(PAID_NOW);
+
+    await page.goto(`${baseUrl}/billing/tariff-plan`);
+    await expect(planButton(page)).toContainText("Top up & Upgrade");
+    await expect(planButton(page)).toBeEnabled();
+    await planButton(page).click();
+
+    const dialog = modalWith(page, "Continue to Stripe");
+    await expect(dialog).toHaveCount(1);
+    await expect(dialog.getByTestId("top_up_amount_input").first()).toBeVisible();
+    expect(deposits).toHaveLength(0);
+    expect(purchases).toHaveLength(0);
+  });
+});
+
 test.describe("Startup plan", () => {
   test("any admin is invited to make the first purchase", async ({
     page,

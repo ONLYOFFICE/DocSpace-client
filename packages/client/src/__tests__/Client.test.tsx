@@ -129,7 +129,13 @@ const renderInFrame = (showMenu: boolean) =>
         isTemplatesFolderRoot: false,
         isDocumentsFolder: false,
       }}
-      filesStore={{ setSelection: vi.fn(), initFiles: vi.fn(async () => {}) }}
+      filesStore={{
+        setSelection: vi.fn(),
+        initFiles: vi.fn(async () => {}),
+        trashIsEmpty: true,
+      }}
+      filesActionsStore={{ emptyTrashInProgress: false }}
+      dialogsStore={{ setEmptyTrashDialogVisible: vi.fn() }}
       clientLoadingStore={{
         isLoaded: true,
         isLoading: false,

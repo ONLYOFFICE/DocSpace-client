@@ -89,7 +89,9 @@ describe("ClientArticleSidebar — Private section", () => {
           isTemplatesFolderRoot: false,
           isDocumentsFolder: false,
         }}
-        filesStore={{ setSelection: vi.fn() }}
+        filesStore={{ setSelection: vi.fn(), trashIsEmpty: true }}
+        filesActionsStore={{ emptyTrashInProgress: false }}
+        dialogsStore={{ setEmptyTrashDialogVisible: vi.fn() }}
         clientLoadingStore={{
           showArticleLoader: false,
           setIsSectionBodyLoading: vi.fn(),

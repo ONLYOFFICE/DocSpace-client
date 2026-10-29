@@ -193,9 +193,17 @@ export async function wsModifyFolderCreateImpl(
   } else if (opt?.type === "folder" && opt?.id) {
     const folder = opt.data ? JSON.parse(opt.data) : null;
 
+    // A form room is listed in Forms, not in the Rooms folder it belongs to.
+    const isFormRoom = folder?.roomType === RoomsType.FormRoom;
+    const isInSelectedFolder = (parentId: number | string) =>
+      isFormRoom
+        ? self.treeFoldersStore.isFormsFolder
+        : self.selectedFolderStore.id == parentId;
+
     // the parent folders are subscribed too, so a folder created in one of
-    // them must not be counted here
-    if (!folder || self.selectedFolderStore.id == folder.parentId) {
+    // them must not be counted here; a folder is counted where it is listed,
+    // as its deletion is
+    if (!folder || isInSelectedFolder(folder.parentId)) {
       self.selectedFolderStore.setFoldersCount(
         self.selectedFolderStore.foldersCount + 1,
       );
@@ -209,12 +217,6 @@ export async function wsModifyFolderCreateImpl(
       const movedToIndex = self.getFolderIndex(folder.parentId);
       if (movedToIndex > -1) self.folders[movedToIndex].foldersCount++;
     }
-
-    const isFormRoom = folder.roomType === RoomsType.FormRoom;
-    const isInSelectedFolder = (parentId: number | string) =>
-      isFormRoom
-        ? self.treeFoldersStore.isFormsFolder
-        : self.selectedFolderStore.id == parentId;
 
     if (
       !isInSelectedFolder(folder.parentId) ||

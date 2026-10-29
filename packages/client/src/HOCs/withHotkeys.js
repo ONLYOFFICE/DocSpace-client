@@ -41,6 +41,7 @@ import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { copySelectedText } from "@docspace/shared/utils/copy";
+import { isContextMenuOpen, isKeyOwnedByFocus } from "SRC_DIR/helpers/hotkeys";
 
 const withHotkeys = (Component) => {
   const WithHotkeys = (props) => {
@@ -118,7 +119,9 @@ const withHotkeys = (Component) => {
 
     const hotkeysFilter = {
       filter: (ev) =>
-        ev.target?.type === "checkbox" || ev.target?.tagName !== "INPUT",
+        (ev.target?.type === "checkbox" || ev.target?.tagName !== "INPUT") &&
+        !isContextMenuOpen() &&
+        !isKeyOwnedByFocus(ev),
       filterPreventDefault: false,
       enableOnTags: ["INPUT"],
       enabled:

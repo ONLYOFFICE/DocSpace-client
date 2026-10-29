@@ -180,6 +180,42 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
     expect(menuShape(store.getFilesContextOptions(room() as never, t))).toMatchSnapshot();
   });
 
+  // The room part and the file part of the option list both carried a
+  // "separator1"; a room listed both and React warned about the duplicate key
+  // on every rooms page.
+  it("keys every row of a room's menu uniquely", () => {
+    const store = createTestContextOptionsStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const menu = store.getFilesContextOptions(
+      {
+        ...room(),
+        isRoom: true,
+        contextOptions: [
+          "select",
+          "open",
+          "separator0",
+          "pin-room",
+          "mute-room",
+          "edit-room",
+          "invite-users-to-room",
+          "room-info",
+          "separator1",
+          "duplicate-room",
+          "download",
+          "archive-room",
+          "leave-room",
+          "delete",
+        ],
+      } as never,
+      t,
+    );
+    const keys = menu.map((option) => option.key);
+    const separators = menu.filter((option) => option.isSeparator);
+
+    expect(separators).toHaveLength(2);
+    expect(new Set(keys).size).toBe(keys.length);
+  });
+
   it("maps a recycle-bin item (restore/delete only)", () => {
     const store = createTestContextOptionsStore({
       treeFoldersStore: { isRecycleBinFolder: true },

@@ -172,6 +172,9 @@ const AddonsPage = (props: AddonsPageProps) => {
         onOpenWebSearch={() =>
           navigateToRoute("/portal-settings/ai-settings/web-search")
         }
+        onOpenLimits={() =>
+          navigateToRoute("/portal-settings/ai-settings/limits")
+        }
       />
       <DocsConnectGetStartedModal
         visible={getStartedVisible ?? false}

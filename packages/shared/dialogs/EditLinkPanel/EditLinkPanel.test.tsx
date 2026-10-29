@@ -287,6 +287,38 @@ describe("<EditLinkPanel />", () => {
     expect(toastr.error).not.toHaveBeenCalled();
   });
 
+  // Picking a calendar day with Enter used to save the panel before the date
+  // was set: Enter belongs to the control it is pressed on.
+  it("leaves Enter on a control in the panel to that control", async () => {
+    const props = renderPanel(
+      { ExternalLink: [ShareRights.Editing, ShareRights.Read] },
+      ShareAccessRights.Editing,
+    );
+
+    await userEvent.click(screen.getByTestId("stub_rename_link"));
+    await waitFor(() => expect(getSaveButton()).toBeEnabled());
+
+    screen.getByTestId("stub_rename_link").focus();
+    await userEvent.keyboard("{Enter}");
+
+    expect(props.updateLink).not.toHaveBeenCalled();
+  });
+
+  it("saves on Enter with nothing in particular focused", async () => {
+    const props = renderPanel(
+      { ExternalLink: [ShareRights.Editing, ShareRights.Read] },
+      ShareAccessRights.Editing,
+    );
+
+    await userEvent.click(screen.getByTestId("stub_rename_link"));
+    await waitFor(() => expect(getSaveButton()).toBeEnabled());
+
+    (document.activeElement as HTMLElement | null)?.blur();
+    await userEvent.keyboard("{Enter}");
+
+    await waitFor(() => expect(props.updateLink).toHaveBeenCalled());
+  });
+
   it("keeps the panel open and reports the error when saving fails", async () => {
     vi.mocked(ShareLinkService.editLink).mockRejectedValue(
       new Error("Role is not available"),

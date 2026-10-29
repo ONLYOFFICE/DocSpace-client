@@ -3,7 +3,7 @@
   "content": "Price",
   "content_en_sha1_hash": "3e8248e32edfca0c629622b5b669c2d9ce4d0917",
   "created_at": "2026-07-27T13:07:48.492Z",
-  "updated_at": "2026-10-21T10:17:45.787Z",
+  "updated_at": "2026-10-22T16:09:36.928Z",
   "comment": {
     "text": "Label in a detail row of the DocsConnect statistics panel, preceding the cost value.",
     "is_auto": true,

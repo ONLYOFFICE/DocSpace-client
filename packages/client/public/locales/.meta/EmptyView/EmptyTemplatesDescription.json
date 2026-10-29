@@ -3,7 +3,7 @@
   "content": "You can create a template from a room in the Room section",
   "content_en_sha1_hash": "3ae0630d6f2123e351bffec005e5b0541a21b4dd",
   "created_at": "2025-05-19T21:30:56.500Z",
-  "updated_at": "2026-10-22T13:13:49.562Z",
+  "updated_at": "2026-10-22T16:09:36.820Z",
   "comment": {
     "text": "This is a message displayed when no room templates are available. It informs the user how to create a template.",
     "is_auto": true,

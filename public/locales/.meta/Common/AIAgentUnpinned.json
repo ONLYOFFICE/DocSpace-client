@@ -3,7 +3,7 @@
   "content": "AI agent unpinned",
   "content_en_sha1_hash": "a87e0a2cbc7edf27d4fb803b62e8f863ecf8a731",
   "created_at": "2026-06-02T22:17:29.900Z",
-  "updated_at": "2026-10-21T10:17:45.825Z",
+  "updated_at": "2026-10-22T16:09:36.966Z",
   "comment": {
     "text": "Status label for an item in a list, appearing when an AI agent is unpinned. It includes the `{aiAgent}` variable representing the agent's name.",
     "is_auto": true,

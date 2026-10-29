@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Elementët që kanë tashmë vlera të {{template}} mbeten të pandryshuar",
   "SuggestMetadata": "Sugjeroni meta të dhëna",
   "TemplateDeleted": "Modeli u fshi",
+  "TemplateFieldsRequired": "Shtoni të paktën një fushë për të ruajtur modelin",
   "TemplateValue": "Modeli: {{template}}",
   "Visibility": "Dukshmëria",
   "Visible": "I dukshëm",

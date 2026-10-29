@@ -3,7 +3,7 @@
   "content": "Who else is in here",
   "content_en_sha1_hash": "f437e3067172e90e0b59973d3195f6b292c952ed",
   "created_at": "2026-08-06T14:20:56.244Z",
-  "updated_at": "2026-10-21T10:17:45.654Z",
+  "updated_at": "2026-10-22T16:09:36.800Z",
   "comment": {
     "text": "An information panel title used during the AI Agents onboarding tour to explain membership visibility to non-admin users.",
     "is_auto": true,

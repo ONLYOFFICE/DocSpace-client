@@ -3,7 +3,7 @@
   "content": "Select a ready PDF form available in the workspace and upload it to the space.",
   "content_en_sha1_hash": "5ffc2ad9c3daac1987c9437583c52da5268669b0",
   "created_at": "2026-08-12T11:00:48.519Z",
-  "updated_at": "2026-10-22T13:13:49.552Z",
+  "updated_at": "2026-10-22T16:09:36.813Z",
   "comment": {
     "text": "Instructional subtext in an empty state view that explains how to select and upload a PDF form from the workspace into the current form space.",
     "is_auto": true,

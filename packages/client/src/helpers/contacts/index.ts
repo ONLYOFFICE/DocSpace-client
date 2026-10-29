@@ -66,6 +66,8 @@ export {
   getContactsMenuItemId,
   getContactsCheckboxItemLabel,
   changeUserQuota,
+  changeUserAILimit,
+  type TAILimitUser,
   onDeletePersonalDataClick,
   onInviteAgainClick,
   onInviteMultipleAgain,

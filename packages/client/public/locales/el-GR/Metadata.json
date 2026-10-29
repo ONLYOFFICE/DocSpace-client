@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Τα στοιχεία που έχουν ήδη τιμές από το {{template}} παραμένουν αμετάβλητα",
   "SuggestMetadata": "Πρόταση μεταδεδομένων",
   "TemplateDeleted": "Το πρότυπο διαγράφηκε",
+  "TemplateFieldsRequired": "Προσθέστε τουλάχιστον ένα πεδίο για να αποθηκεύσετε το πρότυπο",
   "TemplateValue": "Πρότυπο: {{template}}",
   "Visibility": "Ορατότητα",
   "Visible": "Ορατό",

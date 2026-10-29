@@ -567,7 +567,10 @@ class ProfileActionsStore {
             label: t("Common:Contacts"),
             onClick: (obj) =>
               this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),
-            url: PEOPLE_ROUTE_WITH_FILTER,
+            // The route constant has no leading slash; a relative href would
+            // resolve against the current page on middle-click or "Open link
+            // in new tab" (/rooms/shared/accounts/... -> 404).
+            url: `/${PEOPLE_ROUTE_WITH_FILTER}`,
             preventNewTab: true,
           }
         : null;

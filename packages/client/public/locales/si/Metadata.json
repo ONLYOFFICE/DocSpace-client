@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "දැනටමත් {{template}} අගයන් ඇති අයිතම නොවෙනස්ව පවතී",
   "SuggestMetadata": "පාරදත්ත යෝජනා කරන්න",
   "TemplateDeleted": "සැකිල්ල මකා දමන ලදී",
+  "TemplateFieldsRequired": "සැකිල්ල සුරැකීමට අවම වශයෙන් එක් ක්ෂේත්‍රයක් එක් කරන්න",
   "TemplateValue": "සැකිල්ල: {{template}}",
   "Visibility": "දෘශ්‍යතාව",
   "Visible": "දෘශ්‍යමාන",

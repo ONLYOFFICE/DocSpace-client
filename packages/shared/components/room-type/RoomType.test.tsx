@@ -57,6 +57,83 @@ describe("RoomType", () => {
       const listItem = screen.getByTestId("room-type-list-item");
       expect(listItem).toHaveClass(styles.isOpen);
     });
+
+    it("is a button in the Tab order that Enter and Space choose", () => {
+      render(<RoomType {...defaultProps} />);
+
+      const listItem = screen.getByRole("button", {
+        name: /Common:CollaborationRoomTitle/,
+      });
+      expect(listItem).toHaveAttribute("tabindex", "0");
+
+      fireEvent.keyDown(listItem, { key: "Enter" });
+      fireEvent.keyDown(listItem, { key: " " });
+      expect(defaultProps.onClick).toHaveBeenCalledTimes(2);
+    });
+
+    // Choosing a type focuses the room name, whose Enter keyup creates the
+    // room: the keyup of the press that chose the type must not get there.
+    it("keeps the keyup of the Enter that chose it from the page", () => {
+      render(<RoomType {...defaultProps} />);
+      const onWindowKeyUp = vi.fn();
+      window.addEventListener("keyup", onWindowKeyUp);
+
+      const listItem = screen.getByTestId("room-type-list-item");
+      fireEvent.keyDown(listItem, { key: "Enter" });
+      fireEvent.keyUp(document.body, { key: "Enter" });
+
+      window.removeEventListener("keyup", onWindowKeyUp);
+      expect(onWindowKeyUp).not.toHaveBeenCalled();
+    });
+
+    it("calls onClick once for a click on the arrow", () => {
+      render(<RoomType {...defaultProps} />);
+
+      const arrow = screen
+        .getByTestId("room-type-list-item")
+        .querySelector(".choose_room-forward_btn");
+      fireEvent.click(arrow!);
+
+      expect(defaultProps.onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it("refuses a disabled room type by click and by keyboard", () => {
+      render(
+        <RoomType
+          {...defaultProps}
+          roomType={RoomsType.PublicRoom}
+          disabledPublicRoom
+        />,
+      );
+
+      const listItem = screen.getByTestId("room-type-list-item");
+      expect(listItem).toHaveAttribute("aria-disabled", "true");
+      fireEvent.click(listItem);
+      fireEvent.keyDown(listItem, { key: "Enter" });
+      expect(defaultProps.onClick).not.toHaveBeenCalled();
+    });
+
+    // Enter on a disabled type swallowed the keyup that followed anywhere
+    // on the page, though nothing was chosen.
+    it("leaves the keyup to the page when a disabled type ignores the key", () => {
+      render(
+        <RoomType
+          {...defaultProps}
+          roomType={RoomsType.PublicRoom}
+          disabledPublicRoom
+        />,
+      );
+      const onWindowKeyUp = vi.fn();
+      window.addEventListener("keyup", onWindowKeyUp);
+
+      fireEvent.keyDown(screen.getByTestId("room-type-list-item"), {
+        key: "Enter",
+      });
+      fireEvent.keyUp(document.body, { key: "Enter" });
+
+      window.removeEventListener("keyup", onWindowKeyUp);
+      expect(onWindowKeyUp).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe("Dropdown Button Type", () => {

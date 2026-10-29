@@ -59,6 +59,7 @@ const PeopleRowContainer = ({
   contactsTab,
   showStorageInfo,
   isDefaultUsersQuotaSet,
+  showAISpendingInfo,
   isRoomAdmin,
   withContentSelection,
   isMe,
@@ -92,6 +93,7 @@ const PeopleRowContainer = ({
           contactsTab={contactsTab!}
           showStorageInfo={showStorageInfo}
           isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
+          showAISpendingInfo={showAISpendingInfo}
           isRoomAdmin={isRoomAdmin}
           isMe={isMe}
         />
@@ -121,6 +123,7 @@ export default inject(
 
       isUsersEmptyView,
       contactsTab,
+      showAISpendingInfo,
     } = usersStore!;
 
     const { currentDeviceType } = settingsStore;
@@ -144,6 +147,7 @@ export default inject(
       contactsTab,
       showStorageInfo,
       isDefaultUsersQuotaSet,
+      showAISpendingInfo,
       isRoomAdmin,
       withContentSelection,
       isMe: userStore.isMe,

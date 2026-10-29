@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Các mục đã có giá trị {{template}} được giữ nguyên",
   "SuggestMetadata": "Đề xuất siêu dữ liệu",
   "TemplateDeleted": "Đã xóa mẫu",
+  "TemplateFieldsRequired": "Thêm ít nhất một trường để lưu mẫu",
   "TemplateValue": "Mẫu: {{template}}",
   "Visibility": "Khả năng hiển thị",
   "Visible": "Hiển thị",

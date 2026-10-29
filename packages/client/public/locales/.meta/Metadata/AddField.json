@@ -3,7 +3,7 @@
   "content": "Add field",
   "content_en_sha1_hash": "039c63152c673e12b39763a4f120a082303ea7c4",
   "created_at": "2026-10-21T10:17:41.249Z",
-  "updated_at": "2026-10-22T13:13:49.705Z",
+  "updated_at": "2026-10-23T12:28:45.604Z",
   "comment": {
     "text": "Button label that adds a new field: to a metadata template in the portal settings, or a custom field on an item in the info panel; also title of the panel for a new custom field. Imperative verb.",
     "is_auto": true,
@@ -14,13 +14,13 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/index.tsx",
       "line_number": 100,
-      "context": "onBackClick={closeNewField}\n onClose={onClose}\n dataTestId=\"metadata_custom_fields_panel\"\n >\n <ModalDialog.Header>\n {newField ? t(\"Metadata:AddField\") : t(\"Metadata:CustomFields\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n {newField ? (",
+      "context": "onBackClick={closeNewField}\n onClose={newField ? closeNewField : onClose}\n dataTestId=\"metadata_custom_fields_panel\"\n >\n <ModalDialog.Header>\n {newField ? t(\"Metadata:AddField\") : t(\"Metadata:CustomFields\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n {newField ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/index.tsx",
       "line_number": 100,
-      "context": "onBackClick={closeNewField}\n onClose={onClose}\n dataTestId=\"metadata_custom_fields_panel\"\n >\n <ModalDialog.Header>\n {newField ? t(\"Metadata:AddField\") : t(\"Metadata:CustomFields\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n {newField ? (",
+      "context": "onBackClick={closeNewField}\n onClose={newField ? closeNewField : onClose}\n dataTestId=\"metadata_custom_fields_panel\"\n >\n <ModalDialog.Header>\n {newField ? t(\"Metadata:AddField\") : t(\"Metadata:CustomFields\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n {newField ? (",
       "module": "/packages/client"
     },
     {

@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Stavke koje već imaju vrednosti šablona {{template}} ostaju nepromenjene",
   "SuggestMetadata": "Predloži metapodatke",
   "TemplateDeleted": "Šablon je obrisan",
+  "TemplateFieldsRequired": "Dodajte bar jedno polje da biste sačuvali šablon",
   "TemplateValue": "Šablon: {{template}}",
   "Visibility": "Vidljivost",
   "Visible": "Vidljiv",

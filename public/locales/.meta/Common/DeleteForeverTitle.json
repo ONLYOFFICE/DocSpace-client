@@ -3,7 +3,7 @@
   "content": "Delete forever?",
   "content_en_sha1_hash": "0e0027aade000ea790cb5c39b96cbcc240beec7d",
   "created_at": "2026-06-03T09:30:00.209Z",
-  "updated_at": "2026-10-21T10:17:45.710Z",
+  "updated_at": "2026-10-22T16:09:36.858Z",
   "comment": {
     "text": "Dialog title for a confirmation modal that appears when emptying the trash or recycle bin to permanently delete items.",
     "is_auto": true,

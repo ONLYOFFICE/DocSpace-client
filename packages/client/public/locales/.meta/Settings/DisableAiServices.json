@@ -3,7 +3,7 @@
   "content": "Disable {{aiServices}}",
   "content_en_sha1_hash": "ff9221e8d16c8a8a5865acce6a73670a6019e447",
   "created_at": "2026-03-26T08:26:46.833Z",
-  "updated_at": "2026-10-21T10:17:45.712Z",
+  "updated_at": "2026-10-22T16:09:36.862Z",
   "comment": {
     "text": "This is the title of a confirmation dialog. It appears when a user attempts to disable AI services, asking them to confirm the action. `{{aiServices}}` will be replaced with the name of the AI services being disabled.",
     "is_auto": true,

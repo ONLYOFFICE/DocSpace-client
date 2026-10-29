@@ -1,0 +1,22 @@
+{
+  "key_path": "LimitSpentOfLifetime",
+  "content": "Spent {{spent}} of {{limit}}.",
+  "content_en_sha1_hash": "594774f6a9057c7598a551e60d171a17e69fa1c3",
+  "created_at": "2026-10-22T16:09:09.585Z",
+  "updated_at": "2026-10-22T16:10:38.032Z",
+  "comment": {
+    "text": "Status under the portal AI spending limit form for a lifetime (never-resetting) limit; {{spent}} and {{limit}} are formatted money amounts.",
+    "is_auto": true,
+    "updated_at": "2026-10-22T16:10:38.032Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

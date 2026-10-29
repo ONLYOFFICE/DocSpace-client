@@ -3,7 +3,7 @@
   "content": "Star files generated in AI agent chats to keep them close at hand.",
   "content_en_sha1_hash": "5b4cfcc8192963ca7b85e2ffd36b92986deeaf37",
   "created_at": "2026-08-21T15:04:01.441Z",
-  "updated_at": "2026-10-22T13:13:49.558Z",
+  "updated_at": "2026-10-22T16:09:36.817Z",
   "comment": {
     "text": "Description text in an empty state view, appearing when no files are marked as favorites in the AI agents section. It explains the purpose of starring files for quick access.",
     "is_auto": true,

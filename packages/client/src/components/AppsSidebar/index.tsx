@@ -88,6 +88,7 @@ import ArticleDevToolsBar from "@onlyoffice/apps-ui-kit/components/article/sub-c
 import { ArticleProfileLoader } from "@onlyoffice/apps-ui-kit/components/article/skeletons";
 import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
 import type { Section } from "SRC_DIR/helpers/plugins/enums";
+import { closeAfter } from "./closeAfter";
 import CollapseButton from "./CollapseButton";
 import ProfileBlock from "./ProfileBlock";
 import LiveChatBlock from "./LiveChatBlock";
@@ -231,21 +232,14 @@ export const AppsSidebarView = ({
   const mobileGroups = useMemo(() => {
     if (!isMobile) return navGroups;
 
-    const closeAfter =
-      <T,>(handler?: (item: T) => void) =>
-      (item: T) => {
-        handler?.(item);
-        toggleArticleOpen?.();
-      };
-
     return navGroups.map((group) => ({
       ...group,
       items: group.items.map((item: NavMenuItem) => ({
         ...item,
-        onClick: closeAfter(item.onClick),
+        onClick: closeAfter(toggleArticleOpen, item.onClick),
         children: item.children?.map((sub: NavSubItem) => ({
           ...sub,
-          onClick: closeAfter(sub.onClick),
+          onClick: closeAfter(toggleArticleOpen, sub.onClick),
         })),
       })),
     }));

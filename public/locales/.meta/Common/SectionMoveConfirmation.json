@@ -3,7 +3,7 @@
   "content": "Move to {{sectionName}}?",
   "content_en_sha1_hash": "ee3b1c51a995b4cd544de5f673d85dd47977b235",
   "created_at": "2025-06-02T10:19:15.915Z",
-  "updated_at": "2026-10-21T10:17:45.696Z",
+  "updated_at": "2026-10-22T16:09:36.843Z",
   "comment": {
     "text": "This is a dialog title asking for confirmation to move an item to a specific section. The `{{sectionName}}` variable will be replaced with the name of the destination section (e.g., \"Archive\" or \"Trash\").",
     "is_auto": true,

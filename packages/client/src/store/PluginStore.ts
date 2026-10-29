@@ -108,6 +108,11 @@ import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
 import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
 import { matchesUserRole } from "../helpers/plugins/roles";
 import { createPluginApi } from "../helpers/plugins/react/api";
+import {
+  createModuleEvents,
+  releaseModuleEvents,
+  setModuleEventDispatcher,
+} from "../helpers/plugins/react/socket";
 import { toCurrentUser } from "../helpers/plugins/react/utils";
 import {
   PluginFileType,
@@ -229,6 +234,11 @@ class PluginStore {
     this.selectedFolderStore = selectedFolderStore;
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+
+    // messages returned by plugins' socket handlers go through the same dispatcher as any callback
+    setModuleEventDispatcher(({ message, pluginName }) =>
+      this.dispatchMessage({ message, pluginName }),
+    );
 
     makeAutoObservable(this, {
       reactPluginModalState: observable.ref,
@@ -868,6 +878,7 @@ class PluginStore {
       try {
         this.uninstallPluginCss(previous);
         this.unregisterPluginItems(previous);
+        releaseModuleEvents(previous.name);
       } catch (e) {
         console.error(`[Plugin: ${plugin.name}] Failed to unregister:`, e);
       }
@@ -905,6 +916,10 @@ class PluginStore {
     if (plugin.scopes.includes(PluginScopes.API)) {
       plugin.setAPI?.(origin, proxy, prefix);
     }
+
+    // the portal's socket for integration-module events, bound to this plugin; before onLoadCallback, like
+    // setAPI, so the plugin can subscribe while it registers its items
+    plugin.setModuleEvents?.(createModuleEvents(plugin.name));
 
     const { name } = plugin;
 
@@ -1007,6 +1022,9 @@ class PluginStore {
     this.uninstallPluginCss(plugin);
 
     this.unregisterPluginItems(plugin);
+
+    // a disabled plugin keeps no socket listeners or module rooms behind
+    releaseModuleEvents(plugin.name);
   };
 
   getUserRole = () => {

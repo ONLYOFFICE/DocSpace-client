@@ -3,7 +3,7 @@
   "content": "Create Form space",
   "content_en_sha1_hash": "b679d4de30f3c393f4e118ba46859749b669de76",
   "created_at": "2026-06-25T19:30:28.607Z",
-  "updated_at": "2026-10-21T10:17:45.740Z",
+  "updated_at": "2026-10-22T16:09:36.887Z",
   "comment": {
     "text": "Button label in the Forms section header used to initiate the creation of a new collection of forms.",
     "is_auto": true,

@@ -75,6 +75,7 @@ import {
   getFillNotFound,
   getMetadataAIError,
   getMetadataAIModel,
+  getMetadataAIServiceLimit,
   getSkippedTitles,
   getSuggestNotFound,
   getTemplateForms,
@@ -102,6 +103,8 @@ export const useMetadataAIPanel = ({
   const [drafts, setDrafts] = useState<TCustomFieldDraft[]>([]);
   const [summary, setSummary] = useState<TMetadataAISummary | null>(null);
   const [error, setError] = useState("");
+  const [serviceLimit, setServiceLimit] =
+    useState<ReturnType<typeof getMetadataAIServiceLimit>>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [overwrite, setOverwrite] = useState(false);
@@ -199,6 +202,7 @@ export const useMetadataAIPanel = ({
     beforeRun.current = { forms, drafts };
 
     setError("");
+    setServiceLimit(null);
     setPhase("analyzing");
 
     try {
@@ -207,7 +211,10 @@ export const useMetadataAIPanel = ({
     } catch (e) {
       if (abort.signal.aborted) return;
 
-      setError(getMetadataAIError(t, e));
+      const limit = getMetadataAIServiceLimit(e);
+
+      if (limit) setServiceLimit(limit);
+      else setError(getMetadataAIError(t, e));
       setPhase("ready");
     }
   };
@@ -281,6 +288,7 @@ export const useMetadataAIPanel = ({
     drafts,
     summary,
     error,
+    serviceLimit,
     isSaving,
     canSave,
     prompt,

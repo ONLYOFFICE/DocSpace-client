@@ -3,7 +3,7 @@
   "content": "Upload any file types from your personal device",
   "content_en_sha1_hash": "5a550e3da3236feb33525df9c979f22108806a7d",
   "created_at": "2026-08-31T18:23:45.859Z",
-  "updated_at": "2026-10-22T13:13:49.546Z",
+  "updated_at": "2026-10-22T16:09:36.809Z",
   "comment": {
     "text": "Subtext for an upload option in an empty state view, describing the ability to select files from a local device.",
     "is_auto": true,

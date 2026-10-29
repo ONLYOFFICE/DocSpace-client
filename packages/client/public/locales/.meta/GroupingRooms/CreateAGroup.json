@@ -3,7 +3,7 @@
   "content": "Create a group",
   "content_en_sha1_hash": "d3a1fae6a760d743fbd077e9fc79a07fd1e4d9df",
   "created_at": "2026-02-19T13:36:24.870Z",
-  "updated_at": "2026-10-21T10:17:45.713Z",
+  "updated_at": "2026-10-23T12:28:45.551Z",
   "comment": {
     "text": "This is a button label that allows users to create a new group for organizing rooms.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Add instructions for AI (optional)",
   "content_en_sha1_hash": "989e5611f5001fd2f3600a0ef83c3b05a8e64d21",
   "created_at": "2026-10-21T10:17:41.255Z",
-  "updated_at": "2026-10-22T13:13:49.653Z",
+  "updated_at": "2026-10-27T11:03:20.721Z",
   "comment": {
     "text": "Placeholder of the optional text area in the AI metadata panel where the user can type extra instructions for AI.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
-      "line_number": 192,
+      "line_number": 223,
       "context": "<Textarea\n wrapperClassName={styles.prompt}\n className={styles.promptField}\n value={prompt}\n onChange={(e) => setPrompt(e.target.value)}\n placeholder={t(\"Metadata:AIPromptPlaceholder\")}\n maxLength={METADATA_AI_PROMPT_MAX_LENGTH}\n heightTextArea=\"64px\"\n fontSize={13}\n isDisabled={isAnalyzing}\n dataTestId=\"metadata_ai_prompt_textarea\"",
       "module": "/packages/client"
     }

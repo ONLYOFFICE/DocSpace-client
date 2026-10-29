@@ -40,7 +40,6 @@ import { TFile } from "../Tiles/Tiles.types";
 export interface CardProps {
   children: ReactNode;
   smallPreview: boolean;
-  countTilesInRow?: number;
   className?: string;
 }
 

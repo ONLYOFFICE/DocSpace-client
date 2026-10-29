@@ -3,7 +3,7 @@
   "content": "Upload from storage",
   "content_en_sha1_hash": "bb0bb4e2e67d4f7e0242a020d41822a5df4a948a",
   "created_at": "2026-08-31T18:23:45.881Z",
-  "updated_at": "2026-10-22T13:13:49.526Z",
+  "updated_at": "2026-10-22T16:09:36.804Z",
   "comment": {
     "text": "Label for a dropdown option or button in the empty state view that initiates the file upload process from storage.",
     "is_auto": true,

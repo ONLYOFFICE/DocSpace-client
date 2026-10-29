@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Ставке које већ имају вредности „{{template}}“ остају непромењене",
   "SuggestMetadata": "Предложи метаподатке",
   "TemplateDeleted": "Шаблон је обрисан",
+  "TemplateFieldsRequired": "Додајте бар једно поље да бисте сачували шаблон",
   "TemplateValue": "Шаблон: {{template}}",
   "Visibility": "Видљивост",
   "Visible": "Видљив",

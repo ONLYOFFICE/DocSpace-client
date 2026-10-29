@@ -3,7 +3,7 @@
   "content": "Webhook removed",
   "content_en_sha1_hash": "80509c5a189f693eee965d8eb57cef6201a59d6e",
   "created_at": "2025-05-19T21:30:49.885Z",
-  "updated_at": "2026-10-21T10:17:45.798Z",
+  "updated_at": "2026-10-22T16:09:36.942Z",
   "comment": {
     "text": "Toast message. Appears after a webhook has been successfully deleted.",
     "is_auto": true,

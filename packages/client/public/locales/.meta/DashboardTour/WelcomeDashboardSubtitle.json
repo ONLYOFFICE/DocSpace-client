@@ -3,7 +3,7 @@
   "content": "Everything starts here",
   "content_en_sha1_hash": "9d72d40e88a69527225390e07d5a0c77a5b506d5",
   "created_at": "2026-08-31T18:23:46.778Z",
-  "updated_at": "2026-10-21T10:17:45.739Z",
+  "updated_at": "2026-10-22T16:09:36.887Z",
   "comment": {
     "text": "Subtitle in the welcome dialog/dashboard tour, appearing under the mascot icon during the initial onboarding process.",
     "is_auto": true,

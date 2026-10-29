@@ -3,7 +3,7 @@
   "content": "<1>{{displayName}}</1> invites you to join the workspace <1>{{spaceAddress}}</1> for secure document collaboration.",
   "content_en_sha1_hash": "cc6c90c711ee88c69a044a5216a5e13afac6f00f",
   "created_at": "2026-08-13T23:03:12.769Z",
-  "updated_at": "2026-10-21T10:17:45.833Z",
+  "updated_at": "2026-10-22T16:09:36.974Z",
   "comment": {
     "text": "Greeting text displayed on the login screen when a user follows an invitation link, featuring the inviter's name ({{displayName}}) and the workspace address ({{spaceAddress}}).",
     "is_auto": true,

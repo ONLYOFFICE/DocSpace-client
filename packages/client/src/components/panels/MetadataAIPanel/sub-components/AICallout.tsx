@@ -49,6 +49,7 @@ type AICalloutProps = {
   model?: string;
   buttonLabel: string;
   error: string;
+  notice?: ReactNode;
   isDisabled: boolean;
   onClick: () => void;
   children?: ReactNode;
@@ -60,6 +61,7 @@ const AICallout = ({
   model,
   buttonLabel,
   error,
+  notice,
   isDisabled,
   onClick,
   children,
@@ -100,6 +102,7 @@ const AICallout = ({
       onClick={onClick}
       testId="metadata_ai_run_button"
     />
+    {notice}
     {error ? (
       <Text className={styles.error} fontSize="12px" lineHeight="16px">
         {error}

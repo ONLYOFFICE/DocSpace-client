@@ -32,7 +32,7 @@
 - [x] 5.2 Adopt the helper in `KeyRotationDialog`; verify with tests "Passphrase change on Enter", "Enter while the action is disabled", "Enter on the cancel action" in `keys-management/modals/__tests__/KeyRotationDialog.test.tsx`
 - [x] 5.3 Adopt the helper in `RecoveryPhraseInputModal`; verify with tests "Recovery phrase on Enter" and "Line break in the recovery phrase" in `RecoveryPhraseInputModal.test.tsx`
 - [x] 5.4 Adopt `submitOnEnter` in `ResetKeysConfirmDialog` (its token field is a kit `TextInput`, tabbable on its own); verify with test "Reset token on Enter" in the existing `keys-management/modals/__tests__/ResetKeysConfirmDialog.test.tsx`
-- [ ] 5.5 Pin the busy state; verify with tests "Unlock in progress" and "Busy reported to assistive technology" in `PassphraseModal.test.tsx` (`aria-busy` on the primary action, fields disabled, submit spy called once)
+- [x] 5.5 Pin the busy state; verify with tests "Unlock in progress" and "Busy reported to assistive technology" in `PassphraseModal.test.tsx` (`aria-busy` on the primary action, fields disabled, submit spy called once)
 
 ## 6. Integration
 

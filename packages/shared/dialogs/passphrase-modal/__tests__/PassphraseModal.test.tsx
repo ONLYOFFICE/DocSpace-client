@@ -142,14 +142,54 @@ describe("PassphraseModal", () => {
     expect(onSubmit).not.toHaveBeenCalled();
   });
 
-  it("ignores Enter while the submit is in progress", async () => {
+  it("Unlock in progress", async () => {
     const user = userEvent.setup();
-    const { onSubmit } = renderModal({ isLoading: true });
+    const onSubmit = vi.fn();
+    // The prompt stays open with isLoading while the unlock runs, the way the
+    // encryption context hosts it.
+    const Host = () => {
+      const [unlocking, setUnlocking] = useState(false);
+      return (
+        <PassphraseModal
+          visible
+          isNew={false}
+          isLoading={unlocking}
+          onSubmit={(...args) => {
+            onSubmit(...args);
+            setUnlocking(true);
+          }}
+          onCancel={() => {}}
+        />
+      );
+    };
+    render(<Host />);
 
     await user.type(getPassphraseInput(), "correct horse battery");
     await user.keyboard("{Enter}");
+    await user.keyboard("{Enter}");
+    // userEvent sends no keys to the now disabled field; a key that still
+    // reaches it must not submit either.
+    fireEvent.keyDown(getPassphraseInput(), { key: "Enter" });
 
-    expect(onSubmit).not.toHaveBeenCalled();
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+  });
+
+  it.each([
+    { flow: "unlock", isNew: false, fields: ["Common:Passphrase"] },
+    {
+      flow: "key generation",
+      isNew: true,
+      fields: ["Common:Passphrase", "Common:ConfirmPassphrase"],
+    },
+  ])("Busy reported to assistive technology: $flow", ({ isNew, fields }) => {
+    renderModal({ isNew, isLoading: true });
+
+    expect(
+      screen.getByRole("button", { name: "Common:ContinueButton" }),
+    ).toHaveAttribute("aria-busy", "true");
+    for (const name of fields) {
+      expect(screen.getByLabelText(name)).toBeDisabled();
+    }
   });
 
   it("submits both fields on Enter when creating a passphrase", async () => {

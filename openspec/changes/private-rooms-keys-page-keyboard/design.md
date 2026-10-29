@@ -149,6 +149,27 @@ its own, in `KeysManagement.module.scss`, coloured by a theme variable
   locks. Run through `tests-dev` after the kit tarball is refreshed and the
   `client-tests` image rebuilt.
 
+## Implementation notes
+
+Facts found while applying tasks 1.1 to 4.2; they refine D4 and D5.
+
+- **D4, passkey toggle.** The kit's `ToggleButton` README states that
+  `label` is the only way to name it: the component takes no `aria-*` props
+  and forwards none to its input. The fallback D4 names (an `aria-label` with
+  the text kept) is therefore not available; the toggle uses `label`.
+- **D5, focus of the toggle.** The kit's toggle draws no focus on its hidden
+  input and sets `outline: none` on its `<label>`, so the browser's ring does
+  not show there. Its row in `KeysManagement.module.scss` draws a 2px
+  `--accent-main` outline while it holds `:focus-visible` (the client's
+  existing focus-ring pattern), sized to its content. The other controls keep
+  the browser's ring as D5 says; the `ComboBox` button has a focus border of
+  its own. jsdom computes no CSS, so only the E2E pass can check a ring, and
+  the passkey toggle is not offered in its headless Chromium.
+- **Kit.** `HelpButton` derives its props from `IconButtonProps` but passes
+  its icon only props of its own choosing, so `role` and `ariaLabel` are
+  omitted from `HelpButtonProps` (kit commit 0e2019df). The tarball was taken
+  at 73303372, after a merge of origin into release/v4.1.0.
+
 ## Risks / Trade-offs
 
 - [The toggle's `label` prop moves or restyles the passkey text] → the E2E

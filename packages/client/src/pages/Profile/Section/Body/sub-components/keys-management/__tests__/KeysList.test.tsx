@@ -7,16 +7,12 @@
 
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("@onlyoffice/apps-ui-kit/components/badge", () => ({
   Badge: ({ label }: { label?: string }) =>
     React.createElement("span", { "data-testid": "badge" }, label),
-}));
-
-vi.mock("@onlyoffice/apps-ui-kit/components/icon-button", () => ({
-  IconButton: ({ title }: { title?: string }) =>
-    React.createElement("span", { "data-testid": "icon-button" }, title),
 }));
 
 vi.mock("@docspace/shared/services/encryption/identity", () => ({
@@ -38,17 +34,29 @@ const keyNew = {
   date: "2026-10-01T00:00:00",
 } as never;
 
-const renderList = (keys: never[]) =>
+type ListProps = React.ComponentProps<typeof KeysList>;
+
+const renderList = (keys: never[], props: Partial<ListProps> = {}) => {
+  const onDelete = vi.fn();
+  const onExport = vi.fn();
+  const onRotate = vi.fn();
+
   render(
     <KeysList
       keys={keys}
-      onDelete={vi.fn()}
-      onExport={vi.fn()}
-      onRotate={vi.fn()}
+      onDelete={onDelete}
+      onExport={onExport}
+      onRotate={onRotate}
       isDeleting={false}
       deletingKeyId={null}
+      {...props}
     />,
   );
+
+  return { onDelete, onExport, onRotate };
+};
+
+const action = (name: string) => screen.getByRole("button", { name });
 
 describe("KeysList", () => {
   it("shows the no-key state when the user has no key", () => {
@@ -64,5 +72,53 @@ describe("KeysList", () => {
     expect(cards).toHaveLength(1);
     expect(within(cards[0]).getByText("new")).toBeInTheDocument();
     expect(screen.queryByText("Common:ThisDevice")).not.toBeInTheDocument();
+  });
+
+  it("Tab across the key card", async () => {
+    const user = userEvent.setup();
+    renderList([keyNew]);
+
+    await user.tab();
+    expect(action("Common:ChangePassphrase")).toHaveFocus();
+    await user.tab();
+    expect(action("Common:ExportKey")).toHaveFocus();
+    await user.tab();
+    expect(action("Common:Delete")).toHaveFocus();
+  });
+
+  it("Key card actions announced", () => {
+    renderList([keyNew]);
+
+    // title reaches the DOM only under NODE_ENV=test, so the name is read from
+    // aria-label itself.
+    expect(
+      within(screen.getByTestId("key_details"))
+        .getAllByRole("button")
+        .map((button) => button.getAttribute("aria-label")),
+    ).toEqual(["Common:ChangePassphrase", "Common:ExportKey", "Common:Delete"]);
+  });
+
+  it("Action disabled during a deletion", async () => {
+    const user = userEvent.setup();
+    renderList([keyNew], { isDeleting: true, deletingKeyId: "new" });
+
+    await user.tab();
+
+    expect(document.body).toHaveFocus();
+  });
+
+  it("Delete from the keyboard", async () => {
+    const user = userEvent.setup();
+    const { onDelete, onExport, onRotate } = renderList([keyNew]);
+
+    action("Common:Delete").focus();
+    await user.keyboard(" ");
+    action("Common:ExportKey").focus();
+    await user.keyboard("{Enter}");
+
+    expect(onDelete).toHaveBeenCalledTimes(1);
+    expect(onDelete).toHaveBeenCalledWith(keyNew);
+    expect(onExport).toHaveBeenCalledTimes(1);
+    expect(onRotate).not.toHaveBeenCalled();
   });
 });

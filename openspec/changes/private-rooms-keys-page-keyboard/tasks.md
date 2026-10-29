@@ -11,7 +11,7 @@
 
 ## 3. Key card actions
 
-- [ ] 3.1 Give the change-passphrase, export and delete actions in `KeysList.tsx` `tabIndex` (-1 while deleting), `role="button"`, `ariaLabel` and `activateAsButton` (needs 1.2, 2.1); verify with tests "Tab across the key card", "Key card actions announced", "Action disabled during a deletion" and "Delete from the keyboard" (Space calls the delete handler, Enter on export calls the export handler) in `keys-management/__tests__/KeysList.test.tsx` with the real kit
+- [x] 3.1 Give the change-passphrase, export and delete actions in `KeysList.tsx` `tabIndex` (-1 while deleting), `role="button"`, `ariaLabel` and `activateAsButton` (needs 1.2, 2.1); verify with tests "Tab across the key card", "Key card actions announced", "Action disabled during a deletion" and "Delete from the keyboard" (Space calls the delete handler, Enter on export calls the export handler) in `keys-management/__tests__/KeysList.test.tsx` with the real kit
 
 ## 4. Page actions and device settings
 

@@ -48,6 +48,7 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?u
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
 import { getPublicKeyFingerprint } from "@docspace/shared/services/encryption/identity";
+import { activateAsButton } from "@docspace/shared/dialogs/key-dialog-keys";
 import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -127,6 +128,10 @@ const KeyItem: React.FC<KeyItemProps> = ({
                 onClick={handleRotate}
                 isDisabled={isDeleting}
                 title={t("Common:ChangePassphrase")}
+                role="button"
+                ariaLabel={t("Common:ChangePassphrase")}
+                tabIndex={isDeleting ? -1 : 0}
+                onKeyDown={activateAsButton}
               />
               <IconButton
                 className={styles.actionButton}
@@ -135,6 +140,10 @@ const KeyItem: React.FC<KeyItemProps> = ({
                 onClick={handleExport}
                 isDisabled={isDeleting}
                 title={t("Common:ExportKey")}
+                role="button"
+                ariaLabel={t("Common:ExportKey")}
+                tabIndex={isDeleting ? -1 : 0}
+                onKeyDown={activateAsButton}
               />
               <IconButton
                 className={styles.actionButton}
@@ -143,6 +152,10 @@ const KeyItem: React.FC<KeyItemProps> = ({
                 onClick={handleDelete}
                 isDisabled={isDeleting}
                 title={t("Common:Delete")}
+                role="button"
+                ariaLabel={t("Common:Delete")}
+                tabIndex={isDeleting ? -1 : 0}
+                onKeyDown={activateAsButton}
               />
             </div>
           </div>

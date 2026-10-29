@@ -78,6 +78,13 @@
   overflow: hidden;
   display: block;
 
+  // The container holds the focus only so it stays out of the page behind;
+  // it is no control of its own, so it draws no ring (as ModalDialog's
+  // content does not).
+  &:focus {
+    outline: none;
+  }
+
   &[data-visible="false"] {
     display: none;
   }

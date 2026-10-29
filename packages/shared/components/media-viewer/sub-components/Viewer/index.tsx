@@ -43,6 +43,7 @@ import React, {
 import { DeviceType } from "../../../../enums";
 import { includesMethod } from "../../../../utils/typeGuards";
 import type { ContextMenuRefType } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import { useFocusTrap } from "@onlyoffice/apps-ui-kit/hooks/useFocusTrap";
 
 import { isGif, isHeic, isTiff, isWebp } from "../../MediaViewer.utils";
 import styles from "./Viewer.module.scss";
@@ -105,6 +106,10 @@ export const Viewer = (props: ViewerProps) => {
   const panelToolbarRef = useRef<boolean>(false);
 
   const contextMenuRef = useRef<ContextMenuRefType>(null);
+
+  // The viewer covers the page, so Tab and Shift+Tab stay in it.
+  const viewerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(viewerRef, !!visible);
 
   const [isFullscreen, setIsFullScreen] = useState<boolean>(false);
 
@@ -269,6 +274,10 @@ export const Viewer = (props: ViewerProps) => {
 
   return (
     <div
+      ref={viewerRef}
+      // Its controls show only while the pointer moves, so the viewer itself
+      // has to be able to hold the focus the trap keeps out of the page.
+      tabIndex={-1}
       data-testid="media-viewer"
       dir="ltr"
       data-visible={visible}

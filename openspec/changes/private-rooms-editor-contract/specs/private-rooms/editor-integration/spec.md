@@ -54,6 +54,14 @@ After the editor saves an encrypted document, the system SHALL open it again fro
 - **WHEN** a member saves an encrypted document and opens it again while another member is still editing it
 - **THEN** the member rejoins the same session and sees the current content without a change error
 
+#### Scenario: Reopen after leaving without saving
+- **WHEN** a member leaves an encrypted document without saving and opens it again while its editing session lasts
+- **THEN** the unsaved edits are there and no change error occurs
+
+#### Scenario: Session over
+- **WHEN** the editing session of a saved encrypted document has ended and a member opens it
+- **THEN** a new session starts from the latest saved version
+
 ### Requirement: Document address reachable from the browser
 For an encrypted file, the document address in the editor configuration SHALL be reachable from the user's browser, because the editor downloads and decrypts the file there. An address meant only for requests from the Document Server to the portal SHALL NOT be used for it.
 
@@ -142,6 +150,17 @@ The SDK file list SHALL refuse to open an encrypted file in the editor while the
 #### Scenario: Open from the SDK with capability
 - **WHEN** a user opens an encrypted file from a private room in the SDK and the capability is present
 - **THEN** the editor opens and the key flow runs as in the client
+
+### Requirement: Document Server save keeps the encrypted flag
+The server SHALL accept the encrypted flag from the Document Server callback and SHALL store the returned content as an encrypted version of the file. A save of a file whose current version is encrypted that arrives without the encrypted flag SHALL be refused, and the previous version SHALL stay current.
+
+#### Scenario: Callback with encrypted content
+- **WHEN** the Document Server reports a save with the encrypted flag set
+- **THEN** the new version is stored with the encrypted flag and is served as ciphertext afterwards
+
+#### Scenario: Callback without the flag
+- **WHEN** the Document Server reports a save of an encrypted file without the encrypted flag
+- **THEN** the save is refused, no version MUST be stored as not encrypted, and the previous encrypted version stays current
 
 ## REMOVED Requirements
 

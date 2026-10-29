@@ -36,8 +36,10 @@
 ## 6. Session end and document address
 
 - [x] 6.1 Backend: look up in `../server` (CodeGraph) how the document key and `document.url` of a file are produced and when the key changes, and record the findings with their source files in design.md D7 and D8; verified by that record
-- [ ] 6.2 Backend: keep the base of an encrypted editing session stable and start a fresh session once a saved session has ended (design D7, with the Document Server team's answer from 1.2); verify with a server unit test and a recorded run on a Document Server with the crypto add-on: save, close every editor, reopen, and rejoin while another member edits, all without a change error
-- [ ] 6.3 Backend: build `document.url` of an encrypted file from the portal's public address (design D8); verify with a server unit test and a recorded run with an internal portal address for the Document Server that the browser cannot reach
+- [ ] 6.2 Backend: when an editor opens an encrypted file whose current version is a force-save, ask the Document Server `info` for the stable key; while it holds the session, serve the stable key with `document.url` of the stable version, otherwise promote the current version to stable for a new key (design D7, after 6.5); verify with server unit tests for both branches and a recorded run on a Document Server with the crypto add-on: save, close every editor and reopen; save and rejoin while another member edits; leave without saving and reopen; all without a change error
+- [ ] 6.3 Backend: skip `ReplaceCommunityAddress` for `document.url` of an encrypted file, so it keeps the public portal address (design D8); verify with a server unit test and a recorded run with the portal address for the Document Server set to one the browser cannot reach
+- [ ] 6.4 Backend: refuse a save callback for a file whose current version is encrypted when it carries no encrypted flag, keeping the previous version (design D10); verify with a server unit test
+- [ ] 6.5 Record which callbacks the Document Server sends when the last editor of an encrypted document leaves (status 1 with no users, status 4, or none) and how the file tracker ends, from the portal's callback handling on the local stack; record the run in design.md and adjust D7 if the file can stay "being edited"
 
 ## 7. SDK opening
 
@@ -50,5 +52,5 @@
 
 ## Workflow follow-up
 
-- In `private-rooms-dse3-header-authentication`, record that the Document Server encrypts and decrypts with its own copy of the library (build 10.0.0.133 writes version 2), so version 3 needs a Document Server build that ships a library reading it; its own planning commit.
+- In `private-rooms-dse3-header-authentication`, record that the Document Server encrypts and decrypts with its own copy of the library (build 10.0.0.133 ships the bundle of 2026-07-01 and reads and writes version 2), and make the portal write version 2 until the Document Server declares a library that reads version 3 (design D6); its own planning commit.
 - Archive the change only after the Document Server release that implements the contract is identified and the capability has been exercised on staging.

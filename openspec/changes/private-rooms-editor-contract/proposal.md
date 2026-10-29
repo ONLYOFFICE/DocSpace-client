@@ -37,9 +37,12 @@ hidden.
   unwraps the DEK from their own access entry, and the Document Server relays
   and stores only encrypted changes. The client stops clearing the
   unconsumed `canCoAuthoring` flag.
-- Make a saved encrypted file open again: after the editor saves an encrypted
-  document, the next open starts from the saved version without replaying
-  the changes it already contains.
+- Make a saved encrypted file open again, on the portal alone: while the
+  Document Server still holds the editing session, the editor gets the base
+  that session started from; once it is gone, a fresh session starts from the
+  latest save. Unsaved edits keep surviving a reopen while the session lasts.
+- Fail closed on a save without the encrypted flag: the server keeps the
+  previous encrypted version instead of storing ciphertext as plaintext.
 - Keep the document address of an encrypted file reachable from the user's
   browser, since the editor downloads it there.
 - Define the policy for every editor action on an encrypted file. Download-as

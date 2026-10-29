@@ -307,26 +307,35 @@ on release/v4.1.0 (files changed after the last index were read on disk):
    10.0.0.133 ships the bundle of 2026-07-01 (commit 8d6e613ce12). The bundle
    gets a build stamp (library version and source commit), so the contract
    and a running editor can name the build instead of comparing files.
+   Until a Document Server declares a library that reads version 3, the
+   portal keeps writing version 2, so build 10.0.0.133 keeps opening every
+   file; the choice is made in `private-rooms-dse3-header-authentication`.
 
-7. **A saved encrypted document reopens from a matching base.** The editor
-   takes its base from `document.url` while the Document Server replays the
-   session's changes, so the base must be the version the session started
-   from, and the session must end once its changes are saved. Options:
-   (a) the server binds `document.url` of a session to the version it started
-   from, so a member who rejoins after a save gets a consistent base, and the
-   Document Server closes the session once the last editor leaves and drops
-   the changes an encrypted save already contains, after which the server
-   issues a new document key; (b) the server issues a new document key right
-   after storing an encrypted save, which fixes a reopen but splits members
-   still editing into two sessions. Chosen: (a), with the Document Server team
-   for the session end; the backend looks up how the document key and
-   `document.url` are produced (CodeGraph) before choosing the mechanism.
+7. **A saved encrypted document reopens from a matching base, on the portal
+   side.** The cause is the portal's: after a force-save the key still names
+   the stable version while `document.url` serves the current one ("Server:
+   document key, document address and session"), and the browser takes its
+   base from that address while the Document Server replays the session's
+   changes on it. When the base does not change, a reopen works, unsaved
+   edits included (file 21 in the run). Chosen, with no Document Server
+   change: when an editor opens an encrypted file whose current version is a
+   force-save, the server asks the Document Server `info` for the stable key.
+   While that session exists, it serves the stable key with `document.url` of
+   the stable version (`stream&version=N`, which the handler already
+   supports), so the replay lands on its own base. When no session exists, it
+   promotes the current version to stable by clearing its force-save mark,
+   which gives a new key and a fresh session from the latest save.
+   Alternatives: a new key right after every encrypted force-save, which
+   splits members still editing into two sessions and loses edits made after
+   the save and not saved; the stable base without the `info` check, which
+   shows content from before the save once the Document Server no longer
+   holds the changes.
 
-8. **The document address of an encrypted file is a public address.** The
-   editor downloads it in the browser, so the server builds it from the
-   portal's public address, not from the address meant for requests from the
-   Document Server. The backend looks up where the address is built
-   (CodeGraph) before changing it.
+8. **The document address of an encrypted file stays public.** The editor
+   downloads it in the browser. `document.url` is built from the public portal
+   address and then `ReplaceCommunityAddress` swaps its host for the address
+   meant for Document Server requests; for an encrypted file the swap is
+   skipped.
 
 9. **PDF forms: fill as an edit, no form-data collection, no "Share to fill
    out".** Filling a form in the edit mode of a private room works and its
@@ -343,6 +352,12 @@ on release/v4.1.0 (files changed after the last index were read on disk):
    opened to `encryptFile` when it saves.
    Role-based filling in a private virtual data room is server-compatible but
    unverified in the editor, and stays an open question.
+
+10. **An encrypted file's save fails closed.** The encrypted flag of a
+    force-saved version is copied from the callback, so a callback without it
+    would store ciphertext marked as plaintext. The server refuses a save of a
+    file whose current version is encrypted when the callback carries no
+    encrypted flag, and keeps the previous version.
 
 ## Risks / Trade-offs
 
@@ -365,7 +380,13 @@ on release/v4.1.0 (files changed after the last index were read on disk):
   waits for a Document Server that reads version 3.
 - [Edits left unsaved when the last editor leaves exist only as encrypted
   changes in the Document Server, which cannot build a file from them] →
-  open question below; until it is answered, users save explicitly.
+  observed: they survive a reopen while the session lasts, the editor warns
+  before leaving, and portal downloads show the last saved version; they are
+  lost when the Document Server drops the session, so users save explicitly.
+- [The file tracker keeps an encrypted file "being edited" while the Document
+  Server holds a session nobody uses] → the eviction re-probe keeps the users
+  while `info` answers without error; task 6.5 records which callbacks arrive
+  when the last editor leaves before D7 is implemented.
 - [A private form-filling room created through the API accepts submissions
   today] → task 5.4 makes the server refuse them; until then the client does
   not create such rooms.
@@ -417,3 +438,7 @@ on release/v4.1.0 (files changed after the last index were read on disk):
   access entry for the form? A private virtual data room can only be created
   through the API today. To be verified on a Document Server with the crypto
   add-on before a policy is set.
+- When the last editor of an encrypted document leaves, which callback does
+  the Document Server send (status 1 with no users, status 4, or none), and
+  when does it drop the session? The portal's tracker and D7 depend on it.
+  Task 6.5 records it on the local stack; the Document Server team confirms.

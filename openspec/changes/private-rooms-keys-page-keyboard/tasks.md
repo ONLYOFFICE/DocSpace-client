@@ -2,7 +2,7 @@
 
 ## 1. ui-kit: IconButton role and name (docspace-ui-kit-react, release/v4.1.0)
 
-- [ ] 1.1 Add `role` and `ariaLabel` to `IconButtonProps`, worded like `Link`'s and rendered on the element (D2); regenerate the README prop table with `pnpm run readme:props` and note the props under _Added_ in CHANGELOG.md; verify with a new test "puts role and aria-label on the element" in `components/icon-button/IconButton.test.tsx`, and `pnpm run tsc`, `pnpm test`, `pnpm run readme:props:check` and `pnpm build` green in the kit, committed on release/v4.1.0 without a feature branch
+- [x] 1.1 Add `role` and `ariaLabel` to `IconButtonProps`, worded like `Link`'s and rendered on the element (D2); regenerate the README prop table with `pnpm run readme:props` and note the props under _Added_ in CHANGELOG.md; verify with a new test "puts role and aria-label on the element" in `components/icon-button/IconButton.test.tsx`, and `pnpm run tsc`, `pnpm test`, `pnpm run readme:props:check` and `pnpm build` green in the kit, committed on release/v4.1.0 without a feature branch
 - [ ] 1.2 Pack the kit with `pnpm pack` and bring it here with `pnpm run update-ui-kit`; verify the script's hash check passes, `pnpm test` (shared) and `pnpm test:client` stay green, and commit the tarball with `pnpm-lock.yaml`
 
 ## 2. Enter-and-Space activation

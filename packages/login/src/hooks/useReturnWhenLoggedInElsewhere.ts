@@ -48,6 +48,10 @@ export const useReturnWhenLoggedInElsewhere = (enabled: boolean) => {
     if (!enabled) return;
 
     let checking = false;
+    // Aborted on cleanup: a check still in flight is cancelled and must not
+    // navigate, or it would override where the login form itself is taking
+    // the user.
+    const controller = new AbortController();
 
     const check = async () => {
       if (checking || document.visibilityState !== "visible") return;
@@ -59,11 +63,15 @@ export const useReturnWhenLoggedInElsewhere = (enabled: boolean) => {
           method: "get",
           url: "/authentication",
           skipUnauthorized: true,
+          signal: controller.signal,
         });
 
-        if (isAuthenticated === true) window.location.replace("/");
+        // An answer that arrived before the abort is still ignored.
+        if (isAuthenticated === true && !controller.signal.aborted)
+          window.location.replace("/");
       } catch {
-        // No answer about the session: stay on the form.
+        // No answer about the session, or the check was cancelled: stay on
+        // the form.
       } finally {
         checking = false;
       }
@@ -73,6 +81,7 @@ export const useReturnWhenLoggedInElsewhere = (enabled: boolean) => {
     window.addEventListener("focus", check);
 
     return () => {
+      controller.abort();
       document.removeEventListener("visibilitychange", check);
       window.removeEventListener("focus", check);
     };

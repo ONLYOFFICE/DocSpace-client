@@ -248,7 +248,7 @@ const RoomLogoCoverDialog = ({
     >
       <ModalDialog.Header>
         {isAIAgentsFolderRoot
-          ? t("RoomLogoCover:AgentCover")
+          ? t("Common:AgentCover")
           : t("Common:RoomCover")}
       </ModalDialog.Header>
       <ModalDialog.Body>

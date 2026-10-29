@@ -122,6 +122,7 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
 								color={globalColors.black}
 								size="12px"
 								type={LoaderTypes.track}
+								isDecorative
 							/>
 						) : (
 							path.map((pathPart, i) => {

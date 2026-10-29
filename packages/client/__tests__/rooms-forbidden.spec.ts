@@ -200,8 +200,8 @@ test.describe("Rooms — access lost while a room is open", () => {
     });
 
     const bar = (page: Page) => page.locator("#main-bar");
-    const barHeader = (page: Page) =>
-      bar(page).getByText("Your user type has been changed");
+    // By test id: the bar's hidden announcement region repeats its text.
+    const barHeader = (page: Page) => bar(page).getByTestId("snackbar-header");
 
     test("a lowered type offers a reload and stays in the room", async ({
       page,
@@ -229,12 +229,12 @@ test.describe("Rooms — access lost while a room is open", () => {
         hasPersonalFolder: true,
       } as never);
 
-      await expect(barHeader(page)).toBeVisible();
-      await expect(
-        bar(page).getByText(
-          "Some actions on this page may no longer be available to you.",
-        ),
-      ).toBeVisible();
+      await expect(barHeader(page)).toHaveText(
+        "Your user type has been changed",
+      );
+      await expect(bar(page).getByTestId("snackbar-message")).toContainText(
+        "Some actions on this page may no longer be available to you.",
+      );
 
       // The open room is re-read at once, as for a lowered room role.
       await expect(page.getByTestId("main-button")).toBeHidden();
@@ -267,8 +267,7 @@ test.describe("Rooms — access lost while a room is open", () => {
 
       await expect(barHeader(page)).toBeVisible();
 
-      // The close control carries no test id of its own.
-      await bar(page).locator("button[type=\"submit\"]").click();
+      await bar(page).getByRole("button", { name: "Close" }).click();
 
       await expect(barHeader(page)).toBeHidden();
     });
@@ -295,8 +294,8 @@ test.describe("Rooms — access lost while a room is open", () => {
   // changes; a tab left open over a weekend finds out later.
   test.describe("user type change missed by the tab", () => {
     const bar = (page: Page) => page.locator("#main-bar");
-    const barHeader = (page: Page) =>
-      bar(page).getByText("Your user type has been changed");
+    // By test id: the bar's hidden announcement region repeats its text.
+    const barHeader = (page: Page) => bar(page).getByTestId("snackbar-header");
 
     test.beforeEach(async ({ mockRequest, wsMock }) => {
       mockRequest.use(

@@ -79,17 +79,12 @@ test.describe("Profile > Keys Management", () => {
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
     await generateBtn.click();
 
-    // PasswordInput passes id straight to the underlying InputBlock.
-    const passphraseInput = page.locator(
-      'input[name="passphrase"], #passphrase input',
-    );
-    await expect(passphraseInput.first()).toBeVisible({ timeout: 5_000 });
-    await passphraseInput.first().fill("Test-Horse-Battery-Staple-99!");
+    const passphraseInput = page.getByLabel("Passphrase", { exact: true });
+    await expect(passphraseInput).toBeVisible({ timeout: 5_000 });
+    await passphraseInput.fill("Test-Horse-Battery-Staple-99!");
 
-    const confirmInput = page.locator(
-      'input[name="confirmPassphrase"], #confirmPassphrase input',
-    );
-    await confirmInput.first().fill("Test-Horse-Battery-Staple-99!");
+    const confirmInput = page.getByLabel("Confirm passphrase", { exact: true });
+    await confirmInput.fill("Test-Horse-Battery-Staple-99!");
 
     const passphraseDialog = page.getByRole("dialog");
     await passphraseDialog

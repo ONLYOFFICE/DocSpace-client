@@ -73,8 +73,7 @@ const unlockIfPrompted = async (page: Page, passphrase: string) => {
     .filter({ hasText: "Enter passphrase" });
   if (await prompt.isVisible().catch(() => false)) {
     await prompt
-      .locator('input[name="passphrase"], #passphrase input')
-      .first()
+      .getByLabel("Passphrase", { exact: true })
       .fill(passphrase);
     await prompt.getByRole("button", { name: "Confirm" }).click();
   }

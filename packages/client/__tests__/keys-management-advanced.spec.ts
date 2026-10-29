@@ -125,14 +125,10 @@ test.describe("Keys management — advanced flows", () => {
       .getByRole("button", { name: "Continue", exact: true })
       .click();
 
-    const newPassphraseInput = page
-      .locator('input[name="passphrase"], #passphrase input')
-      .first();
+    const newPassphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(newPassphraseInput).toBeVisible({ timeout: 5000 });
     await newPassphraseInput.fill(NEW_PASSPHRASE);
-    await page
-      .locator('input[name="confirmPassphrase"], #confirmPassphrase input')
-      .first()
+    await page.getByLabel("Confirm passphrase", { exact: true })
       .fill(NEW_PASSPHRASE);
 
     const putPromise = page.waitForRequest(
@@ -238,8 +234,7 @@ test.describe("Keys management — advanced flows", () => {
       .getByRole("dialog")
       .filter({ hasText: "Enter passphrase" });
     await expect(verifyDialog).toBeVisible({ timeout: 5000 });
-    await verifyDialog
-      .locator('input[name="passphrase"]')
+    await verifyDialog.getByLabel("Passphrase", { exact: true })
       .fill(KNOWN_PASSPHRASE);
     await verifyDialog
       .getByRole("button", { name: "Continue", exact: true })
@@ -334,12 +329,10 @@ test.describe("Keys management — advanced flows", () => {
     await expect(rotateBtn).toBeVisible({ timeout: 10000 });
     await rotateBtn.click();
 
-    await page
-      .locator('input[name="currentPassphrase"]')
+    await page.getByLabel("Current passphrase", { exact: true })
       .fill(KNOWN_PASSPHRASE);
-    await page.locator('input[name="newPassphrase"]').fill(NEW_PASSPHRASE);
-    await page
-      .locator('input[name="confirmNewPassphrase"]')
+    await page.getByLabel("New passphrase", { exact: true }).fill(NEW_PASSPHRASE);
+    await page.getByLabel("Confirm new passphrase", { exact: true })
       .fill(NEW_PASSPHRASE);
 
     const putPromise = page.waitForRequest(
@@ -459,8 +452,7 @@ test.describe("Keys management — advanced flows", () => {
     await upload("first.txt");
     await expect(prompt).toBeVisible({ timeout: 15000 });
     await prompt
-      .locator('input[name="passphrase"], #passphrase input')
-      .first()
+      .getByLabel("Passphrase", { exact: true })
       .fill(passphrase);
     await prompt.getByText("Don't ask again on this device").click();
     await prompt.getByRole("button", { name: "Confirm" }).click();

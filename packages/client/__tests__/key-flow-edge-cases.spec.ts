@@ -75,15 +75,11 @@ test.describe("Keys management — edge cases", () => {
     await expect(generateBtn).toBeVisible({ timeout: 15000 });
     await generateBtn.click();
 
-    const passphraseInput = page
-      .locator('input[name="passphrase"], #passphrase input')
-      .first();
+    const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5000 });
     await passphraseInput.fill(STRONG_PASSPHRASE);
 
-    const confirmInput = page
-      .locator('input[name="confirmPassphrase"], #confirmPassphrase input')
-      .first();
+    const confirmInput = page.getByLabel("Confirm passphrase", { exact: true });
     await confirmInput.fill("different-passphrase-1234");
 
     const continueBtn = page
@@ -116,15 +112,11 @@ test.describe("Keys management — edge cases", () => {
       .getByRole("button", { name: "Generate new key", exact: true })
       .click();
 
-    const passphraseInput = page
-      .locator('input[name="passphrase"], #passphrase input')
-      .first();
+    const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5000 });
     await passphraseInput.fill(STRONG_PASSPHRASE);
 
-    await page
-      .locator('input[name="confirmPassphrase"], #confirmPassphrase input')
-      .first()
+    await page.getByLabel("Confirm passphrase", { exact: true })
       .fill(STRONG_PASSPHRASE);
 
     await page
@@ -185,13 +177,9 @@ test.describe("Keys management — edge cases", () => {
       .getByRole("button", { name: "Generate new key", exact: true })
       .click();
 
-    await page
-      .locator('input[name="passphrase"], #passphrase input')
-      .first()
+    await page.getByLabel("Passphrase", { exact: true })
       .fill(STRONG_PASSPHRASE);
-    await page
-      .locator('input[name="confirmPassphrase"], #confirmPassphrase input')
-      .first()
+    await page.getByLabel("Confirm passphrase", { exact: true })
       .fill(STRONG_PASSPHRASE);
 
     await page
@@ -273,9 +261,7 @@ test.describe("Keys management — edge cases", () => {
       .getByRole("button", { name: "Generate new key", exact: true })
       .click();
 
-    const passphraseInput = page
-      .locator('input[name="passphrase"], #passphrase input')
-      .first();
+    const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5000 });
     await passphraseInput.fill(STRONG_PASSPHRASE);
 
@@ -312,9 +298,7 @@ test.describe("Keys management — edge cases", () => {
     });
     await generateBtn.click();
 
-    const passphraseInput = page
-      .locator('input[name="passphrase"], #passphrase input')
-      .first();
+    const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5000 });
     await passphraseInput.fill(STRONG_PASSPHRASE);
 

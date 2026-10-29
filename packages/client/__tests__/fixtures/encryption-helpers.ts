@@ -82,15 +82,11 @@ export async function bootstrapEncryption(
   await expect(generateBtn).toBeVisible({ timeout: 15000 });
   await generateBtn.click();
 
-  const passphraseInput = page
-    .locator('input[name="passphrase"], #passphrase input')
-    .first();
+  const passphraseInput = page.getByLabel("Passphrase", { exact: true });
   await expect(passphraseInput).toBeVisible({ timeout: 5000 });
   await passphraseInput.fill(passphrase);
 
-  const confirmInput = page
-    .locator('input[name="confirmPassphrase"], #confirmPassphrase input')
-    .first();
+  const confirmInput = page.getByLabel("Confirm passphrase", { exact: true });
   await confirmInput.fill(passphrase);
 
   await page

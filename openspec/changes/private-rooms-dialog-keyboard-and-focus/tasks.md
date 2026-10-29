@@ -6,7 +6,7 @@
 - [x] 1.2 Record the focus fix under Unreleased in the kit's CHANGELOG.md; `useLiveRegionText` stays out of the kit's `hooks` barrel, which is part of its plugin API, and the client imports it by its deep path; verify with `pnpm build` in the kit and the deep import `@onlyoffice/apps-ui-kit/hooks/useLiveRegionText` resolving from `packages/shared`
 - [x] 1.3 Pack the kit and bring it here with `pnpm run update-ui-kit`; verify the script's hash check passes, `pnpm test` (shared) and `pnpm test:client` stay green, and commit the tarball with `pnpm-lock.yaml`
 - [x] 1.4 Make the kit's `Checkbox` keep the focus when it toggles (D10): the native input takes `tabIndex` and the focus, the icon is decorative, the focus border follows the input; correct the README, the story's `tabIndex` description and play function and the `tabIndex` JSDoc, and note it under Unreleased in CHANGELOG.md; verify with a new test "keeps the focus on the checkbox when Space toggles it" in `components/checkbox/Checkbox.test.tsx`, the held-Space test moved to the input, and `pnpm test` and `pnpm build` green in the kit, committed on release/v4.1.0
-- [ ] 1.5 Pack the kit again and bring it here with `pnpm run update-ui-kit`; verify the script's hash check passes, `pnpm test` (shared) and `pnpm test:client` stay green, and commit the tarball with `pnpm-lock.yaml`
+- [x] 1.5 Pack the kit again and bring it here with `pnpm run update-ui-kit`; verify the script's hash check passes, `pnpm test` (shared) and `pnpm test:client` stay green, and commit the tarball with `pnpm-lock.yaml`
 
 ## 2. Backdrop and close confirmation
 

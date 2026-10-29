@@ -196,17 +196,49 @@ check the enabled flag, so a second submission is refused. The scenarios
 - `Spec:` pointers only where the behaviour is counter-intuitive on its own:
   the refused backdrop close and the absent focus trap.
 
+### D10. Checkbox: the native input takes the focus (kit fix)
+
+The recovery phrase acknowledgement is the kit's `Checkbox`. Its focusable
+element is the box icon (`tabIndex` on the SVG, `tabIndex={-1}` on the
+input), and the kit renders a different SVG component for the unchecked,
+checked and indeterminate states, so Space on the focused icon toggles the box
+and React replaces the icon: the focus falls to `body` and the next Tab no
+longer reaches Continue. The focused icon has no role or name either.
+
+The fix, in `components/checkbox` on the kit's release/v4.1.0: the native
+`<input type="checkbox">`, which is only visually hidden (`opacity: 0.0001`,
+`position: absolute`), takes `tabIndex` and the focus; the icon becomes
+decorative and loses its tab stop and its key handler; the focus border is
+drawn on the icon from the input's `:focus` through the sibling selector.
+Space and Enter then behave as on any native checkbox, the role, the label as
+its name and the checked and mixed states are announced from the element that
+has the focus, and that element never remounts. The kit's README, story and
+CHANGELOG change with it; the client needs nothing beyond the refreshed
+tarball.
+
+Alternatives considered:
+
+- A stable wrapper around the swapped icon, keeping the icon side as the focus
+  target: it would need `role="checkbox"`, `aria-checked` and a label
+  reference of its own while the input stays a second checkbox in the
+  accessibility tree.
+- Moving the focus to the new icon after each toggle: works around the
+  remount instead of removing it, and leaves the focused element unnamed.
+
 ## Implementation notes
 
 Facts found while applying tasks 1.1 to 5.2, for whoever continues; they
 refine the decisions above without changing them.
 
-- **Kit fix (D3).** Lives in `docspace-ui-kit-react` on the branch
-  `bugfix/modal-dialog-focus-restore`, cut from release/v4.1.0: commit
-  14b3a71d (the fix, `useInsertionEffect` reads the opener before the commit
-  that shows the dialog touches the DOM) and 53cc9536 (CHANGELOG). The branch
-  is not pushed. The client already installs that build as its tarball
-  (task 1.3), so the kit needs no further step for this change.
+- **Kit fixes (D3, D10).** Kit work for this change is committed on
+  `docspace-ui-kit-react`'s release/v4.1.0 directly, without feature
+  branches, and is not pushed. The ModalDialog fix, commit 14b3a71d
+  (`useInsertionEffect` reads the opener before the commit that shows the
+  dialog touches the DOM) and 53cc9536 (CHANGELOG), was first made on a
+  separate branch; on 2026-10-29 it was fast-forwarded onto release/v4.1.0
+  and the branch deleted. The client installs that build as its tarball
+  (task 1.3). The Checkbox fix (D10) came out of task 6.1 and follows the
+  same route (tasks 1.4, 1.5).
 - **Close guard (D2).** `packages/shared/dialogs/key-dialog-close-guard.ts`
   exports `useKeyDialogCloseGuard({ visible, dirty, onCancel })` returning
   `{ requestClose, confirming, confirmation }`; each guarded dialog passes
@@ -254,6 +286,11 @@ refine the decisions above without changing them.
   passphrase-change dialog has no baseline.
 
 ## Risks / Trade-offs
+
+- [The Checkbox fix moves the focus target of every checkbox in the product]
+  → `tabIndex` keeps its meaning, now on the input; no style in the kit or the
+  client targets the icon's focus and no consumer passes a key or focus
+  handler to `Checkbox`; the focus border stays where it was drawn.
 
 - [Escape reaches both the dialog and its confirmation] → the guard ignores
   close requests while the confirmation is visible, through a ref; the

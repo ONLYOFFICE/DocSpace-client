@@ -40,11 +40,18 @@ alerts, so the behaviour can be specified and most of it comes for free.
   announced, and a pending action marks the primary button busy and disables
   the fields. This lifts the v1 limitation "placeholder is the accessible
   name".
-- A ui-kit fix, in the `docspace-ui-kit-react` repository: ModalDialog does not
-  register its focus restore when a field inside the dialog is already focused
-  on open (React `autoFocus` runs before the effect), so a dialog with an
-  autofocused field never hands the focus back. Verified in
-  `components/modal-dialog/sub-components/Modal.tsx` on release/v4.1.0.
+- Two ui-kit fixes, in the `docspace-ui-kit-react` repository, committed on
+  its release/v4.1.0 branch:
+  - ModalDialog does not register its focus restore when a field inside the
+    dialog is already focused on open (React `autoFocus` runs before the
+    effect), so a dialog with an autofocused field never hands the focus
+    back. Verified in `components/modal-dialog/sub-components/Modal.tsx`.
+  - Checkbox drops the keyboard focus when it toggles: its focusable element
+    is the box icon, and a different SVG component is rendered per state, so
+    Space replaces the focused icon and the focus falls to the page; the
+    focused icon has no role or name either. Found by the keyboard-only E2E
+    pass on the recovery phrase acknowledgement; verified in
+    `components/checkbox/index.tsx`.
 - Tests follow the patterns the spike/vitest-addon PR introduced: role and
   accessible-name queries, `userEvent.tab` with `toHaveFocus`,
   `defaultPrevented` for key handling, and the kit's test ids for the
@@ -88,10 +95,12 @@ None.
   `private-room-tofu.spec.ts`, whose dialog locators may change.
 - Locales: no new keys; labels and the confirmation reuse existing Common
   keys. The translation tests still run in the task that touches the labels.
-- ui-kit: one fix in `docspace-ui-kit-react` on release/v4.1.0 and a refreshed
-  tarball in this repository (`pnpm run update-ui-kit`). Until it lands, the
-  "returns focus" scenarios for dialogs with an autofocused field fail; the
-  task order keeps those tests last.
+- ui-kit: two fixes in `docspace-ui-kit-react`, committed on release/v4.1.0
+  without a feature branch, each followed by a refreshed tarball in this
+  repository (`pnpm run update-ui-kit`). Until the first lands, the "returns
+  focus" scenarios for dialogs with an autofocused field fail; until the
+  second lands, the keyboard-only E2E pass stops at the recovery phrase
+  acknowledgement.
 - Server (`../server`) and Document Server: no work; nothing in this change
   touches a request or a response.
 

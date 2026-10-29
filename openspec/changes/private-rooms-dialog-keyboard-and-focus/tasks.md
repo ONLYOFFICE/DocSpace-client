@@ -5,6 +5,8 @@
 - [x] 1.1 Fix `components/modal-dialog/sub-components/Modal.tsx` so the focus restore is registered even when the content already holds the focus on open; verify with a new test "hands the focus back after a field inside took it on open" in `components/modal-dialog/ModalDialog.test.tsx` and `pnpm test` green in the kit
 - [x] 1.2 Record the focus fix under Unreleased in the kit's CHANGELOG.md; `useLiveRegionText` stays out of the kit's `hooks` barrel, which is part of its plugin API, and the client imports it by its deep path; verify with `pnpm build` in the kit and the deep import `@onlyoffice/apps-ui-kit/hooks/useLiveRegionText` resolving from `packages/shared`
 - [x] 1.3 Pack the kit and bring it here with `pnpm run update-ui-kit`; verify the script's hash check passes, `pnpm test` (shared) and `pnpm test:client` stay green, and commit the tarball with `pnpm-lock.yaml`
+- [ ] 1.4 Make the kit's `Checkbox` keep the focus when it toggles (D10): the native input takes `tabIndex` and the focus, the icon is decorative, the focus border follows the input; correct the README, the story's `tabIndex` description and play function and the `tabIndex` JSDoc, and note it under Unreleased in CHANGELOG.md; verify with a new test "keeps the focus on the checkbox when Space toggles it" in `components/checkbox/Checkbox.test.tsx`, the held-Space test moved to the input, and `pnpm test` and `pnpm build` green in the kit, committed on release/v4.1.0
+- [ ] 1.5 Pack the kit again and bring it here with `pnpm run update-ui-kit`; verify the script's hash check passes, `pnpm test` (shared) and `pnpm test:client` stay green, and commit the tarball with `pnpm-lock.yaml`
 
 ## 2. Backdrop and close confirmation
 
@@ -36,7 +38,7 @@
 
 ## 6. Integration
 
-- [ ] 6.1 Add a keyboard-only pass to `packages/client/__tests__/keys-management.spec.ts` (Tab through the creation dialog, Enter to confirm, acknowledge the phrase, unlock with Enter) on desktop and mobile; verify with that spec under Docker through `tests-dev` (the `client-tests` image predates the dialog changes; see design.md, Implementation notes) and re-record only a baseline a layout change still moves (the passphrase-create baselines were re-recorded in 3.4)
+- [ ] 6.1 (needs 1.5) Add a keyboard-only pass to `packages/client/__tests__/keys-management.spec.ts` (Tab through the creation dialog, Enter to confirm, acknowledge the phrase, unlock with Enter) on desktop and mobile; verify with that spec under Docker through `tests-dev` (the `client-tests` image predates the dialog changes; see design.md, Implementation notes) and re-record only a baseline a layout change still moves (the passphrase-create baselines were re-recorded in 3.4)
 - [ ] 6.2 Note the role-and-name, `userEvent.tab`/`toHaveFocus` and `defaultPrevented` patterns in `.claude/rules/unit-tests.md`; verify by reading the rule back against the tests of groups 2 to 5
 - [ ] 6.3 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`) and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify all green
 

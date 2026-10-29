@@ -307,6 +307,64 @@ on release/v4.1.0 (files changed after the last index were read on disk):
   `forcesave` (`Core/Helpers/DocumentService.cs:698-707`,
   `DocumentServiceConnector.cs:95-135`, `DocumentServiceHelper.cs:499-561`).
 
+### Run of 2026-10-29, spreadsheets and presentations (task 4.3)
+
+Same stack and build as the morning run (Document Server 10.0.0.133,
+developer edition; portal on localhost:8092), one account ("Administrator")
+in two tabs of one Chrome profile. The room's second member has no
+credentials in any fixture, so the view-only member of task 4.3 was not
+covered (task 4.6). Files were created from the room's "Spreadsheet" and
+"Presentation" tiles; the Document Server's change store (`doc_changes`) and
+task table (`task_result`) were read in the stack's MySQL, and its log with
+`docker logs`.
+
+- **Open and save work in both editors.** The new spreadsheet (file 41) and
+  presentation (file 42) opened with their real names, were edited and saved
+  with Ctrl+S. The portal stored version 2 of each as DSE3 version 2, suite
+  1, flags `0x01`, encrypted flag set (5151 and 30742 bytes); the Document
+  Server ran a force-save task (status 2) for each and kept the stable key. A
+  third spreadsheet (file 43) reached version 3 after saves from two
+  sessions.
+- **Changes are stored encrypted in both editors.** Every stored change of
+  the three files carried the `ENCRYPTED;` marker behind a leading quote
+  (5 of 5, 93 of 93, 9 of 9) and none contained the typed text.
+- **Reopening the presentation failed 4 of 4 times** while the Document
+  Server held its session: the generic open error, and in its log
+  `changesError: Cannot read properties of null (reading 'me')`. The first
+  attempt ran beside the original session; the other three after every
+  editor had closed.
+- **Reopening a spreadsheet failed intermittently, and once with no save
+  and no change at all.** Of eight warm-cache opens, five failed and three
+  succeeded; the two cold-cache first opens succeeded. The very first open of
+  file 43 failed with no other session and an empty change store. Every
+  failed spreadsheet open logged first `Uncaught TypeError: Cannot read
+  properties of undefined (reading 'base64ToArrayBuffer')` at
+  `sdkjs/cell/sdk-all-min.js:2235:111`, the add-on's byte-conversion helper
+  reading `window.OnlyofficeCrypto`, then `Cannot read properties of null
+  (reading 'Qka')` in `applyChanges` with `isDocumentLoadComplete: false`.
+  The sdk injects the library as an `async` script; by the time a failed
+  frame was inspected the library was present. Re-navigating the same tab to
+  the same file after a failure opened it in both attempts, once after a
+  force-save beside the still-open first session, whose changes replayed
+  without error.
+- **The spreadsheet editor does not apply relayed changes.** Two sessions of
+  file 43 in Fast co-editing mode (checked in the Collaboration tab): a cell
+  typed in one session never appeared in the other within 10 seconds, in
+  either direction, before or after a save, while the other session's cell
+  selection was shown and both sessions' changes were stored encrypted. The
+  same two-tab test on document 21 (its morning session still alive with one
+  unsaved change) relayed text both ways within 5 seconds.
+- **Sessions are not ended.** The session of file 41 was still held (task
+  status 0, 5 changes) 18 minutes after its last editor closed; files 42 and
+  43 likewise.
+- Not covered: a view-only member, image insertion (task 4.4), member
+  removal (task 4.5), the presentation relay (no second session ever
+  opened).
+
+Consequences: D7 is revised below, the contract gains DS-17 and DS-18, task
+4.3 is split into 4.3, 4.6 and 4.7, and proposal decision 6 asks whether
+spreadsheets and presentations ship before the Document Server fixes land.
+
 ### Hand-over package of 2026-10-29
 
 Prepared for the editor developers (task 1.3) in `enc-2.1.0` next to the
@@ -427,6 +485,19 @@ Sent: pending (task 1.5).
    shows content from before the save once the Document Server no longer
    holds the changes.
 
+   Revisited after the afternoon run of 2026-10-29 ("Run of 2026-10-29,
+   spreadsheets and presentations"): the base alone does not explain the
+   failure. A spreadsheet failed to open with no save and an empty change
+   store, every failed spreadsheet open began with the crypto library missing
+   from the frame, a retry after a force-save opened and replayed the
+   session's changes, and the presentation failed on every reopen with a
+   different error. The portal-side part of this decision stays: it removes
+   the base mismatch from the Document Server team's analysis and fixes the
+   "session over" case. It is no longer expected to fix the reopen on its
+   own; the Document Server side is DS-17 (the open path waits for the
+   library), DS-14 (the end of the session) and the presentation failure,
+   reported with the run's log lines.
+
 8. **The document address of an encrypted file stays public.** The editor
    downloads it in the browser. `document.url` is built from the public portal
    address and then `ReplaceCommunityAddress` swaps its host for the address
@@ -546,6 +617,10 @@ Sent: pending (task 1.5).
 - [Inserted images or other media leave the browser in plaintext] → not
   exercised; task 4.4 verifies it before release, and the contract requires
   that they do not (DS-13).
+- [Spreadsheet co-editing silently diverges] → until DS-18 is fixed, two
+  members editing one encrypted spreadsheet each keep their own view and the
+  last save wins; proposal decision 6 decides whether spreadsheets and
+  presentations ship before the Document Server fixes land.
 
 ## Migration Plan
 
@@ -612,3 +687,8 @@ Sent: pending (task 1.5).
   editor shows, is verified by task 4.5.
 - DS-12 (per-document change key and associated data): accepted or declined
   by the Document Server team; task 1.2 records the answer.
+- Why the spreadsheet editor shows the other session's selection but does
+  not apply its encrypted changes in Fast mode (DS-18) while the document
+  editor does, and why every reopen of a presentation with a held session
+  fails (`null (reading 'me')`). Owner: Document Server team, with the run
+  of 2026-10-29.

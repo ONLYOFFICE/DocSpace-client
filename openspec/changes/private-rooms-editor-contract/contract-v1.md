@@ -127,14 +127,23 @@ over the file id and version is still required.
 - DS-6. A container of an unsupported DSE3 version MUST produce a distinct
   error (the library throws `UnsupportedVersionError`; the add-on today maps
   every failure to the generic open error).
+- DS-17. The add-on's open path MUST NOT run before the crypto library has
+  loaded. Observed on 2026-10-29: the sdk injects
+  `sdkjs/common/crypto/onlyoffice-crypto.js` as an `async` script, and in
+  five of eight warm-cache spreadsheet opens the add-on read
+  `window.OnlyofficeCrypto` before it existed (`base64ToArrayBuffer` of
+  undefined, `sdk-all-min.js:2235:111`), so the open failed; a retry opened
+  the same file.
 
 ### 4.3 Editors covered
 
 Observed: the add-on is present in the document, spreadsheet and
 presentation bundles; PDF and PDF forms open through the document editor
-(`sdkjs/pdf/src/engine/drawingfile.js` is loaded on demand). The run of
-2026-10-29 verified documents (DOCX) and PDF forms; spreadsheets and
-presentations are verified by task 4.3.
+(`sdkjs/pdf/src/engine/drawingfile.js` is loaded on demand). The runs of
+2026-10-29 verified open, save and encrypted change storage for documents,
+PDF forms, spreadsheets and presentations; reopening and co-editing of
+spreadsheets and presentations carry the defects DS-17 and DS-18 and the
+presentation reopen failure of §7.
 
 ## 5. Saving
 
@@ -242,6 +251,13 @@ typed text.
   a change cannot be replayed into another session of the same file and the
   file's DEK is not used for two message streams. Owner: Document Server team;
   the portal records the answer in design.md.
+- DS-18. The spreadsheet editor MUST apply relayed encrypted changes as the
+  document editor does. Observed on 2026-10-29 in Fast mode with two
+  sessions of one spreadsheet: each session showed the other's cell
+  selection, both sessions' changes were stored encrypted, but neither
+  session applied the other's changes within 10 seconds, before or after a
+  save; the same test on a document relayed text both ways within 5
+  seconds.
 - DS-13 (to verify, task 4.4). Images inserted into an encrypted document are
   kept by the add-on as `cryptoimg://` references with their bytes in memory.
   Whether an inserted image reaches the Document Server's media store or the
@@ -256,6 +272,16 @@ logged no assembly and sent no closing callback; the portal kept returning
 the same document key; a reopen downloaded the saved version and replayed
 the kept changes on it, which failed with `changesError`. The edit history
 listed version 1 only and `edit/diff` had no `changesUrl`.
+
+Afternoon run of 2026-10-29 (design.md, "Run of 2026-10-29, spreadsheets
+and presentations"): reopening a presentation while the Document Server
+held its session failed on every attempt (`changesError: Cannot read
+properties of null (reading 'me')`), reopening a spreadsheet failed
+intermittently and once without any save or change (DS-17), and a retry
+after a force-save opened and replayed the session's changes without
+error. The base mismatch behind P-5 is therefore not the only cause; P-5
+stays as the portal's part, and the Document Server team receives the log
+lines.
 
 - P-5 (portal, design D7, task 6.2). When an editor opens an encrypted file
   whose current version is a force-save, the portal asks the Document Server
@@ -371,6 +397,8 @@ client-side guarantee stays the one of `private-rooms/encryption-core`
 | DS-14 | Document Server | define the end of an encrypted session | to answer |
 | DS-15 | Document Server | no conversion-service path for encrypted documents | to confirm |
 | DS-16 | Document Server | capability and library version signal | to answer |
+| DS-17 | Document Server | open path waits for the crypto library | new, from the run |
+| DS-18 | Document Server | spreadsheet editor applies relayed encrypted changes | new, from the run |
 | P-1 | Portal server | `document.url` reachable from the browser | task 6.3 |
 | P-2 | Portal and Document Server | secure contexts | deployment rule |
 | P-3 | Portal server | refuse a save without the encrypted flag | task 6.4 |
@@ -390,3 +418,5 @@ depends on are DS-4, DS-12, DS-13, DS-14, DS-16 and the token question of
 
 - 2026-10-29: first draft, from the run of the same day, the bundles of
   build 10.0.0.133 and the server code on `release/v4.1.0`.
+- 2026-10-29, afternoon: DS-17 and DS-18 and the presentation reopen
+  failure, from the spreadsheet and presentation run.

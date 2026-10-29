@@ -159,3 +159,8 @@ Confirmed by the feature owner on 2026-10-29, after the live run:
    Document Server or the portal in plaintext: block image insertion for
    encrypted documents until fixed, or hold the release. Owner: feature
    owner with the Document Server team.
+6. Whether encrypted spreadsheets and presentations ship in v1 before the
+   Document Server fixes DS-17 (open waits for the library) and DS-18 (the
+   spreadsheet editor applies relayed changes) and the presentation reopen
+   failure land, or the capability check also keeps those file types
+   closed. Found in the run of 2026-10-29; owner: feature owner.

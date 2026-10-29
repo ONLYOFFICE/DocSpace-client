@@ -65,6 +65,8 @@ import type {
   TMetadataAIFillResult,
   TMetadataAIGenerateRequest,
   TMetadataAIGenerateResult,
+  TByokKey,
+  TByokProvider,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -539,6 +541,33 @@ const postMetadataAI = async <T>(
 
   return body as T;
 };
+
+const byokFetch = async <T>(path: string, init: RequestInit = {}) => {
+  const response = await authFetch(`/api/2.0/ai/byok${path}`, {
+    ...init,
+    headers: { "Content-Type": "application/json" },
+  });
+
+  const body = await response.json().catch(() => null);
+
+  if (!response.ok) throw new Error(body?.error ?? response.statusText);
+
+  return body as T;
+};
+
+export const getByokProviders = () =>
+  byokFetch<TByokProvider[]>("/providers");
+
+export const getByokKeys = () => byokFetch<TByokKey[]>("");
+
+export const setByokKey = (id: string, provider: string, key: string) =>
+  byokFetch<TByokKey>(`/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ provider, key }),
+  });
+
+export const deleteByokKey = (id: string) =>
+  byokFetch<null>(`/${id}`, { method: "DELETE" });
 
 export const fillMetadataWithAI = (
   data: TMetadataAIFillRequest,

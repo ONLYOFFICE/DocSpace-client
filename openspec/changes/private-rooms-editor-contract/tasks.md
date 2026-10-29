@@ -2,7 +2,7 @@
 
 ## 1. Contract with the Document Server
 
-- [ ] 1.1 Draft the versioned contract from the run of 2026-10-29 (design.md Context, "Observed on 2026-10-29"): the encryption keys entry and which fields the web client reads, token handling, DSE3 decrypt and encrypt in the browser with versions 2 and 3 read and version 3 written, the crypto library build the Document Server ships, the save through `savefile`, encrypted co-editing changes, the end of an encrypted session, and the minimum version; get written sign-off from the Document Server team; verify by adding the signed-off document to this change folder as `contract-v1.md`
+- [ ] 1.1 Draft the versioned contract from the run of 2026-10-29 (design.md Context, "Observed on 2026-10-29"): the encryption keys entry and which fields the web client reads, token handling, DSE3 decrypt and encrypt in the browser with versions 2 and 3 read and version 3 written, the crypto library build the Document Server ships, the save through `savefile`, encrypted co-editing changes, the end of an encrypted session, the form flag kept on save, and the minimum version; get written sign-off from the Document Server team; verify by adding the signed-off document to this change folder as `contract-v1.md`
 - [ ] 1.2 Record the Document Server team's answers to the open questions in design.md (session end and unsaved changes, library build per release, editions that carry the crypto add-on, a capability signal) and whether the server keeps the key-pair list with `privateKeyEnc` in the signed configuration (if not, add a backend task here); adjust the delta spec scenarios if an answer differs; verify with `openspec validate private-rooms-editor-contract --strict`
 - [ ] 1.3 Send the editor developers the corrections to the integration guide of 2026-07-01 listed in design.md Context (access-write route, access-read fields, key pairs without an id) and record the date it was sent in design.md; verified by that record
 
@@ -27,8 +27,10 @@
 
 - [ ] 5.1 Doceditor: refuse `onRequestSaveAs` for an encrypted file, so no Document Server address is posted to the file-creation endpoint, while the editor's own download-as and save-copy-as stay available; verify with a doceditor unit test on the save-as handler
 - [ ] 5.2 Doceditor: do not attach history events for encrypted files; verify with a doceditor unit test
-- [ ] 5.3 Doceditor: withhold fill and submit for encrypted PDF forms; verify with a doceditor unit test on the form configuration
-- [ ] 5.4 Add any new locale keys with `translate-comments` and `translate-locales`, then verify with `cd common/tests && npx vitest run test/locales.test.js`
+- [ ] 5.3 Doceditor: hide "Share to fill out" for a PDF form in a private room (no start-filling event attached; design D9); verify with a doceditor unit test on the editor events of an encrypted form in a private room
+- [ ] 5.4 Backend: refuse a form submission of an encrypted file into form-data collection, or refuse to create a private form-filling room, choosing after reading the submission path in `../server` (design D9, "Server form handling"); verify with a server unit test that no result file is stored and no field value reaches the report
+- [ ] 5.5 Add any new locale keys with `translate-comments` and `translate-locales`, then verify with `cd common/tests && npx vitest run test/locales.test.js`
+- [ ] 5.6 Verify role-based filling in a private virtual data room created through the API, on a Document Server with the crypto add-on: every filler opens and fills the encrypted form, and the final submit keeps it encrypted; record the run in design.md and turn the open question into a requirement
 
 ## 6. Session end and document address
 

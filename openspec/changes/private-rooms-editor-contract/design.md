@@ -120,10 +120,59 @@ not contain this code.
   add-on builds the file in the browser and saves it to the device, so
   neither the Document Server conversion nor `onRequestSaveAs` is reached
   (read in the bundle, not executed). Print builds the PDF in the browser too.
+- **Forms.** A PDF form created in the private room ("New PDF form") is a
+  DSE3 container whose header flags carry both the encrypted-name and the
+  form bit (`0x03`), and `GET files/file/{id}` reports `isForm: true`. Both
+  private rooms on the stack are custom rooms (`roomType` 5); for the form
+  the editor configuration gave `edit: true`, `fillForms: false`,
+  `submitForm.visible: false`, `startFilling: true` and
+  `startFillingMode: 1` (Share to fill out). "Share to fill out" offered
+  only "Form data collection" (a form-filling room, with an XLSX of the
+  responses) and "Recipient role-based filling" (a virtual data room); both
+  take the form out of the private room. A field added in the edit mode and
+  saved produced a new encrypted version whose header flags were `0x01`: the
+  add-on calls `encryptFile` with `dek` and `fileName` only, so the form bit
+  is lost on every save, while the API still reported `isForm: true`.
 - **Capability.** The Document Server publishes no capability endpoint
   (`info/info.json` answers 404). Two signals exist: `Asc.Addons.crypto` in
   the editor frame, and `sdkjs/common/crypto/onlyoffice-crypto.js` under the
   Document Server address, which answers 200 with and without the build hash.
+
+### Server form handling, read on 2026-10-29
+
+Read through CodeGraph in `../server/products/ASC.Files` (files changed after
+the last index were read on disk):
+
+- "Private" is a flag on a room of any type (`Core/Core/Entries/Folder.cs:249`,
+  `Server/ApiModels/RequestDto/CreateRoomRequestDto.cs:131`); creating a
+  private room checks only that the creator holds encryption keys
+  (`Core/Core/FileStorageService.cs:1164-1185`), so a private form-filling
+  room or virtual data room is accepted by the API. Both private rooms the
+  client created on the stack are custom rooms.
+- Fill rights exist only in form-filling rooms, virtual data rooms and the
+  user's own folder (`Core/Helpers/DocSpaceHelper.cs:81-82`, enforced in
+  `Core/Core/Security/FileSecurity.cs:1741`). Start filling, the filler's
+  draft and the editor's start-filling and submit settings have no private or
+  encrypted check (`Core/Services/DocumentService/DocumentServiceHelper.cs:590-650`,
+  `Core/Utils/EntryManager.cs:1304-1440`, `Server/Api/EditorController.cs:258-362`,
+  `Core/Services/DocumentService/Configuration.cs:917-929`). The only
+  encrypted branch of the editor permissions switches editing off for an
+  encrypted file outside a private room (`DocumentServiceHelper.cs:268-274`).
+- A submission is a force-save callback with the user-submit type
+  (`Core/Services/DocumentService/DocumentServiceTracker.cs:40-83`, `473-476`).
+  In a form-filling room it is saved as a new file in the done folder without
+  the encrypted flag (`EntryManager.cs:2339-2366`, `Core/Core/Entries/File.cs:319`),
+  and the responses report downloads `formsDataUrl`, the field values the
+  Document Server produces, indexes them and builds an XLSX from them
+  (`Core/Helpers/FormFillingReportCreator.cs:54-68`, `413-430`;
+  `Core/Services/DocumentBuilderService/FormFillingReportBuilder.cs:52-110`);
+  a failure there is only logged (`EntryManager.cs:2439-2441`). In a virtual
+  data room only the final role's submit saves the stream into the same file,
+  keeping the encrypted flag, and no content is read (`EntryManager.cs:2507-2570`,
+  `2535-2541`). Fillers get the embedded editor type
+  (`DocumentServiceHelper.cs:644-646`).
+- A plain save of a form follows the regular save path and keeps the
+  encrypted flag (`DocumentServiceTracker.cs:229-262`, `EntryManager.cs:1588-1591`).
 
 ## Goals / Non-Goals
 
@@ -170,8 +219,7 @@ not contain this code.
    would only remove a working feature. The client stops clearing
    `canCoAuthoring`, which the Document Server does not read.
 
-4. **Action policy in v1: decrypted copies on the device, print, no history,
-   no form submission.** Download-as and save-copy-as are allowed (decided
+4. **Action policy in v1: decrypted copies on the device, print, no history.** Download-as and save-copy-as are allowed (decided
    2026-10-29) because the editor builds them in the browser and saves them to
    the device; nothing plaintext reaches the portal or the Document Server.
    The doceditor still refuses `onRequestSaveAs` for an encrypted file, so a
@@ -183,7 +231,7 @@ not contain this code.
    (`FilesControllerHelper.cs:263-280`, `FileConverter.cs:643-654`). Print is
    local to the session. Version history is withheld: the client withholds
    version operations for encrypted files, the edit history lists no saved
-   version, and there is no `changesUrl` to show. Form submission is withheld.
+   version, and there is no `changesUrl` to show. Forms follow D9.
 
 5. **Contract version travels in the configuration.** A small integer next to
    `dek` and `cryptoEngineId`; the Document Server ignores versions it does
@@ -219,6 +267,20 @@ not contain this code.
    Document Server. The backend looks up where the address is built
    (CodeGraph) before changing it.
 
+9. **PDF forms: fill as an edit, no form-data collection, no "Share to fill
+   out".** Filling a form in the edit mode of a private room works and its
+   save stays encrypted, so it is allowed. Submission into a form-filling room
+   is refused for encrypted files: the server would store the result as an
+   unencrypted file nobody holds a key for, and its responses report needs the
+   field values in plaintext. The refusal sits on the server (the backend
+   chooses between refusing an encrypted submission and refusing a private
+   form-filling room, after reading the code). "Share to fill out" is hidden in
+   a private room (decided 2026-10-29), since both its destinations take the
+   form out of the room. The editor's save must keep the form flag; that is a
+   contract item for the Document Server team, since the add-on drops it.
+   Role-based filling in a private virtual data room is server-compatible but
+   unverified in the editor, and stays an open question.
+
 ## Risks / Trade-offs
 
 - [Document Server does not implement the contract on the planned release
@@ -241,6 +303,11 @@ not contain this code.
 - [Edits left unsaved when the last editor leaves exist only as encrypted
   changes in the Document Server, which cannot build a file from them] →
   open question below; until it is answered, users save explicitly.
+- [A private form-filling room created through the API accepts submissions
+  today] → task 5.4 makes the server refuse them; until then the client does
+  not create such rooms.
+- [The form flag is lost on every editor save] → contract item; the API kept
+  `isForm` in the run, so the form stays a form in the portal meanwhile.
 - [Withholding actions confuses users] → menu items are absent, not greyed;
   the room header shows the private badge.
 
@@ -282,3 +349,8 @@ not contain this code.
   Document Server version. Owner: Document Server team.
 - Will the Document Server publish a capability signal (health check or
   settings) to replace the library-path probe? Owner: Document Server team.
+- Role-based filling in a private virtual data room: does the encrypted
+  editor work in the embedded mode fillers get, and does every filler hold an
+  access entry for the form? A private virtual data room can only be created
+  through the API today. To be verified on a Document Server with the crypto
+  add-on before a policy is set.

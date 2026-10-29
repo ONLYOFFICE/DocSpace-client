@@ -46,7 +46,16 @@ hidden.
   and save-copy-as are allowed (decided 2026-10-29): the editor builds a DOCX
   or PDF in the browser and saves a decrypted copy on the user's device, and
   no copy is stored in the portal or converted by the Document Server. Print
-  is allowed; version history and form submission are withheld in v1.
+  is allowed; version history is withheld in v1.
+- Define the policy for encrypted PDF forms, from a live run and the server
+  code on 2026-10-29: creating, editing and filling a form as an edit work in
+  a private room; the editor's save keeps the form flag of the container (it
+  drops it today); a form submission into form-data collection (a
+  form-filling room) is refused for encrypted files, because the server would
+  store the result unencrypted and report its field values in plaintext;
+  "Share to fill out" is hidden in a private room (decided 2026-10-29), since
+  it only moves the form out of the room; role-based filling in a private
+  virtual data room stays open until it is verified.
 - Let the SDK open encrypted files once the capability check passes.
 - Add the missing test coverage: an MSW `openedit` mock for an encrypted
   file, doceditor unit tests for the key path and the action policy, a client
@@ -80,11 +89,13 @@ None.
   layout, shared settings store (Document Server capability), locales.
 - Server (`../server`): editor configuration (the document address of an
   encrypted file, the document key after an encrypted save), the Document
-  Server capability, and whether the signed configuration keeps the caller's
-  key-pair list. The server already refuses to convert encrypted or
+  Server capability, the refusal of encrypted form submissions into
+  form-data collection, and whether the signed configuration keeps the
+  caller's key-pair list. The server already refuses to convert encrypted or
   private-room files.
 - Document Server team: owns the contract, the end of an encrypted editing
-  session, and the crypto library build each release ships. Nothing in this
+  session, the form flag on save, and the crypto library build each release
+  ships. Nothing in this
   change can be archived until that team confirms the contract and names the
   release that ships it.
 - Tests: `packages/shared/__mocks__/handlers/files/encryptedFiles.ts`,
@@ -105,11 +116,12 @@ Confirmed by the feature owner on 2026-10-29, after the live run:
 - Co-editing of encrypted files is allowed.
 - Download-as and save-copy-as are allowed as decrypted copies on the user's
   device.
+- "Share to fill out" is hidden for a form in a private room.
 
 ## Decisions needed
 
-1. The rest of the v1 action policy: print allowed, version history and form
-   submission withheld. Product owner confirms; the specs below assume it.
+1. The rest of the v1 action policy: print allowed, version history withheld.
+   Product owner confirms; the specs below assume it.
 2. Whether a Document Server without the capability should block only
    encrypted files or disable private-room creation altogether. The specs
    assume per-file refusal.

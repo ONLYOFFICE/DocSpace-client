@@ -86,12 +86,33 @@ The editor SHALL NOT attach version-history events for an encrypted file, matchi
 - **WHEN** the user has history rights and opens an encrypted file
 - **THEN** no history events are attached and the history panel is unavailable
 
-### Requirement: Form submission withheld for encrypted files
-The editor SHALL open an encrypted PDF form for editing of the form itself but SHALL NOT offer filling or submitting it in v1.
+### Requirement: Encrypted PDF forms are filled as edits
+The editor SHALL let a member with edit rights create, edit and fill an encrypted PDF form in a private room through the edit mode, and SHALL save it as a new encrypted version of the same file.
 
-#### Scenario: Encrypted form opened
-- **WHEN** an encrypted PDF form is opened in the editor
-- **THEN** the fill and submit actions are absent
+#### Scenario: Form filled and saved
+- **WHEN** a member fills the fields of an encrypted PDF form in a private room and saves it
+- **THEN** a new encrypted version of the form is stored and the file is still a form
+
+### Requirement: Encrypted form keeps its form flag when saved
+When the editor saves an encrypted PDF form, the saved DSE3 container SHALL carry the form flag in its header, as the container the form was opened from did.
+
+#### Scenario: Form flag after a save
+- **WHEN** the editor saves an encrypted PDF form whose header carries the form flag
+- **THEN** the header of the saved container carries the form flag
+
+### Requirement: Encrypted forms are not submitted to form-data collection
+The system SHALL NOT accept a form submission of an encrypted file into form-data collection (a form-filling room). Such a submission would be stored without encryption and its field values reported in plaintext, so the server SHALL refuse it.
+
+#### Scenario: Submission refused
+- **WHEN** a filler submits an encrypted PDF form in a form-filling room
+- **THEN** the server refuses it, no result file is stored, and no field value MUST be indexed, exported or sent to an external database
+
+### Requirement: Share to fill out hidden in a private room
+The editor SHALL NOT offer "Share to fill out" for a PDF form in a private room, since its destinations, a form-filling room and a virtual data room, take the form out of the private room.
+
+#### Scenario: Form opened in a private room
+- **WHEN** an encrypted PDF form is opened for editing in a private room
+- **THEN** the "Share to fill out" action is absent from the editor
 
 ## MODIFIED Requirements
 
@@ -129,7 +150,7 @@ The SDK file list SHALL refuse to open an encrypted file in the editor while the
 **Migration**: Stop clearing `canCoAuthoring` for encrypted files; the generic co-editing configuration applies.
 
 ### Requirement: Editor actions without encrypted-specific handling
-**Reason**: Replaced by explicit per-action policies (decrypted copies on the device, print, version history, form submission).
+**Reason**: Replaced by explicit per-action policies (decrypted copies on the device, print, version history, PDF forms).
 **Migration**: Implement the policies above; the generic flows stay for non-encrypted files.
 
 ### Requirement: No Document Server version is declared

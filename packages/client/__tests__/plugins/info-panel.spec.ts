@@ -58,7 +58,11 @@ async function selectRow(
   await expect(row).toBeVisible();
   // Click the row icon to select it (same approach as multi-select in context-menu spec).
   const icon = row.getByTestId("room-icon-image");
-  await icon.click();
+  // Under the pointer the icon turns into the row's checkbox, which takes
+  // the click, as it does for a user. `force` skips only Playwright's
+  // hit-target check, which used to pass because the row was a
+  // role="button" drop zone.
+  await icon.click({ force: true });
 }
 
 async function openInfoPanel(page: import("@playwright/test").Page) {

@@ -11,6 +11,7 @@
     "start": "vite",
     "start-prod": "serve dist -s -p 5001",
     "analyze": "vite build --mode analyze",
+    "build:crypto": "vite build --config ../shared/services/encryption/vite.lib.config.ts",
     "test:build": "cross-env PORT=5110 E2E_TEST=true pnpm run build:translations && pnpm run build",
     "test:start": "cross-env PORT=5110 NODE_ENV=production E2E_TEST=true serve dist -s -p 5110",
     "test:e2e:docker:build": "docker-compose build",

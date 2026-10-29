@@ -116,6 +116,7 @@ export {
   DSE3_FIXED_HEADER_SIZE,
   DSE3_FILE_NONCE_SIZE,
   DSE3_FLAG_HAS_ENCRYPTED_NAME,
+  DSE3_FLAG_IS_FORM,
   CHUNKED_ENCRYPTION_THRESHOLD,
   X25519_PUBLIC_KEY_SIZE,
   X25519_PRIVATE_KEY_SIZE,
@@ -123,6 +124,7 @@ export {
   VERSION_IDENTITY,
   VERSION_HPKE_WRAP,
   VERSION_DSE3_FILE,
+  LIBRARY_VERSION,
 } from "./types";
 
 export * from "./errors";
@@ -167,6 +169,15 @@ export {
   splitMnemonicForDisplay,
   normalizeMnemonic,
 } from "./recovery";
+
+// Build stamp: the version is a constant in types.ts, the commit is defined by
+// vite.lib.config.ts when the bundle is built ("dev" everywhere else).
+declare const __ONLYOFFICE_CRYPTO_COMMIT__: string | undefined;
+
+export const BUILD_COMMIT: string =
+  typeof __ONLYOFFICE_CRYPTO_COMMIT__ === "string"
+    ? __ONLYOFFICE_CRYPTO_COMMIT__
+    : "dev";
 
 // ---------------------------------------------------------------------------
 // Legacy compat API (deprecated aliases over the v2 core)

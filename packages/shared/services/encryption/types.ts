@@ -43,6 +43,9 @@ export const MAGIC_DSE3_FILE = new Uint8Array([0x44, 0x53, 0x45, 0x33]); // "DSE
 export const VERSION_IDENTITY = 0x02;
 export const VERSION_HPKE_WRAP = 0x02;
 export const VERSION_DSE3_FILE = 0x02;
+// Editor-facing surface of the standalone onlyoffice-crypto bundle;
+// 2.0.0 is the unstamped build handed over on 2026-07-01.
+export const LIBRARY_VERSION = "2.1.0";
 
 export const X25519_PUBLIC_KEY_SIZE = 32;
 export const X25519_PRIVATE_KEY_SIZE = 32;

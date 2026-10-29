@@ -121,6 +121,9 @@ const REQUIRED_EXPORTS = [
   "arrayBufferToBase64",
   "base64ToArrayBuffer",
   "ENCRYPTION_CONSTANTS",
+  // build stamp
+  "LIBRARY_VERSION",
+  "BUILD_COMMIT",
   // errors
   "CryptoError",
   "InvalidPassphraseError",
@@ -146,6 +149,33 @@ describe("onlyoffice-crypto bundle contract", () => {
     expect(VERSION_DSE3_FILE).toBe(0x02);
     expect(X25519_PUBLIC_KEY_SIZE).toBe(32);
     expect(ENCRYPTION_CONSTANTS.AES_KEY_SIZE).toBe(256);
+  });
+
+  it("LIBRARY_VERSION and BUILD_COMMIT stamp the bundle", () => {
+    expect(bundle.LIBRARY_VERSION).toMatch(/^\d+\.\d+\.\d+$/);
+    expect(bundle.BUILD_COMMIT).toMatch(/^([0-9a-f]{7,40}(-dirty)?|dev)$/);
+  });
+
+  it("encryptFile keeps the form flag in the DSE3 header when asked", async () => {
+    const pt = new TextEncoder().encode("%PDF-1.7 form");
+    const form = await encryptFile(pt, { fileName: "form.pdf", isForm: true });
+    const formBytes = new Uint8Array(await form.encryptedBlob.arrayBuffer());
+    const formHeader = parseDSE3Header(formBytes);
+    expect(formHeader.isForm).toBe(true);
+    expect(formHeader.flags & bundle.DSE3_FLAG_IS_FORM).toBe(
+      bundle.DSE3_FLAG_IS_FORM,
+    );
+
+    const plain = await encryptFile(pt, { fileName: "form.pdf" });
+    const plainHeader = parseDSE3Header(
+      new Uint8Array(await plain.encryptedBlob.arrayBuffer()),
+    );
+    expect(plainHeader.isForm).toBe(false);
+
+    const { data } = await decryptFile(formBytes, form.dek);
+    expect(Array.from(new Uint8Array(await data.arrayBuffer()))).toEqual(
+      Array.from(pt),
+    );
   });
 
   it("generateKeyPair -> X25519 key pair handle", async () => {

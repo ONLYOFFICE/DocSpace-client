@@ -35,20 +35,42 @@
 
 // Vite library-mode build config for the standalone onlyoffice-crypto bundle.
 //
-// Outputs:
-//   dist/crypto/onlyoffice-crypto.js      - ES module
-//   dist/crypto/onlyoffice-crypto.umd.js  - UMD (global: OnlyofficeCrypto)
-//
-// All dependencies are bundled; the library has no runtime npm requirements.
+// Output: dist/crypto/onlyoffice-crypto.js - one IIFE file, global
+// `OnlyofficeCrypto`, every dependency bundled, no runtime npm requirements.
 // Web Crypto API is a browser/Node built-in - no polyfill is included.
+//
+// Build from packages/client (the only package that depends on vite):
+//   pnpm run build:crypto
+//
+// The first line of the output and the `LIBRARY_VERSION` / `BUILD_COMMIT`
+// exports name the build, so a deployed copy can be identified without
+// comparing files.
 
-import { resolve } from "path";
+import { execSync } from "node:child_process";
+import { resolve } from "node:path";
 
-// NOTE: no `import ... from "vite"` here on purpose — the @docspace/shared
+import { LIBRARY_VERSION } from "./types";
+
+let commit = "unknown";
+try {
+  // The short hash, "-dirty" appended when the tree has uncommitted changes.
+  commit = execSync("git describe --always --dirty --exclude=* --abbrev=12", {
+    cwd: __dirname,
+    encoding: "utf8",
+  }).trim();
+} catch {
+  // not a git checkout: the bundle still builds, stamped "unknown"
+}
+
+// NOTE: no `import ... from "vite"` here on purpose - the @docspace/shared
 // package does not depend on vite directly, so the config must stay loadable
 // by whatever vite binary the monorepo provides (e.g. packages/client's).
 /** @type {import("vite").UserConfig} */
 export default {
+  define: {
+    __ONLYOFFICE_CRYPTO_COMMIT__: JSON.stringify(commit),
+  },
+
   build: {
     // Write into a subdirectory so this build never clobbers the shared
     // package's regular TypeScript declaration output.
@@ -69,7 +91,8 @@ export default {
     rollupOptions: {
       external: [],
       output: {
-        // Single IIFE file - <script src="onlyoffice-crypto.iife.js">
+        banner: `/*! onlyoffice-crypto ${LIBRARY_VERSION} ${commit} */`,
+        // Single IIFE file - <script src="onlyoffice-crypto.js">
         // All exports available via window.OnlyofficeCrypto
         inlineDynamicImports: true,
       },

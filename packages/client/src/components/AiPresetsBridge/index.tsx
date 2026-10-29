@@ -46,6 +46,8 @@ import type { TTranslation } from "@docspace/shared/types";
 
 import DialogComponent from "SRC_DIR/components/GlobalEvents/sub-components/Dialog";
 import type AiPresetsStore from "SRC_DIR/store/AiPresetsStore";
+import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
+import { canManageProjects } from "SRC_DIR/pages/AiProjects/utils";
 
 // The folder/file naming dialog is plain JS; only the props this dialog
 // uses are typed here, the way CreatePluginFileEvent does it.
@@ -56,7 +58,7 @@ type TDialogProps = {
   title: string;
   testIdPrefix?: string;
   startValue?: string;
-  onSave: (e: unknown, value: string) => void;
+  onSave: (e: unknown, value: string) => void | Promise<void>;
   onCancel: () => void;
   onClose: () => void;
 };
@@ -66,15 +68,19 @@ const Dialog = DialogComponent as unknown as ComponentType<TDialogProps>;
 type AiPresetsBridgeProps = {
   aiPresetsStore: AiPresetsStore;
   userId: string | null;
+  /** The user may create AI projects (owner, admins, room admins). */
+  canCreateProjects: boolean;
 };
 
 /**
- * Wires the AI presets to the chat panel: the header's save button opens the
- * name dialog, the saved list is loaded for the signed-in user, and the
- * preset an open chat was started from is dropped when the panel closes.
- * Lives inside AiAgentProviders, where the panel store is reachable.
+ * Wires the AI projects to a chat outside the projects page: the header's
+ * save button creates a project from the chat's setup, the model picker's
+ * project list is loaded for the signed-in user and read again whenever the
+ * chat opens, and the project an open chat was started from is dropped when
+ * the panel closes. Lives inside AiAgentProviders, where the panel store is
+ * reachable.
  */
-const AiPresetsBridge = ({ aiPresetsStore, userId }: AiPresetsBridgeProps) => {
+const AiPresetsBridge = ({ aiPresetsStore, userId, canCreateProjects }: AiPresetsBridgeProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const aiChatStore = useAiChatStore();
@@ -83,16 +89,29 @@ const AiPresetsBridge = ({ aiPresetsStore, userId }: AiPresetsBridgeProps) => {
     aiPresetsStore.init(userId);
   }, [aiPresetsStore, userId]);
 
-  // The save button saves a new project from a plain chat. A chat opened
-  // from a project on the projects page already is that project (its rooms
-  // are changed in the sources column), so the header hides it there.
+  // The save button creates a project from a plain chat, for those who may
+  // create one. A chat opened from a project on the projects page already
+  // is that project, so the header hides it there.
   const isProjectsPage = location.pathname.startsWith("/ai-projects");
   const isInsideProject = isProjectsPage && !!aiPresetsStore.activePreset;
   React.useEffect(() => {
-    if (isInsideProject) return undefined;
+    if (isInsideProject || !canCreateProjects) return undefined;
     aiChatStore.setOnSavePreset(aiPresetsStore.openSaveDialog);
     return () => aiChatStore.setOnSavePreset(null);
-  }, [aiChatStore, aiPresetsStore, isInsideProject]);
+  }, [aiChatStore, aiPresetsStore, isInsideProject, canCreateProjects]);
+
+  // The picker offers the projects as they are when the chat opens: one
+  // created, renamed or left elsewhere meanwhile is picked up.
+  React.useEffect(
+    () =>
+      reaction(
+        () => aiChatStore.isVisible,
+        (visible) => {
+          if (visible) void aiPresetsStore.fetchPresets();
+        },
+      ),
+    [aiChatStore, aiPresetsStore],
+  );
 
   // On the projects page the composer also shows its Context slot: any
   // folder connected as the round's context.
@@ -148,10 +167,15 @@ const AiPresetsBridge = ({ aiPresetsStore, userId }: AiPresetsBridgeProps) => {
     [aiChatStore, aiPresetsStore],
   );
 
-  const onSave = (_e: unknown, value: string) => {
-    const preset = aiPresetsStore.savePreset(value);
-    if (preset) {
-      toastr.success(t("Common:AIProjectSaved", { name: preset.name }));
+  const onSave = async (_e: unknown, value: string) => {
+    try {
+      const saved = await aiPresetsStore.savePreset(value);
+      if (!saved) return;
+      toastr.success(t("Common:AIProjectSaved", { name: saved.preset.name }));
+      // A linked room that could not be shared with a member, and the like.
+      saved.project.aiProject.warnings?.forEach((warning) => toastr.warning(warning.message));
+    } catch (e) {
+      toastr.error(errorMessage(e));
     }
   };
 
@@ -175,4 +199,5 @@ const AiPresetsBridge = ({ aiPresetsStore, userId }: AiPresetsBridgeProps) => {
 export default inject(({ aiPresetsStore, userStore }: TStore) => ({
   aiPresetsStore,
   userId: userStore.user?.id ?? null,
+  canCreateProjects: canManageProjects(userStore.user),
 }))(observer(AiPresetsBridge));

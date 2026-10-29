@@ -48,7 +48,7 @@ export const isAiPresetActionId = (actionId?: string): boolean =>
 
 /**
  * Builds the "Choose AI Preset" entry for the chat model picker, next to
- * "Choose AI Agent": a submenu of the user's saved presets. Picking one hands
+ * "Choose AI Agent": a submenu of the user's AI projects. Picking one hands
  * the preset to `onPresetPick`; a preset with a model also carries its
  * `profileId`, so the picker switches the model itself. Empty while the user
  * has no presets.

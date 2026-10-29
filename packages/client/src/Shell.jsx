@@ -91,7 +91,6 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import "@docspace/shared/styles/theme.scss";
 
 import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
-import { getAiContextRoom } from "SRC_DIR/helpers/aiContextRoom";
 import AiPresetsBridge from "SRC_DIR/components/AiPresetsBridge";
 import ProjectIntro from "SRC_DIR/pages/AiProjects/sub-components/project/ProjectIntro";
 import {
@@ -184,7 +183,6 @@ const Shell = ({ page = "home", ...rest }) => {
     isFormsFolderRoot,
     isFormRoomRoot,
     isAIReady,
-    aiContextRoom,
     aiPresetContextRooms,
     aiPresets,
     requestPresetApply,
@@ -856,11 +854,20 @@ const Shell = ({ page = "home", ...rest }) => {
       setPickedAgent,
     );
 
-  // "Choose AI Preset" next to it: the saved presets, applied to the open
-  // chat by AiPresetsBridge (the chat stores live below AiAgentProviders).
+  // "Choose AI Project" next to it: the user's AI projects, applied to the
+  // open chat by AiPresetsBridge (the chat stores live below
+  // AiAgentProviders). A project that is gone by now is only reported.
+  const onProjectPick = useCallback(
+    (preset) => {
+      void requestPresetApply(preset).then((applied) => {
+        if (!applied) toastr.info(t("Common:AIProjectNotAvailable"));
+      });
+    },
+    [requestPresetApply, t],
+  );
   const presetPickerActions = useAiPresetsPickerActions(
     aiPresets,
-    requestPresetApply,
+    onProjectPick,
   );
   const profilePickerActions = useMemo(
     () => [...agentPickerActions, ...presetPickerActions],
@@ -1062,14 +1069,11 @@ const Shell = ({ page = "home", ...rest }) => {
               <ProjectIntro project={aiActiveProject} />
             ) : undefined
           }
-          // The room the user is in, connected as chat context (with the
-          // skills of its .ai folder) when the chat opens — see
-          // ContextRoomSync in ui-kit.
-          // A chat opened from an AI preset or project takes its skills
-          // rooms instead, until the panel closes (see AiPresetsBridge).
-          contextRoom={
-            canUseAi ? (aiPresetContextRooms ?? aiContextRoom) : undefined
-          }
+          // Instructions rooms are connected on their own only from an AI
+          // project (its linked rooms, see AiPresetsBridge); standing in an
+          // Instructions room does not connect it, the user picks it in the
+          // composer like a knowledge base.
+          contextRoom={canUseAi ? aiPresetContextRooms : undefined}
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
@@ -1246,7 +1250,6 @@ const ShellWrapper = inject(
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
       // The current room as a chat-context candidate; a new object per
       // render, the ui-kit provider memoizes it by id and name.
-      aiContextRoom: getAiContextRoom(selectedFolderStore),
       aiPresetContextRooms: aiPresetsStore.activePresetContextRooms,
       isAiProjectOpen: aiProjectsStore.activeProject !== null,
       aiActiveProject: aiProjectsStore.activeProject,

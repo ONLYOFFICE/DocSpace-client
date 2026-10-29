@@ -60,13 +60,13 @@ import type {
   TAiProjectKnowledgeRoom,
   TAiProjectRequest,
   TAiProjectSkillsRoom,
-  TAiProjectSource,
   TAiProjectsQuery,
 } from "@docspace/shared/api/ai/projects";
 import type { TOperation } from "@docspace/shared/api/files/types";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
 import type AiPresetsStore from "./AiPresetsStore";
+import { toAiPreset } from "./AiPresetsStore";
 
 export type TAiProjectsViewAs = "table" | "row" | "tile";
 export type TAiProjectsSortBy = NonNullable<TAiProjectsQuery["sortBy"]>;
@@ -515,20 +515,7 @@ class AiProjectsStore {
    * knowledge bases.
    */
   private syncPreset = (project: TAiProject) => {
-    const { profile, instructionsRooms, knowledgeRooms } = project.aiProject;
-    const toRooms = (rooms: TAiProjectSource[]) =>
-      rooms
-        .filter((room) => room.available)
-        .map((room) => ({ cloud: "docspace", id: String(room.id), name: room.title }));
-    this.aiPresetsStore.setActivePreset({
-      id: String(project.id),
-      name: project.title,
-      createdAt: project.created,
-      profileId: profile?.id ?? null,
-      profileName: profile?.name ?? null,
-      contextRooms: toRooms(instructionsRooms),
-      knowledgeRooms: toRooms(knowledgeRooms),
-    });
+    this.aiPresetsStore.setActivePreset(toAiPreset(project));
   };
 
   refreshActiveProject = async () => {

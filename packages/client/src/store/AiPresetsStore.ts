@@ -33,14 +33,25 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { makeAutoObservable, observable } from "mobx";
+import { makeAutoObservable, observable, runInAction } from "mobx";
 
 import type {
   AiChatPresetRoom,
   AiChatPresetSettings,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 
-/** A saved AI chat setup: the model, the skills rooms and the knowledge bases. */
+import {
+  createAiProject,
+  getAiProject,
+  getAiProjects,
+  type TAiProject,
+  type TAiProjectSource,
+} from "@docspace/shared/api/ai/projects";
+
+/**
+ * An AI project as the chat takes it: the model, its Instructions rooms as
+ * the skills (context) rooms and its Knowledge rooms as the knowledge bases.
+ */
 export type TAiPreset = AiChatPresetSettings & {
   id: string;
   name: string;
@@ -49,80 +60,41 @@ export type TAiPreset = AiChatPresetSettings & {
 
 export type { AiChatPresetRoom, AiChatPresetSettings };
 
-const STORAGE_PREFIX = "docspace_ai_presets";
+/** How many projects the chat's model picker offers, the most recent first. */
+const PICKER_PROJECTS_COUNT = 100;
 
-const storageKey = (userId: string) => `${STORAGE_PREFIX}_${userId}`;
+// A linked room the caller can no longer read is not connected.
+const toChatRooms = (rooms: TAiProjectSource[]): AiChatPresetRoom[] =>
+  rooms
+    .filter((room) => room.available && room.title)
+    .map((room) => ({ cloud: "docspace", id: String(room.id), name: room.title }));
 
-const isRoom = (value: unknown): value is AiChatPresetRoom =>
-  typeof value === "object" &&
-  value !== null &&
-  typeof (value as AiChatPresetRoom).id === "string" &&
-  typeof (value as AiChatPresetRoom).name === "string" &&
-  typeof (value as AiChatPresetRoom).cloud === "string";
-
-const isRoomList = (value: unknown): value is AiChatPresetRoom[] =>
-  Array.isArray(value) && value.every(isRoom);
-
-/**
- * A stored preset, in today's shape (room lists) or the first one (one
- * room of each kind, or `null`); anything else is dropped. The old shape
- * is read as lists of one, so a preset saved before survives the change.
- */
-const readPreset = (value: unknown): TAiPreset | null => {
-  if (typeof value !== "object" || value === null) return null;
-  const preset = value as Record<string, unknown>;
-  if (typeof preset.id !== "string" || typeof preset.name !== "string") {
-    return null;
-  }
-  const rooms = (list: unknown, single: unknown): AiChatPresetRoom[] | null => {
-    if (isRoomList(list)) return list;
-    if (list !== undefined) return null;
-    if (single === null || single === undefined) return [];
-    return isRoom(single) ? [single] : null;
-  };
-  const contextRooms = rooms(preset.contextRooms, preset.contextRoom);
-  const knowledgeRooms = rooms(preset.knowledgeRooms, preset.knowledgeRoom);
-  if (!contextRooms || !knowledgeRooms) return null;
+export const toAiPreset = (project: TAiProject): TAiPreset => {
+  const { profile, instructionsRooms, knowledgeRooms } = project.aiProject;
   return {
-    id: preset.id,
-    name: preset.name,
-    createdAt: typeof preset.createdAt === "string" ? preset.createdAt : "",
-    profileId: typeof preset.profileId === "string" ? preset.profileId : null,
-    profileName:
-      typeof preset.profileName === "string" ? preset.profileName : null,
-    contextRooms,
-    knowledgeRooms,
+    id: String(project.id),
+    name: project.title,
+    createdAt: project.created,
+    profileId: profile?.id ?? null,
+    profileName: profile?.name ?? null,
+    contextRooms: toChatRooms(instructionsRooms),
+    knowledgeRooms: toChatRooms(knowledgeRooms),
   };
 };
 
-const readPresets = (key: string): TAiPreset[] => {
-  try {
-    const raw = window.localStorage.getItem(key);
-    if (!raw) return [];
-    const parsed: unknown = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-    return parsed
-      .map(readPreset)
-      .filter((preset): preset is TAiPreset => preset !== null);
-  } catch {
-    return [];
-  }
-};
-
-const writePresets = (key: string, presets: TAiPreset[]) => {
-  try {
-    window.localStorage.setItem(key, JSON.stringify(presets));
-  } catch {
-    // Storage may be full or blocked (private mode): the in-memory list
-    // still serves the session, the next successful write catches up.
-  }
-};
+// The DocSpace room ids of a chat's rooms; rooms of another cloud are not
+// linked to a project.
+const toRoomIds = (rooms: AiChatPresetRoom[]) =>
+  rooms
+    .filter((room) => room.cloud === "docspace")
+    .map((room) => Number(room.id))
+    .filter((id) => Number.isInteger(id) && id > 0);
 
 /**
- * AI chat presets: named snapshots of the chat setup the user saves from the
- * panel header and reopens from the AI Presets page. Kept in localStorage,
- * one list per user, so a preset never follows another account in the same
- * browser.
+ * The AI projects in a chat outside the projects page: the model picker's
+ * "Choose AI Project" lists them (`ai/projects`), picking one carries its
+ * model, skills and knowledge bases into the open chat, and the panel
+ * header's save button creates a project from the chat's setup.
  */
 class AiPresetsStore {
   presets: TAiPreset[] = [];
@@ -133,19 +105,21 @@ class AiPresetsStore {
   pendingSettings: AiChatPresetSettings | null = null;
 
   /**
-   * The preset the open chat was started from. Its skills rooms are handed
-   * to the chat as the context rooms instead of the room the user stands in,
+   * The project the open chat runs on. Its Instructions rooms are handed to
+   * the chat as the context rooms instead of the room the user stands in,
    * until the panel closes.
    */
   activePreset: TAiPreset | null = null;
 
   /**
-   * A preset picked in the chat's model picker ("Choose AI Preset"), waiting
-   * for AiPresetsBridge to apply it to the open chat; `null` once applied.
-   * The store only records the request: applying needs the chat stores a
-   * MobX store cannot reach.
+   * A project picked in the chat's model picker, waiting for AiPresetsBridge
+   * to apply it to the open chat; `null` once applied. The store only
+   * records the request: applying needs the chat stores a MobX store cannot
+   * reach.
    */
   pendingApply: TAiPreset | null = null;
+
+  private requestId = 0;
 
   constructor() {
     makeAutoObservable(this, { pendingApply: observable.ref });
@@ -154,8 +128,27 @@ class AiPresetsStore {
   init = (userId: string | null) => {
     if (this.userId === userId) return;
     this.userId = userId;
-    this.presets = userId ? readPresets(storageKey(userId)) : [];
+    this.presets = [];
     this.activePreset = null;
+    if (userId) void this.fetchPresets();
+  };
+
+  /** Re-reads the projects the picker offers; a failed read keeps the last list. */
+  fetchPresets = async () => {
+    if (!this.userId) return;
+    const id = ++this.requestId;
+    try {
+      const page = await getAiProjects({
+        sortBy: "DateAndTime",
+        sortOrder: "descending",
+        count: PICKER_PROJECTS_COUNT,
+      });
+      runInAction(() => {
+        if (id === this.requestId) this.presets = page.folders.map(toAiPreset);
+      });
+    } catch {
+      // AI or the projects may be unavailable to the caller: no picker entry.
+    }
   };
 
   openSaveDialog = (settings: AiChatPresetSettings) => {
@@ -166,21 +159,30 @@ class AiPresetsStore {
     this.pendingSettings = null;
   };
 
-  savePreset = (name: string): TAiPreset | null => {
+  /**
+   * Creates an AI project from the chat's setup. Resolves to the new
+   * project, or `null` without a name or an open dialog; a refused create
+   * rejects and leaves the dialog open.
+   */
+  savePreset = async (name: string): Promise<{ preset: TAiPreset; project: TAiProject } | null> => {
     const settings = this.pendingSettings;
     const title = name.trim();
     if (!settings || !title) return null;
 
-    const preset: TAiPreset = {
-      ...settings,
-      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-      name: title,
-      createdAt: new Date().toISOString(),
-    };
-    this.presets = [...this.presets, preset];
-    this.pendingSettings = null;
-    if (this.userId) writePresets(storageKey(this.userId), this.presets);
-    return preset;
+    const project = await createAiProject({
+      title,
+      aiProject: {
+        profileId: settings.profileId,
+        instructionsRoomIds: toRoomIds(settings.contextRooms),
+        knowledgeRoomIds: toRoomIds(settings.knowledgeRooms),
+      },
+    });
+    const preset = toAiPreset(project);
+    runInAction(() => {
+      this.presets = [preset, ...this.presets.filter((p) => p.id !== preset.id)];
+      this.pendingSettings = null;
+    });
+    return { preset, project };
   };
 
   setActivePreset = (preset: TAiPreset | null) => {
@@ -188,25 +190,29 @@ class AiPresetsStore {
   };
 
   /**
-   * Changes the rooms of the project the open chat runs on, from the
-   * project view's sources column: the active project and its saved copy
-   * both take the change, so the project reopens the same way.
+   * A project picked in the model picker: read again, so the chat gets the
+   * project as it is now, then handed to the bridge. A project that is gone
+   * leaves the list and is not applied.
    */
-  updateActiveProject = (
-    patch: Partial<Pick<TAiPreset, "contextRooms" | "knowledgeRooms">>,
-  ) => {
-    const active = this.activePreset;
-    if (!active) return;
-    const next: TAiPreset = { ...active, ...patch };
-    this.activePreset = next;
-    this.presets = this.presets.map((preset) =>
-      preset.id === next.id ? next : preset,
-    );
-    if (this.userId) writePresets(storageKey(this.userId), this.presets);
-  };
-
-  requestApply = (preset: TAiPreset) => {
-    this.pendingApply = preset;
+  requestApply = async (preset: TAiPreset): Promise<boolean> => {
+    let fresh = preset;
+    try {
+      fresh = toAiPreset(await getAiProject(Number(preset.id)));
+    } catch (e) {
+      const status = (e as { response?: { status?: number } })?.response?.status;
+      if (status === 404 || status === 403) {
+        runInAction(() => {
+          this.presets = this.presets.filter((p) => p.id !== preset.id);
+        });
+        return false;
+      }
+      // Any other failure: the list's copy is applied.
+    }
+    runInAction(() => {
+      this.presets = this.presets.map((p) => (p.id === fresh.id ? fresh : p));
+      this.pendingApply = fresh;
+    });
+    return true;
   };
 
   consumePendingApply = (): TAiPreset | null => {
@@ -215,7 +221,7 @@ class AiPresetsStore {
     return preset;
   };
 
-  /** The active preset's skills rooms as the chat's context rooms; `null` outside a preset. */
+  /** The active project's Instructions rooms as the chat's context rooms; `null` outside a project. */
   get activePresetContextRooms(): { id: string; name: string }[] | null {
     const rooms = this.activePreset?.contextRooms;
     return rooms ? rooms.map((room) => ({ id: room.id, name: room.name })) : null;

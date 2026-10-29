@@ -38,7 +38,7 @@ import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import styles from "./Byok.module.scss";
 
 const ByokLoader = () => (
-  <div>
+  <div className={styles.loader}>
     <RectangleSkeleton
       className={styles.description}
       width="520px"

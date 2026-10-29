@@ -82,6 +82,49 @@ the component needs theme; heavy child components are stubbed with
 `vi.mock` returning a `<div data-testid=… />`. Fixtures live in co-located
 `mockData.ts`.
 
+## Dialog and keyboard tests
+
+The key-dialog tests (`packages/shared/dialogs/**/__tests__`, the client's
+`keys-management/modals/__tests__`) render the real kit and set the pattern
+for testing what a keyboard or screen-reader user meets:
+
+- **Role and accessible name.** Find controls the way assistive technology
+  does: `getByRole("dialog", { name: "Common:CreatePassphrase" })`,
+  `getByRole("button", { name: "Common:CancelButton" })`,
+  `getByLabelText("Common:CurrentPassphrase")` for a field with a visible
+  label. `t` echoes the key, so the name is the key. An error is checked on its field:
+  `aria-invalid`, and the text its `aria-describedby` ids resolve to.
+- **Focus with `userEvent.tab`.** `const user = userEvent.setup()`, then
+  `await user.tab()` or `user.tab({ shift: true })` and `toHaveFocus()` after
+  each step. On open, assert `toHaveFocus()` on the field or on
+  `getByRole("dialog")`. For the focus return, render a trigger button in a
+  small host component, open the dialog from it, close it and assert
+  `toHaveFocus()` on the trigger.
+- **Keys.** Press them with `user.keyboard("{Enter}")`, `"{Escape}"` or
+  `"{Shift>}{Enter}{/Shift}"` and assert on the submit spy. A key handler on
+  its own takes a fake event: a `preventDefault` spy shows that it took the
+  key, `defaultPrevented: true` that it leaves a handled key alone
+  (`dialogs/__tests__/key-dialog-keys.test.ts`).
+- **Dialog chrome.** The backdrop is `#modal-onMouseDown-close`
+  (`fireEvent.mouseDown`); the hidden announcement region is
+  `data-testid="key-dialog-announcement"`, read with `waitFor`. Narrow screens
+  set `window.innerWidth` and restore it after each test
+  (`key-dialogs.a11y.test.tsx`). A dialog with the passphrase strength tooltip
+  needs a `ResizeObserver` stub.
+
+jsdom gaps these tests work around:
+
+- A closed `ModalDialog` stays mounted and `aria-hidden`: find a nested dialog
+  (the unsaved-changes confirmation) among `screen.queryAllByRole("dialog")`
+  by its text, never by `queryByText` alone.
+- jsdom ignores `inert`, so a hidden dialog's buttons still take part in
+  `user.tab()`: assert that the focus left a dialog, not where it went.
+- `userEvent` sends no keys to a disabled element. To show that a handler's own
+  guard refuses a key, `fireEvent.keyDown` on the field.
+- That an async submit did not start cannot be shown by waiting: spy on its
+  first synchronous call instead (a partial mock returning
+  `vi.fn(actual.fn)`), so the assertion holds at once.
+
 ## Aliases available in test code
 
 client: `SRC_DIR`, `PUBLIC_DIR`, `ASSETS_DIR`, `COMMON_DIR`, `PACKAGE_FILE`,
@@ -97,6 +140,10 @@ cd packages/client && pnpm exec vitest run src/store/filesStore   # single path
 ```
 
 All three suites are part of the blocking lefthook pre-push gate.
+
+Vitest strips types without checking them: run `pnpm exec tsc --noEmit -p
+tsconfig.json` in the package before committing a test, or the pre-push
+`pnpm run tsc` finds the error later.
 
 ## Snapshots
 

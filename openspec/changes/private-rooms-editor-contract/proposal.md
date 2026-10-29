@@ -60,6 +60,21 @@ hidden.
   it only moves the form out of the room; role-based filling in a private
   virtual data room stays open until it is verified.
 - Let the SDK open encrypted files once the capability check passes.
+- Write the contract down as `contract-v1.md` in this change folder (draft
+  of 2026-10-29, from the add-on code of build 10.0.0.133, the server code
+  and the live run), with numbered obligations for the Document Server
+  (DS-1 to DS-16), the portal server (P-1 to P-8) and the client, so the
+  Document Server team can sign off item by item.
+- Stamp the crypto bundle (library version and source commit as a banner
+  and as exported constants), export the form-flag constant, and hand the
+  editor developers a 2.1.0 build with a corrected integration guide, the
+  contract and the browser test page (done 2026-10-29, sending pending).
+- Make the add-on fail closed with distinct errors when the library or
+  WebCrypto is missing or the container version is unknown, instead of
+  staying off silently.
+- Keep the client's PDF-form flag check a verbatim mirror of the server's
+  classifier (compared 2026-10-29), and state in the encryption-core spec
+  that the flag means what the server would decide from the plaintext.
 - Add the missing test coverage: an MSW `openedit` mock for an encrypted
   file, doceditor unit tests for the key path and the action policy, a client
   E2E that opens an encrypted file, the SDK editor E2E un-fixmed, and a
@@ -84,6 +99,9 @@ None.
   Document Server version" requirements are replaced by explicit action
   policies and a capability requirement; the SDK refusal becomes conditional
   on the capability.
+- `private-rooms/encryption-core`: "PDF form flag in the header" states the
+  rule the flag follows (the server's plaintext classifier applied to the
+  first 300 bytes) and its edge case.
 
 ## Impact
 
@@ -101,6 +119,8 @@ None.
   ships. Nothing in this
   change can be archived until that team confirms the contract and names the
   release that ships it.
+- Shared: the crypto bundle build (`packages/shared/services/encryption/{lib-entry,types,vite.lib.config}.ts`)
+  and `bundle-contract.test.ts`; the `build:crypto` script in `packages/client`.
 - Tests: `packages/shared/__mocks__/handlers/files/encryptedFiles.ts`,
   `packages/doceditor/__tests__`, `packages/client/__tests__`,
   `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`.
@@ -131,3 +151,11 @@ Confirmed by the feature owner on 2026-10-29, after the live run:
 3. Who signs off the Document Server contract document and where it lives
    (proposed: `openspec/specs/private-rooms/editor-integration/spec.md`
    Purpose plus a versioned section in the Document Server repository).
+   The draft now lives in `contract-v1.md` of this change folder.
+4. Whether the Document Server team adopts the recommended change-key
+   derivation and associated data (contract DS-12) in the first release or
+   later; the client needs no change either way.
+5. What the policy is if task 4.4 finds that inserted images reach the
+   Document Server or the portal in plaintext: block image insertion for
+   encrypted documents until fixed, or hold the release. Owner: feature
+   owner with the Document Server team.

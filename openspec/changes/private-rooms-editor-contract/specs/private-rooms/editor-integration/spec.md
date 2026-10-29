@@ -21,6 +21,50 @@ The client SHALL rely on a written, versioned contract with the Document Server 
 - **WHEN** an encrypted document is opened, edited and saved in the editor
 - **THEN** neither the DEK nor the document's plaintext MUST be sent to the Document Server or to the portal
 
+#### Scenario: Library build identified
+- **WHEN** the crypto library the Document Server ships is read
+- **THEN** its first line and its exported constants name the library version and the source commit, and the contract names that library version as the minimum
+
+### Requirement: Editor fails closed without the crypto library
+When the editor configuration carries a DEK and the Document Server's web client cannot decrypt (its crypto library is missing or the page is not a secure context), the editor SHALL report an error and SHALL NOT open the bytes as a document or stay silently without encryption.
+
+#### Scenario: Library missing in the frame
+- **WHEN** an encrypted file is opened and the editor frame has no crypto library or no WebCrypto
+- **THEN** the editor shows an error, no document is rendered and no save is possible
+
+### Requirement: Distinct errors for undecryptable containers
+The editor SHALL report a distinct error when the container cannot be decrypted with the given DEK, fails authentication, or carries a container version the shipped library does not read, so the user and the logs can tell a wrong key from an unsupported format.
+
+#### Scenario: Unsupported container version
+- **WHEN** the editor opens a container whose version the shipped library does not read
+- **THEN** an error naming the unsupported version is reported and nothing is rendered
+
+#### Scenario: Wrong key or tampered container
+- **WHEN** decryption or authentication of the container fails
+- **THEN** an error naming the decryption failure is reported and nothing is rendered
+
+### Requirement: Change encryption format
+Every co-editing change of an encrypted document SHALL leave the browser as the marker `ENCRYPTED;` followed by base64 of a random 12-byte IV and the AES-256-GCM ciphertext, under the file's DEK, of the marker `DECRYPTED;` plus the change; a received change whose decryption or marker check fails SHALL be rejected rather than applied.
+
+#### Scenario: Change relayed
+- **WHEN** a co-editor's change reaches the Document Server
+- **THEN** it carries the `ENCRYPTED;` marker and the typed text MUST NOT be recoverable without the DEK
+
+#### Scenario: Corrupted change
+- **WHEN** a received change does not decrypt to the `DECRYPTED;` marker
+- **THEN** the editor rejects the batch and reports a changes error instead of applying it
+
+### Requirement: Editors covered
+Encrypted editing SHALL cover documents, spreadsheets, presentations and PDF (including PDF forms) through the same key hand-off, since the Document Server ships the crypto add-on in each editor bundle.
+
+#### Scenario: Spreadsheet in a private room
+- **WHEN** a member opens an encrypted spreadsheet from a private room
+- **THEN** it is decrypted in the browser, edited, saved encrypted and reopened like a document
+
+#### Scenario: Presentation in a private room
+- **WHEN** a member opens an encrypted presentation from a private room
+- **THEN** it is decrypted in the browser, edited, saved encrypted and reopened like a document
+
 ### Requirement: Document Server capability check before opening
 The client SHALL learn from the server whether the connected Document Server declares encrypted-editing support, and SHALL NOT mount the editor for an encrypted file when the capability is absent. The user SHALL see Common:PrivateRoomEditorNotSupported instead of the editor.
 

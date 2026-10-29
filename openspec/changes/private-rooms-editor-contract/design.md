@@ -88,6 +88,10 @@ not contain this code.
   not used by the editor), ff9f51aeffb (2026-09-01, the DSE3 form flag) and
   9f73ecc9094 (2026-10-23, an error class the client alone uses). The bundle
   carries no version stamp; it was identified by comparison with the history.
+  A bundle built from the current source on 2026-10-29 differs from the copy
+  by 51 lines, all from those three commits. Until 2.1.0 the
+  `DSE3_FLAG_IS_FORM` constant was not exported from the bundle entry,
+  although `parseDSE3Header` already reported `isForm`.
 - **Open.** The editor frame downloads `document.url` itself
   (`filehandler.ashx?action=stream`, with `stream_auth` and `origin`) and
   decrypts it in the browser; the file name comes from the container header.
@@ -148,6 +152,56 @@ not contain this code.
   the editor frame, and `sdkjs/common/crypto/onlyoffice-crypto.js` under the
   Document Server address, which answers 200 with and without the build hash.
 
+### Read in the add-on code, 2026-10-29
+
+The crypto add-on of build 10.0.0.133, read in `sdkjs/word/sdk-all-min.js`
+(the same code sits in the `cell` and `slide` bundles; `sdkjs/pdf/sdk-all-min.js`
+answers 404 and the PDF paths load `pdf/src/engine/drawingfile.js` on demand).
+Minified names are left out; the behaviour is what the contract
+(`contract-v1.md`) is written against.
+
+- **Entry.** The core hands the encryption keys entry to one function. With
+  `AscDesktopEditor` present and `dek` undefined it creates the desktop engine
+  and sends `portal:cryptoinfo` with the whole entry; otherwise it creates the
+  web engine, which starts only when `dek` is defined and, after the editor is
+  ready, only when `window.OnlyofficeCrypto` and `crypto.subtle` exist. It
+  then imports `dek` (base64) as a non-extractable AES-GCM key, sets the crypto
+  mode to 1 and switches the collaborative-editing layer to encrypted changes.
+  Nothing else in the entry is read. Without the library or WebCrypto nothing
+  happens and no error is raised.
+- **Open.** The engine fetches the document address itself. Bytes with a
+  plaintext signature (ZIP, `DOCY`, `XLSY`, `PPTY`, `VSDY`, `%PDF`, `AT&T`, or
+  the core's own detectors) are passed through undecrypted; otherwise
+  `isDSE3Format` decides, `decryptFile(bytes, dek)` returns the data and the
+  name, the name is published as the document name, and the decrypted bytes are
+  kept for the save path. A rejected promise answers `null`, which the core
+  reports as an open error. A decrypted PDF whose first 4096 bytes carry
+  `/ONLYOFFICEFORM [ <len> <size> ]` followed by `stream\r\n` has its
+  embedded form source extracted and is opened as a form.
+- **Save.** `buildCryptoFile_Start` takes the package the core built (for a
+  form or a PDF in the viewer, a PDF built in the browser with `BuildPdf`),
+  replaces every `media/*` entry with its plaintext bytes (from the image
+  cache, or decrypted when stored as an `ENCRYPTED;` string or a DSE3 blob),
+  calls `encryptFile(bytes, { dek, fileName })` with the document name, and
+  uploads the result through the core's save upload; a failed upload raises
+  the core's save error. `isForm` is not passed.
+- **Changes.** `encryptData` maps each change to `"ENCRYPTED;"` plus base64 of
+  a random 12-byte IV and the AES-GCM ciphertext of `"DECRYPTED;"` plus the
+  change, keeping outer quotes outside; `decryptData` reverses it and marks
+  the batch failed when the prefix is missing or decryption throws. No
+  associated data is used and the key is the file's DEK.
+- **Download-as.** PDF and PDF/A are built in the browser and saved to the
+  device; docx, docm, dotx, xlsx, xlsm, xltx, pptx, pptm, potx, ppsx and vsdx
+  take the package built in the browser to the device; any other target
+  returns to the core's generic path.
+- **Images.** Pasted or chosen images become `cryptoimg://<n>.<ext>` entries
+  with their bytes kept in memory; an image address fetched for display is
+  decrypted when it starts with `ENCRYPTED;`. Whether an inserted image reaches
+  the Document Server's media store in plaintext is not visible in the add-on
+  and was not exercised in the run.
+- **Capability.** `Asc.Addons.crypto` is set to true when the add-on is
+  bundled; the engine's "has crypto" check is `!!window.OnlyofficeCrypto`.
+
 ### Server form handling, read on 2026-10-29
 
 Read through CodeGraph in `../server/products/ASC.Files` (files changed after
@@ -183,6 +237,27 @@ the last index were read on disk):
   (`DocumentServiceHelper.cs:644-646`).
 - A plain save of a form follows the regular save path and keeps the
   encrypted flag (`DocumentServiceTracker.cs:229-262`, `EntryManager.cs:1588-1591`).
+- **Form classification.** `FileChecker.CheckExtendedPDFstream`
+  (`Core/Utils/FileChecker.cs:57-71`) reads the first 300 bytes: a DSE3 magic
+  answers from bit `0x02` of byte 6; otherwise `IsExtendedPDFFile`
+  (`:96-143`) requires the PDF binary comment `%\xCD\xCA\xD2\xA9\r`,
+  then exactly `1 0 obj\n<<\n`, then the configured signature
+  (`files:oform:signature`, `OFormSettings.Signature`,
+  `Core/Services/OFormService/OFormSettings.cs`; `ONLYOFFICEFORM` in buildtools
+  `config/appsettings.json`) before `stream\r\n`, followed by ` [ ` and two
+  space-terminated numbers. `FileDao.SaveFileAsync`
+  (`Core/Core/Dao/TeamlabDao/FileDao.cs`) runs it for a `.pdf` title only while
+  the file's category is still unset and then sets the PdfForm category, so a
+  classified form keeps the category across versions whatever a later header
+  says; `FileUploader.UploadChunkAsync` (`Core/Utils/FileUploader.cs`) runs it
+  on the first chunk. The client mirror `pdf-form-signature.ts`
+  (`sniffPdfFormBlob`, used by `encrypted-upload.ts` for `.pdf` uploads) is a
+  verbatim port with the signature hardcoded; compared on 2026-10-29 at the
+  user's request, the two agree on window, markers and order. The Document
+  Server add-on is looser (the marker anywhere in 4096 bytes, no first-object
+  prefix), so a PDF it treats as a form may be flagged by neither the server
+  nor the client; the editor's own forms satisfy all three (observed: flags
+  `0x03`).
 
 ### Server: document key, document address and session
 
@@ -231,6 +306,27 @@ on release/v4.1.0 (files changed after the last index were read on disk):
   holds a session for a key, as a yes or no), `drop` and `meta`, and never
   `forcesave` (`Core/Helpers/DocumentService.cs:698-707`,
   `DocumentServiceConnector.cs:95-135`, `DocumentServiceHelper.cs:499-561`).
+
+### Hand-over package of 2026-10-29
+
+Prepared for the editor developers (task 1.3) in `enc-2.1.0` next to the
+folder of the 2026-07-01 hand-over, outside the repository:
+
+- `onlyoffice-crypto.js`, library 2.1.0, built from commit b0a476bd858c with
+  `pnpm run build:crypto`; banner `/*! onlyoffice-crypto 2.1.0 b0a476bd858c */`,
+  224861 bytes, SHA-256
+  `fdeabffff6fc373b85fd5b0e847831536c1bf8b0202da9fd3714d24f1bb9a9d2`.
+- `test-bundle.html`, the browser test page of the 2026-07-01 hand-over
+  updated for 2.1.0 (stamp, form flag, error classes). It lives in the
+  hand-over package only; `bundle-contract.test.ts` is the repository's check
+  of the same surface.
+- `contract-v1.md`, the draft contract of this change folder.
+- `integration-guide.md` (v3) and `CHANGELOG.md` in the editor team's
+  language, written from `contract-v1.md`: the editor consumes the DEK only,
+  the three corrections to the v2 guide, the form flag on save, the build
+  stamp, and the obligations DS-1 to DS-16.
+
+Sent: pending (task 1.5).
 
 ## Goals / Non-Goals
 
@@ -359,6 +455,51 @@ on release/v4.1.0 (files changed after the last index were read on disk):
     file whose current version is encrypted when the callback carries no
     encrypted flag, and keeps the previous version.
 
+11. **The bundle carries a build stamp and a library version.** Implemented
+    2026-10-29 (task 1.4): `LIBRARY_VERSION` (2.1.0, a constant next to the
+    other version constants) and `BUILD_COMMIT` (the short hash, `-dirty`
+    from a modified tree, defined by the bundle build) are exported, and the
+    same two values are the first line of the file, so a deployed copy is
+    identified by reading one line. The unstamped build of 2026-07-01 is
+    2.0.0; the library version moves independently of the DocSpace release.
+    Alternatives: a hash list in the contract, which needs the file and a
+    tool; a richer build-info object, dropped as more than the contract
+    needs.
+
+12. **The add-on fails closed and names its errors.** When `dek` is present
+    but the library or WebCrypto is missing, or the container version is
+    unsupported, the Document Server reports a distinct error (contract
+    DS-5, DS-6) instead of staying off or reporting the generic open error.
+    The client's capability check (D2) covers the portal side of the same
+    gap; both are needed, because the capability can be wrong about the
+    frame the user actually loaded.
+
+13. **Change encryption as observed is accepted for v1.** Each change is
+    AES-GCM under the file's DEK with a random 96-bit IV and no associated
+    data (contract §6). The expected message count per document stays far
+    below the random-IV bound, and the Document Server holds only
+    ciphertext. The contract records a recommendation (DS-12): derive the
+    change key from the DEK per document key and bind the document key as
+    associated data, so a change cannot be replayed into another session of
+    the same file. Owner: the Document Server team; not a release
+    prerequisite.
+
+14. **Secure contexts are a deployment rule, not a code check.** The add-on
+    needs `crypto.subtle`, so the Document Server origin must be HTTPS or
+    localhost, like the portal (`private-rooms/encryption-core`, "Secure
+    context required"). The capability check of D2 does not detect an
+    insecure Document Server origin; D12 makes the frame report it.
+
+15. **The client's form-flag check stays a verbatim mirror of the server
+    rule.** Compared on 2026-10-29 ("Server form handling", "Form
+    classification"): same 300-byte window, same markers, same order, the
+    signature hardcoded to the server's configured default. The mirror is
+    kept rather than replaced by the Document Server's looser rule, because
+    the server is the classifier of record for every plaintext upload and the
+    flag must mean "the server would have said form". A change of the
+    server's signature setting would silently desynchronise the two; the
+    risk is recorded below.
+
 ## Risks / Trade-offs
 
 - [Document Server does not implement the contract on the planned release
@@ -394,6 +535,17 @@ on release/v4.1.0 (files changed after the last index were read on disk):
   `isForm` in the run, so the form stays a form in the portal meanwhile.
 - [Withholding actions confuses users] → menu items are absent, not greyed;
   the room header shows the private badge.
+
+- [Changes encrypted under the file DEK with random IVs and no associated
+  data] → accepted for v1 (D13); the recommendation DS-12 is with the Document
+  Server team.
+- [Client form-flag mirror drifts from the server rule or from the configured
+  signature] → the server rule has no unit test and the client test uses a
+  synthetic prefix; task 5.7 adds a fixture produced by the editor to the
+  client test, and the signature setting is named in the contract (§5.3).
+- [Inserted images or other media leave the browser in plaintext] → not
+  exercised; task 4.4 verifies it before release, and the contract requires
+  that they do not (DS-13).
 
 ## Migration Plan
 
@@ -442,3 +594,21 @@ on release/v4.1.0 (files changed after the last index were read on disk):
   the Document Server send (status 1 with no users, status 4, or none), and
   when does it drop the session? The portal's tracker and D7 depend on it.
   Task 6.5 records it on the local stack; the Document Server team confirms.
+- Spreadsheets and presentations: the add-on is present in their bundles,
+  but the run of 2026-10-29 covered a document and a PDF form only. Task 4.3
+  runs open, save, reopen and co-editing for XLSX and PPTX.
+- Inserted images: do `cryptoimg://` images reach the Document Server's media
+  store or the portal in plaintext when a document is saved or co-edited?
+  Task 4.4; owner: Document Server team for the answer, this change for the
+  recorded run.
+- View-only members: a member with read rights opens the editor in view mode
+  with the same key path; whether the add-on decrypts in the viewer and
+  withholds the save path is unverified. Part of task 4.3.
+- Member removal and live sessions: the portal drops users who lost their
+  rights on a file when its sharing changes
+  (`DocumentServiceHelper.CheckUsersForDropAsync`, two callers in
+  `Core/Utils/FileSharing.cs`); whether a private-room member removal reaches
+  that path for every open file of the room, and what the removed member's
+  editor shows, is verified by task 4.5.
+- DS-12 (per-document change key and associated data): accepted or declined
+  by the Document Server team; task 1.2 records the answer.

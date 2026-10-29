@@ -128,6 +128,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
       sessionStorage.removeItem("referenceUrl");
       sessionStorage.removeItem("loggedOutUserId");
+      // Read by the 401 handler, which has no user of its own to name.
+      sessionStorage.setItem("sessionUserId", user.id);
     }
 
     const isAccountsPage = location.pathname.includes("/accounts");

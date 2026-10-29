@@ -118,7 +118,9 @@ const LoginForm = ({
   const passwordChanged = searchParams?.get("passwordChanged");
 
   // An OAuth consent or a public-room popup has its own way out of the form.
-  useReturnWhenLoggedInElsewhere(!clientId && !isPublicAuth);
+  // Off while the form logs in: it takes the user on itself, and a check
+  // answering in the meantime would send them to the root instead.
+  useReturnWhenLoggedInElsewhere(!clientId && !isPublicAuth && !isLoading);
 
   const isDesktop =
     typeof window !== "undefined" && window.AscDesktopEditor !== undefined;

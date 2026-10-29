@@ -145,6 +145,14 @@ describe("PrivateRoute returning a tab to where it was before the login", () => 
     expect(location.assigned).toEqual([]);
   });
 
+  // The 401 handler knows no user; it names the one this tab last showed, so
+  // a page left by a session that ran out is reopened only for that user.
+  it("remembers which user the tab is showing", () => {
+    renderAtRoot();
+
+    expect(sessionStorage.getItem("sessionUserId")).toBe(self.id);
+  });
+
   it("follows the address only once", () => {
     sessionStorage.setItem("referenceUrl", ROOM);
     sessionStorage.setItem("loggedOutUserId", self.id);

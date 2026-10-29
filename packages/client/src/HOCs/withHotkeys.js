@@ -43,6 +43,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { getHotkeyLetter } from "@docspace/shared/utils/getHotkeyLetter";
 import { copySelectedText } from "@docspace/shared/utils/copy";
+import { isContextMenuOpen, isKeyOwnedByFocus } from "SRC_DIR/helpers/hotkeys";
 
 const suppressKeyRepeat = (code) => {
   const onRepeat = (e) => {
@@ -137,8 +138,9 @@ const withHotkeys = (Component) => {
     const hotkeysFilter = {
       filter: (ev) =>
         !checkDialogsOpen() &&
-        !document.getElementsByClassName("p-contextmenu").length &&
-        (ev.target?.type === "checkbox" || ev.target?.tagName !== "INPUT"),
+        !isContextMenuOpen() &&
+        (ev.target?.type === "checkbox" || ev.target?.tagName !== "INPUT") &&
+        !isKeyOwnedByFocus(ev),
       filterPreventDefault: false,
       enableOnTags: ["INPUT"],
       enabled: enabledHotkeys && !mediaViewerIsVisible && !filesIsLoading,

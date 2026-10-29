@@ -113,6 +113,32 @@ describe("AxiosClient error redirects", () => {
     );
   });
 
+  // Whoever logs in next in this tab is sent back to the page only if it is
+  // the same user; an unnamed page would be opened for anyone.
+  it("names the user whose session ran out", async () => {
+    sessionStorage.removeItem("loggedOutUserId");
+    sessionStorage.setItem("sessionUserId", "self-id");
+    location.pathname = "/rooms/shared/12/filter";
+    const client = createFailingClient(401);
+
+    await client.request({ method: "get", url: "/files/12" });
+    await flushPending();
+
+    expect(sessionStorage.getItem("loggedOutUserId")).toBe("self-id");
+  });
+
+  it("names no one when the tab never learned its user", async () => {
+    sessionStorage.removeItem("loggedOutUserId");
+    sessionStorage.removeItem("sessionUserId");
+    location.pathname = "/rooms/shared/12/filter";
+    const client = createFailingClient(401);
+
+    await client.request({ method: "get", url: "/files/12" });
+    await flushPending();
+
+    expect(sessionStorage.getItem("loggedOutUserId")).toBeNull();
+  });
+
   it("does not remember the login page itself", async () => {
     sessionStorage.removeItem("referenceUrl");
     location.pathname = "/login";

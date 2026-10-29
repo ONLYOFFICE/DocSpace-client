@@ -110,6 +110,11 @@
   cursor: pointer;
   outline: 0;
 
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: -2px;
+  }
+
   padding: 16px;
   width: 100%;
   box-sizing: border-box;

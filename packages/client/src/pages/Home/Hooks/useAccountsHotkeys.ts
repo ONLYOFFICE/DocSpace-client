@@ -39,6 +39,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { getHotkeyLetter } from "@docspace/shared/utils/getHotkeyLetter";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 import { copySelectedText } from "@docspace/shared/utils/copy";
+import { isContextMenuOpen, isKeyOwnedByFocus } from "SRC_DIR/helpers/hotkeys";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
@@ -90,7 +91,9 @@ const useAccountsHotkeys = ({
       const eElement = ev.target as HTMLElement;
       const eInputElement = ev.target as HTMLInputElement;
       return (
-        eInputElement?.type === "checkbox" || eElement?.tagName !== "INPUT"
+        (eInputElement?.type === "checkbox" || eElement?.tagName !== "INPUT") &&
+        !isContextMenuOpen() &&
+        !isKeyOwnedByFocus(ev)
       );
     },
     filterPreventDefault: false,

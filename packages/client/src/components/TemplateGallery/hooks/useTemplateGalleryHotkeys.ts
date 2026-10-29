@@ -35,6 +35,7 @@
 
 import { useState, useCallback, useEffect, useRef } from "react";
 import { getHotkeyLetter } from "@docspace/shared/utils/getHotkeyLetter";
+import { isKeyOwnedByFocus } from "SRC_DIR/helpers/hotkeys";
 
 interface UseTemplateGalleryHotkeysProps {
   itemsCount: number;
@@ -184,6 +185,9 @@ const useTemplateGalleryHotkeys = ({
       if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
         return;
       }
+      // The tabs, the buttons and the menus of the gallery keep their own
+      // keys: this listener runs first (capture) and used to swallow them.
+      if (isKeyOwnedByFocus(e)) return;
 
       const currentIndex = pendingIndexRef.current ?? focusedIndexRef.current;
       const isFocusedValid = currentIndex >= 0 && currentIndex < itemsCount;

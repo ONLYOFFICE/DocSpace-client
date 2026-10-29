@@ -77,9 +77,12 @@ const ManualBackupWrapper = ({
     setDocumentTitle(t("Common:DataBackup"));
   }, [setDocumentTitle, t]);
 
+  // The apps decide which folders the room selector offers; an unpaid portal
+  // can only download a backup, so it never opens that selector.
   useEffect(() => {
+    if (isNotPaidPeriod) return;
     ensureAppsLoaded();
-  }, [ensureAppsLoaded]);
+  }, [ensureAppsLoaded, isNotPaidPeriod]);
 
   useEffect(() => {
     if (isNotPaidPeriod) return setIsEmptyContentBeforeLoader(false);

@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { KeyboardEventHandler, MouseEventHandler } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
@@ -47,6 +48,7 @@ import { RoomLogo } from "@onlyoffice/apps-ui-kit/components/room-logo";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 
 import {
   getRoomTypeDescriptionTranslation,
@@ -95,6 +97,34 @@ const RoomType = ({
     (isFormRoom && disabledFormRoom) ||
     (isPublicRoomType && disabledPublicRoom);
 
+  // `listItem` and `dropdownItem` render the disabled state, so they also
+  // refuse the click. Styling alone left the handler live.
+  const handleClick: MouseEventHandler<HTMLElement> = (e) => {
+    if (disabled) return;
+    onClick?.(e);
+  };
+
+  // The interactive layouts are buttons: Enter and Space click them, so the
+  // handler still receives the mouse event it is typed for. The key's keyup
+  // is consumed too: the click moves focus on (choosing a type focuses the
+  // room name, whose Enter keyup creates the room), and the same press must
+  // not act there as well.
+  const handleKeyDown: KeyboardEventHandler<HTMLElement> = (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    if (e.target !== e.currentTarget) return;
+    e.preventDefault();
+    // A disabled type does nothing, so it must not take the next keyup either.
+    if (disabled) return;
+    consumeKey(e);
+    e.currentTarget.click();
+  };
+
+  const buttonProps = {
+    role: "button",
+    tabIndex: 0,
+    onKeyDown: handleKeyDown,
+  } as const;
+
   const arrowClassName =
     type === "dropdownButton"
       ? "choose_room-forward_btn dropdown-button"
@@ -135,7 +165,10 @@ const RoomType = ({
         className={arrowClassName}
         iconName={ArrowReactSvgUrl}
         size={16}
-        onClick={onClick}
+        // No onClick: the arrow sits inside the root, which already handles
+        // the click. Passing the handler here too made one click call it
+        // twice. isClickable keeps the pointer cursor the handler used to set.
+        isClickable={!disabled}
       />
     </>
   );
@@ -149,7 +182,9 @@ const RoomType = ({
       })}
       id={id}
       title={disabled ? "" : room.title}
-      onClick={onClick}
+      onClick={handleClick}
+      {...buttonProps}
+      aria-disabled={disabled || undefined}
       data-tooltip-id={disabled ? "create-room-tooltip" : undefined}
       data-testid="room-type-list-item"
       data-selected-id={selectedId}
@@ -162,6 +197,8 @@ const RoomType = ({
       id={id}
       title={room.title}
       onClick={onClick}
+      {...buttonProps}
+      aria-expanded={isOpen}
       className={classNames(styles.roomType, styles.dropDownButton, {
         [styles.isOpen]: isOpen,
       })}
@@ -174,8 +211,10 @@ const RoomType = ({
     <TooltipContainer
       as="div"
       id={id}
-      title={room.title}
-      onClick={onClick}
+      title={disabled ? "" : room.title}
+      onClick={handleClick}
+      {...buttonProps}
+      aria-disabled={disabled || undefined}
       data-selected-id={selectedId}
       className={classNames(styles.roomType, styles.dropDownItem, {
         [styles.isOpen]: isOpen,

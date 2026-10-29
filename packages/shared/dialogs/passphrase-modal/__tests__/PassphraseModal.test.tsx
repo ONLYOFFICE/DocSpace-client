@@ -291,6 +291,12 @@ describe("PassphraseModal", () => {
     expect(getAnnouncement()).toHaveTextContent("");
   });
 
+  it("Prompt opened", () => {
+    renderModal();
+
+    expect(getPassphraseInput()).toHaveFocus();
+  });
+
   it("Forward through the creation dialog", async () => {
     const user = userEvent.setup();
     renderModal({ isNew: true });

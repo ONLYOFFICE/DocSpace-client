@@ -62,6 +62,13 @@ const renderDialog = () => {
 };
 
 describe("KeyChangeDialog", () => {
+  it("Key-change dialog opened", () => {
+    renderDialog();
+
+    expect(screen.getByRole("dialog")).toHaveFocus();
+    expect(document.activeElement?.tagName).not.toBe("BUTTON");
+  });
+
   // Spec: private-rooms/key-management, "Key dialogs ignore a click beside them"
   it("Backdrop click on the key-change dialog", () => {
     const { onAccept, onRefuse } = renderDialog();

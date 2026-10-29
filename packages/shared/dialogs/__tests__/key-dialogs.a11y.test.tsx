@@ -103,6 +103,15 @@ describe("key dialogs", () => {
       ).not.toBeNull();
     });
 
+    it(`Opened as an aside panel: the ${dialog.name} dialog takes the focus`, () => {
+      setWidth(375);
+      const { baseElement } = render(dialog.element());
+      const panel = baseElement.querySelector<HTMLElement>(
+        "[class*='displayTypeAside']",
+      );
+      expect(panel).toContainElement(document.activeElement as HTMLElement);
+    });
+
     it(`Wide screen: the ${dialog.name} dialog stays a centred modal`, () => {
       setWidth(1440);
       const { baseElement } = render(dialog.element());

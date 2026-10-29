@@ -23,7 +23,7 @@
 ## 4. Focus and Tab order
 
 - [x] 4.1 Remove the hand-assigned `tabIndex` values from `PassphraseModal` and check the markup order of fields, links, checkbox and actions; verify with tests "Forward through the creation dialog", "Backwards from the primary action", "No trap" in `PassphraseModal.test.tsx` using `userEvent.tab()` and `toHaveFocus()`
-- [ ] 4.2 Pin focus on open; verify with tests "Prompt opened" in `PassphraseModal.test.tsx`, "Key-change dialog opened" in `KeyChangeDialog.test.tsx` and "Opened as an aside panel" in `key-dialogs.a11y.test.tsx` (narrow-width helper, `document.activeElement` inside the panel)
+- [x] 4.2 Pin focus on open; verify with tests "Prompt opened" in `PassphraseModal.test.tsx`, "Key-change dialog opened" in `KeyChangeDialog.test.tsx` and "Opened as an aside panel" in `key-dialogs.a11y.test.tsx` (narrow-width helper, `document.activeElement` inside the panel)
 - [ ] 4.3 Pin focus return (needs 1.3); verify with tests "Unlock completed" in `PassphraseModal.test.tsx` and "Generation cancelled from the keyboard" in `packages/shared/dialogs/key-generation/__tests__/useGenerateKeyFlow.test.tsx`, each rendering a trigger button and asserting `toHaveFocus()` on it after the dialog closes
 
 ## 5. Enter from text fields and busy state

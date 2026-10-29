@@ -53,6 +53,10 @@ type Props = {
 
 	withRetryVectorization?: boolean;
 	onRetryVectorization?: () => void;
+	/** The tooltip's heading and text; the file's "preparation failed" ones when unset. */
+	title?: string;
+	info?: string;
+	dataTestId?: string;
 };
 
 export const FailedVectorizationBadge = ({
@@ -60,6 +64,9 @@ export const FailedVectorizationBadge = ({
 	onRetryVectorization,
 	className,
 	withRetryVectorization,
+	title,
+	info,
+	dataTestId = "failed-vectorization-badge",
 }: Props) => {
 	const { t } = useTranslation("Common");
 	const tooltipId = useId();
@@ -71,10 +78,10 @@ export const FailedVectorizationBadge = ({
 		return (
 			<div>
 				<Text fontWeight={600} fontSize="12px" lineHeight="16px">
-					{t("Common:PreparationForAIFailed")}
+					{title ?? t("Common:PreparationForAIFailed")}
 				</Text>
 				<Text fontSize="12px" lineHeight="16px">
-					{t("Common:PreparationForAIFailedInfo")}
+					{info ?? t("Common:PreparationForAIFailedInfo")}
 				</Text>
 				{withRetryVectorization ? (
 					<Link
@@ -98,7 +105,7 @@ export const FailedVectorizationBadge = ({
 					[styles.small]: size === "small",
 					[styles.medium]: size === "medium",
 				})}
-				dataTestId="failed-vectorization-badge"
+				dataTestId={dataTestId}
 			/>
 			<Tooltip
 				id={tooltipId}

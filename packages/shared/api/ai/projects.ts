@@ -35,7 +35,7 @@
 
 import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 
-import { MembersSubjectType, RoomSecurityError } from "../../enums";
+import { MembersSubjectType, RoomSecurityError, VectorizationStatus } from "../../enums";
 import { request } from "../client";
 import type { TFileLink, TOperation } from "../files/types";
 import type { TFeed, TGetRoomMembers } from "../rooms/types";
@@ -101,6 +101,8 @@ export type TAiProjectSource = {
   skillsCount?: number;
   indexedFiles?: number;
   totalFiles?: number;
+  /** Knowledge: files whose vectorization failed. */
+  failedFiles?: number;
 };
 
 /** A room logo: its colour (with `#`) and the built-in cover drawn in it, or uploaded sizes. */
@@ -180,10 +182,22 @@ export type TAiProjectSettingsRequest = {
   knowledgeRoomIds?: number[];
 };
 
+/** An uploaded logo: the temporary file `files/logos` answered and the crop, as a room takes it. */
+export type TAiProjectLogoUpload = {
+  tmpFile: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
 export type TAiProjectRequest = {
   title?: string;
-  /** `color` with or without `#`, and the id of a built-in cover, "" for the initials. */
-  logo?: { color?: string; cover?: string };
+  /**
+   * `color` with or without `#`, the id of a built-in cover ("" for the
+   * initials), and `image` for an uploaded picture, sent as the room's `logo`.
+   */
+  logo?: { color?: string; cover?: string; image?: TAiProjectLogoUpload };
   aiProject?: TAiProjectSettingsRequest;
 };
 
@@ -213,11 +227,17 @@ export type TAiProjectKnowledgeFile = {
   title: string;
   fileExst: string;
   indexed: boolean;
+  /** `VectorizationStatus` of the file; `null` when it was never queued. */
+  vectorizationStatus?: VectorizationStatus | null;
+  /** `Vectorization`: the caller may queue the file again after a failure. */
+  security?: { Vectorization: boolean };
 };
 
 export type TAiProjectKnowledgeRoom = TAiProjectLinkedRoom & {
   totalFiles: number;
   indexedFiles: number;
+  /** Files whose vectorization failed. */
+  failedFiles?: number;
   /** The room holds more files than one listing reads. */
   truncated: boolean;
   files: TAiProjectKnowledgeFile[];
@@ -233,10 +253,8 @@ export type TAiProjectsQuery = {
   hasKnowledge?: boolean;
   /** Keeps the projects this user owns. */
   subjectId?: string;
-  /** Keeps the projects that link this room as an Instructions room. */
-  instructionsRoomId?: number;
-  /** Keeps the projects that link this room as a Knowledge room. */
-  knowledgeRoomId?: number;
+  /** Keeps the projects that link this room, as an Instructions or a Knowledge room. */
+  linkedRoomId?: number;
   startIndex?: number;
   count?: number;
 };
@@ -359,6 +377,7 @@ const toRoomFields = ({ title, logo, aiProject }: TAiProjectRequest) => {
   if (title !== undefined) body.title = title;
   if (logo?.color !== undefined) body.color = logo.color.replace("#", "");
   if (logo?.cover !== undefined) body.cover = logo.cover;
+  if (logo?.image !== undefined) body.logo = logo.image;
   if (aiProject !== undefined) body.aiProject = aiProject;
   return body;
 };
@@ -379,6 +398,12 @@ export const getAiProjects = async (
     res && typeof res === "object" && "items" in res ? (res as { items: unknown }).items : res
   ) as Omit<TAiProjectsPage, "folders"> & { folders: TRoomFolder[] };
   return { ...page, folders: page.folders.map(toAiProject) } as TAiProjectsPage;
+};
+
+/** Drops the project's uploaded logo; it is drawn by its colour and cover again. */
+export const deleteAiProjectLogo = async (id: number) => {
+  const res = await request({ method: "DELETE", url: `${baseUrl}/${id}/logo` });
+  return toAiProject(res as TRoomFolder);
 };
 
 export const getAiProject = async (id: number) => {

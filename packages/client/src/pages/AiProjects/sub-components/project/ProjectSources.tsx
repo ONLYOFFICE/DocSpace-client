@@ -53,7 +53,9 @@ import { getFolderInfo, getFolderPath } from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TAiProject, TAiProjectLogo } from "@docspace/shared/api/ai/projects";
+import type { TAiProject, TAiProjectKnowledgeFile, TAiProjectLogo } from "@docspace/shared/api/ai/projects";
+import { VectorizationStatus } from "@docspace/shared/enums";
+import { FailedVectorizationBadge } from "@docspace/shared/components/failed-vectorization-badge";
 
 
 import config from "PACKAGE_FILE";
@@ -123,11 +125,13 @@ type FileRowProps = {
   getIcon: (size: number, fileExst: string) => string;
   /** Tooltip of the name; the title itself when unset. */
   hint?: string;
+  /** Drawn at the end of the row: the file's vectorization state. */
+  trailing?: React.ReactNode;
 };
 
 /** A file of a linked room (a skill or a knowledge file): it opens in the editor in a new tab. */
-const FileRow = ({ id, title, fileExst, getIcon, hint }: FileRowProps) => (
-  <li>
+const FileRow = ({ id, title, fileExst, getIcon, hint, trailing }: FileRowProps) => (
+  <li className={styles.row} data-testid={`ai-project-file-row-${id}`}>
     <a
       className={classNames(styles.row, styles.fileLink)}
       href={editorUrl(id)}
@@ -140,8 +144,42 @@ const FileRow = ({ id, title, fileExst, getIcon, hint }: FileRowProps) => (
         {title}
       </Text>
     </a>
+    {trailing}
   </li>
 );
+
+type KnowledgeFileStateProps = {
+  file: TAiProjectKnowledgeFile;
+  onRetry: () => void;
+};
+
+/**
+ * A knowledge file's vectorization state at the end of its row: nothing when
+ * it is indexed, "In progress" while it is queued, and the failed badge with
+ * "Try again" for a caller who may queue it once more.
+ */
+const KnowledgeFileState = ({ file, onRetry }: KnowledgeFileStateProps) => {
+  const { t } = useTranslation(["Common"]);
+  switch (file.vectorizationStatus) {
+    case VectorizationStatus.InProgress:
+      return (
+        <Text className={styles.fileState} fontSize="12px" lineHeight="16px" noSelect>
+          {t("Common:InProgress")}
+        </Text>
+      );
+    case VectorizationStatus.Failed:
+      return (
+        <FailedVectorizationBadge
+          className={styles.fileBadge}
+          withRetryVectorization={file.security?.Vectorization === true}
+          onRetryVectorization={onRetry}
+          dataTestId={`ai-project-file-failed-${file.id}`}
+        />
+      );
+    default:
+      return null;
+  }
+};
 
 type RoomCardProps = {
   id: number | string;
@@ -154,10 +192,12 @@ type RoomCardProps = {
   isExpanded?: boolean;
   onToggle?: () => void;
   children?: React.ReactNode;
+  /** Drawn at the end of the room row, e.g. a warning badge. */
+  trailing?: React.ReactNode;
 };
 
 /** A linked room as the folder tree draws one: logo, name, a click opens it. */
-const RoomCard = ({ id, name, logo, icon, hint, onClick, isExpanded, onToggle, children }: RoomCardProps) => (
+const RoomCard = ({ id, name, logo, icon, hint, onClick, isExpanded, onToggle, children, trailing }: RoomCardProps) => (
   <div className={styles.roomCard}>
     <RoomItem
       id={id}
@@ -168,6 +208,7 @@ const RoomCard = ({ id, name, logo, icon, hint, onClick, isExpanded, onToggle, c
       onClick={onClick}
       isExpanded={isExpanded}
       onToggle={onToggle}
+      trailing={trailing}
     />
     {isExpanded ? children : null}
   </div>
@@ -306,10 +347,15 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
       headless={compact}
     >
       {knowledgeRooms.map((room) => {
-          // Only vectorized files are searched, so only they are listed.
-          const files = (store.knowledge.find((loaded) => loaded.id === room.id)?.files ?? []).filter(
-            (file) => file.indexed,
-          );
+          // Every file is listed with its vectorization state: the chat
+          // searches the indexed ones, the rest show why they are not there.
+          const loaded = store.knowledge.find((item) => item.id === room.id);
+          const files = loaded?.files ?? [];
+          // Until the list is read, the room's own count from the project.
+          const failedFiles = loaded
+            ? (loaded.failedFiles ??
+              files.filter((file) => file.vectorizationStatus === VectorizationStatus.Failed).length)
+            : (room.failedFiles ?? 0);
           return (
             <RoomCard
               key={room.id}
@@ -319,6 +365,16 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
               icon="knowledgeRoom.svg"
               isExpanded={expanded.has(`k-${room.id}`)}
               onToggle={() => toggle(`k-${room.id}`, () => void store.fetchKnowledge(project.id))}
+              trailing={
+                failedFiles > 0 ? (
+                  <FailedVectorizationBadge
+                    className={styles.roomBadge}
+                    title={t("Common:AIProjectKnowledgeFailedFiles")}
+                    info={t("Common:AIProjectKnowledgeFailedFilesInfo")}
+                    dataTestId={`ai-project-room-warning-${room.id}`}
+                  />
+                ) : null
+              }
             >
               <ul className={classNames(styles.list, styles.nested)}>
                 {files.map((file) => (
@@ -328,6 +384,9 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
                     title={file.title}
                     fileExst={file.fileExst}
                     getIcon={filesSettingsStore.getIcon}
+                    trailing={
+                      <KnowledgeFileState file={file} onRetry={() => void store.retryKnowledgeFile(room.id, file.id)} />
+                    }
                   />
                 ))}
               </ul>

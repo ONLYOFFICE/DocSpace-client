@@ -165,6 +165,44 @@ test.describe("AI Projects", () => {
         "ai-projects-create-dialog.png",
       ]);
     });
+
+    test("creates a project with an uploaded picture and opens it", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        selfByTypeHandler(TEST_PORT, "owner"),
+        ...aiProjectsHandlers(TEST_PORT, []),
+      );
+
+      await page.goto(`${baseUrl}${PROJECTS_URL}`);
+      await emptyView(page).getByText("Create project", { exact: true }).click();
+      await page.getByTestId("ai-project-title").fill("Sales");
+
+      // A picture goes through the icon's hidden file input into the crop
+      // dialog, as a room's does; Save keeps the crop as the logo preview.
+      const dialog = page.getByTestId("ai-project-dialog");
+      await dialog.locator("input[type=file]").setInputFiles({
+        name: "logo.png",
+        mimeType: "image/png",
+        buffer: Buffer.from(
+          "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+          "base64",
+        ),
+      });
+      await page.getByRole("button", { name: "Save", exact: true }).click();
+      await expect(dialog.getByTestId("room-icon-image")).toBeVisible();
+
+      await page.getByTestId("ai-project-submit").click();
+
+      // The new project opens, with the picture as its logo.
+      await expect(page).toHaveURL(/\/ai-projects\/777100$/);
+      const intro = page.getByTestId("ai-project-intro");
+      await expect(intro).toBeVisible();
+      await expect(intro).toContainText("Sales");
+      await expect(intro.getByTestId("room-icon-image")).toBeVisible();
+    });
   });
 
   test.describe("List", () => {
@@ -296,6 +334,20 @@ test.describe("AI Projects", () => {
         "ai-projects",
         "ai-project-with-sources.png",
       ]);
+
+      // Every file of an expanded room is listed with its state: the failed
+      // one carries the badge with "Try again", and the room row a warning.
+      const [room] = AI_PROJECT_WITH_SOURCES.aiProject.knowledgeRooms;
+      await page.getByTestId(`ai-project-room-expander-${room.id}`).click();
+      await expect(knowledge.getByTestId(/^ai-project-file-row-/)).toHaveCount(4);
+      await expect(knowledge).toContainText("In progress");
+      await expect(
+        page.getByTestId(`ai-project-room-warning-${room.id}`),
+      ).toBeVisible();
+      const failed = page.getByTestId("ai-project-file-failed-779104");
+      await expect(failed).toBeVisible();
+      await failed.hover();
+      await expect(page.getByText("Try again", { exact: true })).toBeVisible();
     });
 
     test("hides the source cards of a project without linked rooms", async ({

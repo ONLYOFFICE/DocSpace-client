@@ -41,10 +41,13 @@ import SocketHelper, {
   SocketEvents,
   type TOptSocket,
 } from "@onlyoffice/apps-ui-kit/utils/socket";
+import { retryVectorization } from "@docspace/shared/api/ai";
+import { VectorizationStatus } from "@docspace/shared/enums";
 import {
   changeAiProjectOwner,
   createAiProject,
   deleteAiProject,
+  deleteAiProjectLogo,
   duplicateAiProject,
   getAiProject,
   getAiProjectKnowledge,
@@ -200,6 +203,9 @@ class AiProjectsStore {
    */
   lostProjectId: number | null = null;
 
+  /** Why the open project was lost: deleted (gone) or the caller's access to it. */
+  lostProjectReason: "deleted" | "access" | null = null;
+
   /** The page is mounted: the socket channels are held and listened to. */
   private isLive = false;
 
@@ -235,12 +241,17 @@ class AiProjectsStore {
 
   /* ------------------------------- List -------------------------------- */
 
+  /** The one room filter in force: the Instructions or the Knowledge one. */
+  private get linkedRoomFilter() {
+    return this.instructionsRoomFilter ?? this.knowledgeRoomFilter;
+  }
+
   /** The list query of the current search, filters and sort. */
   private listQuery = () => ({
     filterValue: this.filterValue.trim() || undefined,
     subjectId: this.ownerFilter?.id,
-    instructionsRoomId: this.instructionsRoomFilter ? Number(this.instructionsRoomFilter.id) : undefined,
-    knowledgeRoomId: this.knowledgeRoomFilter ? Number(this.knowledgeRoomFilter.id) : undefined,
+    // The contract filters by one linked room of either kind.
+    linkedRoomId: this.linkedRoomFilter ? Number(this.linkedRoomFilter.id) : undefined,
     sortBy: this.sortBy,
     sortOrder: this.sortOrder,
   });
@@ -315,8 +326,16 @@ class AiProjectsStore {
     knowledgeRoom?: TAiProjectsFilterEntity | null;
   }) => {
     this.ownerFilter = options.owner ?? null;
-    this.instructionsRoomFilter = options.instructionsRoom ?? null;
-    this.knowledgeRoomFilter = options.knowledgeRoom ?? null;
+    let instructionsRoom = options.instructionsRoom ?? null;
+    let knowledgeRoom = options.knowledgeRoom ?? null;
+    // The server filters by one linked room, so a room of one kind replaces
+    // the other kind's: the newly picked one wins.
+    if (instructionsRoom && knowledgeRoom) {
+      if (knowledgeRoom.id !== this.knowledgeRoomFilter?.id) instructionsRoom = null;
+      else knowledgeRoom = null;
+    }
+    this.instructionsRoomFilter = instructionsRoom;
+    this.knowledgeRoomFilter = knowledgeRoom;
     void this.fetchProjects();
   };
 
@@ -387,6 +406,39 @@ class AiProjectsStore {
 
   clearLostProject = () => {
     this.lostProjectId = null;
+    this.lostProjectReason = null;
+  };
+
+  /** The open project is gone (`deleted`) or closed to the caller (`access`). */
+  private loseProject = (id: number, reason: "deleted" | "access") => {
+    if (this.activeProject?.id === id) {
+      this.lostProjectId = id;
+      this.lostProjectReason = reason;
+    }
+    this.dropProject(id);
+  };
+
+  /**
+   * Queues a failed knowledge file for vectorization again from the Knowledge
+   * card. The file turns to in progress at once and back to failed when the
+   * request is refused.
+   */
+  retryKnowledgeFile = async (roomId: number, fileId: number) => {
+    const setStatus = (status: VectorizationStatus) =>
+      runInAction(() => {
+        const room = this.knowledge.find((r) => r.id === roomId);
+        const file = room?.files.find((f) => f.id === fileId);
+        if (!room || !file) return;
+        file.vectorizationStatus = status;
+        room.failedFiles = room.files.filter((f) => f.vectorizationStatus === VectorizationStatus.Failed).length;
+      });
+    setStatus(VectorizationStatus.InProgress);
+    try {
+      await retryVectorization([fileId]);
+    } catch (e) {
+      setStatus(VectorizationStatus.Failed);
+      toastr.error(errorMessage(e));
+    }
   };
 
   /**
@@ -424,10 +476,7 @@ class AiProjectsStore {
     if (!inRoot && !known) return;
 
     if (opt.cmd === "delete") {
-      runInAction(() => {
-        if (this.activeProject?.id === id) this.lostProjectId = id;
-        this.dropProject(id);
-      });
+      runInAction(() => this.loseProject(id, "deleted"));
       return;
     }
     if (opt.cmd === "create" || !known) {
@@ -471,10 +520,8 @@ class AiProjectsStore {
     } catch (e) {
       const status = (e as { response?: { status?: number } })?.response?.status;
       if (status !== 404 && status !== 403) return;
-      runInAction(() => {
-        if (this.activeProject?.id === id) this.lostProjectId = id;
-        this.dropProject(id);
-      });
+      // Gone (404) means deleted; refused (403) means the caller was removed.
+      runInAction(() => this.loseProject(id, status === 404 ? "deleted" : "access"));
     }
   };
 
@@ -562,8 +609,10 @@ class AiProjectsStore {
     return project;
   };
 
-  updateProject = async (id: number, data: TAiProjectRequest) => {
-    const project = await updateAiProject(id, data);
+  /** Saves the edit dialog; `removeLogo` also drops the uploaded picture. */
+  updateProject = async (id: number, data: TAiProjectRequest, options?: { removeLogo?: boolean }) => {
+    let project = await updateAiProject(id, data);
+    if (options?.removeLogo) project = await deleteAiProjectLogo(id);
     showWarnings(project);
     runInAction(() => this.replaceProject(project));
     if (this.activeProject?.id === id) this.syncPreset(project);

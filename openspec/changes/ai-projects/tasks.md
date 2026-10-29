@@ -27,7 +27,7 @@ Most of the client work is already on `feature/new-ai-concept`. Tasks marked `[x
 
 ## 2b. Align the client with the contract
 
-- [ ] 2b.1 Send the list's room filter as `linkedRoomId` instead of `instructionsRoomId` / `knowledgeRoomId` (`shared/api/ai/projects.ts`, `AiProjectsStore`, the MSW handler); verify with `AiProjectsStore.test.ts` and the filter case in `ai-projects.spec.ts`
+- [x] 2b.1 (`ai-projects-catalog` search and filter) Send the list's room filter as `linkedRoomId` instead of `instructionsRoomId` / `knowledgeRoomId` (`shared/api/ai/projects.ts`, `AiProjectsStore`, the MSW handler); verify with `AiProjectsStore.test.ts` and the filter case in `ai-projects.spec.ts`
 - [ ] 2b.2 Drop a project's linked room from the list and the open project when the server unlinks it (permanent deletion); show `profile.available: false` as "model unavailable" in the dialog, intro and Details; verify with unit cases in `AiProjectsStore.test.ts` on a reload that lost a room and a profile
 - [x] 2b.3 Show the "model unavailable, change it" error in a project's chat on `profile.available: false` or a 409 `projectModelUnavailable`, with an Edit-project action for the owner and managers and an "ask a manager" text for members, keep the composer disabled until the model changes, and clear the error when an edit brings a working model (`Shell.jsx` `formatChatError`, `AiProjectsStore`, ui-kit error box); verify with an E2E case on a mock project with a deleted model for a manager and for a member
 
@@ -48,15 +48,19 @@ Most of the client work is already on `feature/new-ai-concept`. Tasks marked `[x
 - [x] 4.4 Route the Invite panel, Info panel Contacts and History, invitation link and change-owner panel to `/ai/projects/{id}/*` for type 12 rooms, and show `aiProjectWarnings` (75a35715091, 03c7145721b); verify by inviting a Member in the running app and seeing them in Contacts
 - [x] 4.5 Keep the Info panel selection in step with the open, edited, deleted or left project (716c3be08b3); verify that the panel closes after leaving the project
 - [x] 4.6 Show the server's error text for mute/unmute through `errorMessage`, as the other actions do (uncommitted); verify that a refused mute toasts the server message
+- [x] 4.7 Let the project dialog take an uploaded logo as the room dialog does (image editor, crop, "Delete"): upload through `files/logos`, send the crop as the body's `logo` on create/update and remove it with `DELETE ai/projects/{id}/logo` (`shared/api/ai/projects.ts`), draw the picture in `ProjectLogo` (list, intro, header chips) and in the MSW mock; verify with `AiProjectsStore.test.ts` (logo removal) and the create case in `ai-projects.spec.ts` (picture upload)
+- [x] 4.8 Open the new project (`/ai-projects/{id}`) after a successful create from the dialog, as Rooms opens a new room; the chat's save action (`AiPresetsStore`) keeps its place; verify with the create-dialog case in `ai-projects.spec.ts`
 
 ## 5. Inside a project
 
 - [x] 5.1 Render the open project's chat in the section body under the project header with the chat toolbar (187e82eb493); verify by opening a project from the list and through a deep link
 - [x] 5.2 Scope the chat to the project (`entityId`), make the model picker read-only, open the project's chat through ui-kit `AiChatStore.openProject` with its available linked rooms, and hand its Instructions rooms to Shell through the active preset (187e82eb493, 03c7145721b); verify that a Member cannot change the model
 - [x] 5.3 Add the `ProjectIntro` empty-chat view with logo, model and room chips, and no suggestions (187e82eb493, e3e954bbc26); verify with the project screenshot in `ai-projects.spec.ts`
-- [x] 5.4 Add the sources column: Instructions with skills, Knowledge with indexed files, personal Context, and room links via `filter?folder=` (187e82eb493, e3e954bbc26); verify by opening a skill and a room from the column
+- [x] 5.4 Add the sources column: Instructions with skills, Knowledge with its files, personal Context, and room links via `filter?folder=` (187e82eb493, e3e954bbc26); verify by opening a skill and a room from the column
 - [x] 5.5 Leave out the Instructions and Knowledge cards and tabs of a project without available rooms of that kind, and draw the sources as a tab strip on tablet and mobile (187e82eb493, 03c7145721b, bc0f3e55316, uncommitted availability filter); verify with the "project without sources" case in `ai-projects.spec.ts`
 - [x] 5.6 Keep the chat in step with the project: apply edits in place, reset on leave, close on a lost project, close when leaving the page (96276b24c3f, e6ebb167409, e7575e26268); verify that a chat opened in Rooms after leaving a project uses the default model
+- [x] 5.7 Knowledge card: list every file of a room with its vectorization state (not only indexed ones), offer "Vectorization" (retry, `api.ai.retryVectorization`, through the shared `FailedVectorizationBadge`) on a failed file to users with `security.Vectorization`, and show a warning icon with a tooltip at the end of a room row that has failed files; the Node mock sends `vectorizationStatus`, `security.Vectorization` and `failedFiles` in `GET ai/projects/{id}/knowledge` (the real controller passes them through from .NET, group 7); verify with `AiProjectsStore.test.ts` (retry) and the knowledge case in `ai-projects.spec.ts`
+- [x] 5.8 Tell deletion and lost access apart when the open project goes: the socket `delete` event shows a "project was deleted" toast, a 404/403 on reload keeps `Common:AIProjectNotAvailable` (`AiProjectsStore.lostProjectId` carries the reason, `pages/AiProjects/index.tsx` picks the toast); verify with `AiProjectsStore.test.ts` and the lost-project case in `ai-projects.spec.ts`
 
 ## 6. Chat sources and projects outside the page
 
@@ -76,6 +80,8 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - Make Instructions and Knowledge rooms flat (refuse folder create, copy and move) and limit Instructions rooms to `.md` on upload, create, copy and move, with a user-facing message.
 - Drop `FileShare.Editing` from `AvailableRoomAccesses[KnowledgeRoom]`, with a migration of existing Editing shares to Read.
 - Refuse linking a Knowledge room while vectorization is disabled, in the .NET validation.
+- Take the uploaded `logo` in the create/update body and serve `DELETE ai/projects/{id}/logo` (the room logo flow over `files/logos`) for the AI project room type.
+- On `PUT ai/projects/{id}/share`, invite each new member to every linked Instructions and Knowledge room as Viewer and report a room that could not be granted as a `grantSkipped` warning, per `ai-projects-catalog` "Members are invited to the linked rooms".
 
 ## 8. Remove AI Agents
 

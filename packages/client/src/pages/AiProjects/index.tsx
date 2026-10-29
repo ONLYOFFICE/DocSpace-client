@@ -203,15 +203,18 @@ const AiProjects = ({
     [store, aiChatStore, navigate, projectId],
   );
 
-  // The open project was deleted, or the caller was removed from it.
-  const { lostProjectId } = store;
+  // The open project was deleted, or the caller was removed from it: the
+  // toast names which, then the list is shown.
+  const { lostProjectId, lostProjectReason } = store;
   React.useEffect(() => {
     if (lostProjectId === null) return;
+    const deleted = lostProjectReason === "deleted";
     store.clearLostProject();
     aiChatPanel.closeChatPanel();
-    toastr.info(t("Common:AIProjectNotAvailable"));
+    if (deleted) toastr.info(t("Common:AIProjectWasDeleted"));
+    else toastr.info(t("Common:AIProjectNotAvailable"));
     navigate("/ai-projects");
-  }, [lostProjectId, store, aiChatPanel, navigate, t]);
+  }, [lostProjectId, lostProjectReason, store, aiChatPanel, navigate, t]);
 
   const closeProject = React.useCallback(() => {
     store.closeProject();
@@ -626,7 +629,9 @@ const AiProjects = ({
         </ChatPanelView>
       ) : null}
 
-      {store.projectDialog ? <CreateEditProjectDialog key={store.projectDialog.mode} store={store} /> : null}
+      {store.projectDialog ? (
+        <CreateEditProjectDialog key={store.projectDialog.mode} store={store} onCreated={openProject} />
+      ) : null}
       {store.leaveFor ? (
         <ConfirmationModal
           visible

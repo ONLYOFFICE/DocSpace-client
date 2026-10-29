@@ -15,6 +15,7 @@ const api = vi.hoisted(() => ({
   changeAiProjectOwner: vi.fn(),
   getAiProjectSkills: vi.fn(),
   getAiProjectKnowledge: vi.fn(),
+  deleteAiProjectLogo: vi.fn(),
 }));
 
 const { toastr, socket, getOperationProgress } = vi.hoisted(() => ({
@@ -35,6 +36,8 @@ vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (io) => ({
   default: socket,
 }));
 vi.mock("@docspace/shared/utils/getOperationProgress", () => ({ getOperationProgress }));
+const aiApi = vi.hoisted(() => ({ retryVectorization: vi.fn() }));
+vi.mock("@docspace/shared/api/ai", () => aiApi);
 
 import { SocketCommands, SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
 
@@ -111,8 +114,7 @@ describe("AiProjectsStore", () => {
       expect(api.getAiProjects).toHaveBeenCalledWith({
         filterValue: undefined,
         subjectId: undefined,
-        instructionsRoomId: undefined,
-        knowledgeRoomId: undefined,
+        linkedRoomId: undefined,
         sortBy: "DateAndTime",
         sortOrder: "descending",
         startIndex: 0,
@@ -139,8 +141,7 @@ describe("AiProjectsStore", () => {
         expect.objectContaining({
           filterValue: "sa",
           subjectId: "u1",
-          instructionsRoomId: 12,
-          knowledgeRoomId: undefined,
+          linkedRoomId: 12,
           sortBy: "AZ",
           sortOrder: "ascending",
         }),
@@ -152,6 +153,27 @@ describe("AiProjectsStore", () => {
       expect(api.getAiProjects).toHaveBeenLastCalledWith(
         expect.objectContaining({ filterValue: undefined, subjectId: undefined }),
       );
+    });
+
+    it("keeps one linked room filter: the newly picked kind replaces the other", async () => {
+      const store = createStore();
+      store.setFilterOptions({ instructionsRoom: { id: "12", label: "Skills" } });
+      store.setFilterOptions({
+        instructionsRoom: { id: "12", label: "Skills" },
+        knowledgeRoom: { id: "9", label: "Docs" },
+      });
+      await flush();
+      expect(store.instructionsRoomFilter).toBeNull();
+      expect(store.knowledgeRoomFilter?.id).toBe("9");
+      expect(api.getAiProjects).toHaveBeenLastCalledWith(expect.objectContaining({ linkedRoomId: 9 }));
+
+      store.setFilterOptions({
+        instructionsRoom: { id: "13", label: "Legal" },
+        knowledgeRoom: { id: "9", label: "Docs" },
+      });
+      await flush();
+      expect(store.knowledgeRoomFilter).toBeNull();
+      expect(api.getAiProjects).toHaveBeenLastCalledWith(expect.objectContaining({ linkedRoomId: 13 }));
     });
 
     it("appends the next page without duplicates and stops at the total", async () => {
@@ -304,6 +326,20 @@ describe("AiProjectsStore", () => {
       expect(presets.setActivePreset).toHaveBeenCalledWith(expect.objectContaining({ name: "Renamed" }));
       // The sources are not re-read: an open card reads them again on its next expand.
       expect(api.getAiProjectSkills).not.toHaveBeenCalled();
+    });
+
+    it("drops the uploaded logo after an update that removed it", async () => {
+      const store = createStore();
+      await store.fetchProjects();
+      api.updateAiProject.mockResolvedValueOnce(project(1, "With logo"));
+      api.deleteAiProjectLogo.mockResolvedValueOnce(project(1, "Without logo"));
+      await store.updateProject(1, { title: "With logo" }, { removeLogo: true });
+      expect(api.deleteAiProjectLogo).toHaveBeenCalledWith(1);
+      expect(store.projects[0].title).toBe("Without logo");
+
+      api.updateAiProject.mockResolvedValueOnce(project(1, "Kept"));
+      await store.updateProject(1, { title: "Kept" });
+      expect(api.deleteAiProjectLogo).toHaveBeenCalledTimes(1);
     });
 
     it("follows the delete operation, then drops the project and closes it", async () => {
@@ -486,8 +522,22 @@ describe("AiProjectsStore", () => {
       expect(store.projects.map((p) => p.id)).toEqual([2]);
       expect(store.activeProject).toBeNull();
       expect(store.lostProjectId).toBe(1);
+      expect(store.lostProjectReason).toBe("deleted");
       store.clearLostProject();
       expect(store.lostProjectId).toBeNull();
+      expect(store.lostProjectReason).toBeNull();
+    });
+
+    it("tells a project that is gone from one the caller was removed from", async () => {
+      const store = createStore();
+      store.startLiveUpdates();
+      await store.fetchProjects();
+      await store.openProject(store.projects[0]);
+      api.getAiProject.mockRejectedValueOnce({ response: { status: 404 } });
+      modifyFolder()({ type: "folder", cmd: "update", id: 1 });
+      await vi.advanceTimersByTimeAsync(300);
+      expect(store.lostProjectId).toBe(1);
+      expect(store.lostProjectReason).toBe("deleted");
     });
 
     it("drops a changed project the caller can no longer read", async () => {
@@ -500,6 +550,7 @@ describe("AiProjectsStore", () => {
       await vi.advanceTimersByTimeAsync(300);
       expect(store.projects.map((p) => p.id)).toEqual([1]);
       expect(store.lostProjectId).toBe(2);
+      expect(store.lostProjectReason).toBe("access");
       expect(store.activeProject).toBeNull();
 
       api.getAiProject.mockRejectedValueOnce(new Error("offline"));
@@ -529,6 +580,56 @@ describe("AiProjectsStore", () => {
       await vi.advanceTimersByTimeAsync(300);
       expect(api.getAiProject).not.toHaveBeenCalled();
       expect(api.getAiProjects).toHaveBeenCalledTimes(1);
+    });
+  });
+  describe("retryKnowledgeFile", () => {
+    const knowledge = () => [
+      {
+        id: 9,
+        title: "Docs",
+        available: true,
+        totalFiles: 2,
+        indexedFiles: 1,
+        failedFiles: 1,
+        truncated: false,
+        files: [
+          { id: 1, title: "a.docx", fileExst: ".docx", indexed: true, vectorizationStatus: 1 },
+          {
+            id: 2,
+            title: "b.pdf",
+            fileExst: ".pdf",
+            indexed: false,
+            vectorizationStatus: 2,
+            security: { Vectorization: true },
+          },
+        ],
+      },
+    ];
+
+    it("queues the file again and clears the room's failed count", async () => {
+      aiApi.retryVectorization.mockResolvedValue({});
+      api.getAiProjectKnowledge.mockResolvedValue(knowledge());
+      const store = createStore();
+      await store.fetchProjects();
+      await store.openProject(store.projects[0]);
+      await store.fetchKnowledge(1);
+      await store.retryKnowledgeFile(9, 2);
+      expect(aiApi.retryVectorization).toHaveBeenCalledWith([2]);
+      expect(store.knowledge[0].files[1].vectorizationStatus).toBe(0);
+      expect(store.knowledge[0].failedFiles).toBe(0);
+    });
+
+    it("puts the file back to failed when the request is refused", async () => {
+      aiApi.retryVectorization.mockRejectedValue({ response: { data: { error: "No rights" } } });
+      api.getAiProjectKnowledge.mockResolvedValue(knowledge());
+      const store = createStore();
+      await store.fetchProjects();
+      await store.openProject(store.projects[0]);
+      await store.fetchKnowledge(1);
+      await store.retryKnowledgeFile(9, 2);
+      expect(store.knowledge[0].files[1].vectorizationStatus).toBe(2);
+      expect(store.knowledge[0].failedFiles).toBe(1);
+      expect(toastr.error).toHaveBeenCalledWith("No rights");
     });
   });
 });

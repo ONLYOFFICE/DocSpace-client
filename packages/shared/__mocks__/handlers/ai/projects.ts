@@ -146,6 +146,8 @@ type MockProjectOptions = {
   id: number;
   title: string;
   color: string;
+  /** An uploaded picture: one URL for every logo size. */
+  logoImage?: string;
   access?: MockAccess;
   createdBy?: typeof OWNER;
   created?: string;
@@ -160,6 +162,7 @@ export const aiProjectMock = ({
   id,
   title,
   color,
+  logoImage,
   access = AiProjectMockAccess.Owner,
   createdBy = OWNER,
   created = "2026-10-20T10:00:00.0000000+00:00",
@@ -189,7 +192,9 @@ export const aiProjectMock = ({
     foldersCount: 0,
     isFavorite: false,
     new: 0,
-    logo: roomLogo(color),
+    logo: logoImage
+      ? { ...roomLogo(color), original: logoImage, large: logoImage, medium: logoImage, small: logoImage }
+      : roomLogo(color),
     security: sec,
     aiProject: {
       profile,
@@ -278,15 +283,22 @@ export const aiProjectsHandler = (
   http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROJECTS}`,
     ({ request }) => {
-      const filterValue = new URL(request.url).searchParams
-        .get("filterValue")
-        ?.trim()
-        .toLowerCase();
-      const list = filterValue
+      const params = new URL(request.url).searchParams;
+      const filterValue = params.get("filterValue")?.trim().toLowerCase();
+      const linkedRoomId = params.get("linkedRoomId");
+      let list = filterValue
         ? projects.filter((project) =>
             project.title.toLowerCase().includes(filterValue),
           )
         : projects;
+      if (linkedRoomId) {
+        list = list.filter((project) =>
+          [
+            ...project.aiProject.instructionsRooms,
+            ...project.aiProject.knowledgeRooms,
+          ].some((room) => String(room.id) === linkedRoomId),
+        );
+      }
       return HttpResponse.json(listResponse(list));
     },
   );
@@ -313,25 +325,44 @@ export const aiProjectGetByIdHandler = (
     },
   );
 
-/** `POST ai/projects`: creates a project from the dialog's fields and answers it. */
-export const aiProjectCreateHandler = (port: string) =>
+/** A 1x1 PNG, what an uploaded logo resolves to in the mocks. */
+export const MOCK_LOGO_IMAGE =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+
+/**
+ * `POST ai/projects`: creates a project from the dialog's fields and answers
+ * it; the project then joins `projects`, so the page can open it. A `logo`
+ * object in the body (an uploaded picture) gives it the mock picture.
+ */
+export const aiProjectCreateHandler = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+) =>
   http.post(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROJECTS}`,
     async ({ request }) => {
       const body = (await request.json()) as {
         title?: string;
         color?: string;
+        logo?: { tmpFile?: string };
         aiProject?: { instructionsRoomIds?: number[]; knowledgeRoomIds?: number[] };
       };
-      return HttpResponse.json({
-        response: aiProjectMock({
-          id: 777100,
-          title: body.title ?? "New project",
-          color: body.color ?? "8570FF",
-          created: "2026-10-29T10:00:00.0000000+00:00",
-        }),
+      const created = aiProjectMock({
+        id: 777100,
+        title: body.title ?? "New project",
+        color: body.color ?? "8570FF",
+        logoImage: body.logo ? MOCK_LOGO_IMAGE : undefined,
+        created: "2026-10-29T10:00:00.0000000+00:00",
       });
+      projects.unshift(created);
+      return HttpResponse.json({ response: created });
     },
+  );
+
+/** `POST files/logos`: the upload a picture makes before it is set as a logo. */
+export const roomLogoUploadHandler = (port: string) =>
+  http.post(`${BASE_URL}:${port}/${API_PREFIX}/files/logos`, () =>
+    HttpResponse.json({ response: { success: true, data: "tmp-logo.png" } }),
   );
 
 const SKILLS_BY_ROOM: Record<number, { id: string; name: string; description: string }[]> = {
@@ -378,10 +409,40 @@ export const aiProjectSkillsHandler = (
     },
   );
 
+// `vectorizationStatus`: 0 in progress, 1 completed, 2 failed.
 const KNOWLEDGE_FILES = [
-  { id: 779101, title: "Master agreement.docx", fileExst: ".docx", indexed: true },
-  { id: 779102, title: "NDA template.docx", fileExst: ".docx", indexed: true },
-  { id: 779103, title: "Pricing 2026.xlsx", fileExst: ".xlsx", indexed: false },
+  {
+    id: 779101,
+    title: "Master agreement.docx",
+    fileExst: ".docx",
+    indexed: true,
+    vectorizationStatus: 1,
+    security: { Vectorization: false },
+  },
+  {
+    id: 779102,
+    title: "NDA template.docx",
+    fileExst: ".docx",
+    indexed: true,
+    vectorizationStatus: 1,
+    security: { Vectorization: false },
+  },
+  {
+    id: 779103,
+    title: "Pricing 2026.xlsx",
+    fileExst: ".xlsx",
+    indexed: false,
+    vectorizationStatus: 0,
+    security: { Vectorization: false },
+  },
+  {
+    id: 779104,
+    title: "Old price list.pdf",
+    fileExst: ".pdf",
+    indexed: false,
+    vectorizationStatus: 2,
+    security: { Vectorization: true },
+  },
 ];
 
 /** `GET ai/projects/:id/knowledge`: the project's Knowledge rooms with their files. */
@@ -400,6 +461,7 @@ export const aiProjectKnowledgeHandler = (
         available: room.available,
         totalFiles: KNOWLEDGE_FILES.length,
         indexedFiles: KNOWLEDGE_FILES.filter((file) => file.indexed).length,
+        failedFiles: KNOWLEDGE_FILES.filter((file) => file.vectorizationStatus === 2).length,
         truncated: false,
         files: KNOWLEDGE_FILES,
       }));
@@ -416,5 +478,6 @@ export const aiProjectsHandlers = (
   aiProjectGetByIdHandler(port, projects),
   aiProjectSkillsHandler(port, projects),
   aiProjectKnowledgeHandler(port, projects),
-  aiProjectCreateHandler(port),
+  aiProjectCreateHandler(port, projects),
+  roomLogoUploadHandler(port),
 ];

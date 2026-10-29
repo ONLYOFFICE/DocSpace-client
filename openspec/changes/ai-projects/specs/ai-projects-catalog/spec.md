@@ -94,7 +94,7 @@ With no projects and no filter applied, the list SHALL show an empty state for t
 
 ### Requirement: Create and edit a project
 The create and edit dialog SHALL collect:
-- a required name of up to 170 characters, and a logo (a color, or a built-in cover; no image upload);
+- a required name of up to 170 characters, and a logo: a color with a built-in cover, or an uploaded image, as the room dialog offers them;
 - a chat profile (model), where none selected means the portal default;
 - any number of Instructions rooms and any number of Knowledge rooms, each chosen in a room selector limited to that room type.
 
@@ -102,11 +102,22 @@ Edit SHALL also show the project owner. Any warnings the server returns SHALL be
 
 #### Scenario: Create with rooms
 - **WHEN** a room admin creates a project named "Sales" with two Instructions rooms and one Knowledge room
-- **THEN** the project appears at the top of the list with those rooms, and a success toast is shown
+- **THEN** a success toast is shown and the new project opens with those rooms; Back leads to the list where it sits at the top
+
+### Requirement: A created project opens
+After a successful create from the dialog the new project SHALL open (`/ai-projects/{id}`), as a new room opens. A project saved from the chat's own save action SHALL NOT change the page.
+
+#### Scenario: Saved from the chat
+- **WHEN** a user saves the chat's setup as a project from the chat panel in Rooms
+- **THEN** the project is created with a success toast and the user stays in Rooms
 
 #### Scenario: Missing name
 - **WHEN** the user submits the dialog with an empty name
 - **THEN** the dialog stays open and marks the name as required
+
+#### Scenario: Uploaded logo
+- **WHEN** the user uploads and crops an image as the project's logo and saves
+- **THEN** the project shows that image in the list, the header and the intro, and "Remove" in the dialog takes it back to the color and cover
 
 #### Scenario: Server warning
 - **WHEN** the server saves the project but returns a warning (for example a Viewer grant on a linked room was skipped)

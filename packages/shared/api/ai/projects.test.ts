@@ -115,14 +115,14 @@ describe("the calls", () => {
       filterValue: "sa",
       sortBy: "AZ",
       subjectId: undefined,
-      instructionsRoomId: 12,
+      linkedRoomId: 12,
       startIndex: 0,
       count: 100,
     });
     expect(request).toHaveBeenCalledWith(
       expect.objectContaining({
         method: "GET",
-        url: "/ai/projects?filterValue=sa&sortBy=AZ&instructionsRoomId=12&startIndex=0&count=100",
+        url: "/ai/projects?filterValue=sa&sortBy=AZ&linkedRoomId=12&startIndex=0&count=100",
       }),
     );
     expect(page.total).toBe(1);

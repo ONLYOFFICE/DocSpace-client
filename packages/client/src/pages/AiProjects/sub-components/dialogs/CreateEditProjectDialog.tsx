@@ -45,34 +45,60 @@ import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combo
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
-import { RoomIcon, type TModel } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
+import type { TImage } from "@onlyoffice/apps-ui-kit/components/image-editor/ImageEditor.types";
+import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
 import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
 import { INSTRUCTIONS_ROOM_TYPE, KNOWLEDGE_ROOM_TYPE } from "@docspace/shared/api/ai/projects";
-import type { TAiProjectCover, TAiProjectSource } from "@docspace/shared/api/ai/projects";
+import type {
+  TAiProject,
+  TAiProjectCover,
+  TAiProjectLogoUpload,
+  TAiProjectSource,
+} from "@docspace/shared/api/ai/projects";
 import { aiProjectToRoom } from "@docspace/shared/api/ai/projects";
 import { iconSize32 } from "@docspace/shared/utils/image-helpers";
-import { ROOM_ACTION_KEYS } from "@docspace/shared/constants";
 
-import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
 import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
 import { StyledParam } from "SRC_DIR/components/CreateEditDialogParams/StyledParam";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
+import AvatarEditorDialog from "SRC_DIR/components/dialogs/AvatarEditorDialog";
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
 
-import { coverLogo } from "../list/ProjectLogo";
+import { coverLogo, uploadedLogo } from "../list/ProjectLogo";
 import styles from "./CreateEditProjectDialog.module.scss";
 
 type CreateEditProjectDialogProps = {
   store: AiProjectsStore;
+  /** Called with the project a successful create answered, e.g. to open it. */
+  onCreated?: (project: TAiProject) => void;
 };
+
+/** An uploaded picture and its crop, as the image editor holds them; no `uploadedFile` until one is chosen. */
+type TIcon = Omit<TImage, "uploadedFile"> & { uploadedFile?: File };
+
+const EMPTY_ICON: TIcon = { x: 0.5, y: 0.5, zoom: 1 };
+
+/** The crop of the picture in the units the server takes, read off the picture itself. */
+const logoCrop = (file: File, { x, y, zoom }: TIcon) =>
+  new Promise<Omit<TAiProjectLogoUpload, "tmpFile">>((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve(calculateRoomLogoParams(img, x, y, zoom));
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
 
 type TRoomType = typeof INSTRUCTIONS_ROOM_TYPE | typeof KNOWLEDGE_ROOM_TYPE;
 
@@ -89,11 +115,13 @@ const ROOM_ICONS: Record<TRoomType, string> = {
  * with its note under the field, then the rooms of each kind as tags with
  * the "Select rooms" button in the same line and the hint below.
  */
-const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
+const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogProps) => {
   const { t } = useTranslation(["Common"]);
   const dialogsStore = useStore("dialogsStore");
   const filesStore = useStore("filesStore");
   const settingsStore = useStore("settingsStore");
+  const avatarEditorDialogStore = useStore("avatarEditorDialogStore");
+  const { avatarEditorDialogVisible } = avatarEditorDialogStore;
   // With vectorization off a Knowledge room cannot be searched, so none can
   // be linked: the selector lists them greyed out, with the reason.
   const vectorizationEnabled = settingsStore.aiConfig?.vectorizationEnabled !== false;
@@ -113,6 +141,14 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
   );
   const [color, setColor] = React.useState<string>(project?.logo.color.replace("#", "") ?? randomColor);
   const [coverIcon, setCoverIcon] = React.useState<TAiProjectCover | null>(project?.logo.cover ?? null);
+  // An uploaded picture, as the room dialog takes one: the file and its crop
+  // while the editor is open, the cropped preview once saved, and whether
+  // the project's stored picture was removed in this dialog.
+  const [icon, setIcon] = React.useState<TIcon>(EMPTY_ICON);
+  const [previewIcon, setPreviewIcon] = React.useState("");
+  const [imageRemoved, setImageRemoved] = React.useState(false);
+  const storedImage = !imageRemoved && project ? uploadedLogo(project.logo) : null;
+  const hasImage = !!previewIcon || !!storedImage;
   // `null` = the portal default profile, as the API stores it.
   const [profileId, setProfileId] = React.useState<string | null>(project?.aiProject.profile?.id ?? null);
   const [instructions, setInstructions] = React.useState<TAiProjectSource[]>(project?.aiProject.instructionsRooms ?? []);
@@ -134,6 +170,10 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
     setColor(coverColor);
     const picked = coverId ? covers?.find((item) => item.id === coverId) : undefined;
     setCoverIcon(picked ? { id: picked.id, data: picked.data } : null);
+    // A cover takes the picture's place.
+    setPreviewIcon("");
+    setIcon(EMPTY_ICON);
+    setImageRemoved(true);
   }, [coverColor, coverId, covers]);
   React.useEffect(
     () => () => {
@@ -142,19 +182,38 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
     [dialogsStore],
   );
 
-  const logoModel = React.useMemo<TModel[]>(
-    () => [
-      {
-        key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,
-        label: t("Common:CustomizeCover"),
-        icon: PenSvgUrl,
-        onClick: () => dialogsStore.setRoomLogoCoverDialogVisible(true),
-      },
-    ],
-    [dialogsStore, t],
-  );
-  // A camera until something is typed or a cover is chosen, like a new room.
-  const isEmptyIcon = !project && !title && !dialogsStore.cover;
+  // The picture is chosen through the icon's hidden file input; the editor
+  // store sizes it down and opens the crop dialog.
+  const onChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const uploadedFile = await avatarEditorDialogStore.uploadFile(t, e);
+    setIcon((prev) => ({ ...prev, uploadedFile }));
+  };
+  const onChangeIcon = (next: TImage) =>
+    setIcon({ ...next, uploadedFile: next.uploadedFile instanceof File ? next.uploadedFile : undefined });
+  const onSaveAvatar = (_image: TImage, preview: string) => {
+    avatarEditorDialogStore.setAvatarEditorDialogVisible(false);
+    // The picture takes the cover's place.
+    dialogsStore.setCover();
+    setCoverIcon(null);
+    setImageRemoved(false);
+    if (preview) setPreviewIcon(preview);
+  };
+  const onCloseAvatarEditor = () => {
+    avatarEditorDialogStore.setAvatarEditorDialogVisible(false);
+    avatarEditorDialogStore.clearUploadedFile();
+    setIcon(EMPTY_ICON);
+  };
+  const onDeleteImage = () => {
+    avatarEditorDialogStore.clearUploadedFile();
+    setIcon(EMPTY_ICON);
+    setPreviewIcon("");
+    setImageRemoved(true);
+  };
+  // Upload a picture, then delete it or customize the cover, as a room's menu goes.
+  const logoModel = dialogsStore.getLogoCoverModel(t, hasImage, () => onDeleteImage);
+  // A camera until something is typed, a cover is chosen or a picture is
+  // uploaded, like a new room.
+  const isEmptyIcon = !project && !title && !dialogsStore.cover && !hasImage;
 
   // The default profile of the portal first (as the "null" profile the API
   // stores), then every chat-capable profile, each by its name only.
@@ -187,11 +246,24 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
     }
     setIsSaving(true);
     try {
+      // A picture that was cropped in this dialog goes up first, as a room's
+      // does: the resized file to `files/logos`, then its temporary name and
+      // the crop with the project.
+      const { uploadedFile } = icon;
+      const image = uploadedFile
+        ? await (async (): Promise<TAiProjectLogoUpload> => {
+            const [crop, uploaded] = await Promise.all([
+              logoCrop(uploadedFile, icon),
+              avatarEditorDialogStore.getUploadedLogoData(),
+            ]);
+            return { tmpFile: uploaded.responseData.data, ...crop };
+          })()
+        : undefined;
       const data = {
         title: name,
         // The cover goes as a room's does (CreateEditRoomStore): the id of
         // the built-in icon or "" for the initials, and the colour.
-        logo: { color: `#${color}`, cover: coverIcon?.id ?? "" },
+        logo: { color: `#${color}`, cover: coverIcon?.id ?? "", image },
         aiProject: {
           profileId: savedProfileId,
           instructionsRoomIds: instructions.map((r) => r.id),
@@ -199,12 +271,17 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
         },
       };
       if (project) {
-        await store.updateProject(project.id, data);
+        // The stored picture goes when it was removed here and nothing replaced it.
+        const removeLogo = imageRemoved && !image && !!uploadedLogo(project.logo);
+        await store.updateProject(project.id, data, { removeLogo });
+        store.closeProjectDialog();
       } else {
         const created = await store.createProject(data);
         toastr.success(t("Common:AIProjectCreated", { name: created.title }));
+        store.closeProjectDialog();
+        // A new project opens, as a new room does.
+        onCreated?.(created);
       }
-      store.closeProjectDialog();
     } catch (e) {
       toastr.error(errorMessage(e));
     } finally {
@@ -341,11 +418,12 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
                 size="64px"
                 radius="12px"
                 className="room-params-icon"
-                showDefault={!coverIcon}
-                logo={coverIcon ? coverLogo(coverIcon, color) : undefined}
+                showDefault={!hasImage && !coverIcon}
+                logo={previewIcon || storedImage || (coverIcon ? coverLogo(coverIcon, color) : undefined)}
                 isEmptyIcon={isEmptyIcon}
                 withEditing={!isEmptyIcon}
                 model={logoModel}
+                onChangeFile={onChangeFile}
                 dataTestId="ai-project-logo"
               />
               <InputParam
@@ -395,6 +473,20 @@ const CreateEditProjectDialog = ({ store }: CreateEditProjectDialogProps) => {
                   label={t("Common:AIProjectOwner")}
                 />
               </div>
+            ) : null}
+            {avatarEditorDialogVisible ? (
+              <AvatarEditorDialog
+                t={t}
+                isDisabled={isSaving}
+                image={icon}
+                setPreview={setPreviewIcon}
+                onChangeImage={onChangeIcon}
+                onClose={onCloseAvatarEditor}
+                onSave={onSaveAvatar}
+                onChangeFile={onChangeFile}
+                visible={!!icon.uploadedFile}
+                dataTestId="ai-project-avatar-editor"
+              />
             ) : null}
           </div>
         </ModalDialog.Body>

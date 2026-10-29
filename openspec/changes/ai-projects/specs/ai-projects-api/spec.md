@@ -76,7 +76,7 @@ Only the portal owner, DocSpace admins and room admins SHALL create projects. Th
 - **THEN** the answer is 403 and no room id in the body is validated
 
 ### Requirement: Body validation
-The server SHALL validate a create or update body before writing anything; the first failure answers 400 with a localised message. The title SHALL be 1–170 characters after trimming, the colour six hex digits, the cover a known id. Unknown body properties (room-only fields such as `tags`, `quota`, `lifetime`, `watermark`) SHALL be refused.
+The server SHALL validate a create or update body before writing anything; the first failure answers 400 with a localised message. The title SHALL be 1–170 characters after trimming, the colour six hex digits, the cover a known id. Unknown body properties (room-only fields such as `tags`, `quota`, `lifetime`, `watermark`) SHALL be refused. An uploaded logo goes in the body as `logo` and is removed through `DELETE ai/projects/{id}/logo`.
 
 #### Scenario: Room-only field
 - **WHEN** the body carries `tags` or `quota`
@@ -189,11 +189,25 @@ Each listed project SHALL be a full room DTO with its `aiProject` block, where e
 - **THEN** the project lists it with `available: false` and `title: null`
 
 ### Requirement: Sources listings
-`GET ai/projects/{id}/skills` SHALL list every linked Instructions room in linked order with its skills (id, name, description from the Markdown frontmatter). `GET ai/projects/{id}/knowledge` SHALL list every linked Knowledge room with its files (at most 1000, with `truncated` when there are more), each file's `indexed` state and the room's `totalFiles` / `indexedFiles`. A room the caller cannot read SHALL come back with `available: false` and no content, never 403.
+`GET ai/projects/{id}/skills` SHALL list every linked Instructions room in linked order with its skills (id, name, description from the Markdown frontmatter). `GET ai/projects/{id}/knowledge` SHALL list every linked Knowledge room with all of its files (at most 1000, with `truncated` when there are more). A room the caller cannot read SHALL come back with `available: false` and no content, never 403.
 
 #### Scenario: Unreadable linked room
 - **WHEN** a member reads the skills of a project whose Instructions room they lost access to
 - **THEN** that room is listed with `available: false` and an empty skills list
+
+### Requirement: Knowledge file state
+Each file in the knowledge listing SHALL carry `indexed`, its `vectorizationStatus` (in progress, completed, failed) and `security.Vectorization` (whether the caller may retry it). Each room SHALL carry `totalFiles`, `indexedFiles` and `failedFiles`.
+
+#### Scenario: Failed file for a Viewer
+- **WHEN** a Viewer of the room reads the knowledge listing and one file failed to vectorize
+- **THEN** the file comes with `vectorizationStatus: failed` and `security.Vectorization: false`, and the room's `failedFiles` is 1
+
+### Requirement: Project logo image
+A project SHALL take an uploaded logo the way a room does: the picture is uploaded to `files/logos`, and the create or update body carries it as `logo` (`tmpFile`, `x`, `y`, `width`, `height`); `DELETE ai/projects/{id}/logo` removes it, allowed to the owner and Project managers. The project DTO SHALL then carry the logo sizes (`small`, `medium`, `large`, `original`) and no cover; removing the picture SHALL return the project to its colour and cover.
+
+#### Scenario: Set and remove the picture
+- **WHEN** a Project manager saves the project with a cropped picture and later deletes the logo
+- **THEN** the project is listed with the picture's sizes, then again with its colour and cover only
 
 ### Requirement: Chat context
 The server SHALL expose an internal `chat-context` for a project: the caller's role, `canChat`, the stored and the effective profile, whether the profile is available, and the linked rooms split into readable and unavailable ids. It SHALL NOT be reachable by the client; the AI service reads it once per round and on thread creation.

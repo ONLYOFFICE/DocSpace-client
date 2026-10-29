@@ -62,10 +62,23 @@ type RoomItemProps = {
   /** With `onToggle`, an expander before the room, as the folder tree draws one. */
   isExpanded?: boolean;
   onToggle?: () => void;
+  /** Drawn at the end of the row, e.g. a warning badge; a click on it does not open the room. */
+  trailing?: React.ReactNode;
 };
 
 /** A linked room as the new-files panel draws one; a click opens the room. */
-const RoomItem = ({ id, title, logo, icon, onOpen, onClick: onOpenItem, hint, isExpanded, onToggle }: RoomItemProps) => {
+const RoomItem = ({
+  id,
+  title,
+  logo,
+  icon,
+  onOpen,
+  onClick: onOpenItem,
+  hint,
+  isExpanded,
+  onToggle,
+  trailing,
+}: RoomItemProps) => {
   const navigate = useNavigate();
   const color = logo?.color.replace("#", "") ?? "";
 
@@ -93,6 +106,11 @@ const RoomItem = ({ id, title, logo, icon, onOpen, onClick: onOpenItem, hint, is
       <Text className="room-item-title" fontSize="13px" fontWeight={600} lineHeight="15px" title={hint ?? title} truncate noSelect>
         {title}
       </Text>
+      {trailing ? (
+        <span className={styles.roomTrailing} onClick={(e) => e.stopPropagation()}>
+          {trailing}
+        </span>
+      ) : null}
     </div>
   );
 

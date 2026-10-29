@@ -276,6 +276,31 @@
   height: 24px;
 }
 
+// A file row holds the link (which grows) and the file's state after it.
+.row > .fileLink {
+  flex: 1 1 auto;
+  padding: 0;
+}
+
+// "In progress" after a queued file's name, in the muted text colour.
+.fileState {
+  flex: 0 0 auto;
+  color: var(--text-secondary);
+}
+
+// The failed badge of a file, and the warning badge at the end of a room row.
+.fileBadge,
+.roomBadge {
+  flex: 0 0 auto;
+}
+
+.roomTrailing {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin-inline-start: auto;
+}
+
 
 // The chat toolbar inside the project's Navigation: no padding of its own,
 // its buttons follow the project menu.

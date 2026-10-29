@@ -37,7 +37,7 @@ import classNames from "classnames";
 
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
-import type { TAiProject, TAiProjectCover } from "@docspace/shared/api/ai/projects";
+import type { TAiProject, TAiProjectCover, TAiProjectLogo } from "@docspace/shared/api/ai/projects";
 
 import styles from "../../AiProjects.module.scss";
 
@@ -51,21 +51,37 @@ export const coverLogo = (cover: TAiProjectCover, color: string): TLogo => ({
   small: "",
 });
 
+/** The ui-kit logo object for an uploaded picture, or `null` while the project has none. */
+export const uploadedLogo = (logo: TAiProjectLogo): TLogo | null =>
+  logo.medium
+    ? {
+        color: logo.color.replace("#", ""),
+        original: logo.original ?? "",
+        large: logo.large ?? "",
+        medium: logo.medium,
+        small: logo.small ?? "",
+      }
+    : null;
+
+/** What `RoomIcon` draws for a project: the uploaded picture, else the cover in its colour, else nothing (the initials). */
+export const projectLogo = (logo: TAiProjectLogo): TLogo | undefined =>
+  uploadedLogo(logo) ?? (logo.cover ? coverLogo(logo.cover, logo.color.replace("#", "")) : undefined);
+
 type ProjectLogoProps = {
   project: Pick<TAiProject, "title" | "logo">;
   size?: string;
   className?: string;
 };
 
-/** The logo a room shows: the built-in cover in the project's colour, or the initials. */
+/** The logo a room shows: the uploaded picture, the built-in cover in the project's colour, or the initials. */
 export const ProjectLogo = ({ project, size = "32px", className }: ProjectLogoProps) => (
   <RoomIcon
     title={project.title}
     color={project.logo.color.replace("#", "")}
     size={size}
     radius="6px"
-    showDefault={!project.logo.cover}
-    logo={project.logo.cover ? coverLogo(project.logo.cover, project.logo.color.replace("#", "")) : undefined}
+    showDefault={!projectLogo(project.logo)}
+    logo={projectLogo(project.logo)}
     className={classNames(styles.projectLogo, className)}
     dataTestId="ai-project-logo"
   />

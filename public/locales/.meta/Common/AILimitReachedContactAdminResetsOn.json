@@ -3,7 +3,7 @@
   "content": "AI requests are paused until {{date}}. Contact the Full admin to raise the limit.",
   "content_en_sha1_hash": "dcbbf9648f112640a0ef40e976d200bdae9e187f",
   "created_at": "2026-10-23T12:27:54.753Z",
-  "updated_at": "2026-10-27T11:04:31.086Z",
+  "updated_at": "2026-10-29T14:13:10.677Z",
   "comment": {
     "text": "Description under the AI spending limit notice, shown to regular users who cannot change limits; {{date}} is the localized date when the limit resets. Full admin is the administrator role name.",
     "is_auto": true,
@@ -12,28 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
-      "line_number": 134,
-      "context": "<ServiceLimitNotice\n title={t(\"Common:AILimitReached\")}\n description={\n isAdmin\n ? t(\"Common:AILimitReachedResetsOn\", { date })\n : t(\"Common:AILimitReachedContactAdminResetsOn\", { date })\n }\n buttonLabel={t(\"Common:ChangeAILimit\")}\n onClick={isAdmin ? openLimits : undefined}\n />\n );",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 989,
-      "context": "return {\n title: t(\"Common:AILimitReached\"),\n description: isAdmin\n ? t(\"Common:AILimitReachedResetsOn\", { date })\n : t(\"Common:AILimitReachedContactAdminResetsOn\", { date }),\n action: isAdmin\n ? {\n text: t(\"Common:ChangeAILimit\"),\n onClick: () => navigate(\"/portal-settings/ai-settings/limits\"),\n }",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-agent-providers/index.tsx",
-      "line_number": 160,
-      "context": "// user to, so both cases end in a plain message without Retry.\n const serviceLimit = getServiceLimitChatError(payload);\n if (serviceLimit) {\n return {\n title: t(\"Common:AILimitReached\"),\n description: t(\"Common:AILimitReachedContactAdminResetsOn\", {\n date: getCorrectDate(i18n.language, serviceLimit.until),\n }),\n action: null,\n };\n }",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-providers/index.tsx",
-      "line_number": 81,
-      "context": "(payload) => {\n const serviceLimit = getServiceLimitChatError(payload);\n if (serviceLimit) {\n return {\n title: t(\"Common:AILimitReached\"),\n description: t(\"Common:AILimitReachedContactAdminResetsOn\", {\n date: getCorrectDate(i18n.language, serviceLimit.until),\n }),\n action: null,\n };\n }",
-      "module": "/packages/sdk"
+      "file_path": "/packages/shared/utils/ai/getServiceLimitDescription.ts",
+      "line_number": 56,
+      "context": "? t(\"Common:AILimitReachedResetsOn\", { date })\n : t(\"Common:AILimitReachedRaiseLimit\");\n }\n \n return date\n ? t(\"Common:AILimitReachedContactAdminResetsOn\", { date })\n : t(\"Common:AILimitReachedContactAdmin\");\n };",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

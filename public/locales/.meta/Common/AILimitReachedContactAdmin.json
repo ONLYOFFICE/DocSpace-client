@@ -1,0 +1,28 @@
+{
+  "key_path": "AILimitReachedContactAdmin",
+  "content": "AI requests are paused. Contact the Full admin to raise the limit.",
+  "content_en_sha1_hash": "571d9eaa21251a8c3fac692e09dc1d6601cbcdc4",
+  "created_at": "2026-10-29T13:56:56.092Z",
+  "updated_at": "2026-10-29T13:57:47.814Z",
+  "comment": {
+    "text": "Body text of the AI spending-limit message shown to a non-admin user in AI chat when the portal AI spending limit is reached and has no reset date (a lifetime limit). Tells them AI requests are paused and to ask the Full admin (top portal role) to raise the limit. Sibling of AILimitReachedContactAdminResetsOn, which adds the reset date.",
+    "is_auto": false,
+    "updated_at": "2026-10-29T13:59:22.881Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/ai/getServiceLimitDescription.ts",
+      "line_number": 57,
+      "context": ": t(\"Common:AILimitReachedRaiseLimit\");\n }\n \n return date\n ? t(\"Common:AILimitReachedContactAdminResetsOn\", { date })\n : t(\"Common:AILimitReachedContactAdmin\");\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

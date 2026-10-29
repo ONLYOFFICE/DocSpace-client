@@ -356,3 +356,124 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
     ]);
   });
 });
+
+test.describe("Profile > Keys Management: keyboard only", () => {
+  test.use({ locale: "en-US", timezoneId: "UTC" });
+
+  const PASSPHRASE = "Test-Horse-Battery-Staple-99!";
+
+  test.beforeEach(async ({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+    );
+  });
+
+  for (const { screen, viewport } of [
+    { screen: "wide", viewport: null },
+    { screen: "narrow", viewport: { width: 390, height: 844 } },
+  ]) {
+    test(`Create a key and unlock it from the keyboard on a ${screen} screen`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      const handleRef: { current: PrivacyroomHandlerHandle | null } = {
+        current: null,
+      };
+      mockRequest.use(
+        ...privacyroomKeysHandlers(TEST_PORT, {
+          initial: [],
+          handle: handleRef,
+        }),
+      );
+      if (viewport) await page.setViewportSize(viewport);
+      await page.goto(`${baseUrl}/profile/keys-management`);
+
+      const generateBtn = page.getByRole("button", {
+        name: "Generate new key",
+        exact: true,
+      });
+      await expect(generateBtn).toBeVisible({ timeout: 15_000 });
+      await generateBtn.focus();
+      await page.keyboard.press("Enter");
+
+      const create = page.getByRole("dialog", { name: "Create passphrase" });
+      await expect(
+        create.getByLabel("Passphrase", { exact: true }),
+      ).toBeFocused({ timeout: 5_000 });
+      await page.keyboard.type(PASSPHRASE);
+      await page.keyboard.press("Tab");
+      await expect(
+        create.getByLabel("Confirm passphrase", { exact: true }),
+      ).toBeFocused();
+      await page.keyboard.type(PASSPHRASE);
+      await page.keyboard.press("Enter");
+
+      const recovery = page.getByRole("dialog", {
+        name: "Save your recovery phrase",
+      });
+      await expect(recovery).toBeVisible({ timeout: 15_000 });
+      await page.keyboard.press("Tab");
+      await expect(
+        recovery.getByRole("button", { name: "Print or save as PDF" }),
+      ).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(
+        recovery.getByRole("button", { name: "Download", exact: true }),
+      ).toBeFocused();
+      const downloaded = page.waitForEvent("download");
+      await page.keyboard.press("Enter");
+      await downloaded;
+
+      await page.keyboard.press("Tab");
+      await expect(
+        recovery.getByRole("button", { name: "Copy to clipboard" }),
+      ).toBeFocused();
+      await page.keyboard.press("Tab");
+      const acknowledge = recovery.getByRole("checkbox", {
+        name: "I have saved my recovery phrase securely",
+      });
+      await expect(acknowledge).toBeFocused();
+      await page.keyboard.press("Space");
+      await expect(acknowledge).toBeChecked();
+      await expect(acknowledge).toBeFocused();
+
+      await page.keyboard.press("Tab");
+      await expect(
+        recovery.getByRole("button", { name: "Continue" }),
+      ).toBeFocused();
+      const posted = page.waitForRequest(
+        (req) =>
+          req.method() === "POST" && req.url().endsWith("/privacyroom/keys"),
+      );
+      await page.keyboard.press("Enter");
+      await posted;
+      await expect(recovery).toBeHidden({ timeout: 5_000 });
+      await expect
+        .poll(() => handleRef.current?.getKeys().length ?? 0, {
+          timeout: 5_000,
+        })
+        .toBe(1);
+
+      // The key card's actions are not keyboard controls, so only the
+      // prompt itself is driven from the keyboard. Export is the second one.
+      await page
+        .locator("[class*='keyItemActions']")
+        .first()
+        .getByTestId("icon-button")
+        .nth(1)
+        .click();
+      const prompt = page.getByRole("dialog", { name: "Enter passphrase" });
+      await expect(
+        prompt.getByLabel("Passphrase", { exact: true }),
+      ).toBeFocused({ timeout: 5_000 });
+      await page.keyboard.type(PASSPHRASE);
+      const exported = page.waitForEvent("download");
+      await page.keyboard.press("Enter");
+      await exported;
+      await expect(prompt).toBeHidden({ timeout: 5_000 });
+    });
+  }
+});

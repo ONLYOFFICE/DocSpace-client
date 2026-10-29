@@ -61,3 +61,15 @@ export const activateOnEnter = (e: React.KeyboardEvent<Element>) => {
   e.preventDefault();
   (e.currentTarget as HTMLElement).click();
 };
+
+/**
+ * Key handler of a control that acts as a button without being a `<button>`:
+ * Enter and Space click it, as they press a native button. A held key clicks
+ * once, and Space never scrolls the page, auto-repeats included.
+ */
+export const activateAsButton = (e: React.KeyboardEvent<Element>) => {
+  if ((e.key !== "Enter" && e.key !== " ") || e.defaultPrevented) return;
+  e.preventDefault();
+  if (e.repeat) return;
+  (e.currentTarget as HTMLElement).click();
+};

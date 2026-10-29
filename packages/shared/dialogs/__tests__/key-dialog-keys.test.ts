@@ -36,11 +36,20 @@
 import type React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { activateOnEnter, submitOnEnter } from "../key-dialog-keys";
+import {
+  activateAsButton,
+  activateOnEnter,
+  submitOnEnter,
+} from "../key-dialog-keys";
 
 const keyEvent = (
   tag: "input" | "textarea" | "a",
-  init: Partial<{ key: string; shiftKey: boolean; defaultPrevented: boolean }>,
+  init: Partial<{
+    key: string;
+    shiftKey: boolean;
+    defaultPrevented: boolean;
+    repeat: boolean;
+  }>,
 ) => {
   const currentTarget = document.createElement(tag);
   const preventDefault = vi.fn();
@@ -50,6 +59,7 @@ const keyEvent = (
     key: "Enter",
     shiftKey: false,
     defaultPrevented: false,
+    repeat: false,
     ...init,
     currentTarget,
     preventDefault,
@@ -135,6 +145,45 @@ describe("activateOnEnter", () => {
     activateOnEnter(handled.event);
 
     expect(space.click).not.toHaveBeenCalled();
+    expect(handled.click).not.toHaveBeenCalled();
+  });
+});
+
+describe("activateAsButton", () => {
+  it("clicks the control on Enter and on Space and takes the key", () => {
+    const enter = keyEvent("a", {});
+    const space = keyEvent("a", { key: " " });
+
+    activateAsButton(enter.event);
+    activateAsButton(space.event);
+
+    expect(enter.click).toHaveBeenCalledTimes(1);
+    expect(enter.preventDefault).toHaveBeenCalledTimes(1);
+    expect(space.click).toHaveBeenCalledTimes(1);
+    expect(space.preventDefault).toHaveBeenCalledTimes(1);
+  });
+
+  it("takes an auto-repeat without clicking again", () => {
+    const { event, preventDefault, click } = keyEvent("a", {
+      key: " ",
+      repeat: true,
+    });
+
+    activateAsButton(event);
+
+    expect(click).not.toHaveBeenCalled();
+    expect(preventDefault).toHaveBeenCalledTimes(1);
+  });
+
+  it("ignores other keys and handled ones", () => {
+    const other = keyEvent("a", { key: "a" });
+    const handled = keyEvent("a", { key: " ", defaultPrevented: true });
+
+    activateAsButton(other.event);
+    activateAsButton(handled.event);
+
+    expect(other.click).not.toHaveBeenCalled();
+    expect(other.preventDefault).not.toHaveBeenCalled();
     expect(handled.click).not.toHaveBeenCalled();
   });
 });

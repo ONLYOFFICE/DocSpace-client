@@ -7,7 +7,7 @@
 
 ## 2. Enter-and-Space activation
 
-- [ ] 2.1 Add `activateAsButton` next to `activateOnEnter` in `packages/shared/dialogs/key-dialog-keys.ts` (D3); verify with tests in `packages/shared/dialogs/__tests__/key-dialog-keys.test.ts` for Enter, Space, an auto-repeat and an already handled key, and `pnpm exec tsc --noEmit -p tsconfig.json` in shared
+- [x] 2.1 Add `activateAsButton` next to `activateOnEnter` in `packages/shared/dialogs/key-dialog-keys.ts` (D3); verify with tests in `packages/shared/dialogs/__tests__/key-dialog-keys.test.ts` for Enter, Space, an auto-repeat and an already handled key, and `pnpm exec tsc --noEmit -p tsconfig.json` in shared
 
 ## 3. Key card actions
 

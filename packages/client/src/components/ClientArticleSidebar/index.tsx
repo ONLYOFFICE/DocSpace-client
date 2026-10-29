@@ -112,7 +112,6 @@ type ClientArticleSidebarProps = FolderIds & {
   // its section is left out of the sidebar altogether.
   roomsInstalled?: boolean;
   formsInstalled?: boolean;
-  agentsInstalled?: boolean;
   ensureAppsLoaded?: () => void;
   // The Trash item offers "Empty trash" while there is something to empty.
   trashIsEmpty?: boolean;
@@ -132,7 +131,6 @@ const ClientArticleSidebar = ({
   aiServicesEnabled = true,
   roomsInstalled = true,
   formsInstalled = true,
-  agentsInstalled = true,
   ensureAppsLoaded,
   trashIsEmpty = true,
   emptyTrashInProgress,
@@ -575,7 +573,6 @@ const ClientArticleSidebar = ({
     aiServicesEnabled,
     roomsInstalled,
     formsInstalled,
-    agentsInstalled,
     recentFolderId,
     favoritesFolderId,
     recycleBinFolderId,
@@ -625,7 +622,6 @@ const ClientArticleSidebarConnected = inject<TStore>(
     aiServicesEnabled: settingsStore.aiServicesEnabled,
     roomsInstalled: appsStore.isInstalled("ai-rooms"),
     formsInstalled: appsStore.isInstalled("ai-forms"),
-    agentsInstalled: appsStore.isInstalled("ai-agents"),
     ensureAppsLoaded: appsStore.ensureLoaded,
     trashIsEmpty: filesStore.trashIsEmpty,
     emptyTrashInProgress: filesActionsStore.emptyTrashInProgress,

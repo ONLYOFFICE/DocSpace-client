@@ -48,6 +48,7 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
   onClose,
   onCancel,
   onConfirm,
+  zIndex = 401,
 }) => {
   const { t, ready } = useTranslation(["Files", "Settings", "Common"]);
 
@@ -59,7 +60,7 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
 
   return (
     <ModalDialog
-      zIndex={401}
+      zIndex={zIndex}
       visible={visible}
       onClose={onClose}
       isLoading={!ready}

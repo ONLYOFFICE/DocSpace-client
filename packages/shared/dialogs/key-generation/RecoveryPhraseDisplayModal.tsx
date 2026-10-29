@@ -41,6 +41,8 @@ import {
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
+import { useKeyDialogCloseGuard } from "../key-dialog-close-guard";
+import UnsavedChangesDialog from "../unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -147,103 +149,112 @@ export const RecoveryPhraseDisplayModal: React.FC<
     onCancel();
   }, [onCancel]);
 
+  const { requestClose, confirmation } = useKeyDialogCloseGuard({
+    visible,
+    dirty: !acknowledged,
+    onCancel: handleCancel,
+  });
+
   return (
-    <ModalDialog
-      zIndex={410}
-      visible={visible}
-      onClose={handleCancel}
-      displayType={ModalDialogType.modal}
-      displayTypeDetailed={KEY_DIALOG_DISPLAY_TYPE}
-      closeOnBackdropClick={false}
-      aria-labelledby={titleId}
-      isLoading={!ready}
-      autoMaxHeight
-    >
-      <ModalDialog.Header>
-        <span id={titleId}>{t("Common:RecoveryPhraseTitle")}</span>
-      </ModalDialog.Header>
+    <>
+      <ModalDialog
+        zIndex={410}
+        visible={visible}
+        onClose={requestClose}
+        displayType={ModalDialogType.modal}
+        displayTypeDetailed={KEY_DIALOG_DISPLAY_TYPE}
+        closeOnBackdropClick={false}
+        aria-labelledby={titleId}
+        isLoading={!ready}
+        autoMaxHeight
+      >
+        <ModalDialog.Header>
+          <span id={titleId}>{t("Common:RecoveryPhraseTitle")}</span>
+        </ModalDialog.Header>
 
-      <ModalDialog.Body>
-        <div className={styles.container}>
-          <Text className={styles.description}>
-            {t("Common:RecoveryPhraseHint")}
-          </Text>
-
-          <div className={styles.warningBox}>
-            <Text fontSize="13px" fontWeight={600}>
-              {t("Common:RecoveryPhraseWarning")}
+        <ModalDialog.Body>
+          <div className={styles.container}>
+            <Text className={styles.description}>
+              {t("Common:RecoveryPhraseHint")}
             </Text>
+
+            <div className={styles.warningBox}>
+              <Text fontSize="13px" fontWeight={600}>
+                {t("Common:RecoveryPhraseWarning")}
+              </Text>
+            </div>
+
+            <div className={styles.phraseBox}>{words.join(" ")}</div>
+
+            <div className={styles.saveActions}>
+              <Button
+                scale
+                primary
+                className={styles.printButton}
+                size={ButtonSize.small}
+                onClick={handlePrintKit}
+                label={t("Common:RecoveryKitPrint")}
+                isDisabled={isLoading}
+              />
+              <Button
+                scale
+                size={ButtonSize.small}
+                onClick={handleDownloadKit}
+                label={t("Common:Download")}
+                isDisabled={isLoading}
+              />
+              <Button
+                scale
+                size={ButtonSize.small}
+                onClick={handleCopy}
+                label={t("Common:CopyToClipboard")}
+                isDisabled={isLoading}
+              />
+            </div>
+
+            <div className={styles.checkboxRow}>
+              <Checkbox
+                id="recoveryPhraseAcknowledged"
+                isChecked={acknowledged}
+                isDisabled={isLoading || !hasSaved}
+                onChange={(e) => setAcknowledged(e.target.checked)}
+                label={t("Common:RecoveryPhraseAcknowledge")}
+                tabIndex={1}
+              />
+            </div>
+            {!hasSaved ? (
+              <Text className={styles.saveFirstHint} fontSize="12px">
+                {t("Common:RecoveryPhraseSaveFirst")}
+              </Text>
+            ) : null}
           </div>
+        </ModalDialog.Body>
 
-          <div className={styles.phraseBox}>{words.join(" ")}</div>
-
-          <div className={styles.saveActions}>
-            <Button
-              scale
-              primary
-              className={styles.printButton}
-              size={ButtonSize.small}
-              onClick={handlePrintKit}
-              label={t("Common:RecoveryKitPrint")}
-              isDisabled={isLoading}
-            />
-            <Button
-              scale
-              size={ButtonSize.small}
-              onClick={handleDownloadKit}
-              label={t("Common:Download")}
-              isDisabled={isLoading}
-            />
-            <Button
-              scale
-              size={ButtonSize.small}
-              onClick={handleCopy}
-              label={t("Common:CopyToClipboard")}
-              isDisabled={isLoading}
-            />
-          </div>
-
-          <div className={styles.checkboxRow}>
-            <Checkbox
-              id="recoveryPhraseAcknowledged"
-              isChecked={acknowledged}
-              isDisabled={isLoading || !hasSaved}
-              onChange={(e) => setAcknowledged(e.target.checked)}
-              label={t("Common:RecoveryPhraseAcknowledge")}
-              tabIndex={1}
-            />
-          </div>
-          {!hasSaved ? (
-            <Text className={styles.saveFirstHint} fontSize="12px">
-              {t("Common:RecoveryPhraseSaveFirst")}
-            </Text>
-          ) : null}
-        </div>
-      </ModalDialog.Body>
-
-      <ModalDialog.Footer>
-        <Button
-          scale
-          primary
-          key="ContinueButton"
-          onClick={onConfirm}
-          size={ButtonSize.normal}
-          label={t("Common:ContinueButton")}
-          isDisabled={!acknowledged || isLoading}
-          isLoading={isLoading}
-          tabIndex={2}
-        />
-        <Button
-          scale
-          key="CancelButton"
-          onClick={handleCancel}
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-          isDisabled={isLoading}
-          tabIndex={3}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
+        <ModalDialog.Footer>
+          <Button
+            scale
+            primary
+            key="ContinueButton"
+            onClick={onConfirm}
+            size={ButtonSize.normal}
+            label={t("Common:ContinueButton")}
+            isDisabled={!acknowledged || isLoading}
+            isLoading={isLoading}
+            tabIndex={2}
+          />
+          <Button
+            scale
+            key="CancelButton"
+            onClick={handleCancel}
+            size={ButtonSize.normal}
+            label={t("Common:CancelButton")}
+            isDisabled={isLoading}
+            tabIndex={3}
+          />
+        </ModalDialog.Footer>
+      </ModalDialog>
+      <UnsavedChangesDialog {...confirmation} />
+    </>
   );
 };
 

@@ -37,7 +37,8 @@
 // behaviour that lives in the dialog chrome; KeyRotationDialog.test.tsx
 // stubs the kit and covers the validation rules.
 
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 
 import { KeyRotationDialog } from "../KeyRotationDialog";
@@ -71,6 +72,15 @@ const renderDialog = (props: Partial<DialogProps> = {}) => {
   return { onSubmit, onCancel };
 };
 
+// A closed ModalDialog stays mounted, hidden from assistive technology, so the
+// confirmation is looked up among the dialogs that are actually open.
+const queryConfirmation = () =>
+  screen
+    .queryAllByRole("dialog")
+    .find((dialog) =>
+      within(dialog).queryByText("Common:UnsavedChangesDescription"),
+    ) ?? null;
+
 describe("KeyRotationDialog", () => {
   // Spec: private-rooms/key-management, "Key dialogs ignore a click beside them"
   it("Backdrop click on the passphrase-change dialog", () => {
@@ -80,5 +90,23 @@ describe("KeyRotationDialog", () => {
 
     expect(onCancel).not.toHaveBeenCalled();
     expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("Typed passphrase-change kept", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderDialog();
+    const current = screen.getByPlaceholderText(
+      "Common:EnterCurrentPassphrase",
+    );
+
+    await user.type(current, "old horse battery");
+    await user.keyboard("{Escape}");
+    expect(queryConfirmation()).not.toBeNull();
+
+    await user.keyboard("{Escape}");
+
+    expect(queryConfirmation()).toBeNull();
+    expect(onCancel).not.toHaveBeenCalled();
+    expect(current).toHaveValue("old horse battery");
   });
 });

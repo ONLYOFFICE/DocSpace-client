@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 
@@ -71,6 +71,15 @@ const renderModal = (props: Partial<ModalProps> = {}) => {
 
 const getPassphraseInput = () =>
   screen.getByPlaceholderText("Common:Passphrase") as HTMLInputElement;
+
+// A closed ModalDialog stays mounted, hidden from assistive technology, so the
+// confirmation is looked up among the dialogs that are actually open.
+const queryConfirmation = () =>
+  screen
+    .queryAllByRole("dialog")
+    .find((dialog) =>
+      within(dialog).queryByText("Common:UnsavedChangesDescription"),
+    ) ?? null;
 
 describe("PassphraseModal", () => {
   it("submits the passphrase on Enter", async () => {
@@ -153,6 +162,58 @@ describe("PassphraseModal", () => {
 
     await user.keyboard("{Escape}");
 
+    expect(onCancel).toHaveBeenCalledTimes(1);
+  });
+
+  it("Typed passphrase kept", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderModal({ isNew: true });
+
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.keyboard("{Escape}");
+    expect(queryConfirmation()).not.toBeNull();
+
+    await user.keyboard("{Escape}");
+
+    expect(queryConfirmation()).toBeNull();
+    expect(onCancel).not.toHaveBeenCalled();
+    expect(getPassphraseInput()).toHaveValue("Correct1horse!battery");
+  });
+
+  it("Typed passphrase discarded", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderModal({ isNew: true });
+
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.keyboard("{Escape}");
+    await user.click(
+      within(queryConfirmation()!).getByRole("button", {
+        name: "Common:CloseMenu",
+      }),
+    );
+
+    expect(onCancel).toHaveBeenCalledTimes(1);
+    expect(queryConfirmation()).toBeNull();
+  });
+
+  it("Nothing typed yet", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderModal({ isNew: true });
+
+    await user.keyboard("{Escape}");
+
+    expect(queryConfirmation()).toBeNull();
+    expect(onCancel).toHaveBeenCalledTimes(1);
+  });
+
+  it("Unlock prompt closes at once", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderModal();
+
+    await user.type(getPassphraseInput(), "correct horse battery");
+    await user.keyboard("{Escape}");
+
+    expect(queryConfirmation()).toBeNull();
     expect(onCancel).toHaveBeenCalledTimes(1);
   });
 });

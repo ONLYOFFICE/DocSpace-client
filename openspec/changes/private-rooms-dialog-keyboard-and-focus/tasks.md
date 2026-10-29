@@ -28,7 +28,7 @@
 
 ## 5. Enter from text fields and busy state
 
-- [ ] 5.1 Add the shared Enter helper in `packages/shared/dialogs` (D5) and migrate `PassphraseModal` to it; verify with the existing Enter tests in `PassphraseModal.test.tsx` green and a helper test `packages/shared/dialogs/__tests__/enter-submit.test.ts` covering Enter, Shift+Enter on a textarea, disabled action and an already-handled event
+- [x] 5.1 Add the shared Enter helper in `packages/shared/dialogs` (D5) and migrate `PassphraseModal` to it; verify with the existing Enter tests in `PassphraseModal.test.tsx` green and a helper test `packages/shared/dialogs/__tests__/enter-submit.test.ts` covering Enter, Shift+Enter on a textarea, disabled action and an already-handled event
 - [ ] 5.2 Adopt the helper in `KeyRotationDialog`; verify with tests "Passphrase change on Enter", "Enter while the action is disabled", "Enter on the cancel action" in `keys-management/modals/__tests__/KeyRotationDialog.test.tsx`
 - [ ] 5.3 Adopt the helper in `RecoveryPhraseInputModal`; verify with tests "Recovery phrase on Enter" and "Line break in the recovery phrase" in `RecoveryPhraseInputModal.test.tsx`
 - [ ] 5.4 Adopt the helper in `ResetKeysConfirmDialog`; verify with test "Reset token on Enter" in a new `keys-management/modals/__tests__/ResetKeysConfirmDialog.test.tsx`

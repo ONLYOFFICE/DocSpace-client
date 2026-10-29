@@ -35,6 +35,22 @@
 
 import type React from "react";
 
+type FieldKeyEvent = React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>;
+
+/**
+ * Key handler of a text field inside a key dialog: Enter runs the dialog's
+ * primary action while it is enabled and nothing has handled the key yet.
+ * Shift+Enter in a textarea is left alone, so it still inserts a line break.
+ */
+export const submitOnEnter =
+  (submit: () => void, enabled: boolean) => (e: FieldKeyEvent) => {
+    if (e.key !== "Enter" || e.defaultPrevented) return;
+    if (e.shiftKey && e.currentTarget.tagName === "TEXTAREA") return;
+    if (!enabled) return;
+    e.preventDefault();
+    submit();
+  };
+
 /**
  * Key handler of an action link inside a key dialog. The kit's action links
  * carry no href, so Enter does nothing on them by itself; this clicks the link

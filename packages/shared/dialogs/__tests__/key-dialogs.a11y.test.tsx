@@ -1,6 +1,6 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 
 import { KeyChangeDialog } from "../key-change-dialog";
@@ -116,19 +116,18 @@ describe("key dialogs", () => {
     render(
       <PassphraseModal visible isNew onSubmit={vi.fn()} onCancel={vi.fn()} />,
     );
-    const dialog = screen.getByRole("dialog", {
-      name: "Common:CreatePassphrase",
-    });
+    const dialog = within(
+      screen.getByRole("dialog", { name: "Common:CreatePassphrase" }),
+    );
 
-    for (const [name, placeholder] of [
+    for (const [name, label] of [
       ["passphrase", "Common:Passphrase"],
       ["confirmPassphrase", "Common:ConfirmPassphrase"],
     ]) {
-      const field = dialog.querySelector<HTMLInputElement>(
-        `input[name='${name}']`,
-      );
-      expect(field).toHaveAttribute("placeholder", placeholder);
-      expect(field!.labels).toHaveLength(0);
+      const field = dialog.getByLabelText(label);
+      expect(field).toHaveAttribute("name", name);
+      expect(field).toHaveAccessibleName(label);
+      expect(field.labels).toHaveLength(1);
     }
   });
 

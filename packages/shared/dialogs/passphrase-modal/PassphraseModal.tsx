@@ -268,7 +268,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
 
               <FieldContainer
                 isVertical
-                labelVisible={false}
+                labelVisible
+                labelText={t("Common:Passphrase")}
+                labelFor="passphrase"
                 removeMargin
                 hasError={passphraseHasError}
                 errorMessage={displayedError ?? ""}
@@ -383,7 +385,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
             {isNew && (
               <FieldContainer
                 isVertical
-                labelVisible={false}
+                labelVisible
+                labelText={t("Common:ConfirmPassphrase")}
+                labelFor="confirmPassphrase"
                 removeMargin
                 hasError={!!confirmPassphrase && passphrase !== confirmPassphrase}
                 errorMessage={

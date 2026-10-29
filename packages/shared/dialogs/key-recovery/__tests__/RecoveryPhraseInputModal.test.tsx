@@ -37,7 +37,17 @@ import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
+import { validateMnemonic } from "../../../services/encryption/recovery";
 import { RecoveryPhraseInputModal } from "../RecoveryPhraseInputModal";
+
+vi.mock("../../../services/encryption/recovery", async (importOriginal) => {
+  const actual =
+    await importOriginal<typeof import("../../../services/encryption/recovery")>();
+  return { ...actual, validateMnemonic: vi.fn(actual.validateMnemonic) };
+});
+
+// BIP-39 test vector: all-zero entropy, whose checksum word is "art".
+const VALID_PHRASE = `${"abandon ".repeat(23)}art`;
 
 type ModalProps = React.ComponentProps<typeof RecoveryPhraseInputModal>;
 
@@ -86,6 +96,33 @@ describe("RecoveryPhraseInputModal", () => {
     expect(queryConfirmation()).toBeNull();
     expect(onCancel).not.toHaveBeenCalled();
     expect(getPhraseField()).toHaveValue("abandon abandon abandon");
+  });
+
+  it("Recovery phrase on Enter", async () => {
+    const user = userEvent.setup();
+    const { onSubmit } = renderModal();
+
+    await user.click(getPhraseField());
+    await user.paste(VALID_PHRASE);
+    await user.keyboard("{Enter}");
+
+    expect(validateMnemonic).toHaveBeenCalledWith(VALID_PHRASE);
+    await waitFor(() => expect(onSubmit).toHaveBeenCalledWith(VALID_PHRASE));
+    expect(getPhraseField()).toHaveValue(VALID_PHRASE);
+  });
+
+  it("Line break in the recovery phrase", async () => {
+    const user = userEvent.setup();
+    const { onSubmit } = renderModal();
+
+    await user.click(getPhraseField());
+    await user.paste(VALID_PHRASE);
+    await user.keyboard("{Shift>}{Enter}{/Shift}");
+
+    expect(getPhraseField()).toHaveValue(`${VALID_PHRASE}
+`);
+    expect(validateMnemonic).not.toHaveBeenCalled();
+    expect(onSubmit).not.toHaveBeenCalled();
   });
 
   it("Wrong recovery phrase", async () => {

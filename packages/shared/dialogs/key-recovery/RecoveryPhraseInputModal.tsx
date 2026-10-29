@@ -35,7 +35,13 @@
 
 "use client";
 
-import React, { useCallback, useEffect, useState, useId } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useId,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -44,6 +50,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { useKeyDialogCloseGuard } from "../key-dialog-close-guard";
+import { submitOnEnter } from "../key-dialog-keys";
 import { KeyDialogAnnouncement } from "../key-dialog-announcement";
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
@@ -117,13 +124,21 @@ export const RecoveryPhraseInputModal: React.FC<
     onCancel();
   }, [onCancel]);
 
-  const { requestClose, confirmation } = useKeyDialogCloseGuard({
+  const { requestClose, confirming, confirmation } = useKeyDialogCloseGuard({
     visible,
     dirty: phrase.trim() !== "",
     onCancel: handleCancel,
   });
 
   const isDisabled = phrase.trim().length === 0 || isLoading || isValidating;
+
+  const handleKeyDown = useMemo(
+    () =>
+      submitOnEnter(() => {
+        void handleSubmit();
+      }, !isDisabled && !confirming),
+    [handleSubmit, isDisabled, confirming],
+  );
 
   return (
     <>
@@ -166,6 +181,7 @@ export const RecoveryPhraseInputModal: React.FC<
                   setPhrase(e.target.value);
                   setLocalError("");
                 }}
+                onKeyDown={handleKeyDown}
                 placeholder={t("Common:RecoveryPhrasePlaceholder")}
                 aria-labelledby={hintId}
                 heightTextArea="120px"

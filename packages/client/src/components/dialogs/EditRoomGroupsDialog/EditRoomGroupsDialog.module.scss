@@ -58,7 +58,8 @@
         fill: $light-gray-dark;
       }
 
-      > div:last-child svg {
+      // The close cross: an IconButton div in older kits, a button now.
+      > :last-child svg {
         width: 10px !important;
         height: 10px !important;
         padding-top: 3px;

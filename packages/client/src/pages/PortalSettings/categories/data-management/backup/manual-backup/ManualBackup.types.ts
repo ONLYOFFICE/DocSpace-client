@@ -56,6 +56,7 @@ export interface InjectedManualBackupProps
   language?: string;
   refreshPayerInfo?: (isRefresh?: boolean) => Promise<unknown>;
   refreshBackupService?: (serviceName?: string) => Promise<unknown>;
+  ensureAppsLoaded: VoidFunction;
 }
 
 export type ExternalManualBackupProps = Pick<

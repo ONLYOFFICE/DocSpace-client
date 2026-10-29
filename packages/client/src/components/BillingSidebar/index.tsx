@@ -139,7 +139,10 @@ const BillingSidebar = ({
       // linkData renders the item as a real router link, so right-click /
       // Ctrl-click / middle-click can open the section in a new tab.
       linkData: { path: item.path },
-      onClick: () => navigate(item.path),
+      // Drawn as a link the entry navigates by itself (`meta.isLink`).
+      onClick: (_entry: unknown, meta?: { isLink?: boolean }) => {
+        if (!meta?.isLink) navigate(item.path);
+      },
     }));
     return [{ id: "billing", items }];
   }, [t, navigate, visibleItems]);

@@ -94,6 +94,13 @@
 
 .toggleRow {
   display: flex;
+  width: fit-content;
+
+  // The kit's toggle draws no focus of its own on its hidden input.
+  &:has(:focus-visible) {
+    outline: 2px solid var(--accent-main);
+    outline-offset: 2px;
+  }
 }
 
 .deviceToggle {

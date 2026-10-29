@@ -354,9 +354,9 @@ const KeysManagement = ({
                   if (passkeyEnrolled) handleRemovePasskey();
                   else void handleEnrollPasskey();
                 }}
+                label={t("Common:PasskeyUnlockLabel")}
                 dataTestId="passkey_unlock_toggle"
               />
-              <Text>{t("Common:PasskeyUnlockLabel")}</Text>
             </div>
           ) : null}
           {rememberedUntil ? (

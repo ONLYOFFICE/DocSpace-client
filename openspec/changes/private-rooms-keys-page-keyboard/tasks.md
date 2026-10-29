@@ -16,7 +16,7 @@
 ## 4. Page actions and device settings
 
 - [x] 4.1 Give the import, recovery-phrase, forget-device and lock-now links in `KeysManagement.tsx` `role="button"`, `tabIndex={0}` and `activateAsButton`; verify with tests "No key yet", "Text actions announced" and "Lock with Space" in a new `keys-management/__tests__/KeysManagement.test.tsx` (the page inside mobx-react's `Provider` with a fake `userStore`, `useEncryption`, the flow hooks and the passkey and device-unlock services mocked, D6)
-- [ ] 4.2 Name the passkey toggle through the kit's `label` prop and the auto-lock selector through a group labelled by its Common:AutoLockLabel heading (D4); verify with tests "Passkey toggle" and "Device section" in `KeysManagement.test.tsx`, and "Auto-lock selector" and "Moving through the open list" (arrows move the highlight, Enter selects, the button stays `role="button"`) in a new `keys-management/__tests__/AutoLockSetting.test.tsx`
+- [x] 4.2 Name the passkey toggle through the kit's `label` prop and the auto-lock selector through a group labelled by its Common:AutoLockLabel heading (D4); verify with tests "Passkey toggle" and "Device section" in `KeysManagement.test.tsx`, and "Auto-lock selector" and "Moving through the open list" (arrows move the highlight, Enter selects, the button stays `role="button"`) in a new `keys-management/__tests__/AutoLockSetting.test.tsx`
 
 ## 5. Integration
 

@@ -1,7 +1,7 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "mobx-react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -151,5 +151,39 @@ describe("KeysManagement", () => {
     expect(mocks.encryption.lock).toHaveBeenCalledTimes(1);
     expect(mocks.toastSuccess).toHaveBeenCalledWith("Common:EncryptionLocked");
     expect(scrollKept).toBe(true);
+  });
+
+  it("Passkey toggle", async () => {
+    mocks.passkeyAvailable = true;
+    renderPage([KEY]);
+
+    const toggle = await screen.findByRole("checkbox", {
+      name: "Common:PasskeyUnlockLabel",
+    });
+
+    expect(toggle).not.toBeChecked();
+  });
+
+  it("Device section", async () => {
+    const user = userEvent.setup();
+    mocks.passkeyAvailable = true;
+    mocks.writtenAt = Date.now();
+    renderPage([KEY]);
+    const toggle = await screen.findByRole("checkbox", {
+      name: "Common:PasskeyUnlockLabel",
+    });
+    const forget = await screen.findByRole("button", {
+      name: "Common:ForgetDeviceButton",
+    });
+
+    within(screen.getByRole("group", { name: "Common:AutoLockLabel" }))
+      .getByRole("button")
+      .focus();
+    await user.tab();
+    expect(toggle).toHaveFocus();
+    await user.tab();
+    expect(forget).toHaveFocus();
+    await user.tab();
+    expect(action("Common:LockNow")).toHaveFocus();
   });
 });

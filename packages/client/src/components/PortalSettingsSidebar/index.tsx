@@ -216,7 +216,10 @@ const PortalSettingsSidebar = ({
         // linkData renders the item as a real router link, so right-click /
         // Ctrl-click / middle-click can open the section in a new tab.
         linkData: { path },
-        onClick: () => navigate(path),
+        // Drawn as a link the entry navigates by itself (`meta.isLink`).
+        onClick: (_item: unknown, meta?: { isLink?: boolean }) => {
+          if (!meta?.isLink) navigate(path);
+        },
       };
     });
 

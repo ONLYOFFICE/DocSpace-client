@@ -42,6 +42,7 @@ import componentLoader from "@docspace/shared/utils/component-loader";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { generalRoutes } from "./general";
 
+import ProtectedAppRoute from "../components/ProtectedAppRoute";
 import { ViewComponent } from "../pages/PortalSettings/View";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
 import { getPluginSectionRoute } from "SRC_DIR/helpers/plugins/navigation";
@@ -553,7 +554,13 @@ const PortalSettingsRoutes = {
             import("SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom"),
         );
 
-        return { Component: QuotaPerRoomComponentSection };
+        return {
+          Component: () => (
+            <ProtectedAppRoute appId="ai-rooms">
+              <QuotaPerRoomComponentSection />
+            </ProtectedAppRoute>
+          ),
+        };
       },
     },
     {
@@ -576,7 +583,11 @@ const PortalSettingsRoutes = {
         );
 
         return {
-          Component: withAIServicesGuard(QuotaPerAIAgentComponentSection),
+          Component: withAIServicesGuard(() => (
+            <ProtectedAppRoute appId="ai-agents">
+              <QuotaPerAIAgentComponentSection />
+            </ProtectedAppRoute>
+          )),
         };
       },
     },

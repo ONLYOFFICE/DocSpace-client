@@ -306,6 +306,7 @@ const PeopleTableRow = ({
                 className="table-container_row-loader"
                 size="20px"
                 type={LoaderTypes.track}
+                isDecorative
               />
             ) : (
               <>

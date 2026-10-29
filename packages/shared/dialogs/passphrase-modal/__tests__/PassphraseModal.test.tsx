@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 
@@ -135,5 +135,24 @@ describe("PassphraseModal", () => {
     await user.keyboard("{Enter}");
 
     expect(onSubmit).toHaveBeenCalledWith("Correct1horse!battery", undefined);
+  });
+
+  // Spec: private-rooms/key-management, "Key dialogs ignore a click beside them"
+  it("Backdrop click on the unlock prompt", () => {
+    const { onCancel } = renderModal();
+
+    fireEvent.mouseDown(document.getElementById("modal-onMouseDown-close")!);
+
+    expect(onCancel).not.toHaveBeenCalled();
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("Escape still cancels", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderModal();
+
+    await user.keyboard("{Escape}");
+
+    expect(onCancel).toHaveBeenCalledTimes(1);
   });
 });

@@ -217,6 +217,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
       onClose={handleCancel}
       displayType={ModalDialogType.modal}
       displayTypeDetailed={KEY_DIALOG_DISPLAY_TYPE}
+      closeOnBackdropClick={false}
       aria-labelledby={titleId}
       isLoading={!ready}
       autoMaxHeight

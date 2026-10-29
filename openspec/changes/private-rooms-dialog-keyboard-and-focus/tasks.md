@@ -8,7 +8,7 @@
 
 ## 2. Backdrop and close confirmation
 
-- [ ] 2.1 Set `closeOnBackdropClick={false}` on the four shared key dialogs; verify with tests "Backdrop click on the unlock prompt", "Escape still cancels" in `packages/shared/dialogs/passphrase-modal/__tests__/PassphraseModal.test.tsx` and "Backdrop click on the key-change dialog" in a new `packages/shared/dialogs/key-change-dialog/__tests__/KeyChangeDialog.test.tsx`
+- [x] 2.1 Set `closeOnBackdropClick={false}` on the four shared key dialogs; verify with tests "Backdrop click on the unlock prompt", "Escape still cancels" in `packages/shared/dialogs/passphrase-modal/__tests__/PassphraseModal.test.tsx` and "Backdrop click on the key-change dialog" in a new `packages/shared/dialogs/key-change-dialog/__tests__/KeyChangeDialog.test.tsx`
 - [ ] 2.2 Set `closeOnBackdropClick={false}` on `KeyRotationDialog` and `ResetKeysConfirmDialog`; verify with a backdrop test in each dialog's test file under `keys-management/modals/__tests__/`
 - [ ] 2.3 Add the close guard with `UnsavedChangesDialog` to the creation dialog, `KeyRotationDialog`, `RecoveryPhraseInputModal` and `RecoveryPhraseDisplayModal` (D2, including the ref-based Escape guard); verify with tests "Typed passphrase kept", "Typed passphrase discarded", "Nothing typed yet", "Recovery phrase not yet acknowledged", "Unlock prompt closes at once" next to the dialogs, and `pnpm test` (shared) and `pnpm test:client` green
 - [ ] 2.4 Cover the confirmation end to end in `packages/client/__tests__/key-flow-edge-cases.spec.ts` ("Typed passphrase kept", "Typed passphrase discarded"); verify with `cd packages/client && pnpm exec playwright test __tests__/key-flow-edge-cases.spec.ts` under Docker

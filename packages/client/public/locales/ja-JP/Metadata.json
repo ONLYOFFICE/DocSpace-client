@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "{{template}}の値がすでにあるアイテムは変更されません",
   "SuggestMetadata": "メタデータを提案",
   "TemplateDeleted": "テンプレートが削除されました",
+  "TemplateFieldsRequired": "テンプレートを保存するには、フィールドを1つ以上追加してください",
   "TemplateValue": "テンプレート: {{template}}",
   "Visibility": "表示状態",
   "Visible": "表示",

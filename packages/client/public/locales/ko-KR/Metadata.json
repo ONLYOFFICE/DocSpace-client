@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "이미 {{template}} 값이 있는 항목은 변경되지 않습니다",
   "SuggestMetadata": "메타데이터 제안",
   "TemplateDeleted": "템플릿이 삭제되었습니다",
+  "TemplateFieldsRequired": "템플릿을 저장하려면 필드를 하나 이상 추가하세요",
   "TemplateValue": "템플릿: {{template}}",
   "Visibility": "표시 여부",
   "Visible": "표시",

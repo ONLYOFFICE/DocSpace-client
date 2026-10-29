@@ -50,7 +50,7 @@ export type FileInfoType = {
   inPublic?: boolean;
 };
 
-export type FilesSelectorSettings =
+export type FilesSelectorSettings = (
   | {
       getIcon: TGetIcon;
       filesSettings?: FilesSettingsDto & {
@@ -62,7 +62,12 @@ export type FilesSelectorSettings =
       filesSettings: FilesSettingsDto & {
         organizeRoomsGrouping?: boolean;
       };
-    };
+    }
+) & {
+  // Off when the portal has the Rooms / Forms app switched off.
+  withRoomsTreeFolder?: boolean;
+  withFormsTreeFolder?: boolean;
+};
 
 export type FilesSelectorInputProps = {
   newPath: string;

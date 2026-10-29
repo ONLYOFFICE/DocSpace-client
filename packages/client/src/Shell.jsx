@@ -62,6 +62,7 @@ import {
   PORTAL_DARK_THEME_ID,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import { getAiAccessSettings } from "@docspace/shared/api/settings";
+import { setForbiddenHandler } from "@docspace/shared/api/client";
 import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
 import {
@@ -96,6 +97,10 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { handleCopy } from "@docspace/shared/utils/copy";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import {
+  getServiceLimitChatError,
+  getServiceLimitDescription,
+} from "@docspace/shared/utils/ai";
 
 import "@docspace/shared/styles/theme.scss";
 
@@ -126,8 +131,14 @@ import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
 
+// How long a denied request's caller has to show its own error toast before
+// the generic "Access denied" one is shown in its place.
+const FORBIDDEN_TOAST_DELAY = 500;
+
 const Shell = ({ page = "home", ...rest }) => {
   const {
+    checkUserTypeLowered,
+    refreshRightsAfterForbidden,
     isLoaded,
     isAuthenticated,
     loadBaseInfo,
@@ -261,6 +272,51 @@ const Shell = ({ page = "home", ...rest }) => {
       toastr.error(err);
     }
   }, []);
+
+  // A denied request in a room section is only reported: navigating away
+  // threw every open room tab back to the default page. A burst of denied
+  // requests is handled once: it checks whether the user's type or room role
+  // was lowered while the tab missed the socket event, and gets one toast.
+  //
+  // That toast waits a moment, because the request is still rejected to its
+  // caller, and a caller that reports errors shows a toast of its own; a
+  // second "Access denied" next to it would only be noise.
+  useEffect(() => {
+    let toastId = null;
+    let pendingTimer = null;
+    let callerReported = false;
+
+    const unsubscribe = toastify.onChange((payload) => {
+      if (
+        pendingTimer !== null &&
+        payload.status === "added" &&
+        payload.type === ToastType.error
+      ) {
+        callerReported = true;
+      }
+    });
+
+    setForbiddenHandler(() => {
+      if (pendingTimer !== null) return;
+      if (toastId !== null && toastr.isActive(toastId)) return;
+
+      checkUserTypeLowered();
+      refreshRightsAfterForbidden();
+
+      callerReported = false;
+      pendingTimer = setTimeout(() => {
+        pendingTimer = null;
+
+        if (!callerReported) toastId = toastr.error(t("Common:AccessDenied"));
+      }, FORBIDDEN_TOAST_DELAY);
+    });
+
+    return () => {
+      setForbiddenHandler(null);
+      unsubscribe();
+      if (pendingTimer !== null) clearTimeout(pendingTimer);
+    };
+  }, [t, checkUserTypeLowered, refreshRightsAfterForbidden]);
 
   // Locale is handled by Luxon date utilities - no global locale setup needed
 
@@ -914,13 +970,36 @@ const Shell = ({ page = "home", ...rest }) => {
   // Only the Payer can actually top the wallet up, so the button to
   // Billing -> Wallet is theirs alone; everyone else is pointed to the Payer
   // (`action: null` also drops the default Retry, which would just fail
-  // again on an empty wallet). Every other code keeps the library default
-  // (localized text + Retry).
+  // again on an empty wallet). A spending limit reached (relayed as a 403, see
+  // getServiceLimitChatError) is handled the same way: admins get a button to
+  // AI settings -> Limits, everyone else is pointed to an admin. Every other
+  // code keeps the library default (localized text + Retry).
   const formatChatError = useCallback(
     (payload) => {
-      // Standalone pays its AI provider directly: no wallet, nothing to top up,
-      // so the library default (localized text + Retry) stands.
-      if (payload?.code !== "insufficient_funds" || standalone) return null;
+      // Standalone pays its AI provider directly: no wallet and no spending
+      // limits, so the library default (localized text + Retry) stands.
+      if (standalone) return null;
+
+      const serviceLimit = getServiceLimitChatError(payload);
+      if (serviceLimit) {
+        return {
+          title: t("Common:AILimitReached"),
+          description: getServiceLimitDescription(
+            t,
+            language,
+            serviceLimit,
+            isAdmin,
+          ),
+          action: isAdmin
+            ? {
+                text: t("Common:ChangeAILimit"),
+                onClick: () => navigate("/portal-settings/ai-settings/limits"),
+              }
+            : null,
+        };
+      }
+
+      if (payload?.code !== "insufficient_funds") return null;
 
       return {
         title: t("Common:WalletBalanceTooLow"),
@@ -935,7 +1014,7 @@ const Shell = ({ page = "home", ...rest }) => {
           : null,
       };
     },
-    [t, isPayer, navigate, standalone],
+    [t, isAdmin, isPayer, navigate, standalone, language],
   );
 
   // AI chat host callbacks. Web Search settings save on an explicit button
@@ -1051,6 +1130,8 @@ const ShellWrapper = inject(
     aiRoomStore,
     paymentStore,
     accessRightsStore,
+    peopleStore,
+    filesStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -1118,6 +1199,8 @@ const ShellWrapper = inject(
       (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
 
     return {
+      checkUserTypeLowered: peopleStore.usersStore.checkUserTypeLowered,
+      refreshRightsAfterForbidden: filesStore.refreshRightsAfterForbidden,
       loadBaseInfo: async () => {
         await init(false, i18n);
 

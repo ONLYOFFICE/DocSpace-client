@@ -3,7 +3,7 @@
   "content": "Sync responses",
   "content_en_sha1_hash": "69c29f831fa2105be7e339c599a8caf76bf70fe8",
   "created_at": "2026-10-01T08:23:09.584Z",
-  "updated_at": "2026-10-21T10:17:45.821Z",
+  "updated_at": "2026-10-23T12:28:45.659Z",
   "comment": {
     "text": "Context menu option label used to trigger the synchronization of data or responses from an XLSX spreadsheet.",
     "is_auto": true,

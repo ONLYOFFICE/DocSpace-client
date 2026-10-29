@@ -1,0 +1,77 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+// The "Empty trash" badge of the Trash item: shown, as on the old article
+// item, while the pointer is over the item, and while the keyboard is on it.
+// Hidden it must not take a tap either: `opacity` alone left an invisible
+// button at the end of the row, and a touch there opened the dialog instead
+// of the Trash. The link's own focus still reveals it for the keyboard.
+.emptyTrashBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+
+  svg path {
+    fill: var(--nav-menu-item-icon-color, var(--icon-button-color));
+  }
+
+  // Only the Trash item's own row: it sits in the Files section's `li`, and a
+  // bare `li:hover` matched that one too, so hovering or focusing any entry
+  // of the section showed the badge. The section's `li` holds a sub-list.
+  :global(li:not(:has(ul)):hover) &,
+  :global(li:not(:has(ul)):focus-within) & {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // A touch screen has no hover to reveal it, and a tap on the item opens the
+  // Trash, so there the badge stays on.
+  @media (hover: none) {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--nav-menu-item-icon-active-color);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+}

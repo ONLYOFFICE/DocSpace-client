@@ -3,7 +3,7 @@
   "content": "The API key is displayed only once upon saving and is then hidden for security purposes.",
   "content_en_sha1_hash": "74d31a0ea0755223860edc0fa1e51abfdbad7bde",
   "created_at": "2025-10-27T16:14:31.662Z",
-  "updated_at": "2026-10-21T10:17:45.766Z",
+  "updated_at": "2026-10-22T16:09:36.909Z",
   "comment": {
     "text": "This is a descriptive text displayed in a banner. It informs the user that an API key, once saved, will be hidden for security reasons.",
     "is_auto": true,

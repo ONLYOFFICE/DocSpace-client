@@ -3,7 +3,7 @@
   "content": "File viewing.",
   "content_en_sha1_hash": "e8e372e441f865b8c8a7f1c1fcc3ad023e1beccf",
   "created_at": "2025-09-29T18:22:08.790Z",
-  "updated_at": "2026-10-21T10:17:45.837Z",
+  "updated_at": "2026-10-22T16:09:36.980Z",
   "comment": {
     "text": "This is a short description displayed next to the \"Viewer\" role option in sharing settings. It explains the permissions associated with the Viewer role.",
     "is_auto": true,

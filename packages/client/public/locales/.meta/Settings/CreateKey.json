@@ -3,7 +3,7 @@
   "content": "Create key",
   "content_en_sha1_hash": "e028cb09f2a481aec3b30e1b7d57d0e8976efb23",
   "created_at": "2026-04-03T21:51:36.617Z",
-  "updated_at": "2026-10-22T13:13:49.756Z",
+  "updated_at": "2026-10-22T16:09:36.937Z",
   "comment": {
     "text": "This is a button label that creates a new API key.",
     "is_auto": true,

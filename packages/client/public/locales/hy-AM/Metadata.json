@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "«{{template}}» կաղապարի արժեքներ արդեն ունեցող տարրերը մնում են անփոփոխ",
   "SuggestMetadata": "Առաջարկել մետատվյալներ",
   "TemplateDeleted": "Կաղապարը ջնջվեց",
+  "TemplateFieldsRequired": "Կաղապարը պահպանելու համար ավելացրեք առնվազն մեկ դաշտ",
   "TemplateValue": "Կաղապար՝ {{template}}",
   "Visibility": "Տեսանելիություն",
   "Visible": "Տեսանելի",

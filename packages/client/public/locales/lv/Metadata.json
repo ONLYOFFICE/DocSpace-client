@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Vienumi, kuriem jau ir veidnes {{template}} vērtības, paliek nemainīti",
   "SuggestMetadata": "Ieteikt metadatus",
   "TemplateDeleted": "Veidne izdzēsta",
+  "TemplateFieldsRequired": "Pievienojiet vismaz vienu lauku, lai saglabātu veidni",
   "TemplateValue": "Veidne: {{template}}",
   "Visibility": "Redzamība",
   "Visible": "Redzama",

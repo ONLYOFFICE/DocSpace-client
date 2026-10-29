@@ -28,6 +28,8 @@
   "UserTariffLimitHeader": "Dosežena je omejitev za število skrbnikov: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Vsi uporabniki bodo dodani samo z dovoljenji Uporabnika. Za dodajanje dodatnih upravnikov se obrnite na superskrbnika za nadgradnjo tarifnega načrta.",
   "UserTariffReachedForAdmins": "Uporabniki bodo dodani samo z uporabniškimi dovoljenji. Če želite dodati nadaljnje skrbnike, <1>kliknite tukaj</1>, da nadgradite svoj tarifni načrt.",
+  "UserTypeLoweredDescription": "Nekatera dejanja na tej strani vam morda niso več na voljo.",
+  "UserTypeLoweredHeader": "Vaš tip uporabnika je bil spremenjen",
   "WalletLowBalanceContactPayer": "Obrnite se na plačnika (<1>{{payerContact}}</1>), da napolni denarnico in se izognete prekinitvam plačljivih storitev.",
   "WalletLowBalanceDescription": "Napolnite denarnico, da se izognete prekinitvam plačljivih storitev. <1>Napolni</1>",
   "WalletLowBalanceHeader": "Vaši krediti se iztekajo: {{balance}}"

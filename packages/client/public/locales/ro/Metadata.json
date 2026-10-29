@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Elementele care au deja valori {{template}} rămân neschimbate",
   "SuggestMetadata": "Sugerează metadate",
   "TemplateDeleted": "Șablonul a fost șters",
+  "TemplateFieldsRequired": "Adăugați cel puțin un câmp pentru a salva șablonul",
   "TemplateValue": "Șablon: {{template}}",
   "Visibility": "Vizibilitate",
   "Visible": "Vizibil",

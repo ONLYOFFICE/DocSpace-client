@@ -3,7 +3,7 @@
   "content": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
   "content_en_sha1_hash": "50c21689104208a689abc871f03f39356411633c",
   "created_at": "2025-05-19T21:30:53.710Z",
-  "updated_at": "2026-10-21T10:17:45.715Z",
+  "updated_at": "2026-10-22T16:09:36.864Z",
   "comment": {
     "text": "This is a line of text within a dialog warning the user about their room quota. It displays the current number of rooms used (`{{currentValue}}`) out of the maximum allowed (`{{maxValue}}`) by their tariff plan.",
     "is_auto": true,

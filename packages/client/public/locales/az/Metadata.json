@@ -104,6 +104,7 @@
   "SkipExistingValuesDescription": "Artıq {{template}} dəyərləri olan elementlər dəyişməz qalır",
   "SuggestMetadata": "Metadata təklif edin",
   "TemplateDeleted": "Şablon silindi",
+  "TemplateFieldsRequired": "Şablonu saxlamaq üçün ən azı bir sahə əlavə edin",
   "TemplateValue": "Şablon: {{template}}",
   "Visibility": "Görünmə",
   "Visible": "Görünən",

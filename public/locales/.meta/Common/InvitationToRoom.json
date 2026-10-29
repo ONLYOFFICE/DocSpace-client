@@ -3,7 +3,7 @@
   "content": "<1>{{displayName}}</1> invites you to join the room <1>{{roomName}}</1> for secure document collaboration.",
   "content_en_sha1_hash": "a562c988747a5f073b4f2c0e05a5d2508c3d523a",
   "created_at": "2025-05-19T21:30:45.954Z",
-  "updated_at": "2026-10-21T10:17:45.833Z",
+  "updated_at": "2026-10-22T16:09:36.974Z",
   "comment": {
     "text": "This is a greeting message displayed to a user who has been invited to a room. It informs them that `displayName` has invited them to the room `roomName` for secure document collaboration.",
     "is_auto": true,

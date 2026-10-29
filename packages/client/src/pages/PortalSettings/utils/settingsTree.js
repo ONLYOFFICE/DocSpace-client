@@ -564,6 +564,13 @@ export const settingsTree = [
         tKey: "Common:Knowledge",
         isCategory: true,
       },
+      {
+        id: "portal-settings_catalog-ai-settings-limits",
+        key: "7-5",
+        link: "limits",
+        tKey: "Common:AILimits",
+        isCategory: true,
+      },
     ],
   },
   {

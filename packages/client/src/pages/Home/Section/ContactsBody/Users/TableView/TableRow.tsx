@@ -53,6 +53,7 @@ import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import AILimit from "SRC_DIR/components/AILimit";
 import { USER_TYPE_DROPDOWN_WIDTH } from "SRC_DIR/helpers/contacts";
 
 import Badges from "../../Badges";
@@ -82,6 +83,7 @@ const PeopleTableRow = ({
   standalone,
   onOpenGroup,
   showStorageInfo,
+  showAISpendingInfo,
 
   typeColumnIsEnabled,
   groupColumnIsEnabled,
@@ -89,6 +91,7 @@ const PeopleTableRow = ({
   invitedDateColumnIsEnabled,
   inviterColumnIsEnabled,
   storageColumnIsEnabled,
+  aiSpendingColumnIsEnabled,
 
   contactsTab,
   isRoomAdmin,
@@ -303,6 +306,7 @@ const PeopleTableRow = ({
                 className="table-container_row-loader"
                 size="20px"
                 type={LoaderTypes.track}
+                isDecorative
               />
             ) : (
               <>
@@ -451,6 +455,23 @@ const PeopleTableRow = ({
             ) : (
               <div />
             ))}
+
+        {isGuests
+          ? null
+          : showAISpendingInfo &&
+            (aiSpendingColumnIsEnabled ? (
+              <TableCell
+                className="table-cell_AISpending"
+                dataTestId={`contacts_ai_spending_cell_${itemIndex}`}
+              >
+                <AILimit
+                  item={item}
+                  dataTestId={`contacts_ai_limit_${itemIndex}`}
+                />
+              </TableCell>
+            ) : (
+              <div />
+            ))}
       </TableRow>
     </div>
   );
@@ -459,12 +480,14 @@ const PeopleTableRow = ({
 export default inject(
   ({ currentQuotaStore, peopleStore, userStore }: TableRowStores) => {
     const { showStorageInfo } = currentQuotaStore;
+    const { showAISpendingInfo } = peopleStore.usersStore!;
 
     const { getUsersChangeTypeOptions } = peopleStore.contextOptionsStore!;
     const { withContentSelection } = peopleStore.contactsHotkeysStore!;
 
     return {
       showStorageInfo,
+      showAISpendingInfo,
       getUsersChangeTypeOptions,
 
       isRoomAdmin: userStore.user?.isRoomAdmin,

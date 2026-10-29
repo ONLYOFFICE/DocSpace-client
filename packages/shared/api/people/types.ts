@@ -55,6 +55,16 @@ export type TFilterArea = "all" | "people" | "guests";
 
 export type TSortOrder = "descending" | "ascending";
 
+export type TUserServiceLimit = {
+  id: number;
+  scope: "Global" | "Custom";
+  amountValue: number | null;
+  amountConsumed: number;
+  currency: string | null;
+  period: "Day" | "Week" | "Month" | "Lifetime";
+  periodEnd: string | null;
+};
+
 export type TUserGroup = {
   id: string;
   manager: string;
@@ -86,6 +96,7 @@ export type TUser = {
   isSSO: boolean;
   quotaLimit?: number;
   usedSpace?: number;
+  aiServicesLimit?: TUserServiceLimit | null;
   id: string;
   displayName: string;
   avatarSmall: string;
@@ -151,6 +162,7 @@ export type TPeopleListItem = {
   isLDAP: boolean;
   quotaLimit: number | undefined;
   usedSpace: number | undefined;
+  aiServicesLimit: TUserServiceLimit | null | undefined;
   isCustomQuota: boolean | string | undefined;
   // createdBy: any; // TODO: fix type
   registrationDate: string | undefined;

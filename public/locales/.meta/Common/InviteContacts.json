@@ -3,7 +3,7 @@
   "content": "Invite people",
   "content_en_sha1_hash": "e1eb97afa7ac563e4e26cd26d812294d4e04782c",
   "created_at": "2026-08-31T18:23:11.871Z",
-  "updated_at": "2026-10-22T13:13:49.552Z",
+  "updated_at": "2026-10-23T12:28:45.496Z",
   "comment": {
     "text": "Label for a menu option or a title used to initiate the process of inviting users to a room or folder.",
     "is_auto": true,

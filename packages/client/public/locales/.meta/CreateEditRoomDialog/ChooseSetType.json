@@ -3,7 +3,7 @@
   "content": "Choose space type",
   "content_en_sha1_hash": "9cf3e7ce26ad1c3145f39b3c2150635f4101d736",
   "created_at": "2026-08-11T00:00:00.000Z",
-  "updated_at": "2026-10-21T10:17:45.704Z",
+  "updated_at": "2026-10-22T16:09:36.852Z",
   "comment": {
     "text": "Dialog title shown when creating a new item from the Forms section, where the user picks a set type instead of a room type.",
     "is_auto": false,

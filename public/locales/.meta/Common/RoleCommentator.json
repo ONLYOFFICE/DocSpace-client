@@ -3,7 +3,7 @@
   "content": "Commenter",
   "content_en_sha1_hash": "bf4df9c00c605d80b4491471e60b45b6eaaca147",
   "created_at": "2025-05-19T21:30:47.984Z",
-  "updated_at": "2026-10-21T10:17:45.750Z",
+  "updated_at": "2026-10-22T16:09:36.899Z",
   "comment": {
     "text": "This is a label for a user role. It identifies a user who has \"Comment\" access rights, meaning they can add comments to documents but not edit content.",
     "is_auto": true,

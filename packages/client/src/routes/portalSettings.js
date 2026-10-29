@@ -42,6 +42,7 @@ import componentLoader from "@docspace/shared/utils/component-loader";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { generalRoutes } from "./general";
 
+import ProtectedAppRoute from "../components/ProtectedAppRoute";
 import { ViewComponent } from "../pages/PortalSettings/View";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
 import { getPluginSectionRoute } from "SRC_DIR/helpers/plugins/navigation";
@@ -76,13 +77,15 @@ const PaymentsRedirect = inject(({ settingsStore }) => ({
 
 const ProtectedAISettingsRoute = inject(({ settingsStore }) => ({
   aiServicesEnabled: settingsStore.aiServicesEnabled,
+  standalone: settingsStore.standalone,
 }))(
-  observer(({ aiServicesEnabled, children }) => {
-    return aiServicesEnabled ? (
-      children
-    ) : (
-      <Navigate to="/portal-settings" replace />
-    );
+  observer(({ aiServicesEnabled, standalone, hideOnStandalone, children }) => {
+    if (!aiServicesEnabled) return <Navigate to="/portal-settings" replace />;
+
+    if (hideOnStandalone && standalone)
+      return <Navigate to="/portal-settings/ai-settings/ai-models" replace />;
+
+    return children;
   }),
 );
 
@@ -433,6 +436,14 @@ const PortalSettingsRoutes = {
       ),
     },
     {
+      path: "ai-settings/limits",
+      element: (
+        <ProtectedAISettingsRoute hideOnStandalone>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
       path: "apps",
       element: (
         <ProtectedAppsSettingsRoute>
@@ -543,7 +554,13 @@ const PortalSettingsRoutes = {
             import("SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom"),
         );
 
-        return { Component: QuotaPerRoomComponentSection };
+        return {
+          Component: () => (
+            <ProtectedAppRoute appId="ai-rooms">
+              <QuotaPerRoomComponentSection />
+            </ProtectedAppRoute>
+          ),
+        };
       },
     },
     {
@@ -566,7 +583,11 @@ const PortalSettingsRoutes = {
         );
 
         return {
-          Component: withAIServicesGuard(QuotaPerAIAgentComponentSection),
+          Component: withAIServicesGuard(() => (
+            <ProtectedAppRoute appId="ai-agents">
+              <QuotaPerAIAgentComponentSection />
+            </ProtectedAppRoute>
+          )),
         };
       },
     },

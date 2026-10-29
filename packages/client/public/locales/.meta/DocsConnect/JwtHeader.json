@@ -3,7 +3,7 @@
   "content": "JWT header",
   "content_en_sha1_hash": "8312d8848e24c566a42aade809aa3d0c545feaa2",
   "created_at": "2026-07-27T13:07:48.483Z",
-  "updated_at": "2026-10-21T10:17:45.783Z",
+  "updated_at": "2026-10-22T16:09:36.924Z",
   "comment": {
     "text": "Label for a text input and information field in the DocsConnect settings, identifying the header component of a JSON Web Token.",
     "is_auto": true,

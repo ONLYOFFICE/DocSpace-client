@@ -41,6 +41,20 @@ import {
 } from "./arbiter";
 import { aiConfigHandler } from "./config";
 import {
+  AI_PROJECT_WITH_SOURCES,
+  AI_PROJECT_WITHOUT_SOURCES,
+  AI_PROJECTS,
+  AI_PROJECTS_ROOT_ID,
+  AiProjectMockAccess,
+  aiProjectCreateHandler,
+  aiProjectGetByIdHandler,
+  aiProjectKnowledgeHandler,
+  aiProjectMock,
+  aiProjectSkillsHandler,
+  aiProjectsHandler,
+  aiProjectsHandlers,
+} from "./projects";
+import {
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
 } from "./vectorization";
@@ -71,6 +85,18 @@ export {
   AI_ARBITER_PANEL_FOLDERS,
   AI_ARBITER_SESSION_ID,
   aiConfigHandler,
+  AI_PROJECT_WITH_SOURCES,
+  AI_PROJECT_WITHOUT_SOURCES,
+  AI_PROJECTS,
+  AI_PROJECTS_ROOT_ID,
+  AiProjectMockAccess,
+  aiProjectCreateHandler,
+  aiProjectGetByIdHandler,
+  aiProjectKnowledgeHandler,
+  aiProjectMock,
+  aiProjectSkillsHandler,
+  aiProjectsHandler,
+  aiProjectsHandlers,
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
   aiChatAssignmentsHandler,
@@ -99,6 +125,7 @@ export {
   AiActionType,
 } from "./chatStores";
 export type { AiChatProfile, AssignmentMap } from "./chatStores";
+export type { AiProjectMock } from "./projects";
 export {
   META_FILL_RESULT,
   META_GENERATE_RESULT,
@@ -113,4 +140,6 @@ export const aiHandlers = (port: string) => [
   aiVectorizationGetHandler(port),
   aiVectorizationPutHandler(port),
   ...aiChatEmptyStoreHandlers(port),
+  // The sidebar's AI Projects section: an empty list until a spec seeds one.
+  ...aiProjectsHandlers(port, []),
 ];

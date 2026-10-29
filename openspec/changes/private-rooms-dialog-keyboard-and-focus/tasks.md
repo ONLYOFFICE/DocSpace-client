@@ -2,7 +2,7 @@
 
 ## 1. ui-kit fix (docspace-ui-kit-react, release/v4.1.0)
 
-- [ ] 1.1 Fix `components/modal-dialog/sub-components/Modal.tsx` so the focus restore is registered even when the content already holds the focus on open; verify with a new test "hands the focus back after a field inside took it on open" in `components/modal-dialog/ModalDialog.test.tsx` and `pnpm test` green in the kit
+- [x] 1.1 Fix `components/modal-dialog/sub-components/Modal.tsx` so the focus restore is registered even when the content already holds the focus on open; verify with a new test "hands the focus back after a field inside took it on open" in `components/modal-dialog/ModalDialog.test.tsx` and `pnpm test` green in the kit
 - [ ] 1.2 Export `useLiveRegionText` from the kit's `hooks` barrel and note both items in CHANGELOG.md; verify with `pnpm build` in the kit and the hook importable from `@onlyoffice/apps-ui-kit/hooks`
 - [ ] 1.3 Pack the kit and bring it here with `pnpm run update-ui-kit`; verify the script's hash check passes, `pnpm test` (shared) and `pnpm test:client` stay green, and commit the tarball with `pnpm-lock.yaml`
 

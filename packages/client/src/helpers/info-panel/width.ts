@@ -38,7 +38,7 @@ import {
   INFO_PANEL_WIDTH,
 } from "@onlyoffice/apps-ui-kit/utils/device";
 
-import { safeGet, safeSet } from "SRC_DIR/store/TourStore";
+import { safeGet, safeSet } from "SRC_DIR/helpers/safeLocalStorage";
 
 export const INFO_PANEL_WIDTH_KEY = "infoPanelWidth";
 

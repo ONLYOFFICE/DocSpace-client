@@ -124,7 +124,7 @@ describe("key dialogs", () => {
       ["passphrase", "Common:Passphrase"],
       ["confirmPassphrase", "Common:ConfirmPassphrase"],
     ]) {
-      const field = dialog.getByLabelText(label);
+      const field = dialog.getByLabelText<HTMLInputElement>(label);
       expect(field).toHaveAttribute("name", name);
       expect(field).toHaveAccessibleName(label);
       expect(field.labels).toHaveLength(1);

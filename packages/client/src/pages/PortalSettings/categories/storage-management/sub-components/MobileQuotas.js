@@ -41,7 +41,11 @@ import { CategoryItem } from "@onlyoffice/apps-ui-kit/components/category-item";
 
 import styles from "../StyledComponent.module.scss";
 
-const MobileQuotasComponent = ({ isDisabled, aiServicesEnabled }) => {
+const MobileQuotasComponent = ({
+  isDisabled,
+  showRoomQuota,
+  showAIAgentQuota,
+}) => {
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
 
@@ -52,13 +56,15 @@ const MobileQuotasComponent = ({ isDisabled, aiServicesEnabled }) => {
 
   return (
     <div className={styles.baseQuotaComponent}>
-      <CategoryItem
-        title={t("QuotaPerRoom")}
-        onClickLink={onClickLink}
-        url="/portal-settings/management/disk-space/quota-per-room"
-        subtitle={t("SetDefaultRoomQuota")}
-        isDisabled={isDisabled}
-      />
+      {showRoomQuota ? (
+        <CategoryItem
+          title={t("QuotaPerRoom")}
+          onClickLink={onClickLink}
+          url="/portal-settings/management/disk-space/quota-per-room"
+          subtitle={t("SetDefaultRoomQuota")}
+          isDisabled={isDisabled}
+        />
+      ) : null}
       <CategoryItem
         title={t("QuotaPerUser")}
         onClickLink={onClickLink}
@@ -68,7 +74,7 @@ const MobileQuotasComponent = ({ isDisabled, aiServicesEnabled }) => {
         })}
         isDisabled={isDisabled}
       />
-      {aiServicesEnabled ? (
+      {showAIAgentQuota ? (
         <CategoryItem
           title={t("QuotaPerAIAgent")}
           onClickLink={onClickLink}

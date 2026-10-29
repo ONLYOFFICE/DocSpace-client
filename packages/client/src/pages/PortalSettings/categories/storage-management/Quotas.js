@@ -49,20 +49,25 @@ import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
 import { QuotaPerAIAgentComponentSection } from "./sub-components/QuotaPerAIAgent";
 
-const QuotaPerItemsComponent = ({ isStatisticsAvailable, aiServicesEnabled }) => {
+const QuotaPerItemsComponent = ({
+  isStatisticsAvailable,
+  showRoomQuota,
+  showAIAgentQuota,
+}) => {
   if (isMobile())
     return (
       <MobileQuotasComponent
         isDisabled={!isStatisticsAvailable}
-        aiServicesEnabled={aiServicesEnabled}
+        showRoomQuota={showRoomQuota}
+        showAIAgentQuota={showAIAgentQuota}
       />
     );
 
   return (
     <>
-      <QuotaPerRoomComponentSection />
+      {showRoomQuota ? <QuotaPerRoomComponentSection /> : null}
       <QuotaPerUserComponentSection />
-      {aiServicesEnabled ? <QuotaPerAIAgentComponentSection /> : null}
+      {showAIAgentQuota ? <QuotaPerAIAgentComponentSection /> : null}
     </>
   );
 };
@@ -71,8 +76,18 @@ const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
   const { isBase } = useTheme();
 
-  const { isStatisticsAvailable, storageManagementUrl, aiServicesEnabled } =
-    props;
+  const {
+    isStatisticsAvailable,
+    storageManagementUrl,
+    aiServicesEnabled,
+    isAppInstalled,
+  } = props;
+
+  // A quota for a section switched off in Settings -> Apps has nothing to
+  // apply to. Read during render so the observer re-renders once the apps
+  // list arrives.
+  const showRoomQuota = isAppInstalled("ai-rooms");
+  const showAIAgentQuota = aiServicesEnabled && isAppInstalled("ai-agents");
 
   return (
     <div className={styles.baseQuotaComponent}>
@@ -112,13 +127,14 @@ const QuotasComponent = (props) => {
 
       <QuotaPerItemsComponent
         isStatisticsAvailable={isStatisticsAvailable}
-        aiServicesEnabled={aiServicesEnabled}
+        showRoomQuota={showRoomQuota}
+        showAIAgentQuota={showAIAgentQuota}
       />
     </div>
   );
 };
 
-export default inject(({ currentQuotaStore, settingsStore }) => {
+export default inject(({ currentQuotaStore, settingsStore, appsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
   const { storageManagementUrl, aiServicesEnabled } = settingsStore;
 
@@ -126,5 +142,6 @@ export default inject(({ currentQuotaStore, settingsStore }) => {
     isStatisticsAvailable,
     storageManagementUrl,
     aiServicesEnabled,
+    isAppInstalled: appsStore.isInstalled,
   };
 })(observer(QuotasComponent));

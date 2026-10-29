@@ -31,12 +31,12 @@
 - [x] 5.1 Add the shared Enter helper in `packages/shared/dialogs` (D5) and migrate `PassphraseModal` to it; verify with the existing Enter tests in `PassphraseModal.test.tsx` green and a helper test `packages/shared/dialogs/__tests__/enter-submit.test.ts` covering Enter, Shift+Enter on a textarea, disabled action and an already-handled event
 - [x] 5.2 Adopt the helper in `KeyRotationDialog`; verify with tests "Passphrase change on Enter", "Enter while the action is disabled", "Enter on the cancel action" in `keys-management/modals/__tests__/KeyRotationDialog.test.tsx`
 - [ ] 5.3 Adopt the helper in `RecoveryPhraseInputModal`; verify with tests "Recovery phrase on Enter" and "Line break in the recovery phrase" in `RecoveryPhraseInputModal.test.tsx`
-- [ ] 5.4 Adopt the helper in `ResetKeysConfirmDialog`; verify with test "Reset token on Enter" in a new `keys-management/modals/__tests__/ResetKeysConfirmDialog.test.tsx`
+- [ ] 5.4 Adopt `submitOnEnter` in `ResetKeysConfirmDialog` (its token field is a kit `TextInput`, tabbable on its own); verify with test "Reset token on Enter" in the existing `keys-management/modals/__tests__/ResetKeysConfirmDialog.test.tsx`
 - [ ] 5.5 Pin the busy state; verify with tests "Unlock in progress" and "Busy reported to assistive technology" in `PassphraseModal.test.tsx` (`aria-busy` on the primary action, fields disabled, submit spy called once)
 
 ## 6. Integration
 
-- [ ] 6.1 Add a keyboard-only pass to `packages/client/__tests__/keys-management.spec.ts` (Tab through the creation dialog, Enter to confirm, acknowledge the phrase, unlock with Enter) on desktop and mobile; verify with that spec under Docker and updated screenshots only where the labels changed the layout
+- [ ] 6.1 Add a keyboard-only pass to `packages/client/__tests__/keys-management.spec.ts` (Tab through the creation dialog, Enter to confirm, acknowledge the phrase, unlock with Enter) on desktop and mobile; verify with that spec under Docker through `tests-dev` (the `client-tests` image predates the dialog changes; see design.md, Implementation notes) and re-record only a baseline a layout change still moves (the passphrase-create baselines were re-recorded in 3.4)
 - [ ] 6.2 Note the role-and-name, `userEvent.tab`/`toHaveFocus` and `defaultPrevented` patterns in `.claude/rules/unit-tests.md`; verify by reading the rule back against the tests of groups 2 to 5
 - [ ] 6.3 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`) and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify all green
 

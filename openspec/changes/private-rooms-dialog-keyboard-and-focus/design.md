@@ -196,6 +196,63 @@ check the enabled flag, so a second submission is refused. The scenarios
 - `Spec:` pointers only where the behaviour is counter-intuitive on its own:
   the refused backdrop close and the absent focus trap.
 
+## Implementation notes
+
+Facts found while applying tasks 1.1 to 5.2, for whoever continues; they
+refine the decisions above without changing them.
+
+- **Kit fix (D3).** Lives in `docspace-ui-kit-react` on the branch
+  `bugfix/modal-dialog-focus-restore`, cut from release/v4.1.0: commit
+  14b3a71d (the fix, `useInsertionEffect` reads the opener before the commit
+  that shows the dialog touches the DOM) and 53cc9536 (CHANGELOG). The branch
+  is not pushed. The client already installs that build as its tarball
+  (task 1.3), so the kit needs no further step for this change.
+- **Close guard (D2).** `packages/shared/dialogs/key-dialog-close-guard.ts`
+  exports `useKeyDialogCloseGuard({ visible, dirty, onCancel })` returning
+  `{ requestClose, confirming, confirmation }`; each guarded dialog passes
+  `requestClose` to `onClose`, renders `<UnsavedChangesDialog {...confirmation} />`
+  as a sibling of its modal inside a fragment, and blocks Enter while
+  `confirming`. `UnsavedChangesDialog` gained an optional `zIndex` (401 by
+  default; the guard passes 411, above the key dialogs' 410) and now prevents
+  the default of the Enter it acts on: without that, the Enter that confirmed
+  a discard went on to press the control the focus returned to and reopened
+  the generation dialog ("Generation cancelled from the keyboard" found it).
+- **Tab order (D4).** The kit's `InputBlock`, and so `PasswordInput`, defaults
+  `tabIndex` to -1, and its action `Link` has no href, no tab stop and no
+  Enter activation. The passphrase fields therefore carry `tabIndex={0}`, and
+  the generate, forgot-passphrase and passkey links carry `role="button"`,
+  `tabIndex={0}` and `onKeyDown={activateOnEnter}`. `Textarea`, `TextInput`,
+  `Checkbox` and `Button` are tabbable on their own. No other hand-assigned
+  index remains in the six dialogs.
+- **Enter (D5).** The helpers live in `packages/shared/dialogs/key-dialog-keys.ts`:
+  `submitOnEnter(submit, enabled)` for fields and textareas, `activateOnEnter`
+  for links; their test is `dialogs/__tests__/key-dialog-keys.test.ts`. The
+  passphrase and passphrase-change dialogs use `submitOnEnter` through a
+  `useMemo`; the recovery-phrase and reset dialogs are still to do (5.3, 5.4).
+- **Announcement (D7).** `packages/shared/dialogs/key-dialog-announcement/`
+  renders the hidden `role="status"` region (`data-testid="key-dialog-announcement"`)
+  over the kit's `useLiveRegionText`, imported by its deep path. The
+  recovery-phrase textarea now sits in a `FieldContainer` with `labelFor`
+  and `errorMessage`; the old error box above it is gone.
+- **Tests (D9).** The client dialogs are rendered with the real kit in
+  `keys-management/modals/__tests__/KeyRotationDialog.keyboard.test.tsx` and
+  `ResetKeysConfirmDialog.test.tsx`; the older `KeyRotationDialog.test.tsx`
+  stubs the kit and covers validation only. A closed `ModalDialog` stays
+  mounted and `aria-hidden`, so tests find the confirmation among
+  `screen.queryAllByRole("dialog")` by its description text, never by
+  `queryByText` alone. jsdom ignores `inert`, so the hidden confirmation's
+  buttons appear in `userEvent.tab()` order after the dialog's own actions;
+  "No trap" only asserts that the focus left the dialog. Vitest does not
+  type-check: run `pnpm exec tsc --noEmit -p tsconfig.json` in the package
+  before committing a test.
+- **E2E.** The `client-tests` image was rebuilt on 2026-10-29 at 12:29 and
+  predates the label and announcement changes, so specs that open the key
+  dialogs run through `tests-dev`, which mounts the sources and rebuilds
+  `dist` in the container: `docker-compose run --rm -T -e WORKERS=3 tests-dev
+  pnpm exec playwright test <spec> --reporter=line` from `packages/client`.
+  The two `passphrase-create` baselines were re-recorded in task 3.4; the
+  passphrase-change dialog has no baseline.
+
 ## Risks / Trade-offs
 
 - [Escape reaches both the dialog and its confirmation] → the guard ignores

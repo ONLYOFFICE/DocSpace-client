@@ -184,6 +184,54 @@ the last index were read on disk):
 - A plain save of a form follows the regular save path and keeps the
   encrypted flag (`DocumentServiceTracker.cs:229-262`, `EntryManager.cs:1588-1591`).
 
+### Server: document key, document address and session
+
+Task 6.1, read on 2026-10-29 through CodeGraph in `../server/products/ASC.Files`
+on release/v4.1.0 (files changed after the last index were read on disk):
+
+- **Document key.** A SHA-256 of the file id, version, creation date and the
+  database key (`Core/Services/DocumentService/DocumentServiceHelper.cs:463-478`);
+  it is not stored. An editor opening a file whose current version is a
+  force-save gets the key of the newest version saved without force-save, the
+  stable version (`DocumentServiceHelper.cs:312-319`,
+  `Core/Core/EF/Queries/FileQueries.cs:568-597`). A force-save therefore keeps
+  the key, and a save that is not a force-save (callback status 2) creates a
+  new stable version and so a new key. The file tracker remembers the stable
+  key (`Core/Utils/FileTracker.cs:416`, `Core/Utils/EntryManager.cs:1723-1771`),
+  but `openedit` does not read it.
+- **Document address.** `document.url` is the public portal address with
+  `filehandler.ashx?action=stream&fileid=…&stream_auth=…`, built for the
+  current version without a `version` parameter
+  (`Core/Services/DocumentService/Configuration.cs:225-236`,
+  `Core/Helpers/PathProvider.cs:108-132`); `ReplaceCommunityAddress` then swaps
+  the host for the portal address meant for Document Server requests when one
+  is set (`Core/Services/DocumentService/DocumentServiceConnector.cs:482-524`).
+  After a force-save the key names the stable version while the address
+  serves the current one, which is the "changesError" of the run. The stream
+  action accepts `version` and checks `stream_auth` over id and version; for
+  an encrypted file it skips the JWT header check
+  (`Core/HttpHandlers/FileHandler.ashx.cs:589`, `603`, `616-626`).
+- **Callbacks** (`Core/Services/DocumentService/DocumentServiceTracker.cs:215-270`):
+  status 1 tracks the listed users and drops the tracked ones missing from the
+  list, so an empty list clears the tracker; a key that does not match the
+  stable key drops the users (`272-370`). Status 2 and 3 save as non-force-saves
+  and remove the tracker; status 4 removes the tracker without saving; status 6
+  and 7 save as force-saves and keep it. A save callback whose key does not
+  match goes to a temporary store and is answered "Expected key" (`391-401`).
+  The tracker cache lasts 60 seconds; on expiry with users listed the portal
+  asks the Document Server `info` for the remembered key and keeps the users
+  while it answers without error (`FileTracker.cs:44`, `317-380`).
+- **Encrypted force-save** (`EntryManager.cs:1540-1587`): the first force-save
+  after a stable version starts a new version group; later ones add versions
+  to it, because encrypted versions are not overwritten. Each is marked as a
+  user force-save, and the encrypted flag is copied from the callback's
+  `encrypted` field, so a callback without it would store the version as not
+  encrypted.
+- **Commands.** The portal already sends `info` (whether the Document Server
+  holds a session for a key, as a yes or no), `drop` and `meta`, and never
+  `forcesave` (`Core/Helpers/DocumentService.cs:698-707`,
+  `DocumentServiceConnector.cs:95-135`, `DocumentServiceHelper.cs:499-561`).
+
 ## Goals / Non-Goals
 
 **Goals:**

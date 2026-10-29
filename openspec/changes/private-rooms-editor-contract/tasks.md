@@ -35,7 +35,7 @@
 
 ## 6. Session end and document address
 
-- [ ] 6.1 Backend: look up in `../server` (CodeGraph) how the document key and `document.url` of a file are produced and when the key changes, and record the findings with their source files in design.md D7 and D8; verified by that record
+- [x] 6.1 Backend: look up in `../server` (CodeGraph) how the document key and `document.url` of a file are produced and when the key changes, and record the findings with their source files in design.md D7 and D8; verified by that record
 - [ ] 6.2 Backend: keep the base of an encrypted editing session stable and start a fresh session once a saved session has ended (design D7, with the Document Server team's answer from 1.2); verify with a server unit test and a recorded run on a Document Server with the crypto add-on: save, close every editor, reopen, and rejoin while another member edits, all without a change error
 - [ ] 6.3 Backend: build `document.url` of an encrypted file from the portal's public address (design D8); verify with a server unit test and a recorded run with an internal portal address for the Document Server that the browser cannot reach
 

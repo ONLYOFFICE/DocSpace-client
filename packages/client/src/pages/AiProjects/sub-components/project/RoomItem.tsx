@@ -74,7 +74,8 @@ const RoomItem = ({ id, title, logo, icon, onOpen, onClick: onOpenItem, hint, is
     e.stopPropagation();
     onOpen?.();
     if (onOpenItem) onOpenItem();
-    else navigate(`/rooms/shared/${id}`);
+    // The address Files opens a room by; without `folder` the room id is lost.
+    else navigate(`/rooms/shared/${id}/filter?folder=${id}`);
   };
 
   const item = (

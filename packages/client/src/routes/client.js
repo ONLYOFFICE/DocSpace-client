@@ -695,6 +695,8 @@ const ClientRoutes = [
             () => import("SRC_DIR/pages/AiProjects"),
           );
 
+          // With AI services off the page itself sends the user to their
+          // start page (see AiProjectsGate), so the route is not gated here.
           const Component = () => (
             <PrivateRoute>
               <ErrorBoundary>

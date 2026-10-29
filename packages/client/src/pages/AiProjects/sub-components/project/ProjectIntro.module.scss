@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@onlyoffice/apps-ui-kit/styles/variables/colors" as *;
 
 // The intro of an empty project chat: logo, name, the model line and the
 // linked rooms, centred like the default illustration.
@@ -103,14 +102,6 @@
     min-width: 0;
     margin-bottom: 0;
   }
-}
-
-.instructions :global(.room-item-title) {
-  color: #{$ai-purple};
-}
-
-.knowledge :global(.room-item-title) {
-  color: #{$main-green};
 }
 
 // The "+N" chip that unfolds the rest of a group.

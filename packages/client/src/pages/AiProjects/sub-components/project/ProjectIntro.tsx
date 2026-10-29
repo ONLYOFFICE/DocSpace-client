@@ -71,7 +71,7 @@ const SourceGroup = ({ label, rooms, kind }: SourceGroupProps) => {
       </Text>
       <div className={styles.chips}>
         {shown.map((room) => (
-          <div key={room.id} className={classNames(styles.chip, styles[kind])}>
+          <div key={room.id} className={styles.chip}>
             <RoomItem
               id={room.id}
               title={room.title}

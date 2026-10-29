@@ -71,6 +71,7 @@ import {
 } from "SRC_DIR/pages/Home/InfoPanel";
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
+import { DefaultPageRedirect } from "SRC_DIR/pages/Home/DefaultPageRedirect";
 import type DialogsStore from "SRC_DIR/store/DialogsStore";
 import { useHideQuickActions } from "SRC_DIR/pages/Home/Hooks/useHideQuickActions";
 import { usePanelExclusivity } from "SRC_DIR/pages/Home/View/usePanelExclusivity";
@@ -680,5 +681,19 @@ const AiProjectsConnected = inject(
   }),
 )(observer(AiProjects));
 
-export { AiProjectsConnected as AiProjects };
-export default AiProjectsConnected;
+// The page sits behind the portal's AI switch. With AI services off (turned
+// off while the page is open, or a bookmark) it has nothing to serve, and the
+// user is taken to their own start page rather than to an error.
+// Every prop of the page is injected.
+const AiProjectsPage = AiProjectsConnected as unknown as React.FC;
+
+const AiProjectsGate = inject(({ settingsStore }: TStore) => ({
+  aiServicesEnabled: settingsStore.aiServicesEnabled,
+}))(
+  observer(({ aiServicesEnabled }: { aiServicesEnabled?: boolean }) =>
+    aiServicesEnabled ? <AiProjectsPage /> : <DefaultPageRedirect />,
+  ),
+);
+
+export { AiProjectsGate as AiProjects };
+export default AiProjectsGate;

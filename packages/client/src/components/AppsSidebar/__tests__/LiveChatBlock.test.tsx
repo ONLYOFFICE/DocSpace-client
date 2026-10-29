@@ -47,18 +47,6 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
-type TAiChatStore = {
-  isVisible: boolean;
-  effectiveFullscreen: boolean;
-  panelWidth: number;
-};
-
-const aiChat = vi.hoisted(() => ({ store: null as TAiChatStore | null }));
-
-vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store", () => ({
-  useAiChatStoreOptional: () => aiChat.store,
-}));
-
 vi.mock(
   "@onlyoffice/apps-ui-kit/components/article/sub-components/LiveChat",
   () => ({
@@ -66,20 +54,17 @@ vi.mock(
       zendeskKey,
       isShowLiveChat,
       withFloatingButton,
-      isInfoPanelVisible,
       infoPanelWidth,
     }: {
       zendeskKey: string;
       isShowLiveChat: boolean;
       withFloatingButton: boolean;
-      isInfoPanelVisible: boolean;
       infoPanelWidth?: number;
     }) => (
       <span
         data-testid="zendesk"
         data-show={String(isShowLiveChat)}
         data-with-floating-button={String(withFloatingButton)}
-        data-with-info-panel={String(isInfoPanelVisible)}
         data-info-panel-width={String(infoPanelWidth)}
       >
         {zendeskKey}
@@ -97,14 +82,10 @@ const renderComponent = (
     isPrimaryProgressVisbile = false,
     isSecondaryProgressVisbile = false,
     downloadingProgress = 0,
-    isInfoPanelVisible = false,
-    infoPanelWidth = 400,
-    aiChatStore = null as TAiChatStore | null,
+    shownWidth = 0,
   } = {},
-) => {
-  aiChat.store = aiChatStore;
-
-  return render(
+) =>
+  render(
     <Provider
       authStore={{ isLiveChatAvailable, languageBaseName: "en" }}
       settingsStore={{ zendeskKey: "zendesk-key" }}
@@ -113,14 +94,13 @@ const renderComponent = (
         primaryProgressDataStore: { isPrimaryProgressVisbile },
         secondaryProgressDataStore: { isSecondaryProgressVisbile },
       }}
-      infoPanelStore={{ isVisible: isInfoPanelVisible, width: infoPanelWidth }}
+      infoPanelStore={{ shownWidth }}
       backup={{ downloadingProgress }}
       profileActionsStore={{ isShowLiveChat: true }}
     >
       <LiveChatBlock />
     </Provider>,
   );
-};
 
 describe("AppsSidebar LiveChatBlock", () => {
   it("mounts the Zendesk widget with the current live chat state", () => {
@@ -168,35 +148,15 @@ describe("AppsSidebar LiveChatBlock", () => {
     );
   });
 
-  it("tells the widget when the info panel is docked beside the corner", () => {
-    renderComponent(true, false, { isInfoPanelVisible: true });
-
-    expect(screen.getByTestId("zendesk")).toHaveAttribute(
-      "data-with-info-panel",
-      "true",
-    );
-  });
-
-  it("moves the widget clear of the info panel's resized width", () => {
-    renderComponent(true, false, {
-      isInfoPanelVisible: true,
-      infoPanelWidth: 640,
-    });
+  it.each([
+    ["no panel is open", 0],
+    ["the info panel or the AI chat in its place is open", 640],
+  ])("moves the widget by the width Section reports while %s", (_, width) => {
+    renderComponent(true, false, { shownWidth: width });
 
     expect(screen.getByTestId("zendesk")).toHaveAttribute(
       "data-info-panel-width",
-      "640",
-    );
-  });
-
-  it("moves the widget clear of the AI chat open in the info panel's place", () => {
-    renderComponent(true, false, {
-      aiChatStore: { isVisible: true, effectiveFullscreen: false, panelWidth: 500 },
-    });
-
-    expect(screen.getByTestId("zendesk")).toHaveAttribute(
-      "data-info-panel-width",
-      "500",
+      String(width),
     );
   });
 

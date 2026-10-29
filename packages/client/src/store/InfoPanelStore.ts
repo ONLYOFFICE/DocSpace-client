@@ -96,6 +96,8 @@ class InfoPanelStore {
 
   width = readInfoPanelWidth();
 
+  shownWidth = 0;
+
   roomsView: InfoPanelViewType = InfoPanelView.infoMembers;
 
   fileView: InfoPanelViewType = InfoPanelView.infoHistory;
@@ -183,6 +185,10 @@ class InfoPanelStore {
   setWidth = (width: number) => {
     this.width = clampInfoPanelWidth(width);
     saveInfoPanelWidth(this.width);
+  };
+
+  setShownWidth = (width: number) => {
+    this.shownWidth = width;
   };
 
   setTemplateAvailableToEveryone = (isAvailable: boolean) => {

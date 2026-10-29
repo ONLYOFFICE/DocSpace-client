@@ -93,6 +93,7 @@ export default inject(
       getCanDisplay,
       width: infoPanelWidth,
       setWidth: setInfoPanelWidth,
+      setShownWidth,
     } = infoPanelStore;
 
     const { isIndexEditingMode } = indexingStore;
@@ -121,6 +122,7 @@ export default inject(
       isInfoPanelResizable: true,
       infoPanelWidth,
       setInfoPanelWidth,
+      onShownInfoPanelWidthChange: setShownWidth,
       canDisplay,
       anotherDialogOpen,
       isHeaderVisible,

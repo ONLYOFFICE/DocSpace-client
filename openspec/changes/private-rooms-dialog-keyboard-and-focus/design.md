@@ -114,8 +114,7 @@ already holds the focus (capture `previous`, skip only the `content.focus()`
 call, always return the restore). The fix ships in `docspace-ui-kit-react` on
 release/v4.1.0 with a unit test next to "takes the focus when it opens and
 hands it back when it closes", and reaches this repository through
-`pnpm run update-ui-kit`. The same kit PR exports `useLiveRegionText` from
-the hooks barrel (D7).
+`pnpm run update-ui-kit`.
 
 Alternative considered: a client-side hook that records the opener and
 restores it. Rejected: duplicates what the kit already does for every other
@@ -163,9 +162,11 @@ scenarios stay valid.
 dialog renders one visually hidden live region fed by `useLiveRegionText`
 with the current error text: the hook delays the text so the region is
 announced, and the dialog passes the same text until the error changes, so
-typing does not repeat it. Until the kit exports the hook from its barrel
-(same PR as D3) the deep import `@onlyoffice/apps-ui-kit/hooks/useLiveRegionText`
-resolves through the package's wildcard export and is pinned by the tarball.
+typing does not repeat it. The hook is deliberately kept out of the kit's
+`hooks` barrel, which is part of its plugin API, so the client imports it by
+its deep path `@onlyoffice/apps-ui-kit/hooks/useLiveRegionText`:
+portal-internal by the kit's tiering, resolved through the package's wildcard
+export and pinned by the tarball the apps install.
 
 Alternative considered: the kit's `StatusMessage` (`role="alert"`). Rejected:
 it is a visible status row, and the error already has a visible place under
@@ -207,9 +208,9 @@ check the enabled flag, so a second submission is refused. The scenarios
   is checked while removing it; the forward-order test fails otherwise.
 - [E2E specs locate fields by placeholder] → the task that adds the labels
   updates those locators in the same commit.
-- [Deep import of a kit-internal hook] → pinned by the tarball and replaced by
-  the barrel export in the same kit PR; the import path is the only thing
-  that changes.
+- [Deep import of a kit-internal hook] → pinned by the tarball; if the kit
+  moves the hook, the import path is the only thing that changes, and the
+  announcement tests catch it.
 - [Confirmation on the recovery phrase display annoys users who saved the
   phrase but did not tick the box] → the box is the acknowledgement the spec
   already requires before the dialog can be confirmed; the question is asked
@@ -220,8 +221,3 @@ check the enabled flag, so a second submission is refused. The scenarios
 No data or server change. The behaviour ships with the dialogs; a revert of
 the commits restores the previous one. The kit fix is a patch of 4.1.0 and
 needs no migration.
-
-## Open Questions
-
-- Whether the kit PR also exports `useLiveRegionText` from its barrel.
-  Deferrable: only the import path changes.

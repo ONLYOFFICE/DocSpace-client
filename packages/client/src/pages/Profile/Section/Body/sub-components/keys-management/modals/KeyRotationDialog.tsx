@@ -169,12 +169,11 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
             </Text>
 
             <div className={styles.inputGroup}>
-              <Text fontSize="13px" fontWeight={600}>
-                {t("Common:CurrentPassphrase")}
-              </Text>
               <FieldContainer
                 isVertical
-                labelVisible={false}
+                labelVisible
+                labelText={t("Common:CurrentPassphrase")}
+                labelFor="currentPassphrase"
                 removeMargin
                 hasError={!!currentFieldError}
                 errorMessage={currentFieldError}
@@ -217,12 +216,11 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
             </div>
 
             <div className={styles.inputGroup}>
-              <Text fontSize="13px" fontWeight={600}>
-                {t("Common:NewPassphrase")}
-              </Text>
               <FieldContainer
                 isVertical
-                labelVisible={false}
+                labelVisible
+                labelText={t("Common:NewPassphrase")}
+                labelFor="newPassphrase"
                 removeMargin
                 hasError={!!newFieldError}
                 errorMessage={newFieldError}
@@ -249,12 +247,11 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
             </div>
 
             <div className={styles.inputGroup}>
-              <Text fontSize="13px" fontWeight={600}>
-                {t("Common:ConfirmNewPassphrase")}
-              </Text>
               <FieldContainer
                 isVertical
-                labelVisible={false}
+                labelVisible
+                labelText={t("Common:ConfirmNewPassphrase")}
+                labelFor="confirmNewPassphrase"
                 removeMargin
                 hasError={!!confirmFieldError}
                 errorMessage={confirmFieldError}

@@ -64,6 +64,20 @@ describe("keys management dialogs", () => {
     });
   }
 
+  it("Passphrase-change fields", () => {
+    render(dialogs[0].element());
+
+    for (const [name, label] of [
+      ["currentPassphrase", "Common:CurrentPassphrase"],
+      ["newPassphrase", "Common:NewPassphrase"],
+      ["confirmNewPassphrase", "Common:ConfirmNewPassphrase"],
+    ]) {
+      const field = screen.getByLabelText(label);
+      expect(field).toHaveAttribute("name", name);
+      expect(field).toHaveAccessibleName(label);
+    }
+  });
+
   it("Screen reader: the reset field is named by the instruction above it", () => {
     render(dialogs[1].element());
     expect(

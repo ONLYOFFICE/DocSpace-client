@@ -337,6 +337,8 @@ class FilesStore {
 
   tempActionFoldersIds: (number | string)[] = EMPTY_ARRAY;
 
+  tempActionFolderId: Nullable<number | string> = null;
+
   isErrorRoomNotAvailable = false;
 
   isErrorAIAgentNotAvailable = false;
@@ -662,10 +664,20 @@ class FilesStore {
   }, 1000);
 
   debounceRemoveFiles = debounce(() => {
+    if (this.tempActionFolderId !== this.selectedFolderStore.id) {
+      this.setTempActionFilesIds(EMPTY_ARRAY);
+      return;
+    }
+
     this.removeFiles(this.tempActionFilesIds);
   }, 1000);
 
   debounceRemoveFolders = debounce(() => {
+    if (this.tempActionFolderId !== this.selectedFolderStore.id) {
+      this.setTempActionFoldersIds(EMPTY_ARRAY);
+      return;
+    }
+
     this.removeFiles(null, this.tempActionFoldersIds);
   }, 1000);
 
@@ -719,6 +731,10 @@ class FilesStore {
 
   setTempActionFoldersIds = (tempActionFoldersIds: (number | string)[]) => {
     this.tempActionFoldersIds = tempActionFoldersIds;
+  };
+
+  setTempActionFolderId = (tempActionFolderId: Nullable<number | string>) => {
+    this.tempActionFolderId = tempActionFolderId;
   };
 
   setClearSearch = (clearSearch: boolean) => {
@@ -1212,12 +1228,7 @@ class FilesStore {
     if (selected === "close" || selected === "none") {
       clearBuffer && this.setBufferSelection(null);
 
-      if (this.hotkeyCaret) {
-        this.setHotkeyCaretStart(
-          this.selection.at(-1) ?? this.hotkeyCaretStart,
-        );
-        this.setHotkeyCaret(this.selection.at(-1) ?? this.hotkeyCaret);
-      }
+      if (this.hotkeyCaret) this.setHotkeyCaretStart(this.hotkeyCaret);
     }
 
     this.selected = selected;

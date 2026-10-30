@@ -59,6 +59,7 @@ import {
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
+  type TErrorEvent,
   // onOutdatedVersion,
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
@@ -110,6 +111,9 @@ const Editor = ({
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
   const isEncryptedFile = !!config?.file?.encrypted;
+  // The description of an error the editor frame reported for an encrypted
+  // file; shown in place of the editor.
+  const [frameError, setFrameError] = React.useState<string | null>(null);
 
   const {
     onDocumentReady,
@@ -273,7 +277,12 @@ const Editor = ({
     onAppReady: onSDKAppReady,
     onInfo,
     onWarning: onSDKWarning,
-    onError: onSDKError,
+    onError: (event: object) => {
+      onSDKError(event);
+      if (isEncryptedFile) {
+        setFrameError((event as TErrorEvent).data?.errorDescription ?? "");
+      }
+    },
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
@@ -377,46 +386,61 @@ const Editor = ({
   }
 
   const isEncryptionGating =
-    !!config?.file?.encrypted &&
+    isEncryptedFile &&
     !errorMessage &&
     !isSkipError &&
     encryption.status !== "ready";
 
-  if (isEncryptionGating) {
-    return (
+  const renderMessage = (message: React.ReactNode) => (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+      }}
+    >
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          width: "100%",
+          height: "auto",
+          overflow: "visible",
+          position: "relative",
+          zIndex: 1000,
         }}
       >
-        <div
-          style={{
-            height: "auto",
-            overflow: "visible",
-            position: "relative",
-            zIndex: 1000,
-          }}
-        >
-          <Bar quotaExceededScope={config?.quotaExceededScope} />
-        </div>
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            padding: "24px",
-          }}
-        >
-          {encryption.status === "error"
-            ? t("Common:SomethingWentWrong")
-            : t("Common:LoadingProcessing")}
-        </div>
+        <Bar quotaExceededScope={config?.quotaExceededScope} />
       </div>
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          padding: "24px",
+        }}
+      >
+        {message}
+      </div>
+    </div>
+  );
+
+  if (isEncryptionGating) {
+    return renderMessage(
+      encryption.status === "error"
+        ? t("Common:SomethingWentWrong")
+        : t("Common:LoadingProcessing"),
+    );
+  }
+
+  // Spec: editor-integration, "Editor fails closed without the crypto library"
+  if (frameError !== null) {
+    return renderMessage(
+      <>
+        <div>{t("Common:SomethingWentWrong")}</div>
+        {frameError ? <div>{frameError}</div> : null}
+      </>,
     );
   }
 

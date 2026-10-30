@@ -207,6 +207,7 @@ const user = { id: USER_ID, isVisitor: false } as TUser;
 
 describe("Editor", () => {
   let root: Root | null = null;
+  let container: HTMLElement | null = null;
 
   const renderEditor = async (props: Partial<EditorProps>) => {
     const all: EditorProps = {
@@ -223,7 +224,8 @@ describe("Editor", () => {
       onStartFilling: vi.fn(),
       ...props,
     };
-    root = createRoot(document.createElement("div"));
+    container = document.createElement("div");
+    root = createRoot(container);
     await act(async () => {
       root?.render(
         <Suspense fallback={null}>
@@ -250,7 +252,11 @@ describe("Editor", () => {
   afterEach(() => {
     act(() => root?.unmount());
     root = null;
+    container = null;
   });
+
+  const editorMounted = () =>
+    !!container?.querySelector(`[data-testid="document-editor"]`);
 
   const asEncrypted = () => {
     env.encryption.status = "ready";
@@ -416,6 +422,47 @@ describe("Editor", () => {
       expect(events().onRequestSharingSettings).toBe(
         props.onSDKRequestSharingSettings,
       );
+    });
+  });
+
+  describe("Frame errors", () => {
+    const libraryMissing = {
+      data: {
+        errorCode: "-1",
+        errorDescription: "The crypto library is missing in the frame",
+      },
+    };
+
+    it("Library missing in the frame: the error replaces the editor as page text", async () => {
+      asEncrypted();
+      await renderEditor({
+        config: makeConfig(true),
+        fileInfo: makeFileInfo(true),
+      });
+      expect(editorMounted()).toBe(true);
+
+      const onError = events().onError as (event: object) => void;
+      await act(async () => onError(libraryMissing));
+
+      expect(env.eventHelpers.onSDKError).toHaveBeenCalledWith(libraryMissing);
+      expect(editorMounted()).toBe(false);
+      expect(container?.textContent).toContain("Common:SomethingWentWrong");
+      expect(container?.textContent).toContain(
+        libraryMissing.data.errorDescription,
+      );
+    });
+
+    it("Frame error on a plain file: the editor stays mounted and the error is logged", async () => {
+      await renderEditor({
+        config: makeConfig(false),
+        fileInfo: makeFileInfo(false),
+      });
+
+      const onError = events().onError as (event: object) => void;
+      await act(async () => onError(libraryMissing));
+
+      expect(env.eventHelpers.onSDKError).toHaveBeenCalledWith(libraryMissing);
+      expect(editorMounted()).toBe(true);
     });
   });
 });

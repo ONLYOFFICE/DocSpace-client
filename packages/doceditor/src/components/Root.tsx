@@ -280,7 +280,10 @@ const Root = ({
       error.message !== "unavailable" &&
       !isSkipError
     ) {
-      throw new Error(error.message);
+      throw new Error(
+        error.message,
+        error.cause ? { cause: error.cause } : undefined,
+      );
     }
   }, [error, isSkipError]);
 

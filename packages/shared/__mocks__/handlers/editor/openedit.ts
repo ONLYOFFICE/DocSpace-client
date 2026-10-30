@@ -290,3 +290,29 @@ export const openEditHandler = (port: string, editWithPassword?: boolean) => {
     return openEditResolver(editWithPassword);
   });
 };
+
+// openedit failing the ways the editor cannot read: an ASP.NET problem
+// details body (not OK, JSON, no `error`), or a proxy's HTML 502 page.
+export const openEditFailedHandler = (
+  port: string,
+  kind: "problem-details" | "bad-gateway",
+) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_OPEN_EDIT}`, () =>
+    kind === "problem-details"
+      ? new Response(
+          JSON.stringify({
+            type: "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+            title: "One or more validation errors occurred.",
+            status: 400,
+          }),
+          {
+            status: 400,
+            headers: { "content-type": "application/problem+json" },
+          },
+        )
+      : new Response("<html>502 Bad Gateway</html>", {
+          status: 502,
+          headers: { "content-type": "text/html" },
+        }),
+  );
+};

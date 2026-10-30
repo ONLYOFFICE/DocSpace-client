@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { openEditHandler } from "./openedit";
+import { openEditFailedHandler, openEditHandler } from "./openedit";
 import { fileByIdHandler } from "./fileById";
 import { fillingStatusHandler } from "./formFillingStatus";
 import { fillingSessionHandler } from "./fillingSession";
@@ -42,6 +42,7 @@ import { createFileBadGatewayHandler } from "./createFile";
 
 export {
   openEditHandler,
+  openEditFailedHandler,
   fileByIdHandler,
   fillingStatusHandler,
   fillingSessionHandler,

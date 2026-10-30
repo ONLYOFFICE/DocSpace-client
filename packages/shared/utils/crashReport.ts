@@ -56,6 +56,8 @@ export const getCrashReport = (
     language: language || "en",
     errorMessage: error?.message,
     errorStack: error?.stack,
+    // Firebase refuses undefined values, so the field is set only when known.
+    ...(error?.cause ? { errorCause: String(error.cause) } : {}),
     localStorage: lsObject,
     reportTime,
     deviceInfo: deviceDetect(window.navigator.userAgent),

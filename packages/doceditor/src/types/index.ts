@@ -234,6 +234,8 @@ export type TError = {
   status?: "not-found" | "access-denied" | number | string;
   type?: string;
   editorUrl?: string;
+  /** What actually failed, for the error report only; never shown. */
+  cause?: string;
 };
 
 export type TResponse =

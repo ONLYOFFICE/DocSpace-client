@@ -213,6 +213,7 @@ export const useMetadataAIPanel = ({
   const runAI = async () => {
     if (!metadata) return;
 
+    controller.current?.abort();
     const abort = new AbortController();
     controller.current = abort;
     beforeRun.current = { forms, drafts };
@@ -290,7 +291,7 @@ export const useMetadataAIPanel = ({
   const redo = () => restore(history.redo({ forms, drafts, summary }));
 
   const discard = () => {
-    if (!beforeRun.current) return;
+    if (phase !== "review" || !beforeRun.current) return;
 
     resetHistory();
     setForms(beforeRun.current.forms);

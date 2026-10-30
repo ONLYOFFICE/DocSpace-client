@@ -208,7 +208,7 @@ const MetadataAIDialog = ({
       displayType={ModalDialogType.aside}
       isBackButton={isReview}
       isCloseable={!isSaving}
-      onBackClick={isSaving ? undefined : discard}
+      onBackClick={isReview && !isSaving ? discard : undefined}
       onClose={isReview ? discard : onClose}
       dataTestId="metadata_ai_panel"
     >

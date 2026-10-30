@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+/// <reference path="./doceditor-types.d.ts" />
+
 declare module "*.svg?url" {
   const content: string;
   export default content;

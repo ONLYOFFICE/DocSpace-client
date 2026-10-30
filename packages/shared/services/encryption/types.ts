@@ -46,6 +46,9 @@ export const VERSION_DSE3_FILE = 0x02;
 // Editor-facing surface of the standalone onlyoffice-crypto bundle;
 // 2.0.0 is the unstamped build handed over on 2026-07-01.
 export const LIBRARY_VERSION = "2.1.0";
+// Version of the encryption keys entry the editor configuration carries
+// (contract-v1.md of the private-rooms-editor-contract change).
+export const EDITOR_CONTRACT_VERSION = 1;
 
 export const X25519_PUBLIC_KEY_SIZE = 32;
 export const X25519_PRIVATE_KEY_SIZE = 32;

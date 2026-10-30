@@ -262,9 +262,7 @@ const Editor = ({
     encryption.encryptionKeys &&
     newConfig.editorConfig
   ) {
-    Object.assign(newConfig.editorConfig, {
-      encryptionKeys: encryption.encryptionKeys,
-    });
+    newConfig.editorConfig.encryptionKeys = encryption.encryptionKeys;
   }
 
   newConfig.events = {

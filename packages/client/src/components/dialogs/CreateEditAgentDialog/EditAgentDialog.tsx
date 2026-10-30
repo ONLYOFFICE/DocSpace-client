@@ -182,7 +182,7 @@ const EditAgentDialog = ({
     onSave(agentParams);
   };
 
-  const onKeyUpHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (isWrongTitle) return;
     if (e.keyCode === 13) onEditRoom();
   };
@@ -258,7 +258,7 @@ const EditAgentDialog = ({
           isWrongTitle={isWrongTitle}
           setIsValidTitle={setIsValidTitle}
           setIsWrongTitle={setIsWrongTitle}
-          onKeyUp={onKeyUpHandler}
+          onKeyDown={onKeyDownHandler}
           onOwnerChange={onOwnerChange}
           onClickAction={onClickAction}
           selectedServers={selectedServers}

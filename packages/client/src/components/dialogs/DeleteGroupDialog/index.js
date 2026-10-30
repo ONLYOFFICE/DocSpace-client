@@ -70,7 +70,6 @@ const DeleteGroupDialog = (props) => {
 	};
 
 	const onKeyUp = (e) => {
-		if (e.keyCode === 27) onClose();
 		if (e.keyCode === 13 || e.which === 13) onDeleteAction();
 	};
 

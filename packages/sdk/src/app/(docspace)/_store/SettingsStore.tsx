@@ -62,6 +62,8 @@ class SettingsStore {
 
   displayAbout: boolean = true;
 
+  tilesGridColumns: number = 0;
+
   constructor(initData?: TSettingsStoreInitData) {
     if (initData?.viewAs) {
       this.filesViewAs = initData.viewAs;
@@ -98,6 +100,10 @@ class SettingsStore {
 
   setDisplayAbout = (value: boolean) => {
     this.displayAbout = value;
+  };
+
+  setTilesGridColumns = (value: number) => {
+    this.tilesGridColumns = value;
   };
 }
 

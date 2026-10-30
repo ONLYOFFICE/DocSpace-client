@@ -98,10 +98,9 @@ const RemoveGuestDialog = ({
 
 	const onKeyUpHandler = React.useCallback(
 		(e: KeyboardEvent) => {
-			if (e.key === ButtonKeys.esc) onCloseAction();
 			if (e.key === ButtonKeys.enter) onRemove();
 		},
-		[onCloseAction, onRemove],
+		[onRemove],
 	);
 
 	React.useEffect(() => {
@@ -117,7 +116,7 @@ const RemoveGuestDialog = ({
 	return (
 		<ModalDialog
 			visible={visible}
-			onClose={onClose}
+			onClose={onCloseAction}
 			displayType={ModalDialogType.modal}
 			autoMaxHeight
 		>

@@ -3,7 +3,7 @@
   "content": "Fill metadata with AI",
   "content_en_sha1_hash": "0640633ec8ab22af1741dfba7b97434b9f0b1058",
   "created_at": "2026-10-21T10:17:42.475Z",
-  "updated_at": "2026-10-27T19:13:18.289Z",
+  "updated_at": "2026-10-29T14:13:10.482Z",
   "comment": {
     "text": "Title of the intro card next to the AI icon in the Fill metadata side panel: AI reads the file content and fills the empty fields of its metadata templates and custom fields.",
     "is_auto": true,

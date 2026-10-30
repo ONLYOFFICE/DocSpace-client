@@ -1486,7 +1486,17 @@ export const getFilesContextOptionsImpl = (
     );
   }
 
-  const newResult = placePlugins(resultOptions, pluginItems);
+  const usedSeparatorKeys = new Set<string>();
+  const roomOptions = resultOptions.map((option, index) => {
+    if (!option.isSeparator) return option;
+    if (!usedSeparatorKeys.has(option.key)) {
+      usedSeparatorKeys.add(option.key);
+      return option;
+    }
+    return { ...option, key: `${option.key}_${index}` };
+  });
+
+  const newResult = placePlugins(roomOptions, pluginItems);
 
   return withUniqueSeparatorKeys(
     trimSeparator(newResult as ContextMenuModel[]),

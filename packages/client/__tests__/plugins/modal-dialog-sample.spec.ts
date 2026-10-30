@@ -158,7 +158,10 @@ test.describe("Modal Dialog Sample Plugin — IModalDialog via profile menu", ()
 
     await clickAboutItem(page);
 
-    const closeButton = page.getByRole("button", { name: "Close" });
+    // The header's x is a "Close" button too; this is the footer's.
+    const closeButton = page
+      .getByRole("button", { name: "Close" })
+      .and(page.getByTestId("button"));
 
     await expect(closeButton).toBeVisible();
   });
@@ -177,7 +180,10 @@ test.describe("Modal Dialog Sample Plugin — IModalDialog via profile menu", ()
 
     await expect(page.getByTestId("plugin_modal").getByTestId("modal-dialog")).toBeVisible();
 
-    await page.getByRole("button", { name: "Close" }).click();
+    await page
+      .getByRole("button", { name: "Close" })
+      .and(page.getByTestId("button"))
+      .click();
 
     await expect(page.getByTestId("plugin_modal").getByTestId("modal-dialog")).toHaveCount(0);
   });

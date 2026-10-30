@@ -33,19 +33,23 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
+import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import ArticleLiveChat from "@onlyoffice/apps-ui-kit/components/article/sub-components/LiveChat";
+import { zendeskAPI } from "@onlyoffice/apps-ui-kit/components/article/zendesk/Zendesk.utils";
+import { DeviceType } from "@onlyoffice/apps-ui-kit/enums";
 
 type LiveChatBlockProps = {
   isLiveChatAvailable: boolean;
+  isDesktop: boolean;
   languageBaseName: string;
   zendeskKey: string;
   isShowLiveChat: boolean;
   withFloatingButton: boolean;
-  isInfoPanelVisible: boolean;
+  infoPanelWidth: number;
 };
 
 /**
@@ -55,12 +59,32 @@ type LiveChatBlockProps = {
  * shows or hides it from then on. The availability gate repeats the one that
  * adds the switch to the menu, so the two can never disagree. The launcher
  * shares the bottom corner with the create button and the progress button,
- * and the two flags below are what move it aside while one of those is there.
+ * and the flag below moves it aside while one of those is there. The width
+ * below moves it clear of the open info panel, or of the AI chat in its place.
+ * While the AI chat covers the whole page, fullscreen on a desktop and open at
+ * all below it, the widget is hidden, and it comes back once the chat stops
+ * covering it, as long as the switch is on.
  */
-const LiveChatBlock = ({ isLiveChatAvailable, ...rest }: LiveChatBlockProps) => {
+const LiveChatBlock = ({
+  isLiveChatAvailable,
+  isDesktop,
+  isShowLiveChat,
+  ...rest
+}: LiveChatBlockProps) => {
+  const aiChatStore = useAiChatStoreOptional();
+  const isHidden =
+    !!aiChatStore?.isVisible &&
+    (!isDesktop || !!aiChatStore.effectiveFullscreen);
+
+  useEffect(() => {
+    if (isMobile || !isLiveChatAvailable || !isShowLiveChat) return;
+
+    zendeskAPI.addChanges("messenger", isHidden ? "hide" : "show");
+  }, [isLiveChatAvailable, isShowLiveChat, isHidden]);
+
   if (isMobile || !isLiveChatAvailable) return null;
 
-  return <ArticleLiveChat {...rest} />;
+  return <ArticleLiveChat {...rest} isShowLiveChat={isShowLiveChat} />;
 };
 
 // Every field comes from the stores, so the public component takes no props.
@@ -84,6 +108,7 @@ const LiveChatBlockConnected = inject<TStore>(
 
     return {
       isLiveChatAvailable: authStore.isLiveChatAvailable,
+      isDesktop: settingsStore.currentDeviceType === DeviceType.desktop,
       languageBaseName: authStore.languageBaseName,
       zendeskKey: settingsStore.zendeskKey,
       isShowLiveChat: profileActionsStore.isShowLiveChat,
@@ -91,7 +116,7 @@ const LiveChatBlockConnected = inject<TStore>(
       // button it renders into the same corner, so the launcher dodges exactly
       // when that button or the progress button is there.
       withFloatingButton: filesStore.mainButtonVisible || showProgress,
-      isInfoPanelVisible: infoPanelStore.isVisible,
+      infoPanelWidth: infoPanelStore.shownWidth,
     };
   },
 )(observer(LiveChatBlock)) as unknown as React.ComponentType;

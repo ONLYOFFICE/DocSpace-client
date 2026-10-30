@@ -180,7 +180,11 @@ test.describe("Shared with me", () => {
 
     const icon = fileRow.getByTestId("room-icon");
 
-    await icon.click();
+    // Under the pointer the icon turns into the row's checkbox, which takes
+    // the click, as it does for a user. `force` skips only Playwright's
+    // hit-target check, which used to pass because the row was a
+    // role="button" drop zone.
+    await icon.click({ force: true });
 
     const checkBox = fileRow.getByRole("checkbox");
 

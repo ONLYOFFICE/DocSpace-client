@@ -49,6 +49,7 @@ const path = require("path");
 
 const UI_KIT_PACKAGE = "@onlyoffice/apps-ui-kit";
 const UI_KIT_SRC_ENV = "DOCSPACE_UI_KIT_SRC";
+const PLUGIN_NAME = "UiKitSourcePeers";
 
 const fail = (message) => {
   throw new Error(`${UI_KIT_SRC_ENV}: ${message}`);
@@ -85,6 +86,30 @@ const readCheckout = (appDir) => {
     );
 
   return { root, manifest };
+};
+
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/** True when `target` is `root` or lies below it. */
+const isInside = (root, target) => {
+  if (typeof target !== "string") return false;
+
+  const relative = path.relative(root, target);
+
+  return !relative.startsWith("..") && !path.isAbsolute(relative);
+};
+
+/**
+ * True when `name` is installed for `appDir`, by the node_modules walk Node
+ * itself does. require.resolve cannot tell: it fails on packages whose
+ * `exports` hide package.json or offer no `require` condition.
+ */
+const isInstalled = (name, appDir) => {
+  for (let dir = appDir; ; dir = path.dirname(dir)) {
+    if (fs.existsSync(path.join(dir, "node_modules", name, "package.json")))
+      return true;
+    if (path.dirname(dir) === dir) return false;
+  }
 };
 
 /** Every rule whose loader is next-swc-loader, at any depth of `oneOf`. */
@@ -133,26 +158,38 @@ const applyUiKitSourceMode = (config, appDir) => {
   // source resolves against the checkout's own node_modules. For a package
   // both trees carry that means two copies, and for anything holding module
   // state -- a context, a store, a socket -- two copies is a silent behaviour
-  // change. Aliasing the package directory keeps subpath imports working
-  // (react-dom/client, and the deep imports the AI stack uses).
-  for (const peer of Object.keys(manifest.peerDependencies ?? {})) {
-    if (peer === UI_KIT_PACKAGE) continue;
+  // change. A peer imported from inside the checkout is therefore resolved as
+  // if the app imported it: the ordinary lookup, so `exports`, browser
+  // conditions and subpaths behave exactly as in the app's own code. Aliasing
+  // the package directory instead skips `exports` and breaks packages that
+  // have nothing else (react-router).
+  const peers = Object.keys(manifest.peerDependencies ?? {}).filter(
+    (peer) => peer !== UI_KIT_PACKAGE && isInstalled(peer, appDir),
+  );
 
-    try {
-      config.resolve.alias[peer] = path.dirname(
-        require.resolve(`${peer}/package.json`, { paths: [appDir] }),
-      );
-    } catch {
-      try {
-        // No package.json export: fall back to pinning the entry point only.
-        config.resolve.alias[`${peer}$`] = require.resolve(peer, {
-          paths: [appDir],
+  if (peers.length > 0) {
+    const peerRequest = new RegExp(
+      `^(?:${peers.map(escapeRegExp).join("|")})(?:/|$)`,
+    );
+
+    config.plugins = config.plugins ?? [];
+    config.plugins.push({
+      apply: (compiler) => {
+        compiler.hooks.normalModuleFactory.tap(PLUGIN_NAME, (factory) => {
+          factory.hooks.beforeResolve.tap(PLUGIN_NAME, (data) => {
+            if (peerRequest.test(data.request) && isInside(root, data.context))
+              data.context = appDir;
+          });
         });
-      } catch {
-        // Not installed here at all; the checkout resolves it itself.
-      }
-    }
+      },
+    });
   }
+
+  // The alias above is invisible to webpack's persistent cache: the config
+  // file does not change when the variable does, so modules compiled in one
+  // mode would be served in the other -- two Reacts, "Invalid hook call".
+  if (config.cache && typeof config.cache === "object")
+    config.cache.version = `${config.cache.version ?? ""}|${UI_KIT_SRC_ENV}=${root}`;
 
   // Next compiles what lies under the app, and the checkout does not. Adding
   // it to the SWC rules is what makes its TypeScript compile; the CSS rules

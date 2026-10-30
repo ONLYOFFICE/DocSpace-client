@@ -3,7 +3,7 @@
   "content": "Discard",
   "content_en_sha1_hash": "36fff63ccbcd7bf96ac9014e3e482702fc2b02d4",
   "created_at": "2026-10-21T10:17:41.270Z",
-  "updated_at": "2026-10-27T19:13:18.300Z",
+  "updated_at": "2026-10-29T14:13:10.483Z",
   "comment": {
     "text": "Secondary footer button in the AI metadata panel's review step that throws away the AI results. Imperative verb, short button.",
     "is_auto": true,

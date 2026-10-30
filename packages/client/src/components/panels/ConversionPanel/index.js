@@ -68,18 +68,7 @@ const ConversionPanelComponent = ({
   };
 
   useEffect(() => {
-    const onKeyPress = (event) => {
-      if (event.key === "Esc" || event.key === "Escape") {
-        onClose();
-      }
-    };
-
-    document.addEventListener("keyup", onKeyPress);
     setNeedErrorChecking(true, OPERATIONS_NAME.convert);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyPress);
-    };
   }, []);
 
   const clearConversionPanel = () => {

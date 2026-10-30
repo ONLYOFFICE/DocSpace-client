@@ -287,27 +287,58 @@ test.describe("Metadata AI", () => {
     ).toHaveText("Generate metadata");
   });
 
-  test("explains that no model is selected", async ({
-    page,
-    baseUrl,
-    mockRequest,
-  }) => {
-    mockRequest.use(aiChatAssignmentsHandler(TEST_PORT));
+  test.describe("no model selected", () => {
+    test.beforeEach(({ mockRequest }) => {
+      mockRequest.use(aiChatAssignmentsHandler(TEST_PORT));
+    });
 
-    const panel = await openAIPanel(page, baseUrl, "fill");
+    test("leads the admin to the model assignment", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      mockRequest.use(selfByTypeHandler(TEST_PORT, "owner"));
 
-    await expect(
-      panel.getByText(
-        "No AI model is selected for metadata. Ask the administrator to choose one in the AI settings.",
-      ),
-    ).toBeVisible();
-    await expect(panel.getByTestId("metadata_ai_run_button")).toBeDisabled();
+      const panel = await openAIPanel(page, baseUrl, "fill");
+      const notice = panel.getByTestId("metadata_ai_no_model_notice");
 
-    await expectScreenshot(page, [
-      "desktop",
-      "metadata",
-      "metadata-ai_no-model.png",
-    ]);
+      await expect(notice).toContainText("No AI model selected");
+      await expect(notice).toContainText(
+        "Choose a model for metadata in the AI settings.",
+      );
+      await expect(panel.getByTestId("metadata_ai_run_button")).toBeDisabled();
+
+      await expectScreenshot(page, [
+        "desktop",
+        "metadata",
+        "metadata-ai_no-model.png",
+      ]);
+
+      await panel.getByTestId("metadata_ai_choose_model_button").click();
+
+      await expect(page).toHaveURL(
+        /\/portal-settings\/ai-settings\/model-assignment$/,
+      );
+      await expect(page.getByTestId("metadata_ai_panel")).toHaveCount(0);
+    });
+
+    test("sends a regular user to the Full admin", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
+
+      const panel = await openAIPanel(page, baseUrl, "fill");
+      const notice = panel.getByTestId("metadata_ai_no_model_notice");
+
+      await expect(notice).toContainText(
+        "Contact the Full admin to choose a model for metadata.",
+      );
+      await expect(
+        panel.getByTestId("metadata_ai_choose_model_button"),
+      ).toHaveCount(0);
+    });
   });
 
   test("reports an unexpected server error", async ({

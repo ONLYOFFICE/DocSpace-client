@@ -79,6 +79,7 @@ import {
   getSkippedTitles,
   getSuggestNotFound,
   getTemplateForms,
+  isMetadataAINoModel,
   isValidSuggestion,
   revertAICustomValue,
   revertAIValue,
@@ -230,6 +231,7 @@ export const useMetadataAIPanel = ({
       const limit = getMetadataAIServiceLimit(e);
 
       if (limit) setServiceLimit(limit);
+      else if (isMetadataAINoModel(e)) setModel(null);
       else setError(getMetadataAIError(t, e));
       setPhase("ready");
     }

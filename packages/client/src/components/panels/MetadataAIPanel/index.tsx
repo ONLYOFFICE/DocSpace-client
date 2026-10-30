@@ -55,11 +55,11 @@ import { useUndoShortcut } from "./hooks/useUndoShortcut";
 import type { TMetadataAIMode } from "./types";
 import { isSameEntry } from "./utils";
 import AICallout from "./sub-components/AICallout";
+import AINotice from "./sub-components/AINotice";
 import AIPrompt from "./sub-components/AIPrompt";
 import CustomFieldList from "./sub-components/CustomFieldList";
 import FillForms from "./sub-components/FillForms";
 import ReviewNotes from "./sub-components/ReviewNotes";
-import ServiceLimitNotice from "./sub-components/ServiceLimitNotice";
 import styles from "./MetadataAIPanel.module.scss";
 
 type MetadataAIDialogProps = {
@@ -117,33 +117,53 @@ const MetadataAIDialog = ({
 
   const getCalloutError = () => {
     if (error) return error;
-    if (hasNoModel) return t("Metadata:AINoModel");
     if (hasNothingToFill) return t("Metadata:AINothingToFill");
 
     return "";
   };
 
-  const getServiceLimitNotice = () => {
-    if (!serviceLimit) return undefined;
+  const openAISettings = (page: string) => () => {
+    onClose();
+    navigate(`/portal-settings/ai-settings/${page}`);
+  };
 
-    const openLimits = () => {
-      onClose();
-      navigate("/portal-settings/ai-settings/limits");
-    };
+  const getNotice = () => {
+    if (serviceLimit) {
+      return (
+        <AINotice
+          title={t("Common:AILimitReached")}
+          description={getServiceLimitDescription(
+            t,
+            language,
+            serviceLimit,
+            isAdmin,
+          )}
+          buttonLabel={t("Common:ChangeAILimit")}
+          onClick={isAdmin ? openAISettings("limits") : undefined}
+          dataTestId="metadata_ai_limit_notice"
+          buttonTestId="metadata_ai_change_limit_button"
+        />
+      );
+    }
 
-    return (
-      <ServiceLimitNotice
-        title={t("Common:AILimitReached")}
-        description={getServiceLimitDescription(
-          t,
-          language,
-          serviceLimit,
-          isAdmin,
-        )}
-        buttonLabel={t("Common:ChangeAILimit")}
-        onClick={isAdmin ? openLimits : undefined}
-      />
-    );
+    if (hasNoModel) {
+      return (
+        <AINotice
+          title={t("Metadata:AINoModelTitle")}
+          description={
+            isAdmin
+              ? t("Metadata:AINoModelChoose")
+              : t("Metadata:AINoModelContactAdmin")
+          }
+          buttonLabel={t("Common:GoToSettings")}
+          onClick={isAdmin ? openAISettings("model-assignment") : undefined}
+          dataTestId="metadata_ai_no_model_notice"
+          buttonTestId="metadata_ai_choose_model_button"
+        />
+      );
+    }
+
+    return undefined;
   };
 
   const customFields = metadata ? (
@@ -223,7 +243,7 @@ const MetadataAIDialog = ({
                       : t("Metadata:SuggestMetadata")
                   }
                   error={getCalloutError()}
-                  notice={getServiceLimitNotice()}
+                  notice={getNotice()}
                   isDisabled={
                     isAnalyzing ||
                     isSaving ||

@@ -61,6 +61,7 @@ import {
   getMetadataAIModel,
   getUndoShortcut,
   isSameEntry,
+  isMetadataAINoModel,
   isPanelKeyTarget,
   isTextEditable,
   isValidSuggestion,
@@ -451,8 +452,13 @@ describe("service answers", () => {
     ).toEqual(["scan.png", "11"]);
   });
 
+  it("tells a missing model apart from the other refusals", () => {
+    expect(isMetadataAINoModel({ status: 503 })).toBe(true);
+    expect(isMetadataAINoModel({ status: 502 })).toBe(false);
+    expect(isMetadataAINoModel(null)).toBe(false);
+  });
+
   it("explains each refusal of the AI service", () => {
-    expect(getMetadataAIError(t, { status: 503 })).toBe("Metadata:AINoModel");
     expect(getMetadataAIError(t, { status: 422, skipped: [] })).toBe(
       "Metadata:AINothingToRead",
     );

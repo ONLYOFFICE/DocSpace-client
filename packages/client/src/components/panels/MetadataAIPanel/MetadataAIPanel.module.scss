@@ -109,7 +109,7 @@
   color: var(--input-error-color);
 }
 
-.limitNotice {
+.notice {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -118,11 +118,11 @@
   background-color: color-mix(in srgb, var(--input-error-color) 15%, transparent);
 }
 
-.limitNoticeTitle {
+.noticeTitle {
   color: var(--info-block-header-color);
 }
 
-.limitNoticeText {
+.noticeText {
   color: var(--info-block-description-color);
 }
 

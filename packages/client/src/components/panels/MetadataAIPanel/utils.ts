@@ -388,6 +388,9 @@ export const getMetadataAIServiceLimit = (error: unknown) => {
   return getServiceLimitChatError({ code, message: providerMessage });
 };
 
+export const isMetadataAINoModel = (error: unknown) =>
+  (error as TMetadataAIError | null)?.status === 503;
+
 export const getMetadataAIError = (t: TTranslation, error: unknown) => {
   const { status, skipped } = (error ?? {}) as TMetadataAIError;
 
@@ -402,8 +405,6 @@ export const getMetadataAIError = (t: TTranslation, error: unknown) => {
       return t("Metadata:AIBusy");
     case 502:
       return t("Metadata:AIFailed");
-    case 503:
-      return t("Metadata:AINoModel");
     case 504:
       return t("Metadata:AITimeout");
     default:

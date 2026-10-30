@@ -38,34 +38,34 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "../MetadataAIPanel.module.scss";
 
-type ServiceLimitNoticeProps = {
+type AINoticeProps = {
   title: string;
   description: string;
   buttonLabel: string;
   onClick?: () => void;
+  dataTestId: string;
+  buttonTestId: string;
 };
 
-const ServiceLimitNotice = ({
+const AINotice = ({
   title,
   description,
   buttonLabel,
   onClick,
-}: ServiceLimitNoticeProps) => (
-  <div className={styles.limitNotice} data-testid="metadata_ai_limit_notice">
+  dataTestId,
+  buttonTestId,
+}: AINoticeProps) => (
+  <div className={styles.notice} data-testid={dataTestId}>
     <div>
       <Text
-        className={styles.limitNoticeTitle}
+        className={styles.noticeTitle}
         fontSize="13px"
         fontWeight={600}
         lineHeight="20px"
       >
         {title}
       </Text>
-      <Text
-        className={styles.limitNoticeText}
-        fontSize="12px"
-        lineHeight="16px"
-      >
+      <Text className={styles.noticeText} fontSize="12px" lineHeight="16px">
         {description}
       </Text>
     </div>
@@ -74,10 +74,10 @@ const ServiceLimitNotice = ({
         size={ButtonSize.small}
         label={buttonLabel}
         onClick={onClick}
-        testId="metadata_ai_change_limit_button"
+        testId={buttonTestId}
       />
     ) : null}
   </div>
 );
 
-export default ServiceLimitNotice;
+export default AINotice;

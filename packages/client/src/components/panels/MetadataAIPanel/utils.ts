@@ -254,6 +254,8 @@ export const getUndoShortcut = ({
   KeyboardEvent,
   "code" | "ctrlKey" | "metaKey" | "shiftKey" | "altKey"
 >): "undo" | "redo" | null => {
+  if (code === "KeyY" && ctrlKey && !metaKey && !shiftKey && !altKey)
+    return "redo";
   if (code !== "KeyZ" || !(ctrlKey || metaKey) || altKey) return null;
 
   return shiftKey ? "redo" : "undo";

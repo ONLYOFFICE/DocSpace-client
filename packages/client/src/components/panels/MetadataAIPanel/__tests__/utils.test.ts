@@ -298,7 +298,7 @@ describe("fill", () => {
     ).toBe("Ann");
   });
 
-  it("reads Ctrl+Z as undo and Ctrl+Shift+Z as redo in any keyboard layout", () => {
+  it("reads Ctrl+Z as undo and Ctrl+Shift+Z or Ctrl+Y as redo in any keyboard layout", () => {
     const key = (patch: Partial<KeyboardEvent> = {}) => ({
       code: "KeyZ",
       ctrlKey: true,
@@ -315,7 +315,13 @@ describe("fill", () => {
     expect(getUndoShortcut(key({ shiftKey: true }))).toBe("redo");
     expect(getUndoShortcut(key({ altKey: true }))).toBeNull();
     expect(getUndoShortcut(key({ ctrlKey: false }))).toBeNull();
-    expect(getUndoShortcut(key({ code: "KeyY" }))).toBeNull();
+    expect(getUndoShortcut(key({ code: "KeyY" }))).toBe("redo");
+    expect(
+      getUndoShortcut(key({ code: "KeyY", shiftKey: true })),
+    ).toBeNull();
+    expect(
+      getUndoShortcut(key({ code: "KeyY", ctrlKey: false, metaKey: true })),
+    ).toBeNull();
   });
 
   it("leaves Ctrl+Z to the text fields", () => {

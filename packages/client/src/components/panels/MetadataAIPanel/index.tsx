@@ -52,6 +52,7 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import { useMetadataAIPanel } from "./hooks/useMetadataAIPanel";
 import { useScrollToTop } from "./hooks/useScrollToTop";
+import { useUndoShortcut } from "./hooks/useUndoShortcut";
 import type { TMetadataAIMode } from "./types";
 import { isSameEntry, METADATA_AI_PROMPT_MAX_LENGTH } from "./utils";
 import AICallout from "./sub-components/AICallout";
@@ -99,6 +100,8 @@ const MetadataAIDialog = ({
     removeDraft,
     revertField,
     revertCustomField,
+    undo,
+    redo,
     discard,
     save,
   } = useMetadataAIPanel({ item, mode, onSaved });
@@ -107,6 +110,7 @@ const MetadataAIDialog = ({
   const isAnalyzing = phase === "analyzing";
   const isReview = phase === "review" && !!summary;
   const bodyRef = useScrollToTop(isReview);
+  useUndoShortcut(phase === "review" && !isSaving, bodyRef, undo, redo);
   const hasNothingToFill =
     isFill && phase !== "loading" && !forms.length && !drafts.length;
   const hasNoModel = model === null;
@@ -181,13 +185,11 @@ const MetadataAIDialog = ({
       visible
       withBodyScroll
       withoutPadding
-      withForm
       displayType={ModalDialogType.aside}
       isBackButton={isReview}
       isCloseable={!isSaving}
       onBackClick={isSaving ? undefined : discard}
       onClose={isReview ? discard : onClose}
-      onSubmit={submit}
       dataTestId="metadata_ai_panel"
     >
       <ModalDialog.Header>{getTitle()}</ModalDialog.Header>
@@ -282,7 +284,7 @@ const MetadataAIDialog = ({
           label={t("Metadata:SaveChanges")}
           isDisabled={!canSave}
           isLoading={isSaving}
-          type="submit"
+          onClick={submit}
           testId="metadata_ai_save_button"
         />
         <Button

@@ -101,7 +101,7 @@ const CascadeBlock = ({
           </Text>
         </div>
         {isProgressVisible ? (
-          <CascadeProgress progress={isRunning ? progress : 100} />
+          <CascadeProgress progress={progress} />
         ) : null}
       </div>
 

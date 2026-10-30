@@ -113,6 +113,7 @@
   "TemplateDeleted": "Template deleted",
   "TemplateFieldsRequired": "Add at least one field to save the template",
   "TemplateNameExists": "A template with this name already exists",
+  "TemplateNameReserved": "This name is reserved for custom fields",
   "TemplateValue": "Metadata template: {{template}}",
   "Visibility": "Visibility",
   "Visible": "Visible",

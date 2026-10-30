@@ -49,6 +49,7 @@ import { useTemplateEditor } from "../../hooks/useTemplateEditor";
 import {
   isFieldNameTaken,
   isNameFreedOnSave,
+  isTemplateNameReserved,
   isTemplateNameTaken,
   isValidField,
 } from "../../utils";
@@ -110,13 +111,16 @@ const TemplatePanel = ({
 
   const nameError = getNameError();
 
-  const templateNameError = isTemplateNameTaken(
-    templates,
-    draft.name,
-    template?.id,
-  )
-    ? t("Metadata:TemplateNameExists")
-    : "";
+  const getTemplateNameError = () => {
+    if (isTemplateNameReserved(draft.name))
+      return t("Metadata:TemplateNameReserved");
+    if (isTemplateNameTaken(templates, draft.name, template?.id))
+      return t("Metadata:TemplateNameExists");
+
+    return "";
+  };
+
+  const templateNameError = getTemplateNameError();
 
   const submit = () => {
     if (fieldForm) {

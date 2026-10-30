@@ -211,6 +211,9 @@ export const isFieldNameTaken = (fields: TFieldDraft[], form: TFieldForm) => {
   );
 };
 
+export const isTemplateNameReserved = (name: string) =>
+  name.trim().toLowerCase() === SYSTEM_TEMPLATE_NAME.toLowerCase();
+
 export const isTemplateNameTaken = (
   templates: TMetadataTemplate[],
   name: string,
@@ -220,12 +223,11 @@ export const isTemplateNameTaken = (
 
   return (
     !!normalized &&
-    (normalized === SYSTEM_TEMPLATE_NAME.toLowerCase() ||
-      templates.some(
-        (template) =>
-          template.id !== templateId &&
-          template.name.trim().toLowerCase() === normalized,
-      ))
+    templates.some(
+      (template) =>
+        template.id !== templateId &&
+        template.name.trim().toLowerCase() === normalized,
+    )
   );
 };
 

@@ -49,6 +49,7 @@ import {
   isFieldNameTaken,
   isNameFreedOnSave,
   isRowControlClick,
+  isTemplateNameReserved,
   isTemplateNameTaken,
   isValidField,
   moveItem,
@@ -449,12 +450,20 @@ describe("isTemplateNameTaken", () => {
     expect(isTemplateNameTaken(templates, "CONTRACT", 1)).toBe(false);
   });
 
-  it("treats the name reserved for custom fields as taken", () => {
-    expect(isTemplateNameTaken([], "system")).toBe(true);
-  });
-
   it("does not flag an empty name", () => {
     expect(isTemplateNameTaken(templates, "  ")).toBe(false);
+  });
+});
+
+describe("isTemplateNameReserved", () => {
+  it("holds back the name of the custom fields template, ignoring case", () => {
+    expect(isTemplateNameReserved(" system ")).toBe(true);
+    expect(isTemplateNameTaken([], "System")).toBe(false);
+  });
+
+  it("leaves other names free", () => {
+    expect(isTemplateNameReserved("Systems")).toBe(false);
+    expect(isTemplateNameReserved("")).toBe(false);
   });
 });
 

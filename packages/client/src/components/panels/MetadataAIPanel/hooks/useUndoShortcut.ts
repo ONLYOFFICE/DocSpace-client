@@ -33,12 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useEffectEvent } from "react";
+import { type RefObject, useEffect, useEffectEvent } from "react";
 
 import { getUndoShortcut, isTextEditable } from "../utils";
 
 export const useUndoShortcut = (
   isActive: boolean,
+  panelRef: RefObject<HTMLElement | null>,
   onUndo: () => void,
   onRedo: () => void,
 ) => {
@@ -54,10 +55,12 @@ export const useUndoShortcut = (
   });
 
   useEffect(() => {
-    if (!isActive) return undefined;
+    const dialog = panelRef.current?.closest<HTMLElement>('[role="dialog"]');
 
-    document.addEventListener("keydown", onKeyDown);
+    if (!isActive || !dialog) return undefined;
 
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [isActive]);
+    dialog.addEventListener("keydown", onKeyDown);
+
+    return () => dialog.removeEventListener("keydown", onKeyDown);
+  }, [isActive, panelRef]);
 };

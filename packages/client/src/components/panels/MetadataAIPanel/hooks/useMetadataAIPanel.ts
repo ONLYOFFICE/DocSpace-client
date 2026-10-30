@@ -87,7 +87,6 @@ import {
   withoutAIChange,
 } from "../utils";
 import { useUndoHistory } from "./useUndoHistory";
-import { useUndoShortcut } from "./useUndoShortcut";
 
 type TUseMetadataAIPanel = {
   item: TMetadataSelection;
@@ -285,11 +284,8 @@ export const useMetadataAIPanel = ({
     setSummary(step.summary);
   };
 
-  useUndoShortcut(
-    phase === "review" && !isSaving,
-    () => restore(history.undo({ forms, drafts, summary })),
-    () => restore(history.redo({ forms, drafts, summary })),
-  );
+  const undo = () => restore(history.undo({ forms, drafts, summary }));
+  const redo = () => restore(history.redo({ forms, drafts, summary }));
 
   const discard = () => {
     if (!beforeRun.current) return;
@@ -358,6 +354,8 @@ export const useMetadataAIPanel = ({
     removeDraft,
     revertField,
     revertCustomField,
+    undo,
+    redo,
     discard,
     save,
   };

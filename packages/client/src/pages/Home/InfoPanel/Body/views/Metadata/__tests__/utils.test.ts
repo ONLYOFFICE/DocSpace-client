@@ -53,6 +53,7 @@ import {
   createTemplateForm,
   filterTemplatesByName,
   formatMetadataValue,
+  formatPreviousValue,
   getCascadeState,
   getLaunchResult,
   getChangedValues,
@@ -255,6 +256,30 @@ describe("formatMetadataValue", () => {
   });
 });
 
+describe("formatPreviousValue", () => {
+  it("writes a number the way its input does", () => {
+    expect(
+      formatPreviousValue(
+        field(MetadataFieldType.Number, { numberValue: 9000 }),
+        "en",
+      ),
+    ).toBe("9000");
+  });
+
+  it("reads every other type as the card does", () => {
+    const date = field(MetadataFieldType.Date, {
+      dateValue: "2026-09-15T03:00:00.0000000+03:00",
+    });
+
+    expect(formatPreviousValue(date, "en")).toBe(
+      formatMetadataValue(date, "en"),
+    );
+    expect(formatPreviousValue(field(MetadataFieldType.Number), "en")).toBe(
+      "",
+    );
+  });
+});
+
 describe("template form", () => {
   const caseFile: TEntryMetadataTemplate = {
     id: 5,
@@ -446,6 +471,19 @@ describe("cascade", () => {
       progress: 40,
     });
     expect(getCascadeState(running, 2).isRunning).toBe(false);
+  });
+
+  it("fills the bar only for a run that succeeded", () => {
+    const completed = { ...running, isCompleted: true };
+
+    expect(getCascadeState(completed, 1)).toEqual({
+      isRunning: false,
+      progress: 100,
+    });
+    expect(getCascadeState({ ...completed, error: "Failed" }, 1)).toEqual({
+      isRunning: false,
+      progress: 40,
+    });
   });
 
   it("tells how a launched run ended", () => {

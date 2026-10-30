@@ -39,7 +39,7 @@ import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-contain
 import type { TMetadataInput } from "@docspace/shared/utils/metadata";
 
 import type { TTemplateForm } from "../../types";
-import { formatMetadataValue, getFieldInputError } from "../../utils";
+import { formatPreviousValue, getFieldInputError } from "../../utils";
 import AIFilledLabel from "../AIFilledLabel";
 import AIPreviousValue from "../AIPreviousValue";
 import FieldInput from "../FieldInput";
@@ -99,7 +99,7 @@ const TemplateForm = ({
             />
             {isFilled ? (
               <AIPreviousValue
-                value={formatMetadataValue(field, i18n.language)}
+                value={formatPreviousValue(field, i18n.language)}
               />
             ) : null}
           </FieldContainer>

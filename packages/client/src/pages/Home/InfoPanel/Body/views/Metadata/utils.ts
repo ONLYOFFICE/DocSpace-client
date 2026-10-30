@@ -106,7 +106,8 @@ export const getCascadeState = (
     !!operation &&
     !operation.isCompleted &&
     operation.templateIds.includes(templateId),
-  progress: operation?.progress ?? 0,
+  progress:
+    operation?.isCompleted && !operation.error ? 100 : (operation?.progress ?? 0),
 });
 
 export const getLaunchResult = (
@@ -269,6 +270,14 @@ export const formatMetadataValue = (
       return value.stringValue ?? "";
   }
 };
+
+export const formatPreviousValue = (
+  field: TEntryMetadataField,
+  locale: string,
+) =>
+  field.type === MetadataFieldType.Number
+    ? (field.value?.numberValue?.toString() ?? "")
+    : formatMetadataValue(field, locale);
 
 export const toCustomFieldDrafts = (
   fields: TCustomField[],

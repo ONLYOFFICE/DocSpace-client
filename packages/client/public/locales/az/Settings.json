@@ -23,7 +23,7 @@
   "AIAgentQuotaEnabled": "AI agenti kvotası uğurla aktiv edildi.",
   "AiServicesManagement": "{{aiServices}}",
   "AiServicesManagementDescription": "{{productName}} və {{organizationName}} redaktorlarında AI agentlərini və alətlərini açın və ya bağlayın. Deaktiv edildikdə, {{aiSettings}} bölməsi gizlədilir, AI agentləri bütün istifadəçilər üçün əlçatmaz olur və ödənişli {{organizationName}} {{aiServices}}-ə daha artıq daxil olmaq mümkün olmur. Qarşılıqlı əlaqə tarixçəniz təhlükəsiz saxlanılır və {{aiServices}}-i yenidən aktiv etdikdə tam bərpa edilir.",
-  "AISettings": "Süni İntellekt parametrləri",
+  "AISettings": "AI parametrləri",
   "AllDomains": "Hər hansı bir domen adı",
   "AllowExistingUntilRemoved": "Mövcud keçidlərə silinənə qədər icazə verin",
   "APIGuide": "API Bələdçisi",

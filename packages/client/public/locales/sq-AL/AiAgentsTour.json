@@ -24,9 +24,9 @@
   "AgentRowMember": "Hapni një agjent për të përdorur seksionet që lejon roli juaj. Me akses vetëm për shikim, mund të lexoni rezultatet e ruajtura te Rezultatet e bisedës. Përdorni tre pikat për të gozhduar agjentin ose për të kopjuar një lidhje për dikë që ka tashmë akses.",
   "AgentRowTitle": "Një rresht, një agjent",
   "AgentStart": "Krijoni një agjent me një model dhe udhëzime për një detyrë të përsëritur. Shtoni skedarë referimi te Baza e të dhënave e tij, pastaj hapni Bisedë - IA për të provuar një kërkesë dhe për të përmirësuar konfigurimin.",
-  "AgentSwitchOn": "Agjentët në këtë tur ishin shembuj. Aktivizoni agjentët dhe mjetet AI, pastaj kontrolloni modelet e disponueshme te Cilësimet AI për të përgatitur agjentin tuaj të parë.",
+  "AgentSwitchOn": "Agjentët në këtë tur ishin shembuj. Aktivizoni agjentët dhe mjetet IA, pastaj kontrolloni modelet e disponueshme te Cilësimet IA për të përgatitur agjentin tuaj të parë.",
   "AgentSwitchOnTitle": "Aktivizojeni dhe shihni për të vërtetë",
   "AgentWhatIs": "Një agjent IA është një asistent që e konfiguroni për një detyrë të përsëritur. Udhëzimet e tij drejtojnë përgjigjet, Baza e të dhënave ofron kontekstin e dokumenteve dhe Rezultatet e bisedës mbajnë rezultatet e ruajtura.",
-  "AgentWhatIsShared": "Një agjent AI është një asistent i konfiguruar për një detyrë. Roli juaj përcakton nëse mund të përdorni bisedën e tij, të shtoni skedarë te Baza e të dhënave e tij ose të shikoni rezultatet e ruajtura te Rezultatet e bisedës.",
+  "AgentWhatIsShared": "Një agjent IA është një asistent i konfiguruar për një detyrë. Roli juaj përcakton nëse mund të përdorni bisedën e tij, të shtoni skedarë te Baza e të dhënave e tij ose të shikoni rezultatet e ruajtura te Rezultatet e bisedës.",
   "AgentWhatIsTitle": "Një asistent për detyrat tuaja"
 }

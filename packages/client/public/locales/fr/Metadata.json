@@ -77,7 +77,7 @@
   "NoRoomMetadata": "Aucune métadonnée sur cette salle pour l'instant",
   "NoRoomMetadataDescription": "Ajoutez un modèle pour décrire cette salle à l'aide de champs structurés",
   "NoTemplatesToAdd": "Aucun modèle à ajouter",
-  "NoTemplatesToAddDescription": "Tous les modèles disponibles ont déjà été ajoutés, ou aucun n'a encore été créé. Les administrateurs créent les modèles dans les paramètres.",
+  "NoTemplatesToAddDescription": "Tous les modèles disponibles ont déjà été ajoutés, ou aucun n'a encore été créé. Les administrateurs créent les modèles dans les paramètres du portail.",
   "NotFoundTemplates": "Aucun modèle trouvé",
   "NotFoundTemplatesDescription": "Aucun modèle ne correspond à votre recherche. Essayez un autre nom ou effacez le champ de recherche pour afficher tous les modèles.",
   "NotImmediateOperation": "Cette opération n'est pas immédiate et peut prendre un certain temps",

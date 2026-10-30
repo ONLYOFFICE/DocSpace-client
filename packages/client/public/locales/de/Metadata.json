@@ -77,7 +77,7 @@
   "NoRoomMetadata": "Dieser Raum hat noch keine Metadaten",
   "NoRoomMetadataDescription": "Fügen Sie eine Vorlage hinzu, um diesen Raum mit strukturierten Feldern zu beschreiben",
   "NoTemplatesToAdd": "Keine Vorlagen zum Hinzufügen",
-  "NoTemplatesToAddDescription": "Alle verfügbaren Vorlagen wurden bereits hinzugefügt, oder es wurden noch keine erstellt. Administratoren erstellen Vorlagen in den Einstellungen.",
+  "NoTemplatesToAddDescription": "Alle verfügbaren Vorlagen wurden bereits hinzugefügt, oder es wurden noch keine erstellt. Administratoren erstellen Vorlagen in den Portaleinstellungen.",
   "NotFoundTemplates": "Keine Vorlagen gefunden",
   "NotFoundTemplatesDescription": "Keine Vorlagen entsprechen Ihrer Suche. Versuchen Sie es mit einem anderen Namen oder leeren Sie das Suchfeld, um alle Vorlagen anzuzeigen.",
   "NotImmediateOperation": "Dieser Vorgang erfolgt nicht sofort und kann einige Zeit dauern",

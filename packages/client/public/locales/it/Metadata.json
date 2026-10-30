@@ -77,7 +77,7 @@
   "NoRoomMetadata": "Questa stanza non ha ancora metadati",
   "NoRoomMetadataDescription": "Aggiungi un modello per descrivere questa stanza con campi strutturati",
   "NoTemplatesToAdd": "Nessun modello da aggiungere",
-  "NoTemplatesToAddDescription": "Tutti i modelli disponibili sono già stati aggiunti oppure non ne è ancora stato creato nessuno. Gli amministratori creano i modelli nelle impostazioni.",
+  "NoTemplatesToAddDescription": "Tutti i modelli disponibili sono già stati aggiunti oppure non ne è ancora stato creato nessuno. Gli amministratori creano i modelli nelle impostazioni del portale.",
   "NotFoundTemplates": "Nessun modello trovato",
   "NotFoundTemplatesDescription": "Nessun modello corrisponde alla tua ricerca. Prova un altro nome o cancella il campo di ricerca per vedere tutti i modelli.",
   "NotImmediateOperation": "Questa operazione non è immediata e potrebbe richiedere del tempo",

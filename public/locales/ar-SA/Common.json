@@ -1687,7 +1687,7 @@
   "PortalLimit": "حد البوابة",
   "PortalLimitDescription": "حد مشترك واحد لجميع المستخدمين مجتمعين. تتوقف طلبات الذكاء الاصطناعي مؤقتًا للجميع عند بلوغه.",
   "PortalNameEmpty": "اسم الحساب فارغ",
-  "PortalNameIncorrect": "اسم بوابة غير صحيح",
+  "PortalNameIncorrect": "اسم الحساب غير صحيح",
   "PortalNameLength": "يجب أن يكون اسم الحساب بين {{minLength}} و {{maxLength}} حرفًا",
   "PortalOwner": "مالك مساحة العمل",
   "PortalQuotaLimitWarning": "اقتراب الوصول إلى حد الحصة الخاص بمساحة العمل.",

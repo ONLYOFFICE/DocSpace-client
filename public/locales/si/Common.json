@@ -1687,7 +1687,7 @@
   "PortalLimit": "වැඩ අවකාශ සීමාව",
   "PortalLimitDescription": "සියලු පරිශීලකයින් සඳහා ඒකාබද්ධව එක් පොදු සීමාවක්. එයට ළඟා වූ විට සියලු දෙනාටම AI ඉල්ලීම් විරාම වේ.",
   "PortalNameEmpty": "ගිණුමේ නම හිස්ය",
-  "PortalNameIncorrect": "පෝටල් නම වැරදිය",
+  "PortalNameIncorrect": "වැරදි ගිණුම් නාමය",
   "PortalNameLength": "ගිණුමේ නම අකුරු {{minLength}} සහ {{maxLength}} අතර ප්‍රමාණයකින් යුක්ත විය යුතුය",
   "PortalOwner": "වැඩ අවකාශයේ හිමිකරු",
   "PortalQuotaLimitWarning": "වැඩ අවකාශයේ කෝටා සීමාව ළඟා වීමට ආසන්නයි.",

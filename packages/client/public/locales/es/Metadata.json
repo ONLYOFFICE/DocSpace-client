@@ -77,7 +77,7 @@
   "NoRoomMetadata": "Esta sala aún no tiene metadatos",
   "NoRoomMetadataDescription": "Añada una plantilla para describir esta sala con campos estructurados",
   "NoTemplatesToAdd": "No hay plantillas para añadir",
-  "NoTemplatesToAddDescription": "Todas las plantillas disponibles ya se han añadido o aún no se ha creado ninguna. Los administradores crean plantillas en la configuración.",
+  "NoTemplatesToAddDescription": "Todas las plantillas disponibles ya se han añadido o aún no se ha creado ninguna. Los administradores crean plantillas en la configuración del portal.",
   "NotFoundTemplates": "No se encontraron plantillas",
   "NotFoundTemplatesDescription": "Ninguna plantilla coincide con su búsqueda. Pruebe con otro nombre o borre el campo de búsqueda para ver todas las plantillas.",
   "NotImmediateOperation": "Esta operación no es inmediata y puede tardar un tiempo",

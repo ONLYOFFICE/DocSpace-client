@@ -4,7 +4,7 @@
   "AgentAccessMemberTitle": "Burada başka kimler var",
   "AgentBuild": "Bir model seçin, ajanın rolünü ve görevlerini tanımlayın ve ihtiyaç duyduğu mevcut araçları seçin. Ajanı oluşturduktan sonra Bilgi tabanı bölümüne başvuru dosyaları ekleyin.",
   "AgentBuildTitle": "Ona bir iş verin",
-  "AgentChat": "Yapay Zeka Sohbeti bölümünü açın ve neye ihtiyacınız olduğunu anlatın. Önerilen bir soruyu deneyin veya kendi sorunuzu yazın, ardından yanıtı kontrol edin ve gerekirse isteğinizi iyileştirin.",
+  "AgentChat": "AI Sohbeti bölümünü açın ve neye ihtiyacınız olduğunu anlatın. Önerilen bir soruyu deneyin veya kendi sorunuzu yazın, ardından yanıtı kontrol edin ve gerekirse isteğinizi iyileştirin.",
   "AgentChatTitle": "Ajanı işe koşun",
   "AgentDemoContracts": "Sözleşme inceleyici",
   "AgentDemoOnboarding": "İşe alıştırma yardımcısı",
@@ -23,10 +23,10 @@
   "AgentRow": "Sohbetini açmak için bir ajanın adına tıklayın. Her gün kullandıklarınız için En üste sabitle seçeneğini kullanın; kurulumu değiştirmek, kişileri davet etmek veya benzer bir iş için çoğaltmak üzere üç noktayı kullanın.",
   "AgentRowMember": "Rolünüzün izin verdiği bölümleri kullanmak için bir ajanı açın. Yalnızca görüntüleme erişimiyle Sohbet çıktıları bölümündeki kaydedilmiş sonuçları okuyabilirsiniz. Ajanı sabitlemek veya zaten erişimi olan biri için bağlantıyı kopyalamak üzere üç noktayı kullanın.",
   "AgentRowTitle": "Bir satır, bir ajan",
-  "AgentStart": "Tekrarlanan bir görev için model ve talimatlarla bir ajan oluşturun. Bilgi tabanı bölümüne başvuru dosyaları ekleyin, ardından bir isteği denemek ve kurulumu iyileştirmek için Yapay Zeka Sohbeti bölümünü açın.",
+  "AgentStart": "Tekrarlanan bir görev için model ve talimatlarla bir ajan oluşturun. Bilgi tabanı bölümüne başvuru dosyaları ekleyin, ardından bir isteği denemek ve kurulumu iyileştirmek için AI Sohbeti bölümünü açın.",
   "AgentSwitchOn": "Bu turdaki ajanlar örnekti. AI ajanlarını ve araçlarını etkinleştirin, ardından ilk ajanınızı hazır hale getirmek için AI ayarlarındaki mevcut modelleri kontrol edin.",
   "AgentSwitchOnTitle": "Açın ve gerçekten görün",
-  "AgentWhatIs": "Yapay zeka ajanı, tekrarlanan bir görev için kurduğunuz bir asistandır. Talimatları yanıtlara yön verir, Bilgi tabanı belge bağlamı sağlar ve Sohbet çıktıları kaydedilmiş sonuçları tutar.",
+  "AgentWhatIs": "AI ajanı, tekrarlanan bir görev için kurduğunuz bir asistandır. Talimatları yanıtlara yön verir, Bilgi tabanı belge bağlamı sağlar ve Sohbet çıktıları kaydedilmiş sonuçları tutar.",
   "AgentWhatIsShared": "AI ajanı, bir görev için yapılandırılmış bir asistandır. Sohbetini kullanıp kullanamayacağınızı, Bilgi tabanı bölümüne dosya ekleyip ekleyemeyeceğinizi veya Sohbet çıktıları bölümündeki kaydedilmiş sonuçları görüntüleyip görüntüleyemeyeceğinizi rolünüz belirler.",
   "AgentWhatIsTitle": "Görevleriniz için bir asistan"
 }

@@ -1687,7 +1687,7 @@
   "PortalLimit": "Limite du portail",
   "PortalLimitDescription": "Une limite commune à l'ensemble des utilisateurs. Les requêtes IA sont suspendues pour tous lorsqu'elle est atteinte.",
   "PortalNameEmpty": "Le nom du compte est vide",
-  "PortalNameIncorrect": "Nom du portail incorrect",
+  "PortalNameIncorrect": "Nom de compte incorrect",
   "PortalNameLength": "Le nom du compte doit comporter entre {{minLength}} et {{maxLength}} caractères",
   "PortalOwner": "Propriétaire de l'espace de travail",
   "PortalQuotaLimitWarning": "La limite de quota de l'espace de travail est sur le point d'être atteinte.",

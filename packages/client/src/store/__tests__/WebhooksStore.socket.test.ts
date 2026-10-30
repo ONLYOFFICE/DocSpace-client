@@ -139,6 +139,7 @@ afterEach(() => {
 describe("WebhooksStore socket: subscriptions", () => {
   it("re-reads the list once for a burst of add and update events", async () => {
     const store = createStore();
+    store.setIsWebhooksListActive(true);
     vi.mocked(getAllWebhooks).mockResolvedValue([config(1), config(2, "new")]);
 
     emit("s:add-webhook", { id: 2 });
@@ -154,7 +155,7 @@ describe("WebhooksStore socket: subscriptions", () => {
     expect(store.errorWebhooks).toBeNull();
   });
 
-  it("keeps the list current while another page is open", async () => {
+  it("keeps the list current while a journal of the section is open", async () => {
     const store = createStore();
     await openHistory(store, logItems(1));
     vi.mocked(getAllWebhooks).mockResolvedValue([config(7)]);
@@ -165,8 +166,19 @@ describe("WebhooksStore socket: subscriptions", () => {
     expect(store.webhooks.map((w) => w.id)).toEqual([7]);
   });
 
-  it("re-reads the list under steady traffic instead of waiting for a pause", async () => {
+  it("does not re-read the list outside the webhooks section", async () => {
     createStore();
+
+    emit("s:add-webhook", { id: 2 });
+    emit("s:update-webhook", { id: 1 });
+    await vi.advanceTimersByTimeAsync(2500);
+
+    expect(getAllWebhooks).not.toHaveBeenCalled();
+  });
+
+  it("re-reads the list under steady traffic instead of waiting for a pause", async () => {
+    const store = createStore();
+    store.setIsWebhooksListActive(true);
     vi.mocked(getAllWebhooks).mockResolvedValue([]);
 
     for (let i = 0; i < 6; i++) {
@@ -180,6 +192,7 @@ describe("WebhooksStore socket: subscriptions", () => {
   it("keeps the list and shows no error when the re-read fails", async () => {
     const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
     const store = createStore();
+    store.setIsWebhooksListActive(true);
     store.webhooks = [{ id: 1, name: "a", uri: "u", enabled: true }];
     vi.mocked(getAllWebhooks).mockRejectedValue(new Error("network"));
 
@@ -307,6 +320,25 @@ describe("WebhooksStore socket: delivery journal", () => {
     expect(ids(store)).toEqual([7, 6, 5, 4, 3]);
     expect(store.startIndex).toBe(5);
     expect(store.totalItems).toBe(5);
+  });
+
+  it("starts the journal over when the new top does not reach the loaded rows", async () => {
+    const store = createStore();
+    store.FETCH_COUNT = 2;
+    await openHistory(store, logItems(4, 3), 4);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(2, 1), 4));
+    await store.fetchMoreItems(params);
+    store.toggleEventId(3);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(9, 8), 9));
+
+    emit("s:add-webhook-log", { id: 5, configId: 7 });
+    await settle();
+
+    expect(ids(store)).toEqual([9, 8]);
+    expect(store.startIndex).toBe(2);
+    expect(store.totalItems).toBe(9);
+    expect(store.hasMoreItems).toBe(true);
+    expect(store.checkedEventIds).toEqual([]);
   });
 
   it("re-reads by id a record loaded below the top", async () => {

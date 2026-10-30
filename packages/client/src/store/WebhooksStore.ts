@@ -128,6 +128,8 @@ class WebhooksStore {
 
   errorWebhooks: { error: string } | null = null;
 
+  isWebhooksListActive = false;
+
   activeConfigId: number | null = null;
 
   historyParams: TJournalParams | null = null;
@@ -147,6 +149,10 @@ class WebhooksStore {
     SocketHelper?.on(SocketEvents.UpdateWebhookLog, this.onWebhookLogUpdated);
   }
 
+  setIsWebhooksListActive = (isActive: boolean) => {
+    this.isWebhooksListActive = isActive;
+  };
+
   setActiveConfigId = (configId: number | string | null) => {
     this.activeConfigId = configId === null ? null : Number(configId);
   };
@@ -160,9 +166,9 @@ class WebhooksStore {
     this.eventDetails = {};
   };
 
-  // Every delivery attempt shifts the last success or error date, so under
-  // steady traffic the list is re-read at most once per maxWait.
   onWebhookChanged = () => {
+    if (!this.isWebhooksListActive && this.activeConfigId === null) return;
+
     this.debounceReloadWebhooks();
   };
 
@@ -204,9 +210,6 @@ class WebhooksStore {
     this.debounceLoadJournalTop();
   };
 
-  // add-webhook-log is throttled by the server and names only the first record
-  // of its window; the rest are announced by update-webhook-log, so an unknown
-  // id re-reads the top of the journal as well.
   onWebhookLogUpdated = ({ id, configId }: TWebhookLogData) => {
     if (Number(this.eventDetails?.id) === id) {
       this.fetchEventData(id).catch((error) => console.error(error));
@@ -253,9 +256,14 @@ class WebhooksStore {
       const lowestTopId = Math.min(...topItems.map((item) => item.id));
 
       runInAction(() => {
-        const restItems = isWholeJournal
-          ? []
-          : this.historyItems.filter((item) => item.id < lowestTopId);
+        const maxLoadedId = Math.max(
+          ...this.historyItems.map((item) => item.id),
+        );
+        const overlaps = lowestTopId <= maxLoadedId;
+        const restItems =
+          isWholeJournal || !overlaps
+            ? []
+            : this.historyItems.filter((item) => item.id < lowestTopId);
         const items = [...topItems, ...restItems];
         const itemIds = new Set(items.map((item) => item.id));
 

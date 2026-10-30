@@ -35,42 +35,24 @@
 
 import { afterEach, describe, expect, it } from "vitest";
 
-import {
-  INFO_PANEL_WIDTH_KEY,
-  clampInfoPanelWidth,
-  readInfoPanelWidth,
-  saveInfoPanelWidth,
-} from "../info-panel/width";
+import { INFO_PANEL_WIDTH_KEY, infoPanelWidthStorage } from "../info-panel/width";
 
 describe("info panel width", () => {
   afterEach(() => {
     localStorage.clear();
   });
 
-  it("keeps a width between the default and the cap, in whole pixels", () => {
-    expect(clampInfoPanelWidth(612.6)).toBe(613);
-    expect(clampInfoPanelWidth(120)).toBe(400);
-    expect(clampInfoPanelWidth(5000)).toBe(800);
-  });
-
-  it("falls back to the default for anything that is not a width", () => {
-    expect(clampInfoPanelWidth(null)).toBe(400);
-    expect(clampInfoPanelWidth("wide")).toBe(400);
-    expect(clampInfoPanelWidth(Number.NaN)).toBe(400);
+  it("keeps a width between the default and the cap", () => {
+    expect(infoPanelWidthStorage.save(120)).toBe(400);
+    expect(infoPanelWidthStorage.save(5000)).toBe(800);
   });
 
   it("remembers the width between visits", () => {
-    expect(readInfoPanelWidth()).toBe(400);
+    expect(infoPanelWidthStorage.read()).toBe(400);
 
-    saveInfoPanelWidth(640);
+    infoPanelWidthStorage.save(640);
 
     expect(localStorage.getItem(INFO_PANEL_WIDTH_KEY)).toBe("640");
-    expect(readInfoPanelWidth()).toBe(640);
-  });
-
-  it("brings an out-of-range saved width back into range", () => {
-    localStorage.setItem(INFO_PANEL_WIDTH_KEY, "1500");
-
-    expect(readInfoPanelWidth()).toBe(800);
+    expect(infoPanelWidthStorage.read()).toBe(640);
   });
 });

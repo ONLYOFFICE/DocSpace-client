@@ -67,11 +67,7 @@ import {
   showForcedInfoPanelLoader,
   InfoPanelView,
 } from "SRC_DIR/helpers/info-panel";
-import {
-  clampInfoPanelWidth,
-  readInfoPanelWidth,
-  saveInfoPanelWidth,
-} from "SRC_DIR/helpers/info-panel/width";
+import { infoPanelWidthStorage } from "SRC_DIR/helpers/info-panel/width";
 
 import { getContactsView } from "../helpers/contacts";
 import SelectedFolderStore from "./SelectedFolderStore";
@@ -94,7 +90,7 @@ class InfoPanelStore {
 
   isMobileHidden = false;
 
-  width = readInfoPanelWidth();
+  width = infoPanelWidthStorage.read();
 
   shownWidth = 0;
 
@@ -183,8 +179,7 @@ class InfoPanelStore {
   };
 
   setWidth = (width: number) => {
-    this.width = clampInfoPanelWidth(width);
-    saveInfoPanelWidth(this.width);
+    this.width = infoPanelWidthStorage.save(width);
   };
 
   setShownWidth = (width: number) => {

@@ -37,24 +37,15 @@ import {
   INFO_PANEL_MAX_WIDTH,
   INFO_PANEL_WIDTH,
 } from "@onlyoffice/apps-ui-kit/utils/device";
-
-import { safeGet, safeSet } from "SRC_DIR/helpers/safeLocalStorage";
+import { createPanelWidthStorage } from "@onlyoffice/apps-ui-kit/utils/panel-width";
 
 export const INFO_PANEL_WIDTH_KEY = "infoPanelWidth";
 
-export const clampInfoPanelWidth = (value: unknown) => {
-  const width = Number(value);
-
-  if (value === null || !Number.isFinite(width)) return INFO_PANEL_WIDTH;
-
-  return Math.min(
-    Math.max(Math.round(width), INFO_PANEL_WIDTH),
-    INFO_PANEL_MAX_WIDTH,
-  );
-};
-
-export const readInfoPanelWidth = () =>
-  clampInfoPanelWidth(safeGet(INFO_PANEL_WIDTH_KEY));
-
-export const saveInfoPanelWidth = (width: number) =>
-  safeSet(INFO_PANEL_WIDTH_KEY, String(width));
+export const infoPanelWidthStorage = createPanelWidthStorage(
+  INFO_PANEL_WIDTH_KEY,
+  {
+    defaultWidth: INFO_PANEL_WIDTH,
+    minWidth: INFO_PANEL_WIDTH,
+    maxWidth: INFO_PANEL_MAX_WIDTH,
+  },
+);

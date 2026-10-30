@@ -281,8 +281,12 @@ const Editor = ({
     onDownloadAs,
     onUserActionRequired,
     onSubmit,
-    onRequestRefreshFile,
   };
+
+  // Design: private-rooms-editor-contract D16, refresh withheld for an encrypted file
+  if (!isEncryptedFile) {
+    newConfig.events.onRequestRefreshFile = onRequestRefreshFile;
+  }
 
   if (
     (typeof window !== "undefined" &&

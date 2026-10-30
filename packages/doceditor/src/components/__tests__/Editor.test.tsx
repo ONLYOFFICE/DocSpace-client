@@ -342,4 +342,26 @@ describe("Editor", () => {
       expect(events().onStartFilling).toBe(props.onStartFilling);
     });
   });
+
+  describe("Refresh", () => {
+    it("Refresh requested on an encrypted file: the refresh event is absent", async () => {
+      asEncrypted();
+      await renderEditor({
+        config: makeConfig(true),
+        fileInfo: makeFileInfo(true),
+      });
+
+      expect(env.captured.config).toBeDefined();
+      expect(events().onRequestRefreshFile).toBeUndefined();
+    });
+
+    it("Refresh requested on a plain file: the refresh event is attached", async () => {
+      await renderEditor({
+        config: makeConfig(false),
+        fileInfo: makeFileInfo(false),
+      });
+
+      expect(events().onRequestRefreshFile).toBe(env.events.onRequestRefreshFile);
+    });
+  });
 });

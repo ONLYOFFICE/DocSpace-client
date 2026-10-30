@@ -13,7 +13,6 @@ describe("AiProjects utils", () => {
     expect(isManager(withAccess(AiProjectAccess.Owner))).toBe(true);
     expect(isManager(withAccess(AiProjectAccess.ProjectManager))).toBe(true);
     expect(isManager(withAccess(AiProjectAccess.Member))).toBe(false);
-    expect(isManager(withAccess(AiProjectAccess.Viewer))).toBe(false);
   });
 
   it("lets the owner, admins and room admins manage projects, nobody else", () => {

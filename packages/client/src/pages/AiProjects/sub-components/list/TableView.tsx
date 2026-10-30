@@ -54,8 +54,12 @@ import { Events } from "@docspace/shared/enums";
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { SortByFieldName } from "@docspace/shared/enums";
+import AuthorCell from "SRC_DIR/pages/Home/Section/Body/TableView/sub-components/AuthorCell";
+import { useStore } from "SRC_DIR/store/useStore";
+
 import { ProjectLogo } from "./ProjectLogo";
-import { SourceTags } from "./SourceTags";
+import { ProjectTags } from "./ProjectTags";
 import styles from "../../AiProjects.module.scss";
 
 // Column widths are persisted per user, one key with the info panel closed
@@ -69,7 +73,10 @@ const TABLE_COLUMNS_STORAGE = "aiProjectsTableColumns";
 
 const ROW_HEIGHT = 48;
 
-type ColumnKey = "Name" | "Instructions" | "Knowledge" | "Activity";
+type ColumnKey = "Name" | "Tags" | "Owner" | "Activity";
+
+/** The sorts the headers switch, as the rooms table does. */
+const SORTABLE = [SortByFieldName.Name, SortByFieldName.Tags, SortByFieldName.Author, SortByFieldName.ModifiedDate] as const;
 
 /** Applies the saved choice to the default columns, as TableStore.getColumns does. */
 const applySavedColumns = (columns: TTableColumn[], storageName: string) => {
@@ -97,8 +104,11 @@ type TableViewProps = {
 
 export const TableView = observer(
   ({ store, onOpen, getContextModel, locale, userId, infoPanelVisible }: TableViewProps) => {
-    const { t } = useTranslation(["Common"]);
+    const { t } = useTranslation(["Common", "Files"]);
     const { sectionWidth } = use(Context);
+    // The side colour of the rooms table's cells.
+    const { theme } = useStore("settingsStore");
+    const sideColor = theme.filesSection.tableView.row.sideColor;
     const columnStorageName = `${COLUMN_STORAGE}=${userId}`;
     const columnInfoPanelStorageName = `${COLUMN_STORAGE_INFO_PANEL}=${userId}`;
     const tableStorageName = `${TABLE_COLUMNS_STORAGE}=${userId}`;
@@ -108,7 +118,7 @@ export const TableView = observer(
     // "Created" has no column: then no header shows itself as the sort.
     const sortBy = store.sortBy;
     const onSort = (key: string) => {
-      const next = key === "AZ" ? "AZ" : "DateAndTime";
+      const next = SORTABLE.find((item) => item === key) ?? SortByFieldName.ModifiedDate;
       const flip = store.sortBy === next;
       store.setSort(
         next,
@@ -152,27 +162,30 @@ export const TableView = observer(
             onClick: onSort,
           },
           {
-            key: "Instructions",
-            title: t("Common:AIProjectInstructions"),
+            key: "Tags",
+            title: t("Common:Tags"),
             resizable: true,
             enable: true,
-            minWidth: 160,
+            sortBy: SortByFieldName.Tags,
+            withTagRef: true,
+            onClick: onSort,
             onChange: onColumnChange,
           },
           {
-            key: "Knowledge",
-            title: t("Common:Knowledge"),
+            key: "Owner",
+            title: t("Common:Owner"),
             resizable: true,
             enable: true,
-            minWidth: 160,
+            sortBy: SortByFieldName.Author,
+            onClick: onSort,
             onChange: onColumnChange,
           },
           {
             key: "Activity",
-            title: t("Common:AIProjectLastActivity"),
+            title: t("Files:LastActivity"),
             resizable: true,
             enable: true,
-            sortBy: "DateAndTime",
+            sortBy: SortByFieldName.ModifiedDate,
             onClick: onSort,
             onChange: onColumnChange,
             defaultSize: 180,
@@ -239,18 +252,24 @@ export const TableView = observer(
                   {project.title}
                 </Text>
               </TableCell>
-              {isEnabled("Instructions") ? (
+              {isEnabled("Tags") ? (
                 <TableCell>
-                  <SourceTags rooms={project.aiProject.instructionsRooms} columnCount={2} />
+                  <ProjectTags store={store} project={project} columnCount={2} className={styles.tagsCell} />
                 </TableCell>
               ) : (
                 // A disabled column keeps a 0px track in the grid, so the row
                 // keeps a placeholder for it (as every other table does).
                 <div />
               )}
-              {isEnabled("Knowledge") ? (
+              {isEnabled("Owner") ? (
                 <TableCell>
-                  <SourceTags rooms={project.aiProject.knowledgeRooms} columnCount={2} />
+                  {project.createdBy ? (
+                    <AuthorCell
+                      sideColor={sideColor}
+                      fileOwner={project.createdBy.displayName}
+                      item={{ createdBy: project.createdBy }}
+                    />
+                  ) : null}
                 </TableCell>
               ) : (
                 // A disabled column keeps a 0px track in the grid, so the row
@@ -259,7 +278,7 @@ export const TableView = observer(
               )}
               {isEnabled("Activity") ? (
                 <TableCell>
-                  <Text className={styles.dim} fontSize="12px" truncate>
+                  <Text color={sideColor} fontSize="12px" fontWeight={600} truncate>
                     {getCorrectDate(locale ?? "en", project.updated)}
                   </Text>
                 </TableCell>

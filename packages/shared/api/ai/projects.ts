@@ -49,20 +49,18 @@ import type { TOperation } from "../files/types";
  * Like the agents API, this module holds only what is specific to a project:
  * the list with its filters, read, create, update, delete, and the skills and
  * knowledge listings. Everything a project shares with a room (pin, mute,
- * duplicate, leave, owner change, logo removal, members, invitation links,
- * history) goes through the room routes in `api/rooms`, `api/files` and
+ * leave, owner change, logo removal, members, invitation links, history) goes through the room routes in `api/rooms`, `api/files` and
  * `api/settings`, as the room panels already do.
  */
 
 const baseUrl = "/ai/projects";
 
-/** `FileShare` on the server, limited to what a project uses. */
+/** `FileShare` on the server, limited to what a project uses: a Member is the room's Read. */
 export const AiProjectAccess = {
   None: 0,
   Owner: 1,
-  Viewer: 2,
+  Member: 2,
   ProjectManager: 9,
-  Member: 11,
 } as const;
 export type TAiProjectAccess =
   (typeof AiProjectAccess)[keyof typeof AiProjectAccess];
@@ -150,7 +148,6 @@ export type TAiProjectSecurity = {
   Delete: boolean;
   Pin: boolean;
   Mute: boolean;
-  Duplicate: boolean;
   Leave: boolean;
 };
 
@@ -161,6 +158,9 @@ export type TAiProject = {
   created: string;
   updated: string;
   createdBy: TAiProjectUser | null;
+  updatedBy: TAiProjectUser | null;
+  /** The room tags, by name, as a room carries them. */
+  tags: string[];
   pinned: boolean;
   mute: boolean;
   inRoom: boolean;
@@ -196,6 +196,8 @@ export type TAiProjectLogoUpload = {
 
 export type TAiProjectRequest = {
   title?: string;
+  /** The tag names, as a room's create and edit take them; sent when present. */
+  tags?: string[];
   /**
    * `color` with or without `#`, the id of a built-in cover ("" for the
    * initials), and `image` for an uploaded picture, sent as the room's `logo`.
@@ -246,16 +248,26 @@ export type TAiProjectKnowledgeRoom = TAiProjectLinkedRoom & {
   files: TAiProjectKnowledgeFile[];
 };
 
+/** The sort keys of the rooms list a project takes. */
+export type TAiProjectsSortBy = "DateAndTime" | "AZ" | "DateAndTimeCreation" | "Tags" | "Author";
+
 export type TAiProjectsQuery = {
   filterValue?: string;
-  sortBy?: "DateAndTime" | "AZ" | "DateAndTimeCreation";
+  sortBy?: TAiProjectsSortBy;
   sortOrder?: "ascending" | "descending";
   /** Keeps the projects the caller holds this role in; `0` or omitted: any. */
   role?: TAiProjectAccess;
   hasInstructions?: boolean;
   hasKnowledge?: boolean;
-  /** Keeps the projects this user owns. */
+  /** Keeps the projects this user or group is in, as `files/rooms` reads it; `excludeSubject` inverts it. */
   subjectId?: string;
+  excludeSubject?: boolean;
+  /** Keeps the projects this user owns; combines with `subjectId`, as in the rooms list. */
+  subjectOwnerId?: string;
+  /** Keeps the projects carrying any of these tags; sent as a JSON array. */
+  tags?: string[];
+  /** Keeps the projects without tags. */
+  withoutTags?: boolean;
   /** Keeps the projects that link this room, as an Instructions or a Knowledge room. */
   linkedRoomId?: number;
   startIndex?: number;
@@ -265,7 +277,10 @@ export type TAiProjectsQuery = {
 const toParams = (query: Record<string, unknown>) => {
   const params = new URLSearchParams();
   for (const [key, value] of Object.entries(query)) {
-    if (value !== undefined && value !== null && value !== "") {
+    if (Array.isArray(value)) {
+      // A list goes as a JSON array (`tags=["a","b"]`), as the rooms filter sends it.
+      params.set(key, JSON.stringify(value));
+    } else if (value !== undefined && value !== null && value !== "") {
       params.set(key, String(value));
     }
   }
@@ -330,6 +345,8 @@ export const toAiProject = (folder: TAiProjectRoomDto): TAiProject => {
     created: folder.created ?? "",
     updated: folder.updated ?? "",
     createdBy: folder.createdBy ?? null,
+    updatedBy: folder.updatedBy ?? folder.createdBy ?? null,
+    tags: folder.tags ?? [],
     pinned: !!folder.pinned,
     mute: !!folder.mute,
     inRoom,
@@ -344,7 +361,6 @@ export const toAiProject = (folder: TAiProjectRoomDto): TAiProject => {
       Delete: !!security.Delete,
       Pin: !!security.Pin,
       Mute: !!security.Mute,
-      Duplicate: !!security.Duplicate,
       Leave: inRoom && access !== AiProjectAccess.Owner,
     },
     aiProject: {
@@ -367,7 +383,6 @@ export const aiProjectToRoom = (project: TAiProject) => ({
   isRoom: true,
   isFolder: true,
   isAIProject: true,
-  tags: [],
   private: false,
   shared: false,
   canShare: project.security.EditAccess,
@@ -376,9 +391,10 @@ export const aiProjectToRoom = (project: TAiProject) => ({
   foldersCount: 0,
 });
 
-const toRoomFields = ({ title, logo, aiProject }: TAiProjectRequest) => {
+const toRoomFields = ({ title, tags, logo, aiProject }: TAiProjectRequest) => {
   const body: Record<string, unknown> = {};
   if (title !== undefined) body.title = title;
+  if (tags !== undefined) body.tags = tags;
   if (logo?.color !== undefined) body.color = logo.color.replace("#", "");
   if (logo?.cover !== undefined) body.cover = logo.cover;
   if (logo?.image !== undefined) body.logo = logo.image;

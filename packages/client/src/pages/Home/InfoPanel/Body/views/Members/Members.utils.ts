@@ -68,8 +68,8 @@ class MembersHelper {
       projectMember: {
         key: "projectMember",
         label: this.t("Common:Member"),
-        access: ShareAccessRights.Collaborator,
-        type: "collaborator",
+        access: ShareAccessRights.ReadOnly,
+        type: "user",
       },
       collaborator: {
         key: "collaborator",
@@ -189,7 +189,7 @@ class MembersHelper {
     if (roomType === RoomsType.AiProjectRoom) {
       if (access === ShareAccessRights.RoomManager)
         return options.projectManager;
-      if (access === ShareAccessRights.Collaborator)
+      if (access === ShareAccessRights.ReadOnly)
         return options.projectMember;
     }
 

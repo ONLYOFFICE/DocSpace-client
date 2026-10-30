@@ -78,6 +78,8 @@ export const getRoomTypeName = (room, t) => {
       return t("Common:InstructionsRooms");
     case RoomsType.KnowledgeRoom:
       return t("Common:KnowledgeRooms");
+    case RoomsType.AiProjectRoom:
+      return t("Common:AIProjectRoomTitle");
     default:
       break;
   }

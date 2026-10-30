@@ -54,7 +54,9 @@ export interface TagManagementProps extends Omit<
   "onSelectTag" | "access"
 > {
   access: ShareAccessRights;
+  /** Where a clicked tag goes; the Files rooms filter when left out. */
+  onSelectTag?: SharedTagManagementProps["onSelectTag"];
 }
 
 export interface TagManagementWrapperProps
-  extends TagManagementProps, InjectedTagManagementProps {}
+  extends Omit<TagManagementProps, "onSelectTag">, InjectedTagManagementProps {}

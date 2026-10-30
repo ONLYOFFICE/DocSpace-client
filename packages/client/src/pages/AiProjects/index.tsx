@@ -477,13 +477,13 @@ const AiProjects = ({
       );
     }
     if (!isDesktop && store.viewAs !== "tile") {
-      return <RowsView store={store} onOpen={openProject} getContextModel={getContextModel} />;
+      return <RowsView store={store} onOpen={openProject} getContextModel={getContextModel} locale={locale} />;
     }
     switch (store.viewAs) {
       case "tile":
         return <TilesView store={store} onOpen={openProject} getContextModel={getContextModel} />;
       case "row":
-        return <RowsView store={store} onOpen={openProject} getContextModel={getContextModel} />;
+        return <RowsView store={store} onOpen={openProject} getContextModel={getContextModel} locale={locale} />;
       default:
         return (
           <TableView

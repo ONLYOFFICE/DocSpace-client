@@ -27,7 +27,6 @@ const ownerSecurity = {
   Delete: true,
   Pin: true,
   Mute: true,
-  Duplicate: true,
   Leave: false,
 };
 
@@ -38,7 +37,6 @@ const memberSecurity = {
   EditAccess: false,
   ChangeOwner: false,
   Delete: false,
-  Duplicate: false,
   Leave: true,
 };
 
@@ -62,7 +60,6 @@ const project = (
 const store = {
   togglePin: vi.fn(async () => {}),
   toggleMute: vi.fn(async () => {}),
-  duplicateProject: vi.fn(async () => {}),
   openEditDialog: vi.fn(),
   openLeave: vi.fn(),
   openDelete: vi.fn(),
@@ -106,7 +103,6 @@ describe("useProjectContextMenu", () => {
       "mute",
       "sep-edit",
       "edit",
-      "duplicate",
       "invite",
       "change-owner",
       "copy-link",
@@ -141,8 +137,6 @@ describe("useProjectContextMenu", () => {
 
     item(model, "pin").onClick?.();
     expect(store.togglePin).toHaveBeenCalledWith(owner);
-    item(model, "duplicate").onClick?.();
-    expect(store.duplicateProject).toHaveBeenCalledWith(owner);
     item(model, "edit").onClick?.();
     expect(store.openEditDialog).toHaveBeenCalledWith(owner);
     item(model, "delete").onClick?.();

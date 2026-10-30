@@ -51,8 +51,6 @@ import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TAiProjectSettings } from "@docspace/shared/api/ai/projects";
 
-import { SourceTagList } from "SRC_DIR/pages/AiProjects/sub-components/list/SourceTags";
-
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
   getRoomTypeName,
@@ -172,37 +170,31 @@ class DetailsHelper {
   };
 
   getNeededProperties = () => {
-    // An AI project shows as a room, but has no room type of its own to name
-    // and its files live in the linked rooms, not in it.
+    // An AI project shows as a room does; it holds no files of its own and
+    // takes no storage, and its model comes from its settings block.
     const isAIProject = "isAIProject" in this.item && !!this.item.isAIProject;
     return (
       "isRoom" in this.item && this.item.isRoom
         ? [
             "Owner",
             (this.item as TRoom).providerKey && "Storage Type",
-            !isAIProject && "Type",
+            "Type",
             !isAIProject && "Content",
             "Date modified",
-            // A project keeps no editor or creation date of its own to show,
-            // and tags are not a project feature.
-            !isAIProject && "Last modified by",
-            !isAIProject && "Creation date",
+            "Last modified by",
+            "Creation date",
             // Also for a room with no tags yet, as long as the user could
             // add one - otherwise the info panel has no way to attach the
             // first tag at all.
-            !isAIProject &&
-              ((this.item as TRoom).tags?.length ||
-                getTagManagementAccess(
-                  this.item.access,
-                  this.isAdmin,
-                  this.isArchiveFolder,
-                ).canCreate) &&
+            ((this.item as TRoom).tags?.length ||
+              getTagManagementAccess(
+                this.item.access,
+                this.isAdmin,
+                this.isArchiveFolder,
+              ).canCreate) &&
               "Tags",
             !isAIProject && "Storage",
-            // What the project chats with, from its settings block.
             isAIProject && this.getAiProjectSettings()?.profile?.name && "Model",
-            isAIProject && "Instructions",
-            isAIProject && "Knowledge",
           ]
         : "isFolder" in this.item && this.item.isFolder
           ? [
@@ -302,10 +294,6 @@ class DetailsHelper {
 
       case "Model":
         return this.t("Common:AIAgentModel");
-      case "Instructions":
-        return this.t("Common:AIProjectInstructions");
-      case "Knowledge":
-        return this.t("Common:AIProjectKnowledgeRooms");
 
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
@@ -376,10 +364,6 @@ class DetailsHelper {
         return this.getExternalDbTableName();
       case "Model":
         return text(this.getAiProjectSettings()?.profile?.name);
-      case "Instructions":
-        return this.getAiProjectRooms("instructionsRooms");
-      case "Knowledge":
-        return this.getAiProjectRooms("knowledgeRooms");
       default:
         break;
     }
@@ -390,25 +374,6 @@ class DetailsHelper {
     "aiProject" in this.item
       ? (this.item.aiProject as TAiProjectSettings | undefined)
       : undefined;
-
-  /**
-   * The linked rooms of one kind as tags (three, then "+N"), or a note when
-   * none is readable.
-   */
-  getAiProjectRooms = (key: "instructionsRooms" | "knowledgeRooms") => {
-    const rooms = (this.getAiProjectSettings()?.[key] ?? []).filter(
-      (room) => room.available && room.title,
-    );
-    if (!rooms.length) return text(this.t("Common:AIProjectNoRooms"));
-    return (
-      <div
-        className="property-tag_list"
-        data-testid={`info_panel_details_ai_project_${key}`}
-      >
-        <SourceTagList key={this.item.id} rooms={rooms} className="tags" />
-      </div>
-    );
-  };
 
   getExternalDbTableName = () => {
     if (!("externalDbTableName" in this.item)) return null;

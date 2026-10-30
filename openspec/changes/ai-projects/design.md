@@ -8,7 +8,7 @@ See proposal.md (Why) for the motivation, and the seven spec deltas for the beha
 - **Server, what exists on the branch.**
   - Files: `RoomType` 10 / 11 with `FolderType` 38 / 39, their role sets in `FileSecurity.AvailableRoomAccesses` (both types currently allow Room manager, Content creator, Editing, Read), and the vectorization gate: `Create`, `CopyTo` and `MoveTo` into a Knowledge room are refused while `IsVectorizationEnabledAsync()` is false.
   - ASC.AI.Chat (Node): `/api/2.0/ai/projects/*` with every route the client calls, delegating to `internal/ai/projects…` on .NET and checking only that the model exists and can chat. `applyAiProjectChatContext` rewrites a project-scoped round from the project's `chat-context`. `roomSkills.ts` reads skills from an Instructions room's root. Thread storage folds any non-agent `entityId` to the global scope.
-  - **The .NET side is not implemented**: no `AiProjectsController`, no `chat-context`, no room type 12 in `FolderType` / `DocSpaceHelper`. The contract for it is `AiProjects-API-for-CSharp.md` (2026-10-28), condensed into `ai-projects-api`. Development runs on the in-process Node mock (`aiProjects.mock: true` in `config.json`, never in production), which enforces the contract's rights and 400s per user.
+  - **The .NET side is partly implemented** (2026-10-30): room type 12 with its own root, `FileSecurity` rules and `ai/projects` list / create / get / update / delete in `ASC.AI`. Still missing: the `aiProject` block (model, linked rooms), `skills`, `knowledge`, `chat-context` and the linked-room grants. The contract is `AiProjects-API-for-CSharp.md`, condensed into `ai-projects-api`. The in-process Node mock that stood in before is removed; development runs against the real service.
 - **A project comes back as a room** (`FolderDto`) with an `aiProject` block: profile, `instructionsRooms[]`, `knowledgeRooms[]`, `canEditSettings`, `warnings[]`.
 - **The chat lives in ui-kit and ai-chat.** The client can steer it only through the props `Shell.jsx` passes and the `AiChatStore` methods ui-kit exposes:
   - methods: `openProject`, `applyPreset`, `setProjectTitle`, `setOnSavePreset`, `setComposerContextHidden`, `setFolderContextPickerEnabled`;
@@ -37,7 +37,7 @@ See proposal.md (Why) for the motivation, and the seven spec deltas for the beha
 - `toAiProject` normalizes the server room into the page's `TAiProject`: logo color with `#`, linked rooms with `available` and `archived` defaulted, and `Leave` derived. Leave is `inRoom && access !== Owner`, because rooms have no such flag.
 - `aiProjectToRoom` converts back to the `TRoom` shape the room panels read.
 
-The module holds only what is specific to a project (list, get, create, update, delete, `skills`, `knowledge`), as the agents API did. Pin, mute, duplicate, leave, owner change, logo removal, members, invitation links and history go through the room routes, so the room panels need no project branch and `AiProjectsStore` calls `api/rooms`, `api/files` and `api/settings` for them.
+The module holds only what is specific to a project (list, get, create, update, delete, `skills`, `knowledge`), as the agents API did. Pin, mute, leave, owner change, logo removal, members, invitation links and history go through the room routes, so the room panels need no project branch and `AiProjectsStore` calls `api/rooms`, `api/files` and `api/settings` for them.
 
 *Alternative:* mirror every room route under `/ai/projects/{id}` (the first cut). Rejected: it doubled the Node and .NET surface for calls whose behaviour is the room's, and the panels had to branch on the room type at every call.
 
@@ -96,11 +96,10 @@ Projects replace agents in the sidebar, and the agent code paths in the Files st
 
 ## Risks / Trade-offs
 
-- **[Risk]** The .NET implementation is missing, so the feature works end to end only on the Node mock. → Mitigation: `ai-projects-api` is the handout for it; the mock enforces the same rights and limits, so client behavior will not change when .NET lands. Release is blocked until it does.
+- **[Risk]** The .NET implementation is partial: the project settings block, `skills`, `knowledge` and `chat-context` are not served yet, so those parts of the page answer errors against the real service. → Mitigation: `ai-projects-api` is the handout for them; the MSW handlers keep the E2E suite running meanwhile. Release is blocked until they land.
 - **[Risk]** Role sets drift between server and client for the Knowledge room. → Mitigation: one task changes `FileSecurity.AvailableRoomAccesses` and the three client helpers together, with a unit test on the client helpers.
 - **[Risk]** A project still travels as a "preset" (`activePreset`, `applyPreset`) beside `openProject`, which makes the code harder to follow. → Mitigation: doc comments on `AiProjectsStore`, `AiPresetsStore` and `AiPresetsBridge` explain the hook. A ui-kit `applyProject` could remove the remaining preset names.
 - **[Risk]** Outside the page, a chat closed with an applied project must lose the model and rooms too, not only `activePreset`. → Mitigation: `AiPresetsBridge` resets the chat with an empty `applyPreset` when the chat closes with an active preset, as the page does on leaving a project. A chat with no project applied is left alone. Covered in `AiPresetsBridge.test.tsx`.
-- **[Risk]** The Node mock keeps projects in memory, so the room routes (pin, mute, share, links, history, ...) answer 404 for a mock project. → Mitigation: the mock README says so; those flows are verified against the real `.NET` room routes once type 12 lands there, and in E2E through the MSW room handlers.
 - **[Trade-off]** Threads are never shared and have one global scope per user: there is no agent or project scope any more. The project id the chat sends as `entityId` selects the project's model and rooms for a round, not a separate thread list. So the history inside a project shows the user's threads from everywhere. That is what keeps "your conversation is yours only" true; a per-project history would need a new thread scope on the server.
 - **[Trade-off]** The picker reads at most 100 projects, with no paging. Acceptable for a model-picker submenu; the full list lives on the page.
 - **[Trade-off]** Removing agents is breaking for portals that relied on them in the web client. The server still serves agents, and the SDK entry points remain.
@@ -108,7 +107,7 @@ Projects replace agents in the sidebar, and the agent code paths in the Files st
 ## Migration Plan
 
 - No client data migration. The localStorage presets are abandoned rather than imported, because they were only on this unreleased branch.
-- Rollout depends on the .NET `internal/ai/projects` implementation, on ASC.AI.Chat with `aiProjects.mock` off, on ui-kit 4.1.0 (now a local tarball) and on ai-chat `1.0.2-progress.17` (also a local tarball). Both packages must be published, and the manifests moved back to npm versions, before release.
+- Rollout depends on the rest of the .NET `ai/projects` implementation, on ui-kit 4.1.0 (now a local tarball) and on ai-chat `1.0.2-progress.17` (also a local tarball). Both packages must be published, and the manifests moved back to npm versions, before release.
 - Existing Knowledge rooms with Editor members: when the Editor role is removed, those shares must be migrated to Viewer (or Content creator) by the server migration, and the client must not show an unknown role.
 - Rollback means reverting the branch merge. The server can keep serving agents and projects independently.
 

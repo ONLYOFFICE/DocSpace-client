@@ -34,97 +34,85 @@
  */
 
 import React from "react";
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import {
-  ContextMenu,
-  type ContextMenuModel,
-  type ContextMenuRefType,
-} from "@onlyoffice/apps-ui-kit/components/context-menu";
-import {
-  ContextMenuButton,
-  ContextMenuButtonDisplayType,
-} from "@onlyoffice/apps-ui-kit/components/context-menu-button";
-import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { RoomTile } from "@onlyoffice/apps-ui-kit/components/tiles/room-tile";
+import { TileContent } from "@onlyoffice/apps-ui-kit/components/tiles/tile-content";
 import type { TAiProject } from "@docspace/shared/api/ai/projects";
 
+import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
+import { useStore } from "SRC_DIR/store/useStore";
+
 import { ProjectLogo } from "./ProjectLogo";
-import { SourceTags } from "./SourceTags";
-import styles from "../../AiProjects.module.scss";
+import { ProjectTags } from "./ProjectTags";
 
 type ProjectTileProps = {
+  store: AiProjectsStore;
   project: TAiProject;
   onOpen: (project: TAiProject) => void;
   getContextModel: () => ContextMenuModel[];
 };
 
-/**
- * A project card of the tiles view, as the mockups draw it: the logo, the
- * name and the "..." in the top row, then one row per kind of source with
- * its rooms as tags (the rest folded into "+N").
- */
-export const ProjectTile = ({ project, onOpen, getContextModel }: ProjectTileProps) => {
-  const { t } = useTranslation(["Common"]);
-  const menuRef = React.useRef<ContextMenuRefType>(null);
-  const { instructionsRooms, knowledgeRooms } = project.aiProject;
+/** How many tags a card shows before the rest fold into the "+N" tag. */
+const TAG_COLUMNS = 3;
 
-  const onContextMenu = (e: React.MouseEvent) => {
-    e.preventDefault();
-    menuRef.current?.show(e);
+const noop = () => {};
+
+/**
+ * A project card: the room tile of the rooms list (FileTile.js), with the
+ * project logo, the name and its tags, which the room type stands in for
+ * while the project has none.
+ */
+export const ProjectTile = observer(({ store, project, onOpen, getContextModel }: ProjectTileProps) => {
+  const { t } = useTranslation(["Common"]);
+  const { theme } = useStore("settingsStore");
+  const contextOptions = getContextModel();
+  const item = {
+    id: project.id,
+    title: project.title,
+    roomType: String(project.roomType),
+    tags: project.tags,
+    contextOptions,
+    logo: { color: project.logo.color.replace("#", "") },
   };
 
-  // The menu and the "..." overflow tag open their own dropdowns, rendered
-  // through portals, and React bubbles those clicks up the component tree:
-  // each sits in a wrapper that stops them before they reach the card and
-  // open the project.
-  const stop = (e: React.SyntheticEvent) => e.stopPropagation();
-
   return (
-    <div
-      className={styles.projectTile}
-      onClick={() => onOpen(project)}
-      onContextMenu={onContextMenu}
-      data-testid={`ai-project-tile-${project.id}`}
+    <RoomTile
+      item={item}
+      element={<ProjectLogo project={project} />}
+      contextOptions={contextOptions}
+      getContextModel={getContextModel}
+      columnCount={TAG_COLUMNS}
+      thumbnailClick={() => onOpen(project)}
+      selectTag={store.selectTag}
+      selectOption={noop}
+      getRoomTypeName={() => t("Common:AIProjectRoomTitle")}
+      customBottomContent={(isHovered) => (
+        <ProjectTags store={store} project={project} columnCount={TAG_COLUMNS} isActive={isHovered} />
+      )}
+      dataTestId={`ai-project-tile-${project.id}`}
     >
-      <div className={styles.projectTileTop}>
-        <ProjectLogo project={project} />
-        <Text className={styles.projectTileName} fontWeight={600} fontSize="13px" truncate title={project.title}>
+      <TileContent>
+        <Link
+          className="item-file-name"
+          containerWidth="100%"
+          type={LinkType.page}
+          title={project.title}
+          fontWeight={600}
+          color={theme.filesSection.tilesView.color}
+          isTextOverflow
+          dir="auto"
+          view="tile"
+          onClick={() => onOpen(project)}
+        >
           {project.title}
-        </Text>
-        <div className={styles.projectTileMenu} onClick={stop} onContextMenu={stop} onDoubleClick={stop}>
-          <ContextMenuButton
-            className="expandButton"
-            title={t("Common:TitleShowActions")}
-            getData={getContextModel}
-            onClick={onContextMenu}
-            directionX="right"
-            displayType={ContextMenuButtonDisplayType.toggle}
-          />
-          <ContextMenu ref={menuRef} model={[]} getContextModel={getContextModel} withBackdrop />
-        </div>
-      </div>
-      {instructionsRooms.length > 0 ? (
-        <div className={styles.projectTileRow}>
-          <Text className={styles.projectTileLabel} fontSize="11px" truncate>
-            {t("Common:AIProjectInstructions")}
-          </Text>
-          <div className={styles.projectTileTags} onClick={stop} onContextMenu={stop} onDoubleClick={stop}>
-            <SourceTags rooms={instructionsRooms} columnCount={2} />
-          </div>
-        </div>
-      ) : null}
-      {knowledgeRooms.length > 0 ? (
-        <div className={styles.projectTileRow}>
-          <Text className={styles.projectTileLabel} fontSize="11px" truncate>
-            {t("Common:Knowledge")}
-          </Text>
-          <div className={styles.projectTileTags} onClick={stop} onContextMenu={stop} onDoubleClick={stop}>
-            <SourceTags rooms={knowledgeRooms} columnCount={2} />
-          </div>
-        </div>
-      ) : null}
-    </div>
+        </Link>
+      </TileContent>
+    </RoomTile>
   );
-};
+});
 
 export default ProjectTile;

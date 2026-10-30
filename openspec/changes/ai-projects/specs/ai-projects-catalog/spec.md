@@ -40,7 +40,7 @@ Only the portal owner, DocSpace admins and room admins SHALL see the controls th
 - **THEN** no create control is shown
 
 ### Requirement: Project list views
-The list SHALL show each project's logo, name, linked Instructions rooms, linked Knowledge rooms and last activity. It SHALL offer a table and a tiles view on desktop; on tablet and mobile the table gives way to a rows view. The chosen view SHALL be remembered in the browser between visits. The list SHALL load in pages of 100 and fetch the next page as the user scrolls, without duplicates.
+The list SHALL show a project as the Rooms list shows a room: logo, name, tags, owner and last activity, nothing about its linked rooms. The table SHALL have the Name, Tags, Owner and Last activity columns; the rows view SHALL show under the name what the sort is by; the tiles SHALL be room tiles. Desktop SHALL offer table and tiles, tablet and mobile rows and tiles, remembered in the browser. The list SHALL load in pages of 100 as the user scrolls, without duplicates.
 
 #### Scenario: Switching views
 - **WHEN** the user switches from table to tiles and reloads the page
@@ -54,21 +54,27 @@ The list SHALL show each project's logo, name, linked Instructions rooms, linked
 - **WHEN** the server reports more projects than are loaded and the user scrolls to the end of the list
 - **THEN** the next page is appended and no project appears twice
 
-#### Scenario: Empty source group
-- **WHEN** a project links no Knowledge room
-- **THEN** its Knowledge cell or row is left empty rather than showing a placeholder
+#### Scenario: Tile without tags
+- **WHEN** a project without tags is shown as a tile
+- **THEN** the tile's tag row shows the "AI project" room type tag
+
+### Requirement: Tags in the list
+Tags SHALL be managed in place in the list and the Info panel as a room's are (bind, create, rename, remove by the caller's access), and a clicked tag SHALL filter the list.
+
+#### Scenario: Tag clicked in the table
+- **WHEN** the user clicks the tag "sales" on a project in the table
+- **THEN** the list is filtered by that tag and a "sales" chip shows in the filter bar
 
 ### Requirement: Search, filter and sort
-The list SHALL support a text search and the following filters:
-- by owner (the caller or a picked user);
-- by one linked Instructions room;
-- by one linked Knowledge room.
+The list SHALL support a text search and the Rooms filters: owner (`subjectOwnerId`), member ("Contacts", `subjectId`) and tags (`tags`, from the portal's tag list). It SHALL sort by name, tags, owner or last activity (the default, descending). Applied filters SHALL show as removable chips. A newer query SHALL win over a page still loading.
 
-It SHALL support sorting by name, last activity (the default, descending) or creation date. Applied filters SHALL show as removable chips. A newer query SHALL win over a page that is still loading. The room filter SHALL be sent to the server as `linkedRoomId`, the only room filter the contract defines.
+#### Scenario: Filter by a tag
+- **WHEN** the user picks the tag "legal" in the filter
+- **THEN** only projects carrying "legal" are listed, and a "legal" chip is shown
 
-#### Scenario: Filter by a Knowledge room
-- **WHEN** the user picks a Knowledge room in the filter
-- **THEN** only projects that link that room are listed, and a chip with the room's title is shown
+#### Scenario: Filter by a member
+- **WHEN** the user picks "Me" under Contacts
+- **THEN** only the projects the caller is in are listed
 
 #### Scenario: No results
 - **WHEN** the search or filters match no project
@@ -93,12 +99,7 @@ With no projects and no filter applied, the list SHALL show an empty state for t
 - **THEN** the empty state says no projects were shared with them and offers only "Go to Rooms"
 
 ### Requirement: Create and edit a project
-The create and edit dialog SHALL collect:
-- a required name of up to 170 characters, and a logo: a color with a built-in cover, or an uploaded image, as the room dialog offers them;
-- a chat profile (model), where none selected means the portal default;
-- any number of Instructions rooms and any number of Knowledge rooms, each chosen in a room selector limited to that room type.
-
-Edit SHALL also show the project owner. Any warnings the server returns SHALL be shown as toasts.
+The create and edit dialog SHALL collect: a required name of up to 170 characters; a logo (a color with a built-in cover, or an uploaded image) and tags, as the room dialog offers them; a chat profile (model), none meaning the portal default; any number of Instructions rooms and Knowledge rooms, each from a room selector limited to that type. Edit SHALL also show the owner. Server warnings SHALL be shown as toasts.
 
 #### Scenario: Create with rooms
 - **WHEN** a room admin creates a project named "Sales" with two Instructions rooms and one Knowledge room
@@ -124,7 +125,7 @@ After a successful create from the dialog the new project SHALL open (`/ai-proje
 - **THEN** the project is saved and the warning's server message is shown as a toast
 
 ### Requirement: Project actions are gated by security flags
-The project context menu (row, tile and open-project header) SHALL show each action only when the project's matching security flag is true: pin (`Pin`), notifications (`Mute`), edit (`EditRoom`), duplicate (`Duplicate`), invite (`EditAccess`), change owner (`ChangeOwner`) and delete (`Delete`).
+The project context menu (row, tile and open-project header) SHALL show each action only when the project's matching security flag is true: pin (`Pin`), notifications (`Mute`), edit (`EditRoom`), invite (`EditAccess`), change owner (`ChangeOwner`) and delete (`Delete`).
 
 #### Scenario: Flag off
 - **WHEN** a project's `Delete` flag is false for the caller
@@ -148,7 +149,7 @@ Copy link and project info SHALL always be offered. "Leave" SHALL be offered to 
 ### Requirement: Lifecycle operations
 Each lifecycle operation SHALL behave as follows:
 - Delete and leave SHALL ask for confirmation.
-- Delete and duplicate SHALL follow their server file operation until it finishes. A duplicate copies the project without its members.
+- Delete SHALL follow its server file operation until it finishes.
 - Copy link SHALL put `{origin}/ai-projects/{id}` on the clipboard.
 - On any failure, the server's error text SHALL be shown as a toast.
 
@@ -169,11 +170,18 @@ Each lifecycle operation SHALL behave as follows:
 - **THEN** the project drops from the former owner's list
 
 ### Requirement: Membership through the room panels
-Project members SHALL be managed through the existing room panels (Invite, Info panel Contacts, the invitation link, resend invitations). These panels SHALL call the same `files/rooms/{id}` routes for a project as for a room; nothing in them branches on the project type. The invitable roles SHALL be Project manager and Member. The Info panel of a project SHALL show the Contacts, History and Details tabs.
+Project members SHALL be managed through the existing room panels (Invite, Info panel Contacts, the invitation link, resend invitations), which SHALL call the same `files/rooms/{id}` routes for a project as for a room; nothing in them branches on the project type. The invitable roles SHALL be Project manager and Member.
 
 #### Scenario: Invite a member
 - **WHEN** a Project manager invites a user as Member from the Invite panel
 - **THEN** the invitation is sent to `files/rooms/{id}/share` and the user appears in Contacts
+
+### Requirement: Info panel of a project
+The Info panel of a project SHALL show the Contacts, History and Details tabs. Details SHALL list what a room's Details list (owner, type, date modified, last modified by, creation date, tags with tag management) plus the project's model, and no content, storage or linked rooms.
+
+#### Scenario: Details of a project
+- **WHEN** a member opens the Details tab of a project with two linked rooms and the tag "legal"
+- **THEN** the tab shows the owner, the "AI project" type, the dates, the "legal" tag and the model, and no linked rooms
 
 ### Requirement: Members are invited to the linked rooms
 Inviting a user to a project SHALL also invite them to every linked Instructions and Knowledge room, so a member never meets a linked room they cannot open. A member who could not be invited to a linked room SHALL be reported as a warning.

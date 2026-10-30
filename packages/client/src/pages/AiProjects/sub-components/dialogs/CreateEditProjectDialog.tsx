@@ -66,6 +66,10 @@ import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
 import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
+import TagInput from "SRC_DIR/components/TagInput";
+import TagHandler from "SRC_DIR/helpers/TagHandler";
+import type { TRoomTagsParams } from "@docspace/shared/utils/rooms";
+import { createRandomTagId } from "@docspace/shared/utils/random";
 import { StyledParam } from "SRC_DIR/components/CreateEditDialogParams/StyledParam";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import AvatarEditorDialog from "SRC_DIR/components/dialogs/AvatarEditorDialog";
@@ -119,6 +123,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const { t } = useTranslation(["Common"]);
   const dialogsStore = useStore("dialogsStore");
   const filesStore = useStore("filesStore");
+  const tagsStore = useStore("tagsStore");
   const settingsStore = useStore("settingsStore");
   const avatarEditorDialogStore = useStore("avatarEditorDialogStore");
   const { avatarEditorDialogVisible } = avatarEditorDialogStore;
@@ -155,6 +160,16 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const [knowledge, setKnowledge] = React.useState<TAiProjectSource[]>(project?.aiProject.knowledgeRooms ?? []);
   const [selector, setSelector] = React.useState<TRoomType | null>(null);
   const [isSaving, setIsSaving] = React.useState(false);
+  // The tags, as the room dialog keeps them: the project's own, with the
+  // portal's tags fetched for the input's suggestions.
+  const [tags, setTags] = React.useState<TRoomTagsParams[]>(() =>
+    (project?.tags ?? []).map((name) => ({ id: createRandomTagId(), name })),
+  );
+  const [fetchedTags, setFetchedTags] = React.useState<string[]>([]);
+  React.useEffect(() => {
+    void tagsStore.fetchTags().then((list) => setFetchedTags(list as string[]));
+  }, [tagsStore]);
+  const tagHandler = new TagHandler(tags, setTags, fetchedTags);
 
   const chatProfiles = React.useMemo(() => profiles.filter(isChatCapableProfile), [profiles]);
 
@@ -261,6 +276,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
         : undefined;
       const data = {
         title: name,
+        tags: tags.map((tag) => tag.name),
         // The cover goes as a room's does (CreateEditRoomStore): the id of
         // the built-in icon or "" for the initials, and the colour.
         logo: { color: `#${color}`, cover: coverIcon?.id ?? "", image },
@@ -442,6 +458,14 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
                 dataTestId="ai-project-title"
               />
             </div>
+            <TagInput
+              t={t}
+              title={`${t("Common:Tags")}:`}
+              tagHandler={tagHandler}
+              setIsScrollLocked={() => {}}
+              isDisabled={isSaving}
+              dataTestId="ai-project-tags-input"
+            />
             <div className={styles.block}>
               <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
                 {`${t("Common:AIAgentModel")}:`}

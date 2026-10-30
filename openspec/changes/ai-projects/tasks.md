@@ -44,6 +44,8 @@ Most of the client work is already on `feature/new-ai-concept`. Tasks marked `[x
 - [x] 3.5 Add live updates over `DIR-{root}` and `DIR-{project}` with coalesced reloads and lost-project handling (03c7145721b); verify with the live-update cases in `AiProjectsStore.test.ts`
 - [x] 3.6 Gate the empty state's "Create project" by the page's `canCreate` (role, chat available, AI ready) instead of the role alone (uncommitted); verify that the empty state on a standalone portal with no chat profile yet shows only "Go to Rooms" for an admin
 
+- [x] 3.9 Make the list look like Rooms: drop the linked rooms from the table, rows, tiles and the Info panel Details, add Tags (managed in place through `TagManagement`, a click filtering the list) and Owner, take the Rooms filter (owner, Contacts, tags) and sorts (name, tags, owner, last activity), tags in the project dialog, `tags` in the API client and both mocks (`shared/api/ai/projects.ts`, `AiProjectsStore`, `ProjectsFilter`, `TableView`, `RowsView`, `ProjectTile`, `Details.utils.tsx`, the MSW handler, the Node mock); verify with `projects.test.ts`, `AiProjectsStore.test.ts` and the list cases of `ai-projects.spec.ts`
+
 ## 4. Project lifecycle and membership
 
 - [x] 4.1 Add the create/edit aside dialog: name, cover, model, Instructions and Knowledge room selectors, owner (187e82eb493, 7b83d0066ac); verify with the create-dialog case in `ai-projects.spec.ts`
@@ -54,6 +56,10 @@ Most of the client work is already on `feature/new-ai-concept`. Tasks marked `[x
 - [x] 4.6 Show the server's error text for mute/unmute through `errorMessage`, as the other actions do (uncommitted); verify that a refused mute toasts the server message
 - [x] 4.7 Let the project dialog take an uploaded logo as the room dialog does (image editor, crop, "Delete"): upload through `files/logos`, send the crop as the body's `logo` on create/update and remove it with the room route `DELETE files/rooms/{id}/logo`, draw the picture in `ProjectLogo` (list, intro, header chips) and in the MSW mock; verify with `AiProjectsStore.test.ts` (logo removal) and the create case in `ai-projects.spec.ts` (picture upload)
 - [x] 4.8 Open the new project (`/ai-projects/{id}`) after a successful create from the dialog, as Rooms opens a new room; the chat's save action (`AiPresetsStore`) keeps its place; verify with the create-dialog case in `ai-projects.spec.ts`
+
+- [x] 4.9 Make a Member the room's Read (`access` 2) everywhere a project names its roles (`AiProjectAccess`, `getAccessOptions`, `getDefaultAccessUser`, the Contacts role options, both mocks) and drop Duplicate from the project menu, store, security shape and specs, as `FileSecurity` refuses it for a project; verify with `useProjectContextMenu.test.tsx`, `AiProjectsStore.test.ts` and `projects.test.ts`
+
+- [x] 4.10 Remove the in-process AI projects mock from ASC.AI.Chat (controller, storage, config flag, README section, the chat-context and Files helper fallbacks) now that the .NET room type and CRUD exist; verify with the Node unit tests
 
 ## 5. Inside a project
 
@@ -80,7 +86,7 @@ Most of the client work is already on `feature/new-ai-concept`. Tasks marked `[x
 
 These come from the specs but are owned by `../server` C#; they are listed so the client and Node tasks above are not mistaken for the whole job.
 
-- Implement `internal/ai/projects…` and `chat-context` per `ai-projects-api`, then turn `aiProjects.mock` off in the ASC.AI.Chat dev config.
+- Implement the rest of `ai/projects` per `ai-projects-api`: the `aiProject` block in the DTO and the create/update body, `skills`, `knowledge`, `chat-context` and the Viewer grants on linked rooms (the room type, the list and the CRUD landed on 2026-10-30).
 - Make Instructions and Knowledge rooms flat (refuse folder create, copy and move) and limit Instructions rooms to `.md` on upload, create, copy and move, with a user-facing message.
 - Drop `FileShare.Editing` from `AvailableRoomAccesses[KnowledgeRoom]`, with a migration of existing Editing shares to Read.
 - Refuse linking a Knowledge room while vectorization is disabled, in the .NET validation.
@@ -97,7 +103,7 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - [ ] 9.2 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`) and verify every command passes
 - [ ] 9.3 Run `ai-projects.spec.ts` and `ai-projects-access.spec.ts` in Docker and verify they pass with the committed screenshots
 - [ ] 9.4 Run the locale completeness check (`cd common/tests && npx vitest run test/locales.test.js`) and verify the new `Common:*` keys exist in every supported language
-- [ ] 9.5 Against the Node mock (and later the real `ai/projects`), verify the specs end to end: create a project, invite a Member, check the Viewer grant on a linked room, open as that Member, edit from the owner's side, turn vectorization off and check the Knowledge room banner and pickers, then delete
+- [ ] 9.5 Against the real `ai/projects`, verify the specs end to end: create a project, invite a Member, check the Viewer grant on a linked room, open as that Member, edit from the owner's side, turn vectorization off and check the Knowledge room banner and pickers, then delete
 
 ## Workflow follow-up
 

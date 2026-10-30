@@ -55,11 +55,9 @@ type TilesViewProps = {
 const LOADER_TILES = 4;
 
 /**
- * The tiles view: the project cards of the mockups in a responsive grid.
- * Infinite scroll as in Files: while the server holds more projects a row
- * of tile skeletons closes the grid, and the next page loads once it nears
- * the viewport. Files' virtualized tile grid is not used: it sizes its rows
- * for its own tiles, which the project cards are taller than.
+ * The tiles view: room tiles in a responsive grid. Infinite scroll as in
+ * Files: while the server holds more projects a row of tile skeletons closes
+ * the grid, and the next page loads once it nears the viewport.
  */
 export const TilesView = observer(({ store, onOpen, getContextModel }: TilesViewProps) => {
   const loaderRef = React.useRef<HTMLDivElement>(null);
@@ -83,6 +81,7 @@ export const TilesView = observer(({ store, onOpen, getContextModel }: TilesView
       {store.projects.map((project) => (
         <ProjectTile
           key={project.id}
+          store={store}
           project={project}
           onOpen={onOpen}
           getContextModel={() => getContextModel(project)}

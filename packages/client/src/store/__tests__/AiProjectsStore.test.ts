@@ -20,7 +20,7 @@ const roomsApi = vi.hoisted(() => ({
   removeLogoFromRoom: vi.fn(),
   updateRoomMemberRole: vi.fn(),
 }));
-const filesApi = vi.hoisted(() => ({ duplicate: vi.fn(), setFileOwner: vi.fn() }));
+const filesApi = vi.hoisted(() => ({ setFileOwner: vi.fn() }));
 const settingsApi = vi.hoisted(() => ({ muteRoomNotification: vi.fn() }));
 
 const { toastr, socket, getOperationProgress } = vi.hoisted(() => ({
@@ -48,6 +48,7 @@ const aiApi = vi.hoisted(() => ({ retryVectorization: vi.fn() }));
 vi.mock("@docspace/shared/api/ai", () => aiApi);
 
 import { SocketCommands, SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
+import { TagChangeType } from "@docspace/shared/components/tag-management/TagManagement.types";
 
 import type { UserStore } from "@docspace/shared/store/UserStore";
 
@@ -61,6 +62,7 @@ const project = (id: number, title = `Project ${id}`, extra: Partial<TAiProject>
     created: "2026-10-01T00:00:00.000Z",
     pinned: false,
     mute: false,
+    tags: [],
     access: 1,
     security: { EditRoom: true },
     logo: { color: "#FF6680" },
@@ -124,8 +126,9 @@ describe("AiProjectsStore", () => {
       await store.fetchProjects();
       expect(api.getAiProjects).toHaveBeenCalledWith({
         filterValue: undefined,
+        subjectOwnerId: undefined,
         subjectId: undefined,
-        linkedRoomId: undefined,
+        tags: undefined,
         sortBy: "DateAndTime",
         sortOrder: "descending",
         startIndex: 0,
@@ -143,7 +146,8 @@ describe("AiProjectsStore", () => {
       store.setSort("AZ", "ascending");
       store.setFilterOptions({
         owner: { id: "u1", label: "Ann" },
-        instructionsRoom: { id: "12", label: "Skills" },
+        member: { id: "u2", label: "Bob" },
+        tags: ["sales"],
       });
       await flush();
       expect(store.isFiltered).toBe(true);
@@ -151,8 +155,9 @@ describe("AiProjectsStore", () => {
       expect(api.getAiProjects).toHaveBeenLastCalledWith(
         expect.objectContaining({
           filterValue: "sa",
-          subjectId: "u1",
-          linkedRoomId: 12,
+          subjectOwnerId: "u1",
+          subjectId: "u2",
+          tags: ["sales"],
           sortBy: "AZ",
           sortOrder: "ascending",
         }),
@@ -162,29 +167,29 @@ describe("AiProjectsStore", () => {
       await flush();
       expect(store.isFiltered).toBe(false);
       expect(api.getAiProjects).toHaveBeenLastCalledWith(
-        expect.objectContaining({ filterValue: undefined, subjectId: undefined }),
+        expect.objectContaining({ filterValue: undefined, subjectId: undefined, tags: undefined }),
       );
     });
 
-    it("keeps one linked room filter: the newly picked kind replaces the other", async () => {
+    it("adds a clicked tag to the tags filter once", async () => {
       const store = createStore();
-      store.setFilterOptions({ instructionsRoom: { id: "12", label: "Skills" } });
-      store.setFilterOptions({
-        instructionsRoom: { id: "12", label: "Skills" },
-        knowledgeRoom: { id: "9", label: "Docs" },
-      });
+      store.selectTag({ label: "sales" });
+      store.selectTag({ label: "sales" });
       await flush();
-      expect(store.instructionsRoomFilter).toBeNull();
-      expect(store.knowledgeRoomFilter?.id).toBe("9");
-      expect(api.getAiProjects).toHaveBeenLastCalledWith(expect.objectContaining({ linkedRoomId: 9 }));
+      expect(store.tagsFilter).toEqual(["sales"]);
+      expect(api.getAiProjects).toHaveBeenCalledTimes(1);
+    });
 
-      store.setFilterOptions({
-        instructionsRoom: { id: "13", label: "Legal" },
-        knowledgeRoom: { id: "9", label: "Docs" },
-      });
-      await flush();
-      expect(store.knowledgeRoomFilter).toBeNull();
-      expect(api.getAiProjects).toHaveBeenLastCalledWith(expect.objectContaining({ linkedRoomId: 13 }));
+    it("applies a tag change to the projects on screen", async () => {
+      const store = createStore();
+      await store.fetchProjects();
+      await store.openProject(store.projects[0]);
+      store.applyTagChange({ type: TagChangeType.Bound, roomId: 1, label: "sales" });
+      expect(store.projects[0].tags).toEqual(["sales"]);
+      expect(store.projects[1].tags).toEqual([]);
+      expect(store.activeProject?.tags).toEqual(["sales"]);
+      store.applyTagChange({ type: TagChangeType.Renamed, oldLabel: "sales", newLabel: "sold" });
+      expect(store.projects[0].tags).toEqual(["sold"]);
     });
 
     it("appends the next page without duplicates and stops at the total", async () => {
@@ -373,15 +378,6 @@ describe("AiProjectsStore", () => {
       api.deleteAiProject.mockResolvedValueOnce({ id: "op", finished: true, error: "locked" });
       await expect(store.removeProject(store.projects[0])).rejects.toThrow("locked");
       expect(store.projects).toHaveLength(2);
-    });
-
-    it("re-reads the list once a duplicate has landed", async () => {
-      const store = createStore();
-      await store.fetchProjects();
-      filesApi.duplicate.mockResolvedValueOnce([{ id: "op", finished: true }]);
-      await store.duplicateProject(store.projects[0]);
-      expect(filesApi.duplicate).toHaveBeenCalledWith([1], []);
-      expect(api.getAiProjects).toHaveBeenCalledTimes(2);
     });
 
     it("switches notifications and the pin in place", async () => {

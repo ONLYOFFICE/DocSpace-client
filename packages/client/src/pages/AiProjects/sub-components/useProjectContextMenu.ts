@@ -46,7 +46,6 @@ import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
 import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
-import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 // The icons of the matching items of the rooms context menu
 // (filesContextOptions.helpers / folderModel.helpers), so the two menus read alike.
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
@@ -139,14 +138,6 @@ export const useProjectContextMenu = (
           label: t("Common:AIProjectEdit"),
           icon: SettingsReactSvgUrl,
           onClick: () => store.openEditDialog(project),
-        });
-      }
-      if (security.Duplicate) {
-        model.push({
-          key: "duplicate",
-          label: t("Common:Duplicate"),
-          icon: DuplicateReactSvgUrl,
-          onClick: () => void store.duplicateProject(project),
         });
       }
       if (security.EditAccess) {

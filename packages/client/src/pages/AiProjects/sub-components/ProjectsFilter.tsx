@@ -39,24 +39,17 @@ import { useTranslation } from "react-i18next";
 
 import FilterInput from "@onlyoffice/apps-ui-kit/components/filter";
 import type { FilterProps, TItem } from "@onlyoffice/apps-ui-kit/components/filter";
-import { FilterGroups, FilterKeys, FilterSelectorTypes } from "@onlyoffice/apps-ui-kit/enums";
-import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
-import type { SelectorRenderProps } from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
+import { getSubjectId, getSubjectOwnerId, getTags } from "@onlyoffice/apps-ui-kit/components/filter/Filter.utils";
+import { FilterGroups, FilterKeys } from "@onlyoffice/apps-ui-kit/enums";
 import type { DeviceType } from "@docspace/shared/enums";
-import { INSTRUCTIONS_ROOM_TYPE, KNOWLEDGE_ROOM_TYPE } from "@docspace/shared/api/ai/projects";
+import { SortByFieldName } from "@docspace/shared/enums";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
-import type { TAiProjectsFilterEntity } from "SRC_DIR/store/AiProjectsStore";
-
-const SELECT_INSTRUCTIONS_ROOM = "filter_instructions-room";
-const SELECT_KNOWLEDGE_ROOM = "filter_knowledge-room";
-
-// The group of each room kind, and the room type its selector offers.
-const INSTRUCTIONS_GROUP = FilterGroups.roomFilterContent;
-const KNOWLEDGE_GROUP = FilterGroups.roomFilterFolders;
+import type { TAiProjectsFilterEntity, TAiProjectsSortBy } from "SRC_DIR/store/AiProjectsStore";
+import { useStore } from "SRC_DIR/store/useStore";
 
 type ProjectsFilterProps = {
   store: AiProjectsStore;
@@ -67,186 +60,123 @@ type ProjectsFilterProps = {
   isDesktop: boolean;
 };
 
+const SORT_KEYS: TAiProjectsSortBy[] = ["AZ", "Tags", "Author", "DateAndTime", "DateAndTimeCreation"];
+
+/**
+ * The filter bar of the projects list, built as the Rooms filter is: the
+ * owner, a member ("Contacts") and the tags as filters, and name, tags, owner
+ * and last activity as the sorts. A project is a room, so the groups, keys
+ * and selectors are the Rooms filter's own.
+ */
 const ProjectsFilter = observer(
   ({ store, onCreate, canCreate, userId, currentDeviceType, isDesktop }: ProjectsFilterProps) => {
     const { t } = useTranslation(["Common"]);
+    const tagsStore = useStore("tagsStore");
     const [clearSearch, setClearSearch] = React.useState(false);
 
     const noop = React.useCallback(() => {}, []);
 
-    const instructionsTitle = t("Common:AIProjectInstructions");
-    const knowledgeTitle = t("Common:Knowledge");
-
-    // The owner opens the people selector of the Rooms filter; a room kind's
-    // "Select room" opens the room selector limited to that kind.
+    // The people selector for the owner and the member, as in Rooms.
     const renderSelector = React.useCallback(
-      (props: SelectorRenderProps): React.ReactNode => {
-        if (props.selectorType !== FilterSelectorTypes.rooms) return renderFilterSelector(props);
-        const isInstructions = props.group === INSTRUCTIONS_GROUP;
-        return (
-          <RoomSelector
-            className="room-selector"
-            onSubmit={props.onSubmit}
-            withHeader
-            headerProps={{
-              onBackClick: props.onBackClick,
-              onCloseClick: props.onCloseClick,
-              headerLabel: isInstructions ? t("Common:InstructionsRooms") : t("Common:AIProjectKnowledgeRooms"),
-              withoutBackButton: false,
-              withoutBorder: false,
-            }}
-            isMultiSelect={false}
-            withSearch
-            roomType={isInstructions ? INSTRUCTIONS_ROOM_TYPE : KNOWLEDGE_ROOM_TYPE}
-          />
-        );
-      },
-      [t],
+      (props: Parameters<typeof renderFilterSelector>[0]): React.ReactNode => renderFilterSelector(props),
+      [],
     );
 
-    // The owner (the caller, or a user picked in the people selector, as in
-    // Rooms) and, for each room kind, one linked room picked in the room
-    // selector. The groups reuse the Rooms filter's own group ids.
-    const getFilterData = React.useCallback(
-      async (): Promise<TItem[]> => [
-        {
-          key: FilterGroups.roomFilterOwner,
-          group: FilterGroups.roomFilterOwner,
-          label: t("Common:Owner"),
-          isHeader: true,
-          withoutSeparator: true,
-          withMultiItems: true,
-        },
-        {
-          id: "filter_owner-me",
-          key: FilterKeys.me,
-          group: FilterGroups.roomFilterOwner,
-          label: t("Common:MeLabel"),
-        },
-        {
-          id: "filter_owner-user",
-          key: FilterKeys.user,
-          group: FilterGroups.roomFilterOwner,
-          // Shows the picked user's name; the bar fills it in.
-          label: "",
-          displaySelectorType: "link",
-        },
-        {
-          id: "filter_owner-other",
-          key: FilterKeys.other,
-          group: FilterGroups.roomFilterOwner,
-          label: t("Common:SelectAction"),
-        },
-        {
-          key: INSTRUCTIONS_GROUP,
-          group: INSTRUCTIONS_GROUP,
-          label: instructionsTitle,
-          isHeader: true,
-          withoutSeparator: true,
-        },
-        {
-          id: SELECT_INSTRUCTIONS_ROOM,
-          key: SELECT_INSTRUCTIONS_ROOM,
-          group: INSTRUCTIONS_GROUP,
-          label: t("Common:SelectRoom"),
-          displaySelectorType: "button",
-          selectorType: FilterSelectorTypes.rooms,
-        },
-        {
-          key: KNOWLEDGE_GROUP,
-          group: KNOWLEDGE_GROUP,
-          label: knowledgeTitle,
+    const getFilterData = React.useCallback(async (): Promise<TItem[]> => {
+      const subject = (group: FilterGroups, label: string, idPrefix: string): TItem[] => [
+        { key: group, group, label, isHeader: true, withoutSeparator: true, withMultiItems: true },
+        { id: `${idPrefix}-me`, key: FilterKeys.me, group, label: t("Common:MeLabel") },
+        // Shows the picked user's name; the bar fills it in.
+        { id: `${idPrefix}-user`, key: FilterKeys.user, group, label: "", displaySelectorType: "link" },
+        { id: `${idPrefix}-other`, key: FilterKeys.other, group, label: t("Common:SelectAction") },
+      ];
+      const items: TItem[] = [
+        ...subject(FilterGroups.roomFilterOwner, t("Common:Owners"), "filter_owner"),
+        ...subject(FilterGroups.roomFilterSubject, t("Common:Contacts"), "filter_author"),
+      ];
+      const tags = (await tagsStore.fetchTags()) as string[];
+      if (tags.length > 0) {
+        items.push({
+          key: FilterGroups.roomFilterTags,
+          group: FilterGroups.roomFilterTags,
+          label: t("Common:Tags"),
           isHeader: true,
           isLast: true,
-        },
-        {
-          id: SELECT_KNOWLEDGE_ROOM,
-          key: SELECT_KNOWLEDGE_ROOM,
-          group: KNOWLEDGE_GROUP,
-          label: t("Common:SelectRoom"),
-          displaySelectorType: "button",
-          selectorType: FilterSelectorTypes.rooms,
-        },
-      ],
-      [t, instructionsTitle, knowledgeTitle],
-    );
+        });
+        items.push(
+          ...tags.map((tag) => ({ key: tag, group: FilterGroups.roomFilterTags, label: tag, isMultiSelect: true })),
+        );
+      }
+      return items;
+    }, [t, tagsStore]);
 
-    const { ownerFilter, instructionsRoomFilter, knowledgeRoomFilter } = store;
+    const { ownerFilter, memberFilter, tagsFilter } = store;
     const getSelectedFilterData = React.useCallback((): TItem[] => {
       const selected: TItem[] = [];
-      if (ownerFilter) {
-        const isMe = ownerFilter.id === userId;
-        const label = isMe ? t("Common:MeLabel") : ownerFilter.label;
+      const user = (entity: TAiProjectsFilterEntity, group: FilterGroups, title?: string) => {
+        const isMe = entity.id === userId;
+        const label = isMe ? t("Common:MeLabel") : entity.label;
         selected.push({
-          key: isMe ? FilterKeys.me : ownerFilter.id,
-          group: FilterGroups.roomFilterOwner,
+          key: isMe ? FilterKeys.me : entity.id,
+          group,
           label,
-          selectedLabel: `${t("Common:Owner")}: ${label}`,
+          ...(title ? { selectedLabel: `${title}: ${label}` } : {}),
         });
-      }
-      if (instructionsRoomFilter) {
-        selected.push({
-          key: instructionsRoomFilter.id,
-          group: INSTRUCTIONS_GROUP,
-          label: instructionsRoomFilter.label,
-          selectedLabel: `${instructionsTitle}: ${instructionsRoomFilter.label}`,
-        });
-      }
-      if (knowledgeRoomFilter) {
-        selected.push({
-          key: knowledgeRoomFilter.id,
-          group: KNOWLEDGE_GROUP,
-          label: knowledgeRoomFilter.label,
-          selectedLabel: `${knowledgeTitle}: ${knowledgeRoomFilter.label}`,
-        });
+      };
+      if (ownerFilter) user(ownerFilter, FilterGroups.roomFilterOwner, t("Common:Owner"));
+      if (memberFilter) user(memberFilter, FilterGroups.roomFilterSubject);
+      if (tagsFilter.length > 0) {
+        selected.push({ key: [...tagsFilter], group: FilterGroups.roomFilterTags, label: "", isMultiSelect: true });
       }
       return selected;
-    }, [
-      ownerFilter,
-      instructionsRoomFilter,
-      knowledgeRoomFilter,
-      instructionsTitle,
-      knowledgeTitle,
-      userId,
-      t,
-    ]);
+    }, [ownerFilter, memberFilter, tagsFilter, userId, t]);
 
-    // The bar hands over the whole selection: one item per group at most.
-    // A user or room picked in a selector comes with its name; an unchanged
-    // choice keeps the name it had.
+    // The bar hands over the whole selection, read with the helpers the
+    // Rooms filter uses. A user picked in the selector comes with their
+    // name; an unchanged choice keeps the name it had.
     const onFilter = React.useCallback(
       (data: TItem[]) => {
-        const pick = (group: FilterGroups, current: TAiProjectsFilterEntity | null): TAiProjectsFilterEntity | null => {
+        const user = (
+          key: unknown,
+          group: FilterGroups,
+          current: TAiProjectsFilterEntity | null,
+        ): TAiProjectsFilterEntity | null => {
+          if (!key) return null;
+          const id = key === FilterKeys.me ? userId : String(key);
           const item = data.find((i) => i.group === group);
-          if (!item) return null;
-          const id = item.key === FilterKeys.me ? userId : String(item.key);
-          return { id, label: item.label || (current?.id === id ? current.label : "") };
+          return { id, label: item?.label || (current?.id === id ? current.label : "") };
         };
         store.setFilterOptions({
-          owner: pick(FilterGroups.roomFilterOwner, ownerFilter),
-          instructionsRoom: pick(INSTRUCTIONS_GROUP, instructionsRoomFilter),
-          knowledgeRoom: pick(KNOWLEDGE_GROUP, knowledgeRoomFilter),
+          owner: user(getSubjectOwnerId(data), FilterGroups.roomFilterOwner, ownerFilter),
+          member: user(getSubjectId(data), FilterGroups.roomFilterSubject, memberFilter),
+          tags: (getTags(data) as string[] | null) ?? [],
         });
       },
-      [store, userId, ownerFilter, instructionsRoomFilter, knowledgeRoomFilter],
+      [store, userId, ownerFilter, memberFilter],
     );
 
     const removeSelectedItem = React.useCallback(
-      ({ group }: { key: string | number | string[]; group?: FilterGroups }) => {
+      ({ key, group }: { key: string | number | string[]; group?: FilterGroups }) => {
         store.setFilterOptions({
           owner: group === FilterGroups.roomFilterOwner ? null : ownerFilter,
-          instructionsRoom: group === INSTRUCTIONS_GROUP ? null : instructionsRoomFilter,
-          knowledgeRoom: group === KNOWLEDGE_GROUP ? null : knowledgeRoomFilter,
+          member: group === FilterGroups.roomFilterSubject ? null : memberFilter,
+          tags: group === FilterGroups.roomFilterTags ? tagsFilter.filter((tag) => tag !== key) : tagsFilter,
         });
       },
-      [store, ownerFilter, instructionsRoomFilter, knowledgeRoomFilter],
+      [store, ownerFilter, memberFilter, tagsFilter],
     );
 
     const getSortData = React.useCallback(
       () => [
-        { id: "sort-by_name", key: "AZ", label: t("Common:Name") },
-        { id: "sort-by_activity", key: "DateAndTime", label: t("Common:AIProjectLastActivity") },
-        { id: "sort-by_created", key: "DateAndTimeCreation", label: t("Common:ByCreation") },
+        { id: "sort-by_name", key: SortByFieldName.Name, label: t("Common:Label"), default: true },
+        { id: "sort-by_tags", key: SortByFieldName.Tags, label: t("Common:Tags"), default: true },
+        { id: "sort-by_owner", key: SortByFieldName.Author, label: t("Common:Owner"), default: true },
+        {
+          id: "sort-by_activity",
+          key: SortByFieldName.ModifiedDate,
+          label: t("Common:LastActivityDate"),
+          default: true,
+        },
       ],
       [t],
     );
@@ -262,7 +192,7 @@ const ProjectsFilter = observer(
     const onSort = React.useCallback(
       (nextSortId: string, nextDirection: string) => {
         store.setSort(
-          nextSortId === "AZ" || nextSortId === "DateAndTimeCreation" ? nextSortId : "DateAndTime",
+          SORT_KEYS.includes(nextSortId as TAiProjectsSortBy) ? (nextSortId as TAiProjectsSortBy) : "DateAndTime",
           nextDirection === "asc" ? "ascending" : "descending",
         );
       },
@@ -333,7 +263,7 @@ const ProjectsFilter = observer(
         isIndexing={false}
         isIndexEditingMode={false}
         isRecentFolder={false}
-        isRooms={false}
+        isRooms
         isContactsPage={false}
         isContactsPeoplePage={false}
         isContactsGroupsPage={false}

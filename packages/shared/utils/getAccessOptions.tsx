@@ -207,8 +207,8 @@ export const getAccessOptions = (
 			key: "projectMember",
 			label: t("Common:Member"),
 			description: t("Common:AIProjectMemberDescription"),
-			access: ShareAccessRights.Collaborator,
-			type: EmployeeType.User,
+			access: ShareAccessRights.ReadOnly,
+			type: EmployeeType.Guest,
 		},
 		viewer: {
 			key: "viewer",

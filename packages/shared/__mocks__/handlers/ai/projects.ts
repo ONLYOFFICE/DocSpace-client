@@ -41,8 +41,8 @@ const AI_PROJECT_ROOM_TYPE = 12;
 export const AiProjectMockAccess = {
   None: 0,
   Owner: 1,
+  Member: 2,
   ProjectManager: 9,
-  Member: 11,
 } as const;
 
 type MockAccess =
@@ -136,7 +136,6 @@ const security = (access: MockAccess) => {
     Delete: owner || !inside,
     Pin: true,
     Mute: inside,
-    Duplicate: manager || !inside,
     CopyLink: inside,
     UseChat: inside,
   };
@@ -152,6 +151,8 @@ type MockProjectOptions = {
   createdBy?: typeof OWNER;
   created?: string;
   pinned?: boolean;
+  /** The room tags, by name. */
+  tags?: string[];
   profile?: typeof PROFILE | null;
   instructionsRooms?: (typeof INSTRUCTIONS_ROOMS)[keyof typeof INSTRUCTIONS_ROOMS][];
   knowledgeRooms?: (typeof KNOWLEDGE_ROOMS)[keyof typeof KNOWLEDGE_ROOMS][];
@@ -167,6 +168,7 @@ export const aiProjectMock = ({
   createdBy = OWNER,
   created = "2026-10-20T10:00:00.0000000+00:00",
   pinned = false,
+  tags = [],
   profile = PROFILE,
   instructionsRooms = [],
   knowledgeRooms = [],
@@ -185,6 +187,7 @@ export const aiProjectMock = ({
     createdBy,
     updatedBy: createdBy,
     pinned,
+    tags,
     mute: false,
     inRoom: access !== AiProjectMockAccess.None,
     access,
@@ -219,6 +222,7 @@ export const AI_PROJECTS: AiProjectMock[] = [
     color: "8570FF",
     created: "2026-10-22T10:00:00.0000000+00:00",
     pinned: true,
+    tags: ["sales", "internal"],
     instructionsRooms: [INSTRUCTIONS_ROOMS.sales, INSTRUCTIONS_ROOMS.legal],
     knowledgeRooms: [KNOWLEDGE_ROOMS.contracts],
   }),
@@ -227,6 +231,7 @@ export const AI_PROJECTS: AiProjectMock[] = [
     title: "Contract reviewer",
     color: "FF6680",
     created: "2026-10-21T10:00:00.0000000+00:00",
+    tags: ["legal"],
     instructionsRooms: [INSTRUCTIONS_ROOMS.legal],
   }),
   aiProjectMock({
@@ -271,10 +276,17 @@ const listResponse = (projects: AiProjectMock[]) => ({
   statusCode: 200,
 });
 
+/** The owner's name, for the owner sort. */
+const ownerName = (project: AiProjectMock) => project.createdBy?.displayName ?? "";
+
 /**
  * `GET ai/projects`: the caller's projects. `projects` is the list to answer
- * with; left out, the stock list, and `[]` an empty section. A `filterValue`
- * in the query narrows it by title, so the search renders its own empty view.
+ * with; left out, the stock list, and `[]` an empty section. The query is
+ * read as the rooms list reads it: `filterValue` narrows by title (so the
+ * search renders its own empty view), `tags` keeps the projects carrying any
+ * of them, `withoutTags` the untagged ones, `subjectOwnerId` and
+ * `subjectId` (a member) by user, and `sortBy`
+ * takes `AZ`, `Tags`, `Author`, `DateAndTime` and `DateAndTimeCreation`.
  */
 export const aiProjectsHandler = (
   port: string,
@@ -286,6 +298,11 @@ export const aiProjectsHandler = (
       const params = new URL(request.url).searchParams;
       const filterValue = params.get("filterValue")?.trim().toLowerCase();
       const linkedRoomId = params.get("linkedRoomId");
+      const tagsParam = params.get("tags");
+      const tags = tagsParam ? (JSON.parse(tagsParam) as string[]) : [];
+      const withoutTags = params.get("withoutTags") === "true";
+      const ownerId = params.get("subjectOwnerId");
+      const subjectId = params.get("subjectId");
       let list = filterValue
         ? projects.filter((project) =>
             project.title.toLowerCase().includes(filterValue),
@@ -299,6 +316,33 @@ export const aiProjectsHandler = (
           ].some((room) => String(room.id) === linkedRoomId),
         );
       }
+      if (tags.length > 0) {
+        list = list.filter((project) => project.tags.some((tag) => tags.includes(tag)));
+      }
+      if (withoutTags) list = list.filter((project) => project.tags.length === 0);
+      if (ownerId) list = list.filter((project) => project.createdBy?.id === ownerId);
+      if (subjectId) {
+        // The mock's projects are the caller's, so the member filter keeps the
+        // ones the caller is in.
+        list = list.filter((project) => project.inRoom);
+      }
+      const sortBy = params.get("sortBy") ?? "DateAndTime";
+      const descending = params.get("sortOrder") !== "ascending";
+      const compare = (a: AiProjectMock, b: AiProjectMock) => {
+        switch (sortBy) {
+          case "AZ":
+            return a.title.localeCompare(b.title);
+          case "Tags":
+            return a.tags.join(",").localeCompare(b.tags.join(","));
+          case "Author":
+            return ownerName(a).localeCompare(ownerName(b));
+          case "DateAndTimeCreation":
+            return a.created.localeCompare(b.created);
+          default:
+            return a.updated.localeCompare(b.updated);
+        }
+      };
+      list = [...list].sort((a, b) => (descending ? -compare(a, b) : compare(a, b)));
       return HttpResponse.json(listResponse(list));
     },
   );
@@ -343,6 +387,7 @@ export const aiProjectCreateHandler = (
     async ({ request }) => {
       const body = (await request.json()) as {
         title?: string;
+        tags?: string[];
         color?: string;
         logo?: { tmpFile?: string };
         aiProject?: { instructionsRoomIds?: number[]; knowledgeRoomIds?: number[] };
@@ -350,6 +395,7 @@ export const aiProjectCreateHandler = (
       const created = aiProjectMock({
         id: 777100,
         title: body.title ?? "New project",
+        tags: body.tags ?? [],
         color: body.color ?? "8570FF",
         logoImage: body.logo ? MOCK_LOGO_IMAGE : undefined,
         created: "2026-10-29T10:00:00.0000000+00:00",

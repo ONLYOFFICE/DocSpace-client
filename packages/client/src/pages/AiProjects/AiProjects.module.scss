@@ -264,8 +264,7 @@
   width: 100%;
 }
 
-// The tiles view of the mockups: cards in a 4-column grid on a wide screen,
-// fewer columns as the section narrows.
+// The tiles view: room tiles in a grid, fewer columns as the section narrows.
 .tiles {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -273,57 +272,11 @@
   padding: 8px 0 24px;
 }
 
-.projectTile {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-width: 0;
-  padding: 16px;
-  border: var(--tile-room-border);
-  border-radius: var(--tile-room-border-radius, 12px);
-  background: var(--tile-background-color);
-  cursor: pointer;
-  box-sizing: border-box;
-
-  &:hover {
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  }
-}
-
-.projectTileTop {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
-}
-
-.projectTileName {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.projectTileMenu {
-  display: flex;
-  flex: 0 0 auto;
-}
-
-.projectTileRow {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 0;
-}
-
-.projectTileLabel {
-  flex: 0 0 76px;
-  color: var(--text-secondary);
-}
-
-// No `overflow: hidden` here: the "..." tag anchors its dropdown of the
-// hidden rooms inside this box, and a clip would cut the list off.
-.projectTileTags {
-  min-width: 0;
-  flex: 1 1 auto;
+// The tags cell keeps the "+N" tag's dropdown unclipped, as the rooms table does.
+.tagsCell {
+  width: 100%;
+  overflow: hidden;
+  margin-inline-end: 8px;
 }
 
 .empty {

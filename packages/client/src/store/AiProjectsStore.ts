@@ -54,7 +54,7 @@ import {
   updateAiProject,
 } from "@docspace/shared/api/ai/projects";
 // A project is a room: what it shares with a room goes through the room routes.
-import { duplicate, setFileOwner } from "@docspace/shared/api/files";
+import { setFileOwner } from "@docspace/shared/api/files";
 import {
   pinRoom,
   removeLogoFromRoom,
@@ -71,6 +71,8 @@ import type {
   TAiProjectSkillsRoom,
   TAiProjectsQuery,
 } from "@docspace/shared/api/ai/projects";
+import { applyTagChangeToRoomTags, isSharedTagChange } from "@docspace/shared/components/tag-management/TagManagement.utils";
+import type { TagChange } from "@docspace/shared/components/tag-management/TagManagement.types";
 import type { TOperation } from "@docspace/shared/api/files/types";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
@@ -80,7 +82,7 @@ import { toAiPreset } from "./AiPresetsStore";
 export type TAiProjectsViewAs = "table" | "row" | "tile";
 export type TAiProjectsSortBy = NonNullable<TAiProjectsQuery["sortBy"]>;
 
-/** A user or room a list filter is set to: its id, and the name its chip shows. */
+/** A user a list filter is set to: their id, and the name the chip shows. */
 export type TAiProjectsFilterEntity = { id: string; label: string };
 
 export type TProjectDialogState =
@@ -117,7 +119,7 @@ const showWarnings = (project: TAiProject) => {
   project.aiProject.warnings?.forEach((warning) => toastr.warning(warning.message));
 };
 
-/** Follows a file operation (delete, duplicate) until it is finished. */
+/** Follows a file operation (delete) until it is finished. */
 const waitForOperation = async (operation: TOperation | undefined) => {
   let current = operation;
   while (current && !current.finished) {
@@ -170,14 +172,16 @@ class AiProjectsStore {
   filterValue = "";
 
 
+  // The filters of the rooms list a project takes: the owner, a member
+  // ("Contacts" in the Rooms filter) and the tags.
   /** The owner filter, with the name its chip shows; `null`: any owner. */
   ownerFilter: TAiProjectsFilterEntity | null = null;
 
-  /** One linked Instructions room to filter by, with the title its chip shows; `null`: any. */
-  instructionsRoomFilter: TAiProjectsFilterEntity | null = null;
+  /** The member filter, with the name its chip shows; `null`: any member. */
+  memberFilter: TAiProjectsFilterEntity | null = null;
 
-  /** One linked Knowledge room to filter by, with the title its chip shows; `null`: any. */
-  knowledgeRoomFilter: TAiProjectsFilterEntity | null = null;
+  /** The tags filtered by (any of them); empty: all projects. */
+  tagsFilter: string[] = [];
 
   sortBy: TAiProjectsSortBy = "DateAndTime";
 
@@ -238,28 +242,19 @@ class AiProjectsStore {
     return this.filterValue.trim().length > 0 || this.hasFilterOptions;
   }
 
-  /** Whether a filter option (owner, rooms) is applied, apart from the search. */
+  /** Whether a filter option (owner, member, tags) is applied, apart from the search. */
   get hasFilterOptions() {
-    return (
-      this.ownerFilter !== null ||
-      this.instructionsRoomFilter !== null ||
-      this.knowledgeRoomFilter !== null
-    );
+    return this.ownerFilter !== null || this.memberFilter !== null || this.tagsFilter.length > 0;
   }
 
   /* ------------------------------- List -------------------------------- */
 
-  /** The one room filter in force: the Instructions or the Knowledge one. */
-  private get linkedRoomFilter() {
-    return this.instructionsRoomFilter ?? this.knowledgeRoomFilter;
-  }
-
-  /** The list query of the current search, filters and sort. */
-  private listQuery = () => ({
+  /** The list query of the current search, filters and sort, in the rooms list's terms. */
+  private listQuery = (): TAiProjectsQuery => ({
     filterValue: this.filterValue.trim() || undefined,
-    subjectId: this.ownerFilter?.id,
-    // The contract filters by one linked room of either kind.
-    linkedRoomId: this.linkedRoomFilter ? Number(this.linkedRoomFilter.id) : undefined,
+    subjectOwnerId: this.ownerFilter?.id,
+    subjectId: this.memberFilter?.id,
+    tags: this.tagsFilter.length > 0 ? [...this.tagsFilter] : undefined,
     sortBy: this.sortBy,
     sortOrder: this.sortOrder,
   });
@@ -330,28 +325,42 @@ class AiProjectsStore {
 
   setFilterOptions = (options: {
     owner?: TAiProjectsFilterEntity | null;
-    instructionsRoom?: TAiProjectsFilterEntity | null;
-    knowledgeRoom?: TAiProjectsFilterEntity | null;
+    member?: TAiProjectsFilterEntity | null;
+    tags?: string[];
   }) => {
     this.ownerFilter = options.owner ?? null;
-    let instructionsRoom = options.instructionsRoom ?? null;
-    let knowledgeRoom = options.knowledgeRoom ?? null;
-    // The server filters by one linked room, so a room of one kind replaces
-    // the other kind's: the newly picked one wins.
-    if (instructionsRoom && knowledgeRoom) {
-      if (knowledgeRoom.id !== this.knowledgeRoomFilter?.id) instructionsRoom = null;
-      else knowledgeRoom = null;
-    }
-    this.instructionsRoomFilter = instructionsRoom;
-    this.knowledgeRoomFilter = knowledgeRoom;
+    this.memberFilter = options.member ?? null;
+    this.tagsFilter = options.tags ?? [];
     void this.fetchProjects();
+  };
+
+  /** A tag clicked in the list adds itself to the tags filter, as in Rooms. */
+  selectTag = (tag: { label: string }) => {
+    if (this.tagsFilter.includes(tag.label)) return;
+    this.tagsFilter = [...this.tagsFilter, tag.label];
+    void this.fetchProjects();
+  };
+
+  /**
+   * A tag change made in the list or the info panel (bound, unbound, renamed,
+   * removed), applied to the projects on screen, as FilesStore does for rooms.
+   */
+  applyTagChange = (change: TagChange) => {
+    const roomId = isSharedTagChange(change) ? undefined : String(change.roomId);
+    const patch = (project: TAiProject) => {
+      if (roomId !== undefined && String(project.id) !== roomId) return project;
+      const tags = applyTagChangeToRoomTags(project.tags, change);
+      return tags === project.tags ? project : { ...project, tags };
+    };
+    this.projects = this.projects.map(patch);
+    if (this.activeProject) this.activeProject = patch(this.activeProject);
   };
 
   clearFilter = () => {
     this.filterValue = "";
     this.ownerFilter = null;
-    this.instructionsRoomFilter = null;
-    this.knowledgeRoomFilter = null;
+    this.memberFilter = null;
+    this.tagsFilter = [];
     void this.fetchProjects();
   };
 
@@ -630,17 +639,6 @@ class AiProjectsStore {
   removeProject = async (project: TAiProject) => {
     await waitForOperation(await deleteAiProject(project.id));
     runInAction(() => this.dropProject(project.id));
-  };
-
-  /** Copies the project (without its members); the copy shows on the list once made. */
-  duplicateProject = async (project: TAiProject) => {
-    try {
-      const [operation] = await duplicate([project.id], []);
-      await waitForOperation(operation);
-      await this.fetchProjects();
-    } catch (e) {
-      toastr.error(errorMessage(e));
-    }
   };
 
   /** Turns the project's notifications off or back on for the caller. */

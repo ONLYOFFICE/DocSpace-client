@@ -4,7 +4,7 @@
 
 Defines the `/api/2.0/ai/projects` contract the client consumes: what an AI project is on the server, who may do what, how requests are validated and which answers and errors the client can rely on. Served by ASC.AI.Chat (Node), which delegates to the .NET AI service.
 
-Like the agents API, `ai/projects` carries only what is specific to a project: the list with its filters, get, create, update, delete, and the `skills` and `knowledge` listings. Everything a project shares with a room (pin, mute, duplicate, leave, owner change, logo removal, members, invitation links, resend, history) goes through the room routes (`files/rooms/{id}/...`, `files/owner`, `files/fileops/duplicate`, `settings/notification/rooms`), which SHALL accept a room of type 12 wherever they accept the other room types, with the project rules below applied.
+Like the agents API, `ai/projects` carries only what is specific to a project: the list with its filters, get, create, update, delete, and the `skills` and `knowledge` listings. Everything a project shares with a room (pin, mute, leave, owner change, logo removal, members, invitation links, resend, history) goes through the room routes (`files/rooms/{id}/...`, `files/owner`, `settings/notification/rooms`), which SHALL accept a room of type 12 wherever they accept the other room types, with the project rules below applied.
 
 ## ADDED Requirements
 
@@ -19,12 +19,19 @@ An AI project SHALL be a room of type 12 (`FolderType.AiProjectRoom` 40) under i
 - **WHEN** a client tries to create a file or folder inside a project
 - **THEN** the request is refused: a project holds no content
 
+### Requirement: Project tags
+A project SHALL carry tags as a room does: `tags` (names) in its DTO, bound and unbound through `files/rooms/{id}/tags`, and listed in the portal's `files/tags`.
+
+#### Scenario: Tag bound in the list
+- **WHEN** a Project manager binds the tag "sales" to a project through `files/rooms/{id}/tags`
+- **THEN** the project is listed with `tags: ["sales"]` and "sales" is in `files/tags`
+
 ### Requirement: Roles
-A project SHALL have three roles: project owner (`access` 1, the room's `createdBy`), Project manager (`access` 9, portal owner, DocSpace admin or room admin only, never a group) and Member (`access` 11, any user type including guests, directly or through a group). Each project member SHALL also hold Viewer (`Read`) on every linked room, granted by the server; that Viewer share is never a project role.
+A project SHALL have three roles: project owner (`access` 1, the room's `createdBy`), Project manager (`access` 9, portal owner, DocSpace admin or room admin only, never a group) and Member (`access` 2, the room's Read; any user type including guests, directly or through a group). Each member SHALL also hold Viewer on every linked room, granted by the server. A project SHALL NOT be duplicated.
 
 #### Scenario: Guest as Member
 - **WHEN** a Project manager invites a guest as Member
-- **THEN** the guest is accepted with `access` 11
+- **THEN** the guest is accepted with `access` 2
 
 #### Scenario: Guest as Project manager
 - **WHEN** a Project manager tries to give a User or a group the Project manager role
@@ -49,7 +56,7 @@ Reading a project (get, list, history, members, skills, knowledge) and pinning i
 - **THEN** the answer is 200 with the member list
 
 ### Requirement: Management rights
-Update, logo delete, member changes, resend, the invitation link and duplicate SHALL be allowed to the owner and Project managers. Members SHALL get 403. An admin outside the project SHALL get 403 on all of them except duplicate. Mute SHALL require membership (owner, Project manager or Member).
+Update, logo delete, member changes, resend and the invitation link SHALL be allowed to the owner and Project managers. Members and an admin outside the project SHALL get 403. Mute SHALL require membership (owner, Project manager or Member).
 
 #### Scenario: Member edits
 - **WHEN** a Member sends `PUT ai/projects/{id}` with a new title
@@ -78,7 +85,7 @@ Only the portal owner, DocSpace admins and room admins SHALL create projects. Th
 - **THEN** the answer is 403 and no room id in the body is validated
 
 ### Requirement: Body validation
-The server SHALL validate a create or update body before writing anything; the first failure answers 400 with a localised message. The title SHALL be 1–170 characters after trimming, the colour six hex digits, the cover a known id. Unknown body properties (room-only fields such as `tags`, `quota`, `lifetime`, `watermark`) SHALL be refused. An uploaded logo goes in the body as `logo` and is removed through the room route `DELETE files/rooms/{id}/logo`.
+The server SHALL validate a create or update body before writing anything; the first failure answers 400 with a localised message. The title SHALL be 1–170 characters after trimming, the colour six hex digits, the cover a known id. `tags` (names) SHALL be taken as a room's create and edit take them. Unknown body properties (such as `quota`, `lifetime`, `watermark`) SHALL be refused. An uploaded logo goes in the body as `logo` and is removed through the room route `DELETE files/rooms/{id}/logo`.
 
 #### Scenario: Room-only field
 - **WHEN** the body carries `tags` or `quota`
@@ -137,7 +144,7 @@ When a user becomes a member (invite, accepted link, owner change) and when a ro
 - **THEN** the membership change succeeds and `aiProjectWarnings` reports the room
 
 ### Requirement: Membership routes
-Members SHALL be managed through the room routes `GET/PUT files/rooms/{id}/share`, `POST .../resend` and `GET/PUT .../links`; leaving is a share change that sets the caller's own `access` to 0. `access` SHALL be 0 (remove), 9 or 11; the owner SHALL NOT appear in a share change. A project SHALL have at most one invitation link, which joins as Member. The owner and a member who belongs only through a group SHALL NOT be able to leave.
+Members SHALL be managed through the room routes `GET/PUT files/rooms/{id}/share`, `POST .../resend` and `GET/PUT .../links`; leaving is a share change that sets the caller's own `access` to 0. `access` SHALL be 0 (remove), 2 or 9; the owner SHALL NOT appear in a share change. A project SHALL have at most one invitation link, which joins as Member. The owner and a member who belongs only through a group SHALL NOT be able to leave.
 
 #### Scenario: Owner leaves
 - **WHEN** the owner sets their own `access` to 0 through `PUT files/rooms/{id}/share` of a project
@@ -154,16 +161,12 @@ Members SHALL be managed through the room routes `GET/PUT files/rooms/{id}/share
 - **WHEN** the owner hands the project to a room admin and stays
 - **THEN** the room admin is the owner and the former owner is listed with `access` 9
 
-### Requirement: Delete and duplicate
-Delete (`DELETE ai/projects/{id}`) SHALL be permanent (no archive), answered as a file operation to poll, and SHALL remove the project's settings and the members' threads while leaving linked rooms and their Viewer shares untouched. Duplicate (`PUT files/fileops/duplicate` with the project id in `folderIds`) SHALL copy name, logo, model and the linked rooms the caller can read, SHALL NOT copy members, links, pins, mute or threads, and SHALL make the caller the owner of the copy.
+### Requirement: Delete
+Delete (`DELETE ai/projects/{id}`) SHALL be permanent (no archive), answered as a file operation to poll, and SHALL remove the project's settings and the members' threads while leaving linked rooms and their Viewer shares untouched.
 
 #### Scenario: Delete keeps rooms
 - **WHEN** the owner deletes a project with linked rooms
 - **THEN** the linked rooms and the members' Viewer access on them remain
-
-#### Scenario: Duplicate drops members
-- **WHEN** a Project manager duplicates a project with five members
-- **THEN** the copy has one member: the Project manager as owner
 
 ### Requirement: Pin and mute
 Pin and unpin (`PUT files/rooms/{id}/pin` and `.../unpin`) SHALL be personal to the caller, with at most 10 pinned projects per user (an 11th pin answers 403) and a separate counter from rooms and agents. Mute (`POST settings/notification/rooms`) SHALL be personal and SHALL require membership.
@@ -173,7 +176,7 @@ Pin and unpin (`PUT files/rooms/{id}/pin` and `.../unpin`) SHALL be personal to 
 - **THEN** the answer is 403
 
 ### Requirement: Listing query
-`GET ai/projects` SHALL return a page of the projects the caller may see, pinned first. Query: `filterValue` (title), `sortBy` (`DateAndTime` default, `AZ`, `DateAndTimeCreation`), `sortOrder`, `startIndex`, `count`, `subjectId` (owner), `role` (0/1/9/11), `hasInstructions`, `hasKnowledge`, `linkedRoomId` (a linked room of either kind). No other filter exists; the client's room filter SHALL be sent as `linkedRoomId`.
+`GET ai/projects` SHALL return a page of the projects the caller may see, pinned first. Query: `filterValue` (title), `sortBy` (`DateAndTime` default, `AZ`, `DateAndTimeCreation`, `Tags`, `Author`), `sortOrder`, `startIndex`, `count`, the subject and tag filters of `files/rooms` (`subjectId` with `excludeSubject`, `subjectOwnerId`, `tags` as a JSON array, `withoutTags`), `role`, `hasInstructions`, `hasKnowledge`, `linkedRoomId`. No other filter exists.
 
 #### Scenario: Unreadable linked room filter
 - **WHEN** the caller filters by a `linkedRoomId` they cannot read
@@ -184,7 +187,7 @@ Pin and unpin (`PUT files/rooms/{id}/pin` and `.../unpin`) SHALL be personal to 
 - **THEN** the answer is 200 with an empty page
 
 ### Requirement: Listing items
-Each listed project SHALL be a full room DTO with its `aiProject` block, where every linked room reports `available`, `archived`, its logo, and `skillsCount` (Instructions) or `totalFiles` / `indexedFiles` (Knowledge). A linked room the caller cannot read SHALL be reported with `available: false` and no title.
+Each listed project SHALL be a full room DTO (`tags`, `createdBy`, `updatedBy` included) with its `aiProject` block, where every linked room reports `available`, `archived`, its logo, and `skillsCount` (Instructions) or `totalFiles` / `indexedFiles` (Knowledge). A linked room the caller cannot read SHALL be reported with `available: false` and no title.
 
 #### Scenario: Deleted linked room
 - **WHEN** a linked Knowledge room was deleted
@@ -237,7 +240,7 @@ When a project's profile is deleted or loses the chat capability, the server SHA
 - **THEN** the project shows its model as unavailable, its owner and managers are notified, and chatting in it answers 409
 
 ### Requirement: Notifications and history
-The server SHALL e-mail members on invitation, role change, removal and project deletion (mute-aware, never to the actor), with project wording and the roles "Project manager" / "Member". The project history (`GET files/folder/{id}/log`) SHALL record create, rename, model change, room linked / unlinked, Viewer grants on linked rooms, duplicate, owner change, model unavailable, and the membership events, so the History tab can show them.
+The server SHALL e-mail members on invitation, role change, removal and project deletion (mute-aware, never to the actor), with project wording and the roles "Project manager" / "Member". The project history (`GET files/folder/{id}/log`) SHALL record create, rename, model change, room linked / unlinked, Viewer grants on linked rooms, owner change, model unavailable, and the membership events, so the History tab can show them.
 
 #### Scenario: Invitation e-mail
 - **WHEN** a Project manager invites a user with notifications on

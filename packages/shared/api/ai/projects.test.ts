@@ -56,6 +56,12 @@ describe("toAiProject", () => {
     expect(project.aiProject.knowledgeRooms[0]).toMatchObject({ available: false, archived: true });
     expect(project.aiProject.canEditSettings).toBe(false);
     expect(project.aiProject.warnings).toBeUndefined();
+    expect(project.tags).toEqual([]);
+    expect(project.updatedBy).toEqual(project.createdBy);
+  });
+
+  it("carries the room tags", () => {
+    expect(toAiProject(folder({ tags: ["sales", "legal"] })).tags).toEqual(["sales", "legal"]);
   });
 
   it("keeps a colour that already carries the hash", () => {
@@ -107,8 +113,10 @@ describe("the calls", () => {
     request.mockResolvedValueOnce({ total: 1, folders: [folder()] });
     const page = await getAiProjects({
       filterValue: "sa",
-      sortBy: "AZ",
+      sortBy: "Tags",
       subjectId: undefined,
+      subjectOwnerId: "u1",
+      tags: ["sales", "legal"],
       linkedRoomId: 12,
       startIndex: 0,
       count: 100,
@@ -116,7 +124,7 @@ describe("the calls", () => {
     expect(request).toHaveBeenCalledWith(
       expect.objectContaining({
         method: "GET",
-        url: "/ai/projects?filterValue=sa&sortBy=AZ&linkedRoomId=12&startIndex=0&count=100",
+        url: "/ai/projects?filterValue=sa&sortBy=Tags&subjectOwnerId=u1&tags=%5B%22sales%22%2C%22legal%22%5D&linkedRoomId=12&startIndex=0&count=100",
       }),
     );
     expect(page.total).toBe(1);
@@ -131,6 +139,7 @@ describe("the calls", () => {
     request.mockResolvedValue(folder());
     await createAiProject({
       title: "Sales",
+      tags: ["sales"],
       logo: { color: "#FF6680" },
       aiProject: { profileId: "p1", instructionsRoomIds: [12], knowledgeRoomIds: [] },
     });
@@ -139,6 +148,7 @@ describe("the calls", () => {
       url: "/ai/projects",
       data: {
         title: "Sales",
+        tags: ["sales"],
         color: "FF6680",
         aiProject: { profileId: "p1", instructionsRoomIds: [12], knowledgeRoomIds: [] },
       },

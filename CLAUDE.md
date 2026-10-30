@@ -19,6 +19,9 @@ pnpm test:store                # only client store tests (src/store, incl. Files
 # Unit tests (sdk package, Vitest)
 pnpm test:sdk
 
+# Unit tests (doceditor package, Vitest)
+pnpm test:doceditor
+
 # Run single unit test file
 cd packages/shared && pnpm vitest run path/to/file.test.ts
 cd packages/client && pnpm exec vitest run src/store/filesStore
@@ -224,6 +227,7 @@ failure aborts the push:
 4. `pnpm run test` — shared unit tests
 5. `pnpm run test:client` — client unit tests (incl. store tests)
 6. `pnpm run test:sdk` — sdk unit tests
+7. `pnpm run test:doceditor` — doceditor unit tests
 
 Expect a push to take several minutes. To debug a blocked push, run the
 failing command individually. Never bypass the gate with `git push --no-verify`.

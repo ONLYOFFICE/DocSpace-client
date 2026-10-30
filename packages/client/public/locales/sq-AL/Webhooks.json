@@ -94,6 +94,7 @@
   "WebhookName": "Emri i Webhook-ut",
   "WebhookRedilivered": "Webhook u ridorëzuar",
   "WebhookRemoved": "Webhook-u u fshi",
+  "WebhookWasDeleted": "Ky webhook është fshirë",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Guida e Webhook-ave",
   "WebhooksInfo": "Përdorni webhook për të kryer veprime të personalizuara në anën e çdo aplikacioni ose faqe interneti që po përdorni bazuar në ngjarje të ndryshme në {{organizationName}} {{productName}}.\nKëtu, ju mund të krijoni dhe menaxhoni të gjitha webhook-et tuaja, t'i konfiguroni ato dhe të shfletoni historikun e çdo webhook për të audituar performancën e tyre."

@@ -35,8 +35,14 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
+import debounce from "lodash.debounce";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import SocketHelper, {
+  SocketEvents,
+  type TWebhookData,
+  type TWebhookLogData,
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import {
   createWebhook,
@@ -51,6 +57,8 @@ import {
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TTranslation } from "@docspace/shared/types";
 import type { DateTime } from "luxon";
+
+import i18n from "../i18n";
 
 export type TWebhook = {
   id: number;
@@ -120,11 +128,227 @@ class WebhooksStore {
 
   errorWebhooks: { error: string } | null = null;
 
+  isWebhooksListActive = false;
+
+  activeConfigId: number | null = null;
+
+  historyParams: TJournalParams | null = null;
+
+  // A subscription changed while its journal was open: the list is re-read
+  // when it is shown again, since the section does not reload it on the way back.
+  isWebhooksListStale = false;
+
+  // Only the latest event details request may fill eventDetails.
+  eventDetailsRequest = 0;
+
   constructor(settingsStore: SettingsStore) {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      debounceReloadWebhooks: false,
+      debounceLoadJournalTop: false,
+      isWebhooksListStale: false,
+      eventDetailsRequest: false,
+    });
 
     this.settingsStore = settingsStore;
+
+    SocketHelper?.on(SocketEvents.AddWebhook, this.onWebhookChanged);
+    SocketHelper?.on(SocketEvents.UpdateWebhook, this.onWebhookChanged);
+    SocketHelper?.on(SocketEvents.DeleteWebhook, this.onWebhookDeleted);
+    SocketHelper?.on(SocketEvents.AddWebhookLog, this.onWebhookLogAdded);
+    SocketHelper?.on(SocketEvents.UpdateWebhookLog, this.onWebhookLogUpdated);
   }
+
+  setIsWebhooksListActive = (isActive: boolean) => {
+    this.isWebhooksListActive = isActive;
+
+    if (!isActive || !this.isWebhooksListStale) return;
+
+    this.isWebhooksListStale = false;
+    this.reloadWebhooks();
+  };
+
+  setActiveConfigId = (configId: number | string | null) => {
+    this.activeConfigId = configId === null ? null : Number(configId);
+  };
+
+  clearHistoryParams = () => {
+    this.historyParams = null;
+    this.debounceLoadJournalTop.cancel();
+  };
+
+  clearEventDetails = () => {
+    this.eventDetailsRequest += 1;
+    this.eventDetails = {};
+  };
+
+  onWebhookChanged = () => {
+    if (this.isWebhooksListActive) {
+      this.debounceReloadWebhooks();
+      return;
+    }
+
+    if (this.activeConfigId !== null) this.isWebhooksListStale = true;
+  };
+
+  debounceReloadWebhooks = debounce(
+    () => {
+      this.reloadWebhooks();
+    },
+    500,
+    { maxWait: 2000 },
+  );
+
+  reloadWebhooks = async () => {
+    try {
+      const webhooksData = (await getAllWebhooks()) as TWebhookConfigData[];
+
+      runInAction(() => {
+        this.webhooks = this.mapWebhooks(webhooksData);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  onWebhookDeleted = ({ id }: TWebhookData) => {
+    this.webhooks = this.webhooks.filter((webhook) => webhook.id !== id);
+
+    if (this.activeConfigId !== id) return;
+
+    window.DocSpace.navigate("/developer-tools/webhooks");
+    i18n
+      .loadNamespaces("Webhooks")
+      .then(() => toastr.info(i18n.t("Webhooks:WebhookWasDeleted")));
+  };
+
+  isHistoryOf = (configId: number) =>
+    !!this.historyParams && Number(this.historyParams.configId) === configId;
+
+  onWebhookLogAdded = ({ configId }: TWebhookLogData) => {
+    if (!this.isHistoryOf(configId)) return;
+
+    this.debounceLoadJournalTop();
+  };
+
+  onWebhookLogUpdated = ({ id, configId }: TWebhookLogData) => {
+    if (Number(this.eventDetails?.id) === id) {
+      this.fetchEventData(id).catch((error) => console.error(error));
+    }
+
+    if (!this.isHistoryOf(configId)) return;
+
+    const index = this.historyItems.findIndex((item) => item.id === id);
+
+    if (index === -1 || index < this.FETCH_COUNT) {
+      this.debounceLoadJournalTop();
+      return;
+    }
+
+    this.loadJournalItem(id);
+  };
+
+  debounceLoadJournalTop = debounce(
+    () => {
+      this.loadJournalTop();
+    },
+    300,
+    { maxWait: 1000 },
+  );
+
+  loadJournalTop = async () => {
+    const params = this.historyParams;
+
+    if (!params) return;
+
+    const count = this.FETCH_COUNT;
+
+    try {
+      const historyData = (await getWebhooksJournal({
+        ...params,
+        startIndex: 0,
+        count,
+      })) as TJournalData;
+
+      if (this.historyParams !== params) return;
+
+      const topItems = historyData.items;
+      const isWholeJournal = topItems.length >= historyData.total;
+      const lowestTopId = Math.min(...topItems.map((item) => item.id));
+
+      runInAction(() => {
+        const maxLoadedId = Math.max(
+          ...this.historyItems.map((item) => item.id),
+        );
+        const overlaps = lowestTopId <= maxLoadedId;
+        const restItems =
+          isWholeJournal || !overlaps
+            ? []
+            : this.historyItems.filter((item) => item.id < lowestTopId);
+        const items = [...topItems, ...restItems];
+        const itemIds = new Set(items.map((item) => item.id));
+
+        this.historyItems = items;
+        this.startIndex = items.length;
+        this.totalItems = historyData.total;
+        this.checkedEventIds = this.checkedEventIds.filter((checkedId) =>
+          itemIds.has(checkedId),
+        );
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  loadJournalItem = async (id: number) => {
+    const params = this.historyParams;
+
+    if (!params) return;
+
+    try {
+      const historyData = (await getWebhooksJournal({
+        ...params,
+        eventId: id,
+      })) as TJournalData;
+
+      if (this.historyParams !== params) return;
+
+      const updatedItem = historyData.items.find((item) => item.id === id);
+
+      runInAction(() => {
+        if (updatedItem) {
+          this.historyItems = this.historyItems.map((item) =>
+            item.id === id ? updatedItem : item,
+          );
+          return;
+        }
+
+        if (!this.historyItems.some((item) => item.id === id)) return;
+
+        this.historyItems = this.historyItems.filter((item) => item.id !== id);
+        this.startIndex -= 1;
+        this.totalItems -= 1;
+        this.checkedEventIds = this.checkedEventIds.filter(
+          (checkedId) => checkedId !== id,
+        );
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  mapWebhooks = (webhooksData: TWebhookConfigData[]): TWebhook[] =>
+    webhooksData.map((data) => ({
+      id: data.configs.id,
+      name: data.configs.name,
+      uri: data.configs.uri,
+      secretKey: data.configs.secretKey,
+      enabled: data.configs.enabled,
+      ssl: data.configs.ssl,
+      status: data.status,
+      triggers: data.configs.triggers,
+      createdBy: data.configs.createdBy,
+      targetId: data.configs.targetId,
+    }));
 
   setRetryPendingFalse = () => {
     this.isRetryPending = false;
@@ -159,18 +383,7 @@ class WebhooksStore {
         await getPortalPasswordSettings();
       }
       runInAction(() => {
-        this.webhooks = webhooksData.map((data) => ({
-          id: data.configs.id,
-          name: data.configs.name,
-          uri: data.configs.uri,
-          secretKey: data.configs.secretKey,
-          enabled: data.configs.enabled,
-          ssl: data.configs.ssl,
-          status: data.status,
-          triggers: data.configs.triggers,
-          createdBy: data.configs.createdBy,
-          targetId: data.configs.targetId,
-        }));
+        this.webhooks = this.mapWebhooks(webhooksData);
       });
     } catch (error) {
       if (axios.isCancel(error)) return;
@@ -266,6 +479,7 @@ class WebhooksStore {
   };
 
   fetchHistoryItems = async (params: TJournalParams) => {
+    this.historyParams = params;
     this.totalItems = 0;
     this.startIndex = 0;
     const count = params.count ? params.count : this.FETCH_COUNT;
@@ -282,20 +496,35 @@ class WebhooksStore {
   };
 
   fetchMoreItems = async (params: TJournalParams) => {
+    const { historyParams, startIndex } = this;
     const count = params.count ? params.count : this.FETCH_COUNT;
     const historyData = (await getWebhooksJournal({
       ...params,
-      startIndex: this.startIndex,
+      startIndex,
       count,
     })) as TJournalData;
+
+    if (this.historyParams !== historyParams) return;
+    if (this.startIndex !== startIndex) return;
+
     runInAction(() => {
+      const loadedIds = new Set(this.historyItems.map((item) => item.id));
+
       this.startIndex += count;
-      this.historyItems = [...this.historyItems, ...historyData.items];
+      this.historyItems = [
+        ...this.historyItems,
+        ...historyData.items.filter((item) => !loadedIds.has(item.id)),
+      ];
     });
   };
 
   fetchEventData = async (eventId: number) => {
+    this.eventDetailsRequest += 1;
+    const request = this.eventDetailsRequest;
     const data = (await getWebhooksJournal({ eventId })) as TJournalData;
+
+    if (request !== this.eventDetailsRequest) return;
+
     this.eventDetails =
       data.items.find((item) => Number(item.id) === Number(eventId)) ?? {};
   };

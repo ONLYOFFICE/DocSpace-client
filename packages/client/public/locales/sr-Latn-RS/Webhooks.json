@@ -94,6 +94,7 @@
   "WebhookName": "Ime webhooka",
   "WebhookRedilivered": "Webhook ponovo isporučen",
   "WebhookRemoved": "Webhook uklonjen",
+  "WebhookWasDeleted": "Ovaj webhook je obrisan",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Webhooks vodič",
   "WebhooksInfo": "Koristite webhooks da biste izvršili prilagođene akcije na strani bilo koje aplikacije ili web stranice koju koristite na osnovu različitih događaja u {{organizationName}} {{productName}}-u.\nOvde možete kreirati i upravljati svim svojim webhook-ovima, konfigurisati ih i pregledati istoriju svakog webhook-a kako biste proverili njihovu izvedbu."

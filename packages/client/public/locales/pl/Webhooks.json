@@ -94,6 +94,7 @@
   "WebhookName": "Nazwa webhooka",
   "WebhookRedilivered": "Webhook został dostarczony ponownie",
   "WebhookRemoved": "Webhook został usunięty",
+  "WebhookWasDeleted": "Ten webhook został usunięty",
   "Webhooks": "Webhooki",
   "WebhooksGuide": "Przewodnik po webhookach",
   "WebhooksInfo": "Używaj webhooków do wykonywania niestandardowych działań po stronie dowolnej aplikacji lub witryny internetowej, z której korzystasz na podstawie różnych zdarzeń w {{organizationName}} {{productName}}.\nTutaj możesz tworzyć webhooki, zarządzać nimi, konfigurować je, a także przeglądać historię wszystkich webhooków, by zweryfikować ich wydajność."

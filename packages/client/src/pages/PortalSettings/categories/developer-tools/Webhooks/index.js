@@ -62,6 +62,8 @@ const Webhooks = (props) => {
     editWebhook,
     deleteWebhook,
     errorWebhooks,
+    webhooks,
+    setIsWebhooksListActive,
 
     isLoadedArticleBody,
     isLoadedSectionHeader,
@@ -70,6 +72,12 @@ const Webhooks = (props) => {
   const { t } = useTranslation(["Webhooks", "Common"]);
 
   setDocumentTitle(t("Webhooks"));
+
+  useEffect(() => {
+    setIsWebhooksListActive(true);
+
+    return () => setIsWebhooksListActive(false);
+  }, []);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [isCreateOpened, setIsCreateOpened] = useState(
@@ -92,6 +100,16 @@ const Webhooks = (props) => {
   const openSettingsModal = () => setIsSettingsOpened(true);
   const closeDeleteModal = () => setIsDeleteOpened(false);
   const openDeleteModal = () => setIsDeleteOpened(true);
+
+  useEffect(() => {
+    if (!currentWebhook.id) return;
+    if (webhooks.some((webhook) => webhook.id === currentWebhook.id)) return;
+
+    if (isSettingsOpened) toastr.info(t("WebhookWasDeleted"));
+
+    setIsSettingsOpened(false);
+    setIsDeleteOpened(false);
+  }, [webhooks]);
 
   const handleWebhookUpdate = async (webhookInfo) => {
     await editWebhook(currentWebhook, webhookInfo);
@@ -187,6 +205,8 @@ export default inject(({ webhooksStore, common }) => {
     editWebhook,
     deleteWebhook,
     errorWebhooks,
+    webhooks,
+    setIsWebhooksListActive,
   } = webhooksStore;
 
   const { isLoadedArticleBody, isLoadedSectionHeader } = common;
@@ -199,6 +219,8 @@ export default inject(({ webhooksStore, common }) => {
     editWebhook,
     deleteWebhook,
     errorWebhooks,
+    webhooks,
+    setIsWebhooksListActive,
     isLoadedArticleBody,
     isLoadedSectionHeader,
   };

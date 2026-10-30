@@ -136,6 +136,7 @@ type DashboardProps = ChatNoAccessStoreProps & {
   canManageApps: boolean;
   /** Fetches the apps list once, which `isAppInstalled` reads. */
   ensureAppsLoaded: () => void;
+  setShownInfoPanelWidth: (width: number) => void;
 };
 
 const UPLOAD_LINK_ID = "dashboard-upload-link";
@@ -161,6 +162,7 @@ const Dashboard = (props: DashboardProps) => {
     isAppInstalled,
     canManageApps,
     ensureAppsLoaded,
+    setShownInfoPanelWidth,
   } = props;
   const { t } = useTranslation(["Common"]);
   useDocumentTitle("Common:Home", logoText);
@@ -263,6 +265,11 @@ const Dashboard = (props: DashboardProps) => {
   React.useEffect(() => {
     if (!isAiChatAvailable && isChatPanelVisible) closeChatPanel();
   }, [isAiChatAvailable, isChatPanelVisible, closeChatPanel]);
+
+  const onChatShownWidthChange = React.useCallback(
+    (width?: number) => setShownInfoPanelWidth(width ?? 0),
+    [setShownInfoPanelWidth],
+  );
 
   const isDesktop = useIsDesktop();
   const isAiChatFullscreen =
@@ -449,6 +456,8 @@ const Dashboard = (props: DashboardProps) => {
           isFullscreen={isAiChatFullscreen}
           width={aiChatPanel.chatPanelWidth}
           onResize={aiChatPanel.setChatPanelWidth}
+          onLiveResize={setShownInfoPanelWidth}
+          onShownWidthChange={onChatShownWidthChange}
           onRequestFullscreen={aiChatPanel.setChatPanelFullscreen}
           onExitFullscreen={aiChatPanel.unsetChatPanelFullscreen}
         >
@@ -475,6 +484,7 @@ const DashboardConnected = inject((stores: TStore) => {
     aiAgentsTourStore,
     dashboardTourStore,
     appsStore,
+    infoPanelStore,
   } = stores;
 
   // The app cards an onboarding tour can be started from. An app that isn't
@@ -524,6 +534,7 @@ const DashboardConnected = inject((stores: TStore) => {
     isAppInstalled: appsStore.isInstalled,
     canManageApps: appsStore.canManageApps,
     ensureAppsLoaded: appsStore.ensureLoaded,
+    setShownInfoPanelWidth: infoPanelStore.setShownWidth,
   };
 })(observer(Dashboard));
 

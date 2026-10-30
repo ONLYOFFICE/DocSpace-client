@@ -91,7 +91,9 @@ const markStops = (container: Locator) =>
         getComputedStyle(el).visibility !== "hidden" &&
         !(el instanceof HTMLInputElement && el.type === "radio" && !el.checked),
     );
-    stops.forEach((el, index) => el.setAttribute("data-trap-stop", String(index)));
+    stops.forEach((el, index) =>
+      el.setAttribute("data-trap-stop", String(index)),
+    );
     return stops.map(
       (el) =>
         `${el.tagName.toLowerCase()} "${(el.getAttribute("aria-label") || el.getAttribute("data-testid") || el.textContent || "").trim().slice(0, 30)}"`,
@@ -142,7 +144,9 @@ const tabToTestId = async (page: Page, testId: string, limit = 80) => {
   for (let i = 0; i < limit; i += 1) {
     await page.keyboard.press("Tab");
     const id = await page.evaluate(() =>
-      document.activeElement?.closest("[data-testid]")?.getAttribute("data-testid"),
+      document.activeElement
+        ?.closest("[data-testid]")
+        ?.getAttribute("data-testid"),
     );
     if (id === testId) return;
   }
@@ -252,7 +256,11 @@ test.describe("Focus trap in a files dialog", () => {
     await expect(page.getByTestId("table-body")).toBeVisible();
 
     await page.getByTestId("main-button").click();
-    await page.locator('[role="menuitem"]').filter({ hasText: "Folder" }).first().click();
+    await page
+      .locator('[role="menuitem"]')
+      .filter({ hasText: "Folder" })
+      .first()
+      .click();
 
     const input = page.getByTestId("new_folder_text_input");
     await expect(input).toBeFocused();
@@ -307,6 +315,7 @@ test.describe("Focus trap in the files selector", () => {
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       myHandler(TEST_PORT, true),
       myDocumentsHandler(TEST_PORT, true),
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault),
     );
   });
 
@@ -326,12 +335,72 @@ test.describe("Focus trap in the files selector", () => {
     await expect(panel).toBeVisible();
     // It opens with the focus on the list, where a Tab used to be sent back
     // to the search box every time.
-    await expect
-      .poll(() => focusIsIn(panel))
-      .toBe(true);
+    await expect.poll(() => focusIsIn(panel)).toBe(true);
 
     await expectFocusTrapped(page, panel);
     await expect(panel.getByRole("button", { name: "Cancel" })).toBeVisible();
+  });
+
+  test("Move to: the list, its crumbs and its rows work from the keyboard", async ({
+    page,
+    baseUrl,
+  }) => {
+    const moves: string[] = [];
+    page.on("request", (request) => {
+      if (/fileops\/move/.test(request.url())) moves.push(request.url());
+    });
+
+    await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
+    const row = page.getByTestId("table-body").getByTestId("table-row-3");
+    await expect(row).toBeVisible();
+    await row.getByTestId("context-menu-button").click();
+    await page.getByTestId("option_move-or-copy").hover();
+    await page.getByTestId("option_move-to").click();
+
+    const panel = page.getByTestId("aside").first();
+    const list = panel.getByRole("listbox");
+
+    // The list is the one stop for all its rows, and shows which one the
+    // keyboard is on.
+    await expect(list).toBeFocused();
+    await expect(list).toHaveAttribute("aria-activedescendant", /option/);
+
+    const activeOption = () =>
+      list.evaluate((el) => {
+        const id = el.getAttribute("aria-activedescendant");
+        return id ? (document.getElementById(id)?.textContent ?? "") : "";
+      });
+
+    // Up to the root through the crumb, from the keyboard.
+    const apps = panel.getByRole("link", { name: "Apps" });
+    for (
+      let i = 0;
+      i < 6 && !(await apps.evaluate((el) => el === document.activeElement));
+      i += 1
+    )
+      await page.keyboard.press("Shift+Tab");
+    await expect(apps).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(panel.locator('[aria-current="page"]')).toHaveText("Apps");
+
+    // Down the list to Rooms with the arrows, and into it with Enter.
+    for (
+      let i = 0;
+      i < 6 && !(await list.evaluate((el) => el === document.activeElement));
+      i += 1
+    )
+      await page.keyboard.press("Tab");
+    await expect(list).toBeFocused();
+    for (let i = 0; i < 6 && (await activeOption()) !== "Rooms"; i += 1)
+      await page.keyboard.press("ArrowDown");
+    expect(await activeOption()).toBe("Rooms");
+
+    await page.keyboard.press("Enter");
+    await expect(panel.locator('[aria-current="page"]')).toHaveText("Rooms");
+
+    // Opening a row moved nothing, and the panel is still open on the list.
+    await expect(list).toBeFocused();
+    expect(moves).toEqual([]);
   });
 });
 

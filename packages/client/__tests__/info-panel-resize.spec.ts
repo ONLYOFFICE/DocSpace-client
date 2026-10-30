@@ -36,6 +36,7 @@
 import type { Page } from "@playwright/test";
 
 import {
+  aiConfigHandler,
   settingsHandler,
   TypeSettings,
   selfActivationStatusHandler,
@@ -348,6 +349,40 @@ test.describe("Info panel resize on a desktop", () => {
     await expect(
       page.getByTestId("table-body").locator(".table-row").first(),
     ).toBeVisible();
+  });
+});
+
+test.describe("Live chat launcher beside the AI chat on the dashboard", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(...mockPortal(), aiConfigHandler(TEST_PORT));
+  });
+
+  test("moves clear of the docked chat and back once it closes", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.addInitScript(() =>
+      localStorage.setItem("live_chat_state", "true"),
+    );
+    await stubZendeskRecorder(page);
+    await page.setViewportSize(WIDE);
+    await page.goto(`${baseUrl}/dashboard`);
+
+    const createSection = page.locator('[data-tour-id="dashboard-create"]');
+    await expect(createSection).toBeVisible();
+
+    await expect.poll(() => launcherOffset(page)).toBeDefined();
+    const closed = (await launcherOffset(page)) as number;
+
+    await createSection
+      .getByRole("button", { name: "AI Chat", exact: true })
+      .click();
+    await expect(page.locator("#ChatPanelWrapper")).toBeVisible();
+    await expect.poll(() => launcherOffset(page)).toBe(closed + DEFAULT_WIDTH);
+
+    await page.getByTestId("ai-chat-panel-close").click();
+    await expect(page.locator("#ChatPanelWrapper")).toBeHidden();
+    await expect.poll(() => launcherOffset(page)).toBe(closed);
   });
 });
 

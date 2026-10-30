@@ -40,6 +40,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 
 import styles from "./main.module.scss";
+import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 
 type CardProps = {
   title: string;
@@ -113,6 +114,8 @@ const Card = ({
         onKeyDown={(e: React.KeyboardEvent) => {
           if (e.key !== "Enter" && e.key !== " ") return;
           e.preventDefault();
+          // What it opens may listen for this press itself, on the window.
+          consumeKey(e);
           handleCardClick();
         }}
         color="accent"

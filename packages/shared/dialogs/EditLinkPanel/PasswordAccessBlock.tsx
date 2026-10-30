@@ -45,6 +45,7 @@ import { ALLOWED_PASSWORD_CHARACTERS } from "../../constants";
 import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import type { PasswordInputHandle } from "@onlyoffice/apps-ui-kit/components/password-input";
+import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 
 import ToggleBlock from "./ToggleBlock";
 import type { PasswordAccessBlockProps } from "./EditLinkPanel.types";
@@ -92,6 +93,8 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
     (event: React.KeyboardEvent) => {
       if (event.key !== "Enter" && event.key !== " ") return;
       event.preventDefault();
+      // What it opens may listen for this press itself, on the window.
+      consumeKey(event);
       action(event);
     };
 

@@ -44,6 +44,7 @@ import {
 	InputType,
 } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 import { useTranslation } from "react-i18next";
 
 import styles from "./user-fields.module.scss";
@@ -190,6 +191,8 @@ const UserFields = (props) => {
 					onKeyDown={(e) => {
 						if (e.key !== "Enter" && e.key !== " ") return;
 						e.preventDefault();
+						// What it opens may listen for this press itself, on the window.
+						consumeKey(e);
 						onClickAdd();
 					}}
 				>

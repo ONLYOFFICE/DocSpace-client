@@ -39,6 +39,7 @@ import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 
 import GoogleWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.google.react.svg?url";
 import NextcloudWorkspaceSvgUrl from "PUBLIC_DIR/images/thirdparties/nextcloud.svg?url";
@@ -138,6 +139,8 @@ const Providers = (props: ProvidersProps) => {
               onKeyDown={(e: React.KeyboardEvent) => {
                 if (e.key !== "Enter" && e.key !== " ") return;
                 e.preventDefault();
+                // What it opens may listen for this press itself, on the window.
+                consumeKey(e);
                 setWorkspace(workspace.title);
               }}
             >

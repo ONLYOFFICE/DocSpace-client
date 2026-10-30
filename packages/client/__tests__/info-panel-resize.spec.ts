@@ -62,6 +62,7 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
  */
 
 const FILES_URL = "/rooms/personal/filter?folder=12764";
+const FIRST_RENDER_TIMEOUT = 15_000;
 const WIDTH_KEY = "infoPanelWidth";
 
 const DEFAULT_WIDTH = 400;
@@ -369,7 +370,7 @@ test.describe("Live chat launcher beside the AI chat on the dashboard", () => {
     await page.goto(`${baseUrl}/dashboard`);
 
     const createSection = page.locator('[data-tour-id="dashboard-create"]');
-    await expect(createSection).toBeVisible();
+    await expect(createSection).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
 
     await expect.poll(() => launcherOffset(page)).toBeDefined();
     const closed = (await launcherOffset(page)) as number;

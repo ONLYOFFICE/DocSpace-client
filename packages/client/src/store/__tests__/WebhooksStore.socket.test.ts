@@ -62,7 +62,10 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
 }));
 
 vi.mock("../../i18n", () => ({
-  default: { t: (key: string) => key },
+  default: {
+    t: (key: string) => key,
+    loadNamespaces: () => Promise.resolve(),
+  },
 }));
 
 vi.mock("@docspace/shared/api/settings", () => ({
@@ -219,11 +222,12 @@ describe("WebhooksStore socket: subscriptions", () => {
     expect(toastr.info).not.toHaveBeenCalled();
   });
 
-  it("leaves the journal of a deleted subscription for the list with a notice", () => {
+  it("leaves the journal of a deleted subscription for the list with a notice", async () => {
     const store = createStore();
     store.setActiveConfigId("7");
 
     emit("s:delete-webhook", { id: 7 });
+    await vi.advanceTimersByTimeAsync(0);
 
     expect(toastr.info).toHaveBeenCalledWith("Webhooks:WebhookWasDeleted");
     expect(navigate).toHaveBeenCalledWith("/developer-tools/webhooks");
@@ -339,6 +343,44 @@ describe("WebhooksStore socket: delivery journal", () => {
     expect(store.totalItems).toBe(9);
     expect(store.hasMoreItems).toBe(true);
     expect(store.checkedEventIds).toEqual([]);
+  });
+
+  it("drops a lower row once the whole journal fits into the top", async () => {
+    const store = createStore();
+    store.FETCH_COUNT = 2;
+    await openHistory(store, logItems(6, 5), 3);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(4), 3));
+    await store.fetchMoreItems(params);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(6, 5), 2));
+
+    emit("s:update-webhook-log", { id: 4, configId: 7 });
+    await settle();
+
+    expect(ids(store)).toEqual([6, 5]);
+    expect(store.hasMoreItems).toBe(false);
+  });
+
+  it("drops a page that loads while the top is being re-read", async () => {
+    const store = createStore();
+    store.FETCH_COUNT = 2;
+    await openHistory(store, logItems(6, 5), 4);
+
+    let resolvePage: (value: unknown) => void = () => {};
+    vi.mocked(getWebhooksJournal).mockReturnValueOnce(
+      new Promise((resolve) => {
+        resolvePage = resolve;
+      }),
+    );
+    const pending = store.fetchMoreItems(params);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(7, 6), 5));
+
+    emit("s:add-webhook-log", { id: 7, configId: 7 });
+    await settle();
+    resolvePage(journal(logItems(4, 3), 4));
+    await pending;
+
+    expect(ids(store)).toEqual([7, 6, 5]);
+    expect(store.startIndex).toBe(3);
   });
 
   it("re-reads by id a record loaded below the top", async () => {

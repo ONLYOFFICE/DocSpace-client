@@ -197,8 +197,10 @@ class WebhooksStore {
 
     if (this.activeConfigId !== id) return;
 
-    toastr.info(i18n.t("Webhooks:WebhookWasDeleted"));
     window.DocSpace.navigate("/developer-tools/webhooks");
+    i18n
+      .loadNamespaces("Webhooks")
+      .then(() => toastr.info(i18n.t("Webhooks:WebhookWasDeleted")));
   };
 
   isHistoryOf = (configId: number) =>
@@ -252,7 +254,7 @@ class WebhooksStore {
       if (this.historyParams !== params) return;
 
       const topItems = historyData.items;
-      const isWholeJournal = topItems.length < count;
+      const isWholeJournal = topItems.length >= historyData.total;
       const lowestTopId = Math.min(...topItems.map((item) => item.id));
 
       runInAction(() => {
@@ -476,15 +478,16 @@ class WebhooksStore {
   };
 
   fetchMoreItems = async (params: TJournalParams) => {
-    const { historyParams } = this;
+    const { historyParams, startIndex } = this;
     const count = params.count ? params.count : this.FETCH_COUNT;
     const historyData = (await getWebhooksJournal({
       ...params,
-      startIndex: this.startIndex,
+      startIndex,
       count,
     })) as TJournalData;
 
     if (this.historyParams !== historyParams) return;
+    if (this.startIndex !== startIndex) return;
 
     runInAction(() => {
       const loadedIds = new Set(this.historyItems.map((item) => item.id));

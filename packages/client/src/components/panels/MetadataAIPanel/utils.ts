@@ -245,6 +245,7 @@ const TEXT_INPUT_TYPES = new Set([
 ]);
 
 export const getUndoShortcut = ({
+  key,
   code,
   ctrlKey,
   metaKey,
@@ -252,11 +253,15 @@ export const getUndoShortcut = ({
   altKey,
 }: Pick<
   KeyboardEvent,
-  "code" | "ctrlKey" | "metaKey" | "shiftKey" | "altKey"
+  "key" | "code" | "ctrlKey" | "metaKey" | "shiftKey" | "altKey"
 >): "undo" | "redo" | null => {
-  if (code === "KeyY" && ctrlKey && !metaKey && !shiftKey && !altKey)
+  const letter = /^[a-z]$/i.test(key)
+    ? key.toLowerCase()
+    : code.replace(/^Key/, "").toLowerCase();
+
+  if (letter === "y" && ctrlKey && !metaKey && !shiftKey && !altKey)
     return "redo";
-  if (code !== "KeyZ" || !(ctrlKey || metaKey) || altKey) return null;
+  if (letter !== "z" || !(ctrlKey || metaKey) || altKey) return null;
 
   return shiftKey ? "redo" : "undo";
 };

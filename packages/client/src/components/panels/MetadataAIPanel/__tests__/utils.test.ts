@@ -302,6 +302,7 @@ describe("fill", () => {
 
   it("reads Ctrl+Z as undo and Ctrl+Shift+Z or Ctrl+Y as redo in any keyboard layout", () => {
     const key = (patch: Partial<KeyboardEvent> = {}) => ({
+      key: "z",
       code: "KeyZ",
       ctrlKey: true,
       metaKey: false,
@@ -309,21 +310,25 @@ describe("fill", () => {
       altKey: false,
       ...patch,
     });
+    const y = { key: "y", code: "KeyY" };
 
     expect(getUndoShortcut(key())).toBe("undo");
     expect(getUndoShortcut(key({ ctrlKey: false, metaKey: true }))).toBe(
       "undo",
     );
-    expect(getUndoShortcut(key({ shiftKey: true }))).toBe("redo");
+    expect(getUndoShortcut(key({ key: "Z", shiftKey: true }))).toBe("redo");
     expect(getUndoShortcut(key({ altKey: true }))).toBeNull();
     expect(getUndoShortcut(key({ ctrlKey: false }))).toBeNull();
-    expect(getUndoShortcut(key({ code: "KeyY" }))).toBe("redo");
+    expect(getUndoShortcut(key(y))).toBe("redo");
+    expect(getUndoShortcut(key({ ...y, shiftKey: true }))).toBeNull();
     expect(
-      getUndoShortcut(key({ code: "KeyY", shiftKey: true })),
+      getUndoShortcut(key({ ...y, ctrlKey: false, metaKey: true })),
     ).toBeNull();
-    expect(
-      getUndoShortcut(key({ code: "KeyY", ctrlKey: false, metaKey: true })),
-    ).toBeNull();
+    expect(getUndoShortcut(key({ code: "KeyY" }))).toBe("undo");
+    expect(getUndoShortcut(key({ key: "y", code: "KeyZ" }))).toBe("redo");
+    expect(getUndoShortcut(key({ code: "KeyW" }))).toBe("undo");
+    expect(getUndoShortcut(key({ key: "w", code: "KeyZ" }))).toBeNull();
+    expect(getUndoShortcut(key({ key: "я" }))).toBe("undo");
   });
 
   it("leaves Ctrl+Z to the text fields", () => {

@@ -53,6 +53,8 @@ const AIPrompt = ({ value, isDisabled, onChange }: AIPromptProps) => {
   const [isOpen, setIsOpen] = useState(!!value);
 
   if (!isOpen) {
+    const open = () => setIsOpen(true);
+
     return (
       <Link
         className={styles.promptLink}
@@ -61,7 +63,15 @@ const AIPrompt = ({ value, isDisabled, onChange }: AIPromptProps) => {
         fontWeight={600}
         color="accent"
         isHovered
-        onClick={() => setIsOpen(true)}
+        role="button"
+        tabIndex={0}
+        onClick={open}
+        onKeyDown={(e) => {
+          if (e.key !== "Enter" && e.key !== " ") return;
+
+          e.preventDefault();
+          open();
+        }}
         dataTestId="metadata_ai_prompt_link"
       >
         {t("Metadata:AIAddInstructions")}

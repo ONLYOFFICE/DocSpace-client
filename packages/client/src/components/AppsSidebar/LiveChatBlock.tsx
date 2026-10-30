@@ -77,7 +77,7 @@ const LiveChatBlock = ({
     (!isDesktop || !!aiChatStore.effectiveFullscreen);
 
   useEffect(() => {
-    if (!isLiveChatAvailable || !isShowLiveChat) return;
+    if (isMobile || !isLiveChatAvailable || !isShowLiveChat) return;
 
     zendeskAPI.addChanges("messenger", isHidden ? "hide" : "show");
   }, [isLiveChatAvailable, isShowLiveChat, isHidden]);

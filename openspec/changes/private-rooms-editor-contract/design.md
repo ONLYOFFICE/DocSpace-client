@@ -736,6 +736,43 @@ on the room's files at removal time, and refuse a save callback whose
 user no longer has rights on the file, since `SaveEditingAsync` stored
 Bob's version 4.
 
+### Run of 2026-10-30, images (task 4.4)
+
+Document Server 10.0.2.5, read from the editors container's request log
+and cache, the portal proxy log, the portal's disc storage and a send
+hook on the editor frame's WebSocket. Times in UTC.
+
+- **By address, same origin.** Bob inserted
+  `http://localhost:8092/static/images/clouds.png` (21,709 bytes) into
+  document 21. His browser fetched the image itself (the proxy log shows
+  the browser's user agent), then sent `POST /upload/<document key>` to
+  the Document Server and fetched the result back from
+  `/cache/files/data/<key>/media/<name>.png`. The media file in the
+  Document Server cache (38,662 bytes) begins with `ENCRYPTED;`: the
+  add-on uploads the image encrypted under the DEK and decrypts it in
+  the browser. The `saveChanges` frame of the insert was encrypted and
+  carried no PNG data. After Ctrl+S the Document Server's `output.docx`
+  and the portal's `file_21/v2/content.docx` (56,352 bytes) both begin
+  with `DSE3`. No plaintext image left the browser.
+- **By address, other origin.** The same image as
+  `http://host.docker.internal:8092/...`: the browser fetched it, the
+  editor answered "Image URL is incorrect" and nothing reached the
+  Document Server.
+- **From the device.** The owner inserted a file from the disk into
+  document 20 twice: each time the editor uploaded an `ENCRYPTED;` blob
+  (216,946 bytes) and fetched it back, with no error on the Document
+  Server, but the picture never appeared, neither for the owner nor for
+  Bob, who joined the session afterwards. The file-dialog path therefore
+  encrypts too, and fails to render; an item for the Document Server
+  team, not a leak.
+- **Paste and drag** were not exercised.
+
+Proposal decision 5 is not raised: on this build both exercised paths
+keep the image bytes encrypted on the Document Server and in the saved
+container. The add-on read of 2026-10-30 ("the encrypted upload route
+unreachable") is superseded by the request log: `/upload` is used, with
+ciphertext.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -869,6 +906,20 @@ Bob's version 4.
    already assumes a held session; the backend of 6.2 must also accept
    that the held state can last indefinitely and never promote the
    version while `info` answers.
+
+   Reproduced twice on documents on 2026-10-30, with two members: at
+   14:19 UTC Bob reopened document 7 after his own force-save while the
+   owner held the session, and at 14:24 UTC the owner opened document 21
+   after Bob's force-save while Bob held the session. In both cases the
+   portal served the force-saved version as the base (35,009 and 56,352
+   bytes) under the stable key, the Document Server replayed the held
+   changes on it, the frame reported code -82 and logged
+   `changesError: Cannot read properties of undefined (reading 'Jl')`,
+   and the doceditor showed the error as page text (task 9.7). A minute
+   after the second failure Bob's open session of document 21 reported
+   -82 as well. This is the base mismatch this decision describes, now
+   seen on documents and not only on spreadsheets, and the stable-base
+   rule of 6.2 is the fix on the portal side.
 
 8. **The document address of an encrypted file stays public.** The editor
    downloads it in the browser. `document.url` is built from the public portal

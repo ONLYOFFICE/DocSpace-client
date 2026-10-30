@@ -84,6 +84,12 @@ const LinkTitle: FC<LinkTitleProps> = ({
               size={12}
               iconName={CopyIcon}
               isDisabled={isExpiredLink || isLoaded}
+              // Its own click makes it a Tab stop; the row's click, which
+              // copies too, must not run a second time.
+              onClick={(e) => {
+                e.stopPropagation();
+                onCopyLink();
+              }}
             />
           </div>
         ) : null}

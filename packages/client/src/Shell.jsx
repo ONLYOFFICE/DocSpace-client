@@ -54,7 +54,6 @@ import {
   parseToDateTime,
   formatDate,
   formatDateLocalized,
-  getCorrectDate,
   isBefore,
   isAfter,
 } from "@onlyoffice/apps-ui-kit/utils/date";
@@ -99,7 +98,10 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { handleCopy } from "@docspace/shared/utils/copy";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { getServiceLimitChatError } from "@docspace/shared/utils/ai";
+import {
+  getServiceLimitChatError,
+  getServiceLimitDescription,
+} from "@docspace/shared/utils/ai";
 
 import "@docspace/shared/styles/theme.scss";
 
@@ -983,13 +985,14 @@ const Shell = ({ page = "home", ...rest }) => {
 
       const serviceLimit = getServiceLimitChatError(payload);
       if (serviceLimit) {
-        const date = getCorrectDate(language, serviceLimit.until);
-
         return {
           title: t("Common:AILimitReached"),
-          description: isAdmin
-            ? t("Common:AILimitReachedResetsOn", { date })
-            : t("Common:AILimitReachedContactAdminResetsOn", { date }),
+          description: getServiceLimitDescription(
+            t,
+            language,
+            serviceLimit,
+            isAdmin,
+          ),
           action: isAdmin
             ? {
                 text: t("Common:ChangeAILimit"),

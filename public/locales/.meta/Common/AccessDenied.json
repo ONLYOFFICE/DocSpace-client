@@ -3,7 +3,7 @@
   "content": "Access denied",
   "content_en_sha1_hash": "64343a83ad8c0b8e2789c32ca5ab1eb6abb614e0",
   "created_at": "2025-05-19T21:30:42.816Z",
-  "updated_at": "2026-10-26T15:55:53.654Z",
+  "updated_at": "2026-10-29T14:13:10.384Z",
   "comment": {
     "text": "This is an error message indicating that a user does not have the necessary permissions to access a specific resource or perform an action. It appears in various contexts, including restricted access pages, route confirmation, and OAuth2 authentication errors.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 308,
+      "line_number": 310,
       "context": "callerReported = false;\n pendingTimer = setTimeout(() => {\n pendingTimer = null;\n \n if (!callerReported) toastId = toastr.error(t(\"Common:AccessDenied\"));\n }, FORBIDDEN_TOAST_DELAY);\n });\n \n return () => {\n setForbiddenHandler(null);",
       "module": "/packages/client"
     },

@@ -3568,7 +3568,7 @@ packages:
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
     resolution: {integrity: sha512-KTioyT+6DD6RE51EnpFwxYuJ8nNiNCvXTedm6A9zgyBNhQTQf220qgKilj5M2l/cK8ajok60KRgPifgtKOnWUQ==, tarball: file:onlyoffice-apps-ui-kit.tgz}
-    version: 4.0.2
+    version: 4.1.0
     engines: {node: '>=22'}
     peerDependencies:
       '@onlyoffice/ai-chat': '>=1.0.2-20261022'

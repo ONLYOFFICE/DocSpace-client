@@ -330,14 +330,6 @@ const InvitePanel = ({
     isMobileView && window.addEventListener("mousedown", onMouseDown);
   }, [isMobileView]);
 
-  const onKeyPress = (e) =>
-    (e.key === "Esc" || e.key === "Escape") && onClose();
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyPress);
-    return () => document.removeEventListener("keyup", onKeyPress);
-  });
-
   const getContactsInviteLink = async () => {
     if (requestIsRunning) return;
 

@@ -35,7 +35,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
   true;
 
 const mocks = vi.hoisted(() => ({
-  bindings: new Map<string, () => void>(),
+  bindings: new Map<string, (e: KeyboardEvent) => void>(),
   encryptedActions: null as object | null,
   filesList: {
     items: [],
@@ -46,7 +46,7 @@ const mocks = vi.hoisted(() => ({
 
 // The library binds keys through hotkeys-js; the handlers are what is tested.
 vi.mock("react-hotkeys-hook", () => ({
-  useHotkeys: (keys: string, handler: () => void) => {
+  useHotkeys: (keys: string, handler: (e: KeyboardEvent) => void) => {
     mocks.bindings.set(keys, handler);
   },
 }));
@@ -91,7 +91,12 @@ describe("useDocsHotkeys", () => {
     act(() => root?.render(<Probe />));
   };
 
-  const press = (keys: string) => act(() => mocks.bindings.get(keys)?.());
+  // The Shift hotkeys read the keydown event (repeat, code, preventDefault).
+  const keyEvent = () =>
+    ({ repeat: false, code: "", preventDefault: () => {} }) as KeyboardEvent;
+
+  const press = (keys: string) =>
+    act(() => mocks.bindings.get(keys)?.(keyEvent()));
 
   beforeEach(() => {
     mocks.bindings.clear();

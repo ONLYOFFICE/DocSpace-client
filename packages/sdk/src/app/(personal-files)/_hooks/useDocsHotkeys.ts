@@ -39,6 +39,7 @@ import { useCallback, useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { getHotkeyLetter } from "@docspace/shared/utils/getHotkeyLetter";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
@@ -53,6 +54,21 @@ export type DocsHotkeysHandlers = {
   onCreateFile: (type: CreateFileDialogType) => void;
   onUploadFiles: () => void;
   onUploadFolder: () => void;
+};
+
+const suppressKeyRepeat = (code: string) => {
+  const onRepeat = (e: KeyboardEvent) => {
+    if (e.code === code && e.repeat) e.preventDefault();
+  };
+
+  const onRelease = (e: KeyboardEvent) => {
+    if (e.code !== code) return;
+    window.removeEventListener("keydown", onRepeat, true);
+    window.removeEventListener("keyup", onRelease, true);
+  };
+
+  window.addEventListener("keydown", onRepeat, true);
+  window.addEventListener("keyup", onRelease, true);
 };
 
 export default function useDocsHotkeys({
@@ -84,6 +100,13 @@ export default function useDocsHotkeys({
     filterPreventDefault: false,
   };
 
+  const onShiftHotkey = (action: () => void) => (e: KeyboardEvent) => {
+    if (!isEnabled() || e.repeat) return;
+    e.preventDefault();
+    suppressKeyRepeat(e.code);
+    action();
+  };
+
   // Navigate list with arrow keys and vim keys
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -107,7 +130,7 @@ export default function useDocsHotkeys({
           )
         : -1;
 
-      switch (e.key) {
+      switch (getHotkeyLetter(e)) {
         case "ArrowDown":
         case "j": {
           e.preventDefault();
@@ -189,61 +212,61 @@ export default function useDocsHotkeys({
   // Create document
   useHotkeys(
     "shift+d",
-    () => {
-      if (!isEnabled() || !canCreateHere()) return;
+    onShiftHotkey(() => {
+      if (!canCreateHere()) return;
       onCreateFile("docx");
-    },
-    { ...hotkeysOptions, keyup: true },
+    }),
+    hotkeysOptions,
   );
 
   // Create spreadsheet
   useHotkeys(
     "shift+s",
-    () => {
-      if (!isEnabled() || !canCreateHere()) return;
+    onShiftHotkey(() => {
+      if (!canCreateHere()) return;
       onCreateFile("xlsx");
-    },
-    { ...hotkeysOptions, keyup: true },
+    }),
+    hotkeysOptions,
   );
 
   // Create presentation
   useHotkeys(
     "shift+p",
-    () => {
-      if (!isEnabled() || !canCreateHere()) return;
+    onShiftHotkey(() => {
+      if (!canCreateHere()) return;
       onCreateFile("pptx");
-    },
-    { ...hotkeysOptions, keyup: true },
+    }),
+    hotkeysOptions,
   );
 
   // Create PDF form
   useHotkeys(
     "shift+o",
-    () => {
-      if (!isEnabled() || !canCreateHere()) return;
+    onShiftHotkey(() => {
+      if (!canCreateHere()) return;
       onCreateFile("pdf");
-    },
-    { ...hotkeysOptions, keyup: true },
+    }),
+    hotkeysOptions,
   );
 
   // Create folder
   useHotkeys(
     "shift+f",
-    () => {
-      if (!isEnabled() || !canCreateHere()) return;
+    onShiftHotkey(() => {
+      if (!canCreateHere()) return;
       onCreateFile("folder");
-    },
-    { ...hotkeysOptions, keyup: true },
+    }),
+    hotkeysOptions,
   );
 
   // Upload file
   useHotkeys(
     "shift+u",
-    () => {
-      if (!isEnabled() || !canCreateHere()) return;
+    onShiftHotkey(() => {
+      if (!canCreateHere()) return;
       onUploadFiles();
-    },
-    { ...hotkeysOptions, keyup: true },
+    }),
+    hotkeysOptions,
   );
 
   // Upload folder — silently blocked in private rooms (no folder upload allowed).
@@ -252,11 +275,10 @@ export default function useDocsHotkeys({
   // No toast is shown — the reference client also returns silently.
   useHotkeys(
     "shift+i",
-    () => {
-      if (!isEnabled()) return;
+    onShiftHotkey(() => {
       if (encryptedActions) return;
       onUploadFolder();
-    },
-    { ...hotkeysOptions, keyup: true },
+    }),
+    hotkeysOptions,
   );
 }

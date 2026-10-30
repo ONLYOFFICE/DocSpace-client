@@ -136,7 +136,7 @@ const CreateAgentDialog = ({
     }
   };
 
-  const onKeyUpHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (isWrongTitle || !isProfileSelected) return;
     if (e.keyCode === 13) onCreateAgent();
   };
@@ -196,7 +196,7 @@ const CreateAgentDialog = ({
           isWrongTitle={isWrongTitle}
           setIsValidTitle={setIsValidTitle}
           setIsWrongTitle={setIsWrongTitle}
-          onKeyUp={onKeyUpHandler}
+          onKeyDown={onKeyDownHandler}
           onClickAction={onClickAction}
           selectedServers={selectedServers}
           setSelectedServers={setSelectedServers}

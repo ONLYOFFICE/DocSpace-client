@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
 import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { useTranslation } from "react-i18next";
@@ -46,17 +45,7 @@ export const DeleteWebhookDialog = ({
   header,
   handleSubmit,
 }) => {
-  const onKeyPress = (e) =>
-    (e.key === "Esc" || e.key === "Escape") && onClose();
-
   const { t } = useTranslation(["Webhooks", "Common"]);
-
-  const cleanUpEvent = () => window.removeEventListener("keyup", onKeyPress);
-
-  useEffect(() => {
-    window.addEventListener("keyup", onKeyPress);
-    return cleanUpEvent;
-  });
 
   const handleDeleteClick = () => {
     handleSubmit();

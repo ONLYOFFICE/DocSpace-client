@@ -232,7 +232,7 @@ const CreateRoomDialog = ({
     }
   };
 
-  const onKeyUpHandler = (e) => {
+  const onKeyDownHandler = (e) => {
     if (isWrongTitle) return;
     if (e.keyCode === 13) onCreateRoom();
   };
@@ -425,7 +425,7 @@ const CreateRoomDialog = ({
               setIsValidTitle={setIsValidTitle}
               setIsWrongTitle={setIsWrongTitle}
               enableThirdParty={enableThirdParty}
-              onKeyUp={onKeyUpHandler}
+              onKeyDown={onKeyDownHandler}
               templateItem={templateItem}
               fromTemplate={
                 selectionItems.length

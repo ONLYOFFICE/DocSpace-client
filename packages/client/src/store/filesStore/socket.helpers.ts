@@ -388,6 +388,20 @@ export function wsModifyFolderDeleteImpl(self: FilesStore, opt?: TOptSocket) {
     return;
   }
 
+  const activeItems =
+    opt?.type === "file" ? self.activeFiles : self.activeFolders;
+
+  if (
+    activeItems.some(
+      (item) =>
+        item.id === opt?.id &&
+        !!item.destFolderId &&
+        item.destFolderId === self.selectedFolderStore.id,
+    )
+  ) {
+    return;
+  }
+
   if (opt?.type === "file" && opt?.id) {
     const foundIndex = self.files.findIndex((x) => x.id === opt?.id);
     if (foundIndex == -1) return;
@@ -414,6 +428,7 @@ export function wsModifyFolderDeleteImpl(self: FilesStore, opt?: TOptSocket) {
     tempActionFilesIds.push(foundFile.id);
 
     self.setTempActionFilesIds(tempActionFilesIds);
+    self.setTempActionFolderId(self.selectedFolderStore.id);
 
     self.removeStaleItemFromSelection(foundFile);
     self.debounceRemoveFiles();
@@ -465,6 +480,7 @@ export function wsModifyFolderDeleteImpl(self: FilesStore, opt?: TOptSocket) {
     tempActionFoldersIds.push(foundFolder.id);
 
     self.setTempActionFoldersIds(tempActionFoldersIds);
+    self.setTempActionFolderId(self.selectedFolderStore.id);
     self.removeStaleItemFromSelection(foundFolder);
     self.debounceRemoveFolders();
 

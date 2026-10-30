@@ -44,7 +44,6 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import styles from "../MetadataAIPanel.module.scss";
 
 type AICalloutProps = {
-  title: string;
   description: string;
   model?: string;
   buttonLabel: string;
@@ -56,7 +55,6 @@ type AICalloutProps = {
 };
 
 const AICallout = ({
-  title,
   description,
   model,
   buttonLabel,
@@ -68,18 +66,7 @@ const AICallout = ({
 }: AICalloutProps) => (
   <div className={styles.callout} data-testid="metadata_ai_callout">
     <div className={styles.calloutText}>
-      <div className={styles.calloutTitle}>
-        <ReactSVG src={AISvgUrl} />
-        <Text
-          className={styles.accent}
-          fontSize="12px"
-          fontWeight={600}
-          lineHeight="16px"
-        >
-          {title}
-        </Text>
-      </div>
-      <Text className={styles.description} fontSize="13px" lineHeight="20px">
+      <Text className={styles.description} fontSize="12px" lineHeight="16px">
         {description}
       </Text>
       {model ? (
@@ -97,6 +84,7 @@ const AICallout = ({
     <Button
       scale
       size={ButtonSize.small}
+      icon={<ReactSVG className={styles.runIcon} src={AISvgUrl} />}
       label={buttonLabel}
       isDisabled={isDisabled}
       onClick={onClick}

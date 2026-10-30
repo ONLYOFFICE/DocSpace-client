@@ -44,7 +44,6 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
-import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { getServiceLimitDescription } from "@docspace/shared/utils/ai";
 
 import type { TMetadataSelection } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
@@ -54,8 +53,9 @@ import { useMetadataAIPanel } from "./hooks/useMetadataAIPanel";
 import { useScrollToTop } from "./hooks/useScrollToTop";
 import { useUndoShortcut } from "./hooks/useUndoShortcut";
 import type { TMetadataAIMode } from "./types";
-import { isSameEntry, METADATA_AI_PROMPT_MAX_LENGTH } from "./utils";
+import { isSameEntry } from "./utils";
 import AICallout from "./sub-components/AICallout";
+import AIPrompt from "./sub-components/AIPrompt";
 import CustomFieldList from "./sub-components/CustomFieldList";
 import FillForms from "./sub-components/FillForms";
 import ReviewNotes from "./sub-components/ReviewNotes";
@@ -201,14 +201,16 @@ const MetadataAIDialog = ({
           <div ref={bodyRef} className={styles.body} inert={isSaving}>
             <div className={styles.top}>
               {isReview ? (
-                <ReviewNotes mode={mode} summary={summary} />
+                <ReviewNotes
+                  mode={mode}
+                  summary={summary}
+                  hasEmptyFields={
+                    !isFill &&
+                    drafts.some(({ isNew, value }) => isNew && !value.trim())
+                  }
+                />
               ) : (
                 <AICallout
-                  title={
-                    isFill
-                      ? t("Files:FillMetadataWithAI")
-                      : t("Files:SuggestMetadataWithAI")
-                  }
                   description={
                     isFill
                       ? t("Metadata:AIFillDescription")
@@ -231,17 +233,10 @@ const MetadataAIDialog = ({
                   }
                   onClick={runAI}
                 >
-                  <Textarea
-                    wrapperClassName={styles.prompt}
-                    className={styles.promptField}
+                  <AIPrompt
                     value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    placeholder={t("Metadata:AIPromptPlaceholder")}
-                    maxLength={METADATA_AI_PROMPT_MAX_LENGTH}
-                    heightTextArea="64px"
-                    fontSize={13}
                     isDisabled={isAnalyzing}
-                    dataTestId="metadata_ai_prompt_textarea"
+                    onChange={setPrompt}
                   />
                   {isFill ? (
                     <Checkbox

@@ -241,7 +241,7 @@
   }
 
   @include mixins.desktop {
-    width: 360px;
+    width: calc(var(--info-panel-width, 400px) - 40px);
 
     &.aside {
       width: 440px;

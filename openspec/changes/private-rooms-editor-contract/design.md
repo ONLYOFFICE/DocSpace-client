@@ -644,6 +644,10 @@ Document Server tables were not read. Times in UTC.
   through the whole observation, and reported `fileStatus` 1 at 13:13
   UTC on 2026-10-30, with nobody holding it open: a held encrypted
   session with changes keeps the file "being edited" indefinitely.
+  The DEBUG log read later shows what those callbacks carry: status 1
+  with an empty `users` list, and the portal keeps the file flagged
+  all the same, so the flag follows the key the Document Server still
+  holds, not the user list.
 - **What this means for D7.** The Document Server ends an encrypted
   session on its own only when it holds no changes, and it announces
   neither case; the portal's `info` re-check is the only signal, and a
@@ -695,6 +699,42 @@ attaches are the phase A set of the edit case minus nothing new, since
 the view/edit split is the server's; download-as stays, as D4 allows.
 The server still reports `startFilling: true` for the viewer of the
 form, which 5.4 switches off.
+
+### Run of 2026-10-30, member removed while editing (task 4.5)
+
+Bob (Editing access) held document 7 open in edit mode while the owner
+removed him from room 10; read from the Files service log at DEBUG
+(`Logs/files.log`), the editors container log and Bob's browser. Times
+in UTC.
+
+- 13:51:43 Bob typed a line; it left his browser as an encrypted
+  `saveChanges` frame.
+- Between 13:52:51 and 13:54:06 the owner removed Bob from the room. At
+  13:54:06 the room share and the file answered Bob 403, while his editor
+  stayed in edit mode with "All changes saved" and no warning: the room
+  security update reaches no `drop`, as the server read found.
+- 13:54:36 Bob typed another line (again an encrypted frame) and pressed
+  Ctrl+S. 13:54:40 the Document Server sent the status-6 callback with
+  Bob as the only user; 13:54:42 the portal fetched the container from
+  the Document Server (35,363 bytes) and stored it as version 4 of file
+  7 (`DiscDataStore - Save folder_1000/file_7/v4/content.docx`). The save
+  of a member who had already lost access was stored.
+- 13:55:01 the portal's `info` re-check brought a status-1 callback;
+  `DocumentServiceTrackerHelper.ProcessEditAsync` called
+  `EntryManager.TrackEditingAsync`, which threw
+  `AuthenticationException` for Bob, and the catch sent the `drop`
+  command for his user id. So the server read's "throws without a drop"
+  is only half right: the re-check path does drop the user, but only at
+  its own cadence (here two and a half minutes after the removal) and
+  after any save made meanwhile.
+- 13:55:03 Bob's editor reconnected without access: the toast "The file
+  cannot be accessed right now", the toolbar disabled, typing refused,
+  and the doceditor's own `files/file/7/recent` call answered 403.
+
+For task 10.5 this means two things: drop the removed member's sessions
+on the room's files at removal time, and refuse a save callback whose
+user no longer has rights on the file, since `SaveEditingAsync` stored
+Bob's version 4.
 
 ## Goals / Non-Goals
 

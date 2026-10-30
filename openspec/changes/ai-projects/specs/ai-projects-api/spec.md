@@ -221,7 +221,7 @@ Each listed project SHALL be a full room DTO (`tags`, `createdBy`, `updatedBy`, 
 - **THEN** that room is listed with `available: false` and an empty skills list
 
 ### Requirement: Knowledge listing
-`GET ai/projects/{id}/knowledge` SHALL be composed the same way: every linked Knowledge room with its files (`GET files/{roomId}`, files only, at most 1000, with `truncated` when there are more) and the room's `totalFiles`, `indexedFiles` and `failedFiles`. A room whose files cannot be read SHALL come back with `available: false` and no files, never 403.
+`GET ai/projects/{id}/knowledge` SHALL be composed the same way: every linked Knowledge room with its files (`GET files/{roomId}`, files only, read in pages of 100 up to 1000, with `truncated` when there are more) and the room's `totalFiles`, `indexedFiles` and `failedFiles`. A room whose files cannot be read SHALL come back with `available: false` and no files, never 403.
 
 #### Scenario: Room over the listing size
 - **WHEN** a linked Knowledge room holds 1200 files

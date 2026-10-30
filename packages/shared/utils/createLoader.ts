@@ -57,6 +57,11 @@ export function createLoader(
     return timer;
   };
 
+  // Hide the loader: at once when it never showed (the answer came before
+  // `loaderTimer`) or has been up for `minLoaderTimer`, otherwise once it
+  // has been up that long. Returning after the deferred hide matters: the
+  // fall-through used to hide it immediately as well, so the minimum never
+  // held and a fast answer still flashed the loader.
   const endLoader = (callback: VoidFunction): void => {
     if (startedLoader) {
       const currentDate = new Date();
@@ -72,9 +77,10 @@ export function createLoader(
       window.setTimeout(() => {
         callback();
       }, minLoaderTimer - diff);
+      return;
     }
 
-    clearInterval(timer);
+    clearTimeout(timer);
     callback();
     clearState();
   };

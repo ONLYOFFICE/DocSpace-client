@@ -40,6 +40,7 @@ import { useTranslation } from "react-i18next";
 
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
 import { Tabs, TabsTypes, type TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
 import {
@@ -181,6 +182,17 @@ const KnowledgeFileState = ({ file, onRetry }: KnowledgeFileStateProps) => {
   }
 };
 
+/**
+ * What an expanded room shows while its list is on its way: one row-sized
+ * bar across the card, under the room row. The store turns the flag on only
+ * for a read that takes a while (`createLoader`), so a fast answer skips it.
+ */
+const RoomContentSkeleton = ({ testId }: { testId: string }) => (
+  <div className={classNames(styles.nested, styles.skeleton)} data-testid={testId}>
+    <RectangleSkeleton width="100%" height="32px" borderRadius="6px" />
+  </div>
+);
+
 type RoomCardProps = {
   id: number | string;
   name: string;
@@ -305,7 +317,8 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
       headless={compact}
     >
       {instructionsRooms.map((room) => {
-          const skills = store.skills.find((loaded) => loaded.id === room.id)?.skills ?? [];
+          const loaded = store.skills.find((item) => item.id === room.id);
+          const skills = loaded?.skills ?? [];
           return (
             <RoomCard
               key={room.id}
@@ -316,7 +329,9 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
               isExpanded={expanded.has(`i-${room.id}`)}
               onToggle={() => toggle(`i-${room.id}`, () => void store.fetchSkills(project.id))}
             >
-              {skills.length === 0 ? (
+              {!loaded && store.skillsLoading ? (
+                <RoomContentSkeleton testId={`ai-project-skills-loading-${room.id}`} />
+              ) : skills.length === 0 ? (
                 <Text className={classNames(styles.note, styles.nested)}>{t("Common:AIProjectSkillsEmpty")}</Text>
               ) : (
                 <ul className={classNames(styles.list, styles.nested)}>
@@ -376,6 +391,11 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
                 ) : null
               }
             >
+              {!loaded && store.knowledgeLoading ? (
+                <RoomContentSkeleton testId={`ai-project-knowledge-loading-${room.id}`} />
+              ) : loaded && files.length === 0 ? (
+                <Text className={classNames(styles.note, styles.nested)}>{t("Common:NoItemsHereYet")}</Text>
+              ) : (
               <ul className={classNames(styles.list, styles.nested)}>
                 {files.map((file) => (
                   <FileRow
@@ -390,6 +410,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
                   />
                 ))}
               </ul>
+              )}
             </RoomCard>
           );
         })}

@@ -75,6 +75,7 @@ import { applyTagChangeToRoomTags, isSharedTagChange } from "@docspace/shared/co
 import type { TagChange } from "@docspace/shared/components/tag-management/TagManagement.types";
 import type { TOperation } from "@docspace/shared/api/files/types";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
+import { createLoader } from "@docspace/shared/utils/createLoader";
 
 import type AiPresetsStore from "./AiPresetsStore";
 import { toAiPreset } from "./AiPresetsStore";
@@ -195,6 +196,16 @@ class AiProjectsStore {
   skills: TAiProjectSkillsRoom[] = [];
 
   knowledge: TAiProjectKnowledgeRoom[] = [];
+
+  /**
+   * A sources read in flight long enough to show: the skeleton appears
+   * after `SHOW_LOADER_TIMER` and stays at least `MIN_LOADER_TIMER`
+   * (`createLoader`), so a fast answer flashes nothing and a slow one does
+   * not flicker.
+   */
+  skillsLoading = false;
+
+  knowledgeLoading = false;
 
   projectDialog: TProjectDialogState | null = null;
 
@@ -606,6 +617,8 @@ class AiProjectsStore {
   };
 
   fetchSkills = async (id: number) => {
+    const { startLoader, endLoader } = createLoader();
+    startLoader(() => runInAction(() => (this.skillsLoading = true)));
     try {
       const rooms = await getAiProjectSkills(id);
       runInAction(() => {
@@ -613,10 +626,14 @@ class AiProjectsStore {
       });
     } catch (e) {
       toastr.error(errorMessage(e));
+    } finally {
+      endLoader(() => runInAction(() => (this.skillsLoading = false)));
     }
   };
 
   fetchKnowledge = async (id: number) => {
+    const { startLoader, endLoader } = createLoader();
+    startLoader(() => runInAction(() => (this.knowledgeLoading = true)));
     try {
       const rooms = await getAiProjectKnowledge(id);
       runInAction(() => {
@@ -624,6 +641,8 @@ class AiProjectsStore {
       });
     } catch (e) {
       toastr.error(errorMessage(e));
+    } finally {
+      endLoader(() => runInAction(() => (this.knowledgeLoading = false)));
     }
   };
 

@@ -245,6 +245,11 @@
   padding-inline-start: 20px;
 }
 
+// The bar standing in for an expanded room's list while it loads.
+.skeleton {
+  padding-block: 6px;
+}
+
 .row {
   display: flex;
   align-items: center;

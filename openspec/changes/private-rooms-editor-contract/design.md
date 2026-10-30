@@ -552,6 +552,56 @@ references of 2026-10-29 (moved: `ReplaceCommunityAddress` is
   `onRequestEditRights`, `onDocumentStateChange`, `onRequestReferenceData`,
   `onRequestOpen`. Tasks 9.1 to 9.12.
 
+### Stand check of 2026-10-30, phase A
+
+Read in the browser on the local stack (Document Server 10.0.2.5, the
+doceditor dev server at 5013) after the phase A commits, by inspecting
+the configuration the doceditor hands the editor component and the
+`openedit` answer of the server:
+
+- **Document (file 7).** Opens decrypted in edit mode with no
+  `[ENCRYPTION]` console error. The editor configuration carries
+  `encryptionKeys` with `dek` (32 bytes), `cryptoEngineId` from the
+  server's key pair and `contractVersion: 1`, and these events only:
+  `onAppReady`, `onDocumentReady`, `onDocumentStateChange`,
+  `onDownloadAs`, `onError`, `onInfo`, `onMakeActionLink`,
+  `onMetaChange`, `onRequestEditRights`, the four pickers,
+  `onRequestOpen`, `onRequestReferenceData`, `onRequestSendNotify`,
+  `onRequestUsers`, `onSubmit`, `onUserActionRequired`, `onWarning`.
+  Save-as, the history events, refresh, rename (`security.Rename` is
+  true), sharing and start-filling are absent, as phase A intends; the
+  File menu shows Create New, Save, Download As (DOCX, PDF), Print,
+  Protect, Info and Open file location, and no Save copy as, Rename or
+  Version history. Clicking the favorite star sends no favorites request.
+- **Server answer for file 7.** `openedit` carries one key pair with
+  `privateKeyEnc`, the opaque title, `document.url` on
+  `host.docker.internal:8092` (the ReplaceCommunityAddress swap of D8,
+  reachable from this machine by chance), `referenceData` without
+  `roomId`, `mentionShare` false, no `favorite`, and no
+  `canCoAuthoring` field at all: the client type's `canCoAuthoring` never
+  comes from the server, so 4.1 removed its only writer.
+- **PDF form (file 40), task 5.3.** The server answers `startFilling:
+  true`, `startFillingMode: 1` and `customization.startFillingForm`
+  with the text "Share to fill out", yet without `onRequestStartFilling`
+  and `onStartFilling` the editor draws no such button: the header
+  shows the mode switch, the location, the favorite star and search, the
+  toolbar the PDF tools. The flag alone is harmless on the client side;
+  5.4 still switches it off server-side. Two more facts: the server
+  sends `document.isForm: false` for the encrypted form, since
+  `FileChecker.IsFormPDFFile` reads the stored ciphertext, while the file
+  DTO says `isForm: true` from the container flag; and the editor opened
+  the form in "Commenting" mode with `security.FillForms` false, so the
+  filling-as-edit of D9 is not what the stand gives this account today.
+- **Decrypted download (task 5.7).** "Download > Original format" of
+  file 40 saved the plaintext form (215,905 bytes); its first 300 bytes
+  are the fixture of `pdf-form-signature.test.ts`, and the mirror
+  classifies them as a form, as the server lists the file. The plain PDF
+  fixture is the editor's "Download As > PDF" of file 7.
+- **Seen in passing.** After a round trip through the editor, one row of
+  the room list showed its opaque server title instead of the recovered
+  name ("New document (1)"); the name came back on the next listing.
+  Not caused by this change; worth a look at the filename cache.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -940,12 +990,6 @@ BLOCKED or "after <x>" waits.
   metadata? Owner: feature owner (proposal decision 7).
 - Create-new from the editor on an encrypted file: encrypted creation in
   the same folder, or withheld? Owner: feature owner (proposal decision 7).
-- Start-filling button without its event: task 5.3 withholds
-  `onRequestStartFilling` and `onStartFilling` for an encrypted form on
-  2026-10-30, but whether the editor still draws the button from
-  `startFilling: true` without the event is unchecked (the doceditor dev
-  server was not running on the stand during the implementing session).
-  To be read on the stand before 5.4 switches the flag off server-side.
 - Inserted images: do `cryptoimg://` images reach the Document Server's media
   store or the portal in plaintext when a document is saved or co-edited?
   Task 4.4; owner: Document Server team for the answer, this change for the

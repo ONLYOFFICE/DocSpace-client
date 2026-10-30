@@ -607,7 +607,7 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 
-  @container dashboard-content (max-width: 900px) {
+  @container dashboard-content (max-width: 1000px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 

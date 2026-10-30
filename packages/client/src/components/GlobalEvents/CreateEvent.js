@@ -273,7 +273,7 @@ const CreateEvent = ({
           }
 
           await createFile(
-            +parentId,
+            parentId,
             `${newValue}.${extension}`,
             templateId,
             gallerySelected?.id,

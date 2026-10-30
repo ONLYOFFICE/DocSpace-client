@@ -94,7 +94,7 @@ const useCreateFileError = ({
       actionId: error?.fileInfo?.id,
       fileInfo: {
         id: error?.fileInfo?.templateId,
-        folderId: Number(error?.fileInfo?.parentId),
+        folderId: error?.fileInfo?.parentId,
         fileExst: error?.fileInfo?.extension,
       },
     });

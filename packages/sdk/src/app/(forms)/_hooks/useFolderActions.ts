@@ -209,7 +209,7 @@ export default function useFolderActions(
 
       setIsCreatingForm(true);
       try {
-        await createFile(+folderId, `${name}.pdf`);
+        await createFile(folderId, `${name}.pdf`);
         setIsCreateFormDialogVisible(false);
         await refreshAfterMutation(activeSection);
       } catch (error) {

@@ -63,8 +63,8 @@ const filterByFolder = (
   files: TFile[],
   folderId: string | number,
 ) => {
-  const id = Number(folderId);
-  return files.filter((f) => f.folderId === id);
+  const id = String(folderId);
+  return files.filter((f) => String(f.folderId) === id);
 };
 
 export default function useFormsData() {

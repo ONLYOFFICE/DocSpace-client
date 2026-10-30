@@ -151,7 +151,7 @@ const HistoryItemList = ({
       if (!isFeedData) return;
 
       if (isFolder) {
-        if (Number(selectedFolderId) === item.id) return;
+        if (String(selectedFolderId) === String(item.id)) return;
 
         return await getFolderInfo?.(item.id, true).then((res) => {
           openItemAction!({ ...res, isFolder: true });

@@ -57,7 +57,12 @@ const buttonProps = {
 const StatisticsComponent = (props) => {
   const { t } = useTranslation("Settings");
   const { isBase } = useTheme();
-  const { isStatisticsAvailable, aiServicesEnabled } = props;
+  const { isStatisticsAvailable, aiServicesEnabled, isAppInstalled } = props;
+
+  // Same rule as the quotas: a section switched off in Settings -> Apps
+  // gets no top list either.
+  const showRoomsList = isAppInstalled("ai-rooms");
+  const showAIAgentList = aiServicesEnabled && isAppInstalled("ai-agents");
 
   const iconElement = (
     id,
@@ -119,19 +124,21 @@ const StatisticsComponent = (props) => {
       </Text>
       {isStatisticsAvailable ? (
         <>
-          <RoomsList
-            buttonProps={buttonProps}
-            textElement={textElement}
-            quotaElement={quotaElement}
-            iconElement={iconElement}
-          />
+          {showRoomsList ? (
+            <RoomsList
+              buttonProps={buttonProps}
+              textElement={textElement}
+              quotaElement={quotaElement}
+              iconElement={iconElement}
+            />
+          ) : null}
           <UsersList
             buttonProps={buttonProps}
             textElement={textElement}
             quotaElement={quotaElement}
             iconElement={iconElement}
           />
-          {aiServicesEnabled ? (
+          {showAIAgentList ? (
             <AIAgentList
               buttonProps={buttonProps}
               textElement={textElement}
@@ -145,12 +152,13 @@ const StatisticsComponent = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore, settingsStore }) => {
+export default inject(({ currentQuotaStore, settingsStore, appsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
   const { aiServicesEnabled } = settingsStore;
 
   return {
     isStatisticsAvailable,
     aiServicesEnabled,
+    isAppInstalled: appsStore.isInstalled,
   };
 })(observer(StatisticsComponent));

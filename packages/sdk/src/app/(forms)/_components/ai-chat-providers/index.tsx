@@ -40,14 +40,16 @@ import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@onlyoffice/apps-ui-kit";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date";
 import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import type { TUser } from "@docspace/shared/api/people/types";
-import { getServiceLimitChatError } from "@docspace/shared/utils/ai";
+import {
+  getServiceLimitChatError,
+  getServiceLimitDescription,
+} from "@docspace/shared/utils/ai";
 
 type AiAgentProvidersProps = React.ComponentProps<typeof AiAgentProviders>;
 
@@ -78,9 +80,11 @@ const FormsAiChatProviders = ({
       if (serviceLimit) {
         return {
           title: t("Common:AILimitReached"),
-          description: t("Common:AILimitReachedContactAdminResetsOn", {
-            date: getCorrectDate(i18n.language, serviceLimit.until),
-          }),
+          description: getServiceLimitDescription(
+            t,
+            i18n.language,
+            serviceLimit,
+          ),
           action: null,
         };
       }

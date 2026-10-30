@@ -34,10 +34,10 @@
  */
 
 import uniqueid from "lodash/uniqueId";
-import React, { useEffect, useState, useRef, FC } from "react";
+import React, { useRef, FC } from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import { getCountTilesInRow } from "@docspace/shared/utils";
+import { useGridColumns } from "@docspace/shared/hooks/useGridColumns";
 import classNames from "classnames";
 
 import Grid from "./Grid";
@@ -106,14 +106,14 @@ const InfiniteGrid: FC<InfiniteGridInjectedProps> = (props) => {
     hasMoreFiles,
     fetchMoreFiles,
     isShowOneTile,
+    countTilesInRow,
+    onGridColumnsChange,
     smallPreview,
     showLoading,
     ...rest
   } = props;
 
-  const [countTilesInRow, setCountTilesInRow] = useState<number>(
-    getCountTilesInRow(false, false, true, isShowOneTile),
-  );
+  const observeRow = useGridColumns(onGridColumnsChange);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -126,30 +126,17 @@ const InfiniteGrid: FC<InfiniteGridInjectedProps> = (props) => {
     isOneTile?: boolean,
   ): void => {
     list.push(
-      <Item key={key} className="isTemplateGallery" isOneTile={isOneTile}>
+      <Item
+        key={key}
+        className="isTemplateGallery"
+        isOneTile={isOneTile}
+        ref={observeRow}
+      >
         {cards}
       </Item>,
     );
     if (clear) cards = [];
   };
-
-  const setTilesCount = (): void => {
-    const newCount = getCountTilesInRow(false, false, true, isShowOneTile);
-    if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
-  };
-
-  const onResize = (): void => {
-    setTilesCount();
-  };
-
-  useEffect(() => {
-    setTilesCount();
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  });
 
   // If showLoading is true, show 3 rows of skeletons instead of content
   if (showLoading) {
@@ -177,11 +164,8 @@ const InfiniteGrid: FC<InfiniteGridInjectedProps> = (props) => {
       if (child) {
         const cardKey = uniqueid("card-item_");
         cards.push(
-          <Card
-            countTilesInRow={countTilesInRow}
-            smallPreview={smallPreview}
-            key={cardKey}
-          >
+          <Card smallPreview={smallPreview} key={cardKey}>
+
             {child}
           </Card>,
         );

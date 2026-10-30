@@ -33,8 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { observer, inject } from "mobx-react";
+
+import { getCountTilesInGallery } from "@docspace/shared/utils";
 
 import { withTranslation } from "react-i18next";
 import { withoutInjected } from "SRC_DIR/helpers/injected";
@@ -103,9 +105,12 @@ const Tiles: FC<TilesProps> = ({
     [oformFiles, onClickInfo],
   );
 
+  const [gridColumns, setGridColumns] = useState(0);
+  const countTilesInRow = gridColumns || getCountTilesInGallery(isShowOneTile);
+
   const { focusedIndex } = useTemplateGalleryHotkeys({
     itemsCount: oformFiles?.length || 0,
-    isShowOneTile,
+    columnsCount: countTilesInRow,
     onSelect: handleSelectByIndex,
     onInfoSelect: handleInfoSelectByIndex,
     enabled: !isShowInitSkeleton && !filterPanelVisible,
@@ -119,6 +124,8 @@ const Tiles: FC<TilesProps> = ({
         hasMoreFiles={hasMoreFiles}
         fetchMoreFiles={fetchMoreFiles}
         isShowOneTile={isShowOneTile}
+        countTilesInRow={countTilesInRow}
+        onGridColumnsChange={setGridColumns}
         smallPreview={smallPreview}
         showLoading={isShowInitSkeleton}
       >

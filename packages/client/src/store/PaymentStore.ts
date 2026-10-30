@@ -82,6 +82,7 @@ import {
   getIsCardLinkedToPortal,
   getIsCardMissingOrInactive,
   getIsPayer,
+  getIsStripePortalAvailable,
   getWalletBalanceAmount,
   getWalletBalanceCurrency,
   formatPaymentDate,
@@ -199,6 +200,13 @@ class PaymentStore {
     return getIsPayer(
       this.userStore?.user?.email,
       this.currentTariffStatusStore?.walletCustomerEmail,
+    );
+  }
+
+  get isStripePortalAvailable() {
+    return getIsStripePortalAvailable(
+      this.userStore?.user?.isOwner,
+      this.isPayer,
     );
   }
 

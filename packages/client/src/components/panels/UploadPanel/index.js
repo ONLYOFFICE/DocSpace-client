@@ -55,12 +55,7 @@ class UploadPanelComponent extends React.Component {
   componentDidMount() {
     const { setNeedErrorChecking } = this.props;
 
-    document.addEventListener("keyup", this.onKeyPress);
     setNeedErrorChecking(true, OPERATIONS_NAME.upload);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keyup", this.onKeyPress);
   }
 
   onClose = () => {
@@ -69,12 +64,6 @@ class UploadPanelComponent extends React.Component {
 
     setUploadPanelVisible(!uploadPanelVisible);
     setNeedErrorChecking(false, OPERATIONS_NAME.upload);
-  };
-
-  onKeyPress = (event) => {
-    if (event.key === "Esc" || event.key === "Escape") {
-      this.onClose();
-    }
   };
 
   clearUploadPanel = () => {

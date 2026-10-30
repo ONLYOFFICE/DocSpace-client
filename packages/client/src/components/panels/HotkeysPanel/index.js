@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { isMacOs } from "react-device-detect";
@@ -74,15 +73,6 @@ const HotkeysPanel = ({
 
   const CtrlKey = isMacOs ? "⌘" : "Ctrl";
   const AltKey = isMacOs ? "⌥" : "Alt";
-
-  const onKeyPress = (e) =>
-    (e.key === "Esc" || e.key === "Escape") && onClose();
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyPress);
-
-    return () => document.removeEventListener("keyup", onKeyPress);
-  });
 
   return (
     <ModalDialog

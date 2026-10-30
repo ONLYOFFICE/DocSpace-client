@@ -168,6 +168,7 @@ import {
   wsCreatedPDFFormImpl,
   wsChangeFolderAccessRightsImpl,
   redirectToParentImpl,
+  syncSelectedFolderCountsImpl,
 } from "./filesStore/socket.helpers";
 import { removeFilesImpl } from "./filesStore/mutations.helpers";
 import {
@@ -336,6 +337,8 @@ class FilesStore {
 
   tempActionFoldersIds: (number | string)[] = EMPTY_ARRAY;
 
+  tempActionFolderId: Nullable<number | string> = null;
+
   isErrorRoomNotAvailable = false;
 
   isErrorAIAgentNotAvailable = false;
@@ -449,9 +452,9 @@ class FilesStore {
     SocketHelper?.on(SocketEvents.ModifyFolder, async (opt) => {
       const { socketSubscribers } = SocketHelper!;
 
-      if (opt && opt.data) {
-        const data = JSON.parse(opt.data);
+      const data = opt?.data ? JSON.parse(opt.data) : null;
 
+      if (data) {
         const pathParts = data.folderId
           ? `DIR-${data.folderId}`
           : `DIR-${data.parentId}`;
@@ -466,6 +469,18 @@ class FilesStore {
       }
 
       console.log("[WS] s:modify-folder", opt);
+
+      // the event may concern a parent folder, which is subscribed too
+      if (opt?.cmd === "create" || opt?.cmd === "delete") {
+        const parentId = data?.folderId ?? data?.parentId;
+
+        if (
+          parentId === undefined ||
+          String(parentId) === String(this.selectedFolderStore.id)
+        ) {
+          this.debounceSyncSelectedFolderCounts();
+        }
+      }
 
       if (opt?.cmd === "create" && !this.showNewFilesInList) {
         const newFilter = this.filter;
@@ -649,11 +664,25 @@ class FilesStore {
   }, 1000);
 
   debounceRemoveFiles = debounce(() => {
+    if (this.tempActionFolderId !== this.selectedFolderStore.id) {
+      this.setTempActionFilesIds(EMPTY_ARRAY);
+      return;
+    }
+
     this.removeFiles(this.tempActionFilesIds);
   }, 1000);
 
   debounceRemoveFolders = debounce(() => {
+    if (this.tempActionFolderId !== this.selectedFolderStore.id) {
+      this.setTempActionFoldersIds(EMPTY_ARRAY);
+      return;
+    }
+
     this.removeFiles(null, this.tempActionFoldersIds);
+  }, 1000);
+
+  debounceSyncSelectedFolderCounts = debounce(() => {
+    syncSelectedFolderCountsImpl(this);
   }, 1000);
 
   wsModifyFolderCreate = async (opt?: TOptSocket) =>
@@ -702,6 +731,10 @@ class FilesStore {
 
   setTempActionFoldersIds = (tempActionFoldersIds: (number | string)[]) => {
     this.tempActionFoldersIds = tempActionFoldersIds;
+  };
+
+  setTempActionFolderId = (tempActionFolderId: Nullable<number | string>) => {
+    this.tempActionFolderId = tempActionFolderId;
   };
 
   setClearSearch = (clearSearch: boolean) => {
@@ -1195,12 +1228,7 @@ class FilesStore {
     if (selected === "close" || selected === "none") {
       clearBuffer && this.setBufferSelection(null);
 
-      if (this.hotkeyCaret) {
-        this.setHotkeyCaretStart(
-          this.selection.at(-1) ?? this.hotkeyCaretStart,
-        );
-        this.setHotkeyCaret(this.selection.at(-1) ?? this.hotkeyCaret);
-      }
+      if (this.hotkeyCaret) this.setHotkeyCaretStart(this.hotkeyCaret);
     }
 
     this.selected = selected;
@@ -1254,6 +1282,17 @@ class FilesStore {
   setFilter = (filter: TFilesFilter) => {
     filter.pageCount = 100;
     this.filter = filter;
+  };
+
+  // A 403 inside a room usually means the user's role in it was lowered while
+  // the tab missed the socket event. Re-reading the open folder brings its
+  // rights up to date, or shows the "room not available" page if access is
+  // gone. fetchFiles reads the folder with skipRedirect, so this cannot
+  // trigger the 403 handler again.
+  refreshRightsAfterForbidden = () => {
+    if (this.selectedFolderStore.isRootFolder) return;
+
+    this.refreshFiles().catch((e) => console.error(e));
   };
 
   refreshFiles = async () => {

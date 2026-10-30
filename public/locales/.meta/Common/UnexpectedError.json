@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-10-23T12:28:45.486Z",
+  "updated_at": "2026-10-29T13:57:47.506Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -229,8 +229,14 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 986,
+      "line_number": 1041,
       "context": "// with the status only in the message (`HTTP <status>`), not as a\n // property, so the message is checked alongside the axios-style shape.\n const status = error?.response?.status ?? error?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(error?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 732,
+      "context": "} catch (error) {\n // A failure the server reports for the task carries its own message; one\n // of the polling itself does not, and is not shown as is.\n toastr.error(\n error instanceof TaskPollingError\n ? t(\"Common:UnexpectedError\")\n : (error as string),\n );\n console.error(error);\n }\n };",
       "module": "/packages/client"
     },
     {
@@ -253,13 +259,13 @@
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 342,
+      "line_number": 350,
       "context": "try {\n await getPaymentInfo();\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n \n return;\n }\n \n this.setIsUpdatingBasicSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 342,
+      "line_number": 350,
       "context": "try {\n await getPaymentInfo();\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n \n return;\n }\n \n this.setIsUpdatingBasicSettings(false);",
       "module": "/packages/client"
     },
@@ -277,7 +283,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-agent-providers/index.tsx",
-      "line_number": 190,
+      "line_number": 194,
       "context": "| { response?: { status?: number }; status?: number; message?: string }\n | undefined;\n const status = err?.response?.status ?? err?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(err?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
       "module": "/packages/sdk"
     },
@@ -319,7 +325,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-providers/index.tsx",
-      "line_number": 111,
+      "line_number": 115,
       "context": "| { response?: { status?: number }; status?: number; message?: string }\n | undefined;\n const status = err?.response?.status ?? err?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(err?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
       "module": "/packages/sdk"
     },
@@ -327,6 +333,12 @@
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/BillingForm.tsx",
       "line_number": 77,
       "context": "AI_ENUM,\n integrationUrl,\n );\n } catch (e) {\n console.error(\"[ai-billing-content] bootstrap failed\", e);\n if (!cancelled) toastr.error(t(\"Common:UnexpectedError\"));\n } finally {\n if (!cancelled) setIsLoading(false);\n }\n })();",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsActions.ts",
+      "line_number": 296,
+      "context": "if (progressStarted) progressStore.error();\n // A failure the server reports for the task carries its own message;\n // one of the polling itself does not, and is not shown as is.\n toastr.error(\n error instanceof TaskPollingError\n ? t(\"Common:UnexpectedError\")\n : (error as string),\n );\n console.error(error);\n }\n },",
       "module": "/packages/sdk"
     },
     {

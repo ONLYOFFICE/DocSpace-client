@@ -110,6 +110,23 @@ import type { TContextItem, TContextOption, TMenuGroupConfig } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
 import type { TSelectionItem } from "./types";
 
+// The room part and the file part of the option list each carry a
+// "separator1", and a room's list keeps both. The menu keys its rows by `key`,
+// so a repeated separator key is told apart by its position; a separator has
+// no identity of its own.
+const withUniqueSeparatorKeys = (options: ContextMenuModel[]) => {
+  const seen = new Set<string | number>();
+
+  return options.map((option, index) => {
+    if (!option.isSeparator) return option;
+    if (!seen.has(option.key)) {
+      seen.add(option.key);
+      return option;
+    }
+    return { ...option, key: `${option.key}-${index}` };
+  });
+};
+
 export const getFilesContextOptionsImpl = (
   self: ContextOptionsStore,
   item: TContextItem,
@@ -1454,7 +1471,19 @@ export const getFilesContextOptionsImpl = (
     );
   }
 
-  const newResult = placePlugins(resultOptions, pluginItems);
+  const usedSeparatorKeys = new Set<string>();
+  const roomOptions = resultOptions.map((option, index) => {
+    if (!option.isSeparator) return option;
+    if (!usedSeparatorKeys.has(option.key)) {
+      usedSeparatorKeys.add(option.key);
+      return option;
+    }
+    return { ...option, key: `${option.key}_${index}` };
+  });
 
-  return trimSeparator(newResult as ContextMenuModel[]);
+  const newResult = placePlugins(roomOptions, pluginItems);
+
+  return withUniqueSeparatorKeys(
+    trimSeparator(newResult as ContextMenuModel[]),
+  );
 };

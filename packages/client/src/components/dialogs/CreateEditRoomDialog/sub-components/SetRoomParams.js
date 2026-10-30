@@ -78,7 +78,7 @@ const SetRoomParams = ({
   setIsValidTitle,
   isWrongTitle,
   setIsWrongTitle,
-  onKeyUp,
+  onKeyDown,
   enableThirdParty,
   isDefaultRoomsQuotaSet,
   folderFormValidation,
@@ -485,7 +485,7 @@ const SetRoomParams = ({
               ? t("Common:ContainsSpecCharacter")
               : t("Common:RequiredField")
           }
-          onKeyUp={onKeyUp}
+          onKeyDown={onKeyDown}
           isAutoFocussed
           dataTestId="create_edit_room_input"
         />

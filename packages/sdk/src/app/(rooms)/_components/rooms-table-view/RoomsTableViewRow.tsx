@@ -372,7 +372,12 @@ const RoomsTableViewRow = observer(
           >
             <div className="table-container_element">
               {inProgress ? (
-                <Loader color="" size="20px" type={LoaderTypes.track} />
+                <Loader
+                  color=""
+                  size="20px"
+                  type={LoaderTypes.track}
+                  isDecorative
+                />
               ) : (
                 roomIconElement
               )}

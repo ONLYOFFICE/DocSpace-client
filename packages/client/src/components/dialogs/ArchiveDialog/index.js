@@ -72,9 +72,6 @@ const ArchiveDialogComponent = (props) => {
   };
 
   const onKeyPress = (e) => {
-    if (e.key === "Escape") {
-      onClose();
-    }
     if (e.key === "Enter") onAction();
   };
 

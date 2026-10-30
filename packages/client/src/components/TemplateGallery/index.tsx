@@ -144,6 +144,7 @@ type TemplateGalleryProps = {
   initTemplateGallery: () => Promise<void>;
   oformsLoadError: boolean;
   oformsNetworkError: boolean;
+  submitToGalleryDialogVisible: boolean;
   setSubmitToGalleryDialogVisible: (isVisible: boolean) => void;
   t: TTranslation;
   filterOformsByLocaleIsLoading: boolean;
@@ -202,6 +203,7 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
     initTemplateGallery,
     oformsLoadError,
     oformsNetworkError,
+    submitToGalleryDialogVisible,
     setSubmitToGalleryDialogVisible,
     t,
     filterOformsByLocaleIsLoading,
@@ -255,7 +257,7 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
   };
 
   useEventListener("keydown", (e: KeyboardEvent) => {
-    if (e.key !== "Escape") return;
+    if (e.key !== "Escape" || submitToGalleryDialogVisible) return;
 
     if (filterPanelVisible) setFilterPanelVisible(false);
     else onCloseClick();
@@ -415,7 +417,8 @@ export default inject<TStore>(
       setFilterPanelVisible,
     } = oformsStore;
 
-    const { setSubmitToGalleryDialogVisible } = dialogsStore;
+    const { submitToGalleryDialogVisible, setSubmitToGalleryDialogVisible } =
+      dialogsStore;
 
     return {
       templateGalleryVisible,
@@ -424,6 +427,7 @@ export default inject<TStore>(
       resetFilters,
       initTemplateGallery,
       oformsLoadError,
+      submitToGalleryDialogVisible,
       setSubmitToGalleryDialogVisible,
       filterOformsByLocaleIsLoading,
       categoryFilterLoaded,

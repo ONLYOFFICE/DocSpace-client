@@ -100,8 +100,58 @@ describe("FilesStore.removeFiles — characterization", () => {
     expect(toast).toHaveBeenCalledTimes(1);
   });
 
-  it("no-ops when destFolderId equals the current folder", () => {
+  it("moves the hotkey caret to the next item left when its item is removed", () => {
+    store.setHotkeyCaret(store.filesList[1]);
+
+    store.removeFiles([1], null, undefined, undefined);
+
+    expect(store.hotkeyCaret?.id).toBe(2);
+    expect(store.hotkeyCaret?.isFolder).toBeFalsy();
+    expect(store.hotkeyCaretStart?.id).toBe(2);
+  });
+
+  it("moves the hotkey caret back when the last items are removed", () => {
+    store.setHotkeyCaret(store.filesList[2]);
+
+    store.removeFiles([1, 2], null, undefined, undefined);
+
+    expect(store.hotkeyCaret?.id).toBe(3);
+    expect(store.hotkeyCaret?.isFolder).toBe(true);
+  });
+
+  it("clears the hotkey caret when nothing is left", () => {
+    store.setHotkeyCaret(store.filesList[0]);
+
+    store.removeFiles([1, 2], [3], undefined, undefined);
+
+    expect(store.hotkeyCaret).toBeNull();
+    expect(store.hotkeyCaretStart).toBeNull();
+  });
+
+  it("keeps the hotkey caret when another item is removed", () => {
+    const caret = store.filesList[0];
+    store.setHotkeyCaret(caret);
+    store.setHotkeyCaretStart(caret);
+
+    store.removeFiles([2], null, undefined, undefined);
+
+    expect(store.hotkeyCaret?.id).toBe(caret.id);
+    expect(store.hotkeyCaretStart?.id).toBe(caret.id);
+  });
+
+  it("refetches the current folder when it is the destination", () => {
+    const fetchFiles = vi.fn(async () => undefined);
+    store.fetchFiles = fetchFiles;
+
     store.removeFiles([1], null, undefined, store.selectedFolderStore.id);
-    expect(store.files.map((f) => f.id)).toEqual([1, 2]); // unchanged
+
+    expect(store.files.map((f) => f.id)).toEqual([1, 2]);
+    expect(fetchFiles).toHaveBeenCalledWith(
+      store.selectedFolderStore.id,
+      store.filter,
+      true,
+      true,
+      false,
+    );
   });
 });

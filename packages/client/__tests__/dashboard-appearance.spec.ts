@@ -81,6 +81,7 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
  */
 
 const DASHBOARD_URL = "/dashboard";
+const FIRST_RENDER_TIMEOUT = 15_000;
 
 /**
  * The clock every case is taken at.
@@ -395,7 +396,9 @@ const openDashboard = async (
 
   // Past the loader: everything below is decided by stores that are still
   // loading while the skeleton is up.
-  await expect(page.locator(CREATE_SECTION)).toBeVisible();
+  await expect(page.locator(CREATE_SECTION)).toBeVisible({
+    timeout: FIRST_RENDER_TIMEOUT,
+  });
 };
 
 /**

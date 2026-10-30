@@ -147,10 +147,9 @@ const ChangeUserStatusDialogComponent = ({
 
 	const onKeyUpHandler = React.useCallback(
 		(e: KeyboardEvent) => {
-			if (e.key === ButtonKeys.esc) onCloseAction();
 			if (e.key === ButtonKeys.enter) onChangeUserStatus();
 		},
-		[onChangeUserStatus, onCloseAction],
+		[onChangeUserStatus],
 	);
 
 	React.useEffect(() => {

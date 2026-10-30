@@ -71,6 +71,7 @@ const NameCell = ({
           color=""
           size="20px"
           type={LoaderTypes.track}
+          isDecorative
         />
       ) : (
         <TableCell

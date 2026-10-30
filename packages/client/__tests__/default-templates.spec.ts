@@ -108,17 +108,23 @@ test.describe("Default templates", () => {
     const selector = page.getByTestId("aside").first();
     await expect(selector).toBeVisible();
 
-    const roomsRow = selector.getByText("Rooms").first();
+    // Click the item, not the text inside it: the item's label sits over
+    // the text node's own box.
+    const selectorItem = (text: string) =>
+      selector
+        .locator('[data-testid^="selector-item-"]')
+        .filter({ hasText: text })
+        .first();
+
+    const roomsRow = selectorItem("Rooms");
     await expect(roomsRow).toBeVisible();
     await roomsRow.click();
 
-    const roomRow = selector.getByText("New room").first();
+    const roomRow = selectorItem("New room");
     await expect(roomRow).toBeVisible();
     await roomRow.click();
 
-    const documentRow = selector
-      .getByText("ONLYOFFICE Sample Document")
-      .first();
+    const documentRow = selectorItem("ONLYOFFICE Sample Document");
     await expect(documentRow).toBeVisible();
     await documentRow.click();
 

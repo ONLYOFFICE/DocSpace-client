@@ -126,7 +126,11 @@ test.describe("Navigation Sample Plugin", () => {
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
     const row = table.getByTestId(`table-row-${ROW_DOCX}`);
-    await row.getByTestId("room-icon-image").click();
+    // Under the pointer the icon turns into the row's checkbox, which takes
+    // the click, as it does for a user. `force` skips only Playwright's
+    // hit-target check, which used to pass because the row was a
+    // role="button" drop zone.
+    await row.getByTestId("room-icon-image").click({ force: true });
 
     await openContextMenu(page, ROW_DOCX);
 

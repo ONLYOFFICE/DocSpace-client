@@ -71,7 +71,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
     passwordInputRef.current?.onGeneratePassword(event);
   };
 
-  const onCleanClick = (event: React.MouseEvent<Element>) => {
+  const onCleanClick = (event: React.SyntheticEvent) => {
     event.stopPropagation();
     setPasswordValue("");
     setIsPasswordValid(false);
@@ -84,6 +84,16 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
       toastr.success(t("Common:PasswordSuccessfullyCopied"));
     }
   };
+
+  // An action link has no href, so it is a button to the keyboard: Enter and
+  // Space run it, and Space does not scroll the panel.
+  const onButtonKey =
+    (action: (event: React.SyntheticEvent) => void) =>
+    (event: React.KeyboardEvent) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      action(event);
+    };
 
   const onChangePassword = (
     _: React.ChangeEvent<HTMLInputElement>,
@@ -177,6 +187,9 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               fontWeight={600}
               type={LinkType.action}
               onClick={onCleanClick}
+              role="button"
+              tabIndex={0}
+              onKeyDown={onButtonKey(onCleanClick)}
               dataTestId="edit_link_panel_clean_password_link"
             >
               {t("Common:Clean")}
@@ -187,6 +200,9 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               fontWeight={600}
               onClick={onCopyClick}
               type={LinkType.action}
+              role="button"
+              tabIndex={0}
+              onKeyDown={onButtonKey(onCopyClick)}
               dataTestId="edit_link_panel_copy_password_link"
             >
               {t("Common:CopyPassword")}

@@ -63,6 +63,7 @@ import EmptyRoomGroupContainer from "../../../../components/EmptyContainer/Empty
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
+import { useRowFocus } from "../../Hooks/useRowFocus";
 import NoAccessContainer from "../../../../components/EmptyContainer/NoAccessContainer";
 
 const separatorStyles = `width: 100vw;  position: absolute; height: 3px; z-index: 1;`;
@@ -101,6 +102,7 @@ const SectionBodyContent = (props) => {
     tooltipPageY,
     setHotkeyCaretStart,
     setHotkeyCaret,
+    hotkeyCaret,
     scrollToItem,
     setScrollToItem,
     filesList,
@@ -125,6 +127,9 @@ const SectionBodyContent = (props) => {
     draggedFiles,
     setIsChatDropTarget,
   } = props;
+
+  // The real focus follows the keyboard caret, and the list is one Tab stop.
+  useRowFocus(hotkeyCaret);
 
   const attachFilesToChat = useAttachHostFilesToChat();
 
@@ -561,6 +566,7 @@ export default inject(
       setBufferSelection,
       setHotkeyCaretStart,
       setHotkeyCaret,
+      hotkeyCaret,
       scrollToItem,
       setScrollToItem,
       filesList,
@@ -602,6 +608,7 @@ export default inject(
       tooltipPageY,
       setHotkeyCaretStart,
       setHotkeyCaret,
+      hotkeyCaret,
       scrollToItem,
       setScrollToItem,
       filesList,

@@ -121,9 +121,10 @@ const REQUIRED_EXPORTS = [
   "arrayBufferToBase64",
   "base64ToArrayBuffer",
   "ENCRYPTION_CONSTANTS",
-  // build stamp
+  // build stamp and contract
   "LIBRARY_VERSION",
   "BUILD_COMMIT",
+  "EDITOR_CONTRACT_VERSION",
   // errors
   "CryptoError",
   "InvalidPassphraseError",
@@ -154,6 +155,10 @@ describe("onlyoffice-crypto bundle contract", () => {
   it("LIBRARY_VERSION and BUILD_COMMIT stamp the bundle", () => {
     expect(bundle.LIBRARY_VERSION).toMatch(/^\d+\.\d+\.\d+$/);
     expect(bundle.BUILD_COMMIT).toMatch(/^([0-9a-f]{7,40}(-dirty)?|dev)$/);
+  });
+
+  it("Contract referenced by version: the bundle names the contract version the client sends", () => {
+    expect(bundle.EDITOR_CONTRACT_VERSION).toBe(1);
   });
 
   it("encryptFile keeps the form flag in the DSE3 header when asked", async () => {

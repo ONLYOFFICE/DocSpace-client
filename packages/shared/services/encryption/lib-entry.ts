@@ -125,6 +125,7 @@ export {
   VERSION_HPKE_WRAP,
   VERSION_DSE3_FILE,
   LIBRARY_VERSION,
+  EDITOR_CONTRACT_VERSION,
 } from "./types";
 
 export * from "./errors";

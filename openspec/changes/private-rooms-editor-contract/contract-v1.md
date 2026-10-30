@@ -36,8 +36,8 @@ copies in the portal.
 
 | Item | Value in v1 | Where it is visible |
 |---|---|---|
-| Contract version | `1` | `editorConfig.encryptionKeys.contractVersion` (planned, task 3.2; absent in build 133) |
-| Crypto library | `onlyoffice-crypto.js` 2.1.0, this hand-over; 2.0.0 is the unstamped build of 2026-07-01 (commit 8d6e613ce12) that builds 133 and 10.0.2.5 ship (223841 bytes, SHA-256 `58cb7f48…`) | banner on line 1 of the file (`/*! onlyoffice-crypto <version> <commit> */`) and `window.OnlyofficeCrypto.LIBRARY_VERSION` / `BUILD_COMMIT` |
+| Contract version | `1` | `editorConfig.encryptionKeys.contractVersion`, sent by the client since 2026-10-30 (task 3.1); the library exports the same number as `EDITOR_CONTRACT_VERSION` since 2.2.0 |
+| Crypto library | `onlyoffice-crypto.js` 2.2.0, this hand-over (2.1.0 of 2026-10-29 added the stamp and the form flag); 2.0.0 is the unstamped build of 2026-07-01 (commit 8d6e613ce12) that builds 133 and 10.0.2.5 ship (223841 bytes, SHA-256 `58cb7f48…`) | banner on line 1 of the file (`/*! onlyoffice-crypto <version> <commit> */`) and `window.OnlyofficeCrypto.LIBRARY_VERSION` / `BUILD_COMMIT` |
 | DSE3 container | version 2 read and written today; version 3 (authenticated header) is planned, see §5.4 | `window.OnlyofficeCrypto.VERSION_DSE3_FILE`, `parseDSE3Header(bytes).version` |
 | Minimum Document Server | to be named by the Document Server team: the first release whose web client carries the crypto add-on and a library of 2.1.0 or newer | `Asc.Addons.crypto`, the library banner under the Document Server address |
 
@@ -72,6 +72,8 @@ Observed: the web client reads **`dek` only**. `cryptoEngineId` is not read.
   ignore fields it does not know.
 - DS-2. The add-on SHOULD read `contractVersion` and refuse to open (with a
   distinct error, §10) when the major version is one it does not implement.
+  Since 2026-10-30 the client sends `contractVersion: 1` and library 2.2.0
+  exports `EDITOR_CONTRACT_VERSION` for the comparison.
 - DS-3. The add-on MUST NOT send `dek`, the decrypted document or any
   decrypted change to the Document Server's server side. Observed: the DEK is
   read when the add-on starts and is not part of any message to the server
@@ -138,6 +140,9 @@ over the file id and version is still required.
   the first open waits for it (4 of 4 warm opens on 2026-10-30), but a
   second session joining a held session with 257 pending changes failed the
   same way, so the change-apply path on join MUST wait for the library too.
+  On 2026-10-30 with two members the join after a force-save failed twice
+  on documents as well (`changesError: Cannot read properties of undefined
+  (reading 'Jl')`, editor error -82), see §7.
 
 ### 4.3 Editors covered
 
@@ -269,11 +274,20 @@ typed text.
   text appeared twice, while the document editor reopened correctly under
   the same conditions. Until the Document Server ends the session on save
   or replays idempotently, P-5 serves the stable base.
-- DS-13 (to verify, task 4.4). Images inserted into an encrypted document are
-  kept by the add-on as `cryptoimg://` references with their bytes in memory.
-  Whether an inserted image reaches the Document Server's media store or the
-  portal in plaintext is not known; the contract requires that no plaintext
-  media leaves the browser outside the encrypted container.
+- DS-13 (observed 2026-10-30 on 10.0.2.5, task 4.4). An image inserted by
+  address or from the device is uploaded to the Document Server's media store
+  (`POST /upload/<key>`) as an `ENCRYPTED;` blob under the DEK and fetched
+  back for decryption in the browser; the save frame carries no image data
+  and the saved containers are DSE3 on both sides. The contract requires
+  that this stays so: no plaintext media leaves the browser outside the
+  encrypted container. Paste and drag are not verified.
+- DS-20. An image inserted from the device MUST be shown. Observed on
+  2026-10-30: the add-on uploaded the encrypted blob twice and fetched it
+  back, but the picture never appeared, neither for the inserting member nor
+  for a co-editor; the same image inserted by a same-origin address was shown.
+  An address on another origin is refused ("Image URL is incorrect") after
+  the browser fetched it; whether that refusal is intended is for the
+  Document Server team.
 
 ## 7. End of an editing session and reopening
 
@@ -300,6 +314,19 @@ content once, and the presentation reopened without an error but with the
 session's changes applied on top of the saved base, so the typed text
 appeared twice (DS-19). Sessions were still not ended after every editor
 left.
+
+Session end, read on 2026-10-30 (design.md, "Run of 2026-10-30, session
+end"): the Document Server sends status-1 callbacks on open and in answer
+to the portal's `info` re-check, and no callback at all when the last
+editor leaves. A session without changes disappeared within three minutes,
+noticed only by the portal's own re-check; a session with pending changes
+answered `info` with status 1 and an empty user list for more than a day
+and kept the file "being edited". With two members (design.md, "Run of
+2026-10-30, member removed while editing", "images"): a member joining a
+held session after a force-save failed twice on documents with `changesError`
+(editor error -82), the base mismatch P-5 removes; a member removed from
+the room kept editing until the portal's rights re-check dropped him, and a
+save made meanwhile was stored (portal items 10.5).
 
 - P-5 (portal, design D7, task 6.2). When an editor opens an encrypted file
   whose current version is a force-save, the portal asks the Document Server
@@ -422,13 +449,14 @@ client-side guarantee stays the one of `private-rooms/encryption-core`
 | DS-10 | Document Server | relay and store changes encrypted only | observed |
 | DS-11 | Document Server | co-editing enabled | observed |
 | DS-12 | Document Server | per-document change key and AAD | recommended |
-| DS-13 | Document Server | no plaintext media outside the container | to verify |
-| DS-14 | Document Server | define the end of an encrypted session | to answer |
+| DS-13 | Document Server | no plaintext media outside the container | observed on 10.0.2.5 for address and device inserts |
+| DS-14 | Document Server | define the end of an encrypted session | to answer; observed: no closing callback, held sessions answer `info` with no users |
 | DS-15 | Document Server | no conversion-service path for encrypted documents | to confirm |
 | DS-16 | Document Server | capability and library version signal | to answer |
-| DS-17 | Document Server | open path waits for the crypto library | first open closed in 10.0.2.5; the join path still races |
+| DS-17 | Document Server | open path waits for the crypto library | first open closed in 10.0.2.5; the join after a force-save still fails, on documents too |
 | DS-18 | Document Server | spreadsheet editor applies relayed encrypted changes | closed in 10.0.2.5 |
 | DS-19 | Document Server | no duplicated replay on a presentation reopen | new, from the run of 2026-10-30 |
+| DS-20 | Document Server | an image inserted from the device is shown | new, from the run of 2026-10-30 |
 | P-1 | Portal server | `document.url` reachable from the browser | task 6.3 |
 | P-2 | Portal and Document Server | secure contexts | deployment rule |
 | P-3 | Portal server | refuse a save without the encrypted flag | task 6.4 |
@@ -453,3 +481,7 @@ question of §3.3.
 - 2026-10-30: read against build 10.0.2.5 and a run on it: DS-17 narrowed
   to the join path, DS-18 closed, DS-19 added, DS-15 and DS-16 made
   precise, the sources and the library row updated.
+- 2026-10-30, evening: the runs with two members and the session-end read
+  (design.md): DS-13 observed, DS-14 narrowed, DS-17 reproduced on documents,
+  DS-20 added; the client sends `contractVersion: 1` and library 2.2.0
+  exports `EDITOR_CONTRACT_VERSION`.

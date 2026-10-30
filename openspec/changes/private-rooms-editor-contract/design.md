@@ -950,7 +950,8 @@ ciphertext.
     encrypted flag, and keeps the previous version.
 
 11. **The bundle carries a build stamp and a library version.** Implemented
-    2026-10-29 (task 1.4): `LIBRARY_VERSION` (2.1.0, a constant next to the
+    2026-10-29 (task 1.4), 2.2.0 on 2026-10-30 exporting
+    `EDITOR_CONTRACT_VERSION` for DS-2: `LIBRARY_VERSION` (a constant next to the
     other version constants) and `BUILD_COMMIT` (the short hash, `-dirty`
     from a modified tree, defined by the bundle build) are exported, and the
     same two values are the first line of the file, so a deployed copy is

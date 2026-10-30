@@ -117,6 +117,7 @@
   "TemplateDeleted": "Predloga izbrisana",
   "TemplateFieldsRequired": "Za shranjevanje predloge dodajte vsaj eno polje",
   "TemplateNameExists": "Predloga s tem imenom že obstaja",
+  "TemplateNameReserved": "To ime je rezervirano za polja po meri",
   "TemplateValue": "Predloga metapodatkov: {{template}}",
   "Visibility": "Vidnost",
   "Visible": "Vidna",

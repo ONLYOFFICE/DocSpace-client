@@ -117,6 +117,7 @@
   "TemplateDeleted": "Šablon je obrisan",
   "TemplateFieldsRequired": "Dodajte bar jedno polje da biste sačuvali šablon",
   "TemplateNameExists": "Šablon sa ovim nazivom već postoji",
+  "TemplateNameReserved": "Ovaj naziv je rezervisan za prilagođena polja",
   "TemplateValue": "Šablon metapodataka: {{template}}",
   "Visibility": "Vidljivost",
   "Visible": "Vidljiv",

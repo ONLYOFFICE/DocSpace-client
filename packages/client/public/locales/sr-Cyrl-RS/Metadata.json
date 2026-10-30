@@ -117,6 +117,7 @@
   "TemplateDeleted": "Шаблон је обрисан",
   "TemplateFieldsRequired": "Додајте бар једно поље да бисте сачували шаблон",
   "TemplateNameExists": "Шаблон са овим називом већ постоји",
+  "TemplateNameReserved": "Овај назив је резервисан за прилагођена поља",
   "TemplateValue": "Шаблон метаподатака: {{template}}",
   "Visibility": "Видљивост",
   "Visible": "Видљив",

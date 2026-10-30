@@ -117,6 +117,7 @@
   "TemplateDeleted": "Veidne izdzēsta",
   "TemplateFieldsRequired": "Pievienojiet vismaz vienu lauku, lai saglabātu veidni",
   "TemplateNameExists": "Veidne ar šādu nosaukumu jau pastāv",
+  "TemplateNameReserved": "Šis nosaukums ir rezervēts pielāgotajiem laukiem",
   "TemplateValue": "Metadatu veidne: {{template}}",
   "Visibility": "Redzamība",
   "Visible": "Redzama",

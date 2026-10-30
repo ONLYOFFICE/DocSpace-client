@@ -117,6 +117,7 @@
   "TemplateDeleted": "Şablon silindi",
   "TemplateFieldsRequired": "Şablonu kaydetmek için en az bir alan ekleyin",
   "TemplateNameExists": "Bu ada sahip bir şablon zaten var",
+  "TemplateNameReserved": "Bu ad özel alanlar için ayrılmıştır",
   "TemplateValue": "Meta veri şablonu: {{template}}",
   "Visibility": "Görünürlük",
   "Visible": "Görünür",

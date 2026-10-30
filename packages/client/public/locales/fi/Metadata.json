@@ -117,6 +117,7 @@
   "TemplateDeleted": "Malli poistettu",
   "TemplateFieldsRequired": "Lisää vähintään yksi kenttä tallentaaksesi mallin",
   "TemplateNameExists": "Tämänniminen malli on jo olemassa",
+  "TemplateNameReserved": "Tämä nimi on varattu mukautetuille kentille",
   "TemplateValue": "Metatietomalli: {{template}}",
   "Visibility": "Näkyvyys",
   "Visible": "Näkyvissä",

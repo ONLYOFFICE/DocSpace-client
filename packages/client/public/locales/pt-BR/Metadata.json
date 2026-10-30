@@ -117,6 +117,7 @@
   "TemplateDeleted": "Modelo excluído",
   "TemplateFieldsRequired": "Adicione pelo menos um campo para salvar o modelo",
   "TemplateNameExists": "Já existe um modelo com este nome",
+  "TemplateNameReserved": "Este nome é reservado para campos personalizados",
   "TemplateValue": "Modelo de metadados: {{template}}",
   "Visibility": "Visibilidade",
   "Visible": "Visível",

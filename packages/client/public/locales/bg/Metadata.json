@@ -117,6 +117,7 @@
   "TemplateDeleted": "Шаблонът е изтрит",
   "TemplateFieldsRequired": "Добавете поне едно поле, за да запазите шаблона",
   "TemplateNameExists": "Вече съществува шаблон с това име",
+  "TemplateNameReserved": "Това име е запазено за персонализираните полета",
   "TemplateValue": "Шаблон за метаданни: {{template}}",
   "Visibility": "Видимост",
   "Visible": "Видим",

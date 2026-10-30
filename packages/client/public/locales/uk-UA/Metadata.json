@@ -117,6 +117,7 @@
   "TemplateDeleted": "Шаблон видалено",
   "TemplateFieldsRequired": "Додайте принаймні одне поле, щоб зберегти шаблон",
   "TemplateNameExists": "Шаблон з такою назвою вже існує",
+  "TemplateNameReserved": "Ця назва зарезервована для користувацьких полів",
   "TemplateValue": "Шаблон метаданих: {{template}}",
   "Visibility": "Видимість",
   "Visible": "Видимий",

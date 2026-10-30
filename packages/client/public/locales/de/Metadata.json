@@ -117,6 +117,7 @@
   "TemplateDeleted": "Vorlage gelöscht",
   "TemplateFieldsRequired": "Fügen Sie mindestens ein Feld hinzu, um die Vorlage zu speichern",
   "TemplateNameExists": "Eine Vorlage mit diesem Namen ist bereits vorhanden",
+  "TemplateNameReserved": "Dieser Name ist für benutzerdefinierte Felder reserviert",
   "TemplateValue": "Metadatenvorlage: {{template}}",
   "Visibility": "Sichtbarkeit",
   "Visible": "Sichtbar",

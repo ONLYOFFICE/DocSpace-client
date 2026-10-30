@@ -117,6 +117,7 @@
   "TemplateDeleted": "Plantilla eliminada",
   "TemplateFieldsRequired": "Añada al menos un campo para guardar la plantilla",
   "TemplateNameExists": "Ya existe una plantilla con este nombre",
+  "TemplateNameReserved": "Este nombre está reservado para los campos personalizados",
   "TemplateValue": "Plantilla de metadatos: {{template}}",
   "Visibility": "Visibilidad",
   "Visible": "Visible",

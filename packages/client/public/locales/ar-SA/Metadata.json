@@ -117,6 +117,7 @@
   "TemplateDeleted": "تم حذف القالب",
   "TemplateFieldsRequired": "أضف حقلًا واحدًا على الأقل لحفظ القالب",
   "TemplateNameExists": "يوجد قالب بهذا الاسم بالفعل",
+  "TemplateNameReserved": "هذا الاسم محجوز للحقول المخصصة",
   "TemplateValue": "قالب البيانات الوصفية: {{template}}",
   "Visibility": "الظهور",
   "Visible": "ظاهر",

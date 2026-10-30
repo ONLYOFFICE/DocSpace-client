@@ -117,6 +117,7 @@
   "TemplateDeleted": "Đã xóa mẫu",
   "TemplateFieldsRequired": "Thêm ít nhất một trường để lưu mẫu",
   "TemplateNameExists": "Đã tồn tại mẫu có tên này",
+  "TemplateNameReserved": "Tên này được dành riêng cho trường tùy chỉnh",
   "TemplateValue": "Mẫu siêu dữ liệu: {{template}}",
   "Visibility": "Khả năng hiển thị",
   "Visible": "Hiển thị",

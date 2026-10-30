@@ -117,6 +117,7 @@
   "TemplateDeleted": "Modeli u fshi",
   "TemplateFieldsRequired": "Shtoni të paktën një fushë për të ruajtur modelin",
   "TemplateNameExists": "Një model me këtë emër ekziston tashmë",
+  "TemplateNameReserved": "Ky emër është i rezervuar për fushat e personalizuara",
   "TemplateValue": "Modeli i meta të dhënave: {{template}}",
   "Visibility": "Dukshmëria",
   "Visible": "I dukshëm",

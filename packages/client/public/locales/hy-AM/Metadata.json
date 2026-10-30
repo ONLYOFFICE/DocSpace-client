@@ -117,6 +117,7 @@
   "TemplateDeleted": "Կաղապարը ջնջվեց",
   "TemplateFieldsRequired": "Կաղապարը պահպանելու համար ավելացրեք առնվազն մեկ դաշտ",
   "TemplateNameExists": "Այս անունով կաղապար արդեն գոյություն ունի",
+  "TemplateNameReserved": "Այս անունը վերապահված է անհատական դաշտերի համար",
   "TemplateValue": "Մետատվյալների կաղապար՝ {{template}}",
   "Visibility": "Տեսանելիություն",
   "Visible": "Տեսանելի",

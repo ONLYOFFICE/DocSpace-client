@@ -117,6 +117,7 @@
   "TemplateDeleted": "Șablonul a fost șters",
   "TemplateFieldsRequired": "Adăugați cel puțin un câmp pentru a salva șablonul",
   "TemplateNameExists": "Un șablon cu acest nume există deja",
+  "TemplateNameReserved": "Acest nume este rezervat pentru câmpurile particularizate",
   "TemplateValue": "Șablon de metadate: {{template}}",
   "Visibility": "Vizibilitate",
   "Visible": "Vizibil",

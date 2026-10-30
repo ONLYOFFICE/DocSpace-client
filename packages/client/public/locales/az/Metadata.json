@@ -117,6 +117,7 @@
   "TemplateDeleted": "Şablon silindi",
   "TemplateFieldsRequired": "Şablonu saxlamaq üçün ən azı bir sahə əlavə edin",
   "TemplateNameExists": "Bu adda şablon artıq mövcuddur",
+  "TemplateNameReserved": "Bu ad fərdi sahələr üçün ayrılıb",
   "TemplateValue": "Metadata şablonu: {{template}}",
   "Visibility": "Görünmə",
   "Visible": "Görünən",

@@ -117,6 +117,7 @@
   "TemplateDeleted": "Sjabloon verwijderd",
   "TemplateFieldsRequired": "Voeg minstens één veld toe om het sjabloon op te slaan",
   "TemplateNameExists": "Er bestaat al een sjabloon met deze naam",
+  "TemplateNameReserved": "Deze naam is gereserveerd voor aangepaste velden",
   "TemplateValue": "Metadatasjabloon: {{template}}",
   "Visibility": "Zichtbaarheid",
   "Visible": "Zichtbaar",

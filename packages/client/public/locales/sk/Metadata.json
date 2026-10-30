@@ -117,6 +117,7 @@
   "TemplateDeleted": "Šablóna odstránená",
   "TemplateFieldsRequired": "Ak chcete uložiť šablónu, pridajte aspoň jedno pole",
   "TemplateNameExists": "Šablóna s týmto názvom už existuje",
+  "TemplateNameReserved": "Tento názov je vyhradený pre vlastné polia",
   "TemplateValue": "Šablóna metadát: {{template}}",
   "Visibility": "Viditeľnosť",
   "Visible": "Viditeľná",

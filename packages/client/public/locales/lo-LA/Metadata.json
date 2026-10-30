@@ -117,6 +117,7 @@
   "TemplateDeleted": "ລຶບແມ່ແບບແລ້ວ",
   "TemplateFieldsRequired": "ເພີ່ມຊ່ອງຂໍ້ມູນຢ່າງໜ້ອຍໜຶ່ງຊ່ອງເພື່ອບັນທຶກແມ່ແບບ",
   "TemplateNameExists": "ມີແມ່ແບບທີ່ມີຊື່ນີ້ຢູ່ແລ້ວ",
+  "TemplateNameReserved": "ຊື່ນີ້ຖືກສະຫງວນໄວ້ສຳລັບຊ່ອງຂໍ້ມູນກຳນົດເອງ",
   "TemplateValue": "ແມ່ແບບຂໍ້ມູນເມຕາ: {{template}}",
   "Visibility": "ການເບິ່ງເຫັນ",
   "Visible": "ເບິ່ງເຫັນໄດ້",

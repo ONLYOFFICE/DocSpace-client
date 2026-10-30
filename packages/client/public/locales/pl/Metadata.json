@@ -117,6 +117,7 @@
   "TemplateDeleted": "Szablon usunięty",
   "TemplateFieldsRequired": "Dodaj co najmniej jedno pole, aby zapisać szablon",
   "TemplateNameExists": "Szablon o tej nazwie już istnieje",
+  "TemplateNameReserved": "Ta nazwa jest zarezerwowana dla pól niestandardowych",
   "TemplateValue": "Szablon metadanych: {{template}}",
   "Visibility": "Widoczność",
   "Visible": "Widoczny",

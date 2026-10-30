@@ -58,7 +58,6 @@ const QuotaPerUserComponent = (props) => {
       saveQuota={(size) => setUserQuota(size, t)}
       {...initialSizeProp}
       isQuotaSet={isDefaultUsersQuotaSet}
-      tabIndex={2}
       dataTestId="quota_user"
       toggleDescription={t("UserDefaultQuotaDescription", {
         sectionName: t("Common:Files"),

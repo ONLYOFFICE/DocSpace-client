@@ -338,7 +338,6 @@ const PortalRenamingComponent = (props) => {
         isVertical
       >
         <TextInput
-          tabIndex={10}
           id="textInputContainerPortalRenaming"
           name="portal_name"
           scale
@@ -413,7 +412,6 @@ const PortalRenamingComponent = (props) => {
       </div>
       {settingsBlock}
       <SaveCancelButtons
-        tabIndex={11}
         id="buttonsPortalRenaming"
         className="save-cancel-buttons"
         onSaveClick={onOpenModal}

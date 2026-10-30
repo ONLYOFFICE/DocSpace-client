@@ -86,7 +86,6 @@ const Checkboxes = ({
         <div className="ldap_checkbox-header">
           <RadioButton
             id="ldap-connection-type"
-            tabIndex={1}
             key={ConnectionType.Unencrypted}
             value={ConnectionType.Unencrypted}
             isChecked={!isTlsEnabled ? !isSslEnabled : null}
@@ -99,7 +98,6 @@ const Checkboxes = ({
         <div className="ldap_checkbox-header">
           <RadioButton
             id="ldap-connection-type"
-            tabIndex={2}
             key={ConnectionType.StartTls}
             value={ConnectionType.StartTls}
             isChecked={isTlsEnabled}
@@ -116,7 +114,6 @@ const Checkboxes = ({
         <div className="ldap_checkbox-header">
           <RadioButton
             id="ldap-connection-type"
-            tabIndex={3}
             key={ConnectionType.SSL}
             value={ConnectionType.SSL}
             isChecked={isSslEnabled}

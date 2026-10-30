@@ -38,6 +38,8 @@ import { describe } from "node:test";
 import {
   aiChatStoreHandlers,
   selfHandler,
+  thirdPartyCreateFileHandler,
+  thirdPartyFolderHandler,
 } from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test } from "./fixtures/base";
@@ -184,5 +186,47 @@ test.describe("SDK forms mode — frame methods and custom actions", () => {
           folderId: formsRoomId,
         }),
       ]);
+  });
+});
+
+test.describe("SDK forms mode — third-party room", () => {
+  const thirdPartyRoomId = "box-821";
+
+  // A third-party room id is a string. Creating a blank form posted to
+  // /files/NaN/file, and the reload after it kept only the files whose
+  // folderId equalled Number(roomId) - NaN - so the room turned empty.
+  test("creates a form in a third-party room and keeps its list", async ({
+    page,
+    baseUrl,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
+    port,
+  }) => {
+    serverRequestInterceptor.use(thirdPartyFolderHandler(port, thirdPartyRoomId));
+    clientRequestInterceptor.use(
+      thirdPartyFolderHandler(port, thirdPartyRoomId),
+      thirdPartyCreateFileHandler(port, thirdPartyRoomId),
+    );
+    await seedAuthCookie(page, baseUrl);
+
+    await page.goto(
+      `${baseUrl}${path}?theme=Base&locale=en&roomId=${thirdPartyRoomId}`,
+    );
+
+    const form = page.getByText("ONLYOFFICE Sample Form", { exact: true });
+    await expect(form).toBeVisible();
+
+    const createRequest = page.waitForRequest(
+      (request) =>
+        request.method() === "POST" && /\/files\/[^/]+\/file$/.test(request.url()),
+    );
+
+    await page.getByText("New PDF form", { exact: true }).first().click();
+    await page.getByRole("button", { name: "Create" }).click();
+
+    expect(new URL((await createRequest).url()).pathname).toContain(
+      `/files/${thirdPartyRoomId}/file`,
+    );
+    await expect(form).toBeVisible();
   });
 });

@@ -39,7 +39,12 @@ import {
 } from "./filesSettings";
 import { foldersTreeHandler } from "./foldersTree";
 import { filesUsedSpaceHandler } from "./filesUsedSpace";
-import { folderHandler, folderInfoHandler } from "./folder";
+import {
+  folderHandler,
+  folderInfoHandler,
+  thirdPartyCreateFileHandler,
+  thirdPartyFolderHandler,
+} from "./folder";
 import {
   validatePublicRoomKeyHandler,
   validatePublicRoomKeyPasswordHandler,
@@ -172,6 +177,8 @@ export {
   makeRoomLink,
   folderHandler,
   folderInfoHandler,
+  thirdPartyCreateFileHandler,
+  thirdPartyFolderHandler,
   validatePublicRoomPasswordHandler,
   roomListResolver,
   externalLinksHandler,

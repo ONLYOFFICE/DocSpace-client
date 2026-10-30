@@ -597,6 +597,13 @@ the configuration the doceditor hands the editor component and the
   are the fixture of `pdf-form-signature.test.ts`, and the mirror
   classifies them as a form, as the server lists the file. The plain PDF
   fixture is the editor's "Download As > PDF" of file 7.
+- **File pickers (task 9.8).** The document picker opened from Compare
+  lists the private room with the opaque titles of its four encrypted
+  documents; the selector received `disabledItems` [7, 5, 21, 20] through
+  `onFilesLoaded`, and with one of them selected the Select button is
+  disabled, so no presigned address is requested. The ui-kit does not
+  dim a disabled file row, so the refusal is visible only on the button.
+  The image picker showed the room empty, since it has no image file.
 - **Seen in passing.** After a round trip through the editor, one row of
   the room list showed its opaque server title instead of the recovered
   name ("New document (1)"); the name came back on the next listing.

@@ -349,12 +349,21 @@ const fillingSessionSuccess = {
   statusCode: 200,
 };
 
-export const fillingSessionResolver = () => {
-  return new Response(JSON.stringify(fillingSessionSuccess));
+// An OK answer without `response`, as reported from a shared file's
+// completed-form page.
+const fillingSessionEmpty = {
+  status: 0,
+  statusCode: 200,
 };
 
-export const fillingSessionHandler = (port: string) => {
+export const fillingSessionResolver = (empty = false) => {
+  return new Response(
+    JSON.stringify(empty ? fillingSessionEmpty : fillingSessionSuccess),
+  );
+};
+
+export const fillingSessionHandler = (port: string, empty = false) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}*`, () => {
-    return fillingSessionResolver();
+    return fillingSessionResolver(empty);
   });
 };

@@ -676,6 +676,26 @@ Document Server tables were not read. Times in UTC.
   change store itself was not read in this run, the Document Server can
   only hold what the browsers send.
 
+### Run of 2026-10-30, view-only member (task 4.6)
+
+With Bob's access in room 10 switched to Read (access 2) by the owner,
+Bob opened each file type on Document Server 10.0.2.5:
+
+| File | `openedit` | Editor |
+|------|------------|--------|
+| document 7 | mode view, modeWrite false, no callbackUrl, edit false, download and print true, one key pair | view mode, decrypted text with both members' lines, DEK and contract version 1 in the configuration |
+| spreadsheet 41 | the same | view mode, the decrypted cell |
+| presentation 42 | the same | view mode, the decrypted slide |
+| PDF form 40 | the same, fillForms false, startFilling still true | view mode, the decrypted field, no start-filling event |
+
+So a member with read rights gets the same key path, the editor
+decrypts in the viewer, and there is no save path: the server sends no
+callback address and the editor no write mode. The events the doceditor
+attaches are the phase A set of the edit case minus nothing new, since
+the view/edit split is the server's; download-as stays, as D4 allows.
+The server still reports `startFilling: true` for the viewer of the
+form, which 5.4 switches off.
+
 ## Goals / Non-Goals
 
 **Goals:**

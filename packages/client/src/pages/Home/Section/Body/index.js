@@ -103,6 +103,7 @@ const SectionBodyContent = (props) => {
     setHotkeyCaretStart,
     setHotkeyCaret,
     hotkeyCaret,
+    selection,
     scrollToItem,
     setScrollToItem,
     filesList,
@@ -128,8 +129,26 @@ const SectionBodyContent = (props) => {
     setIsChatDropTarget,
   } = props;
 
+  // A row the keyboard focused as a whole, coming into the list, becomes the
+  // selection - unless it is already part of it - and the caret.
+  const onRowFocus = React.useCallback(
+    ({ id, isFolder }) => {
+      const item = filesList.find(
+        (file) => String(file.id) === id && !!file.isFolder === isFolder,
+      );
+      if (!item) return;
+      const isSelected = selection.some(
+        (file) => file.id === item.id && !!file.isFolder === isFolder,
+      );
+      if (!isSelected) setSelection([item]);
+      setHotkeyCaret(item);
+      setHotkeyCaretStart(item);
+    },
+    [filesList, selection, setSelection, setHotkeyCaret, setHotkeyCaretStart],
+  );
+
   // The real focus follows the keyboard caret, and the list is one Tab stop.
-  useRowFocus(hotkeyCaret);
+  useRowFocus(hotkeyCaret, onRowFocus);
 
   const attachFilesToChat = useAttachHostFilesToChat();
 
@@ -567,6 +586,7 @@ export default inject(
       setHotkeyCaretStart,
       setHotkeyCaret,
       hotkeyCaret,
+      selection,
       scrollToItem,
       setScrollToItem,
       filesList,
@@ -609,6 +629,7 @@ export default inject(
       setHotkeyCaretStart,
       setHotkeyCaret,
       hotkeyCaret,
+      selection,
       scrollToItem,
       setScrollToItem,
       filesList,

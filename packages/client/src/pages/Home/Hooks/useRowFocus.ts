@@ -42,6 +42,9 @@ type TCaretItem = {
   fileExst?: string;
 } | null;
 
+/** The item a row shows, as its element id says: `file_12` or `folder_7`. */
+export type TRowKey = { id: string; isFolder: boolean };
+
 // Every row of the files list in each view: table, rows and tiles.
 const ROW = ".files-item";
 // The section's own list, not the info panel's scroller that shares the class.
@@ -69,12 +72,28 @@ const findRow = (item: TCaretItem) => {
   );
 };
 
-// The control the keyboard lands on in a row: its name, a link, which names
-// the item to a screen reader; the row's first stop where there is none (a
-// selected row shows its checkbox before the name).
-const primaryStop = (row: HTMLElement) => {
-  const stops = getTabStops(row);
-  return stops.find((stop) => stop.matches("a[href]")) ?? stops[0];
+// The element that holds the focus for a row as a whole. A row of tiles or of
+// the row view has a box of its own; a table row is display: contents, so its
+// first cell holds it, and the stylesheet rings every cell of the row. It is
+// focusable from script only (tabindex -1), never a Tab stop of its own.
+const HOLDER = "data-row-focus";
+
+const rowHolder = (row: HTMLElement) => {
+  const holder =
+    getComputedStyle(row).display === "contents"
+      ? (row.querySelector<HTMLElement>(".table-container_cell") ?? row)
+      : row;
+  if (!holder.hasAttribute("tabindex")) holder.setAttribute("tabindex", "-1");
+  holder.setAttribute(HOLDER, "");
+  return holder;
+};
+
+const isHolder = (el: Element) => el.hasAttribute(HOLDER);
+
+const rowKey = (row: HTMLElement): TRowKey | null => {
+  const owner = row.closest<HTMLElement>('[id^="file_"], [id^="folder_"]');
+  const match = owner?.id.match(/^(file|folder)_(.+)$/);
+  return match ? { id: match[2], isFolder: match[1] === "folder" } : null;
 };
 
 // The first Tab stop after `from` (or, going back, before it) that matches.
@@ -100,17 +119,24 @@ const stopBeside = (
  * list one stop on the way through the page:
  *
  * - the arrows move the caret (and the selection) as before, and the focus
- *   follows it to the caret row's name;
- * - Tab and Shift+Tab move through that row's controls, and past its last or
- *   first one leave the list for what comes after or before it - the browser's
- *   own Tab, with the other rows' controls out of the order for that key -
- *   rather than walking every other row's controls;
- * - Tab into the list from outside lands on the caret's row.
+ *   follows it to the caret's row as a whole;
+ * - from the row Tab goes through the row's controls and, past the last one,
+ *   out of the list for what comes after it - the browser's own Tab, with the
+ *   other rows' controls out of the order for that key. Shift+Tab goes back
+ *   through them to the row, and from the row out of the list before it;
+ * - Tab or Shift+Tab into the list from outside - the page, or the browser's
+ *   toolbar - lands on the caret's row (or the row it would reach), and
+ *   `onRowFocus` makes it the selection.
  *
  * Only a caret moved from the keyboard pulls the focus; the pointer's clicks
  * are left as they are.
  */
-export const useRowFocus = (hotkeyCaret: TCaretItem) => {
+export const useRowFocus = (
+  hotkeyCaret: TCaretItem,
+  onRowFocus: (key: TRowKey) => void,
+) => {
+  const onRowFocusRef = useRef(onRowFocus);
+  onRowFocusRef.current = onRowFocus;
   const caretRef = useRef(hotkeyCaret);
   caretRef.current = hotkeyCaret;
   const fromKeyboardRef = useRef(false);
@@ -144,7 +170,10 @@ export const useRowFocus = (hotkeyCaret: TCaretItem) => {
 
     const frame = requestAnimationFrame(() => {
       const row = findRow(hotkeyCaret);
-      if (row) primaryStop(row)?.focus({ preventScroll: true });
+      // Already in that row - Tab brought the focus there and made it the
+      // caret, and may have moved on to one of its controls since: leave it.
+      if (!row || row.contains(document.activeElement)) return;
+      rowHolder(row).focus({ preventScroll: true });
     });
     return () => cancelAnimationFrame(frame);
   }, [hotkeyCaret]);
@@ -165,8 +194,16 @@ export const useRowFocus = (hotkeyCaret: TCaretItem) => {
         // Within the row the browser's own order is right; only the edges
         // need handling, where it would go on into the neighbouring row.
         const stops = getTabStops(row);
-        const edge = back ? stops[0] : stops[stops.length - 1];
-        if (stops.includes(activeElement) && activeElement !== edge) return;
+        if (stops.includes(activeElement)) {
+          if (activeElement !== (back ? stops[0] : stops[stops.length - 1]))
+            return;
+          // Back from the row's first control: to the row itself.
+          if (back) {
+            e.preventDefault();
+            rowHolder(row).focus();
+            return;
+          }
+        } else if (!isHolder(activeElement) && !back) return;
 
         // Out of the list as if it were one stop: the other rows' controls
         // leave the order for this one key, and the browser's own Tab goes
@@ -187,21 +224,43 @@ export const useRowFocus = (hotkeyCaret: TCaretItem) => {
         return;
       }
 
-      // Coming into the list: to the caret's row rather than the first row
-      // (or, going back, the last).
+      // Coming into the list, either way: onto the caret's row as a whole
+      // (or the row Tab would reach), which becomes the selection.
       const next = stopBeside(activeElement, back, () => true);
       const nextRow = rowOf(next ?? null);
       if (!nextRow) return;
 
       const targetRow = findRow(caretRef.current) ?? nextRow;
-      const stops = getTabStops(targetRow);
-      const target = back ? stops[stops.length - 1] : primaryStop(targetRow);
-      if (!target) return;
       e.preventDefault();
-      target.focus();
+      rowHolder(targetRow).focus();
+      const key = rowKey(targetRow);
+      if (key) onRowFocusRef.current(key);
+    };
+
+    // Into the list without a key press the page saw - Shift+Tab back from
+    // the browser's toolbar lands on the last row's last control - the focus
+    // still goes to the caret's row as a whole, which becomes the selection.
+    const onFocusIn = (e: FocusEvent) => {
+      if (!fromKeyboardRef.current) return;
+      const { target, relatedTarget } = e;
+      if (!(target instanceof HTMLElement)) return;
+      const row = rowOf(target);
+      if (!row) return;
+      if (relatedTarget instanceof Element && rowOf(relatedTarget)) return;
+
+      const caretRow = findRow(caretRef.current) ?? row;
+      if (caretRow === row && isHolder(target)) return;
+
+      rowHolder(caretRow).focus({ preventScroll: true });
+      const key = rowKey(caretRow);
+      if (key) onRowFocusRef.current(key);
     };
 
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    document.addEventListener("focusin", onFocusIn);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("focusin", onFocusIn);
+    };
   }, []);
 };

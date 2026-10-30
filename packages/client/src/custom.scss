@@ -114,3 +114,13 @@ body.desktop {
 #bit-notification-bar-spacer {
   height: 0px !important;
 }
+
+// A files list row the keyboard focused as a whole (useRowFocus). A tile, or a
+// row of the row view, holds the focus itself and is ringed here; a table row
+// has no box, its first cell (files-item too) holds the focus, and the table's
+// own stylesheet rings the row across its cells.
+.files-item[data-row-focus]:not(.table-container_cell):focus-visible {
+  outline: 2px solid var(--accent-main);
+  // Outside: inside, the tile's own card paints over it.
+  outline-offset: 2px;
+}

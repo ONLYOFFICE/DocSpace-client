@@ -58,7 +58,11 @@ vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
-  toastr: { success: vi.fn(), error: vi.fn() },
+  toastr: { success: vi.fn(), error: vi.fn(), info: vi.fn() },
+}));
+
+vi.mock("../../i18n", () => ({
+  default: { t: (key: string) => key },
 }));
 
 vi.mock("@docspace/shared/api/settings", () => ({
@@ -71,6 +75,7 @@ vi.mock("@docspace/shared/api/settings", () => ({
   updateWebhook: vi.fn(),
 }));
 
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   getAllWebhooks,
   getWebhooksJournal,
@@ -87,27 +92,38 @@ const config = (id: number, name = `hook-${id}`) => ({
 
 const logItem = (id: number, status = 200) => ({ id, status });
 
+const logItems = (...ids: number[]) => ids.map((id) => logItem(id));
+
 const journal = (items: ReturnType<typeof logItem>[], total = items.length) => ({
   items,
   total,
 });
 
+const ids = (store: WebhooksStore) => store.historyItems.map((item) => item.id);
+
 const navigate = vi.fn();
 
 const createStore = () => new WebhooksStore(Object.create(null));
 
+const params = { configId: 7, groupStatus: 4 };
+
 const openHistory = async (
   store: WebhooksStore,
-  params: { configId: number; groupStatus: number },
   items: ReturnType<typeof logItem>[],
   total = items.length,
+  historyParams: { configId: number; groupStatus: number } = params,
 ) => {
   vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(items, total));
-  store.setActiveConfigId(params.configId);
-  await store.fetchHistoryItems(params);
+  store.setActiveConfigId(historyParams.configId);
+  await store.fetchHistoryItems(historyParams);
 };
 
+const settle = () => vi.advanceTimersByTimeAsync(1000);
+
 beforeEach(() => {
+  vi.useFakeTimers();
+  vi.mocked(getAllWebhooks).mockReset();
+  vi.mocked(getWebhooksJournal).mockReset();
   listeners.clear();
   Object.defineProperty(window, "DocSpace", {
     value: { navigate },
@@ -121,20 +137,8 @@ afterEach(() => {
 });
 
 describe("WebhooksStore socket: subscriptions", () => {
-  it("does not re-read the list while the list page is closed", async () => {
-    vi.useFakeTimers();
-    createStore();
-
-    emit("s:update-webhook", { id: 1 });
-    await vi.advanceTimersByTimeAsync(1000);
-
-    expect(getAllWebhooks).not.toHaveBeenCalled();
-  });
-
   it("re-reads the list once for a burst of add and update events", async () => {
-    vi.useFakeTimers();
     const store = createStore();
-    store.setIsWebhooksListActive(true);
     vi.mocked(getAllWebhooks).mockResolvedValue([config(1), config(2, "new")]);
 
     emit("s:add-webhook", { id: 2 });
@@ -150,11 +154,32 @@ describe("WebhooksStore socket: subscriptions", () => {
     expect(store.errorWebhooks).toBeNull();
   });
 
+  it("keeps the list current while another page is open", async () => {
+    const store = createStore();
+    await openHistory(store, logItems(1));
+    vi.mocked(getAllWebhooks).mockResolvedValue([config(7)]);
+
+    emit("s:update-webhook", { id: 7 });
+    await vi.advanceTimersByTimeAsync(500);
+
+    expect(store.webhooks.map((w) => w.id)).toEqual([7]);
+  });
+
+  it("re-reads the list under steady traffic instead of waiting for a pause", async () => {
+    createStore();
+    vi.mocked(getAllWebhooks).mockResolvedValue([]);
+
+    for (let i = 0; i < 6; i++) {
+      emit("s:update-webhook", { id: 1 });
+      await vi.advanceTimersByTimeAsync(400);
+    }
+
+    expect(getAllWebhooks).toHaveBeenCalledTimes(1);
+  });
+
   it("keeps the list and shows no error when the re-read fails", async () => {
-    vi.useFakeTimers();
     const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
     const store = createStore();
-    store.setIsWebhooksListActive(true);
     store.webhooks = [{ id: 1, name: "a", uri: "u", enabled: true }];
     vi.mocked(getAllWebhooks).mockRejectedValue(new Error("network"));
 
@@ -178,136 +203,213 @@ describe("WebhooksStore socket: subscriptions", () => {
     expect(store.webhooks.map((w) => w.id)).toEqual([2]);
     expect(getAllWebhooks).not.toHaveBeenCalled();
     expect(navigate).not.toHaveBeenCalled();
+    expect(toastr.info).not.toHaveBeenCalled();
   });
 
-  it("leaves the journal of a deleted subscription for the list", () => {
+  it("leaves the journal of a deleted subscription for the list with a notice", () => {
     const store = createStore();
     store.setActiveConfigId("7");
 
     emit("s:delete-webhook", { id: 7 });
 
+    expect(toastr.info).toHaveBeenCalledWith("Webhooks:WebhookWasDeleted");
     expect(navigate).toHaveBeenCalledWith("/developer-tools/webhooks");
   });
 });
 
 describe("WebhooksStore socket: delivery journal", () => {
-  const params = { configId: 7, groupStatus: 4 };
-
-  it("adds the records missing at the top and keeps the loaded ones", async () => {
+  it("re-reads the top once for a burst of journal events", async () => {
     const store = createStore();
-    await openHistory(store, params, [logItem(5), logItem(4)], 120);
+    await openHistory(store, logItems(5, 4), 120);
     store.toggleEventId(5);
     vi.mocked(getWebhooksJournal).mockResolvedValueOnce(
-      journal([logItem(7), logItem(6), logItem(5), logItem(4)], 122),
+      journal(logItems(8, 7, 6, 5, 4), 123),
     );
 
-    await emit("s:add-webhook-log", { id: 6, configId: 7 });
+    emit("s:add-webhook-log", { id: 6, configId: 7 });
+    emit("s:update-webhook-log", { id: 7, configId: 7 });
+    emit("s:update-webhook-log", { id: 8, configId: 7 });
+    emit("s:update-webhook-log", { id: 5, configId: 7 });
+    await settle();
 
+    expect(getWebhooksJournal).toHaveBeenCalledTimes(2);
     expect(getWebhooksJournal).toHaveBeenLastCalledWith({
       ...params,
       startIndex: 0,
       count: store.FETCH_COUNT,
     });
-    expect(store.historyItems.map((item) => item.id)).toEqual([7, 6, 5, 4]);
-    expect(store.totalItems).toBe(122);
-    expect(store.startIndex).toBe(store.FETCH_COUNT + 2);
+    expect(ids(store)).toEqual([8, 7, 6, 5, 4]);
+    expect(store.totalItems).toBe(123);
+    expect(store.startIndex).toBe(5);
     expect(store.checkedEventIds).toEqual([5]);
+  });
+
+  it("picks up records announced only by update-webhook-log", async () => {
+    const store = createStore();
+    await openHistory(store, logItems(5));
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(
+      journal([logItem(6, 0), ...logItems(5)]),
+    );
+
+    emit("s:add-webhook-log", { id: 6, configId: 7 });
+    await settle();
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(
+      journal([logItem(9), logItem(8), logItem(7), logItem(6, 200), logItem(5)]),
+    );
+
+    emit("s:update-webhook-log", { id: 7, configId: 7 });
+    emit("s:update-webhook-log", { id: 6, configId: 7 });
+    await settle();
+
+    expect(ids(store)).toEqual([9, 8, 7, 6, 5]);
+    expect(store.historyItems[3]).toEqual(logItem(6, 200));
+  });
+
+  it("re-reads the top under steady traffic instead of waiting for a pause", async () => {
+    const store = createStore();
+    await openHistory(store, logItems(5));
+    vi.mocked(getWebhooksJournal).mockResolvedValue(journal(logItems(5)));
+
+    for (let i = 0; i < 5; i++) {
+      emit("s:update-webhook-log", { id: 5, configId: 7 });
+      await vi.advanceTimersByTimeAsync(250);
+    }
+
+    expect(getWebhooksJournal).toHaveBeenCalledTimes(2);
+  });
+
+  it("drops records of the top that no longer match the filter", async () => {
+    const store = createStore();
+    await openHistory(store, logItems(6, 5, 4), 50);
+    store.toggleEventId(5);
+    store.toggleEventId(6);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(6, 4), 49));
+
+    emit("s:update-webhook-log", { id: 5, configId: 7 });
+    await settle();
+
+    expect(ids(store)).toEqual([6, 4]);
+    expect(store.totalItems).toBe(49);
+    expect(store.checkedEventIds).toEqual([6]);
+  });
+
+  it("keeps the pages loaded below the top", async () => {
+    const store = createStore();
+    store.FETCH_COUNT = 2;
+    await openHistory(store, logItems(6, 5), 4);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(4, 3), 4));
+    await store.fetchMoreItems(params);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(7, 6), 5));
+
+    emit("s:add-webhook-log", { id: 7, configId: 7 });
+    await settle();
+
+    expect(ids(store)).toEqual([7, 6, 5, 4, 3]);
+    expect(store.startIndex).toBe(5);
+    expect(store.totalItems).toBe(5);
+  });
+
+  it("re-reads by id a record loaded below the top", async () => {
+    const store = createStore();
+    store.FETCH_COUNT = 2;
+    await openHistory(store, logItems(6, 5), 4);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(4, 3), 4));
+    await store.fetchMoreItems(params);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(
+      journal([logItem(9), logItem(3, 500)]),
+    );
+
+    await emit("s:update-webhook-log", { id: 3, configId: 7 });
+    await settle();
+
+    expect(getWebhooksJournal).toHaveBeenLastCalledWith({
+      ...params,
+      eventId: 3,
+    });
+    expect(store.historyItems[3]).toEqual(logItem(3, 500));
+    expect(getWebhooksJournal).toHaveBeenCalledTimes(3);
   });
 
   it("ignores records of another subscription", async () => {
     const store = createStore();
-    await openHistory(store, params, [logItem(5)]);
+    await openHistory(store, logItems(5));
 
-    await emit("s:add-webhook-log", { id: 9, configId: 8 });
-    await emit("s:update-webhook-log", { id: 5, configId: 8 });
+    emit("s:add-webhook-log", { id: 9, configId: 8 });
+    emit("s:update-webhook-log", { id: 5, configId: 8 });
+    await settle();
 
     expect(getWebhooksJournal).toHaveBeenCalledTimes(1);
   });
 
-  it("ignores records while the journal is closed", async () => {
+  it("drops a pending re-read when the journal is closed", async () => {
     const store = createStore();
-    await openHistory(store, params, [logItem(5)]);
+    await openHistory(store, logItems(5));
+
+    emit("s:add-webhook-log", { id: 6, configId: 7 });
     store.clearHistoryParams();
-
-    await emit("s:add-webhook-log", { id: 6, configId: 7 });
-
-    expect(getWebhooksJournal).toHaveBeenCalledTimes(1);
-  });
-
-  it("replaces an updated record in place", async () => {
-    const store = createStore();
-    await openHistory(store, params, [logItem(6), logItem(5, 0), logItem(4)]);
-    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(
-      journal([logItem(8), logItem(5, 500)]),
-    );
-
-    await emit("s:update-webhook-log", { id: 5, configId: 7 });
-
-    expect(getWebhooksJournal).toHaveBeenLastCalledWith({
-      ...params,
-      eventId: 5,
-    });
-    expect(store.historyItems).toEqual([
-      logItem(6),
-      logItem(5, 500),
-      logItem(4),
-    ]);
-  });
-
-  it("drops a record that no longer matches the filter", async () => {
-    const store = createStore();
-    await openHistory(store, params, [logItem(6), logItem(5)], 50);
-    store.toggleEventId(5);
-    store.toggleEventId(6);
-    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal([]));
-
-    await emit("s:update-webhook-log", { id: 5, configId: 7 });
-
-    expect(store.historyItems.map((item) => item.id)).toEqual([6]);
-    expect(store.totalItems).toBe(49);
-    expect(store.startIndex).toBe(store.FETCH_COUNT - 1);
-    expect(store.checkedEventIds).toEqual([6]);
-  });
-
-  it("does not request a record that is not loaded", async () => {
-    const store = createStore();
-    await openHistory(store, params, [logItem(6)]);
-
-    await emit("s:update-webhook-log", { id: 5, configId: 7 });
+    await settle();
 
     expect(getWebhooksJournal).toHaveBeenCalledTimes(1);
   });
 
   it("drops a response that arrives after the filter changed", async () => {
     const store = createStore();
-    await openHistory(store, params, [logItem(5)]);
+    await openHistory(store, logItems(5));
 
-    let resolveHead: (value: unknown) => void = () => {};
+    let resolveTop: (value: unknown) => void = () => {};
     vi.mocked(getWebhooksJournal).mockReturnValueOnce(
       new Promise((resolve) => {
-        resolveHead = resolve;
+        resolveTop = resolve;
       }),
     );
-    const pending = emit("s:add-webhook-log", { id: 6, configId: 7 });
+    emit("s:add-webhook-log", { id: 6, configId: 7 });
+    await settle();
 
-    await openHistory(store, { configId: 7, groupStatus: 8 }, [logItem(3)]);
-    resolveHead(journal([logItem(6), logItem(5)]));
-    await pending;
+    await openHistory(store, logItems(3), 1, { configId: 7, groupStatus: 8 });
+    resolveTop(journal(logItems(6, 5)));
+    await settle();
 
-    expect(store.historyItems.map((item) => item.id)).toEqual([3]);
+    expect(ids(store)).toEqual([3]);
+  });
+
+  it("does not duplicate rows when a page loads after new records arrived", async () => {
+    const store = createStore();
+    store.FETCH_COUNT = 2;
+    await openHistory(store, logItems(6, 5), 4);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(5, 4), 5));
+
+    await store.fetchMoreItems(params);
+
+    expect(ids(store)).toEqual([6, 5, 4]);
   });
 
   it("re-reads the opened event details", async () => {
+    vi.useRealTimers();
     const store = createStore();
-    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal([logItem(5)]));
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(5)));
     await store.fetchEventData(5);
     vi.mocked(getWebhooksJournal).mockResolvedValueOnce(
       journal([logItem(5, 500)]),
     );
 
-    await emit("s:update-webhook-log", { id: 5, configId: 7 });
+    emit("s:update-webhook-log", { id: 5, configId: 7 });
     await vi.waitFor(() => expect(store.eventDetails).toEqual(logItem(5, 500)));
 
     expect(getWebhooksJournal).toHaveBeenLastCalledWith({ eventId: 5 });
+  });
+
+  it("logs a failed re-read of the event details", async () => {
+    vi.useRealTimers();
+    const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
+    const store = createStore();
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(5)));
+    await store.fetchEventData(5);
+    vi.mocked(getWebhooksJournal).mockRejectedValueOnce(new Error("network"));
+
+    emit("s:update-webhook-log", { id: 5, configId: 7 });
+    await vi.waitFor(() => expect(consoleError).toHaveBeenCalled());
+
+    expect(store.eventDetails).toEqual(logItem(5));
+    consoleError.mockRestore();
   });
 });

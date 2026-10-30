@@ -58,6 +58,8 @@ import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TTranslation } from "@docspace/shared/types";
 import type { DateTime } from "luxon";
 
+import i18n from "../i18n";
+
 export type TWebhook = {
   id: number;
   name: string;
@@ -126,14 +128,15 @@ class WebhooksStore {
 
   errorWebhooks: { error: string } | null = null;
 
-  isWebhooksListActive = false;
-
   activeConfigId: number | null = null;
 
   historyParams: TJournalParams | null = null;
 
   constructor(settingsStore: SettingsStore) {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      debounceReloadWebhooks: false,
+      debounceLoadJournalTop: false,
+    });
 
     this.settingsStore = settingsStore;
 
@@ -144,31 +147,32 @@ class WebhooksStore {
     SocketHelper?.on(SocketEvents.UpdateWebhookLog, this.onWebhookLogUpdated);
   }
 
-  setIsWebhooksListActive = (isActive: boolean) => {
-    this.isWebhooksListActive = isActive;
-  };
-
   setActiveConfigId = (configId: number | string | null) => {
     this.activeConfigId = configId === null ? null : Number(configId);
   };
 
   clearHistoryParams = () => {
     this.historyParams = null;
+    this.debounceLoadJournalTop.cancel();
   };
 
   clearEventDetails = () => {
     this.eventDetails = {};
   };
 
+  // Every delivery attempt shifts the last success or error date, so under
+  // steady traffic the list is re-read at most once per maxWait.
   onWebhookChanged = () => {
-    if (!this.isWebhooksListActive) return;
-
     this.debounceReloadWebhooks();
   };
 
-  debounceReloadWebhooks = debounce(() => {
-    this.reloadWebhooks();
-  }, 500);
+  debounceReloadWebhooks = debounce(
+    () => {
+      this.reloadWebhooks();
+    },
+    500,
+    { maxWait: 2000 },
+  );
 
   reloadWebhooks = async () => {
     try {
@@ -185,50 +189,92 @@ class WebhooksStore {
   onWebhookDeleted = ({ id }: TWebhookData) => {
     this.webhooks = this.webhooks.filter((webhook) => webhook.id !== id);
 
-    if (this.activeConfigId === id) {
-      window.DocSpace.navigate("/developer-tools/webhooks");
-    }
+    if (this.activeConfigId !== id) return;
+
+    toastr.info(i18n.t("Webhooks:WebhookWasDeleted"));
+    window.DocSpace.navigate("/developer-tools/webhooks");
   };
 
   isHistoryOf = (configId: number) =>
     !!this.historyParams && Number(this.historyParams.configId) === configId;
 
-  onWebhookLogAdded = async ({ configId }: TWebhookLogData) => {
+  onWebhookLogAdded = ({ configId }: TWebhookLogData) => {
     if (!this.isHistoryOf(configId)) return;
 
-    const params = this.historyParams!;
+    this.debounceLoadJournalTop();
+  };
+
+  // add-webhook-log is throttled by the server and names only the first record
+  // of its window; the rest are announced by update-webhook-log, so an unknown
+  // id re-reads the top of the journal as well.
+  onWebhookLogUpdated = ({ id, configId }: TWebhookLogData) => {
+    if (Number(this.eventDetails?.id) === id) {
+      this.fetchEventData(id).catch((error) => console.error(error));
+    }
+
+    if (!this.isHistoryOf(configId)) return;
+
+    const index = this.historyItems.findIndex((item) => item.id === id);
+
+    if (index === -1 || index < this.FETCH_COUNT) {
+      this.debounceLoadJournalTop();
+      return;
+    }
+
+    this.loadJournalItem(id);
+  };
+
+  debounceLoadJournalTop = debounce(
+    () => {
+      this.loadJournalTop();
+    },
+    300,
+    { maxWait: 1000 },
+  );
+
+  loadJournalTop = async () => {
+    const params = this.historyParams;
+
+    if (!params) return;
+
+    const count = this.FETCH_COUNT;
 
     try {
       const historyData = (await getWebhooksJournal({
         ...params,
         startIndex: 0,
-        count: this.FETCH_COUNT,
+        count,
       })) as TJournalData;
 
       if (this.historyParams !== params) return;
 
-      runInAction(() => {
-        const loadedIds = new Set(this.historyItems.map((item) => item.id));
-        const addedItems = historyData.items.filter(
-          (item) => !loadedIds.has(item.id),
-        );
+      const topItems = historyData.items;
+      const isWholeJournal = topItems.length < count;
+      const lowestTopId = Math.min(...topItems.map((item) => item.id));
 
-        this.historyItems = [...addedItems, ...this.historyItems];
-        this.startIndex += addedItems.length;
+      runInAction(() => {
+        const restItems = isWholeJournal
+          ? []
+          : this.historyItems.filter((item) => item.id < lowestTopId);
+        const items = [...topItems, ...restItems];
+        const itemIds = new Set(items.map((item) => item.id));
+
+        this.historyItems = items;
+        this.startIndex = items.length;
         this.totalItems = historyData.total;
+        this.checkedEventIds = this.checkedEventIds.filter((checkedId) =>
+          itemIds.has(checkedId),
+        );
       });
     } catch (error) {
       console.error(error);
     }
   };
 
-  onWebhookLogUpdated = async ({ id, configId }: TWebhookLogData) => {
-    if (Number(this.eventDetails?.id) === id) this.fetchEventData(id);
+  loadJournalItem = async (id: number) => {
+    const params = this.historyParams;
 
-    if (!this.isHistoryOf(configId)) return;
-    if (!this.historyItems.some((item) => item.id === id)) return;
-
-    const params = this.historyParams!;
+    if (!params) return;
 
     try {
       const historyData = (await getWebhooksJournal({
@@ -422,15 +468,24 @@ class WebhooksStore {
   };
 
   fetchMoreItems = async (params: TJournalParams) => {
+    const { historyParams } = this;
     const count = params.count ? params.count : this.FETCH_COUNT;
     const historyData = (await getWebhooksJournal({
       ...params,
       startIndex: this.startIndex,
       count,
     })) as TJournalData;
+
+    if (this.historyParams !== historyParams) return;
+
     runInAction(() => {
+      const loadedIds = new Set(this.historyItems.map((item) => item.id));
+
       this.startIndex += count;
-      this.historyItems = [...this.historyItems, ...historyData.items];
+      this.historyItems = [
+        ...this.historyItems,
+        ...historyData.items.filter((item) => !loadedIds.has(item.id)),
+      ];
     });
   };
 

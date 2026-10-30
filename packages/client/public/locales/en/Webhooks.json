@@ -94,6 +94,7 @@
   "WebhookName": "Webhook name",
   "WebhookRedilivered": "Webhook redelivered",
   "WebhookRemoved": "Webhook removed",
+  "WebhookWasDeleted": "This webhook has been deleted",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Read the Webhooks guide to learn more.",
   "WebhooksInfo": "Use webhooks to trigger custom actions in other apps or websites whenever specific events happen in {{organizationName}} {{productName}}.\nCreate and manage your webhooks here, configure them as needed, and check the history log to track how each one is performing."

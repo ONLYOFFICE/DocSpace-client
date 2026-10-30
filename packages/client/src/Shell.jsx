@@ -187,6 +187,7 @@ const Shell = ({ page = "home", ...rest }) => {
     aiPresetContextRooms,
     aiPresets,
     requestPresetApply,
+    fetchAiPresets,
     isAiProjectOpen,
     aiActiveProject,
     openEditAiProject,
@@ -1049,6 +1050,9 @@ const Shell = ({ page = "home", ...rest }) => {
           profilePickerReadOnly={isInsideAiProject}
           isChatOpen={isChatOpen}
           profilePickerActions={profilePickerActions}
+          // The picker opens on the current project list: one created,
+          // renamed or left elsewhere meanwhile is picked up.
+          onProfilePickerOpen={fetchAiPresets}
           composerHeader={standalone ? undefined : composerHeader}
           composerDisabled={
             isProjectModelUnavailable || (standalone ? undefined : !isAIReady)
@@ -1257,6 +1261,7 @@ const ShellWrapper = inject(
       openEditAiProject: aiProjectsStore.openEditDialog,
       aiPresets: aiPresetsStore.presets,
       requestPresetApply: aiPresetsStore.requestApply,
+      fetchAiPresets: aiPresetsStore.fetchPresets,
       // The Forms section, in both its shapes: the bare Forms root, and a
       // form filling room with its In progress / Complete folders. Caps the
       // chat's attachments at one (see `attachmentLimit`).

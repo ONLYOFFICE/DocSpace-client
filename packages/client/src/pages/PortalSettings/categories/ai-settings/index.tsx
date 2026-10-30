@@ -144,8 +144,7 @@ const AISettings = ({
   }, [fetchKnowledge]);
 
   const { useProfilesStore } = useStores();
-  const profiles = useProfilesStore((s) => s.profiles);
-  const hasProfiles = profiles.length > 0;
+  const hasProfiles = useProfilesStore((s) => s.hasProfiles);
 
   // The profile requirement only applies to standalone installations, whose
   // tabs render functional components that need an AI profile. On SaaS the

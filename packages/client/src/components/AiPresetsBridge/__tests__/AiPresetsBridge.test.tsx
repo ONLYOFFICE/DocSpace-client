@@ -141,18 +141,18 @@ describe("AiPresetsBridge", () => {
     api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales")] });
   });
 
-  it("loads the signed-in user's projects and reads them again when the chat opens", async () => {
+  it("loads the signed-in user's projects once; opening the chat reads nothing more", async () => {
     const store = new AiPresetsStore();
     renderBridge(store);
     await flush();
     expect(api.getAiProjects).toHaveBeenCalledTimes(1);
     expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
 
-    api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales"), project(2, "Legal")] });
+    // The model picker refreshes the list itself when it opens
+    // (onProfilePickerOpen in Shell), so the chat's opening costs no read.
     act(() => aiChatStore.setIsVisible(true));
     await flush();
-    expect(api.getAiProjects).toHaveBeenCalledTimes(2);
-    expect(store.presets.map((p) => p.name)).toEqual(["Sales", "Legal"]);
+    expect(api.getAiProjects).toHaveBeenCalledTimes(1);
   });
 
   it("offers the save button to those who may create projects, outside a project", () => {

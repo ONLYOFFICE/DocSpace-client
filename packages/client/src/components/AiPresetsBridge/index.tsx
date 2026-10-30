@@ -107,19 +107,6 @@ const AiPresetsBridge = ({
     return () => aiChatStore.setOnSavePreset(null);
   }, [aiChatStore, aiPresetsStore, isInsideProject, canCreateProjects]);
 
-  // The picker offers the projects as they are when the chat opens: one
-  // created, renamed or left elsewhere meanwhile is picked up.
-  React.useEffect(
-    () =>
-      reaction(
-        () => aiChatStore.isVisible,
-        (visible) => {
-          if (visible) void aiPresetsStore.fetchPresets();
-        },
-      ),
-    [aiChatStore, aiPresetsStore],
-  );
-
   // On the projects page the composer also shows its Context slot: any
   // folder connected as the round's context.
   React.useEffect(() => {

@@ -132,7 +132,13 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const vectorizationEnabled = settingsStore.aiConfig?.vectorizationEnabled !== false;
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
+  const ensureProfiles = useProfilesStore((s) => s.ensureProfiles);
   const defaultProfile = useProfilesStore((s) => s.defaultProfile);
+  // The chat starts knowing only its assigned profiles; the model combo
+  // box lists the whole catalogue.
+  React.useEffect(() => {
+    void ensureProfiles();
+  }, [ensureProfiles]);
   const state = store.projectDialog;
   const project = state?.mode === "edit" ? state.project : null;
 

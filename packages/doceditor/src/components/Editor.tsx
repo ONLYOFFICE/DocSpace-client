@@ -109,6 +109,7 @@ const Editor = ({
   const { isBase } = useTheme();
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
+  const isEncryptedFile = !!config?.file?.encrypted;
 
   const {
     onDocumentReady,
@@ -311,7 +312,10 @@ const Editor = ({
     newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
 
     if (!user?.isVisitor) {
-      newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
+      // Spec: editor-integration, "Decrypted copies only on the user's device"
+      if (!isEncryptedFile) {
+        newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
+      }
       if (
         !isPDFDocument(fileInfo) &&
         (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))

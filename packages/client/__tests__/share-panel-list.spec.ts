@@ -133,6 +133,43 @@ test.describe("Info panel — Share tab list", () => {
     ).toBeVisible();
   });
 
+  test("the create-link row is a Tab stop that Enter presses", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      createLinksRouteHandler(TEST_PORT, [], "GET" as never, true),
+    );
+    let created = 0;
+    await page.route(/\/files\/file\/\d+\/link$/, (route) => {
+      if (route.request().method() !== "GET") created += 1;
+      return route.fulfill({ json: { response: {} } });
+    });
+
+    await page.goto(`${baseUrl}${MY_DOCS_URL}`);
+    const sharePanel = await openSharePanel(page);
+    const create = sharePanel
+      .getByTestId("info_panel_share_create_and_copy_link")
+      .first();
+    await expect(create).toBeVisible();
+
+    // From the Share tab, Tab walks on into the panel until it gets there.
+    let reached = false;
+    for (let i = 0; i < 20 && !reached; i++) {
+      await page.keyboard.press("Tab");
+      reached = await create.evaluate((el) => el === document.activeElement);
+    }
+    expect(reached).toBe(true);
+    await expect(create).toHaveAttribute("role", "button");
+    expect(
+      await create.evaluate((el) => getComputedStyle(el).outlineStyle),
+    ).toBe("solid");
+
+    await page.keyboard.press("Enter");
+    await expect.poll(() => created).toBe(1);
+  });
+
   test("file with a link lists it", async ({ page, mockRequest, baseUrl }) => {
     mockRequest.use(
       createLinksRouteHandler(

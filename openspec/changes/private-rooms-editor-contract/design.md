@@ -761,6 +761,72 @@ references of 2026-10-29 (moved: `ReplaceCommunityAddress` is
     leave the events generic and rely on the server to refuse; rejected,
     the server stores a plaintext name or a plaintext new file today.
 
+## Implementation notes
+
+For the session that implements this change: read proposal.md, this file and
+tasks.md, then `.claude/rules/private-rooms.md` and the "Commits" paragraph of
+`openspec/config.yaml`. Work the tasks in the order of the "Order of work"
+block of tasks.md; one task is one commit with its tick; a task marked
+BLOCKED or "after <x>" waits.
+
+- **Where the code is.** Doceditor is a Next.js app in `packages/doceditor`:
+  `src/components/Editor.tsx` wires the editor events and the key hook,
+  `src/hooks/useFileEncryptionKeys.ts` resolves the DEK,
+  `src/hooks/useEditorEvents.ts` holds the event handlers, `src/utils/events.ts`
+  the small ones, `src/utils/actions.ts` `getData` runs on the Next server side
+  (no DOM, no stores), `index.d.ts` augments `@onlyoffice/doceditor-types`.
+  The client file list is MobX in `packages/client/src/store`; the SDK is
+  `packages/sdk/src/app`; shared code, the MSW mocks
+  (`packages/shared/__mocks__/handlers`) and the crypto core
+  (`packages/shared/services/encryption`, `services/private-room`) are in
+  `packages/shared`.
+- **Tests.** `packages/doceditor` has no Vitest until task 0.1 (Playwright
+  only, in `packages/doceditor/__tests__`); after 0.1 unit tests live in
+  `src/**/__tests__/*.test.tsx` and run with `cd packages/doceditor && pnpm
+  exec vitest run`. The SDK config is the template (jsdom, globals, the
+  ui-kit inline rule, the `@` and `@docspace/shared` aliases). Test names
+  carry the scenario name of the spec; no comment restates a requirement; at
+  most a one-line `Spec: <capability>, "<requirement>"` pointer where the
+  behaviour is counter-intuitive. The gate before a push: `pnpm run tsc`,
+  `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run
+  test`, `pnpm run test:client`, `pnpm run test:sdk`, and after 0.1
+  `pnpm run test:doceditor`.
+- **Server facts are never guessed.** Every server statement here comes from
+  `../server` read through CodeGraph (`codegraph explore "<Symbols>"` in
+  `../server`, then the file); the line numbers in tasks.md are from
+  `release/v4.1.0` at a782a03fab and may move. An MSW handler mirrors the
+  controller action named in its doc comment; read it before writing the
+  mock.
+- **Capability field.** Tasks 2.2, 2.3, 2.4, 7.1 and the doceditor part of
+  8.1 need the JSON name the backend chooses in 2.1; they are not started
+  before it is recorded in D2. Everything in phase A of tasks.md is
+  independent of it.
+- **Traps.** `isSkipError` (`Root.tsx:144-148`) still mounts the editor, so a
+  capability refusal in the doceditor needs its own state, not an error
+  status. `useFilesSettings` resolves after the key hook starts, so the
+  doceditor gate is fed from `getData`. `onRequestRefreshFile` hands
+  `refreshFile` a raw `openEdit` result (the server's key-pair list, no DEK);
+  the DEK is wiped after the hand-over (`wipeDek`), so the event is withheld
+  rather than re-fed. `files/{id}/access` is requested three times per open
+  today; harmless, worth one call. The feature stays behind the
+  `privateRooms` localStorage flag; nothing in this change touches
+  `packages/shared/utils/privateRooms.ts`. Common:PrivateRoomEditorNotSupported
+  exists in `public/locales/en/Common.json`; re-wording it is a locale change
+  made with the translate skills in the same commit as the code.
+- **Stand.** The local Aspire stack serves the portal at
+  http://localhost:8092 with the Document Server build set by
+  `APP_EDITOR_VERSION` in `.vscode/tasks.json`; the private room on the stand
+  is folder 10 with the files of the runs (7 document, 40 PDF form, 41 and 43
+  spreadsheets, 42 presentation). The Document Server's change store is the
+  stack's MySQL (`host.docker.internal:33306`, database `onlyoffice`, tables
+  `doc_changes` and `task_result`; the credentials are in the editors
+  container's `/etc/onlyoffice/documentserver/local.json`), its log is
+  `docker logs` of the editors container; `info/info.json` answers only
+  from inside that container.
+- **Decisions pending.** Proposal decisions 5, 6 and 7 and decision 16
+  above are the owner's; tasks 9.4, 9.6, 9.10 and 9.11 wait for them and are
+  not decided by the implementing session.
+
 ## Risks / Trade-offs
 
 - [Document Server does not implement the contract on the planned release

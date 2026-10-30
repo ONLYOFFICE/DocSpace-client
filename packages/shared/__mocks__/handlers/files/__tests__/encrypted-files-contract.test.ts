@@ -63,8 +63,24 @@ const ARCHIVED_ROOM_ID = 9200;
 const ARCHIVED_FOLDER_ID = 9201;
 const MOVING_ROOM_ID = 9300;
 const MOVING_FOLDER_ID = 9301;
+const OPENEDIT_ROOM_ID = 9400;
+const OPENEDIT_FILE_ID = 9401;
+const ORDINARY_ROOM_ID = 9500;
+const ORDINARY_FILE_ID = 9501;
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";
 const BOB_ID = "22222222-2222-2222-2222-222222222222";
+
+const OPENEDIT_URL = (fileId: number, query = "") =>
+  `${BASE_URL}:${PORT}/${API_PREFIX}/files/file/${fileId}/openedit${query}`;
+
+const ALICE_CALLER_KEY = {
+  id: "aaaaaaaa-0000-0000-0000-000000000001",
+  userId: ALICE_ID,
+  publicKey: "PK-ALICE",
+  privateKeyEnc: "ENC-SK-ALICE",
+  date: "2026-01-01T00:00:00",
+  cryptoEngineId: "{DC522726-5E0E-43E5-AA02-8EA156BECBC5}",
+};
 
 const FILE_ACCESS_URL = (fileId: number) =>
   `${BASE_URL}:${PORT}/${API_PREFIX}/files/${fileId}/access`;
@@ -83,6 +99,34 @@ const movingHandle: { current: EncryptedFilesHandlerHandle | null } = {
 };
 
 const server = setupServer(
+  ...encryptedFilesHandlers(PORT, {
+    roomId: OPENEDIT_ROOM_ID,
+    ownerId: ALICE_ID,
+    currentUserId: ALICE_ID,
+    callerKeys: [ALICE_CALLER_KEY],
+    initialFiles: [
+      {
+        id: OPENEDIT_FILE_ID,
+        title: "Contract.docx",
+        serverTitle: "a1b2c3d4e5f6.docx",
+        encrypted: true,
+        fileKeys: [
+          { userId: ALICE_ID, publicKeyId: "alice-pk", privateKeyEnc: "wrapA" },
+        ],
+      },
+    ],
+    withOtherRooms: true,
+  }),
+  ...encryptedFilesHandlers(PORT, {
+    roomId: ORDINARY_ROOM_ID,
+    ownerId: ALICE_ID,
+    currentUserId: ALICE_ID,
+    isPrivate: false,
+    initialFiles: [
+      { id: ORDINARY_FILE_ID, title: "Plain.docx", encrypted: false },
+    ],
+    withOtherRooms: true,
+  }),
   ...encryptedFilesHandlers(PORT, {
     roomId: MOVING_ROOM_ID,
     ownerId: ALICE_ID,
@@ -1171,5 +1215,109 @@ describe("encryptedFiles mock — moves inside a private room (mirrors Operation
       await fetch(`${FILEOPS}?id=${body.response[0].id}`)
     ).json()) as { response: { id: string }[] };
     expect(status.response.map((o) => o.id)).toEqual([body.response[0].id]);
+  });
+});
+
+describe("encryptedFiles mock — GET /files/file/{fileId}/openedit (mirrors EditorController.OpenEditFile)", () => {
+  type OpenEditBody = {
+    response: {
+      document: {
+        title: string;
+        url: string;
+        key: string;
+        referenceData: Record<string, unknown>;
+        info: { favorite?: boolean };
+        permissions: Record<string, boolean>;
+      };
+      documentType: string;
+      editorConfig: {
+        mode: string;
+        modeWrite: boolean;
+        callbackUrl?: string;
+        encryptionKeys?: Record<string, string>[];
+        customization: {
+          mentionShare: boolean;
+          review?: { reviewDisplay: string };
+        };
+        user: { id: string; roles: null };
+      };
+      editorType: number;
+      editorUrl: string;
+      token: string;
+      type: string;
+      file: { id: number; encrypted?: boolean; title: string };
+    };
+  };
+
+  it("answers the desktop configuration of an encrypted private-room file: the opaque title, the download address, the caller's key pairs with privateKeyEnc, a token and the encrypted file", async () => {
+    const res = await fetch(OPENEDIT_URL(OPENEDIT_FILE_ID));
+    expect(res.status).toBe(200);
+    const { response } = (await res.json()) as OpenEditBody;
+
+    expect(response.document.title).toBe("a1b2c3d4e5f6.docx");
+    expect(response.document.url).toBe(
+      `${BASE_URL}:${PORT}/${API_PREFIX}/files/file/${OPENEDIT_FILE_ID}/download`,
+    );
+    expect(response.document.key).toEqual(expect.any(String));
+    expect(response.document.referenceData).toEqual({
+      fileKey: String(OPENEDIT_FILE_ID),
+      instanceId: "1",
+      canEditRoom: false,
+    });
+    expect(response.document.info.favorite).toBeUndefined();
+    expect(response.document.permissions).toMatchObject({
+      edit: true,
+      download: true,
+      print: true,
+      copy: true,
+    });
+    expect(response.documentType).toBe("word");
+    expect(response.editorConfig.mode).toBe("edit");
+    expect(response.editorConfig.modeWrite).toBe(true);
+    expect(response.editorConfig.callbackUrl).toContain("action=track");
+    expect(response.editorConfig.encryptionKeys).toEqual([ALICE_CALLER_KEY]);
+    expect(response.editorConfig.customization.mentionShare).toBe(false);
+    expect(response.editorConfig.user).toMatchObject({
+      id: ALICE_ID,
+      roles: null,
+    });
+    expect(response.editorType).toBe(0);
+    expect(response.editorUrl).toContain(`shardkey=${response.document.key}`);
+    expect(response.token).toEqual(expect.any(String));
+    expect(response.type).toBe("desktop");
+    expect(response.file).toMatchObject({
+      id: OPENEDIT_FILE_ID,
+      encrypted: true,
+      title: "a1b2c3d4e5f6.docx",
+    });
+  });
+
+  it("opens in view mode without a callback address when the caller asks view", async () => {
+    const res = await fetch(OPENEDIT_URL(OPENEDIT_FILE_ID, "?view=true"));
+    const { response } = (await res.json()) as OpenEditBody;
+
+    expect(response.editorConfig.mode).toBe("view");
+    expect(response.editorConfig.modeWrite).toBe(false);
+    expect(response.editorConfig.callbackUrl).toBeUndefined();
+    expect(response.editorConfig.customization.review).toEqual({
+      reviewDisplay: "markup",
+    });
+    expect(response.editorConfig.encryptionKeys).toEqual([ALICE_CALLER_KEY]);
+  });
+
+  it("attaches no key pairs to a file outside a private room and keeps mentions and favorites", async () => {
+    const res = await fetch(OPENEDIT_URL(ORDINARY_FILE_ID));
+    expect(res.status).toBe(200);
+    const { response } = (await res.json()) as OpenEditBody;
+
+    expect(response.editorConfig.encryptionKeys).toBeUndefined();
+    expect(response.editorConfig.customization.mentionShare).toBe(true);
+    expect(response.document.info.favorite).toBe(false);
+    expect(response.file.encrypted).toBeUndefined();
+  });
+
+  it("answers 404 for an unknown file", async () => {
+    const res = await fetch(OPENEDIT_URL(9999));
+    expect(res.status).toBe(404);
   });
 });

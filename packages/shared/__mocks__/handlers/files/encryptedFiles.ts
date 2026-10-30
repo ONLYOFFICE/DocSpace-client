@@ -161,6 +161,14 @@ const sectionOf = (archived: boolean) =>
     : { id: ROOMS_SECTION_ID, title: "Rooms", folderType: 14 };
 /** ChunkedUploadSessionHolder.SlidingExpiration. */
 const SESSION_SLIDING_EXPIRATION_MS = 12 * 60 * 60 * 1000;
+
+/** Configuration.DocType for the extensions the mock seeds use. */
+const DOCUMENT_TYPE_BY_EXTENSION = {
+  docx: "word",
+  xlsx: "cell",
+  pptx: "slide",
+  pdf: "pdf",
+} as const;
 /** The `files:viewed-images` setting of appsettings.json. */
 const VIEWED_IMAGES = [
   ".svg",
@@ -841,6 +849,133 @@ export const encryptedFilesHandlers = (
               return rest;
             }),
         );
+      },
+    ),
+
+    /**
+     * Mirrors EditorController.OpenEditFile (HttpGet "file/{fileId}/openedit")
+     * -> DocumentServiceHelper.GetParamsAsync -> ConfigurationConverter.Convert
+     * for a desktop opening by the signed-in user: the document (the stored,
+     * opaque title; the address of the content, here the mock download route;
+     * the revision key; the caller's permissions; the reference data with the
+     * file key and the instance id only, since RoomId is set for a virtual
+     * data room alone), the editor configuration (mode "edit" unless the
+     * caller asks `view` or the room is archived; the callback address while
+     * the session may write; the caller's full key list with privateKeyEnc
+     * in encryptionKeys when the file lies in a private room, as
+     * EncryptionKeyPairDtoHelper.GetKeyPairAsync() returns it; mentionShare
+     * false and no favorite for an encrypted file), the signature token and
+     * the file as FileDtoHelper reports it. A missing file is 404.
+     */
+    http.get(
+      `${apiBase}/files/file/:fileId(\\d+)/openedit`,
+      ({ params, request }) => {
+        const fileId = Number(params.fileId);
+        const f = files.get(fileId);
+        if (!f && withOtherRooms) return undefined;
+        const url = new URL(request.url);
+        requests.push({ method: "GET", url: url.pathname });
+        if (!f) return errorResponse(404, `file ${fileId} not found`);
+
+        const origin = port ? `${BASE_URL}:${port}` : BASE_URL;
+        const dotIdx = f.serverTitle.lastIndexOf(".");
+        const fileExt =
+          dotIdx > 0 ? f.serverTitle.slice(dotIdx + 1).toLowerCase() : "";
+        const documentType =
+          DOCUMENT_TYPE_BY_EXTENSION[
+            fileExt as keyof typeof DOCUMENT_TYPE_BY_EXTENSION
+          ] ?? "";
+        const isPdf = fileExt === "pdf";
+        const canEdit = !archived;
+        const tryEdit = url.searchParams.get("view") !== "true";
+        const modeWrite = canEdit && tryEdit;
+        const key = `${MOCK_TENANT_ID}_${fileId}_1`;
+        const folderId = f.folderId ?? roomId;
+        const gobackUrl = archived
+          ? `${origin}/rooms/archived/filter?folder=${folderId}`
+          : `${origin}/rooms/shared/${folderId}/filter?folder=${folderId}`;
+
+        return okResponse({
+          document: {
+            fileType: fileExt,
+            info: {
+              ...(!f.encrypted && { favorite: false }),
+              folder: `${sectionOf(archived).title} \\ ${roomTitle}`,
+              owner: "Test User",
+              type: 0,
+              uploaded: "01/01/2026 12:00 PM",
+            },
+            isLinkedForMe: false,
+            key,
+            permissions: {
+              comment: canEdit,
+              chat: true,
+              download: true,
+              edit: canEdit,
+              fillForms: canEdit,
+              modifyFilter: canEdit,
+              protect: true,
+              print: true,
+              review: canEdit,
+              copy: true,
+            },
+            referenceData: {
+              fileKey: String(fileId),
+              instanceId: String(MOCK_TENANT_ID),
+              canEditRoom: false,
+            },
+            title: f.serverTitle,
+            url: `${origin}/${API_PREFIX}/files/file/${fileId}/download`,
+            isForm: false,
+          },
+          documentType,
+          editorConfig: {
+            ...(modeWrite && {
+              callbackUrl: `${origin}/filehandler.ashx?action=track&fileid=${fileId}&auth=mock-auth-key`,
+            }),
+            createUrl: `${origin}/filehandler.ashx?action=create&doctype=${documentType}&title=New+document`,
+            customization: {
+              about: true,
+              forcesave: false,
+              goback: { url: gobackUrl },
+              logo: {
+                image: `${origin}/logo/editor.png`,
+                imageDark: `${origin}/logo/editor-dark.png`,
+                imageLight: `${origin}/logo/editor-light.png`,
+                url: origin,
+                visible: true,
+              },
+              mentionShare: !f.encrypted,
+              ...(!modeWrite && { review: { reviewDisplay: "markup" } }),
+              ...(isPdf && {
+                submitForm: { visible: false, resultMessage: "" },
+              }),
+              anonymous: { request: true },
+              ai: { disabled: false },
+            },
+            ...(isPrivate &&
+              opts.callerKeys && {
+                encryptionKeys: opts.callerKeys.map((k) => ({ ...k })),
+              }),
+            lang: "en-US",
+            mode: modeWrite ? "edit" : "view",
+            modeWrite,
+            plugins: { pluginsData: [] },
+            templates: [],
+            user: {
+              id: currentUserId,
+              name: "Test User",
+              image: `${origin}/storage/userphotos/${currentUserId}_medium.png`,
+              roles: null,
+            },
+          },
+          editorType: 0,
+          editorUrl: `${origin}/ds-vpath/web-apps/apps/api/documents/api.js?shardkey=${key}`,
+          token: `mock-editor-token-${fileId}`,
+          type: "desktop",
+          file: buildFileDto(f, roomId, ownerId, port, archived),
+          startFillingMode: 0,
+        });
       },
     ),
 

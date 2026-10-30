@@ -42,7 +42,9 @@ import { EditorConfigErrorType } from "@docspace/shared/enums";
 import { createFile, fileCopyAs, getEditorUrl } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 import Editor from "@/components/Editor";
-import CreateFileError from "@/components/CreateFileError";
+import CreateFileError, {
+  type TCreateFileError,
+} from "@/components/CreateFileError";
 
 type TSearchParams = {
   parentId: string;
@@ -115,7 +117,7 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
   );
 
   let fileId = 0;
-  let fileError: Error | undefined;
+  let fileError: TCreateFileError | undefined;
 
   if (!templateId && fromFile) {
     logger.debug(
@@ -148,7 +150,7 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
 
     return (
       <CreateFileError
-        error={new Error()}
+        error={{ message: "" }}
         fileInfo={fileInfo}
         fromFile={!!fromFile}
       />
@@ -158,7 +160,7 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
   const { file, error } = res;
 
   if (!file) {
-    fileError = error as unknown as Error;
+    fileError = error;
   }
 
   if (file?.id) fileId = file.id;

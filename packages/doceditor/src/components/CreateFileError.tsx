@@ -38,8 +38,13 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
+// A plain value, never an Error instance: React strips the message of an
+// Error passed from a server component in production builds, and the client
+// gets minified React error 441 instead.
+export type TCreateFileError = string | { message?: string; status?: number };
+
 type CreateFileErrorProps = {
-  error: Error;
+  error: TCreateFileError;
   fileInfo: object;
   fromFile: boolean;
 };
@@ -49,10 +54,10 @@ const CreateFileError = ({
   fileInfo,
   fromFile,
 }: CreateFileErrorProps) => {
-  const message = error.message ?? error ?? "";
+  const message = typeof error === "string" ? error : (error.message ?? "");
 
   React.useEffect(() => {
-    if ("status" in error && error?.status === 401) {
+    if (typeof error !== "string" && error.status === 401) {
       sessionStorage.setItem("referenceUrl", window.location.href);
 
       return window.location.replace(`${window.location.origin}/login`);

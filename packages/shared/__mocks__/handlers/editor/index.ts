@@ -38,6 +38,7 @@ import { fileByIdHandler } from "./fileById";
 import { fillingStatusHandler } from "./formFillingStatus";
 import { fillingSessionHandler } from "./fillingSession";
 import { editorPagePassthroughHandler } from "./editorPage";
+import { createFileBadGatewayHandler } from "./createFile";
 
 export {
   openEditHandler,
@@ -45,6 +46,7 @@ export {
   fillingStatusHandler,
   fillingSessionHandler,
   editorPagePassthroughHandler,
+  createFileBadGatewayHandler,
 };
 
 export const editorHandlers = (port: string) => [

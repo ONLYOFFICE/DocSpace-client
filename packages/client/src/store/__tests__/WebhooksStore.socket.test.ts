@@ -158,15 +158,36 @@ describe("WebhooksStore socket: subscriptions", () => {
     expect(store.errorWebhooks).toBeNull();
   });
 
-  it("keeps the list current while a journal of the section is open", async () => {
+  it("re-reads the list once when it is shown after changes behind a journal", async () => {
     const store = createStore();
     await openHistory(store, logItems(1));
     vi.mocked(getAllWebhooks).mockResolvedValue([config(7)]);
 
     emit("s:update-webhook", { id: 7 });
-    await vi.advanceTimersByTimeAsync(500);
+    emit("s:update-webhook", { id: 7 });
+    await vi.advanceTimersByTimeAsync(2500);
 
+    expect(getAllWebhooks).not.toHaveBeenCalled();
+
+    store.setActiveConfigId(null);
+    store.setIsWebhooksListActive(true);
+    await vi.advanceTimersByTimeAsync(0);
+
+    expect(getAllWebhooks).toHaveBeenCalledTimes(1);
     expect(store.webhooks.map((w) => w.id)).toEqual([7]);
+
+    store.setIsWebhooksListActive(false);
+    store.setIsWebhooksListActive(true);
+
+    expect(getAllWebhooks).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not re-read the list when it is shown with nothing changed", () => {
+    const store = createStore();
+
+    store.setIsWebhooksListActive(true);
+
+    expect(getAllWebhooks).not.toHaveBeenCalled();
   });
 
   it("does not re-read the list outside the webhooks section", async () => {
@@ -470,6 +491,45 @@ describe("WebhooksStore socket: delivery journal", () => {
     await vi.waitFor(() => expect(store.eventDetails).toEqual(logItem(5, 500)));
 
     expect(getWebhooksJournal).toHaveBeenLastCalledWith({ eventId: 5 });
+  });
+
+  it("does not show a late re-read over the details opened next", async () => {
+    const store = createStore();
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(5)));
+    await store.fetchEventData(5);
+
+    let resolveStale: (value: unknown) => void = () => {};
+    vi.mocked(getWebhooksJournal).mockReturnValueOnce(
+      new Promise((resolve) => {
+        resolveStale = resolve;
+      }),
+    );
+    emit("s:update-webhook-log", { id: 5, configId: 7 });
+
+    store.clearEventDetails();
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(6)));
+    await store.fetchEventData(6);
+    resolveStale(journal([logItem(5, 500)]));
+    await vi.advanceTimersByTimeAsync(0);
+
+    expect(store.eventDetails).toEqual(logItem(6));
+  });
+
+  it("does not fill the details after they were closed", async () => {
+    const store = createStore();
+
+    let resolveDetails: (value: unknown) => void = () => {};
+    vi.mocked(getWebhooksJournal).mockReturnValueOnce(
+      new Promise((resolve) => {
+        resolveDetails = resolve;
+      }),
+    );
+    const pending = store.fetchEventData(5);
+    store.clearEventDetails();
+    resolveDetails(journal(logItems(5)));
+    await pending;
+
+    expect(store.eventDetails).toEqual({});
   });
 
   it("logs a failed re-read of the event details", async () => {

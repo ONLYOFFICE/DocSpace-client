@@ -134,10 +134,19 @@ class WebhooksStore {
 
   historyParams: TJournalParams | null = null;
 
+  // A subscription changed while its journal was open: the list is re-read
+  // when it is shown again, since the section does not reload it on the way back.
+  isWebhooksListStale = false;
+
+  // Only the latest event details request may fill eventDetails.
+  eventDetailsRequest = 0;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this, {
       debounceReloadWebhooks: false,
       debounceLoadJournalTop: false,
+      isWebhooksListStale: false,
+      eventDetailsRequest: false,
     });
 
     this.settingsStore = settingsStore;
@@ -151,6 +160,11 @@ class WebhooksStore {
 
   setIsWebhooksListActive = (isActive: boolean) => {
     this.isWebhooksListActive = isActive;
+
+    if (!isActive || !this.isWebhooksListStale) return;
+
+    this.isWebhooksListStale = false;
+    this.reloadWebhooks();
   };
 
   setActiveConfigId = (configId: number | string | null) => {
@@ -163,13 +177,17 @@ class WebhooksStore {
   };
 
   clearEventDetails = () => {
+    this.eventDetailsRequest += 1;
     this.eventDetails = {};
   };
 
   onWebhookChanged = () => {
-    if (!this.isWebhooksListActive && this.activeConfigId === null) return;
+    if (this.isWebhooksListActive) {
+      this.debounceReloadWebhooks();
+      return;
+    }
 
-    this.debounceReloadWebhooks();
+    if (this.activeConfigId !== null) this.isWebhooksListStale = true;
   };
 
   debounceReloadWebhooks = debounce(
@@ -501,7 +519,12 @@ class WebhooksStore {
   };
 
   fetchEventData = async (eventId: number) => {
+    this.eventDetailsRequest += 1;
+    const request = this.eventDetailsRequest;
     const data = (await getWebhooksJournal({ eventId })) as TJournalData;
+
+    if (request !== this.eventDetailsRequest) return;
+
     this.eventDetails =
       data.items.find((item) => Number(item.id) === Number(eventId)) ?? {};
   };

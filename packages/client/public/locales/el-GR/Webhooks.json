@@ -94,6 +94,7 @@
   "WebhookName": "Όνομα webhook",
   "WebhookRedilivered": "Το webhook στάλθηκε εκ νέου",
   "WebhookRemoved": "Το webhook αφαιρέθηκε",
+  "WebhookWasDeleted": "Αυτό το webhook διαγράφηκε",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Οδηγός webhooks",
   "WebhooksInfo": "Χρησιμοποιήστε webhooks για να εκτελέσετε προσαρμοσμένες ενέργειες στην πλευρά οποιασδήποτε εφαρμογής ή ιστότοπου που χρησιμοποιείτε με βάση διάφορα συμβάντα στο {{productName}} του {{organizationName}}.\nΕδώ, μπορείτε να δημιουργήσετε και να διαχειριστείτε όλα τα webhooks σας, να τα ρυθμίσετε και να περιηγηθείτε στο ιστορικό κάθε webhook για να ελέγξετε την απόδοσή τους."

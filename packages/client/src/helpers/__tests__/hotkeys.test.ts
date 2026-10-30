@@ -67,6 +67,15 @@ describe("isKeyOwnedByFocus", () => {
     expect(owns(document.body, "Tab")).toBe(true);
   });
 
+  // Shift's own keydown arrives before the Tab of Shift+Tab; the list must
+  // not take the focus there, or the Tab runs backwards from the list.
+  it("leaves a lone modifier to the focused element", () => {
+    const button = mount("<button>Rooms</button>");
+    for (const key of ["Shift", "Control", "Alt", "Meta"]) {
+      expect(owns(button, key), key).toBe(true);
+    }
+  });
+
   it("gives Enter and Space to buttons, links and menu triggers", () => {
     for (const html of [
       "<button>New</button>",

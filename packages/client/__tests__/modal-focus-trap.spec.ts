@@ -402,6 +402,47 @@ test.describe("Focus trap in the files selector", () => {
     await expect(list).toBeFocused();
     expect(moves).toEqual([]);
   });
+
+  test("Move to: the new folder's name row is done or cancelled from the keyboard", async ({
+    page,
+    baseUrl,
+  }) => {
+    const creates: string[] = [];
+    page.on("request", (request) => {
+      if (
+        request.method() === "POST" &&
+        /\/files\/folder\//.test(request.url())
+      )
+        creates.push(request.url());
+    });
+
+    await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
+    const row = page.getByTestId("table-body").getByTestId("table-row-3");
+    await expect(row).toBeVisible();
+    await row.getByTestId("context-menu-button").click();
+    await page.getByTestId("option_move-or-copy").hover();
+    await page.getByTestId("option_move-to").click();
+
+    const panel = page.getByTestId("aside").first();
+    await expect(panel.getByRole("listbox")).toBeFocused();
+
+    // The list's first row starts a new folder.
+    await page.keyboard.press("Home");
+    await page.keyboard.press("Enter");
+    const name = panel.getByTestId("selector_input_item");
+    await expect(name).toBeFocused();
+
+    await page.keyboard.press("Tab");
+    await expect(panel.getByRole("button", { name: "Done" })).toBeFocused();
+    await page.keyboard.press("Tab");
+    const cancel = panel.getByRole("button", { name: "Cancel" }).first();
+    await expect(cancel).toBeFocused();
+
+    // Enter on cancel cancels: the row goes, nothing is created.
+    await page.keyboard.press("Enter");
+    await expect(name).toHaveCount(0);
+    expect(creates).toEqual([]);
+  });
 });
 
 test.describe("Focus trap in nested dialogs", () => {

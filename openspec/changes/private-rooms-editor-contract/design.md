@@ -412,7 +412,8 @@ as the next library after 2.0.0:
   signal), what DocSpace already does, and what the runs with two members
   verified.
 
-Sent: pending (task 1.5).
+Sent: 2026-10-30 to the Document Server team (the editor developers),
+bundle stamp `onlyoffice-crypto 2.2.0 84223f30301b`, the SHA-256 above.
 
 ### Run of 2026-10-30, Document Server 10.0.2.5
 

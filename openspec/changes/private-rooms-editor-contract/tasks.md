@@ -16,7 +16,7 @@ that says BLOCKED or "after <x>" is not started before that.
   4.7 when a Document Server build closes DS-17 and DS-19.
 - **Phase D, backend, in `../server` on its own branch:** 6.3, 6.4, 2.1,
   5.4, 6.2 (after 6.5), 10.1 to 10.5, 10.6 (after 1.2), 10.7.
-- **Waiting for people:** 1.2, 1.5, 1.6 (Document Server team), 5.6 (a
+- **Waiting for people:** 1.2, 1.6 (Document Server team), 5.6 (a
   private virtual data room run), 9.4, 9.6, 9.10, 9.11 (owner decisions).
 
 ## 0. Test runner
@@ -30,7 +30,7 @@ that says BLOCKED or "after <x>" is not started before that.
 - [x] 1.3 Prepare the hand-over package for the editor developers: the corrections to the integration guide of 2026-07-01 listed in design.md Context (access-write route, access-read fields, key pairs without an id), a bundle built from the current library (with the form flag, ff9f51aeffb, and the build stamp of 1.4), the request that the add-on pass the form flag of the opened container to `encryptFile` on save (design D9), the contract draft and the browser test page; record the bundle's stamp in design.md. Done 2026-10-29: design.md "Hand-over package of 2026-10-29", bundle 2.1.0 from commit b0a476bd858c
 - [x] 1.4 Add a build stamp to the crypto bundle: `lib-entry.ts` exports the library version and the source commit the bundle was built from (set in `vite.lib.config.ts` at build time); verify with a case in `packages/shared/services/encryption/__tests__/bundle-contract.test.ts` and the stamp read from a freshly built bundle. Done 2026-10-29: `LIBRARY_VERSION` 2.1.0 in `types.ts` (the unstamped build of 2026-07-01 counts as 2.0.0), `BUILD_COMMIT` defined at build time (`-dirty` from a modified tree, `dev` outside a bundle build), the same two values as a banner on the first line of the file, `DSE3_FLAG_IS_FORM` exported, and `pnpm run build:crypto` in `packages/client` as the build command
 
-- [ ] 1.5 Refresh the integration guide and the contract copy in the package of 1.3 with DS-17 (its remaining join race), DS-18 (closed by 10.0.2.5), DS-19 and the run of 2026-10-30, which the package predates, then send it to the editor developers and record the date, the recipients' team and the bundle's stamp in design.md ("Hand-over package", "Sent"). Done when that record exists
+- [x] 1.5 Refresh the integration guide and the contract copy in the package of 1.3 with DS-17 (its remaining join race), DS-18 (closed by 10.0.2.5), DS-19 and the run of 2026-10-30, which the package predates, then send it to the editor developers and record the date, the recipients' team and the bundle's stamp in design.md ("Hand-over package", "Sent"). Done when that record exists. Done 2026-10-30: package `enc-2.2.0` sent to the Document Server team, bundle 2.2.0 from commit 84223f30301b
 - [ ] 1.6 Get written sign-off from the Document Server team on `contract-v1.md`, item by item (DS-1 to DS-19), and record the date and the signing team at the top of the document, replacing the draft status. Verify: that record and `openspec validate private-rooms-editor-contract --strict`
 
 ## 2. Capability check

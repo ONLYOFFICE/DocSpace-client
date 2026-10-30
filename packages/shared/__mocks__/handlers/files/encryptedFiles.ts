@@ -853,6 +853,22 @@ export const encryptedFilesHandlers = (
     ),
 
     /**
+     * Mirrors FilesController.GetFileInfo (HttpGet "file/{fileId}") ->
+     * FilesControllerHelper.GetFileInfoAsync -> FileDtoHelper.GetAsync: the
+     * file as the room listing reports it (SetAssignedMetadataTemplatesAsync
+     * adds nothing for a tenant without metadata templates). An unknown file
+     * is 404 (NotFoundIfNull).
+     */
+    http.get(`${apiBase}/files/file/:fileId(\\d+)`, ({ params, request }) => {
+      const fileId = Number(params.fileId);
+      const f = files.get(fileId);
+      if (!f && withOtherRooms) return undefined;
+      requests.push({ method: "GET", url: new URL(request.url).pathname });
+      if (!f) return errorResponse(404, "File not found");
+      return okResponse(buildFileDto(f, roomId, ownerId, port, archived));
+    }),
+
+    /**
      * Mirrors EditorController.OpenEditFile (HttpGet "file/{fileId}/openedit")
      * -> DocumentServiceHelper.GetParamsAsync -> ConfigurationConverter.Convert
      * for a desktop opening by the signed-in user: the document (the stored,

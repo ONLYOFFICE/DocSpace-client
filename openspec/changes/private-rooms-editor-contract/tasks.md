@@ -98,7 +98,7 @@ that says BLOCKED or "after <x>" is not started before that.
 - [ ] 9.9 Doceditor: verify `useAIAttachFile` (`Editor.tsx:161-165`) is inert for an encrypted file without the AI connector, or gate it on `config.file.encrypted`. Verify: a Vitest case "Encrypted file opened" in `Editor.test.tsx` asserting no attach call
 - [ ] 9.10 BLOCKED on the desktop developer (with `private-rooms-remove-dead-api-calls` 2.0). Decide whether the key hook runs under `IS_DESKTOP_EDITOR` (`useInit.ts:98-102`, `initDesktop.ts:47-98`: today `dek` is present and `portal:login` also receives the key pairs, so the add-on takes the web path). Done when design.md records the decision
 - [ ] 9.11 BLOCKED on the owner. SDK: decide the `onEditorOpen` host path (`open-doc-editor.ts:117-120`), which hands an encrypted item to the host without the capability check. Done when design.md records the decision and an SDK unit case covers it
-- [ ] 9.12 MSW: add `GET files/file/:id` for the encrypted files of `encryptedFiles.ts` (mirroring `FilesController.GetFileInfoAsync`, read through CodeGraph) beside the `openedit` resolver of 3.2; `getFileInfo` is used by `useStartFillingSelectDialog.tsx:162` and the doceditor spec of 8.1. Verify: `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`
+- [x] 9.12 MSW: add `GET files/file/:id` for the encrypted files of `encryptedFiles.ts` (mirroring `FilesController.GetFileInfoAsync`, read through CodeGraph) beside the `openedit` resolver of 3.2; `getFileInfo` is used by `useStartFillingSelectDialog.tsx:162` and the doceditor spec of 8.1. Verify: `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`
 
 ## 10. Server: parity with ordinary documents (server read of 2026-10-30)
 

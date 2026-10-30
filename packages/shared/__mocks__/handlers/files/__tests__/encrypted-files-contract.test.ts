@@ -65,8 +65,8 @@ const MOVING_ROOM_ID = 9300;
 const MOVING_FOLDER_ID = 9301;
 const OPENEDIT_ROOM_ID = 9400;
 const OPENEDIT_FILE_ID = 9401;
-const ORDINARY_ROOM_ID = 9500;
-const ORDINARY_FILE_ID = 9501;
+const ORDINARY_ROOM_ID = 9600;
+const ORDINARY_FILE_ID = 9601;
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";
 const BOB_ID = "22222222-2222-2222-2222-222222222222";
 
@@ -1318,6 +1318,39 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/openedit (mirrors Edi
 
   it("answers 404 for an unknown file", async () => {
     const res = await fetch(OPENEDIT_URL(9999));
+    expect(res.status).toBe(404);
+  });
+});
+
+describe("encryptedFiles mock — GET /files/file/{fileId} (mirrors FilesController.GetFileInfo)", () => {
+  type FileBody = { response: Record<string, unknown> };
+  type ListingBody = { response: { files: Record<string, unknown>[] } };
+  const withoutStamps = ({ created, updated, ...rest }: Record<string, unknown>) =>
+    rest;
+
+  it("answers the encrypted file with the DTO its room listing carries", async () => {
+    const res = await fetch(
+      `${BASE_URL}:${PORT}/${API_PREFIX}/files/file/${OPENEDIT_FILE_ID}`,
+    );
+    expect(res.status).toBe(200);
+    const { response: file } = (await res.json()) as FileBody;
+
+    const listing = (await (
+      await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/${OPENEDIT_ROOM_ID}`)
+    ).json()) as ListingBody;
+    const listed = listing.response.files.find((f) => f.id === OPENEDIT_FILE_ID);
+
+    expect(file).toMatchObject({
+      id: OPENEDIT_FILE_ID,
+      title: "a1b2c3d4e5f6.docx",
+      encrypted: true,
+      folderId: OPENEDIT_ROOM_ID,
+    });
+    expect(withoutStamps(file)).toEqual(withoutStamps(listed!));
+  });
+
+  it("answers 404 for an unknown file", async () => {
+    const res = await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/file/9999`);
     expect(res.status).toBe(404);
   });
 });

@@ -384,6 +384,31 @@ folder of the 2026-07-01 hand-over, outside the repository:
   the three corrections to the v2 guide, the form flag on save, the build
   stamp, and the obligations DS-1 to DS-16.
 
+Sent: pending (task 1.5); superseded by the package of 2026-10-30 below.
+
+### Hand-over package of 2026-10-30
+
+Prepared for the editor developers (task 1.5) in `enc-2.2.0` next to the
+earlier packages, outside the repository:
+
+- `onlyoffice-crypto.js`, library 2.2.0, built from commit 84223f30301b with
+  `pnpm run build:crypto`; banner `/*! onlyoffice-crypto 2.2.0 84223f30301b */`,
+  224955 bytes, SHA-256
+  `60769d1f583bd437f9301bde471641342d40d0be734a0799470b58c4127ef054`.
+  2.2.0 exports `EDITOR_CONTRACT_VERSION` (1) for DS-2; the wire bytes are
+  those of 2.1.0.
+- `test-bundle.html`, the browser test page updated for 2.2.0 with a check
+  of `EDITOR_CONTRACT_VERSION`.
+- `contract-v1.md`, the draft revised on 2026-10-30 (evening): DS-13
+  observed, DS-14 narrowed, DS-17 reproduced on documents, DS-20 added.
+- `integration-guide.md` (v4) and `CHANGELOG.md` in the editor team's
+  language, refreshed from the contract.
+- `findings-2026-10-30.md`, in the editor team's language: what the portal
+  and client already do, what the editor must add or fix in release order
+  (the join after a force-save, the end of a session, the form flag, the
+  distinct errors, the contract version, images, the capability signal),
+  and the findings of the runs with two members.
+
 Sent: pending (task 1.5).
 
 ### Run of 2026-10-30, Document Server 10.0.2.5

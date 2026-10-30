@@ -293,9 +293,6 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     if (e.key === "Enter" && !isRequestRunning) {
       secretKey ? onClose() : onGenerate();
     }
-    if (e.key === "Escape") {
-      onClose();
-    }
   };
 
   const onSelectPermission = (data: TTabItem) => {

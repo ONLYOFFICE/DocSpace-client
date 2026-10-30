@@ -200,23 +200,6 @@ const RoomLogoCoverDialog = ({
   };
 
   React.useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Esc" || e.key === "Escape") {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-        onCloseRoomLogo();
-      }
-    };
-
-    document.addEventListener("keyup", onKeyDown, true);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyDown, true);
-    };
-  }, []);
-
-  React.useEffect(() => {
     setEnabledHotkeys?.(false);
 
     return () => {

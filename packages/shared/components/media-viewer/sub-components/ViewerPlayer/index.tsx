@@ -52,6 +52,7 @@ import React, {
 
 import classNames from "classnames";
 import { includesMethod } from "../../../../utils/typeGuards";
+import { checkDialogsOpen } from "../../../../utils/checkDialogsOpen";
 
 import type { Point } from "../../MediaViewer.types";
 import { KeyboardEventKeys } from "../../MediaViewer.enums";
@@ -575,7 +576,7 @@ export const ViewerPlayer = ({
 
   const onKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (event.code === KeyboardEventKeys.Space) {
+      if (event.code === KeyboardEventKeys.Space && !checkDialogsOpen()) {
         togglePlay();
       }
     },

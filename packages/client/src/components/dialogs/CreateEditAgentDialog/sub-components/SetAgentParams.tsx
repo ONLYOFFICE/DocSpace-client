@@ -92,7 +92,7 @@ type setAgentParamsProps = {
   setIsValidTitle: (value: boolean) => void;
   isWrongTitle: boolean;
   setIsWrongTitle: (value: boolean) => void;
-  onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onOwnerChange?: VoidFunction;
   onClickAction?: () => void;
   selectedServers?: TSelectorItem[];
@@ -130,7 +130,7 @@ const SetAgentParams = ({
   setIsValidTitle,
   isWrongTitle,
   setIsWrongTitle,
-  onKeyUp,
+  onKeyDown,
   folderFormValidation,
   maxImageUploadSize,
   selection,
@@ -462,7 +462,7 @@ const SetAgentParams = ({
               ? t("Common:ContainsSpecCharacter")
               : t("Common:RequiredField")
           }
-          onKeyUp={onKeyUp}
+          onKeyDown={onKeyDown}
           isAutoFocussed
           dataTestId="create_edit_agent_input"
         />

@@ -34,11 +34,12 @@
  */
 
 import { inject, observer } from "mobx-react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import uniqueid from "lodash/uniqueId";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
-import { getCountTilesInRow } from "@docspace/shared/utils";
+import { getCountTilesInGrid } from "@docspace/shared/utils";
+import { useGridColumns } from "@docspace/shared/hooks/useGridColumns";
 
 import {
   StyledCard,
@@ -114,17 +115,22 @@ const InfiniteGrid = (props) => {
     currentFolderId,
     isRooms,
     isTemplates,
+    tilesGridColumns,
+    setTilesGridColumns,
     ...rest
   } = props;
 
-  const [countTilesInRow, setCountTilesInRow] = useState();
+  const countTilesInRow =
+    tilesGridColumns || getCountTilesInGrid(isRooms, isTemplates);
+
+  const observeRow = useGridColumns(setTilesGridColumns);
 
   let cards = [];
   const list = [];
 
   const addItemToList = (key, cls, clear) => {
     list.push(
-      <Item key={key} className={cls}>
+      <Item key={key} className={cls} ref={observeRow}>
         {cards}
       </Item>,
     );
@@ -155,25 +161,6 @@ const InfiniteGrid = (props) => {
 
     return "isRoom";
   };
-
-  const setTilesCount = () => {
-    const newCount = getCountTilesInRow(isRooms, isTemplates);
-    if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
-  };
-
-  const onResize = () => {
-    setTilesCount();
-  };
-
-  useEffect(() => {
-    onResize();
-
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  });
 
   React.Children.map(children.props.children, (child) => {
     if (child) {
@@ -275,9 +262,11 @@ export default inject(
     treeFoldersStore,
     clientLoadingStore,
     selectedFolderStore,
+    hotkeyStore,
   }) => {
     const { filesList, hasMoreFiles, filter, fetchMoreFiles, roomsFilter } =
       filesStore;
+    const { tilesGridColumns, setTilesGridColumns } = hotkeyStore;
 
     const { isLoading } = clientLoadingStore;
     const { isRoomsFolder, isArchiveFolder, isFormsFolder } = treeFoldersStore;
@@ -295,6 +284,8 @@ export default inject(
       filesLength,
       isLoading,
       currentFolderId,
+      tilesGridColumns,
+      setTilesGridColumns,
     };
   },
 )(observer(InfiniteGrid));

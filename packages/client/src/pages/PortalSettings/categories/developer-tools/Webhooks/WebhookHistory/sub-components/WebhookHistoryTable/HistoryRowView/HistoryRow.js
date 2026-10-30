@@ -67,12 +67,17 @@ const HistoryRow = (props) => {
   const redirectToDetails = () =>
     navigate(`${window.location.pathname}/${historyItem.id}`);
   const handleRetryEvent = async () => {
-    await retryWebhook(historyItem.id);
-    await fetchHistoryItems({
-      ...(historyFilters ? formatFilters(historyFilters) : {}),
-      configId: id,
-    });
-    toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);
+    try {
+      await retryWebhook(historyItem.id);
+      await fetchHistoryItems({
+        ...(historyFilters ? formatFilters(historyFilters) : {}),
+        configId: id,
+      });
+      toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error);
+    }
   };
   const handleOnSelect = () => toggleEventId(historyItem.id);
   const handleRowClick = (e) => {

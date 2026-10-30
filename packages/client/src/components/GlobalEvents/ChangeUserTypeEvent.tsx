@@ -148,10 +148,9 @@ const ChangeUserTypeEvent = ({
 
 	const onKeyUpHandler = useCallback(
 		(e: KeyboardEvent) => {
-			if (e.key === ButtonKeys.esc) onCloseAction();
 			if (e.key === ButtonKeys.enter) onChangeUserType();
 		},
-		[onChangeUserType, onCloseAction],
+		[onChangeUserType],
 	);
 
 	useEffect(() => {

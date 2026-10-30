@@ -133,6 +133,7 @@ const GroupsTableItem = ({
     >
       <TableRow
         key={item.id}
+        checked={isChecked}
         className={classNames(styles.groupsRow, "table-row", {
           [styles.checked]: isChecked,
           [styles.active]: isActive,

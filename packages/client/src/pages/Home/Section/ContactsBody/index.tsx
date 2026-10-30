@@ -68,6 +68,8 @@ type SectionBodyContentProps = {
   enabledHotkeys?: PeopleStore["enabledHotkeys"];
   selectBottom?: ContactsHotkeysStore["selectBottom"];
   selectUpper?: ContactsHotkeysStore["selectUpper"];
+  multiSelectBottom?: ContactsHotkeysStore["multiSelectBottom"];
+  multiSelectUpper?: ContactsHotkeysStore["multiSelectUpper"];
   activateHotkeys?: ContactsHotkeysStore["activateHotkeys"];
   setHotkeyCaretStart?: ContactsHotkeysStore["setHotkeyCaretStart"];
   setHotkeyCaret?: ContactsHotkeysStore["setHotkeyCaret"];
@@ -97,6 +99,8 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     isUsersLoading,
     selectBottom,
     selectUpper,
+    multiSelectBottom,
+    multiSelectUpper,
     activateHotkeys,
     setHotkeyCaretStart,
     setHotkeyCaret,
@@ -122,6 +126,8 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     isUsersLoading: isUsersLoading!,
     selectBottom: selectBottom!,
     selectUpper: selectUpper!,
+    multiSelectBottom: multiSelectBottom!,
+    multiSelectUpper: multiSelectUpper!,
     activateHotkeys: activateHotkeys!,
     selectAll: selectAll!,
     deselectAll: deselectAll!,
@@ -233,6 +239,8 @@ export default inject(
     const {
       selectBottom,
       selectUpper,
+      multiSelectBottom,
+      multiSelectUpper,
       activateHotkeys,
       setHotkeyCaretStart,
       setHotkeyCaret,
@@ -263,6 +271,8 @@ export default inject(
 
       selectBottom,
       selectUpper,
+      multiSelectBottom,
+      multiSelectUpper,
       activateHotkeys,
       setHotkeyCaretStart,
       setHotkeyCaret,

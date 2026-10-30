@@ -3,7 +3,7 @@
 ## MODIFIED Requirements
 
 ### Requirement: DSE3 chunked file format
-The system SHALL write every new encrypted file as a DSE3 version-3 container: a header (magic, version, suite, flags, chunk plaintext size, chunk count, 16-byte file nonce, optional encrypted name) followed by 1 MiB plaintext chunks, each encrypted with AES-256-GCM under a fresh random 12-byte IV and carrying its tag. The system SHALL still read version-2 containers.
+The system SHALL store every encrypted file as a DSE3 container of version 2 or 3: a header (magic, version, suite, flags, chunk plaintext size, chunk count, 16-byte file nonce, optional encrypted name) followed by 1 MiB plaintext chunks, each encrypted with AES-256-GCM under a fresh random 12-byte IV and carrying its tag. The system SHALL read both versions, SHALL write version 2 until the Document Server contract names a release whose library reads version 3, and SHALL write version 3 from then on.
 
 #### Scenario: Chunk size
 - **WHEN** a 3 MiB file is encrypted
@@ -13,8 +13,12 @@ The system SHALL write every new encrypted file as a DSE3 version-3 container: a
 - **WHEN** any two chunks of any files are compared
 - **THEN** their IVs differ, because each IV comes from the browser's cryptographic random source
 
-#### Scenario: New upload writes version 3
-- **WHEN** a file is encrypted for upload after this change
+#### Scenario: New upload before the Document Server reads version 3
+- **WHEN** a file is encrypted for upload while no Document Server release that reads version 3 is named
+- **THEN** the header version byte is 2 and the Document Server's library of 2026-07-01 still opens the file
+
+#### Scenario: New upload once the Document Server reads version 3
+- **WHEN** a file is encrypted for upload after the portal switched to version 3
 - **THEN** the header version byte is 3
 
 #### Scenario: Version-2 container still opens

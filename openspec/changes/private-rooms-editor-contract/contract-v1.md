@@ -1,19 +1,20 @@
 # Document Server contract for encrypted files, version 1
 
-Status: **draft of 2026-10-29, awaiting sign-off by the Document Server
-team.** Task 1.6 of `private-rooms-editor-contract` turns this draft into the
+Status: **draft of 2026-10-29, revised 2026-10-30 against build 10.0.2.5,
+awaiting sign-off by the Document Server team.** Task 1.6 of `private-rooms-editor-contract` turns this draft into the
 signed-off contract; until then every "MUST" below is the portal's proposal,
 and every "observed" statement is a fact from the run described in
 design.md ("Observed on 2026-10-29").
 
 Sources, in order of authority:
 
-1. The deployed Document Server 10.0.0 build 133, developer edition
-   (`onlyoffice/4testing-documentserver-de:10.0.0.133`), read in the browser
-   bundles `sdkjs/{word,cell,slide}/sdk-all-min.js` (the crypto add-on,
+1. The deployed Document Server builds 10.0.0.133 (read 2026-10-29) and
+   10.0.2.5 (read 2026-10-30), developer edition
+   (`onlyoffice/4testing-documentserver-de`), read in the browser bundles
+   `sdkjs/{word,cell,slide,visio}/sdk-all-min.js` (the crypto add-on,
    `Asc.Addons.crypto`) and `sdkjs/common/crypto/onlyoffice-crypto.js` (the
-   library copy). The public `ONLYOFFICE/sdkjs` repository does not carry the
-   add-on.
+   library copy, byte-identical in both builds). The public
+   `ONLYOFFICE/sdkjs` repository does not carry the add-on.
 2. The portal server (`../server`, branch `release/v4.1.0`), read through
    CodeGraph; file and line references are in design.md.
 3. The live run of 2026-10-29 on the local Aspire stack (design.md).
@@ -36,7 +37,7 @@ copies in the portal.
 | Item | Value in v1 | Where it is visible |
 |---|---|---|
 | Contract version | `1` | `editorConfig.encryptionKeys.contractVersion` (planned, task 3.2; absent in build 133) |
-| Crypto library | `onlyoffice-crypto.js` 2.1.0, this hand-over; 2.0.0 is the unstamped build of 2026-07-01 (commit 8d6e613ce12) that build 133 ships | banner on line 1 of the file (`/*! onlyoffice-crypto <version> <commit> */`) and `window.OnlyofficeCrypto.LIBRARY_VERSION` / `BUILD_COMMIT` |
+| Crypto library | `onlyoffice-crypto.js` 2.1.0, this hand-over; 2.0.0 is the unstamped build of 2026-07-01 (commit 8d6e613ce12) that builds 133 and 10.0.2.5 ship (223841 bytes, SHA-256 `58cb7f48…`) | banner on line 1 of the file (`/*! onlyoffice-crypto <version> <commit> */`) and `window.OnlyofficeCrypto.LIBRARY_VERSION` / `BUILD_COMMIT` |
 | DSE3 container | version 2 read and written today; version 3 (authenticated header) is planned, see §5.4 | `window.OnlyofficeCrypto.VERSION_DSE3_FILE`, `parseDSE3Header(bytes).version` |
 | Minimum Document Server | to be named by the Document Server team: the first release whose web client carries the crypto add-on and a library of 2.1.0 or newer | `Asc.Addons.crypto`, the library banner under the Document Server address |
 
@@ -133,7 +134,10 @@ over the file id and version is still required.
   five of eight warm-cache spreadsheet opens the add-on read
   `window.OnlyofficeCrypto` before it existed (`base64ToArrayBuffer` of
   undefined, `sdk-all-min.js:2235:111`), so the open failed; a retry opened
-  the same file.
+  the same file. On 10.0.2.5 the engine starts in the library's `onload` and
+  the first open waits for it (4 of 4 warm opens on 2026-10-30), but a
+  second session joining a held session with 257 pending changes failed the
+  same way, so the change-apply path on join MUST wait for the library too.
 
 ### 4.3 Editors covered
 
@@ -257,7 +261,14 @@ typed text.
   selection, both sessions' changes were stored encrypted, but neither
   session applied the other's changes within 10 seconds, before or after a
   save; the same test on a document relayed text both ways within 5
-  seconds.
+  seconds. Observed on 2026-10-30 on 10.0.2.5: relayed in both directions
+  within 10 seconds; closed by that build, kept as a requirement.
+- DS-19. Reopening a presentation while its session is held MUST NOT apply
+  the session's changes on top of a base that already contains them.
+  Observed on 2026-10-30 on 10.0.2.5: after a save and a reopen the typed
+  text appeared twice, while the document editor reopened correctly under
+  the same conditions. Until the Document Server ends the session on save
+  or replays idempotently, P-5 serves the stable base.
 - DS-13 (to verify, task 4.4). Images inserted into an encrypted document are
   kept by the add-on as `cryptoimg://` references with their bytes in memory.
   Whether an inserted image reaches the Document Server's media store or the
@@ -282,6 +293,13 @@ after a force-save opened and replayed the session's changes without
 error. The base mismatch behind P-5 is therefore not the only cause; P-5
 stays as the portal's part, and the Document Server team receives the log
 lines.
+
+Run of 2026-10-30 on 10.0.2.5 (design.md, "Run of 2026-10-30"): with the
+session held after a force-save, the document reopened with the saved
+content once, and the presentation reopened without an error but with the
+session's changes applied on top of the saved base, so the typed text
+appeared twice (DS-19). Sessions were still not ended after every editor
+left.
 
 - P-5 (portal, design D7, task 6.2). When an editor opens an encrypted file
   whose current version is a force-save, the portal asks the Document Server
@@ -322,7 +340,11 @@ Obligations:
 - DS-15. For an encrypted document the Document Server MUST NOT offer a
   download-as target that goes through its conversion service, and MUST NOT
   send the document to that service for any purpose (download, print,
-  thumbnails, comparison, mail merge).
+  thumbnails, comparison, mail merge). Read in the bundle on 2026-10-30: a
+  target outside the browser-built set (docx, docm, dotx, xlsx, xlsm, xltx,
+  pptx, pptm, potx, ppsx, vsdx, pdf, pdfa) falls through to the core's
+  conversion path with the browser-built plaintext package; only the
+  save-formats menu guard keeps such targets out of reach.
 - P-6 (portal, decided 2026-10-29). Decrypted copies exist only on the user's
   device; no copy is stored in a portal folder.
 
@@ -354,7 +376,14 @@ Observed: `info/info.json` answers 404; the frame exposes
 `Asc.Addons.crypto === true`; `sdkjs/common/crypto/onlyoffice-crypto.js`
 answers 200 under the Document Server address, with or without the build
 hash in the path. With library 2.1.0 the first line of that file names the
-library version and the source commit.
+library version and the source commit. Read on 2026-10-30: on 10.0.2.5
+`info/info.json` is served from loopback only (`allow 127.0.0.1`) with
+`serverInfo.buildVersion` and `buildNumber`, nothing about the library;
+`DocsAPI.DocEditor.version()` answers `10.0.2`; the portal's
+`settings/version/build` reports `documentServer` 10.0.2.5 while
+`files/docservice.version` is empty. The 404 of 2026-10-29 came from the
+portal's `/ds/` proxy, which answers the client application for every path,
+not from the Document Server.
 
 - P-8 (portal, design D2, task 2.1). The portal exposes an encrypted-editing
   capability to the client, derived until further notice from the library
@@ -397,8 +426,9 @@ client-side guarantee stays the one of `private-rooms/encryption-core`
 | DS-14 | Document Server | define the end of an encrypted session | to answer |
 | DS-15 | Document Server | no conversion-service path for encrypted documents | to confirm |
 | DS-16 | Document Server | capability and library version signal | to answer |
-| DS-17 | Document Server | open path waits for the crypto library | new, from the run |
-| DS-18 | Document Server | spreadsheet editor applies relayed encrypted changes | new, from the run |
+| DS-17 | Document Server | open path waits for the crypto library | first open closed in 10.0.2.5; the join path still races |
+| DS-18 | Document Server | spreadsheet editor applies relayed encrypted changes | closed in 10.0.2.5 |
+| DS-19 | Document Server | no duplicated replay on a presentation reopen | new, from the run of 2026-10-30 |
 | P-1 | Portal server | `document.url` reachable from the browser | task 6.3 |
 | P-2 | Portal and Document Server | secure contexts | deployment rule |
 | P-3 | Portal server | refuse a save without the encrypted flag | task 6.4 |
@@ -411,8 +441,8 @@ client-side guarantee stays the one of `private-rooms/encryption-core`
 ## 14. Open questions
 
 Listed with owners in design.md, "Open Questions"; the ones this contract
-depends on are DS-4, DS-12, DS-13, DS-14, DS-16 and the token question of
-§3.3.
+depends on are DS-4, DS-12, DS-13, DS-14, DS-16, DS-19 and the token
+question of §3.3.
 
 ## 15. Change log
 
@@ -420,3 +450,6 @@ depends on are DS-4, DS-12, DS-13, DS-14, DS-16 and the token question of
   build 10.0.0.133 and the server code on `release/v4.1.0`.
 - 2026-10-29, afternoon: DS-17 and DS-18 and the presentation reopen
   failure, from the spreadsheet and presentation run.
+- 2026-10-30: read against build 10.0.2.5 and a run on it: DS-17 narrowed
+  to the join path, DS-18 closed, DS-19 added, DS-15 and DS-16 made
+  precise, the sources and the library row updated.

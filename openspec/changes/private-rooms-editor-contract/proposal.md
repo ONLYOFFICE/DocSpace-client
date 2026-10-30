@@ -76,10 +76,18 @@ hidden.
 - Keep the client's PDF-form flag check a verbatim mirror of the server's
   classifier (compared 2026-10-29), and state in the encryption-core spec
   that the flag means what the server would decide from the plaintext.
+- Make the editor's events follow the private-room rules of the file list
+  for an encrypted file (rename, sharing, favorites and history withheld;
+  refresh re-injects the keys; create-new encrypted or withheld; frame
+  errors shown), and close the server paths that store ciphertext as
+  plaintext or send it to the Document Server (copy-as, restore by address,
+  the conversion stream, indexing); found by the server and client reads of
+  2026-10-30.
 - Add the missing test coverage: an MSW `openedit` mock for an encrypted
-  file, doceditor unit tests for the key path and the action policy, a client
-  E2E that opens an encrypted file, the SDK editor E2E un-fixmed, and a
-  recorded run of save, reopen and co-editing against a real Document Server.
+  file, a Vitest runner for `packages/doceditor` with unit tests for the key
+  path and the action policy, a client E2E that opens an encrypted file,
+  the SDK editor E2E un-fixmed, and a recorded run of save, reopen and
+  co-editing against a real Document Server.
 
 **BREAKING** for testers: an encrypted file no longer opens against a
 Document Server that does not support encrypted editing.
@@ -112,9 +120,11 @@ None.
 - Server (`../server`): editor configuration (the document address of an
   encrypted file, the document key after an encrypted save), the Document
   Server capability, the refusal of encrypted form submissions into
-  form-data collection, and whether the signed configuration keeps the
-  caller's key-pair list. The server already refuses to convert encrypted or
-  private-room files.
+  form-data collection, whether the signed configuration keeps the
+  caller's key-pair list, and the parity items of the server read of
+  2026-10-30 (indexing, copy-as, the conversion stream, restore by address,
+  the drop of a removed member's sessions). The server already refuses to
+  convert encrypted or private-room files.
 - Document Server team: owns the contract, the end of an encrypted editing
   session, the form flag on save, and the crypto library build each release
   ships. Nothing in this
@@ -123,6 +133,7 @@ None.
 - Shared: the crypto bundle build (`packages/shared/services/encryption/{lib-entry,types,vite.lib.config}.ts`)
   and `bundle-contract.test.ts`; the `build:crypto` script in `packages/client`.
 - Tests: `packages/shared/__mocks__/handlers/files/encryptedFiles.ts`,
+  a Vitest runner for `packages/doceditor` (it has Playwright only),
   `packages/doceditor/__tests__`, `packages/client/__tests__`,
   `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`.
 
@@ -161,7 +172,11 @@ Confirmed by the feature owner on 2026-10-29, after the live run:
    encrypted documents until fixed, or hold the release. Owner: feature
    owner with the Document Server team.
 6. Whether encrypted spreadsheets and presentations ship in v1 before the
-   Document Server fixes DS-17 (open waits for the library) and DS-18 (the
-   spreadsheet editor applies relayed changes) and the presentation reopen
-   failure land, or the capability check also keeps those file types
-   closed. Found in the run of 2026-10-29; owner: feature owner.
+   Document Server closes the join race of DS-17 and the duplicated replay
+   of DS-19 (build 10.0.2.5 closed DS-18 and the first-open race), or the
+   capability check also keeps those file types closed. Found in the runs
+   of 2026-10-29 and 2026-10-30; owner: feature owner.
+7. Editor events on encrypted files: whether create-new from the editor
+   creates an encrypted file in the same folder or is withheld, and whether
+   mention notifications, which carry the comment text to the portal, stay
+   enabled. Found in the client read of 2026-10-30; owner: feature owner.

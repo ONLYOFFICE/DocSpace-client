@@ -386,6 +386,172 @@ folder of the 2026-07-01 hand-over, outside the repository:
 
 Sent: pending (task 1.5).
 
+### Run of 2026-10-30, Document Server 10.0.2.5
+
+Same stack, one account ("Administrator") in two tabs, Document Server
+developer edition 10.0.2.5 (`onlyoffice/4testing-documentserver-de:10.0.2.5`,
+files dated 2026-10-27, `DocsAPI.DocEditor.version()` 10.0.2; the portal's
+`settings/version/build` reports `documentServer` 10.0.2.5 while
+`files/docservice` reports an empty `version`). A fresh Document Server, so
+no session survived from 2026-10-29. The bundles were read on disk and the
+verified statements are folded into contract-v1.md.
+
+- **Library copy unchanged.** `sdkjs/common/crypto/onlyoffice-crypto.js` is
+  byte-identical to the copy of build 133 (223841 bytes, SHA-256
+  `58cb7f487f764d029c0a50a101b63c1c1f43f0bed973cfcbcf18490115184c07`): the
+  build of 2026-07-01 minus one class-field declaration,
+  `VERSION_DSE3_FILE = 2`, no `DSE3_FLAG_IS_FORM`, no `isForm`, no stamp.
+  DS-8 stays unmet: `encryptFile` is still called with `dek` and `fileName`
+  only.
+- **Library loading gated.** The sdk injects the library with a dynamic
+  script element and starts the crypto engine in its `onload`; the document
+  open waits for the loader counter that script increments. A failed load
+  still leaves the add-on silently off (DS-5 unmet). The add-on is also in
+  the `visio` bundle.
+- **Spreadsheet warm opens 4 of 4** (file 43), against 5 of 8 failures on
+  build 133: the first-open part of DS-17 is closed.
+- **Joining a held session still races.** A second session of file 43,
+  opened while the first held 257 changes, failed with the generic open
+  error and `clientLog: changesError: Cannot read properties of undefined
+  (reading 'base64ToArrayBuffer')` in the Document Server log (09:12:56Z,
+  key `cSirCPxO…`); a retry a minute later, with 3 changes in the session,
+  joined and showed them. The change-apply path on join reads the library
+  before it has loaded.
+- **Live relay works in both directions** (file 43, Fast mode): a cell typed
+  in either session appeared in the other within 10 seconds. DS-18 is closed
+  by this build.
+- **Document reopens after a save.** File 7: typed, Ctrl+S (version 3
+  stored, encrypted), left, reopened: the saved content once, no error, the
+  same document key, session still held (task status 0, 7 changes).
+- **Presentation reopens with duplicated content.** File 42: typed
+  " + run 10.0.2.5" into the subtitle, Ctrl+S (version 3, `savefile` 200),
+  left, reopened: no error, the same key `zADFt59p…`, session held with 30
+  changes, and the subtitle read "… + run 10.0.2.5 + run 10.0.2.5". The
+  session's changes were applied on top of the force-saved base. DS-19 in
+  the contract; the portal side is P-5.
+- **Sessions are not ended** on this build either: files 7, 42 and 43 kept
+  task status 0 after every editor left.
+- **`info/info.json`** exists on this build but nginx serves it from
+  loopback only (`ds-docservice.conf:78-82`); it reports
+  `serverInfo.buildVersion` 10.0.2 and `buildNumber` 5 and nothing about
+  the crypto library. The 404 recorded on 2026-10-29 came from the portal's
+  `/ds/` proxy, which answers the client application for every path, not
+  from the Document Server.
+- **Not covered:** a second account (every session was the same user),
+  images (4.4), member removal (4.5), the presentation relay.
+
+### Server read of 2026-10-30
+
+Read through CodeGraph on `release/v4.1.0` (a782a03fab), confirming the
+references of 2026-10-29 (moved: `ReplaceCommunityAddress` is
+`DocumentServiceConnector.cs:482-525`, the `openedit` action
+`EditorController.cs:253-314`, `FileTracker.cs:417`) and adding:
+
+- **Configuration.** `editorConfig.encryptionKeys` is set only for a file
+  located in a private room, from the caller's own key list, unsanitized, so
+  `privateKeyEnc` is in it (`EditorController.cs:311-314`,
+  `EncryptionKeyPairDto.cs:153-162`, `EncryptionKeyDto.cs:49-87`); the token
+  signs the whole DTO (`ConfigurationDto.cs:592`) and nothing changes the
+  field afterwards, while other fields are mutated after signing
+  (`:595-608`, `EditorController.cs:322-385`). The only encrypted or private
+  branches of the configuration: permissions off for an encrypted file
+  outside a private room (`DocumentServiceHelper.cs:268-274`),
+  `info.favorite` null (`Configuration.cs:509-512`),
+  `customization.mentionShare` false (`:905-910`), the go-back link of the
+  Privacy section (`:878-883`), `document.isForm` from the DSE3 flag byte
+  (`ConfigurationDto.cs:809`). Permissions, `modeWrite`, co-editing,
+  force-save, `submitForm`, `startFilling`, plugins and templates never read
+  `Encrypted`. `document.url` carries `version=` for a view-only or history
+  opening (`Configuration.cs:232`, `PathProvider.cs:121-125`), not for Edit,
+  Review or Comment; the note of 2026-10-29 "without a version parameter"
+  holds for the editing case only.
+- **Tracking.** The web client never calls `trackeditfile`; the tracker is
+  kept by the callbacks (status 1 users, `DocumentServiceTracker.cs:272-370`),
+  so the current-version-only key check of `TrackEditFileAsync`
+  (`FileStorageService.cs:2141`) does not affect encrypted editing.
+- **Callbacks.** `TrackerData.Encrypted` is a plain bool parsed from the body
+  or the JWT (`FileHandler.ashx.cs:1528-1533`, `1556-1598`); absent means
+  false. Changes and history are stored only for non-force-saves (`:567`,
+  `SaveHistoryAsync` `:766-800`); `edit/history` and `edit/diff` have no
+  encrypted guard and serve the Document Server's diff as stored.
+- **Paths that treat ciphertext as plaintext.** `copyas` with the same
+  extension copies through `CreateNewFileAsync`
+  (`FileStorageService.cs:2025-2063`), which never copies
+  `template.Encrypted`, and with another extension inserts the ciphertext
+  under the new title (`FilesControllerHelper.cs:263-280`).
+  `RestoreVersionAsync` by address saves with `encrypted=false`
+  (`:2662-2675`), as do PUT `saveediting` (`:2159-2169`) and the document
+  builder (`DocumentBuilderScriptRunner.cs:594`). `FileConverter` refuses
+  the conversion (`:306-309`) but `ExecAsync` returns the raw stream
+  (`:342-346`) and `ExecSynchronouslyAsync` sends it to the Document Server
+  (`:369-391`). Every save publishes an index event whose handler
+  base64-encodes the content with no `Encrypted` check (`FileDao.cs:838-843`,
+  `IndexEventProcessingService.cs:113-127`, `FactoryIndexerFile.cs:47-60`,
+  `FileDao.cs:2914-2975`). `GetReferenceDataAsync` has no encrypted guard
+  (`:4756-4830`). Thumbnails are refused (`Builder.cs:328-335`),
+  `UpdateToVersionFileAsync` refuses encrypted files
+  (`EntryManager.cs:1840-1843`), lock and unlock work
+  (`FileStorageService.cs:2485-2560`), mentions see `canShare` false
+  (`:5169-5173`).
+- **Member removal.** `CheckUsersForDropAsync` runs for file entries only
+  (`FileSharing.cs:527-530`, `599-602`); a room security update passes the
+  room folder (`FileStorageService.cs:4375-4388`), so open files of the room
+  are never dropped; the rights re-check on the next tracking throws without
+  a `drop` (`EntryManager.cs:1745-1753`).
+- **Capability surface.** `GET files/docservice` returns `DocServiceUrlDto`
+  (`DocServiceUrlDto.cs:40-107`) with `version` from `GetVersionsAsync`
+  (`DocumentServiceConnector.cs:274-316`, fallback "4.1.5.1");
+  `GET files/settings` returns `FilesSettingsDto` with `extsWebEncrypt`
+  (`FilesSettingsDto.cs:496`). Probes that already talk to the Document
+  Server: `CheckDocServiceUrlAsync` (`:318-480`) and the healthcheck
+  (`DocumentService.cs:674-692`).
+- **Forms.** As recorded on 2026-10-29; the refusal points are
+  `EntryManager.cs:1647` (UserSubmit), `DocumentServiceTracker.cs:485-491`,
+  `Configuration.cs:926` (`submitForm.visible`) and
+  `FileStorageService.cs:2219-2255` (`StartFillingAsync`).
+
+### Client read of 2026-10-30
+
+- **Open path.** Client list: `navigation.helpers.ts:650-717` (plugins
+  skipped, must-convert refused) → `openDocEditorImpl`
+  (`filesStore/actions.helpers.ts:133-194`) → `/doceditor?fileId=`; no
+  capability check anywhere. SDK: `docs-layout/index.tsx:502-507` refuses
+  unconditionally. Doceditor: `getData` (`utils/actions.ts:761-890`) calls
+  `openEdit` and sets `canCoAuthoring=false` for encrypted (`:828-830`); the
+  server's key-pair list stays in `config.token` and `config.editorConfig`
+  (`Editor.tsx:211-213`); `EncryptionProviderWrapper.tsx:140-211` loads the
+  envelopes; `useFileEncryptionKeys.ts` fetches the access entries (three
+  times per open, seen on the stand), requires the identity, loads the
+  sender keys, unwraps the DEK (`room-file-access.ts:59-165`), recovers the
+  name from a 4 KiB range and builds `{ dek, cryptoEngineId? }`, injected
+  with `Object.assign` (`Editor.tsx:260-268`) because
+  `@onlyoffice/doceditor-types` has no such field; `contractVersion` is not
+  sent. Failures end in `status: "error"` and Common:SomethingWentWrong; the
+  editor never mounts before `ready`.
+- **Settings.** There is no shared files-settings store: `files/settings`
+  lands in the client `FilesSettingsStore`, the SDK `DocsSettingsStore` and
+  the doceditor `useFilesSettings` (fetched after mount, so a doceditor gate
+  has to come from `getData`).
+- **Desktop.** The key hook runs in the desktop too, so `dek` is present
+  and the add-on takes the web path; `initDesktop.ts:47-98` also hands the
+  key pairs to `portal:login`.
+- **Tests.** `packages/doceditor` has no unit-test runner (Playwright
+  only), so every "doceditor unit test" needs task 0.1 first.
+- **Editor events** wired in `Editor.tsx:270-360` that break or leak for an
+  encrypted file, ranked: `onRequestRefreshFile` hands the raw configuration
+  without the DEK to `refreshFile` (breaks the session); `onRequestRename`
+  writes the plaintext name as the server title; `onRequestSharingSettings`
+  opens the sharing the client withholds; `onRequestCreateNew` creates a
+  plaintext file in the private-room folder; `onRequestSaveAs` (5.1) and
+  `onRequestStartFilling` (5.3) move plaintext out; the history events
+  (5.2); `onMetaChange` marks favorites the client withholds;
+  `onRequestSendNotify` sends comment text; `onError` only logs, so DS-5 and
+  DS-6 would be invisible; the file pickers can hand an encrypted file's
+  ciphertext to the Document Server. Unchanged and safe: `onInfo`,
+  `onMakeActionLink`, `onDownloadAs`, `onSubmit`, `onRequestClose`,
+  `onRequestEditRights`, `onDocumentStateChange`, `onRequestReferenceData`,
+  `onRequestOpen`. Tasks 9.1 to 9.12.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -422,6 +588,11 @@ Sent: pending (task 1.5).
    crypto library path (`sdkjs/common/crypto/onlyoffice-crypto.js` answering
    200 under the Document Server address). Alternative: the client probes the
    Document Server directly, which breaks with proxies and the SDK.
+   Found on 2026-10-30: the portal already reports the Document Server
+   build through `settings/version/build` (10.0.2.5 on the stand) while
+   `files/docservice.version` is empty; `info/info.json` is loopback-only
+   and names the build, not the library; so the boolean is derived from the
+   library path until a published signal exists (DS-16).
 
 3. **Co-editing allowed (decided 2026-10-29).** The Document Server encrypts
    every change with the DEK and stores only ciphertext, and each co-editor's
@@ -498,6 +669,14 @@ Sent: pending (task 1.5).
    library), DS-14 (the end of the session) and the presentation failure,
    reported with the run's log lines.
 
+   Run of 2026-10-30 on 10.0.2.5: the document reopened correctly after a
+   save with the session held, the presentation reopened with the session's
+   changes applied twice on the force-saved base (DS-19). The portal-side
+   part stays as decided: serving the stable base while the session lives
+   removes the replay-on-saved-base for every editor; DS-19 asks the
+   presentation editor not to apply a change twice, or the Document Server
+   to end the session on save.
+
 8. **The document address of an encrypted file stays public.** The editor
    downloads it in the browser. `document.url` is built from the public portal
    address and then `ReplaceCommunityAddress` swaps its host for the address
@@ -571,6 +750,17 @@ Sent: pending (task 1.5).
     server's signature setting would silently desynchronise the two; the
     risk is recorded below.
 
+16. **Editor events on an encrypted file follow the client's private-room
+    rules (proposed 2026-10-30, owner to confirm).** Rename, sharing
+    settings, favorites and version history are withheld in the editor as
+    they are in the file list; `refreshFile` re-injects the typed keys
+    entry; create-new from the editor goes through the encrypted creation
+    path or is withheld (proposal decision 7); errors from the Document
+    Server frame are shown as page text; the file pickers skip encrypted
+    files; mentions are decided by the owner (decision 7). Alternative:
+    leave the events generic and rely on the server to refuse; rejected,
+    the server stores a plaintext name or a plaintext new file today.
+
 ## Risks / Trade-offs
 
 - [Document Server does not implement the contract on the planned release
@@ -617,10 +807,16 @@ Sent: pending (task 1.5).
 - [Inserted images or other media leave the browser in plaintext] → not
   exercised; task 4.4 verifies it before release, and the contract requires
   that they do not (DS-13).
-- [Spreadsheet co-editing silently diverges] → until DS-18 is fixed, two
-  members editing one encrypted spreadsheet each keep their own view and the
-  last save wins; proposal decision 6 decides whether spreadsheets and
-  presentations ship before the Document Server fixes land.
+- [Spreadsheet co-editing silently diverges] → closed by Document Server
+  10.0.2.5 (run of 2026-10-30); what remains for proposal decision 6 is the
+  join race of DS-17 and the duplicated replay of DS-19.
+- [Editor events bypass the private-room rules of the file list] → tasks
+  9.1 to 9.9; until then a rename from the editor writes the real name to
+  the server and a new document from the editor is stored in plaintext
+  inside the private room.
+- [Server paths store ciphertext as a plaintext file or send it to the
+  Document Server] → tasks 10.2 to 10.4; `copyas`, restore by address and
+  conversion are reachable through the API today.
 
 ## Migration Plan
 
@@ -669,9 +865,15 @@ Sent: pending (task 1.5).
   the Document Server send (status 1 with no users, status 4, or none), and
   when does it drop the session? The portal's tracker and D7 depend on it.
   Task 6.5 records it on the local stack; the Document Server team confirms.
-- Spreadsheets and presentations: the add-on is present in their bundles,
-  but the run of 2026-10-29 covered a document and a PDF form only. Task 4.3
-  runs open, save, reopen and co-editing for XLSX and PPTX.
+- Spreadsheets and presentations, after the run of 2026-10-30 on 10.0.2.5:
+  the join race of DS-17 and the duplicated replay of DS-19 remain; the
+  first-open race and DS-18 are closed by that build. Owner: Document
+  Server team.
+- Mentions and comments on encrypted files: `onRequestSendNotify` carries
+  the comment text to the portal; withhold, or accept as plaintext
+  metadata? Owner: feature owner (proposal decision 7).
+- Create-new from the editor on an encrypted file: encrypted creation in
+  the same folder, or withheld? Owner: feature owner (proposal decision 7).
 - Inserted images: do `cryptoimg://` images reach the Document Server's media
   store or the portal in plaintext when a document is saved or co-edited?
   Task 4.4; owner: Document Server team for the answer, this change for the
@@ -687,8 +889,8 @@ Sent: pending (task 1.5).
   editor shows, is verified by task 4.5.
 - DS-12 (per-document change key and associated data): accepted or declined
   by the Document Server team; task 1.2 records the answer.
-- Why the spreadsheet editor shows the other session's selection but does
-  not apply its encrypted changes in Fast mode (DS-18) while the document
-  editor does, and why every reopen of a presentation with a held session
-  fails (`null (reading 'me')`). Owner: Document Server team, with the run
-  of 2026-10-29.
+- Why a second session joining a held session with many pending changes
+  still reads the library before it has loaded (DS-17 on 10.0.2.5), and why
+  the presentation editor applies the held changes on top of the
+  force-saved base while the document editor does not (DS-19). Owner:
+  Document Server team, with the runs of 2026-10-29 and 2026-10-30.

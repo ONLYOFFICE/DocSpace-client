@@ -1,7 +1,7 @@
 # Document Server contract for encrypted files, version 1
 
 Status: **draft of 2026-10-29, awaiting sign-off by the Document Server
-team.** Task 1.1 of `private-rooms-editor-contract` turns this draft into the
+team.** Task 1.6 of `private-rooms-editor-contract` turns this draft into the
 signed-off contract; until then every "MUST" below is the portal's proposal,
 and every "observed" statement is a fact from the run described in
 design.md ("Observed on 2026-10-29").

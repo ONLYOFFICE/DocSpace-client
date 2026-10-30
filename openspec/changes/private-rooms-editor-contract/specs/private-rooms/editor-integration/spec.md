@@ -3,7 +3,7 @@
 ## ADDED Requirements
 
 ### Requirement: Versioned Document Server encryption contract
-The client SHALL rely on a written, versioned contract with the Document Server for encrypted files. It SHALL state how the editor's web client reads the encryption keys entry, that the DSE3 container is decrypted and re-encrypted in the browser with the crypto library the Document Server ships, which container versions are read (2 and 3) and written (3), which library build ships, how the signed token treats the entry, and the first Document Server version.
+The client SHALL rely on a written, versioned contract with the Document Server for encrypted files. It SHALL state how the editor's web client reads the encryption keys entry, that the DSE3 container is decrypted and re-encrypted in the browser with the crypto library the Document Server ships, which container versions its shipped library reads and writes (2 in build 10.0.0.133), which library build ships, how the signed token treats the entry, and the first Document Server version.
 
 #### Scenario: Contract referenced by version
 - **WHEN** the client builds the editor configuration for an encrypted file
@@ -15,7 +15,7 @@ The client SHALL rely on a written, versioned contract with the Document Server 
 
 #### Scenario: Container versions
 - **WHEN** the Document Server opens a file stored as a DSE3 version-2 or version-3 container and saves it
-- **THEN** it decrypts either version and the saved container is version 3
+- **THEN** it decrypts either version and saves a container of the version its shipped library writes (version 2 in build 10.0.0.133), which the portal reads
 
 #### Scenario: Plaintext stays in the browser
 - **WHEN** an encrypted document is opened, edited and saved in the editor

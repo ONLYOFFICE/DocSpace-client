@@ -25,9 +25,10 @@ hidden.
   `editorConfig.encryptionKeys`, decrypts the DSE3 container in the browser
   with the crypto library the Document Server ships, saves by uploading a
   container it encrypted with the same DEK, and encrypts every co-editing
-  change with the DEK. The contract names the container versions read (2 and
-  3) and written (3, decided 2026-10-26 with
-  `private-rooms-dse3-header-authentication`), the library build the
+  change with the DEK. The contract names the container versions read and
+  written (version 2 in build 10.0.0.133; version 3 once a release ships a
+  library that reads it, with `private-rooms-dse3-header-authentication`
+  keeping the portal on version 2 until then), the library build the
   Document Server ships, how the signed token treats the entry, and the
   first Document Server version that implements it.
 - Add a Document Server capability check: the client refuses to open an
@@ -63,7 +64,7 @@ hidden.
 - Write the contract down as `contract-v1.md` in this change folder (draft
   of 2026-10-29, from the add-on code of build 10.0.0.133, the server code
   and the live run), with numbered obligations for the Document Server
-  (DS-1 to DS-16), the portal server (P-1 to P-8) and the client, so the
+  (DS-1 to DS-18), the portal server (P-1 to P-8) and the client, so the
   Document Server team can sign off item by item.
 - Stamp the crypto bundle (library version and source commit as a banner
   and as exported constants), export the form-flag constant, and hand the

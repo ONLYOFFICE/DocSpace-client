@@ -282,4 +282,37 @@ describe("Editor", () => {
       expect(events().onRequestSaveAs).toBe(props.onSDKRequestSaveAs);
     });
   });
+
+  describe("Version history", () => {
+    const HISTORY_EVENTS = [
+      "onRequestHistory",
+      "onRequestRestore",
+      "onRequestHistoryData",
+      "onRequestHistoryClose",
+    ];
+
+    it("History rights on an encrypted file: no history event is attached", async () => {
+      asEncrypted();
+      await renderEditor({
+        config: makeConfig(true),
+        fileInfo: makeFileInfo(true, { ReadHistory: true, EditHistory: true }),
+      });
+
+      expect(env.captured.config).toBeDefined();
+      for (const name of HISTORY_EVENTS) {
+        expect(events()[name], name).toBeUndefined();
+      }
+    });
+
+    it("History rights on a plain file: every history event is attached", async () => {
+      await renderEditor({
+        config: makeConfig(false),
+        fileInfo: makeFileInfo(false, { ReadHistory: true, EditHistory: true }),
+      });
+
+      for (const name of HISTORY_EVENTS) {
+        expect(events()[name], name).toEqual(expect.any(Function));
+      }
+    });
+  });
 });

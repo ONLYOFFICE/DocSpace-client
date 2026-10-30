@@ -268,14 +268,12 @@ const Editor = ({
 
   newConfig.events = {
     onDocumentReady,
-    onRequestHistoryClose: onSDKRequestHistoryClose,
     onRequestEditRights: () =>
       onSDKRequestEditRights(t, fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
     onInfo,
     onWarning: onSDKWarning,
     onError: onSDKError,
-    onRequestHistoryData: onSDKRequestHistoryData,
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
@@ -347,12 +345,18 @@ const Editor = ({
       onSDKRequestRename(obj, fileInfo.id);
   }
 
-  if (fileInfo?.security.ReadHistory) {
-    newConfig.events.onRequestHistory = onSDKRequestHistory;
-  }
+  // Spec: editor-integration, "Version history withheld in the editor for encrypted files"
+  if (!isEncryptedFile) {
+    newConfig.events.onRequestHistoryClose = onSDKRequestHistoryClose;
+    newConfig.events.onRequestHistoryData = onSDKRequestHistoryData;
 
-  if (fileInfo?.security.EditHistory) {
-    newConfig.events.onRequestRestore = onSDKRequestRestore;
+    if (fileInfo?.security.ReadHistory) {
+      newConfig.events.onRequestHistory = onSDKRequestHistory;
+    }
+
+    if (fileInfo?.security.EditHistory) {
+      newConfig.events.onRequestRestore = onSDKRequestRestore;
+    }
   }
 
   if (config?.startFilling && !IS_ZOOM) {

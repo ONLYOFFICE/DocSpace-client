@@ -37,6 +37,7 @@ import { http } from "msw";
 
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 import type { RequestLog } from "../privacyroom";
+import { getFilesSettings } from "./filesSettings";
 
 export type EncryptedFileKey = {
   userId: string;
@@ -169,36 +170,34 @@ const DOCUMENT_TYPE_BY_EXTENSION = {
   pptx: "slide",
   pdf: "pdf",
 } as const;
-/** The `files:viewed-images` setting of appsettings.json. */
-const VIEWED_IMAGES = [
-  ".svg",
-  ".bmp",
-  ".gif",
-  ".jpeg",
-  ".jpg",
-  ".png",
-  ".ico",
-  ".tif",
-  ".tiff",
-  ".webp",
-  ".heic",
-];
-/** The `files:viewed-media` setting of appsettings.json. */
-const VIEWED_MEDIA = [
-  ".aac",
-  ".flac",
-  ".m4a",
-  ".mp3",
-  ".oga",
-  ".ogg",
-  ".wav",
-  ".f4v",
-  ".m4v",
-  ".mov",
-  ".mp4",
-  ".ogv",
-  ".webm",
-];
+/**
+ * Mirrors FileUtility.GetAccessibility: every entry is decided by the
+ * extension of the stored title against the portal's extension lists (the
+ * ones the files-settings mock serves), nothing by the encrypted flag.
+ * WebView is GetWebViewAccessibility (a web-previewed extension other than
+ * .pdf); WebReview, WebCustomFilterEditing and WebComment also need WebEdit.
+ * CanConvert is false for a file whose room is private (FileUtility.CanConvert).
+ */
+const viewAccessibilityOf = (fileExst: string) => {
+  const ext = fileExst.toLowerCase();
+  const s = getFilesSettings();
+  const has = (list: string[] | undefined) =>
+    !!list?.some((r) => r.toLowerCase() === ext);
+  const webEdit = has(s.extsWebEdited);
+  return {
+    ImageView: has(s.extsImagePreviewed),
+    MediaView: has(s.extsMediaPreviewed),
+    WebView: ext !== ".pdf" && has(s.extsWebPreviewed),
+    WebEdit: webEdit,
+    WebReview: has(s.extsWebReviewed) && webEdit,
+    WebCustomFilterEditing: has(s.extsWebCustomFilterEditing) && webEdit,
+    WebRestrictedEditing: has(s.extsWebRestrictedEditing),
+    WebComment: has(s.extsWebCommented) && webEdit,
+    CanConvert: false,
+    MustConvert: has(s.extsMustConvert),
+  };
+};
+
 
 const okResponse = <T>(response: T, statusCode = 200): Response =>
   new Response(
@@ -299,20 +298,7 @@ const buildFileDto = (
     updated: new Date().toISOString(),
     createdBy: creator,
     updatedBy: creator,
-    // FileUtility.GetAccessibility reads ImageView and MediaView from the
-    // title's extension; the mock keeps the other entries off.
-    viewAccessibility: {
-      ImageView: VIEWED_IMAGES.includes(fileExst.toLowerCase()),
-      MediaView: VIEWED_MEDIA.includes(fileExst.toLowerCase()),
-      WebView: false,
-      WebEdit: false,
-      WebReview: false,
-      WebCustomFilterEditing: false,
-      WebRestrictedEditing: false,
-      WebComment: false,
-      CanConvert: false,
-      MustConvert: false,
-    },
+    viewAccessibility: viewAccessibilityOf(fileExst),
     security: {
       Read: true,
       Edit: true,

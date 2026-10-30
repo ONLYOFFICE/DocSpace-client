@@ -994,6 +994,40 @@ describe("encryptedFiles mock — viewAccessibility (mirrors FileUtility.GetAcce
     expect(access[7]).toMatchObject({ ImageView: true, MediaView: false });
     expect(access[8]).toMatchObject({ ImageView: false, MediaView: false });
   });
+
+  it("decides the editor entries by the stored title extension, whatever the encrypted flag", async () => {
+    handle.current!.setFiles([
+      { id: 9, title: "secret.docx", serverTitle: "e5f6.docx", fileKeys: [] },
+      { id: 10, title: "form.pdf", serverTitle: "a7b8.pdf", fileKeys: [] },
+    ]);
+
+    const res = await fetch(
+      `${BASE_URL}:${PORT}/${API_PREFIX}/files/${ROOM_ID}`,
+    );
+    const body = (await res.json()) as {
+      response: {
+        files: { id: number; viewAccessibility: Record<string, boolean> }[];
+      };
+    };
+    const access = Object.fromEntries(
+      body.response.files.map((f) => [f.id, f.viewAccessibility]),
+    );
+
+    expect(access[9]).toMatchObject({
+      WebView: true,
+      WebEdit: true,
+      WebReview: true,
+      WebComment: true,
+      WebRestrictedEditing: false,
+      CanConvert: false,
+      MustConvert: false,
+    });
+    expect(access[10]).toMatchObject({
+      WebView: false,
+      WebEdit: true,
+      WebRestrictedEditing: true,
+    });
+  });
 });
 
 describe("encryptedFiles mock — GET /files/folder/{folderId}/path (mirrors FoldersController.GetFolderPath)", () => {

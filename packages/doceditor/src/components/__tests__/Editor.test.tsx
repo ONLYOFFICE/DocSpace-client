@@ -392,4 +392,30 @@ describe("Editor", () => {
       );
     });
   });
+
+  describe("Sharing", () => {
+    it("Sharing requested on an encrypted file: the sharing event is absent", async () => {
+      asEncrypted();
+      await renderEditor({
+        config: makeConfig(true),
+        fileInfo: makeFileInfo(true),
+        isSharingAccess: true,
+      });
+
+      expect(env.captured.config).toBeDefined();
+      expect(events().onRequestSharingSettings).toBeUndefined();
+    });
+
+    it("Sharing requested on a plain file: the sharing event is attached", async () => {
+      const props = await renderEditor({
+        config: makeConfig(false),
+        fileInfo: makeFileInfo(false),
+        isSharingAccess: true,
+      });
+
+      expect(events().onRequestSharingSettings).toBe(
+        props.onSDKRequestSharingSettings,
+      );
+    });
+  });
 });

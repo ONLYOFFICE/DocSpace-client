@@ -332,7 +332,8 @@ const Editor = ({
     newConfig.events.onRequestReferenceSource = onSDKRequestReferenceSource;
   }
 
-  if (isSharingAccess && !config?.startFilling) {
+  // Sharing is withheld for an encrypted file, as in the client file list.
+  if (isSharingAccess && !config?.startFilling && !isEncryptedFile) {
     newConfig.events.onRequestSharingSettings = onSDKRequestSharingSettings;
   }
 

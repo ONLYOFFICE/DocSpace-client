@@ -98,6 +98,8 @@ export type FilesSelectorProps = TSelectorHeader & {
 	theme: TTheme;
 
 	selection: (TFolder | TFile)[];
+	extsFilesVectorized: string[];
+	vectorizationEnabled: boolean;
 	disabledItems: string[] | number[];
 	disabledFolderType?: FolderType;
 	setMoveToPanelVisible: (value: boolean) => void;

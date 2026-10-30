@@ -233,6 +233,8 @@ class DialogsStore {
 
   selectFileFormRoomDialogVisible = false;
 
+  selectFileKnowledgeRoomDialogVisible = false;
+
   convertPasswordDialogVisible = false;
 
   inviteQuotaWarningDialogVisible = false;
@@ -933,6 +935,11 @@ class DialogsStore {
     this.selectFileFormRoomDialogVisible = visible;
     this.selectFileFormRoomFilterParam = filterParam;
     this.selectFileFormRoomOpenRoot = openRoot;
+  };
+
+  /** The workspace picker that copies files into the current Knowledge room. */
+  setSelectFileKnowledgeRoomDialogVisible = (visible: boolean) => {
+    this.selectFileKnowledgeRoomDialogVisible = visible;
   };
 
   createMasterForm = async (

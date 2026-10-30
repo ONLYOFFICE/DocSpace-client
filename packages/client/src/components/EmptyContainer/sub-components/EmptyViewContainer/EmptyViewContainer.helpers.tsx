@@ -438,6 +438,14 @@ export const getOptions = (
     "file",
   );
 
+  // The workspace picker of a Knowledge room copies several files at once
+  // and lists only the formats vectorization reads.
+  const uploadKnowledgeFromStorage: EmptyViewItemType = {
+    ...uploadAllFromDocSpace,
+    key: "upload-knowledge-from-storage",
+    onClick: () => actions.uploadFromDocspaceKnowledgeRoom(),
+  };
+
   const migrationData = {
     title: t("EmptyView:MigrationDataTitle"),
     description: t("EmptyView:MigrationDataDescription", {
@@ -669,9 +677,10 @@ export const getOptions = (
 
       if (!vectorizationEnabled) return isCollaborator ? [] : [inviteUser];
 
-      if (isCollaborator) return [uploadAllFromDocSpace, uploadFilesFromDevice];
+      if (isCollaborator)
+        return [uploadKnowledgeFromStorage, uploadFilesFromDevice];
 
-      return [inviteUser, uploadAllFromDocSpace, uploadFilesFromDevice];
+      return [inviteUser, uploadKnowledgeFromStorage, uploadFilesFromDevice];
     default:
       return [];
   }

@@ -34,6 +34,7 @@
  */
 
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
@@ -99,6 +100,8 @@ const ArticleMainButtonContent = (props) => {
     selectFileDialogVisible,
     selectFileFormRoomDialogVisible,
     setSelectFileFormRoomDialogVisible,
+    setSelectFileKnowledgeRoomDialogVisible,
+    knowledgeUploadAccept,
     showArticleLoader,
     isFavoritesFolder,
     isRecentFolder,
@@ -276,6 +279,10 @@ const ArticleMainButtonContent = (props) => {
   const onUploadFileClick = React.useCallback(() => {
     inputFilesElement.current.click();
   }, []);
+
+  const onShowKnowledgeRoomSelectFileDialog = React.useCallback(() => {
+    setSelectFileKnowledgeRoomDialogVisible(true);
+  }, [setSelectFileKnowledgeRoomDialogVisible]);
 
   const onUploadFolderClick = React.useCallback(() => {
     inputFolderElement.current.click();
@@ -547,8 +554,31 @@ const ArticleMainButtonContent = (props) => {
       const uploadFilesOnly = newUploadActions.filter(
         (action) => action.key !== "upload-folder",
       );
-      const sourceUploadActions =
-        isKnowledgeRoom && !vectorizationEnabled ? [] : uploadFilesOnly;
+      // A Knowledge room takes files from the workspace (copied in) or from
+      // the device, in the order the empty view offers them.
+      const knowledgeUploadActions = [
+        {
+          id: "actions_upload-from-storage",
+          className: "main-button_drop-down",
+          icon: MoveReactSvgUrl,
+          label: t("EmptyView:UploadFromPortalTitle"),
+          onClick: onShowKnowledgeRoomSelectFileDialog,
+          key: "upload-from-storage",
+        },
+        {
+          id: "actions_upload-from-device",
+          className: "main-button_drop-down",
+          icon: ActionsUploadReactSvgUrl,
+          label: t("EmptyView:UploadDeviceOptionTitle"),
+          onClick: onUploadFileClick,
+          key: "upload-from-device",
+        },
+      ];
+      const sourceUploadActions = isKnowledgeRoom
+        ? vectorizationEnabled
+          ? knowledgeUploadActions
+          : []
+        : uploadFilesOnly;
       const createNewMarkdown = {
         id: "actions_new-markdown",
         className: "main-button_drop-down",
@@ -655,6 +685,7 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     onShowSelectFileDialog,
     onShowFormRoomSelectFileDialog,
+    onShowKnowledgeRoomSelectFileDialog,
     onUploadFileClick,
     onUploadFolderClick,
     createActionsForFormRoom,
@@ -785,6 +816,10 @@ const ArticleMainButtonContent = (props) => {
         onClick={onInputClick}
         ref={inputFilesElement}
         style={{ display: "none" }}
+        {...(currentRoomType === RoomsType.KnowledgeRoom &&
+        knowledgeUploadAccept
+          ? { accept: knowledgeUploadAccept }
+          : {})}
       />
       <input
         id="customPDFInput"
@@ -828,6 +863,7 @@ export default inject(
     filesActionsStore,
     currentQuotaStore,
     peopleStore,
+    filesSettingsStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const {
@@ -851,6 +887,7 @@ export default inject(
       selectFileDialogVisible,
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
+      setSelectFileKnowledgeRoomDialogVisible,
     } = dialogsStore;
 
     const {
@@ -945,6 +982,8 @@ export default inject(
       isFolder,
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
+      setSelectFileKnowledgeRoomDialogVisible,
+      knowledgeUploadAccept: filesSettingsStore.knowledgeUploadAccept,
       createFoldersTree,
 
       showWarningDialog,

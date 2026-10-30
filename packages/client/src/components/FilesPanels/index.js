@@ -130,6 +130,10 @@ const Panels = (props) => {
     selectFileFormRoomFilterParam,
     setSelectFileFormRoomDialogVisible,
     copyFromTemplateForm,
+    selectFileKnowledgeRoomDialogVisible,
+    setSelectFileKnowledgeRoomDialogVisible,
+    copyFilesToKnowledgeRoom,
+    knowledgeSelectorFilter,
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
@@ -210,6 +214,10 @@ const Panels = (props) => {
 
   const onCloseFileFormRoomDialog = () => {
     setSelectFileFormRoomDialogVisible(false);
+  };
+
+  const onCloseFileKnowledgeRoomDialog = () => {
+    setSelectFileKnowledgeRoomDialogVisible(false);
   };
 
   const descriptionTextFileFormRoomDialog = useMemo(() => {
@@ -328,6 +336,21 @@ const Panels = (props) => {
         onSelectFile={(file) => copyFromTemplateForm(file, t)}
         filterParam={selectFileFormRoomFilterParam}
         descriptionText={descriptionTextFileFormRoomDialog}
+        withRecentTreeFolder
+        withFavoritesTreeFolder
+      />
+    ),
+    selectFileKnowledgeRoomDialogVisible && (
+      <FilesSelector
+        isFormRoom
+        isPanelVisible
+        isMultiSelect
+        key="select-file-knowledge-room-dialog"
+        onClose={onCloseFileKnowledgeRoomDialog}
+        openRoot
+        onSelectFile={(files) => copyFilesToKnowledgeRoom(files)}
+        filterParam={knowledgeSelectorFilter}
+        descriptionText=""
         withRecentTreeFolder
         withFavoritesTreeFolder
       />
@@ -457,6 +480,7 @@ export default inject(
     filesActionsStore,
     filesStore,
     oformsStore,
+    filesSettingsStore,
   }) => {
     const {
       copyPanelVisible,
@@ -483,6 +507,8 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
+      selectFileKnowledgeRoomDialogVisible,
+      setSelectFileKnowledgeRoomDialogVisible,
       invitePanelOptions,
       inviteQuotaWarningDialogVisible,
       changeQuotaDialogVisible,
@@ -532,7 +558,8 @@ export default inject(
     const { setArrRoomGroups, arrRoomGroups } = filesStore;
 
     const { preparationPortalDialogVisible } = backup;
-    const { copyFromTemplateForm } = filesActionsStore;
+    const { copyFromTemplateForm, copyFilesToKnowledgeRoom } =
+      filesActionsStore;
 
     const { uploadPanelVisible, conversionVisible } = uploadDataStore;
     const {
@@ -597,6 +624,10 @@ export default inject(
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
       copyFromTemplateForm,
+      selectFileKnowledgeRoomDialogVisible,
+      setSelectFileKnowledgeRoomDialogVisible,
+      copyFilesToKnowledgeRoom,
+      knowledgeSelectorFilter: filesSettingsStore.knowledgeSelectorFilter,
       hotkeyPanelVisible,
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,

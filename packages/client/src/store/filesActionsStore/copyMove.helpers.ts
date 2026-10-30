@@ -451,7 +451,35 @@ self: FilesActionStore,fileInfo: TFile
     .catch((error) => toastr.error(error));
 };
 
+/**
+ * Copies the files picked in the workspace selector into the current
+ * Knowledge room. There are no conflicts to resolve: the server keeps every
+ * copy under a free title and queues it for vectorization.
+ */
+export const copyFilesToKnowledgeRoomImpl = async (
+  self: FilesActionStore,
+  filesInfo: TActionItem[],
+) => {
+  const destFolderId = self.selectedFolderStore.id;
+  if (destFolderId == null || filesInfo.length === 0) return;
 
+  const operationData = {
+    destFolderId,
+    folderIds: [],
+    fileIds: filesInfo.map((file) => file.id),
+    deleteAfter: false,
+    isCopy: true,
+    folderTitle: self.selectedFolderStore.title,
+  };
+
+  self.uploadDataStore.secondaryProgressDataStore.setItemsSelectionTitle(
+    filesInfo[0].title,
+  );
+
+  await self.uploadDataStore
+    .itemOperationToFolder(operationData)
+    .catch((error) => toastr.error(error));
+};
 
 export const moveDragItemsImpl = (
 self: FilesActionStore,

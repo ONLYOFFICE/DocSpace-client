@@ -70,7 +70,11 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
-import { getAcceptButtonLabel, getIsDisabled } from "./utils";
+import {
+  getAcceptButtonLabel,
+  getCopyTargetRoomTypes,
+  getIsDisabled,
+} from "./utils";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 let disabledItems: (string | number)[] = [];
@@ -112,6 +116,8 @@ const FilesSelectorWrapper = ({
   withFormsTreeFolder,
 
   selection,
+  extsFilesVectorized,
+  vectorizationEnabled,
   // disabledItems,
   setConflictDialogData,
   checkFileConflicts,
@@ -274,6 +280,20 @@ const FilesSelectorWrapper = ({
       isRoomFormAccessible,
     };
   }, [selection, isCopy, isMove, isFormRoom, t]);
+
+  // Instructions and Knowledge rooms appear among the copy and move targets
+  // only when the whole selection can land in them.
+  const roomsSectionTypes = React.useMemo(
+    () =>
+      isCopy || isMove
+        ? getCopyTargetRoomTypes(
+            selection,
+            extsFilesVectorized,
+            vectorizationEnabled,
+          )
+        : undefined,
+    [isCopy, isMove, selection, extsFilesVectorized, vectorizationEnabled],
+  );
 
   const encryptedInSelection = React.useMemo(
     () =>
@@ -555,6 +575,7 @@ const FilesSelectorWrapper = ({
         isMove && sourceInPrivateRoom ? privateRoomId : undefined
       }
       filterParam={filterParam}
+      roomsSectionTypes={roomsSectionTypes}
       withSubFolders={withSubFolders}
       getIcon={getIcon}
       setIsDataReady={setIsDataReady}
@@ -830,6 +851,9 @@ export default inject(
       setRestorePanelVisible,
 
       selection: selectionsWithoutEditing,
+      extsFilesVectorized: filesSettingsStore.extsFilesVectorized,
+      vectorizationEnabled:
+        settingsStore.aiConfig?.vectorizationEnabled !== false,
       disabledItems,
       setConflictDialogData,
       checkFileConflicts,

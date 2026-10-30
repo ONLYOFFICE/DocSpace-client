@@ -41,7 +41,11 @@ import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { copySelectedText } from "@docspace/shared/utils/copy";
-import { isContextMenuOpen, isKeyOwnedByFocus } from "SRC_DIR/helpers/hotkeys";
+import {
+  isContextMenuOpen,
+  isCreateHotkeyBlockedInRoom,
+  isKeyOwnedByFocus,
+} from "SRC_DIR/helpers/hotkeys";
 
 const withHotkeys = (Component) => {
   const WithHotkeys = (props) => {
@@ -105,6 +109,7 @@ const withHotkeys = (Component) => {
       isGroupMenuBlocked,
       isFormRoom,
       isParentFolderFormRoom,
+      roomType,
       isIndexEditingMode,
       enableSelection,
       openContextMenu,
@@ -153,6 +158,7 @@ const withHotkeys = (Component) => {
     const onCreate = (extension) => {
       if (
         folderWithNoAction ||
+        isCreateHotkeyBlockedInRoom(roomType) ||
         (Boolean(extension) && (isFormRoom || isParentFolderFormRoom))
       )
         return;
@@ -609,7 +615,8 @@ const withHotkeys = (Component) => {
       const { isWarningRoomsDialog } = currentQuotaStore;
 
       const security = selectedFolderStore.security;
-      const isFormRoom = selectedFolderStore.roomType === RoomsType.FormRoom;
+      const { roomType } = selectedFolderStore;
+      const isFormRoom = roomType === RoomsType.FormRoom;
       const isParentFolderFormRoom =
         selectedFolderStore.parentRoomType === FolderType.FormRoom;
       const currentFolderId = selectedFolderStore.id;
@@ -678,6 +685,7 @@ const withHotkeys = (Component) => {
         isGroupMenuBlocked,
         isFormRoom,
         isParentFolderFormRoom,
+        roomType,
         enableSelection,
         askAIAction,
         currentFolderId,

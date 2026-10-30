@@ -67,12 +67,16 @@ export const ROOMS_SECTION_TYPES = RoomsTypeValues.filter(
  * (`GET files/{folderId}?folderType=...`, bound to `List<FolderType>` on the
  * server). Mirrors ROOMS_SECTION_TYPES: form-filling rooms belong to the
  * "Forms" section and AI rooms to "AI Agents", so both are excluded here.
+ * Instructions and Knowledge rooms live in Rooms, so their files show up
+ * in the section's trash, recent and favorites like any other room's.
  */
 export const ROOMS_SECTION_FOLDER_TYPES = [
   FolderType.EditingRoom,
   FolderType.CustomRoom,
   FolderType.PublicRoom,
   FolderType.VirtualDataRoom,
+  FolderType.InstructionsRoom,
+  FolderType.KnowledgeRoom,
 ];
 
 /**

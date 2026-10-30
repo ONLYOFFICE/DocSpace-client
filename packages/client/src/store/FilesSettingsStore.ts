@@ -198,6 +198,21 @@ class FilesSettingsStore {
 
   extsFilesVectorized: string[] = [];
 
+  /** The `accept` list of a device upload into a Knowledge room. */
+  get knowledgeUploadAccept() {
+    return this.extsFilesVectorized.join(",");
+  }
+
+  /**
+   * The extension filter of the workspace selector feeding a Knowledge room,
+   * without the leading dots, as the files API takes them.
+   */
+  get knowledgeSelectorFilter() {
+    return this.extsFilesVectorized
+      .map((ext) => ext.replace(/^\./, ""))
+      .join(",");
+  }
+
   externalShare = true;
 
   defaultShareLinkInternal = false;

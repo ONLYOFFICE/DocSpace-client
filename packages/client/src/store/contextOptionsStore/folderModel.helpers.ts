@@ -366,11 +366,27 @@ export const getFolderModelImpl = (
       icon: ActionsDocumentsReactSvgUrl,
       onClick: () => self.onCreate("md", t),
     };
+    // A Knowledge room takes files from the workspace (copied in) or from
+    // the device, in the order the empty view offers them.
+    const uploadFromStorage: TContextOption = {
+      id: "personal_upload-from-storage",
+      key: "upload-from-storage",
+      label: t("EmptyView:UploadFromPortalTitle"),
+      icon: MoveReactSvgUrl,
+      onClick: () => self.onShowKnowledgeRoomSelectFileDialog(),
+    };
+    const uploadFromDevice: TContextOption = {
+      id: "personal_upload-from-device",
+      key: "upload-from-device",
+      label: t("EmptyView:UploadDeviceOptionTitle"),
+      icon: ActionsUploadReactSvgUrl,
+      onClick: () => onUploadAction("file"),
+    };
     const sourceRoomOptions: TContextOption[] =
       roomType === RoomsType.InstructionsRoom
         ? [createNewMarkdown, { key: "separator", isSeparator: true }, uploadFiles]
         : vectorizationEnabled
-          ? [uploadFiles]
+          ? [uploadFromStorage, uploadFromDevice]
           : [];
 
     return sourceRoomOptions.length > 0 ? sourceRoomOptions : null;

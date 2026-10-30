@@ -136,6 +136,7 @@ import {
   checkOperationConflictImpl,
   preparingDataForCopyingToRoomImpl,
   copyFromTemplateFormImpl,
+  copyFilesToKnowledgeRoomImpl,
   moveDragItemsImpl,
   getPublicKeyImpl,
 } from "./filesActionsStore/copyMove.helpers";
@@ -804,6 +805,9 @@ class FilesActionStore {
   onCreateRoomFromTemplate = (item: TActionItem, addSelection?: boolean)=> onCreateRoomFromTemplateImpl(this, item, addSelection);
 
   copyFromTemplateForm = async (fileInfo: TFile)=> copyFromTemplateFormImpl(this, fileInfo);
+
+  copyFilesToKnowledgeRoom = async (filesInfo: TActionItem[]) =>
+    copyFilesToKnowledgeRoomImpl(this, filesInfo);
 
   setListOrder = (
     startIndex: number,

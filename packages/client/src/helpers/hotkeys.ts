@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { RoomsType } from "@docspace/shared/enums";
+
 // Controls that act on Enter and Space themselves. Only the focused element
 // is tested, never its ancestors: the section and every file row are
 // react-dropzone roots with role="button", and Enter on them opens the item.
@@ -131,3 +133,16 @@ export const isKeyOwnedByFocus = (e: KeyboardEvent) => {
 
   return false;
 };
+
+/**
+ * The create hotkeys (Shift+D/S/P/O for a file, Shift+F for a folder) do
+ * nothing in the flat AI source rooms. An Instructions room creates Markdown
+ * only and a Knowledge room only takes uploads; neither holds folders. The
+ * rooms keep `security.Create` for uploading, so the right alone cannot
+ * tell these hotkeys apart from the "+ New" menu.
+ */
+export const isCreateHotkeyBlockedInRoom = (
+  roomType?: RoomsType | null,
+): boolean =>
+  roomType === RoomsType.InstructionsRoom ||
+  roomType === RoomsType.KnowledgeRoom;

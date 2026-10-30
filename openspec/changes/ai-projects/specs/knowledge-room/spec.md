@@ -28,6 +28,17 @@ A Knowledge room SHALL hold files only: no subfolders can be created or moved in
 - **WHEN** a user uploads a file whose format cannot be extracted
 - **THEN** the upload is refused with a message naming the reason
 
+### Requirement: Adding files
+The room's "Create" menu SHALL offer exactly "Upload from storage" and "Upload from device", in that order, as the empty view does. The device picker SHALL list only the formats vectorization reads; the storage picker SHALL list only those formats, allow several files and copy them into the room. The create hotkeys SHALL do nothing in the room.
+
+#### Scenario: Upload from device
+- **WHEN** a Content creator picks "Upload from device"
+- **THEN** the file picker offers the supported formats only
+
+#### Scenario: Upload from storage
+- **WHEN** a Content creator picks "Upload from storage" and selects two supported files
+- **THEN** both are copied into the room and queued for vectorization
+
 ### Requirement: Indexing state
 Each file SHALL show its vectorization state (in progress, completed, failed). A failed file SHALL offer "Vectorization" (retry) to users with the right, as a file action and in the group menu. The room's counts of indexed and total files SHALL be shown wherever the room is listed as a project source.
 

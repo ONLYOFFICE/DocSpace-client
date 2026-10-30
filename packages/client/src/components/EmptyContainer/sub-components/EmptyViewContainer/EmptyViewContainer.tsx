@@ -149,6 +149,7 @@ const InjectedEmptyViewContainer = inject<
 
     const {
       setSelectFileFormRoomDialogVisible,
+      setSelectFileKnowledgeRoomDialogVisible,
       setQuotaWarningDialogVisible,
       setTemplateAccessSettingsVisible,
     } = dialogsStore;
@@ -185,6 +186,7 @@ const InjectedEmptyViewContainer = inject<
       setIsSectionFilterLoading,
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
+      setSelectFileKnowledgeRoomDialogVisible,
       setQuotaWarningDialogVisible,
       setTemplateAccessSettingsVisible,
       isVisitor: userStore?.user?.isVisitor,

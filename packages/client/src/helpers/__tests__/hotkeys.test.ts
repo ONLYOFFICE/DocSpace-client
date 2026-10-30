@@ -35,9 +35,12 @@
 
 import { afterEach, describe, expect, it } from "vitest";
 
+import { RoomsType } from "@docspace/shared/enums";
+
 import {
   focusListOnSelectionKey,
   isContextMenuOpen,
+  isCreateHotkeyBlockedInRoom,
   isKeyOwnedByFocus,
 } from "../hotkeys";
 
@@ -168,5 +171,19 @@ describe("focusListOnSelectionKey", () => {
     focusListOnSelectionKey(new KeyboardEvent("keydown", { key: "x" }));
 
     expect(document.activeElement).toBe(more);
+  });
+});
+
+describe("isCreateHotkeyBlockedInRoom", () => {
+  it("blocks the create hotkeys in the flat AI source rooms", () => {
+    expect(isCreateHotkeyBlockedInRoom(RoomsType.InstructionsRoom)).toBe(true);
+    expect(isCreateHotkeyBlockedInRoom(RoomsType.KnowledgeRoom)).toBe(true);
+  });
+
+  it("leaves the other rooms and plain folders to the Create right", () => {
+    expect(isCreateHotkeyBlockedInRoom(RoomsType.CustomRoom)).toBe(false);
+    expect(isCreateHotkeyBlockedInRoom(RoomsType.FormRoom)).toBe(false);
+    expect(isCreateHotkeyBlockedInRoom(null)).toBe(false);
+    expect(isCreateHotkeyBlockedInRoom(undefined)).toBe(false);
   });
 });

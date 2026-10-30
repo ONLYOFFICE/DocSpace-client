@@ -40,6 +40,7 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import type { TTranslation } from "@docspace/shared/types";
+import { RoomsType } from "@docspace/shared/enums";
 
 const FOLDER_INPUT_ATTRS = {
   webkitdirectory: "",
@@ -49,11 +50,17 @@ const FOLDER_INPUT_ATTRS = {
 type UploadFileInputsProps = {
   startUpload?: (files: File[], folderId: null, t: TTranslation) => void;
   createFoldersTree?: (t: TTranslation, files: File[]) => Promise<File[]>;
+  isKnowledgeRoom?: boolean;
+  // Only the formats vectorization reads are offered in a Knowledge room;
+  // the server refuses anything else.
+  knowledgeUploadAccept?: string;
 };
 
 const UploadFileInputs = ({
   startUpload,
   createFoldersTree,
+  isKnowledgeRoom,
+  knowledgeUploadAccept,
 }: UploadFileInputsProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -89,6 +96,9 @@ const UploadFileInputs = ({
         style={{ display: "none" }}
         onChange={onFileChange}
         onClick={onInputClick}
+        {...(isKnowledgeRoom && knowledgeUploadAccept
+          ? { accept: knowledgeUploadAccept }
+          : {})}
       />
       <input
         id="customPDFInput"
@@ -113,7 +123,16 @@ const UploadFileInputs = ({
   );
 };
 
-export default inject(({ uploadDataStore, filesActionsStore }: TStore) => ({
-  startUpload: uploadDataStore.startUpload,
-  createFoldersTree: filesActionsStore.createFoldersTree,
-}))(observer(UploadFileInputs));
+export default inject(
+  ({
+    uploadDataStore,
+    filesActionsStore,
+    selectedFolderStore,
+    filesSettingsStore,
+  }: TStore) => ({
+    startUpload: uploadDataStore.startUpload,
+    createFoldersTree: filesActionsStore.createFoldersTree,
+    isKnowledgeRoom: selectedFolderStore.roomType === RoomsType.KnowledgeRoom,
+    knowledgeUploadAccept: filesSettingsStore.knowledgeUploadAccept,
+  }),
+)(observer(UploadFileInputs));

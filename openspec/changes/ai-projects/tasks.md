@@ -25,6 +25,8 @@ Most of the client work is already on `feature/new-ai-concept`. Tasks marked `[x
 - [x] 2a.6 ui-kit / ai-chat: hide the composer's knowledge base picker (`ComposerActionKnowledge`) while vectorization is off, driven by a host flag; verify by opening the composer's source actions in the running app with vectorization off
 - [x] 2a.7 ASC.AI.Chat: refuse linking a Knowledge room (400) while vectorization is disabled, in `aiProjectsController` (create / update) and the mock; verify with a Node unit test that names a Knowledge room under the flag
 
+- [x] 2a.8 Client: give a Knowledge room's "Create" menu "Upload from storage" (multi-select workspace picker filtered to `extsFilesVectorized`, copied in through `copyFilesToKnowledgeRoom`) and "Upload from device" (`accept` limited to `extsFilesVectorized`), in the main button, the "+" menu and the empty view, and block the create hotkeys in Instructions and Knowledge rooms; verify with `ContextOptionsStore.models.test.ts` (Knowledge room menu) and `hotkeys.test.ts`
+
 ## 2b. Align the client with the contract
 
 - [x] 2b.1 (`ai-projects-catalog` search and filter) Send the list's room filter as `linkedRoomId` instead of `instructionsRoomId` / `knowledgeRoomId` (`shared/api/ai/projects.ts`, `AiProjectsStore`, the MSW handler); verify with `AiProjectsStore.test.ts` and the filter case in `ai-projects.spec.ts`

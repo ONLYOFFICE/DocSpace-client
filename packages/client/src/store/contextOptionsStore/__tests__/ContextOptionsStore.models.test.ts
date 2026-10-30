@@ -35,6 +35,8 @@
 
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
+import { RoomsType } from "@docspace/shared/enums";
+
 import { createTestContextOptionsStore, menuShape, t } from "./testHarness";
 
 beforeEach(() => {
@@ -57,6 +59,26 @@ describe("ContextOptionsStore.getFolderModel — characterization", () => {
     const model = store.getFolderModel(t);
     expect(Array.isArray(model)).toBe(true);
     expect(menuShape(model as unknown[])).toMatchSnapshot();
+  });
+});
+
+describe("ContextOptionsStore.getFolderModel — Knowledge room", () => {
+  const knowledgeRoom = { security: { Create: true }, roomType: RoomsType.KnowledgeRoom };
+
+  it("offers the workspace and device uploads, in the empty view's order", () => {
+    const store = createTestContextOptionsStore({ selectedFolderStore: knowledgeRoom });
+    expect(menuShape(store.getFolderModel(t) as unknown[])).toEqual([
+      { key: "upload-from-storage", label: "EmptyView:UploadFromPortalTitle" },
+      { key: "upload-from-device", label: "EmptyView:UploadDeviceOptionTitle" },
+    ]);
+  });
+
+  it("offers nothing while vectorization is off", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: knowledgeRoom,
+      settingsStore: { aiConfig: { vectorizationEnabled: false } },
+    });
+    expect(store.getFolderModel(t)).toBeNull();
   });
 });
 

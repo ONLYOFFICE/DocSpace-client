@@ -94,6 +94,7 @@
   "WebhookName": "Webhook adı",
   "WebhookRedilivered": "Webhook yeniden teslim edildi",
   "WebhookRemoved": "Webhook kaldırıldı",
+  "WebhookWasDeleted": "Bu webhook silindi",
   "Webhooks": "Webhook’lar",
   "WebhooksGuide": "Webhook Kılavuzu",
   "WebhooksInfo": "{{organizationName}} {{productName}}'deki çeşitli olaylara dayalı olarak kullandığınız herhangi bir uygulama veya web sitesinin yanında özel eylemler gerçekleştirmek için webhook kullanın.\nBurada, tüm webhook’larını oluşturup yönetebilir, yapılandırabilir ve performanslarını denetlemek için her bir webhook’un geçmişine göz atabilirsiniz."

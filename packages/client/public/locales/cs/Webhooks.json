@@ -94,6 +94,7 @@
   "WebhookName": "Název webhooku",
   "WebhookRedilivered": "Opětovné doručení webhooku",
   "WebhookRemoved": "Webhook byl odstraněn",
+  "WebhookWasDeleted": "Tento webhook byl smazán",
   "Webhooks": "Webové háčky",
   "WebhooksGuide": "Průvodce webovými háčky",
   "WebhooksInfo": "Pomocí webhooků můžete provádět vlastní akce na straně jakékoli aplikace nebo webové stránky, kterou používáte, na základě různých událostí v aplikaci {{organizationName}} {{productName}}.\nZde můžete vytvářet a spravovat všechny své webhooks, konfigurovat je a procházet historii každého webhooku pro audit jejich výkonnosti."

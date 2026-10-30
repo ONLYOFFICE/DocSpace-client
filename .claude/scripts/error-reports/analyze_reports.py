@@ -445,6 +445,14 @@ def write_signature(rows, args):
     if len(raw) > 8:
         p(f"- … {len(raw) - 8} more variants")
 
+    # errorCause: what a catch-all (doceditor's openEdit) actually caught;
+    # only reports from 4.1.0 on carry it.
+    causes = collections.Counter(r["rec"]["errorCause"][:200] for r in rs if r["rec"].get("errorCause"))
+    if causes:
+        p("\n## Causes (errorCause)\n")
+        for m, n in causes.most_common(8):
+            p(f"- {n} × `{m}`")
+
     top_table("Application", (r["app"] for r in rs))
     top_table("Route (errorUrl)", (r["route"] for r in rs))
     top_table("Top frame", (r["frame"] for r in rs))
@@ -490,7 +498,10 @@ def write_signature(rows, args):
         p(f"### {r['id']} — {r['time']:%Y-%m-%d %H:%M} UTC, {r['version']}, {r['app']}\n")
         p(f"- errorUrl: `{rec.get('errorUrl') or rec.get('url')}`")
         p(f"- userAgent: `{rec.get('userAgent')}`")
-        p(f"- message: `{(rec.get('errorMessage') or '')[:400]}`\n")
+        p(f"- message: `{(rec.get('errorMessage') or '')[:400]}`")
+        if rec.get("errorCause"):
+            p(f"- cause: `{rec['errorCause'][:400]}`")
+        p("")
         stack = "\n".join((rec.get("errorStack") or "").split("\n")[:15])
         p("```\n" + stack + "\n```\n")
 

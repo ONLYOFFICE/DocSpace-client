@@ -207,6 +207,8 @@ const Root = ({
     onCloseSelectFileDialog,
     onSubmitSelectFileDialog,
     getIsDisabledSelectFileDialog,
+    onFilesLoadedSelectFileDialog,
+    selectFileDialogDisabledItems,
 
     selectFileDialogFileTypeDetection,
     selectFileDialogVisible,
@@ -405,6 +407,8 @@ const Root = ({
           onSubmit={onSubmitSelectFileDialog as SelectFileDialogProps["onSubmit"]}
           onClose={onCloseSelectFileDialog}
           getIsDisabled={getIsDisabledSelectFileDialog as SelectFileDialogProps["getIsDisabled"]}
+          onFilesLoaded={onFilesLoadedSelectFileDialog}
+          disabledItems={selectFileDialogDisabledItems}
           fileTypeDetection={selectFileDialogFileTypeDetection}
           fileInfo={fileInfo}
           shareKey={shareKey}

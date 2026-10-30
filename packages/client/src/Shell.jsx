@@ -907,13 +907,20 @@ const Shell = ({ page = "home", ...rest }) => {
     onProjectPick,
   );
 
-  // Inside an AI project the chat is scoped to the project: the AI service
+  // The chat's own scope is only ever an AI project: the AI service
   // recognises the project by this id and takes the round's model and
   // linked rooms from the project itself (`ai/projects/{id}/chat-context`).
+  // Threads are global per user, so no other location scopes the chat.
   const chatEntityId =
-    isInsideAiProject && aiActiveProject
-      ? String(aiActiveProject.id)
-      : chatScopeEntityId;
+    isInsideAiProject && aiActiveProject ? String(aiActiveProject.id) : undefined;
+
+  // The location the rounds work in: the folder or room the chat is opened
+  // in (the AI service's location line, generated files and uploads follow
+  // it). The projects page is no location: its selected folder is whatever
+  // the previous page left, and inside a project the context is the folder
+  // picked in the project, else My documents, both resolved by the AI
+  // service itself.
+  const chatContextEntityId = isAiProjectsPage ? undefined : chatScopeEntityId;
 
   // Chat error box override (Bug 83207): the wallet 402 must read as a
   // human message with a way to top up instead of the raw provider text.
@@ -1041,6 +1048,7 @@ const Shell = ({ page = "home", ...rest }) => {
           canUseAi={canUseAi}
           callbacks={aiChatCallbacks}
           entityId={chatEntityId}
+          contextEntityId={chatContextEntityId}
           // The picker area is always present (an explicit `false` also
           // overrides the lib's entityId default-hide heuristic — the chat
           // is always entity-scoped here). Inside an AI project the model
@@ -1267,18 +1275,16 @@ const ShellWrapper = inject(
       // chat's attachments at one (see `attachmentLimit`).
       isFormsFolderRoot: treeFoldersStore.isFormsFolderRoot,
       isFormRoomRoot: treeFoldersStore.isFormRoomRoot,
-      // Scope the chat to the current location: inside any room (including
-      // its subfolders) the room id wins, elsewhere the currently selected
-      // folder id is used. Only when nothing is selected yet does the chat
-      // stay unscoped (entityId === undefined).
+      // The chat's location: inside any room (including its subfolders) the
+      // room id, elsewhere the currently selected folder id. Only when
+      // nothing is selected yet does the chat have no location.
       // Exception: a tour standing inside a stand-in space: that is a room
-      // the server has never heard of, so every scoped AI request made for
-      // it comes back 404 ("Entity not found") — the demo answers what the
+      // the server has never heard of, so every AI request made for it
+      // comes back 404 ("Entity not found") — the demo answers what the
       // section asks about the space, and the AI service is no part of that.
       // And a location whose id is not a room id (a third-party storage
-      // folder carries a string id): the AI service accepts only integer room
-      // ids as a scope, reads included (Bug 84417), and folds any other
-      // location to the global scope anyway, so send that scope outright.
+      // folder carries a string id): the AI service accepts only integer
+      // ids (Bug 84417), so send no location outright.
       chatScopeEntityId:
         !chatScopeId ||
         isTourDemoId(chatScopeId) ||

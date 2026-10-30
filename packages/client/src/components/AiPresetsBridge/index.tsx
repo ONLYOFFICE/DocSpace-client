@@ -107,13 +107,6 @@ const AiPresetsBridge = ({
     return () => aiChatStore.setOnSavePreset(null);
   }, [aiChatStore, aiPresetsStore, isInsideProject, canCreateProjects]);
 
-  // On the projects page the composer also shows its Context slot: any
-  // folder connected as the round's context.
-  React.useEffect(() => {
-    aiChatStore.setFolderContextPickerEnabled(isProjectsPage);
-    return () => aiChatStore.setFolderContextPickerEnabled(false);
-  }, [aiChatStore, isProjectsPage]);
-
   // With vectorization off no Knowledge room can be searched, so the
   // composer loses its knowledge base picker; a base connected earlier
   // keeps its pill and can still be disconnected.

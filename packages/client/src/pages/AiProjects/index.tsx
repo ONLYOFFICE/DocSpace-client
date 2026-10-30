@@ -152,7 +152,7 @@ const AiProjects = ({
   // the "AI is off" view is held back (the list or the empty state shows
   // meanwhile, without its create action) instead of flashing.
   const { aiReady, activation, topUpDialog } = useChatNoAccess(aiNoAccessStores);
-  const { useProfilesStore, useRouter } = useStores();
+  const { useProfilesStore, useRouter, useCloudsStore } = useStores();
   const profilesInitialized = useProfilesStore((s) => s.initialized);
   // The chat history takes the sources' place: while it is open they hide.
   const isHistoryOpen = useRouter((s) => s.currentPage) === "history";
@@ -403,6 +403,16 @@ const AiProjects = ({
     aiChatStore.setComposerContextHidden(isProjectView);
     return () => aiChatStore.setComposerContextHidden(false);
   }, [aiChatStore, isProjectView]);
+
+  // The context folder is picked only in the project's sources column (the
+  // composer offers no Context slot: a chat opened in Files takes the current
+  // folder or room as its context). Once the project view is left, the folder
+  // would keep scoping every round with nothing on screen to show or remove
+  // it, so it goes with the view.
+  React.useEffect(() => {
+    if (!isProjectView) return undefined;
+    return () => useCloudsStore.getState().clearFolderContext();
+  }, [useCloudsStore, isProjectView]);
 
   const getContextModel = useProjectContextMenu(store, { withOpen: true, onOpen: openProject });
 

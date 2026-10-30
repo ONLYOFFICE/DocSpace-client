@@ -28,8 +28,6 @@ class FakeAiChatStore {
 
   projectTitle: string | null = null;
 
-  folderContextPickerEnabled = false;
-
   knowledgePickerHidden = false;
 
   applyPreset = vi.fn();
@@ -54,9 +52,6 @@ class FakeAiChatStore {
     this.projectTitle = title;
   };
 
-  setFolderContextPickerEnabled = (enabled: boolean) => {
-    this.folderContextPickerEnabled = enabled;
-  };
 }
 
 let aiChatStore = new FakeAiChatStore();
@@ -166,13 +161,12 @@ describe("AiPresetsBridge", () => {
     expect(aiChatStore.onSavePreset).toBeNull();
   });
 
-  it("hides the save button and shows the Context slot inside a project", () => {
+  it("hides the save button and titles the chat inside a project", () => {
     const store = new AiPresetsStore();
     renderBridge(store, { path: "/ai-projects/1" });
     expect(aiChatStore.onSavePreset).toBe(store.openSaveDialog);
     act(() => store.setActivePreset(toAiPreset(project(1, "Sales"))));
     expect(aiChatStore.onSavePreset).toBeNull();
-    expect(aiChatStore.folderContextPickerEnabled).toBe(true);
     expect(aiChatStore.projectTitle).toBe("Sales");
 
     act(() => store.setActivePreset(null));

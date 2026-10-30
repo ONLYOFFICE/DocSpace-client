@@ -8,15 +8,20 @@ const api = vi.hoisted(() => ({
   createAiProject: vi.fn(),
   updateAiProject: vi.fn(),
   deleteAiProject: vi.fn(),
-  duplicateAiProject: vi.fn(),
-  pinAiProject: vi.fn(),
-  muteAiProject: vi.fn(),
-  leaveAiProject: vi.fn(),
-  changeAiProjectOwner: vi.fn(),
   getAiProjectSkills: vi.fn(),
   getAiProjectKnowledge: vi.fn(),
-  deleteAiProjectLogo: vi.fn(),
+  toAiProject: vi.fn((room) => room),
 }));
+
+/** The room routes a project shares with a room. */
+const roomsApi = vi.hoisted(() => ({
+  pinRoom: vi.fn(),
+  unpinRoom: vi.fn(),
+  removeLogoFromRoom: vi.fn(),
+  updateRoomMemberRole: vi.fn(),
+}));
+const filesApi = vi.hoisted(() => ({ duplicate: vi.fn(), setFileOwner: vi.fn() }));
+const settingsApi = vi.hoisted(() => ({ muteRoomNotification: vi.fn() }));
 
 const { toastr, socket, getOperationProgress } = vi.hoisted(() => ({
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn() },
@@ -30,6 +35,9 @@ const { toastr, socket, getOperationProgress } = vi.hoisted(() => ({
 }));
 
 vi.mock("@docspace/shared/api/ai/projects", () => api);
+vi.mock("@docspace/shared/api/rooms", () => roomsApi);
+vi.mock("@docspace/shared/api/files", () => filesApi);
+vi.mock("@docspace/shared/api/settings", () => settingsApi);
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr }));
 vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (io) => ({
   ...((await io()) as Record<string, unknown>),
@@ -40,6 +48,8 @@ const aiApi = vi.hoisted(() => ({ retryVectorization: vi.fn() }));
 vi.mock("@docspace/shared/api/ai", () => aiApi);
 
 import { SocketCommands, SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
+
+import type { UserStore } from "@docspace/shared/store/UserStore";
 
 import type AiPresetsStore from "../AiPresetsStore";
 import AiProjectsStore, { errorMessage } from "../AiProjectsStore";
@@ -70,7 +80,8 @@ const page = (folders: TAiProject[], total = folders.length, rootId = 100) => ({
 });
 
 const presets = { setActivePreset: vi.fn() };
-const createStore = () => new AiProjectsStore(presets as unknown as AiPresetsStore);
+const userStore = { user: { id: "me" } } as unknown as UserStore;
+const createStore = () => new AiProjectsStore(presets as unknown as AiPresetsStore, userStore);
 
 /** The `s:modify-folder` handler the store registered. */
 const modifyFolder = () => {
@@ -332,14 +343,14 @@ describe("AiProjectsStore", () => {
       const store = createStore();
       await store.fetchProjects();
       api.updateAiProject.mockResolvedValueOnce(project(1, "With logo"));
-      api.deleteAiProjectLogo.mockResolvedValueOnce(project(1, "Without logo"));
+      roomsApi.removeLogoFromRoom.mockResolvedValueOnce(project(1, "Without logo"));
       await store.updateProject(1, { title: "With logo" }, { removeLogo: true });
-      expect(api.deleteAiProjectLogo).toHaveBeenCalledWith(1);
+      expect(roomsApi.removeLogoFromRoom).toHaveBeenCalledWith(1);
       expect(store.projects[0].title).toBe("Without logo");
 
       api.updateAiProject.mockResolvedValueOnce(project(1, "Kept"));
       await store.updateProject(1, { title: "Kept" });
-      expect(api.deleteAiProjectLogo).toHaveBeenCalledTimes(1);
+      expect(roomsApi.removeLogoFromRoom).toHaveBeenCalledTimes(1);
     });
 
     it("follows the delete operation, then drops the project and closes it", async () => {
@@ -367,23 +378,28 @@ describe("AiProjectsStore", () => {
     it("re-reads the list once a duplicate has landed", async () => {
       const store = createStore();
       await store.fetchProjects();
-      api.duplicateAiProject.mockResolvedValueOnce({ id: "op", finished: true });
+      filesApi.duplicate.mockResolvedValueOnce([{ id: "op", finished: true }]);
       await store.duplicateProject(store.projects[0]);
+      expect(filesApi.duplicate).toHaveBeenCalledWith([1], []);
       expect(api.getAiProjects).toHaveBeenCalledTimes(2);
     });
 
     it("switches notifications and the pin in place", async () => {
       const store = createStore();
       await store.fetchProjects();
-      api.muteAiProject.mockResolvedValueOnce(undefined);
+      settingsApi.muteRoomNotification.mockResolvedValueOnce(undefined);
       await store.toggleMute(store.projects[0]);
-      expect(api.muteAiProject).toHaveBeenCalledWith(1, true);
+      expect(settingsApi.muteRoomNotification).toHaveBeenCalledWith(1, true);
       expect(store.projects[0].mute).toBe(true);
 
-      api.pinAiProject.mockResolvedValueOnce(project(1, "Project 1", { pinned: true }));
+      roomsApi.pinRoom.mockResolvedValueOnce(project(1, "Project 1", { pinned: true }));
       await store.togglePin(store.projects[0]);
-      expect(api.pinAiProject).toHaveBeenCalledWith(1, true);
-      expect(api.getAiProjects).toHaveBeenCalledTimes(2);
+      expect(roomsApi.pinRoom).toHaveBeenCalledWith(1);
+
+      roomsApi.unpinRoom.mockResolvedValueOnce(project(1, "Project 1"));
+      await store.togglePin({ ...store.projects[0], pinned: true });
+      expect(roomsApi.unpinRoom).toHaveBeenCalledWith(1);
+      expect(api.getAiProjects).toHaveBeenCalledTimes(3);
     });
 
     it("drops a left project, and one handed over without staying on", async () => {
@@ -391,11 +407,17 @@ describe("AiProjectsStore", () => {
       await store.fetchProjects();
       store.openEditDialog(store.projects[0]);
       await store.leaveProject(store.projects[0]);
+      expect(roomsApi.updateRoomMemberRole).toHaveBeenCalledWith(1, {
+        invitations: [{ id: "me", access: 0 }],
+      });
       expect(store.projects.map((p) => p.id)).toEqual([2]);
       expect(store.projectDialog).toBeNull();
 
       await store.changeOwner(store.projects[0], "u2", false);
-      expect(api.changeAiProjectOwner).toHaveBeenCalledWith(2, "u2", false);
+      expect(filesApi.setFileOwner).toHaveBeenCalledWith("u2", [2]);
+      expect(roomsApi.updateRoomMemberRole).toHaveBeenLastCalledWith(2, {
+        invitations: [{ id: "me", access: 0 }],
+      });
       expect(store.projects).toEqual([]);
       expect(store.total).toBe(0);
     });

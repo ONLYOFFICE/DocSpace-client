@@ -57,7 +57,6 @@ import {
 	updateFileMemberAccess,
 	updateRoomMemberRole,
 } from "../../../../api/rooms";
-import { isAiProjectRoom, setAiProjectMembers } from "../../../../api/ai/projects";
 
 import { EmployeeStatus, ShareAccessRights } from "../../../../enums";
 import {
@@ -161,14 +160,7 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 					notify: false,
 					sharingMessage: "",
 				})
-			: isRoom && isAiProjectRoom(infoPanelSelection)
-				? setAiProjectMembers(infoPanelSelection.id, {
-						invitations: [
-							{ id: String(user.id), access: Number(userRoleOption.access) },
-						],
-						notify: false,
-					})
-				: updateRoomMemberRole(infoPanelSelection?.id, {
+			: updateRoomMemberRole(infoPanelSelection?.id, {
 					invitations: [{ id: user.id, access: userRoleOption.access }],
 					notify: false,
 					sharingMessage: "",

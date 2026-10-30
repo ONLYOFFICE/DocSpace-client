@@ -169,11 +169,11 @@ Each lifecycle operation SHALL behave as follows:
 - **THEN** the project drops from the former owner's list
 
 ### Requirement: Membership through the room panels
-Project members SHALL be managed through the existing room panels (Invite, Info panel Contacts, the invitation link, resend invitations). For a project these panels SHALL call the project's `/ai/projects/{id}` endpoints instead of the `files/rooms` ones. The invitable roles SHALL be Project manager and Member. The Info panel of a project SHALL show the Contacts, History and Details tabs.
+Project members SHALL be managed through the existing room panels (Invite, Info panel Contacts, the invitation link, resend invitations). These panels SHALL call the same `files/rooms/{id}` routes for a project as for a room; nothing in them branches on the project type. The invitable roles SHALL be Project manager and Member. The Info panel of a project SHALL show the Contacts, History and Details tabs.
 
 #### Scenario: Invite a member
 - **WHEN** a Project manager invites a user as Member from the Invite panel
-- **THEN** the invitation is sent to `/ai/projects/{id}/share` and the user appears in Contacts
+- **THEN** the invitation is sent to `files/rooms/{id}/share` and the user appears in Contacts
 
 ### Requirement: Members are invited to the linked rooms
 Inviting a user to a project SHALL also invite them to every linked Instructions and Knowledge room, so a member never meets a linked room they cannot open. A member who could not be invited to a linked room SHALL be reported as a warning.

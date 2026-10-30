@@ -42,26 +42,32 @@ import SocketHelper, {
   type TOptSocket,
 } from "@onlyoffice/apps-ui-kit/utils/socket";
 import { retryVectorization } from "@docspace/shared/api/ai";
-import { VectorizationStatus } from "@docspace/shared/enums";
+import { ShareAccessRights, VectorizationStatus } from "@docspace/shared/enums";
 import {
-  changeAiProjectOwner,
   createAiProject,
   deleteAiProject,
-  deleteAiProjectLogo,
-  duplicateAiProject,
   getAiProject,
   getAiProjectKnowledge,
   getAiProjects,
   getAiProjectSkills,
-  leaveAiProject,
-  muteAiProject,
-  pinAiProject,
+  toAiProject,
   updateAiProject,
 } from "@docspace/shared/api/ai/projects";
+// A project is a room: what it shares with a room goes through the room routes.
+import { duplicate, setFileOwner } from "@docspace/shared/api/files";
+import {
+  pinRoom,
+  removeLogoFromRoom,
+  unpinRoom,
+  updateRoomMemberRole,
+} from "@docspace/shared/api/rooms";
+import { muteRoomNotification } from "@docspace/shared/api/settings";
+import type { UserStore } from "@docspace/shared/store/UserStore";
 import type {
   TAiProject,
   TAiProjectKnowledgeRoom,
   TAiProjectRequest,
+  TAiProjectRoomDto,
   TAiProjectSkillsRoom,
   TAiProjectsQuery,
 } from "@docspace/shared/api/ai/projects";
@@ -148,6 +154,7 @@ const socketData = (opt: TOptSocket): { id?: unknown; parentId?: unknown } | und
 
 class AiProjectsStore {
   aiPresetsStore: AiPresetsStore;
+  private userStore: UserStore;
 
   projects: TAiProject[] = [];
 
@@ -216,8 +223,9 @@ class AiProjectsStore {
 
   private projectReloadTimers = new Map<number, ReturnType<typeof setTimeout>>();
 
-  constructor(aiPresetsStore: AiPresetsStore) {
+  constructor(aiPresetsStore: AiPresetsStore, userStore: UserStore) {
     this.aiPresetsStore = aiPresetsStore;
+    this.userStore = userStore;
     makeAutoObservable(this, {
       aiPresetsStore: false,
       ownedChannels: false,
@@ -612,7 +620,7 @@ class AiProjectsStore {
   /** Saves the edit dialog; `removeLogo` also drops the uploaded picture. */
   updateProject = async (id: number, data: TAiProjectRequest, options?: { removeLogo?: boolean }) => {
     let project = await updateAiProject(id, data);
-    if (options?.removeLogo) project = await deleteAiProjectLogo(id);
+    if (options?.removeLogo) project = toAiProject((await removeLogoFromRoom(id)) as TAiProjectRoomDto);
     showWarnings(project);
     runInAction(() => this.replaceProject(project));
     if (this.activeProject?.id === id) this.syncPreset(project);
@@ -627,7 +635,8 @@ class AiProjectsStore {
   /** Copies the project (without its members); the copy shows on the list once made. */
   duplicateProject = async (project: TAiProject) => {
     try {
-      await waitForOperation(await duplicateAiProject(project.id));
+      const [operation] = await duplicate([project.id], []);
+      await waitForOperation(operation);
       await this.fetchProjects();
     } catch (e) {
       toastr.error(errorMessage(e));
@@ -637,13 +646,15 @@ class AiProjectsStore {
   /** Turns the project's notifications off or back on for the caller. */
   toggleMute = async (project: TAiProject) => {
     const mute = !project.mute;
-    await muteAiProject(project.id, mute);
+    await muteRoomNotification(project.id, mute);
     runInAction(() => this.replaceProject({ ...project, mute }));
   };
 
   togglePin = async (project: TAiProject) => {
     try {
-      const updated = await pinAiProject(project.id, !project.pinned);
+      const updated = toAiProject(
+        (await (project.pinned ? unpinRoom(project.id) : pinRoom(project.id))) as TAiProjectRoomDto,
+      );
       runInAction(() => this.replaceProject(updated));
       await this.fetchProjects();
     } catch (e) {
@@ -652,14 +663,18 @@ class AiProjectsStore {
   };
 
   leaveProject = async (project: TAiProject) => {
-    await leaveAiProject(project.id);
+    await updateRoomMemberRole(project.id, {
+      invitations: [{ id: this.userStore.user?.id, access: ShareAccessRights.None }],
+    });
     runInAction(() => this.dropProject(project.id));
   };
 
   changeOwner = async (project: TAiProject, userId: string, keepAsManager: boolean) => {
-    await changeAiProjectOwner(project.id, userId, keepAsManager);
+    // The former owner stays as a Project manager, as a room keeps its former
+    // owner as a room manager; leaving is a separate step.
+    await setFileOwner(userId, [project.id]);
     if (!keepAsManager) {
-      runInAction(() => this.dropProject(project.id));
+      await this.leaveProject(project);
       return;
     }
     try {

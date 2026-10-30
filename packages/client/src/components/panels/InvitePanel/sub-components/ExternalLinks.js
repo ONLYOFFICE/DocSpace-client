@@ -56,7 +56,6 @@ import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import api from "@docspace/shared/api";
-import { setAiProjectLink } from "@docspace/shared/api/ai/projects";
 import { RoomsType } from "@docspace/shared/enums";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
@@ -94,7 +93,6 @@ const ExternalLinks = ({
   setInviteContactsLink,
   hideSelector,
   setInvitePanelOptions,
-  isAiProject,
 }) => {
   const showUsersJoinedBlock = !!activeLink?.maxUseCount;
   const showLifetimeBlock = !!activeLink?.expirationDate;
@@ -111,12 +109,7 @@ const ExternalLinks = ({
 
   const disableLink = async () => {
     shareLinks?.length &&
-      (await (isAiProject ? setAiProjectLink : api.rooms.setInvitationLinks)(
-        roomId,
-        "Invite",
-        0,
-        shareLinks[0].id,
-      ));
+      (await api.rooms.setInvitationLinks(roomId, "Invite", 0, shareLinks[0].id));
     setActiveLink({});
     onChangeExternalLinksVisible(false);
     return setShareLinks([]);

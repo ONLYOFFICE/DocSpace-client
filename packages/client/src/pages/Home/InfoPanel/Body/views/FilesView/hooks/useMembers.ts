@@ -46,10 +46,6 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
-import {
-  getAiProjectMembers,
-  isAiProjectRoom,
-} from "@docspace/shared/api/ai/projects";
 import { Nullable } from "@docspace/shared/types";
 import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
@@ -81,10 +77,7 @@ export const useMembers = ({
     "CreateEditRoomDialog",
   ]);
   const [searchValue, setSearchValue] = React.useState("");
-  // An AI project lists its members through `ai/projects/{id}/share`.
-  const getRoomMembers = isAiProjectRoom(room)
-    ? getAiProjectMembers
-    : api.rooms.getRoomMembers;
+  const { getRoomMembers } = api.rooms;
   const [filter, setFilter] = React.useState({
     page: 0,
     startIndex: 0,

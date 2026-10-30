@@ -35,20 +35,23 @@
 
 import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 
-import { MembersSubjectType, RoomSecurityError, VectorizationStatus } from "../../enums";
+import { VectorizationStatus } from "../../enums";
 import { request } from "../client";
-import type { TFileLink, TOperation } from "../files/types";
-import type { TFeed, TGetRoomMembers } from "../rooms/types";
+import type { TOperation } from "../files/types";
 
 /**
  * AI Projects: a project is a room of type 12 that binds a model,
  * Instructions rooms and Knowledge rooms and shares them with a team.
  * Served by ASC.AI.Chat under `/api/2.0/ai/projects`, which delegates each
  * call to the .NET AI service as it does for agents, so a project comes back
- * as a room (`FolderDto`) with its `aiProject` block. The room panels
- * (invite, members, links, history) take the `/share`, `/links`, `/resend`
- * and `/history` calls below in place of their `files/rooms` ones when the
- * room is a project (`isAiProjectRoom`).
+ * as a room (`FolderDto`) with its `aiProject` block.
+ *
+ * Like the agents API, this module holds only what is specific to a project:
+ * the list with its filters, read, create, update, delete, and the skills and
+ * knowledge listings. Everything a project shares with a room (pin, mute,
+ * duplicate, leave, owner change, logo removal, members, invitation links,
+ * history) goes through the room routes in `api/rooms`, `api/files` and
+ * `api/settings`, as the room panels already do.
  */
 
 const baseUrl = "/ai/projects";
@@ -119,7 +122,7 @@ export type TAiProjectLogo = {
 /** A built-in room cover: its id and the SVG it is drawn from. */
 export type TAiProjectCover = { id: string; data: string };
 
-/** A non-fatal problem of the last create, update, duplicate or membership change. */
+/** A non-fatal problem of the last create or update. */
 export type TAiProjectWarning = {
   code: "grantSkipped" | "ownerLostAccess" | "roomUnavailable";
   roomId: number | null;
@@ -280,7 +283,8 @@ type TRoomSource = Omit<TAiProjectSource, "title" | "available" | "archived" | "
   logo?: Partial<TAiProjectLogo> | null;
 };
 
-type TRoomFolder = Omit<Partial<TAiProject>, "logo" | "security" | "aiProject"> & {
+/** A project as a room route answers it: the room with its `aiProject` block. */
+export type TAiProjectRoomDto = Omit<Partial<TAiProject>, "logo" | "security" | "aiProject"> & {
   id: number;
   logo?: Partial<TAiProjectLogo> | null;
   security?: Record<string, boolean>;
@@ -307,7 +311,7 @@ const toLogo = (logo: Partial<TAiProjectLogo> | null | undefined): TAiProjectLog
  * in the project but its owner may leave) and an empty settings block while
  * the room comes without one.
  */
-export const toAiProject = (folder: TRoomFolder): TAiProject => {
+export const toAiProject = (folder: TAiProjectRoomDto): TAiProject => {
   const security = folder.security ?? {};
   const access = (folder.access ?? AiProjectAccess.None) as TAiProjectAccess;
   const inRoom = !!folder.inRoom;
@@ -396,24 +400,24 @@ export const getAiProjects = async (
   // An envelope that reports `total` reaches here as `{ total, items }`.
   const page = (
     res && typeof res === "object" && "items" in res ? (res as { items: unknown }).items : res
-  ) as Omit<TAiProjectsPage, "folders"> & { folders: TRoomFolder[] };
+  ) as Omit<TAiProjectsPage, "folders"> & { folders: TAiProjectRoomDto[] };
   return { ...page, folders: page.folders.map(toAiProject) } as TAiProjectsPage;
 };
 
 /** Drops the project's uploaded logo; it is drawn by its colour and cover again. */
 export const deleteAiProjectLogo = async (id: number) => {
   const res = await request({ method: "DELETE", url: `${baseUrl}/${id}/logo` });
-  return toAiProject(res as TRoomFolder);
+  return toAiProject(res as TAiProjectRoomDto);
 };
 
 export const getAiProject = async (id: number) => {
   const res = await request({ method: "GET", url: `${baseUrl}/${id}` });
-  return toAiProject(res as TRoomFolder);
+  return toAiProject(res as TAiProjectRoomDto);
 };
 
 export const createAiProject = async (data: TAiProjectRequest) => {
   const res = await request({ method: "POST", url: baseUrl, data: toRoomFields(data) });
-  return toAiProject(res as TRoomFolder);
+  return toAiProject(res as TAiProjectRoomDto);
 };
 
 export const updateAiProject = async (id: number, data: TAiProjectRequest) => {
@@ -422,7 +426,7 @@ export const updateAiProject = async (id: number, data: TAiProjectRequest) => {
     url: `${baseUrl}/${id}`,
     data: toRoomFields(data),
   });
-  return toAiProject(res as TRoomFolder);
+  return toAiProject(res as TAiProjectRoomDto);
 };
 
 /** Starts the delete; the answer is the file operation to follow. */
@@ -433,40 +437,6 @@ export const deleteAiProject = async (id: number) => {
     data: { deleteAfter: false },
   });
   return res as TOperation;
-};
-
-export const pinAiProject = async (id: number, pinned: boolean) => {
-  const res = await request({
-    method: "PUT",
-    url: `${baseUrl}/${id}/${pinned ? "pin" : "unpin"}`,
-  });
-  return toAiProject(res as TRoomFolder);
-};
-
-export const muteAiProject = async (id: number, mute: boolean) => {
-  await request({ method: "PUT", url: `${baseUrl}/${id}/mute`, data: { mute } });
-};
-
-/** Starts the copy; the answer is the file operation to follow. */
-export const duplicateAiProject = async (id: number) => {
-  const res = await request({ method: "PUT", url: `${baseUrl}/${id}/duplicate` });
-  return (Array.isArray(res) ? res[0] : res) as TOperation;
-};
-
-export const leaveAiProject = async (id: number) => {
-  await request({ method: "PUT", url: `${baseUrl}/${id}/leave` });
-};
-
-export const changeAiProjectOwner = async (
-  id: number,
-  userId: string,
-  keepAsManager: boolean,
-) => {
-  await request({
-    method: "PUT",
-    url: `${baseUrl}/${id}/owner`,
-    data: { userId, keepAsManager },
-  });
 };
 
 export const getAiProjectSkills = async (id: number) => {
@@ -486,123 +456,4 @@ export const getAiProjectKnowledge = async (id: number) => {
     ...room,
     logo: room.logo ? toLogo(room.logo) : null,
   }));
-};
-
-/* ------------------------- Members, links, history ------------------------ */
-
-/** Whether a room the room panels hold is an AI project. */
-export const isAiProjectRoom = (room?: { roomType?: unknown } | null) =>
-  room?.roomType === AI_PROJECT_ROOM_TYPE;
-
-const markGroups = (items: TGetRoomMembers["items"] | undefined) => {
-  items?.forEach((item) => {
-    if (item.subjectType === MembersSubjectType.Group) {
-      (item.sharedTo as { isGroup?: boolean }).isGroup = true;
-    }
-  });
-};
-
-/**
- * The members (`filterType` 0) or the invitation link (`filterType` 1) of a
- * project, in the shape of `getRoomMembers`.
- */
-export const getAiProjectMembers = async (
-  id: number | string,
-  filter: {
-    filterType?: number;
-    filterValue?: string;
-    count?: number;
-    startIndex?: number;
-  },
-  signal?: AbortSignal,
-) => {
-  const res = (await request({
-    method: "GET",
-    url: `${baseUrl}/${id}/share${toParams(filter)}`,
-    signal,
-  })) as TGetRoomMembers;
-  markGroups(res.items);
-  return res;
-};
-
-/**
- * Invites, re-roles (`access` 9 or 11) or removes (`access` 0) members, in
- * the shape of `setRoomSecurity`; the linked rooms a new member could not be
- * granted Viewer on come back in `aiProjectWarnings`.
- */
-export const setAiProjectMembers = async (
-  id: number | string,
-  data: {
-    invitations: { id?: string; email?: string; access: number }[];
-    notify?: boolean;
-    message?: string;
-    culture?: string;
-    force?: boolean;
-  },
-) => {
-  const res = (await request({ method: "PUT", url: `${baseUrl}/${id}/share`, data }, true)) as {
-    members?: TGetRoomMembers["items"];
-    warning?: string | null;
-    error?: RoomSecurityError;
-    aiProjectWarnings?: TAiProjectWarning[];
-  };
-  markGroups(res.members);
-  return res;
-};
-
-export const resendAiProjectInvitations = async (
-  id: number | string,
-  resendAll = true,
-  usersIds?: string[],
-) => {
-  await request({
-    method: "POST",
-    url: `${baseUrl}/${id}/resend`,
-    data: { resendAll, ...(usersIds ? { usersIds } : {}) },
-  });
-};
-
-/** The project's invitation link: a list of none or one, as `getRoomSecurityInfo` reads it. */
-export const getAiProjectLinks = async (id: number | string) => {
-  const res = await request({ method: "GET", url: `${baseUrl}/${id}/links` });
-  // A list that reports its total arrives as `{ total, items }`.
-  const items = (Array.isArray(res) ? res : (res as { items?: unknown[] })?.items) ?? [];
-  return { items: items as TGetRoomMembers["items"] };
-};
-
-/**
- * Creates (`linkId` empty), changes or removes (`access` 0) the invitation
- * link, with the arguments of `setInvitationLinks`.
- */
-export const setAiProjectLink = async (
-  id: number | string,
-  title: string,
-  access: number,
-  linkId?: string | null,
-  expirationDate?: string | null,
-  maxUseCount?: number | null,
-) => {
-  const res = await request(
-    {
-      method: "PUT",
-      url: `${baseUrl}/${id}/links`,
-      data: { linkId, title, access, expirationDate, maxUseCount },
-    },
-    true,
-  );
-  return res as TFileLink;
-};
-
-/** The project's history, in the shape of `files/folder/{id}/log`. */
-export const getAiProjectHistory = async (
-  id: number | string,
-  filter: { startIndex: number; count: number; fromDate?: string; toDate?: string },
-  signal?: AbortSignal | null,
-) => {
-  const res = await request({
-    method: "GET",
-    url: `${baseUrl}/${id}/history${toParams(filter)}`,
-    signal: signal ?? undefined,
-  });
-  return res as TFeed;
 };

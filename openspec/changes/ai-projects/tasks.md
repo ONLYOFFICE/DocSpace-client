@@ -33,6 +33,8 @@ Most of the client work is already on `feature/new-ai-concept`. Tasks marked `[x
 - [ ] 2b.2 Drop a project's linked room from the list and the open project when the server unlinks it (permanent deletion); show `profile.available: false` as "model unavailable" in the dialog, intro and Details; verify with unit cases in `AiProjectsStore.test.ts` on a reload that lost a room and a profile
 - [x] 2b.3 Show the "model unavailable, change it" error in a project's chat on `profile.available: false` or a 409 `projectModelUnavailable`, with an Edit-project action for the owner and managers and an "ask a manager" text for members, keep the composer disabled until the model changes, and clear the error when an edit brings a working model (`Shell.jsx` `formatChatError`, `AiProjectsStore`, ui-kit error box); verify with an E2E case on a mock project with a deleted model for a manager and for a member
 
+- [x] 2b.4 Keep only the project-specific calls in `shared/api/ai/projects.ts` (list, get, create, update, delete, skills, knowledge) and route pin, mute, duplicate, leave, owner change, logo removal, members, invitation links, resend and history through `api/rooms`, `api/files` and `api/settings`, dropping the `isAiProjectRoom` branches from the Invite panel, Contacts, History and the group-members dialog and the mirrored routes from ASC.AI.Chat (real and mock controllers); verify with `projects.test.ts` and `AiProjectsStore.test.ts`
+
 ## 3. Projects list section
 
 - [x] 3.1 Add the `/ai-projects/:projectId?` route, the sidebar entry and the `AiProjectsGate` redirect when AI services are off (67f8e24fda9, e3e954bbc26); verify with `ai-projects-access.spec.ts`
@@ -50,7 +52,7 @@ Most of the client work is already on `feature/new-ai-concept`. Tasks marked `[x
 - [x] 4.4 Route the Invite panel, Info panel Contacts and History, invitation link and change-owner panel to `/ai/projects/{id}/*` for type 12 rooms, and show `aiProjectWarnings` (75a35715091, 03c7145721b); verify by inviting a Member in the running app and seeing them in Contacts
 - [x] 4.5 Keep the Info panel selection in step with the open, edited, deleted or left project (716c3be08b3); verify that the panel closes after leaving the project
 - [x] 4.6 Show the server's error text for mute/unmute through `errorMessage`, as the other actions do (uncommitted); verify that a refused mute toasts the server message
-- [x] 4.7 Let the project dialog take an uploaded logo as the room dialog does (image editor, crop, "Delete"): upload through `files/logos`, send the crop as the body's `logo` on create/update and remove it with `DELETE ai/projects/{id}/logo` (`shared/api/ai/projects.ts`), draw the picture in `ProjectLogo` (list, intro, header chips) and in the MSW mock; verify with `AiProjectsStore.test.ts` (logo removal) and the create case in `ai-projects.spec.ts` (picture upload)
+- [x] 4.7 Let the project dialog take an uploaded logo as the room dialog does (image editor, crop, "Delete"): upload through `files/logos`, send the crop as the body's `logo` on create/update and remove it with the room route `DELETE files/rooms/{id}/logo`, draw the picture in `ProjectLogo` (list, intro, header chips) and in the MSW mock; verify with `AiProjectsStore.test.ts` (logo removal) and the create case in `ai-projects.spec.ts` (picture upload)
 - [x] 4.8 Open the new project (`/ai-projects/{id}`) after a successful create from the dialog, as Rooms opens a new room; the chat's save action (`AiPresetsStore`) keeps its place; verify with the create-dialog case in `ai-projects.spec.ts`
 
 ## 5. Inside a project
@@ -82,8 +84,8 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - Make Instructions and Knowledge rooms flat (refuse folder create, copy and move) and limit Instructions rooms to `.md` on upload, create, copy and move, with a user-facing message.
 - Drop `FileShare.Editing` from `AvailableRoomAccesses[KnowledgeRoom]`, with a migration of existing Editing shares to Read.
 - Refuse linking a Knowledge room while vectorization is disabled, in the .NET validation.
-- Take the uploaded `logo` in the create/update body and serve `DELETE ai/projects/{id}/logo` (the room logo flow over `files/logos`) for the AI project room type.
-- On `PUT ai/projects/{id}/share`, invite each new member to every linked Instructions and Knowledge room as Viewer and report a room that could not be granted as a `grantSkipped` warning, per `ai-projects-catalog` "Members are invited to the linked rooms".
+- Take the uploaded `logo` in the create/update body and let the room routes (`files/rooms/{id}/{pin,unpin,share,links,resend,logo}`, `files/folder/{id}/log`, `files/owner`, `files/fileops/duplicate`, `settings/notification/rooms`) accept the AI project room type with the project rules of `ai-projects-api`.
+- On `PUT files/rooms/{id}/share` of a project, invite each new member to every linked Instructions and Knowledge room as Viewer and report a room that could not be granted as a `grantSkipped` warning, per `ai-projects-catalog` "Members are invited to the linked rooms".
 
 ## 8. Remove AI Agents
 

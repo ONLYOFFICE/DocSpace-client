@@ -113,7 +113,7 @@ import TelegramStore from "./TelegramStore";
 
 const aiPresetsStore = new AiPresetsStore();
 
-const aiProjectsStore = new AiProjectsStore(aiPresetsStore);
+const aiProjectsStore = new AiProjectsStore(aiPresetsStore, userStore);
 
 const appsStore = new AppsStore(settingsStore);
 

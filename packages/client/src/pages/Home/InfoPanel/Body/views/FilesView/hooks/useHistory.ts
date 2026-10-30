@@ -37,10 +37,6 @@ import React from "react";
 import axios from "axios";
 
 import api from "@docspace/shared/api";
-import {
-  getAiProjectHistory,
-  isAiProjectRoom,
-} from "@docspace/shared/api/ai/projects";
 import { formatDate, parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { RoomsType } from "@docspace/shared/enums";
@@ -75,14 +71,6 @@ const getHistory = (
   signal: AbortSignal,
   requestToken?: string,
 ) => {
-  if ("roomType" in selection && isAiProjectRoom(selection)) {
-    const { startIndex, count, fromDate, toDate } = filter;
-    return getAiProjectHistory(
-      selection.id,
-      { startIndex, count, fromDate, toDate },
-      signal,
-    );
-  }
   return api.rooms.getHistory(
     selectionType,
     selection.id,

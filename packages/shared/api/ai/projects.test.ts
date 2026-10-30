@@ -13,12 +13,9 @@ import {
   AI_PROJECT_ROOM_TYPE,
   aiProjectToRoom,
   createAiProject,
-  duplicateAiProject,
   getAiProjectKnowledge,
   getAiProjects,
   getAiProjectSkills,
-  isAiProjectRoom,
-  pinAiProject,
   toAiProject,
   updateAiProject,
 } from "./projects";
@@ -98,9 +95,6 @@ describe("aiProjectToRoom", () => {
       tags: [],
       fileEntryType: 1,
     });
-    expect(isAiProjectRoom(room)).toBe(true);
-    expect(isAiProjectRoom({ roomType: 10 })).toBe(false);
-    expect(isAiProjectRoom(null)).toBe(false);
   });
 });
 
@@ -156,21 +150,6 @@ describe("the calls", () => {
       url: "/ai/projects/7",
       data: { cover: "cover-1" },
     });
-  });
-
-  it("pins and unpins by path", async () => {
-    request.mockResolvedValue(folder());
-    await pinAiProject(7, true);
-    expect(request).toHaveBeenLastCalledWith({ method: "PUT", url: "/ai/projects/7/pin" });
-    await pinAiProject(7, false);
-    expect(request).toHaveBeenLastCalledWith({ method: "PUT", url: "/ai/projects/7/unpin" });
-  });
-
-  it("takes the first operation of a duplicate, however the server wraps it", async () => {
-    request.mockResolvedValueOnce([{ id: "op1" }]);
-    expect(await duplicateAiProject(7)).toEqual({ id: "op1" });
-    request.mockResolvedValueOnce({ id: "op2" });
-    expect(await duplicateAiProject(7)).toEqual({ id: "op2" });
   });
 
   it("prefixes the linked rooms' colours in the skills and knowledge lists", async () => {

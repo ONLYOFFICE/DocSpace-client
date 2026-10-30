@@ -37,9 +37,11 @@ See proposal.md (Why) for the motivation, and the seven spec deltas for the beha
 - `toAiProject` normalizes the server room into the page's `TAiProject`: logo color with `#`, linked rooms with `available` and `archived` defaulted, and `Leave` derived. Leave is `inRoom && access !== Owner`, because rooms have no such flag.
 - `aiProjectToRoom` converts back to the `TRoom` shape the room panels read.
 
-The panels branch on `isAiProjectRoom(room)` and call `/ai/projects/{id}/{share,links,resend,history}` in place of `files/rooms`.
+The module holds only what is specific to a project (list, get, create, update, delete, `skills`, `knowledge`), as the agents API did. Pin, mute, duplicate, leave, owner change, logo removal, members, invitation links and history go through the room routes, so the room panels need no project branch and `AiProjectsStore` calls `api/rooms`, `api/files` and `api/settings` for them.
 
-*Alternative:* call `files/rooms?type=12` directly, as the early design note proposed. Rejected: ASC.AI.Chat owns the project contract (warnings, linked-room resolution, `skills` and `knowledge` listings), and agents already follow the delegate pattern.
+*Alternative:* mirror every room route under `/ai/projects/{id}` (the first cut). Rejected: it doubled the Node and .NET surface for calls whose behaviour is the room's, and the panels had to branch on the room type at every call.
+
+*Alternative:* call `files/rooms?type=12` for the list too, as the early design note proposed. Rejected: ASC.AI.Chat owns the project contract (warnings, linked-room resolution, `skills` and `knowledge` listings), and agents already follow the delegate pattern.
 
 ### A project reaches the chat through three paths
 Rooms the caller cannot read are filtered out before they reach the chat on every path.
@@ -98,7 +100,7 @@ Projects replace agents in the sidebar, and the agent code paths in the Files st
 - **[Risk]** Role sets drift between server and client for the Knowledge room. → Mitigation: one task changes `FileSecurity.AvailableRoomAccesses` and the three client helpers together, with a unit test on the client helpers.
 - **[Risk]** A project still travels as a "preset" (`activePreset`, `applyPreset`) beside `openProject`, which makes the code harder to follow. → Mitigation: doc comments on `AiProjectsStore`, `AiPresetsStore` and `AiPresetsBridge` explain the hook. A ui-kit `applyProject` could remove the remaining preset names.
 - **[Risk]** Outside the page, a chat closed with an applied project must lose the model and rooms too, not only `activePreset`. → Mitigation: `AiPresetsBridge` resets the chat with an empty `applyPreset` when the chat closes with an active preset, as the page does on leaving a project. A chat with no project applied is left alone. Covered in `AiPresetsBridge.test.tsx`.
-- **[Risk]** The room panels branch on `isAiProjectRoom`, so a new panel call added later could hit `files/rooms` for a project. → Mitigation: the branch sits in the panel API layer, and the E2E mock answers only `/ai/projects`, so a stray call fails visibly in tests.
+- **[Risk]** The Node mock keeps projects in memory, so the room routes (pin, mute, share, links, history, ...) answer 404 for a mock project. → Mitigation: the mock README says so; those flows are verified against the real `.NET` room routes once type 12 lands there, and in E2E through the MSW room handlers.
 - **[Trade-off]** Threads are never shared and have one global scope per user: there is no agent or project scope any more. The project id the chat sends as `entityId` selects the project's model and rooms for a round, not a separate thread list. So the history inside a project shows the user's threads from everywhere. That is what keeps "your conversation is yours only" true; a per-project history would need a new thread scope on the server.
 - **[Trade-off]** The picker reads at most 100 projects, with no paging. Acceptable for a model-picker submenu; the full list lives on the page.
 - **[Trade-off]** Removing agents is breaking for portals that relied on them in the web client. The server still serves agents, and the SDK entry points remain.

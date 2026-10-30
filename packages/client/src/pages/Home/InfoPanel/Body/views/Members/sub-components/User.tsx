@@ -38,11 +38,6 @@ import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import { getGroupById } from "@docspace/shared/api/groups";
-import {
-  isAiProjectRoom,
-  resendAiProjectInvitations,
-  setAiProjectMembers,
-} from "@docspace/shared/api/ai/projects";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   FolderType,
@@ -122,15 +117,9 @@ const User = ({
       ? (filterPaidRoleOptions(fullRoomRoleOptions) as TOption[])
       : (fullRoomRoleOptions as TOption[]);
 
-  // An AI project takes its member calls on `ai/projects/{id}`, whose body
-  // refuses the room-only `sharingMessage`.
-  const isAiProject = isAiProjectRoom(room);
-
   const onRepeatInvitation = async () => {
-    (isAiProject
-      ? resendAiProjectInvitations(room.id, true)
-      : api.rooms.resendEmailInvitations(room.id, true)
-    )
+    api.rooms
+      .resendEmailInvitations(room.id, true)
       .then(() =>
         toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
       )
@@ -138,17 +127,13 @@ const User = ({
   };
 
   const updateRole = (option: TOption, force: boolean) => {
-    const invitations = [{ id: String(user.id), access: Number(option.access) }];
-    return (
-      isAiProject
-        ? setAiProjectMembers(room.id, { invitations, notify: true, force })
-        : api.rooms.updateRoomMemberRole(room.id, {
-            invitations: [{ id: user.id, access: option.access }],
-            notify: true,
-            sharingMessage: "",
-            force,
-          })
-    )
+    return api.rooms
+      .updateRoomMemberRole(room.id, {
+        invitations: [{ id: user.id, access: option.access }],
+        notify: true,
+        sharingMessage: "",
+        force,
+      })
       .then(async (item) => {
         toastr.success(t("Common:AccessRightsChanged"));
 

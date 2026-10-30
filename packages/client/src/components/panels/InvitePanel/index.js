@@ -61,13 +61,7 @@ import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
-import {
-  aiProjectToRoom,
-  getAiProjectLinks,
-  isAiProjectRoom,
-  setAiProjectLink,
-  setAiProjectMembers,
-} from "@docspace/shared/api/ai/projects";
+import { aiProjectToRoom } from "@docspace/shared/api/ai/projects";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -219,13 +213,10 @@ const InvitePanel = ({
     },
   ];
 
-  // An AI project is not in the Files list: it comes from the projects page,
-  // and its members and invitation link go through `ai/projects/{id}`.
+  // An AI project is not in the Files list: it comes from the projects page.
+  // Its members and invitation link go through the room routes like any room.
   const aiProject = roomId !== -1 ? findAiProject(roomId) : null;
-  const isAiProject = !!aiProject || isAiProjectRoom(selectedRoom);
-  const setInvitationLink = isAiProject
-    ? setAiProjectLink
-    : api.rooms.setInvitationLinks;
+  const setInvitationLink = api.rooms.setInvitationLinks;
 
   const selectRoom = () => {
     if (aiProject) {
@@ -245,11 +236,8 @@ const InvitePanel = ({
   };
 
   const getInfo = () => {
-    return (
-      isAiProject
-        ? getAiProjectLinks(roomId)
-        : api.rooms.getRoomSecurityInfo(roomId)
-    )
+    return api.rooms
+      .getRoomSecurityInfo(roomId)
       .then((res) => res.items)
       .then((links) => {
         const link = links && links[0];
@@ -499,9 +487,7 @@ const InvitePanel = ({
 
       const result = !isRooms
         ? await api.people.inviteUsers(data)
-        : isAiProject
-          ? await setAiProjectMembers(roomId, data)
-          : await api.rooms.setRoomSecurity(roomId, data);
+        : await api.rooms.setRoomSecurity(roomId, data);
 
       if (!isRooms) {
         setIsNewUserByCurrentUser(true);
@@ -913,7 +899,6 @@ const InvitePanel = ({
             setShareLinks={setShareLinks}
             getInfo={getInfo}
             roomType={roomType}
-            isAiProject={isAiProject}
             onChangeExternalLinksVisible={onChangeExternalLinksVisible}
             externalLinksVisible={externalLinksVisible}
             setActiveLink={setActiveLink}

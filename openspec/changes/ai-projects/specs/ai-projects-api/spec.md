@@ -4,6 +4,8 @@
 
 Defines the `/api/2.0/ai/projects` contract the client consumes: what an AI project is on the server, who may do what, how requests are validated and which answers and errors the client can rely on. Served by ASC.AI.Chat (Node), which delegates to the .NET AI service.
 
+Like the agents API, `ai/projects` carries only what is specific to a project: the list with its filters, get, create, update, delete, and the `skills` and `knowledge` listings. Everything a project shares with a room (pin, mute, duplicate, leave, owner change, logo removal, members, invitation links, resend, history) goes through the room routes (`files/rooms/{id}/...`, `files/owner`, `files/fileops/duplicate`, `settings/notification/rooms`), which SHALL accept a room of type 12 wherever they accept the other room types, with the project rules below applied.
+
 ## ADDED Requirements
 
 ### Requirement: Project entity
@@ -43,7 +45,7 @@ Every project route SHALL answer 404 with one message when the id names no AI pr
 Reading a project (get, list, history, members, skills, knowledge) and pinning it SHALL be allowed to the owner, Project managers, Members and admins outside the project.
 
 #### Scenario: Member reads members
-- **WHEN** a Member reads `GET ai/projects/{id}/share`
+- **WHEN** a Member reads `GET files/rooms/{id}/share` of a project
 - **THEN** the answer is 200 with the member list
 
 ### Requirement: Management rights
@@ -76,7 +78,7 @@ Only the portal owner, DocSpace admins and room admins SHALL create projects. Th
 - **THEN** the answer is 403 and no room id in the body is validated
 
 ### Requirement: Body validation
-The server SHALL validate a create or update body before writing anything; the first failure answers 400 with a localised message. The title SHALL be 1–170 characters after trimming, the colour six hex digits, the cover a known id. Unknown body properties (room-only fields such as `tags`, `quota`, `lifetime`, `watermark`) SHALL be refused. An uploaded logo goes in the body as `logo` and is removed through `DELETE ai/projects/{id}/logo`.
+The server SHALL validate a create or update body before writing anything; the first failure answers 400 with a localised message. The title SHALL be 1–170 characters after trimming, the colour six hex digits, the cover a known id. Unknown body properties (room-only fields such as `tags`, `quota`, `lifetime`, `watermark`) SHALL be refused. An uploaded logo goes in the body as `logo` and is removed through the room route `DELETE files/rooms/{id}/logo`.
 
 #### Scenario: Room-only field
 - **WHEN** the body carries `tags` or `quota`
@@ -135,10 +137,10 @@ When a user becomes a member (invite, accepted link, owner change) and when a ro
 - **THEN** the membership change succeeds and `aiProjectWarnings` reports the room
 
 ### Requirement: Membership routes
-Members SHALL be managed through `GET/PUT ai/projects/{id}/share`, `POST .../resend`, `GET/PUT .../links` and `PUT .../leave`, in the shape of the room routes. `access` on a share SHALL be 0 (remove), 9 or 11; the owner SHALL NOT appear in a share change (use change owner). A project SHALL have at most one invitation link, which joins as Member. The owner SHALL NOT be able to leave; a member who belongs only through a group SHALL NOT be able to leave either.
+Members SHALL be managed through the room routes `GET/PUT files/rooms/{id}/share`, `POST .../resend` and `GET/PUT .../links`; leaving is a share change that sets the caller's own `access` to 0. `access` SHALL be 0 (remove), 9 or 11; the owner SHALL NOT appear in a share change. A project SHALL have at most one invitation link, which joins as Member. The owner and a member who belongs only through a group SHALL NOT be able to leave.
 
 #### Scenario: Owner leaves
-- **WHEN** the owner calls `PUT ai/projects/{id}/leave`
+- **WHEN** the owner sets their own `access` to 0 through `PUT files/rooms/{id}/share` of a project
 - **THEN** the answer is 400 "The project owner cannot leave the project. Change the owner first."
 
 #### Scenario: Second link
@@ -146,14 +148,14 @@ Members SHALL be managed through `GET/PUT ai/projects/{id}/share`, `POST .../res
 - **THEN** the answer is 403
 
 ### Requirement: Change owner
-`PUT ai/projects/{id}/owner` SHALL hand the project to an active portal owner, DocSpace admin or room admin, who need not be a member yet. With `keepAsManager` true (default) the former owner stays as Project manager; otherwise they leave the project. The new owner SHALL be granted Viewer on every linked room. Handing to the current owner SHALL be refused with 400.
+`PUT files/owner` with the project id SHALL hand the project to an active portal owner, DocSpace admin or room admin, who need not be a member yet. The former owner stays as Project manager, as a room keeps its former owner as a room manager; the client leaves the project in a separate share change when the user asked not to stay. The new owner SHALL be granted Viewer on every linked room. Handing to the current owner SHALL be refused with 400.
 
 #### Scenario: Hand over and stay
-- **WHEN** the owner hands the project to a room admin with `keepAsManager: true`
+- **WHEN** the owner hands the project to a room admin and stays
 - **THEN** the room admin is the owner and the former owner is listed with `access` 9
 
 ### Requirement: Delete and duplicate
-Delete SHALL be permanent (no archive), answered as a file operation to poll, and SHALL remove the project's settings and the members' threads while leaving linked rooms and their Viewer shares untouched. Duplicate SHALL copy name, logo, model and the linked rooms the caller can read, SHALL NOT copy members, links, pins, mute or threads, and SHALL make the caller the owner of the copy.
+Delete (`DELETE ai/projects/{id}`) SHALL be permanent (no archive), answered as a file operation to poll, and SHALL remove the project's settings and the members' threads while leaving linked rooms and their Viewer shares untouched. Duplicate (`PUT files/fileops/duplicate` with the project id in `folderIds`) SHALL copy name, logo, model and the linked rooms the caller can read, SHALL NOT copy members, links, pins, mute or threads, and SHALL make the caller the owner of the copy.
 
 #### Scenario: Delete keeps rooms
 - **WHEN** the owner deletes a project with linked rooms
@@ -164,7 +166,7 @@ Delete SHALL be permanent (no archive), answered as a file operation to poll, an
 - **THEN** the copy has one member: the Project manager as owner
 
 ### Requirement: Pin and mute
-Pin and unpin SHALL be personal to the caller, with at most 10 pinned projects per user (an 11th pin answers 403) and a separate counter from rooms and agents. Mute SHALL be personal and SHALL require membership.
+Pin and unpin (`PUT files/rooms/{id}/pin` and `.../unpin`) SHALL be personal to the caller, with at most 10 pinned projects per user (an 11th pin answers 403) and a separate counter from rooms and agents. Mute (`POST settings/notification/rooms`) SHALL be personal and SHALL require membership.
 
 #### Scenario: Eleventh pin
 - **WHEN** a user with 10 pinned projects pins another
@@ -203,7 +205,7 @@ Each file in the knowledge listing SHALL carry `indexed`, its `vectorizationStat
 - **THEN** the file comes with `vectorizationStatus: failed` and `security.Vectorization: false`, and the room's `failedFiles` is 1
 
 ### Requirement: Project logo image
-A project SHALL take an uploaded logo the way a room does: the picture is uploaded to `files/logos`, and the create or update body carries it as `logo` (`tmpFile`, `x`, `y`, `width`, `height`); `DELETE ai/projects/{id}/logo` removes it, allowed to the owner and Project managers. The project DTO SHALL then carry the logo sizes (`small`, `medium`, `large`, `original`) and no cover; removing the picture SHALL return the project to its colour and cover.
+A project SHALL take an uploaded logo the way a room does: the picture is uploaded to `files/logos`, and the create or update body carries it as `logo` (`tmpFile`, `x`, `y`, `width`, `height`); `DELETE files/rooms/{id}/logo` removes it, allowed to the owner and Project managers. The project DTO SHALL then carry the logo sizes (`small`, `medium`, `large`, `original`) and no cover; removing the picture SHALL return the project to its colour and cover.
 
 #### Scenario: Set and remove the picture
 - **WHEN** a Project manager saves the project with a cropped picture and later deletes the logo
@@ -235,7 +237,7 @@ When a project's profile is deleted or loses the chat capability, the server SHA
 - **THEN** the project shows its model as unavailable, its owner and managers are notified, and chatting in it answers 409
 
 ### Requirement: Notifications and history
-The server SHALL e-mail members on invitation, role change, removal and project deletion (mute-aware, never to the actor), with project wording and the roles "Project manager" / "Member". The project history SHALL record create, rename, model change, room linked / unlinked, Viewer grants on linked rooms, duplicate, owner change, model unavailable, and the membership events, so the History tab can show them.
+The server SHALL e-mail members on invitation, role change, removal and project deletion (mute-aware, never to the actor), with project wording and the roles "Project manager" / "Member". The project history (`GET files/folder/{id}/log`) SHALL record create, rename, model change, room linked / unlinked, Viewer grants on linked rooms, duplicate, owner change, model unavailable, and the membership events, so the History tab can show them.
 
 #### Scenario: Invitation e-mail
 - **WHEN** a Project manager invites a user with notifications on

@@ -15,7 +15,7 @@ that says BLOCKED or "after <x>" is not started before that.
 - **Phase C, runs on the local stand:** 6.5, 4.4, 4.8, then 4.2, 4.5, 4.6;
   4.7 when a Document Server build closes DS-17 and DS-19.
 - **Phase D, backend, in `../server` on its own branch:** 6.3, 6.4, 2.1,
-  5.4, 6.2 (after 6.5), 10.1 to 10.5, 10.6 (after 1.2).
+  5.4, 6.2 (after 6.5), 10.1 to 10.5, 10.6 (after 1.2), 10.7.
 - **Waiting for people:** 1.2, 1.5, 1.6 (Document Server team), 5.6 (a
   private virtual data room run), 9.4, 9.6, 9.10, 9.11 (owner decisions).
 
@@ -108,6 +108,7 @@ that says BLOCKED or "after <x>" is not started before that.
 - [ ] 10.4 Backend: refuse `RestoreVersionAsync` by address (`FileStorageService.cs:2662-2675`, saves with `encrypted=false`) and `GetReferenceDataAsync` (`:4756-4830`) for encrypted files. Verify: server unit tests
 - [ ] 10.5 Backend, after 4.5: when a member loses access to a private room (room ACE removal or update, `FileStorageService.cs:4375-4440`), drop that member's tracked editor sessions on the room's files (`DocumentServiceHelper.CheckUsersForDropAsync` today runs for file entries only), or send `DropUserAsync` from `TrackEditingAsync` on a failed rights re-check (`EntryManager.cs:1745-1753`). Verify: a server unit test
 - [ ] 10.6 Backend, after 1.2 answers that the Document Server does not need the caller's key pairs: stop attaching them to the editor configuration for the web client (`EditorController.cs:311-314`), so `privateKeyEnc` leaves the signed token; the desktop path (9.10) decides whether it still needs them. Verify: a server unit test and the doceditor key hook still resolving the DEK from the access entries
+- [ ] 10.7 Backend: for an encrypted PDF take `document.isForm` of the editor configuration from the stored form classification (the DSE3 header flag the listing already uses) instead of `FileChecker.IsFormPDFFile` on the ciphertext (`DocumentConfigConverter.Convert`, `ConfigurationDto.cs`), and do not send `startFilling` for an encrypted form. Found 2026-10-30 on the stand (design.md "Stand check of 2026-10-30, phase A"): the form opened in Commenting mode with `document.isForm: false` while `file.isForm` was true. Verify: a server unit test
 
 ## Workflow follow-up
 

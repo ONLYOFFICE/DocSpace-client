@@ -104,6 +104,25 @@ const describeFocus = (page: Page) =>
       if (rect.right + reach > box.right + 0.5) clipped.add("right");
     }
 
+    const hasRowRing = (node: Element) => {
+      if (!node.hasAttribute("data-row-focus")) return false;
+      const probe = document.createElement("span");
+      probe.style.color = "var(--accent-main)";
+      document.body.append(probe);
+      const accent = getComputedStyle(probe).color;
+      probe.remove();
+      let row: Element | null = node.closest(".files-item");
+      for (
+        let outer = row?.parentElement?.closest(".files-item");
+        outer;
+        outer = outer.parentElement?.closest(".files-item")
+      )
+        row = outer;
+      return [...(row?.querySelectorAll(".table-container_cell") ?? [])].some(
+        (cell) => getComputedStyle(cell).borderTopColor === accent,
+      );
+    };
+
     const label =
       el.getAttribute("aria-label") ||
       (el instanceof HTMLElement ? el.innerText : el.textContent) ||
@@ -118,11 +137,13 @@ const describeFocus = (page: Page) =>
         null,
       visible,
       hidden: !!el.closest('[inert], [aria-hidden="true"]'),
-      // Checkbox and radio draw the ring on a sibling or child shape.
+      // Checkbox and radio draw the ring on a sibling or child shape; a files
+      // list row focused as a whole draws it in the accent across its cells.
       ring:
         hasRing(el) ||
         [...el.querySelectorAll("*")].some(hasRing) ||
-        (!!el.nextElementSibling && hasRing(el.nextElementSibling)),
+        (!!el.nextElementSibling && hasRing(el.nextElementSibling)) ||
+        hasRowRing(el),
       clipped: [...clipped],
     };
   });
@@ -256,11 +277,24 @@ test.describe("Keyboard navigation: rooms", () => {
     baseUrl,
   }) => {
     await openRooms(page, baseUrl);
+    // Tabbing into the list selects the row it lands on, and a selection turns
+    // the table's header into the group actions: one walk first, so both of
+    // the walks compared below see the page in that same state.
+    await walk(page, "Tab");
+    // Back to the top of the document without a click, which would clear the
+    // selection: focusing the body moves the browser's starting point there.
+    const toTop = () =>
+      page.evaluate(() => {
+        document.body.tabIndex = -1;
+        document.body.focus();
+        document.body.removeAttribute("tabindex");
+      });
+    await toTop();
     const forward = (await walk(page, "Tab")).map((s) => s.name);
 
     // Go back to the last stop and walk back to the first, inside the page:
     // where focus goes past either end of the document is the browser's.
-    await openRooms(page, baseUrl);
+    await toTop();
     for (const _ of forward) await page.keyboard.press("Tab");
     const backward = [(await describeFocus(page))?.name];
     for (let i = 1; i < forward.length; i += 1) {

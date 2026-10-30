@@ -88,6 +88,8 @@ const focus = (page: Page) =>
     const row = el?.closest('[id^="file_"], [id^="folder_"]');
     return {
       row: row?.id ?? null,
+      // The row as a whole (not one of its controls) holds the focus.
+      isRow: !!el?.hasAttribute("data-row-focus"),
       tag: el?.tagName.toLowerCase() ?? "",
       name: (
         el?.getAttribute("aria-label") ||
@@ -166,7 +168,7 @@ test.describe("Files list: the focus follows the keyboard", () => {
   }) => {
     await page.keyboard.press("ArrowDown");
     await expect.poll(async () => (await focus(page)).row).toBe(fileRow(1));
-    expect((await focus(page)).name).toBe("File 01");
+    expect((await focus(page)).isRow).toBe(true);
     await expect.poll(() => selectedFiles(page)).toEqual([1]);
 
     await page.keyboard.press("ArrowDown");
@@ -199,32 +201,85 @@ test.describe("Files list: the focus follows the keyboard", () => {
     expect(out.row, `Tab went on into ${out.row}`).toBeNull();
   });
 
-  test("Shift+Tab goes back through the row's controls, then out of the list, and Tab comes back to the caret row", async ({
+  test("Shift+Tab goes back through the row's controls to the row, then out of the list, and Tab comes back to the caret row", async ({
     page,
   }) => {
     for (const key of ["ArrowDown", "ArrowDown", "ArrowDown"])
       await page.keyboard.press(key);
     await expect.poll(async () => (await focus(page)).row).toBe(fileRow(3));
 
-    const { before } = await rowStopsAroundFocus(page);
-    for (const name of [...before].reverse()) {
-      await page.keyboard.press("Shift+Tab");
-      const where = await focus(page);
-      expect(where.row, `Shift+Tab left the row before ${name}`).toBe(
-        fileRow(3),
-      );
-      expect(where.name).toBe(name);
-    }
+    // Into the row's controls, to its last one.
+    const { after } = await rowStopsAroundFocus(page);
+    for (const _ of after) await page.keyboard.press("Tab");
+    expect((await focus(page)).row).toBe(fileRow(3));
 
+    // Back through them, and from the first one to the row itself.
+    for (let i = 0; i < after.length; i += 1)
+      await page.keyboard.press("Shift+Tab");
+    const onRow = await focus(page);
+    expect(onRow.row).toBe(fileRow(3));
+    expect(onRow.isRow).toBe(true);
+
+    // From the row, out of the list.
     await page.keyboard.press("Shift+Tab");
     const out = await focus(page);
     expect(out.row, `Shift+Tab went into ${out.row}`).toBeNull();
     expect(out.tag).not.toBe("body");
 
-    // Back in: to the caret's row, not the first row of the list.
+    // Back in: to the caret's row as a whole, not the first row.
     await page.keyboard.press("Tab");
     await expect.poll(async () => (await focus(page)).row).toBe(fileRow(3));
-    expect((await focus(page)).name).toBe("File 03");
+    expect((await focus(page)).isRow).toBe(true);
+  });
+
+  test("coming back from outside the page lands on the caret row, not the last row", async ({
+    page,
+  }) => {
+    for (const key of ["ArrowDown", "ArrowDown", "ArrowDown"])
+      await page.keyboard.press(key);
+    await expect.poll(async () => (await focus(page)).row).toBe(fileRow(3));
+    await page.keyboard.press("Escape");
+    await expect.poll(() => selectedFiles(page)).toEqual([]);
+
+    // What Shift+Tab back from the browser's toolbar does: the page loses
+    // the focus, then the last row's last control gets it, with no key
+    // press the page sees.
+    await page.keyboard.press("Shift");
+    await page.evaluate((id) => {
+      if (document.activeElement instanceof HTMLElement)
+        document.activeElement.blur();
+      const row = document.getElementById(id);
+      const controls = row?.querySelectorAll<HTMLElement>(
+        "a[href], [tabindex='0'], button",
+      );
+      controls?.[controls.length - 1]?.focus();
+    }, fileRow(FILES_COUNT));
+
+    await expect.poll(async () => (await focus(page)).row).toBe(fileRow(3));
+    expect((await focus(page)).isRow).toBe(true);
+    await expect.poll(() => selectedFiles(page)).toEqual([3]);
+  });
+
+  test("Tab into the list focuses a row and selects it", async ({ page }) => {
+    // From the search box, through the controls above the list, into it.
+    await page
+      .locator("#filter_search-input input, input#filter_search-input")
+      .first()
+      .focus();
+    let where = await focus(page);
+    for (let i = 0; i < 20 && !where.row; i += 1) {
+      await page.keyboard.press("Tab");
+      where = await focus(page);
+    }
+
+    expect(where.row).toBe(fileRow(1));
+    expect(where.isRow).toBe(true);
+    await expect.poll(() => selectedFiles(page)).toEqual([1]);
+
+    // The arrows go on from there, the selection with them.
+    await page.keyboard.press("ArrowDown");
+    await expect.poll(async () => (await focus(page)).row).toBe(fileRow(2));
+    await expect.poll(() => selectedFiles(page)).toEqual([2]);
   });
 
   test("the list's hotkeys still work with the focus on a row's name", async ({
@@ -232,7 +287,7 @@ test.describe("Files list: the focus follows the keyboard", () => {
   }) => {
     await page.keyboard.press("ArrowDown");
     await expect.poll(async () => (await focus(page)).row).toBe(fileRow(1));
-    expect((await focus(page)).tag).toBe("a");
+    expect((await focus(page)).isRow).toBe(true);
 
     // Shift+Down extends the selection and takes the focus along.
     await page.keyboard.press("Shift+ArrowDown");
@@ -254,7 +309,13 @@ test.describe("Files list: the focus follows the keyboard", () => {
     await expect.poll(async () => (await focus(page)).row).not.toBeNull();
     const first = await focus(page);
     await page.keyboard.press("ArrowRight");
-    await expect.poll(async () => (await focus(page)).row).not.toBe(first.row);
+    // Not the list itself, which holds the focus for a moment in between.
+    await expect
+      .poll(async () => {
+        const { row } = await focus(page);
+        return row !== null && row !== first.row;
+      })
+      .toBe(true);
     const second = await focus(page);
     expect(second.row).not.toBeNull();
 
@@ -266,15 +327,14 @@ test.describe("Files list: the focus follows the keyboard", () => {
     expect(where.row, `Tab went on into ${where.row}`).toBeNull();
   });
 
-  test("a click selects as before and does not pull the focus to the name", async ({
+  test("a click selects as before and does not pull the focus to the row", async ({
     page,
   }) => {
     const row = page.locator(`#${fileRow(4)}`);
     await row.locator(".table-container_cell").nth(2).click();
 
     await expect.poll(() => selectedFiles(page)).toEqual([4]);
-    const where = await focus(page);
-    expect(where.tag === "a" && where.row === fileRow(4)).toBe(false);
+    expect((await focus(page)).isRow).toBe(false);
   });
 });
 
@@ -301,7 +361,13 @@ test.describe("Rooms list: the focus follows the keyboard", () => {
       .not.toBeNull()
       .then(() => focus(page));
     await page.keyboard.press("ArrowDown");
-    await expect.poll(async () => (await focus(page)).row).not.toBe(first.row);
+    // Not the list itself, which holds the focus for a moment in between.
+    await expect
+      .poll(async () => {
+        const { row } = await focus(page);
+        return row !== null && row !== first.row;
+      })
+      .toBe(true);
     const second = await focus(page);
     expect(second.row).not.toBeNull();
 

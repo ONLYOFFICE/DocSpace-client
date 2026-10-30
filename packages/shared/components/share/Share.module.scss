@@ -529,6 +529,13 @@
 
 .createButton {
   height: 48px;
+
+  // Inside: the panel's scroller clips anything drawn past the row.
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: -2px;
+    border-radius: 3px;
+  }
 }
 
 .shareContainer {

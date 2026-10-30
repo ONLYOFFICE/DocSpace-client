@@ -40,6 +40,7 @@ import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 import styles from "../Share.module.scss";
 
@@ -52,6 +53,9 @@ export const CreateButton: FC<CreateButtonProps> = ({ onClick, title }) => {
 	return (
 		<div
 			onClick={onClick}
+			onKeyDown={(e) => activateOnButtonKey(e, onClick)}
+			role="button"
+			tabIndex={0}
 			className={classNames(styles.linkRow, styles.createButton)}
 			data-testid="info_panel_share_create_and_copy_link"
 		>

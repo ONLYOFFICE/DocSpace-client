@@ -465,4 +465,30 @@ describe("Editor", () => {
       expect(editorMounted()).toBe(true);
     });
   });
+
+  describe("AI attach", () => {
+    it("Encrypted file opened: the AI attach listener is not enabled", async () => {
+      asEncrypted();
+      await renderEditor({
+        config: makeConfig(true),
+        fileInfo: makeFileInfo(true),
+      });
+
+      expect(env.useAIAttachFile).toHaveBeenCalled();
+      expect(env.useAIAttachFile).toHaveBeenLastCalledWith(
+        expect.objectContaining({ enabled: false }),
+      );
+    });
+
+    it("Plain file opened: the AI attach listener is enabled for a member", async () => {
+      await renderEditor({
+        config: makeConfig(false),
+        fileInfo: makeFileInfo(false),
+      });
+
+      expect(env.useAIAttachFile).toHaveBeenLastCalledWith(
+        expect.objectContaining({ enabled: true }),
+      );
+    });
+  });
 });

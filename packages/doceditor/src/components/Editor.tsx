@@ -162,10 +162,12 @@ const Editor = ({
   });
 
   // AI is not available to guests and anonymous viewers — the same rule the
-  // editor's AI plugin init follows in useEditorEvents.
+  // editor's AI plugin init follows in useEditorEvents — nor on an encrypted
+  // file, whose content must not leave the browser.
   useAIAttachFile({
     documentServerUrl,
-    enabled: Boolean(user) && !user?.isVisitor && !isOAuthFrame(),
+    enabled:
+      Boolean(user) && !user?.isVisitor && !isOAuthFrame() && !isEncryptedFile,
     requestStorageFile: onAIRequestStorageFile,
   });
 

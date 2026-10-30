@@ -35,7 +35,7 @@
 
 import { type RefObject, useEffect, useEffectEvent } from "react";
 
-import { getUndoShortcut, isTextEditable } from "../utils";
+import { getUndoShortcut, isPanelKeyTarget, isTextEditable } from "../utils";
 
 export const useUndoShortcut = (
   isActive: boolean,
@@ -59,8 +59,12 @@ export const useUndoShortcut = (
 
     if (!isActive || !dialog) return undefined;
 
-    dialog.addEventListener("keydown", onKeyDown);
+    const onDocumentKeyDown = (e: KeyboardEvent) => {
+      if (isPanelKeyTarget(e.target, dialog)) onKeyDown(e);
+    };
 
-    return () => dialog.removeEventListener("keydown", onKeyDown);
+    document.addEventListener("keydown", onDocumentKeyDown);
+
+    return () => document.removeEventListener("keydown", onDocumentKeyDown);
   }, [isActive, panelRef]);
 };

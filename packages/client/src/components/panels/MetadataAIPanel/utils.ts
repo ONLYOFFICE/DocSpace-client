@@ -267,6 +267,13 @@ export const isTextEditable = (target: EventTarget | null) =>
     target instanceof HTMLTextAreaElement ||
     (target instanceof HTMLInputElement && TEXT_INPUT_TYPES.has(target.type)));
 
+export const isPanelKeyTarget = (
+  target: EventTarget | null,
+  panel: HTMLElement,
+) =>
+  target instanceof Node &&
+  (target === target.ownerDocument?.body || panel.contains(target));
+
 export const withoutAIChange = (
   summary: TMetadataAISummary,
   { fieldId, customKey }: { fieldId?: number; customKey?: string },

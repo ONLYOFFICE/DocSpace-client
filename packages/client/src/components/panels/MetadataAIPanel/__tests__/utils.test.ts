@@ -61,6 +61,7 @@ import {
   getMetadataAIModel,
   getUndoShortcut,
   isSameEntry,
+  isPanelKeyTarget,
   isTextEditable,
   isValidSuggestion,
   revertAICustomValue,
@@ -333,6 +334,17 @@ describe("fill", () => {
     expect(isTextEditable(input("checkbox"))).toBe(false);
     expect(isTextEditable(document.createElement("button"))).toBe(false);
     expect(isTextEditable(null)).toBe(false);
+  });
+
+  it("takes the keys pressed in the panel or after its focused button is gone", () => {
+    const panel = document.createElement("div");
+    const button = panel.appendChild(document.createElement("button"));
+    const outside = document.createElement("button");
+
+    expect(isPanelKeyTarget(button, panel)).toBe(true);
+    expect(isPanelKeyTarget(document.body, panel)).toBe(true);
+    expect(isPanelKeyTarget(outside, panel)).toBe(false);
+    expect(isPanelKeyTarget(null, panel)).toBe(false);
   });
 
   it("stops counting a change once it is undone", () => {

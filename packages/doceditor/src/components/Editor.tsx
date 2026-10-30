@@ -344,7 +344,9 @@ const Editor = ({
     }
   }
 
-  if (fileInfo?.security.Rename) {
+  // The real name of an encrypted file lives in its container; the server
+  // title is opaque, and the client and SDK withhold rename as well.
+  if (fileInfo?.security.Rename && !isEncryptedFile) {
     newConfig.events.onRequestRename = (obj: object) =>
       onSDKRequestRename(obj, fileInfo.id);
   }

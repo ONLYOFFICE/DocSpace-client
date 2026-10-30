@@ -364,4 +364,32 @@ describe("Editor", () => {
       expect(events().onRequestRefreshFile).toBe(env.events.onRequestRefreshFile);
     });
   });
+
+  describe("Rename", () => {
+    it("Rename requested on an encrypted file: the rename event is absent", async () => {
+      asEncrypted();
+      await renderEditor({
+        config: makeConfig(true),
+        fileInfo: makeFileInfo(true, { Rename: true }),
+      });
+
+      expect(env.captured.config).toBeDefined();
+      expect(events().onRequestRename).toBeUndefined();
+    });
+
+    it("Rename requested on a plain file: the rename event writes the title", async () => {
+      await renderEditor({
+        config: makeConfig(false),
+        fileInfo: makeFileInfo(false, { Rename: true }),
+      });
+
+      const onRequestRename = events().onRequestRename as (e: object) => void;
+      expect(onRequestRename).toEqual(expect.any(Function));
+      onRequestRename({ data: "Renamed.docx" });
+      expect(env.eventHelpers.onSDKRequestRename).toHaveBeenCalledWith(
+        { data: "Renamed.docx" },
+        7,
+      );
+    });
+  });
 });

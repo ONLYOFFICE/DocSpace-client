@@ -227,6 +227,17 @@ test.describe("Metadata AI", () => {
   test("suggests custom fields", async ({ page, baseUrl }) => {
     const panel = await openAIPanel(page, baseUrl, "suggest");
 
+    await expect(panel.getByTestId("metadata_ai_model")).toHaveText(
+      `Model: ${AI_CHAT_ASSIGNED.name}`,
+    );
+    await expect(panel.getByTestId("metadata_ai_prompt_link")).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "metadata",
+      "metadata-ai_suggest.png",
+    ]);
+
     await panel.getByTestId("metadata_ai_run_button").click();
 
     await expect(panel.getByTestId("metadata_ai_review_notes")).toBeVisible();
@@ -251,8 +262,10 @@ test.describe("Metadata AI", () => {
     await page.getByTestId("metadata-ai-generate").click();
 
     await expect(
-      page.getByTestId("metadata_ai_panel").getByTestId("metadata_ai_callout"),
-    ).toContainText("Generate metadata with AI");
+      page
+        .getByTestId("metadata_ai_panel")
+        .getByTestId("metadata_ai_run_button"),
+    ).toHaveText("Generate metadata");
   });
 
   test("offers generation in the empty Metadata tab", async ({
@@ -268,8 +281,10 @@ test.describe("Metadata AI", () => {
     await page.getByTestId("metadata-generate").click();
 
     await expect(
-      page.getByTestId("metadata_ai_panel").getByTestId("metadata_ai_callout"),
-    ).toContainText("Generate metadata with AI");
+      page
+        .getByTestId("metadata_ai_panel")
+        .getByTestId("metadata_ai_run_button"),
+    ).toHaveText("Generate metadata");
   });
 
   test("explains that no model is selected", async ({

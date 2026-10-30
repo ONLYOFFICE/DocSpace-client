@@ -653,6 +653,29 @@ Document Server tables were not read. Times in UTC.
   session ended on save) goes to the Document Server team with these
   times.
 
+### Run of 2026-10-30, two members (tasks 4.8 and 4.2)
+
+- **Second account (task 4.8).** "bob tester" (id
+  9a80c453-04d7-4ca3-8104-d9e3825b6c59), a room admin with the Editing
+  access in room 10, keys registered on 2026-10-22 and the device
+  remembered. Right after joining, the room listed opaque titles and the
+  client reported that his identity could not unwrap the files; once the
+  owner granted the access from the Members panel the titles resolved,
+  and `files/7/access` answered Bob with his own entry only. The E2E
+  fixtures carry him as `SECOND_MEMBER` and `SECOND_MEMBER_KEY` in
+  `encryption-helpers.ts`.
+- **Co-editing (task 4.2).** Bob opened document 7 in one browser
+  profile while the owner held it in another session. Bob's editor
+  decrypted the document from his own access entry, and the text he typed
+  left his browser as one `saveChanges` frame of 4076 characters carrying
+  the `ENCRYPTED;` marker and none of the typed words (a send hook on the
+  editor frame's WebSocket). The owner saw Bob's text, typed a line of
+  their own, and Bob's editor showed it within seconds, with the owner's
+  caret marker in the line. Document Server 10.0.2.5 therefore relays
+  encrypted changes between two members unwrapping separate entries; the
+  change store itself was not read in this run, the Document Server can
+  only hold what the browsers send.
+
 ## Goals / Non-Goals
 
 **Goals:**

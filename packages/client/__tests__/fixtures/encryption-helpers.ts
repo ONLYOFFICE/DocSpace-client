@@ -126,3 +126,24 @@ export async function bootstrapEncryption(
 
   return { keysHandle: handleRef.current!, passphrase };
 }
+
+/**
+ * The second member of the private room on the stand (task 4.8): a room
+ * admin with the Editing access in room 10, keys registered on 2026-10-22.
+ * Specs that need a second member with keys take this id and key entry.
+ */
+export const SECOND_MEMBER = {
+  id: "9a80c453-04d7-4ca3-8104-d9e3825b6c59",
+  displayName: "bob tester",
+  email: "bob@test.com",
+};
+
+/** The second member's key entry for `roomUserKeys` and `setRoomKeys`. */
+export const SECOND_MEMBER_KEY = {
+  id: "aecef1bc-e786-4ec8-8a23-d0dc10e5ba68",
+  userId: SECOND_MEMBER.id,
+  publicKey: "BASE64_PUBLIC_KEY_FIXTURE_FOR_SECOND_MEMBER",
+  privateKeyEnc: "",
+  date: "2026-10-22T14:28:00.000Z",
+  cryptoEngineId: "{DC522726-5E0E-43E5-AA02-8EA156BECBC5}",
+};

@@ -384,12 +384,14 @@ folder of the 2026-07-01 hand-over, outside the repository:
   the three corrections to the v2 guide, the form flag on save, the build
   stamp, and the obligations DS-1 to DS-16.
 
-Sent: pending (task 1.5); superseded by the package of 2026-10-30 below.
+Sent: never; superseded by the package of 2026-10-30 below, the first
+hand-over since 2026-07-01.
 
 ### Hand-over package of 2026-10-30
 
 Prepared for the editor developers (task 1.5) in `enc-2.2.0` next to the
-earlier packages, outside the repository:
+package of 2026-07-01, outside the repository; the editor team sees 2.2.0
+as the next library after 2.0.0:
 
 - `onlyoffice-crypto.js`, library 2.2.0, built from commit 84223f30301b with
   `pnpm run build:crypto`; banner `/*! onlyoffice-crypto 2.2.0 84223f30301b */`,
@@ -401,13 +403,14 @@ earlier packages, outside the repository:
   of `EDITOR_CONTRACT_VERSION`.
 - `contract-v1.md`, the draft revised on 2026-10-30 (evening): DS-13
   observed, DS-14 narrowed, DS-17 reproduced on documents, DS-20 added.
-- `integration-guide.md` (v4) and `CHANGELOG.md` in the editor team's
-  language, refreshed from the contract.
-- `findings-2026-10-30.md`, in the editor team's language: what the portal
-  and client already do, what the editor must add or fix in release order
-  (the join after a force-save, the end of a session, the form flag, the
-  distinct errors, the contract version, images, the capability signal),
-  and the findings of the runs with two members.
+- `integration-guide.md` (v3, the first guide since v2 of 2026-07-01) and
+  `CHANGELOG.md` (2.2.0 against 2.0.0) in the editor team's language.
+- `findings-2026-10-30.md`, in the editor team's language: seven items to
+  do in the editor, each as problem, what to do and how to check (the join
+  after a force-save, the end of a session, the form flag, the distinct
+  errors, the contract version, the image from the device, the capability
+  signal), what DocSpace already does, and what the runs with two members
+  verified.
 
 Sent: pending (task 1.5).
 

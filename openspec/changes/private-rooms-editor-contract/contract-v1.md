@@ -37,7 +37,7 @@ copies in the portal.
 | Item | Value in v1 | Where it is visible |
 |---|---|---|
 | Contract version | `1` | `editorConfig.encryptionKeys.contractVersion`, sent by the client since 2026-10-30 (task 3.1); the library exports the same number as `EDITOR_CONTRACT_VERSION` since 2.2.0 |
-| Crypto library | `onlyoffice-crypto.js` 2.2.0, this hand-over (2.1.0 of 2026-10-29 added the stamp and the form flag); 2.0.0 is the unstamped build of 2026-07-01 (commit 8d6e613ce12) that builds 133 and 10.0.2.5 ship (223841 bytes, SHA-256 `58cb7f48…`) | banner on line 1 of the file (`/*! onlyoffice-crypto <version> <commit> */`) and `window.OnlyofficeCrypto.LIBRARY_VERSION` / `BUILD_COMMIT` |
+| Crypto library | `onlyoffice-crypto.js` 2.2.0, this hand-over; 2.0.0 is the unstamped build of 2026-07-01 (commit 8d6e613ce12) that builds 133 and 10.0.2.5 ship (223841 bytes, SHA-256 `58cb7f48…`) | banner on line 1 of the file (`/*! onlyoffice-crypto <version> <commit> */`) and `window.OnlyofficeCrypto.LIBRARY_VERSION` / `BUILD_COMMIT` |
 | DSE3 container | version 2 read and written today; version 3 (authenticated header) is planned, see §5.4 | `window.OnlyofficeCrypto.VERSION_DSE3_FILE`, `parseDSE3Header(bytes).version` |
 | Minimum Document Server | to be named by the Document Server team: the first release whose web client carries the crypto add-on and a library of 2.1.0 or newer | `Asc.Addons.crypto`, the library banner under the Document Server address |
 

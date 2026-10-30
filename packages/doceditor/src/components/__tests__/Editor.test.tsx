@@ -315,4 +315,31 @@ describe("Editor", () => {
       }
     });
   });
+
+  describe("Share to fill out", () => {
+    const pdfForm = (encrypted: boolean) =>
+      makeFileInfo(encrypted, {}, { fileExst: ".pdf", isForm: true });
+
+    it("Form opened in a private room: no start-filling event is attached", async () => {
+      asEncrypted();
+      await renderEditor({
+        config: makeConfig(true, { startFilling: true }),
+        fileInfo: pdfForm(true),
+      });
+
+      expect(env.captured.config).toBeDefined();
+      expect(events().onRequestStartFilling).toBeUndefined();
+      expect(events().onStartFilling).toBeUndefined();
+    });
+
+    it("Form opened outside a private room: the start-filling events are attached", async () => {
+      const props = await renderEditor({
+        config: makeConfig(false, { startFilling: true }),
+        fileInfo: pdfForm(false),
+      });
+
+      expect(events().onRequestStartFilling).toBe(env.events.onRequestStartFilling);
+      expect(events().onStartFilling).toBe(props.onStartFilling);
+    });
+  });
 });

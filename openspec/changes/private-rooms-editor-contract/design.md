@@ -940,6 +940,12 @@ BLOCKED or "after <x>" waits.
   metadata? Owner: feature owner (proposal decision 7).
 - Create-new from the editor on an encrypted file: encrypted creation in
   the same folder, or withheld? Owner: feature owner (proposal decision 7).
+- Start-filling button without its event: task 5.3 withholds
+  `onRequestStartFilling` and `onStartFilling` for an encrypted form on
+  2026-10-30, but whether the editor still draws the button from
+  `startFilling: true` without the event is unchecked (the doceditor dev
+  server was not running on the stand during the implementing session).
+  To be read on the stand before 5.4 switches the flag off server-side.
 - Inserted images: do `cryptoimg://` images reach the Document Server's media
   store or the portal in plaintext when a document is saved or co-edited?
   Task 4.4; owner: Document Server team for the answer, this change for the

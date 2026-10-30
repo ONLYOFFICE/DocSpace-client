@@ -46,11 +46,20 @@ const useShareDialog = (
   const [isVisible, setIsVisible] = React.useState(false);
 
   const onSDKRequestSharingSettings = React.useCallback(() => {
-    if (config?.startFilling && rootFolderType !== FolderType.USER)
+    if (
+      config?.startFilling &&
+      rootFolderType !== FolderType.USER &&
+      !config.file?.encrypted
+    )
       return openShareFormDialog();
 
     setIsVisible(true);
-  }, [config?.startFilling, openShareFormDialog, rootFolderType]);
+  }, [
+    config?.startFilling,
+    config?.file?.encrypted,
+    openShareFormDialog,
+    rootFolderType,
+  ]);
 
   const onClose = React.useCallback(() => {
     setIsVisible(false);

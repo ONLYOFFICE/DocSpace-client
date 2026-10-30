@@ -359,7 +359,8 @@ const Editor = ({
     }
   }
 
-  if (config?.startFilling && !IS_ZOOM) {
+  // Spec: editor-integration, "Share to fill out hidden in a private room"
+  if (config?.startFilling && !IS_ZOOM && !isEncryptedFile) {
     newConfig.events.onRequestStartFilling = onRequestStartFilling;
     newConfig.events.onStartFilling = onStartFilling;
   }

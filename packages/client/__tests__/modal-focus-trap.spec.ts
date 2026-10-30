@@ -37,6 +37,7 @@ import { http } from "msw";
 import type { Locator, Page } from "@playwright/test";
 import { BASE_URL } from "@docspace/shared/__mocks__/e2e";
 import { myDocumentsResolver } from "@docspace/shared/__mocks__/handlers/files/documents";
+import { roomTagsHandler } from "@docspace/shared/__mocks__/handlers/rooms/tags";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import {
   settingsHandler,
@@ -47,6 +48,7 @@ import {
   rootHandler,
   filesSettingsHandler,
   myHandler,
+  myDocumentsHandler,
   roomGroupsHandler,
   roomGroupByIdHandler,
 } from "@docspace/shared/__mocks__/handlers";
@@ -73,17 +75,45 @@ const describeFocus = (page: Page) =>
 const focusIsIn = (container: Locator) =>
   container.evaluate((el) => el.contains(document.activeElement));
 
+// Numbers every element of the container that Tab should stop on - the same
+// rule the trap uses - so a walk can tell which of them it never reached.
+const markStops = (container: Locator) =>
+  container.evaluate((root) => {
+    const candidates = root.querySelectorAll<HTMLElement>(
+      "a[href], area[href], button, input:not([type='hidden']), select, textarea, iframe, summary, [contenteditable]:not([contenteditable='false']), [tabindex]",
+    );
+    const stops = [...candidates].filter(
+      (el) =>
+        el.tabIndex >= 0 &&
+        !("disabled" in el && el.disabled === true) &&
+        !el.closest("[inert]") &&
+        el.getClientRects().length > 0 &&
+        getComputedStyle(el).visibility !== "hidden" &&
+        !(el instanceof HTMLInputElement && el.type === "radio" && !el.checked),
+    );
+    stops.forEach((el, index) => el.setAttribute("data-trap-stop", String(index)));
+    return stops.map(
+      (el) =>
+        `${el.tagName.toLowerCase()} "${(el.getAttribute("aria-label") || el.getAttribute("data-testid") || el.textContent || "").trim().slice(0, 30)}"`,
+    );
+  });
+
 // Presses Tab, then Shift+Tab, more times than the container has stops: after
-// every press the focus must still be inside it, and each direction must come
-// back round to a stop it already visited.
+// every press the focus must still be inside it, each direction must come back
+// round, and every stop must have been reached on the way - a walk that loops
+// over a few of them (say, the search box and the list) leaves the rest out.
 const expectFocusTrapped = async (
   page: Page,
   container: Locator,
   presses = 25,
 ) => {
+  const stops = await markStops(container);
+  const count = Math.max(presses, stops.length * 2 + 2);
+
   for (const key of ["Tab", "Shift+Tab"]) {
     const visited: string[] = [];
-    for (let i = 0; i < presses; i += 1) {
+    const reached = new Set<string>();
+    for (let i = 0; i < count; i += 1) {
       await page.keyboard.press(key);
       const where = await describeFocus(page);
       expect(
@@ -91,11 +121,19 @@ const expectFocusTrapped = async (
         `${key} #${i + 1} left the dialog for ${where}`,
       ).toBe(true);
       visited.push(where);
+      const stop = await page.evaluate(() =>
+        document.activeElement?.getAttribute("data-trap-stop"),
+      );
+      if (stop) reached.add(stop);
     }
     expect(
       new Set(visited).size,
       `${key} never wrapped: ${visited.join(" > ")}`,
     ).toBeLessThan(visited.length);
+    expect(
+      stops.filter((_, index) => !reached.has(String(index))),
+      `${key} never reached these stops: ${visited.join(" > ")}`,
+    ).toEqual([]);
   }
 };
 
@@ -256,6 +294,44 @@ test.describe("Focus trap in the media viewer", () => {
     await expect(viewer).toHaveAttribute("data-visible", "true");
 
     await expectFocusTrapped(page, viewer);
+  });
+});
+
+test.describe("Focus trap in the files selector", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      roomTagsHandler(TEST_PORT),
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      myHandler(TEST_PORT, true),
+      myDocumentsHandler(TEST_PORT, true),
+    );
+  });
+
+  test("Move to: Tab reaches the header and the footer, not only the list", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
+    const row = page.getByTestId("table-body").getByTestId("table-row-3");
+    await expect(row).toBeVisible();
+
+    await row.getByTestId("context-menu-button").click();
+    await page.getByTestId("option_move-or-copy").hover();
+    await page.getByTestId("option_move-to").click();
+
+    const panel = page.getByTestId("aside").first();
+    await expect(panel).toBeVisible();
+    // It opens with the focus on the list, where a Tab used to be sent back
+    // to the search box every time.
+    await expect
+      .poll(() => focusIsIn(panel))
+      .toBe(true);
+
+    await expectFocusTrapped(page, panel);
+    await expect(panel.getByRole("button", { name: "Cancel" })).toBeVisible();
   });
 });
 

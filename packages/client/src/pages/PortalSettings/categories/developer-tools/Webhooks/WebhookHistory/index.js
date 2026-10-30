@@ -80,6 +80,8 @@ const WebhookHistory = (props) => {
     emptyCheckedIds,
     clearHistoryFilters,
     setHistoryFilters,
+    setActiveConfigId,
+    clearHistoryParams,
   } = props;
 
   const [isFetchFinished, setIsFetchFinished] = useState(false);
@@ -104,8 +106,13 @@ const WebhookHistory = (props) => {
   };
 
   useEffect(() => {
+    setActiveConfigId(id);
     startTransition(fetchItems);
-    return clearHistoryFilters;
+    return () => {
+      clearHistoryFilters();
+      clearHistoryParams();
+      setActiveConfigId(null);
+    };
   }, []);
 
   const applyFilters = async ({ deliveryFrom, deliveryTo, groupStatus }) => {
@@ -138,6 +145,8 @@ export const Component = inject(({ webhooksStore }) => {
     emptyCheckedIds,
     clearHistoryFilters,
     setHistoryFilters,
+    setActiveConfigId,
+    clearHistoryParams,
   } = webhooksStore;
 
   return {
@@ -146,5 +155,7 @@ export const Component = inject(({ webhooksStore }) => {
     emptyCheckedIds,
     clearHistoryFilters,
     setHistoryFilters,
+    setActiveConfigId,
+    clearHistoryParams,
   };
 })(observer(WebhookHistory));

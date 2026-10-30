@@ -35,8 +35,14 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
+import debounce from "lodash.debounce";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import SocketHelper, {
+  SocketEvents,
+  type TWebhookData,
+  type TWebhookLogData,
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 
 import {
   createWebhook,
@@ -120,11 +126,155 @@ class WebhooksStore {
 
   errorWebhooks: { error: string } | null = null;
 
+  isWebhooksListActive = false;
+
+  activeConfigId: number | null = null;
+
+  historyParams: TJournalParams | null = null;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
 
     this.settingsStore = settingsStore;
+
+    SocketHelper?.on(SocketEvents.AddWebhook, this.onWebhookChanged);
+    SocketHelper?.on(SocketEvents.UpdateWebhook, this.onWebhookChanged);
+    SocketHelper?.on(SocketEvents.DeleteWebhook, this.onWebhookDeleted);
+    SocketHelper?.on(SocketEvents.AddWebhookLog, this.onWebhookLogAdded);
+    SocketHelper?.on(SocketEvents.UpdateWebhookLog, this.onWebhookLogUpdated);
   }
+
+  setIsWebhooksListActive = (isActive: boolean) => {
+    this.isWebhooksListActive = isActive;
+  };
+
+  setActiveConfigId = (configId: number | string | null) => {
+    this.activeConfigId = configId === null ? null : Number(configId);
+  };
+
+  clearHistoryParams = () => {
+    this.historyParams = null;
+  };
+
+  clearEventDetails = () => {
+    this.eventDetails = {};
+  };
+
+  onWebhookChanged = () => {
+    if (!this.isWebhooksListActive) return;
+
+    this.debounceReloadWebhooks();
+  };
+
+  debounceReloadWebhooks = debounce(() => {
+    this.reloadWebhooks();
+  }, 500);
+
+  reloadWebhooks = async () => {
+    try {
+      const webhooksData = (await getAllWebhooks()) as TWebhookConfigData[];
+
+      runInAction(() => {
+        this.webhooks = this.mapWebhooks(webhooksData);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  onWebhookDeleted = ({ id }: TWebhookData) => {
+    this.webhooks = this.webhooks.filter((webhook) => webhook.id !== id);
+
+    if (this.activeConfigId === id) {
+      window.DocSpace.navigate("/developer-tools/webhooks");
+    }
+  };
+
+  isHistoryOf = (configId: number) =>
+    !!this.historyParams && Number(this.historyParams.configId) === configId;
+
+  onWebhookLogAdded = async ({ configId }: TWebhookLogData) => {
+    if (!this.isHistoryOf(configId)) return;
+
+    const params = this.historyParams!;
+
+    try {
+      const historyData = (await getWebhooksJournal({
+        ...params,
+        startIndex: 0,
+        count: this.FETCH_COUNT,
+      })) as TJournalData;
+
+      if (this.historyParams !== params) return;
+
+      runInAction(() => {
+        const loadedIds = new Set(this.historyItems.map((item) => item.id));
+        const addedItems = historyData.items.filter(
+          (item) => !loadedIds.has(item.id),
+        );
+
+        this.historyItems = [...addedItems, ...this.historyItems];
+        this.startIndex += addedItems.length;
+        this.totalItems = historyData.total;
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  onWebhookLogUpdated = async ({ id, configId }: TWebhookLogData) => {
+    if (Number(this.eventDetails?.id) === id) this.fetchEventData(id);
+
+    if (!this.isHistoryOf(configId)) return;
+    if (!this.historyItems.some((item) => item.id === id)) return;
+
+    const params = this.historyParams!;
+
+    try {
+      const historyData = (await getWebhooksJournal({
+        ...params,
+        eventId: id,
+      })) as TJournalData;
+
+      if (this.historyParams !== params) return;
+
+      const updatedItem = historyData.items.find((item) => item.id === id);
+
+      runInAction(() => {
+        if (updatedItem) {
+          this.historyItems = this.historyItems.map((item) =>
+            item.id === id ? updatedItem : item,
+          );
+          return;
+        }
+
+        if (!this.historyItems.some((item) => item.id === id)) return;
+
+        this.historyItems = this.historyItems.filter((item) => item.id !== id);
+        this.startIndex -= 1;
+        this.totalItems -= 1;
+        this.checkedEventIds = this.checkedEventIds.filter(
+          (checkedId) => checkedId !== id,
+        );
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  mapWebhooks = (webhooksData: TWebhookConfigData[]): TWebhook[] =>
+    webhooksData.map((data) => ({
+      id: data.configs.id,
+      name: data.configs.name,
+      uri: data.configs.uri,
+      secretKey: data.configs.secretKey,
+      enabled: data.configs.enabled,
+      ssl: data.configs.ssl,
+      status: data.status,
+      triggers: data.configs.triggers,
+      createdBy: data.configs.createdBy,
+      targetId: data.configs.targetId,
+    }));
 
   setRetryPendingFalse = () => {
     this.isRetryPending = false;
@@ -159,18 +309,7 @@ class WebhooksStore {
         await getPortalPasswordSettings();
       }
       runInAction(() => {
-        this.webhooks = webhooksData.map((data) => ({
-          id: data.configs.id,
-          name: data.configs.name,
-          uri: data.configs.uri,
-          secretKey: data.configs.secretKey,
-          enabled: data.configs.enabled,
-          ssl: data.configs.ssl,
-          status: data.status,
-          triggers: data.configs.triggers,
-          createdBy: data.configs.createdBy,
-          targetId: data.configs.targetId,
-        }));
+        this.webhooks = this.mapWebhooks(webhooksData);
       });
     } catch (error) {
       if (axios.isCancel(error)) return;
@@ -266,6 +405,7 @@ class WebhooksStore {
   };
 
   fetchHistoryItems = async (params: TJournalParams) => {
+    this.historyParams = params;
     this.totalItems = 0;
     this.startIndex = 0;
     const count = params.count ? params.count : this.FETCH_COUNT;

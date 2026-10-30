@@ -191,3 +191,11 @@
   white-space: pre-wrap;
   word-break: break-all;
 }
+
+// An entry that expands is a button to the keyboard.
+.logEntry.expandable {
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: 2px;
+  }
+}

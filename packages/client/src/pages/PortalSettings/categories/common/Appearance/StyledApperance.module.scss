@@ -184,3 +184,12 @@
     }
   }
 }
+
+// The theme swatches and the add button are buttons to the keyboard.
+.styledTheme,
+.themeAdd {
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: 2px;
+  }
+}

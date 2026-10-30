@@ -141,7 +141,6 @@ const UserFields = (props) => {
 										<TextInput
 											type={InputType.text}
 											size={InputSize.base}
-											tabIndex={index}
 											className={`${classNameAdditional}-input text-input`}
 											id={`user-input-${input}`}
 											name={`${classNameAdditional}_${index}`}
@@ -180,7 +179,20 @@ const UserFields = (props) => {
 				data-testid={addButtonDataTestId}
 			>
 				<PlusIcon className={styles["plus-icon"]} />
-				<Link type="action" isHovered fontWeight={600}>
+				<Link
+					type="action"
+					isHovered
+					fontWeight={600}
+					// An action link has no href: a button to the keyboard, which the
+					// wrapper's click runs for the pointer.
+					role="button"
+					tabIndex={0}
+					onKeyDown={(e) => {
+						if (e.key !== "Enter" && e.key !== " ") return;
+						e.preventDefault();
+						onClickAdd();
+					}}
+				>
 					{buttonLabel}
 				</Link>
 			</div>

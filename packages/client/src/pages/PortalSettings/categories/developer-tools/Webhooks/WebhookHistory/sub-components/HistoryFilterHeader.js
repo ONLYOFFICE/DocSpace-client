@@ -47,8 +47,10 @@ import StatusBar from "./StatusBar";
 import { HistoryHeaderLoader } from "../../sub-components/Loaders/HistoryHeaderLoader";
 
 import styles from "../WebhookHistory.styled.module.scss";
+import { useTranslation } from "react-i18next";
 
 const HistoryFilterHeader = (props) => {
+	const { t } = useTranslation(["Common"]);
 	const {
 		applyFilters,
 		historyFilters,
@@ -100,7 +102,17 @@ const HistoryFilterHeader = (props) => {
 						onClick={openFiltersModal}
 						data-testid="webhook_filter_button"
 					>
-						<IconButton iconName={FilterReactSvrUrl} size={16} />
+						<IconButton
+							iconName={FilterReactSvrUrl}
+							size={16}
+							ariaLabel={t("Common:Filter")}
+							// Its own click makes it a keyboard button; the box takes the
+							// pointer's click and must not open the filters a second time.
+							onClick={(e) => {
+								e.stopPropagation();
+								openFiltersModal();
+							}}
+						/>
 						<span hidden={historyFilters === null} />
 					</div>
 				</header>

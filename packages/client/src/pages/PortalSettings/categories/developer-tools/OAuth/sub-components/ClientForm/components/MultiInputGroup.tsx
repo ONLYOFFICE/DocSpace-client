@@ -50,6 +50,7 @@ import styles from "../ClientForm.styled.module.scss";
 import { isValidUrl } from "../ClientForm.utils";
 
 import InputGroup from "./InputGroup";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 interface MultiInputGroupProps {
   t: TTranslation;
@@ -217,7 +218,14 @@ const MultiInputGroup = ({
             noIcon
             testId={`${dataTestId}_input`}
           />
-          <div ref={addRef} className={styles.styledInputAddBlock} onClick={onAddAction}>
+          <div
+            ref={addRef}
+            className={styles.styledInputAddBlock}
+            onClick={onAddAction}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => activateOnButtonKey(e, onAddAction)}
+          >
             <Text fontSize="13px" fontWeight={600} lineHeight="20px" truncate>
               {value}
             </Text>

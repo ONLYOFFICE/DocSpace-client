@@ -66,6 +66,7 @@ import appearanceStyles from "./Appearance/StyledApperance.module.scss";
 import Loader from "./sub-components/loaderAppearance";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
 import Preview from "./Appearance/preview";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 const Appearance = (props) => {
   const {
@@ -704,6 +705,11 @@ const Appearance = (props) => {
                   onClick={onColorSelection}
                   onMouseOver={onColorCheckImgHover}
                   data-testid={`appearance_standard_theme_${item.id}`}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={item.name}
+                  aria-pressed={selectThemeId === item.id}
+                  onKeyDown={(e) => activateOnButtonKey(e, onColorSelection)}
                 >
                   {selectThemeId === item.id ? (
                     <ReactSVG className={appearanceStyles.checkImg} src={CheckWhiteSvgUrl} />
@@ -732,6 +738,11 @@ const Appearance = (props) => {
                     onClick={onColorSelection}
                     onMouseOver={onColorCheckImgHover}
                     data-testid={`appearance_custom_theme_${item.id}`}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={t("Common:Custom")}
+                    aria-pressed={selectThemeId === item.id}
+                    onKeyDown={(e) => activateOnButtonKey(e, onColorSelection)}
                   >
                     {selectThemeId === item.id ? (
                       <ReactSVG className={appearanceStyles.checkImg} src={CheckWhiteSvgUrl} />
@@ -747,6 +758,11 @@ const Appearance = (props) => {
               data-tip="tooltip"
               className={appearanceStyles.themeAdd}
               data-testid="appearance_add_theme"
+              role="button"
+              tabIndex={0}
+              aria-label={headerAddTheme}
+              aria-disabled={!abilityAddTheme || undefined}
+              onKeyDown={(e) => activateOnButtonKey(e, onAddTheme)}
               style={{ backgroundImage: `url(${PlusThemeSvgUrl})` }}
               onClick={onAddTheme}
             />

@@ -133,6 +133,13 @@ const Providers = (props: ProvidersProps) => {
               isTextOverflow
               color="accent"
               dataTestId={`workspace_item_${workspace.title}_import_link`}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.key !== "Enter" && e.key !== " ") return;
+                e.preventDefault();
+                setWorkspace(workspace.title);
+              }}
             >
               {t("Import")}
             </Link>

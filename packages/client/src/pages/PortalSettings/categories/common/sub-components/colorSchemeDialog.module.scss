@@ -87,3 +87,11 @@
     }
   }
 }
+
+// The colour swatches are buttons to the keyboard.
+.modalAddTheme {
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: 2px;
+  }
+}

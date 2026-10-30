@@ -38,6 +38,7 @@ import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { withTranslation } from "react-i18next";
 import styles from "./colorSchemeDialog.module.scss";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 const ColorSchemeDialog = (props) => {
   const {
@@ -81,6 +82,10 @@ const ColorSchemeDialog = (props) => {
               className={styles.modalAddTheme}
               style={{ background: accentBg }}
               data-testid="color_scheme_dialog_accent"
+              role="button"
+              tabIndex={0}
+              aria-label={t("Settings:AccentColor")}
+              onKeyDown={(e) => activateOnButtonKey(e, onClickColor)}
               onClick={onClickColor}
             />
 
@@ -96,6 +101,10 @@ const ColorSchemeDialog = (props) => {
               className={styles.modalAddTheme}
               style={{ background: buttonsBg }}
               data-testid="color_scheme_dialog_buttons"
+              role="button"
+              tabIndex={0}
+              aria-label={t("Settings:ButtonsColor")}
+              onKeyDown={(e) => activateOnButtonKey(e, onClickColor)}
               onClick={onClickColor}
             />
 

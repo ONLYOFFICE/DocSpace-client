@@ -46,6 +46,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import styles from "./EventLogBlock.module.scss";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 const formatTime = (date) => {
   const h = String(date.getHours()).padStart(2, "0");
@@ -176,6 +177,14 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
                     [styles.expandable]: expandable,
                   })}
                   onClick={expandable ? () => toggle(entry.id) : undefined}
+                  role={expandable ? "button" : undefined}
+                  tabIndex={expandable ? 0 : undefined}
+                  aria-expanded={expandable ? expanded : undefined}
+                  onKeyDown={
+                    expandable
+                      ? (e) => activateOnButtonKey(e, () => toggle(entry.id))
+                      : undefined
+                  }
                 >
                   <span className={styles.gutter}>
                     <span

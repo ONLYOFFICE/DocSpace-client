@@ -108,6 +108,13 @@ const Card = ({
       <Link
         className={styles.cardLink}
         onClick={handleLinkClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e: React.KeyboardEvent) => {
+          if (e.key !== "Enter" && e.key !== " ") return;
+          e.preventDefault();
+          handleCardClick();
+        }}
         color="accent"
         type={LinkType.page}
         fontSize="13px"

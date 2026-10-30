@@ -57,6 +57,7 @@ import {
 	InjectedAddEmailRowContentProps,
 } from "../../../../types";
 import styles from "../../../../StyledDataImport.module.scss";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 const UsersRowContent = (props: AddEmailRowContentProps) => {
 	const {
@@ -183,6 +184,11 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 								size={16}
 								iconName={CheckSvgUrl}
 								dataTestId="change_email_save_button"
+								ariaLabel={t("Common:SaveButton")}
+								onClick={(e: React.MouseEvent) => {
+									e.stopPropagation();
+									handleSaveClick();
+								}}
 							/>
 						</div>
 
@@ -192,6 +198,11 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 								size={16}
 								iconName={CrossSvgUrl}
 								dataTestId="change_email_clear_button"
+								ariaLabel={t("Common:CancelButton")}
+								onClick={(e: React.MouseEvent) => {
+									e.stopPropagation();
+									clearEmail();
+								}}
 							/>
 						</div>
 					</div>
@@ -202,6 +213,9 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 					className="user-email"
 					ref={emailTextRef}
 					data-testid="open_email_button"
+					role="button"
+					tabIndex={0}
+					onKeyDown={(e) => activateOnButtonKey(e, openEmail)}
 				>
 					<EditSvg />
 				</span>

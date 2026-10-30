@@ -53,6 +53,7 @@ import {
   InjectedAddEmailTableRowProps,
 } from "../../../../types";
 import styles from "../../../../StyledDataImport.module.scss";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 const UsersTableRow = (props: AddEmailTableRowProps) => {
   const {
@@ -193,6 +194,11 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
                 size={16}
                 iconName={CheckSvgUrl}
                 dataTestId="import_check_button"
+                ariaLabel={t("Common:SaveButton")}
+                onClick={(e: React.MouseEvent) => {
+                  e.stopPropagation();
+                  handleSaveClick();
+                }}
               />
             </div>
 
@@ -202,11 +208,23 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
                 size={16}
                 iconName={CrossSvgUrl}
                 dataTestId="import_clear_button"
+                ariaLabel={t("Common:CancelButton")}
+                onClick={(e: React.MouseEvent) => {
+                  e.stopPropagation();
+                  clearEmail();
+                }}
               />
             </div>
           </div>
         ) : (
-          <span onClick={openEmail} className="user-email" ref={emailTextRef}>
+          <span
+            onClick={openEmail}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => activateOnButtonKey(e, openEmail)}
+            className="user-email"
+            ref={emailTextRef}
+          >
             <EditSvg />
             <Text color={globalColors.gray} className="user-email" truncate>
               {prevEmail !== "" ? prevEmail : t("Settings:NoEmail")}

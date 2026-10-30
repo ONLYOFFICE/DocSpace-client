@@ -65,6 +65,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
@@ -125,6 +126,18 @@ const ProfileCardComponent = ({
   const handleClose = () => {
     localStorage.setItem(PROFILE_CARD_HIDDEN_KEY, "true");
     setHidden(true);
+  };
+
+  const handleSetPassword = () => setChangePasswordVisible(true);
+
+  // "Set password" is an action link with no href, so it is a button to the
+  // keyboard: Enter and Space open the dialog. The press is consumed, as the
+  // dialog sends the instructions on Enter, listening on the window.
+  const handleSetPasswordKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    consumeKey(e);
+    handleSetPassword();
   };
 
   const handleEditPortalName = () => {
@@ -247,7 +260,10 @@ const ProfileCardComponent = ({
             <Link
               className={styles.profileCardLink}
               type={LinkType.action}
-              onClick={() => setChangePasswordVisible(true)}
+              onClick={handleSetPassword}
+              role="button"
+              tabIndex={0}
+              onKeyDown={handleSetPasswordKeyDown}
               color="accent"
               isHovered
             >

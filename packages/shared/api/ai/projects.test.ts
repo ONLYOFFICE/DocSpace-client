@@ -117,14 +117,13 @@ describe("the calls", () => {
       subjectId: undefined,
       subjectOwnerId: "u1",
       tags: ["sales", "legal"],
-      linkedRoomId: 12,
       startIndex: 0,
       count: 100,
     });
     expect(request).toHaveBeenCalledWith(
       expect.objectContaining({
         method: "GET",
-        url: "/ai/projects?filterValue=sa&sortBy=Tags&subjectOwnerId=u1&tags=%5B%22sales%22%2C%22legal%22%5D&linkedRoomId=12&startIndex=0&count=100",
+        url: "/ai/projects?filterValue=sa&sortBy=Tags&subjectOwnerId=u1&tags=%5B%22sales%22%2C%22legal%22%5D&startIndex=0&count=100",
       }),
     );
     expect(page.total).toBe(1);

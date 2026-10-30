@@ -2,22 +2,25 @@
 
 ## Purpose
 
-Defines the `/api/2.0/ai/projects` contract the client consumes: what an AI project is on the server, who may do what, how requests are validated and which answers and errors the client can rely on. Served by ASC.AI.Chat (Node), which delegates to the .NET AI service.
+Defines the `/api/2.0/ai/projects` contract the client consumes: what an AI project is on the server, who may do what, how requests are validated and which answers and errors the client can rely on. Served by ASC.AI.Chat (Node), which delegates the room to the .NET AI service (`internal/ai/projects`, list, create, get, update, delete and the linked-rooms routes `GET/POST/DELETE internal/ai/projects/{id}/rooms`) and composes the rest of the contract (the `aiProject` block, the `skills` and `knowledge` listings, the chat context) over those routes and the Files API.
 
 Like the agents API, `ai/projects` carries only what is specific to a project: the list with its filters, get, create, update, delete, and the `skills` and `knowledge` listings. Everything a project shares with a room (pin, mute, leave, owner change, logo removal, members, invitation links, resend, history) goes through the room routes (`files/rooms/{id}/...`, `files/owner`, `settings/notification/rooms`), which SHALL accept a room of type 12 wherever they accept the other room types, with the project rules below applied.
 
 ## ADDED Requirements
 
 ### Requirement: Project entity
-An AI project SHALL be a room of type 12 (`FolderType.AiProjectRoom` 40) under its own root (`FolderType.AiProjects` 41). It SHALL hold no files. It SHALL carry an `aiProject` settings block: a chat profile (`null` = portal default), an ordered list of linked Instructions rooms (type 10) and an ordered list of linked Knowledge rooms (type 11). Linked rooms are references by id, never nested rooms.
-
-#### Scenario: Project answered as a room
-- **WHEN** the client reads `GET ai/projects/{id}`
-- **THEN** the answer is a `FolderDto` with `roomType: 12`, `security` flags and an `aiProject` block
+An AI project SHALL be a room of type 12 (`FolderType.AiProjectRoom` 40) under its own root (`FolderType.AiProjects` 41). It SHALL hold no files. The .NET service SHALL store its linked rooms as one set of room ids per project (`files_ai_project_room`), each an active Instructions room (type 10) or Knowledge room (type 11) under the Rooms root, told apart by the room's type. Linked rooms are references by id, never nested rooms.
 
 #### Scenario: Upload into a project
 - **WHEN** a client tries to create a file or folder inside a project
 - **THEN** the request is refused: a project holds no content
+
+### Requirement: Project settings block
+`GET ai/projects/{id}` SHALL answer the room with an `aiProject` block composed by the Node service: `profile` (`null`: the portal default, since the server stores no model with a project yet), `instructionsRooms` and `knowledgeRooms` (each room as the server lists it: id, title, logo, `roomType`, `available: true`, `archived: false`), `canEditSettings` (the room's `EditRoom`) and `warnings` when the last change skipped something.
+
+#### Scenario: Project answered as a room
+- **WHEN** the client reads `GET ai/projects/{id}`
+- **THEN** the answer is a `FolderDto` with `roomType: 12`, `security` flags and an `aiProject` block built from `GET internal/ai/projects/{id}/rooms`
 
 ### Requirement: Project tags
 A project SHALL carry tags as a room does: `tags` (names) in its DTO, bound and unbound through `files/rooms/{id}/tags`, and listed in the portal's `files/tags`.
@@ -38,11 +41,11 @@ A project SHALL have three roles: project owner (`access` 1, the room's `created
 - **THEN** the request is refused with 403
 
 ### Requirement: Visibility guard
-Every project route SHALL answer 404 with one message when the id names no AI project, a project in Trash, a folder of another type, or a project the caller cannot read. A 403 SHALL appear only after this guard, when the caller sees the project but may not perform the action. The portal owner and DocSpace admins SHALL see every project without being members.
+Every project route SHALL answer 404 with one message when the id names no AI project or a folder of another type, and 403 when the project exists but the caller cannot read it. A 403 for the action itself (edit, delete) follows the read check. The portal owner and DocSpace admins SHALL see every project without being members.
 
 #### Scenario: Outsider reads a project
 - **WHEN** a room admin who is not in the project reads it
-- **THEN** the answer is 404
+- **THEN** the answer is 403
 
 #### Scenario: Admin outside the project
 - **WHEN** a DocSpace admin who is not in the project reads it
@@ -95,38 +98,59 @@ The server SHALL validate a create or update body before writing anything; the f
 - **WHEN** a create sends a 171-character title
 - **THEN** the answer is 400 with the title-length message
 
+### Requirement: Linked room routes
+The .NET service SHALL serve the links as `GET internal/ai/projects/{id}/rooms` (`instructionsRooms` and `knowledgeRooms`, each `{ id, title, logo }` sorted by title, for anyone who may read the project), `POST .../rooms { roomIds }` (links the rooms not linked yet, 204) and `DELETE .../rooms { roomIds }` (unlinks the linked ids, 204). The writes SHALL be for the owner and Project managers only, each one history entry naming the rooms, and SHALL push a folder update.
+
+#### Scenario: Member links a room
+- **WHEN** a Member sends `POST internal/ai/projects/{id}/rooms`
+- **THEN** the answer is 403
+
+#### Scenario: Already linked
+- **WHEN** `roomIds` names a room already linked, twice
+- **THEN** the answer is 204 and the room is linked once
+
 ### Requirement: Linked room validation
-Each list SHALL hold at most 20 positive ids; duplicates within a list SHALL be dropped silently; the same id in both lists SHALL be refused. Every room being added SHALL exist, be readable by the caller and by the project owner, be of the expected type (10 for Instructions, 11 for Knowledge), not be third-party storage and not be in Trash or Archive. A missing room and an unreadable room SHALL give the same message.
+`roomIds` SHALL hold 1 to 200 ids. Every room being linked SHALL be an active Instructions or Knowledge room under the Rooms root that the caller can read; any other id (missing, archived, in Trash, of another type, unreadable) SHALL refuse the whole request with 400 naming the ids, linking nothing. A project SHALL link at most 100 rooms of each type; a request over the limit SHALL answer 400 and keep the existing links.
 
-#### Scenario: Too many rooms
-- **WHEN** a create names 21 Knowledge rooms
-- **THEN** the answer is 400 "A project can link at most 20 Knowledge rooms"
+#### Scenario: Room of another type
+- **WHEN** `roomIds` names an Instructions room and an ordinary room
+- **THEN** the answer is 400 naming the ordinary room and neither is linked
 
-#### Scenario: Wrong room type
-- **WHEN** an Instructions room id is sent in `knowledgeRoomIds`
-- **THEN** the answer is 400 naming the room as not a Knowledge room
+#### Scenario: Over the limit
+- **WHEN** a project links 100 Instructions rooms and one more is sent
+- **THEN** the answer is 400 and the 100 stay linked
 
-#### Scenario: Owner cannot read the room
-- **WHEN** a Project manager links a room the project owner cannot read
-- **THEN** the answer is 400 saying the owner has no access to that room
+### Requirement: Linked rooms in the create and update body
+The client SHALL send the linked rooms inside `aiProject` as `instructionsRoomIds` and `knowledgeRoomIds` (positive ids, duplicates dropped); the Node service SHALL take the block apart and never forward it. On create it SHALL link both lists right after the room is made; on update a list sent SHALL be brought about exactly (missing rooms linked, rooms left out unlinked, `[]` unlinks all of that kind) and a list absent or `null` SHALL keep its rooms.
 
-### Requirement: Profile validation
-A `profileId` SHALL name an existing profile that supports chat; the all-zero id SHALL be refused. The AI service (Node) SHALL check this before forwarding, and the .NET service SHALL check it again.
+#### Scenario: Unlink all Knowledge rooms
+- **WHEN** an update sends `"aiProject": { "knowledgeRoomIds": [] }`
+- **THEN** the project links no Knowledge room afterwards and its Instructions rooms are unchanged
+
+### Requirement: Refused link on save
+A link or unlink the server refuses SHALL NOT fail the save: the answer carries the project as it is and a `roomUnavailable` warning with the server's message in `aiProject.warnings`, which the client shows as a toast.
+
+#### Scenario: Refused room on create
+- **WHEN** a create names an archived Instructions room
+- **THEN** the project is created, the answer lists no Instructions room and `aiProject.warnings` holds a `roomUnavailable` entry with the server's message
+
+### Requirement: Project model
+A `profileId` sent in `aiProject` SHALL be a UUID of an existing profile that supports chat, or `null`; the Node service SHALL check this before anything is written. The .NET service stores no model with a project yet, so a project SHALL run on the portal's Chat assignment: the answer reports `profile: null`, and a non-null `profileId` SHALL be answered with a `modelNotStored` warning in `aiProject.warnings` instead of being dropped silently or failing the save.
 
 #### Scenario: Profile without chat
 - **WHEN** a create names an embedding-only profile
 - **THEN** the answer is 400 saying the profile does not support chat
 
+#### Scenario: Model chosen
+- **WHEN** a create names a chat profile
+- **THEN** the project is created with `profile: null` and `aiProject.warnings` holds a `modelNotStored` entry
+
 ### Requirement: Partial update semantics
-On update, an absent field SHALL keep its value. Inside `aiProject`, `profileId` SHALL have three states: absent (keep), `null` (portal default) or a profile id. A list sent as `null` SHALL keep its value; `[]` SHALL unlink every room of that kind. Validation of rooms SHALL run only on rooms being added.
+On update, an absent field SHALL keep its value; a present `tags` replaces the set. Unknown body properties SHALL be refused by the .NET service with 400. A body holding only the `aiProject` block SHALL read the room instead of writing it and still bring the links about.
 
-#### Scenario: Reset the model
-- **WHEN** an update sends `"aiProject": { "profileId": null }`
-- **THEN** the project falls back to the portal default model and its rooms are unchanged
-
-#### Scenario: Unlink all Knowledge rooms
-- **WHEN** an update sends `"knowledgeRoomIds": []`
-- **THEN** the project links no Knowledge room afterwards
+#### Scenario: Rename only
+- **WHEN** an update sends only a new title
+- **THEN** the title changes and the linked rooms are unchanged
 
 ### Requirement: Linked-room grants
 When a user becomes a member (invite, accepted link, owner change) and when a room is linked to a project, the server SHALL grant Viewer on the linked room to every member who has no share on it. Existing shares SHALL never be downgraded, no e-mail SHALL be sent, and a grant that cannot be made SHALL become a warning (`grantSkipped`, `ownerLostAccess`) in the answer rather than a failure. Removing a member or unlinking a room SHALL NOT revoke the grant.
@@ -176,32 +200,35 @@ Pin and unpin (`PUT files/rooms/{id}/pin` and `.../unpin`) SHALL be personal to 
 - **THEN** the answer is 403
 
 ### Requirement: Listing query
-`GET ai/projects` SHALL return a page of the projects the caller may see, pinned first. Query: `filterValue` (title), `sortBy` (`DateAndTime` default, `AZ`, `DateAndTimeCreation`, `Tags`, `Author`), `sortOrder`, `startIndex`, `count`, the subject and tag filters of `files/rooms` (`subjectId` with `excludeSubject`, `subjectOwnerId`, `tags` as a JSON array, `withoutTags`), `role`, `hasInstructions`, `hasKnowledge`, `linkedRoomId`. No other filter exists.
-
-#### Scenario: Unreadable linked room filter
-- **WHEN** the caller filters by a `linkedRoomId` they cannot read
-- **THEN** the answer is 200 with an empty page, not an error
+`GET ai/projects` SHALL return a page of the projects the caller may see, pinned first. Query: `filterValue` (title), `sortBy` (`DateAndTime` default, `AZ`, `DateAndTimeCreation`, `Tags`, `Author`), `sortOrder`, `startIndex`, `count`, and the subject and tag filters of `files/rooms` (`subjectId` with `excludeSubject`, `subjectOwnerId`, `tags` as a JSON array, `withoutTags`). No other filter exists.
 
 #### Scenario: Outsider lists
 - **WHEN** a User who belongs to no project lists projects
 - **THEN** the answer is 200 with an empty page
 
 ### Requirement: Listing items
-Each listed project SHALL be a full room DTO (`tags`, `createdBy`, `updatedBy` included) with its `aiProject` block, where every linked room reports `available`, `archived`, its logo, and `skillsCount` (Instructions) or `totalFiles` / `indexedFiles` (Knowledge). A linked room the caller cannot read SHALL be reported with `available: false` and no title.
+Each listed project SHALL be a full room DTO (`tags`, `createdBy`, `updatedBy`, `pinned`, `mute`, `inRoom`, `access`, `security` included) without the `aiProject` block: the list shows no linked rooms, and the client reads a project on its own (`GET ai/projects/{id}`) when it opens or picks it.
 
-#### Scenario: Deleted linked room
-- **WHEN** a linked Knowledge room was deleted
-- **THEN** the project lists it with `available: false` and `title: null`
+#### Scenario: Project opened from the list
+- **WHEN** the user opens a project from the list
+- **THEN** the client reads `GET ai/projects/{id}` and the chat opens on the rooms that answer lists
 
-### Requirement: Sources listings
-`GET ai/projects/{id}/skills` SHALL list every linked Instructions room in linked order with its skills (id, name, description from the Markdown frontmatter). `GET ai/projects/{id}/knowledge` SHALL list every linked Knowledge room with all of its files (at most 1000, with `truncated` when there are more). A room the caller cannot read SHALL come back with `available: false` and no content, never 403.
+### Requirement: Skills listing
+`GET ai/projects/{id}/skills` SHALL be composed by the Node service from `GET internal/ai/projects/{id}/rooms` and the Files API, with the caller's credentials: every linked Instructions room (sorted by title, as the server lists them) with its skills (id, name, description from the Markdown frontmatter of its root files, `GET files/rooms/{id}/ai`). A room whose files cannot be read SHALL come back with `available: false` and no skills, never 403.
 
 #### Scenario: Unreadable linked room
 - **WHEN** a member reads the skills of a project whose Instructions room they lost access to
 - **THEN** that room is listed with `available: false` and an empty skills list
 
+### Requirement: Knowledge listing
+`GET ai/projects/{id}/knowledge` SHALL be composed the same way: every linked Knowledge room with its files (`GET files/{roomId}`, files only, at most 1000, with `truncated` when there are more) and the room's `totalFiles`, `indexedFiles` and `failedFiles`. A room whose files cannot be read SHALL come back with `available: false` and no files, never 403.
+
+#### Scenario: Room over the listing size
+- **WHEN** a linked Knowledge room holds 1200 files
+- **THEN** the room comes with 1000 files, `totalFiles: 1200` and `truncated: true`
+
 ### Requirement: Knowledge file state
-Each file in the knowledge listing SHALL carry `indexed`, its `vectorizationStatus` (in progress, completed, failed) and `security.Vectorization` (whether the caller may retry it). Each room SHALL carry `totalFiles`, `indexedFiles` and `failedFiles`.
+Each file in the knowledge listing SHALL carry `indexed` (its vectorization completed), its `vectorizationStatus` (in progress, completed, failed, or `null` when never queued) and `security.Vectorization` (whether the caller may retry it). Each room SHALL carry `totalFiles`, `indexedFiles` and `failedFiles`.
 
 #### Scenario: Failed file for a Viewer
 - **WHEN** a Viewer of the room reads the knowledge listing and one file failed to vectorize
@@ -215,40 +242,36 @@ A project SHALL take an uploaded logo the way a room does: the picture is upload
 - **THEN** the project is listed with the picture's sizes, then again with its colour and cover only
 
 ### Requirement: Chat context
-The server SHALL expose an internal `chat-context` for a project: the caller's role, `canChat`, the stored and the effective profile, whether the profile is available, and the linked rooms split into readable and unavailable ids. It SHALL NOT be reachable by the client; the AI service reads it once per round and on thread creation.
+The Node service SHALL compose a project's chat context once per round and on thread creation, from `GET internal/ai/projects/{id}` (the caller's `access` as the role, `inRoom` as `canChat`), `GET internal/ai/projects/{id}/rooms` (the linked rooms, all readable by the caller) and the portal's Chat assignment (the effective model, available when it exists and can chat). It is not a client route.
 
 #### Scenario: Admin outside the project
-- **WHEN** chat-context is read for a DocSpace admin who is not a member
-- **THEN** it answers `myRole: 0` and `canChat: false`
+- **WHEN** a DocSpace admin who is not a member sends a message in the project
+- **THEN** the round is refused with 403
 
 ### Requirement: Linked room lifecycle
-When a linked room is permanently deleted, the server SHALL unlink it from every project (with a history entry) and push an update to those projects. A linked room in Trash, of a changed type, or unreadable by the caller SHALL be reported as unavailable, not unlinked. A renamed linked room SHALL push an update to the projects that link it.
+When a linked room is deleted, moved to Trash or archived, the server SHALL unlink it from every project; restoring the room SHALL NOT link it again. Deleting a project SHALL drop its links. A project lists only the rooms that are linked and active, so a linked room is never reported as unavailable.
 
-#### Scenario: Linked room deleted for good
-- **WHEN** a linked Knowledge room is deleted from Trash
-- **THEN** every project that linked it drops it from `knowledgeRooms` and the open lists refresh
-
-#### Scenario: Linked room in Trash
-- **WHEN** a linked room is moved to Trash
-- **THEN** the project still lists it with `available: false`
+#### Scenario: Linked room archived
+- **WHEN** a linked Instructions room is archived and later restored
+- **THEN** the project lists it in neither state until it is linked again
 
 ### Requirement: Model lifecycle
-When a project's profile is deleted or loses the chat capability, the server SHALL keep the stored `profileId` (no silent fallback), report `profile.available: false`, notify the owner and Project managers, and refuse rounds with 409 until the model is changed.
+A project runs on the portal's Chat assignment. When that assignment names no profile, a deleted one or one without the chat capability, rounds in the project SHALL be refused with 409 `projectModelUnavailable` until the portal's model is fixed.
 
-#### Scenario: Profile removed
-- **WHEN** an admin deletes the profile a project uses
-- **THEN** the project shows its model as unavailable, its owner and managers are notified, and chatting in it answers 409
+#### Scenario: Portal model removed
+- **WHEN** an admin deletes the profile the portal's Chat assignment names
+- **THEN** chatting in any project answers 409
 
 ### Requirement: Notifications and history
-The server SHALL e-mail members on invitation, role change, removal and project deletion (mute-aware, never to the actor), with project wording and the roles "Project manager" / "Member". The project history (`GET files/folder/{id}/log`) SHALL record create, rename, model change, room linked / unlinked, Viewer grants on linked rooms, owner change, model unavailable, and the membership events, so the History tab can show them.
+The server SHALL e-mail members on invitation, role change, removal and project deletion (mute-aware, never to the actor), with project wording and the roles "Project manager" / "Member". The project history (`GET files/folder/{id}/log`) SHALL record create, rename, rooms linked / unlinked (`RoomsLinkedToAiProject` 6117 / `RoomsUnlinkedFromAiProject` 6118, one entry per request naming the rooms), owner change and the membership events, so the History tab can show them.
 
 #### Scenario: Invitation e-mail
 - **WHEN** a Project manager invites a user with notifications on
 - **THEN** the user receives a project invitation e-mail naming the role
 
 #### Scenario: History after an edit
-- **WHEN** the owner links a room and changes the model in one save
-- **THEN** the history shows one "room linked" entry per added room and one "model changed" entry
+- **WHEN** the owner links two rooms in one save
+- **THEN** the history shows one "rooms linked" entry naming both rooms
 
 ### Requirement: Invitation link acceptance
 Joining through the project's invitation link SHALL add the user as Member, grant Viewer on the linked rooms, and land them on `/ai-projects/{id}`.

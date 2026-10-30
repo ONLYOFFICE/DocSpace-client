@@ -547,12 +547,26 @@ class AiProjectsStore {
   // The sources (skills, knowledge files) are not read here: the cards read
   // a room's list when its row is expanded (fetchSkills / fetchKnowledge),
   // and the chat takes the current skills from the server on every round.
-  openProject = async (project: TAiProject) => {
+  // A project from the list comes without its linked rooms (`partial`): it is
+  // read on its own first, so the chat opens on the project's rooms. Resolves
+  // to the project as opened; a failed read opens what the list had.
+  openProject = async (project: TAiProject): Promise<TAiProject> => {
     this.activeProject = project;
     this.syncChannels();
     this.skills = [];
     this.knowledge = [];
-    this.syncPreset(project);
+    let opened = project;
+    if (project.aiProject.partial) {
+      try {
+        opened = await getAiProject(project.id);
+      } catch (e) {
+        toastr.error(errorMessage(e));
+      }
+      if (this.activeProject?.id !== project.id) return opened;
+      runInAction(() => this.replaceProject(opened));
+    }
+    this.syncPreset(opened);
+    return opened;
   };
 
   openProjectById = async (id: number) => {

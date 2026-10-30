@@ -189,8 +189,8 @@ const AiProjects = ({
 
   const openProject = React.useCallback(
     (project: TAiProject) => {
-      void store.openProject(project).then(() => {
-        const { profile, instructionsRooms, knowledgeRooms } = project.aiProject;
+      void store.openProject(project).then((opened) => {
+        const { profile, instructionsRooms, knowledgeRooms } = opened.aiProject;
         aiChatStore.openProject({
           profileId: profile?.id ?? null,
           profileName: profile?.name ?? null,

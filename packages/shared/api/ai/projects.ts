@@ -40,11 +40,14 @@ import { request } from "../client";
 import type { TOperation } from "../files/types";
 
 /**
- * AI Projects: a project is a room of type 12 that binds a model,
- * Instructions rooms and Knowledge rooms and shares them with a team.
- * Served by ASC.AI.Chat under `/api/2.0/ai/projects`, which delegates each
- * call to the .NET AI service as it does for agents, so a project comes back
- * as a room (`FolderDto`) with its `aiProject` block.
+ * AI Projects: a project is a room of type 12 that links Instructions rooms
+ * and Knowledge rooms and shares them with a team. Served by ASC.AI.Chat
+ * under `/api/2.0/ai/projects`, which delegates the room to the .NET AI
+ * service as it does for agents and composes the `aiProject` block over the
+ * server's linked-rooms routes, so a project comes back as a room
+ * (`FolderDto`) with its `aiProject` block. The list answers the rooms
+ * without the block (`aiProject.partial`): a project is read again when it
+ * is opened or picked.
  *
  * Like the agents API, this module holds only what is specific to a project:
  * the list with its filters, read, create, update, delete, and the skills and
@@ -120,9 +123,13 @@ export type TAiProjectLogo = {
 /** A built-in room cover: its id and the SVG it is drawn from. */
 export type TAiProjectCover = { id: string; data: string };
 
-/** A non-fatal problem of the last create or update. */
+/**
+ * A non-fatal problem of the last create or update. `roomUnavailable`: a
+ * room the server refused to link or unlink; `modelNotStored`: the server
+ * keeps no model with a project yet, so the chosen one was not saved.
+ */
 export type TAiProjectWarning = {
-  code: "grantSkipped" | "ownerLostAccess" | "roomUnavailable";
+  code: "grantSkipped" | "ownerLostAccess" | "roomUnavailable" | "modelNotStored";
   roomId: number | null;
   subjectId: string | null;
   /** Localised on the server. */
@@ -136,6 +143,11 @@ export type TAiProjectSettings = {
   canEditSettings: boolean;
   /** Present only right after a change that skipped something. */
   warnings?: TAiProjectWarning[];
+  /**
+   * The room came without its block (the list answers none): the rooms are
+   * unknown until the project is read on its own.
+   */
+  partial?: true;
 };
 
 /** The room security flags a project reads, plus `Leave`, which the client derives. */
@@ -255,10 +267,6 @@ export type TAiProjectsQuery = {
   filterValue?: string;
   sortBy?: TAiProjectsSortBy;
   sortOrder?: "ascending" | "descending";
-  /** Keeps the projects the caller holds this role in; `0` or omitted: any. */
-  role?: TAiProjectAccess;
-  hasInstructions?: boolean;
-  hasKnowledge?: boolean;
   /** Keeps the projects this user or group is in, as `files/rooms` reads it; `excludeSubject` inverts it. */
   subjectId?: string;
   excludeSubject?: boolean;
@@ -268,8 +276,6 @@ export type TAiProjectsQuery = {
   tags?: string[];
   /** Keeps the projects without tags. */
   withoutTags?: boolean;
-  /** Keeps the projects that link this room, as an Instructions or a Knowledge room. */
-  linkedRoomId?: number;
   startIndex?: number;
   count?: number;
 };
@@ -323,8 +329,8 @@ const toLogo = (logo: Partial<TAiProjectLogo> | null | undefined): TAiProjectLog
 /**
  * A project as the page reads it, from the room the Files API answers:
  * the logo colour with `#`, `Leave` derived (rooms have no such flag: anyone
- * in the project but its owner may leave) and an empty settings block while
- * the room comes without one.
+ * in the project but its owner may leave) and, while the room comes without
+ * its settings block, an empty one marked `partial`.
  */
 export const toAiProject = (folder: TAiProjectRoomDto): TAiProject => {
   const security = folder.security ?? {};
@@ -369,6 +375,7 @@ export const toAiProject = (folder: TAiProjectRoomDto): TAiProject => {
       knowledgeRooms: (settings?.knowledgeRooms ?? []).map(toSource),
       canEditSettings: settings?.canEditSettings ?? !!security.EditRoom,
       ...(settings?.warnings?.length ? { warnings: settings.warnings } : {}),
+      ...(settings ? {} : { partial: true as const }),
     },
   };
 };

@@ -60,6 +60,8 @@ Most of the client work is already on `feature/new-ai-concept`. Tasks marked `[x
 - [x] 4.9 Make a Member the room's Read (`access` 2) everywhere a project names its roles (`AiProjectAccess`, `getAccessOptions`, `getDefaultAccessUser`, the Contacts role options, both mocks) and drop Duplicate from the project menu, store, security shape and specs, as `FileSecurity` refuses it for a project; verify with `useProjectContextMenu.test.tsx`, `AiProjectsStore.test.ts` and `projects.test.ts`
 
 - [x] 4.10 Remove the in-process AI projects mock from ASC.AI.Chat (controller, storage, config flag, README section, the chat-context and Files helper fallbacks) now that the .NET room type and CRUD exist; verify with the Node unit tests
+- [x] 4.11 Compose the client contract over the .NET linked-rooms routes in ASC.AI.Chat (`storage/aiProjectRooms.ts`): the `aiProject` block on get / create / update, room lists of the body as link / unlink diffs with `roomUnavailable` warnings, `modelNotStored` for a chosen model, `skills` and `knowledge` from the Files API, the chat context from the project room and the portal's Chat assignment; the list stays without the block.
+- [x] 4.12 Client: mark a project from the list as `aiProject.partial` and read it on its own in `AiProjectsStore.openProject` before the chat opens; drop the `role` / `hasInstructions` / `hasKnowledge` / `linkedRoomId` query fields .NET does not read; the MSW list answers without the block.
 
 ## 5. Inside a project
 
@@ -86,7 +88,8 @@ Most of the client work is already on `feature/new-ai-concept`. Tasks marked `[x
 
 These come from the specs but are owned by `../server` C#; they are listed so the client and Node tasks above are not mistaken for the whole job.
 
-- Implement the rest of `ai/projects` per `ai-projects-api`: the `aiProject` block in the DTO and the create/update body, `skills`, `knowledge`, `chat-context` and the Viewer grants on linked rooms (the room type, the list and the CRUD landed on 2026-10-30).
+- Store a model per project (`aiProject.profileId`, three states on update) and serve it in the DTO and the chat context; until then Node answers `profile: null` and a `modelNotStored` warning (the room type, the list, the CRUD and the linked rooms `projects/{id}/rooms` landed on 2026-10-30).
+- Grant Viewer on the linked rooms to every member (on invite, accepted link, owner change and link) and report a `grantSkipped` warning.
 - Make Instructions and Knowledge rooms flat (refuse folder create, copy and move) and limit Instructions rooms to `.md` on upload, create, copy and move, with a user-facing message.
 - Drop `FileShare.Editing` from `AvailableRoomAccesses[KnowledgeRoom]`, with a migration of existing Editing shares to Read.
 - Refuse linking a Knowledge room while vectorization is disabled, in the .NET validation.

@@ -250,10 +250,12 @@ export const AI_PROJECT_WITH_SOURCES = AI_PROJECTS[0];
 /** The project without a linked room: its source cards are hidden. */
 export const AI_PROJECT_WITHOUT_SOURCES = AI_PROJECTS[2];
 
+// The list answers the rooms without their `aiProject` block, as the
+// service does: the page reads a project on its own when it opens it.
 const listResponse = (projects: AiProjectMock[]) => ({
   response: {
     files: [],
-    folders: projects,
+    folders: projects.map(({ aiProject: _aiProject, ...room }) => room),
     current: {
       id: AI_PROJECTS_ROOT_ID,
       parentId: 0,
@@ -297,7 +299,6 @@ export const aiProjectsHandler = (
     ({ request }) => {
       const params = new URL(request.url).searchParams;
       const filterValue = params.get("filterValue")?.trim().toLowerCase();
-      const linkedRoomId = params.get("linkedRoomId");
       const tagsParam = params.get("tags");
       const tags = tagsParam ? (JSON.parse(tagsParam) as string[]) : [];
       const withoutTags = params.get("withoutTags") === "true";
@@ -308,14 +309,6 @@ export const aiProjectsHandler = (
             project.title.toLowerCase().includes(filterValue),
           )
         : projects;
-      if (linkedRoomId) {
-        list = list.filter((project) =>
-          [
-            ...project.aiProject.instructionsRooms,
-            ...project.aiProject.knowledgeRooms,
-          ].some((room) => String(room.id) === linkedRoomId),
-        );
-      }
       if (tags.length > 0) {
         list = list.filter((project) => project.tags.some((tag) => tags.includes(tag)));
       }

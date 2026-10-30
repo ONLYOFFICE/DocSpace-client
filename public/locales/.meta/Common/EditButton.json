@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2026-10-29T13:57:47.595Z",
+  "updated_at": "2026-10-30T14:51:05.393Z",
   "comment": {
     "text": "This is a button label. It allows users to edit settings, such as auto-payments or submission configurations.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/PauseSubmissionsDialog/index.tsx",
-      "line_number": 105,
+      "line_number": 102,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"pause-submissions-dialog_edit\"\n key=\"EditButton\"\n label={t(\"Common:EditButton\")}\n size={ButtonSize.normal}\n primary\n onClick={handleEdit}\n isLoading={isLoading}\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 524,
+      "line_number": 521,
       "context": "const createFooter = (\n <>\n <Button\n key=\"OKButton\"\n label={isEdit ? t(\"Common:EditButton\") : t(\"Webhooks:Generate\")}\n size={ButtonSize.normal}\n primary\n onClick={onGenerate}\n scale\n isDisabled={isRequestRunning || editIsDisabled || generateIsDisabled}",
       "module": "/packages/client"
     },

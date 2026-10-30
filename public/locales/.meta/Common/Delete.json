@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2026-10-29T14:13:10.394Z",
+  "updated_at": "2026-10-30T14:51:05.190Z",
   "comment": {
     "text": "This is a button label or tooltip text. It allows users to remove a selected item, such as a chat or an image.",
     "is_auto": true,
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 200,
+      "line_number": 199,
       "context": "};\n }, [onKeyUp]);\n \n const getAccessButtonLabel = () => {\n if (isTemplate) {\n return t(\"Common:Delete\");\n }\n \n if (isRoomDelete || isAIAgent) {\n return t(\"Common:DeletePermanently\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteGroupDialog/index.js",
-      "line_number": 105,
+      "line_number": 104,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"group-modal_delete\"\n key=\"Delete\"\n label={t(\"Common:Delete\")}\n size=\"normal\"\n primary\n scale\n onClick={onDeleteAction}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
@@ -61,13 +61,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/index.tsx",
-      "line_number": 302,
+      "line_number": 301,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"OKBtn\"\n label={t(\"Common:Delete\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onDeleteProfileEver}\n isLoading={isRequestRunning}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteVersionDialog/index.tsx",
-      "line_number": 104,
+      "line_number": 103,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-version-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:Delete\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onDelete}\n testId=\"delete_version_dialog_submit\"",
       "module": "/packages/client"
     },
@@ -109,7 +109,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/sub-components/modalDialogDelete.js",
-      "line_number": 64,
+      "line_number": 55,
       "context": "<ModalDialog.Body>{t(\"Settings:DeleteThemeNotice\")}</ModalDialog.Body>\n <ModalDialog.Footer>\n <div className={styles.footerContent}>\n <Button\n className={`delete ${styles.buttonModal}`}\n label={t(\"Common:Delete\")}\n onClick={onClickDelete}\n primary\n size=\"normal\"\n testId=\"portal_settings_modal_dialog_delete_button\"\n />",
       "module": "/packages/client"
     },
@@ -121,7 +121,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/DeleteApiKeyDialog/index.tsx",
-      "line_number": 79,
+      "line_number": 76,
       "context": "<Text>{t(\"Settings:DeleteSecretKeyDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={t(\"Common:Delete\")}\n size={ButtonSize.normal}\n primary\n onClick={onDelete}\n scale\n isLoading={isRequestRunning}",
       "module": "/packages/client"
     },
@@ -163,25 +163,25 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 516,
+      "line_number": 517,
       "context": "},\n {\n id: \"delete-group\",\n key: \"delete-group\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Delete\"),\n title: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => setDeleteGroupDialogVisible(true),\n disabled: !this.hasGroupsToRemove,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 516,
+      "line_number": 517,
       "context": "},\n {\n id: \"delete-group\",\n key: \"delete-group\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Delete\"),\n title: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => setDeleteGroupDialogVisible(true),\n disabled: !this.hasGroupsToRemove,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 516,
+      "line_number": 517,
       "context": "},\n {\n id: \"delete-group\",\n key: \"delete-group\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Delete\"),\n title: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => setDeleteGroupDialogVisible(true),\n disabled: !this.hasGroupsToRemove,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 516,
+      "line_number": 517,
       "context": "},\n {\n id: \"delete-group\",\n key: \"delete-group\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Delete\"),\n title: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => setDeleteGroupDialogVisible(true),\n disabled: !this.hasGroupsToRemove,\n },",
       "module": "/packages/client"
     },

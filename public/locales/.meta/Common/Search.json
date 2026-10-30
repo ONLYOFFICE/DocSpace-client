@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2026-10-27T19:13:18.379Z",
+  "updated_at": "2026-10-30T14:51:05.674Z",
   "comment": {
     "text": "This is a placeholder text for a search input field, prompting the user to type their search query.",
     "is_auto": true,
@@ -55,8 +55,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/TemplateList.tsx",
-      "line_number": 126,
-      "context": "<div className={styles.templateList}>\n <div className={styles.templateSearch}>\n <SearchInput\n size={InputSize.base}\n value={search}\n placeholder={t(\"Common:Search\")}\n onChange={setSearch}\n onClearSearch={() => setSearch(\"\")}\n scale\n dataTestId=\"metadata_template_search\"\n />",
+      "line_number": 136,
+      "context": "<div className={styles.templateList}>\n <div className={styles.templateSearch}>\n <SearchInput\n size={InputSize.base}\n value={search}\n placeholder={t(\"Common:Search\")}\n onChange={changeSearch}\n onClearSearch={() => setSearch(\"\")}\n scale\n dataTestId=\"metadata_template_search\"\n />",
       "module": "/packages/client"
     },
     {

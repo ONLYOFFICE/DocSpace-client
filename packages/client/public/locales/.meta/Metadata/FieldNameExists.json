@@ -3,7 +3,7 @@
   "content": "A field with this name already exists",
   "content_en_sha1_hash": "467875a29e4c0cf4506147a1453cb19e3ce1fdc8",
   "created_at": "2026-10-21T10:17:41.272Z",
-  "updated_at": "2026-10-27T19:13:18.721Z",
+  "updated_at": "2026-10-30T14:51:05.833Z",
   "comment": {
     "text": "Validation error under the field name input when the template or item already has a field with the same name.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
-      "line_number": 104,
+      "line_number": 105,
       "context": "save().finally(() => setIsDeleteConfirmVisible(false));\n \n const getNameError = () => {\n if (!fieldForm) return \"\";\n if (isFieldNameTaken(draft.fields, fieldForm))\n return t(\"Metadata:FieldNameExists\");\n if (isNameFreedOnSave(original, draft, fieldForm))\n return t(\"Metadata:FieldNameFreedOnSave\");\n \n return \"\";\n };",
       "module": "/packages/client"
     }

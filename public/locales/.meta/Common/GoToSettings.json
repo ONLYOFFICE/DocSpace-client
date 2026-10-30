@@ -3,7 +3,7 @@
   "content": "Go to Settings",
   "content_en_sha1_hash": "afc288b1ffb91b961cd8fa6fbe17bd6255268ca9",
   "created_at": "2025-11-03T12:10:26.886Z",
-  "updated_at": "2026-10-27T19:13:17.987Z",
+  "updated_at": "2026-10-30T14:51:05.435Z",
   "comment": {
     "text": "This text is a button label that, when clicked, navigates the user to the application's settings page.",
     "is_auto": true,
@@ -33,6 +33,12 @@
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 487,
       "context": "disabled: false,\n };\n \n // const goToServices = {\n //   type: \"button\",\n //   title: t(\"Common:GoToSettings\"),\n //   key: \"go-to-services\",\n //   onClick: actions.onGoToServices,\n // } as const;\n \n const goToAIProviderSettings = {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
+      "line_number": 158,
+      "context": "description={\n isAdmin\n ? t(\"Metadata:AINoModelChoose\")\n : t(\"Metadata:AINoModelContactAdmin\")\n }\n buttonLabel={t(\"Common:GoToSettings\")}\n onClick={isAdmin ? openAISettings(\"model-assignment\") : undefined}\n dataTestId=\"metadata_ai_no_model_notice\"\n buttonTestId=\"metadata_ai_choose_model_button\"\n />\n );",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Add field",
   "content_en_sha1_hash": "039c63152c673e12b39763a4f120a082303ea7c4",
   "created_at": "2026-10-21T10:17:41.249Z",
-  "updated_at": "2026-10-27T14:49:15.589Z",
+  "updated_at": "2026-10-30T14:51:05.835Z",
   "comment": {
     "text": "Button label that adds a new field: to a metadata template in the portal settings, or a custom field on an item in the info panel; also title of the panel for a new custom field. Imperative verb.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
-      "line_number": 132,
+      "line_number": 136,
       "context": "if (canSave && !templateNameError && !isSaving) onSave();\n };\n \n const getTitle = () => {\n if (fieldForm)\n return isNewField ? t(\"Metadata:AddField\") : t(\"Metadata:EditField\");\n \n return template ? t(\"Files:EditTemplate\") : t(\"Metadata:NewTemplate\");\n };\n \n return (",
       "module": "/packages/client"
     }

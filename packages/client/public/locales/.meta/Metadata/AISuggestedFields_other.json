@@ -3,7 +3,7 @@
   "content": "AI generated {{count}} fields. Review the values before saving.",
   "content_en_sha1_hash": "a1b35b60da059d18483006ccf4912ca9b25df7ee",
   "created_at": "2026-10-27T14:48:36.382Z",
-  "updated_at": "2026-10-27T19:13:18.309Z",
+  "updated_at": "2026-10-30T14:51:05.632Z",
   "comment": {
     "text": "Plural summary at the top of the review step of the Generate metadata side panel after AI generated custom fields; {{count}} is the number of fields.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/sub-components/ReviewNotes.tsx",
-      "line_number": 67,
+      "line_number": 68,
       "context": ": t(\"Metadata:AIFilledFields_other\", { count });\n }\n \n return count === 1\n ? t(\"Metadata:AISuggestedFields_one\", { count })\n : t(\"Metadata:AISuggestedFields_other\", { count });\n };\n \n return (\n <div className={styles.notes} data-testid=\"metadata_ai_review_notes\">\n <Text",
       "module": "/packages/client"
     }

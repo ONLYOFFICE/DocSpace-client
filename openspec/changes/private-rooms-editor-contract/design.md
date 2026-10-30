@@ -609,6 +609,50 @@ the configuration the doceditor hands the editor component and the
   name ("New document (1)"); the name came back on the next listing.
   Not caused by this change; worth a look at the filename cache.
 
+### Run of 2026-10-30, session end (task 6.5)
+
+Read from the local stack after the phase A check, with Document Server
+10.0.2.5: the proxy log of the portal (every `filehandler.ashx?action=track`
+POST), the request log of the editors container (every `/command` the
+portal sends and every editor WebSocket with its duration), the Files
+service log (request lines only, the tracker itself logs nothing at the
+default level) and `GET files/file/{id}` for the editing flag. The
+Document Server tables were not read. Times in UTC.
+
+- **Open.** The `openedit` of document 7 at 12:49:10 made the portal send
+  `info` and the Document Server answer with one track callback; the
+  editor's WebSocket at 12:50:46 brought two more callbacks (status 1,
+  user connected). The form (file 40) behaved the same at 12:50:48 and
+  12:51:25.
+- **Last editor leaves, first session.** The WebSocket of file 7 ended at
+  12:52:22 with no change made. No closing callback followed (neither
+  status 2 nor 4). Instead the portal sent `info` for the file every 70
+  to 80 seconds (12:52:40, 12:53:41, 12:55:03, 12:56:13, 12:57:23,
+  12:58:43, 13:00:02) and each `info` produced a track callback, so the
+  file stayed "being edited" for eight minutes until the next open at
+  13:00:05 joined the same session.
+- **Last editor leaves, second session.** The WebSocket of 13:00:05 ended
+  at 13:07:31, again without a change. No callback for file 7 came after
+  13:00:06 and the portal sent no `info` for it until a single
+  `/command` at 13:10:31 whose answer was shorter than the others; at
+  13:13 the file reported `fileStatus` 0. The session therefore ended on
+  the Document Server side within three minutes, silently, and the
+  portal learnt it only from its own re-check.
+- **Session with pending changes.** File 43 (a spreadsheet with changes
+  from the run of 2026-10-29, saved last at 15:08 UTC that day) still
+  answered the portal's `info` with a callback every 70 to 80 seconds
+  through the whole observation, and reported `fileStatus` 1 at 13:13
+  UTC on 2026-10-30, with nobody holding it open: a held encrypted
+  session with changes keeps the file "being edited" indefinitely.
+- **What this means for D7.** The Document Server ends an encrypted
+  session on its own only when it holds no changes, and it announces
+  neither case; the portal's `info` re-check is the only signal, and a
+  file with pending changes can stay "being edited" for days. The
+  stable-base rule of D7 (serve the stable key and base while `info`
+  says the session lives) stands, and DS-14 (a closing callback, or the
+  session ended on save) goes to the Document Server team with these
+  times.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -733,6 +777,15 @@ the configuration the doceditor hands the editor component and the
    removes the replay-on-saved-base for every editor; DS-19 asks the
    presentation editor not to apply a change twice, or the Document Server
    to end the session on save.
+
+   Task 6.5, 2026-10-30 ("Run of 2026-10-30, session end"): the Document
+   Server sends no callback when the last editor leaves; a session without
+   changes disappears within minutes and one with changes is held for
+   days, so `info` stays the only way to tell, and a file can stay "being
+   edited" until a save or a reopen ends the session. The rule above
+   already assumes a held session; the backend of 6.2 must also accept
+   that the held state can last indefinitely and never promote the
+   version while `info` answers.
 
 8. **The document address of an encrypted file stays public.** The editor
    downloads it in the browser. `document.url` is built from the public portal

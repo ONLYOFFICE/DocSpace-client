@@ -63,7 +63,7 @@ import styles from "../Panel.module.scss";
 type TemplateListProps = {
   assigned: TEntryMetadataTemplate[];
   selected: TMetadataTemplate | null;
-  onSelect: (template: TMetadataTemplate) => void;
+  onSelect: (template: TMetadataTemplate | null) => void;
   onOpen: (template: TMetadataTemplate) => void;
 };
 
@@ -117,6 +117,16 @@ const TemplateList = ({
 
   const foundTemplates = filterTemplatesByName(templates, search);
 
+  const changeSearch = (value: string) => {
+    setSearch(value);
+
+    const isSelectedFound = filterTemplatesByName(templates, value).some(
+      ({ id }) => id === selected?.id,
+    );
+
+    if (selected && !isSelectedFound) onSelect(null);
+  };
+
   return (
     <div className={styles.templateList}>
       <div className={styles.templateSearch}>
@@ -124,7 +134,7 @@ const TemplateList = ({
           size={InputSize.base}
           value={search}
           placeholder={t("Common:Search")}
-          onChange={setSearch}
+          onChange={changeSearch}
           onClearSearch={() => setSearch("")}
           scale
           dataTestId="metadata_template_search"

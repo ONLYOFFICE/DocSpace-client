@@ -308,6 +308,12 @@
       position: absolute;
       inset: 0;
       z-index: 1;
+
+      // Inside: with a long title the icon sits at the edge of .linkOptions,
+      // whose overflow would clip a ring drawn outside it.
+      &:focus-visible {
+        outline-offset: -2px;
+      }
     }
   }
 

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Defines the `/api/2.0/ai/projects` contract the client consumes: what an AI project is on the server, who may do what, how requests are validated and which answers and errors the client can rely on. Served by ASC.AI.Chat (Node), which delegates the room to the .NET AI service (`internal/ai/projects`, list, create, get, update, delete and the linked-rooms routes `GET/POST/DELETE internal/ai/projects/{id}/rooms`) and composes the rest of the contract (the `aiProject` block, the `skills` and `knowledge` listings, the chat context) over those routes and the Files API.
+Defines the `/api/2.0/ai/projects` contract the client consumes: what an AI project is on the server, who may do what, how requests are validated and which answers and errors the client can rely on. Served by ASC.AI.Chat (Node), which delegates the room to the .NET AI service (`internal/ai/projects`, list, create, get, update, delete and the linked-rooms routes `GET/POST/DELETE internal/ai/projects/{id}/rooms`) and composes the rest of the contract (the `aiProject` block, the `knowledge` listing, the chat context) over those routes and the Files API; the `skills` listing is the .NET skills catalog (`GET internal/ai/projects/{id}/skills`) passed through.
 
 Like the agents API, `ai/projects` carries only what is specific to a project: the list with its filters, get, create, update, delete, and the `skills` and `knowledge` listings. Everything a project shares with a room (pin, mute, leave, owner change, logo removal, members, invitation links, resend, history) goes through the room routes (`files/rooms/{id}/...`, `files/owner`, `settings/notification/rooms`), which SHALL accept a room of type 12 wherever they accept the other room types, with the project rules below applied.
 
@@ -110,15 +110,15 @@ The .NET service SHALL serve the links as `GET internal/ai/projects/{id}/rooms` 
 - **THEN** the answer is 204 and the room is linked once
 
 ### Requirement: Linked room validation
-`roomIds` SHALL hold 1 to 200 ids. Every room being linked SHALL be an active Instructions or Knowledge room under the Rooms root that the caller can read; any other id (missing, archived, in Trash, of another type, unreadable) SHALL refuse the whole request with 400 naming the ids, linking nothing. A project SHALL link at most 100 rooms of each type; a request over the limit SHALL answer 400 and keep the existing links.
+`roomIds` SHALL hold 1 to 40 ids. Every room being linked SHALL be an active Instructions or Knowledge room under the AI rooms root that the caller can read; any other id (missing, in Trash, of another type, unreadable) SHALL refuse the whole request with 400 naming the ids, linking nothing. A project SHALL link at most 20 rooms of each type; a request over the limit SHALL answer 400 and keep the existing links.
 
 #### Scenario: Room of another type
 - **WHEN** `roomIds` names an Instructions room and an ordinary room
 - **THEN** the answer is 400 naming the ordinary room and neither is linked
 
 #### Scenario: Over the limit
-- **WHEN** a project links 100 Instructions rooms and one more is sent
-- **THEN** the answer is 400 and the 100 stay linked
+- **WHEN** a project links 20 Instructions rooms and one more is sent
+- **THEN** the answer is 400 and the 20 stay linked
 
 ### Requirement: Linked rooms in the create and update body
 The client SHALL send the linked rooms inside `aiProject` as `instructionsRoomIds` and `knowledgeRoomIds` (positive ids, duplicates dropped); the Node service SHALL take the block apart and never forward it. On create it SHALL link both lists right after the room is made; on update a list sent SHALL be brought about exactly (missing rooms linked, rooms left out unlinked, `[]` unlinks all of that kind) and a list absent or `null` SHALL keep its rooms.
@@ -253,11 +253,18 @@ Each listed project SHALL be a full room DTO (`tags`, `createdBy`, `updatedBy`, 
 - **THEN** the client reads `GET ai/projects/{id}` and the chat opens on the rooms that answer lists
 
 ### Requirement: Skills listing
-`GET ai/projects/{id}/skills` SHALL be composed by the Node service from `GET internal/ai/projects/{id}/rooms` and the Files API, with the caller's credentials: every linked Instructions room (sorted by title, as the server lists them) with its skills (id, name, description from the Markdown frontmatter of its root files, `GET files/rooms/{id}/ai`). A room whose files cannot be read SHALL come back with `available: false` and no skills, never 403.
+`GET ai/projects/{id}/skills` SHALL answer the .NET skills catalog read through the project (`GET internal/ai/projects/{id}/skills`): every linked Instructions room (id, title, logo; sorted by title) with its skills (the file id, the frontmatter `name` and `description`; sorted by file title). Reading the project SHALL be enough to read the skills of every linked room, so no room is reported unavailable; a caller who may not read the project SHALL get 403, a missing project 404.
 
-#### Scenario: Unreadable linked room
-- **WHEN** a member reads the skills of a project whose Instructions room they lost access to
-- **THEN** that room is listed with `available: false` and an empty skills list
+#### Scenario: Skills of a project
+- **WHEN** a Member reads the skills of a project with two linked Instructions rooms
+- **THEN** both rooms are listed with their skills, read through the project
+
+### Requirement: Skills of picked rooms
+The Node service SHALL read the skills of any other set of Instructions rooms (the composer's pickers, every chat round) from `GET internal/ai/rooms/skills?roomIds=…`, 1 to 20 rooms a call, with the caller's credentials: a room that does not exist, is not an Instructions room under the AI rooms root, or that the caller cannot read SHALL be left out of the answer. Node SHALL NOT parse frontmatter itself; it reads a skill's body only, as a file read with the caller's credentials.
+
+#### Scenario: Unreadable picked room
+- **WHEN** the composer's skills catalog read names a room the caller cannot read
+- **THEN** that room is absent from the answer and the round keeps the skills the widget sent for it
 
 ### Requirement: Knowledge listing
 `GET ai/projects/{id}/knowledge` SHALL be composed the same way: every linked Knowledge room with its files (`GET files/{roomId}`, files only, read in pages of 100 up to 1000, with `truncated` when there are more) and the room's `totalFiles`, `indexedFiles` and `failedFiles`. A room whose files cannot be read SHALL come back with `available: false` and no files, never 403.
@@ -281,7 +288,7 @@ A project SHALL take an uploaded logo the way a room does: the picture is upload
 - **THEN** the project is listed with the picture's sizes, then again with its colour and cover only
 
 ### Requirement: Chat context
-The Node service SHALL compose a project's chat context once per round and on thread creation, from `GET internal/ai/projects/{id}` (the caller's `access` as the role, `inRoom` as `canChat`), `GET internal/ai/projects/{id}/rooms` (the linked rooms, all readable by the caller) and the portal's Chat assignment (the effective model, available when it exists and can chat). It is not a client route.
+The Node service SHALL compose a project's chat context once per round and on thread creation, from `GET internal/ai/projects/{id}` (the caller's `access` as the role, `inRoom` as `canChat`), `GET internal/ai/projects/{id}/rooms` (the linked rooms, all readable by the caller), `GET internal/ai/projects/{id}/skills` (their skills) and the portal's Chat assignment (the effective model, available when it exists and can chat). It is not a client route.
 
 #### Scenario: Admin outside the project
 - **WHEN** a DocSpace admin who is not a member sends a message in the project

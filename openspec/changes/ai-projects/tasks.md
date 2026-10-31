@@ -119,6 +119,9 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - [x] 10.7 ASC.AI.Chat (Node): list the Instructions and Knowledge rooms for the composer pickers with `searchArea=AiHub` (`roomSkills.ts`); verify with the Node unit tests
 - [x] 10.8 ui-kit: the room selector asks for `searchArea=AiHub` when its type filter holds only Instructions or Knowledge rooms (the composer's room pickers and the project form), as it does for form rooms; verify with `useRoomsHelper.test.tsx`
 - [x] 10.9 Mocks, locales and E2E: the `@root` mock serves both roots, `aiSectionsHandlers` serves the AI rooms list and the AI room folders; the 67 `Common` keys of the AI feature have translator comments and are translated into every language; `ai-projects.spec.ts` / `ai-projects-access.spec.ts` cover both sections (14 cases, screenshots taken in Docker)
+- [x] 10.10 ASC.AI.Chat (Node): read skills from the .NET skills catalog (.NET `69e51f8e97`, `0ce97aa3dc`) instead of parsing the files: `getRoomsSkills` over `internal/ai/rooms/skills` (20 rooms a call) for the composer picker, the connected room and every round, `listProjectSkills` and the project round over `internal/ai/projects/{id}/skills`; the frontmatter parser removed; verify with the Node unit tests
+- [x] 10.11 Client: the skills listing without `available`; the project form's room selector refuses a 21st room of one type with a warning toast, stating the limit nowhere else (`AI_PROJECT_MAX_ROOMS_PER_TYPE`, `Common:AIProjectInstructionsRoomsLimit`, `Common:AIProjectKnowledgeRoomsLimit`)
+- [x] 10.12 ui-kit: `Selector` / `RoomSelector` `onSelectLimitReached` with `maxSelectedItems` — the rows past the limit keep their look and a tick past it calls the host; verify with `Selector.test.tsx`
 
 ## Workflow follow-up
 

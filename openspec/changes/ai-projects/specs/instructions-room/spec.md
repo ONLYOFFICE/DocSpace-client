@@ -18,7 +18,7 @@ An Instructions room SHALL be a room of type 10 (`FolderType.InstructionsRoom` 3
 - **THEN** only rooms of type 10 are listed
 
 ### Requirement: Markdown files only
-An Instructions room SHALL hold Markdown (`.md`) files only: no subfolders can be created or moved into it, and a file of any other format SHALL be refused on upload, creation, copy or move, in the UI and by the server. Every file in the room is a skill.
+An Instructions room SHALL hold Markdown (`.md`) files only: no subfolders can be created, copied, moved or uploaded into it, and a file of any other format SHALL be refused on upload, creation, copy or move, in the UI and by the server. Every file in the room is a skill.
 
 #### Scenario: Upload a non-Markdown file
 - **WHEN** a user drops a `.docx` file into an Instructions room
@@ -33,15 +33,29 @@ An Instructions room SHALL hold Markdown (`.md`) files only: no subfolders can b
 - **THEN** only a Markdown file can be created
 
 ### Requirement: Skills
-A skill SHALL be a Markdown file with YAML frontmatter `name` and `description`, followed by the instructions. The skill's name SHALL be the frontmatter `name`, or the file title without `.md` when there is none; the description SHALL be `""` when absent. The chat and the project views SHALL show the same name and description for a file.
+A skill SHALL be a Markdown file that starts with a YAML frontmatter block between two `---` lines, holding `name` and `description`, followed by the instructions. The server SHALL keep each skill's name and description in its skills catalog, in step with saves, moves and deletions, and the chat and the project views SHALL read them from that catalog, so both show the same name and description for a file.
 
 #### Scenario: Skill with frontmatter
 - **WHEN** the room holds `tone.md` starting with `name: tone` and `description: Write in the brand voice.`
 - **THEN** the skill is listed as "tone" with that description
 
+### Requirement: Skill validation
+The server SHALL check the frontmatter whenever a file is saved into the room (upload, create, edit, copy, move) and refuse an invalid file with a translated message: the block missing or not valid YAML; a `name` that is not 1 to 64 lowercase letters, digits and single inner hyphens; a `description` that is not 1 to 1024 characters or holds XML tags.
+
 #### Scenario: Skill without frontmatter
-- **WHEN** the room holds `glossary.md` with no frontmatter
-- **THEN** the skill is listed as "glossary" with an empty description
+- **WHEN** a user uploads `glossary.md` with no frontmatter
+- **THEN** the upload is refused with a message that the file must start with a frontmatter block holding `name` and `description`
+
+#### Scenario: Invalid name
+- **WHEN** a user saves a skill whose frontmatter `name` is `Brand Voice`
+- **THEN** the save is refused with a message describing the allowed name
+
+### Requirement: Skills limit
+A room SHALL hold at most 100 skills; a file past the limit SHALL be refused with a message naming the limit.
+
+#### Scenario: Room at the skills limit
+- **WHEN** a room holds 100 skills and a user uploads one more
+- **THEN** the upload is refused with a message that the room can hold at most 100 skills
 
 ### Requirement: Roles
 The room SHALL offer these roles: Room owner (the creator), Room manager, Content creator, Editor and Viewer. Groups and the invitation link SHALL be able to join as Content creator, Editor or Viewer, not as Room manager. A member joining through an AI project SHALL get Viewer.

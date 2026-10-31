@@ -87,7 +87,7 @@ Only the portal owner, DocSpace admins and room admins SHALL see the create cont
 - **THEN** the picker offers no Instructions, Knowledge or AI project type
 
 ### Requirement: Create a project
-"New project" in "AI Projects" SHALL open the project form directly: a required name of up to 170 characters, a logo (color and cover, or an uploaded image), tags, a chat profile (model, none meaning the portal default), any number of Instructions rooms and Knowledge rooms from room selectors limited to that type and to `searchArea=AiHub`. Save SHALL call `POST ai/projects`, show server warnings as toasts and open the project at `/ai-projects/{id}/filter?folder={id}`.
+"New project" in "AI Projects" SHALL open the project form directly: a required name of up to 170 characters, a logo (color and cover, or an uploaded image), tags, a chat profile (model, none meaning the portal default), Instructions rooms and Knowledge rooms from room selectors limited to that type and to `searchArea=AiHub`. Save SHALL call `POST ai/projects`, show server warnings as toasts and open the project at `/ai-projects/{id}/filter?folder={id}`.
 
 #### Scenario: Create with rooms
 - **WHEN** a room admin creates a project "Sales" with two Instructions rooms and one Knowledge room
@@ -96,6 +96,13 @@ Only the portal owner, DocSpace admins and room admins SHALL see the create cont
 #### Scenario: Missing name
 - **WHEN** the user submits the project form with an empty name
 - **THEN** the form stays open and marks the name as required
+
+### Requirement: Rooms limit in the project form
+The project form SHALL NOT state the limit of 20 rooms per type anywhere, and the room selector SHALL NOT grey out rooms at the limit. Ticking a room past the limit SHALL leave it unticked and show a warning toast naming the limit.
+
+#### Scenario: Rooms past the limit
+- **WHEN** 20 Instructions rooms are ticked in the selector and the user ticks one more
+- **THEN** the room stays unticked and a warning toast says a project can include up to 20 Instructions rooms
 
 ### Requirement: Edit a project
 "Edit" on an AI project (list menu, header menu, Info panel, intro) SHALL open the project form filled from `GET ai/projects/{id}`, with the owner shown, and save through `PUT ai/projects/{id}`. "Edit" on an Instructions or Knowledge room SHALL open the ordinary room edit dialog.

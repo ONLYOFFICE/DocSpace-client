@@ -398,15 +398,8 @@
   // its first cell holds the focus. The row is the caret too, so its caret
   // frame - the lines across all its cells - takes the accent colour.
   &:has([data-row-focus]:focus-visible) {
-    // The caret's own 1px frame in a close blue would barely tell focus from
-    // the caret: the frame turns the accent, and its top and bottom lines
-    // double to 2px with a line just outside each cell's border - outside,
-    // as the backgrounds inside a cell (its checkbox box) cover an inset one.
     :global(.table-container_cell) {
       border-color: var(--accent-main) !important;
-      box-shadow:
-        0 -1px 0 var(--accent-main),
-        0 1px 0 var(--accent-main);
     }
 
     :global(.table-container_file-name-cell),

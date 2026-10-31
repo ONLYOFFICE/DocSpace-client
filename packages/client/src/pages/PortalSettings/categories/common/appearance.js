@@ -427,9 +427,15 @@ const Appearance = (props) => {
 
   const onAddThemeKeyDown = (e) => activateOnButtonKey(e, onAddTheme);
 
-  // Custom themes have no names: each is told apart by its place among them.
-  const getCustomThemeLabel = (item) =>
-    `${t("Common:Custom")} ${appearanceTheme.filter((theme) => !theme.name).indexOf(item) + 1}`;
+  // A theme's name is an identifier ("light-blue"), and a custom theme has
+  // none: each swatch is named by its group, as the page heads them, and its
+  // place in it. A number after the word needs no inflection in any language.
+  const getThemeLabel = (item) => {
+    const isCustom = !item.name;
+    const group = appearanceTheme.filter((theme) => !theme.name === isCustom);
+    const label = isCustom ? t("Common:Custom") : t("Common:Standard");
+    return `${label} ${group.indexOf(item) + 1}`;
+  };
 
   const onClickEdit = () => {
     appearanceTheme.forEach((item) => {
@@ -716,7 +722,7 @@ const Appearance = (props) => {
                   data-testid={`appearance_standard_theme_${item.id}`}
                   role="button"
                   tabIndex={0}
-                  aria-label={item.name}
+                  aria-label={getThemeLabel(item)}
                   aria-pressed={selectThemeId === item.id}
                   onKeyDown={onColorSelectionKeyDown}
                 >
@@ -749,7 +755,7 @@ const Appearance = (props) => {
                     data-testid={`appearance_custom_theme_${item.id}`}
                     role="button"
                     tabIndex={0}
-                    aria-label={getCustomThemeLabel(item)}
+                    aria-label={getThemeLabel(item)}
                     aria-pressed={selectThemeId === item.id}
                     onKeyDown={onColorSelectionKeyDown}
                   >

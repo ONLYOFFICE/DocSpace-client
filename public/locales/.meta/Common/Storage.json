@@ -3,7 +3,7 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2026-10-27T11:03:20.759Z",
+  "updated_at": "2026-10-31T12:58:29.140Z",
   "comment": {
     "text": "This is a label or title referring to data storage. It appears in various contexts, such as displaying storage information for users or as part of a larger phrase like \"Storage and Quota.\"",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 306,
-      "context": "? this.isDefaultAIAgentsQuotaSet\n : this.isDefaultRoomsQuotaSet;\n \n return isDefaultQuotaSet && this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")\n : this.t(\"Common:Storage\");\n }\n \n return null;\n default:\n break;",
+      "line_number": 303,
+      "context": "case \"Storage\":\n if (\"usedSpace\" in this.item && this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&\n this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")\n : this.t(\"Common:Storage\");\n }\n \n return null;\n default:\n break;",
       "module": "/packages/client"
     },
     {
@@ -37,25 +37,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 785,
+      "line_number": 772,
       "context": "columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 785,
-      "context": "columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 785,
+      "line_number": 772,
       "context": "columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1731,
+      "line_number": 1607,
       "context": "};\n \n const sortByStorage = {\n id: \"sort-by_storage\",\n key: SortByFieldName.UsedSpace,\n label: t(\"Common:Storage\"),\n default: true,\n };\n \n commonOptions.push(name);",
       "module": "/packages/client"
     },

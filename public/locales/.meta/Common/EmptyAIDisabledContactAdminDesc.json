@@ -3,7 +3,7 @@
   "content": "Contact the Full admin to activate AI agents & tools and create agents with their own knowledge base, share them with your team, and let them run tasks across your apps.",
   "content_en_sha1_hash": "1f2ae48e55349fcf25511910d443e1b74b13b301",
   "created_at": "2026-10-22T16:09:00.737Z",
-  "updated_at": "2026-10-22T16:09:36.810Z",
+  "updated_at": "2026-10-31T12:58:28.846Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -11,15 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
-      "line_number": 112,
-      "context": "</>\n );\n } else {\n // saas user — same text as the empty AI agents view\n titleRoomNoAccess = t(\"Common:AIFeaturesNotActive\");\n descriptionRoomNoAccess = t(\"Common:EmptyAIDisabledContactAdminDesc\");\n }\n \n const goToSettings = (event) => {\n event?.preventDefault();",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 319,
-      "context": "{t(\"Common:EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n </>\n ))\n .with([true, false], () => t(\"Common:EmptyAIAgentsAIDisabledDescription\"))\n .otherwise(() => t(\"Common:EmptyAIDisabledContactAdminDesc\"));\n };\n \n const getAIAgentsAIEnabledDescription = (\n t: TTranslation,\n access: AccessType,",
+      "line_number": 295,
+      "context": "{t(\"Common:EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n </>\n ))\n .with([true, false], () => t(\"Common:EmptyAIAgentsAIDisabledDescription\"))\n .otherwise(() => t(\"Common:EmptyAIDisabledContactAdminDesc\"));\n };\n \n export const getRootDescription = (\n t: TTranslation,\n access: AccessType,",
       "module": "/packages/client"
     }
   ],

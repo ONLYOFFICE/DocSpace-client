@@ -1,0 +1,35 @@
+{
+  "key_path": "AIProjectManager",
+  "content": "Project manager",
+  "content_en_sha1_hash": "d30007bf2f399d99a8d9aaa2340f4d7446470742",
+  "created_at": "2026-10-31T12:56:51.923Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Name of a member role in an AI project, shown in role lists and the members panel; the counterpart of a room manager. Noun phrase.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
+      "line_number": 63,
+      "context": "access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n projectManager: {\n key: \"projectManager\",\n label: this.t(\"Common:AIProjectManager\"),\n tooltip: this.t(\"Common:UserMaxAvailableRoleWarning\"),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n projectMember: {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
+      "line_number": 199,
+      "context": "access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n projectManager: {\n key: \"projectManager\",\n label: t(\"Common:AIProjectManager\"),\n description: t(\"Common:AIProjectManagerDescription\"),\n tooltip: t(\"Common:UserMaxAvailableRoleWarning\"),\n color: globalColors.favoritesStatus,\n access: ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

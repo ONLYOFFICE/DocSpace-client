@@ -3,7 +3,7 @@
   "content": "Find a deleted form in Forms Trash and return the most relevant results. If this information is not provided, ask me for the search term and any useful filters such as owner, date, type, or status.",
   "content_en_sha1_hash": "3f06e7ea9037134941be092c9668e95f4996c622",
   "created_at": "2026-08-04T09:58:55.181Z",
-  "updated_at": "2026-08-05T17:20:17.044Z",
+  "updated_at": "2026-10-31T12:58:29.082Z",
   "comment": {
     "text": "Instructional prompt for the AI assistant that defines how to search for deleted forms in the Forms Trash and specifies which filters to request if details are missing.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 789,
+      "line_number": 729,
       "context": "prompt: t(\"AiSuggestions:FormsTrashWhatSDeletedPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTrashFindADeletedForm\"),\n prompt: t(\"AiSuggestions:FormsTrashFindADeletedFormPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTrashRestoreSelectedItems\"),\n prompt: t(\"AiSuggestions:FormsTrashRestoreSelectedItemsPrompt\"),",
       "module": "/packages/client"
     }

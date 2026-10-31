@@ -3,7 +3,7 @@
   "content": "Disconnect",
   "content_en_sha1_hash": "ed28e0686e1251ba046f582a3e9ec02470a5e78d",
   "created_at": "2025-05-19T21:30:44.562Z",
-  "updated_at": "2026-10-21T10:17:45.713Z",
+  "updated_at": "2026-10-31T12:58:29.004Z",
   "comment": {
     "text": "This is a button label. It appears in various contexts: to disconnect an AI agent from a server, to disconnect a user account, or to disconnect a third-party folder.",
     "is_auto": true,
@@ -18,9 +18,15 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 306,
+      "context": "// Only a chosen folder has a menu; an empty Context is its add button.\n const contextMenu: ContextMenuModel[] | undefined = folderContext\n ? [\n { key: \"change-folder\", label: t(\"Common:AIProjectChangeContext\"), onClick: () => setIsPickerVisible(true) },\n { key: \"disconnect\", label: t(\"Common:Disconnect\"), onClick: clearFolderContext },\n ]\n : undefined;\n \n // A kind with no available linked room has no card and no tab: the rooms\n // are linked in Edit project, and an empty card would only say so.",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 980,
-      "context": "},\n {\n id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : isAIAgent\n ? t(\"Common:DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom",
+      "line_number": 970,
+      "context": "},\n {\n id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? isFormSpace\n ? t(\"Common:DeleteFormSpace\")",
       "module": "/packages/client"
     },
     {

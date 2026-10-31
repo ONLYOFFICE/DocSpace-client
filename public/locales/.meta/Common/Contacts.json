@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2026-10-27T11:03:20.616Z",
+  "updated_at": "2026-10-31T12:58:28.942Z",
   "comment": {
     "text": "This is a header label for a people selector or invitation panel, identifying the section as \"Contacts\".",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 1078,
+      "line_number": 1083,
       "context": "withGuests={showGuestsTab}\n withHeader\n dataTestId=\"invite_panel_people_selector\"\n headerProps={{\n // Todo: Update groups empty screen texts when they are ready\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/client"
     },
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1384,
-      "context": "const subjectOptions = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: isTemplatesFolder ? t(\"TemplateOwner\") : t(\"Common:Contacts\"),\n isHeader: true,\n isLast: isAIAgentsFolder && !tags?.length,\n withMultiItems: true,\n },\n {",
+      "line_number": 1283,
+      "context": "const subjectOptions = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: isTemplatesFolder ? t(\"TemplateOwner\") : t(\"Common:Contacts\"),\n isHeader: true,\n withMultiItems: true,\n },\n {\n id: \"filter_author-me\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 888,
+      "line_number": 873,
       "context": "const accountsNavigationPath = React.useMemo(() => {\n if (isContactsInsideGroupPage) {\n return [\n {\n id: 0,\n title: t(\"Common:Contacts\"),\n isRoom: false,\n isRootRoom: true,\n },\n ];\n }",
       "module": "/packages/client"
     },
@@ -85,7 +85,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
-      "line_number": 567,
+      "line_number": 566,
       "context": "const accounts: TProfileActionType | null =\n !isNotPaidPeriod && !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n // The route constant has no leading slash; a relative href would\n // resolve against the current page on middle-click or \"Open link\n // in new tab\" (/rooms/shared/accounts/... -> 404).",
       "module": "/packages/client"
     },

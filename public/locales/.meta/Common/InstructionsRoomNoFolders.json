@@ -1,0 +1,29 @@
+{
+  "key_path": "InstructionsRoomNoFolders",
+  "content": "Folders cannot be added to an Instructions room: it holds Markdown files only.",
+  "content_en_sha1_hash": "89235657a989de49d143fbd296d3eebc9f489271",
+  "created_at": "2026-10-31T12:57:26.746Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Error toast when a folder is dropped or uploaded into an Instructions room, which holds Markdown files only.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/filesActionsStore/selection.helpers.ts",
+      "line_number": 227,
+      "context": "(f) => f.isEmptyDirectory || (f.path ?? \"\").replace(/^\\/+/, \"\").includes(\"/\"),\n );\n if (bringsFolder) {\n throw new Error(\n isInstructions\n ? t(\"Common:InstructionsRoomNoFolders\")\n : t(\"Common:KnowledgeRoomNoFolders\"),\n );\n }\n if (isInstructions && withoutHiddenFiles.some((f) => !f.name.toLowerCase().endsWith(\".md\"))) {\n throw new Error(t(\"Common:InstructionsRoomMarkdownOnly\"));",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

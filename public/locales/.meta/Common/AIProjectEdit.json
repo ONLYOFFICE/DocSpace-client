@@ -1,0 +1,35 @@
+{
+  "key_path": "AIProjectEdit",
+  "content": "Edit project",
+  "content_en_sha1_hash": "7cb145ffbdc72af9ccc109ec1d3328bfa468062f",
+  "created_at": "2026-10-31T12:56:51.422Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Button label that opens the project settings form, shown when the project's model is unavailable (in the project intro and the chat error box). Imperative verb phrase.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectIntro.tsx",
+      "line_number": 146,
+      "context": "</Text>\n {canEdit ? (\n <Button\n size={ButtonSize.small}\n primary\n label={t(\"Common:AIProjectEdit\")}\n onClick={() => aiProjectsStore.openEditDialog(project)}\n testId=\"ai-project-model-unavailable-edit\"\n />\n ) : null}\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/Shell.jsx",
+      "line_number": 942,
+      "context": "? t(\"Common:AIProjectModelUnavailableManager\")\n : t(\"Common:AIProjectModelUnavailableMember\"),\n action:\n canEdit && aiActiveProject\n ? {\n text: t(\"Common:AIProjectEdit\"),\n onClick: () => openEditAiProject(aiActiveProject),\n }\n : null,\n };\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

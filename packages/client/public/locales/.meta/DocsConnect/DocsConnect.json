@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-10-27T11:03:20.499Z",
+  "updated_at": "2026-10-31T12:58:28.799Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -181,7 +181,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 691,
+      "line_number": 684,
       "context": "{\n id: \"portal-settings_catalog-services-docs-connect\",\n key: \"10-3-4\",\n icon: \"\",\n link: \"docs-connect\",\n tKey: \"DocsConnect:DocsConnect\",\n },\n ],\n },\n ],\n },",
       "module": "/packages/client"
     }

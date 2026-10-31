@@ -3,7 +3,7 @@
   "content": "Model",
   "content_en_sha1_hash": "68c2cc7f0ceaa3e499ecb4db331feb4debbbcc23",
   "created_at": "2026-03-31T15:18:16.635Z",
-  "updated_at": "2026-09-25T10:58:53.269Z",
+  "updated_at": "2026-10-31T12:58:29.110Z",
   "comment": {
     "text": "This is a short label for a dropdown menu in the AI Agent settings, allowing users to select a specific AI model.",
     "is_auto": true,
@@ -12,9 +12,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Profile.tsx",
-      "line_number": 144,
-      "context": "return (\n <StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {t(\"Common:AIAgentModel\", { defaultValue: \"Model\" })}\n </Text>\n <Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n fontWeight={400}",
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
+      "line_number": 481,
+      "context": "isDisabled={isSaving}\n dataTestId=\"ai-project-tags-input\"\n />\n <div className={styles.block}>\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {`${t(\"Common:AIAgentModel\")}:`}\n </Text>\n <ComboBox\n options={profileOptions}\n selectedOption={selectedProfileOption}\n onSelect={(option) => setProfileId(option.key === \"default\" ? null : String(option.key))}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 296,
+      "context": "return this.t(\"Common:AccessLevel\");\n case \"externalDbTableName\":\n return this.t(\"Files:TableName\");\n \n case \"Model\":\n return this.t(\"Common:AIAgentModel\");\n \n case \"Storage\":\n if (\"usedSpace\" in this.item && this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&\n this.item.quotaLimit !== undefined",
       "module": "/packages/client"
     },
     {

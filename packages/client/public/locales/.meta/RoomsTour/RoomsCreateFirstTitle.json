@@ -3,7 +3,7 @@
   "content": "Now make it yours",
   "content_en_sha1_hash": "53971ce5983bffd660e85f87c0abb8f730a36b76",
   "created_at": "2026-08-06T14:20:52.335Z",
-  "updated_at": "2026-10-22T16:09:36.801Z",
+  "updated_at": "2026-10-31T12:58:28.875Z",
   "comment": {
     "text": "A title for a step in the Rooms onboarding tour, appearing when guiding users to create their first room.",
     "is_auto": true,
@@ -11,18 +11,6 @@
     "model": "gemma4:26b"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 322,
-      "context": "isStandIn && demoHooks\n ? emptyScreenAction\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n emptyScreenAction === \"create\"\n ? t(\"RoomsTour:RoomsCreateFirstTitle\")\n : t(\"AiAgentsTour:AgentSwitchOnTitle\"),\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStart\")\n : t(\"AiAgentsTour:AgentSwitchOn\"),\n callbacks,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 322,
-      "context": "isStandIn && demoHooks\n ? emptyScreenAction\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n emptyScreenAction === \"create\"\n ? t(\"RoomsTour:RoomsCreateFirstTitle\")\n : t(\"AiAgentsTour:AgentSwitchOnTitle\"),\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStart\")\n : t(\"AiAgentsTour:AgentSwitchOn\"),\n callbacks,",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
       "line_number": 312,

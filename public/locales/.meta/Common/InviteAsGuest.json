@@ -3,7 +3,7 @@
   "content": "invite as guest",
   "content_en_sha1_hash": "4af13b83671f74562036c77dedfbc2b8b7a372cd",
   "created_at": "2025-05-19T21:30:45.973Z",
-  "updated_at": "2026-08-14T14:58:32.736Z",
+  "updated_at": "2026-10-31T12:58:29.055Z",
   "comment": {
     "text": "This is a label for a button or link that allows a user to invite someone to a document or room with guest permissions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 608,
+      "line_number": 569,
       "context": "truncate\n fontSize=\"12px\"\n fontWeight={400}\n className={styles.emailListInviteAsGuest}\n >\n {t(\"Common:InviteAsGuest\")}\n </Text>\n </div>\n )}\n </div>{\" \"}\n <div className={styles.emailListAddButton}>",
       "module": "/packages/client"
     },

@@ -1,0 +1,29 @@
+{
+  "key_path": "AIProjectsEmptyDescription",
+  "content": "A project keeps a model, Instructions rooms and Knowledge bases together and shares that setup with the people you invite.",
+  "content_en_sha1_hash": "81a18b8a6960281d88b4b572339268d1c9509db9",
+  "created_at": "2026-10-31T12:56:52.426Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Description on the empty AI Projects screen for users who may create projects: what a project keeps and shares.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyAiRoomsContainer.tsx",
+      "line_number": 203,
+      "context": "title={\n canManage ? t(\"Common:AIProjectsEmpty\") : t(\"Common:AIProjectsEmptyUser\")\n }\n description={\n canManage\n ? t(\"Common:AIProjectsEmptyDescription\")\n : t(\"Common:AIProjectsEmptyUserDescription\")\n }\n options={options}\n />\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Member",
   "content_en_sha1_hash": "6853c98a6f4358bbfed1b3b9c81d308649299b0f",
   "created_at": "2025-05-19T21:30:46.439Z",
-  "updated_at": "2026-05-24T17:27:49.135Z",
+  "updated_at": "2026-10-31T12:58:29.172Z",
   "comment": {
     "text": "This is a label for a filter option or a toggle button. It refers to a user who is part of a group or organization.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
+      "line_number": 70,
+      "context": "access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n projectMember: {\n key: \"projectMember\",\n label: this.t(\"Common:Member\"),\n access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n collaborator: {\n key: \"collaborator\",",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 700,
@@ -22,6 +28,12 @@
       "line_number": 435,
       "context": ") : (\n <>\n <Label className=\"label\" text={t(\"RoomFilter\")} />\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Member\")}\n onChange={toggleMembers}\n isChecked={isUserFilterSet}\n dataTestId=\"member_toggle_button\"\n />\n {isUserFilterSet ? (",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
+      "line_number": 208,
+      "context": "access: ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,\n },\n projectMember: {\n key: \"projectMember\",\n label: t(\"Common:Member\"),\n description: t(\"Common:AIProjectMemberDescription\"),\n access: ShareAccessRights.ReadOnly,\n type: EmployeeType.Guest,\n },\n viewer: {",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

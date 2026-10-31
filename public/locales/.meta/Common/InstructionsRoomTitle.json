@@ -1,0 +1,29 @@
+{
+  "key_path": "InstructionsRoomTitle",
+  "content": "Instructions Room",
+  "content_en_sha1_hash": "fca05dd91fdae74f65aef8708988ff322d8790ec",
+  "created_at": "2026-10-31T12:57:26.813Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Name of the Instructions room type in the room creation picker and room info. Singular noun phrase, title case like other room type names.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
+      "line_number": 66,
+      "context": "case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n case RoomsTypePrivate:\n return t(\"Common:PrivateRoomTitle\");\n case RoomsType.InstructionsRoom:\n return t(\"Common:InstructionsRoomTitle\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:KnowledgeRoomTitle\");\n case RoomsType.AiProjectRoom:\n return t(\"Common:AIProjectRoomTitle\");\n default:",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

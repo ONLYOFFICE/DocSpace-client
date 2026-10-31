@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-10-22T16:09:36.807Z",
+  "updated_at": "2026-10-31T12:58:28.815Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 449,
+      "line_number": 476,
       "context": "// Active rooms listing), so the item points at the dedicated /forms route\n // scoped to that search area.\n if (roomsFolder && formsInstalled) {\n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n ...nav(searchAreaUrl(\"/forms/filter\", RoomSearchArea.Forms)),\n ...(formsFolder\n ? sectionBadge(panelFolderId(formsFolder), newCount(formsFolder))\n : {}),",
       "module": "/packages/client"
     },
@@ -49,32 +49,26 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 659,
-      "context": "sectionName: t(\"Common:Rooms\"),\n },\n forms: {\n link: actions.onGoToForms(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:Forms\"),\n },\n agents: {\n link: actions.onGoToAgents(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:AIAgents\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 659,
-      "context": "sectionName: t(\"Common:Rooms\"),\n },\n forms: {\n link: actions.onGoToForms(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:Forms\"),\n },\n agents: {\n link: actions.onGoToAgents(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:AIAgents\"),",
+      "line_number": 544,
+      "context": "sectionName: t(\"Common:Rooms\"),\n },\n forms: {\n link: actions.onGoToForms(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:Forms\"),\n },\n personal: {\n link: actions.onGoToPersonal(),\n icon: <PersonIcon />,\n sectionName: t(\"Common:Files\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 212,
-      "context": "*/\n export const getSectionAppName = (\n t: TTranslation,\n filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isAgentsSectionScope(filterFolderType)) return t(\"Common:AIAgents\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };",
+      "line_number": 195,
+      "context": "*/\n export const getSectionAppName = (\n t: TTranslation,\n filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 324,
+      "line_number": 308,
       "context": "}\n };\n \n const aiFormsItem: NavMenuItem = {\n id: AI_FORMS_ID,\n label: t(\"Common:Forms\"),\n icon: FormFileReactSvgUrl,\n onClick: handleAiFormsClick,\n children: aiFormsEnabled\n ? [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 122,
-      "context": "alwaysOn: false,\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n alwaysOn: false,\n },\n ...(aiServicesEnabled\n ? [",
+      "line_number": 115,
+      "context": "alwaysOn: false,\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n alwaysOn: false,\n },\n {\n id: \"ai-arbiter\",",
       "module": "/packages/client"
     },
     {
@@ -85,7 +79,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 227,
+      "line_number": 204,
       "context": "),\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n href: \"/forms/filter\",\n // A form set is a form-filling room, so it goes through the same\n // create-room dialog, opened on the FormRoom type.\n ...withInstallState(",
       "module": "/packages/client"
     },
@@ -97,19 +91,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/LocationCell.tsx",
-      "line_number": 130,
+      "line_number": 131,
       "context": "/>\n ) : (\n path.map((pathPart, i) => {\n const partTitle =\n i === 0 && isFormsSectionRoot\n ? t(\"Common:Forms\")\n : pathPart.title;\n \n return (\n <Text\n key={pathPart.id}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 785,
-      "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (getCategoryType(location) === CategoryType.Forms)\n return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");",
+      "line_number": 764,
+      "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (getCategoryType(location) === CategoryType.Forms)\n return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n // The AI roots are titled by the client, as the tree titles them.\n if (getCategoryType(location) === CategoryType.AiHub)\n return t(\"Common:AiRooms\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
-      "line_number": 88,
+      "line_number": 82,
       "context": "{\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,\n },\n {\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,\n },\n ];\n \n return options.filter((option) =>",
       "module": "/packages/client"
     },
@@ -133,7 +127,7 @@
     },
     {
       "file_path": "/packages/client/src/store/filesStore/fetch.helpers.ts",
-      "line_number": 310,
+      "line_number": 287,
       "context": "// root path part \"Rooms\". On the /forms route that crumb already\n // navigates to the Forms list (see onClickFolder -> moveToRoomsPage),\n // so it must be labelled Forms to match where it leads.\n const crumbTitle =\n isRootRoom && window.location.pathname.startsWith(\"/forms\")\n ? i18n.t(\"Common:Forms\")\n : title;\n \n let shared: boolean | undefined;\n let quotaLimit: number | undefined;\n let usedSpace: number | undefined;",
       "module": "/packages/client"
     },

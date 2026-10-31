@@ -3,7 +3,7 @@
   "content": "Disable quota for this agent",
   "content_en_sha1_hash": "fd5154101e66376cb087fa58af6438c76bdde902",
   "created_at": "2025-11-03T12:10:33.180Z",
-  "updated_at": "2026-08-17T17:23:21.679Z",
+  "updated_at": "2026-10-31T12:58:29.631Z",
   "comment": {
     "text": "Checkbox label. Disables the storage quota for a specific agent (user or group) within a room.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/RoomQuota/index.tsx",
-      "line_number": 85,
-      "context": "? t(\"StorageDescriptionFormSpace\")\n : t(\"StorageDescription\")\n }\n checkboxLabel={\n isAgent\n ? t(\"DisableRoomQuotaAgent\")\n : isFormSpace\n ? t(\"DisableRoomQuotaFormSpace\")\n : t(\"DisableRoomQuota\")\n }\n onSetQuotaBytesSize={onSetQuotaBytesSize}",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/room-quota/index.tsx",
       "line_number": 114,

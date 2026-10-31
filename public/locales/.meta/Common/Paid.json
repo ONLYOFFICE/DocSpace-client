@@ -3,7 +3,7 @@
   "content": "Paid",
   "content_en_sha1_hash": "dc9d4584a55464cd571719ee0066acb16d411f86",
   "created_at": "2025-05-19T21:30:47.223Z",
-  "updated_at": "2026-10-22T16:09:36.868Z",
+  "updated_at": "2026-10-31T12:58:29.030Z",
   "comment": {
     "text": "This is a short label indicating a paid status. It appears on a badge or as part of a user's status description.",
     "is_auto": true,
@@ -67,7 +67,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 385,
+      "line_number": 387,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n ) : null}\n </div>\n ) : null}",
       "module": "/packages/client"
     },
@@ -127,13 +127,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
-      "line_number": 91,
+      "line_number": 83,
       "context": "backgroundColor={\n isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n className=\"paid-badge\"\n isPaidBadge\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Statistics.js",
-      "line_number": 111,
+      "line_number": 110,
       "context": "backgroundColor={\n isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n className=\"paid-badge\"\n isPaidBadge\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },

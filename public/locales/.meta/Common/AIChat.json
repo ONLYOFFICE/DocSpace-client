@@ -3,7 +3,7 @@
   "content": "AI Chat",
   "content_en_sha1_hash": "81cefbaa610fdd5ac7a58a071fcea75d7e9af3d6",
   "created_at": "2025-11-25T11:53:02.411Z",
-  "updated_at": "2026-10-22T16:09:36.812Z",
+  "updated_at": "2026-10-31T12:58:28.839Z",
   "comment": {
     "text": "This is a label for the \"AI Chat\" feature, appearing as a noun within a sentence describing an empty knowledge base in an AI Room.",
     "is_auto": true,
@@ -19,32 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 130,
-      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 130,
-      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 130,
-      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 130,
-      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 130,
-      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
+      "line_number": 362,
+      "context": "// Opens the AI chat panel — the same action the quick-action tiles and the\n // dashboard use. Only offered where the chat is actually reachable\n // (`isAiChatAvailable` already covers guests and portals without AI).\n const openAiChat = {\n title: t(\"Common:AIChat\"),\n description: t(\"EmptyView:AIChatOptionDescription\"),\n icon: <CreateChatIcon />,\n key: \"open-ai-chat\",\n onClick: actions.onOpenAiChat,\n disabled: false,",
       "module": "/packages/client"
     },
     {
@@ -55,20 +31,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 197,
+      "line_number": 183,
       "context": "const aiChatItems = React.useMemo<QuickActionItem>(\n () => ({\n id: \"quick-ai-chat\",\n dataTestId: \"quick-ai-chat\",\n icon: <AIChatIcon />,\n label: t(\"Common:AIChat\"),\n onClick: openChat,\n }),\n [t, openChat],\n );",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Section/Tabs/AiRoomTabs/index.tsx",
-      "line_number": 152,
-      "context": "};\n \n const items: TTabItem[] = [\n {\n id: \"chat\",\n name: t(\"AIChat\"),\n content: null,\n },\n {\n id: \"knowledge\",\n name: t(\"Knowledge\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/View/index.tsx",
-      "line_number": 549,
-      "context": "ns=\"Common\"\n i18nKey=\"AgentInViewModeWarning\"\n components={{\n strong: <strong />,\n }}\n values={{ aiChat: t(\"Common:AIChat\") }}\n />,\n );\n }\n }, [\n selectedFolderStore.isInsideResultStorage,",
       "module": "/packages/client"
     },
     {

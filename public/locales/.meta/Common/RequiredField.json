@@ -3,7 +3,7 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2026-10-27T11:03:20.630Z",
+  "updated_at": "2026-10-31T12:58:28.959Z",
   "comment": {
     "text": "Error text. This message appears when a required input field is left empty or invalid, indicating that the user must provide information to proceed.",
     "is_auto": true,
@@ -36,12 +36,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 463,
-      "context": "isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"\n />",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
       "line_number": 486,
       "context": "onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_room_input\"\n />",
@@ -54,6 +48,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
+      "line_number": 465,
+      "context": "onChange={(e) => {\n setTitle(e.target.value);\n setIsValidTitle(true);\n }}\n isValidTitle={isValidTitle}\n errorMessage={t(\"Common:RequiredField\")}\n isAutoFocussed\n isDisabled={isSaving}\n dataTestId=\"ai-project-title\"\n />\n </div>",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/CustomFieldRow.tsx",
       "line_number": 83,
       "context": "return \"\";\n };\n \n const nameError = getNameError();\n const valueError =\n isValueRequired && !draft.value.trim() ? t(\"Common:RequiredField\") : \"\";\n \n const valueInput = (\n <TextInput\n type={InputType.text}\n value={draft.value}",
@@ -63,12 +63,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/ExternalDbModal/ExternalDbField.utils.ts",
       "line_number": 69,
       "context": "export const getFieldValidationRules = (\n field: ConsumerProp,\n t: (key: string) => string,\n ) => {\n const rules: Record<string, unknown> = {\n required: isFieldRequired(field) ? t(\"Common:RequiredField\") : false,\n };\n \n return rules;\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/CreateEditAgentStore.ts",
-      "line_number": 346,
-      "context": "const { tags, title, icon, logo, prompt, profileId, quota } = agentParams;\n \n // The agent is bound to a chat-lib profile (profileId), which is\n // mandatory before we create.\n if (!profileId) {\n toastr.error(t(\"Common:RequiredField\"));\n return;\n }\n \n const quotaLimit = isDefaultAIAgentsQuotaSet ? quota : null;",
       "module": "/packages/client"
     },
     {
@@ -109,13 +103,13 @@
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 587,
+      "line_number": 589,
       "context": "const onChangeLdapLoginCheckbox = () =>\n setIsLdapLoginChecked(!isLdapLoginChecked);\n \n const errorMessage = () => {\n if (!password.trim()) {\n return t(\"Common:RequiredField\");\n }\n if (emailFromInvitation) {\n return errorText || t(\"Common:RequiredField\");\n }\n };",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 587,
+      "line_number": 589,
       "context": "const onChangeLdapLoginCheckbox = () =>\n setIsLdapLoginChecked(!isLdapLoginChecked);\n \n const errorMessage = () => {\n if (!password.trim()) {\n return t(\"Common:RequiredField\");\n }\n if (emailFromInvitation) {\n return errorText || t(\"Common:RequiredField\");\n }\n };",
       "module": "/packages/login"
     },

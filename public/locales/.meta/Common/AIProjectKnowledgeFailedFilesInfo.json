@@ -1,0 +1,29 @@
+{
+  "key_path": "AIProjectKnowledgeFailedFilesInfo",
+  "content": "The AI chat does not see those files. Open the room to retry their vectorization.",
+  "content_en_sha1_hash": "36fce068633618a86d066de2aa63203f6eea3391",
+  "created_at": "2026-10-31T12:56:51.749Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Tooltip text under the failed-files title in an AI project's Knowledge card: the chat cannot see those files and the user can retry in the room.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 388,
+      "context": "trailing={\n failedFiles > 0 ? (\n <FailedVectorizationBadge\n className={styles.roomBadge}\n title={t(\"Common:AIProjectKnowledgeFailedFiles\")}\n info={t(\"Common:AIProjectKnowledgeFailedFilesInfo\")}\n dataTestId={`ai-project-room-warning-${room.id}`}\n />\n ) : null\n }\n >",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

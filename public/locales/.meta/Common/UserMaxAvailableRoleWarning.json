@@ -3,7 +3,7 @@
   "content": "Guests and Users cannot be assigned as Room managers. Only Room and Full admins are suitable for the specified role.",
   "content_en_sha1_hash": "47c8fbce17ebb60c641f9b5ca8ea9e3d68ea8820",
   "created_at": "2026-08-13T14:37:13.133Z",
-  "updated_at": "2026-10-22T16:09:36.873Z",
+  "updated_at": "2026-10-31T12:58:29.059Z",
   "comment": {
     "text": "Tooltip or warning text in the Invite Panel and Members list explaining that only Admins can be assigned the Room Manager role.",
     "is_auto": true,
@@ -13,14 +13,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/utils/index.js",
-      "line_number": 90,
-      "context": "item.access = freeRole.access;\n item.warning = item.isGroup\n ? t(\"Common:GroupMaxAvailableRoleWarning\", {\n roleName: freeRole.label,\n })\n : t(\"Common:UserMaxAvailableRoleWarning\");\n return item;\n };\n \n export const makeViewerRole = (item, t, viewerRole) => {\n if (!viewerRole) return item;",
+      "line_number": 80,
+      "context": "item.access = freeRole.access;\n item.warning = item.isGroup\n ? t(\"Common:GroupMaxAvailableRoleWarning\", {\n roleName: freeRole.label,\n })\n : t(\"Common:UserMaxAvailableRoleWarning\");\n return item;\n };\n \n export const fixAccess = (item, t, roomType) => {\n const topFreeRole = getTopFreeRole(t, roomType);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
       "line_number": 57,
-      "context": "type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",\n label: this.t(\"Common:RoomManager\"),\n tooltip: this.t(\"Common:UserMaxAvailableRoleWarning\"),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n agentAdmin: {\n key: \"agentAdmin\",",
+      "context": "type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",\n label: this.t(\"Common:RoomManager\"),\n tooltip: this.t(\"Common:UserMaxAvailableRoleWarning\"),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n projectManager: {\n key: \"projectManager\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
+      "line_number": 57,
+      "context": "type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",\n label: this.t(\"Common:RoomManager\"),\n tooltip: this.t(\"Common:UserMaxAvailableRoleWarning\"),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n projectManager: {\n key: \"projectManager\",",
       "module": "/packages/client"
     },
     {
@@ -34,6 +40,12 @@
       "line_number": 137,
       "context": "item.access = (freeRole as { access: number }).access;\n item.warning = item.isGroup\n ? t(\"Common:GroupMaxAvailableRoleWarning\", {\n roleName: (freeRole as { label: string }).label,\n })\n : t(\"Common:UserMaxAvailableRoleWarning\");\n return item;\n };\n \n export const makeViewerRole = <T extends InviteItemBase>(\n item: T,",
       "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
+      "line_number": 135,
+      "context": "},\n roomManager: {\n key: \"roomManager\",\n label: t(\"Common:RoomManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"Common:UserMaxAvailableRoleWarning\"),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,\n },",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",

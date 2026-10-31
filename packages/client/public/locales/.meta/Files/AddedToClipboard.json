@@ -3,7 +3,7 @@
   "content": "Items added to clipboard",
   "content_en_sha1_hash": "ec9189ec885c2481ccbf1eaee77e1a3ada301a5f",
   "created_at": "2025-05-19T21:30:55.207Z",
-  "updated_at": "2026-07-07T08:59:21.923Z",
+  "updated_at": "2026-10-31T12:58:29.421Z",
   "comment": {
     "text": "Toast message indicating that selected items have been copied or cut to the clipboard. It appears briefly after a copy or cut action. The number of items is appended to this text.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/HotkeyStore.ts",
-      "line_number": 744,
+      "line_number": 753,
       "context": "if (!canCopy || (isCut && !canMove) || !selection.length) return;\n \n setHotkeysClipboard();\n this.hotkeysClipboardAction = isCut ? \"move\" : \"copy\";\n \n const copyText = `${t(\"AddedToClipboard\")}: ${selection.length}`;\n toastr.success(copyText);\n };\n \n moveFilesFromClipboard = (t: TTranslation) => {\n const fileIds: (number | string)[] = [];",
       "module": "/packages/client"
     }

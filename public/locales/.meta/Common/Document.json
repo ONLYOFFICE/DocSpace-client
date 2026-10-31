@@ -3,7 +3,7 @@
   "content": "Document",
   "content_en_sha1_hash": "e214b8a29923056887b7edf6635d90dcbb2abe88",
   "created_at": "2025-05-19T21:30:44.571Z",
-  "updated_at": "2026-10-22T16:09:36.798Z",
+  "updated_at": "2026-10-31T12:58:28.803Z",
   "comment": {
     "text": "This is a button label or option label for creating or converting a document. It appears in menus and dialogs where users can choose to create a new document or convert a file to a document format.",
     "is_auto": true,
@@ -12,14 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/AiAgentsTour/index.tsx",
-      "line_number": 476,
-      "context": "memberAccess: [ShareAccessRights.Editing, ShareAccessRights.ReadOnly],\n agentContents: {\n knowledgeTitle: t(\"Common:Knowledge\"),\n outputsTitle: t(\"Common:ResultStorage\"),\n files: buildDemoFileList({\n document: t(\"Common:Document\"),\n spreadsheet: t(\"Common:Spreadsheet\"),\n presentation: t(\"Common:Presentation\"),\n }),\n },\n }),",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 557,
+      "line_number": 449,
       "context": "const createNewDocumentDocx = {\n id: \"actions_new-document\",\n className: \"main-button_drop-down\",\n icon: ActionsDocumentsReactSvgUrl,\n label: t(\"Common:Document\"),\n onClick: onCreate,\n action: \"docx\",\n key: \"docx\",\n };",
       "module": "/packages/client"
     },
@@ -37,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 572,
+      "line_number": 470,
       "context": "key: \"create-form-form\",\n disabled: !security?.Create,\n model: [\n {\n key: \"create-Document\",\n label: t(\"Common:Document\"),\n icon: DocumentsReactSvgUrl,\n onClick: () => actions.onCreate(\"docx\"),\n },\n {\n key: \"create-spreadsheet\",",
       "module": "/packages/client"
     },
@@ -55,7 +49,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 209,
+      "line_number": 195,
       "context": "() => [\n {\n id: \"quick-docx\",\n dataTestId: \"quick-docx\",\n icon: <CreateDocumentIcon />,\n label: t(\"Common:Document\"),\n onClick: () => dispatchCreate(currentFolderId, \"docx\", t),\n },\n {\n id: \"quick-xlsx\",\n dataTestId: \"quick-xlsx\",",
       "module": "/packages/client"
     },
@@ -67,7 +61,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 255,
+      "line_number": 254,
       "context": "(parentRoomType === FolderType.FormRoom && isFolder);\n \n const createNewDoc: TContextOption = {\n id: \"personal_new-document\",\n key: \"new-document\",\n label: t(\"Common:Document\"),\n onClick: () => self.onCreate(\"docx\"),\n icon: ActionsDocumentsReactSvgUrl,\n };\n \n const createNewSpreadsheet = {",
       "module": "/packages/client"
     },

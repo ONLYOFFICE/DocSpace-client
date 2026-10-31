@@ -3,7 +3,7 @@
   "content": "MCP tools for this agent",
   "content_en_sha1_hash": "5139e21231ef9527baccd4263d543cc857371681",
   "created_at": "2026-08-31T18:23:15.882Z",
-  "updated_at": "2026-08-31T18:55:03.683Z",
+  "updated_at": "2026-10-31T12:58:29.625Z",
   "comment": {
     "text": "Section header in the agent creation dialog that introduces the available MCP tools for the specific agent or room.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "gemma4:26b"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/MCP.tsx",
-      "line_number": 73,
-      "context": "return (\n <StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {t(\"MCP\")}\n </Text>\n <Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n fontWeight={400}",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/MCP.tsx",
       "line_number": 101,

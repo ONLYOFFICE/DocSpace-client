@@ -3,7 +3,7 @@
   "content": "The link has expired.",
   "content_en_sha1_hash": "ef3fc8d140fe94ebbb33acc6c724acb2c51a4cb9",
   "created_at": "2025-05-19T21:30:46.180Z",
-  "updated_at": "2026-10-02T12:15:32.429Z",
+  "updated_at": "2026-10-31T12:58:29.049Z",
   "comment": {
     "text": "This is an error message displayed as a toast notification or on an error page, indicating that a shared link is no longer valid because its expiration date has passed.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 675,
+      "line_number": 691,
       "context": "const isExpired = isAfter(now(), parseToDateTime(expirationDate));\n const isLimit = link?.currentUseCount >= link?.maxUseCount;\n \n if (isExpired) {\n if (!showToast) return;\n return toastr.error(t(\"Common:LinkExpired\"));\n }\n if (isLimit) {\n if (!showToast) return;\n return toastr.error(t(\"Common:LinkNoLongerAvailable\"));\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
-      "line_number": 745,
+      "line_number": 750,
       "context": "item as TFile | TFolder | TRoom,\n );\n \n if (primaryLink) {\n if (primaryLink.sharedTo?.isExpired) {\n toastr.error(t(\"Common:LinkExpired\"));\n return;\n }\n \n if (\n self.filesSettingsStore.isLinkBlockedByAdmin(",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Create your AI agent",
   "content_en_sha1_hash": "ac4a2210b44fea676b4bb03d7b89d8b8faef2aaf",
   "created_at": "2026-05-25T18:26:20.753Z",
-  "updated_at": "2026-10-22T16:09:36.818Z",
+  "updated_at": "2026-10-31T12:58:29.614Z",
   "comment": {
     "text": "Title for an empty state view appearing when no AI agents are present, containing a variable `aiAgent` representing the AI agent term.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "gemma4:26b"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 274,
-      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\")\n : t(\"Common:EmptyAIAgentsTitle\");\n };\n \n const getAIAgentsAIDisabledTitle = (\n t: TTranslation,\n standalone: boolean,",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
       "line_number": 131,

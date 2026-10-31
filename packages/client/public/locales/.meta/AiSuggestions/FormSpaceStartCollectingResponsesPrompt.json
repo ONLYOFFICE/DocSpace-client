@@ -3,7 +3,7 @@
   "content": "Start collecting responses for the selected form after reviewing recipients, access, deadline, and form readiness. If this information is not provided, ask me for the form, recipients, access method, and response deadline.",
   "content_en_sha1_hash": "db7ae8af376870ca904a3853b880974752c3d8ba",
   "created_at": "2026-08-04T09:58:55.158Z",
-  "updated_at": "2026-08-05T17:37:46.958Z",
+  "updated_at": "2026-10-31T12:58:29.083Z",
   "comment": {
     "text": "AI prompt instruction used within FormSpace suggestions to guide the assistant on how to initiate response collection and what information to request if details like recipients or deadlines are missing.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 832,
+      "line_number": 772,
       "context": "prompt: t(\"AiSuggestions:FormSpaceOrganizeFormsPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceStartCollectingResponses\"),\n prompt: t(\"AiSuggestions:FormSpaceStartCollectingResponsesPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceChangeNameAndTags\"),\n prompt: t(\"AiSuggestions:FormSpaceChangeNameAndTagsPrompt\"),",
       "module": "/packages/client"
     }

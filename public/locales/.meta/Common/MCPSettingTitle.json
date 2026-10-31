@@ -3,7 +3,7 @@
   "content": "MCP servers",
   "content_en_sha1_hash": "8d9a304fd985232ade488e1913e41a3d9a502b09",
   "created_at": "2025-11-21T08:21:51.274Z",
-  "updated_at": "2026-09-08T08:44:10.030Z",
+  "updated_at": "2026-10-31T12:58:29.626Z",
   "comment": {
     "text": "This is a noun phrase used as a label for a setting or a section related to managing \"MCP servers.\" It appears in tooltips and as part of longer sentences in empty state messages.",
     "is_auto": true,
@@ -28,12 +28,6 @@
       "line_number": 252,
       "context": ") : (\n <EmptyScreenRoomSelectorDark />\n )\n }\n emptyScreenHeader={t(\"NoMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"NoMCPServersDescription\", {\n mcpServers: t(\"MCPSettingTitle\"),\n aiAgent: t(\"AIAgent\"),\n })}",
       "module": "@onlyoffice/apps-ui-kit"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/MCP.tsx",
-      "line_number": 83,
-      "context": "fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"MCPDescriptionServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n </Text>\n </div>\n <div className=\"ai-mcp-group\">\n <AddButton onClick={onClickAction} />",
-      "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/MCP.tsx",

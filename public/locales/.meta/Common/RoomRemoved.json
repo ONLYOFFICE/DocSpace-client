@@ -3,7 +3,7 @@
   "content": "Room removed",
   "content_en_sha1_hash": "650e240a06004bc3edb792413633404c35651205",
   "created_at": "2025-05-19T21:30:56.119Z",
-  "updated_at": "2026-10-22T16:09:36.857Z",
+  "updated_at": "2026-10-31T12:58:28.995Z",
   "comment": {
     "text": "This is a toast message confirming the successful removal of a single room.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 136,
-      "context": "const translations = {\n successRemoveRoom: isAIAgent\n ? t(\"Common:AgentRemoved\")\n : isFormSpace\n ? t(\"Common:SpaceRemoved\")\n : t(\"Common:RoomRemoved\"),\n successRemoveRooms: isAIAgent\n ? t(\"Common:AgentsRemoved\")\n : isFormSpace\n ? t(\"Common:SpacesRemoved\")\n : t(\"Common:RoomsRemoved\"),",
+      "line_number": 132,
+      "context": "const onDeleteRoom = async () => {\n const translations = {\n successRemoveRoom: isFormSpace\n ? t(\"Common:SpaceRemoved\")\n : t(\"Common:RoomRemoved\"),\n successRemoveRooms: isFormSpace\n ? t(\"Common:SpacesRemoved\")\n : t(\"Common:RoomsRemoved\"),\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
-      "line_number": 517,
+      "line_number": 516,
       "context": "let translations: Record<string, string>;\n \n if (isRoom) {\n translations = {\n successRemoveRoom: t(\"Common:RoomRemoved\"),\n successRemoveRooms: t(\"Common:RoomsRemoved\"),\n };\n \n deleteRoomsAction([selectedFolderId], translations).catch((err: unknown) =>\n toastr.error(err as string),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/delete.helpers.ts",
-      "line_number": 704,
+      "line_number": 694,
       "context": "selection.forEach((item) => {\n items.push(item.id);\n });\n \n const translations = {\n successRemoveRoom: t(\"Common:RoomRemoved\"),\n successRemoveRooms: t(\"Common:RoomsRemoved\"),\n };\n \n self.deleteItemAction(items, \"\", translations, null, null, true);\n };",
       "module": "/packages/client"
     },

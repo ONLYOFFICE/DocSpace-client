@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:49.307Z",
-  "updated_at": "2026-09-08T08:44:10.083Z",
+  "updated_at": "2026-10-31T12:58:29.196Z",
   "comment": {
     "text": "This is a tooltip for a checkbox or a combobox. It appears when hovering over a checkbox in a table row or a combobox in a table group menu, indicating that the element is used to select a file or files.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/FileNameCell/index.tsx",
-      "line_number": 109,
+      "line_number": 110,
       "context": "{!isIndexEditingMode ? (\n <Checkbox\n className=\"table-container_row-checkbox\"\n onChange={onChange}\n isChecked={checked}\n title={t(\"Common:TitleSelectFile\")}\n />\n ) : null}\n </div>\n </TableCell>\n )}",
       "module": "/packages/client"
     },
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-table-view/RoomsTableViewRow.tsx",
-      "line_number": 384,
+      "line_number": 389,
       "context": "</div>\n <Checkbox\n className=\"table-container_row-checkbox\"\n onChange={onCheckboxChange}\n isChecked={isChecked}\n title={t(\"Common:TitleSelectFile\")}\n />\n </div>\n <span className={styles.nameCellText} onClick={onNameClick}>\n {item.title}\n </span>",
       "module": "/packages/sdk"
     }

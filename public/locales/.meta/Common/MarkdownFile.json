@@ -1,0 +1,35 @@
+{
+  "key_path": "MarkdownFile",
+  "content": "Markdown file",
+  "content_en_sha1_hash": "92aab764c8d9d66b7003352e2ea2b1b4583ad0e6",
+  "created_at": "2026-10-31T12:57:36.428Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Menu item in the New menu of an Instructions room that creates a Markdown (.md) file. Noun phrase; Markdown is a format name, kept untranslated.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 586,
+      "context": ": uploadFilesOnly;\n const createNewMarkdown = {\n id: \"actions_new-markdown\",\n className: \"main-button_drop-down\",\n icon: ActionsDocumentsReactSvgUrl,\n label: t(\"Common:MarkdownFile\"),\n onClick: onCreate,\n action: \"md\",\n key: \"md\",\n };\n const sourceActions = isKnowledgeRoom ? [] : [createNewMarkdown];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 367,
+      "context": "const vectorizationEnabled =\n self.settingsStore.aiConfig?.vectorizationEnabled !== false;\n const createNewMarkdown: TContextOption = {\n id: \"personal_new-markdown\",\n key: \"new-markdown\",\n label: t(\"Common:MarkdownFile\"),\n icon: ActionsDocumentsReactSvgUrl,\n onClick: () => self.onCreate(\"md\", t),\n };\n // A Knowledge room takes files from the workspace (copied in) or from\n // the device, in the order the empty view offers them.",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

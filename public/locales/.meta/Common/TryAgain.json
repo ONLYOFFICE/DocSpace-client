@@ -3,7 +3,7 @@
   "content": "Try again",
   "content_en_sha1_hash": "042c862e4467d7d057cced262e6869dd75c22b7d",
   "created_at": "2025-10-27T16:14:24.460Z",
-  "updated_at": "2026-08-26T14:08:33.171Z",
+  "updated_at": "2026-10-31T12:58:29.490Z",
   "comment": {
     "text": "This is a button label that appears when an error occurs or a service is unavailable, allowing the user to retry the action or check availability.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/shared/components/failed-vectorization-badge/index.tsx",
-      "line_number": 85,
+      "line_number": 92,
       "context": "<Link\n type={LinkType.action}\n fontWeight={600}\n onClick={onRetryVectorization}\n >\n {t(\"Common:TryAgain\")}\n </Link>\n ) : null}\n </div>\n );\n };",
       "module": "/packages/shared"
     }

@@ -1,0 +1,29 @@
+{
+  "key_path": "AIProjectChangeOwnerInfo",
+  "content": "The new owner must be a {{productName}} admin or a room admin. Users and guests cannot own a project.",
+  "content_en_sha1_hash": "9d64f78154d4e5be8661b4bc57697444960d0a52",
+  "created_at": "2026-10-31T12:56:51.079Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Explanation under the title of the change project owner panel. {{productName}} is the product brand name (DocSpace), kept untranslated.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
+      "line_number": 210,
+      "context": "const headerLabel = isAIProject\n ? t(\"Common:AIProjectChangeOwner\")\n : t(\"Common:ChangeTheRoomOwner\");\n \n const infoText = isAIProject\n ? t(\"Common:AIProjectChangeOwnerInfo\", { productName: getBrandName(\"ProductName\") })\n : t(\"Common:PeopleSelectorInfo\");\n \n const footerCheckboxLabel = isAIProject\n ? t(\"Common:AIProjectLeave\")\n : isFormSpace",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

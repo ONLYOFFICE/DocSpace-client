@@ -3,7 +3,7 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2026-10-22T16:09:36.826Z",
+  "updated_at": "2026-10-31T12:58:28.867Z",
   "comment": {
     "text": "This is a dialog title for creating various entities like agents, groups, or rooms. It appears at the top of the respective creation dialogs.",
     "is_auto": true,
@@ -12,12 +12,6 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/CreateAgentDialog.tsx",
-      "line_number": 210,
-      "context": "<ModalDialog.Footer>\n <Button\n id=\"shared_create-agent-modal_submit\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n primary\n scale\n isDisabled={isAgentTitleChanged || isWrongTitle || !isProfileSelected}\n isLoading={isLoading}\n type=\"submit\"",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/CreateGroupDialog.tsx",
       "line_number": 194,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"create-group-modal_submit\"\n testId=\"create_edit_group_create_button\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onCreateGroup}\n isDisabled={!groupParams.groupName || !groupParams.groupManager}",
@@ -25,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 453,
+      "line_number": 459,
       "context": "{roomParams.type && !isTemplate ? (\n <ModalDialog.Footer>\n <Button\n id=\"shared_create-room-modal_submit\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n size=\"normal\"\n primary\n scale\n isDisabled={isRoomTitleChanged || isWrongTitle}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
@@ -48,6 +42,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
+      "line_number": 529,
+      "context": ") : null}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={project ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n type=\"submit\"\n isLoading={isSaving}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookDialog.js",
       "line_number": 278,
       "context": "<ModalDialog.Footer>\n <div className={styles.footer}>\n <Button\n id={isSettingsModal ? \"save-button\" : \"create-button\"}\n label={\n isSettingsModal ? t(\"Common:SaveButton\") : t(\"Common:Create\")\n }\n size=\"normal\"\n primary\n onClick={handleSubmitClick}\n isDisabled={isLoading}",
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 80,
+      "line_number": 78,
       "context": "navigate?: unknown,\n ): ContextMenuModel[] => {\n return [\n {\n key: \"create\",\n label: t(\"Common:Create\"),\n onClick: () => self.onCreateTemplate(navigate),\n },\n {\n key: \"template-info\",\n label: t(\"FormGallery:TemplateInfo\"),",
       "module": "/packages/client"
     },

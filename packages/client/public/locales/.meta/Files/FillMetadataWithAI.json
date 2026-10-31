@@ -3,7 +3,7 @@
   "content": "Fill metadata with AI",
   "content_en_sha1_hash": "0640633ec8ab22af1741dfba7b97434b9f0b1058",
   "created_at": "2026-10-21T10:17:42.475Z",
-  "updated_at": "2026-10-27T11:03:20.719Z",
+  "updated_at": "2026-10-31T12:58:29.063Z",
   "comment": {
     "text": "Context menu item for a file, folder or room, also title of the side panel it opens: AI reads the item's content and fills the empty fields of its metadata templates.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 514,
+      "line_number": 515,
       "context": "isSeparator: true,\n },\n {\n id: \"option_fill-metadata-ai\",\n key: \"fill-metadata-ai\",\n label: t(\"Files:FillMetadataWithAI\"),\n icon: AISvgUrl,\n onClick: () =>\n self.dialogsStore.setMetadataAIPanelData({\n visible: true,\n item: item as TMetadataSelection,",
       "module": "/packages/client"
     }

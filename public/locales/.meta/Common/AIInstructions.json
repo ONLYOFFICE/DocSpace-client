@@ -3,7 +3,7 @@
   "content": "AI instructions",
   "content_en_sha1_hash": "15ab6c511ee9ee505ddc164197e14a5eaa32dda3",
   "created_at": "2026-08-31T18:22:48.973Z",
-  "updated_at": "2026-08-31T19:36:56.140Z",
+  "updated_at": "2026-10-31T12:58:29.623Z",
   "comment": {
     "text": "Section label in the Create/Edit Agent dialog that identifies the field for entering instructions for the AI agent.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "gemma4:26b"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Instructions.tsx",
-      "line_number": 74,
-      "context": "return (\n <StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {t(\"AIInstructions\")}\n </Text>\n <Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n fontWeight={400}",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/Instructions.tsx",
       "line_number": 102,

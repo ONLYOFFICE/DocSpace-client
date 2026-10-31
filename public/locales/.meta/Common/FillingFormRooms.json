@@ -3,7 +3,7 @@
   "content": "Filling form",
   "content_en_sha1_hash": "7d83d7eca125edcf45bdc6c74e4efc3a8e517850",
   "created_at": "2025-05-19T21:30:45.351Z",
-  "updated_at": "2026-10-22T13:13:49.667Z",
+  "updated_at": "2026-10-31T12:58:29.088Z",
   "comment": {
     "text": "This is a label for a room type, indicating a space dedicated to filling out forms. It appears in filters and as a room title.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 61,
-      "context": "case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n \n case RoomsType.FillingFormsRoom:\n return t(\"Common:FillingFormRooms\");\n \n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRooms\");\n \n case RoomsType.ReviewRoom:",
+      "line_number": 58,
+      "context": "switch (room) {\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRooms\");\n \n case RoomsType.FillingFormsRoom:\n return t(\"Common:FillingFormRooms\");\n \n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRooms\");\n \n case RoomsType.ReviewRoom:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1267,
+      "line_number": 1159,
       "context": "case RoomsType.FillingFormsRoom:\n return {\n id: \"filter_type-filling-form\",\n key: RoomsType.FillingFormsRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:FillingFormRooms\"),\n };\n case RoomsType.EditingRoom:\n return {\n id: \"filter_type-collaboration\",\n key: RoomsType.EditingRoom,",
       "module": "/packages/client"
     }

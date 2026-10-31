@@ -3,7 +3,7 @@
   "content": "Check the answers for errors",
   "content_en_sha1_hash": "e9be15cc3f4cf9fb106d2cd5b596776478478ad4",
   "created_at": "2026-08-04T09:58:55.103Z",
-  "updated_at": "2026-09-14T19:16:02.591Z",
+  "updated_at": "2026-10-31T12:58:29.084Z",
   "comment": {
     "text": "Label for an AI suggestion option that triggers an automated review of answers for mistakes.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 863,
+      "line_number": 803,
       "context": "{\n name: t(\"AiSuggestions:AiFormBreakDownTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormBreakDownTheAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormCheckTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormCheckTheAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormCollectResponsesIntoATable\"),\n prompt: t(\"AiSuggestions:AiFormCollectResponsesIntoATablePrompt\"),",
       "module": "/packages/client"
     }

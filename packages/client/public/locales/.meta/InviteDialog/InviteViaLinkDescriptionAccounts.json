@@ -3,7 +3,7 @@
   "content": "Create a universal link for self-authorization in the workspace",
   "content_en_sha1_hash": "8cd87f738a4e05fd1e2947da8b637a248fd0a22b",
   "created_at": "2026-08-13T22:44:31.371Z",
-  "updated_at": "2026-08-14T15:27:30.722Z",
+  "updated_at": "2026-10-31T12:58:29.050Z",
   "comment": {
     "text": "Description text in the Invite Panel explaining the purpose of the universal link for workspace-wide access, used when no specific room is selected.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 184,
-      "context": "? getAgentAccesses()\n : filterPaidRoleOptions(accesses);\n \n const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\")\n : roomType === RoomsType.AIRoom\n ? allowInvitingGuests\n ? t(\"Common:InviteViaLinkDescriptionAgentGuest\")\n : t(\"Common:InviteViaLinkDescriptionAgentMembers\")\n : allowInvitingGuests",
+      "line_number": 168,
+      "context": "const filteredAccesses =\n roomType === -1 ? accesses : filterPaidRoleOptions(accesses);\n \n const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\")\n : roomType === RoomsType.AiProjectRoom\n ? allowInvitingGuests\n ? t(\"Common:InviteViaLinkDescriptionAIProjectGuest\")\n : t(\"Common:InviteViaLinkDescriptionAIProjectMembers\")\n : allowInvitingGuests",
       "module": "/packages/client"
     }
   ],

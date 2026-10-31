@@ -3,7 +3,7 @@
   "content": "Author",
   "content_en_sha1_hash": "5fda23d62015b99fb2a9f86b38bcdf2bdf7609c8",
   "created_at": "2025-05-19T21:30:55.305Z",
-  "updated_at": "2026-10-22T13:13:49.639Z",
+  "updated_at": "2026-10-31T12:58:29.027Z",
   "comment": {
     "text": "This is a short label indicating the author of a file or plugin. It appears in file details, plugin information, and as a column header in tables.",
     "is_auto": true,
@@ -19,55 +19,55 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 290,
+      "line_number": 287,
       "context": "return this.t(\"Common:Comments\");\n case \"Tags\":\n return this.t(\"Common:Tags\");\n \n case \"Author\":\n return this.t(\"Common:ByAuthor\");\n case \"Shared by\":\n return this.t(\"Common:SharedBy\");\n case \"Access level\":\n return this.t(\"Common:AccessLevel\");\n case \"externalDbTableName\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 264,
+      "line_number": 251,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"Common:ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 264,
+      "line_number": 251,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"Common:ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 264,
+      "line_number": 251,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"Common:ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 264,
+      "line_number": 251,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"Common:ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 264,
+      "line_number": 251,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"Common:ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 264,
+      "line_number": 251,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"Common:ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1089,
+      "line_number": 983,
       "context": "return [\n {\n key: FilterGroups.filterAuthor,\n group: FilterGroups.filterAuthor,\n label: t(\"Common:ByAuthor\"),\n isHeader: true,\n },\n {\n id: \"filter_author-user-button\",\n key: FilterKeys.user,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1089,
+      "line_number": 983,
       "context": "return [\n {\n key: FilterGroups.filterAuthor,\n group: FilterGroups.filterAuthor,\n label: t(\"Common:ByAuthor\"),\n isHeader: true,\n },\n {\n id: \"filter_author-user-button\",\n key: FilterKeys.user,",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-05-19T21:30:48.141Z",
-  "updated_at": "2026-10-22T16:09:36.854Z",
+  "updated_at": "2026-10-31T12:58:28.986Z",
   "comment": {
     "text": "This is a label for the \"Viewer\" role, indicating a user with read-only access. It appears in dialogs and panels where user roles or access rights are defined.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 77,
-      "context": "tooltip: this.t(\"Common:GuestAgentMaxAvailableRoleWarning\"),\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",\n label: this.t(\"Common:RoleViewer\"),\n access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",",
+      "line_number": 82,
+      "context": "access: ShareAccessRights.Collaborator,\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",\n label: this.t(\"Common:RoleViewer\"),\n access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",",
       "module": "/packages/client"
     },
     {
@@ -31,8 +31,8 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 199,
-      "context": "access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n viewer: {\n key: \"viewer\",\n label: t(\"Common:RoleViewer\"),\n description:\n roomType === RoomsType.AIRoom\n ? t(\"Common:RoleAIAgentViewerDescription\")\n : t(\"Common:RoleViewerDescription\"),\n access: ShareAccessRights.ReadOnly,",
+      "line_number": 215,
+      "context": "access: ShareAccessRights.ReadOnly,\n type: EmployeeType.Guest,\n },\n viewer: {\n key: \"viewer\",\n label: t(\"Common:RoleViewer\"),\n description:\n roomType === RoomsType.AIRoom\n ? t(\"Common:RoleAIAgentViewerDescription\")\n : t(\"Common:RoleViewerDescription\"),\n access: ShareAccessRights.ReadOnly,",
       "module": "/packages/shared"
     },
     {

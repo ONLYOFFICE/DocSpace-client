@@ -3,7 +3,7 @@
   "content": "Change name and tags",
   "content_en_sha1_hash": "d3660bb54a3a3e431d838f6d527609170ffcb5b6",
   "created_at": "2026-08-04T09:58:55.144Z",
-  "updated_at": "2026-08-05T17:49:31.407Z",
+  "updated_at": "2026-10-31T12:58:29.083Z",
   "comment": {
     "text": "Label for an AI suggestion option used to rename a FormSpace and update its tags.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 836,
+      "line_number": 776,
       "context": "name: t(\"AiSuggestions:FormSpaceStartCollectingResponses\"),\n prompt: t(\"AiSuggestions:FormSpaceStartCollectingResponsesPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceChangeNameAndTags\"),\n prompt: t(\"AiSuggestions:FormSpaceChangeNameAndTagsPrompt\"),\n requires: \"editRoom\",\n },\n ],",
       "module": "/packages/client"
     }

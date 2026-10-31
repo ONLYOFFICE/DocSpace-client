@@ -3,7 +3,7 @@
   "content": "Add a form from the gallery",
   "content_en_sha1_hash": "12f02a3843b929dab6c8db5a18fd7d248afb4c24",
   "created_at": "2026-08-04T09:58:55.142Z",
-  "updated_at": "2026-08-05T17:50:40.431Z",
+  "updated_at": "2026-10-31T12:58:29.083Z",
   "comment": {
     "text": "Label for an AI suggestion item in FormSpace that describes the action of creating a new form using templates from the gallery.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 821,
+      "line_number": 761,
       "context": "name: t(\"AiSuggestions:FormSpaceConvertAFileIntoAForm\"),\n prompt: t(\"AiSuggestions:FormSpaceConvertAFileIntoAFormPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceAddAFormFromTheGallery\"),\n prompt: t(\"AiSuggestions:FormSpaceAddAFormFromTheGalleryPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceOrganizeForms\"),",
       "module": "/packages/client"
     }

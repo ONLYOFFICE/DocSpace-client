@@ -1,0 +1,29 @@
+{
+  "key_path": "AIProjectDefaultName",
+  "content": "New AI project",
+  "content_en_sha1_hash": "94a2b5373976c552024b7e771dd29e1f63594b6d",
+  "created_at": "2026-10-31T12:56:51.389Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Default name filled into the form when the user saves the current AI chat setup as a new AI project.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiPresetsBridge/index.tsx",
+      "line_number": 198,
+      "context": "t={t}\n withForm\n visible\n title={t(\"Common:SaveAIProject\")}\n testIdPrefix=\"save_ai_preset\"\n startValue={t(\"Common:AIProjectDefaultName\")}\n onSave={onSave}\n onCancel={aiPresetsStore.closeSaveDialog}\n onClose={aiPresetsStore.closeSaveDialog}\n />\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

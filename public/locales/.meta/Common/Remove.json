@@ -3,7 +3,7 @@
   "content": "Remove",
   "content_en_sha1_hash": "e963907dac5cd5c017869b4c96c18021c9bd058b",
   "created_at": "2025-05-19T21:30:47.809Z",
-  "updated_at": "2026-10-22T16:09:36.857Z",
+  "updated_at": "2026-10-31T12:58:28.996Z",
   "comment": {
     "text": "This is a button label that confirms the removal of an item, such as a guest from a room, a user, or a subscription.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 212,
+      "line_number": 205,
       "context": "if (isRecycleBinFolder) return t(\"Common:DeleteForeverButton\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:Move\");\n };\n \n const getDialogTitle = () => {",
       "module": "/packages/client"
     },
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 116,
+      "line_number": 121,
       "context": "const deleteOption = canChangeUserRole\n ? [\n { key: \"s2\", isSeparator: true },\n {\n key: \"remove\",\n label: this.t(\"Common:Remove\"),\n access: ShareAccessRights.None,\n },\n ]\n : [];",
       "module": "/packages/client"
     },
@@ -115,7 +115,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 318,
+      "line_number": 351,
       "context": "key: \"s2\",\n isSeparator: true,\n },\n {\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ];\n \n return withRemove ? [...options, ...removeOption] : options;\n };",
       "module": "/packages/shared"
     },

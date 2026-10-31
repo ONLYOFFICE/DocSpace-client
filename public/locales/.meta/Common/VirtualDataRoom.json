@@ -3,7 +3,7 @@
   "content": "Virtual Data Room",
   "content_en_sha1_hash": "29f2e3affa77388673134388754b5295d908047b",
   "created_at": "2025-05-19T21:30:49.548Z",
-  "updated_at": "2026-10-23T12:28:45.522Z",
+  "updated_at": "2026-10-31T12:58:28.931Z",
   "comment": {
     "text": "This is a label for a type of room. It appears in various places, such as when displaying room types or filtering rooms.",
     "is_auto": true,
@@ -31,20 +31,20 @@
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 76,
-      "context": "case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n \n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n \n case RoomsType.FormRoom:\n return t(\"Common:FormRoom\");\n default:\n break;",
+      "line_number": 73,
+      "context": "case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n \n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n \n case RoomsType.FormRoom:\n return t(\"Common:FormRoom\");\n case RoomsType.InstructionsRoom:\n return t(\"Common:InstructionsRooms\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 251,
+      "line_number": 237,
       "context": "() => [\n {\n id: \"quick-vdr-room\",\n dataTestId: \"quick-vdr-room\",\n icon: <QuickVdrRoomIcon />,\n label: t(\"Common:VirtualDataRoom\"),\n onClick: () =>\n dispatchCreateRoom(currentFolderId, RoomsType.VirtualDataRoom),\n },\n {\n id: \"quick-collaboration-room\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1309,
-      "context": "case RoomsType.VirtualDataRoom:\n return {\n id: \"filter_type-virtual-data\",\n key: RoomsType.VirtualDataRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:VirtualDataRoom\"),\n };\n case RoomsType.AIRoom:\n return {\n id: \"filter_type-ai\",\n key: RoomsType.AIRoom,",
+      "line_number": 1201,
+      "context": "case RoomsType.VirtualDataRoom:\n return {\n id: \"filter_type-virtual-data\",\n key: RoomsType.VirtualDataRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:VirtualDataRoom\"),\n };\n case RoomsType.InstructionsRoom:\n return {\n id: \"filter_type-instructions\",\n key: RoomsType.InstructionsRoom,",
       "module": "/packages/client"
     },
     {

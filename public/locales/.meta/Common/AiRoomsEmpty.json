@@ -1,0 +1,29 @@
+{
+  "key_path": "AiRoomsEmpty",
+  "content": "No AI rooms yet",
+  "content_en_sha1_hash": "853b80e3d79f7d8e1d7904a9df07a0436ad52318",
+  "created_at": "2026-10-31T12:56:52.601Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Title of the empty screen of the AI rooms section for users who may create rooms.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyAiRoomsContainer.tsx",
+      "line_number": 214,
+      "context": "}\n \n return (\n <EmptyView\n icon={icon}\n title={canManage ? t(\"Common:AiRoomsEmpty\") : t(\"Common:AiRoomsEmptyUser\")}\n description={\n canManage\n ? t(\"Common:AiRoomsEmptyDescription\")\n : t(\"Common:AiRoomsEmptyUserDescription\")\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

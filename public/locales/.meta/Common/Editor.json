@@ -3,7 +3,7 @@
   "content": "Editor",
   "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
   "created_at": "2025-05-19T21:30:44.767Z",
-  "updated_at": "2026-10-22T16:09:36.899Z",
+  "updated_at": "2026-10-31T12:58:29.174Z",
   "comment": {
     "text": "This is a label for the \"Editor\" access right, indicating a user has full editing permissions. It appears in various contexts, such as user role selections and descriptions of document access levels.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 83,
+      "line_number": 88,
       "context": "access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",\n label: this.t(\"Common:Editor\"),\n access: ShareAccessRights.Editing,\n type: \"user\",\n },\n formFiller: {\n key: \"formFiller\",",
       "module": "/packages/client"
     },

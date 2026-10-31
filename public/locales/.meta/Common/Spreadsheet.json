@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2026-10-22T16:09:36.799Z",
+  "updated_at": "2026-10-31T12:58:28.804Z",
   "comment": {
     "text": "This is a button label or menu item for creating a new spreadsheet, or a label within a conversion dialog. It refers to the file type.",
     "is_auto": true,
@@ -12,14 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/AiAgentsTour/index.tsx",
-      "line_number": 477,
-      "context": "agentContents: {\n knowledgeTitle: t(\"Common:Knowledge\"),\n outputsTitle: t(\"Common:ResultStorage\"),\n files: buildDemoFileList({\n document: t(\"Common:Document\"),\n spreadsheet: t(\"Common:Spreadsheet\"),\n presentation: t(\"Common:Presentation\"),\n }),\n },\n }),\n [t, user],",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 567,
+      "line_number": 459,
       "context": "const createNewSpreadsheetXlsx = {\n id: \"actions_new-spreadsheet\",\n className: \"main-button_drop-down\",\n icon: SpreadsheetReactSvgUrl,\n label: t(\"Common:Spreadsheet\"),\n onClick: onCreate,\n action: \"xlsx\",\n key: \"xlsx\",\n };",
       "module": "/packages/client"
     },
@@ -37,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 578,
+      "line_number": 476,
       "context": "icon: DocumentsReactSvgUrl,\n onClick: () => actions.onCreate(\"docx\"),\n },\n {\n key: \"create-spreadsheet\",\n label: t(\"Common:Spreadsheet\"),\n icon: SpreadsheetReactSvgUrl,\n onClick: () => actions.onCreate(\"xlsx\"),\n },\n {\n key: \"create-presentation\",",
       "module": "/packages/client"
     },
@@ -55,7 +49,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 216,
+      "line_number": 202,
       "context": "},\n {\n id: \"quick-xlsx\",\n dataTestId: \"quick-xlsx\",\n icon: <CreateSpreadsheetIcon />,\n label: t(\"Common:Spreadsheet\"),\n onClick: () => dispatchCreate(currentFolderId, \"xlsx\", t),\n },\n {\n id: \"quick-pptx\",\n dataTestId: \"quick-pptx\",",
       "module": "/packages/client"
     },
@@ -67,7 +61,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 263,
+      "line_number": 262,
       "context": "};\n \n const createNewSpreadsheet = {\n id: \"personal_new-spreadsheet\",\n key: \"new-spreadsheet\",\n label: t(\"Common:Spreadsheet\"),\n onClick: () => self.onCreate(\"xlsx\"),\n icon: SpreadsheetReactSvgUrl,\n };\n \n const createNewPresentation = {",
       "module": "/packages/client"
     },

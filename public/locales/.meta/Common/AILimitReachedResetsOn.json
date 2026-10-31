@@ -3,7 +3,7 @@
   "content": "AI requests are paused until {{date}}. Raise the limit in the AI settings to continue now.",
   "content_en_sha1_hash": "3b3f1385a458c62f9a63c7ebaa7e088a438a4b9c",
   "created_at": "2026-10-23T12:27:54.771Z",
-  "updated_at": "2026-10-27T11:04:31.086Z",
+  "updated_at": "2026-10-31T12:58:28.791Z",
   "comment": {
     "text": "Description under the AI spending limit notice, shown to administrators; {{date}} is the localized date when the limit resets. A button below leads to the AI settings spending limits page.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 988,
+      "line_number": 960,
       "context": "const date = getCorrectDate(language, serviceLimit.until);\n \n return {\n title: t(\"Common:AILimitReached\"),\n description: isAdmin\n ? t(\"Common:AILimitReachedResetsOn\", { date })\n : t(\"Common:AILimitReachedContactAdminResetsOn\", { date }),\n action: isAdmin\n ? {\n text: t(\"Common:ChangeAILimit\"),\n onClick: () => navigate(\"/portal-settings/ai-settings/limits\"),",
       "module": "/packages/client"
     }

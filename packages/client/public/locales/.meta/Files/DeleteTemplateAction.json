@@ -3,7 +3,7 @@
   "content": "Delete template",
   "content_en_sha1_hash": "399bf72aa291de43b5c1c104b4f9d4aacf6ea977",
   "created_at": "2025-05-19T21:30:55.439Z",
-  "updated_at": "2026-10-23T12:28:45.544Z",
+  "updated_at": "2026-10-31T12:58:28.996Z",
   "comment": {
     "text": "This is a button label or part of a dialog title. It appears when a user is prompted to confirm the deletion of a template.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 225,
-      "context": "? t(\"Common:DeleteAIAgentsTitle\")\n : t(\"Common:DeleteAIAgentTitle\");\n }\n \n if (isTemplate) {\n return `${t(\"Files:DeleteTemplateAction\")}?`;\n }\n \n if (isRoomDelete) {\n if (selection.length > 1) return t(\"Common:DeleteRoomsTitle\");\n if (isFormSpace) return t(\"Common:DeleteFormSpaceTitle\");",
+      "line_number": 212,
+      "context": "return t(\"Common:Move\");\n };\n \n const getDialogTitle = () => {\n if (isTemplate) {\n return `${t(\"Files:DeleteTemplateAction\")}?`;\n }\n \n if (isRoomDelete) {\n if (selection.length > 1) return t(\"Common:DeleteRoomsTitle\");\n if (isFormSpace) return t(\"Common:DeleteFormSpaceTitle\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 984,
-      "context": "label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : isAIAgent\n ? t(\"Common:DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? isFormSpace\n ? t(\"Common:DeleteFormSpace\")\n : t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),",
+      "line_number": 972,
+      "context": "id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? isFormSpace\n ? t(\"Common:DeleteFormSpace\")\n : t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),",
       "module": "/packages/client"
     }
   ],

@@ -1,0 +1,29 @@
+{
+  "key_path": "AIProjectNotAvailable",
+  "content": "This AI project is no longer available",
+  "content_en_sha1_hash": "5a7dc35eaf467a86ee47b0c08a7f8a555ea9ae40",
+  "created_at": "2026-10-31T12:56:52.221Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Toast when an AI project picked in the chat's model menu was deleted or the user lost access to it.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/Shell.jsx",
+      "line_number": 893,
+      "context": "// applied to the open chat by AiPresetsBridge (the chat stores live below\n // AiAgentProviders). A project that is gone by now is only reported.\n const onProjectPick = useCallback(\n (preset) => {\n void requestPresetApply(preset).then((applied) => {\n if (!applied) toastr.info(t(\"Common:AIProjectNotAvailable\"));\n });\n },\n [requestPresetApply, t],\n );\n const profilePickerActions = useAiPresetsPickerActions(",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

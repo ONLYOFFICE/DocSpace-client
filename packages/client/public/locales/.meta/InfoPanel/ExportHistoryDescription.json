@@ -3,7 +3,7 @@
   "content": "Download activity as an .xlsx spreadsheet.",
   "content_en_sha1_hash": "9b536d2b3aadd27b6324f32201b6f6f66b376a4d",
   "created_at": "2026-08-05T16:31:56.231Z",
-  "updated_at": "2026-08-06T06:41:24.704Z",
+  "updated_at": "2026-10-31T12:58:29.153Z",
   "comment": {
     "text": "Description text for an export menu item explaining the file format of the downloaded activity history.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/Toolbar/sub-components/ExportMenu/ExportMenu.tsx",
-      "line_number": 138,
+      "line_number": 142,
       "context": "<Text\n className={styles.description}\n fontSize=\"13px\"\n lineHeight=\"20px\"\n >\n {t(\"InfoPanel:ExportHistoryDescription\")}\n </Text>\n </div>\n \n <RadioButtonGroup\n name=\"info_history_export_scope\"",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Metadata",
   "content_en_sha1_hash": "251edc0eb5a820646bda4e103f0f007fd55321f3",
   "created_at": "2026-10-21T10:17:32.507Z",
-  "updated_at": "2026-10-23T12:28:45.604Z",
+  "updated_at": "2026-10-31T12:58:29.187Z",
   "comment": {
     "text": "Noun: name of the Metadata tab in the info panel, heading of the metadata section in the files filter and of the metadata conditions panel. Metadata means structured fields (from templates) describing files, folders and rooms.",
     "is_auto": true,
@@ -25,14 +25,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1545,
-      "context": "showStorageInfo &&\n isDefaultRoomsQuotaSet &&\n filterOptions.push(...quotaFilter);\n \n if (withMetadataFilter) {\n addMetadataGroup(filterOptions, t(\"Common:SubmenuMetadata\"));\n }\n } else if (isAIAgentsFolder) {\n filterOptions.push(...subjectOptions);\n filterOptions.push(...ownerOptions);",
+      "line_number": 1444,
+      "context": "showStorageInfo &&\n isDefaultRoomsQuotaSet &&\n filterOptions.push(...quotaFilter);\n \n if (withMetadataFilter) {\n addMetadataGroup(filterOptions, t(\"Common:SubmenuMetadata\"));\n }\n } else {\n // The \"Forms\" section holds PDF forms only, so its Recent/Favorites\n // aggregates give the file-type filter nothing to narrow down.\n const withTypeOptions =",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1545,
-      "context": "showStorageInfo &&\n isDefaultRoomsQuotaSet &&\n filterOptions.push(...quotaFilter);\n \n if (withMetadataFilter) {\n addMetadataGroup(filterOptions, t(\"Common:SubmenuMetadata\"));\n }\n } else if (isAIAgentsFolder) {\n filterOptions.push(...subjectOptions);\n filterOptions.push(...ownerOptions);",
+      "line_number": 1444,
+      "context": "showStorageInfo &&\n isDefaultRoomsQuotaSet &&\n filterOptions.push(...quotaFilter);\n \n if (withMetadataFilter) {\n addMetadataGroup(filterOptions, t(\"Common:SubmenuMetadata\"));\n }\n } else {\n // The \"Forms\" section holds PDF forms only, so its Recent/Favorites\n // aggregates give the file-type filter nothing to narrow down.\n const withTypeOptions =",
       "module": "/packages/client"
     },
     {

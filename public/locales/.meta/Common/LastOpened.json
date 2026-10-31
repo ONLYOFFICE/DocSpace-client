@@ -3,7 +3,7 @@
   "content": "Last opened",
   "content_en_sha1_hash": "6674c9e55888c1169f005b2ea8c53555f625f330",
   "created_at": "2026-06-03T09:30:00.071Z",
-  "updated_at": "2026-06-03T09:32:21.472Z",
+  "updated_at": "2026-10-31T12:58:29.194Z",
   "comment": {
     "text": "Column header in a table view indicating the date and time a document was last accessed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 549,
+      "line_number": 536,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"LastOpenedRecent\",\n title: t(\"Common:LastOpened\"),\n enable: lastOpenedRecentColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },

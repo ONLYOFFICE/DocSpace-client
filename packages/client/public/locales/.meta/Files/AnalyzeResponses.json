@@ -3,7 +3,7 @@
   "content": "Analyze responses",
   "content_en_sha1_hash": "46e903d2491f229806f1d44900b64de628b52b4a",
   "created_at": "2026-05-08T13:10:42.862Z",
-  "updated_at": "2026-10-21T10:17:45.762Z",
+  "updated_at": "2026-10-31T12:58:29.213Z",
   "comment": {
     "text": "Button label that triggers the analysis of responses.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 502,
+      "line_number": 503,
       "context": "disabled: false,\n },\n {\n id: \"option_analyze_responses\",\n key: \"analyze-responses\",\n label: t(\"Files:AnalyzeResponses\"),\n icon: AISvgUrl,\n onClick: () => self.askAI(item, true),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }

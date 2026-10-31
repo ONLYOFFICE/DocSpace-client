@@ -1,0 +1,35 @@
+{
+  "key_path": "AIProjectModelUnavailableMember",
+  "content": "The model of this project is no longer available. Ask a Project manager to choose another model.",
+  "content_en_sha1_hash": "85f36bab9ea56f9d1dde99ee13c07217d1d8b5d3",
+  "created_at": "2026-10-31T12:56:52.135Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Error text in an AI project chat for regular members when the project's AI model was removed or disabled; tells them to ask a Project manager.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectIntro.tsx",
+      "line_number": 140,
+      "context": "<div className={styles.modelError} role=\"alert\" data-testid=\"ai-project-model-unavailable\">\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\">\n {t(\"Common:AIProjectModelUnavailableTitle\")}\n </Text>\n <Text fontSize=\"13px\" lineHeight=\"20px\" className={styles.description}>\n {canEdit ? t(\"Common:AIProjectModelUnavailableManager\") : t(\"Common:AIProjectModelUnavailableMember\")}\n </Text>\n {canEdit ? (\n <Button\n size={ButtonSize.small}\n primary",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/Shell.jsx",
+      "line_number": 938,
+      "context": "const canEdit = !!aiActiveProject?.security?.EditRoom;\n return {\n title: t(\"Common:AIProjectModelUnavailableTitle\"),\n description: canEdit\n ? t(\"Common:AIProjectModelUnavailableManager\")\n : t(\"Common:AIProjectModelUnavailableMember\"),\n action:\n canEdit && aiActiveProject\n ? {\n text: t(\"Common:AIProjectEdit\"),\n onClick: () => openEditAiProject(aiActiveProject),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

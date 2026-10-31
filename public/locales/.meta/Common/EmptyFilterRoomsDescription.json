@@ -3,7 +3,7 @@
   "content": "No room matches this filter. Try another or reset filter to view all rooms.",
   "content_en_sha1_hash": "903ae72970d5a0064d0416b48ff4bea5fe279cc3",
   "created_at": "2025-05-19T21:30:44.841Z",
-  "updated_at": "2026-08-14T14:58:32.638Z",
+  "updated_at": "2026-10-31T12:58:28.825Z",
   "comment": {
     "text": "This is an informational message displayed when no rooms match the applied filter criteria. It suggests trying a different filter or resetting it to see all rooms.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
-      "line_number": 88,
-      "context": "const location = useLocation();\n \n const descriptionText = isAIAgentsFolder\n ? t(\"Common:EmptyFilterAIAgentsDescription\")\n : isRooms\n ? t(\"Common:EmptyFilterRoomsDescription\")\n : t(\"Common:EmptyFilterFilesDescription\");\n \n const getIconURL = () => {\n if (isAIAgentsFolder) {\n return theme.isBase ? (",
+      "line_number": 79,
+      "context": "}) => {\n const navigate = useNavigate();\n const location = useLocation();\n \n const descriptionText = isRooms\n ? t(\"Common:EmptyFilterRoomsDescription\")\n : t(\"Common:EmptyFilterFilesDescription\");\n \n const getIconURL = () => {\n if (isRooms)\n return theme.isBase ? (",
       "module": "/packages/client"
     },
     {

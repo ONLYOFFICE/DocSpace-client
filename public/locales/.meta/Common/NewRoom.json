@@ -3,7 +3,7 @@
   "content": "New room",
   "content_en_sha1_hash": "747a74c7041456888174f7ee810ae8966dccf372",
   "created_at": "2025-05-19T21:30:46.782Z",
-  "updated_at": "2026-10-22T16:09:36.805Z",
+  "updated_at": "2026-10-31T12:58:28.810Z",
   "comment": {
     "text": "This is a button label or menu item for creating a new room. It appears in various contexts where a user can initiate the creation of a new collaborative space.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 840,
+      "line_number": 785,
       "context": "/>\n ) : isRoomsFolder ? (\n <Button\n className={classNames(styles.mainButton, \"create-room-button\")}\n id=\"rooms-shared_create-room-button\"\n label={t(\"Common:NewRoom\")}\n onClick={onCreateRoom}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled}\n size=\"small\"\n primary",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 840,
+      "line_number": 785,
       "context": "/>\n ) : isRoomsFolder ? (\n <Button\n className={classNames(styles.mainButton, \"create-room-button\")}\n id=\"rooms-shared_create-room-button\"\n label={t(\"Common:NewRoom\")}\n onClick={onCreateRoom}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled}\n size=\"small\"\n primary",
       "module": "/packages/client"
     },
@@ -48,38 +48,38 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyAiRoomsContainer.tsx",
+      "line_number": 186,
+      "context": "icon: <CreateRoomIcon />,\n onClick: onCreate,\n }\n : {\n key: \"create-ai-room\",\n title: t(\"Common:NewRoom\"),\n description: t(\"Common:AiRoomsCreateDescription\"),\n icon: <CreateRoomIcon />,\n onClick: onCreate,\n },\n ]",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/helpers/getSectionCreateButton.ts",
-      "line_number": 125,
-      "context": "if (!model || model.length === 0) return HIDDEN;\n \n return {\n showMainButton: true,\n mainButtonProps: {\n text: t(\"Common:NewRoom\"),\n isDropdown: false,\n model: [],\n onAction: () => onCreateRoom(),\n },\n };",
+      "line_number": 114,
+      "context": "if (!model || model.length === 0) return HIDDEN;\n \n return {\n showMainButton: true,\n mainButtonProps: {\n text: isAiProjectsFolder ? t(\"Common:NewAIProject\") : t(\"Common:NewRoom\"),\n isDropdown: false,\n model: [],\n onAction: () => onCreateRoom(),\n },\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 1052,
-      "context": "? WarningQuotaExceededUrl\n : undefined,\n actions: isFormsSection\n ? t(\"Common:CreateFormSet\")\n : isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Common:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n aiChat: t(\"Common:AIChatButton\"),\n }}",
+      "line_number": 1040,
+      "context": "actions: isFormsSection\n ? t(\"Common:CreateFormSet\")\n : isAiProjectsFolder\n ? t(\"Common:NewAIProject\")\n : isRoomsFolder || isAiHubFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Common:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n aiChat: t(\"Common:AIChatButton\"),\n }}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 444,
+      "line_number": 456,
       "context": "? isFlowsFolder\n ? []\n : [\n {\n key: \"new-room\",\n label: t(\"Common:NewRoom\"),\n onClick: self.onCreateRoom,\n icon: CatalogRoomsReactSvgUrl,\n },\n ]\n : isPrivacyFolder",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/CreateEditAgentStore.ts",
-      "line_number": 210,
-      "context": "const currTags = newParams.tags.map((p) => p.name).sort();\n const isTagsChanged = !isEqual(prevTags, currTags);\n \n const editAgentParams: TEditAgentData = {\n ...(isTitleChanged && {\n title: title || t(\"Common:NewRoom\"),\n }),\n \n ...(isTagsChanged && {\n tags,\n }),",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/store/CreateEditRoomStore.ts",
-      "line_number": 299,
+      "line_number": 296,
       "context": "}),\n ...(isSaveFormAsXLSXChanged && {\n saveFormAsXLSX,\n }),\n ...(isTitleChanged && {\n title: title || t(\"Common:NewRoom\"),\n }),\n ...(isDenyDownloadChanged && {\n denyDownload,\n }),\n ...(isIndexingChanged && {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/CreateEditRoomStore.ts",
-      "line_number": 299,
+      "line_number": 296,
       "context": "}),\n ...(isSaveFormAsXLSXChanged && {\n saveFormAsXLSX,\n }),\n ...(isTitleChanged && {\n title: title || t(\"Common:NewRoom\"),\n }),\n ...(isDenyDownloadChanged && {\n denyDownload,\n }),\n ...(isIndexingChanged && {",
       "module": "/packages/client"
     },

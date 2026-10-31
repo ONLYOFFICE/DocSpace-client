@@ -3,7 +3,7 @@
   "content": "Space removed",
   "content_en_sha1_hash": "2b5545b3471564ca676745393fe17824a2f7c8fb",
   "created_at": "2026-10-16T12:14:59.236Z",
-  "updated_at": "2026-10-16T12:17:13.826Z",
+  "updated_at": "2026-10-31T12:58:28.994Z",
   "comment": {
     "text": "Success toast shown after a single form space (a room of the Forms section) is deleted; short past-participle phrase. Plural counterpart: SpacesRemoved.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 135,
-      "context": "const onDeleteRoom = async () => {\n const translations = {\n successRemoveRoom: isAIAgent\n ? t(\"Common:AgentRemoved\")\n : isFormSpace\n ? t(\"Common:SpaceRemoved\")\n : t(\"Common:RoomRemoved\"),\n successRemoveRooms: isAIAgent\n ? t(\"Common:AgentsRemoved\")\n : isFormSpace\n ? t(\"Common:SpacesRemoved\")",
+      "line_number": 131,
+      "context": "};\n \n const onDeleteRoom = async () => {\n const translations = {\n successRemoveRoom: isFormSpace\n ? t(\"Common:SpaceRemoved\")\n : t(\"Common:RoomRemoved\"),\n successRemoveRooms: isFormSpace\n ? t(\"Common:SpacesRemoved\")\n : t(\"Common:RoomsRemoved\"),\n };",
       "module": "/packages/client"
     }
   ],

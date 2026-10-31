@@ -1,0 +1,35 @@
+{
+  "key_path": "AIProjectSources",
+  "content": "Sources",
+  "content_en_sha1_hash": "2eb56be3c2d93cdab0c52e677e3167dfddb30ac5",
+  "created_at": "2026-10-31T12:56:52.824Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Title of the sources column of an open AI project (its Instructions, Knowledge and Context cards). Plural noun.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 484,
+      "context": "};\n \n return (\n <>\n {compact ? (\n <div className={styles.compact} aria-label={t(\"Common:AIProjectSources\")} data-testid=\"ai-project-sources-strip\">\n <div onClick={onTabsClick}>\n <Tabs\n type={TabsTypes.Secondary}\n items={tabs}\n // An id no tab has selects none; an empty one would select the first.",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 484,
+      "context": "};\n \n return (\n <>\n {compact ? (\n <div className={styles.compact} aria-label={t(\"Common:AIProjectSources\")} data-testid=\"ai-project-sources-strip\">\n <div onClick={onTabsClick}>\n <Tabs\n type={TabsTypes.Secondary}\n items={tabs}\n // An id no tab has selects none; an empty one would select the first.",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

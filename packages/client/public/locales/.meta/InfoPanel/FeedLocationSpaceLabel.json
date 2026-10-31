@@ -3,7 +3,7 @@
   "content": "Space «{{folderTitle}}»",
   "content_en_sha1_hash": "771c3e0f3f476f48e696d8c32c08c2d2b05e0a58",
   "created_at": "2026-10-16T12:15:09.056Z",
-  "updated_at": "2026-10-16T12:17:13.826Z",
+  "updated_at": "2026-10-31T12:58:29.150Z",
   "comment": {
     "text": "Location label in a History entry of the Info panel, saying an item is in a form space (a room of the Forms section). {{folderTitle}} is the space name, kept in guillemets. Room counterpart: FeedLocationRoomLabel.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/MainTextFolderInfo.tsx",
-      "line_number": 101,
+      "line_number": 99,
       "context": "const isFromFolder = fromParentType === FolderType.DEFAULT;\n \n const roomLabel =\n parentType === FolderType.FormRoom\n ? t(\"FeedLocationSpaceLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });\n \n const destination = isFolder\n ? t(\"FeedLocationLabel\", {\n folderTitle: isReorderFolder ? title! : parentTitle,",
       "module": "/packages/client"
     }

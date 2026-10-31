@@ -3,7 +3,7 @@
   "content": "Cannot remove member while uploads are in progress ({{count}}). Wait for the batch to finish, then try again.",
   "content_en_sha1_hash": "5fd60907e5adf11a1c78e4578a8f3cca9b3de1e1",
   "created_at": "2026-05-24T17:27:20.484Z",
-  "updated_at": "2026-06-09T09:43:10.881Z",
+  "updated_at": "2026-10-31T12:58:29.180Z",
   "comment": {
     "text": "Warning toast message appearing when attempting to remove a member from a private room during active uploads. The {{count}} variable represents the number of ongoing uploads.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/User.tsx",
-      "line_number": 205,
+      "line_number": 195,
       "context": "const isPrivateRoom = room.private;\n if (isRemoval && isPrivateRoom) {\n const activeUploads = getActiveUploadCountForRoom?.(room.id) ?? 0;\n if (activeUploads > 0) {\n toastr.warning(\n t(\"Common:CannotRemoveMemberWhileUploads\", {\n count: activeUploads,\n }),\n );\n return;\n }",
       "module": "/packages/client"
     },

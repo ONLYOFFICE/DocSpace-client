@@ -3,7 +3,7 @@
   "content": "Summarize my favorite Form Spaces, including their purpose, forms, participants, and collection status. If this information is not provided, ask me for the desired scope, focus, and summary length.",
   "content_en_sha1_hash": "05dfeae771d81f216770c6fa20b1061c00a7975c",
   "created_at": "2026-08-14T09:34:56.527Z",
-  "updated_at": "2026-08-14T15:19:33.617Z",
+  "updated_at": "2026-10-31T12:58:29.078Z",
   "comment": {
     "text": "Detailed instruction text for an AI suggestion option that directs the AI to summarize specific Form Spaces. It serves as the full prompt sent to the AI when this suggestion is selected.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 732,
+      "line_number": 672,
       "context": "// +\n formsFavorites: [\n {\n name: t(\"AiSuggestions:FormsFavoritesSummarizeFavoriteSpaces\"),\n prompt: t(\"AiSuggestions:FormsFavoritesSummarizeFavoriteSpacesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpaces\"),\n prompt: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpacesPrompt\"),\n },",
       "module": "/packages/client"
     }

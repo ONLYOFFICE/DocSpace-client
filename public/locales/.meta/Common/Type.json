@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2026-10-23T12:28:45.595Z",
+  "updated_at": "2026-10-31T12:58:29.128Z",
   "comment": {
     "text": "This is a table column header or a filter option label. It refers to the kind or category of an item, such as a transaction or a file.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 257,
+      "line_number": 254,
       "context": "return this.t(\"Common:Owner\");\n case \"Location\":\n return this.t(\"Common:Location\");\n \n case \"Type\":\n return this.t(\"Common:Type\");\n case \"Storage Type\":\n return this.t(\"InfoPanel:StorageType\");\n \n case \"File extension\":\n return this.t(\"Common:FileExtension\");",
       "module": "/packages/client"
     },
@@ -55,67 +55,67 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 327,
+      "line_number": 314,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 327,
+      "line_number": 314,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 327,
+      "line_number": 314,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 327,
+      "line_number": 314,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 327,
+      "line_number": 314,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 327,
+      "line_number": 314,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 327,
+      "line_number": 314,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 327,
+      "line_number": 314,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1256,
+      "line_number": 1148,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...roomTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1256,
+      "line_number": 1148,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...roomTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1256,
+      "line_number": 1148,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...roomTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },

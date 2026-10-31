@@ -3,7 +3,7 @@
   "content": "Invited",
   "content_en_sha1_hash": "53469df1c48ff6abdcf1b528fd8c8ac2baf05099",
   "created_at": "2025-05-19T21:30:45.993Z",
-  "updated_at": "2026-08-24T22:30:00.653Z",
+  "updated_at": "2026-10-31T12:58:29.054Z",
   "comment": {
     "text": "This is a label indicating that a user has been invited. It appears next to a user's name in a list, for example, when searching for users to invite.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 443,
+      "line_number": 419,
       "context": "<Text\n className={classNames(styles.searchItemText, {\n [styles.isInfo]: true,\n })}\n >\n {t(\"Common:Invited\")}\n </Text>\n ) : null}\n {isDisabled ? (\n <Text\n className={classNames(styles.searchItemText, {",
       "module": "/packages/client"
     },

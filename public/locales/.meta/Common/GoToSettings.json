@@ -3,7 +3,7 @@
   "content": "Go to Settings",
   "content_en_sha1_hash": "afc288b1ffb91b961cd8fa6fbe17bd6255268ca9",
   "created_at": "2025-11-03T12:10:26.886Z",
-  "updated_at": "2026-10-22T16:09:36.810Z",
+  "updated_at": "2026-10-31T12:58:28.821Z",
   "comment": {
     "text": "This text is a button label that, when clicked, navigates the user to the application's settings page.",
     "is_auto": true,
@@ -18,26 +18,20 @@
       "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
-      "line_number": 135,
-      "context": "return [\n {\n type: \"button\",\n onClick: goToSettings,\n key: \"disabled-view-go-to-settings\",\n title: t(\"Common:GoToSettings\"),\n },\n ];\n \n const activateOrTopUpAI = isCardLinkedToPortal\n ? {",
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyAiRoomsContainer.tsx",
+      "line_number": 134,
+      "context": "if (isAdmin && standalone) {\n options = [\n {\n key: \"go-to-ai-provider-settings\",\n type: \"button\",\n title: t(\"Common:GoToSettings\"),\n onClick: () => navigate(AI_SETTINGS_URL),\n },\n ];\n } else if (isAdmin) {\n options = aiNoAccessStores.isCardLinkedToPortal",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 487,
-      "context": "disabled: false,\n };\n \n // const goToServices = {\n //   type: \"button\",\n //   title: t(\"Common:GoToSettings\"),\n //   key: \"go-to-services\",\n //   onClick: actions.onGoToServices,\n // } as const;\n \n const goToAIProviderSettings = {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 487,
-      "context": "disabled: false,\n };\n \n // const goToServices = {\n //   type: \"button\",\n //   title: t(\"Common:GoToSettings\"),\n //   key: \"go-to-services\",\n //   onClick: actions.onGoToServices,\n // } as const;\n \n const goToAIProviderSettings = {",
+      "line_number": 383,
+      "context": "disabled: false,\n };\n \n // const goToServices = {\n //   type: \"button\",\n //   title: t(\"Common:GoToSettings\"),\n //   key: \"go-to-services\",\n //   onClick: actions.onGoToServices,\n // } as const;\n \n // const aiBenefits = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 187,
+      "line_number": 164,
       "context": ") =>\n installed\n ? { installed, ...actions }\n : {\n installed,\n buttonLabel: t(\"Common:GoToSettings\"),\n onAction: () => navigate(APPS_SETTINGS_PATH),\n };\n \n const filesHref = isGuest\n ? \"/shared-with-me/filter\"",
       "module": "/packages/client"
     },
@@ -45,6 +39,12 @@
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
       "line_number": 163,
       "context": "return (\n <ActionButton\n as={Link}\n icon={<SettingsSvg />}\n label={t(\"Common:GoToSettings\")}\n to=\"/portal-settings/ai-settings/ai-models\"\n />\n );\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/KnowledgeVectorizationBar.tsx",
+      "line_number": 79,
+      "context": "isHovered\n fontWeight={600}\n onClick={() => navigate(AI_SETTINGS_URL)}\n dataTestId=\"knowledge_vectorization_bar_settings\"\n >\n {t(\"Common:GoToSettings\")}\n </Link>\n </>\n ) : (\n t(\"Common:KnowledgeRoomVectorizationOffUser\")\n );",
       "module": "/packages/client"
     },
     {

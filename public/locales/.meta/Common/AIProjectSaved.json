@@ -1,0 +1,29 @@
+{
+  "key_path": "AIProjectSaved",
+  "content": "AI project \"{{name}}\" saved",
+  "content_en_sha1_hash": "5382d3a53f125595e960649fc231871996dfc8e5",
+  "created_at": "2026-10-31T12:56:52.347Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Success toast after the current AI chat setup is saved as an AI project. {{name}} is the project name, keep the quotes around it.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiPresetsBridge/index.tsx",
+      "line_number": 181,
+      "context": "const onSave = async (_e: unknown, value: string) => {\n try {\n const saved = await aiPresetsStore.savePreset(value);\n if (!saved) return;\n toastr.success(t(\"Common:AIProjectSaved\", { name: saved.preset.name }));\n // A linked room that could not be shared with a member, and the like.\n saved.project.aiProject.warnings?.forEach((warning) => toastr.warning(warning.message));\n } catch (e) {\n toastr.error(errorMessage(e));\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

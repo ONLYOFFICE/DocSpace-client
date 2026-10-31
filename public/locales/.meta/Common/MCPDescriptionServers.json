@@ -3,7 +3,7 @@
   "content": "Use {{mcpServers}} set up by your admin to power AI chat with extra capabilities, like data extraction, summaries, and smart suggestions",
   "content_en_sha1_hash": "fcd77b5ecc0d9e532453a45d7298f61646d5ea12",
   "created_at": "2026-08-31T18:23:15.914Z",
-  "updated_at": "2026-08-31T18:54:06.559Z",
+  "updated_at": "2026-10-31T12:58:29.625Z",
   "comment": {
     "text": "Info description in the Agent creation/editing dialog explaining how configured MCP servers enhance AI chat capabilities. The {{mcpServers}} variable represents the title of the MCP settings.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "gemma4:26b"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/MCP.tsx",
-      "line_number": 82,
-      "context": "lineHeight=\"16px\"\n fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"MCPDescriptionServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n </Text>\n </div>\n <div className=\"ai-mcp-group\">",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/MCP.tsx",
       "line_number": 110,

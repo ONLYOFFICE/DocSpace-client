@@ -3,7 +3,7 @@
   "content": "Versions",
   "content_en_sha1_hash": "a239107ef28f6efe13d8ea83e502da9aa8c43fbb",
   "created_at": "2026-05-19T19:03:26.848Z",
-  "updated_at": "2026-09-08T08:44:10.073Z",
+  "updated_at": "2026-10-31T12:58:29.139Z",
   "comment": {
     "text": "Label in the file information panel that identifies the section for document history.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 283,
+      "line_number": 280,
       "context": "case \"Index\":\n return this.t(\"Files:Index\");\n \n case \"Versions\":\n return this.t(\"Common:Versions\");\n case \"Comments\":\n return this.t(\"Common:Comments\");\n case \"Tags\":\n return this.t(\"Common:Tags\");",
       "module": "/packages/client"
     },

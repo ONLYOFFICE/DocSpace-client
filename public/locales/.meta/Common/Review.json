@@ -3,7 +3,7 @@
   "content": "Review",
   "content_en_sha1_hash": "e29a79fe0c349724caeaa1762fa917f5543248ca",
   "created_at": "2025-05-19T21:30:47.938Z",
-  "updated_at": "2026-10-22T13:13:49.667Z",
+  "updated_at": "2026-10-31T12:58:29.089Z",
   "comment": {
     "text": "This is a label for a room type or a sharing permission. It indicates that users in this room or with this permission can review documents.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 67,
+      "line_number": 64,
       "context": "case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRooms\");\n \n case RoomsType.ReviewRoom:\n return t(\"Common:Review\");\n \n case RoomsType.ReadOnlyRoom:\n return t(\"Common:ViewOnlyRooms\");\n \n case RoomsType.PublicRoom:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1281,
+      "line_number": 1173,
       "context": "case RoomsType.ReviewRoom:\n return {\n id: \"filter_type-review\",\n key: RoomsType.ReviewRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Review\"),\n };\n case RoomsType.ReadOnlyRoom:\n return {\n id: \"filter_type-view-only\",\n key: RoomsType.ReadOnlyRoom,",
       "module": "/packages/client"
     },

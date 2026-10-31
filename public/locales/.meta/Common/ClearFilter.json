@@ -3,7 +3,7 @@
   "content": "Clear filter",
   "content_en_sha1_hash": "b667d6f9f635decfb59140eb7361aedc90b3b761",
   "created_at": "2025-05-19T21:30:43.475Z",
-  "updated_at": "2026-10-06T10:42:37.453Z",
+  "updated_at": "2026-10-31T12:58:28.826Z",
   "comment": {
     "text": "This is a button label that resets all applied filters to their default state, clearing any search criteria or selections.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
-      "line_number": 177,
+      "line_number": 147,
       "context": "const options = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: onResetFilter,\n },\n ];",
       "module": "/packages/client"
     },

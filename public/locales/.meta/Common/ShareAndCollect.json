@@ -3,7 +3,7 @@
   "content": "Share & collect",
   "content_en_sha1_hash": "39376ae6d9b8a7366e97fa2bb58d1d646af34823",
   "created_at": "2025-05-19T21:30:48.624Z",
-  "updated_at": "2026-05-15T14:00:06.623Z",
+  "updated_at": "2026-10-31T12:58:28.936Z",
   "comment": {
     "text": "This is a dialog title or button label that initiates the process of sharing a document and collecting data through a fillable form. It appears when a user wants to share a document for data collection.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
-      "line_number": 307,
+      "line_number": 304,
       "context": "withBreadCrumbs\n withoutBackButton={false}\n withCancelButton\n currentFolderId=\"\"\n headerProps={{\n headerLabel: t(\"Common:ShareAndCollect\"),\n onCloseClick: onClose,\n ...headerProps,\n }}\n rootFolderType={file.rootFolderType as unknown as SdkFolderType}\n createDefineRoomType={createDefineRoomType}",
       "module": "/packages/client"
     },

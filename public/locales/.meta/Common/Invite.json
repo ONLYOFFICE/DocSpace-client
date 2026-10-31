@@ -3,7 +3,7 @@
   "content": "Invite",
   "content_en_sha1_hash": "b136609f068403340f94e46a0174da273bfbce30",
   "created_at": "2025-05-19T21:30:45.964Z",
-  "updated_at": "2026-10-22T16:09:36.805Z",
+  "updated_at": "2026-10-31T12:58:28.808Z",
   "comment": {
     "text": "This is a button label or dialog title. It initiates the process of inviting users or creating a group.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 794,
+      "line_number": 749,
       "context": "if (!isAccountsPage) return onCreateRoom();\n if (isContactsGroupsPage) return createGroup(currentFolderId, \"sidebar\");\n };\n \n const mainButtonText =\n isRoomAdmin && isAccountsPage ? t(\"Common:Invite\") : t(\"Common:Actions\");\n \n let isDisabled = false;\n \n if (isSettingsPage) {\n isDisabled = isSettingsPage;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 1117,
+      "line_number": 1122,
       "context": "</ModalDialog.Container>\n ) : null}\n \n <ModalDialog.Header>\n <div className={styles.invitePanelHeader}>\n {t(\"Common:Invite\")} {roomId === -1 ? currentAccess?.label : \"\"}\n {roomId === -1 ? (\n <HelpButton\n tooltipMaxWidth=\"448px\"\n place=\"bottom-start\"\n tooltipStyle={{",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/helpers/getSectionCreateButton.ts",
-      "line_number": 154,
+      "line_number": 143,
       "context": "}\n \n return {\n showMainButton: true,\n mainButtonProps: {\n text: t(\"Common:Invite\"),\n isDropdown: true,\n model,\n },\n };\n }",
       "module": "/packages/client"
     },

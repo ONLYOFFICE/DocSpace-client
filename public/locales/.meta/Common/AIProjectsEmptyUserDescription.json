@@ -1,0 +1,29 @@
+{
+  "key_path": "AIProjectsEmptyUserDescription",
+  "content": "AI projects are set up by room admins. When someone invites you to one, it appears here and you can chat in it with its model, instructions and knowledge base.",
+  "content_en_sha1_hash": "f002b693c6999f4f4b82660c061090595ed89f20",
+  "created_at": "2026-10-31T12:56:52.497Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Description on the empty AI Projects screen for users and guests: projects are set up by room admins and appear after an invitation.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyAiRoomsContainer.tsx",
+      "line_number": 204,
+      "context": "canManage ? t(\"Common:AIProjectsEmpty\") : t(\"Common:AIProjectsEmptyUser\")\n }\n description={\n canManage\n ? t(\"Common:AIProjectsEmptyDescription\")\n : t(\"Common:AIProjectsEmptyUserDescription\")\n }\n options={options}\n />\n );\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

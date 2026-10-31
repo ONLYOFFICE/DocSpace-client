@@ -3,7 +3,7 @@
   "content": "Something went wrong.",
   "content_en_sha1_hash": "bee54c9cc30c539ab2ed15c0c936e055cf8ef67e",
   "created_at": "2025-05-19T21:30:48.934Z",
-  "updated_at": "2026-10-27T11:03:20.524Z",
+  "updated_at": "2026-10-31T12:58:28.830Z",
   "comment": {
     "text": "This is an error message displayed in a toast notification or as a title in an empty state view. It appears when an unexpected error occurs during an operation, such as submitting to a form gallery, server communication, or data import.",
     "is_auto": true,
@@ -25,37 +25,25 @@
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 201,
+      "line_number": 190,
       "context": "await enable(\"ai-rooms\", true);\n setEnableAiRoomsVisible(false);\n navigate(\"/ai-rooms?section=rooms\");\n } catch (err) {\n console.error(\"Failed to enable ai-rooms\", err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setEnableAiRoomsLoading(false);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 201,
+      "line_number": 190,
       "context": "await enable(\"ai-rooms\", true);\n setEnableAiRoomsVisible(false);\n navigate(\"/ai-rooms?section=rooms\");\n } catch (err) {\n console.error(\"Failed to enable ai-rooms\", err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setEnableAiRoomsLoading(false);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 201,
+      "line_number": 190,
       "context": "await enable(\"ai-rooms\", true);\n setEnableAiRoomsVisible(false);\n navigate(\"/ai-rooms?section=rooms\");\n } catch (err) {\n console.error(\"Failed to enable ai-rooms\", err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setEnableAiRoomsLoading(false);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 201,
-      "context": "await enable(\"ai-rooms\", true);\n setEnableAiRoomsVisible(false);\n navigate(\"/ai-rooms?section=rooms\");\n } catch (err) {\n console.error(\"Failed to enable ai-rooms\", err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setEnableAiRoomsLoading(false);\n }\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 201,
-      "context": "await enable(\"ai-rooms\", true);\n setEnableAiRoomsVisible(false);\n navigate(\"/ai-rooms?section=rooms\");\n } catch (err) {\n console.error(\"Failed to enable ai-rooms\", err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setEnableAiRoomsLoading(false);\n }\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 201,
+      "line_number": 190,
       "context": "await enable(\"ai-rooms\", true);\n setEnableAiRoomsVisible(false);\n navigate(\"/ai-rooms?section=rooms\");\n } catch (err) {\n console.error(\"Failed to enable ai-rooms\", err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setEnableAiRoomsLoading(false);\n }\n };",
       "module": "/packages/client"
     },
@@ -69,18 +57,6 @@
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/utils.ts",
       "line_number": 316,
       "context": "case 503:\n return t(\"Metadata:AINoModel\");\n case 504:\n return t(\"Metadata:AITimeout\");\n default:\n return t(\"Common:SomethingWentWrong\");\n }\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleLauncher.tsx",
-      "line_number": 113,
-      "context": "const activated = await activate(id);\n if (activated) navigate(href);\n else openDialog();\n } catch (err) {\n console.error(`Failed to activate ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n },\n [activate, navigate, t],\n );",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleLauncher.tsx",
-      "line_number": 113,
-      "context": "const activated = await activate(id);\n if (activated) navigate(href);\n else openDialog();\n } catch (err) {\n console.error(`Failed to activate ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n },\n [activate, navigate, t],\n );",
       "module": "/packages/client"
     },
     {
@@ -127,7 +103,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/apps/index.tsx",
-      "line_number": 87,
+      "line_number": 85,
       "context": "setPendingId(id);\n try {\n await enable?.(id, next);\n } catch (err) {\n console.error(`Failed to ${next ? \"enable\" : \"disable\"} app ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setPendingId(null);\n }\n };",
       "module": "/packages/client"
     },

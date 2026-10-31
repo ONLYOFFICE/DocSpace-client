@@ -3,7 +3,7 @@
   "content": "Show the roles and access settings defined by the open room template. If this information is not provided, ask me for the use case or specific part of the template to focus on.",
   "content_en_sha1_hash": "e22fa761990da398882526eece5c0153a5f35ba1",
   "created_at": "2026-08-04T09:58:55.194Z",
-  "updated_at": "2026-08-05T17:04:57.602Z",
+  "updated_at": "2026-10-31T12:58:29.073Z",
   "comment": {
     "text": "Instructional prompt for the AI assistant, triggered when a user selects the suggestion to display roles and access settings within an open room template.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 666,
+      "line_number": 606,
       "context": "name: t(\"AiSuggestions:RoomTemplateExplainTemplateStructure\"),\n prompt: t(\"AiSuggestions:RoomTemplateExplainTemplateStructurePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomTemplateShowTemplateRoles\"),\n prompt: t(\"AiSuggestions:RoomTemplateShowTemplateRolesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomTemplateCreateARoomFromThisTemplate\"),\n prompt: t(\n \"AiSuggestions:RoomTemplateCreateARoomFromThisTemplatePrompt\",",
       "module": "/packages/client"
     }

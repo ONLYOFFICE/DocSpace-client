@@ -1,0 +1,29 @@
+{
+  "key_path": "ChooseAIProject",
+  "content": "Choose AI Project",
+  "content_en_sha1_hash": "6a561e74ab992dba297e5fa03af1a0203ed37344",
+  "created_at": "2026-10-31T12:57:02.059Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Menu item in the AI chat's model picker that opens a submenu of the user's AI projects to apply one to the chat. Imperative verb phrase.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/Hooks/useAiPresetsPickerActions.ts",
+      "line_number": 67,
+      "context": "if (presets.length === 0) return [];\n \n return [\n {\n id: \"choose-ai-preset\",\n text: t(\"Common:ChooseAIProject\"),\n items: presets.map((preset) => ({\n id: `${AI_PRESET_ACTION_PREFIX}${preset.id}`,\n text: preset.name,\n profileId: preset.profileId ?? undefined,\n onClick: () => onPresetPick(preset),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

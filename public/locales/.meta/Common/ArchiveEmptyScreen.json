@@ -3,7 +3,7 @@
   "content": "You can archive rooms you don’t use and restore them in the workspace at any moment or delete them permanently. These rooms will appear here.",
   "content_en_sha1_hash": "c6237dd74b270c5dfa9ec0bdb0286f1376f8774b",
   "created_at": "2026-08-12T11:00:10.810Z",
-  "updated_at": "2026-10-22T16:09:36.820Z",
+  "updated_at": "2026-10-31T12:58:28.849Z",
   "comment": {
     "text": "Placeholder text displayed on the empty Archive screen to explain how to manage archived rooms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 388,
+      "line_number": 345,
       "context": ")\n .with([FolderType.Favorites, P._], () =>\n getFavoritesDescription(t, isFormsScope, filterFolderType),\n )\n .with([FolderType.Archive, ShareAccessRights.None], () =>\n t(\"Common:ArchiveEmptyScreen\"),\n )\n .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>\n t(\"Files:ArchiveEmptyScreenUser\"),\n )\n .with([FolderType.TRASH, P._], () =>",
       "module": "/packages/client"
     },

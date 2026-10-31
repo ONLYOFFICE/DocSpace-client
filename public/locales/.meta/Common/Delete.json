@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2026-10-23T12:28:45.491Z",
+  "updated_at": "2026-10-31T12:58:28.816Z",
   "comment": {
     "text": "This is a button label or tooltip text. It allows users to remove a selected item, such as a chat or an image.",
     "is_auto": true,
@@ -43,8 +43,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 200,
-      "context": "};\n }, [onKeyUp]);\n \n const getAccessButtonLabel = () => {\n if (isTemplate) {\n return t(\"Common:Delete\");\n }\n \n if (isRoomDelete || isAIAgent) {\n return t(\"Common:DeletePermanently\");\n }",
+      "line_number": 193,
+      "context": "};\n }, [onKeyUp]);\n \n const getAccessButtonLabel = () => {\n if (isTemplate) {\n return t(\"Common:Delete\");\n }\n \n if (isRoomDelete) {\n return t(\"Common:DeletePermanently\");\n }",
       "module": "/packages/client"
     },
     {
@@ -151,7 +151,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 246,
+      "line_number": 245,
       "context": "},\n canDeleteVersion &&\n index !== 0 && {\n key: \"delete\",\n icon: DeleteIcon,\n label: t(\"Common:Delete\"),\n onClick: onDeleteVersion,\n },\n ];\n \n // uncomment if we want to change versions again",
       "module": "/packages/client"
     },
@@ -205,8 +205,8 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 989,
-      "context": "? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? isFormSpace\n ? t(\"Common:DeleteFormSpace\")\n : t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon: item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => self.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
+      "line_number": 977,
+      "context": "? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? isFormSpace\n ? t(\"Common:DeleteFormSpace\")\n : t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => self.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
       "module": "/packages/client"
     },
     {
@@ -223,26 +223,20 @@
     },
     {
       "file_path": "/packages/client/src/store/DialogsStore.ts",
-      "line_number": 1287,
+      "line_number": 1247,
       "context": "ref!.current!.click(),\n },\n \n hasImage\n ? {\n label: t(\"Common:Delete\"),\n icon: TrashIconSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,\n onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),\n }\n : {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 457,
-      "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete-agent\":",
+      "line_number": 407,
+      "context": "};\n case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 457,
-      "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete-agent\":",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 457,
-      "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete-agent\":",
+      "line_number": 407,
+      "context": "};\n case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete\":",
       "module": "/packages/client"
     },
     {

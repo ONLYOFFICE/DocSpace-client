@@ -3,7 +3,7 @@
   "content": "Leave agent",
   "content_en_sha1_hash": "9923909f26b0352a8fd0d58d8a7c07d0d615967d",
   "created_at": "2026-08-31T18:23:13.455Z",
-  "updated_at": "2026-10-21T10:17:45.715Z",
+  "updated_at": "2026-10-31T12:58:29.616Z",
   "comment": {
     "text": "Dialog title, checkbox label, and menu item label used when exiting an AI Agent's space.",
     "is_auto": true,
@@ -11,24 +11,6 @@
     "model": "gemma4:26b"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 88,
-      "context": "document.removeEventListener(\"keyup\", onKeyUp, false);\n };\n }, []);\n \n const titleText = isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 205,
-      "context": "const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\")\n : t(\"Common:PeopleSelectorInfo\");\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");\n \n const selectorComponent = excludeReady ? (",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 938,
-      "context": "},\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: self.onLeaveRoom,",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
       "line_number": 301,

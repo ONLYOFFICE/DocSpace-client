@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-10-23T12:28:45.506Z",
+  "updated_at": "2026-10-31T12:58:28.865Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -45,12 +45,6 @@
       "file_path": "/packages/client/src/components/dialogs/ConvertPasswordDialog/index.js",
       "line_number": 188,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"convert-password-dialog_button-accept\"\n className=\"convert-password-dialog_button\"\n key=\"ContinueButton\"\n label={t(\"Common:SaveButton\")}\n size=\"normal\"\n scale\n primary\n onClick={onConvert}\n isLoading={isLoading}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/EditAgentDialog.tsx",
-      "line_number": 272,
-      "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n primary\n scale\n onClick={onEditRoom}\n isDisabled={\n (!agentParams.profileId && !agentParams.modelId) ||",
       "module": "/packages/client"
     },
     {
@@ -114,6 +108,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
+      "line_number": 529,
+      "context": ") : null}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={project ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n type=\"submit\"\n isLoading={isSaving}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
       "line_number": 169,
       "context": "dataTestId=\"info_panel_details_comment_textarea\"\n />\n <div className=\"property-comment_editor-editor-buttons\">\n <Button\n isLoading={isLoading}\n label={t(\"Common:SaveButton\")}\n onClick={onSave}\n size={ButtonSize.extraSmall}\n primary\n testId=\"info_panel_details_comment_save_button\"\n />",
@@ -139,7 +139,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 806,
+      "line_number": 816,
       "context": "/>\n \n <div className={appearanceStyles.buttonsContainer}>\n <Button\n className=\"save button\"\n label={t(\"Common:SaveButton\")}\n onClick={onSave}\n primary\n size={buttonSize}\n isDisabled={isDisabledSaveButton}\n testId=\"appearance_save_button\"",
       "module": "/packages/client"
     },
@@ -151,7 +151,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 293,
+      "line_number": 285,
       "context": "className={styles.saveCancelButtons}\n onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"ai_services_management_save_button\"",
       "module": "/packages/client"
     },
@@ -175,7 +175,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 419,
+      "line_number": 421,
       "context": "tabIndex={11}\n id=\"buttonsPortalRenaming\"\n className=\"save-cancel-buttons\"\n onSaveClick={onOpenModal}\n onCancelClick={onCancelPortalName}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n hasScroll={hasScroll}",
       "module": "/packages/client"
     },
@@ -331,7 +331,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 380,
+      "line_number": 379,
       "context": "isDisabled={isSavingComment}\n size=\"extraSmall\"\n scale\n primary\n onClick={onSaveClick}\n label={t(\"Common:SaveButton\")}\n testId=\"version_save_button\"\n />\n </div>\n <div className=\"version_edit-comment-button-second\">\n <Button",
       "module": "/packages/client"
     },
@@ -427,7 +427,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 611,
+      "line_number": 627,
       "context": "<Button\n scale\n primary\n onClick={onSave}\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={isDisabledSaveButton}\n testId=\"edit_link_panel_save_button\"\n />\n <Button\n scale",
       "module": "/packages/shared"
     },

@@ -36,7 +36,10 @@
 import { useTranslation } from "react-i18next";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { getCreateRoomTypes } from "@docspace/shared/utils/rooms";
+import {
+  AI_HUB_SECTION_TYPES,
+  getCreateRoomTypes,
+} from "@docspace/shared/utils/rooms";
 import { RoomsType } from "@docspace/shared/enums";
 import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 
@@ -47,6 +50,10 @@ type RoomTypeListProps = {
   isExternalShareRestricted?: boolean;
   processCreatingRoomFromData?: boolean;
   isFormsCreate?: boolean;
+  // The "AI rooms" section's chooser: the AI room types and nothing else.
+  isAiRoomsCreate?: boolean;
+  // Picking "AI project" there leaves this dialog for the project form.
+  onOpenAiProjectForm?: () => void;
   // Set only when the OForms gallery is available; offers a form space built
   // around a gallery template even with the Forms quick actions turned off.
   onOpenTemplateGallery?: () => void;
@@ -60,6 +67,8 @@ const RoomTypeList = ({
   isExternalShareRestricted,
   processCreatingRoomFromData,
   isFormsCreate,
+  isAiRoomsCreate,
+  onOpenAiProjectForm,
   onOpenTemplateGallery,
 
   setRoomType,
@@ -95,6 +104,28 @@ const RoomTypeList = ({
   });
 
   const publicRoomTooltipContent = t("Common:PublicRoomCreationDisabled");
+
+  if (isAiRoomsCreate) {
+    return (
+      <div className={styles.roomTypeList}>
+        {[...AI_HUB_SECTION_TYPES, RoomsType.AiProjectRoom].map((roomType) => (
+          <RoomType
+            id={roomType.toString()}
+            key={roomType}
+            roomType={roomType}
+            type="listItem"
+            onClick={() =>
+              roomType === RoomsType.AiProjectRoom
+                ? onOpenAiProjectForm?.()
+                : handleClick(roomType)
+            }
+            isOpen={false}
+            selectedId={roomType.toString()}
+          />
+        ))}
+      </div>
+    );
+  }
 
   if (isFormsCreate) {
     return (

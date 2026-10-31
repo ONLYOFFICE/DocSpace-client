@@ -224,6 +224,8 @@ const PureHome = observer((props) => {
     isFormRoomFolder,
     isRoomsFolder,
     isFormsFolder,
+    isAiSectionFolder,
+    isAiProjectRoomRoot,
     isPrivacyFolder,
     isArchiveFolder,
     isTemplatesFolder,
@@ -284,8 +286,11 @@ const PureHome = observer((props) => {
 
   usePanelExclusivity(infoPanelStore);
 
+  // An open AI project draws its chat in the section body (AiProjectView),
+  // so the side panel stays out of the way while a project room is shown.
   const isAiChatFullscreen =
     isAiChatAvailable &&
+    !isAiProjectRoomRoot &&
     aiChatPanel.isChatPanelVisible &&
     (aiChatPanel.isChatPanelFullscreen || !isDesktop);
 
@@ -346,6 +351,9 @@ const PureHome = observer((props) => {
     isRoom,
     isFormRoom,
     isRoomsFolder,
+    // The AI Rooms root and an open AI project get no tile set.
+    // Neither AI section gets a tile set.
+    isAiProjectsSection: isAiSectionFolder || isAiProjectRoomRoot,
     isPrivacyFolder,
     isArchiveFolder,
     isRecycleBinFolder,
@@ -537,6 +545,11 @@ const PureHome = observer((props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
+      // An open AI project draws its chat in the body (AiProjectView): the
+      // body fills the section instead of sizing to its content, and has no
+      // footer spacer.
+      sectionProps.fullHeightBody = isAiProjectRoomRoot;
+      sectionProps.withoutFooter = isAiProjectRoomRoot;
     } else {
       sectionProps.isAccounts = isContactsPage;
     }
@@ -605,8 +618,11 @@ const PureHome = observer((props) => {
   sectionProps.dragging = dragging;
   sectionProps.startDropPreview = startDropPreview;
 
-  sectionProps.isChatPanelAvailable = isAiChatAvailable;
-  sectionProps.isChatPanelVisible = aiChatPanel.isChatPanelVisible;
+  // An open AI project draws its chat in the section body (AiProjectView):
+  // the side panel is not there, and takes no width beside the body.
+  sectionProps.isChatPanelAvailable = isAiChatAvailable && !isAiProjectRoomRoot;
+  sectionProps.isChatPanelVisible =
+    aiChatPanel.isChatPanelVisible && !isAiProjectRoomRoot;
   sectionProps.chatPanelDropTargetLabel = isChatDropTarget
     ? t("Common:DropFilesToAttach")
     : undefined;
@@ -891,6 +907,8 @@ export const Component = inject(
       isFavoritesFolder,
       isRecentFolder,
       isFormsFolder,
+      isAiSectionFolder,
+      isAiProjectRoomRoot,
     } = treeFoldersStore;
 
     const {
@@ -1012,6 +1030,8 @@ export const Component = inject(
       isErrorRoomNotAvailable,
       isRoomsFolder,
       isFormsFolder,
+      isAiSectionFolder,
+      isAiProjectRoomRoot,
       isArchiveFolder,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
 

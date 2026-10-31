@@ -38,7 +38,10 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
-import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
+import {
+  AI_HUB_SECTION_FOLDER_TYPES,
+  ROOMS_SECTION_FOLDER_TYPES,
+} from "@docspace/shared/utils/rooms";
 import {
   FILTER_DOCUMENTS,
   FILTER_RECENT,
@@ -142,6 +145,14 @@ export const buildFolderUrl = (
       path = getCategoryUrl(CategoryType.Forms);
       params = roomParams(RoomSearchArea.Forms);
       break;
+    case FolderType.AiHub:
+      path = getCategoryUrl(CategoryType.AiHub);
+      params = roomParams(RoomSearchArea.AiHub);
+      break;
+    case FolderType.AiProjects:
+      path = getCategoryUrl(CategoryType.AiProjects);
+      params = roomParams(RoomSearchArea.AiProjects);
+      break;
     default:
       path = getCategoryUrl(CategoryType.Shared);
       params = roomParams(RoomSearchArea.Active);
@@ -157,6 +168,11 @@ export const getSectionTrashTarget = (
 ): { path: string; folderType: FolderType[] } => {
   if (pathname.startsWith("/forms"))
     return { path: "/forms/trash/filter", folderType: [FolderType.FormRoom] };
+  if (pathname.startsWith("/ai-rooms/"))
+    return {
+      path: "/ai-rooms/trash/filter",
+      folderType: AI_HUB_SECTION_FOLDER_TYPES,
+    };
   if (pathname.startsWith("/rooms") && !pathname.startsWith("/rooms/personal"))
     return {
       path: "/rooms/trash/filter",
@@ -214,6 +230,12 @@ export const getClientActiveId = (
   const isFormTemplates = searchArea === RoomSearchArea.FormTemplates;
 
   if (pathname.startsWith("/dashboard")) return "dashboard";
+  if (pathname.startsWith("/ai-rooms/")) {
+    if (pathname.includes("/recent")) return "ai-rooms-recent";
+    if (pathname.includes("/favorite")) return "ai-rooms-favorites";
+    if (pathname.includes("/trash")) return "ai-rooms-trash";
+    return "ai-rooms";
+  }
   if (pathname.startsWith("/ai-projects")) return "ai-projects";
   if (pathname.startsWith("/forms")) {
     if (pathname.includes("/recent")) return "forms-recent";

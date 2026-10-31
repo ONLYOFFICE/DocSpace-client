@@ -69,15 +69,16 @@ self: ContextOptionsStore,t: TTranslation
     isRoomsFolder,
     isArchiveFolder,
     isFormsFolder,
+    isAiSectionFolder,
   } = self.treeFoldersStore;
 
   const { pinRooms, unpinRooms, deleteRooms } = self.filesActionsStore;
 
-  if (isRoomsFolder || isArchiveFolder || isFormsFolder) {
+  if (isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder) {
     const isPinOption = selection.filter((item) => !item.pinned).length > 0;
 
     let canDelete: boolean | undefined;
-    if (isRoomsFolder || isFormsFolder) {
+    if (isRoomsFolder || isFormsFolder || isAiSectionFolder) {
       canDelete = selection.every((k) => k.contextOptions.includes("delete"));
     } else if (isArchiveFolder) {
       canDelete = selection.some((k) => k.contextOptions.includes("delete"));

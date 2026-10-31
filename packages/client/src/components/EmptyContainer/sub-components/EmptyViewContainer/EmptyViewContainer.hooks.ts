@@ -311,10 +311,21 @@ export const useOptions = (
 
     const event = new CustomEvent(Events.ROOM_CREATE, {
       detail: { parentId: selectedFolder?.id, context: "empty_state" },
-    }) as CustomEvent & { payload?: { startRoomType: RoomsType } };
-    // In the "Forms" section only Form Filling Rooms can be created.
+    }) as CustomEvent & {
+      payload?: {
+        startRoomType?: RoomsType;
+        isAiRoomsCreate?: boolean;
+        isAiProjectCreate?: boolean;
+      };
+    };
+    // In the "Forms" section only Form Filling Rooms can be created; "AI
+    // rooms" offers its own chooser and "AI Projects" the project form.
     if (window.location.pathname.startsWith("/forms")) {
       event.payload = { startRoomType: RoomsType.FormRoom };
+    } else if (window.location.pathname.startsWith("/ai-rooms/")) {
+      event.payload = { isAiRoomsCreate: true };
+    } else if (window.location.pathname.startsWith("/ai-projects")) {
+      event.payload = { isAiProjectCreate: true };
     }
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);

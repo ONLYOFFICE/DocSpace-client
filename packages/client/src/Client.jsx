@@ -166,14 +166,15 @@ const ClientContent = (props) => {
   const isDeveloperToolsArticle =
     location.pathname.includes("/developer-tools");
   const isBillingArticle = location.pathname.startsWith("/billing");
+  // The SDK frame pages. Only the bare `/ai-rooms` is one: its nested paths
+  // are the "AI rooms" section of Home, as `/ai-projects` is "AI Projects".
   const isNewArticle =
     location.pathname.startsWith("/ai-files") ||
-    location.pathname.startsWith("/ai-rooms") ||
+    location.pathname === "/ai-rooms" ||
     location.pathname.startsWith("/ai-forms") ||
     location.pathname.startsWith("/agents") ||
     location.pathname.startsWith("/ai-arbiter") ||
-    location.pathname.startsWith("/dashboard") ||
-    location.pathname.startsWith("/ai-projects");
+    location.pathname.startsWith("/dashboard");
   const withMainButton =
     isAccountsArticle || isDeveloperToolsArticle || isBillingArticle
       ? currentDeviceType !== DeviceType.desktop

@@ -179,6 +179,19 @@ const useFiles = ({
     navigate(`${url}?${filter.toUrlParams()}`);
   };
 
+  // The AI sections' lists: "AI rooms" (searchArea=AiHub) and "AI Projects"
+  // (searchArea=AiProjects, read from `ai/projects` by `api.rooms.getRooms`).
+  const fetchDefaultAiSection = (categoryType: number) => {
+    const searchArea =
+      categoryType === CategoryType.AiHub
+        ? RoomSearchArea.AiHub
+        : RoomSearchArea.AiProjects;
+    const filter = RoomsFilter.getDefault(userId, searchArea);
+    filter.searchArea = searchArea;
+
+    navigate(`${getCategoryUrl(categoryType)}?${filter.toUrlParams()}`);
+  };
+
   const fetchDefaultForms = () => {
     const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);
 
@@ -243,6 +256,9 @@ const useFiles = ({
 
     const isRoomFolder = getObjectByLocation(location)?.folder;
     const isForms = categoryType === CategoryType.Forms;
+    const isAiSection =
+      categoryType === CategoryType.AiHub ||
+      categoryType === CategoryType.AiProjects;
 
     if (isForms && !isRoomFolder) {
       filterObj = RoomsFilter.getFilter(window.location);
@@ -251,6 +267,16 @@ const useFiles = ({
 
       if (!filterObj) {
         fetchDefaultForms();
+
+        return;
+      }
+    } else if (isAiSection && !isRoomFolder) {
+      filterObj = RoomsFilter.getFilter(window.location);
+
+      isRooms = true;
+
+      if (!filterObj) {
+        fetchDefaultAiSection(categoryType as number);
 
         return;
       }

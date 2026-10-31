@@ -206,6 +206,13 @@ export const enum RoomSearchArea {
   AIAgents = "AiAgents",
   Forms = "Forms",
   FormTemplates = "FormTemplates",
+  /** The "AI rooms" section: Instructions and Knowledge rooms (`FolderType.AiHub`). */
+  AiHub = "AiHub",
+  /**
+   * The "AI Projects" section (`FolderType.AiProjects`). `files/rooms` does
+   * not resolve it: `api.rooms.getRooms` reads `ai/projects` for it.
+   */
+  AiProjects = "AiProjects",
 }
 export const enum RoomPrivacyFilter {
   None = 0,

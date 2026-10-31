@@ -39,7 +39,7 @@ import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import type { TAiProject, TAiProjectCover, TAiProjectLogo } from "@docspace/shared/api/ai/projects";
 
-import styles from "../../AiProjects.module.scss";
+import styles from "./ProjectLogo.module.scss";
 
 /** The ui-kit logo object for a built-in cover: no uploaded sizes, the cover and its colour. */
 export const coverLogo = (cover: TAiProjectCover, color: string): TLogo => ({

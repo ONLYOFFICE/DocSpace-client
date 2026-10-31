@@ -67,6 +67,8 @@ export const SECTION_ROOT_FOLDER_TYPES = [
   FolderType.Archive,
   FolderType.USER,
   FolderType.Rooms,
+  FolderType.AiHub,
+  FolderType.AiProjects,
   FolderType.SHARE,
   FolderType.Favorites,
   FolderType.Recent,

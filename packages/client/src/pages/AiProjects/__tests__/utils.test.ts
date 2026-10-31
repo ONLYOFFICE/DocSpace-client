@@ -27,7 +27,7 @@ describe("AiProjects utils", () => {
 
   it("links a project by its id on the portal origin", () => {
     expect(projectLink(withAccess(AiProjectAccess.Owner))).toBe(
-      `${window.location.origin}/ai-projects/7`,
+      `${window.location.origin}/ai-projects/7/filter?folder=7`,
     );
   });
 });

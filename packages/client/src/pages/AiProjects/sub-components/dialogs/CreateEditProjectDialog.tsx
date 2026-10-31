@@ -53,6 +53,7 @@ import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
 import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
+import { RoomSearchArea } from "@docspace/shared/enums";
 import { INSTRUCTIONS_ROOM_TYPE, KNOWLEDGE_ROOM_TYPE } from "@docspace/shared/api/ai/projects";
 import type {
   TAiProject,
@@ -173,7 +174,12 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   );
   const [fetchedTags, setFetchedTags] = React.useState<string[]>([]);
   React.useEffect(() => {
-    void tagsStore.fetchTags().then((list) => setFetchedTags(list as string[]));
+    // The portal's tags feed the input's suggestions; anything but a list
+    // (a failed or odd answer) leaves the suggestions empty instead of
+    // breaking the form.
+    void tagsStore
+      .fetchTags()
+      .then((list) => setFetchedTags(Array.isArray(list) ? (list as string[]) : []));
   }, [tagsStore]);
   const tagHandler = new TagHandler(tags, setTags, fetchedTags);
 
@@ -403,6 +409,9 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
               // as the "add rooms to a group" dialog does.
               forceIsMultiSelect
               roomType={selector}
+              // Instructions and Knowledge rooms live under the "AI rooms"
+              // root, not in Rooms.
+              searchArea={RoomSearchArea.AiHub}
               isRoomDisabled={() => selector === KNOWLEDGE_ROOM_TYPE && !vectorizationEnabled}
               getRoomDisabledText={() =>
                 selector === KNOWLEDGE_ROOM_TYPE && !vectorizationEnabled

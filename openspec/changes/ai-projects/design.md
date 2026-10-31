@@ -26,11 +26,39 @@ See proposal.md (Why) for the motivation, and the seven spec deltas for the beha
 - Keep a Knowledge room honest when vectorization is off: nothing new gets in, nothing pretends to be searchable.
 
 **Non-Goals:**
+- The SDK-frame `/ai-rooms` page (`pages/AiRooms`, the Rooms app frame): it keeps the bare `/ai-rooms` path; the "AI rooms" section takes the nested paths only.
 - Implementing the .NET side here: `ai-projects-api` is the contract it must meet; the code lives in `../server` on its own branch.
 - Archiving projects, shared (non-personal) threads, revoking auto-granted Viewer shares.
 - The SDK's `(ai-agents)` and `(ai-arbiter)` entry points. They and the shared exports they import are kept deliberately.
 
 ## Decisions
+
+### Two AI sections in Home, as the server keeps two roots (2026-10-31)
+The first cut was a stand-alone `/ai-projects` page with its own store (`AiProjectsStore` list, filters, sockets) and its own list views. It is replaced by two root sections the .NET side serves in `GET files/@root` (7d32683f39): `FolderType.AiHub` (42, "AI rooms") holds the Instructions and Knowledge rooms, `FolderType.AiProjects` (41, "AI Projects") holds the projects. The client treats each one as it treats the Forms root (the most recent section added this way): `RoomSearchArea.AiHub` / `AiProjects`, `CategoryType.AiHub` / `AiHubRoom` and `AiProjects` / `AiProject`, Home routes, `TreeFoldersStore.isAiHubFolder` / `isAiProjectsFolder` (and `isAiSectionFolder` for either, beside `isRoomsFolder` / `isFormsFolder` in the Files stores), sidebar items, the Rooms filter, header, bulk menu, context options, table columns, tiles, empty views and sockets.
+
+Why two sections and not one: the server keeps two roots with different rules (only AI rooms hold files), lists one through `files/rooms?searchArea=AiHub` and the other through `ai/projects`, and links them as `ai-rooms/…` and `ai-projects/…`. One section would need a listing across two roots that no endpoint serves.
+
+Why "copy all of Rooms": it is one flag in each Files store, while the page re-implemented a third of it and still lagged (no bulk menu, no hotkeys, no selection area).
+
+What stays of the page: the project workspace (chat, sources column, intro) and the project form. Home renders the workspace when the selected folder is a room of type 12, as `AIAgentView` once did for agent rooms; `AiProjectsStore` keeps the open project, its skills and knowledge, the chat sync (preset) and the project form state, and drops the list, filters and socket code.
+
+*Alternative:* keep the page and only add the slots. Rejected: every Rooms feature would have to be copied a second time.
+
+### The projects list through `ai/projects`
+`files/rooms` resolves no search area to the AI Projects root, while `GET ai/projects` (Node over `internal/ai/projects`) answers that root's folder content in the `files/rooms` shape and takes the same query (`filterValue`, `startIndex`, `count`, `sortBy`, `sortOrder`, `subjectId`, `subjectOwnerId`, `tags`, `withoutTags`, `excludeSubject`). So `api.rooms.getRooms` sends a filter whose `searchArea` is `AiProjects` there, and the Files stores never learn the difference.
+
+### `/ai-rooms` shared with the SDK frame page
+The server links AI rooms as `ai-rooms/{id}/filter?folder={id}`, and the bare `/ai-rooms` is already the Rooms app's SDK frame page. The section takes only the nested paths (`/ai-rooms/filter`, `/ai-rooms/{id}`, the slots); the frame keeps the bare path, and the checks that switch the client into the frame layout (`Client.jsx`, `SectionNavigationContext`) match it exactly instead of by prefix.
+
+*Alternative:* move the section elsewhere and redirect. Rejected: every server link (notifications, history, share) would pay a redirect, and the frame page has no nested paths to lose.
+
+### One creation dialog, three types; a direct form for projects
+"New room" in "AI rooms" opens `CreateRoomDialog` with `isAiRoomsCreate`, the same switch Forms uses (`isFormsCreate`) to draw a fixed picker: Instructions, Knowledge and AI project. Instructions and Knowledge go through `POST files/rooms` (the server puts types 10/11 under the AI rooms root); picking AI project closes the room dialog and opens the project form (`CreateEditProjectDialog`, mounted with the Files panels as `AiProjectDialog`), saved through `POST ai/projects`. "New project" in "AI Projects" opens that form directly (a `ROOM_CREATE` event with `isAiProjectCreate`, answered by `GlobalEvents`). "Edit" on a type-12 room (`Events.ROOM_EDIT`) reads the project and opens the same form. The project form's room selectors ask for `searchArea=AiHub`. The Rooms picker and the Rooms type filter drop the AI types.
+
+*Alternative:* lift the project fields into the room dialog's second step. Rejected for now: the project form has its own selectors, model picker and logo flow, and the hand-off keeps one form for create, edit and the chat's save action.
+
+### Slots scoped by folder type, no archive
+Recent, Favorites and Trash of "AI rooms" are the shared special folders with `folderType` 38/39 in the URL (`scopedUrl`, as Rooms and Forms do); the Rooms slots drop 38/39. The server never archives an AI room or a project, so neither section has an Archive slot or an archive action, and delete removes a room outright, as a form room is deleted from Forms. "AI Projects" has no slots: a project holds no files.
 
 ### A dedicated `/ai/projects` API client, mapped to room shapes
 `packages/shared/api/ai/projects.ts` has two mappers:
@@ -108,7 +136,7 @@ Projects replace agents in the sidebar, and the agent code paths in the Files st
 
 - No client data migration. The localStorage presets are abandoned rather than imported, because they were only on this unreleased branch.
 - Rollout depends on the rest of the .NET `ai/projects` implementation, on ui-kit 4.1.0 (now a local tarball) and on ai-chat `1.0.2-progress.17` (also a local tarball). Both packages must be published, and the manifests moved back to npm versions, before release.
-- Existing Knowledge rooms with Editor members: when the Editor role is removed, those shares must be migrated to Viewer (or Content creator) by the server migration, and the client must not show an unknown role.
+- No server data migration either: the AI room types and projects are unreleased, so no Instructions or Knowledge room lives outside the AI rooms root and no Knowledge room has Editor members.
 - Rollback means reverting the branch merge. The server can keep serving agents and projects independently.
 
 ## Open Questions

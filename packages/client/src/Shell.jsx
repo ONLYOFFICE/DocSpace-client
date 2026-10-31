@@ -249,9 +249,9 @@ const Shell = ({ page = "home", ...rest }) => {
     ],
   );
 
-  // Inside an AI project (the projects page with a project open) the chat
-  // is the project's: its model is fixed and the welcome chips are the
-  // project's own rather than the section's.
+  // Inside an AI project (its room is the selected folder of the AI Rooms
+  // section) the chat is the project's: its model is fixed and the welcome
+  // chips are the project's own rather than the section's.
   const isInsideAiProject =
     isAiProjectOpen && location.pathname.startsWith("/ai-projects");
   useCreateFileError({
@@ -812,21 +812,14 @@ const Shell = ({ page = "home", ...rest }) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
-  // The AI projects page is a section of its own: the client view and the
-  // selected folder are only set by Home, so on this page they still hold
-  // whatever the previous page left (contacts, profile, a folder) and must
-  // not switch the chat off.
-  const isAiProjectsPage = location.pathname.startsWith("/ai-projects");
-
   const isAiChatAvailable =
     aiServicesEnabled &&
     !isSettingsPage &&
-    (isAiProjectsPage ||
-      (currentClientView !== "users" &&
-        currentClientView !== "groups" &&
-        currentClientView !== "profile" &&
-        currentClientView !== "chat" &&
-        !isPrivacyFolder));
+    currentClientView !== "users" &&
+    currentClientView !== "groups" &&
+    currentClientView !== "profile" &&
+    currentClientView !== "chat" &&
+    !isPrivacyFolder;
 
   // The Forms section takes a single attachment: a question there is about one
   // form and the responses collected in it, and two forms in one message
@@ -916,11 +909,10 @@ const Shell = ({ page = "home", ...rest }) => {
 
   // The location the rounds work in: the folder or room the chat is opened
   // in (the AI service's location line, generated files and uploads follow
-  // it). The projects page is no location: its selected folder is whatever
-  // the previous page left, and inside a project the context is the folder
-  // picked in the project, else My documents, both resolved by the AI
-  // service itself.
-  const chatContextEntityId = isAiProjectsPage ? undefined : chatScopeEntityId;
+  // it). An open project is no location: a project room holds no files, and
+  // inside it the context is the folder picked in the project, else My
+  // documents, both resolved by the AI service itself.
+  const chatContextEntityId = isInsideAiProject ? undefined : chatScopeEntityId;
 
   // Chat error box override (Bug 83207): the wallet 402 must read as a
   // human message with a way to top up instead of the raw provider text.

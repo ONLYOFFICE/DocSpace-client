@@ -94,6 +94,7 @@ self: FilesActionStore,
     isArchiveFolderRoot,
     isTemplatesFolder,
     isFormsFolder,
+    isAiSectionFolder,
   } = self.treeFoldersStore;
 
   let newFilter: undefined;
@@ -112,7 +113,8 @@ self: FilesActionStore,
       isArchiveFolder ||
       isArchiveFolderRoot ||
       isTemplatesFolder ||
-      isFormsFolder
+      isFormsFolder ||
+      isAiSectionFolder
     ) {
       await fetchRooms(
         updatedFolder,

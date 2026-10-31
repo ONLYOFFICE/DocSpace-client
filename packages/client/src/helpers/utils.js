@@ -120,6 +120,12 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
     case FolderType.Forms:
       return parentId > 0 ? CategoryType.Form : CategoryType.Forms;
 
+    case FolderType.AiHub:
+      return parentId > 0 ? CategoryType.AiHubRoom : CategoryType.AiHub;
+
+    case FolderType.AiProjects:
+      return parentId > 0 ? CategoryType.AiProject : CategoryType.AiProjects;
+
     case FolderType.Archive:
       return CategoryType.Archive;
 
@@ -197,6 +203,20 @@ export const getCategoryUrl = (categoryType, folderId) => {
 
     case CategoryType.Form:
       return `/forms/${folderId}/filter`;
+
+    // The bare `/ai-rooms` is the Rooms app's SDK frame page; the "AI rooms"
+    // section lives on the nested paths the server links to.
+    case CategoryType.AiHub:
+      return "/ai-rooms/filter";
+
+    case CategoryType.AiHubRoom:
+      return `/ai-rooms/${folderId}/filter`;
+
+    case CategoryType.AiProjects:
+      return "/ai-projects/filter";
+
+    case CategoryType.AiProject:
+      return `/ai-projects/${folderId}/filter`;
 
     case CategoryType.SharedRoom:
       return `/rooms/shared/${folderId}/filter`;

@@ -37,7 +37,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { FileAction, Events } from "@docspace/shared/enums";
+import { FileAction, Events, RoomsType } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -68,6 +68,8 @@ const GlobalEvents = ({
   setCreatePDFFormFile,
   createPDFFormFileProps,
   userId,
+  openEditAiProject,
+  openCreateAiProject,
 }) => {
 
   const [createDialogProps, setCreateDialogProps] = useState({
@@ -180,6 +182,13 @@ const GlobalEvents = ({
   }, []);
 
   const onCreateRoom = useCallback((e) => {
+    // An AI project is created in the project form (model, linked rooms),
+    // not in the room dialog.
+    if (e?.payload?.isAiProjectCreate) {
+      openCreateAiProject();
+      return;
+    }
+
     const startRoomParams = getStartRoomParams(
       e?.payload?.startRoomType,
       e?.title,
@@ -190,6 +199,8 @@ const GlobalEvents = ({
       // straight on a preset room type and lock the chooser.
       startRoomType: e?.payload?.startRoomType,
       isFormsCreate: e?.payload?.isFormsCreate,
+      // The "AI rooms" section's chooser: Instructions, Knowledge, AI project.
+      isAiRoomsCreate: e?.payload?.isAiRoomsCreate,
       // Opens the dialog straight on the "from template" picker instead of the
       // room-type chooser (quick-actions "Room template" tile).
       withTemplateSelector: e?.payload?.withTemplateSelector,
@@ -202,12 +213,21 @@ const GlobalEvents = ({
           onClose: null,
           startRoomType: undefined,
           isFormsCreate: undefined,
+          isAiRoomsCreate: undefined,
           withTemplateSelector: undefined,
         }),
     });
   }, []);
 
   const onEditRoom = useCallback((e) => {
+    // An AI project is edited in the project form (model, linked rooms), not
+    // in the room dialog; the project is read first, as the list's room comes
+    // without its project block.
+    if (e.item?.roomType === RoomsType.AiProjectRoom) {
+      openEditAiProject(e.item.id);
+      return;
+    }
+
     const visible = !!e.item;
 
     setEditRoomDialogProps({
@@ -459,6 +479,7 @@ const GlobalEvents = ({
     onCreate,
     onCreateRoom,
     onEditRoom,
+    openEditAiProject,
     onCreateGroup,
     onEditGroup,
     onChangeUserType,
@@ -530,7 +551,7 @@ const GlobalEvents = ({
 };
 
 export default inject(
-  ({ settingsStore, pluginStore, dialogsStore, userStore }) => {
+  ({ settingsStore, pluginStore, dialogsStore, userStore, aiProjectsStore }) => {
     const { enablePlugins } = settingsStore;
 
     const {
@@ -556,6 +577,8 @@ export default inject(
       setCreatePDFFormFile,
       createPDFFormFileProps,
       userId: userStore?.user?.id,
+      openEditAiProject: aiProjectsStore.openEditDialogById,
+      openCreateAiProject: aiProjectsStore.openCreateDialog,
     };
   },
 )(observer(GlobalEvents));

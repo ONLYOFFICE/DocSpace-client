@@ -52,11 +52,7 @@ import {
   ContextMenuButtonDisplayType,
 } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 
-import type { TAiProject } from "@docspace/shared/api/ai/projects";
-
 import ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
-import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
-import { useProjectContextMenu } from "SRC_DIR/pages/AiProjects/sub-components/useProjectContextMenu";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import styles from "./itemTitle.module.scss";
@@ -72,7 +68,6 @@ type RoomsContextBtnProps = {
   externalShareApplyToRooms?: boolean;
   blockExistingLinksOnRestrict?: boolean;
   hasExternalLinks?: boolean;
-  aiProjectsStore?: AiProjectsStore;
 };
 
 const RoomsContextBtn = ({
@@ -83,7 +78,6 @@ const RoomsContextBtn = ({
   externalShareApplyToRooms,
   blockExistingLinksOnRestrict,
   hasExternalLinks,
-  aiProjectsStore,
 }: RoomsContextBtnProps) => {
   const { t } = useTranslation([
     "Files",
@@ -100,27 +94,10 @@ const RoomsContextBtn = ({
       contextMenuRef?.current?.show(e);
   };
 
-  // An AI project has its own menu, the one its header shows; "Info" is
-  // left out, the panel being open already.
-  // `inject` always passes the store; the prop is optional as injected ones are here.
-  const getProjectModel = useProjectContextMenu(aiProjectsStore!);
-  const isAIProject = "isAIProject" in selection && !!selection.isAIProject;
-
   const getData = useCallback(() => {
-    if (isAIProject) {
-      // The project itself, not its room-shaped copy in the selection.
-      const project =
-        (aiProjectsStore?.activeProject?.id === selection.id
-          ? aiProjectsStore.activeProject
-          : aiProjectsStore?.projects.find((p) => p.id === selection.id)) ??
-        (selection as unknown as TAiProject);
-      return getProjectModel(project).filter(
-        (item) => item.key !== "info",
-      );
-    }
     if (!getItemContextOptionsActions) return [];
     return getItemContextOptionsActions(selection, t, true);
-  }, [selection, t, getItemContextOptionsActions, isAIProject, getProjectModel, aiProjectsStore]);
+  }, [selection, t, getItemContextOptionsActions]);
 
   const data = useMemo(() => getData(), [selection, t]);
 
@@ -221,7 +198,6 @@ export default inject(
     contextOptionsStore,
     filesSettingsStore,
     publicRoomStore,
-    aiProjectsStore,
   }: TStore) => ({
     getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
     getIcon: filesSettingsStore.getIcon,
@@ -229,6 +205,5 @@ export default inject(
     blockExistingLinksOnRestrict:
       filesSettingsStore.blockExistingLinksOnRestrict,
     hasExternalLinks: publicRoomStore.hasExternalLinks,
-    aiProjectsStore,
   }),
 )(observer(RoomsContextBtn));

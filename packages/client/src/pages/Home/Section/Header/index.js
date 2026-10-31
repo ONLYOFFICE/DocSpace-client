@@ -94,6 +94,7 @@ import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHea
 import { useContactsHeader } from "./useContacts";
 import { getWarningText } from "../getWarningText";
 import { AnalyzeResponsesButton } from "./sub-components/AnalyzeResponses";
+import { ChatToolbar } from "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -102,6 +103,10 @@ const SectionHeaderContent = (props) => {
     getGroupContextOptions,
     t,
     isRoomsFolder,
+    isAiHubFolder,
+    isAiProjectsFolder,
+    isAiSectionFolder,
+    isAiProjectRoomRoot,
     security,
     setIsIndexEditingMode,
     tReady,
@@ -758,6 +763,13 @@ const SectionHeaderContent = (props) => {
         ? t("Common:Templates")
         : t("Common:Forms");
 
+    // The AI roots are titled by the client, as the tree titles them.
+    if (getCategoryType(location) === CategoryType.AiHub)
+      return t("Common:AiRooms");
+
+    if (getCategoryType(location) === CategoryType.AiProjects)
+      return t("Common:AIProjects");
+
     if (isContactsPage) {
       switch (contactsTab) {
         case "people":
@@ -939,7 +951,8 @@ const SectionHeaderContent = (props) => {
     isRootFolder,
   ]);
 
-  const withMenu = !isRoomsFolder && !isContactsGroupsPage;
+  const withMenu =
+    !isRoomsFolder && !isAiSectionFolder && !isContactsGroupsPage;
 
   if (showHeaderLoader) return <SectionHeaderSkeleton />;
 
@@ -1010,7 +1023,9 @@ const SectionHeaderContent = (props) => {
                 !isAiChatAvailable ||
                 isSettingsPage ||
                 isPublicRoom ||
-                isProfile
+                isProfile ||
+                // An open AI project is its chat: nothing to toggle.
+                isAiProjectRoomRoot
               }
               titles={{
                 warningText,
@@ -1019,9 +1034,11 @@ const SectionHeaderContent = (props) => {
                   : undefined,
                 actions: isFormsSection
                   ? t("Common:CreateFormSet")
-                  : isRoomsFolder
-                    ? t("Common:NewRoom")
-                    : t("Common:Actions"),
+                  : isAiProjectsFolder
+                    ? t("Common:NewAIProject")
+                    : isRoomsFolder || isAiHubFolder
+                      ? t("Common:NewRoom")
+                      : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
                 aiChat: t("Common:AIChatButton"),
@@ -1065,9 +1082,18 @@ const SectionHeaderContent = (props) => {
               showBackButton={isProfile}
               contextMenuHeader={isProfile ? undefined : contextMenuHeader}
               analyzeResponsesButton={
-                <AnalyzeResponsesButton
-                  className={styles.analyzeResponsesButton}
-                />
+                isAiProjectRoomRoot ? (
+                  // The project's chat toolbar (history, new chat) takes the
+                  // slot after the room menu, as the agents' header did.
+                  <ChatToolbar
+                    className={styles.analyzeResponsesButton}
+                    keepSessionProfile
+                  />
+                ) : (
+                  <AnalyzeResponsesButton
+                    className={styles.analyzeResponsesButton}
+                  />
+                )
               }
             />
             {showSignInButton ? (
@@ -1171,6 +1197,10 @@ export default inject(
     const {
       isRecycleBinFolder,
       isRoomsFolder,
+      isAiHubFolder,
+      isAiProjectsFolder,
+      isAiSectionFolder,
+      isAiProjectRoomRoot,
       isArchiveFolder,
       isPersonalReadOnly,
       isSharedWithMeFolderRoot,
@@ -1365,6 +1395,10 @@ export default inject(
       setIsLoading,
 
       isRoomsFolder,
+      isAiHubFolder,
+      isAiProjectsFolder,
+      isAiSectionFolder,
+      isAiProjectRoomRoot,
 
       selectedFolder,
 

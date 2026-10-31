@@ -842,7 +842,13 @@ class CreateEditRoomStore {
 
     const isFormRoom = room.roomType === RoomsType.FormRoom;
     const path = getCategoryUrl(
-      isFormRoom ? CategoryType.Form : CategoryType.SharedRoom,
+      isFormRoom
+        ? CategoryType.Form
+        : room.rootFolderType === FolderType.AiHub
+          ? CategoryType.AiHubRoom
+          : room.rootFolderType === FolderType.AiProjects
+            ? CategoryType.AiProject
+            : CategoryType.SharedRoom,
       room.id,
     );
 

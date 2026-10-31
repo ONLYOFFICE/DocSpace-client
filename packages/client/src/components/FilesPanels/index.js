@@ -108,9 +108,11 @@ import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
 import AskAIConnectDialog from "../dialogs/AskAIConnectDialog";
+import AiProjectDialog from "../dialogs/AiProjectDialog";
 
 const Panels = (props) => {
   const {
+    aiProjectDialogVisible,
     uploadPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
@@ -464,6 +466,7 @@ const Panels = (props) => {
     askAIConnectDialogVisible && (
       <AskAIConnectDialog key="ask-ai-connect-dialog" />
     ),
+    aiProjectDialogVisible && <AiProjectDialog key="ai-project-dialog" />,
   ];
 };
 
@@ -481,6 +484,7 @@ export default inject(
     filesStore,
     oformsStore,
     filesSettingsStore,
+    aiProjectsStore,
   }) => {
     const {
       copyPanelVisible,
@@ -601,6 +605,7 @@ export default inject(
         isNewRoomByCurrentUser;
 
     return {
+      aiProjectDialogVisible: aiProjectsStore.projectDialog !== null,
       preparationPortalDialogVisible,
       uploadPanelVisible,
       copyPanelVisible,

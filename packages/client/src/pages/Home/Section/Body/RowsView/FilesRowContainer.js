@@ -152,6 +152,7 @@ export default inject(
       isArchiveFolder,
       isTrashFolder,
       isFormsFolder,
+      isAiSectionFolder,
     } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
@@ -160,7 +161,7 @@ export default inject(
     const { primaryProgressDataStore } = uploadDataStore;
     const { setDropTargetPreview } = primaryProgressDataStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
     const canCreateSecurity = security?.Create;
 
     return {

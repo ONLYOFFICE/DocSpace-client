@@ -919,6 +919,18 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   );
   if (formsFolder) sorted.push(formsFolder);
 
+  const aiHubFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.AiHub,
+  );
+  if (aiHubFolder) sorted.push(aiHubFolder);
+
+  const aiProjectsFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.AiProjects,
+  );
+  if (aiProjectsFolder) sorted.push(aiProjectsFolder);
+
   const sharedWithMeFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.SHARE,
@@ -1618,7 +1630,32 @@ export const getCategoryType = (location: { pathname: string }) => {
   let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
   const { pathname } = location;
 
-  if (pathname.startsWith("/forms")) {
+  if (pathname.startsWith("/ai-rooms/")) {
+    // The "AI rooms" section (Instructions and Knowledge rooms): its own root
+    // for the list and the rooms, the shared special folders for the slots.
+    // The bare `/ai-rooms` is the Rooms app's SDK frame page, not this section.
+    const aiHubRoomRegexp = new RegExp(`(ai-rooms)/(${ROUTE_ID})`);
+
+    if (aiHubRoomRegexp.test(pathname)) {
+      categoryType = CategoryType.AiHubRoom;
+    } else if (pathname.indexOf("/recent") > -1) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.indexOf("/favorite") > -1) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.indexOf("/trash") > -1) {
+      categoryType = CategoryType.Trash;
+    } else {
+      categoryType = CategoryType.AiHub;
+    }
+  } else if (pathname.startsWith("/ai-projects")) {
+    // The "AI Projects" section: the list and a project, nothing else (a
+    // project holds no files, so the section has no slots).
+    const aiProjectRegexp = new RegExp(`(ai-projects)/(${ROUTE_ID})`);
+
+    categoryType = aiProjectRegexp.test(pathname)
+      ? CategoryType.AiProject
+      : CategoryType.AiProjects;
+  } else if (pathname.startsWith("/forms")) {
     const formRoomRegexp = new RegExp(`(forms)/(${ROUTE_ID})`);
 
     if (formRoomRegexp.test(pathname)) {

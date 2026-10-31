@@ -199,8 +199,47 @@ Pin and unpin (`PUT files/rooms/{id}/pin` and `.../unpin`) SHALL be personal to 
 - **WHEN** a user with 10 pinned projects pins another
 - **THEN** the answer is 403
 
+### Requirement: AI roots in @root
+`GET files/@root` SHALL include the AI rooms root (`FolderType.AiHub` 42, title "AI rooms") and the AI Projects root (`FolderType.AiProjects` 41) while AI services are enabled for the portal, each with its `new` count, as it includes the Rooms, Forms and Archive roots. Their `DIR-{id}` socket channels SHALL carry the folder events of the rooms created, changed or deleted under them.
+
+#### Scenario: AI enabled
+- **WHEN** a member calls `@root` on a portal with AI services enabled
+- **THEN** one section has `rootFolderType` 42 and one has 41
+
+#### Scenario: AI disabled
+- **WHEN** a member calls `@root` on a portal with AI services disabled
+- **THEN** no section has `rootFolderType` 41 or 42
+
+### Requirement: AI rooms root
+`POST files/rooms` with `roomType` 10 or 11 SHALL create the room under the AI rooms root, and `GET files/rooms?searchArea=AiHub` SHALL list that root's rooms with the filters, sorts and paging of the Active listing; such rooms SHALL NOT appear in `searchArea=Active`. Server links to them SHALL be `ai-rooms/{id}/filter?folder={id}`.
+
+#### Scenario: Knowledge room created
+- **WHEN** a room admin posts `files/rooms` with `roomType: 11`
+- **THEN** the room's `parentId` is the AI rooms root and it is listed by `searchArea=AiHub` only
+
+### Requirement: AI rooms lifecycle
+A room of the AI rooms root SHALL never be archived (403), made a template (403) or moved out of the root; a duplicate SHALL land in the same root; a delete SHALL remove the room outright. No folder SHALL be created in the root itself.
+
+#### Scenario: Archive refused
+- **WHEN** the owner archives an Instructions room
+- **THEN** the answer is 403
+
+### Requirement: Linked rooms come from the AI rooms root
+Only rooms of the AI rooms root SHALL be linked to a project and returned in its `instructionsRooms` and `knowledgeRooms`. No migration is needed: the feature is unreleased, so no Instructions or Knowledge room exists outside that root.
+
+#### Scenario: Linking a room
+- **WHEN** a Project manager links a Knowledge room listed by `searchArea=AiHub`
+- **THEN** the project's `knowledgeRooms` lists it
+
+### Requirement: Special folders scoped to AI rooms
+`GET files/@recent`, `@favorites` and `@trash` SHALL accept `folderType` 38 and 39 in their scope filter and return only the entries that sit in rooms of those types, the way they do for `FolderType.FormRoom`.
+
+#### Scenario: Scoped recent
+- **WHEN** a user calls `files/@recent?folderType=38&folderType=39`
+- **THEN** only files opened inside Instructions and Knowledge rooms are returned
+
 ### Requirement: Listing query
-`GET ai/projects` SHALL return a page of the projects the caller may see, pinned first. Query: `filterValue` (title), `sortBy` (`DateAndTime` default, `AZ`, `DateAndTimeCreation`, `Tags`, `Author`), `sortOrder`, `startIndex`, `count`, and the subject and tag filters of `files/rooms` (`subjectId` with `excludeSubject`, `subjectOwnerId`, `tags` as a JSON array, `withoutTags`). No other filter exists.
+`GET ai/projects` SHALL return a page of the projects the caller may see, pinned first, as the AI Projects root's folder content in the `files/rooms` shape. Query: `filterValue` (title), `sortBy` (`DateAndTime` default, `AZ`, `DateAndTimeCreation`, `Tags`, `Author`), `sortOrder`, `startIndex`, `count`, and the subject and tag filters of `files/rooms` (`subjectId` with `excludeSubject`, `subjectOwnerId`, `tags` as a JSON array, `withoutTags`). No other filter exists.
 
 #### Scenario: Outsider lists
 - **WHEN** a User who belongs to no project lists projects

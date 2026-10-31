@@ -821,8 +821,25 @@ export const buildContextOptions = (
       ]);
     }
 
-    if (item.roomType === RoomsType.FormRoom) {
+    // A form room is never archived. Neither is an AI room: the server keeps
+    // Instructions and Knowledge rooms in their own root, never archives them
+    // and makes no template of them, and refuses to move or duplicate an AI
+    // project; a delete removes them outright.
+    const isAiHubRoom =
+      item.roomType === RoomsType.InstructionsRoom ||
+      item.roomType === RoomsType.KnowledgeRoom;
+    const isAiProject = item.roomType === RoomsType.AiProjectRoom;
+
+    if (item.roomType === RoomsType.FormRoom || isAiHubRoom || isAiProject) {
       roomOptions = removeOptions(roomOptions, ["archive-room"]);
+    }
+
+    if (isAiHubRoom || isAiProject) {
+      roomOptions = removeOptions(roomOptions, ["save-as-template"]);
+    }
+
+    if (isAiProject) {
+      roomOptions = removeOptions(roomOptions, ["duplicate-room"]);
     }
 
     if (!canRemoveRoom) {
@@ -877,10 +894,15 @@ export const buildContextOptions = (
     const sectionGroupsArea = deps.treeFoldersStore.isFormsFolder
       ? RoomSearchArea.Forms
       : RoomSearchArea.Active;
+    // Room groups are kept per Rooms / Forms area; the AI sections have
+    // none.
     if (
       !organizeRoomsGrouping ||
       isArchiveFolder ||
       item.rootFolderType === FolderType.Archive ||
+      item.rootFolderType === FolderType.AiHub ||
+      item.rootFolderType === FolderType.AiProjects ||
+      deps.treeFoldersStore.isAiSectionFolder ||
       itemGroupsArea !== sectionGroupsArea
     ) {
       roomOptions = removeOptions(roomOptions, [

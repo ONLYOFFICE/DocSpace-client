@@ -318,8 +318,14 @@ self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
   let pinName = "unpin";
   const { selection } = self.filesStore;
 
+  // Form rooms and the AI types are never archived (the AI sections hold
+  // nothing else), so a selection holding one offers no "Archive".
   const hasFormRoom = selection.some(
-    (item) => item.roomType === RoomsType.FormRoom,
+    (item) =>
+      item.roomType === RoomsType.FormRoom ||
+      item.roomType === RoomsType.InstructionsRoom ||
+      item.roomType === RoomsType.KnowledgeRoom ||
+      item.roomType === RoomsType.AiProjectRoom,
   );
 
   selection.forEach((item) => {
@@ -404,6 +410,7 @@ self: FilesActionStore,t: TTranslation
     isRecentFolder,
     isTemplatesFolder,
     isFormsFolder,
+    isAiSectionFolder,
   } = self.treeFoldersStore;
 
   const itemsCollection = new Map();
@@ -424,7 +431,7 @@ self: FilesActionStore,t: TTranslation
   if (isArchiveFolder)
     return self.getArchiveRoomsFolderOptions(itemsCollection, t);
 
-  if (isRoomsFolder || isFormsFolder)
+  if (isRoomsFolder || isFormsFolder || isAiSectionFolder)
     return self.getRoomsFolderOptions(itemsCollection, t);
 
   if (isTemplatesFolder)

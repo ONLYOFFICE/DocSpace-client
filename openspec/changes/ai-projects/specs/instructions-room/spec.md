@@ -7,11 +7,11 @@ Defines the Instructions room (room type 10): a room whose Markdown files are th
 ## ADDED Requirements
 
 ### Requirement: Room type
-An Instructions room SHALL be a room of type 10 (`FolderType.InstructionsRoom` 38), offered in the room creation dialog with its own title, description and icon, listed and filterable in Rooms like any other room type. It SHALL be creatable by anyone who may create rooms.
+An Instructions room SHALL be a room of type 10 (`FolderType.InstructionsRoom` 38), offered in the "AI rooms" section's creation dialog with its own title, description and icon, created by `POST files/rooms` under the AI rooms root (`FolderType.AiHub` 42) and listed and filterable there like any other room type. The Rooms section SHALL NOT offer or list it. It SHALL be creatable by anyone who may create rooms.
 
 #### Scenario: Create
-- **WHEN** a room admin creates a room and picks "Instructions room"
-- **THEN** a room of type 10 appears in Rooms with the Instructions icon
+- **WHEN** a room admin creates a room in "AI rooms" and picks "Instructions room"
+- **THEN** a room of type 10 appears in "AI rooms" with the Instructions icon
 
 #### Scenario: Filter
 - **WHEN** the user filters Rooms by type "Instructions rooms"
@@ -113,8 +113,12 @@ The client SHALL show the list of a room's skills (names, descriptions) in one p
 - **THEN** the list shows it after the row is collapsed and expanded again
 
 ### Requirement: Archive and deletion
-An archived Instructions room SHALL stay usable by chats and projects that link it, read-only. A room in Trash SHALL be reported as unavailable in the projects that linked it; a permanently deleted room SHALL be unlinked from them.
+An Instructions room SHALL never be archived, made a template or moved out of the AI rooms root: the server refuses all three, and the client SHALL offer none of them. Delete SHALL remove the room outright; a deleted room SHALL be unlinked from the projects that linked it, and an open project SHALL stop showing it on its next read.
 
-#### Scenario: Archived room
-- **WHEN** a linked Instructions room is archived
-- **THEN** its skills still reach the project's chat and the room shows as archived in the project
+#### Scenario: No archive
+- **WHEN** the owner opens the menu of an Instructions room
+- **THEN** it offers no "Move to archive" and no "Save as template"
+
+#### Scenario: Deleted while linked
+- **WHEN** the owner deletes an Instructions room linked to a project
+- **THEN** the room is gone and the project's next read lists it no more

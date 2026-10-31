@@ -2107,6 +2107,7 @@ class FilesStore {
       isTemplatesFolder,
       isRecentFolder,
       isFormsFolder,
+      isAiSectionFolder,
     } = this.treeFoldersStore;
 
     // Only 100 files on recent page should be shown
@@ -2119,7 +2120,7 @@ class FilesStore {
     // The Forms section is a rooms listing (served via searchArea=Forms), so
     // its pagination total lives on roomsFilter, not the files filter.
     const isRooms =
-      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder || isAiSectionFolder;
     const filterTotal = isRooms ? this.roomsFilter.total : this.filter.total;
 
     if (this.clientLoadingStore.isLoading) return false;
@@ -2143,6 +2144,7 @@ class FilesStore {
       isArchiveFolder,
       isFavoritesFolder,
       isRecentFolder,
+      isAiSectionFolder,
     } = this.treeFoldersStore;
 
     return (
@@ -2150,7 +2152,8 @@ class FilesStore {
       isRoomsFolder ||
       isArchiveFolder ||
       isFavoritesFolder ||
-      isRecentFolder
+      isRecentFolder ||
+      isAiSectionFolder
     );
   }
 
@@ -2230,6 +2233,7 @@ class FilesStore {
       isRoomsFolder,
       isArchiveFolder,
       isFormsFolder,
+      isAiSectionFolder,
       isTemplatesFolder,
     } = this.treeFoldersStore;
 
@@ -2260,6 +2264,7 @@ class FilesStore {
       isRoomsFolder ||
       isArchiveFolder ||
       isFormsFolder ||
+      isAiSectionFolder ||
       isTemplatesFolder
         ? filterValue ||
           type ||

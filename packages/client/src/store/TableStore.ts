@@ -480,6 +480,7 @@ class TableStore {
         isSharedWithMeFolder,
         isInSharedFolder,
         isFormsFolder,
+        isAiSectionFolder,
       } = this.treeFoldersStore;
 
       const contactsView = getContactsView();
@@ -497,7 +498,7 @@ class TableStore {
         ? contactsView === "inside_group"
         : contactsTab === "inside_group";
 
-      const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+      const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
 
       if (isTemplatesFolder) {
         this.setTypeTemplatesColumn(splitColumns.includes("TypeTemplates"));
@@ -633,7 +634,7 @@ class TableStore {
   };
 
   setColumnEnable = (key: string) => {
-    const { isRoomsFolder, isArchiveFolder, isFormsFolder } =
+    const { isRoomsFolder, isArchiveFolder, isFormsFolder, isAiSectionFolder } =
       this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -647,7 +648,7 @@ class TableStore {
       ? contactsView === "inside_group"
       : contactsTab === "inside_group";
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
 
     switch (key) {
       case "Location":
@@ -906,6 +907,7 @@ class TableStore {
       isSharedWithMeFolder,
       isInSharedFolder,
       isFormsFolder,
+      isAiSectionFolder,
     } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -926,7 +928,7 @@ class TableStore {
       ? contactsView === "inside_group"
       : contactsTab === "inside_group";
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
     const userId = this.userStore.user?.id ?? GUEST_ID;
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms;
@@ -976,6 +978,7 @@ class TableStore {
       isSharedWithMeFolder,
       isInSharedFolder,
       isFormsFolder,
+      isAiSectionFolder,
     } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -996,7 +999,7 @@ class TableStore {
       ? contactsView === "inside_group"
       : contactsTab === "inside_group";
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
     const userId = this.userStore.user?.id ?? GUEST_ID;
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms;
@@ -1046,6 +1049,7 @@ class TableStore {
       isSharedWithMeFolder,
       isInSharedFolder,
       isFormsFolder,
+      isAiSectionFolder,
     } = this.treeFoldersStore;
 
     const { isIndexedFolder } = this.selectedFolderStore;
@@ -1066,7 +1070,7 @@ class TableStore {
       ? contactsView === "inside_group"
       : contactsTab === "inside_group";
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
     const userId = this.userStore.user?.id ?? GUEST_ID;
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms;

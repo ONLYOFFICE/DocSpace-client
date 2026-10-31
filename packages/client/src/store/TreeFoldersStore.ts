@@ -122,6 +122,12 @@ class TreeFoldersStore {
         case FolderType.Recent:
           folder.title = i18n.t("Common:Recent");
           break;
+        case FolderType.AiHub:
+          folder.title = i18n.t("Common:AiRooms");
+          break;
+        case FolderType.AiProjects:
+          folder.title = i18n.t("Common:AIProjects");
+          break;
         default:
           break;
       }
@@ -306,6 +312,18 @@ class TreeFoldersStore {
     );
   }
 
+  /** The "AI rooms" root (`FolderType.AiHub`: Instructions and Knowledge rooms), when `@root` serves it. */
+  get aiHubFolder() {
+    return this.treeFolders.find((x) => x.rootFolderType === FolderType.AiHub);
+  }
+
+  /** The "AI Projects" root (`FolderType.AiProjects`), when `@root` serves it. */
+  get aiProjectsFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.AiProjects,
+    );
+  }
+
   get commonFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.COMMON);
   }
@@ -328,6 +346,14 @@ class TreeFoldersStore {
 
   get archiveFolderId() {
     return this.archiveFolder ? this.archiveFolder.id : null;
+  }
+
+  get aiHubFolderId() {
+    return this.aiHubFolder ? this.aiHubFolder.id : null;
+  }
+
+  get aiProjectsFolderId() {
+    return this.aiProjectsFolder ? this.aiProjectsFolder.id : null;
   }
 
   get recycleBinFolderId() {
@@ -431,6 +457,45 @@ class TreeFoldersStore {
       FolderType.Forms === this.selectedFolderStore.rootFolderType &&
       this.selectedFolderStore.isRootFolder
     );
+  }
+
+  /** Anywhere under the "AI rooms" root: its list, a room or a folder inside one. */
+  get isAiHubFolderRoot() {
+    return FolderType.AiHub === this.selectedFolderStore.rootFolderType;
+  }
+
+  /** The "AI rooms" list itself (the root is the selected folder). */
+  get isAiHubFolder() {
+    return (
+      FolderType.AiHub === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
+  }
+
+  /** Anywhere under the "AI Projects" root: its list or a project. */
+  get isAiProjectsFolderRoot() {
+    return FolderType.AiProjects === this.selectedFolderStore.rootFolderType;
+  }
+
+  /** The "AI Projects" list itself (the root is the selected folder). */
+  get isAiProjectsFolder() {
+    return (
+      FolderType.AiProjects === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
+  }
+
+  /**
+   * Either AI section list ("AI rooms" or "AI Projects"): a rooms listing,
+   * as the Rooms and Forms roots are, for the Files stores' rooms branches.
+   */
+  get isAiSectionFolder() {
+    return this.isAiHubFolder || this.isAiProjectsFolder;
+  }
+
+  /** An AI project room (type 12) is the selected folder: Home draws the project workspace. */
+  get isAiProjectRoomRoot() {
+    return this.selectedFolderStore.roomType === RoomsType.AiProjectRoom;
   }
 
   get isFormRoomRoot() {

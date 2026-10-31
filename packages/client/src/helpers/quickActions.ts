@@ -70,6 +70,9 @@ export type SectionFlags = {
   isRecentFolder?: boolean;
   // View-level flags (already computed in Home/Header).
   isFormsSection?: boolean; // the "Forms" section root (CategoryType.Forms)
+  // The "AI Rooms" section root and an AI project room: no tile set applies
+  // (the room tiles are the ordinary room types; a project holds no files).
+  isAiProjectsSection?: boolean;
   isContactsPage?: boolean;
   isProfile?: boolean;
   isSettingsPage?: boolean;
@@ -91,6 +94,7 @@ export const getQuickActionsSection = (
     isFavoritesFolder,
     isRecentFolder,
     isFormsSection,
+    isAiProjectsSection,
     isContactsPage,
     isProfile,
     isSettingsPage,
@@ -98,6 +102,7 @@ export const getQuickActionsSection = (
 
   // Never inside non-files areas or read-only / special folders.
   if (isContactsPage || isProfile || isSettingsPage) return null;
+  if (isAiProjectsSection) return null;
   if (
     isArchiveFolder ||
     isRecycleBinFolder ||

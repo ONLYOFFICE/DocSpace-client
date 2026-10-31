@@ -49,6 +49,7 @@ import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 import ProtectedAppRoute from "../components/ProtectedAppRoute";
+import AiRoomsRoute from "../components/AiRoomsRoute";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
 import { contactsRoutes } from "./contacts";
@@ -396,6 +397,143 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
+          // The AI sections, gated by the portal's AI switch rather than by an
+          // app. "AI rooms" (Instructions and Knowledge rooms, searchArea=AiHub)
+          // takes the nested `/ai-rooms/*` paths the server links to, with its
+          // Recent / Favorites / Trash slots; the bare `/ai-rooms` stays the
+          // Rooms app's SDK frame page (a top-level route below).
+          {
+            path: "ai-rooms/filter",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/:room",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/:room/filter",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/recent",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/recent/filter",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/favorites",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/favorites/filter",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/trash",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/trash/filter",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          // "AI Projects" (searchArea=AiProjects, read from `ai/projects`): the
+          // list and a project, whose chat Home draws in place of a file list.
+          {
+            path: "ai-projects",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-projects/filter",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-projects/:room",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-projects/:room/filter",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
           {
             path: "rooms/archived",
             element: (
@@ -625,26 +763,6 @@ const ClientRoutes = [
             <PrivateRoute>
               <ErrorBoundary>
                 <Dashboard />
-              </ErrorBoundary>
-            </PrivateRoute>
-          );
-
-          return { Component };
-        },
-      },
-      {
-        path: "/ai-projects/:projectId?",
-        async lazy() {
-          const { AiProjects } = await componentLoader(
-            () => import("SRC_DIR/pages/AiProjects"),
-          );
-
-          // With AI services off the page itself sends the user to their
-          // start page (see AiProjectsGate), so the route is not gated here.
-          const Component = () => (
-            <PrivateRoute>
-              <ErrorBoundary>
-                <AiProjects />
               </ErrorBoundary>
             </PrivateRoute>
           );

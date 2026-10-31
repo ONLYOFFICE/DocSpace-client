@@ -53,6 +53,11 @@ import {
   aiProjectSkillsHandler,
   aiProjectsHandler,
   aiProjectsHandlers,
+  AI_HUB_ROOMS,
+  AI_HUB_ROOT_ID,
+  aiHubRoomsHandler,
+  aiRoomFolderHandler,
+  aiSectionsHandlers,
 } from "./projects";
 import {
   aiVectorizationGetHandler,
@@ -97,6 +102,11 @@ export {
   aiProjectSkillsHandler,
   aiProjectsHandler,
   aiProjectsHandlers,
+  AI_HUB_ROOMS,
+  AI_HUB_ROOT_ID,
+  aiHubRoomsHandler,
+  aiRoomFolderHandler,
+  aiSectionsHandlers,
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
   aiChatAssignmentsHandler,
@@ -125,7 +135,7 @@ export {
   AiActionType,
 } from "./chatStores";
 export type { AiChatProfile, AssignmentMap } from "./chatStores";
-export type { AiProjectMock } from "./projects";
+export type { AiProjectMock, AiHubRoomMock } from "./projects";
 export {
   META_FILL_RESULT,
   META_GENERATE_RESULT,

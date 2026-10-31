@@ -213,8 +213,10 @@ const InvitePanel = ({
     },
   ];
 
-  // An AI project is not in the Files list: it comes from the projects page.
-  // Its members and invitation link go through the room routes like any room.
+  // The open AI project is read from its store rather than the Files list
+  // (the list holds the room without its project block, and may hold a
+  // different folder while the project is open). Its members and invitation
+  // link go through the room routes like any room.
   const aiProject = roomId !== -1 ? findAiProject(roomId) : null;
   const setInvitationLink = api.rooms.setInvitationLinks;
 
@@ -1218,10 +1220,9 @@ export default inject(
     const { getFolderInfo, folders } = filesStore;
 
     const findAiProject = (id) =>
-      aiProjectsStore.projects.find((project) => project.id === id) ??
-      (aiProjectsStore.activeProject?.id === id
+      aiProjectsStore.activeProject?.id === id
         ? aiProjectsStore.activeProject
-        : null);
+        : null;
 
     const { isRoomAdmin } = authStore;
 

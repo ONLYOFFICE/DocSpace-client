@@ -46,6 +46,8 @@ export const FILTER_SHARE = "UserFilterShare";
 export const FILTER_SHARED_ROOM = "UserRoomsSharedFilter";
 export const FILTER_ARCHIVE_ROOM = "UserRoomsArchivedFilter";
 export const FILTER_TEMPLATES_ROOM = "UserRoomsTemplatesFilter";
+export const FILTER_AI_HUB_ROOMS = "UserAiHubRoomsFilter";
+export const FILTER_AI_PROJECTS = "UserAiProjectsFilter";
 
 // Room document filters
 export const FILTER_ROOM_DOCUMENTS = "UserFilterSharedRoom";

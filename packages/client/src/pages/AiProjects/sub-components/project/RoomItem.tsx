@@ -88,7 +88,7 @@ const RoomItem = ({
     onOpen?.();
     if (onOpenItem) onOpenItem();
     // The address Files opens a room by; without `folder` the room id is lost.
-    else navigate(`/rooms/shared/${id}/filter?folder=${id}`);
+    else navigate(`/ai-rooms/${id}/filter?folder=${id}`);
   };
 
   const item = (

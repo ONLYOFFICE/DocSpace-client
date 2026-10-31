@@ -765,10 +765,11 @@ export async function fetchMoreFilesImpl(self: FilesStore) {
     isArchiveFolder,
     isTemplatesFolder,
     isFormsFolder,
+    isAiSectionFolder,
   } = self.treeFoldersStore;
 
   const isRooms =
-    isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
+    isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder || isAiSectionFolder;
 
   self.setFilesIsLoading(true);
   // console.log("fetchMoreFiles");

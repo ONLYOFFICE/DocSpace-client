@@ -331,7 +331,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
             >
               {!loaded && store.skillsLoading ? (
                 <RoomContentSkeleton testId={`ai-project-skills-loading-${room.id}`} />
-              ) : skills.length === 0 ? (
+              ) : !loaded && store.skillsPending ? null : skills.length === 0 ? (
                 <Text className={classNames(styles.note, styles.nested)}>{t("Common:AIProjectSkillsEmpty")}</Text>
               ) : (
                 <ul className={classNames(styles.list, styles.nested)}>
@@ -393,7 +393,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
             >
               {!loaded && store.knowledgeLoading ? (
                 <RoomContentSkeleton testId={`ai-project-knowledge-loading-${room.id}`} />
-              ) : loaded && files.length === 0 ? (
+              ) : !loaded && store.knowledgePending ? null : loaded && files.length === 0 ? (
                 <Text className={classNames(styles.note, styles.nested)}>{t("Common:NoItemsHereYet")}</Text>
               ) : (
               <ul className={classNames(styles.list, styles.nested)}>

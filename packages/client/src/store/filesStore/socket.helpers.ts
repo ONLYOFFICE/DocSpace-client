@@ -535,6 +535,21 @@ export function redirectToParentImpl(
   const userId = self.userStore.user && self.userStore.user.id;
 
   switch (rootFolderType) {
+    case FolderType.AiHub:
+    case FolderType.AiProjects: {
+      const isAiHub = rootFolderType === FolderType.AiHub;
+      const searchArea = isAiHub
+        ? RoomSearchArea.AiHub
+        : RoomSearchArea.AiProjects;
+      const aiFilter = RoomsFilter.getDefault(userId as string, searchArea);
+      aiFilter.searchArea = searchArea;
+      const params = aiFilter.toUrlParams(userId as string, true);
+      const path = getCategoryUrl(
+        isAiHub ? CategoryType.AiHub : CategoryType.AiProjects,
+      );
+
+      return window.DocSpace.navigate(`${path}?${params}`, { replace: true });
+    }
     case FolderType.Archive: {
       const archiveFilter = RoomsFilter.getDefault(
         userId as string,

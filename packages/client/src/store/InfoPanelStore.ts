@@ -410,7 +410,7 @@ class InfoPanelStore {
     );
   };
 
-  /** The AI projects page shows a project in the panel as a room. */
+  /** The "AI Projects" section shows a project in the panel as a room. */
   getIsAiProjects = () =>
     window.location.pathname.toLowerCase().startsWith("/ai-projects");
 

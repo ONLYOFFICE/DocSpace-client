@@ -34,41 +34,53 @@
  */
 
 import React from "react";
-import { observer } from "mobx-react";
+import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
-import type { ShareAccessRights } from "@docspace/shared/enums";
 import type { TAiProject } from "@docspace/shared/api/ai/projects";
+import { CategoryType } from "@docspace/shared/constants";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
-import { TagManagement } from "SRC_DIR/components/TagManagement";
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import CreateEditProjectDialog from "SRC_DIR/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog";
 
-type ProjectTagsProps = {
-  store: AiProjectsStore;
-  project: TAiProject;
-  /** How many tags fit before the rest fold into the "+N" tag. */
-  columnCount: number;
-  isActive?: boolean;
-  className?: string;
+type AiProjectDialogProps = {
+  aiProjectsStore: AiProjectsStore;
 };
 
 /**
- * The tags of a project, as a room's tags show in the rooms list: the same
- * tag management (bind, create, rename, remove by the room access), a
- * clicked tag filtering the list, and every change applied to the projects
- * on screen.
+ * The create / edit form of an AI project, mounted with the other Files
+ * panels: it opens from the AI Rooms section's chooser ("AI project"), from
+ * "Edit" on a project room and from the project's own intro. A created
+ * project opens in the section, as a new room does.
  */
-export const ProjectTags = observer(({ store, project, columnCount, isActive, className }: ProjectTagsProps) => (
-  <TagManagement
-    className={className}
-    tags={project.tags}
-    id={project.id}
-    access={project.access as unknown as ShareAccessRights}
-    roomName={project.title}
-    columnCount={columnCount}
-    isActive={isActive}
-    onSelectTag={store.selectTag}
-    onTagsChanged={store.applyTagChange}
-  />
-));
+const AiProjectDialog = ({ aiProjectsStore }: AiProjectDialogProps) => {
+  const navigate = useNavigate();
+  const dialog = aiProjectsStore.projectDialog;
 
-export default ProjectTags;
+  const onCreated = React.useCallback(
+    (project: TAiProject) => {
+      const filter = FilesFilter.getDefault();
+      filter.folder = String(project.id);
+      navigate(
+        `${getCategoryUrl(CategoryType.AiProject, project.id)}?${filter.toUrlParams()}`,
+      );
+    },
+    [navigate],
+  );
+
+  if (!dialog) return null;
+
+  return (
+    <CreateEditProjectDialog
+      key={dialog.mode}
+      store={aiProjectsStore}
+      onCreated={onCreated}
+    />
+  );
+};
+
+export default inject(({ aiProjectsStore }: TStore) => ({ aiProjectsStore }))(
+  observer(AiProjectDialog),
+);

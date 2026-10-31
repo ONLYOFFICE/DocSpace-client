@@ -55,6 +55,8 @@ type CreateButtonMobileProps = {
   currentClientView?: string;
   contactsTab?: string;
   isRoomsFolder?: boolean;
+  isAiHubFolder?: boolean;
+  isAiProjectsFolder?: boolean;
   isFormsFolder?: boolean;
   selectedFolderId?: number | string;
   currentDeviceType?: DeviceType;
@@ -69,6 +71,8 @@ const CreateButtonMobile = ({
   currentClientView,
   contactsTab,
   isRoomsFolder,
+  isAiHubFolder,
+  isAiProjectsFolder,
   isFormsFolder,
   selectedFolderId,
   currentDeviceType,
@@ -93,6 +97,8 @@ const CreateButtonMobile = ({
     isContactsGroupsPage,
     isContactsGuestsPage,
     isRoomsFolder: !!isRoomsFolder,
+    isAiHubFolder: !!isAiHubFolder,
+    isAiProjectsFolder: !!isAiProjectsFolder,
     isFormsSection,
     isFormsFolder: !!isFormsFolder,
     selectedFolderId,
@@ -134,6 +140,8 @@ export default inject(
     currentClientView: clientLoadingStore.currentClientView,
     contactsTab: peopleStore.usersStore.contactsTab,
     isRoomsFolder: treeFoldersStore.isRoomsFolder,
+    isAiHubFolder: treeFoldersStore.isAiHubFolder,
+    isAiProjectsFolder: treeFoldersStore.isAiProjectsFolder,
     isFormsFolder: treeFoldersStore.isFormsFolder,
     selectedFolderId: selectedFolderStore.id,
     currentDeviceType: settingsStore.currentDeviceType,

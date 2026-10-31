@@ -78,7 +78,10 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import type { ValueOf } from "@docspace/shared/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
+import {
+  AI_HUB_SECTION_FOLDER_TYPES,
+  ROOMS_SECTION_FOLDER_TYPES,
+} from "@docspace/shared/utils/rooms";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import CatalogAiProjectsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
@@ -313,6 +316,8 @@ const ClientArticleSidebar = ({
     const favFolder = find(FolderType.Favorites);
     const trashFolder = find(FolderType.TRASH);
     const formsFolder = find(FolderType.Forms);
+    const aiHubFolder = find(FolderType.AiHub);
+    const aiProjectsFolder = find(FolderType.AiProjects);
 
     const mainItems: NavMenuItem[] = [];
 
@@ -531,16 +536,75 @@ const ClientArticleSidebar = ({
       });
     }
 
-    // AI Projects closes the apps: the saved AI chat setups, each opening a
-    // fullscreen chat with its model, skills room and knowledge base. It
-    // takes the former AI Agents icon and place, and is on offer only while the
-    // portal has AI switched on.
-    if (aiServicesEnabled) {
+    // The AI sections close the apps, while the portal has AI switched on
+    // (the server only serves their roots then). "AI rooms" holds the
+    // Instructions and Knowledge rooms (`FolderType.AiHub`) and, like Rooms
+    // and Forms, carries Recent / Favorites / Trash scoped to its room types;
+    // the server never archives them, so there is no Archive slot. "AI
+    // Projects" (`FolderType.AiProjects`) holds the projects, which hold no
+    // files, so it has no slots. The bare `/ai-rooms` is the Rooms app's SDK
+    // frame page: the section lives on the nested paths.
+    if (aiHubFolder && aiServicesEnabled) {
+      mainItems.push({
+        id: "ai-rooms",
+        label: t("Common:AiRooms"),
+        icon: getCatalogIconUrlByType(FolderType.Rooms),
+        ...nav(searchAreaUrl("/ai-rooms/filter", RoomSearchArea.AiHub)),
+        ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),
+        children: [
+          {
+            id: "ai-rooms-recent",
+            label: t("Common:Recent"),
+            icon: getCatalogIconUrlByType(FolderType.Recent),
+            ...nav(
+              scopedUrl(
+                CategoryType.Recent,
+                "/ai-rooms/recent",
+                recentFolderId,
+                AI_HUB_SECTION_FOLDER_TYPES,
+              ),
+            ),
+          },
+          {
+            id: "ai-rooms-favorites",
+            label: t("Common:Favorites"),
+            icon: getCatalogIconUrlByType(FolderType.Favorites),
+            ...nav(
+              scopedUrl(
+                CategoryType.Favorite,
+                "/ai-rooms/favorites",
+                favoritesFolderId,
+                AI_HUB_SECTION_FOLDER_TYPES,
+              ),
+            ),
+          },
+          {
+            id: "ai-rooms-trash",
+            label: t("Common:TrashSection"),
+            icon: getCatalogIconUrlByType(FolderType.TRASH),
+            ...nav(
+              scopedUrl(
+                CategoryType.Trash,
+                "/ai-rooms/trash",
+                recycleBinFolderId,
+                AI_HUB_SECTION_FOLDER_TYPES,
+              ),
+            ),
+            withTopSeparator: true,
+          },
+        ],
+      });
+    }
+
+    if (aiProjectsFolder && aiServicesEnabled) {
       mainItems.push({
         id: "ai-projects",
         label: t("Common:AIProjects"),
         icon: CatalogAiProjectsReactSvgUrl,
-        ...nav("/ai-projects"),
+        ...nav(
+          searchAreaUrl("/ai-projects/filter", RoomSearchArea.AiProjects),
+        ),
+        ...sectionBadge(aiProjectsFolder.id, newCount(aiProjectsFolder)),
       });
     }
 

@@ -70,6 +70,10 @@ import useProfileBody, {
 import useContacts, { type UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { type UseFilesProps } from "../Hooks/useFiles";
 import OformsStore from "SRC_DIR/store/OformsStore";
+import AiProjectViewConnected from "SRC_DIR/pages/AiProjects/AiProjectView";
+
+// Every prop of the project view is injected.
+const AiProjectView = AiProjectViewConnected as unknown as React.FC;
 
 type ViewProps = UseContactsProps &
   UseFilesProps &
@@ -91,6 +95,8 @@ type ViewProps = UseContactsProps &
 
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
     currentExtensionGallery: OformsStore["currentExtensionGallery"];
+    /** An AI project room is the selected folder: its chat replaces the file list. */
+    isAiProjectRoomRoot: boolean;
   };
 
 const View = ({
@@ -155,6 +161,7 @@ const View = ({
   setNotificationChannels,
   checkTg,
   getEncryptionKeys,
+  isAiProjectRoomRoot,
 }: ViewProps) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -487,6 +494,8 @@ const View = ({
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
+          ) : isAiProjectRoomRoot && !isLoading ? (
+            <AiProjectView />
           ) : (
             <SectionBodyContent sectionWidth={context.sectionWidth} />
           )
@@ -583,6 +592,7 @@ export const ViewComponent = inject(
     const { checkTg } = telegramStore;
 
     return {
+      isAiProjectRoomRoot: treeFoldersStore.isAiProjectRoomRoot,
       setContactsTab,
       getUsersList,
       getGroups,

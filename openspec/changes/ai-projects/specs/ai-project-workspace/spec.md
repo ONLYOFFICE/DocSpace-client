@@ -7,14 +7,14 @@ Defines the open-project view: how a project opens, the header and chat it shows
 ## ADDED Requirements
 
 ### Requirement: Opening a project
-Opening a project from the list, or through a `/ai-projects/{id}` deep link, SHALL start a fresh thread in the section body under a header with back, the project name, its context menu, the Info panel toggle and the chat toolbar (chat history, new chat), and SHALL set the URL to `/ai-projects/{id}`. A deep link to a project the caller cannot read SHALL show the server's error as a toast.
+Opening a project from the "AI Projects" list, or through a `/ai-projects/{id}/filter?folder={id}` deep link, SHALL start a fresh thread in the section body under a header with back, the project name, its context menu, the Info panel toggle and the chat toolbar (chat history, new chat). The workspace replaces the file list of the Home page for a room of type 12; the URL keeps the room URL shape. A deep link to a project the caller cannot read SHALL show the server's error as a toast.
 
 #### Scenario: Open from the list
 - **WHEN** the user opens the "Sales" project from the list
-- **THEN** the URL becomes `/ai-projects/{id}` and a new thread of the project's chat fills the section under the project header
+- **THEN** the URL becomes `/ai-projects/{id}/filter?folder={id}` and a new thread of the project's chat fills the section under the project header
 
 #### Scenario: Deep link to an unreadable project
-- **WHEN** the user loads `/ai-projects/{id}` for a project that is gone or not shared with them
+- **WHEN** the user loads `/ai-projects/{id}/filter?folder={id}` for a project that is gone or not shared with them
 - **THEN** a toast shows the server's error and no project opens
 
 ### Requirement: Fixed model

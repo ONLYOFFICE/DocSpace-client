@@ -41,40 +41,37 @@ import {
   selfActivationStatusHandler,
   selfByTypeHandler,
   aiConfigHandler,
-  aiProjectsHandlers,
+  aiSectionsHandlers,
+  AI_HUB_ROOMS,
   AI_PROJECT_WITH_SOURCES,
 } from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 /**
- * Who can reach the AI Projects section by URL.
- *
- * The portal-wide AI switch (Settings -> Integration -> AI services) takes the
- * section away: the sidebar item goes with it. The address bar stays the one
- * way in - a bookmark, a link in an old e-mail, the tab the user was on when
- * an admin flipped the switch - and it has to lead somewhere sensible: not a
- * 404 (the portal is fine, only this section is off) but the page the user
- * chose as their start page.
- *
- * Done by the gate around the page (pages/AiProjects, `AiProjectsGate`),
- * which renders `DefaultPageRedirect` while the flag is off.
- *
- * Assertions are functional only, so this holds on a local run as well as in
- * Docker.
+ * The two AI sections sit behind the portal's AI switch: "AI rooms" on the
+ * nested `/ai-rooms/*` paths and "AI Projects" on `/ai-projects/*`, the
+ * lists and a room in each. With AI off every one of them sends the user to
+ * their start page, never to an error page.
  */
 
-const PROJECTS_URLS = [
+const [HUB_ROOM] = AI_HUB_ROOMS;
+
+const SECTION_URLS = [
+  "/ai-rooms/filter",
+  `/ai-rooms/${HUB_ROOM.id}/filter?folder=${HUB_ROOM.id}`,
   "/ai-projects",
-  `/ai-projects/${AI_PROJECT_WITH_SOURCES.id}`,
+  `/ai-projects/${AI_PROJECT_WITH_SOURCES.id}/filter?folder=${AI_PROJECT_WITH_SOURCES.id}`,
 ];
+
+const SECTION_PATH = /^\/ai-(rooms\/|projects)/;
 
 const ERROR_404_PATH = "/error/404";
 
 const pathnameOf = (page: Page) => new URL(page.url()).pathname;
 
-test.describe("AI Projects section access", () => {
-  test("is left for the user's start page once AI services are switched off", async ({
+test.describe("AI sections access", () => {
+  test("are left for the user's start page once AI services are switched off", async ({
     page,
     baseUrl,
     mockRequest,
@@ -88,24 +85,24 @@ test.describe("AI Projects section access", () => {
       // The portal's AI is not set up either, which is the state a portal with
       // the switch off is normally in.
       aiConfigHandler(TEST_PORT, true),
-      ...aiProjectsHandlers(TEST_PORT),
+      ...aiSectionsHandlers(TEST_PORT),
     );
 
-    for (const url of PROJECTS_URLS) {
+    for (const url of SECTION_URLS) {
       await page.goto(`${baseUrl}${url}`);
 
       await expect
         .poll(() => pathnameOf(page), {
           message: `${url} stayed open with AI services off`,
         })
-        .not.toMatch(/^\/ai-projects/);
+        .not.toMatch(SECTION_PATH);
 
-      // Not an error page: the portal works, only the section is off.
+      // Not an error page: the portal works, only the sections are off.
       expect(pathnameOf(page)).not.toBe(ERROR_404_PATH);
     }
   });
 
-  test("stays open while AI services are on", async ({
+  test("stay open while AI services are on", async ({
     page,
     baseUrl,
     mockRequest,
@@ -115,17 +112,17 @@ test.describe("AI Projects section access", () => {
       selfByTypeHandler(TEST_PORT, "owner"),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       aiConfigHandler(TEST_PORT),
-      ...aiProjectsHandlers(TEST_PORT),
+      ...aiSectionsHandlers(TEST_PORT),
     );
 
-    for (const url of PROJECTS_URLS) {
+    for (const url of SECTION_URLS) {
       await page.goto(`${baseUrl}${url}`);
 
       await expect
         .poll(() => pathnameOf(page), {
           message: `${url} was bounced with AI services on`,
         })
-        .toMatch(/^\/ai-projects/);
+        .toMatch(SECTION_PATH);
     }
   });
 });

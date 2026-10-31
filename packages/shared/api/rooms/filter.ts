@@ -47,6 +47,8 @@ import {
   FILTER_ARCHIVE_ROOM,
   FILTER_SHARED_ROOM,
   FILTER_TEMPLATES_ROOM,
+  FILTER_AI_HUB_ROOMS,
+  FILTER_AI_PROJECTS,
 } from "../../utils/filterConstants";
 import { getUserFilter, setUserFilter } from "../../utils/userFilterUtils";
 import { TSortOrder, TSortBy, Nullable } from "../../types";
@@ -168,7 +170,11 @@ class RoomsFilter {
             ? `${FILTER_ARCHIVE_ROOM}=${userId}`
             : defaultFilter.searchArea === RoomSearchArea.Templates
               ? `${FILTER_TEMPLATES_ROOM}=${userId}`
-              : "";
+              : defaultFilter.searchArea === RoomSearchArea.AiHub
+                ? `${FILTER_AI_HUB_ROOMS}=${userId}`
+                : defaultFilter.searchArea === RoomSearchArea.AiProjects
+                  ? `${FILTER_AI_PROJECTS}=${userId}`
+                  : "";
 
       try {
         const filterStorageItem = getUserFilter(storageKey);
@@ -474,15 +480,21 @@ class RoomsFilter {
     const archivedFilterKey = `${FILTER_ARCHIVE_ROOM}=${userId}`;
     const sharedFilterKey = `${FILTER_SHARED_ROOM}=${userId}`;
     const templatesFilterKey = `${FILTER_TEMPLATES_ROOM}=${userId}`;
+    const aiHubFilterKey = `${FILTER_AI_HUB_ROOMS}=${userId}`;
+    const aiProjectsFilterKey = `${FILTER_AI_PROJECTS}=${userId}`;
 
     let archivedStorageFilter = null;
     let sharedStorageFilter = null;
     let templatesStorageFilter = null;
+    let aiHubStorageFilter = null;
+    let aiProjectsStorageFilter = null;
 
     try {
       archivedStorageFilter = getUserFilter(archivedFilterKey);
       sharedStorageFilter = getUserFilter(sharedFilterKey);
       templatesStorageFilter = getUserFilter(templatesFilterKey);
+      aiHubStorageFilter = getUserFilter(aiHubFilterKey);
+      aiProjectsStorageFilter = getUserFilter(aiProjectsFilterKey);
     } catch {
       // console.log(e);
     }
@@ -510,6 +522,18 @@ class RoomsFilter {
       templatesStorageFilter = dtoFilter;
     }
 
+    if (isEmpty(aiHubStorageFilter) && userId) {
+      defaultFilter.searchArea = RoomSearchArea.AiHub;
+      setUserFilter(aiHubFilterKey, defaultFilter);
+      aiHubStorageFilter = dtoFilter;
+    }
+
+    if (isEmpty(aiProjectsStorageFilter) && userId) {
+      defaultFilter.searchArea = RoomSearchArea.AiProjects;
+      setUserFilter(aiProjectsFilterKey, defaultFilter);
+      aiProjectsStorageFilter = dtoFilter;
+    }
+
     const currentStorageFilter =
       dtoFilter.searchArea === RoomSearchArea.Active
         ? sharedStorageFilter
@@ -517,7 +541,11 @@ class RoomsFilter {
           ? archivedStorageFilter
           : dtoFilter.searchArea === RoomSearchArea.Templates
             ? templatesStorageFilter
-            : "";
+            : dtoFilter.searchArea === RoomSearchArea.AiHub
+              ? aiHubStorageFilter
+              : dtoFilter.searchArea === RoomSearchArea.AiProjects
+                ? aiProjectsStorageFilter
+                : "";
 
     const urlParams =
       withLocalStorage && currentStorageFilter

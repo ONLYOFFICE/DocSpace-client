@@ -40,7 +40,10 @@ import { useLocation, useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
-import { ROOMS_SECTION_TYPES } from "@docspace/shared/utils/rooms";
+import {
+  AI_HUB_SECTION_TYPES,
+  ROOMS_SECTION_TYPES,
+} from "@docspace/shared/utils/rooms";
 import FilterInput from "@onlyoffice/apps-ui-kit/components/filter";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
@@ -176,6 +179,8 @@ const SectionFilterContent = ({
   roomGroups,
   isRoomsFolder,
   isFormsFolder,
+  isAiHubFolder,
+  isAiProjectsFolder,
   organizeRoomsGrouping,
   getPinnedGroupId,
 }) => {
@@ -186,16 +191,27 @@ const SectionFilterContent = ({
   // Form Filling Rooms only, so the room-type filter is not offered there.
   const isFormsSection = location.pathname.startsWith("/forms");
 
+  // The AI sections are roots of their own: "AI rooms" (searchArea=AiHub)
+  // filters by the Instructions and Knowledge types, "AI Projects"
+  // (searchArea=AiProjects) holds one type and offers no type filter. The
+  // bare `/ai-rooms` is the SDK frame page, not this section.
+  const isAiHubSection = location.pathname.startsWith("/ai-rooms/");
+  const isAiProjectsSection = location.pathname.startsWith("/ai-projects");
+
   // Trash is a single, centralized folder reached from several sections
   // (/files/trash, /rooms/trash, /forms/trash, ...). The "Room" filter only
-  // makes sense for Trash opened from the Rooms section.
-  const isRoomsTrash = location.pathname.startsWith("/rooms/trash");
+  // makes sense for Trash opened from a rooms section.
+  const isRoomsTrash =
+    location.pathname.startsWith("/rooms/trash") ||
+    location.pathname.startsWith("/ai-rooms/trash");
 
   // Base path for room-list navigation (sort/search/filter). The "Forms"
   // section keeps its own route instead of falling back to "rooms/shared".
   const getRoomsListBasePath = React.useCallback(
     (searchArea) => {
       if (isFormsSection) return "forms";
+      if (searchArea === RoomSearchArea.AiHub) return "ai-rooms";
+      if (searchArea === RoomSearchArea.AiProjects) return "ai-projects";
 
       return searchArea === RoomSearchArea.Active ||
         searchArea === RoomSearchArea.Templates
@@ -226,6 +242,8 @@ const SectionFilterContent = ({
     isContactsGroupsPage,
     isContactsGuestsPage,
     isRoomsFolder,
+    isAiHubFolder,
+    isAiProjectsFolder,
     isFormsSection,
     isFormsFolder,
     selectedFolderId,
@@ -445,6 +463,8 @@ const SectionFilterContent = ({
     [
       isRooms,
       isTrash,
+      isAiHubFolder,
+      isAiProjectsFolder,
       isRoomsTrash,
       isPrivacyFolder,
       setIsLoading,
@@ -1116,7 +1136,9 @@ const SectionFilterContent = ({
     // Room types offered in the "Rooms" section filter. Form Filling Rooms live
     // in their own "Forms" section, and RoomsTypePrivate is a client-only
     // synthetic value, so both are excluded by ROOMS_SECTION_TYPES.
-    const roomTypeValues = ROOMS_SECTION_TYPES;
+    const roomTypeValues = isAiHubSection
+      ? AI_HUB_SECTION_TYPES
+      : ROOMS_SECTION_TYPES;
 
     const typeOptions = isRooms
       ? [
@@ -1362,9 +1384,10 @@ const SectionFilterContent = ({
       filterOptions.push(...ownerOptions);
       filterOptions.push(...subjectOptions);
 
-      // The "Forms" section is already scoped to Form Filling Rooms — no
+      // The "Forms" and "AI Projects" sections hold one room type each — no
       // room-type filter is shown there.
-      if (!isFormsSection) filterOptions.push(...typeOptions);
+      if (!isFormsSection && !isAiProjectsSection)
+        filterOptions.push(...typeOptions);
 
       if (tags?.length > 0) {
         const tagsOptions = tags.map((tag) => ({
@@ -1755,6 +1778,14 @@ const SectionFilterContent = ({
         newFilter.searchArea = RoomSearchArea.Forms;
       }
 
+      if (isAiHubFolder) {
+        newFilter.searchArea = RoomSearchArea.AiHub;
+      }
+
+      if (isAiProjectsFolder) {
+        newFilter.searchArea = RoomSearchArea.AiProjects;
+      }
+
       const path = getRoomsListBasePath(newFilter.searchArea);
 
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
@@ -1897,10 +1928,17 @@ export default inject(
       isTemplatesFolder,
       isSharedWithMeFolder,
       isFormsFolder,
+      isAiHubFolder,
+      isAiProjectsFolder,
+      isAiSectionFolder,
     } = treeFoldersStore;
 
     const isRooms =
-      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
+      isRoomsFolder ||
+      isArchiveFolder ||
+      isTemplatesFolder ||
+      isFormsFolder ||
+      isAiSectionFolder;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { showStorageInfo, isDefaultRoomsQuotaSet, isDefaultUsersQuotaSet } =
@@ -1964,6 +2002,8 @@ export default inject(
       isRecentFolder,
       isRooms,
       isTrash,
+      isAiHubFolder,
+      isAiProjectsFolder,
       isArchiveFolder,
       isPrivacyFolder,
       isTemplatesFolder,

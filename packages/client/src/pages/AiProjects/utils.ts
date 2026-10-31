@@ -49,5 +49,6 @@ export const canManageProjects = (user?: {
   isRoomAdmin?: boolean;
 } | null) => !!user && (!!user.isOwner || !!user.isAdmin || !!user.isRoomAdmin);
 
+/** The project's address in the AI Rooms section, as a room's "Copy link" gives it. */
 export const projectLink = (project: TAiProject) =>
-  `${window.location.origin}/ai-projects/${project.id}`;
+  `${window.location.origin}/ai-projects/${project.id}/filter?folder=${project.id}`;

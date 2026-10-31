@@ -290,54 +290,66 @@ const ownerName = (project: AiProjectMock) => project.createdBy?.displayName ?? 
  * `subjectId` (a member) by user, and `sortBy`
  * takes `AZ`, `Tags`, `Author`, `DateAndTime` and `DateAndTimeCreation`.
  */
+/**
+ * The `GET ai/projects` query, as the server reads it for a rooms listing (the
+ * Files list reads the "AI Projects" section there): `filterValue` narrows by title (so the
+ * search renders its own empty view), `tags` keeps the projects carrying any
+ * of them, `withoutTags` the untagged ones, `subjectOwnerId` and `subjectId`
+ * (a member) by user, and `sortBy` takes `AZ`, `Tags`, `Author`,
+ * `DateAndTime` and `DateAndTimeCreation`.
+ */
+const queryProjects = (params: URLSearchParams, projects: AiProjectMock[]) => {
+  const filterValue = params.get("filterValue")?.trim().toLowerCase();
+  const tagsParam = params.get("tags");
+  const tags = tagsParam ? (JSON.parse(tagsParam) as string[]) : [];
+  const withoutTags = params.get("withoutTags") === "true";
+  const ownerId = params.get("subjectOwnerId");
+  const subjectId = params.get("subjectId");
+  let list = filterValue
+    ? projects.filter((project) =>
+        project.title.toLowerCase().includes(filterValue),
+      )
+    : projects;
+  if (tags.length > 0) {
+    list = list.filter((project) => project.tags.some((tag) => tags.includes(tag)));
+  }
+  if (withoutTags) list = list.filter((project) => project.tags.length === 0);
+  if (ownerId) list = list.filter((project) => project.createdBy?.id === ownerId);
+  if (subjectId) {
+    // The mock's projects are the caller's, so the member filter keeps the
+    // ones the caller is in.
+    list = list.filter((project) => project.inRoom);
+  }
+  const sortBy = params.get("sortBy") ?? "DateAndTime";
+  const descending = params.get("sortOrder") !== "ascending";
+  const compare = (a: AiProjectMock, b: AiProjectMock) => {
+    switch (sortBy) {
+      case "AZ":
+        return a.title.localeCompare(b.title);
+      case "Tags":
+        return a.tags.join(",").localeCompare(b.tags.join(","));
+      case "Author":
+        return ownerName(a).localeCompare(ownerName(b));
+      case "DateAndTimeCreation":
+        return a.created.localeCompare(b.created);
+      default:
+        return a.updated.localeCompare(b.updated);
+    }
+  };
+  list = [...list].sort((a, b) => (descending ? -compare(a, b) : compare(a, b)));
+  return list;
+};
+
 export const aiProjectsHandler = (
   port: string,
   projects: AiProjectMock[] = AI_PROJECTS,
 ) =>
   http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROJECTS}`,
-    ({ request }) => {
-      const params = new URL(request.url).searchParams;
-      const filterValue = params.get("filterValue")?.trim().toLowerCase();
-      const tagsParam = params.get("tags");
-      const tags = tagsParam ? (JSON.parse(tagsParam) as string[]) : [];
-      const withoutTags = params.get("withoutTags") === "true";
-      const ownerId = params.get("subjectOwnerId");
-      const subjectId = params.get("subjectId");
-      let list = filterValue
-        ? projects.filter((project) =>
-            project.title.toLowerCase().includes(filterValue),
-          )
-        : projects;
-      if (tags.length > 0) {
-        list = list.filter((project) => project.tags.some((tag) => tags.includes(tag)));
-      }
-      if (withoutTags) list = list.filter((project) => project.tags.length === 0);
-      if (ownerId) list = list.filter((project) => project.createdBy?.id === ownerId);
-      if (subjectId) {
-        // The mock's projects are the caller's, so the member filter keeps the
-        // ones the caller is in.
-        list = list.filter((project) => project.inRoom);
-      }
-      const sortBy = params.get("sortBy") ?? "DateAndTime";
-      const descending = params.get("sortOrder") !== "ascending";
-      const compare = (a: AiProjectMock, b: AiProjectMock) => {
-        switch (sortBy) {
-          case "AZ":
-            return a.title.localeCompare(b.title);
-          case "Tags":
-            return a.tags.join(",").localeCompare(b.tags.join(","));
-          case "Author":
-            return ownerName(a).localeCompare(ownerName(b));
-          case "DateAndTimeCreation":
-            return a.created.localeCompare(b.created);
-          default:
-            return a.updated.localeCompare(b.updated);
-        }
-      };
-      list = [...list].sort((a, b) => (descending ? -compare(a, b) : compare(a, b)));
-      return HttpResponse.json(listResponse(list));
-    },
+    ({ request }) =>
+      HttpResponse.json(
+        listResponse(queryProjects(new URL(request.url).searchParams, projects)),
+      ),
   );
 
 /**
@@ -507,6 +519,176 @@ export const aiProjectKnowledgeHandler = (
       return HttpResponse.json({ response: { rooms } });
     },
   );
+
+/** The "AI rooms" root (`FolderType.AiHub`), the Instructions and Knowledge rooms live under it. */
+export const AI_HUB_ROOT_ID = 777500;
+
+/** An Instructions or Knowledge room as `files/rooms?searchArea=AiHub` lists it. */
+const aiHubRoomMock = (
+  room:
+    | (typeof INSTRUCTIONS_ROOMS)[keyof typeof INSTRUCTIONS_ROOMS]
+    | (typeof KNOWLEDGE_ROOMS)[keyof typeof KNOWLEDGE_ROOMS],
+  created: string,
+) => ({
+  id: room.id,
+  title: room.title,
+  roomType: room.roomType,
+  type: room.roomType === INSTRUCTIONS_ROOM_TYPE ? 38 : 39,
+  parentId: AI_HUB_ROOT_ID,
+  rootFolderId: AI_HUB_ROOT_ID,
+  rootFolderType: 42,
+  created,
+  updated: created,
+  createdBy: OWNER,
+  updatedBy: OWNER,
+  pinned: false,
+  tags: [],
+  mute: false,
+  inRoom: true,
+  access: AiProjectMockAccess.Owner,
+  filesCount: 0,
+  foldersCount: 0,
+  isFavorite: false,
+  new: 0,
+  logo: room.logo,
+  // The owner's rights in an AI room: everything but archiving and
+  // templates, which the server refuses for the AI types (no `Move`,
+  // no `CreateRoomFrom`).
+  security: {
+    Read: true,
+    Create: true,
+    Rename: true,
+    EditRoom: true,
+    EditAccess: true,
+    ChangeOwner: true,
+    Delete: true,
+    Duplicate: true,
+    Pin: true,
+    Mute: true,
+    CopyLink: true,
+    Download: true,
+    UseChat: true,
+  },
+});
+
+/** The stock "AI rooms" list: two Instructions rooms and a Knowledge room. */
+export const AI_HUB_ROOMS = [
+  aiHubRoomMock(INSTRUCTIONS_ROOMS.sales, "2026-10-22T10:00:00.0000000+00:00"),
+  aiHubRoomMock(KNOWLEDGE_ROOMS.contracts, "2026-10-21T10:00:00.0000000+00:00"),
+  aiHubRoomMock(INSTRUCTIONS_ROOMS.legal, "2026-10-20T10:00:00.0000000+00:00"),
+];
+
+export type AiHubRoomMock = (typeof AI_HUB_ROOMS)[number];
+
+const AI_ROOT_TITLE = { 41: "AI Projects", 42: "AI rooms" } as const;
+
+/** A folder content answer: the root's list, or a room opened with no files in it. */
+const folderContent = (
+  current: Record<string, unknown>,
+  pathParts: { id: number; title: string; folderType?: number; roomType?: number }[],
+  folders: unknown[] = [],
+) => ({
+  response: {
+    files: [],
+    folders,
+    current,
+    pathParts,
+    startIndex: 0,
+    count: folders.length,
+    total: folders.length,
+    new: 0,
+  },
+  count: 1,
+  links: [],
+  status: 0,
+  statusCode: 200,
+});
+
+const aiRoot = (id: number, rootFolderType: 41 | 42, foldersCount: number) => ({
+  id,
+  parentId: 0,
+  rootFolderId: id,
+  rootFolderType,
+  title: AI_ROOT_TITLE[rootFolderType],
+  filesCount: 0,
+  foldersCount,
+  security: { Read: true, Create: true },
+});
+
+/**
+ * `GET files/rooms?searchArea=AiHub`: the "AI rooms" list, narrowed by the
+ * search, the type filter (`type`, repeated) and the rooms list's sorts as
+ * `queryProjects` reads them. Any other search area is left to the rooms list
+ * handler, so this one must be used before it (`mockRequest.use` puts it
+ * first).
+ */
+export const aiHubRoomsHandler = (
+  port: string,
+  rooms: AiHubRoomMock[] = AI_HUB_ROOMS,
+) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/rooms`, ({ request }) => {
+    const params = new URL(request.url).searchParams;
+    if (params.get("searchArea") !== "AiHub") return undefined;
+    const types = params.getAll("type").map(Number);
+    const filterValue = params.get("filterValue")?.trim().toLowerCase();
+    const list = rooms.filter(
+      (room) =>
+        (types.length === 0 || types.includes(room.roomType)) &&
+        (!filterValue || room.title.toLowerCase().includes(filterValue)),
+    );
+    return HttpResponse.json(
+      folderContent(
+        aiRoot(AI_HUB_ROOT_ID, 42, list.length),
+        [{ id: AI_HUB_ROOT_ID, title: AI_ROOT_TITLE[42], folderType: 42 }],
+        list,
+      ),
+    );
+  });
+
+/**
+ * `GET files/:id` for an AI room or a project: the room opened, with no files
+ * in it (a project holds none; the specs open a room only to check where it
+ * lands). Any other folder is left to the files handlers.
+ */
+export const aiRoomFolderHandler = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+  rooms: AiHubRoomMock[] = AI_HUB_ROOMS,
+) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/:id`, ({ params }) => {
+    const id = Number(params.id);
+    const project = projects.find((p) => p.id === id);
+    if (project) {
+      const { aiProject: _aiProject, ...room } = project;
+      return HttpResponse.json(
+        folderContent({ ...room, isRoom: true }, [
+          { id: AI_PROJECTS_ROOT_ID, title: AI_ROOT_TITLE[41], folderType: 41 },
+          { id, title: room.title, folderType: 40, roomType: room.roomType },
+        ]),
+      );
+    }
+    const hubRoom = rooms.find((r) => r.id === id);
+    if (hubRoom) {
+      return HttpResponse.json(
+        folderContent({ ...hubRoom, isRoom: true }, [
+          { id: AI_HUB_ROOT_ID, title: AI_ROOT_TITLE[42], folderType: 42 },
+          { id, title: hubRoom.title, folderType: hubRoom.type, roomType: hubRoom.roomType },
+        ]),
+      );
+    }
+    return undefined;
+  });
+
+/** Every route of the two AI sections: the projects, the AI rooms and their folders. */
+export const aiSectionsHandlers = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+  rooms: AiHubRoomMock[] = AI_HUB_ROOMS,
+) => [
+  aiHubRoomsHandler(port, rooms),
+  aiRoomFolderHandler(port, projects, rooms),
+  ...aiProjectsHandlers(port, projects),
+];
 
 /** Every projects route, over one list. */
 export const aiProjectsHandlers = (

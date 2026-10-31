@@ -213,11 +213,12 @@ export default inject(
       isTemplatesFolder,
       isPersonalReadOnly,
       isFormsFolder,
+      isAiSectionFolder,
     } = treeFoldersStore;
     const { isIndexedFolder } = selectedFolderStore;
 
     const isRooms =
-      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder || isAiSectionFolder;
     const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;

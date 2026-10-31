@@ -36,19 +36,12 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import SocketHelper, {
-  SocketCommands,
-  SocketEvents,
-  type TOptSocket,
-} from "@onlyoffice/apps-ui-kit/utils/socket";
 import { retryVectorization } from "@docspace/shared/api/ai";
 import { ShareAccessRights, VectorizationStatus } from "@docspace/shared/enums";
 import {
   createAiProject,
-  deleteAiProject,
   getAiProject,
   getAiProjectKnowledge,
-  getAiProjects,
   getAiProjectSkills,
   toAiProject,
   updateAiProject,
@@ -56,12 +49,9 @@ import {
 // A project is a room: what it shares with a room goes through the room routes.
 import { setFileOwner } from "@docspace/shared/api/files";
 import {
-  pinRoom,
   removeLogoFromRoom,
-  unpinRoom,
   updateRoomMemberRole,
 } from "@docspace/shared/api/rooms";
-import { muteRoomNotification } from "@docspace/shared/api/settings";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type {
   TAiProject,
@@ -69,37 +59,15 @@ import type {
   TAiProjectRequest,
   TAiProjectRoomDto,
   TAiProjectSkillsRoom,
-  TAiProjectsQuery,
 } from "@docspace/shared/api/ai/projects";
-import { applyTagChangeToRoomTags, isSharedTagChange } from "@docspace/shared/components/tag-management/TagManagement.utils";
-import type { TagChange } from "@docspace/shared/components/tag-management/TagManagement.types";
-import type { TOperation } from "@docspace/shared/api/files/types";
-import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 
 import type AiPresetsStore from "./AiPresetsStore";
 import { toAiPreset } from "./AiPresetsStore";
 
-export type TAiProjectsViewAs = "table" | "row" | "tile";
-export type TAiProjectsSortBy = NonNullable<TAiProjectsQuery["sortBy"]>;
-
-/** A user a list filter is set to: their id, and the name the chip shows. */
-export type TAiProjectsFilterEntity = { id: string; label: string };
-
 export type TProjectDialogState =
   | { mode: "create" }
   | { mode: "edit"; project: TAiProject };
-
-const VIEW_STORAGE_KEY = "aiProjectsViewAs";
-
-const readViewAs = (): TAiProjectsViewAs => {
-  try {
-    const v = window.localStorage.getItem(VIEW_STORAGE_KEY);
-    return v === "row" || v === "tile" || v === "table" ? v : "table";
-  } catch {
-    return "table";
-  }
-};
 
 /** The server's text of a failed request (Node `{error}` or C# `{error: {message}}`), else the error's own. */
 export const errorMessage = (e: unknown): string => {
@@ -120,77 +88,25 @@ const showWarnings = (project: TAiProject) => {
   project.aiProject.warnings?.forEach((warning) => toastr.warning(warning.message));
 };
 
-/** Follows a file operation (delete) until it is finished. */
-const waitForOperation = async (operation: TOperation | undefined) => {
-  let current = operation;
-  while (current && !current.finished) {
-    current = await getOperationProgress(current.id, "", true);
-  }
-  if (current?.error) throw new Error(current.error);
-};
-
 /**
- * AI Projects: the list the page shows, the project opened in the chat and
- * the dialogs around them. Talks to `/api/2.0/ai/projects`; members, roles
- * and the invitation link go through the room panels. The chat
- * itself is handed the project through `AiPresetsStore.activePreset`, the
- * same hook a saved preset used, so the Shell wiring stays as it is.
+ * The AI project that is open in the AI Rooms section, and the project form.
+ *
+ * The list of projects is the Files list: AI projects are rooms of the AI
+ * Rooms root (`FolderType.AiProjects`), listed, filtered, pinned, archived
+ * and deleted by the Files stores like any room. This store only holds what
+ * the Files stores do not know about a room of type 12: its `aiProject`
+ * block (model and linked rooms) read from `/api/2.0/ai/projects/{id}`, the
+ * skills and knowledge files of its sources, and the create / edit form that
+ * saves through the same API. The chat is handed the open project through
+ * `AiPresetsStore.activePreset`, the same hook a saved preset used, so the
+ * Shell wiring stays as it is.
  */
-/** Projects per list page, as Files pages its lists. */
-const PAGE_COUNT = 100;
-
-// Socket changes are coalesced over this window, as the agents picker does:
-// one change (a create with its logo, an update with its members) lands as
-// several events, and each one costs a request.
-const SOCKET_RELOAD_DELAY_MS = 300;
-
-/** The JSON a `s:modify-folder` event carries, or `undefined` when it has none. */
-const socketData = (opt: TOptSocket): { id?: unknown; parentId?: unknown } | undefined => {
-  if (!opt.data) return undefined;
-  try {
-    const data: unknown = JSON.parse(opt.data);
-    return data && typeof data === "object" ? (data as { id?: unknown; parentId?: unknown }) : undefined;
-  } catch {
-    return undefined;
-  }
-};
-
 class AiProjectsStore {
   aiPresetsStore: AiPresetsStore;
+
   private userStore: UserStore;
 
-  projects: TAiProject[] = [];
-
-  total = 0;
-
-  isLoading = false;
-
-  isLoaded = false;
-
-  /** A further page of the list is on its way (infinite scroll). */
-  isFetchingMore = false;
-
-  filterValue = "";
-
-
-  // The filters of the rooms list a project takes: the owner, a member
-  // ("Contacts" in the Rooms filter) and the tags.
-  /** The owner filter, with the name its chip shows; `null`: any owner. */
-  ownerFilter: TAiProjectsFilterEntity | null = null;
-
-  /** The member filter, with the name its chip shows; `null`: any member. */
-  memberFilter: TAiProjectsFilterEntity | null = null;
-
-  /** The tags filtered by (any of them); empty: all projects. */
-  tagsFilter: string[] = [];
-
-  sortBy: TAiProjectsSortBy = "DateAndTime";
-
-  sortOrder: "ascending" | "descending" = "descending";
-
-  viewAs: TAiProjectsViewAs = readViewAs();
-
-  /** The project open in the chat; `null` on the list. */
+  /** The project open in the chat; `null` outside a project. */
   activeProject: TAiProject | null = null;
 
   skills: TAiProjectSkillsRoom[] = [];
@@ -198,252 +114,134 @@ class AiProjectsStore {
   knowledge: TAiProjectKnowledgeRoom[] = [];
 
   /**
-   * A sources read in flight long enough to show: the skeleton appears
-   * after `SHOW_LOADER_TIMER` and stays at least `MIN_LOADER_TIMER`
-   * (`createLoader`), so a fast answer flashes nothing and a slow one does
-   * not flicker.
+   * A sources read in flight (`*Pending`) and one in flight long enough to
+   * show (`*Loading`): the skeleton appears after `SHOW_LOADER_TIMER` and
+   * stays at least `MIN_LOADER_TIMER` (`createLoader`), so a fast answer
+   * flashes nothing and a slow one does not flicker. While a read is
+   * pending the card shows neither the list nor its empty text.
    */
+  skillsPending = false;
+
   skillsLoading = false;
+
+  knowledgePending = false;
 
   knowledgeLoading = false;
 
   projectDialog: TProjectDialogState | null = null;
 
-  deleteFor: TAiProject | null = null;
-
-  /** The project the "Leave the project" confirmation is open for. */
-  leaveFor: TAiProject | null = null;
-
-  private requestId = 0;
-
-  /** The projects root (`current.id` of the list), whose channel carries created projects. */
-  rootId: number | null = null;
-
-  /**
-   * The open project when it was deleted or the caller lost access to it
-   * while it was open, for the page to leave it; `null` otherwise.
-   */
-  lostProjectId: number | null = null;
-
-  /** Why the open project was lost: deleted (gone) or the caller's access to it. */
-  lostProjectReason: "deleted" | "access" | null = null;
-
-  /** The page is mounted: the socket channels are held and listened to. */
-  private isLive = false;
-
-  /** The `DIR-{id}` channels this store subscribed to (and so may drop). */
-  private ownedChannels: string[] = [];
-
-  private listReloadTimer: ReturnType<typeof setTimeout> | null = null;
-
-  private projectReloadTimers = new Map<number, ReturnType<typeof setTimeout>>();
-
   constructor(aiPresetsStore: AiPresetsStore, userStore: UserStore) {
     this.aiPresetsStore = aiPresetsStore;
     this.userStore = userStore;
-    makeAutoObservable(this, {
-      aiPresetsStore: false,
-      ownedChannels: false,
-      listReloadTimer: false,
-      projectReloadTimers: false,
-    } as never);
+    makeAutoObservable(this, { aiPresetsStore: false } as never);
   }
 
-  get isFiltered() {
-    return this.filterValue.trim().length > 0 || this.hasFilterOptions;
-  }
+  /* ------------------------------ Project ------------------------------ */
 
-  /** Whether a filter option (owner, member, tags) is applied, apart from the search. */
-  get hasFilterOptions() {
-    return this.ownerFilter !== null || this.memberFilter !== null || this.tagsFilter.length > 0;
-  }
-
-  /* ------------------------------- List -------------------------------- */
-
-  /** The list query of the current search, filters and sort, in the rooms list's terms. */
-  private listQuery = (): TAiProjectsQuery => ({
-    filterValue: this.filterValue.trim() || undefined,
-    subjectOwnerId: this.ownerFilter?.id,
-    subjectId: this.memberFilter?.id,
-    tags: this.tagsFilter.length > 0 ? [...this.tagsFilter] : undefined,
-    sortBy: this.sortBy,
-    sortOrder: this.sortOrder,
-  });
-
-  /** Whether the server holds projects past the loaded ones (Files' hasMoreFiles). */
-  get hasMoreProjects() {
-    return this.isLoaded && this.projects.length < this.total;
-  }
-
-  /** The first page; the rest comes from fetchMoreProjects as the list scrolls. */
-  fetchProjects = async () => {
-    const id = ++this.requestId;
-    this.isLoading = true;
-    try {
-      const page = await getAiProjects({ ...this.listQuery(), startIndex: 0, count: PAGE_COUNT });
-      if (id !== this.requestId) return;
-      runInAction(() => {
-        this.projects = page.folders;
-        this.total = page.total;
-        this.isLoaded = true;
-        if (page.current?.id) this.rootId = page.current.id;
-      });
-      this.syncChannels();
-    } catch (e) {
-      if (id === this.requestId) toastr.error(errorMessage(e));
-    } finally {
-      if (id === this.requestId) runInAction(() => (this.isLoading = false));
+  // The sources (skills, knowledge files) are not read here: the cards read
+  // a room's list when its row is expanded (fetchSkills / fetchKnowledge),
+  // and the chat takes the current skills from the server on every round.
+  // A project from the Files list comes without its linked rooms
+  // (`partial`): it is read on its own first, so the chat opens on the
+  // project's rooms. Resolves to the project as opened; a failed read opens
+  // what the list had.
+  openProject = async (project: TAiProject): Promise<TAiProject> => {
+    this.activeProject = project;
+    this.skills = [];
+    this.knowledge = [];
+    let opened = project;
+    if (project.aiProject.partial) {
+      try {
+        opened = await getAiProject(project.id);
+      } catch (e) {
+        toastr.error(errorMessage(e));
+      }
+      if (this.activeProject?.id !== project.id) return opened;
+      runInAction(() => this.replaceProject(opened));
     }
+    this.syncPreset(opened);
+    return opened;
+  };
+
+  /** Opens the project the section shows (its room is the selected folder). */
+  openProjectById = async (id: number): Promise<TAiProject | null> => {
+    if (this.activeProject?.id === id) return this.activeProject;
+    try {
+      const project = await getAiProject(id);
+      return await this.openProject(project);
+    } catch (e) {
+      toastr.error(errorMessage(e));
+      return null;
+    }
+  };
+
+  closeProject = () => {
+    this.activeProject = null;
+    this.skills = [];
+    this.knowledge = [];
+    this.aiPresetsStore.setActivePreset(null);
   };
 
   /**
-   * The next page, appended without duplicates, as Files' fetchMoreFiles does.
-   * A new search (fetchProjects) wins over a page still on its way.
+   * The chat reads the project through the preset hook: its Instructions
+   * rooms are the context (skills) rooms and its Knowledge rooms the
+   * knowledge bases.
    */
-  fetchMoreProjects = async () => {
-    if (!this.hasMoreProjects || this.isLoading || this.isFetchingMore) return;
-    const id = this.requestId;
-    this.isFetchingMore = true;
-    try {
-      const page = await getAiProjects({
-        ...this.listQuery(),
-        startIndex: this.projects.length,
-        count: PAGE_COUNT,
-      });
-      if (id !== this.requestId) return;
-      runInAction(() => {
-        const known = new Set(this.projects.map((p) => p.id));
-        this.projects = [...this.projects, ...page.folders.filter((p) => !known.has(p.id))];
-        this.total = page.total;
-      });
-    } catch (e) {
-      if (id === this.requestId) toastr.error(errorMessage(e));
-    } finally {
-      runInAction(() => (this.isFetchingMore = false));
-    }
+  private syncPreset = (project: TAiProject) => {
+    this.aiPresetsStore.setActivePreset(toAiPreset(project));
   };
 
-  setFilterValue = (value: string) => {
-    this.filterValue = value;
-    void this.fetchProjects();
-  };
-
-  setSort = (sortBy: TAiProjectsSortBy, sortOrder: "ascending" | "descending") => {
-    this.sortBy = sortBy;
-    this.sortOrder = sortOrder;
-    void this.fetchProjects();
-  };
-
-  setFilterOptions = (options: {
-    owner?: TAiProjectsFilterEntity | null;
-    member?: TAiProjectsFilterEntity | null;
-    tags?: string[];
-  }) => {
-    this.ownerFilter = options.owner ?? null;
-    this.memberFilter = options.member ?? null;
-    this.tagsFilter = options.tags ?? [];
-    void this.fetchProjects();
-  };
-
-  /** A tag clicked in the list adds itself to the tags filter, as in Rooms. */
-  selectTag = (tag: { label: string }) => {
-    if (this.tagsFilter.includes(tag.label)) return;
-    this.tagsFilter = [...this.tagsFilter, tag.label];
-    void this.fetchProjects();
-  };
-
-  /**
-   * A tag change made in the list or the info panel (bound, unbound, renamed,
-   * removed), applied to the projects on screen, as FilesStore does for rooms.
-   */
-  applyTagChange = (change: TagChange) => {
-    const roomId = isSharedTagChange(change) ? undefined : String(change.roomId);
-    const patch = (project: TAiProject) => {
-      if (roomId !== undefined && String(project.id) !== roomId) return project;
-      const tags = applyTagChangeToRoomTags(project.tags, change);
-      return tags === project.tags ? project : { ...project, tags };
-    };
-    this.projects = this.projects.map(patch);
-    if (this.activeProject) this.activeProject = patch(this.activeProject);
-  };
-
-  clearFilter = () => {
-    this.filterValue = "";
-    this.ownerFilter = null;
-    this.memberFilter = null;
-    this.tagsFilter = [];
-    void this.fetchProjects();
-  };
-
-  setViewAs = (viewAs: TAiProjectsViewAs) => {
-    this.viewAs = viewAs;
-    try {
-      window.localStorage.setItem(VIEW_STORAGE_KEY, viewAs);
-    } catch {
-      // The view still applies for the session.
-    }
-  };
-
-  /** Replaces a project in every place the page keeps it. */
+  /** The open project (and the one in the edit form), as the server has it now. */
   private replaceProject = (project: TAiProject) => {
-    this.projects = this.projects.map((p) => (p.id === project.id ? project : p));
     if (this.activeProject?.id === project.id) this.activeProject = project;
     if (this.projectDialog?.mode === "edit" && this.projectDialog.project.id === project.id) {
       this.projectDialog = { mode: "edit", project };
     }
   };
 
-  private dropProject = (id: number) => {
-    // A socket event can follow the caller's own delete or leave: count once.
-    if (this.projects.some((p) => p.id === id)) {
-      this.projects = this.projects.filter((p) => p.id !== id);
-      this.total = Math.max(0, this.total - 1);
-    }
-    if (this.activeProject?.id === id) this.closeProject();
-    // Handed over and left from its own Edit dialog: nothing is left to save.
-    if (this.projectDialog?.mode === "edit" && this.projectDialog.project.id === id) {
-      this.projectDialog = null;
+  refreshActiveProject = async () => {
+    if (!this.activeProject) return;
+    try {
+      const project = await getAiProject(this.activeProject.id);
+      runInAction(() => this.replaceProject(project));
+      this.syncPreset(project);
+    } catch (e) {
+      toastr.error(errorMessage(e));
     }
   };
 
-  /* ---------------------------- Live updates ---------------------------- */
-
-  /**
-   * Holds the socket channels of the page and listens to `s:modify-folder`,
-   * as the rooms do: the projects root (a project created, renamed, deleted
-   * by someone else) and the open project. Called when the page mounts.
-   */
-  startLiveUpdates = () => {
-    if (this.isLive) return;
-    this.isLive = true;
-    SocketHelper?.on(SocketEvents.ModifyFolder, this.onModifyFolder);
-    this.syncChannels();
-  };
-
-  /** Drops the page's channels and stops listening; called when the page unmounts. */
-  stopLiveUpdates = () => {
-    if (!this.isLive) return;
-    this.isLive = false;
-    SocketHelper?.off(SocketEvents.ModifyFolder, this.onModifyFolder);
-    if (this.listReloadTimer) clearTimeout(this.listReloadTimer);
-    this.listReloadTimer = null;
-    this.projectReloadTimers.forEach((timer) => clearTimeout(timer));
-    this.projectReloadTimers.clear();
-    this.syncChannels();
-  };
-
-  clearLostProject = () => {
-    this.lostProjectId = null;
-    this.lostProjectReason = null;
-  };
-
-  /** The open project is gone (`deleted`) or closed to the caller (`access`). */
-  private loseProject = (id: number, reason: "deleted" | "access") => {
-    if (this.activeProject?.id === id) {
-      this.lostProjectId = id;
-      this.lostProjectReason = reason;
+  fetchSkills = async (id: number) => {
+    const { startLoader, endLoader } = createLoader();
+    this.skillsPending = true;
+    startLoader(() => runInAction(() => (this.skillsLoading = true)));
+    try {
+      const rooms = await getAiProjectSkills(id);
+      runInAction(() => {
+        if (this.activeProject?.id === id) this.skills = rooms;
+      });
+    } catch (e) {
+      toastr.error(errorMessage(e));
+    } finally {
+      runInAction(() => (this.skillsPending = false));
+      endLoader(() => runInAction(() => (this.skillsLoading = false)));
     }
-    this.dropProject(id);
+  };
+
+  fetchKnowledge = async (id: number) => {
+    const { startLoader, endLoader } = createLoader();
+    this.knowledgePending = true;
+    startLoader(() => runInAction(() => (this.knowledgeLoading = true)));
+    try {
+      const rooms = await getAiProjectKnowledge(id);
+      runInAction(() => {
+        if (this.activeProject?.id === id) this.knowledge = rooms;
+      });
+    } catch (e) {
+      toastr.error(errorMessage(e));
+    } finally {
+      runInAction(() => (this.knowledgePending = false));
+      endLoader(() => runInAction(() => (this.knowledgeLoading = false)));
+    }
   };
 
   /**
@@ -469,197 +267,16 @@ class AiProjectsStore {
     }
   };
 
-  /**
-   * Subscribes to the channels the page needs now and unsubscribes from the
-   * ones it no longer does. A channel someone else already holds (the rooms
-   * hold theirs while they are open) is used, never taken over or dropped.
-   */
-  private syncChannels = () => {
-    const wanted = this.isLive
-      ? [this.rootId, this.activeProject?.id]
-          .filter((id): id is number => typeof id === "number")
-          .map((id) => `DIR-${id}`)
-      : [];
-    const drop = this.ownedChannels.filter((channel) => !wanted.includes(channel));
-    const add = wanted.filter(
-      (channel) =>
-        !this.ownedChannels.includes(channel) && !SocketHelper?.socketSubscribers.has(channel),
-    );
-    if (drop.length > 0) {
-      SocketHelper?.emit(SocketCommands.Unsubscribe, { roomParts: drop, individual: true });
-    }
-    if (add.length > 0) {
-      SocketHelper?.emit(SocketCommands.Subscribe, { roomParts: add, individual: true });
-    }
-    this.ownedChannels = [...this.ownedChannels.filter((channel) => !drop.includes(channel)), ...add];
-  };
-
-  private onModifyFolder = (opt?: TOptSocket) => {
-    if (!opt || opt.type !== "folder") return;
-    const data = socketData(opt);
-    const id = Number(opt.id ?? data?.id);
-    if (!Number.isInteger(id)) return;
-    const inRoot = this.rootId !== null && Number(data?.parentId) === this.rootId;
-    const known = this.activeProject?.id === id || this.projects.some((p) => p.id === id);
-    if (!inRoot && !known) return;
-
-    if (opt.cmd === "delete") {
-      runInAction(() => this.loseProject(id, "deleted"));
-      return;
-    }
-    if (opt.cmd === "create" || !known) {
-      this.scheduleListReload();
-      return;
-    }
-    this.scheduleProjectReload(id);
-  };
-
-  private scheduleListReload = () => {
-    if (this.listReloadTimer) clearTimeout(this.listReloadTimer);
-    this.listReloadTimer = setTimeout(() => {
-      this.listReloadTimer = null;
-      void this.fetchProjects();
-    }, SOCKET_RELOAD_DELAY_MS);
-  };
-
-  private scheduleProjectReload = (id: number) => {
-    const pending = this.projectReloadTimers.get(id);
-    if (pending) clearTimeout(pending);
-    this.projectReloadTimers.set(
-      id,
-      setTimeout(() => {
-        this.projectReloadTimers.delete(id);
-        void this.reloadProject(id);
-      }, SOCKET_RELOAD_DELAY_MS),
-    );
-  };
-
-  /**
-   * Re-reads a project another user changed. The open one also re-syncs the
-   * chat and its sources; a project the caller can no longer see (404) is
-   * dropped, and an open one is left.
-   */
-  private reloadProject = async (id: number) => {
-    try {
-      const project = await getAiProject(id);
-      const isActive = this.activeProject?.id === id;
-      runInAction(() => this.replaceProject(project));
-      if (isActive) this.syncPreset(project);
-    } catch (e) {
-      const status = (e as { response?: { status?: number } })?.response?.status;
-      if (status !== 404 && status !== 403) return;
-      // Gone (404) means deleted; refused (403) means the caller was removed.
-      runInAction(() => this.loseProject(id, status === 404 ? "deleted" : "access"));
-    }
-  };
-
-  /* ------------------------------ Project ------------------------------ */
-
-  // The sources (skills, knowledge files) are not read here: the cards read
-  // a room's list when its row is expanded (fetchSkills / fetchKnowledge),
-  // and the chat takes the current skills from the server on every round.
-  // A project from the list comes without its linked rooms (`partial`): it is
-  // read on its own first, so the chat opens on the project's rooms. Resolves
-  // to the project as opened; a failed read opens what the list had.
-  openProject = async (project: TAiProject): Promise<TAiProject> => {
-    this.activeProject = project;
-    this.syncChannels();
-    this.skills = [];
-    this.knowledge = [];
-    let opened = project;
-    if (project.aiProject.partial) {
-      try {
-        opened = await getAiProject(project.id);
-      } catch (e) {
-        toastr.error(errorMessage(e));
-      }
-      if (this.activeProject?.id !== project.id) return opened;
-      runInAction(() => this.replaceProject(opened));
-    }
-    this.syncPreset(opened);
-    return opened;
-  };
-
-  openProjectById = async (id: number) => {
-    const known = this.projects.find((p) => p.id === id);
-    if (known) return this.openProject(known);
-    try {
-      const project = await getAiProject(id);
-      await this.openProject(project);
-    } catch (e) {
-      toastr.error(errorMessage(e));
-    }
-  };
-
-  closeProject = () => {
-    this.activeProject = null;
-    this.syncChannels();
-    this.aiPresetsStore.setActivePreset(null);
-  };
-
-  /**
-   * The chat reads the project through the preset hook: its Instructions
-   * rooms are the context (skills) rooms and its Knowledge rooms the
-   * knowledge bases.
-   */
-  private syncPreset = (project: TAiProject) => {
-    this.aiPresetsStore.setActivePreset(toAiPreset(project));
-  };
-
-  refreshActiveProject = async () => {
-    if (!this.activeProject) return;
-    try {
-      const project = await getAiProject(this.activeProject.id);
-      runInAction(() => this.replaceProject(project));
-    } catch (e) {
-      toastr.error(errorMessage(e));
-    }
-  };
-
-  fetchSkills = async (id: number) => {
-    const { startLoader, endLoader } = createLoader();
-    startLoader(() => runInAction(() => (this.skillsLoading = true)));
-    try {
-      const rooms = await getAiProjectSkills(id);
-      runInAction(() => {
-        if (this.activeProject?.id === id) this.skills = rooms;
-      });
-    } catch (e) {
-      toastr.error(errorMessage(e));
-    } finally {
-      endLoader(() => runInAction(() => (this.skillsLoading = false)));
-    }
-  };
-
-  fetchKnowledge = async (id: number) => {
-    const { startLoader, endLoader } = createLoader();
-    startLoader(() => runInAction(() => (this.knowledgeLoading = true)));
-    try {
-      const rooms = await getAiProjectKnowledge(id);
-      runInAction(() => {
-        if (this.activeProject?.id === id) this.knowledge = rooms;
-      });
-    } catch (e) {
-      toastr.error(errorMessage(e));
-    } finally {
-      endLoader(() => runInAction(() => (this.knowledgeLoading = false)));
-    }
-  };
-
   /* ----------------------------- Mutations ----------------------------- */
 
+  /** Saves the create form. The Files list learns of the new room over the socket. */
   createProject = async (data: TAiProjectRequest) => {
     const project = await createAiProject(data);
     showWarnings(project);
-    runInAction(() => {
-      this.projects = [project, ...this.projects];
-      this.total += 1;
-      this.isLoaded = true;
-    });
     return project;
   };
 
-  /** Saves the edit dialog; `removeLogo` also drops the uploaded picture. */
+  /** Saves the edit form; `removeLogo` also drops the uploaded picture. */
   updateProject = async (id: number, data: TAiProjectRequest, options?: { removeLogo?: boolean }) => {
     let project = await updateAiProject(id, data);
     if (options?.removeLogo) project = toAiProject((await removeLogoFromRoom(id)) as TAiProjectRoomDto);
@@ -669,37 +286,14 @@ class AiProjectsStore {
     return project;
   };
 
-  removeProject = async (project: TAiProject) => {
-    await waitForOperation(await deleteAiProject(project.id));
-    runInAction(() => this.dropProject(project.id));
-  };
-
-  /** Turns the project's notifications off or back on for the caller. */
-  toggleMute = async (project: TAiProject) => {
-    const mute = !project.mute;
-    await muteRoomNotification(project.id, mute);
-    runInAction(() => this.replaceProject({ ...project, mute }));
-  };
-
-  togglePin = async (project: TAiProject) => {
-    try {
-      const updated = toAiProject(
-        (await (project.pinned ? unpinRoom(project.id) : pinRoom(project.id))) as TAiProjectRoomDto,
-      );
-      runInAction(() => this.replaceProject(updated));
-      await this.fetchProjects();
-    } catch (e) {
-      toastr.error(errorMessage(e));
-    }
-  };
-
-  leaveProject = async (project: TAiProject) => {
+  private leaveProject = async (project: TAiProject) => {
     await updateRoomMemberRole(project.id, {
       invitations: [{ id: this.userStore.user?.id, access: ShareAccessRights.None }],
     });
-    runInAction(() => this.dropProject(project.id));
+    if (this.activeProject?.id === project.id) this.closeProject();
   };
 
+  /** The owner hands the project over from the project form or its intro. */
   changeOwner = async (project: TAiProject, userId: string, keepAsManager: boolean) => {
     // The former owner stays as a Project manager, as a room keeps its former
     // owner as a room manager; leaving is a separate step.
@@ -723,16 +317,25 @@ class AiProjectsStore {
   openEditDialog = (project: TAiProject) =>
     (this.projectDialog = { mode: "edit", project });
 
+  /**
+   * "Edit" on a project room of the Files list: the room comes without its
+   * `aiProject` block, so the project is read first and the form opens on
+   * the model and the rooms the server has.
+   */
+  openEditDialogById = async (id: number) => {
+    if (this.activeProject?.id === id && !this.activeProject.aiProject.partial) {
+      this.openEditDialog(this.activeProject);
+      return;
+    }
+    try {
+      const project = await getAiProject(id);
+      runInAction(() => this.openEditDialog(project));
+    } catch (e) {
+      toastr.error(errorMessage(e));
+    }
+  };
+
   closeProjectDialog = () => (this.projectDialog = null);
-
-  openDelete = (project: TAiProject) => (this.deleteFor = project);
-
-  closeDelete = () => (this.deleteFor = null);
-
-  openLeave = (project: TAiProject) => (this.leaveFor = project);
-
-  closeLeave = () => (this.leaveFor = null);
-
 }
 
 export default AiProjectsStore;

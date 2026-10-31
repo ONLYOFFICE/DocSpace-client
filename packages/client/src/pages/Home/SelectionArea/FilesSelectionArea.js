@@ -149,12 +149,12 @@ export default inject(
     hotkeyStore,
   }) => {
     const { dragging, viewAs, setSelections, folders, files } = filesStore;
-    const { isRoomsFolder, isArchiveFolder, isFormsFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isFormsFolder, isAiSectionFolder } = treeFoldersStore;
     const { isVisible: isInfoPanelVisible } = infoPanelStore;
     const { isIndexEditingMode } = indexingStore;
     const { selectionAreaIsEnabled, setWithContentSelection } = hotkeyStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
 
     return {
       dragging,

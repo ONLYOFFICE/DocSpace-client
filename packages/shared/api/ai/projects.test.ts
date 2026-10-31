@@ -74,6 +74,7 @@ describe("toAiProject", () => {
     );
     expect(project.security.Leave).toBe(false);
     expect(project.aiProject).toEqual({
+      partial: true,
       profile: null,
       instructionsRooms: [],
       knowledgeRooms: [],

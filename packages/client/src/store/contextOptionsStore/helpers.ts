@@ -151,6 +151,10 @@ type TCreateEventPayload = {
   openEditor?: boolean;
   edit?: boolean;
   isFormsCreate?: boolean;
+  /** The "AI rooms" section's chooser: Instructions, Knowledge, AI project. */
+  isAiRoomsCreate?: boolean;
+  /** "New project" in the "AI Projects" section: the project form, no chooser. */
+  isAiProjectCreate?: boolean;
   // ROOM_CREATE only: opens the create-room dialog on this preset type and
   // locks the type chooser (read by GlobalEvents / CreateRoomEvent).
   startRoomType?: RoomsType;

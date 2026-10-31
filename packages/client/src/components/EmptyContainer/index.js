@@ -38,6 +38,7 @@ import { isFolder as isFolderUtil } from "@docspace/shared/utils/typeGuards";
 
 import EmptyFilterContainer from "./EmptyFilterContainer";
 import EmptyViewContainer from "./sub-components/EmptyViewContainer/EmptyViewContainer";
+import EmptyAiRoomsContainer from "./EmptyAiRoomsContainer";
 
 const linkStyles = {
   isHovered: true,
@@ -62,12 +63,21 @@ const EmptyContainer = ({
   folderId,
   isArchiveFolderRoot,
   isFolder,
+  isAiHubFolder,
+  isAiProjectsFolder,
 }) => {
   linkStyles.color = theme.filesEmptyContainer.linkColor;
 
   const isRootEmptyPage = parentId === 0 || (isPublicRoom && isRoot);
 
   if (isFiltered) return <EmptyFilterContainer linkStyles={linkStyles} />;
+
+  // The AI roots have their own empty states ("AI Projects" also the "AI is
+  // off" view).
+  if (isRootEmptyPage && isAiHubFolder)
+    return <EmptyAiRoomsContainer kind="hub" />;
+  if (isRootEmptyPage && isAiProjectsFolder)
+    return <EmptyAiRoomsContainer kind="projects" />;
 
   return (
     <EmptyViewContainer
@@ -100,7 +110,8 @@ export default inject(
       isFiltered === null && isErrorRoomNotAvailable;
 
     const { roomType, id: folderId, parentRoomType } = selectedFolderStore;
-    const { isArchiveFolderRoot } = treeFoldersStore;
+    const { isArchiveFolderRoot, isAiHubFolder, isAiProjectsFolder } =
+      treeFoldersStore;
 
     const isFolder = isFolderUtil(selectedFolderStore.getSelectedFolder());
 
@@ -121,6 +132,8 @@ export default inject(
       folderId,
       isArchiveFolderRoot,
       isFolder,
+      isAiHubFolder,
+      isAiProjectsFolder,
     };
   },
 )(observer(EmptyContainer));

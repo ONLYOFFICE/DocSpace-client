@@ -239,6 +239,8 @@ export const getFolderModelImpl = (
     isPrivacyFolder,
     isFlowsFolder,
     isFormsFolder,
+    isAiHubFolder,
+    isAiProjectsFolder,
   } = self.treeFoldersStore;
   const { mainButtonItemsList } = self.pluginStore;
   const { enablePlugins, templateGalleryAvailable } = self.settingsStore;
@@ -436,7 +438,16 @@ export const getFolderModelImpl = (
             icon: TemplateGalleryReactSvgUrl,
           },
         ]
-      : isRoomsFolder
+      : isAiProjectsFolder
+        ? [
+            {
+              key: "new-project",
+              label: t("Common:NewAIProject"),
+              onClick: self.onCreateRoom,
+              icon: CatalogRoomsReactSvgUrl,
+            },
+          ]
+      : isRoomsFolder || isAiHubFolder
         ? isFlowsFolder
           ? []
           : [
@@ -465,6 +476,8 @@ export const getFolderModelImpl = (
     enablePlugins &&
     !isRoomsFolder &&
     !isFormsFolder &&
+    !isAiHubFolder &&
+    !isAiProjectsFolder &&
     !isPrivacyFolder
   ) {
     const pluginItems: TContextOption[] = [];

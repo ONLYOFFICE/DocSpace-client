@@ -53,6 +53,9 @@ const SECTION_PREFIXES = [
 ] as const;
 
 function getSectionPrefix(pathname: string): string {
+  // The bare `/ai-rooms` is the Rooms app's SDK frame page; its nested paths
+  // are the "AI rooms" section of Home, which belongs to home ("/").
+  if (pathname.startsWith("/ai-rooms/")) return "/";
   const match = SECTION_PREFIXES.find((prefix) => pathname.startsWith(prefix));
   return match ?? "/";
 }
@@ -82,8 +85,8 @@ export const SectionNavigationProvider = ({
     if (currentSection !== prevSectionRef.current) {
       // Store the full previous path (not just the section prefix) so that
       // "Back" returns to the exact page we left — e.g. a specific AI
-      // project (/ai-projects/:id) or the projects list (/ai-projects),
-      // instead of collapsing every non-prefixed route to "/".
+      // project (/ai-projects/:id/filter) or the projects list, instead of
+      // collapsing every non-prefixed route to "/".
       stackRef.current.push(prevPathRef.current);
       prevSectionRef.current = currentSection;
     }

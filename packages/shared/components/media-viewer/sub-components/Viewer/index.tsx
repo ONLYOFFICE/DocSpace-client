@@ -111,6 +111,22 @@ export const Viewer = (props: ViewerProps) => {
   const viewerRef = useRef<HTMLDivElement>(null);
   useFocusTrap(viewerRef, !!visible);
 
+  // A modal dialog takes the focus when it opens - or Space and Enter would
+  // still act on the control behind it, and a screen reader stay on the page
+  // - and gives it back to that control when it closes.
+  useEffect(() => {
+    if (!visible) return;
+    const viewer = viewerRef.current;
+    const previous = document.activeElement;
+    if (viewer && !viewer.contains(previous))
+      viewer.focus({ preventScroll: true });
+
+    return () => {
+      if (previous instanceof HTMLElement && previous.isConnected)
+        previous.focus({ preventScroll: true });
+    };
+  }, [visible]);
+
   const [isFullscreen, setIsFullScreen] = useState<boolean>(false);
 
   const devices = useMemo(() => {

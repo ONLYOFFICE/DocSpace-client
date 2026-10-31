@@ -290,7 +290,8 @@ test.describe("Focus trap in the media viewer", () => {
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
 
-    // An image: the viewer opens over the list without taking the focus.
+    // An image: the viewer opens over the list and takes the focus, so the
+    // keys no longer reach the page behind it.
     await table
       .getByTestId(`files-cell-name-${JPG_ROW}`)
       .locator(".item-file-name")
@@ -300,6 +301,11 @@ test.describe("Focus trap in the media viewer", () => {
     await expect(page).toHaveURL(/\/media\/view\//);
     const viewer = page.getByTestId("media-viewer");
     await expect(viewer).toHaveAttribute("data-visible", "true");
+    await expect
+      .poll(() =>
+        viewer.evaluate((el) => el.contains(document.activeElement)),
+      )
+      .toBe(true);
 
     await expectFocusTrapped(page, viewer);
   });

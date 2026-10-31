@@ -459,10 +459,12 @@ test.describe("Focus trap in the files selector", () => {
     const cancel = panel.getByRole("button", { name: "Cancel" }).first();
     await expect(cancel).toBeFocused();
 
-    // Enter on cancel cancels: the row goes, nothing is created.
+    // Enter on cancel cancels: the row goes, nothing is created, and the
+    // focus goes back to the list rather than the page.
     await page.keyboard.press("Enter");
     await expect(name).toHaveCount(0);
     expect(creates).toEqual([]);
+    await expect(panel.getByRole("listbox")).toBeFocused();
   });
 });
 

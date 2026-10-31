@@ -45,7 +45,6 @@ import { ALLOWED_PASSWORD_CHARACTERS } from "../../constants";
 import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import type { PasswordInputHandle } from "@onlyoffice/apps-ui-kit/components/password-input";
-import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 
 import ToggleBlock from "./ToggleBlock";
 import type { PasswordAccessBlockProps } from "./EditLinkPanel.types";
@@ -84,24 +83,6 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
       copy(passwordValue);
       toastr.success(t("Common:PasswordSuccessfullyCopied"));
     }
-  };
-
-  // An action link has no href, so it is a button to the keyboard: Enter and
-  // Space run it, and Space does not scroll the panel. The press is consumed,
-  // as what the button opens may listen for it too, on the window.
-  const isButtonPress = (event: React.KeyboardEvent) => {
-    if (event.key !== "Enter" && event.key !== " ") return false;
-    event.preventDefault();
-    consumeKey(event);
-    return true;
-  };
-
-  const onCleanKeyDown = (event: React.KeyboardEvent) => {
-    if (isButtonPress(event)) onCleanClick(event);
-  };
-
-  const onCopyKeyDown = (event: React.KeyboardEvent) => {
-    if (isButtonPress(event)) onCopyClick();
   };
 
   const onChangePassword = (
@@ -196,9 +177,6 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               fontWeight={600}
               type={LinkType.action}
               onClick={onCleanClick}
-              role="button"
-              tabIndex={0}
-              onKeyDown={onCleanKeyDown}
               dataTestId="edit_link_panel_clean_password_link"
             >
               {t("Common:Clean")}
@@ -209,9 +187,6 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               fontWeight={600}
               onClick={onCopyClick}
               type={LinkType.action}
-              role="button"
-              tabIndex={0}
-              onKeyDown={onCopyKeyDown}
               dataTestId="edit_link_panel_copy_password_link"
             >
               {t("Common:CopyPassword")}

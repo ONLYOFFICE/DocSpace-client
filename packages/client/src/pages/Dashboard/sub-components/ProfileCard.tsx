@@ -69,7 +69,6 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
-import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 import { DeviceType } from "@docspace/shared/enums";
 import {
   getUserTypeName,
@@ -129,16 +128,6 @@ const ProfileCardComponent = ({
   };
 
   const handleSetPassword = () => setChangePasswordVisible(true);
-
-  // "Set password" is an action link with no href, so it is a button to the
-  // keyboard: Enter and Space open the dialog. The press is consumed, as the
-  // dialog sends the instructions on Enter, listening on the window.
-  const handleSetPasswordKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key !== "Enter" && e.key !== " ") return;
-    e.preventDefault();
-    consumeKey(e);
-    handleSetPassword();
-  };
 
   const handleEditPortalName = () => {
     // On desktop/tablet all customization sections live on a single page,
@@ -261,9 +250,6 @@ const ProfileCardComponent = ({
               className={styles.profileCardLink}
               type={LinkType.action}
               onClick={handleSetPassword}
-              role="button"
-              tabIndex={0}
-              onKeyDown={handleSetPasswordKeyDown}
               color="accent"
               isHovered
             >

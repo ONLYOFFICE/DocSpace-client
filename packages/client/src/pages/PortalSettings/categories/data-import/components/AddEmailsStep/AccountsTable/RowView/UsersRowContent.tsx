@@ -33,7 +33,7 @@
 	* SPDX-License-Identifier: AGPL-3.0-only
 	*/
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -75,7 +75,12 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 		changeEmail,
 		setIsPrevEmailValid,
 	} = props as InjectedAddEmailRowContentProps;
-	const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
+	const { t, ready } = useTranslation([
+		"SMTPSettings",
+		"Settings",
+		"Common",
+		"PeopleTranslations",
+	]);
 
 	const [prevEmail, setPrevEmail] = useState(email);
 	const [tempEmail, setTempEmail] = useState(email);
@@ -97,6 +102,17 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 	};
 
 	const openEmail = () => setOpenedEmailKey(id);
+
+	// Closed by its own save or cancel, the editor took the focus with it:
+	// give it back to the email rather than leave it on the page's body.
+	const wasEmailOpenRef = useRef(isEmailOpen);
+	useEffect(() => {
+		const wasOpen = wasEmailOpenRef.current;
+		wasEmailOpenRef.current = isEmailOpen;
+		const lost =
+			!document.activeElement || document.activeElement === document.body;
+		if (wasOpen && !isEmailOpen && lost) emailTextRef.current?.focus();
+	}, [isEmailOpen, emailTextRef]);
 
 	// The email to edit is a button to the keyboard.
 	const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) =>
@@ -225,6 +241,8 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 					data-testid="open_email_button"
 					role="button"
 					tabIndex={0}
+					// Only an icon shows: the name comes from here.
+					aria-label={t("PeopleTranslations:EmailChangeButton")}
 					onKeyDown={handleEmailKeyDown}
 				>
 					<EditSvg />

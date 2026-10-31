@@ -95,6 +95,17 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
 
   const openEmail = () => setOpenedEmailKey(id);
 
+  // Closed by its own save or cancel, the editor took the focus with it:
+  // give it back to the email rather than leave it on the page's body.
+  const wasEmailOpenRef = useRef(isEmailOpen);
+  useEffect(() => {
+    const wasOpen = wasEmailOpenRef.current;
+    wasEmailOpenRef.current = isEmailOpen;
+    const lost =
+      !document.activeElement || document.activeElement === document.body;
+    if (wasOpen && !isEmailOpen && lost) emailTextRef.current?.focus();
+  }, [isEmailOpen, emailTextRef]);
+
   // The email to edit is a button to the keyboard.
   const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) =>
     activateOnButtonKey(e, openEmail);

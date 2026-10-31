@@ -41,6 +41,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
 import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
 import { InputSize, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 import { TTranslation } from "@docspace/shared/types";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 
@@ -50,7 +51,6 @@ import styles from "../ClientForm.styled.module.scss";
 import { isValidUrl } from "../ClientForm.utils";
 
 import InputGroup from "./InputGroup";
-import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 interface MultiInputGroupProps {
   t: TTranslation;
@@ -136,6 +136,10 @@ const MultiInputGroup = ({
     setIsError(false);
     setValue("");
   }, [isDisabled, isError, name, onAdd, value, withoutSearch]);
+
+  // The add block is a div: a button to the keyboard.
+  const onAddKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) =>
+    activateOnButtonKey(e, onAddAction);
 
   React.useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -224,7 +228,7 @@ const MultiInputGroup = ({
             onClick={onAddAction}
             role="button"
             tabIndex={0}
-            onKeyDown={(e) => activateOnButtonKey(e, onAddAction)}
+            onKeyDown={onAddKeyDown}
           >
             <Text fontSize="13px" fontWeight={600} lineHeight="20px" truncate>
               {value}

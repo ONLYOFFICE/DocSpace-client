@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FC } from "react";
+import { FC, type KeyboardEvent } from "react";
 import classNames from "classnames";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
@@ -50,10 +50,14 @@ interface CreateButtonProps {
 }
 
 export const CreateButton: FC<CreateButtonProps> = ({ onClick, title }) => {
+	// The row is a div: a button to the keyboard.
+	const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) =>
+		activateOnButtonKey(e, onClick);
+
 	return (
 		<div
 			onClick={onClick}
-			onKeyDown={(e) => activateOnButtonKey(e, onClick)}
+			onKeyDown={handleKeyDown}
 			role="button"
 			tabIndex={0}
 			className={classNames(styles.linkRow, styles.createButton)}

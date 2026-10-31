@@ -41,6 +41,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import { EmailInput, TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 import { isMobile } from "@docspace/shared/utils";
 
@@ -57,7 +58,6 @@ import {
 	InjectedAddEmailRowContentProps,
 } from "../../../../types";
 import styles from "../../../../StyledDataImport.module.scss";
-import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 const UsersRowContent = (props: AddEmailRowContentProps) => {
 	const {
@@ -98,6 +98,10 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 
 	const openEmail = () => setOpenedEmailKey(id);
 
+	// The email to edit is a button to the keyboard.
+	const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) =>
+		activateOnButtonKey(e, openEmail);
+
 	const handleSaveEmail = () => {
 		setPrevEmail(tempEmail);
 		changeEmail(id, tempEmail);
@@ -111,6 +115,18 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 	const onValidateEmail = (res: TValidate) => {
 		setIsEmailValid(res.isValid);
 		return { isValid: res.isValid, errors: res.errors || [] };
+	};
+
+	// The icons' own clicks make them keyboard buttons; the box around each,
+	// which takes the pointer's click, must not run it a second time.
+	const handleSaveIconClick = (e: React.MouseEvent) => {
+		e.stopPropagation();
+		handleSaveClick();
+	};
+
+	const handleClearIconClick = (e: React.MouseEvent) => {
+		e.stopPropagation();
+		clearEmail();
 	};
 
 	const handleSaveClick = () => {
@@ -185,10 +201,7 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 								iconName={CheckSvgUrl}
 								dataTestId="change_email_save_button"
 								ariaLabel={t("Common:SaveButton")}
-								onClick={(e: React.MouseEvent) => {
-									e.stopPropagation();
-									handleSaveClick();
-								}}
+								onClick={handleSaveIconClick}
 							/>
 						</div>
 
@@ -199,10 +212,7 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 								iconName={CrossSvgUrl}
 								dataTestId="change_email_clear_button"
 								ariaLabel={t("Common:CancelButton")}
-								onClick={(e: React.MouseEvent) => {
-									e.stopPropagation();
-									clearEmail();
-								}}
+								onClick={handleClearIconClick}
 							/>
 						</div>
 					</div>
@@ -215,7 +225,7 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 					data-testid="open_email_button"
 					role="button"
 					tabIndex={0}
-					onKeyDown={(e) => activateOnButtonKey(e, openEmail)}
+					onKeyDown={handleEmailKeyDown}
 				>
 					<EditSvg />
 				</span>

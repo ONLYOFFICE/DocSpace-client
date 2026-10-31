@@ -65,11 +65,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
-import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { useInterfaceDirection } from "@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext";
+import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 import { DeviceType } from "@docspace/shared/enums";
 import {
   getUserTypeName,

@@ -90,6 +90,20 @@ const Providers = (props: ProvidersProps) => {
     if (ready) setDocumentTitle(t("DataImport"));
   }, [ready, t]);
 
+  // "Import" is an action link with no href, so it is a button to the
+  // keyboard. The press is consumed: the step it opens may listen for it too.
+  const handleImportKeyDown = (e: React.KeyboardEvent) => {
+    const { currentTarget } = e;
+    if (!(currentTarget instanceof HTMLElement)) return;
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    consumeKey(e);
+    const workspace = workspaces.find(
+      ({ title }) => title === currentTarget.dataset.workspace,
+    );
+    if (workspace) setWorkspace(workspace.title);
+  };
+
   if (showPortalSettingsLoader || !ready) return <DataImportLoader />;
 
   return (
@@ -134,15 +148,10 @@ const Providers = (props: ProvidersProps) => {
               isTextOverflow
               color="accent"
               dataTestId={`workspace_item_${workspace.title}_import_link`}
+              data-workspace={workspace.title}
               role="button"
               tabIndex={0}
-              onKeyDown={(e: React.KeyboardEvent) => {
-                if (e.key !== "Enter" && e.key !== " ") return;
-                e.preventDefault();
-                // What it opens may listen for this press itself, on the window.
-                consumeKey(e);
-                setWorkspace(workspace.title);
-              }}
+              onKeyDown={handleImportKeyDown}
             >
               {t("Import")}
             </Link>

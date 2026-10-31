@@ -33,10 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { MigrationButtonsProps } from "../types";
 import styles from "../StyledDataImport.module.scss";
-import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 export const MigrationButtons = ({
   id,
@@ -61,6 +61,10 @@ export const MigrationButtons = ({
   migrationCancelLabel,
   onMigrationCancelClick,
 }: MigrationButtonsProps) => {
+  // The cancel link is a span: a button to the keyboard.
+  const handleCancelKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) =>
+    activateOnButtonKey(e, onMigrationCancelClick);
+
   return (
     <div className={styles.migrationButtonsWrapper}>
       <SaveCancelButtons
@@ -91,7 +95,7 @@ export const MigrationButtons = ({
         data-testid="cancel_import_button"
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => activateOnButtonKey(e, onMigrationCancelClick)}
+        onKeyDown={handleCancelKeyDown}
         onClick={onMigrationCancelClick}
       >
         {migrationCancelLabel}

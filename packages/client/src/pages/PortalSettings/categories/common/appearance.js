@@ -50,6 +50,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
 import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 import api from "@docspace/shared/api";
 
@@ -66,7 +67,6 @@ import appearanceStyles from "./Appearance/StyledApperance.module.scss";
 import Loader from "./sub-components/loaderAppearance";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
 import Preview from "./Appearance/preview";
-import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 const Appearance = (props) => {
   const {
@@ -422,6 +422,11 @@ const Appearance = (props) => {
     setShowColorSchemeDialog(true);
   };
 
+  // The swatches and the add button are buttons to the keyboard.
+  const onColorSelectionKeyDown = (e) => activateOnButtonKey(e, onColorSelection);
+
+  const onAddThemeKeyDown = (e) => activateOnButtonKey(e, onAddTheme);
+
   const onClickEdit = () => {
     appearanceTheme.forEach((item) => {
       if (item.id === selectThemeId) {
@@ -709,7 +714,7 @@ const Appearance = (props) => {
                   tabIndex={0}
                   aria-label={item.name}
                   aria-pressed={selectThemeId === item.id}
-                  onKeyDown={(e) => activateOnButtonKey(e, onColorSelection)}
+                  onKeyDown={onColorSelectionKeyDown}
                 >
                   {selectThemeId === item.id ? (
                     <ReactSVG className={appearanceStyles.checkImg} src={CheckWhiteSvgUrl} />
@@ -742,7 +747,7 @@ const Appearance = (props) => {
                     tabIndex={0}
                     aria-label={t("Common:Custom")}
                     aria-pressed={selectThemeId === item.id}
-                    onKeyDown={(e) => activateOnButtonKey(e, onColorSelection)}
+                    onKeyDown={onColorSelectionKeyDown}
                   >
                     {selectThemeId === item.id ? (
                       <ReactSVG className={appearanceStyles.checkImg} src={CheckWhiteSvgUrl} />
@@ -762,7 +767,7 @@ const Appearance = (props) => {
               tabIndex={0}
               aria-label={headerAddTheme}
               aria-disabled={!abilityAddTheme || undefined}
-              onKeyDown={(e) => activateOnButtonKey(e, onAddTheme)}
+              onKeyDown={onAddThemeKeyDown}
               style={{ backgroundImage: `url(${PlusThemeSvgUrl})` }}
               onClick={onAddTheme}
             />

@@ -55,6 +55,13 @@ const LinkTitle: FC<LinkTitleProps> = ({
   onCopyLink,
   isBlockedByAdmin,
 }) => {
+  // The icon's own click makes it a Tab stop; the row's click, which copies
+  // too, must not run a second time.
+  const handleCopyIconClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onCopyLink();
+  };
+
   return (
     <div>
       <div className={styles.linkTitleContainer} onClick={onCopyLink}>
@@ -84,12 +91,7 @@ const LinkTitle: FC<LinkTitleProps> = ({
               size={12}
               iconName={CopyIcon}
               isDisabled={isExpiredLink || isLoaded}
-              // Its own click makes it a Tab stop; the row's click, which
-              // copies too, must not run a second time.
-              onClick={(e) => {
-                e.stopPropagation();
-                onCopyLink();
-              }}
+              onClick={handleCopyIconClick}
             />
           </div>
         ) : null}

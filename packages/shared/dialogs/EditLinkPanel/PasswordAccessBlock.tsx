@@ -87,16 +87,22 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
   };
 
   // An action link has no href, so it is a button to the keyboard: Enter and
-  // Space run it, and Space does not scroll the panel.
-  const onButtonKey =
-    (action: (event: React.SyntheticEvent) => void) =>
-    (event: React.KeyboardEvent) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
-      event.preventDefault();
-      // What it opens may listen for this press itself, on the window.
-      consumeKey(event);
-      action(event);
-    };
+  // Space run it, and Space does not scroll the panel. The press is consumed,
+  // as what the button opens may listen for it too, on the window.
+  const isButtonPress = (event: React.KeyboardEvent) => {
+    if (event.key !== "Enter" && event.key !== " ") return false;
+    event.preventDefault();
+    consumeKey(event);
+    return true;
+  };
+
+  const onCleanKeyDown = (event: React.KeyboardEvent) => {
+    if (isButtonPress(event)) onCleanClick(event);
+  };
+
+  const onCopyKeyDown = (event: React.KeyboardEvent) => {
+    if (isButtonPress(event)) onCopyClick();
+  };
 
   const onChangePassword = (
     _: React.ChangeEvent<HTMLInputElement>,
@@ -192,7 +198,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               onClick={onCleanClick}
               role="button"
               tabIndex={0}
-              onKeyDown={onButtonKey(onCleanClick)}
+              onKeyDown={onCleanKeyDown}
               dataTestId="edit_link_panel_clean_password_link"
             >
               {t("Common:Clean")}
@@ -205,7 +211,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               type={LinkType.action}
               role="button"
               tabIndex={0}
-              onKeyDown={onButtonKey(onCopyClick)}
+              onKeyDown={onCopyKeyDown}
               dataTestId="edit_link_panel_copy_password_link"
             >
               {t("Common:CopyPassword")}

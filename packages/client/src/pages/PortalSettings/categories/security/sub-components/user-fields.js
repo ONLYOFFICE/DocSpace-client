@@ -79,6 +79,15 @@ const UserFields = (props) => {
 	const [errors, setErrors] = useState(new Array(inputs.length).fill(false));
 	const prevInputsCount = usePrevious(inputs.length);
 
+	// "Add" is an action link with no href, so it is a button to the keyboard;
+	// the press is consumed so that what it adds does not take it as well.
+	const onAddKeyDown = (e) => {
+		if (e.key !== "Enter" && e.key !== " ") return;
+		e.preventDefault();
+		consumeKey(e);
+		onClickAdd();
+	};
+
 	useEffect(() => {
 		if (inputs.length > prevInputsCount) setErrors([...errors, false]);
 	}, [inputs]);
@@ -188,13 +197,7 @@ const UserFields = (props) => {
 					// wrapper's click runs for the pointer.
 					role="button"
 					tabIndex={0}
-					onKeyDown={(e) => {
-						if (e.key !== "Enter" && e.key !== " ") return;
-						e.preventDefault();
-						// What it opens may listen for this press itself, on the window.
-						consumeKey(e);
-						onClickAdd();
-					}}
+					onKeyDown={onAddKeyDown}
 				>
 					{buttonLabel}
 				</Link>

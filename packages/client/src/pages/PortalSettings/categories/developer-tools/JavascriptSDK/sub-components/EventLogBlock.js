@@ -44,9 +44,9 @@ import { DropDownItem } from "@onlyoffice/apps-ui-kit/components/drop-down-item"
 import copy from "copy-to-clipboard";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 import styles from "./EventLogBlock.module.scss";
-import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 const formatTime = (date) => {
   const h = String(date.getHours()).padStart(2, "0");
@@ -108,6 +108,11 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
       return next;
     });
   };
+
+  // An entry that expands is a button to the keyboard. Its id, a number,
+  // comes back from the data attribute as a string.
+  const onEntryKeyDown = (e) =>
+    activateOnButtonKey(e, () => toggle(Number(e.currentTarget.dataset.entryId)));
 
   const toggleEvent = (eventName) => {
     setHiddenEvents((prev) => {
@@ -180,11 +185,8 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
                   role={expandable ? "button" : undefined}
                   tabIndex={expandable ? 0 : undefined}
                   aria-expanded={expandable ? expanded : undefined}
-                  onKeyDown={
-                    expandable
-                      ? (e) => activateOnButtonKey(e, () => toggle(entry.id))
-                      : undefined
-                  }
+                  data-entry-id={entry.id}
+                  onKeyDown={expandable ? onEntryKeyDown : undefined}
                 >
                   <span className={styles.gutter}>
                     <span

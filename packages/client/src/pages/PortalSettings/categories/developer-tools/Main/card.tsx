@@ -38,9 +38,9 @@ import { useNavigate } from "react-router";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 
 import styles from "./main.module.scss";
-import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 
 type CardProps = {
   title: string;
@@ -73,6 +73,15 @@ const Card = ({
     } else {
       navigate(url);
     }
+  };
+
+  // The link has no href, so it is a button to the keyboard. The press is
+  // consumed: the page it opens may listen for it too.
+  const handleLinkKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    consumeKey(e);
+    handleCardClick();
   };
 
   const handleLinkClick = (e: React.MouseEvent) => {
@@ -111,13 +120,7 @@ const Card = ({
         onClick={handleLinkClick}
         role="button"
         tabIndex={0}
-        onKeyDown={(e: React.KeyboardEvent) => {
-          if (e.key !== "Enter" && e.key !== " ") return;
-          e.preventDefault();
-          // What it opens may listen for this press itself, on the window.
-          consumeKey(e);
-          handleCardClick();
-        }}
+        onKeyDown={handleLinkKeyDown}
         color="accent"
         type={LinkType.page}
         fontSize="13px"

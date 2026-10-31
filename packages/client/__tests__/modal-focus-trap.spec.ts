@@ -366,9 +366,12 @@ test.describe("Focus trap in the files selector", () => {
     const panel = page.getByTestId("aside").first();
     const list = panel.getByRole("listbox");
 
-    // The list is the one stop for all its rows, and shows which one the
-    // keyboard is on.
+    // The list is the one stop for all its rows. The focus alone puts the
+    // keyboard on no row, so Enter would still submit; the first arrow
+    // picks one, and the list shows which.
     await expect(list).toBeFocused();
+    await expect(list).not.toHaveAttribute("aria-activedescendant");
+    await page.keyboard.press("ArrowDown");
     await expect(list).toHaveAttribute("aria-activedescendant", /option/);
 
     const activeOption = () =>

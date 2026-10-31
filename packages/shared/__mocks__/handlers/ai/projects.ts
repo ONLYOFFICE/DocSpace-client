@@ -452,7 +452,6 @@ export const aiProjectSkillsHandler = (
           id: room.id,
           title: room.title,
           logo: room.logo,
-          available: room.available,
           skills: SKILLS_BY_ROOM[room.id] ?? [],
         }),
       );

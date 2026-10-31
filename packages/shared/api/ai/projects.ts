@@ -235,7 +235,12 @@ type TAiProjectLinkedRoom = {
   available: boolean;
 };
 
-export type TAiProjectSkillsRoom = TAiProjectLinkedRoom & {
+/**
+ * A linked Instructions room as `GET ai/projects/{id}/skills` lists it. The
+ * server reads the skills through the project, so every linked room is
+ * listed and none is marked unavailable.
+ */
+export type TAiProjectSkillsRoom = Omit<TAiProjectLinkedRoom, "available"> & {
   skills: TAiProjectSkill[];
 };
 

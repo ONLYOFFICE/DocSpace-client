@@ -198,16 +198,31 @@ test.describe("Info panel — Share tab list", () => {
     }
     expect(reached).toBe(true);
 
-    const toasts = page.locator(".Toastify__toast");
+    // Count the copies themselves: copy-to-clipboard copies through
+    // execCommand("copy").
+    await page.evaluate(() => {
+      document.body.dataset.copies = "0";
+      const execCommand = document.execCommand.bind(document);
+      document.execCommand = (command, ...rest) => {
+        if (command === "copy")
+          document.body.dataset.copies = String(
+            Number(document.body.dataset.copies) + 1,
+          );
+        return execCommand(command, ...rest);
+      };
+    });
+    const copies = () =>
+      page.evaluate(() => Number(document.body.dataset.copies));
+
     await page.keyboard.press("Enter");
-    await expect(toasts).toHaveCount(1);
+    await expect.poll(copies).toBe(1);
 
     // The row copies on a click too; the button's click must not add a
     // second copy to its own.
     await copy.click();
-    await expect(toasts).toHaveCount(2);
+    await expect.poll(copies).toBe(2);
     await page.waitForTimeout(300);
-    await expect(toasts).toHaveCount(2);
+    expect(await copies()).toBe(2);
   });
 
   test("file with a link lists it", async ({ page, mockRequest, baseUrl }) => {

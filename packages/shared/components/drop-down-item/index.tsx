@@ -39,9 +39,12 @@ import {
   DropDownItem as Component,
   type DropDownItemProps,
 } from "@onlyoffice/apps-ui-kit/components/drop-down-item";
+import { markAsDropDownItem } from "@onlyoffice/apps-ui-kit/utils/drop-down-item-mark";
 import { getConstName } from "@docspace/shared/constants/consts";
 
-const DropDownItem = (props: DropDownItemProps) => {
+// Marked, so that a ComboBox walks a list of these with the arrow keys as it
+// walks the ui-kit's own items.
+const DropDownItem = markAsDropDownItem((props: DropDownItemProps) => {
   const { t } = useTranslation(["Common"]);
   return (
     <Component
@@ -50,7 +53,7 @@ const DropDownItem = (props: DropDownItemProps) => {
       paidLabel={t("Common:Paid")}
     />
   );
-};
+});
 
 export { DropDownItem };
 export type { DropDownItemProps };

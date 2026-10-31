@@ -103,7 +103,7 @@ const SectionBodyContent = (props) => {
     setHotkeyCaretStart,
     setHotkeyCaret,
     hotkeyCaret,
-    selection,
+    getSelection,
     scrollToItem,
     setScrollToItem,
     filesList,
@@ -130,21 +130,23 @@ const SectionBodyContent = (props) => {
   } = props;
 
   // A row the keyboard focused as a whole, coming into the list, becomes the
-  // selection - unless it is already part of it - and the caret.
+  // selection and the caret. A selection of several items is kept: passing
+  // through the list with Tab moves the caret only.
   const onRowFocus = React.useCallback(
     ({ id, isFolder }) => {
       const item = filesList.find(
         (file) => String(file.id) === id && !!file.isFolder === isFolder,
       );
       if (!item) return;
+      const selection = getSelection();
       const isSelected = selection.some(
         (file) => file.id === item.id && !!file.isFolder === isFolder,
       );
-      if (!isSelected) setSelection([item]);
+      if (!isSelected && selection.length <= 1) setSelection([item]);
       setHotkeyCaret(item);
       setHotkeyCaretStart(item);
     },
-    [filesList, selection, setSelection, setHotkeyCaret, setHotkeyCaretStart],
+    [filesList, getSelection, setSelection, setHotkeyCaret, setHotkeyCaretStart],
   );
 
   // The real focus follows the keyboard caret, and the list is one Tab stop.
@@ -586,7 +588,6 @@ export default inject(
       setHotkeyCaretStart,
       setHotkeyCaret,
       hotkeyCaret,
-      selection,
       scrollToItem,
       setScrollToItem,
       filesList,
@@ -629,7 +630,9 @@ export default inject(
       setHotkeyCaretStart,
       setHotkeyCaret,
       hotkeyCaret,
-      selection,
+      // Read when a row takes the focus, not on render: the body need not
+      // re-render with every change of the selection.
+      getSelection: () => filesStore.selection,
       scrollToItem,
       setScrollToItem,
       filesList,

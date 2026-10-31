@@ -188,6 +188,8 @@ test.describe("Files list: the focus follows the keyboard", () => {
     await expect.poll(async () => (await focus(page)).row).toBe(fileRow(2));
 
     const { after } = await rowStopsAroundFocus(page);
+    // A row with no controls would make the walk below check nothing.
+    expect(after.length).toBeGreaterThan(0);
     for (const name of after) {
       await page.keyboard.press("Tab");
       const where = await focus(page);
@@ -210,6 +212,8 @@ test.describe("Files list: the focus follows the keyboard", () => {
 
     // Into the row's controls, to its last one.
     const { after } = await rowStopsAroundFocus(page);
+    // A row with no controls would make the walk below check nothing.
+    expect(after.length).toBeGreaterThan(0);
     for (const _ of after) await page.keyboard.press("Tab");
     expect((await focus(page)).row).toBe(fileRow(3));
 
@@ -248,6 +252,7 @@ test.describe("Files list: the focus follows the keyboard", () => {
     await page.evaluate((id) => {
       if (document.activeElement instanceof HTMLElement)
         document.activeElement.blur();
+      window.dispatchEvent(new FocusEvent("blur"));
       const row = document.getElementById(id);
       const controls = row?.querySelectorAll<HTMLElement>(
         "a[href], [tabindex='0'], button",
@@ -258,6 +263,47 @@ test.describe("Files list: the focus follows the keyboard", () => {
     await expect.poll(async () => (await focus(page)).row).toBe(fileRow(3));
     expect((await focus(page)).isRow).toBe(true);
     await expect.poll(() => selectedFiles(page)).toEqual([3]);
+  });
+
+  // A dialog opened from a row's control gives the focus back to that
+  // control when it closes: the list must leave it there.
+  test("focus given back to a row control from within the page stays there", async ({
+    page,
+  }) => {
+    for (const key of ["ArrowDown", "ArrowDown", "ArrowDown"])
+      await page.keyboard.press(key);
+    await expect.poll(async () => (await focus(page)).row).toBe(fileRow(3));
+
+    await page.evaluate((id) => {
+      const row = document.getElementById(id);
+      const controls = row?.querySelectorAll<HTMLElement>(
+        "a[href], [tabindex='0'], button",
+      );
+      controls?.[controls.length - 1]?.focus();
+    }, fileRow(5));
+
+    await page.waitForTimeout(200);
+    const where = await focus(page);
+    expect(where.row).toBe(fileRow(5));
+    expect(where.isRow).toBe(false);
+    await expect.poll(() => selectedFiles(page)).toEqual([3]);
+  });
+
+  // Passing through the list with Tab moves the caret, not a selection of
+  // several items the user made.
+  test("a selection of several items survives Tab out of the list and back", async ({
+    page,
+  }) => {
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("Shift+ArrowDown");
+    await expect.poll(() => selectedFiles(page)).toEqual([1, 2]);
+
+    await page.keyboard.press("Shift+Tab");
+    await expect.poll(async () => (await focus(page)).row).toBeNull();
+    await page.keyboard.press("Tab");
+    await expect.poll(async () => (await focus(page)).isRow).toBe(true);
+
+    await expect.poll(() => selectedFiles(page)).toEqual([1, 2]);
   });
 
   test("Tab into the list focuses a row and selects it", async ({ page }) => {

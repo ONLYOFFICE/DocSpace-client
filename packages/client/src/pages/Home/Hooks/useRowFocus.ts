@@ -49,6 +49,8 @@ export type TRowKey = { id: string; isFolder: boolean };
 const ROW = ".files-item";
 // The section's own list, not the info panel's scroller that shares the class.
 const LIST = ".section-scroll:not(.info-panel-scroll)";
+// How many frames the focus waits for the caret's row to be rendered.
+const CARET_ROW_FRAMES = 10;
 
 // The outermost files-item: a table row's context-menu cell carries the
 // class too, and must count as part of its row, not as a row of its own.
@@ -78,17 +80,52 @@ const findRow = (item: TCaretItem) => {
 // focusable from script only (tabindex -1), never a Tab stop of its own.
 const HOLDER = "data-row-focus";
 
+const isHolder = (el: Element) => el.hasAttribute(HOLDER);
+
 const rowHolder = (row: HTMLElement) => {
   const holder =
     getComputedStyle(row).display === "contents"
       ? (row.querySelector<HTMLElement>(".table-container_cell") ?? row)
       : row;
-  if (!holder.hasAttribute("tabindex")) holder.setAttribute("tabindex", "-1");
+  if (isHolder(holder)) return holder;
+
+  // Set for the time it holds the focus only: left on, a click on that cell
+  // or tile would focus it, where nothing took the focus before.
+  const addedTabIndex = !holder.hasAttribute("tabindex");
+  if (addedTabIndex) holder.setAttribute("tabindex", "-1");
   holder.setAttribute(HOLDER, "");
+  holder.addEventListener(
+    "blur",
+    () => {
+      if (addedTabIndex) holder.removeAttribute("tabindex");
+      holder.removeAttribute(HOLDER);
+    },
+    { once: true },
+  );
   return holder;
 };
 
-const isHolder = (el: Element) => el.hasAttribute(HOLDER);
+
+// The first row inside the list's visible area: a virtualized list renders
+// rows above and below it too, which Tab must not select.
+const firstRowOnScreen = () => {
+  const list = document.querySelector(LIST);
+  if (!list) return null;
+  const view = list.getBoundingClientRect();
+  for (const item of list.querySelectorAll<HTMLElement>(ROW)) {
+    const row = rowOf(item);
+    if (!row || row !== item) continue;
+    const box = (rowHolderBox(row) ?? row).getBoundingClientRect();
+    if (box.bottom > view.top && box.top < view.bottom) return row;
+  }
+  return null;
+};
+
+// A table row has no box of its own (display: contents): its first cell's.
+const rowHolderBox = (row: HTMLElement) =>
+  getComputedStyle(row).display === "contents"
+    ? row.querySelector<HTMLElement>(".table-container_cell")
+    : null;
 
 const rowKey = (row: HTMLElement): TRowKey | null => {
   const owner = row.closest<HTMLElement>('[id^="file_"], [id^="folder_"]');
@@ -163,13 +200,24 @@ export const useRowFocus = (
     )
       return;
 
-    const frame = requestAnimationFrame(() => {
+    // A long jump (End, Ctrl+Down) scrolls a virtualized list to a row it has
+    // yet to render: look for it again on the next frames before giving up.
+    let frame = 0;
+    let attempts = 0;
+    const focusCaretRow = () => {
       const row = findRow(hotkeyCaret);
+      if (!row) {
+        attempts += 1;
+        if (attempts < CARET_ROW_FRAMES)
+          frame = requestAnimationFrame(focusCaretRow);
+        return;
+      }
       // Already in that row - Tab brought the focus there and made it the
       // caret, and may have moved on to one of its controls since: leave it.
-      if (!row || row.contains(document.activeElement)) return;
+      if (row.contains(document.activeElement)) return;
       rowHolder(row).focus({ preventScroll: true });
-    });
+    };
+    frame = requestAnimationFrame(focusCaretRow);
     return () => cancelAnimationFrame(frame);
   }, [hotkeyCaret]);
 
@@ -235,12 +283,22 @@ export const useRowFocus = (
       }
 
       // Coming into the list, either way: onto the caret's row as a whole
-      // (or the row Tab would reach), which becomes the selection.
+      // (or the row Tab would reach), which becomes the selection. Tab from
+      // past the list, or Shift+Tab from before it, cannot reach it: no need
+      // to read the page's stops for those.
+      const list = document.querySelector(LIST);
+      if (!list) return;
+      if (!list.contains(activeElement)) {
+        const side = activeElement.compareDocumentPosition(list);
+        const listAhead = !!(side & Node.DOCUMENT_POSITION_FOLLOWING);
+        if (back === listAhead) return;
+      }
       const next = stopBeside(activeElement, back);
       const nextRow = rowOf(next ?? null);
       if (!nextRow) return;
 
-      const targetRow = findRow(caretRef.current) ?? nextRow;
+      const targetRow =
+        findRow(caretRef.current) ?? firstRowOnScreen() ?? nextRow;
       e.preventDefault();
       rowHolder(targetRow).focus();
       const key = rowKey(targetRow);
@@ -250,10 +308,24 @@ export const useRowFocus = (
     // Into the list without a key press the page saw - Shift+Tab back from
     // the browser's toolbar lands on the last row's last control - the focus
     // still goes to the caret's row as a whole, which becomes the selection.
+    // Only focus that comes back from outside the page: a dialog giving the
+    // focus back to the row control that opened it is left alone, and so is
+    // the window restoring the element it had before Alt+Tab.
+    let cameBackFromOutside = false;
+    let focusedBeforeLeaving: Element | null = null;
+    const onWindowBlur = (e: FocusEvent) => {
+      if (e.target !== window) return;
+      cameBackFromOutside = true;
+      focusedBeforeLeaving = document.activeElement;
+    };
+
     const onFocusIn = (e: FocusEvent) => {
-      if (!fromKeyboardRef.current) return;
+      const fromOutside = cameBackFromOutside;
+      cameBackFromOutside = false;
+      if (!fromOutside || !fromKeyboardRef.current) return;
       const { target, relatedTarget } = e;
       if (!(target instanceof HTMLElement)) return;
+      if (target === focusedBeforeLeaving) return;
       const row = rowOf(target);
       if (!row) return;
       if (relatedTarget instanceof Element && rowOf(relatedTarget)) return;
@@ -267,10 +339,12 @@ export const useRowFocus = (
     };
 
     window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("blur", onWindowBlur);
     document.addEventListener("focusin", onFocusIn);
     return () => {
       restorePending();
       window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("blur", onWindowBlur);
       document.removeEventListener("focusin", onFocusIn);
     };
   }, []);

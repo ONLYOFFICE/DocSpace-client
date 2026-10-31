@@ -71,6 +71,8 @@ export type TAiProjectAccess =
 export const INSTRUCTIONS_ROOM_TYPE = RoomsType.InstructionsRoom;
 export const KNOWLEDGE_ROOM_TYPE = RoomsType.KnowledgeRoom;
 export const AI_PROJECT_ROOM_TYPE = RoomsType.AiProjectRoom;
+/** Rooms of one type a project links at most (`AiProjectRoomService.MaxRoomsPerType`). */
+export const AI_PROJECT_MAX_ROOMS_PER_TYPE = 20;
 
 export type TAiProjectUser = {
   id: string;

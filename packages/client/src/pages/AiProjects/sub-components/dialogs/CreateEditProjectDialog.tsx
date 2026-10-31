@@ -54,7 +54,11 @@ import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector"
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
 import { RoomSearchArea } from "@docspace/shared/enums";
-import { INSTRUCTIONS_ROOM_TYPE, KNOWLEDGE_ROOM_TYPE } from "@docspace/shared/api/ai/projects";
+import {
+  AI_PROJECT_MAX_ROOMS_PER_TYPE,
+  INSTRUCTIONS_ROOM_TYPE,
+  KNOWLEDGE_ROOM_TYPE,
+} from "@docspace/shared/api/ai/projects";
 import type {
   TAiProject,
   TAiProjectCover,
@@ -323,6 +327,14 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
     dialogsStore.setChangeRoomOwnerIsVisible(true);
   };
 
+  // The limit is never shown up front: only ticking a room past it is told.
+  const onRoomsLimitReached = () =>
+    toastr.warning(
+      selector === INSTRUCTIONS_ROOM_TYPE
+        ? t("Common:AIProjectInstructionsRoomsLimit", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE })
+        : t("Common:AIProjectKnowledgeRoomsLimit", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE }),
+    );
+
   const onRoomsSelected = (items: TSelectorItem[]) => {
     if (selector === null) return;
     const rooms = items.map((item) => ({
@@ -408,6 +420,8 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
               // Room rows come with `disableMultiSelect`; this overrules it,
               // as the "add rooms to a group" dialog does.
               forceIsMultiSelect
+              maxSelectedItems={AI_PROJECT_MAX_ROOMS_PER_TYPE}
+              onSelectLimitReached={onRoomsLimitReached}
               roomType={selector}
               // Instructions and Knowledge rooms live under the "AI rooms"
               // root, not in Rooms.

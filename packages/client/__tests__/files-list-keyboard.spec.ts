@@ -327,6 +327,33 @@ test.describe("Files list: the focus follows the keyboard", () => {
     expect(where.row, `Tab went on into ${where.row}`).toBeNull();
   });
 
+  // The options are drawn with the client's DropDownItem wrapper; the combo
+  // box took them for custom content and the arrows did nothing.
+  test("the arrows walk the checkbox options in the group menu", async ({
+    page,
+  }) => {
+    await page.keyboard.press("ArrowDown");
+    await expect.poll(() => selectedFiles(page)).toEqual([1]);
+
+    const combo = page.locator('[data-testid="table_group_menu_combobox"]');
+    const button = combo.locator('[aria-haspopup="listbox"]').first();
+    await button.focus();
+    await page.keyboard.press("Enter");
+    await expect(button).toHaveAttribute("aria-expanded", "true");
+
+    const highlighted = () =>
+      button.evaluate(
+        (el) =>
+          document.getElementById(
+            el.getAttribute("aria-activedescendant") ?? "",
+          )?.textContent ?? "",
+      );
+    const first = await highlighted();
+    await page.keyboard.press("ArrowDown");
+    await expect.poll(highlighted).not.toBe(first);
+    await expect.poll(highlighted).not.toBe("");
+  });
+
   test("a click selects as before and does not pull the focus to the row", async ({
     page,
   }) => {

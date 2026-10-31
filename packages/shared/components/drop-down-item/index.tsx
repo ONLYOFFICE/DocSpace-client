@@ -50,15 +50,15 @@ const DropDownItemComponent = (props: DropDownItemProps) => {
       betaLabel={getConstName("BetaLabel")}
       paidLabel={t("Common:Paid")}
     />
-    );
-  };
+  );
+};
 
-  // Named, as a function passed to markAsDropDownItem gets no name of its own.
-  DropDownItemComponent.displayName = "DropDownItem";
+// Named, as a function passed to markAsDropDownItem gets no name of its own.
+DropDownItemComponent.displayName = "DropDownItem";
 
-  // Marked, so that a ComboBox walks a list of these with the arrow keys as it
-  // walks the ui-kit's own items.
-  const DropDownItem = markAsDropDownItem(DropDownItemComponent);
+// Marked, so that a ComboBox walks a list of these with the arrow keys as it
+// walks the ui-kit's own items.
+const DropDownItem = markAsDropDownItem(DropDownItemComponent);
 
-  export { DropDownItem };
+export { DropDownItem };
 export type { DropDownItemProps };

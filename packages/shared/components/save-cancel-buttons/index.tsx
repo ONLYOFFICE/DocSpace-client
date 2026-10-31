@@ -96,8 +96,9 @@ const SaveCancelButtons = ({
       ? disableRestoreToDefault
       : !showReminder;
 
-  const tabIndexSaveButton = tabIndex || -1;
-  const tabIndexCancelButton = tabIndex ? tabIndex + 1 : -1;
+  // Both buttons keep their place in the document's Tab order. Unset, the
+  // tabIndex used to fall back to -1, which took Save and Cancel out of the
+  // keyboard's reach on every page that passed none.
 
   const classNameSave = classNames(
     styles.button,
@@ -136,7 +137,7 @@ const SaveCancelButtons = ({
           primary
           label={saveButtonLabel}
           onClick={onSaveClick}
-          tabIndex={tabIndexSaveButton}
+          tabIndex={tabIndex}
           isLoading={isSaving}
           isDisabled={saveButtonDisabled || showReminder === false}
           testId={saveButtonDataTestId ?? "save-button"}
@@ -148,7 +149,7 @@ const SaveCancelButtons = ({
           className={classNameCancel}
           label={cancelButtonLabel}
           onClick={onCancelClick}
-          tabIndex={tabIndexCancelButton}
+          tabIndex={tabIndex}
           isDisabled={cancelButtonDisabled || isSaving}
           testId={cancelButtonDataTestId ?? "cancel-button"}
           aria-label={`${cancelButtonLabel} changes`}

@@ -68,6 +68,21 @@ describe("<SaveCancelButtons />", () => {
     expect(cancelButton).toHaveAttribute("aria-label", "Cancel");
   });
 
+  // Unset, tabIndex used to fall back to -1: Save and Cancel were out of the
+  // keyboard's reach on every settings page.
+  it("leaves both buttons in the Tab order by default", () => {
+    render(<SaveCancelButtons {...defaultProps} />);
+
+    expect(screen.getByTestId("save-button")).not.toHaveAttribute(
+      "tabindex",
+      "-1",
+    );
+    expect(screen.getByTestId("cancel-button")).not.toHaveAttribute(
+      "tabindex",
+      "-1",
+    );
+  });
+
   it("displays custom id and className", () => {
     render(
       <SaveCancelButtons

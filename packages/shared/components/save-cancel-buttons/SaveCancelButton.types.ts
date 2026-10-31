@@ -78,7 +78,7 @@ export type SaveCancelButtonProps = {
   /** Explicitly enables the cancel button regardless of other states */
   cancelEnable?: boolean;
 
-  /** Tab index for keyboard navigation */
+  /** tabindex of both buttons; leave it unset to keep them in the document's Tab order */
   tabIndex?: number;
 
   /** When true, hides the top border */

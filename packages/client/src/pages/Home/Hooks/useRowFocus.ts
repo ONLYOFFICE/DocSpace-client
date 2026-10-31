@@ -96,12 +96,8 @@ const rowKey = (row: HTMLElement): TRowKey | null => {
   return match ? { id: match[2], isFolder: match[1] === "folder" } : null;
 };
 
-// The first Tab stop after `from` (or, going back, before it) that matches.
-const stopBeside = (
-  from: HTMLElement,
-  back: boolean,
-  matches: (stop: HTMLElement) => boolean,
-) => {
+// The first Tab stop after `from` (or, going back, before it).
+const stopBeside = (from: HTMLElement, back: boolean) => {
   const stops = getTabStops(document.body);
   const side = back
     ? Node.DOCUMENT_POSITION_PRECEDING
@@ -109,8 +105,7 @@ const stopBeside = (
   const beside = (stop: HTMLElement) =>
     stop !== from &&
     !!(from.compareDocumentPosition(stop) & side) &&
-    !stop.contains(from) &&
-    matches(stop);
+    !stop.contains(from);
   return back ? stops.findLast(beside) : stops.find(beside);
 };
 
@@ -179,6 +174,16 @@ export const useRowFocus = (
   }, [hotkeyCaret]);
 
   useEffect(() => {
+    // The other rows' tab stops, taken out of the order for one Tab press and
+    // put back right after it.
+    let pendingRestore: (() => void) | null = null;
+    let restoreTimer: ReturnType<typeof setTimeout> | undefined;
+    const restorePending = () => {
+      clearTimeout(restoreTimer);
+      pendingRestore?.();
+      pendingRestore = null;
+    };
+
     // On window, after the document's listeners: an open dialog's focus
     // trap handles Tab first and claims it.
     const onKeyDown = (e: KeyboardEvent) => {
@@ -208,25 +213,30 @@ export const useRowFocus = (
         // Out of the list as if it were one stop: the other rows' controls
         // leave the order for this one key, and the browser's own Tab goes
         // on to whatever follows - the browser's toolbar, when nothing does.
+        // A restore still waiting from a fast earlier Tab runs first: the
+        // stops it took out must be found, and saved with their own values.
+        restorePending();
         const others = getTabStops(document.body).filter((stop) => {
           const stopRow = rowOf(stop);
           return !!stopRow && stopRow !== row;
         });
         const saved = others.map((stop) => stop.getAttribute("tabindex"));
         others.forEach((stop) => stop.setAttribute("tabindex", "-1"));
-        setTimeout(() =>
+        pendingRestore = () =>
           others.forEach((stop, index) => {
+            // A row the list re-rendered since is gone: nothing to put back.
+            if (!stop.isConnected) return;
             const value = saved[index];
             if (value === null) stop.removeAttribute("tabindex");
             else stop.setAttribute("tabindex", value);
-          }),
-        );
+          });
+        restoreTimer = setTimeout(restorePending);
         return;
       }
 
       // Coming into the list, either way: onto the caret's row as a whole
       // (or the row Tab would reach), which becomes the selection.
-      const next = stopBeside(activeElement, back, () => true);
+      const next = stopBeside(activeElement, back);
       const nextRow = rowOf(next ?? null);
       if (!nextRow) return;
 
@@ -259,6 +269,7 @@ export const useRowFocus = (
     window.addEventListener("keydown", onKeyDown);
     document.addEventListener("focusin", onFocusIn);
     return () => {
+      restorePending();
       window.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("focusin", onFocusIn);
     };

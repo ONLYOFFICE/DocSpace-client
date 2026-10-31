@@ -366,12 +366,9 @@ test.describe("Focus trap in the files selector", () => {
     const panel = page.getByTestId("aside").first();
     const list = panel.getByRole("listbox");
 
-    // The list is the one stop for all its rows. The focus alone puts the
-    // keyboard on no row, so Enter would still submit; the first arrow
-    // picks one, and the list shows which.
+    // The list is the one stop for all its rows, and shows which one the
+    // keyboard is on.
     await expect(list).toBeFocused();
-    await expect(list).not.toHaveAttribute("aria-activedescendant");
-    await page.keyboard.press("ArrowDown");
     await expect(list).toHaveAttribute("aria-activedescendant", /option/);
 
     const activeOption = () =>
@@ -410,6 +407,21 @@ test.describe("Focus trap in the files selector", () => {
     // Opening a row moved nothing, and the panel is still open on the list.
     await expect(list).toBeFocused();
     expect(moves).toEqual([]);
+
+    // The "New room" row opens its menu of room types from the keyboard:
+    // the focus goes to the first type, the arrows walk them, and Escape
+    // closes the menu alone, giving the focus back to the list.
+    await page.keyboard.press("Home");
+    await expect.poll(activeOption).toContain("New room");
+    await page.keyboard.press("Enter");
+    const types = page.getByTestId("room-type-dropdown-item");
+    await expect(types.first()).toBeFocused();
+    await page.keyboard.press("ArrowDown");
+    await expect(types.nth(1)).toBeFocused();
+    await page.keyboard.press("Escape");
+    await expect(types).toHaveCount(0);
+    await expect(list).toBeFocused();
+    await expect(panel).toBeVisible();
   });
 
   test("Move to: the new folder's name row is done or cancelled from the keyboard", async ({

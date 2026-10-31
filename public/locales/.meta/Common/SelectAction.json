@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2026-10-31T12:58:28.864Z",
+  "updated_at": "2026-10-31T13:48:16.657Z",
   "comment": {
     "text": "This is a button label. It appears on various selectors (people, AI agents, files) to confirm the user's selection.",
     "is_auto": true,
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 428,
+      "line_number": 448,
       "context": "withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onCancel={() => setSelector(null)}\n submitButtonLabel={t(\"Common:SelectAction\")}\n selectedItems={selected.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]}\n sortSelectedFirst\n onSubmit={onRoomsSelected}\n />\n </ModalDialog.Container>",
       "module": "/packages/client"
     },

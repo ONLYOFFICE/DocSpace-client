@@ -3,7 +3,7 @@
   "content": "Tags",
   "content_en_sha1_hash": "848eed0fbd5429f556b2982dec3ea87136e33e44",
   "created_at": "2025-05-19T21:30:49.252Z",
-  "updated_at": "2026-10-31T12:58:28.939Z",
+  "updated_at": "2026-10-31T13:48:16.677Z",
   "comment": {
     "text": "This is a label for a column header in a table, a section in an information panel, or a field for entering tags. It refers to keywords or labels associated with an item.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 473,
+      "line_number": 493,
       "context": "dataTestId=\"ai-project-title\"\n />\n </div>\n <TagInput\n t={t}\n title={`${t(\"Common:Tags\")}:`}\n tagHandler={tagHandler}\n setIsScrollLocked={() => {}}\n isDisabled={isSaving}\n dataTestId=\"ai-project-tags-input\"\n />",
       "module": "/packages/client"
     },

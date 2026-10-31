@@ -3,7 +3,7 @@
   "content": "Create AI project",
   "content_en_sha1_hash": "c1b417d2ea27b41860777e3ad5a830033eb298f0",
   "created_at": "2026-10-31T12:56:51.357Z",
-  "updated_at": "2026-10-31T12:59:25.206Z",
+  "updated_at": "2026-10-31T13:48:16.770Z",
   "comment": {
     "text": "Header of the side panel form that creates a new AI project (a shared setup of a model and AI rooms).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 436,
+      "line_number": 456,
       "context": "onSubmit={onRoomsSelected}\n />\n </ModalDialog.Container>\n ) : null}\n <ModalDialog.Header>\n {project ? t(\"Common:AIProjectEditTitle\") : t(\"Common:AIProjectCreateTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.body}>\n <div className=\"logo-name-container\">\n <RoomIcon",
       "module": "/packages/client"
     }

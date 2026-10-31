@@ -427,6 +427,10 @@ const Appearance = (props) => {
 
   const onAddThemeKeyDown = (e) => activateOnButtonKey(e, onAddTheme);
 
+  // Custom themes have no names: each is told apart by its place among them.
+  const getCustomThemeLabel = (item) =>
+    `${t("Common:Custom")} ${appearanceTheme.filter((theme) => !theme.name).indexOf(item) + 1}`;
+
   const onClickEdit = () => {
     appearanceTheme.forEach((item) => {
       if (item.id === selectThemeId) {
@@ -745,7 +749,7 @@ const Appearance = (props) => {
                     data-testid={`appearance_custom_theme_${item.id}`}
                     role="button"
                     tabIndex={0}
-                    aria-label={t("Common:Custom")}
+                    aria-label={getCustomThemeLabel(item)}
                     aria-pressed={selectThemeId === item.id}
                     onKeyDown={onColorSelectionKeyDown}
                   >

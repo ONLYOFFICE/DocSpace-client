@@ -1,0 +1,29 @@
+{
+  "key_path": "AiRoomsAIOffUserTitle",
+  "content": "AI isn’t available yet",
+  "content_en_sha1_hash": "ab4fff9b5a30d7edfb22c36fa5df33d8111d42c1",
+  "created_at": "2026-11-01T08:11:31.728Z",
+  "updated_at": "2026-11-01T08:13:19.914Z",
+  "comment": {
+    "text": "Title of the AI rooms section placeholder shown to a non-admin user while AI is not set up on the portal; there is no action button.",
+    "is_auto": true,
+    "updated_at": "2026-11-01T08:13:19.914Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 258,
+      "context": "export const getAiRoomsAIOffTitle = (\n t: TTranslation,\n standalone: boolean,\n isPortalAdmin: boolean,\n ) => {\n if (!isPortalAdmin) return t(\"Common:AiRoomsAIOffUserTitle\");\n return standalone\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"Common:AIProvider\"),\n })\n : t(\"Common:AiRoomsAIOffTitle\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

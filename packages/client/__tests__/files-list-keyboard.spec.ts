@@ -289,6 +289,38 @@ test.describe("Files list: the focus follows the keyboard", () => {
     await expect.poll(() => selectedFiles(page)).toEqual([3]);
   });
 
+  // The row's context menu leaves the focus on the row, so a dialog opened
+  // from it hands the focus back to the row when it closes - the row must
+  // still be able to take it.
+  test("a dialog opened from the row's context menu gives the focus back to the row", async ({
+    page,
+  }) => {
+    for (const key of ["ArrowDown", "ArrowDown", "ArrowDown"])
+      await page.keyboard.press(key);
+    await expect.poll(async () => (await focus(page)).isRow).toBe(true);
+    expect((await focus(page)).row).toBe(fileRow(3));
+
+    await page.keyboard.press("Shift+F10");
+    const menuEntry = page.locator('[data-focused="true"]');
+    await expect(menuEntry).toBeVisible();
+    for (let i = 0; i < 20; i++) {
+      if ((await menuEntry.innerText()).trim() === "Delete") break;
+      await page.keyboard.press("ArrowDown");
+    }
+    await expect(menuEntry).toHaveText("Delete");
+    await page.keyboard.press("Enter");
+
+    await expect
+      .poll(() =>
+        page.evaluate(() => !!document.activeElement?.closest('[role="dialog"]')),
+      )
+      .toBe(true);
+
+    await page.keyboard.press("Escape");
+    await expect.poll(async () => (await focus(page)).row).toBe(fileRow(3));
+    expect((await focus(page)).isRow).toBe(true);
+  });
+
   // Passing through the list with Tab moves the caret, not a selection of
   // several items the user made.
   test("a selection of several items survives Tab out of the list and back", async ({

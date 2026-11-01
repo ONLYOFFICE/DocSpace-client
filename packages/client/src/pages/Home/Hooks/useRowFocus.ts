@@ -89,22 +89,32 @@ const rowHolder = (row: HTMLElement) => {
       : row;
   if (isHolder(holder)) return holder;
 
-  // Set for the time it holds the focus only: left on, a click on that cell
-  // or tile would focus it, where nothing took the focus before.
+  // Set while the row is the keyboard's: left on, a click on that cell or
+  // tile would focus it, where nothing took the focus before. The focus moving
+  // on within the list ends that at once. Leaving the list - for a dialog or a
+  // menu the row opened, or another window - it stays, so the focus can be
+  // given back to the row; the next press of the pointer elsewhere ends it.
   const addedTabIndex = !holder.hasAttribute("tabindex");
   if (addedTabIndex) holder.setAttribute("tabindex", "-1");
   holder.setAttribute(HOLDER, "");
-  holder.addEventListener(
-    "blur",
-    () => {
-      if (addedTabIndex) holder.removeAttribute("tabindex");
-      holder.removeAttribute(HOLDER);
-    },
-    { once: true },
-  );
+
+  const release = () => {
+    if (addedTabIndex) holder.removeAttribute("tabindex");
+    holder.removeAttribute(HOLDER);
+    holder.removeEventListener("blur", onBlur);
+    window.removeEventListener("pointerdown", onPointerDown, true);
+  };
+  const onBlur = (e: FocusEvent) => {
+    if (e.relatedTarget instanceof Element && e.relatedTarget.closest(LIST))
+      release();
+  };
+  const onPointerDown = (e: PointerEvent) => {
+    if (!(e.target instanceof Node && holder.contains(e.target))) release();
+  };
+  holder.addEventListener("blur", onBlur);
+  window.addEventListener("pointerdown", onPointerDown, true);
   return holder;
 };
-
 
 // The first row inside the list's visible area: a virtualized list renders
 // rows above and below it too, which Tab must not select.
@@ -194,10 +204,7 @@ export const useRowFocus = (
   useEffect(() => {
     if (!hotkeyCaret || !fromKeyboardRef.current) return;
     const { activeElement } = document;
-    if (
-      activeElement !== document.body &&
-      !activeElement?.closest(LIST)
-    )
+    if (activeElement !== document.body && !activeElement?.closest(LIST))
       return;
 
     // A long jump (End, Ctrl+Down) scrolls a virtualized list to a row it has

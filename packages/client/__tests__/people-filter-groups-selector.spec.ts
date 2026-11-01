@@ -191,6 +191,32 @@ test.describe("People filter: groups selector", () => {
     await expect(page.getByTestId("filter_cancel_button")).toBeVisible();
   });
 
+  // A pick swaps "Other" for the picked group: the focus goes to that tag,
+  // whose cross clears the group and hands the focus back to "Other".
+  test("after a pick the focus is on the picked group, and its cross clears it", async ({
+    page,
+    baseUrl,
+  }) => {
+    const selector = await openGroupsSelector(page, baseUrl);
+    await expect(selector.getByRole("listbox")).toBeFocused();
+
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Enter");
+    await expect(selector).toBeHidden();
+
+    const groupBlock = page.getByTestId("filter_block_item_filter-group");
+    const picked = groupBlock.getByRole("button", { name: GROUPS[0].name });
+    await expect(picked).toBeFocused();
+
+    await page.keyboard.press("Tab");
+    const remove = groupBlock.getByRole("button", { name: "Remove" });
+    await expect(remove).toBeFocused();
+    await page.keyboard.press("Enter");
+
+    await expect(picked).toHaveCount(0);
+    await expect(groupBlock.getByTestId("filter_tag_other")).toBeFocused();
+  });
+
   // The filter's tags are keyboard buttons: Tab reaches "Other", and Enter
   // opens the selector from it.
   test("the groups selector opens from the keyboard", async ({

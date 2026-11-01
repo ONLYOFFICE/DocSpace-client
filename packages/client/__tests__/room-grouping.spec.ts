@@ -1204,6 +1204,31 @@ test.describe("Room grouping", () => {
       await expect(submit).toBeFocused();
     });
 
+    // The list draws only the rows near the viewport: Enter used to do nothing
+    // once the wheel had scrolled the keyboard's row away.
+    test("Enter picks the keyboard's room even after the wheel scrolled it away", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      const list = roomSelector.getByRole("listbox");
+      await expect(list).toBeFocused();
+
+      await page.keyboard.press("End");
+      const optionId = await list.getAttribute("aria-activedescendant");
+      expect(optionId).toBeTruthy();
+      const lastRow = roomSelector.locator(`[id="${optionId}"]`);
+      await expect(lastRow).toBeVisible();
+
+      await list.hover();
+      await page.mouse.wheel(0, -10000);
+      await expect(lastRow).toHaveCount(0);
+      await expect(list).toBeFocused();
+
+      await page.keyboard.press("Enter");
+      await expect(lastRow).toHaveAttribute("aria-selected", "true");
+    });
+
     test("Escape closes the room selector and gives the focus back to Create new group", async ({
       page,
       baseUrl,

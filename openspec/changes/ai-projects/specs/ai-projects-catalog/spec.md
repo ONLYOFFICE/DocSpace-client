@@ -75,6 +75,17 @@ Only the portal owner, DocSpace admins and room admins SHALL see the create cont
 - **WHEN** a room admin opens "New room" in the Rooms section
 - **THEN** the picker offers no Instructions, Knowledge or AI project type
 
+### Requirement: AI not set up
+While AI is not set up on the portal, by the AI chat's own rule (a chat profile on standalone, the AI service on SaaS; unknown until the profiles load), the "AI rooms" list SHALL be replaced by the chat's "AI is off" view, whether rooms exist or not: "Go to settings" for an admin on standalone, "Activate" or "Top up and activate" for an admin on SaaS, "contact an admin" for others. Nothing SHALL be created there: no "New room", "+" or main button.
+
+#### Scenario: SaaS without AI
+- **WHEN** an admin opens "AI rooms" on a SaaS portal where the AI service is not activated
+- **THEN** the section shows the "AI is off" view with "Activate" (or "Top up and activate"), and no create control
+
+#### Scenario: Standalone without a chat profile
+- **WHEN** a room admin opens "AI rooms" on a standalone portal with no chat profile
+- **THEN** the section shows the "AI is off" view telling them to contact an admin, and no create control
+
 ### Requirement: Instructions and Knowledge rooms from the picker
 Instructions and Knowledge rooms picked in the "AI rooms" dialog SHALL be created through `POST files/rooms`, which puts them under the AI rooms root, and SHALL open at `/ai-rooms/{id}/filter?folder={id}`.
 
@@ -122,7 +133,7 @@ The slots of "AI rooms" SHALL show the shared special folders scoped by `folderT
 - **THEN** only the Knowledge room file is listed
 
 ### Requirement: Empty state
-With no AI rooms or projects and no filter, the section SHALL show one empty state for the caller's type: "No AI rooms yet" with a "New room" action (opening the three-type picker) for users who may create, "No AI rooms shared with you yet" for others. A filter with no results SHALL show "nothing found" with "Clear filter". There SHALL be no separate projects empty state and no "AI is off" variant of it.
+With no AI rooms or projects and no filter, the section SHALL show one empty state for the caller's type: "No AI rooms yet" with a "New room" action (opening the three-type picker) for users who may create, "No AI rooms shared with you yet" for others. A filter with no results SHALL show "nothing found" with "Clear filter". There SHALL be no separate projects empty state.
 
 #### Scenario: Admin with no AI rooms
 - **WHEN** an admin with no AI rooms opens "AI rooms"

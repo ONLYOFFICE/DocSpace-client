@@ -96,6 +96,13 @@ While vectorization is disabled on the portal (no embedding provider configured,
 - **WHEN** a Content creator tries to upload into a Knowledge room while vectorization is disabled
 - **THEN** the upload control is unavailable and the server refuses the upload
 
+### Requirement: Vectorization off and creation
+While vectorization is disabled, the "AI rooms" picker SHALL show the Knowledge room type greyed out and not clickable, with a tooltip: an admin is told to configure an embeddings provider in the AI settings, a room admin to contact the Full admin. The server SHALL refuse to create one.
+
+#### Scenario: Knowledge room in the picker while off
+- **WHEN** a room admin opens "New room" in "AI rooms" while vectorization is disabled
+- **THEN** the Knowledge room type is disabled, its tooltip tells them to contact the Full admin, and Instructions room and AI project stay available
+
 ### Requirement: Vectorization off and selection
 While vectorization is disabled, the composer SHALL NOT show its knowledge base picker, the project dialog SHALL show Knowledge rooms disabled with a hint that vectorization is off, and the server SHALL refuse to link one. Rooms already linked SHALL stay linked but SHALL NOT be searched.
 

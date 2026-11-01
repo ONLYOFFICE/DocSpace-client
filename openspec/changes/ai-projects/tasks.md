@@ -137,6 +137,12 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - [ ] 11.10 Server (.NET, Maxim): let project members read the scoped model — the read requires `FileSecurity.CanUseAi`, which a Member (Read) and guests lack, so their model reads as `null` and their rounds run on the portal default
 - [ ] 11.11 Server (.NET, Maxim): a scoped reset of the assignment (`DELETE assignments/{type}` takes no `entityId` and removes the global one), so choosing "default" follows the portal's default instead of pinning its current model
 
+## 12. AI not set up and vectorization off (2026-11-01)
+
+- [x] 12.1 Client: `settingsStore.aiReady` (set by `AiPresetsBridge` by the chat's rule); the "AI rooms" list shows the chat's "AI is off" view (Go to settings / Activate / Top up and activate / contact an admin) and offers no "New room", "+" or main button while AI is not set up
+- [x] 12.2 Client + ui-kit: `RoomType` takes `isDisabled`; the "AI rooms" picker disables the Knowledge room type while vectorization is off, with a tooltip for an admin (`Common:KnowledgeRoomCreationNeedsVectorizationAdmin`) and for a room admin (`Common:KnowledgeRoomCreationNeedsVectorizationUser`), translated into every language
+- [ ] 12.3 Server (.NET): refuse creating Instructions and Knowledge rooms and AI projects while AI is not set up on the portal, as the client does (today only a Knowledge room is refused, and only for vectorization)
+
 ## Workflow follow-up
 
 - Archive the change with `/opsx:archive ai-projects` once 9.x passes, so the seven capabilities land in `openspec/specs/` as the baseline.

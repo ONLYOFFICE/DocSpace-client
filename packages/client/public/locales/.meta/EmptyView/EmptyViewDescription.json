@@ -3,7 +3,7 @@
   "content": "Get started with quick actions:",
   "content_en_sha1_hash": "83f9fb1fdf30cf22d37c1769bbed32d2d93c8a9d",
   "created_at": "2025-05-19T21:30:56.474Z",
-  "updated_at": "2026-10-31T12:58:28.844Z",
+  "updated_at": "2026-11-01T08:13:03.810Z",
   "comment": {
     "text": "This is a descriptive text displayed in an empty view, introducing a list of quick actions the user can take.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 250,
-      "context": "isArchiveFolderRoot: boolean,\n ) => {\n if (isNotAdmin || isArchiveFolderRoot)\n return t(\"Common:UserEmptyDescription\");\n \n return t(\"EmptyView:EmptyViewDescription\");\n };\n \n export const getAIAgentsAIDisabledTitle = (\n t: TTranslation,\n standalone: boolean,",
+      "context": "isArchiveFolderRoot: boolean,\n ) => {\n if (isNotAdmin || isArchiveFolderRoot)\n return t(\"Common:UserEmptyDescription\");\n \n return t(\"EmptyView:EmptyViewDescription\");\n };\n \n export const getAiRoomsAIOffTitle = (\n t: TTranslation,\n standalone: boolean,",
       "module": "/packages/client"
     }
   ],

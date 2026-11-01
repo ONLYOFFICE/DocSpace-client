@@ -49,10 +49,10 @@ import {
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 /**
- * The two AI sections sit behind the portal's AI switch: "AI rooms" on the
- * nested `/ai-rooms/*` paths and "AI Projects" on `/ai-projects/*`, the
- * lists and a room in each. With AI off every one of them sends the user to
- * their start page, never to an error page.
+ * The "AI rooms" section sits behind the portal's AI switch, on the nested
+ * `/ai-rooms/*` paths: its list, an AI room and an AI project. With AI off
+ * every one of them sends the user to their start page, never to an error
+ * page.
  */
 
 const [HUB_ROOM] = AI_HUB_ROOMS;
@@ -60,17 +60,16 @@ const [HUB_ROOM] = AI_HUB_ROOMS;
 const SECTION_URLS = [
   "/ai-rooms/filter",
   `/ai-rooms/${HUB_ROOM.id}/filter?folder=${HUB_ROOM.id}`,
-  "/ai-projects",
-  `/ai-projects/${AI_PROJECT_WITH_SOURCES.id}/filter?folder=${AI_PROJECT_WITH_SOURCES.id}`,
+  `/ai-rooms/${AI_PROJECT_WITH_SOURCES.id}/filter?folder=${AI_PROJECT_WITH_SOURCES.id}`,
 ];
 
-const SECTION_PATH = /^\/ai-(rooms\/|projects)/;
+const SECTION_PATH = /^\/ai-rooms\//;
 
 const ERROR_404_PATH = "/error/404";
 
 const pathnameOf = (page: Page) => new URL(page.url()).pathname;
 
-test.describe("AI sections access", () => {
+test.describe("AI rooms access", () => {
   test("are left for the user's start page once AI services are switched off", async ({
     page,
     baseUrl,
@@ -97,7 +96,7 @@ test.describe("AI sections access", () => {
         })
         .not.toMatch(SECTION_PATH);
 
-      // Not an error page: the portal works, only the sections are off.
+      // Not an error page: the portal works, only the section is off.
       expect(pathnameOf(page)).not.toBe(ERROR_404_PATH);
     }
   });

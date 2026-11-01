@@ -28,10 +28,12 @@ import { http, HttpResponse } from "msw";
 
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_AI_PROJECTS = "ai/projects";
-
-/** The projects root the list answers as `current`; its channel carries created projects. */
-export const AI_PROJECTS_ROOT_ID = 777000;
+/**
+ * The "AI rooms" root (`FolderType.AiHub`, 41): the Instructions rooms, the
+ * Knowledge rooms and the AI projects live under it.
+ */
+export const AI_HUB_ROOT_ID = 777500;
+const AI_HUB_FOLDER_TYPE = 41;
 
 const INSTRUCTIONS_ROOM_TYPE = 10;
 const KNOWLEDGE_ROOM_TYPE = 11;
@@ -158,7 +160,11 @@ type MockProjectOptions = {
   knowledgeRooms?: (typeof KNOWLEDGE_ROOMS)[keyof typeof KNOWLEDGE_ROOMS][];
 };
 
-/** A project as `GET ai/projects` lists it: a room folder with the `aiProject` block. */
+/**
+ * A project as the page reads it: the room `files/rooms` answers, with the
+ * `aiProject` block the client composes from `files/rooms/{id}/sources`
+ * (the handlers answer the room without it).
+ */
 export const aiProjectMock = ({
   id,
   title,
@@ -179,9 +185,9 @@ export const aiProjectMock = ({
     title,
     roomType: AI_PROJECT_ROOM_TYPE,
     type: 40,
-    parentId: AI_PROJECTS_ROOT_ID,
-    rootFolderId: AI_PROJECTS_ROOT_ID,
-    rootFolderType: 41,
+    parentId: AI_HUB_ROOT_ID,
+    rootFolderId: AI_HUB_ROOT_ID,
+    rootFolderType: AI_HUB_FOLDER_TYPE,
     created,
     updated: created,
     createdBy,
@@ -250,49 +256,15 @@ export const AI_PROJECT_WITH_SOURCES = AI_PROJECTS[0];
 /** The project without a linked room: its source cards are hidden. */
 export const AI_PROJECT_WITHOUT_SOURCES = AI_PROJECTS[2];
 
-// The list answers the rooms without their `aiProject` block, as the
-// service does: the page reads a project on its own when it opens it.
-const listResponse = (projects: AiProjectMock[]) => ({
-  response: {
-    files: [],
-    folders: projects.map(({ aiProject: _aiProject, ...room }) => room),
-    current: {
-      id: AI_PROJECTS_ROOT_ID,
-      parentId: 0,
-      rootFolderId: AI_PROJECTS_ROOT_ID,
-      rootFolderType: 41,
-      title: "AI Projects",
-      filesCount: 0,
-      foldersCount: projects.length,
-      security: { Read: true, Create: true },
-    },
-    pathParts: [{ id: AI_PROJECTS_ROOT_ID, title: "AI Projects" }],
-    startIndex: 0,
-    count: projects.length,
-    total: projects.length,
-    new: 0,
-  },
-  count: 1,
-  links: [],
-  status: 0,
-  statusCode: 200,
-});
+/** A project as `files/rooms` answers it: the room, without the `aiProject` block. */
+const projectRoom = ({ aiProject: _aiProject, ...room }: AiProjectMock) => room;
 
 /** The owner's name, for the owner sort. */
 const ownerName = (project: AiProjectMock) => project.createdBy?.displayName ?? "";
 
 /**
- * `GET ai/projects`: the caller's projects. `projects` is the list to answer
- * with; left out, the stock list, and `[]` an empty section. The query is
- * read as the rooms list reads it: `filterValue` narrows by title (so the
- * search renders its own empty view), `tags` keeps the projects carrying any
- * of them, `withoutTags` the untagged ones, `subjectOwnerId` and
- * `subjectId` (a member) by user, and `sortBy`
- * takes `AZ`, `Tags`, `Author`, `DateAndTime` and `DateAndTimeCreation`.
- */
-/**
- * The `GET ai/projects` query, as the server reads it for a rooms listing (the
- * Files list reads the "AI Projects" section there): `filterValue` narrows by title (so the
+ * The projects of a `files/rooms?searchArea=AiHub&type=12` query, as the
+ * server reads it for a rooms listing: `filterValue` narrows by title (so the
  * search renders its own empty view), `tags` keeps the projects carrying any
  * of them, `withoutTags` the untagged ones, `subjectOwnerId` and `subjectId`
  * (a member) by user, and `sortBy` takes `AZ`, `Tags`, `Author`,
@@ -340,63 +312,130 @@ const queryProjects = (params: URLSearchParams, projects: AiProjectMock[]) => {
   return list;
 };
 
-export const aiProjectsHandler = (
-  port: string,
-  projects: AiProjectMock[] = AI_PROJECTS,
-) =>
-  http.get(
-    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROJECTS}`,
-    ({ request }) =>
-      HttpResponse.json(
-        listResponse(queryProjects(new URL(request.url).searchParams, projects)),
-      ),
-  );
+const notFound = () =>
+  HttpResponse.json({ error: { message: "The room was not found." } }, { status: 404 });
+
+const findProject = (projects: AiProjectMock[], id: unknown) =>
+  projects.find((p) => String(p.id) === String(id));
 
 /**
- * `GET ai/projects/:id`: one project, by id from `projects`; a project the
- * list does not hold answers 404, as the server does for one the caller
- * cannot see.
+ * `GET files/rooms/:id` for a project: the room, without its `aiProject`
+ * block. Any other room is left to the rooms handlers.
  */
 export const aiProjectGetByIdHandler = (
   port: string,
   projects: AiProjectMock[] = AI_PROJECTS,
 ) =>
-  http.get(
-    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROJECTS}/:id`,
-    ({ params }) => {
-      const project = projects.find((p) => String(p.id) === params.id);
-      if (!project)
-        return HttpResponse.json(
-          { error: { message: "The project was not found." } },
-          { status: 404 },
-        );
-      return HttpResponse.json({ response: project });
-    },
-  );
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id`, ({ params }) => {
+    const project = findProject(projects, params.id);
+    return project ? HttpResponse.json({ response: projectRoom(project) }) : undefined;
+  });
+
+const toSource = (room: { id: number; title: string; logo: unknown }) => ({
+  id: room.id,
+  title: room.title,
+  logo: room.logo,
+});
+
+/**
+ * `GET files/rooms/:id/sources`: the project's linked rooms; `POST` and
+ * `DELETE` link and unlink `roomIds` (any Instructions or Knowledge room of
+ * the mocks), as the server does.
+ */
+export const aiProjectSourcesHandlers = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+) => {
+  const url = `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/sources`;
+  const linkable = [...Object.values(INSTRUCTIONS_ROOMS), ...Object.values(KNOWLEDGE_ROOMS)];
+  const change =
+    (link: boolean) =>
+    async ({ params, request }: { params: Record<string, unknown>; request: Request }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return notFound();
+      const { roomIds = [] } = (await request.json()) as { roomIds?: number[] };
+      const block = project.aiProject;
+      if (link) {
+        for (const room of linkable.filter((r) => roomIds.includes(r.id))) {
+          const list = (
+            room.roomType === INSTRUCTIONS_ROOM_TYPE ? block.instructionsRooms : block.knowledgeRooms
+          ) as (typeof room)[];
+          if (!list.some((r) => r.id === room.id)) list.push(room);
+        }
+      } else {
+        block.instructionsRooms = block.instructionsRooms.filter((r) => !roomIds.includes(r.id));
+        block.knowledgeRooms = block.knowledgeRooms.filter((r) => !roomIds.includes(r.id));
+      }
+      return new HttpResponse(null, { status: 204 });
+    };
+  return [
+    http.get(url, ({ params }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return notFound();
+      return HttpResponse.json({
+        response: {
+          instructionsRooms: project.aiProject.instructionsRooms.map(toSource),
+          knowledgeRooms: project.aiProject.knowledgeRooms.map(toSource),
+        },
+      });
+    }),
+    http.post(url, change(true)),
+    http.delete(url, change(false)),
+  ];
+};
+
+/**
+ * `GET` / `PUT ai/projects/:id/model`: the project's model as ASC.AI.Chat
+ * proxies it (`profile: null` runs on the portal default); a write keeps the
+ * stock profile for any id sent.
+ */
+export const aiProjectModelHandlers = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+) => {
+  const url = `${BASE_URL}:${port}/${API_PREFIX}/ai/projects/:id/model`;
+  return [
+    http.get(url, ({ params }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return notFound();
+      return HttpResponse.json({ response: { profile: project.aiProject.profile } });
+    }),
+    http.put(url, async ({ params, request }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return notFound();
+      const { profileId } = (await request.json()) as { profileId?: string | null };
+      project.aiProject.profile = profileId ? PROFILE : null;
+      return HttpResponse.json({ response: { profile: project.aiProject.profile } });
+    }),
+  ];
+};
 
 /** A 1x1 PNG, what an uploaded logo resolves to in the mocks. */
 export const MOCK_LOGO_IMAGE =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 
 /**
- * `POST ai/projects`: creates a project from the dialog's fields and answers
- * it; the project then joins `projects`, so the page can open it. A `logo`
- * object in the body (an uploaded picture) gives it the mock picture.
+ * `POST files/rooms` with `roomType: 12`: creates a project from the
+ * dialog's fields and answers its room; the project then joins `projects`,
+ * so the page can open it. A `logo` object in the body (an uploaded picture)
+ * gives it the mock picture. Any other room type is left to the rooms
+ * handlers.
  */
 export const aiProjectCreateHandler = (
   port: string,
   projects: AiProjectMock[] = AI_PROJECTS,
 ) =>
   http.post(
-    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROJECTS}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/files/rooms`,
     async ({ request }) => {
-      const body = (await request.json()) as {
+      const body = (await request.clone().json()) as {
         title?: string;
+        roomType?: number;
         tags?: string[];
         color?: string;
         logo?: { tmpFile?: string };
-        aiProject?: { instructionsRoomIds?: number[]; knowledgeRoomIds?: number[] };
       };
+      if (body.roomType !== AI_PROJECT_ROOM_TYPE) return undefined;
       const created = aiProjectMock({
         id: 777100,
         title: body.title ?? "New project",
@@ -406,7 +445,7 @@ export const aiProjectCreateHandler = (
         created: "2026-10-29T10:00:00.0000000+00:00",
       });
       projects.unshift(created);
-      return HttpResponse.json({ response: created });
+      return HttpResponse.json({ response: projectRoom(created) });
     },
   );
 
@@ -438,13 +477,13 @@ const SKILLS_BY_ROOM: Record<number, { id: string; name: string; description: st
   ],
 };
 
-/** `GET ai/projects/:id/skills`: the project's Instructions rooms with their skills. */
+/** `GET files/rooms/:id/skills` for a project: its Instructions rooms with their skills. */
 export const aiProjectSkillsHandler = (
   port: string,
   projects: AiProjectMock[] = AI_PROJECTS,
 ) =>
   http.get(
-    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROJECTS}/:id/skills`,
+    `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/skills`,
     ({ params }) => {
       const project = projects.find((p) => String(p.id) === params.id);
       const rooms = (project?.aiProject.instructionsRooms ?? []).map(
@@ -495,32 +534,24 @@ const KNOWLEDGE_FILES = [
   },
 ];
 
-/** `GET ai/projects/:id/knowledge`: the project's Knowledge rooms with their files. */
-export const aiProjectKnowledgeHandler = (
-  port: string,
-  projects: AiProjectMock[] = AI_PROJECTS,
-) =>
-  http.get(
-    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROJECTS}/:id/knowledge`,
-    ({ params }) => {
-      const project = projects.find((p) => String(p.id) === params.id);
-      const rooms = (project?.aiProject.knowledgeRooms ?? []).map((room) => ({
-        id: room.id,
-        title: room.title,
-        logo: room.logo,
-        available: room.available,
-        totalFiles: KNOWLEDGE_FILES.length,
-        indexedFiles: KNOWLEDGE_FILES.filter((file) => file.indexed).length,
-        failedFiles: KNOWLEDGE_FILES.filter((file) => file.vectorizationStatus === 2).length,
-        truncated: false,
-        files: KNOWLEDGE_FILES,
-      }));
-      return HttpResponse.json({ response: { rooms } });
-    },
-  );
+/**
+ * `GET files/:id?filterType=1` for a Knowledge room: its files with their
+ * vectorization state, as the project's knowledge panel reads them; a room
+ * marked unavailable answers 403. Any other folder is left to the files
+ * handlers.
+ */
+export const aiProjectKnowledgeHandler = (port: string) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/:id`, ({ params, request }) => {
+    const room = Object.values(KNOWLEDGE_ROOMS).find((r) => String(r.id) === params.id);
+    if (!room || new URL(request.url).searchParams.get("filterType") !== "1") return undefined;
+    if (!room.available)
+      return HttpResponse.json({ error: { message: "Access denied" } }, { status: 403 });
+    const files = KNOWLEDGE_FILES.map(({ indexed: _indexed, ...file }) => file);
+    return HttpResponse.json({
+      response: { files, folders: [], total: files.length, startIndex: 0, count: files.length },
+    });
+  });
 
-/** The "AI rooms" root (`FolderType.AiHub`), the Instructions and Knowledge rooms live under it. */
-export const AI_HUB_ROOT_ID = 777500;
 
 /** An Instructions or Knowledge room as `files/rooms?searchArea=AiHub` lists it. */
 const aiHubRoomMock = (
@@ -535,7 +566,7 @@ const aiHubRoomMock = (
   type: room.roomType === INSTRUCTIONS_ROOM_TYPE ? 38 : 39,
   parentId: AI_HUB_ROOT_ID,
   rootFolderId: AI_HUB_ROOT_ID,
-  rootFolderType: 42,
+  rootFolderType: AI_HUB_FOLDER_TYPE,
   created,
   updated: created,
   createdBy: OWNER,
@@ -579,7 +610,7 @@ export const AI_HUB_ROOMS = [
 
 export type AiHubRoomMock = (typeof AI_HUB_ROOMS)[number];
 
-const AI_ROOT_TITLE = { 41: "AI Projects", 42: "AI rooms" } as const;
+const AI_HUB_TITLE = "AI rooms";
 
 /** A folder content answer: the root's list, or a room opened with no files in it. */
 const folderContent = (
@@ -603,42 +634,49 @@ const folderContent = (
   statusCode: 200,
 });
 
-const aiRoot = (id: number, rootFolderType: 41 | 42, foldersCount: number) => ({
-  id,
+const aiRoot = (foldersCount: number) => ({
+  id: AI_HUB_ROOT_ID,
   parentId: 0,
-  rootFolderId: id,
-  rootFolderType,
-  title: AI_ROOT_TITLE[rootFolderType],
+  rootFolderId: AI_HUB_ROOT_ID,
+  rootFolderType: AI_HUB_FOLDER_TYPE,
+  title: AI_HUB_TITLE,
   filesCount: 0,
   foldersCount,
   security: { Read: true, Create: true },
 });
 
 /**
- * `GET files/rooms?searchArea=AiHub`: the "AI rooms" list, narrowed by the
- * search, the type filter (`type`, repeated) and the rooms list's sorts as
- * `queryProjects` reads them. Any other search area is left to the rooms list
- * handler, so this one must be used before it (`mockRequest.use` puts it
- * first).
+ * `GET files/rooms?searchArea=AiHub`: the "AI rooms" list, the AI rooms and
+ * the projects, narrowed by the type filter (`type`, repeated) and the
+ * search. A query for the projects alone (`type=12`, as the chat's project
+ * picker asks) reads the rooms list's filters and sorts (`queryProjects`).
+ * Any other search area is left to the rooms list handler, so this one must
+ * be used before it (`mockRequest.use` puts it first).
  */
 export const aiHubRoomsHandler = (
   port: string,
   rooms: AiHubRoomMock[] = AI_HUB_ROOMS,
+  projects: AiProjectMock[] = AI_PROJECTS,
 ) =>
   http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/rooms`, ({ request }) => {
     const params = new URL(request.url).searchParams;
     if (params.get("searchArea") !== "AiHub") return undefined;
     const types = params.getAll("type").map(Number);
-    const filterValue = params.get("filterValue")?.trim().toLowerCase();
-    const list = rooms.filter(
-      (room) =>
-        (types.length === 0 || types.includes(room.roomType)) &&
-        (!filterValue || room.title.toLowerCase().includes(filterValue)),
-    );
+    let list: unknown[];
+    if (types.length === 1 && types[0] === AI_PROJECT_ROOM_TYPE) {
+      list = queryProjects(params, projects).map(projectRoom);
+    } else {
+      const filterValue = params.get("filterValue")?.trim().toLowerCase();
+      list = [...projects.map(projectRoom), ...rooms].filter(
+        (room) =>
+          (types.length === 0 || types.includes(room.roomType)) &&
+          (!filterValue || room.title.toLowerCase().includes(filterValue)),
+      );
+    }
     return HttpResponse.json(
       folderContent(
-        aiRoot(AI_HUB_ROOT_ID, 42, list.length),
-        [{ id: AI_HUB_ROOT_ID, title: AI_ROOT_TITLE[42], folderType: 42 }],
+        aiRoot(list.length),
+        [{ id: AI_HUB_ROOT_ID, title: AI_HUB_TITLE, folderType: AI_HUB_FOLDER_TYPE }],
         list,
       ),
     );
@@ -657,47 +695,37 @@ export const aiRoomFolderHandler = (
   http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/:id`, ({ params }) => {
     const id = Number(params.id);
     const project = projects.find((p) => p.id === id);
-    if (project) {
-      const { aiProject: _aiProject, ...room } = project;
-      return HttpResponse.json(
-        folderContent({ ...room, isRoom: true }, [
-          { id: AI_PROJECTS_ROOT_ID, title: AI_ROOT_TITLE[41], folderType: 41 },
-          { id, title: room.title, folderType: 40, roomType: room.roomType },
-        ]),
-      );
-    }
-    const hubRoom = rooms.find((r) => r.id === id);
-    if (hubRoom) {
-      return HttpResponse.json(
-        folderContent({ ...hubRoom, isRoom: true }, [
-          { id: AI_HUB_ROOT_ID, title: AI_ROOT_TITLE[42], folderType: 42 },
-          { id, title: hubRoom.title, folderType: hubRoom.type, roomType: hubRoom.roomType },
-        ]),
-      );
-    }
-    return undefined;
+    const room = project ? projectRoom(project) : rooms.find((r) => r.id === id);
+    if (!room) return undefined;
+    return HttpResponse.json(
+      folderContent({ ...room, isRoom: true }, [
+        { id: AI_HUB_ROOT_ID, title: AI_HUB_TITLE, folderType: AI_HUB_FOLDER_TYPE },
+        { id, title: room.title, folderType: room.type, roomType: room.roomType },
+      ]),
+    );
   });
 
-/** Every route of the two AI sections: the projects, the AI rooms and their folders. */
+/** Every route of the "AI rooms" section: its list, the rooms and folders, the projects. */
 export const aiSectionsHandlers = (
   port: string,
   projects: AiProjectMock[] = AI_PROJECTS,
   rooms: AiHubRoomMock[] = AI_HUB_ROOMS,
 ) => [
-  aiHubRoomsHandler(port, rooms),
+  aiHubRoomsHandler(port, rooms, projects),
+  aiProjectKnowledgeHandler(port),
   aiRoomFolderHandler(port, projects, rooms),
   ...aiProjectsHandlers(port, projects),
 ];
 
-/** Every projects route, over one list. */
+/** Every route of a project but the list, over one list of projects. */
 export const aiProjectsHandlers = (
   port: string,
   projects: AiProjectMock[] = AI_PROJECTS,
 ) => [
-  aiProjectsHandler(port, projects),
-  aiProjectGetByIdHandler(port, projects),
   aiProjectSkillsHandler(port, projects),
-  aiProjectKnowledgeHandler(port, projects),
+  ...aiProjectSourcesHandlers(port, projects),
+  ...aiProjectModelHandlers(port, projects),
+  aiProjectGetByIdHandler(port, projects),
   aiProjectCreateHandler(port, projects),
   roomLogoUploadHandler(port),
 ];

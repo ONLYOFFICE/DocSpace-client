@@ -55,23 +55,20 @@ import {
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 /**
- * The two AI sections the server keeps under their own roots, drawn by Home
- * with the Rooms machinery:
- * - "AI rooms" (`/ai-rooms/*`): the Instructions and Knowledge rooms, their
- *   slots, the three-type create picker and a menu without archive;
- * - "AI Projects" (`/ai-projects/*`): the projects list, the empty screens,
- *   the project form, and a project opened with its sources.
+ * The "AI rooms" section the server keeps under its own root, drawn by Home
+ * with the Rooms machinery (`/ai-rooms/*`): the Instructions rooms, the
+ * Knowledge rooms and the AI projects, the section's slots, the three-type
+ * create picker, a menu without archive, the project form, and a project
+ * opened with its sources.
  *
- * Every section list is a Files table; the project views open the first
- * stock project, which links Instructions and Knowledge rooms, and the last,
+ * The list is a Files table; the project views open the first stock
+ * project, which links Instructions and Knowledge rooms, and the last,
  * which links none.
  */
 
 const AI_ROOMS_URL = "/ai-rooms/filter";
-const PROJECTS_URL = "/ai-projects";
 
-const projectUrl = (id: number) =>
-  `${PROJECTS_URL}/${id}/filter?folder=${id}`;
+const projectUrl = (id: number) => `/ai-rooms/${id}/filter?folder=${id}`;
 
 const emptyView = (page: Page) =>
   page.getByTestId("empty-view").filter({ visible: true });
@@ -83,7 +80,7 @@ const sidebar = (page: Page) => page.locator("#article-container");
 /** A fresh copy of the stock projects: the create handler adds to its list. */
 const stockProjects = () => [...AI_PROJECTS];
 
-test.describe("AI sections", () => {
+test.describe("AI rooms", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -95,8 +92,8 @@ test.describe("AI sections", () => {
     );
   });
 
-  test.describe("AI rooms", () => {
-    test("lists the Instructions and Knowledge rooms with the section's slots", async ({
+  test.describe("the list", () => {
+    test("lists the Instructions rooms, Knowledge rooms and AI projects with the section's slots", async ({
       page,
       mockRequest,
       baseUrl,
@@ -109,14 +106,14 @@ test.describe("AI sections", () => {
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
 
       await expect(table(page)).toBeVisible();
-      for (const room of AI_HUB_ROOMS) {
+      for (const room of [...AI_HUB_ROOMS, ...AI_PROJECTS]) {
         await expect(table(page)).toContainText(room.title);
       }
 
-      // Both sections are in the sidebar; "AI rooms" has its own Recent,
-      // Favorites and Trash and no Archive, "AI Projects" no slots at all.
+      // One AI section in the sidebar, with its own Recent, Favorites and
+      // Trash and no Archive; the projects have no section of their own.
       await expect(sidebar(page)).toContainText("AI rooms");
-      await expect(sidebar(page)).toContainText("AI Projects");
+      await expect(sidebar(page)).not.toContainText("AI Projects");
 
       await expectScreenshot(page, [
         "desktop",
@@ -178,8 +175,16 @@ test.describe("AI sections", () => {
 
       // "AI project" leaves the room dialog for the project form.
       await types.nth(2).click();
+      // The modal root is a zero-size wrapper; the aside's fields are what shows.
       await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
       await expect(page.getByTestId("ai-project-title")).toBeVisible();
+      await expect(page.getByTestId("ai-project-profile-combobox")).toBeVisible();
+
+      await expectScreenshot(page, [
+        "desktop",
+        "ai-projects",
+        "ai-projects-create-dialog.png",
+      ]);
     });
 
     test("offers an admin to create a room when the section is empty", async ({
@@ -189,7 +194,7 @@ test.describe("AI sections", () => {
     }) => {
       mockRequest.use(
         selfByTypeHandler(TEST_PORT, "owner"),
-        ...aiSectionsHandlers(TEST_PORT, stockProjects(), []),
+        ...aiSectionsHandlers(TEST_PORT, [], []),
       );
 
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
@@ -204,31 +209,6 @@ test.describe("AI sections", () => {
         "ai-rooms-empty-admin.png",
       ]);
     });
-  });
-
-  test.describe("AI Projects, empty", () => {
-    test("offers an admin to create a project", async ({
-      page,
-      mockRequest,
-      baseUrl,
-    }) => {
-      mockRequest.use(
-        selfByTypeHandler(TEST_PORT, "owner"),
-        ...aiSectionsHandlers(TEST_PORT, []),
-      );
-
-      await page.goto(`${baseUrl}${PROJECTS_URL}`);
-
-      await expect(emptyView(page)).toBeVisible();
-      await expect(emptyView(page)).toContainText("No AI projects yet");
-      await expect(emptyView(page)).toContainText("Create project");
-
-      await expectScreenshot(page, [
-        "desktop",
-        "ai-projects",
-        "ai-projects-empty-admin.png",
-      ]);
-    });
 
     test("tells a user that nothing was shared with them", async ({
       page,
@@ -237,48 +217,21 @@ test.describe("AI sections", () => {
     }) => {
       mockRequest.use(
         selfByTypeHandler(TEST_PORT, "regular"),
-        ...aiSectionsHandlers(TEST_PORT, []),
+        ...aiSectionsHandlers(TEST_PORT, [], []),
       );
 
-      await page.goto(`${baseUrl}${PROJECTS_URL}`);
+      await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
 
       await expect(emptyView(page)).toBeVisible();
       await expect(emptyView(page)).toContainText(
-        "No projects shared with you yet",
+        "No AI rooms shared with you yet",
       );
-      await expect(emptyView(page)).not.toContainText("Create project");
+      await expect(emptyView(page)).not.toContainText("New room");
 
       await expectScreenshot(page, [
         "desktop",
         "ai-projects",
-        "ai-projects-empty-user.png",
-      ]);
-    });
-
-    test("opens the project form from the empty screen", async ({
-      page,
-      mockRequest,
-      baseUrl,
-    }) => {
-      mockRequest.use(
-        selfByTypeHandler(TEST_PORT, "owner"),
-        ...aiSectionsHandlers(TEST_PORT, []),
-      );
-
-      await page.goto(`${baseUrl}${PROJECTS_URL}`);
-      await expect(emptyView(page)).toBeVisible();
-
-      await emptyView(page).getByText("Create project", { exact: true }).click();
-
-      // The modal root is a zero-size wrapper; the aside's fields are what shows.
-      await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
-      await expect(page.getByTestId("ai-project-title")).toBeVisible();
-      await expect(page.getByTestId("ai-project-profile-combobox")).toBeVisible();
-
-      await expectScreenshot(page, [
-        "desktop",
-        "ai-projects",
-        "ai-projects-create-dialog.png",
+        "ai-rooms-empty-user.png",
       ]);
     });
 
@@ -289,11 +242,12 @@ test.describe("AI sections", () => {
     }) => {
       mockRequest.use(
         selfByTypeHandler(TEST_PORT, "owner"),
-        ...aiSectionsHandlers(TEST_PORT, []),
+        ...aiSectionsHandlers(TEST_PORT, [], []),
       );
 
-      await page.goto(`${baseUrl}${PROJECTS_URL}`);
-      await emptyView(page).getByText("Create project", { exact: true }).click();
+      await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
+      await emptyView(page).getByText("New room", { exact: true }).click();
+      await page.getByTestId("room-type-list-item").nth(2).click();
       await page.getByTestId("ai-project-title").fill("Sales");
 
       // A picture goes through the icon's hidden file input into the crop
@@ -312,8 +266,8 @@ test.describe("AI sections", () => {
 
       await page.getByTestId("ai-project-submit").click();
 
-      // The new project opens in its section, with the picture as its logo.
-      await expect(page).toHaveURL(/\/ai-projects\/777100\/filter/);
+      // The new project opens in the section, with the picture as its logo.
+      await expect(page).toHaveURL(/\/ai-rooms\/777100\/filter/);
       const intro = page.getByTestId("ai-project-intro");
       await expect(intro).toBeVisible();
       await expect(intro).toContainText("Sales");
@@ -321,7 +275,7 @@ test.describe("AI sections", () => {
     });
   });
 
-  test.describe("AI Projects", () => {
+  test.describe("a project", () => {
     test.beforeEach(({ mockRequest }) => {
       mockRequest.use(
         selfByTypeHandler(TEST_PORT, "owner"),
@@ -329,23 +283,8 @@ test.describe("AI sections", () => {
       );
     });
 
-    test("lists the projects as rooms", async ({ page, baseUrl }) => {
-      await page.goto(`${baseUrl}${PROJECTS_URL}`);
-
-      await expect(table(page)).toBeVisible();
-      for (const project of AI_PROJECTS) {
-        await expect(table(page)).toContainText(project.title);
-      }
-
-      await expectScreenshot(page, [
-        "desktop",
-        "ai-projects",
-        "ai-projects-table.png",
-      ]);
-    });
-
-    test("opens a project from the list", async ({ page, baseUrl }) => {
-      await page.goto(`${baseUrl}${PROJECTS_URL}`);
+    test("opens from the list", async ({ page, baseUrl }) => {
+      await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
       await expect(table(page)).toBeVisible();
 
       await table(page)
@@ -354,10 +293,9 @@ test.describe("AI sections", () => {
 
       await expect
         .poll(() => new URL(page.url()).pathname)
-        .toBe(`${PROJECTS_URL}/${AI_PROJECT_WITH_SOURCES.id}/filter`);
+        .toBe(`/ai-rooms/${AI_PROJECT_WITH_SOURCES.id}/filter`);
       await expect(page.getByTestId("ai-project-intro")).toBeVisible();
     });
-
     test("shows the chat with the project's skills and knowledge", async ({
       page,
       baseUrl,

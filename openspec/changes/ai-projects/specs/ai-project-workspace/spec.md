@@ -24,6 +24,10 @@ A DocSpace admin who opens a project they are not a member of (`inRoom` false) S
 - **WHEN** a DocSpace admin who is not in the "Sales" project opens it from the AI rooms list
 - **THEN** the section shows "You are not a member of this AI project" instead of the chat, and the header has no chat history or new chat buttons
 
+#### Scenario: Invited while looking at the stub
+- **WHEN** a Project manager invites that admin while the stub is on screen
+- **THEN** on the project room's socket `update` or `create` the admin's view reads the room again and the project chat replaces the stub without a reload
+
 ### Requirement: Workspace in place of the file list
 The Home page SHALL draw the project workspace in place of the file list for a selected folder whose `roomType` is 12, and the file list otherwise. The URL SHALL keep the room URL shape, and "Copy link" on a project SHALL give that URL.
 

@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Anweisungen",
   "AIProjectInstructionsHint": "Markdown-Dateien in den ausgewählten Räumen werden zu Skills für den Chat. Es können mehrere Räume ausgewählt werden.",
   "AIProjectInstructionsRoomsLimit": "Ein Projekt kann bis zu {{limit}} Anweisungsräume enthalten.",
+  "AIProjectInviteSourcesAccess": "Zugriff auf die Projekträume",
+  "AIProjectInviteSourcesAccessDescription": "Alle, die zu diesem Projekt eingeladen werden, erhalten in allen seinen Anweisungs- und Wissensräumen die Rolle Betrachter.",
   "AIProjectIntroModel": "Chatten Sie mit <1>{{model}}</1>. Ihre Unterhaltung gehört nur Ihnen.",
   "AIProjectKnowledgeFailedFiles": "Einige Dateien in diesem Raum konnten nicht für die KI vorbereitet werden",
   "AIProjectKnowledgeFailedFilesInfo": "Der KI-Chat sieht diese Dateien nicht. Öffnen Sie den Raum, um ihre Vektorisierung erneut zu versuchen.",

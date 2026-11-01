@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Հրահանգներ",
   "AIProjectInstructionsHint": "Ընտրված սենյակների Markdown ֆայլերը դառնում են զրույցի հմտություններ։ Կարելի է ընտրել մի քանի սենյակ։",
   "AIProjectInstructionsRoomsLimit": "Նախագիծը կարող է ներառել առավելագույնը {{limit}} հրահանգների սենյակ։",
+  "AIProjectInviteSourcesAccess": "Մուտք նախագծի սենյակներ",
+  "AIProjectInviteSourcesAccessDescription": "Այս նախագծին հրավիրված յուրաքանչյուր ոք ստանում է Դիտորդի դերը նրա բոլոր հրահանգների և գիտելիքների սենյակներում։",
   "AIProjectIntroModel": "Զրուցեք <1>{{model}}</1>-ի հետ։ Ձեր զրույցը միայն ձերն է։",
   "AIProjectKnowledgeFailedFiles": "Այս սենյակի որոշ ֆայլեր չհաջողվեց պատրաստել ԱԲ-ի համար",
   "AIProjectKnowledgeFailedFilesInfo": "ԱԲ զրույցը չի տեսնում այդ ֆայլերը։ Բացեք սենյակը՝ դրանց վեկտորացումը կրկնելու համար։",

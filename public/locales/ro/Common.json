@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Instrucțiuni",
   "AIProjectInstructionsHint": "Fișierele Markdown din sălile selectate devin abilități pentru chat. Puteți selecta mai multe săli.",
   "AIProjectInstructionsRoomsLimit": "Un proiect poate include cel mult {{limit}} săli de instrucțiuni.",
+  "AIProjectInviteSourcesAccess": "Acces la sălile proiectului",
+  "AIProjectInviteSourcesAccessDescription": "Oricine este invitat în acest proiect primește rolul de Vizualizator în toate sălile sale de instrucțiuni și de cunoștințe.",
   "AIProjectIntroModel": "Discutați cu <1>{{model}}</1>. Conversația dvs. este doar a dvs.",
   "AIProjectKnowledgeFailedFiles": "Unele fișiere din această sală nu au putut fi pregătite pentru IA",
   "AIProjectKnowledgeFailedFilesInfo": "Chatul IA nu vede aceste fișiere. Deschideți sala pentru a reîncerca vectorizarea lor.",

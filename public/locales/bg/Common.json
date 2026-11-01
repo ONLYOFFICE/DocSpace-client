@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Инструкции",
   "AIProjectInstructionsHint": "Markdown файловете в избраните стаи стават умения за чата. Можете да изберете няколко стаи.",
   "AIProjectInstructionsRoomsLimit": "Един проект може да включва до {{limit}} стаи с инструкции.",
+  "AIProjectInviteSourcesAccess": "Достъп до стаите на проекта",
+  "AIProjectInviteSourcesAccessDescription": "Всеки поканен в този проект получава ролята Зрител във всички негови стаи с инструкции и стаи със знания.",
   "AIProjectIntroModel": "Чат с <1>{{model}}</1>. Разговорът ви е видим само за вас.",
   "AIProjectKnowledgeFailedFiles": "Някои файлове в тази стая не успяха да бъдат подготвени за ИИ",
   "AIProjectKnowledgeFailedFilesInfo": "ИИ чатът не вижда тези файлове. Отворете стаята, за да опитате отново векторизацията им.",

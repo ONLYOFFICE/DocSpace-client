@@ -168,6 +168,8 @@
   "AIProjectInstructions": "指令",
   "AIProjectInstructionsHint": "所选房间中的 Markdown 文件将成为对话的技能。可以选择多个房间。",
   "AIProjectInstructionsRoomsLimit": "一个项目最多可包含 {{limit}} 个指令房间。",
+  "AIProjectInviteSourcesAccess": "项目房间的访问权限",
+  "AIProjectInviteSourcesAccessDescription": "受邀加入此项目的每个人都将在其所有指令房间和知识房间中获得查看者角色。",
   "AIProjectIntroModel": "与 <1>{{model}}</1> 对话。您的对话仅您自己可见。",
   "AIProjectKnowledgeFailedFiles": "此房间中的部分文件未能为 AI 准备就绪",
   "AIProjectKnowledgeFailedFilesInfo": "AI 对话无法看到这些文件。请打开房间重试矢量化。",

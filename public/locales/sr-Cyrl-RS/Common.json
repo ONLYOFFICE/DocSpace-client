@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Инструкције",
   "AIProjectInstructionsHint": "Markdown датотеке у изабраним собама постају вештине за ћаскање. Можете изабрати више соба.",
   "AIProjectInstructionsRoomsLimit": "Пројекат може да садржи највише {{limit}} соба за инструкције.",
+  "AIProjectInviteSourcesAccess": "Приступ собама пројекта",
+  "AIProjectInviteSourcesAccessDescription": "Свако ко је позван у овај пројекат добија улогу Прегледач у свим његовим собама за инструкције и собама знања.",
   "AIProjectIntroModel": "Ћаскање са <1>{{model}}</1>. Ваш разговор видите само ви.",
   "AIProjectKnowledgeFailedFiles": "Неке датотеке у овој соби нису могле да се припреме за АИ",
   "AIProjectKnowledgeFailedFilesInfo": "АИ ћаскање не види те датотеке. Отворите собу да бисте поново покренули њихову векторизацију.",

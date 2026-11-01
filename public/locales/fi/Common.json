@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Ohjeet",
   "AIProjectInstructionsHint": "Valittujen huoneiden Markdown-tiedostoista tulee chatin taitoja. Voit valita useita huoneita.",
   "AIProjectInstructionsRoomsLimit": "Projektiin voi sisällyttää enintään {{limit}} ohjehuonetta.",
+  "AIProjectInviteSourcesAccess": "Pääsy projektin huoneisiin",
+  "AIProjectInviteSourcesAccessDescription": "Jokainen tähän projektiin kutsuttu saa Katselija-roolin kaikissa sen ohje- ja tietohuoneissa.",
   "AIProjectIntroModel": "Chattaa mallin <1>{{model}}</1> kanssa. Keskustelusi näkyy vain sinulle.",
   "AIProjectKnowledgeFailedFiles": "Joitakin tämän huoneen tiedostoja ei voitu valmistella AI:ta varten",
   "AIProjectKnowledgeFailedFilesInfo": "AI-chat ei näe näitä tiedostoja. Avaa huone yrittääksesi niiden vektorointia uudelleen.",

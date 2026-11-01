@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Istruzioni",
   "AIProjectInstructionsHint": "I file Markdown nelle stanze selezionate diventano competenze per la chat. È possibile selezionare più stanze.",
   "AIProjectInstructionsRoomsLimit": "Un progetto può includere fino a {{limit}} stanze delle istruzioni.",
+  "AIProjectInviteSourcesAccess": "Accesso alle stanze del progetto",
+  "AIProjectInviteSourcesAccessDescription": "Chiunque venga invitato a questo progetto ottiene il ruolo di Visualizzatore in tutte le sue stanze delle istruzioni e della conoscenza.",
   "AIProjectIntroModel": "Chatta con <1>{{model}}</1>. La tua conversazione è solo tua.",
   "AIProjectKnowledgeFailedFiles": "Non è stato possibile preparare per l'IA alcuni file di questa stanza",
   "AIProjectKnowledgeFailedFilesInfo": "La chat IA non vede quei file. Apri la stanza per riprovare la loro vettorizzazione.",

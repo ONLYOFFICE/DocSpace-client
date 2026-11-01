@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Udhëzimet",
   "AIProjectInstructionsHint": "Skedarët Markdown në dhomat e zgjedhura bëhen aftësi për bisedën. Mund të zgjidhen disa dhoma.",
   "AIProjectInstructionsRoomsLimit": "Një projekt mund të përfshijë deri në {{limit}} dhoma udhëzimesh.",
+  "AIProjectInviteSourcesAccess": "Qasja në dhomat e projektit",
+  "AIProjectInviteSourcesAccessDescription": "Kushdo që ftohet në këtë projekt merr rolin Shikuesi në të gjitha dhomat e tij të udhëzimeve dhe të njohurive.",
   "AIProjectIntroModel": "Bisedoni me <1>{{model}}</1>. Biseda juaj është vetëm e juaja.",
   "AIProjectKnowledgeFailedFiles": "Disa skedarë në këtë dhomë nuk mundën të përgatiteshin për IA",
   "AIProjectKnowledgeFailedFilesInfo": "Biseda IA nuk i sheh ata skedarë. Hapni dhomën për të provuar sërish vektorizimin e tyre.",

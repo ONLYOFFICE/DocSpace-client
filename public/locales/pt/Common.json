@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Instruções",
   "AIProjectInstructionsHint": "Os ficheiros Markdown nas salas selecionadas tornam-se competências para o chat. Pode selecionar várias salas.",
   "AIProjectInstructionsRoomsLimit": "Um projeto pode incluir até {{limit}} salas de instruções.",
+  "AIProjectInviteSourcesAccess": "Acesso às salas do projeto",
+  "AIProjectInviteSourcesAccessDescription": "Todas as pessoas convidadas para este projeto recebem a função de Visualizador em todas as suas salas de instruções e de conhecimento.",
   "AIProjectIntroModel": "Converse com <1>{{model}}</1>. A sua conversa é só sua.",
   "AIProjectKnowledgeFailedFiles": "Não foi possível preparar alguns ficheiros desta sala para a IA",
   "AIProjectKnowledgeFailedFilesInfo": "O chat de IA não vê esses ficheiros. Abra a sala para tentar novamente a sua vetorização.",

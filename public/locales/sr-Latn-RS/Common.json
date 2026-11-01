@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Instrukcije",
   "AIProjectInstructionsHint": "Markdown datoteke u izabranim sobama postaju veštine za ćaskanje. Možete izabrati više soba.",
   "AIProjectInstructionsRoomsLimit": "Projekat može da sadrži najviše {{limit}} soba za instrukcije.",
+  "AIProjectInviteSourcesAccess": "Pristup sobama projekta",
+  "AIProjectInviteSourcesAccessDescription": "Svako ko je pozvan u ovaj projekat dobija ulogu Pregledač u svim njegovim sobama za instrukcije i sobama znanja.",
   "AIProjectIntroModel": "Ćaskanje sa <1>{{model}}</1>. Vaš razgovor vidite samo vi.",
   "AIProjectKnowledgeFailedFiles": "Neke datoteke u ovoj sobi nisu mogle da se pripreme za AI",
   "AIProjectKnowledgeFailedFilesInfo": "AI ćaskanje ne vidi te datoteke. Otvorite sobu da biste ponovo pokrenuli njihovu vektorizaciju.",

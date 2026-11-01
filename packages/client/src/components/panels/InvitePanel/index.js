@@ -47,6 +47,7 @@ import {
 import {
   AnalyticsEvents,
   EmployeeType,
+  RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
@@ -92,6 +93,7 @@ import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import styles from "./InvitePanel.module.scss";
 import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
 
 const InvitePanel = ({
   folders,
@@ -894,6 +896,15 @@ const InvitePanel = ({
   const bodyInvitePanel = useMemo(() => {
     return (
       <div style={{ display: "contents" }} ref={invitePanelBodyRef}>
+        {/* A project member reads its linked rooms through the project. */}
+        {roomType === RoomsType.AiProjectRoom ? (
+          <PublicRoomBar
+            className={styles.aiProjectSourcesBar}
+            headerText={t("Common:AIProjectInviteSourcesAccess")}
+            bodyText={t("Common:AIProjectInviteSourcesAccessDescription")}
+            dataTestId="invite_panel_ai_project_sources_bar"
+          />
+        ) : null}
         {isPrivateRoom ? null : (
           <ExternalLinks
             t={t}

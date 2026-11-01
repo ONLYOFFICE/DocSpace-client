@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Hướng dẫn",
   "AIProjectInstructionsHint": "Các tệp Markdown trong các phòng đã chọn sẽ trở thành kỹ năng cho cuộc trò chuyện. Có thể chọn nhiều phòng.",
   "AIProjectInstructionsRoomsLimit": "Một dự án có thể bao gồm tối đa {{limit}} phòng hướng dẫn.",
+  "AIProjectInviteSourcesAccess": "Quyền truy cập vào các phòng của dự án",
+  "AIProjectInviteSourcesAccessDescription": "Mọi người được mời vào dự án này đều nhận vai trò Người xem trong tất cả các phòng hướng dẫn và phòng kiến thức của dự án.",
   "AIProjectIntroModel": "Trò chuyện với <1>{{model}}</1>. Cuộc trò chuyện chỉ dành riêng cho bạn.",
   "AIProjectKnowledgeFailedFiles": "Không thể chuẩn bị một số tệp trong phòng này cho AI",
   "AIProjectKnowledgeFailedFilesInfo": "Trò chuyện AI không nhìn thấy các tệp đó. Hãy mở phòng để thử vectơ hóa lại.",

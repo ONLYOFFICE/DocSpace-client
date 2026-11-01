@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Talimatlar",
   "AIProjectInstructionsHint": "Seçilen odalardaki Markdown dosyaları sohbet için beceri haline gelir. Birden fazla oda seçilebilir.",
   "AIProjectInstructionsRoomsLimit": "Bir proje en fazla {{limit}} talimat odası içerebilir.",
+  "AIProjectInviteSourcesAccess": "Proje odalarına erişim",
+  "AIProjectInviteSourcesAccessDescription": "Bu projeye davet edilen herkes, projenin tüm talimat ve bilgi odalarında Görüntüleyici rolünü alır.",
   "AIProjectIntroModel": "<1>{{model}}</1> ile sohbet edin. Konuşmanızı yalnızca siz görebilirsiniz.",
   "AIProjectKnowledgeFailedFiles": "Bu odadaki bazı dosyalar AI için hazırlanamadı",
   "AIProjectKnowledgeFailedFilesInfo": "AI sohbeti bu dosyaları göremiyor. Vektörleştirmelerini yeniden denemek için odayı açın.",

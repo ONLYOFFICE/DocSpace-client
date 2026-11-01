@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Инструкции",
   "AIProjectInstructionsHint": "Файлы Markdown в выбранных комнатах становятся навыками для чата. Можно выбрать несколько комнат.",
   "AIProjectInstructionsRoomsLimit": "В проект можно добавить не более {{limit}} комнат инструкций.",
+  "AIProjectInviteSourcesAccess": "Доступ к комнатам проекта",
+  "AIProjectInviteSourcesAccessDescription": "Каждый приглашённый в этот проект получает роль «Просмотр» во всех его комнатах инструкций и комнатах знаний.",
   "AIProjectIntroModel": "Чат с <1>{{model}}</1>. Ваша переписка видна только вам.",
   "AIProjectKnowledgeFailedFiles": "Некоторые файлы в этой комнате не удалось подготовить для ИИ",
   "AIProjectKnowledgeFailedFilesInfo": "ИИ-чат не видит эти файлы. Откройте комнату, чтобы повторить их векторизацию.",

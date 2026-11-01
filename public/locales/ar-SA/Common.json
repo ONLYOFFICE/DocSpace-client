@@ -168,6 +168,8 @@
   "AIProjectInstructions": "التعليمات",
   "AIProjectInstructionsHint": "تصبح ملفات Markdown في الغرف المحددة مهارات للدردشة. يمكن تحديد عدة غرف.",
   "AIProjectInstructionsRoomsLimit": "يمكن أن يتضمن المشروع ما يصل إلى {{limit}} من غرف التعليمات.",
+  "AIProjectInviteSourcesAccess": "الوصول إلى غرف المشروع",
+  "AIProjectInviteSourcesAccessDescription": "يحصل كل من تتم دعوته إلى هذا المشروع على دور العارض في جميع غرف التعليمات وغرف المعرفة الخاصة به.",
   "AIProjectIntroModel": "الدردشة مع <1>{{model}}</1>. محادثتك خاصة بك وحدك.",
   "AIProjectKnowledgeFailedFiles": "تعذّر تجهيز بعض الملفات في هذه الغرفة للذكاء الاصطناعي",
   "AIProjectKnowledgeFailedFilesInfo": "لا ترى دردشة الذكاء الاصطناعي هذه الملفات. افتح الغرفة لإعادة محاولة تحويلها إلى متجهات.",

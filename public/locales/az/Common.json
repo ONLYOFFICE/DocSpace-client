@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Təlimatlar",
   "AIProjectInstructionsHint": "Seçilmiş otaqlardakı Markdown faylları söhbət üçün bacarıqlara çevrilir. Bir neçə otaq seçmək olar.",
   "AIProjectInstructionsRoomsLimit": "Layihəyə ən çox {{limit}} təlimat otağı daxil edilə bilər.",
+  "AIProjectInviteSourcesAccess": "Layihə otaqlarına giriş",
+  "AIProjectInviteSourcesAccessDescription": "Bu layihəyə dəvət olunan hər kəs onun bütün Təlimat və Bilik otaqlarında İzləyici rolunu alır.",
   "AIProjectIntroModel": "<1>{{model}}</1> ilə söhbət edin. Söhbətiniz yalnız sizə məxsusdur.",
   "AIProjectKnowledgeFailedFiles": "Bu otaqdakı bəzi faylları AI üçün hazırlamaq mümkün olmadı",
   "AIProjectKnowledgeFailedFilesInfo": "AI söhbəti həmin faylları görmür. Onların vektorlaşdırılmasını təkrarlamaq üçün otağı açın.",

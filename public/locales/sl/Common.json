@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Navodila",
   "AIProjectInstructionsHint": "Datoteke Markdown v izbranih sobah postanejo veščine klepeta. Izberete lahko več sob.",
   "AIProjectInstructionsRoomsLimit": "Projekt lahko vključuje največ {{limit}} sob z navodili.",
+  "AIProjectInviteSourcesAccess": "Dostop do sob projekta",
+  "AIProjectInviteSourcesAccessDescription": "Vsak, ki je povabljen v ta projekt, dobi vlogo Opazovalec v vseh njegovih sobah z navodili in sobah znanja.",
   "AIProjectIntroModel": "Klepetajte z <1>{{model}}</1>. Vaš pogovor je samo vaš.",
   "AIProjectKnowledgeFailedFiles": "Nekaterih datotek v tej sobi ni bilo mogoče pripraviti za AI",
   "AIProjectKnowledgeFailedFilesInfo": "Klepet AI teh datotek ne vidi. Odprite sobo in ponovite njihovo vektorizacijo.",

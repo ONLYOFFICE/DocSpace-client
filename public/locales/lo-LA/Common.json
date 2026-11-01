@@ -168,6 +168,8 @@
   "AIProjectInstructions": "ຄຳແນະນຳ",
   "AIProjectInstructionsHint": "ໄຟລ໌ Markdown ໃນຫ້ອງທີ່ເລືອກຈະກາຍເປັນທັກສະສຳລັບການສົນທະນາ. ສາມາດເລືອກໄດ້ຫຼາຍຫ້ອງ.",
   "AIProjectInstructionsRoomsLimit": "ໂຄງການໜຶ່ງສາມາດມີຫ້ອງຄຳແນະນຳໄດ້ສູງສຸດ {{limit}} ຫ້ອງ.",
+  "AIProjectInviteSourcesAccess": "ການເຂົ້າເຖິງຫ້ອງຂອງໂຄງການ",
+  "AIProjectInviteSourcesAccessDescription": "ທຸກຄົນທີ່ຖືກເຊີນເຂົ້າໂຄງການນີ້ຈະໄດ້ຮັບບົດບາດຜູ້ຊົມໃນຫ້ອງຄຳແນະນຳ ແລະ ຫ້ອງຄວາມຮູ້ທັງໝົດຂອງໂຄງການ.",
   "AIProjectIntroModel": "ສົນທະນາກັບ <1>{{model}}</1>. ການສົນທະນາຂອງທ່ານເປັນຂອງທ່ານຄົນດຽວ.",
   "AIProjectKnowledgeFailedFiles": "ບາງໄຟລ໌ໃນຫ້ອງນີ້ບໍ່ສາມາດກະກຽມສຳລັບ AI ໄດ້",
   "AIProjectKnowledgeFailedFilesInfo": "ການສົນທະນາ AI ບໍ່ເຫັນໄຟລ໌ເຫຼົ່ານັ້ນ. ເປີດຫ້ອງເພື່ອລອງສ້າງເວັກເຕີຂອງພວກມັນອີກຄັ້ງ.",

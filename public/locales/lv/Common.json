@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Instrukcijas",
   "AIProjectInstructionsHint": "Atlasīto telpu Markdown faili kļūst par tērzēšanas prasmēm. Var atlasīt vairākas telpas.",
   "AIProjectInstructionsRoomsLimit": "Projektā var iekļaut ne vairāk kā {{limit}} instrukciju telpas.",
+  "AIProjectInviteSourcesAccess": "Piekļuve projekta telpām",
+  "AIProjectInviteSourcesAccessDescription": "Ikviens, kas uzaicināts uz šo projektu, saņem Skatītāja lomu visās tā instrukciju un zināšanu telpās.",
   "AIProjectIntroModel": "Tērzējiet ar <1>{{model}}</1>. Jūsu saruna ir redzama tikai jums.",
   "AIProjectKnowledgeFailedFiles": "Dažus šīs telpas failus neizdevās sagatavot MI",
   "AIProjectKnowledgeFailedFilesInfo": "MI tērzēšana neredz šos failus. Atveriet telpu, lai atkārtotu to vektorizāciju.",

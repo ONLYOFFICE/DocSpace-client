@@ -168,6 +168,8 @@
   "AIProjectInstructions": "උපදෙස්",
   "AIProjectInstructionsHint": "තෝරාගත් කාමරවල ඇති Markdown ගොනු කතාබහ සඳහා කුසලතා බවට පත් වේ. කාමර කිහිපයක් තෝරා ගත හැක.",
   "AIProjectInstructionsRoomsLimit": "ව්‍යාපෘතියකට උපදෙස් කාමර {{limit}} ක් දක්වා ඇතුළත් කළ හැක.",
+  "AIProjectInviteSourcesAccess": "ව්‍යාපෘති කාමර වෙත ප්‍රවේශය",
+  "AIProjectInviteSourcesAccessDescription": "මෙම ව්‍යාපෘතියට ආරාධනා කරන සෑම කෙනෙකුටම එහි සියලුම උපදෙස් කාමර සහ දැනුම් කාමර තුළ දකින්නා භූමිකාව ලැබේ.",
   "AIProjectIntroModel": "<1>{{model}}</1> සමඟ කතාබහ කරන්න. ඔබේ සංවාදය ඔබට පමණක් අයත් වේ.",
   "AIProjectKnowledgeFailedFiles": "මෙම කාමරයේ සමහර ගොනු AI සඳහා සූදානම් කිරීමට අසමත් විය",
   "AIProjectKnowledgeFailedFilesInfo": "AI කතාබහට එම ගොනු නොපෙනේ. ඒවායේ දෛශිකකරණය නැවත උත්සාහ කිරීමට කාමරය විවෘත කරන්න.",

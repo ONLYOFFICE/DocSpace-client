@@ -168,6 +168,8 @@
   "AIProjectInstructions": "指示",
   "AIProjectInstructionsHint": "選択したルーム内のMarkdownファイルがチャットのスキルになります。複数のルームを選択できます。",
   "AIProjectInstructionsRoomsLimit": "1つのプロジェクトに追加できる指示ルームは最大 {{limit}} 件です。",
+  "AIProjectInviteSourcesAccess": "プロジェクトのルームへのアクセス",
+  "AIProjectInviteSourcesAccessDescription": "このプロジェクトに招待されたユーザーは全員、プロジェクトのすべての指示ルームとナレッジルームで閲覧者のロールを得ます。",
   "AIProjectIntroModel": "<1>{{model}}</1>とチャットします。会話はあなただけのものです。",
   "AIProjectKnowledgeFailedFiles": "このルームの一部のファイルをAI用に準備できませんでした",
   "AIProjectKnowledgeFailedFilesInfo": "AIチャットではこれらのファイルを参照できません。ルームを開いてベクトル化を再試行してください。",

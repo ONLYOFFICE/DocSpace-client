@@ -168,6 +168,8 @@
   "AIProjectInstructions": "Instrukce",
   "AIProjectInstructionsHint": "Soubory Markdown ve vybraných místnostech se stanou dovednostmi chatu. Lze vybrat více místností.",
   "AIProjectInstructionsRoomsLimit": "Projekt může obsahovat nejvýše {{limit}} instrukčních místností.",
+  "AIProjectInviteSourcesAccess": "Přístup k místnostem projektu",
+  "AIProjectInviteSourcesAccessDescription": "Každý, kdo je pozván do tohoto projektu, získá roli Prohlížeč ve všech jeho instrukčních a znalostních místnostech.",
   "AIProjectIntroModel": "Chatujte s <1>{{model}}</1>. Vaše konverzace je jen vaše.",
   "AIProjectKnowledgeFailedFiles": "Některé soubory v této místnosti se nepodařilo připravit pro AI",
   "AIProjectKnowledgeFailedFilesInfo": "AI chat tyto soubory nevidí. Otevřete místnost a zopakujte jejich vektorizaci.",

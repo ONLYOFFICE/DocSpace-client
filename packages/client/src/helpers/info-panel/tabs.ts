@@ -124,7 +124,8 @@ export function getAvailableInfoPanelTabs({
     isRoomUtil(selection) &&
     "rootFolderType" in selection &&
     (selection.rootFolderType === FolderType.Rooms ||
-      selection.rootFolderType === FolderType.Archive);
+      selection.rootFolderType === FolderType.Archive ||
+      selection.rootFolderType === FolderType.AiHub);
 
   const useRoomsView = isRoomsType;
 

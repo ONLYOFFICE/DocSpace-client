@@ -49,6 +49,7 @@ import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import { EmptyView } from "@onlyoffice/apps-ui-kit/components/empty-view";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import type { TAiProject } from "@docspace/shared/api/ai/projects";
+import { getFolderInfo } from "@docspace/shared/api/files";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
 
@@ -69,6 +70,7 @@ type AiProjectViewProps = {
    * project in the list but chats only in the ones they belong to.
    */
   inRoom: boolean;
+  setInRoom: (inRoom: boolean) => void;
   infoPanelVisible: boolean;
 };
 
@@ -88,7 +90,13 @@ const toChatRooms = (rooms: TAiProject["aiProject"]["knowledgeRooms"]) =>
  * Opening reads the project (`GET ai/projects/{id}`) and starts a fresh
  * thread on its model and rooms; leaving the room resets the chat.
  */
-const AiProjectView = ({ aiProjectsStore: store, roomId, inRoom, infoPanelVisible }: AiProjectViewProps) => {
+const AiProjectView = ({
+  aiProjectsStore: store,
+  roomId,
+  inRoom,
+  setInRoom,
+  infoPanelVisible,
+}: AiProjectViewProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
   const navigate = useNavigate();
@@ -201,6 +209,28 @@ const AiProjectView = ({ aiProjectsStore: store, roomId, inRoom, infoPanelVisibl
     };
   }, [store, roomId]);
 
+  // Joining the project (invited by a Project manager) comes as an update or
+  // a create of its room. The Files list does not carry the membership over
+  // to the open room, so a non-member reads the room again and the chat
+  // replaces the "not a member" view once they are in.
+  React.useEffect(() => {
+    if (inRoom) return undefined;
+    let disposed = false;
+    const onModify = ({ cmd, type, id }: { cmd?: string; type?: string; id?: number | string } = {}) => {
+      if ((cmd !== "update" && cmd !== "create") || type !== "folder" || Number(id) !== roomId) return;
+      getFolderInfo(roomId)
+        .then((folder) => {
+          if (!disposed && folder.inRoom) setInRoom(true);
+        })
+        .catch(() => {});
+    };
+    SocketHelper?.on(SocketEvents.ModifyFolder, onModify);
+    return () => {
+      disposed = true;
+      SocketHelper?.off(SocketEvents.ModifyFolder, onModify);
+    };
+  }, [inRoom, roomId, setInRoom]);
+
   // The sources column replaces the composer's chips while it is on screen.
   React.useEffect(() => {
     aiChatStore.setComposerContextHidden(true);
@@ -248,5 +278,6 @@ export default inject(({ aiProjectsStore, infoPanelStore, selectedFolderStore }:
   aiProjectsStore,
   roomId: Number(selectedFolderStore.id),
   inRoom: selectedFolderStore.inRoom,
+  setInRoom: selectedFolderStore.setInRoom,
   infoPanelVisible: infoPanelStore.isVisible,
 }))(observer(AiProjectView));

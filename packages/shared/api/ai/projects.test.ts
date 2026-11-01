@@ -13,7 +13,7 @@ import {
   AI_PROJECT_ROOM_TYPE,
   aiProjectToRoom,
   createAiProject,
-  getAiProjectKnowledge,
+  getAiProjectKnowledgeFiles,
   getAiProjects,
   getAiProject,
   getAiProjectSkills,
@@ -361,16 +361,9 @@ describe("the calls", () => {
     expect(skills.map((room) => room.logo?.color ?? null)).toEqual(["#AABBCC", null]);
   });
 
-  it("lists the knowledge files of every linked Knowledge room, an unreadable one as unavailable", async () => {
+  it("reads a Knowledge room's files with their vectorization state in one request", async () => {
     route({
-      "GET /files/rooms/7/sources": {
-        instructionsRooms: [],
-        knowledgeRooms: [
-          { id: 9, title: "Docs", logo: { color: "#DDEEFF" } },
-          { id: 10, title: "Gone", logo: null },
-        ],
-      },
-      "GET /files/9?filterType=1&count=100&startIndex=0": {
+      "GET /files/9?filterType=1&count=100": {
         total: 3,
         files: [
           { id: 1, title: "a.pdf", fileExst: ".pdf", vectorizationStatus: 1, security: { Vectorization: true } },
@@ -378,21 +371,11 @@ describe("the calls", () => {
           { id: 3, title: "c.txt", vectorizationStatus: null },
         ],
       },
-      "GET /files/10?filterType=1&count=100&startIndex=0": () => {
-        throw new Error("403");
-      },
     });
-    const knowledge = await getAiProjectKnowledge(7);
-    expect(knowledge[0]).toMatchObject({
-      id: 9,
-      available: true,
-      totalFiles: 3,
-      indexedFiles: 1,
-      failedFiles: 1,
-      truncated: false,
-      logo: { color: "#DDEEFF" },
-    });
-    expect(knowledge[0].files[1]).toEqual({
+    const files = await getAiProjectKnowledgeFiles(9);
+    expect(request).toHaveBeenCalledTimes(1);
+    expect(files.map((file) => file.indexed)).toEqual([true, false, false]);
+    expect(files[1]).toEqual({
       id: 2,
       title: "b.docx",
       fileExst: ".docx",
@@ -400,6 +383,5 @@ describe("the calls", () => {
       vectorizationStatus: 2,
       security: { Vectorization: false },
     });
-    expect(knowledge[1]).toMatchObject({ id: 10, available: false, files: [] });
   });
 });

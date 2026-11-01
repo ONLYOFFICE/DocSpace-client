@@ -263,16 +263,6 @@ export type TAiProjectKnowledgeFile = {
   security?: { Vectorization: boolean };
 };
 
-export type TAiProjectKnowledgeRoom = TAiProjectLinkedRoom & {
-  totalFiles: number;
-  indexedFiles: number;
-  /** Files whose vectorization failed. */
-  failedFiles?: number;
-  /** The room holds more files than one listing reads. */
-  truncated: boolean;
-  files: TAiProjectKnowledgeFile[];
-};
-
 /** The sort keys of the rooms list a project takes. */
 export type TAiProjectsSortBy = "DateAndTime" | "AZ" | "DateAndTimeCreation" | "Tags" | "Author";
 
@@ -427,12 +417,8 @@ const toRoomFields = ({ title, tags, logo }: TAiProjectRequest) => {
 
 /** `FilterType.FilesOnly`. */
 const FILTER_FILES_ONLY = 1;
-/** Page size of the Files API; a larger `count` answers 400. */
+/** Page size of the Files API, also the most files a Knowledge room keeps; a larger `count` answers 400. */
 const FILES_PAGE_SIZE = 100;
-/** Files of a Knowledge room read at most; the listing reports `truncated` past it. */
-const KNOWLEDGE_FILES_LIMIT = 1000;
-/** Knowledge rooms read at a time. */
-const READ_CONCURRENCY = 4;
 
 /** A linked room as `GET files/rooms/{id}/sources` answers it. */
 type TSourceDto = { id: number; title: string; logo?: Partial<TAiProjectLogo> | null };
@@ -716,77 +702,26 @@ type TKnowledgeFileDto = {
   security?: { Vectorization?: boolean };
 };
 
-// The files of a Knowledge room (`GET files/{roomId}`, files only), page by
-// page up to the limit, with their vectorization state and the room's total.
-const getKnowledgeFiles = async (roomId: number) => {
-  const files: TAiProjectKnowledgeFile[] = [];
-  let total = 0;
-  for (let startIndex = 0; startIndex < KNOWLEDGE_FILES_LIMIT; startIndex += FILES_PAGE_SIZE) {
-    const page = (await request({
-      method: "GET",
-      url: `/files/${roomId}${toParams({ filterType: FILTER_FILES_ONLY, count: FILES_PAGE_SIZE, startIndex })}`,
-    })) as { files?: TKnowledgeFileDto[]; total?: number };
-    const pageFiles = page.files ?? [];
-    for (const file of pageFiles) {
-      const status = file.vectorizationStatus ?? null;
-      files.push({
-        id: file.id,
-        title: file.title,
-        fileExst: file.fileExst ?? file.title.slice(file.title.lastIndexOf(".")),
-        indexed: status === VectorizationStatus.Completed,
-        vectorizationStatus: status,
-        security: { Vectorization: !!file.security?.Vectorization },
-      });
-    }
-    total = page.total ?? startIndex + pageFiles.length;
-    if (startIndex + FILES_PAGE_SIZE >= total || pageFiles.length === 0) break;
-  }
-  return { files, total };
-};
-
 /**
- * The linked Knowledge rooms with their files (at most 1000 a room,
- * `truncated` past it), their vectorization state and counters. A room that
- * cannot be read comes back with `available: false` and no files.
+ * A linked Knowledge room's files (`GET files/{roomId}`, files only) with
+ * their vectorization state, read when its row in the Knowledge card is
+ * expanded. One page holds them all: a Knowledge room keeps at most 100
+ * files.
  */
-export const getAiProjectKnowledge = async (id: number) => {
-  const { knowledgeRooms } = await getSources(id);
-  const rooms: TAiProjectKnowledgeRoom[] = new Array(knowledgeRooms.length);
-  let next = 0;
-  const worker = async () => {
-    while (next < knowledgeRooms.length) {
-      const index = next;
-      next += 1;
-      const room = knowledgeRooms[index];
-      const base = { id: room.id, title: room.title, logo: room.logo ? toLogo(room.logo) : null };
-      try {
-        const { files, total } = await getKnowledgeFiles(room.id);
-        rooms[index] = {
-          ...base,
-          available: true,
-          totalFiles: total,
-          indexedFiles: files.filter((file) => file.indexed).length,
-          failedFiles: files.filter(
-            (file) => file.vectorizationStatus === VectorizationStatus.Failed,
-          ).length,
-          truncated: total > files.length,
-          files,
-        };
-      } catch {
-        rooms[index] = {
-          ...base,
-          available: false,
-          totalFiles: 0,
-          indexedFiles: 0,
-          failedFiles: 0,
-          truncated: false,
-          files: [],
-        };
-      }
-    }
-  };
-  await Promise.all(
-    Array.from({ length: Math.min(READ_CONCURRENCY, knowledgeRooms.length) }, worker),
-  );
-  return rooms;
+export const getAiProjectKnowledgeFiles = async (roomId: number): Promise<TAiProjectKnowledgeFile[]> => {
+  const page = (await request({
+    method: "GET",
+    url: `/files/${roomId}${toParams({ filterType: FILTER_FILES_ONLY, count: FILES_PAGE_SIZE })}`,
+  })) as { files?: TKnowledgeFileDto[] };
+  return (page.files ?? []).map((file) => {
+    const status = file.vectorizationStatus ?? null;
+    return {
+      id: file.id,
+      title: file.title,
+      fileExst: file.fileExst ?? file.title.slice(file.title.lastIndexOf(".")),
+      indexed: status === VectorizationStatus.Completed,
+      vectorizationStatus: status,
+      security: { Vectorization: !!file.security?.Vectorization },
+    };
+  });
 };

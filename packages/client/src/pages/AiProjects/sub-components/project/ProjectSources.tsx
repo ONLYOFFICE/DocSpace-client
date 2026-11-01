@@ -362,14 +362,14 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
       headless={compact}
     >
       {knowledgeRooms.map((room) => {
-          // Every file is listed with its vectorization state: the chat
-          // searches the indexed ones, the rest show why they are not there.
-          const loaded = store.knowledge.find((item) => item.id === room.id);
-          const files = loaded?.files ?? [];
-          // Until the list is read, the room's own count from the project.
+          // The room's files are read when it is expanded, each with its
+          // vectorization state: the chat searches the indexed ones, the
+          // rest show why they are not there.
+          const loaded = store.knowledge[room.id];
+          const files = loaded ?? [];
+          // Until the files are read, the room's own count from the project.
           const failedFiles = loaded
-            ? (loaded.failedFiles ??
-              files.filter((file) => file.vectorizationStatus === VectorizationStatus.Failed).length)
+            ? files.filter((file) => file.vectorizationStatus === VectorizationStatus.Failed).length
             : (room.failedFiles ?? 0);
           return (
             <RoomCard
@@ -379,7 +379,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
               logo={room.logo}
               icon="knowledgeRoom.svg"
               isExpanded={expanded.has(`k-${room.id}`)}
-              onToggle={() => toggle(`k-${room.id}`, () => void store.fetchKnowledge(project.id))}
+              onToggle={() => toggle(`k-${room.id}`, () => void store.fetchKnowledgeFiles(room.id))}
               trailing={
                 failedFiles > 0 ? (
                   <FailedVectorizationBadge
@@ -391,9 +391,9 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
                 ) : null
               }
             >
-              {!loaded && store.knowledgeLoading ? (
+              {!loaded && store.knowledgeLoading[room.id] ? (
                 <RoomContentSkeleton testId={`ai-project-knowledge-loading-${room.id}`} />
-              ) : !loaded && store.knowledgePending ? null : loaded && files.length === 0 ? (
+              ) : !loaded && store.knowledgePending[room.id] ? null : loaded && files.length === 0 ? (
                 <Text className={classNames(styles.note, styles.nested)}>{t("Common:NoItemsHereYet")}</Text>
               ) : (
               <ul className={classNames(styles.list, styles.nested)}>

@@ -5,7 +5,7 @@ import type { TAiProject } from "@docspace/shared/api/ai/projects";
 const api = vi.hoisted(() => ({
   createAiProject: vi.fn(),
   getAiProject: vi.fn(),
-  getAiProjectKnowledge: vi.fn(),
+  getAiProjectKnowledgeFiles: vi.fn(),
   getAiProjectSkills: vi.fn(),
   updateAiProject: vi.fn(),
   toAiProject: vi.fn((dto: Record<string, unknown>) => ({ ...dto, aiProject: {} })),
@@ -75,7 +75,7 @@ describe("AiProjectsStore", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     api.getAiProjectSkills.mockResolvedValue([{ id: 12, title: "Skills", skills: [] }]);
-    api.getAiProjectKnowledge.mockResolvedValue([]);
+    api.getAiProjectKnowledgeFiles.mockResolvedValue([]);
   });
 
   afterEach(() => {
@@ -165,10 +165,12 @@ describe("AiProjectsStore", () => {
       await store.fetchSkills(1);
       expect(store.skills).toEqual([{ id: 12, title: "Skills", skills: [] }]);
 
-      await store.fetchKnowledge(2);
-      expect(store.knowledge).toEqual([]);
+      api.getAiProjectKnowledgeFiles.mockResolvedValueOnce([{ id: 1, title: "a.docx" }]);
+      await store.fetchKnowledgeFiles(9);
+      expect(api.getAiProjectKnowledgeFiles).toHaveBeenCalledWith(9);
+      expect(store.knowledge).toEqual({ 9: [{ id: 1, title: "a.docx" }] });
       expect(store.skillsPending).toBe(false);
-      expect(store.knowledgePending).toBe(false);
+      expect(store.knowledgePending[9]).toBe(false);
     });
 
     it("re-reads the open project and re-syncs the chat", async () => {
@@ -290,42 +292,33 @@ describe("AiProjectsStore", () => {
 
   describe("retryKnowledgeFile", () => {
     const knowledge = () => [
-      {
-        id: 30,
-        title: "Docs",
-        failedFiles: 1,
-        files: [
-          { id: 1, title: "a.docx", vectorizationStatus: VectorizationStatus.Failed },
-          { id: 2, title: "b.docx", vectorizationStatus: VectorizationStatus.Completed },
-        ],
-      },
+      { id: 1, title: "a.docx", vectorizationStatus: VectorizationStatus.Failed },
+      { id: 2, title: "b.docx", vectorizationStatus: VectorizationStatus.Completed },
     ];
 
-    it("queues the file again and clears the room's failed count", async () => {
+    it("queues the file again, shown in progress at once", async () => {
       const store = createStore();
       await store.openProject(project(1));
-      api.getAiProjectKnowledge.mockResolvedValueOnce(knowledge());
-      await store.fetchKnowledge(1);
+      api.getAiProjectKnowledgeFiles.mockResolvedValueOnce(knowledge());
+      await store.fetchKnowledgeFiles(30);
       aiApi.retryVectorization.mockResolvedValue(undefined);
 
       await store.retryKnowledgeFile(30, 1);
 
       expect(aiApi.retryVectorization).toHaveBeenCalledWith([1]);
-      expect(store.knowledge[0].files[0].vectorizationStatus).toBe(VectorizationStatus.InProgress);
-      expect(store.knowledge[0].failedFiles).toBe(0);
+      expect(store.knowledge[30][0].vectorizationStatus).toBe(VectorizationStatus.InProgress);
     });
 
     it("puts the file back to failed when the request is refused", async () => {
       const store = createStore();
       await store.openProject(project(1));
-      api.getAiProjectKnowledge.mockResolvedValueOnce(knowledge());
-      await store.fetchKnowledge(1);
+      api.getAiProjectKnowledgeFiles.mockResolvedValueOnce(knowledge());
+      await store.fetchKnowledgeFiles(30);
       aiApi.retryVectorization.mockRejectedValue(new Error("busy"));
 
       await store.retryKnowledgeFile(30, 1);
 
-      expect(store.knowledge[0].files[0].vectorizationStatus).toBe(VectorizationStatus.Failed);
-      expect(store.knowledge[0].failedFiles).toBe(1);
+      expect(store.knowledge[30][0].vectorizationStatus).toBe(VectorizationStatus.Failed);
       expect(toastr.error).toHaveBeenCalledWith("busy");
     });
   });

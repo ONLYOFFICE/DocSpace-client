@@ -41,7 +41,7 @@ import { ShareAccessRights, VectorizationStatus } from "@docspace/shared/enums";
 import {
   createAiProject,
   getAiProject,
-  getAiProjectKnowledge,
+  getAiProjectKnowledgeFiles,
   getAiProjectSkills,
   toAiProject,
   updateAiProject,
@@ -55,7 +55,7 @@ import {
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type {
   TAiProject,
-  TAiProjectKnowledgeRoom,
+  TAiProjectKnowledgeFile,
   TAiProjectRequest,
   TAiProjectRoomDto,
   TAiProjectSkillsRoom,
@@ -111,7 +111,8 @@ class AiProjectsStore {
 
   skills: TAiProjectSkillsRoom[] = [];
 
-  knowledge: TAiProjectKnowledgeRoom[] = [];
+  /** The files of each expanded Knowledge room, by room id. */
+  knowledge: Record<number, TAiProjectKnowledgeFile[]> = {};
 
   /**
    * A sources read in flight (`*Pending`) and one in flight long enough to
@@ -124,9 +125,10 @@ class AiProjectsStore {
 
   skillsLoading = false;
 
-  knowledgePending = false;
+  /** As `skills*`, per Knowledge room. */
+  knowledgePending: Record<number, boolean> = {};
 
-  knowledgeLoading = false;
+  knowledgeLoading: Record<number, boolean> = {};
 
   projectDialog: TProjectDialogState | null = null;
 
@@ -139,7 +141,7 @@ class AiProjectsStore {
   /* ------------------------------ Project ------------------------------ */
 
   // The sources (skills, knowledge files) are not read here: the cards read
-  // a room's list when its row is expanded (fetchSkills / fetchKnowledge),
+  // a room's list when its row is expanded (fetchSkills / fetchKnowledgeFiles),
   // and the chat takes the current skills from the server on every round.
   // A project from the Files list comes without its linked rooms
   // (`partial`): it is read on its own first, so the chat opens on the
@@ -148,7 +150,7 @@ class AiProjectsStore {
   openProject = async (project: TAiProject): Promise<TAiProject> => {
     this.activeProject = project;
     this.skills = [];
-    this.knowledge = [];
+    this.knowledge = {};
     let opened = project;
     if (project.aiProject.partial) {
       try {
@@ -178,7 +180,7 @@ class AiProjectsStore {
   closeProject = () => {
     this.activeProject = null;
     this.skills = [];
-    this.knowledge = [];
+    this.knowledge = {};
     this.aiPresetsStore.setActivePreset(null);
   };
 
@@ -227,20 +229,23 @@ class AiProjectsStore {
     }
   };
 
-  fetchKnowledge = async (id: number) => {
+  /** Reads a linked Knowledge room's files when its row is expanded. */
+  fetchKnowledgeFiles = async (roomId: number) => {
+    if (this.knowledgePending[roomId]) return;
+    const projectId = this.activeProject?.id;
     const { startLoader, endLoader } = createLoader();
-    this.knowledgePending = true;
-    startLoader(() => runInAction(() => (this.knowledgeLoading = true)));
+    this.knowledgePending[roomId] = true;
+    startLoader(() => runInAction(() => (this.knowledgeLoading[roomId] = true)));
     try {
-      const rooms = await getAiProjectKnowledge(id);
+      const files = await getAiProjectKnowledgeFiles(roomId);
       runInAction(() => {
-        if (this.activeProject?.id === id) this.knowledge = rooms;
+        if (this.activeProject?.id === projectId) this.knowledge[roomId] = files;
       });
     } catch (e) {
       toastr.error(errorMessage(e));
     } finally {
-      runInAction(() => (this.knowledgePending = false));
-      endLoader(() => runInAction(() => (this.knowledgeLoading = false)));
+      runInAction(() => (this.knowledgePending[roomId] = false));
+      endLoader(() => runInAction(() => (this.knowledgeLoading[roomId] = false)));
     }
   };
 
@@ -252,11 +257,8 @@ class AiProjectsStore {
   retryKnowledgeFile = async (roomId: number, fileId: number) => {
     const setStatus = (status: VectorizationStatus) =>
       runInAction(() => {
-        const room = this.knowledge.find((r) => r.id === roomId);
-        const file = room?.files.find((f) => f.id === fileId);
-        if (!room || !file) return;
-        file.vectorizationStatus = status;
-        room.failedFiles = room.files.filter((f) => f.vectorizationStatus === VectorizationStatus.Failed).length;
+        const file = this.knowledge[roomId]?.find((f) => f.id === fileId);
+        if (file) file.vectorizationStatus = status;
       });
     setStatus(VectorizationStatus.InProgress);
     try {

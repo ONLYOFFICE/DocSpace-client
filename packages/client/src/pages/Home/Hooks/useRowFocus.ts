@@ -82,11 +82,9 @@ const HOLDER = "data-row-focus";
 
 const isHolder = (el: Element) => el.hasAttribute(HOLDER);
 
-// The rows still held, each by its release: the list going away ends them,
-// so no listener outlives it.
-const heldRows = new Set<() => void>();
-
-const rowHolder = (row: HTMLElement) => {
+// `held` collects the release of each row held this way, for the list that
+// holds them to end them all when it goes away: no listener outlives it.
+const rowHolder = (row: HTMLElement, held: Set<() => void>) => {
   const holder =
     getComputedStyle(row).display === "contents"
       ? (row.querySelector<HTMLElement>(".table-container_cell") ?? row)
@@ -109,7 +107,7 @@ const rowHolder = (row: HTMLElement) => {
     holder.removeAttribute(HOLDER);
     holder.removeEventListener("blur", onBlur);
     window.removeEventListener("pointerdown", onPointerDown, true);
-    heldRows.delete(release);
+    held.delete(release);
   };
   const onBlur = (e: FocusEvent) => {
     if (e.relatedTarget instanceof Element && e.relatedTarget.closest(LIST))
@@ -120,7 +118,7 @@ const rowHolder = (row: HTMLElement) => {
   };
   holder.addEventListener("blur", onBlur);
   window.addEventListener("pointerdown", onPointerDown, true);
-  heldRows.add(release);
+  held.add(release);
   return holder;
 };
 
@@ -190,13 +188,21 @@ export const useRowFocus = (
   const caretRef = useRef(hotkeyCaret);
   caretRef.current = hotkeyCaret;
   const fromKeyboardRef = useRef(false);
+  // Whether the last key was a plain Tab: what leaves the page for the
+  // browser's toolbar, unlike Alt+Tab or a click on another window.
+  const lastKeyTabRef = useRef(false);
+  // The rows this list holds for the focus to come back to.
+  const heldRowsRef = useRef(new Set<() => void>());
 
   useEffect(() => {
-    const onKeyDown = () => {
+    const onKeyDown = (e: KeyboardEvent) => {
       fromKeyboardRef.current = true;
+      lastKeyTabRef.current =
+        e.key === "Tab" && !e.altKey && !e.ctrlKey && !e.metaKey;
     };
     const onPointerDown = () => {
       fromKeyboardRef.current = false;
+      lastKeyTabRef.current = false;
     };
     window.addEventListener("keydown", onKeyDown, true);
     window.addEventListener("pointerdown", onPointerDown, true);
@@ -230,7 +236,7 @@ export const useRowFocus = (
       // Already in that row - Tab brought the focus there and made it the
       // caret, and may have moved on to one of its controls since: leave it.
       if (row.contains(document.activeElement)) return;
-      rowHolder(row).focus({ preventScroll: true });
+      rowHolder(row, heldRowsRef.current).focus({ preventScroll: true });
     };
     frame = requestAnimationFrame(focusCaretRow);
     return () => cancelAnimationFrame(frame);
@@ -268,7 +274,7 @@ export const useRowFocus = (
           // Back from the row's first control: to the row itself.
           if (back) {
             e.preventDefault();
-            rowHolder(row).focus();
+            rowHolder(row, heldRowsRef.current).focus();
             return;
           }
         } else if (!isHolder(activeElement) && !back) return;
@@ -319,7 +325,7 @@ export const useRowFocus = (
       const targetRow =
         findRow(caretRef.current) ?? firstRowOnScreen() ?? nextRow;
       e.preventDefault();
-      rowHolder(targetRow).focus();
+      rowHolder(targetRow, heldRowsRef.current).focus();
       const key = rowKey(targetRow);
       if (key) onRowFocusRef.current(key);
     };
@@ -327,14 +333,16 @@ export const useRowFocus = (
     // Into the list without a key press the page saw - Shift+Tab back from
     // the browser's toolbar lands on the last row's last control - the focus
     // still goes to the caret's row as a whole, which becomes the selection.
-    // Only focus that comes back from outside the page: a dialog giving the
-    // focus back to the row control that opened it is left alone, and so is
-    // the window restoring the element it had before Alt+Tab.
+    // Only focus that comes back from the toolbar a Tab left the page for: a
+    // dialog giving the focus back to the row control that opened it is left
+    // alone, and so is the window coming back after Alt+Tab or a click on
+    // another window, with whatever element it restores.
     let cameBackFromOutside = false;
     let focusedBeforeLeaving: Element | null = null;
     const onWindowBlur = (e: FocusEvent) => {
-      if (e.target !== window) return;
-      cameBackFromOutside = true;
+      // The window itself lost the focus, not an element in it.
+      if (e.target !== e.currentTarget) return;
+      cameBackFromOutside = lastKeyTabRef.current;
       focusedBeforeLeaving = document.activeElement;
     };
 
@@ -352,11 +360,12 @@ export const useRowFocus = (
       const caretRow = findRow(caretRef.current) ?? row;
       if (caretRow === row && isHolder(target)) return;
 
-      rowHolder(caretRow).focus({ preventScroll: true });
+      rowHolder(caretRow, heldRowsRef.current).focus({ preventScroll: true });
       const key = rowKey(caretRow);
       if (key) onRowFocusRef.current(key);
     };
 
+    const heldRows = heldRowsRef.current;
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("blur", onWindowBlur);
     document.addEventListener("focusin", onFocusIn);

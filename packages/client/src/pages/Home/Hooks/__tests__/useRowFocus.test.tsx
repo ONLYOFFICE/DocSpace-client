@@ -135,6 +135,48 @@ describe("useRowFocus", () => {
     expect(holder).not.toHaveAttribute("tabindex");
   });
 
+  // Each list holds its own rows: another one going away leaves them be.
+  it("releases only its own held rows when it goes away", async () => {
+    await focusRowA();
+    const other = renderHook(() => useRowFocus(null, vi.fn()));
+    const holder = byTestId("a-name");
+
+    act(() => byTestId("outside").focus());
+    other.unmount();
+
+    expect(holder).toHaveAttribute("data-row-focus");
+  });
+
+  // Back from the browser's toolbar - left with Tab, come back with
+  // Shift+Tab onto a row's control - the focus goes to the caret's row.
+  // Back from Alt+Tab or another window it is left where it lands.
+  describe("focus coming back to the page", () => {
+    const leavePage = () => {
+      act(() => (document.activeElement as HTMLElement | null)?.blur());
+      fireEvent.blur(window);
+    };
+
+    it("goes to the caret's row after a Tab left the page", async () => {
+      await focusRowA();
+
+      fireEvent.keyDown(window, { key: "Tab" });
+      leavePage();
+      act(() => byTestId("b-menu").focus());
+
+      expect(byTestId("a-name")).toHaveFocus();
+    });
+
+    it("is left where it lands after Alt+Tab", async () => {
+      await focusRowA();
+
+      fireEvent.keyDown(window, { key: "Alt", altKey: true });
+      leavePage();
+      act(() => byTestId("b-menu").focus());
+
+      expect(byTestId("b-menu")).toHaveFocus();
+    });
+  });
+
   // Tab out of the list takes the other rows' controls out of the order for
   // that one key - the list's rows, not a files item elsewhere on the page.
   it("takes only the list's other rows out of the Tab order when Tab leaves", async () => {

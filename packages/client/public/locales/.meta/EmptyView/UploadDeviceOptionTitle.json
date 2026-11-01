@@ -3,7 +3,7 @@
   "content": "Upload from device",
   "content_en_sha1_hash": "37ea5a59d00e13d5967bc95d080fc94a3db0eb2a",
   "created_at": "2026-09-04T07:59:38.597Z",
-  "updated_at": "2026-10-31T12:58:28.807Z",
+  "updated_at": "2026-11-01T07:12:22.887Z",
   "comment": {
     "text": "Label for a dropdown menu option or action item used to initiate file uploads from the user's local device.",
     "is_auto": true,
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 383,
+      "line_number": 382,
       "context": "onClick: () => self.onShowKnowledgeRoomSelectFileDialog(),\n };\n const uploadFromDevice: TContextOption = {\n id: \"personal_upload-from-device\",\n key: \"upload-from-device\",\n label: t(\"EmptyView:UploadDeviceOptionTitle\"),\n icon: ActionsUploadReactSvgUrl,\n onClick: () => onUploadAction(\"file\"),\n };\n const sourceRoomOptions: TContextOption[] =\n roomType === RoomsType.InstructionsRoom",
       "module": "/packages/client"
     },

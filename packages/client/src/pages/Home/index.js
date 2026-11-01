@@ -390,7 +390,7 @@ const PureHome = observer((props) => {
         if (fItem.length > 0) startUpload(fItem, uploadToFolder, t);
       })
       .catch((err) => {
-        toastr.error(err, null, 0, true);
+        toastr.error(err, undefined, 0, true);
       });
   });
 

@@ -51,15 +51,20 @@ type UploadFileInputsProps = {
   startUpload?: (files: File[], folderId: null, t: TTranslation) => void;
   createFoldersTree?: (t: TTranslation, files: File[]) => Promise<File[]>;
   isKnowledgeRoom?: boolean;
+  isInstructionsRoom?: boolean;
   // Only the formats vectorization reads are offered in a Knowledge room;
   // the server refuses anything else.
   knowledgeUploadAccept?: string;
 };
 
+// An Instructions room holds Markdown skills only.
+const INSTRUCTIONS_UPLOAD_ACCEPT = ".md";
+
 const UploadFileInputs = ({
   startUpload,
   createFoldersTree,
   isKnowledgeRoom,
+  isInstructionsRoom,
   knowledgeUploadAccept,
 }: UploadFileInputsProps) => {
   const { t } = useTranslation(["Common"]);
@@ -73,7 +78,7 @@ const UploadFileInputs = ({
           if (tree.length > 0) startUpload?.(tree, null, t);
         })
         .catch((err) => {
-          toastr.error(err, null, 0, true);
+          toastr.error(err, undefined, 0, true);
         });
     },
     [createFoldersTree, startUpload, t],
@@ -98,7 +103,9 @@ const UploadFileInputs = ({
         onClick={onInputClick}
         {...(isKnowledgeRoom && knowledgeUploadAccept
           ? { accept: knowledgeUploadAccept }
-          : {})}
+          : isInstructionsRoom
+            ? { accept: INSTRUCTIONS_UPLOAD_ACCEPT }
+            : {})}
       />
       <input
         id="customPDFInput"
@@ -133,6 +140,8 @@ export default inject(
     startUpload: uploadDataStore.startUpload,
     createFoldersTree: filesActionsStore.createFoldersTree,
     isKnowledgeRoom: selectedFolderStore.roomType === RoomsType.KnowledgeRoom,
+    isInstructionsRoom:
+      selectedFolderStore.roomType === RoomsType.InstructionsRoom,
     knowledgeUploadAccept: filesSettingsStore.knowledgeUploadAccept,
   }),
 )(observer(UploadFileInputs));

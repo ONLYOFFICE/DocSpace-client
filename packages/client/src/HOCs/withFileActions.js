@@ -83,7 +83,7 @@ export default function withFileActions(WrappedFileItem) {
           if (f.length > 0) startUpload(f, uploadToFolder, t);
         })
         .catch((err) => {
-          toastr.error(err, null, 0, true);
+          toastr.error(err, undefined, 0, true);
         });
     };
 

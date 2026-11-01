@@ -165,7 +165,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const [imageRemoved, setImageRemoved] = React.useState(false);
   const storedImage = !imageRemoved && project ? uploadedLogo(project.logo) : null;
   const hasImage = !!previewIcon || !!storedImage;
-  // `null` = the portal default profile, as the API stores it.
+  // `null` until a model is picked: the portal default is preselected.
   const [profileId, setProfileId] = React.useState<string | null>(project?.aiProject.profile?.id ?? null);
   const [instructions, setInstructions] = React.useState<TAiProjectSource[]>(project?.aiProject.instructionsRooms ?? []);
   const [knowledge, setKnowledge] = React.useState<TAiProjectSource[]>(project?.aiProject.knowledgeRooms ?? []);
@@ -246,11 +246,12 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   // uploaded, like a new room.
   const isEmptyIcon = !project && !title && !dialogsStore.cover && !hasImage;
 
-  // The default profile of the portal first (as the "null" profile the API
-  // stores), then every chat-capable profile, each by its name only.
+  // The default profile of the portal first, then every chat-capable
+  // profile, each by its name only. Whichever is picked is stored as the
+  // project's own model, the default included.
   const profileOptions = React.useMemo<TOption[]>(
     () => [
-      ...(defaultProfile ? [{ key: "default", value: "default", label: defaultProfile.name }] : []),
+      ...(defaultProfile ? [{ key: defaultProfile.id, value: defaultProfile.id, label: defaultProfile.name }] : []),
       ...chatProfiles
         .filter((profile) => profile.id !== defaultProfile?.id)
         .map((profile) => ({ key: profile.id, value: profile.id, label: profile.name })),
@@ -258,14 +259,10 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
     [chatProfiles, defaultProfile],
   );
   const selectedProfileOption =
-    profileOptions.find((option) => option.key === (profileId ?? "default")) ?? (profileOptions[0] as TOption);
+    profileOptions.find((option) => option.key === profileId) ?? (profileOptions[0] as TOption);
   // A stored model that is gone (removed, disabled, no longer chat-capable)
-  // shows as the default, so the default is what gets saved.
-  const savedProfileId = selectedProfileOption
-    ? selectedProfileOption.key === "default"
-      ? null
-      : String(selectedProfileOption.key)
-    : profileId;
+  // or none at all shows as the default, so the default is what gets saved.
+  const savedProfileId = selectedProfileOption ? String(selectedProfileOption.key) : profileId;
 
   if (!state) return null;
 
@@ -502,7 +499,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
               <ComboBox
                 options={profileOptions}
                 selectedOption={selectedProfileOption}
-                onSelect={(option) => setProfileId(option.key === "default" ? null : String(option.key))}
+                onSelect={(option) => setProfileId(String(option.key))}
                 scaled
                 scaledOptions
                 dropDownMaxHeight={profileOptions.length > 7 ? 300 : undefined}

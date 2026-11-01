@@ -255,8 +255,7 @@ describe("the calls", () => {
     ]);
   });
 
-  it("saves an edit from the opened project without reading the sources or rewriting the model", async () => {
-    route({ "PUT /files/rooms/7": folder({ aiProject: undefined }) });
+  it("saves an edit from the opened project with only the requests its changes need", async () => {
     const opened = toAiProject(
       folder({
         aiProject: {
@@ -269,13 +268,18 @@ describe("the calls", () => {
     request.mockClear();
     const project = await updateAiProject(
       7,
-      { title: "Sales", aiProject: { profileId: "p1", instructionsRoomIds: [12], knowledgeRoomIds: [9] } },
+      {
+        title: "Sales",
+        tags: [],
+        logo: { color: "#FF6680", cover: "" },
+        aiProject: { profileId: "p1", instructionsRoomIds: [12], knowledgeRoomIds: [9] },
+      },
       opened,
     );
     expect(request.mock.calls.map(([config]) => `${(config as { method: string }).method} ${(config as { url: string }).url}`)).toEqual([
-      "PUT /files/rooms/7",
       "DELETE /files/rooms/7/sources",
     ]);
+    expect(project.title).toBe("Sales");
     expect(project.aiProject.instructionsRooms.map((room) => room.id)).toEqual([12]);
     expect(project.aiProject.knowledgeRooms.map((room) => room.title)).toEqual(["Docs"]);
     expect(project.aiProject.profile?.id).toBe("p1");

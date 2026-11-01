@@ -590,6 +590,23 @@ export const createAiProject = async (data: TAiProjectRequest) => {
   return toAiProject(withSources(room, sources, model.profile, [...warnings, ...model.warnings]));
 };
 
+/** The room fields of an edit that differ from the opened project; an uploaded picture always goes. */
+const changedRoomFields = (fields: Record<string, unknown>, current: TAiProject) => {
+  const changed = { ...fields };
+  if (changed.title === current.title) delete changed.title;
+  const tags = changed.tags as string[] | undefined;
+  if (tags && tags.length === current.tags.length && tags.every((tag) => current.tags.includes(tag)))
+    delete changed.tags;
+  const sameColor = changed.color === current.logo.color.replace("#", "");
+  const sameCover = changed.cover === (current.logo.cover?.id ?? "");
+  // A room takes its colour and cover together.
+  if (sameColor && sameCover) {
+    delete changed.color;
+    delete changed.cover;
+  }
+  return changed;
+};
+
 /**
  * Saves the edit form. `current` is the project as the form opened it: its
  * linked rooms are the base of the sources diff and its model is not
@@ -598,7 +615,7 @@ export const createAiProject = async (data: TAiProjectRequest) => {
  * and logos come from the server; an unlink is applied to `current`.
  */
 export const updateAiProject = async (id: number, data: TAiProjectRequest, current?: TAiProject) => {
-  const fields = toRoomFields(data);
+  const fields = current ? changedRoomFields(toRoomFields(data), current) : toRoomFields(data);
   const toSourceDto = ({ id: roomId, title, logo }: TAiProjectSource): TSourceDto => ({
     id: roomId,
     title,
@@ -610,12 +627,17 @@ export const updateAiProject = async (id: number, data: TAiProjectRequest, curre
         knowledgeRooms: current.aiProject.knowledgeRooms.map(toSourceDto),
       }
     : null;
+  // With nothing of the room itself changed, it is neither written nor read:
+  // the opened project stands for it.
+  const keepRoom = !!current && !Object.keys(fields).length;
   const [room, linked] = await Promise.all([
-    request(
-      Object.keys(fields).length
-        ? { method: "PUT", url: `${roomsUrl}/${id}`, data: fields }
-        : { method: "GET", url: `${roomsUrl}/${id}` },
-    ),
+    keepRoom
+      ? null
+      : request(
+          Object.keys(fields).length
+            ? { method: "PUT", url: `${roomsUrl}/${id}`, data: fields }
+            : { method: "GET", url: `${roomsUrl}/${id}` },
+        ),
     known ?? getSources(id),
   ]);
   const { warnings, changed, added } = await syncSources(id, data.aiProject, linked);
@@ -634,9 +656,14 @@ export const updateAiProject = async (id: number, data: TAiProjectRequest, curre
     current && profileId !== undefined && profileId === (current.aiProject.profile?.id ?? null)
       ? { profile: current.aiProject.profile, warnings: [] as TAiProjectWarning[] }
       : await saveModel(id, profileId);
-  return toAiProject(
-    withSources(room as TAiProjectRoomDto, sources, model.profile, [...warnings, ...model.warnings]),
-  );
+  const allWarnings = [...warnings, ...model.warnings];
+  if (current && !room) {
+    const { aiProject } = toAiProject(
+      withSources({ id, security: current.security } as TAiProjectRoomDto, sources, model.profile, allWarnings),
+    );
+    return { ...current, aiProject };
+  }
+  return toAiProject(withSources(room as TAiProjectRoomDto, sources, model.profile, allWarnings));
 };
 
 /** Starts the delete; the answer is the file operation to follow. */

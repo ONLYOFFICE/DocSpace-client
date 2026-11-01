@@ -11,7 +11,7 @@ Most of the client work is already on `feature/new-ai-concept`. Tasks marked `[x
 
 ## 2. Instructions room (client + ASC.AI.Chat)
 
-- [x] 2.1 Client: hide "New folder" and the folder-upload entries inside an Instructions room, offer only a Markdown file in "Create", and refuse non-`.md` files in the upload dialog and the drop zone with a message (`EmptyViewContainer.helpers`, the main button, the context menu, the upload store); verify with E2E cases for a folder create and a `.docx` drop in an Instructions room
+- [x] 2.1 Client: hide "New folder" and the folder-upload entries inside an Instructions room, offer no "Create" (skills are uploaded: a new empty file has no frontmatter; changed 2026-11-01), and refuse non-`.md` files in the upload dialog and the drop zone with a message (`EmptyViewContainer.helpers`, the main button, the context menu, the upload store); verify with E2E cases for a folder create and a `.docx` drop in an Instructions room
 - [x] 2.2 Client: read a linked room's skills when its row is expanded in the project's Instructions card instead of on project open (`AiProjectsStore.fetchSkills` per room on demand, `ProjectSources`); verify with a unit case that opening a project makes no skills request and expanding a row makes one
 - [x] 2.3 ASC.AI.Chat: resolve the skills of composer-picked Instructions rooms (`actionArgs.contextRooms`) on every round from the server, the way `linkedSkillRooms` does for projects, instead of trusting the list the widget sent at connection; verify with a Node unit test where a skill is added between two rounds
 

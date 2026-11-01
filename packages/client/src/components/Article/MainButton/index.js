@@ -542,10 +542,10 @@ const ArticleMainButtonContent = (props) => {
     }
 
     // Instructions and Knowledge rooms are flat and hold one kind of file:
-    // no folders and no folder upload. An Instructions room creates
-    // Markdown only (its files are the skills); a Knowledge room only
-    // uploads (its files are indexed, never edited), and not at all while
-    // vectorization is off.
+    // no folders and no folder upload. An Instructions room uploads
+    // Markdown skills (a new empty file has no frontmatter, which the
+    // server refuses); a Knowledge room uploads files to index, never
+    // edited, and not at all while vectorization is off.
     if (
       currentRoomType === RoomsType.InstructionsRoom ||
       currentRoomType === RoomsType.KnowledgeRoom
@@ -579,28 +579,9 @@ const ArticleMainButtonContent = (props) => {
           ? knowledgeUploadActions
           : []
         : uploadFilesOnly;
-      const createNewMarkdown = {
-        id: "actions_new-markdown",
-        className: "main-button_drop-down",
-        icon: ActionsDocumentsReactSvgUrl,
-        label: t("Common:MarkdownFile"),
-        onClick: onCreate,
-        action: "md",
-        key: "md",
-      };
-      const sourceActions = isKnowledgeRoom ? [] : [createNewMarkdown];
-      const sourceModel =
-        sourceActions.length > 0 && sourceUploadActions.length > 0
-          ? [
-              ...sourceActions,
-              { isSeparator: true, key: "separator" },
-              ...sourceUploadActions,
-            ]
-          : [...sourceActions, ...sourceUploadActions];
-
       setUploadActions(sourceUploadActions);
-      setActions(sourceActions);
-      setModel(sourceModel);
+      setActions([]);
+      setModel(sourceUploadActions);
 
       return;
     }

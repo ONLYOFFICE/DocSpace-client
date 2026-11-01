@@ -1434,7 +1434,6 @@
   "ManualBackupDescription": "ワークスペースのすべてのデータを1つのファイルとしてダウンロードします。",
   "ManyEmails": "解析されたメールアドレスが多すぎます",
   "MarkAsFavorite": "お気に入りに登録",
-  "MarkdownFile": "Markdownファイル",
   "MarkedAsFavorite": "お気に入りに追加",
   "MaxCopies": "{{copiesCount}}は、バックアップの最大コピー数",
   "MaxCurrency": "{{currency}} の最大値",

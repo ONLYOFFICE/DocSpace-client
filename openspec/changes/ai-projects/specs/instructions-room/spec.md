@@ -28,9 +28,9 @@ An Instructions room SHALL hold Markdown (`.md`) files only: no subfolders can b
 - **WHEN** a user tries to create a folder inside an Instructions room
 - **THEN** the action is not offered and the server refuses it
 
-#### Scenario: Create a file from the room
-- **WHEN** a Content creator uses "Create" inside an Instructions room
-- **THEN** only a Markdown file can be created
+#### Scenario: Skills are uploaded, not created
+- **WHEN** a Content creator opens the empty view, the "+" menu or the main button inside an Instructions room
+- **THEN** only an upload of Markdown files from the device is offered, as a new empty file would have no frontmatter and be refused
 
 ### Requirement: Skills
 A skill SHALL be a Markdown file that starts with a YAML frontmatter block between two `---` lines, holding `name` and `description`, followed by the instructions. The server SHALL keep each skill's name and description in its skills catalog, in step with saves, moves and deletions, and the chat and the project views SHALL read them from that catalog, so both show the same name and description for a file.

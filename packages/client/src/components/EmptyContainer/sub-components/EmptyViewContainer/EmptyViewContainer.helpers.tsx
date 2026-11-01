@@ -423,14 +423,13 @@ export const getOptions = (
 
   // The flat AI source rooms: an Instructions room holds Markdown skills,
   // a Knowledge room holds files to index. Neither takes a folder.
-  const createMarkdown: EmptyViewItemType = {
-    title: t("EmptyView:CreateNewFileTitle"),
-    description: t("Common:InstructionsRoomMarkdownOnly"),
-    icon: <CreateNewFormIcon />,
-    key: "create-markdown",
-    disabled: !security?.Create,
-    onClick: () => actions.onCreate("md"),
-  };
+  // A skill is uploaded, never created here: the server refuses a Markdown
+  // file without its name / description frontmatter.
+  const uploadMarkdownFromDevice = createUploadFromDeviceOption(
+    t("EmptyView:UploadDeviceOptionTitle"),
+    t("Common:InstructionsRoomMarkdownOnly"),
+    "file",
+  );
 
   const uploadFilesFromDevice = createUploadFromDeviceOption(
     t("EmptyView:UploadDeviceOptionTitle"),
@@ -661,14 +660,14 @@ export const getOptions = (
         uploadFromDeviceAnyFile,
       ];
 
-    // Markdown only: created here or uploaded from the device (a pick from
-    // the workspace could bring any format).
+    // Markdown only, uploaded from the device (a pick from the workspace
+    // could bring any format; a new empty file has no frontmatter).
     case RoomsType.InstructionsRoom:
       if (isNotAdmin) return [];
 
-      if (isCollaborator) return [createMarkdown, uploadFilesFromDevice];
+      if (isCollaborator) return [uploadMarkdownFromDevice];
 
-      return [createMarkdown, inviteUser, uploadFilesFromDevice];
+      return [inviteUser, uploadMarkdownFromDevice];
 
     // Files to index: uploaded, never created or edited; nothing at all
     // while vectorization is off.

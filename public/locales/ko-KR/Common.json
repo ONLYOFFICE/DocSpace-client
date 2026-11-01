@@ -1434,7 +1434,6 @@
   "ManualBackupDescription": "워크스페이스의 모든 데이터를 하나의 파일로 다운로드하세요.",
   "ManyEmails": "너무 많은 이메일이 파싱되었습니다",
   "MarkAsFavorite": "즐겨 찾기로 표시",
-  "MarkdownFile": "Markdown 파일",
   "MarkedAsFavorite": "즐겨 찾기에 추가되었습니다",
   "MaxCopies": "{{copiesCount}} - 최대 백업 복사본 수",
   "MaxCurrency": "최대 {{currency}}",

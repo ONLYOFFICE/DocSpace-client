@@ -1434,7 +1434,6 @@
   "ManualBackupDescription": "Download all the data in your workspace as a single file.",
   "ManyEmails": "Too many email addresses parsed",
   "MarkAsFavorite": "Mark as favorite",
-  "MarkdownFile": "Markdown file",
   "MarkedAsFavorite": "Added to favorites",
   "MaxCopies": "{{copiesCount}} — maximum number of backup copies",
   "MaxCurrency": "max {{currency}}",

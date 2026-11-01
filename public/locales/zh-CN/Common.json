@@ -1434,7 +1434,6 @@
   "ManualBackupDescription": "将工作区中的所有数据下载为一个文件。",
   "ManyEmails": "解析的邮件过多",
   "MarkAsFavorite": "标记为收藏",
-  "MarkdownFile": "Markdown 文件",
   "MarkedAsFavorite": "已添加至收藏",
   "MaxCopies": "{{copiesCount}} - 备份的最大数量",
   "MaxCurrency": "最高 {{currency}}",

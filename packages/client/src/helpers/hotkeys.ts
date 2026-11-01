@@ -136,8 +136,9 @@ export const isKeyOwnedByFocus = (e: KeyboardEvent) => {
 
 /**
  * The create hotkeys (Shift+D/S/P/O for a file, Shift+F for a folder) do
- * nothing in the flat AI source rooms. An Instructions room creates Markdown
- * only and a Knowledge room only takes uploads; neither holds folders. The
+ * nothing in the flat AI source rooms. Both only take uploads (an
+ * Instructions room Markdown skills, which a new empty file is not);
+ * neither holds folders. The
  * rooms keep `security.Create` for uploading, so the right alone cannot
  * tell these hotkeys apart from the "+ New" menu.
  */

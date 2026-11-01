@@ -104,20 +104,25 @@ const AiProjectView = ({ aiProjectsStore: store, roomId, infoPanelVisible }: AiP
     };
   }, [store, aiChatStore, roomId]);
 
+  // Set while the view unmounts, so closing the project on the way out is
+  // not taken for a project that dropped under it.
+  const isLeavingRef = React.useRef(false);
+
   // Leaving the room (Back, another section, a deleted room) drops the open
   // project with it, and takes its settings out of the chat: the model goes
   // back to the default and its Instructions and Knowledge rooms are
   // disconnected, so a chat opened elsewhere starts clean.
-  React.useEffect(
-    () => () => {
+  React.useEffect(() => {
+    isLeavingRef.current = false;
+    return () => {
+      isLeavingRef.current = true;
       if (store.activeProject) {
         store.closeProject();
         aiChatStore.applyPreset({ profileId: null, profileName: null, contextRooms: [], knowledgeRooms: [] });
         aiChatStore.close();
       }
-    },
-    [store, aiChatStore],
-  );
+    };
+  }, [store, aiChatStore]);
 
   // The project dropped under the open chat (left, or handed over without
   // staying in it): the section goes back to the list.
@@ -126,7 +131,7 @@ const AiProjectView = ({ aiProjectsStore: store, roomId, infoPanelVisible }: AiP
       reaction(
         () => store.activeProject,
         (project, previous) => {
-          if (project === null && previous !== null) {
+          if (project === null && previous !== null && !isLeavingRef.current) {
             navigate(getCategoryUrl(CategoryType.AiHub));
           }
         },

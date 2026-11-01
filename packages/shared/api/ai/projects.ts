@@ -40,23 +40,24 @@ import { request } from "../client";
 import type { TOperation } from "../files/types";
 
 /**
- * AI Projects: a project is a room of type 12 that links Instructions rooms
- * and Knowledge rooms and shares them with a team. Served by ASC.AI.Chat
- * under `/api/2.0/ai/projects`, which delegates the room to the .NET AI
- * service as it does for agents and composes the `aiProject` block over the
- * server's linked-rooms routes, so a project comes back as a room
- * (`FolderDto`) with its `aiProject` block. The list answers the rooms
+ * AI Projects: a project is a room of type 12 under the "AI rooms" root
+ * (`FolderType.AiHub`) that links Instructions rooms and Knowledge rooms and
+ * shares them with a team. The project is an ordinary room of `files/rooms`
+ * (list with `searchArea=AiHub&type=12`, create, read, update, delete); its
+ * linked rooms are `files/rooms/{id}/sources` and the skills of those rooms
+ * `files/rooms/{id}/skills`. The project's model is proxied by ASC.AI.Chat
+ * (`ai/projects/{id}/model`) until Files serves it. This module composes the
+ * `aiProject` block the page reads from the room, its sources and its model. The list answers the rooms
  * without the block (`aiProject.partial`): a project is read again when it
  * is opened or picked.
  *
- * Like the agents API, this module holds only what is specific to a project:
- * the list with its filters, read, create, update, delete, and the skills and
- * knowledge listings. Everything a project shares with a room (pin, mute,
- * leave, owner change, logo removal, members, invitation links, history) goes through the room routes in `api/rooms`, `api/files` and
- * `api/settings`, as the room panels already do.
+ * Everything a project shares with a room (pin, mute, leave, owner change,
+ * members, invitation links, history) goes through the room routes in
+ * `api/rooms`, `api/files` and `api/settings`, as the room panels already do.
  */
 
-const baseUrl = "/ai/projects";
+const roomsUrl = "/files/rooms";
+const modelUrl = (id: number) => `/ai/projects/${id}/model`;
 
 /** `FileShare` on the server, limited to what a project uses: a Member is the room's Read. */
 export const AiProjectAccess = {
@@ -71,7 +72,7 @@ export type TAiProjectAccess =
 export const INSTRUCTIONS_ROOM_TYPE = RoomsType.InstructionsRoom;
 export const KNOWLEDGE_ROOM_TYPE = RoomsType.KnowledgeRoom;
 export const AI_PROJECT_ROOM_TYPE = RoomsType.AiProjectRoom;
-/** Rooms of one type a project links at most (`AiProjectRoomService.MaxRoomsPerType`). */
+/** Rooms of one type a project links at most (`AiHubService.MaxRoomsPerType`). */
 export const AI_PROJECT_MAX_ROOMS_PER_TYPE = 20;
 
 export type TAiProjectUser = {
@@ -126,12 +127,12 @@ export type TAiProjectLogo = {
 export type TAiProjectCover = { id: string; data: string };
 
 /**
- * A non-fatal problem of the last create or update. `roomUnavailable`: a
- * room the server refused to link or unlink; `modelNotStored`: the server
- * keeps no model with a project yet, so the chosen one was not saved.
+ * A non-fatal problem of the last create or update, after the project itself
+ * was saved. `roomUnavailable`: rooms the server refused to link or unlink;
+ * `modelNotSaved`: the model the server refused to store.
  */
 export type TAiProjectWarning = {
-  code: "grantSkipped" | "ownerLostAccess" | "roomUnavailable" | "modelNotStored";
+  code: "roomUnavailable" | "modelNotSaved";
   roomId: number | null;
   subjectId: string | null;
   /** Localised on the server. */
@@ -238,7 +239,7 @@ type TAiProjectLinkedRoom = {
 };
 
 /**
- * A linked Instructions room as `GET ai/projects/{id}/skills` lists it. The
+ * A linked Instructions room as `GET files/rooms/{id}/skills` lists it. The
  * server reads the skills through the project, so every linked room is
  * listed and none is marked unavailable.
  */
@@ -405,18 +406,139 @@ export const aiProjectToRoom = (project: TAiProject) => ({
   foldersCount: 0,
 });
 
-const toRoomFields = ({ title, tags, logo, aiProject }: TAiProjectRequest) => {
+// The room fields `files/rooms` takes; the `aiProject` block goes to the
+// sources and model routes.
+const toRoomFields = ({ title, tags, logo }: TAiProjectRequest) => {
   const body: Record<string, unknown> = {};
   if (title !== undefined) body.title = title;
   if (tags !== undefined) body.tags = tags;
   if (logo?.color !== undefined) body.color = logo.color.replace("#", "");
   if (logo?.cover !== undefined) body.cover = logo.cover;
   if (logo?.image !== undefined) body.logo = logo.image;
-  if (aiProject !== undefined) body.aiProject = aiProject;
   return body;
 };
 
 /* --------------------------------- Calls --------------------------------- */
+
+/** `FilterType.FilesOnly`. */
+const FILTER_FILES_ONLY = 1;
+/** Page size of the Files API; a larger `count` answers 400. */
+const FILES_PAGE_SIZE = 100;
+/** Files of a Knowledge room read at most; the listing reports `truncated` past it. */
+const KNOWLEDGE_FILES_LIMIT = 1000;
+/** Knowledge rooms read at a time. */
+const READ_CONCURRENCY = 4;
+
+/** A linked room as `GET files/rooms/{id}/sources` answers it. */
+type TSourceDto = { id: number; title: string; logo?: Partial<TAiProjectLogo> | null };
+type TSourcesDto = { instructionsRooms: TSourceDto[]; knowledgeRooms: TSourceDto[] };
+
+const getSources = async (id: number) =>
+  (await request({ method: "GET", url: `${roomsUrl}/${id}/sources` })) as TSourcesDto;
+
+/** The project's model; `null` when it runs on the portal default. */
+const getModel = async (id: number) =>
+  ((await request({ method: "GET", url: modelUrl(id) })) as { profile: TAiProjectProfile | null })
+    .profile;
+
+/**
+ * The project room with the `aiProject` block composed from its sources and
+ * its model (`null`: the portal default); every room the server lists is
+ * active and readable.
+ */
+const withSources = (
+  room: TAiProjectRoomDto,
+  sources: TSourcesDto,
+  profile: TAiProjectProfile | null,
+  warnings: TAiProjectWarning[] = [],
+): TAiProjectRoomDto => {
+  const toSource = (roomType: number) => (source: TSourceDto) => ({
+    id: source.id,
+    title: source.title,
+    roomType,
+    available: true,
+    archived: false,
+    logo: source.logo ?? null,
+  });
+  return {
+    ...room,
+    aiProject: {
+      profile,
+      instructionsRooms: sources.instructionsRooms.map(toSource(INSTRUCTIONS_ROOM_TYPE)),
+      knowledgeRooms: sources.knowledgeRooms.map(toSource(KNOWLEDGE_ROOM_TYPE)),
+      canEditSettings: !!room.security?.EditRoom,
+      ...(warnings.length ? { warnings } : {}),
+    },
+  };
+};
+
+const errorMessage = (e: unknown) => {
+  const response = (e as { response?: { data?: { error?: { message?: string } | string } } })
+    ?.response?.data?.error;
+  return (typeof response === "string" ? response : response?.message) || String((e as Error)?.message ?? e);
+};
+
+/**
+ * Brings the project's sources to the lists asked for: rooms not linked yet
+ * are linked, linked rooms left out of a sent list are unlinked, a list not
+ * sent keeps its rooms. A refused call does not fail the save, as the
+ * project itself is already written: it comes back as a warning.
+ */
+const syncSources = async (
+  id: number,
+  settings: TAiProjectSettingsRequest | undefined,
+  current: TSourcesDto,
+) => {
+  const toAdd: number[] = [];
+  const toRemove: number[] = [];
+  const diff = (wanted: number[] | undefined, linked: TSourceDto[]) => {
+    if (!wanted) return;
+    const linkedIds = linked.map((room) => room.id);
+    toAdd.push(...wanted.filter((roomId) => !linkedIds.includes(roomId)));
+    toRemove.push(...linkedIds.filter((roomId) => !wanted.includes(roomId)));
+  };
+  diff(settings?.instructionsRoomIds, current.instructionsRooms);
+  diff(settings?.knowledgeRoomIds, current.knowledgeRooms);
+
+  const warnings: TAiProjectWarning[] = [];
+  const attempt = async (method: "POST" | "DELETE", roomIds: number[]) => {
+    if (!roomIds.length) return;
+    try {
+      await request({ method, url: `${roomsUrl}/${id}/sources`, data: { roomIds } });
+    } catch (e) {
+      warnings.push({
+        code: "roomUnavailable",
+        roomId: roomIds.length === 1 ? roomIds[0] : null,
+        subjectId: null,
+        message: errorMessage(e),
+      });
+    }
+  };
+  await attempt("DELETE", toRemove);
+  await attempt("POST", toAdd);
+  return { warnings, changed: toAdd.length + toRemove.length > 0 };
+};
+
+/**
+ * Stores the model sent (`null`: the portal default) and answers the one the
+ * project keeps; a refused write does not fail the save and comes back as a
+ * warning. `undefined` keeps the model without a write.
+ */
+const saveModel = async (id: number, profileId: string | null | undefined) => {
+  const warnings: TAiProjectWarning[] = [];
+  try {
+    if (profileId !== undefined) {
+      const res = (await request({ method: "PUT", url: modelUrl(id), data: { profileId } })) as {
+        profile: TAiProjectProfile | null;
+      };
+      return { profile: res.profile, warnings };
+    }
+  } catch (e) {
+    warnings.push({ code: "modelNotSaved", roomId: null, subjectId: null, message: errorMessage(e) });
+  }
+  // The model kept: a project the model route cannot read runs on the default.
+  return { profile: await getModel(id).catch(() => null), warnings };
+};
 
 export const getAiProjects = async (
   query: TAiProjectsQuery = {},
@@ -424,7 +546,7 @@ export const getAiProjects = async (
 ) => {
   const res = await request({
     method: "GET",
-    url: `${baseUrl}${toParams(query)}`,
+    url: `${roomsUrl}${toParams({ ...query, searchArea: "AiHub", type: AI_PROJECT_ROOM_TYPE })}`,
     signal,
   });
   // An envelope that reports `total` reaches here as `{ total, items }`.
@@ -436,54 +558,153 @@ export const getAiProjects = async (
 
 /** Drops the project's uploaded logo; it is drawn by its colour and cover again. */
 export const deleteAiProjectLogo = async (id: number) => {
-  const res = await request({ method: "DELETE", url: `${baseUrl}/${id}/logo` });
+  const res = await request({ method: "DELETE", url: `${roomsUrl}/${id}/logo` });
   return toAiProject(res as TAiProjectRoomDto);
 };
 
 export const getAiProject = async (id: number) => {
-  const res = await request({ method: "GET", url: `${baseUrl}/${id}` });
-  return toAiProject(res as TAiProjectRoomDto);
+  const [room, sources, profile] = await Promise.all([
+    request({ method: "GET", url: `${roomsUrl}/${id}` }),
+    getSources(id),
+    // A model that cannot be read leaves the project on the portal default.
+    getModel(id).catch(() => null),
+  ]);
+  return toAiProject(withSources(room as TAiProjectRoomDto, sources, profile));
 };
 
 export const createAiProject = async (data: TAiProjectRequest) => {
-  const res = await request({ method: "POST", url: baseUrl, data: toRoomFields(data) });
-  return toAiProject(res as TAiProjectRoomDto);
+  const room = (await request({
+    method: "POST",
+    url: roomsUrl,
+    data: { ...toRoomFields(data), roomType: AI_PROJECT_ROOM_TYPE },
+  })) as TAiProjectRoomDto;
+  const { warnings, changed } = await syncSources(room.id, data.aiProject, {
+    instructionsRooms: [],
+    knowledgeRooms: [],
+  });
+  const sources = changed ? await getSources(room.id) : { instructionsRooms: [], knowledgeRooms: [] };
+  // A new project runs on the default until a model is chosen.
+  const model = data.aiProject?.profileId
+    ? await saveModel(room.id, data.aiProject.profileId)
+    : { profile: null, warnings: [] };
+  return toAiProject(withSources(room, sources, model.profile, [...warnings, ...model.warnings]));
 };
 
 export const updateAiProject = async (id: number, data: TAiProjectRequest) => {
-  const res = await request({
-    method: "PUT",
-    url: `${baseUrl}/${id}`,
-    data: toRoomFields(data),
-  });
-  return toAiProject(res as TAiProjectRoomDto);
+  const fields = toRoomFields(data);
+  const [room, current] = await Promise.all([
+    request(
+      Object.keys(fields).length
+        ? { method: "PUT", url: `${roomsUrl}/${id}`, data: fields }
+        : { method: "GET", url: `${roomsUrl}/${id}` },
+    ),
+    getSources(id),
+  ]);
+  const { warnings, changed } = await syncSources(id, data.aiProject, current);
+  const sources = changed ? await getSources(id) : current;
+  const model = await saveModel(id, data.aiProject?.profileId);
+  return toAiProject(
+    withSources(room as TAiProjectRoomDto, sources, model.profile, [...warnings, ...model.warnings]),
+  );
 };
 
 /** Starts the delete; the answer is the file operation to follow. */
 export const deleteAiProject = async (id: number) => {
   const res = await request({
     method: "DELETE",
-    url: `${baseUrl}/${id}`,
+    url: `${roomsUrl}/${id}`,
     data: { deleteAfter: false },
   });
   return res as TOperation;
 };
 
 export const getAiProjectSkills = async (id: number) => {
-  const res = await request({ method: "GET", url: `${baseUrl}/${id}/skills` });
+  const res = await request({ method: "GET", url: `${roomsUrl}/${id}/skills` });
   return (res as { rooms: TAiProjectSkillsRoom[] }).rooms.map((room) => ({
     ...room,
     logo: room.logo ? toLogo(room.logo) : null,
   }));
 };
 
+type TKnowledgeFileDto = {
+  id: number;
+  title: string;
+  fileExst?: string;
+  vectorizationStatus?: VectorizationStatus | null;
+  security?: { Vectorization?: boolean };
+};
+
+// The files of a Knowledge room (`GET files/{roomId}`, files only), page by
+// page up to the limit, with their vectorization state and the room's total.
+const getKnowledgeFiles = async (roomId: number) => {
+  const files: TAiProjectKnowledgeFile[] = [];
+  let total = 0;
+  for (let startIndex = 0; startIndex < KNOWLEDGE_FILES_LIMIT; startIndex += FILES_PAGE_SIZE) {
+    const page = (await request({
+      method: "GET",
+      url: `/files/${roomId}${toParams({ filterType: FILTER_FILES_ONLY, count: FILES_PAGE_SIZE, startIndex })}`,
+    })) as { files?: TKnowledgeFileDto[]; total?: number };
+    const pageFiles = page.files ?? [];
+    for (const file of pageFiles) {
+      const status = file.vectorizationStatus ?? null;
+      files.push({
+        id: file.id,
+        title: file.title,
+        fileExst: file.fileExst ?? file.title.slice(file.title.lastIndexOf(".")),
+        indexed: status === VectorizationStatus.Completed,
+        vectorizationStatus: status,
+        security: { Vectorization: !!file.security?.Vectorization },
+      });
+    }
+    total = page.total ?? startIndex + pageFiles.length;
+    if (startIndex + FILES_PAGE_SIZE >= total || pageFiles.length === 0) break;
+  }
+  return { files, total };
+};
+
+/**
+ * The linked Knowledge rooms with their files (at most 1000 a room,
+ * `truncated` past it), their vectorization state and counters. A room that
+ * cannot be read comes back with `available: false` and no files.
+ */
 export const getAiProjectKnowledge = async (id: number) => {
-  const res = await request({
-    method: "GET",
-    url: `${baseUrl}/${id}/knowledge`,
-  });
-  return (res as { rooms: TAiProjectKnowledgeRoom[] }).rooms.map((room) => ({
-    ...room,
-    logo: room.logo ? toLogo(room.logo) : null,
-  }));
+  const { knowledgeRooms } = await getSources(id);
+  const rooms: TAiProjectKnowledgeRoom[] = new Array(knowledgeRooms.length);
+  let next = 0;
+  const worker = async () => {
+    while (next < knowledgeRooms.length) {
+      const index = next;
+      next += 1;
+      const room = knowledgeRooms[index];
+      const base = { id: room.id, title: room.title, logo: room.logo ? toLogo(room.logo) : null };
+      try {
+        const { files, total } = await getKnowledgeFiles(room.id);
+        rooms[index] = {
+          ...base,
+          available: true,
+          totalFiles: total,
+          indexedFiles: files.filter((file) => file.indexed).length,
+          failedFiles: files.filter(
+            (file) => file.vectorizationStatus === VectorizationStatus.Failed,
+          ).length,
+          truncated: total > files.length,
+          files,
+        };
+      } catch {
+        rooms[index] = {
+          ...base,
+          available: false,
+          totalFiles: 0,
+          indexedFiles: 0,
+          failedFiles: 0,
+          truncated: false,
+          files: [],
+        };
+      }
+    }
+  };
+  await Promise.all(
+    Array.from({ length: Math.min(READ_CONCURRENCY, knowledgeRooms.length) }, worker),
+  );
+  return rooms;
 };

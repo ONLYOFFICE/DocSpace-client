@@ -17,6 +17,13 @@ The client SHALL keep the AI rooms root that `GET files/@root` returns while AI 
 - **WHEN** `@root` answers without the AI root
 - **THEN** the section is not shown and its routes redirect to the default start page
 
+### Requirement: AI turned off while open
+When an admin turns AI off for the portal (`s:change-ai-access-settings` with `enabled: false`), every open client SHALL drop the AI rooms section without a reload: the folder tree is read again, the section's routes redirect to the user's start page, and a user who was inside the section or a project SHALL see a toast saying AI was turned off. Turning AI back on SHALL bring the section back the same way, without a toast.
+
+#### Scenario: Turned off under an open project
+- **WHEN** an admin turns AI off while a member has a project open
+- **THEN** the member lands on their start page with a toast that AI was turned off, and "AI rooms" leaves the sidebar
+
 ### Requirement: Routes
 The section SHALL use the paths the server links to (`PathProvider`): `/ai-rooms/filter`, a room or project at `/ai-rooms/{id}/filter?folder={id}`, and the slots `/ai-rooms/recent|favorites|trash` (with `/filter`). There SHALL be no `/ai-projects` route. The bare `/ai-rooms` SHALL stay the SDK frame page. With AI services off, every section route SHALL redirect to the default start page.
 

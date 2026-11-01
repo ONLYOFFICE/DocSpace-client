@@ -82,6 +82,10 @@ const HOLDER = "data-row-focus";
 
 const isHolder = (el: Element) => el.hasAttribute(HOLDER);
 
+// The rows still held, each by its release: the list going away ends them,
+// so no listener outlives it.
+const heldRows = new Set<() => void>();
+
 const rowHolder = (row: HTMLElement) => {
   const holder =
     getComputedStyle(row).display === "contents"
@@ -119,10 +123,6 @@ const rowHolder = (row: HTMLElement) => {
   heldRows.add(release);
   return holder;
 };
-
-// The rows still held, each by its release: the list going away ends them,
-// so no listener outlives it.
-const heldRows = new Set<() => void>();
 
 // The first row inside the list's visible area: a virtualized list renders
 // rows above and below it too, which Tab must not select.

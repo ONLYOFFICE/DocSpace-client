@@ -1,0 +1,148 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { act, fireEvent, renderHook, waitFor } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+import { useRowFocus } from "../useRowFocus";
+
+// A table view of two rows: each row is display: contents, so its first cell
+// holds the focus for it. Outside the list, an info panel draws a files item
+// of its own.
+const buildPage = () => {
+  document.body.innerHTML = `
+    <div class="section-scroll">
+      <div id="file_1" class="files-item row-a_docx" style="display: contents">
+        <div class="table-container_cell" data-testid="a-name">A</div>
+        <div class="table-container_cell" data-testid="a-date">
+          <button type="button" data-testid="a-menu">menu</button>
+        </div>
+      </div>
+      <div id="file_2" class="files-item row-b_docx" style="display: contents">
+        <div class="table-container_cell" data-testid="b-name">B</div>
+        <div class="table-container_cell">
+          <button type="button" data-testid="b-menu">menu</button>
+        </div>
+      </div>
+    </div>
+    <div class="section-scroll info-panel-scroll">
+      <div class="files-item">
+        <button type="button" data-testid="panel-button">panel</button>
+      </div>
+    </div>
+    <button type="button" data-testid="outside">outside</button>
+  `;
+};
+
+const byTestId = (id: string) =>
+  document.querySelector<HTMLElement>(`[data-testid="${id}"]`)!;
+
+const CARET_A = { id: "row-a", fileExst: "docx" };
+
+// The caret moved to row A from the keyboard: its first cell takes the focus.
+const focusRowA = async () => {
+  const onRowFocus = vi.fn();
+  const hook = renderHook(
+    ({ caret }) => useRowFocus(caret, onRowFocus),
+    { initialProps: { caret: null as typeof CARET_A | null } },
+  );
+  fireEvent.keyDown(window, { key: "ArrowDown" });
+  hook.rerender({ caret: CARET_A });
+  await waitFor(() => expect(byTestId("a-name")).toHaveFocus());
+  return hook;
+};
+
+describe("useRowFocus", () => {
+  beforeEach(() => {
+    buildPage();
+    // jsdom lays nothing out: every element counts as rendered.
+    vi.spyOn(Element.prototype, "getClientRects").mockImplementation(() => {
+      const rects = [new DOMRect(0, 0, 10, 10)];
+      return Object.assign(rects, { item: (i: number) => rects[i] ?? null });
+    });
+    // jsdom has no CSS.escape; the class names here need no escaping.
+    if (!globalThis.CSS?.escape)
+      vi.stubGlobal("CSS", { escape: (value: string) => value });
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+    document.body.innerHTML = "";
+  });
+
+  // A table row is several cells: a press on any of them is still on the
+  // row, which must stay able to take the focus back.
+  it("keeps the row held when the pointer presses another of its cells", async () => {
+    await focusRowA();
+    const holder = byTestId("a-name");
+
+    fireEvent.pointerDown(byTestId("a-date"));
+
+    expect(holder).toHaveAttribute("data-row-focus");
+    expect(holder).toHaveAttribute("tabindex", "-1");
+
+    fireEvent.pointerDown(byTestId("b-name"));
+
+    expect(holder).not.toHaveAttribute("data-row-focus");
+    expect(holder).not.toHaveAttribute("tabindex");
+  });
+
+  // The focus left the list for a dialog: the row stays held for it to come
+  // back, but the list going away must not leave that behind.
+  it("releases a row still held when the list goes away", async () => {
+    const hook = await focusRowA();
+    const holder = byTestId("a-name");
+
+    act(() => byTestId("outside").focus());
+    expect(holder).toHaveAttribute("data-row-focus");
+
+    hook.unmount();
+
+    expect(holder).not.toHaveAttribute("data-row-focus");
+    expect(holder).not.toHaveAttribute("tabindex");
+  });
+
+  // Tab out of the list takes the other rows' controls out of the order for
+  // that one key - the list's rows, not a files item elsewhere on the page.
+  it("takes only the list's other rows out of the Tab order when Tab leaves", async () => {
+    await focusRowA();
+
+    fireEvent.keyDown(byTestId("a-name"), { key: "Tab" });
+
+    expect(byTestId("b-menu")).toHaveAttribute("tabindex", "-1");
+    expect(byTestId("panel-button")).not.toHaveAttribute("tabindex");
+  });
+});

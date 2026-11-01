@@ -93,7 +93,9 @@ const rowHolder = (row: HTMLElement) => {
   // tile would focus it, where nothing took the focus before. The focus moving
   // on within the list ends that at once. Leaving the list - for a dialog or a
   // menu the row opened, or another window - it stays, so the focus can be
-  // given back to the row; the next press of the pointer elsewhere ends it.
+  // given back to the row; the next press of the pointer on another row, or
+  // outside the list, ends it - a table row is several cells, and a press on
+  // any of them is still on the row.
   const addedTabIndex = !holder.hasAttribute("tabindex");
   if (addedTabIndex) holder.setAttribute("tabindex", "-1");
   holder.setAttribute(HOLDER, "");
@@ -103,18 +105,24 @@ const rowHolder = (row: HTMLElement) => {
     holder.removeAttribute(HOLDER);
     holder.removeEventListener("blur", onBlur);
     window.removeEventListener("pointerdown", onPointerDown, true);
+    heldRows.delete(release);
   };
   const onBlur = (e: FocusEvent) => {
     if (e.relatedTarget instanceof Element && e.relatedTarget.closest(LIST))
       release();
   };
   const onPointerDown = (e: PointerEvent) => {
-    if (!(e.target instanceof Node && holder.contains(e.target))) release();
+    if (!(e.target instanceof Element && rowOf(e.target) === row)) release();
   };
   holder.addEventListener("blur", onBlur);
   window.addEventListener("pointerdown", onPointerDown, true);
+  heldRows.add(release);
   return holder;
 };
+
+// The rows still held, each by its release: the list going away ends them,
+// so no listener outlives it.
+const heldRows = new Set<() => void>();
 
 // The first row inside the list's visible area: a virtualized list renders
 // rows above and below it too, which Tab must not select.
@@ -271,7 +279,11 @@ export const useRowFocus = (
         // A restore still waiting from a fast earlier Tab runs first: the
         // stops it took out must be found, and saved with their own values.
         restorePending();
-        const others = getTabStops(document.body).filter((stop) => {
+        // Rows live in the list: their stops are looked for there, not in
+        // the whole page.
+        const others = getTabStops(
+          document.querySelector<HTMLElement>(LIST) ?? document.body,
+        ).filter((stop) => {
           const stopRow = rowOf(stop);
           return !!stopRow && stopRow !== row;
         });
@@ -350,6 +362,7 @@ export const useRowFocus = (
     document.addEventListener("focusin", onFocusIn);
     return () => {
       restorePending();
+      heldRows.forEach((release) => release());
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("blur", onWindowBlur);
       document.removeEventListener("focusin", onFocusIn);

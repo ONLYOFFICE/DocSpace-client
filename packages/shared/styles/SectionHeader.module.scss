@@ -58,9 +58,18 @@
   }
 
   // The chat toolbar of an open AI project ends right before the header's
-  // own buttons block, which already keeps its 20px gap from it.
+  // own buttons block (the info panel toggle). That block keeps a 20px gap
+  // from the control buttons, which reads as an empty slot after the
+  // toolbar's last button; in a project it is spaced like the toolbar's own
+  // buttons. The block has no class of its own outside ui-kit, so it is
+  // matched by its CSS module name.
   .projectChatToolbar {
     padding-inline-end: 0;
+  }
+
+  &:has(.projectChatToolbar)
+    :global([class*="buttonsContainer"]) {
+    margin-inline-start: 8px;
   }
 
   :global(.table-container_group-menu) {

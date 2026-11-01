@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Təlimat otaqları bacarıqları, Bilik otaqları söhbətin axtarış apardığı faylları saxlayır, AI layihələri isə onları model ilə birləşdirir və bu quraşdırmanı dəvət etdiyiniz şəxslərlə paylaşır.",
   "AiRoomsEmptyUser": "Sizinlə hələ heç bir AI otağı paylaşılmayıb",
   "AiRoomsEmptyUserDescription": "AI otaqları otaq administratorları tərəfindən qurulur. Kimsə sizi otağa dəvət etdikdə, o burada görünəcək.",
+  "AiRoomsTurnedOff": "AI söndürülüb. Super administrator onu yenidən aktivləşdirənə qədər AI otaqları əlçatan olmayacaq.",
   "AIProjectSkillsEmpty": "Bu otaqda hələ bacarıq yoxdur.",
   "AIProjectSources": "Mənbələr",
   "AIProjectRoomDescription": "Üzvlərinin söhbətləri üçün modeli, Təlimat otaqlarını və Bilik otaqlarını birləşdirən layihə.",

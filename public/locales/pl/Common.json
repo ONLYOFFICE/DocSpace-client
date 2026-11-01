@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Pokoje instrukcji zawierają umiejętności, pokoje wiedzy — pliki przeszukiwane przez czat, a projekty AI łączą je z modelem i udostępniają tę konfigurację zaproszonym osobom.",
   "AiRoomsEmptyUser": "Nikt jeszcze nie udostępnił Ci pokoi AI",
   "AiRoomsEmptyUserDescription": "Pokoje AI tworzą administratorzy pokoi. Gdy ktoś zaprosi Cię do takiego pokoju, pojawi się on tutaj.",
+  "AiRoomsTurnedOff": "AI zostało wyłączone. Pokoje AI będą niedostępne, dopóki superadministrator ponownie go nie włączy.",
   "AIProjectSkillsEmpty": "Ten pokój nie ma jeszcze żadnych umiejętności.",
   "AIProjectSources": "Źródła",
   "AIProjectRoomDescription": "Projekt, który łączy model, pokoje instrukcji i pokoje wiedzy na potrzeby czatów swoich członków.",

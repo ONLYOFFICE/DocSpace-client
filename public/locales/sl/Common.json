@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Sobe z navodili vsebujejo veščine, sobe znanja datoteke, ki jih preiskuje klepet, projekti AI pa jih združujejo z modelom in to nastavitev delijo z ljudmi, ki jih povabite.",
   "AiRoomsEmptyUser": "Z vami še ni deljena nobena soba AI",
   "AiRoomsEmptyUserDescription": "Sobe AI nastavljajo skrbniki sob. Ko vas nekdo povabi v sobo, se ta prikaže tukaj.",
+  "AiRoomsTurnedOff": "AI je izklopljen. Sobe AI ne bodo na voljo, dokler ga superskrbnik znova ne vklopi.",
   "AIProjectSkillsEmpty": "Ta soba še nima veščin.",
   "AIProjectSources": "Viri",
   "AIProjectRoomDescription": "Projekt, ki za klepete svojih članov povezuje model, sobe z navodili in sobe znanja.",

@@ -62,6 +62,8 @@ import {
   setInfoPanelSelectedRoom,
 } from "SRC_DIR/helpers/info-panel";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import i18n from "../../i18n";
 
 import type { Nullable } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
@@ -494,6 +496,32 @@ export function wsChangeFolderAccessRightsImpl(
 
   self.refreshFolder(selectedId!);
   self.refreshFiles();
+}
+
+/**
+ * The portal's AI switch was turned off or on (by an admin, on any device).
+ * The AI rooms root comes and goes with it in `@root`, so the tree is read
+ * again; the AI rooms routes follow `aiServicesEnabled` and take a user who
+ * is inside the section to their start page, with a toast saying why.
+ */
+export function wsChangeAiAccessSettingsImpl(
+  self: FilesStore,
+  data?: { enabled?: boolean },
+) {
+  if (typeof data?.enabled !== "boolean") return;
+  const { enabled } = data;
+
+  console.log("[WS] change ai access settings", { enabled });
+
+  const isInAiRooms =
+    self.selectedFolderStore.rootFolderType === FolderType.AiHub;
+
+  self.settingsStore.setAiServicesEnabled(enabled);
+  self.treeFoldersStore.fetchTreeFolders();
+
+  if (!enabled && isInAiRooms) {
+    toastr.warning(i18n.t("Common:AiRoomsTurnedOff"));
+  }
 }
 
 export function redirectToParentImpl(

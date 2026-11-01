@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Sobe za instrukcije sadrže veštine, sobe znanja datoteke koje ćaskanje pretražuje, a AI projekti ih objedinjuju sa modelom i dele tu postavku sa ljudima koje pozovete.",
   "AiRoomsEmptyUser": "Još uvek nema AI soba podeljenih sa vama",
   "AiRoomsEmptyUserDescription": "AI sobe podešavaju administratori soba. Kada vas neko pozove u takvu sobu, ona će se pojaviti ovde.",
+  "AiRoomsTurnedOff": "AI je isključena. AI sobe neće biti dostupne dok je superadministrator ponovo ne uključi.",
   "AIProjectSkillsEmpty": "Ova soba još uvek nema veštine.",
   "AIProjectSources": "Izvori",
   "AIProjectRoomDescription": "Projekat koji povezuje model, sobe za instrukcije i sobe znanja za ćaskanja svojih članova.",

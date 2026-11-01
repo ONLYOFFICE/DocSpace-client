@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Instructiekamers bevatten vaardigheden, kenniskamers bevatten de bestanden die de chat doorzoekt, en AI-projecten brengen ze samen met een model en delen die configuratie met de mensen die u uitnodigt.",
   "AiRoomsEmptyUser": "Er zijn nog geen AI-kamers met u gedeeld",
   "AiRoomsEmptyUserDescription": "AI-kamers worden ingesteld door kamerbeheerders. Wanneer iemand u voor een kamer uitnodigt, verschijnt die hier.",
+  "AiRoomsTurnedOff": "AI is uitgeschakeld. AI-kamers zijn niet beschikbaar totdat de superbeheerder AI weer inschakelt.",
   "AIProjectSkillsEmpty": "Deze kamer heeft nog geen vaardigheden.",
   "AIProjectSources": "Bronnen",
   "AIProjectRoomDescription": "Een project dat een model, instructiekamers en kenniskamers bundelt voor de chats van zijn leden.",

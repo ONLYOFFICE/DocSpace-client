@@ -165,6 +165,7 @@ import {
   wsModifyFolderDeleteImpl,
   wsCreatedPDFFormImpl,
   wsChangeFolderAccessRightsImpl,
+  wsChangeAiAccessSettingsImpl,
   redirectToParentImpl,
   syncSelectedFolderCountsImpl,
 } from "./filesStore/socket.helpers";
@@ -596,6 +597,15 @@ class FilesStore {
       }) as unknown as TUnmappedSocketListener,
     );
 
+    SocketHelper?.on(
+      SocketEvents.ChangeAiAccessSettings,
+      // The ui-kit maps this event to a zero-arg listener, while the server
+      // sends `{ enabled }`; the erased cast takes the payload.
+      ((data?: { enabled?: boolean }) => {
+        this.wsChangeAiAccessSettings(data);
+      }) as unknown as () => void,
+    );
+
     SocketHelper?.on(SocketEvents.StopEditFile, (data) => {
       const fileId = typeof data === "object" ? data.fileId : data;
 
@@ -675,6 +685,9 @@ class FilesStore {
 
   wsChangeFolderAccessRights = (option: TOptSocket) =>
     wsChangeFolderAccessRightsImpl(this, option);
+
+  wsChangeAiAccessSettings = (data?: { enabled?: boolean }) =>
+    wsChangeAiAccessSettingsImpl(this, data);
 
   redirectToParent = (
     opt: TOptSocket,

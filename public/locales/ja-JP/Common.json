@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "指示ルームにはスキルが、ナレッジルームにはチャットが検索するファイルが保存されます。AIプロジェクトはそれらをモデルとまとめ、その構成を招待したユーザーと共有します。",
   "AiRoomsEmptyUser": "共有されているAIルームはまだありません",
   "AiRoomsEmptyUserDescription": "AIルームはルームの管理者が設定します。招待されるとここに表示されます。",
+  "AiRoomsTurnedOff": "AIがオフになりました。スーパー管理者が再びオンにするまで、AIルームは利用できません。",
   "AIProjectSkillsEmpty": "このルームにはまだスキルがありません。",
   "AIProjectSources": "ソース",
   "AIProjectRoomDescription": "メンバーのチャット用に、モデル、指示ルーム、ナレッジルームをまとめたプロジェクトです。",

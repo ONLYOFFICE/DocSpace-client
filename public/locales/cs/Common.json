@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Instrukční místnosti obsahují dovednosti, znalostní místnosti obsahují soubory, které prohledává chat, a AI projekty je propojují s modelem a sdílejí toto nastavení s lidmi, které pozvete.",
   "AiRoomsEmptyUser": "Zatím s vámi nebyly sdíleny žádné AI místnosti",
   "AiRoomsEmptyUserDescription": "AI místnosti nastavují administrátoři místností. Když vás někdo do místnosti pozve, zobrazí se zde.",
+  "AiRoomsTurnedOff": "AI bylo vypnuto. AI místnosti nebudou dostupné, dokud je supersprávce znovu nezapne.",
   "AIProjectSkillsEmpty": "Tato místnost zatím nemá žádné dovednosti.",
   "AIProjectSources": "Zdroje",
   "AIProjectRoomDescription": "Projekt, který pro chaty svých členů propojuje model, instrukční místnosti a znalostní místnosti.",

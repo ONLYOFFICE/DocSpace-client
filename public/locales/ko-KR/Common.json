@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "지침 방에는 스킬이, 지식 방에는 채팅이 검색하는 파일이 보관됩니다. AI 프로젝트는 이들을 모델과 하나로 묶고 그 구성을 초대한 사람들과 공유합니다.",
   "AiRoomsEmptyUser": "아직 공유된 AI 방이 없습니다",
   "AiRoomsEmptyUserDescription": "AI 방은 방 관리자가 설정합니다. 누군가 방에 초대하면 여기에 표시됩니다.",
+  "AiRoomsTurnedOff": "AI가 꺼졌습니다. 슈퍼 관리자가 다시 켤 때까지 AI 방을 사용할 수 없습니다.",
   "AIProjectSkillsEmpty": "이 방에는 아직 스킬이 없습니다.",
   "AIProjectSources": "소스",
   "AIProjectRoomDescription": "멤버의 채팅을 위해 모델, 지침 방, 지식 방을 하나로 묶는 프로젝트입니다.",

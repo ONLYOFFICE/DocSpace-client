@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Le stanze delle istruzioni contengono competenze, le stanze della conoscenza contengono i file in cui la chat esegue ricerche e i progetti IA le riuniscono con un modello e condividono questa configurazione con le persone che inviti.",
   "AiRoomsEmptyUser": "Ancora nessuna stanza IA condivisa con te",
   "AiRoomsEmptyUserDescription": "Le stanze IA vengono configurate dagli amministratori delle stanze. Quando qualcuno ti invita in una stanza, questa appare qui.",
+  "AiRoomsTurnedOff": "L'IA è stata disattivata. Le stanze IA non saranno disponibili finché il superamministratore non la riattiverà.",
   "AIProjectSkillsEmpty": "Questa stanza non ha ancora competenze.",
   "AIProjectSources": "Fonti",
   "AIProjectRoomDescription": "Un progetto che riunisce un modello, stanze delle istruzioni e stanze della conoscenza per le chat dei suoi membri.",

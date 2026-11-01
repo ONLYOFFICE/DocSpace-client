@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Phòng hướng dẫn chứa kỹ năng, Phòng kiến thức chứa các tệp mà cuộc trò chuyện tìm kiếm, còn dự án AI kết hợp chúng với một mô hình và chia sẻ thiết lập đó với những người bạn mời.",
   "AiRoomsEmptyUser": "Chưa có phòng AI nào được chia sẻ với bạn",
   "AiRoomsEmptyUserDescription": "Phòng AI do quản trị viên phòng thiết lập. Khi có người mời bạn vào một phòng, phòng đó sẽ xuất hiện tại đây.",
+  "AiRoomsTurnedOff": "AI đã bị tắt. Phòng AI sẽ không khả dụng cho đến khi siêu quản trị viên bật lại.",
   "AIProjectSkillsEmpty": "Phòng này chưa có kỹ năng nào.",
   "AIProjectSources": "Nguồn",
   "AIProjectRoomDescription": "Dự án kết hợp một mô hình, các Phòng hướng dẫn và Phòng kiến thức cho các cuộc trò chuyện của thành viên.",

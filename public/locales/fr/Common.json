@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Les salles d'instructions contiennent des compétences, les salles de connaissances contiennent les fichiers dans lesquels le chat effectue ses recherches, et les projets IA les réunissent avec un modèle et partagent cette configuration avec les personnes que vous invitez.",
   "AiRoomsEmptyUser": "Aucune salle IA partagée avec vous pour l'instant",
   "AiRoomsEmptyUserDescription": "Les salles IA sont configurées par les administrateurs de salle. Lorsque quelqu'un vous invite dans une salle, elle apparaît ici.",
+  "AiRoomsTurnedOff": "L'IA a été désactivée. Les salles IA restent indisponibles jusqu'à ce que le super-administrateur la réactive.",
   "AIProjectSkillsEmpty": "Cette salle ne contient encore aucune compétence.",
   "AIProjectSources": "Sources",
   "AIProjectRoomDescription": "Un projet qui associe un modèle, des salles d'instructions et des salles de connaissances pour les chats de ses membres.",

@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Anweisungsräume enthalten Skills, Wissensräume enthalten die Dateien, die der Chat durchsucht, und KI-Projekte führen sie mit einem Modell zusammen und teilen diese Konfiguration mit den Personen, die Sie einladen.",
   "AiRoomsEmptyUser": "Noch keine KI-Räume für Sie freigegeben",
   "AiRoomsEmptyUserDescription": "KI-Räume werden von Raum-Admins eingerichtet. Wenn Sie jemand zu einem Raum einlädt, erscheint er hier.",
+  "AiRoomsTurnedOff": "KI wurde deaktiviert. KI-Räume sind nicht verfügbar, bis der Super-Administrator sie wieder aktiviert.",
   "AIProjectSkillsEmpty": "Dieser Raum enthält noch keine Skills.",
   "AIProjectSources": "Quellen",
   "AIProjectRoomDescription": "Ein Projekt, das ein Modell, Anweisungsräume und Wissensräume für die Chats seiner Mitglieder verbindet.",

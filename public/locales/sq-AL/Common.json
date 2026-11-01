@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Dhomat e udhëzimeve mbajnë aftësi, dhomat e njohurive mbajnë skedarët ku kërkon biseda, dhe projektet IA i bashkojnë ato me një model dhe e ndajnë këtë konfigurim me njerëzit që ftoni.",
   "AiRoomsEmptyUser": "Ende nuk është ndarë asnjë dhomë IA me ju",
   "AiRoomsEmptyUserDescription": "Dhomat IA konfigurohen nga administratorët e dhomave. Kur dikush ju fton në një të tillë, ajo shfaqet këtu.",
+  "AiRoomsTurnedOff": "IA është çaktivizuar. Dhomat IA nuk do të jenë të disponueshme derisa superadministratori ta aktivizojë sërish.",
   "AIProjectSkillsEmpty": "Kjo dhomë nuk ka ende aftësi.",
   "AIProjectSources": "Burimet",
   "AIProjectRoomDescription": "Një projekt që bashkon një model, dhoma udhëzimesh dhe dhoma njohurish për bisedat e anëtarëve të tij.",

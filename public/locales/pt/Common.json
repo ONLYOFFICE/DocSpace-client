@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "As salas de instruções contêm competências, as salas de conhecimento contêm os ficheiros que o chat pesquisa e os projetos de IA reúnem-nas com um modelo e partilham essa configuração com as pessoas que convidar.",
   "AiRoomsEmptyUser": "Ainda não há salas de IA partilhadas consigo",
   "AiRoomsEmptyUserDescription": "As salas de IA são configuradas pelos administradores de sala. Quando alguém o convidar para uma, ela aparecerá aqui.",
+  "AiRoomsTurnedOff": "A IA foi desativada. As salas de IA ficam indisponíveis até que o superadministrador a volte a ativar.",
   "AIProjectSkillsEmpty": "Esta sala ainda não tem competências.",
   "AIProjectSources": "Fontes",
   "AIProjectRoomDescription": "Um projeto que reúne um modelo, salas de instruções e salas de conhecimento para os chats dos seus membros.",

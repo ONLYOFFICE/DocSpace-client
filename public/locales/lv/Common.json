@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Instrukciju telpās glabājas prasmes, zināšanu telpās — faili, kuros meklē tērzēšana, bet MI projekti tās apvieno ar modeli un kopīgo šo iestatījumu ar jūsu uzaicinātajām personām.",
   "AiRoomsEmptyUser": "Ar jums vēl nav kopīgota neviena MI telpa",
   "AiRoomsEmptyUserDescription": "MI telpas iestata telpu administratori. Kad kāds jūs uzaicinās uz telpu, tā parādīsies šeit.",
+  "AiRoomsTurnedOff": "MI ir izslēgts. MI telpas nebūs pieejamas, līdz superadministrators to atkal ieslēgs.",
   "AIProjectSkillsEmpty": "Šajā telpā vēl nav prasmju.",
   "AIProjectSources": "Avoti",
   "AIProjectRoomDescription": "Projekts, kas apvieno modeli, instrukciju telpas un zināšanu telpas tā dalībnieku tērzēšanām.",

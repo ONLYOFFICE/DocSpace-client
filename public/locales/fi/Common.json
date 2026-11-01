@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Ohjehuoneissa on taitoja ja tietohuoneissa tiedostoja, joista chat hakee. AI-projektit yhdistävät ne malliin ja jakavat tämän kokoonpanon kutsumiesi henkilöiden kanssa.",
   "AiRoomsEmptyUser": "Kanssasi ei ole vielä jaettu AI-huoneita",
   "AiRoomsEmptyUserDescription": "AI-huoneet määrittävät huoneiden järjestelmänvalvojat. Kun joku kutsuu sinut huoneeseen, se näkyy täällä.",
+  "AiRoomsTurnedOff": "AI on poistettu käytöstä. AI-huoneet eivät ole käytettävissä, ennen kuin pääjärjestelmänvalvoja ottaa sen uudelleen käyttöön.",
   "AIProjectSkillsEmpty": "Tässä huoneessa ei ole vielä taitoja.",
   "AIProjectSources": "Lähteet",
   "AIProjectRoomDescription": "Projekti, joka yhdistää mallin, ohjehuoneet ja tietohuoneet jäsentensä chatteja varten.",

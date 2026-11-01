@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Talimat odaları becerileri, bilgi odaları sohbetin arama yaptığı dosyaları barındırır; AI projeleri ise bunları bir modelle bir araya getirir ve bu yapılandırmayı davet ettiğiniz kişilerle paylaşır.",
   "AiRoomsEmptyUser": "Henüz sizinle paylaşılan AI odası yok",
   "AiRoomsEmptyUserDescription": "AI odaları oda yöneticileri tarafından kurulur. Biri sizi bir odaya davet ettiğinde oda burada görünür.",
+  "AiRoomsTurnedOff": "AI kapatıldı. Süper yönetici yeniden açana kadar AI odaları kullanılamaz.",
   "AIProjectSkillsEmpty": "Bu odada henüz beceri yok.",
   "AIProjectSources": "Kaynaklar",
   "AIProjectRoomDescription": "Üyelerinin sohbetleri için bir modeli, talimat odalarını ve bilgi odalarını bir araya getiren proje.",

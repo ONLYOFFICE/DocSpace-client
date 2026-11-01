@@ -200,6 +200,7 @@
   "AiRoomsEmptyDescription": "Instructions rooms hold skills, Knowledge rooms hold the files the chat searches, and AI projects bring them together with a model and share that setup with the people you invite.",
   "AiRoomsEmptyUser": "No AI rooms shared with you yet",
   "AiRoomsEmptyUserDescription": "AI rooms are set up by room admins. When someone invites you to one, it appears here.",
+  "AiRoomsTurnedOff": "AI has been turned off. AI rooms are unavailable until the Full admin turns it on again.",
   "AIProjectSkillsEmpty": "This room has no skills yet.",
   "AIProjectSources": "Sources",
   "AIProjectRoomDescription": "A project that binds a model, Instructions rooms and Knowledge rooms for the chats of its members.",

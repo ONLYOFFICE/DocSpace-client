@@ -57,6 +57,12 @@
     }
   }
 
+  // The chat toolbar of an open AI project ends right before the header's
+  // own buttons block, which already keeps its 20px gap from it.
+  .projectChatToolbar {
+    padding-inline-end: 0;
+  }
+
   :global(.table-container_group-menu) {
     margin-block: 0;
     margin-inline: -20px 0;

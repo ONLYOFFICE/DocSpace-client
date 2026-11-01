@@ -1084,7 +1084,10 @@ const SectionHeaderContent = (props) => {
                   // project the caller is not a member of has no chat.
                   selectedFolder?.inRoom ? (
                     <ChatToolbar
-                      className={styles.analyzeResponsesButton}
+                      className={classnames(
+                        styles.analyzeResponsesButton,
+                        styles.projectChatToolbar,
+                      )}
                       keepSessionProfile
                     />
                   ) : null

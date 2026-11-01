@@ -192,7 +192,11 @@ A project's model SHALL be stored in the .NET assignments storage scoped by enti
 - **THEN** the answer is 403
 
 ### Requirement: Model in the client save
-The client SHALL read the model with the project and, after saving the room and sources, write it when the form sends one; a new project left on the default SHALL write nothing. A refused write SHALL NOT fail the save and SHALL come back as a `modelNotSaved` warning toast with the server's message.
+The client SHALL read the model with the project and, after saving the room and sources, write the model picked in the form as the project's own, the preselected portal default included, so the project never stores "none" through the form. A refused write SHALL NOT fail the save and SHALL come back as a `modelNotSaved` warning toast with the server's message.
+
+#### Scenario: Default model kept
+- **WHEN** a room admin creates a project leaving the preselected portal default model
+- **THEN** that model's id is written as the project's model and `GET ai/projects/{id}/model` answers it
 
 #### Scenario: Model refused on save
 - **WHEN** a Project manager saves a project with a model the server refuses

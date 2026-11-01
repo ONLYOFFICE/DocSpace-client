@@ -101,7 +101,7 @@ Instructions and Knowledge rooms picked in the "AI rooms" dialog SHALL be create
 - **THEN** the room opens at `/ai-rooms/{id}/filter?folder={id}`
 
 ### Requirement: Create a project
-"AI project" in the create picker SHALL open the project form: a required name of up to 170 characters, a logo (color and cover, or an uploaded image), tags, a chat model (none meaning the portal default), Instructions and Knowledge rooms from selectors limited to that type and `searchArea=AiHub`. Save SHALL create the room through `POST files/rooms` (`roomType: 12`), link the rooms, write the model, show warnings as toasts and open `/ai-rooms/{id}/filter?folder={id}`.
+"AI project" in the create picker SHALL open the project form: a required name of up to 170 characters, a logo (color and cover, or an uploaded image), tags, a chat model (the portal default preselected), Instructions and Knowledge rooms from selectors limited to that type and `searchArea=AiHub`. Save SHALL create the room through `POST files/rooms` (`roomType: 12`), link the rooms, write the model, show warnings as toasts and open `/ai-rooms/{id}/filter?folder={id}`.
 
 #### Scenario: Create with rooms
 - **WHEN** a room admin creates a project "Sales" with two Instructions rooms and one Knowledge room

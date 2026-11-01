@@ -40,7 +40,8 @@ import classnames from "classnames";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
+import SocketHelper, { SocketEvents, type TUnmappedSocketListener } from "@onlyoffice/apps-ui-kit/utils/socket";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { AiChatPanelBody } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
 import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
@@ -71,6 +72,7 @@ type AiProjectViewProps = {
    */
   inRoom: boolean;
   setInRoom: (inRoom: boolean) => void;
+  userId?: string;
   infoPanelVisible: boolean;
 };
 
@@ -95,6 +97,7 @@ const AiProjectView = ({
   roomId,
   inRoom,
   setInRoom,
+  userId,
   infoPanelVisible,
 }: AiProjectViewProps) => {
   const { t } = useTranslation(["Common"]);
@@ -209,27 +212,48 @@ const AiProjectView = ({
     };
   }, [store, roomId]);
 
-  // Joining the project (invited by a Project manager) comes as an update or
-  // a create of its room. The Files list does not carry the membership over
-  // to the open room, so a non-member reads the room again and the chat
-  // replaces the "not a member" view once they are in.
+  // The caller's membership changes under the open project: an invitation
+  // comes as an update or a create of its room, a removal only as
+  // `s:change-access-rights-folder` naming the caller. The Files list does not
+  // carry the membership over to the open room, so the room is read again:
+  // a member gets the chat, an admin who is no longer one gets the "not a
+  // member" view, and anyone else, who cannot read the project any more,
+  // goes back to the AI rooms list.
   React.useEffect(() => {
-    if (inRoom) return undefined;
     let disposed = false;
-    const onModify = ({ cmd, type, id }: { cmd?: string; type?: string; id?: number | string } = {}) => {
-      if ((cmd !== "update" && cmd !== "create") || type !== "folder" || Number(id) !== roomId) return;
+    const recheck = () => {
       getFolderInfo(roomId)
         .then((folder) => {
-          if (!disposed && folder.inRoom) setInRoom(true);
+          if (!disposed && !!folder.inRoom !== inRoom) setInRoom(!!folder.inRoom);
         })
-        .catch(() => {});
+        .catch(() => {
+          if (disposed) return;
+          toastr.warning(t("Common:AIProjectNotAvailable"));
+          navigate(getCategoryUrl(CategoryType.AiHub));
+        });
     };
+    const onModify = ({ cmd, type, id }: { cmd?: string; type?: string; id?: number | string } = {}) => {
+      if (inRoom || (cmd !== "update" && cmd !== "create") || type !== "folder" || Number(id) !== roomId) return;
+      recheck();
+    };
+    const onAccessRights = ({ id, data }: { id?: number | string; data?: string } = {}) => {
+      if (Number(id) !== roomId || !userId || !data) return;
+      try {
+        if (userId in (JSON.parse(data) as Record<string, number>)) recheck();
+      } catch {
+        // Not a membership change of the caller.
+      }
+    };
+    // The event is not in the ui-kit's typed listener map.
+    const onAccessRightsListener = onAccessRights as unknown as TUnmappedSocketListener;
     SocketHelper?.on(SocketEvents.ModifyFolder, onModify);
+    SocketHelper?.on(SocketEvents.ChaneFolderAccessRights, onAccessRightsListener);
     return () => {
       disposed = true;
       SocketHelper?.off(SocketEvents.ModifyFolder, onModify);
+      SocketHelper?.off(SocketEvents.ChaneFolderAccessRights, onAccessRightsListener);
     };
-  }, [inRoom, roomId, setInRoom]);
+  }, [inRoom, roomId, setInRoom, userId, navigate, t]);
 
   // The sources column replaces the composer's chips while it is on screen.
   React.useEffect(() => {
@@ -274,10 +298,11 @@ const AiProjectView = ({
   );
 };
 
-export default inject(({ aiProjectsStore, infoPanelStore, selectedFolderStore }: TStore) => ({
+export default inject(({ aiProjectsStore, infoPanelStore, selectedFolderStore, userStore }: TStore) => ({
   aiProjectsStore,
   roomId: Number(selectedFolderStore.id),
   inRoom: selectedFolderStore.inRoom,
   setInRoom: selectedFolderStore.setInRoom,
+  userId: userStore.user?.id,
   infoPanelVisible: infoPanelStore.isVisible,
 }))(observer(AiProjectView));

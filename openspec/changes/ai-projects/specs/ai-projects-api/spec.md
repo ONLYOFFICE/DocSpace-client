@@ -30,7 +30,7 @@ A project SHALL be created with `POST files/rooms` and `roomType: 12`, read, cha
 - **THEN** the answer is 400 and no project is created
 
 ### Requirement: Project settings composed by the client
-The client SHALL compose a project's `aiProject` block from `GET files/rooms/{id}` and `GET files/rooms/{id}/sources` and `GET ai/projects/{id}/model`: `profile` (`null` = the portal default, also when the model read fails), `instructionsRooms` and `knowledgeRooms` (id, title, logo, `available: true`, `archived: false`), `canEditSettings` (`security.EditRoom`) and `warnings` when the last save skipped something.
+The client SHALL compose a project's `aiProject` block from `GET files/rooms/{id}`, `GET files/rooms/{id}/sources` and `GET files/rooms/{id}/model`: `profile` (`null` = the portal default, also when the model read fails; its name, provider and availability from `GET ai/profiles/get-by-id`), `instructionsRooms` and `knowledgeRooms` (id, title, logo, `available: true`, `archived: false`), `canEditSettings` (`security.EditRoom`) and `warnings` when the last save skipped something.
 
 #### Scenario: Project read
 - **WHEN** the client opens a project
@@ -167,36 +167,47 @@ A link or unlink the server refuses SHALL NOT fail the save: the project stays s
 - **THEN** the project is created without that room and a toast shows the server's message
 
 ### Requirement: Project model storage
-A project's model SHALL be stored in the .NET assignments storage scoped by entity (`internal/ai/assignments`, actionType `Chat`, `entityId` = project id). No stored model SHALL mean the project runs on the portal's Chat assignment. ASC.AI.Chat SHALL proxy it as `GET/PUT /api/2.0/ai/projects/{id}/model` until Files serves it, when the proxy goes away.
+A project's model SHALL be served by the Files API at `files/rooms/{id}/model`, stored as the project-scoped `Chat` assignment. No stored model, or one whose profile was removed, SHALL mean the project runs on the portal's Chat model. A model SHALL only be replaced, never cleared. ASC.AI.Chat SHALL have no project route.
 
 #### Scenario: No stored model
-- **WHEN** the client reads `GET ai/projects/{id}/model` of a project that never stored one
-- **THEN** the answer is `{ profile: null }` and the project chats on the portal's default Chat model
+- **WHEN** the client reads `GET files/rooms/{id}/model` of a project that never stored one
+- **THEN** the answer is `{ profileId: null }` and the project chats on the portal's default Chat model
 
 ### Requirement: Model read
-`GET ai/projects/{id}/model` SHALL first read the project with the caller's credentials (`files/rooms/{id}`, `roomType` 12, its 403 or 404 relayed) and answer `{ profile: { id, name, provider, available } | null }`.
+`GET files/rooms/{id}/model` SHALL answer `{ profileId }` to every member who can read the project. The client SHALL resolve the profile with `GET ai/profiles/get-by-id` into `{ id, name, provider, available }`, where a profile that is gone or cannot chat is unavailable.
 
-#### Scenario: Not a project
-- **WHEN** the id names an ordinary room
-- **THEN** the answer is 404
+#### Scenario: Member reads the model
+- **WHEN** a Member of a project with its own model opens it
+- **THEN** the project shows that model and the Member's rounds run on it
+
+#### Scenario: Model profile removed
+- **WHEN** the profile a project's model names is no longer chat-capable
+- **THEN** the project shows its model as unavailable
 
 ### Requirement: Model write
-`PUT ai/projects/{id}/model { profileId }` SHALL require `security.EditRoom` on the project; `profileId` SHALL be `null` or the UUID of an existing chat-capable profile, else 400. It SHALL upsert `PUT internal/ai/assignments { assignments: { Chat }, entityId }` and answer the model read's shape.
+`PUT files/rooms/{id}/model { profileId }` SHALL require the right to edit the project (owner or Project manager); `profileId` SHALL be an existing chat-capable profile, else 400. The server SHALL record it in the audit trail and announce it as an update of the project room.
 
 #### Scenario: Profile without chat
-- **WHEN** a Project manager puts an embedding-only profile
+- **WHEN** a Project manager puts an image-only profile
 - **THEN** the answer is 400 and the stored model is unchanged
 
 #### Scenario: Member writes
 - **WHEN** a Member puts a model
 - **THEN** the answer is 403
 
+### Requirement: Model change reaches open projects
+An open project SHALL read its model again (`GET files/rooms/{id}/model`) when its room is announced as updated, and its chat SHALL switch to a changed model in place. The profile SHALL be read only when the model changed.
+
+#### Scenario: Manager changes the model
+- **WHEN** a Project manager changes the model while a Member has the project open
+- **THEN** the Member's chat switches to the new model without a reload and keeps the thread
+
 ### Requirement: Model in the client save
 The client SHALL read the model with the project and, after saving the room and sources, write the model picked in the form as the project's own, the preselected portal default included, so the project never stores "none" through the form. A refused write SHALL NOT fail the save and SHALL come back as a `modelNotSaved` warning toast with the server's message.
 
 #### Scenario: Default model kept
 - **WHEN** a room admin creates a project leaving the preselected portal default model
-- **THEN** that model's id is written as the project's model and `GET ai/projects/{id}/model` answers it
+- **THEN** that model's id is written as the project's model and `GET files/rooms/{id}/model` answers it
 
 #### Scenario: Model refused on save
 - **WHEN** a Project manager saves a project with a model the server refuses

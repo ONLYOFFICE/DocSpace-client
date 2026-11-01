@@ -88,7 +88,7 @@ Most of the client work is already on `feature/new-ai-concept`. Tasks marked `[x
 
 These come from the specs but are owned by `../server` C#; they are listed so the client and Node tasks above are not mistaken for the whole job.
 
-- Store a model per project — done through the scoped assignments (`internal/ai/assignments`, `Chat`, `entityId` = project id) behind a Node proxy (11.8); the move into Files, member read access and a scoped reset are tracked as 11.9–11.11.
+- Store a model per project — done: `files/rooms/{id}/model` (ee2f480944), readable by every member, never cleared.
 - ~~Grant Viewer on the linked rooms to every member and report a `grantSkipped` warning.~~ *Superseded by .NET 64c79db1dc: members read linked rooms through a virtual `SubjectType.AiProject` share record, never stored.*
 - Make Instructions and Knowledge rooms flat (refuse folder create, copy and move) and limit Instructions rooms to `.md` on upload, create, copy and move, with a user-facing message.
 - Drop `FileShare.Editing` from `AvailableRoomAccesses[KnowledgeRoom]` (no share migration: the feature is unreleased).
@@ -133,9 +133,12 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - [x] 11.6 Locales: remove `Common:AIProjects`, `NewAIProject`, `AIProjectsEmpty`, `AIProjectsEmptyDescription`, `AIProjectsEmptyUser`, `AIProjectsEmptyUserDescription`, `AIProjectCreate`, `AIProjectCreateDescription` from every language; verify with `cd common/tests && npx vitest run test/locales.test.js`
 - [x] 11.7 Generate `ai-rooms-empty-user.png` and refresh `ai-rooms-table.png` and `ai-projects-create-dialog.png` in Docker (`pnpm test:e2e:docker:update-screenshots`); verify that `ai-projects.spec.ts` passes in Docker (done 2026-11-01: 11/11 in Docker; the empty-admin, picker and project screenshots refreshed as well)
 - [x] 11.8 Project model through the scoped assignments: ASC.AI.Chat proxies `GET /api/2.0/ai/projects/{id}/model` (`{ profile: { id, name, provider, available } | null }`) and `PUT .../model` (`{ profileId: string | null }`, `security.EditRoom`, 400 for a non-UUID or non-chat profile, 403/404 of `files/rooms/{id}` relayed) over `PUT internal/ai/assignments { assignments: { Chat }, entityId }`; a round runs on the scoped assignment, else the portal's Chat assignment (409 `projectModelUnavailable`); the client facade reads the model with the project (default on a failed read) and writes it after the room and sources when the form sends one, a refused write being a `modelNotSaved` warning toast; the form's model picker works again
-- [ ] 11.9 Server (.NET, Maxim): serve the project model from Files (`files/rooms/{id}` or a route of its own) and remove the Node proxy
-- [ ] 11.10 Server (.NET, Maxim): let project members read the scoped model — the read requires `FileSecurity.CanUseAi`, which a Member (Read) and guests lack, so their model reads as `null` and their rounds run on the portal default
-- [ ] 11.11 Server (.NET, Maxim): a scoped reset of the assignment (`DELETE assignments/{type}` takes no `entityId` and removes the global one), so choosing "default" follows the portal's default instead of pinning its current model
+- [x] 11.9 Server (.NET, Maxim): serve the project model from Files — done in ee2f480944 as `GET/PUT files/rooms/{id}/model` (`{ profileId }`)
+- [x] 11.10 Server (.NET, Maxim): let project members read the model — done in ee2f480944 (any member with read access)
+- [x] ~~11.11 Server (.NET, Maxim): a scoped reset of the assignment~~ — dropped: a model is never cleared on the server, and the form always stores the picked model, the default included
+
+- [x] 11.12 Move to the Files model route: the client reads and writes `files/rooms/{id}/model` and names the profile with `GET ai/profiles/get-by-id` (gone or non-chat = unavailable); ASC.AI.Chat reads a round's project model from `GET files/rooms/{id}/model` and drops the proxy (`aiProjectModelController.ts`, `aiProjectModel.ts`, their tests, the route and its OpenAPI entries); MSW handlers moved; verify with `projects.test.ts`, `AiProjectsStore.test.ts` and the Node suite
+- [x] 11.13 An open project follows a model change made elsewhere: on the project room's socket `update` it reads `files/rooms/{id}/model` again and, when changed, switches the chat in place (`AiProjectsStore.refreshActiveModel`); verify with `AiProjectsStore.test.ts`
 
 ## 12. AI not set up and vectorization off (2026-11-01)
 

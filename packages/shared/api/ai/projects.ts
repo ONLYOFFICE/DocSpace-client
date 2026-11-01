@@ -37,6 +37,8 @@ import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 
 import { VectorizationStatus } from "../../enums";
 import { request } from "../client";
+import { isChatCapableProfile } from "./enums";
+import { getProfileById } from "./index";
 import type { TOperation } from "../files/types";
 
 /**
@@ -57,7 +59,7 @@ import type { TOperation } from "../files/types";
  */
 
 const roomsUrl = "/files/rooms";
-const modelUrl = (id: number) => `/ai/projects/${id}/model`;
+const modelUrl = (id: number) => `${roomsUrl}/${id}/model`;
 
 /** `FileShare` on the server, limited to what a project uses: a Member is the room's Read. */
 export const AiProjectAccess = {
@@ -427,10 +429,43 @@ type TSourcesDto = { instructionsRooms: TSourceDto[]; knowledgeRooms: TSourceDto
 const getSources = async (id: number) =>
   (await request({ method: "GET", url: `${roomsUrl}/${id}/sources` })) as TSourcesDto;
 
-/** The project's model; `null` when it runs on the portal default. */
-const getModel = async (id: number) =>
-  ((await request({ method: "GET", url: modelUrl(id) })) as { profile: TAiProjectProfile | null })
-    .profile;
+/**
+ * The profile the project's model names, with its name and provider from
+ * the AI profiles (`GET ai/profiles/get-by-id`); a profile that is gone or
+ * cannot chat is unavailable.
+ */
+const toProfile = async (profileId: string | null | undefined): Promise<TAiProjectProfile | null> => {
+  if (!profileId) return null;
+  try {
+    const profile = await getProfileById(profileId);
+    if (!profile) throw new Error("Profile not found");
+    return {
+      id: profileId,
+      name: profile.name ?? null,
+      provider: profile.providerType ?? null,
+      available: isChatCapableProfile(profile),
+    };
+  } catch {
+    return { id: profileId, name: null, provider: null, available: false };
+  }
+};
+
+/**
+ * The project's model (`GET files/rooms/{id}/model`, readable by every
+ * member); `null` when none is selected or its profile was removed, and the
+ * project runs on the portal default.
+ */
+const getModel = async (id: number) => getAiProjectModel(id);
+
+/**
+ * The project's model as the server has it now. With `known` (the model on
+ * screen) the profile is not read again while the model stays the same.
+ */
+export const getAiProjectModel = async (id: number, known?: TAiProjectProfile | null) => {
+  const { profileId } = (await request({ method: "GET", url: modelUrl(id) })) as { profileId?: string | null };
+  if (known !== undefined && (profileId ?? null) === (known?.id ?? null)) return known;
+  return toProfile(profileId);
+};
 
 /**
  * The project room with the `aiProject` block composed from its sources and
@@ -541,18 +576,19 @@ const syncedSources = async (
 };
 
 /**
- * Stores the model sent (`null`: the portal default) and answers the one the
- * project keeps; a refused write does not fail the save and comes back as a
- * warning. `undefined` keeps the model without a write.
+ * Stores the model sent and answers the one the project keeps; a refused
+ * write does not fail the save and comes back as a warning. The server
+ * cannot clear a model, so `null` (no profile to pick) and `undefined` keep
+ * the model without a write.
  */
 const saveModel = async (id: number, profileId: string | null | undefined) => {
   const warnings: TAiProjectWarning[] = [];
   try {
-    if (profileId !== undefined) {
+    if (profileId) {
       const res = (await request({ method: "PUT", url: modelUrl(id), data: { profileId } })) as {
-        profile: TAiProjectProfile | null;
+        profileId?: string | null;
       };
-      return { profile: res.profile, warnings };
+      return { profile: await toProfile(res.profileId), warnings };
     }
   } catch (e) {
     warnings.push({ code: "modelNotSaved", roomId: null, subjectId: null, message: errorMessage(e) });

@@ -385,27 +385,35 @@ export const aiProjectSourcesHandlers = (
 };
 
 /**
- * `GET` / `PUT ai/projects/:id/model`: the project's model as ASC.AI.Chat
- * proxies it (`profile: null` runs on the portal default); a write keeps the
- * stock profile for any id sent.
+ * `GET` / `PUT files/rooms/:id/model`: the project's model as the Files API
+ * keeps it (`profileId: null` runs on the portal default; a write keeps the
+ * stock profile for any id sent), and `GET ai/profiles/get-by-id` naming
+ * that profile, unwrapped as ASC.AI.Chat answers it.
  */
 export const aiProjectModelHandlers = (
   port: string,
   projects: AiProjectMock[] = AI_PROJECTS,
 ) => {
-  const url = `${BASE_URL}:${port}/${API_PREFIX}/ai/projects/:id/model`;
+  const url = `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/model`;
+  const answer = (project: AiProjectMock) =>
+    HttpResponse.json({ response: { profileId: project.aiProject.profile?.id ?? null } });
   return [
     http.get(url, ({ params }) => {
       const project = findProject(projects, params.id);
       if (!project) return notFound();
-      return HttpResponse.json({ response: { profile: project.aiProject.profile } });
+      return answer(project);
     }),
     http.put(url, async ({ params, request }) => {
       const project = findProject(projects, params.id);
       if (!project) return notFound();
-      const { profileId } = (await request.json()) as { profileId?: string | null };
+      const { profileId } = (await request.json()) as { profileId?: string };
       project.aiProject.profile = profileId ? PROFILE : null;
-      return HttpResponse.json({ response: { profile: project.aiProject.profile } });
+      return answer(project);
+    }),
+    http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/profiles/get-by-id`, ({ request }) => {
+      const id = new URL(request.url).searchParams.get("id");
+      if (id !== PROFILE.id) return HttpResponse.json({ error: "Profile not found" }, { status: 404 });
+      return HttpResponse.json({ id: PROFILE.id, name: PROFILE.name, providerType: PROFILE.provider, capabilities: 1 });
     }),
   ];
 };

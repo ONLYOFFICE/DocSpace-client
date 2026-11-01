@@ -6,6 +6,7 @@ const api = vi.hoisted(() => ({
   createAiProject: vi.fn(),
   getAiProject: vi.fn(),
   getAiProjectKnowledgeFiles: vi.fn(),
+  getAiProjectModel: vi.fn(),
   getAiProjectSkills: vi.fn(),
   updateAiProject: vi.fn(),
   toAiProject: vi.fn((dto: Record<string, unknown>) => ({ ...dto, aiProject: {} })),
@@ -183,6 +184,25 @@ describe("AiProjectsStore", () => {
 
       expect(store.activeProject).toEqual(renamed);
       expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "1" }));
+    });
+
+    it("follows a model changed elsewhere, and leaves an unchanged one alone", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      const opened = store.activeProject;
+      api.getAiProjectModel.mockImplementationOnce(async (_id: number, known: unknown) => known);
+
+      await store.refreshActiveModel();
+      expect(store.activeProject).toBe(opened);
+
+      const gpt = { id: "p2", name: "GPT", provider: "openai", available: true };
+      api.getAiProjectModel.mockResolvedValueOnce(gpt);
+      presets.setActivePreset.mockClear();
+
+      await store.refreshActiveModel();
+      expect(api.getAiProjectModel).toHaveBeenLastCalledWith(1, opened?.aiProject.profile);
+      expect(store.activeProject?.aiProject.profile).toEqual(gpt);
+      expect(presets.setActivePreset).toHaveBeenCalledTimes(1);
     });
   });
 

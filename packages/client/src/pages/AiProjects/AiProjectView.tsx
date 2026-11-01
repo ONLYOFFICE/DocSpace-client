@@ -39,6 +39,7 @@ import { reaction } from "mobx";
 import classnames from "classnames";
 import { useNavigate } from "react-router";
 
+import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
 import { AiChatPanelBody } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
 import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
@@ -171,6 +172,18 @@ const AiProjectView = ({ aiProjectsStore: store, roomId, infoPanelVisible }: AiP
       ),
     [aiChatStore, store],
   );
+
+  // A model change of the project, here or elsewhere, comes as an update of
+  // its room; the model is read again so every member's chat follows it.
+  React.useEffect(() => {
+    const onUpdate = ({ cmd, type, id }: { cmd?: string; type?: string; id?: number | string } = {}) => {
+      if (cmd === "update" && type === "folder" && Number(id) === roomId) void store.refreshActiveModel();
+    };
+    SocketHelper?.on(SocketEvents.ModifyFolder, onUpdate);
+    return () => {
+      SocketHelper?.off(SocketEvents.ModifyFolder, onUpdate);
+    };
+  }, [store, roomId]);
 
   // The sources column replaces the composer's chips while it is on screen.
   React.useEffect(() => {

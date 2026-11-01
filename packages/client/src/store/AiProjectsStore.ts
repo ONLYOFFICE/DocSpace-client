@@ -42,6 +42,7 @@ import {
   createAiProject,
   getAiProject,
   getAiProjectKnowledgeFiles,
+  getAiProjectModel,
   getAiProjectSkills,
   toAiProject,
   updateAiProject,
@@ -209,6 +210,26 @@ class AiProjectsStore {
       this.syncPreset(project);
     } catch (e) {
       toastr.error(errorMessage(e));
+    }
+  };
+
+  /**
+   * Follows a model change of the open project made elsewhere (the server
+   * announces it as an update of the project room): the model is read again
+   * and, when it changed, reaches the project and its chat.
+   */
+  refreshActiveModel = async () => {
+    const project = this.activeProject;
+    if (!project) return;
+    try {
+      const profile = await getAiProjectModel(project.id, project.aiProject.profile);
+      const current = this.activeProject;
+      if (profile === project.aiProject.profile || current?.id !== project.id) return;
+      const updated = { ...current, aiProject: { ...current.aiProject, profile } };
+      runInAction(() => this.replaceProject(updated));
+      this.syncPreset(updated);
+    } catch {
+      // The next open reads the model anyway.
     }
   };
 

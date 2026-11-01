@@ -8,6 +8,17 @@ vi.mock("../client", () => ({
   request: (options: unknown) => request(options),
 }));
 
+// The AI profiles the project models name: p1 chats, p3 draws images only.
+const getProfileById = vi.fn(async (id: string): Promise<unknown> => {
+  if (id === "p1") return { id, name: "Claude", providerType: "anthropic", capabilities: 1 };
+  if (id === "p3") return { id, name: "Painter", providerType: "openai", capabilities: 2 };
+  return null;
+});
+
+vi.mock("./index", () => ({
+  getProfileById: (id: string) => getProfileById(id),
+}));
+
 import {
   AiProjectAccess,
   AI_PROJECT_ROOM_TYPE,
@@ -312,7 +323,7 @@ describe("the calls", () => {
     route({
       "GET /files/rooms/7": folder({ aiProject: undefined }),
       "GET /files/rooms/7/sources": sources(),
-      "GET /ai/projects/7/model": { profile: PROFILE },
+      "GET /files/rooms/7/model": { profileId: "p1" },
     });
     expect((await getAiProject(7)).aiProject.profile).toEqual(PROFILE);
 
@@ -323,29 +334,40 @@ describe("the calls", () => {
     expect((await getAiProject(7)).aiProject.profile).toBeNull();
   });
 
-  it("stores the chosen model of a new project, and none for the default", async () => {
+  it("marks a model whose profile is gone or cannot chat as unavailable", async () => {
+    for (const profileId of ["p3", "gone"]) {
+      route({
+        "GET /files/rooms/7": folder({ aiProject: undefined }),
+        "GET /files/rooms/7/sources": sources(),
+        "GET /files/rooms/7/model": { profileId },
+      });
+      expect((await getAiProject(7)).aiProject.profile).toMatchObject({ id: profileId, available: false });
+    }
+  });
+
+  it("stores the chosen model of a new project, and none without one", async () => {
     route({
       "POST /files/rooms": folder({ aiProject: undefined }),
-      "PUT /ai/projects/7/model": ({ data }: { data?: unknown }) => {
+      "PUT /files/rooms/7/model": ({ data }: { data?: unknown }) => {
         expect(data).toEqual({ profileId: "p1" });
-        return { profile: PROFILE };
+        return { profileId: "p1" };
       },
     });
     expect((await createAiProject({ title: "Sales", aiProject: { profileId: "p1" } })).aiProject.profile).toEqual(PROFILE);
 
     request.mockClear();
     await createAiProject({ title: "Sales", aiProject: { profileId: null } });
-    expect(request).not.toHaveBeenCalledWith(expect.objectContaining({ url: "/ai/projects/7/model" }));
+    expect(request).not.toHaveBeenCalledWith(expect.objectContaining({ url: "/files/rooms/7/model" }));
   });
 
   it("writes the model on an update and keeps the save when it is refused", async () => {
     route({
       "PUT /files/rooms/7": folder({ aiProject: undefined }),
       "GET /files/rooms/7/sources": sources(),
-      "PUT /ai/projects/7/model": () => {
+      "PUT /files/rooms/7/model": () => {
         throw { response: { data: { error: "AI profile does not support chat" } } };
       },
-      "GET /ai/projects/7/model": { profile: null },
+      "GET /files/rooms/7/model": { profileId: null },
     });
     const project = await updateAiProject(7, { title: "Sales", aiProject: { profileId: "p2" } });
     expect(project.aiProject.profile).toBeNull();

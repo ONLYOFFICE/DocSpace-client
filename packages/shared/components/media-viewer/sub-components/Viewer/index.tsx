@@ -44,6 +44,7 @@ import { DeviceType } from "../../../../enums";
 import { includesMethod } from "../../../../utils/typeGuards";
 import type { ContextMenuRefType } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import { useFocusTrap } from "@onlyoffice/apps-ui-kit/hooks/useFocusTrap";
+import { useFocusReturn } from "@onlyoffice/apps-ui-kit/hooks/useFocusReturn";
 
 import { isGif, isHeic, isTiff, isWebp } from "../../MediaViewer.utils";
 import styles from "./Viewer.module.scss";
@@ -107,25 +108,12 @@ export const Viewer = (props: ViewerProps) => {
 
   const contextMenuRef = useRef<ContextMenuRefType>(null);
 
-  // The viewer covers the page, so Tab and Shift+Tab stay in it.
+  // The viewer covers the page: it takes the focus when it opens - or Space
+  // and Enter would still act on the control behind it - keeps Tab and
+  // Shift+Tab in it, and gives the focus back when it closes.
   const viewerRef = useRef<HTMLDivElement>(null);
+  useFocusReturn(viewerRef, !!visible);
   useFocusTrap(viewerRef, !!visible);
-
-  // A modal dialog takes the focus when it opens - or Space and Enter would
-  // still act on the control behind it, and a screen reader stay on the page
-  // - and gives it back to that control when it closes.
-  useEffect(() => {
-    if (!visible) return;
-    const viewer = viewerRef.current;
-    const previous = document.activeElement;
-    if (viewer && !viewer.contains(previous))
-      viewer.focus({ preventScroll: true });
-
-    return () => {
-      if (previous instanceof HTMLElement && previous.isConnected)
-        previous.focus({ preventScroll: true });
-    };
-  }, [visible]);
 
   const [isFullscreen, setIsFullScreen] = useState<boolean>(false);
 

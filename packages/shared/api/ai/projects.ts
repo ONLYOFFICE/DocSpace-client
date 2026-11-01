@@ -472,12 +472,7 @@ export const getAiProjectModel = async (id: number, known?: TAiProjectProfile | 
  * its model (`null`: the portal default); every room the server lists is
  * active and readable.
  */
-const withSources = (
-  room: TAiProjectRoomDto,
-  sources: TSourcesDto,
-  profile: TAiProjectProfile | null,
-  warnings: TAiProjectWarning[] = [],
-): TAiProjectRoomDto => {
+const toSourceRooms = (sources: TSourcesDto) => {
   const toSource = (roomType: number) => (source: TSourceDto) => ({
     id: source.id,
     title: source.title,
@@ -487,11 +482,22 @@ const withSources = (
     logo: source.logo ?? null,
   });
   return {
+    instructionsRooms: sources.instructionsRooms.map(toSource(INSTRUCTIONS_ROOM_TYPE)),
+    knowledgeRooms: sources.knowledgeRooms.map(toSource(KNOWLEDGE_ROOM_TYPE)),
+  };
+};
+
+const withSources = (
+  room: TAiProjectRoomDto,
+  sources: TSourcesDto,
+  profile: TAiProjectProfile | null,
+  warnings: TAiProjectWarning[] = [],
+): TAiProjectRoomDto => {
+  return {
     ...room,
     aiProject: {
       profile,
-      instructionsRooms: sources.instructionsRooms.map(toSource(INSTRUCTIONS_ROOM_TYPE)),
-      knowledgeRooms: sources.knowledgeRooms.map(toSource(KNOWLEDGE_ROOM_TYPE)),
+      ...toSourceRooms(sources),
       canEditSettings: !!room.security?.EditRoom,
       ...(warnings.length ? { warnings } : {}),
     },
@@ -627,6 +633,28 @@ export const getAiProject = async (id: number) => {
     getModel(id).catch(() => null),
   ]);
   return toAiProject(withSources(room as TAiProjectRoomDto, sources, profile));
+};
+
+/**
+ * The open project with its model and linked rooms as the server has them
+ * now, after an edit made elsewhere (the room update announces it). The room
+ * itself is not read again; the profile is read only for a new model.
+ */
+export const refreshAiProjectSettings = async (project: TAiProject): Promise<TAiProject> => {
+  const known = project.aiProject.profile;
+  const [sources, profile] = await Promise.all([
+    getSources(project.id),
+    getAiProjectModel(project.id, known).catch(() => known),
+  ]);
+  const { instructionsRooms, knowledgeRooms } = toAiProject(withSources({ id: project.id }, sources, profile)).aiProject;
+  const ids = (rooms: TAiProjectSource[]) => rooms.map(({ id, title }) => `${id}:${title}`).join(",");
+  if (
+    profile === known &&
+    ids(instructionsRooms) === ids(project.aiProject.instructionsRooms) &&
+    ids(knowledgeRooms) === ids(project.aiProject.knowledgeRooms)
+  )
+    return project;
+  return { ...project, aiProject: { ...project.aiProject, profile, instructionsRooms, knowledgeRooms } };
 };
 
 export const createAiProject = async (data: TAiProjectRequest) => {

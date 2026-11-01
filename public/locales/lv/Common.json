@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Šī projekta modelis vairs nav pieejams. Lūdziet projekta pārvaldniekam izvēlēties citu modeli.",
   "AIProjectModelUnavailableTitle": "Modelis nav pieejams",
   "AIProjectNotAvailable": "Šis MI projekts vairs nav pieejams",
+  "AIProjectNotMember": "Jūs neesat šī MI projekta dalībnieks",
+  "AIProjectNotMemberDescription": "Tajā tērzēt var tikai projekta dalībnieki. Lūdziet projekta pārvaldniekam jūs uzaicināt.",
   "AIProjectOwner": "Projekta īpašnieks",
   "AIProjectSaved": "MI projekts \"{{name}}\" saglabāts",
   "AiRooms": "MI telpas",

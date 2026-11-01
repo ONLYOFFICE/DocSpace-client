@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "このプロジェクトのモデルは利用できなくなりました。別のモデルを選択するようプロジェクトマネージャーに依頼してください。",
   "AIProjectModelUnavailableTitle": "モデルを利用できません",
   "AIProjectNotAvailable": "このAIプロジェクトは利用できなくなりました",
+  "AIProjectNotMember": "このAIプロジェクトのメンバーではありません",
+  "AIProjectNotMemberDescription": "チャットできるのはプロジェクトのメンバーのみです。プロジェクトマネージャーに招待を依頼してください。",
   "AIProjectOwner": "プロジェクトの所有者",
   "AIProjectSaved": "AIプロジェクト「{{name}}」を保存しました",
   "AiRooms": "AIルーム",

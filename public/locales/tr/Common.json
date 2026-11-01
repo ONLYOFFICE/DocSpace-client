@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Bu projenin modeli artık kullanılamıyor. Bir proje yöneticisinden başka bir model seçmesini isteyin.",
   "AIProjectModelUnavailableTitle": "Model kullanılamıyor",
   "AIProjectNotAvailable": "Bu AI projesi artık kullanılamıyor",
+  "AIProjectNotMember": "Bu AI projesinin üyesi değilsiniz",
+  "AIProjectNotMemberDescription": "Bu projede yalnızca proje üyeleri sohbet edebilir. Sizi davet etmesi için bir proje yöneticisine başvurun.",
   "AIProjectOwner": "Proje sahibi",
   "AIProjectSaved": "AI projesi \"{{name}}\" kaydedildi",
   "AiRooms": "AI odaları",

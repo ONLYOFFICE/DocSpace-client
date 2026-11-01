@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Model tega projekta ni več na voljo. Prosite upravljalca projekta, naj izbere drug model.",
   "AIProjectModelUnavailableTitle": "Model ni na voljo",
   "AIProjectNotAvailable": "Ta projekt AI ni več na voljo",
+  "AIProjectNotMember": "Niste član tega projekta AI",
+  "AIProjectNotMemberDescription": "V njem lahko klepetajo samo člani projekta. Prosite upravljalca projekta, naj vas povabi.",
   "AIProjectOwner": "Lastnik projekta",
   "AIProjectSaved": "Projekt AI »{{name}}« je shranjen",
   "AiRooms": "Sobe AI",

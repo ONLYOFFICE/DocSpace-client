@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Tämän projektin malli ei ole enää käytettävissä. Pyydä projektin hallinnoijaa valitsemaan toinen malli.",
   "AIProjectModelUnavailableTitle": "Malli ei käytettävissä",
   "AIProjectNotAvailable": "Tämä AI-projekti ei ole enää käytettävissä",
+  "AIProjectNotMember": "Et ole tämän AI-projektin jäsen",
+  "AIProjectNotMemberDescription": "Vain projektin jäsenet voivat keskustella siinä. Pyydä projektin hallinnoijaa kutsumaan sinut.",
   "AIProjectOwner": "Projektin omistaja",
   "AIProjectSaved": "AI-projekti \"{{name}}\" tallennettu",
   "AiRooms": "AI-huoneet",

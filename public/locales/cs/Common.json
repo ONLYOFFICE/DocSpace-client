@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Model tohoto projektu již není dostupný. Požádejte správce projektu, aby vybral jiný model.",
   "AIProjectModelUnavailableTitle": "Model není dostupný",
   "AIProjectNotAvailable": "Tento AI projekt již není dostupný",
+  "AIProjectNotMember": "Nejste členem tohoto AI projektu",
+  "AIProjectNotMemberDescription": "Chatovat v něm mohou jen členové projektu. Požádejte správce projektu, aby vás pozval.",
   "AIProjectOwner": "Vlastník projektu",
   "AIProjectSaved": "AI projekt „{{name}}“ byl uložen",
   "AiRooms": "AI místnosti",

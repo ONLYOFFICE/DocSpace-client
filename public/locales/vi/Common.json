@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Mô hình của dự án này không còn khả dụng. Hãy yêu cầu Quản lý dự án chọn mô hình khác.",
   "AIProjectModelUnavailableTitle": "Mô hình không khả dụng",
   "AIProjectNotAvailable": "Dự án AI này không còn khả dụng",
+  "AIProjectNotMember": "Bạn không phải là thành viên của dự án AI này",
+  "AIProjectNotMemberDescription": "Chỉ thành viên dự án mới có thể trò chuyện trong đó. Hãy nhờ quản lý dự án mời bạn.",
   "AIProjectOwner": "Chủ sở hữu dự án",
   "AIProjectSaved": "Đã lưu dự án AI \"{{name}}\"",
   "AiRooms": "Phòng AI",

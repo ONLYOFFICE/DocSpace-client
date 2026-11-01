@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "لم يعد نموذج هذا المشروع متاحًا. اطلب من مدير المشروع اختيار نموذج آخر.",
   "AIProjectModelUnavailableTitle": "النموذج غير متاح",
   "AIProjectNotAvailable": "لم يعد مشروع الذكاء الاصطناعي هذا متاحًا",
+  "AIProjectNotMember": "أنت لست عضوًا في مشروع الذكاء الاصطناعي هذا",
+  "AIProjectNotMemberDescription": "يمكن لأعضاء المشروع فقط الدردشة فيه. اطلب من مدير المشروع دعوتك.",
   "AIProjectOwner": "مالك المشروع",
   "AIProjectSaved": "تم حفظ مشروع الذكاء الاصطناعي \"{{name}}\"",
   "AiRooms": "غرف الذكاء الاصطناعي",

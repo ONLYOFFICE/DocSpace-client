@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Das Modell dieses Projekts ist nicht mehr verfügbar. Bitten Sie einen Projekt-Manager, ein anderes Modell zu wählen.",
   "AIProjectModelUnavailableTitle": "Modell nicht verfügbar",
   "AIProjectNotAvailable": "Dieses KI-Projekt ist nicht mehr verfügbar",
+  "AIProjectNotMember": "Sie sind kein Mitglied dieses KI-Projekts",
+  "AIProjectNotMemberDescription": "Nur Projektmitglieder können darin chatten. Bitten Sie einen Projekt-Manager, Sie einzuladen.",
   "AIProjectOwner": "Projektbesitzer",
   "AIProjectSaved": "KI-Projekt „{{name}}“ gespeichert",
   "AiRooms": "KI-Räume",

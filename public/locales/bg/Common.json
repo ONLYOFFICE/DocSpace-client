@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Моделът на този проект вече не е наличен. Помолете мениджър на проекта да избере друг модел.",
   "AIProjectModelUnavailableTitle": "Моделът не е наличен",
   "AIProjectNotAvailable": "Този ИИ проект вече не е наличен",
+  "AIProjectNotMember": "Не сте член на този ИИ проект",
+  "AIProjectNotMemberDescription": "Само членовете на проекта могат да чатят в него. Помолете мениджъра на проекта да ви покани.",
   "AIProjectOwner": "Собственик на проекта",
   "AIProjectSaved": "ИИ проектът „{{name}}“ е запазен",
   "AiRooms": "ИИ стаи",

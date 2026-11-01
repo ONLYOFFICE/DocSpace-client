@@ -1080,11 +1080,14 @@ const SectionHeaderContent = (props) => {
               analyzeResponsesButton={
                 isAiProjectRoomRoot ? (
                   // The project's chat toolbar (history, new chat) takes the
-                  // slot after the room menu, as the agents' header did.
-                  <ChatToolbar
-                    className={styles.analyzeResponsesButton}
-                    keepSessionProfile
-                  />
+                  // slot after the room menu, as the agents' header did. A
+                  // project the caller is not a member of has no chat.
+                  selectedFolder?.inRoom ? (
+                    <ChatToolbar
+                      className={styles.analyzeResponsesButton}
+                      keepSessionProfile
+                    />
+                  ) : null
                 ) : (
                   <AnalyzeResponsesButton
                     className={styles.analyzeResponsesButton}

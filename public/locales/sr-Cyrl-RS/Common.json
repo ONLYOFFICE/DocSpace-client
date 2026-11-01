@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Модел овог пројекта више није доступан. Замолите менаџера пројекта да изабере други модел.",
   "AIProjectModelUnavailableTitle": "Модел није доступан",
   "AIProjectNotAvailable": "Овај АИ пројекат више није доступан",
+  "AIProjectNotMember": "Нисте члан овог АИ пројекта",
+  "AIProjectNotMemberDescription": "Само чланови пројекта могу да ћаскају у њему. Замолите менаџера пројекта да вас позове.",
   "AIProjectOwner": "Власник пројекта",
   "AIProjectSaved": "АИ пројекат „{{name}}“ је сачуван",
   "AiRooms": "АИ собе",

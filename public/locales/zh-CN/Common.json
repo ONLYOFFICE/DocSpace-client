@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "此项目的模型已不可用。请联系项目经理选择其他模型。",
   "AIProjectModelUnavailableTitle": "模型不可用",
   "AIProjectNotAvailable": "此 AI 项目已不可用",
+  "AIProjectNotMember": "您不是此 AI 项目的成员",
+  "AIProjectNotMemberDescription": "只有项目成员才能在其中聊天。请让项目经理邀请您。",
   "AIProjectOwner": "项目所有者",
   "AIProjectSaved": "已保存 AI 项目“{{name}}”",
   "AiRooms": "AI 房间",

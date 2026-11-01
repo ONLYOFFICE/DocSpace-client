@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Modelul acestui proiect nu mai este disponibil. Cereți unui manager de proiect să aleagă alt model.",
   "AIProjectModelUnavailableTitle": "Model indisponibil",
   "AIProjectNotAvailable": "Acest proiect IA nu mai este disponibil",
+  "AIProjectNotMember": "Nu sunteți membru al acestui proiect IA",
+  "AIProjectNotMemberDescription": "Doar membrii proiectului pot conversa în el. Cereți unui manager de proiect să vă invite.",
   "AIProjectOwner": "Proprietarul proiectului",
   "AIProjectSaved": "Proiectul IA „{{name}}” a fost salvat",
   "AiRooms": "Săli IA",

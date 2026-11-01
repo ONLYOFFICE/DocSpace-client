@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "මෙම ව්‍යාපෘතියේ ආකෘතිය තවදුරටත් ලබා ගත නොහැක. වෙනත් ආකෘතියක් තෝරන ලෙස ව්‍යාපෘති කළමනාකරුගෙන් ඉල්ලන්න.",
   "AIProjectModelUnavailableTitle": "ආකෘතිය ලබා ගත නොහැක",
   "AIProjectNotAvailable": "මෙම AI ව්‍යාපෘතිය තවදුරටත් ලබා ගත නොහැක",
+  "AIProjectNotMember": "ඔබ මෙම AI ව්‍යාපෘතියේ සාමාජිකයෙකු නොවේ",
+  "AIProjectNotMemberDescription": "ව්‍යාපෘති සාමාජිකයින්ට පමණක් එහි කතාබස් කළ හැක. ඔබට ආරාධනා කරන ලෙස ව්‍යාපෘති කළමනාකරුවෙකුගෙන් ඉල්ලන්න.",
   "AIProjectOwner": "ව්‍යාපෘති හිමිකරු",
   "AIProjectSaved": "AI ව්‍යාපෘතිය \"{{name}}\" සුරකින ලදී",
   "AiRooms": "AI කාමර",

@@ -1,0 +1,29 @@
+{
+  "key_path": "AIProjectNotMember",
+  "content": "You are not a member of this AI project",
+  "content_en_sha1_hash": "f9af18c485623f62e23234c0614627dca3b496f7",
+  "created_at": "2026-11-01T10:47:59.602Z",
+  "updated_at": "2026-11-01T10:49:34.931Z",
+  "comment": {
+    "text": "Title of the empty view shown in place of the chat when a DocSpace admin opens an AI project they were not invited to; the admin can see the project but cannot chat in it.",
+    "is_auto": true,
+    "updated_at": "2026-11-01T10:49:34.931Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/AiProjectView.tsx",
+      "line_number": 219,
+      "context": "if (!inRoom) {\n return (\n <EmptyView\n icon={isBase ? <EmptyAccessLightIcon /> : <EmptyAccessDarkIcon />}\n title={t(\"Common:AIProjectNotMember\")}\n description={t(\"Common:AIProjectNotMemberDescription\")}\n options={null}\n />\n );\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Այս նախագծի մոդելն այլևս հասանելի չէ։ Խնդրեք նախագծի մենեջերին ընտրել այլ մոդել։",
   "AIProjectModelUnavailableTitle": "Մոդելը հասանելի չէ",
   "AIProjectNotAvailable": "Այս ԱԲ նախագիծն այլևս հասանելի չէ",
+  "AIProjectNotMember": "Դուք այս ԱԲ նախագծի անդամ չեք",
+  "AIProjectNotMemberDescription": "Միայն նախագծի անդամները կարող են զրուցել դրանում։ Խնդրեք նախագծի մենեջերին հրավիրել ձեզ։",
   "AIProjectOwner": "Նախագծի սեփականատեր",
   "AIProjectSaved": "«{{name}}» ԱԲ նախագիծը պահպանվեց",
   "AiRooms": "ԱԲ սենյակներ",

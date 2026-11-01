@@ -28,6 +28,7 @@ import {
   getAiProjects,
   getAiProject,
   getAiProjectSkills,
+  refreshAiProjectSettings,
   toAiProject,
   updateAiProject,
 } from "./projects";
@@ -332,6 +333,30 @@ describe("the calls", () => {
       "GET /files/rooms/7/sources": sources(),
     });
     expect((await getAiProject(7)).aiProject.profile).toBeNull();
+  });
+
+  it("re-reads only the model and sources of an open project, keeping it when nothing changed", async () => {
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources([12]),
+      "GET /files/rooms/7/model": { profileId: "p1" },
+    });
+    const opened = await getAiProject(7);
+    request.mockClear();
+    getProfileById.mockClear();
+
+    expect(await refreshAiProjectSettings(opened)).toBe(opened);
+    expect(request).not.toHaveBeenCalledWith(expect.objectContaining({ url: "/files/rooms/7" }));
+    expect(getProfileById).not.toHaveBeenCalled();
+
+    route({
+      "GET /files/rooms/7/sources": sources([12], [9]),
+      "GET /files/rooms/7/model": { profileId: "p1" },
+    });
+    const updated = await refreshAiProjectSettings(opened);
+    expect(updated.title).toBe(opened.title);
+    expect(updated.aiProject.profile).toBe(opened.aiProject.profile);
+    expect(updated.aiProject.knowledgeRooms).toMatchObject([{ id: 9, roomType: 11 }]);
   });
 
   it("marks a model whose profile is gone or cannot chat as unavailable", async () => {

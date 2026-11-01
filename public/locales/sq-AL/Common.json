@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Modeli i këtij projekti nuk është më i disponueshëm. Kërkojini një menaxheri të projektit të zgjedhë një model tjetër.",
   "AIProjectModelUnavailableTitle": "Modeli nuk është i disponueshëm",
   "AIProjectNotAvailable": "Ky projekt IA nuk është më i disponueshëm",
+  "AIProjectNotMember": "Nuk jeni anëtar i këtij projekti IA",
+  "AIProjectNotMemberDescription": "Vetëm anëtarët e projektit mund të bisedojnë në të. Kërkojini një menaxheri të projektit t'ju ftojë.",
   "AIProjectOwner": "Pronari i projektit",
   "AIProjectSaved": "Projekti IA \"{{name}}\" u ruajt",
   "AiRooms": "Dhomat IA",

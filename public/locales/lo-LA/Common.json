@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "ຮູບແບບຂອງໂຄງການນີ້ບໍ່ມີໃຫ້ໃຊ້ອີກຕໍ່ໄປ. ຂໍໃຫ້ຜູ້ຈັດການໂຄງການເລືອກຮູບແບບອື່ນ.",
   "AIProjectModelUnavailableTitle": "ຮູບແບບບໍ່ພ້ອມໃຊ້ງານ",
   "AIProjectNotAvailable": "ໂຄງການ AI ນີ້ບໍ່ມີໃຫ້ໃຊ້ອີກຕໍ່ໄປ",
+  "AIProjectNotMember": "ທ່ານບໍ່ແມ່ນສະມາຊິກຂອງໂຄງການ AI ນີ້",
+  "AIProjectNotMemberDescription": "ມີແຕ່ສະມາຊິກຂອງໂຄງການເທົ່ານັ້ນທີ່ສາມາດສົນທະນາໃນໂຄງການນີ້ໄດ້. ຂໍໃຫ້ຜູ້ຈັດການໂຄງການເຊີນທ່ານ.",
   "AIProjectOwner": "ເຈົ້າຂອງໂຄງການ",
   "AIProjectSaved": "ບັນທຶກໂຄງການ AI \"{{name}}\" ແລ້ວ",
   "AiRooms": "ຫ້ອງ AI",

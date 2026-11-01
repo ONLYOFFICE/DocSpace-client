@@ -6,8 +6,8 @@ const api = vi.hoisted(() => ({
   createAiProject: vi.fn(),
   getAiProject: vi.fn(),
   getAiProjectKnowledgeFiles: vi.fn(),
-  getAiProjectModel: vi.fn(),
   getAiProjectSkills: vi.fn(),
+  refreshAiProjectSettings: vi.fn(),
   updateAiProject: vi.fn(),
   toAiProject: vi.fn((dto: Record<string, unknown>) => ({ ...dto, aiProject: {} })),
 }));
@@ -186,22 +186,26 @@ describe("AiProjectsStore", () => {
       expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "1" }));
     });
 
-    it("follows a model changed elsewhere, and leaves an unchanged one alone", async () => {
+    it("follows the model and rooms changed elsewhere, and leaves an unchanged project alone", async () => {
       const store = createStore();
       await store.openProject(project(1));
-      const opened = store.activeProject;
-      api.getAiProjectModel.mockImplementationOnce(async (_id: number, known: unknown) => known);
+      const opened = store.activeProject as TAiProject;
+      api.refreshAiProjectSettings.mockImplementationOnce(async (current: TAiProject) => current);
 
-      await store.refreshActiveModel();
+      await store.refreshActiveSettings();
       expect(store.activeProject).toBe(opened);
 
+      store.knowledge = { 5: [], 6: [] };
+      const knowledgeRoom = { id: 6, title: "Docs", roomType: 11, available: true, archived: false };
       const gpt = { id: "p2", name: "GPT", provider: "openai", available: true };
-      api.getAiProjectModel.mockResolvedValueOnce(gpt);
+      const updated = { ...opened, aiProject: { ...opened.aiProject, profile: gpt, knowledgeRooms: [knowledgeRoom] } };
+      api.refreshAiProjectSettings.mockResolvedValueOnce(updated);
       presets.setActivePreset.mockClear();
 
-      await store.refreshActiveModel();
-      expect(api.getAiProjectModel).toHaveBeenLastCalledWith(1, opened?.aiProject.profile);
-      expect(store.activeProject?.aiProject.profile).toEqual(gpt);
+      await store.refreshActiveSettings();
+      expect(api.refreshAiProjectSettings).toHaveBeenLastCalledWith(opened);
+      expect(store.activeProject).toEqual(updated);
+      expect(Object.keys(store.knowledge)).toEqual(["6"]);
       expect(presets.setActivePreset).toHaveBeenCalledTimes(1);
     });
   });

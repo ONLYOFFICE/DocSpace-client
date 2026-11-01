@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Het model van dit project is niet meer beschikbaar. Vraag een projectbeheerder om een ander model te kiezen.",
   "AIProjectModelUnavailableTitle": "Model niet beschikbaar",
   "AIProjectNotAvailable": "Dit AI-project is niet meer beschikbaar",
+  "AIProjectNotMember": "U bent geen lid van dit AI-project",
+  "AIProjectNotMemberDescription": "Alleen projectleden kunnen erin chatten. Vraag een projectbeheerder om u uit te nodigen.",
   "AIProjectOwner": "Projecteigenaar",
   "AIProjectSaved": "AI-project \"{{name}}\" opgeslagen",
   "AiRooms": "AI-kamers",

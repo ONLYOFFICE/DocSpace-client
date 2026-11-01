@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Το μοντέλο αυτού του έργου δεν είναι πλέον διαθέσιμο. Ζητήστε από έναν διαχειριστή έργου να επιλέξει άλλο μοντέλο.",
   "AIProjectModelUnavailableTitle": "Το μοντέλο δεν είναι διαθέσιμο",
   "AIProjectNotAvailable": "Αυτό το έργο AI δεν είναι πλέον διαθέσιμο",
+  "AIProjectNotMember": "Δεν είστε μέλος αυτού του έργου AI",
+  "AIProjectNotMemberDescription": "Μόνο τα μέλη του έργου μπορούν να συνομιλούν σε αυτό. Ζητήστε από έναν διαχειριστή έργου να σας προσκαλέσει.",
   "AIProjectOwner": "Κάτοχος έργου",
   "AIProjectSaved": "Το έργο AI \"{{name}}\" αποθηκεύτηκε",
   "AiRooms": "Δωμάτια AI",

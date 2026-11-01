@@ -183,6 +183,8 @@
   "AIProjectModelUnavailableMember": "Bu layihənin modeli artıq əlçatan deyil. Layihə menecerindən başqa model seçməsini xahiş edin.",
   "AIProjectModelUnavailableTitle": "Model əlçatan deyil",
   "AIProjectNotAvailable": "Bu AI layihəsi artıq əlçatan deyil",
+  "AIProjectNotMember": "Siz bu AI layihəsinin üzvü deyilsiniz",
+  "AIProjectNotMemberDescription": "Yalnız layihə üzvləri burada söhbət edə bilər. Layihə menecerindən sizi dəvət etməsini xahiş edin.",
   "AIProjectOwner": "Layihə sahibi",
   "AIProjectSaved": "\"{{name}}\" AI layihəsi yadda saxlanıldı",
   "AiRooms": "AI otaqları",

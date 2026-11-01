@@ -56,6 +56,13 @@ class FakeAiChatStore {
 
 let aiChatStore = new FakeAiChatStore();
 
+// The bridge reads whether a chat profile exists to tell "AI is set up".
+vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers", () => ({
+  useStores: () => ({
+    useProfilesStore: (select: (s: { initialized: boolean; hasProfiles: boolean }) => unknown) =>
+      select({ initialized: true, hasProfiles: true }),
+  }),
+}));
 vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store", () => ({
   useAiChatStore: () => aiChatStore,
 }));
@@ -86,6 +93,8 @@ vi.mock("SRC_DIR/components/GlobalEvents/sub-components/Dialog", () => ({
 import AiPresetsStore, { toAiPreset } from "SRC_DIR/store/AiPresetsStore";
 
 import AiPresetsBridgeConnected from "../index";
+
+const setAiReady = vi.fn();
 
 // `inject` supplies the store props; the test renders it under a Provider.
 const AiPresetsBridge = AiPresetsBridgeConnected as unknown as React.FC;
@@ -121,7 +130,12 @@ const renderBridge = (
 ) =>
   render(
     <MemoryRouter initialEntries={[path]}>
-      <Provider aiPresetsStore={aiPresetsStore} userStore={{ user }} settingsStore={{ aiConfig }}>
+      <Provider
+        aiPresetsStore={aiPresetsStore}
+        userStore={{ user }}
+        settingsStore={{ aiConfig, standalone: true, setAiReady }}
+        paymentStore={{ isAIReady: false }}
+      >
         <AiPresetsBridge />
       </Provider>
     </MemoryRouter>,
@@ -266,5 +280,10 @@ describe("AiPresetsBridge", () => {
     act(() => aiChatStore.setIsVisible(true));
     act(() => aiChatStore.setIsVisible(false));
     expect(aiChatStore.applyPreset).not.toHaveBeenCalled();
+  });
+  it("tells the stores that AI is set up once a chat profile exists on standalone", () => {
+    setAiReady.mockClear();
+    renderBridge(new AiPresetsStore());
+    expect(setAiReady).toHaveBeenLastCalledWith(true);
   });
 });

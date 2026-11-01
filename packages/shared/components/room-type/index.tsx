@@ -66,6 +66,7 @@ const RoomType = ({
   selectedId,
   disabledFormRoom,
   disabledPublicRoom,
+  isDisabled,
   isTemplate,
   isTemplateRoom,
   isFormSection,
@@ -94,6 +95,7 @@ const RoomType = ({
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   const disabled =
+    !!isDisabled ||
     (isFormRoom && disabledFormRoom) ||
     (isPublicRoomType && disabledPublicRoom);
 

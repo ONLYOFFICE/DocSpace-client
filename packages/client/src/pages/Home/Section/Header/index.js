@@ -106,6 +106,7 @@ const SectionHeaderContent = (props) => {
     isAiHubFolder,
     isAiSectionFolder,
     isAiProjectRoomRoot,
+    isAiOff,
     security,
     setIsIndexEditingMode,
     tReady,
@@ -854,7 +855,8 @@ const SectionHeaderContent = (props) => {
     selectedFolder?.type,
   ]);
 
-  const currentCanCreate = security?.Create;
+  // Nothing is created in "AI rooms" until AI is set up on the portal.
+  const currentCanCreate = security?.Create && !(isAiHubFolder && isAiOff);
 
   const currentRootRoomTitle =
     navigationPath &&
@@ -1391,6 +1393,7 @@ export default inject(
       isAiHubFolder,
       isAiSectionFolder,
       isAiProjectRoomRoot,
+      isAiOff: settingsStore.aiReady === false,
 
       selectedFolder,
 

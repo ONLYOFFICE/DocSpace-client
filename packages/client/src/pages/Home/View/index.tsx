@@ -71,9 +71,11 @@ import useContacts, { type UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { type UseFilesProps } from "../Hooks/useFiles";
 import OformsStore from "SRC_DIR/store/OformsStore";
 import AiProjectViewConnected from "SRC_DIR/pages/AiProjects/AiProjectView";
+import EmptyAiRoomsContainerConnected from "SRC_DIR/components/EmptyContainer/EmptyAiRoomsContainer";
 
 // Every prop of the project view is injected.
 const AiProjectView = AiProjectViewConnected as unknown as React.FC;
+const EmptyAiRoomsContainer = EmptyAiRoomsContainerConnected as unknown as React.FC;
 
 type ViewProps = UseContactsProps &
   UseFilesProps &
@@ -97,6 +99,8 @@ type ViewProps = UseContactsProps &
     currentExtensionGallery: OformsStore["currentExtensionGallery"];
     /** An AI project room is the selected folder: its chat replaces the file list. */
     isAiProjectRoomRoot: boolean;
+    /** The "AI rooms" list while AI is not set up on the portal: the "AI is off" view replaces it. */
+    isAiRoomsOff: boolean;
   };
 
 const View = ({
@@ -162,6 +166,7 @@ const View = ({
   checkTg,
   getEncryptionKeys,
   isAiProjectRoomRoot,
+  isAiRoomsOff,
 }: ViewProps) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -496,6 +501,8 @@ const View = ({
             <ProfileSectionBodyContent />
           ) : isAiProjectRoomRoot && !isLoading ? (
             <AiProjectView />
+          ) : isAiRoomsOff && !isLoading ? (
+            <EmptyAiRoomsContainer />
           ) : (
             <SectionBodyContent sectionWidth={context.sectionWidth} />
           )
@@ -522,6 +529,7 @@ export const ViewComponent = inject(
     setup,
     authStore,
     telegramStore,
+    settingsStore,
   }: TStore) => {
     const { usersStore, groupsStore } = peopleStore;
 
@@ -593,6 +601,8 @@ export const ViewComponent = inject(
 
     return {
       isAiProjectRoomRoot: treeFoldersStore.isAiProjectRoomRoot,
+      isAiRoomsOff:
+        treeFoldersStore.isAiHubFolder && settingsStore.aiReady === false,
       setContactsTab,
       getUsersList,
       getGroups,

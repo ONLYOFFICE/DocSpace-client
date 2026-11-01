@@ -41,6 +41,7 @@ import { reaction } from "mobx";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -72,6 +73,10 @@ type AiPresetsBridgeProps = {
   canCreateProjects: boolean;
   /** Vectorization is on for the portal: Knowledge rooms can be picked as a knowledge base. */
   vectorizationEnabled: boolean;
+  standalone: boolean;
+  /** SaaS: the AI service is on for the portal. */
+  isAIReady: boolean;
+  setAiReady: (aiReady: boolean | null) => void;
 };
 
 /**
@@ -87,10 +92,24 @@ const AiPresetsBridge = ({
   userId,
   canCreateProjects,
   vectorizationEnabled,
+  standalone,
+  isAIReady,
+  setAiReady,
 }: AiPresetsBridgeProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const aiChatStore = useAiChatStore();
+
+  // Whether AI is set up, by the chat's own rule, for the AI rooms section
+  // outside the providers: a chat profile on standalone (unknown until the
+  // profiles are loaded), the AI service on SaaS.
+  const { useProfilesStore } = useStores();
+  const profilesInitialized = useProfilesStore((s: { initialized: boolean }) => s.initialized);
+  const hasProfiles = useProfilesStore((s: { hasProfiles: boolean }) => s.hasProfiles);
+  const aiReady = standalone ? (profilesInitialized ? hasProfiles : null) : isAIReady;
+  React.useEffect(() => {
+    setAiReady(aiReady);
+  }, [setAiReady, aiReady]);
 
   React.useEffect(() => {
     aiPresetsStore.init(userId);
@@ -203,11 +222,14 @@ const AiPresetsBridge = ({
   );
 };
 
-export default inject(({ aiPresetsStore, userStore, settingsStore }: TStore) => ({
+export default inject(({ aiPresetsStore, userStore, settingsStore, paymentStore }: TStore) => ({
   aiPresetsStore,
   userId: userStore.user?.id ?? null,
   canCreateProjects: canManageProjects(userStore.user),
   // The AI config is read only while AI services are on; until it arrives
   // the picker stays, as the server refuses to link a room anyway.
   vectorizationEnabled: settingsStore.aiConfig?.vectorizationEnabled !== false,
+  standalone: !!settingsStore.standalone,
+  isAIReady: !!paymentStore.isAIReady,
+  setAiReady: settingsStore.setAiReady,
 }))(observer(AiPresetsBridge));

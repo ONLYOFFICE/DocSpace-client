@@ -111,6 +111,7 @@ const ArticleMainButtonContent = (props) => {
     currentFolderId,
     currentRoomType,
     vectorizationEnabled,
+    isAiRoomsOff,
     isRoomsFolder,
     isArchiveFolder,
 
@@ -705,6 +706,9 @@ const ArticleMainButtonContent = (props) => {
 
     // A Knowledge room with vectorization off has nothing to offer: no
     // upload, no create.
+    // Nothing is created in "AI rooms" until AI is set up on the portal.
+    if (isAiRoomsOff) visibilityValue = false;
+
     if (currentRoomType === RoomsType.KnowledgeRoom && !vectorizationEnabled)
       visibilityValue = false;
 
@@ -736,7 +740,8 @@ const ArticleMainButtonContent = (props) => {
   } else if (isAccountsPage) {
     isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
   } else {
-    isDisabled = (isFrame && disableActionButton) || !security?.Create;
+    isDisabled =
+      (isFrame && disableActionButton) || !security?.Create || isAiRoomsOff;
   }
 
   if (showArticleLoader)
@@ -910,6 +915,8 @@ export default inject(
     const { createFoldersTree } = filesActionsStore;
 
     return {
+      isAiRoomsOff:
+        treeFoldersStore.isAiHubFolder && settingsStore.aiReady === false,
       setQuotaWarningDialogVisible,
       showText: settingsStore.showText,
       isMobileArticle: settingsStore.isMobileArticle,

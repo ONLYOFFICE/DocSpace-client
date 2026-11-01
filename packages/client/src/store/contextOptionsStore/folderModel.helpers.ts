@@ -431,7 +431,8 @@ export const getFolderModelImpl = (
           },
         ]
       : isRoomsFolder || isAiHubFolder
-        ? isFlowsFolder
+        ? // Nothing is created in "AI rooms" until AI is set up on the portal.
+          isFlowsFolder || (isAiHubFolder && self.settingsStore.aiReady === false)
           ? []
           : [
               {

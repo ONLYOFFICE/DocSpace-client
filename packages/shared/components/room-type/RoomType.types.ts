@@ -47,6 +47,8 @@ export type RoomTypeProps = {
   onClick: React.MouseEventHandler<HTMLElement>;
   disabledFormRoom?: boolean;
   disabledPublicRoom?: boolean;
+  /** Greys out any room type, marks it `aria-disabled` and stops its `onClick`. */
+  isDisabled?: boolean;
   isTemplate?: boolean;
   isTemplateRoom?: boolean;
   isFormSection?: boolean;

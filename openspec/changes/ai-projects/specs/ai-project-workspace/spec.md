@@ -17,6 +17,13 @@ Opening a project from the "AI rooms" list, or through a `/ai-rooms/{id}/filter?
 - **WHEN** the user loads `/ai-rooms/{id}/filter?folder={id}` for a project that is gone or not shared with them
 - **THEN** a toast shows the server's error and no project opens
 
+### Requirement: Project the caller is not a member of
+A DocSpace admin who opens a project they are not a member of (`inRoom` false) SHALL see a "not a member" empty view in place of the chat, telling them to ask a Project manager for an invitation, with no chat toolbar in the header. The project SHALL NOT be read for the chat and no thread SHALL start. The room menu and the Info panel SHALL stay as for any room.
+
+#### Scenario: Admin opens a project of others
+- **WHEN** a DocSpace admin who is not in the "Sales" project opens it from the AI rooms list
+- **THEN** the section shows "You are not a member of this AI project" instead of the chat, and the header has no chat history or new chat buttons
+
 ### Requirement: Workspace in place of the file list
 The Home page SHALL draw the project workspace in place of the file list for a selected folder whose `roomType` is 12, and the file list otherwise. The URL SHALL keep the room URL shape, and "Copy link" on a project SHALL give that URL.
 
@@ -109,11 +116,15 @@ On desktop the chat history and the Info panel SHALL each take the sources colum
 - **THEN** the history closes and the Info panel takes its place
 
 ### Requirement: Edits reach the open chat
-An edit of the open project's model or rooms, made by the caller or by someone else, SHALL reach the open chat without losing the current thread.
+An edit of the open project's model or rooms, made by the caller or by someone else, SHALL reach the open chat and the sources column without losing the current thread. An edit made elsewhere comes as the socket `update` of the project room: the view SHALL read the project's sources (`files/rooms/{id}/sources`) and model again, not the room, and change nothing when both are as on screen.
 
 #### Scenario: Edited by another user
 - **WHEN** a Project manager adds a Knowledge room to the project while a Member has its chat open
 - **THEN** the Member's chat gains that knowledge base and keeps the current thread
+
+#### Scenario: Room unlinked by another user
+- **WHEN** a Project manager unlinks an Instructions room while a Member has the project open
+- **THEN** on the room update the Member's sources column drops that room and their chat no longer reads its skills
 
 ### Requirement: Lost project closes the view
 When the open project is deleted by someone else, or the caller loses access to it, the chat SHALL close, a toast SHALL tell the user what happened, and the view SHALL go back to the AI rooms list (`/ai-rooms/filter`). The toast SHALL say that the project was deleted when it was deleted, and that it is no longer available when the caller lost access.

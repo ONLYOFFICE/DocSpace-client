@@ -138,7 +138,9 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - [x] ~~11.11 Server (.NET, Maxim): a scoped reset of the assignment~~ — dropped: a model is never cleared on the server, and the form always stores the picked model, the default included
 
 - [x] 11.12 Move to the Files model route: the client reads and writes `files/rooms/{id}/model` and names the profile with `GET ai/profiles/get-by-id` (gone or non-chat = unavailable); ASC.AI.Chat reads a round's project model from `GET files/rooms/{id}/model` and drops the proxy (`aiProjectModelController.ts`, `aiProjectModel.ts`, their tests, the route and its OpenAPI entries); MSW handlers moved; verify with `projects.test.ts`, `AiProjectsStore.test.ts` and the Node suite
-- [x] 11.13 An open project follows a model change made elsewhere: on the project room's socket `update` it reads `files/rooms/{id}/model` again and, when changed, switches the chat in place (`AiProjectsStore.refreshActiveModel`); verify with `AiProjectsStore.test.ts`
+- [x] 11.13 An open project follows a model change made elsewhere: on the project room's socket `update` it reads `files/rooms/{id}/model` again and, when changed, switches the chat in place (`AiProjectsStore.refreshActiveModel`); verify with `AiProjectsStore.test.ts` — *Extended (11.14).*
+- [x] 11.14 The same socket `update` also re-reads the project's sources: `refreshAiProjectSettings` reads `files/rooms/{id}/sources` and the model (not the room) and keeps the project object when nothing changed; `AiProjectsStore.refreshActiveSettings` replaces `refreshActiveModel` and drops the files of an unlinked Knowledge room; verify with `projects.test.ts` and `AiProjectsStore.test.ts`
+- [x] 11.15 A DocSpace admin outside a project (`selectedFolderStore.inRoom` false) gets the "not a member" empty view (`Common:AIProjectNotMember`, `Common:AIProjectNotMemberDescription`, translated into every language) instead of the chat; the project is not read and the header drops the chat toolbar
 
 ## 12. AI not set up and vectorization off (2026-11-01)
 

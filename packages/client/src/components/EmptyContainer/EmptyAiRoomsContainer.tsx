@@ -55,8 +55,8 @@ import { AI_SETTINGS_URL } from "SRC_DIR/helpers/constants";
 import { canManageProjects } from "SRC_DIR/pages/AiProjects/utils";
 
 import {
-  getAIAgentsAIDisabledDescription,
-  getAIAgentsAIDisabledTitle,
+  getAiRoomsAIOffDescription,
+  getAiRoomsAIOffTitle,
 } from "./sub-components/EmptyViewContainer/EmptyViewContainer.utils";
 
 type EmptyAiRoomsContainerProps = {
@@ -144,8 +144,8 @@ const EmptyAiRoomsContainer = ({
       <>
         <EmptyView
           icon={icon}
-          title={getAIAgentsAIDisabledTitle(t, standalone, isAdmin)}
-          description={getAIAgentsAIDisabledDescription(t, standalone, isAdmin)}
+          title={getAiRoomsAIOffTitle(t, standalone, isAdmin)}
+          description={getAiRoomsAIOffDescription(t, standalone, isAdmin)}
           options={aiOffOptions}
         />
         {topUpDialog}

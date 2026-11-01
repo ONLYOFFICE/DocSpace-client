@@ -250,49 +250,34 @@ export const getRoomDescription = (
   return t("EmptyView:EmptyViewDescription");
 };
 
-export const getAIAgentsAIDisabledTitle = (
+export const getAiRoomsAIOffTitle = (
   t: TTranslation,
   standalone: boolean,
   isPortalAdmin: boolean,
 ) => {
-  return (
-    match([standalone, isPortalAdmin])
-      .with([true, true], () =>
-        t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle", {
-          aiProvider: t("Common:AIProvider"),
-        }),
-      )
-      .with([false, true], () => t("Common:EmptyAIAgentsNotActiveYetTitle"))
-      // standalone user
-      .with([true, false], () => t("Common:EmptyAIAgentsAIDisabledUserTitle"))
-      // saas user
-      .otherwise(() => t("Common:AIFeaturesNotActive"))
-  );
+  if (!isPortalAdmin) return t("Common:AiRoomsAIOffUserTitle");
+  return standalone
+    ? t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle", {
+        aiProvider: t("Common:AIProvider"),
+      })
+    : t("Common:AiRoomsAIOffTitle");
 };
 
-export const getAIAgentsAIDisabledDescription = (
+export const getAiRoomsAIOffDescription = (
   t: TTranslation,
   standalone: boolean,
   isPortalAdmin: boolean,
 ) => {
-  return match([standalone, isPortalAdmin])
-    .with([true, true], () =>
-      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
-        aiChats: t("Common:AIChats"),
-      }),
-    )
-    .with([false, true], () => (
-      <>
-        <Text as="span">
-          {t("Common:EmptyAIAgentsNotActiveYetDescription")}
-        </Text>
-        <Text as="span" style={{ display: "block", marginTop: "8px" }}>
-          {t("Common:EmptyAIAgentsNotActiveYetDescriptionLine2")}
-        </Text>
-      </>
-    ))
-    .with([true, false], () => t("Common:EmptyAIAgentsAIDisabledDescription"))
-    .otherwise(() => t("Common:EmptyAIDisabledContactAdminDesc"));
+  if (!isPortalAdmin) return t("Common:AiRoomsAIOffUserDescription");
+  if (standalone) return t("Common:AiRoomsAIOffStandaloneAdminDescription");
+  return (
+    <>
+      <Text as="span">{t("Common:AiRoomsAIOffDescription")}</Text>
+      <Text as="span" style={{ display: "block", marginTop: "8px" }}>
+        {t("Common:EmptyAIAgentsNotActiveYetDescriptionLine2")}
+      </Text>
+    </>
+  );
 };
 
 export const getRootDescription = (

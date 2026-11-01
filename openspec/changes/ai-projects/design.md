@@ -68,7 +68,7 @@ Recent, Favorites and Trash of "AI rooms" are the shared special folders with `f
 - model: after the room and sources, `PUT ai/projects/{id}/model` when the form sends one (a new project on the default writes nothing); a refused write does not fail the save and comes back as a `modelNotSaved` warning;
 - delete: `DELETE files/rooms/{id}` with `deleteAfter: false`;
 - skills: `files/rooms/{id}/skills`;
-- knowledge: the sources' Knowledge rooms, each read with `GET files/{roomId}?filterType=1` in pages of 100 up to 1000 files (`truncated` past it), four rooms at a time; a room that cannot be read is shown as unavailable.
+- knowledge: the sources' Knowledge rooms are listed as they are; a room's files are read when its row is expanded, with one `GET files/{roomId}?filterType=1&count=100` (a Knowledge room holds at most 100 files).
 
 Two mappers stay: `toAiProject` (logo colour with `#`, linked rooms with `available` and `archived` defaulted, `Leave` = `inRoom && access !== Owner`) and `aiProjectToRoom` (back to the `TRoom` shape the room panels read). Pin, mute, leave, owner change, logo removal, members, invitation links and history go through the room routes, so the room panels need no project branch.
 

@@ -324,18 +324,22 @@ Each listed project SHALL be a full room DTO (`tags`, `createdBy`, `updatedBy`, 
 - **THEN** that room is absent from the answer
 
 ### Requirement: Knowledge listing
-The client SHALL compose a project's knowledge from its sources' Knowledge rooms, reading each with `GET files/{roomId}?filterType=1` in pages of 100 up to 1000 files (`truncated` when there are more), four rooms at a time. A room whose files cannot be read SHALL be shown as unavailable with no files, without failing the others.
+The Knowledge card SHALL list the project's Knowledge rooms from its sources alone, with no file read. A room's files SHALL be read when its row is expanded, with one `GET files/{roomId}?filterType=1&count=100`: a Knowledge room holds at most 100 files, so there is no paging. A room whose files cannot be read SHALL show an error toast without touching the other rooms.
 
-#### Scenario: Room over the listing size
-- **WHEN** a linked Knowledge room holds 1200 files
-- **THEN** the room comes with 1000 files, `totalFiles: 1200` and `truncated: true`
+#### Scenario: Project opened
+- **WHEN** a project with three Knowledge rooms opens
+- **THEN** the card lists the three rooms and no files are read
+
+#### Scenario: Room expanded
+- **WHEN** the user expands one of them
+- **THEN** that room's files are read with one request and listed under it
 
 ### Requirement: Knowledge file state
-Each file in the knowledge listing SHALL carry `indexed` (its vectorization completed), its `vectorizationStatus` (in progress, completed, failed, or `null` when never queued) and `security.Vectorization` (whether the caller may retry it). Each room SHALL carry `totalFiles`, `indexedFiles` and `failedFiles`.
+Each file in a room's listing SHALL carry `indexed` (its vectorization completed), its `vectorizationStatus` (in progress, completed, failed, or `null` when never queued) and `security.Vectorization` (whether the caller may retry it). The room's warning icon SHALL count the failed files among those read.
 
 #### Scenario: Failed file for a Viewer
-- **WHEN** a Viewer of the room reads the knowledge listing and one file failed to vectorize
-- **THEN** the file comes with `vectorizationStatus: failed` and `security.Vectorization: false`, and the room's `failedFiles` is 1
+- **WHEN** a Viewer of the room expands it and one file failed to vectorize
+- **THEN** the file comes with `vectorizationStatus: failed` and `security.Vectorization: false`, and the room shows its warning icon
 
 ### Requirement: Project logo image
 A project SHALL take an uploaded logo the way a room does: the picture is uploaded to `files/logos`, and the create or update body carries it as `logo` (`tmpFile`, `x`, `y`, `width`, `height`); `DELETE files/rooms/{id}/logo` removes it, allowed to the owner and Project managers. The DTO then carries the logo sizes and no cover; removing it returns the colour and cover.

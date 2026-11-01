@@ -52,7 +52,7 @@ On desktop (1024px and wider) a sources column SHALL sit beside the chat with th
 ### Requirement: Source card contents
 Each card SHALL list its sources:
 - **Instructions:** one row per linked room, expanding to its skills (name, description as tooltip).
-- **Knowledge:** one row per linked room, expanding to all of its files with their vectorization state.
+- **Knowledge:** one row per linked room, expanding to its files (at most 100) with their vectorization state.
 - **Context:** the caller's own Context folder, or an "Add room" action.
 
 A skill or file SHALL open in the editor in a new tab. A room's name SHALL open the room in Files.

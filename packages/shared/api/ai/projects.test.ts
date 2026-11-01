@@ -255,6 +255,32 @@ describe("the calls", () => {
     ]);
   });
 
+  it("saves an edit from the opened project without reading the sources or rewriting the model", async () => {
+    route({ "PUT /files/rooms/7": folder({ aiProject: undefined }) });
+    const opened = toAiProject(
+      folder({
+        aiProject: {
+          profile: { id: "p1", name: "Claude", provider: "anthropic", available: true },
+          instructionsRooms: [{ id: 12, title: "Skills" }, { id: 13, title: "Old" }],
+          knowledgeRooms: [{ id: 9, title: "Docs" }],
+        },
+      }),
+    );
+    request.mockClear();
+    const project = await updateAiProject(
+      7,
+      { title: "Sales", aiProject: { profileId: "p1", instructionsRoomIds: [12], knowledgeRoomIds: [9] } },
+      opened,
+    );
+    expect(request.mock.calls.map(([config]) => `${(config as { method: string }).method} ${(config as { url: string }).url}`)).toEqual([
+      "PUT /files/rooms/7",
+      "DELETE /files/rooms/7/sources",
+    ]);
+    expect(project.aiProject.instructionsRooms.map((room) => room.id)).toEqual([12]);
+    expect(project.aiProject.knowledgeRooms.map((room) => room.title)).toEqual(["Docs"]);
+    expect(project.aiProject.profile?.id).toBe("p1");
+  });
+
   const PROFILE = { id: "p1", name: "Claude", provider: "anthropic", available: true };
 
   it("reads the project's model with the room, and the default when it cannot be read", async () => {

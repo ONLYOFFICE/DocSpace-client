@@ -278,7 +278,8 @@ class AiProjectsStore {
 
   /** Saves the edit form; `removeLogo` also drops the uploaded picture. */
   updateProject = async (id: number, data: TAiProjectRequest, options?: { removeLogo?: boolean }) => {
-    let project = await updateAiProject(id, data);
+    const current = this.projectDialog?.mode === "edit" ? this.projectDialog.project : undefined;
+    let project = await updateAiProject(id, data, current?.id === id ? current : undefined);
     if (options?.removeLogo) project = toAiProject((await removeLogoFromRoom(id)) as TAiProjectRoomDto);
     showWarnings(project);
     runInAction(() => this.replaceProject(project));

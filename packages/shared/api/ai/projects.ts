@@ -516,7 +516,7 @@ const syncSources = async (
   };
   await attempt("DELETE", toRemove);
   await attempt("POST", toAdd);
-  return { warnings, changed: toAdd.length + toRemove.length > 0 };
+  return { warnings, changed: toAdd.length + toRemove.length > 0, added: toAdd.length > 0 };
 };
 
 /**
@@ -590,19 +590,50 @@ export const createAiProject = async (data: TAiProjectRequest) => {
   return toAiProject(withSources(room, sources, model.profile, [...warnings, ...model.warnings]));
 };
 
-export const updateAiProject = async (id: number, data: TAiProjectRequest) => {
+/**
+ * Saves the edit form. `current` is the project as the form opened it: its
+ * linked rooms are the base of the sources diff and its model is not
+ * written again when the form keeps it, so a save sends only what changed.
+ * The sources are read back only when rooms were linked, as their titles
+ * and logos come from the server; an unlink is applied to `current`.
+ */
+export const updateAiProject = async (id: number, data: TAiProjectRequest, current?: TAiProject) => {
   const fields = toRoomFields(data);
-  const [room, current] = await Promise.all([
+  const toSourceDto = ({ id: roomId, title, logo }: TAiProjectSource): TSourceDto => ({
+    id: roomId,
+    title,
+    logo: logo ?? null,
+  });
+  const known: TSourcesDto | null = current
+    ? {
+        instructionsRooms: current.aiProject.instructionsRooms.map(toSourceDto),
+        knowledgeRooms: current.aiProject.knowledgeRooms.map(toSourceDto),
+      }
+    : null;
+  const [room, linked] = await Promise.all([
     request(
       Object.keys(fields).length
         ? { method: "PUT", url: `${roomsUrl}/${id}`, data: fields }
         : { method: "GET", url: `${roomsUrl}/${id}` },
     ),
-    getSources(id),
+    known ?? getSources(id),
   ]);
-  const { warnings, changed } = await syncSources(id, data.aiProject, current);
-  const sources = changed ? await getSources(id) : current;
-  const model = await saveModel(id, data.aiProject?.profileId);
+  const { warnings, changed, added } = await syncSources(id, data.aiProject, linked);
+  let sources = linked;
+  if (added) sources = await getSources(id);
+  else if (changed) {
+    const keep = (wanted: number[] | undefined, rooms: TSourceDto[]) =>
+      wanted ? rooms.filter((r) => wanted.includes(r.id)) : rooms;
+    sources = {
+      instructionsRooms: keep(data.aiProject?.instructionsRoomIds, linked.instructionsRooms),
+      knowledgeRooms: keep(data.aiProject?.knowledgeRoomIds, linked.knowledgeRooms),
+    };
+  }
+  const profileId = data.aiProject?.profileId;
+  const model =
+    current && profileId !== undefined && profileId === (current.aiProject.profile?.id ?? null)
+      ? { profile: current.aiProject.profile, warnings: [] as TAiProjectWarning[] }
+      : await saveModel(id, profileId);
   return toAiProject(
     withSources(room as TAiProjectRoomDto, sources, model.profile, [...warnings, ...model.warnings]),
   );

@@ -130,8 +130,9 @@ const SectionBodyContent = (props) => {
   } = props;
 
   // A row the keyboard focused as a whole, coming into the list, becomes the
-  // selection and the caret. A selection of several items is kept: passing
-  // through the list with Tab moves the caret only.
+  // selection and the caret. A selection of several items the row is part of
+  // is kept: passing through the list with Tab moves the caret only. A row
+  // outside it takes the selection, so the focus and the selection agree.
   const onRowFocus = React.useCallback(
     ({ id, isFolder }) => {
       const item = filesList.find(
@@ -142,7 +143,7 @@ const SectionBodyContent = (props) => {
       const isSelected = selection.some(
         (file) => file.id === item.id && !!file.isFolder === isFolder,
       );
-      if (!isSelected && selection.length <= 1) setSelection([item]);
+      if (!isSelected) setSelection([item]);
       setHotkeyCaret(item);
       setHotkeyCaretStart(item);
     },

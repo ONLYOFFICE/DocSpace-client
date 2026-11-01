@@ -245,10 +245,11 @@ test.describe("Files list: the focus follows the keyboard", () => {
     await page.keyboard.press("Escape");
     await expect.poll(() => selectedFiles(page)).toEqual([]);
 
-    // What Shift+Tab back from the browser's toolbar does: the page loses
+    // Tab leaves the page for the browser's toolbar - the last key the page
+    // sees - and Shift+Tab back from there does the rest: the page loses
     // the focus, then the last row's last control gets it, with no key
     // press the page sees.
-    await page.keyboard.press("Shift");
+    await page.keyboard.press("Tab");
     await page.evaluate((id) => {
       if (document.activeElement instanceof HTMLElement)
         document.activeElement.blur();
@@ -358,6 +359,35 @@ test.describe("Files list: the focus follows the keyboard", () => {
     await page.keyboard.press("ArrowDown");
     await expect.poll(async () => (await focus(page)).row).toBe(fileRow(2));
     await expect.poll(() => selectedFiles(page)).toEqual([2]);
+  });
+
+  // A selection of several made with the pointer leaves no caret, so Tab
+  // into the list lands on the first row on screen - outside it. The focus
+  // and the selection used to disagree: the row focused, two others ticked.
+  test("Tab into the list onto a row outside a selection of several selects that row", async ({
+    page,
+  }) => {
+    // The row's checkbox takes the place of its icon only under the pointer:
+    // its input is ticked as the pointer would tick it.
+    for (const n of [2, 3])
+      await page
+        .locator(`#${fileRow(n)} input[type=checkbox]`)
+        .first()
+        .dispatchEvent("click");
+    await expect.poll(() => selectedFiles(page)).toEqual([2, 3]);
+
+    await page
+      .locator("#filter_search-input input, input#filter_search-input")
+      .first()
+      .focus();
+    let where = await focus(page);
+    for (let i = 0; i < 20 && !where.row; i += 1) {
+      await page.keyboard.press("Tab");
+      where = await focus(page);
+    }
+
+    expect(where.row).toBe(fileRow(1));
+    await expect.poll(() => selectedFiles(page)).toEqual([1]);
   });
 
   test("the list's hotkeys still work with the focus on a row's name", async ({

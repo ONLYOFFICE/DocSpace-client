@@ -157,6 +157,13 @@ Members of every AI room and project SHALL be managed through the room panels (I
 - **WHEN** a Project manager invites a user as Member from the Invite panel
 - **THEN** the invitation goes to `files/rooms/{id}/share` and the user appears in Contacts
 
+### Requirement: Linked rooms note in the Invite panel
+The Invite panel of an AI project, and of no other room, SHALL open with an info bar saying that everyone invited gets the Viewer role in all of the project's Instructions and Knowledge rooms.
+
+#### Scenario: Project and Knowledge room panels
+- **WHEN** a Project manager opens the Invite panel of a project, and then of a Knowledge room
+- **THEN** the project's panel shows the bar about the Viewer role in its Instructions and Knowledge rooms, and the Knowledge room's panel shows no such bar
+
 ### Requirement: Live updates
 The section SHALL follow the Files socket events as Rooms does: rooms and projects created, edited or deleted under its root by others appear, change or vanish without a reload, and a room the caller can no longer see drops from the list.
 

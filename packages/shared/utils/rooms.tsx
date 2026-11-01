@@ -55,6 +55,33 @@ export const AI_HUB_SECTION_TYPES: RoomsType[] = [
 ];
 
 /**
+ * The settings the server refuses (400) when an "AI rooms" type is created
+ * or edited: none of them applies to those types. A project takes no quota
+ * either.
+ */
+const AI_HUB_REFUSED_SETTINGS = [
+  "indexing",
+  "denyDownload",
+  "lifetime",
+  "watermark",
+  "chatSettings",
+  "sendFormToExternalDB",
+  "saveFormAsXLSX",
+] as const;
+
+/** The create / edit body of a room without the settings its "AI rooms" type refuses. */
+export const withoutSettingsRefusedForAiRooms = <T extends object>(
+  params: T,
+  roomType?: number,
+): T => {
+  if (roomType === undefined || !AI_HUB_SECTION_TYPES.includes(roomType)) return params;
+  const allowed = { ...params } as Record<string, unknown>;
+  AI_HUB_REFUSED_SETTINGS.forEach((key) => delete allowed[key]);
+  if (roomType === RoomsType.AiProjectRoom) delete allowed.quota;
+  return allowed as T;
+};
+
+/**
  * `FolderType` values of the "AI rooms" section's rooms, for the `folderType`
  * scope of its Recent/Favorites/Trash slots (see ROOMS_SECTION_FOLDER_TYPES).
  */

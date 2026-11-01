@@ -26,7 +26,11 @@ A DocSpace admin who opens a project they are not a member of (`inRoom` false) S
 
 #### Scenario: Invited while looking at the stub
 - **WHEN** a Project manager invites that admin while the stub is on screen
-- **THEN** on the project room's socket `update` or `create` the admin's view reads the room again and the project chat replaces the stub without a reload
+- **THEN** on the project room's socket `update` or `create`, or `s:change-access-rights-folder` naming the admin, the view reads the room again and the project chat replaces the stub without a reload
+
+#### Scenario: Admin removed while chatting
+- **WHEN** a Project manager removes a DocSpace admin from a project the admin has open
+- **THEN** on `s:change-access-rights-folder` naming the admin the chat gives way to the "not a member" stub
 
 ### Requirement: Workspace in place of the file list
 The Home page SHALL draw the project workspace in place of the file list for a selected folder whose `roomType` is 12, and the file list otherwise. The URL SHALL keep the room URL shape, and "Copy link" on a project SHALL give that URL.
@@ -138,8 +142,8 @@ When the open project is deleted by someone else, or the caller loses access to 
 - **THEN** that member's chat closes, a toast says the project was deleted, and they land on the AI rooms list
 
 #### Scenario: Access lost while open
-- **WHEN** a member is removed from a project they have open
-- **THEN** their chat closes, a toast says the project is no longer available, and they land on the list
+- **WHEN** a member who is not an admin is removed from a project they have open
+- **THEN** on `s:change-access-rights-folder` naming them (no `s:modify-folder` comes) the room cannot be read any more, a toast says the project is no longer available, and they land on the list
 
 ### Requirement: Leaving a project resets the chat
 Leaving a project by any route (Back, a deleted or lost project, leaving or handing over the project, navigating away from it) SHALL reset the chat's model to the default and disconnect the project's rooms, so a chat opened elsewhere starts clean.

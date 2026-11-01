@@ -162,6 +162,67 @@ const markOpener = async (page: Page) => {
   return page.locator("[data-focus-opener]");
 };
 
+// The files list row the focus is on as a whole (its element id), or null.
+const focusedRow = (page: Page) =>
+  page.evaluate(() =>
+    document.activeElement?.hasAttribute("data-row-focus")
+      ? (document.activeElement.closest('[id^="file_"], [id^="folder_"]')?.id ??
+        null)
+      : null,
+  );
+
+// Moves the caret down the list until the focused row shows this text.
+const arrowToRow = async (page: Page, text: string) => {
+  const rowText = () =>
+    page.evaluate(() =>
+      document.activeElement?.hasAttribute("data-row-focus")
+        ? (document.activeElement.closest('[id^="file_"], [id^="folder_"]')
+            ?.textContent ?? "")
+        : "",
+    );
+  for (let i = 0; i < 20 && !(await rowText()).includes(text); i += 1)
+    await page.keyboard.press("ArrowDown");
+  expect(await rowText()).toContain(text);
+};
+
+// The context menu's entry the keyboard is on: the last one, in a submenu.
+const menuEntry = (page: Page) => page.locator('[data-focused="true"]').last();
+
+// Walks the open context menu with the arrows to the entry with this name.
+const arrowToMenuEntry = async (page: Page, name: string) => {
+  const entry = menuEntry(page);
+  await expect(entry).toBeVisible();
+  for (let i = 0; i < 20; i += 1) {
+    if ((await entry.innerText()).trim() === name) return;
+    await page.keyboard.press("ArrowDown");
+  }
+  await expect(entry).toHaveText(name);
+};
+
+// Opens Move to from the keyboard: the caret on a row, its context menu
+// with Shift+F10, then Move or copy > Move to. Returns that row's id.
+const openMoveToFromKeyboard = async (page: Page, baseUrl: string) => {
+  await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
+  await expect(page.getByTestId("table-body")).toBeVisible();
+  await page.waitForLoadState("networkidle");
+
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await expect.poll(() => focusedRow(page)).not.toBeNull();
+  const rowId = await focusedRow(page);
+
+  await page.keyboard.press("Shift+F10");
+  await arrowToMenuEntry(page, "Move or copy");
+  await page.keyboard.press("ArrowRight");
+  await arrowToMenuEntry(page, "Move to");
+  await page.keyboard.press("Enter");
+
+  const panel = page.getByTestId("aside").first();
+  await expect(panel).toBeVisible();
+  await expect.poll(() => focusIsIn(panel)).toBe(true);
+  return { rowId, panel };
+};
+
 const openRooms = async (page: Page, baseUrl: string) => {
   await page.goto(`${baseUrl}/rooms/shared/`);
   await expect(page.getByTestId("table-body")).toBeVisible();
@@ -309,6 +370,41 @@ test.describe("Focus trap in the media viewer", () => {
 
     await expectFocusTrapped(page, viewer);
   });
+
+  // Opened from the keyboard, the viewer gives the focus back to the row it
+  // was opened from when it closes, so the arrows go on from there.
+  test("opened with Enter on a row, the viewer gives the focus back to that row on Escape", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible();
+    await page.waitForLoadState("networkidle");
+
+    const title = (
+      await table
+        .getByTestId(`files-cell-name-${JPG_ROW}`)
+        .locator(".item-file-name")
+        .innerText()
+    ).trim();
+    await arrowToRow(page, title);
+    const rowId = await focusedRow(page);
+
+    await page.keyboard.press("Enter");
+    await expect(page).toHaveURL(/\/media\/view\//);
+    const viewer = page.getByTestId("media-viewer");
+    await expect(viewer).toHaveAttribute("data-visible", "true");
+    await expect
+      .poll(() =>
+        viewer.evaluate((el) => el.contains(document.activeElement)),
+      )
+      .toBe(true);
+
+    await page.keyboard.press("Escape");
+    await expect(page).not.toHaveURL(/\/media\/view\//);
+    await expect.poll(() => focusedRow(page)).toBe(rowId);
+  });
 });
 
 test.describe("Focus trap in the files selector", () => {
@@ -345,6 +441,63 @@ test.describe("Focus trap in the files selector", () => {
 
     await expectFocusTrapped(page, panel);
     await expect(panel.getByRole("button", { name: "Cancel" })).toBeVisible();
+  });
+
+  // The panel used to drop the focus on the page's body when it closed, so
+  // the keyboard lost its place in the list.
+  test("Move to: opened from the row's context menu, Escape gives the focus back to the row", async ({
+    page,
+    baseUrl,
+  }) => {
+    const { rowId, panel } = await openMoveToFromKeyboard(page, baseUrl);
+
+    await page.keyboard.press("Escape");
+    await expect(panel).toBeHidden();
+    await expect.poll(() => focusedRow(page)).toBe(rowId);
+  });
+
+  test("Move to: closed by its Cancel button from the keyboard, the focus goes back to the row", async ({
+    page,
+    baseUrl,
+  }) => {
+    const { rowId, panel } = await openMoveToFromKeyboard(page, baseUrl);
+
+    const cancel = panel.getByRole("button", { name: "Cancel" });
+    for (
+      let i = 0;
+      i < 15 && !(await cancel.evaluate((el) => el === document.activeElement));
+      i += 1
+    )
+      await page.keyboard.press("Tab");
+    await expect(cancel).toBeFocused();
+    await page.keyboard.press("Enter");
+
+    await expect(panel).toBeHidden();
+    await expect.poll(() => focusedRow(page)).toBe(rowId);
+  });
+
+  // The row stays able to take the focus back while the panel is open; the
+  // pointer moving on to another row must not leave it marked behind.
+  test("Move to: after the focus came back, a click on another row leaves no row marked", async ({
+    page,
+    baseUrl,
+  }) => {
+    const { rowId, panel } = await openMoveToFromKeyboard(page, baseUrl);
+    await page.keyboard.press("Escape");
+    await expect(panel).toBeHidden();
+    await expect.poll(() => focusedRow(page)).toBe(rowId);
+
+    const otherId = await page.evaluate(
+      (id) =>
+        [...document.querySelectorAll('[id^="file_"]')]
+          .map((el) => el.id)
+          .find((other) => other !== id),
+      rowId,
+    );
+    await page.locator(`#${otherId}`).click();
+
+    await expect(page.locator("[data-row-focus]")).toHaveCount(0);
+    expect(await focusedRow(page)).toBeNull();
   });
 
   test("Move to: the list, its crumbs and its rows work from the keyboard", async ({
@@ -423,6 +576,18 @@ test.describe("Focus trap in the files selector", () => {
     await expect(list).toBeFocused();
     // The keyboard is back on the row it opened the menu from.
     await expect.poll(activeOption).toContain("New room");
+    await expect(panel).toBeVisible();
+
+    // Enter on a type picks it: the name row opens with the focus in its
+    // field. The press is the menu's alone - the Selector, which submits on
+    // an Enter keyup, moves nothing.
+    await page.keyboard.press("Enter");
+    await expect(types.first()).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(types).toHaveCount(0);
+    await expect(panel.getByPlaceholder("Enter name")).toBeFocused();
+    await page.waitForTimeout(300);
+    expect(moves).toEqual([]);
     await expect(panel).toBeVisible();
   });
 

@@ -3,7 +3,7 @@
   "content": "Upload from storage",
   "content_en_sha1_hash": "bb0bb4e2e67d4f7e0242a020d41822a5df4a948a",
   "created_at": "2026-08-31T18:23:45.881Z",
-  "updated_at": "2026-11-01T07:12:22.887Z",
+  "updated_at": "2026-11-01T08:02:57.938Z",
   "comment": {
     "text": "Label for a dropdown option or button in the empty state view that initiates the file upload process from storage.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 564,
+      "line_number": 565,
       "context": "const knowledgeUploadActions = [\n {\n id: \"actions_upload-from-storage\",\n className: \"main-button_drop-down\",\n icon: MoveReactSvgUrl,\n label: t(\"EmptyView:UploadFromPortalTitle\"),\n onClick: onShowKnowledgeRoomSelectFileDialog,\n key: \"upload-from-storage\",\n },\n {\n id: \"actions_upload-from-device\",",
       "module": "/packages/client"
     },
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 375,
+      "line_number": 368,
       "context": "// A Knowledge room takes files from the workspace (copied in) or from\n // the device, in the order the empty view offers them.\n const uploadFromStorage: TContextOption = {\n id: \"personal_upload-from-storage\",\n key: \"upload-from-storage\",\n label: t(\"EmptyView:UploadFromPortalTitle\"),\n icon: MoveReactSvgUrl,\n onClick: () => self.onShowKnowledgeRoomSelectFileDialog(),\n };\n const uploadFromDevice: TContextOption = {\n id: \"personal_upload-from-device\",",
       "module": "/packages/client"
     },

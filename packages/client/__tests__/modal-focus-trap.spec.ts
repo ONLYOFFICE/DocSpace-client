@@ -180,8 +180,21 @@ const arrowToRow = async (page: Page, text: string) => {
             ?.textContent ?? "")
         : "",
     );
-  for (let i = 0; i < 20 && !(await rowText()).includes(text); i += 1)
+  // The list may not take the keys yet when the page has just loaded: the
+  // first press is repeated until a row holds the focus.
+  await expect
+    .poll(async () => {
+      await page.keyboard.press("ArrowDown");
+      return rowText();
+    })
+    .not.toBe("");
+  // Then one row at a time, each press waited for.
+  for (let i = 0; i < 20; i += 1) {
+    const before = await rowText();
+    if (before.includes(text)) return;
     await page.keyboard.press("ArrowDown");
+    await expect.poll(rowText).not.toBe(before);
+  }
   expect(await rowText()).toContain(text);
 };
 

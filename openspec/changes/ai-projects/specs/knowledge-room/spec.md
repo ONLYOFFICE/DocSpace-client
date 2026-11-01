@@ -7,7 +7,7 @@ Defines the Knowledge room (room type 11): a room whose whole content is vectori
 ## ADDED Requirements
 
 ### Requirement: Room type
-A Knowledge room SHALL be a room of type 11 (`FolderType.KnowledgeRoom` 39), offered in the "AI rooms" section's creation dialog with its own title, description and icon, created by `POST files/rooms` under the AI rooms root (`FolderType.AiHub` 42) and listed and filterable there like any other room type. The Rooms section SHALL NOT offer or list it.
+A Knowledge room SHALL be a room of type 11 (`FolderType.KnowledgeRoom` 39), offered in the "AI rooms" section's creation dialog with its own title, description and icon, created by `POST files/rooms` under the AI rooms root (`FolderType.AiHub` 41) and listed and filterable there like any other room type. The Rooms section SHALL NOT offer or list it.
 
 #### Scenario: Create
 - **WHEN** a room admin creates a room in "AI rooms" and picks "Knowledge room"
@@ -54,7 +54,7 @@ Files in a Knowledge room SHALL NOT be editable by anyone, whatever their role: 
 - **THEN** it opens in view mode with no edit action
 
 ### Requirement: Roles
-The room SHALL offer these roles: Room owner (the creator), Room manager, Content creator and Viewer. There SHALL be no Editor role, because nothing in the room can be edited: a member either reads or uploads. Groups and the invitation link SHALL be able to join as Content creator or Viewer. A member joining through an AI project SHALL get Viewer.
+The room SHALL offer these roles: Room owner (the creator), Room manager, Content creator and Viewer. There SHALL be no Editor role, because nothing in the room can be edited: a member either reads or uploads. Groups and the invitation link SHALL be able to join as Content creator or Viewer. A member of an AI project that links the room SHALL read it through the project, without a stored role in the room and without the room being listed for them in "AI rooms".
 
 #### Scenario: Role list
 - **WHEN** a Room manager opens the role picker in the Invite panel
@@ -79,7 +79,7 @@ Renaming the room, changing its logo and settings, inviting, re-roling and remov
 - **THEN** the action is not offered
 
 ### Requirement: Use in chats and projects
-The room SHALL be selectable as a knowledge base in the chat composer and as a Knowledge room of an AI project by anyone who can read it. A project SHALL be able to filter by a linked Knowledge room.
+The room SHALL be selectable as a knowledge base in the chat composer and as a Knowledge room of an AI project by anyone who can read it; linking it to a project SHALL also require managing the room.
 
 #### Scenario: Pick in the composer
 - **WHEN** the user opens the knowledge base picker in the composer

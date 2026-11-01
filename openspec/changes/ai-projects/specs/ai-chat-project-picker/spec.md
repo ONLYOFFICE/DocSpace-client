@@ -7,7 +7,7 @@ Brings AI projects into an AI chat that is not inside an open project: a user ca
 ## ADDED Requirements
 
 ### Requirement: Choose AI Project in the model picker
-Outside an open project, the chat's model picker SHALL offer a "Choose AI Project" entry listing the caller's projects, most recently active first, up to 100. The list SHALL be read when the user signs in and again each time the chat opens. A failed read SHALL keep the last list. The entry SHALL be absent while that list is empty.
+Outside an open project, the chat's model picker SHALL offer a "Choose AI Project" entry listing the caller's projects (`files/rooms?searchArea=AiHub&type=12`), most recently active first, up to 100. The list SHALL be read when the user signs in and again each time the chat opens. A failed read SHALL keep the last list. The entry SHALL be absent while that list is empty.
 
 #### Scenario: User with projects
 - **WHEN** a user who belongs to two projects opens the AI chat in the Rooms section
@@ -22,8 +22,8 @@ Outside an open project, the chat's model picker SHALL offer a "Choose AI Projec
 - **THEN** the new project is listed in the picker
 
 ### Requirement: Applying a project to the open chat
-Picking a project SHALL read it again from the server and apply the fresh copy to the open chat without starting a new thread:
-- its model;
+Picking a project SHALL read it again from the server (its room, sources and model) and apply the fresh copy to the open chat without starting a new thread:
+- its model (the portal default when it stores none);
 - its available Instructions rooms as the skills rooms;
 - its available Knowledge rooms as the knowledge bases.
 
@@ -63,10 +63,10 @@ For users who may create projects (portal owner, DocSpace admins, room admins), 
 - **THEN** no save action is offered
 
 ### Requirement: Save is hidden inside a project
-On the AI Projects page, while a project is applied to the chat, the save action SHALL NOT be offered: the chat already is that project. Elsewhere a project applied from the picker keeps the save action, so a tweaked setup can be saved as a new project.
+Inside an open project the save action SHALL NOT be offered: the chat already is that project. Elsewhere, a project applied from the picker keeps the save action, so a tweaked setup can be saved as a new project.
 
-#### Scenario: Project applied on the projects page
-- **WHEN** a project is open on the AI Projects page, or was applied from the picker on that page
+#### Scenario: Project open
+- **WHEN** a project is open at `/ai-rooms/{id}/filter?folder={id}`
 - **THEN** no save action is offered
 
 #### Scenario: Project applied in Rooms

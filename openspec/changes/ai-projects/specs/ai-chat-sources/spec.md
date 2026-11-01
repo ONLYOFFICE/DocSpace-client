@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Defines where an AI chat round takes its sources from — skills from Instructions rooms, a knowledge base from Knowledge rooms, a personal Context folder — how a project overrides them, and how threads are scoped. This is the chat logic shared by the projects page and the chat opened anywhere else.
+Defines where an AI chat round takes its sources from — skills from Instructions rooms, a knowledge base from Knowledge rooms, a personal Context folder — how a project overrides them, and how threads are scoped. This is the chat logic shared by an open project and the chat opened anywhere else.
 
 ## ADDED Requirements
 
@@ -70,7 +70,7 @@ Inside a project the Context folder SHALL be picked by hand in the Context card,
 - **THEN** their next rounds use "Q4 drafts" as context
 
 ### Requirement: Project overrides the sources
-When a round is scoped to an AI project (its `entityId` is the project), the server SHALL replace the round's model, Instructions rooms and Knowledge rooms with the project's stored settings — limited to the rooms the caller can read — whatever the composer sent. The Context folder SHALL stay the one the caller picked in the project. A member of a linked room who lost access to it SHALL get the round without that room.
+When a round is scoped to an AI project (its `entityId` is the project), the Node service SHALL replace the round's model and rooms with the project's: its stored model (else the portal's Chat model) and the rooms of `files/rooms/{id}/sources`, read with the caller's credentials, whatever the composer sent. The Context folder SHALL stay the one the caller picked in the project. A room unlinked from the project SHALL drop out of the next round.
 
 #### Scenario: Composer values ignored
 - **WHEN** a client sends a project-scoped round with a different `profileId` and extra rooms
@@ -84,10 +84,10 @@ A project-scoped round or thread creation SHALL be refused with 403 when the cal
 - **THEN** the round is refused with 403
 
 ### Requirement: Unavailable model asks for a new one
-When the client learns that the project's model is unavailable — from the project's `profile.available: false` or from a 409 on a round — the chat SHALL show an error that the model is no longer available and must be changed, instead of a generic failure. For the owner and Project managers the error SHALL offer to open Edit project on the model field; for Members it SHALL say to ask a Project manager. The composer SHALL stay disabled for sending until the model is changed.
+When the client learns that the project's model is unavailable — from the project's `profile.available: false` or from a 409 `projectModelUnavailable` on a round — the chat SHALL show an error that the model is no longer available and must be changed, instead of a generic failure. For the owner and Project managers the error SHALL offer to open Edit project on the model field; for Members it SHALL say to ask a Project manager.
 
 #### Scenario: Manager opens a project with a deleted model
-- **WHEN** a Project manager opens a project whose profile was deleted
+- **WHEN** a Project manager opens a project whose stored profile was deleted
 - **THEN** the chat shows "model unavailable, change it" with an action that opens Edit project on the model field
 
 #### Scenario: Member sends a message
@@ -97,6 +97,13 @@ When the client learns that the project's model is unavailable — from the proj
 #### Scenario: Model changed
 - **WHEN** the owner picks a new model and saves
 - **THEN** the open chats of the project lose the error and can send again
+
+### Requirement: Composer disabled on an unavailable model
+While the project's model is unavailable, the composer SHALL stay disabled for sending until the model is changed.
+
+#### Scenario: Send blocked
+- **WHEN** a Member opens a project whose model is unavailable
+- **THEN** the composer cannot send
 
 ### Requirement: Chats are private
 A chat (thread) SHALL belong to the user who started it and SHALL never be visible to anyone else: not to other members of the same project, not to the project owner, not to admins. There SHALL be no way to share, hand over or jointly edit a chat. Deleting a project SHALL delete only the threads scoped to it; leaving a project SHALL keep the user's threads for the case they are invited again.

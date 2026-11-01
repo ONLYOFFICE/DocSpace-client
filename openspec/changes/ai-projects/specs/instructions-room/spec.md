@@ -7,14 +7,14 @@ Defines the Instructions room (room type 10): a room whose Markdown files are th
 ## ADDED Requirements
 
 ### Requirement: Room type
-An Instructions room SHALL be a room of type 10 (`FolderType.InstructionsRoom` 38), offered in the "AI rooms" section's creation dialog with its own title, description and icon, created by `POST files/rooms` under the AI rooms root (`FolderType.AiHub` 42) and listed and filterable there like any other room type. The Rooms section SHALL NOT offer or list it. It SHALL be creatable by anyone who may create rooms.
+An Instructions room SHALL be a room of type 10 (`FolderType.InstructionsRoom` 38), offered in the "AI rooms" section's creation dialog with its own title, description and icon, created by `POST files/rooms` under the AI rooms root (`FolderType.AiHub` 41) and listed and filterable there like any other room type. The Rooms section SHALL NOT offer or list it. It SHALL be creatable by anyone who may create rooms.
 
 #### Scenario: Create
 - **WHEN** a room admin creates a room in "AI rooms" and picks "Instructions room"
 - **THEN** a room of type 10 appears in "AI rooms" with the Instructions icon
 
 #### Scenario: Filter
-- **WHEN** the user filters Rooms by type "Instructions rooms"
+- **WHEN** the user filters "AI rooms" by type "Instructions room"
 - **THEN** only rooms of type 10 are listed
 
 ### Requirement: Markdown files only
@@ -58,7 +58,7 @@ A room SHALL hold at most 100 skills; a file past the limit SHALL be refused wit
 - **THEN** the upload is refused with a message that the room can hold at most 100 skills
 
 ### Requirement: Roles
-The room SHALL offer these roles: Room owner (the creator), Room manager, Content creator, Editor and Viewer. Groups and the invitation link SHALL be able to join as Content creator, Editor or Viewer, not as Room manager. A member joining through an AI project SHALL get Viewer.
+The room SHALL offer these roles: Room owner (the creator), Room manager, Content creator, Editor and Viewer. Groups and the invitation link SHALL be able to join as Content creator, Editor or Viewer, not as Room manager. A member of an AI project that links the room SHALL read it through the project, without a stored role in the room and without the room being listed for them in "AI rooms".
 
 #### Scenario: Invite as Editor
 - **WHEN** a Room manager invites a user as Editor
@@ -91,11 +91,11 @@ Renaming the room, changing its logo and settings, inviting, re-roling and remov
 - **THEN** the action is not offered
 
 ### Requirement: Use in chats and projects
-The room SHALL be selectable as a skills source in the chat composer and as an Instructions room of an AI project by anyone who can read it. A project SHALL be able to filter by a linked Instructions room, and a room SHALL be able to show the projects that link it.
+The room SHALL be selectable as a skills source in the chat composer and as an Instructions room of an AI project by anyone who can read it; linking it to a project SHALL also require managing the room.
 
 #### Scenario: Pick in a project
 - **WHEN** a Project manager edits a project and opens the Instructions room selector
-- **THEN** only rooms of type 10 that the caller can read are listed
+- **THEN** only rooms of type 10 of the AI rooms root are listed
 
 ### Requirement: Independent of vectorization
 Skills SHALL NOT be vectorized. An Instructions room SHALL stay fully usable — uploads, chat and projects — while vectorization is disabled on the portal; only Knowledge rooms are affected by that switch.

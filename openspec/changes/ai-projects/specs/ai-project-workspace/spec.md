@@ -7,18 +7,25 @@ Defines the open-project view: how a project opens, the header and chat it shows
 ## ADDED Requirements
 
 ### Requirement: Opening a project
-Opening a project from the "AI Projects" list, or through a `/ai-projects/{id}/filter?folder={id}` deep link, SHALL start a fresh thread in the section body under a header with back, the project name, its context menu, the Info panel toggle and the chat toolbar (chat history, new chat). The workspace replaces the file list of the Home page for a room of type 12; the URL keeps the room URL shape. A deep link to a project the caller cannot read SHALL show the server's error as a toast.
+Opening a project from the "AI rooms" list, or through a `/ai-rooms/{id}/filter?folder={id}` deep link, SHALL start a fresh thread in the section body under a header with back, the project name, its context menu, the Info panel toggle and the chat toolbar (chat history, new chat). A deep link to a project the caller cannot read SHALL show the server's error as a toast.
 
 #### Scenario: Open from the list
 - **WHEN** the user opens the "Sales" project from the list
-- **THEN** the URL becomes `/ai-projects/{id}/filter?folder={id}` and a new thread of the project's chat fills the section under the project header
+- **THEN** the URL becomes `/ai-rooms/{id}/filter?folder={id}` and a new thread of the project's chat fills the section under the project header
 
 #### Scenario: Deep link to an unreadable project
-- **WHEN** the user loads `/ai-projects/{id}/filter?folder={id}` for a project that is gone or not shared with them
+- **WHEN** the user loads `/ai-rooms/{id}/filter?folder={id}` for a project that is gone or not shared with them
 - **THEN** a toast shows the server's error and no project opens
 
+### Requirement: Workspace in place of the file list
+The Home page SHALL draw the project workspace in place of the file list for a selected folder whose `roomType` is 12, and the file list otherwise. The URL SHALL keep the room URL shape, and "Copy link" on a project SHALL give that URL.
+
+#### Scenario: Copy link
+- **WHEN** a member chooses "Copy link" on a project
+- **THEN** the copied URL is `/ai-rooms/{id}/filter?folder={id}` of that project
+
 ### Requirement: Fixed model
-Inside a project the model picker SHALL be a read-only label for every role, showing the model the chat runs on.
+Inside a project the model picker SHALL be a read-only label for every role, showing the model the chat runs on: the project's stored model, or the portal's default Chat model when it stores none.
 
 #### Scenario: Member looks at the composer
 - **WHEN** a Member looks at the composer inside a project
@@ -109,18 +116,18 @@ An edit of the open project's model or rooms, made by the caller or by someone e
 - **THEN** the Member's chat gains that knowledge base and keeps the current thread
 
 ### Requirement: Lost project closes the view
-When the open project is deleted by someone else, or the caller loses access to it, the chat SHALL close, a toast SHALL tell the user what happened, and the URL SHALL return to `/ai-projects`. The toast SHALL say that the project was deleted when it was deleted, and that it is no longer available when the caller lost access.
+When the open project is deleted by someone else, or the caller loses access to it, the chat SHALL close, a toast SHALL tell the user what happened, and the view SHALL go back to the AI rooms list (`/ai-rooms/filter`). The toast SHALL say that the project was deleted when it was deleted, and that it is no longer available when the caller lost access.
 
 #### Scenario: Deleted while open
 - **WHEN** the owner deletes a project another member has open
-- **THEN** that member's chat closes, a toast says the project was deleted, and they land on the list
+- **THEN** that member's chat closes, a toast says the project was deleted, and they land on the AI rooms list
 
 #### Scenario: Access lost while open
 - **WHEN** a member is removed from a project they have open
 - **THEN** their chat closes, a toast says the project is no longer available, and they land on the list
 
 ### Requirement: Leaving a project resets the chat
-Leaving a project by any route (Back, a deleted or lost project, leaving or handing over the project, navigating away from the page) SHALL reset the chat's model to the default and disconnect the project's rooms, so a chat opened elsewhere starts clean.
+Leaving a project by any route (Back, a deleted or lost project, leaving or handing over the project, navigating away from it) SHALL reset the chat's model to the default and disconnect the project's rooms, so a chat opened elsewhere starts clean.
 
 #### Scenario: Leaving the page
 - **WHEN** the user navigates from an open project to the Rooms section and opens the AI chat there

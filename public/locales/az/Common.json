@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Vektorlaşdırma işləmir: AI parametrlərində embedding provayderi konfiqurasiya edilənədək bu otağa fayl əlavə etmək və onu bilik bazası kimi istifadə etmək mümkün deyil.",
   "KnowledgeRoomVectorizationOffTitle": "Vektorlaşdırma deaktivdir",
   "KnowledgeRoomVectorizationOffUser": "Vektorlaşdırma işləmir: bu otağa fayl əlavə etmək və onu bilik bazası kimi istifadə etmək mümkün deyil. Embedding provayderini konfiqurasiya etmək üçün super administratorla əlaqə saxlayın.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "Bilik otağı vektorlaşdırma işlədikdən sonra yaradıla bilər: AI parametrlərində embedding provayderini konfiqurasiya edin.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "Bilik otağı vektorlaşdırma işlədikdən sonra yaradıla bilər. Embedding provayderini konfiqurasiya etmək üçün super administratorla əlaqə saxlayın.",
   "KnowledgeRoomsNeedVectorization": "Vektorlaşdırma deaktiv olduğu müddətdə Bilik otaqlarını seçmək mümkün deyil.",
   "KnowledgeSelectIn": "İş sahəsində seçin",
   "KnowledgeSettingsDescription": "Süni intellekt agentləri üçün bir bilik bazası aktivləşdirin. Sistem sənədlərinizi məlumatlarınız vasitəsilə suala əsaslanan axtarışı dəstəkləmək üçün {{modelName}} modelindən istifadə edərək indeksləyəcək. Bu xüsusiyyət müvafiq məlumat tapmağa fokuslanır, lakin xülasələr yaratmır və ya ümumi analiz etmir.",

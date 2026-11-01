@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Vektorointi ei toimi: tähän huoneeseen ei voi lisätä tiedostoja eikä sitä voi käyttää tietokantana, ennen kuin AI-asetuksissa on määritetty upotusten tarjoaja.",
   "KnowledgeRoomVectorizationOffTitle": "Vektorointi on pois päältä",
   "KnowledgeRoomVectorizationOffUser": "Vektorointi ei toimi: tähän huoneeseen ei voi lisätä tiedostoja eikä sitä voi käyttää tietokantana. Ota yhteyttä pääjärjestelmänvalvojaan upotusten tarjoajan määrittämiseksi.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "Tietohuoneen voi luoda, kun vektorointi toimii: määritä upotusten tarjoaja AI-asetuksissa.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "Tietohuoneen voi luoda, kun vektorointi toimii. Ota yhteyttä pääjärjestelmänvalvojaan upotusten tarjoajan määrittämiseksi.",
   "KnowledgeRoomsNeedVectorization": "Tietohuoneita ei voi valita, kun vektorointi on pois päältä.",
   "KnowledgeSelectIn": "Valitse työtilasta",
   "KnowledgeSettingsDescription": "Ota käyttöön tietopohja AI-agenteille. Järjestelmä indeksoi asiakirjasi käyttäen {{modelName}}-mallia tukemaan kysymysperäistä hakua tietojasi läpi. Tämä ominaisuus keskittyy relevantin tiedon löytämiseen, mutta se ei luo yhteenvetoja eikä suorita globaalia analyysiä.",

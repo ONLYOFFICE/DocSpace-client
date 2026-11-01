@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Vectơ hóa không hoạt động: không thể thêm tệp vào phòng này và không thể dùng phòng làm cơ sở kiến thức cho đến khi nhà cung cấp nhúng được cấu hình trong cài đặt AI.",
   "KnowledgeRoomVectorizationOffTitle": "Vectơ hóa đang tắt",
   "KnowledgeRoomVectorizationOffUser": "Vectơ hóa không hoạt động: không thể thêm tệp vào phòng này và không thể dùng phòng làm cơ sở kiến thức. Hãy liên hệ với siêu quản trị viên để cấu hình nhà cung cấp nhúng.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "Có thể tạo phòng kiến thức khi vectơ hóa hoạt động: hãy cấu hình nhà cung cấp nhúng trong cài đặt AI.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "Có thể tạo phòng kiến thức khi vectơ hóa hoạt động. Hãy liên hệ với siêu quản trị viên để cấu hình nhà cung cấp nhúng.",
   "KnowledgeRoomsNeedVectorization": "Không thể chọn Phòng kiến thức khi vectơ hóa đang tắt.",
   "KnowledgeSelectIn": "Chọn trong không gian làm việc",
   "KnowledgeSettingsDescription": "Kích hoạt cơ sở kiến thức cho các tác nhân AI. Hệ thống sẽ lập chỉ mục tài liệu của bạn bằng mô hình {{modelName}} để hỗ trợ tìm kiếm dựa trên câu hỏi trong dữ liệu của bạn. Tính năng này tập trung vào việc tìm thông tin liên quan nhưng không tạo bản tóm tắt hoặc thực hiện phân tích toàn cục.",

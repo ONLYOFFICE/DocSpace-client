@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Vektorizacija ne deluje: v to sobo ni mogoče dodajati datotek in je ni mogoče uporabiti kot zbirko znanja, dokler v nastavitvah AI ni konfiguriran ponudnik vgrajenih vektorjev.",
   "KnowledgeRoomVectorizationOffTitle": "Vektorizacija je izklopljena",
   "KnowledgeRoomVectorizationOffUser": "Vektorizacija ne deluje: v to sobo ni mogoče dodajati datotek in je ni mogoče uporabiti kot zbirko znanja. Obrnite se na superskrbnika, da konfigurira ponudnika vgrajenih vektorjev.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "Sobo znanja je mogoče ustvariti, ko vektorizacija deluje: v nastavitvah AI konfigurirajte ponudnika vgrajenih vektorjev.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "Sobo znanja je mogoče ustvariti, ko vektorizacija deluje. Obrnite se na superskrbnika, da konfigurira ponudnika vgrajenih vektorjev.",
   "KnowledgeRoomsNeedVectorization": "Sob znanja ni mogoče izbrati, dokler je vektorizacija izklopljena.",
   "KnowledgeSelectIn": "Izberi v delovnem prostoru",
   "KnowledgeSettingsDescription": "Omogočite bazo znanja za AI agente. Sistem bo z modelom {{modelName}} indeksiral vaše dokumente in tako omogočil iskanje po vaših podatkih na podlagi vprašanj. Ta funkcija je osredotočena na iskanje ustreznih informacij, ne ustvarja pa povzetkov in ne izvaja globalne analize.",

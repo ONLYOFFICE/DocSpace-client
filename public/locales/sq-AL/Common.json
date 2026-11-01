@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Vektorizimi nuk funksionon: në këtë dhomë nuk mund të shtohen skedarë dhe ajo nuk mund të përdoret si bazë njohurish derisa të konfigurohet një ofrues embeddings te cilësimet e IA.",
   "KnowledgeRoomVectorizationOffTitle": "Vektorizimi është çaktivizuar",
   "KnowledgeRoomVectorizationOffUser": "Vektorizimi nuk funksionon: në këtë dhomë nuk mund të shtohen skedarë dhe ajo nuk mund të përdoret si bazë njohurish. Kontaktoni superadministratorin për të konfiguruar ofruesin e embeddings.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "Një dhomë njohurish mund të krijohet sapo vektorizimi të funksionojë: konfiguroni një ofrues embeddings te cilësimet e IA.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "Një dhomë njohurish mund të krijohet sapo vektorizimi të funksionojë. Kontaktoni superadministratorin për të konfiguruar ofruesin e embeddings.",
   "KnowledgeRoomsNeedVectorization": "Dhomat e njohurive nuk mund të zgjidhen ndërkohë që vektorizimi është i çaktivizuar.",
   "KnowledgeSelectIn": "Zgjidh në hapësirën e punës",
   "KnowledgeSettingsDescription": "Aktivizoni një bazë të dijeve për agjentët IA. Sistemi do të indeksojë dokumentet tuaja duke përdorur modelin {{modelName}} për të mbështetur kërkimin e bazuar në pyetje përmes të dhënave tuaja. Kjo veçori fokusohet në gjetjen e informacionit relevant, por nuk gjeneron përmbledhje apo nuk kryen analiza globale.",

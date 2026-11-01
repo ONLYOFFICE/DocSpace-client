@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Die Vektorisierung funktioniert nicht: Zu diesem Raum können keine Dateien hinzugefügt werden, und er kann nicht als Wissensdatenbank verwendet werden, bis in den KI-Einstellungen ein Embeddings-Anbieter konfiguriert ist.",
   "KnowledgeRoomVectorizationOffTitle": "Vektorisierung ist deaktiviert",
   "KnowledgeRoomVectorizationOffUser": "Die Vektorisierung funktioniert nicht: Zu diesem Raum können keine Dateien hinzugefügt werden, und er kann nicht als Wissensdatenbank verwendet werden. Wenden Sie sich an den Super-Administrator, um den Embeddings-Anbieter zu konfigurieren.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "Ein Wissensraum kann erstellt werden, sobald die Vektorisierung funktioniert: Konfigurieren Sie in den KI-Einstellungen einen Embeddings-Anbieter.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "Ein Wissensraum kann erstellt werden, sobald die Vektorisierung funktioniert. Wenden Sie sich an den Super-Administrator, um den Embeddings-Anbieter zu konfigurieren.",
   "KnowledgeRoomsNeedVectorization": "Wissensräume können nicht ausgewählt werden, solange die Vektorisierung deaktiviert ist.",
   "KnowledgeSelectIn": "Im Arbeitsbereich wählen",
   "KnowledgeSettingsDescription": "Eine Wissensdatenbank für KI-Agenten aktivieren. Das System indiziert Ihre Dokumente mithilfe des {{modelName}}-Modells, um eine abfragebasierte Suche durch Ihre Daten zu unterstützen. Diese Funktion konzentriert sich darauf, relevante Informationen zu finden, erstellt jedoch keine Zusammenfassungen oder führt globale Analysen durch.",

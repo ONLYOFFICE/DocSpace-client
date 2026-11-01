@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "ベクトル化が機能していません。AI設定で埋め込みプロバイダーを設定するまで、このルームにファイルを追加したり、ナレッジベースとして使用したりすることはできません。",
   "KnowledgeRoomVectorizationOffTitle": "ベクトル化はオフです",
   "KnowledgeRoomVectorizationOffUser": "ベクトル化が機能していません。このルームにファイルを追加したり、ナレッジベースとして使用したりすることはできません。埋め込みプロバイダーを設定するには、スーパー管理者にお問い合わせください。",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "ナレッジルームは、ベクトル化が機能するようになると作成できます。AI設定で埋め込みプロバイダーを設定してください。",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "ナレッジルームは、ベクトル化が機能するようになると作成できます。埋め込みプロバイダーを設定するには、スーパー管理者にお問い合わせください。",
   "KnowledgeRoomsNeedVectorization": "ベクトル化がオフの間は、ナレッジルームを選択できません。",
   "KnowledgeSelectIn": "ワークスペースで選択",
   "KnowledgeSettingsDescription": "AIエージェントのナレッジベースを有効にします。システムは、{{modelName}} モデルを使用してドキュメントをインデックス化し、データに対する質問ベースの検索をサポートします。この機能は関連情報を検索することに焦点を当てており、要約の生成やグローバルな分析は行いません。",

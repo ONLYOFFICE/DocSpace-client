@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "A vetorização não está a funcionar: não é possível adicionar ficheiros a esta sala nem utilizá-la como base de conhecimento até que seja configurado um fornecedor de embeddings nas definições de IA.",
   "KnowledgeRoomVectorizationOffTitle": "A vetorização está desativada",
   "KnowledgeRoomVectorizationOffUser": "A vetorização não está a funcionar: não é possível adicionar ficheiros a esta sala nem utilizá-la como base de conhecimento. Contacte o superadministrador para configurar o fornecedor de embeddings.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "É possível criar uma sala de conhecimento quando a vetorização estiver a funcionar: configure um fornecedor de embeddings nas definições de IA.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "É possível criar uma sala de conhecimento quando a vetorização estiver a funcionar. Contacte o superadministrador para configurar o fornecedor de embeddings.",
   "KnowledgeRoomsNeedVectorization": "Não é possível selecionar salas de conhecimento enquanto a vetorização estiver desativada.",
   "KnowledgeSelectIn": "Selecione no espaço de trabalho",
   "KnowledgeSettingsDescription": "Ativar uma base de conhecimento para os agentes de IA. O sistema indexará seus documentos usando o modelo {{modelName}} para suportar a busca baseada em perguntas em seus dados. Este recurso foca em encontrar informações relevantes, mas não gera resumos nem realiza análises globais.",

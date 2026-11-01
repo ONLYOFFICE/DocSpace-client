@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Vectorisatie werkt niet: er kunnen geen bestanden aan deze kamer worden toegevoegd en deze kan niet als kennisbank worden gebruikt totdat er een embeddingprovider is geconfigureerd in de AI-instellingen.",
   "KnowledgeRoomVectorizationOffTitle": "Vectorisatie is uitgeschakeld",
   "KnowledgeRoomVectorizationOffUser": "Vectorisatie werkt niet: er kunnen geen bestanden aan deze kamer worden toegevoegd en deze kan niet als kennisbank worden gebruikt. Neem contact op met de superbeheerder om de embeddingprovider te configureren.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "Een kenniskamer kan worden aangemaakt zodra vectorisatie werkt: configureer een embeddingprovider in de AI-instellingen.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "Een kenniskamer kan worden aangemaakt zodra vectorisatie werkt. Neem contact op met de superbeheerder om de embeddingprovider te configureren.",
   "KnowledgeRoomsNeedVectorization": "Kenniskamers kunnen niet worden geselecteerd zolang vectorisatie is uitgeschakeld.",
   "KnowledgeSelectIn": "Selecteer in de werkruimte",
   "KnowledgeSettingsDescription": "Schakel een kennisbank in voor AI-agenten. Het systeem zal uw documenten indexeren met behulp van het {{modelName}}-model om vraaggebaseerde zoekopdrachten door uw gegevens te ondersteunen. Deze functie richt zich op het vinden van relevante informatie, maar genereert geen samenvattingen of voert globale analyses uit.",

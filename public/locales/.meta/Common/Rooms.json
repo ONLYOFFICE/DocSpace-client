@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-10-31T12:58:28.832Z",
+  "updated_at": "2026-11-01T08:02:57.955Z",
   "comment": {
     "text": "This is a label for a section or category within the file selector, representing a collection of collaborative workspaces.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList/index.tsx",
-      "line_number": 103,
+      "line_number": 110,
       "context": "setRoomType(roomType);\n };\n \n const formRoomTooltipContent = t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n const publicRoomTooltipContent = t(\"Common:PublicRoomCreationDisabled\");\n \n if (isAiRoomsCreate) {",
       "module": "/packages/client"
     },

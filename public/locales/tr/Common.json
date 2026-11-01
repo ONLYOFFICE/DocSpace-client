@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Vektörleştirme çalışmıyor: AI ayarlarında bir gömme (embedding) sağlayıcısı yapılandırılana kadar bu odaya dosya eklenemez ve oda bilgi tabanı olarak kullanılamaz.",
   "KnowledgeRoomVectorizationOffTitle": "Vektörleştirme kapalı",
   "KnowledgeRoomVectorizationOffUser": "Vektörleştirme çalışmıyor: bu odaya dosya eklenemez ve oda bilgi tabanı olarak kullanılamaz. Gömme (embedding) sağlayıcısını yapılandırmak için süper yöneticiyle iletişime geçin.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "Vektörleştirme çalıştığında bir Bilgi Odası oluşturulabilir: AI ayarlarında bir gömme (embedding) sağlayıcısı yapılandırın.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "Vektörleştirme çalıştığında bir Bilgi Odası oluşturulabilir. Gömme (embedding) sağlayıcısını yapılandırmak için süper yöneticiyle iletişime geçin.",
   "KnowledgeRoomsNeedVectorization": "Vektörleştirme kapalıyken bilgi odaları seçilemez.",
   "KnowledgeSelectIn": "Çalışma alanında seçin",
   "KnowledgeSettingsDescription": "Yapay zeka ajanları için bir bilgi tabanı etkinleştirin. Sistem, verileriniz üzerinden soru tabanlı aramayı desteklemek amacıyla belgelerinizi {{modelName}} modelini kullanarak indeksleyecektir. Bu özellik ilgili bilgileri bulmaya odaklanır ancak özet oluşturmaz veya küresel analiz yapmaz.",

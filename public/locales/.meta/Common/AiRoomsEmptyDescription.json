@@ -3,7 +3,7 @@
   "content": "Instructions rooms hold skills, Knowledge rooms hold the files the chat searches, and AI projects bring them together with a model and share that setup with the people you invite.",
   "content_en_sha1_hash": "d29b17c101ee64788ba6b972470b9e7b8f3efa31",
   "created_at": "2026-11-01T07:10:57.546Z",
-  "updated_at": "2026-11-01T07:12:31.228Z",
+  "updated_at": "2026-11-01T08:02:57.948Z",
   "comment": {
     "text": "Description on the empty AI rooms screen for room admins, under the title saying there are no AI rooms yet. Explains the three kinds of items in the section: Instructions rooms (skills), Knowledge rooms (files the AI chat searches) and AI projects (combine those rooms with a chat model and are shared with invited people).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyAiRoomsContainer.tsx",
-      "line_number": 103,
+      "line_number": 174,
       "context": "<EmptyView\n icon={icon}\n title={canManage ? t(\"Common:AiRoomsEmpty\") : t(\"Common:AiRoomsEmptyUser\")}\n description={\n canManage\n ? t(\"Common:AiRoomsEmptyDescription\")\n : t(\"Common:AiRoomsEmptyUserDescription\")\n }\n options={options}\n />\n );",
       "module": "/packages/client"
     }

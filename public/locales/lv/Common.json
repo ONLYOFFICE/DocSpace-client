@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Vektorizācija nedarbojas: šai telpai nevar pievienot failus, un to nevar izmantot kā zināšanu bāzi, kamēr MI iestatījumos nav konfigurēts iegulumu nodrošinātājs.",
   "KnowledgeRoomVectorizationOffTitle": "Vektorizācija ir izslēgta",
   "KnowledgeRoomVectorizationOffUser": "Vektorizācija nedarbojas: šai telpai nevar pievienot failus, un to nevar izmantot kā zināšanu bāzi. Sazinieties ar superadministratoru, lai konfigurētu iegulumu nodrošinātāju.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "Zināšanu telpu var izveidot, kad darbojas vektorizācija: konfigurējiet iegulumu nodrošinātāju MI iestatījumos.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "Zināšanu telpu var izveidot, kad darbojas vektorizācija. Sazinieties ar superadministratoru, lai konfigurētu iegulumu nodrošinātāju.",
   "KnowledgeRoomsNeedVectorization": "Zināšanu telpas nevar atlasīt, kamēr vektorizācija ir izslēgta.",
   "KnowledgeSelectIn": "Izvēlēties darbvietā",
   "KnowledgeSettingsDescription": "Iespējot zināšanu bāzi MI aģentiem. Sistēma indeksēs jūsu dokumentus, izmantojot {{modelName}} modeli, lai atbalstītu jautājumiem balstītu meklēšanu jūsu datiem. Šī funkcija ir paredzēta, lai atrastu atbilstošu informāciju, bet neizveido kopsavilkumus un neveic globālu analīzi.",

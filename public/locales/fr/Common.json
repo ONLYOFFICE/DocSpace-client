@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "La vectorisation ne fonctionne pas : impossible d'ajouter des fichiers à cette salle ou de l'utiliser comme base de connaissances tant qu'aucun fournisseur d'embeddings n'est configuré dans les paramètres IA.",
   "KnowledgeRoomVectorizationOffTitle": "La vectorisation est désactivée",
   "KnowledgeRoomVectorizationOffUser": "La vectorisation ne fonctionne pas : impossible d'ajouter des fichiers à cette salle ou de l'utiliser comme base de connaissances. Contactez le super-administrateur pour configurer le fournisseur d'embeddings.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "Une salle de connaissances peut être créée dès que la vectorisation fonctionne : configurez un fournisseur d'embeddings dans les paramètres IA.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "Une salle de connaissances peut être créée dès que la vectorisation fonctionne. Contactez le super-administrateur pour configurer le fournisseur d'embeddings.",
   "KnowledgeRoomsNeedVectorization": "Les salles de connaissances ne peuvent pas être sélectionnées tant que la vectorisation est désactivée.",
   "KnowledgeSelectIn": "Sélectionner dans l'espace de travail",
   "KnowledgeSettingsDescription": "Activer une base de connaissances pour les agents IA. Le système indexera vos documents en utilisant le modèle {{modelName}} pour prendre en charge la recherche basée sur des questions dans vos données. Cette fonctionnalité se concentre sur la recherche d'informations pertinentes, mais ne génère pas de résumés ni n'effectue d'analyse globale.",

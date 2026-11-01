@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "La vettorizzazione non funziona: non è possibile aggiungere file a questa stanza né usarla come base di conoscenza finché non viene configurato un provider di embedding nelle impostazioni IA.",
   "KnowledgeRoomVectorizationOffTitle": "La vettorizzazione è disattivata",
   "KnowledgeRoomVectorizationOffUser": "La vettorizzazione non funziona: non è possibile aggiungere file a questa stanza né usarla come base di conoscenza. Contatta il superamministratore per configurare il provider di embedding.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "È possibile creare una stanza della conoscenza quando la vettorizzazione funziona: configura un provider di embedding nelle impostazioni IA.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "È possibile creare una stanza della conoscenza quando la vettorizzazione funziona. Contatta il superamministratore per configurare il provider di embedding.",
   "KnowledgeRoomsNeedVectorization": "Non è possibile selezionare le stanze della conoscenza mentre la vettorizzazione è disattivata.",
   "KnowledgeSelectIn": "Seleziona nello spazio di lavoro",
   "KnowledgeSettingsDescription": "Abilita una base di conoscenza per gli agenti IA. Il sistema indicizzerà i tuoi documenti utilizzando il modello {{modelName}} per supportare la ricerca basata su domande all'interno dei tuoi dati. Questa funzione si concentra sul trovare informazioni pertinenti ma non genera riassunti né esegue analisi globali.",

@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Vectorizarea nu funcționează: nu pot fi adăugate fișiere în această sală și aceasta nu poate fi folosită ca bază de cunoștințe până când nu este configurat un furnizor de embeddings în setările IA.",
   "KnowledgeRoomVectorizationOffTitle": "Vectorizarea este dezactivată",
   "KnowledgeRoomVectorizationOffUser": "Vectorizarea nu funcționează: nu pot fi adăugate fișiere în această sală și aceasta nu poate fi folosită ca bază de cunoștințe. Contactați superadministratorul pentru a configura furnizorul de embeddings.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "O sală de cunoștințe poate fi creată după ce vectorizarea funcționează: configurați un furnizor de embeddings în setările IA.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "O sală de cunoștințe poate fi creată după ce vectorizarea funcționează. Contactați superadministratorul pentru a configura furnizorul de embeddings.",
   "KnowledgeRoomsNeedVectorization": "Sălile de cunoștințe nu pot fi selectate cât timp vectorizarea este dezactivată.",
   "KnowledgeSelectIn": "Selectare din spațiul de lucru",
   "KnowledgeSettingsDescription": "Activați o bază de cunoștințe pentru agenții de inteligență artificială. Sistemul va indexa documentele dvs. folosind modelul {{modelName}} pentru a susține căutarea bazată pe întrebări în datele dvs. Această funcționalitate se concentrează pe găsirea informațiilor relevante, dar nu generează sinteze sau nu efectuează analize globale.",

@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "矢量化无法工作：在 AI 设置中配置嵌入提供商之前，无法向此房间添加文件，也无法将其用作知识库。",
   "KnowledgeRoomVectorizationOffTitle": "矢量化已关闭",
   "KnowledgeRoomVectorizationOffUser": "矢量化无法工作：无法向此房间添加文件，也无法将其用作知识库。请联系超级管理员配置嵌入提供商。",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "矢量化正常工作后才能创建知识房间：请在 AI 设置中配置嵌入提供商。",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "矢量化正常工作后才能创建知识房间。请联系超级管理员配置嵌入提供商。",
   "KnowledgeRoomsNeedVectorization": "矢量化关闭时无法选择知识房间。",
   "KnowledgeSelectIn": "在工作区中选择",
   "KnowledgeSettingsDescription": "为 AI 智能体启用知识库。系统将使用 {{modelName}} 模型对您的文档进行索引，以支持通过数据进行问答搜索。此功能侧重于查找相关信息，但不生成摘要或执行全局分析。",

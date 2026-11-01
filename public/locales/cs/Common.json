@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Vektorizace nefunguje: do této místnosti nelze přidávat soubory a nelze ji používat jako znalostní bázi, dokud v nastavení AI nenakonfigurujete poskytovatele embeddingů.",
   "KnowledgeRoomVectorizationOffTitle": "Vektorizace je vypnutá",
   "KnowledgeRoomVectorizationOffUser": "Vektorizace nefunguje: do této místnosti nelze přidávat soubory a nelze ji používat jako znalostní bázi. Obraťte se na supersprávce, aby nakonfiguroval poskytovatele embeddingů.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "Znalostní místnost lze vytvořit, jakmile bude vektorizace fungovat: v nastavení AI nakonfigurujte poskytovatele embeddingů.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "Znalostní místnost lze vytvořit, jakmile bude vektorizace fungovat. Obraťte se na supersprávce, aby nakonfiguroval poskytovatele embeddingů.",
   "KnowledgeRoomsNeedVectorization": "Znalostní místnosti nelze vybrat, dokud je vektorizace vypnutá.",
   "KnowledgeSelectIn": "Vybrat v pracovním prostoru",
   "KnowledgeSettingsDescription": "Aktivujte znalostní bázi pro AI agenty. Systém bude indexovat vaše dokumenty pomocí modelu {{modelName}} pro podporu vyhledávání na základě otázek ve vašich datech. Tato funkce se soustředí na nalezení relevantních informací, ale negeneruje shrnutí ani neprovádí globální analýzu.",

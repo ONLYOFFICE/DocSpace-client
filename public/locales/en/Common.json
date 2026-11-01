@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Vectorization is not working: files cannot be added to this room and it cannot be used as a knowledge base until an embeddings provider is configured in the AI settings.",
   "KnowledgeRoomVectorizationOffTitle": "Vectorization is off",
   "KnowledgeRoomVectorizationOffUser": "Vectorization is not working: files cannot be added to this room and it cannot be used as a knowledge base. Contact the Full admin to configure the embeddings provider.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "A Knowledge room can be created once vectorization works: configure an embeddings provider in the AI settings.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "A Knowledge room can be created once vectorization works. Contact the Full admin to configure the embeddings provider.",
   "KnowledgeRoomsNeedVectorization": "Knowledge rooms cannot be selected while vectorization is off.",
   "KnowledgeSelectIn": "Select in the workspace",
   "KnowledgeSettingsDescription": "Enable a knowledge base for AI agents. The system will index your documents using the {{modelName}} model to support question-based search through your data. This feature focuses on finding relevant information but doesn't generate summaries or perform global analysis.",

@@ -1288,6 +1288,8 @@
   "KnowledgeRoomVectorizationOffAdmin": "Wektoryzacja nie działa: do tego pokoju nie można dodawać plików ani używać go jako bazy wiedzy, dopóki w ustawieniach AI nie zostanie skonfigurowany dostawca osadzeń.",
   "KnowledgeRoomVectorizationOffTitle": "Wektoryzacja jest wyłączona",
   "KnowledgeRoomVectorizationOffUser": "Wektoryzacja nie działa: do tego pokoju nie można dodawać plików ani używać go jako bazy wiedzy. Skontaktuj się z superadministratorem, aby skonfigurował dostawcę osadzeń.",
+  "KnowledgeRoomCreationNeedsVectorizationAdmin": "Pokój wiedzy można utworzyć, gdy wektoryzacja zacznie działać: skonfiguruj dostawcę osadzeń w ustawieniach AI.",
+  "KnowledgeRoomCreationNeedsVectorizationUser": "Pokój wiedzy można utworzyć, gdy wektoryzacja zacznie działać. Skontaktuj się z superadministratorem, aby skonfigurował dostawcę osadzeń.",
   "KnowledgeRoomsNeedVectorization": "Nie można wybrać pokoi wiedzy, gdy wektoryzacja jest wyłączona.",
   "KnowledgeSelectIn": "Wybierz w przestrzeni roboczej",
   "KnowledgeSettingsDescription": "Włącz bazę wiedzy dla agentów AI. System będzie indeksował Twoje dokumenty przy użyciu modelu {{modelName}}, aby wspierać wyszukiwanie oparte na pytaniach w Twoich danych. Ta funkcja koncentruje się na znajdowaniu odpowiednich informacji, ale nie generuje podsumowań ani nie przeprowadza globalnej analizy.",

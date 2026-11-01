@@ -151,11 +151,15 @@ With no AI rooms or projects and no filter, the section SHALL show one empty sta
 - **THEN** the empty state says "No AI rooms shared with you yet" and offers no action
 
 ### Requirement: Membership through the room panels
-Members of every AI room and project SHALL be managed through the room panels (Invite, Info panel Contacts, invitation link, resend) over the `files/rooms/{id}` routes. For an AI project the invitable roles SHALL be Project manager and Member; a member reads the linked rooms through the project (see `ai-projects-api`), so no share is added to those rooms.
+Members of every AI room and project SHALL be managed through the room panels (Invite, Info panel Contacts, invitation link, resend) over the `files/rooms/{id}` routes. For an AI project the invitable roles SHALL be Project manager and Member, and only people SHALL be invitable: neither the search nor "Choose from list" offers groups; a member reads the linked rooms through the project (see `ai-projects-api`), so no share is added to those rooms.
 
 #### Scenario: Invite a project member
 - **WHEN** a Project manager invites a user as Member from the Invite panel
 - **THEN** the invitation goes to `files/rooms/{id}/share` and the user appears in Contacts
+
+#### Scenario: No groups in a project invite
+- **WHEN** a Project manager types a group's name in the Invite panel of a project, or opens "Choose from list"
+- **THEN** the group is not offered and the list has no Groups tab
 
 ### Requirement: Linked rooms note in the Invite panel
 The Invite panel of an AI project, and of no other room, SHALL open with an info bar saying that everyone invited gets the Viewer role in all of the project's Instructions and Knowledge rooms.

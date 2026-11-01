@@ -892,12 +892,14 @@ const InvitePanel = ({
   };
 
   const isPrivateRoom = !!selectedRoom?.private;
+  // An AI project is shared with people only, never with groups.
+  const isAiProjectRoom = roomType === RoomsType.AiProjectRoom;
 
   const bodyInvitePanel = useMemo(() => {
     return (
       <div style={{ display: "contents" }} ref={invitePanelBodyRef}>
         {/* A project member reads its linked rooms through the project. */}
-        {roomType === RoomsType.AiProjectRoom ? (
+        {isAiProjectRoom ? (
           <PublicRoomBar
             className={styles.aiProjectSourcesBar}
             headerText={t("Common:AIProjectInviteSourcesAccess")}
@@ -941,6 +943,7 @@ const InvitePanel = ({
           usersList={usersList}
           setUsersList={setUsersList}
           isPrivateRoom={isPrivateRoom}
+          withoutGroups={isAiProjectRoom}
         />
         {hasInvitedUsers ? (
           <ItemsList
@@ -1083,7 +1086,7 @@ const InvitePanel = ({
             onAccessRightsChange={() => {}}
             isMultiSelect
             disableDisabledUsers
-            withGroups={!isPrivateRoom}
+            withGroups={!isPrivateRoom && !isAiProjectRoom}
             roomId={roomId}
             disableInvitedUsers={invitedUsersArray}
             withGuests={showGuestsTab}

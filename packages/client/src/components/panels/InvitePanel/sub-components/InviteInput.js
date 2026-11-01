@@ -116,6 +116,7 @@ const InviteInput = ({
   setUsersList,
   allowInvitingGuests,
   isPrivateRoom,
+  withoutGroups,
 }) => {
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
@@ -280,13 +281,16 @@ const InviteInput = ({
               filter,
             );
 
+      // An AI project is shared with people only: its groups are not offered.
+      const items = withoutGroups
+        ? users.items.filter((item) => !item.isGroup)
+        : users.items;
+
       setUsersList(
-        roomId === -1
-          ? users.items.map((u) => ({ ...u, shared: true }))
-          : users.items,
+        roomId === -1 ? items.map((u) => ({ ...u, shared: true })) : items,
       );
 
-      if (users.total) isBlocked = false;
+      if (items.length) isBlocked = false;
     }
 
     const parts = getParts(value);

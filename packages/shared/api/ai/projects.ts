@@ -198,6 +198,11 @@ export type TAiProjectSettingsRequest = {
   profileId?: string | null;
   instructionsRoomIds?: number[];
   knowledgeRoomIds?: number[];
+  /**
+   * The rooms the form shows, as it read them: a room linked by this save is
+   * taken from here instead of reading the sources back.
+   */
+  rooms?: TAiProjectSource[];
 };
 
 /** An uploaded logo: the temporary file `files/logos` answered and the crop, as a room takes it. */
@@ -502,9 +507,10 @@ const syncSources = async (
 
   const warnings: TAiProjectWarning[] = [];
   const attempt = async (method: "POST" | "DELETE", roomIds: number[]) => {
-    if (!roomIds.length) return;
+    if (!roomIds.length) return false;
     try {
       await request({ method, url: `${roomsUrl}/${id}/sources`, data: { roomIds } });
+      return true;
     } catch (e) {
       warnings.push({
         code: "roomUnavailable",
@@ -512,11 +518,40 @@ const syncSources = async (
         subjectId: null,
         message: errorMessage(e),
       });
+      return false;
     }
   };
-  await attempt("DELETE", toRemove);
-  await attempt("POST", toAdd);
-  return { warnings, changed: toAdd.length + toRemove.length > 0, added: toAdd.length > 0 };
+  const removed = (await attempt("DELETE", toRemove)) ? toRemove : [];
+  const added = (await attempt("POST", toAdd)) ? toAdd : [];
+  return { warnings, removed, added };
+};
+
+/**
+ * The sources after a sync: the linked rooms without the unlinked ones, then
+ * the newly linked ones as the form read them. Read back from the server
+ * only when a newly linked room is not among those.
+ */
+const syncedSources = async (
+  id: number,
+  linked: TSourcesDto,
+  removed: number[],
+  added: number[],
+  known: TAiProjectSource[] = [],
+): Promise<TSourcesDto> => {
+  if (!removed.length && !added.length) return linked;
+  const byId = new Map(known.map((room) => [room.id, room]));
+  if (added.some((roomId) => !byId.has(roomId))) return getSources(id);
+  const next = (rooms: TSourceDto[], roomType: number) => [
+    ...rooms.filter((room) => !removed.includes(room.id)),
+    ...added
+      .map((roomId) => byId.get(roomId)!)
+      .filter((room) => room.roomType === roomType)
+      .map(({ id: roomId, title, logo }) => ({ id: roomId, title, logo: logo ?? null })),
+  ];
+  return {
+    instructionsRooms: next(linked.instructionsRooms, INSTRUCTIONS_ROOM_TYPE),
+    knowledgeRooms: next(linked.knowledgeRooms, KNOWLEDGE_ROOM_TYPE),
+  };
 };
 
 /**
@@ -578,11 +613,9 @@ export const createAiProject = async (data: TAiProjectRequest) => {
     url: roomsUrl,
     data: { ...toRoomFields(data), roomType: AI_PROJECT_ROOM_TYPE },
   })) as TAiProjectRoomDto;
-  const { warnings, changed } = await syncSources(room.id, data.aiProject, {
-    instructionsRooms: [],
-    knowledgeRooms: [],
-  });
-  const sources = changed ? await getSources(room.id) : { instructionsRooms: [], knowledgeRooms: [] };
+  const none: TSourcesDto = { instructionsRooms: [], knowledgeRooms: [] };
+  const { warnings, removed, added } = await syncSources(room.id, data.aiProject, none);
+  const sources = await syncedSources(room.id, none, removed, added, data.aiProject?.rooms);
   // A new project runs on the default until a model is chosen.
   const model = data.aiProject?.profileId
     ? await saveModel(room.id, data.aiProject.profileId)
@@ -611,8 +644,8 @@ const changedRoomFields = (fields: Record<string, unknown>, current: TAiProject)
  * Saves the edit form. `current` is the project as the form opened it: its
  * linked rooms are the base of the sources diff and its model is not
  * written again when the form keeps it, so a save sends only what changed.
- * The sources are read back only when rooms were linked, as their titles
- * and logos come from the server; an unlink is applied to `current`.
+ * The sources are not read back: what was linked and unlinked is applied
+ * to them (see `syncedSources`).
  */
 export const updateAiProject = async (id: number, data: TAiProjectRequest, current?: TAiProject) => {
   const fields = current ? changedRoomFields(toRoomFields(data), current) : toRoomFields(data);
@@ -640,20 +673,11 @@ export const updateAiProject = async (id: number, data: TAiProjectRequest, curre
         ),
     known ?? getSources(id),
   ]);
-  const { warnings, changed, added } = await syncSources(id, data.aiProject, linked);
-  let sources = linked;
-  if (added) sources = await getSources(id);
-  else if (changed) {
-    const keep = (wanted: number[] | undefined, rooms: TSourceDto[]) =>
-      wanted ? rooms.filter((r) => wanted.includes(r.id)) : rooms;
-    sources = {
-      instructionsRooms: keep(data.aiProject?.instructionsRoomIds, linked.instructionsRooms),
-      knowledgeRooms: keep(data.aiProject?.knowledgeRoomIds, linked.knowledgeRooms),
-    };
-  }
+  const { warnings, removed, added } = await syncSources(id, data.aiProject, linked);
+  const sources = await syncedSources(id, linked, removed, added, data.aiProject?.rooms);
   const profileId = data.aiProject?.profileId;
   const model =
-    current && profileId !== undefined && profileId === (current.aiProject.profile?.id ?? null)
+    current && (profileId === undefined || profileId === (current.aiProject.profile?.id ?? null))
       ? { profile: current.aiProject.profile, warnings: [] as TAiProjectWarning[] }
       : await saveModel(id, profileId);
   const allWarnings = [...warnings, ...model.warnings];

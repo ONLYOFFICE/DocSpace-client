@@ -297,6 +297,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
           profileId: savedProfileId,
           instructionsRoomIds: instructions.map((r) => r.id),
           knowledgeRoomIds: knowledge.map((r) => r.id),
+          rooms: [...instructions, ...knowledge],
         },
       };
       if (project) {
@@ -334,13 +335,24 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
 
   const onRoomsSelected = (items: TSelectorItem[]) => {
     if (selector === null) return;
-    const rooms = items.map((item) => ({
-      id: Number(item.id),
-      title: item.label,
-      roomType: selector,
-      available: true,
-      archived: false,
-    }));
+    // The logo the selector read with the room, so the saved project shows
+    // the linked rooms without reading them back.
+    const rooms = items.map((item) => {
+      const room = item as { color?: string; cover?: TAiProjectCover; icon?: string; iconOriginal?: string };
+      return {
+        id: Number(item.id),
+        title: item.label,
+        roomType: selector,
+        available: true,
+        archived: false,
+        logo: {
+          color: room.color ? `#${room.color.replace("#", "")}` : "",
+          cover: room.cover ?? null,
+          medium: typeof room.icon === "string" ? room.icon : undefined,
+          original: room.iconOriginal,
+        },
+      };
+    });
     if (selector === INSTRUCTIONS_ROOM_TYPE) setInstructions(rooms);
     else setKnowledge(rooms);
     setSelector(null);

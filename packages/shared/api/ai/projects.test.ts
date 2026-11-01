@@ -285,6 +285,27 @@ describe("the calls", () => {
     expect(project.aiProject.profile?.id).toBe("p1");
   });
 
+  it("takes a newly linked room from the form instead of reading the sources back", async () => {
+    const opened = toAiProject(folder({ aiProject: { instructionsRooms: [], knowledgeRooms: [] } }));
+    request.mockClear();
+    const project = await updateAiProject(
+      7,
+      {
+        aiProject: {
+          instructionsRoomIds: [14],
+          rooms: [{ id: 14, title: "Skills", roomType: 10, available: true, archived: false, logo: { color: "#123456" } }],
+        },
+      },
+      opened,
+    );
+    expect(request.mock.calls.map(([config]) => `${(config as { method: string }).method} ${(config as { url: string }).url}`)).toEqual([
+      "POST /files/rooms/7/sources",
+    ]);
+    expect(project.aiProject.instructionsRooms).toEqual([
+      expect.objectContaining({ id: 14, title: "Skills", logo: expect.objectContaining({ color: "#123456" }) }),
+    ]);
+  });
+
   const PROFILE = { id: "p1", name: "Claude", provider: "anthropic", available: true };
 
   it("reads the project's model with the room, and the default when it cannot be read", async () => {

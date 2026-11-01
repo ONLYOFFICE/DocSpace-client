@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-10-31T12:58:28.813Z",
+  "updated_at": "2026-11-01T07:12:22.890Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 381,
+      "line_number": 379,
       "context": "const childFolders = [sharedFolder, recentFolder, favFolder];\n if (!isVisitor && myDocsFolder) childFolders.push(trashFolder);\n \n mainItems.push({\n id: myDocsFolder ? String(myDocsFolder.id) : \"files\",\n label: myDocsFolder ? myDocsFolder.title : t(\"Common:Files\"),\n icon: getCatalogIconUrlByType(FolderType.USER),\n ...(primaryFolder\n ? nav(folderUrl(primaryFolder.id, primaryFolder.rootFolderType))\n : {}),\n ...sectionBadge(",
       "module": "/packages/client"
     },
@@ -199,13 +199,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 839,
+      "line_number": 833,
       "context": "break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():\n label = getManyPDFTitle(t, true);\n break;\n case FilterType.Pdf.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 839,
+      "line_number": 833,
       "context": "break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():\n label = getManyPDFTitle(t, true);\n break;\n case FilterType.Pdf.toString():",
       "module": "/packages/client"
     },

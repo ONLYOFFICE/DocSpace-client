@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2026-10-31T12:58:28.804Z",
+  "updated_at": "2026-11-01T07:12:22.885Z",
   "comment": {
     "text": "This is a button label or menu item for creating a new spreadsheet, or a label within a conversion dialog. It refers to the file type.",
     "is_auto": true,
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 262,
+      "line_number": 261,
       "context": "};\n \n const createNewSpreadsheet = {\n id: \"personal_new-spreadsheet\",\n key: \"new-spreadsheet\",\n label: t(\"Common:Spreadsheet\"),\n onClick: () => self.onCreate(\"xlsx\"),\n icon: SpreadsheetReactSvgUrl,\n };\n \n const createNewPresentation = {",
       "module": "/packages/client"
     },

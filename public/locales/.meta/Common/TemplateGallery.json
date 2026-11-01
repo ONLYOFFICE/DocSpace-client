@@ -3,7 +3,7 @@
   "content": "Template gallery",
   "content_en_sha1_hash": "6dfaa7588cf9181537129654e857881bc2647de2",
   "created_at": "2025-12-22T09:40:11.793Z",
-  "updated_at": "2026-10-31T12:58:28.805Z",
+  "updated_at": "2026-11-01T07:12:22.886Z",
   "comment": {
     "text": "This is the title for the template gallery, a collection of pre-designed document templates. It appears as a button label to open the gallery and as the header text within the gallery itself.",
     "is_auto": true,
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 328,
+      "line_number": 327,
       "context": "const templateGallery: TContextOption[] = templateGalleryAvailable\n ? [\n { key: \"separator-template-gallery\", isSeparator: true },\n {\n key: \"template-gallery\",\n label: t(\"Common:TemplateGallery\"),\n onClick: () => self.onShowTemplateGallery(),\n icon: TemplateGalleryReactSvgUrl,\n },\n ]\n : [];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 328,
+      "line_number": 327,
       "context": "const templateGallery: TContextOption[] = templateGalleryAvailable\n ? [\n { key: \"separator-template-gallery\", isSeparator: true },\n {\n key: \"template-gallery\",\n label: t(\"Common:TemplateGallery\"),\n onClick: () => self.onShowTemplateGallery(),\n icon: TemplateGalleryReactSvgUrl,\n },\n ]\n : [];",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "A project can include up to {{limit}} instructions rooms.",
   "content_en_sha1_hash": "20bfceffc6be12607cc55ccd97b00658a954459a",
   "created_at": "2026-10-31T13:46:50.482Z",
-  "updated_at": "2026-10-31T13:48:23.949Z",
+  "updated_at": "2026-11-01T07:12:22.998Z",
   "comment": {
     "text": "Warning toast in the AI project form, shown when the user ticks one more Instructions room in the room selector than a project can link; that room stays unticked. {{limit}} is the maximum number of rooms (20). Instructions rooms are the room type whose Markdown files are AI skills; use the same term as the Instructions rooms label in the form.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 338,
-      "context": "// The limit is never shown up front: only a selection past it is told,\n // and the selector stays open to trim it.\n if (exceedsRoomsLimit(items.length)) {\n toastr.warning(\n selector === INSTRUCTIONS_ROOM_TYPE\n ? t(\"Common:AIProjectInstructionsRoomsLimit\", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE })\n : t(\"Common:AIProjectKnowledgeRoomsLimit\", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE }),\n );\n return;\n }\n const rooms = items.map((item) => ({",
+      "line_number": 334,
+      "context": "// The limit is never shown up front: only ticking a room past it is told.\n const onRoomsLimitReached = () =>\n toastr.warning(\n selector === INSTRUCTIONS_ROOM_TYPE\n ? t(\"Common:AIProjectInstructionsRoomsLimit\", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE })\n : t(\"Common:AIProjectKnowledgeRoomsLimit\", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE }),\n );\n \n const onRoomsSelected = (items: TSelectorItem[]) => {\n if (selector === null) return;",
       "module": "/packages/client"
     }
   ],

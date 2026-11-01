@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-10-31T12:58:28.815Z",
+  "updated_at": "2026-11-01T07:12:22.891Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 476,
+      "line_number": 474,
       "context": "// Active rooms listing), so the item points at the dedicated /forms route\n // scoped to that search area.\n if (roomsFolder && formsInstalled) {\n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n ...nav(searchAreaUrl(\"/forms/filter\", RoomSearchArea.Forms)),\n ...(formsFolder\n ? sectionBadge(panelFolderId(formsFolder), newCount(formsFolder))\n : {}),",
       "module": "/packages/client"
     },
@@ -97,8 +97,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 764,
-      "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (getCategoryType(location) === CategoryType.Forms)\n return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n // The AI roots are titled by the client, as the tree titles them.\n if (getCategoryType(location) === CategoryType.AiHub)\n return t(\"Common:AiRooms\");",
+      "line_number": 763,
+      "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (getCategoryType(location) === CategoryType.Forms)\n return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n // The AI root is titled by the client, as the tree titles it.\n if (getCategoryType(location) === CategoryType.AiHub)\n return t(\"Common:AiRooms\");",
       "module": "/packages/client"
     },
     {

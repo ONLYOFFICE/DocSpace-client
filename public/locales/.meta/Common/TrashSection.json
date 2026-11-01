@@ -3,7 +3,7 @@
   "content": "Trash",
   "content_en_sha1_hash": "e3bf62bb7f5af7ba291b2df1a11d573bdb55d7e9",
   "created_at": "2025-05-19T21:30:49.325Z",
-  "updated_at": "2026-10-31T12:58:28.785Z",
+  "updated_at": "2026-11-01T07:12:22.874Z",
   "comment": {
     "text": "This is a noun referring to the \"Trash\" section where deleted files are stored. It appears as a label in various UI components, often as part of a longer sentence or as a section name.",
     "is_auto": true,
@@ -19,19 +19,19 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 454,
+      "line_number": 452,
       "context": "}),\n ]\n : []),\n {\n id: \"rooms-trash\",\n label: t(\"Common:TrashSection\"),\n icon: getCatalogIconUrlByType(FolderType.TRASH),\n ...nav(\n scopedUrl(\n CategoryType.Trash,\n \"/rooms/trash\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 454,
+      "line_number": 452,
       "context": "}),\n ]\n : []),\n {\n id: \"rooms-trash\",\n label: t(\"Common:TrashSection\"),\n icon: getCatalogIconUrlByType(FolderType.TRASH),\n ...nav(\n scopedUrl(\n CategoryType.Trash,\n \"/rooms/trash\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 454,
+      "line_number": 452,
       "context": "}),\n ]\n : []),\n {\n id: \"rooms-trash\",\n label: t(\"Common:TrashSection\"),\n icon: getCatalogIconUrlByType(FolderType.TRASH),\n ...nav(\n scopedUrl(\n CategoryType.Trash,\n \"/rooms/trash\",",
       "module": "/packages/client"
     },
@@ -235,7 +235,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 624,
+      "line_number": 623,
       "context": "period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:FilesMovedToTrashNotice\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }`;\n \n return null;\n }, [sharedType, isEncryptedRoom, lifetime, t]);",
       "module": "/packages/client"
     },

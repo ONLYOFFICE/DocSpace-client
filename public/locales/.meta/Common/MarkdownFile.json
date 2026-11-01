@@ -3,7 +3,7 @@
   "content": "Markdown file",
   "content_en_sha1_hash": "92aab764c8d9d66b7003352e2ea2b1b4583ad0e6",
   "created_at": "2026-10-31T12:57:36.428Z",
-  "updated_at": "2026-10-31T12:59:25.206Z",
+  "updated_at": "2026-11-01T07:12:22.887Z",
   "comment": {
     "text": "Menu item in the New menu of an Instructions room that creates a Markdown (.md) file. Noun phrase; Markdown is a format name, kept untranslated.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 367,
+      "line_number": 366,
       "context": "const vectorizationEnabled =\n self.settingsStore.aiConfig?.vectorizationEnabled !== false;\n const createNewMarkdown: TContextOption = {\n id: \"personal_new-markdown\",\n key: \"new-markdown\",\n label: t(\"Common:MarkdownFile\"),\n icon: ActionsDocumentsReactSvgUrl,\n onClick: () => self.onCreate(\"md\", t),\n };\n // A Knowledge room takes files from the workspace (copied in) or from\n // the device, in the order the empty view offers them.",
       "module": "/packages/client"
     }

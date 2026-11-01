@@ -492,48 +492,6 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
-          // "AI Projects" (searchArea=AiProjects, read from `ai/projects`): the
-          // list and a project, whose chat Home draws in place of a file list.
-          {
-            path: "ai-projects",
-            element: (
-              <PrivateRoute>
-                <AiRoomsRoute>
-                  <ViewComponent />
-                </AiRoomsRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-projects/filter",
-            element: (
-              <PrivateRoute>
-                <AiRoomsRoute>
-                  <ViewComponent />
-                </AiRoomsRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-projects/:room",
-            element: (
-              <PrivateRoute>
-                <AiRoomsRoute>
-                  <ViewComponent />
-                </AiRoomsRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-projects/:room/filter",
-            element: (
-              <PrivateRoute>
-                <AiRoomsRoute>
-                  <ViewComponent />
-                </AiRoomsRoute>
-              </PrivateRoute>
-            ),
-          },
           {
             path: "rooms/archived",
             element: (

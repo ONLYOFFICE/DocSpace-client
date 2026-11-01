@@ -179,13 +179,9 @@ const useFiles = ({
     navigate(`${url}?${filter.toUrlParams()}`);
   };
 
-  // The AI sections' lists: "AI rooms" (searchArea=AiHub) and "AI Projects"
-  // (searchArea=AiProjects, read from `ai/projects` by `api.rooms.getRooms`).
+  // The "AI rooms" list (searchArea=AiHub).
   const fetchDefaultAiSection = (categoryType: number) => {
-    const searchArea =
-      categoryType === CategoryType.AiHub
-        ? RoomSearchArea.AiHub
-        : RoomSearchArea.AiProjects;
+    const searchArea = RoomSearchArea.AiHub;
     const filter = RoomsFilter.getDefault(userId, searchArea);
     filter.searchArea = searchArea;
 
@@ -256,9 +252,7 @@ const useFiles = ({
 
     const isRoomFolder = getObjectByLocation(location)?.folder;
     const isForms = categoryType === CategoryType.Forms;
-    const isAiSection =
-      categoryType === CategoryType.AiHub ||
-      categoryType === CategoryType.AiProjects;
+    const isAiSection = categoryType === CategoryType.AiHub;
 
     if (isForms && !isRoomFolder) {
       filterObj = RoomsFilter.getFilter(window.location);

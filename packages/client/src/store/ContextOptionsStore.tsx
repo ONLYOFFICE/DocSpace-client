@@ -989,13 +989,9 @@ class ContextOptionsStore {
       event.payload = { isFormsCreate: true };
     }
 
-    // "AI rooms" draws its own chooser; "AI Projects" opens the project form.
+    // "AI rooms" draws its own chooser.
     if (!fromItem && window.location.pathname.startsWith("/ai-rooms/")) {
       event.payload = { isAiRoomsCreate: true };
-    }
-
-    if (!fromItem && window.location.pathname.startsWith("/ai-projects")) {
-      event.payload = { isAiProjectCreate: true };
     }
 
     window.dispatchEvent(event);

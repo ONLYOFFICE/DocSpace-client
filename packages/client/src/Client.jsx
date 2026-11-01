@@ -167,7 +167,7 @@ const ClientContent = (props) => {
     location.pathname.includes("/developer-tools");
   const isBillingArticle = location.pathname.startsWith("/billing");
   // The SDK frame pages. Only the bare `/ai-rooms` is one: its nested paths
-  // are the "AI rooms" section of Home, as `/ai-projects` is "AI Projects".
+  // are the "AI rooms" section of Home.
   const isNewArticle =
     location.pathname.startsWith("/ai-files") ||
     location.pathname === "/ai-rooms" ||

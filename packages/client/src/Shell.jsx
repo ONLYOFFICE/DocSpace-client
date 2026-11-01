@@ -253,7 +253,7 @@ const Shell = ({ page = "home", ...rest }) => {
   // section) the chat is the project's: its model is fixed and the welcome
   // chips are the project's own rather than the section's.
   const isInsideAiProject =
-    isAiProjectOpen && location.pathname.startsWith("/ai-projects");
+    isAiProjectOpen && location.pathname.startsWith("/ai-rooms/");
   useCreateFileError({
     setPortalTariff,
     setFormCreationInfo,

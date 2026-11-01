@@ -27,19 +27,7 @@ describe("getRooms", () => {
     request.mockResolvedValue(page());
   });
 
-  it("reads the AI Projects section from the project listing", async () => {
-    const filter = RoomsFilter.getDefault();
-    filter.searchArea = RoomSearchArea.AiProjects;
-    filter.filterValue = "sales";
-
-    await getRooms(filter);
-
-    const url = new URL(requestedUrl(), "http://portal");
-    expect(url.pathname).toBe("/ai/projects");
-    expect(url.searchParams.get("filterValue")).toBe("sales");
-  });
-
-  it("reads every other section, AI rooms included, from files/rooms", async () => {
+  it("reads every section, AI rooms included, from files/rooms", async () => {
     const filter = RoomsFilter.getDefault();
     filter.searchArea = RoomSearchArea.AiHub;
 

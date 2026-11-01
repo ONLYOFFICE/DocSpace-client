@@ -149,10 +149,6 @@ export const buildFolderUrl = (
       path = getCategoryUrl(CategoryType.AiHub);
       params = roomParams(RoomSearchArea.AiHub);
       break;
-    case FolderType.AiProjects:
-      path = getCategoryUrl(CategoryType.AiProjects);
-      params = roomParams(RoomSearchArea.AiProjects);
-      break;
     default:
       path = getCategoryUrl(CategoryType.Shared);
       params = roomParams(RoomSearchArea.Active);
@@ -236,7 +232,6 @@ export const getClientActiveId = (
     if (pathname.includes("/trash")) return "ai-rooms-trash";
     return "ai-rooms";
   }
-  if (pathname.startsWith("/ai-projects")) return "ai-projects";
   if (pathname.startsWith("/forms")) {
     if (pathname.includes("/recent")) return "forms-recent";
     if (pathname.includes("/favorite")) return "forms-favorites";

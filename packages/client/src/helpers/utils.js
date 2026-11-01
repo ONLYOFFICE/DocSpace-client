@@ -123,9 +123,6 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
     case FolderType.AiHub:
       return parentId > 0 ? CategoryType.AiHubRoom : CategoryType.AiHub;
 
-    case FolderType.AiProjects:
-      return parentId > 0 ? CategoryType.AiProject : CategoryType.AiProjects;
-
     case FolderType.Archive:
       return CategoryType.Archive;
 
@@ -211,12 +208,6 @@ export const getCategoryUrl = (categoryType, folderId) => {
 
     case CategoryType.AiHubRoom:
       return `/ai-rooms/${folderId}/filter`;
-
-    case CategoryType.AiProjects:
-      return "/ai-projects/filter";
-
-    case CategoryType.AiProject:
-      return `/ai-projects/${folderId}/filter`;
 
     case CategoryType.SharedRoom:
       return `/rooms/shared/${folderId}/filter`;

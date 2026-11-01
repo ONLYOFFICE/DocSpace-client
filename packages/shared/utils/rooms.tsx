@@ -44,14 +44,14 @@ import { isPrivateRoomsEnabled } from "./privateRooms";
 
 /**
  * Room types the "AI rooms" section lists, filters by and creates through
- * `files/rooms`: the Instructions room (skills) and the Knowledge room
- * (knowledge base). The server keeps them under the `FolderType.AiHub` root
- * (`searchArea=AiHub`), never in Rooms. The AI project (type 12) lives under
- * its own root, in the "AI Projects" section.
+ * `files/rooms`: the Instructions room (skills), the Knowledge room
+ * (knowledge base) and the AI project. The server keeps them under the
+ * `FolderType.AiHub` root (`searchArea=AiHub`), never in Rooms.
  */
 export const AI_HUB_SECTION_TYPES: RoomsType[] = [
   RoomsType.InstructionsRoom,
   RoomsType.KnowledgeRoom,
+  RoomsType.AiProjectRoom,
 ];
 
 /**
@@ -61,6 +61,7 @@ export const AI_HUB_SECTION_TYPES: RoomsType[] = [
 export const AI_HUB_SECTION_FOLDER_TYPES = [
   FolderType.InstructionsRoom,
   FolderType.KnowledgeRoom,
+  FolderType.AiProjectRoom,
 ];
 
 /**

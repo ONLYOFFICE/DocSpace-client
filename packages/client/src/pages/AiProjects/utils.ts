@@ -51,4 +51,4 @@ export const canManageProjects = (user?: {
 
 /** The project's address in the AI Rooms section, as a room's "Copy link" gives it. */
 export const projectLink = (project: TAiProject) =>
-  `${window.location.origin}/ai-projects/${project.id}/filter?folder=${project.id}`;
+  `${window.location.origin}/ai-rooms/${project.id}/filter?folder=${project.id}`;

@@ -319,13 +319,11 @@ export const useOptions = (
       };
     };
     // In the "Forms" section only Form Filling Rooms can be created; "AI
-    // rooms" offers its own chooser and "AI Projects" the project form.
+    // rooms" offers its own chooser.
     if (window.location.pathname.startsWith("/forms")) {
       event.payload = { startRoomType: RoomsType.FormRoom };
     } else if (window.location.pathname.startsWith("/ai-rooms/")) {
       event.payload = { isAiRoomsCreate: true };
-    } else if (window.location.pathname.startsWith("/ai-projects")) {
-      event.payload = { isAiProjectCreate: true };
     }
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);

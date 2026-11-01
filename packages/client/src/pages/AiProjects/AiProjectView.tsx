@@ -127,7 +127,7 @@ const AiProjectView = ({ aiProjectsStore: store, roomId, infoPanelVisible }: AiP
         () => store.activeProject,
         (project, previous) => {
           if (project === null && previous !== null) {
-            navigate(getCategoryUrl(CategoryType.AiProjects));
+            navigate(getCategoryUrl(CategoryType.AiHub));
           }
         },
       ),

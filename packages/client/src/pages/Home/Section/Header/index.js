@@ -104,7 +104,6 @@ const SectionHeaderContent = (props) => {
     t,
     isRoomsFolder,
     isAiHubFolder,
-    isAiProjectsFolder,
     isAiSectionFolder,
     isAiProjectRoomRoot,
     security,
@@ -763,12 +762,9 @@ const SectionHeaderContent = (props) => {
         ? t("Common:Templates")
         : t("Common:Forms");
 
-    // The AI roots are titled by the client, as the tree titles them.
+    // The AI root is titled by the client, as the tree titles it.
     if (getCategoryType(location) === CategoryType.AiHub)
       return t("Common:AiRooms");
-
-    if (getCategoryType(location) === CategoryType.AiProjects)
-      return t("Common:AIProjects");
 
     if (isContactsPage) {
       switch (contactsTab) {
@@ -1034,11 +1030,9 @@ const SectionHeaderContent = (props) => {
                   : undefined,
                 actions: isFormsSection
                   ? t("Common:CreateFormSet")
-                  : isAiProjectsFolder
-                    ? t("Common:NewAIProject")
-                    : isRoomsFolder || isAiHubFolder
-                      ? t("Common:NewRoom")
-                      : t("Common:Actions"),
+                  : isRoomsFolder || isAiHubFolder
+                    ? t("Common:NewRoom")
+                    : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
                 aiChat: t("Common:AIChatButton"),
@@ -1198,7 +1192,6 @@ export default inject(
       isRecycleBinFolder,
       isRoomsFolder,
       isAiHubFolder,
-      isAiProjectsFolder,
       isAiSectionFolder,
       isAiProjectRoomRoot,
       isArchiveFolder,
@@ -1396,7 +1389,6 @@ export default inject(
 
       isRoomsFolder,
       isAiHubFolder,
-      isAiProjectsFolder,
       isAiSectionFolder,
       isAiProjectRoomRoot,
 

@@ -51,8 +51,6 @@ export type GetSectionCreateButtonParams = {
   isRoomsFolder: boolean;
   /** The "AI rooms" root; offers "New room" (its own chooser) like the Rooms root. */
   isAiHubFolder?: boolean;
-  /** The "AI Projects" root; offers "New project" (the project form). */
-  isAiProjectsFolder?: boolean;
   isFormsSection: boolean;
   isFormsFolder: boolean;
 
@@ -78,7 +76,6 @@ export const getSectionCreateButton = ({
   isContactsGuestsPage,
   isRoomsFolder,
   isAiHubFolder = false,
-  isAiProjectsFolder = false,
   isFormsSection,
   isFormsFolder,
   selectedFolderId,
@@ -102,16 +99,16 @@ export const getSectionCreateButton = ({
     };
   }
 
-  // The AI roots create rooms too: "AI rooms" through its own chooser, "AI
-  // Projects" through the project form (both answer `onCreateRoom`).
-  if (isRoomsFolder || isAiHubFolder || isAiProjectsFolder) {
+  // The "AI rooms" root creates rooms too, through its own chooser (it
+  // answers `onCreateRoom`).
+  if (isRoomsFolder || isAiHubFolder) {
     const model = getFolderModel(t);
     if (!model || model.length === 0) return HIDDEN;
 
     return {
       showMainButton: true,
       mainButtonProps: {
-        text: isAiProjectsFolder ? t("Common:NewAIProject") : t("Common:NewRoom"),
+        text: t("Common:NewRoom"),
         isDropdown: false,
         model: [],
         onAction: () => onCreateRoom(),

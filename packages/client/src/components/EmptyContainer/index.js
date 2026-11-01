@@ -64,7 +64,6 @@ const EmptyContainer = ({
   isArchiveFolderRoot,
   isFolder,
   isAiHubFolder,
-  isAiProjectsFolder,
 }) => {
   linkStyles.color = theme.filesEmptyContainer.linkColor;
 
@@ -72,12 +71,8 @@ const EmptyContainer = ({
 
   if (isFiltered) return <EmptyFilterContainer linkStyles={linkStyles} />;
 
-  // The AI roots have their own empty states ("AI Projects" also the "AI is
-  // off" view).
-  if (isRootEmptyPage && isAiHubFolder)
-    return <EmptyAiRoomsContainer kind="hub" />;
-  if (isRootEmptyPage && isAiProjectsFolder)
-    return <EmptyAiRoomsContainer kind="projects" />;
+  // The "AI rooms" root has its own empty state.
+  if (isRootEmptyPage && isAiHubFolder) return <EmptyAiRoomsContainer />;
 
   return (
     <EmptyViewContainer
@@ -110,8 +105,7 @@ export default inject(
       isFiltered === null && isErrorRoomNotAvailable;
 
     const { roomType, id: folderId, parentRoomType } = selectedFolderStore;
-    const { isArchiveFolderRoot, isAiHubFolder, isAiProjectsFolder } =
-      treeFoldersStore;
+    const { isArchiveFolderRoot, isAiHubFolder } = treeFoldersStore;
 
     const isFolder = isFolderUtil(selectedFolderStore.getSelectedFolder());
 
@@ -133,7 +127,6 @@ export default inject(
       isArchiveFolderRoot,
       isFolder,
       isAiHubFolder,
-      isAiProjectsFolder,
     };
   },
 )(observer(EmptyContainer));

@@ -846,9 +846,7 @@ class CreateEditRoomStore {
         ? CategoryType.Form
         : room.rootFolderType === FolderType.AiHub
           ? CategoryType.AiHubRoom
-          : room.rootFolderType === FolderType.AiProjects
-            ? CategoryType.AiProject
-            : CategoryType.SharedRoom,
+          : CategoryType.SharedRoom,
       room.id,
     );
 

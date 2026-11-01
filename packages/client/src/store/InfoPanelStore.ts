@@ -401,18 +401,8 @@ class InfoPanelStore {
       this.peopleStore.usersStore.contactsTab !== false ||
       getContactsView(window.location) !== false;
 
-    return (
-      isRooms ||
-      isFiles ||
-      isForms ||
-      isAccounts ||
-      this.getIsAiProjects()
-    );
+    return isRooms || isFiles || isForms || isAccounts;
   };
-
-  /** The "AI Projects" section shows a project in the panel as a room. */
-  getIsAiProjects = () =>
-    window.location.pathname.toLowerCase().startsWith("/ai-projects");
 
   getIsForms = () => {
     const pathname = window.location.pathname.toLowerCase();

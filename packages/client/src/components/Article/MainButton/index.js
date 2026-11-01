@@ -695,8 +695,8 @@ const ArticleMainButtonContent = (props) => {
   ]);
 
   const isProfile = location.pathname.includes("/profile");
-  // The AI projects page draws its own floating button.
-  const isAiProjectsPage = location.pathname.startsWith("/ai-projects");
+  // An open AI project is its chat: nothing to create in it.
+  const isAiProjectOpen = currentRoomType === RoomsType.AiProjectRoom;
 
   const getMainButtonVisible = () => {
     let visibilityValue = true;
@@ -729,7 +729,7 @@ const ArticleMainButtonContent = (props) => {
 
     if (!isMobileArticle) visibilityValue = false;
 
-    if (isAiProjectsPage) visibilityValue = false;
+    if (isAiProjectOpen) visibilityValue = false;
 
     return visibilityValue;
   };

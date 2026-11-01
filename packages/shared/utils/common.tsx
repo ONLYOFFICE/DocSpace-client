@@ -925,12 +925,6 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   );
   if (aiHubFolder) sorted.push(aiHubFolder);
 
-  const aiProjectsFolder = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.AiProjects,
-  );
-  if (aiProjectsFolder) sorted.push(aiProjectsFolder);
-
   const sharedWithMeFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.SHARE,
@@ -1647,14 +1641,6 @@ export const getCategoryType = (location: { pathname: string }) => {
     } else {
       categoryType = CategoryType.AiHub;
     }
-  } else if (pathname.startsWith("/ai-projects")) {
-    // The "AI Projects" section: the list and a project, nothing else (a
-    // project holds no files, so the section has no slots).
-    const aiProjectRegexp = new RegExp(`(ai-projects)/(${ROUTE_ID})`);
-
-    categoryType = aiProjectRegexp.test(pathname)
-      ? CategoryType.AiProject
-      : CategoryType.AiProjects;
   } else if (pathname.startsWith("/forms")) {
     const formRoomRegexp = new RegExp(`(forms)/(${ROUTE_ID})`);
 

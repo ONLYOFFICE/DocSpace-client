@@ -92,12 +92,12 @@ const showWarnings = (project: TAiProject) => {
  * The AI project that is open in the AI Rooms section, and the project form.
  *
  * The list of projects is the Files list: AI projects are rooms of the AI
- * Rooms root (`FolderType.AiProjects`), listed, filtered, pinned, archived
- * and deleted by the Files stores like any room. This store only holds what
- * the Files stores do not know about a room of type 12: its `aiProject`
- * block (model and linked rooms) read from `/api/2.0/ai/projects/{id}`, the
- * skills and knowledge files of its sources, and the create / edit form that
- * saves through the same API. The chat is handed the open project through
+ * Rooms root (`FolderType.AiHub`), listed, filtered, pinned and deleted by
+ * the Files stores like any room. This store only holds what the Files
+ * stores do not know about a room of type 12: its `aiProject` block (model
+ * and linked rooms, from `files/rooms/{id}/sources`), the skills and
+ * knowledge files of its sources, and the create / edit form that saves
+ * through `files/rooms` (see `api/ai/projects`). The chat is handed the open project through
  * `AiPresetsStore.activePreset`, the same hook a saved preset used, so the
  * Shell wiring stays as it is.
  */

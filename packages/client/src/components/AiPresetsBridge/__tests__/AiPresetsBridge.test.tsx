@@ -90,7 +90,7 @@ import AiPresetsBridgeConnected from "../index";
 // `inject` supplies the store props; the test renders it under a Provider.
 const AiPresetsBridge = AiPresetsBridgeConnected as unknown as React.FC;
 
-const project = (id: number, title: string, warnings?: { code: "grantSkipped"; message: string }[]) =>
+const project = (id: number, title: string, warnings?: { code: "roomUnavailable"; message: string }[]) =>
   ({
     id,
     title,
@@ -163,7 +163,7 @@ describe("AiPresetsBridge", () => {
 
   it("hides the save button and titles the chat inside a project", () => {
     const store = new AiPresetsStore();
-    renderBridge(store, { path: "/ai-projects/1" });
+    renderBridge(store, { path: "/ai-rooms/1/filter" });
     expect(aiChatStore.onSavePreset).toBe(store.openSaveDialog);
     act(() => store.setActivePreset(toAiPreset(project(1, "Sales"))));
     expect(aiChatStore.onSavePreset).toBeNull();
@@ -176,7 +176,7 @@ describe("AiPresetsBridge", () => {
 
   it("creates a project from the chat's setup through the naming dialog", async () => {
     api.createAiProject.mockResolvedValue(
-      project(5, "Common:AIProjectDefaultName 2", [{ code: "grantSkipped", message: "Viewer skipped" }]),
+      project(5, "Common:AIProjectDefaultName 2", [{ code: "roomUnavailable", message: "Viewer skipped" }]),
     );
     const store = new AiPresetsStore();
     renderBridge(store);

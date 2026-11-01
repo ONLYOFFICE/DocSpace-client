@@ -97,10 +97,10 @@ const AiPresetsBridge = ({
   }, [aiPresetsStore, userId]);
 
   // The save button creates a project from a plain chat, for those who may
-  // create one. A chat opened from a project on the projects page already
+  // create one. A chat opened from a project in the AI rooms section already
   // is that project, so the header hides it there.
-  const isProjectsPage = location.pathname.startsWith("/ai-projects");
-  const isInsideProject = isProjectsPage && !!aiPresetsStore.activePreset;
+  const isAiRoomsPage = location.pathname.startsWith("/ai-rooms/");
+  const isInsideProject = isAiRoomsPage && !!aiPresetsStore.activePreset;
   React.useEffect(() => {
     if (isInsideProject || !canCreateProjects) return undefined;
     aiChatStore.setOnSavePreset(aiPresetsStore.openSaveDialog);

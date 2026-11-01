@@ -901,7 +901,6 @@ export const buildContextOptions = (
       isArchiveFolder ||
       item.rootFolderType === FolderType.Archive ||
       item.rootFolderType === FolderType.AiHub ||
-      item.rootFolderType === FolderType.AiProjects ||
       deps.treeFoldersStore.isAiSectionFolder ||
       itemGroupsArea !== sectionGroupsArea
     ) {

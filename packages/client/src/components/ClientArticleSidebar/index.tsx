@@ -84,7 +84,6 @@ import {
 } from "@docspace/shared/utils/rooms";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
-import CatalogAiProjectsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
@@ -317,7 +316,6 @@ const ClientArticleSidebar = ({
     const trashFolder = find(FolderType.TRASH);
     const formsFolder = find(FolderType.Forms);
     const aiHubFolder = find(FolderType.AiHub);
-    const aiProjectsFolder = find(FolderType.AiProjects);
 
     const mainItems: NavMenuItem[] = [];
 
@@ -538,12 +536,11 @@ const ClientArticleSidebar = ({
 
     // The AI sections close the apps, while the portal has AI switched on
     // (the server only serves their roots then). "AI rooms" holds the
-    // Instructions and Knowledge rooms (`FolderType.AiHub`) and, like Rooms
-    // and Forms, carries Recent / Favorites / Trash scoped to its room types;
-    // the server never archives them, so there is no Archive slot. "AI
-    // Projects" (`FolderType.AiProjects`) holds the projects, which hold no
-    // files, so it has no slots. The bare `/ai-rooms` is the Rooms app's SDK
-    // frame page: the section lives on the nested paths.
+    // Instructions rooms, Knowledge rooms and AI projects (`FolderType.AiHub`)
+    // and, like Rooms and Forms, carries Recent / Favorites / Trash scoped to
+    // its room types; the server never archives them, so there is no Archive
+    // slot. The bare `/ai-rooms` is the Rooms app's SDK frame page: the
+    // section lives on the nested paths.
     if (aiHubFolder && aiServicesEnabled) {
       mainItems.push({
         id: "ai-rooms",
@@ -593,18 +590,6 @@ const ClientArticleSidebar = ({
             withTopSeparator: true,
           },
         ],
-      });
-    }
-
-    if (aiProjectsFolder && aiServicesEnabled) {
-      mainItems.push({
-        id: "ai-projects",
-        label: t("Common:AIProjects"),
-        icon: CatalogAiProjectsReactSvgUrl,
-        ...nav(
-          searchAreaUrl("/ai-projects/filter", RoomSearchArea.AiProjects),
-        ),
-        ...sectionBadge(aiProjectsFolder.id, newCount(aiProjectsFolder)),
       });
     }
 

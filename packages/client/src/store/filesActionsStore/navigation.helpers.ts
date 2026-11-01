@@ -94,13 +94,11 @@ self: FilesActionStore
       ? CategoryType.Shared
       : categoryType === CategoryType.Form
         ? CategoryType.Forms
-        : categoryType === CategoryType.AiProject
-          ? CategoryType.AiProjects
-          : categoryType === CategoryType.AiHubRoom
-            ? CategoryType.AiHub
-            : CategoryType.ArchivedRoom === categoryType
-              ? CategoryType.Archive
-              : categoryType;
+        : categoryType === CategoryType.AiHubRoom
+          ? CategoryType.AiHub
+          : CategoryType.ArchivedRoom === categoryType
+            ? CategoryType.Archive
+            : categoryType;
 
   const path = getCategoryUrl(correctCategoryType);
 
@@ -122,10 +120,6 @@ self: FilesActionStore
 
   if (correctCategoryType === CategoryType.Forms) {
     filter.searchArea = RoomSearchArea.Forms;
-  }
-
-  if (correctCategoryType === CategoryType.AiProjects) {
-    filter.searchArea = RoomSearchArea.AiProjects;
   }
 
   if (correctCategoryType === CategoryType.AiHub) {
@@ -376,7 +370,6 @@ self: FilesActionStore,fromHotkeys = true
   if (
     categoryType === CategoryType.SharedRoom ||
     categoryType === CategoryType.Form ||
-    categoryType === CategoryType.AiProject ||
     categoryType === CategoryType.AiHubRoom ||
     isArchivedRoom
   ) {
@@ -390,7 +383,6 @@ self: FilesActionStore,fromHotkeys = true
   if (
     categoryType === CategoryType.Shared ||
     categoryType === CategoryType.Archive ||
-    categoryType === CategoryType.AiProjects ||
     categoryType === CategoryType.AiHub
   ) {
     return self.moveToRoomsPage();

@@ -73,13 +73,7 @@ export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
     params = `?${filter.toApiUrlParams()}`;
   }
 
-  // `files/rooms` resolves no search area to the AI Projects root; the
-  // project listing (`ai/projects`) answers that root's content in the same
-  // shape and takes the same query, so the Files list reads it there.
-  const url =
-    filter?.searchArea === RoomSearchArea.AiProjects
-      ? `/ai/projects${params}`
-      : `/files/rooms${params}`;
+  const url = `/files/rooms${params}`;
 
   const options: AxiosRequestConfig = {
     method: "get",

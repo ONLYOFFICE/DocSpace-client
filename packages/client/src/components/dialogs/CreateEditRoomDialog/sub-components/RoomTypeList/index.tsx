@@ -108,7 +108,7 @@ const RoomTypeList = ({
   if (isAiRoomsCreate) {
     return (
       <div className={styles.roomTypeList}>
-        {[...AI_HUB_SECTION_TYPES, RoomsType.AiProjectRoom].map((roomType) => (
+        {AI_HUB_SECTION_TYPES.map((roomType) => (
           <RoomType
             id={roomType.toString()}
             key={roomType}

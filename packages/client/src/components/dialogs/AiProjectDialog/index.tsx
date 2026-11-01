@@ -64,7 +64,7 @@ const AiProjectDialog = ({ aiProjectsStore }: AiProjectDialogProps) => {
       const filter = FilesFilter.getDefault();
       filter.folder = String(project.id);
       navigate(
-        `${getCategoryUrl(CategoryType.AiProject, project.id)}?${filter.toUrlParams()}`,
+        `${getCategoryUrl(CategoryType.AiHubRoom, project.id)}?${filter.toUrlParams()}`,
       );
     },
     [navigate],

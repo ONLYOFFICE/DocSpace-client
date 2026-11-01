@@ -421,6 +421,8 @@ test.describe("Focus trap in the files selector", () => {
     await page.keyboard.press("Escape");
     await expect(types).toHaveCount(0);
     await expect(list).toBeFocused();
+    // The keyboard is back on the row it opened the menu from.
+    await expect.poll(activeOption).toContain("New room");
     await expect(panel).toBeVisible();
   });
 

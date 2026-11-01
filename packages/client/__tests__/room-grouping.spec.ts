@@ -1114,4 +1114,112 @@ test.describe("Room grouping", () => {
       ).toBeVisible();
     });
   });
+
+  // The room selector picks several rooms: Space and Enter tick and untick
+  // the row the keyboard is on, and the rows' checkboxes are no Tab stops.
+  test.describe("Room selector from the keyboard", () => {
+    test.beforeEach(({ mockRequest }) => {
+      mockRequest.use(
+        filesSettingsHandler(TEST_PORT, { organizeRoomsGrouping: true }),
+        roomGroupsHandler(TEST_PORT, true),
+        roomGroupByIdHandler(TEST_PORT),
+      );
+    });
+
+    // The option the keyboard is on, as the list names it.
+    const activeOption = (roomSelector: Locator) =>
+      roomSelector.getByRole("listbox").evaluate((list) => {
+        const id = list.getAttribute("aria-activedescendant");
+        const option = id ? document.getElementById(id) : null;
+        return {
+          text: option?.textContent?.trim() ?? "",
+          selected: option?.getAttribute("aria-selected") ?? "",
+        };
+      });
+
+    test("the list takes the focus, and the arrows walk the rooms", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      const list = roomSelector.getByRole("listbox");
+
+      await expect(list).toBeFocused();
+      await expect(list).toHaveAttribute("aria-label", /.+/);
+      await expect(list).toHaveAttribute("aria-activedescendant", /option/);
+
+      const options = roomSelector.getByRole("option");
+      await expect(options.first()).toBeVisible();
+      const first = (await activeOption(roomSelector)).text;
+      expect(first).not.toBe("");
+
+      await page.keyboard.press("ArrowDown");
+      const second = (await activeOption(roomSelector)).text;
+      expect(second).not.toBe(first);
+
+      await page.keyboard.press("ArrowUp");
+      expect((await activeOption(roomSelector)).text).toBe(first);
+
+      await page.keyboard.press("End");
+      expect((await activeOption(roomSelector)).text).not.toBe(first);
+      await page.keyboard.press("Home");
+      expect((await activeOption(roomSelector)).text).toBe(first);
+
+      // One Tab stop for the whole list: no row's checkbox takes the focus.
+      const rowStops = await list.evaluate(
+        (el) =>
+          [...el.querySelectorAll<HTMLElement>("input, button, [tabindex]")]
+            .filter((stop) => stop !== el && stop.tabIndex >= 0).length,
+      );
+      expect(rowStops).toBe(0);
+    });
+
+    test("Space and Enter tick and untick rooms, and Select takes them", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      await expect(roomSelector.getByRole("listbox")).toBeFocused();
+      const submit = roomSelector.getByTestId("selector_submit_button");
+
+      await page.keyboard.press(" ");
+      expect((await activeOption(roomSelector)).selected).toBe("true");
+      await page.keyboard.press("ArrowDown");
+      await page.keyboard.press("Enter");
+      expect((await activeOption(roomSelector)).selected).toBe("true");
+      await expect(roomSelector.getByRole("option", { selected: true })).toHaveCount(2);
+
+      // Enter on a ticked row unticks it: in a multi-select it is no submit.
+      await page.keyboard.press("Enter");
+      expect((await activeOption(roomSelector)).selected).toBe("false");
+      await expect(roomSelector.getByRole("option", { selected: true })).toHaveCount(1);
+
+      await expect(submit).toBeEnabled();
+      for (
+        let i = 0;
+        i < 10 && !(await submit.evaluate((el) => el === document.activeElement));
+        i += 1
+      )
+        await page.keyboard.press("Tab");
+      await expect(submit).toBeFocused();
+    });
+
+    test("Escape closes the room selector and gives the focus back to Create new group", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      await expect(roomSelector.getByRole("listbox")).toBeFocused();
+
+      await page.keyboard.press("Escape");
+      await expect(roomSelector).toBeHidden();
+      // The add button's wrapper is the control the focus goes back to; the
+      // Edit room groups dialog it sits in stays open.
+      await expect(
+        page
+          .getByTestId("selector-add-button-container")
+          .filter({ has: page.getByTestId("create_new_group_button") }),
+      ).toBeFocused();
+    });
+  });
 });

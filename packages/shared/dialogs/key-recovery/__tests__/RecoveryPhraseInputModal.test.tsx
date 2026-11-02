@@ -33,8 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { act, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import { validateMnemonic } from "../../../services/encryption/recovery";
@@ -68,6 +69,15 @@ const renderModal = (props: Partial<ModalProps> = {}) => {
 };
 
 const getPhraseField = () => screen.getByRole("textbox") as HTMLTextAreaElement;
+
+// Chrome moves the focus of a field that becomes disabled to the page body;
+// jsdom leaves it on the field, and blur() does nothing on a disabled field.
+const dropFocusToBody = () => {
+  document.body.tabIndex = -1;
+  document.body.focus();
+  document.body.removeAttribute("tabindex");
+  expect(document.body).toHaveFocus();
+};
 
 // A closed ModalDialog stays mounted, hidden from assistive technology, so the
 // confirmation is looked up among the dialogs that are actually open.
@@ -142,5 +152,64 @@ describe("RecoveryPhraseInputModal", () => {
         "Common:InvalidRecoveryPhrase",
       ),
     );
+  });
+
+  it("Focus kept after a wrong recovery phrase: restore refused", async () => {
+    const user = userEvent.setup();
+    const onSubmit = vi.fn();
+    let failRestore = () => {};
+    const Host = () => {
+      const [restoring, setRestoring] = useState(false);
+      const [error, setError] = useState<string | null>(null);
+      failRestore = () => {
+        setRestoring(false);
+        setError("Common:InvalidRecoveryPhrase");
+      };
+      return (
+        <RecoveryPhraseInputModal
+          visible
+          isLoading={restoring}
+          error={error}
+          onSubmit={(mnemonic) => {
+            onSubmit(mnemonic);
+            setError(null);
+            setRestoring(true);
+          }}
+          onCancel={() => {}}
+        />
+      );
+    };
+    render(<Host />);
+
+    await user.click(getPhraseField());
+    await user.paste(VALID_PHRASE);
+    await user.keyboard("{Enter}");
+    await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
+    dropFocusToBody();
+    act(() => failRestore());
+
+    expect(getPhraseField()).toHaveFocus();
+  });
+
+  it("Focus kept after a wrong recovery phrase: checksum refused", async () => {
+    const user = userEvent.setup();
+    let settle: (ok: boolean) => void = () => {};
+    vi.mocked(validateMnemonic).mockImplementationOnce(
+      () =>
+        new Promise<boolean>((resolve) => {
+          settle = resolve;
+        }),
+    );
+    renderModal();
+
+    await user.click(getPhraseField());
+    await user.paste(VALID_PHRASE);
+    await user.keyboard("{Enter}");
+    expect(getPhraseField()).toBeDisabled();
+    dropFocusToBody();
+    await act(async () => settle(false));
+
+    expect(getPhraseField()).toHaveAttribute("aria-invalid", "true");
+    expect(getPhraseField()).toHaveFocus();
   });
 });

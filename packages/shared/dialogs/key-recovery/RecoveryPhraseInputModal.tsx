@@ -51,6 +51,7 @@ import {
 import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { useKeyDialogCloseGuard } from "../key-dialog-close-guard";
 import { submitOnEnter } from "../key-dialog-keys";
+import { useRefocusAfterFailure } from "../key-dialog-refocus";
 import { KeyDialogAnnouncement } from "../key-dialog-announcement";
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
@@ -131,6 +132,11 @@ export const RecoveryPhraseInputModal: React.FC<
   });
 
   const isDisabled = phrase.trim().length === 0 || isLoading || isValidating;
+
+  useRefocusAfterFailure(
+    "recoveryPhraseInput",
+    visible && !isLoading && !isValidating && !!error,
+  );
 
   const handleKeyDown = useMemo(
     () =>

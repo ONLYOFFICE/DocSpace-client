@@ -37,8 +37,9 @@
 // behaviour that lives in the dialog chrome; KeyRotationDialog.test.tsx
 // stubs the kit and covers the validation rules.
 
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useState } from "react";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 
 import { KeyRotationDialog } from "../KeyRotationDialog";
@@ -70,6 +71,15 @@ const renderDialog = (props: Partial<DialogProps> = {}) => {
   );
 
   return { onSubmit, onCancel };
+};
+
+// Chrome moves the focus of a field that becomes disabled to the page body;
+// jsdom leaves it on the field, and blur() does nothing on a disabled field.
+const dropFocusToBody = () => {
+  document.body.tabIndex = -1;
+  document.body.focus();
+  document.body.removeAttribute("tabindex");
+  expect(document.body).toHaveFocus();
 };
 
 // A closed ModalDialog stays mounted, hidden from assistive technology, so the
@@ -151,6 +161,48 @@ describe("KeyRotationDialog", () => {
 
     expect(onSubmit).not.toHaveBeenCalled();
     expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("Focus kept after a wrong current passphrase", async () => {
+    const user = userEvent.setup();
+    let failChange = () => {};
+    const Host = () => {
+      const [changing, setChanging] = useState(false);
+      const [error, setError] = useState<string | null>(null);
+      failChange = () => {
+        setChanging(false);
+        setError("Common:InvalidPassphrase");
+      };
+      return (
+        <KeyRotationDialog
+          visible
+          isLoading={changing}
+          error={error}
+          onSubmit={async () => {
+            setError(null);
+            setChanging(true);
+          }}
+          onCancel={() => {}}
+        />
+      );
+    };
+    render(<Host />);
+    const current = screen.getByLabelText("Common:CurrentPassphrase");
+    const confirm = screen.getByLabelText("Common:ConfirmNewPassphrase");
+
+    await user.type(current, "wrong horse battery");
+    await user.type(
+      screen.getByLabelText("Common:NewPassphrase"),
+      "Correct1horse!battery",
+    );
+    await user.type(confirm, "Correct1horse!battery");
+    await user.keyboard("{Enter}");
+    expect(confirm).toBeDisabled();
+    dropFocusToBody();
+    act(() => failChange());
+
+    expect(current).toHaveAttribute("aria-invalid", "true");
+    expect(current).toHaveFocus();
   });
 
   it("Enter on the cancel action", async () => {

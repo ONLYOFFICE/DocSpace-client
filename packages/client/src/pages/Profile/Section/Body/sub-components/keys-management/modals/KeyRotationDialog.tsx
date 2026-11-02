@@ -43,6 +43,7 @@ import {
 import { KEY_DIALOG_DISPLAY_TYPE } from "@docspace/shared/dialogs/key-dialog-display";
 import { useKeyDialogCloseGuard } from "@docspace/shared/dialogs/key-dialog-close-guard";
 import { activateOnEnter, submitOnEnter } from "@docspace/shared/dialogs/key-dialog-keys";
+import { useRefocusAfterFailure } from "@docspace/shared/dialogs/key-dialog-refocus";
 import { KeyDialogAnnouncement } from "@docspace/shared/dialogs/key-dialog-announcement";
 import UnsavedChangesDialog from "@docspace/shared/dialogs/unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
@@ -153,6 +154,11 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
     currentPassphrase !== newPassphrase;
 
   const isDisabled = !isValid || isLoading;
+
+  useRefocusAfterFailure(
+    "currentPassphrase",
+    visible && !isLoading && !!externalError,
+  );
 
   const handleKeyDown = useMemo(
     () =>

@@ -50,6 +50,7 @@ import {
 import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { useKeyDialogCloseGuard } from "../key-dialog-close-guard";
 import { activateOnEnter, submitOnEnter } from "../key-dialog-keys";
+import { useRefocusAfterFailure } from "../key-dialog-refocus";
 import { KeyDialogAnnouncement } from "../key-dialog-announcement";
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
@@ -180,6 +181,11 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   const handleKeyDown = useMemo(
     () => submitOnEnter(handleSubmit, !isDisabled && !confirming),
     [handleSubmit, isDisabled, confirming],
+  );
+
+  useRefocusAfterFailure(
+    "passphrase",
+    visible && !isLoading && !!externalError,
   );
 
   const displayedError = externalError || error;

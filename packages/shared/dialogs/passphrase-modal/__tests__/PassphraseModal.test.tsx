@@ -34,6 +34,7 @@
  */
 
 import {
+  act,
   fireEvent,
   render,
   screen,
@@ -91,6 +92,15 @@ const describedText = (field: HTMLElement) =>
     .filter(Boolean)
     .map((id) => document.getElementById(id)?.textContent ?? "")
     .join(" ");
+
+// Chrome moves the focus of a field that becomes disabled to the page body;
+// jsdom leaves it on the field, and blur() does nothing on a disabled field.
+const dropFocusToBody = () => {
+  document.body.tabIndex = -1;
+  document.body.focus();
+  document.body.removeAttribute("tabindex");
+  expect(document.body).toHaveFocus();
+};
 
 // A closed ModalDialog stays mounted, hidden from assistive technology, so the
 // confirmation is looked up among the dialogs that are actually open.
@@ -327,6 +337,40 @@ describe("PassphraseModal", () => {
 
     expect(getAnnouncement()).toBe(announcement);
     expect(announcement).toHaveTextContent("Common:InvalidPassphrase");
+  });
+
+  it("Focus kept after a wrong passphrase", async () => {
+    const user = userEvent.setup();
+    let failUnlock = () => {};
+    const Host = () => {
+      const [unlocking, setUnlocking] = useState(false);
+      const [error, setError] = useState<string | null>(null);
+      failUnlock = () => {
+        setUnlocking(false);
+        setError("Common:InvalidPassphrase");
+      };
+      return (
+        <PassphraseModal
+          visible
+          isNew={false}
+          isLoading={unlocking}
+          externalError={error}
+          onSubmit={() => {
+            setError(null);
+            setUnlocking(true);
+          }}
+          onCancel={() => {}}
+        />
+      );
+    };
+    render(<Host />);
+
+    await user.type(getPassphraseInput(), "wrong horse battery");
+    await user.keyboard("{Enter}");
+    dropFocusToBody();
+    act(() => failUnlock());
+
+    expect(getPassphraseInput()).toHaveFocus();
   });
 
   it("Error cleared", async () => {

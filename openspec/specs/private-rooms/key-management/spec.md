@@ -40,7 +40,7 @@ The system SHALL require a new passphrase of at least 12 characters, show a stre
 
 #### Scenario: Passphrase change
 - **WHEN** the user enters a new passphrase built from a common pattern in the passphrase change dialog
-- **THEN** the strength meter shows it as weak, and the change MUST NOT be submitted
+- **THEN** the new passphrase field is marked invalid with Common:PassphraseCommonPattern as its error, and the change MUST NOT be submitted
 
 ### Requirement: Recovery phrase is shown once and must be acknowledged
 The system SHALL display the 24-word recovery phrase after key generation with print, download (HTML recovery kit) and copy actions, and SHALL require the user to tick the acknowledgement (Common:RecoveryPhraseAcknowledge) before the dialog can be closed.
@@ -288,11 +288,15 @@ The system SHALL NOT close a key dialog on a click or tap on the backdrop beside
 - **THEN** the dialog closes and the pending operation is aborted, as on Cancel
 
 ### Requirement: Closing a key dialog with typed input asks for confirmation
-The system SHALL ask for confirmation (Common:UnsavedChanges) before the cross or Escape closes a passphrase-creation, passphrase-change or recovery-phrase-input dialog that holds typed input, or a recovery-phrase display whose phrase is not yet acknowledged; declining keeps the dialog open with its input, confirming discards it. The unlock prompt, the reset dialog and the key-change dialog SHALL close without a question.
+The system SHALL ask for confirmation (Common:UnsavedChanges) before the cross or Escape closes a passphrase-creation, passphrase-change or recovery-phrase-input dialog that holds typed input, or a recovery-phrase display whose phrase is not yet acknowledged; declining keeps the dialog open with its input, confirming discards it, whether the answer is given with a pointer or with the keyboard. The unlock prompt, the reset dialog and the key-change dialog SHALL close without a question.
 
 #### Scenario: Typed passphrase kept
 - **WHEN** the user has typed a new passphrase, presses Escape and declines the confirmation
 - **THEN** the creation dialog stays open with the typed passphrase in place
+
+#### Scenario: Declined from the keyboard
+- **WHEN** the user has typed a new passphrase, presses Escape, moves the focus to Common:CancelButton of the confirmation and presses Enter
+- **THEN** the creation dialog stays open with the typed passphrase in place and nothing is discarded
 
 #### Scenario: Typed passphrase discarded
 - **WHEN** the user has typed a new passphrase, presses Escape and confirms
@@ -326,10 +330,14 @@ The system SHALL move the keyboard focus into a key dialog as it opens: to its f
 - **THEN** the focus moves into the panel the same way
 
 ### Requirement: Key dialogs return the focus when they close
-The system SHALL return the keyboard focus to the control that opened a key dialog when the dialog closes, whether through its actions, the cross or Escape, as long as that control is still on the page.
+The system SHALL return the keyboard focus to the control that opened a key dialog when the dialog closes, whether through its actions, the cross or Escape, as long as that control is still on the page; when a flow replaces one dialog with another, the control that opened the flow receives the focus when the last dialog closes.
 
 #### Scenario: Generation cancelled from the keyboard
 - **WHEN** the user opens key generation from Common:GenerateNewKey, presses Escape and confirms the discard
+- **THEN** the Common:GenerateNewKey button has the focus again
+
+#### Scenario: Flow ended by a later dialog
+- **WHEN** key generation was opened from Common:GenerateNewKey, the recovery-phrase display has replaced the passphrase prompt and the user cancels it
 - **THEN** the Common:GenerateNewKey button has the focus again
 
 #### Scenario: Unlock completed
@@ -352,7 +360,7 @@ The system SHALL move the focus with Tab through a key dialog's fields, links, c
 - **THEN** the focus leaves the dialog
 
 ### Requirement: Enter confirms a key dialog from its text fields
-The system SHALL treat Enter pressed in any text field of a key dialog as its primary action while that action is enabled, SHALL NOT submit while it is disabled, and SHALL leave Enter pressed on a button, link or checkbox to that control. In the recovery phrase field Shift+Enter inserts a line break instead.
+The system SHALL treat Enter pressed in any text field of a key dialog as its primary action while that action is enabled, SHALL NOT submit while it is disabled, and SHALL leave Enter pressed on a button, link or checkbox to that control, acting once for a held key. In the recovery phrase field Shift+Enter inserts a line break instead.
 
 #### Scenario: Passphrase change on Enter
 - **WHEN** the three passphrase-change fields are valid and the user presses Enter in the confirmation field
@@ -374,12 +382,16 @@ The system SHALL treat Enter pressed in any text field of a key dialog as its pr
 - **WHEN** the focus is on the cancel action and the user presses Enter
 - **THEN** the dialog cancels and nothing is submitted
 
+#### Scenario: Held Enter on an action link
+- **WHEN** the user holds Enter on a key dialog's action link, such as Common:GenerateNewKey in the passphrase prompt
+- **THEN** the link acts once, not once per auto-repeat
+
 #### Scenario: Line break in the recovery phrase
 - **WHEN** the user presses Shift+Enter in the recovery phrase field
 - **THEN** a line break is inserted and nothing is submitted
 
 ### Requirement: Key-dialog errors are tied to their field
-The system SHALL mark an invalid key-dialog field as invalid, attach its error text to the field so that assistive technology reads both together, announce the error when it appears, and clear both once the input is corrected.
+The system SHALL mark an invalid key-dialog field as invalid, attach its error text to the field so that assistive technology reads both together, announce the error when it appears, keep or return the keyboard focus to that field once the failed action has settled, and clear both the mark and the text once the input is corrected.
 
 #### Scenario: Mismatched confirmation
 - **WHEN** the confirmation does not match the passphrase
@@ -388,6 +400,10 @@ The system SHALL mark an invalid key-dialog field as invalid, attach its error t
 #### Scenario: Wrong passphrase announced
 - **WHEN** an unlock attempt fails
 - **THEN** the passphrase field is marked invalid, Common:InvalidPassphrase is attached to it and announced once, and typing again does not repeat the announcement
+
+#### Scenario: Focus kept after a failure
+- **WHEN** an unlock attempt fails while the passphrase field had the focus
+- **THEN** the passphrase field has the focus again once Common:InvalidPassphrase is shown, so the next keystroke goes into it and Tab stays within the dialog's order
 
 #### Scenario: Wrong recovery phrase
 - **WHEN** the typed recovery phrase does not restore the key

@@ -44,11 +44,11 @@ A project SHALL carry tags as a room does: `tags` (names) in its DTO, bound and 
 - **THEN** the project is listed with `tags: ["sales"]` and "sales" is in `files/tags`
 
 ### Requirement: Roles
-A project SHALL have three roles: project owner (`access` 1, the room's `createdBy`), Project manager (`access` 9, portal owner, DocSpace admin or room admin only, never a group) and Member (`access` 11, the room's Content creator; any user type including guests, directly or through a group). The invite panel and the invitation link SHALL grant Member as 11, and a member whose share is still the earlier Read (`access` 2) SHALL be shown as Member. A project SHALL NOT be duplicated.
+A project SHALL have three roles: project owner (`access` 1, the room's `createdBy`), Project manager (`access` 9, portal owner, DocSpace admin or room admin only, never a group) and Member (`access` 2, the room's Read; any user type including guests, directly or through a group). A project SHALL NOT be duplicated.
 
 #### Scenario: Guest as Member
 - **WHEN** a Project manager invites a guest as Member
-- **THEN** the guest is accepted with `access` 11
+- **THEN** the guest is accepted with `access` 2
 
 #### Scenario: Guest as Project manager
 - **WHEN** a Project manager tries to give a User or a group the Project manager role

@@ -341,7 +341,7 @@ const InviteInput = ({
       if (isPaidUserRole(access) && (item.isVisitor || item.isCollaborator)) {
         const topFreeRole = getTopFreeRole(t, roomType);
 
-        if (access !== topFreeRole.access) {
+        if (access !== topFreeRole?.access) {
           item = makeFreeRole(item, t, topFreeRole);
 
           if (isUserTariffLimit) {
@@ -463,7 +463,7 @@ const InviteInput = ({
             const topFreeRole =
               roomId === -1 ? EmployeeType.User : getTopFreeRole(t, roomType);
 
-            if (roomId !== -1 && item.access !== topFreeRole.access) {
+            if (roomId !== -1 && item.access !== topFreeRole?.access) {
               item = makeFreeRole(item, t, topFreeRole);
             }
           }

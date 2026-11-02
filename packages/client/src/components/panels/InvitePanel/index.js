@@ -897,7 +897,9 @@ const InvitePanel = ({
             dataTestId="invite_panel_ai_project_sources_bar"
           />
         ) : null}
-        {isPrivateRoom ? null : (
+        {/* The invitation link joins as Member, which a project does not
+            offer for now. */}
+        {isPrivateRoom || roomType === RoomsType.AiProjectRoom ? null : (
           <ExternalLinks
             t={t}
             shareLinks={shareLinks}

@@ -39,14 +39,14 @@ describe("getAccessOptions for an AI project", () => {
     return option && "access" in option ? option.access : undefined;
   };
 
-  it("grants a member Content creator, as the server does", () => {
+  it("offers Project manager only, without Member", () => {
     expect(accessOf("projectManager")).toBe(ShareAccessRights.RoomManager);
-    expect(accessOf("projectMember")).toBe(ShareAccessRights.Collaborator);
+    expect(accessOf("projectMember")).toBeUndefined();
   });
 
-  it("invites a member by default", () => {
+  it("invites a Project manager by default", () => {
     expect(getDefaultAccessUser(RoomsType.AiProjectRoom)).toBe(
-      ShareAccessRights.Collaborator,
+      ShareAccessRights.RoomManager,
     );
   });
 });

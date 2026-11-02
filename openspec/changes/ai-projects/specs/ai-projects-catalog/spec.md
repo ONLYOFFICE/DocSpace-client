@@ -158,11 +158,22 @@ With no AI rooms or projects and no filter, the section SHALL show one empty sta
 - **THEN** the empty state says "No AI rooms shared with you yet" and offers no action
 
 ### Requirement: Membership through the room panels
-Members of every AI room and project SHALL be managed through the room panels (Invite, Info panel Contacts, invitation link, resend) over the `files/rooms/{id}` routes. For an AI project the invitable roles SHALL be Project manager and Member; a member reads the linked rooms through the project (see `ai-projects-api`), so no share is added to those rooms.
+Members of every AI room and project SHALL be managed through the room panels (Invite, Info panel Contacts, invitation link, resend) over the `files/rooms/{id}` routes. A member reads the linked rooms through the project (see `ai-projects-api`), so no share is added to those rooms.
 
-#### Scenario: Invite a project member
-- **WHEN** a Project manager invites a user as Member from the Invite panel
-- **THEN** the invitation goes to `files/rooms/{id}/share` and the user appears in Contacts
+#### Scenario: Invite a project manager
+- **WHEN** a Project manager invites a room admin from the Invite panel of a project
+- **THEN** the role offered is Project manager only, the invitation goes to `files/rooms/{id}/share` with `access` 9 and the user appears in Contacts
+
+### Requirement: Project manager is the only project role offered
+Until the server takes Member again, an AI project SHALL offer Project manager as its only role: the Invite panel grants it by default and has no invitation link (the link joins as Member), and the Contacts role menu offers Project manager and removal only. A member the project already has SHALL still be shown as Member.
+
+#### Scenario: No Member role
+- **WHEN** a Project manager opens the Invite panel of a project, and then the role menu of a member in its Contacts
+- **THEN** neither offers Member, and the Invite panel shows no invitation link
+
+#### Scenario: An existing member
+- **WHEN** the project already has a member with `access` 2
+- **THEN** Contacts shows them as Member
 
 ### Requirement: Linked rooms note in the Invite panel
 The Invite panel of an AI project, and of no other room, SHALL open with an info bar saying that everyone invited gets the Viewer role in all of the project's Instructions and Knowledge rooms.

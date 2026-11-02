@@ -207,8 +207,7 @@ export const getAccessOptions = (
 			key: "projectMember",
 			label: t("Common:Member"),
 			description: t("Common:AIProjectMemberDescription"),
-			// The server grants a project member Content creator.
-			access: ShareAccessRights.Collaborator,
+			access: ShareAccessRights.ReadOnly,
 			type: EmployeeType.Guest,
 		},
 		viewer: {
@@ -315,10 +314,10 @@ export const getAccessOptions = (
 			];
 			break;
 
-		// An AI project: the manager role is paid (room admins and up), so the
-		// invite panel leaves users and guests with Member only.
+		// An AI project is shared with Project managers only for now: the server
+		// does not yet take Member, so the role is not offered.
 		case RoomsType.AiProjectRoom:
-			options = [accesses.projectManager, accesses.projectMember];
+			options = [accesses.projectManager];
 			break;
 
 		case None:

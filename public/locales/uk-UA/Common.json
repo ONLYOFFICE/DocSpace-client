@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Якщо ви переміщуєте або копіюєте зашифровані файли за межі цієї приватної кімнати, вони будуть збережені у розшифрованому вигляді.",
   "EncryptedTransferBannerTitle": "Зашифровані файли",
   "EncryptedUploadNotSharedWith": "Не надано доступ: {{names}} — їхній ключ шифрування змінився і не був підтверджений як довірений.",
+  "EncryptedUploadShareFailed": "Не надано доступ іншим учасникам кімнати: {{names}}. Повторіть спробу на панелі «Учасники».",
   "EncryptingFile": "Шифрування файлу",
   "EncryptionDecryptAllFailed": "Не вдалося розшифрувати всі вибрані файли",
   "EncryptionDecryptPartialFailed": "Не вдалося розшифрувати: {{fileNames}}",

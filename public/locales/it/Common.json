@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Se si spostano o copiano file cifrati al di fuori di questa stanza privata, verranno salvati in forma decifrata.",
   "EncryptedTransferBannerTitle": "File cifrati",
   "EncryptedUploadNotSharedWith": "Non condiviso con {{names}}: la loro chiave di cifratura è cambiata e non è stata ritenuta affidabile.",
+  "EncryptedUploadShareFailed": "Non condiviso con gli altri membri della stanza: {{names}}. Riprovare dal pannello Membri.",
   "EncryptingFile": "Crittografia di file",
   "EncryptionDecryptAllFailed": "Impossibile decifrare tutti i file selezionati",
   "EncryptionDecryptPartialFailed": "Impossibile decifrare: {{fileNames}}",

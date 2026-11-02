@@ -925,6 +925,15 @@ async function uploadEncryptedItem(
         if (history) history.skippedMembers = skippedMembers;
       });
     }
+
+    // Spec: file-operations, "Uploads into a private room are encrypted on the client"
+    if (result.shareFailed) {
+      toastr.warning(
+        i18n.t("Common:EncryptedUploadShareFailed", {
+          names: result.originalName,
+        }),
+      );
+    }
   } finally {
     stopWatchingCancel();
     settleUploadQueue(self, t);

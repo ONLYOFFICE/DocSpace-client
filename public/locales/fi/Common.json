@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Jos siirrät tai kopioit salattuja tiedostoja tämän yksityishuoneen ulkopuolelle, ne tallennetaan salaamattomassa muodossa.",
   "EncryptedTransferBannerTitle": "Salatut tiedostot",
   "EncryptedUploadNotSharedWith": "Ei jaettu käyttäjille {{names}}: heidän salausavaimensa on muuttunut eikä sitä ole hyväksytty luotettavaksi.",
+  "EncryptedUploadShareFailed": "Ei jaettu huoneen muille jäsenille: {{names}}. Yritä uudelleen Jäsenet-paneelista.",
   "EncryptingFile": "Tiedoston salaaminen",
   "EncryptionDecryptAllFailed": "Kaikkien valittujen tiedostojen salauksen purku epäonnistui",
   "EncryptionDecryptPartialFailed": "Salauksen purku epäonnistui: {{fileNames}}",

@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Εάν μετακινήσετε ή αντιγράψετε κρυπτογραφημένα αρχεία εκτός αυτού του ιδιωτικού δωματίου, θα αποθηκευτούν σε αποκρυπτογραφημένη μορφή.",
   "EncryptedTransferBannerTitle": "Κρυπτογραφημένα αρχεία",
   "EncryptedUploadNotSharedWith": "Δεν κοινοποιήθηκε σε {{names}}: το κλειδί κρυπτογράφησής τους έχει αλλάξει και δεν ήταν αξιόπιστο.",
+  "EncryptedUploadShareFailed": "Δεν κοινοποιήθηκε στα υπόλοιπα μέλη του δωματίου: {{names}}. Επαναλάβετε από τον πίνακα Μελών.",
   "EncryptingFile": "Κρυπτογράφηση αρχείου",
   "EncryptionDecryptAllFailed": "Αποτυχία αποκρυπτογράφησης όλων των επιλεγμένων αρχείων",
   "EncryptionDecryptPartialFailed": "Αποτυχία αποκρυπτογράφησης: {{fileNames}}",

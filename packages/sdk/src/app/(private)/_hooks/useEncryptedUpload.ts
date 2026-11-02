@@ -230,6 +230,16 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
           );
         }
 
+        // Spec: file-operations, "Uploads into a private room are encrypted on the client"
+        const notShared = result.results.filter((r) => r.shareFailed);
+        if (notShared.length > 0) {
+          toastr.warning(
+            t("Common:EncryptedUploadShareFailed", {
+              names: notShared.map((r) => r.originalName).join(", "),
+            }),
+          );
+        }
+
         return (
           !result.aborted &&
           !result.refused &&

@@ -299,6 +299,29 @@ describe("UploadDataStore.startSessionFunc — encrypted upload through the shar
     expect(store.files[0].error).toBeFalsy();
   });
 
+  it("Sharing with the members fails", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload(555);
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
+      memberKey("bob", "pk-bob"),
+    ] as never);
+    vi.mocked(filesApi.setFileEncryptionKeys)
+      .mockResolvedValueOnce(undefined as never)
+      .mockRejectedValueOnce(new Error("403"));
+
+    await store.startSessionFunc(0, t);
+
+    expect(store.files[0]).toMatchObject({ action: "uploaded", fileId: 555 });
+    expect(toastr.warning).toHaveBeenCalledWith(
+      "Common:EncryptedUploadShareFailed",
+    );
+    expect(pendingAccessStore.get(7, "bob")?.missingFileIds).toEqual([555]);
+    pendingAccessStore.clear(7, "bob");
+  });
+
   it("Key trusted after a refusal: the uploaded file is recorded as missing for the member whose key was refused", async () => {
     const { store } = setupEncryptedPendingFile();
     vi.mocked(prepareEncryptedUpload).mockResolvedValue(

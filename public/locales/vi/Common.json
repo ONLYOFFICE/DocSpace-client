@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Nếu bạn di chuyển hoặc sao chép các tập tin được mã hoá ra ngoài phòng riêng tư này, chúng sẽ được lưu ở dạng không được mã hoá.",
   "EncryptedTransferBannerTitle": "Tập tin được mã hoá",
   "EncryptedUploadNotSharedWith": "Chưa chia sẻ với {{names}}: khoá mã hoá của họ đã thay đổi và chưa được tin cậy.",
+  "EncryptedUploadShareFailed": "Chưa chia sẻ với các thành viên khác của phòng: {{names}}. Hãy thử lại từ bảng Thành viên.",
   "EncryptingFile": "Mã hóa tệp",
   "EncryptionDecryptAllFailed": "Không thể giải mã tất cả các tệp đã chọn",
   "EncryptionDecryptPartialFailed": "Giải mã thất bại: {{fileNames}}",

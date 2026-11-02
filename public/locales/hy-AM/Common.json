@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Եթե տեղափոխում կամ պատճենում եք կոդավորված ֆայլեր այս մասնավոր սենյակից դուրս, դրանք կպահվեն վերծանված ձևով:",
   "EncryptedTransferBannerTitle": "Կոդավորված ֆայլեր",
   "EncryptedUploadNotSharedWith": "Չի կիսվել {{names}}-ի հետ. նրանց կոդավորման բանալին փոխվել է և հավաստված չի եղել:",
+  "EncryptedUploadShareFailed": "Չի կիսվել սենյակի մյուս անդամների հետ. {{names}}: Կրկնակի փորձեք Անդամների վահանակից:",
   "EncryptingFile": "Ֆայլը կոդավորվում է",
   "EncryptionDecryptAllFailed": "Չհաջողվեց վերծանել բոլոր ընտրված ֆայլերը",
   "EncryptionDecryptPartialFailed": "Վերծանումը ձախողվեց՝ {{fileNames}}",

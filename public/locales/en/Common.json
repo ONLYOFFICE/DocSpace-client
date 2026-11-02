@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "If you move or copy encrypted files outside this private room, they will be saved in decrypted form.",
   "EncryptedTransferBannerTitle": "Encrypted files",
   "EncryptedUploadNotSharedWith": "Not shared with {{names}}: their encryption key has changed and was not trusted.",
+  "EncryptedUploadShareFailed": "Not shared with the other room members: {{names}}. Retry from the Members panel.",
   "EncryptingFile": "Encrypting file",
   "EncryptionDecryptAllFailed": "Failed to decrypt all selected files",
   "EncryptionDecryptPartialFailed": "Failed to decrypt: {{fileNames}}",

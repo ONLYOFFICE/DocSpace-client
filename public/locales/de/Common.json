@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Wenn Sie verschlüsselte Dateien aus diesem privaten Raum verschieben oder kopieren, werden sie in entschlüsselter Form gespeichert.",
   "EncryptedTransferBannerTitle": "Verschlüsselte Dateien",
   "EncryptedUploadNotSharedWith": "Nicht mit {{names}} geteilt: Deren Verschlüsselungsschlüssel hat sich geändert und wurde nicht als vertrauenswürdig eingestuft.",
+  "EncryptedUploadShareFailed": "Nicht mit den anderen Raummitgliedern geteilt: {{names}}. Wiederholen Sie den Vorgang über das Mitglieder-Panel.",
   "EncryptingFile": "Datei wird verschlüsselt",
   "EncryptionDecryptAllFailed": "Entschlüsselung aller ausgewählten Dateien fehlgeschlagen",
   "EncryptionDecryptPartialFailed": "Entschlüsselung fehlgeschlagen: {{fileNames}}",

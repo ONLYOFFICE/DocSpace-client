@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Se você mover ou copiar arquivos criptografados para fora desta sala privada, eles serão salvos em formato descriptografado.",
   "EncryptedTransferBannerTitle": "Arquivos criptografados",
   "EncryptedUploadNotSharedWith": "Não compartilhado com {{names}}: a chave de criptografia deles mudou e não foi confiada.",
+  "EncryptedUploadShareFailed": "Não compartilhado com os outros membros da sala: {{names}}. Tente novamente pelo painel de Membros.",
   "EncryptingFile": "Criptografando arquivo",
   "EncryptionDecryptAllFailed": "Falha ao descriptografar todos os arquivos selecionados",
   "EncryptionDecryptPartialFailed": "Falha ao descriptografar: {{fileNames}}",

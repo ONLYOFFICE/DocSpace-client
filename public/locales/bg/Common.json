@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Ако преместите или копирате криптирани файлове извън тази частна стая, те ще бъдат записани в декриптиран вид.",
   "EncryptedTransferBannerTitle": "Криптирани файлове",
   "EncryptedUploadNotSharedWith": "Не е споделено с {{names}}: техният ключ за криптиране е сменен и не е бил доверен.",
+  "EncryptedUploadShareFailed": "Не е споделено с другите членове на стаята: {{names}}. Опитайте отново от панела Членове.",
   "EncryptingFile": "Криптиране на файл",
   "EncryptionDecryptAllFailed": "Неуспешно дешифриране на всички избрани файлове",
   "EncryptionDecryptPartialFailed": "Неуспешно дешифриране: {{fileNames}}",

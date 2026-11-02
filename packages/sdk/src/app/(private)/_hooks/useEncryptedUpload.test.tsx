@@ -459,4 +459,24 @@ describe("useEncryptedUpload", () => {
       "Common:EncryptedUploadNotSharedWith:name-bob",
     );
   });
+
+  it("Sharing with the members fails", async () => {
+    env.orchestrate.mockImplementation(async (options: TBatchOptions) =>
+      batchResult(options.uploadIds, {
+        results: options.uploadIds.map((uploadId, index) => ({
+          ok: true,
+          uploadId,
+          originalName: `file-${index}.docx`,
+          shareFailed: index === 0,
+        })),
+      }),
+    );
+
+    await upload(["a.docx", "b.docx"]);
+
+    expect(toastr.warning).toHaveBeenCalledTimes(1);
+    expect(toastr.warning).toHaveBeenCalledWith(
+      "Common:EncryptedUploadShareFailed:file-0.docx",
+    );
+  });
 });

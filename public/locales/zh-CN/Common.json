@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "如果您将加密文件移动或复制到此私人房间之外，文件将以未加密形式保存。",
   "EncryptedTransferBannerTitle": "加密文件",
   "EncryptedUploadNotSharedWith": "未与 {{names}} 共享：其加密密钥已更改且未被信任。",
+  "EncryptedUploadShareFailed": "未与房间的其他成员共享：{{names}}。请从成员面板重试。",
   "EncryptingFile": "加密文件",
   "EncryptionDecryptAllFailed": "无法解密所有选定的文件",
   "EncryptionDecryptPartialFailed": "解密失败：{{fileNames}}",

@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "إذا قمت بنقل الملفات المشفرة أو نسخها خارج هذه الغرفة الخاصة، فسيتم حفظها بصيغة غير مشفرة.",
   "EncryptedTransferBannerTitle": "الملفات المشفرة",
   "EncryptedUploadNotSharedWith": "لم تتم المشاركة مع {{names}}: تغيّر مفتاح التشفير الخاص بهم ولم يُوثَّق.",
+  "EncryptedUploadShareFailed": "لم تتم المشاركة مع أعضاء الغرفة الآخرين: {{names}}. أعد المحاولة من لوحة الأعضاء.",
   "EncryptingFile": "تشفير الملف",
   "EncryptionDecryptAllFailed": "فشل فك تشفير جميع الملفات المحددة",
   "EncryptionDecryptPartialFailed": "فشل فك التشفير: {{fileNames}}",

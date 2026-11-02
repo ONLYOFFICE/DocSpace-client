@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Ako premestite ili kopirate šifrovane fajlove izvan ove privatne sobe, biće sačuvani u dešifrovanom obliku.",
   "EncryptedTransferBannerTitle": "Šifrovani fajlovi",
   "EncryptedUploadNotSharedWith": "Nije podeljeno sa {{names}}: njihov ključ za šifrovanje se promenio i nije bio pouzdan.",
+  "EncryptedUploadShareFailed": "Nije podeljeno sa ostalim članovima sobe: {{names}}. Pokušajte ponovo iz panela Članovi.",
   "EncryptingFile": "Šifrovanje datoteke",
   "EncryptionDecryptAllFailed": "Nije uspelo dešifrovanje svih izabranih datoteka",
   "EncryptionDecryptPartialFailed": "Dešifrovanje nije uspelo: {{fileNames}}",

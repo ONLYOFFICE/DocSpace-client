@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Si vous déplacez ou copiez des fichiers chiffrés en dehors de cette salle privée, ils seront enregistrés sous forme déchiffrée.",
   "EncryptedTransferBannerTitle": "Fichiers chiffrés",
   "EncryptedUploadNotSharedWith": "Non partagé avec {{names}} : leur clé de chiffrement a changé et n'a pas été approuvée.",
+  "EncryptedUploadShareFailed": "Non partagé avec les autres membres de la salle : {{names}}. Réessayez depuis le panneau Membres.",
   "EncryptingFile": "Chiffrement du fichier",
   "EncryptionDecryptAllFailed": "Échec du déchiffrement de tous les fichiers sélectionnés",
   "EncryptionDecryptPartialFailed": "Échec du déchiffrement : {{fileNames}}",

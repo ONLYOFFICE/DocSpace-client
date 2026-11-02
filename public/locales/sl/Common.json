@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Če premaknete ali kopirate šifrirane datoteke izven te zasebne sobe, bodo shranjene v dešifrirani obliki.",
   "EncryptedTransferBannerTitle": "Šifrirane datoteke",
   "EncryptedUploadNotSharedWith": "Ni deljeno z {{names}}: njihov šifrirni ključ se je spremenil in ni bil zaupan.",
+  "EncryptedUploadShareFailed": "Ni deljeno z drugimi člani sobe: {{names}}. Ponovite na plošči Člani.",
   "EncryptingFile": "Šifriranje datoteke",
   "EncryptionDecryptAllFailed": "Vseh izbranih datotek ni bilo mogoče dešifrirati",
   "EncryptionDecryptPartialFailed": "Dešifriranje ni uspelo: {{fileNames}}",

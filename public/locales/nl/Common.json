@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Als u versleutelde bestanden buiten deze privékamer verplaatst of kopieert, worden ze opgeslagen in ontsleutelde vorm.",
   "EncryptedTransferBannerTitle": "Versleutelde bestanden",
   "EncryptedUploadNotSharedWith": "Niet gedeeld met {{names}}: hun versleutelingssleutel is gewijzigd en werd niet vertrouwd.",
+  "EncryptedUploadShareFailed": "Niet gedeeld met de andere leden van de kamer: {{names}}. Probeer het opnieuw vanuit het ledenvenster.",
   "EncryptingFile": "Bestand versleutelen",
   "EncryptionDecryptAllFailed": "Het ontsleutelen van alle geselecteerde bestanden is mislukt",
   "EncryptionDecryptPartialFailed": "Ontsleutelen mislukt: {{fileNames}}",

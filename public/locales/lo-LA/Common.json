@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "ຖ້າທ່ານຍ້າຍ ຫຼືສຳເນົາໄຟລ໌ທີ່ເຂົ້າລະຫັດອອກຈາກຫ້ອງສ່ວນຕົວນີ້ ພວກມັນຈະຖືກບັນທຶກໃນຮູບແບບທີ່ຖອດລະຫັດແລ້ວ.",
   "EncryptedTransferBannerTitle": "ໄຟລ໌ທີ່ເຂົ້າລະຫັດ",
   "EncryptedUploadNotSharedWith": "ບໍ່ໄດ້ແບ່ງປັນກັບ {{names}}: ກຸນແຈເຂົ້າລະຫັດຂອງພວກເຂົາໄດ້ປ່ຽນໄປ ແລະບໍ່ໄດ້ຮັບການໄວ້ວາງໃຈ.",
+  "EncryptedUploadShareFailed": "ບໍ່ໄດ້ແບ່ງປັນກັບສະມາຊິກຄົນອື່ນໃນຫ້ອງ: {{names}}. ລອງໃໝ່ຈາກແຜງສະມາຊິກ.",
   "EncryptingFile": "ກຳລັງເຂົ້າລະຫັດໄຟລ໌",
   "EncryptionDecryptAllFailed": "ການຖອດລະຫັດໄຟລ໌ທີ່ເລືອກທັງໝົດລົ້ມເຫຼວ",
   "EncryptionDecryptPartialFailed": "ການຖອດລະຫັດລົ້ມເຫຼວ: {{fileNames}}",

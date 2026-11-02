@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Dacă mutați sau copiați fișiere criptate în afara acestei camere private, acestea vor fi salvate în formă decriptată.",
   "EncryptedTransferBannerTitle": "Fișiere criptate",
   "EncryptedUploadNotSharedWith": "Nepartajat cu {{names}}: cheia lor de criptare s-a schimbat și nu a fost de încredere.",
+  "EncryptedUploadShareFailed": "Nepartajat cu ceilalți membri ai sălii: {{names}}. Reîncercați din panoul Membri.",
   "EncryptingFile": "Criptare fișier",
   "EncryptionDecryptAllFailed": "Nu s-au putut decripta toate fișierele selectate",
   "EncryptionDecryptPartialFailed": "Decriptare eșuată: {{fileNames}}",

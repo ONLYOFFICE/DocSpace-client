@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "Pokud přesunete nebo zkopírujete zašifrované soubory mimo tuto soukromou místnost, budou uloženy v dešifrované podobě.",
   "EncryptedTransferBannerTitle": "Zašifrované soubory",
   "EncryptedUploadNotSharedWith": "Nesdíleno s {{names}}: jejich šifrovací klíč se změnil a nebyl důvěryhodný.",
+  "EncryptedUploadShareFailed": "Nesdíleno s ostatními členy místnosti: {{names}}. Opakujte akci z panelu Členové.",
   "EncryptingFile": "Šifrování souboru",
   "EncryptionDecryptAllFailed": "Nepodařilo se dešifrovat všechny vybrané soubory",
   "EncryptionDecryptPartialFailed": "Nepodařilo se dešifrovat: {{fileNames}}",

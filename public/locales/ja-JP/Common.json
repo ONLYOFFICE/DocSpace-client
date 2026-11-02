@@ -887,6 +887,7 @@
   "EncryptedTransferBannerDescription": "このプライベートルーム外に暗号化ファイルを移動またはコピーすると、復号化された形式で保存されます。",
   "EncryptedTransferBannerTitle": "暗号化ファイル",
   "EncryptedUploadNotSharedWith": "{{names}}とは共有されていません：相手の暗号化キーが変更されており、信頼されていません。",
+  "EncryptedUploadShareFailed": "ルームの他のメンバーとは共有されていません：{{names}}。メンバーパネルで再試行してください。",
   "EncryptingFile": "ファイルの暗号化",
   "EncryptionDecryptAllFailed": "選択したすべてのファイルの復号に失敗しました",
   "EncryptionDecryptPartialFailed": "復号に失敗しました：{{fileNames}}",

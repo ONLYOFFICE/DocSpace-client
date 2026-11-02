@@ -89,6 +89,8 @@ export async function verifyMemberKey(args: {
   if (result.kind === "first-seen" || result.kind === "match") {
     return { kind: "ok", publicKey };
   }
+  // Spec: encryption-core, "Peer public keys are pinned on first use"
+  if (result.kind === "unreadable") return { kind: "key-mismatch-refused" };
 
   const refusalKey = `${userId}:${publicKey}`;
   if (refusals?.has(refusalKey)) return { kind: "key-mismatch-refused" };

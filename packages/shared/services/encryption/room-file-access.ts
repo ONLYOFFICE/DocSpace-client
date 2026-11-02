@@ -192,6 +192,11 @@ async function verifySenderKeyAgainstTofu(
   const tofu = getTofuStore(scopeUserId);
   const result = await tofu.checkKey(senderUserId, senderPublicKey);
   if (result.kind === "first-seen" || result.kind === "match") return;
+  if (result.kind === "unreadable") {
+    throw new AuthenticationError(
+      `sender ${senderUserId} pin could not be read`,
+    );
+  }
 
   const handler = resolver ?? getKeyMismatchHandler();
   if (!handler) {

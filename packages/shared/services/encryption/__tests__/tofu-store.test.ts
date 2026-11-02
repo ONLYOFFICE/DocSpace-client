@@ -663,12 +663,15 @@ describe("TofuStore — per-operation IndexedDB error paths", () => {
     });
   }
 
-  it("getRecord resolves null when the underlying get fires onerror", async () => {
+  it("Pin cannot be read", async () => {
     installFlakyIDB("get");
     const tofu = new TofuStore("alice");
-    // checkKey internally calls getRecord — when read fails, treat as first-seen
+
     const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
-    expect(result.kind).toBe("first-seen");
+    expect(result.kind).toBe("unreadable");
+
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
+    expect(await tofu.list()).toEqual([]);
   });
 
   it("putRecord resolves silently when write fires onerror", async () => {

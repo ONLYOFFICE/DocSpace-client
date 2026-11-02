@@ -222,7 +222,11 @@ export const onCopyLinkImpl = async (
 
   const isSystemFolder = systemFolders.includes(item.type as FolderType);
 
-  if (isShared && !isArchive && !isSystemFolder && item.canShare) {
+  // The server refuses external links in the AI rooms: the link for room
+  // members is copied below.
+  const isAiHub = item.rootFolderType === FolderType.AiHub;
+
+  if (isShared && !isArchive && !isSystemFolder && !isAiHub && item.canShare) {
     try {
       const itemLink = item.isFolder
         ? await getFolderLink(item.id)

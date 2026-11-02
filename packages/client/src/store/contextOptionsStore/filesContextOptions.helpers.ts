@@ -481,9 +481,13 @@ export const getFilesContextOptionsImpl = (
       label: t("Common:CopyLink"),
       icon: InvitationLinkReactSvgUrl,
       onClick: () => self.onCopyLink(item, t),
+      // A shareable file copies its external link instead; the AI rooms
+      // have none, so their files keep this one.
       disabled: item.isTemplate
         ? false
-        : (!item.isRoom && item.canShare) ||
+        : (!item.isRoom &&
+            item.canShare &&
+            item.rootFolderType !== FolderType.AiHub) ||
           (isPublicRoomType && hasShareLinkRights) ||
           Boolean(
             item.external && (item.isLinkExpired || item.passwordProtected),

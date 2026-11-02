@@ -161,7 +161,7 @@ const FilesSelectorInput = ({
     return getIsDisabled(
       isFirstLoad,
       isSelectedParentFolder,
-      selectedItemType === "rooms" || selectedItemType === "agents",
+      selectedItemType === "rooms",
       isRoot,
       filterParam,
       !!selectedFileInfo,

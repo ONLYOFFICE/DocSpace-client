@@ -110,7 +110,7 @@ const useSelectFolderDialog = () => {
 		isFirstLoad: boolean,
 		isSelectedParentFolder: boolean,
 		selectedItemId: string | number | undefined,
-		selectedItemType: "rooms" | "files" | "agents" | undefined,
+		selectedItemType: "rooms" | "files" | undefined,
 		isRoot: boolean,
 		selectedItemSecurity:
 			| TFileSecurity
@@ -126,7 +126,6 @@ const useSelectFolderDialog = () => {
 		if (requestRunning.current) return true;
 		if (selectedFileInfo) return true;
 
-		if (selectedItemType === "agents") return true;
 		if (isInsideResultStorage) return true;
 
 		if (!selectedItemSecurity) return false;

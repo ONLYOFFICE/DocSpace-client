@@ -44,7 +44,7 @@ fixes, 8 the suspicions. One task is one commit with its tick (the
 
 ## 9. Integration
 
-- [ ] 9.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`, `pnpm run test:doceditor`), the client private-room E2E specs and the SDK private E2E folder, and `npx -y @fission-ai/openspec@latest validate private-rooms-spec-drift-fixes --strict`; all green
+- [x] 9.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`, `pnpm run test:doceditor`), the client private-room E2E specs and the SDK private E2E folder, and `npx -y @fission-ai/openspec@latest validate private-rooms-spec-drift-fixes --strict`; all green. Run 2026-11-02: gate green (shared 2013, client 1816, sdk 450, doceditor unit tests), client private-room E2E 148 passed under Docker (`tests-dev`, three workers), SDK private E2E 33 passed and 15 skipped on a fresh `test:build`, OpenSpec 17 of 17 valid; the failures the first run met are tasks 10.1 to 10.3
 
 ## 10. Found by the integration run (2026-11-02)
 

@@ -206,9 +206,17 @@ test.describe("Private room — pending access", () => {
       buffer: Buffer.from("memo"),
     });
     await unlockIfPrompted(page, passphrase);
+    // The uploader's own key write follows the stored file; it must land
+    // before the key writes below are made to fail.
     await expect
-      .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
-      .toBe(1);
+      .poll(
+        () =>
+          filesHandle.current!.getFiles()[0]?.fileKeys.map((k) =>
+            String(k.userId),
+          ) ?? [],
+        { timeout: 30000 },
+      )
+      .toEqual([TEST_USER_ID]);
     accessHandle.current!.setRoomKeys(ROOM_ID, [
       ownKey,
       {

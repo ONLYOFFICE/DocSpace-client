@@ -21,7 +21,7 @@
   "FormRoomAIProviderNotConnectedAskAdmin": "Form məlumatlarını \"Ask AI\" ilə təhlil etmək, qrafiklər yaratmaq və məlumatlar əldə etmək üçün <1>super administratorndan</1> iş sahəsi parametrlərində AI provayderini qoşmasını və aktivləşdirməsini xahiş edin.",
   "FormRoomAIReadyDescriptionFile": "Süni intellektdən bu formadakı cavabları araşdırmağı, dəyərli məlumatlar əldə etməyi və məlumatları vizuallaşdırmağı xahiş edin.",
   "FormRoomAIReadyDescriptionFolder": "Formalardan gələn cavablar burada qoşulmuş verilənlər bazasında saxlanılır. Məlumatları AI ilə təhlil etmək üçün müəyyən bir formu açın və \"Ask AI\" düyməsini basın.",
-  "FormRoomAIReadyDescriptionRoom": "\"Ask AI\" ilə məlumatları təhlil edin, qrafiklər yaradın və anlayışlar əldə edin. Başlamaq üçün bir forma seçin və \"Ask A\" düyməsini basın.",
+  "FormRoomAIReadyDescriptionRoom": "\"Ask AI\" ilə məlumatları təhlil edin, qrafiklər yaradın və anlayışlar əldə edin. Başlamaq üçün bir forma seçin və \"Ask AI\" düyməsini basın.",
   "FormRoomAIReadyTitle": "AI analizi hazırdır",
   "FormRoomAIUnlockTitle": "AI-nin gücünü kəşf edin",
   "FormRoomCollectionConnectedDescription": "Cavablar elektron cədvəl faylına davamlı olaraq yadda saxlanılır.",

@@ -20,7 +20,7 @@
   "FormRoomAIProviderNotConnected": "Form verilerini \"Ask AI\" ile analiz etmek, grafikler oluşturmak ve içgörüler keşfetmek için çalışma alanı ayarlarında bir AI sağlayıcısı bağlayın.",
   "FormRoomAIProviderNotConnectedAskAdmin": "Form verilerini \"Ask AI\" ile analiz etmek, grafikler oluşturmak ve içgörüler elde etmek için <1>süper yöneticinden</1> çalışma alanı ayarlarında bir AI sağlayıcısı bağlamasını ve etkinleştirmesini isteyin.",
   "FormRoomAIReadyDescriptionFile": "Bu formdan gelen yanıtları incele içgörüler ve verileri görselleştirmesi için yapadan yardım isteyin.",
-  "FormRoomAIReadyDescriptionFolder": "Formlardan gelen yanıtlar burada bağlı bir veritabanında depolanır. Verileri AI ile analiz etmek için belirli bir formu açın ve 'Ask AI' seçeneğine tıklayın.",
+  "FormRoomAIReadyDescriptionFolder": "Formlardan gelen yanıtlar burada bağlı bir veritabanında depolanır. Verileri AI ile analiz etmek için belirli bir formu açın ve \"Ask AI\" seçeneğine tıklayın.",
   "FormRoomAIReadyDescriptionRoom": "\"Ask AI\" ile verileri analiz edin, grafikler oluşturun ve içgörüler keşfedin. Başlamak için bir form seçin ve \"Ask AI\" seçeneğine tıklayın.",
   "FormRoomAIReadyTitle": "AI analizi hazır",
   "FormRoomAIUnlockTitle": "AI’ın gücünün kilidini açın",

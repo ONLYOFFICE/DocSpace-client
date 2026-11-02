@@ -20,7 +20,7 @@
   "FormRoomAIProviderNotConnected": "양식 데이터를 \"Ask AI\"으로 분석하고, 차트를 만들고, 인사이트를 발견하려면 워크스페이스 설정에서 AI 공급자를 연결하세요.",
   "FormRoomAIProviderNotConnectedAskAdmin": "\"Ask AI\"로 양식 데이터를 분석하고 차트를 만들고 인사이트를 발견하려면 <1>슈퍼 관리자</1>에게 워크스페이스 설정에서 AI 공급자를 연결하고 활성화하도록 요청하세요.",
   "FormRoomAIReadyDescriptionFile": "AI에게 이 양식의 응답을 탐색하고, 인사이트를 생성하며, 데이터를 시각화하도록 요청하세요.",
-  "FormRoomAIReadyDescriptionFolder": "양식의 응답은 연결된 데이터베이스에 여기에 저장됩니다. AI로 데이터를 분석하려면 특정 양식을 열고 'Ask AI'을 클릭하세요.",
+  "FormRoomAIReadyDescriptionFolder": "양식의 응답은 연결된 데이터베이스에 여기에 저장됩니다. AI로 데이터를 분석하려면 특정 양식을 열고 \"Ask AI\"을 클릭하세요.",
   "FormRoomAIReadyDescriptionRoom": "\"Ask AI\"으로 데이터를 분석하고, 차트를 만들고, 인사이트를 발견하세요. 시작하려면 양식을 선택하고 \"Ask AI\"을 클릭하세요.",
   "FormRoomAIReadyTitle": "AI 분석 준비 완료",
   "FormRoomAIUnlockTitle": "AI의 힘을 잠금 해제하세요",

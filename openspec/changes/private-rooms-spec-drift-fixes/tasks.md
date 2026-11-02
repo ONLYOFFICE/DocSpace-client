@@ -16,7 +16,7 @@ fixes, 8 the suspicions. One task is one commit with its tick (the
 
 ## 3. SDK drops (P0)
 
-- [ ] 3.1 In `packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx`, let the drag context of a private page upload only through the page's override and only into a folder the user can create in, ignoring the drop otherwise (design decision 4); verify with cases "File dropped on a row of an archived room" and "File dropped without the create right" in `docs-layout/index.test.tsx` asserting that neither the generic upload nor the override runs, and `cd packages/sdk && pnpm exec vitest run docs-layout`
+- [x] 3.1 In `packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx`, let the drag context of a private page upload only through the page's override and only into a folder the user can create in, ignoring the drop otherwise (design decision 4); verify with cases "File dropped on a row of an archived room" and "File dropped without the create right" in `docs-layout/index.test.tsx` asserting that neither the generic upload nor the override runs, and `cd packages/sdk && pnpm exec vitest run docs-layout`
 
 ## 4. Owner change from the edit dialog (P1)
 

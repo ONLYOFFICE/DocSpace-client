@@ -159,6 +159,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/files";
 
 import styles from "./DocsLayout.module.scss";
+import { makeDropUpload } from "./drop-upload";
 
 type DocsLayoutProps = {
   folders: TFolder[];
@@ -483,12 +484,18 @@ const DocsLayoutCore = observer(
     const { onItemMouseDown } = useDragActions({ trackOperation });
     const dragStore = useDragStore();
 
+    const dropUpload = makeDropUpload({
+      isPrivate: !!isPrivate,
+      privateUpload: uploadFilesToFolderOverride,
+      genericUpload: uploadFilesToFolder,
+      canCreate: isCanCreate && !isArchive,
+    });
+
     const dragContextValue: React.ContextType<typeof DragContext> = {
       onItemMouseDown,
       isDragging: dragStore.dragging || dragStore.osDragging,
-      onFilesDroppedToFolder: (files, folderId) =>
-        uploadFilesToFolder(files, folderId),
-      onFilesDroppedToCurrentFolder: (files) => uploadFilesToFolder(files),
+      onFilesDroppedToFolder: (files, folderId) => dropUpload(files, folderId),
+      onFilesDroppedToCurrentFolder: (files) => dropUpload(files),
       // Hovered sub-folder overrides the current-folder default in the
       // "Drop to" label; clearing it falls back to the current folder.
       onFolderDragOver: dragStore.setOsHoveredFolderTitle,
@@ -586,7 +593,7 @@ const DocsLayoutCore = observer(
                               data-no-filter={showFilter ? undefined : ""}
                             >
                               <DropZone
-                                onFilesDropped={uploadFilesToFolder}
+                                onFilesDropped={dropUpload}
                                 disabled={
                                   (!isMyDocuments && !isPrivate) ||
                                   (isPrivate && !!isArchive)

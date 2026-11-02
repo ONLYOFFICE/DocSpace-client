@@ -50,8 +50,60 @@ vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/files", () => ({
 }));
 
 import DocsLayout from ".";
+import { makeDropUpload } from "./drop-upload";
 
 type DocsLayoutProps = Parameters<typeof DocsLayout>[0];
+
+describe("drops on a private page", () => {
+  const files = [new File(["x"], "report.docx")];
+
+  it("File dropped on a row of an archived room", async () => {
+    const genericUpload = vi.fn(async () => {});
+    const drop = makeDropUpload({
+      isPrivate: true,
+      privateUpload: undefined,
+      genericUpload,
+      canCreate: false,
+    });
+
+    await drop(files, 42);
+
+    expect(genericUpload).not.toHaveBeenCalled();
+  });
+
+  it("File dropped without the create right", async () => {
+    const genericUpload = vi.fn(async () => {});
+    const privateUpload = vi.fn(async () => {});
+    const drop = makeDropUpload({
+      isPrivate: true,
+      privateUpload,
+      genericUpload,
+      canCreate: false,
+    });
+
+    await drop(files, 42);
+    await drop(files);
+
+    expect(privateUpload).not.toHaveBeenCalled();
+    expect(genericUpload).not.toHaveBeenCalled();
+  });
+
+  it("Member uploads a file", async () => {
+    const genericUpload = vi.fn(async () => {});
+    const privateUpload = vi.fn(async () => {});
+    const drop = makeDropUpload({
+      isPrivate: true,
+      privateUpload,
+      genericUpload,
+      canCreate: true,
+    });
+
+    await drop(files, 42);
+
+    expect(privateUpload).toHaveBeenCalledWith(files, 42);
+    expect(genericUpload).not.toHaveBeenCalled();
+  });
+});
 
 describe("DocsLayout", () => {
   it("No plaintext through a generic page: the private room page offers no AI chat", () => {

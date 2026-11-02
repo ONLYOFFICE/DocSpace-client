@@ -280,6 +280,44 @@ test.describe("Keys management — edge cases", () => {
     await expect(passphraseInput).toHaveValue(STRONG_PASSPHRASE);
   });
 
+  test("Typed passphrase kept from the keyboard", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+    await page
+      .getByRole("button", { name: "Generate new key", exact: true })
+      .click();
+
+    const passphraseInput = page.getByLabel("Passphrase", { exact: true });
+    await expect(passphraseInput).toBeVisible({ timeout: 5000 });
+    await passphraseInput.fill(STRONG_PASSPHRASE);
+
+    await page.keyboard.press("Escape");
+
+    const confirmation = page
+      .getByRole("dialog")
+      .filter({ hasText: "Unsaved changes" });
+    await expect(confirmation).toBeVisible({ timeout: 5000 });
+    const cancel = confirmation.getByRole("button", {
+      name: "Cancel",
+      exact: true,
+    });
+    for (let i = 0; i < 5; i++) {
+      if (await cancel.evaluate((el) => el === document.activeElement)) break;
+      await page.keyboard.press("Tab");
+    }
+    await expect(cancel).toBeFocused();
+    await page.keyboard.press("Enter");
+
+    await expect(confirmation).toBeHidden({ timeout: 5000 });
+    await expect(passphraseInput).toBeVisible();
+    await expect(passphraseInput).toHaveValue(STRONG_PASSPHRASE);
+  });
+
   test("Typed passphrase discarded", async ({ page, mockRequest, baseUrl }) => {
     const handleRef: { current: PrivacyroomHandlerHandle | null } = {
       current: null,

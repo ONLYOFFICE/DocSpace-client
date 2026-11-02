@@ -66,11 +66,12 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import {
   PASSPHRASE_MIN_LENGTH,
+  checkPassphraseStrength,
   isPassphraseAcceptable,
+  type PassphraseStrength,
 } from "@docspace/shared/services/encryption/passphrase-strength";
 
 import styles from "./PassphraseModal.module.scss";
-import { PassphraseStrengthMeter } from "./PassphraseStrengthMeter";
 
 type PassphraseModalProps = {
   visible: boolean;
@@ -90,7 +91,14 @@ type PassphraseModalProps = {
 
 const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
 
-const PASSPHRASE_SETTINGS = {
+const STRENGTH_COLOR: Record<PassphraseStrength, string> = {
+  weak: "var(--status-error)",
+  fair: "var(--status-warning)",
+  good: "var(--status-icon-color-positive)",
+  strong: "var(--status-icon-color-positive)",
+};
+
+export const PASSPHRASE_SETTINGS = {
   minLength: MIN_LENGTH,
   upperCase: true,
   digits: true,
@@ -171,6 +179,26 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     dirty: isNew && (passphrase !== "" || confirmPassphrase !== ""),
     onCancel: handleCancel,
   });
+
+  const strengthResult = useMemo(
+    () => (isNew && passphrase ? checkPassphraseStrength(passphrase) : null),
+    [isNew, passphrase],
+  );
+
+  const strengthLabel = (strength: PassphraseStrength): string => {
+    switch (strength) {
+      case "weak":
+        return t("Common:PassphraseStrengthWeak");
+      case "fair":
+        return t("Common:PassphraseStrengthFair");
+      case "good":
+        return t("Common:PassphraseStrengthGood");
+      case "strong":
+        return t("Common:PassphraseStrengthStrong");
+      default:
+        return "";
+    }
+  };
 
   const isValid = isNew
     ? rulesPassed && passphrase === confirmPassphrase
@@ -293,7 +321,25 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 />
               </FieldContainer>
 
-              <PassphraseStrengthMeter passphrase={isNew ? passphrase : ""} />
+              {strengthResult ? (
+                <div className={styles.strengthRow}>
+                  <Text fontSize="12px" color="var(--text-secondary)">
+                    {t("Common:PassphraseStrengthLabel")}:{" "}
+                  </Text>
+                  <Text
+                    fontSize="12px"
+                    fontWeight={600}
+                    color={STRENGTH_COLOR[strengthResult.strength]}
+                  >
+                    {strengthLabel(strengthResult.strength)}
+                  </Text>
+                </div>
+              ) : null}
+              {strengthResult?.containsCommonPattern ? (
+                <Text fontSize="12px" color="var(--status-error)">
+                  {t("Common:PassphraseCommonPattern")}
+                </Text>
+              ) : null}
 
               {onForgotPassphrase && externalError ? (
                 <div className={styles.forgotRow}>

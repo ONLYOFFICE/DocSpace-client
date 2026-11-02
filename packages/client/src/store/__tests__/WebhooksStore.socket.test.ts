@@ -566,13 +566,15 @@ describe("WebhooksStore socket: delivery journal", () => {
 });
 
 describe("WebhooksStore socket: reconnect", () => {
-  it("re-reads the open list", async () => {
+  it("re-reads the open list once for a flapping connection and the events after it", async () => {
     const store = createStore();
     store.setIsWebhooksListActive(true);
     store.webhooks = [{ id: 1, name: "a", uri: "u", enabled: true }];
     vi.mocked(getAllWebhooks).mockResolvedValue([config(2)]);
 
     emit("reconnect", undefined);
+    emit("reconnect", undefined);
+    emit("s:add-webhook", { id: 2 });
     await settle();
 
     expect(getAllWebhooks).toHaveBeenCalledTimes(1);

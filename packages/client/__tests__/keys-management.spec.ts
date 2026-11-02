@@ -511,6 +511,56 @@ test.describe("Profile > Keys Management: keyboard only", () => {
     });
   }
 
+  test("Focus back after the recovery display", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const generateBtn = page.getByRole("button", {
+      name: "Generate new key",
+      exact: true,
+    });
+    await expect(generateBtn).toBeVisible({ timeout: 15_000 });
+    await generateBtn.focus();
+    await page.keyboard.press("Enter");
+
+    const create = page.getByRole("dialog", { name: "Create passphrase" });
+    await expect(
+      create.getByLabel("Passphrase", { exact: true }),
+    ).toBeFocused({ timeout: 5_000 });
+    await page.keyboard.type(PASSPHRASE);
+    await page.keyboard.press("Tab");
+    await page.keyboard.type(PASSPHRASE);
+    await page.keyboard.press("Enter");
+
+    const recovery = page.getByRole("dialog", {
+      name: "Save your recovery phrase",
+    });
+    await expect(recovery).toBeVisible({ timeout: 15_000 });
+    await page.keyboard.press("Escape");
+
+    const confirmation = page
+      .getByRole("dialog")
+      .filter({ hasText: "Unsaved changes" });
+    await expect(confirmation).toBeVisible({ timeout: 5_000 });
+    const discard = confirmation.getByRole("button", {
+      name: "Close menu",
+      exact: true,
+    });
+    for (let i = 0; i < 5; i++) {
+      if (await discard.evaluate((el) => el === document.activeElement)) break;
+      await page.keyboard.press("Tab");
+    }
+    await expect(discard).toBeFocused();
+    await page.keyboard.press("Enter");
+
+    await expect(recovery).toBeHidden({ timeout: 5_000 });
+    await expect(generateBtn).toBeFocused();
+  });
+
   test("Import a key from the keyboard", async ({
     page,
     mockRequest,

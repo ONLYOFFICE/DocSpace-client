@@ -9,7 +9,7 @@
 
 - [x] 2.1 Reproduce in a browser: generate a key from Common:GenerateNewKey with the keyboard, cancel on the recovery-phrase display (Escape, confirm) and read `document.activeElement`; do the same for the recovery flow's new-passphrase prompt; record the result (browser, kit build) in design.md D2. If the focus is back on the opener, tick 2.2 as not needed with that record
 - [x] 2.2 Capture the opener in `useGenerateKeyFlow` and `useRecoverKeyFlow` when the flow starts and focus it when the flow ends (D2); verify with tests "Recovery display cancelled from the keyboard" in `packages/shared/dialogs/key-generation/__tests__/useGenerateKeyFlow.focus.test.tsx` and "New passphrase prompt cancelled" in a new `packages/shared/dialogs/key-recovery/__tests__/useRecoverKeyFlow.focus.test.tsx`, each asserting `toHaveFocus()` on the trigger after the second dialog closes Not needed (2026-11-02): the run of 2.1 found the focus on the opener in both flows, recorded in design.md D2.
-- [ ] 2.3 Add "Focus back after the recovery display" to the keyboard-only pass in `packages/client/__tests__/keys-management.spec.ts`; verify under Docker
+- [x] 2.3 Add "Focus back after the recovery display" to the keyboard-only pass in `packages/client/__tests__/keys-management.spec.ts`; verify under Docker
 
 ## 3. Focus after a failed action
 

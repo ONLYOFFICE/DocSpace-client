@@ -55,6 +55,7 @@ the file to change so the backend team can pick them up; nothing here is
 - Found on a local portal on 2026-10-22: the public keys of a file in an archived private room are answered 415, because the file check knows only the VirtualRooms section; the server applies the room check's VirtualRooms-or-Archive condition (design decision 9).
 - A caller who may change the access of a private room can read the public keys of named users who are not members yet, so the client verifies invitees' keys before granting access (`private-rooms-invite-atomic-rewrap`, decided 2026-10-28; design decision 10). Today the room access keys cover members only.
 - Found when the server was re-checked on 2026-10-28 (`e618acc6c0`): saving a user's keys can delete another sign-in link of that user, such as Google or SSO; a private room accepts external and invitation links and can be duplicated, saved as a template or index-exported, each guarded by the client only; an empty key set passes every key check; the private flag is accepted with any room type; and a third-party room created as private is not key-checked. The server refuses or fixes each of these (design decisions 11-13).
+- Re-checked on 2026-11-02 against `release/v4.1.0` (`e9cfda8d43`): none of the backend items has landed; the key save can also fail once the other sign-in link is gone, template creation has its own gate, and the private flag also reaches AI agents, templates and rooms from templates (design Context).
 
 ## Capabilities
 

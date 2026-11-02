@@ -2,11 +2,13 @@
 
 ## Context
 
-See proposal.md. Server state on `hotfix/v4.0.1` (`../server`):
+See proposal.md. Server state on `hotfix/v4.0.1` (`../server`). Re-checked on
+`release/v4.1.0` at `e9cfda8d43` on 2026-11-02: none of the backend tasks
+has landed, and the line numbers below are those of that commit.
 
 - Owner change: `products/ASC.Files/Core/Core/FileStorageService.cs`
-  (`ChangeOwnerAsync`, from line 5279; the room loop runs to line 5357) only
-  calls `ThrowIfKeysAreNotSetAsync` for a private room (line 5314); no
+  (`ChangeOwnerAsync`, from line 5348; the room loop runs to line 5427) only
+  calls `ThrowIfKeysAreNotSetAsync` for a private room (line 5383); no
   access-entry check or transfer.
 - Room creation: `FileStorageService.cs:1164-1167` requires keys only; no
   edition rule anywhere (no `PrivacyRoom` hit under `common/ASC.Core.Common`
@@ -34,8 +36,8 @@ See proposal.md. Server state on `hotfix/v4.0.1` (`../server`):
 - E-mails: `products/ASC.Files/Core/Utils/FileSharing.cs` passes the plaintext
   title to both invitation notifiers: `entry.Title` to the e-mail invite of a
   new address (lines 429-431) and `room.Title` to the notice for an existing
-  user (line 443). `FileStorageService.ResendEmailInvitationsAsync` (`:5468`)
-  passes `room.Title` as well (`:5504`, `:5539`). The notify actions put the
+  user (line 443). `FileStorageService.ResendEmailInvitationsAsync` (`:5538`)
+  passes `room.Title` as well (`:5574`, `:5609`). The notify actions put the
   title into the `Message` tag (`web/ASC.Web.Core/Notify/StudioNotifyService.cs:161-192`,
   `Actions.cs:1306-1320, 1366-1379`); the existing-user template
   `pattern_saas_room_invite_existing_user` prints it in every locale
@@ -43,17 +45,17 @@ See proposal.md. Server state on `hotfix/v4.0.1` (`../server`):
   template does not. `NotifyClient.cs` has no private-room check either: for
   example `SendRoomRemovedAsync` passes `folder.Title` (`:352`).
 - Plaintext into a private room: the upload paths have no private-room check
-  (`products/ASC.Files/Core/Utils/FileUploader.cs:61-125, 258-299`), and
+  (`products/ASC.Files/Core/Utils/FileUploader.cs:61-125, 264-310`), and
   `POST files/file/{fileId}/copyas` inserts converted output into any folder
   the caller may create in (`products/ASC.Files/Server/Helpers/FilesControllerHelper.cs:263-280`).
   A chunked upload is marked encrypted from the flag the client set on the
   session (`FileDao.cs:2108`, `:2119`).
-- Upload abort: `products/ASC.Files/Server/Api/UploadController.cs:169`
-  (`HttpDelete("{folderId}/session/{sessionId}")`) exists; the client has no
-  caller for it. It refuses a caller who did not open the session and
-  discards the chunks (`FileUploader.cs:403-418`); it does not match the
+- Upload abort: `products/ASC.Files/Server/Api/UploadController.cs:170`
+  (`HttpDelete("{folderId}/session/{sessionId}")`) exists, and the client
+  calls it since task 7.1. It refuses a caller who did not open the session and
+  discards the chunks (`FileUploader.cs:421-436`); it does not match the
   folder segment against the session, and its documentation remark
-  (`UploadController.cs:152-161`) still says the account is not checked.
+  (`UploadController.cs:153-162`) still says the account is not checked.
 - No recovery, SCIM or access-history controllers exist.
 - Archived private rooms: the Archive branch of `FileSecurity.FilterEntryAsync`
   (`products/ASC.Files/Core/Core/Security/FileSecurity.cs:1929-1989`) has no
@@ -101,16 +103,25 @@ Every item above still holds, and the re-check found:
   With no provider the query matches any link of the user
   (`common/ASC.FederatedLogin/AccountLinker.cs:167-173`) and the first one
   found is deleted (`:103-118`), which may be a Google or SSO sign-in.
+  The encryption record survives in that case, so `AddLinkAsync` refuses the
+  new record as already in use (`:92-95`): the key save fails after the other
+  link is gone (re-checked 2026-11-02).
 - Room-level denials: for the room itself the private-room denials are
   Convert, AskAi and Embed only (`FileSecurity.cs:1906-1913`); EditAccess and
   Copy are denied on its files and subfolders (`:1894-1904`, `:1916-1922`).
   The external-link code has no private check
-  (`FileStorageService.cs:4715-4747`, `:6351-6420`), and link shares skip the
+  (`FileStorageService.cs:4784-4816`, `:6421-6490`), and link shares skip the
   invitee key check (`FileSharing.cs:260`). Duplicating a room runs
   `FolderDao.CopyFolderAsync`, which copies colour, indexing, lifetime, quota,
   watermark, deny-download and logo but not the private setting
   (`FolderDao.cs:1429-1435`), so a duplicate is an ordinary room carrying the
-  private room's title. Template creation was not traced.
+  private room's title. Template creation is gated by
+  `CheckCanCreateRoomTemplateAsync` (`FileStorageService.cs:803-836`, called
+  from `RoomTemplatesController.cs:93`), which checks the edit-room right only
+  (`:828`) and so admits a private room; the template keeps the room's private
+  setting (`:948`). `CreateRoomFrom` is granted only on entries in My
+  documents (`FileSecurity.cs:1369-1372`), never on a room (re-checked
+  2026-11-02).
 - Room creation: `ThrowIfKeysAreNotSetAsync` checks for a null record only
   (`EncryptionLoginProvider.cs:97-103`), so an empty key set passes room
   creation, invitation and owner change; the private setting is stored for
@@ -118,22 +129,26 @@ Every item above still holds, and the re-check found:
   `CreateThirdPartyRoomAsync` passes `false` for `privacy` to
   `InternalCreateFolderAsync` (`:766`, signature `:1101-1105`) while it
   stores `Private = privacy` for the provider (`:780`), so a third-party
-  private room skips the key check.
+  private room skips the key check. The private flag also reaches room
+  creation through `CreateAiAgentAsync` (`:698`, an AI room),
+  `CreateRoomTemplateAsync` (`:948`) and `CreateRoomFromTemplateAsync`
+  (`:1005`, the template's setting by default), none of which restricts the
+  room type (re-checked 2026-11-02).
 - Access-entry read: `GET files/{fileId}/access`
   (`FilesController.GetEncryptionInfoAsync`,
-  `products/ASC.Files/Server/Api/FilesController.cs:1229-1251`) reads
+  `products/ASC.Files/Server/Api/FilesController.cs:1247-1269`) reads
   `FileDao.GetFileKeys(fileId, caller)`, which filters on the caller
   (`FileDao.cs:2434-2446`); nothing else reads the file keys table, so no
   route tells which members lack an entry.
 - Access-entry write: `SetEncryptionInfoAsync` refuses the whole request
   before storing when one listed user cannot read the file
-  (`FileStorageService.cs:5268-5274`), so an upload that still names a member
+  (`FileStorageService.cs:5337-5343`), so an upload that still names a member
   removed meanwhile on another device stores no entry for that file.
 
 The stashed `AUDIT_BACKEND.md` (2026-06-03) already lists the owner-change,
 billing, metadata-guard, title-validation, e-mail and PK items; the
 `SetEncryptionInfoAsync` authorisation it called release-blocking has since
-been fixed (`FileStorageService.cs:5242-5277`) and is already in the main
+been fixed (`FileStorageService.cs:5311-5346`) and is already in the main
 spec. `V1_RELEASE_PROGRESS.md` set admin recovery (#55), audit log (#56) and
 SCIM (#57) as P0 for B2B and explicitly allowed an individuals/SMB launch
 without them.
@@ -236,21 +251,23 @@ keys before that update and needs those keys first.
 11. **A key save replaces the encryption link only (found 2026-10-28).**
     `EncryptionLoginProvider.SetKeysAsync` passes the provider to
     `RemoveProviderAsync` (`ProviderConstants.Encryption`), so no other
-    sign-in link of the user is matched. No alternative: the current call is
-    a bug.
+    sign-in link of the user is matched and the save no longer fails on the
+    surviving encryption record. No alternative: the current call is a bug.
 
 12. **Private rooms refuse links and room-level copies (found 2026-10-28).**
     The link routes refuse an external or invitation link on a private room,
-    and the room-level private denials of `FileSecurity.FilterEntryAsync`
-    gain Duplicate, CreateRoomFrom and IndexExport next to Convert, AskAi and
-    Embed. Alternative: rely on the client, which already withholds these
+    the room-level private denials of `FileSecurity.FilterEntryAsync` gain
+    Duplicate and IndexExport next to Convert, AskAi and Embed, and
+    `CheckCanCreateRoomTemplateAsync` refuses a private room. `CreateRoomFrom`
+    needs no change: it is never granted on a room. Alternative: rely on the client, which already withholds these
     actions; rejected because any API caller reaches them.
 
 13. **Key checks look at the key set, not the record (found 2026-10-28).**
     `ThrowIfKeysAreNotSetAsync` treats an empty key set as no keys, which
     covers room creation, invitation and owner change at once, and the
     invitee keys route of decision 10 leaves such users out. Room creation
-    accepts the private flag with the Custom room type only, and
+    accepts the private flag with the Custom room type only, on every path
+    that creates a room (rooms, AI agents, templates, rooms from templates), and
     `CreateThirdPartyRoomAsync` passes the private flag on, so a third-party
     private room is key-checked. Alternative for third-party rooms: refuse the
     private flag on them (proposal decision 6).

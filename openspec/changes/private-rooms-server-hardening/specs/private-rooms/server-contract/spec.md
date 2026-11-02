@@ -114,7 +114,7 @@ The server SHALL replace only the user's encryption key record when the user's k
 
 #### Scenario: User with a linked sign-in provider saves keys
 - **WHEN** a user whose account is linked to a sign-in provider creates or replaces their encryption keys
-- **THEN** the provider link stays, the user can still sign in through it, and the user holds one encryption key record
+- **THEN** the keys are saved, the provider link stays, the user can still sign in through it, and the user holds one encryption key record
 
 ### Requirement: No external or invitation links on a private room
 The server SHALL refuse to create or update an external link or an invitation link on a private room, active or archived, so that a private room is reached through membership only.
@@ -215,7 +215,7 @@ The server SHALL NOT include the plaintext room title of a private room in invit
 - **THEN** the e-mail contains a link to the room and no room title
 
 ### Requirement: Private room creation requires keys
-The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, a third-party room created as private included, and SHALL refuse with 400 the private flag on a room type other than Custom. It SHALL otherwise store the room as a Custom room with the private setting.
+The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, a third-party room created as private included, and SHALL refuse with 400 the private flag on a room type other than Custom, whichever route creates the room (a room, an AI agent, a template or a room from a template). It SHALL otherwise store the room as a Custom room with the private setting.
 
 #### Scenario: Caller without keys
 - **WHEN** a user without encryption keys creates a private room
@@ -236,6 +236,10 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 #### Scenario: Private flag on another room type
 - **WHEN** a room creation request sets the private flag with a room type other than Custom
 - **THEN** the server answers 400 and creates no room
+
+#### Scenario: AI agent created as private
+- **WHEN** an AI agent creation request sets the private flag
+- **THEN** the server answers 400 and creates no agent
 
 ## REMOVED Requirements
 

@@ -49,6 +49,7 @@ fixes, 8 the suspicions. One task is one commit with its tick (the
 ## 10. Found by the integration run (2026-11-02)
 
 - [x] 10.1 Keyboard pass of `packages/client/__tests__/keys-management.spec.ts` ("Create a key and unlock it from the keyboard"): the ui-kit build of the merge of `release/v4.1.0` makes an `IconButton` with an action a tab stop (`role="button"`, `tabIndex` 0), so the recovery-phrase dialog's Close in the header is the first Tab stop, as "Tab order in key dialogs follows the visual order" requires; the pass now visits Close before Print. The two failures were the same on the code before this change. Verify: `pnpm test:e2e:docker:dev __tests__/keys-management.spec.ts`, both keyboard cases green
+- [x] 10.2 SDK private E2E "All invitees have verified keys" failed because a local run serves the prebuilt `packages/sdk/.next` (`next({ dev: false })`, `packages/shared/__mocks__/e2e/testServer.ts`), here a build of 2026-10-28 11:26 that predates the invitation result view; after `pnpm run test:build` the folder runs 33 passed and 15 skipped, as on 2026-10-28. No code change; `.claude/rules/e2e-tests.md` now says to rebuild before a local SDK run. Verify: `cd packages/sdk && pnpm run test:build && pnpm exec playwright test __tests__/e2e/private`
 
 ## Workflow follow-up
 

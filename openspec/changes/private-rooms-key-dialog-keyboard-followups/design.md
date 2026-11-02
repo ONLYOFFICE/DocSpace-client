@@ -67,10 +67,15 @@ code; task 2.3 keeps the check in the keyboard-only pass.
 ### D3. The error path refocuses its field
 
 The passphrase prompt, the passphrase-change dialog and the recovery-phrase
-input focus the invalid field once the pending action has failed (`isLoading`
-false and an error set), through a ref on the field and an effect on the
-error state. This is a no-op in jsdom and in Firefox, where the field never
-lost the focus. Reproduced in a browser first (task 3.1).
+input focus the invalid field once the pending action has failed (the dialog
+visible, `isLoading` false and an error set; the recovery-phrase input also
+waits for its own checksum check, `isValidating`). One hook,
+`useRefocusAfterFailure` in `packages/shared/dialogs/key-dialog-refocus.ts`,
+does it for all three: it finds the field by its id and focuses it each time
+that condition turns true. An id rather than a ref, because the kit
+`Textarea` of the recovery-phrase input takes no ref. This is a no-op in
+jsdom and in Firefox, where the field never lost the focus. Reproduced in a
+browser first (task 3.1).
 
 Reproduced on 2026-11-02 in Chromium (Playwright, Docker `tests-dev`) with
 the ui-kit pack of the merge of `release/v4.1.0` that day, keyboard only: a

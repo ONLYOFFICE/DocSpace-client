@@ -3,7 +3,7 @@
   "content": "AI tools",
   "content_en_sha1_hash": "cd70703df30d4109edda0871e0b7813e5022ed5b",
   "created_at": "2026-10-27T14:48:45.818Z",
-  "updated_at": "2026-11-02T09:45:28.488Z",
+  "updated_at": "2026-11-02T11:49:58.023Z",
   "comment": {
     "text": "Label of the file context menu item that opens a submenu with the AI actions (Ask AI, Analyze responses, Fill metadata, Generate metadata); also the tooltip of the AI icon button in the Metadata tab header of the info panel. Short noun phrase, no trailing period.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/MetadataAIMenu.tsx",
-      "line_number": 78,
+      "line_number": 84,
       "context": "<>\n <IconButton\n iconName={AISvgUrl}\n size={16}\n isFill\n title={t(\"Files:AITools\")}\n onClick={(e) => menuRef.current?.show(e)}\n dataTestId=\"info_panel_metadata_ai_button\"\n />\n <ContextMenu\n ref={menuRef}",
       "module": "/packages/client"
     },

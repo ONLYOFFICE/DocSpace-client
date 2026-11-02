@@ -40,14 +40,14 @@ import {
   type DataTableColumn,
 } from "@onlyoffice/apps-ui-kit/components/data-table";
 
-import AuthorCell from "../../TableView/sub-components/AuthorCell";
-import DateCell from "../../TableView/sub-components/DateCell";
-import ErasureCell from "../../TableView/sub-components/ErasureCell";
-import SizeCell from "../../TableView/sub-components/SizeCell";
-import TypeCell from "../../TableView/sub-components/TypeCell";
-
-import NameCell from "../cells/NameCell";
-import { formatDate, ownerName } from "../cells/cellValues";
+import {
+  AuthorColumnCell,
+  DateColumnCell,
+  ErasureColumnCell,
+  NameCell,
+  SizeColumnCell,
+  TypeColumnCell,
+} from "../cells/FilesCells";
 import type {
   TFilesColumnFlags,
   TFilesColumnsOptions,
@@ -92,6 +92,7 @@ export const getFilesColumns = (
   options: TFilesColumnsOptions,
 ): DataTableColumn<TFilesTableItem>[] => {
   const { t, flags, sideColor, isPublicRoom, isPersonalReadOnly } = options;
+  const cell = { sideColor };
 
   const columns: (DataTableColumn<TFilesTableItem> | false)[] = [
     {
@@ -99,7 +100,10 @@ export const getFilesColumns = (
       title: t("Common:Label"),
       width: { type: "fill" },
       sortKey: SortByFieldName.Name,
-      cell: (item) => <NameCell item={item} options={options} />,
+      // The old table's name-cell class: drag and drop and the selected-row
+      // styles of `StyledTable.module.scss` look for it.
+      cellClassName: "table-container_file-name-cell",
+      cell: (_, { isLast }) => <NameCell isLast={isLast} />,
     },
     !isPublicRoom && {
       id: "Author",
@@ -107,13 +111,7 @@ export const getFilesColumns = (
       width: { type: "flex" },
       visible: flags.author,
       hideable: true,
-      cell: (item) => (
-        <AuthorCell
-          item={item}
-          sideColor={sideColor}
-          fileOwner={ownerName(item, options)}
-        />
-      ),
+      cell: (_, { isLast }) => <AuthorColumnCell isLast={isLast} {...cell} />,
     },
     {
       id: "Created",
@@ -121,15 +119,8 @@ export const getFilesColumns = (
       width: { type: "flex" },
       visible: flags.created,
       hideable: true,
-      cell: (item) => (
-        <DateCell
-          create
-          sideColor={sideColor}
-          createdDate={formatDate(item.created, options)}
-          updatedDate=""
-          lastOpenedDate=""
-          isRecentFolder={false}
-        />
+      cell: (_, { isLast }) => (
+        <DateColumnCell create isLast={isLast} {...cell} />
       ),
     },
     {
@@ -139,15 +130,8 @@ export const getFilesColumns = (
       visible: flags.modified,
       hideable: true,
       sortKey: SortByFieldName.ModifiedDate,
-      cell: (item) => (
-        <DateCell
-          create={false}
-          sideColor={sideColor}
-          createdDate=""
-          updatedDate={formatDate(item.updated, options)}
-          lastOpenedDate=""
-          isRecentFolder={false}
-        />
+      cell: (_, { isLast }) => (
+        <DateColumnCell create={false} isLast={isLast} {...cell} />
       ),
     },
     isPersonalReadOnly && {
@@ -157,7 +141,7 @@ export const getFilesColumns = (
       visible: flags.erasure,
       hideable: true,
       sortKey: SortByFieldName.ModifiedDate,
-      cell: (item) => <ErasureCell t={t} sideColor={sideColor} item={item} />,
+      cell: (_, { isLast }) => <ErasureColumnCell isLast={isLast} {...cell} />,
     },
     {
       id: "Size",
@@ -166,7 +150,7 @@ export const getFilesColumns = (
       visible: flags.size,
       hideable: true,
       sortKey: SortByFieldName.Size,
-      cell: (item) => <SizeCell item={item} sideColor={sideColor} />,
+      cell: (_, { isLast }) => <SizeColumnCell isLast={isLast} {...cell} />,
     },
     {
       id: "Type",
@@ -174,7 +158,7 @@ export const getFilesColumns = (
       width: { type: "flex" },
       visible: flags.type,
       hideable: true,
-      cell: (item) => <TypeCell t={t} item={item} sideColor={sideColor} />,
+      cell: (_, { isLast }) => <TypeColumnCell isLast={isLast} {...cell} />,
     },
     options.showSettings
       ? settingsColumn<TFilesTableItem>({

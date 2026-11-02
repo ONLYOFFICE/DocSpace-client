@@ -6,11 +6,7 @@ import {
   filesColumnsRecord,
   getFilesColumns,
 } from "../columns/filesColumns";
-import { ownerName } from "../cells/cellValues";
-import type {
-  TFilesColumnsOptions,
-  TFilesTableItem,
-} from "../DataTableView.types";
+import type { TFilesColumnsOptions } from "../DataTableView.types";
 
 // The installed ui-kit package predates the DataTable, so the client's own
 // test run cannot resolve it; the two column helpers are all this file needs.
@@ -25,23 +21,15 @@ vi.mock("@onlyoffice/apps-ui-kit/components/data-table", () => ({
   }),
 }));
 
-// The cells are the old table's components; what is under test is which
-// column each one sits in.
-vi.mock("../cells/NameCell", () => ({ default: () => null }));
-vi.mock("../../TableView/sub-components/AuthorCell", () => ({
-  default: () => null,
-}));
-vi.mock("../../TableView/sub-components/DateCell", () => ({
-  default: () => null,
-}));
-vi.mock("../../TableView/sub-components/ErasureCell", () => ({
-  default: () => null,
-}));
-vi.mock("../../TableView/sub-components/SizeCell", () => ({
-  default: () => null,
-}));
-vi.mock("../../TableView/sub-components/TypeCell", () => ({
-  default: () => null,
+// The cells are the old table's components behind the row HOCs; what is under
+// test is which column each one sits in.
+vi.mock("../cells/FilesCells", () => ({
+  NameCell: () => null,
+  AuthorColumnCell: () => null,
+  DateColumnCell: () => null,
+  ErasureColumnCell: () => null,
+  SizeColumnCell: () => null,
+  TypeColumnCell: () => null,
 }));
 
 const t = ((key: string) => key) as unknown as TFunction;
@@ -51,10 +39,6 @@ const options = (
 ): TFilesColumnsOptions => ({
   t,
   sideColor: "side",
-  linkColor: "link",
-  viewerId: "me",
-  locale: "en",
-  displayFileExtension: true,
   isPublicRoom: false,
   isPersonalReadOnly: false,
   showSettings: true,
@@ -141,6 +125,12 @@ describe("files columns", () => {
     ]);
   });
 
+  it("mark the name cell with the old table's class", () => {
+    const [name] = getFilesColumns(options());
+
+    expect(name.cellClassName).toBe("table-container_file-name-cell");
+  });
+
   it("give the name the remaining width and every other column a share", () => {
     const widths = getFilesColumns(options())
       .slice(0, -1)
@@ -174,26 +164,5 @@ describe("the visible-columns record", () => {
       "Modified",
       "Size",
     ]);
-  });
-});
-
-describe("the author name", () => {
-  const item = (createdBy?: { id: string; displayName: string }) =>
-    ({ createdBy }) as unknown as TFilesTableItem;
-
-  it("is Me for the viewer's own item", () => {
-    expect(ownerName(item({ id: "me", displayName: "Ann" }), options())).toBe(
-      "Common:MeLabel",
-    );
-  });
-
-  it("is the display name for someone else's", () => {
-    expect(
-      ownerName(item({ id: "other", displayName: "Bob" }), options()),
-    ).toBe("Bob");
-  });
-
-  it("is empty without an author", () => {
-    expect(ownerName(item(), options())).toBe("");
   });
 });

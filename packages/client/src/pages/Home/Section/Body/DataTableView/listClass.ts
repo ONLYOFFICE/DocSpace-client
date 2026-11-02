@@ -33,58 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { memo } from "react";
-
-import { getTitleWithoutExtension } from "@docspace/shared/utils/getTitleWithoutExtension";
-
-import ItemIcon from "SRC_DIR/components/ItemIcon";
-
-import { FileName } from "../../TableView/sub-components/FileNameCell/FileNameCell.helpers";
-import type {
-  TFilesCellOptions,
-  TFilesTableItem,
-} from "../DataTableView.types";
-
-import styles from "../DataTableView.module.scss";
-
-type NameCellProps = {
-  item: TFilesTableItem;
-  options: TFilesCellOptions;
-};
-
-const NO_LINK = {};
-
 /**
- * The icon and the title. Selection, badges, quick buttons and opening the item
- * come with the client's row HOCs, which are not wired to this table yet.
+ * Class of the list that holds every row of the DataTable view.
+ * `FilesSelectionArea` measures the rows from its top, as it does from
+ * react-virtualized's inner container for the old table.
  */
-const NameCell = ({ item, options }: NameCellProps) => {
-  const fileExst = item.fileExst ?? "";
-
-  return (
-    <div className={styles.nameCell}>
-      <div className={styles.icon}>
-        <ItemIcon
-          icon={item.icon}
-          fileExst={fileExst}
-          title={item.title}
-          className=""
-        />
-      </div>
-      <FileName
-        title={item.title}
-        color={options.linkColor}
-        linkProps={NO_LINK}
-        indexingClass=""
-        titleWithoutExt={getTitleWithoutExtension(
-          { title: item.title, fileExst },
-          false,
-        )}
-        displayFileExtension={options.displayFileExtension}
-        fileExst={fileExst}
-      />
-    </div>
-  );
-};
-
-export default memo(NameCell);
+export const FILES_DATA_TABLE_LIST_CLASS = "files-data-table_list";

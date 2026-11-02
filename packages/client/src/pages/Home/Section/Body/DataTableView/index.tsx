@@ -33,19 +33,26 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useLayoutEffect, useMemo } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+} from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Events } from "@docspace/shared/enums";
-import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 import {
   DataTable,
   createLocalStorageWidths,
+  type DataTableApi,
+  type DataTableRenderRowProps,
   type DataTableSort,
 } from "@onlyoffice/apps-ui-kit/components/data-table";
+import type { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import {
   getPersistedString,
@@ -62,6 +69,11 @@ import type {
   TFilesColumnsOptions,
   TFilesTableItem,
 } from "./DataTableView.types";
+import { FilesDataTableRow } from "./row/FilesDataTableRow";
+import { FILES_DATA_TABLE_LIST_CLASS } from "./listClass";
+import styles from "./DataTableView.module.scss";
+
+const VIRTUALIZE = { innerClassName: FILES_DATA_TABLE_LIST_CLASS };
 
 type InjectedProps = {
   rows: TFilesTableItem[];
@@ -71,11 +83,8 @@ type InjectedProps = {
   fetchMoreFiles: () => Promise<unknown>;
   filter: TStore["filesStore"]["filter"];
   currentDeviceType: TStore["settingsStore"]["currentDeviceType"];
+  theme: TTheme;
   sideColor: string;
-  linkColor: string;
-  culture: string;
-  viewerId?: string;
-  displayFileExtension: boolean;
   isPublicRoom: boolean;
   isPersonalReadOnly: boolean;
   showSettings: boolean;
@@ -89,6 +98,16 @@ type InjectedProps = {
   columnWidthsStorageName: string;
   getColumns: TStore["tableStore"]["getColumns"];
   setColumnEnable: TStore["tableStore"]["setColumnEnable"];
+  highlightFile: TStore["filesStore"]["highlightFile"];
+  scrollToItem: TStore["filesStore"]["scrollToItem"];
+  setScrollToItem: TStore["filesStore"]["setScrollToItem"];
+  setFirsElemChecked: (checked: boolean) => void;
+  setHeaderBorder: (border: boolean) => void;
+  selectedFolderTitle: string;
+  canCreateSecurity?: boolean;
+  disableDrag: boolean;
+  setDropTargetPreview: (title: string | null) => void;
+  withContentSelection: boolean;
 };
 
 const getRowKey = (item: TFilesTableItem) =>
@@ -107,11 +126,8 @@ const DataTableView = ({
   fetchMoreFiles,
   filter,
   currentDeviceType,
+  theme,
   sideColor,
-  linkColor,
-  culture,
-  viewerId,
-  displayFileExtension,
   isPublicRoom,
   isPersonalReadOnly,
   showSettings,
@@ -125,12 +141,20 @@ const DataTableView = ({
   columnWidthsStorageName,
   getColumns,
   setColumnEnable,
+  highlightFile,
+  scrollToItem,
+  setScrollToItem,
+  setFirsElemChecked,
+  setHeaderBorder,
+  selectedFolderTitle,
+  canCreateSecurity,
+  disableDrag,
+  setDropTargetPreview,
+  withContentSelection,
 }: InjectedProps) => {
   const { t } = useTranslation(["Files", "Common"]);
 
   useViewEffect({ view: viewAs, setView: setViewAs, currentDeviceType });
-
-  const locale = getCookie(LANGUAGE) || culture;
 
   const flags: TFilesColumnFlags = useMemo(
     () => ({
@@ -155,27 +179,12 @@ const DataTableView = ({
     () => ({
       t,
       sideColor,
-      linkColor,
-      viewerId,
-      locale,
-      displayFileExtension,
       flags,
       isPublicRoom,
       isPersonalReadOnly,
       showSettings,
     }),
-    [
-      t,
-      sideColor,
-      linkColor,
-      viewerId,
-      locale,
-      displayFileExtension,
-      flags,
-      isPublicRoom,
-      isPersonalReadOnly,
-      showSettings,
-    ],
+    [t, sideColor, flags, isPublicRoom, isPersonalReadOnly, showSettings],
   );
 
   // What the old header does on mount: read the stored visible columns into
@@ -245,6 +254,62 @@ const DataTableView = ({
     [hasMoreFiles, fetchMoreFiles],
   );
 
+  const highlightId = highlightFile.id;
+  const highlightIsExst = highlightFile.isExst;
+
+  // The old table's row with the client's HOCs around the ui-kit row.
+  const renderRow = useCallback(
+    ({ row, index, rowProps }: DataTableRenderRowProps<TFilesTableItem>) => (
+      <FilesDataTableRow
+        item={row}
+        index={index}
+        itemIndex={index}
+        rowProps={rowProps}
+        theme={theme}
+        isHighlight={
+          // Loose on purpose: ids arrive as strings or numbers, as in the old table.
+          highlightId == row.id ? highlightIsExst === !row.fileExst : null
+        }
+        selectedFolderTitle={selectedFolderTitle}
+        canCreateSecurity={canCreateSecurity}
+        disableDrag={disableDrag}
+        setDropTargetPreview={setDropTargetPreview}
+        setFirsElemChecked={setFirsElemChecked}
+        setHeaderBorder={setHeaderBorder}
+      />
+    ),
+    [
+      theme,
+      highlightId,
+      highlightIsExst,
+      selectedFolderTitle,
+      canCreateSecurity,
+      disableDrag,
+      setDropTargetPreview,
+      setFirsElemChecked,
+      setHeaderBorder,
+    ],
+  );
+
+  // A created or moved item is scrolled into view by its index; the old table
+  // multiplied the index by 40 while its rows were 48 high.
+  const apiRef = useRef<DataTableApi>(null);
+
+  useEffect(() => {
+    if (!scrollToItem) return;
+
+    const index = rows.findIndex(
+      (row) =>
+        row.id === scrollToItem.id &&
+        (!scrollToItem.type ||
+          (scrollToItem.type === "folder") === !!row.isFolder),
+    );
+    if (index === -1) return;
+
+    apiRef.current?.scrollToIndex(index, { align: "auto" });
+    setScrollToItem(null);
+  }, [scrollToItem, rows, setScrollToItem]);
+
   return (
     <DataTable<TFilesTableItem>
       id="table-container"
@@ -258,8 +323,11 @@ const DataTableView = ({
       onSortChange={onSortChange}
       onColumnVisibilityChange={onColumnVisibilityChange}
       widthStorage={widthStorage}
-      virtualize
+      renderRow={renderRow}
+      virtualize={VIRTUALIZE}
       loadMore={loadMore}
+      apiRef={apiRef}
+      className={withContentSelection ? undefined : styles.noSelect}
     />
   );
 };
@@ -268,11 +336,12 @@ export default inject<TStore>(
   ({
     filesStore,
     settingsStore,
-    userStore,
-    filesSettingsStore,
     publicRoomStore,
     treeFoldersStore,
     tableStore,
+    selectedFolderStore,
+    uploadDataStore,
+    hotkeyStore,
   }) => {
     const {
       filter,
@@ -281,9 +350,14 @@ export default inject<TStore>(
       setViewAs,
       hasMoreFiles,
       fetchMoreFiles,
+      highlightFile,
+      scrollToItem,
+      setScrollToItem,
+      setFirsElemChecked,
+      setHeaderBorder,
+      disableDrag,
     } = filesStore;
-    const { theme, culture, currentDeviceType, isFrame, frameConfig } =
-      settingsStore;
+    const { theme, currentDeviceType, isFrame, frameConfig } = settingsStore;
 
     return {
       rows: filesList as TFilesTableItem[],
@@ -293,11 +367,8 @@ export default inject<TStore>(
       fetchMoreFiles,
       filter,
       currentDeviceType,
+      theme,
       sideColor: theme.filesSection.tableView.row.sideColor,
-      linkColor: theme.filesSection.tableView.fileName.linkColor,
-      culture,
-      viewerId: userStore.user?.id,
-      displayFileExtension: !!filesSettingsStore.displayFileExtension,
       isPublicRoom: publicRoomStore.isPublicRoom,
       isPersonalReadOnly: !!treeFoldersStore.isPersonalReadOnly,
       showSettings: isFrame ? !!frameConfig?.showSettings : true,
@@ -311,6 +382,17 @@ export default inject<TStore>(
       columnWidthsStorageName: tableStore.columnWidthsStorageName,
       getColumns: tableStore.getColumns,
       setColumnEnable: tableStore.setColumnEnable,
+      highlightFile,
+      scrollToItem,
+      setScrollToItem,
+      setFirsElemChecked,
+      setHeaderBorder,
+      selectedFolderTitle: selectedFolderStore.title,
+      canCreateSecurity: selectedFolderStore.security?.Create,
+      disableDrag,
+      setDropTargetPreview:
+        uploadDataStore.primaryProgressDataStore.setDropTargetPreview,
+      withContentSelection: hotkeyStore.withContentSelection,
     };
   },
 )(observer(DataTableView));

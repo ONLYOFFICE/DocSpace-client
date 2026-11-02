@@ -33,28 +33,63 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.nameCell {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-  height: 100%;
+@use "@onlyoffice/apps-ui-kit/styles/variables/colors" as *;
 
-  :global(.item-file-name) {
-    padding-block: 14px;
-    padding-inline: 0 8px;
-  }
-
-  :global(.item-file-exst) {
-    color: var(--files-section-table-view-exst-color);
-  }
+// The old table's `noSelect`: no text selection while the selection area or
+// a drag owns the mouse.
+.noSelect {
+  user-select: none;
 }
 
-.icon {
-  display: flex;
-  flex-shrink: 0;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
+// What the old ui-kit `TableRow` added to every Files row, which the DataTable
+// row does not: these rules belong to the client's rows, not to the table.
+.filesRow {
+  :global(.light) & {
+    --files-data-table-drop-background: #{$dnd-hover-color};
+  }
+
+  :global(.dark) & {
+    --files-data-table-drop-background: #{$dnd-dark-hover};
+  }
+
+  // The old cells are 49px and overlap the next row by their top border, so
+  // two rows share one line and the hotkey caret's border runs unbroken.
+  &:global(.table-container_row) :global(.table-container_cell) {
+    height: 49px !important;
+    max-height: none !important;
+  }
+
+  // The share button shows on the row under the pointer, the selected rows
+  // and the row whose menu is open; a shared item keeps its own.
+  @media (hover: hover) {
+    :global(.create-share-link) {
+      display: none;
+    }
+
+    &:hover,
+    &:global(.checked),
+    &.active {
+      :global(.create-share-link) {
+        display: block;
+      }
+    }
+  }
+
+  :global(.droppable-hover) {
+    background: none;
+  }
+
+  &.dropTarget:not(.active) :global(.droppable-hover) {
+    background: var(--files-data-table-drop-background) !important;
+  }
+
+  :global(.table-container_row-loader) {
+    display: inline-flex;
+  }
+
+  // The cell holds the "..." button and nothing to ellipsize; clipping it cut
+  // off the keyboard ring of a button flush with its end.
+  :global(.table-container_row-context-menu-wrapper) {
+    overflow: visible;
+  }
 }

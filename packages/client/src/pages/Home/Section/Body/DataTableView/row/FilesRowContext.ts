@@ -33,27 +33,37 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { createContext, use } from "react";
+import type { TFunction } from "i18next";
 
-import type {
-  TFilesCellOptions,
-  TFilesTableItem,
-} from "../DataTableView.types";
+import type { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import type { LinkProps } from "@docspace/shared/utils/plugin-file-utils";
 
-/** A date as the old table's cells show it (`withContent`'s `getStatusByDate`). */
-export const formatDate = (
-  date: string | undefined,
-  { locale }: Pick<TFilesCellOptions, "locale">,
-) => getCorrectDate(locale, date);
+import type { TFilesTableItem } from "../DataTableView.types";
 
-/** The author, or "Me" for the viewer's own items (`withContent`'s `fileOwner`). */
-export const ownerName = (
-  { createdBy }: TFilesTableItem,
-  { t, viewerId }: Pick<TFilesCellOptions, "t" | "viewerId">,
-) => {
-  if (!createdBy) return "";
-
-  return viewerId === createdBy.id
-    ? t("Common:MeLabel")
-    : createdBy.displayName;
+/**
+ * What the client's row HOCs (`withFileActions`, `withContent`,
+ * `withQuickButtons`, `withBadges`) computed for one row, handed to its cells.
+ * The old table's row passed the same props to its `*RowData` component.
+ */
+export type TFilesRowValue = {
+  item: TFilesTableItem;
+  t: TFunction;
+  theme: TTheme;
+  element: React.ReactNode;
+  checked: boolean;
+  inProgress: boolean;
+  linkStyles: LinkProps;
+  titleWithoutExt: string;
+  displayFileExtension: boolean;
+  onContentFileSelect?: (checked: boolean, item: TFilesTableItem) => void;
+  badgesComponent: React.ReactNode;
+  quickButtonsComponent: React.ReactNode;
+  updatedDate: string;
+  createdDate: string;
+  fileOwner: string;
 };
+
+export const FilesRowContext = createContext<TFilesRowValue | null>(null);
+
+export const useFilesRow = () => use(FilesRowContext);

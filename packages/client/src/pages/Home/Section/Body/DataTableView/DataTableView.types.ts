@@ -44,6 +44,9 @@ export type TFilesTableItem = (TFile | TFolder) & {
   fileExst?: string;
   contentLength?: string;
   daysRemaining?: number;
+  isThirdPartyFolder?: boolean;
+  /** Filled in by `filesStore` for the row menu. */
+  contextOptions?: unknown[];
 };
 
 /** The visible-columns flags of the documents table, as `tableStore` holds them. */
@@ -56,20 +59,10 @@ export type TFilesColumnFlags = {
   type: boolean;
 };
 
-/** What a documents cell needs besides its row. */
-export type TFilesCellOptions = {
+export type TFilesColumnsOptions = {
   t: TFunction;
   /** Colour of the secondary cells. */
   sideColor: string;
-  /** Colour of the file name. */
-  linkColor: string;
-  viewerId?: string;
-  /** Locale the dates are formatted in. */
-  locale: string;
-  displayFileExtension: boolean;
-};
-
-export type TFilesColumnsOptions = TFilesCellOptions & {
   flags: TFilesColumnFlags;
   /** A public room shows no author. */
   isPublicRoom: boolean;

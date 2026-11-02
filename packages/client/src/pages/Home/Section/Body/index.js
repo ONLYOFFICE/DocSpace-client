@@ -127,6 +127,8 @@ const SectionBodyContent = (props) => {
 
   const attachFilesToChat = useAttachHostFilesToChat();
 
+  const isDataTable = viewAs === "table" && isFilesDataTableEnabled(tableScope);
+
   useEffect(() => {
     return () => window?.getSelection()?.removeAllRanges();
   }, []);
@@ -142,7 +144,8 @@ const SectionBodyContent = (props) => {
   }, [currentDeviceType]);
 
   useEffect(() => {
-    if (scrollToItem) {
+    // The DataTable view scrolls to the item by its index itself.
+    if (scrollToItem && !isDataTable) {
       const { type, id } = scrollToItem;
 
       const targetElement = document.getElementById(`${type}_${id}`);
@@ -520,10 +523,9 @@ const SectionBodyContent = (props) => {
     );
   }
 
-  const FileViewComponent =
-    viewAs === "table" && isFilesDataTableEnabled(tableScope)
-      ? DataTableView
-      : (fileViews[viewAs] ?? FilesRowContainer);
+  const FileViewComponent = isDataTable
+    ? DataTableView
+    : (fileViews[viewAs] ?? FilesRowContainer);
 
   return (
     <>

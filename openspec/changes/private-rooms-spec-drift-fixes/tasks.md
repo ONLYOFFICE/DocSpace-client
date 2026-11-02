@@ -20,7 +20,7 @@ fixes, 8 the suspicions. One task is one commit with its tick (the
 
 ## 4. Owner change from the edit dialog (P1)
 
-- [ ] 4.1 In `packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js` run `getNewOwnerKeyRefusal` for a private room before handing the candidate back to the edit dialog, and confirm in the test that the panel opened from `EditRoomDialog` gets the edited room's id (design decision 5); verify with a case "Owner changed in the room's edit dialog" in `ChangeRoomOwnerPanel/__tests__/ChangeRoomOwnerPanel.privateRoom.test.tsx` and `cd packages/client && pnpm exec vitest run src/components/panels/ChangeRoomOwnerPanel`
+- [x] 4.1 In `packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js` run `getNewOwnerKeyRefusal` for a private room before handing the candidate back to the edit dialog, and confirm in the test that the panel opened from `EditRoomDialog` gets the edited room's id (design decision 5); verify with a case "Owner changed in the room's edit dialog" in `ChangeRoomOwnerPanel/__tests__/ChangeRoomOwnerPanel.privateRoom.test.tsx` and `cd packages/client && pnpm exec vitest run src/components/panels/ChangeRoomOwnerPanel`
 
 ## 5. Failed fan-out (P1)
 

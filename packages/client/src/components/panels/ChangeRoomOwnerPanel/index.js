@@ -87,12 +87,7 @@ const ChangeRoomOwner = (props) => {
       return;
     }
 
-    if (showBackButton) {
-      onOwnerChange && onOwnerChange(candidate);
-      handleClosePanel();
-      return;
-    }
-
+    // Spec: room-membership, "New owner must hold a verified key"
     if (isPrivateRoom && roomId) {
       const refusal = await getNewOwnerKeyRefusal(
         t,
@@ -104,6 +99,12 @@ const ChangeRoomOwner = (props) => {
         toastr.error(refusal);
         return;
       }
+    }
+
+    if (showBackButton) {
+      onOwnerChange && onOwnerChange(candidate);
+      handleClosePanel();
+      return;
     }
 
     await changeRoomOwner(t, candidate.id, isChecked);

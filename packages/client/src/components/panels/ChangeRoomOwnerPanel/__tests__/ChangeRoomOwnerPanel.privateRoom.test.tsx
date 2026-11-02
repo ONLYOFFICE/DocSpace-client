@@ -94,11 +94,18 @@ vi.mock("@onlyoffice/apps-ui-kit/selectors/People", () => ({
 // Every prop comes from the stores below; the inferred inject typing of the
 // .js panel still lists them as required.
 const ChangeRoomOwnerPanel = (await import("../index"))
-  .default as unknown as React.ComponentType<{ useModal?: boolean }>;
+  .default as unknown as React.ComponentType<{
+  useModal?: boolean;
+  showBackButton?: boolean;
+  onOwnerChange?: (owner: unknown) => void;
+}>;
 
 const ROOM_ID = 14;
 
-const renderPanelFor = (room: TRoom) => {
+const renderPanelFor = (
+  room: TRoom,
+  editDialog?: { onOwnerChange: (owner: unknown) => void },
+) => {
   const changeRoomOwner = vi.fn(async () => {});
 
   render(
@@ -113,7 +120,11 @@ const renderPanelFor = (room: TRoom) => {
       userStore={{ user: { id: "me" } }}
       infoPanelStore={{ updateInfoPanelMembers: vi.fn() }}
     >
-      <ChangeRoomOwnerPanel useModal={false} />
+      <ChangeRoomOwnerPanel
+        useModal={false}
+        showBackButton={!!editDialog}
+        onOwnerChange={editDialog?.onOwnerChange}
+      />
     </Provider>,
   );
 
@@ -220,5 +231,52 @@ describe("Change owner of a private room", () => {
 
     expect(changeRoomOwner).toHaveBeenCalledWith(expect.anything(), "bob", true);
     expect(mocks.toastr.error).not.toHaveBeenCalled();
+  });
+
+  it("Owner changed in the room's edit dialog", async () => {
+    mocks.validateMembersForEncryption.mockImplementation(async () => ({
+      skipped: [{ id: "bob", reason: "key-mismatch-refused" }],
+    }));
+    const onOwnerChange = vi.fn();
+    const { changeRoomOwner } = renderPanelFor(
+      privateRoomDto({ id: ROOM_ID }),
+      { onOwnerChange },
+    );
+    await waitFor(() => expect(screen.getByTestId("people_selector")));
+
+    await act(() =>
+      mocks.selector!.onSubmit([{ id: "bob", label: "Bob" }], null, "", false),
+    );
+
+    expect(mocks.validateMembersForEncryption).toHaveBeenCalledWith(
+      ROOM_ID,
+      ["bob"],
+      "me",
+      undefined,
+      { bob: "Bob" },
+    );
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedChangeOwnerKeyMismatch",
+    );
+    expect(onOwnerChange).not.toHaveBeenCalled();
+    expect(changeRoomOwner).not.toHaveBeenCalled();
+  });
+
+  it("hands a verified owner back to the room's edit dialog", async () => {
+    const onOwnerChange = vi.fn();
+    const { changeRoomOwner } = renderPanelFor(
+      privateRoomDto({ id: ROOM_ID }),
+      { onOwnerChange },
+    );
+    await waitFor(() => expect(screen.getByTestId("people_selector")));
+
+    await act(() =>
+      mocks.selector!.onSubmit([{ id: "bob", label: "Bob" }], null, "", false),
+    );
+
+    expect(onOwnerChange).toHaveBeenCalledWith(
+      expect.objectContaining({ id: "bob" }),
+    );
+    expect(changeRoomOwner).not.toHaveBeenCalled();
   });
 });

@@ -254,24 +254,24 @@ describe("KeyRotationDialog — passphrase minimum-length guard", () => {
     const onSubmit = vi.fn().mockResolvedValue(undefined);
     render(<KeyRotationDialog {...makeProps(onSubmit)} />);
     typeInto("currentPassphrase", "old-pass-here");
-    typeInto("newPassphrase", "123456789012"); // 12 chars, different from current
-    typeInto("confirmNewPassphrase", "123456789012");
+    typeInto("newPassphrase", "Rv7mKt2pQx9w"); // 12 chars, different from current
+    typeInto("confirmNewPassphrase", "Rv7mKt2pQx9w");
     await act(async () => {
       fireEvent.click(screen.getByTestId("Common:SaveButton"));
     });
-    expect(onSubmit).toHaveBeenCalledWith("old-pass-here", "123456789012");
+    expect(onSubmit).toHaveBeenCalledWith("old-pass-here", "Rv7mKt2pQx9w");
   });
 
   it("allows submission when new passphrase is 13 chars (above minimum)", async () => {
     const onSubmit = vi.fn().mockResolvedValue(undefined);
     render(<KeyRotationDialog {...makeProps(onSubmit)} />);
     typeInto("currentPassphrase", "old-pass-here");
-    typeInto("newPassphrase", "1234567890123"); // 13 chars
-    typeInto("confirmNewPassphrase", "1234567890123");
+    typeInto("newPassphrase", "Rv7mKt2pQx9wz"); // 13 chars
+    typeInto("confirmNewPassphrase", "Rv7mKt2pQx9wz");
     await act(async () => {
       fireEvent.click(screen.getByTestId("Common:SaveButton"));
     });
-    expect(onSubmit).toHaveBeenCalledWith("old-pass-here", "1234567890123");
+    expect(onSubmit).toHaveBeenCalledWith("old-pass-here", "Rv7mKt2pQx9wz");
   });
 
   it("enables submit button when all fields are valid (>=12 chars)", () => {
@@ -281,5 +281,22 @@ describe("KeyRotationDialog — passphrase minimum-length guard", () => {
     typeInto("confirmNewPassphrase", "ValidPass1234");
     const btn = screen.getByTestId("Common:SaveButton") as HTMLButtonElement;
     expect(btn.disabled).toBe(false);
+  });
+
+  it("Passphrase change", async () => {
+    const onSubmit = vi.fn().mockResolvedValue(undefined);
+    render(<KeyRotationDialog {...makeProps(onSubmit)} />);
+    typeInto("currentPassphrase", "old-current-pass");
+    typeInto("newPassphrase", "Qwerty123456!"); // long enough, common pattern
+    typeInto("confirmNewPassphrase", "Qwerty123456!");
+
+    expect(screen.getByText("Common:PassphraseStrengthWeak")).toBeInTheDocument();
+    expect(screen.getByText("Common:PassphraseCommonPattern")).toBeInTheDocument();
+    const btn = screen.getByTestId("Common:SaveButton") as HTMLButtonElement;
+    expect(btn.disabled).toBe(true);
+    await act(async () => {
+      fireEvent.click(btn);
+    });
+    expect(onSubmit).not.toHaveBeenCalled();
   });
 });

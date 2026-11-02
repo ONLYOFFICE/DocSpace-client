@@ -33,7 +33,7 @@ fixes, 8 the suspicions. One task is one commit with its tick (the
 
 ## 7. Smaller fixes (P2)
 
-- [ ] 7.1 Move the strength meter of `PassphraseModal` into a component both dialogs render and gate `KeyRotationDialog` on `isPassphraseAcceptable` (design decision 8); verify with a case "Passphrase change" in `keys-management/modals/__tests__/KeyRotationDialog.test.tsx`, the existing `PassphraseModal` tests, and `pnpm test` and `pnpm test:client`
+- [x] 7.1 Move the strength meter of `PassphraseModal` into a component both dialogs render and gate `KeyRotationDialog` on `isPassphraseAcceptable` (design decision 8); verify with a case "Passphrase change" in `keys-management/modals/__tests__/KeyRotationDialog.test.tsx`, the existing `PassphraseModal` tests, and `pnpm test` and `pnpm test:client`
 - [ ] 7.2 Clear the name cache in the lock and expiry paths of `packages/shared/services/encryption/secret-storage.ts` (design decision 9); verify with a case "Unlocked session expires" in `__tests__/secret-storage.test.ts` and `cd packages/shared && pnpm exec vitest run services/encryption`
 - [ ] 7.3 Show Common:EncryptionDownloadFailed when a single encrypted download finds no file keys or no own entry (`packages/client/src/store/filesActionsStore/download.helpers.ts`, design decision 10); verify with a case "No own access entry" in `__tests__/FilesActionsStore.deleteDownload.test.ts` and `cd packages/client && pnpm exec vitest run src/store/filesActionsStore`
 

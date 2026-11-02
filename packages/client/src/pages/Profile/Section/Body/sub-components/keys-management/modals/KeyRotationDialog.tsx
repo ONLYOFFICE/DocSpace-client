@@ -52,7 +52,11 @@ import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-contain
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import { PASSPHRASE_MIN_LENGTH } from "@docspace/shared/services/encryption/passphrase-strength";
+import {
+  PASSPHRASE_MIN_LENGTH,
+  isPassphraseAcceptable,
+} from "@docspace/shared/services/encryption/passphrase-strength";
+import { PassphraseStrengthMeter } from "@docspace/shared/dialogs/passphrase-modal/PassphraseStrengthMeter";
 
 import styles from "./KeyRotationDialog.module.scss";
 
@@ -116,6 +120,8 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
 
     if (!currentPassphrase) return;
     if (newPassphrase.length < PASSPHRASE_MIN_LENGTH) return;
+    // Spec: key-management, "Passphrase strength gate"
+    if (!isPassphraseAcceptable(newPassphrase)) return;
     if (newPassphrase !== confirmPassphrase) return;
     if (currentPassphrase === newPassphrase) return;
 
@@ -142,6 +148,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
   const isValid =
     currentPassphrase.length > 0 &&
     newPassphrase.length >= PASSPHRASE_MIN_LENGTH &&
+    isPassphraseAcceptable(newPassphrase) &&
     newPassphrase === confirmPassphrase &&
     currentPassphrase !== newPassphrase;
 
@@ -258,6 +265,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   tabIndex={0}
                 />
               </FieldContainer>
+              <PassphraseStrengthMeter passphrase={newPassphrase} />
             </div>
 
             <div className={styles.inputGroup}>

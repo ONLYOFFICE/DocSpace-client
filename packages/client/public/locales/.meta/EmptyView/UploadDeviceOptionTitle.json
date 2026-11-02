@@ -3,7 +3,7 @@
   "content": "Upload from device",
   "content_en_sha1_hash": "37ea5a59d00e13d5967bc95d080fc94a3db0eb2a",
   "created_at": "2026-09-04T07:59:38.597Z",
-  "updated_at": "2026-11-01T08:02:57.938Z",
+  "updated_at": "2026-11-02T09:45:28.086Z",
   "comment": {
     "text": "Label for a dropdown menu option or action item used to initiate file uploads from the user's local device.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 573,
-      "context": "},\n {\n id: \"actions_upload-from-device\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"EmptyView:UploadDeviceOptionTitle\"),\n onClick: onUploadFileClick,\n key: \"upload-from-device\",\n },\n ];\n const sourceUploadActions = isKnowledgeRoom",
+      "line_number": 570,
+      "context": "},\n {\n id: \"actions_upload-from-device\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"EmptyView:UploadDeviceOptionTitle\"),\n onClick: onUploadFileClick,\n key: \"upload-from-device\",\n },\n ];\n const sourceUploadActions =",
       "module": "/packages/client"
     },
     {
@@ -62,7 +62,7 @@
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
       "line_number": 375,
-      "context": "onClick: () => self.onShowKnowledgeRoomSelectFileDialog(),\n };\n const uploadFromDevice: TContextOption = {\n id: \"personal_upload-from-device\",\n key: \"upload-from-device\",\n label: t(\"EmptyView:UploadDeviceOptionTitle\"),\n icon: ActionsUploadReactSvgUrl,\n onClick: () => onUploadAction(\"file\"),\n };\n const sourceRoomOptions: TContextOption[] =\n roomType === RoomsType.InstructionsRoom",
+      "context": "onClick: () => self.onShowKnowledgeRoomSelectFileDialog(),\n };\n const uploadFromDevice: TContextOption = {\n id: \"personal_upload-from-device\",\n key: \"upload-from-device\",\n label: t(\"EmptyView:UploadDeviceOptionTitle\"),\n icon: ActionsUploadReactSvgUrl,\n onClick: () => onUploadAction(\"file\"),\n };\n const sourceRoomOptions: TContextOption[] =\n roomType === RoomsType.KnowledgeRoom && !vectorizationEnabled",
       "module": "/packages/client"
     },
     {

@@ -52,3 +52,19 @@ export const canManageProjects = (user?: {
 /** The project's address in the AI Rooms section, as a room's "Copy link" gives it. */
 export const projectLink = (project: TAiProject) =>
   `${window.location.origin}/ai-rooms/${project.id}/filter?folder=${project.id}`;
+
+/**
+ * The model the project form saves. A stored model missing from the model
+ * list is gone (removed, disabled, no longer chat-capable), so the option
+ * shown in its place, the default, is saved instead. Until the whole list is
+ * in, a missing model may only be one not read yet: it is saved as it is.
+ */
+export const savedProjectProfileId = (
+  profileId: string | null,
+  optionKeys: string[],
+  shownKey: string | undefined,
+  profilesLoaded: boolean,
+) => {
+  if (!profilesLoaded && profileId && !optionKeys.includes(profileId)) return profileId;
+  return shownKey ?? profileId;
+};

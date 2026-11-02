@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { AiProjectAccess, type TAiProject } from "@docspace/shared/api/ai/projects";
 
-import { canManageProjects, isManager, isOwner, projectLink } from "../utils";
+import { canManageProjects, isManager, isOwner, projectLink, savedProjectProfileId } from "../utils";
 
 const withAccess = (access: number) => ({ id: 7, access }) as unknown as TAiProject;
 
@@ -29,5 +29,14 @@ describe("AiProjects utils", () => {
     expect(projectLink(withAccess(AiProjectAccess.Owner))).toBe(
       `${window.location.origin}/ai-rooms/7/filter?folder=7`,
     );
+  });
+
+  it("saves the shown model, but keeps a stored one the list has not read yet", () => {
+    // The list holds only the assigned profiles until it loads.
+    expect(savedProjectProfileId("p9", ["default"], "default", false)).toBe("p9");
+    // Loaded, a missing model is gone and the default shown takes its place.
+    expect(savedProjectProfileId("p9", ["default"], "default", true)).toBe("default");
+    expect(savedProjectProfileId("p9", ["default", "p9"], "p9", false)).toBe("p9");
+    expect(savedProjectProfileId(null, ["default"], "default", false)).toBe("default");
   });
 });

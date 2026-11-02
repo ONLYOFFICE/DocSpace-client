@@ -82,6 +82,7 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import { coverLogo, uploadedLogo } from "../list/ProjectLogo";
 import { SourceRoomLogo } from "../project/RoomItem";
+import { savedProjectProfileId } from "../../utils";
 import styles from "./CreateEditProjectDialog.module.scss";
 
 type CreateEditProjectDialogProps = {
@@ -138,6 +139,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const profiles = useProfilesStore((s) => s.profiles);
   const ensureProfiles = useProfilesStore((s) => s.ensureProfiles);
   const defaultProfile = useProfilesStore((s) => s.defaultProfile);
+  const profilesLoaded = useProfilesStore((s) => s.profilesLoaded);
   // The chat starts knowing only its assigned profiles; the model combo
   // box lists the whole catalogue.
   React.useEffect(() => {
@@ -259,9 +261,14 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   );
   const selectedProfileOption =
     profileOptions.find((option) => option.key === profileId) ?? (profileOptions[0] as TOption);
-  // A stored model that is gone (removed, disabled, no longer chat-capable)
-  // or none at all shows as the default, so the default is what gets saved.
-  const savedProfileId = selectedProfileOption ? String(selectedProfileOption.key) : profileId;
+  // A stored model that is gone, or none at all, shows as the default, so
+  // the default is what gets saved; one not read yet is kept.
+  const savedProfileId = savedProjectProfileId(
+    profileId,
+    profileOptions.map((option) => String(option.key)),
+    selectedProfileOption ? String(selectedProfileOption.key) : undefined,
+    profilesLoaded,
+  );
 
   if (!state) return null;
 

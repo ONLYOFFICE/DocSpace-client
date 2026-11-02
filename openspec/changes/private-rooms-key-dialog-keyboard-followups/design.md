@@ -72,6 +72,13 @@ false and an error set), through a ref on the field and an effect on the
 error state. This is a no-op in jsdom and in Firefox, where the field never
 lost the focus. Reproduced in a browser first (task 3.1).
 
+Reproduced on 2026-11-02 in Chromium (Playwright, Docker `tests-dev`) with
+the ui-kit pack of the merge of `release/v4.1.0` that day, keyboard only: a
+wrong passphrase in the unlock prompt opened from Common:ExportKey, a wrong
+but well-formed recovery phrase, and a wrong current passphrase in the
+passphrase-change dialog each leave the focus on the page body once the
+error is shown. Task 3.2 is needed in all three dialogs.
+
 ### D4. One helper for the links
 
 The key dialogs' action links move from `activateOnEnter` to

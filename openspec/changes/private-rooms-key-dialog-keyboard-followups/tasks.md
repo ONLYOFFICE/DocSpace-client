@@ -13,7 +13,7 @@
 
 ## 3. Focus after a failed action
 
-- [ ] 3.1 Reproduce in a browser: unlock with a wrong passphrase from the keyboard and read `document.activeElement` once Common:InvalidPassphrase is shown; the same for a wrong recovery phrase and for a wrong current passphrase in the passphrase-change dialog; record the result per browser in design.md D3. If the field keeps the focus everywhere, tick 3.2 as not needed with that record
+- [x] 3.1 Reproduce in a browser: unlock with a wrong passphrase from the keyboard and read `document.activeElement` once Common:InvalidPassphrase is shown; the same for a wrong recovery phrase and for a wrong current passphrase in the passphrase-change dialog; record the result per browser in design.md D3. If the field keeps the focus everywhere, tick 3.2 as not needed with that record
 - [ ] 3.2 Refocus the invalid field once the failed action has settled in `PassphraseModal`, `RecoveryPhraseInputModal` and `KeyRotationDialog` (D3); verify with tests "Focus kept after a wrong passphrase" in `PassphraseModal.test.tsx`, "Focus kept after a wrong recovery phrase" in `packages/shared/dialogs/key-recovery/__tests__/RecoveryPhraseInputModal.test.tsx` and "Focus kept after a wrong current passphrase" in `keys-management/modals/__tests__/KeyRotationDialog.keyboard.test.tsx` (the test blurs the field before the error lands, then `toHaveFocus()`)
 - [ ] 3.3 Add "Typing again after a wrong passphrase" to the keyboard-only pass in `keys-management.spec.ts` (wrong passphrase, Enter, then type without Tab and unlock); verify under Docker
 

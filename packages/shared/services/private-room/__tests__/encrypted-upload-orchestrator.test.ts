@@ -824,6 +824,43 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     expect(fanOut.recipients.map((r) => r.userId)).toEqual(["alice"]);
   });
 
+  it("Sharing with the members fails", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { setFileEncryptionKeys } = await import("../../../api/files");
+    pendingAccessStore.clear(10, "alice");
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "a-1", userId: "alice", publicKey: "pk-a", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-1", userId: "bob", publicKey: "pk-b", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+    vi.mocked(setFileEncryptionKeys)
+      .mockResolvedValueOnce(undefined as never)
+      .mockRejectedValueOnce(new Error("403"));
+
+    const { results } = await upload();
+
+    expect(results[0]).toMatchObject({ ok: true, shareFailed: true });
+    const fileId = Number(results[0].fileId);
+    expect(pendingAccessStore.get(10, "alice")?.missingFileIds).toEqual([
+      fileId,
+    ]);
+    expect(pendingAccessStore.get(10, "bob")?.missingFileIds).toEqual([
+      fileId,
+    ]);
+  });
+
+  it("a shared upload is not flagged", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "b-1", userId: "bob", publicKey: "pk-b", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+
+    const { results } = await upload();
+
+    expect(results[0].ok).toBe(true);
+    expect(results[0].shareFailed).toBeUndefined();
+    expect(pendingAccessStore.get(10, "bob")).toBeUndefined();
+  });
+
   it("Key trusted after a refusal: the file a refused key was left out of is recorded for the member", async () => {
     const { getRoomEncryptionKeys } = await import("../../../api/privacy");
     await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");

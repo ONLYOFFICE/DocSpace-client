@@ -24,7 +24,7 @@ fixes, 8 the suspicions. One task is one commit with its tick (the
 
 ## 5. Failed fan-out (P1)
 
-- [ ] 5.1 Make the room fan-out of `wrapDekForSelfAndRoom` (`packages/shared/services/private-room/encrypted-upload-orchestrator.ts`) report a failure with the recipients whose keys it read, mark those recipients as pending access for the file in `pendingAccessStore`, and flag the upload result, an abort still throwing (design decision 6); verify with a case "Sharing with the members fails" in `__tests__/encrypted-upload-orchestrator.test.ts` and `cd packages/shared && pnpm exec vitest run services/private-room`
+- [x] 5.1 Make the room fan-out of `wrapDekForSelfAndRoom` (`packages/shared/services/private-room/encrypted-upload-orchestrator.ts`) report a failure with the recipients whose keys it read, mark those recipients as pending access for the file in `pendingAccessStore`, and flag the upload result, an abort still throwing (design decision 6); verify with a case "Sharing with the members fails" in `__tests__/encrypted-upload-orchestrator.test.ts` and `cd packages/shared && pnpm exec vitest run services/private-room`
 - [ ] 5.2 Show Common:EncryptedUploadShareFailed with the file names from the flagged results in the client upload store (`packages/client/src/store/uploadDataStore/encryption.helpers.ts`) and the SDK (`packages/sdk/src/app/(private)/_hooks/useEncryptedUpload.ts`); add the key to `public/locales/en/Common.json` in the same commit, run `/translate-comments` and `/translate-locales`; verify with cases in `UploadDataStore.encryption.test.ts` and `useEncryptedUpload.test.tsx`, `cd common/tests && npx vitest run test/locales.test.js`, `pnpm test:client` and `pnpm test:sdk`
 
 ## 6. Room file listing (P1)

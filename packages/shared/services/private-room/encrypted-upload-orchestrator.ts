@@ -219,6 +219,8 @@ export interface UploadFileResult {
   aborted?: boolean;
   /** Room members whose key failed the pin check and got no wrap. */
   skippedMembers?: SkippedMemberKey[];
+  /** Stored with the uploader's entry, but the other members' wraps could not be written. */
+  shareFailed?: boolean;
   /** Set when the batch gate refused the file before any byte was sent. */
   refused?: EncryptedUploadRefusal;
   /** The stored file as the server answered it, once the upload went through. */
@@ -231,6 +233,13 @@ export interface UploadFileResult {
    */
   failedAt?: "prepare" | "upload" | "wrap";
 }
+
+/** What sharing a stored file with the room members came to. */
+type TRoomShare = {
+  skipped: SkippedMemberKey[];
+  /** Set when the members' wraps could not be written: the members whose keys were read. */
+  failedFor?: string[];
+};
 
 /** The file was stored but its access list could not be written. */
 export class EncryptedWrapError extends Error {
@@ -488,7 +497,7 @@ async function wrapDekForSelfAndRoom(args: {
   signal: AbortSignal | undefined;
   refusals: Set<string> | undefined;
   serializeFanOut: EncryptedFileUploadArgs["serializeFanOut"];
-}): Promise<SkippedMemberKey[]> {
+}): Promise<TRoomShare> {
   const {
     fileId,
     dek,
@@ -516,7 +525,8 @@ async function wrapDekForSelfAndRoom(args: {
   });
   await setFileEncryptionKeys(fileId, ownWraps);
 
-  const fanOutToRoom = async (): Promise<SkippedMemberKey[]> => {
+  const fanOutToRoom = async (): Promise<TRoomShare> => {
+    let readMembers: string[] = [];
     try {
       throwIfAborted(signal);
 
@@ -542,13 +552,14 @@ async function wrapDekForSelfAndRoom(args: {
         });
       }
 
-      if (recipients.length === 0) return [];
+      readMembers = recipients.map((recipient) => recipient.userId);
+      if (recipients.length === 0) return { skipped: [] };
 
       const { verified, skipped } = await verifyMemberKeys(recipients, {
         scopeUserId: userId,
         refusals,
       });
-      if (verified.length === 0) return skipped;
+      if (verified.length === 0) return { skipped };
 
       throwIfAborted(signal);
 
@@ -560,7 +571,7 @@ async function wrapDekForSelfAndRoom(args: {
         fileId: fileIdNumeric,
       });
 
-      if (newKeys.length === 0) return skipped;
+      if (newKeys.length === 0) return { skipped };
 
       const allKeys = [
         ...existingFileKeys.map((k) => ({
@@ -571,10 +582,11 @@ async function wrapDekForSelfAndRoom(args: {
         ...newKeys,
       ];
       await setFileEncryptionKeys(fileId, allKeys);
-      return skipped;
+      return { skipped };
     } catch (error) {
       if (error instanceof AbortedError) throw error;
-      return [];
+      // Spec: file-operations, "Uploads into a private room are encrypted on the client"
+      return { skipped: [], failedFor: readMembers };
     }
   };
 
@@ -712,9 +724,9 @@ export async function uploadEncryptedFile(
 
     throwIfAborted(signal);
 
-    let skippedMembers: SkippedMemberKey[];
+    let share: TRoomShare;
     try {
-      skippedMembers = await wrapDekForSelfAndRoom({
+      share = await wrapDekForSelfAndRoom({
         fileId,
         dek: prepared.dek,
         identity,
@@ -730,9 +742,14 @@ export async function uploadEncryptedFile(
       if (error instanceof AbortedError) throw error;
       throw new EncryptedWrapError(error);
     }
+    const skippedMembers = share.skipped;
     // Spec: private-rooms/room-membership, "Trusting a changed key wraps what the member missed"
-    for (const member of skippedMembers) {
-      pendingAccessStore.addMissingFiles(Number(roomId), member.userId, [
+    const pendingMembers = [
+      ...skippedMembers.map((member) => member.userId),
+      ...(share.failedFor ?? []),
+    ];
+    for (const memberId of pendingMembers) {
+      pendingAccessStore.addMissingFiles(Number(roomId), memberId, [
         Number(fileId),
       ]);
     }
@@ -743,6 +760,7 @@ export async function uploadEncryptedFile(
       uploadId,
       originalName: prepared.originalFileName,
       ...(skippedMembers.length > 0 ? { skippedMembers } : {}),
+      ...(share.failedFor ? { shareFailed: true } : {}),
     };
   } catch (error) {
     if (error instanceof AbortedError) {

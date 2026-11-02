@@ -35,7 +35,7 @@
 
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TFunction } from "i18next";
@@ -254,12 +254,6 @@ const ManualBackup = ({
 
   const topUpAmount = Math.ceil((backupServicePrice ?? 0) - walletBalance);
 
-  const depositedAmountRef = useRef(0);
-
-  useEffect(() => {
-    depositedAmountRef.current = 0;
-  }, [walletBalance]);
-
   const getCopyButtonLabel = () => {
     if (isDelayedPaymentTopUp) return t("Common:TopUpWallet");
     if (isTopUpBeforeCopy || isTopUpDialogBeforeCopy)
@@ -277,23 +271,23 @@ const ManualBackup = ({
 
     if (!isTopUpBeforeCopy) return true;
 
-    const amount = topUpAmount - depositedAmountRef.current;
+    setIsToppingUp(true);
 
-    if (amount > 0) {
-      setIsToppingUp(true);
-
-      try {
-        await saveDeposite(amount, walletCodeCurrency || "USD");
-        depositedAmountRef.current += amount;
-      } catch (error) {
-        toastr.error(error as Error);
-        return false;
-      } finally {
-        setIsToppingUp(false);
-      }
+    try {
+      await saveDeposite(topUpAmount, walletCodeCurrency || "USD");
+    } catch (error) {
+      toastr.error(error as Error);
+      return false;
+    } finally {
+      setIsToppingUp(false);
     }
 
-    fetchWalletBalance?.(true).catch(() => {});
+    try {
+      await fetchWalletBalance?.(true);
+    } catch (error) {
+      console.error(error);
+    }
+
     return true;
   };
 

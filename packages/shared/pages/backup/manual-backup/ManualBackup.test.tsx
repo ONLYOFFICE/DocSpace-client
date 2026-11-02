@@ -480,7 +480,7 @@ describe("ManualBackup", () => {
       expect(portalApi.startBackup).not.toHaveBeenCalled();
     });
 
-    it("does not top up again when the balance refresh fails after a top-up", async () => {
+    it("still creates the copy when the balance refresh fails after a top-up", async () => {
       const saveDeposite = vi
         .spyOn(portalApi, "saveDeposite")
         .mockResolvedValue("ok");
@@ -496,10 +496,10 @@ describe("ManualBackup", () => {
       );
 
       await userEvent.click(screen.getByText("Common:TopUpAndMakeCopy"));
-      await userEvent.click(screen.getByText("Common:TopUpAndMakeCopy"));
 
       expect(saveDeposite).toHaveBeenCalledTimes(1);
-      expect(portalApi.startBackup).toHaveBeenCalledTimes(2);
+      expect(fetchWalletBalance).toHaveBeenCalledWith(true);
+      expect(portalApi.startBackup).toHaveBeenCalledTimes(1);
     });
 
     it("keeps the plain button when the balance is enough", () => {

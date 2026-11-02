@@ -3,7 +3,7 @@
   "content": "Embedding settings",
   "content_en_sha1_hash": "f68b03428551028203fbc50d7d234dd996565a65",
   "created_at": "2026-06-09T09:42:41.909Z",
-  "updated_at": "2026-08-14T14:58:32.728Z",
+  "updated_at": "2026-11-02T07:10:46.786Z",
   "comment": {
     "text": "Dialog title for the side panel used to configure embedding options.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 417,
+      "line_number": 406,
       "context": "withBodyScroll\n displayType={ModalDialogType.aside}\n withoutPadding\n dataTestId=\"embedding_panel_modal\"\n >\n <ModalDialog.Header>{t(\"Common:EmbeddingSettings\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.embeddingPanelBody}>\n {barIsVisible ? (\n <div className={styles.embeddingPanelBanner}>\n <Text fontSize=\"12px\" fontWeight={400}>",
       "module": "/packages/client"
     },

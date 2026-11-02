@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2026-10-31T12:58:29.190Z",
+  "updated_at": "2026-11-02T07:10:46.854Z",
   "comment": {
     "text": "This is the title for various information panels and dialogs, indicating that the content within provides details or context.",
     "is_auto": true,
@@ -43,25 +43,25 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 502,
+      "line_number": 503,
       "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 502,
+      "line_number": 503,
       "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 502,
+      "line_number": 503,
       "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 502,
+      "line_number": 503,
       "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },

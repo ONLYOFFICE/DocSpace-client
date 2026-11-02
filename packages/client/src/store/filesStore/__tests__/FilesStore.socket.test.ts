@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { FileType } from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
@@ -46,6 +46,8 @@ const file = (id: number): TItem =>
     title: `f${id}.docx`,
     fileExst: ".docx",
     fileType: FileType.Document,
+    viewAccessibility: {},
+    security: {},
   }) as unknown as TItem;
 
 // wsModifyFolderDelete is one of the socket handlers wired in the constructor.
@@ -77,5 +79,56 @@ describe("FilesStore.wsModifyFolderDelete — characterization", () => {
     } as never);
 
     expect(store.tempActionFilesIds).not.toContain(404);
+  });
+
+  it("keeps a file that an own operation is moving into the open folder", () => {
+    const store = createTestFilesStore();
+    store.files = [file(1), file(2)] as never;
+    store.selectedFolderStore.id = 4;
+    store.activeFiles = [{ id: 1, destFolderId: 4 }];
+
+    store.wsModifyFolderDelete({ type: "file", id: 1, data: "" } as never);
+
+    expect(store.tempActionFilesIds).not.toContain(1);
+  });
+
+  it("drops a queued removal when another folder is open by then", () => {
+    vi.useFakeTimers();
+    const store = createTestFilesStore();
+    store.files = [file(1), file(2)] as never;
+    store.selectedFolderStore.id = 10;
+
+    store.wsModifyFolderDelete({ type: "file", id: 1, data: "" } as never);
+    store.selectedFolderStore.id = 4;
+    vi.advanceTimersByTime(1000);
+
+    expect(store.files.map((f) => f.id)).toEqual([1, 2]);
+    expect(store.tempActionFilesIds).toEqual([]);
+    vi.useRealTimers();
+  });
+
+  it("applies a queued removal in the same folder", () => {
+    vi.useFakeTimers();
+    const store = createTestFilesStore();
+    store.files = [file(1), file(2)] as never;
+    store.filter.total = 2;
+    store.selectedFolderStore.id = 10;
+
+    store.wsModifyFolderDelete({ type: "file", id: 1, data: "" } as never);
+    vi.advanceTimersByTime(1000);
+
+    expect(store.files.map((f) => f.id)).toEqual([2]);
+    vi.useRealTimers();
+  });
+
+  it("removes an active file whose operation targets another folder", () => {
+    const store = createTestFilesStore();
+    store.files = [file(1), file(2)] as never;
+    store.selectedFolderStore.id = 4;
+    store.activeFiles = [{ id: 1, destFolderId: 7 }];
+
+    store.wsModifyFolderDelete({ type: "file", id: 1, data: "" } as never);
+
+    expect(store.tempActionFilesIds).toContain(1);
   });
 });

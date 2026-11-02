@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2026-11-01T10:49:28.871Z",
+  "updated_at": "2026-11-02T07:10:46.750Z",
   "comment": {
     "text": "This is a label for an input field. It prompts the user to enter a name for a group or a room.",
     "is_auto": true,
@@ -91,7 +91,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 382,
+      "line_number": 379,
       "context": "{!isEdit ? (\n <Text>{t(\"Settings:CreateNewSecretKeyDialogDescription\")}</Text>\n ) : null}\n <div className=\"api-key_name\">\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:Label\")}\n </Text>\n <TextInput\n name=\"api_key_name\"\n placeholder={t(\"Settings:NewSecretKey\")}\n value={inputValue}",
       "module": "/packages/client"
     },

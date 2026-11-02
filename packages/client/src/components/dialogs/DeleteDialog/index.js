@@ -174,10 +174,9 @@ const DeleteDialogComponent = (props) => {
 
   const onKeyUp = useCallback(
     (e) => {
-      if (e.keyCode === 27) onClose();
       if (e.keyCode === 13 || e.which === 13) onDeleteAction();
     },
-    [onClose, onDeleteAction],
+    [onDeleteAction],
   );
 
   useEffect(() => {

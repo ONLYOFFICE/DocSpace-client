@@ -48,13 +48,18 @@ import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
 import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
 
-const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
+const QuotaPerItemsComponent = ({ isStatisticsAvailable, showRoomQuota }) => {
   if (isMobile())
-    return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;
+    return (
+      <MobileQuotasComponent
+        isDisabled={!isStatisticsAvailable}
+        showRoomQuota={showRoomQuota}
+      />
+    );
 
   return (
     <>
-      <QuotaPerRoomComponentSection />
+      {showRoomQuota ? <QuotaPerRoomComponentSection /> : null}
       <QuotaPerUserComponentSection />
     </>
   );
@@ -64,7 +69,12 @@ const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
   const { isBase } = useTheme();
 
-  const { isStatisticsAvailable, storageManagementUrl } = props;
+  const { isStatisticsAvailable, storageManagementUrl, isAppInstalled } = props;
+
+  // A quota for a section switched off in Settings -> Apps has nothing to
+  // apply to. Read during render so the observer re-renders once the apps
+  // list arrives.
+  const showRoomQuota = isAppInstalled("ai-rooms");
 
   return (
     <div className={styles.baseQuotaComponent}>
@@ -102,17 +112,21 @@ const QuotasComponent = (props) => {
         ) : null}
       </Text>
 
-      <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />
+      <QuotaPerItemsComponent
+        isStatisticsAvailable={isStatisticsAvailable}
+        showRoomQuota={showRoomQuota}
+      />
     </div>
   );
 };
 
-export default inject(({ currentQuotaStore, settingsStore }) => {
+export default inject(({ currentQuotaStore, settingsStore, appsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
   const { storageManagementUrl } = settingsStore;
 
   return {
     isStatisticsAvailable,
     storageManagementUrl,
+    isAppInstalled: appsStore.isInstalled,
   };
 })(observer(QuotasComponent));

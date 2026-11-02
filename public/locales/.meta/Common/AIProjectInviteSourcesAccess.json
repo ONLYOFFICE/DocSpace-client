@@ -3,7 +3,7 @@
   "content": "Access to the project rooms",
   "content_en_sha1_hash": "41af2769395677ceb69c5ab4262f0fb6490374a7",
   "created_at": "2026-11-01T11:21:14.947Z",
-  "updated_at": "2026-11-01T11:22:51.313Z",
+  "updated_at": "2026-11-02T07:10:46.799Z",
   "comment": {
     "text": "Bold header of the grey info bar at the top of the Invite panel, shown only when inviting people to an AI project; a short noun phrase about access to the rooms linked to the project.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 903,
+      "line_number": 895,
       "context": "<div style={{ display: \"contents\" }} ref={invitePanelBodyRef}>\n {/* A project member reads its linked rooms through the project. */}\n {roomType === RoomsType.AiProjectRoom ? (\n <PublicRoomBar\n className={styles.aiProjectSourcesBar}\n headerText={t(\"Common:AIProjectInviteSourcesAccess\")}\n bodyText={t(\"Common:AIProjectInviteSourcesAccessDescription\")}\n dataTestId=\"invite_panel_ai_project_sources_bar\"\n />\n ) : null}\n {isPrivateRoom ? null : (",
       "module": "/packages/client"
     }

@@ -51,9 +51,6 @@ const DeleteApiKeyDialog = (props: DeleteApiKeyDialogProps) => {
     if (e.key === "Enter" && !isRequestRunning) {
       onDelete();
     }
-    if (e.key === "Escape") {
-      onClose();
-    }
   };
 
   useEffect(() => {

@@ -300,6 +300,7 @@ const Panels = (props) => {
         isRestore={restorePanelVisible}
         isRestoreAll={restoreAllPanelVisible}
         disableBySecurity="UseChat"
+        isPortalView
       />
     ),
     connectDialogVisible && <ConnectDialog key="connect-dialog" />,
@@ -326,6 +327,7 @@ const Panels = (props) => {
         onClose={onClose}
         withRecentTreeFolder
         withFavoritesTreeFolder
+        isPortalView
       />
     ),
     selectFileFormRoomDialogVisible && (
@@ -340,6 +342,7 @@ const Panels = (props) => {
         descriptionText={descriptionTextFileFormRoomDialog}
         withRecentTreeFolder
         withFavoritesTreeFolder
+        isPortalView
       />
     ),
     selectFileKnowledgeRoomDialogVisible && (
@@ -355,6 +358,7 @@ const Panels = (props) => {
         descriptionText=""
         withRecentTreeFolder
         withFavoritesTreeFolder
+        isPortalView
       />
     ),
     hotkeyPanelVisible && <HotkeysPanel key="hotkey-panel" />,

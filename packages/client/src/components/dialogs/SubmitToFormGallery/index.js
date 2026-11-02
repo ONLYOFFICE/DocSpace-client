@@ -150,13 +150,6 @@ const SubmitToFormGallery = ({
 
 			if (isEditable) return;
 
-			if (e.key === "Escape") {
-				e.preventDefault();
-				e.stopPropagation();
-				onClose();
-				return;
-			}
-
 			if (e.key === "Enter") {
 				if (e.repeat) return;
 

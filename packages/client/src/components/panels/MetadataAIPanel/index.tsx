@@ -45,7 +45,7 @@ import {
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
-import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date";
+import { getServiceLimitDescription } from "@docspace/shared/utils/ai";
 
 import type { TMetadataSelection } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
 import { useStore } from "SRC_DIR/store/useStore";
@@ -118,8 +118,6 @@ const MetadataAIDialog = ({
   const getServiceLimitNotice = () => {
     if (!serviceLimit) return undefined;
 
-    const date = getCorrectDate(language, serviceLimit.until);
-
     const openLimits = () => {
       onClose();
       navigate("/portal-settings/ai-settings/limits");
@@ -128,11 +126,12 @@ const MetadataAIDialog = ({
     return (
       <ServiceLimitNotice
         title={t("Common:AILimitReached")}
-        description={
-          isAdmin
-            ? t("Common:AILimitReachedResetsOn", { date })
-            : t("Common:AILimitReachedContactAdminResetsOn", { date })
-        }
+        description={getServiceLimitDescription(
+          t,
+          language,
+          serviceLimit,
+          isAdmin,
+        )}
         buttonLabel={t("Common:ChangeAILimit")}
         onClick={isAdmin ? openLimits : undefined}
       />

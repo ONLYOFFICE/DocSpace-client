@@ -1,0 +1,28 @@
+{
+  "key_path": "AILimitReachedRaiseLimit",
+  "content": "AI requests are paused. Raise the limit in the AI settings to continue now.",
+  "content_en_sha1_hash": "bf1b2263bf8541fa87a2c07bc922ab603eefc614",
+  "created_at": "2026-10-29T13:56:56.129Z",
+  "updated_at": "2026-10-29T13:57:47.814Z",
+  "comment": {
+    "text": "Body text of the AI spending-limit message shown to a Full admin in AI chat when the portal AI spending limit is reached and has no reset date (a lifetime limit). Tells them AI requests are paused and that they can raise the limit in the AI settings to continue right away. Sibling of AILimitReachedResetsOn, which adds the reset date.",
+    "is_auto": false,
+    "updated_at": "2026-10-29T13:59:22.881Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/ai/getServiceLimitDescription.ts",
+      "line_number": 52,
+      "context": "const date = until && getCorrectDate(language, until);\n \n if (isAdmin) {\n return date\n ? t(\"Common:AILimitReachedResetsOn\", { date })\n : t(\"Common:AILimitReachedRaiseLimit\");\n }\n \n return date\n ? t(\"Common:AILimitReachedContactAdminResetsOn\", { date })\n : t(\"Common:AILimitReachedContactAdmin\");",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

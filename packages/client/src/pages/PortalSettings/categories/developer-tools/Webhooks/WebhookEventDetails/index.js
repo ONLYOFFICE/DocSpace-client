@@ -47,7 +47,13 @@ import { WebhookDetailsLoader } from "../sub-components/Loaders";
 import styles from "./WebhookEventDetails.styled.module.scss";
 
 const WebhookEventDetails = (props) => {
-  const { fetchEventData, fetchConfigName, configName } = props;
+  const {
+    fetchEventData,
+    fetchConfigName,
+    configName,
+    setActiveConfigId,
+    clearEventDetails,
+  } = props;
   const { id, eventId } = useParams();
 
   const [, startTransition] = useTransition();
@@ -60,7 +66,12 @@ const WebhookEventDetails = (props) => {
   };
 
   useEffect(() => {
+    setActiveConfigId(id);
     startTransition(handleDataFetch);
+    return () => {
+      clearEventDetails();
+      setActiveConfigId(null);
+    };
   }, []);
 
   return (
@@ -79,7 +90,19 @@ const WebhookEventDetails = (props) => {
 };
 
 export const Component = inject(({ webhooksStore }) => {
-  const { fetchEventData, fetchConfigName, configName } = webhooksStore;
+  const {
+    fetchEventData,
+    fetchConfigName,
+    configName,
+    setActiveConfigId,
+    clearEventDetails,
+  } = webhooksStore;
 
-  return { fetchEventData, fetchConfigName, configName };
+  return {
+    fetchEventData,
+    fetchConfigName,
+    configName,
+    setActiveConfigId,
+    clearEventDetails,
+  };
 })(observer(WebhookEventDetails));

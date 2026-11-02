@@ -70,9 +70,6 @@ const PauseSubmissionsDialog = ({
   const onKeyPress = (e: KeyboardEvent) => {
     if (!visible) return;
 
-    if (e.key === "Escape") {
-      onClose();
-    }
     if (e.key === "Enter") {
       handleEdit();
     }

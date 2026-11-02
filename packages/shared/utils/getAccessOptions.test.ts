@@ -32,10 +32,12 @@ describe("getAccessOptions for the AI source rooms", () => {
 });
 
 describe("getAccessOptions for an AI project", () => {
-  const accessOf = (key: string) =>
-    getAccessOptions(t, RoomsType.AiProjectRoom).find(
-      (option) => "key" in option && option.key === key,
-    )?.access;
+  const accessOf = (key: string) => {
+    const option = getAccessOptions(t, RoomsType.AiProjectRoom).find(
+      (item) => "key" in item && item.key === key,
+    );
+    return option && "access" in option ? option.access : undefined;
+  };
 
   it("grants a member Content creator, as the server does", () => {
     expect(accessOf("projectManager")).toBe(ShareAccessRights.RoomManager);

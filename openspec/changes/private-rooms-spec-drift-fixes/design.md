@@ -10,7 +10,12 @@ already states; none comes from a stashed design document. Found on
   `checkKey` matches any key of the record
   (`packages/shared/services/encryption/tofu-store.ts:322-385`), a
   behaviour the unit test "acceptKey appends; previously trusted keys stay
-  trusted" fixes (`__tests__/tofu-store.test.ts:254`). `getRecord` answers
+  trusted" fixes (`__tests__/tofu-store.test.ts:254`). It is deliberate:
+  the server may list several key pairs for one user, files are wrapped by
+  any of them, and `room-file-access.test.ts` ("sender listed with several
+  keys", `:325-408`) requires that an already accepted key never prompts.
+  A pin that held only the newest key made the dialog flip between a
+  sender's old and new files (tried on 2026-11-02, three tests failed). `getRecord` answers
   `null` both when there is no record and when the read fails (`:241-251`,
   test `:654`), so a failed read is taken as a first sight and the record is
   overwritten. Callers of `checkKey` and `acceptKey`: `room-file-access.ts`
@@ -62,13 +67,14 @@ already states; none comes from a stashed design document. Found on
 
 ## Decisions
 
-1. **The pin is the peer's most recent key.** `checkKey` matches only the
-   most recently accepted or seen key of the record; older keys stay in the
-   record for the key-change dialog's history but no longer match. An
-   accepted earlier key becomes the most recent again. Alternative: drop
-   older keys on accept; rejected because the dialog states how long the
-   previous key was active. With one key per user
-   (`private-rooms-single-key`), no flow needs an earlier key to match.
+1. **Accepted keys stay trusted (decided 2026-11-02 by the feature
+   owner).** The code keeps matching every pinned or accepted key; the spec
+   is corrected instead, and the re-listed earlier key becomes an accepted
+   v1 limitation ("Accepted peer keys stay trusted"). Alternatives: a pin
+   of the newest key only, rejected because users with several key pairs
+   on the server would meet the dialog on every switch between their files;
+   trusting an earlier key only while the server lists it next to the
+   newest one, rejected as more machinery than the risk it narrows.
 
 2. **An unreadable pin is a refused key change.** The store tells a missing
    record from a failed read; `checkKey` answers a distinct result for the
@@ -129,8 +135,9 @@ already states; none comes from a stashed design document. Found on
 
 ## Risks / Trade-offs
 
-- [A peer who really returned to an earlier key (an old device restored) is
-  asked again] → intended: the user decides each change, as the spec says.
+- [An earlier key whose private half leaked is used without a dialog when
+  the server lists it again] → accepted v1 limitation; it needs the server
+  to list that key for the user, and the release notes name it.
 - [A failing IndexedDB read blocks wraps and unwraps instead of passing
   silently] → visible and local; the store keeps working once reads
   succeed, and the open failure still falls back to memory.
@@ -142,8 +149,7 @@ already states; none comes from a stashed design document. Found on
 
 ## Migration Plan
 
-No data migration: stored pin records keep their key lists, and only the
-most recent key matches from now on. Behind the `privateRooms` flag.
+No data migration: stored pin records keep their key lists and meaning. Behind the `privateRooms` flag.
 Rollback by revert.
 
 ## Open Questions

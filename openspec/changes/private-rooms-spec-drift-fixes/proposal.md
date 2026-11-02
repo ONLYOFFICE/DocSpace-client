@@ -3,19 +3,23 @@
 ## Why
 
 The audit of 2026-11-02 compared the main private-rooms specs with the code
-on the branch and found nine places where the code does less than the spec
-says. Three of them can break the feature's promises: a peer can return to
-an earlier key without the key-change dialog, a pin that cannot be read is
-silently replaced, and an encrypted Duplicate started outside the room can
-target the room as plaintext. The rest leave members without access, skip
+on the branch and found eight places where the code does less than the spec
+says, and one where the spec says more than the feature can do. Two of them
+can break the feature's promises: a pin that cannot be read is silently
+replaced, and an encrypted Duplicate started outside the room can target
+the room as plaintext. The rest leave members without access, skip
 files or keep data longer than specified. All of them must close before the
 feature leaves its flag.
 
 ## What Changes
 
-- Accepting a changed key replaces the pin: an earlier key of the peer is a
-  key change again, and a pin that cannot be read is treated as a refused
-  key change instead of a first sight.
+- A pin that cannot be read is treated as a refused key change instead of a
+  first sight.
+- The spec stops saying that an accepted key replaces the pin: accepted
+  keys stay trusted, because the server may list several key pairs for one
+  user and files are wrapped by any of them (decided 2026-11-02). That a
+  re-listed earlier key is used without a dialog becomes an accepted v1
+  limitation.
 - An encrypted Duplicate takes its target from the file's own room, so a
   Duplicate started from Recent or another list outside the room is
   encrypted for the room like one started inside it.
@@ -47,9 +51,11 @@ None.
 
 ### Modified Capabilities
 
-- `private-rooms/encryption-core`: "Peer public keys are pinned on first
-  use" (an earlier key and an unreadable pin), "Decrypted filenames are
-  session-scoped" (an expired session).
+- `private-rooms/encryption-core`: new "Accepted peer keys stay trusted"
+  (the v1 limitation); "Peer public keys are pinned on first use" (an
+  unreadable pin), "Key mismatch on unwrap is refused unless a resolver
+  accepts it" (the accepted key joins the trusted keys), "Decrypted
+  filenames are session-scoped" (an expired session).
 - `private-rooms/file-operations`: "Uploads into a private room are
   encrypted on the client" (sharing with the members fails), "Copy within
   the same private room" (Duplicate started outside the room), "Download

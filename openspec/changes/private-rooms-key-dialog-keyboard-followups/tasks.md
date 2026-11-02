@@ -31,7 +31,7 @@ Owner answers (2026-11-02, before 4a.1 started in code): the strength row of `Pa
 
 ## 5. Integration
 
-- [ ] 5.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`) and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify all green
+- [x] 5.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`) and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify all green
 
 ## Workflow follow-up
 

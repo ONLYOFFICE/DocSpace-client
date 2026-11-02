@@ -251,7 +251,7 @@ describe("TofuStore", () => {
     expect(list[0].keys[0].publicKey).toBe("PKBOBABCDEFGHIJK");
   });
 
-  it("acceptKey appends; previously trusted keys stay trusted", async () => {
+  it("Peer with several keys", async () => {
     const tofu = new TofuStore("alice");
     await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     await tofu.markVerified("bob");
@@ -272,6 +272,18 @@ describe("TofuStore", () => {
 
     expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJK")).kind).toBe("match");
     expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJL")).kind).toBe("match");
+  });
+
+  it("Earlier key listed again", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJL");
+    expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJL")).kind).toBe("match");
+
+    const again = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
+    expect(again.kind).toBe("match");
+    if (again.kind !== "match") return;
+    expect(again.matchedKey.publicKey).toBe("PKBOBABCDEFGHIJK");
   });
 
   it("acceptKey on an already-trusted key only bumps lastSeenAt", async () => {

@@ -55,6 +55,15 @@ dialogs' mount contract and their close guards. Reproduced in a browser
 before implementation (task 2.1); if the kit records the right opener after
 all, the code task is closed with the recorded run and no code.
 
+Reproduced on 2026-11-02 in Chromium (Playwright, Docker `tests-dev`) with
+the ui-kit pack of the merge of `release/v4.1.0` that day, keyboard only:
+after cancelling the recovery-phrase display (Escape, then Enter on
+Common:CloseMenu of the confirmation) the focus is on Common:GenerateNewKey,
+and after cancelling the recovery flow's new-passphrase prompt with Escape
+it is on the "Use recovery phrase" link that started the flow. The kit's
+restore already lands on the opener in both flows, so task 2.2 needs no
+code; task 2.3 keeps the check in the keyboard-only pass.
+
 ### D3. The error path refocuses its field
 
 The passphrase prompt, the passphrase-change dialog and the recovery-phrase

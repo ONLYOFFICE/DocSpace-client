@@ -1254,7 +1254,6 @@
   "InviteViaLink": "Invitar mediante enlace",
   "InviteViaLinkDescriptionAgentGuest": "Crear un enlace universal para la autoautorización en el agente como invitado.",
   "InviteViaLinkDescriptionAgentMembers": "Crear un enlace universal para los miembros para la autoautorización en el agente.",
-  "InviteViaLinkDescriptionAIProjectGuest": "Crear un enlace universal para la autoautorización en el proyecto como invitado.",
   "InviteViaLinkDescriptionAIProjectMembers": "Crear un enlace universal para la autoautorización de los miembros en el proyecto.",
   "InviteViaLinkDescriptionFormSpaceGuest": "Crear un enlace universal para la autoautorización en el espacio como invitado.",
   "InviteViaLinkDescriptionRoomGuest": "Crear un enlace universal para la autoautorización en la sala como invitado.",

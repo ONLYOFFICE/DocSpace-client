@@ -165,11 +165,19 @@ Members of every AI room and project SHALL be managed through the room panels (I
 - **THEN** the role offered is Project manager only, the invitation goes to `files/rooms/{id}/share` with `access` 9 and the user appears in Contacts
 
 ### Requirement: Project manager is the only project role offered
-Until the server takes Member again, an AI project SHALL offer Project manager as its only role: the Invite panel grants it by default and has no invitation link (the link joins as Member), and the Contacts role menu offers Project manager and removal only. A member the project already has SHALL still be shown as Member. The Invite panel SHALL offer no guests at all, new or existing.
+An AI project SHALL offer Project manager as its only role: the Invite panel grants it by default, its invitation link joins as Project manager (the only role the server takes for a link), and the Contacts role menu offers Project manager and removal only. A member the project already has SHALL still be shown as Member. The Invite panel SHALL offer no guests, new or existing, and no groups, which the server takes as Member only.
 
 #### Scenario: No Member role
 - **WHEN** a Project manager opens the Invite panel of a project, and then the role menu of a member in its Contacts
-- **THEN** neither offers Member, and the Invite panel shows no invitation link
+- **THEN** neither offers Member
+
+#### Scenario: Invitation link
+- **WHEN** a Project manager turns the invitation link on in the Invite panel of a project
+- **THEN** the link is created with `access` 9, its role selector offers Project manager and its description names no guests
+
+#### Scenario: No groups
+- **WHEN** a Project manager searches or opens the people list in the Invite panel of a project
+- **THEN** no group is offered
 
 #### Scenario: No guests
 - **WHEN** a Project manager opens the Invite panel of a project

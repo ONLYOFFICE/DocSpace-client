@@ -897,9 +897,7 @@ const InvitePanel = ({
             dataTestId="invite_panel_ai_project_sources_bar"
           />
         ) : null}
-        {/* The invitation link joins as Member, which a project does not
-            offer for now. */}
-        {isPrivateRoom || roomType === RoomsType.AiProjectRoom ? null : (
+        {isPrivateRoom ? null : (
           <ExternalLinks
             t={t}
             shareLinks={shareLinks}
@@ -1077,7 +1075,8 @@ const InvitePanel = ({
             onAccessRightsChange={() => {}}
             isMultiSelect
             disableDisabledUsers
-            withGroups={!isPrivateRoom}
+            // A group joins a project as Member only, which is not offered.
+            withGroups={!isPrivateRoom && roomType !== RoomsType.AiProjectRoom}
             roomId={roomId}
             disableInvitedUsers={invitedUsersArray}
             // A project takes no guests.

@@ -1254,7 +1254,6 @@
   "InviteViaLink": "Mời qua liên kết",
   "InviteViaLinkDescriptionAgentGuest": "Tạo một liên kết phổ quát để tự phê duyệt trong tác nhân với vai trò khách.",
   "InviteViaLinkDescriptionAgentMembers": "Tạo một liên kết phổ quát cho các thành viên để tự thực hiện ủy quyền trong tác nhân.",
-  "InviteViaLinkDescriptionAIProjectGuest": "Tạo một liên kết phổ quát để tự ủy quyền trong dự án với vai trò khách.",
   "InviteViaLinkDescriptionAIProjectMembers": "Tạo một liên kết phổ quát cho các thành viên để tự ủy quyền trong dự án.",
   "InviteViaLinkDescriptionFormSpaceGuest": "Tạo một liên kết phổ quát để tự xác thực trong không gian với tư cách là khách.",
   "InviteViaLinkDescriptionRoomGuest": "Tạo một liên kết phổ quát để tự xác thực trong phòng với tư cách là khách.",

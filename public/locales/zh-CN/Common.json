@@ -1254,7 +1254,6 @@
   "InviteViaLink": "通过链接进行邀请",
   "InviteViaLinkDescriptionAgentGuest": "创建通用链接，供访客在智能体中自行授权。",
   "InviteViaLinkDescriptionAgentMembers": "创建通用链接，供成员在智能体中自行授权。",
-  "InviteViaLinkDescriptionAIProjectGuest": "创建通用链接，供访客在项目中自行授权。",
   "InviteViaLinkDescriptionAIProjectMembers": "创建通用链接，供成员在项目中自行授权。",
   "InviteViaLinkDescriptionFormSpaceGuest": "创建通用链接以便访客在空间内进行自我授权。",
   "InviteViaLinkDescriptionRoomGuest": "创建通用链接以便访客在房间内进行自我授权。",

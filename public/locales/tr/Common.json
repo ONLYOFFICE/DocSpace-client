@@ -1254,7 +1254,6 @@
   "InviteViaLink": "Bağlantı yoluyla davet et",
   "InviteViaLinkDescriptionAgentGuest": "Misafir olarak aracıdaki kendi yetkilendirmesi için evrensel bir bağlantı oluşturun.",
   "InviteViaLinkDescriptionAgentMembers": "Üyeler için, ajanda kendi yetkilendirmeleri için evrensel bir bağlantı oluşturun.",
-  "InviteViaLinkDescriptionAIProjectGuest": "Projede konuk olarak kendi kendine yetkilendirme için evrensel bir bağlantı oluşturun.",
   "InviteViaLinkDescriptionAIProjectMembers": "Üyelerin projede kendi kendine yetkilendirmesi için evrensel bir bağlantı oluşturun.",
   "InviteViaLinkDescriptionFormSpaceGuest": "Alan içinde misafir olarak kendi yetkilendirmesi için evrensel bir bağlantı oluşturun.",
   "InviteViaLinkDescriptionRoomGuest": "Oda içinde misafir olarak kendi yetkilendirmesi için evrensel bir bağlantı oluşturun.",

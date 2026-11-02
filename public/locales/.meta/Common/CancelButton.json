@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-11-02T08:53:55.621Z",
+  "updated_at": "2026-11-02T09:45:28.097Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -559,7 +559,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 1183,
+      "line_number": 1185,
       "context": "<Button\n className=\"cancel-button\"\n scale\n size=\"normal\"\n onClick={onClose}\n label={t(\"Common:CancelButton\")}\n isDisabled={isLoading}\n testId=\"invite_panel_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/client"
     },
@@ -613,13 +613,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 453,
+      "line_number": 460,
       "context": "onBackClick: () => setSelector(null),\n withoutBackButton: false,\n withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onCancel={() => setSelector(null)}\n submitButtonLabel={t(\"Common:SelectAction\")}\n selectedItems={selected.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]}\n sortSelectedFirst\n onSubmit={onRoomsSelected}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 453,
+      "line_number": 460,
       "context": "onBackClick: () => setSelector(null),\n withoutBackButton: false,\n withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onCancel={() => setSelector(null)}\n submitButtonLabel={t(\"Common:SelectAction\")}\n selectedItems={selected.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]}\n sortSelectedFirst\n onSubmit={onRoomsSelected}",
       "module": "/packages/client"
     },

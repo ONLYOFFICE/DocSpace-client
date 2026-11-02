@@ -1254,7 +1254,6 @@
   "InviteViaLink": "リンクで招待する",
   "InviteViaLinkDescriptionAgentGuest": "エージェント内でゲストとして自己認証するためのユニバーサルリンクを作成する。",
   "InviteViaLinkDescriptionAgentMembers": "メンバー向けに、エージェント内での自己認証用ユニバーサルリンクを作成する。",
-  "InviteViaLinkDescriptionAIProjectGuest": "プロジェクト内でゲストとして自己認証するためのユニバーサルリンクを作成する。",
   "InviteViaLinkDescriptionAIProjectMembers": "メンバー向けに、プロジェクト内での自己認証用ユニバーサルリンクを作成する。",
   "InviteViaLinkDescriptionFormSpaceGuest": "ゲストとしてスペースで自己認証を行うためのユニバーサルリンクを作成する",
   "InviteViaLinkDescriptionRoomGuest": "ゲストとしてルームで自己認証を行うためのユニバーサルリンクを作成する",

@@ -160,16 +160,19 @@ const ExternalLinks = ({
     standalone,
   );
 
+  // A project's link joins as Project manager, the one role it offers, so
+  // the paid role stays selectable there.
   const filteredAccesses =
-    roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
+    roomType === -1 || roomType === RoomsType.AiProjectRoom
+      ? accesses
+      : filterPaidRoleOptions(accesses);
 
   const description =
     roomId === -1
       ? t("InviteViaLinkDescriptionAccounts")
       : roomType === RoomsType.AiProjectRoom
-          ? allowInvitingGuests
-            ? t("Common:InviteViaLinkDescriptionAIProjectGuest")
-            : t("Common:InviteViaLinkDescriptionAIProjectMembers")
+          ? // A project takes no guests.
+            t("Common:InviteViaLinkDescriptionAIProjectMembers")
           : allowInvitingGuests
             ? roomType === RoomsType.FormRoom
               ? t("Common:InviteViaLinkDescriptionFormSpaceGuest")

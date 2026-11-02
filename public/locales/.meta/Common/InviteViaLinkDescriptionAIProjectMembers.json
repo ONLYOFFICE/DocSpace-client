@@ -3,7 +3,7 @@
   "content": "Create a universal link for members for self-authorization in the project.",
   "content_en_sha1_hash": "9a2a58d21b9cdc450e175320f53d1ce4e3777b9d",
   "created_at": "2026-10-31T12:57:28.596Z",
-  "updated_at": "2026-10-31T12:59:25.206Z",
+  "updated_at": "2026-11-02T09:45:28.330Z",
   "comment": {
     "text": "Description of the invitation link in the invite panel of an AI project when the link lets portal members join the project.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 172,
-      "context": "roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\")\n : roomType === RoomsType.AiProjectRoom\n ? allowInvitingGuests\n ? t(\"Common:InviteViaLinkDescriptionAIProjectGuest\")\n : t(\"Common:InviteViaLinkDescriptionAIProjectMembers\")\n : allowInvitingGuests\n ? roomType === RoomsType.FormRoom\n ? t(\"Common:InviteViaLinkDescriptionFormSpaceGuest\")\n : t(\"Common:InviteViaLinkDescriptionRoomGuest\")\n : t(\"Common:InviteViaLinkDescriptionRoomMembers\");",
+      "line_number": 175,
+      "context": "const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\")\n : roomType === RoomsType.AiProjectRoom\n ? // A project takes no guests.\n t(\"Common:InviteViaLinkDescriptionAIProjectMembers\")\n : allowInvitingGuests\n ? roomType === RoomsType.FormRoom\n ? t(\"Common:InviteViaLinkDescriptionFormSpaceGuest\")\n : t(\"Common:InviteViaLinkDescriptionRoomGuest\")\n : t(\"Common:InviteViaLinkDescriptionRoomMembers\");",
       "module": "/packages/client"
     }
   ],

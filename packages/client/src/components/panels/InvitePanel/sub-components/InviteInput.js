@@ -284,10 +284,11 @@ const InviteInput = ({
               filter,
             );
 
-      // A project takes no guests, neither new nor existing ones.
+      // A project takes no guests, neither new nor existing ones, and no
+      // groups, which join as Member only.
       const items =
         roomTypeRef.current === RoomsType.AiProjectRoom
-          ? users.items.filter((u) => !u.isVisitor)
+          ? users.items.filter((u) => !u.isVisitor && !u.isGroup)
           : users.items;
 
       setUsersList(

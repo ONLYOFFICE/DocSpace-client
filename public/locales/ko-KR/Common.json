@@ -1254,7 +1254,6 @@
   "InviteViaLink": "링크를 통해 초대",
   "InviteViaLinkDescriptionAgentGuest": "에이전트에서 게스트 자격으로 자체 인증을 위한 범용 링크를 생성합니다.",
   "InviteViaLinkDescriptionAgentMembers": "에이전트 내에서 멤버들을 위한 자체 인증을 위한 범용 링크를 생성하세요.",
-  "InviteViaLinkDescriptionAIProjectGuest": "프로젝트에서 게스트 자격으로 자체 인증을 위한 범용 링크를 생성합니다.",
   "InviteViaLinkDescriptionAIProjectMembers": "프로젝트 내에서 멤버들을 위한 자체 인증용 범용 링크를 생성합니다.",
   "InviteViaLinkDescriptionFormSpaceGuest": "게스트로서 공간에서 자체 인증을 위한 범용 링크를 생성합니다.",
   "InviteViaLinkDescriptionRoomGuest": "게스트로서 방에서 자체 인증을 위한 범용 링크를 생성합니다.",

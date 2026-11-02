@@ -1254,7 +1254,6 @@
   "InviteViaLink": "Invite via link",
   "InviteViaLinkDescriptionAgentGuest": "Create a universal link for self-authorization in the agent as a guest.",
   "InviteViaLinkDescriptionAgentMembers": "Create a universal link for members for self-authorization in the agent.",
-  "InviteViaLinkDescriptionAIProjectGuest": "Create a universal link for self-authorization in the project as a guest.",
   "InviteViaLinkDescriptionAIProjectMembers": "Create a universal link for members for self-authorization in the project.",
   "InviteViaLinkDescriptionFormSpaceGuest": "Create a universal link for self-authorization in the space as a guest.",
   "InviteViaLinkDescriptionRoomGuest": "Create a universal link for self-authorization in the room as a guest.",

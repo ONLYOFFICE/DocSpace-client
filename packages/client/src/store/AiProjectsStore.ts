@@ -133,10 +133,16 @@ class AiProjectsStore {
 
   projectDialog: TProjectDialogState | null = null;
 
+  /**
+   * Bumped by every open and close: a read by id that lands after another
+   * open, or after the project was left, opens nothing.
+   */
+  private openRequest = 0;
+
   constructor(aiPresetsStore: AiPresetsStore, userStore: UserStore) {
     this.aiPresetsStore = aiPresetsStore;
     this.userStore = userStore;
-    makeAutoObservable(this, { aiPresetsStore: false } as never);
+    makeAutoObservable(this, { aiPresetsStore: false, openRequest: false } as never);
   }
 
   /* ------------------------------ Project ------------------------------ */
@@ -149,6 +155,7 @@ class AiProjectsStore {
   // project's rooms. Resolves to the project as opened; a failed read opens
   // what the list had.
   openProject = async (project: TAiProject): Promise<TAiProject> => {
+    this.openRequest += 1;
     this.activeProject = project;
     this.skills = [];
     this.knowledge = {};
@@ -169,16 +176,20 @@ class AiProjectsStore {
   /** Opens the project the section shows (its room is the selected folder). */
   openProjectById = async (id: number): Promise<TAiProject | null> => {
     if (this.activeProject?.id === id) return this.activeProject;
+    this.openRequest += 1;
+    const request = this.openRequest;
     try {
       const project = await getAiProject(id);
+      if (request !== this.openRequest) return null;
       return await this.openProject(project);
     } catch (e) {
-      toastr.error(errorMessage(e));
+      if (request === this.openRequest) toastr.error(errorMessage(e));
       return null;
     }
   };
 
   closeProject = () => {
+    this.openRequest += 1;
     this.activeProject = null;
     this.skills = [];
     this.knowledge = {};
@@ -309,7 +320,12 @@ class AiProjectsStore {
   updateProject = async (id: number, data: TAiProjectRequest, options?: { removeLogo?: boolean }) => {
     const current = this.projectDialog?.mode === "edit" ? this.projectDialog.project : undefined;
     let project = await updateAiProject(id, data, current?.id === id ? current : undefined);
-    if (options?.removeLogo) project = toAiProject((await removeLogoFromRoom(id)) as TAiProjectRoomDto);
+    // The logo route answers the bare room, without the model and the
+    // linked rooms the update has just read.
+    if (options?.removeLogo) {
+      const room = toAiProject((await removeLogoFromRoom(id)) as TAiProjectRoomDto);
+      project = { ...room, aiProject: project.aiProject };
+    }
     showWarnings(project);
     runInAction(() => this.replaceProject(project));
     if (this.activeProject?.id === id) this.syncPreset(project);

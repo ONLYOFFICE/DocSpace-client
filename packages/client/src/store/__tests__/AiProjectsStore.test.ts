@@ -147,6 +147,29 @@ describe("AiProjectsStore", () => {
       expect(store.activeProject?.id).toBe(3);
     });
 
+    it("opens nothing by id once the project was left or another opened", async () => {
+      let resolveRead: (p: TAiProject) => void = () => {};
+      const pending = () =>
+        api.getAiProject.mockImplementationOnce(
+          () => new Promise<TAiProject>((resolve) => (resolveRead = resolve)),
+        );
+      const store = createStore();
+
+      pending();
+      const left = store.openProjectById(5);
+      store.closeProject();
+      resolveRead(project(5));
+      expect(await left).toBeNull();
+      expect(store.activeProject).toBeNull();
+
+      pending();
+      const replaced = store.openProjectById(5);
+      await store.openProject(project(6));
+      resolveRead(project(5));
+      expect(await replaced).toBeNull();
+      expect(store.activeProject?.id).toBe(6);
+    });
+
     it("closes the project and resets the preset", async () => {
       const store = createStore();
       await store.openProject(project(1));
@@ -249,7 +272,9 @@ describe("AiProjectsStore", () => {
 
       expect(roomsApi.removeLogoFromRoom).toHaveBeenCalledWith(1);
       expect(api.toAiProject).toHaveBeenCalledWith({ id: 1, title: "No logo" });
-      expect(result).toEqual({ id: 1, title: "No logo", aiProject: {} });
+      // The logo route answers the bare room: the model and the linked rooms
+      // the update read are kept.
+      expect(result).toEqual({ id: 1, title: "No logo", aiProject: project(1).aiProject });
     });
 
     it("hands the project over, and leaves it unless the owner stays on", async () => {

@@ -46,6 +46,10 @@ import {
 } from "../secret-storage";
 import { SESSION_CACHE_DURATION_MS } from "../types";
 import type { IdentityKeyPair } from "../types";
+import {
+  getCachedEncryptedFilename,
+  rememberEncryptedFilename,
+} from "../filename-cache";
 
 function makeIdentity(seed: number): IdentityKeyPair {
   const pk = new Uint8Array(32);
@@ -161,6 +165,32 @@ describe("SecretStorage cache", () => {
     } finally {
       vi.restoreAllMocks();
     }
+  });
+
+  it("Unlocked session expires", () => {
+    SecretStorage.cacheUnlocked("alice", makeIdentity(1));
+    rememberEncryptedFilename(7, "Report.docx");
+    expect(getCachedEncryptedFilename(7)).toBe("Report.docx");
+
+    const t0 = Date.now();
+    vi.spyOn(Date, "now").mockImplementation(
+      () => t0 + SESSION_CACHE_DURATION_MS + 1,
+    );
+    try {
+      expect(SecretStorage.getCached("alice")).toBeNull();
+      expect(getCachedEncryptedFilename(7)).toBeNull();
+    } finally {
+      vi.restoreAllMocks();
+    }
+  });
+
+  it("Lock clears names", () => {
+    SecretStorage.cacheUnlocked("alice", makeIdentity(1));
+    rememberEncryptedFilename(7, "Report.docx");
+
+    SecretStorage.lock();
+
+    expect(getCachedEncryptedFilename(7)).toBeNull();
   });
 
   it("each successful getCached bumps lastUsedAt — usage extends the session", () => {

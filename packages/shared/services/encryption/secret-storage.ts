@@ -36,6 +36,7 @@
 // In-memory cache of the unlocked X25519 keypair for the current user.
 // Single-slot, per-page-session. Lives in main thread (no Worker isolation).
 
+import { clearEncryptedFilenameCache } from "./filename-cache";
 import { SESSION_CACHE_DURATION_MS, type IdentityKeyPair } from "./types";
 import { zeroBuffer } from "./utils";
 
@@ -107,6 +108,13 @@ function clearState(): void {
   }
 }
 
+/** Drops the unlocked identity and, with it, the decrypted names. */
+function lockState(): void {
+  clearState();
+  // Spec: encryption-core, "Decrypted filenames are session-scoped"
+  clearEncryptedFilenameCache();
+}
+
 export const SecretStorage = {
   cacheUnlocked(userId: string, kp: IdentityKeyPair): void {
     if (!userId) {
@@ -129,7 +137,7 @@ export const SecretStorage = {
       return null;
     }
     if (isExpired(_state)) {
-      clearState();
+      lockState();
       return null;
     }
     bump(_state);
@@ -144,7 +152,7 @@ export const SecretStorage = {
   },
 
   lock(): void {
-    clearState();
+    lockState();
   },
 };
 

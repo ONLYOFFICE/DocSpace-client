@@ -513,4 +513,30 @@ test.describe("Rooms list: the focus follows the keyboard", () => {
     }
     expect(where.row, `Tab went on into ${where.row}`).toBeNull();
   });
+
+  // A room tile, like a folder's, was named `<id>_undefined` while the focus
+  // looked for `<id>`: the arrows moved the caret, and the focus stayed put.
+  test("in tiles, the arrows move the focus between rooms", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/rooms/shared/`);
+    await expect(page.getByTestId("table-body")).toBeVisible();
+    await page.waitForLoadState("networkidle");
+    await page.keyboard.press("KeyV");
+    await expect(page.getByTestId("tile_0")).toBeVisible();
+
+    await page.keyboard.press("ArrowRight");
+    await expect.poll(async () => (await focus(page)).row).toMatch(/^folder_/);
+    const first = await focus(page);
+    expect(first.isRow).toBe(true);
+
+    await page.keyboard.press("ArrowRight");
+    await expect
+      .poll(async () => {
+        const { row, isRow } = await focus(page);
+        return !!row?.startsWith("folder_") && isRow && row !== first.row;
+      })
+      .toBe(true);
+  });
 });

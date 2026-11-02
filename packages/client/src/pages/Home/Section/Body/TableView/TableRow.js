@@ -46,6 +46,7 @@ import withBadges from "../../../../../HOCs/withBadges";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withFileActions from "../../../../../HOCs/withFileActions";
 import ItemIcon from "../../../../../components/ItemIcon";
+import { getFilesItemClassName } from "../../../../../helpers/filesItemClassName";
 
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
 import AIAgentsRowDataComponent from "./sub-components/AIAgentsRowData";
@@ -230,9 +231,7 @@ const FilesTableRow = memo((props) => {
     disableDrag,
   ]);
 
-  const idWithFileExst = item.fileExst
-    ? `${item.id}_${item.fileExst}`
-    : (item.id ?? "");
+  const idWithFileExst = getFilesItemClassName(item);
 
   const contextOptionProps = useMemo(() => {
     return isIndexEditingMode

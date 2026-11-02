@@ -53,6 +53,7 @@ import {
   isContextMenuOpen,
   isKeyOwnedByFocus,
 } from "SRC_DIR/helpers/hotkeys";
+import { getFilesItemClassName } from "SRC_DIR/helpers/filesItemClassName";
 import { TABLE_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/table/Table.constants";
 
 import type FilesSettingsStore from "./FilesSettingsStore";
@@ -317,12 +318,7 @@ class HotkeyStore {
   getItemOffset = () => {
     const { hotkeyCaret, viewAs } = this.filesStore;
 
-    // `hotkeyCaret` can be null — the original .js read
-    // `.fileExst` on it unguarded (callers ensure a caret is set); the
-    // non-null assertion keeps runtime identical.
-    const className = hotkeyCaret!.fileExst
-      ? `${hotkeyCaret!.id}_${hotkeyCaret!.fileExst}`
-      : `${hotkeyCaret!.id}`;
+    const className = getFilesItemClassName(hotkeyCaret);
 
     let item: HTMLCollectionOf<Element> | undefined =
       document.getElementsByClassName(className);

@@ -37,6 +37,8 @@ import { useEffect, useRef } from "react";
 
 import { getTabStops } from "@onlyoffice/apps-ui-kit/hooks/useFocusTrap";
 
+import { getFilesItemClassName } from "SRC_DIR/helpers/filesItemClassName";
+
 type TCaretItem = {
   id?: number | string;
   fileExst?: string;
@@ -68,7 +70,7 @@ const rowOf = (el: Element | null) => {
 // A row carries its item as a class, the way HotkeyStore finds it to scroll.
 const findRow = (item: TCaretItem) => {
   if (!item || item.id === undefined || item.id === null) return null;
-  const name = item.fileExst ? `${item.id}_${item.fileExst}` : `${item.id}`;
+  const name = getFilesItemClassName(item);
   return rowOf(
     document.querySelector<HTMLElement>(`${ROW}.${CSS.escape(name)}`),
   );

@@ -17,9 +17,15 @@
 - [ ] 3.2 Refocus the invalid field once the failed action has settled in `PassphraseModal`, `RecoveryPhraseInputModal` and `KeyRotationDialog` (D3); verify with tests "Focus kept after a wrong passphrase" in `PassphraseModal.test.tsx`, "Focus kept after a wrong recovery phrase" in `packages/shared/dialogs/key-recovery/__tests__/RecoveryPhraseInputModal.test.tsx` and "Focus kept after a wrong current passphrase" in `keys-management/modals/__tests__/KeyRotationDialog.keyboard.test.tsx` (the test blurs the field before the error lands, then `toHaveFocus()`)
 - [ ] 3.3 Add "Typing again after a wrong passphrase" to the keyboard-only pass in `keys-management.spec.ts` (wrong passphrase, Enter, then type without Tab and unlock); verify under Docker
 
+Progress note (2026-11-02, before 3.2 started in code): the approach for 3.2 is a hook `useRefocusAfterFailure(fieldId, failed)` next to the other key-dialog helpers (`packages/shared/dialogs/key-dialog-refocus.ts`) that focuses `document.getElementById(fieldId)` when `failed` turns true; `failed` is `!isLoading && !!externalError` in `PassphraseModal` (field id `passphrase`), `!isLoading && !isValidating && !!error` in `RecoveryPhraseInputModal` (`recoveryPhraseInput`; the kit `Textarea` takes no ref) and `!isLoading && !!externalError` in `KeyRotationDialog` (`currentPassphrase`). The hook draws nothing.
+
 ## 4. Action links
 
 - [ ] 4.1 Switch the key dialogs' action links from `activateOnEnter` to `activateAsButton` and delete `activateOnEnter` with its last caller (D4); verify with "Held Enter on an action link" in `packages/shared/dialogs/__tests__/key-dialog-keys.test.ts` (a repeated keydown clicks once) and `pnpm run tsc`
+
+## 4a. Owner directive of 2026-11-02: ui-kit components only
+
+- [ ] 4a.1 Key dialogs use the ui-kit set only, no component of our own for showing passphrase strength: delete `packages/shared/dialogs/passphrase-modal/PassphraseStrengthMeter.tsx` (added by `private-rooms-spec-drift-fixes` 7.1); in `KeyRotationDialog` show the new passphrase's strength with the kit `PasswordInput`'s own indicator (`simpleView={false}`, `passwordSettings`, `onValidateInput`), as the creation dialog does, and the common-pattern refusal as the field's error (`FieldContainer` `errorMessage`, Common:PassphraseCommonPattern) while `isPassphraseAcceptable` keeps gating Save; restore `PassphraseModal` to its code before the extraction. Ask the owner first whether the strength row `PassphraseModal` drew before the extraction (kit `Text` elements under the field) stays or goes. Verify: `KeyRotationDialog.test.tsx` ("Passphrase change"), `cd packages/shared && pnpm exec vitest run dialogs`, `pnpm test:client`, `pnpm run tsc`
 
 ## 5. Integration
 

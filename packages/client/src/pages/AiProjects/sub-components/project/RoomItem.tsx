@@ -66,6 +66,32 @@ type RoomItemProps = {
   trailing?: React.ReactNode;
 };
 
+type SourceRoomLogoProps = {
+  title: string;
+  logo?: TAiProjectLogo;
+  icon: RoomItemProps["icon"];
+  size?: string;
+  className?: string;
+};
+
+/** A linked room's own logo: the uploaded picture, the cover in its colour, or its initials; `icon` while it carries no logo. */
+export const SourceRoomLogo = ({ title, logo, icon, size = "24px", className }: SourceRoomLogoProps) => {
+  const color = logo?.color.replace("#", "") ?? "";
+
+  return (
+    <RoomIcon
+      className={classNames("room-icon", className)}
+      imgClassName="room-image"
+      logo={logo ? (logo.cover ? coverLogo(logo.cover, color) : logo.medium) : (iconSize32.get(icon) ?? "")}
+      title={title}
+      color={color}
+      showDefault={logo ? !logo.cover && !logo.medium : false}
+      dropDownManualX="0"
+      size={size}
+    />
+  );
+};
+
 /** A linked room as the new-files panel draws one; a click opens the room. */
 const RoomItem = ({
   id,
@@ -80,7 +106,6 @@ const RoomItem = ({
   trailing,
 }: RoomItemProps) => {
   const navigate = useNavigate();
-  const color = logo?.color.replace("#", "") ?? "";
 
   const onClick = (e: React.MouseEvent) => {
     // Inside an expandable row the rest of the row toggles; the room itself opens.
@@ -93,16 +118,7 @@ const RoomItem = ({
 
   const item = (
     <div className={styles.roomItem} onClick={onClick} data-testid={`ai-project-room-${id}`}>
-      <RoomIcon
-        className="room-icon"
-        imgClassName="room-image"
-        logo={logo ? (logo.cover ? coverLogo(logo.cover, color) : logo.medium) : (iconSize32.get(icon) ?? "")}
-        title={title}
-        color={color}
-        showDefault={logo ? !logo.cover && !logo.medium : false}
-        dropDownManualX="0"
-        size="24px"
-      />
+      <SourceRoomLogo title={title} logo={logo} icon={icon} />
       <Text className="room-item-title" fontSize="13px" fontWeight={600} lineHeight="15px" title={hint ?? title} truncate noSelect>
         {title}
       </Text>

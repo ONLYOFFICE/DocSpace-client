@@ -41,10 +41,11 @@
   border-top: 1px solid var(--files-section-table-view-row-border-color);
 }
 
+// Label, field and hint 4px apart, as the other parameters of the room dialogs.
 .block {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 // "Select room" on a row of its own; the chosen rooms wrap below it.
@@ -56,9 +57,23 @@
   color: var(--text-secondary);
 }
 
+// The chosen rooms wrap 4px apart, as the tags do.
+.roomList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
 // A chosen room: the chip keeps to the row and truncates a long name,
-// the icon and the cross keep their size.
+// the logo and the cross keep their size.
 .roomItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 3px;
+  background: var(--filled-button-background-color);
   max-width: 100%;
   min-width: 0;
   box-sizing: border-box;

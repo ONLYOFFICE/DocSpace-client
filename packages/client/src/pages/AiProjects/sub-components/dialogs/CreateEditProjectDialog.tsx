@@ -34,7 +34,6 @@
  */
 
 import React from "react";
-import classnames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -66,7 +65,6 @@ import type {
   TAiProjectSource,
 } from "@docspace/shared/api/ai/projects";
 import { aiProjectToRoom } from "@docspace/shared/api/ai/projects";
-import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
@@ -83,6 +81,7 @@ import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import { coverLogo, uploadedLogo } from "../list/ProjectLogo";
+import { SourceRoomLogo } from "../project/RoomItem";
 import styles from "./CreateEditProjectDialog.module.scss";
 
 type CreateEditProjectDialogProps = {
@@ -113,7 +112,7 @@ type TRoomType = typeof INSTRUCTIONS_ROOM_TYPE | typeof KNOWLEDGE_ROOM_TYPE;
 
 const MAX_TITLE = 170;
 
-const ROOM_ICONS: Record<TRoomType, string> = {
+const ROOM_ICONS: Record<TRoomType, "instructionsRoom.svg" | "knowledgeRoom.svg"> = {
   [INSTRUCTIONS_ROOM_TYPE]: "instructionsRoom.svg",
   [KNOWLEDGE_ROOM_TYPE]: "knowledgeRoom.svg",
 };
@@ -359,8 +358,8 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   };
 
   // The rooms of one kind, as the agent dialog lists its MCP servers: the
-  // add button opens the selector, each chosen room is a chip with the icon
-  // of its type and a cross, the hint sits under the row.
+  // add button opens the selector, each chosen room is a chip with the
+  // room's own logo and a cross, the hint sits under the row.
   const roomsBlock = (
     label: string,
     hint: string,
@@ -368,7 +367,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
     type: TRoomType,
     setRooms: (rooms: TAiProjectSource[]) => void,
   ) => (
-    <StyledParam increaseGap className={styles.block}>
+    <StyledParam className={styles.block}>
       <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
         {label}
       </Text>
@@ -381,10 +380,10 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
         />
       </div>
       {rooms.length > 0 ? (
-        <div className="ai-mcp-group">
+        <div className={styles.roomList}>
           {rooms.map((room) => (
-            <div className={classnames("ai-mcp-item", styles.roomItem)} key={room.id} data-testid="ai-project-room-item">
-              <img src={iconSize32.get(ROOM_ICONS[type])} alt="" />
+            <div className={styles.roomItem} key={room.id} data-testid="ai-project-room-item">
+              <SourceRoomLogo title={room.title} logo={room.logo ?? undefined} icon={ROOM_ICONS[type]} size="20px" />
               <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect truncate>
                 {room.title}
               </Text>

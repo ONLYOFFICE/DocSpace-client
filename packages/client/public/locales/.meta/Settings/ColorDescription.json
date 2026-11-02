@@ -3,7 +3,7 @@
   "content": "Pick a color for your workspace interface elements: buttons, links, and other highlights will use it throughout.",
   "content_en_sha1_hash": "c481cd72ce37e3352e276928f3a999bb2e1f297c",
   "created_at": "2026-08-31T18:23:40.638Z",
-  "updated_at": "2026-10-29T13:57:47.678Z",
+  "updated_at": "2026-10-31T12:58:29.242Z",
   "comment": {
     "text": "Instructional text in the Appearance settings explaining how the chosen color affects workspace elements like buttons and links.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Create a form with appropriate fields, response types, validation, and required settings, then show the proposed structure before creating it. If this information is not provided, ask me for the form goal, target respondents, required fields, and validation rules.",
   "content_en_sha1_hash": "3f9b87e00ee02a1852aab490e73ff9849e844a24",
   "created_at": "2026-08-04T09:58:55.162Z",
-  "updated_at": "2026-08-05T17:34:14.072Z",
+  "updated_at": "2026-10-31T12:58:29.076Z",
   "comment": {
     "text": "Instructional prompt for an AI suggestion option that directs the AI model on how to generate a form and interact with the user if details are missing.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 696,
+      "line_number": 636,
       "context": "prompt: t(\"AiSuggestions:FormsStartFromAFormTemplatePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsCreateAFormWithAI\"),\n prompt: t(\"AiSuggestions:FormsCreateAFormWithAIPrompt\"),\n requires: \"contentCreator\",\n },\n {\n name: t(\"AiSuggestions:FormsConvertAFileIntoAForm\"),\n prompt: t(\"AiSuggestions:FormsConvertAFileIntoAFormPrompt\"),",
       "module": "/packages/client"
     }

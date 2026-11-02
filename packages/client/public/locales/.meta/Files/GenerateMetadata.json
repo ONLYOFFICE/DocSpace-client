@@ -3,7 +3,7 @@
   "content": "Generate metadata",
   "content_en_sha1_hash": "88b2fa35c08679cb83f501b66a5a3621dc203510",
   "created_at": "2026-10-27T14:48:46.392Z",
-  "updated_at": "2026-10-30T14:51:05.625Z",
+  "updated_at": "2026-11-02T09:45:28.369Z",
   "comment": {
     "text": "Item in the AI tools submenu of the file context menu, in the AI icon menu of the Metadata tab header and in the Add metadata menu of the empty Metadata tab, and title of the side panel it opens, where AI reads the file and generates new custom metadata fields with values for review. Short verb phrase; do not add a mention of AI.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 544,
+      "line_number": 532,
       "context": "disabled: false,\n },\n {\n id: \"option_suggest-metadata-ai\",\n key: \"suggest-metadata-ai\",\n label: t(\"Files:GenerateMetadata\"),\n icon: AISvgUrl,\n onClick: () =>\n self.dialogsStore.setMetadataAIPanelData({\n visible: true,\n item: item as TMetadataSelection,",
       "module": "/packages/client"
     }

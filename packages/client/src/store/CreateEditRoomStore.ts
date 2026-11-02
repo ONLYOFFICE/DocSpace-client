@@ -59,7 +59,11 @@ import {
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable } from "@docspace/shared/types";
-import { TRoomIconParams, TRoomParams } from "@docspace/shared/utils/rooms";
+import {
+  TRoomIconParams,
+  TRoomParams,
+  withoutSettingsRefusedForAiRooms,
+} from "@docspace/shared/utils/rooms";
 import { TRoom, TWatermark } from "@docspace/shared/api/rooms/types";
 import { addEntityMcpServer } from "@docspace/shared/api/ai";
 import { startDbSync } from "@docspace/shared/api/rooms";
@@ -264,9 +268,6 @@ class CreateEditRoomStore {
       invitations,
       roomId,
       isAvailable,
-      prompt,
-      providerId,
-      modelId,
       sendFormToExternalDB,
       saveFormAsXLSX,
     } = newParams;
@@ -288,7 +289,8 @@ class CreateEditRoomStore {
     const currTags = newParams.tags.map((p) => p.name).sort();
     const isTagsChanged = !isEqual(prevTags, currTags);
 
-    const editRoomParams = {
+    // The AI room types refuse the settings that do not apply to them.
+    const editRoomParams = withoutSettingsRefusedForAiRooms({
       ...(isSendFormToExternalDBChanged && {
         sendFormToExternalDB,
       }),
@@ -329,14 +331,7 @@ class CreateEditRoomStore {
               },
         }),
       logo: undefined as unknown,
-      ...((prompt || providerId || modelId) && {
-        chatSettings: {
-          prompt,
-          providerId,
-          modelId,
-        },
-      }),
-    };
+    }, room.roomType);
 
     const isDeleteLogo = !!room.logo.original && !icon.uploadedFile;
     const additionalRequest = [];
@@ -578,9 +573,6 @@ class CreateEditRoomStore {
       isTemplate,
       roomId,
       logo,
-      prompt,
-      providerId,
-      modelId,
       isPrivate,
       saveFormAsXLSX,
       sendFormToExternalDB,
@@ -630,7 +622,8 @@ class CreateEditRoomStore {
       }
     }
 
-    const createRoomData = {
+    // The AI room types refuse the settings that do not apply to them.
+    const createRoomData = withoutSettingsRefusedForAiRooms({
       roomId,
       roomType: serverRoomType,
       private: isPrivateRoom,
@@ -655,17 +648,10 @@ class CreateEditRoomStore {
           watermark: await this.getWatermarkRequest(watermark),
         }),
       logo: undefined as unknown,
-      ...((prompt || providerId || modelId) && {
-        chatSettings: {
-          prompt,
-          providerId,
-          modelId,
-        },
-      }),
       saveFormAsXLSX,
       sendFormToExternalDB:
         sendFormToExternalDB && this.settingsStore.externalDbEnabled,
-    };
+    }, serverRoomType);
 
     this.setIsLoading(true);
 
@@ -862,7 +848,11 @@ class CreateEditRoomStore {
 
     const isFormRoom = room.roomType === RoomsType.FormRoom;
     const path = getCategoryUrl(
-      isFormRoom ? CategoryType.Form : CategoryType.SharedRoom,
+      isFormRoom
+        ? CategoryType.Form
+        : room.rootFolderType === FolderType.AiHub
+          ? CategoryType.AiHubRoom
+          : CategoryType.SharedRoom,
       room.id,
     );
 

@@ -74,6 +74,8 @@ const CreateRoomDialog = ({
   enableThirdParty,
   startRoomType,
   isFormsCreate,
+  isAiRoomsCreate,
+  onOpenAiProjectForm,
   onOpenTemplateGallery,
   processCreatingRoomFromData,
   setProcessCreatingRoomFromData,
@@ -414,13 +416,17 @@ const CreateRoomDialog = ({
               isExternalShareRestricted={isExternalShareRestricted}
               processCreatingRoomFromData={processCreatingRoomFromData}
               isFormsCreate={isFormsCreate}
+              isAiRoomsCreate={isAiRoomsCreate}
+              onOpenAiProjectForm={onOpenAiProjectForm}
               onOpenTemplateGallery={onOpenTemplateGallery}
               setTemplateDialogIsVisible={setTemplateDialogIsVisible}
             />
           ) : (
             <SetRoomParams
               t={t}
-              disabledChangeRoomType={Boolean(startRoomType) || isFormsCreate}
+              disabledChangeRoomType={
+                Boolean(startRoomType) || isFormsCreate || isAiRoomsCreate
+              }
               isTemplateSelected={isTemplateSelected}
               setIsOauthWindowOpen={setIsOauthWindowOpen}
               tagHandler={tagHandler}

@@ -437,8 +437,8 @@
 // the wrap decision read the title's own width, so the badge stays on the
 // title's right while both fit and drops to a line of its own - still indented
 // past the icon - once they do not. A quarter of the grid is not enough for
-// "KI-Agenten" + "Installiert", nor for the Russian pair of the same two
-// words.
+// a long translated title plus "Installiert", nor for the Russian pair of the
+// same two words.
 .moduleHeadings {
   display: flex;
   flex: 1;

@@ -1,0 +1,29 @@
+{
+  "key_path": "AIProjectContextHint",
+  "content": "The AI works in this folder: it lists it, reads its files and scopes tools to it.",
+  "content_en_sha1_hash": "ba82f466ba979007b5e968ec26971feca6f2b2a6",
+  "created_at": "2026-10-31T12:56:51.167Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Hint under the add button of the Context card in an AI project's sources column, explaining what the chosen folder is used for by the AI.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 452,
+      "context": "titleText={t(\"Common:AIProjectAddRoom\")}\n onClick={() => setIsPickerVisible(true)}\n noSelect\n testId=\"ai-project-context-add\"\n />\n <Text className={styles.note}>{t(\"Common:AIProjectContextHint\")}</Text>\n </>\n )}\n </Section>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

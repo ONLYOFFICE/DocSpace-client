@@ -54,9 +54,6 @@ export const getRoomTypeName = (room, t) => {
     case RoomsType.CustomRoom:
       return t("Common:CustomRooms");
 
-    case RoomsType.AIRoom:
-      return t("Common:AIRoomTitle");
-
     case RoomsType.FillingFormsRoom:
       return t("Common:FillingFormRooms");
 
@@ -77,6 +74,12 @@ export const getRoomTypeName = (room, t) => {
 
     case RoomsType.FormRoom:
       return t("Common:FormRoom");
+    case RoomsType.InstructionsRoom:
+      return t("Common:InstructionsRooms");
+    case RoomsType.KnowledgeRoom:
+      return t("Common:KnowledgeRooms");
+    case RoomsType.AiProjectRoom:
+      return t("Common:AIProjectRoomTitle");
     default:
       break;
   }
@@ -92,6 +95,8 @@ export const getDefaultFileName = (format) => {
       return i18n.t("Common:NewPresentation");
     case "pdf":
       return i18n.t("Common:NewPDFForm");
+    case "md":
+      return i18n.t("Common:NewMarkdown");
     default:
       return i18n.t("Common:NewFolder");
   }
@@ -107,6 +112,8 @@ export const getDefaultFileTestIdPrefix = (format) => {
       return "new_presentation";
     case "pdf":
       return "new_pdf_form";
+    case "md":
+      return "new_markdown";
     default:
       return "new_folder";
   }

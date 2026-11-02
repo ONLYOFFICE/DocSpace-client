@@ -3,7 +3,7 @@
   "content": "Export",
   "content_en_sha1_hash": "f3e4fadb9e370a1e2c0c622c01fc8c77daf93a2c",
   "created_at": "2026-08-05T16:31:27.497Z",
-  "updated_at": "2026-10-29T13:57:47.640Z",
+  "updated_at": "2026-10-31T12:58:29.153Z",
   "comment": {
     "text": "Button label used to trigger the file export process within the history panel toolbar.",
     "is_auto": true,

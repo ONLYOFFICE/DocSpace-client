@@ -72,11 +72,9 @@ const RoomLogoCoverDialog = ({
   roomCoverDialogProps,
   roomLogoCoverDialogVisible,
   setEnabledHotkeys,
-  createAgentDialogVisible,
-  editAgentDialogVisible,
+  aiProjectDialogVisible,
   uploadedFile,
   setUploadedFile,
-  isAIAgentsFolderRoot,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common"]);
   const { currentColorScheme } = useTheme();
@@ -186,8 +184,7 @@ const RoomLogoCoverDialog = ({
     if (
       createRoomDialogVisible ||
       editRoomDialogPropsVisible ||
-      createAgentDialogVisible ||
-      editAgentDialogVisible ||
+      aiProjectDialogVisible ||
       templateEventVisible
     ) {
       onCloseRoomLogo(undefined, false);
@@ -230,9 +227,7 @@ const RoomLogoCoverDialog = ({
       dataTestId="room_logo_cover_dialog"
     >
       <ModalDialog.Header>
-        {isAIAgentsFolderRoot
-          ? t("Common:AgentCover")
-          : t("Common:RoomCover")}
+        {t("Common:RoomCover")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <RoomLogoCover
@@ -273,14 +268,17 @@ const RoomLogoCoverDialog = ({
 };
 
 export default inject<TStore>(
-  ({ dialogsStore, filesStore, avatarEditorDialogStore, treeFoldersStore }) => {
+  ({
+    dialogsStore,
+    filesStore,
+    avatarEditorDialogStore,
+    aiProjectsStore,
+  }) => {
     const {
       setCover,
       getCovers,
       createRoomDialogProps,
       editRoomDialogProps,
-      createAgentDialogProps,
-      editAgentDialogProps,
       setRoomLogoCoverDialogVisible,
       roomLogoCoverDialogVisible,
 
@@ -297,7 +295,6 @@ export default inject<TStore>(
       setUploadedFile,
     } = avatarEditorDialogStore;
 
-    const { isAIAgentsFolderRoot } = treeFoldersStore;
     return {
       setRoomLogoCoverDialogVisible,
       roomLogoCoverDialogVisible,
@@ -309,14 +306,12 @@ export default inject<TStore>(
       roomCoverDialogProps,
       createRoomDialogVisible: createRoomDialogProps.visible,
       editRoomDialogPropsVisible: editRoomDialogProps.visible,
-      createAgentDialogVisible: createAgentDialogProps.visible,
-      editAgentDialogVisible: editAgentDialogProps.visible,
+      aiProjectDialogVisible: aiProjectsStore.projectDialog !== null,
       templateEventVisible,
       setEnabledHotkeys: filesStore.setEnabledHotkeys,
       uploadedFile,
 
       setUploadedFile,
-      isAIAgentsFolderRoot,
     };
   },
 )(observer(RoomLogoCoverDialog));

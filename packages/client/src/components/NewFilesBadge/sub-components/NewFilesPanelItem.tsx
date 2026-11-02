@@ -49,7 +49,6 @@ export const NewFilesPanelItem = ({
   date,
   items,
   isRooms,
-  isAgents,
   isFirst,
   onClose,
 
@@ -58,29 +57,13 @@ export const NewFilesPanelItem = ({
   return (
     <div
       className={classNames(styles.item, {
-        [styles.isRooms]: isRooms || isAgents,
+        [styles.isRooms]: isRooms,
         [styles.isFirst]: isFirst,
       })}
     >
       <NewFilesPanelItemDate date={date} culture={culture} />
-      {isRooms || isAgents ? (
+      {isRooms ? (
         items.map((value) => {
-          if ("agent" in value) {
-            return (
-              <div
-                key={`${date}-${value.agent.id}`}
-                className="room-items-container"
-              >
-                <NewFilesPanelItemRoom room={value.agent} onClose={onClose} />
-                <NewFilesPanelFileList
-                  items={value.items}
-                  isRooms
-                  onClose={onClose}
-                />
-              </div>
-            );
-          }
-
           if ("room" in value)
             return (
               <div

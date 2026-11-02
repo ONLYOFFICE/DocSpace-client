@@ -3,7 +3,7 @@
   "content": "Export history",
   "content_en_sha1_hash": "19b8bf95f23fae4b66bc5bd69bfb6ac812536bbe",
   "created_at": "2026-08-05T16:31:56.230Z",
-  "updated_at": "2026-10-29T13:57:47.639Z",
+  "updated_at": "2026-10-31T12:58:29.153Z",
   "comment": {
     "text": "Label for a menu item in the Export menu that provides access to the list of previous exports.",
     "is_auto": true,

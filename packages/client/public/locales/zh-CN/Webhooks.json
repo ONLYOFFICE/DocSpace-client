@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "AI 智能体已创建",
-  "AgentDeleted": "AI 智能体已删除",
-  "AgentUpdated": "AI 智能体已更新",
   "Before": "之前",
   "CreateWebhook": "创建 webhook",
   "DeleteHint": "此 webhook 将被永久删除。\n您无法撤消此操作。",

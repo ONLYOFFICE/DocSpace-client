@@ -114,15 +114,6 @@ describe("ContextOptionsStore — action handler delegation (batch 3)", () => {
     expect(setRestoreAllPanelVisible).toHaveBeenCalledWith(true);
   });
 
-  it("onShowAiKnowledgeSelectFileDialog -> dialogsStore.setSelectFileAiKnowledgeDialogVisible(true)", () => {
-    const setSelectFileAiKnowledgeDialogVisible = vi.fn();
-    const store = createTestContextOptionsStore({
-      dialogsStore: { setSelectFileAiKnowledgeDialogVisible },
-    });
-    store.onShowAiKnowledgeSelectFileDialog();
-    expect(setSelectFileAiKnowledgeDialogVisible).toHaveBeenCalledWith(true);
-  });
-
   it("onShowFormRoomSelectFileDialog -> dialogsStore.setSelectFileFormRoomDialogVisible", () => {
     const setSelectFileFormRoomDialogVisible = vi.fn();
     const store = createTestContextOptionsStore({
@@ -235,14 +226,6 @@ describe("ContextOptionsStore — action handler delegation (batch 5)", () => {
     expect(setEmbeddingPanelData).toHaveBeenCalledWith(
       expect.objectContaining({ visible: true }),
     );
-  });
-
-  it("onCreateAgent dispatches the agent-create event", () => {
-    const dispatchEvent = vi.spyOn(window, "dispatchEvent");
-    const store = createTestContextOptionsStore();
-    store.onCreateAgent();
-    expect(dispatchEvent).toHaveBeenCalledTimes(1);
-    dispatchEvent.mockRestore();
   });
 
   it("onSaveAsTemplate dispatches the save-as-template event", () => {

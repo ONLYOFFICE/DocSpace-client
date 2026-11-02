@@ -37,5 +37,4 @@
 export const FILES_TOUR_LABEL = "files tour";
 export const ROOMS_TOUR_LABEL = "rooms tour";
 export const FORMS_TOUR_LABEL = "forms tour";
-export const AI_AGENTS_TOUR_LABEL = "ai agents tour";
 export const DASHBOARD_TOUR_LABEL = "dashboard tour";

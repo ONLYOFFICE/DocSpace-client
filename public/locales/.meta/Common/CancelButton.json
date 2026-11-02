@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-10-30T14:51:05.192Z",
+  "updated_at": "2026-11-02T09:45:28.097Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -270,18 +270,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/CreateAgentDialog.tsx",
-      "line_number": 221,
-      "context": "testId=\"create_agent_dialog_save\"\n />\n <Button\n id=\"shared_create-agent-modal_cancel\"\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n scale\n isDisabled={isLoading}\n onClick={onCloseDialog}\n testId=\"create_agent_dialog_cancel\"\n />",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/EditAgentDialog.tsx",
-      "line_number": 287,
-      "context": "}\n isLoading={isLoading}\n />\n <Button\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onCloseAction}\n isDisabled={isLoading}\n />\n </ModalDialog.Footer>",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/CreateGroupDialog.tsx",
       "line_number": 206,
       "context": "/>\n <Button\n id=\"create-group-modal_cancel\"\n testId=\"create_edit_group_cancel_button\"\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n isDisabled={isLoading}\n onClick={onClose}\n />",
@@ -295,7 +283,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 465,
+      "line_number": 471,
       "context": "testId=\"create_room_dialog_save\"\n />\n <Button\n id=\"shared_create-room-modal_cancel\"\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n isDisabled={isLoading}\n onClick={onCloseAndDisconnectThirdparty}\n testId=\"create_room_dialog_cancel\"",
       "module": "/packages/client"
     },
@@ -325,7 +313,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 315,
+      "line_number": 296,
       "context": "testId=\"delete_dialog_modal_submit\"\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isLoading={isLoading}\n testId=\"delete_dialog_modal_cancel\"",
       "module": "/packages/client"
     },
@@ -433,7 +421,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 140,
+      "line_number": 131,
       "context": "isDisabled={isLoading}\n testId=\"leave_room_modal_submit\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isDisabled={isLoading}\n testId=\"leave_room_modal_cancel\"",
       "module": "/packages/client"
     },
@@ -523,7 +511,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 267,
+      "line_number": 262,
       "context": "<Button\n scale\n tabIndex={0}\n onClick={onCloseRoomLogo}\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n testId=\"room_logo_cover_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>\n );",
       "module": "/packages/client"
     },
@@ -553,7 +541,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
-      "line_number": 253,
+      "line_number": 252,
       "context": "testId=\"submit_to_gallery_apply_button\"\n />\n )}\n <Button\n size=\"normal\"\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n scale={!formItem}\n testId=\"submit_to_gallery_cancel_button\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -571,7 +559,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 1167,
+      "line_number": 1185,
       "context": "<Button\n className=\"cancel-button\"\n scale\n size=\"normal\"\n onClick={onClose}\n label={t(\"Common:CancelButton\")}\n isDisabled={isLoading}\n testId=\"invite_panel_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/client"
     },
@@ -601,7 +589,7 @@
     },
     {
       "file_path": "/packages/client/src/components/PluginSelector/PluginFilesSelector/PluginFilesSelector.tsx",
-      "line_number": 222,
+      "line_number": 221,
       "context": "openRoot={openRoot}\n getIcon={getIcon!}\n withSearch={!!withSearch}\n withBreadCrumbs={!!withBreadCrumbs}\n withCancelButton={!!withCancelButton}\n cancelButtonLabel={cancelButtonLabel ?? t(\"Common:CancelButton\")}\n submitButtonLabel={submitButtonLabel ?? t(\"Common:AddButton\")}\n withCreate={!!withCreate}\n disabledCreatePublicRoom={disabledCreatePublicRoom}\n withFooterCheckbox={!!withFooterCheckbox}\n withFooterInput={!!withFooterInput}",
       "module": "/packages/client"
     },
@@ -619,8 +607,20 @@
     },
     {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
-      "line_number": 319,
+      "line_number": 316,
       "context": "currentDeviceType={currentDeviceType}\n createDefineRoomLabel={\n createDefineRoomLabels[createDefineRoomType] ?? \"\"\n }\n submitButtonLabel={t(\"Common:CopyHere\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n cancelButtonId=\"share-collect-selector-cancel\"\n onCancel={onCancel}\n onSubmit={\n onSubmit as unknown as Parameters<\n typeof FilesSelectorWrapper",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
+      "line_number": 460,
+      "context": "onBackClick: () => setSelector(null),\n withoutBackButton: false,\n withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onCancel={() => setSelector(null)}\n submitButtonLabel={t(\"Common:SelectAction\")}\n selectedItems={selected.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]}\n sortSelectedFirst\n onSubmit={onRoomsSelected}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
+      "line_number": 460,
+      "context": "onBackClick: () => setSelector(null),\n withoutBackButton: false,\n withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onCancel={() => setSelector(null)}\n submitButtonLabel={t(\"Common:SelectAction\")}\n selectedItems={selected.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]}\n sortSelectedFirst\n onSubmit={onRoomsSelected}",
       "module": "/packages/client"
     },
     {
@@ -727,7 +727,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 294,
+      "line_number": 286,
       "context": "onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"ai_services_management_save_button\"\n cancelButtonDataTestId=\"ai_services_management_cancel_button\"",
       "module": "/packages/client"
     },
@@ -1015,7 +1015,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 390,
+      "line_number": 389,
       "context": "<Button\n isDisabled={isSavingComment}\n size=\"extraSmall\"\n scale\n onClick={onCancelClick}\n label={t(\"Common:CancelButton\")}\n testId=\"version_cancel_button\"\n />\n </div>\n </div>\n ) : null}",
       "module": "/packages/client"
     },
@@ -1147,7 +1147,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/knowledge-upload-selector-dialog/index.tsx",
-      "line_number": 196,
+      "line_number": 195,
       "context": "// FilesSelectorFilterTypes is a `const enum` and the SDK runs with\n // `isolatedModules`, so SWC can't inline its value — passing the\n // string literal directly avoids a runtime import failure.\n filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SelectAction\", { defaultValue: \"Select\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader=\"\"\n currentFooterInputValue=\"\"\n getFilesArchiveError={() => \"\"}",
       "module": "/packages/sdk"
     },

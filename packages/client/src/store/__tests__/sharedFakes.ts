@@ -54,7 +54,6 @@ export const fakeTreeFoldersStore = (): FakeStore => ({
   isRecentFolder: false,
   isFavoritesFolder: false,
   isPrivacyFolder: false,
-  isAIAgentsFolder: false,
   sharedWithMeFolderId: undefined,
   recentFolderId: -101,
   favoritesFolderId: -102,
@@ -82,8 +81,3 @@ export const fakeUserStore = (): FakeStore => ({
   encryptionKeys: [],
 });
 
-export const fakeAiRoomStore = (): FakeStore => ({
-  setKnowledgeId: vi.fn(),
-  setResultId: vi.fn(),
-  setCurrentTab: vi.fn(),
-});

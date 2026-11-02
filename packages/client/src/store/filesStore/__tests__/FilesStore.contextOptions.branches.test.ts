@@ -175,6 +175,29 @@ describe("getFilesContextOptions — encrypted file", () => {
   });
 });
 
+// The server refuses external links to files in the AI rooms, so the menu
+// keeps only the link for room members there.
+describe("getFilesContextOptions — file in an AI room", () => {
+  it("drops the external link options and keeps the members link", () => {
+    const store = createTestFilesStore();
+    const inUserFolder = store.getFilesContextOptions(fullPermFile());
+    const inAiRoom = store.getFilesContextOptions({
+      ...fullPermFile(),
+      rootFolderType: FolderType.AiHub,
+    } as unknown as TItem);
+
+    for (const option of [
+      "sharing-settings",
+      "copy-shared-link",
+      "manage-links",
+    ]) {
+      expect(inUserFolder).toContain(option);
+      expect(inAiRoom).not.toContain(option);
+    }
+    expect(inAiRoom).toContain("link-for-room-members");
+  });
+});
+
 // Bug 82880: a format that needs server-side conversion cannot be opened from
 // a private room at all, so the menu must not offer it — the file click already
 // explains why. Keys are present here on purpose: without them the no-keys

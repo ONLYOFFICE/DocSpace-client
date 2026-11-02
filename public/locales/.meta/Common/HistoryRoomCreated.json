@@ -3,7 +3,7 @@
   "content": "<1>«{{roomTitle}}»</1> room created",
   "content_en_sha1_hash": "1730e3bd2fac6570d2cc51d49c0b449d6a7f5d92",
   "created_at": "2025-05-19T21:30:54.880Z",
-  "updated_at": "2026-08-17T17:23:21.764Z",
+  "updated_at": "2026-10-31T12:58:29.158Z",
   "comment": {
     "text": "This is a history feed message indicating a new room has been created. `{{roomTitle}}` is the name of the created room.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 235,
+      "line_number": 192,
       "context": ");\n return (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"HistoryRoomCreated\"\n values={{ roomTitle: (feed.data as TFeedData).title }}\n components={{\n 1: (\n <HistoryText\n key={(feed.data as TFeedData).title!}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 196,
+      "line_number": 158,
       "context": "case FeedActionKeys.RoomCreated:\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"HistoryRoomCreated\"\n values={{ roomTitle: feed.data.title }}\n components={{ 1: <HistoryText title={feed.data.title!} /> }}\n />\n );\n case FeedActionKeys.RoomCopied:",
       "module": "/packages/client"
     },

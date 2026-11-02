@@ -47,6 +47,7 @@ import {
   FILTER_ARCHIVE_ROOM,
   FILTER_SHARED_ROOM,
   FILTER_TEMPLATES_ROOM,
+  FILTER_AI_HUB_ROOMS,
 } from "../../utils/filterConstants";
 import { getUserFilter, setUserFilter } from "../../utils/userFilterUtils";
 import { TSortOrder, TSortBy, Nullable } from "../../types";
@@ -168,7 +169,9 @@ class RoomsFilter {
             ? `${FILTER_ARCHIVE_ROOM}=${userId}`
             : defaultFilter.searchArea === RoomSearchArea.Templates
               ? `${FILTER_TEMPLATES_ROOM}=${userId}`
-              : "";
+              : defaultFilter.searchArea === RoomSearchArea.AiHub
+                ? `${FILTER_AI_HUB_ROOMS}=${userId}`
+                : "";
 
       try {
         const filterStorageItem = getUserFilter(storageKey);
@@ -474,15 +477,18 @@ class RoomsFilter {
     const archivedFilterKey = `${FILTER_ARCHIVE_ROOM}=${userId}`;
     const sharedFilterKey = `${FILTER_SHARED_ROOM}=${userId}`;
     const templatesFilterKey = `${FILTER_TEMPLATES_ROOM}=${userId}`;
+    const aiHubFilterKey = `${FILTER_AI_HUB_ROOMS}=${userId}`;
 
     let archivedStorageFilter = null;
     let sharedStorageFilter = null;
     let templatesStorageFilter = null;
+    let aiHubStorageFilter = null;
 
     try {
       archivedStorageFilter = getUserFilter(archivedFilterKey);
       sharedStorageFilter = getUserFilter(sharedFilterKey);
       templatesStorageFilter = getUserFilter(templatesFilterKey);
+      aiHubStorageFilter = getUserFilter(aiHubFilterKey);
     } catch {
       // console.log(e);
     }
@@ -510,6 +516,12 @@ class RoomsFilter {
       templatesStorageFilter = dtoFilter;
     }
 
+    if (isEmpty(aiHubStorageFilter) && userId) {
+      defaultFilter.searchArea = RoomSearchArea.AiHub;
+      setUserFilter(aiHubFilterKey, defaultFilter);
+      aiHubStorageFilter = dtoFilter;
+    }
+
     const currentStorageFilter =
       dtoFilter.searchArea === RoomSearchArea.Active
         ? sharedStorageFilter
@@ -517,7 +529,9 @@ class RoomsFilter {
           ? archivedStorageFilter
           : dtoFilter.searchArea === RoomSearchArea.Templates
             ? templatesStorageFilter
-            : "";
+            : dtoFilter.searchArea === RoomSearchArea.AiHub
+              ? aiHubStorageFilter
+              : "";
 
     const urlParams =
       withLocalStorage && currentStorageFilter

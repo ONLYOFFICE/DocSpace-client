@@ -123,4 +123,16 @@ describe("ContextOptionsStore — action handler delegation (batch 11)", () => {
     expect(getFileLink).toHaveBeenCalledWith(1);
     expect(copyShareLink).toHaveBeenCalledWith("http://x");
   });
+
+  it("onCopyLink (file in an AI room) -> the members link, never an external one", async () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: { shared: true, navigationPath: [] },
+      filesSettingsStore: { isLinkBlockedByAdmin: () => false },
+    });
+    await store.onCopyLink(
+      item({ canShare: true, rootFolderType: FolderType.AiHub, shortWebUrl: "http://short" }),
+      t,
+    );
+    expect(getFileLink).not.toHaveBeenCalled();
+  });
 });

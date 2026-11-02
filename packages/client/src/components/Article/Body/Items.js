@@ -84,7 +84,6 @@ const Item = ({
   getLinkData,
   onBadgeClick,
   roomsFolderId,
-  aiAgentsFolderId,
   setDropTargetPreview,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
@@ -215,11 +214,7 @@ const Item = ({
           <NewFilesBadge
             newFilesCount={labelBadge}
             folderId={
-              item.id === roomsFolderId
-                ? "rooms"
-                : item.id === aiAgentsFolderId
-                  ? "agents"
-                  : item.id
+              item.id === roomsFolderId ? "rooms" : item.id
             }
             parentDOMId={folderId}
             onBadgeClick={onBadgeClick}
@@ -227,7 +222,7 @@ const Item = ({
         }
         linkData={linkData}
         $currentColorScheme={currentColorScheme}
-        dataTooltipId={`aiAgentsTooltip${item.id}`}
+        dataTooltipId={`catalogItemTooltip${item.id}`}
         LinkRouter={Link}
       />
     </DragAndDrop>
@@ -275,7 +270,6 @@ const Items = ({
 
   getLinkData,
   roomsFolderId,
-  aiAgentsFolderId,
   setDropTargetPreview,
 }) => {
   const getFolderIcon = React.useCallback((item) => {
@@ -390,7 +384,6 @@ const Items = ({
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
             currentColorScheme={currentColorScheme}
             roomsFolderId={roomsFolderId}
-            aiAgentsFolderId={aiAgentsFolderId}
             onHide={onHide}
             isIndexEditingMode={isIndexEditingMode}
             setDropTargetPreview={setDropTargetPreview}
@@ -405,27 +398,8 @@ const Items = ({
         (f) => f.rootFolderType === FolderType.USER,
       );
 
-      const hasAIAgents = elm.some(
-        (f) => f.rootFolderType === FolderType.AIAgents,
-      );
-
-      let dividerAfterAgents = hasAIAgents ? 1 : 0;
-      let dividerAfterRooms = hasAIAgents ? 4 : 2;
-      let dividerAfterRecent = hasAIAgents ? 8 : 6;
-
-      if (!hasMyDocuments) {
-        dividerAfterAgents = hasAIAgents ? 1 : 0;
-        dividerAfterRooms = hasAIAgents ? 3 : 1;
-        dividerAfterRecent = hasAIAgents ? 7 : 5;
-      }
-
-      if (hasAIAgents) {
-        items.splice(
-          dividerAfterAgents,
-          0,
-          <CatalogDivider key="ai-agents-divider" />,
-        );
-      }
+      const dividerAfterRooms = hasMyDocuments ? 2 : 1;
+      const dividerAfterRecent = hasMyDocuments ? 6 : 5;
 
       items.splice(
         dividerAfterRooms,
@@ -521,7 +495,6 @@ export default inject(
       commonFolderId,
       isPrivacyFolder,
       roomsFolderId,
-      aiAgentsFolderId,
     } = treeFoldersStore;
 
     const { id, access: folderAccess } = selectedFolderStore;
@@ -569,7 +542,6 @@ export default inject(
       folderAccess,
       currentColorScheme,
       roomsFolderId,
-      aiAgentsFolderId,
       isIndexEditingMode,
       setDropTargetPreview,
     };

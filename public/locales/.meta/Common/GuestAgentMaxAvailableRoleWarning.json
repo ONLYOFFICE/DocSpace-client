@@ -3,7 +3,7 @@
   "content": "Guests cannot be assigned as Content creator.\nOnly Room admins, Full admins and Users are eligible for this role.",
   "content_en_sha1_hash": "e21f3e636f2b0d1a18825e95caf57242921a972c",
   "created_at": "2026-08-13T14:36:53.405Z",
-  "updated_at": "2026-10-22T16:09:36.874Z",
+  "updated_at": "2026-10-31T12:58:29.607Z",
   "comment": {
     "text": "Tooltip or warning text in the Invite or Members panel that appears when attempting to assign the \"Content creator\" role to a guest user.",
     "is_auto": true,
@@ -11,18 +11,6 @@
     "model": "gemma4:26b"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/panels/InvitePanel/utils/index.js",
-      "line_number": 100,
-      "context": "if (!viewerRole) return item;\n \n item.warning =\n item.access === ShareAccessRights.RoomManager\n ? t(\"Common:UserAgentMaxAvailableRoleWarning\")\n : t(\"Common:GuestAgentMaxAvailableRoleWarning\");\n item.access = viewerRole.access;\n \n return item;\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 72,
-      "context": "},\n collaborator: {\n key: \"collaborator\",\n label: this.t(\"Common:ContentCreator\"),\n access: ShareAccessRights.Collaborator,\n tooltip: this.t(\"Common:GuestAgentMaxAvailableRoleWarning\"),\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",\n label: this.t(\"Common:RoleViewer\"),",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/Members.utils.ts",
       "line_number": 72,

@@ -110,6 +110,7 @@ const MetadataTemplates = () => {
       {editingTemplate !== undefined ? (
         <TemplatePanel
           template={editingTemplate}
+          templates={templates}
           onClose={closePanel}
           onSaved={onSaved}
           onApplied={loadTemplates}

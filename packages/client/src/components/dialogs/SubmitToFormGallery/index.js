@@ -182,7 +182,6 @@ const SubmitToFormGallery = ({
 				onClose={onCloseFormSelector}
 				withRecentTreeFolder
 				withFavoritesTreeFolder
-				withAIAgentsTreeFolder
 				isSelect
 				isPortalView
 				withoutDescriptionText

@@ -65,7 +65,6 @@ import {
   TShareSettings,
 } from "@docspace/shared/api/files/types";
 import {
-  TAIRoomChatSettings,
   TRoom,
   TRoomLifetime,
   TRoomSecurity,
@@ -92,9 +91,6 @@ export type TNavigationPath = {
   external?: boolean;
   /** Set by FilesStore.fetchFiles for the room-templates root entry. */
   isRootTemplates?: boolean;
-  /** Folder type of the path part (used to drop Knowledge/ResultStorage
-   * entries). */
-  folderType?: FolderType;
   /** Set by the .js FilesStore for template folders; read by
    * FilesActionsStore.moveToRoomsPage. */
   isTemplatesFolder?: boolean;
@@ -223,8 +219,6 @@ class SelectedFolderStore {
 
   passwordProtected: boolean = false;
 
-  chatSettings: TAIRoomChatSettings | undefined;
-
   rootRoomType: Nullable<RoomsType> = null;
 
   rootRoomId: number | string = "";
@@ -284,7 +278,6 @@ class SelectedFolderStore {
       pinned: this.pinned,
       isRoom: this.isRoom,
       isTemplate: this.isTemplate,
-      isAIAgent: this.isAIAgent,
       logo: this.logo,
       tags: this.tags,
       rootFolderId: this.rootFolderId,
@@ -310,10 +303,6 @@ class SelectedFolderStore {
       external: this.external,
       changeDocumentsTabs: this.changeDocumentsTabs,
       isIndexedFolder: this.isIndexedFolder,
-      isAIRoom: this.isAIRoom,
-      isInsideResultStorage: this.isInsideResultStorage,
-      isInsideKnowledge: this.isInsideKnowledge,
-      chatSettings: this.chatSettings,
       rootRoomType: this.rootRoomType,
       rootRoomId: this.rootRoomId,
       shareSettings: this.shareSettings,
@@ -386,7 +375,6 @@ class SelectedFolderStore {
     this.watermark = null;
     this.passwordProtected = false;
     this.external = false;
-    this.chatSettings = undefined;
     this.rootRoomType = null;
     this.rootRoomId = "";
     this.shareSettings = null;
@@ -591,18 +579,6 @@ class SelectedFolderStore {
     }
   };
 
-  get isAIRoom() {
-    return (
-      this.roomType === RoomsType.AIRoom ||
-      this.navigationPath.some((r) => r.roomType === RoomsType.AIRoom) ||
-      this.rootRoomType === RoomsType.AIRoom
-    );
-  }
-
-  get isAIAgent() {
-    return this.roomType === RoomsType.AIRoom;
-  }
-
   get roomQuotaLimit() {
     const { navigationPath } = this;
     return navigationPath.length >= 2
@@ -633,20 +609,6 @@ class SelectedFolderStore {
     if (roomUsedSpace === undefined) return false;
 
     return roomUsedSpace >= roomQuotaLimit;
-  }
-
-  get isInsideResultStorage() {
-    return (
-      this.type === FolderType.ResultStorage ||
-      this.pathParts.some((r) => r.folderType === FolderType.ResultStorage)
-    );
-  }
-
-  get isInsideKnowledge() {
-    return (
-      this.type === FolderType.Knowledge ||
-      this.pathParts.some((r) => r.folderType === FolderType.Knowledge)
-    );
   }
 }
 

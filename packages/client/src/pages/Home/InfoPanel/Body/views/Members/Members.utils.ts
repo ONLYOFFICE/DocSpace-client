@@ -58,18 +58,23 @@ class MembersHelper {
         access: ShareAccessRights.RoomManager,
         type: "manager",
       },
-      agentAdmin: {
-        key: "agentAdmin",
-        label: this.t("Common:AgentManager"),
-        tooltip: this.t("Common:UserAgentMaxAvailableRoleWarning"),
+      projectManager: {
+        key: "projectManager",
+        label: this.t("Common:AIProjectManager"),
+        tooltip: this.t("Common:UserMaxAvailableRoleWarning"),
         access: ShareAccessRights.RoomManager,
         type: "manager",
+      },
+      projectMember: {
+        key: "projectMember",
+        label: this.t("Common:Member"),
+        access: ShareAccessRights.ReadOnly,
+        type: "user",
       },
       collaborator: {
         key: "collaborator",
         label: this.t("Common:ContentCreator"),
         access: ShareAccessRights.Collaborator,
-        tooltip: this.t("Common:GuestAgentMaxAvailableRoleWarning"),
         type: "collaborator",
       },
       viewer: {
@@ -120,7 +125,17 @@ class MembersHelper {
       : [];
 
     switch (roomType) {
+      // A Knowledge room has no Editor: its files are only read or uploaded.
+      case RoomsType.KnowledgeRoom:
+        return [
+          options.roomAdmin,
+          options.collaborator,
+          options.viewer,
+          ...deleteOption,
+        ];
+
       case RoomsType.EditingRoom:
+      case RoomsType.InstructionsRoom:
         return [
           options.roomAdmin,
           options.collaborator,
@@ -158,31 +173,33 @@ class MembersHelper {
           options.viewer,
           ...deleteOption,
         ];
-      case RoomsType.AIRoom:
-        return [
-          options.agentAdmin,
-          options.collaborator,
-          options.viewer,
-          ...deleteOption,
-        ];
+      case RoomsType.AiProjectRoom:
+        return [options.projectManager, options.projectMember, ...deleteOption];
       default:
         return [];
     }
   };
 
-  getOptionByUserAccess = (
-    access: ShareAccessRights,
-    isAIAgentsFolderRoot?: boolean,
-  ) => {
+  getOptionByUserAccess = (access: ShareAccessRights, roomType?: RoomsType) => {
     if (!access) return;
 
     const options = this.getOptions();
 
-    if (isAIAgentsFolderRoot && access === ShareAccessRights.RoomManager)
-      return options.agentAdmin;
+    // A project names its two roles after itself.
+    if (roomType === RoomsType.AiProjectRoom) {
+      if (access === ShareAccessRights.RoomManager)
+        return options.projectManager;
+      if (access === ShareAccessRights.ReadOnly)
+        return options.projectMember;
+    }
 
+    // The project roles share their access with Room manager and Viewer,
+    // so any other room never resolves to them.
     const [userOption] = Object.values(options).filter(
-      (opt) => opt.access === access,
+      (opt) =>
+        opt.access === access &&
+        opt.key !== "projectManager" &&
+        opt.key !== "projectMember",
     );
 
     return userOption;

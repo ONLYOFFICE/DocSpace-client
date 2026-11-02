@@ -136,18 +136,6 @@ export const useModuleLauncher = ({
         return;
       }
 
-      if (modId === "ai-agents") {
-        try {
-          const activated = await activate("ai-agents");
-          if (activated) navigate("/agents");
-          else toastr.error(t("Common:SomethingWentWrong"));
-        } catch (err) {
-          console.error("Failed to activate ai-agents", err);
-          toastr.error(t("Common:SomethingWentWrong"));
-        }
-        return;
-      }
-
       if (modId === "ai-rooms") {
         setEnableAiRoomsVisible(true);
         return;

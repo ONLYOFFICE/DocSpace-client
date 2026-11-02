@@ -82,7 +82,6 @@ import ChatPanelView from "@onlyoffice/apps-ui-kit/components/section/sub-compon
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
-import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 import { IntegrationsCard } from "SRC_DIR/components/IntegrationsCard";
 import {
   useChatNoAccess,
@@ -118,10 +117,6 @@ type DashboardProps = ChatNoAccessStoreProps & {
   isAdminOrOwner: boolean;
   /** Whether Docs Connect can be offered at all — SaaS, admin or owner. */
   canOpenDocsConnect: boolean;
-  /** Whether the portal's AI is set up, which agent creation also needs. */
-  aiReady: boolean;
-  /** The portal-wide AI switch: with it off the AI Agents card is dropped. */
-  aiServicesEnabled: boolean;
   /** Names the plan in the apps subtitle: Startup when free, Business when paid. */
   isFreeTariff: boolean;
   /** Startup and Business are SaaS tariffs; standalone gets the neutral copy. */
@@ -152,8 +147,6 @@ const Dashboard = (props: DashboardProps) => {
     canCreateRooms,
     isAdminOrOwner,
     canOpenDocsConnect,
-    aiReady,
-    aiServicesEnabled,
     isFreeTariff,
     standalone,
     isWarningRoomsDialog,
@@ -195,12 +188,6 @@ const Dashboard = (props: DashboardProps) => {
 
   const createItems = useCreateActions(myFolderId, isGuest, isAiChatAvailable);
 
-  // Agent creation needs AI to be set up on top of the create right. `aiReady`
-  // (portal /ai/config) can lag behind the chat-lib profiles, so existing
-  // profiles count as ready too — the same signal Home and the agents EmptyView
-  // use to decide whether to offer agent creation.
-  const hasAiProfiles = useHasAiProfiles();
-
   React.useEffect(() => {
     ensureAppsLoaded();
   }, [ensureAppsLoaded]);
@@ -208,8 +195,6 @@ const Dashboard = (props: DashboardProps) => {
   const moduleItems = useModuleItems({
     isGuest,
     canCreateRooms,
-    canCreateAgents: (aiReady || hasAiProfiles) && canCreateRooms,
-    aiServicesEnabled,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
     isAppInstalled,
@@ -481,7 +466,6 @@ const DashboardConnected = inject((stores: TStore) => {
     filesTourStore,
     roomsTourStore,
     formsTourStore,
-    aiAgentsTourStore,
     dashboardTourStore,
     appsStore,
     infoPanelStore,
@@ -493,7 +477,6 @@ const DashboardConnected = inject((stores: TStore) => {
     "ai-files": filesTourStore,
     "ai-rooms": roomsTourStore,
     "ai-forms": formsTourStore,
-    "ai-agents": aiAgentsTourStore,
   } as const;
 
   return {
@@ -506,7 +489,7 @@ const DashboardConnected = inject((stores: TStore) => {
         appTourStores[appId as keyof typeof appTourStores].requestTour();
     },
     requestDashboardTour: dashboardTourStore.requestTour,
-    // Same set the Home quick actions and the agents header button gate on.
+    // Same set the Home quick actions gate on.
     canCreateRooms: authStore.isAdmin || authStore.isRoomAdmin,
     // Room admins are excluded here: the apps subtitle names the portal's plan,
     // which only admins and the owner see. Same flags the Header and
@@ -520,10 +503,6 @@ const DashboardConnected = inject((stores: TStore) => {
       settingsStore.standalone,
       settingsStore.limitedAccessDevToolsForUsers,
     ),
-    aiReady: settingsStore.aiConfig?.aiReady ?? false,
-    // The portal's own AI switch, which is a stronger statement than `aiReady`:
-    // AI that is off is not "not set up yet", it is not on offer at all.
-    aiServicesEnabled: settingsStore.aiServicesEnabled,
     // Undefined until the tariff loads; the plan is free by default, matching
     // the header's own fallback.
     isFreeTariff: currentQuotaStore.isFreeTariff ?? true,

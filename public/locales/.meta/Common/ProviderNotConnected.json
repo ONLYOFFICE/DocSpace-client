@@ -3,7 +3,7 @@
   "content": "Provider is not connected to your account",
   "content_en_sha1_hash": "ed6647eb55027d0d5abf74e208b43017b22a7669",
   "created_at": "2025-05-19T21:30:47.595Z",
-  "updated_at": "2026-10-29T13:57:47.761Z",
+  "updated_at": "2026-10-31T12:58:29.463Z",
   "comment": {
     "text": "This is an error message displayed in a toast notification. It informs the user that a third-party provider (e.g., Google, Facebook) is not linked to their ONLYOFFICE DocSpace account, appearing when a login attempt through that provider fails.",
     "is_auto": true,

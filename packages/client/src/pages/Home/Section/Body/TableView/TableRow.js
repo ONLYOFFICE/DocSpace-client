@@ -48,7 +48,6 @@ import withFileActions from "../../../../../HOCs/withFileActions";
 import ItemIcon from "../../../../../components/ItemIcon";
 
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
-import AIAgentsRowDataComponent from "./sub-components/AIAgentsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
 import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
@@ -99,7 +98,6 @@ const FilesTableRow = memo((props) => {
     isFavoritesFolder,
     isSharedWithMeFolder,
     isInSharedFolder,
-    isAIAgentsFolder,
     canDrag,
     onEditIndex,
     isIndexUpdated,
@@ -323,13 +321,6 @@ const FilesTableRow = memo((props) => {
           />
         ) : isRooms ? (
           <RoomsRowDataComponent
-            element={element}
-            dragStyles={dragStyles}
-            isHovered={isHovered}
-            {...props}
-          />
-        ) : isAIAgentsFolder ? (
-          <AIAgentsRowDataComponent
             element={element}
             dragStyles={dragStyles}
             isHovered={isHovered}

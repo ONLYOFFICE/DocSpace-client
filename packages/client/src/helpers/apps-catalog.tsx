@@ -65,7 +65,6 @@ import { useTranslation } from "react-i18next";
 import CatalogFolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
 import CatalogRoomsIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg";
 import CatalogDocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg";
-import AiAgentsIcon from "PUBLIC_DIR/images/icons/16/ai-agents.svg";
 import CatalogAiArbiterIcon from "PUBLIC_DIR/images/icons/16/catalog.ai-arbiter.react.svg";
 import CatalogPrivateIcon from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg";
 
@@ -75,7 +74,6 @@ export type AppId =
   | "ai-files"
   | "ai-rooms"
   | "ai-forms"
-  | "ai-agents"
   | "ai-arbiter"
   | "e2e-rooms";
 
@@ -93,12 +91,7 @@ export type AppCatalogItem = {
  * arbiter and private rooms are still unreleased: they stay behind their opt-in
  * flags (see disabled-apps) and are filtered out below without them.
  */
-export const useAppsCatalog = ({
-  aiServicesEnabled,
-}: {
-  /** With AI switched off portal-wide, AI Agents is not on offer at all. */
-  aiServicesEnabled: boolean;
-}): AppCatalogItem[] => {
+export const useAppsCatalog = (): AppCatalogItem[] => {
   const { t } = useTranslation(["Common"]);
 
   const catalog: AppCatalogItem[] = [
@@ -123,17 +116,6 @@ export const useAppsCatalog = ({
       description: t("Common:DashboardFormsDescription"),
       alwaysOn: false,
     },
-    ...(aiServicesEnabled
-      ? [
-          {
-            id: "ai-agents" as const,
-            icon: <AiAgentsIcon />,
-            title: t("Common:AIAgents"),
-            description: t("Common:DashboardAIChatAgentsDescription"),
-            alwaysOn: false,
-          },
-        ]
-      : []),
     {
       id: "ai-arbiter",
       icon: <CatalogAiArbiterIcon />,

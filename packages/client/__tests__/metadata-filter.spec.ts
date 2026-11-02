@@ -240,7 +240,9 @@ test.describe("Metadata filter", () => {
       ])}`,
     );
 
-    await expect(chip(page, "template")).toContainText("Template: Contract");
+    await expect(chip(page, "template")).toContainText(
+      "Metadata template: Contract",
+    );
     await expect(page).toHaveURL(/metadataTemplateId=1/);
     expect(new URL(page.url()).searchParams.has("metadataFilters")).toBe(false);
   });

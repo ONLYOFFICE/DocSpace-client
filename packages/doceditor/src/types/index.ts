@@ -330,7 +330,7 @@ export interface SelectFolderDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | FileEntryDtoIntegerAllOfSecurity
@@ -370,7 +370,7 @@ export interface SelectFileDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | FileEntryDtoIntegerAllOfSecurity
@@ -517,7 +517,7 @@ export type StartFillingSelectorDialogProps = {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | FileEntryDtoIntegerAllOfSecurity

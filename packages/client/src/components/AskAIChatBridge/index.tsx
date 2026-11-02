@@ -35,12 +35,8 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { SearchArea } from "@docspace/shared/enums";
-import { CategoryType } from "@docspace/shared/constants";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useStores as useAiChatStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
@@ -50,7 +46,6 @@ import {
   notifyAttachmentLimit,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/files";
 
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { useStore } from "SRC_DIR/store/useStore";
 
 /**
@@ -66,9 +61,6 @@ const AskAIChatBridgeComponent = () => {
   const { t } = useTranslation("Common");
 
   const dialogsStore = useStore("dialogsStore");
-  const aiRoomStore = useStore("aiRoomStore");
-  const selectedFolderStore = useStore("selectedFolderStore");
-  const navigate = useNavigate();
   const pendingFile = dialogsStore.askAIFile;
 
   const openChat = useOpenAiChat();
@@ -83,30 +75,9 @@ const AskAIChatBridgeComponent = () => {
     const { file, analyze } = dialogsStore.consumeAskAIFile();
     if (!file) return;
 
-    // Inside an AI room the chat is not the side panel (which is disabled
-    // there — see `isAiChatAvailable` in Shell) but the room's chat tab, so
-    // "Ask AI" from the Knowledge / Result storage tabs must navigate to it
-    // instead of raising the panel flag nobody renders (Bug 83446). Mirrors
-    // the chat branch of AiRoomTabs' onSelect, without starting a new
-    // thread — the attachment must land in the room's current conversation.
-    if (selectedFolderStore.isAIRoom && !aiRoomStore.isChatTab) {
-      aiRoomStore.setCurrentTab("chat");
-      aiRoomStore.setKnowledgeId(null);
-      aiRoomStore.setResultId(null);
-
-      const folder = selectedFolderStore.rootRoomId || selectedFolderStore.id;
-      const filesFilter = FilesFilter.getDefault();
-      filesFilter.folder = folder?.toString() ?? "";
-      filesFilter.searchArea = SearchArea.Any;
-
-      navigate(
-        `${getCategoryUrl(CategoryType.Chat, folder)}?${filesFilter.toUrlParams()}`,
-      );
-    } else {
-      // Opening a closed panel starts a fresh thread; an already open chat
-      // keeps its conversation and just receives the attachment.
-      openChat();
-    }
+    // Opening a closed panel starts a fresh thread; an already open chat
+    // keeps its conversation and just receives the attachment.
+    openChat();
     // The chat may have been left on the history page, where the composer —
     // and therefore the freshly attached chip — is not on screen.
     setCurrentPage("chat");
@@ -132,9 +103,6 @@ const AskAIChatBridgeComponent = () => {
   }, [
     pendingFile,
     dialogsStore,
-    aiRoomStore,
-    selectedFolderStore,
-    navigate,
     openChat,
     setCurrentPage,
     attachFilesToChat,

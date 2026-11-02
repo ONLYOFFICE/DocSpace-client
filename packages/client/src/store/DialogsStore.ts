@@ -158,21 +158,6 @@ type TCreateRoomDialogProps = {
   item?: unknown;
 };
 
-type TCreateAgentDialogProps = {
-  title?: string;
-  visible: boolean;
-  onClose: Nullable<VoidFunction>;
-  item?: unknown;
-  context?: string;
-};
-
-type TEditAgentDialogProps = {
-  visible: boolean;
-  item: unknown;
-  onClose: Nullable<VoidFunction>;
-  context?: string;
-};
-
 type TCreatePDFFormFileProps = {
   visible: boolean;
   file: Nullable<TFile>;
@@ -248,6 +233,8 @@ class DialogsStore {
 
   selectFileFormRoomDialogVisible = false;
 
+  selectFileKnowledgeRoomDialogVisible = false;
+
   convertPasswordDialogVisible = false;
 
   inviteQuotaWarningDialogVisible = false;
@@ -322,8 +309,6 @@ class DialogsStore {
   saveAfterReconnectOAuth = false;
 
   createRoomDialogVisible = false;
-
-  createAgentDialogVisible = false;
 
   createRoomConfirmDialogVisible = false;
 
@@ -417,18 +402,6 @@ class DialogsStore {
     onClose: null,
   };
 
-  createAgentDialogProps: TCreateAgentDialogProps = {
-    title: "",
-    visible: false,
-    onClose: null,
-  };
-
-  editAgentDialogProps: TEditAgentDialogProps = {
-    visible: false,
-    item: null,
-    onClose: null,
-  };
-
   createPDFFormFileProps: TCreatePDFFormFileProps = {
     visible: false,
     file: null,
@@ -495,8 +468,6 @@ class DialogsStore {
   };
 
   socialAuthWelcomeDialogVisible = false;
-
-  selectFileAiKnowledgeDialogVisible = false;
 
   connectAccountDialogVisible = false;
 
@@ -596,14 +567,6 @@ class DialogsStore {
 
   setCreateRoomDialogProps = (props: TCreateRoomDialogProps) => {
     this.createRoomDialogProps = props;
-  };
-
-  setCreateAgentDialogProps = (props: TCreateAgentDialogProps) => {
-    this.createAgentDialogProps = props;
-  };
-
-  setEditAgentDialogProps = (props: TEditAgentDialogProps) => {
-    this.editAgentDialogProps = props;
   };
 
   setInviteLanguage = (culture: { key: string; label: string }) => {
@@ -974,8 +937,9 @@ class DialogsStore {
     this.selectFileFormRoomOpenRoot = openRoot;
   };
 
-  setSelectFileAiKnowledgeDialogVisible = (visible: boolean) => {
-    this.selectFileAiKnowledgeDialogVisible = visible;
+  /** The workspace picker that copies files into the current Knowledge room. */
+  setSelectFileKnowledgeRoomDialogVisible = (visible: boolean) => {
+    this.selectFileKnowledgeRoomDialogVisible = visible;
   };
 
   createMasterForm = async (
@@ -1073,10 +1037,6 @@ class DialogsStore {
 
   setCreateRoomDialogVisible = (createRoomDialogVisible: boolean) => {
     this.createRoomDialogVisible = createRoomDialogVisible;
-  };
-
-  setCreateAgentDialogVisible = (value: boolean) => {
-    this.createAgentDialogVisible = value;
   };
 
   setCreateRoomConfirmDialogVisible = (

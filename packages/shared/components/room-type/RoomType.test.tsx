@@ -113,6 +113,17 @@ describe("RoomType", () => {
       expect(defaultProps.onClick).not.toHaveBeenCalled();
     });
 
+    it("disables any room type with isDisabled", () => {
+      render(
+        <RoomType {...defaultProps} roomType={RoomsType.KnowledgeRoom} isDisabled />,
+      );
+
+      const listItem = screen.getByTestId("room-type-list-item");
+      expect(listItem).toHaveAttribute("aria-disabled", "true");
+      fireEvent.click(listItem);
+      expect(defaultProps.onClick).not.toHaveBeenCalled();
+    });
+
     // Enter on a disabled type swallowed the keyup that followed anywhere
     // on the page, though nothing was chosen.
     it("leaves the keyup to the page when a disabled type ignores the key", () => {

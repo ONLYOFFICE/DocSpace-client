@@ -65,7 +65,6 @@ import {
   DeviceType,
   FolderType,
   WhiteLabelLogoType,
-  SearchArea,
 } from "@docspace/shared/enums";
 
 import { CategoryType, EMPTY_ARRAY } from "@docspace/shared/constants";
@@ -95,6 +94,7 @@ import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHea
 import { useContactsHeader } from "./useContacts";
 import { getWarningText } from "../getWarningText";
 import { AnalyzeResponsesButton } from "./sub-components/AnalyzeResponses";
+import { ChatToolbar } from "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -103,6 +103,10 @@ const SectionHeaderContent = (props) => {
     getGroupContextOptions,
     t,
     isRoomsFolder,
+    isAiHubFolder,
+    isAiSectionFolder,
+    isAiProjectRoomRoot,
+    isAiOff,
     security,
     setIsIndexEditingMode,
     tReady,
@@ -138,7 +142,6 @@ const SectionHeaderContent = (props) => {
     setIsLoading,
 
     moveToRoomsPage,
-    moveToAIAgentsPage,
     // setIsInfoPanelVisible,
 
     getContactsHeaderMenu,
@@ -175,7 +178,6 @@ const SectionHeaderContent = (props) => {
     getFolderModel,
     contactsCanCreate,
     onCreateRoom,
-    onCreateAgent,
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
@@ -196,12 +198,9 @@ const SectionHeaderContent = (props) => {
     isPrivacyFolder,
     showTemplateBadge,
 
-    isAIRoom,
-    isAIAgent,
     isRoomStorageQuotaExceeded,
     roomUsedSpace,
     roomQuotaLimit,
-    isKnowledgeTab,
     currentClientView,
     profile,
     profileClicked,
@@ -217,7 +216,6 @@ const SectionHeaderContent = (props) => {
     isRootRooms,
     isArchive,
     isSharedWithMeFolderRoot,
-    isAIAgentsFolder,
     filesSelection,
     isCollaborator,
     isVisitor,
@@ -287,7 +285,7 @@ const SectionHeaderContent = (props) => {
           if (f.length > 0) startUpload(f, null, t);
         })
         .catch((err) => {
-          toastr.error(err, null, 0, true);
+          toastr.error(err, undefined, 0, true);
         });
     },
     [startUpload, t],
@@ -368,8 +366,6 @@ const SectionHeaderContent = (props) => {
   }, [isContactsPage, setUsersSelected, setSelected]);
 
   const menuItems = React.useMemo(() => {
-    if (isAIAgentsFolder) return null;
-
     const checkboxOptions = isContactsPage ? (
       getContactsMenuItems()
     ) : (
@@ -392,13 +388,7 @@ const SectionHeaderContent = (props) => {
     );
 
     return checkboxOptions;
-  }, [
-    cbMenuItems,
-    isAIAgentsFolder,
-    isContactsPage,
-    getContactsMenuItems,
-    onSelect,
-  ]);
+  }, [cbMenuItems, isContactsPage, getContactsMenuItems, onSelect]);
 
   const onChange = React.useCallback(
     (checked) => {
@@ -418,10 +408,6 @@ const SectionHeaderContent = (props) => {
       }
 
       const rootFolderType = selectedFolder.rootFolderType;
-
-      if (isRootRoom && rootFolderType === FolderType.AIAgents) {
-        return moveToAIAgentsPage();
-      }
 
       if (isRootRoom || isRootTemplates) {
         return moveToRoomsPage();
@@ -452,10 +438,6 @@ const SectionHeaderContent = (props) => {
       const isRoomCalc =
         selectedFolder.navigationPath[itemIdx]?.isRoom || false;
 
-      if (isAIRoom && isRoomCalc) {
-        filter.searchArea = SearchArea.ResultStorage;
-      }
-
       const state = {
         title: selectedFolder.navigationPath[itemIdx]?.title || "",
         isRoot: itemIdx === selectedFolder.navigationPath.length - 1,
@@ -480,11 +462,9 @@ const SectionHeaderContent = (props) => {
     [
       isPublicRoom,
       moveToPublicRoom,
-      moveToAIAgentsPage,
       moveToRoomsPage,
       selectedFolder,
       setSelectedNode,
-      isAIRoom,
       setSelected,
       setIsLoading,
       isFormsRoute,
@@ -498,9 +478,8 @@ const SectionHeaderContent = (props) => {
 
   const onPlusClick = React.useCallback(() => {
     if (isContactsGroupsPage) return createGroup();
-    if (isAIAgentsFolder) return onCreateAgent();
     return onCreateRoom();
-  }, [isContactsGroupsPage, isAIAgentsFolder, onCreateAgent, onCreateRoom]);
+  }, [isContactsGroupsPage, onCreateRoom]);
 
   const isPlusButtonVisible =
     (isEmptyPage && !isContactsPage) ||
@@ -784,6 +763,10 @@ const SectionHeaderContent = (props) => {
         ? t("Common:Templates")
         : t("Common:Forms");
 
+    // The AI root is titled by the client, as the tree titles it.
+    if (getCategoryType(location) === CategoryType.AiHub)
+      return t("Common:AiRooms");
+
     if (isContactsPage) {
       switch (contactsTab) {
         case "people":
@@ -872,8 +855,8 @@ const SectionHeaderContent = (props) => {
     selectedFolder?.type,
   ]);
 
-  const currentCanCreate =
-    isAIRoom && !isKnowledgeTab ? false : security?.Create;
+  // Nothing is created in "AI rooms" until AI is set up on the portal.
+  const currentCanCreate = security?.Create && !(isAiHubFolder && isAiOff);
 
   const currentRootRoomTitle =
     navigationPath &&
@@ -902,8 +885,6 @@ const SectionHeaderContent = (props) => {
       categoryType === CategoryType.Form ||
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
-
-  const insideTheAgent = categoryType === CategoryType.AIAgent && !isAIAgent;
 
   const logo = React.useMemo(
     () =>
@@ -968,7 +949,8 @@ const SectionHeaderContent = (props) => {
     isRootFolder,
   ]);
 
-  const withMenu = !isRoomsFolder && !isContactsGroupsPage && !isAIAgentsFolder;
+  const withMenu =
+    !isRoomsFolder && !isAiSectionFolder && !isContactsGroupsPage;
 
   if (showHeaderLoader) return <SectionHeaderSkeleton />;
 
@@ -1039,7 +1021,9 @@ const SectionHeaderContent = (props) => {
                 !isAiChatAvailable ||
                 isSettingsPage ||
                 isPublicRoom ||
-                isProfile
+                isProfile ||
+                // An open AI project is its chat: nothing to toggle.
+                isAiProjectRoomRoot
               }
               titles={{
                 warningText,
@@ -1048,7 +1032,7 @@ const SectionHeaderContent = (props) => {
                   : undefined,
                 actions: isFormsSection
                   ? t("Common:CreateFormSet")
-                  : isRoomsFolder
+                  : isRoomsFolder || isAiHubFolder
                     ? t("Common:NewRoom")
                     : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
@@ -1077,7 +1061,7 @@ const SectionHeaderContent = (props) => {
               titleIconTooltip={titleIconTooltip}
               titleTooltip={titleTooltip}
               showRootFolderTitle={
-                insideTheRoom || insideTheAgent || isContactsInsideGroupPage
+                insideTheRoom || isContactsInsideGroupPage
               }
               currentDeviceType={currentDeviceType}
               isFrame={isFrame}
@@ -1094,9 +1078,24 @@ const SectionHeaderContent = (props) => {
               showBackButton={isProfile}
               contextMenuHeader={isProfile ? undefined : contextMenuHeader}
               analyzeResponsesButton={
-                <AnalyzeResponsesButton
-                  className={styles.analyzeResponsesButton}
-                />
+                isAiProjectRoomRoot ? (
+                  // The project's chat toolbar (history, new chat) takes the
+                  // slot after the room menu, as the agents' header did. A
+                  // project the caller is not a member of has no chat.
+                  selectedFolder?.inRoom ? (
+                    <ChatToolbar
+                      className={classnames(
+                        styles.analyzeResponsesButton,
+                        styles.projectChatToolbar,
+                      )}
+                      keepSessionProfile
+                    />
+                  ) : null
+                ) : (
+                  <AnalyzeResponsesButton
+                    className={styles.analyzeResponsesButton}
+                  />
+                )
               }
             />
             {showSignInButton ? (
@@ -1156,7 +1155,6 @@ export default inject(
     uploadDataStore,
     indexingStore,
     dialogsStore,
-    aiRoomStore,
     profileActionsStore,
     mediaViewerDataStore,
   }) => {
@@ -1201,10 +1199,12 @@ export default inject(
     const {
       isRecycleBinFolder,
       isRoomsFolder,
+      isAiHubFolder,
+      isAiSectionFolder,
+      isAiProjectRoomRoot,
       isArchiveFolder,
       isPersonalReadOnly,
       isSharedWithMeFolderRoot,
-      isAIAgentsFolder,
       isPrivacyFolder,
       isFormRoomRoot,
     } = treeFoldersStore;
@@ -1218,7 +1218,6 @@ export default inject(
       getHeaderMenu,
       isGroupMenuBlocked,
       moveToRoomsPage,
-      moveToAIAgentsPage,
       onClickBack,
       moveToPublicRoom,
       createFoldersTree,
@@ -1236,8 +1235,6 @@ export default inject(
       security,
       rootFolderType,
       shared,
-      isAIRoom,
-      isAIAgent,
       isRoomStorageQuotaExceeded,
       roomUsedSpace,
       roomQuotaLimit,
@@ -1256,7 +1253,6 @@ export default inject(
       onCreateAndCopySharedLink,
       getFolderModel,
       onCreateRoom,
-      onCreateAgent,
       getHeaderOptions,
       onEmptyTrashAction,
     } = contextOptionsStore;
@@ -1327,7 +1323,6 @@ export default inject(
       ? navigationPath[navigationPath.length - 1]?.id
       : selectedFolder.id;
 
-    const { isKnowledgeTab } = aiRoomStore;
     const { setDialogData, setChangeEmailVisible } = dialogStore;
     const {
       setChangePasswordVisible,
@@ -1401,6 +1396,10 @@ export default inject(
       setIsLoading,
 
       isRoomsFolder,
+      isAiHubFolder,
+      isAiSectionFolder,
+      isAiProjectRoomRoot,
+      isAiOff: settingsStore.aiReady === false,
 
       selectedFolder,
 
@@ -1410,7 +1409,6 @@ export default inject(
       isGroupMenuBlocked,
 
       moveToRoomsPage,
-      moveToAIAgentsPage,
       onClickBack,
       isPublicRoom,
 
@@ -1448,7 +1446,6 @@ export default inject(
       startUpload,
       getFolderModel,
       onCreateRoom,
-      onCreateAgent,
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,
@@ -1466,12 +1463,9 @@ export default inject(
       setCloseEditIndexDialogVisible,
       showTemplateBadge: isTemplate && !isRoot,
 
-      isAIRoom,
-      isAIAgent,
       isRoomStorageQuotaExceeded,
       roomUsedSpace,
       roomQuotaLimit,
-      isKnowledgeTab,
       contactsTab,
 
       profile: userStore.user,
@@ -1492,7 +1486,6 @@ export default inject(
       isRootRooms,
       isArchive,
       isSharedWithMeFolderRoot,
-      isAIAgentsFolder,
       filesSelection,
     };
   },

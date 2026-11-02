@@ -754,13 +754,8 @@ class ContextOptionsStore {
     }
   };
 
-  onClickPin = (
-    action: "pin" | "unpin",
-    id: number,
-    t: TTranslation,
-    isAIAgent = false,
-  ) => {
-    this.filesActionsStore.setPinAction(action, id, t, isAIAgent);
+  onClickPin = (action: "pin" | "unpin", id: number, t: TTranslation) => {
+    this.filesActionsStore.setPinAction(action, id, t);
   };
 
   onClickArchive = (action: "archive" | "unarchive") => {
@@ -994,23 +989,10 @@ class ContextOptionsStore {
       event.payload = { isFormsCreate: true };
     }
 
-    window.dispatchEvent(event);
-  };
-
-  onCreateAgent = () => {
-    // TODO: AI: Add quota if it needed
-
-    // if (this.currentQuotaStore.isWarningRoomsDialog) {
-    //   this.dialogsStore.setQuotaWarningDialogVisible(true);
-    //   return;
-    // }
-
-    const event = new CustomEvent(Events.AGENT_CREATE, {
-      detail: {
-        parentId: this.selectedFolderStore.id,
-        context: "context_menu",
-      },
-    });
+    // "AI rooms" draws its own chooser.
+    if (!fromItem && window.location.pathname.startsWith("/ai-rooms/")) {
+      event.payload = { isAiRoomsCreate: true };
+    }
 
     window.dispatchEvent(event);
   };
@@ -1075,8 +1057,8 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter, true);
   };
 
-  onShowAiKnowledgeSelectFileDialog = () => {
-    this.dialogsStore.setSelectFileAiKnowledgeDialogVisible(true);
+  onShowKnowledgeRoomSelectFileDialog = () => {
+    this.dialogsStore.setSelectFileKnowledgeRoomDialogVisible(true);
   };
 
   getContextOptionsPlusFormRoom = (

@@ -107,25 +107,27 @@ export function getAvailableInfoPanelTabs({
     };
   }
 
+  // An AI project (the projects page): its members, history and details.
+  if ("isAIProject" in selection && selection.isAIProject === true) {
+    return {
+      tabs: [
+        InfoPanelView.infoMembers,
+        InfoPanelView.infoHistory,
+        InfoPanelView.infoDetails,
+      ],
+      useRoomsView: true,
+    };
+  }
+
   const isRoomsType =
     !isRecentFolder &&
     isRoomUtil(selection) &&
     "rootFolderType" in selection &&
     (selection.rootFolderType === FolderType.Rooms ||
-      selection.rootFolderType === FolderType.Archive);
+      selection.rootFolderType === FolderType.Archive ||
+      selection.rootFolderType === FolderType.AiHub);
 
-  const isAgentType =
-    !isRecentFolder &&
-    "rootFolderType" in selection &&
-    "roomType" in selection &&
-    !!selection.roomType &&
-    selection.rootFolderType === FolderType.AIAgents;
-
-  const isAIAgentsSection =
-    "rootFolderType" in selection &&
-    selection.rootFolderType === FolderType.AIAgents;
-
-  const useRoomsView = isRoomsType || isAgentType;
+  const useRoomsView = isRoomsType;
 
   const tabs: InfoPanelViewType[] = [];
 
@@ -139,18 +141,23 @@ export function getAvailableInfoPanelTabs({
     "canShare" in selection &&
     selection.canShare &&
     !isRoomUtil(selection) &&
-    !isPrivateItem
+    !isPrivateItem &&
+    // No external links to files in the AI rooms (the server refuses them).
+    !(
+      "rootFolderType" in selection &&
+      selection.rootFolderType === FolderType.AiHub
+    )
   ) {
     tabs.push(InfoPanelView.infoShare);
   }
 
   tabs.push(InfoPanelView.infoHistory, InfoPanelView.infoDetails);
 
-  if (!isAIAgentsSection && isMetadataSupported(selection)) {
+  if (isMetadataSupported(selection)) {
     tabs.push(InfoPanelView.infoMetadata);
   }
 
-  if (!isAIAgentsSection && enablePlugins && infoPanelItemsList.length > 0) {
+  if (enablePlugins && infoPanelItemsList.length > 0) {
     const isRoomSelection = isRoomUtil(selection);
     const isFileSelection = isFileUtil(selection);
 

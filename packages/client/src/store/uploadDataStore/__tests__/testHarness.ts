@@ -107,7 +107,6 @@ import type { TFile } from "@docspace/shared/api/files/types";
 import { createTestFilesStore } from "../../filesStore/__tests__/testHarness";
 // eslint-disable-next-line import/first
 import {
-  fakeAiRoomStore,
   fakeFilesSettingsStore,
   fakeSelectedFolderStore,
   fakeSettingsStore,
@@ -132,7 +131,6 @@ export type UploadFakeStores = {
   primaryProgressDataStore: FakeStore;
   dialogsStore: FakeStore;
   filesSettingsStore: FakeStore;
-  aiRoomStore: FakeStore;
   userStore: FakeStore;
 };
 
@@ -145,7 +143,6 @@ const defaultFakes = (): UploadFakeStores => ({
   selectedFolderStore: {
     ...fakeSelectedFolderStore(),
     roomType: null,
-    isAIRoom: false,
   },
   secondaryProgressDataStore: {
     setSecondaryProgressBarData: vi.fn(),
@@ -174,10 +171,6 @@ const defaultFakes = (): UploadFakeStores => ({
     canConvert: vi.fn(() => false),
     hideConfirmConvertSave: false,
     storeOriginalFiles: false,
-  },
-  aiRoomStore: {
-    ...fakeAiRoomStore(),
-    knowledgeId: null,
   },
   userStore: fakeUserStore(),
 });
@@ -210,7 +203,6 @@ export const createTestUploadDataStore = (
       fakes.primaryProgressDataStore,
       fakes.dialogsStore,
       fakes.filesSettingsStore,
-      fakes.aiRoomStore,
       fakes.userStore,
     ] as unknown as ConstructorParameters<typeof UploadDataStore>),
   );

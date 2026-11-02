@@ -88,6 +88,7 @@ const MultiInputGroup = ({
   const [isError, setIsError] = React.useState(false);
 
   const addRef = React.useRef<null | HTMLDivElement>(null);
+  const inputRef = React.useRef<null | HTMLInputElement>(null);
   // const withoutSearch = name === "redirect_uris";
   const withoutSearch = true;
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,9 +138,14 @@ const MultiInputGroup = ({
     setValue("");
   }, [isDisabled, isError, name, onAdd, value, withoutSearch]);
 
-  // The add block is a div: a button to the keyboard.
+  // The add block is a div: a button to the keyboard. It hides once it adds
+  // the value, so the focus goes back to the field for the next one rather
+  // than falling to the page's body.
   const onAddKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) =>
-    activateOnButtonKey(e, onAddAction);
+    activateOnButtonKey(e, () => {
+      onAddAction();
+      inputRef.current?.focus();
+    });
 
   React.useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -221,6 +227,7 @@ const MultiInputGroup = ({
             type={InputType.text}
             noIcon
             testId={`${dataTestId}_input`}
+            forwardedRef={inputRef}
           />
           <div
             ref={addRef}

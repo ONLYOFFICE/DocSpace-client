@@ -76,7 +76,7 @@ The system SHALL cover both states of the portal setting in the client E2E suite
 **Reason**: Replaced by "Existing private rooms stay usable when the setting is off".
 **Migration**: None; behaviour is preserved under the new requirement.
 
-### Requirement: SDK private routes are not gated by the flag
+### Requirement: SDK private routes honour the host opt-in
 **Reason**: Replaced by "SDK private surface follows the server setting".
 **Migration**: The SDK reads the setting from the portal settings it already loads.
 

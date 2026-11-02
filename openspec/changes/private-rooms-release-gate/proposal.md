@@ -5,7 +5,8 @@
 Private rooms are hidden behind a browser-local opt-in (`privateRooms` in
 localStorage) because the feature was not releasable on 2026-08-14 and still
 is not. The opt-in is a discoverability control only: any user can set it
-from the console, the SDK private routes ignore it, and the server exposes
+from the console or with a `?privateRooms=` URL parameter, the SDK private
+routes and the embedded client take a host opt-in instead, and the server exposes
 every private-room endpoint regardless. Releasing means replacing that opt-in
 with a real availability control and proving, change by change, that the
 blockers found in the 2026-10-20 audit are closed. This change is the
@@ -62,20 +63,21 @@ None.
 ### Modified Capabilities
 
 - `private-rooms/feature-gating`: the browser-local opt-in requirements are
-  removed and replaced by a server-side availability setting; the SDK and
-  server "not gated" statements become obsolete; the E2E fixture requirement
-  is removed.
+  removed and replaced by a server-side availability setting; the SDK host
+  opt-in and the server "not gated" statement become obsolete; the E2E
+  fixture requirement is removed.
 
 ## Impact
 
 - Client: `packages/shared/utils/privateRooms.ts` (deleted),
-  `packages/shared/utils/rooms.tsx`, `packages/client/src/helpers/disabled-apps.ts`,
+  `packages/client/src/store/AppsStore.ts`, `packages/client/src/helpers/disabled-apps.ts`,
   `packages/client/src/routes/general.js`, `packages/client/src/pages/Profile/Section/Body/index.tsx`,
   `packages/shared/store/SettingsStore.ts` (new setting), E2E fixture
   `packages/client/__tests__/fixtures/base.ts`, spec
   `packages/client/__tests__/private-rooms-hidden.spec.ts` (replaced by a
   setting-off spec).
-- SDK: `packages/sdk/src/app/(private)` layout reads the setting.
+- SDK: `packages/sdk/src/app/(private)` layout, page guards and opt-in
+  helpers read the setting instead of the host opt-in.
 - Server (`../server`): a portal setting for private-room availability
   exposed in the settings payload; builds on the availability rule from
   `private-rooms-server-hardening`.

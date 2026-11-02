@@ -3,14 +3,25 @@
 ## Context
 
 See proposal.md. The opt-in lives in `packages/shared/utils/privateRooms.ts`
-(`isPrivateRoomsEnabled`, presence flag) and is read by the create-room
-chooser (`packages/shared/utils/rooms.tsx`), the unreleased-apps map
+(`isPrivateRoomsEnabled`, presence flag; `applyPrivateRoomsOptInFromUrl` sets
+it from a `?privateRooms=` URL parameter, which the SDK's keys-management
+link adds). The client's main gate is `AppsStore.isPrivateRoomsSectionAvailable`
+(`packages/client/src/store/AppsStore.ts`), which combines the flag with the
+frame opt-in `frameConfig.privateRooms` and feeds the create-room chooser,
+the protected app routes and the files store; the unreleased-apps map
 (`packages/client/src/helpers/disabled-apps.ts`), the route tables
 (`packages/client/src/routes/general.js`) and the profile tabs
-(`packages/client/src/pages/Profile/Section/Body/index.tsx`). The E2E base
-fixture sets it for every page (`packages/client/__tests__/fixtures/base.ts:75`)
-and `private-rooms-hidden.spec.ts` asserts the hidden state. The SDK never
-reads it, and the server has no availability rule yet; the rule itself is
+(`packages/client/src/pages/Profile/Section/Body/index.tsx`) read the flag
+directly. The SDK private routes are gated by the host opt-in since
+`private-rooms-sdk-gating-and-parity` (archived 2026-10-28): the frame
+property `privateRooms` (`packages/shared/types/Frame.ts`) is read in
+`(private)/_utils/private-rooms-opt-in.ts`, `_components/opt-in`, the
+layout, the page guards, `usePrivateRoute` and `usePrivateFrameBridge`. The
+E2E base fixture sets the flag for every page
+(`packages/client/__tests__/fixtures/base.ts`), `private-rooms-section.spec.ts`
+sets it too, `AppsStore.installed.test.ts` writes the raw `"privateRooms"`
+key, and `private-rooms-hidden.spec.ts` asserts the hidden state. The server
+has no availability rule yet; the rule itself is
 specified in `private-rooms-server-hardening` and this change only adds the
 administrator-facing setting on top of it.
 
@@ -81,3 +92,8 @@ proposal.md.
 
 - Where the setting is surfaced in the management UI (security section or
   rooms section). Owner: product design. Does not change the specs.
+- Whether the frame property `privateRooms` stays once the server setting
+  exists, as a host's way to hide the private surface on a portal that
+  allows it, or goes with the browser flag. Owner: feature owner. Decides
+  task 3.3 and the fate of "Client in an embedded frame takes the host
+  opt-in".

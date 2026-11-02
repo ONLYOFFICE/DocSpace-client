@@ -2,8 +2,8 @@
 
 ## 1. Gate criteria (no code; each box is ticked only by evidence)
 
-- [ ] 1.1 `private-rooms-upload-fail-closed` archived; verify with `openspec list` showing it under `changes/archive`
-- [ ] 1.2 `private-rooms-tofu-on-upload` archived; verify with `openspec list`
+- [x] 1.1 `private-rooms-upload-fail-closed` archived; verify with `openspec list` showing it under `changes/archive`. Archived 2026-10-20 (`changes/archive/2026-10-20-private-rooms-upload-fail-closed`)
+- [x] 1.2 `private-rooms-tofu-on-upload` archived; verify with `openspec list`. Archived 2026-10-20 (`changes/archive/2026-10-20-private-rooms-tofu-on-upload`)
 - [ ] 1.3 `private-rooms-invite-atomic-rewrap` archived; verify with `openspec list`
 - [ ] 1.4 `private-rooms-editor-contract` archived and the Document Server release named in its README; verify with `openspec list` and the README
 - [ ] 1.5 `private-rooms-device-unlock-policy` and `private-rooms-dse3-header-authentication` archived, or deferred with an accepted-limitation requirement merged into the main spec; verify with `openspec show private-rooms/encryption-core --type spec`
@@ -20,10 +20,10 @@
 
 ## 3. Remove the browser-local opt-in
 
-- [ ] 3.1 Replace `isPrivateRoomsEnabled` reads in `packages/shared/utils/rooms.tsx`, `packages/client/src/helpers/disabled-apps.ts`, `packages/client/src/routes/general.js` and `packages/client/src/pages/Profile/Section/Body/index.tsx` with the settings-store value, keeping Keys management reachable for users who hold keys; verify with `cd packages/shared && pnpm exec vitest run utils/privateRooms.test.ts` rewritten against the store and the client unit tests for the chooser
-- [ ] 3.2 Delete `packages/shared/utils/privateRooms.ts` and every import of `PRIVATE_ROOMS_FLAG_KEY`; verify with `pnpm run tsc`
-- [ ] 3.3 SDK: read the setting in `packages/sdk/src/app/(private)/layout.tsx` and render the setting-off empty state; verify with an SDK unit test and `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`
-- [ ] 3.4 E2E: remove the flag from `packages/client/__tests__/fixtures/base.ts`, replace `private-rooms-hidden.spec.ts` with a setting-off spec that mocks the settings payload; verify with `pnpm test:e2e:docker:start`
+- [ ] 3.1 Replace the opt-in reads in `AppsStore.privateRoomsOptIn` and `isPrivateRoomsSectionAvailable` in `packages/client/src/store/AppsStore.ts` (the frame opt-in follows the open question in design.md), `packages/client/src/helpers/disabled-apps.ts`, `packages/client/src/routes/general.js` and `packages/client/src/pages/Profile/Section/Body/index.tsx` with the settings-store value, keeping Keys management reachable for users who hold keys; verify with `cd packages/shared && pnpm exec vitest run utils/privateRooms.test.ts` rewritten against the store and the client unit tests for the chooser
+- [ ] 3.2 Delete `packages/shared/utils/privateRooms.ts` (the flag, `applyPrivateRoomsOptInFromUrl` and its `?privateRooms=` parameter) and every import of `PRIVATE_ROOMS_FLAG_KEY`, and the raw `"privateRooms"` key in `packages/client/src/store/__tests__/AppsStore.installed.test.ts`, which `tsc` does not catch; verify with `pnpm run tsc` and a search for `privateRooms` in localStorage calls
+- [ ] 3.3 SDK: read the setting in `packages/sdk/src/app/(private)/layout.tsx` and render the setting-off empty state, replacing the host opt-in of `_utils/private-rooms-opt-in.ts`, `_components/opt-in/PrivateRoomsOptInSource.tsx`, the guards of `private/page.tsx`, `private/archive/page.tsx` and `private/[roomId]/page.tsx`, `usePrivateRoute.ts`, `usePrivateFrameBridge.ts` and the parameter of `_utils/keys-management-link.ts` as the open question in design.md decides; verify with an SDK unit test and `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`
+- [ ] 3.4 E2E: remove the flag from `packages/client/__tests__/fixtures/base.ts` and `private-rooms-section.spec.ts`, replace `private-rooms-hidden.spec.ts` with a setting-off spec that mocks the settings payload; verify with `pnpm test:e2e:docker:start`
 
 ## 4. Documentation and release notes
 

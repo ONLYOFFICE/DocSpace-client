@@ -46,6 +46,10 @@ fixes, 8 the suspicions. One task is one commit with its tick (the
 
 - [ ] 9.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`, `pnpm run test:doceditor`), the client private-room E2E specs and the SDK private E2E folder, and `npx -y @fission-ai/openspec@latest validate private-rooms-spec-drift-fixes --strict`; all green
 
+## 10. Found by the integration run (2026-11-02)
+
+- [x] 10.1 Keyboard pass of `packages/client/__tests__/keys-management.spec.ts` ("Create a key and unlock it from the keyboard"): the ui-kit build of the merge of `release/v4.1.0` makes an `IconButton` with an action a tab stop (`role="button"`, `tabIndex` 0), so the recovery-phrase dialog's Close in the header is the first Tab stop, as "Tab order in key dialogs follows the visual order" requires; the pass now visits Close before Print. The two failures were the same on the code before this change. Verify: `pnpm test:e2e:docker:dev __tests__/keys-management.spec.ts`, both keyboard cases green
+
 ## Workflow follow-up
 
 - Add this change to the gate criteria of `private-rooms-release-gate` with `/opsx:update private-rooms-release-gate`.

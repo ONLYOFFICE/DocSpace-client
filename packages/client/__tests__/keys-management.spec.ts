@@ -418,6 +418,8 @@ test.describe("Profile > Keys Management: keyboard only", () => {
       });
       await expect(recovery).toBeVisible({ timeout: 15_000 });
       await page.keyboard.press("Tab");
+      await expect(recovery.getByRole("button", { name: "Close" })).toBeFocused();
+      await page.keyboard.press("Tab");
       await expect(
         recovery.getByRole("button", { name: "Print or save as PDF" }),
       ).toBeFocused();

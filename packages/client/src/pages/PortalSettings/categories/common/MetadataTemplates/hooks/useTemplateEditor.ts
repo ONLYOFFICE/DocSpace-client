@@ -37,6 +37,7 @@ import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { uuid } from "@onlyoffice/apps-ui-kit/utils/uuid";
 import {
   createMetadataField,
   createMetadataTemplate,
@@ -45,7 +46,10 @@ import {
   updateMetadataField,
   updateMetadataTemplate,
 } from "@docspace/shared/api/metadata";
-import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
+import type {
+  TMetadataFieldRequest,
+  TMetadataTemplate,
+} from "@docspace/shared/api/metadata/types";
 
 import type {
   TFieldDraft,
@@ -58,29 +62,64 @@ import {
   createFieldForm,
   getTemplateChanges,
   isValidField,
+  leavesTemplateEmpty,
   moveItem,
   settleInOrder,
+  settleRequests,
+  splitCreatedFields,
   toFieldRequest,
   toTemplateDraft,
   upsertField,
 } from "../utils";
 
-const applyFieldChanges = (
-  templateId: number,
+const applyFieldChanges = async (
+  template: TMetadataTemplate,
   { updated, removed, created }: TTemplateChanges,
   onApplied: () => void,
-) =>
-  settleInOrder(
+) => {
+  const { id: templateId } = template;
+  const { beforeRemoval, afterRemoval } = splitCreatedFields(
+    created,
+    template,
+  );
+  const update = ({ id, data }: { id: number; data: TMetadataFieldRequest }) =>
+    updateMetadataField(templateId, id, data);
+
+  if (!leavesTemplateEmpty(template, removed, beforeRemoval)) {
+    return settleInOrder(
+      [
+        () =>
+          beforeRemoval.map((data) => createMetadataField(templateId, data)),
+        () => removed.map((id) => deleteMetadataField(templateId, id)),
+        () => updated.map(update),
+        () => afterRemoval.map((data) => createMetadataField(templateId, data)),
+      ],
+      onApplied,
+    );
+  }
+
+  const renames: { id: number; data: TMetadataFieldRequest }[] = [];
+
+  await settleRequests(
+    afterRemoval.map((data) =>
+      createMetadataField(templateId, { ...data, name: uuid() }).then(
+        ({ id, options }) => {
+          renames.push({ id, data: { ...data, options } });
+        },
+      ),
+    ),
+    onApplied,
+  );
+
+  return settleInOrder(
     [
       () => removed.map((id) => deleteMetadataField(templateId, id)),
-      () =>
-        updated.map(({ id, data }) =>
-          updateMetadataField(templateId, id, data),
-        ),
-      () => created.map((data) => createMetadataField(templateId, data)),
+      () => updated.map(update),
+      () => renames.map(update),
     ],
     onApplied,
   );
+};
 
 export const useTemplateEditor = (
   template: TMetadataTemplate | null,
@@ -167,7 +206,7 @@ export const useTemplateEditor = (
           markApplied();
         }
 
-        await applyFieldChanges(original.id, changes, markApplied);
+        await applyFieldChanges(original, changes, markApplied);
       }
 
       toastr.success(t("Common:ChangesSavedSuccessfully"));

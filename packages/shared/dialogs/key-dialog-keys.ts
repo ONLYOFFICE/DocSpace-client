@@ -52,17 +52,6 @@ export const submitOnEnter =
   };
 
 /**
- * Key handler of an action link inside a key dialog. The kit's action links
- * carry no href, so Enter does nothing on them by itself; this clicks the link
- * on Enter, the way a button behaves, and leaves every other key alone.
- */
-export const activateOnEnter = (e: React.KeyboardEvent<Element>) => {
-  if (e.key !== "Enter" || e.defaultPrevented) return;
-  e.preventDefault();
-  (e.currentTarget as HTMLElement).click();
-};
-
-/**
  * Key handler of a control that acts as a button without being a `<button>`:
  * Enter and Space click it, as they press a native button. A held key clicks
  * once, and Space never scrolls the page, auto-repeats included.

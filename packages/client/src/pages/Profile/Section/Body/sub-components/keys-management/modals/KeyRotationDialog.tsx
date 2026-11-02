@@ -42,7 +42,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { KEY_DIALOG_DISPLAY_TYPE } from "@docspace/shared/dialogs/key-dialog-display";
 import { useKeyDialogCloseGuard } from "@docspace/shared/dialogs/key-dialog-close-guard";
-import { activateOnEnter, submitOnEnter } from "@docspace/shared/dialogs/key-dialog-keys";
+import { activateAsButton, submitOnEnter } from "@docspace/shared/dialogs/key-dialog-keys";
 import { useRefocusAfterFailure } from "@docspace/shared/dialogs/key-dialog-refocus";
 import { KeyDialogAnnouncement } from "@docspace/shared/dialogs/key-dialog-announcement";
 import UnsavedChangesDialog from "@docspace/shared/dialogs/unsaved-changes-dialog";
@@ -232,7 +232,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                     fontSize="12px"
                     isHovered
                     onClick={onForgotPassphrase}
-                    onKeyDown={activateOnEnter}
+                    onKeyDown={activateAsButton}
                     dataTestId="forgot_passphrase_link"
                   >
                     {t("Common:ForgotPassphrase")}

@@ -21,7 +21,7 @@ Progress note (2026-11-02, before 3.2 started in code): the approach for 3.2 is 
 
 ## 4. Action links
 
-- [ ] 4.1 Switch the key dialogs' action links from `activateOnEnter` to `activateAsButton` and delete `activateOnEnter` with its last caller (D4); verify with "Held Enter on an action link" in `packages/shared/dialogs/__tests__/key-dialog-keys.test.ts` (a repeated keydown clicks once) and `pnpm run tsc`
+- [x] 4.1 Switch the key dialogs' action links from `activateOnEnter` to `activateAsButton` and delete `activateOnEnter` with its last caller (D4); verify with "Held Enter on an action link" in `packages/shared/dialogs/__tests__/key-dialog-keys.test.ts` (a repeated keydown clicks once) and `pnpm run tsc`
 
 ## 4a. Owner directive of 2026-11-02: ui-kit components only
 

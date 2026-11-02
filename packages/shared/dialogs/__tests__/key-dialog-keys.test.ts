@@ -36,11 +36,7 @@
 import type React from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import {
-  activateAsButton,
-  activateOnEnter,
-  submitOnEnter,
-} from "../key-dialog-keys";
+import { activateAsButton, submitOnEnter } from "../key-dialog-keys";
 
 const keyEvent = (
   tag: "input" | "textarea" | "a",
@@ -127,28 +123,6 @@ describe("submitOnEnter", () => {
   });
 });
 
-describe("activateOnEnter", () => {
-  it("clicks the link on Enter and takes the key", () => {
-    const { event, preventDefault, click } = keyEvent("a", {});
-
-    activateOnEnter(event);
-
-    expect(click).toHaveBeenCalledTimes(1);
-    expect(preventDefault).toHaveBeenCalledTimes(1);
-  });
-
-  it("ignores other keys and handled ones", () => {
-    const space = keyEvent("a", { key: " " });
-    const handled = keyEvent("a", { defaultPrevented: true });
-
-    activateOnEnter(space.event);
-    activateOnEnter(handled.event);
-
-    expect(space.click).not.toHaveBeenCalled();
-    expect(handled.click).not.toHaveBeenCalled();
-  });
-});
-
 describe("activateAsButton", () => {
   it("clicks the control on Enter and on Space and takes the key", () => {
     const enter = keyEvent("a", {});
@@ -173,6 +147,18 @@ describe("activateAsButton", () => {
 
     expect(click).not.toHaveBeenCalled();
     expect(preventDefault).toHaveBeenCalledTimes(1);
+  });
+
+  it("Held Enter on an action link", () => {
+    const first = keyEvent("a", {});
+    const repeat = { ...first.event, repeat: true } as typeof first.event;
+
+    activateAsButton(first.event);
+    activateAsButton(repeat);
+    activateAsButton(repeat);
+
+    expect(first.click).toHaveBeenCalledTimes(1);
+    expect(first.preventDefault).toHaveBeenCalledTimes(3);
   });
 
   it("ignores other keys and handled ones", () => {

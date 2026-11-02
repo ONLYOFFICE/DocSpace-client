@@ -49,7 +49,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { useKeyDialogCloseGuard } from "../key-dialog-close-guard";
-import { activateOnEnter, submitOnEnter } from "../key-dialog-keys";
+import { activateAsButton, submitOnEnter } from "../key-dialog-keys";
 import { useRefocusAfterFailure } from "../key-dialog-refocus";
 import { KeyDialogAnnouncement } from "../key-dialog-announcement";
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
@@ -240,7 +240,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                     fontSize="13px"
                     isHovered
                     onClick={handleGeneratePassword}
-                    onKeyDown={activateOnEnter}
+                    onKeyDown={activateAsButton}
                     dataTestId="generate_passphrase_link"
                   >
                     {t("Common:GenerateLogoButton")}
@@ -305,7 +305,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                     fontSize="12px"
                     isHovered
                     onClick={onForgotPassphrase}
-                    onKeyDown={activateOnEnter}
+                    onKeyDown={activateAsButton}
                     dataTestId="forgot_passphrase_link"
                   >
                     {t("Common:ForgotPassphrase")}
@@ -340,7 +340,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                     onClick={() => {
                       if (!isLoading && !isPasskeyUnlocking) onPasskeyUnlock();
                     }}
-                    onKeyDown={activateOnEnter}
+                    onKeyDown={activateAsButton}
                     dataTestId="passkey_unlock_link"
                   >
                     {t("Common:PasskeyUnlockButton")}

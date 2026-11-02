@@ -54,6 +54,17 @@ already states; none comes from a stashed design document. Found on
 - Download: a single download without file keys or an own entry returns
   without a message (`filesActionsStore/download.helpers.ts:356-364`).
 
+Checked on the stand on 2026-11-02 (task 2.1; local stack on the server
+checkout `e9cfda8d43`, Document Server 10.0.2.5, signed in as the owner of
+private room 10): encrypted files never reach Recent. The server adds the
+Recent tag only through `EntryManager.MarkAsRecent`, which returns at once
+for an encrypted file (`products/ASC.Files/Core/Utils/EntryManager.cs:2117-2120`);
+on the stand Recent stayed empty although this account had opened files 7,
+40 and 42 in the editor, and `POST files/file/7/recent` answered 200 and
+left it empty. A Duplicate of an encrypted file from Recent is therefore not
+reachable today; the fix of task 2.2 stays, so the Duplicate takes its
+target from the file whatever list offers it.
+
 Checked on 2026-11-02 for the suspicions (tasks 8.1, 8.2):
 
 - Copy to from Recent: the selector decides the source by the open
@@ -65,9 +76,9 @@ Checked on 2026-11-02 for the suspicions (tasks 8.1, 8.2):
   room: the server refuses to copy a private-room file out of it
   (`CompliesPrivateRoomRulesAsync`,
   `products/ASC.Files/Core/Services/WCFService/FileOperations/CopyPermissionsCheck.cs:823-845`),
-  so the user gets a server error instead of a decrypted copy. Whether the
-  path is reachable depends on encrypted files being listed in Recent, the
-  question of task 2.1; the fix waits for that answer.
+  so the user gets a server error instead of a decrypted copy. The path is
+  not reachable today, because encrypted files never reach Recent (task
+  2.1, above); no fix is made for it.
 - Idle auto-lock after a recovery: the recovery caches the identity in the
   secret storage but re-wraps the same key pair, so only `privateKeyEnc`
   changes, and the context re-read the unlocked state on a new public key

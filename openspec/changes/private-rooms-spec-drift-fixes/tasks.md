@@ -11,7 +11,7 @@ fixes, 8 the suspicions. One task is one commit with its tick (the
 
 ## 2. Duplicate outside the room (P0)
 
-- [ ] 2.1 Reproduce on the stand whether an encrypted file listed in Recent offers Duplicate, and record the result (date, build) in design.md Context; the fix of 2.2 lands either way
+- [x] 2.1 Reproduce on the stand whether an encrypted file listed in Recent offers Duplicate, and record the result (date, build) in design.md Context; the fix of 2.2 lands either way
 - [x] 2.2 Make `duplicateEncryptedFileImpl` (`packages/client/src/store/filesActionsStore/copyMove.helpers.ts`) pass the file's own section to the copy target instead of the open folder's (design decision 3); verify with a case "Duplicate started outside the room" in `packages/client/src/store/filesActionsStore/__tests__/FilesActionsStore.encryption.test.ts` asserting a private, encrypted target for a file of a private room opened from Recent, and `cd packages/client && pnpm exec vitest run src/store/filesActionsStore`
 
 ## 3. SDK drops (P0)

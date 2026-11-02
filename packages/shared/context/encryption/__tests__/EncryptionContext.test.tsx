@@ -596,6 +596,33 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
     });
 
+    it("Idle lock after recovery", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      const tree = (userKeys: EncryptionUserKeys) => (
+        <EncryptionProvider
+          userKeys={userKeys}
+          PassphraseDialog={MockPassphraseDialog}
+          KeyChangeDialog={MockKeyChangeDialog}
+        >
+          <Consumer />
+        </EncryptionProvider>
+      );
+      const { rerender } = render(tree(userKeysFixture));
+      expect(latest.isUnlocked).toBe(false);
+
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      rerender(tree({ ...userKeysFixture, privateKeyEnc: "enc-recovered" }));
+      expect(latest.isUnlocked).toBe(true);
+
+      act(() => {
+        vi.advanceTimersByTime(60_000);
+      });
+
+      expect(latest.isUnlocked).toBe(false);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+
     it("activity resets the timer (no lock if event arrives before timeout)", () => {
       vi.useFakeTimers();
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);

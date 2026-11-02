@@ -196,7 +196,13 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     setIsUnlocked(SecretStorage.hasUnlocked(userKeys.userId));
     setFilenameCacheScope(userKeys.userId);
     setAutoLockScope(userKeys.userId);
-  }, [hasConfiguredKey, userKeys?.publicKey, userKeys?.userId]);
+    // Spec: key-management, "Auto-lock timeout presets"
+  }, [
+    hasConfiguredKey,
+    userKeys?.publicKey,
+    userKeys?.privateKeyEnc,
+    userKeys?.userId,
+  ]);
 
   useEffect(() => {
     const userId = userKeys?.userId;

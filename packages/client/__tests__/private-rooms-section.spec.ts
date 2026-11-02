@@ -69,8 +69,6 @@ import { armTour, tourTooltip } from "./helpers/tour";
 const ROOM_ID = 9500;
 /** The pending flag of the Rooms tour, packages/client/src/store/RoomsTourStore.ts */
 const ROOMS_TOUR_KEY = "rooms_tour_pending";
-/** The AI agents folder of the root mock, the sidebar item that follows Private. */
-const AI_AGENTS_ID = "224866";
 const ROOM_TITLE = "Private Section Room";
 const FILE_TITLE = "plan.txt";
 
@@ -188,9 +186,9 @@ test.describe("Private section — sidebar", () => {
 
     const ids = await navItemIds(page);
     const topLevel = ids.filter(
-      (id) => id === "forms" || id === "private-rooms" || id === AI_AGENTS_ID,
+      (id) => id === "forms" || id === "private-rooms" || id === "ai-rooms",
     );
-    expect(topLevel).toEqual(["forms", "private-rooms", AI_AGENTS_ID]);
+    expect(topLevel).toEqual(["forms", "private-rooms", "ai-rooms"]);
   });
 
   test("Section not available", async ({ page, mockRequest, baseUrl }) => {

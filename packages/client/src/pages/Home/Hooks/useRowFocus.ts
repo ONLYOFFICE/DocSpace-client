@@ -51,6 +51,12 @@ export type TRowKey = { id: string; isFolder: boolean };
 const ROW = ".files-item";
 // The section's own list, not the info panel's scroller that shares the class.
 const LIST = ".section-scroll:not(.info-panel-scroll)";
+// The section's sticky header - the search box, the filter, the group menu -
+// scrolls with the list but is no part of it.
+const STICKY_HEADER = ".section-sticky-container";
+// A layer over the page: a modal dialog or the media viewer, or a side panel
+// (ui-kit's Aside, which keeps the focus inside as a modal does).
+const LAYER = '[aria-modal="true"], aside';
 // How many frames the focus waits for the caret's row to be rendered.
 const CARET_ROW_FRAMES = 10;
 
@@ -116,7 +122,11 @@ const rowHolder = (row: HTMLElement, held: Set<() => void>) => {
       release();
   };
   const onPointerDown = (e: PointerEvent) => {
-    if (!(e.target instanceof Element && rowOf(e.target) === row)) release();
+    if (!(e.target instanceof Element)) return release();
+    // A press inside a dialog or a panel over the page - one the row opened,
+    // which gives the focus back to it as it closes - is no press elsewhere.
+    if (rowOf(e.target) === row || e.target.closest(LAYER)) return;
+    release();
   };
   holder.addEventListener("blur", onBlur);
   window.addEventListener("pointerdown", onPointerDown, true);
@@ -216,12 +226,16 @@ export const useRowFocus = (
 
   // The caret moved from the keyboard while the focus is in the list (on
   // the list itself, where the arrows put it, or on a row): the focus goes to
-  // the new row, once it is rendered and scrolled to.
+  // the new row, once it is rendered and scrolled to. The section's scroller
+  // holds its sticky header too - the search box, the filter - and a caret
+  // moved while the user is there (a delete ending) leaves them be.
   useEffect(() => {
     if (!hotkeyCaret || !fromKeyboardRef.current) return;
     const { activeElement } = document;
-    if (activeElement !== document.body && !activeElement?.closest(LIST))
-      return;
+    const inList =
+      activeElement === document.body ||
+      (!!activeElement?.closest(LIST) && !activeElement.closest(STICKY_HEADER));
+    if (!inList) return;
 
     // A long jump (End, Ctrl+Down) scrolls a virtualized list to a row it has
     // yet to render: look for it again on the next frames before giving up.

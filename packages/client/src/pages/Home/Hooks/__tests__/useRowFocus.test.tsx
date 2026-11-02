@@ -39,11 +39,16 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { useRowFocus } from "../useRowFocus";
 
 // A table view of two rows: each row is display: contents, so its first cell
-// holds the focus for it. Outside the list, an info panel draws a files item
-// of its own.
+// holds the focus for it. The section's scroller wraps its content, the
+// sticky header with the search box included; the arrows focus that content
+// wrapper. Outside the list, an info panel draws a files item of its own.
 const buildPage = () => {
   document.body.innerHTML = `
     <div class="section-scroll">
+     <div data-testid="list" tabindex="-1">
+      <div class="section-sticky-container">
+        <input data-testid="search" />
+      </div>
       <div id="file_1" class="files-item row-a_docx" style="display: contents">
         <div class="table-container_cell" data-testid="a-name">A</div>
         <div class="table-container_cell" data-testid="a-date">
@@ -56,6 +61,7 @@ const buildPage = () => {
           <button type="button" data-testid="b-menu">menu</button>
         </div>
       </div>
+     </div>
     </div>
     <div class="section-scroll info-panel-scroll">
       <div class="files-item">
@@ -103,6 +109,37 @@ describe("useRowFocus", () => {
     document.body.innerHTML = "";
   });
 
+  // The caret moved from the keyboard pulls the focus along - from the list
+  // the arrows focused, not from a control that only shares its scroller.
+  describe("the caret moving", () => {
+    const moveCaret = (from: HTMLElement) => {
+      const onRowFocus = vi.fn();
+      const hook = renderHook(
+        ({ caret }) => useRowFocus(caret, onRowFocus),
+        { initialProps: { caret: null as typeof CARET_A | null } },
+      );
+      act(() => from.focus());
+      fireEvent.keyDown(from, { key: "ArrowDown" });
+      hook.rerender({ caret: CARET_A });
+      return hook;
+    };
+
+    it("takes the focus from the list to the caret's row", async () => {
+      moveCaret(byTestId("list"));
+      await waitFor(() => expect(byTestId("a-name")).toHaveFocus());
+    });
+
+    // A delete run from the keyboard moves the caret off the removed rows
+    // when it ends: the user typing in the search box by then lost the focus
+    // to a row.
+    it("leaves the focus in the search box above the rows", async () => {
+      moveCaret(byTestId("search"));
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      expect(byTestId("search")).toHaveFocus();
+    });
+  });
+
   // A table row is several cells: a press on any of them is still on the
   // row, which must stay able to take the focus back.
   it("keeps the row held when the pointer presses another of its cells", async () => {
@@ -118,6 +155,30 @@ describe("useRowFocus", () => {
 
     expect(holder).not.toHaveAttribute("data-row-focus");
     expect(holder).not.toHaveAttribute("tabindex");
+  });
+
+  // A dialog or a panel the row opened (Rename, the media viewer, Move to)
+  // takes the pointer's presses too: one of them released the row, and the
+  // dialog closing gave the focus back to a cell that could no longer take
+  // it - the focus fell to the page's body.
+  it.each([
+    ["a modal dialog", '<div role="dialog" aria-modal="true">'],
+    ["a side panel", "<aside>"],
+  ])("keeps the row held through a press inside %s it opened", async (_, open) => {
+    await focusRowA();
+    const holder = byTestId("a-name");
+    const close = open.startsWith("<aside") ? "</aside>" : "</div>";
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `${open}<input data-testid="layer-input" />${close}`,
+    );
+    act(() => byTestId("layer-input").focus());
+
+    fireEvent.pointerDown(byTestId("layer-input"));
+
+    expect(holder).toHaveAttribute("data-row-focus");
+    act(() => holder.focus());
+    expect(holder).toHaveFocus();
   });
 
   // The focus left the list for a dialog: the row stays held for it to come

@@ -95,6 +95,126 @@ const COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL = `templatesRoomsColumnsSizeInfoPan
 const COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE = `infoPanelSharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
 const COLUMNS_IN_SHARED_FOLDER_INFO_PANEL_SIZE = `infoPanelInSharedColumnsSize_ver-${TableVersions.InSharedFolder}`;
 
+// Column widths of the ui-kit DataTable: shares of the table, one record per
+// section and no separate info-panel record. The record carries its own format
+// version, so this one only changes if the key itself has to.
+const COLUMN_WIDTHS_VERSION = "1";
+
+/**
+ * The table a section draws. Every storage key of a section is derived from
+ * this one value, so the columns a table shows and the widths it reads can
+ * never come from two different sections.
+ */
+export type TTableScope =
+  | "templates"
+  | "rooms"
+  | "people"
+  | "guests"
+  | "groups"
+  | "insideGroup"
+  | "trash"
+  | "recent"
+  | "favorites"
+  | "sharedWithMe"
+  | "inSharedFolder"
+  | "vdrIndexing"
+  | "files";
+
+type TTableStorageKeys = {
+  /** Visible columns, comma-separated. */
+  columns: string;
+  /** Column sizes of the old Table. */
+  size: string;
+  /** Column sizes of the old Table while the info panel is open. */
+  infoPanelSize: string;
+  /** Column widths of the DataTable. */
+  widths: string;
+};
+
+const widthsKey = (section: string) =>
+  `${section}ColumnsWidths_ver-${COLUMN_WIDTHS_VERSION}`;
+
+const TABLE_STORAGE_KEYS: Record<TTableScope, TTableStorageKeys> = {
+  templates: {
+    columns: TABLE_TEMPLATES_ROOM_COLUMNS,
+    size: COLUMNS_TEMPLATES_ROOM_SIZE,
+    infoPanelSize: COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL,
+    widths: widthsKey("templatesRooms"),
+  },
+  rooms: {
+    columns: TABLE_ROOMS_COLUMNS,
+    size: COLUMNS_ROOMS_SIZE,
+    infoPanelSize: COLUMNS_ROOMS_SIZE_INFO_PANEL,
+    widths: widthsKey("rooms"),
+  },
+  people: {
+    columns: TABLE_PEOPLE_COLUMNS,
+    size: COLUMNS_PEOPLE_SIZE,
+    infoPanelSize: COLUMNS_PEOPLE_INFO_PANEL_SIZE,
+    widths: widthsKey("people"),
+  },
+  guests: {
+    columns: TABLE_GUESTS_COLUMNS,
+    size: COLUMNS_GUESTS_SIZE,
+    infoPanelSize: COLUMNS_GUESTS_INFO_PANEL_SIZE,
+    widths: widthsKey("guests"),
+  },
+  groups: {
+    columns: TABLE_GROUPS_COLUMNS,
+    size: COLUMNS_GROUPS_SIZE,
+    infoPanelSize: COLUMNS_GROUPS_INFO_PANEL_SIZE,
+    widths: widthsKey("groups"),
+  },
+  insideGroup: {
+    columns: TABLE_INSIDE_GROUP_COLUMNS,
+    size: COLUMNS_INSIDE_GROUPS_SIZE,
+    infoPanelSize: COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE,
+    widths: widthsKey("insideGroup"),
+  },
+  trash: {
+    columns: TABLE_TRASH_COLUMNS,
+    size: COLUMNS_TRASH_SIZE,
+    infoPanelSize: COLUMNS_TRASH_SIZE_INFO_PANEL,
+    widths: widthsKey("trash"),
+  },
+  recent: {
+    columns: TABLE_RECENT_COLUMNS,
+    size: COLUMNS_RECENT_SIZE,
+    infoPanelSize: COLUMNS_RECENT_SIZE_INFO_PANEL,
+    widths: widthsKey("recent"),
+  },
+  favorites: {
+    columns: TABLE_FAVORITES_COLUMNS,
+    size: COLUMNS_FAVORITES_SIZE,
+    infoPanelSize: COLUMNS_FAVORITES_SIZE_INFO_PANEL,
+    widths: widthsKey("favorites"),
+  },
+  sharedWithMe: {
+    columns: TABLE_SHARED_WITH_ME_COLUMNS,
+    size: COLUMNS_SHARED_WITH_ME_SIZE,
+    infoPanelSize: COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE,
+    widths: widthsKey("sharedWithMe"),
+  },
+  inSharedFolder: {
+    columns: TABLE_IN_SHARED_FOLDER_COLUMNS,
+    size: COLUMNS_IN_SHARED_FOLDER_SIZE,
+    infoPanelSize: COLUMNS_IN_SHARED_FOLDER_INFO_PANEL_SIZE,
+    widths: widthsKey("inSharedFolder"),
+  },
+  vdrIndexing: {
+    columns: TABLE_VDR_INDEXING_COLUMNS,
+    size: COLUMNS_VDR_INDEXING_SIZE,
+    infoPanelSize: COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL,
+    widths: widthsKey("vdrIndexing"),
+  },
+  files: {
+    columns: TABLE_COLUMNS,
+    size: COLUMNS_SIZE,
+    infoPanelSize: COLUMNS_SIZE_INFO_PANEL,
+    widths: widthsKey("files"),
+  },
+};
+
 class TableStore {
   authStore: AuthStore;
 
@@ -460,7 +580,6 @@ class TableStore {
     (this.aiSpendingInsideGroupColumnIsEnabled = enable);
 
   setColumnsEnable = (frameTableColumns: string | null) => {
-    const { contactsTab } = this.peopleStore.usersStore;
     const storageColumns = getPersistedString(this.tableStorageName);
     const splitColumns = storageColumns
       ? storageColumns.split(",")
@@ -468,39 +587,12 @@ class TableStore {
         ? frameTableColumns.split(",")
         : null;
 
-    if (splitColumns) {
-      const {
-        isRoomsFolder,
-        isArchiveFolder,
-        isTrashFolder,
-        isTemplatesFolder,
-        isPersonalReadOnly,
-        isRecentFolder,
-        isFavoritesFolder,
-        isSharedWithMeFolder,
-        isInSharedFolder,
-        isFormsFolder,
-        isAiSectionFolder,
-      } = this.treeFoldersStore;
+    if (!splitColumns) return;
 
-      const contactsView = getContactsView();
+    const scope = this.tableScope;
 
-      const isContactsPeople = !contactsTab
-        ? contactsView === "people"
-        : contactsTab === "people";
-      const isContactsGuests = !contactsTab
-        ? contactsView === "guests"
-        : contactsTab === "guests";
-      const isContactsGroups = !contactsTab
-        ? contactsView === "groups"
-        : contactsTab === "groups";
-      const isContactsInsideGroup = !contactsTab
-        ? contactsView === "inside_group"
-        : contactsTab === "inside_group";
-
-      const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
-
-      if (isTemplatesFolder) {
+    switch (scope) {
+      case "templates":
         this.setTypeTemplatesColumn(splitColumns.includes("TypeTemplates"));
         this.setTemplateRoomColumnTags(splitColumns.includes("TagsTemplates"));
         this.setOwnerTemplatesColumn(splitColumns.includes("OwnerTemplates"));
@@ -510,15 +602,14 @@ class TableStore {
         this.setTemplateRoomColumnQuota(
           splitColumns.includes("StorageTemplates"),
         );
-
         return;
-      }
 
-      if (isSharedWithMeFolder || isInSharedFolder) {
+      case "sharedWithMe":
+      case "inSharedFolder": {
         const isPublicPage = this.treeFoldersStore.publicRoomStore.isPublicRoom;
 
         this.setSharedByShareWithMeColumn(
-          !isInSharedFolder &&
+          scope === "sharedWithMe" &&
             !isPublicPage &&
             splitColumns.includes("SharedByShareWithMe"),
         );
@@ -534,43 +625,37 @@ class TableStore {
         );
         this.setSizeShareWithMeColumn(splitColumns.includes("SizeShareWithMe"));
         this.setTypeShareWithMeColumn(splitColumns.includes("TypeShareWithMe"));
-
         return;
       }
 
-      if (isRooms) {
+      case "rooms":
         this.setRoomColumnType(splitColumns.includes("Type"));
         this.setRoomColumnTags(splitColumns.includes("Tags"));
         this.setRoomColumnOwner(splitColumns.includes("Owner"));
         this.setRoomColumnActivity(splitColumns.includes("Activity"));
         this.setRoomColumnQuota(splitColumns.includes("Storage"));
         return;
-      }
 
-      if (isContactsGroups) {
+      case "groups":
         this.setGroupsColumnPeople(splitColumns.includes("People"));
         this.setGroupsColumnManager(splitColumns.includes("Head of Group"));
         return;
-      }
 
-      if (isContactsPeople) {
+      case "people":
         this.setPeopleColumnType(splitColumns.includes("Type"));
         this.setPeopleColumnEmail(splitColumns.includes("Mail"));
         this.setPeopleColumnGroup(splitColumns.includes("Department"));
         this.setPeopleColumnStorage(splitColumns.includes("Storage"));
         this.setPeopleColumnAiSpending(splitColumns.includes("AISpending"));
         return;
-      }
 
-      if (isContactsGuests) {
+      case "guests":
         this.setGuestsColumnEmail(splitColumns.includes("Mail"));
         this.setGuestsColumnInviter(splitColumns.includes("Inviter"));
         this.setGuestsColumnInvitedDate(splitColumns.includes("InvitedDate"));
-
         return;
-      }
 
-      if (isContactsInsideGroup) {
+      case "insideGroup":
         this.setInsideGroupColumnType(splitColumns.includes("Type"));
         this.setInsideGroupColumnEmail(splitColumns.includes("Mail"));
         this.setInsideGroupColumnGroup(splitColumns.includes("Department"));
@@ -579,9 +664,8 @@ class TableStore {
           splitColumns.includes("AISpending"),
         );
         return;
-      }
 
-      if (isTrashFolder) {
+      case "trash":
         this.setLocationColumn(splitColumns.includes("Location"));
         this.setAuthorTrashColumn(splitColumns.includes("AuthorTrash"));
         this.setCreatedTrashColumn(splitColumns.includes("CreatedTrash"));
@@ -589,9 +673,8 @@ class TableStore {
         this.setSizeTrashColumn(splitColumns.includes("SizeTrash"));
         this.setTypeTrashColumn(splitColumns.includes("TypeTrash"));
         return;
-      }
 
-      if (isRecentFolder) {
+      case "recent":
         this.setLocationRecentColumn(splitColumns.includes("LocationRecent"));
         this.setAuthorRecentColumn(splitColumns.includes("AuthorRecent"));
         this.setLastOpenedRecentColumn(
@@ -600,9 +683,8 @@ class TableStore {
         this.setSizeRecentColumn(splitColumns.includes("SizeRecent"));
         this.setTypeRecentColumn(splitColumns.includes("TypeRecent"));
         return;
-      }
 
-      if (isFavoritesFolder) {
+      case "favorites":
         this.setLocationFavoritesColumn(
           splitColumns.includes("LocationFavorites"),
         );
@@ -613,42 +695,34 @@ class TableStore {
         this.setSizeFavoritesColumn(splitColumns.includes("SizeFavorites"));
         this.setTypeFavoritesColumn(splitColumns.includes("TypeFavorites"));
         return;
-      }
 
-      if (this.selectedFolderStore.isIndexedFolder) {
-        this.setAuthorVDRColumn(splitColumns.includes("AuthorIndexing"));
-        this.setCreatedVDRColumn(splitColumns.includes("CreatedIndexing"));
-        this.setModifiedVDRColumn(splitColumns.includes("ModifiedIndexing"));
-        this.setSizeVDRColumn(splitColumns.includes("SizeIndexing"));
-        this.setTypeVDRColumn(splitColumns.includes("TypeIndexing"));
-      }
-
-      this.setModifiedColumn(splitColumns.includes("Modified"));
-      this.setAuthorColumn(splitColumns.includes("Author"));
-      this.setCreatedColumn(splitColumns.includes("Created"));
-      if (isPersonalReadOnly)
-        this.setErasureColumn(splitColumns.includes("Erasure"));
-      this.setSizeColumn(splitColumns.includes("Size"));
-      this.setTypeColumn(splitColumns.includes("Type"));
+      default:
     }
+
+    // A VDR folder sets its own columns and then the documents ones as well.
+    if (scope === "vdrIndexing") {
+      this.setAuthorVDRColumn(splitColumns.includes("AuthorIndexing"));
+      this.setCreatedVDRColumn(splitColumns.includes("CreatedIndexing"));
+      this.setModifiedVDRColumn(splitColumns.includes("ModifiedIndexing"));
+      this.setSizeVDRColumn(splitColumns.includes("SizeIndexing"));
+      this.setTypeVDRColumn(splitColumns.includes("TypeIndexing"));
+    }
+
+    this.setModifiedColumn(splitColumns.includes("Modified"));
+    this.setAuthorColumn(splitColumns.includes("Author"));
+    this.setCreatedColumn(splitColumns.includes("Created"));
+    if (this.treeFoldersStore.isPersonalReadOnly)
+      this.setErasureColumn(splitColumns.includes("Erasure"));
+    this.setSizeColumn(splitColumns.includes("Size"));
+    this.setTypeColumn(splitColumns.includes("Type"));
   };
 
   setColumnEnable = (key: string) => {
-    const { isRoomsFolder, isArchiveFolder, isFormsFolder, isAiSectionFolder } =
-      this.treeFoldersStore;
+    const scope = this.tableScope;
 
-    const { contactsTab } = this.peopleStore.usersStore;
-
-    const contactsView = getContactsView();
-
-    const isContactsPeople = !contactsTab
-      ? contactsView === "people"
-      : contactsTab === "people";
-    const isContactsInsideGroup = !contactsTab
-      ? contactsView === "inside_group"
-      : contactsTab === "inside_group";
-
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
+    const isRooms = scope === "rooms";
+    const isContactsPeople = scope === "people";
+    const isContactsInsideGroup = scope === "insideGroup";
 
     switch (key) {
       case "Location":
@@ -895,8 +969,15 @@ class TableStore {
     return defaultColumns;
   };
 
-  // Column names
-  get tableStorageName() {
+  /**
+   * The section whose table is on screen. One order of checks for every key:
+   * it is the order the visible-columns key always used, and the one the
+   * Files header and rows pick their columns by (shared before VDR). The size
+   * keys used to check in another order, so a stale contacts tab or a shared
+   * folder with indexing read the columns of one section and the sizes of
+   * another.
+   */
+  get tableScope(): TTableScope {
     const {
       isRoomsFolder,
       isArchiveFolder,
@@ -910,206 +991,51 @@ class TableStore {
       isAiSectionFolder,
     } = this.treeFoldersStore;
 
-    const { contactsTab } = this.peopleStore.usersStore;
-    const { isIndexedFolder } = this.selectedFolderStore;
+    const contactsView =
+      this.peopleStore.usersStore.contactsTab || getContactsView();
 
-    const contactsView = getContactsView();
+    if (isTemplatesFolder) return "templates";
+    if (isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder)
+      return "rooms";
+    if (contactsView === "people") return "people";
+    if (contactsView === "guests") return "guests";
+    if (contactsView === "groups") return "groups";
+    if (contactsView === "inside_group") return "insideGroup";
+    if (isTrashFolder) return "trash";
+    if (isRecentFolder) return "recent";
+    if (isFavoritesFolder) return "favorites";
+    if (isSharedWithMeFolder) return "sharedWithMe";
+    if (isInSharedFolder) return "inSharedFolder";
+    if (this.selectedFolderStore.isIndexedFolder) return "vdrIndexing";
+    return "files";
+  }
 
-    const isContactsPeople = !contactsTab
-      ? contactsView === "people"
-      : contactsTab === "people";
-    const isContactsGuests = !contactsTab
-      ? contactsView === "guests"
-      : contactsTab === "guests";
-    const isContactsGroups = !contactsTab
-      ? contactsView === "groups"
-      : contactsTab === "groups";
-    const isContactsInsideGroup = !contactsTab
-      ? contactsView === "inside_group"
-      : contactsTab === "inside_group";
-
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
+  getStorageName = (kind: keyof TTableStorageKeys) => {
     const userId = this.userStore.user?.id ?? GUEST_ID;
-    const isFrame = this.settingsStore.isFrame;
-    const isDocumentsFolder = !isRooms;
+    const name = `${TABLE_STORAGE_KEYS[this.tableScope][kind]}=${userId}`;
 
-    let tableStorageName: string;
+    return this.settingsStore.isFrame ? `SDK_${name}` : name;
+  };
 
-    if (isTemplatesFolder)
-      tableStorageName = `${TABLE_TEMPLATES_ROOM_COLUMNS}=${userId}`;
-    else if (isRooms) tableStorageName = `${TABLE_ROOMS_COLUMNS}=${userId}`;
-    else if (isContactsPeople)
-      tableStorageName = `${TABLE_PEOPLE_COLUMNS}=${userId}`;
-    else if (isContactsGuests)
-      tableStorageName = `${TABLE_GUESTS_COLUMNS}=${userId}`;
-    else if (isContactsGroups)
-      tableStorageName = `${TABLE_GROUPS_COLUMNS}=${userId}`;
-    else if (isContactsInsideGroup)
-      tableStorageName = `${TABLE_INSIDE_GROUP_COLUMNS}=${userId}`;
-    else if (isTrashFolder)
-      tableStorageName = `${TABLE_TRASH_COLUMNS}=${userId}`;
-    else if (isRecentFolder)
-      tableStorageName = `${TABLE_RECENT_COLUMNS}=${userId}`;
-    else if (isFavoritesFolder)
-      tableStorageName = `${TABLE_FAVORITES_COLUMNS}=${userId}`;
-    else if (isSharedWithMeFolder)
-      tableStorageName = `${TABLE_SHARED_WITH_ME_COLUMNS}=${userId}`;
-    else if (isInSharedFolder)
-      tableStorageName = `${TABLE_IN_SHARED_FOLDER_COLUMNS}=${userId}`;
-    else if (isIndexedFolder)
-      tableStorageName = `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`;
-    else if (isDocumentsFolder) tableStorageName = `${TABLE_COLUMNS}=${userId}`;
-    else tableStorageName = "";
-
-    return isFrame && tableStorageName
-      ? `SDK_${tableStorageName}`
-      : tableStorageName;
+  // Column names
+  get tableStorageName() {
+    return this.getStorageName("columns");
   }
 
   // Table column sizes
   get columnStorageName() {
-    const {
-      isRoomsFolder,
-      isArchiveFolder,
-      isTrashFolder,
-      isRecentFolder,
-      isTemplatesFolder,
-      isFavoritesFolder,
-      isSharedWithMeFolder,
-      isInSharedFolder,
-      isFormsFolder,
-      isAiSectionFolder,
-    } = this.treeFoldersStore;
-
-    const { contactsTab } = this.peopleStore.usersStore;
-    const { isIndexedFolder } = this.selectedFolderStore;
-
-    const contactsView = getContactsView();
-
-    const isContactsPeople = !contactsTab
-      ? contactsView === "people"
-      : contactsTab === "people";
-    const isContactsGuests = !contactsTab
-      ? contactsView === "guests"
-      : contactsTab === "guests";
-    const isContactsGroups = !contactsTab
-      ? contactsView === "groups"
-      : contactsTab === "groups";
-    const isContactsInsideGroup = !contactsTab
-      ? contactsView === "inside_group"
-      : contactsTab === "inside_group";
-
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
-    const userId = this.userStore.user?.id ?? GUEST_ID;
-    const isFrame = this.settingsStore.isFrame;
-    const isDocumentsFolder = !isRooms;
-
-    let columnStorageName: string;
-
-    if (isTemplatesFolder)
-      columnStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE}=${userId}`;
-    else if (isRooms) columnStorageName = `${COLUMNS_ROOMS_SIZE}=${userId}`;
-    else if (isTrashFolder)
-      columnStorageName = `${COLUMNS_TRASH_SIZE}=${userId}`;
-    else if (isRecentFolder)
-      columnStorageName = `${COLUMNS_RECENT_SIZE}=${userId}`;
-    else if (isFavoritesFolder)
-      columnStorageName = `${COLUMNS_FAVORITES_SIZE}=${userId}`;
-    else if (isIndexedFolder)
-      columnStorageName = `${COLUMNS_VDR_INDEXING_SIZE}=${userId}`;
-    else if (isContactsPeople)
-      columnStorageName = `${COLUMNS_PEOPLE_SIZE}=${userId}`;
-    else if (isContactsGuests)
-      columnStorageName = `${COLUMNS_GUESTS_SIZE}=${userId}`;
-    else if (isContactsInsideGroup)
-      columnStorageName = `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`;
-    else if (isContactsGroups)
-      columnStorageName = `${COLUMNS_GROUPS_SIZE}=${userId}`;
-    else if (isSharedWithMeFolder)
-      columnStorageName = `${COLUMNS_SHARED_WITH_ME_SIZE}=${userId}`;
-    else if (isInSharedFolder)
-      columnStorageName = `${COLUMNS_IN_SHARED_FOLDER_SIZE}=${userId}`;
-    else if (isDocumentsFolder) columnStorageName = `${COLUMNS_SIZE}=${userId}`;
-    else columnStorageName = "";
-
-    return isFrame && columnStorageName
-      ? `SDK_${columnStorageName}`
-      : columnStorageName;
+    return this.getStorageName("size");
   }
 
-  // Column names for info-panel
+  // Column sizes for info-panel
   get columnInfoPanelStorageName() {
-    const {
-      isRoomsFolder,
-      isArchiveFolder,
-      isTrashFolder,
-      isRecentFolder,
-      isTemplatesFolder,
-      isFavoritesFolder,
-      isSharedWithMeFolder,
-      isInSharedFolder,
-      isFormsFolder,
-      isAiSectionFolder,
-    } = this.treeFoldersStore;
+    return this.getStorageName("infoPanelSize");
+  }
 
-    const { isIndexedFolder } = this.selectedFolderStore;
-    const { contactsTab } = this.peopleStore.usersStore;
-
-    const contactsView = getContactsView();
-
-    const isContactsPeople = !contactsTab
-      ? contactsView === "people"
-      : contactsTab === "people";
-    const isContactsGuests = !contactsTab
-      ? contactsView === "guests"
-      : contactsTab === "guests";
-    const isContactsGroups = !contactsTab
-      ? contactsView === "groups"
-      : contactsTab === "groups";
-    const isContactsInsideGroup = !contactsTab
-      ? contactsView === "inside_group"
-      : contactsTab === "inside_group";
-
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
-    const userId = this.userStore.user?.id ?? GUEST_ID;
-    const isFrame = this.settingsStore.isFrame;
-    const isDocumentsFolder = !isRooms;
-
-    let columnInfoPanelStorageName: string;
-
-    if (isTemplatesFolder)
-      columnInfoPanelStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL}=${userId}`;
-    else if (isRooms)
-      columnInfoPanelStorageName = `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`;
-    else if (isTrashFolder)
-      columnInfoPanelStorageName = `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`;
-    else if (isRecentFolder)
-      columnInfoPanelStorageName = `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`;
-    else if (isFavoritesFolder)
-      columnInfoPanelStorageName = `${COLUMNS_FAVORITES_SIZE_INFO_PANEL}=${userId}`;
-    else if (isIndexedFolder)
-      columnInfoPanelStorageName = `${COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL}=${userId}`;
-    else if (isContactsPeople)
-      columnInfoPanelStorageName = `${COLUMNS_PEOPLE_INFO_PANEL_SIZE}=${userId}`;
-    else if (isContactsGuests)
-      columnInfoPanelStorageName = `${COLUMNS_GUESTS_INFO_PANEL_SIZE}=${userId}`;
-    else if (isContactsInsideGroup)
-      columnInfoPanelStorageName = `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`;
-    else if (isContactsGroups)
-      columnInfoPanelStorageName = `${COLUMNS_GROUPS_INFO_PANEL_SIZE}=${userId}`;
-    else if (isSharedWithMeFolder)
-      columnInfoPanelStorageName = `${COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE}=${userId}`;
-    else if (isInSharedFolder)
-      columnInfoPanelStorageName = `${COLUMNS_IN_SHARED_FOLDER_INFO_PANEL_SIZE}=${userId}`;
-    else if (isDocumentsFolder)
-      columnInfoPanelStorageName = `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
-    else columnInfoPanelStorageName = "";
-
-    return isFrame && columnInfoPanelStorageName
-      ? `SDK_${columnInfoPanelStorageName}`
-      : columnInfoPanelStorageName;
+  // Column widths of the DataTable, the same with the info panel open or not
+  get columnWidthsStorageName() {
+    return this.getStorageName("widths");
   }
 }
 
 export default TableStore;
-

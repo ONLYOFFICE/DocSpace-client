@@ -147,6 +147,7 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - [x] 12.1 Client: `settingsStore.aiReady` (set by `AiPresetsBridge` by the chat's rule); the "AI rooms" list shows the chat's "AI is off" view (Go to settings / Activate / Top up and activate / contact an admin) and offers no "New room", "+" or main button while AI is not set up
 - [x] 12.2 Client + ui-kit: `RoomType` takes `isDisabled`; the "AI rooms" picker disables the Knowledge room type while vectorization is off, with a tooltip for an admin (`Common:KnowledgeRoomCreationNeedsVectorizationAdmin`) and for a room admin (`Common:KnowledgeRoomCreationNeedsVectorizationUser`), translated into every language
 - [ ] 12.3 Server (.NET): refuse creating Instructions and Knowledge rooms and AI projects while AI is not set up on the portal, as the client does (today only a Knowledge room is refused, and only for vectorization)
+- [x] 12.4 ui-kit + client: the file and folder selectors list "AI rooms" (Instructions and Knowledge rooms, no projects, no creation) instead of "AI agents" at the root; `withAIRoomsTreeFolder` replaces `withAIAgentsTreeFolder`, on by default and off in `FilesSelectorInput`; copy/move keeps only the AI types the selection fits
 
 ## Workflow follow-up
 

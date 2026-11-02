@@ -184,3 +184,15 @@ When the open project is deleted or the caller loses access to it, the view SHAL
 #### Scenario: Project deleted while open
 - **WHEN** the owner deletes a project another member has open
 - **THEN** that member lands on the AI rooms list
+
+### Requirement: AI rooms in the file selectors
+The root of the file and folder selectors SHALL list "AI rooms" after Forms and SHALL NOT list "AI agents". Inside, it SHALL list only the Instructions and Knowledge rooms (`searchArea=AiHub`), never AI projects, with no room creation. For copy and move it SHALL keep only the room types the selection can land in, those types SHALL leave the Rooms section, and it SHALL be hidden when none fits.
+
+#### Scenario: Picking a file to attach
+- **WHEN** a user opens the attach picker of the AI chat on a portal with AI on
+- **THEN** the root reads Files, Rooms, Forms, AI rooms, and AI rooms lists the Instructions and Knowledge rooms but no project
+
+#### Scenario: Copying a document that no AI room takes
+- **WHEN** a user copies a folder
+- **THEN** the selector root has no "AI rooms" entry
+

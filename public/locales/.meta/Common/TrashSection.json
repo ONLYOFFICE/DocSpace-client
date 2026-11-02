@@ -3,7 +3,7 @@
   "content": "Trash",
   "content_en_sha1_hash": "e3bf62bb7f5af7ba291b2df1a11d573bdb55d7e9",
   "created_at": "2025-05-19T21:30:49.325Z",
-  "updated_at": "2026-11-02T07:10:46.659Z",
+  "updated_at": "2026-11-02T08:07:42.828Z",
   "comment": {
     "text": "This is a noun referring to the \"Trash\" section where deleted files are stored. It appears as a label in various UI components, often as part of a longer sentence or as a section name.",
     "is_auto": true,
@@ -169,7 +169,7 @@
     },
     {
       "file_path": "/packages/client/src/HOCs/withHotkeys.js",
-      "line_number": 480,
+      "line_number": 479,
       "context": "if (confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n deleteAction(translations).catch((err) => toastr.error(err));\n }\n }",
       "module": "/packages/client"
     },

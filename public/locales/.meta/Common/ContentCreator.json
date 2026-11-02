@@ -3,7 +3,7 @@
   "content": "Content creator",
   "content_en_sha1_hash": "19984b0eed18a37a50dc1dace36b9a212c829a2e",
   "created_at": "2025-05-19T21:30:43.682Z",
-  "updated_at": "2026-10-31T12:58:29.173Z",
+  "updated_at": "2026-11-02T08:07:43.050Z",
   "comment": {
     "text": "This is a label for a user role, indicating someone who can create content. It appears in user management interfaces, such as when assigning permissions or viewing user details.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
       "line_number": 76,
-      "context": "access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n collaborator: {\n key: \"collaborator\",\n label: this.t(\"Common:ContentCreator\"),\n access: ShareAccessRights.Collaborator,\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",",
+      "context": "access: ShareAccessRights.Collaborator,\n type: \"user\",\n },\n collaborator: {\n key: \"collaborator\",\n label: this.t(\"Common:ContentCreator\"),\n access: ShareAccessRights.Collaborator,\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",",
       "module": "/packages/client"
     },
     {

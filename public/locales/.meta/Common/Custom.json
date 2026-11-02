@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/AddMetadataMenu.tsx",
-      "line_number": 72,
-      "context": "icon: AccessFormReactSvgUrl,\n onClick: onAddTemplate,\n },\n {\n key: \"metadata-custom\",\n label: t(\"Common:Custom\"),\n icon: EditReactSvgUrl,\n disabled: isCustomFieldDisabled,\n onClick: onAddCustomField,\n },\n ];",
+      "line_number": 75,
+      "context": "icon: AccessFormReactSvgUrl,\n onClick: onAddTemplate,\n },\n {\n key: \"metadata-custom\",\n label: t(\"Common:Custom\"),\n icon: EditReactSvgUrl,\n disabled: isCustomFieldDisabled,\n onClick: onAddCustomField,\n },\n ...(onGenerate",
       "module": "/packages/client"
     },
     {

@@ -512,7 +512,7 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_fill-metadata-ai",
       key: "fill-metadata-ai",
-      label: t("Files:FillMetadataWithAI"),
+      label: t("Files:FillMetadata"),
       icon: AISvgUrl,
       onClick: () =>
         self.dialogsStore.setMetadataAIPanelData({
@@ -525,7 +525,7 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_suggest-metadata-ai",
       key: "suggest-metadata-ai",
-      label: t("Files:SuggestMetadataWithAI"),
+      label: t("Files:GenerateMetadata"),
       icon: AISvgUrl,
       onClick: () =>
         self.dialogsStore.setMetadataAIPanelData({
@@ -1097,6 +1097,20 @@ export const getFilesContextOptionsImpl = (
       needsGrouping: true,
       minItemsCount: 1,
     });
+
+    menuGroupsConfig.push({
+      groupKey: "ai-tools",
+      groupLabel: t("Files:AITools"),
+      groupIcon: AISvgUrl,
+      itemKeys: [
+        "ask-ai",
+        "analyze-responses",
+        "fill-metadata-ai",
+        "suggest-metadata-ai",
+      ],
+      needsGrouping: false,
+      minItemsCount: 1,
+    });
   }
 
   const downloadOption = newOptions.find((option) => option.key === "download");
@@ -1258,7 +1272,7 @@ export const getFilesContextOptionsImpl = (
     const groups = item.isFolder
       ? [
           ["select", "open", "mark-read", "open-location"],
-          ["fill-metadata-ai", "suggest-metadata-ai"],
+          ["ai-tools", "fill-metadata-ai", "suggest-metadata-ai"],
           [
             "update-xlsx-data",
             "share",
@@ -1289,6 +1303,7 @@ export const getFilesContextOptionsImpl = (
           ],
           ["filling-status", "reset-and-start-filling"],
           [
+            "ai-tools",
             "ask-ai",
             "analyze-responses",
             "fill-metadata-ai",

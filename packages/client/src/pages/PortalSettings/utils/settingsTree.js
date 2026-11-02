@@ -170,7 +170,7 @@ export const settingsTree = [
         key: "0-3",
         icon: "",
         link: "default-templates",
-        tKey: "DefaultTemplates",
+        tKey: "DocumentTemplates",
         isCategory: true,
         children: [
           {
@@ -178,7 +178,7 @@ export const settingsTree = [
             key: "0-3-0",
             icon: "",
             link: "default-templates",
-            tKey: "DefaultTemplates",
+            tKey: "DocumentTemplates",
           },
         ],
       },

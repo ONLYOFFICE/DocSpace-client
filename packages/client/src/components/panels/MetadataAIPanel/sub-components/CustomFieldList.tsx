@@ -44,15 +44,19 @@ import styles from "../MetadataAIPanel.module.scss";
 type CustomFieldListProps = {
   drafts: TCustomFieldDraft[];
   metadata: TEntryMetadata;
+  filledKeys?: string[];
   onChange: (draft: TCustomFieldDraft) => void;
   onRemove?: (key: string) => void;
+  onRevert?: (key: string) => void;
 };
 
 const CustomFieldList = ({
   drafts,
   metadata,
+  filledKeys,
   onChange,
   onRemove,
+  onRevert,
 }: CustomFieldListProps) =>
   drafts.length ? (
     <div className={styles.customFields} data-testid="metadata_ai_custom_fields">
@@ -65,8 +69,13 @@ const CustomFieldList = ({
             metadata.customFields,
             drafts,
           )}
+          isAIFilled={!!filledKeys?.includes(draft.key)}
+          previousValue={
+            metadata.customFields.find(({ name }) => name === draft.key)?.value
+          }
           onChange={onChange}
           onRemove={onRemove ? () => onRemove(draft.key) : undefined}
+          onRevert={onRevert ? () => onRevert(draft.key) : undefined}
         />
       ))}
     </div>

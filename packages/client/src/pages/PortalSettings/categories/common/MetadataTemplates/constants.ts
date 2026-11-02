@@ -35,6 +35,8 @@
 
 import { MetadataFieldType } from "@docspace/shared/enums";
 
+export const SYSTEM_TEMPLATE_NAME = "System";
+
 export const FIELD_TYPES = [
   MetadataFieldType.String,
   MetadataFieldType.Number,

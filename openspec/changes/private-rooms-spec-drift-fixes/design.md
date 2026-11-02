@@ -54,6 +54,27 @@ already states; none comes from a stashed design document. Found on
 - Download: a single download without file keys or an own entry returns
   without a message (`filesActionsStore/download.helpers.ts:356-364`).
 
+Checked on 2026-11-02 for the suspicions (tasks 8.1, 8.2):
+
+- Copy to from Recent: the selector decides the source by the open
+  folder (`treeFoldersStore.isPrivacyFolder`,
+  `packages/client/src/components/FilesSelector/index.tsx:909`), so an
+  encrypted file opened from Recent is planned as a plain server copy, and
+  the menu offers Copy to for an encrypted file without the copy right
+  (`filesStore/contextOptions.helpers.ts:534`). No ciphertext leaves the
+  room: the server refuses to copy a private-room file out of it
+  (`CompliesPrivateRoomRulesAsync`,
+  `products/ASC.Files/Core/Services/WCFService/FileOperations/CopyPermissionsCheck.cs:823-845`),
+  so the user gets a server error instead of a decrypted copy. Whether the
+  path is reachable depends on encrypted files being listed in Recent, the
+  question of task 2.1; the fix waits for that answer.
+- Idle auto-lock after a recovery: the recovery caches the identity in the
+  secret storage but re-wraps the same key pair, so only `privateKeyEnc`
+  changes, and the context re-read the unlocked state on a new public key
+  or user only (`EncryptionContext.tsx:185-198`); the idle timer, which
+  runs while the context counts as unlocked, never started. Fixed by
+  re-reading it on a new `privateKeyEnc` too.
+
 ## Goals / Non-Goals
 
 **Goals:**

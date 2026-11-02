@@ -100,13 +100,20 @@ const ApplyMetadataDialog = ({
     else setIsApplying(false);
   };
 
+  const submit = () => {
+    if (!isApplying) apply();
+  };
+
   return (
     <ModalDialog
       visible
       isLarge
+      withForm
       zIndex={312}
       displayType={ModalDialogType.modal}
+      isCloseable={!isApplying}
       onClose={onClose}
+      onSubmit={submit}
       dataTestId="metadata_apply_dialog"
     >
       <ModalDialog.Header>{t("Metadata:ApplyMetadata")}</ModalDialog.Header>
@@ -133,6 +140,7 @@ const ApplyMetadataDialog = ({
                   label={option.title}
                   fontWeight={600}
                   isChecked={conflict === option.value}
+                  autoFocus={conflict === option.value}
                   onChange={() => setConflict(option.value)}
                   testId={`metadata_apply_conflict_${option.value}`}
                 />
@@ -154,7 +162,7 @@ const ApplyMetadataDialog = ({
           size={ButtonSize.normal}
           label={t("Common:ApplyButton")}
           isLoading={isApplying}
-          onClick={apply}
+          type="submit"
           testId="metadata_apply_button"
         />
         <Button

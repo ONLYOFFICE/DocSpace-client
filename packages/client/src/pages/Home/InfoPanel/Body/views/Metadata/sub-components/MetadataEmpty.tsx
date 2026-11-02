@@ -37,23 +37,39 @@ import EmptyLightSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.
 import EmptyDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg?url";
 import PlusReactSvg from "PUBLIC_DIR/images/plus.react.svg";
 
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import type { TAddMetadataActions, TMetadataItemType } from "../types";
+import { useMetadataAIAvailable } from "../hooks/useMetadataAIAvailable";
+import { useOpenMetadataAI } from "../hooks/useOpenMetadataAI";
+import type {
+  TAddMetadataActions,
+  TMetadataEmptyHint,
+  TMetadataItemType,
+  TMetadataSelection,
+} from "../types";
+import { getMetadataEmptyHint } from "../utils";
 import AddMetadataMenu from "./AddMetadataMenu";
 import styles from "../Metadata.module.scss";
 
 type MetadataEmptyProps = {
+  selection: TMetadataSelection;
   itemType: TMetadataItemType;
   addActions?: TAddMetadataActions;
 };
 
-const MetadataEmpty = ({ itemType, addActions }: MetadataEmptyProps) => {
+const MetadataEmpty = ({
+  selection,
+  itemType,
+  addActions,
+}: MetadataEmptyProps) => {
   const { t } = useTranslation(["Metadata"]);
   const { isBase } = useTheme();
+  const isAIAvailable = useMetadataAIAvailable(selection);
+  const openAI = useOpenMetadataAI(selection);
 
   const titles: Record<TMetadataItemType, string> = {
     file: t("Metadata:NoFileMetadata"),
@@ -61,8 +77,9 @@ const MetadataEmpty = ({ itemType, addActions }: MetadataEmptyProps) => {
     room: t("Metadata:NoRoomMetadata"),
   };
 
-  const descriptions: Record<TMetadataItemType, string> = {
+  const descriptions: Record<TMetadataEmptyHint, string> = {
     file: t("Metadata:NoFileMetadataDescription"),
+    fileWithAI: t("Metadata:NoFileMetadataDescriptionAI"),
     folder: t("Metadata:NoFolderMetadataDescription"),
     room: t("Metadata:NoRoomMetadataDescription"),
   };
@@ -90,12 +107,15 @@ const MetadataEmpty = ({ itemType, addActions }: MetadataEmptyProps) => {
             lineHeight="16px"
             textAlign="center"
           >
-            {descriptions[itemType]}
+            {descriptions[getMetadataEmptyHint(itemType, isAIAvailable)]}
           </Text>
         ) : null}
       </div>
       {addActions ? (
-        <AddMetadataMenu {...addActions}>
+        <AddMetadataMenu
+          {...addActions}
+          onGenerate={isAIAvailable ? () => openAI("suggest") : undefined}
+        >
           {(openMenu) => (
             <button
               type="button"
@@ -113,4 +133,4 @@ const MetadataEmpty = ({ itemType, addActions }: MetadataEmptyProps) => {
   );
 };
 
-export default MetadataEmpty;
+export default observer(MetadataEmpty);

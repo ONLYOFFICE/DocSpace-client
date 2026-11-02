@@ -39,18 +39,24 @@ import { useTranslation } from "react-i18next";
 
 import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import type { TEntryMetadata } from "@docspace/shared/api/metadata/types";
 import type { TMetadataInput } from "@docspace/shared/utils/metadata";
 
 import TemplateForm from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/TemplateForm";
 import type { TTemplateForm } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
 
+import SavedMetadata from "./SavedMetadata";
 import styles from "../MetadataAIPanel.module.scss";
 
 type FillFormsProps = {
+  metadata: TEntryMetadata | null;
   forms: TTemplateForm[];
+  filledFieldIds?: number[];
   customFields: ReactNode;
   isAnalyzing: boolean;
+  isReadOnly: boolean;
   onChange: (templateId: number, fieldId: number, input: TMetadataInput) => void;
+  onRevert: (templateId: number, fieldId: number) => void;
 };
 
 const SectionTitle = ({ children }: { children: string }) => (
@@ -66,26 +72,36 @@ const SectionTitle = ({ children }: { children: string }) => (
 );
 
 const FillForms = ({
+  metadata,
   forms,
+  filledFieldIds,
   customFields,
   isAnalyzing,
+  isReadOnly,
   onChange,
+  onRevert,
 }: FillFormsProps) => {
   const { t } = useTranslation(["Metadata"]);
 
   const withTitles = forms.length > 1 || !!customFields;
 
-  return (
-    <div className={styles.forms}>
-      <div className={classNames({ [styles.disabled]: isAnalyzing })}>
+  const getContent = () => {
+    if (isReadOnly) {
+      return metadata ? <SavedMetadata metadata={metadata} /> : null;
+    }
+
+    return (
+      <>
         {forms.map((form) => (
           <div key={form.template.id}>
             {withTitles ? <SectionTitle>{form.template.name}</SectionTitle> : null}
             <TemplateForm
               form={form}
+              filledFieldIds={filledFieldIds}
               onChange={(fieldId, input) =>
                 onChange(form.template.id, fieldId, input)
               }
+              onRevert={(fieldId) => onRevert(form.template.id, fieldId)}
             />
           </div>
         ))}
@@ -97,10 +113,20 @@ const FillForms = ({
             {customFields}
           </div>
         ) : null}
+      </>
+    );
+  };
+
+  return (
+    <div className={styles.forms}>
+      <div className={classNames({ [styles.disabled]: isAnalyzing })}>
+        {getContent()}
       </div>
       {isAnalyzing ? (
         <div className={styles.overlay} data-testid="metadata_ai_analyzing">
-          <Loader type={LoaderTypes.track} size="64px" />
+          <div className={styles.overlayLoader}>
+            <Loader type={LoaderTypes.track} size="64px" />
+          </div>
         </div>
       ) : null}
     </div>

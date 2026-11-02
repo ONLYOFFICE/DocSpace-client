@@ -137,16 +137,20 @@ const TagManagement: FC<TagManagementWrapperProps> = ({
 };
 
 export default inject<TStore, TagManagementProps, InjectedTagManagementProps>(
-  ({
-    filesActionsStore,
-    authStore,
-    treeFoldersStore,
-    filesStore,
-    selectedFolderStore,
-    tagsStore,
-  }) => ({
+  (
+    {
+      filesActionsStore,
+      authStore,
+      treeFoldersStore,
+      filesStore,
+      selectedFolderStore,
+      tagsStore,
+    },
+    props,
+  ) => ({
     isAdmin: authStore.isAdmin,
-    onSelectTag: filesActionsStore.selectTag,
+    // A list other than Files (the AI projects) filters itself on a tag.
+    onSelectTag: props.onSelectTag ?? filesActionsStore.selectTag,
     isArchiveFolder: treeFoldersStore.isArchiveFolderRoot,
     applyTagChangeToRooms: filesStore.applyTagChange,
     applyTagChangeToOpenRoom: selectedFolderStore.applyTagChange,

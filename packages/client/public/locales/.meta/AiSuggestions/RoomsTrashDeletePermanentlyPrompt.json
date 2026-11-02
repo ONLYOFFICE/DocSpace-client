@@ -3,7 +3,7 @@
   "content": "Delete permanently in the room Trash only after showing the impact and requesting confirmation. If this information is not provided, ask me for the exact items and confirmation before any destructive action.",
   "content_en_sha1_hash": "08137a2621b2583ad45a910f1c4c4cb9470f6960",
   "created_at": "2026-08-04T09:58:55.220Z",
-  "updated_at": "2026-08-05T16:43:35.358Z",
+  "updated_at": "2026-10-31T12:58:29.071Z",
   "comment": {
     "text": "An instructional prompt for the AI assistant that defines its behavior when handling permanent deletion requests in the Trash room, specifically requiring an impact assessment and user confirmation.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
       "line_number": 565,
-      "context": "prompt: t(\"AiSuggestions:RoomsTrashRestoreARoomPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTrashDeletePermanently\"),\n prompt: t(\"AiSuggestions:RoomsTrashDeletePermanentlyPrompt\"),\n requires: \"roomAdmin\",\n },\n ],\n \n aiRoom: [",
+      "context": "prompt: t(\"AiSuggestions:RoomsTrashRestoreARoomPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTrashDeletePermanently\"),\n prompt: t(\"AiSuggestions:RoomsTrashDeletePermanentlyPrompt\"),\n requires: \"roomAdmin\",\n },\n ],\n \n customRoom: insideRoom,",
       "module": "/packages/client"
     }
   ],

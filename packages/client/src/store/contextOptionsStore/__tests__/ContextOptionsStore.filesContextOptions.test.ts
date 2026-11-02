@@ -260,21 +260,6 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
     expect(menuShape(store.getFilesContextOptions(enc as never, t))).toMatchSnapshot();
   });
 
-  it("maps an AI agent room", () => {
-    const store = createTestContextOptionsStore();
-    store.dialogsStore = { roomGroups: [] } as never;
-    const agent = {
-      id: 4,
-      title: "Agent",
-      roomType: RoomsType.AIRoom,
-      rootFolderType: FolderType.AIAgents,
-      security: {},
-      viewAccessibility: {},
-      contextOptions: ["room-info", "edit-room", "delete"],
-    };
-    expect(menuShape(store.getFilesContextOptions(agent as never, t))).toMatchSnapshot();
-  });
-
   it("maps a room template", () => {
     const store = createTestContextOptionsStore();
     store.dialogsStore = { roomGroups: [] } as never;
@@ -394,5 +379,33 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
         true,
       );
     });
+  });
+});
+
+describe("ContextOptionsStore.getFilesContextOptions — the members link", () => {
+  type TOption = { key?: string; disabled?: boolean; items?: TOption[] };
+  const find = (options: TOption[], key: string): TOption | undefined => {
+    for (const option of options) {
+      if (option.key === key) return option;
+      const nested = option.items && find(option.items, key);
+      if (nested) return nested;
+    }
+    return undefined;
+  };
+  const membersLink = (rootFolderType: FolderType) => {
+    const store = createTestContextOptionsStore();
+    const model = store.getFilesContextOptions(
+      { ...fileItem(["link-for-room-members"]), canShare: true, rootFolderType } as never,
+      t,
+    );
+    return find(model as TOption[], "link-for-room-members");
+  };
+
+  it("stays enabled for a shareable file in the AI rooms, which have no external link", () => {
+    expect(membersLink(FolderType.AiHub)).toMatchObject({ disabled: false });
+  });
+
+  it("gives way to the external link for a shareable file elsewhere", () => {
+    expect(membersLink(FolderType.Rooms)?.disabled ?? true).toBe(true);
   });
 });

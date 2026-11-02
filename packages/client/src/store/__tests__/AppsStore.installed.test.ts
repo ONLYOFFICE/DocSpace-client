@@ -95,8 +95,6 @@ describe("AppsStore.isInstalled", () => {
 
     expect(store.isInstalled("ai-rooms")).toBe(false);
     expect(store.isInstalled("ai-forms")).toBe(true);
-    // An app the server does not list is not on offer.
-    expect(store.isInstalled("ai-agents")).toBe(false);
   });
 
   it("is optimistic on standalone until the list arrives", () => {

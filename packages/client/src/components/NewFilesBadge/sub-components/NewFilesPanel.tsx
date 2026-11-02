@@ -121,7 +121,6 @@ export const NewFilesPanelComponent = ({
 
   const isForms = folderId === "forms";
   const isRooms = folderId === "rooms" || isForms;
-  const isAgents = folderId === "agents";
 
   const fetchFolderIds = React.useMemo(
     () => (folderIds?.length ? folderIds : [folderId]),
@@ -135,11 +134,10 @@ export const NewFilesPanelComponent = ({
 
     const folderIDs: (string | number)[] = [];
 
-    if (isRooms || isAgents) {
+    if (isRooms) {
       data.forEach(({ items }) => {
         items.forEach((item) => {
           if ("room" in item) folderIDs.push(item.room.id);
-          if ("agent" in item) folderIDs.push(item.agent.id);
         });
       });
     } else {
@@ -154,7 +152,6 @@ export const NewFilesPanelComponent = ({
     fetchFolderIds,
     isMarkAsReadRunning,
     isRooms,
-    isAgents,
     data,
     markAsRead,
     onClose,
@@ -176,13 +173,11 @@ export const NewFilesPanelComponent = ({
 
         const newFiles = isRooms
           ? await api.files.getNewFiles("rooms")
-          : isAgents
-            ? await api.files.getNewFilesAgents()
-            : mergeFolderGroups(
-                await Promise.all(
-                  fetchFolderIds.map((id) => api.files.getNewFolderFiles(id)),
-                ),
-              );
+          : mergeFolderGroups(
+              await Promise.all(
+                fetchFolderIds.map((id) => api.files.getNewFolderFiles(id)),
+              ),
+            );
 
         dataFetched.current = true;
         requestRunning.current = false;
@@ -216,7 +211,6 @@ export const NewFilesPanelComponent = ({
     fetchFolderIds,
     isRooms,
     isForms,
-    isAgents,
     onClose,
     setIsLoading,
   ]);
@@ -254,7 +248,7 @@ export const NewFilesPanelComponent = ({
   );
 
   const content = isLoading ? (
-    <NewFilesPanelLoader isRooms={isRooms || isAgents} />
+    <NewFilesPanelLoader isRooms={isRooms} />
   ) : (
     data.map(({ date, items }, index) => {
       return (
@@ -263,7 +257,6 @@ export const NewFilesPanelComponent = ({
           date={date}
           items={items}
           isRooms={isRooms}
-          isAgents={isAgents}
           isFirst={index === 0}
           culture={culture}
           onClose={onClose}

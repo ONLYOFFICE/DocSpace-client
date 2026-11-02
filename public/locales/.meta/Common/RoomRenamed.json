@@ -3,7 +3,7 @@
   "content": "Room <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
   "content_en_sha1_hash": "6577c913cb505335f78dd2df81da5de99e766f6a",
   "created_at": "2025-05-19T21:30:54.945Z",
-  "updated_at": "2026-08-17T17:23:21.764Z",
+  "updated_at": "2026-10-31T12:58:29.159Z",
   "comment": {
     "text": "This is a toast message that appears in the activity feed when a room is renamed. It informs the user about the old and new names of the room. `{{oldRoomTitle}}` and `{{roomTitle}}` are placeholders for the room's previous and current names, respectively.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 269,
+      "line_number": 226,
       "context": "case FeedActionKeys.RoomRenamed:\n return (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"RoomRenamed\"\n values={{\n oldRoomTitle: (feed.data as TFeedData).oldTitle,\n roomTitle: (feed.data as TFeedData).newTitle,\n }}\n components={{",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 216,
+      "line_number": 178,
       "context": "case FeedActionKeys.RoomRenamed:\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RoomRenamed\"\n values={{\n oldRoomTitle: feed.data.oldTitle,\n roomTitle: feed.data.newTitle,\n }}\n components={{",
       "module": "/packages/client"
     },

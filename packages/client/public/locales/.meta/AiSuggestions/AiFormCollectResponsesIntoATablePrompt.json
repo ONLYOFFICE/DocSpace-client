@@ -3,7 +3,7 @@
   "content": "Collect the answers from the attached form into a table: one column per field, one row per response, and tell me which values you could not read. If this information is not provided, ask me which fields to include and in what order.",
   "content_en_sha1_hash": "908351ea3cb63bcaad4d69d1451e705a27775a37",
   "created_at": "2026-09-14T19:16:00.070Z",
-  "updated_at": "2026-09-14T19:19:30.026Z",
+  "updated_at": "2026-10-31T12:58:29.084Z",
   "comment": {
     "text": "An instructional prompt sent to the AI assistant when the user selects the option to convert form responses into a table.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 868,
+      "line_number": 808,
       "context": "name: t(\"AiSuggestions:AiFormCheckTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormCheckTheAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormCollectResponsesIntoATable\"),\n prompt: t(\"AiSuggestions:AiFormCollectResponsesIntoATablePrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormCreateAReportFromTheForm\"),\n prompt: t(\"AiSuggestions:AiFormCreateAReportFromTheFormPrompt\"),\n },",
       "module": "/packages/client"
     }

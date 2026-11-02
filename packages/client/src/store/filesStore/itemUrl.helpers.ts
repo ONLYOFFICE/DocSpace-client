@@ -59,14 +59,10 @@ export const getItemUrl = (
   canOpenPlayer: boolean | undefined,
   deps: GetItemUrlDeps,
   shareKey?: string,
-  isAiRoom?: boolean,
 ) => {
   const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
 
-  const url = getCategoryUrl(
-    isAiRoom ? CategoryType.Chat : deps.categoryType,
-    id,
-  );
+  const url = getCategoryUrl(deps.categoryType, id);
 
   if (canOpenPlayer) {
     if (deps.publicRoomStore.isPublicRoom) {

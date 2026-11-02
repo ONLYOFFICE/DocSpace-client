@@ -3,7 +3,7 @@
   "content": "In a Form Filling space, the main link is valid for an unlimited time period.",
   "content_en_sha1_hash": "407d0e5b7463f55778f528ade6fba7e4f1a6f3f0",
   "created_at": "2025-08-26T11:15:03.468Z",
-  "updated_at": "2026-10-29T13:57:47.781Z",
+  "updated_at": "2026-10-31T12:58:29.533Z",
   "comment": {
     "text": "This is a descriptive text displayed in a dialog. It informs the user that the main link for a Form Filling room has no time limit.",
     "is_auto": true,

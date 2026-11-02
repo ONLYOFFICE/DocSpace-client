@@ -121,12 +121,13 @@ const SelectionArea = (props) => {
 export default inject(
   ({ filesStore, treeFoldersStore, indexingStore, hotkeyStore }) => {
     const { dragging, viewAs, setSelections, folders, files } = filesStore;
-    const { isRoomsFolder, isArchiveFolder, isFormsFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isFormsFolder, isAiSectionFolder } =
+      treeFoldersStore;
     const { isIndexEditingMode } = indexingStore;
     const { selectionAreaIsEnabled, setWithContentSelection, countTilesInRow } =
       hotkeyStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
 
     return {
       dragging,

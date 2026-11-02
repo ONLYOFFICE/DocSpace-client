@@ -82,7 +82,6 @@ const SimpleFilesRow = React.memo((props) => {
     showHotkeyBorder,
     id,
     isRooms,
-    isAIAgentsFolder,
     folderCategory,
     isHighlight,
     badgesComponent,
@@ -243,9 +242,7 @@ const SimpleFilesRow = React.memo((props) => {
           element={element}
           mode="modern"
           contentElement={
-            isMobileDevice || isRooms || isAIAgentsFolder
-              ? null
-              : quickButtonsComponent
+            isMobileDevice || isRooms ? null : quickButtonsComponent
           }
           badgesComponent={
             !isMobileDevice || item.isTemplate ? badgesComponent : null
@@ -274,7 +271,6 @@ const SimpleFilesRow = React.memo((props) => {
           isDragOver={isDragActive}
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}
-          isAIAgentsFolder={isAIAgentsFolder}
           folderCategory={folderCategory}
           withoutBorder
           isHighlight={isHighlight}
@@ -288,12 +284,9 @@ const SimpleFilesRow = React.memo((props) => {
             sectionWidth={sectionWidth}
             onFilesClick={onFilesClickEvent}
             quickButtons={
-              isMobileDevice || isRooms || isAIAgentsFolder
-                ? quickButtonsComponent
-                : null
+              isMobileDevice || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
-            isAIAgentsFolder={isAIAgentsFolder}
             badgesComponent={
               isMobileDevice && !item.isTemplate ? badgesComponent : null
             }

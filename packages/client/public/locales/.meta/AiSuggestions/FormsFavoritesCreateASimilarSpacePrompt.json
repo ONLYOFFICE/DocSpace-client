@@ -3,7 +3,7 @@
   "content": "Create a new Form Space based on the structure and settings of the selected favorite space. If this information is not provided, ask me for the space name, collection goal, forms, participants, and deadline.",
   "content_en_sha1_hash": "a61bbd77ad7ad350bafff7c9cf5271891f3b2fe4",
   "created_at": "2026-08-12T15:15:05.677Z",
-  "updated_at": "2026-08-12T15:19:02.369Z",
+  "updated_at": "2026-10-31T12:58:29.078Z",
   "comment": {
     "text": "AI prompt instructing the assistant to replicate a Form Space's structure and settings from a selected favorite space, including instructions on what information to request if details are missing.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 740,
+      "line_number": 680,
       "context": "name: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpaces\"),\n prompt: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpacesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsFavoritesCreateASimilarSpace\"),\n prompt: t(\"AiSuggestions:FormsFavoritesCreateASimilarSpacePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsFavoritesFindTheFormYouNeed\"),\n prompt: t(\"AiSuggestions:FormsFavoritesFindTheFormYouNeedPrompt\"),",
       "module": "/packages/client"
     }

@@ -208,7 +208,6 @@ class AppsStore {
       const settings = await this.fetchAppSettings<{ installed?: boolean }>(id);
       return !settings?.installed;
     }
-    if (id === "ai-agents") return false;
     const settings = await this.fetchAppSettings(id);
     return !settings;
   };

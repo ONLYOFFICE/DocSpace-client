@@ -244,7 +244,6 @@ const TemplatesRow = ({
           isMultiSelect={false}
           withRecentTreeFolder
           withFavoritesTreeFolder
-          withAIAgentsTreeFolder
           openRoot
           isSelect
         />

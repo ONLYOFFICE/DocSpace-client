@@ -115,12 +115,17 @@ body.desktop {
   height: 0px !important;
 }
 
-// A files list row the keyboard focused as a whole (useRowFocus). A tile, or a
-// row of the row view, holds the focus itself and is ringed here; a table row
-// has no box, its first cell (files-item too) holds the focus, and the table's
-// own stylesheet rings the row across its cells.
-.files-item[data-row-focus]:not(.table-container_cell):focus-visible {
+// A files list row the keyboard focused as a whole (useRowFocus). A tile's card,
+// or a row of the row view, holds the focus itself and is ringed here; a table
+// row has no box, its first cell (files-item too) holds the focus, and the
+// table's own stylesheet rings the row across its cells.
+.files-item > [data-row-focus]:focus-visible {
   outline: 2px solid var(--accent-main);
-  // Outside: inside, the tile's own card paints over it.
   outline-offset: 2px;
+}
+
+// A tile's card draws the caret's border itself: the ring lies on it, one
+// frame, not a second one a gap away.
+.tile-container .files-item > [data-row-focus]:focus-visible {
+  outline-offset: 0;
 }

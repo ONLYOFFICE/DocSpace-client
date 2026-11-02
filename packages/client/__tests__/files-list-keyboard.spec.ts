@@ -435,6 +435,24 @@ test.describe("Files list: the focus follows the keyboard", () => {
     expect(where.row, `Tab went on into ${where.row}`).toBeNull();
   });
 
+  // The tile's drag-and-drop wrapper held the focus, past the card that
+  // handles the item's context menu: Shift+F10 opened the section's menu.
+  test("in tiles, Shift+F10 opens the focused item's context menu", async ({
+    page,
+  }) => {
+    await page.keyboard.press("KeyV");
+    await expect(page.getByTestId("tile_0")).toBeVisible();
+
+    await page.keyboard.press("ArrowRight");
+    await expect.poll(async () => (await focus(page)).isRow).toBe(true);
+
+    await page.keyboard.press("Shift+F10");
+    // "Select" is the item's own menu; the section's offers new files.
+    await expect(
+      page.locator('.p-contextmenu [data-testid="option_select"]'),
+    ).toBeVisible();
+  });
+
   // The options are drawn with the client's DropDownItem wrapper; the combo
   // box took them for custom content and the arrows did nothing.
   test("the arrows walk the checkbox options in the group menu", async ({

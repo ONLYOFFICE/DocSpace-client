@@ -140,6 +140,39 @@ describe("useRowFocus", () => {
     });
   });
 
+  // A tile is the item's own card inside a drag-and-drop wrapper, and the card
+  // handles its context menu. The wrapper held the focus: Shift+F10 or the
+  // Menu key fired the context menu on it, past the card, and the section's
+  // menu opened instead of the item's - and its ring stood off the card's
+  // own border, two frames with a gap between them.
+  it("focuses a tile's own card, which takes the keyboard's context menu", async () => {
+    document.body.innerHTML = `
+      <div class="section-scroll">
+        <div class="tile-container">
+          <div id="folder_7" class="files-item 7">
+            <div data-testid="card">
+              <button type="button" data-testid="card-menu">menu</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    const onContextMenu = vi.fn();
+    byTestId("card").addEventListener("contextmenu", onContextMenu);
+    const hook = renderHook(({ caret }) => useRowFocus(caret, vi.fn()), {
+      initialProps: { caret: null as { id: number } | null },
+    });
+    fireEvent.keyDown(window, { key: "ArrowRight" });
+    hook.rerender({ caret: { id: 7 } });
+
+    await waitFor(() => expect(byTestId("card")).toHaveFocus());
+    expect(byTestId("card")).toHaveAttribute("data-row-focus");
+
+    // What the browser does for Shift+F10: a contextmenu on the focused element.
+    fireEvent.contextMenu(document.activeElement!);
+    expect(onContextMenu).toHaveBeenCalledOnce();
+  });
+
   // A table row is several cells: a press on any of them is still on the
   // row, which must stay able to take the focus back.
   it("keeps the row held when the pointer presses another of its cells", async () => {

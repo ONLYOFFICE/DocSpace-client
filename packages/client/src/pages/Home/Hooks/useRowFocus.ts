@@ -82,9 +82,13 @@ const findRow = (item: TCaretItem) => {
   );
 };
 
-// The element that holds the focus for a row as a whole. A row of tiles or of
-// the row view has a box of its own; a table row is display: contents, so its
-// first cell holds it, and the stylesheet rings every cell of the row. It is
+// The element that holds the focus for a row as a whole. A tile, or a row of
+// the row view, is the item's own element (the card, the row) inside a
+// drag-and-drop wrapper: that element holds it, as it is the one that handles
+// the item's context menu - Shift+F10 and the Menu key fire on the focused
+// element - and draws the caret's border the ring goes round. A table row is
+// display: contents, so its first cell holds it, the row's context menu
+// handler above it, and the stylesheet rings every cell of the row. It is
 // focusable from script only (tabindex -1), never a Tab stop of its own.
 const HOLDER = "data-row-focus";
 
@@ -93,10 +97,13 @@ const isHolder = (el: Element) => el.hasAttribute(HOLDER);
 // `held` collects the release of each row held this way, for the list that
 // holds them to end them all when it goes away: no listener outlives it.
 const rowHolder = (row: HTMLElement, held: Set<() => void>) => {
+  const item = row.firstElementChild;
   const holder =
     getComputedStyle(row).display === "contents"
       ? (row.querySelector<HTMLElement>(".table-container_cell") ?? row)
-      : row;
+      : item instanceof HTMLElement
+        ? item
+        : row;
   if (isHolder(holder)) return holder;
 
   // Set while the row is the keyboard's: left on, a click on that cell or

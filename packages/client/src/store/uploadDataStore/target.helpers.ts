@@ -38,40 +38,29 @@ import { RoomsType } from "@docspace/shared/enums";
 import type { ItemUploadContext } from "@docspace/shared/services/private-room/encrypted-upload";
 
 import type { TUploadTarget } from "./helpers";
-import type AiRoomStore from "../AiRoomStore";
 import type SelectedFolderStore from "../SelectedFolderStore";
 import type TreeFoldersStore from "../TreeFoldersStore";
 
 export type TOpenFolderTargetDeps = {
   selectedFolderStore: Pick<
     SelectedFolderStore,
-    "id" | "isRoom" | "isAIRoom" | "navigationPath" | "roomType"
+    "id" | "isRoom" | "navigationPath" | "roomType"
   >;
   treeFoldersStore: Pick<TreeFoldersStore, "isPrivacyFolder">;
-  aiRoomStore: Pick<AiRoomStore, "knowledgeId">;
 };
 
-/**
- * Snapshot of the open folder as an upload target. An AI agent uploads into
- * its knowledge folder.
- */
+/** Snapshot of the open folder as an upload target. */
 export function resolveOpenFolderTarget({
   selectedFolderStore,
   treeFoldersStore,
-  aiRoomStore,
 }: TOpenFolderTargetDeps): TUploadTarget {
-  const { id, isRoom, isAIRoom, navigationPath, roomType } =
-    selectedFolderStore;
+  const { id, isRoom, navigationPath, roomType } = selectedFolderStore;
   const isPrivate = treeFoldersStore.isPrivacyFolder;
 
-  let targetRoomType = roomType;
-  if (isPrivate) targetRoomType = RoomsType.CustomRoom;
-  else if (isAIRoom) targetRoomType = RoomsType.AIRoom;
-
   return {
-    folderId: isAIRoom ? aiRoomStore.knowledgeId : id,
+    folderId: id,
     isPrivate,
-    roomType: targetRoomType,
+    roomType: isPrivate ? RoomsType.CustomRoom : roomType,
     encryptionRoomId:
       navigationPath?.find((r) => r.isRoom)?.id ?? (isRoom ? id : null),
   };

@@ -117,11 +117,11 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
     case FolderType.RoomTemplates:
       return parentId > 0 ? CategoryType.SharedRoom : CategoryType.Shared;
 
-    case FolderType.AIAgents:
-      return parentId > 0 ? CategoryType.AIAgent : CategoryType.AIAgents;
-
     case FolderType.Forms:
       return parentId > 0 ? CategoryType.Form : CategoryType.Forms;
+
+    case FolderType.AiHub:
+      return parentId > 0 ? CategoryType.AiHubRoom : CategoryType.AiHub;
 
     case FolderType.Archive:
       return CategoryType.Archive;
@@ -203,12 +203,6 @@ export const getCategoryUrl = (categoryType, folderId) => {
   const cType = categoryType;
 
   switch (cType) {
-    case CategoryType.AIAgents:
-      return "/ai-agents/filter";
-
-    case CategoryType.AIAgent:
-      return `/ai-agents/${folderId}/filter`;
-
     case CategoryType.Recent:
       return "/recent/filter";
 
@@ -233,11 +227,16 @@ export const getCategoryUrl = (categoryType, folderId) => {
     case CategoryType.PrivateArchive:
       return "/private/archived/filter";
 
+    // The bare `/ai-rooms` is the Rooms app's SDK frame page; the "AI rooms"
+    // section lives on the nested paths the server links to.
+    case CategoryType.AiHub:
+      return "/ai-rooms/filter";
+
+    case CategoryType.AiHubRoom:
+      return `/ai-rooms/${folderId}/filter`;
+
     case CategoryType.SharedRoom:
       return `/rooms/shared/${folderId}/filter`;
-
-    case CategoryType.Chat:
-      return `/ai-agents/${folderId}/chat`;
 
     case CategoryType.Archive:
       return "/rooms/archived/filter";
@@ -298,8 +297,6 @@ export const getNewViewUrlByFolderType = (folderType) => {
       return "/ai-rooms?section=rooms";
     case FolderType.Archive:
       return "/ai-rooms?section=archive";
-    case FolderType.AIAgents:
-      return "/agents";
     default:
       return "/ai-files";
   }

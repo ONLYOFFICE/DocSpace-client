@@ -212,7 +212,7 @@ export default function FilesSelectorClient({
       isFirstLoad: boolean,
       isSelectedParentFolder: boolean,
       selectedItemIdParam: string | number | undefined,
-      selectedItemT: "rooms" | "files" | "agents" | undefined,
+      selectedItemT: "rooms" | "files" | undefined,
       isRoot: boolean,
       selectedItemSecurity:
         | TFileSecurity

@@ -3,7 +3,6 @@
 exports[`UploadDataStore — public surface > exposes a stable set of public members 1`] = `
 [
   "activeConversionQueue",
-  "aiRoomStore",
   "asyncUpload",
   "asyncUploadObj",
   "cancelConversion",

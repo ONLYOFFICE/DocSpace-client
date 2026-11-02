@@ -71,7 +71,6 @@ type ItemData = {
   lockedBy?: string;
   locked?: boolean;
   isFavorite?: boolean;
-  isAIAgent?: boolean;
   startFilling?: boolean;
   isFillingPreparing?: boolean;
   encrypted?: boolean;

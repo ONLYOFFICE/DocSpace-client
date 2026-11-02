@@ -101,7 +101,7 @@ export const useSectionDrop = ({
           if (items.length > 0) startUpload(items, target, t);
         })
         .catch((err) => {
-          toastr.error(err, null, 0, true);
+          toastr.error(err, undefined, 0, true);
         });
     },
   );

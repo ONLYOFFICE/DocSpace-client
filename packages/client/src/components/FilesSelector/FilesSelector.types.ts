@@ -93,12 +93,13 @@ export type FilesSelectorProps = TSelectorHeader & {
 	treeFolders?: TFolder[];
 	withRecentTreeFolder?: boolean;
 	withFavoritesTreeFolder?: boolean;
-	withAIAgentsTreeFolder?: boolean;
 	withFormsTreeFolder?: boolean;
 
 	theme: TTheme;
 
 	selection: (TFolder | TFile)[];
+	extsFilesVectorized: string[];
+	vectorizationEnabled: boolean;
 	disabledItems: string[] | number[];
 	disabledFolderType?: FolderType;
 	setMoveToPanelVisible: (value: boolean) => void;

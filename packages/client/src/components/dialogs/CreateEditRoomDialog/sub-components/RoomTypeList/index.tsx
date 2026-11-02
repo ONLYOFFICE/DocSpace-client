@@ -34,11 +34,17 @@
  */
 
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { getCreateRoomTypes } from "@docspace/shared/utils/rooms";
+import {
+  AI_HUB_SECTION_TYPES,
+  getCreateRoomTypes,
+} from "@docspace/shared/utils/rooms";
 import { RoomsType } from "@docspace/shared/enums";
 import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+
+import { useStores } from "SRC_DIR/store/useStore";
 
 import styles from "./RoomTypeList.module.scss";
 
@@ -47,6 +53,10 @@ type RoomTypeListProps = {
   isExternalShareRestricted?: boolean;
   processCreatingRoomFromData?: boolean;
   isFormsCreate?: boolean;
+  // The "AI rooms" section's chooser: the AI room types and nothing else.
+  isAiRoomsCreate?: boolean;
+  // Picking "AI project" there leaves this dialog for the project form.
+  onOpenAiProjectForm?: () => void;
   // Set only when the OForms gallery is available; offers a form space built
   // around a gallery template even with the Forms quick actions turned off.
   onOpenTemplateGallery?: () => void;
@@ -60,12 +70,18 @@ const RoomTypeList = ({
   isExternalShareRestricted,
   processCreatingRoomFromData,
   isFormsCreate,
+  isAiRoomsCreate,
+  onOpenAiProjectForm,
   onOpenTemplateGallery,
 
   setRoomType,
   setTemplateDialogIsVisible,
 }: RoomTypeListProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Files", "Common"]);
+  const { settingsStore, userStore } = useStores();
+  const vectorizationEnabled =
+    settingsStore.aiConfig?.vectorizationEnabled !== false;
+  const isAdmin = !!(userStore.user?.isOwner || userStore.user?.isAdmin);
 
   // Form Filling Rooms are created from the dedicated "Forms" section (which
   // opens straight into the FFR form via startRoomType). The only place the
@@ -95,6 +111,56 @@ const RoomTypeList = ({
   });
 
   const publicRoomTooltipContent = t("Common:PublicRoomCreationDisabled");
+
+  if (isAiRoomsCreate) {
+    // A Knowledge room is searched through vectorization, so it cannot be
+    // created while vectorization is off (the server refuses it too); the
+    // tooltip says who can turn it on.
+    const knowledgeRoomTooltipContent = isAdmin
+      ? t("Common:KnowledgeRoomCreationNeedsVectorizationAdmin")
+      : t("Common:KnowledgeRoomCreationNeedsVectorizationUser");
+
+    return (
+      <div className={styles.roomTypeList}>
+        {AI_HUB_SECTION_TYPES.map((roomType) => {
+          const isDisabled =
+            roomType === RoomsType.KnowledgeRoom && !vectorizationEnabled;
+          const roomTypeElement = (
+            <RoomType
+              id={roomType.toString()}
+              key={roomType}
+              roomType={roomType}
+              type="listItem"
+              onClick={() =>
+                roomType === RoomsType.AiProjectRoom
+                  ? onOpenAiProjectForm?.()
+                  : handleClick(roomType)
+              }
+              isDisabled={isDisabled}
+              isOpen={false}
+              selectedId={roomType.toString()}
+            />
+          );
+          const tooltipId = `room-type-disabled-tooltip-${roomType}`;
+
+          return isDisabled ? (
+            <div key={roomType} id={tooltipId}>
+              {roomTypeElement}
+              <Tooltip
+                id={`${tooltipId}-instance`}
+                anchorSelect={`#${tooltipId}`}
+                place="bottom"
+                float
+                getContent={() => knowledgeRoomTooltipContent}
+              />
+            </div>
+          ) : (
+            roomTypeElement
+          );
+        })}
+      </div>
+    );
+  }
 
   if (isFormsCreate) {
     return (
@@ -189,4 +255,4 @@ const RoomTypeList = ({
   );
 };
 
-export default RoomTypeList;
+export default observer(RoomTypeList);

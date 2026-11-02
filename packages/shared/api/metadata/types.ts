@@ -104,6 +104,7 @@ export type TCustomFieldRequest = {
 export type TEntryMetadata = {
   templates: TEntryMetadataTemplate[];
   customFields: TCustomField[];
+  hasMetadataFields?: boolean;
 };
 
 export type TMetadataOperation = {

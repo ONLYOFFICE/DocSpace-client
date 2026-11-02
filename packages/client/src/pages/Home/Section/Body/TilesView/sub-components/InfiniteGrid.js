@@ -269,10 +269,10 @@ export default inject(
     const { tilesGridColumns, setTilesGridColumns } = hotkeyStore;
 
     const { isLoading } = clientLoadingStore;
-    const { isRoomsFolder, isArchiveFolder, isFormsFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isFormsFolder, isAiSectionFolder } = treeFoldersStore;
 
     const filesLength = filesList.length;
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
 
     const currentFolderId = selectedFolderStore.id;
 

@@ -90,16 +90,12 @@ export function removeFilesImpl(
     isRoomsFolder,
     isArchiveFolder,
     isTemplatesFolder,
-    isAIAgentsFolder,
     isFormsFolder,
+    isAiSectionFolder,
   } = self.treeFoldersStore;
 
   const isRooms =
-    isRoomsFolder ||
-    isArchiveFolder ||
-    isTemplatesFolder ||
-    isAIAgentsFolder ||
-    isFormsFolder;
+    isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder || isAiSectionFolder;
 
   let deleteCount = 0;
 
@@ -205,10 +201,8 @@ export function removeFilesImpl(
     (newFilter.page + 1) * newFilter.pageCount - deleteCount;
   newFilter.pageCount = deleteCount;
   if (isRooms) {
-    const request = isAIAgentsFolder
-      ? api.ai.getAIAgents(newFilter as TRoomsFilter)
-      : api.rooms.getRooms(scopeRoomsRequest(self, newFilter as TRoomsFilter));
-    return request
+    return api.rooms
+      .getRooms(scopeRoomsRequest(self, newFilter as TRoomsFilter))
       .then((res) => {
         const folders = folderIds
           ? self.folders.filter((x) => !folderIds.includes(x.id))

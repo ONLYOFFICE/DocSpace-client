@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "AIエージェントが作成されました",
-  "AgentDeleted": "AIエージェントが削除されました",
-  "AgentUpdated": "AIエージェントが更新されました",
   "Before": "その前",
   "CreateWebhook": "ウェブフックの作成",
   "DeleteHint": "ウェブフックは永久に削除されます。\nこの操作を元に戻すことはできません。",

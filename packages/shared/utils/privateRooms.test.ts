@@ -38,7 +38,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { RoomsTypePrivate } from "../enums";
 
 import { RoomsTypeValues } from "./common";
-import { getCreateRoomTypes } from "./rooms";
+import { AI_HUB_SECTION_TYPES, getCreateRoomTypes } from "./rooms";
 import {
   isPrivateRoomsEnabled,
   isPrivateRoomsOptInValue,
@@ -138,7 +138,10 @@ describe("private rooms feature flag", () => {
     const withFlag = getCreateRoomTypes();
 
     expect(withoutFlag).toEqual(
-      RoomsTypeValues.filter((type) => type !== RoomsTypePrivate),
+      RoomsTypeValues.filter(
+        (type) =>
+          type !== RoomsTypePrivate && !AI_HUB_SECTION_TYPES.includes(type),
+      ),
     );
     expect(withFlag).toEqual(withoutFlag);
   });

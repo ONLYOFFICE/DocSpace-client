@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { FilesSelectorFilterTypes, RoomsType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 
 export const getHeaderLabel = (
@@ -92,4 +92,41 @@ export const getAcceptButtonLabel = (
   if (filterParam) return t("Common:SaveButton");
 
   return t("Common:SaveHereButton");
+};
+
+const ORDINARY_TARGET_ROOM_TYPES = [
+  RoomsType.EditingRoom,
+  RoomsType.CustomRoom,
+  RoomsType.PublicRoom,
+  RoomsType.VirtualDataRoom,
+];
+
+/**
+ * The room types the copy and move selector lists in its Rooms section.
+ * Besides the ordinary rooms, an Instructions room is offered when every
+ * selected item is a Markdown file, and a Knowledge room when every selected
+ * item is a file vectorization reads (and vectorization is on); folders
+ * disqualify both, since neither room holds any.
+ */
+export const getCopyTargetRoomTypes = (
+  selection: { isFolder?: boolean; fileExst?: string | null }[],
+  extsFilesVectorized: string[],
+  vectorizationEnabled: boolean,
+): RoomsType[] => {
+  const types = [...ORDINARY_TARGET_ROOM_TYPES];
+  if (selection.length === 0) return types;
+
+  const exts: string[] = [];
+  for (const item of selection) {
+    if (item.isFolder || !item.fileExst) return types;
+    exts.push(item.fileExst.toLowerCase());
+  }
+
+  if (exts.every((ext) => ext === ".md")) types.push(RoomsType.InstructionsRoom);
+
+  const vectorized = extsFilesVectorized.map((ext) => ext.toLowerCase());
+  if (vectorizationEnabled && exts.every((ext) => vectorized.includes(ext)))
+    types.push(RoomsType.KnowledgeRoom);
+
+  return types;
 };

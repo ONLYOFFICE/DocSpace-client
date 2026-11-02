@@ -53,7 +53,6 @@ import CommonStore from "./CommonStore";
 import FilesTourStore from "./FilesTourStore";
 import RoomsTourStore from "./RoomsTourStore";
 import FormsTourStore from "./FormsTourStore";
-import AiAgentsTourStore from "./AiAgentsTourStore";
 import DashboardTourStore from "./DashboardTourStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
@@ -101,18 +100,20 @@ import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 
 import OAuthStore from "./OAuthStore";
 import DocsConnectStore from "./DocsConnectStore";
-import AiRoomStore from "./AiRoomStore";
+import AiPresetsStore from "./AiPresetsStore";
+import AiProjectsStore from "./AiProjectsStore";
 import AppsStore from "./AppsStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
 import AISettingsStore from "./portal-settings/AISettingsStore";
-import CreateEditAgentStore from "./CreateEditAgentStore";
 
 import DefaultTemplatesStore from "./portal-settings/DefaultTemplatesStore";
 
 import TelegramStore from "./TelegramStore";
 
-const aiRoomStore = new AiRoomStore();
+const aiPresetsStore = new AiPresetsStore();
+
+const aiProjectsStore = new AiProjectsStore(aiPresetsStore, userStore);
 
 const appsStore = new AppsStore(settingsStore);
 
@@ -202,13 +203,11 @@ const filesStore = new FilesStore(
   currentTariffStatusStore,
   settingsStore,
   indexingStore,
-  aiRoomStore,
 );
 
 const filesTourStore = new FilesTourStore();
 const roomsTourStore = new RoomsTourStore();
 const formsTourStore = new FormsTourStore();
-const aiAgentsTourStore = new AiAgentsTourStore();
 const dashboardTourStore = new DashboardTourStore();
 
 const mediaViewerDataStore = new MediaViewerDataStore(
@@ -279,7 +278,6 @@ const uploadDataStore = new UploadDataStore(
   primaryProgressDataStore,
   dialogsStore,
   filesSettingsStore,
-  aiRoomStore,
   userStore,
 );
 
@@ -306,7 +304,6 @@ const filesActionsStore = new FilesActionsStore(
   currentQuotaStore,
   indexingStore,
   versionHistoryStore,
-  aiRoomStore,
 );
 
 versionHistoryStore.filesActionsStore = filesActionsStore;
@@ -384,18 +381,6 @@ const createEditRoomStore = new CreateEditRoomStore(
   dialogsStore,
   avatarEditorDialogStore,
   oformsStore,
-);
-
-const createEditAgentStore = new CreateEditAgentStore(
-  filesStore,
-  filesActionsStore,
-  selectedFolderStore,
-  tagsStore,
-  settingsStore,
-  currentQuotaStore,
-  clientLoadingStore,
-  dialogsStore,
-  avatarEditorDialogStore,
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
@@ -500,14 +485,13 @@ const store = {
   filesTourStore,
   roomsTourStore,
   formsTourStore,
-  aiAgentsTourStore,
   dashboardTourStore,
 
-  aiRoomStore,
+  aiPresetsStore,
+  aiProjectsStore,
   appsStore,
   aiSettingsStore,
   telegramStore,
-  createEditAgentStore,
   defaultTemplatesStore,
 };
 

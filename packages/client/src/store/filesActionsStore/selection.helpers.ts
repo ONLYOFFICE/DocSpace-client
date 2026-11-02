@@ -46,6 +46,7 @@ import {
   FileStatus,
   ValidationStatus,
   VectorizationStatus,
+  RoomsType,
 } from "@docspace/shared/enums";
 import { runInAction } from "mobx";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -85,7 +86,6 @@ self: FilesActionStore,
   const {
     fetchFiles,
     fetchRooms,
-    fetchAgents,
     filter,
     roomsFilter,
     scrollToTop,
@@ -96,8 +96,8 @@ self: FilesActionStore,
     isArchiveFolder,
     isArchiveFolderRoot,
     isTemplatesFolder,
-    isAIAgentsFolder,
     isFormsFolder,
+    isAiSectionFolder,
   } = self.treeFoldersStore;
 
   let newFilter: undefined;
@@ -111,19 +111,13 @@ self: FilesActionStore,
   try {
     if (skipFetch) return;
 
-    if (isAIAgentsFolder) {
-      fetchAgents(
-        updatedFolder,
-        newFilter || roomsFilter.clone(),
-        false,
-        false,
-      );
-    } else if (
+    if (
       isRoomsFolder ||
       isArchiveFolder ||
       isArchiveFolderRoot ||
       isTemplatesFolder ||
-      isFormsFolder
+      isFormsFolder ||
+      isAiSectionFolder
     ) {
       await fetchRooms(
         updatedFolder,
@@ -227,7 +221,6 @@ self: FilesActionStore,
   //  console.log("createFoldersTree", files, folderId);
   const { uploaded, percent } = self.uploadDataStore;
 
-  const { isAIAgentsFolderRoot } = self.treeFoldersStore;
   const { setPrimaryProgressBarData } =
     self.uploadDataStore.primaryProgressDataStore;
 
@@ -244,6 +237,31 @@ self: FilesActionStore,
     if (fileEntries.length !== withoutHiddenFiles.length) {
       toastr.warning(t("Common:FolderUploadNotSupportedInPrivateRoom"));
       withoutHiddenFiles = fileEntries;
+    }
+  }
+
+  // Instructions and Knowledge rooms are flat, and an Instructions room
+  // holds Markdown only: a dropped or picked folder, or another format, is
+  // refused here before anything is queued (the server refuses them too).
+  const roomType =
+    roomFolder && "roomType" in roomFolder ? roomFolder.roomType : undefined;
+  if (
+    roomType === RoomsType.InstructionsRoom ||
+    roomType === RoomsType.KnowledgeRoom
+  ) {
+    const isInstructions = roomType === RoomsType.InstructionsRoom;
+    const bringsFolder = withoutHiddenFiles.some(
+      (f) => f.isEmptyDirectory || (f.path ?? "").replace(/^\/+/, "").includes("/"),
+    );
+    if (bringsFolder) {
+      throw new Error(
+        isInstructions
+          ? t("Common:InstructionsRoomNoFolders")
+          : t("Common:KnowledgeRoomNoFolders"),
+      );
+    }
+    if (isInstructions && withoutHiddenFiles.some((f) => !f.name.toLowerCase().endsWith(".md"))) {
+      throw new Error(t("Common:InstructionsRoomMarkdownOnly"));
     }
   }
 
@@ -274,13 +292,9 @@ self: FilesActionStore,
 
       const size = getConvertedSize(t, roomFolder.quotaLimit);
 
-      const error = isAIAgentsFolderRoot
-        ? t("Common:AIAgentSpaceQuotaExceeded", {
-            size,
-          })
-        : t("Common:RoomSpaceQuotaExceeded", {
-            size,
-          });
+      const error = t("Common:RoomSpaceQuotaExceeded", {
+        size,
+      });
       throw new Error(error);
     }
   }
@@ -408,8 +422,6 @@ self: FilesActionStore,tag: {
 
   const { setIsSectionBodyLoading } = self.clientLoadingStore;
 
-  const categoryType = getCategoryType(window.DocSpace.location);
-
   const setIsLoading = (param: boolean) => {
     setIsSectionBodyLoading(param);
   };
@@ -448,14 +460,7 @@ self: FilesActionStore,tag: {
     newFilter.withoutTags = true;
   }
 
-  let pathName = window.DocSpace.location.pathname;
-
-  if (
-    categoryType === CategoryType.Chat ||
-    categoryType === CategoryType.AIAgent
-  ) {
-    pathName = getCategoryUrl(CategoryType.AIAgents);
-  }
+  const pathName = window.DocSpace.location.pathname;
 
   setIsLoading(true);
   window.DocSpace.navigate(

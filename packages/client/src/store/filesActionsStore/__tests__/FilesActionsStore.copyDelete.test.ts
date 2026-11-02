@@ -65,16 +65,6 @@ describe("FilesActionsStore — copy/delete operations (batch 14)", () => {
     await store.copyFromTemplateForm({ id: 1, title: "Form" } as never);
     expect(itemOperationToFolder).toHaveBeenCalledTimes(1);
   });
-
-  it("copyFileToAiKnowledge copies the files to the knowledge folder", async () => {
-    const itemOperationToFolder = vi.fn(async () => {});
-    const store = createTestFilesActionsStore({
-      aiRoomStore: { knowledgeId: 42, setKnowledgeId: vi.fn() },
-      uploadDataStore: progressStore({ itemOperationToFolder }),
-    });
-    await store.copyFileToAiKnowledge([{ id: 1, title: "Doc" }] as never);
-    expect(itemOperationToFolder).toHaveBeenCalledTimes(1);
-  });
 });
 
 describe("FilesActionsStore - private-room transfer plan", () => {

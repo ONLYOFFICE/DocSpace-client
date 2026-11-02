@@ -93,7 +93,6 @@ import {
   getArchiveRoomsFolderOptionsImpl,
   getRoomsFolderOptionsImpl,
   getTemplatesFolderOptionsImpl,
-  getAIAgentsFolderOptionsImpl,
   getAnotherFolderOptionsImpl,
   getHeaderMenuImpl,
 } from "./filesActionsStore/menu.helpers";
@@ -140,7 +139,7 @@ import {
   checkOperationConflictImpl,
   preparingDataForCopyingToRoomImpl,
   copyFromTemplateFormImpl,
-  copyFileToAiKnowledgeImpl,
+  copyFilesToKnowledgeRoomImpl,
   moveDragItemsImpl,
   getPublicKeyImpl,
 } from "./filesActionsStore/copyMove.helpers";
@@ -152,7 +151,6 @@ import type {
 } from "./filesActionsStore/copyMove.helpers";
 import {
   moveToRoomsPageImpl,
-  moveToAIAgentsPageImpl,
   moveToPublicRoomImpl,
   openLocationActionImpl,
   checkAndOpenLocationActionImpl,
@@ -174,9 +172,6 @@ import {
   changeRoomQuotaImpl,
   disableRoomQuotaImpl,
   resetRoomQuotaImpl,
-  changeAIAgentsQuotaImpl,
-  disableAIAgentQuotaImpl,
-  resetAIAgentQuotaImpl,
   onClickCreateRoomImpl,
   onCreateRoomFromTemplateImpl,
   onLeaveRoomImpl,
@@ -215,7 +210,6 @@ import type PluginStore from "./PluginStore";
 import type PeopleStore from "./contacts/PeopleStore";
 import type IndexingStore from "./IndexingStore";
 import type VersionHistoryStore from "./VersionHistoryStore";
-import type AiRoomStore from "./AiRoomStore";
 
 export type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
 
@@ -242,7 +236,6 @@ export type TActionItem = {
   providerKey?: string;
   isFolder?: boolean;
   isRoom?: boolean;
-  isAIAgent?: boolean;
   isTemplate?: boolean;
   encrypted?: boolean;
   private?: boolean;
@@ -333,9 +326,6 @@ type TFilesStore = {
   hasRoomsToChangeQuota: boolean;
   hasRoomsToDisableQuota: boolean;
   hasRoomsToResetQuota: boolean;
-  hasAIAgentsToChangeQuota: boolean;
-  hasAIAgentsToDisableQuota: boolean;
-  hasAIAgentsToResetQuota: boolean;
   fetchFiles: (
     folderId: number | string | null,
     filter: FilesFilter,
@@ -349,12 +339,6 @@ type TFilesStore = {
     withSubfolders?: unknown,
     clearFilter?: unknown,
     withFilterLocalStorage?: unknown,
-  ) => Promise<unknown>;
-  fetchAgents: (
-    folderId: number | string | null,
-    filter: RoomsFilter,
-    withSubfolders?: boolean,
-    clearFilter?: boolean,
   ) => Promise<unknown>;
   setPendingClientSearch: (
     pending: Nullable<{ folderId: number | string; query: string }>,
@@ -410,12 +394,7 @@ type TFilesStore = {
     ids: (number | string)[],
     quota: number,
   ) => Promise<unknown>;
-  setCustomAIAgentQuota: (
-    ids: (number | string)[],
-    quota: number,
-  ) => Promise<unknown>;
   resetRoomQuota: (ids: (number | string)[]) => Promise<unknown>;
-  resetAIAgentQuota: (ids: (number | string)[]) => Promise<unknown>;
   setInRoomFolder: (roomId: number | string, inRoom: boolean) => void;
   refreshFiles: () => Promise<unknown>;
   clearFiles: () => void;
@@ -449,8 +428,6 @@ class FilesActionStore {
   indexingStore: IndexingStore;
 
   versionHistoryStore: VersionHistoryStore;
-
-  aiRoomStore: AiRoomStore;
 
   filesHeaderOptionStore: FilesHeaderOptionStore;
 
@@ -502,7 +479,6 @@ class FilesActionStore {
     currentQuotaStore: CurrentQuotasStore,
     indexingStore: IndexingStore,
     versionHistoryStore: VersionHistoryStore,
-    aiRoomStore: AiRoomStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -523,7 +499,6 @@ class FilesActionStore {
     this.currentQuotaStore = currentQuotaStore;
     this.indexingStore = indexingStore;
     this.versionHistoryStore = versionHistoryStore;
-    this.aiRoomStore = aiRoomStore;
 
     this.filesHeaderOptionStore = new FilesHeaderOptionStore(
       this,
@@ -666,8 +641,7 @@ class FilesActionStore {
     action: string,
     id: number | number[],
     t: TTranslation,
-    isAIAgent = false,
-  )=> setPinActionImpl(this, action, id, t, isAIAgent);
+  )=> setPinActionImpl(this, action, id, t);
 
   setMuteAction = (action: string, item: TActionItem, t: TTranslation)=> setMuteActionImpl(this, action, item, t);
 
@@ -692,7 +666,6 @@ class FilesActionStore {
     id: number | string;
     isRoom?: boolean;
     isTemplate?: boolean;
-    isAIAgent?: boolean;
     title?: string;
     rootFolderType?: FolderType;
     roomType?: RoomsType;
@@ -782,31 +755,13 @@ class FilesActionStore {
     abortCallback?: (...args: unknown[]) => unknown,
   )=> changeRoomQuotaImpl(this, items, successCallback, abortCallback);
 
-  changeAIAgentsQuota = (
-    items: (TActionItem | number)[],
-    successCallback?: (...args: unknown[]) => unknown,
-    abortCallback?: (...args: unknown[]) => unknown,
-  )=> changeAIAgentsQuotaImpl(this, items, successCallback, abortCallback);
-
   disableRoomQuota = async (items: (TActionItem | number)[], t: TTranslation)=> disableRoomQuotaImpl(this, items, t);
 
-  disableAIAgentQuota = async (
-    items: (TActionItem | number)[],
-    t: TTranslation,
-  )=> disableAIAgentQuotaImpl(this, items, t);
-
   resetRoomQuota = async (items: (TActionItem | number)[], t: TTranslation)=> resetRoomQuotaImpl(this, items, t);
-
-  resetAIAgentQuota = async (
-    items: (TActionItem | number)[],
-    t: TTranslation,
-  )=> resetAIAgentQuotaImpl(this, items, t);
 
   getOption = (option: string, t: TTranslation)=> getOptionImpl(this, option, t);
 
   getRoomsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getRoomsFolderOptionsImpl(this, itemsCollection, t);
-
-  getAIAgentsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getAIAgentsFolderOptionsImpl(this, itemsCollection, t);
 
   getArchiveRoomsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getArchiveRoomsFolderOptionsImpl(this, itemsCollection, t);
 
@@ -850,8 +805,6 @@ class FilesActionStore {
 
   moveToRoomsPage = ()=> moveToRoomsPageImpl(this);
 
-  moveToAIAgentsPage = ()=> moveToAIAgentsPageImpl(this);
-
   moveToPublicRoom = (folderId?: number | string)=> moveToPublicRoomImpl(this, folderId);
 
   backToParentFolder = async ()=> backToParentFolderImpl(this);
@@ -878,7 +831,8 @@ class FilesActionStore {
 
   copyFromTemplateForm = async (fileInfo: TFile)=> copyFromTemplateFormImpl(this, fileInfo);
 
-  copyFileToAiKnowledge = async (filesInfo: TActionItem[])=> copyFileToAiKnowledgeImpl(this, filesInfo);
+  copyFilesToKnowledgeRoom = async (filesInfo: TActionItem[]) =>
+    copyFilesToKnowledgeRoomImpl(this, filesInfo);
 
   setListOrder = (
     startIndex: number,

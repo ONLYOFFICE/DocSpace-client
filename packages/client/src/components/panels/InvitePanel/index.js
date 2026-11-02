@@ -47,8 +47,8 @@ import {
 import {
   AnalyticsEvents,
   EmployeeType,
-  ShareAccessRights,
   RoomsType,
+  ShareAccessRights,
 } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
 import uniqueid from "lodash/uniqueId";
@@ -62,6 +62,7 @@ import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
+import { aiProjectToRoom } from "@docspace/shared/api/ai/projects";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -74,7 +75,6 @@ import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions"
 import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
-import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import { fixAccess } from "./utils";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
@@ -94,10 +94,12 @@ import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import styles from "./InvitePanel.module.scss";
 import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
 
 const InvitePanel = ({
   folders,
   getFolderInfo,
+  findAiProject,
   inviteItems,
   roomId,
   setInviteItems,
@@ -219,7 +221,19 @@ const InvitePanel = ({
     },
   ];
 
+  // The open AI project is read from its store rather than the Files list
+  // (the list holds the room without its project block, and may hold a
+  // different folder while the project is open). Its members and invitation
+  // link go through the room routes like any room.
+  const aiProject = roomId !== -1 ? findAiProject(roomId) : null;
+  const setInvitationLink = api.rooms.setInvitationLinks;
+
   const selectRoom = () => {
+    if (aiProject) {
+      setSelectedRoom(aiProjectToRoom(aiProject));
+      return Promise.resolve();
+    }
+
     const room = folders.find((folder) => folder.id === roomId);
 
     if (room) {
@@ -503,6 +517,10 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
+      result?.aiProjectWarnings?.forEach((warning) =>
+        toastr.warning(warning.message),
+      );
+
       if (showsResult) {
         const run = ++sendRunRef.current;
         const operationId = uniqueid("operation_");
@@ -652,7 +670,7 @@ const InvitePanel = ({
 
     try {
       setIsLinksToggling(true);
-      link = await api.rooms.setInvitationLinks(
+      link = await setInvitationLink(
         roomId,
         "Invite",
         type,
@@ -734,7 +752,7 @@ const InvitePanel = ({
             ? access.maxUseCount
             : activeLink?.maxUseCount;
 
-        const newLink = await api.rooms.setInvitationLinks(
+        const newLink = await setInvitationLink(
           roomId,
           "Invite",
           +selectedAccess,
@@ -817,6 +835,15 @@ const InvitePanel = ({
   const bodyInvitePanel = useMemo(() => {
     return (
       <div style={{ display: "contents" }} ref={invitePanelBodyRef}>
+        {/* A project member reads its linked rooms through the project. */}
+        {roomType === RoomsType.AiProjectRoom ? (
+          <PublicRoomBar
+            className={styles.aiProjectSourcesBar}
+            headerText={t("Common:AIProjectInviteSourcesAccess")}
+            bodyText={t("Common:AIProjectInviteSourcesAccessDescription")}
+            dataTestId="invite_panel_ai_project_sources_bar"
+          />
+        ) : null}
         {isPrivateRoom ? null : (
           <ExternalLinks
             t={t}
@@ -894,12 +921,8 @@ const InvitePanel = ({
       const shouldMakeFreeRole =
         checkIfAccessPaid(u.access) &&
         (u.isGroup || u.isVisitor || u.isCollaborator);
-      const shouldMakeViewerRole =
-        roomType === RoomsType.AIRoom &&
-        u.isVisitor &&
-        u.access !== ShareAccessRights.ReadOnly;
 
-      if (shouldMakeFreeRole || shouldMakeViewerRole) {
+      if (shouldMakeFreeRole) {
         u = fixAccess(u, t, roomType);
 
         if (isUserTariffLimit) {
@@ -941,13 +964,7 @@ const InvitePanel = ({
   const access = defaultAccess ?? ShareAccessRights.ReadOnly;
 
   const filteredAccesses =
-    roomType === -1
-      ? accessOptions
-      : roomType === RoomsType.AIRoom
-        ? filterNotReadOnlyOptions(accessOptions).filter(
-            (o) => !o.isSeparator && !o.disabled,
-          )
-        : filterPaidRoleOptions(accessOptions);
+    roomType === -1 ? accessOptions : filterPaidRoleOptions(accessOptions);
 
   const onSubmitLinkSettingsPanel = (defaultLink) => {
     if (roomId === -1) {
@@ -1005,11 +1022,12 @@ const InvitePanel = ({
             onAccessRightsChange={() => {}}
             isMultiSelect
             disableDisabledUsers
-            withGroups={!isPrivateRoom}
+            // A group joins a project as Member only, which is not offered.
+            withGroups={!isPrivateRoom && roomType !== RoomsType.AiProjectRoom}
             roomId={roomId}
-            isAgent={roomType === RoomsType.AIRoom}
             disableInvitedUsers={invitedUsersArray}
-            withGuests={showGuestsTab}
+            // A project takes no guests.
+            withGuests={showGuestsTab && roomType !== RoomsType.AiProjectRoom}
             withHeader
             data-test-id="invite_panel_people_selector"
             headerProps={{
@@ -1171,6 +1189,7 @@ export default inject(
     userStore,
     peopleStore,
     uploadDataStore,
+    aiProjectsStore,
   }) => {
     const { theme, standalone, allowInvitingGuests, checkGuests, hasGuests } =
       settingsStore;
@@ -1191,6 +1210,11 @@ export default inject(
 
     const { getFolderInfo, folders } = filesStore;
 
+    const findAiProject = (id) =>
+      aiProjectsStore.activeProject?.id === id
+        ? aiProjectsStore.activeProject
+        : null;
+
     const { isRoomAdmin } = authStore;
 
     const { isUserTariffLimit } = currentQuotaStore;
@@ -1209,6 +1233,7 @@ export default inject(
       isVisible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,
       getFolderInfo,
+      findAiProject,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
       isRoomAdmin,

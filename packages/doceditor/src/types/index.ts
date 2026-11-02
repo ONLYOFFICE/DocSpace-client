@@ -236,6 +236,8 @@ export type TError = {
   status?: "not-found" | "access-denied" | number | string;
   type?: string;
   editorUrl?: string;
+  /** What actually failed, for the error report only; never shown. */
+  cause?: string;
 };
 
 export type TResponse =
@@ -330,7 +332,7 @@ export interface SelectFolderDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | FileEntryDtoIntegerAllOfSecurity
@@ -370,7 +372,7 @@ export interface SelectFileDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | FileEntryDtoIntegerAllOfSecurity
@@ -524,7 +526,7 @@ export type StartFillingSelectorDialogProps = {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | FileEntryDtoIntegerAllOfSecurity

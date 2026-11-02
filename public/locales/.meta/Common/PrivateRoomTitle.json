@@ -3,7 +3,7 @@
   "content": "Private Room",
   "content_en_sha1_hash": "a0cccc661b0d8700741fa5aee59c20fb505d3dc0",
   "created_at": "2026-05-24T17:27:35.780Z",
-  "updated_at": "2026-07-07T08:59:21.733Z",
+  "updated_at": "2026-10-31T12:58:28.980Z",
   "comment": {
     "text": "Title used to identify a room when its type is set to private.",
     "is_auto": true,
@@ -26,7 +26,7 @@
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 64,
-      "context": "case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n case RoomsTypePrivate:\n return t(\"Common:PrivateRoomTitle\");\n default:\n return \"\";\n }\n };",
+      "context": "case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n case RoomsTypePrivate:\n return t(\"Common:PrivateRoomTitle\");\n case RoomsType.InstructionsRoom:\n return t(\"Common:InstructionsRoomTitle\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:KnowledgeRoomTitle\");\n case RoomsType.AiProjectRoom:",
       "module": "/packages/shared"
     }
   ],

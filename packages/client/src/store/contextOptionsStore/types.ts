@@ -137,7 +137,6 @@ export type TFilesActionsStore = {
     action: "pin" | "unpin",
     id: number,
     t: TTranslation,
-    isAIAgent?: boolean,
   ) => Promise<unknown>;
   setMuteAction: (
     action: "mute" | "unmute",

@@ -69,17 +69,17 @@ self: ContextOptionsStore,t: TTranslation
     isRecycleBinFolder,
     isRoomsFolder,
     isArchiveFolder,
-    isAIAgentsFolder,
     isFormsFolder,
+    isAiSectionFolder,
   } = self.treeFoldersStore;
 
   const { pinRooms, unpinRooms, deleteRooms } = self.filesActionsStore;
 
-  if (isRoomsFolder || isArchiveFolder || isAIAgentsFolder || isFormsFolder) {
+  if (isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder) {
     const isPinOption = selection.filter((item) => !item.pinned).length > 0;
 
     let canDelete: boolean | undefined;
-    if (isRoomsFolder || isFormsFolder) {
+    if (isRoomsFolder || isFormsFolder || isAiSectionFolder) {
       canDelete = selection.every((k) => k.contextOptions.includes("delete"));
     } else if (isArchiveFolder) {
       canDelete = selection.some((k) => k.contextOptions.includes("delete"));
@@ -142,12 +142,7 @@ self: ContextOptionsStore,t: TTranslation
     // Spec: private-rooms/sidebar-section, "No room groups in the section"
     const isPrivateSection = isPrivateRoomsRoute(window.location.pathname);
 
-    if (
-      organizeRoomsGrouping &&
-      !isArchiveFolder &&
-      !isAIAgentsFolder &&
-      !isPrivateSection
-    ) {
+    if (organizeRoomsGrouping && !isArchiveFolder && !isPrivateSection) {
       const roomIds = selection.map((room) => room.id);
       options.push({
         key: "create-group",

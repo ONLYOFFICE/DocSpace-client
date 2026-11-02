@@ -62,6 +62,12 @@ export const getRoomTypeTitleTranslation = (
       return t("Common:FormFilingRoomTitle");
     case RoomsTypePrivate:
       return t("Common:PrivateRoomTitle");
+    case RoomsType.InstructionsRoom:
+      return t("Common:InstructionsRoomTitle");
+    case RoomsType.KnowledgeRoom:
+      return t("Common:KnowledgeRoomTitle");
+    case RoomsType.AiProjectRoom:
+      return t("Common:AIProjectRoomTitle");
     default:
       return "";
   }
@@ -95,6 +101,12 @@ export const getRoomTypeDescriptionTranslation = (
       return t("Common:FormFilingRoomInfo");
     case RoomsTypePrivate:
       return t("Common:PrivateRoomDescription");
+    case RoomsType.InstructionsRoom:
+      return t("Common:InstructionsRoomDescription");
+    case RoomsType.KnowledgeRoom:
+      return t("Common:KnowledgeRoomDescription");
+    case RoomsType.AiProjectRoom:
+      return t("Common:AIProjectRoomDescription");
     default:
       return "";
   }

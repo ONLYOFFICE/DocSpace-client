@@ -260,21 +260,6 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
     expect(menuShape(store.getFilesContextOptions(enc as never, t))).toMatchSnapshot();
   });
 
-  it("maps an AI agent room", () => {
-    const store = createTestContextOptionsStore();
-    store.dialogsStore = { roomGroups: [] } as never;
-    const agent = {
-      id: 4,
-      title: "Agent",
-      roomType: RoomsType.AIRoom,
-      rootFolderType: FolderType.AIAgents,
-      security: {},
-      viewAccessibility: {},
-      contextOptions: ["room-info", "edit-room", "delete"],
-    };
-    expect(menuShape(store.getFilesContextOptions(agent as never, t))).toMatchSnapshot();
-  });
-
   it("maps a room template", () => {
     const store = createTestContextOptionsStore();
     store.dialogsStore = { roomGroups: [] } as never;
@@ -354,6 +339,34 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
       expect(askAI).toHaveBeenCalledWith(expect.objectContaining({ id: 1 }));
     });
 
+    it("nests several AI entries under AI tools", () => {
+      const store = createTestContextOptionsStore();
+      const shape = menuShape(
+        store.getFilesContextOptions(
+          fileItem([
+            "ask-ai",
+            "fill-metadata-ai",
+            "suggest-metadata-ai",
+            "rename",
+          ]) as never,
+          t,
+        ),
+      ).filter((option) => !String(option.key).startsWith("separator"));
+
+      expect(shape).toEqual([
+        {
+          key: "ai-tools",
+          label: "Files:AITools",
+          items: [
+            { key: "ask-ai", label: "Common:AskAI" },
+            { key: "fill-metadata-ai", label: "Files:FillMetadata" },
+            { key: "suggest-metadata-ai", label: "Files:GenerateMetadata" },
+          ],
+        },
+        { key: "rename", label: "Common:Rename" },
+      ]);
+    });
+
     it("renders analyze-responses as its own entry, asking for the mode", () => {
       const { entry, askAI } = entryOf("analyze-responses");
       expect(entry?.id).toBe("option_analyze_responses");
@@ -366,5 +379,33 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
         true,
       );
     });
+  });
+});
+
+describe("ContextOptionsStore.getFilesContextOptions — the members link", () => {
+  type TOption = { key?: string; disabled?: boolean; items?: TOption[] };
+  const find = (options: TOption[], key: string): TOption | undefined => {
+    for (const option of options) {
+      if (option.key === key) return option;
+      const nested = option.items && find(option.items, key);
+      if (nested) return nested;
+    }
+    return undefined;
+  };
+  const membersLink = (rootFolderType: FolderType) => {
+    const store = createTestContextOptionsStore();
+    const model = store.getFilesContextOptions(
+      { ...fileItem(["link-for-room-members"]), canShare: true, rootFolderType } as never,
+      t,
+    );
+    return find(model as TOption[], "link-for-room-members");
+  };
+
+  it("stays enabled for a shareable file in the AI rooms, which have no external link", () => {
+    expect(membersLink(FolderType.AiHub)).toMatchObject({ disabled: false });
+  });
+
+  it("gives way to the external link for a shareable file elsewhere", () => {
+    expect(membersLink(FolderType.Rooms)?.disabled ?? true).toBe(true);
   });
 });

@@ -125,7 +125,6 @@ const setup = () => {
       resolveOpenFolderTarget({
         selectedFolderStore,
         treeFoldersStore,
-        aiRoomStore: { knowledgeId: null },
       } as never),
   });
 

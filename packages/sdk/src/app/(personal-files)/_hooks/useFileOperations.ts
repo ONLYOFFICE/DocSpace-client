@@ -621,13 +621,13 @@ export default function useFileOperations({
       isFirstLoad: boolean,
       isSelectedParentFolder: boolean,
       selectedItemId: string | number | undefined,
-      selectedItemType: "rooms" | "files" | "agents" | undefined,
+      selectedItemType: "rooms" | "files" | undefined,
       isRoot: boolean,
       selectedItemSecurity?: TFileSecurity | TFolderSecurity | TRoomSecurity,
       selectedFileInfo?: unknown,
       isDisabledFolder?: boolean,
-      isInsideKnowledge?: boolean,
-      isInsideResultStorage?: boolean,
+      _isInsideKnowledge?: boolean,
+      _isInsideResultStorage?: boolean,
       isInsidePrivateRoom?: boolean,
     ) =>
       encryptedActions
@@ -647,9 +647,6 @@ export default function useFileOperations({
             pendingItems.some((i) => i.isFolder),
             selectorMode === "restore",
             isDisabledFolder,
-            isInsideKnowledge,
-            isInsideResultStorage,
-            selectedItemType === "agents",
             isInsidePrivateRoom,
             true,
           )

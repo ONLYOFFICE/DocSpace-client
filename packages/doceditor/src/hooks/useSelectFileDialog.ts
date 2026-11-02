@@ -324,7 +324,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 			isFirstLoad: boolean,
 			isSelectedParentFolder: boolean,
 			selectedItemId: string | number | undefined,
-			selectedItemType: "rooms" | "files" | "agents" | undefined,
+			selectedItemType: "rooms" | "files" | undefined,
 			isRoot: boolean,
 			selectedItemSecurity:
 				| TFileSecurity

@@ -74,7 +74,6 @@ import { CategoryType } from "@docspace/shared/constants";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import { SECTION_ROOT_FOLDER_TYPES } from "./helpers";
 import type FilesActionStore from "../FilesActionsStore";
 import type {
@@ -93,16 +92,17 @@ self: FilesActionStore
   const filter = RoomsFilter.getDefault();
 
   const correctCategoryType =
-    categoryType === CategoryType.SharedRoom ||
-    categoryType === CategoryType.Chat
+    categoryType === CategoryType.SharedRoom
       ? CategoryType.Shared
       : categoryType === CategoryType.Form
         ? CategoryType.Forms
-        : CategoryType.ArchivedRoom === categoryType
-          ? CategoryType.Archive
-          : categoryType === CategoryType.PrivateRoom
-            ? CategoryType.PrivateRooms
-            : categoryType;
+        : categoryType === CategoryType.AiHubRoom
+          ? CategoryType.AiHub
+          : CategoryType.ArchivedRoom === categoryType
+            ? CategoryType.Archive
+            : categoryType === CategoryType.PrivateRoom
+              ? CategoryType.PrivateRooms
+              : categoryType;
 
   const path = getCategoryUrl(correctCategoryType);
 
@@ -129,6 +129,10 @@ self: FilesActionStore
     filter.searchArea = RoomSearchArea.Forms;
   }
 
+  if (correctCategoryType === CategoryType.AiHub) {
+    filter.searchArea = RoomSearchArea.AiHub;
+  }
+
   if (
     self.selectedFolderStore?.navigationPath &&
     self.selectedFolderStore?.navigationPath.length > 0 &&
@@ -142,10 +146,6 @@ self: FilesActionStore
         : RoomSearchArea.Templates;
   }
 
-  if (categoryType === CategoryType.Chat) {
-    self.clientLoadingStore.setIsSectionBodyLoading(true, false);
-  }
-
   window.DocSpace.navigate(
     `${path}?${filter.toUrlParams(self.userStore?.user?.id, true)}`,
     {
@@ -155,41 +155,6 @@ self: FilesActionStore
   );
 };
 
-
-export const moveToAIAgentsPageImpl = (
-self: FilesActionStore
-)=> {
-  const categoryType = getCategoryType(window.DocSpace.location);
-
-  const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AIAgents);
-
-  const path = getCategoryUrl(CategoryType.AIAgents);
-
-  const state = {
-    title:
-      (self.selectedFolderStore?.navigationPath &&
-        self.selectedFolderStore?.navigationPath.length > 0 &&
-        self.selectedFolderStore?.navigationPath[
-          self.selectedFolderStore.navigationPath.length - 1
-        ]?.title) ||
-      "",
-    isRoot: true,
-    isPublicRoomType: false,
-    rootFolderType: self.selectedFolderStore.rootFolderType,
-  };
-
-  if (categoryType === CategoryType.Chat) {
-    self.clientLoadingStore.setIsSectionBodyLoading(true, false);
-  }
-
-  window.DocSpace.navigate(
-    `${path}?${filter.toUrlParams(self.userStore?.user?.id, true)}`,
-    {
-      state,
-      replace: true,
-    },
-  );
-};
 
 
 export const moveToPublicRoomImpl = (
@@ -221,7 +186,6 @@ self: FilesActionStore,item: {
   id: number | string;
   isRoom?: boolean;
   isTemplate?: boolean;
-  isAIAgent?: boolean;
   title?: string;
   rootFolderType?: FolderType;
   roomType?: RoomsType;
@@ -231,17 +195,17 @@ self: FilesActionStore,item: {
   if (self.publicRoomStore.isPublicRoom)
     return self.moveToPublicRoom(item.id);
 
-  const { id, isRoom, isTemplate, isAIAgent, title, rootFolderType, roomType } =
-    item;
+  const { id, isRoom, isTemplate, title, rootFolderType, roomType } = item;
 
-  const categoryType = isAIAgent
-    ? CategoryType.Chat
-    : getCategoryTypeByFolderTypeInSection(rootFolderType, id, {
-        roomType,
-        isPrivate:
-          self.filesStore.isPrivateRoomsSectionAvailable &&
-          item.private === true,
-      });
+  const categoryType = getCategoryTypeByFolderTypeInSection(
+    rootFolderType,
+    id,
+    {
+      roomType,
+      isPrivate:
+        self.filesStore.isPrivateRoomsSectionAvailable && item.private === true,
+    },
+  );
 
   const state = { title, rootFolderType, isRoot: false, isRoom };
   const filter = FilesFilter.getDefault();
@@ -250,7 +214,7 @@ self: FilesActionStore,item: {
   // JS assigns raw numeric ids; toUrlParams only serializes it.
   filter.folder = id as string;
 
-  if (!isAIAgent && (isRoom || isTemplate)) {
+  if (isRoom || isTemplate) {
     if (self.userStore.user?.id) {
       const key =
         categoryType === CategoryType.Archive ||
@@ -412,15 +376,6 @@ self: FilesActionStore,fromHotkeys = true
     CategoryType.Trash !== (categoryType as TCategoryType) && urlFilter?.folder
   );
 
-  if (
-    roomType === RoomsType.AIRoom ||
-    categoryType === CategoryType.Chat ||
-    categoryType === CategoryType.AIAgent ||
-    categoryType === CategoryType.AIAgents
-  ) {
-    return self.moveToAIAgentsPage();
-  }
-
   if (self.publicRoomStore.isPublicRoom) {
     return self.backToParentFolder();
   }
@@ -429,6 +384,7 @@ self: FilesActionStore,fromHotkeys = true
     categoryType === CategoryType.SharedRoom ||
     categoryType === CategoryType.Form ||
     categoryType === CategoryType.PrivateRoom ||
+    categoryType === CategoryType.AiHubRoom ||
     isArchivedRoom
   ) {
     if (isRoom) {
@@ -441,6 +397,7 @@ self: FilesActionStore,fromHotkeys = true
   if (
     categoryType === CategoryType.Shared ||
     categoryType === CategoryType.Archive ||
+    categoryType === CategoryType.AiHub ||
     categoryType === CategoryType.PrivateRooms ||
     categoryType === CategoryType.PrivateArchive
   ) {
@@ -649,7 +606,7 @@ self: FilesActionStore,
 
     // an encrypted file stays on the normal open path: the plugin registered
     // for this extension could only pass ciphertext outside the room
-    if (!isAIAgents() && fileItemsList && enablePlugins && !item.encrypted) {
+    if (fileItemsList && enablePlugins && !item.encrypted) {
       // TS cannot track the assignment inside the forEach
       // callback; the erased casts keep the old unchecked reads.
       let currPluginItem: Nullable<TPluginFileItem> = null;
@@ -714,7 +671,13 @@ self: FilesActionStore,
           item.security?.EditForm &&
           !item.startFilling;
 
-      return openDocEditor(id, false, shareKey, canEditForm);
+      // A Knowledge room's files are sources to index: read or replaced by
+      // an upload, never edited, whatever the caller's role.
+      const readOnlyRoom =
+        self.selectedFolderStore.roomType === RoomsType.KnowledgeRoom ||
+        self.selectedFolderStore.parentRoomType === FolderType.KnowledgeRoom;
+
+      return openDocEditor(id, readOnlyRoom, shareKey, canEditForm && !readOnlyRoom);
     }
 
     if (isMediaOrImage) {

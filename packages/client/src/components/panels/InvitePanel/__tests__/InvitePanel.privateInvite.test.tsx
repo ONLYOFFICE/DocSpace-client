@@ -201,6 +201,7 @@ const renderInviteFromList = (room: TRoom) => {
       currentTariffStatusStore={{ isCommunity: false }}
       userStore={{ user: { id: "admin", isOwner: true, isAdmin: true } }}
       peopleStore={{}}
+      aiProjectsStore={{ activeProject: null }}
       uploadDataStore={{
         secondaryProgressDataStore: { setSecondaryProgressBarData: vi.fn() },
       }}

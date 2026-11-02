@@ -80,7 +80,6 @@ import { isAppTemporarilyDisabled } from "SRC_DIR/helpers/disabled-apps";
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
-import CatalogAiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg?url";
 import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
@@ -101,7 +100,6 @@ const OVERVIEW_ID = "overview";
 const AI_FILES_ID = "ai-files";
 const AI_FORMS_ID = "ai-forms";
 const AI_ROOMS_ID = "ai-rooms";
-const AI_AGENTS_ID = "ai-agents";
 const AI_ARBITER_ID = "ai-arbiter";
 const E2E_ROOMS_ID = "e2e-rooms";
 
@@ -131,13 +129,6 @@ const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
   settings: "ai-forms-settings",
 };
 
-const AI_AGENTS_SECTION_TO_ID: Record<string, string> = {
-  recent: "ai-agents-recent",
-  favorites: "ai-agents-favorites",
-  trash: "ai-agents-trash",
-  settings: "ai-agents-settings",
-};
-
 const AI_ROOMS_SECTION_TO_ID: Record<string, string> = {
   recent: "ai-rooms-recent",
   favorites: "ai-rooms-favorites",
@@ -153,7 +144,6 @@ type NewArticleProps = {
   aiFilesEnabled: boolean;
   aiFormsEnabled: boolean;
   aiRoomsEnabled: boolean;
-  aiAgentsEnabled: boolean;
   aiArbiterEnabled: boolean;
   e2eRoomsEnabled: boolean;
   sharedWithMeFolderId?: number | null;
@@ -172,7 +162,6 @@ const NewArticle = ({
   aiFilesEnabled,
   aiFormsEnabled,
   aiRoomsEnabled,
-  aiAgentsEnabled,
   aiArbiterEnabled,
   e2eRoomsEnabled,
   sharedWithMeFolderId,
@@ -215,8 +204,6 @@ const NewArticle = ({
 
   const isAdminOrOwner = (user?.isAdmin ?? false) || (user?.isOwner ?? false);
   const isGuest = user?.isVisitor ?? false;
-  const canManageAgents =
-    isAdminOrOwner || (user?.isRoomAdmin ?? false);
   const canCreateForms = !isGuest && !(user?.isCollaborator ?? false);
 
   const activeId = React.useMemo(() => {
@@ -229,9 +216,6 @@ const NewArticle = ({
     }
     if (location.pathname.startsWith("/ai-forms")) {
       return AI_FORMS_SECTION_TO_ID[section] ?? AI_FORMS_ID;
-    }
-    if (location.pathname.startsWith("/agents")) {
-      return AI_AGENTS_SECTION_TO_ID[section] ?? AI_AGENTS_ID;
     }
     if (location.pathname.startsWith("/ai-rooms")) {
       return AI_ROOMS_SECTION_TO_ID[section] ?? AI_ROOMS_ID;
@@ -420,54 +404,6 @@ const NewArticle = ({
         : undefined,
     };
 
-    const handleAiAgentsClick = async () => {
-      if (aiAgentsEnabled) {
-        navigate("/agents");
-        return;
-      }
-      try {
-        const activated = await activate("ai-agents");
-        if (activated) {
-          navigate("/agents");
-        } else {
-          toastr.error(t("Common:SomethingWentWrong"));
-        }
-      } catch (err) {
-        console.error("Failed to activate ai-agents", err);
-        toastr.error(t("Common:SomethingWentWrong"));
-      }
-    };
-
-    const aiAgentsItem: NavMenuItem = {
-      id: AI_AGENTS_ID,
-      label: t("Common:AIAgents"),
-      icon: CatalogAiAgentsReactSvgUrl,
-      onClick: handleAiAgentsClick,
-      children: aiAgentsEnabled && canManageAgents
-        ? [
-            {
-              id: "ai-agents-recent",
-              label: t("Common:Recent"),
-              icon: CatalogRestoreReactSvgUrl,
-              onClick: () => navigate("/agents?section=recent"),
-            },
-            {
-              id: "ai-agents-favorites",
-              label: t("Common:Favorites"),
-              icon: CatalogFavoritesReactSvgUrl,
-              onClick: () => navigate("/agents?section=favorites"),
-            },
-            {
-              id: "ai-agents-trash",
-              label: t("Common:TrashSection"),
-              icon: CatalogTrashReactSvgUrl,
-              onClick: () => navigate("/agents?section=trash"),
-              withTopSeparator: true,
-            },
-          ]
-        : undefined,
-    };
-
     const handleAiArbiterClick = async () => {
       if (aiArbiterEnabled) {
         navigate("/ai-arbiter");
@@ -528,7 +464,6 @@ const NewArticle = ({
       ...(!isGuest ? [{ item: aiFilesItem, enabled: aiFilesEnabled }] : []),
       { item: aiRoomsItem, enabled: aiRoomsEnabled },
       { item: aiFormsItem, enabled: aiFormsEnabled },
-      { item: aiAgentsItem, enabled: aiAgentsEnabled },
       // Hidden while the arbiter is temporarily disabled: showing it in the
       // "available" group would offer an install flow for a product that
       // cannot run on the new AI stack.
@@ -573,11 +508,9 @@ const NewArticle = ({
     isAdminOrOwner,
     isGuest,
     canCreateForms,
-    canManageAgents,
     aiFilesEnabled,
     aiFormsEnabled,
     aiRoomsEnabled,
-    aiAgentsEnabled,
     aiArbiterEnabled,
     e2eRoomsEnabled,
     sharedWithMeFolderId,
@@ -642,7 +575,6 @@ const NewArticleConnected = inject<TStore>(
     aiFilesEnabled: appsStore.isEnabled("ai-files"),
     aiFormsEnabled: appsStore.isEnabled("ai-forms"),
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
-    aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
     aiArbiterEnabled: appsStore.isEnabled("ai-arbiter"),
     e2eRoomsEnabled: appsStore.isEnabled("e2e-rooms"),
     sharedWithMeFolderId: treeFoldersStore.sharedWithMeFolder?.id ?? null,

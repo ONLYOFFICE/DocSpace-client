@@ -322,16 +322,6 @@ describe("handleUploadConflictsImpl", () => {
       expect(upload).toHaveBeenCalledTimes(1);
     });
   });
-
-  it("checks an ordinary target while an AI room is open", async () => {
-    const { store } = createTestUploadDataStore({
-      selectedFolderStore: { isAIRoom: true },
-    });
-
-    await checkConflicts(store, [ordinaryItem()], 1);
-
-    expect(filesApi.checkIsFileExist).toHaveBeenCalledWith(1, ["Agenda.docx"]);
-  });
 });
 
 describe("retryUploadFilesImpl", () => {
@@ -552,18 +542,4 @@ describe("startUploadImpl - upload target", () => {
     });
   });
 
-  it("sends every item of an AI agent's upload to its knowledge folder", () => {
-    const { store } = createTestUploadDataStore({
-      selectedFolderStore: { id: 70, isRoom: true, isAIRoom: true },
-      aiRoomStore: { knowledgeId: 71 },
-    });
-
-    const [item] = queueFiles(store, [
-      makeBrowserFile("a.docx", 10, { parentFolderId: 70 }),
-    ]);
-
-    expect(item.target.folderId).toBe(71);
-    expect(item.target.roomType).toBe(RoomsType.AIRoom);
-    expect(item.toFolderId).toBe(71);
-  });
 });

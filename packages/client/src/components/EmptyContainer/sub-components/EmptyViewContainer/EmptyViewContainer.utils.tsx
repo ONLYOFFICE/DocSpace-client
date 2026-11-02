@@ -98,12 +98,6 @@ import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.default.folder
 import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
 import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 
-import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
-import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
-
-import AIChatNotAvailableDarkIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.dark.svg";
-import AIChatNotAvailableLightIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.light.svg";
-
 import { Text } from "@onlyoffice/apps-ui-kit/components";
 
 import {
@@ -147,13 +141,6 @@ export const isFormsSectionScope = (filterFolderType: Nullable<number[]>) => {
   );
 };
 
-const isAgentsSectionScope = (filterFolderType: Nullable<number[]>) => {
-  return (
-    !!filterFolderType?.length &&
-    filterFolderType.every((type) => type === FolderType.AIAgent)
-  );
-};
-
 const isRoomsSectionScope = (filterFolderType: Nullable<number[]>) => {
   return (
     !!filterFolderType?.length &&
@@ -173,8 +160,6 @@ const getRecentDescription = (
   filterFolderType: Nullable<number[]>,
 ) => {
   if (isFormsScope) return t("Common:EmptyRecentFormsDescription");
-  if (isAgentsSectionScope(filterFolderType))
-    return t("Common:EmptyRecentAgentsDescription");
   if (isRoomsSectionScope(filterFolderType))
     return t("Common:EmptyRecentRoomsDescription");
 
@@ -191,8 +176,6 @@ const getFavoritesDescription = (
   filterFolderType: Nullable<number[]>,
 ) => {
   if (isFormsScope) return t("Common:EmptyFavoritesFormsDescription");
-  if (isAgentsSectionScope(filterFolderType))
-    return t("Common:EmptyFavoritesAgentsDescription");
   if (isRoomsSectionScope(filterFolderType))
     return t("Common:EmptyFavoritesRoomsDescription");
 
@@ -210,7 +193,6 @@ export const getSectionAppName = (
   filterFolderType: Nullable<number[]>,
 ) => {
   if (isFormsSectionScope(filterFolderType)) return t("Common:Forms");
-  if (isAgentsSectionScope(filterFolderType)) return t("Common:AIAgents");
   if (isRoomsSectionScope(filterFolderType)) return t("Common:Rooms");
 
   return t("Common:Files");
@@ -268,66 +250,34 @@ export const getRoomDescription = (
   return t("EmptyView:EmptyViewDescription");
 };
 
-const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
-  return isUser(access)
-    ? t("Common:EmptyAIAgentsUserTitle")
-    : t("Common:EmptyAIAgentsTitle");
-};
-
-const getAIAgentsAIDisabledTitle = (
+export const getAiRoomsAIOffTitle = (
   t: TTranslation,
   standalone: boolean,
   isPortalAdmin: boolean,
 ) => {
+  if (!isPortalAdmin) return t("Common:AiRoomsAIOffUserTitle");
+  return standalone
+    ? t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle", {
+        aiProvider: t("Common:AIProvider"),
+      })
+    : t("Common:AiRoomsAIOffTitle");
+};
+
+export const getAiRoomsAIOffDescription = (
+  t: TTranslation,
+  standalone: boolean,
+  isPortalAdmin: boolean,
+) => {
+  if (!isPortalAdmin) return t("Common:AiRoomsAIOffUserDescription");
+  if (standalone) return t("Common:AiRoomsAIOffStandaloneAdminDescription");
   return (
-    match([standalone, isPortalAdmin])
-      .with([true, true], () =>
-        t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle", {
-          aiProvider: t("Common:AIProvider"),
-        }),
-      )
-      .with([false, true], () => t("Common:EmptyAIAgentsNotActiveYetTitle"))
-      // standalone user
-      .with([true, false], () => t("Common:EmptyAIAgentsAIDisabledUserTitle"))
-      // saas user
-      .otherwise(() => t("Common:AIFeaturesNotActive"))
+    <>
+      <Text as="span">{t("Common:AiRoomsAIOffDescription")}</Text>
+      <Text as="span" style={{ display: "block", marginTop: "8px" }}>
+        {t("Common:EmptyAIAgentsNotActiveYetDescriptionLine2")}
+      </Text>
+    </>
   );
-};
-
-const getAIAgentsAIDisabledDescription = (
-  t: TTranslation,
-  standalone: boolean,
-  isPortalAdmin: boolean,
-) => {
-  return match([standalone, isPortalAdmin])
-    .with([true, true], () =>
-      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
-        aiChats: t("Common:AIChats"),
-      }),
-    )
-    .with([false, true], () => (
-      <>
-        <Text as="span">
-          {t("Common:EmptyAIAgentsNotActiveYetDescription")}
-        </Text>
-        <Text as="span" style={{ display: "block", marginTop: "8px" }}>
-          {t("Common:EmptyAIAgentsNotActiveYetDescriptionLine2")}
-        </Text>
-      </>
-    ))
-    .with([true, false], () => t("Common:EmptyAIAgentsAIDisabledDescription"))
-    .otherwise(() => t("Common:EmptyAIDisabledContactAdminDesc"));
-};
-
-const getAIAgentsAIEnabledDescription = (
-  t: TTranslation,
-  access: AccessType,
-) => {
-  return isUser(access)
-    ? t("Common:EmptyAIAgentsAIEnabledUserDescription")
-    : t("Common:EmptyAIAgentsDescription", {
-        mcpServer: t("Common:MCPServer"),
-      });
 };
 
 export const getRootDescription = (
@@ -338,9 +288,6 @@ export const getRootDescription = (
   security: Nullable<
     TFolderSecurity | Partial<TFolderSecurity & TRoomSecurity>
   >,
-  standalone: boolean,
-  aiReady: boolean,
-  isPortalAdmin: boolean,
   isFormsScope: boolean = false,
   filterFolderType: Nullable<number[]> = null,
   isPrivateScope: boolean = false,
@@ -353,11 +300,6 @@ export const getRootDescription = (
         <span>{t("Common:FilesWillAppearHere")}</span>
       </>
     ))
-    .with([FolderType.AIAgents, P._], () =>
-      aiReady
-        ? getAIAgentsAIEnabledDescription(t, access)
-        : getAIAgentsAIDisabledDescription(t, standalone, isPortalAdmin),
-    )
     .with([FolderType.Rooms, P.when(() => isPrivateScope)], () =>
       access === ShareAccessRights.None
         ? t("EmptyView:EmptyRootPrivateRoomsDescription")
@@ -477,18 +419,10 @@ export const getRootTitle = (
   t: TTranslation,
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
-  aiReady: boolean,
-  standalone: boolean,
-  isPortalAdmin: boolean,
   isFormsScope: boolean = false,
   isPrivateScope: boolean = false,
 ) => {
   return match([rootFolderType, access])
-    .with([FolderType.AIAgents, P._], () =>
-      aiReady
-        ? getAIAgentsAIEnabledTitle(t, access)
-        : getAIAgentsAIDisabledTitle(t, standalone, isPortalAdmin),
-    )
     .with([FolderType.Rooms, P.when(() => isPrivateScope)], () =>
       t("EmptyView:EmptyRootPrivateRoomsTitle"),
     )
@@ -536,31 +470,8 @@ export const getFolderIcon = (
   isBaseTheme: boolean,
   access: AccessType,
   folderType: Nullable<FolderType>,
-  security: Nullable<
-    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
-  >,
-  isResultsTab?: boolean,
 ) => {
   return match([roomType, folderType, access])
-    .with(
-      [
-        P._,
-        P.when(
-          () =>
-            security &&
-            "UseChat" in security &&
-            !security?.UseChat &&
-            isResultsTab,
-        ),
-        P._,
-      ],
-      () =>
-        isBaseTheme ? (
-          <AIChatNotAvailableLightIcon />
-        ) : (
-          <AIChatNotAvailableDarkIcon />
-        ),
-    )
     .with([FolderType.FormRoom, P._, P._], () =>
       isBaseTheme ? <FormDefaultFolderLight /> : <FormDefaultFolderDark />,
     )
@@ -577,10 +488,6 @@ export const getRoomIcon = (
   type: RoomsType,
   isBaseTheme: boolean,
   access: AccessType,
-  security: Nullable<
-    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
-  >,
-  isResultsTab?: boolean,
 ) => {
   return match([type, access])
     .with([RoomsType.FormRoom, ShareAccessRights.FormFilling], () =>
@@ -707,43 +614,6 @@ export const getRoomIcon = (
         <EmptyCustomRoomCollaboratorDarkIcon />
       ),
     )
-    .with(
-      [
-        RoomsType.AIRoom,
-        P.when(
-          () =>
-            security &&
-            "UseChat" in security &&
-            !security?.UseChat &&
-            isResultsTab,
-        ), // viewer
-      ],
-      () =>
-        isBaseTheme ? (
-          <AIChatNotAvailableLightIcon />
-        ) : (
-          <AIChatNotAvailableDarkIcon />
-        ),
-    )
-    .with(
-      [
-        RoomsType.AIRoom,
-        P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
-      ],
-      () =>
-        isBaseTheme ? (
-          <EmptyCustomRoomLightIcon />
-        ) : (
-          <EmptyCustomRoomDarkIcon />
-        ),
-    )
-    .with([RoomsType.AIRoom, ShareAccessRights.Collaborator], () =>
-      isBaseTheme ? (
-        <EmptyCustomRoomCollaboratorLightIcon />
-      ) : (
-        <EmptyCustomRoomCollaboratorDarkIcon />
-      ),
-    )
     .with([P._, P.when(isUser)], () =>
       isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />,
     )
@@ -754,24 +624,8 @@ export const getRootIcon = (
   rootFolderType: Nullable<FolderType>,
   access: AccessType,
   isBaseTheme: boolean,
-  aiReady: boolean,
 ) => {
   return match([rootFolderType, access])
-    .with([FolderType.AIAgents, P._], () => {
-      if (aiReady) {
-        return isBaseTheme ? (
-          <EmptyAIAgentsLightIcon />
-        ) : (
-          <EmptyAIAgentsDarkIcon />
-        );
-      }
-
-      return isBaseTheme ? (
-        <AIChatNotAvailableLightIcon />
-      ) : (
-        <AIChatNotAvailableDarkIcon />
-      );
-    })
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       isBaseTheme ? <EmptyRoomsRootLightIcon /> : <EmptyRoomsRootDarkIcon />,
     )
@@ -879,16 +733,12 @@ export const helperOptions = (
     title: string,
     description: string,
     uploadType: UploadType,
-    isKnowledge?: boolean,
   ) => ({
     title,
     description,
     icon: <UploadDevicePDFFormIcon />,
     key: "create-form",
-    onClick: () =>
-      isKnowledge
-        ? actions.uploadFromDeviceAiKnowledge()
-        : actions.onUploadAction(uploadType),
+    onClick: () => actions.onUploadAction(uploadType),
     disabled: !security?.Create,
   });
 
@@ -896,16 +746,12 @@ export const helperOptions = (
     title: string,
     description: string,
     filterType: FilesSelectorFilterTypes | FilterType | string,
-    isKnowledge?: boolean,
   ) => ({
     title,
     description,
     icon: <UploadPDFFormIcon />,
     key: "upload-pdf-form",
-    onClick: () =>
-      isKnowledge
-        ? actions.uploadFromDocspaceAiKnowledge()
-        : actions.uploadFromDocspace(filterType),
+    onClick: () => actions.uploadFromDocspace(filterType),
     disabled: !security?.Create,
   });
 

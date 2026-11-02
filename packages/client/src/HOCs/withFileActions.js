@@ -111,7 +111,7 @@ export default function withFileActions(WrappedFileItem) {
           if (f.length > 0) startUpload(f, target, t);
         })
         .catch((err) => {
-          toastr.error(err, null, 0, true);
+          toastr.error(err, undefined, 0, true);
         });
     };
 
@@ -477,7 +477,6 @@ export default function withFileActions(WrappedFileItem) {
         isArchiveFolder,
         isTemplatesFolder,
         isRecentFolder,
-        isAIAgentsFolder,
       } = treeFoldersStore;
       const {
         dragging,
@@ -499,7 +498,7 @@ export default function withFileActions(WrappedFileItem) {
         withCtrlSelect,
         withShiftSelect,
       } = filesStore;
-      const { id, isInsideResultStorage } = selectedFolderStore;
+      const { id } = selectedFolderStore;
       const {
         startUpload,
         resolveOpenFolderTarget,
@@ -522,8 +521,7 @@ export default function withFileActions(WrappedFileItem) {
         (x) => x.id === item.id && x.fileExst === item?.fileExst,
       );
 
-      const isDisabledDropItem =
-        item.security?.Create === false || isInsideResultStorage;
+      const isDisabledDropItem = item.security?.Create === false;
 
       const draggable =
         !isRecycleBinFolder && selectedItem && !isDisabledDropItem;
@@ -573,7 +571,6 @@ export default function withFileActions(WrappedFileItem) {
         isTemplatesFolder ||
         isRecentFolder ||
         inProgress ||
-        isAIAgentsFolder ||
         isMobile;
 
       let isActive = false;

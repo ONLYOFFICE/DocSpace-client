@@ -32,9 +32,6 @@ const enabling = {
     hasRoomsToChangeQuota: true,
     hasRoomsToDisableQuota: true,
     hasRoomsToResetQuota: true,
-    hasAIAgentsToChangeQuota: true,
-    hasAIAgentsToDisableQuota: true,
-    hasAIAgentsToResetQuota: true,
     roomsFilter: { groupId: "g1", clone: () => ({}) },
     selection: [
       {
@@ -86,9 +83,6 @@ describe("FilesActionsStore.getHeaderMenu — dispatch by folder type", () => {
   });
   it("templates", () => {
     expect(menuFor({ isTemplatesFolder: true })).toMatchSnapshot();
-  });
-  it("ai agents", () => {
-    expect(menuFor({ isAIAgentsFolder: true })).toMatchSnapshot();
   });
   it("another (default) folder", () => {
     expect(menuFor({})).toMatchSnapshot();

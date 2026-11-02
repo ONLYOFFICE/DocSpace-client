@@ -322,9 +322,7 @@ export async function handleUploadConflictsImpl(
   uploadData: TStartUploadData,
 ) {
   // Spec: private-rooms/encryption-core, "Opaque upload name with visible extension".
-  const checkedFiles = uploadData.files.filter(
-    (f) => !f.target.isPrivate && f.target.roomType !== RoomsType.AIRoom,
-  );
+  const checkedFiles = uploadData.files.filter((f) => !f.target.isPrivate);
   const filesArray = checkedFiles.map((fileInfo) => fileInfo.file.name);
 
   const checkConflicts = checkedFiles.some((f) => f.toFolderId === toFolderId);
@@ -430,10 +428,7 @@ export function startUploadImpl(
       file,
       uniqueId: uniqueid("download_row-key_"),
       fileId: null,
-      toFolderId:
-        target.roomType === RoomsType.AIRoom
-          ? target.folderId
-          : file.parentFolderId,
+      toFolderId: file.parentFolderId,
       target: itemTarget,
       action: "upload",
       error: null,

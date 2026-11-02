@@ -39,7 +39,12 @@ import {
 } from "./filesSettings";
 import { foldersTreeHandler } from "./foldersTree";
 import { filesUsedSpaceHandler } from "./filesUsedSpace";
-import { folderHandler, folderInfoHandler } from "./folder";
+import {
+  folderHandler,
+  folderInfoHandler,
+  thirdPartyCreateFileHandler,
+  thirdPartyFolderHandler,
+} from "./folder";
 import {
   validatePublicRoomKeyHandler,
   validatePublicRoomKeyPasswordHandler,
@@ -83,16 +88,6 @@ import {
   getFileHandler,
   deleteFavoritesHandler,
 } from "./favorites";
-import {
-  agentFolderChatHandler,
-  agentFolderInfoHandler,
-  agentFolderResultStorageHandler,
-  agentFolderKnowledgeHandler,
-} from "./agentFolder";
-import {
-  resultStorageFolderHandler,
-  resultStorageFolderInfoHandler,
-} from "./resultStorageFolder";
 import {
   defaultTemplatesHandler,
   defaultTemplatesSetHandler,
@@ -173,6 +168,8 @@ export {
   makeRoomLink,
   folderHandler,
   folderInfoHandler,
+  thirdPartyCreateFileHandler,
+  thirdPartyFolderHandler,
   validatePublicRoomPasswordHandler,
   roomListResolver,
   externalLinksHandler,
@@ -196,12 +193,6 @@ export {
   addFileToFavoritesHandler,
   getFileHandler,
   deleteFavoritesHandler,
-  agentFolderChatHandler,
-  agentFolderInfoHandler,
-  agentFolderResultStorageHandler,
-  agentFolderKnowledgeHandler,
-  resultStorageFolderHandler,
-  resultStorageFolderInfoHandler,
   validatePublicRoomKeyPasswordHandler,
   defaultTemplatesHandler,
   defaultTemplatesSetHandler,
@@ -229,18 +220,11 @@ export const filesHandlers = (port: string) => [
   // named endpoints under files/, and the first match wins.
   filesUsedSpaceHandler(port),
   //foldersTreeHandler(port),
-  // agentFolderResultStorageHandler, agentFolderKnowledgeHandler and agentFolderChatHandler filter by searchArea parameter
-  agentFolderResultStorageHandler(port),
-  agentFolderKnowledgeHandler(port),
-  agentFolderChatHandler(port),
-  resultStorageFolderHandler(port),
   rootHandler(port),
   filesSettingsHandler(port),
   showQuickActionsHandler(port),
   validatePublicRoomKeyHandler(port),
   roomListHandler(port),
-  agentFolderInfoHandler(port),
-  resultStorageFolderInfoHandler(port),
   folderHandler(port),
   folderInfoHandler(port),
   validatePublicRoomPasswordHandler(port),

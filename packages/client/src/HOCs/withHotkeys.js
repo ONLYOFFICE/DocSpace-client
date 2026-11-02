@@ -43,7 +43,11 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { getHotkeyLetter } from "@docspace/shared/utils/getHotkeyLetter";
 import { copySelectedText } from "@docspace/shared/utils/copy";
-import { isContextMenuOpen, isKeyOwnedByFocus } from "SRC_DIR/helpers/hotkeys";
+import {
+  isContextMenuOpen,
+  isCreateHotkeyBlockedInRoom,
+  isKeyOwnedByFocus,
+} from "SRC_DIR/helpers/hotkeys";
 
 const suppressKeyRepeat = (code) => {
   const onRepeat = (e) => {
@@ -103,10 +107,8 @@ const withHotkeys = (Component) => {
       isArchiveFolder,
       isRoomsFolder,
       isFormsFolder,
-      isAIAgentsFolder,
       isPrivacyFolder,
       canCreateEncrypted,
-      isAIRoom,
 
       getSelection,
       setFavoriteAction,
@@ -116,8 +118,6 @@ const withHotkeys = (Component) => {
       deleteRooms,
       archiveRooms,
       createRoom,
-      isGracePeriod,
-      setQuotaWarningDialogVisible,
 
       security,
       copyToClipboard,
@@ -126,6 +126,7 @@ const withHotkeys = (Component) => {
       isGroupMenuBlocked,
       isFormRoom,
       isParentFolderFormRoom,
+      roomType,
       isIndexEditingMode,
       enableSelection,
       openContextMenu,
@@ -162,13 +163,12 @@ const withHotkeys = (Component) => {
       isRoomsFolder ||
       isFormsFolder ||
       isVisitor ||
-      isAIAgentsFolder ||
-      isAIRoom ||
       !security?.Create;
 
     const onCreate = (extension) => {
       if (
         folderWithNoAction ||
+        isCreateHotkeyBlockedInRoom(roomType) ||
         (Boolean(extension) && (isFormRoom || isParentFolderFormRoom))
       )
         return;
@@ -221,20 +221,6 @@ const withHotkeys = (Component) => {
         security?.Create
       ) {
         createRoom(null, false, "hotkey");
-      }
-    };
-
-    const onCreateAIAgent = () => {
-      if (!isVisitor && isAIAgentsFolder && security?.Create) {
-        if (isGracePeriod) {
-          setQuotaWarningDialogVisible(true);
-          return;
-        }
-
-        const event = new CustomEvent(Events.AGENT_CREATE, {
-          detail: { parentId: currentFolderId, context: "hotkey" },
-        });
-        window.dispatchEvent(event);
       }
     };
 
@@ -447,18 +433,10 @@ const withHotkeys = (Component) => {
 
     useHotkeys("Shift+c", onShiftHotkey(openContextMenu), hotkeysFilter);
 
-    // Create AI agent
-    useHotkeys("Shift+a", onShiftHotkey(onCreateAIAgent), hotkeysFilter);
-
     // Delete selection
     useHotkeys(
       "delete, shift+3, command+delete, command+Backspace",
       () => {
-        if (isAIAgentsFolder) {
-          isAvailableOption("delete-room") && deleteRooms(t);
-          return;
-        }
-
         if (isArchiveFolder) {
           isAvailableOption("delete-room") && deleteRooms(t);
           return;
@@ -585,7 +563,6 @@ const withHotkeys = (Component) => {
       userStore,
       indexingStore,
       contextOptionsStore,
-      currentTariffStatusStore,
       uploadDataStore,
     }) => {
       const {
@@ -625,7 +602,6 @@ const withHotkeys = (Component) => {
       const {
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        setQuotaWarningDialogVisible,
       } = dialogsStore;
       const {
         isAvailableOption,
@@ -650,14 +626,14 @@ const withHotkeys = (Component) => {
         isArchiveFolder,
         isRoomsFolder,
         isFormsFolder,
-        isAIAgentsFolder,
         isPrivacyFolder,
       } = treeFoldersStore;
 
       const canCreateEncrypted = uploadDataStore.shouldEncryptCurrentUpload();
 
       const security = selectedFolderStore.security;
-      const isFormRoom = selectedFolderStore.roomType === RoomsType.FormRoom;
+      const { roomType } = selectedFolderStore;
+      const isFormRoom = roomType === RoomsType.FormRoom;
       const isParentFolderFormRoom =
         selectedFolderStore.parentRoomType === FolderType.FormRoom;
       const currentFolderId = selectedFolderStore.id;
@@ -704,10 +680,8 @@ const withHotkeys = (Component) => {
         isArchiveFolder,
         isRoomsFolder,
         isFormsFolder,
-        isAIAgentsFolder,
         isPrivacyFolder,
         canCreateEncrypted,
-        isAIRoom: selectedFolderStore.isAIRoom,
         isIndexEditingMode: indexingStore.isIndexEditingMode,
 
         getSelection,
@@ -718,8 +692,6 @@ const withHotkeys = (Component) => {
         deleteRooms,
         archiveRooms,
         createRoom: contextOptionsStore.onCreateRoom,
-        isGracePeriod: currentTariffStatusStore.isGracePeriod,
-        setQuotaWarningDialogVisible,
 
         security,
         copyToClipboard,
@@ -729,6 +701,7 @@ const withHotkeys = (Component) => {
         isGroupMenuBlocked,
         isFormRoom,
         isParentFolderFormRoom,
+        roomType,
         enableSelection,
         askAIAction,
         currentFolderId,

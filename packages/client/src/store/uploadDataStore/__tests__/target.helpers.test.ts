@@ -61,19 +61,16 @@ describe("resolveOpenFolderTarget", () => {
   const deps = (overrides: {
     selected?: Record<string, unknown>;
     isPrivacyFolder?: boolean;
-    knowledgeId?: number | null;
   }) =>
     ({
       selectedFolderStore: {
         id: 60,
         isRoom: false,
-        isAIRoom: false,
         roomType: null,
         navigationPath: [],
         ...overrides.selected,
       },
       treeFoldersStore: { isPrivacyFolder: !!overrides.isPrivacyFolder },
-      aiRoomStore: { knowledgeId: overrides.knowledgeId ?? null },
     }) as never;
 
   it("takes the room of a folder inside a private room from the navigation path", () => {
@@ -108,17 +105,6 @@ describe("resolveOpenFolderTarget", () => {
       encryptionRoomId: 70,
     });
   });
-
-  it("points an AI agent's uploads at its knowledge folder", () => {
-    expect(
-      resolveOpenFolderTarget(
-        deps({
-          selected: { id: 70, isRoom: true, isAIRoom: true },
-          knowledgeId: 71,
-        }),
-      ),
-    ).toMatchObject({ folderId: 71, roomType: RoomsType.AIRoom });
-  });
 });
 
 describe("resolveOpenFolderTarget — the section does not decide encryption", () => {
@@ -126,7 +112,6 @@ describe("resolveOpenFolderTarget — the section does not decide encryption", (
   const openFolder = {
     id: 60,
     isRoom: false,
-    isAIRoom: false,
     roomType: null,
     private: false,
     navigationPath: [{ id: PRIVATE_ROOM_ID, isRoom: true, private: true }],
@@ -142,7 +127,6 @@ describe("resolveOpenFolderTarget — the section does not decide encryption", (
     return resolveOpenFolderTarget({
       selectedFolderStore: openFolder,
       treeFoldersStore,
-      aiRoomStore: { knowledgeId: null },
     } as never);
   };
 

@@ -18,11 +18,6 @@ describe("FilesActionsStore — navigation targets (batch 11)", () => {
     expect(navigate).toHaveBeenCalledTimes(1);
   });
 
-  it("moveToAIAgentsPage navigates to the agents page", () => {
-    createTestFilesActionsStore().moveToAIAgentsPage();
-    expect(navigate).toHaveBeenCalledTimes(1);
-  });
-
   it("moveToPublicRoom navigates to the public-room URL", () => {
     const store = createTestFilesActionsStore({
       selectedFolderStore: {

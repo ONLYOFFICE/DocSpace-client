@@ -51,6 +51,7 @@ import {
   FILTER_SHARE,
   FILTER_SHARED_ROOM,
   FILTER_TEMPLATES_ROOM,
+  FILTER_AI_HUB_ROOMS,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
 
@@ -132,12 +133,15 @@ export function setRoomsFilterImpl(self: FilesStore, filter: TRoomsFilter) {
     self.categoryType === CategoryType.Archive ||
     self.categoryType === CategoryType.PrivateArchive;
   const isTemplate = filter.searchArea === RoomSearchArea.Templates;
+  const isAiHub = filter.searchArea === RoomSearchArea.AiHub;
 
   const key = isArchive
     ? `${FILTER_ARCHIVE_ROOM}=${self.userStore.user?.id}`
     : isTemplate
       ? `${FILTER_TEMPLATES_ROOM}=${self.userStore.user?.id}`
-      : `${FILTER_SHARED_ROOM}=${self.userStore.user?.id}`;
+      : isAiHub
+        ? `${FILTER_AI_HUB_ROOMS}=${self.userStore.user?.id}`
+        : `${FILTER_SHARED_ROOM}=${self.userStore.user?.id}`;
 
   const sharedStorageFilter = getUserFilter(key);
 

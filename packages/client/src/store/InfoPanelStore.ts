@@ -410,7 +410,6 @@ class InfoPanelStore {
   getCanDisplay = () => {
     if (isPluginPage()) return false;
 
-    const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
     const isForms = this.getIsForms();
@@ -418,12 +417,7 @@ class InfoPanelStore {
       this.peopleStore.usersStore.contactsTab !== false ||
       getContactsView(window.location) !== false;
 
-    return isRooms || isFiles || isForms || isAccounts || isAIAgent;
-  };
-
-  getIsAIAgent = () => {
-    const pathname = window.location.pathname.toLowerCase();
-    return pathname.indexOf("ai-agent") !== -1;
+    return isRooms || isFiles || isForms || isAccounts;
   };
 
   getIsForms = () => {

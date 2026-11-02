@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "AI Agent ໄດ້ຖືກສ້າງຂຶ້ນ",
-  "AgentDeleted": "AI Agent ຖືກລຶບ",
-  "AgentUpdated": "ຕົວແທນ AI ໄດ້ຮັບການອັບເດດແລ້ວ",
   "Before": "ກ່ອນ",
   "CreateWebhook": "ສ້າງ webhook",
   "DeleteHint": "webhook ຈະຖືກລຶບຢ່າງຖາວອນ.\nທ່ານຈະບໍ່ສາມາດຍົກເລີກຄຳສັ່ງນີ້ໄດ້.",

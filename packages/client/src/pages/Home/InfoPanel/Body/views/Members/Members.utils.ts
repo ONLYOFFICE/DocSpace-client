@@ -68,7 +68,7 @@ class MembersHelper {
       projectMember: {
         key: "projectMember",
         label: this.t("Common:Member"),
-        access: ShareAccessRights.ReadOnly,
+        access: ShareAccessRights.Collaborator,
         type: "user",
       },
       collaborator: {
@@ -185,11 +185,15 @@ class MembersHelper {
 
     const options = this.getOptions();
 
-    // A project names its two roles after itself.
+    // A project names its two roles after itself. A member is Content
+    // creator; Read is what the server granted before, still shown as one.
     if (roomType === RoomsType.AiProjectRoom) {
       if (access === ShareAccessRights.RoomManager)
         return options.projectManager;
-      if (access === ShareAccessRights.ReadOnly)
+      if (
+        access === ShareAccessRights.Collaborator ||
+        access === ShareAccessRights.ReadOnly
+      )
         return options.projectMember;
     }
 

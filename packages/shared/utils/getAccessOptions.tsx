@@ -207,7 +207,8 @@ export const getAccessOptions = (
 			key: "projectMember",
 			label: t("Common:Member"),
 			description: t("Common:AIProjectMemberDescription"),
-			access: ShareAccessRights.ReadOnly,
+			// The server grants a project member Content creator.
+			access: ShareAccessRights.Collaborator,
 			type: EmployeeType.Guest,
 		},
 		viewer: {

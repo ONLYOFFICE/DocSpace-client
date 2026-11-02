@@ -39,12 +39,12 @@ describe("getAccessOptions for an AI project", () => {
     return option && "access" in option ? option.access : undefined;
   };
 
-  it("offers Project manager only, without Member", () => {
+  it("offers Project manager and Member, a member reading the project", () => {
     expect(accessOf("projectManager")).toBe(ShareAccessRights.RoomManager);
-    expect(accessOf("projectMember")).toBeUndefined();
+    expect(accessOf("projectMember")).toBe(ShareAccessRights.ReadOnly);
   });
 
-  it("invites a Project manager by default", () => {
+  it("creates the invitation link as Project manager", () => {
     expect(getDefaultAccessUser(RoomsType.AiProjectRoom)).toBe(
       ShareAccessRights.RoomManager,
     );

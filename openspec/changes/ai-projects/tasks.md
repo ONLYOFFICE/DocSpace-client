@@ -152,6 +152,7 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - [x] 12.6 Client: a file under the AI rooms root offers no external link (no "Sharing settings", "Copy shared link", "Manage links", no Info panel Share tab), after server c765587896 refuses them; the room-members link stays
 - [x] 12.7 Client: an Instructions room offers "Upload from storage" before "Upload from device" in the empty view, the "+" menu and the main button, as a Knowledge room does; the storage picker lists `.md` files only
 - [x] 12.8 Client: the Invite panel of a project offers no guests (no Guests tab, no guests in the search, no e-mail invitation); the server is to refuse them too
+- [x] 12.9 Client: a project offers Member (Read, 2) again in the Invite panel and the members list; the invitation link stays Project manager only
 
 ## Workflow follow-up
 

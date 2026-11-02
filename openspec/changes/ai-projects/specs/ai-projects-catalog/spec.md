@@ -162,18 +162,18 @@ Members of every AI room and project SHALL be managed through the room panels (I
 
 #### Scenario: Invite a project manager
 - **WHEN** a Project manager invites a room admin from the Invite panel of a project
-- **THEN** the role offered is Project manager only, the invitation goes to `files/rooms/{id}/share` with `access` 9 and the user appears in Contacts
+- **THEN** Project manager is offered by default, the invitation goes to `files/rooms/{id}/share` with `access` 9 and the user appears in Contacts
 
-### Requirement: Project manager is the only project role offered
-An AI project SHALL offer Project manager as its only role: the Invite panel grants it by default, its invitation link joins as Project manager (the only role the server takes for a link), and the Contacts role menu offers Project manager and removal only. A member the project already has SHALL still be shown as Member. The Invite panel SHALL offer no guests, new or existing, and no groups, which the server takes as Member only.
+### Requirement: Project roles and who may be invited
+An AI project SHALL offer two roles, Project manager (`access` 9) and Member (`access` 2): the Invite panel offers both, with Project manager by default, and the Contacts role menu offers both and removal. Its invitation link SHALL join as Project manager only, the only role the server takes for a link. The Invite panel SHALL offer portal users only: no guests, new or existing, and no groups.
 
-#### Scenario: No Member role
-- **WHEN** a Project manager opens the Invite panel of a project, and then the role menu of a member in its Contacts
-- **THEN** neither offers Member
+#### Scenario: Invite a member from the list
+- **WHEN** a Project manager picks a user in the people list of a project's Invite panel and sets Member
+- **THEN** the invitation goes to `files/rooms/{id}/share` with `access` 2 and Contacts shows the user as Member
 
 #### Scenario: Invitation link
 - **WHEN** a Project manager turns the invitation link on in the Invite panel of a project
-- **THEN** the link is created with `access` 9, its role selector offers Project manager and its description names no guests
+- **THEN** the link is created with `access` 9, its role selector offers Project manager alone and its description names no guests
 
 #### Scenario: No groups
 - **WHEN** a Project manager searches or opens the people list in the Invite panel of a project

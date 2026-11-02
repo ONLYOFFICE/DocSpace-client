@@ -19,6 +19,10 @@ describe("MembersHelper.getOptionsByRoomType", () => {
     expect(keysOf(RoomsType.InstructionsRoom)).toEqual(["roomAdmin", "collaborator", "editor", "viewer"]);
   });
 
+  it("offers both project roles in a project", () => {
+    expect(keysOf(RoomsType.AiProjectRoom)).toEqual(["projectManager", "projectMember"]);
+  });
+
   it("appends the remove option when the caller may change roles", () => {
     expect(keysOf(RoomsType.KnowledgeRoom, true)).toEqual(["roomAdmin", "collaborator", "viewer", "s2", "remove"]);
   });

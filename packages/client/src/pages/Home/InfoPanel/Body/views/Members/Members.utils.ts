@@ -174,9 +174,7 @@ class MembersHelper {
           ...deleteOption,
         ];
       case RoomsType.AiProjectRoom:
-        // Member is not offered until the server takes it again; a member
-        // the project already has is still shown as one.
-        return [options.projectManager, ...deleteOption];
+        return [options.projectManager, options.projectMember, ...deleteOption];
       default:
         return [];
     }

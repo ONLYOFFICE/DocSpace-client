@@ -160,12 +160,14 @@ const ExternalLinks = ({
     standalone,
   );
 
-  // A project's link joins as Project manager, the one role it offers, so
-  // the paid role stays selectable there.
+  // A project's link joins as Project manager only - the server takes no
+  // other role for it - so the paid role stays selectable there.
   const filteredAccesses =
-    roomType === -1 || roomType === RoomsType.AiProjectRoom
-      ? accesses
-      : filterPaidRoleOptions(accesses);
+    roomType === RoomsType.AiProjectRoom
+      ? accesses.filter((access) => access.key === "projectManager")
+      : roomType === -1
+        ? accesses
+        : filterPaidRoleOptions(accesses);
 
   const description =
     roomId === -1

@@ -51,11 +51,13 @@ import styles from "./TemplatePanel.module.scss";
 
 type TemplateFormProps = Omit<FieldsListProps, "fields"> & {
   draft: TTemplateDraft;
+  nameError: string;
   onChange: (patch: Partial<TTemplateDraft>) => void;
 };
 
 const TemplateForm = ({
   draft,
+  nameError,
   onChange,
   ...fieldsListProps
 }: TemplateFormProps) => {
@@ -87,10 +89,13 @@ const TemplateForm = ({
         isVertical
         removeMargin
         labelText={t("Common:Name")}
+        hasError={!!nameError}
+        errorMessage={nameError}
       >
         <TextInput
           type={InputType.text}
           value={draft.name}
+          hasError={!!nameError}
           onChange={(e) => onChange({ name: e.target.value })}
           placeholder={t("Metadata:EnterTemplateName")}
           maxLength={METADATA_NAME_MAX_LENGTH}

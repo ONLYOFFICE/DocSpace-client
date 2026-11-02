@@ -53,12 +53,14 @@ import {
   createTemplateForm,
   filterTemplatesByName,
   formatMetadataValue,
+  formatPreviousValue,
   getCascadeState,
   getLaunchResult,
   getChangedValues,
   getCustomFieldChanges,
   getEntryKind,
   getFieldInputError,
+  getMetadataEmptyHint,
   getMetadataItemType,
   getUnassignedTemplates,
   getVisibleTemplates,
@@ -124,6 +126,18 @@ describe("getEntryKind", () => {
     expect(getMetadataItemType(file(true))).toBe("file");
     expect(getMetadataItemType(folder(true))).toBe("folder");
     expect(getMetadataItemType(room(true))).toBe("room");
+  });
+});
+
+describe("getMetadataEmptyHint", () => {
+  it("promises AI autofill only for files where AI is available", () => {
+    expect(getMetadataEmptyHint("file", true)).toBe("fileWithAI");
+    expect(getMetadataEmptyHint("file", false)).toBe("file");
+  });
+
+  it("never promises AI for folders and rooms", () => {
+    expect(getMetadataEmptyHint("folder", true)).toBe("folder");
+    expect(getMetadataEmptyHint("room", true)).toBe("room");
   });
 });
 
@@ -239,6 +253,30 @@ describe("formatMetadataValue", () => {
 
   it("shows nothing for an empty field", () => {
     expect(formatMetadataValue(field(MetadataFieldType.String), "en")).toBe("");
+  });
+});
+
+describe("formatPreviousValue", () => {
+  it("writes a number the way its input does", () => {
+    expect(
+      formatPreviousValue(
+        field(MetadataFieldType.Number, { numberValue: 9000 }),
+        "en",
+      ),
+    ).toBe("9000");
+  });
+
+  it("reads every other type as the card does", () => {
+    const date = field(MetadataFieldType.Date, {
+      dateValue: "2026-09-15T03:00:00.0000000+03:00",
+    });
+
+    expect(formatPreviousValue(date, "en")).toBe(
+      formatMetadataValue(date, "en"),
+    );
+    expect(formatPreviousValue(field(MetadataFieldType.Number), "en")).toBe(
+      "",
+    );
   });
 });
 
@@ -433,6 +471,19 @@ describe("cascade", () => {
       progress: 40,
     });
     expect(getCascadeState(running, 2).isRunning).toBe(false);
+  });
+
+  it("fills the bar only for a run that succeeded", () => {
+    const completed = { ...running, isCompleted: true };
+
+    expect(getCascadeState(completed, 1)).toEqual({
+      isRunning: false,
+      progress: 100,
+    });
+    expect(getCascadeState({ ...completed, error: "Failed" }, 1)).toEqual({
+      isRunning: false,
+      progress: 40,
+    });
   });
 
   it("tells how a launched run ended", () => {

@@ -82,6 +82,26 @@ describe("ContextOptionsStore.getFolderModel — Knowledge room", () => {
   });
 });
 
+describe("ContextOptionsStore.getFolderModel — Instructions room", () => {
+  const instructionsRoom = { security: { Create: true }, roomType: RoomsType.InstructionsRoom };
+
+  it("offers the workspace and device uploads, as a Knowledge room does", () => {
+    const store = createTestContextOptionsStore({ selectedFolderStore: instructionsRoom });
+    expect(menuShape(store.getFolderModel(t) as unknown[])).toEqual([
+      { key: "upload-from-storage", label: "EmptyView:UploadFromPortalTitle" },
+      { key: "upload-from-device", label: "EmptyView:UploadDeviceOptionTitle" },
+    ]);
+  });
+
+  it("keeps both while vectorization is off", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: instructionsRoom,
+      settingsStore: { aiConfig: { vectorizationEnabled: false } },
+    });
+    expect(menuShape(store.getFolderModel(t) as unknown[])).toHaveLength(2);
+  });
+});
+
 describe("ContextOptionsStore.getGroupContextOptions — characterization", () => {
   it("builds the group (multi-selection) model", () => {
     const store = createTestContextOptionsStore({

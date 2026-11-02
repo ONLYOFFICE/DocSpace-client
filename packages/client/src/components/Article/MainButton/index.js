@@ -543,21 +543,18 @@ const ArticleMainButtonContent = (props) => {
     }
 
     // Instructions and Knowledge rooms are flat and hold one kind of file:
-    // no folders and no folder upload. An Instructions room uploads
-    // Markdown skills (a new empty file has no frontmatter, which the
-    // server refuses); a Knowledge room uploads files to index, never
-    // edited, and not at all while vectorization is off.
+    // no folders and no folder upload. An Instructions room takes Markdown
+    // skills (a new empty file has no frontmatter, which the server
+    // refuses); a Knowledge room takes files to index, never edited, and
+    // none at all while vectorization is off.
     if (
       currentRoomType === RoomsType.InstructionsRoom ||
       currentRoomType === RoomsType.KnowledgeRoom
     ) {
       const isKnowledgeRoom = currentRoomType === RoomsType.KnowledgeRoom;
-      const uploadFilesOnly = newUploadActions.filter(
-        (action) => action.key !== "upload-folder",
-      );
-      // A Knowledge room takes files from the workspace (copied in) or from
-      // the device, in the order the empty view offers them.
-      const knowledgeUploadActions = [
+      // Both take files from the workspace (copied in, filtered to what the
+      // room holds) or from the device, in the order the empty view offers.
+      const sourceRoomUploadActions = [
         {
           id: "actions_upload-from-storage",
           className: "main-button_drop-down",
@@ -575,11 +572,10 @@ const ArticleMainButtonContent = (props) => {
           key: "upload-from-device",
         },
       ];
-      const sourceUploadActions = isKnowledgeRoom
-        ? vectorizationEnabled
-          ? knowledgeUploadActions
-          : []
-        : uploadFilesOnly;
+      const sourceUploadActions =
+        isKnowledgeRoom && !vectorizationEnabled
+          ? []
+          : sourceRoomUploadActions;
       setUploadActions(sourceUploadActions);
       setActions([]);
       setModel(sourceUploadActions);

@@ -437,12 +437,18 @@ export const getOptions = (
     "file",
   );
 
-  // The workspace picker of a Knowledge room copies several files at once
-  // and lists only the formats vectorization reads.
+  // The workspace picker of a Knowledge or Instructions room copies several
+  // files at once and lists only what the room holds: the formats
+  // vectorization reads, or Markdown.
   const uploadKnowledgeFromStorage: EmptyViewItemType = {
     ...uploadAllFromDocSpace,
     key: "upload-knowledge-from-storage",
     onClick: () => actions.uploadFromDocspaceKnowledgeRoom(),
+  };
+
+  const uploadMarkdownFromStorage: EmptyViewItemType = {
+    ...uploadKnowledgeFromStorage,
+    key: "upload-markdown-from-storage",
   };
 
   const migrationData = {
@@ -665,9 +671,10 @@ export const getOptions = (
     case RoomsType.InstructionsRoom:
       if (isNotAdmin) return [];
 
-      if (isCollaborator) return [uploadMarkdownFromDevice];
+      if (isCollaborator)
+        return [uploadMarkdownFromStorage, uploadMarkdownFromDevice];
 
-      return [inviteUser, uploadMarkdownFromDevice];
+      return [inviteUser, uploadMarkdownFromStorage, uploadMarkdownFromDevice];
 
     // Files to index: uploaded, never created or edited; nothing at all
     // while vectorization is off.

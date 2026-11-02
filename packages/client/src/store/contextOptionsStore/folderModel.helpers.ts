@@ -360,8 +360,8 @@ export const getFolderModelImpl = (
   ) {
     const vectorizationEnabled =
       self.settingsStore.aiConfig?.vectorizationEnabled !== false;
-    // A Knowledge room takes files from the workspace (copied in) or from
-    // the device, in the order the empty view offers them.
+    // Both take files from the workspace (copied in, filtered to what the
+    // room holds) or from the device, in the order the empty view offers.
     const uploadFromStorage: TContextOption = {
       id: "personal_upload-from-storage",
       key: "upload-from-storage",
@@ -377,11 +377,9 @@ export const getFolderModelImpl = (
       onClick: () => onUploadAction("file"),
     };
     const sourceRoomOptions: TContextOption[] =
-      roomType === RoomsType.InstructionsRoom
-        ? [uploadFiles]
-        : vectorizationEnabled
-          ? [uploadFromStorage, uploadFromDevice]
-          : [];
+      roomType === RoomsType.KnowledgeRoom && !vectorizationEnabled
+        ? []
+        : [uploadFromStorage, uploadFromDevice];
 
     return sourceRoomOptions.length > 0 ? sourceRoomOptions : null;
   }

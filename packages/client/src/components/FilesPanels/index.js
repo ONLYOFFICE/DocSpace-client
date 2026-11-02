@@ -41,6 +41,7 @@ import {
   Events,
   FilesSelectorFilterTypes,
   FilterType,
+  RoomsType,
 } from "@docspace/shared/enums";
 
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
@@ -136,6 +137,7 @@ const Panels = (props) => {
     setSelectFileKnowledgeRoomDialogVisible,
     copyFilesToKnowledgeRoom,
     knowledgeSelectorFilter,
+    isInstructionsRoom,
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
@@ -354,7 +356,10 @@ const Panels = (props) => {
         onClose={onCloseFileKnowledgeRoomDialog}
         openRoot
         onSelectFile={(files) => copyFilesToKnowledgeRoom(files)}
-        filterParam={knowledgeSelectorFilter}
+        filterParam={
+          // An Instructions room takes Markdown skills only.
+          isInstructionsRoom ? "md" : knowledgeSelectorFilter
+        }
         descriptionText=""
         withRecentTreeFolder
         withFavoritesTreeFolder
@@ -489,6 +494,7 @@ export default inject(
     oformsStore,
     filesSettingsStore,
     aiProjectsStore,
+    selectedFolderStore,
   }) => {
     const {
       copyPanelVisible,
@@ -637,6 +643,8 @@ export default inject(
       setSelectFileKnowledgeRoomDialogVisible,
       copyFilesToKnowledgeRoom,
       knowledgeSelectorFilter: filesSettingsStore.knowledgeSelectorFilter,
+      isInstructionsRoom:
+        selectedFolderStore.roomType === RoomsType.InstructionsRoom,
       hotkeyPanelVisible,
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,

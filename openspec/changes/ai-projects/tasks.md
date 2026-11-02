@@ -150,6 +150,7 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - [x] 12.4 ui-kit + client: the file and folder selectors list "AI rooms" (Instructions and Knowledge rooms, no projects, no creation) instead of "AI agents" at the root; `withAIRoomsTreeFolder` replaces `withAIAgentsTreeFolder`, on by default and off in `FilesSelectorInput`; copy/move keeps only the AI types the selection fits
 - [x] 12.5 Client: a project offers only Project manager (`ShareAccessRights.RoomManager`, 9) until the server takes Member back: the invite panel and the members list offer no Member, the invite default is Project manager and the invite panel has no invitation link; a member the project already has (Read, 2) is still shown as Member
 - [x] 12.6 Client: a file under the AI rooms root offers no external link (no "Sharing settings", "Copy shared link", "Manage links", no Info panel Share tab), after server c765587896 refuses them; the room-members link stays
+- [x] 12.7 Client: an Instructions room offers "Upload from storage" before "Upload from device" in the empty view, the "+" menu and the main button, as a Knowledge room does; the storage picker lists `.md` files only
 
 ## Workflow follow-up
 

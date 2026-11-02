@@ -79,6 +79,8 @@ const NAVIGATION_KEYS = [
 
 const SELECTION_KEYS = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
 
+const MODIFIER_KEYS = ["Shift", "Control", "Alt", "Meta", "AltGraph"];
+
 /**
  * Hands the focus to the list once its hotkeys have taken an arrow key from
  * another element. A closed menu gives the focus back to its "..." button; if
@@ -111,6 +113,11 @@ export const isContextMenuOpen = () =>
  */
 export const isKeyOwnedByFocus = (e: KeyboardEvent) => {
   if (e.key === "Tab") return true;
+
+  // A modifier pressed on its own is no hotkey. Its keydown comes before the
+  // key it modifies, and handing the focus to the list there sent Shift+Tab
+  // backwards from the list instead of from the focused control.
+  if (MODIFIER_KEYS.includes(e.key)) return true;
 
   const target = e.target;
   if (!(target instanceof Element)) return false;

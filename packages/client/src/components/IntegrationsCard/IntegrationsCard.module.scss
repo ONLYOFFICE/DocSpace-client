@@ -41,6 +41,14 @@
     grid-template-columns: 1fr;
   }
 
+  @container dashboard-content (max-width: 800px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @container dashboard-content (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+
   &[data-columns="2"] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 

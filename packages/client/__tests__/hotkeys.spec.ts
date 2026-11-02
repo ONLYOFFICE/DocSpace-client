@@ -509,7 +509,10 @@ test.describe("Hotkeys in the files list", () => {
       const columns = await tilesInRow(page);
       expect(await gridColumns(page)).toBe(columns);
 
-      await page.keyboard.press("Shift");
+      // The click may drop the caret. A key the list binds to nothing puts it
+      // back on the first file without moving it; a lone Shift no longer
+      // does, since the focused control owns modifiers.
+      await page.keyboard.press("Home");
       await expect.poll(() => caretFile(page)).toBe(1);
 
       await page.keyboard.press("ArrowDown");

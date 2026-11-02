@@ -7,7 +7,7 @@ Describes what a user can do with files and folders inside a private (end-to-end
 ## Requirements
 
 ### Requirement: Uploads into a private room are encrypted on the client
-The system SHALL encrypt each file on the client before it is uploaded into a private room, wrap the file key for the uploader and for each room member the server lists a key for, using that member's selected key so every member gets exactly one wrap, and mark the uploaded file as encrypted. The system SHALL NOT send a file into a private room in any other form.
+The system SHALL encrypt each file on the client before it is uploaded into a private room, wrap the file key for the uploader and for each room member the server lists a key for, using that member's selected key so every member gets exactly one wrap, and mark the uploaded file as encrypted. The system SHALL NOT send a file into a private room in any other form. A failure to write the members' wraps SHALL be reported, never passed over.
 
 #### Scenario: Member uploads a file
 - **WHEN** a user with an encryption key drops a file into a private room
@@ -24,6 +24,10 @@ The system SHALL encrypt each file on the client before it is uploaded into a pr
 #### Scenario: Member with two keys on the server
 - **WHEN** the room access list holds two keys for one member
 - **THEN** that member gets one access entry, for the selected key, and every other member still gets theirs
+
+#### Scenario: Sharing with the members fails
+- **WHEN** the file is stored with the uploader's entry but writing the other members' wraps fails
+- **THEN** Common:EncryptedUploadShareFailed names the file, the members whose keys were read are marked as pending access for it, and the upload MUST NOT be reported as shared with them
 
 ### Requirement: No conversion on private upload
 The system SHALL NOT offer or perform upload-time format conversion for files uploaded into a private room.
@@ -269,7 +273,7 @@ The system SHALL, when files are copied or moved out of a private room to a dest
 - **THEN** no file is transferred and no source is deleted
 
 ### Requirement: Copy within the same private room
-The system SHALL allow copying an encrypted file to the root of the same private room and SHALL give the copy the first copy suffix that no file of the destination carries, without asking.
+The system SHALL allow copying an encrypted file to the root of the same private room, wherever the copy is started, and SHALL give the copy the first copy suffix that no file of the destination carries, without asking.
 
 #### Scenario: Same-room copy
 - **WHEN** an encrypted file is copied to the root of its own room
@@ -278,6 +282,10 @@ The system SHALL allow copying an encrypted file to the root of the same private
 #### Scenario: Copy of a name that already has a copy
 - **WHEN** the room root holds "Report.docx" and "Report (1).docx", and "Report.docx" is copied to the root
 - **THEN** the copy is stored as "Report (2).docx" and no conflict dialog is shown
+
+#### Scenario: Duplicate started outside the room
+- **WHEN** an encrypted file is duplicated from a list outside its room, such as Recent
+- **THEN** the copy is encrypted for the file's room as a Duplicate inside the room would be, and its content MUST NOT be sent as plaintext
 
 ### Requirement: Download decrypts on the client
 The system SHALL download an encrypted file by fetching the ciphertext, decrypting it in the browser with the unlocked identity and saving it under its original name, reporting progress and surfacing a localized error on failure.
@@ -289,6 +297,10 @@ The system SHALL download an encrypted file by fetching the ciphertext, decrypti
 #### Scenario: Unlock declined
 - **WHEN** the user dismisses the passphrase prompt during download
 - **THEN** nothing is downloaded
+
+#### Scenario: No own access entry
+- **WHEN** the user downloads one encrypted file for which they hold no access entry
+- **THEN** nothing is downloaded and Common:EncryptionDownloadFailed is shown
 
 ### Requirement: Multiple encrypted files download as a decrypted zip
 The system SHALL decrypt each selected encrypted file and deliver them together as Files.zip, a decrypted name that clashes with another taking the lowest numbered suffix no other entry has. A selected folder that lies in a private room SHALL be included as its decrypted subtree under the folder's name, and no server archive SHALL be requested for it. Non-encrypted files and folders outside private rooms of the same selection download through the standard path.

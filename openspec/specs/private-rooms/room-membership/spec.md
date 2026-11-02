@@ -181,11 +181,15 @@ The system SHALL, when a member leaves a private room, run a revocation of the l
 - **THEN** the member still leaves the room and the failure is only logged
 
 ### Requirement: New owner must hold a verified key
-The system SHALL validate the chosen new owner of a private room before transferring ownership and SHALL refuse with Common:EncryptedChangeOwnerNoKeys or Common:EncryptedChangeOwnerKeyMismatch when the candidate has no key or a refused key change.
+The system SHALL validate the chosen new owner of a private room before transferring ownership, whether the owner is changed from the owner panel or from the room's edit dialog, and SHALL refuse with Common:EncryptedChangeOwnerNoKeys or Common:EncryptedChangeOwnerKeyMismatch when the candidate has no key or a refused key change.
 
 #### Scenario: Candidate without key
 - **WHEN** the owner selects a candidate who has no encryption key
 - **THEN** ownership is not transferred and Common:EncryptedChangeOwnerNoKeys names the candidate
+
+#### Scenario: Owner changed in the room's edit dialog
+- **WHEN** the owner picks a candidate with a refused key change in the edit dialog of a private room and saves
+- **THEN** ownership MUST NOT be transferred and Common:EncryptedChangeOwnerKeyMismatch names the candidate, as in the owner panel
 
 ### Requirement: Owner candidates are current members
 The system SHALL offer only current members of the private room, excluding the current owner, as ownership candidates; administrators who are not members SHALL be excluded.
@@ -263,6 +267,10 @@ The system SHALL let a room manager run a best-effort backfill sweep that re-wra
 #### Scenario: Non-manager opens the room
 - **WHEN** a member without room-edit rights opens the room
 - **THEN** no sweep runs
+
+#### Scenario: Room listed over several pages
+- **WHEN** a folder of the room holds subfolders and more files than one page of the server's listing returns
+- **THEN** the sweep reaches every encrypted file of that folder, not only those on the first page
 
 ### Requirement: No AI chat in private rooms
 The system SHALL NOT offer the AI chat while a private room, or a folder inside it, is open, whether the room is active or archived and whatever address it was opened under. The chat runs on the server, which holds the files of a private room only as ciphertext.

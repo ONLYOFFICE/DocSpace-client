@@ -39,7 +39,7 @@ fixes, 8 the suspicions. One task is one commit with its tick (the
 
 ## 8. Suspicions
 
-- [ ] 8.1 Check whether Copy to of an encrypted file opened from Recent is planned as a plain server copy (`packages/client/src/components/FilesSelector/index.tsx`, `packages/shared/services/private-room/private-transfer.ts`); if it is, plan it from the file's own room as 2.2 does, with a case "Copy started outside the room" in `FilesActionsStore.encryption.test.ts`; record the finding in design.md either way
+- [x] 8.1 Check whether Copy to of an encrypted file opened from Recent is planned as a plain server copy (`packages/client/src/components/FilesSelector/index.tsx`, `packages/shared/services/private-room/private-transfer.ts`); if it is, plan it from the file's own room as 2.2 does, with a case "Copy started outside the room" in `FilesActionsStore.encryption.test.ts`; record the finding in design.md either way
 - [x] 8.2 Check whether the idle auto-lock starts after a key recovery from Keys management (`packages/shared/dialogs/key-recovery/useRecoverKeyFlow.tsx`, `packages/shared/context/encryption/EncryptionContext.tsx`); if it does not, mark the identity unlocked after recovery, with a case "Idle lock after recovery" next to the existing recovery flow tests; record the finding in design.md either way
 
 ## 9. Integration

@@ -240,6 +240,45 @@ function singleFile(fileId: number): { id: number; encrypted: boolean }[] {
   return [{ id: fileId, encrypted: true }];
 }
 
+describe("listing the encrypted files of a room", () => {
+  beforeEach(() => {
+    getFolderMock.mockReset();
+    getFileEncryptionAccessMock.mockReset();
+    getFileEncryptionAccessMock.mockResolvedValue({ fileKeys: [] });
+  });
+
+  const files = (from: number, count: number) =>
+    Array.from({ length: count }, (_, i) => ({ id: from + i, encrypted: true }));
+
+  it("Room listed over several pages", async () => {
+    const SUBFOLDER_A = 901;
+    const SUBFOLDER_B = 902;
+    getFolderMock.mockImplementation(
+      async (folderId: number, filter: { page: number }) => {
+        if (folderId !== ROOM_ID) return { files: [], folders: [], total: 0 };
+        if (filter.page === 0) {
+          return {
+            folders: [{ id: SUBFOLDER_A }, { id: SUBFOLDER_B }],
+            files: files(1, 98),
+            total: 152,
+          };
+        }
+        if (filter.page === 1) {
+          return { folders: [], files: files(99, 52), total: 152 };
+        }
+        return { folders: [], files: [], total: 152 };
+      },
+    );
+
+    const results = await revokeMemberFromEncryptedRoom(ROOM_ID, "bob", {});
+
+    expect(results).toHaveLength(150);
+    expect(
+      getFolderMock.mock.calls.filter(([id]) => id === ROOM_ID),
+    ).toHaveLength(2);
+  });
+});
+
 describe("addMembersToEncryptedRoom", () => {
   let alice: IdentityKeyPair;
   let bob: IdentityKeyPair;

@@ -97,6 +97,7 @@ async function getEncryptedFilesInRoom(roomId: number): Promise<TFile[]> {
   const allFiles: TFile[] = [];
   let page = 0;
   const pageSize = 100;
+  let read = 0;
   let hasMore = true;
 
   while (hasMore) {
@@ -113,7 +114,14 @@ async function getEncryptedFilesInRoom(roomId: number): Promise<TFile[]> {
       allFiles.push(...subfolderFiles);
     }
 
-    hasMore = folderData.files.length === pageSize;
+    // A page holds the folders first and files after them, so only the
+    // folder's total tells whether files remain.
+    const onPage = folderData.files.length + folderData.folders.length;
+    read += onPage;
+    hasMore =
+      typeof folderData.total === "number"
+        ? onPage > 0 && read < folderData.total
+        : folderData.files.length === pageSize;
     page++;
   }
   return allFiles;

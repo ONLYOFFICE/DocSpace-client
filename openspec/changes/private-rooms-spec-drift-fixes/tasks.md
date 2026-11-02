@@ -29,7 +29,7 @@ fixes, 8 the suspicions. One task is one commit with its tick (the
 
 ## 6. Room file listing (P1)
 
-- [ ] 6.1 Make `getEncryptedFilesInRoom` (`packages/shared/services/private-room/room-encryption.ts`) page on until it has read the folder's `total` entries (design decision 7); verify with a case "Room listed over several pages" in `__tests__/room-encryption.test.ts` (a folder with subfolders and 150 files) and `cd packages/shared && pnpm exec vitest run services/private-room`
+- [x] 6.1 Make `getEncryptedFilesInRoom` (`packages/shared/services/private-room/room-encryption.ts`) page on until it has read the folder's `total` entries (design decision 7); verify with a case "Room listed over several pages" in `__tests__/room-encryption.test.ts` (a folder with subfolders and 150 files) and `cd packages/shared && pnpm exec vitest run services/private-room`
 
 ## 7. Smaller fixes (P2)
 

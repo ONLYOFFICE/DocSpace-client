@@ -48,6 +48,11 @@ browser does:
   the error, so the user keeps typing without leaving the dialog.
 - The key dialogs' action links (generate, forgot passphrase, passkey) use
   the Enter-and-Space helper with its auto-repeat guard.
+- Owner directive of 2026-11-02: the key dialogs show passphrase strength
+  with ui-kit components only. The passphrase-change dialog uses the kit
+  password field's own indicator and shows a common pattern as the error
+  of the new passphrase field; the creation dialog keeps its strength row
+  of kit text elements.
 - The gaps are pinned by scenarios in `private-rooms/key-management` and by
   Playwright cases where the unit tests cannot see them.
 
@@ -63,7 +68,9 @@ None.
   asks for confirmation" gains the keyboard decline; "Key dialogs return the
   focus when they close" gains the replaced-dialog case; "Key-dialog errors
   are tied to their field" gains the focus after a failure; "Enter confirms
-  a key dialog from its text fields" gains the held key on an action link.
+  a key dialog from its text fields" gains the held key on an action link;
+  "Passphrase strength gate" shows the change dialog's refusal of a common
+  pattern as the field's error.
 
 ## Impact
 

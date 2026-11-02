@@ -2,6 +2,21 @@
 
 ## MODIFIED Requirements
 
+### Requirement: Passphrase strength gate
+The system SHALL require a new passphrase of at least 12 characters, show a strength meter with suggestions, and SHALL refuse passphrases that match a common pattern (keyboard rows, sequences, brand names), at key creation and at a passphrase change alike.
+
+#### Scenario: Too short
+- **WHEN** the user enters an 11-character passphrase
+- **THEN** the confirm button stays disabled
+
+#### Scenario: Common pattern
+- **WHEN** the user enters a passphrase built from a keyboard row or the product name
+- **THEN** it is rejected as weak even if it is long enough
+
+#### Scenario: Passphrase change
+- **WHEN** the user enters a new passphrase built from a common pattern in the passphrase change dialog
+- **THEN** the new passphrase field is marked invalid with Common:PassphraseCommonPattern as its error, and the change MUST NOT be submitted
+
 ### Requirement: Closing a key dialog with typed input asks for confirmation
 The system SHALL ask for confirmation (Common:UnsavedChanges) before the cross or Escape closes a passphrase-creation, passphrase-change or recovery-phrase-input dialog that holds typed input, or a recovery-phrase display whose phrase is not yet acknowledged; declining keeps the dialog open with its input, confirming discards it, whether the answer is given with a pointer or with the keyboard. The unlock prompt, the reset dialog and the key-change dialog SHALL close without a question.
 

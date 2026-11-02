@@ -27,6 +27,8 @@ Progress note (2026-11-02, before 3.2 started in code): the approach for 3.2 is 
 
 - [ ] 4a.1 Key dialogs use the ui-kit set only, no component of our own for showing passphrase strength: delete `packages/shared/dialogs/passphrase-modal/PassphraseStrengthMeter.tsx` (added by `private-rooms-spec-drift-fixes` 7.1); in `KeyRotationDialog` show the new passphrase's strength with the kit `PasswordInput`'s own indicator (`simpleView={false}`, `passwordSettings`, `onValidateInput`), as the creation dialog does, and the common-pattern refusal as the field's error (`FieldContainer` `errorMessage`, Common:PassphraseCommonPattern) while `isPassphraseAcceptable` keeps gating Save; restore `PassphraseModal` to its code before the extraction. Ask the owner first whether the strength row `PassphraseModal` drew before the extraction (kit `Text` elements under the field) stays or goes. Verify: `KeyRotationDialog.test.tsx` ("Passphrase change"), `cd packages/shared && pnpm exec vitest run dialogs`, `pnpm test:client`, `pnpm run tsc`
 
+Owner answers (2026-11-02, before 4a.1 started in code): the strength row of `PassphraseModal` stays, so the restore brings it back as it was before the extraction; the `key-management` delta of this change rewords "Passphrase strength gate", scenario "Passphrase change", to the field error the change dialog shows.
+
 ## 5. Integration
 
 - [ ] 5.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`) and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify all green

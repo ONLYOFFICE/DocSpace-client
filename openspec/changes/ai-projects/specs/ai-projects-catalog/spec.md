@@ -196,3 +196,10 @@ The root of the file and folder selectors SHALL list "AI rooms" after Forms and 
 - **WHEN** a user copies a folder
 - **THEN** the selector root has no "AI rooms" entry
 
+### Requirement: No external links to files in the AI rooms
+A file under the AI rooms root SHALL offer no external link: its menu SHALL drop "Sharing settings", "Copy shared link" and "Manage links", and the Info panel SHALL show no Share tab for it, since the server refuses those links (c765587896). The link for room members SHALL stay.
+
+#### Scenario: Skill in an Instructions room
+- **WHEN** a Room manager opens the menu of a skill in an Instructions room
+- **THEN** it offers "Copy link" for room members but no shared link and no "Manage links"
+

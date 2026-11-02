@@ -298,6 +298,16 @@ export const buildContextOptions = (
 
     fileOptions = removeOptions(fileOptions, hiddenMetadataAIOptions);
 
+    // The server refuses external links to files in the AI rooms; the link
+    // for room members stays.
+    if (item.rootFolderType === FolderType.AiHub) {
+      fileOptions = removeOptions(fileOptions, [
+        "sharing-settings",
+        "copy-shared-link",
+        "manage-links",
+      ]);
+    }
+
     if (!canAskAi && !canAnalyzeResponses && !metadataAIOptions.length) {
       fileOptions = removeOptions(fileOptions, ["separator6"]);
     }

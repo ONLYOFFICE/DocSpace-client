@@ -141,7 +141,12 @@ export function getAvailableInfoPanelTabs({
     "canShare" in selection &&
     selection.canShare &&
     !isRoomUtil(selection) &&
-    !isPrivateItem
+    !isPrivateItem &&
+    // No external links to files in the AI rooms (the server refuses them).
+    !(
+      "rootFolderType" in selection &&
+      selection.rootFolderType === FolderType.AiHub
+    )
   ) {
     tabs.push(InfoPanelView.infoShare);
   }

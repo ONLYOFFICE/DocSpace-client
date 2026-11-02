@@ -149,6 +149,7 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - [ ] 12.3 Server (.NET): refuse creating Instructions and Knowledge rooms and AI projects while AI is not set up on the portal, as the client does (today only a Knowledge room is refused, and only for vectorization)
 - [x] 12.4 ui-kit + client: the file and folder selectors list "AI rooms" (Instructions and Knowledge rooms, no projects, no creation) instead of "AI agents" at the root; `withAIRoomsTreeFolder` replaces `withAIAgentsTreeFolder`, on by default and off in `FilesSelectorInput`; copy/move keeps only the AI types the selection fits
 - [x] 12.5 Client: a project Member is Content creator (`ShareAccessRights.Collaborator`, 11) after server 8137a5366a: the role options, the invite default and the invitation link grant it, and the members list shows both 11 and the earlier Read (2) as Member
+- [x] 12.6 Client: a file under the AI rooms root offers no external link (no "Sharing settings", "Copy shared link", "Manage links", no Info panel Share tab), after server c765587896 refuses them; the room-members link stays
 
 ## Workflow follow-up
 

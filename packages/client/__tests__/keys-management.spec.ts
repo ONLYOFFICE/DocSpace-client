@@ -36,6 +36,10 @@
 import type { Page } from "@playwright/test";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
+  generateIdentityKeyPair,
+  serializeIdentity,
+} from "@docspace/shared/services/encryption/identity";
+import {
   capabilitiesHandler,
   privacyroomKeysHandlers,
   roomListHandler,
@@ -361,6 +365,7 @@ test.describe("Profile > Keys Management: keyboard only", () => {
   test.use({ locale: "en-US", timezoneId: "UTC" });
 
   const PASSPHRASE = "Test-Horse-Battery-Staple-99!";
+  const USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 
   test.beforeEach(async ({ mockRequest }) => {
     mockRequest.use(
@@ -559,6 +564,61 @@ test.describe("Profile > Keys Management: keyboard only", () => {
 
     await expect(recovery).toBeHidden({ timeout: 5_000 });
     await expect(generateBtn).toBeFocused();
+  });
+
+  test("Typing again after a wrong passphrase", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const sealed = await serializeIdentity(
+      await generateIdentityKeyPair(),
+      PASSPHRASE,
+    );
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [
+          {
+            id: "22222222-2222-2222-2222-222222222222",
+            userId: USER_ID,
+            publicKey: sealed.publicKey,
+            privateKeyEnc: sealed.privateKeyEnc,
+            date: "2026-10-01T00:00:00",
+          },
+        ],
+        userId: USER_ID,
+      }),
+    );
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const exportKey = page.getByRole("button", {
+      name: "Export key",
+      exact: true,
+    });
+    await expect(exportKey).toBeVisible({ timeout: 15_000 });
+    await exportKey.focus();
+    await page.keyboard.press("Enter");
+
+    const prompt = page.getByRole("dialog", { name: "Enter passphrase" });
+    const field = prompt.getByLabel("Passphrase", { exact: true });
+    await expect(field).toBeFocused({ timeout: 5_000 });
+    await page.keyboard.type("Wrong-Horse-Battery-Staple-00!");
+    await page.keyboard.press("Enter");
+
+    await expect(field).toHaveAttribute("aria-invalid", "true", {
+      timeout: 15_000,
+    });
+    await expect(field).toHaveAccessibleDescription(/Invalid passphrase/);
+    await expect(field).toBeEnabled();
+    await expect(field).toBeFocused();
+
+    await page.keyboard.press("ControlOrMeta+A");
+    await page.keyboard.type(PASSPHRASE);
+    const exported = page.waitForEvent("download");
+    await page.keyboard.press("Enter");
+    await exported;
+    await expect(prompt).toBeHidden({ timeout: 5_000 });
+    await expect(exportKey).toBeFocused();
   });
 
   test("Import a key from the keyboard", async ({

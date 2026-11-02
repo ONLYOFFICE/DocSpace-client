@@ -60,6 +60,7 @@ import {
   AccountsSearchArea,
   EmployeeStatus,
   EmployeeType,
+  RoomsType,
 } from "@docspace/shared/enums";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
@@ -126,6 +127,9 @@ const InviteInput = ({
 
   const searchRef = useRef();
   const prevDropDownContent = useRef(null);
+  // The debounced search keeps its first closure; the room loads later.
+  const roomTypeRef = useRef(roomType);
+  roomTypeRef.current = roomType;
 
   useEffect(() => {
     setTimeout(() => {
@@ -280,13 +284,17 @@ const InviteInput = ({
               filter,
             );
 
+      // A project takes no guests, neither new nor existing ones.
+      const items =
+        roomTypeRef.current === RoomsType.AiProjectRoom
+          ? users.items.filter((u) => !u.isVisitor)
+          : users.items;
+
       setUsersList(
-        roomId === -1
-          ? users.items.map((u) => ({ ...u, shared: true }))
-          : users.items,
+        roomId === -1 ? items.map((u) => ({ ...u, shared: true })) : items,
       );
 
-      if (users.total) isBlocked = false;
+      if (items.length) isBlocked = false;
     }
 
     const parts = getParts(value);
@@ -441,7 +449,8 @@ const InviteInput = ({
       return;
     }
 
-    if (isPrivateRoom) return;
+    // An e-mail invitation joins as a guest, which a project does not take.
+    if (isPrivateRoom || roomType === RoomsType.AiProjectRoom) return;
 
     const items = toUserItems(inputValue);
 
@@ -749,7 +758,7 @@ const InviteInput = ({
 };
 
 export default inject(
-  ({ settingsStore, dialogsStore, userStore, currentQuotaStore }) => {
+  ({ settingsStore, dialogsStore, userStore, currentQuotaStore }, { roomType }) => {
     const { isOwner, isAdmin } = userStore.user;
     const {
       invitePanelOptions,
@@ -776,7 +785,9 @@ export default inject(
       isAdmin,
       isPaidUserAccess,
       isUserTariffLimit,
-      allowInvitingGuests,
+      // A project takes no guests: no e-mail invitation, which joins as one.
+      allowInvitingGuests:
+        allowInvitingGuests && roomType !== RoomsType.AiProjectRoom,
     };
   },
 )(

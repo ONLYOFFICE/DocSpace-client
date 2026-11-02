@@ -1080,7 +1080,8 @@ const InvitePanel = ({
             withGroups={!isPrivateRoom}
             roomId={roomId}
             disableInvitedUsers={invitedUsersArray}
-            withGuests={showGuestsTab}
+            // A project takes no guests.
+            withGuests={showGuestsTab && roomType !== RoomsType.AiProjectRoom}
             withHeader
             dataTestId="invite_panel_people_selector"
             headerProps={{

@@ -6,7 +6,7 @@
 
 ## 2. Integration
 
-- [ ] 2.1 Run `npx -y @fission-ai/openspec@latest validate --all --strict`; verify green.
+- [x] 2.1 Run `npx -y @fission-ai/openspec@latest validate --all --strict`; verify green.
 
 ## Workflow follow-up
 

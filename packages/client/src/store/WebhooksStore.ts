@@ -156,6 +156,7 @@ class WebhooksStore {
     SocketHelper?.on(SocketEvents.DeleteWebhook, this.onWebhookDeleted);
     SocketHelper?.on(SocketEvents.AddWebhookLog, this.onWebhookLogAdded);
     SocketHelper?.on(SocketEvents.UpdateWebhookLog, this.onWebhookLogUpdated);
+    SocketHelper?.onReconnect(this.onSocketReconnect);
   }
 
   setIsWebhooksListActive = (isActive: boolean) => {
@@ -245,6 +246,21 @@ class WebhooksStore {
     }
 
     this.loadJournalItem(id);
+  };
+
+  // Events emitted while the socket was down are not replayed: re-read
+  // whatever is open now.
+  onSocketReconnect = () => {
+    if (this.isWebhooksListActive) this.reloadWebhooks();
+    else if (this.activeConfigId !== null) this.isWebhooksListStale = true;
+
+    if (this.historyParams) this.debounceLoadJournalTop();
+
+    const eventId = Number(this.eventDetails?.id);
+
+    if (eventId) {
+      this.fetchEventData(eventId).catch((error) => console.error(error));
+    }
   };
 
   debounceLoadJournalTop = debounce(

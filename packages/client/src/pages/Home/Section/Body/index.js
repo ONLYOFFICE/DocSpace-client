@@ -62,6 +62,8 @@ import EmptyContainer from "../../../../components/EmptyContainer";
 import EmptyRoomGroupContainer from "../../../../components/EmptyContainer/EmptyRoomGroupContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
+import DataTableView from "./DataTableView";
+import { isFilesDataTableEnabled } from "./DataTableView/isFilesDataTableEnabled";
 import withHotkeys from "../../../../HOCs/withHotkeys";
 import NoAccessContainer from "../../../../components/EmptyContainer/NoAccessContainer";
 
@@ -120,6 +122,7 @@ const SectionBodyContent = (props) => {
     isFormsFolder,
     draggedFiles,
     setIsChatDropTarget,
+    tableScope,
   } = props;
 
   const attachFilesToChat = useAttachHostFilesToChat();
@@ -517,7 +520,10 @@ const SectionBodyContent = (props) => {
     );
   }
 
-  const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
+  const FileViewComponent =
+    viewAs === "table" && isFilesDataTableEnabled(tableScope)
+      ? DataTableView
+      : (fileViews[viewAs] ?? FilesRowContainer);
 
   return (
     <>
@@ -538,6 +544,7 @@ export default inject(
     uploadDataStore,
     indexingStore,
     dialogsStore,
+    tableStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -605,6 +612,7 @@ export default inject(
       setDropTargetPreview,
       roomsFilterGroupId: roomsFilter?.groupId,
       setEditRoomGroupsDialogVisible,
+      tableScope: tableStore.tableScope,
       // Check if any filter or search is active (excluding sorting and groupId)
       isFilterOrSearchActive: !!(
         roomsFilter?.filterValue ||

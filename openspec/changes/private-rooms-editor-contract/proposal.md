@@ -80,9 +80,9 @@ hidden.
   for an encrypted file (rename, sharing, favorites and history withheld;
   refresh re-injects the keys; create-new encrypted or withheld; frame
   errors shown), and close the server paths that store ciphertext as
-  plaintext or send it to the Document Server (copy-as, restore by address,
-  the conversion stream, indexing); found by the server and client reads of
-  2026-10-30.
+  plaintext (copy-as, restore by address); found by the server and client
+  reads of 2026-10-30, re-checked on 2026-11-02 (the conversion stream and
+  indexing turned out closed already).
 - Add the missing test coverage: an MSW `openedit` mock for an encrypted
   file, a Vitest runner for `packages/doceditor` with unit tests for the key
   path and the action policy, a client E2E that opens an encrypted file,
@@ -122,8 +122,8 @@ None.
   Server capability, the refusal of encrypted form submissions into
   form-data collection, whether the signed configuration keeps the
   caller's key-pair list, and the parity items of the server read of
-  2026-10-30 (indexing, copy-as, the conversion stream, restore by address,
-  the drop of a removed member's sessions). The server already refuses to
+  2026-10-30 (copy-as, restore by address, the drop of a removed member's
+  sessions). The server already refuses to
   convert encrypted or private-room files.
 - Document Server team: owns the contract, the end of an encrypted editing
   session, the form flag on save, and the crypto library build each release

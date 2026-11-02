@@ -511,12 +511,16 @@ references of 2026-10-29 (moved: `ReplaceCommunityAddress` is
   `RestoreVersionAsync` by address saves with `encrypted=false`
   (`:2662-2675`), as do PUT `saveediting` (`:2159-2169`) and the document
   builder (`DocumentBuilderScriptRunner.cs:594`). `FileConverter` refuses
-  the conversion (`:306-309`) but `ExecAsync` returns the raw stream
-  (`:342-346`) and `ExecSynchronouslyAsync` sends it to the Document Server
-  (`:369-391`). Every save publishes an index event whose handler
-  base64-encodes the content with no `Encrypted` check (`FileDao.cs:838-843`,
-  `IndexEventProcessingService.cs:113-127`, `FactoryIndexerFile.cs:47-60`,
-  `FileDao.cs:2914-2975`). `GetReferenceDataAsync` has no encrypted guard
+  the conversion (`:306-309`) and `ExecAsync` then returns the raw stream
+  (`:346-350` on `e9cfda8d43`), which `copyas` with another extension
+  stores under the new title (`FilesControllerHelper.cs:277`).
+  Re-checked 2026-11-02: `ExecSynchronouslyAsync` does not use that stream,
+  and its only caller is gated by `CanConvertAsync`, which private-room
+  files fail (`FileSecurity.cs:1894-1904`), so no ciphertext reaches the
+  conversion service; and content indexing already skips encrypted files:
+  `FileDao.InitDocumentAsync` reads content only when `CanIndexByContentAsync`
+  allows it (`FileDao.cs:2921-2924`), which is false for `Encrypted`
+  (`FactoryIndexerFile.cs:175`). The read of 2026-10-30 missed both. `GetReferenceDataAsync` has no encrypted guard
   (`:4756-4830`). Thumbnails are refused (`Builder.cs:328-335`),
   `UpdateToVersionFileAsync` refuses encrypted files
   (`EntryManager.cs:1840-1843`), lock and unlock work
@@ -616,9 +620,13 @@ the configuration the doceditor hands the editor component and the
   shows the mode switch, the location, the favorite star and search, the
   toolbar the PDF tools. The flag alone is harmless on the client side;
   5.4 still switches it off server-side. Two more facts: the server
-  sends `document.isForm: false` for the encrypted form, since
-  `FileChecker.IsFormPDFFile` reads the stored ciphertext, while the file
-  DTO says `isForm: true` from the container flag; and the editor opened
+  sends `document.isForm: false` for the encrypted form while the file DTO
+  says `isForm: true`. Re-checked 2026-11-02: `IsFormPDFFile` reads the
+  DSE3 form flag (`FileChecker.cs:58-68`, cached a day per file version) and
+  the DTO's `isForm` only means "a PDF" (`FileDto.cs:595`), so the stored
+  version lacked the form bit, which the editor's save drops (DS-8,
+  "Observed on 2026-10-29"), or the cache held an older answer; and the
+  editor opened
   the form in "Commenting" mode with `security.FillForms` false, so the
   filling-as-edit of D9 is not what the stand gives this account today.
 - **Decrypted download (task 5.7).** "Download > Original format" of
@@ -1048,7 +1056,7 @@ BLOCKED or "after <x>" waits.
   `src/hooks/useFileEncryptionKeys.ts` resolves the DEK,
   `src/hooks/useEditorEvents.ts` holds the event handlers, `src/utils/events.ts`
   the small ones, `src/utils/actions.ts` `getData` runs on the Next server side
-  (no DOM, no stores), `index.d.ts` augments `@onlyoffice/doceditor-types`.
+  (no DOM, no stores), `doceditor-types.d.ts` augments `@onlyoffice/doceditor-types`.
   The client file list is MobX in `packages/client/src/store`; the SDK is
   `packages/sdk/src/app`; shared code, the MSW mocks
   (`packages/shared/__mocks__/handlers`) and the crypto core

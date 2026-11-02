@@ -195,8 +195,13 @@ class MembersHelper {
         return options.projectMember;
     }
 
+    // The project roles share their access with Room manager and Viewer,
+    // so any other room never resolves to them.
     const [userOption] = Object.values(options).filter(
-      (opt) => opt.access === access,
+      (opt) =>
+        opt.access === access &&
+        opt.key !== "projectManager" &&
+        opt.key !== "projectMember",
     );
 
     return userOption;

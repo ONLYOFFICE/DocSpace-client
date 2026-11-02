@@ -37,11 +37,11 @@ The system SHALL make the Private section available only while two conditions ho
 - **THEN** the section stays unavailable until the page is reloaded
 
 ### Requirement: Sidebar item
-The system SHALL show a top-level sidebar item labelled Common:Private while the section is available, to every user whose sidebar shows the Rooms tree. The item SHALL be placed after Forms (after Rooms when Forms is absent) and before AI Agents. It SHALL have exactly one sub-item, Archive (Common:Archive).
+The system SHALL show a top-level sidebar item labelled Common:Private while the section is available, to every user whose sidebar shows the Rooms tree. The item SHALL be placed after Forms (after Rooms when Forms is absent) and before AI rooms (Common:AiRooms) when that item is shown. It SHALL have exactly one sub-item, Archive (Common:Archive).
 
 #### Scenario: Section available
-- **WHEN** the sidebar renders while the section is available
-- **THEN** a Private item follows Forms and precedes AI Agents, and expanding it shows only the Archive sub-item
+- **WHEN** the sidebar renders while the section is available and AI services are on
+- **THEN** a Private item follows Forms and precedes AI rooms, and expanding it shows only the Archive sub-item
 
 #### Scenario: Item clicked
 - **WHEN** the user clicks the Private item

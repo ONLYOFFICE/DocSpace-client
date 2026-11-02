@@ -153,6 +153,7 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - [x] 12.7 Client: an Instructions room offers "Upload from storage" before "Upload from device" in the empty view, the "+" menu and the main button, as a Knowledge room does; the storage picker lists `.md` files only
 - [x] 12.8 Client: the Invite panel of a project offers no guests (no Guests tab, no guests in the search, no e-mail invitation); the server is to refuse them too
 - [x] 12.9 Client: a project offers Member (Read, 2) again in the Invite panel and the members list; the invitation link stays Project manager only
+- [x] 12.10 Client: an AI room opened under `/rooms/shared/{id}` (an accepted invitation link) moves to `/ai-rooms/{id}`, so back leads to the AI rooms list
 
 ## Workflow follow-up
 

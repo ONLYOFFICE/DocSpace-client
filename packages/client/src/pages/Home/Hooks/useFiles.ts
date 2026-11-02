@@ -74,6 +74,9 @@ import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 
+const SHARED_ROOMS_PREFIX = "/rooms/shared/";
+const AI_ROOMS_PREFIX = "/ai-rooms/";
+
 const dropDeletedMetadata = async (
   filter: FilesFilter | RoomsFilter,
   checked: React.RefObject<string>,
@@ -430,6 +433,23 @@ const useFiles = ({
         return Promise.resolve();
       })
       .then(() => {
+        // An AI room opened under `/rooms/shared/{id}` - where an accepted
+        // invitation link lands, since the confirm page cannot tell the room
+        // type - moves to its own section, so the back button and the
+        // sidebar lead to AI rooms rather than Rooms.
+        if (
+          categoryType === CategoryType.SharedRoom &&
+          selectedFolderStore.rootFolderType === FolderType.AiHub &&
+          window.location.pathname === location.pathname &&
+          location.pathname.startsWith(SHARED_ROOMS_PREFIX)
+        ) {
+          navigate(
+            `${AI_ROOMS_PREFIX}${location.pathname.slice(SHARED_ROOMS_PREFIX.length)}${location.search}`,
+            { replace: true },
+          );
+          return;
+        }
+
         if (gallerySelected && !isVisibleInfoPanelTemplateGallery) {
           setIsUpdatingRowItem(false);
 

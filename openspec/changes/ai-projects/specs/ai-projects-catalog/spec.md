@@ -175,6 +175,10 @@ An AI project SHALL offer two roles, Project manager (`access` 9) and Member (`a
 - **WHEN** a Project manager turns the invitation link on in the Invite panel of a project
 - **THEN** the link is created with `access` 9, its role selector offers Project manager alone and its description names no guests
 
+#### Scenario: Joining through the link
+- **WHEN** a user accepts a project's invitation link and lands on `/rooms/shared/{id}/filter`, where the confirm page sends every room
+- **THEN** once the project loads, the address is replaced with `/ai-rooms/{id}/filter`, and the back button leads to the AI rooms list, not to Rooms
+
 #### Scenario: No groups
 - **WHEN** a Project manager searches or opens the people list in the Invite panel of a project
 - **THEN** no group is offered

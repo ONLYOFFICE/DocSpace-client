@@ -251,8 +251,7 @@ class WebhooksStore {
   // Events emitted while the socket was down are not replayed: re-read
   // whatever is open now.
   onSocketReconnect = () => {
-    if (this.isWebhooksListActive) this.debounceReloadWebhooks();
-    else if (this.activeConfigId !== null) this.isWebhooksListStale = true;
+    this.onWebhookChanged();
 
     if (this.historyParams) this.debounceLoadJournalTop();
 

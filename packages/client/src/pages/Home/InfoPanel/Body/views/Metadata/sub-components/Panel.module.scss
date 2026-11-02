@@ -61,6 +61,8 @@
 }
 
 .emptyScreen {
+  --empty-screen-link-color: var(--accent-main);
+
   box-sizing: border-box;
   width: 100%;
   padding: 45px 16px 0;
@@ -215,4 +217,59 @@
 .optionDescription {
   padding-inline-start: 24px;
   color: var(--param-description-color);
+}
+
+.aiFilledRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.aiUndoButton {
+  flex-shrink: 0;
+}
+
+.aiPreviousValue {
+  margin-top: 4px;
+  color: var(--param-description-color);
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.aiFilledLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+  color: var(--accent-main);
+
+  span,
+  svg {
+    display: block;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  svg path {
+    fill: currentColor;
+  }
+}
+
+.aiFilledIcon {
+  flex-shrink: 0;
+}
+
+.aiFilledName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

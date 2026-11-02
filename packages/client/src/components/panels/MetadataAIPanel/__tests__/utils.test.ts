@@ -59,10 +59,17 @@ import {
   getSuggestNotFound,
   getTemplateForms,
   getMetadataAIModel,
+  getUndoShortcut,
   isSameEntry,
+  isMetadataAINoModel,
+  isPanelKeyTarget,
+  isTextEditable,
   isValidSuggestion,
+  revertAICustomValue,
+  revertAIValue,
   toCustomFieldRequests,
   toSuggestionDrafts,
+  withoutAIChange,
 } from "../utils";
 
 const metadata = {
@@ -216,7 +223,7 @@ describe("fill", () => {
   });
 
   it("puts the values AI found into the form and saves only those", () => {
-    const { forms: filled, count } = applyAIValues(
+    const { forms: filled, fieldIds } = applyAIValues(
       forms,
       [
         { fieldId: 12, name: "Client", value: { stringValue: "ACME" } },
@@ -228,7 +235,7 @@ describe("fill", () => {
       false,
     );
 
-    expect(count).toBe(2);
+    expect(fieldIds).toEqual([13, 15]);
     expect(filled.flatMap(getChangedValues)).toEqual([
       { fieldId: 13, optionIds: ["b"] },
       { fieldId: 15, numberValue: 1248500 },
@@ -244,7 +251,7 @@ describe("fill", () => {
       { fieldId: 15, name: "Claim amount", value: { numberValue: 1248500 } },
     ];
 
-    expect(applyAIValues(typed, found, false).count).toBe(0);
+    expect(applyAIValues(typed, found, false).fieldIds).toEqual([]);
     expect(applyAIValues(typed, found, true).forms[0].inputs[15]).toBe(
       "1248500",
     );
@@ -256,14 +263,116 @@ describe("fill", () => {
       { key: "Court", name: "Court", value: "Superior", isNew: false },
     ];
 
-    const { drafts: filled, count } = applyAICustomValues(drafts, [
+    const { drafts: filled, keys } = applyAICustomValues(drafts, [
       { fieldId: 12, name: "Reviewer", value: { stringValue: "Bob" } },
       { name: "reviewer", value: " Bob " },
       { name: "Court", value: "Superior" },
     ]);
 
-    expect(count).toBe(1);
+    expect(keys).toEqual(["Reviewer"]);
     expect(filled.map(({ value }) => value)).toEqual(["Bob", "Superior"]);
+  });
+
+  it("puts back the saved value of one field AI changed", () => {
+    const { forms: filled } = applyAIValues(
+      forms,
+      [
+        { fieldId: 12, name: "Client", value: { stringValue: "Globex" } },
+        { fieldId: 15, name: "Claim amount", value: { numberValue: 1248500 } },
+      ],
+      true,
+    );
+    const reverted = revertAIValue(filled, 1, 12);
+
+    expect(reverted[0].inputs[12]).toBe("ACME");
+    expect(reverted[0].inputs[15]).toBe("1248500");
+    expect(revertAIValue(filled, 2, 12)).toEqual(filled);
+  });
+
+  it("puts back the saved value of a custom field AI changed", () => {
+    const drafts = toCustomFieldDrafts(metadata.customFields).map((draft) => ({
+      ...draft,
+      value: "Bob",
+    }));
+
+    expect(
+      revertAICustomValue(drafts, metadata.customFields, "Reviewer")[0].value,
+    ).toBe("Ann");
+  });
+
+  it("reads Ctrl+Z as undo and Ctrl+Shift+Z or Ctrl+Y as redo in any keyboard layout", () => {
+    const key = (patch: Partial<KeyboardEvent> = {}) => ({
+      key: "z",
+      code: "KeyZ",
+      ctrlKey: true,
+      metaKey: false,
+      shiftKey: false,
+      altKey: false,
+      ...patch,
+    });
+    const y = { key: "y", code: "KeyY" };
+
+    expect(getUndoShortcut(key())).toBe("undo");
+    expect(getUndoShortcut(key({ ctrlKey: false, metaKey: true }))).toBe(
+      "undo",
+    );
+    expect(getUndoShortcut(key({ key: "Z", shiftKey: true }))).toBe("redo");
+    expect(getUndoShortcut(key({ altKey: true }))).toBeNull();
+    expect(getUndoShortcut(key({ ctrlKey: false }))).toBeNull();
+    expect(getUndoShortcut(key(y))).toBe("redo");
+    expect(getUndoShortcut(key({ ...y, shiftKey: true }))).toBeNull();
+    expect(
+      getUndoShortcut(key({ ...y, ctrlKey: false, metaKey: true })),
+    ).toBeNull();
+    expect(getUndoShortcut(key({ code: "KeyY" }))).toBe("undo");
+    expect(getUndoShortcut(key({ key: "y", code: "KeyZ" }))).toBe("redo");
+    expect(getUndoShortcut(key({ code: "KeyW" }))).toBe("undo");
+    expect(getUndoShortcut(key({ key: "w", code: "KeyZ" }))).toBeNull();
+    expect(getUndoShortcut(key({ key: "я" }))).toBe("undo");
+  });
+
+  it("leaves Ctrl+Z to the text fields", () => {
+    const input = (type: string) =>
+      Object.assign(document.createElement("input"), { type });
+
+    expect(isTextEditable(input("text"))).toBe(true);
+    expect(isTextEditable(document.createElement("textarea"))).toBe(true);
+    expect(isTextEditable(input("checkbox"))).toBe(false);
+    expect(isTextEditable(document.createElement("button"))).toBe(false);
+    expect(isTextEditable(null)).toBe(false);
+  });
+
+  it("takes the keys pressed in the panel or after its focused button is gone", () => {
+    const panel = document.createElement("div");
+    const button = panel.appendChild(document.createElement("button"));
+    const outside = document.createElement("button");
+
+    expect(isPanelKeyTarget(button, panel)).toBe(true);
+    expect(isPanelKeyTarget(document.body, panel)).toBe(true);
+    expect(isPanelKeyTarget(outside, panel)).toBe(false);
+    expect(isPanelKeyTarget(null, panel)).toBe(false);
+  });
+
+  it("stops counting a change once it is undone", () => {
+    const summary = {
+      count: 3,
+      notFound: [],
+      skipped: [],
+      filledFieldIds: [12, 15],
+      filledCustomKeys: ["Reviewer"],
+    };
+
+    expect(withoutAIChange(summary, { fieldId: 12 })).toMatchObject({
+      count: 2,
+      filledFieldIds: [15],
+      filledCustomKeys: ["Reviewer"],
+      hasUndone: true,
+    });
+    expect(withoutAIChange(summary, { customKey: "Reviewer" })).toMatchObject({
+      count: 2,
+      filledFieldIds: [12, 15],
+      filledCustomKeys: [],
+    });
   });
 
   it("names the empty visible fields AI found nothing for", () => {
@@ -348,8 +457,13 @@ describe("service answers", () => {
     ).toEqual(["scan.png", "11"]);
   });
 
+  it("tells a missing model apart from the other refusals", () => {
+    expect(isMetadataAINoModel({ status: 503 })).toBe(true);
+    expect(isMetadataAINoModel({ status: 502 })).toBe(false);
+    expect(isMetadataAINoModel(null)).toBe(false);
+  });
+
   it("explains each refusal of the AI service", () => {
-    expect(getMetadataAIError(t, { status: 503 })).toBe("Metadata:AINoModel");
     expect(getMetadataAIError(t, { status: 422, skipped: [] })).toBe(
       "Metadata:AINothingToRead",
     );

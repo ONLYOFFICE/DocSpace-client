@@ -43,14 +43,19 @@ import styles from "../MetadataAIPanel.module.scss";
 type ReviewNotesProps = {
   mode: TMetadataAIMode;
   summary: TMetadataAISummary;
+  hasEmptyFields: boolean;
 };
 
-const ReviewNotes = ({ mode, summary }: ReviewNotesProps) => {
+const ReviewNotes = ({ mode, summary, hasEmptyFields }: ReviewNotesProps) => {
   const { t } = useTranslation(["Metadata"]);
-  const { count, notFound, skipped } = summary;
+  const { count, notFound, skipped, hasUndone } = summary;
 
   const getResult = () => {
-    if (!count) return t("Metadata:AINoChanges");
+    if (!count) {
+      return hasUndone
+        ? t("Metadata:AIChangesUndone")
+        : t("Metadata:AINoChanges");
+    }
 
     if (mode === "fill") {
       return count === 1
@@ -82,6 +87,11 @@ const ReviewNotes = ({ mode, summary }: ReviewNotesProps) => {
             values={{ fields: notFound.join(", ") }}
             components={{ strong: <strong /> }}
           />
+        </Text>
+      ) : null}
+      {hasEmptyFields ? (
+        <Text className={styles.notesText} fontSize="12px" lineHeight="16px">
+          {t("Metadata:AIEmptyFieldsNotSaved")}
         </Text>
       ) : null}
       {skipped.length ? (

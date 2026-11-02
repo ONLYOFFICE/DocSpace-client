@@ -33,51 +33,67 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
-import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+
+import { METADATA_AI_PROMPT_MAX_LENGTH } from "../utils";
 import styles from "../MetadataAIPanel.module.scss";
 
-type ServiceLimitNoticeProps = {
-  title: string;
-  description: string;
-  buttonLabel: string;
-  onClick?: () => void;
+type AIPromptProps = {
+  value: string;
+  isDisabled: boolean;
+  onChange: (value: string) => void;
 };
 
-const ServiceLimitNotice = ({
-  title,
-  description,
-  buttonLabel,
-  onClick,
-}: ServiceLimitNoticeProps) => (
-  <div className={styles.limitNotice} data-testid="metadata_ai_limit_notice">
-    <div>
-      <Text
-        className={styles.limitNoticeTitle}
+const AIPrompt = ({ value, isDisabled, onChange }: AIPromptProps) => {
+  const { t } = useTranslation(["Metadata"]);
+  const [isOpen, setIsOpen] = useState(!!value);
+
+  if (!isOpen) {
+    const open = () => setIsOpen(true);
+
+    return (
+      <Link
+        className={styles.promptLink}
+        type={LinkType.action}
         fontSize="13px"
         fontWeight={600}
-        lineHeight="20px"
-      >
-        {title}
-      </Text>
-      <Text
-        className={styles.limitNoticeText}
-        fontSize="12px"
-        lineHeight="16px"
-      >
-        {description}
-      </Text>
-    </div>
-    {onClick ? (
-      <Button
-        size={ButtonSize.small}
-        label={buttonLabel}
-        onClick={onClick}
-        testId="metadata_ai_change_limit_button"
-      />
-    ) : null}
-  </div>
-);
+        color="accent"
+        isHovered
+        role="button"
+        tabIndex={0}
+        onClick={open}
+        onKeyDown={(e) => {
+          if (e.key !== "Enter" && e.key !== " ") return;
 
-export default ServiceLimitNotice;
+          e.preventDefault();
+          open();
+        }}
+        dataTestId="metadata_ai_prompt_link"
+      >
+        {t("Metadata:AIAddInstructions")}
+      </Link>
+    );
+  }
+
+  return (
+    <Textarea
+      wrapperClassName={styles.prompt}
+      className={styles.promptField}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={t("Metadata:AIPromptPlaceholder")}
+      maxLength={METADATA_AI_PROMPT_MAX_LENGTH}
+      heightTextArea="64px"
+      fontSize={13}
+      autoFocus={!value}
+      isDisabled={isDisabled}
+      dataTestId="metadata_ai_prompt_textarea"
+    />
+  );
+};
+
+export default AIPrompt;

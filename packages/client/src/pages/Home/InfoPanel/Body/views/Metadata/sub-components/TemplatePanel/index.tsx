@@ -81,15 +81,29 @@ const TemplatePanel = ({
     save,
   } = useTemplatePanel({ template, onSubmit, onClose });
 
+  const isFormStep = !!form && isNew;
+
+  const submit = () => {
+    if (!form) {
+      if (selected) openForm();
+      return;
+    }
+
+    if (canSave && !isSaving) save();
+  };
+
   return (
     <ModalDialog
       visible
       withBodyScroll
       withoutPadding
+      withForm
       displayType={ModalDialogType.aside}
-      isBackButton={!!form && isNew}
-      onBackClick={closeForm}
-      onClose={onClose}
+      isBackButton={isFormStep}
+      isCloseable={!isSaving}
+      onBackClick={isFormStep && !isSaving ? closeForm : undefined}
+      onClose={isFormStep ? closeForm : onClose}
+      onSubmit={submit}
       dataTestId="metadata_template_panel"
     >
       <ModalDialog.Header>
@@ -120,7 +134,7 @@ const TemplatePanel = ({
             label={t("Common:SaveButton")}
             isDisabled={!canSave}
             isLoading={isSaving}
-            onClick={save}
+            type="submit"
             testId="metadata_template_save_button"
           />
         ) : (
@@ -130,7 +144,7 @@ const TemplatePanel = ({
             size={ButtonSize.normal}
             label={t("Common:Next")}
             isDisabled={!selected}
-            onClick={() => openForm()}
+            type="submit"
             testId="metadata_template_next_button"
           />
         )}

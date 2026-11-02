@@ -39,16 +39,25 @@ import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-contain
 import type { TMetadataInput } from "@docspace/shared/utils/metadata";
 
 import type { TTemplateForm } from "../../types";
-import { getFieldInputError } from "../../utils";
+import { formatPreviousValue, getFieldInputError } from "../../utils";
+import AIFilledLabel from "../AIFilledLabel";
+import AIPreviousValue from "../AIPreviousValue";
 import FieldInput from "../FieldInput";
 import styles from "../Panel.module.scss";
 
 type TemplateFormProps = {
   form: TTemplateForm;
+  filledFieldIds?: number[];
   onChange: (fieldId: number, input: TMetadataInput) => void;
+  onRevert?: (fieldId: number) => void;
 };
 
-const TemplateForm = ({ form, onChange }: TemplateFormProps) => {
+const TemplateForm = ({
+  form,
+  filledFieldIds,
+  onChange,
+  onRevert,
+}: TemplateFormProps) => {
   const { t, i18n } = useTranslation(["Metadata", "Common"]);
 
   return (
@@ -60,6 +69,7 @@ const TemplateForm = ({ form, onChange }: TemplateFormProps) => {
           form.inputs[field.id],
           i18n.language,
         );
+        const isFilled = !!filledFieldIds?.includes(field.id);
 
         return (
           <FieldContainer
@@ -67,7 +77,17 @@ const TemplateForm = ({ form, onChange }: TemplateFormProps) => {
             labelVisible
             isVertical
             removeMargin
-            labelText={field.name}
+            labelText={
+              isFilled ? (
+                <AIFilledLabel
+                  onUndo={onRevert ? () => onRevert(field.id) : undefined}
+                >
+                  {field.name}
+                </AIFilledLabel>
+              ) : (
+                field.name
+              )
+            }
             hasError={!!error}
             errorMessage={error ?? undefined}
           >
@@ -77,6 +97,11 @@ const TemplateForm = ({ form, onChange }: TemplateFormProps) => {
               onChange={(input) => onChange(field.id, input)}
               emptyLabel={t("Common:SelectAction")}
             />
+            {isFilled ? (
+              <AIPreviousValue
+                value={formatPreviousValue(field, i18n.language)}
+              />
+            ) : null}
           </FieldContainer>
         );
       })}

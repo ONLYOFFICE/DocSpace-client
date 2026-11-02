@@ -46,6 +46,8 @@ export type TMetadataSelection = TRoom | TFile | TFolder;
 
 export type TMetadataItemType = "file" | "folder" | "room";
 
+export type TMetadataEmptyHint = TMetadataItemType | "fileWithAI";
+
 export type TCascadeItemType = Exclude<TMetadataItemType, "file">;
 
 export type TCascadeConflict = TMetadataConflictResolveType;

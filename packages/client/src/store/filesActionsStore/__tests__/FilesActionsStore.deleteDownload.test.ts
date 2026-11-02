@@ -41,6 +41,7 @@ import {
   downloadAndDecryptFileToBuffer,
   triggerFileDownload,
 } from "@docspace/shared/services/private-room/encrypted-download";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 
 const progress = () => {
   const setSecondaryProgressBarData = vi.fn();
@@ -354,5 +355,31 @@ describe("FilesActionsStore — decrypted download of several files", () => {
     expect(vi.mocked(triggerFileDownload).mock.calls.at(-1)![1]).toBe(
       "Files.zip",
     );
+  });
+});
+
+describe("FilesActionsStore — single encrypted download", () => {
+  it("No own access entry", async () => {
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      fileKeys: [{ userId: "someone-else", publicKeyId: "k9", privateKeyEnc: "w" }],
+    } as never);
+    const { store: uploadDataStore } = progress();
+    const store = createTestFilesActionsStore({
+      userStore: { user: { id: "user-1" }, encryptionKeys: [{ id: "k1" }] },
+      uploadDataStore,
+    });
+
+    await store.downloadEncryptedFile({
+      id: 5,
+      title: "opaque-5.txt",
+      encrypted: true,
+    } as never);
+
+    expect(getFileEncryptionAccess).toHaveBeenCalledWith(5);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptionDownloadFailed",
+    );
+    expect(requireUnlock).not.toHaveBeenCalled();
+    expect(downloadAndDecryptFileToBuffer).not.toHaveBeenCalled();
   });
 });

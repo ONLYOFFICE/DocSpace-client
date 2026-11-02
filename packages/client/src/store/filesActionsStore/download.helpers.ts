@@ -353,13 +353,12 @@ self: FilesActionStore,file: TActionItem
   try {
     const encryptionInfo = await getFileEncryptionAccess(file.id);
 
-    if (!encryptionInfo || !encryptionInfo.fileKeys) {
-      return Promise.resolve();
-    }
-    const hasOwnEntry = encryptionInfo.fileKeys.some(
+    const hasOwnEntry = !!encryptionInfo?.fileKeys?.some(
       (k) => String(k.userId) === String(userId),
     );
     if (!hasOwnEntry) {
+      // Spec: file-operations, "Download decrypts on the client"
+      toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
       return Promise.resolve();
     }
 

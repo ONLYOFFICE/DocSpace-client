@@ -1,6 +1,7 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect, vi } from "vitest";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { createTestFilesActionsStore } from "./testHarness";
 // After the harness, which mocks the toast module.
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -62,6 +63,34 @@ describe("FilesActionsStore — encrypted ops guard (batch 18)", () => {
     });
     await store.duplicateEncryptedFile({ id: 1, folderId: 2 } as never);
     expect(itemOperationToFolder).not.toHaveBeenCalled();
+  });
+
+  it("Duplicate started outside the room", async () => {
+    const store = createTestFilesActionsStore({
+      selectedFolderStore: {
+        rootFolderId: 5,
+        rootFolderType: FolderType.Recent,
+        roomType: null,
+      },
+    });
+    const copy = vi.fn(async () => {});
+    store.copyEncryptedFilesToFolder = copy;
+    const item = {
+      id: 1,
+      folderId: 2,
+      rootFolderId: 3,
+      rootFolderType: FolderType.Rooms,
+      encrypted: true,
+    };
+
+    await store.duplicateEncryptedFile(item as never);
+
+    expect(copy).toHaveBeenCalledWith([item], 2, {
+      private: true,
+      rootFolderId: 3,
+      rootFolderType: FolderType.Rooms,
+      roomType: RoomsType.CustomRoom,
+    });
   });
 });
 

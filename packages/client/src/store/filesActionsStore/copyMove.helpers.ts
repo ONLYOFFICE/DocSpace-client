@@ -177,10 +177,12 @@ self: FilesActionStore,item: TActionItem
 export const duplicateEncryptedFileImpl = async (
 self: FilesActionStore,item: TActionItem
 )=> {
+  // Spec: file-operations, "Copy within the same private room"
   return self.copyEncryptedFilesToFolder([item], item.folderId, {
     private: true,
-    rootFolderId: self.selectedFolderStore.rootFolderId,
-    rootFolderType: self.selectedFolderStore.rootFolderType ?? undefined,
+    rootFolderId: item.rootFolderId ?? self.selectedFolderStore.rootFolderId,
+    rootFolderType:
+      item.rootFolderType ?? self.selectedFolderStore.rootFolderType ?? undefined,
     roomType: self.selectedFolderStore.roomType ?? RoomsType.CustomRoom,
   });
 };

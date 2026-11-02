@@ -120,9 +120,17 @@ class MembersHelper {
       : [];
 
     switch (roomType) {
+      // Nothing in a Knowledge room is edited: a member reads or uploads.
+      case RoomsType.KnowledgeRoom:
+        return [
+          options.roomAdmin,
+          options.collaborator,
+          options.viewer,
+          ...deleteOption,
+        ];
+
       case RoomsType.EditingRoom:
       case RoomsType.InstructionsRoom:
-      case RoomsType.KnowledgeRoom:
         return [
           options.roomAdmin,
           options.collaborator,

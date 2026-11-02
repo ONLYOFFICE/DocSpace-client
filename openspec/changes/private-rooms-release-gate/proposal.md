@@ -44,7 +44,7 @@ The change MUST NOT be applied until all of the following hold:
    requirement: `private-rooms-device-unlock-policy`,
    `private-rooms-dse3-header-authentication`.
 3. Archived: `private-rooms-sdk-gating-and-parity`, `private-rooms-ux-gaps`,
-   `private-rooms-remove-dead-api-calls`.
+   `private-rooms-remove-dead-api-calls`, `private-rooms-spec-drift-fixes`.
 4. `private-rooms-server-hardening`: owner-change hand-over, availability
    rule, metadata guards, title validation and e-mail title items merged on
    the server; recovery and offboarding merged if the launch scope is B2B.

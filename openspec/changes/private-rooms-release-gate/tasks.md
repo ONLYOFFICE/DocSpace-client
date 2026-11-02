@@ -12,6 +12,7 @@
 - [ ] 1.8 External penetration test of the crypto core and private-room flows completed and its summary published; verify by linking the report in this change's README.md
 - [ ] 1.9 Accessibility pass on the key dialogs and the keys management page completed; verify with `private-rooms-dialog-keyboard-and-focus` and `private-rooms-keys-page-keyboard` archived (`openspec list`) and their unit tests and the keyboard-only pass in `packages/client/__tests__/keys-management.spec.ts` passing in CI. Both changes were archived on 2026-10-29 with their unit tests and the keyboard-only pass green under Docker (`tests-dev`); the CI dispatch is still to run, and the review of 2026-10-30 opened `private-rooms-key-dialog-keyboard-followups` for four keyboard gaps it found, to be archived before this box is ticked
 - [ ] 1.10 Accessibility pass on the private-room panels (invite panel, Members view) completed; verify with a change covering them archived and its checks passing in CI (no such change exists yet; `private-rooms-ux-gaps` checked the key dialogs only)
+- [x] 1.11 `private-rooms-spec-drift-fixes` archived; verify with `openspec list` showing it under `changes/archive`. Archived 2026-11-02 (`changes/archive/2026-11-02-private-rooms-spec-drift-fixes`)
 
 ## 2. Server-side setting
 

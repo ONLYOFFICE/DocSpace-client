@@ -149,6 +149,15 @@ describe("context menu options", () => {
     expect(getMetadataAIOptions(room(), context)).toEqual([]);
   });
 
+  it("offers the filling only to a file that has a field to fill", () => {
+    expect(
+      getMetadataAIOptions(file({ hasMetadataFields: false }), context),
+    ).toEqual(["suggest-metadata-ai"]);
+    expect(
+      getMetadataAIOptions(file({ hasMetadataFields: true }), context),
+    ).toEqual(["fill-metadata-ai", "suggest-metadata-ai"]);
+  });
+
   it("hides both where AI cannot read or write the metadata", () => {
     const hidden = [
       getMetadataAIOptions(file({ fileExst: ".png" }), context),

@@ -50,10 +50,15 @@ import styles from "../Metadata.module.scss";
 
 type MetadataHeaderProps = {
   selection: TMetadataSelection;
+  hasFields: boolean;
   addActions?: TAddMetadataActions;
 };
 
-const MetadataHeader = ({ selection, addActions }: MetadataHeaderProps) => {
+const MetadataHeader = ({
+  selection,
+  hasFields,
+  addActions,
+}: MetadataHeaderProps) => {
   const { t } = useTranslation(["Metadata", "Common"]);
   const isAIAvailable = useMetadataAIAvailable(selection);
   const openAI = useOpenMetadataAI(selection);
@@ -72,7 +77,7 @@ const MetadataHeader = ({ selection, addActions }: MetadataHeaderProps) => {
         <div className={styles.headerActions}>
           {isAIAvailable ? (
             <MetadataAIMenu
-              onFill={() => openAI("fill")}
+              onFill={hasFields ? () => openAI("fill") : undefined}
               onGenerate={() => openAI("suggest")}
             />
           ) : null}

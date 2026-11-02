@@ -124,7 +124,11 @@ export const getMetadataAIOptions = (
     isFile(item) &&
     canReadAsText(item.fileExst, extsConvertible);
 
-  return isAvailable ? METADATA_AI_OPTIONS : [];
+  if (!isAvailable) return [];
+
+  return isFile(item) && item.hasMetadataFields === false
+    ? [SUGGEST_METADATA_AI]
+    : METADATA_AI_OPTIONS;
 };
 
 export const getMetadataAIModel = (

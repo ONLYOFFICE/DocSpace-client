@@ -240,6 +240,23 @@ describe("PassphraseModal", () => {
     expect(getPassphraseInput()).toHaveValue("Correct1horse!battery");
   });
 
+  it("Typed passphrase kept from the keyboard", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderModal({ isNew: true });
+
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.keyboard("{Escape}");
+    const cancel = within(queryConfirmation()!).getByRole("button", {
+      name: "Common:CancelButton",
+    });
+    cancel.focus();
+    await user.keyboard("{Enter}");
+
+    expect(queryConfirmation()).toBeNull();
+    expect(onCancel).not.toHaveBeenCalled();
+    expect(getPassphraseInput()).toHaveValue("Correct1horse!battery");
+  });
+
   it("Typed passphrase discarded", async () => {
     const user = userEvent.setup();
     const { onCancel } = renderModal({ isNew: true });

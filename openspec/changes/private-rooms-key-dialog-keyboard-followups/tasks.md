@@ -2,7 +2,7 @@
 
 ## 1. Decline from the keyboard
 
-- [ ] 1.1 Make `UnsavedChangesDialog` ignore an Enter whose target is a button or a control with the button role (D1); verify with tests "Enter on the dialog confirms" and "Enter on the cancel button declines" in a new `packages/shared/dialogs/unsaved-changes-dialog/__tests__/UnsavedChangesDialog.test.tsx`, "Typed passphrase kept from the keyboard" in `packages/shared/dialogs/passphrase-modal/__tests__/PassphraseModal.test.tsx` (Escape, Tab to Common:CancelButton, Enter, input still there), `cd packages/shared && pnpm exec vitest run dialogs` green, then `pnpm test:client` for the other callers of the dialog
+- [x] 1.1 Make `UnsavedChangesDialog` ignore an Enter whose target is a button or a control with the button role (D1); verify with tests "Enter on the dialog confirms" and "Enter on the cancel button declines" in a new `packages/shared/dialogs/unsaved-changes-dialog/__tests__/UnsavedChangesDialog.test.tsx`, "Typed passphrase kept from the keyboard" in `packages/shared/dialogs/passphrase-modal/__tests__/PassphraseModal.test.tsx` (Escape, Tab to Common:CancelButton, Enter, input still there), `cd packages/shared && pnpm exec vitest run dialogs` green, then `pnpm test:client` for the other callers of the dialog
 - [ ] 1.2 Cover it end to end in `packages/client/__tests__/key-flow-edge-cases.spec.ts` ("Typed passphrase kept from the keyboard"); verify with that spec under Docker
 
 ## 2. Focus return across replaced dialogs

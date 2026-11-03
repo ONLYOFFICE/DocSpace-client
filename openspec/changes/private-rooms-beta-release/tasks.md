@@ -45,7 +45,7 @@ Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 20
 
 ## 4. E2E
 
-- [ ] 4.1 Stop writing the `privateRooms` flag in `packages/client/__tests__/fixtures/base.ts`; the Arbiter flag stays. Verify: case "Base fixture", and the private-room specs (`private-room-*`, `private-rooms-section`, `keys-management*`, `key-flow-edge-cases`, `encrypted-file-ui`) green with `cd packages/client && pnpm test:e2e:docker:dev <specs>`.
+- [x] 4.1 Stop writing the `privateRooms` flag in `packages/client/__tests__/fixtures/base.ts`; the Arbiter flag stays. Verify: case "Base fixture", and the private-room specs (`private-room-*`, `private-rooms-section`, `keys-management*`, `key-flow-edge-cases`, `encrypted-file-ui`) green with `cd packages/client && pnpm test:e2e:docker:dev <specs>`.
 - [ ] 4.2 Replace `private-rooms-hidden.spec.ts` with `private-rooms-app-off.spec.ts`, covering "App-off spec", "Browser-local flag ignored", "App off, key held", "Link opened while the section is not available" and "Chooser with the app off" on a mocked standalone portal. Verify under Docker as in 4.1.
 - [ ] 4.3 Assert the badges: "Beta badge shown" in `private-rooms-section.spec.ts` and "Tab label" in `keys-management.spec.ts`, each with the tooltip title. Verify under Docker as in 4.1.
 - [ ] 4.4 Run the full client E2E under Docker (`tests-dev`, `--update-snapshots=changed`). Design decision 7 expects no screenshot to move; check any that does by eye before committing it, and announce a regeneration to the teams that merge into the release branch. Verify: the full run, green except the failures the release branch has on its own (seven on 2026-11-03: five in `unpaid-portal-requests`, two in `ai-services-disabled`).

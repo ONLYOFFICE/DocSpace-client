@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "Fehler beim Kopieren verschlüsselter Dateien: {{names}}",
   "EncryptedDownloadPartial": "Diese Dateien konnten nicht entschlüsselt werden und wurden nicht in das Archiv aufgenommen: {{fileNames}}",
   "EncryptedFile": "Verschlüsselte Datei",
+  "EncryptedInviteFailed": "{{users}} konnten nicht eingeladen werden. Versuchen Sie es erneut.",
+  "EncryptedInviteNoKey": "Nicht eingeladen: {{users}}. Sie haben noch keine Verschlüsselungsschlüssel eingerichtet. Bitten Sie sie, in ihrem Profil einen Schlüssel zu erstellen, und laden Sie sie dann erneut ein.",
   "EncryptedInviteResultTitle": "Ergebnisse der Einladung",
   "EncryptedMovePartialFailure": "Diese Dateien konnten nicht aus dem privaten Raum verschoben werden und verbleiben darin: {{names}}",
   "EncryptedOperationFailed": "Der Vorgang mit der verschlüsselten Datei ist fehlgeschlagen. Versuchen Sie es erneut.",

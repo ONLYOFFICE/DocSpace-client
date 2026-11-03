@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "Şifrelenmiş dosyalar kopyalanamadı: {{names}}",
   "EncryptedDownloadPartial": "Bu dosyaların şifresi çözülemedi ve arşive eklenmedi: {{fileNames}}",
   "EncryptedFile": "Şifrelenmiş dosya",
+  "EncryptedInviteFailed": "{{users}} davet edilemedi. Tekrar deneyin.",
+  "EncryptedInviteNoKey": "Davet edilmedi: {{users}}. Henüz şifreleme anahtarı oluşturmadılar. Profillerinde bir anahtar oluşturmalarını isteyin, ardından onları yeniden davet edin.",
   "EncryptedInviteResultTitle": "Davet sonuçları",
   "EncryptedMovePartialFailure": "Bu dosyalar özel odanın dışına taşınamadı ve odada kalmaya devam ediyor: {{names}}",
   "EncryptedOperationFailed": "Şifrelenmiş dosya üzerindeki işlem başarısız oldu. Tekrar deneyin.",

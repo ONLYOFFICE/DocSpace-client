@@ -55,6 +55,7 @@ import uniqueid from "lodash/uniqueId";
 import {
   getMembersToRewrap,
   rewrapForInvitedMembers,
+  sendPrivateRoomInvitations,
 } from "@docspace/shared/services/private-room/room-member-flows";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 
@@ -468,10 +469,12 @@ const InvitePanel = ({
       const isRooms = roomId !== -1;
       const isPrivateInvite = isRooms && !!selectedRoom?.private;
 
-      const newMembers = isPrivateInvite ? getMembersToRewrap(inviteItems) : [];
+      const invitedMembers = isPrivateInvite
+        ? getMembersToRewrap(inviteItems)
+        : [];
 
       let identity = null;
-      if (isPrivateInvite && newMembers.length > 0) {
+      if (isPrivateInvite && invitedMembers.length > 0) {
         identity = await requireUnlock(String(currentUserId));
         if (!identity) {
           setIsLoading(false);
@@ -480,9 +483,37 @@ const InvitePanel = ({
         }
       }
 
+      // Spec: private-rooms/room-membership, "Private-room invitations are sent one invitee per request"
+      const privateSend = isPrivateInvite
+        ? await sendPrivateRoomInvitations(roomId, invitations, {
+            culture: data.culture,
+            notify: data.notify,
+            message: data.message,
+          })
+        : null;
+      const itemOf = (invitation) => inviteItems[invitations.indexOf(invitation)];
+      const newMembers = privateSend
+        ? getMembersToRewrap(privateSend.accepted.map(itemOf))
+        : [];
+      const refused = privateSend
+        ? privateSend.refused.map(({ invitation, noKey }) => {
+            const item = itemOf(invitation);
+            return {
+              member: {
+                id: item.id ?? item.email,
+                displayName: item.displayName || item.email,
+              },
+              noKey,
+            };
+          })
+        : [];
+
       const result = !isRooms
         ? await api.people.inviteUsers(data)
-        : await api.rooms.setRoomSecurity(roomId, data);
+        : privateSend
+          ? null
+          : await api.rooms.setRoomSecurity(roomId, data);
+      const responses = privateSend ? privateSend.responses : [result];
 
       if (!isRooms) {
         setIsNewUserByCurrentUser(true);
@@ -497,12 +528,15 @@ const InvitePanel = ({
         window.dataLayer.push({
           event: AnalyticsEvents.RoomShared,
           roomId,
-          count: invitations.length,
+          count: privateSend
+            ? privateSend.accepted.length
+            : invitations.length,
           context: "invite_panel",
           parentId: selectedRoom?.parentId,
         });
       }
-      const showsResult = isPrivateInvite && identity && newMembers.length > 0;
+      const showsResult =
+        isPrivateInvite && identity && invitedMembers.length > 0;
 
       if (!showsResult) {
         setIsLoading(false);
@@ -513,13 +547,18 @@ const InvitePanel = ({
         toastr.success(t("Common:UsersInvited"));
       }
 
-      if (result?.warning) {
-        toastr.warning(result?.warning);
-      }
+      responses.forEach((response) => {
+        if (response?.warning) toastr.warning(response.warning);
+        response?.aiProjectWarnings?.forEach((warning) =>
+          toastr.warning(warning.message),
+        );
+      });
 
-      result?.aiProjectWarnings?.forEach((warning) =>
-        toastr.warning(warning.message),
-      );
+      if (showsResult && newMembers.length === 0) {
+        setIsLoading(false);
+        setInviteOutcome({ granted: [], pending: [], skipped: [], refused });
+        return;
+      }
 
       if (showsResult) {
         const run = ++sendRunRef.current;
@@ -552,7 +591,13 @@ const InvitePanel = ({
         notices.forEach(({ level, text }) => toastr[level](text));
 
         setIsLoading(false);
-        if (run === sendRunRef.current) setInviteOutcome(outcome);
+        if (run === sendRunRef.current) {
+          setInviteOutcome(
+            outcome
+              ? { ...outcome, refused }
+              : { granted: [], pending: [], skipped: [], refused },
+          );
+        }
         return;
       }
 
@@ -591,6 +636,8 @@ const InvitePanel = ({
   };
 
   const hasInvitedUsers = !!inviteItems.length;
+  const canInviteAgain =
+    !!inviteOutcome?.skipped.length || !!inviteOutcome?.refused?.length;
 
   const removeExist = (items) => {
     const filtered = items.reduce((unique, current) => {
@@ -609,10 +656,15 @@ const InvitePanel = ({
   };
 
   const onInviteAgain = () => {
-    const skippedIds = new Set(
-      inviteOutcome.skipped.map((member) => member.id),
+    const skippedIds = new Set([
+      ...inviteOutcome.skipped.map((member) => member.id),
+      ...(inviteOutcome.refused ?? []).map(({ member }) => member.id),
+    ]);
+    setInviteItems(
+      inviteItems.filter(
+        (item) => skippedIds.has(item.id) || skippedIds.has(item.email),
+      ),
     );
-    setInviteItems(inviteItems.filter((item) => skippedIds.has(item.id)));
     setInviteOutcome(null);
   };
 
@@ -1127,7 +1179,7 @@ const InvitePanel = ({
       <ModalDialog.Footer>
         {inviteOutcome ? (
           <>
-            {inviteOutcome.skipped.length ? (
+            {canInviteAgain ? (
               <Button
                 className="invite-again"
                 scale
@@ -1142,7 +1194,7 @@ const InvitePanel = ({
               className="close-button"
               scale
               size="normal"
-              primary={!inviteOutcome.skipped.length}
+              primary={!canInviteAgain}
               onClick={onClose}
               label={t("Common:CloseButton")}
               testId="invite_panel_close_button"

@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "فشل نسخ الملفات المشفرة: {{names}}",
   "EncryptedDownloadPartial": "تعذّر فك تشفير هذه الملفات ولم تُضمَّن في الأرشيف: {{fileNames}}",
   "EncryptedFile": "ملف مشفر",
+  "EncryptedInviteFailed": "تعذّرت دعوة {{users}}. حاول مرة أخرى.",
+  "EncryptedInviteNoKey": "لم تتم دعوة {{users}}: لم يقوموا بإعداد مفاتيح التشفير بعد. اطلب منهم إنشاء مفتاح في ملفاتهم الشخصية، ثم ادعهم مرة أخرى.",
   "EncryptedInviteResultTitle": "نتائج الدعوة",
   "EncryptedMovePartialFailure": "تعذر نقل هذه الملفات خارج الغرفة الخاصة وستبقى فيها: {{names}}",
   "EncryptedOperationFailed": "فشلت العملية على الملف المشفر. حاول مرة أخرى.",

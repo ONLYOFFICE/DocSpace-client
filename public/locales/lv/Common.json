@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "Neizdevās kopēt šifrētos failus: {{names}}",
   "EncryptedDownloadPartial": "Šos failus neizdevās atšifrēt, un tie netika iekļauti arhīvā: {{fileNames}}",
   "EncryptedFile": "Šifrēts fails",
+  "EncryptedInviteFailed": "Neizdevās uzaicināt {{users}}. Mēģiniet vēlreiz.",
+  "EncryptedInviteNoKey": "Nav uzaicināti: {{users}}. Viņi vēl nav iestatījuši šifrēšanas atslēgas. Palūdziet viņiem izveidot atslēgu savā profilā un pēc tam uzaiciniet viņus vēlreiz.",
   "EncryptedInviteResultTitle": "Uzaicinājuma rezultāti",
   "EncryptedMovePartialFailure": "Šos failus neizdevās pārvietot ārpus privātās istabas, un tie paliek tajā: {{names}}",
   "EncryptedOperationFailed": "Darbība ar šifrēto failu neizdevās. Mēģiniet vēlreiz.",

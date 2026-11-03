@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "Copierea fișierelor criptate a eșuat: {{names}}",
   "EncryptedDownloadPartial": "Aceste fișiere nu au putut fi decriptate și au fost excluse din arhivă: {{fileNames}}",
   "EncryptedFile": "Fișier criptat",
+  "EncryptedInviteFailed": "Nu s-a putut invita {{users}}. Încercați din nou.",
+  "EncryptedInviteNoKey": "Neinvitați: {{users}}. Aceștia nu au configurat încă chei de criptare. Rugați-i să creeze o cheie în profilul lor, apoi invitați-i din nou.",
   "EncryptedInviteResultTitle": "Rezultatele invitaţiei",
   "EncryptedMovePartialFailure": "Aceste fișiere nu au putut fi mutate în afara camerei private și rămân în ea: {{names}}",
   "EncryptedOperationFailed": "Operațiunea asupra fișierului criptat a eșuat. Încercați din nou.",

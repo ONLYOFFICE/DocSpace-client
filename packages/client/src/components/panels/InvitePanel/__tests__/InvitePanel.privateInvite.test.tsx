@@ -84,6 +84,10 @@ vi.mock("@docspace/shared/api", () => ({
   },
 }));
 
+vi.mock("@docspace/shared/api/rooms", () => ({
+  setRoomSecurity: mocks.setRoomSecurity,
+}));
+
 vi.mock("@docspace/shared/api/portal", () => ({
   getInviteLink: vi.fn(),
   createInviteLink: vi.fn(),
@@ -163,7 +167,15 @@ const BOB_ITEM = {
   access: ShareAccessRights.Editing,
 };
 
-const renderInviteFromList = (room: TRoom) => {
+const ANN_ITEM = {
+  id: "ann",
+  avatar: "/avatar.png",
+  displayName: "ann keeper",
+  email: "ann@example.com",
+  access: ShareAccessRights.Editing,
+};
+
+const renderInviteFromList = (room: TRoom, inviteItems = [BOB_ITEM]) => {
   const getFolderInfo = vi.fn();
   const setInviteItems = vi.fn();
   const setInvitePanelOptions = vi.fn();
@@ -180,7 +192,7 @@ const renderInviteFromList = (room: TRoom) => {
       }}
       filesStore={{ folders: [room], getFolderInfo }}
       dialogsStore={{
-        inviteItems: [BOB_ITEM],
+        inviteItems,
         invitePanelOptions: {
           visible: true,
           roomId: ROOM_ID,
@@ -344,6 +356,84 @@ describe("Invite opened from the list", () => {
     expect(
       screen.queryByTestId("invite_panel_result_granted"),
     ).not.toBeInTheDocument();
+  });
+
+  describe("Refused invitees are named in the invite result", () => {
+    const refusal = (status: number) =>
+      Object.assign(new Error(String(status)), { response: { status } });
+    const refuseBob = (status: number) =>
+      mocks.setRoomSecurity.mockImplementation(
+        async (_id: number, data: { invitations: { id: string }[] }) => {
+          if (data.invitations[0].id === "bob") throw refusal(status);
+          return {};
+        },
+      );
+
+    beforeEach(() => {
+      mocks.requireUnlock.mockImplementation(async () => identity);
+    });
+
+    it("Invitee without a key named", async () => {
+      refuseBob(403);
+      renderInviteFromList(
+        privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+        [ANN_ITEM, BOB_ITEM],
+      );
+
+      fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+      expect(
+        await screen.findByTestId("invite_panel_result_refused"),
+      ).toHaveTextContent("Common:EncryptedInviteNoKey");
+      expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(2);
+      expect(mocks.setRoomSecurity.mock.calls[0][1].invitations).toEqual([
+        { id: "ann", access: ShareAccessRights.Editing },
+      ]);
+      expect(mocks.setRoomSecurity.mock.calls[1][1].invitations).toEqual([
+        { id: "bob", access: ShareAccessRights.Editing },
+      ]);
+      expect(mocks.addMembersToEncryptedRoom).toHaveBeenCalledWith(
+        ROOM_ID,
+        [{ id: "ann", displayName: "ann keeper" }],
+        expect.anything(),
+      );
+      expect(mocks.toastr.error).not.toHaveBeenCalled();
+      expect(
+        screen.getByTestId("invite_panel_invite_again_button"),
+      ).toBeInTheDocument();
+    });
+
+    it("Other refusal named", async () => {
+      refuseBob(500);
+      renderInviteFromList(
+        privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+        [ANN_ITEM, BOB_ITEM],
+      );
+
+      fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+      expect(
+        await screen.findByTestId("invite_panel_result_refused"),
+      ).toHaveTextContent("Common:EncryptedInviteFailed");
+    });
+
+    it("Every invitee refused", async () => {
+      refuseBob(403);
+      const { setInviteItems } = renderInviteFromList(
+        privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+      );
+
+      fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+      expect(
+        await screen.findByTestId("invite_panel_result_refused"),
+      ).toHaveTextContent("Common:EncryptedInviteNoKey");
+      expect(mocks.addMembersToEncryptedRoom).not.toHaveBeenCalled();
+
+      fireEvent.click(screen.getByTestId("invite_panel_invite_again_button"));
+
+      expect(setInviteItems).toHaveBeenCalledWith([BOB_ITEM]);
+    });
   });
 
   it("sends an ordinary room's invitations without unlocking", async () => {

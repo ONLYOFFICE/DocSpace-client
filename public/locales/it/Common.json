@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "Impossibile copiare i file cifrati: {{names}}",
   "EncryptedDownloadPartial": "Non è stato possibile decifrare questi file, che sono stati esclusi dall'archivio: {{fileNames}}",
   "EncryptedFile": "File cifrato",
+  "EncryptedInviteFailed": "Impossibile invitare {{users}}. Riprovare.",
+  "EncryptedInviteNoKey": "Non invitati: {{users}}. Non hanno ancora configurato le chiavi di cifratura. Chiedere di creare una chiave nel proprio profilo, quindi invitarli di nuovo.",
   "EncryptedInviteResultTitle": "Risultati dell'invito",
   "EncryptedMovePartialFailure": "Questi file non sono stati spostati fuori dalla stanza privata e vi rimangono: {{names}}",
   "EncryptedOperationFailed": "L'operazione sul file crittografato non è riuscita. Riprova.",

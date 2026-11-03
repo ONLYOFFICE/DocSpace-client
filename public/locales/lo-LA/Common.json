@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "ສຳເນົາໄຟລ໌ທີ່ເຂົ້າລະຫັດລົ້ມເຫຼວ: {{names}}",
   "EncryptedDownloadPartial": "ບໍ່ສາມາດຖອດລະຫັດໄຟລ໌ເຫຼົ່ານີ້ໄດ້ ແລະພວກມັນຖືກຍົກເວັ້ນອອກຈາກໄຟລ໌ບີບອັດ: {{fileNames}}",
   "EncryptedFile": "ໄຟລ໌ທີ່ເຂົ້າລະຫັດ",
+  "EncryptedInviteFailed": "ບໍ່ສາມາດເຊີນ {{users}} ໄດ້. ລອງໃໝ່ອີກຄັ້ງ.",
+  "EncryptedInviteNoKey": "ບໍ່ໄດ້ເຊີນ: {{users}}. ພວກເຂົາຍັງບໍ່ໄດ້ຕັ້ງຄ່າກຸນແຈເຂົ້າລະຫັດ. ຂໍໃຫ້ພວກເຂົາສ້າງກຸນແຈໃນໂປຣໄຟລ໌ ແລ້ວເຊີນພວກເຂົາອີກຄັ້ງ.",
   "EncryptedInviteResultTitle": "ຜົນການເຊີນ",
   "EncryptedMovePartialFailure": "ບໍ່ສາມາດຍ້າຍໄຟລ໌ເຫຼົ່ານີ້ອອກຈາກຫ້ອງສ່ວນຕົວໄດ້ ແລະ ພວກມັນຍັງຢູ່ໃນຫ້ອງ: {{names}}",
   "EncryptedOperationFailed": "ການດຳເນີນການກັບໄຟລ໌ທີ່ເຂົ້າລະຫັດລົ້ມເຫຼວ. ກະລຸນາລອງໃໝ່.",

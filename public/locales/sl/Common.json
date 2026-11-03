@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "Kopiranje šifriranih datotek ni uspelo: {{names}}",
   "EncryptedDownloadPartial": "Teh datotek ni bilo mogoče dešifrirati, zato niso bile vključene v arhiv: {{fileNames}}",
   "EncryptedFile": "Šifrirana datoteka",
+  "EncryptedInviteFailed": "{{users}} ni bilo mogoče povabiti. Poskusite znova.",
+  "EncryptedInviteNoKey": "Niso povabljeni: {{users}}. Šifrirnih ključev še niso nastavili. Prosite jih, da v svojem profilu ustvarijo ključ, nato jih znova povabite.",
   "EncryptedInviteResultTitle": "Rezultati povabila",
   "EncryptedMovePartialFailure": "Teh datotek ni bilo mogoče premakniti iz zasebne sobe in ostajajo v njej: {{names}}",
   "EncryptedOperationFailed": "Operacija s šifrirano datoteko ni uspela. Poskusite znova.",

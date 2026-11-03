@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "Failed to copy encrypted files: {{names}}",
   "EncryptedDownloadPartial": "These files could not be decrypted and were left out of the archive: {{fileNames}}",
   "EncryptedFile": "Encrypted file",
+  "EncryptedInviteFailed": "Could not invite {{users}}. Try again.",
+  "EncryptedInviteNoKey": "Not invited: {{users}}. They have not set up encryption keys yet. Ask them to create a key in their profile, then invite them again.",
   "EncryptedInviteResultTitle": "Invitation results",
   "EncryptedMovePartialFailure": "These files could not be moved out of the private room and remain in it: {{names}}",
   "EncryptedOperationFailed": "The operation on the encrypted file failed. Try again.",

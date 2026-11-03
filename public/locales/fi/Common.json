@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "Salattujen tiedostojen kopiointi epäonnistui: {{names}}",
   "EncryptedDownloadPartial": "Näiden tiedostojen salausta ei voitu purkaa, joten ne jätettiin pois arkistosta: {{fileNames}}",
   "EncryptedFile": "Salattu tiedosto",
+  "EncryptedInviteFailed": "Käyttäjiä {{users}} ei voitu kutsua. Yritä uudelleen.",
+  "EncryptedInviteNoKey": "Ei kutsuttu: {{users}}. He eivät ole vielä ottaneet salausavaimia käyttöön. Pyydä heitä luomaan avain profiilissaan ja kutsu heidät sitten uudelleen.",
   "EncryptedInviteResultTitle": "Kutsun tulokset",
   "EncryptedMovePartialFailure": "Näitä tiedostoja ei voitu siirtää pois yksityisestä huoneesta, ja ne jäävät sinne: {{names}}",
   "EncryptedOperationFailed": "Salattua tiedostoa koskeva toiminto epäonnistui. Yritä uudelleen.",

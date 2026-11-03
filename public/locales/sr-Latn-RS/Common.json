@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "Kopiranje šifrovanih fajlova nije uspelo: {{names}}",
   "EncryptedDownloadPartial": "Ove datoteke nije moguće dešifrovati i izostavljene su iz arhive: {{fileNames}}",
   "EncryptedFile": "Šifrovani fajl",
+  "EncryptedInviteFailed": "Nije moguće pozvati {{users}}. Pokušajte ponovo.",
+  "EncryptedInviteNoKey": "Nisu pozvani: {{users}}. Još nisu podesili ključeve za šifrovanje. Zamolite ih da naprave ključ u svom profilu, a zatim ih ponovo pozovite.",
   "EncryptedInviteResultTitle": "Rezultati poziva",
   "EncryptedMovePartialFailure": "Ove datoteke nije bilo moguće premestiti izvan privatne sobe i ostaju u njoj: {{names}}",
   "EncryptedOperationFailed": "Operacija sa šifrovanom datotekom nije uspela. Pokušajte ponovo.",

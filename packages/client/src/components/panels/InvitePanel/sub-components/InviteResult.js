@@ -42,7 +42,13 @@ const namesOf = (members) =>
   members.map((member) => member.displayName || member.id).join(", ");
 
 const InviteResult = ({ t, outcome }) => {
-  const { granted, pending, skipped, failed } = outcome;
+  const { granted, pending, skipped, failed, refused = [] } = outcome;
+  const refusedWithoutKey = refused
+    .filter((entry) => entry.noKey)
+    .map((entry) => entry.member);
+  const refusedOtherwise = refused
+    .filter((entry) => !entry.noKey)
+    .map((entry) => entry.member);
   const withoutKey = skipped.filter((member) => member.reason === "no-key");
   const withRefusedKey = skipped.filter(
     (member) => member.reason === "key-mismatch-refused",
@@ -73,6 +79,25 @@ const InviteResult = ({ t, outcome }) => {
                   count: missingFileCount,
                 })}
           </Text>
+        </section>
+      ) : null}
+
+      {refused.length ? (
+        <section data-testid="invite_panel_result_refused">
+          {refusedWithoutKey.length ? (
+            <Text className={styles.description}>
+              {t("Common:EncryptedInviteNoKey", {
+                users: namesOf(refusedWithoutKey),
+              })}
+            </Text>
+          ) : null}
+          {refusedOtherwise.length ? (
+            <Text className={styles.description}>
+              {t("Common:EncryptedInviteFailed", {
+                users: namesOf(refusedOtherwise),
+              })}
+            </Text>
+          ) : null}
         </section>
       ) : null}
 

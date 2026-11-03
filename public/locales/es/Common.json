@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "Error al copiar los archivos cifrados: {{names}}",
   "EncryptedDownloadPartial": "No se pudieron descifrar estos archivos y se dejaron fuera del archivo comprimido: {{fileNames}}",
   "EncryptedFile": "Archivo cifrado",
+  "EncryptedInviteFailed": "No se pudo invitar a {{users}}. Inténtelo de nuevo.",
+  "EncryptedInviteNoKey": "No invitados: {{users}}. Aún no han configurado claves de cifrado. Pídales que creen una clave en su perfil y vuelva a invitarlos.",
   "EncryptedInviteResultTitle": "Resultados de la invitación",
   "EncryptedMovePartialFailure": "Estos archivos no se han podido mover fuera de la sala privada y permanecen en ella: {{names}}",
   "EncryptedOperationFailed": "No se ha podido completar la operación con el archivo cifrado. Inténtelo de nuevo.",

@@ -906,6 +906,8 @@
   "EncryptedCopyFailed": "Nepodarilo sa skopírovať zašifrované súbory: {{names}}",
   "EncryptedDownloadPartial": "Tieto súbory sa nepodarilo dešifrovať a neboli zahrnuté do archívu: {{fileNames}}",
   "EncryptedFile": "Zašifrovaný súbor",
+  "EncryptedInviteFailed": "{{users}} sa nepodarilo pozvať. Skúste to znova.",
+  "EncryptedInviteNoKey": "Nepozvaní: {{users}}. Ešte nenastavili šifrovacie kľúče. Požiadajte ich, aby si vo svojom profile vytvorili kľúč, a potom ich pozvite znova.",
   "EncryptedInviteResultTitle": "Výsledky pozvania",
   "EncryptedMovePartialFailure": "Tieto súbory sa nepodarilo presunúť mimo súkromnej miestnosti a zostávajú v nej: {{names}}",
   "EncryptedOperationFailed": "Operácia so zašifrovaným súborom zlyhala. Skúste to znova.",

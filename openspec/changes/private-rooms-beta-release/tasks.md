@@ -66,7 +66,7 @@ Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 20
 
 ## 6. Integration
 
-- [ ] 6.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`, `pnpm run test:doceditor`), the SDK private E2E and `npx -y @fission-ai/openspec@latest validate --all --strict`. Verify: all green.
+- [x] 6.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`, `pnpm run test:doceditor`), the SDK private E2E and `npx -y @fission-ai/openspec@latest validate --all --strict`. Verify: all green.
 - [ ] 6.2 Run on staging with the Document Server of 0.1, and record date, builds and results in design.md:
   - a user who never opted in sees the Private section and the badges;
   - on a standalone portal an administrator switches the Private app off: the section goes, private rooms are listed in Rooms, and the Keys management tab stays for a key holder.

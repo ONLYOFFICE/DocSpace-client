@@ -100,6 +100,5 @@ Every task first adds a test named after its scenario and shows that it fails on
 
 ## Workflow follow-up
 
-- Re-check the server facts of design.md (M5) through CodeGraph once `../server` is indexed.
 - Archive with `/opsx:archive private-rooms-pre-pr-review-fixes` before opening the PR.
 - The remaining review findings (H1, H4, M3, M7 to M12, zip entry names, lows) go into a separate change before the beta.

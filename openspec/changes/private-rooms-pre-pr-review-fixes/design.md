@@ -89,9 +89,9 @@ See proposal.md, "Why". Each defect was traced in the code on 2026-11-03.
   `/rooms/...` addresses (`packages/shared/utils/axiosClient.ts:597-613`). In
   the client that toasts Common:AccessDenied and calls
   `refreshRightsAfterForbidden` (`Shell.jsx:301-312`).
-- The server source was read directly at those paths: the CodeGraph index of
-  `../server` is not set up on this machine. Re-check through CodeGraph once
-  it is indexed.
+- Confirmed through CodeGraph on 2026-11-03: the route attribute is at
+  `UserController.cs:1257`, the check at `:1289` and the throw at `:1291`;
+  the User or Guest branch is at `UserExtensions.cs:184`.
 
 **M6 — cancelling inside key generation.**
 - `useGenerateKeyFlow` wires `onCancel={reset}` on both dialogs, so a cancel

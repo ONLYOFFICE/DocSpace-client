@@ -138,15 +138,18 @@ place:
 - **Testers lose the console toggle.** → They need none: the section is shown.
   `.claude/rules/private-rooms.md` says so in the same change.
 - **The Document Server build lacks the crypto add-on.** Encrypted files then
-  fail to open in the editor. → Gate items 0.1 and 0.2.
+  fail to open in the editor. → Accepted by proposal decision 6: gate items
+  0.1 and 0.2 stay open and are named in the release notes instead of
+  holding back the flag removal.
 
 ## Migration Plan
 
 1. Revise `private-rooms-release-gate` (decision 9).
 2. Commit the Beta badge title, the availability read, the keys guard, the
    removal of the flag and the E2E changes directly on `release/v4.1.0`
-   (proposal decision 5). Tasks 3.1 to 3.3 remove the flag and wait for
-   group 0 of tasks.md; 4.1, 4.2, 4.4, 5.2 and group 6 follow them. 2.4, 4.3
+   (proposal decision 5). Tasks 3.1 to 3.3 remove the flag once 0.3 and 0.5
+   of tasks.md hold (0.1 and 0.2 no longer hold them back, proposal
+   decision 6); 4.1, 4.2, 4.4, 5.2 and group 6 follow them. 2.4, 4.3
    and 5.1 may land earlier, while the flag still hides the section.
 3. Run the pre-push gate and the full client E2E under Docker, and the SDK
    private E2E.

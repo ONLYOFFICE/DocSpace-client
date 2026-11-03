@@ -1,6 +1,6 @@
 # Tasks
 
-Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 2026-11-03 behind the flag, so the gate now holds back the flag removal of 3.1 to 3.3 rather than the merge, and every remaining task is committed directly on `release/v4.1.0` (design, Migration Plan). One task is one commit with its tick (the "Commits" paragraph of `openspec/config.yaml`). Server behaviour is read in `../server` through CodeGraph.
+Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 2026-11-03 behind the flag, so the gate now holds back the flag removal of 3.1 to 3.3 rather than the merge, and every remaining task is committed directly on `release/v4.1.0` (design, Migration Plan). Proposal decision 6 (2026-11-03) lets 3.1 to 3.3 land while 0.1 and 0.2 are open; those two stay open for the release notes. One task is one commit with its tick (the "Commits" paragraph of `openspec/config.yaml`). Server behaviour is read in `../server` through CodeGraph.
 
 ## 0. Beta gate and decisions (evidence only, no code)
 

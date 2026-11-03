@@ -68,6 +68,9 @@ until these hold:
 `private-rooms-server-hardening` 12.1 is not a prerequisite any more: the
 owner accepted the account-link risk for the beta (decision 2).
 
+Prerequisites 1 and 2 no longer hold the flag back (decision 6): the flag is
+removed while they are open, and the release notes name them.
+
 ## Capabilities
 
 ### New Capabilities
@@ -129,3 +132,9 @@ None.
    (2026-11-03). PR !798 merged the feature branch there with the flag in
    place, so the gate above holds back the removal of the flag, not the
    merge.
+6. **The flag is removed before prerequisites 1 and 2 hold** (2026-11-03),
+   with the risk accepted: on a Document Server build without the crypto
+   add-on, or with DS-17 and DS-19 still open, encrypted documents,
+   spreadsheets or presentations may not open in the editor. Gate items 0.1
+   and 0.2 stay open and feed the release notes (task 5.1); they no longer
+   hold back tasks 3.1 to 3.3.

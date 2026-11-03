@@ -471,21 +471,25 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     [t],
   );
 
-  const settleKeyChange = useCallback((decision: KeyMismatchDecision) => {
-    const queue = keyChangeQueueRef.current;
-    const current = queue.shift();
-    for (const resolve of current?.resolvers ?? []) resolve(decision);
-    setKeyChangeRequest(queue[0]?.info ?? null);
-  }, []);
-
-  const handleKeyChangeAccept = useCallback(
-    () => settleKeyChange("accept"),
-    [settleKeyChange],
-  );
-
-  const handleKeyChangeRefuse = useCallback(
-    () => settleKeyChange("refuse"),
-    [settleKeyChange],
+  // An answer settles only the request it was given for, so a second click
+  // or a repeated key cannot answer the request shown after it.
+  // Spec: private-rooms/key-management, "Key-change dialog"
+  const settleKeyChange = useCallback(
+    (decision: KeyMismatchDecision, answered: KeyMismatchInfo) => {
+      const queue = keyChangeQueueRef.current;
+      const head = queue[0];
+      if (
+        !head ||
+        head.info.userId !== answered.userId ||
+        head.info.newKey !== answered.newKey
+      ) {
+        return;
+      }
+      queue.shift();
+      for (const resolve of head.resolvers) resolve(decision);
+      setKeyChangeRequest(queue[0]?.info ?? null);
+    },
+    [],
   );
 
   const handlePassphraseSubmit = useCallback(
@@ -572,6 +576,9 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       )}
       {KeyChangeDialog && keyChangeRequest?.displayName && (
         <KeyChangeDialog
+          // A new instance per request takes the focus and shows its own
+          // fingerprints.
+          key={`${keyChangeRequest.userId}:${keyChangeRequest.newKey}`}
           visible
           userId={keyChangeRequest.userId}
           displayName={keyChangeRequest.displayName}
@@ -579,8 +586,8 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
           newPublicKey={keyChangeRequest.newKey}
           knownFirstSeenAt={keyChangeRequest.knownFirstSeenAt}
           knownLastSeenAt={keyChangeRequest.knownLastSeenAt}
-          onAccept={handleKeyChangeAccept}
-          onRefuse={handleKeyChangeRefuse}
+          onAccept={() => settleKeyChange("accept", keyChangeRequest)}
+          onRefuse={() => settleKeyChange("refuse", keyChangeRequest)}
         />
       )}
     </EncryptionContext.Provider>

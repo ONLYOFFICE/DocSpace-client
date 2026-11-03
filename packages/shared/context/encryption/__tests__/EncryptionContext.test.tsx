@@ -34,7 +34,7 @@
  */
 
 import { act, render } from "@testing-library/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
@@ -130,6 +130,7 @@ const userKeysFixture: EncryptionUserKeys = {
 const captured = {
   passphrase: null as PassphraseDialogProps | null,
   keyChange: null as KeyChangeDialogModalProps | null,
+  keyChangeMounts: 0,
 };
 
 const MockPassphraseDialog: React.FC<PassphraseDialogProps> = (props) => {
@@ -141,8 +142,14 @@ const MockPassphraseDialog: React.FC<PassphraseDialogProps> = (props) => {
 };
 const MockKeyChangeDialog: React.FC<KeyChangeDialogModalProps> = (props) => {
   captured.keyChange = props;
-  useEffect(() => () => {
-    captured.keyChange = null;
+  const own = useRef(props);
+  own.current = props;
+  useEffect(() => {
+    captured.keyChangeMounts += 1;
+    return () => {
+      // A replacing instance has already rendered its own props.
+      if (captured.keyChange === own.current) captured.keyChange = null;
+    };
   }, []);
   return null;
 };
@@ -877,6 +884,56 @@ describe("EncryptionContext / EncryptionProvider", () => {
       });
       expect(await secondPromise).toBe("refuse");
       expect(captured.keyChange).toBeNull();
+    });
+
+    it("Next request after an answer", async () => {
+      renderTree();
+      let firstPromise!: Promise<string>;
+      let secondPromise!: Promise<string>;
+      await act(async () => {
+        firstPromise = latest.resolveKeyMismatch(sampleInfo);
+        secondPromise = latest.resolveKeyMismatch({
+          ...sampleInfo,
+          userId: "peer-2",
+          displayName: "Bob",
+          newKey: "pub-bob-new",
+        });
+      });
+      const acceptFirst = captured.keyChange!.onAccept;
+
+      await act(async () => {
+        acceptFirst();
+      });
+      // The same button pressed again, or a held Enter repeating.
+      await act(async () => {
+        acceptFirst();
+      });
+
+      expect(await firstPromise).toBe("accept");
+      expect(await stillPending(secondPromise)).toBe("pending");
+      expect(captured.keyChange!.userId).toBe("peer-2");
+    });
+
+    it("Queued key-change dialog opened", async () => {
+      renderTree();
+      captured.keyChangeMounts = 0;
+      await act(async () => {
+        void latest.resolveKeyMismatch(sampleInfo);
+        void latest.resolveKeyMismatch({
+          ...sampleInfo,
+          userId: "peer-2",
+          displayName: "Bob",
+          newKey: "pub-bob-new",
+        });
+      });
+      expect(captured.keyChangeMounts).toBe(1);
+
+      await act(async () => {
+        captured.keyChange!.onAccept();
+      });
+
+      expect(captured.keyChange!.userId).toBe("peer-2");
+      expect(captured.keyChangeMounts).toBe(2);
     });
 
     it("Same key asked twice: one dialog, one decision for every waiting request", async () => {

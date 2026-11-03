@@ -65,7 +65,7 @@ Every task first adds a test named after its scenario and shows that it fails on
 
 ## 4. Key-change dialog (review M4 and M5)
 
-- [ ] 4.1 `packages/shared/context/encryption/EncryptionContext.tsx` (design decision 5):
+- [x] 4.1 `packages/shared/context/encryption/EncryptionContext.tsx` (design decision 5):
   - render the dialog with `key={`${userId}:${newKey}`}`;
   - let `settleKeyChange` take the request it answers and shift the queue only when that request is still at its head.
 

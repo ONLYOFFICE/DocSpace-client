@@ -8,7 +8,7 @@ Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 20
 - [ ] 0.2 Spreadsheets and presentations are covered: `private-rooms-editor-contract` 4.7 passes on the build of 0.1, or a follow-up change that opens them view-only and withholds their creation in private rooms is archived. Verify: the editor-contract record or `openspec list`.
 - [x] 0.3 The change that fixes the verified blockers of the second pre-PR review of 2026-11-03 is archived. Verify: `openspec list` shows it under `changes/archive`. Done 2026-11-03: `changes/archive/2026-11-03-private-rooms-pre-pr-review-2-fixes`.
 - [x] 0.4 Record proposal decisions 1 to 4 with their dates and owners in proposal.md. Verify: `npx -y @fission-ai/openspec@latest validate private-rooms-beta-release --strict`. Done 2026-11-03: the owner removed the flag without a server setting and accepted the account-link risk of `private-rooms-server-hardening` 12.1.
-- [ ] 0.5 Ticking "Don't ask again" in the name dialog of a private room creates one file (proposal prerequisite 4). Verify: `openspec list` shows `private-rooms-create-dialog-single-file` under `changes/archive`.
+- [x] 0.5 Ticking "Don't ask again" in the name dialog of a private room creates one file (proposal prerequisite 4). Verify: `openspec list` shows `private-rooms-create-dialog-single-file` under `changes/archive`. Done 2026-11-03: `changes/archive/2026-11-03-private-rooms-create-dialog-single-file`.
 
 ## 1. Planning
 

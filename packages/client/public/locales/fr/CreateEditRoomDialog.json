@@ -27,7 +27,7 @@
   "NoDatabaseConnectionsRoomAdmin": "Les connexions à la base de données sont configurées par un administrateur. Une fois qu'une base de données sera configurée, vous pourrez activer l'exportation ici.",
   "Position": "Position",
   "PublicRoomBarDescription": "Cette salle est accessible à toute personne disposant du lien. L'accès pour les utilisateurs externes est fourni en fonction du type de droits d'accès sélectionné.",
-  "PublicRoomSystemFoldersDescription": "Les dossiers système stockent des copies de formulaires à différents stades d'achèvement. Les formulaires en cours de remplissage sont stockés dans le dossier En cours, et les formulaires complétés sont stockés dans le dossier Terminés.",
+  "PublicRoomSystemFoldersDescription": "Les dossiers système stockent des copies de formulaires à différents stades d'achèvement. Les formulaires en cours de remplissage sont stockés dans le dossier En cours, et les formulaires complétés sont stockés dans le dossier Terminé.",
   "PublicRoomSystemFoldersTitle": "Dossiers système",
   "RestrictCopyAndDownload": "Restreindre la copie et le téléchargement",
   "RestrictCopyAndDownloadDescription": "Activez ce paramètre pour désactiver les téléchargements et la copie de contenu pour les utilisateurs ayant le rôle \"{{role}}\".",

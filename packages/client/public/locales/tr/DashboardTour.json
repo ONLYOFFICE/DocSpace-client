@@ -1,7 +1,7 @@
 {
-  "DashboardApps": "Depolamadan iş birliğine, veri toplamadan otomasyona ve yapay zekaya kadar — her uygulama farklı bir iş için tasarlanmıştır. Bir uygulamanın turuna katılmak veya turu yeniden izlemek için uygulama kartındaki mezuniyet kepi simgesini kullanın.",
+  "DashboardApps": "Depolamadan iş birliğine, veri toplamadan otomasyona ve AI kadar — her uygulama farklı bir iş için tasarlanmıştır. Bir uygulamanın turuna katılmak veya turu yeniden izlemek için uygulama kartındaki mezuniyet kepi simgesini kullanın.",
   "DashboardAppsTitle": "Uygulamalarınızı keşfedin",
-  "DashboardCreate": "Bir metin belgesi, elektronik tablo, sunum veya PDF formu seçin, mevcut dosyaları yükleyin ya da bir yapay zeka sohbeti başlatın. Yeni belgeler {{files}} bölümüne kaydedilir ve ihtiyaç duyduğunuz her an hazırdır.",
+  "DashboardCreate": "Bir metin belgesi, elektronik tablo, sunum veya PDF formu seçin, mevcut dosyaları yükleyin ya da bir AI sohbeti başlatın. Yeni belgeler {{files}} bölümüne kaydedilir ve ihtiyaç duyduğunuz her an hazırdır.",
   "DashboardCreateTitle": "Oluşturmaya başlayın",
   "DashboardDevTools": "Burası geliştirici merkeziniz: API'ler, SDK'lar, eklentiler, webhook'lar ve daha fazlası. Daha fazla bilgi almak veya başlamak için herhangi bir karta tıklayın.",
   "DashboardDevToolsTitle": "{{organizationName}} ile geliştirin",
@@ -13,6 +13,6 @@
   "DashboardProfileTitle": "Profil bilgilerinizi kontrol edin",
   "WelcomeDashboardSubtitle": "Her şey burada başlar",
   "WelcomeDashboardTitle": "{{organizationName}}'e hoş geldiniz",
-  "WelcomeDescription": "Belgeler oluşturun, odalarda birlikte çalışın, formlarla veri toplayın ve sıkıcı işleri yapay zekaya bırakın — hepsi tek bir yerden. Hızlı bir tura hazır mısınız?",
+  "WelcomeDescription": "Belgeler oluşturun, odalarda birlikte çalışın, formlarla veri toplayın ve sıkıcı işleri AI bırakın — hepsi tek bir yerden. Hızlı bir tura hazır mısınız?",
   "WelcomeLater": "Belki daha sonra"
 }

@@ -57,6 +57,20 @@
     }
   }
 
+  // The chat toolbar of an open AI project ends right before the header's
+  // own buttons block (the info panel toggle). The block's 20px start margin
+  // reads as an empty slot after the toolbar's last button, so in a project
+  // it is 8px. The block has no class of its own outside ui-kit, so it is
+  // matched by its CSS module name.
+  .projectChatToolbar {
+    padding-inline-end: 0;
+  }
+
+  &:has(.projectChatToolbar)
+    :global([class*="buttonsContainer"]) {
+    margin-inline-start: 8px;
+  }
+
   :global(.table-container_group-menu) {
     margin-block: 0;
     margin-inline: -20px 0;

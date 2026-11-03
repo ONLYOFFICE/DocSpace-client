@@ -86,7 +86,6 @@ const ClientContent = (props) => {
     setIsLoaded,
     isAuthenticated,
     user,
-    isEncryption,
     legacyEncryptionKeys,
     setLegacyEncryptionKeys,
     updateLegacyEncryptionKeys,
@@ -124,7 +123,7 @@ const ClientContent = (props) => {
       setIsDesktopClientInit(true);
       regDesktop(
         user,
-        isEncryption,
+        false,
         legacyEncryptionKeys,
         setLegacyEncryptionKeys,
         updateLegacyEncryptionKeys,
@@ -143,7 +142,6 @@ const ClientContent = (props) => {
     t,
     isAuthenticated,
     user,
-    isEncryption,
     legacyEncryptionKeys,
     setLegacyEncryptionKeys,
     updateLegacyEncryptionKeys,
@@ -166,9 +164,11 @@ const ClientContent = (props) => {
   const isDeveloperToolsArticle =
     location.pathname.includes("/developer-tools");
   const isBillingArticle = location.pathname.startsWith("/billing");
+  // The SDK frame pages. Only the bare `/ai-rooms` is one: its nested paths
+  // are the "AI rooms" section of Home.
   const isNewArticle =
     location.pathname.startsWith("/ai-files") ||
-    location.pathname.startsWith("/ai-rooms") ||
+    location.pathname === "/ai-rooms" ||
     location.pathname.startsWith("/ai-forms") ||
     location.pathname.startsWith("/agents") ||
     location.pathname.startsWith("/ai-arbiter") ||
@@ -228,7 +228,6 @@ export const Client = inject(
       legacyEncryptionKeys,
       setLegacyEncryptionKeys,
       updateLegacyEncryptionKeys,
-      isEncryptionSupport,
       enablePlugins,
       isDesktopClientInit,
       setIsDesktopClientInit,
@@ -260,7 +259,6 @@ export const Client = inject(
       user: userStore.user,
       isAuthenticated: authStore.isAuthenticated,
       legacyEncryptionKeys,
-      isEncryption: isEncryptionSupport,
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
       isInfoPanelVisible: isVisible && !isProfile,

@@ -44,6 +44,13 @@ vi.mock("@docspace/shared/utils/userFilterUtils", () => ({
 }));
 
 import { getUserFilter, setUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import { CategoryType } from "@docspace/shared/constants";
+import {
+  FILTER_ARCHIVE_DOCUMENTS,
+  FILTER_ARCHIVE_ROOM,
+  FILTER_DOCUMENTS,
+  FILTER_ROOM_DOCUMENTS,
+} from "@docspace/shared/utils/filterConstants";
 
 import { createTestFilesStore } from "./testHarness";
 
@@ -98,3 +105,42 @@ describe("FilesStore.setRoomsFilter — characterization", () => {
     expect(setUserFilter).toHaveBeenCalledTimes(1);
   });
 });
+
+describe("FilesStore sort keys in the Private section", () => {
+  beforeEach(() => {
+    vi.mocked(setUserFilter).mockClear();
+  });
+
+  const savedKeys = () =>
+    vi.mocked(setUserFilter).mock.calls.map(([key]) => key.split("=")[0]);
+
+  it.each([
+    [CategoryType.PrivateRoom, FILTER_ROOM_DOCUMENTS],
+    [CategoryType.PrivateArchive, FILTER_ARCHIVE_DOCUMENTS],
+  ])(
+    "sorting inside a private room of category %s keeps the My documents sort",
+    (categoryType, roomKey) => {
+      const store = createTestFilesStore();
+      store.categoryType = categoryType;
+      const filter = store.filter.clone();
+      filter.sortBy = "AZ";
+
+      store.setFilesFilter(filter, 12);
+
+      expect(savedKeys()).toEqual([roomKey]);
+      expect(savedKeys()).not.toContain(FILTER_DOCUMENTS);
+    },
+  );
+
+  it("sorting the private archive saves the archive rooms sort", () => {
+    const store = createTestFilesStore();
+    store.categoryType = CategoryType.PrivateArchive;
+    const filter = store.roomsFilter.clone();
+    filter.sortBy = "AZ";
+
+    store.setRoomsFilter(filter);
+
+    expect(savedKeys()).toEqual([FILTER_ARCHIVE_ROOM]);
+  });
+});
+

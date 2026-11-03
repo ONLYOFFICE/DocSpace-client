@@ -55,7 +55,6 @@ import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
-import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import api from "@docspace/shared/api";
 import { RoomsType } from "@docspace/shared/enums";
 import AccessSelector from "../../../AccessSelector";
@@ -110,12 +109,7 @@ const ExternalLinks = ({
 
   const disableLink = async () => {
     shareLinks?.length &&
-      (await api.rooms.setInvitationLinks(
-        roomId,
-        "Invite",
-        0,
-        shareLinks[0].id,
-      ));
+      (await api.rooms.setInvitationLinks(roomId, "Invite", 0, shareLinks[0].id));
     setActiveLink({});
     onChangeExternalLinksVisible(false);
     return setShareLinks([]);
@@ -166,31 +160,26 @@ const ExternalLinks = ({
     standalone,
   );
 
-  const getAgentAccesses = () => {
-    return filterNotReadOnlyOptions(accesses).filter(
-      (o) => !o.isSeparator && !o.disabled,
-    );
-  };
-
+  // A project's link joins as Project manager only - the server takes no
+  // other role for it - so the paid role stays selectable there.
   const filteredAccesses =
-    roomType === -1
-      ? accesses
-      : roomType === RoomsType.AIRoom
-        ? getAgentAccesses()
+    roomType === RoomsType.AiProjectRoom
+      ? accesses.filter((access) => access.key === "projectManager")
+      : roomType === -1
+        ? accesses
         : filterPaidRoleOptions(accesses);
 
   const description =
     roomId === -1
       ? t("InviteViaLinkDescriptionAccounts")
-      : roomType === RoomsType.AIRoom
-        ? allowInvitingGuests
-          ? t("Common:InviteViaLinkDescriptionAgentGuest")
-          : t("Common:InviteViaLinkDescriptionAgentMembers")
-        : allowInvitingGuests
-          ? roomType === RoomsType.FormRoom
-            ? t("Common:InviteViaLinkDescriptionFormSpaceGuest")
-            : t("Common:InviteViaLinkDescriptionRoomGuest")
-          : t("Common:InviteViaLinkDescriptionRoomMembers");
+      : roomType === RoomsType.AiProjectRoom
+          ? // A project takes no guests.
+            t("Common:InviteViaLinkDescriptionAIProjectMembers")
+          : allowInvitingGuests
+            ? roomType === RoomsType.FormRoom
+              ? t("Common:InviteViaLinkDescriptionFormSpaceGuest")
+              : t("Common:InviteViaLinkDescriptionRoomGuest")
+            : t("Common:InviteViaLinkDescriptionRoomMembers");
 
   return (
     <div className={styles.externalLink} ref={inputsRef}>

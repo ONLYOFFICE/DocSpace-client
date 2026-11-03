@@ -57,7 +57,9 @@ describe("useTemplateGalleryHotkeys", () => {
   // take the arrows from the gallery's tabs and Enter from its buttons.
   it("leaves the keys of a focused tab or button to it", () => {
     const onSelect = vi.fn();
-    renderHook(() => useTemplateGalleryHotkeys({ itemsCount: 3, onSelect }));
+    renderHook(() =>
+      useTemplateGalleryHotkeys({ itemsCount: 3, columnsCount: 3, onSelect }),
+    );
     document.body.innerHTML =
       '<div role="tablist"><div role="tab" tabindex="0" id="tab">Docs</div></div><button id="btn">Submit</button>';
 
@@ -71,7 +73,9 @@ describe("useTemplateGalleryHotkeys", () => {
   });
 
   it("still walks the tiles with nothing in particular focused", () => {
-    renderHook(() => useTemplateGalleryHotkeys({ itemsCount: 3 }));
+    renderHook(() =>
+      useTemplateGalleryHotkeys({ itemsCount: 3, columnsCount: 3 }),
+    );
 
     expect(press(document.body, "ArrowRight").defaultPrevented).toBe(true);
   });

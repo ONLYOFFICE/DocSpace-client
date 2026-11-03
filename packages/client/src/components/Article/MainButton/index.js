@@ -34,6 +34,7 @@
  */
 
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
@@ -42,7 +43,6 @@ import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.rea
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
-import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.template.react.svg?url";
 // import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 // import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
@@ -77,11 +77,7 @@ import {
 
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 
-import { getFolderInfo } from "@docspace/shared/api/files";
-
 import MobileView from "./MobileView";
-import ActivateAIDialog from "../../dialogs/ActivateAIDialog";
-import ClientSimpleTopUpDialog from "../../EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 
 import {
   getManagerSection,
@@ -98,14 +94,15 @@ const ArticleMainButtonContent = (props) => {
 
     isPrivacy,
     startUpload,
+    resolveOpenFolderTarget,
     setAction,
     setSelectFileDialogVisible,
     setMainButtonVisible,
     selectFileDialogVisible,
     selectFileFormRoomDialogVisible,
     setSelectFileFormRoomDialogVisible,
-    selectFileAiKnowledgeDialogVisible,
-    setSelectFileAiKnowledgeDialogVisible,
+    setSelectFileKnowledgeRoomDialogVisible,
+    knowledgeUploadAccept,
     showArticleLoader,
     isFavoritesFolder,
     isRecentFolder,
@@ -114,8 +111,9 @@ const ArticleMainButtonContent = (props) => {
 
     currentFolderId,
     currentRoomType,
+    vectorizationEnabled,
+    isAiRoomsOff,
     isRoomsFolder,
-    isAIAgentsFolder,
     isArchiveFolder,
 
     setOformFromFolderId,
@@ -152,25 +150,8 @@ const ArticleMainButtonContent = (props) => {
     setTemplateGalleryVisible,
     templateGalleryAvailable,
 
-    isChatTab,
-    isResultTab,
-    isKnowledgeTab,
-    isAIRoom,
-    extsFilesVectorized,
     allowInvitingMembers,
 
-    aiConfig,
-    isGracePeriod,
-
-    standalone,
-    isAIReady,
-    isCardLinkedToPortal,
-    enableAIService,
-    getAIConfig,
-    refreshPaymentInfo,
-    setSecurity,
-    isEmptyFilesList,
-    language,
     frameCustomActions,
     rootFolderType,
   } = props;
@@ -267,76 +248,6 @@ const ArticleMainButtonContent = (props) => {
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog, currentFolderId]);
 
-  const onCreateAgent = React.useCallback(() => {
-    if (isGracePeriod) {
-      setQuotaWarningDialogVisible(true);
-      return;
-    }
-
-    const event = new CustomEvent(Events.AGENT_CREATE, {
-      detail: { parentId: currentFolderId, context: "sidebar" },
-    });
-    window.dispatchEvent(event);
-  }, [isGracePeriod, currentFolderId]);
-
-  const [aiFeaturesDialogVisible, setAiFeaturesDialogVisible] =
-    React.useState(false);
-  const [simpleTopUpDialogVisible, setSimpleTopUpDialogVisible] =
-    React.useState(false);
-  const [isActivatingAI, setIsActivatingAI] = React.useState(false);
-
-  const showActivateAIDialog =
-    isAIAgentsFolder && !isAIReady && !isEmptyFilesList;
-
-  const refreshCurrentFolder = React.useCallback(async () => {
-    if (!currentFolderId) return;
-    const updated = await getFolderInfo(currentFolderId);
-    if (updated.security) setSecurity?.(updated.security);
-  }, [currentFolderId, setSecurity]);
-
-  const onAIActivated = React.useCallback(async () => {
-    await Promise.all([
-      getAIConfig?.(),
-      refreshCurrentFolder(),
-      refreshPaymentInfo?.(),
-    ]);
-  }, [getAIConfig, refreshCurrentFolder, refreshPaymentInfo]);
-
-  const onDialogActivate = React.useCallback(async () => {
-    if (!isCardLinkedToPortal) {
-      setAiFeaturesDialogVisible(false);
-      setSimpleTopUpDialogVisible(true);
-      return;
-    }
-
-    try {
-      setIsActivatingAI(true);
-      await enableAIService?.(onAIActivated);
-
-      const event = new CustomEvent(Events.AGENT_CREATE, {
-        detail: { parentId: currentFolderId, context: "sidebar" },
-      });
-      window.dispatchEvent(event);
-      setAiFeaturesDialogVisible(false);
-    } finally {
-      setIsActivatingAI(false);
-    }
-  }, [isCardLinkedToPortal, enableAIService, onAIActivated, currentFolderId]);
-
-  const onMainButtonAgentClick = React.useCallback(() => {
-    // The activation dialog offers a SaaS service to switch on and a wallet to
-    // top up, neither of which a standalone portal has. There the create-agent
-    // event decides instead (GlobalEvents): it reads readiness from the chat
-    // profiles rather than the lagging /ai/config flag, and sends a portal
-    // admin to the AI settings while telling everyone else to ask one.
-    if (showActivateAIDialog && !standalone) {
-      setAiFeaturesDialogVisible(true);
-      return;
-    }
-
-    onCreateAgent();
-  }, [showActivateAIDialog, standalone, onCreateAgent]);
-
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
       toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
@@ -352,28 +263,29 @@ const ArticleMainButtonContent = (props) => {
     [setSelectFileFormRoomDialogVisible],
   );
 
-  const onShowAiKnowledgeSelectFileDialog = React.useCallback(() => {
-    setSelectFileAiKnowledgeDialogVisible(true);
-  }, [setSelectFileAiKnowledgeDialogVisible]);
-
   const onFileChange = React.useCallback(
     async (e) => {
+      const target = resolveOpenFolderTarget();
       const files = await getFilesFromEvent(e);
 
-      createFoldersTree(t, files)
+      createFoldersTree(t, files, target)
         .then((f) => {
-          if (f.length > 0) startUpload(f, null, t);
+          if (f.length > 0) startUpload(f, target, t);
         })
         .catch((err) => {
-          toastr.error(err, null, 0, true);
+          toastr.error(err, undefined, 0, true);
         });
     },
-    [startUpload, t],
+    [startUpload, resolveOpenFolderTarget, t],
   );
 
   const onUploadFileClick = React.useCallback(() => {
     inputFilesElement.current.click();
   }, []);
+
+  const onShowKnowledgeRoomSelectFileDialog = React.useCallback(() => {
+    setSelectFileKnowledgeRoomDialogVisible(true);
+  }, [setSelectFileKnowledgeRoomDialogVisible]);
 
   const onUploadFolderClick = React.useCallback(() => {
     inputFolderElement.current.click();
@@ -489,7 +401,7 @@ const ArticleMainButtonContent = (props) => {
   );
 
   React.useEffect(() => {
-    if (isRoomsFolder || isAIAgentsFolder || isSettingsPage) return;
+    if (isRoomsFolder || isSettingsPage) return;
 
     if (isAccountsPage) {
       const contactsModel = getContactsModel(t);
@@ -511,23 +423,6 @@ const ArticleMainButtonContent = (props) => {
       },
     ];
 
-    if (isAIRoom && isKnowledgeTab) {
-      newUploadActions[0].label = t("EmptyView:UploadDeviceOptionTitle");
-      const uploadFromDocspace = {
-        id: "actions_upload-files-product",
-        className: "main-button_drop-down",
-        icon: MoveReactSvgUrl,
-        label: t("EmptyView:UploadFromPortalTitle"),
-        onClick: onShowAiKnowledgeSelectFileDialog,
-        key: "upload-files-product",
-      };
-
-      setActions([]);
-      setUploadActions([uploadFromDocspace, ...newUploadActions]);
-      setModel([uploadFromDocspace, ...newUploadActions]);
-
-      return;
-    }
 
     const pluginItems = [];
 
@@ -649,6 +544,47 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
+    // Instructions and Knowledge rooms are flat and hold one kind of file:
+    // no folders and no folder upload. An Instructions room takes Markdown
+    // skills (a new empty file has no frontmatter, which the server
+    // refuses); a Knowledge room takes files to index, never edited, and
+    // none at all while vectorization is off.
+    if (
+      currentRoomType === RoomsType.InstructionsRoom ||
+      currentRoomType === RoomsType.KnowledgeRoom
+    ) {
+      const isKnowledgeRoom = currentRoomType === RoomsType.KnowledgeRoom;
+      // Both take files from the workspace (copied in, filtered to what the
+      // room holds) or from the device, in the order the empty view offers.
+      const sourceRoomUploadActions = [
+        {
+          id: "actions_upload-from-storage",
+          className: "main-button_drop-down",
+          icon: MoveReactSvgUrl,
+          label: t("EmptyView:UploadFromPortalTitle"),
+          onClick: onShowKnowledgeRoomSelectFileDialog,
+          key: "upload-from-storage",
+        },
+        {
+          id: "actions_upload-from-device",
+          className: "main-button_drop-down",
+          icon: ActionsUploadReactSvgUrl,
+          label: t("EmptyView:UploadDeviceOptionTitle"),
+          onClick: onUploadFileClick,
+          key: "upload-from-device",
+        },
+      ];
+      const sourceUploadActions =
+        isKnowledgeRoom && !vectorizationEnabled
+          ? []
+          : sourceRoomUploadActions;
+      setUploadActions(sourceUploadActions);
+      setActions([]);
+      setModel(sourceUploadActions);
+
+      return;
+    }
+
     const createNewPdfForm = {
       id: "actions_new-pdf-form",
       className: "main-button_drop-down",
@@ -715,8 +651,8 @@ const ArticleMainButtonContent = (props) => {
     enablePlugins,
     mainButtonItemsList,
     currentRoomType,
+    vectorizationEnabled,
     isRoomsFolder,
-    isAIAgentsFolder,
     isOwner,
     isAdmin,
     isRoomAdmin,
@@ -729,18 +665,18 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     onShowSelectFileDialog,
     onShowFormRoomSelectFileDialog,
-    onShowAiKnowledgeSelectFileDialog,
+    onShowKnowledgeRoomSelectFileDialog,
     onUploadFileClick,
     onUploadFolderClick,
     createActionsForFormRoom,
     isMobileArticle,
 
-    isAIRoom,
-    isKnowledgeTab,
     contactsTab,
   ]);
 
   const isProfile = location.pathname.includes("/profile");
+  // An open AI project is its chat: nothing to create in it.
+  const isAiProjectOpen = currentRoomType === RoomsType.AiProjectRoom;
 
   const getMainButtonVisible = () => {
     let visibilityValue = true;
@@ -752,7 +688,6 @@ const ArticleMainButtonContent = (props) => {
         copyPanelVisible ||
         selectFileDialogVisible ||
         selectFileFormRoomDialogVisible ||
-        selectFileAiKnowledgeDialogVisible ||
         versionHistoryPanelVisible
       );
     }
@@ -767,13 +702,17 @@ const ArticleMainButtonContent = (props) => {
 
     if (!isAccountsPage) visibilityValue = security?.Create;
 
+    // A Knowledge room with vectorization off has nothing to offer: no
+    // upload, no create.
+    // Nothing is created in "AI rooms" until AI is set up on the portal.
+    if (isAiRoomsOff) visibilityValue = false;
+
+    if (currentRoomType === RoomsType.KnowledgeRoom && !vectorizationEnabled)
+      visibilityValue = false;
+
     if (!isMobileArticle) visibilityValue = false;
 
-    if (isAIRoom && (isChatTab || isResultTab)) visibilityValue = false;
-
-    if (isAIAgentsFolder && aiConfig?.aiReadyNeedReset) visibilityValue = false;
-
-    if (showActivateAIDialog && isMobileArticle) visibilityValue = true;
+    if (isAiProjectOpen) visibilityValue = false;
 
     return visibilityValue;
   };
@@ -785,7 +724,6 @@ const ArticleMainButtonContent = (props) => {
   }, [mainButtonVisible]);
 
   const onMainButtonClick = () => {
-    if (isAIAgentsFolder) return onMainButtonAgentClick();
     if (!isAccountsPage) return onCreateRoom();
     if (isContactsGroupsPage) return createGroup(currentFolderId, "sidebar");
   };
@@ -799,18 +737,15 @@ const ArticleMainButtonContent = (props) => {
     isDisabled = isSettingsPage;
   } else if (isAccountsPage) {
     isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
-  } else if ((isChatTab || isResultTab) && isAIRoom) {
-    isDisabled = true;
-  } else if (showActivateAIDialog) {
-    isDisabled = isFrame && disableActionButton;
   } else {
-    isDisabled = (isFrame && disableActionButton) || !security?.Create;
+    isDisabled =
+      (isFrame && disableActionButton) || !security?.Create || isAiRoomsOff;
   }
 
   if (showArticleLoader)
     return isMobileArticle ? null : <ArticleButtonLoader height="32px" />;
 
-  const withMenu = !isRoomsFolder && !isAIAgentsFolder && !isContactsGroupsPage;
+  const withMenu = !isRoomsFolder && !isContactsGroupsPage;
 
   return (
     <>
@@ -820,13 +755,7 @@ const ArticleMainButtonContent = (props) => {
           titleProp={t("Common:Upload")}
           actionOptions={withFrameActions(actions)}
           buttonOptions={!isAccountsPage ? uploadActions : null}
-          withoutButton={
-            isRoomsFolder ||
-            isAIAgentsFolder ||
-            isAccountsPage ||
-            isChatTab ||
-            isResultTab
-          }
+          withoutButton={isRoomsFolder || isAccountsPage}
           withMenu={withMenu}
           mainButtonMobileVisible={
             mainButtonMobileVisible ? mainButtonVisible : null
@@ -846,20 +775,6 @@ const ArticleMainButtonContent = (props) => {
           scale
           title={t("Common:NewRoom")}
           testId="create_new_room_button"
-        />
-      ) : isAIAgentsFolder ? (
-        <Button
-          className={classNames(styles.mainButton, "create-agent-button")}
-          id="rooms-shared_create-agent-button"
-          label={t("Common:NewAgent")}
-          onClick={onMainButtonAgentClick}
-          $currentColorScheme={currentColorScheme}
-          isDisabled={isDisabled || aiConfig?.aiReadyNeedReset}
-          size="small"
-          primary
-          scale
-          title={t("Common:NewAgent")}
-          testId="create_new_agent_button"
         />
       ) : (
         <MainButton
@@ -885,7 +800,13 @@ const ArticleMainButtonContent = (props) => {
         onClick={onInputClick}
         ref={inputFilesElement}
         style={{ display: "none" }}
-        {...(isAIRoom ? { accept: extsFilesVectorized.join(",") } : {})}
+        {...(currentRoomType === RoomsType.KnowledgeRoom &&
+        knowledgeUploadAccept
+          ? { accept: knowledgeUploadAccept }
+          : currentRoomType === RoomsType.InstructionsRoom
+            ? // An Instructions room holds Markdown skills only.
+              { accept: ".md" }
+            : {})}
       />
       <input
         id="customPDFInput"
@@ -909,19 +830,6 @@ const ArticleMainButtonContent = (props) => {
         ref={inputFolderElement}
         style={{ display: "none" }}
       />
-
-      <ActivateAIDialog
-        visible={aiFeaturesDialogVisible}
-        onClose={() => setAiFeaturesDialogVisible(false)}
-        onActivate={onDialogActivate}
-        isActivating={isActivatingAI}
-      />
-      <ClientSimpleTopUpDialog
-        visible={simpleTopUpDialogVisible}
-        onClose={() => setSimpleTopUpDialogVisible(false)}
-        onConfirm={onAIActivated}
-        language={language}
-      />
     </>
   );
 };
@@ -942,13 +850,8 @@ export default inject(
     filesActionsStore,
     currentQuotaStore,
     peopleStore,
-    aiRoomStore,
     filesSettingsStore,
-    currentTariffStatusStore,
-    paymentStore,
-    authStore,
   }) => {
-    const { isChatTab, isResultTab, isKnowledgeTab } = aiRoomStore;
     const { showArticleLoader } = clientLoadingStore;
     const {
       isPrivacyFolder,
@@ -956,11 +859,10 @@ export default inject(
       isRecentFolder,
       isRecycleBinFolder,
       isRoomsFolder,
-      isAIAgentsFolder,
       isArchiveFolder,
       selectedTreeNode,
     } = treeFoldersStore;
-    const { startUpload } = uploadDataStore;
+    const { startUpload, resolveOpenFolderTarget } = uploadDataStore;
     const canCreateEncrypted = uploadDataStore.shouldEncryptCurrentUpload();
     const {
       setSelectFileDialogVisible,
@@ -972,8 +874,7 @@ export default inject(
       selectFileDialogVisible,
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
-      selectFileAiKnowledgeDialogVisible,
-      setSelectFileAiKnowledgeDialogVisible,
+      setSelectFileKnowledgeRoomDialogVisible,
     } = dialogsStore;
 
     const {
@@ -981,7 +882,6 @@ export default inject(
       currentColorScheme,
       currentDeviceType,
       allowInvitingMembers,
-      aiConfig,
       templateGalleryAvailable,
     } = settingsStore;
 
@@ -989,18 +889,20 @@ export default inject(
 
     const { security } = selectedFolderStore;
 
-    const { mainButtonMobileVisible, setMainButtonVisible, isEmptyFilesList } =
-      filesStore;
+    const { mainButtonMobileVisible, setMainButtonVisible } = filesStore;
 
     const currentFolderId = selectedFolderStore.id;
     const currentRoomType = selectedFolderStore.roomType;
+    // Read only while AI services are on; until then a Knowledge room keeps
+    // its upload, the server refuses what it must.
+    const vectorizationEnabled =
+      settingsStore.aiConfig?.vectorizationEnabled !== false;
     const { parentRoomType } = selectedFolderStore;
     const { isFolder } = selectedFolderStore;
 
     const { isAdmin, isOwner, isRoomAdmin, isCollaborator } = userStore.user;
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
-    const { isGracePeriod } = currentTariffStatusStore;
 
     const { setOformFromFolderId, oformsFilter, setTemplateGalleryVisible } =
       oformsStore;
@@ -1011,6 +913,8 @@ export default inject(
     const { createFoldersTree } = filesActionsStore;
 
     return {
+      isAiRoomsOff:
+        treeFoldersStore.isAiHubFolder && settingsStore.aiReady === false,
       setQuotaWarningDialogVisible,
       showText: settingsStore.showText,
       isMobileArticle: settingsStore.isMobileArticle,
@@ -1023,11 +927,11 @@ export default inject(
       isRecycleBinFolder,
 
       isRoomsFolder,
-      isAIAgentsFolder,
       isArchiveFolder,
       selectedTreeNode,
 
       startUpload,
+      resolveOpenFolderTarget,
 
       setSelectFileDialogVisible,
       selectFileDialogVisible,
@@ -1036,6 +940,7 @@ export default inject(
 
       currentFolderId,
       currentRoomType,
+    vectorizationEnabled,
 
       setOformFromFolderId,
       oformsFilter,
@@ -1067,8 +972,8 @@ export default inject(
       isFolder,
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
-      selectFileAiKnowledgeDialogVisible,
-      setSelectFileAiKnowledgeDialogVisible,
+      setSelectFileKnowledgeRoomDialogVisible,
+      knowledgeUploadAccept: filesSettingsStore.knowledgeUploadAccept,
       createFoldersTree,
 
       showWarningDialog,
@@ -1080,26 +985,7 @@ export default inject(
       setTemplateGalleryVisible,
       templateGalleryAvailable,
 
-      isChatTab,
-      isResultTab,
-      isKnowledgeTab,
-      isAIRoom: selectedFolderStore.isAIRoom,
-      extsFilesVectorized: filesSettingsStore.extsFilesVectorized,
       allowInvitingMembers,
-
-      aiConfig,
-
-      isGracePeriod,
-
-      standalone: settingsStore.standalone,
-      isAIReady: paymentStore.isAIReady,
-      isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
-      enableAIService: paymentStore.enableAIService,
-      getAIConfig: settingsStore.getAIConfig,
-      refreshPaymentInfo: authStore.getPaymentInfo,
-      setSecurity: selectedFolderStore.setSecurity,
-      isEmptyFilesList,
-      language: authStore.language ?? "en",
     };
   },
 )(

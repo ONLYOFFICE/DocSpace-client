@@ -628,26 +628,16 @@ self: FilesActionStore,
               : translations?.successRemoveRoom,
         );
 
-        const { rootFolderType } = self.selectedFolderStore;
-        const categoryType = getCategoryTypeByFolderType(rootFolderType, 0);
-        const isAgentDeletion = categoryType === CategoryType.AIAgents;
-
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          event: isAgentDeletion
-            ? AnalyticsEvents.AgentDeleted
-            : AnalyticsEvents.RoomDeleted,
+          event: AnalyticsEvents.RoomDeleted,
           ids: items,
           parentId: roomParentId,
         });
 
         const currentFolderId = self.selectedFolderStore.id;
         if (items.includes(currentFolderId as number)) {
-          if (isAgentDeletion) {
-            self.moveToAIAgentsPage();
-          } else {
-            self.moveToRoomsPage();
-          }
+          self.moveToRoomsPage();
         }
       })
       .finally(() => {

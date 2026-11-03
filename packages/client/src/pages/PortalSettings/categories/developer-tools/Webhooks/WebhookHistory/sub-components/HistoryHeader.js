@@ -130,7 +130,7 @@ const HistoryHeader = (props) => {
       const timeout = setTimeout(() => {
         setIsPendingVisible(true);
       }, 300);
-      await retryWebhooks(checkedEventIds);
+      const requeued = await retryWebhooks(checkedEventIds);
       await emptyCheckedIds();
       clearTimeout(timeout);
       setRetryPendingFalse();
@@ -140,7 +140,7 @@ const HistoryHeader = (props) => {
         configId: id,
       });
       toastr.success(
-        `${t("WebhookRedilivered")}: ${checkedEventIds.length}`,
+        `${t("WebhookRedilivered")}: ${Array.isArray(requeued) ? requeued.length : 0}`,
         <b>{t("Common:Done")}</b>,
       );
     } catch (error) {

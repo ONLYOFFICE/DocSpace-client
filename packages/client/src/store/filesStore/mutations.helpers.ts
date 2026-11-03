@@ -43,6 +43,38 @@ import type { default as TFilesFilter } from "@docspace/shared/api/files/filter"
 import type { default as TRoomsFilter } from "@docspace/shared/api/rooms/filter";
 
 import type { default as FilesStore } from "../FilesStore";
+import { scopeRoomsRequest } from "./fetch.helpers";
+
+function moveHotkeyCaretOffRemovedItems(
+  self: FilesStore,
+  fileIds?: Nullable<(number | string)[]>,
+  folderIds?: Nullable<(number | string)[]>,
+) {
+  const { hotkeyCaret, filesList } = self;
+  if (!hotkeyCaret) return;
+
+  const isRemoved = (item: (typeof filesList)[number]) =>
+    item.isFolder
+      ? !!folderIds?.includes(item.id!)
+      : !!fileIds?.includes(item.id!);
+
+  const caretIndex = filesList.findIndex(
+    (item) =>
+      item.id === hotkeyCaret.id && item.isFolder === hotkeyCaret.isFolder,
+  );
+  if (caretIndex === -1 || !isRemoved(filesList[caretIndex])) return;
+
+  const nextCaret =
+    filesList.slice(caretIndex + 1).find((item) => !isRemoved(item)) ??
+    filesList
+      .slice(0, caretIndex)
+      .reverse()
+      .find((item) => !isRemoved(item)) ??
+    null;
+
+  self.setHotkeyCaret(nextCaret);
+  self.setHotkeyCaretStart(nextCaret);
+}
 
 // State-mutation actions extracted from FilesStore. Side-effectful (not
 // computeds); moved verbatim into free functions over `self: FilesStore`.
@@ -58,16 +90,12 @@ export function removeFilesImpl(
     isRoomsFolder,
     isArchiveFolder,
     isTemplatesFolder,
-    isAIAgentsFolder,
     isFormsFolder,
+    isAiSectionFolder,
   } = self.treeFoldersStore;
 
   const isRooms =
-    isRoomsFolder ||
-    isArchiveFolder ||
-    isTemplatesFolder ||
-    isAIAgentsFolder ||
-    isFormsFolder;
+    isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder || isAiSectionFolder;
 
   let deleteCount = 0;
 
@@ -94,7 +122,12 @@ export function removeFilesImpl(
   const newFilter = isRooms ? self.roomsFilter.clone() : self.filter.clone();
   newFilter.total -= deleteCount;
 
-  if (destFolderId && destFolderId === self.selectedFolderStore.id) return;
+  if (destFolderId && destFolderId === self.selectedFolderStore.id) {
+    self.fetchFiles(destFolderId, self.filter, true, true, false);
+    return;
+  }
+
+  moveHotkeyCaretOffRemovedItems(self, fileIds, folderIds);
 
   if (newFilter.total <= self.filesList.length) {
     const files = fileIds
@@ -168,8 +201,8 @@ export function removeFilesImpl(
     (newFilter.page + 1) * newFilter.pageCount - deleteCount;
   newFilter.pageCount = deleteCount;
   if (isRooms) {
-    const req = isAIAgentsFolder ? api.ai.getAIAgents : api.rooms.getRooms;
-    return req(newFilter as TRoomsFilter)
+    return api.rooms
+      .getRooms(scopeRoomsRequest(self, newFilter as TRoomsFilter))
       .then((res) => {
         const folders = folderIds
           ? self.folders.filter((x) => !folderIds.includes(x.id))

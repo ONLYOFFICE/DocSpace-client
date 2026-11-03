@@ -34,13 +34,18 @@
  */
 
 import { useEffect } from "react";
-import { Navigate } from "react-router";
+import { Navigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 
 type ProtectedAppRouteProps = {
   // Several ids let a route shared by two apps through as long as either of
   // them is on.
   appId: string | string[];
+  // Also admits an address that names a folder while the Private section is
+  // available: it may hold a private room.
+  admitPrivateRooms?: boolean;
+  isPrivateRoomsSectionAvailable: boolean;
+  isFrameOptInSettled: boolean;
   isInstalled: (id: string) => boolean;
   isAppsLoaded: boolean;
   isAppsLoadFailed: boolean;
@@ -54,6 +59,9 @@ const GUEST_RESTRICTED_APPS = new Set(["ai-files"]);
 
 const ProtectedAppRoute = ({
   appId,
+  admitPrivateRooms = false,
+  isPrivateRoomsSectionAvailable,
+  isFrameOptInSettled,
   isInstalled,
   isAppsLoaded,
   isAppsLoadFailed,
@@ -62,6 +70,8 @@ const ProtectedAppRoute = ({
   isGuest,
   children,
 }: ProtectedAppRouteProps) => {
+  const location = useLocation();
+
   useEffect(() => {
     ensureAppsLoaded();
   }, [ensureAppsLoaded]);
@@ -76,14 +86,22 @@ const ProtectedAppRoute = ({
   if (isGuest && appIds.every((id) => GUEST_RESTRICTED_APPS.has(id)))
     return <Navigate to="/dashboard" replace />;
 
-  return appIds.some(isInstalled) ? (
-    children
-  ) : (
-    <Navigate to="/dashboard" replace />
-  );
+  if (appIds.some(isInstalled)) return children;
+
+  const isFolderAddress = new URLSearchParams(location.search).has("folder");
+
+  // Spec: private-rooms/sidebar-section, "Private rooms open inside the section"
+  if (admitPrivateRooms && isFolderAddress && !isFrameOptInSettled)
+    return null;
+  if (admitPrivateRooms && isPrivateRoomsSectionAvailable && isFolderAddress)
+    return children;
+
+  return <Navigate to="/dashboard" replace />;
 };
 
 export default inject<TStore>(({ appsStore, userStore }) => ({
+  isPrivateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
+  isFrameOptInSettled: appsStore.isFrameOptInSettled,
   isInstalled: appsStore.isInstalled,
   isAppsLoaded: appsStore.isLoaded,
   isAppsLoadFailed: appsStore.isLoadFailed,

@@ -103,8 +103,6 @@ export const useChatNoAccess = ({
     getAIConfig,
     refreshPaymentInfo,
     isCardLinkedToPortal,
-    context: "chat",
-    createAgentOnActivate: false,
   });
 
   const goToAISettings = useCallback(

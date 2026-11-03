@@ -133,7 +133,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     setRoomParams({ ...roomParams, tags: newTags });
   };
 
-  const onKeyUp = (e: KeyboardEvent) => {
+  const onKeyDown = (e: KeyboardEvent) => {
     if (isWrongTitle) return;
     if (e.key === "Enter") onCreateRoomTemplate();
   };
@@ -264,7 +264,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
           isWrongTitle={isWrongTitle}
           setIsValidTitle={setIsValidTitle}
           setIsWrongTitle={setIsWrongTitle}
-          onKeyUp={onKeyUp}
+          onKeyDown={onKeyDown}
           onOpenAccessSettings={onOpenAccessSettings}
           createdBy={item.createdBy}
           inviteItems={inviteItems}

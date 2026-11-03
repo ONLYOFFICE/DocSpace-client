@@ -38,7 +38,6 @@ import {
   isFolder as isFolderUtil,
   isRoom as isRoomUtil,
 } from "@docspace/shared/utils/typeGuards";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import type { IContextMenuItemClient } from "SRC_DIR/helpers/plugins/types";
 import type { TContextItem, TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
@@ -52,8 +51,6 @@ type TPluginGroupItem = {
 export const onMultiLoadPluginsImpl = (
 self: ContextOptionsStore,items: TSelectionItem[]
 ): TContextOption[]=> {
-  if (isAIAgents()) return [];
-
   const { enablePlugins } = self.settingsStore;
 
   const pluginItems: TContextOption[] = [];
@@ -137,7 +134,6 @@ self: ContextOptionsStore,items: TSelectionItem[]
 export const onLoadPluginsImpl = (
 self: ContextOptionsStore,item: TContextItem
 ): TContextOption[]=> {
-  if (isAIAgents()) return [];
   // callers always pass an item enriched with
   // contextOptions (see getFilesContextOptions) — the cast keeps the
   // original unchecked access.

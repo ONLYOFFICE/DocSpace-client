@@ -72,7 +72,7 @@ import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryConte
 import { ConvertContext } from "../../../../_contexts/ConvertContext";
 import { AskAIContext } from "../../../../_contexts/AskAIContext";
 import type { TFileItem, TFolderItem } from "../../../../_hooks/useItemList";
-import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { generateFilesItemValue } from "../../../_utils";
 import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
 import { DragContext } from "../../../../_contexts/DragContext";
@@ -149,11 +149,7 @@ const TableViewRow = observer(
       (item as TFolderItem).security?.MoveTo === true;
     const value = generateFilesItemValue(item, isDroppable, index);
 
-    const title = useDecryptedFilename(
-      item.id,
-      item.title,
-      "encrypted" in item ? item.encrypted : false,
-    );
+    const title = useResolvedFileTitle(item);
 
     const titleWithoutExt =
       "fileExst" in item ? getTitleWithoutExt(title, item.fileExst) : title;

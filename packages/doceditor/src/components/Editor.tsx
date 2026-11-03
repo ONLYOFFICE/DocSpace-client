@@ -59,6 +59,7 @@ import {
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
+  type TErrorEvent,
   // onOutdatedVersion,
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
@@ -109,6 +110,10 @@ const Editor = ({
   const { isBase } = useTheme();
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
+  const isEncryptedFile = !!config?.file?.encrypted;
+  // The description of an error the editor frame reported for an encrypted
+  // file; shown in place of the editor.
+  const [frameError, setFrameError] = React.useState<string | null>(null);
 
   const {
     onDocumentReady,
@@ -157,10 +162,12 @@ const Editor = ({
   });
 
   // AI is not available to guests and anonymous viewers — the same rule the
-  // editor's AI plugin init follows in useEditorEvents.
+  // editor's AI plugin init follows in useEditorEvents — nor on an encrypted
+  // file, whose content must not leave the browser.
   useAIAttachFile({
     documentServerUrl,
-    enabled: Boolean(user) && !user?.isVisitor && !isOAuthFrame(),
+    enabled:
+      Boolean(user) && !user?.isVisitor && !isOAuthFrame() && !isEncryptedFile,
     requestStorageFile: onAIRequestStorageFile,
   });
 
@@ -262,21 +269,22 @@ const Editor = ({
     encryption.encryptionKeys &&
     newConfig.editorConfig
   ) {
-    Object.assign(newConfig.editorConfig, {
-      encryptionKeys: encryption.encryptionKeys,
-    });
+    newConfig.editorConfig.encryptionKeys = encryption.encryptionKeys;
   }
 
   newConfig.events = {
     onDocumentReady,
-    onRequestHistoryClose: onSDKRequestHistoryClose,
     onRequestEditRights: () =>
       onSDKRequestEditRights(t, fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
     onInfo,
     onWarning: onSDKWarning,
-    onError: onSDKError,
-    onRequestHistoryData: onSDKRequestHistoryData,
+    onError: (event: object) => {
+      onSDKError(event);
+      if (isEncryptedFile) {
+        setFrameError((event as TErrorEvent).data?.errorDescription ?? "");
+      }
+    },
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
@@ -284,8 +292,12 @@ const Editor = ({
     onDownloadAs,
     onUserActionRequired,
     onSubmit,
-    onRequestRefreshFile,
   };
+
+  // Design: private-rooms-editor-contract D16, refresh withheld for an encrypted file
+  if (!isEncryptedFile) {
+    newConfig.events.onRequestRefreshFile = onRequestRefreshFile;
+  }
 
   if (
     (typeof window !== "undefined" &&
@@ -313,7 +325,10 @@ const Editor = ({
     newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
 
     if (!user?.isVisitor) {
-      newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
+      // Spec: editor-integration, "Decrypted copies only on the user's device"
+      if (!isEncryptedFile) {
+        newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
+      }
       if (
         !isPDFDocument(fileInfo) &&
         (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
@@ -328,7 +343,8 @@ const Editor = ({
     newConfig.events.onRequestReferenceSource = onSDKRequestReferenceSource;
   }
 
-  if (isSharingAccess && !config?.startFilling) {
+  // Sharing is withheld for an encrypted file, as in the client file list.
+  if (isSharingAccess && !config?.startFilling && !isEncryptedFile) {
     newConfig.events.onRequestSharingSettings = onSDKRequestSharingSettings;
   }
 
@@ -340,20 +356,29 @@ const Editor = ({
     }
   }
 
-  if (fileInfo?.security.Rename) {
+  // The real name of an encrypted file lives in its container; the server
+  // title is opaque, and the client and SDK withhold rename as well.
+  if (fileInfo?.security.Rename && !isEncryptedFile) {
     newConfig.events.onRequestRename = (obj: object) =>
       onSDKRequestRename(obj, fileInfo.id);
   }
 
-  if (fileInfo?.security.ReadHistory) {
-    newConfig.events.onRequestHistory = onSDKRequestHistory;
+  // Spec: editor-integration, "Version history withheld in the editor for encrypted files"
+  if (!isEncryptedFile) {
+    newConfig.events.onRequestHistoryClose = onSDKRequestHistoryClose;
+    newConfig.events.onRequestHistoryData = onSDKRequestHistoryData;
+
+    if (fileInfo?.security.ReadHistory) {
+      newConfig.events.onRequestHistory = onSDKRequestHistory;
+    }
+
+    if (fileInfo?.security.EditHistory) {
+      newConfig.events.onRequestRestore = onSDKRequestRestore;
+    }
   }
 
-  if (fileInfo?.security.EditHistory) {
-    newConfig.events.onRequestRestore = onSDKRequestRestore;
-  }
-
-  if (config?.startFilling && !IS_ZOOM) {
+  // Spec: editor-integration, "Share to fill out hidden in a private room"
+  if (config?.startFilling && !IS_ZOOM && !isEncryptedFile) {
     newConfig.events.onRequestStartFilling = onRequestStartFilling;
     newConfig.events.onStartFilling = onStartFilling;
   }
@@ -363,46 +388,61 @@ const Editor = ({
   }
 
   const isEncryptionGating =
-    !!config?.file?.encrypted &&
+    isEncryptedFile &&
     !errorMessage &&
     !isSkipError &&
     encryption.status !== "ready";
 
-  if (isEncryptionGating) {
-    return (
+  const renderMessage = (message: React.ReactNode) => (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+      }}
+    >
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          width: "100%",
+          height: "auto",
+          overflow: "visible",
+          position: "relative",
+          zIndex: 1000,
         }}
       >
-        <div
-          style={{
-            height: "auto",
-            overflow: "visible",
-            position: "relative",
-            zIndex: 1000,
-          }}
-        >
-          <Bar quotaExceededScope={config?.quotaExceededScope} />
-        </div>
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            padding: "24px",
-          }}
-        >
-          {encryption.status === "error"
-            ? t("Common:SomethingWentWrong")
-            : t("Common:LoadingProcessing")}
-        </div>
+        <Bar quotaExceededScope={config?.quotaExceededScope} />
       </div>
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          padding: "24px",
+        }}
+      >
+        {message}
+      </div>
+    </div>
+  );
+
+  if (isEncryptionGating) {
+    return renderMessage(
+      encryption.status === "error"
+        ? t("Common:SomethingWentWrong")
+        : t("Common:LoadingProcessing"),
+    );
+  }
+
+  // Spec: editor-integration, "Editor fails closed without the crypto library"
+  if (frameError !== null) {
+    return renderMessage(
+      <>
+        <div>{t("Common:SomethingWentWrong")}</div>
+        {frameError ? <div>{frameError}</div> : null}
+      </>,
     );
   }
 

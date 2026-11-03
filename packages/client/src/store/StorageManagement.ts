@@ -49,13 +49,11 @@ import {
 import { getRooms } from "@docspace/shared/api/rooms";
 import { getUserList } from "@docspace/shared/api/people";
 import { SortByFieldName, RoomsProviderType } from "@docspace/shared/enums";
-import { getAIAgents } from "@docspace/shared/api/ai";
 
 import type { TPortal } from "@docspace/shared/api/portal/types";
 import type { TFilesUsedSpace } from "@docspace/shared/api/files/types";
 import type { TGetUserList } from "@docspace/shared/api/people/types";
 import type { TGetRooms } from "@docspace/shared/api/rooms/types";
-import type { TGetAgents } from "@docspace/shared/api/ai/types";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -88,8 +86,6 @@ class StorageManagement {
   rooms: unknown[] = [];
 
   accounts: TPeopleListItem[] = [];
-
-  aIAgents: unknown[] = [];
 
   needRecalculating = false;
 
@@ -129,7 +125,7 @@ class StorageManagement {
     const { usersStore } = this.peopleStore;
     const { getPeopleListItem } = usersStore;
     const { isFreeTariff } = this.currentQuotaStore;
-    const { standalone, aiServicesEnabled } = this.settingsStore;
+    const { standalone } = this.settingsStore;
 
     this.userFilterData.pageCount = FILTER_COUNT;
     this.userFilterData.sortBy = SortByFieldName.UsedSpace;
@@ -179,7 +175,6 @@ class StorageManagement {
 
       let roomsList: TGetRooms | undefined;
       let accountsList: TGetUserList | undefined;
-      let aIAgentsList: TGetAgents | undefined;
 
       const requests: Promise<unknown>[] = [
         getPortal(portalAbortRequests.signal),
@@ -192,15 +187,6 @@ class StorageManagement {
           getUserList(this.userFilterData, userAbortRequests.signal),
           getRooms(this.roomFilterData, roomAbortRequests.signal),
         );
-
-        // The AI agents list is served by the AI product, whose controllers
-        // answer 403 once AI is turned off for the portal (Settings ->
-        // Customization -> AI services). Asking anyway rejects the whole
-        // Promise.all below and leaves the page empty behind a 403 toast.
-        if (aiServicesEnabled)
-          requests.push(
-            getAIAgents(this.roomFilterData, roomAbortRequests.signal),
-          );
       }
 
       [
@@ -210,7 +196,6 @@ class StorageManagement {
         this.quotaSettings,
         accountsList,
         roomsList,
-        aIAgentsList,
       ] = (await Promise.all(requests)) as [
         TPortal,
         number,
@@ -218,13 +203,9 @@ class StorageManagement {
         TQuotaSettings,
         TGetUserList | undefined,
         TGetRooms | undefined,
-        TGetAgents | undefined,
       ];
 
       if (roomsList) this.rooms = getFilesListItems(roomsList?.folders);
-
-      if (aIAgentsList)
-        this.aIAgents = getFilesListItems(aIAgentsList?.folders);
 
       if (accountsList)
         this.accounts = accountsList.items.map((user) =>
@@ -270,7 +251,7 @@ class StorageManagement {
     }
   };
 
-  updateQuotaInfo = async (type: "user" | "agent" | "room") => {
+  updateQuotaInfo = async (type: "user" | "room") => {
     const { fetchPortalQuota } = this.currentQuotaStore;
     const { getFilesListItems } = this.filesStore;
     const { usersStore } = this.peopleStore;
@@ -288,9 +269,7 @@ class StorageManagement {
 
     type === "user"
       ? requests.push(getUserList(userFilterData))
-      : type === "agent"
-        ? requests.push(getAIAgents(roomFilterData))
-        : requests.push(getRooms(roomFilterData));
+      : requests.push(getRooms(roomFilterData));
 
     try {
       const [, items] = await Promise.all(requests);
@@ -301,12 +280,6 @@ class StorageManagement {
         );
         return;
       }
-      if (type === "agent") {
-        console.log("agent", (items as TGetAgents).folders);
-        this.aIAgents = getFilesListItems((items as TGetAgents).folders);
-        return;
-      }
-
       this.rooms = getFilesListItems((items as TGetRooms).folders);
     } catch (e) {
       toastr.error(e as string);

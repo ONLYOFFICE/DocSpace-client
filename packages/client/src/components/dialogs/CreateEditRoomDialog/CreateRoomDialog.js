@@ -56,7 +56,8 @@ import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
 import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
-import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
+import { usePrivateRoomKeyGate } from "@docspace/shared/hooks/usePrivateRoomKeyGate";
+import { hasPrivateRoomSecureContext } from "@docspace/shared/services/private-room/create-room-gate";
 
 const CreateRoomDialog = ({
   t,
@@ -74,6 +75,8 @@ const CreateRoomDialog = ({
   enableThirdParty,
   startRoomType,
   isFormsCreate,
+  isAiRoomsCreate,
+  onOpenAiProjectForm,
   onOpenTemplateGallery,
   processCreatingRoomFromData,
   setProcessCreatingRoomFromData,
@@ -97,7 +100,6 @@ const CreateRoomDialog = ({
   const [templateDialogIsVisible, setTemplateDialogIsVisible] = useState(
     !!withTemplateSelector,
   );
-  const [keyConfirmVisible, setKeyConfirmVisible] = useState(false);
   const isMountRef = React.useRef(true);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
@@ -117,7 +119,7 @@ const CreateRoomDialog = ({
     return () => {
       isMountRef.current = false;
     };
-  });
+  }, []);
 
   React.useEffect(() => {
     if (startRoomType) setSelectedRoomType(startRoomType);
@@ -165,41 +167,83 @@ const CreateRoomDialog = ({
     }
   }, [setUserEncryptionKeys]);
 
-  const generateKey = useGenerateKeyFlow({
+  const keyGate = usePrivateRoomKeyGate({
+    t,
     userId,
     accountLabel: accountEmail,
+    hasExistingKeys: !!encryptionKeys?.length,
     refreshKeysFromServer,
-    onSuccess: () => {
+    onKeyGenerated: () => {
       if (!isMountRef.current) return;
       if (!roomParams.isPrivate) applyPrivateRoomType();
     },
-    onError: () => {
-      onCloseRef.current?.();
+    // A creation locked on the Private type cannot go on without a key; one
+    // started from a room-type card keeps its dialog.
+    // Spec: room-membership, "Starting private room creation without a key starts key generation"
+    onKeyGenerationCancelled: () => {
+      if (startRoomType === RoomsTypePrivate || fetchedRoomParams) {
+        onCloseRef.current?.();
+      }
     },
+    onClose,
   });
 
+  // A key list that has not loaded is unknown, never empty: it is fetched
+  // first, and `null` comes back when that fails.
+  // Spec: room-membership, "Starting private room creation without a key starts key generation"
+  const loadOwnKeys = useCallback(async () => {
+    if (encryptionKeys) return encryptionKeys;
+    try {
+      const fresh = (await getEncryptionKeys()) ?? [];
+      setUserEncryptionKeys?.(fresh);
+      return fresh;
+    } catch (error) {
+      console.error("Failed to load keys:", error);
+      return null;
+    }
+  }, [encryptionKeys, setUserEncryptionKeys]);
+
   const keyAutoPromptedRef = useRef(false);
+  const isPrivateStart = startRoomType === RoomsTypePrivate;
   React.useEffect(() => {
-    if (!isTemplateItem || !roomParams.isPrivate) return;
+    if (!(isTemplateItem || isPrivateStart) || !roomParams.isPrivate) return;
     if (encryptionKeys && encryptionKeys.length > 0) return;
     if (keyAutoPromptedRef.current) return;
     keyAutoPromptedRef.current = true;
-    if (!globalThis.crypto?.subtle) {
-      toastr.error(t("Common:EncryptionRequiresHttps"));
-      onCloseRef.current?.();
+
+    const offerFor = (keys) => {
+      if (keys === null) {
+        toastr.error(t("Common:EncryptionKeysLoadFailed"));
+        onCloseRef.current?.();
+        return;
+      }
+      if (keys.length > 0) return;
+      if (!keyGate.offerKeyGeneration()) onCloseRef.current?.();
+    };
+
+    if (encryptionKeys) {
+      offerFor(encryptionKeys);
       return;
     }
-    setKeyConfirmVisible(true);
-  }, [isTemplateItem, roomParams.isPrivate, encryptionKeys, t]);
+    void loadOwnKeys().then((keys) => {
+      if (isMountRef.current) offerFor(keys);
+    });
+  }, [isTemplateItem, isPrivateStart, roomParams.isPrivate, encryptionKeys, t]);
 
-  const setRoomType = (newRoomType) => {
+  const setRoomType = async (newRoomType) => {
     if (newRoomType === RoomsTypePrivate) {
-      if (!globalThis.crypto?.subtle) {
+      if (!hasPrivateRoomSecureContext()) {
         toastr.error(t("Common:EncryptionRequiresHttps"));
         return;
       }
-      if (!encryptionKeys || encryptionKeys.length === 0) {
-        setKeyConfirmVisible(true);
+      const keys = await loadOwnKeys();
+      if (!isMountRef.current) return;
+      if (keys === null) {
+        toastr.error(t("Common:EncryptionKeysLoadFailed"));
+        return;
+      }
+      if (keys.length === 0) {
+        keyGate.offerKeyGeneration();
         return;
       }
     }
@@ -217,14 +261,10 @@ const CreateRoomDialog = ({
     }));
   };
 
-  const onConfirmGenerateKey = () => {
-    setKeyConfirmVisible(false);
-    generateKey.request();
-  };
+  const onConfirmGenerateKey = keyGate.confirmKeyGeneration;
 
   const onCancelGenerateKey = () => {
-    setKeyConfirmVisible(false);
-    if (roomParams.isPrivate) onCloseRef.current?.();
+    keyGate.cancelKeyGeneration(!!roomParams.isPrivate);
   };
 
   const isRoomTitleChanged = roomParams?.title?.trim() === "";
@@ -241,7 +281,7 @@ const CreateRoomDialog = ({
     }
   };
 
-  const onKeyUpHandler = (e) => {
+  const onKeyDownHandler = (e) => {
     if (isWrongTitle) return;
     if (e.keyCode === 13) onCreateRoom();
   };
@@ -352,7 +392,7 @@ const CreateRoomDialog = ({
   return (
     <>
       <ConfirmationModal
-        visible={keyConfirmVisible}
+        visible={keyGate.keyConfirmVisible}
         title={t("Common:PrivateRoomKeyRequiredTitle")}
         message={t("Common:PrivateRoomKeyRequiredDescription")}
         confirmLabel={t("Common:ContinueButton")}
@@ -360,7 +400,7 @@ const CreateRoomDialog = ({
         onCancel={onCancelGenerateKey}
         zIndex={410}
       />
-      {generateKey.modals}
+      {keyGate.keyGenerationModals}
       <ModalDialog
         displayType="aside"
         withBodyScroll
@@ -414,13 +454,17 @@ const CreateRoomDialog = ({
               isExternalShareRestricted={isExternalShareRestricted}
               processCreatingRoomFromData={processCreatingRoomFromData}
               isFormsCreate={isFormsCreate}
+              isAiRoomsCreate={isAiRoomsCreate}
+              onOpenAiProjectForm={onOpenAiProjectForm}
               onOpenTemplateGallery={onOpenTemplateGallery}
               setTemplateDialogIsVisible={setTemplateDialogIsVisible}
             />
           ) : (
             <SetRoomParams
               t={t}
-              disabledChangeRoomType={Boolean(startRoomType) || isFormsCreate}
+              disabledChangeRoomType={
+                Boolean(startRoomType) || isFormsCreate || isAiRoomsCreate
+              }
               isTemplateSelected={isTemplateSelected}
               setIsOauthWindowOpen={setIsOauthWindowOpen}
               tagHandler={tagHandler}
@@ -434,7 +478,7 @@ const CreateRoomDialog = ({
               setIsValidTitle={setIsValidTitle}
               setIsWrongTitle={setIsWrongTitle}
               enableThirdParty={enableThirdParty}
-              onKeyUp={onKeyUpHandler}
+              onKeyDown={onKeyDownHandler}
               templateItem={templateItem}
               fromTemplate={
                 selectionItems.length

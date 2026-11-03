@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { RoomsType } from "@docspace/shared/enums";
+
 // Controls that act on Enter and Space themselves. Only the focused element
 // is tested, never its ancestors: the section and every file row are
 // react-dropzone roots with role="button", and Enter on them opens the item.
@@ -79,6 +81,8 @@ const NAVIGATION_KEYS = [
 
 const SELECTION_KEYS = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
 
+const MODIFIER_KEYS = ["Shift", "Control", "Alt", "Meta", "AltGraph"];
+
 /**
  * Hands the focus to the list once its hotkeys have taken an arrow key from
  * another element. A closed menu gives the focus back to its "..." button; if
@@ -112,6 +116,11 @@ export const isContextMenuOpen = () =>
 export const isKeyOwnedByFocus = (e: KeyboardEvent) => {
   if (e.key === "Tab") return true;
 
+  // A modifier pressed on its own is no hotkey. Its keydown comes before the
+  // key it modifies, and handing the focus to the list there sent Shift+Tab
+  // backwards from the list instead of from the focused control.
+  if (MODIFIER_KEYS.includes(e.key)) return true;
+
   const target = e.target;
   if (!(target instanceof Element)) return false;
 
@@ -131,3 +140,17 @@ export const isKeyOwnedByFocus = (e: KeyboardEvent) => {
 
   return false;
 };
+
+/**
+ * The create hotkeys (Shift+D/S/P/O for a file, Shift+F for a folder) do
+ * nothing in the flat AI source rooms. Both only take uploads (an
+ * Instructions room Markdown skills, which a new empty file is not);
+ * neither holds folders. The
+ * rooms keep `security.Create` for uploading, so the right alone cannot
+ * tell these hotkeys apart from the "+ New" menu.
+ */
+export const isCreateHotkeyBlockedInRoom = (
+  roomType?: RoomsType | null,
+): boolean =>
+  roomType === RoomsType.InstructionsRoom ||
+  roomType === RoomsType.KnowledgeRoom;

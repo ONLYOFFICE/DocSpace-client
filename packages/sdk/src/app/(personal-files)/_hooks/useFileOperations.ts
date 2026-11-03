@@ -37,6 +37,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 import {
   copyToFolder,
@@ -50,8 +51,11 @@ import { getApps } from "@docspace/shared/api/apps";
 import type {
   TFolder,
   TFile,
+  TFileSecurity,
+  TFolderSecurity,
   TGetFolder,
 } from "@docspace/shared/api/files/types";
+import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { ConflictResolveType, FolderType } from "@docspace/shared/enums";
@@ -62,6 +66,14 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useEncryptedFileActions } from "@/app/(docspace)/_contexts/EncryptedFileActionsContext";
 import { PAGE_COUNT } from "@/utils/constants";
+import { resolveFolderTarget } from "@docspace/shared/services/private-room/upload-target";
+import {
+  getSelectorTransfer,
+  getShowEncryptedTransferBanner,
+  planPrivateTransfer,
+} from "@docspace/shared/services/private-room/private-transfer";
+import { getIsDisabled } from "@docspace/shared/utils/filesSelector";
+import { getEncryptedOperationErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import useOperationToast from "./useOperationToast";
 import type {
   TFileItem,
@@ -92,7 +104,22 @@ export type SelectorInitData = {
   hasNextPage: boolean;
 };
 
-export default function useFileOperations() {
+/** Where a transfer to the folder lands; null when its path cannot be read. */
+const resolveDestination = (folderId: number | string) =>
+  resolveFolderTarget({ id: folderId }).catch(() => null);
+
+type UseFileOperationsOptions = {
+  /** The standard upload, with its conflict check, for decrypted copies. */
+  uploadDecryptedFiles: (
+    files: File[],
+    folderId: number | string,
+  ) => Promise<void>;
+};
+
+export default function useFileOperations({
+  uploadDecryptedFiles,
+}: UseFileOperationsOptions) {
+  const { t } = useTranslation(["Common"]);
   const router = useRouter();
   const { showCopyToast, showMoveToast } = useOperationToast();
   const filesListStore = useFilesListStore();
@@ -134,6 +161,16 @@ export default function useFileOperations() {
     setOperationProgress(null);
   }, []);
 
+  // Spec: private-rooms/sdk-surface, "Encrypted errors are localized"
+  const toErrorText = useCallback(
+    (error: unknown) => {
+      if (typeof error === "string" && error) return error;
+      if (encryptedActions) return getEncryptedOperationErrorMessage(t, error);
+      return error instanceof Error ? error.message : String(error);
+    },
+    [encryptedActions, t],
+  );
+
   const trackOperation = useCallback(
     async (
       operationId: string,
@@ -152,7 +189,9 @@ export default function useFileOperations() {
         while (!finished) {
           const result = await getOperationProgress(
             operationId,
-            "Operation failed",
+            encryptedActions
+              ? t("Common:EncryptedOperationFailed")
+              : "Operation failed",
             true,
           );
           if (result) {
@@ -174,11 +213,11 @@ export default function useFileOperations() {
         setOperationProgress((prev) =>
           prev ? { ...prev, alert: true } : prev,
         );
-        toastr.error(error instanceof Error ? error.message : String(error));
+        toastr.error(toErrorText(error));
         progressTimerRef.current = setTimeout(clearProgress, 5000);
       }
     },
-    [clearProgress],
+    [clearProgress, encryptedActions, t, toErrorText],
   );
 
   const openSelector = useCallback(
@@ -230,10 +269,10 @@ export default function useFileOperations() {
 
         setSelectorDialogVisible(true);
       } catch (error) {
-        toastr.error(error instanceof Error ? error.message : String(error));
+        toastr.error(toErrorText(error));
       }
     },
-    [],
+    [toErrorText],
   );
 
   const requestCopy = useCallback(
@@ -273,7 +312,11 @@ export default function useFileOperations() {
         !item.isFolder &&
         (item as TFileItem).encrypted
       ) {
-        await encryptedActions.duplicateFile(item as TFileItem);
+        try {
+          await encryptedActions.duplicateFile(item as TFileItem);
+        } catch (error) {
+          toastr.error(toErrorText(error));
+        }
         return;
       }
 
@@ -298,10 +341,10 @@ export default function useFileOperations() {
           router.refresh();
         }
       } catch (error) {
-        toastr.error(error instanceof Error ? error.message : String(error));
+        toastr.error(toErrorText(error));
       }
     },
-    [router, trackOperation, encryptedActions],
+    [router, trackOperation, encryptedActions, toErrorText],
   );
 
   const closeSelectorDialog = useCallback(() => {
@@ -401,21 +444,59 @@ export default function useFileOperations() {
 
       let serverItems: (TFileItem | TFolderItem)[] = pendingItems;
       if (encryptedActions) {
-        const encryptedFiles = pendingItems.filter(
-          (i) => !i.isFolder && (i as TFileItem).encrypted,
-        ) as TFileItem[];
-        if (encryptedFiles.length) {
-          serverItems = pendingItems.filter(
-            (i) => !(!i.isFolder && (i as TFileItem).encrypted),
-          );
-          try {
-            if (isMove)
-              await encryptedActions.moveFiles(encryptedFiles, destFolderId);
-            else await encryptedActions.copyFiles(encryptedFiles, destFolderId);
-          } catch (error) {
-            toastr.error(
-              error instanceof Error ? error.message : String(error),
+        const destination = await resolveDestination(destFolderId);
+        // Spec: private-rooms/sdk-surface, "Moves stay inside the private room"
+        const plan = planPrivateTransfer({
+          items: pendingItems,
+          sourceInPrivateRoom: true,
+          sourceRoomId: encryptedActions.roomId,
+          move: isMove,
+          dest: destination
+            ? {
+                insidePrivateRoom: destination.isPrivate,
+                roomId: destination.encryptionRoomId,
+              }
+            : null,
+        });
+
+        if (plan.kind === "refuse-into") {
+          toastr.error(t("Common:CannotTransferToPrivateRoom"));
+          serverItems = [];
+        } else if (plan.kind === "refuse-folder-out") {
+          toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
+          serverItems = [];
+        } else if (plan.kind === "refuse-move-into") {
+          toastr.error(t("Common:CannotMoveToAnotherPrivateRoom"));
+          serverItems = [];
+        } else {
+          const transfer = getSelectorTransfer({
+            plan,
+            selection: pendingItems,
+            selectedItemId: destFolderId,
+            isCopy: !isMove,
+            isMove,
+          });
+          if (transfer.kind === "encrypted") {
+            if (transfer.movesIntoItself) {
+              toastr.error(t("Common:MoveToFolderMessage"));
+            }
+            if (transfer.refusedFolders) {
+              toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
+            }
+            serverItems = pendingItems.filter((i) =>
+              i.isFolder
+                ? transfer.folderIds.includes(i.id as number)
+                : transfer.fileIds.includes(i.id as number),
             );
+            try {
+              await encryptedActions.copyFiles(
+                transfer.encryptedFiles as unknown as TFileItem[],
+                destFolderId,
+                uploadDecryptedFiles,
+              );
+            } catch (error) {
+              toastr.error(toErrorText(error));
+            }
           }
         }
       }
@@ -464,12 +545,20 @@ export default function useFileOperations() {
           destFolderTitle,
         );
       } catch (error) {
-        toastr.error(error instanceof Error ? error.message : String(error));
+        toastr.error(toErrorText(error));
       }
 
       setPendingItems([]);
     },
-    [selectorMode, pendingItems, executeOperation, encryptedActions],
+    [
+      selectorMode,
+      pendingItems,
+      executeOperation,
+      encryptedActions,
+      uploadDecryptedFiles,
+      t,
+      toErrorText,
+    ],
   );
 
   const confirmConflict = useCallback(
@@ -489,13 +578,13 @@ export default function useFileOperations() {
           dest.destFolderTitle,
         );
       } catch (error) {
-        toastr.error(error instanceof Error ? error.message : String(error));
+        toastr.error(toErrorText(error));
       } finally {
         setPendingItems([]);
         setConflictItems([]);
       }
     },
-    [pendingItems, executeOperation],
+    [pendingItems, executeOperation, toErrorText],
   );
 
   const closeConflictDialog = useCallback(() => {
@@ -510,10 +599,59 @@ export default function useFileOperations() {
     .filter((i) => i.isFolder)
     .map((i) => i.id as number);
 
-  // True when at least one pending file is encrypted; drives the info-bar
-  // warning shown in FilesSelector when source is a private room.
-  const pendingHasEncrypted = pendingItems.some(
-    (i) => !i.isFolder && (i as TFileItem).encrypted,
+  // Spec: private-rooms/sdk-surface, "Moves stay inside the private room"
+  const selectorPinnedRootId =
+    encryptedActions && selectorMode === "move"
+      ? encryptedActions.roomId
+      : undefined;
+
+  const showEncryptedTransferBanner =
+    !!encryptedActions &&
+    getShowEncryptedTransferBanner({
+      selection: pendingItems as unknown as Parameters<
+        typeof getShowEncryptedTransferBanner
+      >[0]["selection"],
+      sourceInPrivateRoom: true,
+      isCopy: selectorMode === "copy",
+    });
+
+  /** The client's destination rules when the picker opens in a private room. */
+  const getSelectorIsDisabled = useCallback(
+    (
+      isFirstLoad: boolean,
+      isSelectedParentFolder: boolean,
+      selectedItemId: string | number | undefined,
+      selectedItemType: "rooms" | "files" | undefined,
+      isRoot: boolean,
+      selectedItemSecurity?: TFileSecurity | TFolderSecurity | TRoomSecurity,
+      selectedFileInfo?: unknown,
+      isDisabledFolder?: boolean,
+      _isInsideKnowledge?: boolean,
+      _isInsideResultStorage?: boolean,
+      isInsidePrivateRoom?: boolean,
+    ) =>
+      encryptedActions
+        ? getIsDisabled(
+            isFirstLoad,
+            isSelectedParentFolder,
+            String(filesListStore.currentFolder?.id) === String(selectedItemId),
+            selectedItemType === "rooms",
+            isRoot,
+            selectorMode === "copy",
+            selectorMode === "move",
+            false,
+            false,
+            selectedItemSecurity,
+            undefined,
+            !!selectedFileInfo,
+            pendingItems.some((i) => i.isFolder),
+            selectorMode === "restore",
+            isDisabledFolder,
+            isInsidePrivateRoom,
+            true,
+          )
+        : isFirstLoad || isRoot,
+    [encryptedActions, filesListStore, selectorMode, pendingItems],
   );
 
   return {
@@ -521,7 +659,9 @@ export default function useFileOperations() {
     selectorMode,
     hasRooms,
     pendingItemCount: pendingItems.length,
-    pendingHasEncrypted,
+    selectorPinnedRootId,
+    showEncryptedTransferBanner,
+    getSelectorIsDisabled,
     foldersTree,
     selectorInitData,
     disabledItems,

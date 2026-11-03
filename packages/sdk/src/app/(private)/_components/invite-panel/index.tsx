@@ -36,21 +36,17 @@
 "use client";
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 import type { TUser } from "@docspace/shared/api/people/types";
 import { RoomsType } from "@docspace/shared/enums";
-import { ProgressBar } from "@onlyoffice/apps-ui-kit/components/progress-bar";
 
 import InvitePanel from "@/app/(rooms)/_components/invite-panel";
 
 import { usePrivateInviteFlow } from "../../_hooks/usePrivateInviteFlow";
 
-// Thin wrapper around (rooms)/invite-panel:
-//   - locks isPrivateRoom=true so external-links / groups / guests UI hides;
-//   - hooks onInviteSubmitted to addMembersToEncryptedRoom via the flow hook.
-// The base panel already accepts `isPrivateRoom` and gates ExternalLinks
-// (added during v1); the only thing we add is the post-invite encryption fan-out.
+// Thin wrapper around (rooms)/invite-panel: `isPrivateRoom` hides external
+// links, groups and guests, and the flow hook unlocks before the security
+// update and re-wraps the file keys after it.
 
 type PrivateInvitePanelProps = {
   visible: boolean;
@@ -71,9 +67,7 @@ const PrivateInvitePanel: React.FC<PrivateInvitePanelProps> = ({
   defaultAccess,
   onMembersUpdated,
 }) => {
-  const { t } = useTranslation(["Common"]);
-  const { onInviteSubmitted, onBeforeSubmit, reencryptProgress } =
-    usePrivateInviteFlow();
+  const { onInviteSubmitted, onBeforeSubmit } = usePrivateInviteFlow();
 
   const handleInviteSubmitted = React.useCallback(
     (memberIds: string[], displayNames: Record<string, string>) =>
@@ -81,39 +75,20 @@ const PrivateInvitePanel: React.FC<PrivateInvitePanelProps> = ({
     [onInviteSubmitted, roomId],
   );
 
-  // Compute integer percentage for the progress bar. The initial onProgress
-  // call passes (0, total) which would show 0%; subsequent calls increment
-  // processed so the bar advances as each file's DEK is re-wrapped.
-  const reencryptPercent =
-    reencryptProgress !== null && reencryptProgress.total > 0
-      ? Math.floor(
-          (reencryptProgress.processed / reencryptProgress.total) * 100,
-        )
-      : 0;
-
   return (
-    <>
-      <InvitePanel
-        visible={visible}
-        onClose={onClose}
-        roomId={roomId}
-        roomType={RoomsType.CustomRoom}
-        defaultAccess={defaultAccess}
-        user={user}
-        isPrivateRoom
-        culture={culture}
-        onMembersUpdated={onMembersUpdated}
-        onBeforeSubmit={onBeforeSubmit}
-        onInviteSubmitted={handleInviteSubmitted}
-      />
-      {reencryptProgress !== null ? (
-        <ProgressBar
-          percent={reencryptPercent}
-          label={t("Common:ReEncryptingFiles")}
-          data-testid="reencrypt-progress-bar"
-        />
-      ) : null}
-    </>
+    <InvitePanel
+      visible={visible}
+      onClose={onClose}
+      roomId={roomId}
+      roomType={RoomsType.CustomRoom}
+      defaultAccess={defaultAccess}
+      user={user}
+      isPrivateRoom
+      culture={culture}
+      onMembersUpdated={onMembersUpdated}
+      onBeforeSubmit={onBeforeSubmit}
+      onInviteSubmitted={handleInviteSubmitted}
+    />
   );
 };
 

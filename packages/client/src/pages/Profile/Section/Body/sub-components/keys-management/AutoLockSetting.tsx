@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useId, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -53,6 +53,7 @@ import styles from "./AutoLockSetting.module.scss";
 
 export const AutoLockSetting = () => {
   const { t } = useTranslation(["Common"]);
+  const labelId = useId();
   const [presetId, setPresetId] = useState<AutoLockPresetId>(() =>
     getCurrentAutoLockPresetId(),
   );
@@ -80,9 +81,9 @@ export const AutoLockSetting = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} role="group" aria-labelledby={labelId}>
       <div className={styles.label}>
-        <Text fontSize="13px" fontWeight={600}>
+        <Text id={labelId} fontSize="13px" fontWeight={600}>
           {t("Common:AutoLockLabel")}
         </Text>
         <Text fontSize="12px" color="var(--text-secondary)">

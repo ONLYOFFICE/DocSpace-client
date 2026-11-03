@@ -170,7 +170,6 @@ const KnowledgeUploadSelectorDialog = observer(() => {
       isMultiSelect
       withRecentTreeFolder
       withFavoritesTreeFolder
-      withAIAgentsTreeFolder
       isRoomsOnly={false}
       isThirdParty={false}
       withCreate={false}

@@ -93,6 +93,23 @@ describe("<BetaBadge />", () => {
     });
   });
 
+  it("shows a given description in place of the default one, followed by the feedback links", async () => {
+    render(
+      <BetaBadge {...baseProps} description="Private rooms are in beta" />,
+    );
+
+    const badge = screen.getByText("BETA");
+    await userEvent.click(badge);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Private rooms are in beta/)).toBeInTheDocument();
+      expect(
+        screen.getByText(/If you have found a bug/),
+      ).toBeInTheDocument();
+    });
+    expect(screen.queryByText(/This is a beta feature/)).not.toBeInTheDocument();
+  });
+
   it("hides feedback links when withOutFeedbackLink is true", async () => {
     render(<BetaBadge {...baseProps} withOutFeedbackLink />);
 

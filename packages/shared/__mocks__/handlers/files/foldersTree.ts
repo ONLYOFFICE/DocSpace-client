@@ -599,8 +599,8 @@ const getFoldersTree = (): TGetRootFolder[] => {
         indexing: false,
         denyDownload: false,
         fileEntryType: 1,
-        id: 6,
-        rootFolderId: 6,
+        id: 7,
+        rootFolderId: 7,
         canShare: false,
         security: {
           Read: true,
@@ -627,7 +627,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
           HistoryExport: true,
         },
         availableShareRights: {},
-        title: "AI agents",
+        title: "AI rooms",
         access: 0,
         shared: false,
         sharedForUser: false,
@@ -652,7 +652,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
           isAnonim: false,
         },
         updated: "2025-12-10T14:13:36.0000000+05:00",
-        rootFolderType: 34,
+        rootFolderType: 41,
         updatedBy: {
           id: "487b33be-9a9c-4270-a61f-d23d2e4f22e4",
           displayName: "asdasd asdadsads",
@@ -673,9 +673,9 @@ const getFoldersTree = (): TGetRootFolder[] => {
       },
       pathParts: [
         {
-          id: 6,
-          title: "AI agents",
-          folderType: 34,
+          id: 7,
+          title: "AI rooms",
+          folderType: 41,
         },
       ],
       startIndex: 0,

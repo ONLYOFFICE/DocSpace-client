@@ -38,17 +38,36 @@ import path from "node:path";
 
 export default defineConfig({
   test: {
-    environment: "node",
+    environment: "jsdom",
+    globals: true,
     clearMocks: true,
-    // __tests__/ holds the Playwright E2E specs
-    include: ["src/**/*.test.{ts,tsx}"],
+    setupFiles: ["./vitest/setupTests.ts"],
+    // ui-kit modules each import their own CSS file. Vitest externalizes
+    // node_modules by default, which hands those modules to Node as-is, and
+    // Node rejects the .css import (ERR_UNKNOWN_FILE_EXTENSION). Inlining
+    // routes them through Vite, which treats the stylesheet like any other.
+    server: {
+      deps: {
+        inline: [/@onlyoffice[\\/]apps-ui-kit/],
+      },
+    },
+    typecheck: {
+      tsconfig: "./tsconfig.vitest.json",
+    },
+    include: ["src/**/*.{test,spec}.{js,ts,jsx,tsx}"],
     exclude: ["node_modules", ".next", "__tests__/**"],
+    testTimeout: 20000,
   },
 
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
       "@docspace/shared": path.resolve(__dirname, "../shared"),
+      PUBLIC_DIR: path.resolve(__dirname, "../../public"),
     },
+  },
+
+  esbuild: {
+    target: "esnext",
   },
 });

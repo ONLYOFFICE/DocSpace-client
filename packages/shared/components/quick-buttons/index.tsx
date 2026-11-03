@@ -66,6 +66,7 @@ import { isRoom } from "../../utils/typeGuards";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
+import styles from "./QuickButtons.module.scss";
 import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
 export const QuickButtons = memo((props: QuickButtonsProps) => {
@@ -224,7 +225,12 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
     !isRoom(item) && item?.isFavorite && !isPublicRoom && !isTrashFolder;
 
   return (
-    <div className="badges additional-badges badges__quickButtons">
+    <div
+      className={classNames(
+        styles.quickButtons,
+        "badges additional-badges badges__quickButtons",
+      )}
+    >
       {!isIndexEditingMode ? (
         <>
           {showLifetimeIcon ? (

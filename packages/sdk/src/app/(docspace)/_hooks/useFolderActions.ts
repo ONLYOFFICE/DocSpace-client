@@ -34,11 +34,12 @@
  */
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import api from "@docspace/shared/api";
 import { copyShareLink } from "@docspace/shared/utils/copy";
+import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -62,6 +63,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
   const { shareKey } = useSettingsStore();
   const openFolderOverride = React.useContext(OpenFolderContext);
   const router = useRouter();
+  const pathname = usePathname();
 
   const openFolder = React.useCallback(
     (folderId: number | string, title: string) => {
@@ -103,7 +105,8 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
     ) => {
       const filter = FilesFilter.getDefault();
       filter.folder = folderId.toString();
-      filter.search = search;
+      // Spec: private-rooms/sdk-surface, "No search in private rooms".
+      if (!isPrivateRoomsRoute(pathname ?? "")) filter.search = search;
 
       const filterUrl = `?${shareKey ? `key=${shareKey}&` : ""}${filter.toUrlParams()}`;
 
@@ -126,6 +129,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
     },
     [
       router,
+      pathname,
       shareKey,
       setCurrentFolderId,
       setCurrentTitle,

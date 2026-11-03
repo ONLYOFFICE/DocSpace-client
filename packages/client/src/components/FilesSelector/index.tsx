@@ -37,10 +37,11 @@ import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Events, FilterType, FolderType } from "@docspace/shared/enums";
+import { FilterType, FolderType } from "@docspace/shared/enums";
 import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { UserStore } from "@docspace/shared/store/UserStore";
 import {
   TFile,
   TFileSecurity,
@@ -68,22 +69,17 @@ import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
-import { FILES_SELECTOR_AGENT_CONTEXT } from "SRC_DIR/store/CreateEditAgentStore";
-import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
-import { getAcceptButtonLabel, getIsDisabled } from "./utils";
+import { usePickerFileTitles } from "@docspace/shared/hooks/usePickerFileTitles";
+import { getAcceptButtonLabel, getCopyTargetRoomTypes } from "./utils";
+import { getIsDisabled } from "@docspace/shared/utils/filesSelector";
+import {
+  getPickedRoomId,
+  getSelectorTransfer,
+  getShowEncryptedTransferBanner,
+} from "@docspace/shared/services/private-room/private-transfer";
 import { getBrandName } from "@docspace/shared/constants/brands";
-
-// The selector cannot create an agent itself: its "New agent" item opens the
-// create dialog through the same event the agents section uses.
-const createAgent = () => {
-  window.dispatchEvent(
-    new CustomEvent(Events.AGENT_CREATE, {
-      detail: { context: FILES_SELECTOR_AGENT_CONTEXT },
-    }),
-  );
-};
 
 let disabledItems: (string | number)[] = [];
 
@@ -121,18 +117,21 @@ const FilesSelectorWrapper = ({
   treeFolders,
   withRecentTreeFolder,
   withFavoritesTreeFolder,
-  withAIAgentsTreeFolder,
   withFormsTreeFolder,
 
   selection,
+  extsFilesVectorized,
+  vectorizationEnabled,
   // disabledItems,
   setConflictDialogData,
   checkFileConflicts,
   itemOperationToFolder,
   copyEncryptedFilesToFolder,
-  sourceIsPrivate,
+  planPrivateTransfer,
+  runPrivateTransferPlan,
   sourceInPrivateRoom,
   privateRoomId,
+  userId,
   clearActiveOperations,
   setSelected,
   setMoveToPanelVisible,
@@ -181,7 +180,6 @@ const FilesSelectorWrapper = ({
 
   withCreate,
   disabledCreatePublicRoom,
-  standalone,
   folderIsShared,
   checkCreating,
   isMultiSelect,
@@ -228,14 +226,6 @@ const FilesSelectorWrapper = ({
       setMoveToPanelVisible(false);
     }
   };
-
-  // Standalone creates agents only with an AI provider connected; without one
-  // the create flow would leave for the settings page, so the selector
-  // offers no "New agent" and says why instead. SaaS keeps it: its create
-  // flow activates AI in place.
-  const hasAiProfiles = useHasAiProfiles();
-  const canCreateAgent = !standalone || hasAiProfiles;
-  const withAgentCreation = isMove || isCopy || isRestore || isRestoreAll;
 
   const onCloseAndDeselectAction = () => {
     setSelected("none");
@@ -297,18 +287,27 @@ const FilesSelectorWrapper = ({
     };
   }, [selection, isCopy, isMove, isFormRoom, t]);
 
-  const encryptedInSelection = React.useMemo(
-    () =>
-      (selection as Array<TFile | TFolder>).filter(
-        (it) =>
-          "fileExst" in it && it.fileExst && (it as TFile).encrypted === true,
-      ) as TFile[],
-    [selection],
-  );
-  const hasEncryptedInSelection = encryptedInSelection.length > 0;
+  const pickerFileTitles = usePickerFileTitles(userId);
 
-  const showEncryptedTransferBanner =
-    !!(isCopy || isMove) && hasEncryptedInSelection && !!sourceIsPrivate;
+  // Instructions and Knowledge rooms appear among the copy and move targets
+  // only when the whole selection can land in them.
+  const roomsSectionTypes = React.useMemo(
+    () =>
+      isCopy || isMove
+        ? getCopyTargetRoomTypes(
+            selection,
+            extsFilesVectorized,
+            vectorizationEnabled,
+          )
+        : undefined,
+    [isCopy, isMove, selection, extsFilesVectorized, vectorizationEnabled],
+  );
+
+  const showEncryptedTransferBanner = getShowEncryptedTransferBanner({
+    selection: selection as Array<TFile | TFolder>,
+    sourceInPrivateRoom,
+    isCopy,
+  });
 
   const onAccept = async (
     selectedItemId: string | number | undefined,
@@ -319,81 +318,97 @@ const FilesSelectorWrapper = ({
     isChecked: boolean,
     selectedTreeNode: TFolder,
     selectedFileInfo: TSelectedFileInfo,
-    isInsideKnowledge?: boolean,
-    isInsideResultStorage?: boolean,
+    _isInsideKnowledge?: boolean,
+    _isInsideResultStorage?: boolean,
     isInsidePrivateRoom?: boolean,
   ) => {
-    if (isCopy && !isEditorDialog && hasEncryptedInSelection) {
+    if ((isMove || isCopy || isRestore || isRestoreAll) && !isEditorDialog) {
+      const destInPrivateRoom =
+        (selectedTreeNode as unknown as { private?: boolean })?.private ===
+          true || isInsidePrivateRoom === true;
       const destInfo = {
-        private:
-          (selectedTreeNode as unknown as { private?: boolean })?.private ===
-            true || isInsidePrivateRoom === true,
+        private: destInPrivateRoom,
+        insidePrivateRoom: destInPrivateRoom,
+        // Spec: private-rooms/file-operations, "Move into another private room is refused", "Copy into another private room needs access to it".
+        roomId:
+          getPickedRoomId(breadCrumbs) ??
+          (isMove && sourceInPrivateRoom ? privateRoomId : undefined),
         rootFolderId: (selectedTreeNode as unknown as { rootFolderId?: number })
           ?.rootFolderId,
         roomType: (selectedTreeNode as unknown as { roomType?: number })
           ?.roomType,
       };
 
-      const regularFileIds: number[] = [];
-      const folderIds: number[] = [];
-      for (const item of selection) {
-        if (
-          ("fileExst" in item && item.fileExst) ||
-          ("contentLength" in item && item.contentLength)
-        ) {
-          if ((item as TFile).encrypted) continue;
-          regularFileIds.push(item.id);
-        } else if (item.id === selectedItemId) {
-          toastr.error(t("Common:MoveToFolderMessage"));
-        } else {
-          folderIds.push(item.id);
-        }
-      }
+      const plan = planPrivateTransfer({
+        items: selection as unknown as Parameters<
+          typeof planPrivateTransfer
+        >[0]["items"],
+        sourceInPrivateRoom: !!sourceInPrivateRoom,
+        sourceRoomId: privateRoomId,
+        move: !!isMove,
+        dest: destInfo,
+      });
+      const transfer = getSelectorTransfer({
+        plan,
+        selection,
+        selectedItemId,
+        isCopy,
+        isMove,
+      });
 
-      if (sourceInPrivateRoom && !destInfo.private && folderIds.length) {
-        toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
-        folderIds.length = 0;
-      }
-
-      if (selectedItemId != null) {
-        await copyEncryptedFilesToFolder(
-          encryptedInSelection,
-          selectedItemId,
-          destInfo,
-        );
-      }
-
-      if (regularFileIds.length || folderIds.length) {
-        const operationData = {
-          destFolderId: selectedItemId,
-          destFolderInfo: selectedTreeNode,
-          folderIds,
-          fileIds: regularFileIds,
-          deleteAfter: false,
-          isCopy,
-          folderTitle,
-          itemsCount: regularFileIds.length + folderIds.length,
-        };
-        try {
-          await itemOperationToFolder(operationData);
-        } catch (error) {
-          console.error(error);
-        }
-      }
-
-      setIsRequestRunning(false);
-      onCloseAndDeselectAction();
-      return;
-    }
-
-    if ((isMove || isCopy || isRestore || isRestoreAll) && !isEditorDialog) {
-      const isPrivateDestination =
-        (selectedTreeNode as unknown as { private?: boolean })?.private ===
-          true || isInsidePrivateRoom === true;
-
-      if (!sourceInPrivateRoom && isPrivateDestination) {
-        toastr.error(t("Common:CannotTransferToPrivateRoom"));
+      if (transfer.kind === "refuse") {
+        runPrivateTransferPlan(plan, selectedItemId!, destInfo, {
+          move: !!isMove,
+        });
         setIsRequestRunning(false);
+        return;
+      }
+
+      if (transfer.kind === "encrypted") {
+        if (transfer.movesIntoItself) {
+          toastr.error(t("Common:MoveToFolderMessage"));
+        }
+        if (transfer.refusedFolders) {
+          toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
+        }
+
+        if (selectedItemId != null && transfer.encryptedFiles.length) {
+          await copyEncryptedFilesToFolder(
+            transfer.encryptedFiles,
+            selectedItemId,
+            {
+              private: destInfo.private,
+              rootFolderId: destInfo.rootFolderId,
+              rootFolderType: (
+                selectedTreeNode as unknown as { rootFolderType?: FolderType }
+              )?.rootFolderType,
+              roomType: destInfo.roomType,
+              deleteSourceOnSuccess: transfer.deleteSourceOnSuccess,
+              sourceRoomId: privateRoomId,
+            },
+          );
+        }
+
+        if (transfer.fileIds.length || transfer.folderIds.length) {
+          const operationData = {
+            destFolderId: selectedItemId,
+            destFolderInfo: selectedTreeNode,
+            folderIds: transfer.folderIds,
+            fileIds: transfer.fileIds,
+            deleteAfter: false,
+            isCopy,
+            folderTitle,
+            itemsCount: transfer.fileIds.length + transfer.folderIds.length,
+          };
+          try {
+            await itemOperationToFolder(operationData);
+          } catch (error) {
+            console.error(error);
+          }
+        }
+
+        setIsRequestRunning(false);
+        onCloseAndDeselectAction();
         return;
       }
 
@@ -436,14 +451,11 @@ const FilesSelectorWrapper = ({
 
         setSelectedItems();
         try {
-          const conflicts =
-            selectedTreeNode.type === FolderType.Knowledge
-              ? []
-              : ((await checkFileConflicts(
-                  selectedItemId,
-                  folderIds,
-                  fileIds,
-                )) as []);
+          const conflicts = (await checkFileConflicts(
+            selectedItemId,
+            folderIds,
+            fileIds,
+          )) as [];
 
           if (conflicts.length) {
             setConflictDialogData(conflicts, operationData);
@@ -527,7 +539,7 @@ const FilesSelectorWrapper = ({
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -536,8 +548,8 @@ const FilesSelectorWrapper = ({
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
     isDisabledFolder?: boolean,
-    isInsideKnowledge?: boolean,
-    isInsideResultStorage?: boolean,
+    _isInsideKnowledge?: boolean,
+    _isInsideResultStorage?: boolean,
     isInsidePrivateRoom?: boolean,
   ) => {
     return getIsDisabled(
@@ -556,9 +568,6 @@ const FilesSelectorWrapper = ({
       includeFolder,
       isRestore,
       isDisabledFolder,
-      isInsideKnowledge,
-      isInsideResultStorage,
-      selectedItemType === "agents",
       isInsidePrivateRoom,
       sourceInPrivateRoom,
     );
@@ -576,25 +585,21 @@ const FilesSelectorWrapper = ({
 
   return (
     <FilesSelector
+      {...pickerFileTitles}
       openRoot={openRootVar}
       disabledItems={disabledItems}
       isRoomDisabled={isRoomDisabled}
       pinnedRootId={
         isMove && sourceInPrivateRoom ? privateRoomId : undefined
       }
-      disabledFolderType={
-        isMove || isCopy || isRestore || isRestoreAll
-          ? (FolderType.ResultStorage as unknown as SdkFolderType)
-          : undefined
-      }
       filterParam={filterParam}
+      roomsSectionTypes={roomsSectionTypes}
       withSubFolders={withSubFolders}
       getIcon={getIcon}
       setIsDataReady={setIsDataReady}
       treeFolders={treeFolders as unknown as FolderDtoInteger[]}
       withRecentTreeFolder={withRecentTreeFolder}
       withFavoritesTreeFolder={withFavoritesTreeFolder}
-      withAIAgentsTreeFolder={withAIAgentsTreeFolder}
       withFormsTreeFolder={withFormsTreeFolder}
       onSetBaseFolderPath={onSetBaseFolderPath}
       isUserOnly={isUserOnly}
@@ -655,14 +660,6 @@ const FilesSelectorWrapper = ({
         (isMove || isCopy || isRestore || isRestoreAll) ?? withCreate ?? false
       }
       disabledCreatePublicRoom={disabledCreatePublicRoom}
-      onCreateAIAgent={
-        withAgentCreation && canCreateAgent ? createAgent : undefined
-      }
-      agentsEmptyDescription={
-        withAgentCreation && !canCreateAgent
-          ? t("Common:EmptyAIAgentsSelectorNoProviderDescription")
-          : undefined
-      }
       filesSettings={filesSettings as unknown as FilesSettingsDto}
       headerProps={headerProps}
       formProps={formProps}
@@ -674,13 +671,8 @@ const FilesSelectorWrapper = ({
       infoBarData={
         showEncryptedTransferBanner
           ? {
-              title: t("Common:EncryptedTransferBannerTitle", {
-                defaultValue: "Encrypted files",
-              }),
-              description: t("Common:EncryptedTransferBannerDescription", {
-                defaultValue:
-                  "If you move or copy encrypted files outside this private room, they will be saved in decrypted form.",
-              }),
+              title: t("Common:EncryptedTransferBannerTitle"),
+              description: t("Common:EncryptedTransferBannerDescription"),
             }
           : undefined
       }
@@ -699,6 +691,7 @@ export default inject(
       dialogsStore,
       filesStore,
       infoPanelStore,
+      userStore,
     }: {
       settingsStore: SettingsStore;
       selectedFolderStore: SelectedFolderStore;
@@ -708,6 +701,7 @@ export default inject(
       dialogsStore: DialogsStore;
       filesStore: FilesStore;
       infoPanelStore: InfoPanelStore;
+      userStore: UserStore;
     },
     {
       isCopy,
@@ -725,7 +719,6 @@ export default inject(
       id: selectedId,
       parentId,
       rootFolderType,
-      private: sourceIsPrivate,
       shared,
       navigationPath,
       isRoom,
@@ -741,6 +734,8 @@ export default inject(
       checkFileConflicts,
       setSelectedItems,
       copyEncryptedFilesToFolder,
+      planPrivateTransfer,
+      runPrivateTransferPlan,
     } = filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
@@ -872,6 +867,9 @@ export default inject(
       setRestorePanelVisible,
 
       selection: selectionsWithoutEditing,
+      extsFilesVectorized: filesSettingsStore.extsFilesVectorized,
+      vectorizationEnabled:
+        settingsStore.aiConfig?.vectorizationEnabled !== false,
       disabledItems,
       setConflictDialogData,
       checkFileConflicts,
@@ -884,9 +882,11 @@ export default inject(
       setInfoPanelIsMobileHidden,
       includeFolder,
       copyEncryptedFilesToFolder,
-      sourceIsPrivate,
+      planPrivateTransfer,
+      runPrivateTransferPlan,
       sourceInPrivateRoom: treeFoldersStore.isPrivacyFolder,
       privateRoomId,
+      userId: userStore.user?.id,
 
       setMoveToPublicRoomVisible,
       setBackupToPublicRoomVisible,
@@ -894,7 +894,6 @@ export default inject(
       isExternalShareEnabled: externalShare,
       disabledCreatePublicRoom:
         isExternalShareRestricted && externalShareApplyToRooms,
-      standalone: settingsStore.standalone,
       getIcon,
 
       roomsFolderId,

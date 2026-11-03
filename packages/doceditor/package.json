@@ -67,6 +67,7 @@
     "@types/react-dom": "19.2.3",
     "cross-env": "^10.1.0",
     "css-minimizer-webpack-plugin": "^7.0.4",
+    "jsdom": "^27.4.0",
     "nconf": "0.12.1",
     "prettier": "^3.9.6",
     "sass": "1.79.6",

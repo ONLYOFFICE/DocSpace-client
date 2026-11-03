@@ -58,7 +58,6 @@ import {
   AccountsSearchArea,
   EmployeeStatus,
   EmployeeType,
-  RoomsType,
 } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
@@ -67,7 +66,6 @@ import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
-import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import Filter from "@docspace/shared/api/people/filter";
@@ -80,7 +78,6 @@ import {
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
   getTopFreeRole,
-  getViewerRole,
   isPaidUserRole,
 } from "../utils";
 
@@ -188,26 +185,20 @@ const Item = ({
       : isRolePaid &&
         (type === EmployeeType.Guest || type === EmployeeType.User);
 
-  const isReadOnlyFiltered =
-    roomType === RoomsType.AIRoom && type === EmployeeType.Guest;
-
   const isGroupRoleFiltered = isRolePaid && item.isGroup;
 
   const filteredAccesses =
     roomId === -1
       ? accesses
-      : isReadOnlyFiltered
-        ? filterNotReadOnlyOptions(accesses)
-        : item.isGroup ||
-            isUserRolesFilterd ||
-            type === EmployeeType.Guest ||
-            type === EmployeeType.User
-          ? filterPaidRoleOptions(accesses)
-          : accesses;
+      : item.isGroup ||
+          isUserRolesFilterd ||
+          type === EmployeeType.Guest ||
+          type === EmployeeType.User
+        ? filterPaidRoleOptions(accesses)
+        : accesses;
 
-  const defaultAccess = isReadOnlyFiltered
-    ? getViewerRole(t, roomType)
-    : isUserRolesFilterd || isGroupRoleFiltered
+  const defaultAccess =
+    isUserRolesFilterd || isGroupRoleFiltered
       ? getTopFreeRole(t, roomType)
       : filteredAccesses.find((option) => option.access === +access);
 

@@ -147,6 +147,7 @@ export async function getFolderInfo(
   folderId: number | string,
   skipRedirect = false,
   share?: string,
+  signal?: AbortSignal,
 ) {
   const headers = share
     ? {
@@ -158,6 +159,7 @@ export async function getFolderInfo(
     method: "get",
     url: `/files/folder/${folderId}`,
     headers,
+    signal,
   };
 
   const res = (await request(options, skipRedirect)) as TFolder;
@@ -405,18 +407,6 @@ export async function getTrashFolderList() {
 //   return request(options);
 // }
 
-/**
- * The one folder title the server refuses with 403 for a reason other than
- * access: a second `.ai` folder in a room's root ("The room already contains
- * the .ai folder", `InvalidOperationException` -> Forbidden). The shared
- * client reads a 403 inside a room as lost access and leaves for the root,
- * so for this title alone the redirect is skipped and the toast stands.
- */
-const AI_FOLDER_TITLE = ".ai";
-
-const skipRedirectForTitle = (title: string): boolean =>
-  title.trim() === AI_FOLDER_TITLE;
-
 export async function createFolder(
   parentFolderId: number | string,
   title: string,
@@ -428,7 +418,7 @@ export async function createFolder(
     data,
   };
 
-  const res = (await request(options, skipRedirectForTitle(title))) as TFolder;
+  const res = (await request(options)) as TFolder;
 
   return res;
 }
@@ -468,7 +458,7 @@ export async function renameFolder(folderId: number, title: string) {
     data,
   };
 
-  const res = (await request(options, skipRedirectForTitle(title))) as TFolder;
+  const res = (await request(options)) as TFolder;
 
   return res;
 }
@@ -836,6 +826,16 @@ export async function finalizeUploadSession(
   return res;
 }
 
+export async function abortUploadSession(
+  folderId: string | number,
+  sessionId: string,
+) {
+  return request({
+    method: "delete",
+    url: `/files/${folderId}/session/${sessionId}`,
+  });
+}
+
 // TODO: Need update res type and remove unknown
 export function uploadFile(url: string, data: unknown) {
   return axios.post(url, data);
@@ -1002,17 +1002,6 @@ export async function getNewFiles(folderId: number | string) {
   const res = (await request({
     method: "get",
     url: `/files/${folderId}/news`,
-  })) as TNewFiles[];
-
-  return res;
-}
-
-export async function getNewFilesAgents() {
-  // Agents are served by the Node AI service now; its /news endpoint forwards
-  // to the same .NET endpoint, so the response shape is identical.
-  const res = (await request({
-    method: "get",
-    url: `/ai/agents/news`,
   })) as TNewFiles[];
 
   return res;
@@ -1378,15 +1367,6 @@ export async function removeFromFavorite(
     data,
   };
   const res = (await request(options)) as boolean;
-  return res;
-}
-
-export async function getIsEncryptionSupport() {
-  const res = (await request({
-    method: "get",
-    url: "/files/@privacy/available",
-  })) as boolean;
-
   return res;
 }
 

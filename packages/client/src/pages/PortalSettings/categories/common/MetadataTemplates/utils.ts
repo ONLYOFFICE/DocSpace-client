@@ -43,6 +43,7 @@ import type {
 } from "@docspace/shared/api/metadata/types";
 import type { TTranslation } from "@docspace/shared/types";
 
+import { SYSTEM_TEMPLATE_NAME } from "./constants";
 import type {
   TDragState,
   TDropLine,
@@ -210,6 +211,26 @@ export const isFieldNameTaken = (fields: TFieldDraft[], form: TFieldForm) => {
   );
 };
 
+export const isTemplateNameReserved = (name: string) =>
+  name.trim().toLowerCase() === SYSTEM_TEMPLATE_NAME.toLowerCase();
+
+export const isTemplateNameTaken = (
+  templates: TMetadataTemplate[],
+  name: string,
+  templateId?: number,
+) => {
+  const normalized = name.trim().toLowerCase();
+
+  return (
+    !!normalized &&
+    templates.some(
+      (template) =>
+        template.id !== templateId &&
+        template.name.trim().toLowerCase() === normalized,
+    )
+  );
+};
+
 export const upsertField = (fields: TFieldDraft[], field: TFieldDraft) =>
   fields.some((item) => item.key === field.key)
     ? fields.map((item) => (item.key === field.key ? field : item))
@@ -309,6 +330,29 @@ export const getTemplateChanges = (
 
   return changes;
 };
+
+export const splitCreatedFields = (
+  created: TMetadataFieldRequest[],
+  template: TMetadataTemplate,
+) => {
+  const taken = new Set(
+    (template.fields ?? []).map(({ name }) => name.trim().toLowerCase()),
+  );
+  const isTaken = ({ name }: TMetadataFieldRequest) =>
+    taken.has(name.trim().toLowerCase());
+
+  return {
+    beforeRemoval: created.filter((field) => !isTaken(field)),
+    afterRemoval: created.filter(isTaken),
+  };
+};
+
+export const leavesTemplateEmpty = (
+  template: TMetadataTemplate,
+  removed: number[],
+  beforeRemoval: TMetadataFieldRequest[],
+) =>
+  (template.fields?.length ?? 0) - removed.length + beforeRemoval.length === 0;
 
 export const hasTemplateChanges = (changes: TTemplateChanges) =>
   changes.isTemplateChanged ||

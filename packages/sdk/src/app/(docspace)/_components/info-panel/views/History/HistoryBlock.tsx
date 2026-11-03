@@ -79,8 +79,12 @@ import {
   parseToDateTime,
 } from "@onlyoffice/apps-ui-kit/utils/date";
 import { getFileExtension } from "@docspace/shared/utils/common";
+import { getFileInfo } from "@docspace/shared/api/files";
 import { getCachedEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
-import { useFilenameCacheVersion } from "@docspace/shared/hooks/useResolvedFileTitle";
+import {
+  useEncryptedFilenameRecovery,
+  useFilenameCacheVersion,
+} from "@docspace/shared/hooks/useResolvedFileTitle";
 import type {
   TFeedAction,
   TFeedData,
@@ -97,6 +101,8 @@ import SortDescReactSvg from "PUBLIC_DIR/images/sort.desc.react.svg";
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import { useDocsSettingsStore } from "@/app/(personal-files)/_store/DocsSettingsStore";
+import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
+import { useEncryptedFileActions } from "@/app/(docspace)/_contexts/EncryptedFileActionsContext";
 
 import { useFeedTranslation } from "./useFeedTranslation";
 import { getFeedInfo } from "./FeedInfo";
@@ -145,6 +151,24 @@ const HistoryBlock = ({
     (feedInfo.targetType === "file" || feedInfo.targetType === "folder");
 
   useFilenameCacheVersion();
+
+  const encryptedActions = useEncryptedFileActions();
+  const docsUserStore = useDocsUserStore();
+  // Spec: private-rooms/sdk-surface, "Decrypted titles in lists and history"
+  useEncryptedFilenameRecovery(
+    feedInfo?.targetType !== "file" || !encryptedActions
+      ? []
+      : [feed, ...feed.related].map(({ data }) => ({
+          id: (data as TFeedData).id,
+          encrypted: true,
+          viewUrl: (data as TFeedData).viewUrl,
+        })),
+    {
+      userId: docsUserStore.user?.id,
+      roomId: encryptedActions?.roomId,
+      loadViewUrl: async (fileId) => (await getFileInfo(fileId)).viewUrl,
+    },
+  );
 
   const isFolder = feedInfo?.targetType === "folder";
   const data = (feed.data ?? {}) as TFeedData;

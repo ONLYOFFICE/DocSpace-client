@@ -77,6 +77,7 @@ export const useMembers = ({
     "CreateEditRoomDialog",
   ]);
   const [searchValue, setSearchValue] = React.useState("");
+  const { getRoomMembers } = api.rooms;
   const [filter, setFilter] = React.useState({
     page: 0,
     startIndex: 0,
@@ -223,21 +224,19 @@ export const useMembers = ({
       roomType === RoomsType.FormRoom;
 
     const requests = [
-      api.rooms
-        .getRoomMembers(
-          roomId,
-          {
-            filterType: 0,
-            startIndex: 0,
-            count: PAGE_COUNT,
-            filterValue: searchValue,
-          },
-          abortController.current?.signal,
-        )
-        .then((res) => {
-          setTotal(res.total);
-          return res.items;
-        }),
+      getRoomMembers(
+        roomId,
+        {
+          filterType: 0,
+          startIndex: 0,
+          count: PAGE_COUNT,
+          filterValue: searchValue,
+        },
+        abortController.current?.signal,
+      ).then((res) => {
+        setTotal(res.total);
+        return res.items;
+      }),
     ];
 
     // abortController.current = null;
@@ -250,17 +249,15 @@ export const useMembers = ({
       roomId
     ) {
       requests.push(
-        api.rooms
-          .getRoomMembers(
-            roomId,
-            {
-              filterType: 2,
-            },
-            abortController.current?.signal,
-          )
-          .then((res) => {
-            return res.items;
-          }),
+        getRoomMembers(
+          roomId,
+          {
+            filterType: 2,
+          },
+          abortController.current?.signal,
+        ).then((res) => {
+          return res.items;
+        }),
       );
     }
 
@@ -280,7 +277,14 @@ export const useMembers = ({
       if (axios.isCancel(error)) return;
       console.error(error);
     }
-  }, [room?.id, room?.roomType, room?.isTemplate, room?.security, searchValue]);
+    }, [
+    room?.id,
+    room?.roomType,
+    room?.isTemplate,
+    room?.security,
+    searchValue,
+    getRoomMembers,
+  ]);
 
   const fetchMoreMembers = async () => {
     setIsLoading(true);
@@ -293,7 +297,7 @@ export const useMembers = ({
     });
 
     try {
-      const data = await api.rooms.getRoomMembers(room.id, {
+      const data = await getRoomMembers(room.id, {
         filterType: 0,
         startIndex: newStartIndex,
         count: PAGE_COUNT,
@@ -396,7 +400,7 @@ export const useMembers = ({
           const newStartIndex = filter.startIndex + PAGE_COUNT - 1;
           const newPageCount = 1;
 
-          const data = await api.rooms.getRoomMembers(room.id, {
+          const data = await getRoomMembers(room.id, {
             filterType: 0,
             startIndex: newStartIndex,
             count: newPageCount,

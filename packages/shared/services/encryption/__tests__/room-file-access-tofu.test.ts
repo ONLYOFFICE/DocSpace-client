@@ -43,6 +43,7 @@ import {
   type RoomMemberPublicKey,
 } from "../room-file-access";
 import {
+  TofuStore,
   getTofuStore,
   resetTofuStores,
   registerKeyMismatchHandler,
@@ -164,6 +165,26 @@ describe("unwrapDekForCurrentUser — TOFU verification on sender public key", (
         fileId: FILE_ID,
       }),
     ).rejects.toBeInstanceOf(AuthenticationError);
+  });
+
+  it("Pin cannot be read", async () => {
+    const resolver = vi.fn<KeyMismatchResolver>(async () => "accept");
+    registerKeyMismatchHandler(resolver);
+    const check = vi
+      .spyOn(TofuStore.prototype, "checkKey")
+      .mockResolvedValue({ kind: "unreadable" });
+
+    await expect(
+      unwrapDekForCurrentUser({
+        fileKeys: legitimateFileKeys,
+        roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+        currentUserId: BOB_ID,
+        currentIdentity: bob,
+        fileId: FILE_ID,
+      }),
+    ).rejects.toBeInstanceOf(AuthenticationError);
+    expect(resolver).not.toHaveBeenCalled();
+    check.mockRestore();
   });
 
   it("invokes the registered global resolver on mismatch and refuses on 'refuse'", async () => {

@@ -251,7 +251,7 @@ describe("TofuStore", () => {
     expect(list[0].keys[0].publicKey).toBe("PKBOBABCDEFGHIJK");
   });
 
-  it("acceptKey appends; previously trusted keys stay trusted", async () => {
+  it("Peer with several keys", async () => {
     const tofu = new TofuStore("alice");
     await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     await tofu.markVerified("bob");
@@ -272,6 +272,18 @@ describe("TofuStore", () => {
 
     expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJK")).kind).toBe("match");
     expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJL")).kind).toBe("match");
+  });
+
+  it("Earlier key listed again", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJL");
+    expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJL")).kind).toBe("match");
+
+    const again = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
+    expect(again.kind).toBe("match");
+    if (again.kind !== "match") return;
+    expect(again.matchedKey.publicKey).toBe("PKBOBABCDEFGHIJK");
   });
 
   it("acceptKey on an already-trusted key only bumps lastSeenAt", async () => {
@@ -651,12 +663,15 @@ describe("TofuStore — per-operation IndexedDB error paths", () => {
     });
   }
 
-  it("getRecord resolves null when the underlying get fires onerror", async () => {
+  it("Pin cannot be read", async () => {
     installFlakyIDB("get");
     const tofu = new TofuStore("alice");
-    // checkKey internally calls getRecord — when read fails, treat as first-seen
+
     const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
-    expect(result.kind).toBe("first-seen");
+    expect(result.kind).toBe("unreadable");
+
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
+    expect(await tofu.list()).toEqual([]);
   });
 
   it("putRecord resolves silently when write fires onerror", async () => {

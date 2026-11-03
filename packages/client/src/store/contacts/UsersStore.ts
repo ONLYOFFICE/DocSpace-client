@@ -48,7 +48,11 @@ import {
   FolderType,
   RoomSearchArea,
 } from "@docspace/shared/enums";
-import { getUserType } from "@docspace/shared/utils/common";
+import {
+  getCategoryType,
+  getUserType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
@@ -61,7 +65,7 @@ import {
   FILTER_INSIDE_GROUPS,
   FILTER_PEOPLE,
 } from "@docspace/shared/utils/filterConstants";
-import { LANGUAGE } from "@docspace/shared/constants";
+import { CategoryType, LANGUAGE } from "@docspace/shared/constants";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import SocketHelper, {
@@ -322,8 +326,11 @@ class UsersStore {
         return;
       }
 
-      const isArchive = pathname.includes("rooms/archived");
-      if (!isArchive && !pathname.includes("rooms/shared")) return;
+      const isPrivate = isPrivateRoomsRoute(pathname);
+      const isArchive = isPrivate
+        ? getCategoryType({ pathname }) === CategoryType.PrivateArchive
+        : pathname.includes("rooms/archived");
+      if (!isArchive && !isPrivate && !pathname.includes("rooms/shared")) return;
 
       // Inside an open room only its own rights are re-read (the type can
       // change the user's role in it): fetchRooms there replaced the room's
@@ -1235,11 +1242,15 @@ class UsersStore {
   };
 
   setSelected = (selected: TContactsSelected) => {
-    const { hotkeyCaret, setHotkeyCaret } = this.contactsHotkeysStore;
+    const { hotkeyCaret, setHotkeyCaret, setHotkeyCaretStart } =
+      this.contactsHotkeysStore;
     this.bufferSelection = null;
     this.selected = selected;
 
-    setHotkeyCaret(this.selection.at(-1) ?? hotkeyCaret);
+    if (!hotkeyCaret) setHotkeyCaret(this.selection.at(-1) ?? null);
+    if (hotkeyCaret && (selected === "none" || selected === "close")) {
+      setHotkeyCaretStart(hotkeyCaret);
+    }
     const selectedUser = this.getUsersBySelected(this.peopleList, selected);
     this.setSelection(selectedUser);
 

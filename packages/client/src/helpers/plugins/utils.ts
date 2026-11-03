@@ -375,17 +375,6 @@ export const getPluginUrl = (url: string, file: string): string => {
   );
 };
 
-export const isAIAgents = (): boolean => {
-  const categoryType = getCategoryType(window.location);
-
-  return (
-    categoryType === CategoryType.Chat ||
-    categoryType === CategoryType.AIAgent ||
-    categoryType === CategoryType.AIAgents ||
-    window.location.pathname.startsWith("/ai-agents")
-  );
-};
-
 export const isSameId = (
   first: number | string | null | undefined,
   second: number | string | null | undefined,

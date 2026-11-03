@@ -109,7 +109,8 @@ The desktop bridge, as found on 2026-10-20:
 
 ## Migration Plan
 
-Single client PR; no data or server migration. Rollback is a revert.
+Client commits on `release/v4.1.0`, one per task; no data or server
+migration. Rollback is a revert.
 
 ## Open Questions
 

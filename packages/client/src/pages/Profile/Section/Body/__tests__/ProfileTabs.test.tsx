@@ -51,10 +51,6 @@ vi.mock("react-router", () => ({
   useLocation: () => ({ pathname: "/profile/keys-management", state: null }),
 }));
 
-vi.mock("@docspace/shared/utils/privateRooms", () => ({
-  isPrivateRoomsEnabled: () => true,
-}));
-
 vi.mock("@onlyoffice/apps-ui-kit/components/tabs", () => ({
   Tabs: ({
     items,
@@ -101,7 +97,15 @@ vi.mock("../sub-components/keys-management", () => ({ default: () => null }));
 const SectionBodyContent = (await import("../index"))
   .default as unknown as React.ComponentType;
 
-const renderProfileTabs = () =>
+type TKeysState = {
+  isSectionAvailable?: boolean;
+  encryptionKeys?: { id: string }[] | null;
+};
+
+const renderProfileTabs = ({
+  isSectionAvailable = true,
+  encryptionKeys = [],
+}: TKeysState = {}) =>
   render(
     <Provider
       settingsStore={{ currentDeviceType: "desktop" }}
@@ -131,7 +135,8 @@ const renderProfileTabs = () =>
       setup={{ getSessions: vi.fn() }}
       filesStore={{ resetSelections: vi.fn() }}
       telegramStore={{ checkTg: vi.fn() }}
-      userStore={{ getEncryptionKeys: vi.fn() }}
+      userStore={{ getEncryptionKeys: vi.fn(), encryptionKeys }}
+      appsStore={{ isPrivateRoomsSectionAvailable: isSectionAvailable }}
     >
       <SectionBodyContent />
     </Provider>,
@@ -152,5 +157,29 @@ describe("Keys management tab carries the Beta badge", () => {
     renderProfileTabs();
 
     expect(screen.getAllByTestId("beta-badge")).toHaveLength(1);
+  });
+});
+
+describe("Keys management tab follows the Private section", () => {
+  it("Section available", () => {
+    renderProfileTabs({ isSectionAvailable: true, encryptionKeys: [] });
+
+    expect(screen.getByTestId("tab-keys-management")).toBeInTheDocument();
+  });
+
+  it("App off, no key", () => {
+    renderProfileTabs({ isSectionAvailable: false, encryptionKeys: [] });
+
+    expect(screen.queryByTestId("tab-keys-management")).toBeNull();
+    expect(screen.getByTestId("tab-login")).toBeInTheDocument();
+  });
+
+  it("App off, key held", () => {
+    renderProfileTabs({
+      isSectionAvailable: false,
+      encryptionKeys: [{ id: "key-1" }],
+    });
+
+    expect(screen.getByTestId("tab-keys-management")).toBeInTheDocument();
   });
 });

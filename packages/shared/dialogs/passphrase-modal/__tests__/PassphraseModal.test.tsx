@@ -523,5 +523,21 @@ describe("PassphraseModal", () => {
         screen.getByRole("button", { name: "Common:CancelButton" }),
       ).toHaveFocus();
     });
+
+    it("A confirmation over a key dialog holds the focus", async () => {
+      const user = userEvent.setup();
+      render(<button type="button">Page</button>);
+      renderModal({ isNew: true });
+      await user.type(getPassphraseInput(), "Correct1horse!battery");
+      await user.keyboard("{Escape}");
+      const confirmation = queryConfirmation();
+      if (!confirmation) throw new Error("The confirmation did not open");
+
+      const presses = within(confirmation).getAllByRole("button").length * 2 + 1;
+      for (let i = 0; i < presses; i += 1) {
+        await user.tab();
+        expect(confirmation.contains(document.activeElement)).toBe(true);
+      }
+    });
   });
 });

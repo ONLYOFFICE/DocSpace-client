@@ -550,7 +550,12 @@ const SectionBodyContent = (props) => {
     <>
       <KnowledgeVectorizationBar />
       <ClientSearchProgress />
-      <FileViewComponent />
+      {/* Where the list is for useRowFocus in every layout: the mobile one
+          has no section scroller to find it by. No box of its own, so the
+          view lays out as before. */}
+      <div data-files-list="" style={{ display: "contents" }}>
+        <FileViewComponent />
+      </div>
     </>
   );
 };

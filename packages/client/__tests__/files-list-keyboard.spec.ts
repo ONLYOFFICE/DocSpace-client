@@ -34,7 +34,7 @@
  */
 
 import { http } from "msw";
-import type { Page } from "@playwright/test";
+import { devices, type Page } from "@playwright/test";
 import {
   settingsHandler,
   TypeSettings,
@@ -144,22 +144,28 @@ const selectedFiles = (page: Page) =>
     { count: FILES_COUNT, offset: FILE_ID_OFFSET },
   );
 
-const openMyDocuments = async (page: Page, baseUrl: string) => {
+const folderHandlers = () => [
+  rootHandler(TEST_PORT),
+  filesSettingsHandler(TEST_PORT),
+  settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+  selfActivationStatusHandler(TEST_PORT, null, false, true),
+  filesListHandler,
+];
+
+const openFolder = async (page: Page, baseUrl: string) => {
   await page.goto(`${baseUrl}/rooms/personal/filter?folder=${FOLDER_ID}`);
-  await expect(page.getByTestId("table-body")).toBeVisible();
   await expect(page.locator(`#file_${fileId(FILES_COUNT)}`)).toBeAttached();
   await page.waitForLoadState("networkidle");
 };
 
+const openMyDocuments = async (page: Page, baseUrl: string) => {
+  await openFolder(page, baseUrl);
+  await expect(page.getByTestId("table-body")).toBeVisible();
+};
+
 test.describe("Files list: the focus follows the keyboard", () => {
   test.beforeEach(async ({ page, mockRequest, baseUrl }) => {
-    mockRequest.use(
-      rootHandler(TEST_PORT),
-      filesSettingsHandler(TEST_PORT),
-      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
-      selfActivationStatusHandler(TEST_PORT, null, false, true),
-      filesListHandler,
-    );
+    mockRequest.use(...folderHandlers());
     await openMyDocuments(page, baseUrl);
   });
 
@@ -488,6 +494,69 @@ test.describe("Files list: the focus follows the keyboard", () => {
 
     await expect.poll(() => selectedFiles(page)).toEqual([4]);
     expect((await focus(page)).isRow).toBe(false);
+  });
+});
+
+// The mobile layout scrolls the page and has no section scroller: the list
+// must still be one Tab stop whose rows the arrows walk. Tab used to land on
+// the first row's name link with nothing selected, and the arrows moved the
+// selection while the focus stayed on that link.
+test.describe("Files list on a phone: the focus follows the keyboard", () => {
+  // A phone, not only its width: on a touch device the floating create
+  // button's menu renders a scroller of the section's class. The browser
+  // type cannot change inside a describe, and is chromium already.
+  const { defaultBrowserType: _browserType, ...phone } = devices["Pixel 5"];
+  test.use(phone);
+
+  test.beforeEach(async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(...folderHandlers());
+    await openFolder(page, baseUrl);
+  });
+
+  test("Tab into the list focuses a row and selects it, and the arrows go on from there", async ({
+    page,
+  }) => {
+    let where = await focus(page);
+    for (let i = 0; i < 40 && !where.row; i += 1) {
+      await page.keyboard.press("Tab");
+      where = await focus(page);
+    }
+
+    expect(where.row).toBe(fileRow(1));
+    expect(where.isRow).toBe(true);
+    await expect.poll(() => selectedFiles(page)).toEqual([1]);
+
+    await page.keyboard.press("ArrowDown");
+    await expect.poll(async () => (await focus(page)).row).toBe(fileRow(2));
+    expect((await focus(page)).isRow).toBe(true);
+    await expect.poll(() => selectedFiles(page)).toEqual([2]);
+  });
+
+  // The section's body holds the focus as the page loads, and there is no
+  // scroller for the arrows to move it into first.
+  test("the arrows take the focus from the page as it loads to the caret row", async ({
+    page,
+  }) => {
+    await page.keyboard.press("ArrowDown");
+    await expect.poll(async () => (await focus(page)).row).toBe(fileRow(1));
+    expect((await focus(page)).isRow).toBe(true);
+    await expect.poll(() => selectedFiles(page)).toEqual([1]);
+  });
+
+  test("the arrows take the focus from a row's control to the caret row", async ({
+    page,
+  }) => {
+    await page.locator(`#${fileRow(1)} a[href]`).first().focus();
+
+    // The first press puts the caret on row 1, which already holds the focus.
+    await page.keyboard.press("ArrowDown");
+    await expect.poll(() => selectedFiles(page)).toEqual([1]);
+
+    // The next one moves it on, and the focus with it: Enter is the row's.
+    await page.keyboard.press("ArrowDown");
+    await expect.poll(async () => (await focus(page)).row).toBe(fileRow(2));
+    expect((await focus(page)).isRow).toBe(true);
+    await expect.poll(() => selectedFiles(page)).toEqual([2]);
   });
 });
 

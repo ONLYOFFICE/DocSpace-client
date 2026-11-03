@@ -49,8 +49,15 @@ export type TRowKey = { id: string; isFolder: boolean };
 
 // Every row of the files list in each view: table, rows and tiles.
 const ROW = ".files-item";
-// The section's own list, not the info panel's scroller that shares the class.
-const LIST = ".section-scroll:not(.info-panel-scroll)";
+// The section's own scroller, by the id of its scrollbar: the info panel's
+// carries the class too, and so does the floating create button's menu on a
+// touch device, rendered before the list even while closed. The mobile layout
+// scrolls the page instead and renders none.
+const SCROLLER = "#sectionScroll .section-scroll";
+// The section's own list: its scroller, which the arrows focus, or - where
+// there is none - the wrapper the section body puts round the list's view.
+// The scroller comes first in the page, so it is the one found where both are.
+const LIST = `${SCROLLER}, [data-files-list]`;
 // The section's sticky header - the search box, the filter, the group menu -
 // scrolls with the list but is no part of it.
 const STICKY_HEADER = ".section-sticky-container";
@@ -146,7 +153,11 @@ const rowHolder = (row: HTMLElement, held: Set<() => void>) => {
 const firstRowOnScreen = () => {
   const list = document.querySelector(LIST);
   if (!list) return null;
-  const view = list.getBoundingClientRect();
+  // Without a scroller of its own the list scrolls with the page, and its
+  // wrapper has no box (display: contents): the window is the visible area.
+  const view =
+    document.querySelector(SCROLLER)?.getBoundingClientRect() ??
+    new DOMRect(0, 0, window.innerWidth, window.innerHeight);
   for (const item of list.querySelectorAll<HTMLElement>(ROW)) {
     const row = rowOf(item);
     if (!row || row !== item) continue;
@@ -232,15 +243,19 @@ export const useRowFocus = (
   }, []);
 
   // The caret moved from the keyboard while the focus is in the list (on
-  // the list itself, where the arrows put it, or on a row): the focus goes to
-  // the new row, once it is rendered and scrolled to. The section's scroller
-  // holds its sticky header too - the search box, the filter - and a caret
-  // moved while the user is there (a delete ending) leaves them be.
+  // the list itself, where the arrows put it, or on a row) or round it (the
+  // page, or the section's body where there is no scroller to put it in):
+  // the focus goes to the new row, once it is rendered and scrolled to. The
+  // section's scroller holds its sticky header too - the search box, the
+  // filter - and a caret moved while the user is there (a delete ending)
+  // leaves them be.
   useEffect(() => {
     if (!hotkeyCaret || !fromKeyboardRef.current) return;
     const { activeElement } = document;
+    const list = document.querySelector(LIST);
     const inList =
       activeElement === document.body ||
+      (!!list && !!activeElement?.contains(list)) ||
       (!!activeElement?.closest(LIST) && !activeElement.closest(STICKY_HEADER));
     if (!inList) return;
 

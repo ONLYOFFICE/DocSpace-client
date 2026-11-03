@@ -3,7 +3,7 @@
   "content": "Add a metadata template or custom fields to this item first, then fill it with AI.",
   "content_en_sha1_hash": "a95ca6240e537113cc684518ccdb14da9e10d783",
   "created_at": "2026-10-27T14:48:36.313Z",
-  "updated_at": "2026-10-30T14:51:05.619Z",
+  "updated_at": "2026-11-02T11:49:57.571Z",
   "comment": {
     "text": "Error in the Fill metadata with AI panel when the item has no metadata template and no custom fields, so there is nothing for AI to fill. Keep the full term metadata template: the product also has document templates and room templates.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/utils.ts",
-      "line_number": 408,
-      "context": "case 403:\n return t(\"Common:AccessDenied\");\n case 422:\n return skipped\n ? t(\"Metadata:AINothingToRead\")\n : t(\"Metadata:AINothingToFill\");\n case 429:\n return t(\"Metadata:AIBusy\");\n case 502:\n return t(\"Metadata:AIFailed\");\n case 504:",
+      "line_number": 425,
+      "context": "case 403:\n return t(\"Common:AccessDenied\");\n case 422:\n return skipped\n ? getSkippedError(t, skipped)\n : t(\"Metadata:AINothingToFill\");\n case 429:\n return t(\"Metadata:AIBusy\");\n case 502:\n return t(\"Metadata:AIFailed\");\n case 504:",
       "module": "/packages/client"
     }
   ],

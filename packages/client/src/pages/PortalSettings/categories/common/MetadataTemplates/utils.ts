@@ -331,6 +331,29 @@ export const getTemplateChanges = (
   return changes;
 };
 
+export const splitCreatedFields = (
+  created: TMetadataFieldRequest[],
+  template: TMetadataTemplate,
+) => {
+  const taken = new Set(
+    (template.fields ?? []).map(({ name }) => name.trim().toLowerCase()),
+  );
+  const isTaken = ({ name }: TMetadataFieldRequest) =>
+    taken.has(name.trim().toLowerCase());
+
+  return {
+    beforeRemoval: created.filter((field) => !isTaken(field)),
+    afterRemoval: created.filter(isTaken),
+  };
+};
+
+export const leavesTemplateEmpty = (
+  template: TMetadataTemplate,
+  removed: number[],
+  beforeRemoval: TMetadataFieldRequest[],
+) =>
+  (template.fields?.length ?? 0) - removed.length + beforeRemoval.length === 0;
+
 export const hasTemplateChanges = (changes: TTemplateChanges) =>
   changes.isTemplateChanged ||
   changes.removed.length > 0 ||

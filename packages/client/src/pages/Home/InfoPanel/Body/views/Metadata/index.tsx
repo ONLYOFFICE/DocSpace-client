@@ -192,7 +192,11 @@ const Metadata = ({ selection }: MetadataProps) => {
         />
       ) : (
         <>
-          <MetadataHeader selection={selection} addActions={addActions} />
+          <MetadataHeader
+            selection={selection}
+            hasFields={metadata.hasMetadataFields !== false}
+            addActions={addActions}
+          />
 
           <div className={styles.blocks}>
             {getVisibleTemplates(metadata.templates).map((template) => (

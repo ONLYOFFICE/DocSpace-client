@@ -159,7 +159,10 @@ class AvatarEditorDialogStore {
           toastr.error(e as string);
         }
 
+        // A rejected save leaves `room` unset; writing it into the list
+        // would put `undefined` among the folders.
         needUpdate &&
+          room &&
           updateRoom(item as TItem, room as Parameters<FilesStore["updateRoom"]>[1]);
         URL.revokeObjectURL(img.src);
         setActiveFolders([]);

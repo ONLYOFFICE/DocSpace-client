@@ -36,8 +36,10 @@
 @use "@onlyoffice/apps-ui-kit/styles/variables/colors" as *;
 
 // The old table's `noSelect`: no text selection while the selection area or
-// a drag owns the mouse.
-.noSelect {
+// a drag owns the mouse. On every descendant too, and as specific as the old
+// rule, because the file name's link sets `user-select: text` with two classes.
+:global(.table-container).noSelect,
+:global(.table-container).noSelect *:not(img) {
   user-select: none;
 }
 

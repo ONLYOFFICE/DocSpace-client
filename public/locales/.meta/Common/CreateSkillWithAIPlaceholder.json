@@ -1,0 +1,21 @@
+{
+  "key_path": "CreateSkillWithAIPlaceholder",
+  "content": "Describe what the skill should do, when it should be used and what the result should look like",
+  "content_en_sha1_hash": "8cc92881deacd5173f772b4766bc2183615ff001",
+  "created_at": "2026-11-03T07:19:20.913Z",
+  "updated_at": "2026-11-03T07:19:20.913Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

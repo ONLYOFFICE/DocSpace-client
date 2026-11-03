@@ -90,6 +90,7 @@ export interface InjectedEmptyViewContainerProps
       TStore["dialogsStore"],
       | "setSelectFileFormRoomDialogVisible"
       | "setSelectFileKnowledgeRoomDialogVisible"
+      | "setGenerateSkillDialogVisible"
       | "setQuotaWarningDialogVisible"
       | "setTemplateAccessSettingsVisible"
     >,
@@ -145,6 +146,7 @@ export type OptionActions = {
     openRoot?: boolean,
   ) => void;
   uploadFromDocspaceKnowledgeRoom: VoidFunction;
+  createSkillWithAI: VoidFunction;
   onUploadAction: (type: UploadType) => void;
   createAndCopySharedLink: VoidFunction;
   openInfoPanel: VoidFunction;

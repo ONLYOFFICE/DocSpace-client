@@ -61,6 +61,7 @@ import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
 import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
 import FormBlankIcon from "PUBLIC_DIR/images/form.blank.react.svg?url";
 import CreateChatIcon from "PUBLIC_DIR/images/emptyview/create.chat.svg";
+import CreateAiAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
 import SharedIcon from "PUBLIC_DIR/images/emptyview/share-view.svg";
 
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
@@ -423,8 +424,8 @@ export const getOptions = (
 
   // The flat AI source rooms: an Instructions room holds Markdown skills,
   // a Knowledge room holds files to index. Neither takes a folder.
-  // A skill is uploaded, never created here: the server refuses a Markdown
-  // file without its name / description frontmatter.
+  // A skill is uploaded or written by AI, never created empty: the server
+  // refuses a Markdown file without its name / description frontmatter.
   const uploadMarkdownFromDevice = createUploadFromDeviceOption(
     t("EmptyView:UploadDeviceOptionTitle"),
     t("Common:InstructionsRoomMarkdownOnly"),
@@ -449,6 +450,15 @@ export const getOptions = (
   const uploadMarkdownFromStorage: EmptyViewItemType = {
     ...uploadKnowledgeFromStorage,
     key: "upload-markdown-from-storage",
+  };
+
+  const createSkillWithAI: EmptyViewItemType = {
+    title: t("Common:CreateSkillWithAI"),
+    description: t("Common:CreateSkillWithAIDescription"),
+    icon: <CreateAiAgentIcon />,
+    key: "create-skill-with-ai",
+    onClick: actions.createSkillWithAI,
+    disabled: false,
   };
 
   const migrationData = {
@@ -672,9 +682,18 @@ export const getOptions = (
       if (isNotAdmin) return [];
 
       if (isCollaborator)
-        return [uploadMarkdownFromStorage, uploadMarkdownFromDevice];
+        return [
+          uploadMarkdownFromStorage,
+          uploadMarkdownFromDevice,
+          createSkillWithAI,
+        ];
 
-      return [inviteUser, uploadMarkdownFromStorage, uploadMarkdownFromDevice];
+      return [
+        inviteUser,
+        uploadMarkdownFromStorage,
+        uploadMarkdownFromDevice,
+        createSkillWithAI,
+      ];
 
     // Files to index: uploaded, never created or edited; nothing at all
     // while vectorization is off.

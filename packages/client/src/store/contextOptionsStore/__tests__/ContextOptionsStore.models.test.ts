@@ -85,20 +85,21 @@ describe("ContextOptionsStore.getFolderModel — Knowledge room", () => {
 describe("ContextOptionsStore.getFolderModel — Instructions room", () => {
   const instructionsRoom = { security: { Create: true }, roomType: RoomsType.InstructionsRoom };
 
-  it("offers the workspace and device uploads, as a Knowledge room does", () => {
+  it("offers the workspace and device uploads, as a Knowledge room does, and a skill written by AI", () => {
     const store = createTestContextOptionsStore({ selectedFolderStore: instructionsRoom });
     expect(menuShape(store.getFolderModel(t) as unknown[])).toEqual([
       { key: "upload-from-storage", label: "EmptyView:UploadFromPortalTitle" },
       { key: "upload-from-device", label: "EmptyView:UploadDeviceOptionTitle" },
+      { key: "create-skill-with-ai", label: "Common:CreateSkillWithAI" },
     ]);
   });
 
-  it("keeps both while vectorization is off", () => {
+  it("keeps all three while vectorization is off", () => {
     const store = createTestContextOptionsStore({
       selectedFolderStore: instructionsRoom,
       settingsStore: { aiConfig: { vectorizationEnabled: false } },
     });
-    expect(menuShape(store.getFolderModel(t) as unknown[])).toHaveLength(2);
+    expect(menuShape(store.getFolderModel(t) as unknown[])).toHaveLength(3);
   });
 });
 

@@ -110,10 +110,12 @@ import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
 import AskAIConnectDialog from "../dialogs/AskAIConnectDialog";
 import AiProjectDialog from "../dialogs/AiProjectDialog";
+import GenerateSkillDialog from "../dialogs/GenerateSkillDialog";
 
 const Panels = (props) => {
   const {
     aiProjectDialogVisible,
+    generateSkillDialogVisible,
     uploadPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
@@ -476,6 +478,9 @@ const Panels = (props) => {
       <AskAIConnectDialog key="ask-ai-connect-dialog" />
     ),
     aiProjectDialogVisible && <AiProjectDialog key="ai-project-dialog" />,
+    generateSkillDialogVisible && (
+      <GenerateSkillDialog key="generate-skill-dialog" />
+    ),
   ];
 };
 
@@ -616,6 +621,7 @@ export default inject(
 
     return {
       aiProjectDialogVisible: aiProjectsStore.projectDialog !== null,
+      generateSkillDialogVisible: dialogsStore.generateSkillDialogVisible,
       preparationPortalDialogVisible,
       uploadPanelVisible,
       copyPanelVisible,

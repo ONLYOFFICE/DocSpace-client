@@ -1,0 +1,21 @@
+{
+  "key_path": "CreateSkillWithAIDescription",
+  "content": "Describe what the skill should do, and AI will write it for you.",
+  "content_en_sha1_hash": "8e1a43d9ae592b5574628942f7941f08ee6366bc",
+  "created_at": "2026-11-03T07:19:20.843Z",
+  "updated_at": "2026-11-03T07:19:20.843Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

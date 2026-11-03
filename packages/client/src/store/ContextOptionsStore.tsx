@@ -1061,6 +1061,10 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileKnowledgeRoomDialogVisible(true);
   };
 
+  onShowGenerateSkillDialog = () => {
+    this.dialogsStore.setGenerateSkillDialogVisible(true);
+  };
+
   getContextOptionsPlusFormRoom = (
     t: TTranslation,
     models: {

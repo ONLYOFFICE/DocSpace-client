@@ -235,6 +235,8 @@ class DialogsStore {
 
   selectFileKnowledgeRoomDialogVisible = false;
 
+  generateSkillDialogVisible = false;
+
   convertPasswordDialogVisible = false;
 
   inviteQuotaWarningDialogVisible = false;
@@ -940,6 +942,11 @@ class DialogsStore {
   /** The workspace picker that copies files into the current Knowledge room. */
   setSelectFileKnowledgeRoomDialogVisible = (visible: boolean) => {
     this.selectFileKnowledgeRoomDialogVisible = visible;
+  };
+
+  /** The panel that writes a skill with AI into the current Instructions room. */
+  setGenerateSkillDialogVisible = (visible: boolean) => {
+    this.generateSkillDialogVisible = visible;
   };
 
   createMasterForm = async (

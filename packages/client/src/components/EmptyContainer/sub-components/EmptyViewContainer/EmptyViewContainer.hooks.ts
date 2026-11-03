@@ -188,6 +188,7 @@ export const useOptions = (
     setQuotaWarningDialogVisible,
     setSelectFileFormRoomDialogVisible,
     setSelectFileKnowledgeRoomDialogVisible,
+    setGenerateSkillDialogVisible,
     inviteUser: inviteRootUser,
     setTemplateAccessSettingsVisible,
 
@@ -402,6 +403,10 @@ export const useOptions = (
     setSelectFileKnowledgeRoomDialogVisible?.(true);
   }, [setSelectFileKnowledgeRoomDialogVisible]);
 
+  const createSkillWithAI = useCallback(() => {
+    setGenerateSkillDialogVisible?.(true);
+  }, [setGenerateSkillDialogVisible]);
+
   const onCreate = useCallback(
     (extension: ExtensionType, withoutDialog?: boolean) => {
       const event: CreateEvent = new Event(Events.CREATE);
@@ -462,6 +467,7 @@ export const useOptions = (
           onCreate,
           uploadFromDocspace,
           uploadFromDocspaceKnowledgeRoom,
+          createSkillWithAI,
           onUploadAction,
           createAndCopySharedLink,
           openInfoPanel,
@@ -504,6 +510,7 @@ export const useOptions = (
       onOpenAccessSettings,
       uploadFromDocspace,
       uploadFromDocspaceKnowledgeRoom,
+      createSkillWithAI,
       onUploadAction,
       createAndCopySharedLink,
       onCreate,

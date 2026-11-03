@@ -1,0 +1,21 @@
+{
+  "key_path": "CreateSkillWithAI",
+  "content": "Create skill with AI",
+  "content_en_sha1_hash": "50757b51078c43bf03dd80f7dc0a5b9ec2e035a8",
+  "created_at": "2026-11-03T07:19:20.808Z",
+  "updated_at": "2026-11-03T07:19:20.808Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -69,8 +69,16 @@ vi.mock("@onlyoffice/apps-ui-kit/components/tabs", () => ({
 }));
 
 vi.mock("SRC_DIR/components/BetaBadgeWrapper", () => ({
-  default: ({ description }: { description?: string }) => (
-    <span data-testid="beta-badge">{description}</span>
+  default: ({
+    title,
+    description,
+  }: {
+    title?: string;
+    description?: string;
+  }) => (
+    <span data-testid="beta-badge" data-title={title}>
+      {description}
+    </span>
   ),
 }));
 
@@ -151,6 +159,16 @@ describe("Keys management tab carries the Beta badge", () => {
     expect(within(keysTab).getByTestId("beta-badge")).toHaveTextContent(
       "Common:PrivateRoomsBetaDescription",
     );
+  });
+
+  it("Badge tooltip", () => {
+    renderProfileTabs();
+
+    const badge = within(screen.getByTestId("tab-keys-management")).getByTestId(
+      "beta-badge",
+    );
+    expect(badge).toHaveAttribute("data-title", "Common:PrivateRoomsBetaTitle");
+    expect(badge).toHaveTextContent("Common:PrivateRoomsBetaDescription");
   });
 
   it("puts the badge on no other profile tab", () => {

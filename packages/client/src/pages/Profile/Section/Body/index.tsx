@@ -207,6 +207,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
             badge: (
               <BetaBadge
                 place="bottom"
+                title={t?.("Common:PrivateRoomsBetaTitle")}
                 description={t?.("Common:PrivateRoomsBetaDescription")}
                 dataTestId="keys_management_beta_badge"
               />

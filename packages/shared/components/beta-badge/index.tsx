@@ -56,6 +56,7 @@ const BetaBadge = ({
   withoutTooltip = false,
   dataTestId,
   description,
+  title,
 }: BetaBadgeProps) => {
   const { t } = useTranslation(["Common", "Settings"]);
 
@@ -104,7 +105,7 @@ const BetaBadge = ({
   const tooltipProps = withoutTooltip
     ? {}
     : {
-        tooltipTitle: t("Common:BetaBadgeTitle"),
+        tooltipTitle: title ?? t("Common:BetaBadgeTitle"),
         tooltipDescription,
         dataTestId,
       };

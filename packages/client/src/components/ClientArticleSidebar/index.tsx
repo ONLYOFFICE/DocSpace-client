@@ -548,6 +548,7 @@ const ClientArticleSidebar = ({
         badgeComponent: (
           <BetaBadge
             place="right-start"
+            title={t("Common:PrivateRoomsBetaTitle")}
             description={t("Common:PrivateRoomsBetaDescription")}
             dataTestId="private_rooms_beta_badge"
           />

@@ -27,7 +27,7 @@ Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 20
   - cases "Beta badge shown" and "Badge tooltip" in `ClientArticleSidebar/__tests__/ClientArticleSidebar.test.tsx`, with no badge on the Archive sub-item;
   - `cd common/tests && npx vitest run test/locales.test.js`.
 - [x] 2.3 Put the Beta badge on the Keys management tab through the tab's `badge` slot in `packages/client/src/pages/Profile/Section/Body/index.tsx`. Verify: a case "Tab label" in a new `packages/client/src/pages/Profile/Section/Body/__tests__/ProfileTabs.test.tsx`, and `pnpm run tsc`.
-- [ ] 2.4 Give `BetaBadge` an optional title that replaces `Common:BetaBadgeTitle` (design decision 5), and pass the new key Common:PrivateRoomsBetaTitle from the sidebar item and the Keys management tab. Add the key to every language in the same commit, with its `.meta` comment written by `/translate-comments`. Verify:
+- [x] 2.4 Give `BetaBadge` an optional title that replaces `Common:BetaBadgeTitle` (design decision 5), and pass the new key Common:PrivateRoomsBetaTitle from the sidebar item and the Keys management tab. Add the key to every language in the same commit, with its `.meta` comment written by `/translate-comments`. Verify:
   - a `BetaBadge.test.tsx` case for the overridden title, with a `t` mock that keeps `Common:BetaBadgeTitle` distinct;
   - the "Badge tooltip" cases of the sidebar and of `ProfileTabs.test.tsx` assert the title key;
   - `cd common/tests && npx vitest run test/locales.test.js`.

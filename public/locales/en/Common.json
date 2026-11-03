@@ -1811,6 +1811,7 @@
   "PrivateRoomNotFoundTitle": "Not found",
   "PrivateRoomRenameNotSupported": "Renaming encrypted files is not supported yet.",
   "PrivateRoomsBetaDescription": "Private rooms are in beta. Some actions are not available for encrypted files yet, and encrypted files cannot be opened without your key, so keep your recovery phrase safe.",
+  "PrivateRoomsBetaTitle": "Private rooms",
   "PrivateRoomsListEmptyDescription": "Private rooms are end-to-end encrypted. Files are encrypted in your browser before upload and only the people you invite can read them.",
   "PrivateRoomsListEmptyTitle": "No private rooms yet",
   "PrivateRoomTitle": "Private Room",

@@ -20,7 +20,7 @@ One task is one commit with its code, tests, locales, mocks and the tick (the "C
 ## 4. SDK
 
 - [x] 4.1 In `PrivateCreateRoomDialog`, treat an unknown key list as one that may hold a key for the key gate and the dialog, and show Common:EncryptionKeysLoadFailed when the save-time load fails (design decision 5). Verify: cases "Key list still loading", "Key list failed to load" and "Key list known to be empty" in `PrivateCreateRoomDialog.test.tsx`.
-- [ ] 4.2 Take each file's cancel signal when an encrypted batch starts in `packages/sdk/src/app/(private)/_hooks/useEncryptedUpload.ts` (design decision 6). Verify: case "File cancelled while waiting" in the hook tests, asserting no chunk and no file creation for the cancelled file.
+- [x] 4.2 Take each file's cancel signal when an encrypted batch starts in `packages/sdk/src/app/(private)/_hooks/useEncryptedUpload.ts` (design decision 6). Verify: case "File cancelled while waiting" in the hook tests, asserting no chunk and no file creation for the cancelled file.
 
 ## 5. Keys page
 

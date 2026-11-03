@@ -371,6 +371,30 @@ describe("useEncryptedUpload", () => {
     expect(store.items[0].status).toBe("cancelled");
   });
 
+  it("File cancelled while waiting", async () => {
+    let waitingAborted: boolean | undefined;
+    env.orchestrate.mockImplementationOnce(async (options: TBatchOptions) => {
+      const [first, waiting] = options.uploadIds;
+      // The second file waits while the first uploads; its row is cancelled.
+      store.cancelItem(waiting);
+      waitingAborted = options.fileSignal(waiting)?.aborted;
+      return {
+        results: [
+          { ok: true, uploadId: first, originalName: first },
+          { ok: false, uploadId: waiting, originalName: waiting, aborted: true },
+        ],
+        quotaErrorRaised: false,
+        aborted: true,
+        skippedMembers: [],
+      };
+    });
+
+    await upload(["a.docx", "b.docx"]);
+
+    expect(waitingAborted).toBe(true);
+    expect(store.items.map((i) => i.fileName)).toEqual(["a.docx"]);
+  });
+
   it("Cancelled after the file is stored", async () => {
     const stored = { id: 8202, folderId: 5 };
     env.orchestrate.mockImplementationOnce(async (options: TBatchOptions) => {

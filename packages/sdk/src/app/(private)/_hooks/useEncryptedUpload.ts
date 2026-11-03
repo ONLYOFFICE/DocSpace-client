@@ -145,6 +145,16 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
         (error as { response?: { data?: { error?: { message?: string } } } })
           ?.response?.data?.error?.message || t("Common:QuotaExceededTooltip");
 
+      // Taken now: a cancelled row leaves the store before the batch reaches it.
+      // Spec: private-rooms/file-operations, "Cancelling a queued encrypted upload in the SDK stops it"
+      const fileSignals = new Map(
+        items.map((item) => [
+          item.uploadId,
+          uploadStore.items.find((row) => row.uniqueId === item.uploadId)
+            ?.abortController.signal,
+        ]),
+      );
+
       try {
         const orchestrator = await loadOrchestrator();
         const options = {
@@ -153,9 +163,7 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
           publicKeyId: selectUserKey(identityStore.keys)?.id ?? null,
           requireIdentity,
           signal: controller.signal,
-          fileSignal: (uploadId: string) =>
-            uploadStore.items.find((i) => i.uniqueId === uploadId)
-              ?.abortController.signal,
+          fileSignal: (uploadId: string) => fileSignals.get(uploadId),
           uploadStore: {
             files: [],
             reportProgress: (uploadId: string, percent: number) =>

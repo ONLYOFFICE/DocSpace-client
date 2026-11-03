@@ -756,6 +756,24 @@ describe("uploadEncryptedFile for a caller with its own queue", () => {
     expect(queued).toBe(1);
   });
 
+  it("a wrap refused for an erased key writes no access entry", async () => {
+    const api = await import("../../../api/files");
+    const access = await import("../../encryption/room-file-access");
+    const { InvalidFormatError } = await import("../../encryption/errors");
+    vi.mocked(access.wrapDekForRecipients).mockRejectedValueOnce(
+      new InvalidFormatError("erased private key"),
+    );
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      ARGS,
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: false, fileId: 42, failedAt: "wrap" });
+    expect(api.setFileEncryptionKeys).not.toHaveBeenCalled();
+  });
+
   it("a file stored without its access list fails with the wrap failure and keeps its id", async () => {
     const api = await import("../../../api/files");
     vi.mocked(api.setFileEncryptionKeys).mockRejectedValueOnce(

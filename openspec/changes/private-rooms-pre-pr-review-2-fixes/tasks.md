@@ -9,7 +9,7 @@ One task is one commit with its code, tests, locales, mocks and the tick (the "C
 ## 2. Key cache
 
 - [x] 2.1 Make `SecretStorage.getCached` return copies of the key material, so a lock wipes only the slot (design decision 2). Verify: cases "Lock now during an upload" and "Idle expiry during a re-wrap" in the secret-storage tests: a pair obtained before `lock()` keeps its bytes, and a wrap made with it after the lock is opened by the recipient; `cd packages/shared && pnpm exec vitest run services/encryption`.
-- [ ] 2.2 Make `wrapDEK` and `unwrapDEK` (`packages/shared/services/encryption/hpke.ts`) refuse a private key whose bytes are all zero (design decision 3). Verify: case "All-zero private key" in the HPKE tests, and the orchestrator test that a refused wrap writes no access entry.
+- [x] 2.2 Make `wrapDEK` and `unwrapDEK` (`packages/shared/services/encryption/hpke.ts`) refuse a private key whose bytes are all zero (design decision 3). Verify: case "All-zero private key" in the HPKE tests, and the orchestrator test that a refused wrap writes no access entry.
 
 ## 3. Invitations
 

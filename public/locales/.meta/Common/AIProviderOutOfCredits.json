@@ -1,0 +1,21 @@
+{
+  "key_path": "AIProviderOutOfCredits",
+  "content": "The AI provider has run out of credits",
+  "content_en_sha1_hash": "9bdfaa03c8ff7d11b4a5451e89859b2a4b5ba33e",
+  "created_at": "2026-11-03T10:46:34.574Z",
+  "updated_at": "2026-11-03T10:46:34.574Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

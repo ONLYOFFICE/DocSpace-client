@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Om uw abonnement te reactiveren, kunt u uw portemonnee opladen via Services. Zodra de betaling is voltooid, wordt uw extra opslagruimte weer beschikbaar.",
   "TopUpWallet": "Laad portemonnee bij",
   "TopUpWalletStorageHint": "Uw portemonnee wordt met <1>{{currency}}</1> opgewaardeerd. Kom terug nadat het geld is ontvangen om extra opslag aan te schaffen. Opwaardeerbedragen worden naar boven afgerond op hele dollars.",
-  "TopUpWalletToContinue": "Laad uw portemonnee bij om door te gaan.",
   "TotalDueToday": "Totaal verschuldigd vandaag",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/maand</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/jaar</3>",

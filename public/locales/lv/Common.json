@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Lai aktivizētu savu abonementu, lūdzu, papildiniet savu maku, izmantojot pakalpojumus. Kad maksājums būs apstiprināts, jūsu papildu krātuve atkal būs pieejama.",
   "TopUpWallet": "Papildīt maku",
   "TopUpWalletStorageHint": "Jūsu maks tiks papildināts par <1>{{currency}}</1>. Atgriezieties pēc naudas saņemšanas, lai iegādātos papildu krātuvi. Papildināšanas summas tiek noapaļotas uz augšu līdz nākamajam veselajam dolāram.",
-  "TopUpWalletToContinue": "Lai turpinātu, papildiniet maku.",
   "TotalDueToday": "Šodien maksājamā summa",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/mēnesī</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/gadā</3>",

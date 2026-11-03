@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Um Ihr Abonnement zu reaktivieren, laden Sie bitte Ihr Guthaben über die Dienste auf. Sobald die Zahlung abgeschlossen ist, steht Ihnen Ihr zusätzlicher Speicherplatz wieder zur Verfügung.",
   "TopUpWallet": "Wallet aufladen",
   "TopUpWalletStorageHint": "Ihr Wallet wird um <1>{{currency}}</1> aufgeladen. Kehren Sie nach Eingang der Zahlung zurück, um zusätzlichen Speicherplatz zu kaufen. Aufladebeträge werden auf den nächsten vollen Dollar aufgerundet.",
-  "TopUpWalletToContinue": "Laden Sie Ihr Wallet auf, um fortzufahren.",
   "TotalDueToday": "Gesamtbetrag heute fällig",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/Monat</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/Jahr</3>",

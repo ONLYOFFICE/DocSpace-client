@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Pour réactiver votre abonnement, veuillez recharger votre Wallet via les Services. Une fois le paiement effectué, votre espace de stockage supplémentaire sera à nouveau disponible.",
   "TopUpWallet": "Recharger le portefeuille",
   "TopUpWalletStorageHint": "Votre portefeuille sera rechargé de <1>{{currency}}</1>. Revenez après réception des fonds pour acheter de l'espace de stockage supplémentaire. Les montants de recharge sont arrondis au dollar entier supérieur.",
-  "TopUpWalletToContinue": "Rechargez votre portefeuille pour continuer.",
   "TotalDueToday": "Total dû aujourd'hui",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/mois</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/année</3>",

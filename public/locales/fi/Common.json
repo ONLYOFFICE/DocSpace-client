@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Jotta voit aktivoida tilauksesi uudelleen, lisää saldoasi Palvelut-osiossa. Kun maksu on valmis, lisäsäilytystilasi on jälleen käytettävissä.",
   "TopUpWallet": "Lataa lompakko",
   "TopUpWalletStorageHint": "Lompakkoosi ladataan <1>{{currency}}</1>. Palaa takaisin varojen saavuttua ostaaksesi lisää tallennustilaa. Latausmäärät pyöristetään ylöspäin seuraavaan täyteen dollariin.",
-  "TopUpWalletToContinue": "Jatka lataamalla lompakko.",
   "TotalDueToday": "Tänään erääntynyt summa",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/kuukausi</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/vuosi</3>",

@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "購読を再開するには、Servicesを通じてウォレットにチャージアップしてください。お支払いが完了すると、追加ストレージが再度利用可能になります。",
   "TopUpWallet": "ウォレットのチャージ",
   "TopUpWalletStorageHint": "ウォレットに<1>{{currency}}</1>がチャージされます。入金後に戻って、追加ストレージをご購入ください。チャージ金額は次の整数ドルに切り上げられます。",
-  "TopUpWalletToContinue": "続行するには、ウォレットをチャージしてください。",
   "TotalDueToday": "本日のお支払い合計額",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/月</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/年</3>",

@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Para reactivar su suscripción, por favor recargue su monedero a través de la sección Servicios. Una vez realizado el pago, su almacenamiento adicional volverá a estar disponible.",
   "TopUpWallet": "Recargar monedero",
   "TopUpWalletStorageHint": "Su monedero se recargará con <1>{{currency}}</1>. Vuelva cuando lleguen los fondos para comprar almacenamiento adicional. Los importes de recarga se redondean al alza al siguiente dólar entero.",
-  "TopUpWalletToContinue": "Recarga el monedero para continuar.",
   "TotalDueToday": "Total a pagar hoy",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/mes</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/año</3>",

@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Za ponovno aktivacijo naročnine, prosim, napolnite denarnico preko Storitev. Ko bo plačilo končano, bo dodatna shramba spet na voljo.",
   "TopUpWallet": "Napolnite denarnico",
   "TopUpWalletStorageHint": "Vaša denarnica bo napolnjena za <1>{{currency}}</1>. Ko sredstva prispejo, se vrnite in kupite dodatno shrambo. Zneski polnjenja se zaokrožijo navzgor na naslednji cel dolar.",
-  "TopUpWalletToContinue": "Za nadaljevanje napolnite denarnico.",
   "TotalDueToday": "Skupaj dolgujete danes",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/mesec</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/leto</3>",

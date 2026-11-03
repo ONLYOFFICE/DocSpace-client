@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Pentru a reîncepe abonamentul dvs, alimentați Portofelul dvs din secțiunea Servicii. După finalizarea plății spațiul de stocare suplimentar va deveni disponibil din nou.",
   "TopUpWallet": "Alimentează portofelul",
   "TopUpWalletStorageHint": "Portofelul dvs. va fi alimentat cu <1>{{currency}}</1>. Reveniți după ce fondurile ajung pentru a achiziționa spațiu de stocare suplimentar. Sumele de alimentare sunt rotunjite în sus la următorul dolar întreg.",
-  "TopUpWalletToContinue": "Alimentează portofelul pentru a continua.",
   "TotalDueToday": "Total de plată astăzi",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/lună</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/an</3>",

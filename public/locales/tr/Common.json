@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Aboneliğinizi yeniden etkinleştirmek için, lütfen Hizmetler aracılığıyla cüzdanınıza para yatırın. Ödeme tamamlandıktan sonra, ek depolama alanınız tekrar kullanılabilir hale gelecektir.",
   "TopUpWallet": "Cüzdana Para Yükle",
   "TopUpWalletStorageHint": "Cüzdanınıza <1>{{currency}}</1> yüklenecek. Ek depolama alanı satın almak için para hesaba geçtikten sonra geri dönün. Yükleme tutarları bir üst tam dolara yuvarlanır.",
-  "TopUpWalletToContinue": "Devam etmek için cüzdanınıza para yükleyin.",
   "TotalDueToday": "Bugün ödenecek toplam",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/ay</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/yıl</3>",

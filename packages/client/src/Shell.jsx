@@ -91,10 +91,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { handleCopy } from "@docspace/shared/utils/copy";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import {
-  getServiceLimitChatError,
-  getServiceLimitDescription,
-} from "@docspace/shared/utils/ai";
+import { getServiceLimitChatError } from "@docspace/shared/utils/ai";
 
 import "@docspace/shared/styles/theme.scss";
 
@@ -102,7 +99,7 @@ import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
 import AiPresetsBridge from "SRC_DIR/components/AiPresetsBridge";
 import ProjectIntro from "SRC_DIR/pages/AiProjects/sub-components/project/ProjectIntro";
 import { useAiPresetsPickerActions } from "SRC_DIR/Hooks/useAiPresetsPickerActions";
-import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
+import { useAiChatNotice } from "SRC_DIR/Hooks/useAiChatNotice";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 
@@ -886,6 +883,24 @@ const Shell = ({ page = "home", ...rest }) => {
   // wait for the chat to open.
   const isChatOpen = isChatPanelVisible;
 
+  // The money state behind an interrupted answer (an empty wallet, a limit
+  // reached), shown above the composer while it lasts; the answer keeps its
+  // own past-tense note (see formatChatError).
+  const {
+    composerNotice: aiComposerNotice,
+    onStreamError: onAiStreamError,
+    onStreamEnd: onAiStreamEnd,
+  } = useAiChatNotice({
+    t,
+    language,
+    standalone,
+    isAdmin,
+    isPayer,
+    isChatOpen,
+    navigate,
+    fetchWalletBalance,
+  });
+
   // "Choose AI Project" entry for the model picker: the user's AI projects,
   // applied to the open chat by AiPresetsBridge (the chat stores live below
   // AiAgentProviders). A project that is gone by now is only reported.
@@ -916,17 +931,16 @@ const Shell = ({ page = "home", ...rest }) => {
   // documents, both resolved by the AI service itself.
   const chatContextEntityId = isInsideAiProject ? undefined : chatScopeEntityId;
 
-  // Chat error box override (Bug 83207): the wallet 402 must read as a
-  // human message with a way to top up instead of the raw provider text.
-  // Only the Payer can actually top the wallet up, so the button to
-  // Billing -> Wallet is theirs alone; everyone else is pointed to the Payer
-  // (`action: null` also drops the default Retry, which would just fail
-  // again on an empty wallet). A spending limit reached (relayed as a 403, see
-  // getServiceLimitChatError) is handled the same way: admins get a button to
-  // AI settings -> Limits, everyone else is pointed to an admin. Every other
-  // code keeps the library default (localized text + Retry).
+  // The note under an interrupted answer (Bug 83207: never the raw provider
+  // text). It records what happened, in the past tense, and stays in the
+  // history; the money state behind it - an empty wallet, a spending limit
+  // reached (relayed as a 403, see getServiceLimitChatError) - and the way
+  // out are on the notice above the composer (useAiChatNotice), which goes
+  // away with the state and holds Retry back while it lasts. A project whose
+  // model is unavailable keeps its own note and action. Every other code
+  // keeps the library's default note and Retry.
   const formatChatError = useCallback(
-    (payload) => {
+    (payload, { providerType } = {}) => {
       // The project's model is gone or cannot chat (409 from the AI
       // service): the round is refused until someone changes the model.
       // Owner and managers get the Edit project action, members are told
@@ -952,41 +966,26 @@ const Shell = ({ page = "home", ...rest }) => {
       // limits, so the library default (localized text + Retry) stands.
       if (standalone) return null;
 
-      const serviceLimit = getServiceLimitChatError(payload);
-      if (serviceLimit) {
-        return {
-          title: t("Common:AILimitReached"),
-          description: getServiceLimitDescription(
-            t,
-            language,
-            serviceLimit,
-            isAdmin,
-          ),
-          action: isAdmin
-            ? {
-                text: t("Common:ChangeAILimit"),
-                onClick: () => navigate("/portal-settings/ai-settings/limits"),
-              }
-            : null,
-        };
+      // The note says what happened to this answer, in the past tense; the
+      // state itself and the way out (top up, raise the limit) are on the
+      // notice above the composer, which also holds Retry back until the
+      // state is over (useAiChatNotice).
+      if (getServiceLimitChatError(payload)) {
+        return { title: t("Common:AIInterruptedLimitReached") };
       }
 
-      if (payload?.code !== "insufficient_funds") return null;
+      // A 402 from the portal gateway is the wallet; any other provider's
+      // is its own credits, which the library's default note describes.
+      if (
+        payload?.code === "insufficient_funds" &&
+        providerType === "onlyoffice"
+      ) {
+        return { title: t("Common:AIInterruptedWalletEmpty") };
+      }
 
-      return {
-        title: t("Common:WalletBalanceTooLow"),
-        description: isPayer
-          ? t("Common:TopUpWalletToContinue")
-          : t("Common:InsufficientFundsContactPayerShort"),
-        action: isPayer
-          ? {
-              text: t("Common:TopUpWallet"),
-              onClick: () => navigate(PAYMENT_ROUTES.wallet),
-            }
-          : null,
-      };
+      return null;
     },
-    [t, isAdmin, isPayer, navigate, standalone, language, aiActiveProject, openEditAiProject],
+    [t, standalone, aiActiveProject, openEditAiProject],
   );
 
   // Inside a project whose model is unavailable nothing can be sent until
@@ -1017,8 +1016,10 @@ const Shell = ({ page = "home", ...rest }) => {
           status === 403 || /\bHTTP\s+403\b/.test(error?.message ?? "");
         if (!isForbidden) toastr.error(t("Common:UnexpectedError"));
       },
+      onStreamError: onAiStreamError,
+      onStreamEnd: onAiStreamEnd,
     }),
-    [t],
+    [t, onAiStreamError, onAiStreamEnd],
   );
 
   // Defer mounting AiAgentProviders until authStore is loaded — otherwise
@@ -1060,6 +1061,7 @@ const Shell = ({ page = "home", ...rest }) => {
           composerDisabled={
             isProjectModelUnavailable || (standalone ? undefined : !isAIReady)
           }
+          composerNotice={aiComposerNotice}
           // A chat opened from an AI preset or inside a project starts with
           // no suggestion chips: its sources are the subject, not the page.
           suggestions={

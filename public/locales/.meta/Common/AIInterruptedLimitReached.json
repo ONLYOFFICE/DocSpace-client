@@ -1,0 +1,21 @@
+{
+  "key_path": "AIInterruptedLimitReached",
+  "content": "Response interrupted: the AI spending limit was reached",
+  "content_en_sha1_hash": "2af79604fd088f594a1b76adfd04097c2bf252b0",
+  "created_at": "2026-11-03T10:46:32.086Z",
+  "updated_at": "2026-11-03T10:46:32.086Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

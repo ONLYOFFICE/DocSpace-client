@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Abunəçiliyinizi yenidən aktivləşdirmək üçün, xidmətlər vasitəsilə ərzənizi doldurun. Ödəniş tamamlandıqdan sonra, əlavə saxlama yeriniz yenidən əlçatan olacaq.",
   "TopUpWallet": "Walleti doldurun",
   "TopUpWalletStorageHint": "Pul kisəniz <1>{{currency}}</1> məbləğində doldurulacaq. Əlavə yaddaş almaq üçün vəsait daxil olduqdan sonra qayıdın. Doldurma məbləğləri növbəti tam dollara yuvarlaqlaşdırılır.",
-  "TopUpWalletToContinue": "Davam etmək üçün Walleti doldurun.",
   "TotalDueToday": "Bu günün ümumi ödənişi",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/ay</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/il</3>",

@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Për të riaktivuar abonimin tuaj, ju lutem rimbushni portofolin tuaj përmes Shërbimeve. Kur pagesa të kryhet, ruajtja shtesë do të bëhet përsëri e disponueshme.",
   "TopUpWallet": "Mbushni portofolin",
   "TopUpWalletStorageHint": "Portofoli juaj do të mbushet me <1>{{currency}}</1>. Kthehuni pasi të mbërrijnë fondet për të blerë hapësirë shtesë ruajtjeje. Shumat e mbushjes rrumbullakosen lart deri te dollari i plotë pasues.",
-  "TopUpWalletToContinue": "Mbushni portofolin për të vazhduar.",
   "TotalDueToday": "Total i duhur sot",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/muaji</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/vit</3>",

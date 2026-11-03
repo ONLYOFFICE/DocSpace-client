@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "구독을 다시 활성화하려면 Services를 통해 지갑에 충전해주세요. 결제가 완료되면 추가 저장 공간이 다시 사용 가능하게 됩니다.",
   "TopUpWallet": "지갑 충전하기",
   "TopUpWalletStorageHint": "지갑에 <1>{{currency}}</1>이(가) 충전됩니다. 자금이 입금된 후 다시 돌아와 추가 저장 공간을 구매하세요. 충전 금액은 다음 정수 달러 단위로 올림 처리됩니다.",
-  "TopUpWalletToContinue": "계속하려면 지갑을 충전하세요.",
   "TotalDueToday": "오늘 지불해야 할 총액",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/월</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/년</3>",

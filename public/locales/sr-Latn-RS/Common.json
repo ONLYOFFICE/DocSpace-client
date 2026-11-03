@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Da biste ponovo aktivirali pretplatu, dopunite svoj novčanik putem odeljka Usluge. Nakon što uplata bude izvršena, dodatni prostor će ponovo biti dostupan.",
   "TopUpWallet": "Dopuni novčanik",
   "TopUpWalletStorageHint": "Vaš novčanik će biti dopunjen za <1>{{currency}}</1>. Vratite se nakon što sredstva stignu da biste kupili dodatni prostor za skladištenje. Iznosi dopune se zaokružuju naviše na sledeći ceo dolar.",
-  "TopUpWalletToContinue": "Dopunite novčanik da biste nastavili.",
   "TotalDueToday": "Ukupno dospelo danas",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/mesec</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/godišnje</3>",

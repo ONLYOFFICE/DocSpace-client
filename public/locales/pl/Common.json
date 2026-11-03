@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Aby ponownie aktywować subskrypcję, doładuj swój portfel za pomocą Usług. Po dokonaniu płatności, dodatkowe miejsce na dane stanie się ponownie dostępne.",
   "TopUpWallet": "Dopłóż na portfel",
   "TopUpWalletStorageHint": "Twój portfel zostanie doładowany o <1>{{currency}}</1>. Wróć po zaksięgowaniu środków, aby kupić dodatkową przestrzeń dyskową. Kwoty doładowania są zaokrąglane w górę do pełnego dolara.",
-  "TopUpWalletToContinue": "Doładuj portfel, aby kontynuować.",
   "TotalDueToday": "Całkowita kwota należna dzisiaj",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/miesięcznie</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/rok</3>",

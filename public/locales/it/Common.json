@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Per riattivare l'abbonamento, si prega di ricaricare il portafoglio tramite Servizi. Una volta completato il pagamento, lo spazio di archiviazione aggiuntivo sarà nuovamente disponibile.",
   "TopUpWallet": "Ricarica portafoglio",
   "TopUpWalletStorageHint": "Il tuo portafoglio verrà ricaricato di <1>{{currency}}</1>. Torna dopo l'arrivo dei fondi per acquistare spazio di archiviazione aggiuntivo. Gli importi di ricarica vengono arrotondati per eccesso al dollaro intero successivo.",
-  "TopUpWalletToContinue": "Ricarica il portafoglio per continuare.",
   "TotalDueToday": "Totale dovuto oggi",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/mese</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/anno</3>",

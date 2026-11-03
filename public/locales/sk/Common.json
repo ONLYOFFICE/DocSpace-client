@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Na obnovenie predplatného, doplňte prosím peňaženku cez Služby. Po dokončení platby bude vaše dodatočné úložisko opäť dostupné.",
   "TopUpWallet": "Doplň peňaženku",
   "TopUpWalletStorageHint": "Vaša peňaženka bude doplnená o <1>{{currency}}</1>. Po pripísaní prostriedkov sa vráťte a zakúpte si ďalšie úložisko. Sumy doplnenia sa zaokrúhľujú nahor na celé doláre.",
-  "TopUpWalletToContinue": "Ak chcete pokračovať, doplňte peňaženku.",
   "TotalDueToday": "Celková suma splatná dnes",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/mesiac</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/rok</3>",

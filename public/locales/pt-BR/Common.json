@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Para reativar sua assinatura, carregue sua carteira por meio dos Serviços. Assim que o pagamento for concluído, seu armazenamento adicional ficará disponível novamente.",
   "TopUpWallet": "Recarregar carteira",
   "TopUpWalletStorageHint": "Sua carteira será recarregada em <1>{{currency}}</1>. Volte após a chegada dos fundos para comprar armazenamento adicional. Os valores de recarga são arredondados para cima até o próximo dólar inteiro.",
-  "TopUpWalletToContinue": "Recarregue sua carteira para continuar.",
   "TotalDueToday": "Total devido hoje",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/mês</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/ano</3>",

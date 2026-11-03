@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "Để kích hoạt lại đăng ký của bạn, vui lòng nạp tiền vào ví của bạn thông qua Services. Sau khi thanh toán hoàn tất, không gian lưu trữ bổ sung của bạn sẽ khả dụng trở lại.",
   "TopUpWallet": "Nạp tiền vào ví",
   "TopUpWalletStorageHint": "Ví của bạn sẽ được nạp <1>{{currency}}</1>. Hãy quay lại sau khi tiền về để mua thêm dung lượng lưu trữ. Số tiền nạp được làm tròn lên đến đô la nguyên tiếp theo.",
-  "TopUpWalletToContinue": "Nạp tiền vào ví để tiếp tục.",
   "TotalDueToday": "Tổng cộng đến hạn hôm nay",
   "TotalPricePerMonth": "<2>{{price}} </2><3>/tháng</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/năm</3>",

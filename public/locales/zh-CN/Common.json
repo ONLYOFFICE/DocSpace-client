@@ -2316,7 +2316,6 @@
   "TopUpToReactivateStorage": "要重新激活您的订阅，请通过服务为您的钱包充值。付款完成后，您的额外存储空间将再次可用。",
   "TopUpWallet": "钱包充值",
   "TopUpWalletStorageHint": "您的钱包将充值 <1>{{currency}}</1>。资金到账后请返回购买额外存储空间。充值金额将向上取整为整数美元。",
-  "TopUpWalletToContinue": "请为钱包充值以继续。",
   "TotalDueToday": "今日应付总额",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/月</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/年</3>",

@@ -4040,3 +4040,34 @@ export const folderInfoHandler = (port?: string) => {
     return new Response(JSON.stringify({ response: getFolderInfo() }));
   });
 };
+
+// A third-party folder: its id is a string ("box-821"), and so is the
+// folderId of every file in it.
+export const thirdPartyFolderHandler = (port: string, folderId: string) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/${folderId}`, () => {
+    const folder = getFolder();
+
+    return new Response(
+      JSON.stringify({
+        response: {
+          ...folder,
+          files: folder.files.map((file) => ({ ...file, folderId })),
+          current: { ...folder.current, id: folderId, rootFolderId: folderId },
+          pathParts: [{ id: folderId, title: "Documents" }],
+        },
+      }),
+    );
+  });
+};
+
+export const thirdPartyCreateFileHandler = (port: string, folderId: string) => {
+  return http.post(
+    `${BASE_URL}:${port}/${API_PREFIX}/files/${folderId}/file`,
+    () =>
+      new Response(
+        JSON.stringify({
+          response: { ...files[0], id: 9999, folderId, title: "New form.pdf" },
+        }),
+      ),
+  );
+};

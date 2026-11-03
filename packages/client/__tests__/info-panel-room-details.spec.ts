@@ -33,9 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import path from "path";
 import type { Page } from "@playwright/test";
 import { http, HttpResponse } from "msw";
 import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { API_PREFIX, BASE_URL } from "@docspace/shared/__mocks__/e2e/utils";
 import {
   settingsHandler,
@@ -281,5 +283,83 @@ test.describe("Rooms — info panel details", () => {
     await expect(content).toHaveText("Folders: 0 | Files: 0");
 
     wsMock.closeConnection();
+  });
+});
+
+test.describe("Rooms — info panel room logo", () => {
+  // "Public third-party" in the ContextMenu room list: a Box room, so the
+  // logo save goes through FilesStore.updateRoom's providerKey branch.
+  const THIRD_PARTY_ROOM_ID = "box-821";
+
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+        access: ShareAccessRights.RoomManager,
+      }),
+      http.post(`${API}/files/logos`, () =>
+        HttpResponse.json({
+          response: { success: true, data: "tmp-logo.png" },
+        }),
+      ),
+      http.post(`${API}/files/rooms/${THIRD_PARTY_ROOM_ID}/logo`, () =>
+        HttpResponse.json(
+          { error: { message: "Provider id not found or you have no access" } },
+          { status: 500 },
+        ),
+      ),
+    );
+  });
+
+  // Production report (4.0.0): "Cannot read properties of undefined
+  // (reading 'order')" from FilesStore.filesList, reached through
+  // updateFolder -> updateSelection, on the Rooms root of a portal with a
+  // OneDrive room. A rejected logo save leaves `room` undefined, and
+  // updateRoom writes it into the folders list.
+  test("should keep the rooms list when the room logo save is rejected", async ({
+    page,
+    baseUrl,
+  }) => {
+    const pageErrors: string[] = [];
+    page.on("pageerror", (error) => pageErrors.push(error.message));
+
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+
+    const list = page.getByTestId("table-body");
+    const row = list
+      .locator('[data-testid^="table-row-"]')
+      .filter({ hasText: "Public third-party" });
+
+    await row.getByTestId("context-menu-button").last().click();
+    await page.getByRole("menuitem", { name: "Select" }).click();
+
+    await openDetails(page);
+
+    const roomIcon = page.getByTestId("info_panel_details_room_icon");
+    await expect(roomIcon).toBeVisible();
+
+    await roomIcon.getByRole("button").click();
+    const fileChooser = page.waitForEvent("filechooser");
+    await roomIcon.getByRole("option", { name: "Upload picture" }).click();
+    await (await fileChooser).setFiles(
+      path.resolve(
+        __dirname,
+        "../../../public/images/default_user_photo_size_200-200.png",
+      ),
+    );
+
+    const saveButton = page.getByRole("button", { name: "Save" });
+    await expect(saveButton).toBeVisible();
+    await saveButton.click();
+
+    await expect(page.getByText("Provider id not found")).toBeVisible();
+
+    expect(
+      pageErrors.filter((m) => m.includes("Cannot read properties")),
+    ).toEqual([]);
+    await expect(list.getByText("Public third-party")).toBeVisible();
   });
 });

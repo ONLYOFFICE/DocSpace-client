@@ -43,7 +43,7 @@ import {
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
-import { beforeAll, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { PassphraseModal } from "../PassphraseModal";
 
@@ -438,35 +438,61 @@ describe("PassphraseModal", () => {
     expect(trigger).toHaveFocus();
   });
 
-  it("Forward through the creation dialog", async () => {
-    const user = userEvent.setup();
-    renderModal({ isNew: true });
-    await user.type(getPassphraseInput(), "Correct1horse!battery");
-    await user.type(getConfirmInput(), "Correct1horse!battery");
+  // jsdom lays nothing out, and the dialog's focus trap leaves out controls
+  // without a box: every element gets one here, so the trap sees the dialog.
+  describe("Tab order", () => {
+    beforeEach(() => {
+      vi.spyOn(Element.prototype, "getClientRects").mockImplementation(() => {
+        const rects = [new DOMRect(0, 0, 10, 10)];
+        return Object.assign(rects, { item: (i: number) => rects[i] ?? null });
+      });
+    });
 
-    getPassphraseInput().focus();
-    await user.tab();
-    expect(getConfirmInput()).toHaveFocus();
-    await user.tab();
-    expect(
-      screen.getByRole("button", { name: "Common:ContinueButton" }),
-    ).toHaveFocus();
-    await user.tab();
-    expect(
-      screen.getByRole("button", { name: "Common:CancelButton" }),
-    ).toHaveFocus();
-  });
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
 
-  it("Backwards from the primary action", async () => {
-    const user = userEvent.setup();
-    renderModal({ isNew: true });
-    await user.type(getPassphraseInput(), "Correct1horse!battery");
-    await user.type(getConfirmInput(), "Correct1horse!battery");
+    const getToggles = () =>
+      within(
+        screen.getByRole("dialog", { name: "Common:CreatePassphrase" }),
+      ).getAllByRole("button", { name: "Show" });
 
-    screen.getByRole("button", { name: "Common:ContinueButton" }).focus();
-    await user.tab({ shift: true });
+    it("Forward through the creation dialog", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+      await user.type(getPassphraseInput(), "Correct1horse!battery");
+      await user.type(getConfirmInput(), "Correct1horse!battery");
+      const [passphraseToggle, confirmToggle] = getToggles();
 
-    expect(getConfirmInput()).toHaveFocus();
+      getPassphraseInput().focus();
+      await user.tab();
+      expect(passphraseToggle).toHaveFocus();
+      await user.tab();
+      expect(getConfirmInput()).toHaveFocus();
+      await user.tab();
+      expect(confirmToggle).toHaveFocus();
+      await user.tab();
+      expect(
+        screen.getByRole("button", { name: "Common:ContinueButton" }),
+      ).toHaveFocus();
+      await user.tab();
+      expect(
+        screen.getByRole("button", { name: "Common:CancelButton" }),
+      ).toHaveFocus();
+    });
+
+    it("Backwards from the primary action", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+      await user.type(getPassphraseInput(), "Correct1horse!battery");
+      await user.type(getConfirmInput(), "Correct1horse!battery");
+      const [, confirmToggle] = getToggles();
+
+      screen.getByRole("button", { name: "Common:ContinueButton" }).focus();
+      await user.tab({ shift: true });
+
+      expect(confirmToggle).toHaveFocus();
+    });
   });
 
   // Spec: private-rooms/key-management, "Tab order in key dialogs follows the visual order"

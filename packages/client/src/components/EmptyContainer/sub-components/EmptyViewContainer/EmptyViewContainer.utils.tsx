@@ -290,6 +290,7 @@ export const getRootDescription = (
   >,
   isFormsScope: boolean = false,
   filterFolderType: Nullable<number[]> = null,
+  isPrivateScope: boolean = false,
 ) => {
   return match([rootFolderType, access])
     .with([P._, P.when(() => isPublicRoom)], () => (
@@ -299,6 +300,11 @@ export const getRootDescription = (
         <span>{t("Common:FilesWillAppearHere")}</span>
       </>
     ))
+    .with([FolderType.Rooms, P.when(() => isPrivateScope)], () =>
+      access === ShareAccessRights.None
+        ? t("EmptyView:EmptyRootPrivateRoomsDescription")
+        : t("EmptyView:EmptyRootPrivateRoomsUserDescription"),
+    )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),
     )
@@ -414,8 +420,12 @@ export const getRootTitle = (
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
   isFormsScope: boolean = false,
+  isPrivateScope: boolean = false,
 ) => {
   return match([rootFolderType, access])
+    .with([FolderType.Rooms, P.when(() => isPrivateScope)], () =>
+      t("EmptyView:EmptyRootPrivateRoomsTitle"),
+    )
     .with(
       [
         FolderType.Rooms,

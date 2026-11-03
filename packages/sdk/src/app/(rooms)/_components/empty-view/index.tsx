@@ -68,6 +68,7 @@ import { useTranslation } from "react-i18next";
 import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/empty-view";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { roomsFilterQuery } from "@/utils/roomsFilterUrl";
 
 import EmptyRoomsRootLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg";
 import EmptyRoomsRootDarkIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.dark.svg";
@@ -81,9 +82,15 @@ import FolderReactSvg from "PUBLIC_DIR/images/folder.react.svg";
 type RoomsEmptyViewProps = {
   isFiltered: boolean;
   isArchive?: boolean;
+  /** Where the archive's "go to rooms" action leads. */
+  roomsPath?: string;
 };
 
-const RoomsEmptyView = ({ isFiltered, isArchive }: RoomsEmptyViewProps) => {
+const RoomsEmptyView = ({
+  isFiltered,
+  isArchive,
+  roomsPath = "/rooms",
+}: RoomsEmptyViewProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase: isBaseTheme } = useTheme();
   const router = useRouter();
@@ -107,7 +114,7 @@ const RoomsEmptyView = ({ isFiltered, isArchive }: RoomsEmptyViewProps) => {
   ) => {
     e.preventDefault();
     const defaultFilter = RoomsFilter.getDefault();
-    window.history.pushState(null, "", `?${defaultFilter.toUrlParams()}`);
+    window.history.pushState(null, "", `?${roomsFilterQuery(defaultFilter)}`);
   };
 
   const filterOptions = [
@@ -125,7 +132,7 @@ const RoomsEmptyView = ({ isFiltered, isArchive }: RoomsEmptyViewProps) => {
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => {
     e.preventDefault();
-    router.push("/rooms");
+    router.push(roomsPath);
   };
 
   const archiveOptions = [

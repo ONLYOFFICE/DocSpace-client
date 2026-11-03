@@ -280,3 +280,131 @@ describe("getFilesContextOptions — room/folder with no permissions", () => {
     expect(opts).toMatchSnapshot();
   });
 });
+
+describe("getFilesContextOptions — folder inside an archived private room", () => {
+  const archivedFolder = (): TItem =>
+    ({
+      id: 6,
+      parentId: 7,
+      title: "Reports",
+      isFolder: true,
+      private: false,
+      rootFolderType: FolderType.Archive,
+      security: { Read: true, Download: true, Copy: true, Duplicate: true },
+      viewAccessibility: {},
+    }) as unknown as TItem;
+
+  const withheld = [
+    "copy-to",
+    "duplicate",
+    "sharing-settings",
+    "copy-shared-link",
+    "manage-links",
+    "link-for-room-members",
+    "mark-as-favorite",
+  ];
+
+  it("Folder menu in an archived private room", () => {
+    const store = createTestFilesStore({
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+    const opts = store.getFilesContextOptions(archivedFolder());
+
+    for (const option of withheld) {
+      expect(opts).not.toContain(option);
+    }
+    expect(opts).toContain("download");
+    expect(opts).toContain("download-encrypted");
+  });
+
+  it("keeps download and copy-to for the same folder in an ordinary archived room", () => {
+    const opts = createTestFilesStore().getFilesContextOptions(
+      archivedFolder(),
+    );
+
+    expect(opts).toContain("download");
+    expect(opts).toContain("copy-to");
+    expect(opts).not.toContain("download-encrypted");
+  });
+});
+
+describe("getFilesContextOptions — download in a private room", () => {
+  const downloadSecurity = { Read: true, Download: true };
+
+  it("Folder context menu", () => {
+    const store = createTestFilesStore({
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+    const folder = {
+      id: 6,
+      parentId: 7,
+      title: "Reports",
+      isFolder: true,
+      rootFolderType: FolderType.Rooms,
+      security: downloadSecurity,
+      viewAccessibility: {},
+    } as unknown as TItem;
+    const opts = store.getFilesContextOptions(folder);
+
+    expect(opts).toContain("download");
+    expect(opts).toContain("download-encrypted");
+  });
+
+  it("Private room with the download right", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const room = {
+      id: 7,
+      title: "Private room",
+      roomType: RoomsType.CustomRoom,
+      rootFolderType: FolderType.Rooms,
+      private: true,
+      security: downloadSecurity,
+      viewAccessibility: {},
+    } as unknown as TItem;
+    const opts = store.getFilesContextOptions(room);
+
+    expect(opts).toContain("download");
+    expect(opts).toContain("download-encrypted");
+  });
+});
+
+describe("getFilesContextOptions — room-level operations of a private room", () => {
+  const ROOM_LEVEL_OPTIONS = [
+    "edit-index",
+    "export-room-index",
+    "save-as-template",
+    "duplicate-room",
+  ];
+  const room = (isPrivate: boolean) =>
+    ({
+      id: 7,
+      title: "Room",
+      roomType: RoomsType.CustomRoom,
+      rootFolderType: FolderType.Rooms,
+      private: isPrivate,
+      security: {
+        Read: true,
+        Download: true,
+        Duplicate: true,
+        EditRoom: true,
+        EditAccess: true,
+        IndexExport: true,
+      },
+      viewAccessibility: {},
+    }) as unknown as TItem;
+
+  it("Private room context menu", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+
+    const ordinary = store.getFilesContextOptions(room(false));
+    const opts = store.getFilesContextOptions(room(true));
+
+    expect(ordinary).toEqual(expect.arrayContaining(ROOM_LEVEL_OPTIONS));
+    for (const option of ROOM_LEVEL_OPTIONS) {
+      expect(opts).not.toContain(option);
+    }
+    expect(opts).toContain("download");
+  });
+});

@@ -34,7 +34,7 @@
  */
 
 import { describe, it, expect, vi } from "vitest";
-import { FileType } from "@docspace/shared/enums";
+import { FileType, FolderType } from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
 import type { TItem } from "../types";
@@ -130,5 +130,47 @@ describe("FilesStore.wsModifyFolderDelete — characterization", () => {
     store.wsModifyFolderDelete({ type: "file", id: 1, data: "" } as never);
 
     expect(store.tempActionFilesIds).toContain(1);
+  });
+});
+
+describe("FilesStore.redirectToParent — Removed from an archived private room", () => {
+  const ARCHIVE_ID = 2003;
+  const ROOM_ID = 12;
+
+  const removedFromArchivedRoomAt = (pathname: string, search: string) => {
+    const navigate = vi.fn();
+    (window as unknown as { DocSpace: unknown }).DocSpace = {
+      navigate,
+      location: { pathname, search },
+    };
+
+    createTestFilesStore().redirectToParent(
+      { id: ROOM_ID } as never,
+      [{ id: ARCHIVE_ID }, { id: ROOM_ID }] as never,
+      true,
+      false,
+      FolderType.Archive,
+    );
+
+    return String(navigate.mock.calls[0][0]);
+  };
+
+  it.each([
+    ["its active-form address", "/private/12/filter"],
+    ["its archive address", "/private/archived/filter"],
+  ])("opens Private → Archive from %s", (_, pathname) => {
+    const url = removedFromArchivedRoomAt(pathname, `?folder=${ROOM_ID}`);
+
+    expect(url.startsWith("/private/archived/filter?")).toBe(true);
+    expect(url).toContain("searchArea=Archive");
+  });
+
+  it("keeps an archived ordinary room's users in Rooms → Archive", () => {
+    const url = removedFromArchivedRoomAt(
+      "/rooms/archived/filter",
+      `?folder=${ROOM_ID}`,
+    );
+
+    expect(url.startsWith("/rooms/archived/filter?")).toBe(true);
   });
 });

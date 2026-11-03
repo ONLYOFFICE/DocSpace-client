@@ -57,14 +57,24 @@ import {
   type TFileItem,
 } from "@/app/(docspace)/_contexts/EncryptedFileActionsContext";
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
+import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
+import useRoomActions from "@/app/(rooms)/_hooks/useRoomActions";
+import { RoomActionsOverrideContext } from "@/app/(rooms)/_contexts/RoomActionsOverrideContext";
 import DocsLayout from "@/app/(personal-files)/_components/docs-layout";
 
 import { usePrivateRoomsPageInit } from "../../_hooks/usePrivateRoomsPageInit";
+import { usePrivateRoute } from "../../_hooks/usePrivateRoute";
 import { usePrivateRoomFilesStore } from "../../_store/PrivateRoomFilesStore";
 import { useEncryptionIdentityStore } from "../../_store/EncryptionIdentityStore";
 import { useEncryptedUpload } from "../../_hooks/useEncryptedUpload";
+import { useEncryptedFileCreation } from "../../_hooks/useEncryptedFileCreation";
 import { useEncryptedDownload } from "../../_hooks/useEncryptedDownload";
 import { useEncryptedCopyMove } from "../../_hooks/useEncryptedCopyMove";
+import { usePrivateRoomActions } from "../../_hooks/usePrivateRoomActions";
+import {
+  resolvePrivateDropFolder,
+  splitPrivateDrop,
+} from "../../_utils/private-drop-zone";
 import {
   PrivateInfoPanelBody,
   PrivateInfoPanelHeader,
@@ -80,6 +90,10 @@ type PrivateRoomFilesPageProps = {
   roomId: string;
   /** True when this room lives in the Archive section (read-only). */
   isArchive?: boolean;
+  /** Whether the room on the open folder's path is private. */
+  isPrivate?: boolean;
+  /** Whether the user may edit the room on the open folder's path. */
+  canEditRoom?: boolean;
 };
 
 const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
@@ -91,19 +105,33 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   user,
   roomId,
   isArchive = false,
+  isPrivate = false,
+  canEditRoom = false,
 }) => {
   const router = useRouter();
+  const privateRoute = usePrivateRoute();
   const { t } = useTranslation(["Common"]);
   const filesStore = usePrivateRoomFilesStore();
   const identityStore = useEncryptionIdentityStore();
   const navigationStore = useNavigationStore();
+  const infoPanelStore = useInfoPanelStore();
+  const { roomChanged } = useRoomActions();
+  const onMembersUpdated = React.useCallback(
+    () => infoPanelStore.setIsMembersPanelUpdating(true),
+    [infoPanelStore],
+  );
+  // Spec: private-rooms/sdk-surface, "Membership from every entry point"
+  const privateRoomActions = usePrivateRoomActions({
+    onRoomChanged: roomChanged,
+    onMembersUpdated,
+  });
   const { uploadFiles } = useEncryptedUpload();
+  const { createFile } = useEncryptedFileCreation(roomId);
   const { downloadFile: decryptAndSaveFile, downloadZip: decryptAndSaveZip } =
     useEncryptedDownload();
   const {
     duplicateFile: duplicateEncryptedFile,
     copyFiles: copyEncryptedFiles,
-    moveFiles: moveEncryptedFiles,
   } = useEncryptedCopyMove();
 
   const isReady = usePrivateRoomsPageInit({
@@ -114,21 +142,14 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   });
 
   React.useEffect(() => {
-    const isPrivate = folderData?.current?.private === true;
-    const canEditRoom = folderData?.current?.security?.EditRoom === true;
     filesStore.setRoomContext(roomId, isPrivate, canEditRoom);
     return () => filesStore.reset();
-  }, [
-    filesStore,
-    roomId,
-    folderData?.current?.private,
-    folderData?.current?.security?.EditRoom,
-  ]);
+  }, [filesStore, roomId, isPrivate, canEditRoom]);
 
   const warnedRoomRef = React.useRef<string | null>(null);
   React.useEffect(() => {
     if (!isReady) return;
-    if (folderData?.current?.private !== true) return;
+    if (!isPrivate) return;
     if (identityStore.keys === null) return;
     if (identityStore.hasKeys) return;
     if (warnedRoomRef.current === roomId) return;
@@ -139,7 +160,7 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
     roomId,
     identityStore.keys,
     identityStore.hasKeys,
-    folderData?.current?.private,
+    isPrivate,
     t,
   ]);
 
@@ -147,25 +168,52 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
     (folderId: number | string) => {
       const roomsRootId = folderData.pathParts?.[0]?.id;
       if (roomsRootId !== undefined && folderId === roomsRootId) {
-        router.push("/private");
+        router.push(privateRoute("/private"));
         return true;
       }
       return false;
     },
-    [router, folderData.pathParts],
+    [router, privateRoute, folderData.pathParts],
   );
 
   // folderId is read at call time so subfolder navigation keeps working.
   const handleEncryptedUpload = React.useCallback(
-    async (input: FileList | File[]) => {
-      const fileArray = Array.from(input);
-      if (fileArray.length === 0) return;
-      const folderId =
+    async (input: FileList | File[], targetFolderId?: number | string) => {
+      // Spec: private-rooms/sdk-surface, "Dropped folders and drop targets".
+      const { files, refusedFolders } = splitPrivateDrop(Array.from(input));
+      if (refusedFolders) {
+        toastr.warning(t("Common:FolderUploadNotSupportedInPrivateRoom"));
+      }
+      if (files.length === 0) return;
+      const openFolderId =
         navigationStore.currentFolderId ?? folderData.current?.id;
-      if (folderId === undefined || folderId === null) return;
-      await uploadFiles({ files: fileArray, folderId, roomId });
+      if (openFolderId === undefined || openFolderId === null) return;
+
+      const target = await resolvePrivateDropFolder(
+        {
+          folderId: openFolderId,
+          isPrivate: true,
+          roomType: folderData.current?.roomType ?? null,
+          encryptionRoomId: roomId,
+        },
+        targetFolderId,
+        folderData.current?.rootFolderType,
+      ).catch(() => null);
+      if (target?.folderId === undefined || target?.folderId === null) {
+        toastr.error(t("Common:OpenPrivateRoomToUpload"));
+        return;
+      }
+      await uploadFiles({ files, folderId: target.folderId, roomId });
     },
-    [uploadFiles, navigationStore, folderData.current?.id, roomId],
+    [
+      uploadFiles,
+      navigationStore,
+      folderData.current?.id,
+      folderData.current?.roomType,
+      folderData.current?.rootFolderType,
+      roomId,
+      t,
+    ],
   );
 
   const encryptedFileActions = React.useMemo<EncryptedFileActions>(
@@ -199,7 +247,8 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
           roomId,
           folderId: navigationStore.currentFolderId ?? folderData.current?.id ?? roomId,
         }),
-      copyFiles: (items, destFolderId) =>
+      roomId,
+      copyFiles: (items, destFolderId, uploadDecrypted) =>
         copyEncryptedFiles({
           files: items.map((it: TFileItem) => ({
             id: Number(it.id),
@@ -209,17 +258,7 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
           })),
           destFolderId,
           sourceRoomId: roomId,
-        }),
-      moveFiles: (items, destFolderId) =>
-        moveEncryptedFiles({
-          files: items.map((it: TFileItem) => ({
-            id: Number(it.id),
-            title: it.title,
-            viewUrl: it.viewUrl,
-            fileExst: it.fileExst ?? "",
-          })),
-          destFolderId,
-          sourceRoomId: roomId,
+          uploadDecrypted,
         }),
     }),
     [
@@ -227,7 +266,6 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
       decryptAndSaveZip,
       duplicateEncryptedFile,
       copyEncryptedFiles,
-      moveEncryptedFiles,
       navigationStore,
       folderData.current?.id,
       roomId,
@@ -255,26 +293,29 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   return (
     <OpenFolderContext.Provider value={handleOpenFolder}>
       <EncryptedFileActionsContext.Provider value={encryptedFileActions}>
-        <DocsLayout
-          folders={folders}
-          files={files}
-          total={total}
-          current={current}
-          pathParts={pathParts}
-          filesSettings={filesSettings}
-          portalSettings={portalSettings}
-          filesFilter={filesFilter}
-          withoutFavorite
-          isPrivate
-          isArchive={isArchive}
-          hasEncryptionKeys={identityStore.hasKeys}
-          uploadFilesToFolder={
-            isArchive ? undefined : handleEncryptedUpload
-          }
-          currentRoomId={roomId}
-          infoPanelHeader={<PrivateInfoPanelHeader />}
-          infoPanelBody={<PrivateInfoPanelBody />}
-        />
+        <RoomActionsOverrideContext.Provider value={privateRoomActions}>
+          <DocsLayout
+            folders={folders}
+            files={files}
+            total={total}
+            current={current}
+            pathParts={pathParts}
+            filesSettings={filesSettings}
+            portalSettings={portalSettings}
+            filesFilter={filesFilter}
+            withoutFavorite
+            isPrivate
+            isArchive={isArchive}
+            hasEncryptionKeys={identityStore.hasKeys}
+            uploadFilesToFolder={
+              isArchive ? undefined : handleEncryptedUpload
+            }
+            createFileInFolder={isArchive ? undefined : createFile}
+            currentRoomId={roomId}
+            infoPanelHeader={<PrivateInfoPanelHeader />}
+            infoPanelBody={<PrivateInfoPanelBody />}
+          />
+        </RoomActionsOverrideContext.Provider>
       </EncryptedFileActionsContext.Provider>
     </OpenFolderContext.Provider>
   );

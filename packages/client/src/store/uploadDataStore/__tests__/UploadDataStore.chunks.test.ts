@@ -34,12 +34,13 @@ import {
   makeBrowserFile,
   makeFileInfo,
   makeUploadFile,
+  makeUploadTarget,
 } from "./testHarness";
 
 import * as filesApi from "@docspace/shared/api/files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { AnalyticsEvents } from "@docspace/shared/enums";
+import { AnalyticsEvents, RoomsType } from "@docspace/shared/enums";
 
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";

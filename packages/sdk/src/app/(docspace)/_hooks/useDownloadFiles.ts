@@ -76,7 +76,11 @@ export default function useDownloadFiles() {
   );
 
   const downloadFiles = useCallback(
-    async (fileIds: number[] | TFileConvertId[], folderIds: number[]) => {
+    async (
+      fileIds: number[] | TFileConvertId[],
+      folderIds: number[],
+      options?: { errorMessage?: (error: unknown) => string },
+    ) => {
       const activeFileIds = fileIds.map((f) =>
         typeof f !== "number" ? f.key : f,
       );
@@ -123,7 +127,14 @@ export default function useDownloadFiles() {
           throw new Error(passwordError);
         }
 
-        toastr.error(error as TData, undefined, 0, true);
+        toastr.error(
+          options?.errorMessage && typeof error !== "string"
+            ? options.errorMessage(error)
+            : (error as TData),
+          undefined,
+          0,
+          true,
+        );
       }
     },
     [

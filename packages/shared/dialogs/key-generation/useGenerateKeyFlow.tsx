@@ -60,10 +60,13 @@ type Step = "idle" | "passphrase" | "recovery-display";
 type Deps = {
   userId: string | undefined;
   accountLabel?: string;
+  /** A user who already has a key gets no second one. */
   hasExistingKeys?: boolean;
   refreshKeysFromServer: () => Promise<void>;
   onSuccess?: () => void;
   onError?: () => void;
+  /** The user cancelled the passphrase or the recovery-phrase dialog. */
+  onCancel?: () => void;
 };
 
 export type GenerateKeyFlow = {
@@ -79,6 +82,7 @@ export function useGenerateKeyFlow({
   refreshKeysFromServer,
   onSuccess,
   onError,
+  onCancel,
 }: Deps): GenerateKeyFlow {
   const { t } = useTranslation(["Common"]);
   const { suspendAutoLock } = useEncryption();
@@ -100,14 +104,21 @@ export function useGenerateKeyFlow({
     setMnemonic(null);
   }, []);
 
+  // Spec: room-membership, "Starting private room creation without a key starts key generation"
+  const cancel = useCallback(() => {
+    reset();
+    onCancel?.();
+  }, [reset, onCancel]);
+
   const request = useCallback(() => {
     if (!globalThis.crypto?.subtle) {
       toastr.error(t("Common:EncryptionRequiresHttps"));
       return;
     }
-    if (isPending || step !== "idle") return;
+    // Spec: private-rooms/key-management, "Generate a new key".
+    if (hasExistingKeys || isPending || step !== "idle") return;
     setStep("passphrase");
-  }, [t, isPending, step]);
+  }, [t, hasExistingKeys, isPending, step]);
 
   const onPassphraseSubmit = useCallback(
     async (input: string) => {
@@ -155,8 +166,6 @@ export function useGenerateKeyFlow({
         userId,
         newIdentity: keyPair,
         newPublicKeyB64: serialized.publicKey,
-        newPublicKeyId: payload.id,
-        activate: !hasExistingKeys,
       });
 
       await refreshKeysFromServer();
@@ -176,7 +185,6 @@ export function useGenerateKeyFlow({
     passphrase,
     mnemonic,
     userId,
-    hasExistingKeys,
     refreshKeysFromServer,
     reset,
     t,
@@ -191,7 +199,7 @@ export function useGenerateKeyFlow({
           visible
           isNew
           onSubmit={onPassphraseSubmit}
-          onCancel={reset}
+          onCancel={cancel}
           isLoading={isPending}
         />
       ) : null}
@@ -201,7 +209,7 @@ export function useGenerateKeyFlow({
           mnemonic={mnemonic}
           accountLabel={accountLabel}
           onConfirm={onRecoveryConfirm}
-          onCancel={reset}
+          onCancel={cancel}
           isLoading={isPending}
         />
       ) : null}

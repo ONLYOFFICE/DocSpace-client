@@ -37,12 +37,71 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 import { RoomsTypePrivate } from "../enums";
 
-import { getCreateRoomTypes } from "./rooms";
-import { isPrivateRoomsEnabled, PRIVATE_ROOMS_FLAG_KEY } from "./privateRooms";
+import { RoomsTypeValues } from "./common";
+import { AI_HUB_SECTION_TYPES, getCreateRoomTypes } from "./rooms";
+import {
+  isPrivateRoomsEnabled,
+  isPrivateRoomsOptInValue,
+  PRIVATE_ROOMS_FLAG_KEY,
+  setPrivateRoomsOptInSource,
+} from "./privateRooms";
 
 describe("private rooms feature flag", () => {
   beforeEach(() => {
     localStorage.clear();
+    setPrivateRoomsOptInSource(null);
+  });
+
+  it("takes the opt-in from an installed source instead of the flag", () => {
+    localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
+    setPrivateRoomsOptInSource(() => false);
+    expect(isPrivateRoomsEnabled()).toBe(false);
+
+    localStorage.clear();
+    setPrivateRoomsOptInSource(() => true);
+    expect(isPrivateRoomsEnabled()).toBe(true);
+  });
+
+  it("goes back to the flag when the source is removed", () => {
+    setPrivateRoomsOptInSource(() => true);
+    setPrivateRoomsOptInSource(null);
+
+    expect(isPrivateRoomsEnabled()).toBe(false);
+  });
+
+  it("is off when the installed source throws", () => {
+    setPrivateRoomsOptInSource(() => {
+      throw new Error("no config");
+    });
+
+    expect(isPrivateRoomsEnabled()).toBe(false);
+  });
+
+  it("sets the flag from the opt-in in the page URL", () => {
+    window.history.pushState({}, "", "/profile/keys-management?privateRooms=1");
+    expect(isPrivateRoomsEnabled()).toBe(true);
+
+    window.history.pushState({}, "", "/profile/login");
+    expect(isPrivateRoomsEnabled()).toBe(true);
+    window.history.pushState({}, "", "/");
+  });
+
+  it("leaves the flag alone without the opt-in in the page URL", () => {
+    window.history.pushState({}, "", "/profile/keys-management?privateRooms=0");
+
+    expect(isPrivateRoomsEnabled()).toBe(false);
+    window.history.pushState({}, "", "/");
+  });
+
+  it("reads true and 1 as an opt-in and nothing else", () => {
+    expect([true, "true", "1"].map(isPrivateRoomsOptInValue)).toEqual([
+      true,
+      true,
+      true,
+    ]);
+    expect(
+      [false, "false", "0", "", null, undefined].map(isPrivateRoomsOptInValue),
+    ).toEqual([false, false, false, false, false, false]);
   });
 
   it("is off when the flag was never set", () => {
@@ -62,22 +121,28 @@ describe("private rooms feature flag", () => {
     expect(isPrivateRoomsEnabled()).toBe(false);
   });
 
-  it("hides the private room type from the create-room chooser", () => {
+  it("Chooser without the flag: hides the private room type", () => {
     expect(getCreateRoomTypes()).not.toContain(RoomsTypePrivate);
   });
 
-  it("offers the private room type once the flag is set", () => {
+  it("Chooser with the flag: still hides the private room type", () => {
     localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
 
-    expect(getCreateRoomTypes()).toContain(RoomsTypePrivate);
+    expect(getCreateRoomTypes()).not.toContain(RoomsTypePrivate);
   });
 
   it("keeps every other room type in both states", () => {
-    const hidden = getCreateRoomTypes();
+    const withoutFlag = getCreateRoomTypes();
 
     localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
-    const shown = getCreateRoomTypes();
+    const withFlag = getCreateRoomTypes();
 
-    expect(shown.filter((type) => type !== RoomsTypePrivate)).toEqual(hidden);
+    expect(withoutFlag).toEqual(
+      RoomsTypeValues.filter(
+        (type) =>
+          type !== RoomsTypePrivate && !AI_HUB_SECTION_TYPES.includes(type),
+      ),
+    );
+    expect(withFlag).toEqual(withoutFlag);
   });
 });

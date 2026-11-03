@@ -148,6 +148,7 @@ export async function getFolderInfo(
   folderId: number | string,
   skipRedirect = false,
   share?: string,
+  signal?: AbortSignal,
 ) {
   const headers = share
     ? {
@@ -159,6 +160,7 @@ export async function getFolderInfo(
     method: "get",
     url: `/files/folder/${folderId}`,
     headers,
+    signal,
   };
 
   const res = (await request(options, skipRedirect)) as TFolder;
@@ -825,6 +827,16 @@ export async function finalizeUploadSession(
   return res;
 }
 
+export async function abortUploadSession(
+  folderId: string | number,
+  sessionId: string,
+) {
+  return request({
+    method: "delete",
+    url: `/files/${folderId}/session/${sessionId}`,
+  });
+}
+
 // TODO: Need update res type and remove unknown
 export function uploadFile(url: string, data: unknown) {
   return axios.post(url, data);
@@ -1356,15 +1368,6 @@ export async function removeFromFavorite(
     data,
   };
   const res = (await request(options)) as boolean;
-  return res;
-}
-
-export async function getIsEncryptionSupport() {
-  const res = (await request({
-    method: "get",
-    url: "/files/@privacy/available",
-  })) as boolean;
-
   return res;
 }
 

@@ -140,6 +140,9 @@ export type UseQuickActionsProps = SectionFlags & {
   // Makes the gallery create a form space out of the picked template instead of
   // a file — used by the Forms root tile, which has no folder to create in.
   setCreateRoomFromTemplate?: (value: boolean) => void;
+  // Opens the create-room dialog on the Private type (ContextOptionsStore
+  // .onCreateRoom on the Private list).
+  onCreatePrivateRoom?: () => void;
 };
 
 export type QuickActionsResult = {
@@ -164,6 +167,7 @@ export const useQuickActions = (
     setTemplateGalleryVisible,
     setOformFromFolderId,
     setCreateRoomFromTemplate,
+    onCreatePrivateRoom,
     ...sectionFlags
   } = props;
 
@@ -373,8 +377,25 @@ export const useQuickActions = (
     isAiChatAvailable,
   ]);
 
+  // Spec: private-rooms/sidebar-section, "Quick actions in the section"
+  const privateRoomItems = React.useMemo<QuickActionItem[]>(
+    () => [
+      {
+        id: "quick-private-room",
+        dataTestId: "quick-private-room",
+        icon: <QuickCustomRoomIcon />,
+        label: t("Common:PrivateRoomTitle"),
+        onClick: () => onCreatePrivateRoom?.(),
+      },
+    ],
+    [t, onCreatePrivateRoom],
+  );
+
   if (section === "files" && canCreateFiles)
     return { show: true, items: fileItems };
+
+  if (section === "private-rooms" && canCreateRooms)
+    return { show: true, items: privateRoomItems };
 
   if (section === "rooms" && canCreateRooms)
     return { show: true, items: roomItems };

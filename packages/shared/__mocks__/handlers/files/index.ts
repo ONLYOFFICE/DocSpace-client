@@ -140,6 +140,7 @@ export {
   privateRoomListHandler,
   type PrivateRoomListOptions,
 } from "./privateRoomList";
+export { emptyTemplateHandler } from "./emptyTemplate";
 
 export {
   type FolderHistoryFeedSeed,

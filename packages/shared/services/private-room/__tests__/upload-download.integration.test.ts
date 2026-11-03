@@ -82,9 +82,10 @@ const server = setupServer(
   ...encryptedFilesHandlers(PORT, {
     roomId: ROOM_ID,
     ownerId: ALICE_ID,
+    currentUserId: ALICE_ID,
     handle: filesHandle,
   }),
-  ...privacyroomAccessHandlers(PORT),
+  ...privacyroomAccessHandlers(PORT, { userId: ALICE_ID }),
 );
 
 class MockOpenRequest {

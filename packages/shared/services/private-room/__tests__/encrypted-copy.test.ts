@@ -60,11 +60,13 @@ vi.mock("../../../api/files", () => ({
 }));
 vi.mock("../../../api/privacy", () => ({
   getRoomEncryptionKeys: vi.fn().mockResolvedValue([]),
+  getFilePublicKeys: vi.fn().mockResolvedValue([]),
 }));
 
 import { decryptFile, wipeDek } from "../../encryption/file-keys";
 import { getFileEncryptionAccess } from "../../../api/files";
 import { unwrapDekForCurrentUser } from "../../encryption/room-file-access";
+import { getFilePublicKeys, getRoomEncryptionKeys } from "../../../api/privacy";
 
 const ROOM_ID = 9100;
 
@@ -195,6 +197,35 @@ describe("encryptedCopy", () => {
       expect(file.name).toBe("real.docx");
       expect(file.type).toBe("application/x-doc");
       expect(wipeDek).toHaveBeenCalledTimes(1);
+    });
+
+    it("Cut and paste a file another member uploaded: the sender key comes from the file when no room id is known", async () => {
+      vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+        validAccess as any,
+      );
+      vi.mocked(getFilePublicKeys).mockResolvedValueOnce([
+        // biome-ignore lint/suspicious/noExplicitAny: test mock
+        { id: "alice-1", userId: "alice", publicKey: "PK-ALICE" } as any,
+      ]);
+      vi.stubGlobal("fetch", vi.fn().mockResolvedValue(respond(16)));
+      vi.mocked(unwrapDekForCurrentUser).mockResolvedValueOnce(
+        new Uint8Array(32),
+      );
+      vi.mocked(decryptFile).mockResolvedValueOnce({
+        data: new Blob([new Uint8Array([5, 6])]),
+        fileName: "real.docx",
+      });
+
+      await decryptEncryptedItemToFile(baseItem, "u1", identity, null);
+
+      expect(getFilePublicKeys).toHaveBeenCalledWith(baseItem.id);
+      expect(getRoomEncryptionKeys).not.toHaveBeenCalled();
+      expect(
+        vi.mocked(unwrapDekForCurrentUser).mock.calls[0][0].roomMemberKeys,
+      ).toEqual([
+        expect.objectContaining({ userId: "alice", publicKey: "PK-ALICE" }),
+      ]);
     });
 
     it("falls back to item.title when the DSE3 header has no encryptedName", async () => {

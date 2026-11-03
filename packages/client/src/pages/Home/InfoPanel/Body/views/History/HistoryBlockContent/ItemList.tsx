@@ -49,7 +49,11 @@ import {
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getFileExtension } from "@docspace/shared/utils/common";
 import { getCachedEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
-import { useFilenameCacheVersion } from "@docspace/shared/hooks/useResolvedFileTitle";
+import {
+  useEncryptedFilenameRecovery,
+  useFilenameCacheVersion,
+} from "@docspace/shared/hooks/useResolvedFileTitle";
+import { getFileInfo as loadFile } from "@docspace/shared/api/files";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -72,6 +76,9 @@ type HistoryItemListProps = {
   feed: TFeedAction<TFeedData>;
 
   selectedFolderId?: number | string;
+  userId?: string;
+  /** The private room the history belongs to, if it is one. */
+  privateRoomId?: number | string | null;
 
   getInfoPanelItemIcon?: InfoPanelStore["getInfoPanelItemIcon"];
 
@@ -91,6 +98,8 @@ const HistoryItemList = ({
   actionType,
   targetType,
   selectedFolderId,
+  userId,
+  privateRoomId,
 
   nameWithoutExtension,
   getInfoPanelItemIcon,
@@ -113,6 +122,21 @@ const HistoryItemList = ({
   const onExpand = () => setIsExpanded(true);
 
   const isFolder = targetType === "folder";
+
+  useEncryptedFilenameRecovery(
+    isFolder || !privateRoomId
+      ? []
+      : [feed, ...feed.related].map(({ data }) => ({
+          id: data.id,
+          encrypted: true,
+          viewUrl: data.viewUrl,
+        })),
+    {
+      userId,
+      roomId: privateRoomId,
+      loadViewUrl: async (fileId) => (await loadFile(fileId)).viewUrl,
+    },
+  );
 
   const items = [feed, ...feed.related].map((item) => {
     const { id, data } = item;
@@ -303,8 +327,14 @@ const HistoryItemList = ({
 };
 
 export default inject<TStore>(
-  ({ infoPanelStore, filesActionsStore, filesStore, selectedFolderStore }) => {
-    const { getInfoPanelItemIcon } = infoPanelStore;
+  ({
+    infoPanelStore,
+    filesActionsStore,
+    filesStore,
+    selectedFolderStore,
+    userStore,
+  }) => {
+    const { getInfoPanelItemIcon, infoPanelRoomSelection } = infoPanelStore;
 
     const { getFileInfo, getFolderInfo } = filesStore;
 
@@ -313,6 +343,10 @@ export default inject<TStore>(
 
     return {
       selectedFolderId: selectedFolderStore.id,
+      userId: userStore.user?.id,
+      privateRoomId: infoPanelRoomSelection?.private
+        ? infoPanelRoomSelection.id
+        : null,
 
       getInfoPanelItemIcon,
       nameWithoutExtension,

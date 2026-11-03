@@ -34,16 +34,19 @@
  */
 
 import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
+import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
+import { resolveFolderTarget } from "@docspace/shared/services/private-room/upload-target";
 
-import { getFilesSettings, getFolder } from "@/api/files";
+import { getFilesSettings, getFolder, getFolderPath } from "@/api/files";
 import { getSettings } from "@/api/settings";
 import { getSelf } from "@/api/people";
 import { PAGE_COUNT } from "@/utils/constants";
 
+import { hasPrivateRoomsOptIn } from "../../_utils/private-rooms-opt-in";
 import PrivateRoomFilesPage from "./page.client";
 
 export const dynamic = "force-dynamic";
@@ -58,7 +61,6 @@ const serializeFilter = (filter: FilesFilter) => {
     ["sortBy", filter.sortBy],
     ["sortOrder", filter.sortOrder],
     ["filterType", filter.filterType?.toString()],
-    ["search", filter.search],
   ];
 
   for (const [key, value] of entries) {
@@ -82,13 +84,15 @@ export default async function PrivateRoomFiles({
   const { roomId } = await params;
   const sp = await searchParams;
 
+  if (!hasPrivateRoomsOptIn(sp)) return null;
+
+  // Spec: private-rooms/sdk-surface, "No search in private rooms"
   const filter = FilesFilter.getDefault();
   filter.folder = sp.folder || roomId;
   filter.pageCount = sp.pageCount ? Number(sp.pageCount) : PAGE_COUNT;
   if (sp.page) filter.page = Math.max(0, Number(sp.page) - 1);
   if (sp.sortBy) filter.sortBy = sp.sortBy as typeof filter.sortBy;
   if (sp.sortOrder) filter.sortOrder = sp.sortOrder as typeof filter.sortOrder;
-  if (sp.search) filter.search = sp.search;
 
   const filesFilter = serializeFilter(filter);
 
@@ -115,7 +119,34 @@ export default async function PrivateRoomFiles({
     notFound();
   }
 
-  const isArchive = folderData.current.isArchive === true;
+  // Spec: private-rooms/sdk-surface, "Archive page follows private-room rules"
+  let path: TFolder[] = [];
+  const target = await resolveFolderTarget(
+    { id: folderData.current.id, rootFolderType: folderData.current.rootFolderType },
+    async (folderId) => {
+      path = await getFolderPath(folderId);
+      return path;
+    },
+  ).catch(() => null);
+  if (!target || target.encryptionRoomId === null) notFound();
+  const room = path.find(
+    (entry) => String(entry.id) === String(target.encryptionRoomId),
+  );
+
+  // Spec: private-rooms/sdk-surface, "Private rooms only through the private pages"
+  if (!target.isPrivate) {
+    const params = new URLSearchParams(sp);
+    if (String(target.folderId) === String(target.encryptionRoomId)) {
+      params.delete("folder");
+    } else {
+      params.set("folder", String(target.folderId));
+    }
+    const query = params.toString();
+    const section = target.isArchived ? "/archive" : "/rooms";
+    redirect(
+      `${section}/${target.encryptionRoomId}${query ? `?${query}` : ""}`,
+    );
+  }
 
   return (
     <PrivateRoomFilesPage
@@ -125,8 +156,10 @@ export default async function PrivateRoomFiles({
       portalSettings={portalSettings as TSettings}
       filesFilter={filesFilter}
       user={user}
-      roomId={roomId}
-      isArchive={isArchive}
+      roomId={String(target.encryptionRoomId)}
+      isArchive={!!target.isArchived}
+      isPrivate={target.isPrivate}
+      canEditRoom={room?.security?.EditRoom === true}
     />
   );
 }

@@ -106,6 +106,12 @@
   white-space: nowrap;
 }
 
+.pendingAccess {
+  display: flex;
+  column-gap: 4px;
+  min-width: 0;
+}
+
 .userSubtitle {
   font-size: 12px;
   line-height: 16px;

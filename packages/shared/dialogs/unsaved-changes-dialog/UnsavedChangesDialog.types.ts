@@ -38,4 +38,6 @@ export interface UnsavedChangesDialogProps {
   onClose: VoidFunction;
   onCancel: VoidFunction;
   onConfirm: VoidFunction;
+  /** Stacking order; raise it when the dialog confirms the close of another dialog. */
+  zIndex?: number;
 }

@@ -40,8 +40,6 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { resetGhostStateGate } from "@docspace/shared/services/encryption/ghost-state-notifier";
-import { clearActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
-import { clearRotationState } from "@docspace/shared/services/encryption/rotation-state";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -91,8 +89,6 @@ export function useResetKeysFlow({
       const results = await Promise.allSettled(
         keys.map((k) => deleteEncryptionKey(String(k.id))),
       );
-      clearActiveKeyId(userId);
-      clearRotationState(userId);
       SecretStorage.lock();
       resetGhostStateGate();
       await refreshKeysFromServer();
@@ -112,7 +108,7 @@ export function useResetKeysFlow({
       setIsPending(false);
       setConfirming(false);
     }
-  }, [encryptionKeys, isPending, userId, refreshKeysFromServer, t]);
+  }, [encryptionKeys, isPending, refreshKeysFromServer, t]);
 
   const modals = confirming ? (
     <ResetKeysConfirmDialog

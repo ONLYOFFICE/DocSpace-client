@@ -52,6 +52,8 @@ export type QuickActionsSection =
   | "form-room"
   // Private room: file-creation tiles wired to the client-side encryption flow.
   | "private"
+  // Private section list root: offer the single Private room tile.
+  | "private-rooms"
   // Archive / trash / templates / favorites / recent / contacts / profile /
   // settings: no quick-actions banner.
   | null;
@@ -70,6 +72,8 @@ export type SectionFlags = {
   isRecentFolder?: boolean;
   // View-level flags (already computed in Home/Header).
   isFormsSection?: boolean; // the "Forms" section root (CategoryType.Forms)
+  isPrivateRoomsSection?: boolean; // the Private list address (CategoryType.PrivateRooms)
+  isPrivateRoute?: boolean; // any `/private` address
   // The "AI Rooms" section root and an AI project room: no tile set applies
   // (the room tiles are the ordinary room types; a project holds no files).
   isAiProjectsSection?: boolean;
@@ -94,6 +98,8 @@ export const getQuickActionsSection = (
     isFavoritesFolder,
     isRecentFolder,
     isFormsSection,
+    isPrivateRoomsSection,
+    isPrivateRoute,
     isAiProjectsSection,
     isContactsPage,
     isProfile,
@@ -115,8 +121,14 @@ export const getQuickActionsSection = (
   // Forms section root → collect-forms + from-template tiles.
   if (isFormsSection) return "forms";
 
-  // Rooms list root → room tiles.
-  if (isRoomsFolder) return "rooms";
+  // Private list root → the Private room tile. It is a Rooms list root too, so
+  // it must be checked first; a room named by the list address's query is not.
+  if (isPrivateRoomsSection && isRoomsFolder) return "private-rooms";
+
+  // Rooms list root → room tiles. A `/private` address still holding the rooms
+  // root, as under its no-access view, gets none.
+  // Spec: private-rooms/sidebar-section, "Navigation up and out stays in the section"
+  if (isRoomsFolder) return isPrivateRoute ? null : "rooms";
 
   // Encrypted/private room → handled separately (no banner for now).
   if (isPrivacyFolder) return "private";

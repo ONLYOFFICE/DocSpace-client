@@ -94,6 +94,7 @@ const ArticleMainButtonContent = (props) => {
 
     isPrivacy,
     startUpload,
+    resolveOpenFolderTarget,
     setAction,
     setSelectFileDialogVisible,
     setMainButtonVisible,
@@ -264,17 +265,18 @@ const ArticleMainButtonContent = (props) => {
 
   const onFileChange = React.useCallback(
     async (e) => {
+      const target = resolveOpenFolderTarget();
       const files = await getFilesFromEvent(e);
 
-      createFoldersTree(t, files)
+      createFoldersTree(t, files, target)
         .then((f) => {
-          if (f.length > 0) startUpload(f, null, t);
+          if (f.length > 0) startUpload(f, target, t);
         })
         .catch((err) => {
           toastr.error(err, undefined, 0, true);
         });
     },
-    [startUpload, t],
+    [startUpload, resolveOpenFolderTarget, t],
   );
 
   const onUploadFileClick = React.useCallback(() => {
@@ -860,7 +862,7 @@ export default inject(
       isArchiveFolder,
       selectedTreeNode,
     } = treeFoldersStore;
-    const { startUpload } = uploadDataStore;
+    const { startUpload, resolveOpenFolderTarget } = uploadDataStore;
     const canCreateEncrypted = uploadDataStore.shouldEncryptCurrentUpload();
     const {
       setSelectFileDialogVisible,
@@ -929,6 +931,7 @@ export default inject(
       selectedTreeNode,
 
       startUpload,
+      resolveOpenFolderTarget,
 
       setSelectFileDialogVisible,
       selectFileDialogVisible,

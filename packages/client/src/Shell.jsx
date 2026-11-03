@@ -76,6 +76,7 @@ import { getCookie, deleteCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 
 import {
   getFrameInitialTheme,
+  isPrivateRoomsRoute,
   updateTempContent,
 } from "@docspace/shared/utils/common";
 import {
@@ -821,7 +822,9 @@ const Shell = ({ page = "home", ...rest }) => {
     currentClientView !== "groups" &&
     currentClientView !== "profile" &&
     currentClientView !== "chat" &&
-    !isPrivacyFolder;
+    !isPrivacyFolder &&
+    // Spec: private-rooms/sidebar-section, "No AI chat in the section"
+    !isPrivateRoomsRoute(location.pathname);
 
   // The Forms section takes a single attachment: a question there is about one
   // form and the responses collected in it, and two forms in one message

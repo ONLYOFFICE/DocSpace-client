@@ -61,6 +61,10 @@ import {
 // uses 64 MiB / t=3 / p=4 (DEFAULT_ARGON2_PARAMS).
 const FAST_PARAMS = { m_KiB: 256, t: 1, p: 1 };
 
+// The passphrase slot follows magic(4) + version(1) + suite(1) + flags(1) +
+// public key; it starts with kdfId(1), t(1), p(1).
+const PASSPHRASE_SLOT_OFFSET = 4 + 1 + 1 + 1 + X25519_PUBLIC_KEY_SIZE;
+
 describe("identity", () => {
   let kp: IdentityKeyPair;
 
@@ -307,13 +311,13 @@ describe("identity", () => {
         argon2Params: FAST_PARAMS,
       });
       const bytes = base64ToUint8Array(ser.privateKeyEnc);
-      bytes[8] = 0xff;
-      await expect(
-        unlockWithPassphrase(
-          { publicKey: ser.publicKey, privateKeyEnc: arrayBufferToBase64(bytes) },
-          "secret",
-        ),
-      ).rejects.toBeInstanceOf(InvalidFormatError);
+      bytes[PASSPHRASE_SLOT_OFFSET] = 0xff;
+      const unlock = unlockWithPassphrase(
+        { publicKey: ser.publicKey, privateKeyEnc: arrayBufferToBase64(bytes) },
+        "secret",
+      );
+      await expect(unlock).rejects.toBeInstanceOf(InvalidFormatError);
+      await expect(unlock).rejects.toThrow("unsupported KDF id: 0xff");
     });
 
     it("unlockWithPassphrase rejects zero argon2 params", async () => {
@@ -324,14 +328,14 @@ describe("identity", () => {
         argon2Params: FAST_PARAMS,
       });
       const bytes = base64ToUint8Array(ser.privateKeyEnc);
-      bytes[9] = 0;
-      bytes[10] = 0;
-      await expect(
-        unlockWithPassphrase(
-          { publicKey: ser.publicKey, privateKeyEnc: arrayBufferToBase64(bytes) },
-          "secret",
-        ),
-      ).rejects.toBeInstanceOf(InvalidFormatError);
+      bytes[PASSPHRASE_SLOT_OFFSET + 1] = 0;
+      bytes[PASSPHRASE_SLOT_OFFSET + 2] = 0;
+      const unlock = unlockWithPassphrase(
+        { publicKey: ser.publicKey, privateKeyEnc: arrayBufferToBase64(bytes) },
+        "secret",
+      );
+      await expect(unlock).rejects.toBeInstanceOf(InvalidFormatError);
+      await expect(unlock).rejects.toThrow("Argon2 params must be non-zero");
     });
   });
 

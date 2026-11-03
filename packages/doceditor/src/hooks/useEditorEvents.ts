@@ -938,7 +938,8 @@ const useEditorEvents = ({
       const newTitle = (event as { data: { title: string } }).data.title;
       const favorite = (event as { data: { favorite: boolean } }).data.favorite;
 
-      if (favorite !== fileInfo?.isFavorite && fileInfo?.id) {
+      // Favorites are withheld for an encrypted file, as in the client.
+      if (favorite !== fileInfo?.isFavorite && fileInfo?.id && !fileInfo.encrypted) {
         try {
           if (favorite) {
             await markAsFavorite([fileInfo.id], []);

@@ -13,7 +13,7 @@ pre-push:
       skip_on_fail: false
       fail_text: See report ./common/tests/reports/tests-results.html
     tsc-lint-unit-tests:
-      run: CI=true FORCE_COLOR=0 VITE_CONFIG_NATIVE_IGNORE_WARNING=true pnpm nx run-many -t tsc lint test -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared --parallel=4
+      run: CI=true FORCE_COLOR=0 VITE_CONFIG_NATIVE_IGNORE_WARNING=true pnpm nx run-many -t tsc lint test -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared --parallel=3
       skip_empty: true
       follow: true
       skip_on_fail: false

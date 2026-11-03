@@ -102,8 +102,11 @@ cd packages/client && pnpm exec vitest run src/store/filesStore   # single path
 
 All three suites are part of the blocking lefthook pre-push gate, run in one
 `nx run-many -t tsc lint test` call and cached by Nx: a suite reruns only when
-its package, a package it depends on (`^default`), `pnpm-lock.yaml` or a JSON
-under the root `public/` changed.
+its own package, the non-test, non-story files of a package it depends on,
+`pnpm-lock.yaml` / `pnpm-workspace.yaml`, `public/images`, or the root JSON it
+imports (`locales/.constants`, `locales/en`, `scripts/config.json`) changed —
+see `CLAUDE.md` → "Git hooks". A test that starts reading another root
+`public/` file needs it added to the `test` inputs in `nx.json`.
 
 ## Snapshots
 

@@ -5,7 +5,26 @@
       "{workspaceRoot}/pnpm-lock.yaml",
       "{workspaceRoot}/pnpm-workspace.yaml"
     ],
-    "default": ["{projectRoot}/**/*", "sharedGlobals"]
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "source": [
+      "default",
+      "!{projectRoot}/__tests__/screenshots/**/*",
+      "!{projectRoot}/**/*.md"
+    ],
+    "production": [
+      "source",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
+    ],
+    "publicCode": [
+      "{workspaceRoot}/public/locales/.constants/*.json",
+      "{workspaceRoot}/public/locales/en/*.json",
+      "{workspaceRoot}/public/scripts/config.json"
+    ],
+    "biomeConfig": [
+      "{workspaceRoot}/packages/shared/biome.json",
+      "{workspaceRoot}/packages/shared/biome-plugins/**/*"
+    ]
   },
   "targetDefaults": {
     "build:translations": {
@@ -37,15 +56,20 @@
     },
     "test": {
       "cache": true,
-      "inputs": ["default", "^default", "{workspaceRoot}/public/**/*.json"]
+      "inputs": [
+        "source",
+        "^production",
+        "publicCode",
+        "{workspaceRoot}/public/images/**/*"
+      ]
     },
     "tsc": {
       "cache": true,
-      "inputs": ["default", "^default", "{workspaceRoot}/public/**/*.json"]
+      "inputs": ["source", "^production", "publicCode"]
     },
     "lint": {
       "cache": true,
-      "inputs": ["default", "^default"]
+      "inputs": ["source", "biomeConfig"]
     }
   },
   "defaultBase": "develop",

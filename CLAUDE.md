@@ -219,18 +219,26 @@ failure aborts the push:
 1. `npm --prefix ./common/tests run test:lefthook` — locale, asset, color,
    license-header and dependency checks (translation-completeness suites are
    skipped here, so a green push does **not** mean locales are complete)
-2. one `nx run-many -t tsc lint test --parallel=4` over the six packages —
+2. one `nx run-many -t tsc lint test --parallel=3` over the six packages —
    type checking and Biome for all of them, unit tests for shared, client and
    sdk (incl. store tests)
 
-`tsc`, `lint` and `test` are cached by Nx (`nx.json` `targetDefaults`), so a
-task reruns only for a package whose files, dependencies (`^default`),
-lockfile or root `public/**/*.json` changed: a cold run takes about three
-minutes, a push with nothing changed seconds. Nx prints only the output of
-failed tasks. To debug a blocked push, run the failing task on its own
-(`pnpm run tsc`, `lint`, `test`, `test:client`, `test:sdk`); `pnpm nx reset`
-drops the cache if a result looks stale. Never bypass the gate with
-`git push --no-verify`.
+`tsc`, `lint` and `test` are cached by Nx; their inputs are the named inputs
+in `nx.json`. A task reruns only when its own package changed (minus E2E
+screenshots and Markdown), the non-test, non-story files of a package it
+depends on changed, or `pnpm-lock.yaml` / `pnpm-workspace.yaml` changed. On top
+of that, `tsc` and `test` watch the root JSON they really import
+(`locales/.constants`, `locales/en`, `scripts/config.json`), `test` watches
+`public/images` (svgr imports), and `lint` watches shared's `biome.json` and
+`biome-plugins/`. A cold run takes about three minutes, a push with nothing
+changed seconds. A new import of another root `public/` file into code or
+tests must be added to those inputs, or the cache hides it.
+
+The manual `pnpm run tsc`, `lint`, `test`, `test:client` and `test:sdk` go
+through the same cache and replay a stored result when nothing changed. Nx
+prints only the output of failed tasks. To debug a blocked push, run the
+failing task on its own; `pnpm nx reset` drops the cache if a result looks
+stale. Never bypass the gate with `git push --no-verify`.
 
 CI lives in Gitea Actions (`.gitea/workflows/frontend-common-tests.yaml`) but
 is **manual-dispatch only** — there is no automatic PR/push CI, so the

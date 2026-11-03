@@ -203,6 +203,7 @@ const InjectedEmptyViewContainer = inject<
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
       vectorizationEnabled: settingsStore.aiConfig?.vectorizationEnabled !== false,
       onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
+      createRoom: contextOptionsStore.onCreateRoom,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

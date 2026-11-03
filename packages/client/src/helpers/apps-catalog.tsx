@@ -126,7 +126,7 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
     {
       id: "e2e-rooms",
       icon: <CatalogPrivateIcon />,
-      title: t("Common:DashboardE2eRoomsTitle"),
+      title: t("Common:Private"),
       description: t("Common:DashboardE2eRoomsDescription"),
       alwaysOn: false,
     },

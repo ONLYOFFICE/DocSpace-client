@@ -62,7 +62,13 @@ export const getItemUrl = (
 ) => {
   const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
 
-  const url = getCategoryUrl(deps.categoryType, id);
+  // A room row of the Private list links to the room's own address.
+  const categoryType =
+    deps.categoryType === CategoryType.PrivateRooms
+      ? CategoryType.PrivateRoom
+      : deps.categoryType;
+
+  const url = getCategoryUrl(categoryType, id);
 
   if (canOpenPlayer) {
     if (deps.publicRoomStore.isPublicRoom) {

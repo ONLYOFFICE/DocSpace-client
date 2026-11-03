@@ -35,14 +35,27 @@
 
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useId,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
+import { useKeyDialogCloseGuard } from "../key-dialog-close-guard";
+import { submitOnEnter } from "../key-dialog-keys";
+import { useRefocusAfterFailure } from "../key-dialog-refocus";
+import { KeyDialogAnnouncement } from "../key-dialog-announcement";
+import UnsavedChangesDialog from "../unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
@@ -64,6 +77,8 @@ export const RecoveryPhraseInputModal: React.FC<
   RecoveryPhraseInputModalProps
 > = ({ visible, onSubmit, onCancel, error: externalError, isLoading = false }) => {
   const { t, ready } = useTranslation(["Common"]);
+  const titleId = useId();
+  const hintId = useId();
 
   const [phrase, setPhrase] = useState("");
   const [localError, setLocalError] = useState("");
@@ -110,73 +125,104 @@ export const RecoveryPhraseInputModal: React.FC<
     onCancel();
   }, [onCancel]);
 
+  const { requestClose, confirming, confirmation } = useKeyDialogCloseGuard({
+    visible,
+    dirty: phrase.trim() !== "",
+    onCancel: handleCancel,
+  });
+
   const isDisabled = phrase.trim().length === 0 || isLoading || isValidating;
 
+  useRefocusAfterFailure(
+    "recoveryPhraseInput",
+    visible && !isLoading && !isValidating && !!error,
+  );
+
+  const handleKeyDown = useMemo(
+    () =>
+      submitOnEnter(() => {
+        void handleSubmit();
+      }, !isDisabled && !confirming),
+    [handleSubmit, isDisabled, confirming],
+  );
+
   return (
-    <ModalDialog
-      zIndex={410}
-      visible={visible}
-      onClose={handleCancel}
-      displayType={ModalDialogType.modal}
-      isLoading={!ready}
-      autoMaxHeight
-    >
-      <ModalDialog.Header>
-        {t("Common:UseRecoveryPhrase")}
-      </ModalDialog.Header>
+    <>
+      <ModalDialog
+        zIndex={410}
+        visible={visible}
+        onClose={requestClose}
+        displayType={ModalDialogType.modal}
+        displayTypeDetailed={KEY_DIALOG_DISPLAY_TYPE}
+        closeOnBackdropClick={false}
+        aria-labelledby={titleId}
+        isLoading={!ready}
+        autoMaxHeight
+      >
+        <ModalDialog.Header>
+          <span id={titleId}>{t("Common:UseRecoveryPhrase")}</span>
+        </ModalDialog.Header>
 
-      <ModalDialog.Body>
-        <div className={styles.container}>
-          <Text className={styles.description}>
-            {t("Common:RecoveryPhraseInputHint")}
-          </Text>
-
-          {error ? (
-            <div className={styles.errorBox}>
-              <Text fontSize="13px" fontWeight={600} color="var(--color-error)">
-                {error}
+        <ModalDialog.Body>
+          <div className={styles.container}>
+            <div id={hintId}>
+              <Text className={styles.description}>
+                {t("Common:RecoveryPhraseInputHint")}
               </Text>
             </div>
-          ) : null}
 
-          <Textarea
-            id="recoveryPhraseInput"
-            name="recoveryPhraseInput"
-            value={phrase}
-            onChange={(e) => {
-              setPhrase(e.target.value);
-              setLocalError("");
-            }}
-            placeholder={t("Common:RecoveryPhrasePlaceholder")}
-            heightTextArea="120px"
-            isDisabled={isLoading || isValidating}
-            hasError={!!error}
-            autoFocus
-            fontSize={13}
+            <FieldContainer
+              isVertical
+              labelFor="recoveryPhraseInput"
+              removeMargin
+              hasError={!!error}
+              errorMessage={error ?? ""}
+              errorMessageWidth="100%"
+            >
+              <Textarea
+                id="recoveryPhraseInput"
+                name="recoveryPhraseInput"
+                value={phrase}
+                onChange={(e) => {
+                  setPhrase(e.target.value);
+                  setLocalError("");
+                }}
+                onKeyDown={handleKeyDown}
+                placeholder={t("Common:RecoveryPhrasePlaceholder")}
+                aria-labelledby={hintId}
+                heightTextArea="120px"
+                isDisabled={isLoading || isValidating}
+                hasError={!!error}
+                autoFocus
+                fontSize={13}
+              />
+            </FieldContainer>
+          </div>
+          <KeyDialogAnnouncement text={error ?? ""} />
+        </ModalDialog.Body>
+
+        <ModalDialog.Footer>
+          <Button
+            scale
+            primary
+            key="SubmitButton"
+            onClick={handleSubmit}
+            size={ButtonSize.normal}
+            label={t("Common:ContinueButton")}
+            isDisabled={isDisabled}
+            isLoading={isLoading || isValidating}
           />
-        </div>
-      </ModalDialog.Body>
-
-      <ModalDialog.Footer>
-        <Button
-          scale
-          primary
-          key="SubmitButton"
-          onClick={handleSubmit}
-          size={ButtonSize.normal}
-          label={t("Common:ContinueButton")}
-          isDisabled={isDisabled}
-          isLoading={isLoading || isValidating}
-        />
-        <Button
-          scale
-          key="CancelButton"
-          onClick={handleCancel}
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-          isDisabled={isLoading || isValidating}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
+          <Button
+            scale
+            key="CancelButton"
+            onClick={handleCancel}
+            size={ButtonSize.normal}
+            label={t("Common:CancelButton")}
+            isDisabled={isLoading || isValidating}
+          />
+        </ModalDialog.Footer>
+      </ModalDialog>
+      <UnsavedChangesDialog {...confirmation} />
+    </>
   );
 };

@@ -57,6 +57,8 @@ import useContextMenuModel from "./useContextMenuModel";
 import useRoomContextMenuModel from "@/app/(rooms)/_hooks/useRoomContextMenuModel";
 import useRoomActions from "@/app/(rooms)/_hooks/useRoomActions";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
+import { PRIVATE_FOLDER_CONTEXT_OPTIONS } from "@/app/(personal-files)/_constants/private-context-options";
+import { useEncryptedFileActions } from "../_contexts/EncryptedFileActionsContext";
 import type { TFolderItem } from "./useItemList";
 
 /**
@@ -78,6 +80,7 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
   const renameCtx = React.useContext(RenameContext);
   const infoCtx = React.useContext(InfoContext);
   const shareCtx = React.useContext(ShareContext);
+  const insidePrivateRoom = !!useEncryptedFileActions();
 
   const {
     editRoom,
@@ -85,17 +88,22 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     changeOwner,
     archiveRoom,
     deleteRoom,
+    restoreRoom,
     infoRoom,
     roomChanged,
   } = useRoomActions();
 
-  const { getFoldersContextMenu } = useItemContextMenu({ isTrashSection, isDocsSection });
+  const { getFoldersContextMenu } = useItemContextMenu({
+    isTrashSection,
+    isDocsSection,
+    isPrivate: insidePrivateRoom,
+  });
   const { getContextModel: getRoomContextModel } = useRoomContextMenuModel(
     editRoom,
     roomChanged,
     changeOwner,
-    false,        // isArchive
-    undefined,    // onRestoreRoom
+    filesListStore.rootFolderType === FolderType.Archive,
+    restoreRoom,
     deleteRoom,
     undefined,    // onDeleteSelected
     undefined,    // onRestoreSelected
@@ -109,7 +117,12 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     if (!current) return undefined;
 
     // isHeader: true — "open" is excluded at the source (see useItemContextMenu)
-    const contextOptions = getFoldersContextMenu(current, { isHeader: true });
+    const allOptions = getFoldersContextMenu(current, { isHeader: true });
+    // Spec: private-rooms/sdk-surface, "Menu entries withheld for encrypted items".
+    const contextOptions =
+      insidePrivateRoom && !isRoom
+        ? allOptions.filter((key) => PRIVATE_FOLDER_CONTEXT_OPTIONS.has(key))
+        : allOptions;
 
     const rawLogo = (current as unknown as { logo?: TLogo }).logo;
     const { roomLogo, roomIconColor, hasRoomImage } = normalizeRoomLogo(rawLogo);
@@ -125,7 +138,12 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
       roomIconColor,
       hasRoomImage,
     } as unknown as TFolderItem;
-  }, [current, getFoldersContextMenu, isRoom]);
+  }, [
+    current,
+    getFoldersContextMenu,
+    isRoom,
+    insidePrivateRoom,
+  ]);
 
   const { getContextMenuModel: getFolderHeaderContextMenuModel } =
     useContextMenuModel({

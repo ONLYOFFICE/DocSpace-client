@@ -33,9 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { Page } from "@playwright/test";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import {
+  generateIdentityKeyPair,
+  serializeIdentity,
+} from "@docspace/shared/services/encryption/identity";
 import {
   capabilitiesHandler,
   privacyroomKeysHandlers,
+  roomListHandler,
   selfActivationStatusHandler,
   settingsHandler,
   type PrivacyroomHandlerHandle,
@@ -76,17 +83,12 @@ test.describe("Profile > Keys Management", () => {
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
     await generateBtn.click();
 
-    // PasswordInput passes id straight to the underlying InputBlock.
-    const passphraseInput = page.locator(
-      'input[name="passphrase"], #passphrase input',
-    );
-    await expect(passphraseInput.first()).toBeVisible({ timeout: 5_000 });
-    await passphraseInput.first().fill("Test-Horse-Battery-Staple-99!");
+    const passphraseInput = page.getByLabel("Passphrase", { exact: true });
+    await expect(passphraseInput).toBeVisible({ timeout: 5_000 });
+    await passphraseInput.fill("Test-Horse-Battery-Staple-99!");
 
-    const confirmInput = page.locator(
-      'input[name="confirmPassphrase"], #confirmPassphrase input',
-    );
-    await confirmInput.first().fill("Test-Horse-Battery-Staple-99!");
+    const confirmInput = page.getByLabel("Confirm passphrase", { exact: true });
+    await confirmInput.fill("Test-Horse-Battery-Staple-99!");
 
     const passphraseDialog = page.getByRole("dialog");
     await passphraseDialog
@@ -187,5 +189,463 @@ test.describe("Profile > Keys Management", () => {
       .getRequests()
       .filter((r) => r.method === "POST" || r.method === "PUT");
     expect(writeRequests).toHaveLength(0);
+  });
+
+  test("Leftover keys: one key card, no generate or import, and the unused-key notice", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const userId = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [
+          {
+            id: "11111111-1111-1111-1111-111111111111",
+            userId,
+            publicKey: "BASE64_PUBLIC_KEY_OLD",
+            privateKeyEnc: "BASE64_PRIVATE_KEY_ENC_OLD",
+            date: "2026-01-01T00:00:00",
+          },
+          {
+            id: "22222222-2222-2222-2222-222222222222",
+            userId,
+            publicKey: "BASE64_PUBLIC_KEY_NEW",
+            privateKeyEnc: "BASE64_PRIVATE_KEY_ENC_NEW",
+            date: "2026-10-01T00:00:00",
+          },
+        ],
+      }),
+    );
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const cards = page.getByTestId("key_details");
+    await expect(cards).toHaveCount(1, { timeout: 15_000 });
+    await expect(cards.first()).toContainText(
+      "22222222-2222-2222-2222-222222222222",
+    );
+    await expect(
+      page.getByRole("button", { name: "Generate new key", exact: true }),
+    ).toHaveCount(0);
+    await expect(page.getByTestId("import_key_link")).toHaveCount(0);
+    await expect(page.getByTestId("unused_keys_notice")).toBeVisible();
+  });
+});
+
+// Spec: private-rooms/key-management, "Key dialogs are accessible and adapt
+// to narrow screens". The passphrase dialog opens as a centred modal on a wide
+// screen and as an aside panel on a narrow one.
+test.describe("Profile > Keys Management: key dialogs on screen", () => {
+  test.use({ locale: "en-US", timezoneId: "UTC" });
+
+  const MOBILE = { width: 390, height: 844 };
+  const USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+
+  test.beforeEach(async ({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      // No private room in the list: the delete warning names none.
+      roomListHandler(TEST_PORT),
+    );
+  });
+
+  const openPassphraseDialog = async (
+    page: Page,
+    baseUrl: string,
+  ) => {
+    await page.goto(`${baseUrl}/profile/keys-management`);
+    await page
+      .getByRole("button", { name: "Generate new key", exact: true })
+      .click({ timeout: 15_000 });
+    const dialog = page.getByRole("dialog", { name: "Create passphrase" });
+    await expect(dialog).toBeVisible({ timeout: 5_000 });
+    return dialog;
+  };
+
+  const openDeleteWarning = async (
+    page: Page,
+    baseUrl: string,
+  ) => {
+    await page.goto(`${baseUrl}/profile/keys-management`);
+    await page
+      .locator("[class*='keyItemActions']")
+      .first()
+      .getByTestId("icon-button")
+      .nth(2)
+      .click({ timeout: 15_000 });
+    const dialog = page
+      .getByRole("dialog")
+      .filter({ hasText: "Delete encryption keyWarning" });
+    await expect(
+      dialog.getByText(
+        "None of your private rooms has files encrypted for you, so no room is affected.",
+        { exact: true },
+      ),
+    ).toBeVisible({ timeout: 10_000 });
+    return dialog;
+  };
+
+  const oneKey = () =>
+    privacyroomKeysHandlers(TEST_PORT, {
+      initial: [
+        {
+          id: "22222222-2222-2222-2222-222222222222",
+          userId: USER_ID,
+          publicKey: "BASE64_PUBLIC_KEY_NEW",
+          privateKeyEnc: "BASE64_PRIVATE_KEY_ENC_NEW",
+          date: "2026-10-01T00:00:00",
+        },
+      ],
+    });
+
+  test("Passphrase dialog on a wide screen", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await openPassphraseDialog(page, baseUrl);
+    await expectScreenshot(page, [
+      "desktop",
+      "keys-management",
+      "passphrase-create.png",
+    ]);
+  });
+
+  test("Mobile viewport: the passphrase dialog opens as an aside panel", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await page.setViewportSize(MOBILE);
+    const dialog = await openPassphraseDialog(page, baseUrl);
+    await expect(dialog.getByRole("button", { name: "Continue" })).toBeVisible();
+    await expectScreenshot(page, [
+      "mobile",
+      "keys-management",
+      "passphrase-create.png",
+    ]);
+  });
+
+  test("Delete warning on a wide screen", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...oneKey());
+    await openDeleteWarning(page, baseUrl);
+    await expectScreenshot(page, [
+      "desktop",
+      "keys-management",
+      "delete-key-warning.png",
+    ]);
+  });
+
+  test("Delete warning on a narrow screen", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...oneKey());
+    await page.setViewportSize(MOBILE);
+    await openDeleteWarning(page, baseUrl);
+    await expectScreenshot(page, [
+      "mobile",
+      "keys-management",
+      "delete-key-warning.png",
+    ]);
+  });
+});
+
+test.describe("Profile > Keys Management: keyboard only", () => {
+  test.use({ locale: "en-US", timezoneId: "UTC" });
+
+  const PASSPHRASE = "Test-Horse-Battery-Staple-99!";
+  const USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+
+  test.beforeEach(async ({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      // No private room in the list: the delete warning names none.
+      roomListHandler(TEST_PORT),
+    );
+  });
+
+  for (const { screen, viewport } of [
+    { screen: "wide", viewport: null },
+    { screen: "narrow", viewport: { width: 390, height: 844 } },
+  ]) {
+    test(`Create a key and unlock it from the keyboard on a ${screen} screen`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      const handleRef: { current: PrivacyroomHandlerHandle | null } = {
+        current: null,
+      };
+      mockRequest.use(
+        ...privacyroomKeysHandlers(TEST_PORT, {
+          initial: [],
+          handle: handleRef,
+        }),
+      );
+      if (viewport) await page.setViewportSize(viewport);
+      await page.goto(`${baseUrl}/profile/keys-management`);
+
+      const generateBtn = page.getByRole("button", {
+        name: "Generate new key",
+        exact: true,
+      });
+      await expect(generateBtn).toBeVisible({ timeout: 15_000 });
+      await generateBtn.focus();
+      await page.keyboard.press("Enter");
+
+      const create = page.getByRole("dialog", { name: "Create passphrase" });
+      await expect(
+        create.getByLabel("Passphrase", { exact: true }),
+      ).toBeFocused({ timeout: 5_000 });
+      await page.keyboard.type(PASSPHRASE);
+      await page.keyboard.press("Tab");
+      await expect(
+        create.getByLabel("Confirm passphrase", { exact: true }),
+      ).toBeFocused();
+      await page.keyboard.type(PASSPHRASE);
+      await page.keyboard.press("Enter");
+
+      const recovery = page.getByRole("dialog", {
+        name: "Save your recovery phrase",
+      });
+      await expect(recovery).toBeVisible({ timeout: 15_000 });
+      await page.keyboard.press("Tab");
+      await expect(recovery.getByRole("button", { name: "Close" })).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(
+        recovery.getByRole("button", { name: "Print or save as PDF" }),
+      ).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(
+        recovery.getByRole("button", { name: "Download", exact: true }),
+      ).toBeFocused();
+      const downloaded = page.waitForEvent("download");
+      await page.keyboard.press("Enter");
+      await downloaded;
+
+      await page.keyboard.press("Tab");
+      await expect(
+        recovery.getByRole("button", { name: "Copy to clipboard" }),
+      ).toBeFocused();
+      await page.keyboard.press("Tab");
+      const acknowledge = recovery.getByRole("checkbox", {
+        name: "I have saved my recovery phrase securely",
+      });
+      await expect(acknowledge).toBeFocused();
+      await page.keyboard.press("Space");
+      await expect(acknowledge).toBeChecked();
+      await expect(acknowledge).toBeFocused();
+
+      await page.keyboard.press("Tab");
+      await expect(
+        recovery.getByRole("button", { name: "Continue" }),
+      ).toBeFocused();
+      const posted = page.waitForRequest(
+        (req) =>
+          req.method() === "POST" && req.url().endsWith("/privacyroom/keys"),
+      );
+      await page.keyboard.press("Enter");
+      await posted;
+      await expect(recovery).toBeHidden({ timeout: 5_000 });
+      await expect
+        .poll(() => handleRef.current?.getKeys().length ?? 0, {
+          timeout: 5_000,
+        })
+        .toBe(1);
+
+      const exportKey = page.getByRole("button", {
+        name: "Export key",
+        exact: true,
+      });
+      await page
+        .getByRole("button", { name: "Change passphrase", exact: true })
+        .focus();
+      await page.keyboard.press("Tab");
+      await expect(exportKey).toBeFocused();
+      expect(
+        await exportKey.evaluate((el) => getComputedStyle(el).outlineStyle),
+      ).not.toBe("none");
+
+      await page.keyboard.press("Enter");
+      const prompt = page.getByRole("dialog", { name: "Enter passphrase" });
+      await expect(
+        prompt.getByLabel("Passphrase", { exact: true }),
+      ).toBeFocused({ timeout: 5_000 });
+      await page.keyboard.type(PASSPHRASE);
+      const exported = page.waitForEvent("download");
+      await page.keyboard.press("Enter");
+      await exported;
+      await expect(prompt).toBeHidden({ timeout: 5_000 });
+      await expect(exportKey).toBeFocused();
+
+      await page.getByRole("button", { name: "Delete", exact: true }).focus();
+      await page.keyboard.press("Space");
+      const warning = page
+        .getByRole("dialog")
+        .filter({ hasText: "Delete encryption key" });
+      await expect(warning).toBeVisible({ timeout: 5_000 });
+      await page.keyboard.press("Escape");
+      await expect(warning).toBeHidden();
+      expect(
+        handleRef
+          .current!.getRequests()
+          .filter((r) => r.method === "DELETE"),
+      ).toHaveLength(0);
+
+      const lockNow = page.getByRole("button", {
+        name: "Lock now",
+        exact: true,
+      });
+      await lockNow.focus();
+      await page.keyboard.press("Space");
+      await expect(page.getByText("Encryption locked")).toBeVisible();
+      await expect(lockNow).toBeHidden();
+    });
+  }
+
+  test("Focus back after the recovery display", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const generateBtn = page.getByRole("button", {
+      name: "Generate new key",
+      exact: true,
+    });
+    await expect(generateBtn).toBeVisible({ timeout: 15_000 });
+    await generateBtn.focus();
+    await page.keyboard.press("Enter");
+
+    const create = page.getByRole("dialog", { name: "Create passphrase" });
+    await expect(
+      create.getByLabel("Passphrase", { exact: true }),
+    ).toBeFocused({ timeout: 5_000 });
+    await page.keyboard.type(PASSPHRASE);
+    await page.keyboard.press("Tab");
+    await page.keyboard.type(PASSPHRASE);
+    await page.keyboard.press("Enter");
+
+    const recovery = page.getByRole("dialog", {
+      name: "Save your recovery phrase",
+    });
+    await expect(recovery).toBeVisible({ timeout: 15_000 });
+    await page.keyboard.press("Escape");
+
+    const confirmation = page
+      .getByRole("dialog")
+      .filter({ hasText: "Unsaved changes" });
+    await expect(confirmation).toBeVisible({ timeout: 5_000 });
+    const discard = confirmation.getByRole("button", {
+      name: "Close menu",
+      exact: true,
+    });
+    for (let i = 0; i < 5; i++) {
+      if (await discard.evaluate((el) => el === document.activeElement)) break;
+      await page.keyboard.press("Tab");
+    }
+    await expect(discard).toBeFocused();
+    await page.keyboard.press("Enter");
+
+    await expect(recovery).toBeHidden({ timeout: 5_000 });
+    await expect(generateBtn).toBeFocused();
+  });
+
+  test("Typing again after a wrong passphrase", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const sealed = await serializeIdentity(
+      await generateIdentityKeyPair(),
+      PASSPHRASE,
+    );
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [
+          {
+            id: "22222222-2222-2222-2222-222222222222",
+            userId: USER_ID,
+            publicKey: sealed.publicKey,
+            privateKeyEnc: sealed.privateKeyEnc,
+            date: "2026-10-01T00:00:00",
+          },
+        ],
+        userId: USER_ID,
+      }),
+    );
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const exportKey = page.getByRole("button", {
+      name: "Export key",
+      exact: true,
+    });
+    await expect(exportKey).toBeVisible({ timeout: 15_000 });
+    await exportKey.focus();
+    await page.keyboard.press("Enter");
+
+    const prompt = page.getByRole("dialog", { name: "Enter passphrase" });
+    const field = prompt.getByLabel("Passphrase", { exact: true });
+    await expect(field).toBeFocused({ timeout: 5_000 });
+    await page.keyboard.type("Wrong-Horse-Battery-Staple-00!");
+    await page.keyboard.press("Enter");
+
+    await expect(field).toHaveAttribute("aria-invalid", "true", {
+      timeout: 15_000,
+    });
+    await expect(field).toHaveAccessibleDescription(/Invalid passphrase/);
+    await expect(field).toBeEnabled();
+    await expect(field).toBeFocused();
+
+    await page.keyboard.press("ControlOrMeta+A");
+    await page.keyboard.type(PASSPHRASE);
+    const exported = page.waitForEvent("download");
+    await page.keyboard.press("Enter");
+    await exported;
+    await expect(prompt).toBeHidden({ timeout: 5_000 });
+    await expect(exportKey).toBeFocused();
+  });
+
+  test("Import a key from the keyboard", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    // Playwright intercepts the file chooser only once a listener exists; a
+    // listener added right before the key press can miss the dialog.
+    const chooser = page.waitForEvent("filechooser", { timeout: 25_000 });
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const generateBtn = page.getByRole("button", {
+      name: "Generate new key",
+      exact: true,
+    });
+    await expect(generateBtn).toBeVisible({ timeout: 15_000 });
+    await generateBtn.focus();
+    await page.keyboard.press("Tab");
+    const importKey = page.getByRole("button", {
+      name: "Import key",
+      exact: true,
+    });
+    await expect(importKey).toBeFocused();
+
+    await page.keyboard.press("Enter");
+    await chooser;
   });
 });

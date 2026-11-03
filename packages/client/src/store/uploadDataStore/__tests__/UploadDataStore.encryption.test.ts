@@ -33,26 +33,31 @@ import {
   installWindowGlobals,
   makeBrowserFile,
   makeFileInfo,
+  makePrivateUploadTarget,
   makeUploadFile,
 } from "./testHarness";
 
 import * as filesApi from "@docspace/shared/api/files";
+import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import { requestDeviceSetupHint } from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
+import { verifyMemberKeys } from "@docspace/shared/services/private-room/member-key-verification";
+import { pendingAccessStore } from "@docspace/shared/services/private-room/pending-access";
+import { tagFileForCopy } from "@docspace/shared/services/private-room/encrypted-copy";
 import {
   EncryptedReimportError,
+  makeOpaqueUploadName,
   prepareEncryptedUpload,
   recoverDekForReimport,
   sniffDse3Upload,
 } from "@docspace/shared/services/private-room/encrypted-upload";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
-import { hasFileDek, setFileDek, takeFileDek } from "../helpers";
-
-import type { TFile } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";
 import type UploadDataStore from "../../UploadDataStore";
 
@@ -65,6 +70,14 @@ vi.mock("@docspace/shared/services/encryption/secret-storage", async (orig) => {
   const actual = (await orig()) as Record<string, unknown>;
   return { ...actual, requireUnlock: vi.fn() };
 });
+
+vi.mock(
+  "@docspace/shared/services/encryption/device-setup-hint-notifier",
+  async (orig) => {
+    const actual = (await orig()) as Record<string, unknown>;
+    return { ...actual, requestDeviceSetupHint: vi.fn() };
+  },
+);
 
 vi.mock(
   "@docspace/shared/services/encryption/room-file-access",
@@ -87,28 +100,26 @@ vi.mock(
   },
 );
 
+vi.mock(
+  "@docspace/shared/services/private-room/member-key-verification",
+  async (orig) => {
+    const actual = (await orig()) as Record<string, unknown>;
+    return {
+      ...actual,
+      verifyMemberKeys: vi.fn(async (recipients: unknown[]) => ({
+        verified: recipients,
+        skipped: [],
+      })),
+    };
+  },
+);
+
 const t = ((key: string) => key) as unknown as TTranslation;
 
 const userWithKeys = () => ({
   user: { id: "user-1", isAdmin: false },
   encryptionKeys: [{ id: "key-1", publicKey: "pub-b64" }],
 });
-
-const callCheckChunkUpload = (
-  store: UploadDataStore,
-  args: {
-    res: { uploaded: boolean; id: number | string | null; file: TFile | null };
-    index: number;
-    indexOfFile: number;
-    chunksLength: number;
-    resolve: (value?: unknown) => void;
-  },
-) =>
-  store.checkChunkUpload({
-    t,
-    path: [],
-    ...args,
-  } as unknown as Parameters<UploadDataStore["checkChunkUpload"]>[0]);
 
 const replaceAction = (store: UploadDataStore, key: string) => {
   const fn = vi.fn().mockResolvedValue(undefined);
@@ -118,6 +129,14 @@ const replaceAction = (store: UploadDataStore, key: string) => {
 
 const makeDek = (fill = 1) => new Uint8Array([fill, fill + 1, fill + 2]);
 
+const memberKey = (userId: string, publicKey: string) => ({
+  id: `${userId}-key`,
+  userId,
+  publicKey,
+  privateKeyEnc: "",
+  date: "2026-01-01T00:00:00",
+});
+
 declare function allowConsoleError(matcher: RegExp | string): void;
 
 beforeEach(() => {
@@ -125,240 +144,53 @@ beforeEach(() => {
   installWindowGlobals();
 });
 
-describe("uploadDataStore/helpers — module-level DEK store", () => {
-  it("stores, reports and takes a DEK exactly once per entry", () => {
-    const entry = makeUploadFile();
-    const dek = makeDek();
+const IDENTITY = { publicKey: "id-pub" };
 
-    expect(hasFileDek(entry)).toBe(false);
+/** Lets an encrypted upload through: session, parts and a finalize that answers the stored file. */
+const serveEncryptedUpload = (fileId = 555, folderId: number = 7) => {
+  vi.mocked(filesApi.startUploadSession).mockResolvedValue({
+    id: "session-1",
+    path: [2, folderId],
+  } as never);
+  vi.mocked(filesApi.uploadChunkParallel).mockResolvedValue({} as never);
+  vi.mocked(filesApi.finalizeUploadSession).mockResolvedValue({
+    id: fileId,
+    uploaded: true,
+    file: makeFileInfo({ id: fileId, folderId, version: 1 }),
+  } as never);
+  vi.mocked(filesApi.getFileEncryptionAccess).mockResolvedValue({
+    fileKeys: [],
+  } as never);
+  vi.mocked(filesApi.setFileEncryptionKeys).mockResolvedValue(
+    undefined as never,
+  );
+  vi.mocked(getRoomEncryptionKeys).mockResolvedValue([] as never);
+  vi.mocked(wrapDekForRecipients).mockImplementation(
+    async ({ recipients }) =>
+      recipients.map((r) => ({
+        userId: r.userId,
+        publicKeyId: r.publicKeyId ?? "",
+        privateKeyEnc: `wrap-${r.userId}`,
+      })) as never,
+  );
+};
 
-    setFileDek(entry, dek);
-    expect(hasFileDek(entry)).toBe(true);
-
-    expect(takeFileDek(entry)).toBe(dek);
-    expect(hasFileDek(entry)).toBe(false);
-    expect(takeFileDek(entry)).toBeNull();
-    expect(wipeDek).not.toHaveBeenCalled();
-  });
-
-  it("wipes the previous DEK when an entry is re-keyed, but not on a same-reference re-set", () => {
-    const entry = makeUploadFile();
-    const first = makeDek(1);
-    const second = makeDek(10);
-
-    setFileDek(entry, first);
-    setFileDek(entry, first);
-    expect(wipeDek).not.toHaveBeenCalled();
-
-    setFileDek(entry, second);
-    expect(vi.mocked(wipeDek).mock.calls).toEqual([[first]]);
-    expect(takeFileDek(entry)).toBe(second);
-  });
-
-  it("treats null/undefined entries as no-ops", () => {
-    expect(() => setFileDek(null, makeDek())).not.toThrow();
-    expect(hasFileDek(null)).toBe(false);
-    expect(hasFileDek(undefined)).toBe(false);
-    expect(takeFileDek(null)).toBeNull();
-    expect(takeFileDek(undefined)).toBeNull();
-    expect(wipeDek).not.toHaveBeenCalled();
-  });
-});
-
-describe("UploadDataStore.wrapForSelfThenRoom — DEK hygiene (§3.4.1)", () => {
-  it("wraps for self, stores the keys, delegates to room members and wipes the DEK last", async () => {
-    const { store } = createTestUploadDataStore();
-    const dek = makeDek();
-    const identity = { publicKey: "id-pub" };
-    const ownWraps = [
-      { userId: "user-1", publicKeyId: "key-1", privateKeyEnc: "enc" },
-    ];
-    vi.mocked(requireUnlock).mockResolvedValue(identity as never);
-    vi.mocked(wrapDekForRecipients).mockResolvedValue(ownWraps as never);
-    vi.mocked(filesApi.setFileEncryptionKeys).mockResolvedValue(
-      undefined as never,
-    );
-    const encryptForRoom = replaceAction(store, "encryptKeysForRoomMembers");
-
-    await store.wrapForSelfThenRoom(555, "user-1", "pub-b64", "key-1", dek, 7);
-
-    expect(vi.mocked(wrapDekForRecipients).mock.calls).toEqual([
-      [
-        {
-          dek,
-          senderIdentity: identity,
-          senderUserId: "user-1",
-          recipients: [
-            { userId: "user-1", publicKey: "pub-b64", publicKeyId: "key-1" },
-          ],
-          fileId: 555,
-        },
-      ],
-    ]);
-    expect(vi.mocked(filesApi.setFileEncryptionKeys).mock.calls).toEqual([
-      [555, ownWraps],
-    ]);
-    expect(encryptForRoom.mock.calls).toEqual([
-      [555, "user-1", 7, dek, identity],
-    ]);
-
-    expect(vi.mocked(wipeDek).mock.calls).toEqual([[dek]]);
-    expect(vi.mocked(wipeDek).mock.invocationCallOrder[0]).toBeGreaterThan(
-      vi.mocked(filesApi.setFileEncryptionKeys).mock.invocationCallOrder[0],
-    );
-  });
-
-  it("wipes the DEK even when the identity is locked", async () => {
-    const { store } = createTestUploadDataStore();
-    const dek = makeDek();
-    vi.mocked(requireUnlock).mockResolvedValue(null as never);
-
-    await expect(
-      store.wrapForSelfThenRoom(555, "user-1", "pub-b64", "key-1", dek, null),
-    ).rejects.toThrow("Encryption identity is locked");
-
-    expect(filesApi.setFileEncryptionKeys).not.toHaveBeenCalled();
-    expect(vi.mocked(wipeDek).mock.calls).toEqual([[dek]]);
-  });
-
-  it("wipes the DEK when wrapping itself fails", async () => {
-    const { store } = createTestUploadDataStore();
-    const dek = makeDek();
-    vi.mocked(requireUnlock).mockResolvedValue(
-      { publicKey: "id-pub" } as never,
-    );
-    vi.mocked(wrapDekForRecipients).mockRejectedValue(
-      new Error("wrap failed"),
-    );
-
-    await expect(
-      store.wrapForSelfThenRoom(555, "user-1", "pub-b64", "key-1", dek, null),
-    ).rejects.toThrow("wrap failed");
-
-    expect(filesApi.setFileEncryptionKeys).not.toHaveBeenCalled();
-    expect(vi.mocked(wipeDek).mock.calls).toEqual([[dek]]);
-  });
-});
-
-describe("UploadDataStore.checkChunkUpload — encrypted final chunk", () => {
-  const setupEncryptedFinalChunk = (
-    overrides: Parameters<typeof createTestUploadDataStore>[0] = {},
-  ) => {
-    const harness = createTestUploadDataStore(overrides);
-    const { store } = harness;
-    const entry = makeUploadFile({
-      uniqueId: "enc-done",
-      encrypted: true,
-      inAction: true,
-      toFolderId: 7,
-    });
-    store.files = [entry];
-    store.uploadedFilesHistory = [{ ...entry, percent: 50 }];
-    store.uploaded = false;
-    store.currentUploadNumber = 1;
-    replaceAction(store, "refreshFiles");
-    const dek = makeDek();
-    setFileDek(store.files[0], dek);
-    const serverFile = makeFileInfo({ id: 555, folderId: 7, version: 1 });
-    return { ...harness, entry, dek, serverFile };
-  };
-
-  it("remembers the plaintext filename and hands the DEK to wrapForSelfThenRoom exactly once", () => {
-    const { store, entry, dek, serverFile } = setupEncryptedFinalChunk({
-      userStore: userWithKeys(),
-    });
-    const wrap = replaceAction(store, "wrapForSelfThenRoom");
-
-    callCheckChunkUpload(store, {
-      res: { uploaded: true, id: 555, file: serverFile },
-      index: 1,
-      indexOfFile: 0,
-      chunksLength: 1,
-      resolve: vi.fn(),
-    });
-
-    expect(vi.mocked(rememberEncryptedFilename).mock.calls).toEqual([
-      [555, entry.file.name],
-    ]);
-
-    expect(wrap.mock.calls).toEqual([
-      [555, "user-1", "pub-b64", "key-1", dek, null],
-    ]);
-    expect(hasFileDek(store.files[0])).toBe(false);
-    expect(wipeDek).not.toHaveBeenCalled();
-  });
-
-  it("wipes the orphan DEK and skips wrapping when the user has no encryption keys", () => {
-    allowConsoleError("[ENCRYPTION] Cannot wrap DEK");
-    const { store, entry, dek, serverFile } = setupEncryptedFinalChunk();
-    const wrap = replaceAction(store, "wrapForSelfThenRoom");
-
-    callCheckChunkUpload(store, {
-      res: { uploaded: true, id: 555, file: serverFile },
-      index: 1,
-      indexOfFile: 0,
-      chunksLength: 1,
-      resolve: vi.fn(),
-    });
-
-    expect(vi.mocked(rememberEncryptedFilename).mock.calls).toEqual([
-      [555, entry.file.name],
-    ]);
-
-    expect(wrap).not.toHaveBeenCalled();
-    expect(vi.mocked(wipeDek).mock.calls).toEqual([[dek]]);
-    expect(hasFileDek(store.files[0])).toBe(false);
-  });
-
-  it("marks the file and its history entry when wrapping rejects after upload", async () => {
-    allowConsoleError("[ENCRYPTION] Failed to set file encryption keys");
-    const { store, serverFile } = setupEncryptedFinalChunk({
-      userStore: userWithKeys(),
-    });
-    const wrap = replaceAction(store, "wrapForSelfThenRoom");
-    wrap.mockRejectedValue({
-      response: { status: 500 },
-      message: "wrap exploded",
-    });
-
-    callCheckChunkUpload(store, {
-      res: { uploaded: true, id: 555, file: serverFile },
-      index: 1,
-      indexOfFile: 0,
-      chunksLength: 1,
-      resolve: vi.fn(),
-    });
-
-    await vi.waitFor(() =>
-      expect(store.files[0].error).toBe("Common:EncryptionUploadWrapFailed"),
-    );
-    expect(store.files[0].action).toBe("uploaded");
-    expect(store.files[0].fileId).toBe(555);
-    expect(store.uploadedFilesHistory[0].error).toBe(
-      "Common:EncryptionUploadWrapFailed",
-    );
-    expect(toastr.error).toHaveBeenCalledWith(
-      "Common:EncryptionUploadWrapFailed",
-    );
-  });
-});
-
-describe("UploadDataStore.startSessionFunc — encrypted upload preparation", () => {
+describe("UploadDataStore.startSessionFunc — encrypted upload through the shared pipeline", () => {
   const setupEncryptedPendingFile = () => {
-    const harness = createTestUploadDataStore({
-      treeFoldersStore: { isPrivacyFolder: true },
-      userStore: userWithKeys(),
-    });
+    const harness = createTestUploadDataStore({ userStore: userWithKeys() });
     const { store } = harness;
     const entry = makeUploadFile({
       uniqueId: "enc-pending",
       file: makeBrowserFile("secret.docx", 3000),
       toFolderId: 7,
+      encryptionRoomId: 7,
+      target: makePrivateUploadTarget({ folderId: 7 }),
     });
     store.files = [entry];
     store.uploadedFilesHistory = [{ ...entry }];
     store.uploaded = false;
     store.currentUploadNumber = 1;
+    replaceAction(store, "refreshFiles");
     return { ...harness, entry };
   };
 
@@ -372,12 +204,16 @@ describe("UploadDataStore.startSessionFunc — encrypted upload preparation", ()
     originalFileName: "secret.docx",
   });
 
-  it("stores the DEK, marks the entry encrypted and starts the session with the obfuscated name", async () => {
+  beforeEach(() => {
+    vi.mocked(requireUnlock).mockResolvedValue(IDENTITY as never);
+    vi.mocked(sniffDse3Upload).mockResolvedValue(null);
+  });
+
+  it("marks the entry encrypted, shows the encryption progress and starts the session with the obfuscated name", async () => {
     const { store, fakes } = setupEncryptedPendingFile();
-    const dek = makeDek();
     vi.mocked(prepareEncryptedUpload).mockImplementation(async (config) => {
       config.onProgress?.(0.5);
-      return preparedUpload(dek) as never;
+      return preparedUpload(makeDek()) as never;
     });
     vi.mocked(filesApi.startUploadSession).mockReturnValue(
       new Promise(() => {}) as never,
@@ -388,9 +224,7 @@ describe("UploadDataStore.startSessionFunc — encrypted upload preparation", ()
       expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1),
     );
 
-    expect(hasFileDek(store.files[0])).toBe(true);
     expect(store.files[0].encrypted).toBe(true);
-
     expect(store.uploadedFilesHistory[0].percent).toBe(10);
     expect(
       fakes.primaryProgressDataStore.setPrimaryProgressBarData,
@@ -408,7 +242,218 @@ describe("UploadDataStore.startSessionFunc — encrypted upload preparation", ()
     expect(wipeDek).not.toHaveBeenCalled();
   });
 
-  it("wipes the orphan DEK when the upload session fails after encryption", async () => {
+  it("stores the file, remembers its plaintext name, wraps it for the uploader and wipes the DEK", async () => {
+    const { store } = setupEncryptedPendingFile();
+    const dek = makeDek();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(dek) as never,
+    );
+    serveEncryptedUpload();
+
+    await store.startSessionFunc(0, t);
+
+    expect(store.files[0]).toMatchObject({
+      action: "uploaded",
+      fileId: 555,
+      encrypted: true,
+    });
+    expect(store.files[0].error).toBeFalsy();
+    expect(vi.mocked(rememberEncryptedFilename).mock.calls).toEqual([
+      [555, "secret.docx"],
+    ]);
+    expect(vi.mocked(filesApi.setFileEncryptionKeys).mock.calls[0]).toEqual([
+      555,
+      [{ userId: "user-1", publicKeyId: "key-1", privateKeyEnc: "wrap-user-1" }],
+    ]);
+    expect(filesApi.uploadChunkParallel).toHaveBeenCalled();
+    expect(filesApi.finalizeUploadSession).toHaveBeenCalledTimes(1);
+    expect(vi.mocked(wipeDek).mock.calls).toEqual([[dek]]);
+    expect(store.currentUploadNumber).toBe(0);
+  });
+
+  it("Member key mismatch on upload: the skipped members land on the file and its history entry", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload();
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
+      memberKey("bob", "pk-bob"),
+    ] as never);
+    const skipped = [
+      { userId: "bob", displayName: undefined, reason: "key-mismatch-refused" as const },
+    ];
+    vi.mocked(verifyMemberKeys).mockResolvedValueOnce({
+      verified: [],
+      skipped,
+    } as never);
+    const named = [{ ...skipped[0], displayName: "Bob" }];
+    const report = replaceAction(store, "reportSkippedMembers");
+    report.mockResolvedValue(named);
+
+    await store.startSessionFunc(0, t);
+
+    expect(report).toHaveBeenCalledWith(skipped);
+    expect(store.files[0].skippedMembers).toEqual(named);
+    expect(store.uploadedFilesHistory[0].skippedMembers).toEqual(named);
+    expect(store.files[0].error).toBeFalsy();
+  });
+
+  it("Sharing with the members fails", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload(555);
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
+      memberKey("bob", "pk-bob"),
+    ] as never);
+    vi.mocked(filesApi.setFileEncryptionKeys)
+      .mockResolvedValueOnce(undefined as never)
+      .mockRejectedValueOnce(new Error("403"));
+
+    await store.startSessionFunc(0, t);
+
+    expect(store.files[0]).toMatchObject({ action: "uploaded", fileId: 555 });
+    expect(toastr.warning).toHaveBeenCalledWith(
+      "Common:EncryptedUploadShareFailed",
+    );
+    expect(pendingAccessStore.get(7, "bob")?.missingFileIds).toEqual([555]);
+    pendingAccessStore.clear(7, "bob");
+  });
+
+  it("Key trusted after a refusal: the uploaded file is recorded as missing for the member whose key was refused", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload(555);
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
+      memberKey("bob", "pk-bob"),
+    ] as never);
+    vi.mocked(verifyMemberKeys).mockResolvedValueOnce({
+      verified: [],
+      skipped: [{ userId: "bob", reason: "key-mismatch-refused" }],
+    } as never);
+    replaceAction(store, "reportSkippedMembers");
+
+    await store.startSessionFunc(0, t);
+
+    expect(pendingAccessStore.get(7, "bob")?.missingFileIds).toEqual([555]);
+    pendingAccessStore.clear(7, "bob");
+  });
+
+  it("marks the file and its history entry when wrapping rejects after upload", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload();
+    vi.mocked(filesApi.setFileEncryptionKeys).mockRejectedValueOnce({
+      response: { status: 500 },
+      message: "wrap exploded",
+    });
+
+    await store.startSessionFunc(0, t);
+
+    expect(store.files[0].error).toBe("Common:EncryptionUploadWrapFailed");
+    expect(store.files[0].action).toBe("uploaded");
+    expect(store.files[0].fileId).toBe(555);
+    expect(store.uploadedFilesHistory[0].error).toBe(
+      "Common:EncryptionUploadWrapFailed",
+    );
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptionUploadWrapFailed",
+    );
+  });
+
+  it("Cancelled while chunks are sent", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload();
+    // The transport rejects a request whose signal aborted.
+    vi.mocked(filesApi.uploadChunkParallel).mockImplementation(async () => {
+      store.cancelCurrentUpload("enc-pending", t);
+      throw Object.assign(new Error("canceled"), {
+        name: "CanceledError",
+        code: "ERR_CANCELED",
+      });
+    });
+    vi.mocked(filesApi.abortUploadSession).mockResolvedValue(
+      undefined as never,
+    );
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.abortUploadSession).toHaveBeenCalledWith(7, "session-1");
+    expect(filesApi.finalizeUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0].cancel).toBe(true);
+    expect(store.files[0].error).toBeFalsy();
+  });
+
+  it("Cancelled after the file is stored", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload();
+    // The cancel lands while the uploader's access entry is written.
+    vi.mocked(filesApi.setFileEncryptionKeys).mockImplementationOnce(
+      async () => {
+        store.cancelCurrentUpload("enc-pending", t);
+        return undefined as never;
+      },
+    );
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.abortUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0]).toMatchObject({
+      cancel: false,
+      action: "uploaded",
+      fileId: 555,
+    });
+    expect(store.files[0].error).toBeFalsy();
+    const history = store.uploadedFilesHistory.filter(
+      (f) => f.uniqueId === "enc-pending",
+    );
+    expect(history).toHaveLength(1);
+    expect(history[0]).toMatchObject({ action: "uploaded", fileId: 555 });
+  });
+
+  it("a later batch that starts nothing does not abort a running encrypted upload", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload();
+    // Three chunks on one thread, so the upload is still sending when the
+    // later batch sets the queue as finished.
+    Object.assign(store.filesSettingsStore, {
+      chunkUploadSize: 1100,
+      uploadThreadCount: 1,
+    });
+    vi.mocked(filesApi.uploadChunkSequential).mockImplementation(async () => {
+      // What startUploadFiles does when the files it gets are all running.
+      store.uploaded = true;
+      return {
+        data: {
+          id: 555,
+          uploaded: true,
+          file: makeFileInfo({ id: 555, folderId: 7, version: 1 }),
+        },
+      } as never;
+    });
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.abortUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0]).toMatchObject({ action: "uploaded", fileId: 555 });
+  });
+
+  it("wipes the DEK when the upload session fails after encryption", async () => {
     const { store } = setupEncryptedPendingFile();
     const dek = makeDek();
     vi.mocked(prepareEncryptedUpload).mockResolvedValue(
@@ -422,13 +467,12 @@ describe("UploadDataStore.startSessionFunc — encrypted upload preparation", ()
     await store.startSessionFunc(0, t);
 
     expect(vi.mocked(wipeDek).mock.calls).toEqual([[dek]]);
-    expect(hasFileDek(store.files[0])).toBe(false);
     expect(store.files[0].error).toBe("session down");
     expect(store.currentUploadNumber).toBe(0);
   });
 
   it("fails the file and frees the slot when the encryption preparation itself rejects", async () => {
-    allowConsoleError("[ENCRYPTION] prepareFileForEncryptedUpload failed");
+    allowConsoleError("[ENCRYPTION] encrypted upload preparation failed");
     const { store, fakes } = setupEncryptedPendingFile();
     vi.mocked(prepareEncryptedUpload).mockRejectedValue(
       new Error("encryptFile blew up"),
@@ -438,10 +482,9 @@ describe("UploadDataStore.startSessionFunc — encrypted upload preparation", ()
     await store.startSessionFunc(0, t);
 
     expect(wipeDek).not.toHaveBeenCalled();
-    expect(hasFileDek(store.files[0])).toBe(false);
-
     expect(store.files[0].error).toBe("Common:EncryptionPrepareFailed");
     expect(store.files[0].percent).toBe(0);
+    expect(store.files[0].encrypted).toBe(false);
     expect(store.uploadedFilesHistory[0].error).toBe(
       "Common:EncryptionPrepareFailed",
     );
@@ -461,25 +504,17 @@ describe("UploadDataStore.startSessionFunc — encrypted upload preparation", ()
   });
 });
 
-describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)", () => {
-  const RAW_NAME = "9f8b7c6d-1a2b-4c3d-8e4f-556677889900.docx";
-  const dse3Header = {
-    encryptedName: new Uint8Array([1, 2, 3]),
-    fileNonce: new Uint8Array(16),
-  };
-  const identity = { publicKey: "id-pub" };
-
-  const setupReimportPendingFile = () => {
+describe("UploadDataStore.startSessionFunc — uploader without a key", () => {
+  const setupKeylessPendingFile = () => {
     const harness = createTestUploadDataStore({
-      treeFoldersStore: { isPrivacyFolder: true },
-      userStore: userWithKeys(),
+      userStore: { user: { id: "user-1", isAdmin: false }, encryptionKeys: [] },
     });
     const { store } = harness;
     const entry = makeUploadFile({
-      uniqueId: "reimport-pending",
-      file: makeBrowserFile(RAW_NAME, 2048),
+      uniqueId: "keyless-pending",
+      file: makeBrowserFile("secret.docx", 3000),
       toFolderId: 7,
-      encryptionRoomId: 55,
+      target: makePrivateUploadTarget({ folderId: 7 }),
     });
     store.files = [entry];
     store.uploadedFilesHistory = [{ ...entry }];
@@ -488,13 +523,92 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
     return { ...harness, entry };
   };
 
+  it("refuses a key-less upload: no session, no encryption, localized reason, hint requested", async () => {
+    const { store, fakes } = setupKeylessPendingFile();
+    const finishUploadFiles = replaceAction(store, "finishUploadFiles");
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(sniffDse3Upload).not.toHaveBeenCalled();
+    expect(store.files[0].error).toBe("Common:EncryptionKeysRequiredForUpload");
+    expect(store.files[0].percent).toBe(0);
+    expect(store.uploadedFilesHistory[0].error).toBe(
+      "Common:EncryptionKeysRequiredForUpload",
+    );
+    expect(requestDeviceSetupHint).toHaveBeenCalledTimes(1);
+    expect(
+      fakes.primaryProgressDataStore.setPrimaryProgressBarData,
+    ).toHaveBeenLastCalledWith({
+      operation: OPERATIONS_NAME.upload,
+      percent: 0,
+      alert: true,
+    });
+    expect(store.currentUploadNumber).toBe(0);
+    expect(store.finishUploadFilesCalled).toBe(true);
+    expect(finishUploadFiles.mock.calls).toEqual([[t, false]]);
+  });
+
+  it("still uploads plaintext outside private rooms without keys", async () => {
+    const { store } = createTestUploadDataStore({
+      treeFoldersStore: { isPrivacyFolder: false },
+      userStore: { user: { id: "user-1", isAdmin: false }, encryptionKeys: [] },
+    });
+    const entry = makeUploadFile({
+      uniqueId: "plain-pending",
+      file: makeBrowserFile("notes.txt", 10),
+      toFolderId: 9,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    vi.mocked(filesApi.startUploadSession).mockReturnValue(
+      new Promise(() => {}) as never,
+    );
+
+    store.startSessionFunc(0, t);
+    await vi.waitFor(() =>
+      expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1),
+    );
+
+    expect(store.files[0].error).toBeNull();
+    expect(requestDeviceSetupHint).not.toHaveBeenCalled();
+  });
+});
+
+describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)", () => {
+  const RAW_NAME = "9f8b7c6d-1a2b-4c3d-8e4f-556677889900.docx";
+  const dse3Header = {
+    encryptedName: new Uint8Array([1, 2, 3]),
+    fileNonce: new Uint8Array(16),
+  };
+
+  const setupReimportPendingFile = () => {
+    const harness = createTestUploadDataStore({ userStore: userWithKeys() });
+    const { store } = harness;
+    const entry = makeUploadFile({
+      uniqueId: "reimport-pending",
+      file: makeBrowserFile(RAW_NAME, 2048),
+      toFolderId: 7,
+      encryptionRoomId: 55,
+      target: makePrivateUploadTarget({ folderId: 7, encryptionRoomId: 55 }),
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    replaceAction(store, "refreshFiles");
+    return { ...harness, entry };
+  };
+
   it("uploads the DSE3 blob unchanged with the recovered DEK instead of re-encrypting", async () => {
     const { store, entry } = setupReimportPendingFile();
-    const dek = makeDek();
     vi.mocked(sniffDse3Upload).mockResolvedValue(dse3Header as never);
-    vi.mocked(requireUnlock).mockResolvedValue(identity as never);
+    vi.mocked(requireUnlock).mockResolvedValue(IDENTITY as never);
     vi.mocked(recoverDekForReimport).mockResolvedValue({
-      dek,
+      dek: makeDek(),
       realName: "secret.docx",
       sourceFileId: 42,
     } as never);
@@ -515,15 +629,11 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
           header: dse3Header,
           roomId: 55,
           userId: "user-1",
-          identity,
+          identity: IDENTITY,
         },
       ],
     ]);
-
-    expect(hasFileDek(store.files[0])).toBe(true);
-    expect(takeFileDek(store.files[0])).toBe(dek);
     expect(store.files[0].encrypted).toBe(true);
-    expect(store.files[0].reimportRealName).toBe("secret.docx");
 
     const sessionArgs = vi.mocked(filesApi.startUploadSession).mock.calls[0];
     expect(sessionArgs[0]).toBe(7);
@@ -535,11 +645,30 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
     expect(sessionArgs[4]).toBe(true);
   });
 
-  it("fails the file with the re-import message when no DEK can be recovered", async () => {
-    allowConsoleError("[ENCRYPTION] prepareFileForEncryptedUpload failed");
+  it("caches the recovered real name instead of the opaque browser file name", async () => {
     const { store } = setupReimportPendingFile();
     vi.mocked(sniffDse3Upload).mockResolvedValue(dse3Header as never);
-    vi.mocked(requireUnlock).mockResolvedValue(identity as never);
+    vi.mocked(requireUnlock).mockResolvedValue(IDENTITY as never);
+    vi.mocked(recoverDekForReimport).mockResolvedValue({
+      dek: makeDek(),
+      realName: "secret.docx",
+      sourceFileId: 42,
+    } as never);
+    serveEncryptedUpload();
+
+    await store.startSessionFunc(0, t);
+
+    expect(store.files[0].action).toBe("uploaded");
+    expect(vi.mocked(rememberEncryptedFilename).mock.calls).toEqual([
+      [555, "secret.docx"],
+    ]);
+  });
+
+  it("fails the file with the re-import message when no DEK can be recovered", async () => {
+    allowConsoleError("[ENCRYPTION] encrypted upload preparation failed");
+    const { store } = setupReimportPendingFile();
+    vi.mocked(sniffDse3Upload).mockResolvedValue(dse3Header as never);
+    vi.mocked(requireUnlock).mockResolvedValue(IDENTITY as never);
     vi.mocked(recoverDekForReimport).mockRejectedValue(
       new EncryptedReimportError("no source file"),
     );
@@ -547,7 +676,6 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
 
     await store.startSessionFunc(0, t);
 
-    expect(hasFileDek(store.files[0])).toBe(false);
     expect(store.files[0].error).toBe("Common:EncryptionReimportFailed");
     expect(store.uploadedFilesHistory[0].error).toBe(
       "Common:EncryptionReimportFailed",
@@ -559,7 +687,6 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
   });
 
   it("fails with the re-import message when the identity stays locked", async () => {
-    allowConsoleError("[ENCRYPTION] prepareFileForEncryptedUpload failed");
     const { store } = setupReimportPendingFile();
     vi.mocked(sniffDse3Upload).mockResolvedValue(dse3Header as never);
     vi.mocked(requireUnlock).mockResolvedValue(null as never);
@@ -573,43 +700,6 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
   });
 });
 
-describe("UploadDataStore.checkChunkUpload — re-imported file display name", () => {
-  it("caches the recovered real name instead of the opaque browser file name", () => {
-    const harness = createTestUploadDataStore({ userStore: userWithKeys() });
-    const { store } = harness;
-    const entry = makeUploadFile({
-      uniqueId: "reimport-done",
-      encrypted: true,
-      inAction: true,
-      toFolderId: 7,
-      reimportRealName: "secret.docx",
-    });
-    store.files = [entry];
-    store.uploadedFilesHistory = [{ ...entry, percent: 50 }];
-    store.uploaded = false;
-    store.currentUploadNumber = 1;
-    replaceAction(store, "refreshFiles");
-    replaceAction(store, "wrapForSelfThenRoom");
-    setFileDek(store.files[0], makeDek());
-
-    callCheckChunkUpload(store, {
-      res: {
-        uploaded: true,
-        id: 555,
-        file: makeFileInfo({ id: 555, folderId: 7 }),
-      },
-      index: 1,
-      indexOfFile: 0,
-      chunksLength: 1,
-      resolve: vi.fn(),
-    });
-
-    expect(vi.mocked(rememberEncryptedFilename).mock.calls).toEqual([
-      [555, "secret.docx"],
-    ]);
-  });
-});
-
 describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
   it("ensureEncryptionUnlockedForBatch is a pass-through without keys or encryptable files", async () => {
     const { store } = createTestUploadDataStore();
@@ -619,11 +709,8 @@ describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
   });
 
   it("ensureEncryptionUnlockedForBatch requires an unlocked identity when a pending file will encrypt", async () => {
-    const { store } = createTestUploadDataStore({
-      treeFoldersStore: { isPrivacyFolder: true },
-      userStore: userWithKeys(),
-    });
-    store.files = [makeUploadFile()];
+    const { store } = createTestUploadDataStore({ userStore: userWithKeys() });
+    store.files = [makeUploadFile({ target: makePrivateUploadTarget() })];
 
     vi.mocked(requireUnlock).mockResolvedValue({ pub: "x" } as never);
     await expect(store.ensureEncryptionUnlockedForBatch()).resolves.toBe(true);
@@ -635,19 +722,19 @@ describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
     );
   });
 
-  it("cancelEncryptedBatchUpload cancels only the not-yet-started encryptable files and prunes their history", () => {
-    const { store } = createTestUploadDataStore({
-      treeFoldersStore: { isPrivacyFolder: true },
-      userStore: userWithKeys(),
-    });
-    const pendingEncryptable = makeUploadFile({ uniqueId: "enc-a" });
+  it("uploader declines to unlock: cancelEncryptedBatchUpload fails only the not-yet-started encryptable files with the locked reason", () => {
+    const { store } = createTestUploadDataStore({ userStore: userWithKeys() });
+    const target = makePrivateUploadTarget();
+    const pendingEncryptable = makeUploadFile({ uniqueId: "enc-a", target });
     const alreadyRunning = makeUploadFile({
       uniqueId: "run-b",
       inAction: true,
+      target,
     });
     const alreadyEncrypted = makeUploadFile({
       uniqueId: "pre-c",
       encrypted: true,
+      target,
     });
     store.files = [pendingEncryptable, alreadyRunning, alreadyEncrypted];
     store.uploadedFilesHistory = [
@@ -658,15 +745,361 @@ describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
 
     store.cancelEncryptedBatchUpload();
 
-    expect(store.files.map((f) => !!f.cancel)).toEqual([true, false, false]);
-    expect(store.files[0].action).toBe("uploaded");
-    expect(store.files[0].percent).toBe(100);
+    expect(store.files.map((f) => !!f.cancel)).toEqual([false, false, false]);
+    expect(store.files[0].error).toBe("Common:EncryptionLockedUpload");
+    expect(store.files[0].inAction).toBe(true);
+    expect(store.files[0].percent).toBe(0);
+    expect(store.files[1].error).toBeNull();
+    expect(store.files[2].error).toBeNull();
     expect(store.uploadedFilesHistory.map((f) => f.uniqueId)).toEqual([
+      "enc-a",
       "run-b",
       "pre-c",
     ]);
+    expect(store.uploadedFilesHistory[0].error).toBe(
+      "Common:EncryptionLockedUpload",
+    );
     expect(toastr.info).toHaveBeenCalledWith(
       "Common:EncryptionUploadCancelled",
     );
+  });
+});
+
+describe("UploadDataStore — upload target fixed when the user starts the upload", () => {
+  const OPAQUE_NAME =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.docx$/;
+  const PRIVATE_ROOM_ID = 50;
+  const PLAIN_FOLDER_ID = 9;
+
+  const privateRoomOpen = {
+    selectedFolderStore: {
+      id: PRIVATE_ROOM_ID,
+      isRoom: true,
+      roomType: RoomsType.CustomRoom,
+      navigationPath: [],
+    },
+    treeFoldersStore: { isPrivacyFolder: true },
+  };
+
+  const plainFolderOpen = {
+    selectedFolderStore: {
+      id: PLAIN_FOLDER_ID,
+      isRoom: false,
+      roomType: null,
+      navigationPath: [],
+    },
+    treeFoldersStore: { isPrivacyFolder: false },
+  };
+
+  const openFolder = (
+    store: UploadDataStore,
+    folder: {
+      selectedFolderStore: Record<string, unknown>;
+      treeFoldersStore: Record<string, unknown>;
+    },
+  ) => {
+    Object.assign(store.selectedFolderStore, folder.selectedFolderStore);
+    Object.assign(store.treeFoldersStore, folder.treeFoldersStore);
+  };
+
+  const openRoomsList = (store: UploadDataStore) =>
+    openFolder(store, {
+      selectedFolderStore: {
+        id: 2,
+        isRoom: false,
+        roomType: null,
+        navigationPath: [],
+      },
+      treeFoldersStore: { isPrivacyFolder: false },
+    });
+
+  const clearSelectedFolder = (store: UploadDataStore) =>
+    openFolder(store, {
+      selectedFolderStore: {
+        id: null,
+        isRoom: false,
+        roomType: null,
+        navigationPath: [],
+      },
+      treeFoldersStore: { isPrivacyFolder: false },
+    });
+
+  /** Queues files the way an entry point does: the open folder is the target. */
+  const queueIntoOpenFolder = (store: UploadDataStore, count: number) => {
+    const handleUploadConflicts = vi.fn();
+    store.handleUploadConflicts = handleUploadConflicts as never;
+    const parentFolderId = store.selectedFolderStore.id;
+    const files = Array.from({ length: count }, (_, i) =>
+      makeBrowserFile(`report-${i}.docx`, 100, { parentFolderId }),
+    );
+    store.startUpload(files, store.resolveOpenFolderTarget(), t);
+    return handleUploadConflicts.mock.calls[0][2];
+  };
+
+  const encryptEveryFile = () =>
+    vi.mocked(prepareEncryptedUpload).mockImplementation(
+      async (config) =>
+        ({
+          data: new Blob([new Uint8Array(config.file.size + 100)]),
+          encrypted: true,
+          dek: makeDek(),
+          uploadFileName: makeOpaqueUploadName(config.file.name),
+          originalFileType: "application/octet-stream",
+          originalFileSize: config.file.size,
+          originalFileName: config.file.name,
+        }) as never,
+    );
+
+  const sessionCalls = () => vi.mocked(filesApi.startUploadSession).mock.calls;
+
+  beforeEach(() => {
+    vi.mocked(sniffDse3Upload).mockResolvedValue(null);
+    vi.mocked(filesApi.startUploadSession).mockReturnValue(
+      new Promise(() => {}) as never,
+    );
+  });
+
+  it("Room left while files are queued", async () => {
+    const { store } = createTestUploadDataStore({
+      ...privateRoomOpen,
+      userStore: userWithKeys(),
+    });
+    vi.mocked(requireUnlock).mockResolvedValue({ pub: "x" } as never);
+    encryptEveryFile();
+
+    const data = queueIntoOpenFolder(store, 6);
+    openRoomsList(store);
+    store.handleFilesUpload(data, t);
+    await vi.waitFor(() => expect(sessionCalls()).toHaveLength(5));
+
+    store.startSessionFunc(5, t);
+    await vi.waitFor(() => expect(sessionCalls()).toHaveLength(6));
+
+    expect(
+      new Set(vi.mocked(requireUnlock).mock.calls.map(([userId]) => userId)),
+    ).toEqual(new Set(["user-1"]));
+    for (const [folderId, name, , , encrypted] of sessionCalls()) {
+      expect(folderId).toBe(PRIVATE_ROOM_ID);
+      expect(name).toMatch(OPAQUE_NAME);
+      expect(encrypted).toBe(true);
+    }
+    for (const [config] of vi.mocked(prepareEncryptedUpload).mock.calls) {
+      expect(config).toMatchObject({
+        isPrivate: true,
+        roomType: RoomsType.CustomRoom,
+      });
+    }
+    expect(store.files.every((f) => f.encrypted)).toBe(true);
+  });
+
+  it("Files section left while files are queued", async () => {
+    const { store } = createTestUploadDataStore({
+      ...privateRoomOpen,
+      userStore: userWithKeys(),
+    });
+    vi.mocked(requireUnlock).mockResolvedValue({ pub: "x" } as never);
+    encryptEveryFile();
+
+    const data = queueIntoOpenFolder(store, 2);
+    clearSelectedFolder(store);
+    store.handleFilesUpload(data, t);
+    await vi.waitFor(() => expect(sessionCalls()).toHaveLength(2));
+
+    for (const [folderId, name, , , encrypted] of sessionCalls()) {
+      expect(folderId).toBe(PRIVATE_ROOM_ID);
+      expect(name).toMatch(OPAQUE_NAME);
+      expect(encrypted).toBe(true);
+    }
+  });
+
+  it("Private room opened while a plain upload is queued", async () => {
+    const { store } = createTestUploadDataStore({
+      ...plainFolderOpen,
+      userStore: userWithKeys(),
+    });
+
+    const data = queueIntoOpenFolder(store, 2);
+    openFolder(store, privateRoomOpen);
+    store.handleFilesUpload(data, t);
+    await vi.waitFor(() => expect(sessionCalls()).toHaveLength(2));
+
+    expect(requireUnlock).not.toHaveBeenCalled();
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(sessionCalls().map(([folderId, name, , , encrypted]) => [
+      folderId,
+      name,
+      encrypted,
+    ])).toEqual([
+      [PLAIN_FOLDER_ID, "report-0.docx", false],
+      [PLAIN_FOLDER_ID, "report-1.docx", false],
+    ]);
+  });
+
+  it("No key when the queued file starts", async () => {
+    const { store } = createTestUploadDataStore({
+      ...privateRoomOpen,
+      userStore: { user: { id: "user-1", isAdmin: false }, encryptionKeys: [] },
+    });
+    replaceAction(store, "finishUploadFiles");
+
+    const data = queueIntoOpenFolder(store, 2);
+    openRoomsList(store);
+    store.handleFilesUpload(data, t);
+    await vi.waitFor(() =>
+      expect(store.files.every((f) => !!f.error)).toBe(true),
+    );
+
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(store.files.map((f) => f.error)).toEqual([
+      "Common:EncryptionKeysRequiredForUpload",
+      "Common:EncryptionKeysRequiredForUpload",
+    ]);
+  });
+
+  it("Encryption yields no ciphertext", async () => {
+    allowConsoleError("[ENCRYPTION] encrypted upload preparation failed");
+    const { store } = createTestUploadDataStore({
+      ...privateRoomOpen,
+      userStore: userWithKeys(),
+    });
+    vi.mocked(requireUnlock).mockResolvedValue({ pub: "x" } as never);
+    vi.mocked(prepareEncryptedUpload).mockImplementation(
+      async (config) =>
+        ({
+          data: config.file,
+          encrypted: false,
+          dek: null,
+          uploadFileName: config.file.name,
+          originalFileType: "application/octet-stream",
+          originalFileSize: config.file.size,
+          originalFileName: config.file.name,
+        }) as never,
+    );
+    replaceAction(store, "finishUploadFiles");
+
+    const data = queueIntoOpenFolder(store, 1);
+    openRoomsList(store);
+    store.handleFilesUpload(data, t);
+    await vi.waitFor(() =>
+      expect(store.files[0].error).toBe("Common:EncryptionPrepareFailed"),
+    );
+
+    expect(prepareEncryptedUpload).toHaveBeenCalledTimes(1);
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0].encrypted).toBeFalsy();
+  });
+
+  it("Private target with another room type", async () => {
+    const { store } = createTestUploadDataStore({
+      ...privateRoomOpen,
+      userStore: userWithKeys(),
+    });
+    replaceAction(store, "finishUploadFiles");
+    const handleUploadConflicts = vi.fn();
+    store.handleUploadConflicts = handleUploadConflicts as never;
+
+    store.startUpload(
+      [makeBrowserFile("report-0.docx", 100, { parentFolderId: PRIVATE_ROOM_ID })],
+      {
+        folderId: PRIVATE_ROOM_ID,
+        isPrivate: true,
+        roomType: RoomsType.PublicRoom,
+        encryptionRoomId: PRIVATE_ROOM_ID,
+      },
+      t,
+    );
+    store.handleFilesUpload(handleUploadConflicts.mock.calls[0][2], t);
+    await vi.waitFor(() =>
+      expect(store.files[0].error).toBe("Common:EncryptionPrepareFailed"),
+    );
+
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+  });
+
+  it("Unlock declined for a queued batch", async () => {
+    const { store } = createTestUploadDataStore({
+      ...privateRoomOpen,
+      userStore: userWithKeys(),
+    });
+    vi.mocked(requireUnlock).mockResolvedValue(null as never);
+
+    const data = queueIntoOpenFolder(store, 2);
+    openRoomsList(store);
+    store.handleFilesUpload(data, t);
+    await vi.waitFor(() => expect(store.uploaded).toBe(true));
+
+    expect(vi.mocked(requireUnlock).mock.calls).toEqual([["user-1"]]);
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(store.files.map((f) => f.error)).toEqual([
+      "Common:EncryptionLockedUpload",
+      "Common:EncryptionLockedUpload",
+    ]);
+  });
+});
+
+describe("UploadDataStore — copy into another private room", () => {
+  const DEST_ROOM_ID = 60;
+
+  it("Destination member without a key", async () => {
+    const { store } = createTestUploadDataStore({ userStore: userWithKeys() });
+    vi.mocked(requireUnlock).mockResolvedValue({ publicKey: "id-pub" } as never);
+    vi.mocked(sniffDse3Upload).mockResolvedValue(null);
+    vi.mocked(prepareEncryptedUpload).mockImplementation(
+      async (config) =>
+        ({
+          data: new Blob([new Uint8Array(config.file.size + 100)]),
+          encrypted: true,
+          dek: makeDek(),
+          uploadFileName: makeOpaqueUploadName(config.file.name),
+          originalFileType: "application/octet-stream",
+          originalFileSize: config.file.size,
+          originalFileName: config.file.name,
+        }) as never,
+    );
+    serveEncryptedUpload(555, DEST_ROOM_ID);
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
+      memberKey("user-1", "pub-b64"),
+      memberKey("bob", "pk-bob"),
+      memberKey("carol", ""),
+    ] as never);
+    replaceAction(store, "refreshFiles");
+    replaceAction(store, "finishUploadFiles");
+    const handleUploadConflicts = vi.fn();
+    store.handleUploadConflicts = handleUploadConflicts as never;
+
+    store.startUpload(
+      [
+        tagFileForCopy(makeBrowserFile("plan.docx", 100), DEST_ROOM_ID, {
+          roomType: RoomsType.CustomRoom,
+          isPrivate: true,
+        }),
+      ],
+      makePrivateUploadTarget({
+        folderId: DEST_ROOM_ID,
+        encryptionRoomId: DEST_ROOM_ID,
+      }),
+      t,
+    );
+    store.handleFilesUpload(handleUploadConflicts.mock.calls[0][2], t);
+    await vi.waitFor(() =>
+      expect(filesApi.setFileEncryptionKeys).toHaveBeenCalledTimes(2),
+    );
+
+    const [folderId, , , , encrypted] = vi.mocked(filesApi.startUploadSession)
+      .mock.calls[0];
+    expect([folderId, encrypted]).toEqual([DEST_ROOM_ID, true]);
+    expect(
+      vi
+        .mocked(wrapDekForRecipients)
+        .mock.calls.map(([{ recipients }]) => recipients.map((r) => r.userId)),
+    ).toEqual([["user-1"], ["bob"]]);
+    expect(vi.mocked(getRoomEncryptionKeys).mock.calls).toEqual([
+      [DEST_ROOM_ID],
+    ]);
+    expect(store.files[0].skippedMembers).toBeUndefined();
+    expect(toastr.warning).not.toHaveBeenCalled();
   });
 });

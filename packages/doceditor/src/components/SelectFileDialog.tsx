@@ -49,6 +49,8 @@ const SelectFileDialog = ({
   isVisible,
   onClose,
   onSubmit,
+  onFilesLoaded,
+  disabledItems = [],
   fileInfo,
   filesSettings,
   shareKey,
@@ -98,7 +100,8 @@ const SelectFileDialog = ({
       withoutBackButton
       withSearch
       withBreadCrumbs
-      disabledItems={[]}
+      disabledItems={disabledItems}
+      onFilesLoaded={onFilesLoaded}
       isPanelVisible={isVisible}
       onCancel={onClose}
       onSubmit={onSubmit}

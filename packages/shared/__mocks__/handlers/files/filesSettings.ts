@@ -39,7 +39,7 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "files/settings";
 
-const getFilesSettings = (): TFilesSettings => {
+export const getFilesSettings = (): TFilesSettings => {
   return {
     extsImagePreviewed: [
       ".svg",

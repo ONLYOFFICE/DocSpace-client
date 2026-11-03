@@ -42,6 +42,11 @@ import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { isMobile } from "react-device-detect";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
+import {
+  isDropRefused,
+  resolveDropTarget,
+} from "@docspace/shared/services/private-room/upload-target";
+
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
     onContentFileSelect = (checked, file) => {
@@ -70,17 +75,40 @@ export default function withFileActions(WrappedFileItem) {
       setEnabledHotkeys(true);
     };
 
-    onDropZoneUpload = (files, uploadToFolder) => {
-      const { t, dragging, setDragging, startUpload, createFoldersTree } =
-        this.props;
+    // Spec: private-rooms/file-operations, "Drops onto a private room from outside it are refused".
+    onDropCapture = () => {
+      this.dropSnapshot = this.props.resolveOpenFolderTarget();
+    };
 
+    onDropZoneUpload = async (files) => {
+      const {
+        t,
+        item,
+        dragging,
+        setDragging,
+        startUpload,
+        createFoldersTree,
+        resolveOpenFolderTarget,
+      } = this.props;
+
+      const open = this.dropSnapshot ?? resolveOpenFolderTarget();
+      this.dropSnapshot = null;
       const dragged = dragging;
 
       dragging && setDragging(false);
 
-      createFoldersTree(t, files, uploadToFolder, dragged)
+      const target = await resolveDropTarget(open, item).catch((err) => {
+        toastr.error(err, null, 0, true);
+        return null;
+      });
+      if (isDropRefused(open, target)) {
+        if (target) toastr.warning(t("Common:OpenPrivateRoomToUpload"));
+        return;
+      }
+
+      createFoldersTree(t, files, target, dragged)
         .then((f) => {
-          if (f.length > 0) startUpload(f, uploadToFolder, t);
+          if (f.length > 0) startUpload(f, target, t);
         })
         .catch((err) => {
           toastr.error(err, undefined, 0, true);
@@ -93,18 +121,12 @@ export default function withFileActions(WrappedFileItem) {
         dragging,
         setDragging,
         isDisabledDropItem,
-        item,
         isRecentFolder,
       } = this.props;
-      const { fileExst, isFolder, id } = item;
 
       if (isTrashFolder || isRecentFolder || isDisabledDropItem)
         return dragging && setDragging(false);
-      if (!fileExst && isFolder) {
-        this.onDropZoneUpload(items, id);
-      } else {
-        this.onDropZoneUpload(items);
-      }
+      this.onDropZoneUpload(items);
     };
 
     onMouseDown = (e) => {
@@ -389,6 +411,7 @@ export default function withFileActions(WrappedFileItem) {
           onContentFileSelect={this.onContentFileSelect}
           fileContextClick={this.onFileContextClick}
           onDrop={this.onDrop}
+          onDropCapture={this.onDropCapture}
           onMouseDown={this.onMouseDown}
           onFilesClick={this.onFilesClick}
           onDoubleClick={this.onDoubleClick}
@@ -476,7 +499,11 @@ export default function withFileActions(WrappedFileItem) {
         withShiftSelect,
       } = filesStore;
       const { id } = selectedFolderStore;
-      const { startUpload, secondaryProgressDataStore } = uploadDataStore;
+      const {
+        startUpload,
+        resolveOpenFolderTarget,
+        secondaryProgressDataStore,
+      } = uploadDataStore;
       const { withContentSelection } = hotkeyStore;
       const { findOperationById } = secondaryProgressDataStore;
       const {
@@ -581,6 +608,7 @@ export default function withFileActions(WrappedFileItem) {
         dragging,
         setDragging,
         startUpload,
+        resolveOpenFolderTarget,
         createFoldersTree,
         draggable,
         setTooltipPosition,

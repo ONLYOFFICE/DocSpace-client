@@ -53,7 +53,34 @@ const FORM_PREFIX =
   "/ONLYOFFICEFORM 12 0 R\x0A>>\x0A" +
   "stream\x0D\x0A";
 
+// The first 300 bytes of files the editor produced on the stand on
+// 2026-10-30: file 40, "New PDF form", decrypted through the client
+// download, which the server lists as a form; and the "Download As > PDF"
+// of document 7, built in the browser, which carries the same first
+// object without the form signature.
+const STAND_FORM_HEAD_BASE64 =
+  "JVBERi0yLjAlUERGLTEuNw0lzcrSqQ0xIDAgb2JqCjw8Ci9JRCA8NzU5OUIwNzZFOTcxNkI4OEU0RkUzNkYzREY1RkU5QTY+Ci9MZW5ndGggMzQ4MzUgICAgIAovT05MWU9GRklDRUZPUk0gWyAwIDM0ODM1IF0KL1R5cGUgL01ldGFPRm9ybQo+PgpzdHJlYW0NClBLAwQUAAAACAAAAAAAgBFlgu0AAACsAQAAEQAAAGRvY1Byb3BzL2NvcmUueG1sdZBNS8QwEIbv/oqSeztbBZHSdsGDJxcEFbyGyWw32HyQGe3335stWldYjzPvk4fJ226Pbiw+KbENvlN1tVEFeQzG+qFTry8P5Z0qWLQ3egyeOjUTq21/1WJsMCR6SiFSEktcZJHnBmOn";
+
+const STAND_PLAIN_PDF_HEAD_BASE64 =
+  "JVBERi0yLjANJc3K0qkNMSAwIG9iago8PAovTGVuZ3RoIDAgICAgICAgICAKL1R5cGUgL01ldGFPRm9ybQo+PgpzdHJlYW0NCgplbmRzdHJlYW0KZW5kb2JqCjIgMCBvYmoKPDwKL0xhbmcgKGVuLVVTKQovTWFya0luZm8gPDwKL01hcmtlZCB0cnVlCj4+Ci9NZXRhZGF0YSAyMSAwIFIKL1BhZ2VMYXlvdXQgL09uZUNvbHVtbgovUGFnZU1vZGUgL1VzZU5vbmUKL1BhZ2VzIDMgMCBSCi9TdHJ1Y3RUcmVlUm9vdCA0IDAgUgovVHlwZSAvQ2F0YWxvZwovVmlld2VyUHJlZmVyZW5jZXMgPDwKL0Rpc3BsYXlEb2NUaXRsZSB0cnVlCj4+";
+
+const fromBase64 = (s: string): Uint8Array =>
+  Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
 describe("pdfFormSignature", () => {
+  describe("files the editor produced on the stand", () => {
+    it("classifies the PDF form of file 40 as the server does: a form", () => {
+      const head = fromBase64(STAND_FORM_HEAD_BASE64);
+      expect(head).toHaveLength(PDF_FORM_SNIFF_LIMIT);
+      expect(isPdfFormContent(head)).toBe(true);
+    });
+
+    it("classifies the PDF export of document 7 as the server does: not a form", () => {
+      const head = fromBase64(STAND_PLAIN_PDF_HEAD_BASE64);
+      expect(head).toHaveLength(PDF_FORM_SNIFF_LIMIT);
+      expect(isPdfFormContent(head)).toBe(false);
+    });
+  });
+
   describe("isPdfFormContent", () => {
     it("detects a well-formed form prefix", () => {
       expect(isPdfFormContent(latin1Bytes(FORM_PREFIX))).toBe(true);

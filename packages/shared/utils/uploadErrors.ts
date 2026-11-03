@@ -93,7 +93,11 @@ const extractType = (error: unknown): string => {
     response?: { data?: { error?: { type?: unknown } } };
   };
   const raw = candidate.response?.data?.error?.type ?? candidate.type;
-  return typeof raw === "string" ? raw.toLowerCase() : "";
+  // The server names the exception with its namespace
+  // (ASC.Core.Tenants.TenantQuotaException); compare the class name only.
+  return typeof raw === "string"
+    ? (raw.toLowerCase().split(".").pop() ?? "")
+    : "";
 };
 
 export const isQuotaError = (error: unknown): boolean => {
@@ -113,6 +117,8 @@ export const isQuotaError = (error: unknown): boolean => {
 
 export interface UploadQueueItem {
   toFolderId?: string | number | null;
+  /** The room the item uploads into, captured when it was queued. */
+  encryptionRoomId?: string | number | null;
   action?: string;
   error?: unknown;
   cancel?: boolean;
@@ -125,7 +131,8 @@ export const countActiveUploadsForRoom = (
   if (roomId === null || roomId === undefined) return 0;
   const target = String(roomId);
   return files.reduce((acc, file) => {
-    if (String(file.toFolderId ?? "") !== target) return acc;
+    if (String(file.encryptionRoomId ?? file.toFolderId ?? "") !== target)
+      return acc;
     if (file.cancel) return acc;
     if (file.error) return acc;
     const action = file.action;

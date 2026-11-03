@@ -53,6 +53,7 @@ export const NewFilesPanelItem = ({
   onClose,
 
   culture,
+  roomId,
 }: NewFilesPanelItemProps) => {
   return (
     <div
@@ -75,6 +76,7 @@ export const NewFilesPanelItem = ({
                   items={value.items}
                   isRooms
                   onClose={onClose}
+                  roomId={value.room.id}
                 />
               </div>
             );
@@ -87,6 +89,7 @@ export const NewFilesPanelItem = ({
           items={items as unknown as TFile[]}
           isRooms={false}
           onClose={onClose}
+          roomId={roomId}
         />
       )}
     </div>

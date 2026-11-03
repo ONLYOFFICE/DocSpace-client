@@ -3,7 +3,7 @@
   "content": "Download",
   "content_en_sha1_hash": "a479c9c34e878d07b4d67a73a48f432ad7dc53c8",
   "created_at": "2025-05-19T21:30:44.645Z",
-  "updated_at": "2026-11-02T09:45:28.536Z",
+  "updated_at": "2026-11-03T13:10:45.815Z",
   "comment": {
     "text": "This is a button label that allows users to download a file or a document version.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 671,
+      "line_number": 672,
       "context": "// onLoad: () => self.onLoadLinks(t, item),\n },\n {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n if (isLockedSharedRoom(item as TRoom))\n return self.dialogsStore.setPasswordEntryDialog(\n true,",
       "module": "/packages/client"
     },
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 250,
+      "line_number": 251,
       "context": "scale\n primary\n size={ButtonSize.medium}\n label={\n isAnonym\n ? t(\"Common:Download\")\n : t(\"CompletedForm:CheckReadyForms\")\n }\n onClick={isAnonym ? handleDownload : gotoCompleteFolder}\n testId={\n isAnonym",
       "module": "/packages/doceditor"
     },

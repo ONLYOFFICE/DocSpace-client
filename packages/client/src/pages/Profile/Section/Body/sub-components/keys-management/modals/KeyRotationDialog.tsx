@@ -33,13 +33,19 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useId, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { KEY_DIALOG_DISPLAY_TYPE } from "@docspace/shared/dialogs/key-dialog-display";
+import { useKeyDialogCloseGuard } from "@docspace/shared/dialogs/key-dialog-close-guard";
+import { activateAsButton, submitOnEnter } from "@docspace/shared/dialogs/key-dialog-keys";
+import { useRefocusAfterFailure } from "@docspace/shared/dialogs/key-dialog-refocus";
+import { KeyDialogAnnouncement } from "@docspace/shared/dialogs/key-dialog-announcement";
+import UnsavedChangesDialog from "@docspace/shared/dialogs/unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
 import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
@@ -47,7 +53,12 @@ import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-contain
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import { PASSPHRASE_MIN_LENGTH } from "@docspace/shared/services/encryption/passphrase-strength";
+import {
+  PASSPHRASE_MIN_LENGTH,
+  containsCommonPattern,
+  isPassphraseAcceptable,
+} from "@docspace/shared/services/encryption/passphrase-strength";
+import { PASSPHRASE_SETTINGS } from "@docspace/shared/dialogs/passphrase-modal/PassphraseModal";
 
 import styles from "./KeyRotationDialog.module.scss";
 
@@ -69,10 +80,12 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
   onForgotPassphrase,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
+  const titleId = useId();
 
   const [currentPassphrase, setCurrentPassphrase] = useState("");
   const [newPassphrase, setNewPassphrase] = useState("");
   const [confirmPassphrase, setConfirmPassphrase] = useState("");
+  const [rulesPassed, setRulesPassed] = useState(false);
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
 
   useEffect(() => {
@@ -80,6 +93,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
       setCurrentPassphrase("");
       setNewPassphrase("");
       setConfirmPassphrase("");
+      setRulesPassed(false);
       setAttemptedSubmit(false);
     }
   }, [visible]);
@@ -90,15 +104,19 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
       ? t("Common:CurrentPassphraseRequired")
       : "";
 
-  const newFieldError = attemptedSubmit
-    ? newPassphrase.length > 0 && newPassphrase.length < PASSPHRASE_MIN_LENGTH
-      ? t("Common:PassphraseTooShort", { length: PASSPHRASE_MIN_LENGTH })
-      : newPassphrase &&
-          currentPassphrase &&
-          currentPassphrase === newPassphrase
-        ? t("Common:PassphraseMustBeDifferent")
-        : ""
-    : "";
+  const newFieldError =
+    (attemptedSubmit
+      ? newPassphrase.length > 0 && newPassphrase.length < PASSPHRASE_MIN_LENGTH
+        ? t("Common:PassphraseTooShort", { length: PASSPHRASE_MIN_LENGTH })
+        : newPassphrase &&
+            currentPassphrase &&
+            currentPassphrase === newPassphrase
+          ? t("Common:PassphraseMustBeDifferent")
+          : ""
+      : "") ||
+    (containsCommonPattern(newPassphrase)
+      ? t("Common:PassphraseCommonPattern")
+      : "");
 
   const confirmFieldError =
     confirmPassphrase && newPassphrase !== confirmPassphrase
@@ -110,176 +128,237 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
 
     if (!currentPassphrase) return;
     if (newPassphrase.length < PASSPHRASE_MIN_LENGTH) return;
+    // Spec: key-management, "Passphrase strength gate"
+    if (!rulesPassed || !isPassphraseAcceptable(newPassphrase)) return;
     if (newPassphrase !== confirmPassphrase) return;
     if (currentPassphrase === newPassphrase) return;
 
     await onSubmit(currentPassphrase, newPassphrase);
-  }, [currentPassphrase, newPassphrase, confirmPassphrase, onSubmit]);
+  }, [
+    currentPassphrase,
+    newPassphrase,
+    confirmPassphrase,
+    rulesPassed,
+    onSubmit,
+  ]);
 
   const handleCancel = useCallback(() => {
     setCurrentPassphrase("");
     setNewPassphrase("");
     setConfirmPassphrase("");
+    setRulesPassed(false);
     setAttemptedSubmit(false);
     onCancel();
   }, [onCancel]);
 
+  const { requestClose, confirming, confirmation } = useKeyDialogCloseGuard({
+    visible,
+    dirty:
+      currentPassphrase !== "" ||
+      newPassphrase !== "" ||
+      confirmPassphrase !== "",
+    onCancel: handleCancel,
+  });
+
   const isValid =
     currentPassphrase.length > 0 &&
     newPassphrase.length >= PASSPHRASE_MIN_LENGTH &&
+    rulesPassed &&
+    isPassphraseAcceptable(newPassphrase) &&
     newPassphrase === confirmPassphrase &&
     currentPassphrase !== newPassphrase;
 
   const isDisabled = !isValid || isLoading;
 
+  useRefocusAfterFailure(
+    "currentPassphrase",
+    visible && !isLoading && !!externalError,
+  );
+
+  const handleKeyDown = useMemo(
+    () =>
+      submitOnEnter(() => {
+        void handleSubmit();
+      }, !isDisabled && !confirming),
+    [handleSubmit, isDisabled, confirming],
+  );
+
   return (
-    <ModalDialog
-      zIndex={410}
-      visible={visible}
-      onClose={handleCancel}
-      displayType={ModalDialogType.modal}
-      isLoading={!ready}
-      autoMaxHeight
-    >
-      <ModalDialog.Header>{t("Common:ChangePassphrase")}</ModalDialog.Header>
+    <>
+      <ModalDialog
+        zIndex={410}
+        visible={visible}
+        onClose={requestClose}
+        displayType={ModalDialogType.modal}
+        displayTypeDetailed={KEY_DIALOG_DISPLAY_TYPE}
+        closeOnBackdropClick={false}
+        aria-labelledby={titleId}
+        isLoading={!ready}
+        autoMaxHeight
+      >
+        <ModalDialog.Header>
+          <span id={titleId}>{t("Common:ChangePassphrase")}</span>
+        </ModalDialog.Header>
 
-      <ModalDialog.Body>
-        <div className={styles.container}>
-          <Text className={styles.description}>
-            {t("Common:ChangePassphraseHint")}
-          </Text>
-
-          <div className={styles.inputGroup}>
-            <Text fontSize="13px" fontWeight={600}>
-              {t("Common:CurrentPassphrase")}
+        <ModalDialog.Body>
+          <div className={styles.container}>
+            <Text className={styles.description}>
+              {t("Common:ChangePassphraseHint")}
             </Text>
-            <FieldContainer
-              isVertical
-              labelVisible={false}
-              removeMargin
-              hasError={!!currentFieldError}
-              errorMessage={currentFieldError}
-              errorMessageWidth="100%"
-              className={styles.inputWrapper}
-            >
-              <PasswordInput
-                id="currentPassphrase"
-                inputName="currentPassphrase"
-                inputValue={currentPassphrase}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setCurrentPassphrase(e.target.value);
-                }}
-                placeholder={t("Common:EnterCurrentPassphrase")}
-                scale
-                size={InputSize.base}
-                simpleView
-                isDisabled={isLoading}
+
+            <div className={styles.inputGroup}>
+              <FieldContainer
+                isVertical
+                labelVisible
+                labelText={t("Common:CurrentPassphrase")}
+                labelFor="currentPassphrase"
+                removeMargin
                 hasError={!!currentFieldError}
-                isAutoFocussed
-                autoComplete="new-password"
-              />
-            </FieldContainer>
-            {onForgotPassphrase && externalError ? (
-              <div className={styles.forgotRow}>
-                <Link
-                  type={LinkType.action}
-                  fontWeight="600"
-                  fontSize="12px"
-                  isHovered
-                  onClick={onForgotPassphrase}
-                  dataTestId="forgot_passphrase_link"
-                >
-                  {t("Common:ForgotPassphrase")}
-                </Link>
-              </div>
-            ) : null}
-          </div>
+                errorMessage={currentFieldError}
+                errorMessageWidth="100%"
+                className={styles.inputWrapper}
+              >
+                <PasswordInput
+                  id="currentPassphrase"
+                  inputName="currentPassphrase"
+                  inputValue={currentPassphrase}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setCurrentPassphrase(e.target.value);
+                  }}
+                  placeholder={t("Common:EnterCurrentPassphrase")}
+                  scale
+                  size={InputSize.base}
+                  simpleView
+                  isDisabled={isLoading}
+                  hasError={!!currentFieldError}
+                  isAutoFocussed
+                  autoComplete="new-password"
+                  onKeyDown={handleKeyDown}
+                  tabIndex={0}
+                />
+              </FieldContainer>
+              {onForgotPassphrase && externalError ? (
+                <div className={styles.forgotRow}>
+                  <Link
+                    type={LinkType.action}
+                    role="button"
+                    tabIndex={0}
+                    fontWeight="600"
+                    fontSize="12px"
+                    isHovered
+                    onClick={onForgotPassphrase}
+                    onKeyDown={activateAsButton}
+                    dataTestId="forgot_passphrase_link"
+                  >
+                    {t("Common:ForgotPassphrase")}
+                  </Link>
+                </div>
+              ) : null}
+            </div>
 
-          <div className={styles.inputGroup}>
-            <Text fontSize="13px" fontWeight={600}>
-              {t("Common:NewPassphrase")}
-            </Text>
-            <FieldContainer
-              isVertical
-              labelVisible={false}
-              removeMargin
-              hasError={!!newFieldError}
-              errorMessage={newFieldError}
-              errorMessageWidth="100%"
-              className={styles.inputWrapper}
-            >
-              <PasswordInput
-                id="newPassphrase"
-                inputName="newPassphrase"
-                inputValue={newPassphrase}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setNewPassphrase(e.target.value);
-                }}
-                placeholder={t("Common:EnterNewPassphrase")}
-                scale
-                size={InputSize.base}
-                simpleView
-                isDisabled={isLoading}
+            <div className={styles.inputGroup}>
+              <FieldContainer
+                isVertical
+                labelVisible
+                labelText={t("Common:NewPassphrase")}
+                labelFor="newPassphrase"
+                removeMargin
                 hasError={!!newFieldError}
-                autoComplete="new-password"
-              />
-            </FieldContainer>
-          </div>
+                errorMessage={newFieldError}
+                errorMessageWidth="100%"
+                className={styles.inputWrapper}
+              >
+                <PasswordInput
+                  id="newPassphrase"
+                  inputName="newPassphrase"
+                  inputValue={newPassphrase}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setNewPassphrase(e.target.value);
+                  }}
+                  placeholder={t("Common:EnterNewPassphrase")}
+                  scale
+                  size={InputSize.base}
+                  simpleView={false}
+                  passwordSettings={PASSPHRASE_SETTINGS}
+                  onValidateInput={(progressScore) =>
+                    setRulesPassed(progressScore)
+                  }
+                  tooltipPasswordTitle={`${t("Common:PassphraseLimitMessage")}:`}
+                  tooltipPasswordLength={`${t(
+                    "Common:PasswordMinimumLength",
+                  )}: ${PASSPHRASE_MIN_LENGTH}`}
+                  tooltipPasswordDigits={t("Common:PasswordLimitDigits")}
+                  tooltipPasswordCapital={t("Common:PasswordLimitUpperCase")}
+                  tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
+                  isDisabled={isLoading}
+                  hasError={!!newFieldError}
+                  autoComplete="new-password"
+                  onKeyDown={handleKeyDown}
+                  tabIndex={0}
+                />
+              </FieldContainer>
+            </div>
 
-          <div className={styles.inputGroup}>
-            <Text fontSize="13px" fontWeight={600}>
-              {t("Common:ConfirmNewPassphrase")}
-            </Text>
-            <FieldContainer
-              isVertical
-              labelVisible={false}
-              removeMargin
-              hasError={!!confirmFieldError}
-              errorMessage={confirmFieldError}
-              errorMessageWidth="100%"
-              className={styles.inputWrapper}
-            >
-              <PasswordInput
-                id="confirmNewPassphrase"
-                inputName="confirmNewPassphrase"
-                inputValue={confirmPassphrase}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setConfirmPassphrase(e.target.value);
-                }}
-                placeholder={t("Common:ConfirmNewPassphrase")}
-                scale
-                size={InputSize.base}
-                simpleView
-                isDisabled={isLoading}
+            <div className={styles.inputGroup}>
+              <FieldContainer
+                isVertical
+                labelVisible
+                labelText={t("Common:ConfirmNewPassphrase")}
+                labelFor="confirmNewPassphrase"
+                removeMargin
                 hasError={!!confirmFieldError}
-                autoComplete="new-password"
-              />
-            </FieldContainer>
+                errorMessage={confirmFieldError}
+                errorMessageWidth="100%"
+                className={styles.inputWrapper}
+              >
+                <PasswordInput
+                  id="confirmNewPassphrase"
+                  inputName="confirmNewPassphrase"
+                  inputValue={confirmPassphrase}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setConfirmPassphrase(e.target.value);
+                  }}
+                  placeholder={t("Common:ConfirmNewPassphrase")}
+                  scale
+                  size={InputSize.base}
+                  simpleView
+                  isDisabled={isLoading}
+                  hasError={!!confirmFieldError}
+                  autoComplete="new-password"
+                  onKeyDown={handleKeyDown}
+                  tabIndex={0}
+                />
+              </FieldContainer>
+            </div>
           </div>
-        </div>
-      </ModalDialog.Body>
+          <KeyDialogAnnouncement
+            text={currentFieldError || newFieldError || confirmFieldError || ""}
+          />
+        </ModalDialog.Body>
 
-      <ModalDialog.Footer>
-        <Button
-          scale
-          primary
-          key="SubmitButton"
-          onClick={handleSubmit}
-          size={ButtonSize.normal}
-          label={t("Common:SaveButton")}
-          isDisabled={isDisabled}
-          isLoading={isLoading}
-        />
-        <Button
-          scale
-          key="CancelButton"
-          onClick={handleCancel}
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-          isDisabled={isLoading}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
+        <ModalDialog.Footer>
+          <Button
+            scale
+            primary
+            key="SubmitButton"
+            onClick={handleSubmit}
+            size={ButtonSize.normal}
+            label={t("Common:SaveButton")}
+            isDisabled={isDisabled}
+            isLoading={isLoading}
+          />
+          <Button
+            scale
+            key="CancelButton"
+            onClick={handleCancel}
+            size={ButtonSize.normal}
+            label={t("Common:CancelButton")}
+            isDisabled={isLoading}
+          />
+        </ModalDialog.Footer>
+      </ModalDialog>
+      <UnsavedChangesDialog {...confirmation} />
+    </>
   );
 };
 

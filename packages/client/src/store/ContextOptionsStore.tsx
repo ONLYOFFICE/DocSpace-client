@@ -60,6 +60,7 @@ import {
 } from "@docspace/shared/utils/getDefaultAccessUser";
 import {
   RoomsType,
+  RoomsTypePrivate,
   Events,
   FolderType,
   UrlActionType,
@@ -67,6 +68,10 @@ import {
   FilterType,
   FileExtensions,
 } from "@docspace/shared/enums";
+import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
+import i18n from "../i18n";
+import { getEncryptedOperationErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
+import { hasPrivateRoomSecureContext } from "@docspace/shared/services/private-room/create-room-gate";
 import {
   isFolder,
   isRoom as isRoomUtil,
@@ -479,8 +484,17 @@ class ContextOptionsStore {
 
     if (isFile && encrypted) {
       downloadAction("", item).catch((err: unknown) =>
-        toastr.error(err as string),
+        toastr.error(getEncryptedOperationErrorMessage(i18n.t, err)),
       );
+    } else if (
+      !isFile &&
+      (this.treeFoldersStore.isPrivacyFolder || item.private)
+    ) {
+      this.filesActionsStore
+        .downloadEncryptedFolder(item)
+        .catch((err: unknown) =>
+          toastr.error(getEncryptedOperationErrorMessage(i18n.t, err)),
+        );
     } else if (isFile) {
       // the original .js passed viewUrl through unchecked
       // (files always carry it) — the non-null assertion keeps that behavior.
@@ -497,8 +511,13 @@ class ContextOptionsStore {
 
     if (item.isFolder || item.roomType) {
       return this.filesActionsStore
-        .downloadFiles([], [item.id], { label: t("Common:ArchivingData") })
-        .catch((err: unknown) => toastr.error(err as string));
+        .downloadFiles([], [item.id], {
+          label: t("Common:ArchivingData"),
+          errorMessage: (err) => getEncryptedOperationErrorMessage(i18n.t, err),
+        })
+        .catch((err: unknown) =>
+          toastr.error(getEncryptedOperationErrorMessage(i18n.t, err)),
+        );
     }
 
     openUrl(item.viewUrl!, UrlActionType.Download);
@@ -964,9 +983,22 @@ class ContextOptionsStore {
 
   getGroupContextOptions = (t: TTranslation): ContextMenuModel[]=> getGroupContextOptionsImpl(this, t);
 
-  onCreateRoom = (item?: TContextItem | null, fromItem?: boolean) => {
+  onCreateRoom = (
+    item?: TContextItem | null,
+    fromItem?: boolean,
+    context: string = "context_menu",
+  ) => {
     if (this.currentQuotaStore.isWarningRoomsDialog) {
       this.dialogsStore.setQuotaWarningDialogVisible(true);
+      return;
+    }
+
+    const isPrivateSection =
+      !fromItem && isPrivateRoomsRoute(window.location.pathname);
+
+    // Spec: private-rooms/room-membership, "Private rooms need a secure context"
+    if (isPrivateSection && !hasPrivateRoomSecureContext()) {
+      toastr.error(i18n.t("Common:EncryptionRequiresHttps"));
       return;
     }
 
@@ -977,7 +1009,7 @@ class ContextOptionsStore {
     const event: TStoreCustomEvent = new CustomEvent(Events.ROOM_CREATE, {
       detail: {
         parentId: this.selectedFolderStore.id,
-        context: "context_menu",
+        context,
       },
     });
 
@@ -985,7 +1017,9 @@ class ContextOptionsStore {
       event.title = item.title;
     }
 
-    if (!fromItem && window.location.pathname.startsWith("/forms")) {
+    if (isPrivateSection) {
+      event.payload = { startRoomType: RoomsTypePrivate };
+    } else if (!fromItem && window.location.pathname.startsWith("/forms")) {
       event.payload = { isFormsCreate: true };
     }
 

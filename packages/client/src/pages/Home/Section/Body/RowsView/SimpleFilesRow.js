@@ -64,6 +64,7 @@ const SimpleFilesRow = React.memo((props) => {
     onContentFileSelect,
     fileContextClick,
     onDrop,
+    onDropCapture,
     onMouseDown,
     className,
     isDragging,
@@ -227,6 +228,7 @@ const SimpleFilesRow = React.memo((props) => {
         value={value}
         className={classNames("files-item", className, idWithFileExst)}
         onDrop={onDrop}
+        onDropCapture={onDropCapture}
         onMouseDown={onMouseDown}
         dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}

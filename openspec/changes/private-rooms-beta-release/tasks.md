@@ -12,12 +12,12 @@ Group 0 holds the beta gate and the decisions. Tasks that name a server field or
 
 ## 1. Planning
 
-- [ ] 1.1 Revise `private-rooms-release-gate` with `/opsx:update` (design decision 9):
+- [x] 1.1 Revise `private-rooms-release-gate` with `/opsx:update` (design decision 9):
   - drop its groups 2 and 3 and its feature-gating delta, which this change owns;
   - keep its general-availability criteria;
   - add the removal of the Beta badges as its client work.
 
-  Verify: `npx -y @fission-ai/openspec@latest validate --all --strict`.
+  Verify: `npx -y @fission-ai/openspec@latest validate --all --strict`. Done 2026-11-03: the release gate now covers general availability. Its prerequisites gain this change (1.12), it removes the beta label in one task (2.1) with its E2E update (2.2), and its deltas modify the administrator control and remove the two badge requirements this change adds.
 
 ## 2. Beta badge
 

@@ -2,56 +2,58 @@
 
 ## Why
 
-Private rooms are hidden behind a browser-local opt-in (`privateRooms` in
-localStorage) because the feature was not releasable on 2026-08-14 and still
-is not. The opt-in is a discoverability control only: any user can set it
-from the console or with a `?privateRooms=` URL parameter, the SDK private
-routes and the embedded client take a host opt-in instead, and the server exposes
-every private-room endpoint regardless. Releasing means replacing that opt-in
-with a real availability control and proving, change by change, that the
-blockers found in the 2026-10-20 audit are closed. This change is the
-definition of done for the feature: it lists the prerequisites, replaces the
-opt-in with a server-side setting, and removes the gating from the client,
-the SDK and the E2E suite.
+Private rooms reach users first as a beta (`private-rooms-beta-release`):
+- a portal setting controls availability instead of the browser-local tester
+  flag;
+- the Private sidebar item, the Keys management tab and the administrator
+  control carry a Beta badge.
+
+The beta deliberately ships without the items that general availability
+needs: an external penetration test, the Document Server contract sign-off,
+the server hardening found in the 2026-10-20 audit, and the accessibility pass
+on the member panels. This change is the definition of done for general
+availability. It lists those prerequisites, removes the beta label once they
+hold, and publishes the release documents.
 
 ## What Changes
 
-- Replace the `privateRooms` localStorage opt-in with a server-side
-  availability setting that administrators can turn off; the client, the
-  E2E rooms app and the SDK read that setting instead of localStorage.
-- Remove the gated-surface logic (create-room chooser, apps catalog and
-  sidebar, keys-management tab and routes) and the hidden-surfaces E2E spec;
-  the base E2E fixture stops setting the flag.
-- Publish release notes that list every accepted v1 limitation from
+- Remove the Beta badges from the Private sidebar item and the Keys management
+  tab, and the beta label from the administrator control for the setting,
+  together with the Common:PrivateRoomsBetaDescription text they share.
+- Publish release notes listing every accepted v1 limitation from
   `private-rooms/encryption-core` (no room key, no forward secrecy for
-  already-decrypted content, file extension visible, per-device identity,
-  in-memory buffering) and the editor action policy.
+  already-decrypted content, visible file extension, per-device identity,
+  in-memory buffering, unauthenticated DSE3 header flags) and the editor
+  action policy.
 - Commit the compliance and positioning documents recovered from the stashes
-  under `docs/private-rooms/` after review.
+  under `docs/private-rooms/`, after review.
 - Update `.claude/rules/private-rooms.md` and `openspec/config.yaml` so they
-  no longer describe the feature as hidden.
+  describe a released feature, not a beta.
 
-**BREAKING**: the localStorage opt-in stops working; testers use the server
-setting.
+Revised on 2026-11-03: the portal setting and the removal of the browser
+opt-in moved to `private-rooms-beta-release`. That change ships them as the
+beta, and this change no longer carries them.
 
 ### Prerequisites (gate criteria)
 
 The change MUST NOT be applied until all of the following hold:
 
-1. Archived: `private-rooms-upload-fail-closed`, `private-rooms-tofu-on-upload`,
-   `private-rooms-invite-atomic-rewrap`, `private-rooms-editor-contract`.
-2. Decided and archived or explicitly deferred with an accepted-limitation
-   requirement: `private-rooms-device-unlock-policy`,
+1. Archived: `private-rooms-beta-release`, `private-rooms-upload-fail-closed`,
+   `private-rooms-tofu-on-upload`, `private-rooms-invite-atomic-rewrap` and
+   `private-rooms-editor-contract`.
+2. Decided, then archived or explicitly deferred with an accepted-limitation
+   requirement: `private-rooms-device-unlock-policy` and
    `private-rooms-dse3-header-authentication`.
 3. Archived: `private-rooms-sdk-gating-and-parity`, `private-rooms-ux-gaps`,
-   `private-rooms-remove-dead-api-calls`, `private-rooms-spec-drift-fixes`.
-4. `private-rooms-server-hardening`: owner-change hand-over, availability
-   rule, metadata guards, title validation and e-mail title items merged on
-   the server; recovery and offboarding merged if the launch scope is B2B.
+   `private-rooms-remove-dead-api-calls` and `private-rooms-spec-drift-fixes`.
+4. `private-rooms-server-hardening` items merged on the server:
+   - always: owner-change hand-over, availability rule, metadata guards,
+     title validation and the e-mail title;
+   - if the launch scope is B2B: recovery and offboarding as well.
 5. External penetration test performed on the crypto core and the private
    room flows, with the summary published (stashed task #69).
-6. Accessibility pass on the key dialogs and private-room panels.
-7. Document Server release implementing the encrypted-editing contract is
+6. Accessibility pass on the key dialogs and the private-room panels.
+7. A Document Server release implementing the encrypted-editing contract is
    named and exercised on staging.
 
 ## Capabilities
@@ -62,38 +64,41 @@ None.
 
 ### Modified Capabilities
 
-- `private-rooms/feature-gating`: the browser-local opt-in requirements are
-  removed and replaced by a server-side availability setting; the SDK host
-  opt-in and the server "not gated" statement become obsolete; the E2E
-  fixture requirement is removed.
+- `private-rooms/feature-gating`: the administrator control for the setting is
+  no longer labelled as a beta.
+- `private-rooms/sidebar-section`: the Private sidebar item loses its Beta
+  badge.
+- `private-rooms/key-management`: the Keys management tab loses its Beta badge.
+
+These deltas modify requirements that `private-rooms-beta-release` adds. They
+apply once that change is archived (prerequisite 1).
 
 ## Impact
 
-- Client: `packages/shared/utils/privateRooms.ts` (deleted),
-  `packages/client/src/store/AppsStore.ts`, `packages/client/src/helpers/disabled-apps.ts`,
-  `packages/client/src/routes/general.js`, `packages/client/src/pages/Profile/Section/Body/index.tsx`,
-  `packages/shared/store/SettingsStore.ts` (new setting), E2E fixture
-  `packages/client/__tests__/fixtures/base.ts`, spec
-  `packages/client/__tests__/private-rooms-hidden.spec.ts` (replaced by a
-  setting-off spec).
-- SDK: `packages/sdk/src/app/(private)` layout, page guards and opt-in
-  helpers read the setting instead of the host opt-in.
-- Server (`../server`): a portal setting for private-room availability
-  exposed in the settings payload; builds on the availability rule from
-  `private-rooms-server-hardening`.
-- Docs: `docs/private-rooms/` compliance and positioning pack, release notes.
+- **Client:**
+  - `packages/client/src/components/ClientArticleSidebar`;
+  - `packages/client/src/pages/Profile/Section/Body/index.tsx`;
+  - the administrator control added by `private-rooms-beta-release`;
+  - `public/locales` (Common:PrivateRoomsBetaDescription removed in every language);
+  - the E2E specs that assert the badges and the sidebar screenshots.
+- **Server (`../server`):** the `private-rooms-server-hardening` items of
+  prerequisite 4. This change itself needs no server work.
+- **Document Server:** the release named in prerequisite 7.
+- **Docs:** the `docs/private-rooms/` compliance and positioning pack, and the
+  release notes.
 
 ## Out of scope
 
 - Any functional change to private rooms themselves.
 - Marketing copy beyond the "no zero-knowledge claim" rule from the stashed
   positioning audit.
+- The portal setting, its default and the removal of the browser opt-in:
+  `private-rooms-beta-release` owns them.
 
 ## Decisions needed
 
-1. Launch scope: individuals/SMB (prerequisite 4 without recovery and
-   offboarding) or B2B (with them). The stashed V1 plan allowed the former
+1. Launch scope: individuals and SMB (prerequisite 4 without recovery and
+   offboarding), or B2B (with them). The stashed V1 plan allowed the former,
    with an explicit note in the release notes.
-2. Default of the server-side setting on upgrade: on for every portal, or
-   off until an administrator enables it. Recommendation: off for existing
-   portals, on for new ones, so administrators opt in consciously.
+2. Whether frames and the SDK keep the host opt-in at general availability.
+   `private-rooms-beta-release` keeps it for the beta.

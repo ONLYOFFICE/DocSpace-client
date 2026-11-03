@@ -1,3 +1,3 @@
 # private-rooms-release-gate
 
-Criteria and steps to remove the privateRooms feature flag
+Criteria and steps for the general availability of private rooms after the beta of private-rooms-beta-release

@@ -91,7 +91,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { handleCopy } from "@docspace/shared/utils/copy";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { getServiceLimitChatError } from "@docspace/shared/utils/ai";
+import { getAiChatInterruption } from "@docspace/shared/utils/ai";
 
 import "@docspace/shared/styles/theme.scss";
 
@@ -972,28 +972,12 @@ const Shell = ({ page = "home", ...rest }) => {
         };
       }
 
-      // Standalone pays its AI provider directly: no wallet and no spending
-      // limits, so the library default (localized text + Retry) stands.
-      if (standalone) return null;
-
       // The note says what happened to this answer, in the past tense; the
       // state itself and the way out (top up, raise the limit) are on the
       // notice above the composer, which also holds Retry back until the
-      // state is over (useAiChatNotice).
-      if (getServiceLimitChatError(payload)) {
-        return { title: t("Common:AIInterruptedLimitReached") };
-      }
-
-      // A 402 from the portal gateway is the wallet; any other provider's
-      // is its own credits, which the library's default note describes.
-      if (
-        payload?.code === "insufficient_funds" &&
-        providerType === "onlyoffice"
-      ) {
-        return { title: t("Common:AIInterruptedWalletEmpty") };
-      }
-
-      return null;
+      // state is over (useAiChatNotice). Standalone has neither a wallet nor
+      // limits, so the library default (localized text + Retry) stands.
+      return getAiChatInterruption(t, payload, providerType, standalone);
     },
     [t, standalone, aiActiveProject, openEditAiProject],
   );

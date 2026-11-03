@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "Sala de datos virtuales",
   "VirtualDataRoomDescription": "Utilice la VDR para una seguridad y transparencia avanzadas de los archivos. Establezca marcas de agua, indexe y rastree automáticamente todos los contenidos, restrinja las descargas y las copias.",
   "Wallet": "Monedero",
-  "WalletBalanceTooLow": "El saldo del monedero es demasiado bajo",
   "WalletDelayedPaymentMethodBanner": "Transferencia SEPA enviada. Los fondos pueden tardar varios días hábiles en llegar. El saldo de su monedero se actualizará automáticamente cuando lleguen los fondos. Puede volver a recargar, incluso con tarjeta.",
   "WalletRefilled": "Monedero recargado",
   "WalletSectionDescriptionAddons": "El Monedero le permite comprar fácilmente complementos como almacenamiento, herramientas de IA y copias de seguridad. Añada créditos y seleccione los <1>complementos</1> que necesita para empezar.",

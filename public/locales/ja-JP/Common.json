@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "バーチャルデータルーム",
   "VirtualDataRoomDescription": "高度なファイルセキュリティと透明性のためにVDRを使用する。透かしを設定し、すべてのコンテンツを自動的にインデックス化して追跡し、ダウンロードとコピーを制限する。",
   "Wallet": "ウォレット",
-  "WalletBalanceTooLow": "ウォレットの残高が不足しています",
   "WalletDelayedPaymentMethodBanner": "SEPA振込を送信しました。入金までに数営業日かかる場合があります。入金後、ウォレットの残高は自動的に更新されます。カードを含め、再度チャージすることもできます。",
   "WalletRefilled": "ウォレットがチャージされました",
   "WalletSectionDescriptionAddons": "ウォレットを使用すると、ストレージ、AIツール、バックアップなどのアドオンを簡単に購入できます。クレジットを追加し、必要な<1>アドオン</1>を選択して始めましょう。",

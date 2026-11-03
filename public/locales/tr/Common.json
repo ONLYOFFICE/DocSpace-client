@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "Sanal Veri Odası",
   "VirtualDataRoomDescription": "Gelişmiş dosya güvenliği ve şeffaflık için VDR kullanın. Filigranlar ayarlayın, tüm içerikleri otomatik olarak dizinleyin ve izleyin, indirme ve kopyalamayı kısıtlayın.",
   "Wallet": "Cüzdan",
-  "WalletBalanceTooLow": "Cüzdan bakiyesi çok düşük",
   "WalletDelayedPaymentMethodBanner": "SEPA havalesi gönderildi. Paranın hesaba geçmesi birkaç iş günü sürebilir. Para hesaba geçtikten sonra cüzdan bakiyeniz otomatik olarak güncellenir. Kartla dahil olmak üzere yeniden para yükleyebilirsiniz.",
   "WalletRefilled": "Cüzdan dolduruldu",
   "WalletSectionDescriptionAddons": "Cüzdan, depolama, AI araçları ve yedeklemeler gibi eklentileri kolayca satın almanıza olanak tanır. Kredi ekleyin ve başlamak için ihtiyacınız olan <1>eklentileri</1> seçin.",

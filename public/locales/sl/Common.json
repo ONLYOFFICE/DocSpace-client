@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "Virtualna podatkovna soba",
   "VirtualDataRoomDescription": "Uporabite VDR za napredno varnost in preglednost datotek. Nastavite vodne žige, samodejno indeksirajte in sledite vsebini, omejite prenos in kopiranje.",
   "Wallet": "Denarnica",
-  "WalletBalanceTooLow": "Stanje denarnice je prenizko",
   "WalletDelayedPaymentMethodBanner": "Nakazilo SEPA je bilo poslano. Prejem sredstev lahko traja več delovnih dni. Stanje vaše denarnice se bo po prejemu sredstev samodejno posodobilo. Denarnico lahko znova napolnite, tudi s kartico.",
   "WalletRefilled": "Denarnica napolnjena",
   "WalletSectionDescriptionAddons": "Denarnica vam omogoča enostaven nakup dodatkov, kot so shranjevanje, orodja umetne inteligence in varnostne kopije. Dodajte kredite in izberite <1>dodatke</1>, ki jih potrebujete za začetek.",

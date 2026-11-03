@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "Virtuaalinen datahuone",
   "VirtualDataRoomDescription": "Käytä VDR:ää parantaaksesi tiedostojen suojausta ja läpinäkyvyyttä. Aseta vesileimat, indeksoi ja seuraa kaikkea sisältöä automaattisesti sekä rajoita lataamista ja kopiointia.",
   "Wallet": "Lompakko",
-  "WalletBalanceTooLow": "Lompakon saldo on liian pieni",
   "WalletDelayedPaymentMethodBanner": "SEPA-tilisiirto lähetetty. Varojen saapuminen voi kestää useita arkipäiviä. Lompakkosi saldo päivittyy automaattisesti varojen saavuttua. Voit edelleen ladata lompakkoa uudelleen, myös kortilla.",
   "WalletRefilled": "Lompakko ladattu",
   "WalletSectionDescriptionAddons": "Lompakon avulla voit helposti ostaa lisäosia, kuten tallennustilaa, AI-työkaluja ja varmuuskopioita. Lisää kredittejä ja valitse tarvitsemasi <1>lisäosat</1> aloittaaksesi.",

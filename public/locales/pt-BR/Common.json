@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "Sala de dados virtual",
   "VirtualDataRoomDescription": "Use o VDR para obter segurança avançada e transparência de arquivos. Defina marcas d'água, indexe e rastreie automaticamente todo o conteúdo, restrinja o download e a cópia.",
   "Wallet": "Carteira",
-  "WalletBalanceTooLow": "O saldo da carteira está muito baixo",
   "WalletDelayedPaymentMethodBanner": "Transferência SEPA enviada. Os fundos podem levar vários dias úteis para chegar. O saldo da sua carteira será atualizado automaticamente após a chegada dos fundos. Você ainda pode recarregar novamente, inclusive com cartão.",
   "WalletRefilled": "Carteira recarregada",
   "WalletSectionDescriptionAddons": "A Carteira permite que você adquira facilmente add-ons como armazenamento, ferramentas de IA e backups. Adicione créditos e selecione os <1>add-ons</1> de que precisa para começar.",

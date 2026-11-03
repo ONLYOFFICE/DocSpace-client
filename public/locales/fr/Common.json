@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "Salle de données virtuelle",
   "VirtualDataRoomDescription": "Utilisez une salle de données virtuelle pour une sécurité et une transparence avancées des fichiers. Définissez des filigranes, indexez et suivez automatiquement tout le contenu, limitez le téléchargement et la copie.",
   "Wallet": "Wallet",
-  "WalletBalanceTooLow": "Le solde du portefeuille est trop faible",
   "WalletDelayedPaymentMethodBanner": "Virement SEPA envoyé. La réception des fonds peut prendre plusieurs jours ouvrés. Le solde de votre portefeuille sera mis à jour automatiquement après réception des fonds. Vous pouvez toujours effectuer une nouvelle recharge, y compris par carte.",
   "WalletRefilled": "Wallet rechargé",
   "WalletSectionDescriptionAddons": "Le Wallet vous permet d'acheter facilement des extensions telles que du stockage, des outils IA et des sauvegardes. Ajoutez des crédits et sélectionnez les <1>extensions</1> dont vous avez besoin pour commencer.",

@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "Wirtualny pokój danych (VDR)",
   "VirtualDataRoomDescription": "VDR zapewnia zaawansowane zabezpieczenia i przejrzystość plików. Dodawaj znaki wodne, automatycznie indeksuj i śledź całą zawartość, a także ograniczaj pobierania i kopiowanie.",
   "Wallet": "Portfel",
-  "WalletBalanceTooLow": "Saldo portfela jest zbyt niskie",
   "WalletDelayedPaymentMethodBanner": "Przelew SEPA został wysłany. Zaksięgowanie środków może potrwać kilka dni roboczych. Saldo Twojego portfela zostanie zaktualizowane automatycznie po zaksięgowaniu środków. Nadal możesz doładować portfel ponownie, również kartą.",
   "WalletRefilled": "Portfel doładowany",
   "WalletSectionDescriptionAddons": "Portfel umożliwia łatwe kupowanie dodatków, takich jak pamięć masowa, narzędzia AI i kopie zapasowe. Dodaj kredyty i wybierz <1>dodatki</1>, których potrzebujesz, aby rozpocząć.",

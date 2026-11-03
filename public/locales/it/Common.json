@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "Virtual Data Room",
   "VirtualDataRoomDescription": "Utilizza la VDR per la sicurezza e la trasparenza avanzate dei file. Imposta filigrane, indicizza e traccia automaticamente tutti i contenuti, limita il download e la copia.",
   "Wallet": "Portafoglio",
-  "WalletBalanceTooLow": "Il saldo del portafoglio è troppo basso",
   "WalletDelayedPaymentMethodBanner": "Bonifico SEPA inviato. L'arrivo dei fondi può richiedere diversi giorni lavorativi. Il saldo del tuo portafoglio verrà aggiornato automaticamente dopo l'arrivo dei fondi. Puoi comunque effettuare una nuova ricarica, anche con carta.",
   "WalletRefilled": "Portafoglio ricaricato",
   "WalletSectionDescriptionAddons": "Il Portafoglio ti consente di acquistare facilmente componenti aggiuntivi come spazio di archiviazione, strumenti IA e backup. Aggiungi crediti e seleziona i <1>componenti aggiuntivi</1> di cui hai bisogno per iniziare.",

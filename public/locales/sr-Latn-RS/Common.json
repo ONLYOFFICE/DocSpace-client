@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "Virtuelna soba za podatke",
   "VirtualDataRoomDescription": "Koristite VDR za naprednu sigurnost i transparentnost fajlova. Postavite vodene žigove, automatski indeksirajte i pratite sav sadržaj, ograničite preuzimanje i kopiranje.",
   "Wallet": "Novčanik",
-  "WalletBalanceTooLow": "Stanje novčanika je prenisko",
   "WalletDelayedPaymentMethodBanner": "SEPA transfer je poslat. Sredstvima može biti potrebno nekoliko radnih dana da stignu. Stanje vašeg novčanika će se automatski ažurirati nakon što sredstva stignu. I dalje možete ponovo da dopunite novčanik, uključujući i karticom.",
   "WalletRefilled": "Novčanik dopunjen",
   "WalletSectionDescriptionAddons": "Novčanik vam omogućava da lako kupite dodatke kao što su skladište, AI alatke i rezervne kopije. Dodajte kredite i izaberite <1>dodatke</1> koji su vam potrebni da biste počeli.",

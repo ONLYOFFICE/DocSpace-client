@@ -42,4 +42,5 @@ export {
   type TAiChatBlock,
   type TAiChatStreamError,
 } from "./getAiChatBlock";
+export { getAiChatInterruption } from "./getAiChatInterruption";
 export { getServiceLimitDescription } from "./getServiceLimitDescription";

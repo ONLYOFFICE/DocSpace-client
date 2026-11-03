@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "Virtueller Datenraum",
   "VirtualDataRoomDescription": "Nutzen Sie den VDR für fortschrittliche Dateisicherheit und Transparenz. Setzen Sie Wasserzeichen, indexieren und verfolgen Sie alle Inhalte automatisch, und schränken Sie das Herunterladen und Kopieren ein.",
   "Wallet": "Wallet",
-  "WalletBalanceTooLow": "Wallet-Guthaben ist zu niedrig",
   "WalletDelayedPaymentMethodBanner": "SEPA-Überweisung gesendet. Der Zahlungseingang kann mehrere Werktage dauern. Ihr Wallet-Guthaben wird nach Eingang der Zahlung automatisch aktualisiert. Sie können weiterhin erneut aufladen, auch per Karte.",
   "WalletRefilled": "Wallet aufgefüllt",
   "WalletSectionDescriptionAddons": "Mit dem Wallet können Sie ganz einfach Add-ons wie Speicherplatz, KI-Tools und Backups erwerben. Fügen Sie Guthaben hinzu und wählen Sie die benötigten <1>Add-ons</1> aus, um loszulegen.",

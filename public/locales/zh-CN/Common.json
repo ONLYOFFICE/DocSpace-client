@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "虚拟数据室",
   "VirtualDataRoomDescription": "使用 VDR 实现高级文件安全性和透明度。设置水印，自动索引并跟踪所有内容，限制下载和复制。",
   "Wallet": "钱包",
-  "WalletBalanceTooLow": "钱包余额过低",
   "WalletDelayedPaymentMethodBanner": "SEPA 转账已发送。资金到账可能需要几个工作日。资金到账后，您的钱包余额将自动更新。您仍可再次充值，包括使用银行卡。",
   "WalletRefilled": "钱包已充值",
   "WalletSectionDescriptionAddons": "钱包让您可以轻松购买存储、AI 工具和备份等附加组件。添加积分并选择您需要的<1>附加组件</1>即可开始使用。",

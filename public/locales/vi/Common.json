@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "Phòng Dữ Liệu Ảo (VDR)",
   "VirtualDataRoomDescription": "Sử dụng VDR để minh bạch và bảo mật tập tin nâng cao. Đặt watermark, tự động lập chỉ mục và theo dõi tất cả nội dung, hạn chế tải xuống và sao chép.",
   "Wallet": "Ví",
-  "WalletBalanceTooLow": "Số dư ví quá thấp",
   "WalletDelayedPaymentMethodBanner": "Đã gửi chuyển khoản SEPA. Tiền có thể mất vài ngày làm việc để về. Số dư ví của bạn sẽ tự động cập nhật sau khi tiền về. Bạn vẫn có thể nạp tiền lại, kể cả bằng thẻ.",
   "WalletRefilled": "Ví đã được nạp tiền",
   "WalletSectionDescriptionAddons": "Ví cho phép bạn dễ dàng mua các tiện ích bổ sung như dung lượng lưu trữ, công cụ AI và sao lưu. Thêm tín dụng và chọn <1>tiện ích bổ sung</1> bạn cần để bắt đầu.",

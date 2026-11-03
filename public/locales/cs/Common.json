@@ -2497,7 +2497,6 @@
   "VirtualDataRoom": "Virtuální datová místnost",
   "VirtualDataRoomDescription": "Použijte VDR pro pokročilé zabezpečení a transparentnost souborů. Nastavte vodoznaky, automaticky indexujte a sledujte veškerý obsah, omezte stahování a kopírování.",
   "Wallet": "Peněženka",
-  "WalletBalanceTooLow": "Zůstatek peněženky je příliš nízký",
   "WalletDelayedPaymentMethodBanner": "Převod SEPA byl odeslán. Připsání prostředků může trvat několik pracovních dnů. Zůstatek vaší peněženky se po připsání prostředků aktualizuje automaticky. Peněženku můžete doplnit znovu, i kartou.",
   "WalletRefilled": "Peněženka doplněna",
   "WalletSectionDescriptionAddons": "Peněženka vám umožňuje snadno zakoupit doplňky, jako je úložiště, AI nástroje a zálohy. Přidejte kredity a vyberte <1>doplňky</1>, které potřebujete, abyste mohli začít.",

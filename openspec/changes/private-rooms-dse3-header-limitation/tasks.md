@@ -6,7 +6,7 @@
 
 ## 2. Mark the version-3 change as deferred
 
-- [ ] 2.1 In `openspec/changes/private-rooms-dse3-header-authentication/`, add to the README and to the top of tasks.md the owner decision of 2026-11-02: the change is deferred to the next version, and its open tasks stay as the plan. Add to its tasks.md that its delta must also remove the requirement "DSE3 header flags and name length are not authenticated" from `private-rooms/encryption-core` and turn the two tests of 1.1 into failure cases for version 3. Verify: `npx -y @fission-ai/openspec@latest validate private-rooms-dse3-header-authentication --strict`.
+- [x] 2.1 In `openspec/changes/private-rooms-dse3-header-authentication/`, add to the README and to the top of tasks.md the owner decision of 2026-11-02: the change is deferred to the next version, and its open tasks stay as the plan. Add to its tasks.md that its delta must also remove the requirement "DSE3 header flags and name length are not authenticated" from `private-rooms/encryption-core` and turn the two tests of 1.1 into failure cases for version 3. Verify: `npx -y @fission-ai/openspec@latest validate private-rooms-dse3-header-authentication --strict`.
 
 ## 3. Integration
 

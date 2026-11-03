@@ -1,5 +1,13 @@
 # Tasks
 
+**Deferred to the next version** (owner decision of 2026-11-02): header
+authentication waits for a Document Server release whose library reads
+container version 3, so as not to complicate the transition. Until then the
+portal writes version 2 only, and `private-rooms-dse3-header-limitation`
+records the unauthenticated header fields as a v1 limitation in
+`private-rooms/encryption-core`. The open tasks below stay as the plan;
+task 2.3 retires that limitation when the change resumes.
+
 ## 0. Decisions (before any code)
 
 - [x] 0.1 Record the answers to the three decisions (version bump, migration policy, Document Server acceptance of version 3): decided 2026-10-26, bump to 3, no migration, Document Server support required by `private-rooms-editor-contract`; recorded in proposal.md and design.md.
@@ -15,6 +23,7 @@
 
 - [ ] 2.1 Extend `__tests__/dse3-tampering.test.ts` with version-3 cases: flags byte flipped, IS_FORM cleared, has-name cleared with nameLen zeroed, chunkPlaintextSize changed, nameLen changed; verify each fails with the authentication error and that the same mutations on a v2 fixture still behave as before (documenting the v2 limitation).
 - [ ] 2.2 Mark the decrypt result with `headerAuthenticated` (true for v3, false for v2) and cover it in `__tests__/streaming-encryption.test.ts`.
+- [ ] 2.3 Retire the v1 limitation recorded by `private-rooms-dse3-header-limitation`: this change's `encryption-core` delta removes the requirement "DSE3 header flags and name length are not authenticated" (or narrows it to the version-2 containers that stay readable unmigrated, decided when the change resumes), and the two tests of the `describe("DSE3 v2 header flags and name length")` block in `__tests__/dse3-tampering.test.ts`, "Form flag cleared in storage" and "Encrypted name stripped in storage", get version-3 counterparts that fail with the authentication error. Verify: `cd packages/shared && pnpm exec vitest run services/encryption/__tests__/dse3-tampering.test.ts` and `npx -y @fission-ai/openspec@latest validate private-rooms-dse3-header-authentication --strict`.
 
 ## 3. Upload, download, re-import and name recovery on version 3
 

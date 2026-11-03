@@ -1,6 +1,6 @@
 # Tasks
 
-Group 0 holds the beta gate. One task is one commit with its tick (the "Commits" paragraph of `openspec/config.yaml`). Server behaviour is read in `../server` through CodeGraph.
+Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 2026-11-03 behind the flag, so the gate now holds back the flag removal of 3.1 to 3.3 rather than the merge, and every remaining task is committed directly on `release/v4.1.0` (design, Migration Plan). One task is one commit with its tick (the "Commits" paragraph of `openspec/config.yaml`). Server behaviour is read in `../server` through CodeGraph.
 
 ## 0. Beta gate and decisions (evidence only, no code)
 
@@ -8,6 +8,7 @@ Group 0 holds the beta gate. One task is one commit with its tick (the "Commits"
 - [ ] 0.2 Spreadsheets and presentations are covered: `private-rooms-editor-contract` 4.7 passes on the build of 0.1, or a follow-up change that opens them view-only and withholds their creation in private rooms is archived. Verify: the editor-contract record or `openspec list`.
 - [x] 0.3 The change that fixes the verified blockers of the second pre-PR review of 2026-11-03 is archived. Verify: `openspec list` shows it under `changes/archive`. Done 2026-11-03: `changes/archive/2026-11-03-private-rooms-pre-pr-review-2-fixes`.
 - [x] 0.4 Record proposal decisions 1 to 4 with their dates and owners in proposal.md. Verify: `npx -y @fission-ai/openspec@latest validate private-rooms-beta-release --strict`. Done 2026-11-03: the owner removed the flag without a server setting and accepted the account-link risk of `private-rooms-server-hardening` 12.1.
+- [ ] 0.5 Ticking "Don't ask again" in the name dialog of a private room creates one file (proposal prerequisite 4). Verify: `openspec list` shows `private-rooms-create-dialog-single-file` under `changes/archive`.
 
 ## 1. Planning
 
@@ -74,5 +75,5 @@ Group 0 holds the beta gate. One task is one commit with its tick (the "Commits"
 
 ## Workflow follow-up
 
-- Archive with `/opsx:archive private-rooms-beta-release` after the beta is merged to the release branch. At the archive, rewrite the Purpose of `private-rooms/feature-gating` in the main spec so it describes the beta shown to every user instead of the tester opt-in.
+- Archive with `/opsx:archive private-rooms-beta-release` once 3.1 to 3.3 and the tasks that follow them are on `release/v4.1.0`. At the archive, rewrite the Purpose of `private-rooms/feature-gating` in the main spec so it describes the beta shown to every user instead of the tester opt-in.
 - General availability then follows the revised `private-rooms-release-gate`.

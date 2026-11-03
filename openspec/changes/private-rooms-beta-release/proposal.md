@@ -48,7 +48,9 @@ working. They are no longer needed.
 
 ### Prerequisites (beta gate)
 
-The beta is not merged to a release branch until these hold:
+The private-rooms code is on `release/v4.1.0` since 2026-11-03 (PR !798),
+still hidden behind the browser-local flag. The flag is not removed there
+until these hold:
 
 1. The Document Server build shipped with the release is named, and it
    carries the crypto add-on. Otherwise the capability check of
@@ -59,6 +61,9 @@ The beta is not merged to a release branch until these hold:
    and withholds their creation in private rooms is archived first.
 3. The verified blockers of the second pre-PR review of 2026-11-03 are fixed
    by their own change.
+4. Ticking "Don't ask again" in the name dialog of a private room creates
+   one file, not two: `private-rooms-create-dialog-single-file` is archived
+   first.
 
 `private-rooms-server-hardening` 12.1 is not a prerequisite any more: the
 owner accepted the account-link risk for the beta (decision 2).
@@ -120,3 +125,7 @@ None.
    from decision 1). No new administrator control in this change.
 4. **The E2E suite runs with the section shown** (follows from decision 1):
    the mocked apps list has the app on, and the app-off spec switches it off.
+5. **The rest of the beta is committed directly on `release/v4.1.0`**
+   (2026-11-03). PR !798 merged the feature branch there with the flag in
+   place, so the gate above holds back the removal of the flag, not the
+   merge.

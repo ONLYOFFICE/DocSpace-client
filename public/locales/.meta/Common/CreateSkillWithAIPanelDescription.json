@@ -1,9 +1,9 @@
 {
   "key_path": "CreateSkillWithAIPanelDescription",
-  "content": "AI will write a skill from the name and description below and save it to this room as a Markdown file. Open it afterwards to review and edit the instructions.",
-  "content_en_sha1_hash": "bc358355031838564705e2fe0df9126b5f1b3225",
-  "created_at": "2026-11-03T07:40:39.578Z",
-  "updated_at": "2026-11-03T07:40:39.578Z",
+  "content": "AI will write a skill from the name and description below. Review and edit it, then save it to this room as a Markdown file.",
+  "content_en_sha1_hash": "c765646b3d641bf732220041dc3027a55977b4ec",
+  "created_at": "2026-11-03T07:47:07.834Z",
+  "updated_at": "2026-11-03T07:47:07.834Z",
   "comment": {
     "text": "",
     "is_auto": false,

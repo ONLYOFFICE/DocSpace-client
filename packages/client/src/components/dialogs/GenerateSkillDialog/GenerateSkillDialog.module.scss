@@ -50,3 +50,24 @@
   flex-direction: column;
   gap: 4px;
 }
+
+// The run button of the metadata AI panel: the AI icon takes the label colour.
+.runIcon {
+  svg {
+    display: block;
+  }
+
+  svg path {
+    fill: currentColor;
+  }
+}
+
+.error {
+  color: var(--input-error-color);
+}
+
+.editor {
+  overflow: hidden;
+  border: 1px solid var(--input-border-color);
+  border-radius: 3px;
+}

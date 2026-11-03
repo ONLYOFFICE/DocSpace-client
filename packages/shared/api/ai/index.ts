@@ -533,7 +533,7 @@ export const generateMetadataWithAI = (
   signal?: AbortSignal,
 ) => postMetadataAI<TMetadataAIGenerateResult>("generate", data, signal);
 
-/** Write a skill with AI and save it in an Instructions room. */
+/** Write a skill with AI for an Instructions room; the caller saves it after review. */
 export const generateSkillWithAI = async (
   data: TGenerateSkillRequest,
   signal?: AbortSignal,

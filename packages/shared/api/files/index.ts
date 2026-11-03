@@ -1429,6 +1429,30 @@ export async function setFileEncryptionKeys(
   return res;
 }
 
+/**
+ * A new file in the folder with the given content, in one multipart request.
+ * A same-named file gets a numbered title, nothing is overwritten.
+ */
+export async function insertFile(
+  folderId: number | string,
+  title: string,
+  content: Blob,
+) {
+  const fd = new FormData();
+
+  fd.append("title", title);
+  fd.append("createNewIfExist", "true");
+  fd.append("file", content, title);
+
+  const res = await request({
+    method: "post",
+    url: `/files/${folderId}/insert`,
+    data: fd,
+  });
+
+  return res as TFile;
+}
+
 export async function updateFileStream(
   fileId: number | string,
   file: File,

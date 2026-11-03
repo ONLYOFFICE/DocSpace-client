@@ -203,6 +203,7 @@ export const useOptions = (
     templateGalleryAvailable,
     onShowTemplateGallery,
     vectorizationEnabled = true,
+    isCreateSkillWithAIAvailable = true,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -494,6 +495,7 @@ export const useOptions = (
         isAiChatAvailable,
         templateGalleryAvailable,
         vectorizationEnabled,
+        isCreateSkillWithAIAvailable,
       ),
     [
       type,
@@ -531,6 +533,7 @@ export const useOptions = (
       isAiChatAvailable,
       templateGalleryAvailable,
       vectorizationEnabled,
+      isCreateSkillWithAIAvailable,
     ],
   );
 

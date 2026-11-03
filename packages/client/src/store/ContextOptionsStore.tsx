@@ -1065,6 +1065,18 @@ class ContextOptionsStore {
     this.dialogsStore.setGenerateSkillDialogVisible(true);
   };
 
+  /**
+   * "Create skill with AI" is offered while the AI can write one: AI services
+   * are on and AI is set up on the portal (unknown counts as set up until the
+   * chat profiles are read, as for the AI rooms).
+   */
+  get isCreateSkillWithAIAvailable() {
+    return (
+      this.settingsStore.aiServicesEnabled &&
+      this.settingsStore.aiReady !== false
+    );
+  }
+
   getContextOptionsPlusFormRoom = (
     t: TTranslation,
     models: {

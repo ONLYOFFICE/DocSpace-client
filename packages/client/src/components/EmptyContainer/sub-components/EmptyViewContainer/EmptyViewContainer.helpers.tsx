@@ -214,6 +214,7 @@ export const getOptions = (
   isAiChatAvailable: boolean = false,
   isTemplateGalleryAvailable: boolean = false,
   vectorizationEnabled: boolean = true,
+  isCreateSkillWithAIAvailable: boolean = true,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -678,22 +679,15 @@ export const getOptions = (
 
     // Markdown only, uploaded from the device (a pick from the workspace
     // could bring any format; a new empty file has no frontmatter).
-    case RoomsType.InstructionsRoom:
+    case RoomsType.InstructionsRoom: {
       if (isNotAdmin) return [];
 
-      if (isCollaborator)
-        return [
-          uploadMarkdownFromStorage,
-          uploadMarkdownFromDevice,
-          createSkillWithAI,
-        ];
+      const skillOptions = isCreateSkillWithAIAvailable
+        ? [uploadMarkdownFromStorage, uploadMarkdownFromDevice, createSkillWithAI]
+        : [uploadMarkdownFromStorage, uploadMarkdownFromDevice];
 
-      return [
-        inviteUser,
-        uploadMarkdownFromStorage,
-        uploadMarkdownFromDevice,
-        createSkillWithAI,
-      ];
+      return isCollaborator ? skillOptions : [inviteUser, ...skillOptions];
+    }
 
     // Files to index: uploaded, never created or edited; nothing at all
     // while vectorization is off.

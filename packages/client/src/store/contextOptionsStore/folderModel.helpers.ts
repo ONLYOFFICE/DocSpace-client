@@ -391,7 +391,9 @@ export const getFolderModelImpl = (
         ? vectorizationEnabled
           ? [uploadFromStorage, uploadFromDevice]
           : []
-        : [uploadFromStorage, uploadFromDevice, createSkillWithAI];
+        : self.isCreateSkillWithAIAvailable
+          ? [uploadFromStorage, uploadFromDevice, createSkillWithAI]
+          : [uploadFromStorage, uploadFromDevice];
 
     return sourceRoomOptions.length > 0 ? sourceRoomOptions : null;
   }

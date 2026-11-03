@@ -204,6 +204,8 @@ const InjectedEmptyViewContainer = inject<
       language,
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
       vectorizationEnabled: settingsStore.aiConfig?.vectorizationEnabled !== false,
+      isCreateSkillWithAIAvailable:
+        contextOptionsStore.isCreateSkillWithAIAvailable,
       onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
     };
   },

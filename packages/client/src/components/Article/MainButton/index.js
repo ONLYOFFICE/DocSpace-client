@@ -103,6 +103,7 @@ const ArticleMainButtonContent = (props) => {
     setSelectFileFormRoomDialogVisible,
     setSelectFileKnowledgeRoomDialogVisible,
     setGenerateSkillDialogVisible,
+    isCreateSkillWithAIAvailable,
     knowledgeUploadAccept,
     showArticleLoader,
     isFavoritesFolder,
@@ -592,7 +593,9 @@ const ArticleMainButtonContent = (props) => {
         ? vectorizationEnabled
           ? sourceRoomUploadActions
           : []
-        : [...sourceRoomUploadActions, createSkillWithAI];
+        : isCreateSkillWithAIAvailable
+          ? [...sourceRoomUploadActions, createSkillWithAI]
+          : sourceRoomUploadActions;
       setUploadActions(sourceUploadActions);
       setActions([]);
       setModel(sourceUploadActions);
@@ -682,6 +685,7 @@ const ArticleMainButtonContent = (props) => {
     onShowFormRoomSelectFileDialog,
     onShowKnowledgeRoomSelectFileDialog,
     onShowGenerateSkillDialog,
+    isCreateSkillWithAIAvailable,
     onUploadFileClick,
     onUploadFolderClick,
     createActionsForFormRoom,
@@ -867,6 +871,7 @@ export default inject(
     currentQuotaStore,
     peopleStore,
     filesSettingsStore,
+    contextOptionsStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const {
@@ -990,6 +995,8 @@ export default inject(
       setSelectFileFormRoomDialogVisible,
       setSelectFileKnowledgeRoomDialogVisible,
       setGenerateSkillDialogVisible,
+      isCreateSkillWithAIAvailable:
+        contextOptionsStore.isCreateSkillWithAIAvailable,
       knowledgeUploadAccept: filesSettingsStore.knowledgeUploadAccept,
       createFoldersTree,
 

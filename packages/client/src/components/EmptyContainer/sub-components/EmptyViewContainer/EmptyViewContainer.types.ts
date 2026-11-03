@@ -127,6 +127,8 @@ export interface InjectedEmptyViewContainerProps
   onShowTemplateGallery: TStore["contextOptionsStore"]["onShowTemplateGallery"];
   /** Vectorization is on for the portal: a Knowledge room takes uploads. */
   vectorizationEnabled?: boolean;
+  /** The AI can write a skill: an Instructions room offers it. */
+  isCreateSkillWithAIAvailable?: boolean;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

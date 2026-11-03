@@ -224,15 +224,17 @@ failure aborts the push:
    sdk (incl. store tests)
 
 `tsc`, `lint` and `test` are cached by Nx; their inputs are the named inputs
-in `nx.json`. A task reruns only when its own package changed (minus E2E
-screenshots and Markdown), the non-test, non-story files of a package it
-depends on changed, or `pnpm-lock.yaml` / `pnpm-workspace.yaml` changed. On top
-of that, `tsc` and `test` watch the root JSON they really import
-(`locales/.constants`, `locales/en`, `scripts/config.json`), `test` watches
-`public/images` (svgr imports), and `lint` watches shared's `biome.json` and
-`biome-plugins/`. A cold run takes about three minutes, a push with nothing
-changed seconds. A new import of another root `public/` file into code or
-tests must be added to those inputs, or the cache hides it.
+in `nx.json`. Each reruns when its own package changed (minus E2E screenshots
+and Markdown) or `pnpm-lock.yaml` / `pnpm-workspace.yaml` changed. `tsc` and
+`test` also watch the non-test, non-story files of the packages they depend
+on and the root JSON they really import (`locales/.constants`, `locales/en`,
+`scripts/config.json`); `test` also watches `public/images` (svgr imports).
+`lint` watches only its own package plus shared's `biome.json` and
+`biome-plugins/`: Biome never reads a dependency's files, so an edit in
+`packages/shared` does not rerun another package's lint. A cold run takes
+about three minutes, a push with nothing changed seconds. A new import of
+another root `public/` file into code or tests must be added to those inputs,
+or the cache hides it.
 
 The manual `pnpm run tsc`, `lint`, `test`, `test:client` and `test:sdk` go
 through the same cache and replay a stored result when nothing changed. Nx

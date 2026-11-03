@@ -71,3 +71,26 @@
   border: 1px solid var(--input-border-color);
   border-radius: 3px;
 }
+
+// The drag handle on the panel's inner edge. The aside content is moved in
+// with a transform, which makes it the containing block of a fixed child,
+// so the handle follows the panel as it slides and as it is resized.
+.resizer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  inset-inline-start: 0;
+  z-index: 1;
+  width: 6px;
+  cursor: col-resize;
+  touch-action: none;
+
+  &:hover,
+  &:active {
+    background-color: var(--input-border-color);
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+}

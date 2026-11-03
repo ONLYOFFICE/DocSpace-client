@@ -65,6 +65,62 @@ import styles from "./GenerateSkillDialog.module.scss";
 // CodeMirror is loaded with the first generated skill, not with the panels.
 const SkillEditor = React.lazy(() => import("./SkillEditor"));
 
+const WIDTH_STORAGE_KEY = "generate-skill-panel-width";
+// The default aside width is the narrowest the panel goes.
+const MIN_WIDTH = 480;
+// The page keeps at least this much room beside the panel.
+const MIN_PAGE_GAP = 120;
+
+const getMaxWidth = () => Math.max(MIN_WIDTH, window.innerWidth - MIN_PAGE_GAP);
+
+const readStoredWidth = () => {
+  try {
+    const stored = Number(localStorage.getItem(WIDTH_STORAGE_KEY));
+    return stored >= MIN_WIDTH ? Math.min(stored, getMaxWidth()) : MIN_WIDTH;
+  } catch {
+    return MIN_WIDTH;
+  }
+};
+
+/**
+ * The panel's width, dragged from its inner edge and remembered per browser.
+ * The aside takes it through the ModalDialog width variable; on a phone the
+ * aside is full width and the handle is hidden.
+ */
+const usePanelWidth = () => {
+  const [width, setWidth] = React.useState(readStoredWidth);
+  const widthRef = React.useRef(width);
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const handle = e.currentTarget;
+    handle.setPointerCapture(e.pointerId);
+    const isRtl = document.documentElement.dataset.dir === "rtl";
+
+    const onMove = (event: PointerEvent) => {
+      const next = isRtl ? event.clientX : window.innerWidth - event.clientX;
+      widthRef.current = Math.min(Math.max(next, MIN_WIDTH), getMaxWidth());
+      setWidth(widthRef.current);
+    };
+    const onUp = () => {
+      handle.removeEventListener("pointermove", onMove);
+      handle.removeEventListener("pointerup", onUp);
+      handle.removeEventListener("pointercancel", onUp);
+      try {
+        localStorage.setItem(WIDTH_STORAGE_KEY, String(widthRef.current));
+      } catch {
+        // Storage is unavailable: the width lasts for this panel only.
+      }
+    };
+
+    handle.addEventListener("pointermove", onMove);
+    handle.addEventListener("pointerup", onUp);
+    handle.addEventListener("pointercancel", onUp);
+  };
+
+  return { width, onPointerDown };
+};
+
 type GenerateSkillDialogProps = {
   roomId?: number | string | null;
   setGenerateSkillDialogVisible?: (visible: boolean) => void;
@@ -101,6 +157,7 @@ const GenerateSkillDialog = ({
   const [error, setError] = React.useState("");
   const [skill, setSkill] = React.useState<TGenerateSkillResult | null>(null);
   const abortRef = React.useRef<AbortController | null>(null);
+  const { width, onPointerDown } = usePanelWidth();
 
   React.useEffect(() => () => abortRef.current?.abort(), []);
 
@@ -215,63 +272,24 @@ const GenerateSkillDialog = ({
       }}
       onClose={onClose}
       isCloseable={!isSaving}
+      // The preview hides the form; the back arrow returns to it and drops
+      // the generated text, which "Generate skill" writes anew.
+      isBackButton={!!skill}
+      onBackClick={isSaving ? undefined : () => setSkill(null)}
+      style={{ "--modal-dialog-aside-default-width": `${width}px` } as React.CSSProperties}
       dataTestId="generate-skill-dialog"
     >
       <ModalDialog.Header>{t("Common:CreateSkillWithAI")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div className={styles.body}>
-          <Text className={styles.description} fontSize="12px" lineHeight="16px">
-            {t("Common:CreateSkillWithAIPanelDescription")}
-          </Text>
-          <InputParam
-            id="generate-skill-title"
-            title={`${t("Common:Name")}:`}
-            placeholder={t("Common:EnterName")}
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value.slice(0, SKILL_TITLE_MAX_LENGTH));
-              setIsValidTitle(true);
-            }}
-            isValidTitle={isValidTitle}
-            errorMessage={t("Common:RequiredField")}
-            isAutoFocussed
-            isDisabled={isBusy}
-            dataTestId="generate-skill-title"
-          />
-          <div className={styles.field}>
-            <Label
-              htmlFor="generate-skill-description"
-              text={`${t("Common:DescriptionLabel")}:`}
-              display="display"
-            />
-            <Textarea
-              id="generate-skill-description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder={t("Common:CreateSkillWithAIPlaceholder")}
-              maxLength={SKILL_DESCRIPTION_MAX_LENGTH}
-              heightTextArea="120px"
-              fontSize={13}
-              isDisabled={isBusy}
-              dataTestId="generate-skill-description"
-            />
-          </div>
-          <Button
-            scale
-            size={ButtonSize.small}
-            icon={<ReactSVG className={styles.runIcon} src={AISvgUrl} />}
-            label={t("Common:GenerateSkill")}
-            isLoading={isGenerating}
-            isDisabled={!canGenerate || isSaving}
-            onClick={() => void onGenerate()}
-            testId="generate-skill-run-button"
-          />
-          {error ? (
-            <Text className={styles.error} fontSize="12px" lineHeight="16px">
-              {error}
-            </Text>
-          ) : null}
-          {skill ? (
+        <div
+          className={styles.resizer}
+          role="separator"
+          aria-orientation="vertical"
+          onPointerDown={onPointerDown}
+          data-testid="generate-skill-resizer"
+        />
+        {skill ? (
+          <div className={styles.body}>
             <React.Suspense fallback={null}>
               <SkillEditor
                 value={skill.content}
@@ -279,8 +297,62 @@ const GenerateSkillDialog = ({
                 onChange={(content) => setSkill({ ...skill, content })}
               />
             </React.Suspense>
-          ) : null}
-        </div>
+          </div>
+        ) : (
+          <div className={styles.body}>
+            <Text className={styles.description} fontSize="12px" lineHeight="16px">
+              {t("Common:CreateSkillWithAIPanelDescription")}
+            </Text>
+            <InputParam
+              id="generate-skill-title"
+              title={`${t("Common:Name")}:`}
+              placeholder={t("Common:EnterName")}
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value.slice(0, SKILL_TITLE_MAX_LENGTH));
+                setIsValidTitle(true);
+              }}
+              isValidTitle={isValidTitle}
+              errorMessage={t("Common:RequiredField")}
+              isAutoFocussed
+              isDisabled={isBusy}
+              dataTestId="generate-skill-title"
+            />
+            <div className={styles.field}>
+              <Label
+                htmlFor="generate-skill-description"
+                text={`${t("Common:DescriptionLabel")}:`}
+                display="display"
+              />
+              <Textarea
+                id="generate-skill-description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder={t("Common:CreateSkillWithAIPlaceholder")}
+                maxLength={SKILL_DESCRIPTION_MAX_LENGTH}
+                heightTextArea="120px"
+                fontSize={13}
+                isDisabled={isBusy}
+                dataTestId="generate-skill-description"
+              />
+            </div>
+            <Button
+              scale
+              size={ButtonSize.small}
+              icon={<ReactSVG className={styles.runIcon} src={AISvgUrl} />}
+              label={t("Common:GenerateSkill")}
+              isLoading={isGenerating}
+              isDisabled={!canGenerate || isSaving}
+              onClick={() => void onGenerate()}
+              testId="generate-skill-run-button"
+            />
+            {error ? (
+              <Text className={styles.error} fontSize="12px" lineHeight="16px">
+                {error}
+              </Text>
+            ) : null}
+          </div>
+        )}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

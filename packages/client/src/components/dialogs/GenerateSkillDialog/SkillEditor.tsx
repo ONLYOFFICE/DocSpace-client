@@ -85,6 +85,9 @@ const SkillEditor = ({ value, isDisabled, onChange }: SkillEditorProps) => {
         editable={!isDisabled}
         readOnly={isDisabled}
         onChange={onChange}
+        // The preview is the panel's whole body: a short skill still gets
+        // the room of a long one, and a long one scrolls with the panel.
+        minHeight="calc(100vh - 220px)"
         basicSetup={{ foldGutter: false }}
       />
     </div>

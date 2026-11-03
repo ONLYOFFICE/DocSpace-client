@@ -49,15 +49,11 @@ export type TFilesTableItem = (TFile | TFolder) & {
   contextOptions?: unknown[];
 };
 
-/** The visible-columns flags of the documents table, as `tableStore` holds them. */
-export type TFilesColumnFlags = {
-  author: boolean;
-  created: boolean;
-  modified: boolean;
-  erasure: boolean;
-  size: boolean;
-  type: boolean;
-};
+/**
+ * Whether each column of the section is on, by column id, as `tableStore`
+ * holds it.
+ */
+export type TFilesColumnFlags = Record<string, boolean>;
 
 export type TFilesColumnsOptions = {
   t: TFunction;

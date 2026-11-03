@@ -40,6 +40,11 @@
 .table {
   --data-table-bleed-start: 20px;
   --data-table-bleed-end: 20px;
+
+  // Where the old table's header sits: its container rose 25px into the
+  // section's top padding. The Section's `stickyTableHeader` mode (the
+  // quick-actions banner, in My documents) cancels this for both tables.
+  margin-top: -25px;
 }
 
 // The old table's `noSelect`: no text selection while the selection area or

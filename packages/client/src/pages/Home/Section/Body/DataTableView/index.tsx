@@ -61,10 +61,16 @@ import {
 } from "SRC_DIR/store/utils/persistence";
 
 import {
-  FILES_COLUMN_FLAG,
   filesColumnsRecord,
+  findSectionColumn,
   getFilesColumns,
 } from "./columns/filesColumns";
+import {
+  SECTIONS,
+  isFilesSection,
+  readColumnFlags,
+  type TSection,
+} from "./columns/sections";
 import type {
   TFilesColumnFlags,
   TFilesColumnsOptions,
@@ -72,6 +78,7 @@ import type {
 } from "./DataTableView.types";
 import { FilesDataTableRow } from "./row/FilesDataTableRow";
 import { FILES_DATA_TABLE_LIST_CLASS } from "./listClass";
+import { useStickyHeaderTop } from "./useStickyHeaderTop";
 import styles from "./DataTableView.module.scss";
 
 const VIRTUALIZE = { innerClassName: FILES_DATA_TABLE_LIST_CLASS };
@@ -89,12 +96,8 @@ type InjectedProps = {
   isPublicRoom: boolean;
   isPersonalReadOnly: boolean;
   showSettings: boolean;
-  authorColumnIsEnabled: boolean;
-  createdColumnIsEnabled: boolean;
-  modifiedColumnIsEnabled: boolean;
-  erasureColumnIsEnabled: boolean;
-  sizeColumnIsEnabled: boolean;
-  typeColumnIsEnabled: boolean;
+  section: TSection;
+  columnFlags: TFilesColumnFlags;
   tableStorageName: string;
   columnWidthsStorageName: string;
   getColumns: TStore["tableStore"]["getColumns"];
@@ -132,12 +135,8 @@ const DataTableView = ({
   isPublicRoom,
   isPersonalReadOnly,
   showSettings,
-  authorColumnIsEnabled,
-  createdColumnIsEnabled,
-  modifiedColumnIsEnabled,
-  erasureColumnIsEnabled,
-  sizeColumnIsEnabled,
-  typeColumnIsEnabled,
+  section,
+  columnFlags,
   tableStorageName,
   columnWidthsStorageName,
   getColumns,
@@ -157,23 +156,12 @@ const DataTableView = ({
 
   useViewEffect({ view: viewAs, setView: setViewAs, currentDeviceType });
 
-  const flags: TFilesColumnFlags = useMemo(
-    () => ({
-      author: authorColumnIsEnabled,
-      created: createdColumnIsEnabled,
-      modified: modifiedColumnIsEnabled,
-      erasure: erasureColumnIsEnabled,
-      size: sizeColumnIsEnabled,
-      type: typeColumnIsEnabled,
-    }),
-    [
-      authorColumnIsEnabled,
-      createdColumnIsEnabled,
-      modifiedColumnIsEnabled,
-      erasureColumnIsEnabled,
-      sizeColumnIsEnabled,
-      typeColumnIsEnabled,
-    ],
+  // The injector hands a new object on every render; the columns are rebuilt
+  // only when a flag actually changes.
+  const flagsKey = JSON.stringify(columnFlags);
+  const flags = useMemo(
+    () => JSON.parse(flagsKey) as TFilesColumnFlags,
+    [flagsKey],
   );
 
   const options: TFilesColumnsOptions = useMemo(
@@ -195,11 +183,17 @@ const DataTableView = ({
     getColumns([]);
 
     if (!getPersistedString(tableStorageName))
-      setPersistedString(tableStorageName, filesColumnsRecord(flags, options));
+      setPersistedString(
+        tableStorageName,
+        filesColumnsRecord(section, flags, options),
+      );
     // Only when the section changes, as in the old header.
   }, [tableStorageName]);
 
-  const columns = useMemo(() => getFilesColumns(options), [options]);
+  const columns = useMemo(
+    () => getFilesColumns(section, options),
+    [section, options],
+  );
 
   const widthStorage = useMemo(
     () => createLocalStorageWidths(columnWidthsStorageName),
@@ -235,19 +229,19 @@ const DataTableView = ({
 
   const onColumnVisibilityChange = useCallback(
     (id: string, visible: boolean) => {
-      const flag = FILES_COLUMN_FLAG[id];
-      if (!flag || flags[flag] === visible) return;
+      if (!findSectionColumn(section, options, id) || flags[id] === visible)
+        return;
 
       setColumnEnable(id);
 
       setPersistedString(
         tableStorageName,
-        filesColumnsRecord({ ...flags, [flag]: visible }, options),
+        filesColumnsRecord(section, { ...flags, [id]: visible }, options),
       );
 
       window.dispatchEvent(new Event(Events.CHANGE_COLUMN));
     },
-    [flags, options, setColumnEnable, tableStorageName],
+    [section, flags, options, setColumnEnable, tableStorageName],
   );
 
   const loadMore = useMemo(
@@ -296,6 +290,9 @@ const DataTableView = ({
   // multiplied the index by 40 while its rows were 48 high.
   const apiRef = useRef<DataTableApi>(null);
 
+  const tableRef = useRef<HTMLDivElement>(null);
+  useStickyHeaderTop(tableRef);
+
   useEffect(() => {
     if (!scrollToItem) return;
 
@@ -330,6 +327,7 @@ const DataTableView = ({
       virtualize={VIRTUALIZE}
       loadMore={loadMore}
       apiRef={apiRef}
+      ref={tableRef}
       className={classNames(styles.table, {
         [styles.noSelect]: !withContentSelection,
       })}
@@ -364,6 +362,10 @@ export default inject<TStore>(
     } = filesStore;
     const { theme, currentDeviceType, isFrame, frameConfig } = settingsStore;
 
+    // Body renders this view only for the scopes SECTIONS describes.
+    const { tableScope } = tableStore;
+    const section = SECTIONS[isFilesSection(tableScope) ? tableScope : "files"];
+
     return {
       rows: filesList as TFilesTableItem[],
       viewAs,
@@ -377,12 +379,8 @@ export default inject<TStore>(
       isPublicRoom: publicRoomStore.isPublicRoom,
       isPersonalReadOnly: !!treeFoldersStore.isPersonalReadOnly,
       showSettings: isFrame ? !!frameConfig?.showSettings : true,
-      authorColumnIsEnabled: tableStore.authorColumnIsEnabled,
-      createdColumnIsEnabled: tableStore.createdColumnIsEnabled,
-      modifiedColumnIsEnabled: tableStore.modifiedColumnIsEnabled,
-      erasureColumnIsEnabled: tableStore.erasureColumnIsEnabled,
-      sizeColumnIsEnabled: tableStore.sizeColumnIsEnabled,
-      typeColumnIsEnabled: tableStore.typeColumnIsEnabled,
+      section,
+      columnFlags: readColumnFlags(section, tableStore),
       tableStorageName: tableStore.tableStorageName,
       columnWidthsStorageName: tableStore.columnWidthsStorageName,
       getColumns: tableStore.getColumns,

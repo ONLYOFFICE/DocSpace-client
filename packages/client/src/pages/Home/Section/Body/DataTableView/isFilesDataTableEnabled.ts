@@ -35,19 +35,20 @@
 
 import type { TTableScope } from "SRC_DIR/store/TableStore";
 
+import { isFilesSection } from "./columns/sections";
+
 /** `localStorage` key of the switch between the old table and the DataTable. */
 export const FILES_DATA_TABLE_SWITCH = "files-data-table";
 
-/** The sections the DataTable can already draw. */
-const SUPPORTED_SCOPES: readonly TTableScope[] = ["files"];
-
 /**
- * Whether the documents list uses the ui-kit DataTable. Opt-in while the new
- * view is being built: `localStorage.setItem("files-data-table", "on")` turns it
- * on, anything else keeps the old table.
+ * Whether the documents list uses the ui-kit DataTable, for the sections it can
+ * already draw (`SECTIONS`).
+ * Opt-in while the new view is being built:
+ * `localStorage.setItem("files-data-table", "on")` turns it on, anything else
+ * keeps the old table.
  */
 export const isFilesDataTableEnabled = (scope: TTableScope) => {
-  if (!SUPPORTED_SCOPES.includes(scope)) return false;
+  if (!isFilesSection(scope)) return false;
 
   try {
     return window.localStorage.getItem(FILES_DATA_TABLE_SWITCH) === "on";

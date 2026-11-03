@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type React from "react";
+
 import { SortByFieldName } from "@docspace/shared/enums";
 import {
   contextMenuColumn,
@@ -44,6 +46,8 @@ import {
   AuthorColumnCell,
   DateColumnCell,
   ErasureColumnCell,
+  LastOpenedColumnCell,
+  LocationColumnCell,
   NameCell,
   SizeColumnCell,
   TypeColumnCell,
@@ -53,125 +57,94 @@ import type {
   TFilesColumnsOptions,
   TFilesTableItem,
 } from "../DataTableView.types";
+import type { TCellKind, TSection, TSectionColumn } from "./sections";
 
-/**
- * The column ids are the keys the old table stores visible columns under, so
- * both tables read and write the same record while they live side by side.
- */
-export const FILES_COLUMN_FLAG: Record<string, keyof TFilesColumnFlags> = {
-  Author: "author",
-  Created: "created",
-  Modified: "modified",
-  Erasure: "erasure",
-  Size: "size",
-  Type: "type",
+type TCellProps = { isLast: boolean; sideColor: string };
+
+const CELLS: Record<TCellKind, (props: TCellProps) => React.ReactNode> = {
+  author: AuthorColumnCell,
+  created: (props) => <DateColumnCell create {...props} />,
+  modified: (props) => <DateColumnCell create={false} {...props} />,
+  lastOpened: LastOpenedColumnCell,
+  erasure: ErasureColumnCell,
+  size: SizeColumnCell,
+  type: TypeColumnCell,
+  location: LocationColumnCell,
 };
 
+/** The columns the section has, given where it is shown. */
+const columnsOf = (section: TSection, options: TFilesColumnsOptions) =>
+  section.columns.filter((column) => column.when?.(options) ?? true);
+
 /**
- * The visible-columns record in the exact shape the old table writes: every
+ * The visible-columns record in the exact shape the old header writes: every
  * column of the section in its order, a disabled one as `false`, a column the
- * section does not have as an empty slot. The old table resets its column sizes
- * when the record's length differs from its column count, so the shape matters
- * as long as both tables share the key.
+ * section does not have here as an empty slot. The old table resets its column
+ * sizes when the record's length differs from its column count, so the shape
+ * matters as long as both tables share the key.
  */
 export const filesColumnsRecord = (
+  section: TSection,
   flags: TFilesColumnFlags,
-  { isPublicRoom, isPersonalReadOnly }: TFilesColumnsOptions,
+  options: TFilesColumnsOptions,
 ) =>
   [
     "Name",
-    isPublicRoom ? undefined : flags.author && "Author",
-    flags.created && "Created",
-    flags.modified && "Modified",
-    isPersonalReadOnly ? flags.erasure && "Erasure" : undefined,
-    flags.size && "Size",
-    flags.type && "Type",
+    ...section.columns.map((column) =>
+      (column.when?.(options) ?? true) ? flags[column.id] && column.id : "",
+    ),
   ].join(",");
 
-/** The old table's cell test ids, which the client's specs find cells by. */
-const filesCellTestId =
-  (columnId: string) => (_: TFilesTableItem, index: number) =>
-    `files-cell-${columnId.toLowerCase()}-${index}`;
+/** The section's column with this id, among those it has. */
+export const findSectionColumn = (
+  section: TSection,
+  options: TFilesColumnsOptions,
+  id: string,
+): TSectionColumn | undefined =>
+  columnsOf(section, options).find((column) => column.id === id);
 
 export const getFilesColumns = (
+  section: TSection,
   options: TFilesColumnsOptions,
 ): DataTableColumn<TFilesTableItem>[] => {
-  const { t, flags, sideColor, isPublicRoom, isPersonalReadOnly } = options;
-  const cell = { sideColor };
+  const { t, flags, sideColor } = options;
+  const { testIdPrefix, quickButtons } = section;
 
-  const columns: (DataTableColumn<TFilesTableItem> | false)[] = [
+  // The old table's cell test ids, which the client's specs find cells by.
+  const cellTestId = (part: string) => (_: TFilesTableItem, index: number) =>
+    `${testIdPrefix}-cell-${part}-${index}`;
+
+  return [
     {
       id: "Name",
-      cellTestId: filesCellTestId("Name"),
+      cellTestId: cellTestId("name"),
       title: t("Common:Label"),
       width: { type: "fill" },
-      sortKey: SortByFieldName.Name,
+      sortKey: section.nameSortable ? SortByFieldName.Name : undefined,
       // The old table's name-cell class: drag and drop and the selected-row
       // styles of `StyledTable.module.scss` look for it.
       cellClassName: "table-container_file-name-cell",
-      cell: (_, { isLast }) => <NameCell isLast={isLast} />,
+      cell: (_, { isLast }) => <NameCell isLast={isLast && quickButtons} />,
     },
-    !isPublicRoom && {
-      id: "Author",
-      cellTestId: filesCellTestId("Author"),
-      title: t("Common:ByAuthor"),
-      width: { type: "flex" },
-      visible: flags.author,
-      hideable: true,
-      cell: (_, { isLast }) => <AuthorColumnCell isLast={isLast} {...cell} />,
-    },
-    {
-      id: "Created",
-      cellTestId: filesCellTestId("Created"),
-      title: t("Common:ByCreation"),
-      width: { type: "flex" },
-      visible: flags.created,
-      hideable: true,
-      cell: (_, { isLast }) => (
-        <DateColumnCell create isLast={isLast} {...cell} />
-      ),
-    },
-    {
-      id: "Modified",
-      cellTestId: filesCellTestId("Modified"),
-      title: t("Common:ByLastModified"),
-      width: { type: "flex" },
-      visible: flags.modified,
-      hideable: true,
-      sortKey: SortByFieldName.ModifiedDate,
-      cell: (_, { isLast }) => (
-        <DateColumnCell create={false} isLast={isLast} {...cell} />
-      ),
-    },
-    isPersonalReadOnly && {
-      id: "Erasure",
-      cellTestId: filesCellTestId("Erasure"),
-      title: t("Common:ByErasure"),
-      width: { type: "flex" },
-      visible: flags.erasure,
-      hideable: true,
-      sortKey: SortByFieldName.ModifiedDate,
-      cell: (_, { isLast }) => <ErasureColumnCell isLast={isLast} {...cell} />,
-    },
-    {
-      id: "Size",
-      cellTestId: filesCellTestId("Size"),
-      title: t("Common:Size"),
-      width: { type: "flex" },
-      visible: flags.size,
-      hideable: true,
-      sortKey: SortByFieldName.Size,
-      cell: (_, { isLast }) => <SizeColumnCell isLast={isLast} {...cell} />,
-    },
-    {
-      id: "Type",
-      cellTestId: filesCellTestId("Type"),
-      title: t("Common:Type"),
-      width: { type: "flex" },
-      visible: flags.type,
-      hideable: true,
-      cell: (_, { isLast }) => <TypeColumnCell isLast={isLast} {...cell} />,
-    },
+    ...columnsOf(section, options).map(
+      (column): DataTableColumn<TFilesTableItem> => {
+        const Cell = CELLS[column.cell];
+
+        return {
+          id: column.id,
+          cellTestId: cellTestId(column.testId),
+          title: column.title(t),
+          width: { type: "flex" },
+          visible: flags[column.id],
+          hideable: true,
+          sortKey: column.sortKey,
+          sortable: column.sortable,
+          cell: (_, { isLast }) => (
+            <Cell isLast={isLast && quickButtons} sideColor={sideColor} />
+          ),
+        };
+      },
+    ),
     options.showSettings
       ? settingsColumn<TFilesTableItem>({
           title: t("Common:TableSettingsTitle"),
@@ -179,8 +152,4 @@ export const getFilesColumns = (
         })
       : contextMenuColumn<TFilesTableItem>(),
   ];
-
-  return columns.filter(
-    (column): column is DataTableColumn<TFilesTableItem> => !!column,
-  );
 };

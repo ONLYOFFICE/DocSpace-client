@@ -111,6 +111,7 @@ type THocProps = {
   displayFileExtension: boolean;
   updatedDate: string;
   createdDate: string;
+  lastOpenedDate: string;
   fileOwner: string;
 };
 
@@ -253,6 +254,7 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       quickButtonsComponent: props.quickButtonsComponent,
       updatedDate: props.updatedDate,
       createdDate: props.createdDate,
+      lastOpenedDate: props.lastOpenedDate,
       fileOwner: props.fileOwner,
     }),
     // `element` is rebuilt from the item each render, like the old row's.
@@ -272,6 +274,7 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       props.quickButtonsComponent,
       props.updatedDate,
       props.createdDate,
+      props.lastOpenedDate,
       props.fileOwner,
     ],
   );

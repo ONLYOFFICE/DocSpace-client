@@ -61,6 +61,7 @@ export type TFilesRowValue = {
   quickButtonsComponent: React.ReactNode;
   updatedDate: string;
   createdDate: string;
+  lastOpenedDate: string;
   fileOwner: string;
 };
 

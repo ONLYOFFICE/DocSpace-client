@@ -37,27 +37,36 @@ import type { TTranslation } from "../../types";
 import { getAiChatBlock, type TAiChatStreamError } from "./getAiChatBlock";
 
 /**
- * The past-tense title of an answer a money state cut short, for the chat's
- * error box, or `null` to keep the library's own text. The state itself and
- * the way out of it are on the notice above the composer (useAiChatNotice).
- * A provider's own credits are left to the library: its default sentence
- * already says so.
+ * How the chat draws an answer a money state cut short, or `null` to keep
+ * the library's red error box. Wherever the notice above the composer
+ * (useAiChatNotice) shows the state - an empty wallet, a spending limit, a
+ * provider out of credits - the answer gets a muted past-tense note with a
+ * pause icon instead. A provider's credits keep the library's own sentence,
+ * which already says so.
  */
 export const getAiChatInterruption = (
   t: TTranslation,
   payload: TAiChatStreamError["error"] | null | undefined,
   providerType: string | undefined,
   standalone: boolean,
-): { title: string } | null => {
+): { title?: string; appearance: "note" } | null => {
   if (!payload) return null;
 
   const block = getAiChatBlock({ error: payload, providerType }, standalone);
-  if (block?.kind === "limit") {
-    return { title: t("Common:AIInterruptedLimitReached") };
+  if (!block) return null;
+
+  if (block.kind === "limit") {
+    return {
+      title: t("Common:AIInterruptedLimitReached"),
+      appearance: "note",
+    };
   }
-  if (block?.kind === "wallet") {
-    return { title: t("Common:AIInterruptedWalletEmpty") };
+  if (block.kind === "wallet") {
+    return {
+      title: t("Common:AIInterruptedWalletEmpty"),
+      appearance: "note",
+    };
   }
 
-  return null;
+  return { appearance: "note" };
 };

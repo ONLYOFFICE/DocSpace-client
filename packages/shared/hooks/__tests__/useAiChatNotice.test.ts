@@ -13,7 +13,7 @@ vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
   SocketEvents: { TopUpWallet: "top-up-wallet" },
 }));
 
-import { getAiChatBlock } from "@docspace/shared/utils/ai";
+import { getAiChatBlock, getAiChatInterruption } from "@docspace/shared/utils/ai";
 
 import { useAiChatNotice } from "../useAiChatNotice";
 
@@ -87,6 +87,32 @@ describe("getAiChatBlock", () => {
       getAiChatBlock({ error: { code: "auth", message: LIMIT_MESSAGE } }, true),
     ).toBeNull();
     expect(getAiChatBlock({ error: { code: "network" } }, false)).toBeNull();
+  });
+});
+
+describe("getAiChatInterruption", () => {
+  const t = ((key: string) => key) as never;
+
+  it("draws every case with a notice as a muted note", () => {
+    expect(
+      getAiChatInterruption(t, walletError.error, "onlyoffice", false),
+    ).toEqual({
+      title: "Common:AIInterruptedWalletEmpty",
+      appearance: "note",
+    });
+    expect(
+      getAiChatInterruption(t, { code: "auth", message: LIMIT_MESSAGE }, undefined, false),
+    ).toEqual({
+      title: "Common:AIInterruptedLimitReached",
+      appearance: "note",
+    });
+    expect(getAiChatInterruption(t, walletError.error, "openai", false)).toEqual({
+      appearance: "note",
+    });
+  });
+
+  it("leaves other errors to the library's red box", () => {
+    expect(getAiChatInterruption(t, { code: "network" }, "openai", false)).toBeNull();
   });
 });
 

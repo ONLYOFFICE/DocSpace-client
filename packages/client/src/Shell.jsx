@@ -972,11 +972,11 @@ const Shell = ({ page = "home", ...rest }) => {
         };
       }
 
-      // The note says what happened to this answer, in the past tense; the
+      // An answer a money state cut short gets a muted past-tense note; the
       // state itself and the way out (top up, raise the limit) are on the
       // notice above the composer, which also holds Retry back until the
-      // state is over (useAiChatNotice). Standalone has neither a wallet nor
-      // limits, so the library default (localized text + Retry) stands.
+      // state is over (useAiChatNotice). Every other error keeps the
+      // library's red box and Retry.
       return getAiChatInterruption(t, payload, providerType, standalone);
     },
     [t, standalone, aiActiveProject, openEditAiProject],

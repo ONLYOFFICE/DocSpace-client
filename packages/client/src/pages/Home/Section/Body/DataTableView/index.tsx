@@ -42,6 +42,7 @@ import {
 } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Events } from "@docspace/shared/enums";
 import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
@@ -315,6 +316,8 @@ const DataTableView = ({
       id="table-container"
       headerId="table-container_caption-header"
       testId="files-data-table"
+      // The old table's body test id, which the client's specs scope to.
+      bodyTestId="table-body"
       ariaLabel={t("Common:Documents")}
       columns={columns}
       rows={rows}
@@ -327,7 +330,9 @@ const DataTableView = ({
       virtualize={VIRTUALIZE}
       loadMore={loadMore}
       apiRef={apiRef}
-      className={withContentSelection ? undefined : styles.noSelect}
+      className={classNames(styles.table, {
+        [styles.noSelect]: !withContentSelection,
+      })}
     />
   );
 };

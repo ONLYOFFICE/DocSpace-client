@@ -88,6 +88,11 @@ export const filesColumnsRecord = (
     flags.type && "Type",
   ].join(",");
 
+/** The old table's cell test ids, which the client's specs find cells by. */
+const filesCellTestId =
+  (columnId: string) => (_: TFilesTableItem, index: number) =>
+    `files-cell-${columnId.toLowerCase()}-${index}`;
+
 export const getFilesColumns = (
   options: TFilesColumnsOptions,
 ): DataTableColumn<TFilesTableItem>[] => {
@@ -97,6 +102,7 @@ export const getFilesColumns = (
   const columns: (DataTableColumn<TFilesTableItem> | false)[] = [
     {
       id: "Name",
+      cellTestId: filesCellTestId("Name"),
       title: t("Common:Label"),
       width: { type: "fill" },
       sortKey: SortByFieldName.Name,
@@ -107,6 +113,7 @@ export const getFilesColumns = (
     },
     !isPublicRoom && {
       id: "Author",
+      cellTestId: filesCellTestId("Author"),
       title: t("Common:ByAuthor"),
       width: { type: "flex" },
       visible: flags.author,
@@ -115,6 +122,7 @@ export const getFilesColumns = (
     },
     {
       id: "Created",
+      cellTestId: filesCellTestId("Created"),
       title: t("Common:ByCreation"),
       width: { type: "flex" },
       visible: flags.created,
@@ -125,6 +133,7 @@ export const getFilesColumns = (
     },
     {
       id: "Modified",
+      cellTestId: filesCellTestId("Modified"),
       title: t("Common:ByLastModified"),
       width: { type: "flex" },
       visible: flags.modified,
@@ -136,6 +145,7 @@ export const getFilesColumns = (
     },
     isPersonalReadOnly && {
       id: "Erasure",
+      cellTestId: filesCellTestId("Erasure"),
       title: t("Common:ByErasure"),
       width: { type: "flex" },
       visible: flags.erasure,
@@ -145,6 +155,7 @@ export const getFilesColumns = (
     },
     {
       id: "Size",
+      cellTestId: filesCellTestId("Size"),
       title: t("Common:Size"),
       width: { type: "flex" },
       visible: flags.size,
@@ -154,6 +165,7 @@ export const getFilesColumns = (
     },
     {
       id: "Type",
+      cellTestId: filesCellTestId("Type"),
       title: t("Common:Type"),
       width: { type: "flex" },
       visible: flags.type,

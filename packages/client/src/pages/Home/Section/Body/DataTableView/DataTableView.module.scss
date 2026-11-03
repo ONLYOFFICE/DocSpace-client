@@ -35,6 +35,13 @@
 
 @use "@onlyoffice/apps-ui-kit/styles/variables/colors" as *;
 
+// The section's 20px gutters on both sides: the header line reaches across
+// them once rows scroll under it, as the old header's did.
+.table {
+  --data-table-bleed-start: 20px;
+  --data-table-bleed-end: 20px;
+}
+
 // The old table's `noSelect`: no text selection while the selection area or
 // a drag owns the mouse. On every descendant too, and as specific as the old
 // rule, because the file name's link sets `user-select: text` with two classes.

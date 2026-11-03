@@ -6,7 +6,10 @@ import {
   filesColumnsRecord,
   getFilesColumns,
 } from "../columns/filesColumns";
-import type { TFilesColumnsOptions } from "../DataTableView.types";
+import type {
+  TFilesColumnsOptions,
+  TFilesTableItem,
+} from "../DataTableView.types";
 
 // The installed ui-kit package predates the DataTable, so the client's own
 // test run cannot resolve it; the two column helpers are all this file needs.
@@ -122,6 +125,23 @@ describe("files columns", () => {
       ["Modified", "DateAndTime"],
       ["Erasure", "DateAndTime"],
       ["Size", "Size"],
+    ]);
+  });
+
+  it("give their cells the old table's test ids", () => {
+    const row = {} as TFilesTableItem;
+    const testIds = getFilesColumns(options({ isPersonalReadOnly: true }))
+      .filter((column) => column.cellTestId)
+      .map((column) => column.cellTestId?.(row, 3));
+
+    expect(testIds).toEqual([
+      "files-cell-name-3",
+      "files-cell-author-3",
+      "files-cell-created-3",
+      "files-cell-modified-3",
+      "files-cell-erasure-3",
+      "files-cell-size-3",
+      "files-cell-type-3",
     ]);
   });
 

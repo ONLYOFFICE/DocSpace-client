@@ -3,7 +3,7 @@
   "content": "Color",
   "content_en_sha1_hash": "1d0c8304baedcf8e3a78982c2e7c0b04622bf2a0",
   "created_at": "2025-05-19T21:30:43.522Z",
-  "updated_at": "2026-10-29T13:57:47.676Z",
+  "updated_at": "2026-10-31T12:58:29.242Z",
   "comment": {
     "text": "This is a label for a color selection option, used in dialogs for customizing room logos or portal appearance settings.",
     "is_auto": true,

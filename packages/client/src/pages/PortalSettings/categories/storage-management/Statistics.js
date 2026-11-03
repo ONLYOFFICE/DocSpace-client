@@ -48,7 +48,6 @@ import styles from "./StyledComponent.module.scss";
 
 import RoomsList from "./sub-components/RoomsList";
 import UsersList from "./sub-components/UsersList";
-import AIAgentList from "./sub-components/AIAgentList.js";
 
 const buttonProps = {
   className: "button-element",
@@ -57,12 +56,11 @@ const buttonProps = {
 const StatisticsComponent = (props) => {
   const { t } = useTranslation("Settings");
   const { isBase } = useTheme();
-  const { isStatisticsAvailable, aiServicesEnabled, isAppInstalled } = props;
+  const { isStatisticsAvailable, isAppInstalled } = props;
 
   // Same rule as the quotas: a section switched off in Settings -> Apps
   // gets no top list either.
   const showRoomsList = isAppInstalled("ai-rooms");
-  const showAIAgentList = aiServicesEnabled && isAppInstalled("ai-agents");
 
   const iconElement = (
     id,
@@ -138,27 +136,17 @@ const StatisticsComponent = (props) => {
             quotaElement={quotaElement}
             iconElement={iconElement}
           />
-          {showAIAgentList ? (
-            <AIAgentList
-              buttonProps={buttonProps}
-              textElement={textElement}
-              quotaElement={quotaElement}
-              iconElement={iconElement}
-            />
-          ) : null}
         </>
       ) : null}
     </div>
   );
 };
 
-export default inject(({ currentQuotaStore, settingsStore, appsStore }) => {
+export default inject(({ currentQuotaStore, appsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
-  const { aiServicesEnabled } = settingsStore;
 
   return {
     isStatisticsAvailable,
-    aiServicesEnabled,
     isAppInstalled: appsStore.isInstalled,
   };
 })(observer(StatisticsComponent));

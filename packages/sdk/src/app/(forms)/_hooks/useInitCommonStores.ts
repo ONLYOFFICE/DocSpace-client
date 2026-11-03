@@ -118,9 +118,10 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
     }
 
     if (commonData.initialFiles) {
-      const roomId = Number(commonData.roomId);
+      // A third-party room id is a string ("box-821"); compare as strings.
+      const roomId = commonData.roomId ? String(commonData.roomId) : "";
       const files = roomId
-        ? commonData.initialFiles.filter((f) => f.folderId === roomId)
+        ? commonData.initialFiles.filter((f) => String(f.folderId) === roomId)
         : commonData.initialFiles;
       formsListStore.setSection(FormsSection.MyForms);
       const FORMS_PAGE_COUNT = 25;

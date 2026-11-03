@@ -3,7 +3,7 @@
   "content": "Days remaining: {{daysRemaining}}",
   "content_en_sha1_hash": "0e94f2f4c0003d4ac110575e4374ddbe1195c476",
   "created_at": "2026-06-03T09:30:00.148Z",
-  "updated_at": "2026-06-09T14:03:10.864Z",
+  "updated_at": "2026-10-31T12:58:29.193Z",
   "comment": {
     "text": "A label or tooltip in file/room lists indicating the time left until auto-deletion. The {{daysRemaining}} variable represents the number of days (e.g., \"5\" or \"<1\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/RowsView/FilesRowContent.js",
-      "line_number": 129,
+      "line_number": 128,
       "context": "isDefaultRoomsQuotaSet,\n );\n \n default:\n if (isTrashFolder || isPersonalReadOnly)\n return t(\"Common:DaysRemaining\", {\n daysRemaining,\n });\n \n return updatedDate;\n }",
       "module": "/packages/client"
     },

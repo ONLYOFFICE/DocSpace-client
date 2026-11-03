@@ -3,7 +3,7 @@
   "content": "Limit availability period for this link by setting an expiration date.",
   "content_en_sha1_hash": "2169933e858b996075f2e41dfb5e69ff59914d77",
   "created_at": "2025-08-26T11:15:03.504Z",
-  "updated_at": "2026-10-29T13:57:47.782Z",
+  "updated_at": "2026-10-31T12:58:29.535Z",
   "comment": {
     "text": "This is a label for a checkbox or radio button that allows users to set an expiration date for a shared link. It appears when no expiration date is currently set.",
     "is_auto": true,

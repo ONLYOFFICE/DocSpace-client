@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2026-10-22T16:09:36.910Z",
+  "updated_at": "2026-10-31T12:58:29.230Z",
   "comment": {
     "text": "This is a toast message confirming that settings have been successfully saved or updated. It appears briefly after a user makes changes to settings, such as the appearance theme.",
     "is_auto": true,
@@ -85,13 +85,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 191,
+      "line_number": 187,
       "context": "// The boot probe is skipped while AI is off, so the config the rest of\n // the UI reads is stale (or was never loaded) the moment it comes back.\n await getAIConfig();\n await fetchTreeFolders();\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e as string);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 191,
+      "line_number": 187,
       "context": "// The boot probe is skipped while AI is off, so the config the rest of\n // the UI reads is stale (or was never loaded) the moment it comes back.\n await getAIConfig();\n await fetchTreeFolders();\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e as string);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },

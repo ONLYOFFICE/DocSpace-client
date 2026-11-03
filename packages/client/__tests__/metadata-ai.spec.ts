@@ -41,6 +41,7 @@ import {
   aiConfigHandler,
   aiMetaFillHandler,
   aiMetaGenerateHandler,
+  EMPTY_ENTRY_METADATA,
   META_SERVICE_LIMIT_ERROR,
   entryMetadataHandler,
   entryMetadataSaveHandlers,
@@ -83,12 +84,25 @@ const openAIPanel = async (
   mode: "fill" | "suggest",
 ) => {
   await openDocxContextMenu(page, baseUrl);
+  await page.getByTestId("option_ai-tools").hover();
   await page.getByTestId(`option_${mode}-metadata-ai`).click();
 
   const panel = page.getByTestId("metadata_ai_panel");
   await expect(panel.getByTestId("metadata_ai_callout")).toBeVisible();
 
   return panel;
+};
+
+const openMetadataTab = async (page: Page, baseUrl: string) => {
+  await openDocxContextMenu(page, baseUrl);
+  await page.getByTestId("option_info").hover();
+  await page.getByTestId("option_show-info").click();
+  await page.getByTestId("info_metadata_tab").click();
+
+  const metadata = page.getByTestId("info_panel_metadata");
+  await expect(metadata).toBeVisible();
+
+  return metadata;
 };
 
 test.describe("Metadata AI", () => {
@@ -121,6 +135,7 @@ test.describe("Metadata AI", () => {
     await openDocxContextMenu(page, baseUrl);
 
     await expect(page.getByTestId("option_share")).toBeVisible();
+    await expect(page.getByTestId("option_ai-tools")).toHaveCount(0);
     await expect(page.getByTestId("option_fill-metadata-ai")).toHaveCount(0);
     await expect(page.getByTestId("option_suggest-metadata-ai")).toHaveCount(0);
   });
@@ -135,6 +150,8 @@ test.describe("Metadata AI", () => {
       `Model: ${AI_CHAT_ASSIGNED.name}`,
     );
     await expect(panel.getByTestId("metadata_ai_save_button")).toBeDisabled();
+    await expect(panel.getByTestId("metadata_ai_saved_metadata")).toBeVisible();
+    await expect(panel.getByTestId("metadata_value_input")).toHaveCount(0);
 
     await expectScreenshot(page, [
       "desktop",
@@ -145,6 +162,8 @@ test.describe("Metadata AI", () => {
     await panel.getByTestId("metadata_ai_run_button").click();
 
     await expect(panel.getByTestId("metadata_ai_review_notes")).toBeVisible();
+    await expect(panel.getByTestId("metadata_ai_saved_metadata")).toHaveCount(0);
+    await expect(panel.getByTestId("metadata_ai_filled_mark")).toHaveCount(4);
     await expect(panel.getByTestId("metadata_ai_save_button")).toBeEnabled();
 
     await expectScreenshot(page, [
@@ -170,8 +189,54 @@ test.describe("Metadata AI", () => {
     await expect(panel.getByTestId("metadata_ai_save_button")).toBeHidden();
   });
 
+  test("undoes the AI changes field by field and with the keyboard", async ({
+    page,
+    baseUrl,
+  }) => {
+    const panel = await openAIPanel(page, baseUrl, "fill");
+    const marks = panel.getByTestId("metadata_ai_filled_mark");
+    const undoButtons = panel.getByTestId("metadata_ai_undo_button");
+
+    await panel.getByTestId("metadata_ai_run_button").click();
+
+    await expect(marks).toHaveCount(4);
+    await expect(panel.getByTestId("metadata_ai_previous_value")).toHaveText(
+      "Previously: Apollo",
+    );
+
+    await undoButtons.first().click();
+    await expect(marks).toHaveCount(3);
+
+    await page.keyboard.press("Control+z");
+    await expect(marks).toHaveCount(4);
+
+    await page.keyboard.press("Control+Shift+z");
+    await expect(marks).toHaveCount(3);
+
+    for (const left of [2, 1, 0]) {
+      await undoButtons.first().click();
+      await expect(marks).toHaveCount(left);
+    }
+
+    await expect(panel.getByTestId("metadata_ai_review_notes")).toContainText(
+      "All AI changes are undone.",
+    );
+    await expect(panel.getByTestId("metadata_ai_save_button")).toBeDisabled();
+  });
+
   test("suggests custom fields", async ({ page, baseUrl }) => {
     const panel = await openAIPanel(page, baseUrl, "suggest");
+
+    await expect(panel.getByTestId("metadata_ai_model")).toHaveText(
+      `Model: ${AI_CHAT_ASSIGNED.name}`,
+    );
+    await expect(panel.getByTestId("metadata_ai_prompt_link")).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "metadata",
+      "metadata-ai_suggest.png",
+    ]);
 
     await panel.getByTestId("metadata_ai_run_button").click();
 
@@ -186,27 +251,94 @@ test.describe("Metadata AI", () => {
     ]);
   });
 
-  test("explains that no model is selected", async ({
+  test("opens the AI actions from the Metadata tab header", async ({
+    page,
+    baseUrl,
+  }) => {
+    const metadata = await openMetadataTab(page, baseUrl);
+
+    await metadata.getByTestId("info_panel_metadata_ai_button").click();
+    await expect(page.getByTestId("metadata-ai-fill")).toBeVisible();
+    await page.getByTestId("metadata-ai-generate").click();
+
+    await expect(
+      page
+        .getByTestId("metadata_ai_panel")
+        .getByTestId("metadata_ai_run_button"),
+    ).toHaveText("Generate metadata");
+  });
+
+  test("offers generation in the empty Metadata tab", async ({
     page,
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(aiChatAssignmentsHandler(TEST_PORT));
+    mockRequest.use(entryMetadataHandler(TEST_PORT, EMPTY_ENTRY_METADATA));
 
-    const panel = await openAIPanel(page, baseUrl, "fill");
+    const metadata = await openMetadataTab(page, baseUrl);
+
+    await metadata.getByTestId("info_panel_metadata_add_link").click();
+    await page.getByTestId("metadata-generate").click();
 
     await expect(
-      panel.getByText(
-        "No AI model is selected for metadata. Ask the administrator to choose one in the AI settings.",
-      ),
-    ).toBeVisible();
-    await expect(panel.getByTestId("metadata_ai_run_button")).toBeDisabled();
+      page
+        .getByTestId("metadata_ai_panel")
+        .getByTestId("metadata_ai_run_button"),
+    ).toHaveText("Generate metadata");
+  });
 
-    await expectScreenshot(page, [
-      "desktop",
-      "metadata",
-      "metadata-ai_no-model.png",
-    ]);
+  test.describe("no model selected", () => {
+    test.beforeEach(({ mockRequest }) => {
+      mockRequest.use(aiChatAssignmentsHandler(TEST_PORT));
+    });
+
+    test("leads the admin to the model assignment", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      mockRequest.use(selfByTypeHandler(TEST_PORT, "owner"));
+
+      const panel = await openAIPanel(page, baseUrl, "fill");
+      const notice = panel.getByTestId("metadata_ai_no_model_notice");
+
+      await expect(notice).toContainText("No AI model selected");
+      await expect(notice).toContainText(
+        "Choose a model for metadata in the AI settings.",
+      );
+      await expect(panel.getByTestId("metadata_ai_run_button")).toBeDisabled();
+
+      await expectScreenshot(page, [
+        "desktop",
+        "metadata",
+        "metadata-ai_no-model.png",
+      ]);
+
+      await panel.getByTestId("metadata_ai_choose_model_button").click();
+
+      await expect(page).toHaveURL(
+        /\/portal-settings\/ai-settings\/model-assignment$/,
+      );
+      await expect(page.getByTestId("metadata_ai_panel")).toHaveCount(0);
+    });
+
+    test("sends a regular user to the Full admin", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
+
+      const panel = await openAIPanel(page, baseUrl, "fill");
+      const notice = panel.getByTestId("metadata_ai_no_model_notice");
+
+      await expect(notice).toContainText(
+        "Contact the Full admin to choose a model for metadata.",
+      );
+      await expect(
+        panel.getByTestId("metadata_ai_choose_model_button"),
+      ).toHaveCount(0);
+    });
   });
 
   test("reports an unexpected server error", async ({

@@ -3,7 +3,7 @@
   "content": "AI requests are paused until {{date}}. Raise the limit in the AI settings to continue now.",
   "content_en_sha1_hash": "3b3f1385a458c62f9a63c7ebaa7e088a438a4b9c",
   "created_at": "2026-10-23T12:27:54.771Z",
-  "updated_at": "2026-10-29T14:13:10.677Z",
+  "updated_at": "2026-11-02T07:10:47.033Z",
   "comment": {
     "text": "Description under the AI spending limit notice, shown to administrators; {{date}} is the localized date when the limit resets. A button below leads to the AI settings spending limits page.",
     "is_auto": true,

@@ -843,7 +843,7 @@ const DocsLayoutCore = observer(
                                     _selectedItemId:
                                       string | number | undefined,
                                     _selectedItemType:
-                                      "rooms" | "files" | "agents" | undefined,
+                                      "rooms" | "files" | undefined,
                                     isRoot: boolean,
                                   ) => isFirstLoad || isRoot}
                                   onCancel={closeSelectorDialog}

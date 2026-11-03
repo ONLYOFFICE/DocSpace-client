@@ -130,7 +130,6 @@ const SelectFileDialog = ({
       openRoot={openRoot}
       withRecentTreeFolder
       withFavoritesTreeFolder
-      withAIAgentsTreeFolder
     />
   );
 };

@@ -3,7 +3,7 @@
   "content": "You cannot disable the restriction on downloading and copying data because this setting is enforced at the room level for all files.",
   "content_en_sha1_hash": "5fc62c010d3055bab64d90486b438d05848dc72f",
   "created_at": "2025-08-26T11:15:00.099Z",
-  "updated_at": "2026-10-29T13:57:47.784Z",
+  "updated_at": "2026-10-31T12:58:29.544Z",
   "comment": {
     "text": "This is a tooltip that appears when a user tries to disable the download and copy restriction for a file, explaining that the setting is enforced at the room level.",
     "is_auto": true,

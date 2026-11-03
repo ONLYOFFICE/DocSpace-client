@@ -3,7 +3,7 @@
   "content": "Couldn’t prepare the file for AI — run preparation again.",
   "content_en_sha1_hash": "6c920133128b3b46618545a65f82fa0474ad171c",
   "created_at": "2025-10-27T16:14:24.446Z",
-  "updated_at": "2026-05-15T14:00:06.930Z",
+  "updated_at": "2026-10-31T12:58:29.489Z",
   "comment": {
     "text": "This is an error message displayed in a badge when the AI preparation of a file fails. It informs the user that the preparation could not be completed and suggests retrying.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/failed-vectorization-badge/index.tsx",
-      "line_number": 77,
-      "context": "<div>\n <Text fontWeight={600} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparationForAIFailed\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparationForAIFailedInfo\")}\n </Text>\n {withRetryVectorization ? (\n <Link\n type={LinkType.action}\n fontWeight={600}",
+      "line_number": 84,
+      "context": "<div>\n <Text fontWeight={600} fontSize=\"12px\" lineHeight=\"16px\">\n {title ?? t(\"Common:PreparationForAIFailed\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {info ?? t(\"Common:PreparationForAIFailedInfo\")}\n </Text>\n {withRetryVectorization ? (\n <Link\n type={LinkType.action}\n fontWeight={600}",
       "module": "/packages/shared"
     }
   ],

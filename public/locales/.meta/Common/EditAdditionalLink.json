@@ -3,7 +3,7 @@
   "content": "Edit additional link",
   "content_en_sha1_hash": "b24e5fc30e6ff61b639c8b15b99d9f17a3f3af0a",
   "created_at": "2025-08-26T11:15:03.527Z",
-  "updated_at": "2026-10-29T13:57:47.783Z",
+  "updated_at": "2026-10-31T12:58:29.540Z",
   "comment": {
     "text": "This is the title of a dialog box for editing a link that is not the primary shared link, such as a public link or a link within a form room.",
     "is_auto": true,

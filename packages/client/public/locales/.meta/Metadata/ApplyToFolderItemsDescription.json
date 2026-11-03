@@ -3,7 +3,7 @@
   "content": "The template and its values will be applied to all new and existing items in this folder and its subfolders.",
   "content_en_sha1_hash": "8028ebad98680f9a2a460317d71c37b92d20e892",
   "created_at": "2026-10-21T10:17:41.262Z",
-  "updated_at": "2026-10-21T10:20:42.121Z",
+  "updated_at": "2026-10-27T14:49:15.581Z",
   "comment": {
     "text": "Hint under the Apply to all items in this folder toggle in the Metadata tab of the info panel.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CascadeBlock/index.tsx",
-      "line_number": 75,
+      "line_number": 77,
       "context": "folder: t(\"Metadata:ApplyToFolderItems\"),\n room: t(\"Metadata:ApplyToRoomItems\"),\n };\n \n const descriptions: Record<TCascadeItemType, string> = {\n folder: t(\"Metadata:ApplyToFolderItemsDescription\"),\n room: t(\"Metadata:ApplyToRoomItemsDescription\"),\n };\n \n return (\n <div",
       "module": "/packages/client"
     }

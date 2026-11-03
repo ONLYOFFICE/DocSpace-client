@@ -229,7 +229,6 @@ export async function handleUploadConflictsImpl(
   toFolderId: number | string | null,
   uploadData: TStartUploadData,
 ) {
-  const { isAIRoom } = self.selectedFolderStore;
   const filesArray = uploadData.files.map((fileInfo) => fileInfo.file.name);
 
   const checkConflicts =
@@ -237,7 +236,7 @@ export async function handleUploadConflictsImpl(
 
   try {
     let conflicts: (string | { title: string; isFile: boolean })[] =
-      isAIRoom || !checkConflicts
+      !checkConflicts
         ? []
         : ((await checkIsFileExist(
             toFolderId as number,
@@ -294,10 +293,6 @@ export function startUploadImpl(
 ) {
   const { canConvert } = self.filesSettingsStore;
 
-  const { isAIRoom } = self.selectedFolderStore;
-
-  const { knowledgeId } = self.aiRoomStore;
-
   const toFolderId = folderId || self.selectedFolderStore.id;
 
   const encryptionRoomId =
@@ -336,7 +331,7 @@ export function startUploadImpl(
       file,
       uniqueId: uniqueid("download_row-key_"),
       fileId: null,
-      toFolderId: isAIRoom ? knowledgeId : file.parentFolderId,
+      toFolderId: file.parentFolderId,
       action: "upload",
       error: null,
       fileInfo: null,

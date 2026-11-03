@@ -101,9 +101,6 @@ class TreeFoldersStore {
 
     treeFolders.forEach((folder) => {
       switch (folder.rootFolderType) {
-        case FolderType.AIAgents:
-          folder.title = i18n.t("Common:AIAgents");
-          break;
         case FolderType.USER:
           folder.title = i18n.t("Common:Files");
           break;
@@ -124,6 +121,9 @@ class TreeFoldersStore {
           break;
         case FolderType.Recent:
           folder.title = i18n.t("Common:Recent");
+          break;
+        case FolderType.AiHub:
+          folder.title = i18n.t("Common:AiRooms");
           break;
         default:
           break;
@@ -293,12 +293,6 @@ class TreeFoldersStore {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Recent);
   }
 
-  get aiAgentsFolder() {
-    return this.treeFolders.find(
-      (x) => x.rootFolderType === FolderType.AIAgents,
-    );
-  }
-
   get roomsFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Rooms);
   }
@@ -313,6 +307,11 @@ class TreeFoldersStore {
     return this.treeFolders.find(
       (x) => x.rootFolderType === FolderType.Templates,
     );
+  }
+
+  /** The "AI rooms" root (`FolderType.AiHub`: Instructions rooms, Knowledge rooms, AI projects), when `@root` serves it. */
+  get aiHubFolder() {
+    return this.treeFolders.find((x) => x.rootFolderType === FolderType.AiHub);
   }
 
   get commonFolder() {
@@ -339,6 +338,10 @@ class TreeFoldersStore {
     return this.archiveFolder ? this.archiveFolder.id : null;
   }
 
+  get aiHubFolderId() {
+    return this.aiHubFolder ? this.aiHubFolder.id : null;
+  }
+
   get recycleBinFolderId() {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
   }
@@ -349,10 +352,6 @@ class TreeFoldersStore {
 
   get recentFolderId() {
     return this.recentFolder ? this.recentFolder.id : null;
-  }
-
-  get aiAgentsFolderId() {
-    return this.aiAgentsFolder ? this.aiAgentsFolder.id : null;
   }
 
   get sharedWithMeFolderId() {
@@ -435,17 +434,6 @@ class TreeFoldersStore {
     );
   }
 
-  get isAIAgentsFolder() {
-    return (
-      this.aiAgentsFolder &&
-      this.selectedFolderStore.id === this.aiAgentsFolder.id
-    );
-  }
-
-  get isAIAgentsFolderRoot() {
-    return FolderType.AIAgents === this.selectedFolderStore.rootFolderType;
-  }
-
   get isFormsFolderRoot() {
     return FolderType.Forms === this.selectedFolderStore.rootFolderType;
   }
@@ -455,6 +443,32 @@ class TreeFoldersStore {
       FolderType.Forms === this.selectedFolderStore.rootFolderType &&
       this.selectedFolderStore.isRootFolder
     );
+  }
+
+  /** Anywhere under the "AI rooms" root: its list, a room or a folder inside one. */
+  get isAiHubFolderRoot() {
+    return FolderType.AiHub === this.selectedFolderStore.rootFolderType;
+  }
+
+  /** The "AI rooms" list itself (the root is the selected folder). */
+  get isAiHubFolder() {
+    return (
+      FolderType.AiHub === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
+  }
+
+  /**
+   * The "AI rooms" list: a rooms listing, as the Rooms and Forms roots are,
+   * for the Files stores' rooms branches.
+   */
+  get isAiSectionFolder() {
+    return this.isAiHubFolder;
+  }
+
+  /** An AI project room (type 12) is the selected folder: Home draws the project workspace. */
+  get isAiProjectRoomRoot() {
+    return this.selectedFolderStore.roomType === RoomsType.AiProjectRoom;
   }
 
   get isFormRoomRoot() {

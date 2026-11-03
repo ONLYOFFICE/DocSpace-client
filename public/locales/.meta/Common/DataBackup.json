@@ -3,7 +3,7 @@
   "content": "Data backup",
   "content_en_sha1_hash": "557da1f0ef4a81b758b4c447e2a745dbf3a4b0fe",
   "created_at": "2025-05-26T07:15:42.350Z",
-  "updated_at": "2026-10-29T13:57:47.686Z",
+  "updated_at": "2026-10-31T12:58:29.256Z",
   "comment": {
     "text": "This is a page title and a navigation item label within the \"Data Management\" section of the portal settings. It refers to the functionality for backing up data.",
     "is_auto": true,

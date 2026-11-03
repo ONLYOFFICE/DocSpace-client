@@ -42,7 +42,6 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   FolderType,
   RoomSecurityError,
-  RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import { User as ShareUser } from "@docspace/shared/components/share/sub-components/User";
@@ -51,7 +50,6 @@ import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import type { TGroup } from "@docspace/shared/api/groups/types";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
-import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 
 import { revokeMemberFromEncryptedRoom } from "@docspace/shared/services/private-room/room-encryption";
 
@@ -71,7 +69,6 @@ const User = ({
   setEditMembersGroup,
   setEditGroupMembersDialogVisible,
   setRemoveUserConfirmation,
-  isAIAgentsFolderRoot,
   getActiveUploadCountForRoom,
 }: UserProps) => {
   const { t } = useTranslation([
@@ -111,19 +108,12 @@ const User = ({
 
   const userRole = membersHelper.getOptionByUserAccess(
     user.access,
-    isAIAgentsFolderRoot,
+    room.roomType,
   );
 
-  const guestInAgent =
-    "isVisitor" in user && user.isVisitor && room.roomType === RoomsType.AIRoom;
-
-  const userRoleOptions = guestInAgent
-    ? filterNotReadOnlyOptions(fullRoomRoleOptions)
-    : ("isGroup" in user && user.isGroup) ||
-        ("isAdmin" in user &&
-          !user.isAdmin &&
-          !user.isOwner &&
-          !user.isRoomAdmin)
+  const userRoleOptions =
+    ("isGroup" in user && user.isGroup) ||
+    ("isAdmin" in user && !user.isAdmin && !user.isOwner && !user.isRoomAdmin)
       ? (filterPaidRoleOptions(fullRoomRoleOptions) as TOption[])
       : (fullRoomRoleOptions as TOption[]);
 
@@ -244,21 +234,19 @@ const User = ({
 };
 
 export default inject(
-  ({ dialogsStore, treeFoldersStore, uploadDataStore }: TStore) => {
+  ({ dialogsStore, uploadDataStore }: TStore) => {
     const {
       setEditMembersGroup,
       setEditGroupMembersDialogVisible,
       setRemoveUserConfirmation,
     } = dialogsStore;
 
-    const { isAIAgentsFolderRoot } = treeFoldersStore;
     const { getActiveUploadCountForRoom } = uploadDataStore;
 
     return {
       setEditMembersGroup,
       setEditGroupMembersDialogVisible,
       setRemoveUserConfirmation,
-      isAIAgentsFolderRoot,
       getActiveUploadCountForRoom,
     };
   },

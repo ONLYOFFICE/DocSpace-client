@@ -3,7 +3,7 @@
   "content": "Knowledge base",
   "content_en_sha1_hash": "70cd2e748fd8d867b9e8c7a55f97c1f3930136f7",
   "created_at": "2025-12-17T07:49:06.312Z",
-  "updated_at": "2026-10-23T12:28:45.487Z",
+  "updated_at": "2026-10-31T12:58:29.111Z",
   "comment": {
     "text": "This is a tab label or section title. It refers to a knowledge base feature within the AI Room or Portal Settings.",
     "is_auto": true,
@@ -12,26 +12,32 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/AiAgentsTour/index.tsx",
-      "line_number": 473,
-      "context": "},\n ],\n owner: user as unknown as TCreatedBy,\n memberAccess: [ShareAccessRights.Editing, ShareAccessRights.ReadOnly],\n agentContents: {\n knowledgeTitle: t(\"Common:Knowledge\"),\n outputsTitle: t(\"Common:ResultStorage\"),\n files: buildDemoFileList({\n document: t(\"Common:Document\"),\n spreadsheet: t(\"Common:Spreadsheet\"),\n presentation: t(\"Common:Presentation\"),",
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectIntro.tsx",
+      "line_number": 168,
+      "context": "<div className={styles.sources}>\n {instructionsRooms.length > 0 ? (\n <SourceGroup label={t(\"Common:AIProjectInstructions\")} rooms={instructionsRooms} kind=\"instructions\" />\n ) : null}\n {knowledgeRooms.length > 0 ? (\n <SourceGroup label={t(\"Common:Knowledge\")} rooms={knowledgeRooms} kind=\"knowledge\" />\n ) : null}\n </div>\n ) : null}\n </div>\n );",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Knowledge.tsx",
-      "line_number": 59,
-      "context": "return (\n <StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {t(\"Knowledge\")}\n </Text>\n <Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n fontWeight={400}",
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 359,
+      "context": "</Section>\n );\n \n const knowledgeSection = knowledgeRooms.length === 0 ? null : (\n <Section\n title={t(\"Common:Knowledge\")}\n menuTitle={t(\"Common:Knowledge\")}\n testId=\"ai-project-knowledge\"\n headless={compact}\n >\n {knowledgeRooms.map((room) => {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Tabs/AiRoomTabs/index.tsx",
-      "line_number": 157,
-      "context": "name: t(\"AIChat\"),\n content: null,\n },\n {\n id: \"knowledge\",\n name: t(\"Knowledge\"),\n content: null,\n },\n {\n id: \"result\",\n name: t(\"ResultStorage\"),",
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 359,
+      "context": "</Section>\n );\n \n const knowledgeSection = knowledgeRooms.length === 0 ? null : (\n <Section\n title={t(\"Common:Knowledge\")}\n menuTitle={t(\"Common:Knowledge\")}\n testId=\"ai-project-knowledge\"\n headless={compact}\n >\n {knowledgeRooms.map((room) => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 359,
+      "context": "</Section>\n );\n \n const knowledgeSection = knowledgeRooms.length === 0 ? null : (\n <Section\n title={t(\"Common:Knowledge\")}\n menuTitle={t(\"Common:Knowledge\")}\n testId=\"ai-project-knowledge\"\n headless={compact}\n >\n {knowledgeRooms.map((room) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 229,
+      "line_number": 228,
       "context": "onClick: makeOnClick(TAB_IDS.WEB_SEARCH),\n isDisabled: disableNonAiModels,\n },\n {\n id: TAB_IDS.KNOWLEDGE,\n name: t(\"Common:Knowledge\"),\n content: standalone ? <Knowledge /> : <KnowledgeBaseSaas />,\n onClick: makeOnClick(TAB_IDS.KNOWLEDGE),\n isDisabled: disableNonAiModels,\n },\n ...(standalone",
       "module": "/packages/client"
     },
@@ -43,7 +49,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 564,
+      "line_number": 557,
       "context": "},\n {\n id: \"portal-settings_catalog-ai-settings-knowledge\",\n key: \"7-4\",\n link: \"knowledge\",\n tKey: \"Common:Knowledge\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-ai-settings-limits\",\n key: \"7-5\",",
       "module": "/packages/client"
     },

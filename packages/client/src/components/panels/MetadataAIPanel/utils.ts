@@ -68,7 +68,11 @@ import {
   isSameInput,
 } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/utils";
 
-import type { TMetadataAIContext, TMetadataAIItem } from "./types";
+import type {
+  TMetadataAIContext,
+  TMetadataAIItem,
+  TMetadataAISummary,
+} from "./types";
 
 export const FILL_METADATA_AI = "fill-metadata-ai";
 export const SUGGEST_METADATA_AI = "suggest-metadata-ai";
@@ -120,7 +124,11 @@ export const getMetadataAIOptions = (
     isFile(item) &&
     canReadAsText(item.fileExst, extsConvertible);
 
-  return isAvailable ? METADATA_AI_OPTIONS : [];
+  if (!isAvailable) return [];
+
+  return isFile(item) && item.hasMetadataFields === false
+    ? [SUGGEST_METADATA_AI]
+    : METADATA_AI_OPTIONS;
 };
 
 export const getMetadataAIModel = (
@@ -151,7 +159,7 @@ export const applyAIValues = (
   filled: TMetadataAIFilledField[],
   overwrite: boolean,
 ) => {
-  let count = 0;
+  const fieldIds: number[] = [];
 
   const next = forms.map((form) => {
     const inputs = { ...form.inputs };
@@ -168,20 +176,20 @@ export const applyAIValues = (
       if (isSameInput(input, inputs[field.id])) return;
 
       inputs[field.id] = input;
-      count += 1;
+      fieldIds.push(field.id);
     });
 
     return { ...form, inputs };
   });
 
-  return { forms: next, count };
+  return { forms: next, fieldIds };
 };
 
 export const applyAICustomValues = (
   drafts: TCustomFieldDraft[],
   filled: TMetadataAIFilledField[],
 ) => {
-  let count = 0;
+  const keys: string[] = [];
 
   const next = drafts.map((draft) => {
     const value = filled.find(
@@ -192,12 +200,107 @@ export const applyAICustomValues = (
 
     if (!text || text === draft.value) return draft;
 
-    count += 1;
+    keys.push(draft.key);
 
     return { ...draft, value: text };
   });
 
-  return { drafts: next, count };
+  return { drafts: next, keys };
+};
+
+export const revertAIValue = (
+  forms: TTemplateForm[],
+  templateId: number,
+  fieldId: number,
+) =>
+  forms.map((form) => {
+    const field = form.template.fields.find(({ id }) => id === fieldId);
+
+    if (form.template.id !== templateId || !field) return form;
+
+    return {
+      ...form,
+      inputs: { ...form.inputs, [fieldId]: getMetadataInput(field) },
+    };
+  });
+
+export const revertAICustomValue = (
+  drafts: TCustomFieldDraft[],
+  customFields: TCustomField[],
+  key: string,
+) =>
+  drafts.map((draft) =>
+    draft.key === key
+      ? {
+          ...draft,
+          value: customFields.find(({ name }) => name === key)?.value ?? "",
+        }
+      : draft,
+  );
+
+const TEXT_INPUT_TYPES = new Set([
+  "text",
+  "search",
+  "email",
+  "url",
+  "tel",
+  "password",
+  "number",
+]);
+
+export const getUndoShortcut = ({
+  key,
+  code,
+  ctrlKey,
+  metaKey,
+  shiftKey,
+  altKey,
+}: Pick<
+  KeyboardEvent,
+  "key" | "code" | "ctrlKey" | "metaKey" | "shiftKey" | "altKey"
+>): "undo" | "redo" | null => {
+  const letter = /^[a-z]$/i.test(key)
+    ? key.toLowerCase()
+    : code.replace(/^Key/, "").toLowerCase();
+
+  if (letter === "y" && ctrlKey && !metaKey && !shiftKey && !altKey)
+    return "redo";
+  if (letter !== "z" || !(ctrlKey || metaKey) || altKey) return null;
+
+  return shiftKey ? "redo" : "undo";
+};
+
+export const isTextEditable = (target: EventTarget | null) =>
+  target instanceof HTMLElement &&
+  (target.isContentEditable ||
+    target instanceof HTMLTextAreaElement ||
+    (target instanceof HTMLInputElement && TEXT_INPUT_TYPES.has(target.type)));
+
+export const isPanelKeyTarget = (
+  target: EventTarget | null,
+  panel: HTMLElement,
+) =>
+  target instanceof Node &&
+  (target === target.ownerDocument?.body || panel.contains(target));
+
+export const withoutAIChange = (
+  summary: TMetadataAISummary,
+  { fieldId, customKey }: { fieldId?: number; customKey?: string },
+): TMetadataAISummary => {
+  const filledFieldIds = (summary.filledFieldIds ?? []).filter(
+    (id) => id !== fieldId,
+  );
+  const filledCustomKeys = (summary.filledCustomKeys ?? []).filter(
+    (key) => key !== customKey,
+  );
+
+  return {
+    ...summary,
+    count: filledFieldIds.length + filledCustomKeys.length,
+    filledFieldIds,
+    filledCustomKeys,
+    hasUndone: true,
+  };
 };
 
 export const getFillCustomFieldChanges = (
@@ -294,6 +397,22 @@ export const getMetadataAIServiceLimit = (error: unknown) => {
   return getServiceLimitChatError({ code, message: providerMessage });
 };
 
+export const isMetadataAINoModel = (error: unknown) =>
+  (error as TMetadataAIError | null)?.status === 503;
+
+const getSkippedError = (t: TTranslation, skipped: TMetadataAISkipped[]) => {
+  switch (skipped[0]?.reason) {
+    case "empty":
+      return t("Metadata:AIEmptyContent");
+    case "unsupported":
+      return t("Metadata:AIUnsupportedFormat");
+    case "forbidden":
+      return t("Common:AccessDenied");
+    default:
+      return t("Metadata:AINothingToRead");
+  }
+};
+
 export const getMetadataAIError = (t: TTranslation, error: unknown) => {
   const { status, skipped } = (error ?? {}) as TMetadataAIError;
 
@@ -302,14 +421,12 @@ export const getMetadataAIError = (t: TTranslation, error: unknown) => {
       return t("Common:AccessDenied");
     case 422:
       return skipped
-        ? t("Metadata:AINothingToRead")
+        ? getSkippedError(t, skipped)
         : t("Metadata:AINothingToFill");
     case 429:
       return t("Metadata:AIBusy");
     case 502:
       return t("Metadata:AIFailed");
-    case 503:
-      return t("Metadata:AINoModel");
     case 504:
       return t("Metadata:AITimeout");
     default:

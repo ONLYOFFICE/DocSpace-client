@@ -3,7 +3,7 @@
   "content": "No metadata on this room yet",
   "content_en_sha1_hash": "0088a1c35f3cd546e0141aa8260af454fd280df8",
   "created_at": "2026-10-21T10:17:41.280Z",
-  "updated_at": "2026-10-21T10:20:42.121Z",
+  "updated_at": "2026-10-27T14:49:15.596Z",
   "comment": {
     "text": "Empty-state title in the Metadata tab of the info panel when the selected room has no metadata.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/MetadataEmpty.tsx",
-      "line_number": 61,
-      "context": "const { isBase } = useTheme();\n \n const titles: Record<TMetadataItemType, string> = {\n file: t(\"Metadata:NoFileMetadata\"),\n folder: t(\"Metadata:NoFolderMetadata\"),\n room: t(\"Metadata:NoRoomMetadata\"),\n };\n \n const descriptions: Record<TMetadataItemType, string> = {\n file: t(\"Metadata:NoFileMetadataDescription\"),\n folder: t(\"Metadata:NoFolderMetadataDescription\"),",
+      "line_number": 77,
+      "context": "const openAI = useOpenMetadataAI(selection);\n \n const titles: Record<TMetadataItemType, string> = {\n file: t(\"Metadata:NoFileMetadata\"),\n folder: t(\"Metadata:NoFolderMetadata\"),\n room: t(\"Metadata:NoRoomMetadata\"),\n };\n \n const descriptions: Record<TMetadataEmptyHint, string> = {\n file: t(\"Metadata:NoFileMetadataDescription\"),\n fileWithAI: t(\"Metadata:NoFileMetadataDescriptionAI\"),",
       "module": "/packages/client"
     }
   ],

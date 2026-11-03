@@ -3,7 +3,7 @@
   "content": "Form Filling Space",
   "content_en_sha1_hash": "3d6a10533724f64d81d51bdfb0b0d9480d6c3ef2",
   "created_at": "2025-05-19T21:30:45.511Z",
-  "updated_at": "2026-09-04T07:59:41.664Z",
+  "updated_at": "2026-10-31T12:58:29.292Z",
   "comment": {
     "text": "This is a type label. It identifies a space specifically designed for filling out forms.",
     "is_auto": true,
@@ -32,7 +32,7 @@
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 62,
-      "context": "case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n case RoomsTypePrivate:\n return t(\"Common:PrivateRoomTitle\");\n default:\n return \"\";\n }",
+      "context": "case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n case RoomsTypePrivate:\n return t(\"Common:PrivateRoomTitle\");\n case RoomsType.InstructionsRoom:\n return t(\"Common:InstructionsRoomTitle\");\n case RoomsType.KnowledgeRoom:",
       "module": "/packages/shared"
     }
   ],

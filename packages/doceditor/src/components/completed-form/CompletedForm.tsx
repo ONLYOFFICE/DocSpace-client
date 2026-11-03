@@ -85,14 +85,15 @@ export const CompletedForm = ({
   const { isBase, currentColorScheme } = useTheme();
   const { t } = useTranslation(["CompletedForm", "Common"]);
 
-  useUpdateSearchParamId(session?.response.originalForm.id.toString());
+  useUpdateSearchParamId(session?.response?.originalForm?.id.toString());
 
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !isBase);
   const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !isBase);
 
   const bgPattern = getBgPattern(currentColorScheme?.id);
 
-  if (!session) return <CompletedFormEmpty />;
+  // An OK fill result can come back without `response`.
+  if (!session?.response) return <CompletedFormEmpty />;
 
   const {
     response: {

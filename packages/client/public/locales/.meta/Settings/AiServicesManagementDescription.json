@@ -3,7 +3,7 @@
   "content": "Turn AI agents & tools on or off across {{productName}} and {{organizationName}} editors. When disabled, the {{aiSettings}} section is hidden, AI agents become unavailable to all users, and paid {{organizationName}} {{aiServices}} can no longer be accessed. Your interaction history is kept safe and fully restored if you turn {{aiServices}} back on.",
   "content_en_sha1_hash": "0329ae9b8eb30ac3bf05d13164ca3fa034c3231a",
   "created_at": "2026-10-22T16:09:30.922Z",
-  "updated_at": "2026-10-22T16:09:36.911Z",
+  "updated_at": "2026-10-31T12:58:29.231Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 243,
+      "line_number": 235,
       "context": "aiServices: t(\"Common:AIServices\"),\n })}\n </Text>\n ) : null}\n <Text className=\"category-item-description\" fontSize=\"13px\">\n {t(\"AiServicesManagementDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n organizationName: getBrandName(\"OrganizationName\"),\n })}",
       "module": "/packages/client"
     }

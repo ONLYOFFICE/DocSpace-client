@@ -11,24 +11,6 @@ vi.mock("@docspace/shared/api/files", async (io) => ({
 import { createTestFilesActionsStore, t } from "./testHarness";
 
 describe("FilesActionsStore — quota/index/media (batch 10)", () => {
-  it("disableAIAgentQuota sets a custom agent quota of -1", async () => {
-    const setCustomAIAgentQuota = vi.fn(async () => {});
-    const store = createTestFilesActionsStore({
-      filesStore: { setCustomAIAgentQuota },
-    });
-    await store.disableAIAgentQuota([{ id: 1 }, 2] as never, t);
-    expect(setCustomAIAgentQuota).toHaveBeenCalledWith([1, 2], -1);
-  });
-
-  it("resetAIAgentQuota delegates to filesStore.resetAIAgentQuota", async () => {
-    const resetAIAgentQuota = vi.fn(async () => {});
-    const store = createTestFilesActionsStore({
-      filesStore: { resetAIAgentQuota },
-    });
-    await store.resetAIAgentQuota([{ id: 3 }] as never, t);
-    expect(resetAIAgentQuota).toHaveBeenCalledWith([3]);
-  });
-
   it("isExpiredLinkAsync: explicitly-expired link short-circuits to true", async () => {
     await expect(
       createTestFilesActionsStore().isExpiredLinkAsync({

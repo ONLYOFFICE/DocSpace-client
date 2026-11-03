@@ -38,6 +38,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { observable, runInAction } from "mobx";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { PRIVATE_ROOMS_FLAG_KEY } from "@docspace/shared/utils/privateRooms";
 
 const { getApps, temporarilyDisabled, frame } = vi.hoisted(() => ({
   getApps: vi.fn(),
@@ -225,7 +226,7 @@ describe("AppsStore.isPrivateRoomsSectionAvailable in an SDK frame", () => {
   });
 
   it("Browser flag in a frame", async () => {
-    window.localStorage.setItem("privateRooms", "true");
+    window.localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
     const { settingsStore, store } = createFramedStore();
     await store.fetchApps();
 

@@ -313,10 +313,7 @@ const CreateEvent = ({
       parentId,
       extension,
       templateId,
-      title,
       fromTemplate,
-      withoutDialog,
-      keepNewFileName,
       gallerySelected?.id,
       openOnNewPage,
       openEditor,
@@ -331,10 +328,13 @@ const CreateEvent = ({
       encryptionRoomId,
       fetchFiles,
       openDocEditor,
-      actionEdit,
     ],
   );
 
+  const onSaveRef = React.useRef(onSave);
+  onSaveRef.current = onSave;
+
+  // Spec: private-rooms/file-operations, "One create action makes one file"
   React.useEffect(() => {
     const defaultName = getDefaultFileName(extension);
     const suggestedName =
@@ -361,13 +361,13 @@ const CreateEvent = ({
     if (!keepNewFileName && !withoutDialog) {
       setEventDialogVisible(true);
     } else {
-      onSave(null, title || suggestedName);
+      onSaveRef.current(null, title || suggestedName);
     }
 
     return () => {
       setEventDialogVisible(false);
     };
-  }, [extension, title, fromTemplate, withoutDialog, onSave]);
+  }, [extension, title, fromTemplate, withoutDialog]);
 
   return (
     <Dialog

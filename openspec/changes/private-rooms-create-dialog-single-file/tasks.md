@@ -4,7 +4,7 @@ One task is one commit with its tick, committed directly on `release/v4.1.0` (th
 
 ## 1. One file per create request
 
-- [ ] 1.1 In `packages/client/src/components/GlobalEvents/CreateEvent.js`, make the dialog-or-create effect depend only on the request fields and call the latest `onSave` through a ref (design decision 1), and drop `keepNewFileName`, `withoutDialog`, `title` and the second `actionEdit` from the `onSave` dependencies (decision 2). Verify:
+- [x] 1.1 In `packages/client/src/components/GlobalEvents/CreateEvent.js`, make the dialog-or-create effect depend only on the request fields and call the latest `onSave` through a ref (design decision 1), and drop `keepNewFileName`, `withoutDialog`, `title` and the second `actionEdit` from the `onSave` dependencies (decision 2). Verify:
   - a new `packages/client/src/components/GlobalEvents/__tests__/CreateEvent.test.tsx` (decision 3), written before the fix, whose cases for the ticked box fail on the current code: "Don't ask again ticked in the name dialog", "Name typed and Don't ask again ticked", "Dialog during the creation", "File names not asked", "Another file type requested during a creation" and "Form room: Don't ask again ticked";
   - `cd packages/client && pnpm exec vitest run src/components/GlobalEvents` and `pnpm exec tsc --noEmit -p tsconfig.json`.
 

@@ -34,7 +34,7 @@ Every task first adds a test named after its scenario and shows that it fails on
 - [x] 2.2 Add an SDK helper that appends the current address parameters `RoomsFilter` does not own (as `getOtherSearchParams` does for files), and use it in `(rooms)/_components/rooms-filter/useRoomsFilter.tsx:120`, `rooms-list/index.tsx:860` and `empty-view/index.tsx:116`. Verify:
   - case "Frame reloaded after a filter change" in a unit test of the helper and in `empty-view/index.test.tsx`, asserting that the pushed address keeps `privateRooms=true`;
   - generic room lists without the parameter are unchanged.
-- [ ] 2.3 SDK E2E: in `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`, sort the private list, open a room and assert that its content renders. Verify with `cd packages/sdk && pnpm exec playwright test __tests__/e2e/private`.
+- [x] 2.3 SDK E2E: in `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`, sort the private list, open a room and assert that its content renders. Verify with `cd packages/sdk && pnpm exec playwright test __tests__/e2e/private`. Done 2026-11-03 after `pnpm run test:build`: 34 passed, 15 skipped, the new case included.
 
 ## 3. Cancelling an encrypted upload (review M1 and M2)
 

@@ -538,6 +538,24 @@ test.describe("(private) — rooms list & unlock", () => {
     },
   );
 
+  test("Room opened after sorting", async ({ page, baseUrl, port, mockBoth }) => {
+    await serveRooms(mockBoth, port);
+    await page.goto(`${baseUrl}${PRIVATE_LIST}${OPT_IN}`);
+    await expect(page.getByText(ROOM_TITLE)).toBeVisible();
+
+    await page.getByTestId("filter_sort_button").click();
+    await page.locator("#sort-by_modified").click();
+    await expect
+      .poll(() => new URL(page.url()).searchParams.get("sortBy"))
+      .not.toBeNull();
+    expect(new URL(page.url()).searchParams.get("privateRooms")).toBe("true");
+
+    await page.getByText(ROOM_TITLE).click();
+
+    await expect(row(page, MEMO.serverTitle)).toBeVisible();
+    expect(new URL(page.url()).searchParams.get("privateRooms")).toBe("true");
+  });
+
   test("List header", async ({
     page,
     baseUrl,

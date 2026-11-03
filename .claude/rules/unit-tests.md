@@ -20,12 +20,13 @@ paths:
   E2E** — never put unit tests there.
 - **shared**: co-located next to the component
   (`SaveCancelButtons.test.tsx`), a few `__tests__/` dirs.
-- **doceditor**: co-located under `packages/doceditor/src/**` (vitest
-  `include` is `src/**/*.test.{ts,tsx}`). `packages/doceditor/__tests__/` is
-  **Playwright E2E**. The suite runs in the `node` environment with no setup
-  file and none of the always-on mocks below — it is meant for pure logic
-  pulled out of hooks and components; switch to `jsdom` and add a setup
-  before testing anything that renders.
+- **doceditor**: co-located under `packages/doceditor/src/**`, either next to
+  the source or in a `__tests__/` dir inside `src/` (vitest `include` is
+  `src/**/*.{test,spec}.{js,ts,jsx,tsx}`). The top-level
+  `packages/doceditor/__tests__/` is **Playwright E2E** and is excluded. The
+  suite runs in `jsdom` with `vitest/setupTests.ts` (TextEncoder/TextDecoder
+  polyfills) and inlines `@onlyoffice/apps-ui-kit` so its CSS imports load;
+  none of shared's always-on mocks below apply.
 - **ui-kit** is a third, separate suite living in its own repository, with its own setup and
   mocks; shared's setup does not apply there, and its `include` is an explicit
   directory list — a test outside those dirs silently does not run.

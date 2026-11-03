@@ -10,7 +10,7 @@
 
 ## 3. Integration
 
-- [ ] 3.1 Run `pnpm run test` (shared unit tests) and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify both green.
+- [x] 3.1 Run `pnpm run test` (shared unit tests) and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify both green.
 
 ## Workflow follow-up
 

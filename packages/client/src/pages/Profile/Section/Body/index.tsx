@@ -58,6 +58,7 @@ import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import TelegramStore from "SRC_DIR/store/TelegramStore";
+import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
 
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/login";
@@ -204,6 +205,13 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
           {
             id: "keys-management",
             name: t?.("Common:KeysManagement"),
+            badge: (
+              <BetaBadge
+                place="bottom"
+                description={t?.("Common:PrivateRoomsBetaDescription")}
+                dataTestId="keys_management_beta_badge"
+              />
+            ),
             content: <KeysManagement />,
             onClick: async () => {
               await getEncryptionKeysData();

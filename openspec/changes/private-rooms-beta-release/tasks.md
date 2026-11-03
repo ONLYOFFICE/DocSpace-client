@@ -25,7 +25,7 @@ Group 0 holds the beta gate and the decisions. Tasks that name a server field or
 - [x] 2.2 Put the Beta badge on the Private sidebar item through `badgeComponent` in `packages/client/src/components/ClientArticleSidebar/index.tsx`, with `BetaBadgeWrapper` and the description Common:PrivateRoomsBetaDescription. Add the key to `public/locales/en/Common.json` in the same commit, then run `/translate-comments` and `/translate-locales`. Verify:
   - cases "Beta badge shown" and "Badge tooltip" in `ClientArticleSidebar/__tests__/ClientArticleSidebar.test.tsx`, with no badge on the Archive sub-item;
   - `cd common/tests && npx vitest run test/locales.test.js`.
-- [ ] 2.3 Put the Beta badge on the Keys management tab through the tab's `badge` slot in `packages/client/src/pages/Profile/Section/Body/index.tsx`. Verify: a case "Tab label" in a new `packages/client/src/pages/Profile/Section/Body/__tests__/ProfileTabs.test.tsx`, and `pnpm run tsc`.
+- [x] 2.3 Put the Beta badge on the Keys management tab through the tab's `badge` slot in `packages/client/src/pages/Profile/Section/Body/index.tsx`. Verify: a case "Tab label" in a new `packages/client/src/pages/Profile/Section/Body/__tests__/ProfileTabs.test.tsx`, and `pnpm run tsc`.
 
 ## 3. Portal setting
 

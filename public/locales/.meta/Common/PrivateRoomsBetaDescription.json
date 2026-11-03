@@ -3,11 +3,11 @@
   "content": "Private rooms are in beta. Some actions are not available for encrypted files yet, and encrypted files cannot be opened without your key, so keep your recovery phrase safe.",
   "content_en_sha1_hash": "045251236d9b52fc6dad0ec2b3f054a5d1357f10",
   "created_at": "2026-11-03T07:50:34.798Z",
-  "updated_at": "2026-11-03T07:52:49.771Z",
+  "updated_at": "2026-11-03T07:58:05.585Z",
   "comment": {
-    "text": "Tooltip text of the BETA badge next to the Private item in the left sidebar and on other private-room entry points; a separate sentence with bug-report links follows it. Private rooms are end-to-end encrypted rooms; 'key' is the user's encryption key and 'recovery phrase' the 24-word phrase that restores it.",
+    "text": "Tooltip text of the BETA badge next to the Private item in the left sidebar and on the Keys management tab of the user profile; a separate sentence with bug-report links follows it. Private rooms are end-to-end encrypted rooms; 'key' is the user's encryption key and 'recovery phrase' the 24-word phrase that restores it.",
     "is_auto": true,
-    "updated_at": "2026-11-03T07:52:49.771Z",
+    "updated_at": "2026-11-03T07:58:05.585Z",
     "model": "claude-opus-5-5"
   },
   "usage": [

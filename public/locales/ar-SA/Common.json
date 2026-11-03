@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "تم توليد مفتاح التشفير بنجاح",
   "EncryptionKeyImported": "تم استيراد مفتاح التشفير بنجاح",
   "EncryptionKeys": "مفاتيح التشفير",
+  "EncryptionKeysLoadFailed": "تعذر تحميل مفاتيح التشفير الخاصة بك. تحقق من اتصالك وحاول مرة أخرى.",
   "EncryptionKeysManagedInProfile": "تتم إدارة مفاتيح التشفير في ملفك الشخصي على {{productName}}، ضمن علامة التبويب إدارة المفاتيح.",
   "EncryptionKeysNotConfigured": "مفاتيح التشفير غير مهيأة على هذا الجهاز. قم بإعداد مفاتيحك في إعدادات الملف الشخصي للعمل مع الملفات المشفرة.",
   "EncryptionKeysReload": "يجب إعادة إدخال مفاتيح التشفير",

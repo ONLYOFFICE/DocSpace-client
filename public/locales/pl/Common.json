@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Klucz szyfrowania został pomyślnie wygenerowany",
   "EncryptionKeyImported": "Klucz szyfrowania został pomyślnie zaimportowany",
   "EncryptionKeys": "Klucze szyfrowania",
+  "EncryptionKeysLoadFailed": "Nie udało się wczytać Twoich kluczy szyfrowania. Sprawdź połączenie i spróbuj ponownie.",
   "EncryptionKeysManagedInProfile": "Kluczami szyfrowania zarządza się w Twoim profilu {{productName}}, na karcie Zarządzanie kluczami.",
   "EncryptionKeysNotConfigured": "Klucze szyfrowania nie są skonfigurowane na tym urządzeniu. Skonfiguruj swoje klucze w ustawieniach Profilu, aby pracować z zaszyfrowanymi plikami.",
   "EncryptionKeysReload": "Klucze szyfrowania muszą zostać wpisane ponownie",

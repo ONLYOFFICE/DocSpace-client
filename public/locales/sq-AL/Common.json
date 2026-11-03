@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Çelësi i enkriptimit u gjenerua me sukses",
   "EncryptionKeyImported": "Çelësi i enkriptimit u importua me sukses",
   "EncryptionKeys": "Çelësa enkriptimi",
+  "EncryptionKeysLoadFailed": "Çelësat tuaj të enkriptimit nuk mund të ngarkoheshin. Kontrolloni lidhjen dhe provoni përsëri.",
   "EncryptionKeysManagedInProfile": "Çelësat e enkriptimit menaxhohen në profilin tuaj në {{productName}}, te skeda Menaxhimi i çelësave.",
   "EncryptionKeysNotConfigured": "Çelësat e enkriptimit nuk janë konfiguruar në këtë pajisje. Konfiguroni çelësat tuaj në cilësimet e Profilit për të punuar me skedarët e enkriptuar.",
   "EncryptionKeysReload": "Çelësat e enkriptimit duhet të rifuten",

@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Şifrələmə açarı uğurla yaradıldı",
   "EncryptionKeyImported": "Şifrələmə açarı uğurla idxal edildi",
   "EncryptionKeys": "Şifrələmə açarları",
+  "EncryptionKeysLoadFailed": "Şifrələmə açarlarınızı yükləmək mümkün olmadı. Bağlantınızı yoxlayın və yenidən cəhd edin.",
   "EncryptionKeysManagedInProfile": "Şifrələmə açarları {{productName}} profilinizdə, Açarların idarə edilməsi bölməsində idarə olunur.",
   "EncryptionKeysNotConfigured": "Şifrələmə açarları bu cihazda qurulmayıb. Şifrəli fayllarla işləmək üçün Profil parametrlərindən açarlarınızı qurun.",
   "EncryptionKeysReload": "Şifrələmə düymələri yenidən daxil edilməlidir",

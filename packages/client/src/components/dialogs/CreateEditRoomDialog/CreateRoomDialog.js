@@ -119,7 +119,7 @@ const CreateRoomDialog = ({
     return () => {
       isMountRef.current = false;
     };
-  });
+  }, []);
 
   React.useEffect(() => {
     if (startRoomType) setSelectedRoomType(startRoomType);
@@ -179,6 +179,21 @@ const CreateRoomDialog = ({
     onClose,
   });
 
+  // A key list that has not loaded is unknown, never empty: it is fetched
+  // first, and `null` comes back when that fails.
+  // Spec: room-membership, "Starting private room creation without a key starts key generation"
+  const loadOwnKeys = useCallback(async () => {
+    if (encryptionKeys) return encryptionKeys;
+    try {
+      const fresh = (await getEncryptionKeys()) ?? [];
+      setUserEncryptionKeys?.(fresh);
+      return fresh;
+    } catch (error) {
+      console.error("Failed to load keys:", error);
+      return null;
+    }
+  }, [encryptionKeys, setUserEncryptionKeys]);
+
   const keyAutoPromptedRef = useRef(false);
   const isPrivateStart = startRoomType === RoomsTypePrivate;
   React.useEffect(() => {
@@ -186,16 +201,39 @@ const CreateRoomDialog = ({
     if (encryptionKeys && encryptionKeys.length > 0) return;
     if (keyAutoPromptedRef.current) return;
     keyAutoPromptedRef.current = true;
-    if (!keyGate.offerKeyGeneration()) onCloseRef.current?.();
+
+    const offerFor = (keys) => {
+      if (keys === null) {
+        toastr.error(t("Common:EncryptionKeysLoadFailed"));
+        onCloseRef.current?.();
+        return;
+      }
+      if (keys.length > 0) return;
+      if (!keyGate.offerKeyGeneration()) onCloseRef.current?.();
+    };
+
+    if (encryptionKeys) {
+      offerFor(encryptionKeys);
+      return;
+    }
+    void loadOwnKeys().then((keys) => {
+      if (isMountRef.current) offerFor(keys);
+    });
   }, [isTemplateItem, isPrivateStart, roomParams.isPrivate, encryptionKeys, t]);
 
-  const setRoomType = (newRoomType) => {
+  const setRoomType = async (newRoomType) => {
     if (newRoomType === RoomsTypePrivate) {
       if (!hasPrivateRoomSecureContext()) {
         toastr.error(t("Common:EncryptionRequiresHttps"));
         return;
       }
-      if (!encryptionKeys || encryptionKeys.length === 0) {
+      const keys = await loadOwnKeys();
+      if (!isMountRef.current) return;
+      if (keys === null) {
+        toastr.error(t("Common:EncryptionKeysLoadFailed"));
+        return;
+      }
+      if (keys.length === 0) {
         keyGate.offerKeyGeneration();
         return;
       }

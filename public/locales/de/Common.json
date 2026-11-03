@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Verschlüsselungsschlüssel erfolgreich generiert",
   "EncryptionKeyImported": "Verschlüsselungsschlüssel erfolgreich importiert",
   "EncryptionKeys": "Verschlüsselungsschlüssel",
+  "EncryptionKeysLoadFailed": "Ihre Verschlüsselungsschlüssel konnten nicht geladen werden. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
   "EncryptionKeysManagedInProfile": "Verschlüsselungsschlüssel werden in Ihrem {{productName}}-Profil auf der Registerkarte Schlüsselverwaltung verwaltet.",
   "EncryptionKeysNotConfigured": "Verschlüsselungsschlüssel sind auf diesem Gerät nicht konfiguriert. Richten Sie Ihre Schlüssel in den Profileinstellungen ein, um mit verschlüsselten Dateien arbeiten zu können.",
   "EncryptionKeysReload": "Verschlüsselungsschlüssel müssen erneut eingegeben werden",

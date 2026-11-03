@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Đã tạo khoá mã hoá thành công",
   "EncryptionKeyImported": "Đã nhập khoá mã hoá thành công",
   "EncryptionKeys": "Khoá mã hoá",
+  "EncryptionKeysLoadFailed": "Không thể tải khoá mã hoá của bạn. Hãy kiểm tra kết nối và thử lại.",
   "EncryptionKeysManagedInProfile": "Khoá mã hoá được quản lý trong hồ sơ {{productName}} của bạn, tại tab Quản lý khoá.",
   "EncryptionKeysNotConfigured": "Khoá mã hoá chưa được cấu hình trên thiết bị này. Hãy thiết lập khoá trong Cài đặt hồ sơ để làm việc với các tập tin được mã hoá.",
   "EncryptionKeysReload": "Phải nhập lại các khóa mã hóa",

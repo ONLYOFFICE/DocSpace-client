@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Ključ za šifrovanje je uspešno generisan",
   "EncryptionKeyImported": "Ključ za šifrovanje je uspešno uvezen",
   "EncryptionKeys": "Ključevi za šifrovanje",
+  "EncryptionKeysLoadFailed": "Nije bilo moguće učitati vaše ključeve za šifrovanje. Proverite vezu i pokušajte ponovo.",
   "EncryptionKeysManagedInProfile": "Ključevima za šifrovanje upravlja se u vašem profilu na {{productName}}, na kartici Upravljanje ključevima.",
   "EncryptionKeysNotConfigured": "Ključevi za šifrovanje nisu konfigurisani na ovom uređaju. Podesite ključeve u Podešavanjima profila za rad sa šifrovanim fajlovima.",
   "EncryptionKeysReload": "Ključevi za šifrovanje moraju biti ponovo unešeni",

@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Chave de criptografia gerada com sucesso",
   "EncryptionKeyImported": "Chave de criptografia importada com sucesso",
   "EncryptionKeys": "Chaves de criptografia",
+  "EncryptionKeysLoadFailed": "Não foi possível carregar suas chaves de criptografia. Verifique sua conexão e tente novamente.",
   "EncryptionKeysManagedInProfile": "As chaves de criptografia são gerenciadas no seu perfil do {{productName}}, na aba Gerenciamento de chaves.",
   "EncryptionKeysNotConfigured": "As chaves de criptografia não estão configuradas neste dispositivo. Configure suas chaves nas configurações do Perfil para trabalhar com arquivos criptografados.",
   "EncryptionKeysReload": "As chaves de criptografia devem ser inseridas novamente",

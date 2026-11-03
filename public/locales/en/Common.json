@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Encryption key generated successfully",
   "EncryptionKeyImported": "Encryption key imported successfully",
   "EncryptionKeys": "Encryption keys",
+  "EncryptionKeysLoadFailed": "Could not load your encryption keys. Check your connection and try again.",
   "EncryptionKeysManagedInProfile": "Encryption keys are managed in your {{productName}} profile, on the Keys management tab.",
   "EncryptionKeysNotConfigured": "Encryption keys are not configured on this device. Set up your keys in Profile settings to work with encrypted files.",
   "EncryptionKeysReload": "Encryption keys must be re-entered",

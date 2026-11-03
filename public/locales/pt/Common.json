@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Chave de encriptação gerada com sucesso",
   "EncryptionKeyImported": "Chave de encriptação importada com sucesso",
   "EncryptionKeys": "Chaves de encriptação",
+  "EncryptionKeysLoadFailed": "Não foi possível carregar as suas chaves de encriptação. Verifique a sua ligação e tente novamente.",
   "EncryptionKeysManagedInProfile": "As chaves de encriptação são geridas no seu perfil do {{productName}}, no separador Gestão de chaves.",
   "EncryptionKeysNotConfigured": "As chaves de encriptação não estão configuradas neste dispositivo. Configure as suas chaves nas definições de Perfil para trabalhar com ficheiros encriptados.",
   "EncryptionKeysReload": "As chaves de Encriptação têm de ser reinseridas",

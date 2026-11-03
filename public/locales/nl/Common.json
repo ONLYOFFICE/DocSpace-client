@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Versleutelingssleutel succesvol gegenereerd",
   "EncryptionKeyImported": "Versleutelingssleutel succesvol geïmporteerd",
   "EncryptionKeys": "Versleutelingssleutels",
+  "EncryptionKeysLoadFailed": "Uw versleutelingssleutels konden niet worden geladen. Controleer uw verbinding en probeer het opnieuw.",
   "EncryptionKeysManagedInProfile": "Versleutelingssleutels worden beheerd in uw {{productName}}-profiel, op het tabblad Sleutelbeheer.",
   "EncryptionKeysNotConfigured": "Versleutelingssleutels zijn niet geconfigureerd op dit apparaat. Stel uw sleutels in via Profielinstellingen om met versleutelde bestanden te werken.",
   "EncryptionKeysReload": "Encryptiesleutels moeten opnieuw worden ingevoerd",

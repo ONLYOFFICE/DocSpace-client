@@ -4,7 +4,7 @@ Every task first adds a test named after its scenario and shows that it fails on
 
 ## 1. Key list not loaded is not "no key" (review H2)
 
-- [ ] 1.1 Client create flow (`packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js:186` and `:203`):
+- [x] 1.1 Client create flow (`packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js:186` and `:203`):
   - treat `encryptionKeys === null` as unknown;
   - before any key offer, await `refreshKeysFromServer`, and offer generation only when it returned an empty list;
   - otherwise toast Common:EncryptionKeysLoadFailed and close a Private or template start;

@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Şifreleme anahtarı başarıyla oluşturuldu",
   "EncryptionKeyImported": "Şifreleme anahtarı başarıyla içe aktarıldı",
   "EncryptionKeys": "Şifreleme anahtarları",
+  "EncryptionKeysLoadFailed": "Şifreleme anahtarlarınız yüklenemedi. Bağlantınızı kontrol edip yeniden deneyin.",
   "EncryptionKeysManagedInProfile": "Şifreleme anahtarları, {{productName}} profilinizdeki Anahtar yönetimi sekmesinden yönetilir.",
   "EncryptionKeysNotConfigured": "Bu cihazda şifreleme anahtarları yapılandırılmamış. Şifrelenmiş dosyalarla çalışmak için Profil ayarlarından anahtarlarınızı kurun.",
   "EncryptionKeysReload": "Şifreleme anahtarları yeniden girilmelidir",

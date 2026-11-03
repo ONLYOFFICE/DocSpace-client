@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Šifrirni ključ je bil uspešno ustvarjen",
   "EncryptionKeyImported": "Šifrirni ključ je bil uspešno uvožen",
   "EncryptionKeys": "Šifrirni ključi",
+  "EncryptionKeysLoadFailed": "Vaših šifrirnih ključev ni bilo mogoče naložiti. Preverite povezavo in poskusite znova.",
   "EncryptionKeysManagedInProfile": "Šifrirne ključe upravljate v svojem profilu {{productName}} na zavihku Upravljanje ključev.",
   "EncryptionKeysNotConfigured": "Šifrirni ključi niso nastavljeni na tej napravi. Nastavite ključe v nastavitvah profila za delo s šifriranimi datotekami.",
   "EncryptionKeysReload": "Ključe za šifriranje je potrebno znova vnesti",

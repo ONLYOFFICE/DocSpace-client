@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Clé de chiffrement générée avec succès",
   "EncryptionKeyImported": "Clé de chiffrement importée avec succès",
   "EncryptionKeys": "Clés de chiffrement",
+  "EncryptionKeysLoadFailed": "Impossible de charger vos clés de chiffrement. Vérifiez votre connexion et réessayez.",
   "EncryptionKeysManagedInProfile": "Les clés de chiffrement se gèrent dans votre profil {{productName}}, dans l'onglet Gestion des clés.",
   "EncryptionKeysNotConfigured": "Les clés de chiffrement ne sont pas configurées sur cet appareil. Configurez vos clés dans les paramètres du profil pour travailler avec les fichiers chiffrés.",
   "EncryptionKeysReload": "Les clés de chiffrement doivent être saisies à nouveau",

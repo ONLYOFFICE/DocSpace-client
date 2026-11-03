@@ -933,6 +933,7 @@
   "EncryptionKeyGenerated": "Salausavain luotu onnistuneesti",
   "EncryptionKeyImported": "Salausavain tuotu onnistuneesti",
   "EncryptionKeys": "Salausavaimet",
+  "EncryptionKeysLoadFailed": "Salausavaimiasi ei voitu ladata. Tarkista yhteytesi ja yritä uudelleen.",
   "EncryptionKeysManagedInProfile": "Salausavaimia hallitaan {{productName}}-profiilissasi Avainten hallinta -välilehdellä.",
   "EncryptionKeysNotConfigured": "Salausavaimia ei ole määritetty tällä laitteella. Määritä avaimesi Profiiliasetuksissa käyttääksesi salattuja tiedostoja.",
   "EncryptionKeysReload": "Salausavaimet on syötettävä uudelleen",

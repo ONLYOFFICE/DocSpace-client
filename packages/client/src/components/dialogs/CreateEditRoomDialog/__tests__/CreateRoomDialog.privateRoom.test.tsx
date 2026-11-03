@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { act, render } from "@testing-library/react";
+import { act, render, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { RoomsTypePrivate } from "@docspace/shared/enums";
@@ -49,11 +49,16 @@ const mocks = vi.hoisted(() => ({
   confirm: null as TConfirmProps | null,
   keyFlow: null as TKeyFlowOptions | null,
   requestKey: vi.fn(),
+  getEncryptionKeys: vi.fn(),
   toastr: { success: vi.fn(), warning: vi.fn(), error: vi.fn() },
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: mocks.toastr,
+}));
+
+vi.mock("@docspace/shared/api/privacy", () => ({
+  getEncryptionKeys: mocks.getEncryptionKeys,
 }));
 
 vi.mock("@docspace/shared/dialogs/confirmation-modal", () => ({
@@ -92,8 +97,11 @@ const CreateRoomDialog = CreateRoomDialogComponent as unknown as React.Component
   Record<string, unknown>
 >;
 
-const renderPrivateRoomCreation = () => {
+const renderPrivateRoomCreation = ({
+  encryptionKeys = [] as unknown[] | null,
+} = {}) => {
   const onClose = vi.fn();
+  const setUserEncryptionKeys = vi.fn();
 
   render(
     <CreateRoomDialog
@@ -104,14 +112,14 @@ const renderPrivateRoomCreation = () => {
       startRoomType={RoomsTypePrivate}
       setSelectedRoomType={vi.fn()}
       selectionItems={[]}
-      encryptionKeys={[]}
+      encryptionKeys={encryptionKeys}
       userId="me"
       accountEmail="me@example.com"
-      setUserEncryptionKeys={vi.fn()}
+      setUserEncryptionKeys={setUserEncryptionKeys}
     />,
   );
 
-  return { onClose };
+  return { onClose, setUserEncryptionKeys };
 };
 
 describe("Creating a private room without keys", () => {
@@ -159,5 +167,51 @@ describe("Creating a private room without keys", () => {
     );
     expect(onClose).toHaveBeenCalledTimes(1);
     expect(mocks.confirm?.visible).toBe(false);
+  });
+});
+
+describe("Creating a private room before the key list is known", () => {
+  beforeEach(() => {
+    mocks.confirm = null;
+    mocks.keyFlow = null;
+  });
+
+  it("Key list could not be loaded", async () => {
+    mocks.getEncryptionKeys.mockRejectedValue(new Error("Network Error"));
+    const { onClose } = renderPrivateRoomCreation({ encryptionKeys: null });
+
+    await waitFor(() =>
+      expect(mocks.toastr.error).toHaveBeenCalledWith(
+        "Common:EncryptionKeysLoadFailed",
+      ),
+    );
+    expect(onClose).toHaveBeenCalledTimes(1);
+    expect(mocks.confirm?.visible).toBe(false);
+    expect(mocks.requestKey).not.toHaveBeenCalled();
+  });
+
+  it("User accepts key generation once the list loads empty", async () => {
+    mocks.getEncryptionKeys.mockResolvedValue([]);
+    const { onClose, setUserEncryptionKeys } = renderPrivateRoomCreation({
+      encryptionKeys: null,
+    });
+
+    await waitFor(() => expect(mocks.confirm?.visible).toBe(true));
+    expect(setUserEncryptionKeys).toHaveBeenCalledWith([]);
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it("offers nothing when the loaded list holds a key", async () => {
+    const key = { publicKey: "pk", privateKeyEnc: "enc", date: "2026-10-22" };
+    mocks.getEncryptionKeys.mockResolvedValue([key]);
+    const { onClose, setUserEncryptionKeys } = renderPrivateRoomCreation({
+      encryptionKeys: null,
+    });
+
+    await waitFor(() =>
+      expect(setUserEncryptionKeys).toHaveBeenCalledWith([key]),
+    );
+    expect(mocks.confirm?.visible).toBe(false);
+    expect(onClose).not.toHaveBeenCalled();
   });
 });

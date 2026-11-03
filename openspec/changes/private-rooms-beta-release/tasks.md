@@ -34,7 +34,7 @@ Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 20
 
 ## 3. Availability
 
-- [ ] 3.1 In `packages/client/src/store/AppsStore.ts`, drop `privateRoomsOptIn`: `isPrivateRoomsSectionAvailable` follows the E2E rooms app as `isInstalled` reads it, and inside an SDK frame also requires the frame opt-in. Remove `e2e-rooms` from the unreleased apps in `packages/client/src/helpers/disabled-apps.ts`. Verify:
+- [x] 3.1 In `packages/client/src/store/AppsStore.ts`, drop `privateRoomsOptIn`: `isPrivateRoomsSectionAvailable` follows the E2E rooms app as `isInstalled` reads it, and inside an SDK frame also requires the frame opt-in. Remove `e2e-rooms` from the unreleased apps in `packages/client/src/helpers/disabled-apps.ts`. Verify:
   - cases "SaaS portal", "Standalone portal with the app on", "App switched off on a standalone portal", "Frame configuration carries the opt-in", "Frame configuration without the opt-in" and "Browser flag in a frame" in the AppsStore unit tests;
   - `cd packages/client && pnpm exec vitest run src/store src/helpers`.
 - [ ] 3.2 Register the `profile/keys-management` routes of `packages/client/src/routes/general.js` unconditionally, behind a guard that renders the page while the section is available or the user holds a key, and otherwise falls back to the profile (design decision 4). Apply the same rule to the profile tab. Verify: cases "Section available", "App off, no key" and "App off, key held" in unit tests next to the guard and in `ProfileTabs.test.tsx`, and `pnpm run tsc`.

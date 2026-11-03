@@ -63,6 +63,8 @@ type LegacyTofuRecordV1 = {
 
 export type TofuCheckResult =
   | { kind: "first-seen" }
+  /** The pin store is open but the peer's record could not be read. */
+  | { kind: "unreadable" }
   | { kind: "match"; record: TofuRecord; matchedKey: TofuKeyEntry }
   | {
       kind: "mismatch";
@@ -70,6 +72,8 @@ export type TofuCheckResult =
       knownKeys: TofuKeyEntry[];
       submitted: string;
     };
+
+const UNREADABLE = Symbol("unreadable");
 
 const DB_NAME_PREFIX = "docspace-tofu-";
 const STORE_NAME = "known_keys";
@@ -233,12 +237,15 @@ export class TofuStore {
     return this.dbPromise;
   }
 
-  private async getRecord(userId: string): Promise<TofuRecord | null> {
+  /** The peer's record, `null` when there is none, `UNREADABLE` when the read failed. */
+  private async readRecord(
+    userId: string,
+  ): Promise<TofuRecord | null | typeof UNREADABLE> {
     const db = await this.openDB();
     if (!db) {
       return normalizeRecord(this.getMemoryStore().get(userId));
     }
-    return new Promise<TofuRecord | null>((resolve) => {
+    return new Promise<TofuRecord | null | typeof UNREADABLE>((resolve) => {
       try {
         const tx = db.transaction(STORE_NAME, "readonly");
         const store = tx.objectStore(STORE_NAME);
@@ -246,11 +253,16 @@ export class TofuStore {
         req.onsuccess = () => {
           resolve(normalizeRecord(req.result));
         };
-        req.onerror = () => resolve(null);
+        req.onerror = () => resolve(UNREADABLE);
       } catch {
-        resolve(null);
+        resolve(UNREADABLE);
       }
     });
+  }
+
+  private async getRecord(userId: string): Promise<TofuRecord | null> {
+    const record = await this.readRecord(userId);
+    return record === UNREADABLE ? null : record;
   }
 
   private async putRecord(record: TofuRecord): Promise<void> {
@@ -299,7 +311,9 @@ export class TofuStore {
       throw new Error("TofuStore.checkKey: userId and publicKey are required");
     }
 
-    const existing = await this.getRecord(userId);
+    const existing = await this.readRecord(userId);
+    // Spec: encryption-core, "Peer public keys are pinned on first use"
+    if (existing === UNREADABLE) return { kind: "unreadable" };
     const now = Date.now();
 
     if (!existing) {
@@ -347,7 +361,8 @@ export class TofuStore {
     if (!userId || !publicKey) {
       throw new Error("TofuStore.acceptKey: userId and publicKey are required");
     }
-    const existing = await this.getRecord(userId);
+    const existing = await this.readRecord(userId);
+    if (existing === UNREADABLE) return;
     const now = Date.now();
     if (!existing) {
       await this.putRecord({

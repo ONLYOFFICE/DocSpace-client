@@ -45,26 +45,80 @@
  * Any non-empty value counts as "enabled" (presence-flag pattern), so
  * `"true"`, `"1"` or `"on"` all work.
  *
- * Gated surfaces (all of them behave exactly as before once the flag is set):
- *   - the Private room card in the create-room type chooser
- *     (`getCreateRoomTypes` in ./rooms.tsx),
- *   - the "e2e-rooms" app: sidebar item, `/e2e-rooms` route and the enable
- *     flow (`SRC_DIR/helpers/disabled-apps.ts`, `AppsStore.isEnabled`),
+ * Gated surfaces:
+ *   - the "e2e-rooms" app, which stands for the Private section of the
+ *     sidebar: the section and its `/private` routes, `/e2e-rooms` (a
+ *     redirect into the section) and the enable flow
+ *     (`SRC_DIR/helpers/disabled-apps.ts`,
+ *     `AppsStore.isPrivateRoomsSectionAvailable`),
  *   - the Keys management tab and its `profile/keys-management` routes.
  *
- * The flag is read on demand, but the routing table is built once per page
- * load, so flipping it requires a reload.
+ * Private rooms are created from the Private section only; the create-room
+ * chooser never offers them (`getCreateRoomTypes` in ./rooms.tsx).
+ *
+ * The flag is read on demand, but the routing table and the Private section
+ * are fixed once per page load, so flipping it requires a reload.
+ *
+ * The embeddable SDK cannot see that flag (it may run on another origin), so
+ * it takes the opt-in from its host instead: the `privateRooms` property of
+ * the frame configuration, carried in the frame URL under the same name, and
+ * installed with `setPrivateRoomsOptInSource`.
  */
 export const PRIVATE_ROOMS_FLAG_KEY = "privateRooms";
 
-export const isPrivateRoomsEnabled = (): boolean => {
+type TPrivateRoomsOptInSource = () => boolean;
+
+const readBrowserFlag: TPrivateRoomsOptInSource = () => {
   if (typeof window === "undefined") return false;
 
+  applyPrivateRoomsOptInFromUrl();
+
+  return Boolean(window.localStorage.getItem(PRIVATE_ROOMS_FLAG_KEY));
+};
+
+let optInSource = readBrowserFlag;
+
+/**
+ * Replaces the browser-local flag as the source of the opt-in; `null` goes
+ * back to the flag.
+ */
+export const setPrivateRoomsOptInSource = (
+  source: TPrivateRoomsOptInSource | null,
+) => {
+  optInSource = source ?? readBrowserFlag;
+};
+
+export const isPrivateRoomsEnabled = (): boolean => {
   try {
-    return Boolean(window.localStorage.getItem(PRIVATE_ROOMS_FLAG_KEY));
+    return optInSource();
   } catch {
     // Storage can throw in a sandboxed iframe or with cookies disabled;
     // an unreadable flag means the feature stays hidden.
     return false;
   }
 };
+
+/** Whether a frame property or URL parameter value turns the opt-in on. */
+export const isPrivateRoomsOptInValue = (value: unknown): boolean =>
+  value === true || value === "true" || value === "1";
+
+/**
+ * Sets the browser-local flag when the page was opened with the opt-in in its
+ * URL, as the keys-management link from the SDK is. Every read of the flag
+ * runs it first, so the routes, built from the flag once per page load, see
+ * it whichever module reads the flag first.
+ */
+function applyPrivateRoomsOptInFromUrl() {
+  if (typeof window === "undefined") return;
+
+  const value = new URLSearchParams(window.location.search).get(
+    PRIVATE_ROOMS_FLAG_KEY,
+  );
+  if (!isPrivateRoomsOptInValue(value)) return;
+
+  try {
+    window.localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
+  } catch {
+    // Unwritable storage leaves the page as gated as before.
+  }
+}

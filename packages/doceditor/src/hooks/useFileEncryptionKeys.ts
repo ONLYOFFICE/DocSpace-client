@@ -36,11 +36,13 @@
 "use client";
 
 import React from "react";
+import type { EditorConfigBase } from "@onlyoffice/doceditor-types";
 
 import { getFileEncryptionAccess } from "@docspace/shared/api/files";
 import { useEncryptionOptional } from "@docspace/shared/context/encryption";
 import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/room-file-access";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
+import { EDITOR_CONTRACT_VERSION } from "@docspace/shared/services/encryption/types";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
 import {
   getCachedEncryptedFilename,
@@ -56,7 +58,9 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import { useEncryptionKeysReady } from "@/components/EncryptionProviderWrapper";
 import type { IInitialConfig } from "@/types";
 
-export type TEditorEncryptionKeys = { [key: string]: string | boolean };
+export type TEditorEncryptionKeys = NonNullable<
+  EditorConfigBase["encryptionKeys"]
+>;
 
 export type TFileEncryptionStatus =
   | "off"
@@ -201,6 +205,7 @@ const useFileEncryptionKeys = (
 
         const encryptionKeys: TEditorEncryptionKeys = {
           dek: arrayBufferToBase64(dek),
+          contractVersion: EDITOR_CONTRACT_VERSION,
         };
         if (typeof serverCryptoEngineId === "string") {
           encryptionKeys.cryptoEngineId = serverCryptoEngineId;

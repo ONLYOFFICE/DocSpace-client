@@ -49,11 +49,17 @@ export type TUploadItem = {
   fileName: string;
   fileSize: number;
   folderId: number | string;
+  /** The room the file uploads into, whatever folder of it is the target. */
+  roomId?: number | string;
   percent: number;
   status: TUploadItemStatus;
   error?: string;
   /** Phase label shown in the upload panel row (e.g. "Encrypting"). */
   label?: string;
+  /** The upload failed on the storage quota. */
+  isQuotaError?: boolean;
+  /** Sends the failed file again, when its upload can be retried. */
+  retry?: () => void;
   abortController: AbortController;
 };
 
@@ -62,6 +68,7 @@ export type TUploadItemInit = {
   fileName: string;
   fileSize: number;
   folderId: number | string;
+  roomId?: number | string;
 };
 
 class UploadStore {
@@ -91,6 +98,7 @@ class UploadStore {
         fileName: init.fileName,
         fileSize: init.fileSize,
         folderId: init.folderId,
+        roomId: init.roomId,
         percent: 0,
         status: "uploading",
         abortController: fileAbort,
@@ -105,12 +113,26 @@ class UploadStore {
     }
   };
 
-  setItemUploaded = (uniqueId: string) => {
+  /**
+   * Marks a row uploaded. A row cancelled after its file was stored is gone
+   * from the panel; `restore` brings it back as uploaded.
+   */
+  setItemUploaded = (uniqueId: string, restore?: TUploadItemInit) => {
     const item = this.items.find((i) => i.uniqueId === uniqueId);
     if (item) {
       item.status = "uploaded";
       item.percent = 100;
+      return;
     }
+    if (!restore) return;
+    this.items.push({
+      ...restore,
+      percent: 100,
+      status: "uploaded",
+      abortController: new AbortController(),
+    });
+    this.totalBytes += restore.fileSize;
+    this.uploadedBytes += restore.fileSize;
   };
 
   setItemError = (uniqueId: string, error: string) => {
@@ -118,7 +140,39 @@ class UploadStore {
     if (item) {
       item.status = "error";
       item.error = error;
+      item.isQuotaError = false;
+      item.label = undefined;
     }
+  };
+
+  setItemQuotaError = (uniqueId: string, error: string) => {
+    this.setItemError(uniqueId, error);
+    const item = this.items.find((i) => i.uniqueId === uniqueId);
+    if (item) item.isQuotaError = true;
+  };
+
+  setItemRetry = (uniqueId: string, retry: (() => void) | undefined) => {
+    const item = this.items.find((i) => i.uniqueId === uniqueId);
+    if (item) item.retry = retry;
+  };
+
+  /** Puts a failed row back into the uploading state for a retry. */
+  resetItemForRetry = (uniqueId: string) => {
+    const item = this.items.find((i) => i.uniqueId === uniqueId);
+    if (!item) return;
+    const fileAbort = new AbortController();
+    this.batchAbortController?.signal.addEventListener(
+      "abort",
+      () => fileAbort.abort(),
+      { once: true },
+    );
+    item.status = "uploading";
+    item.percent = 0;
+    item.error = undefined;
+    item.isQuotaError = false;
+    item.label = undefined;
+    item.retry = undefined;
+    item.abortController = fileAbort;
   };
 
   setItemCancelled = (uniqueId: string) => {

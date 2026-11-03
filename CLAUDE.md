@@ -19,6 +19,9 @@ pnpm test:store                # only client store tests (src/store, incl. Files
 # Unit tests (sdk package, Vitest)
 pnpm test:sdk
 
+# Unit tests (doceditor package, Vitest)
+pnpm test:doceditor
+
 # Run single unit test file
 cd packages/shared && pnpm vitest run path/to/file.test.ts
 cd packages/client && pnpm exec vitest run src/store/filesStore
@@ -224,6 +227,7 @@ failure aborts the push:
 4. `pnpm run test` — shared unit tests
 5. `pnpm run test:client` — client unit tests (incl. store tests)
 6. `pnpm run test:sdk` — sdk unit tests
+7. `pnpm run test:doceditor` — doceditor unit tests
 
 Expect a push to take several minutes. To debug a blocked push, run the
 failing command individually. Never bypass the gate with `git push --no-verify`.
@@ -265,6 +269,7 @@ the translation skills use that comment as context.
 | `.claude/rules/link-preview.md` | `packages/client/index.html`, `packages/shared/utils/link-preview.ts`, `packages/shared/components/link-preview-meta/**`, `packages/login/src/app/link-preview/**` |
 | `.claude/rules/access-matrix.md` | access rules for user types and room roles, and their specs |
 | `.claude/rules/dashboard-matrix.md` | `packages/client/src/pages/Dashboard/**`, `dashboard-appearance.spec.ts`, its screenshots |
+| `.claude/rules/private-rooms.md` | private-room / encryption code, `openspec/**` — OpenSpec specs and workflow for the feature |
 | `.claude/rules/pnpm.md` | `package.json`, `pnpm-workspace.yaml`, Dockerfiles, CI workflows |
 | `.claude/rules/claude-settings.md` | `.claude/settings*.json` |
 | `.claude/rules/vscode-tasks.md` | `.vscode/**`, `frontend.code-workspace` |

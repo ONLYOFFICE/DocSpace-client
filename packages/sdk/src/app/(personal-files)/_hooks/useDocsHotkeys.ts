@@ -89,6 +89,10 @@ export default function useDocsHotkeys({
     return !checkDialogsOpen();
   }, []);
 
+  // Spec: private-rooms/sdk-surface, "No upload or creation without the create right".
+  const canCreateHere = () =>
+    !encryptedActions || !!filesListStore.currentFolder?.security?.Create;
+
   const hotkeysOptions = {
     filter: (ev: KeyboardEvent) =>
       (ev.target as HTMLElement)?.tagName !== "INPUT" &&
@@ -208,40 +212,62 @@ export default function useDocsHotkeys({
   // Create document
   useHotkeys(
     "shift+d",
-    onShiftHotkey(() => onCreateFile("docx")),
+    onShiftHotkey(() => {
+      if (!canCreateHere()) return;
+      onCreateFile("docx");
+    }),
     hotkeysOptions,
   );
 
   // Create spreadsheet
   useHotkeys(
     "shift+s",
-    onShiftHotkey(() => onCreateFile("xlsx")),
+    onShiftHotkey(() => {
+      if (!canCreateHere()) return;
+      onCreateFile("xlsx");
+    }),
     hotkeysOptions,
   );
 
   // Create presentation
   useHotkeys(
     "shift+p",
-    onShiftHotkey(() => onCreateFile("pptx")),
+    onShiftHotkey(() => {
+      if (!canCreateHere()) return;
+      onCreateFile("pptx");
+    }),
     hotkeysOptions,
   );
 
   // Create PDF form
   useHotkeys(
     "shift+o",
-    onShiftHotkey(() => onCreateFile("pdf")),
+    onShiftHotkey(() => {
+      if (!canCreateHere()) return;
+      onCreateFile("pdf");
+    }),
     hotkeysOptions,
   );
 
   // Create folder
   useHotkeys(
     "shift+f",
-    onShiftHotkey(() => onCreateFile("folder")),
+    onShiftHotkey(() => {
+      if (!canCreateHere()) return;
+      onCreateFile("folder");
+    }),
     hotkeysOptions,
   );
 
   // Upload file
-  useHotkeys("shift+u", onShiftHotkey(onUploadFiles), hotkeysOptions);
+  useHotkeys(
+    "shift+u",
+    onShiftHotkey(() => {
+      if (!canCreateHere()) return;
+      onUploadFiles();
+    }),
+    hotkeysOptions,
+  );
 
   // Upload folder — silently blocked in private rooms (no folder upload allowed).
   // Mirrors HotkeyStore.js:601-603: uploadFile(isFolder) { if (isFolder) {

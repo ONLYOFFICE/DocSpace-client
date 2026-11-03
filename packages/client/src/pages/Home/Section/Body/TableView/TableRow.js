@@ -71,6 +71,7 @@ const FilesTableRow = memo((props) => {
     dragging,
     isDragging,
     onDrop,
+    onDropCapture,
     onMouseDown,
     isActive,
     onHideContextMenu,
@@ -267,6 +268,7 @@ const FilesTableRow = memo((props) => {
         "table-row-selected": !showHotkeyBorder && (checkedProps || isActive),
       })}
       onDrop={onDrop}
+      onDropCapture={onDropCapture}
       onMouseDown={onMouseDown}
       dragging={dragging ? isDragging : null}
       onDragOver={onDragOverEvent}

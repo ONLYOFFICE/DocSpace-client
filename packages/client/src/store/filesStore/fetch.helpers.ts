@@ -45,9 +45,15 @@ import {
 } from "@docspace/shared/enums";
 import {
   frameCallEvent,
+  getCategoryType,
+  isPrivateRoomsRoute,
   isPublicRoom,
 } from "@docspace/shared/utils/common";
 import { isDesktop } from "@docspace/shared/utils";
+import {
+  getRoomsRequestScope,
+  withRoomsRequestScope,
+} from "@docspace/shared/utils/rooms";
 import {
   CategoryType,
   EMPTY_ARRAY,
@@ -63,8 +69,13 @@ import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
   getCategoryTypeByFolderTypeInSection,
+  setDocumentTitle,
 } from "SRC_DIR/helpers/utils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
+import {
+  getSectionAddressCorrection,
+  SECTION_DECIDED_STATE,
+} from "SRC_DIR/helpers/privateRoomsSection";
 
 import type { Nullable, TPathParts } from "@docspace/shared/types";
 import type { default as TFilesFilter } from "@docspace/shared/api/files/filter";
@@ -88,6 +99,80 @@ const { FilesFilter, RoomsFilter } = api;
 // Module-level request guard used by fetchFilesImpl (moved verbatim from
 // FilesStore, where it was only referenced by fetchFiles).
 let requestCounter = 0;
+
+type TFetchAddress = { pathname: string; search: string; state: unknown };
+
+/**
+ * Whether a loaded room or folder belongs to the other section than the
+ * address it was opened at, decided before anything of it is committed. The
+ * room of a folder is read only when its privacy decides, and is handed on.
+ */
+async function checkSectionAddress(
+  self: FilesStore,
+  data: { current: TFolder; pathParts: TPathParts[] },
+  address: TFetchAddress,
+  controller: Nullable<AbortController>,
+): Promise<{
+  correction: string | null;
+  room: Nullable<TItem>;
+  /** A later fetchFiles has taken over; this one must commit nothing. */
+  isSuperseded: boolean;
+}> {
+  const { appsStore } = self;
+  const decision = {
+    pathname: address.pathname,
+    search: address.search,
+    folderId: data.current.id,
+    isPrivate: !!data.current.private,
+    isSectionAvailable: self.isPrivateRoomsSectionAvailable,
+    isRoomsAppOff:
+      !!appsStore &&
+      !appsStore.isInstalled("ai-rooms") &&
+      !appsStore.isInstalled("ai-forms"),
+    isDecided: !!(address.state as Nullable<Record<string, unknown>>)?.[
+      SECTION_DECIDED_STATE
+    ],
+  };
+
+  const roomPart = data.pathParts?.[1];
+  const isInRoom =
+    !!roomPart &&
+    String(roomPart.id) !== String(data.current.id) &&
+    (data.current.rootFolderType === FolderType.Rooms ||
+      data.current.rootFolderType === FolderType.Archive);
+  const privacyDecides =
+    getSectionAddressCorrection({ ...decision, isPrivate: true }) !==
+    getSectionAddressCorrection(decision);
+
+  const room: Nullable<TItem> =
+    !decision.isPrivate && isInRoom && privacyDecides
+      ? await api.files.getFolderInfo(
+          roomPart.id,
+          false,
+          undefined,
+          controller?.signal,
+        )
+      : null;
+
+  if (self.filesController !== controller)
+    return { correction: null, room, isSuperseded: true };
+
+  const current = window.DocSpace?.location ?? window.location;
+  if (
+    current.pathname !== address.pathname ||
+    current.search !== address.search
+  )
+    return { correction: null, room, isSuperseded: false };
+
+  return {
+    correction: getSectionAddressCorrection({
+      ...decision,
+      isPrivate: decision.isPrivate || !!room?.private,
+    }),
+    room,
+    isSuperseded: false,
+  };
+}
 
 // Network-fetch orchestration extracted from the FilesStore methods. These are
 // side-effectful actions (not computeds), so they are moved verbatim into free
@@ -176,9 +261,43 @@ export function fetchFilesImpl(
 
   let room: Nullable<TItem> = null;
 
+  const controller = self.filesController;
+  // Set when a corrected address or a newer fetch takes the loading over.
+  let isLoadingHandedOver = false;
+  const routerLocation = window.DocSpace?.location;
+  const address: TFetchAddress = {
+    pathname: (routerLocation ?? window.location).pathname,
+    search: (routerLocation ?? window.location).search,
+    state: routerLocation?.state,
+  };
+
   return api.files
     .getFolder(folderId as string, filterData, self.filesController.signal)
     .then(async (data) => {
+      const sectionCheck = await checkSectionAddress(
+        self,
+        data,
+        address,
+        controller,
+      );
+
+      if (sectionCheck.isSuperseded) {
+        isLoadingHandedOver = true;
+        return;
+      }
+
+      if (sectionCheck.correction) {
+        isLoadingHandedOver = true;
+        window.DocSpace.navigate(sectionCheck.correction, {
+          replace: true,
+          state: {
+            ...((address.state ?? {}) as Record<string, unknown>),
+            [SECTION_DECIDED_STATE]: true,
+          },
+        });
+
+        return;
+      }
       let newTotal = data.total;
 
       // fixed row loader if total and items length is different
@@ -240,10 +359,15 @@ export function fetchFilesImpl(
             data.current.roomType === RoomsType.FormRoom ||
             data.current.parentRoomType === FolderType.FormRoom;
 
+          // The address is settled by now: a private room opened under Rooms
+          // was moved to the section above.
           self.categoryType = getCategoryTypeByFolderTypeInSection(
             data.current.rootFolderType,
             data.current.parentId,
-            { roomType: isInFormRoom ? RoomsType.FormRoom : undefined },
+            {
+              roomType: isInFormRoom ? RoomsType.FormRoom : undefined,
+              isPrivate: isPrivateRoomsRoute(address.pathname),
+            },
           );
         }
       });
@@ -271,7 +395,8 @@ export function fetchFilesImpl(
             ? data.current
             : { ...folder, id: folder.id };
 
-          const { title, roomType } = folderInfo as TFolder & TPathParts;
+          const { title, roomType, folderType } = folderInfo as TFolder &
+            TPathParts;
 
           const isRootRoom =
             idx === 0 &&
@@ -285,7 +410,11 @@ export function fetchFilesImpl(
           const crumbTitle =
             isRootRoom && window.location.pathname.startsWith("/forms")
               ? i18n.t("Common:Forms")
-              : title;
+              : isRootRoom &&
+                  folderType === Rooms &&
+                  isPrivateRoomsRoute(address.pathname)
+                ? i18n.t("Common:Private")
+                : title;
 
           let shared: boolean | undefined;
           let quotaLimit: number | undefined;
@@ -297,7 +426,8 @@ export function fetchFilesImpl(
 
           if (idx === 1) {
             if (!isCurrentFolder) {
-              room = await api.files.getFolderInfo(folder.id);
+              room =
+                sectionCheck.room ?? (await api.files.getFolderInfo(folder.id));
 
               shared = room.shared;
               external = room.external;
@@ -494,6 +624,7 @@ export function fetchFilesImpl(
 
       if (axios.isCancel(err)) {
         console.log("Request canceled", err.message);
+        if (controller !== self.filesController) isLoadingHandedOver = true;
 
         throw err;
       }
@@ -538,6 +669,9 @@ export function fetchFilesImpl(
       }
     })
     .finally(() => {
+      // Spec: private-rooms/sidebar-section, "Section addresses are decided before the folder is shown".
+      if (isLoadingHandedOver) return;
+
       self.setIsLoadedFetchFiles(true);
 
       self.clientLoadingStore.setIsSectionHeaderLoading(false);
@@ -610,13 +744,23 @@ export function fetchRoomsImpl(
   self.roomsController = new AbortController();
   self.filesController = null;
 
+  const shownFolderId = self.selectedFolderStore.id;
+  const shownCategoryType = self.categoryType;
+
   // The Rooms/Forms split is enforced server-side by the room's folder type:
   // `searchArea=Active` never returns Form Filling Rooms, and the Forms
   // section requests `searchArea=Forms`. The filter (carrying searchArea)
   // maps directly to the request — no client-side room-type scoping needed.
+  // The Rooms/Private split is client-side: scopeRoomsRequest adds it.
+  const { signal } = self.roomsController;
+
+  // The scope depends on the Private section, which an SDK frame knows only
+  // once its configuration has arrived.
   const request = () =>
-    api.rooms
-      .getRooms(filterData, self.roomsController!.signal)
+    Promise.resolve(self.appsStore?.waitForFrameOptIn?.())
+      .then(() =>
+        api.rooms.getRooms(scopeRoomsRequest(self, filterData), signal),
+      )
       .then(async (data) => {
         if (!folderId) setSelectedNode([`${data.current.id}`]);
 
@@ -639,9 +783,14 @@ export function fetchRoomsImpl(
         }
 
         runInAction(() => {
-          self.categoryType = getCategoryTypeByFolderType(
+          self.categoryType = getCategoryTypeByFolderTypeInSection(
             data.current.rootFolderType,
             data.current.parentId,
+            {
+              isPrivate: isPrivateRoomsRoute(
+                (window.DocSpace?.location ?? window.location).pathname,
+              ),
+            },
           );
         });
 
@@ -655,6 +804,10 @@ export function fetchRoomsImpl(
             navigationPath: EMPTY_ARRAY,
             ...{ new: data.new },
           });
+
+          // Spec: private-rooms/sidebar-section, "Section titles and path labels"
+          if (self.categoryType === CategoryType.PrivateRooms)
+            setDocumentTitle(i18n.t("Common:Private"));
 
           const isEmptyList = data.folders.length === 0;
           if (filter && isEmptyList) {
@@ -694,10 +847,13 @@ export function fetchRoomsImpl(
           self.setFiles(EMPTY_ARRAY);
         });
 
-        if (clearFilter) {
-          if (clearSelection) {
-            self.setSelected("close");
-          }
+        // Spec: private-rooms/sidebar-section, "Info panel in the section".
+        const isListShown =
+          shownFolderId === data.current.id &&
+          shownCategoryType === self.categoryType;
+
+        if (clearFilter && (clearSelection || !isListShown)) {
+          self.setSelected("close");
         }
 
         setInfoPanelSelectedRoom(null);
@@ -752,6 +908,44 @@ export function fetchRoomsImpl(
   return request();
 }
 
+/**
+ * The copy of a rooms filter a list request sends: the Private section asks
+ * for private rooms only, and Rooms for none while that section exists.
+ */
+export const scopeRoomsRequest = (
+  self: FilesStore,
+  filter: TRoomsFilter,
+): TRoomsFilter =>
+  withRoomsRequestScope(
+    filter,
+    getRoomsRequestScope(
+      getCategoryType(window.DocSpace?.location ?? window.location),
+      filter.searchArea,
+      !!self.appsStore?.isPrivateRoomsSectionAvailable,
+    ),
+  );
+
+/** Reloads an open Rooms list when the Private section appears or goes away. */
+export function refetchRoomsListOnSectionChangeImpl(self: FilesStore) {
+  const { isRoomsFolder, isArchiveFolder } = self.treeFoldersStore;
+  if (!isRoomsFolder && !isArchiveFolder) return;
+
+  const categoryType = getCategoryType(
+    window.DocSpace?.location ?? window.location,
+  );
+  if (
+    categoryType !== CategoryType.Shared &&
+    categoryType !== CategoryType.Archive
+  )
+    return;
+
+  // The list changes membership, so a selected room may be gone from it.
+  // A cancelled request was superseded by a newer list request.
+  self
+    .fetchRooms(null, self.roomsFilter, true, false, true)
+    .catch(() => {});
+}
+
 export async function fetchMoreFilesImpl(self: FilesStore) {
   if (
     !self.hasMoreFiles ||
@@ -780,7 +974,9 @@ export async function fetchMoreFilesImpl(self: FilesStore) {
   else self.setFilter(newFilter as TFilesFilter);
 
   const newFilesData = isRooms
-    ? await api.rooms.getRooms(newFilter as TRoomsFilter)
+    ? await api.rooms.getRooms(
+        scopeRoomsRequest(self, newFilter as TRoomsFilter),
+      )
     : await api.files.getFolder(
         (newFilter as TFilesFilter).folder,
         newFilter as TFilesFilter,

@@ -37,18 +37,28 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 import type { TUser } from "@docspace/shared/api/people/types";
+import { ConflictResolveType } from "@docspace/shared/enums";
+import { ProgressBar } from "@onlyoffice/apps-ui-kit/components/progress-bar";
 
+import ConflictResolveDialog from "@/app/(personal-files)/_components/conflict-resolve-dialog";
+import LeaveRoomDialog from "@/app/(rooms)/_components/leave-room-dialog";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 
 import { usePrivateDialogsStore } from "../../_store/PrivateDialogsStore";
+import { usePrivateRoute } from "../../_hooks/usePrivateRoute";
 import RemoveUserConfirmationDialog from "./RemoveUserConfirmationDialog";
 import PrivateInvitePanel from "../invite-panel";
 import PrivateChangeOwnerDialog from "../owner-change/PrivateChangeOwnerDialog";
 import PrivateCreateRoomDialog from "../create-room/PrivateCreateRoomDialog";
 
 const PrivateDialogsInner: React.FC = () => {
+  const { t } = useTranslation(["Common"]);
+  const router = useRouter();
+  const privateRoute = usePrivateRoute();
   const dialogs = usePrivateDialogsStore();
   const docsUser = useDocsUserStore();
   const user = docsUser.user as TUser | null;
@@ -75,6 +85,31 @@ const PrivateDialogsInner: React.FC = () => {
         />
       ) : null}
 
+      {dialogs.reencryptPercent !== null ? (
+        <div data-testid="reencrypt-progress-bar">
+          <ProgressBar
+            percent={dialogs.reencryptPercent}
+            label={t("Common:ReEncryptingFiles")}
+          />
+        </div>
+      ) : null}
+
+      {dialogs.leaveRoom ? (
+        <LeaveRoomDialog
+          room={dialogs.leaveRoom.room}
+          onClose={dialogs.closeLeaveRoom}
+          currentUserId={user?.id}
+          onLeftOpenRoom={() => router.push(privateRoute("/private"))}
+          onTransferOwnership={(room) =>
+            dialogs.openChangeOwner({
+              roomId: Number(room.id),
+              roomOwnerId: room.createdBy?.id,
+              onChanged: dialogs.leaveRoom?.onOwnerChanged,
+            })
+          }
+        />
+      ) : null}
+
       {dialogs.changeOwner ? (
         <PrivateChangeOwnerDialog
           visible
@@ -93,6 +128,20 @@ const PrivateDialogsInner: React.FC = () => {
           room={dialogs.createEditRoom.room}
           onCreated={dialogs.createEditRoom.onCreated}
           onEdited={dialogs.createEditRoom.onEdited}
+        />
+      ) : null}
+      {dialogs.nameClash ? (
+        <ConflictResolveDialog
+          visible
+          withOverwrite={false}
+          conflictItems={dialogs.nameClash.names.map((title) => ({
+            title,
+            isFile: true,
+          }))}
+          onClose={() => dialogs.answerNameClash(false)}
+          onSubmit={(type) =>
+            dialogs.answerNameClash(type === ConflictResolveType.Duplicate)
+          }
         />
       ) : null}
     </>

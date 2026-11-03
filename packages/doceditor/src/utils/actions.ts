@@ -833,10 +833,6 @@ export async function getData(
         response.config.editorConfig.mode = "view";
       }
 
-      if (response.config.file.encrypted) {
-        response.config.editorConfig.canCoAuthoring = false;
-      }
-
       response.successAuth = successAuth;
       response.isSharingAccess = isSharingAccess;
 

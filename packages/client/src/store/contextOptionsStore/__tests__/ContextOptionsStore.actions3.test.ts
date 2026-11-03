@@ -35,7 +35,12 @@
 
 import { describe, it, expect, vi } from "vitest";
 
+import { RoomsType } from "@docspace/shared/enums";
+
 import { createTestContextOptionsStore, t } from "./testHarness";
+// After the harness, which mocks the toast module.
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import type { TDownloadTranslations } from "SRC_DIR/store/FilesActionsStore";
 
 const item = (over: Record<string, unknown> = {}) =>
   ({ id: 1, isFolder: false, fileExst: ".docx", ...over }) as never;
@@ -48,6 +53,49 @@ describe("ContextOptionsStore — action handler delegation (batch 6)", () => {
     });
     store.onClickDownload(item({ isFolder: true }), t);
     expect(downloadAction).toHaveBeenCalledTimes(1);
+  });
+
+  it("Folder download in a private room -> filesActionsStore.downloadEncryptedFolder", () => {
+    const downloadAction = vi.fn(async () => {});
+    const downloadEncryptedFolder = vi.fn(async () => {});
+    const store = createTestContextOptionsStore({
+      filesActionsStore: { downloadAction, downloadEncryptedFolder },
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+    const folder = item({ isFolder: true, fileExst: undefined });
+    store.onClickDownload(folder, t);
+    expect(downloadEncryptedFolder).toHaveBeenCalledWith(folder);
+    expect(downloadAction).not.toHaveBeenCalled();
+  });
+
+  it("Room downloaded: a private room is decrypted into a zip on the client", () => {
+    const downloadEncryptedFolder = vi.fn(async () => {});
+    const downloadFiles = vi.fn(async () => {});
+    const store = createTestContextOptionsStore({
+      filesActionsStore: { downloadEncryptedFolder, downloadFiles },
+    });
+    const room = item({ isFolder: true, private: true, fileExst: undefined });
+    store.onClickDownload(room, t);
+    expect(downloadEncryptedFolder).toHaveBeenCalledWith(room);
+    expect(downloadFiles).not.toHaveBeenCalled();
+  });
+
+  it("Room downloaded without decryption: a private room is requested as the server archive of its ciphertext", () => {
+    const downloadEncryptedFolder = vi.fn(async () => {});
+    const downloadFiles = vi.fn(async () => {});
+    const store = createTestContextOptionsStore({
+      filesActionsStore: { downloadEncryptedFolder, downloadFiles },
+    });
+    const room = item({
+      id: 7,
+      isFolder: true,
+      private: true,
+      roomType: RoomsType.CustomRoom,
+      fileExst: undefined,
+    });
+    store.onClickDownloadEncrypted(room, t);
+    expect(downloadFiles).toHaveBeenCalledWith([], [7], expect.anything());
+    expect(downloadEncryptedFolder).not.toHaveBeenCalled();
   });
 
   it("onClickDownload (file) -> settingsStore.openUrl", () => {
@@ -75,6 +123,48 @@ describe("ContextOptionsStore — action handler delegation (batch 6)", () => {
     });
     store.onClickDownloadEncrypted(item({ isFolder: true }), t);
     expect(downloadFiles).toHaveBeenCalledTimes(1);
+  });
+
+  it("Error text is localized", async () => {
+    const downloadAction = vi.fn(async () => {
+      throw new Error("decrypt pipeline broke");
+    });
+    const downloadFiles = vi.fn(async () => {
+      throw { response: { data: { error: { message: "Server says no" } } } };
+    });
+    const store = createTestContextOptionsStore({
+      filesActionsStore: { downloadAction, downloadFiles },
+    });
+
+    store.onClickDownload(item({ encrypted: true }), t);
+    store.onClickDownloadEncrypted(item({ isFolder: true }), t);
+
+    await vi.waitFor(() =>
+      expect(vi.mocked(toastr.error).mock.calls).toEqual([
+        ["Common:EncryptedOperationFailed"],
+        ["Server says no"],
+      ]),
+    );
+  });
+
+  it("Download without decryption fails", () => {
+    const downloadFiles = vi.fn(async () => {});
+    const store = createTestContextOptionsStore({
+      filesActionsStore: { downloadFiles },
+    });
+
+    store.onClickDownloadEncrypted(item({ isFolder: true }), t);
+
+    const translations = (
+      downloadFiles.mock.calls[0] as unknown as [
+        number[],
+        number[],
+        TDownloadTranslations,
+      ]
+    )[2];
+    expect(translations.errorMessage!(new Error("Network Error"))).toBe(
+      "Common:EncryptedOperationFailed",
+    );
   });
 
   it("onDownloadAllAction -> filesActionsStore.downloadAction", () => {

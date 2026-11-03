@@ -45,6 +45,8 @@ export type BetaBadgeProps = {
 	place: PlacesType;
 	mobilePlace?: PlacesType;
 	withOutFeedbackLink?: boolean;
+	/** Tooltip text shown in place of the default beta description; the feedback links follow it. */
+	description?: string;
 
 	withoutTooltip?: boolean;
 	dataTestId?: string;

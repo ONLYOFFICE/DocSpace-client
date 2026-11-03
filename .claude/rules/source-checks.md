@@ -49,6 +49,17 @@ offenders (both in ui-kit) were fixed in `docspace-ui-kit-react`. The
 list must only ever shrink, so it stays empty: a new mixed-indentation file
 fails the push rather than being added to it.
 
+## No positive tabIndex (tabindex.test.js)
+
+No `.js/.jsx/.ts/.tsx` may set a `tabIndex` above zero (`tabIndex={2}`,
+`tabIndex: 2`, `tabindex="2"`). A positive value jumps its element ahead of
+every `0` one whatever the DOM order, and ui-kit's focus trap keeps that order
+inside dialogs, as the browser does - so a dialog with a few of them sent Tab
+to its footer past its settings. Drop the value; if the element comes in the
+wrong place, move it in the markup. `tabindex-allowlist.json` freezes the
+`login` pages, management's configuration and the public room password form
+that still set one; it must only ever shrink (stale entries fail).
+
 ## Images (images.test.js)
 
 - Every image added under `packages/**` or `public/` must be

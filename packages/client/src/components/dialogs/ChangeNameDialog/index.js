@@ -207,7 +207,6 @@ const ChangeNameDialog = (props) => {
 					primary
 					onClick={onSaveClick}
 					isLoading={isSaving}
-					tabIndex={3}
 					isDisabled={
 						!isNameValid ||
 						!isSurnameValid ||
@@ -224,7 +223,6 @@ const ChangeNameDialog = (props) => {
 					scale
 					onClick={onClose}
 					isDisabled={isSaving}
-					tabIndex={4}
 					testId="dialog_change_name_cancel_button"
 				/>
 			</ModalDialog.Footer>

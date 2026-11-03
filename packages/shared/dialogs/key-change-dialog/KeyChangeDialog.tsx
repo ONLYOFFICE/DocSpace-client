@@ -214,7 +214,6 @@ const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
           onClick={onRefuse}
           size={ButtonSize.normal}
           label={t("Common:KeyChangedRefuse")}
-          tabIndex={1}
         />
         <Button
           scale
@@ -223,7 +222,6 @@ const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
           onClick={onAccept}
           size={ButtonSize.normal}
           label={t("Common:KeyChangedAccept")}
-          tabIndex={2}
         />
       </ModalDialog.Footer>
     </ModalDialog>

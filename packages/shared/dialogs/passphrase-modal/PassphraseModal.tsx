@@ -240,7 +240,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   isHovered
                   onClick={handleGeneratePassword}
                   dataTestId="generate_passphrase_link"
-                  tabIndex={1}
                 >
                   {t("Common:GenerateLogoButton")}
                 </Link>
@@ -286,7 +285,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 isAutoFocussed
                 autoComplete="new-password"
                 onKeyDown={handleKeyDown}
-                tabIndex={2}
               />
             </FieldContainer>
 
@@ -319,7 +317,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   isHovered
                   onClick={onForgotPassphrase}
                   dataTestId="forgot_passphrase_link"
-                  tabIndex={3}
                 >
                   {t("Common:ForgotPassphrase")}
                 </Link>
@@ -334,7 +331,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   isDisabled={isLoading}
                   onChange={(e) => setRememberDevice(e.target.checked)}
                   label={t("Common:RememberDeviceLabel")}
-                  tabIndex={4}
                 />
               </div>
             ) : null}
@@ -350,7 +346,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                     if (!isLoading && !isPasskeyUnlocking) onPasskeyUnlock();
                   }}
                   dataTestId="passkey_unlock_link"
-                  tabIndex={2}
                 >
                   {t("Common:PasskeyUnlockButton")}
                 </Link>
@@ -391,7 +386,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 }
                 autoComplete="new-password"
                 onKeyDown={handleKeyDown}
-                tabIndex={3}
               />
             </FieldContainer>
           )}
@@ -408,7 +402,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
           label={submitLabel ?? t("Common:ContinueButton")}
           isDisabled={isDisabled}
           isLoading={isLoading}
-          tabIndex={4}
         />
         <Button
           scale
@@ -417,7 +410,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
-          tabIndex={5}
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -153,7 +153,6 @@ export const RecoveryPhraseInputModal: React.FC<
             hasError={!!error}
             autoFocus
             fontSize={13}
-            tabIndex={1}
           />
         </div>
       </ModalDialog.Body>
@@ -168,7 +167,6 @@ export const RecoveryPhraseInputModal: React.FC<
           label={t("Common:ContinueButton")}
           isDisabled={isDisabled}
           isLoading={isLoading || isValidating}
-          tabIndex={2}
         />
         <Button
           scale
@@ -177,7 +175,6 @@ export const RecoveryPhraseInputModal: React.FC<
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
           isDisabled={isLoading || isValidating}
-          tabIndex={3}
         />
       </ModalDialog.Footer>
     </ModalDialog>

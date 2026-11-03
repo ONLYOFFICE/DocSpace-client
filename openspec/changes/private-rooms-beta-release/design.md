@@ -161,3 +161,22 @@ place:
 - The wording of `Common:PrivateRoomsBetaTitle` and
   `Common:PrivateRoomsBetaDescription`. Product may reword them; the
   behaviour does not change.
+
+## Local stand run (2026-11-03, before task 6.2)
+
+Not the staging run of task 6.2: local standalone stand (`localhost:8092`),
+client `release/v4.1.0` at `59e3090d4c9` served by the Vite dev server,
+DocSpace server 3.1.0, Document Server 10.0.2.5 (not the build of gate item
+0.1). Administrator holding one key.
+
+- With the browser's leftover `privateRooms` entry removed, Rooms shows the
+  Private item with its Beta badge; the badge tooltip is titled "Private
+  rooms" and the Keys management tab carries the badge too.
+- The tooltip glued the description to the bug-report sentence ("...safe.If
+  you have found a bug"); fixed in the shared BetaBadge (`2c2564cffcd`). The
+  support address was empty on this stand.
+- The administrator switched the Private app off in the apps settings: the
+  Private section went without a reload, the private room "Pirate room" was
+  listed in Rooms with its private badge, and the Keys management tab and
+  page stayed, also after a full load of `/profile/keys-management`. The app
+  was switched back on afterwards.

@@ -13,7 +13,7 @@ The system SHALL show the Keys management tab (Common:KeysManagement) in the pro
 - **THEN** no Keys management tab or route exists
 
 ### Requirement: Generate a new key
-The system SHALL let a user with no key generate one from the Keys management tab (Common:GenerateNewKey) or when choosing the Private room type: the user sets a passphrase, receives a recovery phrase, and the sealed envelope plus public key are registered on the server. Success is confirmed with Common:EncryptionKeyGenerated. The action SHALL NOT be offered while the user has a key.
+The system SHALL let a user with no key generate one from the Keys management tab (Common:GenerateNewKey) or when choosing the Private room type: the user sets a passphrase, receives a recovery phrase, and the sealed envelope plus public key are registered on the server. Success is confirmed with Common:EncryptionKeyGenerated. The action SHALL NOT be offered while the user has a key, nor while the user's key list is not known because it has not loaded or failed to load.
 
 #### Scenario: First key
 - **WHEN** a user without keys completes passphrase creation and acknowledges the recovery phrase
@@ -26,6 +26,10 @@ The system SHALL let a user with no key generate one from the Keys management ta
 #### Scenario: Key already exists
 - **WHEN** the user already has a key
 - **THEN** Keys management offers no way to generate another one
+
+#### Scenario: Key list could not be loaded
+- **WHEN** the user opens Keys management and the request for their key list fails
+- **THEN** Common:EncryptionKeysLoadFailed is shown with Common:TryAgain, no generate or import action is offered, and no key is registered until a reload of the list answers with an empty list
 
 ### Requirement: Passphrase strength gate
 The system SHALL require a new passphrase of at least 12 characters, show a strength meter with suggestions, and SHALL refuse passphrases that match a common pattern (keyboard rows, sequences, brand names), at key creation and at a passphrase change alike.
@@ -147,7 +151,7 @@ The system SHALL export a registered key as a JSON file named after the key fing
 - **THEN** a `docspace-key-<fingerprint>.json` file is downloaded
 
 ### Requirement: Import a key
-The system SHALL import a key from a previously exported JSON file (Common:ImportKey) for a user who has no key: the user picks the file, enters its passphrase, and the key is registered for this account and unlocked, confirming with Common:EncryptionKeyImported. Over HTTP the import SHALL be refused with Common:EncryptionRequiresHttps. The action SHALL NOT be offered while the user has a key.
+The system SHALL import a key from a previously exported JSON file (Common:ImportKey) for a user who has no key: the user picks the file, enters its passphrase, and the key is registered for this account and unlocked, confirming with Common:EncryptionKeyImported. Over HTTP the import SHALL be refused with Common:EncryptionRequiresHttps. The action SHALL NOT be offered while the user has a key, nor while the user's key list is not known.
 
 #### Scenario: Import
 - **WHEN** a user without a key selects a valid export file and enters the right passphrase
@@ -159,6 +163,10 @@ The system SHALL import a key from a previously exported JSON file (Common:Impor
 
 #### Scenario: Key already exists
 - **WHEN** the user already has a key
+- **THEN** Keys management offers no import
+
+#### Scenario: Key list not known
+- **WHEN** the user's key list has not loaded or failed to load
 - **THEN** Keys management offers no import
 
 ### Requirement: Change passphrase
@@ -241,6 +249,14 @@ The system SHALL show a dialog when a peer's public key differs from its pin, na
 #### Scenario: Peer named in the dialog
 - **WHEN** the key-change dialog opens for a room member whose key changed
 - **THEN** the dialog names the member by display name, as the skipped-member toast does; the user id stands in only when the name cannot be loaded
+
+#### Scenario: Peer name not readable
+- **WHEN** the server refuses the current user the profile of the peer whose key changed
+- **THEN** the dialog names the peer by user id, and no access-denied message, rights refresh or selection reset follows from the refused lookup
+
+#### Scenario: Next request after an answer
+- **WHEN** the user answers a key-change dialog while another request for a different user or key is waiting
+- **THEN** the waiting request opens as a new dialog with its own peer and fingerprints, and MUST NOT be answered by the same click, key press or key repeat that answered the previous one
 
 ### Requirement: Key dialogs are accessible and adapt to narrow screens
 The system SHALL present the passphrase, recovery-phrase, key-change, passphrase-change and reset dialogs as centred modals on wide screens and as aside panels on narrow screens; each dialog SHALL expose a dialog role and an accessible name, and every input and action SHALL have an accessible name, so screen readers announce them. The passphrase fields SHALL carry a visible label, which is their accessible name.
@@ -328,6 +344,10 @@ The system SHALL move the keyboard focus into a key dialog as it opens: to its f
 #### Scenario: Opened as an aside panel
 - **WHEN** a key dialog opens on a narrow screen
 - **THEN** the focus moves into the panel the same way
+
+#### Scenario: Queued key-change dialog opened
+- **WHEN** a waiting key-change request opens right after the user answered the previous one
+- **THEN** the new dialog itself has the focus and none of its actions is pre-selected, as for the first dialog
 
 ### Requirement: Key dialogs return the focus when they close
 The system SHALL return the keyboard focus to the control that opened a key dialog when the dialog closes, whether through its actions, the cross or Escape, as long as that control is still on the page; when a flow replaces one dialog with another, the control that opened the flow receives the focus when the last dialog closes.

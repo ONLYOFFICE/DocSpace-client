@@ -56,6 +56,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isQuotaError } from "@docspace/shared/utils/uploadErrors";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
+import type { TFile } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";
 
 import i18n from "../../i18n";
@@ -826,10 +827,10 @@ async function uploadEncryptedItem(
 
   const { chunkUploadSize, uploadThreadCount } = self.filesSettingsStore;
   const controller = new AbortController();
+  // The batch cancel marks every running row, so the row's own mark is the
+  // only signal; `uploaded` is also set by a later batch with nothing to start.
   const stopWatchingCancel = when(
-    () =>
-      self.uploaded ||
-      !!self.files.find((f) => f.uniqueId === uniqueId)?.cancel,
+    () => isRowCancelled(self, uniqueId),
     () => controller.abort(),
   );
   const setProgress = (percent: number, label?: string) => {
@@ -873,13 +874,19 @@ async function uploadEncryptedItem(
     );
 
     if (result.aborted) return;
+
+    // Spec: file-operations, "Cancelling an encrypted upload"
+    const storedAfterCancel =
+      result.fileId !== undefined && isRowCancelled(self, uniqueId);
+    if (storedAfterCancel) restoreRowCancelledLate(self, uniqueId, result);
+
     if (result.failedAt === "prepare") {
       runInAction(() => {
         item.encrypted = false;
       });
     }
 
-    if (result.fileId !== undefined) {
+    if (result.fileId !== undefined && !storedAfterCancel) {
       self.checkChunkUpload({
         t,
         res: {
@@ -938,6 +945,45 @@ async function uploadEncryptedItem(
     stopWatchingCancel();
     settleUploadQueue(self, t);
   }
+}
+
+function isRowCancelled(self: UploadDataStore, uniqueId: string) {
+  return !!self.files.find((f) => f.uniqueId === uniqueId)?.cancel;
+}
+
+/**
+ * A row cancelled after its file was stored: the cancel already freed the
+ * row's slot and dropped it from the history, so it comes back as uploaded
+ * without the queue bookkeeping of a finished upload.
+ */
+function restoreRowCancelledLate(
+  self: UploadDataStore,
+  uniqueId: string,
+  result: { fileId?: number | string; file?: TFile },
+) {
+  runInAction(() => {
+    const queued = self.files.find((f) => f.uniqueId === uniqueId);
+    if (!queued) return;
+    queued.cancel = false;
+    queued.action = "uploaded";
+    queued.percent = 100;
+    queued.fileId = result.fileId as number;
+    queued.fileInfo = result.file ?? null;
+    const history = self.uploadedFilesHistory.find(
+      (f) => f.uniqueId === uniqueId,
+    );
+    if (history) {
+      Object.assign(history, {
+        cancel: false,
+        action: "uploaded",
+        percent: 100,
+        fileId: queued.fileId,
+        fileInfo: queued.fileInfo,
+      });
+    } else {
+      self.uploadedFilesHistory = [...self.uploadedFilesHistory, { ...queued }];
+    }
+  });
 }
 
 /** A stored file whose access list could not be written keeps the error. */

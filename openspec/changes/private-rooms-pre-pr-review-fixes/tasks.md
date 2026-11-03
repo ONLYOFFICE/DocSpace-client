@@ -52,9 +52,9 @@ Every task first adds a test named after its scenario and shows that it fails on
   - `cd packages/shared && pnpm exec vitest run services/private-room`.
 
   Done 2026-11-03: the behaviour comes with 3.1, which takes the signal out of the wrap stage; both cases fail on the orchestrator before 3.1.
-- [ ] 3.3 Client store (`packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts:829` and `:875`, design decision 4):
+- [x] 3.3 Client store (`packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts:829` and `:875`, design decision 4):
   - the cancel watcher reacts to the row's `cancel` mark only;
-  - a successful result for a row cancelled late is shown as uploaded, with its cancel mark cleared, and goes through `checkChunkUpload`;
+  - a successful result for a row cancelled late is shown as uploaded, with its cancel mark cleared, and returns to the history without the queue bookkeeping of `checkChunkUpload`, which the cancel already did and which fails on the dropped history entry;
   - an `aborted` result leaves the row cancelled with no error text.
 
   Verify:

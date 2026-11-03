@@ -389,6 +389,68 @@ describe("UploadDataStore.startSessionFunc — encrypted upload through the shar
 
     expect(filesApi.abortUploadSession).toHaveBeenCalledWith(7, "session-1");
     expect(filesApi.finalizeUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0].cancel).toBe(true);
+    expect(store.files[0].error).toBeFalsy();
+  });
+
+  it("Cancelled after the file is stored", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload();
+    // The cancel lands while the uploader's access entry is written.
+    vi.mocked(filesApi.setFileEncryptionKeys).mockImplementationOnce(
+      async () => {
+        store.cancelCurrentUpload("enc-pending", t);
+        return undefined as never;
+      },
+    );
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.abortUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0]).toMatchObject({
+      cancel: false,
+      action: "uploaded",
+      fileId: 555,
+    });
+    expect(store.files[0].error).toBeFalsy();
+    const history = store.uploadedFilesHistory.filter(
+      (f) => f.uniqueId === "enc-pending",
+    );
+    expect(history).toHaveLength(1);
+    expect(history[0]).toMatchObject({ action: "uploaded", fileId: 555 });
+  });
+
+  it("a later batch that starts nothing does not abort a running encrypted upload", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload();
+    // Three chunks on one thread, so the upload is still sending when the
+    // later batch sets the queue as finished.
+    Object.assign(store.filesSettingsStore, {
+      chunkUploadSize: 1100,
+      uploadThreadCount: 1,
+    });
+    vi.mocked(filesApi.uploadChunkSequential).mockImplementation(async () => {
+      // What startUploadFiles does when the files it gets are all running.
+      store.uploaded = true;
+      return {
+        data: {
+          id: 555,
+          uploaded: true,
+          file: makeFileInfo({ id: 555, folderId: 7, version: 1 }),
+        },
+      } as never;
+    });
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.abortUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0]).toMatchObject({ action: "uploaded", fileId: 555 });
   });
 
   it("wipes the DEK when the upload session fails after encryption", async () => {

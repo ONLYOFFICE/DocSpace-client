@@ -82,7 +82,10 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
-import type { TInviteOutcome } from "@docspace/shared/services/private-room/room-member-flows";
+import {
+  sendPrivateRoomInvitations,
+  type TInviteOutcome,
+} from "@docspace/shared/services/private-room/room-member-flows";
 
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button/Button.enums";
@@ -658,15 +661,42 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         }
       }
 
-      const result = (await api.rooms.setRoomSecurity(
-        roomId,
-        data,
-      )) as SetRoomSecurityResult;
+      // Spec: private-rooms/sdk-surface, "SDK invitations into a private room are sent one invitee per request"
+      const privateSend = isPrivateRoom
+        ? await sendPrivateRoomInvitations(roomId, invitations, {
+            notify: data.notify,
+            message: data.message,
+          })
+        : null;
+      const result = privateSend
+        ? null
+        : ((await api.rooms.setRoomSecurity(
+            roomId,
+            data,
+          )) as SetRoomSecurityResult);
+      const responses = (
+        privateSend ? privateSend.responses : [result]
+      ) as (SetRoomSecurityResult | null)[];
+      const itemOf = (invitation: (typeof invitations)[number]) =>
+        inviteItems[invitations.indexOf(invitation)];
+      const refused = (privateSend?.refused ?? []).map(
+        ({ invitation, noKey }) => {
+          const item = itemOf(invitation);
+          return {
+            member: {
+              id: String(item.id ?? item.email),
+              displayName: item.displayName ?? item.email,
+            },
+            noKey,
+          };
+        },
+      );
 
-      const memberIds = invitations
+      const memberIds = (privateSend ? privateSend.accepted : invitations)
         .map((inv) => inv.id)
         .filter((id): id is string => typeof id === "string" && id.length > 0);
-      const showsResult = !!onInviteSubmitted && memberIds.length > 0;
+      const showsResult =
+        !!onInviteSubmitted && (memberIds.length > 0 || refused.length > 0);
 
       if (!showsResult) {
         setIsLoading(false);
@@ -676,11 +706,11 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         toastr.success(t("Common:UsersInvited"));
       }
 
-      if (result?.warning) {
-        toastr.warning(result.warning);
+      for (const response of responses) {
+        if (response?.warning) toastr.warning(response.warning);
       }
 
-      onMembersUpdated?.();
+      if (memberIds.length > 0 || !privateSend) onMembersUpdated?.();
 
       // Spec: private-rooms/sdk-surface, "Invite panel offers people only and reports the invitation result"
       if (showsResult) {
@@ -693,15 +723,22 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         }
 
         let outcome: TInviteOutcome | null = null;
-        try {
-          outcome = await onInviteSubmitted(memberIds, displayNames);
-        } catch (encryptError) {
-          toastr.error(encryptError as string | Error);
+        if (memberIds.length > 0) {
+          try {
+            outcome = await onInviteSubmitted(memberIds, displayNames);
+          } catch (encryptError) {
+            toastr.error(encryptError as string | Error);
+          }
         }
 
         setIsLoading(false);
         if (run !== sendRunRef.current) return;
-        if (outcome) setInviteOutcome(outcome);
+        if (refused.length > 0) {
+          setInviteOutcome({
+            ...(outcome ?? { granted: [], pending: [], skipped: [] }),
+            refused,
+          });
+        } else if (outcome) setInviteOutcome(outcome);
         else handleClose();
       }
     } catch (err) {
@@ -752,11 +789,15 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
     setAddUsersPanelVisible(false);
   };
 
+  const canInviteAgain =
+    !!inviteOutcome?.skipped.length || !!inviteOutcome?.refused?.length;
+
   const onInviteAgain = () => {
     if (!inviteOutcome) return;
-    const skippedIds = new Set(
-      inviteOutcome.skipped.map((member) => member.id),
-    );
+    const skippedIds = new Set([
+      ...inviteOutcome.skipped.map((member) => member.id),
+      ...(inviteOutcome.refused ?? []).map(({ member }) => member.id),
+    ]);
     setInviteItems(
       inviteItems.filter(
         (item) => typeof item.id === "string" && skippedIds.has(item.id),
@@ -1095,7 +1136,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
       <ModalDialog.Footer>
         {inviteOutcome ? (
           <>
-            {inviteOutcome.skipped.length ? (
+            {canInviteAgain ? (
               <Button
                 className="invite-again"
                 scale
@@ -1110,7 +1151,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
               className="close-button"
               scale
               size={ButtonSize.normal}
-              primary={!inviteOutcome.skipped.length}
+              primary={!canInviteAgain}
               onClick={handleClose}
               label={t("Common:CloseButton")}
               testId="invite_panel_close_button"

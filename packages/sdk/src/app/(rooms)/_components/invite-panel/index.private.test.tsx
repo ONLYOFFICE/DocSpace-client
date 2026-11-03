@@ -87,6 +87,10 @@ vi.mock("@docspace/shared/api", () => ({
   },
 }));
 
+vi.mock("@docspace/shared/api/rooms", () => ({
+  setRoomSecurity: mocks.setRoomSecurity,
+}));
+
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: mocks.toastr,
 }));
@@ -271,8 +275,48 @@ describe("InvitePanel of a private room", () => {
     expect(find("invite_panel_result")).toBeNull();
     await click("invite_panel_send_button");
 
+    expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(3);
+    expect(mocks.setRoomSecurity.mock.calls[2][1].invitations).toEqual([
+      { id: "dan", access: ShareAccessRights.Editing },
+    ]);
+  });
+
+  it("One invitee has never registered a key", async () => {
+    mocks.setRoomSecurity.mockImplementation(
+      async (_id: number, data: { invitations: { id: string }[] }) => {
+        if (data.invitations[0].id === "dan") {
+          throw Object.assign(new Error("403"), { response: { status: 403 } });
+        }
+        return {};
+      },
+    );
+    const onInviteSubmitted = vi.fn(async () => ({
+      granted: [{ id: "bob", displayName: "Bob" }],
+      pending: [],
+      skipped: [],
+    }));
+    const { onClose } = await renderPanel({
+      isPrivateRoom: true,
+      onBeforeSubmit: async () => true,
+      onInviteSubmitted,
+    });
+
+    await click("add_bob_and_dan");
+    await click("invite_panel_send_button");
+
     expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(2);
-    expect(mocks.setRoomSecurity.mock.calls[1][1].invitations).toEqual([
+    expect(onInviteSubmitted).toHaveBeenCalledWith(["bob"], expect.anything());
+    expect(find("invite_panel_result_granted")?.textContent).toContain("Bob");
+    expect(find("invite_panel_result_refused")?.textContent).toContain(
+      "Common:EncryptedInviteNoKey",
+    );
+    expect(mocks.toastr.error).not.toHaveBeenCalled();
+    expect(onClose).not.toHaveBeenCalled();
+
+    await click("invite_panel_invite_again_button");
+    await click("invite_panel_send_button");
+
+    expect(mocks.setRoomSecurity.mock.calls[2][1].invitations).toEqual([
       { id: "dan", access: ShareAccessRights.Editing },
     ]);
   });

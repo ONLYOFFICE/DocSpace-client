@@ -193,6 +193,9 @@ export type TInviteRewrapProgress = {
   alert?: boolean;
 };
 
+/** An invitee the server refused; `noKey` when it answered 403. */
+export type TRefusedInvitee = { member: NewRoomMember; noKey: boolean };
+
 /** How an invitation ended for each invitee the re-wrap covered. */
 export type TInviteOutcome = {
   granted: NewRoomMember[];
@@ -200,6 +203,8 @@ export type TInviteOutcome = {
   skipped: SkippedRoomMember[];
   /** The re-wrap failed as a whole, so every invitee it covered is pending. */
   failed?: true;
+  /** Invitees the server refused, who never became members. */
+  refused?: TRefusedInvitee[];
 };
 
 const getInviteOutcome = (

@@ -178,6 +178,21 @@ describe("CreateEditRoomDialog of a private room", () => {
     expect(mocks.createRoom).not.toHaveBeenCalled();
   });
 
+  it("Key list failed to load", async () => {
+    await render({ isPrivate: true, resolveEncryptionKeys: async () => null });
+
+    await typeName("Vault");
+    await clickCreate();
+
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptionKeysLoadFailed",
+    );
+    expect(mocks.toastr.error).not.toHaveBeenCalledWith(
+      "Common:EncryptionKeysRequiredForPrivateRoom",
+    );
+    expect(mocks.createRoom).not.toHaveBeenCalled();
+  });
+
   it("creates the private room once the keys are confirmed", async () => {
     await render({
       isPrivate: true,

@@ -45,8 +45,11 @@ type TConfirmProps = {
   onConfirm: () => void;
   onCancel: () => void;
 };
-type TKeyFlowOptions = { onError: () => void };
-type TDialogProps = { resolveEncryptionKeys?: () => Promise<boolean> };
+type TKeyFlowOptions = { onError: () => void; hasExistingKeys?: boolean };
+type TDialogProps = {
+  hasEncryptionKeys?: boolean;
+  resolveEncryptionKeys?: () => Promise<boolean | null>;
+};
 
 const mocks = vi.hoisted(() => ({
   confirm: null as TConfirmProps | null,
@@ -138,6 +141,31 @@ describe("PrivateCreateRoomDialog", () => {
     expect(mocks.confirm?.visible ?? false).toBe(false);
     expect(mocks.requestKey).not.toHaveBeenCalled();
     expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it("Key list still loading", () => {
+    mocks.keysLoaded = false;
+    mocks.identity.keys = null;
+    open();
+
+    expect(mocks.dialog?.hasEncryptionKeys).toBe(true);
+    expect(mocks.keyFlow?.hasExistingKeys).toBe(true);
+  });
+
+  it("Key list known to be empty", () => {
+    open();
+
+    expect(mocks.dialog?.hasEncryptionKeys).toBe(false);
+    expect(mocks.keyFlow?.hasExistingKeys).toBe(false);
+  });
+
+  it("reports an unknown key list when the save-time load fails", async () => {
+    mocks.keysLoaded = false;
+    mocks.identity.keys = null;
+    mocks.identity.loadKeys.mockImplementation(async () => {});
+    open();
+
+    await expect(mocks.dialog!.resolveEncryptionKeys!()).resolves.toBeNull();
   });
 
   it("Plain HTTP origin", () => {

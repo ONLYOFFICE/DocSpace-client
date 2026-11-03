@@ -43,10 +43,7 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import { useEncryption } from "@docspace/shared/context/encryption";
 import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
 import { usePrivateRoomKeyGate } from "@docspace/shared/hooks/usePrivateRoomKeyGate";
-import {
-  hasPrivateRoomSecureContext,
-  resolvePrivateRoomKeys,
-} from "@docspace/shared/services/private-room/create-room-gate";
+import { hasPrivateRoomSecureContext } from "@docspace/shared/services/private-room/create-room-gate";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import CreateEditRoomDialog, {
@@ -79,6 +76,8 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
 
   const hasKeys = identityStore.hasKeys;
   const { keysLoaded } = useEncryption();
+  // Spec: private-rooms/sdk-surface, "Private room creation waits for a known key list"
+  const mayHoldKey = !keysLoaded || hasKeys;
 
   const isCreation = !room;
   const canCreate = !isCreation || hasPrivateRoomSecureContext();
@@ -93,18 +92,18 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
     t,
     userId,
     accountLabel: user?.email,
-    hasExistingKeys: hasKeys,
+    hasExistingKeys: mayHoldKey,
     refreshKeysFromServer,
     onKeyGenerationCancelled: onClose,
     onClose,
   });
 
+  // null: the list could not be loaded, so whether a key exists is unknown.
   const resolveEncryptionKeys = React.useCallback(async () => {
-    const keys = await resolvePrivateRoomKeys(identityStore.keys, async () => {
-      await identityStore.loadKeys();
-      return identityStore.keys;
-    });
-    return keys !== null;
+    if (identityStore.keys?.length) return true;
+    await identityStore.loadKeys();
+    if (identityStore.keys === null) return null;
+    return identityStore.keys.length > 0;
   }, [identityStore]);
 
   // Spec: private-rooms/sdk-surface, "Private room creation gate"
@@ -144,7 +143,7 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
           onClose={onClose}
           room={room}
           isPrivate
-          hasEncryptionKeys={hasKeys}
+          hasEncryptionKeys={mayHoldKey}
           onRequestCreateKeys={keyGate.offerKeyGeneration}
           resolveEncryptionKeys={resolveEncryptionKeys}
           onRoomCreated={onCreated}

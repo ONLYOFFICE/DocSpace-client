@@ -132,7 +132,8 @@ export type CreateEditRoomDialogProps = {
   hasEncryptionKeys?: boolean;
   onRequestCreateKeys?: () => void;
   /** Whether the user has keys, asking the server again when none are cached. */
-  resolveEncryptionKeys?: () => Promise<boolean>;
+  /** Re-checks the keys on save; null when the key list could not be loaded. */
+  resolveEncryptionKeys?: () => Promise<boolean | null>;
 };
 
 const CreateEditRoomDialog = ({
@@ -391,6 +392,11 @@ const CreateEditRoomDialog = ({
           const hasKeys = resolveEncryptionKeys
             ? await resolveEncryptionKeys()
             : hasEncryptionKeys;
+          if (hasKeys === null) {
+            setIsLoading(false);
+            toastr.error(t("Common:EncryptionKeysLoadFailed"));
+            return;
+          }
           if (!hasKeys) {
             setIsLoading(false);
             toastr.error(t("Common:EncryptionKeysRequiredForPrivateRoom"));

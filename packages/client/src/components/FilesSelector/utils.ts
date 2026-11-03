@@ -33,12 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import {
-  TFileSecurity,
-  TFolderSecurity,
-} from "@docspace/shared/api/files/types";
-import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-
 import { FilesSelectorFilterTypes, RoomsType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -98,58 +92,6 @@ export const getAcceptButtonLabel = (
   if (filterParam) return t("Common:SaveButton");
 
   return t("Common:SaveHereButton");
-};
-
-export const getIsDisabled = (
-  isFirstLoad: boolean,
-  isSelectedParentFolder: boolean,
-  sameId?: boolean,
-  isRooms?: boolean,
-  isRoot?: boolean,
-  isCopy?: boolean,
-  isMove?: boolean,
-  isRestoreAll?: boolean,
-  isRequestRunning?: boolean,
-  security?: TFileSecurity | TFolderSecurity | TRoomSecurity,
-  filterParam?: string,
-  isFileSelected?: boolean,
-  includeFolder?: boolean,
-  isRestore?: boolean,
-  isDisabledFolder?: boolean,
-  isInsidePrivateRoom?: boolean,
-  sourceIsPrivate?: boolean,
-) => {
-  if (isFirstLoad) return true;
-  if (isRequestRunning) return true;
-  if (isDisabledFolder) return true;
-  if (filterParam) return !isFileSelected;
-  if (sameId && !isCopy) return true;
-  if (sameId && isCopy && includeFolder) return true;
-  if (isRooms) return true;
-  if (isRoot) return true;
-  if (isSelectedParentFolder) return true;
-  if (
-    (isMove || isCopy || isRestore || isRestoreAll) &&
-    !sourceIsPrivate &&
-    isInsidePrivateRoom
-  )
-    return true;
-  if (isCopy) {
-    if (sourceIsPrivate && isInsidePrivateRoom) {
-      return security && "Create" in security ? !security.Create : false;
-    }
-
-    return security && "CopyTo" in security
-      ? !security?.CopyTo || !security?.Create
-      : !security?.Copy;
-  }
-  if (isMove || isRestoreAll || isRestore) {
-    return security && "MoveTo" in security
-      ? !security?.MoveTo || !security?.Create
-      : !security?.Move;
-  }
-
-  return false;
 };
 
 const ORDINARY_TARGET_ROOM_TYPES = [

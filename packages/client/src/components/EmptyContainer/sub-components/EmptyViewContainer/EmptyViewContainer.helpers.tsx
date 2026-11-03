@@ -111,6 +111,7 @@ export const getDescription = (
   >,
   isFormsScope: boolean = false,
   filterFolderType: Nullable<number[]> = null,
+  isPrivateScope: boolean = false,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
@@ -123,6 +124,7 @@ export const getDescription = (
       security,
       isFormsScope,
       filterFolderType,
+      isPrivateScope,
     );
 
   if (isFolder)
@@ -150,13 +152,20 @@ export const getTitle = (
   rootFolderType: Nullable<FolderType>,
   isFormsScope: boolean = false,
   isPublicRoom: boolean = false,
+  isPrivateScope: boolean = false,
 ): string => {
   const isNotAdmin = isUser(access);
 
   if (isRootEmptyPage && isPublicRoom) return t("Common:EmptyScreenFolder");
 
   if (isRootEmptyPage)
-    return getRootTitle(t, access, rootFolderType, isFormsScope);
+    return getRootTitle(
+      t,
+      access,
+      rootFolderType,
+      isFormsScope,
+      isPrivateScope,
+    );
 
   if (isFolder)
     return getFolderTitle(
@@ -213,6 +222,7 @@ export const getOptions = (
   isAiChatAvailable: boolean = false,
   isTemplateGalleryAvailable: boolean = false,
   vectorizationEnabled: boolean = true,
+  isPrivateScope: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -507,6 +517,10 @@ export const getOptions = (
   if (isRootEmptyPage) {
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
+      // Spec: private-rooms/sidebar-section, "Section empty state"
+      .with([FolderType.Rooms, P.when(() => isPrivateScope), P._], () =>
+        access === ShareAccessRights.None ? [createRoom] : [],
+      )
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,
         inviteRootRoom,
@@ -530,9 +544,11 @@ export const getOptions = (
       ])
       .with([FolderType.Archive, ShareAccessRights.None, P._], () => [
         {
-          ...actions.onGoToShared(),
+          ...(isPrivateScope ? actions.onGoToPrivate() : actions.onGoToShared()),
           icon: <FolderIcon />,
-          description: t("Common:GoToMyRooms"),
+          description: isPrivateScope
+            ? t("Common:GoToSection", { sectionName: t("Common:Private") })
+            : t("Common:GoToMyRooms"),
           key: "empty-view-goto-shared",
         },
       ])

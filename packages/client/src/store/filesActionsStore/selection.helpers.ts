@@ -39,6 +39,7 @@ import {
   markAsRead,
   createFolder,
   deleteFilesFromRecent,
+  getFolderInfo,
 } from "@docspace/shared/api/files";
 import {
   FileAction,
@@ -57,12 +58,14 @@ import {
 } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import { createLoader } from "@docspace/shared/utils/createLoader";
+import { isFolderEntry } from "@docspace/shared/services/private-room/upload-target";
 import api from "@docspace/shared/api";
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { convertToTree } from "./helpers";
 import type { TTreeNode, TUploadTreeFile } from "./helpers";
+import type { TUploadTarget } from "../uploadDataStore/helpers";
 import type FilesActionStore from "../FilesActionsStore";
 import type { TActionItem, TOperationName } from "../FilesActionsStore";
 
@@ -184,11 +187,34 @@ self: FilesActionStore,
 };
 
 
+type TRoomQuota = { quotaLimit?: number; usedSpace?: number };
+
+/**
+ * The room whose quota an upload into `target` counts against: the open one
+ * as the folder store holds it, or another room loaded by its id.
+ */
+const targetRoomForQuota = async (
+  self: FilesActionStore,
+  target: TUploadTarget,
+): Promise<TRoomQuota | null> => {
+  if (target.encryptionRoomId === null) return null;
+
+  const openRoom =
+    self.selectedFolderStore.navigationPath.find((r) => r.isRoom) ??
+    self.selectedFolderStore.getSelectedFolder();
+  if (openRoom && String(openRoom.id) === String(target.encryptionRoomId)) {
+    return openRoom;
+  }
+
+  // A room's folder info carries its quota; TFolder does not declare it.
+  return (await getFolderInfo(target.encryptionRoomId)) as TRoomQuota;
+};
+
 export const createFoldersTreeImpl = async (
 self: FilesActionStore,
   t: TTranslation,
   files: TUploadTreeFile[] | Record<string, TUploadTreeFile>,
-  folderId?: number | string | null,
+  target: TUploadTarget,
   dragged?: boolean,
 
 )=> {
@@ -198,15 +224,21 @@ self: FilesActionStore,
   const { setPrimaryProgressBarData } =
     self.uploadDataStore.primaryProgressDataStore;
 
-  const roomFolder =
-    self.selectedFolderStore.navigationPath.find((r) => r.isRoom) ??
-    self.selectedFolderStore.getSelectedFolder();
+  const roomFolder = await targetRoomForQuota(self, target);
 
-  const withoutHiddenFiles = Object.values(files).filter((f) => {
+  let withoutHiddenFiles = Object.values(files).filter((f) => {
     const isHidden = /(^|\/)\.[^\/\.]/g.test(f.name);
 
     return !isHidden;
   });
+
+  if (target.isPrivate) {
+    const fileEntries = withoutHiddenFiles.filter((f) => !isFolderEntry(f));
+    if (fileEntries.length !== withoutHiddenFiles.length) {
+      toastr.warning(t("Common:FolderUploadNotSupportedInPrivateRoom"));
+      withoutHiddenFiles = fileEntries;
+    }
+  }
 
   // Instructions and Knowledge rooms are flat, and an Instructions room
   // holds Markdown only: a dropped or picked folder, or another format, is
@@ -267,7 +299,7 @@ self: FilesActionStore,
     }
   }
 
-  const toFolderId = folderId || self.selectedFolderStore.id;
+  const toFolderId = target.folderId;
 
   if (withoutHiddenFiles.length) {
     setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });

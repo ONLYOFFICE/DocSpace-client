@@ -19,6 +19,9 @@ pnpm test:store                # only client store tests (src/store, incl. Files
 # Unit tests (sdk package, Vitest)
 pnpm test:sdk
 
+# Unit tests (doceditor package, Vitest; __tests__/ there is Playwright E2E)
+pnpm test:doceditor
+
 # Run single unit test file
 cd packages/shared && pnpm vitest run path/to/file.test.ts
 cd packages/client && pnpm exec vitest run src/store/filesStore
@@ -220,8 +223,8 @@ failure aborts the push:
    license-header and dependency checks (translation-completeness suites are
    skipped here, so a green push does **not** mean locales are complete)
 2. one `nx run-many -t tsc lint test --parallel=3` over the six packages —
-   type checking and Biome for all of them, unit tests for shared, client and
-   sdk (incl. store tests)
+   type checking and Biome for all of them, unit tests for shared, client
+   (incl. store tests), sdk and doceditor
 
 `tsc`, `lint` and `test` are cached by Nx; their inputs are the named inputs
 in `nx.json`. Each reruns when its own package changed (minus E2E screenshots
@@ -236,11 +239,11 @@ about three minutes, a push with nothing changed seconds. A new import of
 another root `public/` file into code or tests must be added to those inputs,
 or the cache hides it.
 
-The manual `pnpm run tsc`, `lint`, `test`, `test:client` and `test:sdk` go
-through the same cache and replay a stored result when nothing changed. Nx
-prints only the output of failed tasks. To debug a blocked push, run the
-failing task on its own; `pnpm nx reset` drops the cache if a result looks
-stale. Never bypass the gate with `git push --no-verify`.
+The manual `pnpm run tsc`, `lint`, `test`, `test:client`, `test:sdk` and
+`test:doceditor` go through the same cache and replay a stored result when
+nothing changed. Nx prints only the output of failed tasks. To debug a blocked
+push, run the failing task on its own; `pnpm nx reset` drops the cache if a
+result looks stale. Never bypass the gate with `git push --no-verify`.
 
 CI lives in Gitea Actions (`.gitea/workflows/frontend-common-tests.yaml`) but
 is **manual-dispatch only** — there is no automatic PR/push CI, so the
@@ -279,6 +282,7 @@ the translation skills use that comment as context.
 | `.claude/rules/link-preview.md` | `packages/client/index.html`, `packages/shared/utils/link-preview.ts`, `packages/shared/components/link-preview-meta/**`, `packages/login/src/app/link-preview/**` |
 | `.claude/rules/access-matrix.md` | access rules for user types and room roles, and their specs |
 | `.claude/rules/dashboard-matrix.md` | `packages/client/src/pages/Dashboard/**`, `dashboard-appearance.spec.ts`, its screenshots |
+| `.claude/rules/private-rooms.md` | private-room / encryption code, `openspec/**` — OpenSpec specs and workflow for the feature |
 | `.claude/rules/pnpm.md` | `package.json`, `pnpm-workspace.yaml`, Dockerfiles, CI workflows |
 | `.claude/rules/claude-settings.md` | `.claude/settings*.json` |
 | `.claude/rules/vscode-tasks.md` | `.vscode/**`, `frontend.code-workspace` |

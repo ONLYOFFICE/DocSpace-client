@@ -147,7 +147,7 @@ describe("useRecoverKeyFlow", () => {
   });
 
   describe("error message routing", () => {
-    it("shows InvalidRecoveryPhrase when the phrase matches NO key", async () => {
+    it("shows InvalidRecoveryPhrase when the phrase does not match the user's key", async () => {
       vi.mocked(unlockWithRecoveryPhrase).mockRejectedValue(
         new InvalidRecoveryPhraseError(),
       );
@@ -165,8 +165,7 @@ describe("useRecoverKeyFlow", () => {
         );
       });
       expect(captured.phrase?.error).toBe("Common:InvalidRecoveryPhrase");
-      // Every key was tried before declaring the phrase invalid.
-      expect(unlockWithRecoveryPhrase).toHaveBeenCalledTimes(3);
+      expect(unlockWithRecoveryPhrase).toHaveBeenCalledTimes(1);
     });
 
     it("shows the generic EncryptionError on non-recoverable failures (network/crypto throw)", async () => {
@@ -191,37 +190,11 @@ describe("useRecoverKeyFlow", () => {
   });
 
   describe("phrase unlock and re-encrypt", () => {
-    it("tries each key in turn until one matches the recovery phrase", async () => {
-      const keys = makeKeys(3);
-      // First two reject as InvalidRecoveryPhraseError, third succeeds.
-      vi.mocked(unlockWithRecoveryPhrase)
-        .mockRejectedValueOnce(new InvalidRecoveryPhraseError())
-        .mockRejectedValueOnce(new InvalidRecoveryPhraseError())
-        .mockResolvedValueOnce(
-          // biome-ignore lint/suspicious/noExplicitAny: test mock
-          dummyKeyPair as any,
-        );
-      render(
-        <Harness
-          userId="42"
-          encryptionKeys={keys}
-          refreshKeysFromServer={vi.fn()}
-        />,
-      );
-      act(() => latest.request());
-      await act(async () => {
-        await (captured.phrase!.onSubmit as (p: string) => Promise<void>)(
-          "twelve words",
-        );
-      });
-
-      expect(unlockWithRecoveryPhrase).toHaveBeenCalledTimes(3);
-      // Advanced to next step → the matched key won.
-      expect(captured.passphrase).not.toBeNull();
-    });
-
-    it("stops trying once a key matches (does NOT keep iterating after success)", async () => {
-      const keys = makeKeys(5);
+    it("Own key with leftover envelopes: recovery tries only the key with the newer date", async () => {
+      const keys = [
+        { ...makeKeys(1)[0], id: "new", publicKey: "pub-new", date: "2026-10-01T00:00:00" },
+        { ...makeKeys(1)[0], id: "old", publicKey: "pub-old", date: "2026-01-01T00:00:00" },
+      ];
       vi.mocked(unlockWithRecoveryPhrase).mockResolvedValueOnce(
         // biome-ignore lint/suspicious/noExplicitAny: test mock
         dummyKeyPair as any,
@@ -241,16 +214,23 @@ describe("useRecoverKeyFlow", () => {
       });
 
       expect(unlockWithRecoveryPhrase).toHaveBeenCalledTimes(1);
+      expect(vi.mocked(unlockWithRecoveryPhrase).mock.calls[0][0]).toEqual(
+        expect.objectContaining({ publicKey: "pub-new" }),
+      );
+      expect(captured.passphrase).not.toBeNull();
     });
 
-    it("re-encrypts the MATCHED key (not always keys[0])", async () => {
-      const keys = makeKeys(3);
-      vi.mocked(unlockWithRecoveryPhrase)
-        .mockRejectedValueOnce(new InvalidRecoveryPhraseError())
-        .mockResolvedValueOnce(
-          // biome-ignore lint/suspicious/noExplicitAny: test mock
-          dummyKeyPair as any,
-        );
+
+    it("re-encrypts the selected key in place", async () => {
+      const keys = [
+        { ...makeKeys(1)[0], id: "old", date: "2026-01-01T00:00:00" },
+        { ...makeKeys(1)[0], id: "new", date: "2026-10-01T00:00:00" },
+        { ...makeKeys(1)[0], id: "older", date: "2025-01-01T00:00:00" },
+      ];
+      vi.mocked(unlockWithRecoveryPhrase).mockResolvedValueOnce(
+        // biome-ignore lint/suspicious/noExplicitAny: test mock
+        dummyKeyPair as any,
+      );
       vi.mocked(serializeIdentity).mockResolvedValue({
         publicKey: "pub-rotated",
         privateKeyEnc: "enc-rotated",
@@ -276,9 +256,8 @@ describe("useRecoverKeyFlow", () => {
         );
       });
 
-      // The matched key was the 2nd one (keys[1], id="2"), so PUT must target it.
       expect(updateEncryptionKeys).toHaveBeenCalledWith({
-        id: "2",
+        id: "new",
         publicKey: "pub-rotated",
         privateKeyEnc: "enc-rotated",
       });

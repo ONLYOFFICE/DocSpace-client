@@ -84,8 +84,10 @@ import {
 } from "@docspace/shared/utils/rooms";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
+import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
+import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 import {
   buildFolderUrl,
@@ -115,6 +117,7 @@ type ClientArticleSidebarProps = FolderIds & {
   // its section is left out of the sidebar altogether.
   roomsInstalled?: boolean;
   formsInstalled?: boolean;
+  privateRoomsSectionAvailable?: boolean;
   ensureAppsLoaded?: () => void;
   // The Trash item offers "Empty trash" while there is something to empty.
   trashIsEmpty?: boolean;
@@ -134,6 +137,7 @@ const ClientArticleSidebar = ({
   aiServicesEnabled = true,
   roomsInstalled = true,
   formsInstalled = true,
+  privateRoomsSectionAvailable = false,
   ensureAppsLoaded,
   trashIsEmpty = true,
   emptyTrashInProgress,
@@ -534,6 +538,33 @@ const ClientArticleSidebar = ({
       });
     }
 
+    // Spec: private-rooms/sidebar-section, "No new-items counter on the section item"
+    if (roomsFolder && privateRoomsSectionAvailable) {
+      mainItems.push({
+        id: "private-rooms",
+        label: t("Common:Private"),
+        icon: CatalogPrivateReactSvgUrl,
+        ...nav(searchAreaUrl("/private/filter", RoomSearchArea.Active)),
+        badgeComponent: (
+          <BetaBadge
+            place="right-start"
+            description={t("Common:PrivateRoomsBetaDescription")}
+            dataTestId="private_rooms_beta_badge"
+          />
+        ),
+        children: [
+          {
+            id: "private-rooms-archive",
+            label: t("Common:Archive"),
+            icon: getCatalogIconUrlByType(FolderType.Archive),
+            ...nav(
+              searchAreaUrl("/private/archived/filter", RoomSearchArea.Archive),
+            ),
+          },
+        ],
+      });
+    }
+
     // The AI sections close the apps, while the portal has AI switched on
     // (the server only serves their roots then). "AI rooms" holds the
     // Instructions rooms, Knowledge rooms and AI projects (`FolderType.AiHub`)
@@ -620,6 +651,7 @@ const ClientArticleSidebar = ({
     aiServicesEnabled,
     roomsInstalled,
     formsInstalled,
+    privateRoomsSectionAvailable,
     recentFolderId,
     favoritesFolderId,
     recycleBinFolderId,
@@ -668,6 +700,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
     aiServicesEnabled: settingsStore.aiServicesEnabled,
     roomsInstalled: appsStore.isInstalled("ai-rooms"),
     formsInstalled: appsStore.isInstalled("ai-forms"),
+    privateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
     ensureAppsLoaded: appsStore.ensureLoaded,
     trashIsEmpty: filesStore.trashIsEmpty,
     emptyTrashInProgress: filesActionsStore.emptyTrashInProgress,

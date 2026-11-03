@@ -68,6 +68,7 @@ import { TRoom, TWatermark } from "@docspace/shared/api/rooms/types";
 import { addEntityMcpServer } from "@docspace/shared/api/ai";
 import { startDbSync } from "@docspace/shared/api/rooms";
 import { DbSyncService } from "@docspace/shared/services/db-sync.service";
+import { resolvePrivateRoomKeys } from "@docspace/shared/services/private-room/create-room-gate";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
@@ -606,17 +607,17 @@ class CreateEditRoomStore {
 
     if (isPrivateRoom) {
       const userStore = this.filesStore!.userStore;
-      let keys = userStore?.encryptionKeys;
+      const { keys, fetchFailed } = await resolvePrivateRoomKeys(
+        userStore?.encryptionKeys,
+        () => userStore?.getEncryptionKeys?.(),
+      );
 
-      if (!keys || keys.length === 0) {
-        try {
-          keys = (await userStore?.getEncryptionKeys?.()) ?? null;
-        } catch {
-          keys = null;
-        }
+      if (fetchFailed) {
+        toastr.error(t("Common:EncryptionKeysLoadFailed"));
+        return;
       }
 
-      if (!keys || keys.length === 0) {
+      if (!keys) {
         toastr.error(t("Common:EncryptionKeysRequiredForPrivateRoom"));
         return;
       }
@@ -847,12 +848,16 @@ class CreateEditRoomStore {
     setIsSectionBodyLoading(true);
 
     const isFormRoom = room.roomType === RoomsType.FormRoom;
+    const isPrivateRoom =
+      this.filesStore!.isPrivateRoomsSectionAvailable && room.private === true;
     const path = getCategoryUrl(
       isFormRoom
         ? CategoryType.Form
-        : room.rootFolderType === FolderType.AiHub
-          ? CategoryType.AiHubRoom
-          : CategoryType.SharedRoom,
+        : isPrivateRoom
+          ? CategoryType.PrivateRoom
+          : room.rootFolderType === FolderType.AiHub
+            ? CategoryType.AiHubRoom
+            : CategoryType.SharedRoom,
       room.id,
     );
 

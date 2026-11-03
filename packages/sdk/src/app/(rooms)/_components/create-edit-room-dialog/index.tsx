@@ -131,6 +131,9 @@ export type CreateEditRoomDialogProps = {
   isPrivate?: boolean;
   hasEncryptionKeys?: boolean;
   onRequestCreateKeys?: () => void;
+  /** Whether the user has keys, asking the server again when none are cached. */
+  /** Re-checks the keys on save; null when the key list could not be loaded. */
+  resolveEncryptionKeys?: () => Promise<boolean | null>;
 };
 
 const CreateEditRoomDialog = ({
@@ -142,12 +145,14 @@ const CreateEditRoomDialog = ({
   isPrivate = false,
   hasEncryptionKeys = true,
   onRequestCreateKeys,
+  resolveEncryptionKeys,
 }: CreateEditRoomDialogProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = React.useContext(RoomsRefreshContext);
   const dialogsStore = useDialogsStore();
 
   const isEdit = !!room;
+  const isPrivateRoom = isPrivate || room?.private === true;
 
   const [name, setName] = React.useState(room?.title ?? "");
   const [tags, setTags] = React.useState<string[]>(room?.tags ?? []);
@@ -382,10 +387,21 @@ const CreateEditRoomDialog = ({
 
         onRoomEdited?.(room.id);
       } else {
-        if (isPrivate && !hasEncryptionKeys) {
-          setIsLoading(false);
-          onRequestCreateKeys?.();
-          return;
+        // Spec: private-rooms/sdk-surface, "Private room creation gate"
+        if (isPrivate) {
+          const hasKeys = resolveEncryptionKeys
+            ? await resolveEncryptionKeys()
+            : hasEncryptionKeys;
+          if (hasKeys === null) {
+            setIsLoading(false);
+            toastr.error(t("Common:EncryptionKeysLoadFailed"));
+            return;
+          }
+          if (!hasKeys) {
+            setIsLoading(false);
+            toastr.error(t("Common:EncryptionKeysRequiredForPrivateRoom"));
+            return;
+          }
         }
         const logo = await buildLogoParams();
         const newRoom = (await api.rooms.createRoom({
@@ -459,7 +475,7 @@ const CreateEditRoomDialog = ({
       >
         <ModalDialog.Header>
           {isEdit
-            ? isPrivate
+            ? isPrivateRoom
               ? t("Common:EditPrivateRoom")
               : t("Common:EditRoom")
             : isPrivate
@@ -574,7 +590,7 @@ const CreateEditRoomDialog = ({
               ) : null}
             </div>
 
-            {isEdit && isPrivate ? (
+            {isPrivateRoom ? (
               <div className={styles.privacyRow}>
                 <ReactSVG
                   className={styles.privacyIcon}

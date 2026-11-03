@@ -87,6 +87,37 @@ describe("FilesStore.wsModifyFolderCreate — characterization", () => {
   });
 });
 
+describe("FilesStore.wsModifyFolderCreate — rooms the user cannot read", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it("Administrator outside a new private room", async () => {
+    const store = createTestFilesStore({
+      selectedFolderStore: { id: 8 },
+      treeFoldersStore: { isFormsFolder: false },
+    });
+    const getFolderInfo = vi
+      .spyOn(api.files, "getFolderInfo")
+      .mockRejectedValue(Object.assign(new Error("403"), { response: { status: 403 } }));
+
+    await expect(
+      store.wsModifyFolderCreate({
+        type: "folder",
+        id: 100,
+        data: JSON.stringify({
+          id: 100,
+          title: "Private",
+          roomType: RoomsType.CustomRoom,
+          parentId: 8,
+          createdBy: { id: "other-user" },
+        }),
+      } as never),
+    ).resolves.not.toThrow();
+
+    expect(getFolderInfo).toHaveBeenCalledWith(100, true);
+    expect(store.folders).toEqual([]);
+  });
+});
+
 describe("FilesStore.wsModifyFolderCreate — form rooms", () => {
   afterEach(() => vi.restoreAllMocks());
 

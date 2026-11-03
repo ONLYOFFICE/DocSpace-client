@@ -698,7 +698,8 @@ class FilesStore {
   wsModifyFolderUpdate = async (opt?: TOptSocket) =>
     wsModifyFolderUpdateImpl(this, opt);
 
-  refreshFolder = (id: number | string) => refreshFolderImpl(this, id);
+  refreshFolder = (id: number | string, skipRedirect = false) =>
+    refreshFolderImpl(this, id, skipRedirect);
 
   wsModifyFolderDelete = (opt?: TOptSocket) =>
     wsModifyFolderDeleteImpl(this, opt);

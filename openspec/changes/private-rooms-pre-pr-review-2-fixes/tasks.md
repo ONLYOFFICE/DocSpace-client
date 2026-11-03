@@ -4,7 +4,7 @@ One task is one commit with its code, tests, locales, mocks and the tick (the "C
 
 ## 1. Live updates
 
-- [ ] 1.1 Read the room of a create-folder event and the folder of `refreshFolderImpl` in `packages/client/src/store/filesStore/socket.helpers.ts` with `skipRedirect`, and drop the event when the read is refused or fails (design decision 1). Verify: cases "Administrator outside a new private room" and "Private room updated" in the socket helper tests, asserting no forbidden handler call and an unchanged list; `cd packages/client && pnpm exec vitest run src/store/filesStore`.
+- [x] 1.1 Read the room of a create-folder event and the folder of `refreshFolderImpl` in `packages/client/src/store/filesStore/socket.helpers.ts` with `skipRedirect`, and drop the event when the read is refused or fails (design decision 1). Verify: cases "Administrator outside a new private room" and "Private room updated" in the socket helper tests, asserting no forbidden handler call and an unchanged list; `cd packages/client && pnpm exec vitest run src/store/filesStore`.
 
 ## 2. Key cache
 

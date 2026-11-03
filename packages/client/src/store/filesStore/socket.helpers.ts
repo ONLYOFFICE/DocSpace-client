@@ -223,14 +223,17 @@ export async function wsModifyFolderCreateImpl(
       return (self.roomCreated = false);
     }
 
-    const folderInfo = await api.files.getFolderInfo(folder.id);
-
-    console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
+    // Spec: private-rooms/sidebar-section, "Live updates skip rooms the user cannot read"
+    const folderInfo = await api.files
+      .getFolderInfo(folder.id, true)
+      .catch(() => null);
 
     if (!folderInfo || !isInSelectedFolder(folderInfo.parentId)) {
       console.log("Skip UNSUBSCRIBED folder creation");
       return;
     }
+
+    console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
 
     // Spec: private-rooms/sidebar-section, "Live updates respect the split"
     if (folder.roomType) {
@@ -302,13 +305,18 @@ export async function wsModifyFolderUpdateImpl(
     const folder = JSON.parse(opt?.data);
     if (!folder || !folder.id) return;
 
-    self.refreshFolder(folder.id);
+    // Spec: private-rooms/sidebar-section, "Live updates skip rooms the user cannot read"
+    self.refreshFolder(folder.id, true);
   }
 }
 
-export function refreshFolderImpl(self: FilesStore, id: number | string) {
+export function refreshFolderImpl(
+  self: FilesStore,
+  id: number | string,
+  skipRedirect = false,
+) {
   api.files
-    .getFolderInfo(id)
+    .getFolderInfo(id, skipRedirect)
     .then((response) => {
       const folderInfo = {
         isFolder: true,

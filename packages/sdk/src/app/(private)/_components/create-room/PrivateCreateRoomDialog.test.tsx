@@ -59,6 +59,7 @@ const mocks = vi.hoisted(() => ({
     loadKeys: vi.fn(),
   },
   toastr: { success: vi.fn(), error: vi.fn() },
+  keysLoaded: true,
 }));
 
 vi.mock("react-i18next", () => ({
@@ -66,7 +67,7 @@ vi.mock("react-i18next", () => ({
 }));
 
 vi.mock("@docspace/shared/context/encryption", () => ({
-  useEncryption: () => ({ keysLoaded: true }),
+  useEncryption: () => ({ keysLoaded: mocks.keysLoaded }),
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
@@ -120,12 +121,23 @@ describe("PrivateCreateRoomDialog", () => {
     mocks.dialog = null;
     mocks.identity.keys = [];
     mocks.identity.hasKeys = false;
+    mocks.keysLoaded = true;
   });
 
   afterEach(() => {
     act(() => root?.unmount());
     root = null;
     vi.unstubAllGlobals();
+  });
+
+  it("Key list failed to load", () => {
+    mocks.keysLoaded = false;
+    mocks.identity.keys = null;
+    const { onClose } = open();
+
+    expect(mocks.confirm?.visible ?? false).toBe(false);
+    expect(mocks.requestKey).not.toHaveBeenCalled();
+    expect(onClose).not.toHaveBeenCalled();
   });
 
   it("Plain HTTP origin", () => {

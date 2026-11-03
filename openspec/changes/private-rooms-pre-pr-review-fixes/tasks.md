@@ -20,12 +20,12 @@ Every task first adds a test named after its scenario and shows that it fails on
   - offer neither Generate nor Import.
 
   Verify: cases "Key list could not be loaded" and "Key list not known" in `keys-management/__tests__/KeysManagement.test.tsx`.
-- [ ] 1.4 SDK key store (`packages/sdk/src/app/(private)/_store/EncryptionIdentityStore.tsx`):
+- [x] 1.4 SDK key store (`packages/sdk/src/app/(private)/_store/EncryptionIdentityStore.tsx`):
   - on a load error, keep the previous `keys` and set only `loadError`;
   - in `_store/EncryptionShell.tsx`, report `keysLoaded` only after a successful load.
 
   Verify:
-  - case "Key list failed to load" (no key-generation prompt, the identity not locked) in a new `_store/__tests__/EncryptionIdentityStore.test.ts` and in `_components/create-room/PrivateCreateRoomDialog.test.tsx`;
+  - case "Key list failed to load" (no key-generation prompt, the identity not locked) in a new `_store/EncryptionIdentityStore.test.tsx` (co-located, as the other store tests there) and in `_components/create-room/PrivateCreateRoomDialog.test.tsx`;
   - `cd packages/sdk && pnpm exec vitest run "src/app/(private)"`.
 
 ## 2. The SDK private pages keep the host opt-in (review H3)

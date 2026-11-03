@@ -71,10 +71,12 @@ class EncryptionIdentityStore {
         this.keys = keys ?? [];
       });
     } catch (error) {
+      // A failed load is not an empty list: the keys known before stay, and
+      // a list never loaded stays unknown.
+      // Spec: sdk-surface, "Private room creation gate"
       runInAction(() => {
         this.loadError =
           error instanceof Error ? error : new Error(String(error));
-        this.keys = [];
       });
     } finally {
       runInAction(() => {

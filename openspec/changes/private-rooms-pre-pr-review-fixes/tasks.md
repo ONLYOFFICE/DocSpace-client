@@ -47,9 +47,11 @@ Every task first adds a test named after its scenario and shows that it fails on
   Verify, in `services/private-room/__tests__/encrypted-upload-orchestrator.test.ts`:
   - "Cancelled while chunks are sent", sequential and parallel, with a `CanceledError` from the parallel chunk request: `aborted`, session aborted, no `failedAt`;
   - "Cancelled after the file is stored": the self-wrap and fan-out written, `ok: true`.
-- [ ] 3.2 Orchestrator fan-out after a late cancel: a failed members' write still marks the read members pending and reports `shareFailed`. Verify:
+- [x] 3.2 Orchestrator fan-out after a late cancel: a failed members' write still marks the read members pending and reports `shareFailed`. Verify:
   - cases "Sharing fails after a late cancel" and "Stored file never left without its entries" in the same test file;
   - `cd packages/shared && pnpm exec vitest run services/private-room`.
+
+  Done 2026-11-03: the behaviour comes with 3.1, which takes the signal out of the wrap stage; both cases fail on the orchestrator before 3.1.
 - [ ] 3.3 Client store (`packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts:829` and `:875`, design decision 4):
   - the cancel watcher reacts to the row's `cancel` mark only;
   - a successful result for a row cancelled late is shown as uploaded, with its cancel mark cleared, and goes through `checkChunkUpload`;

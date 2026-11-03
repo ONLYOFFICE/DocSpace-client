@@ -874,6 +874,63 @@ describe("Cancelling an encrypted upload", () => {
     expect(pendingAccessStore.get(10, "bob")).toBeUndefined();
   });
 
+  it("Sharing fails after a late cancel", async () => {
+    const api = await import("../../../api/files");
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([BOB] as never);
+    const controller = new AbortController();
+    vi.mocked(api.setFileEncryptionKeys)
+      .mockImplementationOnce(async () => {
+        controller.abort();
+        return undefined as never;
+      })
+      .mockRejectedValueOnce(new Error("403"));
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: true, fileId: 42, shareFailed: true });
+    expect(pendingAccessStore.get(10, "bob")?.missingFileIds).toEqual([42]);
+  });
+
+  it("Stored file never left without its entries", async () => {
+    const api = await import("../../../api/files");
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([BOB] as never);
+    const controller = new AbortController();
+    let fanOutStarted = false;
+    const serializeFanOut = async <T>(fanOut: () => Promise<T>) => {
+      // The cancel lands while the fan-out to the members waits in the queue.
+      controller.abort();
+      fanOutStarted = true;
+      return fanOut();
+    };
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, signal: controller.signal, serializeFanOut },
+      "row-1",
+    );
+
+    expect(fanOutStarted).toBe(true);
+    expect(result).toMatchObject({ ok: true, fileId: 42 });
+    const recipients = vi
+      .mocked(wrapDekForRecipients)
+      .mock.calls.flatMap(([args]) =>
+        (args as { recipients: { userId: string }[] }).recipients.map(
+          (recipient) => recipient.userId,
+        ),
+      );
+    expect(recipients).toEqual(["user-1", "bob"]);
+    expect(api.setFileEncryptionKeys).toHaveBeenCalledTimes(2);
+  });
+
   it("Cancelled while the file is finalized in parallel: the file is kept and shared", async () => {
     const api = await import("../../../api/files");
     const controller = new AbortController();

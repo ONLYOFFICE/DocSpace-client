@@ -79,7 +79,7 @@ through CodeGraph.
    `room-member-flows.ts` sends the requests in sequence, returns the accepted
    and the refused invitees with their status, and both panels re-wrap the
    accepted ones with `rewrapForInvitedMembers`. A 403 is shown as
-   Common:EncryptedInviteNoKey; other failures with the generic error text.
+   Common:EncryptedInviteNoKey; other failures as Common:EncryptedInviteFailed.
    Sequential requests keep the server load and the notification order as
    they were.
    - *Alternative:* send one request, and on 403 read the members to find who was added.

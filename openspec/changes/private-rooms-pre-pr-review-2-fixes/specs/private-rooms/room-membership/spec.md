@@ -14,7 +14,7 @@ The system SHALL send the invitations of a private room one invitee per room sec
 - **THEN** no re-wrap runs
 
 ### Requirement: Refused invitees are named in the invite result
-The system SHALL name each refused invitee of a private-room invitation in the invite result: with Common:EncryptedInviteNoKey when the server refused with 403, which it does for a user who never registered a key, and with the generic error text otherwise.
+The system SHALL name each refused invitee of a private-room invitation in the invite result: with Common:EncryptedInviteNoKey when the server refused with 403, which it does for a user who never registered a key, and with Common:EncryptedInviteFailed otherwise.
 
 #### Scenario: Invitee without a key named
 - **WHEN** the server refuses an invitee of a private room with 403
@@ -22,7 +22,7 @@ The system SHALL name each refused invitee of a private-room invitation in the i
 
 #### Scenario: Other refusal named
 - **WHEN** the request of an invitee fails with another error
-- **THEN** the invite result names that invitee with the generic error text
+- **THEN** the invite result names that invitee with Common:EncryptedInviteFailed
 
 ## MODIFIED Requirements
 

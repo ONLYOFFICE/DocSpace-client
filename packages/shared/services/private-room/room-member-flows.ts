@@ -36,6 +36,7 @@
 import type { TFunction } from "i18next";
 
 import { getGroupById } from "../../api/groups";
+import { setRoomSecurity } from "../../api/rooms";
 import type { IdentityKeyPair } from "../encryption/types";
 import {
   addMembersToEncryptedRoom,
@@ -139,6 +140,51 @@ export const getMembersToRewrap = (
       id: item.id as string,
       displayName: (item.displayName || item.email) as string,
     }));
+
+/** How the per-invitee requests of a private-room invitation ended. */
+export type TPrivateRoomInvitations<TInvitation> = {
+  accepted: TInvitation[];
+  /** `noKey`: refused with 403, which the server answers for a key-less user. */
+  refused: { invitation: TInvitation; noKey: boolean; error: unknown }[];
+  /** The responses of the accepted requests, for their warnings. */
+  responses: unknown[];
+};
+
+/**
+ * Sends the invitations of a private room one invitee per request, in order.
+ * The server saves the invitees of a request one by one and stops at the
+ * first without an encryption key, so a shared request would add the ones
+ * before it without telling which.
+ * Spec: private-rooms/room-membership, "Private-room invitations are sent one invitee per request"
+ */
+export async function sendPrivateRoomInvitations<TInvitation>(
+  roomId: number | string,
+  invitations: TInvitation[],
+  request: Record<string, unknown>,
+): Promise<TPrivateRoomInvitations<TInvitation>> {
+  const result: TPrivateRoomInvitations<TInvitation> = {
+    accepted: [],
+    refused: [],
+    responses: [],
+  };
+
+  for (const invitation of invitations) {
+    try {
+      const response = await setRoomSecurity(roomId, {
+        ...request,
+        invitations: [invitation],
+      });
+      result.accepted.push(invitation);
+      result.responses.push(response);
+    } catch (error) {
+      const status = (error as { response?: { status?: number } })?.response
+        ?.status;
+      result.refused.push({ invitation, noKey: status === 403, error });
+    }
+  }
+
+  return result;
+}
 
 /** The re-encryption progress of an invite, for the caller's progress bar. */
 export type TInviteRewrapProgress = {

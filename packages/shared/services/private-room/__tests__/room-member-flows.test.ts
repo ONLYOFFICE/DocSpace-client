@@ -46,8 +46,12 @@ vi.mock("../room-encryption", () => ({
 vi.mock("../../../api/groups", () => ({
   getGroupById: vi.fn(),
 }));
+vi.mock("../../../api/rooms", () => ({
+  setRoomSecurity: vi.fn(),
+}));
 
 import { getGroupById } from "../../../api/groups";
+import { setRoomSecurity } from "../../../api/rooms";
 import type { IdentityKeyPair } from "../../encryption/types";
 import {
   addMembersToEncryptedRoom,
@@ -60,6 +64,7 @@ import {
   revokeRemovedMemberAccess,
   rewrapForInvitedMembers,
   rewrapPendingAccessOfMember,
+  sendPrivateRoomInvitations,
 } from "../room-member-flows";
 import { pendingAccessStore } from "../pending-access";
 
@@ -80,6 +85,66 @@ const identity = {
 
 const ok = (fileId: number) => ({ fileId, success: true });
 const failed = (fileId: number) => ({ fileId, success: false });
+
+describe("sendPrivateRoomInvitations", () => {
+  const ann = { id: "u-ann", access: 2 };
+  const bob = { id: "u-bob", access: 2 };
+  const request = { culture: "en", notify: true, message: "Hi" };
+  const refusal = (status: number) =>
+    Object.assign(new Error(String(status)), { response: { status } });
+
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
+  it("One invitee has never registered a key", async () => {
+    vi.mocked(setRoomSecurity).mockImplementation(async (_id, data) => {
+      if (data.invitations[0].id === "u-bob") throw refusal(403);
+      return { members: [] };
+    });
+
+    const result = await sendPrivateRoomInvitations(ROOM_ID, [ann, bob], request);
+
+    expect(setRoomSecurity).toHaveBeenCalledTimes(2);
+    expect(vi.mocked(setRoomSecurity).mock.calls[0]).toEqual([
+      ROOM_ID,
+      { ...request, invitations: [ann] },
+    ]);
+    expect(vi.mocked(setRoomSecurity).mock.calls[1]).toEqual([
+      ROOM_ID,
+      { ...request, invitations: [bob] },
+    ]);
+    expect(result.accepted).toEqual([ann]);
+    expect(result.refused).toEqual([
+      expect.objectContaining({ invitation: bob, noKey: true }),
+    ]);
+  });
+
+  it("Every invitee refused", async () => {
+    vi.mocked(setRoomSecurity)
+      .mockRejectedValueOnce(refusal(403))
+      .mockRejectedValueOnce(refusal(500));
+
+    const result = await sendPrivateRoomInvitations(ROOM_ID, [ann, bob], request);
+
+    expect(result.accepted).toEqual([]);
+    expect(result.refused).toEqual([
+      expect.objectContaining({ invitation: ann, noKey: true }),
+      expect.objectContaining({ invitation: bob, noKey: false }),
+    ]);
+  });
+
+  it("keeps the responses of the accepted invitations for their warnings", async () => {
+    vi.mocked(setRoomSecurity).mockResolvedValue({
+      members: [],
+      warning: "Quota",
+    });
+
+    const result = await sendPrivateRoomInvitations(ROOM_ID, [ann], request);
+
+    expect(result.responses).toEqual([{ members: [], warning: "Quota" }]);
+  });
+});
 
 describe("rewrapForInvitedMembers", () => {
   const newMembers = [

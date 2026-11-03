@@ -438,6 +438,7 @@ describe("PassphraseModal", () => {
     expect(trigger).toHaveFocus();
   });
 
+  // Spec: private-rooms/key-management, "Tab in key dialogs follows the visual order and stays inside the dialog"
   // jsdom lays nothing out, and the dialog's focus trap leaves out controls
   // without a box: every element gets one here, so the trap sees the dialog.
   describe("Tab order", () => {
@@ -493,19 +494,34 @@ describe("PassphraseModal", () => {
 
       expect(confirmToggle).toHaveFocus();
     });
-  });
 
-  // Spec: private-rooms/key-management, "Tab order in key dialogs follows the visual order"
-  it("No trap", async () => {
-    const user = userEvent.setup();
-    renderModal({ isNew: true });
-    const dialog = screen.getByRole("dialog", {
-      name: "Common:CreatePassphrase",
+    const getClose = () =>
+      within(
+        screen.getByRole("dialog", { name: "Common:CreatePassphrase" }),
+      ).getByRole("button", { name: "Close" });
+
+    it("Tab wraps from the last control", async () => {
+      const user = userEvent.setup();
+      render(<button type="button">Page</button>);
+      renderModal({ isNew: true });
+
+      screen.getByRole("button", { name: "Common:CancelButton" }).focus();
+      await user.tab();
+
+      expect(getClose()).toHaveFocus();
     });
 
-    screen.getByRole("button", { name: "Common:CancelButton" }).focus();
-    await user.tab();
+    it("Shift+Tab wraps from the first control", async () => {
+      const user = userEvent.setup();
+      render(<button type="button">Page</button>);
+      renderModal({ isNew: true });
 
-    expect(dialog).not.toContainElement(document.activeElement as HTMLElement);
+      getClose().focus();
+      await user.tab({ shift: true });
+
+      expect(
+        screen.getByRole("button", { name: "Common:CancelButton" }),
+      ).toHaveFocus();
+    });
   });
 });

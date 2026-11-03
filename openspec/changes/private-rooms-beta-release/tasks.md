@@ -21,7 +21,7 @@ Group 0 holds the beta gate and the decisions. Tasks that name a server field or
 
 ## 2. Beta badge
 
-- [ ] 2.1 Give `BetaBadge` (`packages/shared/components/beta-badge`) an optional description that replaces `Common:BetaBadgeDescription` and keeps the feedback links (design decision 5). Verify: new cases in `BetaBadge.test.tsx` for the default and the overridden text, with `cd packages/shared && pnpm exec vitest run components/beta-badge`.
+- [x] 2.1 Give `BetaBadge` (`packages/shared/components/beta-badge`) an optional description that replaces `Common:BetaBadgeDescription` and keeps the feedback links (design decision 5). Verify: new cases in `BetaBadge.test.tsx` for the default and the overridden text, with `cd packages/shared && pnpm exec vitest run components/beta-badge`.
 - [ ] 2.2 Put the Beta badge on the Private sidebar item through `badgeComponent` in `packages/client/src/components/ClientArticleSidebar/index.tsx`, with `BetaBadgeWrapper` and the description Common:PrivateRoomsBetaDescription. Add the key to `public/locales/en/Common.json` in the same commit, then run `/translate-comments` and `/translate-locales`. Verify:
   - cases "Beta badge shown" and "Badge tooltip" in `ClientArticleSidebar/__tests__/ClientArticleSidebar.test.tsx`, with no badge on the Archive sub-item;
   - `cd common/tests && npx vitest run test/locales.test.js`.

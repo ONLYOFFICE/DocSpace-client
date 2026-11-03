@@ -184,6 +184,9 @@ const GenerateSkillDialog = ({
   openFileAction,
 }: GenerateSkillDialogProps) => {
   const { t } = useTranslation(["Common", "Metadata"]);
+  // The room the panel was opened in: the skill is generated for it and
+  // saved into it, wherever the user has gone meanwhile.
+  const [targetRoomId] = React.useState(roomId);
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [isValidTitle, setIsValidTitle] = React.useState(true);
@@ -197,8 +200,9 @@ const GenerateSkillDialog = ({
   React.useEffect(() => () => abortRef.current?.abort(), []);
 
   const isBusy = isGenerating || isSaving;
-  const canGenerate = !!title.trim() && !!description.trim() && roomId != null;
-  const canSave = !!skill?.content.trim() && roomId != null;
+  const canGenerate =
+    !!title.trim() && !!description.trim() && targetRoomId != null;
+  const canSave = !!skill?.content.trim() && targetRoomId != null;
 
   const onClose = () => {
     abortRef.current?.abort();
@@ -263,7 +267,11 @@ const GenerateSkillDialog = ({
     try {
       setSkill(
         await generateSkillWithAI(
-          { destId: roomId!, title: trimmedTitle, description: description.trim() },
+          {
+            destId: targetRoomId!,
+            title: trimmedTitle,
+            description: description.trim(),
+          },
           abort.signal,
         ),
       );
@@ -283,7 +291,7 @@ const GenerateSkillDialog = ({
 
     try {
       const file = await insertFile(
-        roomId!,
+        targetRoomId!,
         `${skill.name}.md`,
         new Blob([skill.content], { type: "text/markdown" }),
       );

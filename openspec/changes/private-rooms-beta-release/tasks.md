@@ -17,7 +17,7 @@ Group 0 holds the beta gate. One task is one commit with its tick (the "Commits"
   - add the removal of the Beta badges as its client work.
 
   Verify: `npx -y @fission-ai/openspec@latest validate --all --strict`. Done 2026-11-03: the release gate now covers general availability. Its prerequisites gain this change (1.12), it removes the beta label in one task (2.1) with its E2E update (2.2), and its deltas modify the administrator control and remove the two badge requirements this change adds.
-- [ ] 1.2 Revise `private-rooms-release-gate` a second time (design decision 9): it adds the portal setting from the server, its administrator control and the availability rule on top of the E2E rooms app, and its deltas no longer modify requirements this change stopped adding. Verify: `npx -y @fission-ai/openspec@latest validate --all --strict`.
+- [x] 1.2 Revise `private-rooms-release-gate` a second time (design decision 9): it adds the portal setting from the server, its administrator control and the availability rule on top of the E2E rooms app, and its deltas no longer modify requirements this change stopped adding. Verify: `npx -y @fission-ai/openspec@latest validate --all --strict`. Done 2026-11-03: the release gate gains prerequisite 8 and task 1.13 for the server setting, group 5 for the settings read, the availability rule, the administrator control, the SDK layout and a setting-off spec, and its deltas add the administrator control and modify "Private rooms are offered on every portal" and "Section availability follows the E2E rooms app".
 
 ## 2. Beta badge
 

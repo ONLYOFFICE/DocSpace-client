@@ -277,7 +277,7 @@ extracted copy, that the lockfile references no other ai-chat tarball, and the
 lockfile entry's peers and dependencies against the packed manifest; a failed
 install restores the tarballs, manifests and lockfile. It warns when the
 filename and the packed version disagree. Go back with
-`pnpm -r update @onlyoffice/ai-chat@^<version>` and delete the tarball. Both
+`pnpm -r update @onlyoffice/ai-chat@^<version>` and delete the tarball. The
 updaters share their helpers in `scripts/lib/vendored-tarball.mjs`.
 
 Most of ai-chat's own peers are optional too (the assistant-ui widgets, the
@@ -296,3 +296,25 @@ peers as ai-chat's own `dependencies`. pnpm treats a name that is also an
 optional peer of the package as a peer: it resolves it from the dependent when
 it can and silently drops it when it cannot, so a fresh resolution loses the
 LLM SDKs while an incremental one appears to work. It was tried and reverted.
+
+## The plugin SDK dependency
+
+`@onlyoffice/docspace-plugin-sdk` (only `packages/client` depends on it) comes
+from npm as well. An SDK build that is not published yet - a client feature
+that needs new SDK typings - is packed in the `docspace-plugin-sdk` checkout
+(`npm run build && npm pack`; the version the client sees is the one in the
+packed `package.json`) and switched in the same way as ui-kit:
+
+```bash
+pnpm run update-plugin-sdk                 # newest pack in ../../docspace-plugin-sdk
+pnpm run update-plugin-sdk path/to/pack.tgz
+DOCSPACE_PLUGIN_SDK_SRC=../elsewhere pnpm run update-plugin-sdk
+```
+
+The pack lands at the repo root as `onlyoffice-docspace-plugin-sdk.tgz`, so the
+Dockerfiles need no change, and the script handles the same-filename trap and
+verifies the install as `update-ui-kit` does. pnpm shortens the SDK's directory
+under `node_modules/.pnpm` to `@onlyoffice+docspace-plugin_<hash>`; the script
+matches that prefix. Go back with
+`pnpm -r update @onlyoffice/docspace-plugin-sdk@^<version>` once the release is
+on npm, and delete the tarball.

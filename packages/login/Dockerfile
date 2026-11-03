@@ -26,12 +26,6 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 # local development. A glob matching nothing is fine next to real sources.
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
 
-# `--frozen-lockfile` installs every package the lockfile names, not just the
-# ones the workspace projects present in this image depend on. One of them is a
-# tarball under packages/client, so it has to be here even though this image
-# never builds the client.
-COPY packages/client/*.tgz ./packages/client/
-
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
 COPY packages/login/package.json ./packages/login/package.json

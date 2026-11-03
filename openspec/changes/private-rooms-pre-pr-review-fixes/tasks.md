@@ -97,7 +97,7 @@ Every task first adds a test named after its scenario and shows that it fails on
 
 ## 6. Integration
 
-- [ ] 6.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`, `pnpm run test:doceditor`) and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify all green.
+- [x] 6.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`, `pnpm run test:doceditor`) and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify all green. Done 2026-11-03: tsc, lint and common/tests green; shared 2074, client 1864, sdk 466 and doceditor 27 unit tests passed; OpenSpec 18 of 18 valid.
 - [ ] 6.2 Run the client private-room and keys E2E specs (`cd packages/client && pnpm test:e2e:docker:dev __tests__/private-room*.spec.ts __tests__/keys-management*.spec.ts __tests__/key-flow-edge-cases.spec.ts`) and the SDK private E2E folder; verify green, and record the run in this file.
 
 ## Workflow follow-up

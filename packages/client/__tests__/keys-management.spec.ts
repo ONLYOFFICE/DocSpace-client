@@ -627,6 +627,9 @@ test.describe("Profile > Keys Management: keyboard only", () => {
     baseUrl,
   }) => {
     mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    // Playwright intercepts the file chooser only once a listener exists; a
+    // listener added right before the key press can miss the dialog.
+    const chooser = page.waitForEvent("filechooser", { timeout: 25_000 });
     await page.goto(`${baseUrl}/profile/keys-management`);
 
     const generateBtn = page.getByRole("button", {
@@ -642,7 +645,6 @@ test.describe("Profile > Keys Management: keyboard only", () => {
     });
     await expect(importKey).toBeFocused();
 
-    const chooser = page.waitForEvent("filechooser");
     await page.keyboard.press("Enter");
     await chooser;
   });

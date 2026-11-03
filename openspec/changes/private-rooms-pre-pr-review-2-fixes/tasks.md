@@ -24,7 +24,7 @@ One task is one commit with its code, tests, locales, mocks and the tick (the "C
 
 ## 5. Keys page
 
-- [ ] 5.1 Find why "Import a key from the keyboard" (`packages/client/__tests__/keys-management.spec.ts`) fails: bisect between the last run where it passed and `946556ad744`, and check the keyboard path in a real browser (design decision 7). Fix the cause, in the page if real users are affected, else in the spec. Verify: the spec passes five times in a row alone (`--repeat-each=5`) and in the full client E2E run under Docker, then record `private-rooms-pre-pr-review-fixes` 6.2.
+- [x] 5.1 Find why "Import a key from the keyboard" (`packages/client/__tests__/keys-management.spec.ts`) fails: bisect between the last run where it passed and `946556ad744`, and check the keyboard path in a real browser (design decision 7). Fix the cause, in the page if real users are affected, else in the spec. Verify: the spec passes five times in a row alone (`--repeat-each=5`) and in the full client E2E run under Docker, then record `private-rooms-pre-pr-review-fixes` 6.2. Done 2026-11-03: not a page defect. Playwright intercepts the file chooser only once a listener exists, and the spec added its listener right before the key press, so the dialog was sometimes missed; a mouse click made after the listener existed always caught it. With the listener added before the page loads, Enter on the Import key link opens the file chooser five times in five under Docker (`--repeat-each=5`), where it had failed three times in three.
 
 ## 6. Integration
 

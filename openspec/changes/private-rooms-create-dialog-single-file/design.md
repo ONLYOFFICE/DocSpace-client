@@ -104,6 +104,22 @@ No stashed design document covers the create dialog.
   checks a single creation on the dev stand; a remaining hang becomes its own
   change (proposal, "Out of scope").
 
+## Run on the dev stand (task 2.2)
+
+2026-11-03, local stand (`localhost:8092`): client `release/v4.1.0` at
+`6a5c0b5291a` served by the Vite dev server, DocSpace server 3.1.0,
+Document Server 10.0.2.5. Administrator, private room "Pirate room" (id 11),
+editors opening in a new tab.
+
+- Common:DontAskAgain switched off, then "+ New" > "Presentation", the box
+  ticked in the name dialog, Create.
+- Result: one file, `New presentation.pptx` (id 33), the room went from three
+  files to four; one editor tab (`doceditor?fileId=33`); the setting read
+  back as on.
+- The editor opened the presentation with its empty title slide. The
+  "Loading presentation" hang of the recording did not occur with a single
+  file on this Document Server, so no separate change is proposed.
+
 ## Migration Plan
 
 1. Commit the fix with its test directly on `release/v4.1.0`.

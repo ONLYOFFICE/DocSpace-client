@@ -11,7 +11,7 @@ One task is one commit with its tick, committed directly on `release/v4.1.0` (th
 ## 2. Integration
 
 - [ ] 2.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`, `pnpm run test:doceditor`) and `npx -y @fission-ai/openspec@latest validate --all --strict`. Verify: all green.
-- [ ] 2.2 On the dev stand with a Document Server, repeat the tester's recording: Common:DontAskAgain off in the profile, a private room, "New presentation", tick the box in the name dialog, Create. Record date, builds and result in design.md: one file, one editor tab, and whether the editor opens. Verify: that record; an editor that still hangs is proposed as its own change.
+- [x] 2.2 On the dev stand with a Document Server, repeat the tester's recording: Common:DontAskAgain off in the profile, a private room, "New presentation", tick the box in the name dialog, Create. Record date, builds and result in design.md: one file, one editor tab, and whether the editor opens. Verify: that record; an editor that still hangs is proposed as its own change.
 
 ## Workflow follow-up
 

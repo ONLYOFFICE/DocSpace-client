@@ -940,6 +940,7 @@ export const buildContextOptions = (
           security,
           item.security,
           item.id,
+          item.roomType,
         );
 
         pluginRoomsKeys &&

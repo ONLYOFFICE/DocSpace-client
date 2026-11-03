@@ -68,6 +68,7 @@ import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { roomsFilterQuery } from "@/utils/roomsFilterUrl";
 import type {
   TFile,
   TFilesSettings,
@@ -857,7 +858,7 @@ const RoomsList = ({
           newFilter.page = 0;
           newFilter.pageCount = PAGE_COUNT;
           setFilter(newFilter);
-          window.history.pushState(null, "", `?${newFilter.toUrlParams()}`);
+          window.history.pushState(null, "", `?${roomsFilterQuery(newFilter)}`);
         }}
         timezone={timezone}
         fetchMoreFiles={fetchMoreRooms}

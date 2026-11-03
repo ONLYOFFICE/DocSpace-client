@@ -31,7 +31,7 @@ Every task first adds a test named after its scenario and shows that it fails on
 ## 2. The SDK private pages keep the host opt-in (review H3)
 
 - [x] 2.1 Provide a `PrivateRoomsOptInContext` from the `(private)` layout (`packages/sdk/src/app/(private)/layout.tsx`, which renders only with the opt-in). Make `_hooks/usePrivateRoute.ts` and `_hooks/usePrivateFrameBridge.ts` build their paths from it instead of `useSearchParams()` (design decision 8). Verify: case "Room opened after sorting" for `usePrivateRoute` and for the frame bridge's `navigateSection` in a new `_hooks/usePrivateRoute.test.tsx` (co-located), both with an address that has lost `privateRooms`.
-- [ ] 2.2 Add an SDK helper that appends the current address parameters `RoomsFilter` does not own (as `getOtherSearchParams` does for files), and use it in `(rooms)/_components/rooms-filter/useRoomsFilter.tsx:120`, `rooms-list/index.tsx:860` and `empty-view/index.tsx:116`. Verify:
+- [x] 2.2 Add an SDK helper that appends the current address parameters `RoomsFilter` does not own (as `getOtherSearchParams` does for files), and use it in `(rooms)/_components/rooms-filter/useRoomsFilter.tsx:120`, `rooms-list/index.tsx:860` and `empty-view/index.tsx:116`. Verify:
   - case "Frame reloaded after a filter change" in a unit test of the helper and in `empty-view/index.test.tsx`, asserting that the pushed address keeps `privateRooms=true`;
   - generic room lists without the parameter are unchanged.
 - [ ] 2.3 SDK E2E: in `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`, sort the private list, open a room and assert that its content renders. Verify with `cd packages/sdk && pnpm exec playwright test __tests__/e2e/private`.

@@ -100,3 +100,20 @@ describe("RoomsEmptyView in the archive", () => {
     expect(env.push).toHaveBeenCalledWith("/rooms");
   });
 });
+
+describe("RoomsEmptyView of a filtered private list", () => {
+  it("Frame reloaded after a filter change", () => {
+    window.history.replaceState(
+      null,
+      "",
+      "/private?privateRooms=true&filterValue=report",
+    );
+    renderView(<RoomsEmptyView isFiltered roomsPath="/private" />);
+
+    env.view?.options[0].onClick({ preventDefault: () => {} });
+
+    const params = new URLSearchParams(window.location.search);
+    expect(params.get("privateRooms")).toBe("true");
+    expect(params.has("filterValue")).toBe(false);
+  });
+});

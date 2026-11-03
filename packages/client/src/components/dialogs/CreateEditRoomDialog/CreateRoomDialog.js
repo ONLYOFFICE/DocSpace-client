@@ -177,6 +177,14 @@ const CreateRoomDialog = ({
       if (!isMountRef.current) return;
       if (!roomParams.isPrivate) applyPrivateRoomType();
     },
+    // A creation locked on the Private type cannot go on without a key; one
+    // started from a room-type card keeps its dialog.
+    // Spec: room-membership, "Starting private room creation without a key starts key generation"
+    onKeyGenerationCancelled: () => {
+      if (startRoomType === RoomsTypePrivate || fetchedRoomParams) {
+        onCloseRef.current?.();
+      }
+    },
     onClose,
   });
 

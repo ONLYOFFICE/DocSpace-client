@@ -95,6 +95,7 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
     accountLabel: user?.email,
     hasExistingKeys: hasKeys,
     refreshKeysFromServer,
+    onKeyGenerationCancelled: onClose,
     onClose,
   });
 

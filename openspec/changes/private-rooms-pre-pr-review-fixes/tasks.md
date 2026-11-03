@@ -89,11 +89,11 @@ Every task first adds a test named after its scenario and shows that it fails on
   Verify:
   - a case "User cancels inside key generation" in `dialogs/key-generation/__tests__/useGenerateKeyFlow.test.tsx`, for both dialogs;
   - a case in `hooks/usePrivateRoomKeyGate.test.tsx`.
-- [ ] 5.2 Close the creation on that callback when it started on the Private type or from a template:
+- [x] 5.2 Close the creation on that callback when it started on the Private type or from a template:
   - in the client `CreateRoomDialog.js`;
   - in the SDK `(private)/_components/create-room/PrivateCreateRoomDialog.tsx`.
 
-  Verify: case "User cancels inside key generation" in `CreateRoomDialog.privateRoom.test.tsx` and in `PrivateCreateRoomDialog.test.tsx`, with the real `useGenerateKeyFlow` rather than a mock.
+  Verify: case "User cancels inside key generation" in the new `CreateRoomDialog.keyGenerationCancel.test.tsx` and `PrivateCreateRoomDialog.keyGenerationCancel.test.tsx`, which run the real `useGenerateKeyFlow` (the existing dialog tests mock it), each failing on the dialog before this task.
 
 ## 6. Integration
 

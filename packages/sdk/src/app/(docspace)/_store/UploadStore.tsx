@@ -113,12 +113,26 @@ class UploadStore {
     }
   };
 
-  setItemUploaded = (uniqueId: string) => {
+  /**
+   * Marks a row uploaded. A row cancelled after its file was stored is gone
+   * from the panel; `restore` brings it back as uploaded.
+   */
+  setItemUploaded = (uniqueId: string, restore?: TUploadItemInit) => {
     const item = this.items.find((i) => i.uniqueId === uniqueId);
     if (item) {
       item.status = "uploaded";
       item.percent = 100;
+      return;
     }
+    if (!restore) return;
+    this.items.push({
+      ...restore,
+      percent: 100,
+      status: "uploaded",
+      abortController: new AbortController(),
+    });
+    this.totalBytes += restore.fileSize;
+    this.uploadedBytes += restore.fileSize;
   };
 
   setItemError = (uniqueId: string, error: string) => {

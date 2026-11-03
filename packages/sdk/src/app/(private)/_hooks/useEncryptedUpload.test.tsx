@@ -371,6 +371,27 @@ describe("useEncryptedUpload", () => {
     expect(store.items[0].status).toBe("cancelled");
   });
 
+  it("Cancelled after the file is stored", async () => {
+    const stored = { id: 8202, folderId: 5 };
+    env.orchestrate.mockImplementationOnce(async (options: TBatchOptions) => {
+      const [uploadId] = options.uploadIds;
+      // The row is cancelled once the orchestrator no longer honours it.
+      store.cancelItem(uploadId);
+      options.onFileComplete(options.files[0], { uploadId, file: stored });
+      return batchResult(options.uploadIds);
+    });
+
+    await upload(["late.docx"]);
+
+    expect(store.items).toHaveLength(1);
+    expect(store.items[0]).toMatchObject({
+      fileName: "late.docx",
+      status: "uploaded",
+      percent: 100,
+    });
+    expect(filesList.storedFiles).toEqual([stored]);
+  });
+
   it("Upload without a socket connection: the stored file goes to the files list", async () => {
     const stored = { id: 8201, folderId: 5 };
     env.orchestrate.mockImplementation(async (options: TBatchOptions) => {

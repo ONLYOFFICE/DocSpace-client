@@ -192,7 +192,20 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
             _file: File,
             fileResult: { uploadId: string; file?: TFile },
           ) => {
-            uploadStore.setItemUploaded(fileResult.uploadId);
+            // Spec: file-operations, "Cancelling an encrypted upload"
+            const queued = items.find(
+              (i) => i.uploadId === fileResult.uploadId,
+            );
+            uploadStore.setItemUploaded(
+              fileResult.uploadId,
+              queued && {
+                uniqueId: queued.uploadId,
+                fileName: queued.file.name,
+                fileSize: queued.file.size,
+                folderId: queued.folderId,
+                roomId: queued.roomId,
+              },
+            );
             if (fileResult.file) filesListStore.addStoredFile(fileResult.file);
           },
           onNameClash: (clashes: { file: File }[]) =>

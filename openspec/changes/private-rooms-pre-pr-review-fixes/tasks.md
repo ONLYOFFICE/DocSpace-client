@@ -61,7 +61,7 @@ Every task first adds a test named after its scenario and shows that it fails on
   - cases "Cancelled while chunks are sent" and "Cancelled after the file is stored" in `uploadDataStore/__tests__/UploadDataStore.encryption.test.ts`;
   - a case asserting that a later batch which starts nothing does not abort a running encrypted upload;
   - `cd packages/client && pnpm exec vitest run src/store/uploadDataStore`.
-- [ ] 3.4 SDK upload store (`packages/sdk/src/app/(private)/_store/PrivateEncryptedUploadStore.tsx` and `_hooks/useEncryptedUpload.ts`): a row cancelled late whose result is `ok` is shown as uploaded, and an `aborted` one as cancelled. Verify: cases "Cancelled after the file is stored" and "Cancelled while chunks are sent" in `_hooks/useEncryptedUpload.test.tsx`.
+- [x] 3.4 SDK upload store (`packages/sdk/src/app/(private)/_store/PrivateEncryptedUploadStore.tsx` and `_hooks/useEncryptedUpload.ts`): a row cancelled late whose result is `ok` is shown as uploaded, and an `aborted` one as cancelled. Verify: cases "Cancelled after the file is stored" and "Cancelled while chunks are sent" in `_hooks/useEncryptedUpload.test.tsx`.
 
 ## 4. Key-change dialog (review M4 and M5)
 

@@ -122,6 +122,18 @@ describe("<BetaBadge />", () => {
     expect(screen.queryByText("Beta Feature")).not.toBeInTheDocument();
   });
 
+  it("separates the description from the feedback sentence", async () => {
+    render(<BetaBadge {...baseProps} />);
+
+    await userEvent.click(screen.getByText("BETA"));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("tooltip-description")).toHaveTextContent(
+        /This is a beta feature If you have found a bug/,
+      );
+    });
+  });
+
   it("hides feedback links when withOutFeedbackLink is true", async () => {
     render(<BetaBadge {...baseProps} withOutFeedbackLink />);
 

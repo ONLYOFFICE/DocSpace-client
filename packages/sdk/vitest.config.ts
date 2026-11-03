@@ -41,6 +41,7 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     clearMocks: true,
+    silent: "passed-only",
     setupFiles: ["./vitest/setupTests.ts"],
     // ui-kit modules each import their own CSS file. Vitest externalizes
     // node_modules by default, which hands those modules to Node as-is, and
@@ -69,9 +70,5 @@ export default defineConfig({
       "@docspace/shared": path.resolve(__dirname, "../shared"),
       PUBLIC_DIR: path.resolve(__dirname, "../../public"),
     },
-  },
-
-  esbuild: {
-    target: "esnext",
   },
 });

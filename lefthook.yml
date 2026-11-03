@@ -6,35 +6,15 @@ pre-push:
   env:
     LEFTHOOK: "1"
   commands:
-    tsc:
-      run: CI=true FORCE_COLOR=0 pnpm run tsc
-      skip_empty: true
-      follow: true
-      skip_on_fail: false
-    lint:
-      run: CI=true FORCE_COLOR=0 pnpm run lint
-      skip_empty: true
-      follow: true
-      skip_on_fail: false
     common:
-      run: npm --prefix ./common/tests run test:lefthook
+      run: VITE_CONFIG_NATIVE_IGNORE_WARNING=true npm --prefix ./common/tests run test:lefthook
       skip_empty: true
       follow: true
       skip_on_fail: false
       fail_text: See report ./common/tests/reports/tests-results.html
-    unit-tests:
-      run: CI=true FORCE_COLOR=0 pnpm run test
+    tsc-lint-unit-tests:
+      run: CI=true FORCE_COLOR=0 VITE_CONFIG_NATIVE_IGNORE_WARNING=true pnpm nx run-many -t tsc lint test -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared --parallel=4
       skip_empty: true
       follow: true
       skip_on_fail: false
-      fail_text: See report cd packages/shared && pnpm run test:open-report
-    unit-tests-client:
-      run: CI=true FORCE_COLOR=0 pnpm run test:client
-      skip_empty: true
-      follow: true
-      skip_on_fail: false
-    unit-tests-sdk:
-      run: CI=true FORCE_COLOR=0 pnpm run test:sdk
-      skip_empty: true
-      follow: true
-      skip_on_fail: false
+      fail_text: Rerun the failed task from the Nx list above (pnpm run tsc / lint / test / test:client / test:sdk); shared test report - cd packages/shared && pnpm run test:open-report

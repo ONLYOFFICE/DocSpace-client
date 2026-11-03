@@ -38,6 +38,10 @@ paths:
   scope `vi.fn()` implementations are cleared between tests.
 - `console.error` containing `[ENCRYPTION]` **fails the test**; opt out with
   the global `allowConsoleError(/pattern/)`.
+- `silent: "passed-only"` in all three configs: console output of a passing
+  test is dropped, a failing test still prints its logs. A `console.log` you
+  add while debugging stays invisible until the test fails — run that file
+  with `--silent=false` to see it.
 - `__mocks__/handlers/**` + `__mocks__/e2e/**` are MSW for Playwright only;
   unit tests mock API modules with `vi.mock` instead.
 
@@ -96,7 +100,10 @@ pnpm test:sdk      # sdk             pnpm test:store    # client src/store only
 cd packages/client && pnpm exec vitest run src/store/filesStore   # single path
 ```
 
-All three suites are part of the blocking lefthook pre-push gate.
+All three suites are part of the blocking lefthook pre-push gate, run in one
+`nx run-many -t tsc lint test` call and cached by Nx: a suite reruns only when
+its package, a package it depends on (`^default`), `pnpm-lock.yaml` or a JSON
+under the root `public/` changed.
 
 ## Snapshots
 

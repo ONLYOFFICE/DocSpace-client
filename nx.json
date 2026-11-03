@@ -37,6 +37,14 @@
     },
     "test": {
       "cache": true,
+      "inputs": ["default", "^default", "{workspaceRoot}/public/**/*.json"]
+    },
+    "tsc": {
+      "cache": true,
+      "inputs": ["default", "^default", "{workspaceRoot}/public/**/*.json"]
+    },
+    "lint": {
+      "cache": true,
       "inputs": ["default", "^default"]
     }
   },

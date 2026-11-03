@@ -83,6 +83,7 @@ export default defineConfig({
     },
     globals: true,
     clearMocks: true,
+    silent: "passed-only",
     pool: process.env.POOL || "threads",
     testTimeout: 30000,
     include: [
@@ -122,9 +123,5 @@ export default defineConfig({
         "../shared/__mocks__/reactSvgMock.tsx",
       ),
     },
-  },
-
-  esbuild: {
-    target: "esnext",
   },
 });

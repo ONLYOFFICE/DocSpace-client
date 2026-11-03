@@ -88,6 +88,7 @@ export default defineConfig({
     // Global test settings
     globals: true,
     clearMocks: true,
+    silent: "passed-only",
     pool: process.env.POOL || "threads",
 
     // TypeScript configuration
@@ -131,9 +132,5 @@ export default defineConfig({
       "hex-rgb": path.resolve(__dirname, "./__mocks__/hex-rgb.js"),
       "react-svg": path.resolve(__dirname, "./__mocks__/reactSvgMock.tsx"),
     },
-  },
-
-  esbuild: {
-    target: "esnext",
   },
 });

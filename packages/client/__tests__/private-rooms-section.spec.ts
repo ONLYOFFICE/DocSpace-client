@@ -170,6 +170,28 @@ test.describe("Private section — sidebar", () => {
     ).toBeNull();
   });
 
+  test("Beta badge shown", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+
+    const badge = navItem(page, "private-rooms")
+      .locator("xpath=ancestor::li[1]")
+      .getByTestId("private_rooms_beta_badge");
+    await expect(badge).toBeVisible({ timeout: 15000 });
+    await expect(page.getByTestId("private_rooms_beta_badge")).toHaveCount(1);
+    await expect(navItem(page, "private-rooms-archive")).toBeVisible();
+    await expect(
+      navItem(page, "private-rooms-archive").getByTestId(
+        "private_rooms_beta_badge",
+      ),
+    ).toHaveCount(0);
+
+    await badge.getByText("BETA", { exact: true }).click();
+
+    await expect(page.getByTestId("tooltip-title")).toHaveText(
+      "Private rooms",
+    );
+  });
+
   test("Section available", async ({ page, baseUrl }) => {
     await page.goto(`${baseUrl}/rooms/shared/filter`);
 

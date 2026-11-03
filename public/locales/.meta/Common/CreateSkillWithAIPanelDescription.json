@@ -3,11 +3,12 @@
   "content": "AI will write a skill from the name and description below. Review and edit it, then save it to this room as a Markdown file.",
   "content_en_sha1_hash": "c765646b3d641bf732220041dc3027a55977b4ec",
   "created_at": "2026-11-03T07:47:07.834Z",
-  "updated_at": "2026-11-03T07:47:07.834Z",
+  "updated_at": "2026-11-03T11:24:37.937Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Explanation at the top of the Create skill with AI side panel: AI writes the skill from the name and description fields below, the user reviews and edits it in an editor, then saves it to the current Instructions room as a Markdown file.",
+    "is_auto": true,
+    "updated_at": "2026-11-03T11:24:37.937Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [],
   "languages": {

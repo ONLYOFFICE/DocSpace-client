@@ -9,7 +9,7 @@
 
 ## 2. Keyboard-only E2E flows
 
-- [ ] 2.1 In `packages/client/__tests__/keys-management.spec.ts`, step from the passphrase field to the confirmation field through its show-passphrase toggle in "Create a key and unlock it from the keyboard" and "Focus back after the recovery display" (D4); verify with `pnpm test:e2e:docker:build` and `docker-compose run --rm -T -e WORKERS=3 tests-local pnpm exec playwright test __tests__/keys-management.spec.ts __tests__/key-flow-edge-cases.spec.ts` in `packages/client`, all green
+- [x] 2.1 In `packages/client/__tests__/keys-management.spec.ts`, step from the passphrase field to the confirmation field through its show-passphrase toggle in "Create a key and unlock it from the keyboard" and "Focus back after the recovery display" (D4); verify with `pnpm test:e2e:docker:build` and `docker-compose run --rm -T -e WORKERS=3 tests-local pnpm exec playwright test __tests__/keys-management.spec.ts __tests__/key-flow-edge-cases.spec.ts` in `packages/client`, all green
 
 ## 3. Integration
 

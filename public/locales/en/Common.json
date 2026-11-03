@@ -596,6 +596,7 @@
   "CreateSkillWithAI": "Create skill with AI",
   "CreateSkillWithAIDescription": "Describe what the skill should do, and AI will write it for you.",
   "CreateSkillWithAINoModel": "No AI model is configured to write skills. Ask your administrator to connect an AI provider.",
+  "CreateSkillWithAIPanelDescription": "AI will write a skill from the name and description below and save it to this room as a Markdown file. Open it afterwards to review and edit the instructions.",
   "CreateSkillWithAIPlaceholder": "Describe what the skill should do, when it should be used and what the result should look like",
   "CreateSkillWithAISuccess": "Skill {{title}} has been created. <0>Open</0>",
   "CreateTag": "Create tag",

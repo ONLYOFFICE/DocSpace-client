@@ -42,6 +42,7 @@ import { ModalDialog, ModalDialogType } from "@onlyoffice/apps-ui-kit/components
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Label } from "@onlyoffice/apps-ui-kit/components/label";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { generateSkillWithAI } from "@docspace/shared/api/ai";
@@ -182,6 +183,9 @@ const GenerateSkillDialog = ({
       <ModalDialog.Header>{t("Common:CreateSkillWithAI")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.body}>
+          <Text className={styles.description} fontSize="12px" lineHeight="16px">
+            {t("Common:CreateSkillWithAIPanelDescription")}
+          </Text>
           <InputParam
             id="generate-skill-title"
             title={`${t("Common:Name")}:`}

@@ -249,10 +249,9 @@ const DeleteProfileEverDialogComponent = ({
 
 	const onKeyUpHandler = React.useCallback(
 		(e: KeyboardEvent) => {
-			if (e.key === ButtonKeys.esc) onClose();
 			if (e.key === ButtonKeys.enter) onDeleteProfileEver();
 		},
-		[onClose, onDeleteProfileEver],
+		[onDeleteProfileEver],
 	);
 
 	React.useEffect(() => {

@@ -41,7 +41,7 @@ import classNames from "classnames";
 import { isMobile } from "@docspace/shared/utils";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
+import { FileType, RoomsType } from "@docspace/shared/enums";
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
@@ -86,8 +86,6 @@ type DetailsProps = {
   onCreateRoomFromTemplate?: FilesActionStore["onCreateRoomFromTemplate"];
 
   isDefaultRoomsQuotaSet?: boolean;
-  isDefaultAIAgentsQuotaSet?: boolean;
-  isAIAgentsFolderRoot?: boolean;
 
   getLogoCoverModel?: DialogsStore["getLogoCoverModel"];
 
@@ -107,8 +105,6 @@ const Details = ({
   isAdmin,
   isArchive,
   isDefaultRoomsQuotaSet,
-  isDefaultAIAgentsQuotaSet,
-  isAIAgentsFolderRoot,
 
   getLogoCoverModel,
   onChangeFile,
@@ -136,27 +132,13 @@ const Details = ({
     openUser: openUser!,
     culture: culture!,
     isDefaultRoomsQuotaSet: isDefaultRoomsQuotaSet!,
-    isDefaultAIAgentsQuotaSet: isDefaultAIAgentsQuotaSet!,
-    isAIAgentsFolder: isAIAgentsFolderRoot!,
     isAdmin: isAdmin!,
     isArchiveFolder: isArchive,
     roomLifetime: roomLifetime!,
   });
 
   const createThumbnailAction = useCallback(async () => {
-    let property = detailsHelper.getPropertyList();
-
-    const isAgent =
-      selection &&
-      "rootFolderType" in selection &&
-      "roomType" in selection &&
-      selection.roomType &&
-      selection.rootFolderType === FolderType.AIAgents;
-
-    if (isAgent)
-      property = property.filter((item) => {
-        return item.id !== "Type";
-      });
+    const property = detailsHelper.getPropertyList();
 
     setItemProperties(property);
 
@@ -233,6 +215,7 @@ const Details = ({
     "roomType" in selection && selection.roomType === RoomsType.FormRoom;
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
+  const isAIProject = "isAIProject" in selection && !!selection.isAIProject;
   const resolvedTitle = useResolvedFileTitle(
     selection as { id?: number | string; title?: string; encrypted?: boolean },
   );
@@ -314,8 +297,10 @@ const Details = ({
             tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
             // When EditRoom is true, RoomIcon hides the badge in favour of the edit affordance.
+            // An AI project changes its logo in its own edit dialog: the
+            // room cover flow here would save it as a room's.
             withEditing={
-              "isRoom" in selection && selection.isRoom
+              "isRoom" in selection && selection.isRoom && !isAIProject
                 ? Boolean(selection.security?.EditRoom)
                 : false
             }
@@ -358,7 +343,6 @@ export default inject(
     dialogsStore,
     avatarEditorDialogStore,
     selectedFolderStore,
-    treeFoldersStore,
   }: TStore) => {
     const { getInfoPanelItemIcon, openUser, infoPanelRoomSelection } =
       infoPanelStore;
@@ -373,10 +357,7 @@ export default inject(
     const isCollaborator = user?.isCollaborator;
     const isAdmin = user?.isAdmin;
 
-    const { isDefaultRoomsQuotaSet, isDefaultAIAgentsQuotaSet } =
-      currentQuotaStore;
-
-    const { isAIAgentsFolderRoot } = treeFoldersStore;
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     return {
       culture,
@@ -387,8 +368,6 @@ export default inject(
       isCollaborator,
       isAdmin,
       isDefaultRoomsQuotaSet,
-      isDefaultAIAgentsQuotaSet,
-      isAIAgentsFolderRoot,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
       onChangeFile: avatarEditorDialogStore.onChangeFile,
       roomLifetime:

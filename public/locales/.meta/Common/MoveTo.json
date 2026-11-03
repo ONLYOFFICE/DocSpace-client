@@ -3,7 +3,7 @@
   "content": "Move to",
   "content_en_sha1_hash": "349f807a5e5497d0e5f0e5eb83dd8a59d2dd2c7d",
   "created_at": "2025-05-19T21:30:46.631Z",
-  "updated_at": "2026-10-21T10:17:45.676Z",
+  "updated_at": "2026-10-31T12:58:28.862Z",
   "comment": {
     "text": "This is a button label or menu item that initiates the action of moving a selected file or folder to a different location.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 243,
+      "line_number": 259,
       "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => onShowEditingToast(t)\n : () => self.onMoveAction(item),\n disabled: false,",
       "module": "/packages/client"
     },
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 301,
+      "line_number": 282,
       "context": "case \"moveTo\":\n if (!this.isAvailableOption(\"moveTo\")) return null;\n return {\n id: \"menu-move-to\",\n label: t(\"Common:MoveTo\"),\n onClick: this.moveToHandle,\n iconUrl: MoveReactSvgUrl,\n };\n case \"pin\":\n return {",
       "module": "/packages/client"
     },

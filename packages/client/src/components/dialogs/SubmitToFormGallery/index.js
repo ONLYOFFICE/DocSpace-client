@@ -150,13 +150,6 @@ const SubmitToFormGallery = ({
 
 			if (isEditable) return;
 
-			if (e.key === "Escape") {
-				e.preventDefault();
-				e.stopPropagation();
-				onClose();
-				return;
-			}
-
 			if (e.key === "Enter") {
 				if (e.repeat) return;
 
@@ -189,7 +182,6 @@ const SubmitToFormGallery = ({
 				onClose={onCloseFormSelector}
 				withRecentTreeFolder
 				withFavoritesTreeFolder
-				withAIAgentsTreeFolder
 				isSelect
 				isPortalView
 				withoutDescriptionText

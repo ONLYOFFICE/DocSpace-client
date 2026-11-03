@@ -3,7 +3,7 @@
   "content": "Summarize favorite Form Spaces",
   "content_en_sha1_hash": "12b45109f2ef72ab410d7a2ccc6cb25f8169da3d",
   "created_at": "2026-08-14T09:34:56.523Z",
-  "updated_at": "2026-08-14T15:19:56.041Z",
+  "updated_at": "2026-10-31T12:58:29.077Z",
   "comment": {
     "text": "Button label for an AI suggestion that triggers a summary of the user's favorite Form Spaces.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 731,
+      "line_number": 671,
       "context": "],\n \n // +\n formsFavorites: [\n {\n name: t(\"AiSuggestions:FormsFavoritesSummarizeFavoriteSpaces\"),\n prompt: t(\"AiSuggestions:FormsFavoritesSummarizeFavoriteSpacesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpaces\"),\n prompt: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpacesPrompt\"),",
       "module": "/packages/client"
     }

@@ -117,7 +117,6 @@ export type FakeStores = {
   currentQuotaStore: Record<string, unknown>;
   indexingStore: Record<string, unknown>;
   versionHistoryStore: Record<string, unknown>;
-  aiRoomStore: Record<string, unknown>;
 };
 
 const defaultFakes = (): FakeStores => ({
@@ -147,7 +146,6 @@ const defaultFakes = (): FakeStores => ({
     isArchiveFolder: false,
     isArchiveFolderRoot: false,
     isTemplatesFolder: false,
-    isAIAgentsFolder: false,
     isFormsFolder: false,
     isRecycleBinFolder: false,
     isPrivacyFolder: false,
@@ -176,7 +174,6 @@ const defaultFakes = (): FakeStores => ({
     getFilesChecked: vi.fn(),
     fetchFiles: vi.fn(async () => {}),
     fetchRooms: vi.fn(async () => {}),
-    fetchAgents: vi.fn(async () => {}),
     scrollToTop: vi.fn(),
     setScrollToItem: vi.fn(),
     activeFiles: [],
@@ -242,9 +239,6 @@ const defaultFakes = (): FakeStores => ({
     setIsIndexEditingMode: vi.fn(),
   },
   versionHistoryStore: {},
-  aiRoomStore: {
-    setKnowledgeId: vi.fn(),
-  },
 });
 
 /**
@@ -280,7 +274,6 @@ export const createTestFilesActionsStore = (
     merged.currentQuotaStore,
     merged.indexingStore,
     merged.versionHistoryStore,
-    merged.aiRoomStore,
   ];
 
   return new FilesActionsStore(

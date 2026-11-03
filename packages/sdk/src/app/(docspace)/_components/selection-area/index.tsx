@@ -43,7 +43,7 @@ import {
   type TArrayTypes,
   type TOnMove,
 } from "@onlyoffice/apps-ui-kit/components/selection-area";
-import { checkIsSSR, getCountTilesInRow } from "@docspace/shared/utils";
+import { checkIsSSR } from "@docspace/shared/utils";
 import useFilesSelection from "@/app/(docspace)/_hooks/useFilesSelection";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -53,11 +53,10 @@ type SelectionAreaProps = {
 };
 
 const SelectionArea = observer(({ isRooms }: SelectionAreaProps) => {
-  const [countTilesInRow, setCountTilesInRow] = useState(0);
   const [isSSR, setIsSSR] = useState(true);
 
   const { setSelections } = useFilesSelection();
-  const { filesViewAs } = useSettingsStore();
+  const { filesViewAs, tilesGridColumns: countTilesInRow } = useSettingsStore();
   const { items } = useFilesListStore();
 
   const foldersLength = useMemo(
@@ -97,22 +96,6 @@ const SelectionArea = observer(({ isRooms }: SelectionAreaProps) => {
   const onMove = ({ added, removed, clear }: TOnMove) => {
     setSelections(added, removed, clear);
   };
-
-  useLayoutEffect(() => {
-    const setTilesCount = () => {
-      const newCount = getCountTilesInRow();
-      if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
-    };
-
-    const onResize = () => setTilesCount();
-
-    setTilesCount();
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [countTilesInRow]);
 
   useLayoutEffect(() => {
     setIsSSR(checkIsSSR());

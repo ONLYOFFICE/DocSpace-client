@@ -3,7 +3,7 @@
   "content": "No AI agent",
   "content_en_sha1_hash": "8fec51905e0dd6abdafc7c7e3e6569839a73a45d",
   "created_at": "2026-06-02T22:17:47.998Z",
-  "updated_at": "2026-10-22T16:09:36.892Z",
+  "updated_at": "2026-10-31T12:58:29.630Z",
   "comment": {
     "text": "Alt text for an image in an empty state screen when no AI agents are present. It contains a variable representing the AI agent.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "gemma4:26b"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoAgentItem.tsx",
-      "line_number": 63,
-      "context": "styles.noItemContainer,\n \"info-panel_gallery-empty-screen\",\n )}\n >\n <div className=\"no-thumbnail-img-wrapper\">\n <ImageIcon aria-label={t(\"Common:NoAgent\")} role=\"img\" />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"Common:AIAgentsEmptyScreenTent\")}\n </Text>\n </div>",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/no-agent-item/index.tsx",
       "line_number": 105,

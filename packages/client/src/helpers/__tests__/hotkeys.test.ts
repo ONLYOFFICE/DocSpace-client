@@ -35,9 +35,12 @@
 
 import { afterEach, describe, expect, it } from "vitest";
 
+import { RoomsType } from "@docspace/shared/enums";
+
 import {
   focusListOnSelectionKey,
   isContextMenuOpen,
+  isCreateHotkeyBlockedInRoom,
   isKeyOwnedByFocus,
 } from "../hotkeys";
 
@@ -65,6 +68,15 @@ describe("isKeyOwnedByFocus", () => {
 
   it("leaves Tab to the focused element whatever it is", () => {
     expect(owns(document.body, "Tab")).toBe(true);
+  });
+
+  // Shift's own keydown arrives before the Tab of Shift+Tab; the list must
+  // not take the focus there, or the Tab runs backwards from the list.
+  it("leaves a lone modifier to the focused element", () => {
+    const button = mount("<button>Rooms</button>");
+    for (const key of ["Shift", "Control", "Alt", "Meta"]) {
+      expect(owns(button, key), key).toBe(true);
+    }
   });
 
   it("gives Enter and Space to buttons, links and menu triggers", () => {
@@ -168,5 +180,19 @@ describe("focusListOnSelectionKey", () => {
     focusListOnSelectionKey(new KeyboardEvent("keydown", { key: "x" }));
 
     expect(document.activeElement).toBe(more);
+  });
+});
+
+describe("isCreateHotkeyBlockedInRoom", () => {
+  it("blocks the create hotkeys in the flat AI source rooms", () => {
+    expect(isCreateHotkeyBlockedInRoom(RoomsType.InstructionsRoom)).toBe(true);
+    expect(isCreateHotkeyBlockedInRoom(RoomsType.KnowledgeRoom)).toBe(true);
+  });
+
+  it("leaves the other rooms and plain folders to the Create right", () => {
+    expect(isCreateHotkeyBlockedInRoom(RoomsType.CustomRoom)).toBe(false);
+    expect(isCreateHotkeyBlockedInRoom(RoomsType.FormRoom)).toBe(false);
+    expect(isCreateHotkeyBlockedInRoom(null)).toBe(false);
+    expect(isCreateHotkeyBlockedInRoom(undefined)).toBe(false);
   });
 });

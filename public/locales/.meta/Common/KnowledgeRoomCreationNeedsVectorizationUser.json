@@ -1,0 +1,29 @@
+{
+  "key_path": "KnowledgeRoomCreationNeedsVectorizationUser",
+  "content": "A Knowledge room can be created once vectorization works. Contact the Full admin to configure the embeddings provider.",
+  "content_en_sha1_hash": "2754d3d99fa8902113c80bfb7b8b5fb55e1e314a",
+  "created_at": "2026-11-01T08:02:04.149Z",
+  "updated_at": "2026-11-01T08:02:58.546Z",
+  "comment": {
+    "text": "Tooltip over the greyed-out Knowledge room option in the New room chooser of the AI rooms section, shown to a room admin who cannot change portal settings while vectorization (turning files into searchable embeddings for the AI chat) is not working; tells them to ask the Full admin (the portal administrator role) to configure the embeddings provider. Knowledge room is a room type name.",
+    "is_auto": true,
+    "updated_at": "2026-11-01T08:02:58.546Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList/index.tsx",
+      "line_number": 121,
+      "context": "// A Knowledge room is searched through vectorization, so it cannot be\n // created while vectorization is off (the server refuses it too); the\n // tooltip says who can turn it on.\n const knowledgeRoomTooltipContent = isAdmin\n ? t(\"Common:KnowledgeRoomCreationNeedsVectorizationAdmin\")\n : t(\"Common:KnowledgeRoomCreationNeedsVectorizationUser\");\n \n return (\n <div className={styles.roomTypeList}>\n {AI_HUB_SECTION_TYPES.map((roomType) => {\n const isDisabled =",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

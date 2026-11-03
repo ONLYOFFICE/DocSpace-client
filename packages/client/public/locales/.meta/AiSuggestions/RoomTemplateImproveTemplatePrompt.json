@@ -3,7 +3,7 @@
   "content": "Review the open room template and propose improvements to its structure, names, roles, and reusable content. If this information is not provided, ask me for the template name, intended use case, and changes to apply.",
   "content_en_sha1_hash": "77bdc8412f692240aed8f9bc0f190078e6cc5888",
   "created_at": "2026-08-04T09:58:55.193Z",
-  "updated_at": "2026-08-05T17:05:51.147Z",
+  "updated_at": "2026-10-31T12:58:29.074Z",
   "comment": {
     "text": "Instructional prompt for an AI feature that guides the model to review and suggest improvements to room templates, including their structure, names, roles, and content.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 677,
+      "line_number": 617,
       "context": "),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomTemplateImproveTemplate\"),\n prompt: t(\"AiSuggestions:RoomTemplateImproveTemplatePrompt\"),\n requires: \"editRoom\",\n },\n ],\n \n // +",
       "module": "/packages/client"
     }

@@ -67,6 +67,7 @@ import {
   showForcedInfoPanelLoader,
   InfoPanelView,
 } from "SRC_DIR/helpers/info-panel";
+import { infoPanelWidthStorage } from "SRC_DIR/helpers/info-panel/width";
 
 import { getContactsView } from "../helpers/contacts";
 import SelectedFolderStore from "./SelectedFolderStore";
@@ -88,6 +89,10 @@ class InfoPanelStore {
   isVisible = false;
 
   isMobileHidden = false;
+
+  width = infoPanelWidthStorage.read();
+
+  shownWidth = 0;
 
   roomsView: InfoPanelViewType = InfoPanelView.infoMembers;
 
@@ -171,6 +176,14 @@ class InfoPanelStore {
 
     this.isVisible = visiable;
     this.isScrollLocked = false;
+  };
+
+  setWidth = (width: number) => {
+    this.width = infoPanelWidthStorage.save(width);
+  };
+
+  setShownWidth = (width: number) => {
+    this.shownWidth = width;
   };
 
   setTemplateAvailableToEveryone = (isAvailable: boolean) => {
@@ -394,7 +407,6 @@ class InfoPanelStore {
   getCanDisplay = () => {
     if (isPluginPage()) return false;
 
-    const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
     const isForms = this.getIsForms();
@@ -402,12 +414,7 @@ class InfoPanelStore {
       this.peopleStore.usersStore.contactsTab !== false ||
       getContactsView(window.location) !== false;
 
-    return isRooms || isFiles || isForms || isAccounts || isAIAgent;
-  };
-
-  getIsAIAgent = () => {
-    const pathname = window.location.pathname.toLowerCase();
-    return pathname.indexOf("ai-agent") !== -1;
+    return isRooms || isFiles || isForms || isAccounts;
   };
 
   getIsForms = () => {

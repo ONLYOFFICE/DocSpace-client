@@ -67,6 +67,7 @@ export const SECTION_ROOT_FOLDER_TYPES = [
   FolderType.Archive,
   FolderType.USER,
   FolderType.Rooms,
+  FolderType.AiHub,
   FolderType.SHARE,
   FolderType.Favorites,
   FolderType.Recent,
@@ -122,7 +123,6 @@ export const setPinAction = async (
   action: string,
   id: number | number[],
   t: TTranslation,
-  isAIAgent = false,
 ) => {
   const items = Array.isArray(id) ? id : [id];
 
@@ -133,24 +133,12 @@ export const setPinAction = async (
   const updatingFolderList = (elems: unknown[], isPin = false) => {
     if (elems.length === 0) return;
 
-    let translationForOneItem;
-    let translationForSeverals;
-
-    if (isAIAgent) {
-      translationForOneItem = isPin
-        ? t("Common:AIAgentPinned")
-        : t("Common:AIAgentUnpinned");
-      translationForSeverals = isPin
-        ? t("Common:AIAgentsPinned")
-        : t("Common:AIAgentsUnpinned");
-    } else {
-      translationForOneItem = isPin
-        ? t("Common:RoomPinned")
-        : t("Common:RoomUnpinned");
-      translationForSeverals = isPin
-        ? t("Common:RoomsPinned", { count: elems.length })
-        : t("Common:RoomsUnpinned", { count: elems.length });
-    }
+    const translationForOneItem = isPin
+      ? t("Common:RoomPinned")
+      : t("Common:RoomUnpinned");
+    const translationForSeverals = isPin
+      ? t("Common:RoomsPinned", { count: elems.length })
+      : t("Common:RoomsUnpinned", { count: elems.length });
 
     toastr.success(
       elems.length > 1 ? translationForSeverals : translationForOneItem,
@@ -186,11 +174,7 @@ export const setPinAction = async (
     updatingFolderList(withFinishedOperation, isPin);
 
     if (isError) {
-      isAIAgent
-        ? toastr.error(
-            t("Common:AIAgentPinLimitMessage"),
-          )
-        : toastr.error(t("Common:RoomsPinLimitMessage"));
+      toastr.error(t("Common:RoomsPinLimitMessage"));
     }
 
     return;

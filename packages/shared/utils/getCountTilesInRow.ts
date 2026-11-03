@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { isDesktop, isMobile } from "@onlyoffice/apps-ui-kit/utils/device";
+import { isDesktop } from "@onlyoffice/apps-ui-kit/utils/device";
 
 function getTileWidth(
   min: number,
@@ -44,61 +44,50 @@ function getTileWidth(
   return Math.max(min, Math.min(preferred, max));
 }
 
-// Used to update the number of tiles in a row after the window is resized.
-export const getCountTilesInRow = (
+function getSectionContentWidth() {
+  const elem = document.getElementsByClassName("section-wrapper-content")[0];
+  if (!elem) return 0;
+
+  const elemPadding = window.getComputedStyle(elem)?.getPropertyValue("padding");
+  if (!elemPadding) return 0;
+
+  const paddingValues = elemPadding.split("px");
+  if (paddingValues.length < 4) return 0;
+
+  return (
+    (elem.clientWidth || 0) -
+    (parseInt(paddingValues[1], 10) || 0) -
+    (parseInt(paddingValues[3], 10) || 0)
+  );
+}
+
+export const getCountTilesInGrid = (
   isRooms?: boolean,
   isTemplates?: boolean,
-  isTemplateGallery?: boolean,
-  isShowOneTile?: boolean,
 ) => {
-  if (isTemplateGallery) {
-    if (isShowOneTile) return 1;
-
-    if (window.innerWidth > 600 && window.innerWidth <= 839) return 3;
-
-    if (window.innerWidth >= 840 && window.innerWidth <= 1199) return 4;
-
-    if (window.innerWidth >= 1200 && window.innerWidth <= 1439) return 5;
-
-    if (window.innerWidth >= 1440) return 6;
-
-    return 2;
-  }
-
   const isDesktopView = isDesktop();
-  const isMobileView = isMobile();
-  const tileGap = 16;
+  const gridWidth = getSectionContentWidth() + (isDesktopView ? -1 : 1);
+  const tileGap = isDesktopView || isRooms ? 16 : 14;
+  const tileWidth =
+    isRooms || isTemplates ? getTileWidth(275, 350) : getTileWidth(216, 360);
+  const minTileWidth = Math.floor(tileWidth * 64) / 64;
 
-  const elem = document.getElementsByClassName("section-wrapper-content")[0];
-  let containerWidth = 0;
-  if (elem) {
-    const elemPadding = window
-      .getComputedStyle(elem)
-      ?.getPropertyValue("padding");
+  return Math.max(
+    1,
+    Math.floor((gridWidth + tileGap) / (minTileWidth + tileGap)),
+  );
+};
 
-    if (elemPadding) {
-      const paddingValues = elemPadding.split("px");
-      if (paddingValues.length >= 4) {
-        containerWidth =
-          (elem.clientWidth || 0) -
-          (parseInt(paddingValues[1], 10) || 0) -
-          (parseInt(paddingValues[3], 10) || 0);
-      }
-    }
-  }
+export const getCountTilesInGallery = (isShowOneTile?: boolean) => {
+  if (isShowOneTile) return 1;
 
-  containerWidth += tileGap;
-  if (!isMobileView) containerWidth -= 1;
-  if (!isDesktopView) containerWidth += 3; // tablet tile margin -3px (TileContainer.js)
+  if (window.innerWidth > 600 && window.innerWidth <= 839) return 3;
 
-  let minTileWidth;
-  if (isRooms || isTemplates) {
-    minTileWidth = getTileWidth(275, 350) + tileGap;
-  } else if (isTemplateGallery) {
-    minTileWidth = 216 + tileGap;
-  } else {
-    minTileWidth = getTileWidth(216, 360) + tileGap;
-  }
+  if (window.innerWidth >= 840 && window.innerWidth <= 1199) return 4;
 
-  return Math.floor(containerWidth / minTileWidth);
+  if (window.innerWidth >= 1200 && window.innerWidth <= 1439) return 5;
+
+  if (window.innerWidth >= 1440) return 6;
+
+  return 2;
 };

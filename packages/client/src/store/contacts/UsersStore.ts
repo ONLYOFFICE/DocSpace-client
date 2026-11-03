@@ -1235,11 +1235,15 @@ class UsersStore {
   };
 
   setSelected = (selected: TContactsSelected) => {
-    const { hotkeyCaret, setHotkeyCaret } = this.contactsHotkeysStore;
+    const { hotkeyCaret, setHotkeyCaret, setHotkeyCaretStart } =
+      this.contactsHotkeysStore;
     this.bufferSelection = null;
     this.selected = selected;
 
-    setHotkeyCaret(this.selection.at(-1) ?? hotkeyCaret);
+    if (!hotkeyCaret) setHotkeyCaret(this.selection.at(-1) ?? null);
+    if (hotkeyCaret && (selected === "none" || selected === "close")) {
+      setHotkeyCaretStart(hotkeyCaret);
+    }
     const selectedUser = this.getUsersBySelected(this.peopleList, selected);
     this.setSelection(selectedUser);
 

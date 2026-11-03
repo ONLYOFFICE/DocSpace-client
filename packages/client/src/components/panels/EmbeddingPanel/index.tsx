@@ -307,17 +307,6 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 		window.open(url, "_blank");
 	};
 
-	const onKeyPress = (e: KeyboardEvent) => {
-		if (e.key === "Esc" || e.key === "Escape") {
-			onClose();
-		}
-	};
-
-	useEffect(() => {
-		document.addEventListener("keyup", onKeyPress);
-		return () => document.removeEventListener("keyup", onKeyPress);
-	});
-
 	const getLinks = useCallback(async () => {
 		try {
 			setIsLoading(true);

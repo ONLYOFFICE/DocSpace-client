@@ -41,7 +41,6 @@ import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 import { Context } from "@onlyoffice/apps-ui-kit/utils/context";
 import { FilesRowContainer as RowContainer } from "@docspace/shared/components/files-row";
 
-
 import SimpleFilesRow from "./SimpleFilesRow";
 
 const FilesRowContainer = ({
@@ -52,7 +51,6 @@ const FilesRowContainer = ({
   fetchMoreFiles,
   hasMoreFiles,
   isRooms,
-  isAIAgentsFolder,
   isTrashFolder,
   highlightFile,
   currentDeviceType,
@@ -83,7 +81,6 @@ const FilesRowContainer = ({
         itemIndex={index}
         sectionWidth={sectionWidth}
         isRooms={isRooms}
-        isAIAgentsFolder={isAIAgentsFolder}
         isTrashFolder={isTrashFolder}
         changeIndex={changeIndex}
         isHighlight={
@@ -102,7 +99,6 @@ const FilesRowContainer = ({
     list,
     sectionWidth,
     isRooms,
-    isAIAgentsFolder,
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
@@ -155,8 +151,8 @@ export default inject(
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isAIAgentsFolder,
       isFormsFolder,
+      isAiSectionFolder,
     } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
@@ -165,7 +161,7 @@ export default inject(
     const { primaryProgressDataStore } = uploadDataStore;
     const { setDropTargetPreview } = primaryProgressDataStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
     const canCreateSecurity = security?.Create;
 
     return {
@@ -173,12 +169,10 @@ export default inject(
       viewAs,
       setViewAs,
       infoPanelVisible,
-      filterTotal:
-        isRooms || isAIAgentsFolder ? roomsFilter.total : filter.total,
+      filterTotal: isRooms ? roomsFilter.total : filter.total,
       fetchMoreFiles,
       hasMoreFiles,
       isRooms,
-      isAIAgentsFolder,
       isTrashFolder,
       highlightFile,
       currentDeviceType,

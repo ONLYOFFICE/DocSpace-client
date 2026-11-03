@@ -73,9 +73,11 @@ export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
     params = `?${filter.toApiUrlParams()}`;
   }
 
+  const url = `/files/rooms${params}`;
+
   const options: AxiosRequestConfig = {
     method: "get",
-    url: `/files/rooms${params}`,
+    url,
     signal,
   };
 

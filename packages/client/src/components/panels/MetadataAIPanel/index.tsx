@@ -44,20 +44,22 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
-import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
-import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date";
+import { getServiceLimitDescription } from "@docspace/shared/utils/ai";
 
 import type { TMetadataSelection } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import { useMetadataAIPanel } from "./hooks/useMetadataAIPanel";
+import { useScrollToTop } from "./hooks/useScrollToTop";
+import { useUndoShortcut } from "./hooks/useUndoShortcut";
 import type { TMetadataAIMode } from "./types";
-import { isSameEntry, METADATA_AI_PROMPT_MAX_LENGTH } from "./utils";
+import { isSameEntry } from "./utils";
 import AICallout from "./sub-components/AICallout";
+import AINotice from "./sub-components/AINotice";
+import AIPrompt from "./sub-components/AIPrompt";
 import CustomFieldList from "./sub-components/CustomFieldList";
 import FillForms from "./sub-components/FillForms";
 import ReviewNotes from "./sub-components/ReviewNotes";
-import ServiceLimitNotice from "./sub-components/ServiceLimitNotice";
 import styles from "./MetadataAIPanel.module.scss";
 
 type MetadataAIDialogProps = {
@@ -96,6 +98,10 @@ const MetadataAIDialog = ({
     setInput,
     changeDraft,
     removeDraft,
+    revertField,
+    revertCustomField,
+    undo,
+    redo,
     discard,
     save,
   } = useMetadataAIPanel({ item, mode, onSaved });
@@ -103,48 +109,71 @@ const MetadataAIDialog = ({
   const isFill = mode === "fill";
   const isAnalyzing = phase === "analyzing";
   const isReview = phase === "review" && !!summary;
+  const bodyRef = useScrollToTop(isReview);
+  useUndoShortcut(phase === "review" && !isSaving, bodyRef, undo, redo);
   const hasNothingToFill =
     isFill && phase !== "loading" && !forms.length && !drafts.length;
   const hasNoModel = model === null;
 
   const getCalloutError = () => {
     if (error) return error;
-    if (hasNoModel) return t("Metadata:AINoModel");
     if (hasNothingToFill) return t("Metadata:AINothingToFill");
 
     return "";
   };
 
-  const getServiceLimitNotice = () => {
-    if (!serviceLimit) return undefined;
+  const openAISettings = (page: string) => () => {
+    onClose();
+    navigate(`/portal-settings/ai-settings/${page}`);
+  };
 
-    const date = getCorrectDate(language, serviceLimit.until);
+  const getNotice = () => {
+    if (serviceLimit) {
+      return (
+        <AINotice
+          title={t("Common:AILimitReached")}
+          description={getServiceLimitDescription(
+            t,
+            language,
+            serviceLimit,
+            isAdmin,
+          )}
+          buttonLabel={t("Common:ChangeAILimit")}
+          onClick={isAdmin ? openAISettings("limits") : undefined}
+          dataTestId="metadata_ai_limit_notice"
+          buttonTestId="metadata_ai_change_limit_button"
+        />
+      );
+    }
 
-    const openLimits = () => {
-      onClose();
-      navigate("/portal-settings/ai-settings/limits");
-    };
+    if (hasNoModel) {
+      return (
+        <AINotice
+          title={t("Metadata:AINoModelTitle")}
+          description={
+            isAdmin
+              ? t("Metadata:AINoModelChoose")
+              : t("Metadata:AINoModelContactAdmin")
+          }
+          buttonLabel={t("Common:GoToSettings")}
+          onClick={isAdmin ? openAISettings("model-assignment") : undefined}
+          dataTestId="metadata_ai_no_model_notice"
+          buttonTestId="metadata_ai_choose_model_button"
+        />
+      );
+    }
 
-    return (
-      <ServiceLimitNotice
-        title={t("Common:AILimitReached")}
-        description={
-          isAdmin
-            ? t("Common:AILimitReachedResetsOn", { date })
-            : t("Common:AILimitReachedContactAdminResetsOn", { date })
-        }
-        buttonLabel={t("Common:ChangeAILimit")}
-        onClick={isAdmin ? openLimits : undefined}
-      />
-    );
+    return undefined;
   };
 
   const customFields = metadata ? (
     <CustomFieldList
       drafts={drafts}
       metadata={metadata}
+      filledKeys={summary?.filledCustomKeys}
       onChange={changeDraft}
       onRemove={isFill ? undefined : removeDraft}
+      onRevert={isFill ? revertCustomField : undefined}
     />
   ) : null;
 
@@ -153,12 +182,16 @@ const MetadataAIDialog = ({
       if (isAnalyzing) return t("Metadata:AIFillingTitle");
       if (isReview) return t("Metadata:AIReviewAutofill");
 
-      return t("Files:FillMetadataWithAI");
+      return t("Files:FillMetadata");
     }
 
     return isReview
       ? t("Metadata:AIReviewSuggestions")
-      : t("Files:SuggestMetadataWithAI");
+      : t("Files:GenerateMetadata");
+  };
+
+  const submit = () => {
+    if (canSave && !isSaving) save();
   };
 
   const loader = (
@@ -173,7 +206,10 @@ const MetadataAIDialog = ({
       withBodyScroll
       withoutPadding
       displayType={ModalDialogType.aside}
-      onClose={onClose}
+      isBackButton={isReview}
+      isCloseable={!isSaving}
+      onBackClick={isReview && !isSaving ? discard : undefined}
+      onClose={isReview ? discard : onClose}
       dataTestId="metadata_ai_panel"
     >
       <ModalDialog.Header>{getTitle()}</ModalDialog.Header>
@@ -182,17 +218,19 @@ const MetadataAIDialog = ({
         {phase === "loading" ? (
           loader
         ) : (
-          <div className={styles.body}>
+          <div ref={bodyRef} className={styles.body} inert={isSaving}>
             <div className={styles.top}>
               {isReview ? (
-                <ReviewNotes mode={mode} summary={summary} />
+                <ReviewNotes
+                  mode={mode}
+                  summary={summary}
+                  hasEmptyFields={
+                    !isFill &&
+                    drafts.some(({ isNew, value }) => isNew && !value.trim())
+                  }
+                />
               ) : (
                 <AICallout
-                  title={
-                    isFill
-                      ? t("Files:FillMetadataWithAI")
-                      : t("Files:SuggestMetadataWithAI")
-                  }
                   description={
                     isFill
                       ? t("Metadata:AIFillDescription")
@@ -205,7 +243,7 @@ const MetadataAIDialog = ({
                       : t("Metadata:SuggestMetadata")
                   }
                   error={getCalloutError()}
-                  notice={getServiceLimitNotice()}
+                  notice={getNotice()}
                   isDisabled={
                     isAnalyzing ||
                     isSaving ||
@@ -215,17 +253,10 @@ const MetadataAIDialog = ({
                   }
                   onClick={runAI}
                 >
-                  <Textarea
-                    wrapperClassName={styles.prompt}
-                    className={styles.promptField}
+                  <AIPrompt
                     value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    placeholder={t("Metadata:AIPromptPlaceholder")}
-                    maxLength={METADATA_AI_PROMPT_MAX_LENGTH}
-                    heightTextArea="64px"
-                    fontSize={13}
                     isDisabled={isAnalyzing}
-                    dataTestId="metadata_ai_prompt_textarea"
+                    onChange={setPrompt}
                   />
                   {isFill ? (
                     <Checkbox
@@ -242,10 +273,14 @@ const MetadataAIDialog = ({
 
             {isFill ? (
               <FillForms
+                metadata={metadata}
                 forms={forms}
+                filledFieldIds={summary?.filledFieldIds}
                 customFields={drafts.length ? customFields : null}
                 isAnalyzing={isAnalyzing}
+                isReadOnly={!isReview}
                 onChange={setInput}
+                onRevert={revertField}
               />
             ) : null}
 
@@ -264,7 +299,7 @@ const MetadataAIDialog = ({
           label={t("Metadata:SaveChanges")}
           isDisabled={!canSave}
           isLoading={isSaving}
-          onClick={save}
+          onClick={submit}
           testId="metadata_ai_save_button"
         />
         <Button

@@ -80,16 +80,6 @@ const customRoom = (): TItem =>
     viewAccessibility: {},
   }) as unknown as TItem;
 
-const aiAgentRoom = (): TItem =>
-  ({
-    id: 5,
-    title: "AI Agent",
-    roomType: RoomsType.AIRoom,
-    rootFolderType: FolderType.AIAgents,
-    security: { EditAccess: true, EditRoom: true, ChangeOwner: true },
-    viewAccessibility: {},
-  }) as unknown as TItem;
-
 describe("FilesStore.getFilesListItems — characterization", () => {
   let store: ReturnType<typeof createTestFilesStore>;
 
@@ -107,7 +97,6 @@ describe("FilesStore.getFilesListItems — characterization", () => {
     expect(item.id).toBe(1);
     expect(item.isFolder).toBe(false);
     expect(item.isRoom).toBe(false);
-    expect(item.isAIAgent).toBe(false);
     expect(item.isForm).toBe(false);
     expect(item.title).toBe("Report.docx");
     expect(item.contextOptions).toBe(CTX_SENTINEL);
@@ -145,38 +134,11 @@ describe("FilesStore.getFilesListItems — characterization", () => {
     expect(item.defaultRoomIcon).toBe("icon.svg");
   });
 
-  it("marks an AI agent room and applies the aiConfig security transform", () => {
-    // With aiReadyNeedReset undefined, EditAccess/EditRoom/ChangeOwner stay truthy.
-    const [item] = store.getFilesListItems([aiAgentRoom()]);
-    expect(item.isAIAgent).toBe(true);
-    expect(item.isRoom).toBe(true);
-    expect(item.security).toMatchObject({
-      EditAccess: true,
-      EditRoom: true,
-      ChangeOwner: true,
-    });
-  });
-
-  it("resets AI-agent edit security when aiReadyNeedReset is set", () => {
-    store = createTestFilesStore({
-      settingsStore: { aiConfig: { aiReadyNeedReset: true } },
-    });
-    store.folders = [];
-    store.getFilesContextOptions = () => CTX_SENTINEL;
-
-    const [item] = store.getFilesListItems([aiAgentRoom()]);
-    const security = item.security as Record<string, unknown>;
-    expect(security.EditAccess).toBeFalsy();
-    expect(security.EditRoom).toBeFalsy();
-    expect(security.ChangeOwner).toBeFalsy();
-  });
-
   it("produces a stable shape for a mixed set (snapshot)", () => {
     const items = store.getFilesListItems([
       documentFile(),
       plainFolder(),
       customRoom(),
-      aiAgentRoom(),
     ]);
 
     // Normalize volatile url fields (depend on jsdom origin) to keep the

@@ -34,7 +34,6 @@
  */
 
 import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
-import { useEffect } from "react";
 import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { withTranslation } from "react-i18next";
@@ -63,14 +62,6 @@ const ColorSchemeDialog = (props) => {
   const buttonsBg = currentColorButtons
     ? currentColorButtons
     : `var(--settings-appearance-theme-add-bg) url(${PlusThemeSvgUrl}) no-repeat center`;
-
-  const onKeyPress = (e) =>
-    (e.key === "Esc" || e.key === "Escape") && onClose();
-
-  useEffect(() => {
-    window.addEventListener("keyup", onKeyPress);
-    return () => window.removeEventListener("keyup", onKeyPress);
-  }, [onClose]);
 
   return (
     <ModalDialog

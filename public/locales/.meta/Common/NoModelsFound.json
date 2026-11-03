@@ -3,7 +3,7 @@
   "content": "No models found",
   "content_en_sha1_hash": "3d02178b7a78aaa935e174c3b52e143f4d548b07",
   "created_at": "2026-02-18T14:56:04.517Z",
-  "updated_at": "2026-09-25T10:58:53.268Z",
+  "updated_at": "2026-10-31T12:58:29.626Z",
   "comment": {
     "text": "This text appears in a dropdown list or as a label when no AI models are available for selection.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Profile.tsx",
-      "line_number": 125,
-      "context": "value: selectedProfile.id,\n label: selectedProfile.name,\n }\n : {\n key: \"empty-selected-option\",\n label: chatProfiles.length ? \"\" : t(\"Common:NoModelsFound\"),\n },\n [selectedProfile, chatProfiles.length, t],\n );\n \n const onSelectProfile = React.useCallback(",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/Profile.tsx",
       "line_number": 154,

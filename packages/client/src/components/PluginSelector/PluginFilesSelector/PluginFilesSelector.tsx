@@ -152,8 +152,7 @@ const PluginFilesSelector = ({
     selectedItemSecurity,
     selectedFileInfo,
   ) => {
-    if (!selectorProps.getIsDisabled || selectedItemType === "agents")
-      return false;
+    if (!selectorProps.getIsDisabled) return false;
 
     const isDisabled = selectorProps.getIsDisabled({
       isFirstLoad,

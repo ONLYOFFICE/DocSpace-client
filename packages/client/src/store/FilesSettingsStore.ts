@@ -64,7 +64,6 @@ import {
   insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -198,6 +197,21 @@ class FilesSettingsStore {
   private quickActionsApplied = 0;
 
   extsFilesVectorized: string[] = [];
+
+  /** The `accept` list of a device upload into a Knowledge room. */
+  get knowledgeUploadAccept() {
+    return this.extsFilesVectorized.join(",");
+  }
+
+  /**
+   * The extension filter of the workspace selector feeding a Knowledge room,
+   * without the leading dots, as the files API takes them.
+   */
+  get knowledgeSelectorFilter() {
+    return this.extsFilesVectorized
+      .map((ext) => ext.replace(/^\./, ""))
+      .join(",");
+  }
 
   externalShare = true;
 
@@ -690,9 +704,6 @@ class FilesSettingsStore {
         case RoomsType.CustomRoom:
           path = "customRoom.svg";
           break;
-        case RoomsType.AIRoom:
-          path = "aiRoom.svg";
-          break;
         case RoomsType.EditingRoom:
           path = "editingRoom.svg";
           break;
@@ -704,6 +715,15 @@ class FilesSettingsStore {
           break;
         case RoomsType.FormRoom:
           path = "formRoom.svg";
+          break;
+        case RoomsType.InstructionsRoom:
+          path = "instructionsRoom.svg";
+          break;
+        case RoomsType.KnowledgeRoom:
+          path = "knowledgeRoom.svg";
+          break;
+        case RoomsType.AiProjectRoom:
+          path = "aiProjectRoom.svg";
           break;
         default:
           path = "customRoom.svg";
@@ -726,7 +746,7 @@ class FilesSettingsStore {
     const { enablePlugins } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
 
-    if (!isAIAgents() && enablePlugins && fileItemsList) {
+    if (enablePlugins && fileItemsList) {
       const fileItem = fileItemsList.find(
         ({ value }) => value.extension === extension && value.fileIcon,
       );

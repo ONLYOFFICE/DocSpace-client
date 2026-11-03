@@ -37,13 +37,12 @@ import { makeAutoObservable } from "mobx";
 import type { NavigateFunction } from "react-router";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { RoomsType } from "@docspace/shared/enums";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import type FilesFilter from "@docspace/shared/api/files/filter";
 import type { TTranslation } from "@docspace/shared/types";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { isMobile, getCountTilesInRow } from "@docspace/shared/utils";
+import { isMobile, getCountTilesInGrid } from "@docspace/shared/utils";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 
@@ -68,7 +67,10 @@ type TFilesItem = {
   fileExst?: string;
   contentLength?: string | number;
   parentId?: number | string;
+  folderId?: number | string;
   isFolder?: boolean;
+  isRoom?: boolean;
+  isTemplate?: boolean;
   isEditing?: boolean;
   security?: { Copy?: boolean; Move?: boolean };
 };
@@ -163,9 +165,13 @@ class HotkeyStore {
 
   hotkeysClipboardAction: "move" | "copy" | null = null;
 
+  hotkeysClipboardFromShared = false;
+
   selectionAreaIsEnabled = true;
 
   withContentSelection = false;
+
+  tilesGridColumns: number | null = null;
 
   constructor(
     filesStore: TFilesStore,
@@ -262,8 +268,22 @@ class HotkeyStore {
 
     focusListOnSelectionKey(e);
 
-    const { selection: s, hotkeyCaret, filesList } = this.filesStore;
-    const selection = s.length ? s : filesList;
+    const {
+      selection: s,
+      hotkeyCaret,
+      hotkeyCaretStart,
+      filesList,
+    } = this.filesStore;
+    const caretStartItem = filesList.find(
+      (f) =>
+        f.id === hotkeyCaretStart?.id &&
+        f.isFolder === hotkeyCaretStart?.isFolder,
+    );
+    const selection = s.length
+      ? s
+      : caretStartItem
+        ? [caretStartItem]
+        : filesList;
 
     if (!hotkeyCaret) {
       const scroll = document.getElementsByClassName("section-scroll");
@@ -378,7 +398,20 @@ class HotkeyStore {
     } else this.selectFirstFile();
   };
 
+  dropCaretOutsideList = () => {
+    const { hotkeyCaret, filesList, setHotkeyCaret } = this.filesStore;
+
+    if (
+      hotkeyCaret &&
+      !filesList.some(
+        (f) => f.id === hotkeyCaret.id && f.isFolder === hotkeyCaret.isFolder,
+      )
+    )
+      setHotkeyCaret(null);
+  };
+
   selectBottom = () => {
+    this.dropCaretOutsideList();
     const { viewAs, hotkeyCaret, selection } = this.filesStore;
 
     if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
@@ -387,6 +420,7 @@ class HotkeyStore {
   };
 
   selectUpper = () => {
+    this.dropCaretOutsideList();
     const { hotkeyCaret, viewAs, selection } = this.filesStore;
 
     if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
@@ -395,6 +429,7 @@ class HotkeyStore {
   };
 
   selectLeft = () => {
+    this.dropCaretOutsideList();
     const { hotkeyCaret, filesList, setHotkeyCaretStart, selection, viewAs } =
       this.filesStore;
     if (viewAs !== "tile") return;
@@ -409,6 +444,7 @@ class HotkeyStore {
   };
 
   selectRight = () => {
+    this.dropCaretOutsideList();
     const { hotkeyCaret, filesList, setHotkeyCaretStart, selection, viewAs } =
       this.filesStore;
     if (viewAs !== "tile") return;
@@ -421,7 +457,16 @@ class HotkeyStore {
     }
   };
 
+  selectCaretIfNothingSelected = () => {
+    this.dropCaretOutsideList();
+    const { selection, hotkeyCaret, setSelection } = this.filesStore;
+
+    if (!selection.length && hotkeyCaret) setSelection([hotkeyCaret]);
+  };
+
   multiSelectBottom = () => {
+    this.selectCaretIfNothingSelected();
+
     const {
       selection,
       setSelection,
@@ -469,6 +514,8 @@ class HotkeyStore {
   };
 
   multiSelectUpper = () => {
+    this.selectCaretIfNothingSelected();
+
     const {
       selection,
       setSelection,
@@ -523,6 +570,7 @@ class HotkeyStore {
   };
 
   multiSelectRight = () => {
+    this.dropCaretOutsideList();
     const {
       selection,
       setSelection,
@@ -587,6 +635,7 @@ class HotkeyStore {
   };
 
   multiSelectLeft = () => {
+    this.dropCaretOutsideList();
     const {
       selection,
       setSelection,
@@ -739,6 +788,11 @@ class HotkeyStore {
     }
   };
 
+  get isInSharedFolder() {
+    const { shared, navigationPath } = this.selectedFolderStore;
+    return shared || navigationPath.some((item) => item.shared);
+  }
+
   copyToClipboard = (t: TTranslation, isCut?: boolean) => {
     const { selection, setHotkeysClipboard } = this.filesStore;
 
@@ -749,6 +803,7 @@ class HotkeyStore {
 
     setHotkeysClipboard();
     this.hotkeysClipboardAction = isCut ? "move" : "copy";
+    this.hotkeysClipboardFromShared = this.isInSharedFolder;
 
     const copyText = `${t("AddedToClipboard")}: ${selection.length}`;
     toastr.success(copyText);
@@ -760,7 +815,6 @@ class HotkeyStore {
 
     const {
       id: selectedItemId,
-      roomType,
       security,
       getSelectedFolder,
     } = this.selectedFolderStore;
@@ -782,16 +836,25 @@ class HotkeyStore {
     // keep runtime identical.
     if (!security!.CopyTo || !security!.MoveTo) return;
 
-    const isPublic = roomType === RoomsType.PublicRoom;
+    let isPastedIntoItself = false;
+    let isPastedIntoSameFolder = false;
 
     selections.forEach((item) => {
       if (item.fileExst || item.contentLength) {
+        if (!isCopy && item.folderId === selectedItemId) {
+          isPastedIntoSameFolder = true;
+          return;
+        }
+
         const fileInAction = activeFiles.includes(item.id);
         if (!fileInAction) {
           fileIds.push(item.id);
         }
       } else if (item.id === selectedItemId) {
+        isPastedIntoItself = true;
         toastr.error(t("Common:MoveToFolderMessage"));
+      } else if (item.parentId === selectedItemId) {
+        isPastedIntoSameFolder = true;
       } else {
         const folderInAction = activeFolders.includes(item.id);
 
@@ -818,14 +881,10 @@ class HotkeyStore {
         }),
       };
 
-      // `selections` is an array, so `selections.rootFolderType`
-      // is always undefined at runtime (looks like a latent bug — probably
-      // meant `selections[0].rootFolderType`); the cast keeps the original
-      // runtime behavior.
       if (
-        isPublic &&
-        !(selections as TFilesItem[] & { rootFolderType?: unknown })
-          .rootFolderType
+        this.filesSettingsStore.externalShare &&
+        this.isInSharedFolder &&
+        !this.hotkeysClipboardFromShared
       ) {
         this.dialogsStore.setMoveToPublicRoomVisible(true, operationData);
         return;
@@ -844,11 +903,8 @@ class HotkeyStore {
         })
         .catch(() => {
           clearActiveOperations(fileIds, folderIds);
-        })
-        .finally(() => {
-          this.filesStore.setHotkeysClipboard([]);
         });
-    } else {
+    } else if (!isPastedIntoItself && !isPastedIntoSameFolder) {
       toastr.error(t("Common:ErrorEmptyList"));
     }
   };
@@ -888,6 +944,10 @@ class HotkeyStore {
 
   setWithContentSelection = (withContentSelection: boolean) => {
     this.withContentSelection = withContentSelection;
+  };
+
+  setTilesGridColumns = (tilesGridColumns: number) => {
+    this.tilesGridColumns = tilesGridColumns;
   };
 
   enableSelection = (e: KeyboardEvent) => {
@@ -958,7 +1018,12 @@ class HotkeyStore {
   };
 
   get countTilesInRow() {
-    return getCountTilesInRow(this.treeFoldersStore?.isRoomsFolder);
+    if (this.tilesGridColumns) return this.tilesGridColumns;
+
+    const { filesList } = this.filesStore;
+    const isRooms = filesList.some((item) => item.isRoom && !item.isTemplate);
+    const isTemplates = filesList.some((item) => item.isTemplate);
+    return getCountTilesInGrid(isRooms, isTemplates);
   }
 
   get division() {

@@ -98,7 +98,13 @@ const KeysManagement = ({
   const [passkeyEnrolled, setPasskeyEnrolled] = useState(false);
   const [passkeyBusy, setPasskeyBusy] = useState(false);
 
-  const hasKeys = !!encryptionKeys && encryptionKeys.length > 0;
+  // A list that has not loaded is unknown, not empty: no key is offered
+  // until the server has answered.
+  // Spec: key-management, "Generate a new key"
+  const keysKnown = Array.isArray(encryptionKeys);
+  const hasKeys = keysKnown && encryptionKeys.length > 0;
+  const offerNewKey = keysKnown && !hasKeys;
+  const [keysLoadFailed, setKeysLoadFailed] = useState(false);
 
   useEffect(() => {
     if (!userId) {
@@ -196,15 +202,31 @@ const KeysManagement = ({
     }
   }, [setUserEncryptionKeys]);
 
+  const loadKeys = useCallback(async () => {
+    setKeysLoadFailed(false);
+    try {
+      const fresh = await getEncryptionKeys();
+      setUserEncryptionKeys?.(fresh ?? []);
+    } catch (error) {
+      console.error("Failed to load keys:", error);
+      setKeysLoadFailed(true);
+    }
+  }, [setUserEncryptionKeys]);
+
+  useEffect(() => {
+    if (!keysKnown) void loadKeys();
+    // Loaded once on mount; a failure is retried from the page.
+  }, []);
+
   const generate = useGenerateKeyFlow({
     userId,
     accountLabel: userEmail,
-    hasExistingKeys: hasKeys,
+    hasExistingKeys: !offerNewKey,
     refreshKeysFromServer,
   });
   const importFlow = useImportKeyFlow({
     userId,
-    hasExistingKeys: hasKeys,
+    hasExistingKeys: !offerNewKey,
     refreshKeysFromServer,
   });
   const recover = useRecoverKeyFlow({
@@ -286,8 +308,21 @@ const KeysManagement = ({
           />
         </div>
       ) : null}
+      {!keysKnown && keysLoadFailed ? (
+        <div className={styles.resetSection} data-testid="keys_load_failed">
+          <span className={styles.resetHint}>
+            {t("Common:EncryptionKeysLoadFailed")}
+          </span>
+          <Button
+            className={styles.resetButton}
+            size={ButtonSize.small}
+            onClick={loadKeys}
+            label={t("Common:TryAgain")}
+          />
+        </div>
+      ) : null}
       <div className={styles.contentBody}>
-        {hasKeys ? null : (
+        {offerNewKey ? (
           <div className={styles.inputGroup}>
             <Button
               primary
@@ -299,9 +334,9 @@ const KeysManagement = ({
             />
             {importFlow.fileInput}
           </div>
-        )}
+        ) : null}
         <div className={styles.secondaryActions}>
-          {hasKeys ? null : (
+          {offerNewKey ? (
             <Link
               type={LinkType.action}
               fontWeight="600"
@@ -317,7 +352,7 @@ const KeysManagement = ({
             >
               {t("Common:ImportKey")}
             </Link>
-          )}
+          ) : null}
           {recover.available ? (
             <Link
               type={LinkType.action}

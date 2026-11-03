@@ -1,7 +1,7 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "mobx-react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -27,6 +27,7 @@ const mocks = vi.hoisted(() => {
     exportFlow: flow(),
     rotate: flow(),
     toastSuccess: vi.fn(),
+    getEncryptionKeys: vi.fn(),
   };
 });
 
@@ -45,7 +46,7 @@ vi.mock("@docspace/shared/services/encryption/passkey-unlock", () => ({
   removePasskeyUnlock: vi.fn(async () => {}),
 }));
 vi.mock("@docspace/shared/api/privacy", () => ({
-  getEncryptionKeys: vi.fn(async () => []),
+  getEncryptionKeys: mocks.getEncryptionKeys,
 }));
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: mocks.toastSuccess, error: vi.fn() },
@@ -85,12 +86,15 @@ const KEY = {
   date: "2026-10-01T00:00:00",
 };
 
-const renderPage = (keys: (typeof KEY)[]) =>
+const renderPage = (
+  keys: (typeof KEY)[] | null,
+  setUserEncryptionKeys = vi.fn(),
+) =>
   render(
     <Provider
       userStore={{
         encryptionKeys: keys,
-        setUserEncryptionKeys: vi.fn(),
+        setUserEncryptionKeys,
         user: { id: "user-1", email: "user@example.com" },
       }}
     >
@@ -105,6 +109,7 @@ beforeEach(() => {
   mocks.writtenAt = null;
   mocks.passkeyAvailable = false;
   mocks.recover.available = true;
+  mocks.getEncryptionKeys.mockResolvedValue([]);
 });
 
 describe("KeysManagement", () => {
@@ -185,5 +190,46 @@ describe("KeysManagement", () => {
     expect(forget).toHaveFocus();
     await user.tab();
     expect(action("Common:LockNow")).toHaveFocus();
+  });
+});
+
+describe("KeysManagement before the key list is known", () => {
+  it("Key list could not be loaded", async () => {
+    mocks.getEncryptionKeys.mockRejectedValue(new Error("Network Error"));
+    renderPage(null);
+
+    expect(
+      await screen.findByText("Common:EncryptionKeysLoadFailed"),
+    ).toBeInTheDocument();
+    expect(action("Common:TryAgain")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Common:GenerateNewKey" }),
+    ).toBeNull();
+    expect(screen.queryByRole("button", { name: "Common:ImportKey" })).toBeNull();
+  });
+
+  it("reloads the list from Try again", async () => {
+    const user = userEvent.setup();
+    const setUserEncryptionKeys = vi.fn();
+    mocks.getEncryptionKeys.mockRejectedValueOnce(new Error("Network Error"));
+    mocks.getEncryptionKeys.mockResolvedValueOnce([KEY]);
+    renderPage(null, setUserEncryptionKeys);
+
+    await user.click(await screen.findByRole("button", { name: "Common:TryAgain" }));
+
+    await waitFor(() =>
+      expect(setUserEncryptionKeys).toHaveBeenCalledWith([KEY]),
+    );
+  });
+
+  it("Key list not known", () => {
+    mocks.getEncryptionKeys.mockReturnValue(new Promise(() => {}));
+    renderPage(null);
+
+    expect(
+      screen.queryByRole("button", { name: "Common:GenerateNewKey" }),
+    ).toBeNull();
+    expect(screen.queryByRole("button", { name: "Common:ImportKey" })).toBeNull();
+    expect(screen.queryByText("Common:EncryptionKeysLoadFailed")).toBeNull();
   });
 });

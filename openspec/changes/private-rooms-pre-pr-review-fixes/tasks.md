@@ -15,7 +15,7 @@ Every task first adds a test named after its scenario and shows that it fails on
   - `cd packages/client && pnpm exec vitest run src/components/dialogs/CreateEditRoomDialog`;
   - `cd common/tests && npx vitest run test/locales.test.js`.
 - [x] 1.2 Shared key gate (`packages/shared/hooks/usePrivateRoomKeyGate.ts`): take and pass `hasExistingKeys` to `useGenerateKeyFlow`, so that a gate whose caller knows of a key never starts generation. Verify: a case "Key already exists" in a new `packages/shared/hooks/usePrivateRoomKeyGate.test.tsx` (co-located, as the other hook tests of that folder), with `cd packages/shared && pnpm exec vitest run hooks`.
-- [ ] 1.3 Keys page (`keys-management/KeysManagement.tsx:101` and `useProfileBody.tsx` `getEncryptionKeysData`):
+- [x] 1.3 Keys page (`keys-management/KeysManagement.tsx:101` and `useProfileBody.tsx` `getEncryptionKeysData`):
   - while the list is `null` after a failed load, show Common:EncryptionKeysLoadFailed with a Common:TryAgain button that reloads the list;
   - offer neither Generate nor Import.
 

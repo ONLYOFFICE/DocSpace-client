@@ -1807,6 +1807,7 @@
   "PrivateRoomNotFoundDescription": "A sala privada que você está procurando não existe ou você não tem acesso.",
   "PrivateRoomNotFoundTitle": "Não encontrado",
   "PrivateRoomRenameNotSupported": "A renomeação de arquivos criptografados ainda não é compatível.",
+  "PrivateRoomsBetaDescription": "As salas privadas estão em versão beta. Algumas ações ainda não estão disponíveis para arquivos criptografados, e os arquivos criptografados não podem ser abertos sem a sua chave, portanto guarde sua frase de recuperação em um local seguro.",
   "PrivateRoomsListEmptyDescription": "As salas privadas têm criptografia de ponta a ponta. Os arquivos são criptografados no seu navegador antes do envio e apenas as pessoas que você convidar podem lê-los.",
   "PrivateRoomsListEmptyTitle": "Ainda não há salas privadas",
   "PrivateRoomTitle": "Sala Privada",

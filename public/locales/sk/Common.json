@@ -1807,6 +1807,7 @@
   "PrivateRoomNotFoundDescription": "Súkromná miestnosť, ktorú hľadáte, neexistuje alebo k nej nemáte prístup.",
   "PrivateRoomNotFoundTitle": "Nenašlo sa",
   "PrivateRoomRenameNotSupported": "Premenovanie šifrovaných súborov zatiaľ nie je podporované.",
+  "PrivateRoomsBetaDescription": "Súkromné miestnosti sú vo verzii beta. Niektoré akcie zatiaľ nie sú pre šifrované súbory dostupné a šifrované súbory nemožno otvoriť bez vášho kľúča, preto si obnovovaciu frázu bezpečne uschovajte.",
   "PrivateRoomsListEmptyDescription": "Súkromné miestnosti sú koncovo zašifrované. Súbory sú zašifrované vo vašom prehliadači pred nahraním a prečítať si ich môžu iba ľudia, ktorých pozvete.",
   "PrivateRoomsListEmptyTitle": "Zatiaľ žiadne súkromné miestnosti",
   "PrivateRoomTitle": "Súkromná miestnosť",

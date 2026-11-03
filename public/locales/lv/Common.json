@@ -1807,6 +1807,7 @@
   "PrivateRoomNotFoundDescription": "Privātā telpa, ko meklējat, neeksistē vai jums nav tai piekļuves.",
   "PrivateRoomNotFoundTitle": "Nav atrasta",
   "PrivateRoomRenameNotSupported": "Šifrētu failu pārdēvēšana pagaidām netiek atbalstīta.",
+  "PrivateRoomsBetaDescription": "Privātās telpas ir beta versijā. Dažas darbības šifrētiem failiem vēl nav pieejamas, un šifrētus failus nevar atvērt bez jūsu atslēgas, tāpēc glabājiet atkopšanas frāzi drošā vietā.",
   "PrivateRoomsListEmptyDescription": "Privātās telpas ir pilnīgi šifrētas. Faili tiek šifrēti jūsu pārlūkprogrammā pirms augšupielādes, un tos var lasīt tikai jūsu uzaicinātie cilvēki.",
   "PrivateRoomsListEmptyTitle": "Vēl nav privāto telpu",
   "PrivateRoomTitle": "Privātā telpa",

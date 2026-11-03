@@ -1807,6 +1807,7 @@
   "PrivateRoomNotFoundDescription": "Etsimääsi yksityishuonetta ei ole olemassa tai sinulla ei ole siihen käyttöoikeutta.",
   "PrivateRoomNotFoundTitle": "Ei löytynyt",
   "PrivateRoomRenameNotSupported": "Salattujen tiedostojen uudelleennimeämistä ei vielä tueta.",
+  "PrivateRoomsBetaDescription": "Yksityishuoneet ovat beta-vaiheessa. Jotkin toiminnot eivät ole vielä käytettävissä salatuille tiedostoille, eikä salattuja tiedostoja voi avata ilman avaintasi, joten säilytä palautuslauseesi turvassa.",
   "PrivateRoomsListEmptyDescription": "Yksityishuoneet on salattu päästä päähän. Tiedostot salataan selaimessasi ennen lähetystä, ja vain kutsumasi henkilöt voivat lukea niitä.",
   "PrivateRoomsListEmptyTitle": "Ei vielä yksityishuoneita",
   "PrivateRoomTitle": "Yksityishuone",

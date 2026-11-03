@@ -1807,6 +1807,7 @@
   "PrivateRoomNotFoundDescription": "Privatna soba koju tražite ne postoji ili nemate pristup.",
   "PrivateRoomNotFoundTitle": "Nije pronađeno",
   "PrivateRoomRenameNotSupported": "Preimenovanje šifrovanih fajlova još uvek nije podržano.",
+  "PrivateRoomsBetaDescription": "Privatne sobe su u beta fazi. Neke radnje još uvek nisu dostupne za šifrovane fajlove, a šifrovani fajlovi ne mogu da se otvore bez vašeg ključa, zato čuvajte frazu za oporavak na bezbednom mestu.",
   "PrivateRoomsListEmptyDescription": "Privatne sobe su šifrovane s kraja na kraj. Datoteke se šifruju u vašem pregledaču pre otpremanja i mogu ih čitati samo osobe koje pozovete.",
   "PrivateRoomsListEmptyTitle": "Još nema privatnih soba",
   "PrivateRoomTitle": "Privatna soba",

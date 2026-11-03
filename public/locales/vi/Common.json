@@ -1807,6 +1807,7 @@
   "PrivateRoomNotFoundDescription": "Phòng riêng tư bạn đang tìm không tồn tại hoặc bạn không có quyền truy cập.",
   "PrivateRoomNotFoundTitle": "Không tìm thấy",
   "PrivateRoomRenameNotSupported": "Việc đổi tên tệp được mã hóa chưa được hỗ trợ.",
+  "PrivateRoomsBetaDescription": "Phòng riêng tư đang ở giai đoạn beta. Một số thao tác chưa khả dụng cho tệp được mã hóa, và không thể mở tệp được mã hóa nếu không có khóa của bạn, vì vậy hãy giữ cụm từ khôi phục của bạn ở nơi an toàn.",
   "PrivateRoomsListEmptyDescription": "Các phòng riêng tư được mã hoá đầu cuối. Tập tin được mã hoá trong trình duyệt của bạn trước khi tải lên và chỉ những người bạn mời mới có thể đọc chúng.",
   "PrivateRoomsListEmptyTitle": "Chưa có phòng riêng tư nào",
   "PrivateRoomTitle": "Phòng Riêng Tư",

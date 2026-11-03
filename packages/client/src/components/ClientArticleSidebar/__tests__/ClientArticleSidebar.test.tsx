@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -50,18 +50,28 @@ vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store", () => ({
 
 vi.mock("SRC_DIR/components/NewFilesBadge", () => ({ default: () => null }));
 
+vi.mock("SRC_DIR/components/BetaBadgeWrapper", () => ({
+  default: ({ description }: { description?: string }) => (
+    <span data-testid="beta-badge">{description}</span>
+  ),
+}));
+
+type TNavEntry = {
+  id: string;
+  badgeComponent?: React.ReactNode;
+  children?: TNavEntry[];
+};
+
 vi.mock("SRC_DIR/components/AppsSidebar", () => ({
-  default: ({
-    groups,
-  }: {
-    groups: { items: { id: string; children?: { id: string }[] }[] }[];
-  }) => (
+  default: ({ groups }: { groups: { items: TNavEntry[] }[] }) => (
     <ul>
       {groups
         .flatMap((group) => group.items)
         .flatMap((item) => [item, ...(item.children ?? [])])
         .map((item) => (
-          <li key={item.id} data-testid={`nav-${item.id}`} />
+          <li key={item.id} data-testid={`nav-${item.id}`}>
+            {item.badgeComponent}
+          </li>
         ))}
     </ul>
   ),
@@ -71,43 +81,67 @@ vi.mock("SRC_DIR/components/AppsSidebar", () => ({
 const ClientArticleSidebar = (await import("../index"))
   .default as unknown as React.ComponentType;
 
+const renderSidebar = () =>
+  render(
+    <Provider
+      authStore={{ isAdmin: true, isRoomAdmin: false }}
+      userStore={{ user: { id: "user-1", isVisitor: false } }}
+      treeFoldersStore={{
+        treeFolders: [
+          { id: 1, title: "My documents", rootFolderType: FolderType.USER },
+          { id: 2002, title: "Rooms", rootFolderType: FolderType.Rooms },
+          { id: 2003, title: "Archive", rootFolderType: FolderType.Archive },
+        ],
+        roomsFolderId: 2002,
+        archiveFolderId: 2003,
+        myFolderId: 1,
+        isTemplatesFolderRoot: false,
+        isDocumentsFolder: false,
+      }}
+      filesStore={{ setSelection: vi.fn(), trashIsEmpty: true }}
+      filesActionsStore={{ emptyTrashInProgress: false }}
+      dialogsStore={{ setEmptyTrashDialogVisible: vi.fn() }}
+      clientLoadingStore={{
+        showArticleLoader: false,
+        setIsSectionBodyLoading: vi.fn(),
+      }}
+      settingsStore={{ aiServicesEnabled: true }}
+      appsStore={{
+        isInstalled: () => true,
+        isPrivateRoomsSectionAvailable: true,
+        ensureLoaded: vi.fn(),
+      }}
+    >
+      <ClientArticleSidebar />
+    </Provider>,
+  );
+
 describe("ClientArticleSidebar — Private section", () => {
   it("Private item rendered", () => {
-    render(
-      <Provider
-        authStore={{ isAdmin: true, isRoomAdmin: false }}
-        userStore={{ user: { id: "user-1", isVisitor: false } }}
-        treeFoldersStore={{
-          treeFolders: [
-            { id: 1, title: "My documents", rootFolderType: FolderType.USER },
-            { id: 2002, title: "Rooms", rootFolderType: FolderType.Rooms },
-            { id: 2003, title: "Archive", rootFolderType: FolderType.Archive },
-          ],
-          roomsFolderId: 2002,
-          archiveFolderId: 2003,
-          myFolderId: 1,
-          isTemplatesFolderRoot: false,
-          isDocumentsFolder: false,
-        }}
-        filesStore={{ setSelection: vi.fn(), trashIsEmpty: true }}
-        filesActionsStore={{ emptyTrashInProgress: false }}
-        dialogsStore={{ setEmptyTrashDialogVisible: vi.fn() }}
-        clientLoadingStore={{
-          showArticleLoader: false,
-          setIsSectionBodyLoading: vi.fn(),
-        }}
-        settingsStore={{ aiServicesEnabled: true }}
-        appsStore={{
-          isInstalled: () => true,
-          isPrivateRoomsSectionAvailable: true,
-          ensureLoaded: vi.fn(),
-        }}
-      >
-        <ClientArticleSidebar />
-      </Provider>,
-    );
+    renderSidebar();
 
     expect(screen.getByTestId("nav-private-rooms")).toBeInTheDocument();
     expect(screen.getByTestId("nav-private-rooms-archive")).toBeInTheDocument();
+  });
+
+  it("Beta badge shown", () => {
+    renderSidebar();
+
+    expect(
+      within(screen.getByTestId("nav-private-rooms")).getByTestId("beta-badge"),
+    ).toBeInTheDocument();
+    expect(
+      within(screen.getByTestId("nav-private-rooms-archive")).queryByTestId(
+        "beta-badge",
+      ),
+    ).toBeNull();
+  });
+
+  it("Badge tooltip", () => {
+    renderSidebar();
+
+    expect(
+      within(screen.getByTestId("nav-private-rooms")).getByTestId("beta-badge"),
+    ).toHaveTextContent("Common:PrivateRoomsBetaDescription");
   });
 });

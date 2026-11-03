@@ -1807,6 +1807,7 @@
   "PrivateRoomNotFoundDescription": "La salle privée que vous recherchez n'existe pas ou vous n'y avez pas accès.",
   "PrivateRoomNotFoundTitle": "Introuvable",
   "PrivateRoomRenameNotSupported": "Le renommage des fichiers chiffrés n'est pas encore pris en charge.",
+  "PrivateRoomsBetaDescription": "Les salles privées sont en version bêta. Certaines actions ne sont pas encore disponibles pour les fichiers chiffrés, et les fichiers chiffrés ne peuvent pas être ouverts sans votre clé, alors conservez votre phrase de récupération en lieu sûr.",
   "PrivateRoomsListEmptyDescription": "Les salles privées sont chiffrées de bout en bout. Les fichiers sont chiffrés dans votre navigateur avant le téléversement et seules les personnes que vous invitez peuvent les lire.",
   "PrivateRoomsListEmptyTitle": "Aucune salle privée pour le moment",
   "PrivateRoomTitle": "Salle privée",

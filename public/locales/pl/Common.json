@@ -1807,6 +1807,7 @@
   "PrivateRoomNotFoundDescription": "Prywatny pokój, którego szukasz, nie istnieje lub nie masz do niego dostępu.",
   "PrivateRoomNotFoundTitle": "Nie znaleziono",
   "PrivateRoomRenameNotSupported": "Zmiana nazwy zaszyfrowanych plików nie jest jeszcze obsługiwana.",
+  "PrivateRoomsBetaDescription": "Prywatne pokoje są w wersji beta. Niektóre działania nie są jeszcze dostępne dla zaszyfrowanych plików, a zaszyfrowanych plików nie można otworzyć bez Twojego klucza, dlatego przechowuj frazę odzyskiwania w bezpiecznym miejscu.",
   "PrivateRoomsListEmptyDescription": "Prywatne pokoje są szyfrowane end-to-end. Pliki są szyfrowane w przeglądarce przed wgraniem i mogą je odczytać tylko zaproszone przez Ciebie osoby.",
   "PrivateRoomsListEmptyTitle": "Brak prywatnych pokoi",
   "PrivateRoomTitle": "Prywatny pokój",

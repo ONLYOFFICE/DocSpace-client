@@ -87,6 +87,7 @@ import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-setti
 import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
+import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 import {
   buildFolderUrl,
@@ -544,6 +545,13 @@ const ClientArticleSidebar = ({
         label: t("Common:Private"),
         icon: CatalogPrivateReactSvgUrl,
         ...nav(searchAreaUrl("/private/filter", RoomSearchArea.Active)),
+        badgeComponent: (
+          <BetaBadge
+            place="right-start"
+            description={t("Common:PrivateRoomsBetaDescription")}
+            dataTestId="private_rooms_beta_badge"
+          />
+        ),
         children: [
           {
             id: "private-rooms-archive",

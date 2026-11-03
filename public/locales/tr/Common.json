@@ -1807,6 +1807,7 @@
   "PrivateRoomNotFoundDescription": "Aradığınız özel oda mevcut değil veya erişim izniniz yok.",
   "PrivateRoomNotFoundTitle": "Bulunamadı",
   "PrivateRoomRenameNotSupported": "Şifrelenmiş dosyaları yeniden adlandırma henüz desteklenmiyor.",
+  "PrivateRoomsBetaDescription": "Özel odalar beta aşamasındadır. Şifrelenmiş dosyalar için bazı işlemler henüz kullanılamıyor ve şifrelenmiş dosyalar anahtarınız olmadan açılamaz, bu nedenle kurtarma ifadenizi güvenli bir yerde saklayın.",
   "PrivateRoomsListEmptyDescription": "Özel odalar uçtan uca şifrelenir. Dosyalar yüklenmeden önce tarayıcınızda şifrelenir ve yalnızca davet ettiğiniz kişiler bunları okuyabilir.",
   "PrivateRoomsListEmptyTitle": "Henüz özel oda yok",
   "PrivateRoomTitle": "Özel Oda",

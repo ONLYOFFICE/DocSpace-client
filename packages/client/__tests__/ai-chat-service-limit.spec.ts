@@ -60,9 +60,11 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
  * the chat library turns it into a generic "auth" error. The answer keeps a
  * past-tense note (Shell's formatChatError), and the state goes to the
  * notice above the composer (useAiChatNotice), which names when the limit
- * resets and holds sending back meanwhile. Only admins can change the limit,
+ * resets and leaves sending open: the limit also resets with its period, and
+ * nothing tells a regular user about it. Only admins can change the limit,
  * so the notice gives them a button to AI settings -> Limits; everyone else
- * is pointed to the Full admin. Neither gets a Retry while the limit holds.
+ * is pointed to the Full admin. The limit comes as an "auth" error, which
+ * the library never offers to retry.
  */
 
 /** The rooms list (roomListHandler); its header carries the AI Chat button. */
@@ -74,8 +76,6 @@ const DESKTOP = { width: 1440, height: 1024 };
 const RESET_AT = "2026-10-23 23:59:59Z";
 /** The same instant the standard way, for an en-US account in UTC. */
 const RESET_AT_SHOWN = "10/23/2026 11:59 PM";
-/** The browser's clock in both tests: the day the limit is reached. */
-const NOW = new Date("2026-10-23T12:00:00Z");
 
 /** Ids of the selfByTypeHandler accounts the two tests sign in as. */
 const OWNER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
@@ -96,9 +96,6 @@ const dismissModelUpdatedNotice = (page: Page, userId: string) =>
 
 /** Opens the rooms list, docks the AI Chat panel from the header and sends. */
 const openChatAndSend = async (page: Page, baseUrl: string) => {
-  // Before the reset: a limit whose reset has passed is lifted at once, so
-  // the notice would never show on a real clock once that day is over.
-  await page.clock.setFixedTime(NOW);
   await page.setViewportSize(DESKTOP);
   await page.goto(`${baseUrl}${ROOMS_URL}`);
 
@@ -113,6 +110,12 @@ const openChatAndSend = async (page: Page, baseUrl: string) => {
 
   await expect(errorBox(page)).toBeVisible();
   await expect(notice(page)).toBeVisible();
+};
+
+/** The notice does not hold the composer: a new message can be sent. */
+const expectSendingOpen = async (page: Page) => {
+  await page.getByTestId("composer-input").fill("Try again");
+  await expect(page.getByTestId("send-button")).toBeEnabled();
 };
 
 /**
@@ -180,7 +183,7 @@ test.describe("AI chat: spending limit reached", () => {
     await expect(page.getByTestId("chat-error-title")).toHaveText(
       "Response interrupted: the AI spending limit was reached",
     );
-    // No Retry while the limit holds: it would only hit the same limit.
+    // No Retry for an "auth" error.
     await expect(errorBox(page).getByRole("button")).toHaveCount(0);
 
     await expect(page.getByTestId("composer-notice-title")).toHaveText(
@@ -189,8 +192,6 @@ test.describe("AI chat: spending limit reached", () => {
     await expect(page.getByTestId("composer-notice-description")).toHaveText(
       `AI requests are paused until ${RESET_AT_SHOWN}. Raise the limit in the AI settings to continue now.`,
     );
-    await expect(page.getByTestId("send-button")).toBeDisabled();
-
     // The host's Button drops the library's data-testid, so the notice's
     // button is found by role.
     const action = notice(page).getByRole("button");
@@ -198,6 +199,8 @@ test.describe("AI chat: spending limit reached", () => {
     await expect(action).toHaveText("Change AI limit");
 
     await shootDesktop(page, "admin-change-limit.png");
+
+    await expectSendingOpen(page);
 
     await action.click();
     await expect(page).toHaveURL(new RegExp(`${LIMITS_URL}$`));
@@ -227,5 +230,7 @@ test.describe("AI chat: spending limit reached", () => {
     await expect(notice(page).getByRole("button")).toHaveCount(0);
 
     await shootDesktop(page, "user-contact-admin.png");
+
+    await expectSendingOpen(page);
   });
 });

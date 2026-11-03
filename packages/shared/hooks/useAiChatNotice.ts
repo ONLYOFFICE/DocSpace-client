@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
@@ -56,37 +56,37 @@ export type TComposerNotice = {
   blocksSending?: boolean;
 };
 
+// The wallet service group whose limits the chat runs into (`ServiceLimitGroups.AiServices`).
+const AI_SERVICES = "ai-services";
+
 type UseAiChatNoticeProps = {
   t: TTranslation;
   language: string;
   standalone: boolean;
   isAdmin: boolean;
   isPayer: boolean;
-  isChatOpen: boolean;
   /** Opens the wallet; the Payer gets a "Top up wallet" button for it. */
   onTopUpWallet?: () => void;
   /** Opens the AI limits; an admin gets a "Change AI limit" button for it. */
   onChangeAiLimit?: () => void;
-  /** Reads the balance back for an admin when the chat is opened again. */
-  fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
 };
 
 /**
  * The AI chat's state notice above the composer (see
  * `WidgetConfig.composerNotice`). An interrupted answer keeps its own note
- * in the history; this is the state behind it, shown while it lasts:
+ * in the history; this is the state behind it:
  *
  * - set when a round fails for lack of money;
- * - the wallet one is cleared by the top-up socket event, which reaches
- *   every user of the portal, and on opening the chat - for an admin after
- *   the balance is read back, for anyone else optimistically, since a
- *   regular user cannot read the balance (a send that still fails sets it
- *   again);
- * - the limit one is cleared when the limit resets and on opening the chat
- *   (an admin may have raised it meanwhile);
- * - the provider one is cleared by the next answer that completes: the
- *   portal never sees a top-up at the provider, so it does not block
- *   sending either.
+ * - cleared only by a fact that the state is over, never by a guess: the
+ *   next answer that completes (any kind), the top-up socket event (wallet)
+ *   and the limits-changed socket event (limit) - the server sends the
+ *   latter to everyone who may read the changed limit, the admin who changed
+ *   it included. A reload starts without it.
+ *
+ * None of them blocks sending: a limit also resets with its period, and a
+ * regular user is not told when an admin raises the portal's limit, so a
+ * blocked composer could outlive the state. A send made while it still
+ * holds fails the same way and keeps the notice.
  *
  * Shared by the portal and the SDK frames; a host without a wallet page or
  * AI settings to send the user to (the SDK) leaves the actions out and the
@@ -98,14 +98,10 @@ export const useAiChatNotice = ({
   standalone,
   isAdmin,
   isPayer,
-  isChatOpen,
   onTopUpWallet,
   onChangeAiLimit,
-  fetchWalletBalance,
 }: UseAiChatNoticeProps) => {
   const [block, setBlock] = useState<TAiChatBlock | null>(null);
-  const blockRef = useRef(block);
-  blockRef.current = block;
 
   const onStreamError = useCallback(
     (event: TAiChatStreamError) => {
@@ -115,9 +111,7 @@ export const useAiChatNotice = ({
     [standalone],
   );
 
-  const onStreamEnd = useCallback(() => {
-    if (blockRef.current?.kind === "provider") setBlock(null);
-  }, []);
+  const onStreamEnd = useCallback(() => setBlock(null), []);
 
   // The wallet was topped up: the state is over for everyone.
   useEffect(() => {
@@ -131,42 +125,20 @@ export const useAiChatNotice = ({
     };
   }, [block?.kind]);
 
-  // A limit with a reset date lifts by itself.
+  // The AI limits changed (raised, removed): the next send tells whether
+  // this one still holds.
   useEffect(() => {
-    if (block?.kind !== "limit" || !block.until) return;
+    if (block?.kind !== "limit") return;
 
-    const delay = new Date(block.until).getTime() - Date.now();
-    if (Number.isNaN(delay)) return;
+    const onLimitsChange = ({ serviceName }: { serviceName: string }) => {
+      if (serviceName === AI_SERVICES) setBlock(null);
+    };
+    SocketHelper?.on(SocketEvents.ChangeServiceLimits, onLimitsChange);
 
-    const timer = setTimeout(() => setBlock(null), Math.max(delay, 0));
-    return () => clearTimeout(timer);
-  }, [block]);
-
-  // Opening the chat re-checks the state instead of waiting for the next
-  // message.
-  const wasChatOpen = useRef(isChatOpen);
-  useEffect(() => {
-    const opened = isChatOpen && !wasChatOpen.current;
-    wasChatOpen.current = isChatOpen;
-    if (!opened || !blockRef.current) return;
-
-    const { kind } = blockRef.current;
-    if (kind === "limit") {
-      setBlock(null);
-      return;
-    }
-    if (kind !== "wallet") return;
-
-    if (!isAdmin || !fetchWalletBalance) {
-      setBlock(null);
-      return;
-    }
-    fetchWalletBalance(true)
-      .then((balance) => {
-        if (balance > 0 && blockRef.current?.kind === "wallet") setBlock(null);
-      })
-      .catch((e) => console.error(e));
-  }, [isChatOpen, isAdmin, fetchWalletBalance]);
+    return () => {
+      SocketHelper?.off(SocketEvents.ChangeServiceLimits, onLimitsChange);
+    };
+  }, [block?.kind]);
 
   const composerNotice = useMemo<TComposerNotice | null>(() => {
     if (!block) return null;
@@ -181,7 +153,6 @@ export const useAiChatNotice = ({
           isPayer && onTopUpWallet
             ? { text: t("Common:TopUpWallet"), onClick: onTopUpWallet }
             : undefined,
-        blocksSending: true,
       };
     }
 
@@ -198,7 +169,6 @@ export const useAiChatNotice = ({
           isAdmin && onChangeAiLimit
             ? { text: t("Common:ChangeAILimit"), onClick: onChangeAiLimit }
             : undefined,
-        blocksSending: true,
       };
     }
 

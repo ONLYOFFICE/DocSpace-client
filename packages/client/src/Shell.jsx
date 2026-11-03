@@ -885,8 +885,8 @@ const Shell = ({ page = "home", ...rest }) => {
   const isChatOpen = isChatPanelVisible;
 
   // The money state behind an interrupted answer (an empty wallet, a limit
-  // reached), shown above the composer while it lasts; the answer keeps its
-  // own past-tense note (see formatChatError).
+  // reached), shown above the composer until the server says it is over;
+  // the answer keeps its own past-tense note (see formatChatError).
   const onTopUpWallet = useCallback(
     () => navigate(PAYMENT_ROUTES.wallet),
     [navigate],
@@ -905,10 +905,8 @@ const Shell = ({ page = "home", ...rest }) => {
     standalone,
     isAdmin,
     isPayer,
-    isChatOpen,
     onTopUpWallet,
     onChangeAiLimit,
-    fetchWalletBalance,
   });
 
   // "Choose AI Project" entry for the model picker: the user's AI projects,
@@ -946,7 +944,7 @@ const Shell = ({ page = "home", ...rest }) => {
   // history; the money state behind it - an empty wallet, a spending limit
   // reached (relayed as a 403, see getServiceLimitChatError) - and the way
   // out are on the notice above the composer (useAiChatNotice), which goes
-  // away with the state and holds Retry back while it lasts. A project whose
+  // away with the state. A project whose
   // model is unavailable keeps its own note and action. Every other code
   // keeps the library's default note and Retry.
   const formatChatError = useCallback(
@@ -974,9 +972,8 @@ const Shell = ({ page = "home", ...rest }) => {
 
       // An answer a money state cut short gets a muted past-tense note; the
       // state itself and the way out (top up, raise the limit) are on the
-      // notice above the composer, which also holds Retry back until the
-      // state is over (useAiChatNotice). Every other error keeps the
-      // library's red box and Retry.
+      // notice above the composer until the state is over (useAiChatNotice).
+      // Every other error keeps the library's red box and Retry.
       return getAiChatInterruption(t, payload, providerType, standalone);
     },
     [t, standalone, aiActiveProject, openEditAiProject],

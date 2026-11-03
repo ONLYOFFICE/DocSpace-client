@@ -159,7 +159,6 @@ const AiAgentsAiChatProviders = ({
     standalone: isStandalone,
     isAdmin: !!(user?.isAdmin || user?.isOwner),
     isPayer: false,
-    isChatOpen: true,
   });
 
   const formatChatError = React.useCallback<

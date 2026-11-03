@@ -1,16 +1,19 @@
 import { act, renderHook } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const handlers = new Map<string, () => void>();
+const handlers = new Map<string, (data?: unknown) => void>();
 
 vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
   default: {
-    on: vi.fn((event: string, handler: () => void) =>
+    on: vi.fn((event: string, handler: (data?: unknown) => void) =>
       handlers.set(event, handler),
     ),
     off: vi.fn((event: string) => handlers.delete(event)),
   },
-  SocketEvents: { TopUpWallet: "top-up-wallet" },
+  SocketEvents: {
+    TopUpWallet: "top-up-wallet",
+    ChangeServiceLimits: "change-service-limits",
+  },
 }));
 
 import { getAiChatBlock, getAiChatInterruption } from "@docspace/shared/utils/ai";
@@ -37,7 +40,6 @@ const setup = (overrides: Partial<Parameters<typeof useAiChatNotice>[0]> = {}) =
       standalone: false,
       isAdmin: false,
       isPayer: false,
-      isChatOpen: true,
       onTopUpWallet,
       onChangeAiLimit,
       ...overrides,
@@ -128,14 +130,13 @@ describe("useAiChatNotice", () => {
     expect(result.current.composerNotice).toBeNull();
   });
 
-  it("blocks sending on an empty wallet and lifts it on the top-up event", () => {
+  it("explains an empty wallet without blocking sending, until the top-up event", () => {
     const { result } = setup();
     act(() => result.current.onStreamError(walletError));
     expect(result.current.composerNotice).toEqual({
       title: "Common:AIPaused",
       description: "Common:AIPausedWalletEmptyContactPayer",
       action: undefined,
-      blocksSending: true,
     });
     act(() => handlers.get("top-up-wallet")?.());
     expect(result.current.composerNotice).toBeNull();
@@ -151,26 +152,51 @@ describe("useAiChatNotice", () => {
     expect(onTopUpWallet).toHaveBeenCalledTimes(1);
   });
 
-  it("re-checks the wallet when the chat is opened again", async () => {
-    const fetchWalletBalance = vi.fn().mockResolvedValue(5);
-    const { result, rerender } = setup({ isAdmin: true, fetchWalletBalance });
+  it("clears any notice when the next answer completes", () => {
+    const { result } = setup();
     act(() => result.current.onStreamError(walletError));
-    const props = {
-      t,
-      language: "en",
-      standalone: false,
-      isAdmin: true,
-      isPayer: false,
-      onTopUpWallet: vi.fn(),
-      onChangeAiLimit: vi.fn(),
-      fetchWalletBalance,
-    };
-    rerender({ ...props, isChatOpen: false });
+    act(() => result.current.onStreamEnd());
+    expect(result.current.composerNotice).toBeNull();
+
+    act(() =>
+      result.current.onStreamError({
+        error: { code: "auth", message: LIMIT_MESSAGE },
+      }),
+    );
+    act(() => result.current.onStreamEnd());
+    expect(result.current.composerNotice).toBeNull();
+  });
+
+  it("does not lift a limit by its reset date", () => {
+    vi.useFakeTimers();
+    try {
+      const { result } = setup();
+      act(() =>
+        result.current.onStreamError({
+          error: { code: "auth", message: LIMIT_MESSAGE },
+        }),
+      );
+      act(() => vi.advanceTimersByTime(30 * 24 * 60 * 60 * 1000));
+      expect(result.current.composerNotice?.title).toBe("Common:AILimitReached");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("lifts a limit when the AI limits change, and only those", () => {
+    const { result } = setup();
+    act(() =>
+      result.current.onStreamError({
+        error: { code: "auth", message: LIMIT_MESSAGE },
+      }),
+    );
+    act(() =>
+      handlers.get("change-service-limits")?.({ serviceName: "storage" }),
+    );
     expect(result.current.composerNotice).not.toBeNull();
-    await act(async () => {
-      rerender({ ...props, isChatOpen: true });
-    });
-    expect(fetchWalletBalance).toHaveBeenCalledWith(true);
+    act(() =>
+      handlers.get("change-service-limits")?.({ serviceName: "ai-services" }),
+    );
     expect(result.current.composerNotice).toBeNull();
   });
 
@@ -194,7 +220,7 @@ describe("useAiChatNotice", () => {
     );
     const notice = result.current.composerNotice;
     expect(notice?.title).toBe("Common:AILimitReached");
-    expect(notice?.blocksSending).toBe(true);
+    expect(notice?.blocksSending).toBeUndefined();
     notice?.action?.onClick();
     expect(onChangeAiLimit).toHaveBeenCalledTimes(1);
   });

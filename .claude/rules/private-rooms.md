@@ -74,8 +74,10 @@ Workflow:
    summary>`, e.g. `Client: Private rooms: refuse key-less uploads before the
    upload session`, or `OpenSpec: <change>: <summary>` for artifact-only
    commits; body in plain prose, ending with `OpenSpec: <change> <task id>`.
-   No AI-attribution lines (CLAUDE.md), no `--no-verify`, no push unless
-   asked. Full wording: the "Commits" paragraph of `openspec/config.yaml`.
+   Commit directly on `release/v4.1.0` (the feature branch was merged there
+   by PR !798). No AI-attribution lines (CLAUDE.md), no `--no-verify`, no
+   push unless asked. Full wording: the "Commits" paragraph of
+   `openspec/config.yaml`.
 8. The feature stays behind the `privateRooms` localStorage flag
    (`packages/shared/utils/privateRooms.ts`) until a change explicitly
    releases it; see `private-rooms/feature-gating`.

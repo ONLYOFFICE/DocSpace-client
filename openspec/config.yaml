@@ -76,9 +76,10 @@ context: |
   uploads before the upload session`; then a blank line and a plain-prose
   body wrapped at 72 columns saying what changed and why, ending with the
   line `OpenSpec: <change> <task id>` when it implements a task. No
-  Co-Authored-By or other AI-attribution lines (CLAUDE.md). Commit on the
-  current feature branch (branch first when on master or develop), never
-  push unless the user asks, and never bypass hooks with --no-verify.
+  Co-Authored-By or other AI-attribution lines (CLAUDE.md). Commit directly
+  on `release/v4.1.0`, where the feature branch was merged on 2026-11-03
+  (PR !798), never on master or develop; never push unless the user asks,
+  and never bypass hooks with --no-verify.
 
   Design history: the original design documents (SECURITY.md, FORMAT.md,
   AUDIT_FRONTEND/BACKEND.md, V1_RELEASE_PROGRESS.md, SDK plans) were never

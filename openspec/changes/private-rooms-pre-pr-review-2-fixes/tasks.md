@@ -28,7 +28,7 @@ One task is one commit with its code, tests, locales, mocks and the tick (the "C
 
 ## 6. Integration
 
-- [ ] 6.1 Run the pre-push gate, the client private-room and keys E2E under Docker (`tests-dev`), the SDK private E2E after `pnpm run test:build`, and `npx -y @fission-ai/openspec@latest validate --all --strict`. Verify: all green, except the failures the release branch has on its own.
+- [x] 6.1 Run the pre-push gate, the client private-room and keys E2E under Docker (`tests-dev`), the SDK private E2E after `pnpm run test:build`, and `npx -y @fission-ai/openspec@latest validate --all --strict`. Verify: all green, except the failures the release branch has on its own. Done 2026-11-03: the lefthook pre-push gate passed on the push of `78739003fd0`; under Docker (`tests-dev`) on `608aab0a5d2` the client `private-room*`, `keys-management*` and `key-flow-edge-cases` specs passed 146 of 146; the SDK private E2E after `pnpm run test:build` passed 34 with 15 skipped as fixme; `validate --all --strict` 19 of 19. Task 7.1 came after that E2E run and is covered by its unit test.
 
 ## 7. PR review
 

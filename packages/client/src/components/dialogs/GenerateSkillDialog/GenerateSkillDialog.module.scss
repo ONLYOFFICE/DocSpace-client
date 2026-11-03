@@ -68,7 +68,7 @@
 
 .editor {
   overflow: hidden;
-  border: 1px solid var(--input-border-color);
+  border: 1px solid var(--aside-header-border-color);
   border-radius: 3px;
 }
 
@@ -87,7 +87,7 @@
 
   &:hover,
   &:active {
-    background-color: var(--input-border-color);
+    background-color: var(--aside-header-border-color);
   }
 
   @media (max-width: 600px) {

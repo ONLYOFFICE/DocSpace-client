@@ -2167,6 +2167,7 @@
   "Site": "Trang web",
   "Size": "Kích cỡ",
   "SizeImageLarge": "Kích thước hình ảnh quá lớn, xin vui lòng chọn một hình ảnh khác.",
+  "SkillNameNeedsLetterOrDigit": "Tên phải chứa ít nhất một chữ cái hoặc chữ số",
   "Skip": "Bỏ qua",
   "SkipDescription": "Không có tệp nào được sao chép. Tệp gốc sẽ được giữ lại trong thư mục đích.",
   "SkipFolderDescription": "Không có thư mục nào sẽ được sao chép",

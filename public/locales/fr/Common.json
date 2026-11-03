@@ -2167,6 +2167,7 @@
   "Site": "Site",
   "Size": "Taille",
   "SizeImageLarge": "La taille de l’image est trop grande, veuillez sélectionner une autre image.",
+  "SkillNameNeedsLetterOrDigit": "Le nom doit contenir au moins une lettre ou un chiffre",
   "Skip": "Passer",
   "SkipDescription": "Aucun fichier ne sera copié. Le fichier d'origine sera conservé dans le dossier de destination.",
   "SkipFolderDescription": "Aucun dossier ne sera copié",

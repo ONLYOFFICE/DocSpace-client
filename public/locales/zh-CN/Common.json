@@ -2167,6 +2167,7 @@
   "Site": "站点",
   "Size": "大小",
   "SizeImageLarge": "图像尺寸过大，请选择另一张图像。",
+  "SkillNameNeedsLetterOrDigit": "名称必须至少包含一个字母或数字",
   "Skip": "跳过",
   "SkipDescription": "不会复制任何文件。原始文件将在目标文件夹中保留。",
   "SkipFolderDescription": "没有文件夹将会被复制",

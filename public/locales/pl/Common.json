@@ -2167,6 +2167,7 @@
   "Site": "Strona",
   "Size": "Rozmiar",
   "SizeImageLarge": "Rozmiar obrazu jest zbyt duży, wybierz inny obraz.",
+  "SkillNameNeedsLetterOrDigit": "Nazwa musi zawierać co najmniej jedną literę lub cyfrę",
   "Skip": "Pomiń",
   "SkipDescription": "Żaden plik nie zostanie skopiowany. Oryginalny plik zostanie zachowany w folderze docelowym.",
   "SkipFolderDescription": "Żaden katalog nie zostanie skopiowany",

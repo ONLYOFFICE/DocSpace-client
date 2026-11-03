@@ -2167,6 +2167,7 @@
   "Site": "Site",
   "Size": "Dimensiune",
   "SizeImageLarge": "Dimensiunea imaginii este prea mare, selectaţi o altă imagine.",
+  "SkillNameNeedsLetterOrDigit": "Numele trebuie să conțină cel puțin o literă sau o cifră",
   "Skip": "Omite",
   "SkipDescription": "Niciun fișier n-o să fie copiat. Fișierul de origine rămâne în dosarul de destinație.",
   "SkipFolderDescription": "Nici-un folder nu va fi copiat",

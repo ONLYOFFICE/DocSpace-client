@@ -57,6 +57,10 @@ import {
 } from "@docspace/shared/api/ai/types";
 import { getFileInfo, insertFile } from "@docspace/shared/api/files";
 import type { TTranslation } from "@docspace/shared/types";
+import {
+  getServiceLimitChatError,
+  getServiceLimitDescription,
+} from "@docspace/shared/utils/ai";
 
 import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
 
@@ -84,8 +88,7 @@ const readStoredWidth = () => {
 
 /**
  * The panel's width, dragged from its inner edge and remembered per browser.
- * The aside takes it through the ModalDialog width variable; on a phone the
- * aside is full width and the handle is hidden.
+ * On a phone the aside is full width and the handle is hidden.
  */
 const usePanelWidth = () => {
   const [width, setWidth] = React.useState(readStoredWidth);
@@ -121,18 +124,48 @@ const usePanelWidth = () => {
   return { width, onPointerDown };
 };
 
+// The server folds the title into the skill name and keeps only letters and
+// digits of it, so a title without any has no name.
+const HAS_NAME_CHARS = /[\p{L}\p{N}]/u;
+
 type GenerateSkillDialogProps = {
   roomId?: number | string | null;
+  isAdmin?: boolean;
+  language?: string;
   setGenerateSkillDialogVisible?: (visible: boolean) => void;
   openFileAction?: (item: never, t: TTranslation) => Promise<unknown>;
 };
 
-const getGenerateError = (t: TTranslation, error: TGenerateSkillError) => {
-  if (error.status === 503) return t("Common:CreateSkillWithAINoModel");
-  // The provider's own words for a rate limit or a lack of credit.
-  if (error.providerMessage) return error.providerMessage;
-  if (error.status && error.status < 500) return error.message;
-  return t("Common:SomethingWentWrong");
+// The statuses read as in the metadata AI panel (getMetadataAIError); the
+// server's own text is for developers and never shown.
+const getGenerateError = (
+  t: TTranslation,
+  language: string,
+  isAdmin: boolean,
+  error: TGenerateSkillError,
+) => {
+  const serviceLimit = getServiceLimitChatError({
+    code: error.code,
+    message: error.providerMessage,
+  });
+  if (serviceLimit) {
+    return getServiceLimitDescription(t, language, serviceLimit, isAdmin);
+  }
+
+  switch (error.status) {
+    case 403:
+      return t("Common:AccessDenied");
+    case 429:
+      return t("Metadata:AIBusy");
+    case 502:
+      return t("Metadata:AIFailed");
+    case 503:
+      return t("Common:CreateSkillWithAINoModel");
+    case 504:
+      return t("Metadata:AITimeout");
+    default:
+      return t("Common:SomethingWentWrong");
+  }
 };
 
 /**
@@ -145,10 +178,12 @@ const getGenerateError = (t: TTranslation, error: TGenerateSkillError) => {
  */
 const GenerateSkillDialog = ({
   roomId,
+  isAdmin = false,
+  language = "en",
   setGenerateSkillDialogVisible,
   openFileAction,
 }: GenerateSkillDialogProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "Metadata"]);
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [isValidTitle, setIsValidTitle] = React.useState(true);
@@ -214,11 +249,11 @@ const GenerateSkillDialog = ({
 
   const onGenerate = async () => {
     const trimmedTitle = title.trim();
-    if (!trimmedTitle) {
+    if (!canGenerate || isBusy) return;
+    if (!HAS_NAME_CHARS.test(trimmedTitle)) {
       setIsValidTitle(false);
       return;
     }
-    if (!canGenerate || isBusy) return;
 
     const abort = new AbortController();
     abortRef.current = abort;
@@ -234,7 +269,9 @@ const GenerateSkillDialog = ({
       );
     } catch (e) {
       if (abort.signal.aborted) return;
-      setError(getGenerateError(t, e as TGenerateSkillError));
+      setError(
+        getGenerateError(t, language, isAdmin, e as TGenerateSkillError),
+      );
     }
     setIsGenerating(false);
   };
@@ -276,7 +313,10 @@ const GenerateSkillDialog = ({
       // the generated text, which "Generate skill" writes anew.
       isBackButton={!!skill}
       onBackClick={isSaving ? undefined : () => setSkill(null)}
-      style={{ "--modal-dialog-aside-default-width": `${width}px` } as React.CSSProperties}
+      // `style` lands on the dialog element, below the root that resolves
+      // `--modal-dialog-aside-default-width` into the aside width, so the
+      // resolved variable itself is set here and the aside inherits it.
+      style={{ "--modal-dialog-aside-width": `${width}px` } as React.CSSProperties}
       dataTestId="generate-skill-dialog"
     >
       <ModalDialog.Header>{t("Common:CreateSkillWithAI")}</ModalDialog.Header>
@@ -313,7 +353,7 @@ const GenerateSkillDialog = ({
                 setIsValidTitle(true);
               }}
               isValidTitle={isValidTitle}
-              errorMessage={t("Common:RequiredField")}
+              errorMessage={t("Common:SkillNameNeedsLetterOrDigit")}
               isAutoFocussed
               isDisabled={isBusy}
               dataTestId="generate-skill-title"
@@ -378,8 +418,12 @@ const GenerateSkillDialog = ({
   );
 };
 
-export default inject(({ dialogsStore, selectedFolderStore, filesActionsStore }: TStore) => ({
-  roomId: selectedFolderStore.id,
-  setGenerateSkillDialogVisible: dialogsStore.setGenerateSkillDialogVisible,
-  openFileAction: filesActionsStore.openFileAction,
-}))(observer(GenerateSkillDialog));
+export default inject(
+  ({ authStore, dialogsStore, selectedFolderStore, filesActionsStore }: TStore) => ({
+    roomId: selectedFolderStore.id,
+    isAdmin: authStore.isAdmin,
+    language: authStore.language,
+    setGenerateSkillDialogVisible: dialogsStore.setGenerateSkillDialogVisible,
+    openFileAction: filesActionsStore.openFileAction,
+  }),
+)(observer(GenerateSkillDialog));

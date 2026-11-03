@@ -2167,6 +2167,7 @@
   "Site": "Vietne",
   "Size": "Izmērs",
   "SizeImageLarge": "Attēls ir pārāk liels. Lūdzu, atlasiet citu attēlu.",
+  "SkillNameNeedsLetterOrDigit": "Nosaukumā jābūt vismaz vienam burtam vai ciparam",
   "Skip": "Izlaist",
   "SkipDescription": "Failam netiks veikta kopēšana. Oriģinālais fails tiks saglabāts sākotnējā vietā.",
   "SkipFolderDescription": "Neviena mape netiks kopēta",

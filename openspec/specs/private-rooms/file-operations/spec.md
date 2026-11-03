@@ -717,3 +717,10 @@ The system SHALL end an encrypted upload that the user cancels before its cipher
 #### Scenario: Stored file never left without its entries
 - **WHEN** an encrypted upload is cancelled at any stage
 - **THEN** the system MUST NOT leave a stored encrypted file without the uploader's access entry, and MUST NOT leave its members without either an entry or a pending-access mark, without reporting it
+
+### Requirement: Cancelling a queued encrypted upload in the SDK stops it
+The SDK SHALL take the cancel signal of every file of an encrypted upload batch when the batch starts, so that cancelling a file that is still waiting in the batch stops it before any of its bytes are sent.
+
+#### Scenario: File cancelled while waiting
+- **WHEN** a user uploads two files into a private room through the SDK and cancels the second while the first is still uploading
+- **THEN** the second file is not uploaded, no file is created for it, and its row is gone

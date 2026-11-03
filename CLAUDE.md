@@ -19,7 +19,7 @@ pnpm test:store                # only client store tests (src/store, incl. Files
 # Unit tests (sdk package, Vitest)
 pnpm test:sdk
 
-# Unit tests (doceditor package, Vitest)
+# Unit tests (doceditor package, Vitest; __tests__/ there is Playwright E2E)
 pnpm test:doceditor
 
 # Run single unit test file
@@ -216,7 +216,7 @@ commit messages.
 
 ### Git hooks (lefthook)
 
-`lefthook.yml` runs a blocking pre-push gate — six sequential commands, any
+`lefthook.yml` runs a blocking pre-push gate — seven sequential commands, any
 failure aborts the push:
 
 1. `pnpm run tsc` — type checking, all packages

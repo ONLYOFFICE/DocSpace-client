@@ -4,6 +4,7 @@ paths:
   - "packages/client/src/**/__tests__/**"
   - "packages/shared/**/*.test.*"
   - "packages/shared/**/__tests__/**"
+  - "packages/doceditor/src/**/*.test.*"
   - "packages/*/vitest.config.ts"
   - "packages/*/vitest/**"
 ---
@@ -19,6 +20,13 @@ paths:
   E2E** — never put unit tests there.
 - **shared**: co-located next to the component
   (`SaveCancelButtons.test.tsx`), a few `__tests__/` dirs.
+- **doceditor**: co-located under `packages/doceditor/src/**`, either next to
+  the source or in a `__tests__/` dir inside `src/` (vitest `include` is
+  `src/**/*.{test,spec}.{js,ts,jsx,tsx}`). The top-level
+  `packages/doceditor/__tests__/` is **Playwright E2E** and is excluded. The
+  suite runs in `jsdom` with `vitest/setupTests.ts` (TextEncoder/TextDecoder
+  polyfills) and inlines `@onlyoffice/apps-ui-kit` so its CSS imports load;
+  none of shared's always-on mocks below apply.
 - **ui-kit** is a third, separate suite living in its own repository, with its own setup and
   mocks; shared's setup does not apply there, and its `include` is an explicit
   directory list — a test outside those dirs silently does not run.
@@ -136,10 +144,11 @@ client: `SRC_DIR`, `PUBLIC_DIR`, `ASSETS_DIR`, `COMMON_DIR`, `PACKAGE_FILE`,
 ```bash
 pnpm test          # shared          pnpm test:client   # client
 pnpm test:sdk      # sdk             pnpm test:store    # client src/store only
+pnpm test:doceditor   # doceditor
 cd packages/client && pnpm exec vitest run src/store/filesStore   # single path
 ```
 
-All three suites are part of the blocking lefthook pre-push gate.
+All four suites are part of the blocking lefthook pre-push gate.
 
 Vitest strips types without checking them: run `pnpm exec tsc --noEmit -p
 tsconfig.json` in the package before committing a test, or the pre-push

@@ -367,15 +367,19 @@ describe("UploadDataStore.startSessionFunc — encrypted upload through the shar
     );
   });
 
-  it("Cancelled encrypted upload", async () => {
+  it("Cancelled while chunks are sent", async () => {
     const { store } = setupEncryptedPendingFile();
     vi.mocked(prepareEncryptedUpload).mockResolvedValue(
       preparedUpload(makeDek()) as never,
     );
     serveEncryptedUpload();
+    // The transport rejects a request whose signal aborted.
     vi.mocked(filesApi.uploadChunkParallel).mockImplementation(async () => {
       store.cancelCurrentUpload("enc-pending", t);
-      return {} as never;
+      throw Object.assign(new Error("canceled"), {
+        name: "CanceledError",
+        code: "ERR_CANCELED",
+      });
     });
     vi.mocked(filesApi.abortUploadSession).mockResolvedValue(
       undefined as never,

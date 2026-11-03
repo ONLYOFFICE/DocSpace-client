@@ -777,6 +777,125 @@ describe("uploadEncryptedFile for a caller with its own queue", () => {
   });
 });
 
+describe("Cancelling an encrypted upload", () => {
+  const ARGS = {
+    folderId: 1,
+    roomId: 10,
+    identity: makeIdentity() as never,
+    userId: "user-1",
+    publicKey: "pk-own",
+    publicKeyId: "key-1",
+  };
+  const BOB = {
+    id: "b-1",
+    userId: "bob",
+    publicKey: "pk-b",
+    privateKeyEnc: "",
+    date: "2026-01-01T00:00:00",
+  };
+  /** What axios rejects a request with when its signal aborts. */
+  const transportCancel = () =>
+    Object.assign(new Error("canceled"), {
+      name: "CanceledError",
+      code: "ERR_CANCELED",
+    });
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    resetTofuStores();
+    pendingAccessStore.clear(10, "bob");
+  });
+
+  it("Cancelled while chunks are sent, in parallel: aborted, not failed", async () => {
+    const api = await import("../../../api/files");
+    const controller = new AbortController();
+    vi.mocked(api.uploadChunkParallel).mockImplementation(async () => {
+      controller.abort();
+      throw transportCancel();
+    });
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, chunkSize: 1024, uploadThreads: 2, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: false, aborted: true });
+    expect(result.failedAt).toBeUndefined();
+    expect(api.abortUploadSession).toHaveBeenCalledWith(1, "session-1");
+    expect(api.finalizeUploadSession).not.toHaveBeenCalled();
+    vi.mocked(api.uploadChunkParallel).mockReset();
+  });
+
+  it("Cancelled after the file is stored: the last sequential chunk was sent", async () => {
+    const api = await import("../../../api/files");
+    const controller = new AbortController();
+    let sent = 0;
+    vi.mocked(api.uploadChunkSequential).mockImplementation(async () => {
+      sent += 1;
+      if (sent === 3) controller.abort();
+      return { data: { id: 42 } } as never;
+    });
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, chunkSize: 24, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: true, fileId: 42 });
+    expect(api.abortUploadSession).not.toHaveBeenCalled();
+    expect(api.setFileEncryptionKeys).toHaveBeenCalled();
+    vi.mocked(api.uploadChunkSequential).mockReset();
+    vi.mocked(api.uploadChunkSequential).mockResolvedValue({
+      data: { id: 42 },
+    } as never);
+  });
+
+  it("Cancelled after the file is stored: the uploader's and the members' entries are written", async () => {
+    const api = await import("../../../api/files");
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([BOB] as never);
+    const controller = new AbortController();
+    vi.mocked(api.setFileEncryptionKeys).mockImplementationOnce(async () => {
+      controller.abort();
+      return undefined as never;
+    });
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: true, fileId: 42 });
+    expect(result.aborted).toBeFalsy();
+    expect(api.setFileEncryptionKeys).toHaveBeenCalledTimes(2);
+    expect(pendingAccessStore.get(10, "bob")).toBeUndefined();
+  });
+
+  it("Cancelled while the file is finalized in parallel: the file is kept and shared", async () => {
+    const api = await import("../../../api/files");
+    const controller = new AbortController();
+    vi.mocked(api.finalizeUploadSession).mockImplementationOnce(
+      async (_folderId, _sessionId, signal?: AbortSignal) => {
+        controller.abort();
+        if (signal?.aborted) throw transportCancel();
+        return { id: 42, uploaded: true } as never;
+      },
+    );
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, chunkSize: 24, uploadThreads: 2, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: true, fileId: 42 });
+    expect(api.abortUploadSession).not.toHaveBeenCalled();
+  });
+});
+
 describe("orchestrateEncryptedUpload - room fan-out", () => {
   beforeEach(() => {
     vi.clearAllMocks();

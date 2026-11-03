@@ -38,7 +38,7 @@ Every task first adds a test named after its scenario and shows that it fails on
 
 ## 3. Cancelling an encrypted upload (review M1 and M2)
 
-- [ ] 3.1 Orchestrator (`packages/shared/services/private-room/encrypted-upload-orchestrator.ts`, design decisions 2 and 3):
+- [x] 3.1 Orchestrator (`packages/shared/services/private-room/encrypted-upload-orchestrator.ts`, design decisions 2 and 3):
   - pass the signal only to session start and chunk sending;
   - in the sequential path, skip the signal check once the last chunk request has been sent;
   - run `finalizeUploadSession` and the wrap stage without the signal;

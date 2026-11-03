@@ -432,8 +432,10 @@ async function uploadInChunks(
         }
       }),
     );
-    throwIfAborted(signal);
-    lastResponse = await finalizeUploadSession(folderId, sessionId, signal);
+    // Every chunk is on the server: the file is completed whatever a cancel
+    // says from here on.
+    // Spec: file-operations, "Cancelling an encrypted upload"
+    lastResponse = await finalizeUploadSession(folderId, sessionId);
   } else {
     for (const part of parts) {
       throwIfAborted(signal);
@@ -444,7 +446,6 @@ async function uploadInChunks(
       );
       reportSent(part);
     }
-    throwIfAborted(signal);
     try {
       await finalizeUploadSession(folderId, sessionId);
     } catch {
@@ -494,7 +495,6 @@ async function wrapDekForSelfAndRoom(args: {
   publicKey: string;
   publicKeyId: string;
   roomId: number | string;
-  signal: AbortSignal | undefined;
   refusals: Set<string> | undefined;
   serializeFanOut: EncryptedFileUploadArgs["serializeFanOut"];
 }): Promise<TRoomShare> {
@@ -506,12 +506,10 @@ async function wrapDekForSelfAndRoom(args: {
     publicKey,
     publicKeyId,
     roomId,
-    signal,
     refusals,
     serializeFanOut,
   } = args;
 
-  throwIfAborted(signal);
   const fileIdNumeric = typeof fileId === "number" ? fileId : Number(fileId);
 
   // 1. Self-wrap first — guarantees the uploader can decrypt even if the room
@@ -528,8 +526,6 @@ async function wrapDekForSelfAndRoom(args: {
   const fanOutToRoom = async (): Promise<TRoomShare> => {
     let readMembers: string[] = [];
     try {
-      throwIfAborted(signal);
-
       const [publicKeys, encryptionInfo] = await Promise.all([
         getRoomEncryptionKeys(roomId),
         getFileEncryptionAccess(fileId),
@@ -561,8 +557,6 @@ async function wrapDekForSelfAndRoom(args: {
       });
       if (verified.length === 0) return { skipped };
 
-      throwIfAborted(signal);
-
       const newKeys = await wrapDekForRecipients({
         dek,
         senderIdentity: identity,
@@ -583,8 +577,7 @@ async function wrapDekForSelfAndRoom(args: {
       ];
       await setFileEncryptionKeys(fileId, allKeys);
       return { skipped };
-    } catch (error) {
-      if (error instanceof AbortedError) throw error;
+    } catch {
       // Spec: file-operations, "Uploads into a private room are encrypted on the client"
       return { skipped: [], failedFor: readMembers };
     }
@@ -722,8 +715,7 @@ export async function uploadEncryptedFile(
     rememberEncryptedFilename(fileId, prepared.originalFileName);
     stage = "wrap";
 
-    throwIfAborted(signal);
-
+    // Spec: file-operations, "Cancelling an encrypted upload"
     let share: TRoomShare;
     try {
       share = await wrapDekForSelfAndRoom({
@@ -734,12 +726,10 @@ export async function uploadEncryptedFile(
         publicKey,
         publicKeyId,
         roomId,
-        signal,
         refusals: memberKeyRefusals,
         serializeFanOut,
       });
     } catch (error) {
-      if (error instanceof AbortedError) throw error;
       throw new EncryptedWrapError(error);
     }
     const skippedMembers = share.skipped;
@@ -763,14 +753,17 @@ export async function uploadEncryptedFile(
       ...(share.failedFor ? { shareFailed: true } : {}),
     };
   } catch (error) {
-    if (error instanceof AbortedError) {
+    const cancelled =
+      error instanceof AbortedError ||
+      (!!signal?.aborted && stored.fileId === undefined);
+    if (cancelled) {
       return {
         ok: false,
         ...stored,
         uploadId,
         originalName: prepared?.originalFileName ?? file.name,
         aborted: true,
-        error,
+        error: error instanceof AbortedError ? error : new AbortedError(),
       };
     }
     return {

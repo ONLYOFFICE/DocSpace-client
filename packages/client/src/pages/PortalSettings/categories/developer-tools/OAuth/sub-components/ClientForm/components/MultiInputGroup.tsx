@@ -140,11 +140,12 @@ const MultiInputGroup = ({
 
   // The add block is a div: a button to the keyboard. It hides once it adds
   // the value, so the focus goes back to the field for the next one rather
-  // than falling to the page's body.
+  // than falling to the page's body - before the value is added: the field's
+  // focus handler shows the block again while it still holds a valid value.
   const onAddKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) =>
     activateOnButtonKey(e, () => {
-      onAddAction();
       inputRef.current?.focus();
+      onAddAction();
     });
 
   React.useEffect(() => {

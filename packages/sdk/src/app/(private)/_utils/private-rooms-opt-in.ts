@@ -57,9 +57,9 @@ const readParam = (params: TParams) => {
 export const hasPrivateRoomsOptIn = (params: TParams) =>
   isPrivateRoomsOptInValue(readParam(params));
 
-/** A private-surface path that keeps the opt-in of the current URL. */
-export const withPrivateRoomsOptIn = (path: string, current: TParams) => {
-  if (!hasPrivateRoomsOptIn(current)) return path;
+/** A private-surface path that carries the opt-in when `optedIn` is set. */
+export const withPrivateRoomsOptInWhen = (path: string, optedIn: boolean) => {
+  if (!optedIn) return path;
 
   const [pathname, query = ""] = path.split("?");
   const params = new URLSearchParams(query);
@@ -67,3 +67,7 @@ export const withPrivateRoomsOptIn = (path: string, current: TParams) => {
 
   return `${pathname}?${params.toString()}`;
 };
+
+/** A private-surface path that keeps the opt-in of the current URL. */
+export const withPrivateRoomsOptIn = (path: string, current: TParams) =>
+  withPrivateRoomsOptInWhen(path, hasPrivateRoomsOptIn(current));

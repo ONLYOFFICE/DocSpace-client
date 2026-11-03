@@ -44,6 +44,8 @@ import {
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
+import { PrivateRoomsOptInContext } from "./PrivateRoomsOptInContext";
+
 /**
  * Feeds the shared opt-in from the host's frame configuration. The private
  * layout renders this only for a request that carried the opt-in, so the
@@ -65,7 +67,12 @@ const PrivateRoomsOptInSource = ({
     return () => setPrivateRoomsOptInSource(null);
   }, [fromConfig]);
 
-  return children;
+  // The private layout renders this only for a request with the opt-in.
+  return (
+    <PrivateRoomsOptInContext.Provider value>
+      {children}
+    </PrivateRoomsOptInContext.Provider>
+  );
 };
 
 export default PrivateRoomsOptInSource;

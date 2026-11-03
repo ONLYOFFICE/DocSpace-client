@@ -42,7 +42,8 @@ import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 
 import { useSdkMethods } from "@/providers/sdkMethods";
 
-import { withPrivateRoomsOptIn } from "../_utils/private-rooms-opt-in";
+import { withPrivateRoomsOptInWhen } from "../_utils/private-rooms-opt-in";
+import { usePrivateRoomsOptIn } from "./usePrivateRoute";
 
 export type PrivateFrameSection = "rooms" | "archive";
 
@@ -62,6 +63,7 @@ export const usePrivateFrameBridge = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const optedIn = usePrivateRoomsOptIn();
 
   const appReadySent = React.useRef(false);
   React.useEffect(() => {
@@ -87,9 +89,9 @@ export const usePrivateFrameBridge = () => {
     navigateSection: (data) => {
       const sec = (data as { section?: string } | undefined)?.section;
       if (sec === "archive") {
-        router.replace(withPrivateRoomsOptIn("/private/archive", searchParams));
+        router.replace(withPrivateRoomsOptInWhen("/private/archive", optedIn));
       } else if (sec === "rooms") {
-        router.replace(withPrivateRoomsOptIn("/private", searchParams));
+        router.replace(withPrivateRoomsOptInWhen("/private", optedIn));
       } else {
         throw new Error(`Unknown section: ${String(sec)}`);
       }

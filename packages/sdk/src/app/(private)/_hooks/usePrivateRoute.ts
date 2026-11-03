@@ -38,15 +38,31 @@
 import React from "react";
 import { useSearchParams } from "next/navigation";
 
-import { withPrivateRoomsOptIn } from "../_utils/private-rooms-opt-in";
+import {
+  hasPrivateRoomsOptIn,
+  withPrivateRoomsOptInWhen,
+} from "../_utils/private-rooms-opt-in";
+import { usePrivateRoomsOptInFromLayout } from "../_components/opt-in/PrivateRoomsOptInContext";
+
+/**
+ * Whether private-surface URLs carry the host opt-in: the one the private
+ * layout was opened with, since list filters rewrite the address; outside
+ * that layout, the address.
+ * Spec: sdk-surface, "Private pages keep the host opt-in"
+ */
+export const usePrivateRoomsOptIn = () => {
+  const fromLayout = usePrivateRoomsOptInFromLayout();
+  const searchParams = useSearchParams();
+  return fromLayout ?? hasPrivateRoomsOptIn(searchParams);
+};
 
 /** Builds internal private-surface URLs that keep the host's opt-in. */
 export const usePrivateRoute = () => {
-  const searchParams = useSearchParams();
+  const optedIn = usePrivateRoomsOptIn();
 
   return React.useCallback(
-    (path: string) => withPrivateRoomsOptIn(path, searchParams),
-    [searchParams],
+    (path: string) => withPrivateRoomsOptInWhen(path, optedIn),
+    [optedIn],
   );
 };
 

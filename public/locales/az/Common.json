@@ -1811,6 +1811,7 @@
   "PrivateRoomNotFoundTitle": "Tapılmadı",
   "PrivateRoomRenameNotSupported": "Şifrələnmiş faylların adının dəyişdirilməsi hələ dəstəklənmir.",
   "PrivateRoomsBetaDescription": "Şəxsi otaqlar beta mərhələsindədir. Şifrələnmiş fayllar üçün bəzi əməliyyatlar hələ əlçatan deyil və şifrələnmiş faylları açarınız olmadan açmaq mümkün deyil, ona görə də bərpa ifadənizi təhlükəsiz yerdə saxlayın.",
+  "PrivateRoomsBetaTitle": "Şəxsi otaqlar",
   "PrivateRoomsListEmptyDescription": "Şəxsi otaqlar uçdan-uca şifrələnir. Fayllar yükləməzdən əvvəl brauzerinizdə şifrələnir və yalnız dəvət etdiyiniz şəxslər onları oxuya bilər.",
   "PrivateRoomsListEmptyTitle": "Hələ şəxsi otaq yoxdur",
   "PrivateRoomTitle": "Şəxsi Otaq",

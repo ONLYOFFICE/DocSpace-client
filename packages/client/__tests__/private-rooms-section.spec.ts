@@ -60,7 +60,6 @@ import {
 } from "@docspace/shared/__mocks__/handlers/files/roomList";
 import { RoomPrivacyFilter, ShareAccessRights } from "@docspace/shared/enums";
 import { API_PREFIX, BASE_URL } from "@docspace/shared/__mocks__/e2e";
-import { PRIVATE_ROOMS_FLAG_KEY } from "@docspace/shared/utils/privateRooms";
 import { http } from "msw";
 import type { Page } from "@playwright/test";
 import { expect, test, TEST_PORT } from "./fixtures/base";
@@ -76,11 +75,6 @@ const roomRow = (page: Page) =>
   page
     .locator('[data-testid^="table-row-"]')
     .filter({ hasText: FILE_TITLE.replace(/\.txt$/, "") });
-
-const withoutOptIn = (page: Page) =>
-  page.addInitScript((key: string) => {
-    window.localStorage.removeItem(key);
-  }, PRIVATE_ROOMS_FLAG_KEY);
 
 test.describe("Private section — addresses", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -98,18 +92,6 @@ test.describe("Private section — addresses", () => {
         ],
       }),
     );
-  });
-
-  test("Link opened without the opt-in", async ({ page, baseUrl }) => {
-    await withoutOptIn(page);
-
-    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
-
-    await expect(page).toHaveURL(
-      `${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`,
-      { timeout: 15000 },
-    );
-    await expect(roomRow(page)).toBeVisible({ timeout: 15000 });
   });
 
   test("Rooms app switched off", async ({ page, mockRequest, baseUrl }) => {
@@ -176,6 +158,37 @@ test.describe("Private section — sidebar", () => {
       capabilitiesHandler(TEST_PORT, true),
       filesSettingsHandler(TEST_PORT),
       roomListHandler(TEST_PORT, TypeRoomList.IsDefault),
+    );
+  });
+
+  test("Base fixture", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+
+    await expect(navItem(page, "private-rooms")).toHaveText("Private");
+    expect(
+      await page.evaluate(() => window.localStorage.getItem("privateRooms")),
+    ).toBeNull();
+  });
+
+  test("Beta badge shown", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+
+    const badge = navItem(page, "private-rooms")
+      .locator("xpath=ancestor::li[1]")
+      .getByTestId("private_rooms_beta_badge");
+    await expect(badge).toBeVisible({ timeout: 15000 });
+    await expect(page.getByTestId("private_rooms_beta_badge")).toHaveCount(1);
+    await expect(navItem(page, "private-rooms-archive")).toBeVisible();
+    await expect(
+      navItem(page, "private-rooms-archive").getByTestId(
+        "private_rooms_beta_badge",
+      ),
+    ).toHaveCount(0);
+
+    await badge.getByText("BETA", { exact: true }).click();
+
+    await expect(page.getByTestId("tooltip-title")).toHaveText(
+      "Private rooms",
     );
   });
 

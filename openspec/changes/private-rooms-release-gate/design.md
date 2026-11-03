@@ -83,9 +83,10 @@ proposal.md.
 2. Once the server setting has merged, read its JSON name in `../server`
    through CodeGraph, add it to the settings type and the MSW handler, then
    land the client and SDK reads and the administrator control.
-3. Remove the beta label, its texts and its E2E assertions in one client PR.
+3. Remove the beta label, its texts and its E2E assertions in tasks 2.1 and
+   2.2, committed on the release branch.
 4. Publish the release notes and the compliance pack.
-5. Rollback: revert the client PR, which brings the beta label back. The
+5. Rollback: revert those commits, which brings the beta label back. The
    setting does nothing without the client reads.
 
 ## Open Questions

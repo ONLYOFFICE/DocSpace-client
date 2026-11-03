@@ -2,7 +2,9 @@
 
 ## Context
 
-See proposal.md, "Why". The current state of the branch, read on 2026-11-03:
+See proposal.md, "Why". The current state of the code, read on 2026-11-03
+and merged into `release/v4.1.0` the same day (PR !798) with the flag in
+place:
 
 - **The browser opt-in.** `packages/shared/utils/privateRooms.ts` holds the
   flag (`isPrivateRoomsEnabled`, `PRIVATE_ROOMS_FLAG_KEY`). Since this branch
@@ -131,17 +133,24 @@ See proposal.md, "Why". The current state of the branch, read on 2026-11-03:
 - **No switch on SaaS.** Every SaaS user is offered the beta. → Accepted for
   the beta; the portal setting arrives with general availability.
 - **Every user now meets the defects of the beta.** → The verified blockers of
-  the second pre-PR review are fixed by their own change before the merge.
+  the second pre-PR review and the duplicate file of the name dialog are fixed
+  by their own changes before the flag is removed (gate items 0.3 and 0.5).
 - **Testers lose the console toggle.** → They need none: the section is shown.
   `.claude/rules/private-rooms.md` says so in the same change.
 - **The Document Server build lacks the crypto add-on.** Encrypted files then
-  fail to open in the editor. → Gate items 0.3 and 0.4.
+  fail to open in the editor. → Accepted by proposal decision 6: gate items
+  0.1 and 0.2 stay open and are named in the release notes instead of
+  holding back the flag removal.
 
 ## Migration Plan
 
 1. Revise `private-rooms-release-gate` (decision 9).
-2. Land the Beta badge title, the availability read, the keys guard, the
-   removal of the flag and the E2E changes on the feature branch.
+2. Commit the Beta badge title, the availability read, the keys guard, the
+   removal of the flag and the E2E changes directly on `release/v4.1.0`
+   (proposal decision 5). Tasks 3.1 to 3.3 remove the flag once 0.3 and 0.5
+   of tasks.md hold (0.1 and 0.2 no longer hold them back, proposal
+   decision 6); 4.1, 4.2, 4.4, 5.2 and group 6 follow them. 2.4, 4.3
+   and 5.1 may land earlier, while the flag still hides the section.
 3. Run the pre-push gate and the full client E2E under Docker, and the SDK
    private E2E.
 4. Rollback: revert the client changes of this change. The flag and the
@@ -152,3 +161,22 @@ See proposal.md, "Why". The current state of the branch, read on 2026-11-03:
 - The wording of `Common:PrivateRoomsBetaTitle` and
   `Common:PrivateRoomsBetaDescription`. Product may reword them; the
   behaviour does not change.
+
+## Local stand run (2026-11-03, before task 6.2)
+
+Not the staging run of task 6.2: local standalone stand (`localhost:8092`),
+client `release/v4.1.0` at `59e3090d4c9` served by the Vite dev server,
+DocSpace server 3.1.0, Document Server 10.0.2.5 (not the build of gate item
+0.1). Administrator holding one key.
+
+- With the browser's leftover `privateRooms` entry removed, Rooms shows the
+  Private item with its Beta badge; the badge tooltip is titled "Private
+  rooms" and the Keys management tab carries the badge too.
+- The tooltip glued the description to the bug-report sentence ("...safe.If
+  you have found a bug"); fixed in the shared BetaBadge (`2c2564cffcd`). The
+  support address was empty on this stand.
+- The administrator switched the Private app off in the apps settings: the
+  Private section went without a reload, the private room "Pirate room" was
+  listed in Rooms with its private badge, and the Keys management tab and
+  page stayed, also after a full load of `/profile/keys-management`. The app
+  was switched back on afterwards.

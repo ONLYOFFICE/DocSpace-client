@@ -1811,6 +1811,7 @@
   "PrivateRoomNotFoundTitle": "Nu a fost găsit",
   "PrivateRoomRenameNotSupported": "Redenumirea fișierelor criptate nu este acceptată încă.",
   "PrivateRoomsBetaDescription": "Sălile private sunt în versiune beta. Unele acțiuni nu sunt încă disponibile pentru fișierele criptate, iar fișierele criptate nu pot fi deschise fără cheia dumneavoastră, așa că păstrați fraza de recuperare într-un loc sigur.",
+  "PrivateRoomsBetaTitle": "Săli private",
   "PrivateRoomsListEmptyDescription": "Sălile private sunt criptate end-to-end. Fișierele sunt criptate în browserul dvs. înainte de încărcare și numai persoanele pe care le invitați le pot citi.",
   "PrivateRoomsListEmptyTitle": "Încă nu există săli private",
   "PrivateRoomTitle": "Cameră privată",

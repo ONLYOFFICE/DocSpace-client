@@ -99,7 +99,8 @@ import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
 import AiPresetsBridge from "SRC_DIR/components/AiPresetsBridge";
 import ProjectIntro from "SRC_DIR/pages/AiProjects/sub-components/project/ProjectIntro";
 import { useAiPresetsPickerActions } from "SRC_DIR/Hooks/useAiPresetsPickerActions";
-import { useAiChatNotice } from "SRC_DIR/Hooks/useAiChatNotice";
+import { useAiChatNotice } from "@docspace/shared/hooks/useAiChatNotice";
+import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 
@@ -886,6 +887,14 @@ const Shell = ({ page = "home", ...rest }) => {
   // The money state behind an interrupted answer (an empty wallet, a limit
   // reached), shown above the composer while it lasts; the answer keeps its
   // own past-tense note (see formatChatError).
+  const onTopUpWallet = useCallback(
+    () => navigate(PAYMENT_ROUTES.wallet),
+    [navigate],
+  );
+  const onChangeAiLimit = useCallback(
+    () => navigate("/portal-settings/ai-settings/limits"),
+    [navigate],
+  );
   const {
     composerNotice: aiComposerNotice,
     onStreamError: onAiStreamError,
@@ -897,7 +906,8 @@ const Shell = ({ page = "home", ...rest }) => {
     isAdmin,
     isPayer,
     isChatOpen,
-    navigate,
+    onTopUpWallet,
+    onChangeAiLimit,
     fetchWalletBalance,
   });
 

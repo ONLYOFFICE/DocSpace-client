@@ -13,11 +13,9 @@ vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
   SocketEvents: { TopUpWallet: "top-up-wallet" },
 }));
 
-vi.mock("SRC_DIR/pages/PortalSettings/categories/payments/utils", () => ({
-  PAYMENT_ROUTES: { wallet: "/portal-settings/payments/wallet" },
-}));
+import { getAiChatBlock } from "@docspace/shared/utils/ai";
 
-import { getAiChatBlock, useAiChatNotice } from "../useAiChatNotice";
+import { useAiChatNotice } from "../useAiChatNotice";
 
 const t = ((key: string) => key) as never;
 const LIMIT_MESSAGE =
@@ -29,7 +27,8 @@ const walletError = {
 };
 
 const setup = (overrides: Partial<Parameters<typeof useAiChatNotice>[0]> = {}) => {
-  const navigate = vi.fn();
+  const onTopUpWallet = vi.fn();
+  const onChangeAiLimit = vi.fn();
   const view = renderHook((props: Parameters<typeof useAiChatNotice>[0]) =>
     useAiChatNotice(props), {
     initialProps: {
@@ -39,11 +38,12 @@ const setup = (overrides: Partial<Parameters<typeof useAiChatNotice>[0]> = {}) =
       isAdmin: false,
       isPayer: false,
       isChatOpen: true,
-      navigate,
+      onTopUpWallet,
+      onChangeAiLimit,
       ...overrides,
     },
   });
-  return { ...view, navigate };
+  return { ...view, onTopUpWallet, onChangeAiLimit };
 };
 
 describe("getAiChatBlock", () => {
@@ -95,13 +95,13 @@ describe("useAiChatNotice", () => {
   });
 
   it("offers the Payer the top-up", () => {
-    const { result, navigate } = setup({ isPayer: true });
+    const { result, onTopUpWallet } = setup({ isPayer: true });
     act(() => result.current.onStreamError(walletError));
     const notice = result.current.composerNotice;
     expect(notice?.description).toBe("Common:AIPausedWalletEmpty");
     expect(notice?.action?.text).toBe("Common:TopUpWallet");
     notice?.action?.onClick();
-    expect(navigate).toHaveBeenCalledWith("/portal-settings/payments/wallet");
+    expect(onTopUpWallet).toHaveBeenCalledTimes(1);
   });
 
   it("re-checks the wallet when the chat is opened again", async () => {
@@ -114,7 +114,8 @@ describe("useAiChatNotice", () => {
       standalone: false,
       isAdmin: true,
       isPayer: false,
-      navigate: vi.fn(),
+      onTopUpWallet: vi.fn(),
+      onChangeAiLimit: vi.fn(),
       fetchWalletBalance,
     };
     rerender({ ...props, isChatOpen: false });
@@ -126,8 +127,19 @@ describe("useAiChatNotice", () => {
     expect(result.current.composerNotice).toBeNull();
   });
 
+  it("leaves the buttons out for a host with nowhere to send the user", () => {
+    const { result } = setup({
+      isAdmin: true,
+      isPayer: true,
+      onTopUpWallet: undefined,
+      onChangeAiLimit: undefined,
+    });
+    act(() => result.current.onStreamError(walletError));
+    expect(result.current.composerNotice?.action).toBeUndefined();
+  });
+
   it("explains a spending limit and lets the admin change it", () => {
-    const { result, navigate } = setup({ isAdmin: true });
+    const { result, onChangeAiLimit } = setup({ isAdmin: true });
     act(() =>
       result.current.onStreamError({
         error: { code: "auth", message: LIMIT_MESSAGE },
@@ -137,7 +149,7 @@ describe("useAiChatNotice", () => {
     expect(notice?.title).toBe("Common:AILimitReached");
     expect(notice?.blocksSending).toBe(true);
     notice?.action?.onClick();
-    expect(navigate).toHaveBeenCalledWith("/portal-settings/ai-settings/limits");
+    expect(onChangeAiLimit).toHaveBeenCalledTimes(1);
   });
 
   it("keeps a provider's credits notice open for sending until an answer completes", () => {

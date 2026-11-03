@@ -34,39 +34,26 @@
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { NavigateFunction } from "react-router";
 
 import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
-import type { ComposerNotice } from "@onlyoffice/ai-chat";
 import {
-  getServiceLimitChatError,
+  getAiChatBlock,
   getServiceLimitDescription,
-} from "@docspace/shared/utils/ai";
-import type { TTranslation } from "@docspace/shared/types";
-
-import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
-
-/** The DocSpace AI gateway: its 402 is the portal wallet running dry. */
-const GATEWAY_PROVIDER = "onlyoffice";
-
-const AI_LIMITS_ROUTE = "/portal-settings/ai-settings/limits";
+  type TAiChatBlock,
+  type TAiChatStreamError,
+} from "../utils/ai";
+import type { TTranslation } from "../types";
 
 /**
- * What keeps the chat from working right now:
- * - `wallet` - the portal wallet ran out mid-answer;
- * - `limit` - the AI spending limit was reached (`until` is when it resets,
- *   null for a lifetime limit);
- * - `provider` - a provider with its own key ran out of credits, which the
- *   portal cannot see being topped up.
+ * The notice the chat shows above its composer - `ComposerNotice` of
+ * `@onlyoffice/ai-chat`, spelled out here because shared does not depend on
+ * the chat library; the apps pass it on as `composerNotice`.
  */
-export type TAiChatBlock =
-  | { kind: "wallet" }
-  | { kind: "limit"; until: string | null }
-  | { kind: "provider" };
-
-type TStreamError = {
-  error: { code?: string; message?: string };
-  providerType?: string;
+export type TComposerNotice = {
+  title: string;
+  description?: string;
+  action?: { text: string; onClick: () => void };
+  blocksSending?: boolean;
 };
 
 type UseAiChatNoticeProps = {
@@ -76,30 +63,12 @@ type UseAiChatNoticeProps = {
   isAdmin: boolean;
   isPayer: boolean;
   isChatOpen: boolean;
-  navigate: NavigateFunction;
+  /** Opens the wallet; the Payer gets a "Top up wallet" button for it. */
+  onTopUpWallet?: () => void;
+  /** Opens the AI limits; an admin gets a "Change AI limit" button for it. */
+  onChangeAiLimit?: () => void;
+  /** Reads the balance back for an admin when the chat is opened again. */
   fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
-};
-
-/**
- * Which money state an errored round reports, or null when the error is
- * not about money (it then only leaves its note in the history).
- */
-export const getAiChatBlock = (
-  { error, providerType }: TStreamError,
-  standalone: boolean,
-): TAiChatBlock | null => {
-  // Standalone pays its providers directly: no wallet and no spending
-  // limits, only a provider of its own running out.
-  if (!standalone) {
-    const serviceLimit = getServiceLimitChatError(error);
-    if (serviceLimit) return { kind: "limit", until: serviceLimit.until };
-  }
-
-  if (error.code !== "insufficient_funds") return null;
-
-  return !standalone && providerType === GATEWAY_PROVIDER
-    ? { kind: "wallet" }
-    : { kind: "provider" };
 };
 
 /**
@@ -118,6 +87,10 @@ export const getAiChatBlock = (
  * - the provider one is cleared by the next answer that completes: the
  *   portal never sees a top-up at the provider, so it does not block
  *   sending either.
+ *
+ * Shared by the portal and the SDK frames; a host without a wallet page or
+ * AI settings to send the user to (the SDK) leaves the actions out and the
+ * notice only says what is going on.
  */
 export const useAiChatNotice = ({
   t,
@@ -126,7 +99,8 @@ export const useAiChatNotice = ({
   isAdmin,
   isPayer,
   isChatOpen,
-  navigate,
+  onTopUpWallet,
+  onChangeAiLimit,
   fetchWalletBalance,
 }: UseAiChatNoticeProps) => {
   const [block, setBlock] = useState<TAiChatBlock | null>(null);
@@ -134,7 +108,7 @@ export const useAiChatNotice = ({
   blockRef.current = block;
 
   const onStreamError = useCallback(
-    (event: TStreamError) => {
+    (event: TAiChatStreamError) => {
       const next = getAiChatBlock(event, standalone);
       if (next) setBlock(next);
     },
@@ -194,7 +168,7 @@ export const useAiChatNotice = ({
       .catch((e) => console.error(e));
   }, [isChatOpen, isAdmin, fetchWalletBalance]);
 
-  const composerNotice = useMemo<ComposerNotice | null>(() => {
+  const composerNotice = useMemo<TComposerNotice | null>(() => {
     if (!block) return null;
 
     if (block.kind === "wallet") {
@@ -203,12 +177,10 @@ export const useAiChatNotice = ({
         description: isPayer
           ? t("Common:AIPausedWalletEmpty")
           : t("Common:AIPausedWalletEmptyContactPayer"),
-        action: isPayer
-          ? {
-              text: t("Common:TopUpWallet"),
-              onClick: () => navigate(PAYMENT_ROUTES.wallet),
-            }
-          : undefined,
+        action:
+          isPayer && onTopUpWallet
+            ? { text: t("Common:TopUpWallet"), onClick: onTopUpWallet }
+            : undefined,
         blocksSending: true,
       };
     }
@@ -222,12 +194,10 @@ export const useAiChatNotice = ({
           { until: block.until },
           isAdmin,
         ),
-        action: isAdmin
-          ? {
-              text: t("Common:ChangeAILimit"),
-              onClick: () => navigate(AI_LIMITS_ROUTE),
-            }
-          : undefined,
+        action:
+          isAdmin && onChangeAiLimit
+            ? { text: t("Common:ChangeAILimit"), onClick: onChangeAiLimit }
+            : undefined,
         blocksSending: true,
       };
     }
@@ -236,7 +206,7 @@ export const useAiChatNotice = ({
       title: t("Common:AIProviderOutOfCredits"),
       description: t("Common:AIProviderOutOfCreditsTopUp"),
     };
-  }, [block, t, language, isAdmin, isPayer, navigate]);
+  }, [block, t, language, isAdmin, isPayer, onTopUpWallet, onChangeAiLimit]);
 
   return { composerNotice, onStreamError, onStreamEnd };
 };

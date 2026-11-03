@@ -267,6 +267,39 @@ export function placePlugins(
   return newResult;
 }
 
+const ROOM_EXIT_KEYS = [
+  "remove-shared-room",
+  "leave-room",
+  "archive-room",
+  "unarchive-room",
+  "delete",
+];
+
+export const layoutRoomOptions = (
+  options: TContextOption[],
+  customActions: TContextOption[],
+): TContextOption[] => {
+  const isExitOption = (option: TContextOption) =>
+    ROOM_EXIT_KEYS.includes(option.key);
+
+  const mainOptions = options.filter(
+    (option) =>
+      !option.disabled &&
+      !isExitOption(option) &&
+      option.key !== "more-options",
+  );
+  while (mainOptions[mainOptions.length - 1]?.isSeparator) mainOptions.pop();
+
+  return [
+    ...mainOptions,
+    ...options.filter((option) => option.key === "more-options"),
+    { key: "separator-custom-actions", isSeparator: true },
+    ...customActions,
+    { key: "separator-after-custom-actions", isSeparator: true },
+    ...options.filter(isExitOption),
+  ];
+};
+
 export const onShowEditingToast = (t: TTranslation) => {
   toastr.error(t("Files:DocumentEdited"));
 };

@@ -53,7 +53,11 @@ const allowlist = new Set(
   ),
 );
 
-const excludeDirs = [
+// Directories that hold no first-party source, matched by whole path
+// segment. The shared walker excludes any path that merely contains one of
+// its names, which took every directory named like "common" or "test" out of
+// the scan; it is given only node_modules, too large to walk.
+const excludedSegments = new Set([
   ".nx",
   "e2e",
   ".github",
@@ -66,25 +70,32 @@ const excludeDirs = [
   "tests",
   ".next",
   "storybook-static",
-  "node_modules",
-  "common",
-];
+]);
+const isExcluded = (relPath) =>
+  relPath.split("/").some((segment) => excludedSegments.has(segment));
 const sourcePattern = /\.(js|jsx|ts|tsx)$/;
 // `tabIndex={2}`, `tabIndex: 2`, `tabindex="2"` - any value above zero.
 const positiveTabIndex = /tab[iI]ndex\s*(?:=\s*\{?\s*["']?|:\s*["']?)0*[1-9]/;
 const commentPrefix = /^\s*(\/\/|\/?\*)/;
+const toRelPath = (filePath) =>
+  path.relative(BASE_DIR, filePath).split(path.sep).join("/");
 
 let offenders = new Map();
+let scanned = new Set();
 
 beforeAll(() => {
   const files = getWorkSpaces().flatMap((wsPath) =>
-    getAllFiles(wsPath, excludeDirs).filter(
+    getAllFiles(wsPath, ["node_modules"]).filter(
       (filePath) =>
+        filePath &&
+        !isExcluded(toRelPath(filePath)) &&
         sourcePattern.test(filePath) &&
         !filePath.includes(".test.") &&
         !filePath.includes(".stories."),
     ),
   );
+
+  scanned = new Set(files.map(toRelPath));
 
   files.forEach((filePath) => {
     const lines = fs
@@ -95,8 +106,7 @@ beforeAll(() => {
         ({ line }) => !commentPrefix.test(line) && positiveTabIndex.test(line),
       );
     if (!lines.length) return;
-    const relPath = path.relative(BASE_DIR, filePath).split(path.sep).join("/");
-    offenders.set(relPath, lines);
+    offenders.set(toRelPath(filePath), lines);
   });
   console.log(`Files setting a positive tabIndex = ${offenders.size}.`);
 });
@@ -119,6 +129,16 @@ describe("Positive tabIndex Tests", () => {
         .join("\n");
 
     expect(fresh.length, message).toBe(0);
+  });
+
+  // A directory whose name merely contains an excluded one is still source:
+  // the settings pages under categories/common went unscanned once.
+  it("PositiveTabIndexScanCoverage: directories named like an excluded one are scanned", () => {
+    expect(
+      scanned.has(
+        "packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      ),
+    ).toBe(true);
   });
 
   it("StalePositiveTabIndexAllowlist: the baseline only lists files that still set one", () => {

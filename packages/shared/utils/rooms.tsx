@@ -43,6 +43,55 @@ import { RoomsTypeValues } from "./common";
 import { isPrivateRoomsEnabled } from "./privateRooms";
 
 /**
+ * Room types the "AI rooms" section lists, filters by and creates through
+ * `files/rooms`: the Instructions room (skills), the Knowledge room
+ * (knowledge base) and the AI project. The server keeps them under the
+ * `FolderType.AiHub` root (`searchArea=AiHub`), never in Rooms.
+ */
+export const AI_HUB_SECTION_TYPES: RoomsType[] = [
+  RoomsType.InstructionsRoom,
+  RoomsType.KnowledgeRoom,
+  RoomsType.AiProjectRoom,
+];
+
+/**
+ * The settings the server refuses (400) when an "AI rooms" type is created
+ * or edited: none of them applies to those types. A project takes no quota
+ * either.
+ */
+const AI_HUB_REFUSED_SETTINGS = [
+  "indexing",
+  "denyDownload",
+  "lifetime",
+  "watermark",
+  "chatSettings",
+  "sendFormToExternalDB",
+  "saveFormAsXLSX",
+] as const;
+
+/** The create / edit body of a room without the settings its "AI rooms" type refuses. */
+export const withoutSettingsRefusedForAiRooms = <T extends object>(
+  params: T,
+  roomType?: number,
+): T => {
+  if (roomType === undefined || !AI_HUB_SECTION_TYPES.includes(roomType)) return params;
+  const allowed = { ...params } as Record<string, unknown>;
+  AI_HUB_REFUSED_SETTINGS.forEach((key) => delete allowed[key]);
+  if (roomType === RoomsType.AiProjectRoom) delete allowed.quota;
+  return allowed as T;
+};
+
+/**
+ * `FolderType` values of the "AI rooms" section's rooms, for the `folderType`
+ * scope of its Recent/Favorites/Trash slots (see ROOMS_SECTION_FOLDER_TYPES).
+ */
+export const AI_HUB_SECTION_FOLDER_TYPES = [
+  FolderType.InstructionsRoom,
+  FolderType.KnowledgeRoom,
+  FolderType.AiProjectRoom,
+];
+
+/**
  * Room types offered as filter options in the "Rooms" section dropdown.
  *
  * Form Filling Rooms are excluded because they live in their own "Forms"
@@ -58,7 +107,10 @@ import { isPrivateRoomsEnabled } from "./privateRooms";
  * Rooms/Forms split is enforced server-side by the room's folder type.
  */
 export const ROOMS_SECTION_TYPES = RoomsTypeValues.filter(
-  (type) => type !== RoomsType.FormRoom && type !== RoomsTypePrivate,
+  (type) =>
+    type !== RoomsType.FormRoom &&
+    type !== RoomsTypePrivate &&
+    !AI_HUB_SECTION_TYPES.includes(type),
 );
 
 /**
@@ -66,7 +118,8 @@ export const ROOMS_SECTION_TYPES = RoomsTypeValues.filter(
  * `folderType` scope filter of the Recent/Favorites/Trash aggregates
  * (`GET files/{folderId}?folderType=...`, bound to `List<FolderType>` on the
  * server). Mirrors ROOMS_SECTION_TYPES: form-filling rooms belong to the
- * "Forms" section and AI rooms to "AI Agents", so both are excluded here.
+ * "Forms" section and the AI room types to "AI rooms", so both are excluded
+ * here.
  */
 export const ROOMS_SECTION_FOLDER_TYPES = [
   FolderType.EditingRoom,
@@ -76,7 +129,9 @@ export const ROOMS_SECTION_FOLDER_TYPES = [
 ];
 
 /**
- * Room types the create-room chooser may offer, in catalog order.
+ * Room types the create-room chooser of the Rooms section may offer, in
+ * catalog order. The AI room types are created from the "AI rooms" section's
+ * own chooser (AI_HUB_SECTION_TYPES).
  *
  * Private rooms are still unreleased, so their card is only offered when the
  * tester opted in via the `privateRooms` localStorage flag (see
@@ -84,9 +139,11 @@ export const ROOMS_SECTION_FOLDER_TYPES = [
  * scope: the flag is flipped from the console at runtime.
  */
 export const getCreateRoomTypes = () =>
-  isPrivateRoomsEnabled()
-    ? RoomsTypeValues
-    : RoomsTypeValues.filter((type) => type !== RoomsTypePrivate);
+  RoomsTypeValues.filter(
+    (type) =>
+      !AI_HUB_SECTION_TYPES.includes(type) &&
+      (isPrivateRoomsEnabled() || type !== RoomsTypePrivate),
+  );
 
 const getRoomCreationAdditionalParams = (roomType: RoomsType) => {
   const additionalParams = {

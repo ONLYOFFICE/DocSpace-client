@@ -49,14 +49,12 @@ import { isStartPageAvailable } from "SRC_DIR/helpers/defaultStartPage";
 type Props = {
   defaultFolderType?: SettingsStore["defaultFolderType"];
   updateDefaultFolderType?: SettingsStore["updateDefaultFolderType"];
-  aiServicesEnabled?: SettingsStore["aiServicesEnabled"];
   userType?: UserStore["userType"];
 };
 
 const StartPageSettingComponent = ({
   defaultFolderType,
   updateDefaultFolderType,
-  aiServicesEnabled,
   userType,
 }: Props) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
@@ -73,10 +71,6 @@ const StartPageSettingComponent = ({
         key: FolderType.DEFAULT,
       },
       {
-        label: t("Common:AIAgents"),
-        key: FolderType.AIAgents,
-      },
-      {
         label: t("Common:Files"),
         key: FolderType.USER,
       },
@@ -91,7 +85,7 @@ const StartPageSettingComponent = ({
     ];
 
     return options.filter((option) =>
-      isStartPageAvailable(option.key, { aiServicesEnabled, isGuest }),
+      isStartPageAvailable(option.key, { isGuest }),
     );
   };
 
@@ -135,15 +129,13 @@ const StartPageSettingComponent = ({
 
 export const DefaultPageSetting = inject(
   ({ settingsStore, userStore }: TStore) => {
-    const { defaultFolderType, updateDefaultFolderType, aiServicesEnabled } =
-      settingsStore;
+    const { defaultFolderType, updateDefaultFolderType } = settingsStore;
 
     const { userType } = userStore;
 
     return {
       defaultFolderType,
       updateDefaultFolderType,
-      aiServicesEnabled,
       userType,
     };
   },

@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "AI ajanı oluşturuldu",
-  "AgentDeleted": "AI ajanı silindi",
-  "AgentUpdated": "AI ajanı güncellendi",
   "Before": "Önce",
   "CreateWebhook": "Webhook oluştur",
   "DeleteHint": "Webhook kalıcı olarak silinecek.\nBu işlemi geri alamazsınız.",
@@ -96,5 +93,6 @@
   "WebhookRemoved": "Webhook kaldırıldı",
   "Webhooks": "Webhook’lar",
   "WebhooksGuide": "Webhook Kılavuzu",
-  "WebhooksInfo": "{{organizationName}} {{productName}}'deki çeşitli olaylara dayalı olarak kullandığınız herhangi bir uygulama veya web sitesinin yanında özel eylemler gerçekleştirmek için webhook kullanın.\nBurada, tüm webhook’larını oluşturup yönetebilir, yapılandırabilir ve performanslarını denetlemek için her bir webhook’un geçmişine göz atabilirsiniz."
+  "WebhooksInfo": "{{organizationName}} {{productName}}'deki çeşitli olaylara dayalı olarak kullandığınız herhangi bir uygulama veya web sitesinin yanında özel eylemler gerçekleştirmek için webhook kullanın.\nBurada, tüm webhook’larını oluşturup yönetebilir, yapılandırabilir ve performanslarını denetlemek için her bir webhook’un geçmişine göz atabilirsiniz.",
+  "WebhookWasDeleted": "Bu webhook silindi"
 }

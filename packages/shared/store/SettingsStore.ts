@@ -374,6 +374,13 @@ class SettingsStore {
 
   aiConfig: Nullable<TAIConfig> = null;
 
+  /**
+   * Whether AI is set up on the portal, as the AI chat decides it: a chat
+   * profile exists (standalone) or the AI service is on (SaaS). `null` while
+   * it is not known yet; set by the client from inside the AI providers.
+   */
+  aiReady: Nullable<boolean> = null;
+
   /** Comes from the settings response, so a missed socket event is recovered. */
   walletLowBalance = false;
 
@@ -1774,6 +1781,10 @@ class SettingsStore {
   // starting value, and the one state a non-null setter could not restore.
   setAIConfig = (config: Nullable<TAIConfig>) => {
     this.aiConfig = config;
+  };
+
+  setAiReady = (aiReady: Nullable<boolean>) => {
+    this.aiReady = aiReady;
   };
 
   setInterfaceDirection = (direction: string) => {

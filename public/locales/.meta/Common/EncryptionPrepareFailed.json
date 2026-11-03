@@ -3,7 +3,7 @@
   "content": "Could not encrypt the file before upload. The file was not sent. Please try again or contact support.",
   "content_en_sha1_hash": "5d6f40171a9b3563ed0cffff6184241215ebb92d",
   "created_at": "2026-05-24T17:27:26.712Z",
-  "updated_at": "2026-10-22T16:09:36.969Z",
+  "updated_at": "2026-10-31T12:58:29.448Z",
   "comment": {
     "text": "Error text displayed for a specific file in the upload list when the encryption process fails before the upload begins.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts",
-      "line_number": 652,
+      "line_number": 648,
       "context": "const orphanDek = takeFileDek(self.files[indexOfFile]);\n if (orphanDek) wipeDek(orphanDek);\n const errorMessage =\n error instanceof EncryptedReimportError\n ? i18n.t(\"Common:EncryptionReimportFailed\")\n : i18n.t(\"Common:EncryptionPrepareFailed\");\n runInAction(() => {\n if (self.files[indexOfFile]) {\n self.files[indexOfFile].error = errorMessage;\n self.files[indexOfFile].percent = 0;\n }",
       "module": "/packages/client"
     },

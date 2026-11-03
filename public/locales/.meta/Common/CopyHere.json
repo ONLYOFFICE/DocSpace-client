@@ -3,7 +3,7 @@
   "content": "Copy here",
   "content_en_sha1_hash": "92816e8a2d8cd79faa7d9b23fa0080284e21fef3",
   "created_at": "2025-05-19T21:30:43.763Z",
-  "updated_at": "2026-08-20T12:26:01.712Z",
+  "updated_at": "2026-10-31T12:58:28.866Z",
   "comment": {
     "text": "This is a button label. It appears in file selection dialogs to confirm copying selected files to the current location.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
-      "line_number": 318,
+      "line_number": 315,
       "context": "isPanelVisible={visible ? !conflictResolveDialogVisible : false}\n currentDeviceType={currentDeviceType}\n createDefineRoomLabel={\n createDefineRoomLabels[createDefineRoomType] ?? \"\"\n }\n submitButtonLabel={t(\"Common:CopyHere\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n cancelButtonId=\"share-collect-selector-cancel\"\n onCancel={onCancel}\n onSubmit={\n onSubmit as unknown as Parameters<",
       "module": "/packages/client"
     },

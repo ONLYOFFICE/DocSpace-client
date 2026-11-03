@@ -40,6 +40,7 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import type { TTranslation } from "@docspace/shared/types";
+import { RoomsType } from "@docspace/shared/enums";
 
 const FOLDER_INPUT_ATTRS = {
   webkitdirectory: "",
@@ -49,15 +50,22 @@ const FOLDER_INPUT_ATTRS = {
 type UploadFileInputsProps = {
   startUpload?: (files: File[], folderId: null, t: TTranslation) => void;
   createFoldersTree?: (t: TTranslation, files: File[]) => Promise<File[]>;
-  isAIRoom?: boolean;
-  extsFilesVectorized?: string[];
+  isKnowledgeRoom?: boolean;
+  isInstructionsRoom?: boolean;
+  // Only the formats vectorization reads are offered in a Knowledge room;
+  // the server refuses anything else.
+  knowledgeUploadAccept?: string;
 };
+
+// An Instructions room holds Markdown skills only.
+const INSTRUCTIONS_UPLOAD_ACCEPT = ".md";
 
 const UploadFileInputs = ({
   startUpload,
   createFoldersTree,
-  isAIRoom,
-  extsFilesVectorized,
+  isKnowledgeRoom,
+  isInstructionsRoom,
+  knowledgeUploadAccept,
 }: UploadFileInputsProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -70,7 +78,7 @@ const UploadFileInputs = ({
           if (tree.length > 0) startUpload?.(tree, null, t);
         })
         .catch((err) => {
-          toastr.error(err, null, 0, true);
+          toastr.error(err, undefined, 0, true);
         });
     },
     [createFoldersTree, startUpload, t],
@@ -93,9 +101,11 @@ const UploadFileInputs = ({
         style={{ display: "none" }}
         onChange={onFileChange}
         onClick={onInputClick}
-        {...(isAIRoom && extsFilesVectorized
-          ? { accept: extsFilesVectorized.join(",") }
-          : {})}
+        {...(isKnowledgeRoom && knowledgeUploadAccept
+          ? { accept: knowledgeUploadAccept }
+          : isInstructionsRoom
+            ? { accept: INSTRUCTIONS_UPLOAD_ACCEPT }
+            : {})}
       />
       <input
         id="customPDFInput"
@@ -129,7 +139,9 @@ export default inject(
   }: TStore) => ({
     startUpload: uploadDataStore.startUpload,
     createFoldersTree: filesActionsStore.createFoldersTree,
-    isAIRoom: selectedFolderStore.isAIRoom,
-    extsFilesVectorized: filesSettingsStore.extsFilesVectorized,
+    isKnowledgeRoom: selectedFolderStore.roomType === RoomsType.KnowledgeRoom,
+    isInstructionsRoom:
+      selectedFolderStore.roomType === RoomsType.InstructionsRoom,
+    knowledgeUploadAccept: filesSettingsStore.knowledgeUploadAccept,
   }),
 )(observer(UploadFileInputs));

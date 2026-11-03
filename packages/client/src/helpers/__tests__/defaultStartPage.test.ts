@@ -68,19 +68,9 @@ describe("getEffectiveDefaultFolderType", () => {
   });
 
   it("keeps a section that is still available", () => {
-    expect(
-      getEffectiveDefaultFolderType(FolderType.AIAgents, {
-        aiServicesEnabled: true,
-      }),
-    ).toBe(FolderType.AIAgents);
-  });
-
-  it("falls back to Home when AI services are off", () => {
-    expect(
-      getEffectiveDefaultFolderType(FolderType.AIAgents, {
-        aiServicesEnabled: false,
-      }),
-    ).toBe(FolderType.DEFAULT);
+    expect(getEffectiveDefaultFolderType(FolderType.Rooms)).toBe(
+      FolderType.Rooms,
+    );
   });
 
   it("falls back to Home for a guest whose value is the Files section", () => {
@@ -99,17 +89,6 @@ describe("getDefaultStartPageUrl", () => {
     expect(getDefaultStartPageUrl(FolderType.Rooms)).toBe(
       "/rooms/shared/filter",
     );
-  });
-
-  // The setting hides AI Agents once the portal switch is off; entry routing
-  // has to agree, because /ai-agents/* sits behind requireAIServices and would
-  // answer 404.
-  it("does not route to AI Agents once AI services are off", () => {
-    expect(
-      getDefaultStartPageUrl(FolderType.AIAgents, {
-        aiServicesEnabled: false,
-      }),
-    ).toBe("/dashboard");
   });
 
   it("does not route a guest to the Files section", () => {

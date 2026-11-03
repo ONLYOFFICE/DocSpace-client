@@ -93,7 +93,6 @@ export type NewFilesPanelItemProps = {
   date: string;
   items: TNewFilesItem[];
   isRooms: boolean;
-  isAgents: boolean;
   isFirst: boolean;
   onClose: VoidFunction;
 

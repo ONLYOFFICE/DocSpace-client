@@ -90,14 +90,13 @@ export type CoverDialogProps = RoomLogoCoverProps & {
   setRoomLogoCoverDialogVisible: (value: boolean) => void;
   createRoomDialogVisible: boolean;
   editRoomDialogPropsVisible: boolean;
-  createAgentDialogVisible: boolean;
-  editAgentDialogVisible: boolean;
+  /** The AI project dialog is open: the cover is handed to it, not saved to a room. */
+  aiProjectDialogVisible: boolean;
   roomLogoCoverDialogVisible: boolean;
   templateEventVisible: boolean;
   setEnabledHotkeys?: FilesStore["setEnabledHotkeys"];
   uploadedFile: AvatarEditorDialogStore["uploadedFile"];
   setUploadedFile: AvatarEditorDialogStore["setUploadedFile"];
-  isAIAgentsFolderRoot: boolean;
 };
 
 export interface CustomLogoProps {

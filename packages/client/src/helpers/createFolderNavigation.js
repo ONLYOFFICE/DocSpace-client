@@ -35,7 +35,7 @@
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 
-import { RoomsType, SearchArea } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_ARCHIVE_DOCUMENTS,
@@ -68,12 +68,6 @@ export const createFolderNavigation = async (
     security,
   } = item;
 
-  const isAiRoom = itemRoomType === RoomsType.AIRoom;
-
-  const aiAgentStartCategory = security.UseChat
-    ? CategoryType.Chat
-    : CategoryType.AIAgent;
-
   // Keys on the room type as well as the route: a form room reached from
   // another section (Files -> "Form data collection" -> "Share in the room")
   // has no `/forms` prefix yet, and routing it by rootFolderType alone would
@@ -84,15 +78,11 @@ export const createFolderNavigation = async (
     { roomType: itemRoomType },
   );
 
-  const path = isAiRoom
-    ? getCategoryUrl(aiAgentStartCategory, id)
-    : getCategoryUrl(baseCategory, id);
+  const path = getCategoryUrl(baseCategory, id);
   const filter = FilesFilter.getDefault();
   const filterObj = FilesFilter.getFilter(window.location);
 
-  if (isAiRoom) {
-    if (!security.UseChat) filter.searchArea = SearchArea.ResultStorage;
-  } else if (isRoom) {
+  if (isRoom) {
     if (userId) {
       const key =
         categoryType === CategoryType.Archive
@@ -124,7 +114,6 @@ export const createFolderNavigation = async (
     isRoom,
     rootRoomTitle: roomType ? currentTitle : "",
     isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
-    isAiRoomType: isAiRoom,
     isShared,
     isExternal,
     canCreate: security?.canCreate,

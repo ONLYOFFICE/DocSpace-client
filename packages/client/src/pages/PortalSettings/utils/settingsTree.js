@@ -170,7 +170,7 @@ export const settingsTree = [
         key: "0-3",
         icon: "",
         link: "default-templates",
-        tKey: "DefaultTemplates",
+        tKey: "DocumentTemplates",
         isCategory: true,
         children: [
           {
@@ -178,7 +178,7 @@ export const settingsTree = [
             key: "0-3-0",
             icon: "",
             link: "default-templates",
-            tKey: "DefaultTemplates",
+            tKey: "DocumentTemplates",
           },
         ],
       },
@@ -509,13 +509,6 @@ export const settingsTree = [
             icon: "",
             link: "quota-per-user",
             tKey: "QuotaPerUser",
-          },
-          {
-            id: "portal-settings_catalog-storageManagement_quota-per-ai-agent",
-            key: "6-0-3",
-            icon: "",
-            link: "quota-per-ai-agent",
-            tKey: "QuotaPerAIAgent",
           },
         ],
       },

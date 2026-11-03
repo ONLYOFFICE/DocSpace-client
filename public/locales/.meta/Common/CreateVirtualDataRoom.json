@@ -3,7 +3,7 @@
   "content": "Create virtual data room",
   "content_en_sha1_hash": "cffe205b69e44d4beb86299712697b1f2e680fe5",
   "created_at": "2025-05-19T21:30:43.931Z",
-  "updated_at": "2026-05-15T14:00:06.623Z",
+  "updated_at": "2026-10-31T12:58:28.936Z",
   "comment": {
     "text": "This is a button label that allows users to create a new virtual data room. It appears on empty screens where no rooms exist yet, and in selection dialogs for creating different room types.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
-      "line_number": 292,
+      "line_number": 289,
       "context": "icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper",
       "module": "/packages/client"
     },

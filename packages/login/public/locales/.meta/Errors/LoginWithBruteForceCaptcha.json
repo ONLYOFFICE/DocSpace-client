@@ -3,7 +3,7 @@
   "content": "Confirm that you are not a robot",
   "content_en_sha1_hash": "3aab2c84eba713b9e899821400ca17067061fc52",
   "created_at": "2025-05-19T21:30:57.292Z",
-  "updated_at": "2026-10-29T13:57:47.762Z",
+  "updated_at": "2026-10-31T12:58:29.466Z",
   "comment": {
     "text": "This is an error message displayed when a CAPTCHA challenge fails during login, password recovery, or access recovery, indicating that the user's attempt to prove they are not a robot was unsuccessful.",
     "is_auto": true,

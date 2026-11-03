@@ -216,6 +216,16 @@ collection, creating, uploading and editing PDF forms, and syncing results to a
 spreadsheet are RO RM CC; enabling XLSX collection and database sync are RO RM;
 the form list - running, in progress and completed - is visible to RO RM CC FF.
 
+**Instructions room** (type 10, AI skills) and **Knowledge room** (type 11, AI
+knowledge base) are decided by the AI projects spec
+(`openspec/changes/ai-projects/specs/{instructions-room,knowledge-room}`), not
+by the spreadsheet. Both are flat: no folders, no folder upload. An
+Instructions room holds `.md` files only and keeps RO RM CC Ed Vw. A Knowledge
+room has **no Editor** — its files are never edited, only read or uploaded —
+so it offers RO RM CC Vw; while vectorization is off it takes no uploads and
+cannot be picked as a knowledge base. CC deletes and moves own files only, as
+everywhere. A member joining through an AI project gets Vw on the linked room.
+
 ## Where the spreadsheet reads ambiguously, the code decides
 
 Two rows are answered three different ways across the sheets. The code is right

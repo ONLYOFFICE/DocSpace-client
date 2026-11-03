@@ -60,6 +60,7 @@ import type {
   TEditAgentData,
   TGetAgents,
   TAIUserConfig,
+  TProfile,
   TProfilesList,
   TMetadataAIFillRequest,
   TMetadataAIFillResult,
@@ -251,39 +252,6 @@ export const deleteAIAgent = async (id: TAgent["id"]) => {
   await request({ method: "DELETE", url: `${baseUrl}/agents/${id}`, data: {} });
 };
 
-export const resetAIAgentQuota = async (
-  roomIds: TAgent["id"] | TAgent["id"][],
-) => {
-  const data = {
-    roomIds,
-  };
-  const options = {
-    method: "put",
-    url: `${baseUrl}/agents/resetquota`,
-    data,
-  };
-
-  return request(options);
-};
-
-export function setCustomAIAgentQuota(
-  roomIds: TAgent["id"] | TAgent["id"][],
-  quota: number,
-) {
-  const data = {
-    roomIds,
-    quota,
-  };
-
-  const options = {
-    method: "put",
-    url: `${baseUrl}/agents/agentquota`,
-    data,
-  };
-
-  return request(options);
-}
-
 export const getProfilesList = async () => {
   const response = await authFetch(`/api/2.0/ai/profiles/list`, {
     method: "GET",
@@ -295,6 +263,19 @@ export const getProfilesList = async () => {
   if (!response.ok) return [] as TProfilesList;
 
   return (await response.json()) as TProfilesList;
+};
+
+// One AI profile by id, as the chat's own `profiles/get-by-id` returns it
+// (without its key); `null` when it is gone or cannot be read.
+export const getProfileById = async (id: string) => {
+  const response = await authFetch(
+    `/api/2.0/ai/profiles/get-by-id?id=${encodeURIComponent(id)}`,
+    { method: "GET", headers: { "Content-Type": "application/json" } },
+  );
+
+  if (!response.ok) return null;
+
+  return (await response.json()) as TProfile;
 };
 
 // A draft attachment of the AI chat, as the chat's own

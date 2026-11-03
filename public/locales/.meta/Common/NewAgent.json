@@ -3,7 +3,7 @@
   "content": "New agent",
   "content_en_sha1_hash": "d200d92a331aabd52dfb0d7911c95be2fdd35eab",
   "created_at": "2025-10-27T16:14:17.785Z",
-  "updated_at": "2026-10-23T12:28:45.490Z",
+  "updated_at": "2026-10-31T12:58:29.617Z",
   "comment": {
     "text": "This is a button label or an item in a dropdown list. It allows users to create a new AI agent.",
     "is_auto": true,
@@ -11,48 +11,6 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 854,
-      "context": "/>\n ) : isAIAgentsFolder ? (\n <Button\n className={classNames(styles.mainButton, \"create-agent-button\")}\n id=\"rooms-shared_create-agent-button\"\n label={t(\"Common:NewAgent\")}\n onClick={onMainButtonAgentClick}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled || aiConfig?.aiReadyNeedReset}\n size=\"small\"\n primary",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 854,
-      "context": "/>\n ) : isAIAgentsFolder ? (\n <Button\n className={classNames(styles.mainButton, \"create-agent-button\")}\n id=\"rooms-shared_create-agent-button\"\n label={t(\"Common:NewAgent\")}\n onClick={onMainButtonAgentClick}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled || aiConfig?.aiReadyNeedReset}\n size=\"small\"\n primary",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/helpers/getSectionCreateButton.ts",
-      "line_number": 110,
-      "context": "if (!model || model.length === 0) return HIDDEN;\n \n return {\n showMainButton: true,\n mainButtonProps: {\n text: t(\"Common:NewAgent\"),\n isDropdown: false,\n model: [],\n onAction: () => onCreateAgent(),\n },\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 396,
-      "context": "() => [\n {\n id: \"quick-new-agent\",\n dataTestId: \"quick-new-agent\",\n icon: <CreateAgentIcon />,\n label: t(\"Common:NewAgent\"),\n onClick: () => dispatchCreateAgent(currentFolderId),\n },\n ],\n [t, currentFolderId],\n );",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 2010,
-      "context": "const agentsMainButtonProps = React.useMemo(\n () => ({\n isDropdown: false,\n model: [],\n onAction: onCreateAgentFromFilter,\n text: t(\"Common:NewAgent\"),\n }),\n [t, onCreateAgentFromFilter],\n );\n \n if (showFilterLoader) return <FilterLoader />;",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 415,
-      "context": "const options: TContextOption[] = isAIAgentsFolder\n ? [\n {\n key: \"new-agent\",\n label: t(\"Common:NewAgent\"),\n onClick: self.onCreateAgent,\n icon: CatalogAIAgentsReactSvgUrl,\n },\n ]\n : isFormsFolder",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/CreateEditAgentStore.ts",
-      "line_number": 367,
-      "context": "color: (logo as { color: string }).color,\n }\n : null;\n \n const baseAgentData = {\n title: title || t(\"Common:NewAgent\"),\n \n ...(quotaLimit && {\n quota: +quotaLimit,\n }),",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
       "line_number": 185,

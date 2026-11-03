@@ -3,7 +3,7 @@
   "content": "Internal server error. Try again later.",
   "content_en_sha1_hash": "50b64918b994b2985e494b4a494e20d58180ff95",
   "created_at": "2025-05-19T21:30:45.082Z",
-  "updated_at": "2026-08-14T14:58:32.686Z",
+  "updated_at": "2026-10-31T12:58:28.952Z",
   "comment": {
     "text": "Error text displayed when an unexpected server-side issue occurs, prompting the user to try again later.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
-      "line_number": 105,
+      "line_number": 102,
       "context": "if (res.success) {\n res.data && updateCreatedAvatar(res.data);\n setHasAvatar(true);\n toastr.success(t(\"Common:ChangesSavedSuccessfully\"));\n } else {\n throw new Error(t(\"Common:ErrorInternalServer\"));\n }\n \n onClose();\n } catch (error) {\n console.error(error);",
       "module": "/packages/client"
     },

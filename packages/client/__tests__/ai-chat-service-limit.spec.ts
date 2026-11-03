@@ -74,6 +74,8 @@ const DESKTOP = { width: 1440, height: 1024 };
 const RESET_AT = "2026-10-23 23:59:59Z";
 /** The same instant the standard way, for an en-US account in UTC. */
 const RESET_AT_SHOWN = "10/23/2026 11:59 PM";
+/** The browser's clock in both tests: the day the limit is reached. */
+const NOW = new Date("2026-10-23T12:00:00Z");
 
 /** Ids of the selfByTypeHandler accounts the two tests sign in as. */
 const OWNER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
@@ -94,6 +96,9 @@ const dismissModelUpdatedNotice = (page: Page, userId: string) =>
 
 /** Opens the rooms list, docks the AI Chat panel from the header and sends. */
 const openChatAndSend = async (page: Page, baseUrl: string) => {
+  // Before the reset: a limit whose reset has passed is lifted at once, so
+  // the notice would never show on a real clock once that day is over.
+  await page.clock.setFixedTime(NOW);
   await page.setViewportSize(DESKTOP);
   await page.goto(`${baseUrl}${ROOMS_URL}`);
 

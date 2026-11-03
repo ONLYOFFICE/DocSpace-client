@@ -129,7 +129,12 @@ export const SecretStorage = {
     };
   },
 
-  /** Side-effect: any expiry / userId-mismatch wipes the slot before returning null. */
+  /**
+   * Side-effect: any expiry / userId-mismatch wipes the slot before returning null.
+   * Every caller gets its own copy, so a lock wipes the slot without erasing
+   * the key under an operation that is still running.
+   * Spec: encryption-core, "A lock wipes only the cache slot"
+   */
   getCached(userId: string): IdentityKeyPair | null {
     if (!_state) return null;
     if (_state.userId !== userId) {
@@ -142,8 +147,8 @@ export const SecretStorage = {
     }
     bump(_state);
     return {
-      publicKey: _state.publicKey,
-      privateKey: _state.privateKey,
+      publicKey: new Uint8Array(_state.publicKey),
+      privateKey: new Uint8Array(_state.privateKey),
     };
   },
 

@@ -147,6 +147,57 @@ describe("useGenerateKeyFlow", () => {
     });
   });
 
+  describe("User cancels inside key generation", () => {
+    it("reports a cancel of the passphrase dialog", async () => {
+      const onCancel = vi.fn();
+      const onError = vi.fn();
+      render(
+        <Harness
+          userId="42"
+          refreshKeysFromServer={vi.fn()}
+          onCancel={onCancel}
+          onError={onError}
+        />,
+      );
+      await act(async () => latest.request());
+
+      await act(async () => {
+        (captured.passphrase!.onCancel as () => void)();
+      });
+
+      expect(onCancel).toHaveBeenCalledTimes(1);
+      expect(onError).not.toHaveBeenCalled();
+      expect(captured.passphrase).toBeNull();
+      expect(setEncryptionKeys).not.toHaveBeenCalled();
+    });
+
+    it("reports a cancel of the recovery-phrase dialog", async () => {
+      happyMocks();
+      const onCancel = vi.fn();
+      render(
+        <Harness
+          userId="42"
+          refreshKeysFromServer={vi.fn()}
+          onCancel={onCancel}
+        />,
+      );
+      await act(async () => latest.request());
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+
+      await act(async () => {
+        (captured.recovery!.onCancel as () => void)();
+      });
+
+      expect(onCancel).toHaveBeenCalledTimes(1);
+      expect(captured.recovery).toBeNull();
+      expect(setEncryptionKeys).not.toHaveBeenCalled();
+    });
+  });
+
   describe("onPassphraseSubmit", () => {
     it("toasts an error and does NOT generate keys when userId is undefined", async () => {
       render(

@@ -82,7 +82,7 @@ Every task first adds a test named after its scenario and shows that it fails on
 
 ## 5. Cancelling key generation closes a private-room creation (review M6)
 
-- [ ] 5.1 Shared flow and gate (design decision 7):
+- [x] 5.1 Shared flow and gate (design decision 7):
   - add `onCancel` to `useGenerateKeyFlow` (`packages/shared/dialogs/key-generation/useGenerateKeyFlow.tsx:193` and `:203`), called on a user cancel of the passphrase and recovery-phrase dialogs;
   - forward it from `usePrivateRoomKeyGate` as `onKeyGenerationCancelled`.
 

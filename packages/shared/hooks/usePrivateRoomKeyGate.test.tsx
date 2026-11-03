@@ -75,6 +75,20 @@ describe("usePrivateRoomKeyGate", () => {
     expect(captured.passphrase).not.toBeNull();
   });
 
+  it("User cancels inside key generation", () => {
+    const onKeyGenerationCancelled = vi.fn();
+    const onClose = vi.fn();
+    renderGate({ hasExistingKeys: false, onKeyGenerationCancelled, onClose });
+    act(() => gate.confirmKeyGeneration());
+
+    act(() => {
+      (captured.passphrase!.onCancel as () => void)();
+    });
+
+    expect(onKeyGenerationCancelled).toHaveBeenCalledTimes(1);
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
   it("Key already exists", () => {
     renderGate({ hasExistingKeys: true });
 

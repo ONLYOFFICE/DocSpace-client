@@ -65,6 +65,8 @@ type Deps = {
   refreshKeysFromServer: () => Promise<void>;
   onSuccess?: () => void;
   onError?: () => void;
+  /** The user cancelled the passphrase or the recovery-phrase dialog. */
+  onCancel?: () => void;
 };
 
 export type GenerateKeyFlow = {
@@ -80,6 +82,7 @@ export function useGenerateKeyFlow({
   refreshKeysFromServer,
   onSuccess,
   onError,
+  onCancel,
 }: Deps): GenerateKeyFlow {
   const { t } = useTranslation(["Common"]);
   const { suspendAutoLock } = useEncryption();
@@ -100,6 +103,12 @@ export function useGenerateKeyFlow({
     setPassphrase(null);
     setMnemonic(null);
   }, []);
+
+  // Spec: room-membership, "Starting private room creation without a key starts key generation"
+  const cancel = useCallback(() => {
+    reset();
+    onCancel?.();
+  }, [reset, onCancel]);
 
   const request = useCallback(() => {
     if (!globalThis.crypto?.subtle) {
@@ -190,7 +199,7 @@ export function useGenerateKeyFlow({
           visible
           isNew
           onSubmit={onPassphraseSubmit}
-          onCancel={reset}
+          onCancel={cancel}
           isLoading={isPending}
         />
       ) : null}
@@ -200,7 +209,7 @@ export function useGenerateKeyFlow({
           mnemonic={mnemonic}
           accountLabel={accountLabel}
           onConfirm={onRecoveryConfirm}
-          onCancel={reset}
+          onCancel={cancel}
           isLoading={isPending}
         />
       ) : null}

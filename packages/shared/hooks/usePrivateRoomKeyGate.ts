@@ -53,6 +53,7 @@ export function usePrivateRoomKeyGate({
   hasExistingKeys,
   refreshKeysFromServer,
   onKeyGenerated,
+  onKeyGenerationCancelled,
   onClose,
 }: {
   t: TFunction;
@@ -62,11 +63,15 @@ export function usePrivateRoomKeyGate({
   hasExistingKeys?: boolean;
   refreshKeysFromServer: () => Promise<void>;
   onKeyGenerated?: () => void;
+  /** The user cancelled inside key generation, after confirming the offer. */
+  onKeyGenerationCancelled?: () => void;
   onClose?: () => void;
 }) {
   const [keyConfirmVisible, setKeyConfirmVisible] = useState(false);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
+  const onCancelledRef = useRef(onKeyGenerationCancelled);
+  onCancelledRef.current = onKeyGenerationCancelled;
 
   const generateKey = useGenerateKeyFlow({
     userId,
@@ -76,6 +81,9 @@ export function usePrivateRoomKeyGate({
     onSuccess: onKeyGenerated,
     onError: () => {
       onCloseRef.current?.();
+    },
+    onCancel: () => {
+      onCancelledRef.current?.();
     },
   });
 

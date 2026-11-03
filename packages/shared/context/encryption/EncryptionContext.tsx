@@ -427,7 +427,9 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     if (!keyChangeRequest || keyChangeRequest.displayName) return undefined;
     const request = keyChangeRequest;
     let cancelled = false;
-    getUserById(request.userId)
+    // The server refuses another profile to some account types; that refusal
+    // is not the page losing access.
+    getUserById(request.userId, undefined, { skipForbidden: true })
       .then((user) => user?.displayName)
       .catch(() => undefined)
       .then((name) => {

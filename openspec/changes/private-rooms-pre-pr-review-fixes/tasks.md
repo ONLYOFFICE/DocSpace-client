@@ -72,13 +72,13 @@ Every task first adds a test named after its scenario and shows that it fails on
   Verify:
   - cases "Next request after an answer" (a second click on the same button does not answer the next request) and "Queued key-change dialog opened" (the new dialog has the focus, with its own fingerprints) in `context/encryption/__tests__/EncryptionContext.test.tsx`;
   - `cd packages/shared && pnpm exec vitest run context/encryption`.
-- [ ] 4.2 Name lookup without the forbidden handler (design decision 6):
+- [x] 4.2 Name lookup without the forbidden handler (design decision 6):
   - give `getUserById` (`packages/shared/api/people/index.ts:377`) an optional `skipForbidden` passed to `request`;
   - use it for the key-change dialog's lookup.
 
   Verify:
   - case "Peer name not readable" in `EncryptionContext.test.tsx`: the lookup is sent with `skipForbidden`, and a rejected lookup names the peer by id;
-  - a case in a new `packages/shared/api/people/__tests__/getUserById.test.ts` that the option reaches `request`.
+  - a case in a new `packages/shared/api/people/getUserById.test.ts` (co-located, as the other API tests) that the option reaches `request`.
 
 ## 5. Cancelling key generation closes a private-room creation (review M6)
 

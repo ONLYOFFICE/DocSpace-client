@@ -967,7 +967,9 @@ describe("EncryptionContext / EncryptionProvider", () => {
           displayName: undefined,
         });
       });
-      expect(getUserById).toHaveBeenCalledWith("peer-1");
+      expect(getUserById).toHaveBeenCalledWith("peer-1", undefined, {
+        skipForbidden: true,
+      });
       expect(captured.keyChange!.displayName).toBe("Alice Smith");
     });
 
@@ -978,6 +980,24 @@ describe("EncryptionContext / EncryptionProvider", () => {
       });
       expect(getUserById).not.toHaveBeenCalled();
       expect(captured.keyChange!.displayName).toBe("Alice");
+    });
+
+    it("Peer name not readable", async () => {
+      const refused = Object.assign(new Error("403"), {
+        response: { status: 403 },
+      });
+      vi.mocked(getUserById).mockRejectedValue(refused);
+      renderTree();
+      await act(async () => {
+        void latest.resolveKeyMismatch({
+          ...sampleInfo,
+          displayName: undefined,
+        });
+      });
+      expect(getUserById).toHaveBeenCalledWith("peer-1", undefined, {
+        skipForbidden: true,
+      });
+      expect(captured.keyChange!.displayName).toBe("peer-1");
     });
 
     it("Peer named in the dialog: the user id stands in when the lookup fails", async () => {

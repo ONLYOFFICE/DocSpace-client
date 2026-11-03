@@ -42,15 +42,28 @@ import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 
 import { useSdkMethods } from "@/providers/sdkMethods";
 
+import { withPrivateRoomsOptInWhen } from "../_utils/private-rooms-opt-in";
+import { usePrivateRoomsOptIn } from "./usePrivateRoute";
+
 export type PrivateFrameSection = "rooms" | "archive";
 
 export const sectionFromPathname = (pathname: string): PrivateFrameSection =>
   pathname.startsWith("/private/archive") ? "archive" : "rooms";
 
+// Spec: private-rooms/sdk-surface, "No search in private rooms".
+export const withoutSearchText = (query: string): string => {
+  const params = new URLSearchParams(query);
+  if (!params.has("search")) return query;
+  params.delete("search");
+  const rest = params.toString();
+  return rest ? `?${rest}` : "";
+};
+
 export const usePrivateFrameBridge = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const optedIn = usePrivateRoomsOptIn();
 
   const appReadySent = React.useRef(false);
   React.useEffect(() => {
@@ -67,7 +80,7 @@ export const usePrivateFrameBridge = () => {
       data: {
         section,
         pathname: window.location.pathname,
-        search: window.location.search,
+        search: withoutSearchText(window.location.search),
       },
     });
   }, [section, pathname, searchParams]);
@@ -76,9 +89,9 @@ export const usePrivateFrameBridge = () => {
     navigateSection: (data) => {
       const sec = (data as { section?: string } | undefined)?.section;
       if (sec === "archive") {
-        router.replace("/private/archive");
+        router.replace(withPrivateRoomsOptInWhen("/private/archive", optedIn));
       } else if (sec === "rooms") {
-        router.replace("/private");
+        router.replace(withPrivateRoomsOptInWhen("/private", optedIn));
       } else {
         throw new Error(`Unknown section: ${String(sec)}`);
       }

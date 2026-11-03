@@ -36,7 +36,10 @@
 import { describe, expect, it } from "vitest";
 
 import { FolderType, MetadataFieldType } from "@docspace/shared/enums";
-import type { TProfile } from "@docspace/shared/api/ai/types";
+import type {
+  TMetadataAISkipped,
+  TProfile,
+} from "@docspace/shared/api/ai/types";
 import type { TEntryMetadata } from "@docspace/shared/api/metadata/types";
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -147,6 +150,15 @@ describe("context menu options", () => {
       "suggest-metadata-ai",
     ]);
     expect(getMetadataAIOptions(room(), context)).toEqual([]);
+  });
+
+  it("offers the filling only to a file that has a field to fill", () => {
+    expect(
+      getMetadataAIOptions(file({ hasMetadataFields: false }), context),
+    ).toEqual(["suggest-metadata-ai"]);
+    expect(
+      getMetadataAIOptions(file({ hasMetadataFields: true }), context),
+    ).toEqual(["fill-metadata-ai", "suggest-metadata-ai"]);
   });
 
   it("hides both where AI cannot read or write the metadata", () => {
@@ -473,6 +485,26 @@ describe("service answers", () => {
     expect(getMetadataAIError(t, { status: 504 })).toBe("Metadata:AITimeout");
     expect(getMetadataAIError(t, new Error("offline"))).toBe(
       "Common:SomethingWentWrong",
+    );
+  });
+
+  it("says why the content was not read", () => {
+    const skippedFor = (reason: TMetadataAISkipped["reason"]) => ({
+      status: 422,
+      skipped: [{ id: "7", reason }],
+    });
+
+    expect(getMetadataAIError(t, skippedFor("empty"))).toBe(
+      "Metadata:AIEmptyContent",
+    );
+    expect(getMetadataAIError(t, skippedFor("unsupported"))).toBe(
+      "Metadata:AIUnsupportedFormat",
+    );
+    expect(getMetadataAIError(t, skippedFor("forbidden"))).toBe(
+      "Common:AccessDenied",
+    );
+    expect(getMetadataAIError(t, skippedFor("failed"))).toBe(
+      "Metadata:AINothingToRead",
     );
   });
 

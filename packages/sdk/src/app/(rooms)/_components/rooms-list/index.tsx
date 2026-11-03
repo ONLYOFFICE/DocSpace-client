@@ -68,6 +68,7 @@ import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { roomsFilterQuery } from "@/utils/roomsFilterUrl";
 import type {
   TFile,
   TFilesSettings,
@@ -81,12 +82,12 @@ import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import {
   DeviceType,
   FolderType,
-  RoomPrivacyFilter,
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
+import { scopeRoomsRequest } from "@/utils/roomsRequestScope";
 
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
@@ -118,6 +119,7 @@ import RestoreRoomDialog from "../restore-room-dialog";
 import DeleteRoomDialog from "../delete-room-dialog";
 import MoveToArchiveDialog from "../move-to-archive-dialog";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
+import { RoomActionsOverrideContext } from "../../_contexts/RoomActionsOverrideContext";
 import { useRoomsTagsStore } from "../../_store/RoomsTagsStore";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
@@ -153,9 +155,6 @@ type RoomsListProps = {
   isPrivate?: boolean;
   /** Picks shield vs padlock icon on private-room cards. */
   hasEncryptionKeys?: boolean;
-  /** Private-only override; falls through to public dialogs otherwise. */
-  onPrivateInviteRoom?: (room: TFolder) => void;
-  onPrivateChangeOwner?: (room: TFolder) => void;
   // Populated by RoomsList so RoomsLayout can hand the same handlers to the
   // shared Header's TableGroupMenu without lifting the dialog state out of
   // RoomsList. Mirrors the existing `refreshRef` pattern.
@@ -178,8 +177,6 @@ const RoomsList = ({
   titleOverride,
   isPrivate,
   hasEncryptionKeys,
-  onPrivateInviteRoom,
-  onPrivateChangeOwner,
   roomActionsRef,
   infoPanelVisible,
 }: RoomsListProps) => {
@@ -229,7 +226,6 @@ const RoomsList = ({
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
     f.type = String(RoomsType.CustomRoom);
-    if (isPrivate) f.privacyFilter = RoomPrivacyFilter.Private;
     const sp = new URLSearchParams(filesFilter);
     if (sp.get("page")) f.page = Number(sp.get("page"));
     if (sp.get("pageCount")) f.pageCount = Number(sp.get("pageCount"));
@@ -293,36 +289,43 @@ const RoomsList = ({
     (TFolderItem | TFileItem) | null
   >(null);
 
+  const actionsOverride = React.useContext(RoomActionsOverrideContext);
+
   const onInviteRoom = React.useCallback(
     (item: TFolderItem | TFileItem) => {
-      const isPrivate = (item as { private?: boolean }).private === true;
-      if (isPrivate && onPrivateInviteRoom) {
-        onPrivateInviteRoom(item as TFolder);
+      if (actionsOverride) {
+        actionsOverride.inviteRoom(item);
         return;
       }
       setInvitingRoom(item);
     },
-    [onPrivateInviteRoom],
+    [actionsOverride],
   );
 
   const [restoringItems, setRestoringItems] = React.useState<
     (TFolderItem | TFileItem)[] | null
   >(null);
 
-  const onEditRoom = React.useCallback((item: TFolderItem | TFileItem) => {
-    setEditingRoom(item);
-  }, []);
+  const onEditRoom = React.useCallback(
+    (item: TFolderItem | TFileItem) => {
+      if (actionsOverride) {
+        actionsOverride.editRoom(item);
+        return;
+      }
+      setEditingRoom(item);
+    },
+    [actionsOverride],
+  );
 
   const onChangeOwner = React.useCallback(
     (item: TFolderItem | TFileItem) => {
-      const isPrivate = (item as { private?: boolean }).private === true;
-      if (isPrivate && onPrivateChangeOwner) {
-        onPrivateChangeOwner(item as TFolder);
+      if (actionsOverride) {
+        actionsOverride.changeOwner(item);
         return;
       }
       setChangingOwnerRoom(item);
     },
-    [onPrivateChangeOwner],
+    [actionsOverride],
   );
 
   const onTagClick = React.useCallback(
@@ -580,7 +583,6 @@ const RoomsList = ({
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
     newFilter.type = String(RoomsType.CustomRoom);
-    if (isPrivate) newFilter.privacyFilter = RoomPrivacyFilter.Private;
     const sp = new URLSearchParams(window.location.search);
     if (sp.get("page")) newFilter.page = Number(sp.get("page"));
     if (sp.get("sortBy"))
@@ -605,7 +607,10 @@ const RoomsList = ({
     newFilter.pageCount = PAGE_COUNT;
 
     try {
-      const res = await api.rooms.getRooms(newFilter, controller.signal);
+      const res = await api.rooms.getRooms(
+        scopeRoomsRequest(newFilter, { isPrivate, isArchive }),
+        controller.signal,
+      );
 
       if (controller.signal.aborted) return;
 
@@ -617,7 +622,7 @@ const RoomsList = ({
       } = res;
 
       if (titleOverride) {
-        // Sticky title — keep the page-level override (e.g. "Rooms E2E")
+        // Sticky title — keep the page-level override (e.g. "Private")
         // even after the server response carries a generic title.
         navigationStore.setCurrentTitle(titleOverride);
       } else if (newCurrent?.title) {
@@ -757,7 +762,10 @@ const RoomsList = ({
     filter.pageCount = PAGE_COUNT;
 
     try {
-      const res = await api.rooms.getRooms(filter, controller.signal);
+      const res = await api.rooms.getRooms(
+        scopeRoomsRequest(filter, { isPrivate, isArchive }),
+        controller.signal,
+      );
 
       if (controller.signal.aborted) return;
 
@@ -783,6 +791,8 @@ const RoomsList = ({
     convertFolderToItem,
     convertFileToItem,
     filesListStore,
+    isPrivate,
+    isArchive,
   ]);
 
   React.useEffect(() => {
@@ -848,7 +858,7 @@ const RoomsList = ({
           newFilter.page = 0;
           newFilter.pageCount = PAGE_COUNT;
           setFilter(newFilter);
-          window.history.pushState(null, "", `?${newFilter.toUrlParams()}`);
+          window.history.pushState(null, "", `?${roomsFilterQuery(newFilter)}`);
         }}
         timezone={timezone}
         fetchMoreFiles={fetchMoreRooms}
@@ -908,6 +918,7 @@ const RoomsList = ({
           roomIconColor: folder.roomIconColor,
           roomCover: logo?.cover,
           createdBy: folder.createdBy as TCreatedBy | undefined,
+          private: (folder as unknown as { private?: boolean }).private,
         };
       })()
     : undefined;
@@ -915,13 +926,15 @@ const RoomsList = ({
   return (
     <RoomsRefreshContext.Provider value={fetchCurrentRooms}>
       {content}
-      <CreateEditRoomDialog
-        visible={!!editingRoom}
-        onClose={() => setEditingRoom(null)}
-        room={editingRoomData}
-        onRoomEdited={refreshSingleRoom}
-      />
-      {changingOwnerRoom ? (
+      {actionsOverride ? null : (
+        <CreateEditRoomDialog
+          visible={!!editingRoom}
+          onClose={() => setEditingRoom(null)}
+          room={editingRoomData}
+          onRoomEdited={refreshSingleRoom}
+        />
+      )}
+      {changingOwnerRoom && !actionsOverride ? (
         <ChangeRoomOwnerDialog
           visible
           onClose={() => setChangingOwnerRoom(null)}
@@ -933,18 +946,13 @@ const RoomsList = ({
           onChanged={refreshSingleRoom}
         />
       ) : null}
-      <LeaveRoomDialog
-        currentUserId={user?.id}
-        onTransferOwnership={(room) => {
-          const isPrivate = (room as { private?: boolean }).private === true;
-          if (isPrivate && onPrivateChangeOwner) {
-            onPrivateChangeOwner(room as TFolder);
-            return;
-          }
-          setChangingOwnerRoom(room);
-        }}
-      />
-      {invitingRoom ? (
+      {actionsOverride ? null : (
+        <LeaveRoomDialog
+          currentUserId={user?.id}
+          onTransferOwnership={setChangingOwnerRoom}
+        />
+      )}
+      {invitingRoom && !actionsOverride ? (
         <InvitePanel
           visible
           onClose={() => setInvitingRoom(null)}

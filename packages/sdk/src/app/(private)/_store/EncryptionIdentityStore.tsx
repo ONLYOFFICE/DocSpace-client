@@ -40,10 +40,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
-import {
-  getActiveKeyId,
-  selectActiveKey,
-} from "@docspace/shared/services/encryption/active-key-preference";
+import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import type { EncryptionUserKeys } from "@docspace/shared/context/encryption";
 
 class EncryptionIdentityStore {
@@ -74,10 +71,12 @@ class EncryptionIdentityStore {
         this.keys = keys ?? [];
       });
     } catch (error) {
+      // A failed load is not an empty list: the keys known before stay, and
+      // a list never loaded stays unknown.
+      // Spec: sdk-surface, "Private room creation gate"
       runInAction(() => {
         this.loadError =
           error instanceof Error ? error : new Error(String(error));
-        this.keys = [];
       });
     } finally {
       runInAction(() => {
@@ -98,7 +97,7 @@ class EncryptionIdentityStore {
   // overlay the owner's id from the user store.
   get userKeys(): EncryptionUserKeys | null {
     if (!this.ownerId || !this.keys) return null;
-    const chosen = selectActiveKey(this.keys, getActiveKeyId(this.ownerId));
+    const chosen = selectUserKey(this.keys);
     if (!chosen) return null;
     return {
       publicKey: chosen.publicKey,

@@ -207,6 +207,8 @@ const Root = ({
     onCloseSelectFileDialog,
     onSubmitSelectFileDialog,
     getIsDisabledSelectFileDialog,
+    onFilesLoadedSelectFileDialog,
+    selectFileDialogDisabledItems,
 
     selectFileDialogFileTypeDetection,
     selectFileDialogVisible,
@@ -280,7 +282,10 @@ const Root = ({
       error.message !== "unavailable" &&
       !isSkipError
     ) {
-      throw new Error(error.message);
+      throw new Error(
+        error.message,
+        error.cause ? { cause: error.cause } : undefined,
+      );
     }
   }, [error, isSkipError]);
 
@@ -405,6 +410,8 @@ const Root = ({
           onSubmit={onSubmitSelectFileDialog as SelectFileDialogProps["onSubmit"]}
           onClose={onCloseSelectFileDialog}
           getIsDisabled={getIsDisabledSelectFileDialog as SelectFileDialogProps["getIsDisabled"]}
+          onFilesLoaded={onFilesLoadedSelectFileDialog}
+          disabledItems={selectFileDialogDisabledItems}
           fileTypeDetection={selectFileDialogFileTypeDetection}
           fileInfo={fileInfo}
           shareKey={shareKey}

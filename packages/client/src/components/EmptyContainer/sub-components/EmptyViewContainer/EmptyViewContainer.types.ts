@@ -124,6 +124,7 @@ export interface InjectedEmptyViewContainerProps
   language?: string;
   templateGalleryAvailable: boolean;
   onShowTemplateGallery: TStore["contextOptionsStore"]["onShowTemplateGallery"];
+  createRoom: TStore["contextOptionsStore"]["onCreateRoom"];
   /** Vectorization is on for the portal: a Knowledge room takes uploads. */
   vectorizationEnabled?: boolean;
 }
@@ -154,6 +155,7 @@ export type OptionActions = {
   inviteRootUser: ContactsConextOptionsStore["inviteUser"];
   onGoToPersonal: () => LinkProps;
   onGoToShared: () => LinkProps;
+  onGoToPrivate: () => LinkProps;
   onGoToForms: () => LinkProps;
   onOpenAiChat: VoidFunction;
   onGoToServices: VoidFunction;

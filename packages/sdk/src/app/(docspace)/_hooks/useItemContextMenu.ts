@@ -224,7 +224,9 @@ export default function useItemContextMenu({
       }
 
       if (file.security.Rename) model.add(AVAILABLE_CONTEXT_ITEMS.rename);
-      if (file.security.Copy) model.add(AVAILABLE_CONTEXT_ITEMS.copy);
+      // Spec: private-rooms/sdk-surface, "Copy and move destination resolved fail-closed"
+      if (file.security.Copy || file.encrypted)
+        model.add(AVAILABLE_CONTEXT_ITEMS.copy);
       if (file.security.Duplicate)
         model.add(AVAILABLE_CONTEXT_ITEMS.duplicate);
       if (file.security.Move) model.add(AVAILABLE_CONTEXT_ITEMS.moveTo);

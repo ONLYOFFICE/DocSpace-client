@@ -57,6 +57,7 @@ import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?u
 import { isDesktop } from "@docspace/shared/utils";
 import { RoomSearchArea } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getEncryptedOperationErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import type { TRoomGroup } from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
 
@@ -93,6 +94,21 @@ export default class FilesHeaderOptionStore {
 
   private downloadAsHandle = () =>
     this.dialogsStore.setDownloadDialogVisible(true);
+
+  private downloadEncryptedHandle = () => {
+    const selection = this.filesStore.selection as unknown as TActionItem[];
+    const fileIds = selection.filter((i) => i.fileExst).map((i) => i.id);
+    const folderIds = selection.filter((i) => !i.fileExst).map((i) => i.id);
+
+    return this.filesActionsStore
+      .downloadFiles(fileIds, folderIds, {
+        label: this.t("Common:ArchivingData"),
+        errorMessage: (err) => getEncryptedOperationErrorMessage(this.t, err),
+      })
+      ?.catch((err) =>
+        toastr.error(getEncryptedOperationErrorMessage(this.t, err)),
+      );
+  };
 
   private moveToHandle = () => this.dialogsStore.setMoveToPanelVisible(true);
 
@@ -263,6 +279,15 @@ export default class FilesHeaderOptionStore {
           id: "menu-download",
           label: t("Common:Download"),
           onClick: this.downloadHandle,
+          iconUrl: DownloadReactSvgUrl,
+        };
+
+      case "downloadEncrypted":
+        if (!this.isAvailableOption("download")) return null;
+        return {
+          id: "menu-download-encrypted",
+          label: t("Common:DownloadWithoutDecryption"),
+          onClick: this.downloadEncryptedHandle,
           iconUrl: DownloadReactSvgUrl,
         };
 

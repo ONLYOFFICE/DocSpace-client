@@ -33,8 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { render, screen } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useState } from "react";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 
 import { PassphraseModal } from "../PassphraseModal";
@@ -72,6 +80,37 @@ const renderModal = (props: Partial<ModalProps> = {}) => {
 const getPassphraseInput = () =>
   screen.getByPlaceholderText("Common:Passphrase") as HTMLInputElement;
 
+const getConfirmInput = () =>
+  screen.getByPlaceholderText("Common:ConfirmPassphrase") as HTMLInputElement;
+
+const getAnnouncement = () => screen.getByTestId("key-dialog-announcement");
+
+// The text assistive technology reads together with the field.
+const describedText = (field: HTMLElement) =>
+  (field.getAttribute("aria-describedby") ?? "")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((id) => document.getElementById(id)?.textContent ?? "")
+    .join(" ");
+
+// Chrome moves the focus of a field that becomes disabled to the page body;
+// jsdom leaves it on the field, and blur() does nothing on a disabled field.
+const dropFocusToBody = () => {
+  document.body.tabIndex = -1;
+  document.body.focus();
+  document.body.removeAttribute("tabindex");
+  expect(document.body).toHaveFocus();
+};
+
+// A closed ModalDialog stays mounted, hidden from assistive technology, so the
+// confirmation is looked up among the dialogs that are actually open.
+const queryConfirmation = () =>
+  screen
+    .queryAllByRole("dialog")
+    .find((dialog) =>
+      within(dialog).queryByText("Common:UnsavedChangesDescription"),
+    ) ?? null;
+
 describe("PassphraseModal", () => {
   it("submits the passphrase on Enter", async () => {
     const user = userEvent.setup();
@@ -93,6 +132,16 @@ describe("PassphraseModal", () => {
     expect(onSubmit).toHaveBeenCalledWith("correct horse battery", false);
   });
 
+  it("Option explains the trade-off: the remember option carries its hint", () => {
+    renderModal({ showRememberDevice: true });
+    expect(screen.getByText("Common:RememberDeviceHint")).toBeInTheDocument();
+  });
+
+  it("shows no remember hint when the option is not offered", () => {
+    renderModal();
+    expect(screen.queryByText("Common:RememberDeviceHint")).toBeNull();
+  });
+
   it("ignores Enter while the passphrase is too short", async () => {
     const user = userEvent.setup();
     const { onSubmit } = renderModal();
@@ -103,14 +152,54 @@ describe("PassphraseModal", () => {
     expect(onSubmit).not.toHaveBeenCalled();
   });
 
-  it("ignores Enter while the submit is in progress", async () => {
+  it("Unlock in progress", async () => {
     const user = userEvent.setup();
-    const { onSubmit } = renderModal({ isLoading: true });
+    const onSubmit = vi.fn();
+    // The prompt stays open with isLoading while the unlock runs, the way the
+    // encryption context hosts it.
+    const Host = () => {
+      const [unlocking, setUnlocking] = useState(false);
+      return (
+        <PassphraseModal
+          visible
+          isNew={false}
+          isLoading={unlocking}
+          onSubmit={(...args) => {
+            onSubmit(...args);
+            setUnlocking(true);
+          }}
+          onCancel={() => {}}
+        />
+      );
+    };
+    render(<Host />);
 
     await user.type(getPassphraseInput(), "correct horse battery");
     await user.keyboard("{Enter}");
+    await user.keyboard("{Enter}");
+    // userEvent sends no keys to the now disabled field; a key that still
+    // reaches it must not submit either.
+    fireEvent.keyDown(getPassphraseInput(), { key: "Enter" });
 
-    expect(onSubmit).not.toHaveBeenCalled();
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+  });
+
+  it.each([
+    { flow: "unlock", isNew: false, fields: ["Common:Passphrase"] },
+    {
+      flow: "key generation",
+      isNew: true,
+      fields: ["Common:Passphrase", "Common:ConfirmPassphrase"],
+    },
+  ])("Busy reported to assistive technology: $flow", ({ isNew, fields }) => {
+    renderModal({ isNew, isLoading: true });
+
+    expect(
+      screen.getByRole("button", { name: "Common:ContinueButton" }),
+    ).toHaveAttribute("aria-busy", "true");
+    for (const name of fields) {
+      expect(screen.getByLabelText(name)).toBeDisabled();
+    }
   });
 
   it("submits both fields on Enter when creating a passphrase", async () => {
@@ -125,5 +214,272 @@ describe("PassphraseModal", () => {
     await user.keyboard("{Enter}");
 
     expect(onSubmit).toHaveBeenCalledWith("Correct1horse!battery", undefined);
+  });
+
+  // Spec: private-rooms/key-management, "Key dialogs ignore a click beside them"
+  it("Backdrop click on the unlock prompt", () => {
+    const { onCancel } = renderModal();
+
+    fireEvent.mouseDown(document.getElementById("modal-onMouseDown-close")!);
+
+    expect(onCancel).not.toHaveBeenCalled();
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("Escape still cancels", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderModal();
+
+    await user.keyboard("{Escape}");
+
+    expect(onCancel).toHaveBeenCalledTimes(1);
+  });
+
+  it("Typed passphrase kept", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderModal({ isNew: true });
+
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.keyboard("{Escape}");
+    expect(queryConfirmation()).not.toBeNull();
+
+    await user.keyboard("{Escape}");
+
+    expect(queryConfirmation()).toBeNull();
+    expect(onCancel).not.toHaveBeenCalled();
+    expect(getPassphraseInput()).toHaveValue("Correct1horse!battery");
+  });
+
+  it("Typed passphrase kept from the keyboard", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderModal({ isNew: true });
+
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.keyboard("{Escape}");
+    const cancel = within(queryConfirmation()!).getByRole("button", {
+      name: "Common:CancelButton",
+    });
+    cancel.focus();
+    await user.keyboard("{Enter}");
+
+    expect(queryConfirmation()).toBeNull();
+    expect(onCancel).not.toHaveBeenCalled();
+    expect(getPassphraseInput()).toHaveValue("Correct1horse!battery");
+  });
+
+  it("Typed passphrase discarded", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderModal({ isNew: true });
+
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.keyboard("{Escape}");
+    await user.click(
+      within(queryConfirmation()!).getByRole("button", {
+        name: "Common:CloseMenu",
+      }),
+    );
+
+    expect(onCancel).toHaveBeenCalledTimes(1);
+    expect(queryConfirmation()).toBeNull();
+  });
+
+  it("Nothing typed yet", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderModal({ isNew: true });
+
+    await user.keyboard("{Escape}");
+
+    expect(queryConfirmation()).toBeNull();
+    expect(onCancel).toHaveBeenCalledTimes(1);
+  });
+
+  it("Unlock prompt closes at once", async () => {
+    const user = userEvent.setup();
+    const { onCancel } = renderModal();
+
+    await user.type(getPassphraseInput(), "correct horse battery");
+    await user.keyboard("{Escape}");
+
+    expect(queryConfirmation()).toBeNull();
+    expect(onCancel).toHaveBeenCalledTimes(1);
+  });
+
+  it("Mismatched confirmation", async () => {
+    const user = userEvent.setup();
+    renderModal({ isNew: true });
+
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.type(getConfirmInput(), "Different1horse!battery");
+
+    expect(getConfirmInput()).toHaveAttribute("aria-invalid", "true");
+    expect(describedText(getConfirmInput())).toContain(
+      "Common:PassphraseMismatch",
+    );
+    await waitFor(() =>
+      expect(getAnnouncement()).toHaveTextContent("Common:PassphraseMismatch"),
+    );
+  });
+
+  it("Wrong passphrase announced", async () => {
+    const user = userEvent.setup();
+    renderModal({ externalError: "Common:InvalidPassphrase" });
+
+    expect(getPassphraseInput()).toHaveAttribute("aria-invalid", "true");
+    expect(describedText(getPassphraseInput())).toContain(
+      "Common:InvalidPassphrase",
+    );
+    await waitFor(() =>
+      expect(getAnnouncement()).toHaveTextContent("Common:InvalidPassphrase"),
+    );
+    const announcement = getAnnouncement();
+
+    await user.type(getPassphraseInput(), "again");
+
+    expect(getAnnouncement()).toBe(announcement);
+    expect(announcement).toHaveTextContent("Common:InvalidPassphrase");
+  });
+
+  it("Focus kept after a wrong passphrase", async () => {
+    const user = userEvent.setup();
+    let failUnlock = () => {};
+    const Host = () => {
+      const [unlocking, setUnlocking] = useState(false);
+      const [error, setError] = useState<string | null>(null);
+      failUnlock = () => {
+        setUnlocking(false);
+        setError("Common:InvalidPassphrase");
+      };
+      return (
+        <PassphraseModal
+          visible
+          isNew={false}
+          isLoading={unlocking}
+          externalError={error}
+          onSubmit={() => {
+            setError(null);
+            setUnlocking(true);
+          }}
+          onCancel={() => {}}
+        />
+      );
+    };
+    render(<Host />);
+
+    await user.type(getPassphraseInput(), "wrong horse battery");
+    await user.keyboard("{Enter}");
+    dropFocusToBody();
+    act(() => failUnlock());
+
+    expect(getPassphraseInput()).toHaveFocus();
+  });
+
+  it("Error cleared", async () => {
+    const user = userEvent.setup();
+    renderModal({ isNew: true });
+
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.type(getConfirmInput(), "Different1horse!battery");
+    await waitFor(() =>
+      expect(getAnnouncement()).toHaveTextContent("Common:PassphraseMismatch"),
+    );
+
+    await user.clear(getConfirmInput());
+    await user.type(getConfirmInput(), "Correct1horse!battery");
+
+    expect(getConfirmInput()).not.toHaveAttribute("aria-invalid", "true");
+    expect(describedText(getConfirmInput())).not.toContain(
+      "Common:PassphraseMismatch",
+    );
+    expect(getAnnouncement()).toHaveTextContent("");
+  });
+
+  it("Prompt opened", () => {
+    renderModal();
+
+    expect(getPassphraseInput()).toHaveFocus();
+  });
+
+  it("Unlock completed", async () => {
+    const user = userEvent.setup();
+    const onSubmit = vi.fn();
+    // The prompt is mounted only while an operation waits for the passphrase,
+    // the way the encryption context hosts it.
+    const Host = () => {
+      const [open, setOpen] = useState(false);
+      return (
+        <>
+          <button type="button" onClick={() => setOpen(true)}>
+            Open
+          </button>
+          {open ? (
+            <PassphraseModal
+              visible
+              isNew={false}
+              onSubmit={(...args) => {
+                onSubmit(...args);
+                setOpen(false);
+              }}
+              onCancel={() => setOpen(false)}
+            />
+          ) : null}
+        </>
+      );
+    };
+    render(<Host />);
+    const trigger = screen.getByRole("button", { name: "Open" });
+
+    await user.click(trigger);
+    expect(getPassphraseInput()).toHaveFocus();
+    await user.type(getPassphraseInput(), "correct horse battery");
+    await user.keyboard("{Enter}");
+
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(trigger).toHaveFocus();
+  });
+
+  it("Forward through the creation dialog", async () => {
+    const user = userEvent.setup();
+    renderModal({ isNew: true });
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.type(getConfirmInput(), "Correct1horse!battery");
+
+    getPassphraseInput().focus();
+    await user.tab();
+    expect(getConfirmInput()).toHaveFocus();
+    await user.tab();
+    expect(
+      screen.getByRole("button", { name: "Common:ContinueButton" }),
+    ).toHaveFocus();
+    await user.tab();
+    expect(
+      screen.getByRole("button", { name: "Common:CancelButton" }),
+    ).toHaveFocus();
+  });
+
+  it("Backwards from the primary action", async () => {
+    const user = userEvent.setup();
+    renderModal({ isNew: true });
+    await user.type(getPassphraseInput(), "Correct1horse!battery");
+    await user.type(getConfirmInput(), "Correct1horse!battery");
+
+    screen.getByRole("button", { name: "Common:ContinueButton" }).focus();
+    await user.tab({ shift: true });
+
+    expect(getConfirmInput()).toHaveFocus();
+  });
+
+  // Spec: private-rooms/key-management, "Tab order in key dialogs follows the visual order"
+  it("No trap", async () => {
+    const user = userEvent.setup();
+    renderModal({ isNew: true });
+    const dialog = screen.getByRole("dialog", {
+      name: "Common:CreatePassphrase",
+    });
+
+    screen.getByRole("button", { name: "Common:CancelButton" }).focus();
+    await user.tab();
+
+    expect(dialog).not.toContainElement(document.activeElement as HTMLElement);
   });
 });

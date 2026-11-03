@@ -35,14 +35,11 @@
 
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { createEncryptedFile } from "@docspace/shared/services/private-room/encrypted-file-creation";
 
-import {
-  getUniqueFileTitle,
-  isEncryptedCreateExtension,
-  runEncryptedFileCreation,
-} from "../encryptedFileCreation";
+import { runEncryptedFileCreation } from "../encryptedFileCreation";
 
 vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
   requireUnlock: vi.fn(async () => ({
@@ -75,49 +72,6 @@ function baseParams() {
 
 beforeEach(() => {
   vi.clearAllMocks();
-});
-
-describe("isEncryptedCreateExtension", () => {
-  it("accepts only the supported template extensions", () => {
-    expect(isEncryptedCreateExtension("docx")).toBe(true);
-    expect(isEncryptedCreateExtension("xlsx")).toBe(true);
-    expect(isEncryptedCreateExtension("pptx")).toBe(true);
-    expect(isEncryptedCreateExtension("pdf")).toBe(true);
-    expect(isEncryptedCreateExtension("docxf")).toBe(false);
-    expect(isEncryptedCreateExtension("")).toBe(false);
-    expect(isEncryptedCreateExtension(null)).toBe(false);
-    expect(isEncryptedCreateExtension(undefined)).toBe(false);
-  });
-});
-
-describe("getUniqueFileTitle", () => {
-  it("returns the base title when the folder has no clash", () => {
-    expect(getUniqueFileTitle("New document", "docx", [])).toBe("New document");
-    expect(
-      getUniqueFileTitle("New document", "docx", ["Other.docx", "New.xlsx"]),
-    ).toBe("New document");
-  });
-
-  it("appends an index until the name is free", () => {
-    const existing = [
-      "New document.docx",
-      "New document (1).docx",
-      "budget.xlsx",
-    ];
-    expect(getUniqueFileTitle("New document", "docx", existing)).toBe(
-      "New document (2)",
-    );
-  });
-
-  it("compares case-insensitively", () => {
-    expect(getUniqueFileTitle("New document", "docx", ["new document.DOCX"]))
-      .toBe("New document (1)");
-  });
-
-  it("does not clash across different extensions", () => {
-    expect(getUniqueFileTitle("New document", "docx", ["New document.xlsx"]))
-      .toBe("New document");
-  });
 });
 
 describe("runEncryptedFileCreation", () => {
@@ -159,14 +113,36 @@ describe("runEncryptedFileCreation", () => {
     expect(createEncryptedFile).not.toHaveBeenCalled();
   });
 
-  it("rejects unsupported extensions before unlocking", async () => {
-    await expect(
-      runEncryptedFileCreation({
-        ...baseParams(),
-        extension: "exe" as never,
-      }),
-    ).rejects.toThrow();
+  it("Unsupported extension requested", async () => {
+    const error = await runEncryptedFileCreation({
+      ...baseParams(),
+      extension: "exe" as never,
+    }).catch((e: unknown) => e);
 
+    expect(error).toMatchObject({
+      code: "UNSUPPORTED_EXTENSION",
+      extension: "exe",
+    });
     expect(requireUnlock).not.toHaveBeenCalled();
+
+    const t = vi.fn((key: string) => key);
+    expect(getEncryptionErrorMessage(t as never, error)).toBe(
+      "Common:PrivateRoomCreateNotSupported",
+    );
+    expect(t).toHaveBeenCalledWith("Common:PrivateRoomCreateNotSupported", {
+      extension: "exe",
+    });
+  });
+
+  it("names the missing keys through a locale key", async () => {
+    const error = await runEncryptedFileCreation({
+      ...baseParams(),
+      publicKey: null,
+    }).catch((e: unknown) => e);
+
+    expect(error).toMatchObject({ code: "KEYS_UNAVAILABLE" });
+    expect(
+      getEncryptionErrorMessage(((key: string) => key) as never, error),
+    ).toBe("Common:EncryptionKeysNotConfigured");
   });
 });

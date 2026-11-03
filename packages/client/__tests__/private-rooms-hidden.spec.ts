@@ -37,9 +37,12 @@ import type { Page } from "@playwright/test";
 import {
   capabilitiesHandler,
   filesSettingsHandler,
+  privateRoomListHandler,
+  privacyroomKeysHandlers,
   roomListHandler,
   rootHandler,
   selfActivationStatusHandler,
+  selfByTypeHandler,
   settingsHandler,
   TypeRoomList,
   TypeSettings,
@@ -81,6 +84,23 @@ const privateRoomCard = (page: Page) =>
     `[data-testid="room-type-list-item"][data-selected-id="${PRIVATE_ROOM_TYPE}"]`,
   );
 
+const navItem = (page: Page, id: string) =>
+  page.locator(`nav [data-item-id="${id}"]`);
+
+const roomLink = (page: Page, title: string) =>
+  page.locator(`[data-title="${title}"] [data-testid="link"]`).first();
+
+/** The query of every rooms list request the page sends. */
+const recordRoomsRequests = (page: Page) => {
+  const requests: URLSearchParams[] = [];
+  page.on("request", (request) => {
+    const url = new URL(request.url());
+    if (request.method() === "GET" && url.pathname.endsWith("/files/rooms"))
+      requests.push(url.searchParams);
+  });
+  return requests;
+};
+
 test.describe("Private rooms behind the localStorage flag", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
@@ -92,7 +112,7 @@ test.describe("Private rooms behind the localStorage flag", () => {
     );
   });
 
-  test("create-room chooser hides the Private room card without the flag", async ({
+  test("Chooser without the flag", async ({
     page,
     mockRequest,
     baseUrl,
@@ -105,16 +125,92 @@ test.describe("Private rooms behind the localStorage flag", () => {
     await expect(privateRoomCard(page)).toHaveCount(0);
   });
 
-  test("create-room chooser offers the Private room card with the flag", async ({
+  test("Section not available without the flag", async ({
     page,
     mockRequest,
     baseUrl,
   }) => {
     mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.IsDefault));
+    await disablePrivateRooms(page);
+    const roomsRequests = recordRoomsRequests(page);
+
+    await page.goto(`${baseUrl}${ROOMS_URL}`);
+    await expect(page.getByTestId("table-body")).toBeVisible({ timeout: 15000 });
+
+    await expect(navItem(page, "private-rooms")).toHaveCount(0);
+    expect(roomsRequests.length).toBeGreaterThan(0);
+    for (const params of roomsRequests)
+      expect(params.has("privacyFilter")).toBe(false);
+  });
+
+  test("Sidebar with the flag", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.IsDefault));
+
+    await page.goto(`${baseUrl}${ROOMS_URL}`);
+    await expect(navItem(page, "private-rooms")).toHaveText("Private", {
+      timeout: 15000,
+    });
+
+    await page.goto(`${baseUrl}/e2e-rooms`);
+
+    await expect
+      .poll(() => new URL(page.url()).pathname, { timeout: 15000 })
+      .toBe("/private/filter");
+    await expect(navItem(page, "private-rooms-archive")).toBeVisible();
+  });
+
+  test("Private room listed with the section", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      privateRoomListHandler(TEST_PORT, {
+        roomId: 9700,
+        title: "Gated Private Room",
+        ordinaryRooms: [{ roomId: 9701, title: "Gated Ordinary Room" }],
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page, "Gated Private Room")).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(roomLink(page, "Gated Ordinary Room")).toHaveCount(0);
+
+    await page.goto(`${baseUrl}${ROOMS_URL}filter`);
+    await expect(roomLink(page, "Gated Ordinary Room")).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(roomLink(page, "Gated Private Room")).toHaveCount(0);
+  });
+
+  test("Direct navigation without the flag", async ({ page, baseUrl }) => {
+    await disablePrivateRooms(page);
+
+    await page.goto(`${baseUrl}/e2e-rooms`);
+
+    await expect(page).toHaveURL(/\/dashboard/, { timeout: 15000 });
+  });
+
+  test("Catalog with the flag", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "owner"));
+
+    await page.goto(`${baseUrl}/portal-settings/apps`);
+
+    const app = page.getByTestId("settings-app-e2e-rooms");
+    await expect(app).toBeVisible({ timeout: 15000 });
+    await expect(app.getByText("Private", { exact: true })).toBeVisible();
+    await expect(app).toContainText("End-to-end encrypted rooms.");
+    await expect(page.getByText("Rooms E2E")).toHaveCount(0);
+  });
+
+  test("Chooser with the flag", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.IsDefault));
 
     await openCreateRoomDialog(page, baseUrl);
 
-    await expect(privateRoomCard(page).first()).toBeVisible();
+    await expect(privateRoomCard(page)).toHaveCount(0);
   });
 
   test("profile hides the Keys management tab without the flag", async ({
@@ -127,6 +223,22 @@ test.describe("Private rooms behind the localStorage flag", () => {
     await expect(page.getByTestId("main-profile")).toBeVisible();
 
     await expect(page.getByTestId("keys-management_tab")).toHaveCount(0);
+  });
+
+  test("Forgot passphrase: the deep link renders keys management without the flag", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await disablePrivateRooms(page);
+
+    await page.goto(`${baseUrl}/profile/keys-management?privateRooms=1`);
+
+    await expect(
+      page.getByRole("button", { name: "Generate new key", exact: true }),
+    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByTestId("keys-management_tab")).toBeVisible();
   });
 
   test("profile shows the Keys management tab with the flag", async ({

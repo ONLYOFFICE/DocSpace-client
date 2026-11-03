@@ -46,7 +46,7 @@ import {
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 type MetadataAIMenuProps = {
-  onFill: () => void;
+  onFill?: () => void;
   onGenerate: () => void;
 };
 
@@ -54,13 +54,19 @@ const MetadataAIMenu = ({ onFill, onGenerate }: MetadataAIMenuProps) => {
   const { t } = useTranslation(["Files"]);
   const menuRef = useRef<ContextMenuRefType>(null);
 
+  const fillItem: ContextMenuModel[] = onFill
+    ? [
+        {
+          key: "metadata-ai-fill",
+          label: t("Files:FillMetadata"),
+          icon: AISvgUrl,
+          onClick: onFill,
+        },
+      ]
+    : [];
+
   const model: ContextMenuModel[] = [
-    {
-      key: "metadata-ai-fill",
-      label: t("Files:FillMetadata"),
-      icon: AISvgUrl,
-      onClick: onFill,
-    },
+    ...fillItem,
     {
       key: "metadata-ai-generate",
       label: t("Files:GenerateMetadata"),

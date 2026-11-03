@@ -39,10 +39,6 @@ export type TPrivacyRoomRequest = {
   privateKeyEnc: string;
 };
 
-export type TPrivacySettingsRequest = {
-  enable?: boolean;
-};
-
 export type TEncryptionKeyPair = {
   id: string;
   privateKeyEnc: string;

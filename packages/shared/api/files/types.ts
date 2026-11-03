@@ -57,6 +57,7 @@ import type { TRoom } from "../rooms/types";
 export type TFile = TFileBase & {
   encrypted?: boolean;
   startFilling?: boolean;
+  hasMetadataFields?: boolean;
 };
 
 export type TFileEncryptionInfo = {
@@ -132,6 +133,7 @@ export type TShareSettings = {
 
 export type TOpenEditRequest = {
   documentType: string;
+  editorConfig: { mode: string };
   editorUrl: string;
   token: string;
   type: string;

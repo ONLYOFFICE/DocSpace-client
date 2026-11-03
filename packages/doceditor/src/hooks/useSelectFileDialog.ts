@@ -34,6 +34,7 @@
  */
 
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
 	TFileSecurity,
@@ -44,8 +45,13 @@ import {
 } from "@docspace/shared/api/files/types";
 import { getPresignedUri, getReferenceData } from "@docspace/shared/api/files";
 import { getDocEditor } from "@/utils";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
-import { TSelectedFileInfo } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
+import type {
+	TFilesSelectorFile,
+	TFilesSelectorLoadedFiles,
+	TSelectedFileInfo,
+} from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 
@@ -58,7 +64,13 @@ export const setReferenceSourceAction = "referenceSourceType";
 export const aiAttachFileAction = "aiAttachFileType";
 
 const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
+	const { t } = useTranslation(["Common"]);
 	const [isVisible, setIsVisible] = React.useState(false);
+	// Design: private-rooms-editor-contract D16, encrypted files stay out of the pickers.
+	const encryptedIds = React.useRef(new Set<string | number>());
+	const [encryptedItems, setEncryptedItems] = React.useState<
+		(string | number)[]
+	>([]);
 	const [actionEvent, setActionEvent] = React.useState<TEvent>({} as TEvent);
 	const [filesType, setFilesType] = React.useState("");
 	const [fileTypeDetection, setFileTypeDetection] = React.useState({
@@ -171,10 +183,35 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		docEditor?.setReferenceSource(data);
 	}, []);
 
+	const onFilesLoaded = useCallback(
+		(files: TFilesSelectorFile[], _context: TFilesSelectorLoadedFiles) => {
+			let changed = false;
+			for (const file of files) {
+				if (file.encrypted && !encryptedIds.current.has(file.id)) {
+					encryptedIds.current.add(file.id);
+					changed = true;
+				}
+			}
+			if (changed) setEncryptedItems([...encryptedIds.current]);
+		},
+		[],
+	);
+
+	const isEncryptedPick = useCallback(
+		(file: TSelectedFileInfo, isInsidePrivateRoom?: boolean) =>
+			!!file && (!!isInsidePrivateRoom || encryptedIds.current.has(file.id)),
+		[],
+	);
+
 	const onSelectFile = useCallback(
-		async (file: TSelectedFileInfo) => {
+		async (file: TSelectedFileInfo, isInsidePrivateRoom?: boolean) => {
 			try {
 				if (!file) return;
+
+				if (isEncryptedPick(file, isInsidePrivateRoom)) {
+					toastr.info(t("Common:PrivateRoomEditorNotSupported"));
+					return;
+				}
 
 				if (filesType === aiAttachFileAction) {
 					settleAIFileRequest(file);
@@ -204,6 +241,8 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 			mailMerge,
 			compareFiles,
 			settleAIFileRequest,
+			isEncryptedPick,
+			t,
 		],
 	);
 
@@ -268,9 +307,12 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 			isChecked: boolean,
 			selectedTreeNode: TFolder,
 			selectedFileInfo: TSelectedFileInfo,
+			_isInsideKnowledge?: boolean,
+			_isInsideResultStorage?: boolean,
+			isInsidePrivateRoom?: boolean,
 		) => {
 			requestRunning.current = true;
-			await onSelectFile(selectedFileInfo);
+			await onSelectFile(selectedFileInfo, isInsidePrivateRoom);
 			requestRunning.current = false;
 			onClose();
 		},
@@ -290,14 +332,19 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 				| TRoomSecurity
 				| undefined,
 			selectedFileInfo: TSelectedFileInfo,
+			_isDisabledFolder?: boolean,
+			_isInsideKnowledge?: boolean,
+			_isInsideResultStorage?: boolean,
+			isInsidePrivateRoom?: boolean,
 		) => {
 			if (isFirstLoad) return true;
 			if (requestRunning.current) return true;
 			if (!selectedFileInfo) return true;
+			if (isEncryptedPick(selectedFileInfo, isInsidePrivateRoom)) return true;
 
 			return false;
 		},
-		[],
+		[isEncryptedPick],
 	);
 
 	return {
@@ -311,6 +358,8 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		onCloseSelectFileDialog: onClose,
 
 		getIsDisabledSelectFileDialog: getIsDisabled,
+		onFilesLoadedSelectFileDialog: onFilesLoaded,
+		selectFileDialogDisabledItems: encryptedItems,
 
 		selectFileDialogVisible: isVisible,
 

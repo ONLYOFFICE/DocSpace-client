@@ -100,6 +100,7 @@ import { isFolder } from "@docspace/shared/utils/typeGuards";
 import {
   createMenuGroup,
   filterModel,
+  layoutRoomOptions,
   onClickLinkForPortal,
   onEditRoomTemplate,
   onShowEditingToast,
@@ -1244,17 +1245,7 @@ export const getFilesContextOptionsImpl = (
         });
         defaultPlugins.forEach((p) => moreOptionsGroup.items!.push(p));
       } else {
-        const externalLinkIdx = resultOptions.findIndex(
-          (o) => o.key === "external-link",
-        );
-        const roomMembersLinkIdx = resultOptions.findIndex(
-          (o) => o.key === "link-for-room-members",
-        );
-        const menuIdx =
-          externalLinkIdx !== -1 ? externalLinkIdx : roomMembersLinkIdx;
-        const pluginInsertIdx = menuIdx !== -1 ? menuIdx + 1 : 1;
-
-        resultOptions.splice(pluginInsertIdx, 0, {
+        resultOptions.push({
           id: "option_more-options",
           key: "more-options",
           label: t("Common:MoreOptions"),
@@ -1288,7 +1279,7 @@ export const getFilesContextOptionsImpl = (
             "download-encrypted",
             "rename",
           ],
-          ["mark-as-favorite", "show-info"],
+          ["mark-as-favorite", "show-info", "more-options"],
           ["restore"],
           ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
         ]
@@ -1330,6 +1321,7 @@ export const getFilesContextOptionsImpl = (
             "custom-filter",
             "info",
             "show-info",
+            "more-options",
           ],
           ["restore"],
           [
@@ -1426,35 +1418,17 @@ export const getFilesContextOptionsImpl = (
     }
   }
 
-  if (frameActions.length > 0) {
-    const roomExitIndex = resultOptions.findIndex((option) =>
-      ["leave-room", "archive-room", "unarchive-room", "delete"].includes(
-        option.key,
-      ),
-    );
-
-    let insertIndex =
-      roomExitIndex === -1 ? resultOptions.length : roomExitIndex;
-    if (resultOptions[insertIndex - 1]?.isSeparator) insertIndex -= 1;
-
-    resultOptions.splice(
-      insertIndex,
-      0,
-      { key: "separator-custom-actions", isSeparator: true },
-      ...frameActions,
-      { key: "separator-after-custom-actions", isSeparator: true },
-    );
-  }
-
   const usedSeparatorKeys = new Set<string>();
-  const roomOptions = resultOptions.map((option, index) => {
-    if (!option.isSeparator) return option;
-    if (!usedSeparatorKeys.has(option.key)) {
-      usedSeparatorKeys.add(option.key);
-      return option;
-    }
-    return { ...option, key: `${option.key}_${index}` };
-  });
+  const roomOptions = layoutRoomOptions(resultOptions, frameActions).map(
+    (option, index) => {
+      if (!option.isSeparator) return option;
+      if (!usedSeparatorKeys.has(option.key)) {
+        usedSeparatorKeys.add(option.key);
+        return option;
+      }
+      return { ...option, key: `${option.key}_${index}` };
+    },
+  );
 
   const newResult = placePlugins(roomOptions, pluginItems);
 

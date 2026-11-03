@@ -160,19 +160,36 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
  * pathname is the fallback for folders *inside* a form room, which carry no
  * room type of their own.
  *
+ * `isPrivate` marks a target that is a private room or lies inside the open one.
+ * Spec: private-rooms/sidebar-section, "Private rooms open inside the section"
+ *
  * @param {import("@docspace/shared/enums").FolderType|null} [folderType]
  * @param {number|string|null} [parentId]
  * @param {{
  *   roomType?: import("@docspace/shared/enums").RoomsType,
  *   pathname?: string,
+ *   isPrivate?: boolean,
  * }} [options]
  */
 export const getCategoryTypeByFolderTypeInSection = (
   folderType,
   parentId,
-  { roomType, pathname = window.location.pathname } = {},
+  { roomType, pathname = window.location.pathname, isPrivate = false } = {},
 ) => {
   const categoryType = getCategoryTypeByFolderType(folderType, parentId);
+
+  if (isPrivate) {
+    switch (categoryType) {
+      case CategoryType.Shared:
+        return CategoryType.PrivateRooms;
+      case CategoryType.SharedRoom:
+        return CategoryType.PrivateRoom;
+      case CategoryType.Archive:
+        return CategoryType.PrivateArchive;
+      default:
+        break;
+    }
+  }
 
   if (categoryType !== CategoryType.SharedRoom) return categoryType;
 
@@ -200,6 +217,15 @@ export const getCategoryUrl = (categoryType, folderId) => {
 
     case CategoryType.Form:
       return `/forms/${folderId}/filter`;
+
+    case CategoryType.PrivateRooms:
+      return "/private/filter";
+
+    case CategoryType.PrivateRoom:
+      return `/private/${folderId}/filter`;
+
+    case CategoryType.PrivateArchive:
+      return "/private/archived/filter";
 
     // The bare `/ai-rooms` is the Rooms app's SDK frame page; the "AI rooms"
     // section lives on the nested paths the server links to.

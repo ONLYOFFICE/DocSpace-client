@@ -44,17 +44,21 @@ import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
+import { activateAsButton } from "@docspace/shared/dialogs/key-dialog-keys";
 import {
+  DEVICE_UNLOCK_MAX_AGE_MS,
   forgetDeviceUnlock,
-  hasDeviceUnlock,
+  getDeviceUnlockWrittenAt,
 } from "@docspace/shared/services/encryption/device-unlock-store";
+import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { LANGUAGE } from "@onlyoffice/apps-ui-kit/constants";
 import {
   enrollPasskeyUnlock,
   hasPasskeyUnlock,
   isPasskeyUnlockAvailable,
   removePasskeyUnlock,
 } from "@docspace/shared/services/encryption/passkey-unlock";
-import { getActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
@@ -65,11 +69,10 @@ import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
 import { useImportKeyFlow } from "./flows/useImportKeyFlow";
 import { useDeleteKeyFlow } from "./flows/useDeleteKeyFlow";
-import { useSwitchKeyFlow } from "./flows/useSwitchKeyFlow";
+import { useDeleteUnusedKeysFlow } from "./flows/useDeleteUnusedKeysFlow";
 import { useExportKeyFlow } from "./flows/useExportKeyFlow";
 import { useRotatePassphraseFlow } from "./flows/useRotatePassphraseFlow";
 import { useResetKeysFlow } from "./flows/useResetKeysFlow";
-import { useRotateIdentityForRooms } from "./flows/useRotateIdentityForRooms";
 
 import styles from "./KeysManagement.module.scss";
 
@@ -78,13 +81,6 @@ type KeysManagementProps = {
   setUserEncryptionKeys?: (keys: TEncryptionKeyPair[]) => void;
   userId?: string;
   userEmail?: string;
-  setSecondaryProgressBarData?: (data: {
-    operation: string;
-    operationId: string;
-    percent?: number;
-    completed?: boolean;
-    alert?: boolean;
-  }) => void;
 };
 
 const KeysManagement = ({
@@ -92,26 +88,40 @@ const KeysManagement = ({
   setUserEncryptionKeys,
   userId,
   userEmail,
-  setSecondaryProgressBarData,
 }: KeysManagementProps) => {
   const { t } = useTranslation(["Common"]);
   const { isUnlocked, lock, getIdentity, requireIdentity, publicKey } =
     useEncryption();
-  const [deviceRemembered, setDeviceRemembered] = useState(false);
+  /** Formatted date the remembered-device record expires, or null. */
+  const [rememberedUntil, setRememberedUntil] = useState<string | null>(null);
   const [passkeyPlatformOk, setPasskeyPlatformOk] = useState(false);
   const [passkeyEnrolled, setPasskeyEnrolled] = useState(false);
   const [passkeyBusy, setPasskeyBusy] = useState(false);
 
-  const hasKeys = !!encryptionKeys && encryptionKeys.length > 0;
+  // A list that has not loaded is unknown, not empty: no key is offered
+  // until the server has answered.
+  // Spec: key-management, "Generate a new key"
+  const keysKnown = Array.isArray(encryptionKeys);
+  const hasKeys = keysKnown && encryptionKeys.length > 0;
+  const offerNewKey = keysKnown && !hasKeys;
+  const [keysLoadFailed, setKeysLoadFailed] = useState(false);
 
   useEffect(() => {
     if (!userId) {
-      setDeviceRemembered(false);
+      setRememberedUntil(null);
       return undefined;
     }
     let cancelled = false;
-    void hasDeviceUnlock(userId).then((remembered) => {
-      if (!cancelled) setDeviceRemembered(remembered);
+    void getDeviceUnlockWrittenAt(userId).then((writtenAt) => {
+      if (cancelled) return;
+      setRememberedUntil(
+        writtenAt === null
+          ? null
+          : getCorrectDate(
+              getCookie(LANGUAGE) || "",
+              new Date(writtenAt + DEVICE_UNLOCK_MAX_AGE_MS).toISOString(),
+            ),
+      );
     });
     return () => {
       cancelled = true;
@@ -121,7 +131,7 @@ const KeysManagement = ({
   const handleForgetDevice = useCallback(() => {
     if (!userId) return;
     void forgetDeviceUnlock(userId).then(() => {
-      setDeviceRemembered(false);
+      setRememberedUntil(null);
       toastr.success(t("Common:DeviceUnlockForgotten"));
     });
   }, [userId, t]);
@@ -192,27 +202,31 @@ const KeysManagement = ({
     }
   }, [setUserEncryptionKeys]);
 
-  const { rotationProgress, rotateForAllRooms } = useRotateIdentityForRooms({
-    setSecondaryProgressBarData,
-  });
+  const loadKeys = useCallback(async () => {
+    setKeysLoadFailed(false);
+    try {
+      const fresh = await getEncryptionKeys();
+      setUserEncryptionKeys?.(fresh ?? []);
+    } catch (error) {
+      console.error("Failed to load keys:", error);
+      setKeysLoadFailed(true);
+    }
+  }, [setUserEncryptionKeys]);
 
-  const switchKey = useSwitchKeyFlow({
-    userId,
-    encryptionKeys,
-    requireIdentity,
-    rotateForAllRooms,
-    refreshKeysFromServer,
-  });
+  useEffect(() => {
+    if (!keysKnown) void loadKeys();
+    // Loaded once on mount; a failure is retried from the page.
+  }, []);
 
   const generate = useGenerateKeyFlow({
     userId,
     accountLabel: userEmail,
-    hasExistingKeys: hasKeys,
+    hasExistingKeys: !offerNewKey,
     refreshKeysFromServer,
   });
   const importFlow = useImportKeyFlow({
     userId,
-    hasExistingKeys: hasKeys,
+    hasExistingKeys: !offerNewKey,
     refreshKeysFromServer,
   });
   const recover = useRecoverKeyFlow({
@@ -242,6 +256,12 @@ const KeysManagement = ({
     refreshKeysFromServer,
     onForgotPassphrase: handleForgotPassphrase,
   });
+  const deleteUnused = useDeleteUnusedKeysFlow({
+    userId,
+    encryptionKeys,
+    refreshKeysFromServer,
+    onForgotPassphrase: handleForgotPassphrase,
+  });
   const exportFlow = useExportKeyFlow({
     onForgotPassphrase: handleForgotPassphrase,
   });
@@ -251,64 +271,88 @@ const KeysManagement = ({
     onForgotPassphrase: handleForgotPassphrase,
   });
 
-  const isRotating = rotationProgress !== null;
-
   const busy =
     generate.isPending ||
     importFlow.isPending ||
     remove.isPending ||
+    deleteUnused.isPending ||
     exportFlow.isPending ||
     rotate.isPending ||
     recover.isPending ||
-    reset.isPending ||
-    switchKey.isPending ||
-    isRotating;
-
-  const handleSelectActive = useCallback(
-    (keyId: string) => {
-      if (busy) return;
-      void switchKey.switchTo(keyId);
-    },
-    [busy, switchKey],
-  );
+    reset.isPending;
 
   return (
     <div className={styles.sectionBody}>
       <KeysList
         keys={encryptionKeys || []}
-        activeKeyId={getActiveKeyId(userId)}
         onDelete={remove.request}
         onExport={exportFlow.request}
         onRotate={rotate.request}
-        onSelectActive={handleSelectActive}
         isDeleting={remove.isPending}
         deletingKeyId={remove.pendingId}
       />
-      <div className={styles.contentBody}>
-        <div className={styles.inputGroup}>
+      {deleteUnused.unusedCount > 0 ? (
+        <div className={styles.resetSection} data-testid="unused_keys_notice">
+          <span className={styles.resetHint}>
+            {t("Common:UnusedEncryptionKeysNotice", {
+              count: deleteUnused.unusedCount,
+            })}
+          </span>
           <Button
-            primary
+            className={styles.resetButton}
             size={ButtonSize.small}
-            onClick={generate.request}
-            label={t("Common:GenerateNewKey")}
-            isLoading={generate.isPending}
+            onClick={deleteUnused.request}
+            label={t("Common:DeleteUnusedEncryptionKeys")}
+            isLoading={deleteUnused.isPending}
             isDisabled={busy}
           />
-          {importFlow.fileInput}
         </div>
+      ) : null}
+      {!keysKnown && keysLoadFailed ? (
+        <div className={styles.resetSection} data-testid="keys_load_failed">
+          <span className={styles.resetHint}>
+            {t("Common:EncryptionKeysLoadFailed")}
+          </span>
+          <Button
+            className={styles.resetButton}
+            size={ButtonSize.small}
+            onClick={loadKeys}
+            label={t("Common:TryAgain")}
+          />
+        </div>
+      ) : null}
+      <div className={styles.contentBody}>
+        {offerNewKey ? (
+          <div className={styles.inputGroup}>
+            <Button
+              primary
+              size={ButtonSize.small}
+              onClick={generate.request}
+              label={t("Common:GenerateNewKey")}
+              isLoading={generate.isPending}
+              isDisabled={busy}
+            />
+            {importFlow.fileInput}
+          </div>
+        ) : null}
         <div className={styles.secondaryActions}>
-          <Link
-            type={LinkType.action}
-            fontWeight="600"
-            fontSize="13px"
-            isHovered
-            onClick={() => {
-              if (!busy) importFlow.request();
-            }}
-            dataTestId="import_key_link"
-          >
-            {t("Common:ImportKey")}
-          </Link>
+          {offerNewKey ? (
+            <Link
+              type={LinkType.action}
+              fontWeight="600"
+              fontSize="13px"
+              isHovered
+              onClick={() => {
+                if (!busy) importFlow.request();
+              }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={activateAsButton}
+              dataTestId="import_key_link"
+            >
+              {t("Common:ImportKey")}
+            </Link>
+          ) : null}
           {recover.available ? (
             <Link
               type={LinkType.action}
@@ -318,51 +362,16 @@ const KeysManagement = ({
               onClick={() => {
                 if (!busy) recover.request();
               }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={activateAsButton}
               dataTestId="use_recovery_phrase_link"
             >
               {t("Common:UseRecoveryPhrase")}
             </Link>
           ) : null}
         </div>
-        {isRotating && rotationProgress ? (
-          <div className={styles.rotationProgress} role="status">
-            <span>
-              {t("Common:ReEncryptingFiles")} (
-              {rotationProgress.roomsDone}/{rotationProgress.roomsTotal})
-            </span>
-          </div>
-        ) : null}
       </div>
-      {switchKey.pendingState && !switchKey.isDismissed && !isRotating ? (
-        <div className={styles.resumeSection} data-testid="resume_rotation_banner">
-          <span className={styles.resetHint}>
-            {t("Common:ResumeReEncryptionHint")}
-          </span>
-          <div className={styles.resumeActions}>
-            <Button
-              size={ButtonSize.small}
-              onClick={() => {
-                if (!busy && switchKey.pendingState) {
-                  void switchKey.switchTo(switchKey.pendingState.newKeyId);
-                }
-              }}
-              label={t("Common:ResumeReEncryptionCta")}
-              isLoading={switchKey.isPending}
-              isDisabled={busy}
-            />
-            <Link
-              type={LinkType.action}
-              fontWeight="600"
-              fontSize="13px"
-              isHovered
-              onClick={switchKey.dismiss}
-              dataTestId="resume_rotation_dismiss_link"
-            >
-              {t("Common:Later")}
-            </Link>
-          </div>
-        </div>
-      ) : null}
       {hasKeys ? (
         <div className={styles.deviceSection}>
           <Text fontSize="14px" fontWeight={600}>
@@ -380,14 +389,18 @@ const KeysManagement = ({
                   if (passkeyEnrolled) handleRemovePasskey();
                   else void handleEnrollPasskey();
                 }}
+                label={t("Common:PasskeyUnlockLabel")}
                 dataTestId="passkey_unlock_toggle"
               />
-              <Text>{t("Common:PasskeyUnlockLabel")}</Text>
             </div>
           ) : null}
-          {deviceRemembered ? (
+          {rememberedUntil ? (
             <div className={styles.deviceRow}>
-              <Text fontSize="13px">{t("Common:RememberDeviceLabel")}</Text>
+              <Text fontSize="13px">
+                {t("Common:DeviceUnlockRememberedUntil", {
+                  date: rememberedUntil,
+                })}
+              </Text>
               <Link
                 type={LinkType.action}
                 fontWeight="600"
@@ -396,6 +409,9 @@ const KeysManagement = ({
                 onClick={() => {
                   if (!busy) handleForgetDevice();
                 }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={activateAsButton}
                 dataTestId="forget_device_link"
               >
                 {t("Common:ForgetDeviceButton")}
@@ -412,9 +428,12 @@ const KeysManagement = ({
                 onClick={() => {
                   if (busy) return;
                   lock();
-                  setDeviceRemembered(false);
+                  setRememberedUntil(null);
                   toastr.success(t("Common:EncryptionLocked"));
                 }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={activateAsButton}
                 dataTestId="lock_now_link"
               >
                 {t("Common:LockNow")}
@@ -439,10 +458,10 @@ const KeysManagement = ({
         </div>
       ) : null}
       {generate.modals}
-      {switchKey.modals}
       {importFlow.modals}
       {recover.modals}
       {remove.modals}
+      {deleteUnused.modals}
       {exportFlow.modals}
       {rotate.modals}
       {reset.modals}
@@ -450,14 +469,12 @@ const KeysManagement = ({
   );
 };
 
-export default inject(({ userStore, uploadDataStore }: TStore) => {
+export default inject(({ userStore }: TStore) => {
   const { encryptionKeys, setUserEncryptionKeys, user } = userStore;
   return {
     encryptionKeys,
     setUserEncryptionKeys,
     userId: user?.id ? String(user.id) : undefined,
     userEmail: user?.email,
-    setSecondaryProgressBarData:
-      uploadDataStore.secondaryProgressDataStore.setSecondaryProgressBarData,
   };
 })(observer(KeysManagement));

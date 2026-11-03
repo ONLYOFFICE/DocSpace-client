@@ -117,8 +117,7 @@ const withHotkeys = (Component) => {
       isVisitor,
       deleteRooms,
       archiveRooms,
-      isWarningRoomsDialog,
-      setQuotaWarningDialogVisible,
+      createRoom,
 
       security,
       copyToClipboard,
@@ -221,18 +220,7 @@ const withHotkeys = (Component) => {
         (isRoomsFolder || isFormsFolder) &&
         security?.Create
       ) {
-        if (isWarningRoomsDialog) {
-          setQuotaWarningDialogVisible(true);
-          return;
-        }
-
-        const event = new CustomEvent(Events.ROOM_CREATE, {
-          detail: { parentId: currentFolderId, context: "hotkey" },
-        });
-        if (isFormsFolder) {
-          event.payload = { isFormsCreate: true };
-        }
-        window.dispatchEvent(event);
+        createRoom(null, false, "hotkey");
       }
     };
 
@@ -574,7 +562,7 @@ const withHotkeys = (Component) => {
       selectedFolderStore,
       userStore,
       indexingStore,
-      currentQuotaStore,
+      contextOptionsStore,
       uploadDataStore,
     }) => {
       const {
@@ -614,7 +602,6 @@ const withHotkeys = (Component) => {
       const {
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        setQuotaWarningDialogVisible,
       } = dialogsStore;
       const {
         isAvailableOption,
@@ -643,8 +630,6 @@ const withHotkeys = (Component) => {
       } = treeFoldersStore;
 
       const canCreateEncrypted = uploadDataStore.shouldEncryptCurrentUpload();
-
-      const { isWarningRoomsDialog } = currentQuotaStore;
 
       const security = selectedFolderStore.security;
       const { roomType } = selectedFolderStore;
@@ -706,9 +691,7 @@ const withHotkeys = (Component) => {
         isVisitor,
         deleteRooms,
         archiveRooms,
-
-        isWarningRoomsDialog,
-        setQuotaWarningDialogVisible,
+        createRoom: contextOptionsStore.onCreateRoom,
 
         security,
         copyToClipboard,

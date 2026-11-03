@@ -41,6 +41,7 @@ import { FilterType, FolderType } from "@docspace/shared/enums";
 import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { UserStore } from "@docspace/shared/store/UserStore";
 import {
   TFile,
   TFileSecurity,
@@ -70,11 +71,14 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
+import { usePickerFileTitles } from "@docspace/shared/hooks/usePickerFileTitles";
+import { getAcceptButtonLabel, getCopyTargetRoomTypes } from "./utils";
+import { getIsDisabled } from "@docspace/shared/utils/filesSelector";
 import {
-  getAcceptButtonLabel,
-  getCopyTargetRoomTypes,
-  getIsDisabled,
-} from "./utils";
+  getPickedRoomId,
+  getSelectorTransfer,
+  getShowEncryptedTransferBanner,
+} from "@docspace/shared/services/private-room/private-transfer";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 let disabledItems: (string | number)[] = [];
@@ -123,9 +127,11 @@ const FilesSelectorWrapper = ({
   checkFileConflicts,
   itemOperationToFolder,
   copyEncryptedFilesToFolder,
-  sourceIsPrivate,
+  planPrivateTransfer,
+  runPrivateTransferPlan,
   sourceInPrivateRoom,
   privateRoomId,
+  userId,
   clearActiveOperations,
   setSelected,
   setMoveToPanelVisible,
@@ -281,6 +287,8 @@ const FilesSelectorWrapper = ({
     };
   }, [selection, isCopy, isMove, isFormRoom, t]);
 
+  const pickerFileTitles = usePickerFileTitles(userId);
+
   // Instructions and Knowledge rooms appear among the copy and move targets
   // only when the whole selection can land in them.
   const roomsSectionTypes = React.useMemo(
@@ -295,18 +303,11 @@ const FilesSelectorWrapper = ({
     [isCopy, isMove, selection, extsFilesVectorized, vectorizationEnabled],
   );
 
-  const encryptedInSelection = React.useMemo(
-    () =>
-      (selection as Array<TFile | TFolder>).filter(
-        (it) =>
-          "fileExst" in it && it.fileExst && (it as TFile).encrypted === true,
-      ) as TFile[],
-    [selection],
-  );
-  const hasEncryptedInSelection = encryptedInSelection.length > 0;
-
-  const showEncryptedTransferBanner =
-    !!(isCopy || isMove) && hasEncryptedInSelection && !!sourceIsPrivate;
+  const showEncryptedTransferBanner = getShowEncryptedTransferBanner({
+    selection: selection as Array<TFile | TFolder>,
+    sourceInPrivateRoom,
+    isCopy,
+  });
 
   const onAccept = async (
     selectedItemId: string | number | undefined,
@@ -321,77 +322,93 @@ const FilesSelectorWrapper = ({
     _isInsideResultStorage?: boolean,
     isInsidePrivateRoom?: boolean,
   ) => {
-    if (isCopy && !isEditorDialog && hasEncryptedInSelection) {
+    if ((isMove || isCopy || isRestore || isRestoreAll) && !isEditorDialog) {
+      const destInPrivateRoom =
+        (selectedTreeNode as unknown as { private?: boolean })?.private ===
+          true || isInsidePrivateRoom === true;
       const destInfo = {
-        private:
-          (selectedTreeNode as unknown as { private?: boolean })?.private ===
-            true || isInsidePrivateRoom === true,
+        private: destInPrivateRoom,
+        insidePrivateRoom: destInPrivateRoom,
+        // Spec: private-rooms/file-operations, "Move into another private room is refused", "Copy into another private room needs access to it".
+        roomId:
+          getPickedRoomId(breadCrumbs) ??
+          (isMove && sourceInPrivateRoom ? privateRoomId : undefined),
         rootFolderId: (selectedTreeNode as unknown as { rootFolderId?: number })
           ?.rootFolderId,
         roomType: (selectedTreeNode as unknown as { roomType?: number })
           ?.roomType,
       };
 
-      const regularFileIds: number[] = [];
-      const folderIds: number[] = [];
-      for (const item of selection) {
-        if (
-          ("fileExst" in item && item.fileExst) ||
-          ("contentLength" in item && item.contentLength)
-        ) {
-          if ((item as TFile).encrypted) continue;
-          regularFileIds.push(item.id);
-        } else if (item.id === selectedItemId) {
-          toastr.error(t("Common:MoveToFolderMessage"));
-        } else {
-          folderIds.push(item.id);
-        }
-      }
+      const plan = planPrivateTransfer({
+        items: selection as unknown as Parameters<
+          typeof planPrivateTransfer
+        >[0]["items"],
+        sourceInPrivateRoom: !!sourceInPrivateRoom,
+        sourceRoomId: privateRoomId,
+        move: !!isMove,
+        dest: destInfo,
+      });
+      const transfer = getSelectorTransfer({
+        plan,
+        selection,
+        selectedItemId,
+        isCopy,
+        isMove,
+      });
 
-      if (sourceInPrivateRoom && !destInfo.private && folderIds.length) {
-        toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
-        folderIds.length = 0;
-      }
-
-      if (selectedItemId != null) {
-        await copyEncryptedFilesToFolder(
-          encryptedInSelection,
-          selectedItemId,
-          destInfo,
-        );
-      }
-
-      if (regularFileIds.length || folderIds.length) {
-        const operationData = {
-          destFolderId: selectedItemId,
-          destFolderInfo: selectedTreeNode,
-          folderIds,
-          fileIds: regularFileIds,
-          deleteAfter: false,
-          isCopy,
-          folderTitle,
-          itemsCount: regularFileIds.length + folderIds.length,
-        };
-        try {
-          await itemOperationToFolder(operationData);
-        } catch (error) {
-          console.error(error);
-        }
-      }
-
-      setIsRequestRunning(false);
-      onCloseAndDeselectAction();
-      return;
-    }
-
-    if ((isMove || isCopy || isRestore || isRestoreAll) && !isEditorDialog) {
-      const isPrivateDestination =
-        (selectedTreeNode as unknown as { private?: boolean })?.private ===
-          true || isInsidePrivateRoom === true;
-
-      if (!sourceInPrivateRoom && isPrivateDestination) {
-        toastr.error(t("Common:CannotTransferToPrivateRoom"));
+      if (transfer.kind === "refuse") {
+        runPrivateTransferPlan(plan, selectedItemId!, destInfo, {
+          move: !!isMove,
+        });
         setIsRequestRunning(false);
+        return;
+      }
+
+      if (transfer.kind === "encrypted") {
+        if (transfer.movesIntoItself) {
+          toastr.error(t("Common:MoveToFolderMessage"));
+        }
+        if (transfer.refusedFolders) {
+          toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
+        }
+
+        if (selectedItemId != null && transfer.encryptedFiles.length) {
+          await copyEncryptedFilesToFolder(
+            transfer.encryptedFiles,
+            selectedItemId,
+            {
+              private: destInfo.private,
+              rootFolderId: destInfo.rootFolderId,
+              rootFolderType: (
+                selectedTreeNode as unknown as { rootFolderType?: FolderType }
+              )?.rootFolderType,
+              roomType: destInfo.roomType,
+              deleteSourceOnSuccess: transfer.deleteSourceOnSuccess,
+              sourceRoomId: privateRoomId,
+            },
+          );
+        }
+
+        if (transfer.fileIds.length || transfer.folderIds.length) {
+          const operationData = {
+            destFolderId: selectedItemId,
+            destFolderInfo: selectedTreeNode,
+            folderIds: transfer.folderIds,
+            fileIds: transfer.fileIds,
+            deleteAfter: false,
+            isCopy,
+            folderTitle,
+            itemsCount: transfer.fileIds.length + transfer.folderIds.length,
+          };
+          try {
+            await itemOperationToFolder(operationData);
+          } catch (error) {
+            console.error(error);
+          }
+        }
+
+        setIsRequestRunning(false);
+        onCloseAndDeselectAction();
         return;
       }
 
@@ -568,6 +585,7 @@ const FilesSelectorWrapper = ({
 
   return (
     <FilesSelector
+      {...pickerFileTitles}
       openRoot={openRootVar}
       disabledItems={disabledItems}
       isRoomDisabled={isRoomDisabled}
@@ -653,13 +671,8 @@ const FilesSelectorWrapper = ({
       infoBarData={
         showEncryptedTransferBanner
           ? {
-              title: t("Common:EncryptedTransferBannerTitle", {
-                defaultValue: "Encrypted files",
-              }),
-              description: t("Common:EncryptedTransferBannerDescription", {
-                defaultValue:
-                  "If you move or copy encrypted files outside this private room, they will be saved in decrypted form.",
-              }),
+              title: t("Common:EncryptedTransferBannerTitle"),
+              description: t("Common:EncryptedTransferBannerDescription"),
             }
           : undefined
       }
@@ -678,6 +691,7 @@ export default inject(
       dialogsStore,
       filesStore,
       infoPanelStore,
+      userStore,
     }: {
       settingsStore: SettingsStore;
       selectedFolderStore: SelectedFolderStore;
@@ -687,6 +701,7 @@ export default inject(
       dialogsStore: DialogsStore;
       filesStore: FilesStore;
       infoPanelStore: InfoPanelStore;
+      userStore: UserStore;
     },
     {
       isCopy,
@@ -704,7 +719,6 @@ export default inject(
       id: selectedId,
       parentId,
       rootFolderType,
-      private: sourceIsPrivate,
       shared,
       navigationPath,
       isRoom,
@@ -720,6 +734,8 @@ export default inject(
       checkFileConflicts,
       setSelectedItems,
       copyEncryptedFilesToFolder,
+      planPrivateTransfer,
+      runPrivateTransferPlan,
     } = filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
@@ -866,9 +882,11 @@ export default inject(
       setInfoPanelIsMobileHidden,
       includeFolder,
       copyEncryptedFilesToFolder,
-      sourceIsPrivate,
+      planPrivateTransfer,
+      runPrivateTransferPlan,
       sourceInPrivateRoom: treeFoldersStore.isPrivacyFolder,
       privateRoomId,
+      userId: userStore.user?.id,
 
       setMoveToPublicRoomVisible,
       setBackupToPublicRoomVisible,

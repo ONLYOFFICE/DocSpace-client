@@ -13,7 +13,7 @@
 
 ## 3. Integration
 
-- [ ] 3.1 Run `npx -y @fission-ai/openspec@latest validate --all --strict`, `pnpm test` (shared) and `cd packages/client && pnpm exec vitest run src/pages/Profile`; verify all are green
+- [x] 3.1 Run `npx -y @fission-ai/openspec@latest validate --all --strict`, `pnpm test` (shared) and `cd packages/client && pnpm exec vitest run src/pages/Profile`; verify all are green
 
 ## Workflow follow-up
 

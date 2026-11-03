@@ -56,9 +56,12 @@ No `.js/.jsx/.ts/.tsx` may set a `tabIndex` above zero (`tabIndex={2}`,
 every `0` one whatever the DOM order, and ui-kit's focus trap keeps that order
 inside dialogs, as the browser does - so a dialog with a few of them sent Tab
 to its footer past its settings. Drop the value; if the element comes in the
-wrong place, move it in the markup. `tabindex-allowlist.json` freezes the
-`login` pages, management's configuration and the public room password form
-that still set one; it must only ever shrink (stale entries fail).
+wrong place, move it in the markup. `tabindex-allowlist.json` is **empty**
+and stays so: a new positive value fails the push rather than joining it.
+Directories are excluded by whole path segment, not by the shared walker's
+substring match, so `categories/common` and other `common`/`test`-named
+directories are scanned. The check reads values on the line itself: a computed
+`tabIndex={index + 1}` is not caught.
 
 ## Images (images.test.js)
 

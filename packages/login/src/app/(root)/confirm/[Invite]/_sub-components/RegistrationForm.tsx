@@ -199,7 +199,6 @@ const RegistrationForm = ({
           value={fname}
           placeholder={t("Common:FirstName")}
           scale
-          tabIndex={1}
           isDisabled={isLoading}
           onChange={onChangeFname}
           onKeyDown={onKeyPress}
@@ -229,7 +228,6 @@ const RegistrationForm = ({
           value={sname}
           placeholder={t("Common:LastName")}
           scale
-          tabIndex={1}
           isDisabled={isLoading}
           onChange={onChangeSname}
           onKeyDown={onKeyPress}
@@ -257,7 +255,6 @@ const RegistrationForm = ({
           hasError={isPasswordErrorShow ? !passwordValid : undefined}
           inputValue={password}
           scale
-          tabIndex={1}
           isDisabled={isLoading}
           autoComplete="current-password"
           onChange={onChangePassword}
@@ -299,7 +296,6 @@ const RegistrationForm = ({
         size={ButtonSize.medium}
         scale
         label={isLoading ? t("Common:LoadingProcessing") : t("SignUp")}
-        tabIndex={1}
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onSubmit}

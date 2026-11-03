@@ -43,12 +43,14 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/data-table";
 
 import {
+  AccessLevelColumnCell,
   AuthorColumnCell,
   DateColumnCell,
   ErasureColumnCell,
   LastOpenedColumnCell,
   LocationColumnCell,
   NameCell,
+  SharedByColumnCell,
   SizeColumnCell,
   TypeColumnCell,
 } from "../cells/FilesCells";
@@ -70,7 +72,13 @@ const CELLS: Record<TCellKind, (props: TCellProps) => React.ReactNode> = {
   size: SizeColumnCell,
   type: TypeColumnCell,
   location: LocationColumnCell,
+  sharedBy: SharedByColumnCell,
+  accessLevel: AccessLevelColumnCell,
 };
+
+// The old rows' class on the last column's cells: its text keeps 8px from the
+// end instead of 12px (`StyledTable.module.scss`).
+const LAST_COLUMN_CLASS = "no-extra-space";
 
 /** The columns the section has, given where it is shown. */
 const columnsOf = (section: TSection, options: TFilesColumnsOptions) =>
@@ -114,6 +122,10 @@ export const getFilesColumns = (
   const cellTestId = (part: string) => (_: TFilesTableItem, index: number) =>
     `${testIdPrefix}-cell-${part}-${index}`;
 
+  const sectionColumns = columnsOf(section, options);
+  // Never Name, as in the old rows; in compact the column is not drawn anyway.
+  const lastId = sectionColumns.findLast((column) => flags[column.id])?.id;
+
   return [
     {
       id: "Name",
@@ -126,25 +138,24 @@ export const getFilesColumns = (
       cellClassName: "table-container_file-name-cell",
       cell: (_, { isLast }) => <NameCell isLast={isLast && quickButtons} />,
     },
-    ...columnsOf(section, options).map(
-      (column): DataTableColumn<TFilesTableItem> => {
-        const Cell = CELLS[column.cell];
+    ...sectionColumns.map((column): DataTableColumn<TFilesTableItem> => {
+      const Cell = CELLS[column.cell];
 
-        return {
-          id: column.id,
-          cellTestId: cellTestId(column.testId),
-          title: column.title(t),
-          width: { type: "flex" },
-          visible: flags[column.id],
-          hideable: true,
-          sortKey: column.sortKey,
-          sortable: column.sortable,
-          cell: (_, { isLast }) => (
-            <Cell isLast={isLast && quickButtons} sideColor={sideColor} />
-          ),
-        };
-      },
-    ),
+      return {
+        id: column.id,
+        cellTestId: cellTestId(column.testId),
+        title: column.title(t),
+        width: { type: "flex" },
+        visible: flags[column.id],
+        hideable: true,
+        sortKey: column.sortKey,
+        sortable: column.sortable,
+        cellClassName: column.id === lastId ? LAST_COLUMN_CLASS : undefined,
+        cell: (_, { isLast }) => (
+          <Cell isLast={isLast && quickButtons} sideColor={sideColor} />
+        ),
+      };
+    }),
     options.showSettings
       ? settingsColumn<TFilesTableItem>({
           title: t("Common:TableSettingsTitle"),

@@ -51,7 +51,9 @@ export type TCellKind =
   | "erasure"
   | "size"
   | "type"
-  | "location";
+  | "location"
+  | "sharedBy"
+  | "accessLevel";
 
 /** The `tableStore` property that says whether a column is on. */
 type TColumnFlag = {
@@ -89,13 +91,67 @@ export type TSection = {
 /** The scopes the DataTable draws, and so the ones `SECTIONS` describes. */
 export type TFilesSection = Extract<
   TTableScope,
-  "files" | "trash" | "recent" | "favorites"
+  "files" | "trash" | "recent" | "favorites" | "sharedWithMe" | "inSharedFolder"
 >;
+
+/**
+ * Shared with me and the folders inside it: one set of columns, but only the
+ * section's own list says who shared each item.
+ */
+const sharedColumns = (inFolder: boolean): TSectionColumn[] => [
+  {
+    id: "SharedByShareWithMe",
+    flag: "sharedByShareWithMeColumnIsEnabled",
+    title: (t) => t("Common:SharedBy"),
+    cell: "sharedBy",
+    testId: "shared-by",
+    when: ({ isPublicRoom }) => !inFolder && !isPublicRoom,
+  },
+  {
+    id: "AuthorShareWithMe",
+    flag: "authorShareWithMeColumnIsEnabled",
+    title: (t) => t("Common:ByAuthor"),
+    cell: "author",
+    testId: "author",
+    when: ({ isPublicRoom }) => !isPublicRoom,
+  },
+  {
+    id: "AccessLevelShareWithMe",
+    flag: "accessLevelShareWithMeColumnIsEnabled",
+    title: (t) => t("Common:AccessLevel"),
+    cell: "accessLevel",
+    testId: "access-level",
+  },
+  {
+    id: "ModifiedShareWithMe",
+    flag: "modifiedShareWithMeColumnIsEnabled",
+    title: (t) => t("Common:ByLastModified"),
+    cell: "modified",
+    testId: "modified",
+    sortKey: SortByFieldName.ModifiedDate,
+  },
+  {
+    id: "SizeShareWithMe",
+    flag: "sizeShareWithMeColumnIsEnabled",
+    title: (t) => t("Common:Size"),
+    cell: "size",
+    testId: "size",
+    sortKey: SortByFieldName.Size,
+  },
+  {
+    id: "TypeShareWithMe",
+    flag: "typeShareWithMeColumnIsEnabled",
+    title: (t) => t("Common:Type"),
+    cell: "type",
+    testId: "type",
+  },
+];
 
 /**
  * The old header's columns for each section (`getFilesColumns`,
  * `getTrashFolderColumns`, `getRecentFolderColumns`,
- * `getFavoritesFolderColumns` in `TableView/TableHeader.js`), in their order.
+ * `getFavoritesFolderColumns`, `getSharedWithMeFolderColumns` in
+ * `TableView/TableHeader.js`), in their order.
  */
 export const SECTIONS: Record<TFilesSection, TSection> = {
   files: {
@@ -307,6 +363,22 @@ export const SECTIONS: Record<TFilesSection, TSection> = {
         testId: "type",
       },
     ],
+  },
+
+  // The old table drew both with one row component, so the cell test ids are
+  // the same.
+  sharedWithMe: {
+    testIdPrefix: "shared-with-me",
+    nameSortable: true,
+    quickButtons: true,
+    columns: sharedColumns(false),
+  },
+
+  inSharedFolder: {
+    testIdPrefix: "shared-with-me",
+    nameSortable: true,
+    quickButtons: true,
+    columns: sharedColumns(true),
   },
 };
 

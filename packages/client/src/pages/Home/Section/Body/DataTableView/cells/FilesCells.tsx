@@ -37,11 +37,13 @@ import type React from "react";
 
 import type { TFile } from "@docspace/shared/api/files/types";
 
+import AccessLevelCell from "../../TableView/sub-components/AccessLevelCell";
 import AuthorCell from "../../TableView/sub-components/AuthorCell";
 import DateCell from "../../TableView/sub-components/DateCell";
 import ErasureCell from "../../TableView/sub-components/ErasureCell";
 import FileNameCell from "../../TableView/sub-components/FileNameCell";
 import LocationCell from "../../TableView/sub-components/LocationCell";
+import SharedByCell from "../../TableView/sub-components/SharedByCell";
 import SizeCell from "../../TableView/sub-components/SizeCell";
 import TypeCell from "../../TableView/sub-components/TypeCell";
 import {
@@ -164,6 +166,26 @@ export const LocationColumnCell = ({ isLast, sideColor }: TCellProps) => {
 
   return withQuickButtons(
     <LocationCell item={row.item as TFile} sideColor={sideColor} />,
+    isLast,
+  );
+};
+
+export const SharedByColumnCell = ({ isLast, sideColor }: TCellProps) => {
+  const row = useFilesRow();
+  if (!row) return null;
+
+  return withQuickButtons(
+    <SharedByCell item={row.item} sideColor={sideColor} />,
+    isLast,
+  );
+};
+
+export const AccessLevelColumnCell = ({ isLast, sideColor }: TCellProps) => {
+  const row = useFilesRow();
+  if (!row) return null;
+
+  return withQuickButtons(
+    <AccessLevelCell t={row.t} item={row.item} sideColor={sideColor} />,
     isLast,
   );
 };

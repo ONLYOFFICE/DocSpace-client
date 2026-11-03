@@ -30,11 +30,13 @@ vi.mock("@onlyoffice/apps-ui-kit/components/data-table", () => ({
 // test is which column each one sits in.
 vi.mock("../cells/FilesCells", () => ({
   NameCell: () => null,
+  AccessLevelColumnCell: () => null,
   AuthorColumnCell: () => null,
   DateColumnCell: () => null,
   ErasureColumnCell: () => null,
   LastOpenedColumnCell: () => null,
   LocationColumnCell: () => null,
+  SharedByColumnCell: () => null,
   SizeColumnCell: () => null,
   TypeColumnCell: () => null,
 }));
@@ -179,6 +181,68 @@ describe("files columns", () => {
 
     expect(widths).toEqual(["fill", "flex", "flex", "flex", "flex", "flex"]);
   });
+
+  it("mark the cells of the last visible column, as the old rows did", () => {
+    const lastClass = (flags: Record<string, boolean>) =>
+      getFilesColumns(files, options({ flags }))
+        .filter((column) => column.cellClassName === "no-extra-space")
+        .map((column) => column.id);
+
+    expect(lastClass(FILES_FLAGS)).toEqual(["Size"]);
+    expect(lastClass({ ...FILES_FLAGS, Type: true })).toEqual(["Type"]);
+    expect(lastClass({})).toEqual([]);
+  });
+});
+
+describe("shared with me columns", () => {
+  const row = {} as TFilesTableItem;
+  const testIdsOf = (
+    section: (typeof SECTIONS)[keyof typeof SECTIONS],
+    opts = options({ flags: {} }),
+  ) =>
+    getFilesColumns(section, opts).map((column) => [
+      column.id,
+      column.cellTestId?.(row, 0),
+    ]);
+
+  it("are the old shared header's columns, with its test ids", () => {
+    expect(testIdsOf(SECTIONS.sharedWithMe)).toEqual([
+      ["Name", "shared-with-me-cell-name-0"],
+      ["SharedByShareWithMe", "shared-with-me-cell-shared-by-0"],
+      ["AuthorShareWithMe", "shared-with-me-cell-author-0"],
+      ["AccessLevelShareWithMe", "shared-with-me-cell-access-level-0"],
+      ["ModifiedShareWithMe", "shared-with-me-cell-modified-0"],
+      ["SizeShareWithMe", "shared-with-me-cell-size-0"],
+      ["TypeShareWithMe", "shared-with-me-cell-type-0"],
+      ["Settings", undefined],
+    ]);
+  });
+
+  it("drop who shared an item inside a shared folder", () => {
+    expect(testIdsOf(SECTIONS.inSharedFolder).map(([id]) => id)).not.toContain(
+      "SharedByShareWithMe",
+    );
+  });
+
+  it("drop who shared and the author in a public room", () => {
+    const ids = testIdsOf(
+      SECTIONS.sharedWithMe,
+      options({ flags: {}, isPublicRoom: true }),
+    ).map(([id]) => id);
+
+    expect(ids).not.toContain("SharedByShareWithMe");
+    expect(ids).not.toContain("AuthorShareWithMe");
+  });
+
+  it("sort by name, modification and size from the header", () => {
+    for (const section of [SECTIONS.sharedWithMe, SECTIONS.inSharedFolder]) {
+      expect(sortable(options(), section)).toEqual([
+        ["Name", "AZ", true],
+        ["ModifiedShareWithMe", "DateAndTime", true],
+        ["SizeShareWithMe", "Size", true],
+      ]);
+    }
+  });
 });
 
 describe("trash, recent and favorites columns", () => {
@@ -319,6 +383,24 @@ describe("the visible-columns record", () => {
 
     expect(filesColumnsRecord(SECTIONS.trash, flags, options())).toBe(
       "Name,Location,false,false,Erasure,SizeTrash,false",
+    );
+  });
+
+  it("keeps the slot of who shared inside a shared folder, as the old header's empty key", () => {
+    const flags = {
+      SharedByShareWithMe: false,
+      AuthorShareWithMe: false,
+      AccessLevelShareWithMe: true,
+      ModifiedShareWithMe: true,
+      SizeShareWithMe: false,
+      TypeShareWithMe: false,
+    };
+
+    expect(filesColumnsRecord(SECTIONS.sharedWithMe, flags, options())).toBe(
+      "Name,false,false,AccessLevelShareWithMe,ModifiedShareWithMe,false,false",
+    );
+    expect(filesColumnsRecord(SECTIONS.inSharedFolder, flags, options())).toBe(
+      "Name,,false,AccessLevelShareWithMe,ModifiedShareWithMe,false,false",
     );
   });
 

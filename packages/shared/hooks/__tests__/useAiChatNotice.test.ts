@@ -60,6 +60,27 @@ describe("getAiChatBlock", () => {
     ).toEqual({ kind: "limit", until: "2099-10-23T23:59:59Z" });
   });
 
+  it("reads a spending limit from the gateway's shortened text", () => {
+    expect(
+      getAiChatBlock(
+        { error: { code: "auth", message: "403 Service limit exceeded" } },
+        false,
+      ),
+    ).toEqual({ kind: "limit", until: null });
+    expect(
+      getAiChatBlock(
+        {
+          error: {
+            code: "auth",
+            message:
+              "Service limit exceeded for customer No.1. Service group 'storage'",
+          },
+        },
+        false,
+      ),
+    ).toBeNull();
+  });
+
   it("has no wallet or limit on standalone, and ignores non-money errors", () => {
     expect(getAiChatBlock(walletError, true)).toEqual({ kind: "provider" });
     expect(

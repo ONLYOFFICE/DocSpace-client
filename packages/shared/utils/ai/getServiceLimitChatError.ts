@@ -42,7 +42,8 @@ export type TServiceLimitChatError = {
 
 // The AI gateway relays the accounting service's 403 "Service limit exceeded:
 // Service limit exceeded for customer No.X. Service group 'ai-services', amount
-// limit 1.0, available 0.02 until 2026-10-23 23:59:59Z" as is, and ai-chat
+// limit 1.0, available 0.02 until 2026-10-23 23:59:59Z" as is (or cut to
+// "403 Service limit exceeded"), and ai-chat
 // folds every 403 into code "auth", so the text is the only signal left. A
 // lifetime limit never resets, so its message has no "until" part.
 export const getServiceLimitChatError = (
@@ -52,7 +53,10 @@ export const getServiceLimitChatError = (
 
   const message = payload.message ?? "";
   if (!/service limit exceeded/i.test(message)) return null;
-  if (!/service group 'ai-services'/i.test(message)) return null;
+  // The gateway may shorten the text to "403 Service limit exceeded"; only a
+  // message that names another service group is someone else's limit.
+  const group = message.match(/service group '([^']*)'/i);
+  if (group && group[1].toLowerCase() !== "ai-services") return null;
 
   const until = message.match(
     /\buntil (\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2}:\d{2})Z\b/,

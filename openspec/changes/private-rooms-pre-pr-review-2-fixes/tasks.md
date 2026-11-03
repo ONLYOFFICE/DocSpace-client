@@ -30,6 +30,10 @@ One task is one commit with its code, tests, locales, mocks and the tick (the "C
 
 - [ ] 6.1 Run the pre-push gate, the client private-room and keys E2E under Docker (`tests-dev`), the SDK private E2E after `pnpm run test:build`, and `npx -y @fission-ai/openspec@latest validate --all --strict`. Verify: all green, except the failures the release branch has on its own.
 
+## 7. PR review
+
+- [x] 7.1 `CreateEditRoomStore.onCreateRoom` treated a key list that failed to load as no key: `resolvePrivateRoomKeys` returned null for both, so a user holding a key saw Common:EncryptionKeysRequiredForPrivateRoom after a transient fetch error, against "Starting private room creation without a key starts key generation" (`private-rooms-pre-pr-review-fixes`). The helper now reports a failed fetch apart from an empty list, and the store shows Common:EncryptionKeysLoadFailed for it. Verify: case "Key list could not be loaded" in `CreateEditRoomStore.privateRoom.test.ts`, which asserted the wrong message before. Found by the PR review on 2026-11-03.
+
 ## Workflow follow-up
 
 - Archive with `/opsx:archive private-rooms-pre-pr-review-2-fixes` after `private-rooms-pre-pr-review-fixes`, whose sdk-surface and file-operations deltas these deltas sit next to; this change then ticks `private-rooms-beta-release` 0.3.

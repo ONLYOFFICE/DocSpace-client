@@ -607,9 +607,15 @@ class CreateEditRoomStore {
 
     if (isPrivateRoom) {
       const userStore = this.filesStore!.userStore;
-      const keys = await resolvePrivateRoomKeys(userStore?.encryptionKeys, () =>
-        userStore?.getEncryptionKeys?.(),
+      const { keys, fetchFailed } = await resolvePrivateRoomKeys(
+        userStore?.encryptionKeys,
+        () => userStore?.getEncryptionKeys?.(),
       );
+
+      if (fetchFailed) {
+        toastr.error(t("Common:EncryptionKeysLoadFailed"));
+        return;
+      }
 
       if (!keys) {
         toastr.error(t("Common:EncryptionKeysRequiredForPrivateRoom"));

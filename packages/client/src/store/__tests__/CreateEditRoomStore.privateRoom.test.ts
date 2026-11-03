@@ -114,7 +114,7 @@ describe("CreateEditRoomStore.onCreateRoom for a private room", () => {
     expect(createRoom).not.toHaveBeenCalled();
   });
 
-  it("creates nothing when the keys cannot be fetched", async () => {
+  it("Key list could not be loaded", async () => {
     const { store, createRoom } = createStore({
       encryptionKeys: null,
       getEncryptionKeys: vi.fn(async () => {
@@ -124,7 +124,8 @@ describe("CreateEditRoomStore.onCreateRoom for a private room", () => {
 
     await store.onCreateRoom(t);
 
-    expect(toastr.error).toHaveBeenCalledWith(
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptionKeysLoadFailed");
+    expect(toastr.error).not.toHaveBeenCalledWith(
       "Common:EncryptionKeysRequiredForPrivateRoom",
     );
     expect(createRoom).not.toHaveBeenCalled();

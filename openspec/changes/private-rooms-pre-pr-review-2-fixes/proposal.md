@@ -41,6 +41,10 @@ and after the merge with the release branch, and blocks the record of
   removes the row before the batch reaches the file, so the per-file signal is
   not found and the file is uploaded anyway. Each file's signal is taken when
   the batch starts.
+- **Creating a private room from the store reports a key list that failed
+  to load.** `CreateEditRoomStore.onCreateRoom` showed "keys required" after
+  a transient fetch error, the case the first fixes change settled for the
+  dialogs (found by the PR review).
 - **The keyboard import test of the keys page passes reliably.** Its cause is
   found first; the fix goes where the cause is.
 

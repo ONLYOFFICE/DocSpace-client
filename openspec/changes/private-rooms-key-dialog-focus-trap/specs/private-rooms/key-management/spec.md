@@ -13,7 +13,7 @@ The system SHALL move the focus with Tab through a key dialog's fields, links, c
 
 #### Scenario: Forward through the creation dialog
 - **WHEN** the creation dialog has the focus in the passphrase field and the user presses Tab repeatedly
-- **THEN** the focus visits the confirmation field, then the dialog's links and actions in their displayed order
+- **THEN** the focus visits the passphrase field's show-passphrase toggle, the confirmation field and its toggle, then the dialog's links and actions in their displayed order
 
 #### Scenario: Backwards from the primary action
 - **WHEN** the focus is on the primary action and the user presses Shift+Tab

@@ -26,9 +26,14 @@ backdrop is the one exception, and nothing about keys calls for it.
 - The "No trap" scenario gives way to scenarios for the wrap in both
   directions and for a confirmation opened over a key dialog (the
   unsaved-changes question), which holds the focus while it is open.
-- The PassphraseModal tests that pinned the old behaviour follow the
-  requirement; the unit tests stub what jsdom does not lay out, so the trap
-  sees the dialog's controls.
+- "Forward through the creation dialog" names the show-passphrase toggle of
+  each passphrase field: the kit made it a Tab stop on the same branch, so
+  Tab from the passphrase field reaches its toggle before the confirmation
+  field.
+- The PassphraseModal tests and the keyboard-only E2E flows of the Keys
+  management tab that pinned the old behaviour follow the requirement; the
+  unit tests stub what jsdom does not lay out, so the trap sees the dialog's
+  controls.
 
 No change to the dialogs' markup, their focus on open or on close, Enter
 handling or errors.
@@ -49,9 +54,11 @@ None.
 ## Impact
 
 - Behaviour comes from `@onlyoffice/apps-ui-kit`'s `useFocusTrap`, already in
-  `ModalDialog` and `Aside` through the locally packed ui-kit; no code of the
-  key dialogs changes.
-- Tests: `packages/shared/dialogs/passphrase-modal/__tests__/PassphraseModal.test.tsx`.
+  `ModalDialog` and `Aside`, and from its `PasswordInput`, whose show/hide
+  toggle takes a Tab stop, both through the locally packed ui-kit; no code
+  of the key dialogs changes.
+- Tests: `packages/shared/dialogs/passphrase-modal/__tests__/PassphraseModal.test.tsx`
+  and `packages/client/__tests__/keys-management.spec.ts`.
 - No server (`../server`) or Document Server work.
 
 Out of scope: the focus trap itself (owned by ui-kit, reviewed there), other

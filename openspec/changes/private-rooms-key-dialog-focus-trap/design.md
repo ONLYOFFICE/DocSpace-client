@@ -14,6 +14,16 @@ the "SHALL NOT trap" came from the archived change
 `2026-10-29-private-rooms-dialog-keyboard-and-focus` (design D4), written
 when the kit had no trap.
 
+The same branch made the kit's `PasswordInput` show/hide toggle a Tab stop
+(ui-kit `8a9c4cc8`, "reach the show and hide eye from the keyboard"), so in
+the browser Tab from the creation dialog's passphrase field goes to that
+toggle, then to the confirmation field: the creation dialog's stops are the
+cross, the generate link, the passphrase field, its toggle, the
+confirmation field, its toggle, Continue and Cancel. The keyboard-only E2E
+flows in `keys-management.spec.ts` ("Create a key and unlock it from the
+keyboard" on both screens, "Focus back after the recovery display") press Tab
+once from the passphrase field and fail on it.
+
 The trap reads its stops at each key press and leaves out what is not
 rendered (`getClientRects()` empty). jsdom lays nothing out, so in the unit
 tests it sees no stop at all and Tab moves nothing - which is why "Forward
@@ -56,6 +66,13 @@ presses Tab more times than the confirmation has controls and checks after
 each press that the focus is inside the confirmation found with
 `queryConfirmation()`. The kit lets only the top trap act (the confirmation
 is nested in the creation dialog's DOM).
+
+### D4. The E2E flows step over the toggle by name
+
+Where a flow goes from the passphrase field to the confirmation field it
+presses Tab twice and asserts the focus on the toggle (its accessible name,
+"Show") in between, so a toggle that drops out of the order again, or a new
+stop in between, fails the flow instead of being stepped over by a loop.
 
 ## Risks / Trade-offs
 

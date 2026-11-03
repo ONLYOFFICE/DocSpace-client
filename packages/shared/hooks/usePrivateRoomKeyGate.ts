@@ -50,6 +50,7 @@ export function usePrivateRoomKeyGate({
   t,
   userId,
   accountLabel,
+  hasExistingKeys,
   refreshKeysFromServer,
   onKeyGenerated,
   onClose,
@@ -57,6 +58,8 @@ export function usePrivateRoomKeyGate({
   t: TFunction;
   userId: string | undefined;
   accountLabel?: string;
+  /** A user who already holds a key is never offered a second one. */
+  hasExistingKeys?: boolean;
   refreshKeysFromServer: () => Promise<void>;
   onKeyGenerated?: () => void;
   onClose?: () => void;
@@ -68,6 +71,7 @@ export function usePrivateRoomKeyGate({
   const generateKey = useGenerateKeyFlow({
     userId,
     accountLabel,
+    hasExistingKeys,
     refreshKeysFromServer,
     onSuccess: onKeyGenerated,
     onError: () => {

@@ -171,6 +171,7 @@ const CreateRoomDialog = ({
     t,
     userId,
     accountLabel: accountEmail,
+    hasExistingKeys: !!encryptionKeys?.length,
     refreshKeysFromServer,
     onKeyGenerated: () => {
       if (!isMountRef.current) return;

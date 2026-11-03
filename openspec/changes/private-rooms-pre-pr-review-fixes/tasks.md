@@ -14,7 +14,7 @@ Every task first adds a test named after its scenario and shows that it fails on
   - cases "Key list could not be loaded" and "User accepts key generation" (with a list that loads empty) in `CreateRoomDialog.privateRoom.test.tsx`;
   - `cd packages/client && pnpm exec vitest run src/components/dialogs/CreateEditRoomDialog`;
   - `cd common/tests && npx vitest run test/locales.test.js`.
-- [ ] 1.2 Shared key gate (`packages/shared/hooks/usePrivateRoomKeyGate.ts`): take and pass `hasExistingKeys` to `useGenerateKeyFlow`, so that a gate whose caller knows of a key never starts generation. Verify: a case "Key already exists" in a new `packages/shared/hooks/__tests__/usePrivateRoomKeyGate.test.tsx`, with `cd packages/shared && pnpm exec vitest run hooks`.
+- [x] 1.2 Shared key gate (`packages/shared/hooks/usePrivateRoomKeyGate.ts`): take and pass `hasExistingKeys` to `useGenerateKeyFlow`, so that a gate whose caller knows of a key never starts generation. Verify: a case "Key already exists" in a new `packages/shared/hooks/usePrivateRoomKeyGate.test.tsx` (co-located, as the other hook tests of that folder), with `cd packages/shared && pnpm exec vitest run hooks`.
 - [ ] 1.3 Keys page (`keys-management/KeysManagement.tsx:101` and `useProfileBody.tsx` `getEncryptionKeysData`):
   - while the list is `null` after a failed load, show Common:EncryptionKeysLoadFailed with a Common:TryAgain button that reloads the list;
   - offer neither Generate nor Import.
@@ -86,7 +86,7 @@ Every task first adds a test named after its scenario and shows that it fails on
 
   Verify:
   - a case "User cancels inside key generation" in `dialogs/key-generation/__tests__/useGenerateKeyFlow.test.tsx`, for both dialogs;
-  - a case in `hooks/__tests__/usePrivateRoomKeyGate.test.tsx`.
+  - a case in `hooks/usePrivateRoomKeyGate.test.tsx`.
 - [ ] 5.2 Close the creation on that callback when it started on the Private type or from a template:
   - in the client `CreateRoomDialog.js`;
   - in the SDK `(private)/_components/create-room/PrivateCreateRoomDialog.tsx`.

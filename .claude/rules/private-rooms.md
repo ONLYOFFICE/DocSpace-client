@@ -78,6 +78,9 @@ Workflow:
    by PR !798). No AI-attribution lines (CLAUDE.md), no `--no-verify`, no
    push unless asked. Full wording: the "Commits" paragraph of
    `openspec/config.yaml`.
-8. The feature stays behind the `privateRooms` localStorage flag
-   (`packages/shared/utils/privateRooms.ts`) until a change explicitly
-   releases it; see `private-rooms/feature-gating`.
+8. Private rooms are a beta offered to every user, with Beta badges on the
+   Private item and the Keys management tab. The section follows the E2E
+   rooms app (always on SaaS, the administrator's switch on standalone); an
+   embedding frame also needs the host opt-in `privateRooms`
+   (`packages/shared/utils/privateRooms.ts`). There is no browser-local
+   flag; see `private-rooms/feature-gating`.

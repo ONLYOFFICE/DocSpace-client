@@ -62,7 +62,7 @@ Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 20
   - the Document Server build of 0.1.
 
   Verify: that record.
-- [ ] 5.2 Make `.claude/rules/private-rooms.md` (item 8 and its flag mentions) and the feature-flag line of the `openspec/config.yaml` context describe the beta shown to every user, not a hidden feature. Verify: `npx -y @fission-ai/openspec@latest validate --all --strict`.
+- [x] 5.2 Make `.claude/rules/private-rooms.md` (item 8 and its flag mentions) and the feature-flag line of the `openspec/config.yaml` context describe the beta shown to every user, not a hidden feature. Verify: `npx -y @fission-ai/openspec@latest validate --all --strict`.
 
 ## 6. Integration
 

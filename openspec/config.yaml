@@ -31,8 +31,11 @@ context: |
   - SDK: packages/sdk/src/app/(private) and (docspace) encrypted hooks.
   - Server API client: packages/shared/api/privacy and encrypted-specific
     calls in packages/shared/api/files.
-  - Feature flag: packages/shared/utils/privateRooms.ts (localStorage
-    "privateRooms"); the feature is hidden until the flag is set.
+  - Availability: a beta offered to every user while the E2E rooms app is
+    on (always on SaaS, the standalone administrator's switch), read through
+    AppsStore.isPrivateRoomsSectionAvailable; an embedding frame also needs
+    the host opt-in `privateRooms` (packages/shared/utils/privateRooms.ts).
+    There is no browser-local flag.
 
   Tests: shared unit tests `cd packages/shared && pnpm exec vitest run <path>`,
   client unit tests `cd packages/client && pnpm exec vitest run <path>`,
@@ -108,7 +111,7 @@ rules:
 operations:
   apply:
     guidance:
-      - Do not remove the privateRooms feature flag as part of any change unless the change is explicitly about releasing the feature.
+      - Do not bring back a browser-local switch or hide the feature again unless the change is explicitly about availability (private-rooms/feature-gating).
       - Backend-dependent tasks stop at the client side and record the expected server contract.
       - "Commit right after ticking each task, before starting the next one, with the message format from the Commits paragraph of the context; a task is not done while its changes are uncommitted."
       - A new or changed MSW handler mirrors the server endpoint as implemented in ../server (found through CodeGraph, read in the source), never a shape guessed from the client; its doc comment names that controller action.

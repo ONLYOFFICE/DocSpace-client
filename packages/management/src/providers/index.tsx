@@ -42,6 +42,7 @@ import type {
 } from "@docspace/shared/api/settings/types";
 import type { ThemeKeys } from "@docspace/shared/enums";
 import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import ForeignTextGuard from "@docspace/shared/components/foreign-text-guard";
 import { ErrorBoundary } from "@onlyoffice/apps-ui-kit/providers/error-boundary";
 import { TranslationProvider } from "@onlyoffice/apps-ui-kit/providers/translation";
 import type {
@@ -109,6 +110,7 @@ const Providers = ({ children, contextData }: TProviders) => {
             <AppStateProvider {...contextData}>
               <StoreProvider>
                 <RootTooltip />
+                <ForeignTextGuard />
                 {children}
               </StoreProvider>
             </AppStateProvider>

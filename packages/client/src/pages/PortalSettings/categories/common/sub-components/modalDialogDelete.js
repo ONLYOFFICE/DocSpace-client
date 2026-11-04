@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
 import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { withTranslation } from "react-i18next";
@@ -42,14 +41,6 @@ import styles from "./modalDialogDelete.module.scss";
 
 const ModalDialogDelete = (props) => {
   const { visible, onClose, onClickDelete, t } = props;
-
-  const onKeyPress = (e) =>
-    (e.key === "Esc" || e.key === "Escape") && onClose();
-
-  useEffect(() => {
-    window.addEventListener("keyup", onKeyPress);
-    return () => window.removeEventListener("keyup", onKeyPress);
-  });
 
   return (
     <ModalDialog visible={visible} onClose={onClose} displayType="modal">

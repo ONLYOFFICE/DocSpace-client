@@ -1,0 +1,21 @@
+{
+  "key_path": "AIModelsDisabledTitle",
+  "content": "AI models are disabled",
+  "content_en_sha1_hash": "4b3d52a17b2339b083fb5cd8d58868ad0f4b4b9e",
+  "created_at": "2026-10-14T15:10:22.088Z",
+  "updated_at": "2026-10-14T15:10:22.088Z",
+  "comment": {
+    "text": "Title of the placeholder screen shown in the AI chat panel or the AI agents section when an administrator has switched off every AI model in the portal, so no chat can run.",
+    "is_auto": false,
+    "updated_at": "2026-10-14T15:11:28.000Z"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

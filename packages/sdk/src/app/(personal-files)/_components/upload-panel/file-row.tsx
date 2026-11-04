@@ -113,15 +113,32 @@ const FileRow = observer(({ item, onCancel }: FileRowProps) => {
         {isDone ? (
           <CheckReactSvg className="upload-panel_check-button" />
         ) : isError ? (
-          <Link
-            fontSize="12px"
-            fontWeight={600}
-            type={LinkType.action}
-            className={styles.errorText}
-            title={item.error}
-          >
-            {t("Common:Error")}
-          </Link>
+          <>
+            <Link
+              fontSize="12px"
+              fontWeight={600}
+              type={LinkType.action}
+              className={styles.errorText}
+              title={
+                item.isQuotaError ? t("Common:QuotaExceededTooltip") : item.error
+              }
+            >
+              {t("Common:Error")}
+            </Link>
+            {item.retry ? (
+              <Link
+                fontSize="12px"
+                fontWeight={600}
+                type={LinkType.action}
+                className={styles.retryLink}
+                onClick={item.retry}
+              >
+                {item.isQuotaError
+                  ? t("Common:RetryAfterQuotaUpgrade")
+                  : t("Common:ArbiterRetry")}
+              </Link>
+            ) : null}
+          </>
         ) : (
           <>
             {item.percent >= 0 ? (

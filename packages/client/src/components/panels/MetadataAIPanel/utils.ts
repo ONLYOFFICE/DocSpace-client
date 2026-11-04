@@ -1,0 +1,435 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { FolderType } from "@docspace/shared/enums";
+import type {
+  TMetadataAIError,
+  TMetadataAIField,
+  TMetadataAIFilledField,
+  TMetadataAISkipped,
+  TMetadataAIUnresolvedField,
+  TProfile,
+} from "@docspace/shared/api/ai/types";
+import type {
+  TCustomField,
+  TCustomFieldRequest,
+  TEntryMetadata,
+} from "@docspace/shared/api/metadata/types";
+import type { TTranslation } from "@docspace/shared/types";
+import { getServiceLimitChatError } from "@docspace/shared/utils/ai";
+import {
+  getMetadataInput,
+  isMetadataSupported,
+} from "@docspace/shared/utils/metadata";
+import { isFile } from "@docspace/shared/utils/typeGuards";
+
+import type {
+  TCustomFieldDraft,
+  TTemplateForm,
+} from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
+import {
+  canEditMetadata,
+  createTemplateForm,
+  getCustomFieldChanges,
+  getVisibleTemplates,
+  isCustomFieldNameTaken,
+  isSameInput,
+} from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/utils";
+
+import type {
+  TMetadataAIContext,
+  TMetadataAIItem,
+  TMetadataAISummary,
+} from "./types";
+
+export const FILL_METADATA_AI = "fill-metadata-ai";
+export const SUGGEST_METADATA_AI = "suggest-metadata-ai";
+export const METADATA_AI_OPTIONS = [FILL_METADATA_AI, SUGGEST_METADATA_AI];
+export const METADATA_AI_PROMPT_MAX_LENGTH = 2000;
+
+const TEXT_EXTENSIONS = [".txt", ".csv"];
+
+const CLOSED_ROOT_TYPES = [FolderType.Archive, FolderType.RoomTemplates];
+
+const NOT_FOUND_REASONS = ["not_found", "invalid_value", "unknown_option"];
+
+const isSameName = (a: string, b: string) =>
+  a.trim().toLowerCase() === b.trim().toLowerCase();
+
+export const canReadAsText = (
+  extension: string | undefined,
+  extsConvertible: TMetadataAIContext["extsConvertible"],
+) => {
+  if (!extension) return false;
+  if (TEXT_EXTENSIONS.includes(extension)) return true;
+
+  const targets = Array.isArray(extsConvertible)
+    ? []
+    : (extsConvertible?.[extension] ?? []);
+
+  return targets.some((target) => TEXT_EXTENSIONS.includes(target));
+};
+
+export const getMetadataAIOptions = (
+  item: TMetadataAIItem,
+  {
+    isAIEnabled,
+    isAIReady,
+    isGuest,
+    isPublicRoom,
+    extsConvertible,
+  }: TMetadataAIContext,
+) => {
+  const isAvailable =
+    isAIEnabled &&
+    isAIReady &&
+    !isGuest &&
+    !isPublicRoom &&
+    isMetadataSupported(item) &&
+    !CLOSED_ROOT_TYPES.includes(item.rootFolderType as FolderType) &&
+    canEditMetadata(item) &&
+    !!item.security?.Download &&
+    isFile(item) &&
+    canReadAsText(item.fileExst, extsConvertible);
+
+  if (!isAvailable) return [];
+
+  return isFile(item) && item.hasMetadataFields === false
+    ? [SUGGEST_METADATA_AI]
+    : METADATA_AI_OPTIONS;
+};
+
+export const getMetadataAIModel = (
+  profiles: TProfile[],
+  assignments: Record<string, string>,
+) => {
+  const profileId = assignments.GenerateMeta ?? assignments.Default;
+  const profile = profiles.find(({ id }) => id === profileId);
+
+  return profile ? profile.name || profile.modelId : null;
+};
+
+type TEntryRef = { id?: number | string; isFolder?: boolean };
+
+export const isSameEntry = (selection: unknown, item: TEntryRef) => {
+  if (!selection || Array.isArray(selection)) return false;
+
+  const entry = selection as TEntryRef;
+
+  return entry.id === item.id && !!entry.isFolder === !!item.isFolder;
+};
+
+export const getTemplateForms = ({ templates }: TEntryMetadata) =>
+  getVisibleTemplates(templates).map(createTemplateForm);
+
+export const applyAIValues = (
+  forms: TTemplateForm[],
+  filled: TMetadataAIFilledField[],
+  overwrite: boolean,
+) => {
+  const fieldIds: number[] = [];
+
+  const next = forms.map((form) => {
+    const inputs = { ...form.inputs };
+
+    form.template.fields.forEach((field) => {
+      if (!overwrite && inputs[field.id]?.length) return;
+
+      const value = filled.find(({ fieldId }) => fieldId === field.id)?.value;
+
+      if (!value || typeof value === "string") return;
+
+      const input = getMetadataInput({ type: field.type, value });
+
+      if (isSameInput(input, inputs[field.id])) return;
+
+      inputs[field.id] = input;
+      fieldIds.push(field.id);
+    });
+
+    return { ...form, inputs };
+  });
+
+  return { forms: next, fieldIds };
+};
+
+export const applyAICustomValues = (
+  drafts: TCustomFieldDraft[],
+  filled: TMetadataAIFilledField[],
+) => {
+  const keys: string[] = [];
+
+  const next = drafts.map((draft) => {
+    const value = filled.find(
+      (field) =>
+        field.fieldId === undefined && isSameName(field.name, draft.name),
+    )?.value;
+    const text = typeof value === "string" ? value.trim() : "";
+
+    if (!text || text === draft.value) return draft;
+
+    keys.push(draft.key);
+
+    return { ...draft, value: text };
+  });
+
+  return { drafts: next, keys };
+};
+
+export const revertAIValue = (
+  forms: TTemplateForm[],
+  templateId: number,
+  fieldId: number,
+) =>
+  forms.map((form) => {
+    const field = form.template.fields.find(({ id }) => id === fieldId);
+
+    if (form.template.id !== templateId || !field) return form;
+
+    return {
+      ...form,
+      inputs: { ...form.inputs, [fieldId]: getMetadataInput(field) },
+    };
+  });
+
+export const revertAICustomValue = (
+  drafts: TCustomFieldDraft[],
+  customFields: TCustomField[],
+  key: string,
+) =>
+  drafts.map((draft) =>
+    draft.key === key
+      ? {
+          ...draft,
+          value: customFields.find(({ name }) => name === key)?.value ?? "",
+        }
+      : draft,
+  );
+
+const TEXT_INPUT_TYPES = new Set([
+  "text",
+  "search",
+  "email",
+  "url",
+  "tel",
+  "password",
+  "number",
+]);
+
+export const getUndoShortcut = ({
+  key,
+  code,
+  ctrlKey,
+  metaKey,
+  shiftKey,
+  altKey,
+}: Pick<
+  KeyboardEvent,
+  "key" | "code" | "ctrlKey" | "metaKey" | "shiftKey" | "altKey"
+>): "undo" | "redo" | null => {
+  const letter = /^[a-z]$/i.test(key)
+    ? key.toLowerCase()
+    : code.replace(/^Key/, "").toLowerCase();
+
+  if (letter === "y" && ctrlKey && !metaKey && !shiftKey && !altKey)
+    return "redo";
+  if (letter !== "z" || !(ctrlKey || metaKey) || altKey) return null;
+
+  return shiftKey ? "redo" : "undo";
+};
+
+export const isTextEditable = (target: EventTarget | null) =>
+  target instanceof HTMLElement &&
+  (target.isContentEditable ||
+    target instanceof HTMLTextAreaElement ||
+    (target instanceof HTMLInputElement && TEXT_INPUT_TYPES.has(target.type)));
+
+export const isPanelKeyTarget = (
+  target: EventTarget | null,
+  panel: HTMLElement,
+) =>
+  target instanceof Node &&
+  (target === target.ownerDocument?.body || panel.contains(target));
+
+export const withoutAIChange = (
+  summary: TMetadataAISummary,
+  { fieldId, customKey }: { fieldId?: number; customKey?: string },
+): TMetadataAISummary => {
+  const filledFieldIds = (summary.filledFieldIds ?? []).filter(
+    (id) => id !== fieldId,
+  );
+  const filledCustomKeys = (summary.filledCustomKeys ?? []).filter(
+    (key) => key !== customKey,
+  );
+
+  return {
+    ...summary,
+    count: filledFieldIds.length + filledCustomKeys.length,
+    filledFieldIds,
+    filledCustomKeys,
+    hasUndone: true,
+  };
+};
+
+export const getFillCustomFieldChanges = (
+  fields: TCustomField[],
+  drafts: TCustomFieldDraft[],
+) =>
+  getCustomFieldChanges(fields, drafts).filter(({ value }) => value !== null);
+
+export const getFillNotFound = (
+  unresolved: TMetadataAIUnresolvedField[],
+  forms: TTemplateForm[],
+) => {
+  const emptyFieldIds = forms.flatMap(({ template, inputs }) =>
+    template.fields
+      .filter(({ id }) => !inputs[id]?.length)
+      .map(({ id }) => id),
+  );
+
+  return unresolved
+    .filter(({ reason }) => NOT_FOUND_REASONS.includes(reason))
+    .filter(
+      ({ fieldId }) =>
+        fieldId !== undefined && emptyFieldIds.includes(fieldId),
+    )
+    .map(({ name }) => name);
+};
+
+const getProposals = (fields: TMetadataAIField[], metadata: TEntryMetadata) => {
+  const templateFieldNames = metadata.templates.flatMap(({ fields }) =>
+    fields.map(({ name }) => name),
+  );
+
+  return fields.filter(
+    ({ name }) =>
+      !templateFieldNames.some((fieldName) => isSameName(fieldName, name)),
+  );
+};
+
+export const toSuggestionDrafts = (
+  fields: TMetadataAIField[],
+  metadata: TEntryMetadata,
+): TCustomFieldDraft[] =>
+  getProposals(fields, metadata).flatMap(({ name, value }) => {
+    const text = value?.trim() ?? "";
+    const current = metadata.customFields.find((field) =>
+      isSameName(field.name, name),
+    );
+
+    if (current && (!text || text === current.value)) return [];
+
+    return [
+      {
+        key: `suggestion-${name.trim().toLowerCase()}`,
+        name: current?.name ?? name.trim(),
+        value: text,
+        isNew: !current,
+      },
+    ];
+  });
+
+export const getSuggestNotFound = (
+  fields: TMetadataAIField[],
+  metadata: TEntryMetadata,
+) =>
+  getProposals(fields, metadata)
+    .filter(({ value }) => !value?.trim())
+    .map(({ name }) => name);
+
+export const isValidSuggestion = (
+  draft: TCustomFieldDraft,
+  metadata: TEntryMetadata,
+  drafts: TCustomFieldDraft[],
+) =>
+  draft.isNew
+    ? !!draft.name.trim() &&
+      !isCustomFieldNameTaken(draft, metadata.customFields, drafts)
+    : !!draft.value.trim();
+
+export const toCustomFieldRequests = (
+  drafts: TCustomFieldDraft[],
+): TCustomFieldRequest[] =>
+  drafts
+    .map(({ name, value }) => ({ name: name.trim(), value: value.trim() }))
+    .filter(({ value }) => value);
+
+export const getSkippedTitles = (skipped: TMetadataAISkipped[]) =>
+  skipped
+    .filter(({ reason }) => reason !== "limit")
+    .map(({ id, title }) => title ?? id);
+
+export const getMetadataAIServiceLimit = (error: unknown) => {
+  const { code, providerMessage } = (error ?? {}) as TMetadataAIError;
+
+  return getServiceLimitChatError({ code, message: providerMessage });
+};
+
+export const isMetadataAINoModel = (error: unknown) =>
+  (error as TMetadataAIError | null)?.status === 503;
+
+const getSkippedError = (t: TTranslation, skipped: TMetadataAISkipped[]) => {
+  switch (skipped[0]?.reason) {
+    case "empty":
+      return t("Metadata:AIEmptyContent");
+    case "unsupported":
+      return t("Metadata:AIUnsupportedFormat");
+    case "forbidden":
+      return t("Common:AccessDenied");
+    default:
+      return t("Metadata:AINothingToRead");
+  }
+};
+
+export const getMetadataAIError = (t: TTranslation, error: unknown) => {
+  const { status, skipped } = (error ?? {}) as TMetadataAIError;
+
+  switch (status) {
+    case 403:
+      return t("Common:AccessDenied");
+    case 422:
+      return skipped
+        ? getSkippedError(t, skipped)
+        : t("Metadata:AINothingToFill");
+    case 429:
+      return t("Metadata:AIBusy");
+    case 502:
+      return t("Metadata:AIFailed");
+    case 504:
+      return t("Metadata:AITimeout");
+    default:
+      return t("Common:SomethingWentWrong");
+  }
+};

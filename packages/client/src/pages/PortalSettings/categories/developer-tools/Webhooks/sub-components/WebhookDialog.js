@@ -95,16 +95,6 @@ const WebhookDialog = (props) => {
     isSettingsModal && setIsResetVisible(true);
   };
 
-  const onKeyPress = (e) =>
-    (e.key === "Esc" || e.key === "Escape") && onModalClose();
-
-  const cleanUpEvent = () => window.removeEventListener("keyup", onKeyPress);
-
-  useEffect(() => {
-    window.addEventListener("keyup", onKeyPress);
-    return cleanUpEvent;
-  }, []);
-
   const onInputChange = (e) => {
     if (e.target.name) {
       !isValid[e.target.name] &&

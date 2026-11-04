@@ -33,14 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { ReactNode } from "react";
+import { ReactNode, Ref } from "react";
 import { IndexRange } from "react-virtualized";
 import { TFile } from "../Tiles/Tiles.types";
 
 export interface CardProps {
   children: ReactNode;
   smallPreview: boolean;
-  countTilesInRow?: number;
   className?: string;
 }
 
@@ -48,6 +47,7 @@ export interface ItemProps {
   children: ReactNode;
   className: string;
   isOneTile?: boolean;
+  ref?: Ref<HTMLDivElement>;
 }
 
 export interface InfiniteGridProps {
@@ -55,6 +55,8 @@ export interface InfiniteGridProps {
   hasMoreFiles: boolean;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   isShowOneTile?: boolean;
+  countTilesInRow: number;
+  onGridColumnsChange: (columns: number) => void;
   smallPreview: boolean;
   showLoading: boolean;
 }

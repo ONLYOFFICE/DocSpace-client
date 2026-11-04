@@ -54,6 +54,7 @@ export interface ICompanyInfo {
   buildVersionInfo: IBuildInfo;
   standalone: boolean;
   licenseAgreementsUrl: string;
+  privacyPolicyUrl?: string;
   isEnterprise: boolean;
   logoText: string;
 }

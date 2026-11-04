@@ -42,14 +42,13 @@ import { Events, RoomsType } from "@docspace/shared/enums";
 import CatalogRoomsIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg";
 import CatalogFolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
 import CatalogDocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg";
-import AiAgentsIcon from "PUBLIC_DIR/images/icons/16/ai-agents.svg";
 
 import type { ModuleItem } from "../sub-components/ModuleCard";
 import { DASHBOARD_ANALYTICS_CONTEXT } from "../utils";
 
 // The dashboard sits outside any folder, so creation is dispatched without a
 // parent and each dialog falls back to its section root. `context` is only read
-// by analytics: it tags the RoomCreated / AgentCreated events as coming from
+// by analytics: it tags the RoomCreated events as coming from
 // the Dashboard rather than the sidebar.
 const DASHBOARD_CREATE_DETAIL = {
   parentId: null,
@@ -69,29 +68,10 @@ const dispatchCreateRoom = (startRoomType?: RoomsType) => {
   window.dispatchEvent(event);
 };
 
-// Opens the create-agent dialog. GlobalEvents' onCreateAgent runs the
-// AI-readiness gate itself, showing the activate-AI dialog first when the
-// portal isn't set up yet.
-const dispatchCreateAgent = () => {
-  window.dispatchEvent(
-    new CustomEvent(Events.AGENT_CREATE, { detail: DASHBOARD_CREATE_DETAIL }),
-  );
-};
-
 export type UseModuleItemsProps = {
   isGuest: boolean;
   /** Admins / owners / room admins — the set allowed to create rooms. */
   canCreateRooms: boolean;
-  /** `canCreateRooms` plus AI being ready, which agent creation also needs. */
-  canCreateAgents: boolean;
-  /**
-   * The portal-wide AI switch (Settings -> Integration -> AI services).
-   *
-   * Stricter than `canCreateAgents`, and it removes the card instead of
-   * degrading it: a portal with AI switched off has no agents to open either,
-   * so an app card leading into that section would only offer a dead end.
-   */
-  aiServicesEnabled: boolean;
   /**
    * Rooms quota is exhausted or the portal is in its grace period. Room and
    * form-set creation then opens the quota warning instead of the create
@@ -99,7 +79,22 @@ export type UseModuleItemsProps = {
    */
   isWarningRoomsDialog: boolean;
   setQuotaWarningDialogVisible: (visible: boolean) => void;
+  /**
+   * Whether an app is switched on for the portal (`appsStore.isInstalled`).
+   * Always true in SaaS, where apps cannot be switched off. Files is always on
+   * and is not asked.
+   */
+  isAppInstalled: (id: string) => boolean;
+  /**
+   * The user can switch apps on: a portal admin or the owner, on a standalone
+   * installation. Such a user still gets the card of an app that is off, with
+   * a "Go to Settings" button leading to Settings -> Apps; everyone else does
+   * not see the card at all.
+   */
+  canEnableApps: boolean;
 };
+
+const APPS_SETTINGS_PATH = "/portal-settings/apps";
 
 /**
  * Builds the app cards for the Dashboard's "Apps" section.
@@ -108,17 +103,25 @@ export type UseModuleItemsProps = {
  * other three are create-first: their button opens the matching create dialog,
  * which is the point of the card. A user who can't create there gets the plain
  * "Open" behaviour and label instead, so the card still leads somewhere useful.
+ *
+ * An app that is switched off keeps its card, badged "Disabled", only for a
+ * user who can switch it on; its button then leads to the apps settings.
  */
 export const useModuleItems = ({
   isGuest,
   canCreateRooms,
-  canCreateAgents,
-  aiServicesEnabled,
   isWarningRoomsDialog,
   setQuotaWarningDialogVisible,
+  isAppInstalled,
+  canEnableApps,
 }: UseModuleItemsProps): ModuleItem[] => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
+
+  // Read during render rather than inside the memo, so the observer around the
+  // Dashboard tracks the apps list and the memo re-runs once it loads.
+  const roomsInstalled = isAppInstalled("ai-rooms");
+  const formsInstalled = isAppInstalled("ai-forms");
 
   return React.useMemo(() => {
     // Wraps a room-flavoured create so an exhausted quota surfaces its own
@@ -145,6 +148,23 @@ export const useModuleItems = ({
         ? { buttonLabel: createLabel, onAction: create }
         : { buttonLabel: t("Common:Open"), onAction: () => navigate(href) };
 
+    /**
+     * The card's state and action for an app that may be switched off: as
+     * given while it is on, a "Go to Settings" button leading to the apps
+     * settings while it is off.
+     */
+    const withInstallState = (
+      installed: boolean,
+      actions: Pick<ModuleItem, "buttonLabel" | "onAction">,
+    ) =>
+      installed
+        ? { installed, ...actions }
+        : {
+            installed,
+            buttonLabel: t("Common:GoToSettings"),
+            onAction: () => navigate(APPS_SETTINGS_PATH),
+          };
+
     const filesHref = isGuest
       ? "/shared-with-me/filter"
       : "/rooms/personal/filter";
@@ -155,6 +175,7 @@ export const useModuleItems = ({
         icon: <CatalogFolderIcon />,
         title: t("Common:Files"),
         description: t("Common:DashboardFilesDescription"),
+        // Files cannot be switched off.
         installed: true,
         href: filesHref,
         buttonLabel: t("Common:Open"),
@@ -165,14 +186,16 @@ export const useModuleItems = ({
         icon: <CatalogRoomsIcon />,
         title: t("Common:Rooms"),
         description: t("Common:DashboardRoomsDescription"),
-        installed: true,
         href: "/rooms/shared/filter",
-        ...createOrOpen(
-          canCreateRooms,
-          "/rooms/shared/filter",
-          t("Common:CreateRoom"),
-          // No preset type: the dialog opens on its room-type chooser.
-          withQuotaCheck(() => dispatchCreateRoom()),
+        ...withInstallState(
+          roomsInstalled,
+          createOrOpen(
+            canCreateRooms,
+            "/rooms/shared/filter",
+            t("Common:CreateRoom"),
+            // No preset type: the dialog opens on its room-type chooser.
+            withQuotaCheck(() => dispatchCreateRoom()),
+          ),
         ),
       },
       {
@@ -180,50 +203,32 @@ export const useModuleItems = ({
         icon: <CatalogDocumentsIcon />,
         title: t("Common:Forms"),
         description: t("Common:DashboardFormsDescription"),
-        installed: true,
         href: "/forms/filter",
         // A form set is a form-filling room, so it goes through the same
         // create-room dialog, opened on the FormRoom type.
-        ...createOrOpen(
-          canCreateRooms,
-          "/forms/filter",
-          t("Common:CreateFormSet"),
-          withQuotaCheck(() => dispatchCreateRoom(RoomsType.FormRoom)),
+        ...withInstallState(
+          formsInstalled,
+          createOrOpen(
+            canCreateRooms,
+            "/forms/filter",
+            t("Common:CreateFormSet"),
+            withQuotaCheck(() => dispatchCreateRoom(RoomsType.FormRoom)),
+          ),
         ),
       },
-      // Dropped outright on a portal with AI switched off - see
-      // `aiServicesEnabled`. The sidebar drops its AI Agents item under the
-      // same rule, so the app is absent from both places at once.
-      ...(aiServicesEnabled
-        ? [
-            {
-              id: "ai-agents",
-              icon: <AiAgentsIcon />,
-              title: t("Common:AIAgents"),
-              description: t("Common:DashboardAIChatAgentsDescription"),
-              installed: true,
-              href: "/ai-agents/filter",
-              ...createOrOpen(
-                canCreateAgents,
-                "/ai-agents/filter",
-                t("Common:CreateAIAgent", { aiAgent: t("Common:AIAgent") }),
-                dispatchCreateAgent,
-              ),
-            },
-          ]
-        : []),
     ];
 
-    return items.filter((mod) => mod.installed);
+    return items.filter((mod) => mod.installed || canEnableApps);
   }, [
     t,
     navigate,
     isGuest,
     canCreateRooms,
-    canCreateAgents,
-    aiServicesEnabled,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
+    roomsInstalled,
+    formsInstalled,
+    canEnableApps,
   ]);
 };
 

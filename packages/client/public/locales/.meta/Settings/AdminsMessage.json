@@ -3,7 +3,7 @@
   "content": "Administrator message",
   "content_en_sha1_hash": "54f2dc02b2e58e2c2025d4950fae4658dbac7d95",
   "created_at": "2026-08-31T18:23:40.285Z",
-  "updated_at": "2026-08-31T20:48:52.467Z",
+  "updated_at": "2026-10-21T10:17:45.808Z",
   "comment": {
     "text": "Section title in the Portal Settings menu that labels the configuration area for the administrator's message.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 257,
+      "line_number": 274,
       "context": "{\n id: \"portal-settings_catalog-admin-message\",\n key: \"1-0-7\",\n icon: \"\",\n link: \"admin-message\",\n tKey: \"AdminsMessage\",\n },\n {\n id: \"portal-settings_catalog-session-life-time\",\n key: \"1-0-8\",\n icon: \"\",",
       "module": "/packages/client"
     }

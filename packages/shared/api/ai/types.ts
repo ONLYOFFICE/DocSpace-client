@@ -36,6 +36,11 @@
 import type { TPathParts } from "../../types";
 import type { TFile, TFolder } from "../files/types";
 import type { TRoom } from "../rooms/types";
+import type {
+  TEntryMetadata,
+  TMetadataEntryKind,
+  TMetadataValue,
+} from "../metadata/types";
 import { KnowledgeType, ProviderType } from "./enums";
 
 import {
@@ -184,5 +189,75 @@ export type TCreateAgentWithProfileData = Omit<
 
 export type TAIUserConfig = {
   chatRecommendedModelVisible: boolean;
+};
+
+export type TMetadataAISource = {
+  id: string;
+  title: string;
+  truncated: boolean;
+};
+
+export type TMetadataAISkipped = {
+  id: string;
+  title?: string;
+  reason: "unsupported" | "limit" | "forbidden" | "not_found" | "empty" | "failed";
+};
+
+export type TMetadataAIFillRequest = {
+  kind: TMetadataEntryKind;
+  id: number;
+  prompt?: string;
+  overwrite?: boolean;
+  dryRun?: boolean;
+};
+
+export type TMetadataAIFilledField = {
+  fieldId?: number;
+  name: string;
+  value: TMetadataValue | string;
+};
+
+export type TMetadataAIUnresolvedField = {
+  fieldId?: number;
+  name: string;
+  reason:
+    | "already_set"
+    | "not_found"
+    | "invalid_value"
+    | "unknown_option"
+    | "write_failed";
+};
+
+export type TMetadataAIFillResult = {
+  metadata: TEntryMetadata;
+  filled: TMetadataAIFilledField[];
+  unresolved: TMetadataAIUnresolvedField[];
+  sources: TMetadataAISource[];
+  skipped: TMetadataAISkipped[];
+  dryRun: boolean;
+};
+
+export type TMetadataAIGenerateRequest = {
+  kind: TMetadataEntryKind;
+  id: number;
+  prompt?: string;
+};
+
+export type TMetadataAIField = {
+  name: string;
+  value: string | null;
+};
+
+export type TMetadataAIGenerateResult = {
+  fields: TMetadataAIField[];
+  sources: TMetadataAISource[];
+  skipped: TMetadataAISkipped[];
+};
+
+export type TMetadataAIError = Error & {
+  status?: number;
+  skipped?: TMetadataAISkipped[];
+  code?: string;
+  providerMessage?: string;
 };
 

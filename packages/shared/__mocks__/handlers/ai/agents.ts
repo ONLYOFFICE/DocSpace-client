@@ -919,11 +919,15 @@ const getListWithCreate = ({
  * `Create: false`. The canned payloads here all say `true`, so a test standing
  * in as anybody else has to say otherwise.
  */
-const withRootCreate = <T,>(payload: T, canCreate?: boolean): T => {
-	if (canCreate === undefined) return payload;
+type RootParams = { canCreate?: boolean; rootAccess?: ShareAccessRights };
+
+const withRoot = <T,>(payload: T, { canCreate, rootAccess }: RootParams): T => {
+	if (canCreate === undefined && rootAccess === undefined) return payload;
 
 	const list = payload as unknown as {
-		response: { current: { security: Record<string, boolean> } };
+		response: {
+			current: { access?: number; security: Record<string, boolean> };
+		};
 	};
 
 	return {
@@ -932,7 +936,10 @@ const withRootCreate = <T,>(payload: T, canCreate?: boolean): T => {
 			...list.response,
 			current: {
 				...list.response.current,
-				security: { ...list.response.current.security, Create: canCreate },
+				...(rootAccess !== undefined && { access: rootAccess }),
+				...(canCreate !== undefined && {
+					security: { ...list.response.current.security, Create: canCreate },
+				}),
 			},
 		},
 	} as unknown as T;
@@ -945,6 +952,7 @@ export const aiAgentsResolver = ({
 	inRoom = true,
 	isDocAdmin,
 	canCreate,
+	rootAccess,
 }: {
 	withCreate?: boolean;
 	withListCreate?: boolean;
@@ -952,28 +960,31 @@ export const aiAgentsResolver = ({
 	inRoom?: boolean;
 	isDocAdmin?: boolean;
 	canCreate?: boolean;
+	rootAccess?: ShareAccessRights;
 }) => {
+	const root = { canCreate, rootAccess };
+
 	if (aiAccess !== undefined) {
 		return new Response(
 			JSON.stringify(
-				withRootCreate(
+				withRoot(
 					getListWithCreate({ access: aiAccess, inRoom, isDocAdmin }),
-					canCreate,
+					root,
 				),
 			),
 		);
 	}
 	if (withCreate) {
 		return new Response(
-			JSON.stringify(withRootCreate(successEmptyWithCreate, canCreate)),
+			JSON.stringify(withRoot(successEmptyWithCreate, root)),
 		);
 	}
 	if (withListCreate) {
 		return new Response(
-			JSON.stringify(withRootCreate(successListWithCreate, canCreate)),
+			JSON.stringify(withRoot(successListWithCreate, root)),
 		);
 	}
-	return new Response(JSON.stringify(withRootCreate(successEmpty, canCreate)));
+	return new Response(JSON.stringify(withRoot(successEmpty, root)));
 };
 
 export const aiAgentsHandler = (
@@ -985,6 +996,7 @@ export const aiAgentsHandler = (
 		inRoom,
 		isDocAdmin,
 		canCreate,
+		rootAccess,
 	}: {
 		withCreate?: boolean;
 		withListCreate?: boolean;
@@ -996,6 +1008,7 @@ export const aiAgentsHandler = (
 		 * value stands.
 		 */
 		canCreate?: boolean;
+		rootAccess?: ShareAccessRights;
 	} = {},
 ) => {
 	return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_AGENTS}`, () => {
@@ -1006,6 +1019,7 @@ export const aiAgentsHandler = (
 			inRoom,
 			isDocAdmin,
 			canCreate,
+			rootAccess,
 		});
 	});
 };

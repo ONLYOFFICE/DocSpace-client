@@ -49,6 +49,7 @@ import type { ShareAccessRights } from "@docspace/shared/enums";
 import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { TAiProjectSettings } from "@docspace/shared/api/ai/projects";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
@@ -120,8 +121,6 @@ type DetailsHelperProps = {
   isVisitor: boolean;
   isCollaborator: boolean;
   isDefaultRoomsQuotaSet: boolean;
-  isDefaultAIAgentsQuotaSet: boolean;
-  isAIAgentsFolder: boolean;
   isAdmin: boolean;
   isArchiveFolder: boolean;
   roomLifetime: TRoomLifetime;
@@ -142,10 +141,6 @@ class DetailsHelper {
 
   isDefaultRoomsQuotaSet: boolean;
 
-  isDefaultAIAgentsQuotaSet: boolean;
-
-  isAIAgentsFolder: boolean;
-
   isAdmin: boolean;
 
   isArchiveFolder: boolean;
@@ -160,8 +155,6 @@ class DetailsHelper {
     this.isVisitor = props.isVisitor;
     this.isCollaborator = props.isCollaborator;
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
-    this.isDefaultAIAgentsQuotaSet = props.isDefaultAIAgentsQuotaSet;
-    this.isAIAgentsFolder = props.isAIAgentsFolder;
     this.isAdmin = props.isAdmin;
     this.isArchiveFolder = props.isArchiveFolder;
     this.roomLifetime = props.roomLifetime;
@@ -177,13 +170,16 @@ class DetailsHelper {
   };
 
   getNeededProperties = () => {
+    // An AI project shows as a room does; it holds no files of its own and
+    // takes no storage, and its model comes from its settings block.
+    const isAIProject = "isAIProject" in this.item && !!this.item.isAIProject;
     return (
       "isRoom" in this.item && this.item.isRoom
         ? [
             "Owner",
             (this.item as TRoom).providerKey && "Storage Type",
             "Type",
-            "Content",
+            !isAIProject && "Content",
             "Date modified",
             "Last modified by",
             "Creation date",
@@ -197,7 +193,8 @@ class DetailsHelper {
                 this.isArchiveFolder,
               ).canCreate) &&
               "Tags",
-            "Storage",
+            !isAIProject && "Storage",
+            isAIProject && this.getAiProjectSettings()?.profile?.name && "Model",
           ]
         : "isFolder" in this.item && this.item.isFolder
           ? [
@@ -295,13 +292,13 @@ class DetailsHelper {
       case "externalDbTableName":
         return this.t("Files:TableName");
 
+      case "Model":
+        return this.t("Common:AIAgentModel");
+
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
-          const isDefaultQuotaSet = this.isAIAgentsFolder
-            ? this.isDefaultAIAgentsQuotaSet
-            : this.isDefaultRoomsQuotaSet;
-
-          return isDefaultQuotaSet && this.item.quotaLimit !== undefined
+          return this.isDefaultRoomsQuotaSet &&
+            this.item.quotaLimit !== undefined
             ? this.t("Common:StorageAndQuota")
             : this.t("Common:Storage");
         }
@@ -365,10 +362,18 @@ class DetailsHelper {
         return this.getItemAccessLevel();
       case "externalDbTableName":
         return this.getExternalDbTableName();
+      case "Model":
+        return text(this.getAiProjectSettings()?.profile?.name);
       default:
         break;
     }
   };
+
+  /** The settings block of an AI project (`aiProject`), if the item is one. */
+  getAiProjectSettings = () =>
+    "aiProject" in this.item
+      ? (this.item.aiProject as TAiProjectSettings | undefined)
+      : undefined;
 
   getExternalDbTableName = () => {
     if (!("externalDbTableName" in this.item)) return null;
@@ -501,7 +506,7 @@ class DetailsHelper {
         <SpaceQuota
           item={this.item}
           isReadOnly={!this.item?.security?.EditRoom}
-          type={this.isAIAgentsFolder ? "agent" : "room"}
+          type="room"
         />
       );
     }

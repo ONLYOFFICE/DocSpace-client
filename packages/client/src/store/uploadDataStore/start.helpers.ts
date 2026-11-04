@@ -38,12 +38,20 @@ import uniqueid from "lodash/uniqueId";
 import { checkIsFileExist, getFolderInfo } from "@docspace/shared/api/files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { RoomsType } from "@docspace/shared/enums";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import {
+  listDecryptedFileNames,
+  resolveNameClashes,
+} from "@docspace/shared/services/private-room/encrypted-name-clash";
 
 import type { TTranslation } from "@docspace/shared/types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
 
 import { releaseUploadAutoLockSuspension, removeDuplicate } from "./helpers";
-import type { TUploadBrowserFile, TUploadFile } from "./helpers";
+import type { TUploadBrowserFile, TUploadFile, TUploadTarget } from "./helpers";
+import { withItemUploadContext } from "./target.helpers";
+import { finishUploadIfSettled } from "./chunkUpload.helpers";
 import type {
   default as UploadDataStore,
   TAxiosLikeError,
@@ -223,21 +231,105 @@ export function handleUploadAndOptionalConversionImpl(
   }
 }
 
+/** A file of a private upload that is kept next to one of the same name. */
+export type TPrivateRename = {
+  uniqueId: string;
+  /** The decrypted name both files have. */
+  title: string;
+  /** The name the new file takes. */
+  name: string;
+};
+
+/**
+ * The files of the batch that would go encrypted into a folder already
+ * holding a file of the same decrypted name. The comparison needs the
+ * identity: when the unlock is declined, those files fail as for a declined
+ * batch and nothing is compared.
+ */
+async function findPrivateNameClashes(
+  self: UploadDataStore,
+  items: TUploadFile[],
+): Promise<TPrivateRename[]> {
+  const privateItems = items.filter((f) => self.willEncryptItem(f));
+  if (privateItems.length === 0) return [];
+
+  const { userId } = self.getUserEncryptionKeys();
+  const identity = await requireUnlock(String(userId));
+  if (!identity) {
+    self.cancelEncryptedBatchUpload(privateItems);
+    return [];
+  }
+
+  const byFolder = new Map<string, TUploadFile[]>();
+  for (const item of privateItems) {
+    const folderId = String(item.toFolderId ?? item.target.folderId);
+    byFolder.set(folderId, [...(byFolder.get(folderId) ?? []), item]);
+  }
+
+  const renames: TPrivateRename[] = [];
+  for (const [folderId, folderItems] of byFolder) {
+    const roomId = folderItems[0].target.encryptionRoomId;
+    if (roomId === null) continue;
+
+    const existingNames = await listDecryptedFileNames(
+      folderId,
+      roomId,
+      String(userId),
+      identity,
+    );
+    const clashes = resolveNameClashes(
+      folderItems.map((item) => ({ item, name: item.file.name })),
+      existingNames,
+    );
+    clashes.forEach(({ item, name, renamed }) => {
+      renames.push({ uniqueId: item.uniqueId, title: name, name: renamed });
+    });
+  }
+  return renames;
+}
+
+/** Keeps both files of a private clash: the new one takes its suffixed name. */
+export function keepBothPrivateNamesImpl(
+  uploadData: TStartUploadData,
+  renames: TPrivateRename[],
+) {
+  const items = [
+    ...uploadData.files,
+    ...(uploadData.allNewFiles ?? []),
+    ...(uploadData.uploadedFilesHistory ?? []),
+  ];
+
+  renames.forEach(({ uniqueId, name }) => {
+    items
+      .filter((item) => item.uniqueId === uniqueId)
+      .forEach((item) => {
+        const { file } = item;
+        item.file = Object.assign(
+          new File([file], name, {
+            type: file.type,
+            lastModified: file.lastModified,
+          }),
+          { ...file },
+        );
+      });
+  });
+}
+
 export async function handleUploadConflictsImpl(
   self: UploadDataStore,
   t: TTranslation,
   toFolderId: number | string | null,
   uploadData: TStartUploadData,
 ) {
-  const { isAIRoom } = self.selectedFolderStore;
-  const filesArray = uploadData.files.map((fileInfo) => fileInfo.file.name);
+  // Spec: private-rooms/encryption-core, "Opaque upload name with visible extension".
+  const checkedFiles = uploadData.files.filter((f) => !f.target.isPrivate);
+  const filesArray = checkedFiles.map((fileInfo) => fileInfo.file.name);
 
-  const checkConflicts =
-    uploadData.files.findIndex((f) => f.toFolderId === toFolderId) > -1;
+  const checkConflicts = checkedFiles.some((f) => f.toFolderId === toFolderId);
 
   try {
     let conflicts: (string | { title: string; isFile: boolean })[] =
-      isAIRoom || !checkConflicts
+      !checkConflicts
         ? []
         : ((await checkIsFileExist(
             toFolderId as number,
@@ -250,11 +342,20 @@ export async function handleUploadConflictsImpl(
       isFile: true,
     }));
 
+    const privateRenames = await findPrivateNameClashes(
+      self,
+      uploadData.allNewFiles,
+    );
+    privateRenames.forEach(({ title }) => {
+      conflicts.push({ title, isFile: true });
+    });
+
     if (conflicts.length > 0) {
       self.setConflictDialogData(conflicts, {
         isUploadConflict: true,
         newUploadData: uploadData,
         folderTitle: folderInfo.title,
+        ...(privateRenames.length > 0 && { privateRenames }),
       });
     } else {
       self.handleUploadAndOptionalConversion(uploadData, t, true);
@@ -289,22 +390,12 @@ export async function handleUploadConflictsImpl(
 export function startUploadImpl(
   self: UploadDataStore,
   uploadFiles: Record<string, TUploadBrowserFile> | unknown[],
-  folderId: number | string | null,
+  target: TUploadTarget,
   t: TTranslation,
 ) {
   const { canConvert } = self.filesSettingsStore;
 
-  const { isAIRoom } = self.selectedFolderStore;
-
-  const { knowledgeId } = self.aiRoomStore;
-
-  const toFolderId = folderId || self.selectedFolderStore.id;
-
-  const encryptionRoomId =
-    self.selectedFolderStore.navigationPath?.find((r) => r.isRoom)?.id ??
-    (self.selectedFolderStore.isRoom ? self.selectedFolderStore.id : null);
-
-  const isPrivateUpload = self.treeFoldersStore.isPrivacyFolder;
+  const toFolderId = target.folderId;
 
   if (self.uploaded) {
     self.files = self.files.filter((f) => f.action !== "upload" || f.error);
@@ -327,23 +418,25 @@ export function startUploadImpl(
 
   uploadFilesArray.forEach((index) => {
     const file = (uploadFiles as Record<string, TUploadBrowserFile>)[index];
+    const itemTarget = withItemUploadContext(target, file.uploadContext);
 
     const parts = file.name.split(".");
     const ext = parts.length > 1 ? `.${parts.pop()}` : "";
-    const needConvert = !isPrivateUpload && canConvert(ext);
+    const needConvert = !itemTarget.isPrivate && canConvert(ext);
 
     const newFile: TUploadFile = {
       file,
       uniqueId: uniqueid("download_row-key_"),
       fileId: null,
-      toFolderId: isAIRoom ? knowledgeId : file.parentFolderId,
+      toFolderId: file.parentFolderId,
+      target: itemTarget,
       action: "upload",
       error: null,
       fileInfo: null,
       cancel: false,
       needConvert,
       encrypted: file.encrypted,
-      encryptionRoomId,
+      encryptionRoomId: itemTarget.encryptionRoomId,
       percent: 0,
     };
 
@@ -396,7 +489,40 @@ export function startUploadImpl(
   }
 }
 
-export function retryUploadFilesImpl(
+/**
+ * Returns the retried files to reset; the encrypted ones fail instead when the
+ * unlock is declined.
+ * Spec: private-rooms/file-operations, "Retry keeps the fixed target".
+ */
+async function unlockRetriedFiles(
+  self: UploadDataStore,
+  retryFiles: TUploadFile[],
+) {
+  if (await self.ensureEncryptionUnlockedForBatch(retryFiles)) {
+    return retryFiles;
+  }
+
+  const plainFiles = retryFiles.filter((f) => !self.willEncryptItem(f));
+  self.cancelEncryptedBatchUpload(
+    retryFiles.filter((f) => !plainFiles.includes(f)),
+  );
+  return plainFiles;
+}
+
+function sendRetriedFiles(
+  self: UploadDataStore,
+  retryFiles: TUploadFile[],
+  t: TTranslation,
+) {
+  const filesToSend = retryFiles.filter((f) => !f.error);
+  if (filesToSend.length === 0) {
+    finishUploadIfSettled(self, t);
+    return;
+  }
+  self.parallelUploading(filesToSend, t);
+}
+
+export async function retryUploadFilesImpl(
   self: UploadDataStore,
   t: TTranslation,
   uniqueId: string,
@@ -415,6 +541,16 @@ export function retryUploadFilesImpl(
     return;
   }
 
+  const [resetFile] = await unlockRetriedFiles(self, [retryFile]);
+
+  self.quotaErrorRaised = false;
+  self.finishUploadFilesCalled = false;
+
+  if (!resetFile) {
+    finishUploadIfSettled(self, t);
+    return;
+  }
+
   retryFile.action = "upload";
   retryFile.error = "";
   retryFile.isQuotaError = false;
@@ -427,8 +563,6 @@ export function retryUploadFilesImpl(
   retryFileUploaded.inAction = false;
   retryFileUploaded.errorShown = false;
   retryFileUploaded.percent = 0;
-
-  self.quotaErrorRaised = false;
 
   if (self.uploaded) {
     const newUploadData = {
@@ -450,18 +584,21 @@ export function retryUploadFilesImpl(
     self.primaryProgressDataStore.setPrimaryProgressBarData(progressData);
   }
 
-  self.parallelUploading([retryFile], t);
+  sendRetriedFiles(self, [retryFile], t);
 }
 
-export function retryQuotaFailedFilesImpl(
+export async function retryQuotaFailedFilesImpl(
   self: UploadDataStore,
   t: TTranslation,
 ) {
   const failed = self.files.filter((f) => f.isQuotaError);
   if (failed.length === 0) return;
 
+  const resetFiles = await unlockRetriedFiles(self, failed);
+
   self.quotaErrorRaised = false;
-  failed.forEach((retryFile) => {
+  self.finishUploadFilesCalled = false;
+  resetFiles.forEach((retryFile) => {
     const fileIndex = self.files.findIndex(
       (f) => f.uniqueId === retryFile.uniqueId,
     );
@@ -484,7 +621,7 @@ export function retryQuotaFailedFilesImpl(
     }
   });
 
-  if (self.uploaded) {
+  if (self.uploaded && resetFiles.length > 0) {
     const newUploadData = {
       filesSize: self.convertFilesSize,
       uploadedFiles: self.uploadedFiles,
@@ -502,7 +639,7 @@ export function retryQuotaFailedFilesImpl(
   }
 
   const retryFiles = self.files.filter((f) =>
-    failed.some((rf) => rf.uniqueId === f.uniqueId),
+    resetFiles.some((rf) => rf.uniqueId === f.uniqueId),
   );
-  self.parallelUploading(retryFiles, t);
+  sendRetriedFiles(self, retryFiles, t);
 }

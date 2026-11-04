@@ -45,9 +45,6 @@ minimumReleaseAgeExclude:
   - '@rolldown/binding-linux-s390x-gnu@1.2.2'
   - '@rolldown/binding-linux-x64-musl@1.2.2'
   - '@rolldown/binding-openharmony-arm64@1.2.8'
-  # next 16.3.6 (critical RCE fixes GHSA-p293-qw3h-jr36, GHSA-2xp9-vwfh-vxw4)
-  # was younger than the release-age window; drop once it ages out
-  - '@next/bundle-analyzer@16.3.6'
   - '@next/env@16.3.6'
   - '@next/swc-darwin-arm64@16.3.6'
   - '@next/swc-darwin-x64@16.3.6'
@@ -59,6 +56,8 @@ minimumReleaseAgeExclude:
   - '@next/swc-win32-x64-msvc@16.3.6'
   - next@16.3.6
   - '@onlyoffice/docspace-sdk-js@2.2.0'
+  - '@onlyoffice/doceditor-types@10.0.0'
+  - '@onlyoffice/document-editor-react@2.3.0'
 
 # The peers an app has to carry for @onlyoffice/ai-chat. ai-chat declares the
 # libraries it is built on -- the assistant-ui widgets, the radix primitives,
@@ -78,8 +77,8 @@ catalog:
   '@assistant-ui/react': '^0.11.58'
   '@assistant-ui/react-markdown': '0.11.10'
   '@codemirror/lang-json': '6.0.2'
-  '@codemirror/state': '6.5.2'
-  '@codemirror/view': '6.38.2'
+  '@codemirror/state': '6.7.6'
+  '@codemirror/view': '6.43.13'
   '@google/genai': '1.52.0'
   '@mistralai/mistralai': '1.15.1'
   '@radix-ui/react-dialog': '1.1.15'
@@ -105,7 +104,15 @@ catalog:
   # them. One declared version pins the peer for both. openai 5.23.2 asks for
   # ^3.23.8, so `pnpm peers check` reports zod 4 as unmet; ai-chat never loads
   # openai/helpers/zod, the only module that needs it.
-  'zod': '4.5.4'
+  'zod': '4.6.7'
+
+# Advisories accepted on purpose, so `pnpm audit` stays meaningful. Each id
+# must also be explained next to its override below - keep the two in step.
+auditConfig:
+  ignoreGhsas:
+    # @grpc/grpc-js held on 1.9.x by @firebase/firestore, see overrides
+    - GHSA-m9gg-hp2v-232j
+    - GHSA-f596-whhp-79r4
 
 overrides:
   pnpm: ">=10.33.0"
@@ -165,6 +172,8 @@ overrides:
   # Deliberately left on 1.9.x: firestore is never imported (shared/utils/
   # firebase.ts loads remote-config, storage and database only), and the
   # advisory is about server-side getAuthContext, which nothing here calls.
+  # The same holds for GHSA-f596-whhp-79r4 (low): it leaks method-handler
+  # errors from a grpc server, and nothing here runs one.
   "@grpc/grpc-js": "~1.9.16"
   form-data: ">=4.0.6"
   vite: ">=8.0.16"

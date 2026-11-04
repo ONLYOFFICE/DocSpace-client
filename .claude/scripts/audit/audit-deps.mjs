@@ -9,6 +9,9 @@
  * ui-kit is out of scope: it ships as a prebuilt npm package from its own
  * repository and has no lockfile here. Audit it in `docspace-ui-kit-react`.
  *
+ * Shared logic with docspace-ui-kit-react's .claude/scripts/audit-deps/,
+ * which adds the runtime/dev split a published package needs; keep in step.
+ *
  * Read-only: runs audits, reads lockfiles, prints findings and the override
  * line that would fix each one. Never installs, never edits a file.
  *
@@ -179,17 +182,70 @@ const major = (v) => Number.parseInt(v, 10);
 /** First concrete version in a range string: ">=3.3.18" -> "3.3.18". */
 const firstVersion = (range) => (range ?? "").match(/\d+\.\d+\.\d+/)?.[0] ?? null;
 
+/** Lowest published version above `version` within the same major. */
+function firstPublishedAbove(pkg, version) {
+  try {
+    const out = execFileSync("npm", ["view", `${pkg}@>${version} <${major(version) + 1}.0.0`, "version", "--json"], {
+      encoding: "utf8",
+      timeout: 30_000,
+      stdio: ["ignore", "pipe", "ignore"],
+    });
+    const versions = [].concat(JSON.parse(out || "[]")).filter((v) => !v.includes("-"));
+    return versions[0] ?? null;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Smallest safe version. `patched_versions` (pnpm) states it outright; npm
  * only reports what is vulnerable, so read the upper bound of that range -
- * ">=10.0.0 <10.2.1" is fixed by 10.2.1, not by 10.0.0.
+ * ">=10.0.0 <10.2.1" is fixed by 10.2.1, not by 10.0.0. An inclusive bound
+ * ("<=16.4.0") is itself vulnerable, so the fix is the next release after it.
  */
 function safeVersion(finding) {
   const patched = firstVersion(finding.patched);
   if (patched) return patched;
-  const bounds = [...(finding.vulnerable ?? "").matchAll(/<=?\s*(\d+\.\d+\.\d+)/g)];
-  if (bounds.length > 0) return bounds.at(-1)[1];
+  const bounds = [...(finding.vulnerable ?? "").matchAll(/<(=?)\s*(\d+\.\d+\.\d+)/g)];
+  if (bounds.length > 0) {
+    const [, inclusive, bound] = bounds.at(-1);
+    return inclusive ? firstPublishedAbove(finding.package, bound) : bound;
+  }
   return firstVersion(finding.vulnerable);
+}
+
+/**
+ * Manifests that declare `pkg` directly. For those the fix is a version bump
+ * in the manifest, not an override - an override would hide the real pin.
+ */
+function directDeclarations(tree, pkg) {
+  const manifests = [join(tree.dir, "package.json")];
+  if (tree.manager === "pnpm" && existsSync(join(tree.dir, "packages"))) {
+    for (const entry of readdirSync(join(tree.dir, "packages"))) {
+      manifests.push(join(tree.dir, "packages", entry, "package.json"));
+    }
+  }
+  const found = [];
+  for (const file of manifests) {
+    if (!existsSync(file)) continue;
+    const manifest = JSON.parse(readFileSync(file, "utf8"));
+    for (const section of ["dependencies", "peerDependencies", "devDependencies", "optionalDependencies"]) {
+      const spec = manifest[section]?.[pkg];
+      if (spec) found.push(`${relative(ROOT, file)} ${section} (${spec.startsWith("catalog:") ? "pnpm-workspace.yaml catalog" : spec})`);
+    }
+  }
+  return found;
+}
+
+/**
+ * A finding whose advisory id is already written next to the overrides is a
+ * documented decision (e.g. "deliberately left on 1.9.x"), not new work.
+ */
+function documentedIn(tree, finding) {
+  const id = finding.url?.match(/GHSA-[\w-]+/)?.[0];
+  if (!id) return null;
+  const file = tree.manager === "pnpm" ? join(tree.dir, "pnpm-workspace.yaml") : join(tree.dir, "package.json");
+  return existsSync(file) && readFileSync(file, "utf8").includes(id) ? relative(ROOT, file) : null;
 }
 
 /** Semver-ish compare, enough to pick the highest required fix. */
@@ -217,7 +273,9 @@ function suggestOverride(pkg, finding, versions) {
 
   const majors = [...new Set(versions.map(major))].filter((m) => !Number.isNaN(m));
   const fixMajor = major(fix);
-  const crossesMajor = majors.length > 0 && !majors.includes(fixMajor);
+  // Under 0.x every minor is breaking (katex 0.17 -> 0.18), so compare 0.minor
+  const line = (v) => (major(v) === 0 ? v.split(".").slice(0, 2).join(".") : String(major(v)));
+  const crossesMajor = versions.length > 0 && !versions.map(line).includes(line(fix));
 
   if (crossesMajor) {
     return {
@@ -262,6 +320,18 @@ for (const tree of trees) {
     for (const finding of findings) {
       finding.installed = installedVersions(tree, finding.package);
       finding.fix = suggestOverride(finding.package, finding, finding.installed);
+      // A declaration needs a bump only while its range still admits a
+      // vulnerable version: `^1.19.0` is fine for a fix in 1.15.1.
+      const fixed = finding.fix?.version;
+      finding.direct = directDeclarations(tree, finding.package).filter((d) => {
+        const floor = firstVersion(d.slice(d.lastIndexOf("(")));
+        return !fixed || !floor || (floor !== fixed && higher(floor, fixed) === fixed);
+      });
+      // Parents that pull a copy in themselves; a bump of ours leaves theirs.
+      finding.via = [
+        ...new Set((finding.paths ?? []).filter((p) => p.split(">").length > 2).map((p) => p.split(">").at(-2))),
+      ];
+      finding.documented = documentedIn(tree, finding);
     }
     results.push({ ...tree, findings });
   } catch (err) {
@@ -298,13 +368,26 @@ if (asJson) {
       if (f.affects?.length) console.log(`    reaches the tree through: ${f.affects.join(", ")}`);
       for (const p of (f.paths ?? []).slice(0, 3)) console.log(`    path: ${p}`);
       if ((f.paths ?? []).length > 3) console.log(`    ... ${f.paths.length - 3} more path(s)`);
+      if (f.documented) {
+        console.log(`    documented exception: the advisory id is already explained in ${f.documented}`);
+        continue;
+      }
+      if (f.direct.length > 0) {
+        console.log(`    direct dependency - bump it to >= ${f.fix?.version ?? "the patched version"} in:`);
+        for (const d of f.direct) console.log(`      ${d}`);
+      }
+      if (f.via?.length) console.log(`    also pulled in by: ${f.via.slice(0, 4).join(", ")}`);
+      if (f.direct.length > 0 && !f.via?.length) {
+        if (f.fix?.note) console.log(`    note: ${f.fix.note}`);
+        continue;
+      }
       if (f.fix) console.log(`    fix: ${overrideLine(f.fix)}`);
       if (f.fix?.note) console.log(`    note: ${f.fix.note}`);
     }
 
     const merged = new Map();
     for (const f of r.findings) {
-      if (!f.fix) continue;
+      if (!f.fix || f.documented || (f.direct.length > 0 && !f.via?.length)) continue;
       const prev = merged.get(f.fix.selector);
       merged.set(f.fix.selector, prev ? { ...f.fix, version: higher(prev.version, f.fix.version) } : f.fix);
     }
@@ -316,5 +399,5 @@ if (asJson) {
   console.log("");
 }
 
-const blocking = results.filter((r) => r.findings.length > 0);
+const blocking = results.filter((r) => r.findings.some((f) => !f.documented));
 process.exit(blocking.length > 0 ? 1 : 0);

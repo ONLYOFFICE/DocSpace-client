@@ -198,7 +198,8 @@ class AuthStore {
       isOAuthFrame() &&
       getAuthToken() &&
       !this.isAuthenticated &&
-      !this.settingsStore?.isPortalDeactivate
+      !this.settingsStore?.isPortalDeactivate &&
+      !this.settingsStore?.isPortalBlocked
     ) {
       frameCallEvent({
         event: "onAuthError",
@@ -208,7 +209,12 @@ class AuthStore {
 
     const requests = [];
 
-    const isPortalDeactivated = this.settingsStore?.isPortalDeactivate;
+    const isPortalBlocked = this.settingsStore?.isPortalBlocked;
+
+    // Neither a deactivated nor a blocked portal lets anyone in, so the user
+    // and everything loaded on their behalf is skipped for both.
+    const isPortalDeactivated =
+      this.settingsStore?.isPortalDeactivate || isPortalBlocked;
 
     const isPortalRestore =
       this.settingsStore?.tenantStatus === TenantStatus.PortalRestore;
@@ -216,7 +222,9 @@ class AuthStore {
     const isPortalEncryption =
       this.settingsStore?.tenantStatus === TenantStatus.EncryptionProcess;
 
-    if (!isPortalRestore && !isPortalEncryption)
+    // A blocked portal answers 404 to capabilities like to anything but the
+    // settings, the confirm-link check and its own unblocking.
+    if (!isPortalRestore && !isPortalEncryption && !isPortalBlocked)
       requests.push(this.getCapabilities());
 
     if (

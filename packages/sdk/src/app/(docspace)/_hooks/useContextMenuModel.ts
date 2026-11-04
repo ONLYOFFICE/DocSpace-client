@@ -74,6 +74,7 @@ import DotsHorizontalReactSvgUrl from "PUBLIC_DIR/images/icons/16/dots-horizonta
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
+import { ENCRYPTED_FILE_WITHHELD } from "@docspace/shared/services/private-room/private-menu-rules";
 
 import { TFileItem, TFolderItem } from "./useItemList";
 import useFolderActions from "./useFolderActions";
@@ -81,6 +82,7 @@ import useFilesActions from "./useFilesActions";
 import useDownloadActions from "./useDownloadActions";
 import useFavoritesActions from "./useFavoritesActions";
 import useSdkCustomContextActions from "./useSdkCustomContextActions";
+import { useEncryptedFileActions } from "../_contexts/EncryptedFileActionsContext";
 
 // Files the AI chat can ingest as an attachment: the document set the chat
 // supports (CHAT_SUPPORTED_FORMATS) plus any image. Gates the "Ask AI" entry.
@@ -168,6 +170,7 @@ export default function useContextMenuModel({
   const { t } = useTranslation(["Common"]);
 
   const filesSelectionStore = useFilesSelectionStore();
+  const insidePrivateRoom = useEncryptedFileActions() !== null;
 
   const { openFolder, copyFolderLink, openLocation } = useFolderActions({ t });
   const { openFile, copyFileLink, lockFile, changeCustomFilter } =
@@ -631,7 +634,9 @@ export default function useContextMenuModel({
   );
 
   const getGroupCopyItem = useCallback(() => {
-    const canCopy = filesSelectionStore.selection.every((i) => i.security.Copy);
+    const canCopy = filesSelectionStore.selection.every(
+      (i) => i.security.Copy || (!i.isFolder && (i as TFileItem).encrypted),
+    );
     return {
       id: "option_copy",
       key: "copy",
@@ -742,11 +747,13 @@ export default function useContextMenuModel({
 
     items.push(getDownloadItem());
 
+    // Spec: private-rooms/sdk-surface, "Mixed and folder downloads refused"
     if (
       filesSelectionStore.selection.some((i) => "fileExst" in i && i.fileExst) &&
       !filesSelectionStore.selection.some(
         (i) => (i as TFileItem).encrypted === true,
-      )
+      ) &&
+      !(insidePrivateRoom && filesSelectionStore.selection.some((i) => i.isFolder))
     ) {
       items.push(getDownloadAsItem());
     }
@@ -772,6 +779,7 @@ export default function useContextMenuModel({
     return items;
   }, [
     filesSelectionStore.selection,
+    insidePrivateRoom,
     getGroupCustomActions,
     getDownloadAsItem,
     getDownloadItem,
@@ -807,11 +815,30 @@ export default function useContextMenuModel({
       const deleteItem =
         deleteIndex >= 0 ? base.splice(deleteIndex, 1)[0] : null;
 
-      const favItem = singleFile.isFavorite
-        ? getRemoveFromFavoritesItem(singleFile)
-        : getMarkAsFavoriteItem(singleFile);
+      // Spec: private-rooms/sdk-surface, "Menu entries withheld for encrypted items".
+      if (singleFile.encrypted) {
+        const offers = (key: AVAILABLE_CONTEXT_ITEMS) =>
+          singleFile.contextOptions.includes(key);
+        const downloadIndex = base.findIndex((i) => i.key === "download");
+        if (downloadIndex >= 0 && !offers(AVAILABLE_CONTEXT_ITEMS.download)) {
+          base.splice(downloadIndex, 1);
+        }
+        if (offers(AVAILABLE_CONTEXT_ITEMS.downloadEncrypted)) {
+          base.splice(
+            base.findIndex((i) => i.key === "download") + 1,
+            0,
+            getDownloadEncryptedItem(singleFile),
+          );
+        }
+      }
 
-      base.push(favItem);
+      if (!(singleFile.encrypted && ENCRYPTED_FILE_WITHHELD.has("favorites"))) {
+        base.push(
+          singleFile.isFavorite
+            ? getRemoveFromFavoritesItem(singleFile)
+            : getMarkAsFavoriteItem(singleFile),
+        );
+      }
 
       if (
         singleFile.contextOptions.includes(
@@ -844,6 +871,7 @@ export default function useContextMenuModel({
     isRoomsFolder,
     getRoomsFolderOptions,
     getGroupContextMenuModel,
+    getDownloadEncryptedItem,
     getMarkAsFavoriteItem,
     getRemoveFromFavoritesItem,
     getRemoveFromRecentItem,

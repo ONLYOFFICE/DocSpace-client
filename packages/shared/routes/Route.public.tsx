@@ -49,6 +49,7 @@ export const PublicRoute = (props: PublicRouteProps) => {
     isAuthenticated,
     tenantStatus,
     isPortalDeactivate,
+    isPortalBlocked,
     children,
   } = props;
 
@@ -66,6 +67,9 @@ export const PublicRoute = (props: PublicRouteProps) => {
     const isEncryptionPortalUrl = location.pathname === "/encryption-portal";
     const isPortalRestoring = tenantStatus === TenantStatus.PortalRestore;
     const isPortalEncryption = tenantStatus === TenantStatus.EncryptionProcess;
+    // Neither a deactivated nor a blocked portal lets anyone in: both go to
+    // the unavailable page instead of the portal root or the login form.
+    const isPortalUnavailable = isPortalDeactivate || isPortalBlocked;
 
     // if (!isLoaded) {
     //   return <AppLoader />;
@@ -80,7 +84,7 @@ export const PublicRoute = (props: PublicRouteProps) => {
     }
 
     if (
-      (isAuthenticated && !isPortalRestoring && !isPortalDeactivate) ||
+      (isAuthenticated && !isPortalRestoring && !isPortalUnavailable) ||
       (!location?.state?.isRestrictionError && isPortalRestriction)
     ) {
       return <Navigate replace to="/" />;
@@ -107,7 +111,7 @@ export const PublicRoute = (props: PublicRouteProps) => {
       );
     }
 
-    if (isAuthenticated && isPortalDeactivate && !isDeactivationPortalUrl) {
+    if (isAuthenticated && isPortalUnavailable && !isDeactivationPortalUrl) {
       return (
         <Navigate
           replace
@@ -141,7 +145,7 @@ export const PublicRoute = (props: PublicRouteProps) => {
     }
     if (
       !isAuthenticated &&
-      isPortalDeactivate &&
+      isPortalUnavailable &&
       wizardCompleted &&
       !isDeactivationPortalUrl
     ) {
@@ -157,8 +161,7 @@ export const PublicRoute = (props: PublicRouteProps) => {
       wizardCompleted &&
       !isAuthenticated &&
       !isPortalRestoring &&
-      !isPortalDeactivate &&
-      !isPortalDeactivate &&
+      !isPortalUnavailable &&
       !isPortalEncryption
     ) {
       window.location.replace(

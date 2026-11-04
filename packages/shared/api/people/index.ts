@@ -200,10 +200,15 @@ export function getUserFromConfirm(userId, confirmKey = null) {
 }
 
 export function getUserPhoto(userId) {
-  return request({
-    method: "get",
-    url: `/people/${userId}/photo`,
-  });
+  const skipRedirect = true;
+
+  return request(
+    {
+      method: "get",
+      url: `/people/${userId}/photo`,
+    },
+    skipRedirect,
+  );
 }
 
 export async function startEmptyPersonal() {
@@ -369,11 +374,16 @@ export function changeProductAdmin(userId, productId, administrator) {
   });
 }
 
-export async function getUserById(userId: string, signal?: AbortSignal) {
+export async function getUserById(
+  userId: string,
+  signal?: AbortSignal,
+  options?: Pick<TReqOption, "skipForbidden">,
+) {
   const res = (await request({
     method: "get",
     url: `/people/${userId}`,
     signal,
+    ...options,
   })) as TUser;
 
   res.displayName = Encoder.htmlDecode(res.displayName);

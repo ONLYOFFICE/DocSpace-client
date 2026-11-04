@@ -37,7 +37,9 @@ import React from "react";
 import axios from "axios";
 import { useNavigate, useLocation, useParams } from "react-router";
 
+import { getFolder } from "@docspace/shared/api/files";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { getMetadataTemplates } from "@docspace/shared/api/metadata";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import {
   CREATED_FORM_KEY,
@@ -59,6 +61,12 @@ import {
 import type { ValueOf } from "@docspace/shared/types";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getSectionTrashUrl } from "SRC_DIR/helpers/articleNavigation";
+import {
+  applyMetadataFilter,
+  getMetadataFilterState,
+  pruneMetadataFilter,
+} from "SRC_DIR/pages/Home/Section/Filter/MetadataFilter/utils";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
@@ -66,10 +74,34 @@ import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 
+const SHARED_ROOMS_PREFIX = "/rooms/shared/";
+const AI_ROOMS_PREFIX = "/ai-rooms/";
+
+const dropDeletedMetadata = async (
+  filter: FilesFilter | RoomsFilter,
+  checked: React.RefObject<string>,
+) => {
+  const state = getMetadataFilterState(filter);
+  if (!state) return false;
+
+  const key = JSON.stringify(state);
+  if (key === checked.current) return false;
+
+  const templates = await getMetadataTemplates().catch(() => null);
+  if (!templates) return false;
+
+  const pruned = pruneMetadataFilter(state, templates);
+  checked.current = JSON.stringify(pruned);
+
+  if (checked.current === key) return false;
+
+  applyMetadataFilter(filter, pruned);
+  return true;
+};
+
 export type UseFilesProps = {
   fetchFiles: FilesStore["fetchFiles"];
   fetchRooms: FilesStore["fetchRooms"];
-  fetchAgents: FilesStore["fetchAgents"];
   getFileInfo: FilesStore["getFileInfo"];
   setIsPreview: FilesStore["setIsPreview"];
   setIsUpdatingRowItem: FilesStore["setIsUpdatingRowItem"];
@@ -91,7 +123,6 @@ export type UseFilesProps = {
 const useFiles = ({
   fetchFiles,
   fetchRooms,
-  fetchAgents,
   getFileInfo,
   setIsPreview,
   setIsUpdatingRowItem,
@@ -111,6 +142,7 @@ const useFiles = ({
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
+  const checkedMetadata = React.useRef("");
 
   const fetchDefaultFiles = (categoryType: ValueOf<typeof CategoryType>) => {
     const filter = FilesFilter.getDefault({
@@ -137,6 +169,7 @@ const useFiles = ({
         break;
 
       case CategoryType.Archive:
+      case CategoryType.PrivateArchive:
         searchArea = RoomSearchArea.Archive;
         break;
 
@@ -150,14 +183,13 @@ const useFiles = ({
     navigate(`${url}?${filter.toUrlParams()}`);
   };
 
-  const fetchDefaultAgents = () => {
-    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents);
+  // The "AI rooms" list (searchArea=AiHub).
+  const fetchDefaultAiSection = (categoryType: number) => {
+    const searchArea = RoomSearchArea.AiHub;
+    const filter = RoomsFilter.getDefault(userId, searchArea);
+    filter.searchArea = searchArea;
 
-    const categoryType = getCategoryType(location) as number;
-
-    const url = getCategoryUrl(categoryType);
-
-    navigate(`${url}?${filter.toUrlParams()}`);
+    navigate(`${getCategoryUrl(categoryType)}?${filter.toUrlParams()}`);
   };
 
   const fetchDefaultForms = () => {
@@ -223,18 +255,10 @@ const useFiles = ({
     }
 
     const isRoomFolder = getObjectByLocation(location)?.folder;
-    const isAIAgents = categoryType === CategoryType.AIAgents;
     const isForms = categoryType === CategoryType.Forms;
+    const isAiSection = categoryType === CategoryType.AiHub;
 
-    if (isAIAgents) {
-      filterObj = RoomsFilter.getFilter(window.location);
-
-      if (!filterObj) {
-        fetchDefaultAgents();
-
-        return;
-      }
-    } else if (isForms && !isRoomFolder) {
+    if (isForms && !isRoomFolder) {
       filterObj = RoomsFilter.getFilter(window.location);
 
       isRooms = true;
@@ -244,11 +268,24 @@ const useFiles = ({
 
         return;
       }
+    } else if (isAiSection && !isRoomFolder) {
+      filterObj = RoomsFilter.getFilter(window.location);
+
+      isRooms = true;
+
+      if (!filterObj) {
+        fetchDefaultAiSection(categoryType as number);
+
+        return;
+      }
     } else if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
         categoryType == CategoryType.Form ||
-        categoryType == CategoryType.Archive) &&
+        categoryType == CategoryType.Archive ||
+        categoryType == CategoryType.PrivateRooms ||
+        categoryType == CategoryType.PrivateRoom ||
+        categoryType == CategoryType.PrivateArchive) &&
       !isRoomFolder
     ) {
       filterObj = RoomsFilter.getFilter(window.location);
@@ -267,6 +304,23 @@ const useFiles = ({
         fetchDefaultFiles(categoryType);
 
         return;
+      }
+
+      if (categoryType === CategoryType.Trash && !filterObj.folderType) {
+        try {
+          const { current } = await getFolder(
+            "@trash",
+            FilesFilter.getDefault({ pageCount: 1 }),
+          );
+
+          navigate(getSectionTrashUrl(current.id, location.pathname), {
+            replace: true,
+          });
+
+          return;
+        } catch (e) {
+          console.error(e);
+        }
       }
     }
 
@@ -321,11 +375,25 @@ const useFiles = ({
     const { filter } = dataObj;
     let newFilter = filter
       ? filter.clone()
-      : isAIAgents
-        ? RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents)
-        : isRooms
-          ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
-          : FilesFilter.getDefault({ categoryType });
+      : isRooms
+        ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
+        : FilesFilter.getDefault({ categoryType });
+
+    const href = window.location.href;
+    const isPruned = await dropDeletedMetadata(newFilter, checkedMetadata);
+
+    if (window.location.href !== href) return;
+
+    if (isPruned) {
+      const params =
+        newFilter instanceof RoomsFilter
+          ? newFilter.toUrlParams(userId)
+          : newFilter.toUrlParams();
+
+      navigate(`${location.pathname}?${params}`, { replace: true });
+      return;
+    }
+
     const requests = [Promise.resolve(newFilter)];
 
     await axios
@@ -345,9 +413,6 @@ const useFiles = ({
         newFilter = data[0];
 
         if (newFilter) {
-          if (isAIAgents) {
-            return fetchAgents(null, newFilter as RoomsFilter, false, false);
-          }
           if (isRooms) {
             return fetchRooms(
               null,
@@ -372,6 +437,23 @@ const useFiles = ({
         return Promise.resolve();
       })
       .then(() => {
+        // An AI room opened under `/rooms/shared/{id}` - where an accepted
+        // invitation link lands, since the confirm page cannot tell the room
+        // type - moves to its own section, so the back button and the
+        // sidebar lead to AI rooms rather than Rooms.
+        if (
+          categoryType === CategoryType.SharedRoom &&
+          selectedFolderStore.rootFolderType === FolderType.AiHub &&
+          window.location.pathname === location.pathname &&
+          location.pathname.startsWith(SHARED_ROOMS_PREFIX)
+        ) {
+          navigate(
+            `${AI_ROOMS_PREFIX}${location.pathname.slice(SHARED_ROOMS_PREFIX.length)}${location.search}`,
+            { replace: true },
+          );
+          return;
+        }
+
         if (gallerySelected && !isVisibleInfoPanelTemplateGallery) {
           setIsUpdatingRowItem(false);
 
@@ -402,7 +484,6 @@ const useFiles = ({
     location.search,
     fetchFiles,
     fetchRooms,
-    fetchAgents,
     getFileInfo,
     setIsPreview,
     setIsUpdatingRowItem,

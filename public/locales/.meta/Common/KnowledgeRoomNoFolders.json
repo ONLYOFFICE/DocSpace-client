@@ -1,0 +1,29 @@
+{
+  "key_path": "KnowledgeRoomNoFolders",
+  "content": "Folders cannot be added to a Knowledge room: it holds files only.",
+  "content_en_sha1_hash": "6f116719d02ec8e841036be5871c3d2ab555512f",
+  "created_at": "2026-10-31T12:57:30.362Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Error toast when a folder is dropped or uploaded into a Knowledge room, which holds files only.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/filesActionsStore/selection.helpers.ts",
+      "line_number": 228,
+      "context": ");\n if (bringsFolder) {\n throw new Error(\n isInstructions\n ? t(\"Common:InstructionsRoomNoFolders\")\n : t(\"Common:KnowledgeRoomNoFolders\"),\n );\n }\n if (isInstructions && withoutHiddenFiles.some((f) => !f.name.toLowerCase().endsWith(\".md\"))) {\n throw new Error(t(\"Common:InstructionsRoomMarkdownOnly\"));\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

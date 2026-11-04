@@ -55,12 +55,19 @@ export const buildSuccess = {
   ok: true,
 };
 
-export const buildResolver = () => {
-  return new Response(JSON.stringify(buildSuccess));
+export type BuildOverrides = Partial<{ aiTools: string }>;
+
+export const buildResolver = (overrides?: BuildOverrides) => {
+  return new Response(
+    JSON.stringify({
+      ...buildSuccess,
+      response: { ...buildSuccess.response, ...overrides },
+    }),
+  );
 };
 
-export const buildHandler = (port: string) => {
+export const buildHandler = (port: string, overrides?: BuildOverrides) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_BUILD}`, () => {
-    return buildResolver();
+    return buildResolver(overrides);
   });
 };

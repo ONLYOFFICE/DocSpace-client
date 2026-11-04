@@ -46,21 +46,11 @@ import {
 import { SectionBodyContent } from "../../../pages/VersionHistory/Section";
 
 class PureVersionHistoryPanel extends React.Component {
-  componentDidMount() {
-    document.addEventListener("keyup", this.onKeyPress);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keyup", this.onKeyPress);
-  }
-
   onClose = () => {
     const { setIsVerHistoryPanel, setInfoPanelIsMobileHidden } = this.props;
     setIsVerHistoryPanel(false);
     setInfoPanelIsMobileHidden(false);
   };
-
-  onKeyPress = (e) => (e.key === "Esc" || e.key === "Escape") && this.onClose();
 
   render() {
     const { visible, isLoading, versions, fileTitle, showProgressBar } =

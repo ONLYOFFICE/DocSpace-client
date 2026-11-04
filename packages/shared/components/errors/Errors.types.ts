@@ -38,7 +38,10 @@ import type FirebaseHelper from "../../utils/firebase";
 import type { TColorScheme } from "@onlyoffice/apps-ui-kit/providers/theme";
 import type { DeviceType } from "../../enums";
 
-export type ErrorUnavailableProps = Record<string, never>;
+export type ErrorUnavailableProps = {
+	/** The portal is blocked by the retention policy rather than deactivated by its owner */
+	isPortalBlocked?: boolean;
+};
 
 export type Error520Props = {
 	/** Error object containing details about the error that occurred */

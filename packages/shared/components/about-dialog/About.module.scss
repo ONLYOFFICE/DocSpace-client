@@ -58,74 +58,79 @@
   width: 100%;
   user-select: text;
 
-  .avatar {
-    margin-top: 0;
-    margin-bottom: 16px;
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    margin-bottom: 20px;
 
     @include mixins.tablet-and-below {
       margin-top: 32px;
     }
+
+    // The legal line (Terms | Privacy, or the server license) gets a row of
+    // its own under the logo rather than wrapping wherever it runs out.
+    @include mixins.mobile {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 
-  .rowEl {
-    display: inline-block;
+  .license {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 64px;
+    margin-bottom: 32px;
+
+    // One product per row: Docs, Apps, then AI Tools when it is deployed.
+    @include mixins.mobile {
+      flex-direction: column;
+    }
+  }
+
+  .product {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .productName {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 20px;
+  }
+
+  .separator {
+    padding: 0 4px;
+  }
+
+  .version,
+  .phone {
+    direction: ltr;
+    unicode-bidi: embed;
   }
 
   .copyright {
-    margin-top: 14px;
     margin-bottom: 4px;
-    font-weight: 700;
-  }
-
-  .noSelect {
-    @include mixins.no-user-select;
   }
 
   .row {
     line-height: 20px;
   }
 
-  .telTitle,
-  .addressTitle {
-    display: inline;
-  }
-
-  .selectEl {
-    @include mixins.tablet-and-below {
-      user-select: text;
-    }
-  }
-
-  .telTitle.selectEl {
-    direction: ltr;
-  }
-
-  .programWithVersion {
-    display: inline;
-    direction: ltr;
-  }
-
-  :global(.logo-theme) {
-    svg {
-      g:nth-child(2) {
-        path:nth-child(5) {
-          fill: var(--about-logo-color);
-        }
-
-        path:nth-child(6) {
-          fill: var(--about-logo-color);
-        }
-      }
-    }
+  .noSelect {
+    @include mixins.no-user-select;
   }
 
   .logoDocspaceTheme {
     height: 24px;
-
-    svg {
-      path:nth-child(4) {
-        fill: var(--about-logo-color);
-      }
-    }
   }
 }

@@ -342,7 +342,9 @@ const PortalRenamingComponent = (props) => {
           id="textInputContainerPortalRenaming"
           name="portal_name"
           scale
-          value={portalName}
+          // The store holds null until the effect above sets the name; a
+          // controlled input needs a string from its first render.
+          value={portalName ?? ""}
           testId="customization_portal_renaming_text_input"
           onChange={onChangePortalName}
           isDisabled={

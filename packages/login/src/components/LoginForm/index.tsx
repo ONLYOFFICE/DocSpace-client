@@ -66,6 +66,7 @@ import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { LoginFormProps } from "@/types";
+import { useReturnWhenLoggedInElsewhere } from "@/hooks/useReturnWhenLoggedInElsewhere";
 import {
   getAvailablePortals,
   getEmailFromInvitation,
@@ -115,6 +116,11 @@ const LoginForm = ({
   const linkData = searchParams?.get("linkData");
   const isPublicAuth = searchParams?.get("publicAuth");
   const passwordChanged = searchParams?.get("passwordChanged");
+
+  // An OAuth consent or a public-room popup has its own way out of the form.
+  // Off while the form logs in: it takes the user on itself, and a check
+  // answering in the meantime would send them to the root instead.
+  useReturnWhenLoggedInElsewhere(!clientId && !isPublicAuth && !isLoading);
 
   const isDesktop =
     typeof window !== "undefined" && window.AscDesktopEditor !== undefined;

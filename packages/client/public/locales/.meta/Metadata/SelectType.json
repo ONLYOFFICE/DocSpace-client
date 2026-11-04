@@ -1,0 +1,29 @@
+{
+  "key_path": "SelectType",
+  "content": "Select type",
+  "content_en_sha1_hash": "905d012288daea2be717442025afc148200da865",
+  "created_at": "2026-10-21T10:17:41.290Z",
+  "updated_at": "2026-10-21T10:20:42.121Z",
+  "comment": {
+    "text": "Placeholder of the field type selector in the metadata template field editor.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/FieldForm.tsx",
+      "line_number": 80,
+      "context": "label: getFieldTypeLabel(t, type),\n }));\n \n const selectedType = typeOptions.find(\n (option) => option.key === String(value.type),\n ) ?? { key: \"\", label: t(\"Metadata:SelectType\") };\n \n return (\n <div className={classNames(styles.form, styles.fieldForm)}>\n <FieldContainer\n labelVisible",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

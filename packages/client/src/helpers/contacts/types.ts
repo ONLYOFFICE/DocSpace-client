@@ -33,7 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TUser, TUserGroup } from "@docspace/shared/api/people/types";
+import {
+  TUser,
+  TUserGroup,
+  TUserServiceLimit,
+} from "@docspace/shared/api/people/types";
 import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
 import { TCreatedBy } from "@docspace/shared/types";
 
@@ -83,6 +87,7 @@ export type TPeopleListItem = {
   isLDAP: boolean;
   quotaLimit: number | undefined;
   usedSpace: number | undefined;
+  aiServicesLimit: TUserServiceLimit | null | undefined;
   isCustomQuota: boolean | string | undefined;
   createdBy: TCreatedBy | undefined;
   registrationDate: string | undefined;

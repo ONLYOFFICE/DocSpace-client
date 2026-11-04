@@ -34,6 +34,7 @@
  */
 
 import type { TCreatedBy } from "@docspace/shared/types";
+import type { TModuleEvents } from "./react/socket";
 import type {
   TFile,
   TFileSecurity,
@@ -181,6 +182,12 @@ export interface IArticleNavigationItemClient
   extends Omit<IArticleNavigationItem, "component"> {
   pluginName: string;
   /**
+   * Counter shown on the sidebar entry (for example, unread items); nothing is shown for
+   * 0, an empty string or no value. Not in the SDK typings yet: a plugin sets it on its item
+   * and calls `updateArticleNavigationItems` to redraw.
+   */
+  badge?: number | string;
+  /**
    * React section, optional on the client side: plugins built against the
    * pre-React SDK describe their section with the IBox fields below.
    */
@@ -230,6 +237,11 @@ export type TPluginError =
 
 export type TPlugin = {
   name: string;
+  /**
+   * Receives the portal's socket for integration-module events, bound to this plugin. Not in the SDK typings
+   * yet; a portal without the feature never calls it, which is how a plugin detects it.
+   */
+  setModuleEvents?: (events: TModuleEvents) => void;
   nameLocaleMap?: { [key: string]: string };
   version: string;
   minDocSpaceVersion?: string;

@@ -72,6 +72,7 @@ export const mockDefaultProps = {
   companyInfoSettingsData: mockCompanyInfo,
   standalone: false,
   licenseAgreementsUrl: "https://www.example.com/license-agreements",
-  isEnterprise: true,
+  privacyPolicyUrl: "https://www.example.com/privacy",
+  isEnterprise: false,
   logoText: "Company Name",
 };

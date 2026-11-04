@@ -34,7 +34,12 @@
  */
 
 import React, { useEffect, useMemo, useCallback, useState } from "react";
-import { Outlet, useLocation, useNavigate, useSearchParams } from "react-router";
+import {
+  Outlet,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
@@ -57,28 +62,28 @@ import {
   PORTAL_DARK_THEME_ID,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import { getAiAccessSettings } from "@docspace/shared/api/settings";
+import { setForbiddenHandler } from "@docspace/shared/api/client";
 import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { SnackBar } from "@onlyoffice/apps-ui-kit/components/snackbar";
-import { Toast, toastr, ToastType } from "@onlyoffice/apps-ui-kit/components/toast";
+import {
+  Toast,
+  toastr,
+  ToastType,
+} from "@onlyoffice/apps-ui-kit/components/toast";
 import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { getCookie, deleteCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 
 import {
   getFrameInitialTheme,
+  isPrivateRoomsRoute,
   updateTempContent,
 } from "@docspace/shared/utils/common";
 import {
   AnalyticsEvents,
   DeviceType,
-  FolderType,
   IndexedDBStores,
-  InfoPanelEvents,
-  SearchArea,
 } from "@docspace/shared/enums";
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { editAIAgent } from "@docspace/shared/api/ai";
-import { CategoryType } from "@docspace/shared/constants";
 
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
@@ -87,18 +92,20 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { handleCopy } from "@docspace/shared/utils/copy";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import {
+  getServiceLimitChatError,
+  getServiceLimitDescription,
+} from "@docspace/shared/utils/ai";
 
 import "@docspace/shared/styles/theme.scss";
 
 import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
-import { getAiContextRoom } from "SRC_DIR/helpers/aiContextRoom";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import AiPresetsBridge from "SRC_DIR/components/AiPresetsBridge";
+import ProjectIntro from "SRC_DIR/pages/AiProjects/sub-components/project/ProjectIntro";
+import { useAiPresetsPickerActions } from "SRC_DIR/Hooks/useAiPresetsPickerActions";
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
-import { setFileView } from "SRC_DIR/helpers/info-panel";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
-import { ModelUpdatedBanner } from "SRC_DIR/pages/Home/View/ModelUpdatedBanner";
-import { useAiAgentsPickerActions } from "SRC_DIR/Hooks/useAiAgentsPickerActions";
 
 import config from "PACKAGE_FILE";
 
@@ -111,13 +118,23 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import { AskAIChatBridge } from "./components/AskAIChatBridge";
+import { AiChatVisibilityBridge } from "./components/AiChatVisibilityBridge";
 import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
 
+// Stable empty list, so the chat provider's memo is not re-run each render.
+const NO_SUGGESTIONS = [];
+
+// How long a denied request's caller has to show its own error toast before
+// the generic "Access denied" one is shown in its place.
+const FORBIDDEN_TOAST_DELAY = 500;
+
 const Shell = ({ page = "home", ...rest }) => {
   const {
+    checkUserTypeLowered,
+    refreshRightsAfterForbidden,
     isLoaded,
     isAuthenticated,
     loadBaseInfo,
@@ -158,12 +175,7 @@ const Shell = ({ page = "home", ...rest }) => {
     setAiServicesEnabled,
     fetchWalletBalance,
     setWalletLowBalance,
-    agentEntityId,
-    isInsideAgentRoom,
-    canEditAgentRoom,
-    getAgentRoomId,
-    openResultFile,
-    closeEditorPanel,
+    chatScopeEntityId,
     currentClientView,
     selectedFolderType,
     selectedRoomType,
@@ -175,7 +187,13 @@ const Shell = ({ page = "home", ...rest }) => {
     isFormsFolderRoot,
     isFormRoomRoot,
     isAIReady,
-    aiContextRoom,
+    aiPresetContextRooms,
+    aiPresets,
+    requestPresetApply,
+    fetchAiPresets,
+    isAiProjectOpen,
+    aiActiveProject,
+    openEditAiProject,
   } = rest;
 
   const [searchParams] = useSearchParams();
@@ -234,6 +252,11 @@ const Shell = ({ page = "home", ...rest }) => {
     ],
   );
 
+  // Inside an AI project (its room is the selected folder of the AI Rooms
+  // section) the chat is the project's: its model is fixed and the welcome
+  // chips are the project's own rather than the section's.
+  const isInsideAiProject =
+    isAiProjectOpen && location.pathname.startsWith("/ai-rooms/");
   useCreateFileError({
     setPortalTariff,
     setFormCreationInfo,
@@ -251,6 +274,51 @@ const Shell = ({ page = "home", ...rest }) => {
       toastr.error(err);
     }
   }, []);
+
+  // A denied request in a room section is only reported: navigating away
+  // threw every open room tab back to the default page. A burst of denied
+  // requests is handled once: it checks whether the user's type or room role
+  // was lowered while the tab missed the socket event, and gets one toast.
+  //
+  // That toast waits a moment, because the request is still rejected to its
+  // caller, and a caller that reports errors shows a toast of its own; a
+  // second "Access denied" next to it would only be noise.
+  useEffect(() => {
+    let toastId = null;
+    let pendingTimer = null;
+    let callerReported = false;
+
+    const unsubscribe = toastify.onChange((payload) => {
+      if (
+        pendingTimer !== null &&
+        payload.status === "added" &&
+        payload.type === ToastType.error
+      ) {
+        callerReported = true;
+      }
+    });
+
+    setForbiddenHandler(() => {
+      if (pendingTimer !== null) return;
+      if (toastId !== null && toastr.isActive(toastId)) return;
+
+      checkUserTypeLowered();
+      refreshRightsAfterForbidden();
+
+      callerReported = false;
+      pendingTimer = setTimeout(() => {
+        pendingTimer = null;
+
+        if (!callerReported) toastId = toastr.error(t("Common:AccessDenied"));
+      }, FORBIDDEN_TOAST_DELAY);
+    });
+
+    return () => {
+      setForbiddenHandler(null);
+      unsubscribe();
+      if (pendingTimer !== null) clearTimeout(pendingTimer);
+    };
+  }, [t, checkUserTypeLowered, refreshRightsAfterForbidden]);
 
   // Locale is handled by Luxon date utilities - no global locale setup needed
 
@@ -402,7 +470,10 @@ const Shell = ({ page = "home", ...rest }) => {
       fetchTreeFolders?.();
     };
 
-    SocketHelper?.on(SocketEvents.ChangeAiAccessSettings, handleAiAccessChanged);
+    SocketHelper?.on(
+      SocketEvents.ChangeAiAccessSettings,
+      handleAiAccessChanged,
+    );
 
     return () => {
       SocketHelper?.off(
@@ -739,23 +810,21 @@ const Shell = ({ page = "home", ...rest }) => {
   // host and handed to AiAgentProviders, which shares it with descendants
   // (Home page, section header) via context / `useIsAiChatAvailable()`. The
   // chat is offered only on file/room/document views — never on contacts,
-  // profile, settings, the embedded chat view, or the Knowledge /
-  // ResultStorage system folders.
+  // profile, settings or the embedded chat view.
   const isSettingsPage =
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
   const isAiChatAvailable =
     aiServicesEnabled &&
+    !isSettingsPage &&
     currentClientView !== "users" &&
     currentClientView !== "groups" &&
     currentClientView !== "profile" &&
     currentClientView !== "chat" &&
-    !isSettingsPage &&
     !isPrivacyFolder &&
-    selectedFolderType !== FolderType.Knowledge &&
-    selectedFolderType !== FolderType.ResultStorage &&
-    selectedRootFolderType !== FolderType.AIAgents;
+    // Spec: private-rooms/sidebar-section, "No AI chat in the section"
+    !isPrivateRoomsRoute(location.pathname);
 
   // The Forms section takes a single attachment: a question there is about one
   // form and the responses collected in it, and two forms in one message
@@ -801,12 +870,6 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const composerHeader = useMemo(() => <AIActivationBanner />, []);
 
-  // Agent picked in the model picker (or restored from an opened thread's
-  // persisted context): the picker shows the agent's name while its profile
-  // drives every request, and sends carry the agent's room as the request
-  // context — the conversation itself stays in the current location.
-  const [pickedAgent, setPickedAgent] = useState(null);
-
   // Anonymous sessions (public room / public preview via a share link) and
   // guests must never issue AI calls: they answer 401, and the shared axios
   // client reacts to a 401 with logout + redirect to the login page, killing
@@ -817,86 +880,101 @@ const Shell = ({ page = "home", ...rest }) => {
   const canUseAi =
     isAuthenticated && !isGuest && !isNotPaidPeriod && aiServicesEnabled;
 
-  // "Choose AI Agent" entry (with the agents submenu) for the model picker;
-  // empty until agents are loaded and unless there is more than one of them.
-  const { actions: profilePickerActions, getAgentByRoomId } =
-    useAiAgentsPickerActions(
-      isLoaded && isAiChatAvailable && canUseAi,
-      setPickedAgent,
-    );
+  // Whether the side chat panel is open — reported from inside the providers
+  // by AiChatVisibilityBridge, since the panel store lives there.
+  const [isChatPanelVisible, setIsChatPanelVisible] = useState(false);
 
-  // Re-derive the picked agent from the opened thread's persisted context:
-  // agent threads restore their agent (alias + request context), plain
-  // threads drop it. An agent missing from the loaded list still restores
-  // the request context — only the picker alias is skipped.
-  const onThreadContextChange = useCallback(
-    (contextEntityId) => {
-      if (!contextEntityId) {
-        setPickedAgent(null);
-        return;
-      }
-      setPickedAgent(
-        getAgentByRoomId(contextEntityId) ?? { entityId: contextEntityId },
-      );
+  // While the side chat panel is closed the providers only remember the
+  // scope (entityId): entering a folder must not cost AI requests — they
+  // wait for the chat to open.
+  const isChatOpen = isChatPanelVisible;
+
+  // "Choose AI Project" entry for the model picker: the user's AI projects,
+  // applied to the open chat by AiPresetsBridge (the chat stores live below
+  // AiAgentProviders). A project that is gone by now is only reported.
+  const onProjectPick = useCallback(
+    (preset) => {
+      void requestPresetApply(preset).then((applied) => {
+        if (!applied) toastr.info(t("Common:AIProjectNotAvailable"));
+      });
     },
-    [getAgentByRoomId],
+    [requestPresetApply, t],
+  );
+  const profilePickerActions = useAiPresetsPickerActions(
+    aiPresets,
+    onProjectPick,
   );
 
-  // Picking a plain profile row returns the chat to the current-location
-  // scope; entering an AI agent room does the same — there the room itself
-  // fixes the entity.
-  //
-  // Inside an AI agent room the picker is an editable combo for users who may
-  // edit the room. A pick there must persist for that specific agent, not
-  // just the session: the chat lib keeps entity-scoped picks session-local
-  // (never hits the API), so the host rebinds the agent's Chat-action profile
-  // via PUT /ai/agents/:id — the exact path the Edit-agent dialog uses. A
-  // pick always carries `actionId === undefined` here (agent-picker actions
-  // are suppressed in agent rooms), so no extra guard is needed.
-  const onProfilePickerSelect = useCallback(
-    (profile, actionId) => {
-      if (!actionId) setPickedAgent(null);
+  // The chat's own scope is only ever an AI project: the AI service
+  // recognises the project by this id and takes the round's model and
+  // linked rooms from the project itself (`ai/projects/{id}/chat-context`).
+  // Threads are global per user, so no other location scopes the chat.
+  const chatEntityId =
+    isInsideAiProject && aiActiveProject ? String(aiActiveProject.id) : undefined;
 
-      if (isInsideAgentRoom && !actionId && profile?.id && agentEntityId) {
-        editAIAgent(Number(agentEntityId), { profileId: profile.id }).catch(
-          (err) => toastr.error(err),
-        );
-      }
-    },
-    [isInsideAgentRoom, agentEntityId],
-  );
-
-  useEffect(() => {
-    if (isInsideAgentRoom) setPickedAgent(null);
-  }, [isInsideAgentRoom]);
-
-  // Talking to a picked agent keeps the conversation where the user is:
-  // history and uploads stay under the current location's entity, and only
-  // the request context (agent tools, workspace steering, profile fallback)
-  // targets the agent's room via contextEntityId.
-  const chatContextEntityId =
-    !isInsideAgentRoom && pickedAgent ? pickedAgent.entityId : undefined;
-
-  const chatPickerAlias = useMemo(
-    () =>
-      !isInsideAgentRoom && pickedAgent?.profileId && pickedAgent?.title
-        ? { profileId: pickedAgent.profileId, label: pickedAgent.title }
-        : null,
-    [isInsideAgentRoom, pickedAgent],
-  );
+  // The location the rounds work in: the folder or room the chat is opened
+  // in (the AI service's location line, generated files and uploads follow
+  // it). An open project is no location: a project room holds no files, and
+  // inside it the context is the folder picked in the project, else My
+  // documents, both resolved by the AI service itself.
+  const chatContextEntityId = isInsideAiProject ? undefined : chatScopeEntityId;
 
   // Chat error box override (Bug 83207): the wallet 402 must read as a
   // human message with a way to top up instead of the raw provider text.
   // Only the Payer can actually top the wallet up, so the button to
   // Billing -> Wallet is theirs alone; everyone else is pointed to the Payer
   // (`action: null` also drops the default Retry, which would just fail
-  // again on an empty wallet). Every other code keeps the library default
-  // (localized text + Retry).
+  // again on an empty wallet). A spending limit reached (relayed as a 403, see
+  // getServiceLimitChatError) is handled the same way: admins get a button to
+  // AI settings -> Limits, everyone else is pointed to an admin. Every other
+  // code keeps the library default (localized text + Retry).
   const formatChatError = useCallback(
     (payload) => {
-      // Standalone pays its AI provider directly: no wallet, nothing to top up,
-      // so the library default (localized text + Retry) stands.
-      if (payload?.code !== "insufficient_funds" || standalone) return null;
+      // The project's model is gone or cannot chat (409 from the AI
+      // service): the round is refused until someone changes the model.
+      // Owner and managers get the Edit project action, members are told
+      // to ask one of them.
+      if (payload?.code === "projectModelUnavailable") {
+        const canEdit = !!aiActiveProject?.security?.EditRoom;
+        return {
+          title: t("Common:AIProjectModelUnavailableTitle"),
+          description: canEdit
+            ? t("Common:AIProjectModelUnavailableManager")
+            : t("Common:AIProjectModelUnavailableMember"),
+          action:
+            canEdit && aiActiveProject
+              ? {
+                  text: t("Common:AIProjectEdit"),
+                  onClick: () => openEditAiProject(aiActiveProject),
+                }
+              : null,
+        };
+      }
+
+      // Standalone pays its AI provider directly: no wallet and no spending
+      // limits, so the library default (localized text + Retry) stands.
+      if (standalone) return null;
+
+      const serviceLimit = getServiceLimitChatError(payload);
+      if (serviceLimit) {
+        return {
+          title: t("Common:AILimitReached"),
+          description: getServiceLimitDescription(
+            t,
+            language,
+            serviceLimit,
+            isAdmin,
+          ),
+          action: isAdmin
+            ? {
+                text: t("Common:ChangeAILimit"),
+                onClick: () => navigate("/portal-settings/ai-settings/limits"),
+              }
+            : null,
+        };
+      }
+
+      if (payload?.code !== "insufficient_funds") return null;
 
       return {
         title: t("Common:WalletBalanceTooLow"),
@@ -911,8 +989,13 @@ const Shell = ({ page = "home", ...rest }) => {
           : null,
       };
     },
-    [t, isPayer, navigate, standalone],
+    [t, isAdmin, isPayer, navigate, standalone, language, aiActiveProject, openEditAiProject],
   );
+
+  // Inside a project whose model is unavailable nothing can be sent until
+  // the model is changed; the intro says so and offers the change.
+  const isProjectModelUnavailable =
+    isInsideAiProject && aiActiveProject?.aiProject.profile?.available === false;
 
   // AI chat host callbacks. Web Search settings save on an explicit button
   // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.
@@ -959,49 +1042,50 @@ const Shell = ({ page = "home", ...rest }) => {
           // hold a chat-capable room role (`UseChat` needs RoomManager /
           // ContentCreator), so excluding the type is exact. Providers stay
           // mounted for useStores() consumers; only hydration and the chat
-          // UI are switched off. Viewer-role gating inside agent rooms is
-          // handled by `accessRightsStore.canUseChat` in AIAgentView.
+          // UI are switched off.
           canUseAi={canUseAi}
           callbacks={aiChatCallbacks}
-          entityId={agentEntityId}
+          entityId={chatEntityId}
           contextEntityId={chatContextEntityId}
           // The picker area is always present (an explicit `false` also
           // overrides the lib's entityId default-hide heuristic — the chat
-          // is always entity-scoped here). Inside an AI agent room the
-          // room's assigned profile drives the chat: users without the
-          // EditRoom right see it as a read-only label, managers get an
-          // interactive picker to change it. `isAgentRoom` keeps the
-          // room-assignment-wins reset on scope switches even though the
-          // picker is no longer hidden there.
+          // is always entity-scoped here). Inside an AI project the model
+          // is fixed by the project, so the picker is a read-only label.
           formatChatError={formatChatError}
           hideProfilePicker={false}
-          profilePickerReadOnly={isInsideAgentRoom && !canEditAgentRoom}
-          isAgentRoom={isInsideAgentRoom}
-          profilePickerActions={
-            isInsideAgentRoom ? undefined : profilePickerActions
-          }
-          profilePickerAlias={chatPickerAlias}
-          onProfilePickerSelect={onProfilePickerSelect}
-          onThreadContextChange={onThreadContextChange}
-          getAgentRoomId={getAgentRoomId}
-          openResultFile={openResultFile}
-          closeEditorPanel={closeEditorPanel}
+          profilePickerReadOnly={isInsideAiProject}
+          isChatOpen={isChatOpen}
+          profilePickerActions={profilePickerActions}
+          // The picker opens on the current project list: one created,
+          // renamed or left elsewhere meanwhile is picked up.
+          onProfilePickerOpen={fetchAiPresets}
           composerHeader={standalone ? undefined : composerHeader}
-          composerDisabled={standalone ? undefined : !isAIReady}
-          suggestions={aiSuggestions}
-          // The room the user is in, connected as chat context (with the
-          // skills of its .ai folder) when the chat opens — see
-          // ContextRoomSync in ui-kit.
-          contextRoom={canUseAi ? aiContextRoom : undefined}
+          composerDisabled={
+            isProjectModelUnavailable || (standalone ? undefined : !isAIReady)
+          }
+          // A chat opened from an AI preset or inside a project starts with
+          // no suggestion chips: its sources are the subject, not the page.
+          suggestions={
+            isInsideAiProject || aiPresetContextRooms ? NO_SUGGESTIONS : aiSuggestions
+          }
+          // An empty project chat opens with the project's logo, name and
+          // sources instead of the default illustration.
+          chatIntro={
+            isInsideAiProject && aiActiveProject ? (
+              <ProjectIntro project={aiActiveProject} />
+            ) : undefined
+          }
+          // Instructions rooms are connected on their own only from an AI
+          // project (its linked rooms, see AiPresetsBridge); standing in an
+          // Instructions room does not connect it, the user picks it in the
+          // composer like a knowledge base.
+          contextRoom={canUseAi ? aiPresetContextRooms : undefined}
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
-          <ModelUpdatedBanner
-            key={agentEntityId}
-            entityId={agentEntityId}
-            isAgentRoom={isInsideAgentRoom}
-            userId={userId}
-          />
+          <AiPresetsBridge />
+
+          <AiChatVisibilityBridge onChange={setIsChatPanelVisible} />
           {layout}
         </AiAgentProviders>
       ) : (
@@ -1022,9 +1106,11 @@ const ShellWrapper = inject(
     dialogsStore,
     selectedFolderStore,
     treeFoldersStore,
-    aiRoomStore,
+    aiPresetsStore,
+    aiProjectsStore,
     paymentStore,
-    accessRightsStore,
+    peopleStore,
+    filesStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -1050,6 +1136,7 @@ const ShellWrapper = inject(
       isFrame,
       frameConfig,
       isPortalDeactivate,
+      isPortalBlocked,
       isPortalRestoring,
       logoText,
       setLogoText,
@@ -1086,14 +1173,21 @@ const ShellWrapper = inject(
     const pagesWithoutNavMenu =
       clientError ||
       isPortalDeactivate ||
+      isPortalBlocked ||
       isPortalRestoring ||
       (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
 
     return {
+      checkUserTypeLowered: peopleStore.usersStore.checkUserTypeLowered,
+      refreshRightsAfterForbidden: filesStore.refreshRightsAfterForbidden,
       loadBaseInfo: async () => {
         await init(false, i18n);
 
-        if (settingsStore.walletLowBalance) {
+        if (
+          settingsStore.walletLowBalance &&
+          !settingsStore.isPortalDeactivate &&
+          !settingsStore.isPortalBlocked
+        ) {
           paymentStore.fetchWalletBalance().catch((e) => console.error(e));
         }
 
@@ -1164,69 +1258,37 @@ const ShellWrapper = inject(
       // rights of the opened folder / room do not allow are filtered out.
       selectedSecurity: selectedFolderStore.security,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
-      // The current room as a chat-context candidate; a new object per
-      // render, the ui-kit provider memoizes it by id and name.
-      aiContextRoom: getAiContextRoom(selectedFolderStore),
+      // The Instructions rooms of the project the chat runs on, as its
+      // context rooms; a new array per render, the ui-kit provider memoizes
+      // it by id and name.
+      aiPresetContextRooms: aiPresetsStore.activePresetContextRooms,
+      isAiProjectOpen: aiProjectsStore.activeProject !== null,
+      aiActiveProject: aiProjectsStore.activeProject,
+      openEditAiProject: aiProjectsStore.openEditDialog,
+      aiPresets: aiPresetsStore.presets,
+      requestPresetApply: aiPresetsStore.requestApply,
+      fetchAiPresets: aiPresetsStore.fetchPresets,
       // The Forms section, in both its shapes: the bare Forms root, and a
       // form filling room with its In progress / Complete folders. Caps the
       // chat's attachments at one (see `attachmentLimit`).
       isFormsFolderRoot: treeFoldersStore.isFormsFolderRoot,
       isFormRoomRoot: treeFoldersStore.isFormRoomRoot,
-      // Scope the chat to the current location: inside any room (including
-      // its subfolders) the room id wins, elsewhere the currently selected
-      // folder id is used. Only when nothing is selected yet does the chat
-      // stay unscoped (entityId === undefined).
-      // Exception: an AI agent room opened without the UseChat right (a
-      // foreign agent viewed by an admin in view-only mode) must not scope
-      // the chat stores to that room — every scoped hydration / rescope
-      // request (threads, model assignment, tool servers, preferences) is
-      // rejected with 403 for such a viewer and lands in the console as an
-      // unhandled error (Bug 83230). Stay on the global scope instead: the
-      // chat pane itself is already replaced by the view-only stub
-      // (AIAgentView gates on the same accessRightsStore.canUseChat).
-      // And the same for a tour standing inside a stand-in space: that is a
-      // room the server has never heard of, so every scoped AI request made
-      // for it comes back 404 ("Entity not found") — the demo answers what the
+      // The chat's location: inside any room (including its subfolders) the
+      // room id, elsewhere the currently selected folder id. Only when
+      // nothing is selected yet does the chat have no location.
+      // Exception: a tour standing inside a stand-in space: that is a room
+      // the server has never heard of, so every AI request made for it
+      // comes back 404 ("Entity not found") — the demo answers what the
       // section asks about the space, and the AI service is no part of that.
-      agentEntityId:
-        (selectedFolderStore.isAIRoom && !accessRightsStore.canUseChat) ||
+      // And a location whose id is not a room id (a third-party storage
+      // folder carries a string id): the AI service accepts only integer
+      // ids (Bug 84417), so send no location outright.
+      chatScopeEntityId:
         !chatScopeId ||
-        isTourDemoId(chatScopeId)
+        isTourDemoId(chatScopeId) ||
+        !/^\d+$/.test(String(chatScopeId))
           ? undefined
           : String(chatScopeId),
-      // Inside AI agent rooms the model is fixed by the agent's assigned
-      // profile. It is shown in the composer as a read-only label, or — for
-      // users who may edit the room — an interactive picker to change it.
-      isInsideAgentRoom: selectedFolderStore.isAIRoom,
-      // EditRoom is the room-manager right; viewers (EditRoom === false, or
-      // security not resolved yet) get the read-only label. Both room and
-      // sub-folder security view-models carry EditRoom.
-      canEditAgentRoom: selectedFolderStore.security?.EditRoom === true,
-      getAgentRoomId: () => {
-        const id = selectedFolderStore.rootRoomId;
-        return id ? Number(id) : null;
-      },
-      openResultFile: (fileId) => {
-        if (!selectedFolderStore.isAIRoom) return;
-        const roomId = selectedFolderStore.rootRoomId || selectedFolderStore.id;
-        if (!roomId) return;
-
-        aiRoomStore.setCurrentTab("result");
-        aiRoomStore.setSelectedResultFileId(Number(fileId));
-
-        const filesFilter = FilesFilter.getDefault();
-        filesFilter.folder = String(roomId);
-        filesFilter.searchArea = SearchArea.ResultStorage;
-        const path = getCategoryUrl(CategoryType.AIAgent, roomId);
-        clientLoadingStore.setIsSectionBodyLoading(true, false);
-        window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
-
-        window.dispatchEvent(new CustomEvent(InfoPanelEvents.showInfoPanel));
-        setFileView("info_ai_chat");
-      },
-      closeEditorPanel: () => {
-        aiRoomStore.setSelectedResultFileId(null);
-      },
     };
   },
 )(observer(Shell));
@@ -1238,3 +1300,4 @@ const Root = () => (
 );
 
 export default Root;
+

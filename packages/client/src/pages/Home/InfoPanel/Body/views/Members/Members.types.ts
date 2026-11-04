@@ -45,6 +45,7 @@ import DialogsStore from "SRC_DIR/store/DialogsStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
+import SecondaryProgressDataStore from "SRC_DIR/store/SecondaryProgressDataStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
 export enum TInfoPanelMemberType {
@@ -138,7 +139,6 @@ export type UserProps = {
   searchValue: string;
 
   index?: number;
-  isAIAgentsFolderRoot?: boolean;
 
   changeUserRole: (
     option: TOption,
@@ -152,6 +152,8 @@ export type UserProps = {
   setRemoveUserConfirmation?: DialogsStore["setRemoveUserConfirmation"];
 
   getActiveUploadCountForRoom?: (roomId: string | number) => number;
+  setSecondaryProgressBarData?: SecondaryProgressDataStore["setSecondaryProgressBarData"];
+  selfId?: string;
 };
 
 export type LinkRowProps = {

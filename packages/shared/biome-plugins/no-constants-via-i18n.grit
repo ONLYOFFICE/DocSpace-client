@@ -47,6 +47,8 @@
         `"Common:PM"`,
         `"Pipedrive"`,
         `"Common:Pipedrive"`,
+        `"ProductAIToolsName"`,
+        `"Common:ProductAIToolsName"`,
         `"ProductEditorsName"`,
         `"Common:ProductEditorsName"`,
         `"ProductName"`,

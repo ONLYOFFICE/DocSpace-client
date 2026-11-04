@@ -89,6 +89,7 @@ const FileNameCell = <T extends FileNameCellItem = FileNameCellItem>({
           color=""
           size="20px"
           type={LoaderTypes.track}
+          isDecorative
         />
       ) : (
         <TableCell

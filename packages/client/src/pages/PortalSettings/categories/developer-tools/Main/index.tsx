@@ -98,11 +98,17 @@ const Main = (props: {
             {t("Common:DeveloperTools")}
           </Text>
           <Text fontSize="13px" fontWeight={400} lineHeight="20px">
-            {t("Settings:DeveloperToolsDescription", {
-              organizationName: getBrandName("OrganizationName"),
-              editorsName: getBrandName("ProductEditorsName"),
-              productName: getBrandName("ProductName"),
-            })}
+            {canOpenDocsConnect
+              ? t("Settings:DeveloperToolsDescription", {
+                  organizationName: getBrandName("OrganizationName"),
+                  editorsName: getBrandName("ProductEditorsName"),
+                  productName: getBrandName("ProductName"),
+                })
+              : t("Settings:DeveloperToolsDescriptionStandalone", {
+                  organizationName: getBrandName("OrganizationName"),
+                  editorsName: getBrandName("ProductEditorsName"),
+                  productName: getBrandName("ProductName"),
+                })}
           </Text>
         </div>
         <div className={styles.grid}>

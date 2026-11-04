@@ -1,0 +1,29 @@
+{
+  "key_path": "TourFilter",
+  "content": "Use the filter to narrow the list by file type or author. Clear the filters to return to the full list.",
+  "content_en_sha1_hash": "f3a9646cb4ae509fa34a6dcf9f700b349aa5005e",
+  "created_at": "2026-10-16T12:15:09.410Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
+  "comment": {
+    "text": "Body of the Files onboarding tour step that highlights the filter button above the file list.",
+    "is_auto": true,
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 147,
+      "context": "FILES_TOUR_LABEL,\n ),\n elementStep(\n FILTER_BUTTON_SELECTOR,\n t(\"FilesTour:TourFilterTitle\"),\n t(\"FilesTour:TourFilter\"),\n callbacks,\n FILES_TOUR_LABEL,\n ),\n elementGroupStep(\n SORT_AND_VIEW_TARGET,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

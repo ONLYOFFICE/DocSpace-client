@@ -1,0 +1,29 @@
+{
+  "key_path": "LimitBelowSpent",
+  "content": "<1>Spent {{spent}} this period.</1> Saving a {{amount}} limit pauses AI requests until {{date}}.",
+  "content_en_sha1_hash": "b30dce12ece1fd5d3771eecdbc526342748821c0",
+  "created_at": "2026-10-22T16:09:09.382Z",
+  "updated_at": "2026-10-22T16:10:38.032Z",
+  "comment": {
+    "text": "Warning under an AI spending limit form when the entered amount is lower than what was already spent this period; <1></1> wraps the bold first sentence. {{spent}} and {{amount}} are money amounts, {{date}} is the date and time the period resets.",
+    "is_auto": true,
+    "updated_at": "2026-10-22T16:10:38.032Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeAILimitDialog/index.tsx",
+      "line_number": 170,
+      "context": "return (\n <Text className={classNames(styles.status, styles.statusWarning)}>\n {periodEnd ? (\n <Trans\n t={t}\n i18nKey=\"Common:LimitBelowSpent\"\n values={values}\n components={components}\n />\n ) : (\n <Trans",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -40,16 +40,97 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
+import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 import { EMPTY_ARRAY } from "@docspace/shared/constants";
 
 import { removeOptions, removeSeparator } from "SRC_DIR/helpers/filesUtils";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
+import type { TMetadataAIItem } from "SRC_DIR/components/panels/MetadataAIPanel/types";
+import {
+  getMetadataAIOptions,
+  METADATA_AI_OPTIONS,
+} from "SRC_DIR/components/panels/MetadataAIPanel/utils";
 
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 import type { default as FilesStore } from "../FilesStore";
 
 import type { TClientConfigWithPdfViewer, TItem } from "./types";
+import {
+  getEncryptedFileWithheld,
+  PRIVATE_FOLDER_WITHHELD,
+  PRIVATE_ROOM_WITHHELD,
+  withheldMenuKeys,
+  type TPrivateMenuIntent,
+} from "@docspace/shared/services/private-room/private-menu-rules";
+
+type TPrivateMenuKeys = Partial<Record<TPrivateMenuIntent, readonly string[]>>;
+
+/** The file menu keys of the intents a private room withholds. */
+const PRIVATE_FILE_MENU_KEYS: TPrivateMenuKeys = {
+  share: [
+    "link-for-room-members",
+    "sharing-settings",
+    "copy-shared-link",
+    "manage-links",
+    "copy-general-link",
+    "send-by-email",
+  ],
+  "create-room": ["create-room", "create-room-separator"],
+  ai: ["ask-ai", "separator6", "vectorization", "embedding-settings"],
+  forms: [
+    "make-form",
+    "submit-to-gallery",
+    "separator-SubmitToGallery",
+    "fill-form",
+    "filling-status",
+    "start-filling",
+    "reset-and-start-filling",
+    "separate-stop-filling",
+    "stop-filling",
+  ],
+  "docu-sign": ["docu-sign"],
+  "custom-filter": ["custom-filter"],
+  "spreadsheet-data": ["update-xlsx-data"],
+  convert: ["convert"],
+  "download-as": ["download-as"],
+  favorites: ["mark-as-favorite"],
+  rename: ["rename"],
+  index: ["edit-index"],
+  versions: [
+    "show-version-history",
+    "finalize-version",
+    "version",
+    "block-unblock-version",
+  ],
+  open: ["view", "pdf-view", "preview", "edit", "open-pdf", "edit-pdf"],
+  download: ["download"],
+};
+
+/** The folder menu keys of the intents a private room withholds. */
+const PRIVATE_FOLDER_MENU_KEYS: TPrivateMenuKeys = {
+  share: [
+    "sharing-settings",
+    "copy-shared-link",
+    "manage-links",
+    "link-for-room-members",
+  ],
+  "create-room": ["create-room-separator", "create-room"],
+  favorites: ["mark-as-favorite", "remove-from-favorites"],
+  index: ["edit-index"],
+  copy: ["copy-to"],
+  duplicate: ["duplicate"],
+};
+
+/** The room menu keys of the intents a private room withholds. */
+const PRIVATE_ROOM_MENU_KEYS: TPrivateMenuKeys = {
+  share: ["link-for-room-members"],
+  "external-link": ["external-link"],
+  embedding: ["embedding-settings"],
+  index: ["edit-index", "export-room-index"],
+  "room-template": ["save-as-template"],
+  duplicate: ["duplicate-room"],
+};
 
 // Everything getFilesContextOptions reads off `this`, passed as live store
 // references so the branch logic is a pure function of (item, optionsToRemove,
@@ -70,6 +151,7 @@ export type BuildContextOptionsDeps = {
   roomsFilter: FilesStore["roomsFilter"];
   filterType: FilesStore["filterType"];
   filterSearch: FilesStore["filterSearch"];
+  filter: FilesStore["filter"];
 };
 
 export const buildContextOptions = (
@@ -81,9 +163,6 @@ export const buildContextOptions = (
   const isRoom = !!item.roomType;
   const isTemplate =
     item.rootFolderType === FolderType.RoomTemplates && isRoom;
-  const isAIAgent =
-    item.rootFolderType === FolderType.AIAgents &&
-    item.roomType === RoomsType.AIRoom;
 
   // the non-null assertions in this method keep the old
   // unchecked reads of optional item fields (new/fileStatus/security/
@@ -96,6 +175,19 @@ export const buildContextOptions = (
   const canConvert = item.viewAccessibility?.CanConvert;
   const mustConvert = item.viewAccessibility?.MustConvert;
   const isEncrypted = item.encrypted;
+  const metadataAIOptions = getMetadataAIOptions(
+    item as unknown as TMetadataAIItem,
+    {
+      isAIEnabled: deps.settingsStore.aiServicesEnabled,
+      isAIReady: !!deps.settingsStore.aiConfig?.aiReady,
+      isGuest: !!deps.userStore.user?.isVisitor,
+      isPublicRoom: deps.publicRoomStore.isPublicRoom,
+      extsConvertible: deps.filesSettingsStore.extsConvertible,
+    },
+  );
+  const hiddenMetadataAIOptions = METADATA_AI_OPTIONS.filter(
+    (key) => !metadataAIOptions.includes(key),
+  );
   const isDocuSign = false; // TODO: need this prop;
   const isEditing = false; // (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
@@ -203,6 +295,8 @@ export const buildContextOptions = (
       "separator0",
       "ask-ai",
       "analyze-responses",
+      "fill-metadata-ai",
+      "suggest-metadata-ai",
       "separator6",
       "filling-status",
       "start-filling",
@@ -258,19 +352,8 @@ export const buildContextOptions = (
     // list keeps stale `true` values after an admin disables AI portal-wide —
     // check the live switch as well. Privacy and encryption rule the chat out
     // whatever the rights say.
-    //
-    // Inside an AI agent room "Ask AI" does not raise the side panel (disabled
-    // there — see `isAiChatAvailable` in Shell) but navigates to the room's
-    // chat tab, which a member without `UseChat` is redirected away from. Its
-    // files still carry `AskAi: true`, so without this the entry is offered to
-    // a Viewer and leads straight back to where they came from. The same holds
-    // for "Analyze responses", which opens that very chat.
-    const noAgentChatAccess =
-      deps.selectedFolderStore.isAIRoom && !deps.accessRightsStore.canUseChat;
-
     const noAi =
       !deps.settingsStore.aiServicesEnabled ||
-      noAgentChatAccess ||
       isPrivacyFolder ||
       item.private ||
       isEncrypted;
@@ -289,7 +372,19 @@ export const buildContextOptions = (
       fileOptions = removeOptions(fileOptions, ["ask-ai"]);
     }
 
-    if (!canAskAi && !canAnalyzeResponses) {
+    fileOptions = removeOptions(fileOptions, hiddenMetadataAIOptions);
+
+    // The server refuses external links to files in the AI rooms; the link
+    // for room members stays.
+    if (item.rootFolderType === FolderType.AiHub) {
+      fileOptions = removeOptions(fileOptions, [
+        "sharing-settings",
+        "copy-shared-link",
+        "manage-links",
+      ]);
+    }
+
+    if (!canAskAi && !canAnalyzeResponses && !metadataAIOptions.length) {
       fileOptions = removeOptions(fileOptions, ["separator6"]);
     }
 
@@ -509,72 +604,19 @@ export const buildContextOptions = (
     }
 
     if (isEncrypted) {
-      fileOptions = removeOptions(fileOptions, [
-        "link-for-room-members",
-        "sharing-settings",
-        "copy-shared-link",
-        "manage-links",
-        "copy-general-link",
-        "send-by-email",
-        "create-room",
-        "create-room-separator",
-        "ask-ai",
-        "separator6",
-        "make-form",
-        "submit-to-gallery",
-        "separator-SubmitToGallery",
-        "docu-sign",
-        "custom-filter",
-        "update-xlsx-data",
-        "vectorization",
-        "embedding-settings",
-        "convert",
-        "download-as",
-        "mark-as-favorite",
-        "rename",
-        "edit-index",
-        "show-version-history",
-        "finalize-version",
-        "version",
-        "fill-form",
-        "filling-status",
-        "start-filling",
-        "reset-and-start-filling",
-        "separate-stop-filling",
-        "stop-filling",
-        "block-unblock-version",
-      ]);
+      const userKeys = deps.userStore?.encryptionKeys;
+      fileOptions = removeOptions(
+        fileOptions,
+        withheldMenuKeys(
+          getEncryptedFileWithheld({
+            mustConvert,
+            hasKeys: Array.isArray(userKeys) && userKeys.length > 0,
+          }),
+          PRIVATE_FILE_MENU_KEYS,
+        ),
+      );
 
       fileOptions.push("download-encrypted");
-
-      // Conversion runs on the server, which only ever sees ciphertext here,
-      // so such a file cannot be opened from a private room by any route.
-      if (mustConvert) {
-        fileOptions = removeOptions(fileOptions, [
-          "view",
-          "pdf-view",
-          "preview",
-          "edit",
-          "open-pdf",
-          "edit-pdf",
-        ]);
-      }
-
-      const userKeys = deps.userStore?.encryptionKeys;
-      const hasEncryptionKeys =
-        Array.isArray(userKeys) && userKeys.length > 0;
-
-      if (!hasEncryptionKeys) {
-        fileOptions = removeOptions(fileOptions, [
-          "view",
-          "pdf-view",
-          "download",
-          "preview",
-          "edit",
-          "open-pdf",
-          "edit-pdf",
-        ]);
-      }
     }
 
     // if (isFavoritesFolder || isRecentFolder) {
@@ -646,7 +688,9 @@ export const buildContextOptions = (
         isRecentFolder ||
         isFavoritesFolder ||
         ((isMyFolder || isRoomsSection) &&
-          (deps.filterType || deps.filterSearch))
+          (deps.filterType ||
+            deps.filterSearch ||
+            deps.filter.hasMetadataFilter()))
       )
     ) {
       fileOptions = removeOptions(fileOptions, ["open-location"]);
@@ -684,99 +728,6 @@ export const buildContextOptions = (
     }
 
     return templateOptions;
-  } else if (isAIAgent) {
-    const canInviteUserInAgent =
-      item.security?.EditAccess &&
-      !deps.settingsStore.aiConfig?.aiReadyNeedReset;
-    const canRemoveAgent = item.security?.Delete;
-
-    const canPinAgent = item.security?.Pin;
-
-    const canEditAgent =
-      item.security?.EditRoom &&
-      !deps.settingsStore.aiConfig?.aiReadyNeedReset;
-
-    const canViewAgentInfo = item.security?.Read;
-    const canMuteAgent = item.security?.Mute;
-
-    const canChangeOwner =
-      item.security?.ChangeOwner &&
-      !deps.settingsStore.aiConfig?.aiReadyNeedReset;
-
-    let agentOptions = [
-      "select",
-      "open",
-      "separator0",
-      "edit-agent",
-      "invite-users-to-room",
-      "link-for-room-members",
-      "room-info",
-      "pin-room",
-      "unpin-room",
-      "mute-room",
-      "unmute-room",
-      "separator1",
-      "duplicate-room",
-      "download",
-      "change-agent-owner",
-      "leave-room",
-      "delete",
-    ];
-
-    if (optionsToRemove.length) {
-      agentOptions = removeOptions(agentOptions, optionsToRemove);
-    }
-
-    if (!canEditAgent) {
-      agentOptions = removeOptions(agentOptions, ["edit-agent"]);
-    }
-
-    if (!canInviteUserInAgent) {
-      agentOptions = removeOptions(agentOptions, ["invite-users-to-room"]);
-    }
-
-    if (!canChangeOwner) {
-      agentOptions = removeOptions(agentOptions, ["change-agent-owner"]);
-    }
-
-    if (!canRemoveAgent) {
-      agentOptions = removeOptions(agentOptions, ["delete"]);
-    }
-
-    if (!canDuplicate) {
-      agentOptions = removeOptions(agentOptions, ["duplicate-room"]);
-    }
-
-    if (!canDownload) {
-      agentOptions = removeOptions(agentOptions, ["download"]);
-    }
-
-    if (!canPinAgent) {
-      agentOptions = removeOptions(agentOptions, ["unpin-room", "pin-room"]);
-    } else {
-      agentOptions = item.pinned
-        ? removeOptions(agentOptions, ["pin-room"])
-        : removeOptions(agentOptions, ["unpin-room"]);
-    }
-
-    if (!canMuteAgent) {
-      agentOptions = removeOptions(agentOptions, [
-        "unmute-room",
-        "mute-room",
-      ]);
-    } else {
-      agentOptions = item.mute
-        ? removeOptions(agentOptions, ["mute-room"])
-        : removeOptions(agentOptions, ["unmute-room"]);
-    }
-
-    if (!canViewAgentInfo) {
-      agentOptions = removeOptions(agentOptions, ["room-info"]);
-    }
-
-    agentOptions = removeSeparator(agentOptions);
-
-    return agentOptions;
   }
   if (isRoom) {
     const canInviteUserInRoom = item.private
@@ -805,6 +756,10 @@ export const buildContextOptions = (
       "open",
       "separator0",
       "link-for-room-members",
+      "separator-metadata-ai",
+      "fill-metadata-ai",
+      "suggest-metadata-ai",
+      "separator6",
       "reconnect-storage",
       "edit-room",
       "invite-users-to-room",
@@ -819,7 +774,6 @@ export const buildContextOptions = (
       "mute-room",
       "unmute-room",
       "edit-index",
-      "short-tour",
       "export-room-index",
       "save-as-template",
       "separator1",
@@ -837,6 +791,13 @@ export const buildContextOptions = (
     if (!item.private) {
       roomOptions = removeOptions(roomOptions, ["download-encrypted"]);
     }
+
+    roomOptions = removeOptions(
+      roomOptions,
+      metadataAIOptions.length
+        ? hiddenMetadataAIOptions
+        : [...METADATA_AI_OPTIONS, "separator-metadata-ai", "separator6"],
+    );
 
     if (!item.external) {
       roomOptions = removeOptions(roomOptions, ["remove-shared-room"]);
@@ -858,17 +819,10 @@ export const buildContextOptions = (
     }
 
     if (item.private) {
-      roomOptions = removeOptions(roomOptions, [
-        "external-link",
-        "link-for-room-members",
-        "embedding-settings",
-        "edit-index",
-        "export-room-index",
-        "short-tour",
-        "save-as-template",
-        "duplicate-room",
-        "download",
-      ]);
+      roomOptions = removeOptions(
+        roomOptions,
+        withheldMenuKeys(PRIVATE_ROOM_WITHHELD, PRIVATE_ROOM_MENU_KEYS),
+      );
     }
 
     if (!canEditRoom) {
@@ -894,8 +848,25 @@ export const buildContextOptions = (
       ]);
     }
 
-    if (item.roomType === RoomsType.FormRoom) {
+    // A form room is never archived. Neither is an AI room: the server keeps
+    // Instructions and Knowledge rooms in their own root, never archives them
+    // and makes no template of them, and refuses to move or duplicate an AI
+    // project; a delete removes them outright.
+    const isAiHubRoom =
+      item.roomType === RoomsType.InstructionsRoom ||
+      item.roomType === RoomsType.KnowledgeRoom;
+    const isAiProject = item.roomType === RoomsType.AiProjectRoom;
+
+    if (item.roomType === RoomsType.FormRoom || isAiHubRoom || isAiProject) {
       roomOptions = removeOptions(roomOptions, ["archive-room"]);
+    }
+
+    if (isAiHubRoom || isAiProject) {
+      roomOptions = removeOptions(roomOptions, ["save-as-template"]);
+    }
+
+    if (isAiProject) {
+      roomOptions = removeOptions(roomOptions, ["duplicate-room"]);
     }
 
     if (!canRemoveRoom) {
@@ -950,12 +921,17 @@ export const buildContextOptions = (
     const sectionGroupsArea = deps.treeFoldersStore.isFormsFolder
       ? RoomSearchArea.Forms
       : RoomSearchArea.Active;
+    // Room groups are kept per Rooms / Forms area; the AI sections have
+    // none.
     if (
       !organizeRoomsGrouping ||
       isArchiveFolder ||
       item.rootFolderType === FolderType.Archive ||
-      deps.treeFoldersStore.isAIAgentsFolder ||
-      itemGroupsArea !== sectionGroupsArea
+      item.rootFolderType === FolderType.AiHub ||
+      deps.treeFoldersStore.isAiSectionFolder ||
+      itemGroupsArea !== sectionGroupsArea ||
+      // Spec: private-rooms/sidebar-section, "No room groups in the section"
+      isPrivateRoomsRoute(window.location.pathname)
     ) {
       roomOptions = removeOptions(roomOptions, [
         "create-group",
@@ -1003,6 +979,8 @@ export const buildContextOptions = (
     "select",
     "open",
     // "separator0",
+    "fill-metadata-ai",
+    "suggest-metadata-ai",
     "update-xlsx-data",
     "sharing-settings",
     "copy-shared-link",
@@ -1032,6 +1010,8 @@ export const buildContextOptions = (
     "remove-shared-folder-or-file",
     "delete",
   ];
+
+  folderOptions = removeOptions(folderOptions, hiddenMetadataAIOptions);
 
   if (item.external && item.isLinkExpired) {
     folderOptions = ["select", "separator0", "remove-shared-folder-or-file"];
@@ -1105,20 +1085,10 @@ export const buildContextOptions = (
   // }
 
   if (isPrivacyFolder || item.private) {
-    folderOptions = removeOptions(folderOptions, [
-      "sharing-settings",
-      "copy-shared-link",
-      "manage-links",
-      "link-for-room-members",
-      "create-room-separator",
-      "create-room",
-      "mark-as-favorite",
-      "remove-from-favorites",
-      "edit-index",
-      "copy-to",
-      "duplicate",
-      "download",
-    ]);
+    folderOptions = removeOptions(
+      folderOptions,
+      withheldMenuKeys(PRIVATE_FOLDER_WITHHELD, PRIVATE_FOLDER_MENU_KEYS),
+    );
 
     if (!canMove) {
       folderOptions = removeOptions(folderOptions, ["move", "move-to"]);
@@ -1204,7 +1174,9 @@ export const buildContextOptions = (
       isRecentFolder ||
       isFavoritesFolder ||
       ((isMyFolder || isRoomsSection) &&
-        (deps.filterType || deps.filterSearch))
+        (deps.filterType ||
+          deps.filterSearch ||
+          deps.filter.hasMetadataFilter()))
     )
   ) {
     folderOptions = removeOptions(folderOptions, ["open-location"]);

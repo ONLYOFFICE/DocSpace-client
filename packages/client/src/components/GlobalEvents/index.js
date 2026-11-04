@@ -36,11 +36,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router";
 
-import { FileAction, Events } from "@docspace/shared/enums";
+import { FileAction, Events, RoomsType } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
-import { getStartAgentParams } from "@docspace/shared/utils/aiAgents";
 import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
@@ -49,19 +47,14 @@ import CreateEvent from "./CreateEvent";
 import RenameEvent from "./RenameEvent";
 import CreateRoomEvent from "./CreateRoomEvent";
 import EditRoomEvent from "./EditRoomEvent";
-import CreateAgentEvent from "./AgentEvents/CreateAgentEvent";
-import ActivateAIEvent from "./AgentEvents/ActivateAIEvent";
-import EditAgentEvent from "./AgentEvents/EditAgentEvent";
 import CreateGroupEvent from "./GroupEvents/CreateGroupEvent";
 import EditGroupEvent from "./GroupEvents/EditGroupEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
+import ChangeAILimitDialog from "../dialogs/ChangeAILimitDialog";
 import SaveAsTemplateEvent from "./SaveAsTemplateEvent";
-import { useHasAiProfiles } from "../../Hooks/useHasAiProfiles";
-import { AI_SETTINGS_URL } from "../../helpers/constants";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
-import { isAIAgents } from "../../helpers/plugins/utils";
 
 const GlobalEvents = ({
   enablePlugins,
@@ -70,20 +63,14 @@ const GlobalEvents = ({
   setEditRoomDialogProps,
   createRoomDialogProps,
   setCreateRoomDialogProps,
-  createAgentDialogProps,
-  setCreateAgentDialogProps,
-  editAgentDialogProps,
-  setEditAgentDialogProps,
   setCover,
 
   setCreatePDFFormFile,
   createPDFFormFileProps,
   userId,
-  getIsAIReady,
-  standalone,
-  canOpenAISettings,
+  openEditAiProject,
+  openCreateAiProject,
 }) => {
-  const navigate = useNavigate();
 
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -117,6 +104,10 @@ const GlobalEvents = ({
     visible: false,
     onClose: null,
   });
+  const [changeAILimitDialog, setChangeAILimitDialogProps] = useState({
+    visible: false,
+    items: [],
+  });
   const [changeQuotaDialog, setChangeQuotaDialogProps] = useState({
     visible: false,
     type: null,
@@ -134,13 +125,6 @@ const GlobalEvents = ({
     props: null,
     onClose: null,
   });
-
-  const [activateAIProps, setActivateAIProps] = useState({ visible: false });
-
-  // Not `profiles.length` off the store: that flaps to false while a rebuilt
-  // chat bundle hydrates, and on standalone a false negative here navigates
-  // the user off the page. The hook holds the last hydrated value instead.
-  const hasAiProfiles = useHasAiProfiles();
 
   const onCreate = useCallback((e) => {
     const { payload } = e;
@@ -198,6 +182,13 @@ const GlobalEvents = ({
   }, []);
 
   const onCreateRoom = useCallback((e) => {
+    // An AI project is created in the project form (model, linked rooms),
+    // not in the room dialog.
+    if (e?.payload?.isAiProjectCreate) {
+      openCreateAiProject();
+      return;
+    }
+
     const startRoomParams = getStartRoomParams(
       e?.payload?.startRoomType,
       e?.title,
@@ -208,6 +199,8 @@ const GlobalEvents = ({
       // straight on a preset room type and lock the chooser.
       startRoomType: e?.payload?.startRoomType,
       isFormsCreate: e?.payload?.isFormsCreate,
+      // The "AI rooms" section's chooser: Instructions, Knowledge, AI project.
+      isAiRoomsCreate: e?.payload?.isAiRoomsCreate,
       // Opens the dialog straight on the "from template" picker instead of the
       // room-type chooser (quick-actions "Room template" tile).
       withTemplateSelector: e?.payload?.withTemplateSelector,
@@ -220,12 +213,21 @@ const GlobalEvents = ({
           onClose: null,
           startRoomType: undefined,
           isFormsCreate: undefined,
+          isAiRoomsCreate: undefined,
           withTemplateSelector: undefined,
         }),
     });
   }, []);
 
   const onEditRoom = useCallback((e) => {
+    // An AI project is edited in the project form (model, linked rooms), not
+    // in the room dialog; the project is read first, as the list's room comes
+    // without its project block.
+    if (e.item?.roomType === RoomsType.AiProjectRoom) {
+      openEditAiProject(e.item.id);
+      return;
+    }
+
     const visible = !!e.item;
 
     setEditRoomDialogProps({
@@ -235,76 +237,6 @@ const GlobalEvents = ({
       onClose: () => {
         setCover();
         setEditRoomDialogProps({
-          visible: false,
-          item: null,
-          onClose: null,
-        });
-      },
-    });
-  }, []);
-
-  const onCreateAgent = useCallback(
-    (e) => {
-      const context = e.context || e.detail?.context || "";
-
-      const isAIReady = standalone ? hasAiProfiles : getIsAIReady();
-
-      if (!isAIReady) {
-        // Standalone connects its own AI provider in the settings: there is no
-        // service to switch on and no wallet to top up, so the activation
-        // dialog would offer an action that does not exist there. Whoever
-        // cannot open the settings still gets it - that branch only tells them
-        // to contact the admin.
-        if (standalone && canOpenAISettings) {
-          navigate(AI_SETTINGS_URL);
-          return;
-        }
-
-        setActivateAIProps({
-          visible: true,
-          parentId: e.detail?.parentId,
-          context,
-          onClose: () => setActivateAIProps({ visible: false }),
-        });
-        return;
-      }
-
-      setActivateAIProps({ visible: false });
-
-      const startAgentParams = getStartAgentParams();
-      setCreateAgentDialogProps({
-        ...startAgentParams,
-        item: e.item,
-        context,
-        visible: true,
-        onClose: () => {
-          setCreateAgentDialogProps({
-            visible: false,
-            onClose: null,
-          });
-        },
-      });
-    },
-    [
-      standalone,
-      canOpenAISettings,
-      navigate,
-      getIsAIReady,
-      hasAiProfiles,
-      setCreateAgentDialogProps,
-    ],
-  );
-
-  const onEditAgent = useCallback((e) => {
-    const visible = !!e.item;
-
-    setEditAgentDialogProps({
-      visible,
-      item: e.item,
-      context: e.context || e.detail?.context || "",
-      onClose: () => {
-        setCover();
-        setEditAgentDialogProps({
           visible: false,
           item: null,
           onClose: null,
@@ -417,6 +349,15 @@ const GlobalEvents = ({
     [],
   );
 
+  const onChangeAILimit = useCallback((e) => {
+    const { payload } = e;
+
+    setChangeAILimitDialogProps({
+      visible: payload.visible,
+      items: payload.items ?? [],
+    });
+  }, []);
+
   const onChangeQuota = useCallback((e) => {
     const { payload } = e;
 
@@ -479,15 +420,14 @@ const GlobalEvents = ({
     window.addEventListener(Events.CREATE, onCreate);
     window.addEventListener(Events.RENAME, onRename);
     window.addEventListener(Events.ROOM_CREATE, onCreateRoom);
-    window.addEventListener(Events.AGENT_CREATE, onCreateAgent);
-    window.addEventListener(Events.AGENT_EDIT, onEditAgent);
     window.addEventListener(Events.ROOM_EDIT, onEditRoom);
     window.addEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
     window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
     window.addEventListener(Events.GROUP_EDIT, onEditGroup);
     window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
+    window.addEventListener(Events.CHANGE_AI_LIMIT, onChangeAILimit);
     window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
-    if (!isAIAgents() && enablePlugins) {
+    if (enablePlugins) {
       window.addEventListener(
         Events.CREATE_PLUGIN_FILE,
         onCreatePluginFileDialog,
@@ -511,15 +451,14 @@ const GlobalEvents = ({
       window.removeEventListener(Events.RENAME, onRename);
       window.removeEventListener(Events.ROOM_CREATE, onCreateRoom);
       window.removeEventListener(Events.ROOM_EDIT, onEditRoom);
-      window.removeEventListener(Events.AGENT_CREATE, onCreateAgent);
-      window.removeEventListener(Events.AGENT_EDIT, onEditAgent);
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
       window.removeEventListener(Events.CHANGE_QUOTA, onChangeQuota);
+      window.removeEventListener(Events.CHANGE_AI_LIMIT, onChangeAILimit);
       window.removeEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
-      if (!isAIAgents() && enablePlugins) {
+      if (enablePlugins) {
         window.removeEventListener(
           Events.CREATE_PLUGIN_FILE,
           onCreatePluginFileDialog,
@@ -539,13 +478,13 @@ const GlobalEvents = ({
     onRename,
     onCreate,
     onCreateRoom,
-    onCreateAgent,
-    onEditAgent,
     onEditRoom,
+    openEditAiProject,
     onCreateGroup,
     onEditGroup,
     onChangeUserType,
     onChangeQuota,
+    onChangeAILimit,
     onSaveAsTemplate,
     onCreatePluginFileDialog,
     enablePlugins,
@@ -564,15 +503,6 @@ const GlobalEvents = ({
     ),
     editRoomDialogProps.visible && (
       <EditRoomEvent key={Events.ROOM_EDIT} {...editRoomDialogProps} />
-    ),
-    createAgentDialogProps.visible && (
-      <CreateAgentEvent key={Events.AGENT_CREATE} {...createAgentDialogProps} />
-    ),
-    activateAIProps.visible && (
-      <ActivateAIEvent key="activate-ai" {...activateAIProps} />
-    ),
-    editAgentDialogProps.visible && (
-      <EditAgentEvent key={Events.AGENT_EDIT} {...editAgentDialogProps} />
     ),
     createGroupDialogProps.visible && (
       <CreateGroupEvent key={Events.GROUP_CREATE} {...createGroupDialogProps} />
@@ -601,6 +531,16 @@ const GlobalEvents = ({
     changeQuotaDialog.visible && (
       <ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
     ),
+    changeAILimitDialog.visible && (
+      <ChangeAILimitDialog
+        key={Events.CHANGE_AI_LIMIT}
+        visible
+        items={changeAILimitDialog.items}
+        onClose={() =>
+          setChangeAILimitDialogProps({ visible: false, items: [] })
+        }
+      />
+    ),
     createPDFFormFileProps.visible && !createDialogProps.visible ? (
       <CreatedPDFFormDialog
         key="created-pdf-form-dialog"
@@ -611,7 +551,7 @@ const GlobalEvents = ({
 };
 
 export default inject(
-  ({ settingsStore, pluginStore, dialogsStore, userStore, paymentStore }) => {
+  ({ settingsStore, pluginStore, dialogsStore, userStore, aiProjectsStore }) => {
     const { enablePlugins } = settingsStore;
 
     const {
@@ -619,10 +559,6 @@ export default inject(
       setEditRoomDialogProps,
       createRoomDialogProps,
       setCreateRoomDialogProps,
-      createAgentDialogProps,
-      setCreateAgentDialogProps,
-      editAgentDialogProps,
-      setEditAgentDialogProps,
       setCover,
       setCreatePDFFormFile,
       createPDFFormFileProps,
@@ -637,19 +573,12 @@ export default inject(
       setEditRoomDialogProps,
       createRoomDialogProps,
       setCreateRoomDialogProps,
-      createAgentDialogProps,
-      setCreateAgentDialogProps,
-      editAgentDialogProps,
-      setEditAgentDialogProps,
       setCover,
       setCreatePDFFormFile,
       createPDFFormFileProps,
       userId: userStore?.user?.id,
-      getIsAIReady: () => paymentStore.isAIReady,
-      standalone: settingsStore.standalone,
-      canOpenAISettings: Boolean(
-        userStore?.user?.isAdmin || userStore?.user?.isOwner,
-      ),
+      openEditAiProject: aiProjectsStore.openEditDialogById,
+      openCreateAiProject: aiProjectsStore.openCreateDialog,
     };
   },
 )(observer(GlobalEvents));

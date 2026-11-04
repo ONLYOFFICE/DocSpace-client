@@ -1,0 +1,29 @@
+{
+  "key_path": "AILimitCountedFromDay",
+  "content": "Counted from the start of the day.",
+  "content_en_sha1_hash": "e78b6bb914f0f2e1160648bc76d5d5107e670b1e",
+  "created_at": "2026-10-22T16:08:49.178Z",
+  "updated_at": "2026-10-22T16:10:38.032Z",
+  "comment": {
+    "text": "Hint under the amount and period fields of the Change AI limit dialog when the period is 'per day': explains that daily spending is counted from the start of the current day.",
+    "is_auto": true,
+    "updated_at": "2026-10-22T16:10:38.032Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeAILimitDialog/index.tsx",
+      "line_number": 151,
+      "context": "case \"Month\":\n return t(\"Common:AILimitCountedFromMonth\");\n case \"Lifetime\":\n return t(\"Common:AILimitCountedFromLifetime\");\n default:\n return t(\"Common:AILimitCountedFromDay\");\n }\n };\n \n const renderWarning = () => {\n if (!isBelowSpent || amount === null) return null;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

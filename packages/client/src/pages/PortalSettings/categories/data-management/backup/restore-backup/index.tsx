@@ -57,6 +57,7 @@ const RestoreBackupWrapper = ({
   resetDownloadingProgress,
   setConnectedThirdPartyAccount,
   isInitialLoading,
+  ensureAppsLoaded,
   ...props
 }: RestoreBackupWrapperProps) => {
   const { t } = useTranslation(["Settings", "Common"]);
@@ -65,6 +66,10 @@ const RestoreBackupWrapper = ({
   useEffect(() => {
     setDocumentTitle(t("Common:RestoreBackup"));
   }, [t]);
+
+  useEffect(() => {
+    ensureAppsLoaded();
+  }, [ensureAppsLoaded]);
 
   useEffect(() => {
     return () => {
@@ -100,6 +105,7 @@ export default inject(
     filesSelectorInput,
     thirdPartyStore,
     clientLoadingStore,
+    appsStore,
   }: TStore) => {
     const {
       errorInformation,
@@ -188,7 +194,12 @@ export default inject(
       storeItem ??
       {}) as ThirdPartyAccountType;
 
-    const settingsFileSelector = { getIcon, filesSettings };
+    const settingsFileSelector = {
+      getIcon,
+      filesSettings,
+      withRoomsTreeFolder: appsStore.isInstalled("ai-rooms"),
+      withFormsTreeFolder: appsStore.isInstalled("ai-forms"),
+    };
     const defaultRegion =
       defaultFormSettings && "region" in defaultFormSettings
         ? (defaultFormSettings.region as string)
@@ -200,6 +211,7 @@ export default inject(
       isEnableRestore,
       settingsFileSelector,
       isInitialLoading,
+      ensureAppsLoaded: appsStore.ensureLoaded,
 
       // settingsStore
       standalone,

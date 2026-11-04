@@ -49,6 +49,8 @@ const SelectFileDialog = ({
   isVisible,
   onClose,
   onSubmit,
+  onFilesLoaded,
+  disabledItems = [],
   fileInfo,
   filesSettings,
   shareKey,
@@ -76,6 +78,10 @@ const SelectFileDialog = ({
   }, [fileTypeDetection.filterParam, t]);
 
   const selectFilesListTitle = React.useCallback(() => {
+    // Any file goes (the AI chat's attach): there is no type to name.
+    if (fileTypeDetection.filterParam === FilesSelectorFilterTypes.ALL)
+      return "";
+
     const type = getFileTypeTranslation();
     return fileTypeDetection.filterParam === FilesSelectorFilterTypes.XLSX
       ? type
@@ -94,7 +100,8 @@ const SelectFileDialog = ({
       withoutBackButton
       withSearch
       withBreadCrumbs
-      disabledItems={[]}
+      disabledItems={disabledItems}
+      onFilesLoaded={onFilesLoaded}
       isPanelVisible={isVisible}
       onCancel={onClose}
       onSubmit={onSubmit}
@@ -126,7 +133,6 @@ const SelectFileDialog = ({
       openRoot={openRoot}
       withRecentTreeFolder
       withFavoritesTreeFolder
-      withAIAgentsTreeFolder
     />
   );
 };

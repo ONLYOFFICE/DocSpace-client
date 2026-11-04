@@ -240,7 +240,10 @@ const unquote = (value) => value.trim().replace(/^'(.*)'$/, "$1");
 
 /** Package names under `overrides:` in pnpm-workspace.yaml. */
 const overriddenNames = () => {
-  const workspace = fs.readFileSync(path.join(ROOT, "pnpm-workspace.yaml"), "utf8");
+  const workspace = fs
+    .readFileSync(path.join(ROOT, "pnpm-workspace.yaml"), "utf8")
+    // A checkout with core.autocrlf writes CRLF; the regexes below expect LF.
+    .replace(/\r\n/g, "\n");
   const block = workspace.match(/^overrides:\n((?:[ #].*\n|\n)*)/m)?.[1] ?? "";
   const names = new Set();
   for (const [, key] of block.matchAll(/^ {2}("[^"]+"|'[^']+'|[^\s:#][^:]*):/gm)) {
@@ -262,7 +265,7 @@ const overriddenNames = () => {
  * `--frozen-lockfile` in Docker staying green.
  */
 export const lockDrift = (key, packed) => {
-  const lockText = fs.readFileSync(LOCKFILE, "utf8");
+  const lockText = fs.readFileSync(LOCKFILE, "utf8").replace(/\r\n/g, "\n");
 
   // `last`: a key with no peer suffix appears twice, under `packages:` first
   // and `snapshots:` second.

@@ -83,7 +83,6 @@ const HeaderUnAuth = ({
 
   return (
     <header
-      isLoaded={isLoaded}
       className={classNames(styles.unAuthHeader, "navMenuHeaderUnAuth")}
     >
       <div className="header-items-wrapper">

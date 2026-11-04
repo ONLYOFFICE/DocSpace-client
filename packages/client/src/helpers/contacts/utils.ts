@@ -38,7 +38,10 @@ import type { Location as RouterLocation } from "react-router";
 import Filter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
 import { TGroup } from "@docspace/shared/api/groups/types";
-import { TUser } from "@docspace/shared/api/people/types";
+import {
+  TUser,
+  TUserServiceLimit,
+} from "@docspace/shared/api/people/types";
 import { EmployeeStatus, Events } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { TTranslation } from "@docspace/shared/types";
@@ -238,6 +241,21 @@ export const changeUserQuota = (
   };
 
   event.payload = payload;
+
+  window.dispatchEvent(event);
+};
+
+export type TAILimitUser = {
+  id: string;
+  aiServicesLimit?: TUserServiceLimit | null;
+};
+
+export const changeUserAILimit = (users: TAILimitUser[]) => {
+  const event: Event & { payload?: unknown } = new Event(
+    Events.CHANGE_AI_LIMIT,
+  );
+
+  event.payload = { visible: true, items: users };
 
   window.dispatchEvent(event);
 };

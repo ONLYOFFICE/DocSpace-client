@@ -1,7 +1,5 @@
 [
-  "AiSuggestions: AiRoomCollectDataIntoATable, FilesMultipleCollectDataIntoATable",
-  "AiSuggestions: AiRoomCreateAPresentation, FilesMultipleCreateAPresentation, FormSpaceResultsCreateAPresentation",
-  "AiSuggestions: AiRoomFindADocument, InsideRoomFindADocument",
+  "AiSuggestions: FilesMultipleCreateAPresentation, FormSpaceResultsCreateAPresentation",
   "AiSuggestions: FilesTrashRestoreSelectedItems, FormsTrashRestoreSelectedItems",
   "AiSuggestions: FormSpaceChangeNameAndTags, InsideRoomChangeNameAndTags",
   "AiSuggestions: FormSpaceConvertAFileIntoAForm, FormsConvertAFileIntoAForm",

@@ -240,6 +240,10 @@
   &:focus-within {
     border-color: var(--input-border-focus);
   }
+
+  &[data-error="true"]:focus-within {
+    border-color: var(--input-error-border-focus);
+  }
 }
 
 .secretInput {

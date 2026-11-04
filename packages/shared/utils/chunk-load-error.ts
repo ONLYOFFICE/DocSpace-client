@@ -52,6 +52,18 @@ const CHUNK_ERROR_PATTERNS = [
   /Importing a module script failed/i,
 ];
 
+// The RSC payload of a Next.js page is streamed inside its HTML. When that
+// stream ends before every chunk it referenced has arrived (the connection
+// dropped, a proxy cut the response, the browser stopped parsing), React
+// rejects the root with "Connection closed." - minified to React error 412
+// in React 19 production builds. Like a failed chunk, a fresh load usually
+// succeeds, so it shares the same bounded reload.
+const RSC_CONNECTION_ERROR_PATTERNS = [
+  /^Connection closed\.$/,
+  // \x23 is "#": spelled out, the color check would read it as a hex color
+  /Minified React error \x23412[;:\s]/,
+];
+
 let reloadScheduled = false;
 
 export const isChunkLoadError = (error: unknown): boolean => {
@@ -59,6 +71,12 @@ export const isChunkLoadError = (error: unknown): boolean => {
   const { name, message } = error as Error;
   if (name === "ChunkLoadError") return true;
   return CHUNK_ERROR_PATTERNS.some((re) => re.test(message ?? ""));
+};
+
+export const isRscConnectionError = (error: unknown): boolean => {
+  if (!error || typeof error !== "object") return false;
+  const { message } = error as Error;
+  return RSC_CONNECTION_ERROR_PATTERNS.some((re) => re.test(message ?? ""));
 };
 
 const lastReloadAt = (storageKey: string): number => {
@@ -81,7 +99,7 @@ export const canReloadOnChunkError = (
   storageKey: string,
 ): boolean => {
   if (typeof window === "undefined") return false;
-  if (!isChunkLoadError(error)) return false;
+  if (!isChunkLoadError(error) && !isRscConnectionError(error)) return false;
   if (reloadScheduled) return true;
   return Date.now() - lastReloadAt(storageKey) > RELOAD_WINDOW_MS;
 };

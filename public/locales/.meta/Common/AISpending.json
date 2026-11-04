@@ -1,0 +1,35 @@
+{
+  "key_path": "AISpending",
+  "content": "AI spending",
+  "content_en_sha1_hash": "ab10a5bd92ce307659678229ae9a7b2931e4cdf7",
+  "created_at": "2026-10-22T16:08:49.835Z",
+  "updated_at": "2026-10-22T16:10:38.032Z",
+  "comment": {
+    "text": "Column header in the Contacts users table and field label in the user info panel showing how much money the user has spent on AI services. Short noun phrase.",
+    "is_auto": true,
+    "updated_at": "2026-10-22T16:10:38.032Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
+      "line_number": 361,
+      "context": "showAISpendingInfo &&\n userSelection.aiServicesLimit ? (\n <>\n <Text\n className={styles.infoField}\n title={t(\"Common:AISpending\")}\n >\n {t(\"Common:AISpending\")}\n </Text>\n <AILimit\n item={userSelection}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
+      "line_number": 361,
+      "context": "showAISpendingInfo &&\n userSelection.aiServicesLimit ? (\n <>\n <Text\n className={styles.infoField}\n title={t(\"Common:AISpending\")}\n >\n {t(\"Common:AISpending\")}\n </Text>\n <AILimit\n item={userSelection}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

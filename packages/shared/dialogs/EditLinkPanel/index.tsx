@@ -395,10 +395,26 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     setIsSameDate(isSameDateCheck);
   }, [date, expirationDate]);
 
+  // Enter saves as it submits a form: from a text field, or with nothing in
+  // particular focused. A control that acts on Enter itself (a calendar day,
+  // a list option, a toggle, a button) keeps it -- picking a date with Enter
+  // used to save the panel before the date was set.
   useEventListener("keydown", (e: KeyboardEvent) => {
-    if (e.key === "Enter" && !unsavedChangesDialogVisible) {
-      onSave();
-    }
+    if (e.key !== "Enter" || unsavedChangesDialogVisible || e.defaultPrevented)
+      return;
+
+    const { target } = e;
+    const fromTextField =
+      target instanceof HTMLInputElement &&
+      !["checkbox", "radio", "button", "submit", "reset"].includes(
+        target.type,
+      );
+    const fromNothing =
+      target === document.body ||
+      (target instanceof HTMLElement &&
+        target.getAttribute("role") === "dialog");
+
+    if (fromTextField || fromNothing) onSave();
   });
 
   const getPasswordSettings = useCallback(async () => {

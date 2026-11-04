@@ -33,18 +33,21 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { inject, observer } from "mobx-react";
+import { runInAction } from "mobx";
 import { useTranslation } from "react-i18next";
 
 import {
   DeviceType,
+  FolderType,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { getFolder } from "@docspace/shared/api/files";
 import { CategoryType } from "@docspace/shared/constants";
 
 import type FormsTourStore from "SRC_DIR/store/FormsTourStore";
@@ -54,13 +57,28 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import { FORMS_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
+import useDemoSwap from "SRC_DIR/components/Tour/useDemoSwap";
 import { getTourAudience } from "SRC_DIR/components/Tour/audience";
 import { tourDemo } from "SRC_DIR/api/tourDemo";
+import {
+  fadeSectionIn,
+  fadeSectionOut,
+} from "SRC_DIR/components/Tour/sectionFade";
+import {
+  DEMO_SPACE_ITEM_IDS,
+  withDemoFormLaunched,
+  type TourDemoConfig,
+} from "SRC_DIR/api/tourDemo/data";
 
 import type { TCreatedBy } from "@docspace/shared/types";
 
-import { getTourSteps, type TourStepFlags } from "./tourSteps";
+import {
+  getTourSteps,
+  FIRST_ITEM_SELECTOR,
+  type TourStepFlags,
+} from "./tourSteps";
 
 type FormsTourProps = {
   formsTourStore: FormsTourStore;
@@ -104,6 +122,82 @@ const FormsTour = ({
   // filter in it is the one they arrived with.
   const sectionLocation = useRef<string | null>(null);
 
+  type OwnSpace = {
+    id: number;
+    title: string;
+    rootFolderType?: FolderType;
+    items: { form: number; inProgress: number; complete: number };
+  };
+  const [ownSpace, setOwnSpace] = useState<OwnSpace | null | undefined>(
+    undefined,
+  );
+
+  useEffect(() => {
+    if (!formsTourStore.isPending || formsTourStore.isRunning) return;
+    if (ownSpace !== undefined) return;
+    if (firstLoad || isSectionLoading || !isFormsRoot) return;
+
+    const space = filesStore.filesList?.[0] as
+      | {
+          id: number;
+          title: string;
+          rootFolderType?: FolderType;
+          isRoom?: boolean;
+        }
+      | undefined;
+    if (!hasItems || !space?.isRoom) {
+      setOwnSpace(null);
+      return;
+    }
+
+    let cancelled = false;
+    getFolder(space.id, FilesFilter.getDefault())
+      .then(({ files, folders }) => {
+        if (cancelled) return;
+        // Not yet launched: the share step shows Start filling, the fill
+        // step fakes the launch and undoes it afterwards.
+        const form = files.find(
+          (file) => file.fileExst === ".pdf" && !file.startFilling,
+        );
+        const inProgress = folders.find(
+          (folder) => folder.type === FolderType.InProgress,
+        );
+        const complete = folders.find(
+          (folder) => folder.type === FolderType.Done,
+        );
+        setOwnSpace(
+          form && inProgress && complete
+            ? {
+                id: space.id,
+                title: space.title,
+                rootFolderType: space.rootFolderType,
+                items: {
+                  form: form.id as number,
+                  inProgress: inProgress.id as number,
+                  complete: complete.id as number,
+                },
+              }
+            : null,
+        );
+      })
+      .catch(() => {
+        if (!cancelled) setOwnSpace(null);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    formsTourStore.isPending,
+    formsTourStore.isRunning,
+    ownSpace,
+    firstLoad,
+    isSectionLoading,
+    isFormsRoot,
+    hasItems,
+    filesStore,
+  ]);
+
   /**
    * Walks into the stand-in space, the way clicking its row would.
    *
@@ -131,7 +225,7 @@ const FormsTour = ({
   const enterSpace = useCallback(() => {
     if (sectionLocation.current) return;
 
-    const space = tourDemo.space;
+    const space = ownSpace ?? tourDemo.space;
     if (!space) return;
 
     sectionLocation.current = `${window.location.pathname}${window.location.search}`;
@@ -142,6 +236,7 @@ const FormsTour = ({
     window.DocSpace?.navigate(
       `${getCategoryUrl(CategoryType.Form, space.id)}?${filter.toUrlParams()}`,
       {
+        replace: true,
         state: {
           title: space.title,
           isRoot: false,
@@ -149,7 +244,7 @@ const FormsTour = ({
         },
       },
     );
-  }, []);
+  }, [ownSpace]);
 
   /** Puts the tour back at the section root. A no-op if it never left. */
   const leaveSpace = useCallback(() => {
@@ -166,8 +261,47 @@ const FormsTour = ({
     // navigate out and straight back in again. `navigates` buys the anchor the
     // longer wait a route change needs — the room has to be fetched and
     // rendered before any row inside it exists to point at.
-    () => ({ reveal: enterSpace, restore: () => {}, navigates: true }),
+    () => ({
+      reveal: enterSpace,
+      restore: () => {},
+      navigates: true,
+      // Walked back into from the closing step: the list is on its way back.
+      awaitBefore: FIRST_ITEM_SELECTOR,
+    }),
     [enterSpace],
+  );
+
+  // The launch the tour cannot do for real, faked on the loaded row.
+  const spaceItemIds = ownSpace?.items ?? DEMO_SPACE_ITEM_IDS;
+  const setFormLaunched = useCallback(
+    (launched: boolean) => {
+      const form = filesStore.files.find(
+        (file) => file.id === spaceItemIds.form,
+      );
+      if (!form || !!form.startFilling === launched) return false;
+
+      runInAction(() => {
+        Object.assign(form, withDemoFormLaunched(form, launched));
+      });
+      return true;
+    },
+    [filesStore, spaceItemIds],
+  );
+
+  // Only a launch the tour faked is undone; a form launched for real stays so.
+  const launchedByTour = useRef(false);
+  const launchHooks = useMemo(
+    () => ({
+      reveal: () => {
+        launchedByTour.current = setFormLaunched(true);
+      },
+      restore: () => {
+        if (!launchedByTour.current) return;
+        launchedByTour.current = false;
+        setFormLaunched(false);
+      },
+    }),
+    [setFormLaunched],
   );
 
   // The section's own filter is passed back rather than left to default: it is
@@ -190,40 +324,78 @@ const FormsTour = ({
   // from here on — the navigation's included — goes to the server, so the
   // stand-in rooms cannot come back after the reload that was meant to
   // replace them.
-  const endDemo = useCallback(async () => {
-    if (!tourDemo.isActive) {
-      leaveSpace();
-      return;
-    }
+  const endDemo = useCallback(
+    async ({ fade = false } = {}) => {
+      const swaps =
+        tourDemo.isStandingInForList || sectionLocation.current !== null;
+      if (fade && swaps) await fadeSectionOut();
 
-    // Only a section that was stood in for has anything to fetch back; when
-    // the list was the user's own all along, dropping the mocks is enough.
-    const wasStandingIn = tourDemo.isStandingInForList;
-    tourDemo.deactivate();
+      try {
+        if (!tourDemo.isActive) {
+          leaveSpace();
+          return;
+        }
 
-    leaveSpace();
+        const wasStandingIn = tourDemo.isStandingInForList;
+        tourDemo.deactivate();
+        leaveSpace();
+        if (wasStandingIn) await reloadSection();
+      } finally {
+        if (fade && swaps) fadeSectionIn();
+      }
+    },
+    [leaveSpace, reloadSection],
+  );
 
-    // Awaited so the reload settles after the navigation's own load rather
-    // than alongside it — both now hit the server, and this one is the answer
-    // the section is left showing.
-    if (wasStandingIn) await reloadSection();
-  }, [leaveSpace, reloadSection]);
+  // Shared by the arming effect and the closing step's `restore`.
+  const demoConfig = useMemo<TourDemoConfig>(
+    () => ({
+      list: "rooms",
+      standInForList: !hasItems,
+      rooms: [
+        {
+          roomType: RoomsType.FormRoom,
+          title: t("FormsTour:FormsDemoOnboarding"),
+        },
+        {
+          roomType: RoomsType.FormRoom,
+          title: t("FormsTour:FormsDemoTimeOff"),
+        },
+        {
+          roomType: RoomsType.FormRoom,
+          title: t("FormsTour:FormsDemoFeedback"),
+        },
+      ],
+      owner: user as unknown as TCreatedBy,
+      memberAccess: [
+        ShareAccessRights.FormFilling,
+        ShareAccessRights.FormFilling,
+      ],
+      contents: {
+        inProgressTitle: t("Common:InProgress"),
+        completeTitle: t("Common:Complete"),
+      },
+    }),
+    [t, user, hasItems],
+  );
+
+  // Walked back out of the closing step: the stand-in list comes back.
+  const restoreDemo = useCallback(() => {
+    if (tourDemo.isActive || !user) return;
+    tourDemo.activate(demoConfig);
+    void reloadSection();
+  }, [demoConfig, reloadSection, user]);
 
   const demoHooks = useMemo(
-    // Nothing to restore afterwards: the section is already the user's own
-    // again by the time this step is done with it. `reveal` is sync by
-    // contract and the step's own `waitForElement` is what waits for the empty
-    // screen the reload brings up, so the promise is left to settle on its own.
     () => ({
       reveal: () => {
         void endDemo();
       },
-      restore: () => {},
-      // Steps out of the space and refetches the section, so the empty screen
-      // this step points at is the far side of a route change and a request.
+      restore: restoreDemo,
+      swapsList: true,
       navigates: true,
     }),
-    [endDemo],
+    [endDemo, restoreDemo],
   );
 
   /**
@@ -242,85 +414,36 @@ const FormsTour = ({
    * reload has to have landed by the time joyride freezes the step list
    * against the DOM.
    */
+  // Armed whatever the list holds: the stand-in space is built off the list
+  // response either way. The section is hidden only while an empty list is
+  // being replaced.
+  const shouldArmDemo =
+    formsTourStore.isPending &&
+    !formsTourStore.isRunning &&
+    !tourDemo.isActive &&
+    !isMobileView &&
+    !firstLoad &&
+    !isSectionLoading &&
+    isFormsRoot &&
+    !!user &&
+    ready;
+
+  const { isPreparing, runSwap } = useDemoSwap(shouldArmDemo && !hasItems);
+
   useEffect(() => {
-    if (!formsTourStore.isPending || formsTourStore.isRunning) return;
-    if (tourDemo.isActive) return;
-    if (isMobileView || firstLoad || isSectionLoading || !isFormsRoot) return;
-    if (!user) return;
-    // The stand-in titles below are read once and frozen into the demo: the
-    // next run of this effect finds the demo active and returns. `FormsTour` is
-    // not one of the preloaded namespaces (SRC_DIR/i18n.js), so with
-    // `useSuspense: false` it can still be a render behind the rest of the
-    // page — and a demo armed then keeps the raw keys for as long as it is up.
-    if (!ready) return;
+    if (!shouldArmDemo) return;
 
-    // Whatever the audience. A form filler with no spaces yet has the most to
-    // gain from this and the least without it: their empty section renders
-    // neither the banner nor the filter bar, so their tour is one sidebar step
-    // — nothing about what a space holds, and nothing about the form inside it.
-    // The closing step is what keeps that honest: it forks on `canCreate` and
-    // names the empty list for anyone who has no "create" button to be sent at.
-    const standInForList = !hasItems;
+    const arm = () => {
+      tourDemo.activate(demoConfig);
+      return reloadSection();
+    };
 
-    tourDemo.activate({
-      // Form spaces are rooms with a search area of their own, so the list they
-      // come back on is the ordinary one.
-      list: "rooms",
-      standInForList,
-      // Three collections anybody recognizes, so the list reads as what the
-      // section is for at a glance. Unlike the rooms tour — where each room is
-      // named after its own type and the names already exist — a form space
-      // has no name of its own to borrow, so these are the tour's own strings.
-      rooms: [
-        {
-          roomType: RoomsType.FormRoom,
-          title: t("FormsTour:FormsDemoOnboarding"),
-        },
-        {
-          roomType: RoomsType.FormRoom,
-          title: t("FormsTour:FormsDemoTimeOff"),
-        },
-        {
-          roomType: RoomsType.FormRoom,
-          title: t("FormsTour:FormsDemoFeedback"),
-        },
-      ],
-      owner: user as unknown as TCreatedBy,
-      // The people a collection is run for, for anything that asks a stand-in
-      // space who is in it.
-      memberAccess: [
-        ShareAccessRights.FormFilling,
-        ShareAccessRights.FormFilling,
-      ],
-      // The two system folders the tour walks the user through inside a space,
-      // named by the labels the product already uses for them.
-      contents: {
-        inProgressTitle: t("Common:InProgress"),
-        completeTitle: t("Common:Complete"),
-      },
-    });
-
-    // Fetched whether or not the list is being stood in for. The stand-in
-    // space the tour walks into is built by the list interceptor, off the
-    // `current` folder of a real answer (tourDemo.standInForRooms), so a list
-    // that was loaded before the mocks went up leaves `tourDemo.space` null —
-    // and `enterSpace` a no-op, which strands every step that stands inside a
-    // space. The response is passed through untouched when the list is the
-    // user's own, so this costs a request and changes nothing on screen.
-    void reloadSection();
-  }, [
-    formsTourStore.isPending,
-    formsTourStore.isRunning,
-    hasItems,
-    isMobileView,
-    firstLoad,
-    isSectionLoading,
-    isFormsRoot,
-    user,
-    reloadSection,
-    ready,
-    t,
-  ]);
+    if (hasItems) {
+      void arm();
+    } else {
+      runSwap(arm);
+    }
+  }, [shouldArmDemo, hasItems, demoConfig, reloadSection, runSwap]);
 
   // A tour that ends while a step is still up — closed, skipped, its anchor
   // gone — never reaches that step's `after`, so the user would be left
@@ -345,7 +468,8 @@ const FormsTour = ({
     if (!hasStarted.current) return;
     hasStarted.current = false;
 
-    void endDemoRef.current();
+    void endDemoRef.current({ fade: true });
+    setOwnSpace(undefined);
   }, [formsTourStore.isRunning]);
 
   // The effect above only fires while this component is around to see the tour
@@ -383,9 +507,12 @@ const FormsTour = ({
       showFilter,
       hasItems,
       hasForms,
-      isDemo,
+      isDemo: isDemo || !!ownSpace,
       isStandIn,
+      usesStandInSpace: !ownSpace,
+      spaceItemIds,
       spaceHooks,
+      launchHooks,
       demoHooks,
       leaveSpace,
     }),
@@ -398,7 +525,10 @@ const FormsTour = ({
       hasForms,
       isDemo,
       isStandIn,
+      ownSpace,
+      spaceItemIds,
       spaceHooks,
+      launchHooks,
       demoHooks,
       leaveSpace,
     ],
@@ -413,7 +543,7 @@ const FormsTour = ({
     formsTourStore,
     buildSteps,
     isMobileView,
-    "forms tour",
+    FORMS_TOUR_LABEL,
   );
 
   usePendingTour(
@@ -421,6 +551,8 @@ const FormsTour = ({
     !firstLoad &&
       !isSectionLoading &&
       isFormsRoot &&
+      ownSpace !== undefined &&
+      !isPreparing &&
       // With the list stood in for, "ready" also means the stand-in spaces have
       // actually landed. Without this the reload above and the start timer
       // race, and joyride can freeze its step list against the empty page the

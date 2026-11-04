@@ -54,7 +54,9 @@ export type ListProps = {
   withoutFavorite?: boolean;
   infoPanelVisible?: boolean;
   /** Whitelist of context-menu action keys; filters per-item contextOptions. */
-  allowedContextOptions?: ReadonlySet<string>;
+  allowedContextOptions?:
+    | ReadonlySet<string>
+    | ((file: TFile) => ReadonlySet<string>);
   /**
    * Separate whitelist applied only to folder items. When set, folders use
    * this instead of `allowedContextOptions` (see useItemList for details).

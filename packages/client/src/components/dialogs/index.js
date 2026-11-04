@@ -80,7 +80,6 @@ import CancelOperationDialog from "./CancelOperationDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
 import ConnectAccountDialog from "./ConnectAccountDialog";
 import DisconnectAccountDialog from "./DisconnectAccountDialog";
-import CreateAgentDialog from "./CreateEditAgentDialog/CreateAgentDialog";
 import ResetTemplateDialog from "./ResetTemplateDialog";
 import EditRoomGroupsDialog from "./EditRoomGroupsDialog";
 import AddRoomToGroupDialog from "./AddRoomToGroupDialog";
@@ -134,7 +133,6 @@ export {
   ReducedRightsDialog,
   ConnectAccountDialog,
   DisconnectAccountDialog,
-  CreateAgentDialog,
   ResetTemplateDialog,
   EditRoomGroupsDialog,
   AddRoomToGroupDialog,

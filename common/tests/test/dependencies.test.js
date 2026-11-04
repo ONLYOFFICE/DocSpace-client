@@ -481,3 +481,41 @@ it("DifferentDependencyVersionsTest: Verify that all workspaces use same depende
     );
   }
 });
+
+it("SplitDependencyCopiesTest: Verify that apps without a bundler dedupe share every common dependency's copy with shared", () => {
+  const { findSplitCopies } = require(
+    path.join(BASE_DIR, "scripts", "split-copies.cjs"),
+  );
+
+  // These apps resolve split dependencies from their own copy at build time
+  // and test that in their bundler config: packages/client/config/resolve.test.ts
+  // (Vite resolve.dedupe) and packages/sdk/next.config.test.ts (webpack).
+  const dedupedApps = new Set(["client", "sdk"]);
+
+  const packagesDir = path.join(BASE_DIR, "packages");
+  const apps = fs
+    .readdirSync(packagesDir)
+    .filter(
+      (name) =>
+        name !== "shared" &&
+        !dedupedApps.has(name) &&
+        fs.existsSync(path.join(packagesDir, name, "package.json")),
+    );
+
+  const report = apps.flatMap((app) =>
+    findSplitCopies(path.join(packagesDir, app)).map(
+      ({ name, appCopy, sharedCopy }) =>
+        `❌ ${app}: ${name} is installed twice\n` +
+        `  - ${app}: ${path.relative(BASE_DIR, appCopy)}\n` +
+        `  - shared: ${path.relative(BASE_DIR, sharedCopy)}`,
+    ),
+  );
+
+  // pnpm installs a package once per peer set. An app that declares a peer of
+  // a common dependency which shared does not gets its own copy, and imports
+  // from shared's sources then load the other one: a React context or store
+  // in it is no longer shared (ui-kit's ScrollbarContext split emptied the
+  // info panel Share tab). Align the declared peers, or dedupe the package in
+  // the app's bundler and cover it with a test like the two above.
+  expect(report, report.join("\n\n")).toEqual([]);
+});

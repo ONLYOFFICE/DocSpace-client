@@ -46,6 +46,10 @@ import {
   PORTAL_DARK_THEME_ID,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import type { TUser } from "@docspace/shared/api/people/types";
+import {
+  getServiceLimitChatError,
+  getServiceLimitDescription,
+} from "@docspace/shared/utils/ai";
 
 type AiAgentProvidersProps = React.ComponentProps<typeof AiAgentProviders>;
 
@@ -72,6 +76,19 @@ const FormsAiChatProviders = ({
     NonNullable<AiAgentProvidersProps["formatChatError"]>
   >(
     (payload) => {
+      const serviceLimit = getServiceLimitChatError(payload);
+      if (serviceLimit) {
+        return {
+          title: t("Common:AILimitReached"),
+          description: getServiceLimitDescription(
+            t,
+            i18n.language,
+            serviceLimit,
+          ),
+          action: null,
+        };
+      }
+
       if (payload?.code !== "insufficient_funds") return null;
 
       return {
@@ -80,7 +97,7 @@ const FormsAiChatProviders = ({
         action: null,
       };
     },
-    [t],
+    [t, i18n.language],
   );
 
   const callbacks = React.useMemo<AiAgentProvidersProps["callbacks"]>(

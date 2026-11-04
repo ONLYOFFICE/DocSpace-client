@@ -96,7 +96,6 @@ const RoomsActionsContainer = ({
           files: t("Common:Files"),
           rooms: t("Common:Rooms"),
           forms: t("Common:Forms"),
-          aiAgents: t("Common:AIAgents"),
         })}
       </Text>
     </div>

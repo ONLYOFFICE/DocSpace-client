@@ -3,7 +3,7 @@
   "content": "Start collecting responses",
   "content_en_sha1_hash": "116a9de714c9e995151f59b60676aec7fad3cbcd",
   "created_at": "2026-08-04T09:58:55.157Z",
-  "updated_at": "2026-08-05T17:38:06.941Z",
+  "updated_at": "2026-10-31T12:58:29.083Z",
   "comment": {
     "text": "Actionable label in the AI suggestions menu that initiates the process of accepting responses for a form.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 831,
+      "line_number": 771,
       "context": "name: t(\"AiSuggestions:FormSpaceOrganizeForms\"),\n prompt: t(\"AiSuggestions:FormSpaceOrganizeFormsPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceStartCollectingResponses\"),\n prompt: t(\"AiSuggestions:FormSpaceStartCollectingResponsesPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceChangeNameAndTags\"),",
       "module": "/packages/client"
     }

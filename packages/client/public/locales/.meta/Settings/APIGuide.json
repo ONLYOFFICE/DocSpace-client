@@ -3,7 +3,7 @@
   "content": "Read the API guide",
   "content_en_sha1_hash": "9c0f1adc63afde76f483309429e1ff101f5fd032",
   "created_at": "2026-08-26T14:08:26.195Z",
-  "updated_at": "2026-08-26T14:13:23.132Z",
+  "updated_at": "2026-10-22T16:09:36.916Z",
   "comment": {
     "text": "A clickable link label in the developer tools section that provides access to the API documentation.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 188,
+      "line_number": 198,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n onClick={() => window.open(apiKeysUrl, \"_blank\")}\n dataTestId=\"api_guide_link\"\n >\n {t(\"Settings:APIGuide\")}\n </Link>\n ) : null}\n </div>\n <div>\n {error ? (",
       "module": "/packages/client"
     }

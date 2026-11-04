@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Aplikácie boli úspešne aktivované",
   "AppName": "Názov aplikácie",
   "Apps": "Aplikácie",
+  "AppsLimitReached": "Dosiahli ste maximálny počet aplikácií, ktoré môžete vytvoriť. Ak chcete pridať novú aplikáciu, vymažte aplikáciu, ktorú už nepotrebujete.",
+  "AppsLimitReachedWorkspace": "Tento pracovný priestor dosiahol maximálny počet aplikácií. Ak chcete pridať novú aplikáciu, vymažte aplikáciu, ktorá už nie je potrebná.",
   "AuthButton": "Tlačidlo autorizácie",
   "AuthenticationMethod": "Spôsob autorizácie",
   "AuthorizedApps": "Autorizované aplikácie",

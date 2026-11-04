@@ -61,9 +61,7 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
 		case RoomsType.FormRoom:
 			return t("Common:RoleRoomAdminFormRoomDescription");
 		case RoomsType.AIRoom:
-			return t("Common:RoleAIAgentManagerDescription", {
-				aiAgent: t("Common:AIAgent"),
-			});
+			return t("Common:RoleAIAgentManagerDescription");
 		case None:
 			return t("Common:RoleRoomAdminDescription", {
 				sectionName: t("Common:Files"),
@@ -196,6 +194,22 @@ export const getAccessOptions = (
 			access: ShareAccessRights.Comment,
 			type: EmployeeType.User,
 		},
+		projectManager: {
+			key: "projectManager",
+			label: t("Common:AIProjectManager"),
+			description: t("Common:AIProjectManagerDescription"),
+			tooltip: t("Common:UserMaxAvailableRoleWarning"),
+			color: globalColors.favoritesStatus,
+			access: ShareAccessRights.RoomManager,
+			type: EmployeeType.RoomAdmin,
+		},
+		projectMember: {
+			key: "projectMember",
+			label: t("Common:Member"),
+			description: t("Common:AIProjectMemberDescription"),
+			access: ShareAccessRights.ReadOnly,
+			type: EmployeeType.Guest,
+		},
 		viewer: {
 			key: "viewer",
 			label: t("Common:RoleViewer"),
@@ -218,7 +232,18 @@ export const getAccessOptions = (
 		//     accesses.viewer,
 		//   ];
 		//   break;
+		// A Knowledge room has no Editor: its files are sources to index, read
+		// or replaced by an upload, never edited in place.
+		case RoomsType.KnowledgeRoom:
+			options = [
+				accesses.roomManager,
+				{ key: "s1", isSeparator: withSeparator },
+				accesses.contentCreator,
+				accesses.viewer,
+			];
+			break;
 		case RoomsType.EditingRoom:
+		case RoomsType.InstructionsRoom:
 			options = [
 				accesses.roomManager,
 				{ key: "s1", isSeparator: withSeparator },
@@ -287,6 +312,13 @@ export const getAccessOptions = (
 				{ key: "s1", isSeparator: withSeparator },
 				accesses.viewer,
 			];
+			break;
+
+		// An AI project: the manager role is paid (room admins and up), so the
+		// invite panel leaves users with Member only. Its invitation link joins
+		// as Project manager alone (see ExternalLinks).
+		case RoomsType.AiProjectRoom:
+			options = [accesses.projectManager, accesses.projectMember];
 			break;
 
 		case None:

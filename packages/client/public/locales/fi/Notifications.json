@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Merkit korostavat tiedostotoimintoja, kuten latauksia, muokkauksia ja jakoja, sovelluksissa {{files}}, {{rooms}}, {{forms}} ja {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Merkit korostavat tiedostotoimintoja, kuten latauksia, muokkauksia ja jakoja, sovelluksissa {{files}}, {{rooms}}, {{forms}} ja AI-agentit.",
   "AdminSetupRequired": "Adminin asennus vaaditaan",
   "Badges": "Merkit",
   "DailyFeed": "Päivittäinen {{organizationName}} {{productName}}-syöte",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "Tämä käyttäjätili ladataan LDAP:sta. Käyttäjän sähköpostiosoitetta ei ole määritetty, ja nykyinen osoite on luotu automaattisesti eikä sitä voi käyttää ilmoitusten lähettämiseen.",
   "NotConfigured": "Ei määritetty",
   "Notifications": "Ilmoitukset",
-  "RoomsActivityDescription": "Saat välittömät sähköposti-ilmoitukset uusista jaetuista tiedostoista ja kansioista sekä toiminnasta osioissa {{files}}, {{rooms}}, {{forms}} ja {{aiAgents}}.",
-  "RoomUpdateNotify": "Toiminta osioissa {{files}}, {{rooms}}, {{forms}} ja {{aiAgents}}",
+  "RoomsActivityDescription": "Saat välittömät sähköposti-ilmoitukset uusista jaetuista tiedostoista ja kansioista sekä toiminnasta osioissa {{files}}, {{rooms}}, {{forms}} ja AI-agentit.",
+  "RoomUpdateNotify": "Toiminta osioissa {{files}}, {{rooms}}, {{forms}} ja AI-agentit",
   "SettingUpNotifications": "Ilmoitusasetukset",
   "SuccessConnected": "{{serviceName}} on yhdistetty onnistuneesti ilmoituskanavana. Saat sieltä nyt päivityksiä.",
   "SuccessDisconnected": "{{serviceName}} onnistui irrottamaan ilmoituskanavana. Ilmoituksia ei enää lähetetä sinne.",

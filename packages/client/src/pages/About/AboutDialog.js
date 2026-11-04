@@ -47,6 +47,7 @@ const AboutDialog = (props) => {
     companyInfoSettingsData,
     standalone,
     licenseAgreementsUrl,
+    privacyPolicyUrl,
     isEnterprise,
     logoText,
   } = props;
@@ -59,6 +60,7 @@ const AboutDialog = (props) => {
       companyInfoSettingsData={companyInfoSettingsData}
       standalone={standalone}
       licenseAgreementsUrl={licenseAgreementsUrl}
+      privacyPolicyUrl={privacyPolicyUrl}
       isEnterprise={isEnterprise}
       logoText={logoText}
     />
@@ -70,6 +72,7 @@ export default inject(({ settingsStore, currentTariffStatusStore }) => {
     companyInfoSettingsData,
     standalone,
     licenseAgreementsUrl,
+    privacyPolicyUrl,
     logoText,
   } = settingsStore;
   const { isEnterprise } = currentTariffStatusStore;
@@ -78,6 +81,7 @@ export default inject(({ settingsStore, currentTariffStatusStore }) => {
     companyInfoSettingsData,
     standalone,
     licenseAgreementsUrl,
+    privacyPolicyUrl,
     isEnterprise,
     logoText,
   };

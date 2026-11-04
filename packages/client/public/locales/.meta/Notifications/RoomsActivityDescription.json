@@ -1,20 +1,20 @@
 {
   "key_path": "RoomsActivityDescription",
-  "content": "Get instant email notifications about new shared files and folders and activity in {{files}}, {{rooms}}, {{forms}}, and {{aiAgents}}.",
-  "content_en_sha1_hash": "ab50f85af8e886e367102f5985883b013aade1cb",
-  "created_at": "2026-08-31T18:23:43.458Z",
-  "updated_at": "2026-08-31T20:04:37.002Z",
+  "content": "Get instant email notifications about new shared files and folders and activity in {{files}}, {{rooms}}, {{forms}}, and AI agents.",
+  "content_en_sha1_hash": "6ab4c968b59a831ecf2405d81391ef59a4fc7fb2",
+  "created_at": "2026-10-16T12:03:34.655Z",
+  "updated_at": "2026-10-16T12:03:59.839Z",
   "comment": {
-    "text": "Explanatory text for the Rooms Activity notification toggle. It describes the scope of email alerts, using placeholders for various workspace entities (files, rooms, forms, and AI agents).",
+    "text": "Description of the rooms activity email notification option; {{files}}, {{rooms}}, {{forms}} are section names. Write \"AI agents\" in the case the sentence needs.",
     "is_auto": true,
-    "updated_at": "2026-08-31T20:04:37.002Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-16T12:03:59.839Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
-      "line_number": 92,
-      "context": "isChecked={roomsActivitySubscription}\n dataTestId=\"rooms_activity_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"RoomsActivityDescription\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}",
+      "line_number": 91,
+      "context": "isChecked={roomsActivitySubscription}\n dataTestId=\"rooms_activity_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"RoomsActivityDescription\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>",
       "module": "/packages/client"
     }
   ],

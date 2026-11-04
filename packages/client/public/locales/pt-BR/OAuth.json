@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Aplicativos ativados com êxito",
   "AppName": "Nome do aplicativo",
   "Apps": "Aplicativos",
+  "AppsLimitReached": "Você atingiu o número máximo de aplicativos que pode criar. Exclua um aplicativo de que não precisa mais para adicionar um novo.",
+  "AppsLimitReachedWorkspace": "Este espaço de trabalho atingiu o número máximo de aplicativos. Exclua um aplicativo que não seja mais necessário para adicionar um novo.",
   "AuthButton": "Botão de autenticação",
   "AuthenticationMethod": "Método de autenticação",
   "AuthorizedApps": "Aplicativos autorizados",

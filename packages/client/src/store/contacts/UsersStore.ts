@@ -48,7 +48,11 @@ import {
   FolderType,
   RoomSearchArea,
 } from "@docspace/shared/enums";
-import { getUserType } from "@docspace/shared/utils/common";
+import {
+  getCategoryType,
+  getUserType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
@@ -61,13 +65,14 @@ import {
   FILTER_INSIDE_GROUPS,
   FILTER_PEOPLE,
 } from "@docspace/shared/utils/filterConstants";
-import { LANGUAGE } from "@docspace/shared/constants";
+import { CategoryType, LANGUAGE } from "@docspace/shared/constants";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
 } from "@onlyoffice/apps-ui-kit/utils/socket";
+import type { TUnmappedSocketListener } from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   downgradeUserType,
   getReassignmentProgress,
@@ -109,6 +114,22 @@ import FilesStore from "../FilesStore";
 import DialogsStore from "../DialogsStore";
 import SelectedFolderStore from "../SelectedFolderStore";
 
+type TUserTypeFlags = Partial<
+  Pick<TUser, "isOwner" | "isAdmin" | "isRoomAdmin" | "isCollaborator">
+>;
+
+const getUserTypeRank = (user: TUserTypeFlags) => {
+  if (user.isOwner) return 4;
+  if (user.isAdmin) return 3;
+  if (user.isRoomAdmin) return 2;
+  if (user.isCollaborator) return 1;
+  return 0;
+};
+
+// UsersStore is a singleton, so one flag is enough to keep a burst of
+// triggers down to one request.
+let isUserTypeCheckRunning = false;
+
 class UsersStore {
   filter = Filter.getDefault();
 
@@ -140,6 +161,8 @@ class UsersStore {
   roomParts: string = "";
 
   activeUsers: TPeopleListItem[] = [];
+
+  isUserTypeLoweredBarVisible = false;
 
   constructor(
     public settingsStore: SettingsStore,
@@ -248,6 +271,15 @@ class UsersStore {
 
       const userData = { ...data, hasPersonalFolder };
 
+      // What is already on screen was loaded with the old rights, and parts of
+      // it start answering 403. Offer a reload instead of navigating away.
+      if (
+        this.userStore.user &&
+        getUserTypeRank(userData) < getUserTypeRank(this.userStore.user)
+      ) {
+        this.setIsUserTypeLoweredBarVisible(true);
+      }
+
       setUser(userData as TUser);
 
       fetchTreeFolders();
@@ -294,19 +326,30 @@ class UsersStore {
         return;
       }
 
-      const isArchive = pathname.includes("rooms/archived");
-      if (isArchive || pathname.includes("rooms/shared")) {
-        const { fetchRooms } = this.filesStore;
+      const isPrivate = isPrivateRoomsRoute(pathname);
+      const isArchive = isPrivate
+        ? getCategoryType({ pathname }) === CategoryType.PrivateArchive
+        : pathname.includes("rooms/archived");
+      if (!isArchive && !isPrivate && !pathname.includes("rooms/shared")) return;
 
-        const roomsFilter = RoomsFilter.getDefault(
-          id,
-          isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
-        );
-        // fetchRooms(folderId, filter) — this caller has
-        // always passed the filter in the folderId slot (the filter argument
-        // falls back to the default); erased cast preserves that behavior.
-        fetchRooms(roomsFilter as unknown as string);
+      // Inside an open room only its own rights are re-read (the type can
+      // change the user's role in it): fetchRooms there replaced the room's
+      // content with the list.
+      if (!this.selectedFolderStore.isRootFolder) {
+        this.filesStore.refreshFiles().catch((e) => console.error(e));
+        return;
       }
+
+      const { fetchRooms } = this.filesStore;
+
+      const roomsFilter = RoomsFilter.getDefault(
+        id,
+        isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
+      );
+      // fetchRooms(folderId, filter) — this caller has
+      // always passed the filter in the folderId slot (the filter argument
+      // falls back to the default); erased cast preserves that behavior.
+      fetchRooms(roomsFilter as unknown as string);
     };
 
     SocketHelper?.on(SocketEvents.AddUser, addUser);
@@ -316,6 +359,17 @@ class UsersStore {
     SocketHelper?.on(SocketEvents.DeleteUser, deleteUser);
     SocketHelper?.on(SocketEvents.DeleteGuest, deleteUser);
     SocketHelper?.on(SocketEvents.ChangeMyType, changeMyType);
+
+    // s:change-my-type only reaches a tab that is connected at that moment.
+    // socket.io fires "connect" again on every reconnect (the first one is
+    // over before listeners are registered), so a missed change is caught up
+    // here.
+    SocketHelper?.on(
+      "connect" as SocketEvents,
+      (() => {
+        this.checkUserTypeLowered();
+      }) as unknown as TUnmappedSocketListener,
+    );
 
     SocketHelper?.on(SocketEvents.UpdateGroup, async (value) => {
       console.log(
@@ -339,6 +393,33 @@ class UsersStore {
       });
     });
   }
+
+  setIsUserTypeLoweredBarVisible = (visible: boolean) => {
+    this.isUserTypeLoweredBarVisible = visible;
+  };
+
+  // Re-reads the current user for a tab that may have missed
+  // s:change-my-type, and offers a reload if the type went down meanwhile.
+  checkUserTypeLowered = async () => {
+    const { user } = this.userStore;
+
+    if (!user || this.isUserTypeLoweredBarVisible || isUserTypeCheckRunning)
+      return;
+
+    isUserTypeCheckRunning = true;
+
+    try {
+      const self = await api.people.getUser();
+
+      if (self && getUserTypeRank(self) < getUserTypeRank(user)) {
+        this.setIsUserTypeLoweredBarVisible(true);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      isUserTypeCheckRunning = false;
+    }
+  };
 
   setContactsTab = (contactsTab: TContactsTab) => {
     if (contactsTab) {
@@ -424,6 +505,18 @@ class UsersStore {
   get isUsersEmptyView() {
     return !this.peopleList.length;
   }
+
+  refreshUser = async (id: string) => {
+    const user = await api.people.getUserById(id);
+
+    runInAction(() => {
+      const idx = this.users.findIndex((x) => x.id === id);
+
+      if (idx !== -1) this.users[idx] = user;
+    });
+
+    this.updateSelection();
+  };
 
   setUsers = (users: TUser[]) => {
     this.users = users;
@@ -622,6 +715,7 @@ class UsersStore {
     statusType: ReturnType<typeof getUserStatus>,
     userRole: ReturnType<typeof getUserType>,
     status: EmployeeStatus,
+    hasAILimit: boolean,
   ) => {
     if (!this.userStore.user) return;
 
@@ -639,6 +733,8 @@ class UsersStore {
 
         if (isAdmin || isOwner) {
           options.push("room-list");
+
+          if (!isGuest && hasAILimit) options.push("change-ai-limit");
         }
 
         if (isMySelf) {
@@ -736,6 +832,8 @@ class UsersStore {
 
           if (isAdmin || isOwner) {
             options.push("room-list");
+
+            if (!isGuest && hasAILimit) options.push("change-ai-limit");
           }
 
           if (
@@ -846,6 +944,7 @@ class UsersStore {
       isLDAP,
       quotaLimit,
       usedSpace,
+      aiServicesLimit,
       isCustomQuota,
       createdBy,
       registrationDate,
@@ -866,6 +965,7 @@ class UsersStore {
       statusType,
       role,
       status,
+      !!aiServicesLimit,
     );
 
     const locale = getCookie(LANGUAGE) ?? this.settingsStore.culture;
@@ -903,6 +1003,7 @@ class UsersStore {
       isLDAP,
       quotaLimit,
       usedSpace,
+      aiServicesLimit,
       isCustomQuota,
       createdBy,
       registrationDate: regDate,
@@ -1141,11 +1242,15 @@ class UsersStore {
   };
 
   setSelected = (selected: TContactsSelected) => {
-    const { hotkeyCaret, setHotkeyCaret } = this.contactsHotkeysStore;
+    const { hotkeyCaret, setHotkeyCaret, setHotkeyCaretStart } =
+      this.contactsHotkeysStore;
     this.bufferSelection = null;
     this.selected = selected;
 
-    setHotkeyCaret(this.selection.at(-1) ?? hotkeyCaret);
+    if (!hotkeyCaret) setHotkeyCaret(this.selection.at(-1) ?? null);
+    if (hotkeyCaret && (selected === "none" || selected === "close")) {
+      setHotkeyCaretStart(hotkeyCaret);
+    }
     const selectedUser = this.getUsersBySelected(this.peopleList, selected);
     this.setSelection(selectedUser);
 
@@ -1297,6 +1402,14 @@ class UsersStore {
     const users = this.selection.filter(() => canDisableQuota());
 
     return users.length > 0;
+  }
+
+  get showAISpendingInfo() {
+    const { isOwner, isAdmin } = this.userStore.user ?? {};
+
+    if (!isOwner && !isAdmin) return false;
+
+    return this.users.some((user) => !!user.aiServicesLimit);
   }
 
   get hasUsersToResetQuota() {

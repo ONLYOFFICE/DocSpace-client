@@ -58,6 +58,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     isNotPaidPeriod,
     isAuthenticated,
     isPortalDeactivate,
+    isPortalBlocked,
 
     withManager,
     withCollaborator,
@@ -81,6 +82,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
   const location = useLocation();
 
+  // Nobody can work in a deactivated or a blocked portal; both only show the
+  // unavailable page, which tells them apart by the status.
+  const isPortalUnavailable = isPortalDeactivate || isPortalBlocked;
+
   const renderComponent = () => {
     // A deleted portal fails every request, this route among them, so the
     // branches below would send the visitor to the login page — which bounces
@@ -90,7 +95,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (isPortalNotFoundRedirectClaimed()) return null;
 
     if (!user && isAuthenticated) {
-      if (isPortalDeactivate) {
+      if (isPortalUnavailable) {
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),
         );
@@ -107,12 +112,24 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       const loggedOutUserId = sessionStorage.getItem("loggedOutUserId");
       const redirectPath = sessionStorage.getItem("referenceUrl");
 
-      if (loggedOutUserId && redirectPath && loggedOutUserId === user.id) {
+      // A tab sent to the login page keeps its address in referenceUrl.
+      // Logging in in another tab sends such a tab to the portal root, so it
+      // is brought back from here. The address is followed for the user who
+      // was there, and also when nothing names that user (the session ran
+      // out, an open document lost its session); only another user's page
+      // is never opened.
+      if (
+        redirectPath &&
+        (!loggedOutUserId || loggedOutUserId === user.id) &&
+        redirectPath !== window.location.href
+      ) {
         window.location.href = redirectPath;
       }
 
       sessionStorage.removeItem("referenceUrl");
       sessionStorage.removeItem("loggedOutUserId");
+      // Read by the 401 handler, which has no user of its own to name.
+      sessionStorage.setItem("sessionUserId", user.id);
     }
 
     const isAccountsPage = location.pathname.includes("/accounts");
@@ -187,7 +204,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return <AppLoader />;
       }
 
-      if (isPortalDeactivate) {
+      if (isPortalUnavailable) {
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),
         );
@@ -218,7 +235,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         ((!user?.isOwner || (baseDomain && baseDomain === "localhost")) &&
           isPortalDeletionUrl) ||
         (isCommunity && isPaymentsSection) ||
-        (isEnterprise && isBonusPage))
+        ((isEnterprise || !standalone) && isBonusPage))
     ) {
       return <Navigate replace to="/" />;
     }
@@ -318,7 +335,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     // if (!isLoaded) {
     //   return <AppLoader />;
 
-    if (isPortalDeactivate && location.pathname !== "/unavailable") {
+    if (isPortalUnavailable && location.pathname !== "/unavailable") {
       return (
         <Navigate
           to={combineUrl(window.ClientConfig?.proxy?.url, "/unavailable")}

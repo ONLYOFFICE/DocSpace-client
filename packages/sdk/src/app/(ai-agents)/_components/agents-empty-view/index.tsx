@@ -66,22 +66,24 @@ import { observer } from "mobx-react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+
+import AIChatNotAvailableDarkIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.dark.svg";
+import AIChatNotAvailableLightIcon from "@onlyoffice/apps-ui-kit/assets/ai.chat.not.available.light.svg";
+
+import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
+import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
+
+import { getBrandName } from "@docspace/shared/constants/brands";
 import {
   EmptyView,
   type EmptyViewOptionsType,
 } from "@docspace/shared/components/empty-view";
-import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
-import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
-import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
-import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 import CreateAIAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
 
-import {
-  useAgentsUserStore,
-  useAgentDialogsStore,
-} from "../../_store";
+import { useAgentsUserStore, useAgentDialogsStore } from "../../_store";
 
 // Port of client EmptyViewContainer for the AI Agents root folder. Renders
 // the same <EmptyView> primitive with the same i18n keys + the same SVG
@@ -124,12 +126,10 @@ const AgentsEmptyView = () => {
   const title = aiReady
     ? isVisitor
       ? t("Common:EmptyAIAgentsUserTitle", {
-          aiAgents: t("Common:AIAgents", { defaultValue: "AI Agents" }),
-          defaultValue: "No {{aiAgents}} yet",
+          defaultValue: "No AI agents yet",
         })
       : t("Common:EmptyAIAgentsTitle", {
-          aiAgent: t("Common:AIAgent", { defaultValue: "AI Agent" }),
-          defaultValue: "Create your first {{aiAgent}}",
+          defaultValue: "Create your first AI agent",
         })
     : standalone && isAdminOrOwner
       ? t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle", {
@@ -143,16 +143,14 @@ const AgentsEmptyView = () => {
             defaultValue: "AI agents are unavailable",
           })
         : t("Common:EmptyAIAgentsAIDisabledUserTitle", {
-            aiAgents: t("Common:AIAgents", { defaultValue: "AI Agents" }),
-            defaultValue: "{{aiAgents}} are unavailable",
+            defaultValue: "AI agents are unavailable",
           });
 
   const description = aiReady
     ? isVisitor
       ? t("Common:EmptyAIAgentsAIEnabledUserDescription", {
-          aiAgents: t("Common:AIAgents", { defaultValue: "AI Agents" }),
           defaultValue:
-            "{{aiAgents}} will appear here once an admin creates them.",
+            "AI agents will appear here once an admin creates them.",
         })
       : t("Common:EmptyAIAgentsDescription", {
           mcpServer: t("Common:MCPServer", { defaultValue: "MCP server" }),
@@ -169,21 +167,25 @@ const AgentsEmptyView = () => {
       : isAdminOrOwner
         ? t("Common:EmptyAIAgentsAIDisabledSaasAdminDescription", {
             productName: getBrandName("ProductName"),
-            aiAgents: t("Common:AIAgents", { defaultValue: "AI Agents" }),
             defaultValue:
-              "{{aiAgents}} are not yet enabled in this {{productName}} portal.",
+              "AI agents are not yet enabled in this {{productName}} portal.",
           })
         : t("Common:EmptyAIAgentsAIDisabledDescription", {
             productName: getBrandName("ProductName"),
-            aiAgents: t("Common:AIAgents", { defaultValue: "AI Agents" }),
             defaultValue:
-              "Ask your portal admin to enable {{aiAgents}} in {{productName}}.",
+              "Ask your portal admin to enable AI agents in {{productName}}.",
           });
 
-  const icon = useLightIcon ? (
-    <EmptyAIAgentsLightIcon />
+  const icon = aiReady ? (
+    useLightIcon ? (
+      <EmptyAIAgentsLightIcon />
+    ) : (
+      <EmptyAIAgentsDarkIcon />
+    )
+  ) : useLightIcon ? (
+    <AIChatNotAvailableLightIcon />
   ) : (
-    <EmptyAIAgentsDarkIcon />
+    <AIChatNotAvailableDarkIcon />
   );
 
   // Actions:
@@ -203,8 +205,7 @@ const AgentsEmptyView = () => {
               defaultValue: "Create a new AI agent",
             }),
             description: t("Common:CreateAIAgentDescription", {
-              aiAgent: t("Common:AIAgent", { defaultValue: "AI Agent" }),
-              defaultValue: "Set up a new {{aiAgent}} from scratch.",
+              defaultValue: "Set up a new AI agent from scratch.",
             }),
             icon: <CreateAIAgentIcon />,
             onClick: () => dialogsStore.setCreateAgentDialogVisible(true),

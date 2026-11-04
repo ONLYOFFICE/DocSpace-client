@@ -78,6 +78,8 @@
     }
 
     .upload-panel_file-name {
+      flex-shrink: 10000;
+      min-width: 48px;
       max-width: 412px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -86,9 +88,10 @@
     }
 
     .enter-password {
+      min-width: 0;
       white-space: nowrap;
-      max-width: 97px;
       overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .password-input {
@@ -113,6 +116,8 @@
     }
 
     .upload_panel-icon {
+      min-width: 0;
+      max-width: 50%;
       margin-inline-start: auto;
       padding-inline-start: 16px;
       line-height: 24px;
@@ -123,6 +128,10 @@
       svg {
         width: 16px;
         height: 16px;
+      }
+
+      > :not(.enter-password) {
+        flex-shrink: 0;
       }
 
       .enter-password {

@@ -3,7 +3,7 @@
   "content": "Upload from storage",
   "content_en_sha1_hash": "bb0bb4e2e67d4f7e0242a020d41822a5df4a948a",
   "created_at": "2026-08-31T18:23:45.881Z",
-  "updated_at": "2026-10-06T10:42:37.447Z",
+  "updated_at": "2026-11-02T09:45:28.086Z",
   "comment": {
     "text": "Label for a dropdown option or button in the empty state view that initiates the file upload process from storage.",
     "is_auto": true,
@@ -13,25 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 520,
-      "context": "newUploadActions[0].label = t(\"EmptyView:UploadDeviceOptionTitle\");\n const uploadFromDocspace = {\n id: \"actions_upload-files-product\",\n className: \"main-button_drop-down\",\n icon: MoveReactSvgUrl,\n label: t(\"EmptyView:UploadFromPortalTitle\"),\n onClick: onShowAiKnowledgeSelectFileDialog,\n key: \"upload-files-product\",\n };\n \n setActions([]);",
+      "line_number": 562,
+      "context": "const sourceRoomUploadActions = [\n {\n id: \"actions_upload-from-storage\",\n className: \"main-button_drop-down\",\n icon: MoveReactSvgUrl,\n label: t(\"EmptyView:UploadFromPortalTitle\"),\n onClick: onShowKnowledgeRoomSelectFileDialog,\n key: \"upload-from-storage\",\n },\n {\n id: \"actions_upload-from-device\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 321,
+      "line_number": 236,
       "context": "t(\"EmptyView:ManageAccess\"),\n t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:UploadPDFFormOptionDescription\"),\n FilterType.PDFForm,\n );\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 321,
-      "context": "t(\"EmptyView:ManageAccess\"),\n t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:UploadPDFFormOptionDescription\"),\n FilterType.PDFForm,\n );\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 321,
+      "line_number": 236,
       "context": "t(\"EmptyView:ManageAccess\"),\n t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:UploadPDFFormOptionDescription\"),\n FilterType.PDFForm,\n );\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(",
       "module": "/packages/client"
     },
@@ -43,8 +37,8 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 370,
-      "context": "return [\n {\n id: \"actions_upload-files-product\",\n className: \"main-button_drop-down\",\n icon: MoveReactSvgUrl,\n label: t(\"EmptyView:UploadFromPortalTitle\"),\n onClick: self.onShowAiKnowledgeSelectFileDialog,\n key: \"upload-files-product\",\n },\n {\n id: \"actions_upload-files\",",
+      "line_number": 368,
+      "context": "// Both take files from the workspace (copied in, filtered to what the\n // room holds) or from the device, in the order the empty view offers.\n const uploadFromStorage: TContextOption = {\n id: \"personal_upload-from-storage\",\n key: \"upload-from-storage\",\n label: t(\"EmptyView:UploadFromPortalTitle\"),\n icon: MoveReactSvgUrl,\n onClick: () => self.onShowKnowledgeRoomSelectFileDialog(),\n };\n const uploadFromDevice: TContextOption = {\n id: \"personal_upload-from-device\",",
       "module": "/packages/client"
     },
     {

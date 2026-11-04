@@ -47,10 +47,16 @@ import {
   FILTER_ARCHIVE_ROOM,
   FILTER_SHARED_ROOM,
   FILTER_TEMPLATES_ROOM,
+  FILTER_AI_HUB_ROOMS,
 } from "../../utils/filterConstants";
 import { getUserFilter, setUserFilter } from "../../utils/userFilterUtils";
 import { TSortOrder, TSortBy, Nullable } from "../../types";
 import { validateAndFixObject } from "../../utils/filterValidator";
+import {
+  parseMetadataFilters,
+  parseMetadataTemplateId,
+} from "../../utils/metadata";
+import type { TMetadataFilterCondition } from "../metadata/types";
 import { typeDefinition } from "./typeDefinition";
 
 const DEFAULT_EXCLUDE_SUBJECT: Nullable<string | boolean> = false;
@@ -96,6 +102,8 @@ const GROUP_ID = "groupId";
 const START_INDEX = "startIndex";
 const SUBJECT_OWNER_ID = "subjectOwnerId";
 const PRIVACY_FILTER = "privacyFilter";
+const METADATA_TEMPLATE_ID = "metadataTemplateId";
+const METADATA_FILTERS = "metadataFilters";
 
 class RoomsFilter {
   page: number;
@@ -140,6 +148,10 @@ class RoomsFilter {
 
   privacyFilter: Nullable<string | number>;
 
+  metadataTemplateId: Nullable<number> = null;
+
+  metadataFilters: Nullable<TMetadataFilterCondition[]> = null;
+
   static getDefault(userId?: string, searchArea: string = DEFAULT_SEARCH_AREA) {
     const defaultFilter = new RoomsFilter(
       DEFAULT_PAGE,
@@ -157,7 +169,9 @@ class RoomsFilter {
             ? `${FILTER_ARCHIVE_ROOM}=${userId}`
             : defaultFilter.searchArea === RoomSearchArea.Templates
               ? `${FILTER_TEMPLATES_ROOM}=${userId}`
-              : "";
+              : defaultFilter.searchArea === RoomSearchArea.AiHub
+                ? `${FILTER_AI_HUB_ROOMS}=${userId}`
+                : "";
 
       try {
         const filterStorageItem = getUserFilter(storageKey);
@@ -277,6 +291,13 @@ class RoomsFilter {
       privacyFilter,
     );
 
+    newFilter.metadataTemplateId = parseMetadataTemplateId(
+      urlFilter[METADATA_TEMPLATE_ID],
+    );
+    newFilter.metadataFilters = parseMetadataFilters(
+      urlFilter[METADATA_FILTERS],
+    );
+
     return newFilter;
   }
 
@@ -387,6 +408,10 @@ class RoomsFilter {
       [GROUP_ID]: groupId,
       [SUBJECT_OWNER_ID]: subjectOwnerId,
       [PRIVACY_FILTER]: privacyFilter,
+      [METADATA_TEMPLATE_ID]: this.metadataTemplateId,
+      [METADATA_FILTERS]: this.metadataFilters?.length
+        ? this.metadataFilters
+        : null,
     };
 
     return toUrlParams(dtoFilter, true);
@@ -437,6 +462,12 @@ class RoomsFilter {
       ...(groupId && { [GROUP_ID]: groupId }),
       ...(subjectOwnerId && { [SUBJECT_OWNER_ID]: subjectOwnerId }),
       ...(privacyFilter && { [PRIVACY_FILTER]: privacyFilter }),
+      ...(this.metadataTemplateId && {
+        [METADATA_TEMPLATE_ID]: this.metadataTemplateId,
+      }),
+      ...(this.metadataFilters?.length && {
+        [METADATA_FILTERS]: this.metadataFilters,
+      }),
       [PAGE]: page + 1,
       [SORT_BY]: sortBy,
       [SORT_ORDER]: sortOrder,
@@ -446,15 +477,18 @@ class RoomsFilter {
     const archivedFilterKey = `${FILTER_ARCHIVE_ROOM}=${userId}`;
     const sharedFilterKey = `${FILTER_SHARED_ROOM}=${userId}`;
     const templatesFilterKey = `${FILTER_TEMPLATES_ROOM}=${userId}`;
+    const aiHubFilterKey = `${FILTER_AI_HUB_ROOMS}=${userId}`;
 
     let archivedStorageFilter = null;
     let sharedStorageFilter = null;
     let templatesStorageFilter = null;
+    let aiHubStorageFilter = null;
 
     try {
       archivedStorageFilter = getUserFilter(archivedFilterKey);
       sharedStorageFilter = getUserFilter(sharedFilterKey);
       templatesStorageFilter = getUserFilter(templatesFilterKey);
+      aiHubStorageFilter = getUserFilter(aiHubFilterKey);
     } catch {
       // console.log(e);
     }
@@ -482,6 +516,12 @@ class RoomsFilter {
       templatesStorageFilter = dtoFilter;
     }
 
+    if (isEmpty(aiHubStorageFilter) && userId) {
+      defaultFilter.searchArea = RoomSearchArea.AiHub;
+      setUserFilter(aiHubFilterKey, defaultFilter);
+      aiHubStorageFilter = dtoFilter;
+    }
+
     const currentStorageFilter =
       dtoFilter.searchArea === RoomSearchArea.Active
         ? sharedStorageFilter
@@ -489,7 +529,9 @@ class RoomsFilter {
           ? archivedStorageFilter
           : dtoFilter.searchArea === RoomSearchArea.Templates
             ? templatesStorageFilter
-            : "";
+            : dtoFilter.searchArea === RoomSearchArea.AiHub
+              ? aiHubStorageFilter
+              : "";
 
     const urlParams =
       withLocalStorage && currentStorageFilter
@@ -513,8 +555,12 @@ class RoomsFilter {
     return Math.ceil(this.total / this.pageCount) - 1;
   }
 
+  hasMetadataFilter() {
+    return Boolean(this.metadataTemplateId || this.metadataFilters?.length);
+  }
+
   clone() {
-    return new RoomsFilter(
+    const filter = new RoomsFilter(
       this.page,
       this.pageCount,
       this.total,
@@ -537,6 +583,13 @@ class RoomsFilter {
       this.subjectOwnerId,
       this.privacyFilter,
     );
+
+    filter.metadataTemplateId = this.metadataTemplateId;
+    filter.metadataFilters = this.metadataFilters
+      ? [...this.metadataFilters]
+      : null;
+
+    return filter;
   }
 
   equals(filter: RoomsFilter) {
@@ -565,6 +618,9 @@ class RoomsFilter {
       this.groupId === filter.groupId &&
       this.subjectOwnerId === filter.subjectOwnerId &&
       this.privacyFilter === filter.privacyFilter &&
+      this.metadataTemplateId === filter.metadataTemplateId &&
+      JSON.stringify(this.metadataFilters ?? null) ===
+        JSON.stringify(filter.metadataFilters ?? null) &&
       typeEqual &&
       tagsEqual;
 

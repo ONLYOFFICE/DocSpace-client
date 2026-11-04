@@ -39,6 +39,8 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { ProgressBar } from "@onlyoffice/apps-ui-kit/components/progress-bar";
@@ -54,7 +56,6 @@ import {
 	ErrorFile,
 	FileActions,
 } from "SRC_DIR/components/PanelComponents";
-import { isAIAgents } from "../../../helpers/plugins/utils";
 
 class FileRow extends Component {
 	constructor(props) {
@@ -258,6 +259,18 @@ class FileRow extends Component {
 									{name}
 									{fileExtension}
 								</Link>
+								{item.skippedMembers?.length ? (
+									<HelpButton
+										className="upload-panel_not-shared"
+										iconName={InfoReactSvgUrl}
+										size={12}
+										tooltipContent={t("Common:EncryptedUploadNotSharedWith", {
+											names: item.skippedMembers
+												.map((m) => m.displayName || m.userId)
+												.join(", "),
+										})}
+									/>
+								) : null}
 							</div>
 						)
 					) : (
@@ -379,7 +392,7 @@ export default inject(
 		let isPlugin = false;
 		let onPluginClick = null;
 
-		if (!isAIAgents() && fileItemsList && enablePlugins) {
+		if (fileItemsList && enablePlugins) {
 			let currPluginItem = null;
 
 			fileItemsList.forEach((i) => {

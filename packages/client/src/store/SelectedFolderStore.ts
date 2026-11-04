@@ -65,7 +65,6 @@ import {
   TShareSettings,
 } from "@docspace/shared/api/files/types";
 import {
-  TAIRoomChatSettings,
   TRoom,
   TRoomLifetime,
   TRoomSecurity,
@@ -92,9 +91,6 @@ export type TNavigationPath = {
   external?: boolean;
   /** Set by FilesStore.fetchFiles for the room-templates root entry. */
   isRootTemplates?: boolean;
-  /** Folder type of the path part (used to drop Knowledge/ResultStorage
-   * entries). */
-  folderType?: FolderType;
   /** Set by the .js FilesStore for template folders; read by
    * FilesActionsStore.moveToRoomsPage. */
   isTemplatesFolder?: boolean;
@@ -121,6 +117,8 @@ class SelectedFolderStore {
   parentId = 0;
 
   filesCount = 0;
+
+  private countedCreatedFileIds = new Set<number | string>();
 
   foldersCount = 0;
 
@@ -221,8 +219,6 @@ class SelectedFolderStore {
 
   passwordProtected: boolean = false;
 
-  chatSettings: TAIRoomChatSettings | undefined;
-
   rootRoomType: Nullable<RoomsType> = null;
 
   rootRoomId: number | string = "";
@@ -282,7 +278,6 @@ class SelectedFolderStore {
       pinned: this.pinned,
       isRoom: this.isRoom,
       isTemplate: this.isTemplate,
-      isAIAgent: this.isAIAgent,
       logo: this.logo,
       tags: this.tags,
       rootFolderId: this.rootFolderId,
@@ -308,10 +303,6 @@ class SelectedFolderStore {
       external: this.external,
       changeDocumentsTabs: this.changeDocumentsTabs,
       isIndexedFolder: this.isIndexedFolder,
-      isAIRoom: this.isAIRoom,
-      isInsideResultStorage: this.isInsideResultStorage,
-      isInsideKnowledge: this.isInsideKnowledge,
-      chatSettings: this.chatSettings,
       rootRoomType: this.rootRoomType,
       rootRoomId: this.rootRoomId,
       shareSettings: this.shareSettings,
@@ -344,6 +335,7 @@ class SelectedFolderStore {
     this.folders = null;
     this.parentId = 0;
     this.filesCount = 0;
+    this.countedCreatedFileIds = new Set();
     this.foldersCount = 0;
     this.isShareable = false;
     this.new = 0;
@@ -383,7 +375,6 @@ class SelectedFolderStore {
     this.watermark = null;
     this.passwordProtected = false;
     this.external = false;
-    this.chatSettings = undefined;
     this.rootRoomType = null;
     this.rootRoomId = "";
     this.shareSettings = null;
@@ -398,6 +389,23 @@ class SelectedFolderStore {
 
   setFilesCount = (filesCount: number) => {
     this.filesCount = filesCount;
+  };
+
+  // An uploaded file reaches the folder twice - through the upload finish and
+  // through the socket "create" event - in either order, so each id may raise
+  // the count only once until the folder is loaded again.
+  countFileCreated = (fileId: number | string) => {
+    if (this.countedCreatedFileIds.has(fileId)) return;
+
+    this.countedCreatedFileIds.add(fileId);
+    this.filesCount += 1;
+  };
+
+  // A file restored from the trash or moved back keeps its id, so it has to
+  // be countable again once it is gone.
+  countFileDeleted = (fileId: number | string) => {
+    this.countedCreatedFileIds.delete(fileId);
+    this.filesCount -= 1;
   };
 
   setFoldersCount = (foldersCount: number) => {
@@ -571,18 +579,6 @@ class SelectedFolderStore {
     }
   };
 
-  get isAIRoom() {
-    return (
-      this.roomType === RoomsType.AIRoom ||
-      this.navigationPath.some((r) => r.roomType === RoomsType.AIRoom) ||
-      this.rootRoomType === RoomsType.AIRoom
-    );
-  }
-
-  get isAIAgent() {
-    return this.roomType === RoomsType.AIRoom;
-  }
-
   get roomQuotaLimit() {
     const { navigationPath } = this;
     return navigationPath.length >= 2
@@ -613,20 +609,6 @@ class SelectedFolderStore {
     if (roomUsedSpace === undefined) return false;
 
     return roomUsedSpace >= roomQuotaLimit;
-  }
-
-  get isInsideResultStorage() {
-    return (
-      this.type === FolderType.ResultStorage ||
-      this.pathParts.some((r) => r.folderType === FolderType.ResultStorage)
-    );
-  }
-
-  get isInsideKnowledge() {
-    return (
-      this.type === FolderType.Knowledge ||
-      this.pathParts.some((r) => r.folderType === FolderType.Knowledge)
-    );
   }
 }
 

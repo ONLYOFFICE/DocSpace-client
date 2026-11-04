@@ -36,10 +36,12 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { installOAuthFetchInterceptor } from "@docspace/shared/utils/oauthFetchInterceptor";
+import { installForeignTextGuard } from "@docspace/shared/utils/foreign-text-guard";
 import App from "./App";
 // import { registerSW } from "@docspace/shared/sw/helper";
 
 installOAuthFetchInterceptor();
+installForeignTextGuard();
 
 const container = document.getElementById("root");
 const root = createRoot(container);

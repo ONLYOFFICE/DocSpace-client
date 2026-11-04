@@ -694,12 +694,14 @@
   --info-block-background: #{$gray-light};
   --info-block-header-color: #{$black};
   --info-block-description-color: #{$gray-text};
+  --ai-callout-description-color: #{$light-gray-dark};
 }
 
 .dark {
   --info-block-background: #{$dark-gray-light};
   --info-block-header-color: #{$white};
   --info-block-description-color: #{$dark-gray-dark};
+  --ai-callout-description-color: #{$dark-gray-dark};
 }
 
 .light {
@@ -2161,10 +2163,12 @@
 
 .light {
   --about-logo-color: #{$black};
+  --about-secondary-text-color: #{$light-gray-dark};
 }
 
 .dark {
   --about-logo-color: #{$white};
+  --about-secondary-text-color: #{$dark-gray-dark};
 }
 
 .light {

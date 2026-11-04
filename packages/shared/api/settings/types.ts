@@ -487,6 +487,8 @@ export type TVersionBuild = {
   docSpace: string;
   communityServer: string;
   documentServer: string;
+  /** Present only where the AI Tools service is deployed. */
+  aiTools?: string;
 };
 
 export type TMailDomainSettings = {

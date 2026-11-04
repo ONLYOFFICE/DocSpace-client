@@ -121,7 +121,6 @@ const CustomizationNavbar = ({
           productName: getBrandName("ProductName"),
           organizationName: getBrandName("OrganizationName"),
           aiSettings: t("AISettings"),
-          aiAgents: t("Common:AIAgents"),
           aiServices: t("Common:AIServices"),
         })}
         url="/portal-settings/customization/general/ai-services-management"

@@ -61,9 +61,11 @@ class PeopleTableHeader extends React.Component<
     const {
       isDefaultUsersQuotaSet,
       showStorageInfo,
+      showAISpendingInfo,
       typeColumnIsEnabled,
       groupColumnIsEnabled,
       storageColumnIsEnabled,
+      aiSpendingColumnIsEnabled,
       invitedDateColumnIsEnabled,
       inviterColumnIsEnabled,
       emailColumnIsEnabled,
@@ -148,12 +150,21 @@ class PeopleTableHeader extends React.Component<
       onClick: this.onFilter,
     };
 
+    const aiSpendingColumn: TableHeaderColumn = {
+      key: "AISpending",
+      title: t!("Common:AISpending"),
+      enable: aiSpendingColumnIsEnabled,
+      resizable: true,
+      onChange: this.onColumnChange,
+    };
+
     const defaultColumns: TableHeaderColumn[] = [nameColumn, mailColumn];
 
     if (!isGuests) {
       defaultColumns.splice(1, 0, typeColumn);
       defaultColumns.splice(2, 0, departmentColumn);
       if (showStorageInfo) defaultColumns.push(userQuotaColumn);
+      if (showAISpendingInfo) defaultColumns.push(aiSpendingColumn);
     } else if (!isRoomAdmin) {
       defaultColumns.push(inviterColumn);
       defaultColumns.push(invitedDateColumn);
@@ -262,7 +273,8 @@ export default inject(
     currentQuotaStore,
     tableStore,
   }: TableHeaderStores) => {
-    const { filter, setFilter, contactsTab } = peopleStore.usersStore!;
+    const { filter, setFilter, contactsTab, showAISpendingInfo } =
+      peopleStore.usersStore!;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -282,6 +294,7 @@ export default inject(
 
       isDefaultUsersQuotaSet,
       showStorageInfo,
+      showAISpendingInfo,
 
       getColumns,
       setColumnEnable,

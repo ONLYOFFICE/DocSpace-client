@@ -253,11 +253,11 @@
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 16px 24px;
 
-  @media (max-width: 900px) {
+  @container dashboard-content (max-width: 800px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  @media (max-width: 520px) {
+  @container dashboard-content (max-width: 480px) {
     grid-template-columns: 1fr;
   }
 }
@@ -437,8 +437,8 @@
 // the wrap decision read the title's own width, so the badge stays on the
 // title's right while both fit and drops to a line of its own - still indented
 // past the icon - once they do not. A quarter of the grid is not enough for
-// "KI-Agenten" + "Installiert", nor for the Russian pair of the same two
-// words.
+// a long translated title plus "Installiert", nor for the Russian pair of the
+// same two words.
 .moduleHeadings {
   display: flex;
   flex: 1;
@@ -607,15 +607,15 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 
-  @media (max-width: 1200px) {
+  @container dashboard-content (max-width: 1000px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  @media (max-width: 900px) {
+  @container dashboard-content (max-width: 800px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  @media (max-width: 600px) {
+  @container dashboard-content (max-width: 560px) {
     grid-template-columns: 1fr;
 
     .devToolTileFeatured {

@@ -41,6 +41,7 @@ import {
   Events,
   FilesSelectorFilterTypes,
   FilterType,
+  RoomsType,
 } from "@docspace/shared/enums";
 
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
@@ -54,6 +55,7 @@ import {
   EmbeddingPanel,
   ConversionPanel,
   ShareFormPanel,
+  MetadataAIPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -107,9 +109,11 @@ import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
 import AskAIConnectDialog from "../dialogs/AskAIConnectDialog";
+import AiProjectDialog from "../dialogs/AiProjectDialog";
 
 const Panels = (props) => {
   const {
+    aiProjectDialogVisible,
     uploadPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
@@ -128,10 +132,12 @@ const Panels = (props) => {
     selectFileFormRoomDialogVisible,
     selectFileFormRoomFilterParam,
     setSelectFileFormRoomDialogVisible,
-    selectFileAiKnowledgeDialogVisible,
-    setSelectFileAiKnowledgeDialogVisible,
     copyFromTemplateForm,
-    copyFileToAiKnowledge,
+    selectFileKnowledgeRoomDialogVisible,
+    setSelectFileKnowledgeRoomDialogVisible,
+    copyFilesToKnowledgeRoom,
+    knowledgeSelectorFilter,
+    isInstructionsRoom,
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
@@ -148,6 +154,7 @@ const Panels = (props) => {
     editLinkPanelIsVisible,
     deleteLinkDialogVisible,
     embeddingPanelData,
+    metadataAIPanelData,
     moveToPublicRoomVisible,
     settingsPluginDialogVisible,
     pluginDialogVisible,
@@ -179,7 +186,6 @@ const Panels = (props) => {
     reducedRightsVisible,
     removeUserConfirmation,
     assignRolesDialogVisible,
-    extsFilesVectorized,
     templateGalleryVisible,
     isVisibleInfoPanelTemplateGallery,
     editRoomGroupsDialogVisible,
@@ -214,8 +220,8 @@ const Panels = (props) => {
     setSelectFileFormRoomDialogVisible(false);
   };
 
-  const onCloseFileFormAiKnowledgeDialog = () => {
-    setSelectFileAiKnowledgeDialogVisible(false);
+  const onCloseFileKnowledgeRoomDialog = () => {
+    setSelectFileKnowledgeRoomDialogVisible(false);
   };
 
   const descriptionTextFileFormRoomDialog = useMemo(() => {
@@ -295,8 +301,8 @@ const Panels = (props) => {
         isCopy={copyPanelVisible}
         isRestore={restorePanelVisible}
         isRestoreAll={restoreAllPanelVisible}
-        withAIAgentsTreeFolder
         disableBySecurity="UseChat"
+        isPortalView
       />
     ),
     connectDialogVisible && <ConnectDialog key="connect-dialog" />,
@@ -323,7 +329,7 @@ const Panels = (props) => {
         onClose={onClose}
         withRecentTreeFolder
         withFavoritesTreeFolder
-        withAIAgentsTreeFolder
+        isPortalView
       />
     ),
     selectFileFormRoomDialogVisible && (
@@ -338,23 +344,26 @@ const Panels = (props) => {
         descriptionText={descriptionTextFileFormRoomDialog}
         withRecentTreeFolder
         withFavoritesTreeFolder
-        withAIAgentsTreeFolder
+        isPortalView
       />
     ),
-    selectFileAiKnowledgeDialogVisible && (
+    selectFileKnowledgeRoomDialogVisible && (
       <FilesSelector
         isFormRoom
         isPanelVisible
-        key="select-file-ai-knowledge-dialog"
-        onClose={onCloseFileFormAiKnowledgeDialog}
-        openRoot
-        onSelectFile={(files) => copyFileToAiKnowledge(files, t)}
-        filterParam={extsFilesVectorized.join(",")}
-        descriptionText=""
         isMultiSelect
+        key="select-file-knowledge-room-dialog"
+        onClose={onCloseFileKnowledgeRoomDialog}
+        openRoot
+        onSelectFile={(files) => copyFilesToKnowledgeRoom(files)}
+        filterParam={
+          // An Instructions room takes Markdown skills only.
+          isInstructionsRoom ? "md" : knowledgeSelectorFilter
+        }
+        descriptionText=""
         withRecentTreeFolder
         withFavoritesTreeFolder
-        withAIAgentsTreeFolder
+        isPortalView
       />
     ),
     hotkeyPanelVisible && <HotkeysPanel key="hotkey-panel" />,
@@ -380,6 +389,7 @@ const Panels = (props) => {
     editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
     deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
     embeddingPanelData.visible && <EmbeddingPanel key="embedding-panel" />,
+    metadataAIPanelData.visible && <MetadataAIPanel key="metadata-ai-panel" />,
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
@@ -465,6 +475,7 @@ const Panels = (props) => {
     askAIConnectDialogVisible && (
       <AskAIConnectDialog key="ask-ai-connect-dialog" />
     ),
+    aiProjectDialogVisible && <AiProjectDialog key="ai-project-dialog" />,
   ];
 };
 
@@ -480,8 +491,10 @@ export default inject(
     currentQuotaStore,
     filesActionsStore,
     filesStore,
-    filesSettingsStore,
     oformsStore,
+    filesSettingsStore,
+    aiProjectsStore,
+    selectedFolderStore,
   }) => {
     const {
       copyPanelVisible,
@@ -508,8 +521,8 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
-      selectFileAiKnowledgeDialogVisible,
-      setSelectFileAiKnowledgeDialogVisible,
+      selectFileKnowledgeRoomDialogVisible,
+      setSelectFileKnowledgeRoomDialogVisible,
       invitePanelOptions,
       inviteQuotaWarningDialogVisible,
       changeQuotaDialogVisible,
@@ -518,6 +531,7 @@ export default inject(
       editLinkPanelIsVisible,
       deleteLinkDialogVisible,
       embeddingPanelData,
+      metadataAIPanelData,
       moveToPublicRoomVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
@@ -557,10 +571,9 @@ export default inject(
 
     const { setArrRoomGroups, arrRoomGroups } = filesStore;
 
-    const { extsFilesVectorized } = filesSettingsStore;
-
     const { preparationPortalDialogVisible } = backup;
-    const { copyFromTemplateForm, copyFileToAiKnowledge } = filesActionsStore;
+    const { copyFromTemplateForm, copyFilesToKnowledgeRoom } =
+      filesActionsStore;
 
     const { uploadPanelVisible, conversionVisible } = uploadDataStore;
     const {
@@ -602,6 +615,7 @@ export default inject(
         isNewRoomByCurrentUser;
 
     return {
+      aiProjectDialogVisible: aiProjectsStore.projectDialog !== null,
       preparationPortalDialogVisible,
       uploadPanelVisible,
       copyPanelVisible,
@@ -624,10 +638,13 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
-      selectFileAiKnowledgeDialogVisible,
-      setSelectFileAiKnowledgeDialogVisible,
       copyFromTemplateForm,
-      copyFileToAiKnowledge,
+      selectFileKnowledgeRoomDialogVisible,
+      setSelectFileKnowledgeRoomDialogVisible,
+      copyFilesToKnowledgeRoom,
+      knowledgeSelectorFilter: filesSettingsStore.knowledgeSelectorFilter,
+      isInstructionsRoom:
+        selectedFolderStore.roomType === RoomsType.InstructionsRoom,
       hotkeyPanelVisible,
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,
@@ -641,6 +658,7 @@ export default inject(
       editLinkPanelIsVisible,
       deleteLinkDialogVisible,
       embeddingPanelData,
+      metadataAIPanelData,
       moveToPublicRoomVisible,
       settingsPluginDialogVisible,
       pluginDialogVisible,
@@ -672,7 +690,6 @@ export default inject(
       reducedRightsVisible: reducedRightsData.visible,
       removeUserConfirmation: removeUserConfirmation.visible,
       assignRolesDialogVisible: assignRolesDialogData.visible,
-      extsFilesVectorized,
 
       templateGalleryVisible,
       isVisibleInfoPanelTemplateGallery,

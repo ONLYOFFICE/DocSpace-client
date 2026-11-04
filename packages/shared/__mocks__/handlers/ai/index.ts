@@ -41,6 +41,25 @@ import {
 } from "./arbiter";
 import { aiConfigHandler } from "./config";
 import {
+  AI_PROJECT_WITH_SOURCES,
+  AI_PROJECT_WITHOUT_SOURCES,
+  AI_PROJECTS,
+  AiProjectMockAccess,
+  aiProjectCreateHandler,
+  aiProjectGetByIdHandler,
+  aiProjectKnowledgeHandler,
+  aiProjectMock,
+  aiProjectModelHandlers,
+  aiProjectSkillsHandler,
+  aiProjectSourcesHandlers,
+  aiProjectsHandlers,
+  AI_HUB_ROOMS,
+  AI_HUB_ROOT_ID,
+  aiHubRoomsHandler,
+  aiRoomFolderHandler,
+  aiSectionsHandlers,
+} from "./projects";
+import {
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
 } from "./vectorization";
@@ -56,6 +75,8 @@ import {
   aiChatThreadGetByIdHandler,
   aiChatPromptsListHandler,
   aiChatReasoningLevelHandler,
+  aiChatSendWithStreamHandler,
+  aiChatServiceLimitExceededEvent,
   aiChatStoreHandlers,
   aiChatSystemToolsHandler,
   aiChatThreadsListHandler,
@@ -69,6 +90,23 @@ export {
   AI_ARBITER_PANEL_FOLDERS,
   AI_ARBITER_SESSION_ID,
   aiConfigHandler,
+  AI_PROJECT_WITH_SOURCES,
+  AI_PROJECT_WITHOUT_SOURCES,
+  AI_PROJECTS,
+  AiProjectMockAccess,
+  aiProjectCreateHandler,
+  aiProjectGetByIdHandler,
+  aiProjectKnowledgeHandler,
+  aiProjectMock,
+  aiProjectModelHandlers,
+  aiProjectSkillsHandler,
+  aiProjectSourcesHandlers,
+  aiProjectsHandlers,
+  AI_HUB_ROOMS,
+  AI_HUB_ROOT_ID,
+  aiHubRoomsHandler,
+  aiRoomFolderHandler,
+  aiSectionsHandlers,
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
   aiChatAssignmentsHandler,
@@ -82,6 +120,8 @@ export {
   aiChatThreadGetByIdHandler,
   aiChatPromptsListHandler,
   aiChatReasoningLevelHandler,
+  aiChatSendWithStreamHandler,
+  aiChatServiceLimitExceededEvent,
   aiChatStoreHandlers,
   aiChatSystemToolsHandler,
   aiChatThreadsListHandler,
@@ -95,6 +135,14 @@ export {
   AiActionType,
 } from "./chatStores";
 export type { AiChatProfile, AssignmentMap } from "./chatStores";
+export type { AiProjectMock, AiHubRoomMock } from "./projects";
+export {
+  META_FILL_RESULT,
+  META_GENERATE_RESULT,
+  META_SERVICE_LIMIT_ERROR,
+  aiMetaFillHandler,
+  aiMetaGenerateHandler,
+} from "./meta";
 
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),
@@ -102,4 +150,7 @@ export const aiHandlers = (port: string) => [
   aiVectorizationGetHandler(port),
   aiVectorizationPutHandler(port),
   ...aiChatEmptyStoreHandlers(port),
+  // The "AI rooms" section and its projects: empty until a spec seeds them.
+  aiHubRoomsHandler(port, [], []),
+  ...aiProjectsHandlers(port, []),
 ];

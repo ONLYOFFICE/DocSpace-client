@@ -94,6 +94,7 @@ Object.defineProperty(window, "localStorage", { value: localStorageMock() });
 Object.defineProperty(window, "location", {
   value: {
     origin: "https://example.com",
+    href: "https://example.com/",
   },
 });
 

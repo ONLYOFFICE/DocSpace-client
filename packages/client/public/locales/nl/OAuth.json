@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Toepassingen succesvol ingeschakeld",
   "AppName": "App naam",
   "Apps": "Toepassingen",
+  "AppsLimitReached": "U hebt het maximale aantal toepassingen bereikt dat u kunt maken. Verwijder een toepassing die u niet meer nodig hebt om een nieuwe toe te voegen.",
+  "AppsLimitReachedWorkspace": "Deze werkruimte heeft het maximale aantal toepassingen bereikt. Verwijder een toepassing die niet meer nodig is om een nieuwe toe te voegen.",
   "AuthButton": "Auth knop",
   "AuthenticationMethod": "Authenticatiemethode",
   "AuthorizedApps": "Geautoriseerde apps",

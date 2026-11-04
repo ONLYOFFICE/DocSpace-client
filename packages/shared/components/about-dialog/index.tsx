@@ -50,6 +50,7 @@ export const AboutDialog = ({
   companyInfoSettingsData,
   standalone,
   licenseAgreementsUrl,
+  privacyPolicyUrl,
   isEnterprise,
   logoText,
 }: IDialogProps) => {
@@ -72,6 +73,7 @@ export const AboutDialog = ({
             companyInfoSettingsData={companyInfoSettingsData}
             standalone={standalone}
             licenseAgreementsUrl={licenseAgreementsUrl}
+            privacyPolicyUrl={privacyPolicyUrl}
             isEnterprise={isEnterprise}
             logoText={logoText}
           />

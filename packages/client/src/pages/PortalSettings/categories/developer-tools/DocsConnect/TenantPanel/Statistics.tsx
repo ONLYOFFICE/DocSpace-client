@@ -61,6 +61,7 @@ import { IntegrationsCard } from "SRC_DIR/components/IntegrationsCard";
 
 import {
   formatDocsConnectDate,
+  getDocsConnectPlanDevPack,
   getDocsConnectPricePerUser,
   getDocsConnectTrialState,
 } from "../utils";
@@ -109,7 +110,7 @@ const Statistics = ({
   const trialLow = !expired && totalDays > 0 && daysLeft / totalDays < 0.5;
 
   const currency = wallet?.currency ?? "USD";
-  const { devPackEnabled } = info;
+  const devPackEnabled = getDocsConnectPlanDevPack(info);
   const pricePerUser = getDocsConnectPricePerUser(info);
   const planUsers = tenant.payment?.quantity ?? 0;
   const monthlyCharge = planUsers * pricePerUser;

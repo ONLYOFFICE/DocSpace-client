@@ -113,7 +113,7 @@ export const getBuildConfig = (
           // Core framework used on every page.
           {
             name: "vendor-react",
-            test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-i18next|scheduler|mobx|mobx-react|styled-components)/,
+            test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-i18next|scheduler|mobx|mobx-react)/,
             priority: 90,
           },
           // Everything else from node_modules in a single vendor chunk —

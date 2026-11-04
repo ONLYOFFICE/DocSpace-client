@@ -3,7 +3,7 @@
   "content": "Integrate, extend, and automate {{organizationName}} {{editorsName}} and {{productName}} using developer tools — from Docs Connect and Embed SDK to webhooks and OAuth apps. Choose a tool below to get started.",
   "content_en_sha1_hash": "43548264dc52e0768983ce92c27b3298330a056e",
   "created_at": "2026-08-26T14:08:26.590Z",
-  "updated_at": "2026-08-26T14:12:11.448Z",
+  "updated_at": "2026-10-22T16:09:36.937Z",
   "comment": {
     "text": "Descriptive paragraph in the Developer Tools page header that introduces integration and automation options. It includes variables for the organization name, the editors' name, and the product name.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 101,
-      "context": "<div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">\n {t(\"Common:DeveloperTools\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">\n {t(\"Settings:DeveloperToolsDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>",
+      "line_number": 102,
+      "context": "<Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">\n {t(\"Common:DeveloperTools\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">\n {canOpenDocsConnect\n ? t(\"Settings:DeveloperToolsDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"Settings:DeveloperToolsDescriptionStandalone\", {",
       "module": "/packages/client"
     }
   ],

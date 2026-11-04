@@ -185,8 +185,8 @@ const PluginItem = ({
             <ToggleButton
               className={styles.pluginToggleButton}
               onChange={onChangeStatus}
-              isChecked={enabled && !loadError}
-              isDisabled={!!loadError}
+              isChecked={enabled}
+              isDisabled={!!loadError && !enabled}
               dataTestId="enable_plugin_toggle_button"
             />
           </div>

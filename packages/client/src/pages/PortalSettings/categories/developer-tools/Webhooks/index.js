@@ -62,6 +62,8 @@ const Webhooks = (props) => {
     editWebhook,
     deleteWebhook,
     errorWebhooks,
+    webhooks,
+    setIsWebhooksListActive,
 
     isLoadedArticleBody,
     isLoadedSectionHeader,
@@ -71,19 +73,43 @@ const Webhooks = (props) => {
 
   setDocumentTitle(t("Webhooks"));
 
-  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    setIsWebhooksListActive(true);
+
+    return () => setIsWebhooksListActive(false);
+  }, []);
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isCreateOpened, setIsCreateOpened] = useState(
     () => searchParams.get("create") === "true",
   );
   const [isSettingsOpened, setIsSettingsOpened] = useState(false);
   const [isDeleteOpened, setIsDeleteOpened] = useState(false);
 
-  const closeCreateModal = () => setIsCreateOpened(false);
+  const closeCreateModal = () => {
+    setIsCreateOpened(false);
+
+    if (!searchParams.has("create")) return;
+
+    const params = new URLSearchParams(searchParams);
+    params.delete("create");
+    setSearchParams(params, { replace: true });
+  };
   const openCreateModal = () => setIsCreateOpened(true);
   const closeSettingsModal = () => setIsSettingsOpened(false);
   const openSettingsModal = () => setIsSettingsOpened(true);
   const closeDeleteModal = () => setIsDeleteOpened(false);
   const openDeleteModal = () => setIsDeleteOpened(true);
+
+  useEffect(() => {
+    if (!currentWebhook.id) return;
+    if (webhooks.some((webhook) => webhook.id === currentWebhook.id)) return;
+
+    if (isSettingsOpened) toastr.info(t("WebhookWasDeleted"));
+
+    setIsSettingsOpened(false);
+    setIsDeleteOpened(false);
+  }, [webhooks]);
 
   const handleWebhookUpdate = async (webhookInfo) => {
     await editWebhook(currentWebhook, webhookInfo);
@@ -179,6 +205,8 @@ export default inject(({ webhooksStore, common }) => {
     editWebhook,
     deleteWebhook,
     errorWebhooks,
+    webhooks,
+    setIsWebhooksListActive,
   } = webhooksStore;
 
   const { isLoadedArticleBody, isLoadedSectionHeader } = common;
@@ -191,6 +219,8 @@ export default inject(({ webhooksStore, common }) => {
     editWebhook,
     deleteWebhook,
     errorWebhooks,
+    webhooks,
+    setIsWebhooksListActive,
     isLoadedArticleBody,
     isLoadedSectionHeader,
   };

@@ -379,8 +379,18 @@ const Appearance = (props) => {
   }, [selectThemeId, selectedThemeId, onCloseDialogDelete, getAppearanceTheme]);
 
   const onCloseColorSchemeDialog = () => {
-    if ((openHexColorPickerAccent || openHexColorPickerButtons) && isMobile())
+    if (openHexColorPickerAccent || openHexColorPickerButtons) {
+      // An open picker takes the Escape that would close the dialog: on a
+      // phone it is a dialog of its own and closes itself; elsewhere it is a
+      // drop-down inside this dialog, so it is closed here and the dialog,
+      // with the colours being edited, stays. A click outside the drop-down
+      // has already closed it before any button of the dialog is clicked.
+      if (isMobile()) return;
+
+      if (openHexColorPickerAccent) onCloseHexColorPickerAccent();
+      if (openHexColorPickerButtons) onCloseHexColorPickerButtons();
       return;
+    }
 
     setShowColorSchemeDialog(false);
 

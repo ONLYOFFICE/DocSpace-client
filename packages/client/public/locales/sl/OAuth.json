@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Aplikacije uspešno omogočene",
   "AppName": "Ime aplikacije",
   "Apps": "Aplikacije",
+  "AppsLimitReached": "Dosegli ste največje število aplikacij, ki jih lahko ustvarite. Če želite dodati novo aplikacijo, izbrišite aplikacijo, ki je ne potrebujete več.",
+  "AppsLimitReachedWorkspace": "Ta delovni prostor je dosegel največje število aplikacij. Če želite dodati novo aplikacijo, izbrišite aplikacijo, ki ni več potrebna.",
   "AuthButton": "Gumb za avtentikacijo",
   "AuthenticationMethod": "Metoda avtentikacije",
   "AuthorizedApps": "Avtorizirane aplikacije",

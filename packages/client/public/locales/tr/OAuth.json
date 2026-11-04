@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Uygulamalar başarıyla etkinleştirildi",
   "AppName": "Uygulama adı",
   "Apps": "Uygulamalar",
+  "AppsLimitReached": "Oluşturabileceğiniz maksimum uygulama sayısına ulaştınız. Yeni bir uygulama eklemek için artık ihtiyacınız olmayan bir uygulamayı silin.",
+  "AppsLimitReachedWorkspace": "Bu çalışma alanı maksimum uygulama sayısına ulaştı. Yeni bir uygulama eklemek için artık gerekli olmayan bir uygulamayı silin.",
   "AuthButton": "Kimlik doğrulama düğmesi",
   "AuthenticationMethod": "Kimlik doğrulama yöntemi",
   "AuthorizedApps": "Yetkili uygulamalar",

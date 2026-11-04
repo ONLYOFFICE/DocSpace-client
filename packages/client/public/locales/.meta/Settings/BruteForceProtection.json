@@ -3,7 +3,7 @@
   "content": "Brute force protection",
   "content_en_sha1_hash": "cc2c00f9d3e7f6f8b135a2b662a1e9b3e5091be7",
   "created_at": "2026-08-31T18:23:40.539Z",
-  "updated_at": "2026-08-31T20:45:37.441Z",
+  "updated_at": "2026-10-21T10:17:45.808Z",
   "comment": {
     "text": "Section header and menu item title in the Portal Security settings, labeling the feature used to prevent automated login attempts.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 250,
+      "line_number": 267,
       "context": "{\n id: \"portal-settings_catalog-brute-force-protection\",\n key: \"1-0-6\",\n icon: \"\",\n link: \"brute-force-protection\",\n tKey: \"BruteForceProtection\",\n },\n {\n id: \"portal-settings_catalog-admin-message\",\n key: \"1-0-7\",\n icon: \"\",",
       "module": "/packages/client"
     }

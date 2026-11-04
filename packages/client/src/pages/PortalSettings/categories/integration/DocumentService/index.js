@@ -387,7 +387,7 @@ const DocumentService = ({
               label={t("Settings:ConnectEditors")}
               onClick={() => setConnectDialogVisible(true)}
               isDisabled={isSaveLoading || isResetLoading || isConnecting}
-              dataTestId="docs_connect_connect_editors"
+              testId="docs_connect_connect_editors"
             />
           </div>
         ) : (

@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Žetoni izceļ failu darbības, piemēram, augšupielādes, rediģēšanu un koplietošanu, lietotnēs {{files}}, {{rooms}}, {{forms}} un {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Žetoni izceļ failu darbības, piemēram, augšupielādes, rediģēšanu un koplietošanu, lietotnēs {{files}}, {{rooms}}, {{forms}} un MI aģenti.",
   "AdminSetupRequired": "Admin iestatīšana nepieciešama",
   "Badges": "Žetoni",
   "DailyFeed": "Ikdienas {{organizationName}} {{productName}} plūsma",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "Šis lietotāja konts tiek ielādēts no LDAP. Lietotāja e-pasta adrese nav norādīta, un pašreizējā tika ģenerēta automātiski un nevar tikt izmantota, lai sūtītu paziņojumus.",
   "NotConfigured": "Nav konfigurēts",
   "Notifications": "Paziņojumi",
-  "RoomsActivityDescription": "Saņemiet tūlītējus e-pasta paziņojumus par jauniem koplietotiem failiem un mapēm, kā arī par aktivitāti sadaļās {{files}}, {{rooms}}, {{forms}} un {{aiAgents}}.",
-  "RoomUpdateNotify": "Aktivitāte sadaļās {{files}}, {{rooms}}, {{forms}} un {{aiAgents}}",
+  "RoomsActivityDescription": "Saņemiet tūlītējus e-pasta paziņojumus par jauniem koplietotiem failiem un mapēm, kā arī par aktivitāti sadaļās {{files}}, {{rooms}}, {{forms}} un MI aģenti.",
+  "RoomUpdateNotify": "Aktivitāte sadaļās {{files}}, {{rooms}}, {{forms}} un MI aģenti",
   "SettingUpNotifications": "Paziņojumu iestatījumi",
   "SuccessConnected": "{{serviceName}} ir veiksmīgi pievienots kā paziņojumu kanāls. Jūs tagad saņemsiet atjauninājumus tur.",
   "SuccessDisconnected": "{{serviceName}} ir veiksmīgi atvienots kā paziņojumu kanāls. Tur paziņojumi vairs netiks sūtīti.",

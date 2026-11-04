@@ -3,7 +3,7 @@
   "content": "Removed the user, but {{count}} encrypted files could not be re-keyed. Re-run revocation later or rotate them manually.",
   "content_en_sha1_hash": "49dde25405cd6ef6de0e381ffc198e193b410703",
   "created_at": "2026-05-24T17:27:26.366Z",
-  "updated_at": "2026-06-09T09:43:10.881Z",
+  "updated_at": "2026-10-31T12:58:29.179Z",
   "comment": {
     "text": "Warning toast message appearing when a user is removed but some encrypted files fail to re-key. The {{count}} variable represents the number of failed files.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/User.tsx",
-      "line_number": 181,
+      "line_number": 171,
       "context": "{},\n );\n const failures = results.filter((r) => !r.success);\n if (failures.length > 0) {\n toastr.warning(\n t(\"Common:EncryptedRevokePartialFailure\", {\n count: failures.length,\n }),\n );\n return;\n }",
       "module": "/packages/client"
     },

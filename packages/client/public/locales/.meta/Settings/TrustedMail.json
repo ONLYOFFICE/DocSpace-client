@@ -3,7 +3,7 @@
   "content": "Trusted mail domains",
   "content_en_sha1_hash": "feee5106546e56d699c37846cf678dd2c5f6523c",
   "created_at": "2026-08-31T18:23:42.391Z",
-  "updated_at": "2026-08-31T20:14:25.780Z",
+  "updated_at": "2026-10-21T10:17:45.808Z",
   "comment": {
     "text": "A menu item title in the security settings section that leads to the configuration of allowed email domains.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 222,
+      "line_number": 239,
       "context": "{\n id: \"portal-settings_catalog-trusted-mail\",\n key: \"1-0-2\",\n icon: \"\",\n link: \"trusted-mail\",\n tKey: \"TrustedMail\",\n },\n {\n id: \"portal-settings_catalog-access-dev-tools\",\n key: \"1-0-3\",\n icon: \"\",",
       "module": "/packages/client"
     }

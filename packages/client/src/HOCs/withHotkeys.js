@@ -33,14 +33,36 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router";
+import { isMobile } from "react-device-detect";
 import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { getHotkeyLetter } from "@docspace/shared/utils/getHotkeyLetter";
 import { copySelectedText } from "@docspace/shared/utils/copy";
+import {
+  isContextMenuOpen,
+  isCreateHotkeyBlockedInRoom,
+  isKeyOwnedByFocus,
+} from "SRC_DIR/helpers/hotkeys";
+
+const suppressKeyRepeat = (code) => {
+  const onRepeat = (e) => {
+    if (e.code === code && e.repeat) e.preventDefault();
+  };
+
+  const onRelease = (e) => {
+    if (e.code !== code) return;
+    window.removeEventListener("keydown", onRepeat, true);
+    window.removeEventListener("keyup", onRelease, true);
+  };
+
+  window.addEventListener("keydown", onRepeat, true);
+  window.addEventListener("keyup", onRelease, true);
+};
 
 const withHotkeys = (Component) => {
   const WithHotkeys = (props) => {
@@ -84,10 +106,9 @@ const withHotkeys = (Component) => {
       isTrashFolder,
       isArchiveFolder,
       isRoomsFolder,
-      isAIAgentsFolder,
+      isFormsFolder,
       isPrivacyFolder,
       canCreateEncrypted,
-      isAIRoom,
 
       getSelection,
       setFavoriteAction,
@@ -96,8 +117,7 @@ const withHotkeys = (Component) => {
       isVisitor,
       deleteRooms,
       archiveRooms,
-      isWarningRoomsDialog,
-      setQuotaWarningDialogVisible,
+      createRoom,
 
       security,
       copyToClipboard,
@@ -106,6 +126,7 @@ const withHotkeys = (Component) => {
       isGroupMenuBlocked,
       isFormRoom,
       isParentFolderFormRoom,
+      roomType,
       isIndexEditingMode,
       enableSelection,
       openContextMenu,
@@ -115,26 +136,20 @@ const withHotkeys = (Component) => {
 
     const navigate = useNavigate();
 
-    const [isEnabled, setIsEnabled] = useState(true);
-
     const hotkeysFilter = {
       filter: (ev) =>
-        ev.target?.type === "checkbox" || ev.target?.tagName !== "INPUT",
+        !checkDialogsOpen() &&
+        !isContextMenuOpen() &&
+        (ev.target?.type === "checkbox" || ev.target?.tagName !== "INPUT") &&
+        !isKeyOwnedByFocus(ev),
       filterPreventDefault: false,
       enableOnTags: ["INPUT"],
-      enabled:
-        enabledHotkeys && !mediaViewerIsVisible && !filesIsLoading && isEnabled,
+      enabled: enabledHotkeys && !mediaViewerIsVisible && !filesIsLoading,
       // keyup: true,
       // keydown: false,
     };
 
     const onKeyDown = (e) => {
-      const contextMenuIsOpen =
-        document.getElementsByClassName("p-contextmenu").length;
-
-      const someDialogIsOpen = checkDialogsOpen();
-      setIsEnabled(!someDialogIsOpen || !contextMenuIsOpen);
-
       if (isIndexEditingMode) return;
 
       activateHotkeys(e);
@@ -146,19 +161,26 @@ const withHotkeys = (Component) => {
       isTrashFolder ||
       isArchiveFolder ||
       isRoomsFolder ||
+      isFormsFolder ||
       isVisitor ||
-      isAIAgentsFolder ||
-      isAIRoom ||
       !security?.Create;
 
     const onCreate = (extension) => {
       if (
         folderWithNoAction ||
+        isCreateHotkeyBlockedInRoom(roomType) ||
         (Boolean(extension) && (isFormRoom || isParentFolderFormRoom))
       )
         return;
 
       if (isPrivacyFolder && extension && !canCreateEncrypted) return;
+
+      const isPDF = extension === "pdf";
+
+      if (isPDF && isMobile) {
+        toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
+        return;
+      }
 
       const event = new CustomEvent(Events.CREATE, {
         detail: { parentId: currentFolderId, context: "hotkey", extension },
@@ -167,6 +189,7 @@ const withHotkeys = (Component) => {
       const payload = {
         extension,
         id: -1,
+        edit: isPDF,
       };
 
       event.payload = payload;
@@ -192,25 +215,12 @@ const withHotkeys = (Component) => {
     };
 
     const onCreateRoom = () => {
-      if (!isVisitor && isRoomsFolder && security?.Create) {
-        if (isWarningRoomsDialog) {
-          setQuotaWarningDialogVisible(true);
-          return;
-        }
-
-        const event = new CustomEvent(Events.ROOM_CREATE, {
-          detail: { parentId: currentFolderId, context: "hotkey" },
-        });
-        window.dispatchEvent(event);
-      }
-    };
-
-    const onCreateAIAgent = () => {
-      if (!isVisitor && isAIAgentsFolder && security?.Create) {
-        const event = new CustomEvent(Events.AGENT_CREATE, {
-          detail: { parentId: currentFolderId, context: "hotkey" },
-        });
-        window.dispatchEvent(event);
+      if (
+        !isVisitor &&
+        (isRoomsFolder || isFormsFolder) &&
+        security?.Create
+      ) {
+        createRoom(null, false, "hotkey");
       }
     };
 
@@ -224,6 +234,13 @@ const withHotkeys = (Component) => {
 
         askAIAction(item);
       }
+    };
+
+    const onShiftHotkey = (action) => (e) => {
+      if (e.repeat) return;
+      e.preventDefault();
+      suppressKeyRepeat(e.code);
+      action();
     };
 
     const onPaste = async (e) => {
@@ -245,17 +262,11 @@ const withHotkeys = (Component) => {
     });
 
     // Select/deselect item
-    useHotkeys("x", selectFile);
+    useHotkeys("x", selectFile, hotkeysFilter);
 
     useHotkeys(
       "*",
       (e) => {
-        const contextMenuIsOpen =
-          document.getElementsByClassName("p-contextmenu").length;
-        const someDialogIsOpen = checkDialogsOpen();
-
-        if (someDialogIsOpen || contextMenuIsOpen) return e;
-
         if (
           (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
           ((e.key === "Meta" || e.key === "Control") && e.altKey)
@@ -263,10 +274,16 @@ const withHotkeys = (Component) => {
           return enableSelection(e);
         }
 
-        if (e.shiftKey || e.ctrlKey || isIndexEditingMode || e.type === "keyup")
+        if (
+          e.shiftKey ||
+          e.ctrlKey ||
+          e.metaKey ||
+          isIndexEditingMode ||
+          e.type === "keyup"
+        )
           return;
 
-        switch (e.key) {
+        switch (getHotkeyLetter(e)) {
           case "ArrowDown":
           case "j": {
             return selectBottom();
@@ -350,14 +367,7 @@ const withHotkeys = (Component) => {
     // useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     // Back to parent folder
-    useHotkeys(
-      "Backspace",
-      () => {
-        const someDialogIsOpen = checkDialogsOpen();
-        if (!someDialogIsOpen) onClickBack();
-      },
-      hotkeysFilter,
-    );
+    useHotkeys("Backspace", onClickBack, hotkeysFilter);
 
     // Change viewAs
     useHotkeys(
@@ -367,34 +377,44 @@ const withHotkeys = (Component) => {
     );
 
     // Crete document
-    useHotkeys("Shift+d", () => onCreate("docx"), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys(
+      "Shift+d",
+      onShiftHotkey(() => onCreate("docx")),
+      hotkeysFilter,
+    );
 
     // Crete spreadsheet
-    useHotkeys("Shift+s", () => onCreate("xlsx"), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys(
+      "Shift+s",
+      onShiftHotkey(() => onCreate("xlsx")),
+      hotkeysFilter,
+    );
 
     // Crete presentation
-    useHotkeys("Shift+p", () => onCreate("pptx"), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys(
+      "Shift+p",
+      onShiftHotkey(() => onCreate("pptx")),
+      hotkeysFilter,
+    );
 
     // Crete form template
-    useHotkeys("Shift+o", () => onCreate("pdf"), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys(
+      "Shift+o",
+      onShiftHotkey(() => onCreate("pdf")),
+      hotkeysFilter,
+    );
 
     // Crete form template from file
     useHotkeys(
       "Alt+Shift+o",
       () => {
         if (folderWithNoAction || isFormRoom || isParentFolderFormRoom) return;
+
+        if (isMobile) {
+          toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
+          return;
+        }
+
         setSelectFileDialogVisible(true);
       },
 
@@ -402,38 +422,23 @@ const withHotkeys = (Component) => {
     );
 
     // Crete folder
-    useHotkeys("Shift+f", () => onCreate(null), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys(
+      "Shift+f",
+      onShiftHotkey(() => onCreate(null)),
+      hotkeysFilter,
+    );
 
     // Crete room
-    useHotkeys("Shift+r", () => onCreateRoom(), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys("Shift+r", onShiftHotkey(onCreateRoom), hotkeysFilter);
 
-    useHotkeys("Shift+c", openContextMenu, {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
-
-    // Create AI agent
-    useHotkeys("Shift+a", () => onCreateAIAgent(), {
-      ...hotkeysFilter,
-      ...{ keyup: true },
-    });
+    useHotkeys("Shift+c", onShiftHotkey(openContextMenu), hotkeysFilter);
 
     // Delete selection
     useHotkeys(
       "delete, shift+3, command+delete, command+Backspace",
       () => {
-        if (isAIAgentsFolder && selection?.length > 1) {
-          return;
-        }
-
         if (isArchiveFolder) {
-          isAvailableOption("unarchive") && deleteRooms(t);
+          isAvailableOption("delete-room") && deleteRooms(t);
           return;
         }
 
@@ -557,7 +562,7 @@ const withHotkeys = (Component) => {
       selectedFolderStore,
       userStore,
       indexingStore,
-      currentQuotaStore,
+      contextOptionsStore,
       uploadDataStore,
     }) => {
       const {
@@ -597,7 +602,6 @@ const withHotkeys = (Component) => {
       const {
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        setQuotaWarningDialogVisible,
       } = dialogsStore;
       const {
         isAvailableOption,
@@ -621,16 +625,15 @@ const withHotkeys = (Component) => {
         isTrashFolder,
         isArchiveFolder,
         isRoomsFolder,
-        isAIAgentsFolder,
+        isFormsFolder,
         isPrivacyFolder,
       } = treeFoldersStore;
 
       const canCreateEncrypted = uploadDataStore.shouldEncryptCurrentUpload();
 
-      const { isWarningRoomsDialog } = currentQuotaStore;
-
       const security = selectedFolderStore.security;
-      const isFormRoom = selectedFolderStore.roomType === RoomsType.FormRoom;
+      const { roomType } = selectedFolderStore;
+      const isFormRoom = roomType === RoomsType.FormRoom;
       const isParentFolderFormRoom =
         selectedFolderStore.parentRoomType === FolderType.FormRoom;
       const currentFolderId = selectedFolderStore.id;
@@ -676,10 +679,9 @@ const withHotkeys = (Component) => {
         isTrashFolder,
         isArchiveFolder,
         isRoomsFolder,
-        isAIAgentsFolder,
+        isFormsFolder,
         isPrivacyFolder,
         canCreateEncrypted,
-        isAIRoom: selectedFolderStore.isAIRoom,
         isIndexEditingMode: indexingStore.isIndexEditingMode,
 
         getSelection,
@@ -689,9 +691,7 @@ const withHotkeys = (Component) => {
         isVisitor,
         deleteRooms,
         archiveRooms,
-
-        isWarningRoomsDialog,
-        setQuotaWarningDialogVisible,
+        createRoom: contextOptionsStore.onCreateRoom,
 
         security,
         copyToClipboard,
@@ -701,6 +701,7 @@ const withHotkeys = (Component) => {
         isGroupMenuBlocked,
         isFormRoom,
         isParentFolderFormRoom,
+        roomType,
         enableSelection,
         askAIAction,
         currentFolderId,

@@ -44,7 +44,69 @@ import {
   webPluginsHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import type { Page } from "@playwright/test";
 import { expect, test, TEST_PORT } from "./fixtures/base";
+
+const routeTestPlugin = async (page: Page) => {
+  await page.route(/\/plugins\/test-plugin-one\/assets\//, (route) => {
+    route.fulfill({
+      contentType: "image/svg+xml",
+      body: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect width="16" height="16" rx="2" fill="#657077"/></svg>',
+    });
+  });
+
+  await page.route("**/plugins/test-plugin-one/plugin.js", (route) => {
+    route.fulfill({
+      contentType: "text/javascript",
+      body: `
+        window.Plugins = window.Plugins || {};
+        window.Plugins.Testpluginone = {
+          getContextMenuItems: function () {
+            return new Map([
+              [
+                "plugin-test-action",
+                {
+                  key: "plugin-test-action",
+                  label: "Test Plugin Action",
+                  icon: "plugin-icon.png",
+                  fileType: ["file"],
+                  onItemClick: async function (id) {},
+                },
+              ],
+            ]);
+          },
+        };
+      `,
+    });
+  });
+
+  return {
+    loaded: page.waitForResponse("**/plugins/test-plugin-one/plugin.js"),
+  };
+};
+
+const openDocxInfoPanelMenu = async (page: Page) => {
+  await page
+    .getByTestId("table-body")
+    .getByTestId("table-row-3")
+    .getByTestId("context-menu-button")
+    .first()
+    .click();
+
+  await page.getByTestId("option_info").hover();
+  await page.getByTestId("option_show-info").click();
+
+  const infoOptions = page.locator("#info-options");
+  await expect(infoOptions).toBeVisible();
+  await infoOptions.click();
+
+  await page.getByTestId("option_info").filter({ visible: true }).hover();
+  await expect(
+    page
+      .getByTestId("option_show-version-history")
+      .filter({ visible: true }),
+  ).toBeVisible();
+};
 
 test.describe("My documents context menu", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -419,48 +481,14 @@ test.describe("My documents context menu", () => {
       webPluginsHandler(TEST_PORT, "withData"),
     );
 
-    await page.route(/\/plugins\/test-plugin-one\/assets\//, (route) => {
-      route.fulfill({
-        contentType: "image/svg+xml",
-        body: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect width="16" height="16" rx="2" fill="#657077"/></svg>',
-      });
-    });
-
-    await page.route("**/plugins/test-plugin-one/plugin.js", (route) => {
-      route.fulfill({
-        contentType: "text/javascript",
-        body: `
-          window.Plugins = window.Plugins || {};
-          window.Plugins.Testpluginone = {
-            getContextMenuItems: function () {
-              return new Map([
-                [
-                  "plugin-test-action",
-                  {
-                    key: "plugin-test-action",
-                    label: "Test Plugin Action",
-                    icon: "plugin-icon.png",
-                    fileType: ["file"],
-                    onItemClick: async function (id) {},
-                  },
-                ],
-              ]);
-            },
-          };
-        `,
-      });
-    });
-
-    const pluginLoadedPromise = page.waitForResponse(
-      "**/plugins/test-plugin-one/plugin.js",
-    );
+    const plugin = await routeTestPlugin(page);
 
     await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
 
-    await pluginLoadedPromise;
+    await plugin.loaded;
 
     const folderItem = table.getByTestId("table-row-3");
     const contextMenuButton = folderItem
@@ -478,6 +506,51 @@ test.describe("My documents context menu", () => {
       "desktop",
       "context-menu",
       "files-context-menu_docx-plugin-more.png",
+    ]);
+  });
+
+  test("DOCX Document menu in the info panel", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
+    await expect(page.getByTestId("table-body")).toBeVisible();
+
+    await openDocxInfoPanelMenu(page);
+
+    await expectScreenshot(page, [
+      "desktop",
+      "context-menu",
+      "info-panel-context-menu_docx-more.png",
+    ]);
+  });
+
+  test("DOCX Document menu in the info panel with plugin in More options", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithPlugins),
+      webPluginsHandler(TEST_PORT, "withData"),
+    );
+
+    const plugin = await routeTestPlugin(page);
+
+    await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
+    await expect(page.getByTestId("table-body")).toBeVisible();
+    await plugin.loaded;
+
+    await openDocxInfoPanelMenu(page);
+
+    await expect(
+      page.getByText("Test Plugin Action").filter({ visible: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByTestId("option_more-options").filter({ visible: true }),
+    ).toHaveCount(0);
+
+    await expectScreenshot(page, [
+      "desktop",
+      "context-menu",
+      "info-panel-context-menu_docx-plugin-more.png",
     ]);
   });
 });

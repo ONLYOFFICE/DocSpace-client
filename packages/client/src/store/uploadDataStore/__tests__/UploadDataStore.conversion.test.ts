@@ -31,11 +31,13 @@ import {
   createTestUploadDataStore,
   makeFileInfo,
   makeUploadFile,
+  makeUploadTarget,
 } from "./testHarness";
 
 import * as filesApi from "@docspace/shared/api/files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 import type { TTranslation } from "@docspace/shared/types";
 import type { TUploadFile } from "../helpers";
@@ -315,35 +317,6 @@ describe("UploadDataStore.handleUploadConflicts — characterization", () => {
     expect(
       fakes.dialogsStore.setConflictResolveDialogVisible,
     ).not.toHaveBeenCalled();
-  });
-
-  it("skips the existence check entirely inside an AI room", async () => {
-    const { store } = createTestUploadDataStore({
-      selectedFolderStore: { isAIRoom: true },
-    });
-    const data = makeStartUploadData({
-      files: [makeUploadFile({ toFolderId: 5 })],
-    });
-
-    vi.mocked(filesApi.checkIsFileExist).mockResolvedValue([
-      "document.docx",
-    ] as never);
-    vi.mocked(filesApi.getFolderInfo).mockResolvedValue({
-      title: "AI room",
-    } as never);
-
-    const handleUploadAndOptionalConversion = vi.fn();
-    store.handleUploadAndOptionalConversion =
-      handleUploadAndOptionalConversion as never;
-
-    await store.handleUploadConflicts(t, 5, data as never);
-
-    expect(filesApi.checkIsFileExist).not.toHaveBeenCalled();
-    expect(handleUploadAndOptionalConversion).toHaveBeenCalledWith(
-      data,
-      t,
-      true,
-    );
   });
 
   it("surfaces API failures via toastr and completes the progress bar", async () => {

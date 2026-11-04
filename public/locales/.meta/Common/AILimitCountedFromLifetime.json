@@ -1,0 +1,29 @@
+{
+  "key_path": "AILimitCountedFromLifetime",
+  "content": "Counted from the moment the limit is set, never resets.",
+  "content_en_sha1_hash": "536eb9145ceea4216b46b974d7187fae3bb7394e",
+  "created_at": "2026-10-22T16:08:49.197Z",
+  "updated_at": "2026-10-22T16:10:38.032Z",
+  "comment": {
+    "text": "Hint under the amount and period fields of the Change AI limit dialog when the period is 'lifetime': spending is counted from the moment the limit is saved and the counter never resets.",
+    "is_auto": true,
+    "updated_at": "2026-10-22T16:10:38.032Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeAILimitDialog/index.tsx",
+      "line_number": 149,
+      "context": "case \"Week\":\n return t(\"Common:AILimitCountedFromWeek\");\n case \"Month\":\n return t(\"Common:AILimitCountedFromMonth\");\n case \"Lifetime\":\n return t(\"Common:AILimitCountedFromLifetime\");\n default:\n return t(\"Common:AILimitCountedFromDay\");\n }\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

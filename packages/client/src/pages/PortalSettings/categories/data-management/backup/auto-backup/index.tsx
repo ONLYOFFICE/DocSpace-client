@@ -61,9 +61,14 @@ const AutoBackupWrapper = ({
   isEmptyContentBeforeLoader,
   isInitialError,
   isBackupPaid,
+  ensureAppsLoaded,
   ...props
 }: AutoBackupWrapperProps) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
+
+  useEffect(() => {
+    ensureAppsLoaded();
+  }, [ensureAppsLoaded]);
 
   useUnmount(() => {
     resetDownloadingProgress();
@@ -103,6 +108,7 @@ export default inject(
     dialogsStore,
     currentQuotaStore,
     clientLoadingStore,
+    appsStore,
   }: TStore) => {
     const language = authStore.language;
 
@@ -113,7 +119,12 @@ export default inject(
       externalShareApplyToRooms,
     } = filesSettingsStore;
 
-    const settingsFileSelector = { getIcon, filesSettings };
+    const settingsFileSelector = {
+      getIcon,
+      filesSettings,
+      withRoomsTreeFolder: appsStore.isInstalled("ai-rooms"),
+      withFormsTreeFolder: appsStore.isInstalled("ai-forms"),
+    };
     const {
       openConnectWindow,
       setThirdPartyProviders,
@@ -236,6 +247,7 @@ export default inject(
     return {
       removeItem,
       settingsFileSelector,
+      ensureAppsLoaded: appsStore.ensureLoaded,
       disabledCreatePublicRoom:
         isExternalShareRestricted && externalShareApplyToRooms,
       isEnableAuto,

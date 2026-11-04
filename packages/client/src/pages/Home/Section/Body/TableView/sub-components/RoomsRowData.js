@@ -67,7 +67,6 @@ const RoomsRowDataComponent = (props) => {
     checkedProps,
     element,
     inProgress,
-    showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
     item,
@@ -114,7 +113,7 @@ const RoomsRowDataComponent = (props) => {
           isIndexEditingMode={props.isIndexEditingMode}
           displayFileExtension={props.displayFileExtension}
         />
-        <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
+        <StyledBadgesContainer>
           {badgesComponent}
         </StyledBadgesContainer>
         {lastColumn === "Name" ? quickButtonsComponentNode : null}

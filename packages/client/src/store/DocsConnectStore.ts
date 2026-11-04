@@ -43,6 +43,7 @@ import {
   startDocsConnectTrial,
   buyDocsConnectPlan,
   calculateDocsConnectDevPack,
+  calculateDocsConnectUpgrade,
   switchDocsConnectToDevPack,
   cancelDocsConnectPlan,
   cancelDocsConnectScheduledChange,
@@ -482,6 +483,12 @@ class DocsConnectStore {
 
   calculateDevPack = async (quantity: number) =>
     calculateDocsConnectDevPack(quantity);
+
+  calculateUpgrade = async (opts: {
+    addedUsers: number;
+    devPackEnabled: boolean;
+    signal?: AbortSignal;
+  }) => calculateDocsConnectUpgrade(opts);
 
   switchToDevPack = async ({
     quantity,

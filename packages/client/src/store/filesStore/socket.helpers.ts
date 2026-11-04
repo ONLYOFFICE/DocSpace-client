@@ -38,13 +38,16 @@ import api from "@docspace/shared/api";
 import {
   AnalyticsEvents,
   FolderType,
+  RoomPrivacyFilter,
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
+import { getRoomsRequestScope } from "@docspace/shared/utils/rooms";
 import {
   frameCallEvent,
   getCategoryType,
   getFileExtension,
+  isPrivateRoomsRoute,
 } from "@docspace/shared/utils/common";
 import {
   CategoryType,
@@ -62,6 +65,8 @@ import {
   setInfoPanelSelectedRoom,
 } from "SRC_DIR/helpers/info-panel";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import i18n from "../../i18n";
 
 import type { Nullable } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
@@ -89,8 +94,6 @@ export function onResolveNewFileImpl(
 
   if (
     self.selectedFolderStore.id !== fileInfo.folderId &&
-    self.aiRoomStore.knowledgeId !== fileInfo.folderId &&
-    self.aiRoomStore.resultId !== fileInfo.folderId &&
     self.selectedFolderStore.rootFolderType !== FolderType.Recent &&
     self.selectedFolderStore.rootFolderType !== FolderType.Favorites
   )
@@ -123,11 +126,7 @@ export async function wsModifyFolderCreateImpl(
     // (JSON.parse of possibly-undefined data, user possibly null).
     const file = JSON.parse(opt?.data as string);
 
-    if (
-      self.selectedFolderStore.id !== file.folderId &&
-      self.aiRoomStore.knowledgeId !== file.folderId &&
-      self.aiRoomStore.resultId !== file.folderId
-    ) {
+    if (self.selectedFolderStore.id !== file.folderId) {
       const movedToIndex = self.getFolderIndex(file.folderId);
       if (movedToIndex > -1) self.folders[movedToIndex].filesCount++;
       return;
@@ -166,9 +165,7 @@ export async function wsModifyFolderCreateImpl(
       file_type: getFileExtension(file.title).replace(".", ""),
     });
 
-    self.selectedFolderStore.setFilesCount(
-      self.selectedFolderStore.filesCount + 1,
-    );
+    self.selectedFolderStore.countFileCreated(file.id);
 
     setTimeout(() => {
       if (self.getFileIndex(file.id) > -1) {
@@ -190,15 +187,27 @@ export async function wsModifyFolderCreateImpl(
       }) as unknown as () => Promise<unknown>);
     }, 300);
   } else if (opt?.type === "folder" && opt?.id) {
-    self.selectedFolderStore.setFoldersCount(
-      self.selectedFolderStore.foldersCount + 1,
-    );
+    const folder = opt.data ? JSON.parse(opt.data) : null;
+
+    // A form room is listed in Forms, not in the Rooms folder it belongs to.
+    const isFormRoom = folder?.roomType === RoomsType.FormRoom;
+    const isInSelectedFolder = (parentId: number | string) =>
+      isFormRoom
+        ? self.treeFoldersStore.isFormsFolder
+        : self.selectedFolderStore.id == parentId;
+
+    // the parent folders are subscribed too, so a folder created in one of
+    // them must not be counted here; a folder is counted where it is listed,
+    // as its deletion is
+    if (!folder || isInSelectedFolder(folder.parentId)) {
+      self.selectedFolderStore.setFoldersCount(
+        self.selectedFolderStore.foldersCount + 1,
+      );
+    }
 
     const foundIndex = self.folders.findIndex((x) => x.id == opt?.id);
 
-    if (foundIndex > -1) return;
-
-    const folder = JSON.parse(opt?.data as string);
+    if (foundIndex > -1 || !folder) return;
 
     if (self.selectedFolderStore.id != folder.parentId) {
       const movedToIndex = self.getFolderIndex(folder.parentId);
@@ -206,7 +215,7 @@ export async function wsModifyFolderCreateImpl(
     }
 
     if (
-      self.selectedFolderStore.id != folder.parentId ||
+      !isInSelectedFolder(folder.parentId) ||
       (folder.roomType &&
         folder.createdBy.id === self.userStore.user!.id &&
         self.roomCreated)
@@ -214,13 +223,32 @@ export async function wsModifyFolderCreateImpl(
       return (self.roomCreated = false);
     }
 
-    const folderInfo = await api.files.getFolderInfo(folder.id);
+    // Spec: private-rooms/sidebar-section, "Live updates skip rooms the user cannot read"
+    const folderInfo = await api.files
+      .getFolderInfo(folder.id, true)
+      .catch(() => null);
+
+    if (!folderInfo || !isInSelectedFolder(folderInfo.parentId)) {
+      console.log("Skip UNSUBSCRIBED folder creation");
+      return;
+    }
 
     console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
 
-    if (!folderInfo || folderInfo.parentId !== self.selectedFolderStore.id) {
-      console.log("Skip UNSUBSCRIBED folder creation");
-      return;
+    // Spec: private-rooms/sidebar-section, "Live updates respect the split"
+    if (folder.roomType) {
+      const scope = getRoomsRequestScope(
+        getCategoryType(window.DocSpace?.location ?? window.location),
+        self.roomsFilter.searchArea,
+        self.isPrivateRoomsSectionAvailable,
+      );
+      const isPrivate = !!folderInfo.private;
+      if (
+        (scope?.privacyFilter === RoomPrivacyFilter.Private && !isPrivate) ||
+        (scope?.privacyFilter === RoomPrivacyFilter.NotPrivate && isPrivate)
+      ) {
+        return;
+      }
     }
 
     const newFolders = [folderInfo, ...self.folders];
@@ -233,6 +261,29 @@ export async function wsModifyFolderCreateImpl(
       self.setFolders(newFolders);
     });
   }
+}
+
+// The counts above are kept up to date from socket events, which miss files
+// outside the loaded page, a filter or a partly listed indexed folder, so the
+// current folder's counts are re-read from the server once the events settle.
+export async function syncSelectedFolderCountsImpl(self: FilesStore) {
+  const { id } = self.selectedFolderStore;
+  if (!id) return;
+
+  const folder = await api.files.getFolderInfo(id, true).catch(() => null);
+
+  if (
+    !folder ||
+    self.selectedFolderStore.id !== id ||
+    typeof folder.filesCount !== "number" ||
+    typeof folder.foldersCount !== "number"
+  )
+    return;
+
+  runInAction(() => {
+    self.selectedFolderStore.setFilesCount(folder.filesCount);
+    self.selectedFolderStore.setFoldersCount(folder.foldersCount);
+  });
 }
 
 export async function wsModifyFolderUpdateImpl(
@@ -254,13 +305,18 @@ export async function wsModifyFolderUpdateImpl(
     const folder = JSON.parse(opt?.data);
     if (!folder || !folder.id) return;
 
-    self.refreshFolder(folder.id);
+    // Spec: private-rooms/sidebar-section, "Live updates skip rooms the user cannot read"
+    self.refreshFolder(folder.id, true);
   }
 }
 
-export function refreshFolderImpl(self: FilesStore, id: number | string) {
+export function refreshFolderImpl(
+  self: FilesStore,
+  id: number | string,
+  skipRedirect = false,
+) {
   api.files
-    .getFolderInfo(id)
+    .getFolderInfo(id, skipRedirect)
     .then((response) => {
       const folderInfo = {
         isFolder: true,
@@ -336,15 +392,27 @@ export function wsModifyFolderDeleteImpl(self: FilesStore, opt?: TOptSocket) {
     return;
   }
 
+  const activeItems =
+    opt?.type === "file" ? self.activeFiles : self.activeFolders;
+
+  if (
+    activeItems.some(
+      (item) =>
+        item.id === opt?.id &&
+        !!item.destFolderId &&
+        item.destFolderId === self.selectedFolderStore.id,
+    )
+  ) {
+    return;
+  }
+
   if (opt?.type === "file" && opt?.id) {
     const foundIndex = self.files.findIndex((x) => x.id === opt?.id);
     if (foundIndex == -1) return;
 
     const foundFile = self.files[foundIndex];
 
-    self.selectedFolderStore.setFilesCount(
-      self.selectedFolderStore.filesCount - 1,
-    );
+    self.selectedFolderStore.countFileDeleted(foundFile.id);
 
     console.log("[WS] delete file", foundFile.id, foundFile.title);
 
@@ -364,6 +432,7 @@ export function wsModifyFolderDeleteImpl(self: FilesStore, opt?: TOptSocket) {
     tempActionFilesIds.push(foundFile.id);
 
     self.setTempActionFilesIds(tempActionFilesIds);
+    self.setTempActionFolderId(self.selectedFolderStore.id);
 
     self.removeStaleItemFromSelection(foundFile);
     self.debounceRemoveFiles();
@@ -415,6 +484,7 @@ export function wsModifyFolderDeleteImpl(self: FilesStore, opt?: TOptSocket) {
     tempActionFoldersIds.push(foundFolder.id);
 
     self.setTempActionFoldersIds(tempActionFoldersIds);
+    self.setTempActionFolderId(self.selectedFolderStore.id);
     self.removeStaleItemFromSelection(foundFolder);
     self.debounceRemoveFolders();
 
@@ -453,7 +523,13 @@ export function wsChangeFolderAccessRightsImpl(
   const folderId = option.id;
   const memberAccess = JSON.parse(option.data);
 
-  if (self.selectedFolderStore.id !== folderId) return;
+  // The event names the room, while the user may be deep inside it: the
+  // subfolders inherit the room's rights, so they are re-read just the same.
+  const { id: selectedId, pathParts } = self.selectedFolderStore;
+  const isInside =
+    selectedId === folderId || !!pathParts?.some((p) => p.id === folderId);
+
+  if (!isInside) return;
   if (!memberAccess[self.userStore.user!.id]) return;
 
   console.log("[WS] change folder access rights for current user", {
@@ -461,8 +537,34 @@ export function wsChangeFolderAccessRightsImpl(
     memberAccess,
   });
 
-  self.refreshFolder(folderId);
+  self.refreshFolder(selectedId!);
   self.refreshFiles();
+}
+
+/**
+ * The portal's AI switch was turned off or on (by an admin, on any device).
+ * The AI rooms root comes and goes with it in `@root`, so the tree is read
+ * again; the AI rooms routes follow `aiServicesEnabled` and take a user who
+ * is inside the section to their start page, with a toast saying why.
+ */
+export function wsChangeAiAccessSettingsImpl(
+  self: FilesStore,
+  data?: { enabled?: boolean },
+) {
+  if (typeof data?.enabled !== "boolean") return;
+  const { enabled } = data;
+
+  console.log("[WS] change ai access settings", { enabled });
+
+  const isInAiRooms =
+    self.selectedFolderStore.rootFolderType === FolderType.AiHub;
+
+  self.settingsStore.setAiServicesEnabled(enabled);
+  self.treeFoldersStore.fetchTreeFolders();
+
+  if (!enabled && isInAiRooms) {
+    toastr.warning(i18n.t("Common:AiRoomsTurnedOff"));
+  }
 }
 
 export function redirectToParentImpl(
@@ -504,18 +606,14 @@ export function redirectToParentImpl(
   const userId = self.userStore.user && self.userStore.user.id;
 
   switch (rootFolderType) {
-    case FolderType.AIAgents: {
-      // RoomsFilter.getDefault/toUrlParams type userId as
-      // `string | undefined` but the old JS passes `null` when there is no
-      // user; erased casts keep the exact runtime value.
-      const aiAgentsFilter = RoomsFilter.getDefault(
-        userId as string,
-        RoomSearchArea.AIAgents,
-      );
-      const params = aiAgentsFilter.toUrlParams(userId as string, true);
-      const path = getCategoryUrl(CategoryType.AIAgents);
+    case FolderType.AiHub: {
+      const searchArea = RoomSearchArea.AiHub;
+      const aiFilter = RoomsFilter.getDefault(userId as string, searchArea);
+      aiFilter.searchArea = searchArea;
+      const params = aiFilter.toUrlParams(userId as string, true);
+      const path = getCategoryUrl(CategoryType.AiHub);
 
-      return window.DocSpace.navigate(`${path}?${params}`);
+      return window.DocSpace.navigate(`${path}?${params}`, { replace: true });
     }
     case FolderType.Archive: {
       const archiveFilter = RoomsFilter.getDefault(
@@ -524,7 +622,12 @@ export function redirectToParentImpl(
       );
       archiveFilter.searchArea = RoomSearchArea.Archive;
       const params = archiveFilter.toUrlParams(userId as string, true);
-      const path = getCategoryUrl(CategoryType.Archive);
+      // An archived private room may be open at its active-form /private address.
+      const path = getCategoryUrl(
+        isPrivateRoomsRoute(window.DocSpace.location.pathname)
+          ? CategoryType.PrivateArchive
+          : CategoryType.Archive,
+      );
 
       return window.DocSpace.navigate(`${path}?${params}`);
     }
@@ -534,14 +637,18 @@ export function redirectToParentImpl(
       }
 
       if (pathPart.id === roomsFolderId) {
-        const isForms =
-          getCategoryType(window.DocSpace.location) === CategoryType.Form;
+        const categoryType = getCategoryType(window.DocSpace.location);
+        const isForms = categoryType === CategoryType.Form;
 
         const roomsFilter = RoomsFilter.getDefault();
         if (isForms) roomsFilter.searchArea = RoomSearchArea.Forms;
 
         const path = getCategoryUrl(
-          isForms ? CategoryType.Forms : CategoryType.Shared,
+          isForms
+            ? CategoryType.Forms
+            : categoryType === CategoryType.PrivateRoom
+              ? CategoryType.PrivateRooms
+              : CategoryType.Shared,
         );
 
         return window.DocSpace.navigate(
@@ -574,7 +681,11 @@ export function redirectToParentImpl(
 
       const categoryType = isPublic
         ? CategoryType.PublicRoom
-        : getCategoryTypeByFolderTypeInSection(rootFolderType, pathPart.id);
+        : getCategoryTypeByFolderTypeInSection(rootFolderType, pathPart.id, {
+            isPrivate:
+              self.isPrivateRoomsSectionAvailable &&
+              self.treeFoldersStore.isPrivacyFolder,
+          });
 
       const path = getCategoryUrl(categoryType, pathPart.id);
 

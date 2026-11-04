@@ -105,12 +105,18 @@ const AccountsSidebar = ({ isNavLoading }: AccountsSidebarProps) => {
   // body skeleton on every section switch.
   // `linkData` renders the item as a real router link (right-click / Ctrl-click
   // / middle-click open the section in a new tab), while `onClick` keeps the
-  // plain click an in-app navigation.
+  // plain click an in-app navigation -- only when the entry is not drawn as a
+  // link (`meta.isLink`), which navigates by itself.
   const navToFilterRoute = React.useCallback(
     (route: string): Pick<NavMenuItem, "linkData" | "onClick"> => {
       const params = AccountsFilter.getDefault().toUrlParams();
       const path = `/${route}?${params}`;
-      return { linkData: { path }, onClick: () => navigate(path) };
+      return {
+        linkData: { path },
+        onClick: (_item: unknown, meta?: { isLink?: boolean }) => {
+          if (!meta?.isLink) navigate(path);
+        },
+      };
     },
     [navigate],
   );

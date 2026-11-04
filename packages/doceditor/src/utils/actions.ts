@@ -63,7 +63,7 @@ import type {
   TResponse,
 } from "@/types";
 
-import { availableActions, REPLACED_URL_PATH } from "./constants";
+import { isActionType, REPLACED_URL_PATH } from "./constants";
 
 export async function getFillingSession(
   fillingSessionId: string,
@@ -538,8 +538,10 @@ export async function openEdit(
 
       const message = status ? config.error.message : undefined;
 
+      // A non-OK answer can come without `error` (an ASP.NET problem
+      // details body, for one).
       const error = isAuth
-        ? config.error.type === EditorConfigErrorType.LinkScope
+        ? config.error?.type === EditorConfigErrorType.LinkScope
           ? { message: message ?? "unauthorized", status, editorUrl }
           : { ...config.error, status, editorUrl }
         : { message: "unauthorized", status, editorUrl };
@@ -565,6 +567,12 @@ export async function openEdit(
     return {
       status: "error",
       message: "An unexpected error occurred",
+      // The page shows only `message`; the cause goes to the error report,
+      // which otherwise cannot tell a timeout from a non-JSON answer.
+      cause:
+        error instanceof Error
+          ? `${error.name}: ${error.message}`
+          : String(error),
     } as TError;
   }
 }
@@ -771,7 +779,7 @@ export async function getData(
   try {
     const searchParams = new URLSearchParams();
 
-    if (action && availableActions[action]) searchParams.append(action, "true");
+    if (action && isActionType(action)) searchParams.append(action, "true");
 
     if (version) {
       searchParams.append("version", version);
@@ -813,7 +821,8 @@ export async function getData(
 
       if (
         typeof response.settings !== "string" &&
-        response.settings?.tenantStatus === TenantStatus.PortalDeactivate
+        (response.settings?.tenantStatus === TenantStatus.PortalDeactivate ||
+          response.settings?.tenantStatus === TenantStatus.PortalBlocked)
       ) {
         response.error = { message: "unavailable" };
       }
@@ -822,10 +831,6 @@ export async function getData(
 
       if (view) {
         response.config.editorConfig.mode = "view";
-      }
-
-      if (response.config.file.encrypted) {
-        response.config.editorConfig.canCoAuthoring = false;
       }
 
       response.successAuth = successAuth;
@@ -851,7 +856,8 @@ export async function getData(
 
     if (
       typeof settings !== "string" &&
-      settings?.tenantStatus === TenantStatus.PortalDeactivate
+      (settings?.tenantStatus === TenantStatus.PortalDeactivate ||
+        settings?.tenantStatus === TenantStatus.PortalBlocked)
     ) {
       response.error = { message: "unavailable" };
     }

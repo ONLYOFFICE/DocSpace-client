@@ -58,7 +58,10 @@ import {
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
-import { getUserType } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
 import { LANGUAGE, SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import config from "PACKAGE_FILE";
@@ -67,6 +70,7 @@ import {
   showForcedInfoPanelLoader,
   InfoPanelView,
 } from "SRC_DIR/helpers/info-panel";
+import { infoPanelWidthStorage } from "SRC_DIR/helpers/info-panel/width";
 
 import { getContactsView } from "../helpers/contacts";
 import SelectedFolderStore from "./SelectedFolderStore";
@@ -88,6 +92,10 @@ class InfoPanelStore {
   isVisible = false;
 
   isMobileHidden = false;
+
+  width = infoPanelWidthStorage.read();
+
+  shownWidth = 0;
 
   roomsView: InfoPanelViewType = InfoPanelView.infoMembers;
 
@@ -173,6 +181,14 @@ class InfoPanelStore {
     this.isScrollLocked = false;
   };
 
+  setWidth = (width: number) => {
+    this.width = infoPanelWidthStorage.save(width);
+  };
+
+  setShownWidth = (width: number) => {
+    this.shownWidth = width;
+  };
+
   setTemplateAvailableToEveryone = (isAvailable: boolean) => {
     this.templateAvailableToEveryone = isAvailable;
   };
@@ -210,6 +226,11 @@ class InfoPanelStore {
 
   openMembersTab = () => {
     this.setView(InfoPanelView.infoMembers);
+    this.isVisible = true;
+  };
+
+  openMetadataTab = () => {
+    this.setView(InfoPanelView.infoMetadata);
     this.isVisible = true;
   };
 
@@ -389,7 +410,6 @@ class InfoPanelStore {
   getCanDisplay = () => {
     if (isPluginPage()) return false;
 
-    const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
     const isForms = this.getIsForms();
@@ -397,12 +417,7 @@ class InfoPanelStore {
       this.peopleStore.usersStore.contactsTab !== false ||
       getContactsView(window.location) !== false;
 
-    return isRooms || isFiles || isForms || isAccounts || isAIAgent;
-  };
-
-  getIsAIAgent = () => {
-    const pathname = window.location.pathname.toLowerCase();
-    return pathname.indexOf("ai-agent") !== -1;
+    return isRooms || isFiles || isForms || isAccounts;
   };
 
   getIsForms = () => {
@@ -424,7 +439,9 @@ class InfoPanelStore {
   getIsRooms = () => {
     const pathname = window.location.pathname.toLowerCase();
     return (
-      pathname.indexOf("rooms") !== -1 && !(pathname.indexOf("personal") !== -1)
+      (pathname.indexOf("rooms") !== -1 &&
+        !(pathname.indexOf("personal") !== -1)) ||
+      isPrivateRoomsRoute(pathname)
     );
   };
 

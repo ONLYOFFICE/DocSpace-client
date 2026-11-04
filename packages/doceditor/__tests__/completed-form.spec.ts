@@ -81,6 +81,34 @@ test.describe("Completed form", () => {
     ]);
   });
 
+  // Production report (4.0.0): "can't access property "originalForm", x is
+  // undefined" on a shared file's completed-form page. The fill result came
+  // back OK but without `response`, and CompletedForm reads
+  // `session?.response.originalForm` before its empty-state check.
+  test("Completed form without a fill result renders the empty state", async ({
+    page,
+    serverRequestInterceptor,
+    port,
+    baseUrl,
+  }) => {
+    serverRequestInterceptor.use(
+      filesSettingsHandler(port),
+      fillingSessionHandler(port, true),
+    );
+
+    const pageErrors: string[] = [];
+    page.on("pageerror", (error) => pageErrors.push(error.message));
+
+    await page.goto(
+      `${baseUrl}/doceditor/completed-form?share=qwerty&is_file=true&fileId=1&fillingSessionId=anon_1`,
+    );
+
+    await expect(
+      page.getByTestId("completed_form_empty_container"),
+    ).toBeVisible();
+    expect(pageErrors.filter((m) => m.includes("originalForm"))).toEqual([]);
+  });
+
   test("VDR completed form render", async ({
     page,
     serverRequestInterceptor,

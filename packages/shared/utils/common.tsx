@@ -96,7 +96,7 @@ import {
 } from "../constants";
 
 import { TI18n, TTranslation, ValueOf } from "../types";
-import { TUser } from "../api/people/types";
+import { TUser, TUserServiceLimit } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
 import {
@@ -652,6 +652,12 @@ export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
 
+/** Whether this window is a frame the SDK opened, known before its configuration arrives. */
+export const isSdkFrameWindow = () =>
+  typeof window !== "undefined" &&
+  window.self !== window.parent &&
+  window.name.startsWith(`${FRAME_NAME}__#`);
+
 export const getFrameInitialTheme = (): ThemeKeys | null => {
   if (typeof window === "undefined" || !window.name.includes(FRAME_NAME))
     return null;
@@ -786,7 +792,10 @@ export const frameHandlePing = (eventData: {
   return false;
 };
 
-import { getConvertedSize } from "@onlyoffice/apps-ui-kit/billing/utils/common";
+import {
+  formatCurrencyValue,
+  getConvertedSize,
+} from "@onlyoffice/apps-ui-kit/billing/utils/common";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { getConstName } from "@docspace/shared/constants/consts";
 
@@ -814,6 +823,35 @@ export const getSpaceQuotaAsText = (
   const quotaValue = getConvertedQuota(t, quotaLimit);
 
   return `${usedValue} / ${quotaValue}`;
+};
+
+export const formatAiAmount = (
+  language: string,
+  amount: number,
+  currency: string | null | undefined,
+  fractionDigits: number = 2,
+) => {
+  if (!currency) return amount.toFixed(fractionDigits);
+
+  return formatCurrencyValue(language, amount, currency, fractionDigits);
+};
+
+export const getAiSpendingAsText = (
+  language: string,
+  limit: TUserServiceLimit | null | undefined,
+) => {
+  const currency = limit?.currency;
+
+  if (!limit || !currency) return "";
+
+  const format = (amount: number) => formatAiAmount(language, amount, currency);
+
+  const spent = format(limit.amountConsumed);
+
+  if (limit.amountValue === null || limit.amountValue === undefined)
+    return spent;
+
+  return `${spent} / ${format(limit.amountValue)}`;
 };
 
 export const conversionToBytes = (size: number, power: number) => {
@@ -869,12 +907,6 @@ export const getFileExtension = (fileTitleParam: string) => {
 export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   const sorted = [];
 
-  const aiAgentsFolder = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.AIAgents,
-  );
-  if (aiAgentsFolder) sorted.push(aiAgentsFolder);
-
   const myFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.USER,
@@ -892,6 +924,12 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
     (folder) => folder.current.rootFolderType === FolderType.Forms,
   );
   if (formsFolder) sorted.push(formsFolder);
+
+  const aiHubFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.AiHub,
+  );
+  if (aiHubFolder) sorted.push(aiHubFolder);
 
   const sharedWithMeFolder = find(
     folders,
@@ -946,8 +984,6 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
 
 export const getFolderClassNameByType = (folderType: FolderType) => {
   switch (folderType) {
-    case FolderType.AIAgents:
-      return "tree-node-ai-agents";
     case FolderType.USER:
       return "tree-node-my";
     case FolderType.SHARE:
@@ -1115,10 +1151,14 @@ export function tryParseArray(str: string) {
   }
 }
 
+// AI agents and AI projects are rooms for the API, but they are created from
+// their own sections, never from the room type chooser or the Rooms filter.
 export const RoomsTypeValues = [
   ...Object.values(RoomsType).filter(
     (item): item is number =>
-      typeof item === "number" && item !== RoomsType.AIRoom,
+      typeof item === "number" &&
+      item !== RoomsType.AIRoom &&
+      item !== RoomsType.AiProjectRoom,
   ),
   RoomsTypePrivate,
 ];
@@ -1572,7 +1612,7 @@ export const getErrorInfo = (
 };
 
 /**
- * A room or agent id in a route.
+ * A room id in a route.
  *
  * Negative ids are matched on purpose. A section tour can walk the user into a
  * stand-in room whose id is negative by design (client's `api/tourDemo`, where
@@ -1581,17 +1621,47 @@ export const getErrorInfo = (
  * which leaves the list's own title, create button and quick-actions on a page
  * that is standing inside a room.
  *
- * Only the forms tour walks into a stand-in room today; the rooms and agents
- * patterns are written the same way so that adding such a step there is not a
- * silent trap.
+ * Only the forms tour walks into a stand-in room today; the rooms pattern is
+ * written the same way so that adding such a step there is not a silent trap.
  */
 const ROUTE_ID = "-?\\d+";
+
+/** The Private section of the sidebar: private rooms listed apart from Rooms. */
+export const isPrivateRoomsRoute = (pathname: string) =>
+  pathname === "/private" || pathname.startsWith("/private/");
 
 export const getCategoryType = (location: { pathname: string }) => {
   let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
   const { pathname } = location;
 
-  if (pathname.startsWith("/forms")) {
+  if (isPrivateRoomsRoute(pathname)) {
+    const privateRoomRegexp = new RegExp(`^/private/(${ROUTE_ID})(/|$)`);
+
+    if (pathname.startsWith("/private/archived")) {
+      categoryType = CategoryType.PrivateArchive;
+    } else if (privateRoomRegexp.test(pathname)) {
+      categoryType = CategoryType.PrivateRoom;
+    } else {
+      categoryType = CategoryType.PrivateRooms;
+    }
+  } else if (pathname.startsWith("/ai-rooms/")) {
+    // The "AI rooms" section (Instructions and Knowledge rooms): its own root
+    // for the list and the rooms, the shared special folders for the slots.
+    // The bare `/ai-rooms` is the Rooms app's SDK frame page, not this section.
+    const aiHubRoomRegexp = new RegExp(`(ai-rooms)/(${ROUTE_ID})`);
+
+    if (aiHubRoomRegexp.test(pathname)) {
+      categoryType = CategoryType.AiHubRoom;
+    } else if (pathname.indexOf("/recent") > -1) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.indexOf("/favorite") > -1) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.indexOf("/trash") > -1) {
+      categoryType = CategoryType.Trash;
+    } else {
+      categoryType = CategoryType.AiHub;
+    }
+  } else if (pathname.startsWith("/forms")) {
     const formRoomRegexp = new RegExp(`(forms)/(${ROUTE_ID})`);
 
     if (formRoomRegexp.test(pathname)) {
@@ -1639,27 +1709,6 @@ export const getCategoryType = (location: { pathname: string }) => {
     categoryType = CategoryType.Accounts;
   } else if (pathname.startsWith("/shared-with-me")) {
     categoryType = CategoryType.SharedWithMe;
-  } else if (pathname.startsWith("/ai-agents")) {
-    const agentRegexp = new RegExp(`(ai-agents)/(${ROUTE_ID})`);
-    const chatRegexp = new RegExp(`(ai-agents)/(${ROUTE_ID})/chat`);
-
-    // Agent-scoped alias sections reuse the file recent/favorites/trash data
-    // (same as the global sections), but live under /ai-agents/* so the
-    // sidebar keeps them under AI Agents. Detect them before the agent-detail
-    // patterns.
-    if (pathname.startsWith("/ai-agents/recent")) {
-      categoryType = CategoryType.Recent;
-    } else if (pathname.startsWith("/ai-agents/favorites")) {
-      categoryType = CategoryType.Favorite;
-    } else if (pathname.startsWith("/ai-agents/trash")) {
-      categoryType = CategoryType.Trash;
-    } else if (chatRegexp.test(location.pathname)) {
-      categoryType = CategoryType.Chat;
-    } else if (agentRegexp.test(location.pathname)) {
-      categoryType = CategoryType.AIAgent;
-    } else {
-      categoryType = CategoryType.AIAgents;
-    }
   }
 
   return categoryType;

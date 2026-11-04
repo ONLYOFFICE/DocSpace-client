@@ -130,34 +130,6 @@ export function scrollToTopImpl(self: FilesStore) {
   scrollElm && scrollElm.scrollTo(0, 0);
 }
 
-export async function fetchFavoritesFolderImpl(
-  self: FilesStore,
-  folderId: number | string,
-) {
-  // The live filter carries the section scope (folderType: Rooms/Forms/AI/
-  // MyDocs) along with sort and paging. It must be passed on: calling
-  // getFolder with the id alone skips the query string entirely, so the
-  // refreshed listing comes back unscoped and shows favorites belonging to
-  // every other section.
-  const requestFilter = self.filter.clone();
-  requestFilter.folder = folderId as string;
-
-  const favoritesFolder = await api.files.getFolder(folderId, requestFilter);
-
-  self.setFolders(favoritesFolder.folders);
-  self.setFiles(favoritesFolder.files);
-
-  const newFilter = self.filter.clone();
-  newFilter.total = favoritesFolder.total;
-  self.setFilter(newFilter);
-
-  self.selectedFolderStore.setSelectedFolder({
-    folders: favoritesFolder.folders,
-    ...favoritesFolder.current,
-    pathParts: favoritesFolder.pathParts,
-  });
-}
-
 export function openDocEditorImpl(
   self: FilesStore,
   id: number | string,

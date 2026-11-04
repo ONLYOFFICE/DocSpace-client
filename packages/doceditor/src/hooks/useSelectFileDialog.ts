@@ -34,6 +34,7 @@
  */
 
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
 	TFileSecurity,
@@ -43,9 +44,14 @@ import {
 	TPresignedUri,
 } from "@docspace/shared/api/files/types";
 import { getPresignedUri, getReferenceData } from "@docspace/shared/api/files";
-import { EDITOR_ID } from "@docspace/shared/constants";
+import { getDocEditor } from "@/utils";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
-import { TSelectedFileInfo } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
+import type {
+	TFilesSelectorFile,
+	TFilesSelectorLoadedFiles,
+	TSelectedFileInfo,
+} from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
 import { TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 
@@ -55,9 +61,16 @@ export const insertImageAction = "imageFileType";
 export const mailMergeAction = "mailMergeFileType";
 export const compareFilesAction = "documentsFileType";
 export const setReferenceSourceAction = "referenceSourceType";
+export const aiAttachFileAction = "aiAttachFileType";
 
 const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
+	const { t } = useTranslation(["Common"]);
 	const [isVisible, setIsVisible] = React.useState(false);
+	// Design: private-rooms-editor-contract D16, encrypted files stay out of the pickers.
+	const encryptedIds = React.useRef(new Set<string | number>());
+	const [encryptedItems, setEncryptedItems] = React.useState<
+		(string | number)[]
+	>([]);
 	const [actionEvent, setActionEvent] = React.useState<TEvent>({} as TEvent);
 	const [filesType, setFilesType] = React.useState("");
 	const [fileTypeDetection, setFileTypeDetection] = React.useState({
@@ -66,6 +79,27 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 	});
 
 	const requestRunning = React.useRef(false);
+	// Pending "Add file from storage" pick of the editor's AI chat: settled
+	// with the selected file, or with null when the dialog closes without one.
+	const aiFileResolverRef = React.useRef<
+		((file: TSelectedFileInfo | null) => void) | null
+	>(null);
+
+	const settleAIFileRequest = useCallback((file: TSelectedFileInfo | null) => {
+		const resolve = aiFileResolverRef.current;
+		aiFileResolverRef.current = null;
+		resolve?.(file);
+	}, []);
+
+	const onAIRequestStorageFile = useCallback(() => {
+		settleAIFileRequest(null);
+		return new Promise<TSelectedFileInfo | null>((resolve) => {
+			aiFileResolverRef.current = resolve;
+			setActionEvent({} as TEvent);
+			setFilesType(aiAttachFileAction);
+			setIsVisible(true);
+		});
+	}, [settleAIFileRequest]);
 
 	const onSDKRequestSelectDocument = useCallback((event: object) => {
 		// console.log("onSDKRequestSelectDocument", { event });
@@ -99,8 +133,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		(link: TPresignedUri) => {
 			const token = link.token;
 
-			const docEditor =
-				typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+			const docEditor = getDocEditor();
 
 			docEditor?.insertImage({
 				...actionEvent.data,
@@ -116,8 +149,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		(link: TPresignedUri) => {
 			const token = link.token;
 
-			const docEditor =
-				typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+			const docEditor = getDocEditor();
 
 			docEditor?.setRequestedSpreadsheet({
 				...actionEvent.data,
@@ -133,8 +165,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		(link: TPresignedUri) => {
 			const token = link.token;
 
-			const docEditor =
-				typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+			const docEditor = getDocEditor();
 
 			docEditor?.setRequestedDocument({
 				...actionEvent.data,
@@ -147,18 +178,44 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 	);
 
 	const setReferenceSource = useCallback((data: TGetReferenceDataRequest) => {
-		const docEditor =
-			typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+		const docEditor = getDocEditor();
 
 		docEditor?.setReferenceSource(data);
 	}, []);
 
+	const onFilesLoaded = useCallback(
+		(files: TFilesSelectorFile[], _context: TFilesSelectorLoadedFiles) => {
+			let changed = false;
+			for (const file of files) {
+				if (file.encrypted && !encryptedIds.current.has(file.id)) {
+					encryptedIds.current.add(file.id);
+					changed = true;
+				}
+			}
+			if (changed) setEncryptedItems([...encryptedIds.current]);
+		},
+		[],
+	);
+
+	const isEncryptedPick = useCallback(
+		(file: TSelectedFileInfo, isInsidePrivateRoom?: boolean) =>
+			!!file && (!!isInsidePrivateRoom || encryptedIds.current.has(file.id)),
+		[],
+	);
+
 	const onSelectFile = useCallback(
-		async (file: TSelectedFileInfo) => {
+		async (file: TSelectedFileInfo, isInsidePrivateRoom?: boolean) => {
 			try {
 				if (!file) return;
 
-				if (filesType === setReferenceSourceAction) {
+				if (isEncryptedPick(file, isInsidePrivateRoom)) {
+					toastr.info(t("Common:PrivateRoomEditorNotSupported"));
+					return;
+				}
+
+				if (filesType === aiAttachFileAction) {
+					settleAIFileRequest(file);
+				} else if (filesType === setReferenceSourceAction) {
 					const data = await getReferenceData({
 						fileKey: file.id,
 						instanceId,
@@ -183,10 +240,20 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 			insertImage,
 			mailMerge,
 			compareFiles,
+			settleAIFileRequest,
+			isEncryptedPick,
+			t,
 		],
 	);
 
 	const getFileTypeDetection = React.useCallback(() => {
+		// The AI chat takes any file: images inline, documents as text.
+		if (filesType === aiAttachFileAction) {
+			return {
+				isSelect: true,
+				filterParam: FilesSelectorFilterTypes.ALL,
+			};
+		}
 		if (filesType === insertImageAction) {
 			return {
 				isSelect: true,
@@ -227,7 +294,8 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		if (requestRunning.current) return;
 		setIsVisible(false);
 		setActionEvent({} as TEvent);
-	}, []);
+		settleAIFileRequest(null);
+	}, [settleAIFileRequest]);
 
 	const onSubmit = useCallback(
 		async (
@@ -239,9 +307,12 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 			isChecked: boolean,
 			selectedTreeNode: TFolder,
 			selectedFileInfo: TSelectedFileInfo,
+			_isInsideKnowledge?: boolean,
+			_isInsideResultStorage?: boolean,
+			isInsidePrivateRoom?: boolean,
 		) => {
 			requestRunning.current = true;
-			await onSelectFile(selectedFileInfo);
+			await onSelectFile(selectedFileInfo, isInsidePrivateRoom);
 			requestRunning.current = false;
 			onClose();
 		},
@@ -253,7 +324,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 			isFirstLoad: boolean,
 			isSelectedParentFolder: boolean,
 			selectedItemId: string | number | undefined,
-			selectedItemType: "rooms" | "files" | "agents" | undefined,
+			selectedItemType: "rooms" | "files" | undefined,
 			isRoot: boolean,
 			selectedItemSecurity:
 				| TFileSecurity
@@ -261,14 +332,19 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 				| TRoomSecurity
 				| undefined,
 			selectedFileInfo: TSelectedFileInfo,
+			_isDisabledFolder?: boolean,
+			_isInsideKnowledge?: boolean,
+			_isInsideResultStorage?: boolean,
+			isInsidePrivateRoom?: boolean,
 		) => {
 			if (isFirstLoad) return true;
 			if (requestRunning.current) return true;
 			if (!selectedFileInfo) return true;
+			if (isEncryptedPick(selectedFileInfo, isInsidePrivateRoom)) return true;
 
 			return false;
 		},
-		[],
+		[isEncryptedPick],
 	);
 
 	return {
@@ -276,11 +352,14 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 		onSDKRequestInsertImage,
 		onSDKRequestReferenceSource,
 		onSDKRequestSelectSpreadsheet,
+		onAIRequestStorageFile,
 
 		onSubmitSelectFileDialog: onSubmit,
 		onCloseSelectFileDialog: onClose,
 
 		getIsDisabledSelectFileDialog: getIsDisabled,
+		onFilesLoadedSelectFileDialog: onFilesLoaded,
+		selectFileDialogDisabledItems: encryptedItems,
 
 		selectFileDialogVisible: isVisible,
 

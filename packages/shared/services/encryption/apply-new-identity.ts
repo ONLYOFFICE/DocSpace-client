@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { setActiveKeyId } from "./active-key-preference";
 import { SecretStorage } from "./secret-storage";
 import { getTofuStore } from "./tofu-store";
 import type { IdentityKeyPair } from "./types";
@@ -42,16 +41,9 @@ export async function applyNewIdentity(params: {
   userId: string;
   newIdentity: IdentityKeyPair;
   newPublicKeyB64: string;
-  newPublicKeyId: string;
-  activate: boolean;
 }): Promise<void> {
-  const { userId, newIdentity, newPublicKeyB64, newPublicKeyId, activate } =
-    params;
+  const { userId, newIdentity, newPublicKeyB64 } = params;
 
   await getTofuStore(userId).acceptKey(userId, newPublicKeyB64);
-
-  if (activate) {
-    setActiveKeyId(userId, newPublicKeyId);
-    SecretStorage.cacheUnlocked(userId, newIdentity);
-  }
+  SecretStorage.cacheUnlocked(userId, newIdentity);
 }

@@ -1,0 +1,29 @@
+{
+  "key_path": "AiRoomsAIOffUserDescription",
+  "content": "AI projects, Instructions rooms and Knowledge rooms will be available once the Full admin sets up AI.",
+  "content_en_sha1_hash": "8ad8f916bc808238e08b51d95556baed0fd3ad37",
+  "created_at": "2026-11-01T08:11:31.695Z",
+  "updated_at": "2026-11-01T08:13:19.914Z",
+  "comment": {
+    "text": "Description in the AI rooms section placeholder for a non-admin user while AI is not set up on the portal. Instructions rooms and Knowledge rooms are room type names; Full admin is the top portal administrator role.",
+    "is_auto": true,
+    "updated_at": "2026-11-01T08:13:19.914Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 271,
+      "context": "export const getAiRoomsAIOffDescription = (\n t: TTranslation,\n standalone: boolean,\n isPortalAdmin: boolean,\n ) => {\n if (!isPortalAdmin) return t(\"Common:AiRoomsAIOffUserDescription\");\n if (standalone) return t(\"Common:AiRoomsAIOffStandaloneAdminDescription\");\n return (\n <>\n <Text as=\"span\">{t(\"Common:AiRoomsAIOffDescription\")}</Text>\n <Text as=\"span\" style={{ display: \"block\", marginTop: \"8px\" }}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -145,6 +145,5 @@ with the change.
 
 ## Advisory-only tools (not gated)
 
-`pnpm check-circular` (madge) and `fallow` / `fallow:audit` (dead code,
-unused exports; config in `.fallowrc.json`) run manually — useful before
-large refactors, but nothing in lefthook/CI enforces them.
+`pnpm check-circular` (madge) runs manually — useful before large
+refactors, but nothing in lefthook/CI enforces it.

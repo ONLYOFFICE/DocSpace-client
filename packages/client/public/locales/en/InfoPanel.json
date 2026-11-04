@@ -11,6 +11,7 @@
   "FeedLocationLabelFrom": "from «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Room «{{folderTitle}}»",
   "FeedLocationSectionLabel": "Section «{{folderTitle}}»",
+  "FeedLocationSpaceLabel": "Space «{{folderTitle}}»",
   "FormRoomAIAnalyzeTitle": "Analyze responses with AI",
   "FormRoomAIModalConnect": "Connect database",
   "FormRoomAIModalDescription": "Connect a database to analyze all collected responses with Ask AI. You can continue without it and ask about this form only.",

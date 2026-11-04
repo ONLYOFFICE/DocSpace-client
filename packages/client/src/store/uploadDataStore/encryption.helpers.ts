@@ -34,160 +34,114 @@
  */
 
 import { runInAction } from "mobx";
-import { RoomsType } from "@docspace/shared/enums";
-import {
-  setFileEncryptionKeys,
-  getFileEncryptionAccess,
-} from "@docspace/shared/api/files";
-import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
-import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
-import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
+import { removeFiles } from "@docspace/shared/api/files";
+import type { SkippedMemberKey } from "@docspace/shared/services/private-room/member-key-verification";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
-import { prepareEncryptedUpload } from "@docspace/shared/services/private-room/encrypted-upload";
+import type { MoveSourceRef } from "@docspace/shared/services/private-room/encrypted-upload";
+import {
+  getEncryptedUploadRefusalMessage,
+  getEncryptedUploadRefusalNotice,
+  nameSkippedMembers,
+} from "@docspace/shared/services/private-room/encrypted-upload-orchestrator";
+import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-
-import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
+import uniqueid from "lodash/uniqueId";
 
 import i18n from "../../i18n";
 
-import type { TUploadBrowserFile } from "./helpers";
+import type { TUploadFile } from "./helpers";
 import type { default as UploadDataStore } from "../UploadDataStore";
 
-export async function wrapForSelfThenRoomImpl(
+// Spec: private-rooms/file-operations, "Files leaving a private room are decrypted".
+export async function deleteMovedEncryptedSourceImpl(
   self: UploadDataStore,
-  fileId: number,
-  currentUserId: string,
-  publicKeyBase64: string,
-  publicKeyId: string,
-  dek: Uint8Array,
-  roomId: number | string | null,
+  moveSource: MoveSourceRef,
 ) {
+  const pbData = {
+    operation: OPERATIONS_NAME.trash,
+    operationId: uniqueid("operation_"),
+  };
+  const fileId = Number(moveSource.fileId);
+
   try {
-    const identity = await requireUnlock(currentUserId);
-    if (!identity) {
-      throw new Error(
-        "Encryption identity is locked — cannot wrap DEK for upload",
-      );
+    const [operation] = await removeFiles([], [fileId], false, true);
+    if (!operation || operation.error) {
+      throw new Error(operation?.error || "Delete operation was not started");
     }
-    const ownWraps = await wrapDekForRecipients({
-      dek,
-      senderIdentity: identity,
-      senderUserId: currentUserId,
-      recipients: [
-        {
-          userId: currentUserId,
-          publicKey: publicKeyBase64,
-          publicKeyId,
-        },
-      ],
-      fileId,
+
+    const result = await self.loopFilesOperations(operation, pbData);
+    if (result?.error) throw new Error(result.error);
+
+    self.secondaryProgressDataStore.setSecondaryProgressBarData({
+      ...pbData,
+      completed: true,
     });
-    await setFileEncryptionKeys(fileId, ownWraps);
-    await self.encryptKeysForRoomMembers(
-      fileId,
-      currentUserId,
-      roomId,
-      dek,
-      identity,
-    );
-  } finally {
-    wipeDek(dek);
-  }
-}
-
-export async function encryptKeysForRoomMembersImpl(
-  self: UploadDataStore,
-  fileId: number,
-  currentUserId: string,
-  roomId: number | string | null,
-  dek: Uint8Array,
-  identity: IdentityKeyPair,
-) {
-  try {
-    if (!roomId) {
-      console.error(
-        "[ENCRYPTION] encryptKeysForRoomMembers called without roomId",
-      );
-      return;
-    }
-    if (!dek || !identity) {
-      console.error(
-        "[ENCRYPTION] encryptKeysForRoomMembers called without dek/identity",
-      );
-      return;
-    }
-    const [publicKeys, encryptionInfo] = await Promise.all([
-      getRoomEncryptionKeys(roomId),
-      getFileEncryptionAccess(fileId),
-    ]);
-
-    const existingFileKeys = encryptionInfo.fileKeys ?? [];
-    const existingKeyPairs = new Set(
-      existingFileKeys.map((k) => `${String(k.userId)}:${k.publicKeyId || ""}`),
-    );
-
-    const recipients: {
-      userId: string;
-      publicKey: string;
-      publicKeyId: string;
-    }[] = [];
-    if (Array.isArray(publicKeys)) {
-      for (const pk of publicKeys) {
-        if (!pk.publicKey || !pk.userId) continue;
-        const uid = String(pk.userId);
-        if (uid === String(currentUserId)) continue;
-        const pairKey = `${uid}:${pk.id || ""}`;
-        if (existingKeyPairs.has(pairKey)) continue;
-
-        recipients.push({
-          userId: uid,
-          publicKey: pk.publicKey,
-          publicKeyId: pk.id || "",
-        });
-      }
-    }
-    if (recipients.length === 0) return;
-
-    const newKeys = await wrapDekForRecipients({
-      dek,
-      senderIdentity: identity,
-      senderUserId: String(currentUserId),
-      recipients,
-      fileId,
-    });
-
-    if (newKeys.length > 0) {
-      const allKeys = [
-        ...existingFileKeys.map((k) => ({
-          userId: k.userId,
-          publicKeyId: k.publicKeyId || "",
-          privateKeyEnc: k.privateKeyEnc,
-        })),
-        ...newKeys,
-      ];
-      await setFileEncryptionKeys(fileId, allKeys);
-    }
+    self.filesStore.removeFiles([fileId]);
+    forgetEncryptedFilename(fileId);
   } catch (error) {
-    console.error(
-      "[ENCRYPTION] Failed to encrypt keys for room members:",
+    console.error("[ENCRYPTION] Failed to delete the source of a moved file", {
+      fileId,
       error,
+    });
+    self.secondaryProgressDataStore.setSecondaryProgressBarData({
+      ...pbData,
+      completed: true,
+      alert: true,
+    });
+    toastr.error(
+      i18n.t("Common:EncryptedMovePartialFailure", {
+        names: moveSource.title,
+      }),
     );
   }
 }
 
-export async function ensureEncryptionUnlockedForBatchImpl(
+/**
+ * Names the members a file's fan-out left out and warns once per member and
+ * session; returns the members with their display names for the panel row.
+ * Spec: private-rooms/encryption-core, "File access list holds one wrap per member".
+ */
+export async function reportSkippedMembersImpl(
   self: UploadDataStore,
-) {
-  const { userId } = self.getUserEncryptionKeys();
-  if (!userId) return true;
+  skipped: SkippedMemberKey[],
+): Promise<SkippedMemberKey[]> {
+  const named = await nameSkippedMembers(skipped);
 
-  const needsUnlock = self.files.some(
+  const fresh = named.filter(
+    (m) => !self.reportedSkippedMemberIds.has(m.userId),
+  );
+  if (fresh.length > 0) {
+    for (const m of fresh) self.reportedSkippedMemberIds.add(m.userId);
+    toastr.warning(
+      i18n.t("Common:EncryptedUploadNotSharedWith", {
+        names: fresh.map((m) => m.displayName).join(", "),
+      }),
+    );
+  }
+  return named;
+}
+
+/** The given items, or the uploads of the queue that have not started yet. */
+const batchItems = (self: UploadDataStore, items?: TUploadFile[]) =>
+  items ??
+  self.files.filter(
     (item) =>
       !item.inAction &&
       !item.error &&
       !item.cancel &&
-      item.action === "upload" &&
-      self.willEncryptItem(item),
+      item.action === "upload",
+  );
+
+export async function ensureEncryptionUnlockedForBatchImpl(
+  self: UploadDataStore,
+  items?: TUploadFile[],
+) {
+  const { userId } = self.getUserEncryptionKeys();
+  if (!userId) return true;
+
+  const needsUnlock = batchItems(self, items).some((item) =>
+    self.willEncryptItem(item),
   );
 
   if (!needsUnlock) return true;
@@ -196,57 +150,36 @@ export async function ensureEncryptionUnlockedForBatchImpl(
   return !!identity;
 }
 
-export function cancelEncryptedBatchUploadImpl(self: UploadDataStore) {
-  runInAction(() => {
-    self.files.forEach((item) => {
-      if (
-        item.inAction ||
-        item.error ||
-        item.cancel ||
-        item.action !== "upload" ||
-        !self.willEncryptItem(item)
-      )
-        return;
+// Spec: private-rooms/file-operations, "Uploads into a private room are encrypted on the client".
+export function cancelEncryptedBatchUploadImpl(
+  self: UploadDataStore,
+  items?: TUploadFile[],
+) {
+  const errorMessage = getEncryptedUploadRefusalMessage(i18n.t, "locked");
 
-      item.cancel = true;
-      item.action = "uploaded";
-      item.percent = 100;
-      self.uploadedFilesHistory = self.uploadedFilesHistory.filter(
-        (f) => f.uniqueId !== item.uniqueId,
+  runInAction(() => {
+    batchItems(self, items).forEach((item) => {
+      if (!self.willEncryptItem(item)) return;
+
+      item.inAction = true;
+      item.error = errorMessage;
+      item.isQuotaError = false;
+      item.percent = 0;
+      const historyItem = self.uploadedFilesHistory.find(
+        (f) => f.uniqueId === item.uniqueId,
       );
+      if (historyItem) {
+        historyItem.error = errorMessage;
+        historyItem.isQuotaError = false;
+        historyItem.percent = 0;
+      }
     });
 
     self.percent = self.getFilesPercent();
   });
 
   try {
-    toastr.info(i18n.t("Common:EncryptionUploadCancelled"));
+    toastr.info(getEncryptedUploadRefusalNotice(i18n.t, "locked"));
   } catch {
   }
-}
-
-export async function prepareFileForEncryptedUploadImpl(
-  self: UploadDataStore,
-  file: TUploadBrowserFile,
-  folderId: number | string | null | undefined,
-  onProgress?: (progress: number) => void,
-) {
-  const overrideCtx = file?.uploadContext;
-  const ancestorIsPrivate = self.treeFoldersStore.isPrivacyFolder;
-  const roomType =
-    overrideCtx?.roomType ??
-    (ancestorIsPrivate
-      ? RoomsType.CustomRoom
-      : self.selectedFolderStore.roomType);
-  const isPrivate =
-    overrideCtx && "isPrivate" in overrideCtx
-      ? overrideCtx.isPrivate
-      : ancestorIsPrivate;
-  return prepareEncryptedUpload({
-    file,
-    folderId: folderId as number,
-    roomType: roomType || RoomsType.CustomRoom,
-    isPrivate: isPrivate || false,
-    onProgress,
-  });
 }

@@ -35,7 +35,7 @@
 
 import { useCallback, useRef } from "react";
 
-import { EDITOR_ID } from "@docspace/shared/constants";
+import { getDocEditor } from "@/utils";
 
 /**
  * Calls `startFilling(true)` on the editor and waits until the SDK fires
@@ -46,11 +46,10 @@ export const useDisconnectUsers = () => {
   const resolveRef = useRef<(() => void) | undefined>(undefined);
 
   const disconnectUsers = useCallback(() => {
-    const docEditor =
-      typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+    const docEditor = getDocEditor();
     return new Promise<void>((resolve) => {
       resolveRef.current = resolve;
-      docEditor?.startFilling(true);
+      docEditor?.startFilling?.(true);
     });
   }, []);
 

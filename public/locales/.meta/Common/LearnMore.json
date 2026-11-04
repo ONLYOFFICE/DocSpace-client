@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2026-09-14T20:38:41.353Z",
+  "updated_at": "2026-10-31T12:58:28.886Z",
   "comment": {
     "text": "This is a link label that, when clicked, directs the user to a help page or settings page for more information about the current feature or setting.",
     "is_auto": true,
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 293,
+      "line_number": 292,
       "context": "fontWeight={600}\n isHovered\n href={knowledgeSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <div className={styles.knowledgeForm} data-testid=\"knowledge-form\">\n <FieldContainer\n labelVisible",
       "module": "/packages/client"
     },
@@ -73,13 +73,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 788,
+      "line_number": 798,
       "context": "type=\"page\"\n href={appearanceBlockHelpUrl}\n target=\"_blank\"\n dataTestId=\"appearance_preview_help_button_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n </div>\n }\n />\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 261,
+      "line_number": 252,
       "context": "isHovered\n href={aiServicesManagementUrl}\n fontWeight={600}\n dataTestId=\"ai_services_management_learn_more\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <RadioButtonGroup\n className={styles.radioButtonGroup}\n fontSize=\"13px\"",
       "module": "/packages/client"
     },
@@ -97,13 +97,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 553,
+      "line_number": 550,
       "context": "target=\"_blank\"\n isHovered\n dataTestId=\"language_and_time_zone_link\"\n href={languageAndTimeZoneSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n {settingsBlock}\n <SaveCancelButtons",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 408,
+      "line_number": 410,
       "context": "target=\"_blank\"\n isHovered\n href={renamingSettingsUrl}\n dataTestId=\"portal_renaming_learn_more\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n {settingsBlock}\n <SaveCancelButtons",
       "module": "/packages/client"
     },
@@ -283,13 +283,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
-      "line_number": 313,
+      "line_number": 312,
       "context": "fontWeight={600}\n isHovered\n href={knowledgeSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <div className={styles.knowledgeForm} data-testid=\"knowledge-form\">\n <FieldContainer\n labelVisible",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 287,
+      "line_number": 285,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n href={customFilterExternalLink}\n isHovered\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </>\n );",
       "module": "/packages/shared"
     },

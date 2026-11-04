@@ -221,7 +221,7 @@ const HistoryMainContent = (props) => {
       <div className={styles["download-wrapper"]}>
         <Button
           className="download-report_button"
-          dataTestId={
+          testId={
             loginHistory
               ? "login_history_download_report_button"
               : "audit_trail_download_report_button"

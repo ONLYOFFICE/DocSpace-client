@@ -39,7 +39,12 @@ import {
 } from "./filesSettings";
 import { foldersTreeHandler } from "./foldersTree";
 import { filesUsedSpaceHandler } from "./filesUsedSpace";
-import { folderHandler, folderInfoHandler } from "./folder";
+import {
+  folderHandler,
+  folderInfoHandler,
+  thirdPartyCreateFileHandler,
+  thirdPartyFolderHandler,
+} from "./folder";
 import {
   validatePublicRoomKeyHandler,
   validatePublicRoomKeyPasswordHandler,
@@ -84,16 +89,6 @@ import {
   deleteFavoritesHandler,
 } from "./favorites";
 import {
-  agentFolderChatHandler,
-  agentFolderInfoHandler,
-  agentFolderResultStorageHandler,
-  agentFolderKnowledgeHandler,
-} from "./agentFolder";
-import {
-  resultStorageFolderHandler,
-  resultStorageFolderInfoHandler,
-} from "./resultStorageFolder";
-import {
   defaultTemplatesHandler,
   defaultTemplatesSetHandler,
   defaultTemplatesResetHandler,
@@ -120,6 +115,19 @@ import {
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";
 export {
+  EMPTY_ENTRY_METADATA,
+  ENTRY_METADATA,
+  METADATA_FIELD,
+  METADATA_OPTION,
+  METADATA_TEMPLATES,
+  entryMetadataHandler,
+  entryMetadataSaveHandlers,
+  entryTemplateHandlers,
+  metadataCascadeHandlers,
+  metadataTemplatesHandlers,
+  myDocumentsMetadataFilterHandler,
+} from "./metadata";
+export {
   encryptedFilesHandlers,
   type EncryptedFileKey,
   type EncryptedFileSeed,
@@ -132,6 +140,7 @@ export {
   privateRoomListHandler,
   type PrivateRoomListOptions,
 } from "./privateRoomList";
+export { emptyTemplateHandler } from "./emptyTemplate";
 
 export {
   type FolderHistoryFeedSeed,
@@ -159,6 +168,8 @@ export {
   makeRoomLink,
   folderHandler,
   folderInfoHandler,
+  thirdPartyCreateFileHandler,
+  thirdPartyFolderHandler,
   validatePublicRoomPasswordHandler,
   roomListResolver,
   externalLinksHandler,
@@ -182,12 +193,6 @@ export {
   addFileToFavoritesHandler,
   getFileHandler,
   deleteFavoritesHandler,
-  agentFolderChatHandler,
-  agentFolderInfoHandler,
-  agentFolderResultStorageHandler,
-  agentFolderKnowledgeHandler,
-  resultStorageFolderHandler,
-  resultStorageFolderInfoHandler,
   validatePublicRoomKeyPasswordHandler,
   defaultTemplatesHandler,
   defaultTemplatesSetHandler,
@@ -215,18 +220,11 @@ export const filesHandlers = (port: string) => [
   // named endpoints under files/, and the first match wins.
   filesUsedSpaceHandler(port),
   //foldersTreeHandler(port),
-  // agentFolderResultStorageHandler, agentFolderKnowledgeHandler and agentFolderChatHandler filter by searchArea parameter
-  agentFolderResultStorageHandler(port),
-  agentFolderKnowledgeHandler(port),
-  agentFolderChatHandler(port),
-  resultStorageFolderHandler(port),
   rootHandler(port),
   filesSettingsHandler(port),
   showQuickActionsHandler(port),
   validatePublicRoomKeyHandler(port),
   roomListHandler(port),
-  agentFolderInfoHandler(port),
-  resultStorageFolderInfoHandler(port),
   folderHandler(port),
   folderInfoHandler(port),
   validatePublicRoomPasswordHandler(port),

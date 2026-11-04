@@ -67,6 +67,7 @@ const FileTile = (props) => {
     onContentFileSelect,
     fileContextClick,
     onDrop,
+    onDropCapture,
     onMouseDown,
     className,
     isDragging,
@@ -225,7 +226,6 @@ const FileTile = (props) => {
     children: tileContent,
     forwardRef: tileRef,
     dataTestId,
-    badgeUrl,
   };
 
   const renderTile = () => {
@@ -234,6 +234,7 @@ const FileTile = (props) => {
         <TemplateTile
           {...commonProps}
           key={item.id}
+          badgeUrl={badgeUrl}
           thumbnailClick={onFilesClick}
           openUser={onOpenUser}
           showStorageInfo={showStorageInfo}
@@ -246,6 +247,7 @@ const FileTile = (props) => {
           {...commonProps}
           t={t}
           key={item.id}
+          badgeUrl={badgeUrl}
           selectTag={onSelectTag}
           selectOption={onSelectOption}
           columnCount={columnCount}
@@ -318,6 +320,7 @@ const FileTile = (props) => {
         value={value}
         className={classNames(styles.dragAndDrop, classNameMemo)}
         onDrop={onDrop}
+        onDropCapture={onDropCapture}
         onMouseDown={onMouseDown}
         dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
@@ -349,13 +352,13 @@ export default inject(
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
 
-    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder, isFormsFolder } =
+    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder, isFormsFolder, isAiSectionFolder } =
       treeFoldersStore;
 
     const { showStorageInfo } = currentQuotaStore;
 
     const isRooms =
-      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder || isAiSectionFolder;
 
     return {
       getIcon,

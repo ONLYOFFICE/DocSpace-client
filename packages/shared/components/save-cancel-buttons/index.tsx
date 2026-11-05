@@ -127,8 +127,9 @@ const SaveCancelButtons = ({
       id={id}
       className={containerClassName}
       data-testid="save-cancel-buttons"
+      // Unnamed: the buttons name themselves by their labels, and a name here
+      // would be one more string to translate for no gain.
       role="group"
-      aria-label="Save or cancel changes"
     >
       {getTopComponent?.()}
       <div className={styles.buttonsContainer}>
@@ -141,7 +142,6 @@ const SaveCancelButtons = ({
           isLoading={isSaving}
           isDisabled={saveButtonDisabled || showReminder === false}
           testId={saveButtonDataTestId ?? "save-button"}
-          aria-label={`${saveButtonLabel} changes`}
           minWidth={displaySettings ? "auto" : ""}
           scale={isMobile()}
         />
@@ -152,7 +152,6 @@ const SaveCancelButtons = ({
           tabIndex={tabIndex}
           isDisabled={cancelButtonDisabled || isSaving}
           testId={cancelButtonDataTestId ?? "cancel-button"}
-          aria-label={`${cancelButtonLabel} changes`}
           minWidth={displaySettings ? "auto" : ""}
           scale={isMobile()}
         />

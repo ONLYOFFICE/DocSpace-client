@@ -59,7 +59,7 @@ describe("<SaveCancelButtons />", () => {
     const container = screen.getByTestId("save-cancel-buttons");
     expect(container).toBeInTheDocument();
     expect(container).toHaveAttribute("role", "group");
-    expect(container).toHaveAttribute("aria-label", "Save or cancel changes");
+    expect(container).not.toHaveAttribute("aria-label");
 
     const saveButton = screen.getByTestId("save-button");
     const cancelButton = screen.getByTestId("cancel-button");

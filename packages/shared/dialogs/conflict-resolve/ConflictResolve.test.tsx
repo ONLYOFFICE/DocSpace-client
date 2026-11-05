@@ -87,6 +87,17 @@ describe("ConflictResolve", () => {
     expect(screen.getByText("Cancel")).toBeInTheDocument();
   });
 
+  it("offers no overwrite without it and keeps both by default", async () => {
+    render(<ConflictResolve {...defaultProps} withOverwrite={false} />);
+
+    expect(screen.queryByText("Overwrite")).toBeNull();
+    expect(screen.getByText("Duplicate")).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText("OK"));
+
+    expect(mockOnSubmit).toHaveBeenCalledWith(ConflictResolveType.Duplicate);
+  });
+
   it("calls onClose when cancel button is clicked", async () => {
     render(<ConflictResolve {...defaultProps} />);
 

@@ -34,7 +34,7 @@
  */
 
 import { act, render } from "@testing-library/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
@@ -54,6 +54,11 @@ import type {
   SerializedIdentity,
 } from "../../../services/encryption/types";
 import type { KeyMismatchInfo } from "../../../services/encryption/tofu-store";
+import { arrayBufferToBase64 } from "../../../services/encryption/utils";
+import {
+  mockIDB,
+  resetMockIDB,
+} from "../../../services/private-room/__tests__/_helpers/mock-idb";
 
 vi.mock("../../../services/encryption/identity", () => ({
   unlockWithPassphrase: vi.fn(),
@@ -72,6 +77,37 @@ vi.mock("../../../services/encryption/auto-lock-preference", () => ({
   AUTO_LOCK_OPTIONS: [],
 }));
 
+vi.mock("../../../api/people", () => ({
+  getUserById: vi.fn(),
+}));
+
+const trustMocks = vi.hoisted(() => ({
+  listener: null as null | ((userId: string, scopeUserId: string) => void),
+  rewrap: vi.fn(),
+  toastr: { success: vi.fn(), warning: vi.fn(), error: vi.fn() },
+}));
+
+vi.mock("../../../services/private-room/member-key-verification", () => ({
+  onMemberKeyTrusted: vi.fn(
+    (listener: (userId: string, scopeUserId: string) => void) => {
+      trustMocks.listener = listener;
+      return () => {
+        trustMocks.listener = null;
+      };
+    },
+  ),
+}));
+
+vi.mock("../../../services/private-room/room-member-flows", () => ({
+  rewrapPendingAccessOfMember: trustMocks.rewrap,
+}));
+
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
+  toastr: trustMocks.toastr,
+}));
+
+import { getUserById } from "../../../api/people";
+import { pendingAccessStore } from "../../../services/private-room/pending-access";
 import { unlockWithPassphrase } from "../../../services/encryption/identity";
 import { getAutoLockTimeoutSeconds } from "../../../services/encryption/auto-lock-preference";
 import {
@@ -94,6 +130,7 @@ const userKeysFixture: EncryptionUserKeys = {
 const captured = {
   passphrase: null as PassphraseDialogProps | null,
   keyChange: null as KeyChangeDialogModalProps | null,
+  keyChangeMounts: 0,
 };
 
 const MockPassphraseDialog: React.FC<PassphraseDialogProps> = (props) => {
@@ -105,8 +142,14 @@ const MockPassphraseDialog: React.FC<PassphraseDialogProps> = (props) => {
 };
 const MockKeyChangeDialog: React.FC<KeyChangeDialogModalProps> = (props) => {
   captured.keyChange = props;
-  useEffect(() => () => {
-    captured.keyChange = null;
+  const own = useRef(props);
+  own.current = props;
+  useEffect(() => {
+    captured.keyChangeMounts += 1;
+    return () => {
+      // A replacing instance has already rendered its own props.
+      if (captured.keyChange === own.current) captured.keyChange = null;
+    };
   }, []);
   return null;
 };
@@ -119,18 +162,21 @@ const Consumer: React.FC = () => {
 
 type RenderOpts = {
   userKeys?: EncryptionUserKeys | null;
+  keysLoaded?: boolean;
   withPassphraseDialog?: boolean;
   withKeyChangeDialog?: boolean;
 };
 
 const renderTree = ({
   userKeys = userKeysFixture,
+  keysLoaded,
   withPassphraseDialog = true,
   withKeyChangeDialog = true,
 }: RenderOpts = {}) => {
   return render(
     <EncryptionProvider
       userKeys={userKeys}
+      keysLoaded={keysLoaded}
       PassphraseDialog={withPassphraseDialog ? MockPassphraseDialog : undefined}
       KeyChangeDialog={withKeyChangeDialog ? MockKeyChangeDialog : undefined}
     >
@@ -158,6 +204,15 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(lockSpy).toHaveBeenCalled();
       expect(latest.hasConfiguredKey).toBe(false);
       expect(latest.isUnlocked).toBe(false);
+    });
+
+    it("reports the key list as loaded unless the wrapper says it is still loading", () => {
+      renderTree({ userKeys: null });
+      expect(latest.keysLoaded).toBe(true);
+
+      renderTree({ userKeys: null, keysLoaded: false });
+      expect(latest.keysLoaded).toBe(false);
+      expect(latest.hasConfiguredKey).toBe(false);
     });
 
     it("treats partial userKeys (missing privateKeyEnc) as not configured", () => {
@@ -388,6 +443,101 @@ describe("EncryptionContext / EncryptionProvider", () => {
     });
   });
 
+  describe("remembered device across auto-lock (real device store)", () => {
+    type DeviceStore =
+      typeof import("../../../services/encryption/device-unlock-store");
+    const DAY = 24 * 60 * 60 * 1000;
+    const T0 = Date.UTC(2026, 9, 1);
+    const realPublicKey = arrayBufferToBase64(dummyKeyPair.publicKey);
+    const realUserKeys = {
+      ...userKeysFixture,
+      publicKey: realPublicKey,
+    } as EncryptionUserKeys;
+    let store: DeviceStore;
+    let now: ReturnType<typeof vi.spyOn>;
+
+    beforeEach(async () => {
+      store = await vi.importActual<DeviceStore>(
+        "../../../services/encryption/device-unlock-store",
+      );
+      resetMockIDB();
+      store.resetDeviceUnlockStoreForTests();
+      vi.stubGlobal("indexedDB", mockIDB);
+      vi.mocked(restoreDeviceUnlock).mockImplementation(
+        store.restoreDeviceUnlock,
+      );
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      now = vi.spyOn(Date, "now").mockReturnValue(T0);
+      await store.persistDeviceUnlock("user-42", realPublicKey, dummyKeyPair);
+    });
+
+    afterEach(() => {
+      now.mockRestore();
+      vi.mocked(restoreDeviceUnlock).mockResolvedValue(null);
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      vi.unstubAllGlobals();
+      Object.defineProperty(document, "visibilityState", {
+        value: "visible",
+        configurable: true,
+      });
+    });
+
+    const renderUnlockedThenHideTab = async () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      await act(async () => {
+        renderTree({ userKeys: realUserKeys });
+      });
+      Object.defineProperty(document, "visibilityState", {
+        value: "hidden",
+        configurable: true,
+      });
+      await act(async () => {
+        document.dispatchEvent(new Event("visibilitychange"));
+      });
+      expect(latest.isUnlocked).toBe(false);
+      expect(forgetDeviceUnlock).not.toHaveBeenCalled();
+      // The user comes back to the tab before the next operation.
+      Object.defineProperty(document, "visibilityState", {
+        value: "visible",
+        configurable: true,
+      });
+      await act(async () => {
+        document.dispatchEvent(new Event("visibilitychange"));
+      });
+    };
+
+    it("Auto-lock on a remembered device: the next operation restores the key without a prompt", async () => {
+      await renderUnlockedThenHideTab();
+      now.mockReturnValue(T0 + DAY);
+
+      let restored: IdentityKeyPair | null = null;
+      await act(async () => {
+        restored = await latest.requireIdentity();
+      });
+
+      expect(restored).not.toBeNull();
+      expect(captured.passphrase).toBeNull();
+      expect(latest.isUnlocked).toBe(true);
+    });
+
+    it("Remembered record expired: after auto-lock the user is prompted for the passphrase", async () => {
+      await renderUnlockedThenHideTab();
+      now.mockReturnValue(T0 + 31 * DAY);
+
+      let promised!: Promise<IdentityKeyPair | null>;
+      await act(async () => {
+        promised = latest.requireIdentity();
+      });
+
+      expect(captured.passphrase).not.toBeNull();
+      await act(async () => {
+        captured.passphrase!.onCancel();
+      });
+      expect(await promised).toBeNull();
+      expect(await store.getDeviceUnlockWrittenAt("user-42")).toBeNull();
+    });
+  });
+
   describe("auto-lock on tab hidden", () => {
     afterEach(() => {
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
@@ -443,6 +593,33 @@ describe("EncryptionContext / EncryptionProvider", () => {
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();
+      expect(latest.isUnlocked).toBe(true);
+
+      act(() => {
+        vi.advanceTimersByTime(60_000);
+      });
+
+      expect(latest.isUnlocked).toBe(false);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+
+    it("Idle lock after recovery", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      const tree = (userKeys: EncryptionUserKeys) => (
+        <EncryptionProvider
+          userKeys={userKeys}
+          PassphraseDialog={MockPassphraseDialog}
+          KeyChangeDialog={MockKeyChangeDialog}
+        >
+          <Consumer />
+        </EncryptionProvider>
+      );
+      const { rerender } = render(tree(userKeysFixture));
+      expect(latest.isUnlocked).toBe(false);
+
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      rerender(tree({ ...userKeysFixture, privateKeyEnc: "enc-recovered" }));
       expect(latest.isUnlocked).toBe(true);
 
       act(() => {
@@ -659,7 +836,28 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(await promised).toBe("refuse");
     });
 
-    it("refuses the pending dialog when a NEW mismatch comes in concurrently", async () => {
+    const stillPending = (promise: Promise<unknown>) =>
+      Promise.race([
+        promise.then(() => "settled"),
+        new Promise<string>((resolve) =>
+          setTimeout(() => resolve("pending"), 0),
+        ),
+      ]);
+
+    it("No automatic refusal: a new mismatch does not answer the pending one", async () => {
+      renderTree();
+      let firstPromise!: Promise<string>;
+      await act(async () => {
+        firstPromise = latest.resolveKeyMismatch(sampleInfo);
+      });
+      await act(async () => {
+        void latest.resolveKeyMismatch({ ...sampleInfo, newKey: "pub-newer" });
+      });
+      expect(await stillPending(firstPromise)).toBe("pending");
+      expect(captured.keyChange!.newPublicKey).toBe("pub-new");
+    });
+
+    it("Second mismatch while a dialog is open: shown after the first is decided", async () => {
       renderTree();
       let firstPromise!: Promise<string>;
       let secondPromise!: Promise<string>;
@@ -669,14 +867,149 @@ describe("EncryptionContext / EncryptionProvider", () => {
       await act(async () => {
         secondPromise = latest.resolveKeyMismatch({
           ...sampleInfo,
-          newKey: "pub-newer",
+          userId: "peer-2",
+          displayName: "Bob",
+          newKey: "pub-bob-new",
         });
       });
-      expect(await firstPromise).toBe("refuse");
+      expect(captured.keyChange!.userId).toBe("peer-1");
       await act(async () => {
         captured.keyChange!.onAccept();
       });
-      expect(await secondPromise).toBe("accept");
+      expect(await firstPromise).toBe("accept");
+      expect(captured.keyChange!.userId).toBe("peer-2");
+      expect(await stillPending(secondPromise)).toBe("pending");
+      await act(async () => {
+        captured.keyChange!.onRefuse();
+      });
+      expect(await secondPromise).toBe("refuse");
+      expect(captured.keyChange).toBeNull();
+    });
+
+    it("Next request after an answer", async () => {
+      renderTree();
+      let firstPromise!: Promise<string>;
+      let secondPromise!: Promise<string>;
+      await act(async () => {
+        firstPromise = latest.resolveKeyMismatch(sampleInfo);
+        secondPromise = latest.resolveKeyMismatch({
+          ...sampleInfo,
+          userId: "peer-2",
+          displayName: "Bob",
+          newKey: "pub-bob-new",
+        });
+      });
+      const acceptFirst = captured.keyChange!.onAccept;
+
+      await act(async () => {
+        acceptFirst();
+      });
+      // The same button pressed again, or a held Enter repeating.
+      await act(async () => {
+        acceptFirst();
+      });
+
+      expect(await firstPromise).toBe("accept");
+      expect(await stillPending(secondPromise)).toBe("pending");
+      expect(captured.keyChange!.userId).toBe("peer-2");
+    });
+
+    it("Queued key-change dialog opened", async () => {
+      renderTree();
+      captured.keyChangeMounts = 0;
+      await act(async () => {
+        void latest.resolveKeyMismatch(sampleInfo);
+        void latest.resolveKeyMismatch({
+          ...sampleInfo,
+          userId: "peer-2",
+          displayName: "Bob",
+          newKey: "pub-bob-new",
+        });
+      });
+      expect(captured.keyChangeMounts).toBe(1);
+
+      await act(async () => {
+        captured.keyChange!.onAccept();
+      });
+
+      expect(captured.keyChange!.userId).toBe("peer-2");
+      expect(captured.keyChangeMounts).toBe(2);
+    });
+
+    it("Same key asked twice: one dialog, one decision for every waiting request", async () => {
+      renderTree();
+      let firstPromise!: Promise<string>;
+      let secondPromise!: Promise<string>;
+      let thirdPromise!: Promise<string>;
+      await act(async () => {
+        firstPromise = latest.resolveKeyMismatch(sampleInfo);
+      });
+      await act(async () => {
+        secondPromise = latest.resolveKeyMismatch({ ...sampleInfo });
+        thirdPromise = latest.resolveKeyMismatch({ ...sampleInfo });
+      });
+      await act(async () => {
+        captured.keyChange!.onAccept();
+      });
+      expect(await Promise.all([firstPromise, secondPromise, thirdPromise]))
+        .toEqual(["accept", "accept", "accept"]);
+      expect(captured.keyChange).toBeNull();
+    });
+
+    it("Peer named in the dialog", async () => {
+      vi.mocked(getUserById).mockResolvedValue({
+        displayName: "Alice Smith",
+      } as Awaited<ReturnType<typeof getUserById>>);
+      renderTree();
+      await act(async () => {
+        void latest.resolveKeyMismatch({
+          ...sampleInfo,
+          displayName: undefined,
+        });
+      });
+      expect(getUserById).toHaveBeenCalledWith("peer-1", undefined, {
+        skipForbidden: true,
+      });
+      expect(captured.keyChange!.displayName).toBe("Alice Smith");
+    });
+
+    it("Peer named in the dialog: a known name is not looked up", async () => {
+      renderTree();
+      await act(async () => {
+        void latest.resolveKeyMismatch(sampleInfo);
+      });
+      expect(getUserById).not.toHaveBeenCalled();
+      expect(captured.keyChange!.displayName).toBe("Alice");
+    });
+
+    it("Peer name not readable", async () => {
+      const refused = Object.assign(new Error("403"), {
+        response: { status: 403 },
+      });
+      vi.mocked(getUserById).mockRejectedValue(refused);
+      renderTree();
+      await act(async () => {
+        void latest.resolveKeyMismatch({
+          ...sampleInfo,
+          displayName: undefined,
+        });
+      });
+      expect(getUserById).toHaveBeenCalledWith("peer-1", undefined, {
+        skipForbidden: true,
+      });
+      expect(captured.keyChange!.displayName).toBe("peer-1");
+    });
+
+    it("Peer named in the dialog: the user id stands in when the lookup fails", async () => {
+      vi.mocked(getUserById).mockRejectedValue(new Error("404"));
+      renderTree();
+      await act(async () => {
+        void latest.resolveKeyMismatch({
+          ...sampleInfo,
+          displayName: undefined,
+        });
+      });
+      expect(captured.keyChange!.displayName).toBe("peer-1");
     });
   });
 
@@ -728,6 +1061,61 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(ok).toBe(false);
       expect(latest.unlockError).toBe("Common:EncryptionError");
       expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+  });
+
+  describe("trusted member keys", () => {
+    afterEach(() => {
+      pendingAccessStore.clear(7, "bob");
+    });
+
+    it("Key trusted after a refusal: the files the member missed are wrapped again and the result is shown", async () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      pendingAccessStore.addMissingFiles(7, "bob", [5]);
+      vi.mocked(getUserById).mockResolvedValue({ displayName: "Bob" } as never);
+      trustMocks.rewrap.mockResolvedValue([
+        { level: "success", text: "Common:EncryptedAccessRestored" },
+      ]);
+      renderTree();
+
+      await act(async () => {
+        trustMocks.listener?.("bob", "user-42");
+      });
+
+      await vi.waitFor(() =>
+        expect(trustMocks.toastr.success).toHaveBeenCalledWith(
+          "Common:EncryptedAccessRestored",
+        ),
+      );
+      expect(trustMocks.rewrap).toHaveBeenCalledWith({
+        t: expect.any(Function),
+        member: { id: "bob", displayName: "Bob" },
+        currentUserId: "user-42",
+        identity: dummyKeyPair,
+      });
+    });
+
+    it("re-wraps nothing for a member without recorded files", async () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      await act(async () => {
+        trustMocks.listener?.("bob", "user-42");
+      });
+
+      expect(trustMocks.rewrap).not.toHaveBeenCalled();
+      expect(getUserById).not.toHaveBeenCalled();
+    });
+
+    it("re-wraps nothing while the identity is locked", async () => {
+      pendingAccessStore.addMissingFiles(7, "bob", [5]);
+      renderTree();
+
+      await act(async () => {
+        trustMocks.listener?.("bob", "user-42");
+      });
+
+      expect(trustMocks.rewrap).not.toHaveBeenCalled();
     });
   });
 });

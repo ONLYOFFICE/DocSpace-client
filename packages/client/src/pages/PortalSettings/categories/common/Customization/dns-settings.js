@@ -69,11 +69,9 @@ const textInputProps = {
   testId: "customization_dns_settings_text_input",
   className: "dns-textarea",
   scale: true,
-  tabIndex: 8,
 };
 
 const buttonProps = {
-  tabIndex: 9,
   className: "save-cancel-buttons send-request-button",
   testId: "customization_dns_settings_button",
   primary: true,

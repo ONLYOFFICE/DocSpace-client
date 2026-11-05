@@ -15,8 +15,6 @@
   "AnalyzeResponses": "回答を分析",
   "ArchiveAction": "アーカイブを空にする",
   "ArchiveEmptyScreenUser": "アーカイブされたルームはここに表示されます。",
-  "ChangeAgentOwnerSelectorInfo": "エージェントの所有者になれるのは、ルーム管理者またはスーパー管理者のみです",
-  "ChangeTheAgentOwner": "エージェントの所有者を変更する",
   "ClientSearchDecryptingNames": "ファイル名を復号しています… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "フォルダーが大きすぎます。検索結果が不完全な場合があります。",
   "CompressingFiles": "ファイルを圧縮中",
@@ -103,7 +101,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "ルーム内のすべてのファイルへのリンクが削除されます。ルーム内のファイルおよび埋め込み文書への以前のリンクは利用できなくなります。",
   "RevokeSharedLinkDescriptionFormRoom": "スペース内のすべてのフォームへのリンクが再生成されます。スペースフォームおよび埋め込みフォームへの以前のリンクは利用できなくなります。",
   "RevokeSharedLinkDescriptionPublicRoom": "ルーム内のすべてのファイルへのリンクが再生成されます。ルームファイルおよび埋め込み文書への以前のリンクは利用できなくなります。",
-  "RoomAccessRedirectNote": "5秒後に自動的に{{sectionName}}にリダイレクトされます。",
+  "RoomAccessRedirectNote": "5秒後に自動的に{{sectionName}}セクションにリダイレクトされます。",
   "RoomAvailableViaExternalLink": "外部リンクから利用可能なルーム",
   "RoomAvailableViaSharedLink": "共有リンクから利用可能なスペース",
   "RoomCreated": "ルームが作成されました",
@@ -146,6 +144,5 @@
   "WarningMoveToFormRoom": "このスペースにファイルを移動できません。{{ organizationName }} PDFフォームを移動してみてください。",
   "WarningMoveToFormRoomServal": "フォーム記入スペースへの複数のファイルの移動はサポートされていません。{{ organizationName }} PDFフォームを1つずつ移動してください。",
   "WillBeDeletedPermanently": "{{date}}は完全に削除されます",
-  "YouLeftTheAgent": "エージェントを離れました",
   "YourUserTypeHasChanged": "スーパー管理者の<1>{{adminName}}</1>さんによって、あなたのユーザータイプが<1>「{{userType}}」</1>に変更されました。"
 }

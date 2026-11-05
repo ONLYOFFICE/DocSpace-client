@@ -38,11 +38,19 @@ import React from "react";
 import type { TFileItem, TFolderItem } from "../_hooks/useItemList";
 
 export type EncryptedFileActions = {
+  /** The private room whose items these actions handle. */
+  roomId: number | string;
   downloadFile: (file: TFileItem) => Promise<void>;
   downloadZip: (files: TFileItem[]) => Promise<void>;
   duplicateFile: (file: TFileItem) => Promise<void>;
-  copyFiles: (files: TFileItem[], destFolderId: number | string) => Promise<void>;
-  moveFiles: (files: TFileItem[], destFolderId: number | string) => Promise<void>;
+  copyFiles: (
+    files: TFileItem[],
+    destFolderId: number | string,
+    uploadDecrypted: (
+      files: File[],
+      folderId: number | string,
+    ) => Promise<void>,
+  ) => Promise<void>;
 };
 
 export const EncryptedFileActionsContext =

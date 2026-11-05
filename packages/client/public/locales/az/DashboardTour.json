@@ -1,7 +1,7 @@
 {
-  "DashboardApps": "Saxlamadan birgə işə, məlumat toplamadan avtomatlaşdırmaya və süni intellektə qədər — hər tətbiq fərqli iş üçün yaradılıb. Tətbiqin səyahətini keçmək və ya təkrarlamaq üçün tətbiq kartındakı məzun papağı ikonasından istifadə edin.",
+  "DashboardApps": "Saxlamadan birgə işə, məlumat toplamadan avtomatlaşdırmaya və AI qədər — hər tətbiq fərqli iş üçün yaradılıb. Tətbiqin səyahətini keçmək və ya təkrarlamaq üçün tətbiq kartındakı məzun papağı ikonasından istifadə edin.",
   "DashboardAppsTitle": "Tətbiqlərinizi kəşf edin",
-  "DashboardCreate": "Mətn sənədi, cədvəl, təqdimat və ya PDF forması seçin, mövcud faylları yükləyin və ya süni intellekt söhbətinə başlayın. Yeni sənədlər {{files}} bölməsində saxlanılır və ehtiyac duyduğunuz istənilən vaxt hazırdır.",
+  "DashboardCreate": "Mətn sənədi, cədvəl, təqdimat və ya PDF forması seçin, mövcud faylları yükləyin və ya AI söhbətinə başlayın. Yeni sənədlər {{files}} bölməsində saxlanılır və ehtiyac duyduğunuz istənilən vaxt hazırdır.",
   "DashboardCreateTitle": "Yaratmağa başlayın",
   "DashboardDevTools": "Bura tərtibatçı mərkəzinizdir: API-lar, SDK-lar, plaginlər, webhooklar və daha çoxu. Ətraflı məlumat almaq və ya başlamaq üçün istənilən karta klikləyin.",
   "DashboardDevToolsTitle": "{{organizationName}} ilə yaradın",
@@ -13,6 +13,6 @@
   "DashboardProfileTitle": "Profil məlumatlarınızı yoxlayın",
   "WelcomeDashboardSubtitle": "Hər şey bu səhifədən başlayır",
   "WelcomeDashboardTitle": "{{organizationName}}-a xoş gəlmisiniz",
-  "WelcomeDescription": "Sənədlər yaradın, otaqlarda birgə işləyin, formalarla məlumat toplayın və rutin işləri süni intellektə həvalə edin — hamısı bir yerdən. Qısa səyahətə hazırsınız?",
+  "WelcomeDescription": "Sənədlər yaradın, otaqlarda birgə işləyin, formalarla məlumat toplayın və rutin işləri AI həvalə edin — hamısı bir yerdən. Qısa səyahətə hazırsınız?",
   "WelcomeLater": "Bəlkə sonra"
 }

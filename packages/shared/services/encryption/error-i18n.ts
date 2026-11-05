@@ -39,6 +39,7 @@ import {
   AuthenticationError,
   CryptoError,
   DecryptionError,
+  EncryptedCreateError,
   InvalidFormatError,
   InvalidPassphraseError,
   InvalidRecoveryPhraseError,
@@ -53,6 +54,13 @@ export function getEncryptionErrorMessage(
   t: TFunction,
   error: unknown,
 ): string {
+  if (error instanceof EncryptedCreateError) {
+    return error.code === "UNSUPPORTED_EXTENSION"
+      ? t("Common:PrivateRoomCreateNotSupported", {
+          extension: error.extension,
+        })
+      : t("Common:EncryptionKeysNotConfigured");
+  }
   if (error instanceof WebCryptoUnavailableError) {
     return t("Common:EncryptionRequiresHttps");
   }
@@ -85,4 +93,20 @@ export function getEncryptionErrorMessage(
     return t("Common:EncryptionError");
   }
   return t("Common:EncryptionError");
+}
+
+/**
+ * The message of a failed encrypted copy, download or open: the key of an
+ * encryption error, the server's own message, or Common:EncryptedOperationFailed.
+ */
+export function getEncryptedOperationErrorMessage(
+  t: TFunction,
+  error: unknown,
+): string {
+  if (error instanceof CryptoError) return getEncryptionErrorMessage(t, error);
+  const serverMessage = (
+    error as { response?: { data?: { error?: { message?: unknown } } } }
+  )?.response?.data?.error?.message;
+  if (typeof serverMessage === "string" && serverMessage) return serverMessage;
+  return t("Common:EncryptedOperationFailed");
 }

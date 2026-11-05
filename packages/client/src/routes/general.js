@@ -36,14 +36,9 @@
 import { Navigate } from "react-router";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
-import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
 import PrivateRouteWrapper from "SRC_DIR/components/PrivateRouteWrapper";
-
-// Keys management serves private rooms only, so its routes exist just for the
-// testers who opted in (see @docspace/shared/utils/privateRooms). The tables
-// below are built once per page load, so flipping the flag needs a reload.
-const withPrivateRooms = (routes) => (isPrivateRoomsEnabled() ? routes : []);
+import KeysManagementRoute from "SRC_DIR/components/KeysManagementRoute";
 
 export const profileClientRoutes = [
   {
@@ -78,16 +73,16 @@ export const profileClientRoutes = [
       </PrivateRouteWrapper>
     ),
   },
-  ...withPrivateRooms([
-    {
-      path: "profile/keys-management",
-      element: (
-        <PrivateRouteWrapper>
+  {
+    path: "profile/keys-management",
+    element: (
+      <PrivateRouteWrapper>
+        <KeysManagementRoute>
           <ViewComponent />
-        </PrivateRouteWrapper>
-      ),
-    },
-  ]),
+        </KeysManagementRoute>
+      </PrivateRouteWrapper>
+    ),
+  },
   {
     path: "profile/interface-theme",
     element: (
@@ -450,12 +445,22 @@ const generalRoutes = [
         path: "file-management",
         lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
-      ...withPrivateRooms([
-        {
-          path: "keys-management",
-          lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+      {
+        path: "keys-management",
+        lazy: async () => {
+          const { Component } = await componentLoader(
+            () => import("SRC_DIR/pages/Profile"),
+          );
+
+          return {
+            Component: () => (
+              <KeysManagementRoute>
+                <Component />
+              </KeysManagementRoute>
+            ),
+          };
         },
-      ]),
+      },
       {
         path: "interface-theme",
         lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),

@@ -43,6 +43,7 @@ import type { default as TFilesFilter } from "@docspace/shared/api/files/filter"
 import type { default as TRoomsFilter } from "@docspace/shared/api/rooms/filter";
 
 import type { default as FilesStore } from "../FilesStore";
+import { scopeRoomsRequest } from "./fetch.helpers";
 
 function moveHotkeyCaretOffRemovedItems(
   self: FilesStore,
@@ -89,16 +90,12 @@ export function removeFilesImpl(
     isRoomsFolder,
     isArchiveFolder,
     isTemplatesFolder,
-    isAIAgentsFolder,
     isFormsFolder,
+    isAiSectionFolder,
   } = self.treeFoldersStore;
 
   const isRooms =
-    isRoomsFolder ||
-    isArchiveFolder ||
-    isTemplatesFolder ||
-    isAIAgentsFolder ||
-    isFormsFolder;
+    isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder || isAiSectionFolder;
 
   let deleteCount = 0;
 
@@ -204,8 +201,8 @@ export function removeFilesImpl(
     (newFilter.page + 1) * newFilter.pageCount - deleteCount;
   newFilter.pageCount = deleteCount;
   if (isRooms) {
-    const req = isAIAgentsFolder ? api.ai.getAIAgents : api.rooms.getRooms;
-    return req(newFilter as TRoomsFilter)
+    return api.rooms
+      .getRooms(scopeRoomsRequest(self, newFilter as TRoomsFilter))
       .then((res) => {
         const folders = folderIds
           ? self.folders.filter((x) => !folderIds.includes(x.id))

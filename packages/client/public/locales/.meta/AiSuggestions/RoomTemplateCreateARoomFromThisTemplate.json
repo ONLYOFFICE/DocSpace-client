@@ -3,7 +3,7 @@
   "content": "Create a room from this template",
   "content_en_sha1_hash": "2a9694467578970844555bc41c89cff9186a2689",
   "created_at": "2026-08-04T09:58:55.191Z",
-  "updated_at": "2026-08-05T17:07:43.622Z",
+  "updated_at": "2026-10-31T12:58:29.074Z",
   "comment": {
     "text": "Button label in an AI suggestions menu used to initiate room creation using the selected template.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 669,
+      "line_number": 609,
       "context": "{\n name: t(\"AiSuggestions:RoomTemplateShowTemplateRoles\"),\n prompt: t(\"AiSuggestions:RoomTemplateShowTemplateRolesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomTemplateCreateARoomFromThisTemplate\"),\n prompt: t(\n \"AiSuggestions:RoomTemplateCreateARoomFromThisTemplatePrompt\",\n ),\n requires: \"roomAdmin\",\n },",
       "module": "/packages/client"
     }

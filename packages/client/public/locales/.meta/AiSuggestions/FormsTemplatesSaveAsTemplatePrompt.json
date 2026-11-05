@@ -3,7 +3,7 @@
   "content": "Save as a template across available form templates in a clear, reusable structure. If this information is not provided, ask me for the template name, intended use case, and changes to apply.",
   "content_en_sha1_hash": "491afd64630a141fbaa1ff230f1f43adaf63225c",
   "created_at": "2026-08-04T09:58:55.177Z",
-  "updated_at": "2026-08-05T17:22:40.590Z",
+  "updated_at": "2026-10-31T12:58:29.081Z",
   "comment": {
     "text": "An instruction prompt for the AI assistant that defines how to process requests to save form templates and specifies which details to request if information is missing.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 775,
+      "line_number": 715,
       "context": "name: t(\"AiSuggestions:FormsTemplatesShowTemplateFields\"),\n prompt: t(\"AiSuggestions:FormsTemplatesShowTemplateFieldsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsTemplatesSaveAsTemplate\"),\n prompt: t(\"AiSuggestions:FormsTemplatesSaveAsTemplatePrompt\"),\n requires: \"roomAdmin\",\n },\n ],\n \n // +",
       "module": "/packages/client"
     }

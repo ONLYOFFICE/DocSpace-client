@@ -56,6 +56,8 @@ import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 class PrivateEncryptedUploadStore {
   quotaErrorRaised = false;
   inFlightControllers: Set<AbortController> = new Set();
+  /** Members already named in a left-out warning this session. */
+  reportedSkippedMemberIds: Set<string> = new Set();
 
   constructor() {
     makeAutoObservable(this);
@@ -127,6 +129,7 @@ export const useActiveEncryptedUploadsForRoom = (
       get files(): ReadonlyArray<UploadQueueItem> {
         return uploadStore.items.map((i) => ({
           toFolderId: i.folderId,
+          encryptionRoomId: i.roomId,
           action:
             i.status === "uploaded"
               ? "uploaded"

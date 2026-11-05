@@ -260,21 +260,6 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
     expect(menuShape(store.getFilesContextOptions(enc as never, t))).toMatchSnapshot();
   });
 
-  it("maps an AI agent room", () => {
-    const store = createTestContextOptionsStore();
-    store.dialogsStore = { roomGroups: [] } as never;
-    const agent = {
-      id: 4,
-      title: "Agent",
-      roomType: RoomsType.AIRoom,
-      rootFolderType: FolderType.AIAgents,
-      security: {},
-      viewAccessibility: {},
-      contextOptions: ["room-info", "edit-room", "delete"],
-    };
-    expect(menuShape(store.getFilesContextOptions(agent as never, t))).toMatchSnapshot();
-  });
-
   it("maps a room template", () => {
     const store = createTestContextOptionsStore();
     store.dialogsStore = { roomGroups: [] } as never;
@@ -394,5 +379,232 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
         true,
       );
     });
+  });
+});
+
+describe("ContextOptionsStore.getFilesContextOptions — More options placement", () => {
+  const visibleKeys = (model: unknown[]) =>
+    (model as { key: string; isSeparator?: boolean }[]).map((option) =>
+      option.isSeparator ? "|" : option.key,
+    );
+
+  const room = (contextOptions: string[], extra: Record<string, unknown> = {}) => ({
+    id: 7,
+    parentId: 1,
+    title: "Team Room",
+    isRoom: true,
+    isFolder: true,
+    inRoom: true,
+    roomType: RoomsType.EditingRoom,
+    rootFolderType: FolderType.Rooms,
+    security: {
+      Create: true,
+      Duplicate: true,
+      Download: true,
+      Read: true,
+      EditRoom: true,
+      EditAccess: true,
+    },
+    viewAccessibility: {},
+    ...extra,
+    contextOptions,
+  });
+
+  const storeWithPlugin = (key: string) =>
+    createTestContextOptionsStore({
+      settingsStore: { enablePlugins: true },
+      pluginStore: {
+        contextMenuItemsList: [
+          {
+            value: { key, label: "Plugin action", icon: "plugin.svg", onClick: vi.fn() },
+          },
+        ],
+      },
+    });
+
+  it("goes after the room group actions, right above the exit group", () => {
+    const store = createTestContextOptionsStore();
+    store.dialogsStore = { roomGroups: [{ id: 1, name: "Group" }] } as never;
+
+    const keys = visibleKeys(
+      store.getFilesContextOptions(
+        room([
+          "select",
+          "open",
+          "separator0",
+          "link-for-room-members",
+          "edit-room",
+          "invite-users-to-room",
+          "room-info",
+          "create-group",
+          "add-to-group",
+          "save-as-template",
+          "separator1",
+          "duplicate-room",
+          "download",
+          "change-room-owner",
+          "archive-room",
+          "leave-room",
+          "delete",
+        ]) as never,
+        t,
+      ),
+    );
+
+    expect(keys.slice(keys.indexOf("link-for-room-members"))).toEqual([
+      "link-for-room-members",
+      "create-group",
+      "add-to-group",
+      "more-options",
+      "|",
+      "leave-room",
+      "archive-room",
+      "delete",
+    ]);
+  });
+
+  it("puts a plugins-only More options above the exit group of a room without a link", () => {
+    const store = storeWithPlugin("plugin-action");
+
+    const keys = visibleKeys(
+      store.getFilesContextOptions(
+        room(
+          [
+            "select",
+            "open",
+            "separator0",
+            "room-info",
+            "separator1",
+            "leave-room",
+            "plugin-action",
+          ],
+          { private: true, security: { Read: true } },
+        ) as never,
+        t,
+      ),
+    ).filter((key) => key !== "|");
+
+    expect(keys).toEqual(["select", "open", "room-info", "more-options", "leave-room"]);
+  });
+
+  it("puts a plugins-only More options after the inline room actions, in their block", () => {
+    const store = storeWithPlugin("plugin-action");
+
+    const keys = visibleKeys(
+      store.getFilesContextOptions(
+        room(
+          [
+            "select",
+            "open",
+            "separator0",
+            "link-for-room-members",
+            "room-info",
+            "separator1",
+            "download",
+            "leave-room",
+            "plugin-action",
+          ],
+          { security: { Read: true, Download: true } },
+        ) as never,
+        t,
+      ),
+    );
+
+    expect(keys).toEqual([
+      "select",
+      "open",
+      "|",
+      "link-for-room-members",
+      "download",
+      "room-info",
+      "more-options",
+      "|",
+      "leave-room",
+    ]);
+  });
+
+  it("keeps a file's plugins-only More options in the favorites block, right above Delete", () => {
+    const store = storeWithPlugin("plugin-action");
+
+    const keys = visibleKeys(
+      store.getFilesContextOptions(
+        {
+          ...fileItem([
+            "select",
+            "download",
+            "rename",
+            "mark-as-favorite",
+            "show-info",
+            "delete",
+            "plugin-action",
+          ]),
+          security: { Download: true },
+        } as never,
+        t,
+      ),
+    );
+
+    expect(keys).toEqual([
+      "select",
+      "|",
+      "download",
+      "rename",
+      "|",
+      "mark-as-favorite",
+      "show-info",
+      "more-options",
+      "|",
+      "delete",
+    ]);
+  });
+
+  it("keeps a folder's plugins-only More options above Delete", () => {
+    const store = storeWithPlugin("plugin-action");
+
+    const keys = visibleKeys(
+      store.getFilesContextOptions(
+        {
+          id: 3,
+          parentId: 10,
+          title: "Docs",
+          isFolder: true,
+          rootFolderId: 5,
+          security: {},
+          viewAccessibility: {},
+          contextOptions: ["open", "rename", "show-info", "delete", "plugin-action"],
+        } as never,
+        t,
+      ),
+    ).filter((key) => key !== "|");
+
+    expect(keys).toEqual(["open", "rename", "show-info", "more-options", "delete"]);
+  });
+});
+
+describe("ContextOptionsStore.getFilesContextOptions — the members link", () => {
+  type TOption = { key?: string; disabled?: boolean; items?: TOption[] };
+  const find = (options: TOption[], key: string): TOption | undefined => {
+    for (const option of options) {
+      if (option.key === key) return option;
+      const nested = option.items && find(option.items, key);
+      if (nested) return nested;
+    }
+    return undefined;
+  };
+  const membersLink = (rootFolderType: FolderType) => {
+    const store = createTestContextOptionsStore();
+    const model = store.getFilesContextOptions(
+      { ...fileItem(["link-for-room-members"]), canShare: true, rootFolderType } as never,
+      t,
+    );
+    return find(model as TOption[], "link-for-room-members");
+  };
+
+  it("stays enabled for a shareable file in the AI rooms, which have no external link", () => {
+    expect(membersLink(FolderType.AiHub)).toMatchObject({ disabled: false });
+  });
+
+  it("gives way to the external link for a shareable file elsewhere", () => {
+    expect(membersLink(FolderType.Rooms)?.disabled ?? true).toBe(true);
   });
 });

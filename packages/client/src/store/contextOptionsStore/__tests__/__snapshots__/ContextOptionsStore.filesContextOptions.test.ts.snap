@@ -94,23 +94,6 @@ exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps a room
 ]
 `;
 
-exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps an AI agent room 1`] = `
-[
-  {
-    "key": "delete",
-    "label": "Common:DeleteAgent",
-  },
-  {
-    "key": "edit-room",
-    "label": "Common:EditRoom",
-  },
-  {
-    "key": "room-info",
-    "label": "Common:RoomInfo",
-  },
-]
-`;
-
 exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps an archived room 1`] = `
 [
   {

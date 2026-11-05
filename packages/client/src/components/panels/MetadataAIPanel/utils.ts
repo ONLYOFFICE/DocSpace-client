@@ -124,7 +124,11 @@ export const getMetadataAIOptions = (
     isFile(item) &&
     canReadAsText(item.fileExst, extsConvertible);
 
-  return isAvailable ? METADATA_AI_OPTIONS : [];
+  if (!isAvailable) return [];
+
+  return isFile(item) && item.hasMetadataFields === false
+    ? [SUGGEST_METADATA_AI]
+    : METADATA_AI_OPTIONS;
 };
 
 export const getMetadataAIModel = (
@@ -396,6 +400,19 @@ export const getMetadataAIServiceLimit = (error: unknown) => {
 export const isMetadataAINoModel = (error: unknown) =>
   (error as TMetadataAIError | null)?.status === 503;
 
+const getSkippedError = (t: TTranslation, skipped: TMetadataAISkipped[]) => {
+  switch (skipped[0]?.reason) {
+    case "empty":
+      return t("Metadata:AIEmptyContent");
+    case "unsupported":
+      return t("Metadata:AIUnsupportedFormat");
+    case "forbidden":
+      return t("Common:AccessDenied");
+    default:
+      return t("Metadata:AINothingToRead");
+  }
+};
+
 export const getMetadataAIError = (t: TTranslation, error: unknown) => {
   const { status, skipped } = (error ?? {}) as TMetadataAIError;
 
@@ -404,7 +421,7 @@ export const getMetadataAIError = (t: TTranslation, error: unknown) => {
       return t("Common:AccessDenied");
     case 422:
       return skipped
-        ? t("Metadata:AINothingToRead")
+        ? getSkippedError(t, skipped)
         : t("Metadata:AINothingToFill");
     case 429:
       return t("Metadata:AIBusy");

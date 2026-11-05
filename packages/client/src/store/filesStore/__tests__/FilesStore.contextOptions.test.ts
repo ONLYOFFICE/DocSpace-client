@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { describe, it, expect, beforeEach } from "vitest";
+import { afterEach, describe, it, expect, beforeEach } from "vitest";
 import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
@@ -107,26 +107,6 @@ const customRoom = (): TItem =>
     viewAccessibility: {},
   }) as unknown as TItem;
 
-const aiAgentRoom = (): TItem =>
-  ({
-    id: 4,
-    title: "AI Agent",
-    roomType: RoomsType.AIRoom,
-    rootFolderType: FolderType.AIAgents,
-    security: {
-      EditAccess: true,
-      EditRoom: true,
-      Delete: true,
-      Pin: true,
-      Read: true,
-      Mute: true,
-      ChangeOwner: true,
-      Duplicate: true,
-      Download: true,
-    },
-    viewAccessibility: {},
-  }) as unknown as TItem;
-
 const plainFolder = (): TItem =>
   ({
     id: 5,
@@ -173,10 +153,6 @@ describe("FilesStore.getFilesContextOptions — characterization", () => {
 
   it("builds options for a custom room", () => {
     expect(store.getFilesContextOptions(customRoom())).toMatchSnapshot();
-  });
-
-  it("builds options for an AI agent room", () => {
-    expect(store.getFilesContextOptions(aiAgentRoom())).toMatchSnapshot();
   });
 
   it("builds options for a plain folder", () => {
@@ -261,45 +237,6 @@ describe("FilesStore.getFilesContextOptions — characterization", () => {
     expect(opts).not.toContain("separator6");
   });
 
-  it("keeps ask-ai inside an AI agent room when the member may use the chat", () => {
-    const store2 = createTestFilesStore({
-      selectedFolderStore: { isAIRoom: true },
-      accessRightsStore: { canMoveItems: () => true, canUseChat: true },
-    });
-    store2.dialogsStore = { roomGroups: [] } as never;
-    expect(store2.getFilesContextOptions(documentFile())).toContain("ask-ai");
-  });
-
-  it("strips ask-ai in an AI agent room for a member without chat access", () => {
-    // Chat-outputs files keep `AskAi: true`, but inside an agent room the
-    // option navigates to the room's chat tab, which a Viewer is redirected
-    // away from — offering it would be a dead end. "Analyze responses" opens
-    // the same chat, so it goes with it.
-    const store2 = createTestFilesStore({
-      selectedFolderStore: { isAIRoom: true },
-      accessRightsStore: { canMoveItems: () => true, canUseChat: false },
-    });
-    store2.dialogsStore = { roomGroups: [] } as never;
-
-    const form = {
-      ...documentFile(),
-      security: { ...fileSecurity, AnalyzeResponses: true },
-    } as never;
-    const opts = store2.getFilesContextOptions(form);
-
-    expect(opts).not.toContain("analyze-responses");
-    expect(opts).not.toContain("ask-ai");
-    expect(opts).not.toContain("separator6");
-  });
-
-  it("keeps ask-ai outside an AI agent room regardless of chat access", () => {
-    const store2 = createTestFilesStore({
-      accessRightsStore: { canMoveItems: () => true, canUseChat: false },
-    });
-    store2.dialogsStore = { roomGroups: [] } as never;
-    expect(store2.getFilesContextOptions(documentFile())).toContain("ask-ai");
-  });
-
   it("collapses expired-link files to just select outside a shared-with-me section", () => {
     // The expired-link set starts as ["select","separator0",
     // "remove-shared-folder-or-file"], but outside a shared-with-me section
@@ -311,5 +248,30 @@ describe("FilesStore.getFilesContextOptions — characterization", () => {
       isLinkExpired: true,
     } as TItem;
     expect(store.getFilesContextOptions(expired)).toStrictEqual(["select"]);
+  });
+});
+
+describe("FilesStore.getFilesContextOptions — Private section", () => {
+  afterEach(() => window.history.pushState({}, "", "/"));
+
+  it("Context menu of a private room in the section", () => {
+    const store = createTestFilesStore({
+      filesSettingsStore: { organizeRoomsGrouping: true },
+    });
+    store.dialogsStore = { roomGroups: [{ id: "g1" }] } as never;
+    const privateRoom = { ...customRoom(), private: true } as TItem;
+
+    window.history.pushState({}, "", "/rooms/shared/filter");
+    const inRooms = store.getFilesContextOptions(privateRoom);
+
+    window.history.pushState({}, "", "/private/filter");
+    const inPrivate = store.getFilesContextOptions(privateRoom);
+
+    expect(inRooms).toEqual(
+      expect.arrayContaining(["create-group", "add-to-group"]),
+    );
+    expect(inPrivate).not.toContain("create-group");
+    expect(inPrivate).not.toContain("add-to-group");
+    expect(inPrivate).not.toContain("remove-from-group");
   });
 });

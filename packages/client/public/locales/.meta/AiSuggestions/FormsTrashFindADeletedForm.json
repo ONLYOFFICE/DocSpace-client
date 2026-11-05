@@ -3,7 +3,7 @@
   "content": "Find a deleted form",
   "content_en_sha1_hash": "3cc56885ea4ca9ca710dd5d34892a0d86b8086f4",
   "created_at": "2026-08-04T09:58:55.180Z",
-  "updated_at": "2026-08-05T17:20:36.001Z",
+  "updated_at": "2026-10-31T12:58:29.081Z",
   "comment": {
     "text": "Label for an AI suggestion action that allows room administrators to search for forms located in the trash.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 788,
+      "line_number": 728,
       "context": "name: t(\"AiSuggestions:FormsTrashWhatSDeleted\"),\n prompt: t(\"AiSuggestions:FormsTrashWhatSDeletedPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTrashFindADeletedForm\"),\n prompt: t(\"AiSuggestions:FormsTrashFindADeletedFormPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTrashRestoreSelectedItems\"),",
       "module": "/packages/client"
     }

@@ -35,7 +35,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
-import TrashIcon from "PUBLIC_DIR/images/icons/16/trash.react.svg";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import {
@@ -44,9 +44,14 @@ import {
 	InputType,
 } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 import { useTranslation } from "react-i18next";
 
 import styles from "./user-fields.module.scss";
+
+const DELETE_BUTTON = "user-fields_delete-button";
+const ADD_LINK = "user-fields_add-link";
 
 const usePrevious = (value) => {
 	const ref = useRef();
@@ -77,10 +82,34 @@ const UserFields = (props) => {
 
 	const [errors, setErrors] = useState(new Array(inputs.length).fill(false));
 	const prevInputsCount = usePrevious(inputs.length);
+	const { t } = useTranslation("Common");
+
+	const containerRef = useRef(null);
+	// The field whose delete button held the focus as it went: the focus moves
+	// on to the delete button that takes its place, or past the last field to
+	// "Add", instead of falling to the page with the button.
+	const deletedWithFocusRef = useRef(null);
+
+	// "Add" is a link with no href, so it is a button to the keyboard; the
+	// press is consumed so that what it adds does not take it as well.
+	const onAddKeyDown = (e) => activateOnButtonKey(e, onClickAdd);
 
 	useEffect(() => {
 		if (inputs.length > prevInputsCount) setErrors([...errors, false]);
 	}, [inputs]);
+
+	useEffect(() => {
+		const index = deletedWithFocusRef.current;
+		if (index === null) return;
+		deletedWithFocusRef.current = null;
+		const container = containerRef.current;
+		if (!container) return;
+		const buttons = container.querySelectorAll(`.${DELETE_BUTTON}`);
+		const next =
+			buttons[Math.min(index, buttons.length - 1)] ??
+			container.querySelector(`.${ADD_LINK}`);
+		next?.focus();
+	}, [inputs.length]);
 
 	const onBlur = (index) => {
 		const newErrors = Array.from(errors);
@@ -101,11 +130,13 @@ const UserFields = (props) => {
 		newErrors.splice(index, 1);
 		setErrors(newErrors);
 
+		if (document.activeElement?.closest(`.${DELETE_BUTTON}`))
+			deletedWithFocusRef.current = index;
 		onDeleteInput(index);
 	};
 
 	return (
-		<div className={className}>
+		<div className={className} ref={containerRef}>
 			{inputs
 				? inputs.map((input, index) => {
 						let newInput1;
@@ -141,7 +172,6 @@ const UserFields = (props) => {
 										<TextInput
 											type={InputType.text}
 											size={InputSize.base}
-											tabIndex={index}
 											className={`${classNameAdditional}-input text-input`}
 											id={`user-input-${input}`}
 											name={`${classNameAdditional}_${index}`}
@@ -157,10 +187,14 @@ const UserFields = (props) => {
 											testId={inputDataTestId}
 										/>
 										{hideDeleteIcon ? null : (
-											<TrashIcon
-												className={`${styles["trash-icon"]} ${classNameAdditional}-delete-icon`}
+											<IconButton
+												className={`${styles["trash-icon"]} ${classNameAdditional}-delete-icon ${DELETE_BUTTON}`}
+												iconName={TrashReactSvgUrl}
+												size={16}
+												color="--security-side-color"
 												onClick={() => onDelete(index)}
-												data-testid={deleteIconDataTestId}
+												ariaLabel={t("Common:Delete")}
+												dataTestId={deleteIconDataTestId}
 											/>
 										)}
 									</div>
@@ -180,7 +214,17 @@ const UserFields = (props) => {
 				data-testid={addButtonDataTestId}
 			>
 				<PlusIcon className={styles["plus-icon"]} />
-				<Link type="action" isHovered fontWeight={600}>
+				<Link
+					className={ADD_LINK}
+					type="action"
+					isHovered
+					fontWeight={600}
+					// An action link has no href: a button to the keyboard, which the
+					// wrapper's click runs for the pointer.
+					role="button"
+					tabIndex={0}
+					onKeyDown={onAddKeyDown}
+				>
 					{buttonLabel}
 				</Link>
 			</div>

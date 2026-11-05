@@ -113,5 +113,6 @@ export type FilesSelectorInputProps = {
     options: BackupToPublicRoomOptionType,
   ) => void;
 
-  withAIAgentsTreeFolder?: boolean;
+  /** Lists the AI rooms section (Instructions and Knowledge rooms) at the root; off by default. */
+  withAIRoomsTreeFolder?: boolean;
 };

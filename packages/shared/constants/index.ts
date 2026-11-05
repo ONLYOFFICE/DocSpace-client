@@ -100,6 +100,7 @@ export const FOLDER_NAMES = Object.freeze({
   14: "shared",
   20: "archive",
   31: "ai-agents",
+  41: "ai-rooms",
 });
 
 export const PROVIDERS_DATA = Object.freeze({
@@ -257,9 +258,15 @@ export const CategoryType = Object.freeze({
   Groups: 13,
   Guests: 14,
   AIAgents: 15,
-  AIAgent: 16,
   Forms: 17,
   Form: 18,
+  PrivateRooms: 19,
+  PrivateRoom: 20,
+  /** The "AI rooms" section list (`FolderType.AiHub` root). */
+  AiHub: 21,
+  /** An Instructions room, a Knowledge room or an AI project, opened in the "AI rooms" section. */
+  AiHubRoom: 22,
+  PrivateArchive: 23,
 });
 
 export const SHARED_MEMBERS_COUNT = 100;

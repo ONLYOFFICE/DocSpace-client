@@ -1,18 +1,13 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 /**
- * Bug 82819: the "This device" badge marked a key on every device of the
- * profile, not on the device that actually holds it. Adoption is recorded per
- * device in localStorage (active-key-preference), so the badge has to follow
- * that record — and any key this device has not adopted must offer
- * "Use on this device", including when the profile has a single key.
- *
  * Heavy UI-kit components are replaced with lightweight stand-ins that expose
  * their label so the rendered variant can be asserted.
  */
 
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("@onlyoffice/apps-ui-kit/components/badge", () => ({
@@ -20,96 +15,110 @@ vi.mock("@onlyoffice/apps-ui-kit/components/badge", () => ({
     React.createElement("span", { "data-testid": "badge" }, label),
 }));
 
-vi.mock("@onlyoffice/apps-ui-kit/components/button", () => ({
-  Button: ({ label, onClick }: { label?: string; onClick?: () => void }) =>
-    React.createElement("button", { "data-testid": "button", onClick }, label),
-  ButtonSize: { extraSmall: "extraSmall" },
-}));
-
-vi.mock("@onlyoffice/apps-ui-kit/components/icon-button", () => ({
-  IconButton: ({ title }: { title?: string }) =>
-    React.createElement("span", { "data-testid": "icon-button" }, title),
-}));
-
 vi.mock("@docspace/shared/services/encryption/identity", () => ({
   getPublicKeyFingerprint: vi.fn(async () => "FINGERPRINT"),
 }));
 
-// The provider adopts the only key on any device, which is what produced the
-// wrong badge; keep that state so the test fails for the reported reason.
-vi.mock("@docspace/shared/context/encryption", () => ({
-  useEncryption: () => ({ publicKey: "pub-a" }),
-}));
-
 import { KeysList } from "../KeysList";
 
-const keyA = {
-  id: "a",
-  publicKey: "pub-a",
-  privateKeyEnc: "enc-a",
-  date: "",
+const keyOld = {
+  id: "old",
+  publicKey: "pub-old",
+  privateKeyEnc: "enc-old",
+  date: "2026-01-01T00:00:00",
 } as never;
-const keyB = {
-  id: "b",
-  publicKey: "pub-b",
-  privateKeyEnc: "enc-b",
-  date: "",
+const keyNew = {
+  id: "new",
+  publicKey: "pub-new",
+  privateKeyEnc: "enc-new",
+  date: "2026-10-01T00:00:00",
 } as never;
 
-const renderList = (keys: never[], activeKeyId: string | null) =>
+type ListProps = React.ComponentProps<typeof KeysList>;
+
+const renderList = (keys: never[], props: Partial<ListProps> = {}) => {
+  const onDelete = vi.fn();
+  const onExport = vi.fn();
+  const onRotate = vi.fn();
+
   render(
     <KeysList
       keys={keys}
-      activeKeyId={activeKeyId}
-      onDelete={vi.fn()}
-      onExport={vi.fn()}
-      onRotate={vi.fn()}
-      onSelectActive={vi.fn()}
+      onDelete={onDelete}
+      onExport={onExport}
+      onRotate={onRotate}
       isDeleting={false}
       deletingKeyId={null}
+      {...props}
     />,
   );
 
-const rows = () => screen.getAllByTestId("key_details");
+  return { onDelete, onExport, onRotate };
+};
 
-describe("KeysList — the 'This device' marker", () => {
-  it("marks only the key this device adopted", () => {
-    renderList([keyA, keyB], "a");
+const action = (name: string) => screen.getByRole("button", { name });
 
-    expect(within(rows()[0]).getByText("Common:ThisDevice")).toBeInTheDocument();
-    expect(within(rows()[0]).queryByTestId("button")).not.toBeInTheDocument();
-
-    expect(within(rows()[1]).getByTestId("button")).toHaveTextContent(
-      "Common:UseOnThisDevice",
-    );
+describe("KeysList", () => {
+  it("shows the no-key state when the user has no key", () => {
+    renderList([]);
+    expect(screen.getByText("Common:NoEncryptionKey")).toBeInTheDocument();
+    expect(screen.queryByTestId("key_details")).not.toBeInTheDocument();
   });
 
-  it("offers adoption for a single key the device has not adopted", () => {
-    renderList([keyA], null);
+  it("Own key with leftover envelopes: shows one card, for the key with the newer date", async () => {
+    renderList([keyNew, keyOld]);
 
-    expect(within(rows()[0]).getByTestId("button")).toHaveTextContent(
-      "Common:UseOnThisDevice",
-    );
+    const cards = screen.getAllByTestId("key_details");
+    expect(cards).toHaveLength(1);
+    expect(within(cards[0]).getByText("new")).toBeInTheDocument();
+    expect(screen.queryByText("Common:ThisDevice")).not.toBeInTheDocument();
+  });
+
+  it("Tab across the key card", async () => {
+    const user = userEvent.setup();
+    renderList([keyNew]);
+
+    await user.tab();
+    expect(action("Common:ChangePassphrase")).toHaveFocus();
+    await user.tab();
+    expect(action("Common:ExportKey")).toHaveFocus();
+    await user.tab();
+    expect(action("Common:Delete")).toHaveFocus();
+  });
+
+  it("Key card actions announced", () => {
+    renderList([keyNew]);
+
+    // title reaches the DOM only under NODE_ENV=test, so the name is read from
+    // aria-label itself.
     expect(
-      within(rows()[0]).queryByText("Common:ThisDevice"),
-    ).not.toBeInTheDocument();
+      within(screen.getByTestId("key_details"))
+        .getAllByRole("button")
+        .map((button) => button.getAttribute("aria-label")),
+    ).toEqual(["Common:ChangePassphrase", "Common:ExportKey", "Common:Delete"]);
   });
 
-  it("marks a single key that this device did adopt", () => {
-    renderList([keyA], "a");
+  it("Action disabled during a deletion", async () => {
+    const user = userEvent.setup();
+    renderList([keyNew], { isDeleting: true, deletingKeyId: "new" });
 
-    expect(within(rows()[0]).getByText("Common:ThisDevice")).toBeInTheDocument();
-    expect(within(rows()[0]).queryByTestId("button")).not.toBeInTheDocument();
+    await user.tab();
+
+    expect(document.body).toHaveFocus();
   });
 
-  it("offers adoption for every key when the device adopted none", () => {
-    renderList([keyA, keyB], null);
+  it("Delete from the keyboard", async () => {
+    const user = userEvent.setup();
+    const { onDelete, onExport, onRotate } = renderList([keyNew]);
 
-    for (const row of rows()) {
-      expect(within(row).getByTestId("button")).toHaveTextContent(
-        "Common:UseOnThisDevice",
-      );
-      expect(within(row).queryByText("Common:ThisDevice")).not.toBeInTheDocument();
-    }
+    action("Common:Delete").focus();
+    await user.keyboard(" ");
+    action("Common:ExportKey").focus();
+    await user.keyboard("{Enter}");
+
+    expect(onDelete).toHaveBeenCalledTimes(1);
+    expect(onDelete).toHaveBeenCalledWith(keyNew);
+    expect(onExport).toHaveBeenCalledTimes(1);
+    expect(onRotate).not.toHaveBeenCalled();
   });
 });

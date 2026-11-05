@@ -37,6 +37,12 @@ export const getPropertyClassName = (propertyId: string) => {
   switch (propertyId) {
     case "Owner":
       return "info_details_owner";
+    case "Model":
+      return "info_details_model";
+    case "Instructions":
+      return "info_details_instructions";
+    case "Knowledge":
+      return "info_details_knowledge";
     case "Location":
       return "info_details_location";
     case "Type":

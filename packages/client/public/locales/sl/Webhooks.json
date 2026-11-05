@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "Ustvarjen AI agent",
-  "AgentDeleted": "AI Agent izbrisan",
-  "AgentUpdated": "AI agent posodobljen",
   "Before": "Pred",
   "CreateWebhook": "Ustvari webhook",
   "DeleteHint": "Webhook bo trajno izbrisan.\nTega dejanja ne boste mogli razveljaviti.",
@@ -94,8 +91,8 @@
   "WebhookName": "Webhook ime",
   "WebhookRedilivered": "Webhook ponovno dostavljen",
   "WebhookRemoved": "Webhook odstranjen",
-  "WebhookWasDeleted": "Ta webhook je bil izbrisan",
   "Webhooks": "Webhooki",
   "WebhooksGuide": "Navodila za Webhook",
-  "WebhooksInfo": "Uporabite webhooke za izvajanje dejanj po meri na strani katere koli aplikacije ali spletne strani, ki jo uporabljate, na podlagi različnih dogodkov v {{organizationName}} {{productName}}.\nTukaj lahko ustvarite in upravljate vse svoje webhooke, jih konfigurirate in brskate po zgodovini vsakega webhooka, da preverite njegovo delovanje."
+  "WebhooksInfo": "Uporabite webhooke za izvajanje dejanj po meri na strani katere koli aplikacije ali spletne strani, ki jo uporabljate, na podlagi različnih dogodkov v {{organizationName}} {{productName}}.\nTukaj lahko ustvarite in upravljate vse svoje webhooke, jih konfigurirate in brskate po zgodovini vsakega webhooka, da preverite njegovo delovanje.",
+  "WebhookWasDeleted": "Ta webhook je bil izbrisan"
 }

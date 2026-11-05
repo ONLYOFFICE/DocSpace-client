@@ -167,7 +167,6 @@ const PasswordChangeForm = ({
             inputType={InputType.password}
             size={InputSize.large}
             scale
-            tabIndex={1}
             autoComplete="current-password"
             onChange={onChangePassword}
             onValidateInput={onValidatePassword}
@@ -194,7 +193,6 @@ const PasswordChangeForm = ({
         size={ButtonSize.medium}
         scale
         label={t("Common:Create")}
-        tabIndex={5}
         onClick={onSubmit}
         isDisabled={isLoading}
         testId="create_password_button"

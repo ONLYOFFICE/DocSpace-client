@@ -53,6 +53,7 @@ const RoomListPanel = ({
   sortSelectedFirst = false,
   withoutBackdropBackground = false,
   isFormsSection = false,
+  excludeItems,
 }: RoomListPanelProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -87,6 +88,7 @@ const RoomListPanel = ({
           isForms={isFormsSection}
           isMultiSelect
           forceIsMultiSelect
+          excludeItems={excludeItems}
           selectedItems={
             selectedRooms
               ? convertToItems(

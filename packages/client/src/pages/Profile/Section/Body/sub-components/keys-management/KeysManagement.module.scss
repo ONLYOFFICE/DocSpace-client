@@ -94,6 +94,13 @@
 
 .toggleRow {
   display: flex;
+  width: fit-content;
+
+  // The kit's toggle draws no focus of its own on its hidden input.
+  &:has(:focus-visible) {
+    outline: 2px solid var(--accent-main);
+    outline-offset: 2px;
+  }
 }
 
 .deviceToggle {
@@ -236,22 +243,7 @@
   gap: 8px;
 }
 
-.resumeSection {
-  margin-bottom: 20px;
-  padding: 16px;
-  background: var(--row-background-color);
-  border: 1px solid var(--divider-color);
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
 
-.resumeActions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
 
 .resetHint {
   color: var(--text-secondary);
@@ -261,11 +253,4 @@
 
 .resetButton {
   align-self: flex-start;
-}
-
-.rotationProgress {
-  margin-bottom: 12px;
-  color: var(--text-secondary);
-  font-size: 12px;
-  line-height: 16px;
 }

@@ -49,6 +49,9 @@ import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 import ProtectedAppRoute from "../components/ProtectedAppRoute";
+import PrivateRoomsSectionRoute from "../components/PrivateRoomsSectionRoute";
+import E2eRoomsRedirect from "../components/PrivateRoomsSectionRoute/E2eRoomsRedirect";
+import AiRoomsRoute from "../components/AiRoomsRoute";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
 import { contactsRoutes } from "./contacts";
@@ -260,7 +263,7 @@ const ClientRoutes = [
             path: "rooms/shared",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId="ai-rooms">
+                <ProtectedAppRoute appId="ai-rooms" admitPrivateRooms>
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -270,7 +273,7 @@ const ClientRoutes = [
             path: "rooms/shared/filter",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId="ai-rooms">
+                <ProtectedAppRoute appId="ai-rooms" admitPrivateRooms>
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -280,7 +283,10 @@ const ClientRoutes = [
             path: "rooms/shared/:room",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                <ProtectedAppRoute
+                  appId={["ai-rooms", "ai-forms"]}
+                  admitPrivateRooms
+                >
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -290,7 +296,10 @@ const ClientRoutes = [
             path: "rooms/shared/:room/filter",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                <ProtectedAppRoute
+                  appId={["ai-rooms", "ai-forms"]}
+                  admitPrivateRooms
+                >
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -397,10 +406,165 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "private",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/filter",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/archived",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/archived/filter",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/:room",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/:room/filter",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          // The AI sections, gated by the portal's AI switch rather than by an
+          // app. "AI rooms" (Instructions and Knowledge rooms, searchArea=AiHub)
+          // takes the nested `/ai-rooms/*` paths the server links to, with its
+          // Recent / Favorites / Trash slots; the bare `/ai-rooms` stays the
+          // Rooms app's SDK frame page (a top-level route below).
+          {
+            path: "ai-rooms/filter",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/:room",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/:room/filter",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/recent",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/recent/filter",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/favorites",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/favorites/filter",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/trash",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-rooms/trash/filter",
+            element: (
+              <PrivateRoute>
+                <AiRoomsRoute>
+                  <ViewComponent />
+                </AiRoomsRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "rooms/archived",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId="ai-rooms">
+                <ProtectedAppRoute appId="ai-rooms" admitPrivateRooms>
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -410,7 +574,7 @@ const ClientRoutes = [
             path: "rooms/archived/filter",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId="ai-rooms">
+                <ProtectedAppRoute appId="ai-rooms" admitPrivateRooms>
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -420,7 +584,10 @@ const ClientRoutes = [
             path: "rooms/archived/:room",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                <ProtectedAppRoute
+                  appId={["ai-rooms", "ai-forms"]}
+                  admitPrivateRooms
+                >
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -430,7 +597,10 @@ const ClientRoutes = [
             path: "rooms/archived/:room/filter",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                <ProtectedAppRoute
+                  appId={["ai-rooms", "ai-forms"]}
+                  admitPrivateRooms
+                >
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -482,122 +652,6 @@ const ClientRoutes = [
             element: (
               <PrivateRoute>
                 <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          // Every AI Agents view sits behind the portal's AI switch
-          // (`requireAIServices` -> Route.private): with AI services off the
-          // section has nothing to serve, and the UI drops every way into it -
-          // the sidebar item and the dashboard card. A bookmark or a link from
-          // an old email is the one way left in, and it must answer 404 rather
-          // than open a section the portal no longer has.
-          {
-            path: "ai-agents",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ProtectedAppRoute appId="ai-agents">
-                  <ViewComponent />
-                </ProtectedAppRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ProtectedAppRoute appId="ai-agents">
-                  <ViewComponent />
-                </ProtectedAppRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/recent",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ProtectedAppRoute appId="ai-agents">
-                  <ViewComponent />
-                </ProtectedAppRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/recent/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ProtectedAppRoute appId="ai-agents">
-                  <ViewComponent />
-                </ProtectedAppRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/favorites",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ProtectedAppRoute appId="ai-agents">
-                  <ViewComponent />
-                </ProtectedAppRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/favorites/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ProtectedAppRoute appId="ai-agents">
-                  <ViewComponent />
-                </ProtectedAppRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/trash",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ProtectedAppRoute appId="ai-agents">
-                  <ViewComponent />
-                </ProtectedAppRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/trash/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ProtectedAppRoute appId="ai-agents">
-                  <ViewComponent />
-                </ProtectedAppRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:id",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ProtectedAppRoute appId="ai-agents">
-                  <ViewComponent />
-                </ProtectedAppRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:id/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ProtectedAppRoute appId="ai-agents">
-                  <ViewComponent />
-                </ProtectedAppRoute>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:id/chat",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ProtectedAppRoute appId="ai-agents">
-                  <ViewComponent />
-                </ProtectedAppRoute>
               </PrivateRoute>
             ),
           },
@@ -691,24 +745,6 @@ const ClientRoutes = [
         },
       },
       {
-        path: "/agents",
-        async lazy() {
-          const { AiAgents } = await componentLoader(
-            () => import("SRC_DIR/pages/AiAgents"),
-          );
-
-          const Component = () => (
-            <PrivateRoute requireAIServices>
-              <ErrorBoundary>
-                <AiAgents />
-              </ErrorBoundary>
-            </PrivateRoute>
-          );
-
-          return { Component };
-        },
-      },
-      {
         path: "/ai-rooms",
         async lazy() {
           const { AiRooms } = await componentLoader(
@@ -730,23 +766,13 @@ const ClientRoutes = [
       },
       {
         path: "/e2e-rooms",
-        async lazy() {
-          const { E2eRooms } = await componentLoader(
-            () => import("SRC_DIR/pages/E2eRooms"),
-          );
-
-          const Component = () => (
-            <PrivateRoute>
-              <ProtectedAppRoute appId="e2e-rooms">
-                <ErrorBoundary>
-                  <E2eRooms />
-                </ErrorBoundary>
-              </ProtectedAppRoute>
-            </PrivateRoute>
-          );
-
-          return { Component };
-        },
+        element: (
+          <PrivateRoute>
+            <ProtectedAppRoute appId="e2e-rooms">
+              <E2eRoomsRedirect />
+            </ProtectedAppRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard",

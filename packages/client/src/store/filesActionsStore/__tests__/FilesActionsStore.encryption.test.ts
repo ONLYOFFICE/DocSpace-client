@@ -1,7 +1,10 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect, vi } from "vitest";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { createTestFilesActionsStore } from "./testHarness";
+// After the harness, which mocks the toast module.
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 // The default harness userStore has no encryptionKeys, so every encrypted
 // operation hits its "keys not configured" guard and returns without touching
@@ -60,5 +63,57 @@ describe("FilesActionsStore — encrypted ops guard (batch 18)", () => {
     });
     await store.duplicateEncryptedFile({ id: 1, folderId: 2 } as never);
     expect(itemOperationToFolder).not.toHaveBeenCalled();
+  });
+
+  it("Duplicate started outside the room", async () => {
+    const store = createTestFilesActionsStore({
+      selectedFolderStore: {
+        rootFolderId: 5,
+        rootFolderType: FolderType.Recent,
+        roomType: null,
+      },
+    });
+    const copy = vi.fn(async () => {});
+    store.copyEncryptedFilesToFolder = copy;
+    const item = {
+      id: 1,
+      folderId: 2,
+      rootFolderId: 3,
+      rootFolderType: FolderType.Rooms,
+      encrypted: true,
+    };
+
+    await store.duplicateEncryptedFile(item as never);
+
+    expect(copy).toHaveBeenCalledWith([item], 2, {
+      private: true,
+      rootFolderId: 3,
+      rootFolderType: FolderType.Rooms,
+      roomType: RoomsType.CustomRoom,
+    });
+  });
+});
+
+describe("FilesActionsStore — opening an encrypted file", () => {
+  it("Error text is localized", async () => {
+    const store = createTestFilesActionsStore({
+      filesStore: { setSelection: vi.fn(), categoryType: 0 },
+    });
+    store.downloadEncryptedFile = vi.fn(async () => {
+      throw new Error("decrypt pipeline broke");
+    });
+
+    await store.openItemAction({
+      id: 1,
+      title: "archive.zip",
+      fileExst: ".zip",
+      isFolder: false,
+      encrypted: true,
+      viewUrl: "http://x/1",
+      security: { Download: true },
+      viewAccessibility: {},
+    } as never);
+
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedOperationFailed");
   });
 });

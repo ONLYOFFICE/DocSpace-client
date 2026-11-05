@@ -41,14 +41,15 @@ import {
   EncryptionProvider,
   useEncryption,
 } from "@docspace/shared/context/encryption";
-import {
-  getActiveKeyId,
-  selectActiveKey,
-} from "@docspace/shared/services/encryption/active-key-preference";
+import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import {
   registerGhostStateHandler,
   clearGhostStateHandler,
 } from "@docspace/shared/services/encryption/ghost-state-notifier";
+import {
+  registerDeviceSetupHintHandler,
+  clearDeviceSetupHintHandler,
+} from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 import {
   PassphraseModal,
@@ -135,13 +136,43 @@ const GhostStateToastEffect = () => {
 
 const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 
-const DeviceSetupHintEffect = inject(({ selectedFolderStore, userStore }) => ({
+const showDeviceSetupHint = (t) => {
+  const setupLink = (
+    <Link
+      key="setup"
+      tag="a"
+      isHovered
+      color="accent"
+      onClick={() => {
+        toastr.clear();
+        window.location.href = "/profile/keys-management";
+      }}
+    />
+  );
+
+  toastr.info(
+    <Trans
+      i18nKey="Common:EncryptionDeviceSetupHint"
+      t={t}
+      components={[setupLink]}
+    />,
+    null,
+    30000,
+    true,
+  );
+};
+
+const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
   isPrivate: selectedFolderStore?.private,
-  accountKeysCount: userStore?.encryptionKeys?.length ?? 0,
 }))(
-  observer(({ isPrivate, accountKeysCount }) => {
+  observer(({ isPrivate }) => {
     const { hasConfiguredKey } = useEncryption();
     const { t } = useTranslation(["Common"]);
+
+    React.useEffect(() => {
+      registerDeviceSetupHintHandler(() => showDeviceSetupHint(t));
+      return () => clearDeviceSetupHintHandler();
+    }, [t]);
 
     React.useEffect(() => {
       if (!isPrivate || hasConfiguredKey) return;
@@ -151,38 +182,8 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore, userStore }) => ({
         sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
       } catch {}
 
-      const setupLink = (
-        <Link
-          key="setup"
-          tag="a"
-          isHovered
-          color="accent"
-          onClick={() => {
-            toastr.clear();
-            window.location.href = "/profile/keys-management";
-          }}
-        />
-      );
-
-      toastr.info(
-        accountKeysCount > 0 ? (
-          <Trans
-            i18nKey="Common:EncryptionChooseKeyHint"
-            t={t}
-            components={[setupLink]}
-          />
-        ) : (
-          <Trans
-            i18nKey="Common:EncryptionDeviceSetupHint"
-            t={t}
-            components={[setupLink]}
-          />
-        ),
-        null,
-        30000,
-        true,
-      );
-    }, [isPrivate, hasConfiguredKey, accountKeysCount, t]);
+      showDeviceSetupHint(t);
+    }, [isPrivate, hasConfiguredKey, t]);
 
     return null;
   }),
@@ -273,7 +274,7 @@ const EncryptionProviderWrapper = observer(({ userStore, children }) => {
   const ownerId = userStore?.user?.id;
   const ownerIdStr = ownerId ? String(ownerId) : undefined;
 
-  const chosen = selectActiveKey(keys, getActiveKeyId(ownerIdStr));
+  const chosen = selectUserKey(keys);
 
   const userKeys =
     chosen && ownerIdStr

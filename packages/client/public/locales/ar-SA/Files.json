@@ -15,8 +15,6 @@
   "AnalyzeResponses": "تحليل الاستجابات",
   "ArchiveAction": "إفراغ الأرشيف",
   "ArchiveEmptyScreenUser": "ستظهر هنا الغرف التي تم أرشفتها.",
-  "ChangeAgentOwnerSelectorInfo": "يمكن لمسؤول الغرفة أو المسؤول العام فقط أن يصبح مالكًا للوكيل",
-  "ChangeTheAgentOwner": "تغيير مالك الوكيل",
   "ClientSearchDecryptingNames": "جارٍ فك تشفير أسماء الملفات… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "المجلد كبير جدًا. قد تكون نتائج البحث غير مكتملة.",
   "CompressingFiles": "ضغط الملفات",
@@ -103,7 +101,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "سيتم حذف الروابط إلى جميع الملفات في الغرفة. وستصبح الروابط السابقة إلى ملفات الغرفة والمستندات المضمنة غير متاحة.",
   "RevokeSharedLinkDescriptionFormRoom": "سيتم إعادة إنشاء الروابط إلى جميع الملفات في المساحة. وستصبح الروابط السابقة إلى ملفات المساحة والمستندات المضمنة غير متاحة.",
   "RevokeSharedLinkDescriptionPublicRoom": "سيتم إعادة إنشاء الروابط إلى جميع الملفات في الغرفة. وستصبح الروابط السابقة إلى ملفات الغرفة والمستندات المضمنة غير متاحة.",
-  "RoomAccessRedirectNote": "سيتم إعادة توجيهكم تلقائيًا إلى {{sectionName}} في غضون 5 ثوانٍ.",
+  "RoomAccessRedirectNote": "سيتم إعادة توجيهكم تلقائيًا إلى قسم {{sectionName}} في غضون 5 ثوانٍ.",
   "RoomAvailableViaExternalLink": "الغرفة متاحة بواسطة رابط خارجي",
   "RoomAvailableViaSharedLink": "المساحة متاحة بواسطة رابط المشاركة",
   "RoomCreated": "تم إنشاء الغرفة",
@@ -146,6 +144,5 @@
   "WarningMoveToFormRoom": "لا يمكن نقل الملف إلى هذه المساحة. يُرجى محاولة نقل نموذج PDF الخاص بـ {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "لا يُسمح بنقل أكثر من ملف واحد إلى مساحة تعبئة النماذج. يرجى نقل نماذج PDF من {{ organizationName }} بشكل فردي.",
   "WillBeDeletedPermanently": "سيتم حذف {{date}} نهائيًا",
-  "YouLeftTheAgent": "لقد غادرتم الوكيل",
   "YourUserTypeHasChanged": "تم تغيير نوع المستخدم الخاص بك إلى <1>«{{userType}}»</1> بواسطة المسؤول العام <1>{{adminName}}</1>."
 }

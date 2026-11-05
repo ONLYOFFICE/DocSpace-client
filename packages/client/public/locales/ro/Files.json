@@ -15,8 +15,6 @@
   "AnalyzeResponses": "Analizează răspunsurile",
   "ArchiveAction": "Golire arhivă",
   "ArchiveEmptyScreenUser": "Sălile care au fost arhivate vor apărea aici.",
-  "ChangeAgentOwnerSelectorInfo": "Doar un administrator al sălii sau superadministrator poate deveni proprietarul agentului",
-  "ChangeTheAgentOwner": "Schimbare proprietar al agentului",
   "ClientSearchDecryptingNames": "Se decriptează numele fișierelor… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Dosarul este prea mare. Rezultatele căutării pot fi incomplete.",
   "CompressingFiles": "Comprimare fișiere",
@@ -103,7 +101,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "Link-uri către toate fișierele din sala vor fi șterse. Link-urile precedente către fișerele din sala si documentele incorporate for deveni indisponibile.",
   "RevokeSharedLinkDescriptionFormRoom": "Link-urile către toate formularele din spațiu vor fi regenerate. Link-urile precedente către formularele din spațiu și formularele încorporate vor deveni indisponibile.",
   "RevokeSharedLinkDescriptionPublicRoom": "Link-uri către toate fișierele din sala vor fi regenerate. Link-urile precedente către fișerele din sala si documentele incorporate for deveni indisponibile.",
-  "RoomAccessRedirectNote": "Veţi fi redirecţionat automat către {{sectionName}} în 5 secunde.",
+  "RoomAccessRedirectNote": "Veți fi redirecționat automat către secțiunea {{sectionName}} în 5 secunde.",
   "RoomAvailableViaExternalLink": "Sala este disponibilă pe link extern",
   "RoomAvailableViaSharedLink": "Spațiul este disponibil pe link partajat",
   "RoomCreated": "Sala s-a creat",
@@ -146,6 +144,5 @@
   "WarningMoveToFormRoom": "Imposibil de mutat fișierul în acest spațiu. Încercați să deplasați formularul PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Deplasarea mai multor fișiere în Spațiul de completare a formularelor nu este acceptată. Deplasați câte un formular PDF {{ organizationName }}.",
   "WillBeDeletedPermanently": "{{date}} va fi şters definitiv",
-  "YouLeftTheAgent": "Dvs ați părăsit agentul",
   "YourUserTypeHasChanged": "Tipul dvs. de utilizator a fost schimbat în <1>„{{userType}}”</1> de către superadministratorul <1>{{adminName}}</1>."
 }

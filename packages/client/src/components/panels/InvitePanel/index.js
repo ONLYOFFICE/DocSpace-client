@@ -47,21 +47,23 @@ import {
 import {
   AnalyticsEvents,
   EmployeeType,
-  ShareAccessRights,
   RoomsType,
+  ShareAccessRights,
 } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
 import uniqueid from "lodash/uniqueId";
 import {
-  addMembersToEncryptedRoom,
-  backfillEncryptedFilesForRoomMembers,
-} from "@docspace/shared/services/private-room/room-encryption";
+  getMembersToRewrap,
+  rewrapForInvitedMembers,
+  sendPrivateRoomInvitations,
+} from "@docspace/shared/services/private-room/room-member-flows";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
+import { aiProjectToRoom } from "@docspace/shared/api/ai/projects";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -74,11 +76,11 @@ import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions"
 import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
-import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import { fixAccess } from "./utils";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
+import InviteResult from "./sub-components/InviteResult";
 import LinkSettingsPanel from "../LinkSettingsPanel";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
@@ -93,10 +95,12 @@ import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import styles from "./InvitePanel.module.scss";
 import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
 
 const InvitePanel = ({
   folders,
   getFolderInfo,
+  findAiProject,
   inviteItems,
   roomId,
   setInviteItems,
@@ -132,6 +136,9 @@ const InvitePanel = ({
   const [hasErrors, setHasErrors] = useState(false);
   const [shareLinks, setShareLinks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [inviteOutcome, setInviteOutcome] = useState(null);
+  // Counts sends and closes, so a re-wrap that ends after a close shows nothing.
+  const sendRunRef = useRef(0);
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [activeLink, setActiveLink] = useState({});
@@ -157,6 +164,8 @@ const InvitePanel = ({
   const { isRTL } = useInterfaceDirection();
 
   const onClose = () => {
+    sendRunRef.current += 1;
+    setInviteOutcome(null);
     setInviteLanguage({ key: "", label: "" });
     setInfoPanelIsMobileHidden(false);
     setInvitePanelOptions({
@@ -213,7 +222,19 @@ const InvitePanel = ({
     },
   ];
 
+  // The open AI project is read from its store rather than the Files list
+  // (the list holds the room without its project block, and may hold a
+  // different folder while the project is open). Its members and invitation
+  // link go through the room routes like any room.
+  const aiProject = roomId !== -1 ? findAiProject(roomId) : null;
+  const setInvitationLink = api.rooms.setInvitationLinks;
+
   const selectRoom = () => {
+    if (aiProject) {
+      setSelectedRoom(aiProjectToRoom(aiProject));
+      return Promise.resolve();
+    }
+
     const room = folders.find((folder) => folder.id === roomId);
 
     if (room) {
@@ -448,17 +469,12 @@ const InvitePanel = ({
       const isRooms = roomId !== -1;
       const isPrivateInvite = isRooms && !!selectedRoom?.private;
 
-      const newMembers = isPrivateInvite
-        ? inviteItems
-            .filter((item) => item.id && !item.isGroup)
-            .map((item) => ({
-              id: item.id,
-              displayName: item.displayName || item.email,
-            }))
+      const invitedMembers = isPrivateInvite
+        ? getMembersToRewrap(inviteItems)
         : [];
 
       let identity = null;
-      if (isPrivateInvite && newMembers.length > 0) {
+      if (isPrivateInvite && invitedMembers.length > 0) {
         identity = await requireUnlock(String(currentUserId));
         if (!identity) {
           setIsLoading(false);
@@ -467,9 +483,37 @@ const InvitePanel = ({
         }
       }
 
+      // Spec: private-rooms/room-membership, "Private-room invitations are sent one invitee per request"
+      const privateSend = isPrivateInvite
+        ? await sendPrivateRoomInvitations(roomId, invitations, {
+            culture: data.culture,
+            notify: data.notify,
+            message: data.message,
+          })
+        : null;
+      const itemOf = (invitation) => inviteItems[invitations.indexOf(invitation)];
+      const newMembers = privateSend
+        ? getMembersToRewrap(privateSend.accepted.map(itemOf))
+        : [];
+      const refused = privateSend
+        ? privateSend.refused.map(({ invitation, noKey }) => {
+            const item = itemOf(invitation);
+            return {
+              member: {
+                id: item.id ?? item.email,
+                displayName: item.displayName || item.email,
+              },
+              noKey,
+            };
+          })
+        : [];
+
       const result = !isRooms
         ? await api.people.inviteUsers(data)
-        : await api.rooms.setRoomSecurity(roomId, data);
+        : privateSend
+          ? null
+          : await api.rooms.setRoomSecurity(roomId, data);
+      const responses = privateSend ? privateSend.responses : [result];
 
       if (!isRooms) {
         setIsNewUserByCurrentUser(true);
@@ -484,122 +528,80 @@ const InvitePanel = ({
         window.dataLayer.push({
           event: AnalyticsEvents.RoomShared,
           roomId,
-          count: invitations.length,
+          count: privateSend
+            ? privateSend.accepted.length
+            : invitations.length,
           context: "invite_panel",
           parentId: selectedRoom?.parentId,
         });
       }
-      setIsLoading(false);
+      const showsResult =
+        isPrivateInvite && identity && invitedMembers.length > 0;
 
-      onClose();
+      if (!showsResult) {
+        setIsLoading(false);
+        onClose();
+      }
 
       if (!isPrivateInvite) {
         toastr.success(t("Common:UsersInvited"));
       }
 
-      if (result?.warning) {
-        toastr.warning(result?.warning);
+      responses.forEach((response) => {
+        if (response?.warning) toastr.warning(response.warning);
+        response?.aiProjectWarnings?.forEach((warning) =>
+          toastr.warning(warning.message),
+        );
+      });
+
+      if (showsResult && newMembers.length === 0) {
+        setIsLoading(false);
+        setInviteOutcome({ granted: [], pending: [], skipped: [], refused });
+        return;
       }
 
-      if (isPrivateInvite && identity && newMembers.length > 0) {
+      if (showsResult) {
+        const run = ++sendRunRef.current;
         const operationId = uniqueid("operation_");
 
+        updateInfoPanelMembers();
         setSecondaryProgressBarData({
           operation: OPERATIONS_NAME.roomReencryption,
           percent: 0,
           operationId,
         });
 
-        addMembersToEncryptedRoom(roomId, newMembers, {
+        let outcome = null;
+        const notices = await rewrapForInvitedMembers({
+          t,
+          roomId,
+          newMembers,
           currentUserId: String(currentUserId),
           identity,
-          onProgress: (processed, total) => {
-            const percent = Math.floor((processed / total) * 100);
+          onProgress: (progress) =>
             setSecondaryProgressBarData({
               operation: OPERATIONS_NAME.roomReencryption,
-              percent,
+              ...progress,
               operationId,
-            });
+            }),
+          onOutcome: (value) => {
+            outcome = value;
           },
-        })
-          .then(({ fileResults, skippedMembers }) => {
-            const failures = fileResults.filter((r) => !r.success);
-            const hasAlert =
-              failures.length > 0 || skippedMembers.length > 0;
-            setSecondaryProgressBarData({
-              operation: OPERATIONS_NAME.roomReencryption,
-              percent: 100,
-              completed: true,
-              alert: hasAlert,
-              operationId,
-            });
+        });
+        notices.forEach(({ level, text }) => toastr[level](text));
 
-            if (skippedMembers.length > 0) {
-              const formatName = (m) =>
-                m.displayName ||
-                newMembers.find((n) => n.id === m.id)?.displayName ||
-                m.id;
-              const noKeyNames = skippedMembers
-                .filter((m) => m.reason === "no-key")
-                .map(formatName);
-              const mismatchNames = skippedMembers
-                .filter((m) => m.reason === "key-mismatch-refused")
-                .map(formatName);
-              if (noKeyNames.length > 0) {
-                toastr.warning(
-                  t("Common:EncryptedSkippedNoKeys", {
-                    users: noKeyNames.join(", "),
-                  }),
-                );
-              }
-              if (mismatchNames.length > 0) {
-                toastr.warning(
-                  t("Common:EncryptedSkippedKeyMismatch", {
-                    users: mismatchNames.join(", "),
-                  }),
-                );
-              }
-            }
+        setIsLoading(false);
+        if (run === sendRunRef.current) {
+          setInviteOutcome(
+            outcome
+              ? { ...outcome, refused }
+              : { granted: [], pending: [], skipped: [], refused },
+          );
+        }
+        return;
+      }
 
-            if (failures.length > 0) {
-              toastr.warning(
-                t("Common:EncryptedReencryptPartialFailure", {
-                  count: failures.length,
-                }),
-              );
-            } else if (skippedMembers.length === 0) {
-              toastr.success(t("Common:UsersInvited"));
-            }
-
-            // Silent follow-up: also re-wrap for any previously-invited
-            // members who registered their keypair after the fact (their old
-            // files would otherwise stay locked out indefinitely).
-            void backfillEncryptedFilesForRoomMembers(roomId, {
-              currentUserId: String(currentUserId),
-              identity,
-              onKeyChange: async () => "refuse",
-            }).catch((error) => {
-              console.error(
-                "[ENCRYPTION] Post-invite backfill failed:",
-                error,
-              );
-            });
-          })
-          .catch((error) => {
-            console.error(
-              "Failed to re-encrypt file keys for new members:",
-              error,
-            );
-            toastr.error(t("Common:EncryptedReencryptFailed"));
-            setSecondaryProgressBarData({
-              operation: OPERATIONS_NAME.roomReencryption,
-              percent: 100,
-              completed: true,
-              alert: true,
-              operationId,
-            });
-          });
-      } else if (isPrivateInvite) {
+      if (isPrivateInvite) {
         toastr.success(t("Common:UsersInvited"));
       }
 
@@ -634,6 +636,8 @@ const InvitePanel = ({
   };
 
   const hasInvitedUsers = !!inviteItems.length;
+  const canInviteAgain =
+    !!inviteOutcome?.skipped.length || !!inviteOutcome?.refused?.length;
 
   const removeExist = (items) => {
     const filtered = items.reduce((unique, current) => {
@@ -649,6 +653,19 @@ const InvitePanel = ({
     if (items.length > filtered.length) toastr.warning(t("Common:UsersAlreadyAdded"));
 
     return filtered;
+  };
+
+  const onInviteAgain = () => {
+    const skippedIds = new Set([
+      ...inviteOutcome.skipped.map((member) => member.id),
+      ...(inviteOutcome.refused ?? []).map(({ member }) => member.id),
+    ]);
+    setInviteItems(
+      inviteItems.filter(
+        (item) => skippedIds.has(item.id) || skippedIds.has(item.email),
+      ),
+    );
+    setInviteOutcome(null);
   };
 
   const onCloseLinkSettingsPanel = () => {
@@ -705,7 +722,7 @@ const InvitePanel = ({
 
     try {
       setIsLinksToggling(true);
-      link = await api.rooms.setInvitationLinks(
+      link = await setInvitationLink(
         roomId,
         "Invite",
         type,
@@ -787,7 +804,7 @@ const InvitePanel = ({
             ? access.maxUseCount
             : activeLink?.maxUseCount;
 
-        const newLink = await api.rooms.setInvitationLinks(
+        const newLink = await setInvitationLink(
           roomId,
           "Invite",
           +selectedAccess,
@@ -870,6 +887,15 @@ const InvitePanel = ({
   const bodyInvitePanel = useMemo(() => {
     return (
       <div style={{ display: "contents" }} ref={invitePanelBodyRef}>
+        {/* A project member reads its linked rooms through the project. */}
+        {roomType === RoomsType.AiProjectRoom ? (
+          <PublicRoomBar
+            className={styles.aiProjectSourcesBar}
+            headerText={t("Common:AIProjectInviteSourcesAccess")}
+            bodyText={t("Common:AIProjectInviteSourcesAccessDescription")}
+            dataTestId="invite_panel_ai_project_sources_bar"
+          />
+        ) : null}
         {isPrivateRoom ? null : (
           <ExternalLinks
             t={t}
@@ -947,12 +973,8 @@ const InvitePanel = ({
       const shouldMakeFreeRole =
         checkIfAccessPaid(u.access) &&
         (u.isGroup || u.isVisitor || u.isCollaborator);
-      const shouldMakeViewerRole =
-        roomType === RoomsType.AIRoom &&
-        u.isVisitor &&
-        u.access !== ShareAccessRights.ReadOnly;
 
-      if (shouldMakeFreeRole || shouldMakeViewerRole) {
+      if (shouldMakeFreeRole) {
         u = fixAccess(u, t, roomType);
 
         if (isUserTariffLimit) {
@@ -994,13 +1016,7 @@ const InvitePanel = ({
   const access = defaultAccess ?? ShareAccessRights.ReadOnly;
 
   const filteredAccesses =
-    roomType === -1
-      ? accessOptions
-      : roomType === RoomsType.AIRoom
-        ? filterNotReadOnlyOptions(accessOptions).filter(
-            (o) => !o.isSeparator && !o.disabled,
-          )
-        : filterPaidRoleOptions(accessOptions);
+    roomType === -1 ? accessOptions : filterPaidRoleOptions(accessOptions);
 
   const onSubmitLinkSettingsPanel = (defaultLink) => {
     if (roomId === -1) {
@@ -1058,13 +1074,14 @@ const InvitePanel = ({
             onAccessRightsChange={() => {}}
             isMultiSelect
             disableDisabledUsers
-            withGroups={!isPrivateRoom}
+            // A group joins a project as Member only, which is not offered.
+            withGroups={!isPrivateRoom && roomType !== RoomsType.AiProjectRoom}
             roomId={roomId}
-            isAgent={roomType === RoomsType.AIRoom}
             disableInvitedUsers={invitedUsersArray}
-            withGuests={showGuestsTab}
+            // A project takes no guests.
+            withGuests={showGuestsTab && roomType !== RoomsType.AiProjectRoom}
             withHeader
-            dataTestId="invite_panel_people_selector"
+            data-test-id="invite_panel_people_selector"
             headerProps={{
               // Todo: Update groups empty screen texts when they are ready
               headerLabel: t("Common:Contacts"),
@@ -1106,7 +1123,13 @@ const InvitePanel = ({
 
       <ModalDialog.Header>
         <div className={styles.invitePanelHeader}>
-          {t("Common:Invite")} {roomId === -1 ? currentAccess?.label : ""}
+          {inviteOutcome ? (
+            t("Common:EncryptedInviteResultTitle")
+          ) : (
+            <>
+              {t("Common:Invite")} {roomId === -1 ? currentAccess?.label : ""}
+            </>
+          )}
           {roomId === -1 ? (
             <HelpButton
               tooltipMaxWidth="448px"
@@ -1146,28 +1169,61 @@ const InvitePanel = ({
           ) : null}
         </div>
       </ModalDialog.Header>
-      <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
+      <ModalDialog.Body>
+        {inviteOutcome ? (
+          <InviteResult t={t} outcome={inviteOutcome} />
+        ) : (
+          bodyInvitePanel
+        )}
+      </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          className="send-invitation"
-          scale
-          size="normal"
-          isDisabled={hasErrors || !hasInvitedUsers}
-          primary
-          onClick={onClickSend}
-          label={t("Common:SendInvitation")}
-          isLoading={isLoading}
-          testId="invite_panel_send_button"
-        />
-        <Button
-          className="cancel-button"
-          scale
-          size="normal"
-          onClick={onClose}
-          label={t("Common:CancelButton")}
-          isDisabled={isLoading}
-          testId="invite_panel_cancel_button"
-        />
+        {inviteOutcome ? (
+          <>
+            {canInviteAgain ? (
+              <Button
+                className="invite-again"
+                scale
+                size="normal"
+                primary
+                onClick={onInviteAgain}
+                label={t("Common:InviteAgain")}
+                testId="invite_panel_invite_again_button"
+              />
+            ) : null}
+            <Button
+              className="close-button"
+              scale
+              size="normal"
+              primary={!canInviteAgain}
+              onClick={onClose}
+              label={t("Common:CloseButton")}
+              testId="invite_panel_close_button"
+            />
+          </>
+        ) : (
+          <>
+            <Button
+              className="send-invitation"
+              scale
+              size="normal"
+              isDisabled={hasErrors || !hasInvitedUsers}
+              primary
+              onClick={onClickSend}
+              label={t("Common:SendInvitation")}
+              isLoading={isLoading}
+              testId="invite_panel_send_button"
+            />
+            <Button
+              className="cancel-button"
+              scale
+              size="normal"
+              onClick={onClose}
+              label={t("Common:CancelButton")}
+              isDisabled={isLoading}
+              testId="invite_panel_cancel_button"
+            />
+          </>
+        )}
       </ModalDialog.Footer>
     </ModalDialog>
   );
@@ -1185,6 +1241,7 @@ export default inject(
     userStore,
     peopleStore,
     uploadDataStore,
+    aiProjectsStore,
   }) => {
     const { theme, standalone, allowInvitingGuests, checkGuests, hasGuests } =
       settingsStore;
@@ -1205,6 +1262,11 @@ export default inject(
 
     const { getFolderInfo, folders } = filesStore;
 
+    const findAiProject = (id) =>
+      aiProjectsStore.activeProject?.id === id
+        ? aiProjectsStore.activeProject
+        : null;
+
     const { isRoomAdmin } = authStore;
 
     const { isUserTariffLimit } = currentQuotaStore;
@@ -1223,6 +1285,7 @@ export default inject(
       isVisible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,
       getFolderInfo,
+      findAiProject,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
       isRoomAdmin,

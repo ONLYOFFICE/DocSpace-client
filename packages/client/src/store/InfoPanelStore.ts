@@ -58,7 +58,10 @@ import {
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
-import { getUserType } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
 import { LANGUAGE, SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import config from "PACKAGE_FILE";
@@ -407,7 +410,6 @@ class InfoPanelStore {
   getCanDisplay = () => {
     if (isPluginPage()) return false;
 
-    const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
     const isForms = this.getIsForms();
@@ -415,12 +417,7 @@ class InfoPanelStore {
       this.peopleStore.usersStore.contactsTab !== false ||
       getContactsView(window.location) !== false;
 
-    return isRooms || isFiles || isForms || isAccounts || isAIAgent;
-  };
-
-  getIsAIAgent = () => {
-    const pathname = window.location.pathname.toLowerCase();
-    return pathname.indexOf("ai-agent") !== -1;
+    return isRooms || isFiles || isForms || isAccounts;
   };
 
   getIsForms = () => {
@@ -442,7 +439,9 @@ class InfoPanelStore {
   getIsRooms = () => {
     const pathname = window.location.pathname.toLowerCase();
     return (
-      pathname.indexOf("rooms") !== -1 && !(pathname.indexOf("personal") !== -1)
+      (pathname.indexOf("rooms") !== -1 &&
+        !(pathname.indexOf("personal") !== -1)) ||
+      isPrivateRoomsRoute(pathname)
     );
   };
 

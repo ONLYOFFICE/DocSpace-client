@@ -15,8 +15,6 @@
   "AnalyzeResponses": "Analiziraj odzive",
   "ArchiveAction": "Izprazni arhiv",
   "ArchiveEmptyScreenUser": "Tukaj bodo prikazane sobe, ki so bile arhivirane.",
-  "ChangeAgentOwnerSelectorInfo": "Lastnik agenta lahko postane samo skrbnik sobe ali superskrbnik",
-  "ChangeTheAgentOwner": "Spremenite lastnika agenta",
   "ClientSearchDecryptingNames": "Dešifriranje imen datotek… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Mapa je prevelika. Rezultati iskanja so morda nepopolni.",
   "CompressingFiles": "Stiskanje datotek",
@@ -103,7 +101,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "Povezave do vseh datotek v sobi bodo izbrisane. Prejšnje povezave do datotek sobe in vdelanih dokumentov ne bodo več na voljo.",
   "RevokeSharedLinkDescriptionFormRoom": "Povezave do vseh obrazcev v prostoru bodo ponovno ustvarjene. Prejšnje povezave do obrazcev prostora in vdelanih obrazcev ne bodo več na voljo.",
   "RevokeSharedLinkDescriptionPublicRoom": "Povezave do vseh datotek v sobi bodo znova ustvarjene. Prejšnje povezave do datotek sobe in vdelanih dokumentov ne bodo več na voljo.",
-  "RoomAccessRedirectNote": "Samodejno vas čez 5 sekund preusmerimo na {{sectionName}}.",
+  "RoomAccessRedirectNote": "Samodejno vas čez 5 sekund preusmerimo na razdelek {{sectionName}}.",
   "RoomAvailableViaExternalLink": "Soba na voljo preko zunanje povezave",
   "RoomAvailableViaSharedLink": "Prostor na voljo preko povezave v skupni rabi",
   "RoomCreated": "Soba ustvarjena",
@@ -146,6 +144,5 @@
   "WarningMoveToFormRoom": "Datoteke ni mogoče premakniti v ta prostor. Poskusite premakniti obrazec PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Premikanje več datotek v prostor za izpolnjevanje obrazcev ni podprto. Premaknite po en obrazec PDF {{ organizationName }} naenkrat.",
   "WillBeDeletedPermanently": "{{date}} bo trajno izbrisan",
-  "YouLeftTheAgent": "Zapustili ste agenta.",
   "YourUserTypeHasChanged": "Superskrbnik <1>{{adminName}}</1> je vaš tip uporabnika spremenil na <1>„{{userType}}“</1>."
 }

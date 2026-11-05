@@ -161,6 +161,11 @@ const expectAboutContent = async (page: Page, about: AboutCase) => {
   }
 
   const aiTools = page.getByText("AI Tools", { exact: true });
+  // The sidebar carries Beta badges of its own, so the label is looked up
+  // among the products only.
+  const betaLabel = page
+    .getByTestId("about-products")
+    .getByText("BETA", { exact: true });
 
   await expect(
     page.getByTestId("about-products").getByTestId(/^about-product-/),
@@ -170,11 +175,11 @@ const expectAboutContent = async (page: Page, about: AboutCase) => {
   if (about.aiTools) {
     await expect(aiTools).toBeVisible();
     await expect(page.getByRole("link", { name: "AI Tools" })).toHaveCount(0);
-    await expect(page.getByText("BETA", { exact: true })).toBeVisible();
+    await expect(betaLabel).toBeVisible();
     await expect(page.getByText(about.aiTools, { exact: true })).toBeVisible();
   } else {
     await expect(aiTools).toHaveCount(0);
-    await expect(page.getByText("BETA", { exact: true })).toHaveCount(0);
+    await expect(betaLabel).toHaveCount(0);
   }
 
   await expect(

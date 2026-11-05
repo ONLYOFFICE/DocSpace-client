@@ -79,7 +79,6 @@ const GoogleCloudSettings = ({
 		<>
 			<TextInput
 				scale
-				tabIndex={1}
 				name={BUCKET}
 				id="bucket-input"
 				onChange={onChangeText}
@@ -96,7 +95,6 @@ const GoogleCloudSettings = ({
 			{isNeedFilePath ? (
 				<TextInput
 					scale
-					tabIndex={2}
 					type={InputType.text}
 					size={InputSize.base}
 					name={FILE_PATH}

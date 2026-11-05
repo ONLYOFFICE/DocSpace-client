@@ -1211,3 +1211,12 @@
     width: 357.67px;
   }
 }
+
+// The cancel link and an email to edit are buttons to the keyboard.
+.cancelMigrationButton,
+:global(.user-email)[role="button"] {
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: 2px;
+  }
+}

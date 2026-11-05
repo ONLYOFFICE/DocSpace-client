@@ -15,8 +15,6 @@
   "AnalyzeResponses": "Analizza le risposte",
   "ArchiveAction": "Svuota archivio",
   "ArchiveEmptyScreenUser": "Le stanze che sono state archiviate appariranno qui.",
-  "ChangeAgentOwnerSelectorInfo": "Solo un amministratore della stanza o superamministratore può diventare proprietario dell'agente",
-  "ChangeTheAgentOwner": "Cambia il proprietario dell’agente",
   "ClientSearchDecryptingNames": "Decrittografia dei nomi dei file… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "La cartella è troppo grande. I risultati della ricerca potrebbero essere incompleti.",
   "CompressingFiles": "Compressione dei file",
@@ -103,7 +101,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "I collegamenti a tutti i file della stanza verranno eliminati. I collegamenti precedenti ai file della stanza e ai documenti incorporati non saranno più disponibili.",
   "RevokeSharedLinkDescriptionFormRoom": "I collegamenti a tutti i moduli dello spazio verranno rigenerati. I collegamenti precedenti ai moduli dello spazio e ai moduli incorporati non saranno più disponibili.",
   "RevokeSharedLinkDescriptionPublicRoom": "I collegamenti a tutti i file della stanza verranno rigenerati. I collegamenti precedenti ai file della stanza e ai documenti incorporati non saranno più disponibili.",
-  "RoomAccessRedirectNote": "Verrai reindirizzato automaticamente a {{sectionName}} tra 5 secondi.",
+  "RoomAccessRedirectNote": "Verrai reindirizzato automaticamente alla sezione {{sectionName}} tra 5 secondi.",
   "RoomAvailableViaExternalLink": "Stanza disponibile tramite collegamento esterno",
   "RoomAvailableViaSharedLink": "Spazio disponibile tramite collegamento condiviso",
   "RoomCreated": "La stanza è stata creata",
@@ -146,6 +144,5 @@
   "WarningMoveToFormRoom": "Non è possibile spostare il file in questo spazio. Provare a spostare un modulo PDF {{ organizationName }} alla volta.",
   "WarningMoveToFormRoomServal": "Lo spostamento di più file nello spazio di compilazione dei moduli non è supportato. Sposta un modulo PDF {{ organizationName }} alla volta.",
   "WillBeDeletedPermanently": "{{date}} verrà eliminato definitivamente",
-  "YouLeftTheAgent": "Hai lasciato l'agente",
   "YourUserTypeHasChanged": "Il tuo tipo di utente è stato modificato in <1>“{{userType}}”</1> dal superamministratore <1>{{adminName}}</1>."
 }

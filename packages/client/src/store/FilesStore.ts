@@ -34,7 +34,7 @@
  */
 
 import equal from "fast-deep-equal";
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import {
@@ -122,8 +122,8 @@ import type AccessRightsStore from "./AccessRightsStore";
 import type ClientLoadingStore from "./ClientLoadingStore";
 import type PluginStore from "./PluginStore";
 import type PublicRoomStore from "./PublicRoomStore";
+import type AppsStore from "./AppsStore";
 import type IndexingStore from "./IndexingStore";
-import type AiRoomStore from "./AiRoomStore";
 import type DialogsStore from "./DialogsStore";
 
 import {
@@ -156,8 +156,8 @@ import { getItemUrl as buildItemUrl } from "./filesStore/itemUrl.helpers";
 import {
   fetchFilesImpl,
   fetchRoomsImpl,
-  fetchAgentsImpl,
   fetchMoreFilesImpl,
+  refetchRoomsListOnSectionChangeImpl,
 } from "./filesStore/fetch.helpers";
 import {
   onResolveNewFileImpl,
@@ -167,6 +167,7 @@ import {
   wsModifyFolderDeleteImpl,
   wsCreatedPDFFormImpl,
   wsChangeFolderAccessRightsImpl,
+  wsChangeAiAccessSettingsImpl,
   redirectToParentImpl,
   syncSelectedFolderCountsImpl,
 } from "./filesStore/socket.helpers";
@@ -341,13 +342,9 @@ class FilesStore {
 
   isErrorRoomNotAvailable = false;
 
-  isErrorAIAgentNotAvailable = false;
-
   roomsController: Nullable<AbortController> = null;
 
   filesController: Nullable<AbortController> = null;
-
-  aiAgentsController: Nullable<AbortController> = null;
 
   clearSearch = false;
 
@@ -377,14 +374,17 @@ class FilesStore {
 
   mainButtonVisible = false;
 
-  // initialized null, always assigned in the constructor —
-  // the erased cast keeps the exact old JS runtime shape (own `null` field
-  // observed by makeAutoObservable before assignment).
-  aiRoomStore: AiRoomStore = null as unknown as AiRoomStore;
-
   // Narrow interface (Track F): attached post-construction in
   // store/index.ts (mutual reference); only `roomGroups` is read here.
   dialogsStore: Nullable<Pick<DialogsStore, "roomGroups">> = null;
+
+  // Attached post-construction in store/index.ts with
+  // watchPrivateRoomsSection; read for the Private section's request scope
+  // and address.
+  appsStore: Nullable<
+    Pick<AppsStore, "isPrivateRoomsSectionAvailable" | "isInstalled"> &
+      Partial<Pick<AppsStore, "waitForFrameOptIn">>
+  > = null;
 
   arrRoomGroups: unknown[] = [];
 
@@ -407,7 +407,6 @@ class FilesStore {
     currentTariffStatusStore: CurrentTariffStatusStore,
     settingsStore: SettingsStore,
     indexingStore: IndexingStore,
-    aiRoomStore: AiRoomStore,
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -426,7 +425,6 @@ class FilesStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.settingsStore = settingsStore;
     this.indexingStore = indexingStore;
-    this.aiRoomStore = aiRoomStore;
 
     // Singleton lifetime; never unsubscribed.
     subscribeFilenameCache(() => {
@@ -611,6 +609,15 @@ class FilesStore {
       }) as unknown as TUnmappedSocketListener,
     );
 
+    SocketHelper?.on(
+      SocketEvents.ChangeAiAccessSettings,
+      // The ui-kit maps this event to a zero-arg listener, while the server
+      // sends `{ enabled }`; the erased cast takes the payload.
+      ((data?: { enabled?: boolean }) => {
+        this.wsChangeAiAccessSettings(data);
+      }) as unknown as () => void,
+    );
+
     SocketHelper?.on(SocketEvents.StopEditFile, (data) => {
       const fileId = typeof data === "object" ? data.fileId : data;
 
@@ -691,7 +698,8 @@ class FilesStore {
   wsModifyFolderUpdate = async (opt?: TOptSocket) =>
     wsModifyFolderUpdateImpl(this, opt);
 
-  refreshFolder = (id: number | string) => refreshFolderImpl(this, id);
+  refreshFolder = (id: number | string, skipRedirect = false) =>
+    refreshFolderImpl(this, id, skipRedirect);
 
   wsModifyFolderDelete = (opt?: TOptSocket) =>
     wsModifyFolderDeleteImpl(this, opt);
@@ -700,6 +708,9 @@ class FilesStore {
 
   wsChangeFolderAccessRights = (option: TOptSocket) =>
     wsChangeFolderAccessRightsImpl(this, option);
+
+  wsChangeAiAccessSettings = (data?: { enabled?: boolean }) =>
+    wsChangeAiAccessSettingsImpl(this, data);
 
   redirectToParent = (
     opt: TOptSocket,
@@ -719,10 +730,6 @@ class FilesStore {
 
   setIsErrorRoomNotAvailable = (state: boolean) => {
     this.isErrorRoomNotAvailable = state;
-  };
-
-  setIsErrorAIAgentNotAvailable = (state: boolean) => {
-    this.isErrorAIAgentNotAvailable = state;
   };
 
   setTempActionFilesIds = (tempActionFilesIds: (number | string)[]) => {
@@ -1316,6 +1323,17 @@ class FilesStore {
       clearSelection,
     );
 
+  watchPrivateRoomsSection = (
+    appsStore: Pick<AppsStore, "isPrivateRoomsSectionAvailable" | "isInstalled">,
+  ) => {
+    this.appsStore = appsStore;
+
+    reaction(
+      () => appsStore.isPrivateRoomsSectionAvailable,
+      () => refetchRoomsListOnSectionChangeImpl(this),
+    );
+  };
+
   fetchRooms = (
     folderId: Nullable<number | string>,
     filter?: Nullable<TRoomsFilter>,
@@ -1331,14 +1349,6 @@ class FilesStore {
       withSubfolders,
       clearSelection,
     );
-
-  fetchAgents = (
-    folderId: Nullable<number | string>,
-    filter?: Nullable<TRoomsFilter>,
-    clearFilter = true,
-    clearSelection = true,
-  ): Promise<unknown> =>
-    fetchAgentsImpl(this, folderId, filter, clearFilter, clearSelection);
 
   setCustomRoomQuota = async (
     itemsIDs: (number | string)[],
@@ -1366,26 +1376,6 @@ class FilesStore {
     return rooms;
   };
 
-  setCustomAIAgentQuota = async (
-    itemsIDs: (number | string)[],
-    quotaSize: number | string,
-    inAgent = false,
-    filter: Nullable<TRoomsFilter> = null,
-  ) => {
-    // the AI quota endpoints are typed with numeric agent
-    // ids; string ids pass through unchanged at runtime.
-    const agents = await api.ai.setCustomAIAgentQuota(
-      itemsIDs as number[],
-      +quotaSize,
-    );
-
-    if (!inAgent) {
-      await this.fetchAgents(null, filter, false, false);
-    }
-
-    return agents;
-  };
-
   resetRoomQuota = async (
     itemsIDs: (number | string)[],
     inRoom = false,
@@ -1404,20 +1394,6 @@ class FilesStore {
     }
 
     return rooms;
-  };
-
-  resetAIAgentQuota = async (
-    itemsIDs: (number | string)[],
-    inAgent = false,
-    filter: Nullable<TRoomsFilter> = null,
-  ) => {
-    const agents = await api.ai.resetAIAgentQuota(itemsIDs as number[]);
-
-    if (!inAgent) {
-      await this.fetchAgents(null, filter, false, false);
-    }
-
-    return agents;
   };
 
   setAlreadyFetchingRooms = (alreadyFetchingRooms: boolean) => {
@@ -1650,13 +1626,9 @@ class FilesStore {
           !this.selectedFolderStore.isRootFolder && canCreateInSharedFolder
         );
       }
-      case FolderType.Privacy:
-        return (
-          this.settingsStore.isDesktopClient &&
-          this.settingsStore.isEncryptionSupport
-        );
       case FolderType.COMMON:
         return this.authStore.isAdmin;
+      case FolderType.Privacy:
       case FolderType.Archive:
       case FolderType.TRASH:
       default:
@@ -1678,7 +1650,6 @@ class FilesStore {
     needConvert: boolean | undefined,
     canOpenPlayer: boolean | undefined,
     shareKey?: string,
-    isAiRoom?: boolean,
   ) => {
     return buildItemUrl(
       id,
@@ -1690,7 +1661,6 @@ class FilesStore {
         publicRoomStore: this.publicRoomStore,
       },
       shareKey,
-      isAiRoom,
     );
   };
 
@@ -1698,7 +1668,6 @@ class FilesStore {
     buildFilesListItems(items, {
       fileItemsList: this.pluginStore.fileItemsList,
       enablePlugins: this.settingsStore.enablePlugins,
-      aiReadyNeedReset: this.settingsStore.aiConfig?.aiReadyNeedReset,
       getIcon: this.filesSettingsStore.getIcon,
       getThirdPartyIcon: this.thirdPartyStore.getThirdPartyIcon,
       getItemUrl: this.getItemUrl,
@@ -1807,7 +1776,6 @@ class FilesStore {
         elem !== `room-${FilterType.FoldersOnly}` &&
         elem !== `room-${(RoomsType as TRemovedRoomsTypes).FillingFormsRoom}` &&
         elem !== `room-${RoomsType.CustomRoom}` &&
-        elem !== `room-${RoomsType.AIRoom}` &&
         elem !== `room-${RoomsType.EditingRoom}` &&
         elem !== `room-${(RoomsType as TRemovedRoomsTypes).ReviewRoom}` &&
         elem !== `room-${RoomsType.FormRoom}` &&
@@ -1985,20 +1953,6 @@ class FilesStore {
     return rooms.length > 0;
   }
 
-  get hasAIAgentsToResetQuota() {
-    const canResetCustomQuota = (item: TItem) => {
-      const { isDefaultAIAgentsQuotaSet } = this.authStore.currentQuotaStore;
-
-      if (!isDefaultAIAgentsQuotaSet) return false;
-
-      return item.security?.EditRoom && item.isCustomQuota;
-    };
-
-    const aiAgents = this.selection.filter((x) => canResetCustomQuota(x));
-
-    return aiAgents.length > 0;
-  }
-
   get hasRoomsToDisableQuota() {
     const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
@@ -2015,20 +1969,6 @@ class FilesStore {
     return rooms.length > 0;
   }
 
-  get hasAIAgentsToDisableQuota() {
-    const { isDefaultAIAgentsQuotaSet } = this.authStore.currentQuotaStore;
-
-    const canDisableQuota = (item: TItem) => {
-      if (!isDefaultAIAgentsQuotaSet) return false;
-
-      return item.security?.EditRoom;
-    };
-
-    const aiAgents = this.selection.filter((x) => canDisableQuota(x));
-
-    return aiAgents.length > 0;
-  }
-
   get hasRoomsToChangeQuota() {
     const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
@@ -2043,20 +1983,6 @@ class FilesStore {
     const rooms = this.selection.filter((x) => canChangeQuota(x));
 
     return rooms.length > 0;
-  }
-
-  get hasAIAgentsToChangeQuota() {
-    const { isDefaultAIAgentsQuotaSet } = this.authStore.currentQuotaStore;
-
-    const canChangeQuota = (item: TItem) => {
-      if (!isDefaultAIAgentsQuotaSet) return false;
-
-      return item.security?.EditRoom;
-    };
-
-    const aiAgents = this.selection.filter((x) => canChangeQuota(x));
-
-    return aiAgents.length > 0;
   }
 
   get hasOneSelection() {
@@ -2216,14 +2142,18 @@ class FilesStore {
     return minWidth + orderLength * 2;
   }
 
+  get isPrivateRoomsSectionAvailable() {
+    return !!this.appsStore?.isPrivateRoomsSectionAvailable;
+  }
+
   get hasMoreFiles() {
     const {
       isRoomsFolder,
       isArchiveFolder,
       isTemplatesFolder,
       isRecentFolder,
-      isAIAgentsFolder,
       isFormsFolder,
+      isAiSectionFolder,
     } = this.treeFoldersStore;
 
     // Only 100 files on recent page should be shown
@@ -2236,9 +2166,8 @@ class FilesStore {
     // The Forms section is a rooms listing (served via searchArea=Forms), so
     // its pagination total lives on roomsFilter, not the files filter.
     const isRooms =
-      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
-    const filterTotal =
-      isRooms || isAIAgentsFolder ? this.roomsFilter.total : this.filter.total;
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder || isAiSectionFolder;
+    const filterTotal = isRooms ? this.roomsFilter.total : this.filter.total;
 
     if (this.clientLoadingStore.isLoading) return false;
     return this.filesList.length < filterTotal;
@@ -2261,10 +2190,8 @@ class FilesStore {
       isArchiveFolder,
       isFavoritesFolder,
       isRecentFolder,
-      isAIAgentsFolder,
+      isAiSectionFolder,
     } = this.treeFoldersStore;
-
-    const { isInsideResultStorage } = this.selectedFolderStore;
 
     return (
       isRecycleBinFolder ||
@@ -2272,8 +2199,7 @@ class FilesStore {
       isArchiveFolder ||
       isFavoritesFolder ||
       isRecentFolder ||
-      isInsideResultStorage ||
-      isAIAgentsFolder
+      isAiSectionFolder
     );
   }
 
@@ -2352,8 +2278,8 @@ class FilesStore {
     const {
       isRoomsFolder,
       isArchiveFolder,
-      isAIAgentsFolder,
       isFormsFolder,
+      isAiSectionFolder,
       isTemplatesFolder,
     } = this.treeFoldersStore;
 
@@ -2383,8 +2309,8 @@ class FilesStore {
     const isFiltered =
       isRoomsFolder ||
       isArchiveFolder ||
-      isAIAgentsFolder ||
       isFormsFolder ||
+      isAiSectionFolder ||
       isTemplatesFolder
         ? filterValue ||
           type ||

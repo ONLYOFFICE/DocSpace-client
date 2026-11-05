@@ -781,8 +781,8 @@ const successRoot = {
         indexing: false,
         denyDownload: false,
         fileEntryType: 1,
-        id: 224866,
-        rootFolderId: 224866,
+        id: 224867,
+        rootFolderId: 224867,
         canShare: false,
         security: {
           Read: true,
@@ -809,7 +809,7 @@ const successRoot = {
           UseChat: false,
         },
         availableShareRights: {},
-        title: "AI agents",
+        title: "AI rooms",
         access: 0,
         shared: false,
         sharedForUser: false,
@@ -834,7 +834,7 @@ const successRoot = {
           isAnonim: false,
         },
         updated: "2025-11-12T14:31:29.0000000+00:00",
-        rootFolderType: 34,
+        rootFolderType: 41,
         updatedBy: {
           id: "00000000-0000-0000-0000-0000000000",
           displayName: "Administrator ",
@@ -855,9 +855,9 @@ const successRoot = {
       },
       pathParts: [
         {
-          id: 224866,
-          title: "AI agents",
-          folderType: 34,
+          id: 224867,
+          title: "AI rooms",
+          folderType: 41,
         },
       ],
       startIndex: 0,

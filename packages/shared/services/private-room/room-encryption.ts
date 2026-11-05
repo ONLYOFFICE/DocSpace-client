@@ -46,11 +46,10 @@ import {
 } from "../encryption/room-file-access";
 import { wipeDek } from "../encryption/file-keys";
 import {
-  getTofuStore,
-  getKeyMismatchHandler,
   type KeyMismatchResolver,
 } from "../encryption/tofu-store";
-import { loadRoomMemberKeys } from "./room-member-keys";
+import { verifyMemberKey } from "./member-key-verification";
+import { loadRoomMemberKeys, selectMemberKeys } from "./room-member-keys";
 import FilesFilter from "../../api/files/filter";
 import type { TFile } from "../../api/files/types";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
@@ -77,9 +76,14 @@ export interface SkippedRoomMember {
   reason: SkippedMemberReason;
 }
 
-export interface AddMembersResult {
+export interface RoomRewrapResult {
   fileResults: FileEncryptionOpResult[];
   skippedMembers: SkippedRoomMember[];
+}
+
+export interface AddMembersResult extends RoomRewrapResult {
+  /** The files each invitee with a verified key got no wrap for. */
+  missingFileIdsByMember: Record<string, number[]>;
 }
 
 export interface RoomEncryptionOptions {
@@ -93,6 +97,7 @@ async function getEncryptedFilesInRoom(roomId: number): Promise<TFile[]> {
   const allFiles: TFile[] = [];
   let page = 0;
   const pageSize = 100;
+  let read = 0;
   let hasMore = true;
 
   while (hasMore) {
@@ -109,52 +114,17 @@ async function getEncryptedFilesInRoom(roomId: number): Promise<TFile[]> {
       allFiles.push(...subfolderFiles);
     }
 
-    hasMore = folderData.files.length === pageSize;
+    // A page holds the folders first and files after them, so only the
+    // folder's total tells whether files remain.
+    const onPage = folderData.files.length + folderData.folders.length;
+    read += onPage;
+    hasMore =
+      typeof folderData.total === "number"
+        ? onPage > 0 && read < folderData.total
+        : folderData.files.length === pageSize;
     page++;
   }
   return allFiles;
-}
-
-type VerifiedKeyResult =
-  | { kind: "ok"; publicKey: string }
-  | { kind: "key-mismatch-refused" };
-
-async function verifyUserPublicKey(
-  userId: string,
-  scopeUserId: string,
-  displayName: string | undefined,
-  resolver: KeyMismatchResolver | undefined,
-  publicKey: string,
-): Promise<VerifiedKeyResult> {
-  const tofu = getTofuStore(scopeUserId);
-  const result = await tofu.checkKey(userId, publicKey);
-  if (result.kind === "first-seen" || result.kind === "match") {
-    return { kind: "ok", publicKey };
-  }
-
-  const handler = resolver ?? getKeyMismatchHandler();
-  if (!handler) return { kind: "key-mismatch-refused" };
-
-  let decision: "accept" | "refuse";
-  try {
-    decision = await handler({
-      userId,
-      knownKey: result.known.publicKey,
-      newKey: result.submitted,
-      knownFirstSeenAt: result.known.firstSeenAt,
-      knownLastSeenAt: result.known.lastSeenAt,
-      displayName,
-    });
-  } catch (e) {
-    if (typeof console !== "undefined") {
-      // biome-ignore lint/suspicious/noConsole: surface resolver bugs in dev; failing closed (refused).
-      console.error("Key mismatch resolver threw:", e);
-    }
-    return { kind: "key-mismatch-refused" };
-  }
-  if (decision !== "accept") return { kind: "key-mismatch-refused" };
-  await tofu.acceptKey(userId, publicKey);
-  return { kind: "ok", publicKey };
 }
 
 export async function addMembersToEncryptedRoom(
@@ -162,19 +132,57 @@ export async function addMembersToEncryptedRoom(
   newMembers: NewRoomMember[],
   options: RoomEncryptionOptions,
 ): Promise<AddMembersResult> {
+  const validMembers = newMembers.filter((m) => m.id);
+  if (validMembers.length === 0) return emptyAddMembersResult();
+
+  const encryptedFiles = await getEncryptedFilesInRoom(roomId);
+  if (encryptedFiles.length === 0) return emptyAddMembersResult();
+
+  return wrapFilesForMembers(
+    roomId,
+    encryptedFiles.map((file) => file.id),
+    validMembers,
+    options,
+  );
+}
+
+/**
+ * Wraps the given files of the room for one member again, after an invite
+ * or an earlier retry left the member without an entry for them.
+ */
+export async function rewrapMissingFilesForMember(
+  roomId: number,
+  userId: string,
+  fileIds: number[],
+  options: RoomEncryptionOptions,
+): Promise<AddMembersResult> {
+  if (!userId || fileIds.length === 0) return emptyAddMembersResult();
+  return wrapFilesForMembers(roomId, fileIds, [{ id: userId }], options);
+}
+
+const emptyAddMembersResult = (): AddMembersResult => ({
+  fileResults: [],
+  skippedMembers: [],
+  missingFileIdsByMember: {},
+});
+
+/**
+ * Wraps the given files of the room for the members whose key passes
+ * verification, the caller unwrapping each file with its own entry.
+ */
+async function wrapFilesForMembers(
+  roomId: number,
+  fileIds: number[],
+  validMembers: NewRoomMember[],
+  options: RoomEncryptionOptions,
+): Promise<AddMembersResult> {
   const fileResults: FileEncryptionOpResult[] = [];
   const { currentUserId, identity, onProgress, onKeyChange } = options;
 
-  const validMembers = newMembers.filter((m) => m.id);
-  if (validMembers.length === 0) return { fileResults, skippedMembers: [] };
-
-  const encryptedFiles = await getEncryptedFilesInRoom(roomId);
-  if (encryptedFiles.length === 0) return { fileResults, skippedMembers: [] };
-
-  const { keysByUserId, list: roomMemberKeys } =
+  const { keyByUserId, list: roomMemberKeys } =
     await loadRoomMemberKeys(roomId);
 
-  onProgress?.(0, encryptedFiles.length);
+  onProgress?.(0, fileIds.length);
 
   const memberKeyCache = new Map<string, RoomMemberPublicKey | null>();
   const skippedReasons = new Map<string, SkippedMemberReason>();
@@ -189,39 +197,35 @@ export async function addMembersToEncryptedRoom(
     const cached = memberKeyCache.get(m.id);
     if (cached !== undefined) return cached;
 
-    const registered = keysByUserId.get(String(m.id));
     const candidate: RoomMemberPublicKey | null =
-      registered && registered.length > 0
-        ? registered[registered.length - 1]
-        : m.publicKey
-          ? { userId: String(m.id), publicKey: m.publicKey }
-          : null;
+      keyByUserId.get(String(m.id)) ??
+      (m.publicKey ? { userId: String(m.id), publicKey: m.publicKey } : null);
     if (!candidate) {
       memberKeyCache.set(m.id, null);
       skippedReasons.set(m.id, "no-key");
       return null;
     }
 
-    const verification = await verifyUserPublicKey(
-      m.id,
-      currentUserId,
-      memberDisplayName.get(m.id),
-      onKeyChange,
-      candidate.publicKey,
-    );
+    const verification = await verifyMemberKey({
+      userId: m.id,
+      scopeUserId: currentUserId,
+      displayName: memberDisplayName.get(m.id),
+      resolver: onKeyChange,
+      publicKey: candidate.publicKey,
+    });
     const resolved = verification.kind === "ok" ? candidate : null;
     memberKeyCache.set(m.id, resolved);
     if (verification.kind !== "ok") skippedReasons.set(m.id, verification.kind);
     return resolved;
   };
 
-  for (let i = 0; i < encryptedFiles.length; i++) {
-    const file = encryptedFiles[i];
+  for (let i = 0; i < fileIds.length; i++) {
+    const fileId = fileIds[i];
     try {
-      const info = await getFileEncryptionAccess(file.id);
+      const info = await getFileEncryptionAccess(fileId);
       if (!info?.fileKeys || info.fileKeys.length === 0) {
         fileResults.push({
-          fileId: file.id,
+          fileId,
           success: false,
           error: "no encryption keys for file",
         });
@@ -235,25 +239,21 @@ export async function addMembersToEncryptedRoom(
           roomMemberKeys,
           currentUserId,
           currentIdentity: identity,
-          fileId: file.id,
+          fileId,
         });
       } catch (e) {
         fileResults.push({
-          fileId: file.id,
+          fileId,
           success: false,
           error: e instanceof Error ? e.message : "unwrap failed",
         });
         continue;
       }
 
-      const usersWithAnyEntry = new Set(
-        info.fileKeys.map((k) => String(k.userId)),
-      );
-
+      // Spec: private-rooms/server-contract, "File access entries read".
       const recipients: RoomMemberPublicKey[] = [];
       for (const m of validMembers) {
-        const uid = String(m.id);
-        if (usersWithAnyEntry.has(uid)) continue;
+        if (String(m.id) === String(currentUserId)) continue;
         const key = await resolveMemberKey(m);
         if (!key) continue;
         recipients.push({
@@ -265,7 +265,7 @@ export async function addMembersToEncryptedRoom(
 
       if (recipients.length === 0) {
         wipeDek(dek);
-        fileResults.push({ fileId: file.id, success: true });
+        fileResults.push({ fileId, success: true });
         continue;
       }
 
@@ -276,7 +276,7 @@ export async function addMembersToEncryptedRoom(
           senderIdentity: identity,
           senderUserId: currentUserId,
           recipients,
-          fileId: file.id,
+          fileId,
         });
       } finally {
         wipeDek(dek);
@@ -290,48 +290,17 @@ export async function addMembersToEncryptedRoom(
         })),
         ...newKeys,
       ];
-      await setFileEncryptionKeys(file.id, allKeys);
+      await setFileEncryptionKeys(fileId, allKeys);
 
-      // BL-4 defense-in-depth — the server-side authz on PUT /file/{id}/access
-      // currently lets any room-Viewer overwrite arbitrary userId entries.
-      // Re-fetch ACL state and emit a structured warning if the returned set
-      // doesn't include every entry we just wrote. Best-effort: never throws,
-      // never affects the operation result.
-      try {
-        const verifiedInfo = await getFileEncryptionAccess(file.id);
-        const verifiedSet = new Set(
-          (verifiedInfo?.fileKeys ?? []).map(
-            (k) => `${String(k.userId)}:${k.publicKeyId || ""}`,
-          ),
-        );
-        const expectedNew = newKeys.map(
-          (k) => `${String(k.userId)}:${k.publicKeyId || ""}`,
-        );
-        const missing = expectedNew.filter((p) => !verifiedSet.has(p));
-        if (missing.length > 0 && typeof console !== "undefined") {
-          // biome-ignore lint/suspicious/noConsole: BL-4 telemetry hook; production build strips console.
-          console.warn(
-            "[ENCRYPTION] encryption-acl-drift after addMembersToEncryptedRoom",
-            {
-              fileId: file.id,
-              missing,
-              telemetryEvent: "encryption-acl-drift",
-            },
-          );
-        }
-      } catch {
-        // Verification GET failed — non-fatal. The main operation succeeded.
-      }
-
-      fileResults.push({ fileId: file.id, success: true });
+      fileResults.push({ fileId, success: true });
     } catch (error) {
       fileResults.push({
-        fileId: file.id,
+        fileId,
         success: false,
         error: error instanceof Error ? error.message : "unknown error",
       });
     }
-    onProgress?.(i + 1, encryptedFiles.length);
+    onProgress?.(i + 1, fileIds.length);
   }
 
   for (const m of validMembers) {
@@ -351,24 +320,31 @@ export async function addMembersToEncryptedRoom(
     }
   }
 
-  return { fileResults, skippedMembers };
+  // A file's entries are written in one request, so a failed file left
+  // every verified invitee without a wrap for it.
+  const failedFileIds = fileResults
+    .filter((result) => !result.success)
+    .map((result) => result.fileId);
+  const missingFileIdsByMember: Record<string, number[]> = {};
+  if (failedFileIds.length > 0) {
+    for (const m of validMembers) {
+      if (String(m.id) === String(currentUserId)) continue;
+      if (skippedReasons.has(m.id)) continue;
+      missingFileIdsByMember[m.id] = [...failedFileIds];
+    }
+  }
+
+  return { fileResults, skippedMembers, missingFileIdsByMember };
 }
 
 /**
- * Re-wraps existing file DEKs for any current room member whose public key
- * is registered server-side but who has no envelope on one or more files.
+ * Re-wraps every encrypted file of the room for every member with a verified
+ * key other than the caller. The caller cannot see other users' entries, so
+ * the sweep is blind by design and its callers bound how often it runs.
+ * Spec: private-rooms/room-membership, "Backfill re-wraps every member".
  *
- * Use case: a user is invited to a private room before they have registered
- * their encryption keypair. `addMembersToEncryptedRoom` skips them at invite
- * time (reason "no-key"). Once they later register a key, their new uploads
- * work, but pre-existing files remain inaccessible. This function backfills
- * those missing envelopes per-file.
- *
- * Recipient discovery uses the file-level endpoint `getFilePublicKeys` —
- * the same one the upload pipeline uses successfully. The room-level
- * `getRoomEncryptionKeys` is intentionally NOT consulted for recipient
- * selection because in practice it can lag behind file-level access state.
- * Room member keys are still loaded once for HPKE-Auth sender verification.
+ * Recipient discovery uses the file-level endpoint `getFilePublicKeys`;
+ * room member keys are loaded once for HPKE-Auth sender verification.
  *
  * Pass an `onKeyChange` that auto-refuses if you want a fully silent run
  * (recommended for background invocations triggered by navigation).
@@ -376,7 +352,7 @@ export async function addMembersToEncryptedRoom(
 export async function backfillEncryptedFilesForRoomMembers(
   roomId: number,
   options: RoomEncryptionOptions,
-): Promise<AddMembersResult> {
+): Promise<RoomRewrapResult> {
   const fileResults: FileEncryptionOpResult[] = [];
   const { currentUserId, identity, onProgress, onKeyChange } = options;
 
@@ -404,13 +380,12 @@ export async function backfillEncryptedFilesForRoomMembers(
     const cacheKey = `${userId}:${candidate}`;
     const cached = verifiedCache.get(cacheKey);
     if (cached !== undefined) return cached;
-    const result = await verifyUserPublicKey(
+    const result = await verifyMemberKey({
       userId,
-      currentUserId,
-      undefined,
-      onKeyChange,
-      candidate,
-    );
+      scopeUserId: currentUserId,
+      resolver: onKeyChange,
+      publicKey: candidate,
+    });
     const pk = result.kind === "ok" ? result.publicKey : null;
     verifiedCache.set(cacheKey, pk);
     if (result.kind !== "ok") skippedReasons.set(userId, result.kind);
@@ -437,14 +412,6 @@ export async function backfillEncryptedFilesForRoomMembers(
         continue;
       }
 
-      const usersWithAnyEntry = new Set(
-        info.fileKeys.map((k) => String(k.userId)),
-      );
-
-      const backfillByUser = new Map<
-        string,
-        { publicKey: string; publicKeyId?: string }
-      >();
       if (Array.isArray(filePublicKeys)) {
         for (const pk of filePublicKeys) {
           if (!pk?.userId || !pk?.publicKey) continue;
@@ -458,20 +425,12 @@ export async function backfillEncryptedFilesForRoomMembers(
               publicKeyId: pk.id,
             });
           }
-          if (uid === String(currentUserId)) continue;
-          if (usersWithAnyEntry.has(uid)) continue;
-          backfillByUser.set(uid, {
-            publicKey: pk.publicKey,
-            publicKeyId: pk.id,
-          });
         }
       }
 
-      const candidates = Array.from(backfillByUser, ([userId, v]) => ({
-        userId,
-        publicKey: v.publicKey,
-        publicKeyId: v.publicKeyId,
-      }));
+      const candidates = Array.from(selectMemberKeys(filePublicKeys)).flatMap(
+        ([userId, key]) => (userId === String(currentUserId) ? [] : [key]),
+      );
 
       if (candidates.length === 0) {
         fileResults.push({ fileId: file.id, success: true });
@@ -638,126 +597,6 @@ export async function revokeMemberFromEncryptedRoom(
   return results;
 }
 
-export async function rotateOwnIdentityForRoom(
-  roomId: number,
-  options: {
-    currentUserId: string;
-    oldIdentity: IdentityKeyPair;
-    newIdentity: IdentityKeyPair;
-    newPublicKeyId: string;
-    onProgress?: (processed: number, total: number) => void;
-  },
-): Promise<FileEncryptionOpResult[]> {
-  const results: FileEncryptionOpResult[] = [];
-  const {
-    currentUserId,
-    oldIdentity,
-    newIdentity,
-    newPublicKeyId,
-    onProgress,
-  } = options;
-
-  if (!newPublicKeyId) {
-    throw new Error("rotateOwnIdentityForRoom: newPublicKeyId is required");
-  }
-
-  const encryptedFiles = await getEncryptedFilesInRoom(roomId);
-  if (encryptedFiles.length === 0) return results;
-
-  const tofu = getTofuStore(currentUserId);
-  await tofu.acceptKey(currentUserId, base64FromBytes(oldIdentity.publicKey));
-  await tofu.acceptKey(currentUserId, base64FromBytes(newIdentity.publicKey));
-
-  const { list: roomMemberKeys } = await loadRoomMemberKeys(roomId);
-
-  onProgress?.(0, encryptedFiles.length);
-
-  for (let i = 0; i < encryptedFiles.length; i++) {
-    const file = encryptedFiles[i];
-    try {
-      const info = await getFileEncryptionAccess(file.id);
-      if (!info?.fileKeys) {
-        results.push({
-          fileId: file.id,
-          success: false,
-          error: "no encryption keys for file",
-        });
-        continue;
-      }
-
-      const alreadyRotated = info.fileKeys.some(
-        (k) =>
-          String(k.userId) === String(currentUserId) &&
-          k.publicKeyId === newPublicKeyId,
-      );
-      if (alreadyRotated) {
-        results.push({ fileId: file.id, success: true, skipped: true });
-        onProgress?.(i + 1, encryptedFiles.length);
-        continue;
-      }
-
-      let dek: Uint8Array;
-      try {
-        dek = await unwrapDekForCurrentUser({
-          fileKeys: info.fileKeys,
-          roomMemberKeys,
-          currentUserId,
-          currentIdentity: oldIdentity,
-          fileId: file.id,
-        });
-      } catch (e) {
-        results.push({
-          fileId: file.id,
-          success: false,
-          unreadable: true,
-          error: e instanceof Error ? e.message : "unwrap failed",
-        });
-        continue;
-      }
-
-      let myNewWraps: ServerAccessKeyDto[];
-      try {
-        myNewWraps = await wrapDekForRecipients({
-          dek,
-          senderIdentity: newIdentity,
-          senderUserId: currentUserId,
-          recipients: [
-            {
-              userId: currentUserId,
-              publicKey: base64FromBytes(newIdentity.publicKey),
-              publicKeyId: newPublicKeyId,
-            },
-          ],
-          fileId: file.id,
-        });
-      } finally {
-        wipeDek(dek);
-      }
-
-      const updated: ServerAccessKeyDto[] = info.fileKeys.map((k) =>
-        String(k.userId) === String(currentUserId)
-          ? myNewWraps[0]
-          : {
-              userId: k.userId,
-              publicKeyId: k.publicKeyId || "",
-              privateKeyEnc: k.privateKeyEnc,
-            },
-      );
-      await setFileEncryptionKeys(file.id, updated);
-      results.push({ fileId: file.id, success: true });
-    } catch (error) {
-      results.push({
-        fileId: file.id,
-        success: false,
-        error: error instanceof Error ? error.message : "unknown error",
-      });
-    }
-    onProgress?.(i + 1, encryptedFiles.length);
-  }
-
-  return results;
-}
-
 export async function roomHasEncryptedFiles(roomId: number): Promise<boolean> {
   const filter = FilesFilter.getDefault();
   filter.page = 0;
@@ -795,18 +634,18 @@ export async function validateMembersForEncryption(
 
   for (const memberId of memberIds) {
     const displayName = displayNames?.[memberId];
-    const candidate = keyByUserId.get(String(memberId));
+    const candidate = keyByUserId.get(String(memberId))?.publicKey;
     if (!candidate) {
       skipped.push({ id: memberId, displayName, reason: "no-key" });
       continue;
     }
-    const verification = await verifyUserPublicKey(
-      memberId,
+    const verification = await verifyMemberKey({
+      userId: memberId,
       scopeUserId,
       displayName,
-      onKeyChange,
-      candidate,
-    );
+      resolver: onKeyChange,
+      publicKey: candidate,
+    });
     if (verification.kind === "ok") {
       valid.push({ id: memberId, publicKey: verification.publicKey });
     } else {
@@ -818,12 +657,4 @@ export async function validateMembersForEncryption(
     }
   }
   return { valid, skipped };
-}
-
-function base64FromBytes(bytes: Uint8Array): string {
-  let binary = "";
-  for (let i = 0; i < bytes.byteLength; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return btoa(binary);
 }

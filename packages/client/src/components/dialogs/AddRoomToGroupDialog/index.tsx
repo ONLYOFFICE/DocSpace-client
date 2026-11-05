@@ -39,6 +39,7 @@ import { useTranslation } from "react-i18next";
 
 import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
 import { Aside } from "@onlyoffice/apps-ui-kit/components/aside";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
 import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector/Selector.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
@@ -57,6 +58,7 @@ type AddRoomToGroupDialogProps = {
     data: { roomsToAdd?: (string | number)[]; roomsToRemove?: number[] },
   ) => Promise<void>;
   getAllRoomGroups?: () => Promise<void>;
+  getPrivateSectionRoomIds?: () => Promise<number[]>;
   isFormsSection?: boolean;
 };
 
@@ -67,6 +69,7 @@ const AddRoomToGroupDialog = ({
   getGroupById,
   updateRoomGroup,
   getAllRoomGroups,
+  getPrivateSectionRoomIds,
   isFormsSection = false,
 }: AddRoomToGroupDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
@@ -74,6 +77,44 @@ const AddRoomToGroupDialog = ({
     rooms: TRoom[];
     name: string;
   } | null>(null);
+  const [privateRoomIds, setPrivateRoomIds] = useState<number[] | null>(null);
+
+  useEffect(() => {
+    if (!visible) return;
+
+    let isCurrent = true;
+
+    const fetchPrivateRoomIds = async () => {
+      try {
+        const ids =
+          isFormsSection || !getPrivateSectionRoomIds
+            ? []
+            : await getPrivateSectionRoomIds();
+        if (isCurrent) setPrivateRoomIds(ids);
+      } catch (error) {
+        // Spec: private-rooms/sidebar-section, "Rooms section excludes private rooms while the section is available".
+        if (!isCurrent) return;
+        toastr.error(error as Error);
+        setAddRoomToGroupDialogVisible?.(false);
+      }
+    };
+
+    fetchPrivateRoomIds();
+
+    return () => {
+      isCurrent = false;
+      setPrivateRoomIds(null);
+    };
+  }, [
+    visible,
+    isFormsSection,
+    getPrivateSectionRoomIds,
+    setAddRoomToGroupDialogVisible,
+  ]);
+
+  const groupRooms = (groupData?.rooms || []).filter(
+    (room) => !privateRoomIds?.includes(room.id),
+  );
 
   useEffect(() => {
     const fetchGroupData = async () => {
@@ -105,7 +146,7 @@ const AddRoomToGroupDialog = ({
     if (!groupId || !updateRoomGroup) return;
 
     const toIdKey = (id: string | number) => String(id);
-    const initialRoomIds = (groupData?.rooms || []).map((room) => room.id);
+    const initialRoomIds = groupRooms.map((room) => room.id);
     const initialRoomIdByKey = new Map<string, number>(
       initialRoomIds.map((id) => [toIdKey(id), id] as const),
     );
@@ -182,31 +223,34 @@ const AddRoomToGroupDialog = ({
         onClose={onClose}
         withoutHeader
       >
-        <RoomSelector
-          onSubmit={onSubmitRoom}
-          withHeader
-          headerProps={{
-            onBackClick: onClose,
-            onCloseClick: onClose,
-            headerLabel:
-              groupData?.name ||
-              (isFormsSection
-                ? t("GroupingRooms:AddSpace")
-                : t("GroupingRooms:AddRoom")),
-            withoutBorder: false,
-            withoutBackButton: false,
-          }}
-          withSearch
-          isForms={isFormsSection}
-          isMultiSelect
-          selectedItems={groupData ? convertToItems(groupData.rooms || []) : []}
-          withCancelButton
-          cancelButtonLabel={t("Common:CancelButton")}
-          onCancel={onClose}
-          forceIsMultiSelect
-          disableSubmitUntilChanged
-          sortSelectedFirst
-        />
+        {privateRoomIds ? (
+          <RoomSelector
+            onSubmit={onSubmitRoom}
+            withHeader
+            headerProps={{
+              onBackClick: onClose,
+              onCloseClick: onClose,
+              headerLabel:
+                groupData?.name ||
+                (isFormsSection
+                  ? t("GroupingRooms:AddSpace")
+                  : t("GroupingRooms:AddRoom")),
+              withoutBorder: false,
+              withoutBackButton: false,
+            }}
+            withSearch
+            isForms={isFormsSection}
+            isMultiSelect
+            excludeItems={privateRoomIds}
+            selectedItems={groupData ? convertToItems(groupRooms) : []}
+            withCancelButton
+            cancelButtonLabel={t("Common:CancelButton")}
+            onCancel={onClose}
+            forceIsMultiSelect
+            disableSubmitUntilChanged
+            sortSelectedFirst
+          />
+        ) : null}
       </Aside>
     </>
   );
@@ -220,6 +264,7 @@ export default inject(({ dialogsStore, treeFoldersStore }: TStore) => {
     getGroupById,
     updateRoomGroup,
     getAllRoomGroups,
+    getPrivateSectionRoomIds,
   } = dialogsStore;
 
   return {
@@ -229,6 +274,7 @@ export default inject(({ dialogsStore, treeFoldersStore }: TStore) => {
     getGroupById,
     updateRoomGroup,
     getAllRoomGroups,
+    getPrivateSectionRoomIds,
     isFormsSection: treeFoldersStore.isFormsFolder,
   };
 })(observer(AddRoomToGroupDialog));

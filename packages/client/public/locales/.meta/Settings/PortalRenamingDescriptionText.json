@@ -3,7 +3,7 @@
   "content": "Change the address that appears alongside {{ domain }}.",
   "content_en_sha1_hash": "4747dd483e450c918877ea510725a75a55e6bfe0",
   "created_at": "2026-08-31T18:23:41.780Z",
-  "updated_at": "2026-10-29T13:57:47.669Z",
+  "updated_at": "2026-10-31T12:58:29.235Z",
   "comment": {
     "text": "Description text for a customization setting in Portal Settings, explaining how to modify the address shown alongside the {{ domain }} variable.",
     "is_auto": true,

@@ -40,6 +40,7 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "next/navigation";
 
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { roomsFilterQuery } from "@/utils/roomsFilterUrl";
 import {
   RoomSearchArea,
   RoomsType,
@@ -117,7 +118,7 @@ export default function useRoomsFilter({
 
   const applyFilter = React.useCallback((next: RoomsFilter) => {
     setFilter(next);
-    window.history.pushState(null, "", `?${next.toUrlParams()}`);
+    window.history.pushState(null, "", `?${roomsFilterQuery(next)}`);
   }, []);
 
   const onClearFilter = React.useCallback(() => {

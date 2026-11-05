@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "Agente de IA creado",
-  "AgentDeleted": "Agente IA eliminado",
-  "AgentUpdated": "Agente IA actualizado",
   "Before": "Antes de",
   "CreateWebhook": "Crear webhook",
   "DeleteHint": "El webhook se eliminará de forma permanente.\nUsted no podrá deshacer esta acción.",
@@ -94,8 +91,8 @@
   "WebhookName": "Nombre de webhook",
   "WebhookRedilivered": "Webhook reenviado",
   "WebhookRemoved": "Webhook eliminado",
-  "WebhookWasDeleted": "Este webhook ha sido eliminado",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Guía de webhooks",
-  "WebhooksInfo": "Utilice webhooks para realizar acciones personalizadas en el lado de cualquier aplicación o sitio web que está utilizando basado en varios eventos en {{organizationName}} {{productName}}.\nAquí usted puede crear y gestionar todos sus webhooks, configurarlos, y navegar por el historial de cada webhook para auditar su rendimiento."
+  "WebhooksInfo": "Utilice webhooks para realizar acciones personalizadas en el lado de cualquier aplicación o sitio web que está utilizando basado en varios eventos en {{organizationName}} {{productName}}.\nAquí usted puede crear y gestionar todos sus webhooks, configurarlos, y navegar por el historial de cada webhook para auditar su rendimiento.",
+  "WebhookWasDeleted": "Este webhook ha sido eliminado"
 }

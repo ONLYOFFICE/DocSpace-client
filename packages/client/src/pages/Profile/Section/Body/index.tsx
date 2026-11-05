@@ -43,7 +43,6 @@ import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs, TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
 
 import { SECTION_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/section/Section.constants";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
@@ -58,6 +57,8 @@ import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import TelegramStore from "SRC_DIR/store/TelegramStore";
+import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
+import { isKeysManagementAvailable } from "SRC_DIR/helpers/privateRoomsSection";
 
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/login";
@@ -93,6 +94,7 @@ type SectionBodyContentProps = {
   setNotificationChannels?: TargetUserStore["setNotificationChannels"];
   checkTg?: TelegramStore["checkTg"];
   getEncryptionKeys?: UserStore["getEncryptionKeys"];
+  showKeysManagement?: boolean;
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -120,6 +122,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     setNotificationChannels,
     checkTg,
     getEncryptionKeys,
+    showKeysManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -195,15 +198,20 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
         await getFileManagementData();
       },
     },
-    // Encryption keys only exist to serve private rooms, so the tab stays
-    // hidden while the feature is unreleased (see
-    // @docspace/shared/utils/privateRooms). The matching route is gated too,
-    // so the tab cannot be reached by URL either.
-    ...(isPrivateRoomsEnabled()
+    // Spec: private-rooms/key-management, "Keys management tab follows the Private section"
+    ...(showKeysManagement
       ? [
           {
             id: "keys-management",
             name: t?.("Common:KeysManagement"),
+            badge: (
+              <BetaBadge
+                place="bottom"
+                title={t?.("Common:PrivateRoomsBetaTitle")}
+                description={t?.("Common:PrivateRoomsBetaDescription")}
+                dataTestId="keys_management_beta_badge"
+              />
+            ),
             content: <KeysManagement />,
             onClick: async () => {
               await getEncryptionKeysData();
@@ -284,6 +292,7 @@ export default inject(
     filesStore,
     telegramStore,
     userStore,
+    appsStore,
   }: TStore) => {
     const {
       showProfileLoader,
@@ -341,6 +350,10 @@ export default inject(
       setNotificationChannels,
       checkTg,
       getEncryptionKeys,
+      showKeysManagement: isKeysManagementAvailable(
+        appsStore.isPrivateRoomsSectionAvailable,
+        userStore.encryptionKeys,
+      ),
     };
   },
 )(

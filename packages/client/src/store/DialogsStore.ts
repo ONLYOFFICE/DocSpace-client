@@ -47,9 +47,15 @@ import type { RefObject } from "react";
 import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
-import { ROOM_ACTION_KEYS } from "@docspace/shared/constants";
+import { CategoryType, ROOM_ACTION_KEYS } from "@docspace/shared/constants";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import {
+  getRoomsRequestScope,
+  withRoomsRequestScope,
+} from "@docspace/shared/utils/rooms";
 
 import {
+  getRooms,
   getRoomCovers,
   setRoomCover,
   removeLogoFromRoom,
@@ -95,6 +101,7 @@ import type VersionHistoryStore from "./VersionHistoryStore";
 type TFilesStore = {
   hasSelection: boolean;
   hasBufferSelection: boolean;
+  isPrivateRoomsSectionAvailable: boolean;
   setSelected: (selected: "none") => void;
 };
 
@@ -156,21 +163,6 @@ type TCreateRoomDialogProps = {
   startRoomType?: RoomsType;
   isFormsCreate?: boolean;
   item?: unknown;
-};
-
-type TCreateAgentDialogProps = {
-  title?: string;
-  visible: boolean;
-  onClose: Nullable<VoidFunction>;
-  item?: unknown;
-  context?: string;
-};
-
-type TEditAgentDialogProps = {
-  visible: boolean;
-  item: unknown;
-  onClose: Nullable<VoidFunction>;
-  context?: string;
 };
 
 type TCreatePDFFormFileProps = {
@@ -248,6 +240,8 @@ class DialogsStore {
 
   selectFileFormRoomDialogVisible = false;
 
+  selectFileKnowledgeRoomDialogVisible = false;
+
   convertPasswordDialogVisible = false;
 
   inviteQuotaWarningDialogVisible = false;
@@ -322,8 +316,6 @@ class DialogsStore {
   saveAfterReconnectOAuth = false;
 
   createRoomDialogVisible = false;
-
-  createAgentDialogVisible = false;
 
   createRoomConfirmDialogVisible = false;
 
@@ -417,18 +409,6 @@ class DialogsStore {
     onClose: null,
   };
 
-  createAgentDialogProps: TCreateAgentDialogProps = {
-    title: "",
-    visible: false,
-    onClose: null,
-  };
-
-  editAgentDialogProps: TEditAgentDialogProps = {
-    visible: false,
-    item: null,
-    onClose: null,
-  };
-
   createPDFFormFileProps: TCreatePDFFormFileProps = {
     visible: false,
     file: null,
@@ -495,8 +475,6 @@ class DialogsStore {
   };
 
   socialAuthWelcomeDialogVisible = false;
-
-  selectFileAiKnowledgeDialogVisible = false;
 
   connectAccountDialogVisible = false;
 
@@ -596,14 +574,6 @@ class DialogsStore {
 
   setCreateRoomDialogProps = (props: TCreateRoomDialogProps) => {
     this.createRoomDialogProps = props;
-  };
-
-  setCreateAgentDialogProps = (props: TCreateAgentDialogProps) => {
-    this.createAgentDialogProps = props;
-  };
-
-  setEditAgentDialogProps = (props: TEditAgentDialogProps) => {
-    this.editAgentDialogProps = props;
   };
 
   setInviteLanguage = (culture: { key: string; label: string }) => {
@@ -974,8 +944,9 @@ class DialogsStore {
     this.selectFileFormRoomOpenRoot = openRoot;
   };
 
-  setSelectFileAiKnowledgeDialogVisible = (visible: boolean) => {
-    this.selectFileAiKnowledgeDialogVisible = visible;
+  /** The workspace picker that copies files into the current Knowledge room. */
+  setSelectFileKnowledgeRoomDialogVisible = (visible: boolean) => {
+    this.selectFileKnowledgeRoomDialogVisible = visible;
   };
 
   createMasterForm = async (
@@ -1073,10 +1044,6 @@ class DialogsStore {
 
   setCreateRoomDialogVisible = (createRoomDialogVisible: boolean) => {
     this.createRoomDialogVisible = createRoomDialogVisible;
-  };
-
-  setCreateAgentDialogVisible = (value: boolean) => {
-    this.createAgentDialogVisible = value;
   };
 
   setCreateRoomConfirmDialogVisible = (
@@ -1403,6 +1370,29 @@ class DialogsStore {
   getGroupById = async (groupId: string) => {
     const response = (await getGroupById(groupId)) as IRoomGroup;
     return response;
+  };
+
+  /**
+   * The ids of the rooms the Private section lists, none while it is not
+   * available. Spec: private-rooms/sidebar-section, "Rooms section excludes
+   * private rooms while the section is available"
+   */
+  getPrivateSectionRoomIds = async () => {
+    const ids: number[] = [];
+    if (!this.filesStore.isPrivateRoomsSectionAvailable) return ids;
+
+    const filter = withRoomsRequestScope(
+      RoomsFilter.getDefault(),
+      getRoomsRequestScope(CategoryType.PrivateRooms, undefined, true),
+    );
+    filter.pageCount = 100;
+
+    for (;;) {
+      const { folders, total } = await getRooms(filter);
+      ids.push(...folders.map((room) => room.id));
+      if (folders.length < filter.pageCount || ids.length >= total) return ids;
+      filter.page += 1;
+    }
   };
 
   updateGroupIcon = async (groupId: string, icon: Nullable<string>) => {

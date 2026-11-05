@@ -15,8 +15,6 @@
   "AnalyzeResponses": "Analizar respuestas",
   "ArchiveAction": "Vaciar archivo",
   "ArchiveEmptyScreenUser": "Las salas archivadas aparecerán aquí.",
-  "ChangeAgentOwnerSelectorInfo": "Solo un administrador de sala o superadministrador puede convertirse en propietario del agente",
-  "ChangeTheAgentOwner": "Cambiar el propietario del agente",
   "ClientSearchDecryptingNames": "Descifrando nombres de archivos… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "La carpeta es demasiado grande. Los resultados de búsqueda pueden estar incompletos.",
   "CompressingFiles": "Comprimiendo archivos",
@@ -103,7 +101,7 @@
   "RevokeSharedLinkDescriptionCustomRoom": "Se eliminarán los enlaces a todos los archivos de la sala. Los enlaces anteriores a los archivos de la sala y a los documentos incrustados dejarán de estar disponibles.",
   "RevokeSharedLinkDescriptionFormRoom": "Se volverán a generar enlaces a todos los formularios del espacio. Los enlaces anteriores a los formularios del espacio y a los formularios incrustados dejarán de estar disponibles.",
   "RevokeSharedLinkDescriptionPublicRoom": "Se volverán a generar enlaces a todos los archivos de la sala. Los enlaces anteriores a los archivos de la sala y a los documentos incrustados dejarán de estar disponibles.",
-  "RoomAccessRedirectNote": "Será redirigido automáticamente a {{sectionName}} en 5 segundos.",
+  "RoomAccessRedirectNote": "Será redirigido automáticamente a la sección {{sectionName}} en 5 segundos.",
   "RoomAvailableViaExternalLink": "Sala disponible a través de enlace externo",
   "RoomAvailableViaSharedLink": "Espacio disponible a través de enlace compartido",
   "RoomCreated": "La sala se ha creado",
@@ -146,6 +144,5 @@
   "WarningMoveToFormRoom": "El archivo no se puede mover a este espacio. Por favor, intente mover el formulario PDF de {{organizationName}}.",
   "WarningMoveToFormRoomServal": "No es posible mover varios archivos al espacio para rellenar formularios. Mueva un formulario PDF de {{organizationName}} a la vez.",
   "WillBeDeletedPermanently": "{{date}} se eliminará permanentemente",
-  "YouLeftTheAgent": "Ha abandonado el agente",
   "YourUserTypeHasChanged": "El superadministrador <1>{{adminName}}</1> ha cambiado su tipo de usuario a <1>“{{userType}}”</1>."
 }

@@ -138,6 +138,7 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
                 color={hasHidden ? globalColors.lightBlueMain : undefined}
                 onClick={() => setFilterOpen((v) => !v)}
                 iconName={VerticalDotsReactSvgUrl}
+                ariaLabel={t("Common:Filter")}
               />
               <DropDown
                 open={filterOpen}

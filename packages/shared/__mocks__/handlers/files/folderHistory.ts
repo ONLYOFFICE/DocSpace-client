@@ -57,7 +57,18 @@ export type FolderHistoryFeedSeed = {
   /** ISO date in UTC, e.g. 2026-03-16T09:00:00.000Z */
   date: string;
   title: string;
+  /**
+   * The action of HistoryService.TrackedActions the entry records, a file
+   * creation unless given; FileKeysSet (MessageAction 5164) is a key write
+   * of an encrypted file, listed with its actor and without the recipients.
+   */
+  action?: "FileCreated" | "FileKeysSet";
 };
+
+const ACTIONS = {
+  FileCreated: { id: 5000, key: FeedActionKeys.FileCreated },
+  FileKeysSet: { id: 5164, key: FeedActionKeys.FileKeysSet },
+} as const;
 
 export type FolderHistoryRequestLog = {
   fromDate: string | null;
@@ -78,7 +89,7 @@ export type FolderHistoryHandlerOptions = {
 
 const makeFeed = (seed: FolderHistoryFeedSeed, folderId: number | string) => ({
   id: seed.id,
-  action: { id: 5000, key: FeedActionKeys.FileCreated },
+  action: ACTIONS[seed.action ?? "FileCreated"],
   data: {
     id: seed.id,
     title: seed.title,

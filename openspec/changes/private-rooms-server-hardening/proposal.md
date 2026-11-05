@@ -74,6 +74,8 @@ None.
   change wraps the candidate's missing files before it asks the server
   and keeps the owner when some remain or the server answers 409 (task
   2.2, design decision 1).
+- `private-rooms/file-operations`: the History tab leaves the
+  file-keys-issued entry out (task 6.2, design decision 19).
 - `private-rooms/server-contract`: owner change, edition gate, invitation
   e-mail, audit scope, recovery/offboarding
   endpoints, the copy right in archived private rooms and the public keys

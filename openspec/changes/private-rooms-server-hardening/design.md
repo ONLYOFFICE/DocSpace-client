@@ -543,7 +543,14 @@ translations of the letter label (4.5).
     audit trail with the recipients' ids and to the file and folder history
     as a plain entry. The per-file access history this change asked for is
     therefore the file history, not a dedicated route; the client decides
-    how its History tab shows the new action (task 6.2).
+    how its History tab shows the new action (task 6.2). Decided
+    2026-11-05 with task 6.2: the tab leaves the entry out, as it does any
+    action it does not know (`getFeedInfo` finds nothing and
+    `HistoryBlockContent` renders nothing), recorded in the
+    `file-operations` delta. One entry per file per write, without the
+    recipients, would only be noise next to the audit trail, which keeps
+    the write with its recipients. Alternative: name it with a Common key;
+    kept open, it needs the key and its translations only.
 
 20. **The backfill sweep wraps the missing entries only (task 14.2).** With
     the missing-keys route the sweep reads once which members lack an entry

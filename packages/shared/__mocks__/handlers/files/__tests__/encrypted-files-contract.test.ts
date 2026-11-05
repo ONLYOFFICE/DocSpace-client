@@ -69,6 +69,8 @@ const ORDINARY_ROOM_ID = 9600;
 const ORDINARY_FILE_ID = 9601;
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";
 const BOB_ID = "22222222-2222-2222-2222-222222222222";
+/** A name the client generates for an encrypted upload. */
+const OPAQUE_NAME = "0f8fad5b-d9cb-469f-a165-70867728950e.bin";
 
 const OPENEDIT_URL = (fileId: number, query = "") =>
   `${BASE_URL}:${PORT}/${API_PREFIX}/files/file/${fileId}/openedit${query}`;
@@ -979,7 +981,7 @@ describe("encryptedFiles mock — upload sessions (mirrors UploadController)", (
     const res = await fetch(SESSION_URL(folderId), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fileName: "blob.bin", fileSize, encrypted: true }),
+      body: JSON.stringify({ fileName: OPAQUE_NAME, fileSize, encrypted: true }),
     });
     return (await res.json()).response as Record<string, unknown> & {
       id: string;
@@ -1043,7 +1045,7 @@ describe("encryptedFiles mock — upload sessions (mirrors UploadController)", (
     const res = await fetch(SESSION_URL(ROOM_ID), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fileName: "blob.bin", fileSize: 4096, encrypted: true }),
+      body: JSON.stringify({ fileName: OPAQUE_NAME, fileSize: 4096, encrypted: true }),
     });
     const body = (await res.json()) as { error: unknown; statusCode: number };
 
@@ -1055,6 +1057,70 @@ describe("encryptedFiles mock — upload sessions (mirrors UploadController)", (
     });
     expect(handle.current!.getSessions()).toEqual([]);
     expect((await createSession(ROOM_ID, 1024)).id).toBeTruthy();
+  });
+
+  const openSession = (
+    folderId: number,
+    fileName: string,
+    encrypted = true,
+  ) =>
+    fetch(SESSION_URL(folderId), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fileName, fileSize: 4, encrypted }),
+    });
+
+  const expectBadName = async (res: Response) => {
+    expect(res.status).toBe(400);
+    expect(((await res.json()) as { error: unknown }).error).toEqual({
+      message: "Bad request. (Parameter 'fileName')",
+    });
+  };
+
+  it("Readable name", async () => {
+    await expectBadName(await openSession(ROOM_ID, "Q3 Report.docx"));
+    await expectBadName(
+      await openSession(MOVING_FOLDER_ID, "Q3 Report.docx"),
+    );
+    expect(handle.current!.getSessions()).toEqual([]);
+    expect(movingHandle.current!.getSessions()).toEqual([]);
+  });
+
+  it("Uppercase UUID", async () => {
+    await expectBadName(
+      await openSession(ROOM_ID, "0F8FAD5B-D9CB-469F-A165-70867728950E.docx"),
+    );
+    expect(handle.current!.getSessions()).toEqual([]);
+  });
+
+  it("Uppercase extension", async () => {
+    await expectBadName(
+      await openSession(ROOM_ID, "0f8fad5b-d9cb-469f-a165-70867728950e.DOCX"),
+    );
+    expect(handle.current!.getSessions()).toEqual([]);
+  });
+
+  it("Bare UUID", async () => {
+    const res = await openSession(
+      ROOM_ID,
+      "0f8fad5b-d9cb-469f-a165-70867728950e",
+    );
+
+    expect(res.status).toBe(200);
+    expect(handle.current!.getSessions()).toHaveLength(1);
+  });
+
+  it("Session without the encrypted flag", async () => {
+    const res = await openSession(ROOM_ID, OPAQUE_NAME, false);
+    const inFolder = await openSession(MOVING_FOLDER_ID, OPAQUE_NAME, false);
+
+    expect(res.status).toBe(403);
+    expect(((await res.json()) as { error: unknown }).error).toEqual({
+      message: "Access denied",
+    });
+    expect(inFolder.status).toBe(403);
+    expect(handle.current!.getSessions()).toEqual([]);
+    expect(movingHandle.current!.getSessions()).toEqual([]);
   });
 
   it("numbered upload answers the session DTO and never builds the file", async () => {
@@ -1183,6 +1249,15 @@ describe("encryptedFiles mock — upload sessions (mirrors UploadController)", (
 
     expect(res.status).toBe(200);
     expect(handle.current!.getSessions()).toEqual([]);
+  });
+
+  it("Ordinary room", async () => {
+    const res = await openSession(ORDINARY_ROOM_ID, "Q3 Report.docx", false);
+    const { response } = (await res.json()) as { response: { id: string } };
+
+    expect(res.status).toBe(200);
+    // Nothing resets the ordinary room between tests.
+    expect((await abort(ORDINARY_ROOM_ID, response.id)).status).toBe(200);
   });
 });
 
@@ -1389,7 +1464,7 @@ describe("encryptedFiles mock — a second room in the same spec (withOtherRooms
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fileName: "blob.bin",
+          fileName: OPAQUE_NAME,
           fileSize: 4,
           encrypted: true,
         }),
@@ -1420,7 +1495,7 @@ describe("encryptedFiles mock — a second room in the same spec (withOtherRooms
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fileName: "blob.bin",
+          fileName: OPAQUE_NAME,
           fileSize: 4,
           encrypted: true,
         }),

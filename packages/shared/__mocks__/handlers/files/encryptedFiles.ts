@@ -174,6 +174,9 @@ const sectionOf = (archived: boolean) =>
     : { id: ROOMS_SECTION_ID, title: "Rooms", folderType: 14 };
 /** ChunkedUploadSessionHolder.SlidingExpiration. */
 const SESSION_SLIDING_EXPIRATION_MS = 12 * 60 * 60 * 1000;
+/** FileUploader.EncryptedFileNameRegex. */
+const ENCRYPTED_FILE_NAME =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(\.[a-z0-9]+)?$/;
 
 /** Configuration.DocType for the extensions the mock seeds use. */
 const DOCUMENT_TYPE_BY_EXTENSION = {
@@ -1192,6 +1195,13 @@ export const encryptedFilesHandlers = (
      * the folder's maximum upload size, the room's free space included, with
      * FileSizeComment.GetFileSizeException: a TenantQuotaException, which
      * UnhandledExceptionMiddleware answers with 402 and the exception type.
+     * FileUploader.InitiateUploadAsync then refuses a session into a private
+     * room or one of its `folders` (a folder the mock does not hold stands
+     * for one outside the room) that is not marked encrypted with a
+     * SecurityException (403, "Access denied" from CustomExceptionHandler),
+     * and one whose name fails EncryptedFileNameRegex with an
+     * ArgumentException for `fileName` (400, its message); an ordinary room
+     * takes any session.
      */
     http.post(
       `${apiBase}/files/:folderId(\\d+)/session`,
@@ -1215,6 +1225,13 @@ export const encryptedFilesHandlers = (
             `The maximum file size is exceeded (${filesSizeToString(freeSpace)}).`,
             "ASC.Core.Tenants.TenantQuotaException",
           );
+        }
+        const intoPrivateRoom = isPrivate && holdsFolder(folderId);
+        if (intoPrivateRoom && !body.encrypted) {
+          return errorResponse(403, "Access denied");
+        }
+        if (intoPrivateRoom && !ENCRYPTED_FILE_NAME.test(body.fileName)) {
+          return errorResponse(400, "Bad request. (Parameter 'fileName')");
         }
 
         const sessionId = `mock-session-${nextSessionId++}`;

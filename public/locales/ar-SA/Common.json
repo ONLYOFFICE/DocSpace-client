@@ -1811,6 +1811,7 @@
   "PrivateRoomNotFoundTitle": "لم يتم العثور عليها",
   "PrivateRoomRenameNotSupported": "إعادة تسمية الملفات المشفرة غير مدعومة بعد.",
   "PrivateRoomsBetaDescription": "الغرف الخاصة في مرحلة تجريبية. بعض الإجراءات غير متاحة بعد للملفات المشفرة، ولا يمكن فتح الملفات المشفرة بدون مفتاحك، لذا احتفظ بعبارة الاسترداد في مكان آمن.",
+  "PrivateRoomsBetaTitle": "الغرف الخاصة",
   "PrivateRoomsListEmptyDescription": "الغرف الخاصة مشفّرة من طرف إلى طرف. تُشفَّر الملفات في متصفحك قبل التحميل ولا يمكن قراءتها إلا للأشخاص الذين تدعوهم.",
   "PrivateRoomsListEmptyTitle": "لا توجد غرف خاصة بعد",
   "PrivateRoomTitle": "الغرفة الخاصة",

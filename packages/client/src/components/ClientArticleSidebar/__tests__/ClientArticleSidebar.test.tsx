@@ -51,8 +51,16 @@ vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store", () => ({
 vi.mock("SRC_DIR/components/NewFilesBadge", () => ({ default: () => null }));
 
 vi.mock("SRC_DIR/components/BetaBadgeWrapper", () => ({
-  default: ({ description }: { description?: string }) => (
-    <span data-testid="beta-badge">{description}</span>
+  default: ({
+    title,
+    description,
+  }: {
+    title?: string;
+    description?: string;
+  }) => (
+    <span data-testid="beta-badge" data-title={title}>
+      {description}
+    </span>
   ),
 }));
 
@@ -140,8 +148,10 @@ describe("ClientArticleSidebar — Private section", () => {
   it("Badge tooltip", () => {
     renderSidebar();
 
-    expect(
-      within(screen.getByTestId("nav-private-rooms")).getByTestId("beta-badge"),
-    ).toHaveTextContent("Common:PrivateRoomsBetaDescription");
+    const badge = within(screen.getByTestId("nav-private-rooms")).getByTestId(
+      "beta-badge",
+    );
+    expect(badge).toHaveAttribute("data-title", "Common:PrivateRoomsBetaTitle");
+    expect(badge).toHaveTextContent("Common:PrivateRoomsBetaDescription");
   });
 });

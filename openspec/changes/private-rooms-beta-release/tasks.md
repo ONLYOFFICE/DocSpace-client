@@ -1,6 +1,6 @@
 # Tasks
 
-Group 0 holds the beta gate. One task is one commit with its tick (the "Commits" paragraph of `openspec/config.yaml`). Server behaviour is read in `../server` through CodeGraph.
+Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 2026-11-03 behind the flag, so the gate now holds back the flag removal of 3.1 to 3.3 rather than the merge, and every remaining task is committed directly on `release/v4.1.0` (design, Migration Plan). Proposal decision 6 (2026-11-03) lets 3.1 to 3.3 land while 0.1 and 0.2 are open; those two stay open for the release notes. One task is one commit with its tick (the "Commits" paragraph of `openspec/config.yaml`). Server behaviour is read in `../server` through CodeGraph.
 
 ## 0. Beta gate and decisions (evidence only, no code)
 
@@ -8,6 +8,7 @@ Group 0 holds the beta gate. One task is one commit with its tick (the "Commits"
 - [ ] 0.2 Spreadsheets and presentations are covered: `private-rooms-editor-contract` 4.7 passes on the build of 0.1, or a follow-up change that opens them view-only and withholds their creation in private rooms is archived. Verify: the editor-contract record or `openspec list`.
 - [x] 0.3 The change that fixes the verified blockers of the second pre-PR review of 2026-11-03 is archived. Verify: `openspec list` shows it under `changes/archive`. Done 2026-11-03: `changes/archive/2026-11-03-private-rooms-pre-pr-review-2-fixes`.
 - [x] 0.4 Record proposal decisions 1 to 4 with their dates and owners in proposal.md. Verify: `npx -y @fission-ai/openspec@latest validate private-rooms-beta-release --strict`. Done 2026-11-03: the owner removed the flag without a server setting and accepted the account-link risk of `private-rooms-server-hardening` 12.1.
+- [x] 0.5 Ticking "Don't ask again" in the name dialog of a private room creates one file (proposal prerequisite 4). Verify: `openspec list` shows `private-rooms-create-dialog-single-file` under `changes/archive`. Done 2026-11-03: `changes/archive/2026-11-03-private-rooms-create-dialog-single-file`.
 
 ## 1. Planning
 
@@ -26,28 +27,28 @@ Group 0 holds the beta gate. One task is one commit with its tick (the "Commits"
   - cases "Beta badge shown" and "Badge tooltip" in `ClientArticleSidebar/__tests__/ClientArticleSidebar.test.tsx`, with no badge on the Archive sub-item;
   - `cd common/tests && npx vitest run test/locales.test.js`.
 - [x] 2.3 Put the Beta badge on the Keys management tab through the tab's `badge` slot in `packages/client/src/pages/Profile/Section/Body/index.tsx`. Verify: a case "Tab label" in a new `packages/client/src/pages/Profile/Section/Body/__tests__/ProfileTabs.test.tsx`, and `pnpm run tsc`.
-- [ ] 2.4 Give `BetaBadge` an optional title that replaces `Common:BetaBadgeTitle` (design decision 5), and pass the new key Common:PrivateRoomsBetaTitle from the sidebar item and the Keys management tab. Add the key to every language in the same commit, with its `.meta` comment written by `/translate-comments`. Verify:
+- [x] 2.4 Give `BetaBadge` an optional title that replaces `Common:BetaBadgeTitle` (design decision 5), and pass the new key Common:PrivateRoomsBetaTitle from the sidebar item and the Keys management tab. Add the key to every language in the same commit, with its `.meta` comment written by `/translate-comments`. Verify:
   - a `BetaBadge.test.tsx` case for the overridden title, with a `t` mock that keeps `Common:BetaBadgeTitle` distinct;
   - the "Badge tooltip" cases of the sidebar and of `ProfileTabs.test.tsx` assert the title key;
   - `cd common/tests && npx vitest run test/locales.test.js`.
 
 ## 3. Availability
 
-- [ ] 3.1 In `packages/client/src/store/AppsStore.ts`, drop `privateRoomsOptIn`: `isPrivateRoomsSectionAvailable` follows the E2E rooms app as `isInstalled` reads it, and inside an SDK frame also requires the frame opt-in. Remove `e2e-rooms` from the unreleased apps in `packages/client/src/helpers/disabled-apps.ts`. Verify:
+- [x] 3.1 In `packages/client/src/store/AppsStore.ts`, drop `privateRoomsOptIn`: `isPrivateRoomsSectionAvailable` follows the E2E rooms app as `isInstalled` reads it, and inside an SDK frame also requires the frame opt-in. Remove `e2e-rooms` from the unreleased apps in `packages/client/src/helpers/disabled-apps.ts`. Verify:
   - cases "SaaS portal", "Standalone portal with the app on", "App switched off on a standalone portal", "Frame configuration carries the opt-in", "Frame configuration without the opt-in" and "Browser flag in a frame" in the AppsStore unit tests;
   - `cd packages/client && pnpm exec vitest run src/store src/helpers`.
-- [ ] 3.2 Register the `profile/keys-management` routes of `packages/client/src/routes/general.js` unconditionally, behind a guard that renders the page while the section is available or the user holds a key, and otherwise falls back to the profile (design decision 4). Apply the same rule to the profile tab. Verify: cases "Section available", "App off, no key" and "App off, key held" in unit tests next to the guard and in `ProfileTabs.test.tsx`, and `pnpm run tsc`.
-- [ ] 3.3 Delete the browser flag and its URL parameter from `packages/shared/utils/privateRooms.ts`, keeping the frame opt-in value check and the parameter name (design decision 6). Remove every import of the deleted names, including the SDK opt-in helpers, and the raw `"privateRooms"` key in `packages/client/src/store/__tests__/AppsStore.installed.test.ts`. Verify:
+- [x] 3.2 Register the `profile/keys-management` routes of `packages/client/src/routes/general.js` unconditionally, behind a guard that renders the page while the section is available or the user holds a key, and otherwise falls back to the profile (design decision 4). Apply the same rule to the profile tab. Verify: cases "Section available", "App off, no key" and "App off, key held" in unit tests next to the guard and in `ProfileTabs.test.tsx`, and `pnpm run tsc`.
+- [x] 3.3 Delete the browser flag and its URL parameter from `packages/shared/utils/privateRooms.ts`, keeping the frame opt-in value check and the parameter name (design decision 6). Remove every import of the deleted names, including the SDK opt-in helpers, and the raw `"privateRooms"` key in `packages/client/src/store/__tests__/AppsStore.installed.test.ts`. Verify:
   - a rewritten `privateRooms.test.ts` with the case "Browser-local flag ignored";
   - `pnpm run tsc` and `pnpm run test:sdk`;
   - no `privateRooms` localStorage access left: `grep -rn "localStorage" packages --include=*.ts* | grep -i privaterooms` prints nothing outside tests that assert it is ignored.
 
 ## 4. E2E
 
-- [ ] 4.1 Stop writing the `privateRooms` flag in `packages/client/__tests__/fixtures/base.ts`; the Arbiter flag stays. Verify: case "Base fixture", and the private-room specs (`private-room-*`, `private-rooms-section`, `keys-management*`, `key-flow-edge-cases`, `encrypted-file-ui`) green with `cd packages/client && pnpm test:e2e:docker:dev <specs>`.
-- [ ] 4.2 Replace `private-rooms-hidden.spec.ts` with `private-rooms-app-off.spec.ts`, covering "App-off spec", "Browser-local flag ignored", "App off, key held", "Link opened while the section is not available" and "Chooser with the app off" on a mocked standalone portal. Verify under Docker as in 4.1.
-- [ ] 4.3 Assert the badges: "Beta badge shown" in `private-rooms-section.spec.ts` and "Tab label" in `keys-management.spec.ts`, each with the tooltip title. Verify under Docker as in 4.1.
-- [ ] 4.4 Run the full client E2E under Docker (`tests-dev`, `--update-snapshots=changed`). Design decision 7 expects no screenshot to move; check any that does by eye before committing it, and announce a regeneration to the teams that merge into the release branch. Verify: the full run, green except the failures the release branch has on its own (seven on 2026-11-03: five in `unpaid-portal-requests`, two in `ai-services-disabled`).
+- [x] 4.1 Stop writing the `privateRooms` flag in `packages/client/__tests__/fixtures/base.ts`; the Arbiter flag stays. Verify: case "Base fixture", and the private-room specs (`private-room-*`, `private-rooms-section`, `keys-management*`, `key-flow-edge-cases`, `encrypted-file-ui`) green with `cd packages/client && pnpm test:e2e:docker:dev <specs>`.
+- [x] 4.2 Replace `private-rooms-hidden.spec.ts` with `private-rooms-app-off.spec.ts`, covering "App-off spec", "Browser-local flag ignored", "App off, key held", "Link opened while the section is not available" and "Chooser with the app off" on a mocked standalone portal. Verify under Docker as in 4.1.
+- [x] 4.3 Assert the badges: "Beta badge shown" in `private-rooms-section.spec.ts` and "Tab label" in `keys-management.spec.ts`, each with the tooltip title. Verify under Docker as in 4.1.
+- [x] 4.4 Run the full client E2E under Docker (`tests-dev`, `--update-snapshots=changed`). Design decision 7 expects no screenshot to move; check any that does by eye before committing it, and announce a regeneration to the teams that merge into the release branch. Verify: the full run, green except the failures the release branch has on its own (seven on 2026-11-03: five in `unpaid-portal-requests`, two in `ai-services-disabled`).
 
 ## 5. Documentation
 
@@ -61,11 +62,11 @@ Group 0 holds the beta gate. One task is one commit with its tick (the "Commits"
   - the Document Server build of 0.1.
 
   Verify: that record.
-- [ ] 5.2 Make `.claude/rules/private-rooms.md` (item 8 and its flag mentions) and the feature-flag line of the `openspec/config.yaml` context describe the beta shown to every user, not a hidden feature. Verify: `npx -y @fission-ai/openspec@latest validate --all --strict`.
+- [x] 5.2 Make `.claude/rules/private-rooms.md` (item 8 and its flag mentions) and the feature-flag line of the `openspec/config.yaml` context describe the beta shown to every user, not a hidden feature. Verify: `npx -y @fission-ai/openspec@latest validate --all --strict`.
 
 ## 6. Integration
 
-- [ ] 6.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`, `pnpm run test:doceditor`), the SDK private E2E and `npx -y @fission-ai/openspec@latest validate --all --strict`. Verify: all green.
+- [x] 6.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`, `pnpm run test:doceditor`), the SDK private E2E and `npx -y @fission-ai/openspec@latest validate --all --strict`. Verify: all green.
 - [ ] 6.2 Run on staging with the Document Server of 0.1, and record date, builds and results in design.md:
   - a user who never opted in sees the Private section and the badges;
   - on a standalone portal an administrator switches the Private app off: the section goes, private rooms are listed in Rooms, and the Keys management tab stays for a key holder.
@@ -74,5 +75,5 @@ Group 0 holds the beta gate. One task is one commit with its tick (the "Commits"
 
 ## Workflow follow-up
 
-- Archive with `/opsx:archive private-rooms-beta-release` after the beta is merged to the release branch. At the archive, rewrite the Purpose of `private-rooms/feature-gating` in the main spec so it describes the beta shown to every user instead of the tester opt-in.
+- Archive with `/opsx:archive private-rooms-beta-release` once 3.1 to 3.3 and the tasks that follow them are on `release/v4.1.0`. At the archive, rewrite the Purpose of `private-rooms/feature-gating` in the main spec so it describes the beta shown to every user instead of the tester opt-in.
 - General availability then follows the revised `private-rooms-release-gate`.

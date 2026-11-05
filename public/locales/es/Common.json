@@ -1811,6 +1811,7 @@
   "PrivateRoomNotFoundTitle": "No encontrado",
   "PrivateRoomRenameNotSupported": "El cambio de nombre de archivos cifrados aún no es compatible.",
   "PrivateRoomsBetaDescription": "Las salas privadas están en fase beta. Algunas acciones aún no están disponibles para los archivos cifrados, y los archivos cifrados no se pueden abrir sin su clave, así que guarde su frase de recuperación en un lugar seguro.",
+  "PrivateRoomsBetaTitle": "Salas privadas",
   "PrivateRoomsListEmptyDescription": "Las salas privadas están cifradas de extremo a extremo. Los archivos se cifran en su navegador antes de subirlos y solo las personas que invite pueden leerlos.",
   "PrivateRoomsListEmptyTitle": "Aún no hay salas privadas",
   "PrivateRoomTitle": "Sala privada",

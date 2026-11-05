@@ -74,10 +74,7 @@ import {
 } from "@docspace/shared/api/apps";
 import type { TApp } from "@docspace/shared/api/apps/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import {
-  isPrivateRoomsEnabled,
-  isPrivateRoomsOptInValue,
-} from "@docspace/shared/utils/privateRooms";
+import { isPrivateRoomsOptInValue } from "@docspace/shared/utils/privateRooms";
 import { isSdkFrameWindow } from "@docspace/shared/utils/common";
 import { isAppTemporarilyDisabled } from "SRC_DIR/helpers/disabled-apps";
 
@@ -101,14 +98,13 @@ class AppsStore {
 
   settingsStore: SettingsStore;
 
-  // Spec: private-rooms/sidebar-section, "Section availability"
-  privateRoomsOptIn = isPrivateRoomsEnabled();
+  isSdkFrame = isSdkFrameWindow();
 
   // Spec: private-rooms/feature-gating, "Client in an embedded frame takes the host opt-in"
   framePrivateRoomsOptIn = false;
 
   // An SDK frame learns the host's opt-in only from its configuration.
-  isFrameOptInSettled = !isSdkFrameWindow();
+  isFrameOptInSettled = !this.isSdkFrame;
 
   constructor(settingsStore: SettingsStore) {
     this.settingsStore = settingsStore;
@@ -216,10 +212,9 @@ class AppsStore {
     return this.isEnabled(id);
   };
 
-  // The Private section: the opt-in captured at load, and the E2E rooms app
-  // read as `isInstalled` reads it, without asking the flag again.
+  // Spec: private-rooms/sidebar-section, "Section availability follows the E2E rooms app"
   get isPrivateRoomsSectionAvailable() {
-    if (!this.privateRoomsOptIn && !this.framePrivateRoomsOptIn) return false;
+    if (this.isSdkFrame && !this.framePrivateRoomsOptIn) return false;
     if (!this.canManageApps || !this.isLoaded) return true;
     return (
       this.apps.find((a) => a.id === PRIVATE_ROOMS_APP_ID)?.enabled ?? false

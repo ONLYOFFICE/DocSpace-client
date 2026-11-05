@@ -92,12 +92,19 @@ const unlockIfPrompted = async (page: Page, passphrase: string) => {
   }
 };
 
-/** Generates a key, then opens the private room in-app so the identity stays unlocked. */
+/**
+ * Generates a key, then opens the private room in-app so the identity stays
+ * unlocked. With `withAppOff` the E2E rooms app is switched off after the key
+ * is made, since Keys management is not offered without the app or a key, and
+ * the room is opened by a full load, which reads the apps list again; the
+ * passphrase is entered when the load asks for it.
+ */
 const openPrivateRoomWithKey = async (
   page: Page,
   mockRequest: WorkerFixture,
   baseUrl: string,
   roomUrl = `/private/${ROOM_ID}/filter?folder=${ROOM_ID}`,
+  withAppOff = false,
 ) => {
   const { keysHandle, passphrase } = await bootstrapEncryption(
     page,
@@ -123,14 +130,31 @@ const openPrivateRoomWithKey = async (
     { ...keysHandle.getKeys()[0], userId: TEST_USER_ID },
   ]);
 
-  await navigateInApp(page, roomUrl);
-  await page.waitForResponse(
+  const roomLoaded = page.waitForResponse(
     (res) =>
       res.request().method() === "GET" &&
       new URL(res.url()).pathname.endsWith(`/files/${ROOM_ID}`) &&
       res.ok(),
     { timeout: 15000 },
   );
+
+  if (withAppOff) {
+    mockRequest.use(appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }));
+    await page.goto(`${baseUrl}${roomUrl}`);
+    await roomLoaded;
+
+    const prompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    const isPrompted = await prompt
+      .waitFor({ state: "visible", timeout: 5000 })
+      .then(() => true)
+      .catch(() => false);
+    if (isPrompted) await unlockIfPrompted(page, passphrase);
+  } else {
+    await navigateInApp(page, roomUrl);
+    await roomLoaded;
+  }
 
   return { filesHandle, passphrase };
 };
@@ -300,12 +324,12 @@ test.describe("Private room — upload target fixed when the user starts the upl
   }) => {
     test.slow();
     // Under Rooms only while the Private section is off.
-    mockRequest.use(appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }));
     const { filesHandle, passphrase } = await openPrivateRoomWithKey(
       page,
       mockRequest,
       baseUrl,
       `/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`,
+      true,
     );
     const sent = recordSessionRequests(page);
 

@@ -37,42 +37,20 @@
 
 import React from "react";
 
-import {
-  isPrivateRoomsOptInValue,
-  setPrivateRoomsOptInSource,
-} from "@docspace/shared/utils/privateRooms";
-
-import { useSDKConfig } from "@/providers/SDKConfigProvider";
-
 import { PrivateRoomsOptInContext } from "./PrivateRoomsOptInContext";
 
 /**
- * Feeds the shared opt-in from the host's frame configuration. The private
- * layout renders this only for a request that carried the opt-in, so the
- * opt-in holds until `setConfig` delivers a configuration that turns it off.
+ * Tells the private pages that their request carried the host's opt-in; the
+ * private layout renders this only for such a request.
  */
 const PrivateRoomsOptInSource = ({
   children,
 }: {
   children: React.ReactNode;
-}) => {
-  const { sdkConfig } = useSDKConfig();
-  const fromConfig = sdkConfig?.privateRooms;
-
-  React.useEffect(() => {
-    setPrivateRoomsOptInSource(() =>
-      fromConfig === undefined ? true : isPrivateRoomsOptInValue(fromConfig),
-    );
-
-    return () => setPrivateRoomsOptInSource(null);
-  }, [fromConfig]);
-
-  // The private layout renders this only for a request with the opt-in.
-  return (
-    <PrivateRoomsOptInContext.Provider value>
-      {children}
-    </PrivateRoomsOptInContext.Provider>
-  );
-};
+}) => (
+  <PrivateRoomsOptInContext.Provider value>
+    {children}
+  </PrivateRoomsOptInContext.Provider>
+);
 
 export default PrivateRoomsOptInSource;

@@ -291,6 +291,52 @@ export const openEditHandler = (port: string, editWithPassword?: boolean) => {
   });
 };
 
+export type TOpenEditFormOptions = {
+  // The version of the form the editor opens.
+  version?: number;
+  mode?: "edit" | "view";
+  // Off for a filled form or a draft of the same room.
+  edit?: boolean;
+  // StartFillingMode; 3 is the original form of a form-filling room.
+  startFillingMode?: number;
+};
+
+// A PDF form opened in the editor, by default the original form of a form-filling room opened for editing.
+export const openEditForm = ({
+  version = 1,
+  mode = "edit",
+  edit = true,
+  startFillingMode = 3,
+}: TOpenEditFormOptions = {}) => {
+  const config = structuredClone(openEditSuccess);
+  const { response } = config;
+
+  response.documentType = "pdf";
+  response.document.fileType = "pdf";
+  response.document.isForm = true;
+  response.document.title = "Form.pdf";
+  response.document.permissions.edit = edit;
+  response.editorConfig.mode = mode;
+  response.startFillingMode = startFillingMode;
+  response.file.version = version;
+  response.file.fileExst = ".pdf";
+  response.file.title = "Form.pdf";
+
+  return {
+    ...config,
+    response: { ...response, startFilling: startFillingMode === 3 },
+  };
+};
+
+export const openEditFormHandler = (
+  port: string,
+  options?: TOpenEditFormOptions,
+) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_OPEN_EDIT}`, () => {
+    return new Response(JSON.stringify(openEditForm(options)));
+  });
+};
+
 // openedit failing the ways the editor cannot read: an ASP.NET problem
 // details body (not OK, JSON, no `error`), or a proxy's HTML 502 page.
 export const openEditFailedHandler = (

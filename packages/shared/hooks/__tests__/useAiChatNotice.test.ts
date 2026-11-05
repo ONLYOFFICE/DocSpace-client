@@ -83,6 +83,32 @@ describe("getAiChatBlock", () => {
     ).toBeNull();
   });
 
+  it("reads a spending limit from the gateway's 402 payment_error, not as an empty wallet", () => {
+    expect(
+      getAiChatBlock(
+        {
+          error: {
+            code: "insufficient_funds",
+            message: "402 Service limit exceeded",
+          },
+          providerType: "onlyoffice",
+        },
+        false,
+      ),
+    ).toEqual({ kind: "limit", until: null });
+    expect(
+      getAiChatBlock(
+        {
+          error: {
+            code: "service_limit_exceeded",
+            message: "Service limit exceeded",
+          },
+        },
+        false,
+      ),
+    ).toEqual({ kind: "limit", until: null });
+  });
+
   it("has no wallet or limit on standalone, and ignores non-money errors", () => {
     expect(getAiChatBlock(walletError, true)).toEqual({ kind: "provider" });
     expect(

@@ -38,7 +38,7 @@ import {
   getFileEncryptionAccess,
   setFileEncryptionKeys,
 } from "../../api/files";
-import { getFilePublicKeys } from "../../api/privacy";
+import { getFilePublicKeys, getRoomMissingFileKeys } from "../../api/privacy";
 import {
   unwrapDekForCurrentUser,
   wrapDekForRecipients,
@@ -348,9 +348,34 @@ async function wrapFilesForMembers(
 }
 
 /**
- * Re-wraps every encrypted file of the room for every member with a verified
- * key other than the caller. The caller cannot see other users' entries, so
- * the sweep is blind by design and its callers bound how often it runs.
+ * The encrypted files each member lacks a key on, by file, as the server
+ * reports them for the room; null when the request fails, so the sweep
+ * covers every file for every member instead.
+ */
+async function readMissingFileKeys(
+  roomId: number,
+): Promise<Map<number, Set<string>> | null> {
+  try {
+    const entries = await getRoomMissingFileKeys(roomId);
+    const byFile = new Map<number, Set<string>>();
+    for (const { userId, fileIds } of entries) {
+      for (const fileId of fileIds) {
+        const users = byFile.get(fileId) ?? new Set<string>();
+        users.add(String(userId));
+        byFile.set(fileId, users);
+      }
+    }
+    return byFile;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Wraps, for every member with a verified key other than the caller, the
+ * encrypted files of the room the server lists them as lacking a key on;
+ * when that list cannot be read, every encrypted file for every member.
+ * Its callers bound how often it runs.
  * Spec: private-rooms/room-membership, "Backfill re-wraps every member".
  *
  * Recipient discovery uses the file-level endpoint `getFilePublicKeys`;
@@ -366,9 +391,13 @@ export async function backfillEncryptedFilesForRoomMembers(
   const fileResults: FileEncryptionOpResult[] = [];
   const { currentUserId, identity, onProgress, onKeyChange } = options;
 
-  const encryptedFiles = await getEncryptedFilesInRoom(roomId);
   const missingFileIdsByMember: Record<string, number[]> = {};
-  if (encryptedFiles.length === 0) {
+  // Spec: private-rooms/server-contract, "Missing file keys of a room"
+  const missing = await readMissingFileKeys(roomId);
+  const fileIds = missing
+    ? [...missing.keys()]
+    : (await getEncryptedFilesInRoom(roomId)).map((file) => file.id);
+  if (fileIds.length === 0) {
     return { fileResults, skippedMembers: [], missingFileIdsByMember };
   }
 
@@ -404,19 +433,19 @@ export async function backfillEncryptedFilesForRoomMembers(
     return pk;
   };
 
-  onProgress?.(0, encryptedFiles.length);
+  onProgress?.(0, fileIds.length);
 
-  for (let i = 0; i < encryptedFiles.length; i++) {
-    const file = encryptedFiles[i];
+  for (let i = 0; i < fileIds.length; i++) {
+    const fileId = fileIds[i];
     try {
       const [filePublicKeys, info] = await Promise.all([
-        getFilePublicKeys(file.id),
-        getFileEncryptionAccess(file.id),
+        getFilePublicKeys(fileId),
+        getFileEncryptionAccess(fileId),
       ]);
 
       if (!info?.fileKeys || info.fileKeys.length === 0) {
         fileResults.push({
-          fileId: file.id,
+          fileId: fileId,
           success: false,
           error: "no encryption keys for file",
         });
@@ -439,12 +468,16 @@ export async function backfillEncryptedFilesForRoomMembers(
         }
       }
 
+      const lacking = missing?.get(fileId);
       const candidates = Array.from(selectMemberKeys(filePublicKeys)).flatMap(
-        ([userId, key]) => (userId === String(currentUserId) ? [] : [key]),
+        ([userId, key]) =>
+          userId === String(currentUserId) || (lacking && !lacking.has(userId))
+            ? []
+            : [key],
       );
 
       if (candidates.length === 0) {
-        fileResults.push({ fileId: file.id, success: true });
+        fileResults.push({ fileId: fileId, success: true });
         continue;
       }
 
@@ -460,7 +493,7 @@ export async function backfillEncryptedFilesForRoomMembers(
       }
 
       if (recipients.length === 0) {
-        fileResults.push({ fileId: file.id, success: true });
+        fileResults.push({ fileId: fileId, success: true });
         continue;
       }
 
@@ -471,11 +504,11 @@ export async function backfillEncryptedFilesForRoomMembers(
           roomMemberKeys: senderCandidates,
           currentUserId,
           currentIdentity: identity,
-          fileId: file.id,
+          fileId: fileId,
         });
       } catch (e) {
         fileResults.push({
-          fileId: file.id,
+          fileId: fileId,
           success: false,
           error: e instanceof Error ? e.message : "unwrap failed",
         });
@@ -489,7 +522,7 @@ export async function backfillEncryptedFilesForRoomMembers(
           senderIdentity: identity,
           senderUserId: currentUserId,
           recipients,
-          fileId: file.id,
+          fileId: fileId,
         });
       } finally {
         wipeDek(dek);
@@ -504,16 +537,16 @@ export async function backfillEncryptedFilesForRoomMembers(
         ...newKeys,
       ];
       try {
-        const written = await setFileEncryptionKeys(file.id, allKeys);
+        const written = await setFileEncryptionKeys(fileId, allKeys);
         for (const userId of written?.skippedUserIds ?? []) {
           const id = String(userId);
           if (!recipients.some((r) => String(r.userId) === id)) continue;
           missingFileIdsByMember[id] = [
             ...(missingFileIdsByMember[id] ?? []),
-            file.id,
+            fileId,
           ];
         }
-        fileResults.push({ fileId: file.id, success: true });
+        fileResults.push({ fileId: fileId, success: true });
       } catch (e) {
         const err = e as {
           response?: { status?: number; data?: unknown };
@@ -524,14 +557,14 @@ export async function backfillEncryptedFilesForRoomMembers(
         console.error(
           "[ENCRYPTION] setFileEncryptionKeys failed (backfill)",
           {
-            fileId: file.id,
+            fileId: fileId,
             status,
             data: err?.response?.data,
             message: err?.message,
           },
         );
         fileResults.push({
-          fileId: file.id,
+          fileId: fileId,
           success: false,
           error:
             e instanceof Error
@@ -541,12 +574,12 @@ export async function backfillEncryptedFilesForRoomMembers(
       }
     } catch (error) {
       fileResults.push({
-        fileId: file.id,
+        fileId: fileId,
         success: false,
         error: error instanceof Error ? error.message : "unknown error",
       });
     }
-    onProgress?.(i + 1, encryptedFiles.length);
+    onProgress?.(i + 1, fileIds.length);
   }
 
   const skippedMembers: SkippedRoomMember[] = [];

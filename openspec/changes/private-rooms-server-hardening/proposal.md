@@ -67,6 +67,10 @@ None.
 
 ### Modified Capabilities
 
+- `private-rooms/room-membership`: the backfill sweep wraps the entries
+  the server lists as missing and keeps the others, falling back to the
+  blind re-wrap of every file for every member when that read fails
+  (decided 2026-11-05 with task 14.2, design decision 20).
 - `private-rooms/server-contract`: owner change, edition gate, invitation
   e-mail, audit scope, recovery/offboarding
   endpoints, the copy right in archived private rooms and the public keys

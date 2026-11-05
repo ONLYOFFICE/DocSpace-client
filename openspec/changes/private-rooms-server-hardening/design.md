@@ -539,6 +539,20 @@ translations of the letter label (4.5).
     therefore the file history, not a dedicated route; the client decides
     how its History tab shows the new action (task 6.2).
 
+20. **The backfill sweep wraps the missing entries only (task 14.2).** With
+    the missing-keys route the sweep reads once which members lack an entry
+    on which files and wraps exactly those, keeping the entries other
+    senders wrote; the blind sweep that re-wrapped every file for every
+    member stays as the fallback when the read fails. This supersedes
+    decision 4 of `private-rooms-fanout-dialog-and-backfill` (archived,
+    confirmed by the user on 2026-10-20), whose alternative (c), a server
+    query, is what landed; the `room-membership` delta of this change
+    modifies "Backfill re-wraps every member" accordingly, and its scenario
+    "Existing wraps are replaced" holds on the fallback only. Alternative:
+    keep re-wrapping everything and use the route only to find late
+    members; rejected because every room open by a manager rewrote every
+    entry of every file for nothing.
+
 ## Risks / Trade-offs
 
 - [Backend schedule] → every server task is independent, and each client

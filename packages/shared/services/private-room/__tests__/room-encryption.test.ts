@@ -69,6 +69,7 @@ const getFileEncryptionAccessMock = vi.fn();
 const setFileEncryptionKeysMock = vi.fn();
 const getRoomEncryptionKeysMock = vi.fn();
 const getFilePublicKeysMock = vi.fn();
+const getRoomMissingFileKeysMock = vi.fn();
 
 vi.mock("../../../api/files", () => ({
   getFolder: (...args: unknown[]) => getFolderMock(...args),
@@ -82,6 +83,8 @@ vi.mock("../../../api/privacy", () => ({
   getRoomEncryptionKeys: (...args: unknown[]) =>
     getRoomEncryptionKeysMock(...args),
   getFilePublicKeys: (...args: unknown[]) => getFilePublicKeysMock(...args),
+  getRoomMissingFileKeys: (...args: unknown[]) =>
+    getRoomMissingFileKeysMock(...args),
 }));
 
 vi.mock("../../../api/files/filter", () => {
@@ -893,6 +896,8 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     setFileEncryptionKeysMock.mockResolvedValue({});
     getRoomEncryptionKeysMock.mockReset();
     getFilePublicKeysMock.mockReset();
+    getRoomMissingFileKeysMock.mockReset();
+    getRoomMissingFileKeysMock.mockRejectedValue(new Error("not served"));
 
     resetMockIDB();
     resetTofuStores();
@@ -901,6 +906,86 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
 
   afterEach(() => {
     vi.unstubAllGlobals();
+  });
+
+  it("Backfill wraps the missing files only", async () => {
+    const OTHER_FILE_ID = FILE_ID + 1;
+    getRoomMissingFileKeysMock.mockResolvedValue([
+      { userId: BOB, fileIds: [FILE_ID] },
+    ]);
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+      { userId: CAROL, publicKey: pubB64(await generateIdentityKeyPair()) },
+    ]);
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(getRoomMissingFileKeysMock).toHaveBeenCalledWith(ROOM_ID);
+    expect(getFolderMock).not.toHaveBeenCalled();
+    expect(getFileEncryptionAccessMock).toHaveBeenCalledTimes(1);
+    expect(getFileEncryptionAccessMock).not.toHaveBeenCalledWith(OTHER_FILE_ID);
+    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    const [fileId, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
+    expect(fileId).toBe(FILE_ID);
+    expect(
+      (keysPosted as ServerAccessKeyDto[]).map((k) => String(k.userId)).sort(),
+    ).toEqual([ALICE, BOB].sort());
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
+  });
+
+  it("Nothing missing: no file is read", async () => {
+    getRoomMissingFileKeysMock.mockResolvedValue([]);
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(result.fileResults).toEqual([]);
+    expect(getFolderMock).not.toHaveBeenCalled();
+    expect(getFileEncryptionAccessMock).not.toHaveBeenCalled();
+    expect(getRoomEncryptionKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("Backfill falls back when the missing-keys request fails", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(getRoomMissingFileKeysMock).toHaveBeenCalledWith(ROOM_ID);
+    expect(getFolderMock).toHaveBeenCalled();
+    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
   });
 
   it("returns empty result when there are no encrypted files", async () => {

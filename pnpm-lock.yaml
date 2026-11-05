@@ -3567,7 +3567,7 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-A4RavDIZ+ywi7VuPuUTmzzPq6aoFAxWdMZ2poi/f3FwygcMJJYRQRyyNbBh+VtoWAzzlZOeZdTCxSQGbhYBKLQ==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-KUA4CWbumg/wd5Er8GQlVhbHvjCzBPfiJ49kaeK6q0ApphaZu6Ybdw94cjmXpijqZHP2SPAJ6w7VgEPo/VZy0w==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.1.0
     engines: {node: '>=22'}
     peerDependencies:
@@ -5024,6 +5024,15 @@ packages:
     resolution: {integrity: sha512-Zz70EgjahNI7aCz8BZxM3vUGU44ycxEAzMuCUjLeA7SVhhOkg3ZgPjPJPvHjs6Rmky/dtmnu1WzjGHNHmhCoZQ==}
     peerDependencies:
       react: 19.2.8
+
+  '@tanstack/react-virtual@3.14.16':
+    resolution: {integrity: sha512-l7muFr3BozVei4DUizxqzqznyWO2bspAn5urGsllfSiw4SL86HreMniFTSXIfDX+Zpc7jHcO02NKYTg4hJtvlg==}
+    peerDependencies:
+      react: 19.2.8
+      react-dom: 19.2.8
+
+  '@tanstack/virtual-core@3.19.1':
+    resolution: {integrity: sha512-l2WWYlRblIesvv/iEs/5OIVQvr8EML3Wh4pxmdROlDrd5L9/J8Vk26MfTCOp2kA6CM5Ve0SDkPX5uupyrfA2AA==}
 
   '@testing-library/dom@10.4.2':
     resolution: {integrity: sha512-yzr2S9HyAIdhz2/6qHgbs665Q7PKVcDF05vsOlHPxG1mo36gKVesdYVeDLnXgfjJ03CrKRk08knc6+E/9m8v2Q==}
@@ -11782,6 +11791,7 @@ snapshots:
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@onlyoffice/docspace-api-sdk': 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
+      '@tanstack/react-virtual': 3.14.16(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       classnames: 2.5.1
       cnbuilder: 3.1.0
       copy-to-clipboard: 3.3.3
@@ -13080,6 +13090,14 @@ snapshots:
     dependencies:
       '@tanstack/query-core': 5.104.1
       react: 19.2.8
+
+  '@tanstack/react-virtual@3.14.16(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@tanstack/virtual-core': 3.19.1
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+
+  '@tanstack/virtual-core@3.19.1': {}
 
   '@testing-library/dom@10.4.2':
     dependencies:

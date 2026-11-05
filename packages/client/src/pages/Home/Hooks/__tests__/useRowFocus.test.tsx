@@ -140,6 +140,21 @@ describe("useRowFocus", () => {
       await new Promise((resolve) => requestAnimationFrame(resolve));
       expect(byTestId("search")).toHaveFocus();
     });
+
+    // A rename field sits in a row, inside the list: a caret moved while it
+    // has the focus - another user deleting the caret's item, say - was not
+    // moved by the keys typed there, and must not take the focus from it.
+    it("leaves the focus in a field inside a row", async () => {
+      const field = document.createElement("input");
+      field.dataset.testid = "rename";
+      byTestId("b-name").append(field);
+
+      moveCaret(field);
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+
+      expect(field).toHaveFocus();
+    });
   });
 
   // A tile is the item's own card inside a drag-and-drop wrapper, and the card
@@ -229,6 +244,26 @@ describe("useRowFocus", () => {
 
     expect(holder).not.toHaveAttribute("data-row-focus");
     expect(holder).not.toHaveAttribute("tabindex");
+  });
+
+  // A row removed with the focus in it (Enter opening a folder) gets no blur:
+  // its hold, and the window listener with it, ends with the next row held.
+  it("releases a held row the list removed once another row is held", async () => {
+    const hook = await focusRowA();
+    const holder = byTestId("a-name");
+    const removeListener = vi.spyOn(window, "removeEventListener");
+    holder.closest(".files-item")!.remove();
+
+    fireEvent.keyDown(window, { key: "ArrowDown" });
+    hook.rerender({ caret: { id: "row-b", fileExst: "docx" } });
+    await waitFor(() => expect(byTestId("b-name")).toHaveFocus());
+
+    expect(holder).not.toHaveAttribute("data-row-focus");
+    expect(removeListener).toHaveBeenCalledWith(
+      "pointerdown",
+      expect.any(Function),
+      true,
+    );
   });
 
   // Each list holds its own rows: another one going away leaves them be.
@@ -344,7 +379,42 @@ describe("useRowFocus", () => {
       fireEvent.keyDown(byTestId("search"), { key: "Tab" });
 
       expect(byTestId("a-card")).toHaveFocus();
-      expect(onRowFocus).toHaveBeenCalledWith({ id: "1", isFolder: false });
+      expect(onRowFocus).toHaveBeenCalledWith(
+        { id: "1", isFolder: false },
+        { standIn: true },
+      );
+    });
+
+    it("lands Tab into the list on the caret's row, which is no stand-in", () => {
+      const onRowFocus = vi.fn();
+      const hook = render(onRowFocus);
+      hook.rerender({ caret: CARET_B });
+      act(() => byTestId("search").focus());
+
+      fireEvent.keyDown(byTestId("search"), { key: "Tab" });
+
+      expect(byTestId("b-card")).toHaveFocus();
+      expect(onRowFocus).toHaveBeenCalledWith(
+        { id: "2", isFolder: false },
+        { standIn: false },
+      );
+    });
+
+    // The caret's row scrolled out of a virtualized list: the row on screen
+    // stands in for it, and says so, so a selection of several is kept.
+    it("marks the row on screen as a stand-in for a caret row not rendered", () => {
+      const onRowFocus = vi.fn();
+      const hook = render(onRowFocus);
+      hook.rerender({ caret: { id: "row-gone", fileExst: "docx" } });
+      act(() => byTestId("search").focus());
+
+      fireEvent.keyDown(byTestId("search"), { key: "Tab" });
+
+      expect(byTestId("a-card")).toHaveFocus();
+      expect(onRowFocus).toHaveBeenCalledWith(
+        { id: "1", isFolder: false },
+        { standIn: true },
+      );
     });
 
     it("releases the row when the focus moves on within the list", async () => {

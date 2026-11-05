@@ -47,6 +47,16 @@ type TCaretItem = {
 /** The item a row shows, as its element id says: `file_12` or `folder_7`. */
 export type TRowKey = { id: string; isFolder: boolean };
 
+/**
+ * How the row came to take the focus. `standIn` is set when the row is only
+ * the nearest one on screen, standing in for a caret row the list has not
+ * rendered (scrolled away) or for no caret at all: no choice of the user's,
+ * so it must not undo a selection of several the user made.
+ */
+export type TRowFocusOptions = { standIn?: boolean };
+
+type TRowHeld = Map<HTMLElement, () => void>;
+
 // Every row of the files list in each view: table, rows and tiles.
 const ROW = ".files-item";
 // The section's own scroller, by the id of its scrollbar: the info panel's
@@ -101,9 +111,13 @@ const HOLDER = "data-row-focus";
 
 const isHolder = (el: Element) => el.hasAttribute(HOLDER);
 
-// `held` collects the release of each row held this way, for the list that
-// holds them to end them all when it goes away: no listener outlives it.
-const rowHolder = (row: HTMLElement, held: Set<() => void>) => {
+// `held` maps each row holder to its release, for the list that holds them to
+// end them all when it goes away: no listener outlives it. A holder removed
+// with the focus in it (Enter opening a folder, a row scrolled out of a
+// virtualized list) gets no blur to end it: it is ended with the next row held.
+const rowHolder = (row: HTMLElement, held: TRowHeld) => {
+  for (const [el, release] of held) if (!el.isConnected) release();
+
   const item = row.firstElementChild;
   const holder =
     getComputedStyle(row).display === "contents"
@@ -129,7 +143,7 @@ const rowHolder = (row: HTMLElement, held: Set<() => void>) => {
     holder.removeAttribute(HOLDER);
     holder.removeEventListener("blur", onBlur);
     window.removeEventListener("pointerdown", onPointerDown, true);
-    held.delete(release);
+    held.delete(holder);
   };
   const onBlur = (e: FocusEvent) => {
     if (e.relatedTarget instanceof Element && e.relatedTarget.closest(LIST))
@@ -144,7 +158,7 @@ const rowHolder = (row: HTMLElement, held: Set<() => void>) => {
   };
   holder.addEventListener("blur", onBlur);
   window.addEventListener("pointerdown", onPointerDown, true);
-  held.add(release);
+  held.set(holder, release);
   return holder;
 };
 
@@ -179,6 +193,12 @@ const rowKey = (row: HTMLElement): TRowKey | null => {
   return match ? { id: match[2], isFolder: match[1] === "folder" } : null;
 };
 
+// A control the user types into: a caret moved while it has the focus was not
+// moved by those keys, which the list's hotkeys leave to the control.
+const isEditable = (el: Element | null) =>
+  el instanceof HTMLElement &&
+  (el.isContentEditable || el.matches("input, textarea, select"));
+
 // The first Tab stop after `from` (or, going back, before it).
 const stopBeside = (from: HTMLElement, back: boolean) => {
   const stops = getTabStops(document.body);
@@ -211,7 +231,7 @@ const stopBeside = (from: HTMLElement, back: boolean) => {
  */
 export const useRowFocus = (
   hotkeyCaret: TCaretItem,
-  onRowFocus: (key: TRowKey) => void,
+  onRowFocus: (key: TRowKey, options?: TRowFocusOptions) => void,
 ) => {
   const onRowFocusRef = useRef(onRowFocus);
   onRowFocusRef.current = onRowFocus;
@@ -222,7 +242,7 @@ export const useRowFocus = (
   // browser's toolbar, unlike Alt+Tab or a click on another window.
   const lastKeyTabRef = useRef(false);
   // The rows this list holds for the focus to come back to.
-  const heldRowsRef = useRef(new Set<() => void>());
+  const heldRowsRef = useRef<TRowHeld>(new Map());
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -248,10 +268,12 @@ export const useRowFocus = (
   // the focus goes to the new row, once it is rendered and scrolled to. The
   // section's scroller holds its sticky header too - the search box, the
   // filter - and a caret moved while the user is there (a delete ending)
-  // leaves them be.
+  // leaves them be, as does one moved while a field in a row has it (a rename):
+  // what the user types there is no move of the caret.
   useEffect(() => {
     if (!hotkeyCaret || !fromKeyboardRef.current) return;
     const { activeElement } = document;
+    if (isEditable(activeElement)) return;
     const list = document.querySelector(LIST);
     const inList =
       activeElement === document.body ||
@@ -360,12 +382,13 @@ export const useRowFocus = (
       const nextRow = rowOf(next ?? null);
       if (!nextRow) return;
 
-      const targetRow =
-        findRow(caretRef.current) ?? firstRowOnScreen() ?? nextRow;
+      const caretRow = findRow(caretRef.current);
+      const targetRow = caretRow ?? firstRowOnScreen() ?? nextRow;
       e.preventDefault();
       rowHolder(targetRow, heldRowsRef.current).focus();
       const key = rowKey(targetRow);
-      if (key) onRowFocusRef.current(key);
+      if (key)
+        onRowFocusRef.current(key, { standIn: !caretRow });
     };
 
     // Into the list without a key press the page saw - Shift+Tab back from
@@ -395,12 +418,14 @@ export const useRowFocus = (
       if (!row) return;
       if (relatedTarget instanceof Element && rowOf(relatedTarget)) return;
 
-      const caretRow = findRow(caretRef.current) ?? row;
+      const renderedCaretRow = findRow(caretRef.current);
+      const caretRow = renderedCaretRow ?? row;
       if (caretRow === row && isHolder(target)) return;
 
       rowHolder(caretRow, heldRowsRef.current).focus({ preventScroll: true });
       const key = rowKey(caretRow);
-      if (key) onRowFocusRef.current(key);
+      if (key)
+        onRowFocusRef.current(key, { standIn: !renderedCaretRow });
     };
 
     const heldRows = heldRowsRef.current;

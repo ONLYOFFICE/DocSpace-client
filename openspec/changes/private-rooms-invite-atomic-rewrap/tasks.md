@@ -30,7 +30,7 @@
 ## 5. Integration check
 
 - [ ] 5.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`), the client private-room E2E specs and the SDK private E2E folder (`cd packages/sdk && pnpm exec playwright test __tests__/e2e/private`); verify green. NEEDS A RE-RUN after the server change: green on 2026-10-28 without task 2.1 (gate, client private-room E2E 138 passed, SDK private E2E 33 passed and 15 skipped), to be run again once 2.1 is done (11.1 merged on `../server` on 2026-11-04).
-- [ ] 5.2 Confirm `openspec validate private-rooms-invite-atomic-rewrap --strict` passes. NEEDS A RE-RUN after the server change: passed on 2026-10-28 without task 2.1, to be run again after 2.1 and any artifact edits it brings.
+- [x] 5.2 Confirm `openspec validate private-rooms-invite-atomic-rewrap --strict` passes. NEEDS A RE-RUN after the server change: passed on 2026-10-28 without task 2.1, to be run again after 2.1 and any artifact edits it brings. Re-run 2026-11-05 after 2.1 and its artifact edits: `validate --all --strict` passes, 18 of 18.
 
 ## Workflow follow-up
 

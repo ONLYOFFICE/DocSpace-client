@@ -56,6 +56,7 @@ import type { Locator, Page } from "@playwright/test";
 import {
   emptyTemplateHandler,
   encryptedFilesHandlers,
+  filesSettingsHandler,
   folderHistoryHandler,
   privacyroomAccessHandlers,
   privateRoomListHandler,
@@ -934,13 +935,57 @@ test.describe("(private) — create / upload / download / preview", () => {
       .toBe(1);
   });
 
-  test.fixme(
-    "open-in-editor is blocked for encrypted documents with a toast",
-    async () => {
-      // Waits for private-rooms-editor-contract, which defines how the SDK
-      // opens an encrypted document in the editor.
-    },
-  );
+  // Spec: editor-integration, "SDK does not open encrypted files in the editor"
+  test("Open from the SDK", async ({ page, baseUrl, port, mockBoth }) => {
+    await serveRooms(mockBoth, port);
+    mockBoth(
+      filesSettingsHandler(port, { docServiceEncryptionSupported: false }),
+    );
+    await openRoom(page, baseUrl);
+
+    const editorPages: string[] = [];
+    page.on("request", (request) => {
+      if (request.url().includes("/doceditor")) editorPages.push(request.url());
+    });
+    await row(page, MEMO.serverTitle).dblclick();
+
+    // The name click and the row double-click each refuse, so several toasts.
+    await expect(
+      page
+        .getByTestId("toast-content")
+        .filter({ hasText: "Encrypted files cannot be opened in the editor" })
+        .first(),
+    ).toBeVisible();
+    expect(editorPages).toEqual([]);
+  });
+
+  test("Open from the SDK with capability", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveRooms(mockBoth, port);
+    mockBoth(filesSettingsHandler(port, { openEditorInSameTab: true }));
+    // The suite serves the SDK build only: the editor page is stood in for.
+    await page.route("**/doceditor**", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "text/html",
+        body: "<title>editor</title>",
+      }),
+    );
+    await openRoom(page, baseUrl);
+
+    const editorPage = page.waitForRequest((request) =>
+      request.url().includes("/doceditor"),
+    );
+    await row(page, MEMO.serverTitle).dblclick();
+
+    const url = new URL((await editorPage).url());
+    expect(url.pathname.endsWith("/doceditor")).toBe(true);
+    expect(url.searchParams.get("fileId")).toBe(String(MEMO.id));
+  });
 });
 
 test.describe("(private) — copy / move / duplicate (P1)", () => {

@@ -78,7 +78,7 @@ that says BLOCKED or "after <x>" is not started before that.
 
 ## 7. SDK opening
 
-- [ ] 7.1 After 2.2. SDK: open encrypted files through the key flow when the capability is present (`docs-layout/index.tsx:504` → `openFileInEditor` → `open-doc-editor.ts:79-143`, a full page navigation to `/doceditor?fileId=`), leaving the `onEditorOpen` host path (`:117-120`) to 9.11. Verify: un-fixme the editor test in `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts` as an assertion on the navigation (the suite serves only the SDK build) and the toast when the capability is false, run with `cd packages/sdk && pnpm exec playwright test __tests__/e2e/private`
+- [x] 7.1 After 2.2. SDK: open encrypted files through the key flow when the capability is present (`docs-layout/index.tsx:504` → `openFileInEditor` → `open-doc-editor.ts:79-143`, a full page navigation to `/doceditor?fileId=`), leaving the `onEditorOpen` host path (`:117-120`) to 9.11. Verify: un-fixme the editor test in `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts` as an assertion on the navigation (the suite serves only the SDK build) and the toast when the capability is false, run with `cd packages/sdk && pnpm exec playwright test __tests__/e2e/private`. Done 2026-11-05: with 2.3 the private page hands an encrypted file to `openFileInEditor` once the capability is present, the same navigation to `/doceditor?fileId=` as for a plain file; the former fixme became "Open from the SDK" (toast, no editor request, capability false) and "Open from the SDK with capability" (the navigation carries the file id, the editor page stood in for by a route), run on chromium against the test build
 
 ## 8. Integration
 

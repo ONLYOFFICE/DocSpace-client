@@ -188,7 +188,6 @@ const ChangeNameDialog = (props) => {
 									placeholder={field.placeholder}
 									isDisabled={isSaving}
 									onKeyDown={onKeyDown}
-									tabIndex={index + 1}
 									hasError={field.hasError}
 									testId={`${field.dataTestId}_input`}
 								/>

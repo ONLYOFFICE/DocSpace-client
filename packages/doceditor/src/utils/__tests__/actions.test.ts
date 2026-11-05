@@ -72,16 +72,42 @@ describe("getData", () => {
   /** What GET /files/settings answers: a capability, or a failure. */
   let filesSettings: { docServiceEncryptionSupported: boolean } | "down";
   let openedConfig: ReturnType<typeof encryptedConfig>;
+  /** openedit answers 415, as for a file the editors cannot open. */
+  let openEditRefused: boolean;
+  /** What GET /files/file/7 says of the file. */
+  let fileEncrypted: boolean;
 
   beforeEach(() => {
     filesSettings = { docServiceEncryptionSupported: true };
     openedConfig = encryptedConfig(true);
+    openEditRefused = false;
+    fileEncrypted = true;
     vi.stubGlobal(
       "fetch",
       vi.fn(async (request: Request) => {
         const { pathname } = new URL(request.url);
         if (pathname.endsWith("/files/file/7/openedit")) {
-          return json({ response: openedConfig });
+          return openEditRefused
+            ? new Response(
+                JSON.stringify({
+                  error: { message: "refused", type: "System.NotSupportedException" },
+                  status: 1,
+                  statusCode: 415,
+                }),
+                { status: 415, headers: { "Content-Type": "application/json" } },
+              )
+            : json({ response: openedConfig });
+        }
+        if (pathname.endsWith("/files/file/7")) {
+          return json({
+            response: { id: 7, ...(fileEncrypted && { encrypted: true }) },
+          });
+        }
+        if (pathname.endsWith("/authentication")) {
+          return json({ response: true });
+        }
+        if (pathname.endsWith("/files/docservice")) {
+          return json({ response: { docServiceUrl: "http://portal.test/ds-vpath/" } });
         }
         if (pathname.endsWith("/people/@self")) {
           return json({ response: { id: "user-1" } });
@@ -134,6 +160,36 @@ describe("getData", () => {
 
       expect(result.error).toBeUndefined();
       expect(result.docServiceEncryptionSupported).toBe(false);
+    });
+
+    it("Editor refused by the server", async () => {
+      openEditRefused = true;
+      filesSettings = { docServiceEncryptionSupported: false };
+
+      const result = await getData("7");
+
+      expect(result.error?.status).toBe("not-supported");
+      expect(result.docServiceEncryptionSupported).toBe(false);
+    });
+
+    it("keeps the format error of a plain file the editors cannot open", async () => {
+      openEditRefused = true;
+      fileEncrypted = false;
+      filesSettings = { docServiceEncryptionSupported: false };
+
+      const result = await getData("7");
+
+      expect(result.error?.status).toBe("not-supported");
+      expect(result.docServiceEncryptionSupported).toBeUndefined();
+    });
+
+    it("keeps the format error while the editors can encrypt", async () => {
+      openEditRefused = true;
+
+      const result = await getData("7");
+
+      expect(result.error?.status).toBe("not-supported");
+      expect(result.docServiceEncryptionSupported).toBeUndefined();
     });
 
     it("Plain file: the files settings are not read", async () => {

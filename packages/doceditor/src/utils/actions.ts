@@ -795,6 +795,22 @@ export async function getFileLink(fileId: number | string) {
 //   return res;
 // }
 
+/**
+ * For a 415 of openedit: false when the file is encrypted and the Document
+ * Server cannot edit encrypted files, which the server answers with the same
+ * status as a format the editors cannot open; undefined otherwise.
+ */
+// Spec: editor-integration, "Document Server capability check before opening"
+async function encryptedEditingRefusal(fileId: string, share?: string) {
+  const [file, filesSettings] = await Promise.all([
+    getFileById(fileId),
+    getFilesSettings(share),
+  ]);
+  return file?.encrypted && !isEncryptedEditingAvailable(filesSettings)
+    ? false
+    : undefined;
+}
+
 export async function getData(
   fileId: string,
   version?: string,
@@ -879,6 +895,10 @@ export async function getData(
       error: config,
 
       fileId,
+      docServiceEncryptionSupported:
+        "status" in config && config.status === "not-supported"
+          ? await encryptedEditingRefusal(fileId, share)
+          : undefined,
     };
 
     if (

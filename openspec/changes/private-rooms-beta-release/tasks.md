@@ -4,7 +4,7 @@ Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 20
 
 ## 0. Beta gate and decisions (evidence only, no code)
 
-- [ ] 0.1 The Document Server build shipped with the release is named and carries the crypto add-on (`private-rooms-editor-contract` 1.2), or `private-rooms-editor-contract` tasks 2.1 to 2.4 are archived. Verify: the build recorded in README.md.
+- [ ] 0.1 The Document Server build shipped with the release is named and carries the crypto add-on (`private-rooms-editor-contract` 1.2), or `private-rooms-editor-contract` tasks 2.1 to 2.4 are archived. Since `b562fc3fb1` (2026-11-05) the server refuses to create a private room (403) and to open an encrypted file of one (415) on a build without the add-on, so the second branch leaves private rooms unusable on such a build. Verify: the build recorded in README.md.
 - [ ] 0.2 Spreadsheets and presentations are covered: `private-rooms-editor-contract` 4.7 passes on the build of 0.1, or a follow-up change that opens them view-only and withholds their creation in private rooms is archived. Verify: the editor-contract record or `openspec list`.
 - [x] 0.3 The change that fixes the verified blockers of the second pre-PR review of 2026-11-03 is archived. Verify: `openspec list` shows it under `changes/archive`. Done 2026-11-03: `changes/archive/2026-11-03-private-rooms-pre-pr-review-2-fixes`.
 - [x] 0.4 Record proposal decisions 1 to 4 with their dates and owners in proposal.md. Verify: `npx -y @fission-ai/openspec@latest validate private-rooms-beta-release --strict`. Done 2026-11-03: the owner removed the flag without a server setting and accepted the account-link risk of `private-rooms-server-hardening` 12.1.

@@ -63,7 +63,8 @@ From the SHALL NOT requirements of `private-rooms/encryption-core`:
 
 - **Document Server build:** not named yet (beta gate item 0.1, left open by
   proposal decision 6). On a Document Server build without the crypto add-on,
-  encrypted files do not open in the editor.
+  private rooms cannot be created (the server answers 403 since `b562fc3fb1`)
+  and encrypted files do not open in the editor (415).
 - **Spreadsheets and presentations** (gate item 0.2, `private-rooms-editor-contract`
   4.7). On build 10.0.2.5 (run of 2026-10-30):
   - DS-17: a second session joining a held session with pending changes can

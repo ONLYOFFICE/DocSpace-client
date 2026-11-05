@@ -339,7 +339,6 @@ const buildFileDto = (
       ...(archived && {
         Edit: false,
         Delete: false,
-        Copy: true,
         Move: false,
         Rename: false,
         ReadHistory: true,
@@ -376,11 +375,15 @@ const buildFolderDto = (
     // FolderDtoHelper sets InRoom for the room's creator and for a user with
     // a direct share record; the mock's current user is always one of them.
     inRoom: true,
+    // FileSecurity.FilterEntryAsync denies Copy, Duplicate and IndexExport
+    // on a private room before the section rules, archived or not.
     ...(archived && {
       security: {
         Read: true,
         Download: true,
-        Copy: true,
+        Copy: false,
+        Duplicate: false,
+        IndexExport: false,
         Create: false,
         CopyTo: false,
         MoveTo: false,
@@ -394,9 +397,9 @@ const buildFolderDto = (
 /**
  * A folder inside the room, as FolderDtoHelper.GetAsync builds it: `private`
  * is the folder's own setting, which only a room carries, and the rights
- * follow FileSecurity.FilterEntryAsync for the room owner. In an active
- * private room a subfolder loses Copy and CopyTo; in Archive only Read,
- * ReadHistory, Copy and Download pass for a folder that is not the room.
+ * follow FileSecurity.FilterEntryAsync for the room owner. A subfolder of a
+ * private room loses Copy and CopyTo, archived or not; in Archive only Read,
+ * ReadHistory and Download pass otherwise for a folder that is not the room.
  */
 const buildSubfolderDto = (
   folder: EncryptedFolderSeed,
@@ -434,7 +437,7 @@ const buildSubfolderDto = (
       ? {
           Read: true,
           ReadHistory: true,
-          Copy: true,
+          Copy: false,
           Download: true,
           Create: false,
           Delete: false,

@@ -750,7 +750,7 @@ describe("encryptedFiles mock — the copy right (mirrors FileSecurity.FilterEnt
         Read: true,
         Download: true,
         ReadHistory: true,
-        Copy: true,
+        Copy: false,
         Edit: false,
         Rename: false,
         Move: false,
@@ -762,7 +762,14 @@ describe("encryptedFiles mock — the copy right (mirrors FileSecurity.FilterEnt
       rootFolderId: 11244,
       rootFolderType: 20,
       private: true,
-      security: { Create: false, CopyTo: false, MoveTo: false },
+      security: {
+        Create: false,
+        CopyTo: false,
+        MoveTo: false,
+        Copy: false,
+        Duplicate: false,
+        IndexExport: false,
+      },
     });
     expect(pathParts[0]).toEqual({
       id: 11244,
@@ -818,7 +825,7 @@ describe("encryptedFiles mock — an archived room and its folders (mirrors Fold
       private: false,
       security: {
         Read: true,
-        Copy: true,
+        Copy: false,
         Download: true,
         CopyTo: false,
         Create: false,

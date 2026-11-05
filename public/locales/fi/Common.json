@@ -1794,7 +1794,7 @@
   "PrivateRoomDisclosureBody": "Salaus suoritetaan kokonaan selaimessasi, joten tiedostoja voivat lukea vain kutsumasi henkilöt. Luotat koodiin, jonka työtilan portaalisi tarjoaa — lukitse istuntosi, kun et käytä sitä.",
   "PrivateRoomDisclosureDismiss": "Selvä",
   "PrivateRoomDisclosureTitle": "Päästä päähän -salaus selaimessa",
-  "PrivateRoomEditorNotSupported": "Salattuja tiedostoja ei voi vielä avata editorissa.",
+  "PrivateRoomEditorNotSupported": "Salattuja tiedostoja ei voi avata tässä editorissa.",
   "PrivateRoomEmptyBenefitAEAD": "Jokainen asiakirja saa oman avaimensa, joten yksi vuotanut tiedosto ei paljasta toista.",
   "PrivateRoomEmptyBenefitE2EE": "Tiedostosi salataan selaimessasi — vain kutsutut jäsenet voivat lukea niitä.",
   "PrivateRoomEmptyBenefitHPKE": "Tee yhteistyötä luotettujen tiimiläisten kanssa jakamatta koskaan salasanaasi.",

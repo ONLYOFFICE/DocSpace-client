@@ -1794,7 +1794,7 @@
   "PrivateRoomDisclosureBody": "A criptografia é executada inteiramente no seu navegador, portanto os arquivos só podem ser lidos pelas pessoas que você convidar. Você confia no código fornecido pelo seu espaço de trabalho — bloqueie sua sessão quando não estiver usando.",
   "PrivateRoomDisclosureDismiss": "Entendi",
   "PrivateRoomDisclosureTitle": "Criptografia de ponta a ponta no cliente",
-  "PrivateRoomEditorNotSupported": "Arquivos criptografados ainda não podem ser abertos no editor.",
+  "PrivateRoomEditorNotSupported": "Arquivos criptografados não podem ser abertos neste editor.",
   "PrivateRoomEmptyBenefitAEAD": "Cada documento recebe sua própria chave, portanto um arquivo vazado nunca expõe outro.",
   "PrivateRoomEmptyBenefitE2EE": "Seus arquivos são criptografados no seu navegador — somente os membros convidados podem lê-los.",
   "PrivateRoomEmptyBenefitHPKE": "Colabore com colegas de confiança sem nunca compartilhar sua senha.",

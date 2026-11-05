@@ -1794,7 +1794,7 @@
   "PrivateRoomDisclosureBody": "Šifriranje poteka v celoti v vašem brskalniku, zato lahko datoteke berejo samo osebe, ki jih povabite. Zanašate se na kodo, ki jo ponuja vaš delovnega prostora — sejo zaklenite, ko je ne uporabljate.",
   "PrivateRoomDisclosureDismiss": "Razumem",
   "PrivateRoomDisclosureTitle": "Šifriranje od konca do konca na strani odjemalca",
-  "PrivateRoomEditorNotSupported": "Šifriranih datotek še ni mogoče odpreti v urejevalniku.",
+  "PrivateRoomEditorNotSupported": "Šifriranih datotek ni mogoče odpreti v tem urejevalniku.",
   "PrivateRoomEmptyBenefitAEAD": "Vsak dokument dobi lasten ključ, zato ena uhajala datoteka ne razkrije druge.",
   "PrivateRoomEmptyBenefitE2EE": "Vaše datoteke so šifrirane v vašem brskalniku — berejo jih lahko samo povabljeni člani.",
   "PrivateRoomEmptyBenefitHPKE": "Sodelujte z zaupanja vrednimi sodelavci, ne da bi kdaj delili geslo.",

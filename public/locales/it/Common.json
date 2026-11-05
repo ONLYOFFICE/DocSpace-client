@@ -1794,7 +1794,7 @@
   "PrivateRoomDisclosureBody": "La crittografia viene eseguita interamente nel tuo browser, quindi i file sono leggibili solo dalle persone che inviti. Ti affidi al codice fornito dal tuo spazio di lavoro: blocca la sessione quando non la stai utilizzando.",
   "PrivateRoomDisclosureDismiss": "Ho capito",
   "PrivateRoomDisclosureTitle": "Crittografia end-to-end lato client",
-  "PrivateRoomEditorNotSupported": "I file crittografati non possono ancora essere aperti nell'editor.",
+  "PrivateRoomEditorNotSupported": "I file crittografati non possono essere aperti in questo editor.",
   "PrivateRoomEmptyBenefitAEAD": "Ogni documento ha la propria chiave, quindi un file compromesso non espone mai gli altri.",
   "PrivateRoomEmptyBenefitE2EE": "I file vengono cifrati nel browser — solo i membri invitati possono leggerli.",
   "PrivateRoomEmptyBenefitHPKE": "Collaborare con colleghi affidabili senza mai condividere la propria password.",

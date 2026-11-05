@@ -1794,7 +1794,7 @@
   "PrivateRoomDisclosureBody": "Encryption runs entirely in your browser, so files are readable only by the people you invite. You rely on the code your workspace serves — lock your session when you are not using it.",
   "PrivateRoomDisclosureDismiss": "Got it",
   "PrivateRoomDisclosureTitle": "Client-side end-to-end encryption",
-  "PrivateRoomEditorNotSupported": "Encrypted files cannot be opened in the editor yet.",
+  "PrivateRoomEditorNotSupported": "Encrypted files cannot be opened in this editor.",
   "PrivateRoomEmptyBenefitAEAD": "Every document gets its own key, so one leaked file never exposes another.",
   "PrivateRoomEmptyBenefitE2EE": "Your files are encrypted in your browser — only invited members can read them.",
   "PrivateRoomEmptyBenefitHPKE": "Collaborate with trusted teammates without ever sharing your password.",

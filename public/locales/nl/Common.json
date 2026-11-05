@@ -1794,7 +1794,7 @@
   "PrivateRoomDisclosureBody": "De versleuteling draait volledig in uw browser, dus bestanden kunnen alleen worden gelezen door de mensen die u uitnodigt. U vertrouwt op de code die uw werkruimte levert — vergrendel uw sessie wanneer u deze niet gebruikt.",
   "PrivateRoomDisclosureDismiss": "Begrepen",
   "PrivateRoomDisclosureTitle": "End-to-end-versleuteling aan de clientzijde",
-  "PrivateRoomEditorNotSupported": "Versleutelde bestanden kunnen nog niet in de editor worden geopend.",
+  "PrivateRoomEditorNotSupported": "Versleutelde bestanden kunnen niet in deze editor worden geopend.",
   "PrivateRoomEmptyBenefitAEAD": "Elk document krijgt zijn eigen sleutel, zodat één uitgelekt bestand nooit een ander blootstelt.",
   "PrivateRoomEmptyBenefitE2EE": "Uw bestanden worden versleuteld in uw browser — alleen uitgenodigde leden kunnen ze lezen.",
   "PrivateRoomEmptyBenefitHPKE": "Werk samen met vertrouwde teamleden zonder ooit uw wachtwoord te delen.",

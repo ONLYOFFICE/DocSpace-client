@@ -1794,7 +1794,7 @@
   "PrivateRoomDisclosureBody": "يتم تنفيذ التشفير بالكامل في متصفحك، لذا لا يمكن قراءة الملفات إلا للأشخاص الذين تدعوهم. أنت تثق في الشيفرة التي يقدمها مساحة العمل الخاص بك — اقفل جلستك عندما لا تستخدمها.",
   "PrivateRoomDisclosureDismiss": "حسنًا",
   "PrivateRoomDisclosureTitle": "التشفير من طرف إلى طرف على جهاز العميل",
-  "PrivateRoomEditorNotSupported": "لا يمكن فتح الملفات المشفرة في المحرر بعد.",
+  "PrivateRoomEditorNotSupported": "لا يمكن فتح الملفات المشفرة في هذا المحرر.",
   "PrivateRoomEmptyBenefitAEAD": "يحصل كل مستند على مفتاحه الخاص، لذا فإن تسرب ملف واحد لا يكشف عن غيره أبداً.",
   "PrivateRoomEmptyBenefitE2EE": "تُشفَّر ملفاتك في متصفحك — لا يمكن قراءتها إلا للأعضاء المدعوين.",
   "PrivateRoomEmptyBenefitHPKE": "تعاون مع زملائك الموثوقين دون مشاركة كلمة مرورك أبداً.",

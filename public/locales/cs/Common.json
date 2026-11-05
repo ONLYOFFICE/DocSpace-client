@@ -1794,7 +1794,7 @@
   "PrivateRoomDisclosureBody": "Šifrování probíhá zcela ve vašem prohlížeči, takže soubory mohou číst pouze lidé, které pozvete. Spoléháte na kód, který poskytuje váš pracovního prostoru — když relaci nepoužíváte, uzamkněte ji.",
   "PrivateRoomDisclosureDismiss": "Rozumím",
   "PrivateRoomDisclosureTitle": "Koncové šifrování na straně klienta",
-  "PrivateRoomEditorNotSupported": "Šifrované soubory zatím nelze otevřít v editoru.",
+  "PrivateRoomEditorNotSupported": "Šifrované soubory nelze otevřít v tomto editoru.",
   "PrivateRoomEmptyBenefitAEAD": "Každý dokument má svůj vlastní klíč, takže jeden uniklý soubor nikdy neodhalí ostatní.",
   "PrivateRoomEmptyBenefitE2EE": "Vaše soubory jsou šifrovány ve vašem prohlížeči — mohou je číst pouze pozvaní členové.",
   "PrivateRoomEmptyBenefitHPKE": "Spolupracujte s důvěryhodnými kolegy, aniž byste kdy sdíleli své heslo.",

@@ -953,7 +953,7 @@ test.describe("(private) — create / upload / download / preview", () => {
     await expect(
       page
         .getByTestId("toast-content")
-        .filter({ hasText: "Encrypted files cannot be opened in the editor" })
+        .filter({ hasText: "Encrypted files cannot be opened in this editor" })
         .first(),
     ).toBeVisible();
     expect(editorPages).toEqual([]);

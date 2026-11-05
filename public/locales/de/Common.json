@@ -1794,7 +1794,7 @@
   "PrivateRoomDisclosureBody": "Die Verschlüsselung läuft vollständig in Ihrem Browser, sodass Dateien nur von den von Ihnen eingeladenen Personen gelesen werden können. Sie verlassen sich auf den Code, den Ihr Arbeitsbereich bereitstellt — sperren Sie Ihre Sitzung, wenn Sie sie nicht verwenden.",
   "PrivateRoomDisclosureDismiss": "Verstanden",
   "PrivateRoomDisclosureTitle": "Ende-zu-Ende-Verschlüsselung im Browser",
-  "PrivateRoomEditorNotSupported": "Verschlüsselte Dateien können noch nicht im Editor geöffnet werden.",
+  "PrivateRoomEditorNotSupported": "Verschlüsselte Dateien können in diesem Editor nicht geöffnet werden.",
   "PrivateRoomEmptyBenefitAEAD": "Jedes Dokument erhält seinen eigenen Schlüssel, sodass eine kompromittierte Datei nie eine andere gefährdet.",
   "PrivateRoomEmptyBenefitE2EE": "Ihre Dateien werden in Ihrem Browser verschlüsselt — nur eingeladene Mitglieder können sie lesen.",
   "PrivateRoomEmptyBenefitHPKE": "Arbeiten Sie mit vertrauenswürdigen Kollegen zusammen, ohne jemals Ihr Passwort zu teilen.",

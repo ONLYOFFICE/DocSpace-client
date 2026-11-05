@@ -1794,7 +1794,7 @@
   "PrivateRoomDisclosureBody": "Šifrēšana pilnībā darbojas jūsu pārlūkprogrammā, tāpēc failus var lasīt tikai jūsu uzaicinātie cilvēki. Jūs paļaujaties uz kodu, ko nodrošina jūsu darbvietas — bloķējiet savu sesiju, kad to neizmantojat.",
   "PrivateRoomDisclosureDismiss": "Sapratu",
   "PrivateRoomDisclosureTitle": "Pilnīga šifrēšana klienta pusē",
-  "PrivateRoomEditorNotSupported": "Šifrētus failus pagaidām nevar atvērt redaktorā.",
+  "PrivateRoomEditorNotSupported": "Šifrētus failus nevar atvērt šajā redaktorā.",
   "PrivateRoomEmptyBenefitAEAD": "Katrs dokuments saņem savu atslēgu, tāpēc viens noplūdis fails nekad neatklāj citu.",
   "PrivateRoomEmptyBenefitE2EE": "Jūsu faili tiek šifrēti jūsu pārlūkprogrammā — tikai uzaicināti dalībnieki var tos lasīt.",
   "PrivateRoomEmptyBenefitHPKE": "Sadarbojieties ar uzticamiem komandas biedriem, nekad nekoplietojot savu paroli.",

@@ -1794,7 +1794,7 @@
   "PrivateRoomDisclosureBody": "Szyfrowanie odbywa się w całości w przeglądarce, więc pliki mogą odczytać tylko zaproszone przez Ciebie osoby. Polegasz na kodzie dostarczanym przez Twój przestrzeni roboczej — blokuj sesję, gdy z niej nie korzystasz.",
   "PrivateRoomDisclosureDismiss": "Rozumiem",
   "PrivateRoomDisclosureTitle": "Szyfrowanie end-to-end po stronie klienta",
-  "PrivateRoomEditorNotSupported": "Zaszyfrowanych plików nie można jeszcze otworzyć w edytorze.",
+  "PrivateRoomEditorNotSupported": "Zaszyfrowanych plików nie można otworzyć w tym edytorze.",
   "PrivateRoomEmptyBenefitAEAD": "Każdy dokument ma własny klucz, więc wyciek jednego pliku nigdy nie naraża pozostałych.",
   "PrivateRoomEmptyBenefitE2EE": "Twoje pliki są szyfrowane w przeglądarce — tylko zaproszeni członkowie mogą je odczytać.",
   "PrivateRoomEmptyBenefitHPKE": "Współpracuj z zaufanymi współpracownikami bez konieczności udostępniania swojego hasła.",

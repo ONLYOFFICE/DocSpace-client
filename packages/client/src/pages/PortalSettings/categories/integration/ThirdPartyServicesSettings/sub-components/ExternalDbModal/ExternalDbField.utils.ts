@@ -78,14 +78,14 @@ export const isFieldVisible = (
 ): boolean => {
   const { dependsOn, dependsOnValue, dependsOnValues } = field;
 
-  if (!dependsOn || (!dependsOnValue && dependsOnValues?.length === 0)) {
+  if (!dependsOn || (!dependsOnValue && !dependsOnValues?.length)) {
     return true;
   }
 
   const formValue = formValues[dependsOn];
 
-  return (
-    field.dependsOnValues?.some((value) => value === formValue) ||
-    formValue === dependsOnValue
-  );
+  // The list, when there is one, supersedes the single value.
+  return dependsOnValues?.length
+    ? dependsOnValues.some((value) => value === formValue)
+    : formValue === dependsOnValue;
 };

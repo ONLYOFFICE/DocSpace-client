@@ -64,7 +64,6 @@ export const CancelTextInput = ({ t, config, setConfig }) => {
 				onChange={onChangeCancelLabel}
 				placeholder={t("Common:CancelButton")}
 				value={value}
-				tabIndex={8}
 				testId="cancel_text_input"
 			/>
 		</>

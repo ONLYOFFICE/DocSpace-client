@@ -66,7 +66,11 @@ export type AccessItem = { access?: ShareAccessRights };
 export type TLink = TFileLink | { key: string; isLoaded: boolean };
 
 export type LinkRowProps = {
-  onAddClick?: () => Promise<void>;
+  onAddClick?: () => Promise<unknown>;
+  /** Move the focus to the first link's row once it is drawn. */
+  takeFocus?: boolean;
+  /** Called once the row has taken the focus. */
+  onFocusTaken?: () => void;
   links: TLink[] | null;
 
   changeShareOption: (item: TOption, link: TFileLink) => void;

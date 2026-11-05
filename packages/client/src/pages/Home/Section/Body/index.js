@@ -63,6 +63,7 @@ import EmptyRoomGroupContainer from "../../../../components/EmptyContainer/Empty
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
+import { useRowFocus } from "../../Hooks/useRowFocus";
 import NoAccessContainer from "../../../../components/EmptyContainer/NoAccessContainer";
 
 const separatorStyles = `width: 100vw;  position: absolute; height: 3px; z-index: 1;`;
@@ -101,6 +102,8 @@ const SectionBodyContent = (props) => {
     tooltipPageY,
     setHotkeyCaretStart,
     setHotkeyCaret,
+    hotkeyCaret,
+    getSelection,
     scrollToItem,
     setScrollToItem,
     filesList,
@@ -121,6 +124,33 @@ const SectionBodyContent = (props) => {
     draggedFiles,
     setIsChatDropTarget,
   } = props;
+
+  // A row the keyboard focused as a whole, coming into the list, becomes the
+  // selection and the caret. A selection of several items the row is part of
+  // is kept: passing through the list with Tab moves the caret only. A row
+  // outside it takes the selection, so the focus and the selection agree -
+  // unless it only stands in for a caret row scrolled away: then a selection
+  // of several, which the user made, is kept and the row takes the caret.
+  const onRowFocus = React.useCallback(
+    ({ id, isFolder }, { standIn = false } = {}) => {
+      const item = filesList.find(
+        (file) => String(file.id) === id && !!file.isFolder === isFolder,
+      );
+      if (!item) return;
+      const selection = getSelection();
+      const isSelected = selection.some(
+        (file) => file.id === item.id && !!file.isFolder === isFolder,
+      );
+      if (!isSelected && !(standIn && selection.length > 1))
+        setSelection([item]);
+      setHotkeyCaret(item);
+      setHotkeyCaretStart(item);
+    },
+    [filesList, getSelection, setSelection, setHotkeyCaret, setHotkeyCaretStart],
+  );
+
+  // The real focus follows the keyboard caret, and the list is one Tab stop.
+  useRowFocus(hotkeyCaret, onRowFocus);
 
   const attachFilesToChat = useAttachHostFilesToChat();
 
@@ -523,7 +553,12 @@ const SectionBodyContent = (props) => {
     <>
       <KnowledgeVectorizationBar />
       <ClientSearchProgress />
-      <FileViewComponent />
+      {/* Where the list is for useRowFocus in every layout: the mobile one
+          has no section scroller to find it by. No box of its own, so the
+          view lays out as before. */}
+      <div data-files-list="" style={{ display: "contents" }}>
+        <FileViewComponent />
+      </div>
     </>
   );
 };
@@ -553,6 +588,7 @@ export default inject(
       setBufferSelection,
       setHotkeyCaretStart,
       setHotkeyCaret,
+      hotkeyCaret,
       scrollToItem,
       setScrollToItem,
       filesList,
@@ -592,6 +628,10 @@ export default inject(
       tooltipPageY,
       setHotkeyCaretStart,
       setHotkeyCaret,
+      hotkeyCaret,
+      // Read when a row takes the focus, not on render: the body need not
+      // re-render with every change of the selection.
+      getSelection: () => filesStore.selection,
       scrollToItem,
       setScrollToItem,
       filesList,

@@ -127,6 +127,8 @@ const ProfileCardComponent = ({
     setHidden(true);
   };
 
+  const handleSetPassword = () => setChangePasswordVisible(true);
+
   const handleEditPortalName = () => {
     // On desktop/tablet all customization sections live on a single page,
     // so we link to the portal-renaming anchor to scroll straight to it.
@@ -247,7 +249,7 @@ const ProfileCardComponent = ({
             <Link
               className={styles.profileCardLink}
               type={LinkType.action}
-              onClick={() => setChangePasswordVisible(true)}
+              onClick={handleSetPassword}
               color="accent"
               isHovered
             >

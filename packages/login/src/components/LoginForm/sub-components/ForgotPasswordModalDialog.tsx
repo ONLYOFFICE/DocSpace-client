@@ -236,7 +236,6 @@ const ForgotPasswordModalDialog = ({
               name="e-mail"
               size={InputSize.base}
               scale
-              tabIndex={2}
               isDisabled={isLoading}
               value={email}
               onChange={onChangeEmail}
@@ -274,7 +273,6 @@ const ForgotPasswordModalDialog = ({
           onClick={onSendPasswordInstructions}
           isLoading={isLoading}
           isDisabled={isLoading}
-          tabIndex={2}
           testId="forgot_password_send_button"
         />
         <Button
@@ -288,7 +286,6 @@ const ForgotPasswordModalDialog = ({
           onClick={onDialogClose}
           // isLoading={isLoading}
           isDisabled={isLoading}
-          tabIndex={2}
           testId="forgot_password_cancel_button"
         />
       </ModalDialog.Footer>

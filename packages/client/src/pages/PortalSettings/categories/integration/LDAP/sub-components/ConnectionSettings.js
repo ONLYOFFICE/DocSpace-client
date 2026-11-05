@@ -114,7 +114,6 @@ const ConnectionSettings = (props) => {
             value={server}
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={3}
             dataTestId="server_field"
           />
         </FieldContainer>
@@ -137,7 +136,6 @@ const ConnectionSettings = (props) => {
             value={userDN}
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={5}
             dataTestId="user_dn_field"
           />
         </FieldContainer>
@@ -160,7 +158,6 @@ const ConnectionSettings = (props) => {
             value={loginAttribute}
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={7}
             dataTestId="login_attribute_field"
           />
         </FieldContainer>
@@ -186,7 +183,6 @@ const ConnectionSettings = (props) => {
             value={portNumber}
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={4}
             dataTestId="port_number_field"
           />
         </FieldContainer>
@@ -211,7 +207,6 @@ const ConnectionSettings = (props) => {
             value={userFilter}
             heightTextArea={100}
             isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={6}
             dataTestId="user_filter_field"
           />
         </FieldContainer>

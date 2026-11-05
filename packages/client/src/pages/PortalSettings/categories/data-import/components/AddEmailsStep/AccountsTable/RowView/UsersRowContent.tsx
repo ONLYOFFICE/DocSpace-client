@@ -33,7 +33,7 @@
 	* SPDX-License-Identifier: AGPL-3.0-only
 	*/
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useId } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -83,6 +83,8 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 	]);
 
 	const [prevEmail, setPrevEmail] = useState(email);
+	// Every row's button is "Change email": the user's name tells them apart.
+	const nameId = useId();
 	const [tempEmail, setTempEmail] = useState(email);
 	const [isEmailValid, setIsEmailValid] = useState(email.length > 0);
 
@@ -171,7 +173,7 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 	return (
 		<RowContent className={styles.styledRowContentEmail} sectionWidth={sectionWidth}>
 			<div className="import-accounts-name">
-				<Text fontWeight={600} fontSize="14px">
+				<Text id={nameId} fontWeight={600} fontSize="14px">
 					{displayName}
 				</Text>
 				<Text
@@ -243,6 +245,7 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 					tabIndex={0}
 					// Only an icon shows: the name comes from here.
 					aria-label={t("PeopleTranslations:EmailChangeButton")}
+					aria-describedby={nameId}
 					onKeyDown={handleEmailKeyDown}
 				>
 					<EditSvg />

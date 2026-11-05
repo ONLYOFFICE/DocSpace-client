@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useId } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -68,9 +68,15 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
     setOpenedEmailKey,
   } = props as InjectedAddEmailTableRowProps;
 
-  const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
+  const { t, ready } = useTranslation([
+    "SMTPSettings",
+    "Settings",
+    "Common",
+    "PeopleTranslations",
+  ]);
 
   const [prevEmail, setPrevEmail] = useState(email);
+  const emailTextId = useId();
   const [tempEmail, setTempEmail] = useState(email);
   const [isEmailValid, setIsEmailValid] = useState(email.length > 0);
   const [isPrevEmailValid, setIsPrevEmailValid] = useState(email.length > 0);
@@ -242,12 +248,21 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
             onClick={openEmail}
             role="button"
             tabIndex={0}
+            // Named by what it does, described by the email it changes: its
+            // text alone read as the address, with no hint that it edits.
+            aria-label={t("PeopleTranslations:EmailChangeButton")}
+            aria-describedby={emailTextId}
             onKeyDown={handleEmailKeyDown}
             className="user-email"
             ref={emailTextRef}
           >
             <EditSvg />
-            <Text color={globalColors.gray} className="user-email" truncate>
+            <Text
+              id={emailTextId}
+              color={globalColors.gray}
+              className="user-email"
+              truncate
+            >
               {prevEmail !== "" ? prevEmail : t("Settings:NoEmail")}
             </Text>
           </span>

@@ -19,7 +19,7 @@
   "FormRoomAINotConnectedDescription": "回答を構造化データとして保存します。「Ask AI」でAI搭載の分析を利用するには、スペース設定でデータベース同期を有効にしてください。",
   "FormRoomAIProviderNotConnected": "フォームデータを「Ask AI」で分析し、グラフを作成してインサイトを発見するには、ワークスペースの設定でAIプロバイダーを接続してください。",
   "FormRoomAIProviderNotConnectedAskAdmin": "「Ask AI」でフォームデータを分析し、グラフを作成してインサイトを得るには、<1>スーパー管理者</1>にワークスペース設定でAIプロバイダーを接続して有効にするよう依頼してください。",
-  "FormRoomAIReadyDescriptionFile": "AIこのフォームの回答調査し、インサイトを生成しデータを可視化する依頼してください。",
+  "FormRoomAIReadyDescriptionFile": "AIに質問して、このフォームの回答を調べたり、インサイトを生成したり、データを可視化したりできます。",
   "FormRoomAIReadyDescriptionFolder": "フォームからの回答は、接続されたデータベースにここに保存されます。AIでデータを分析するには、特定のフォームを開いて「Ask AI」をクリックしてください。",
   "FormRoomAIReadyDescriptionRoom": "「Ask AI」でデータを分析し、グラフを作成してインサイトを発見しましょう。開始するには、フォームを選択して「Ask AI」をクリックしてください。",
   "FormRoomAIReadyTitle": "AI分析の準備が完了しました",

@@ -19,7 +19,7 @@
   "FormRoomAINotConnectedDescription": "Przechowuj odpowiedzi jako dane ustrukturyzowane. Włącz synchronizację bazy danych w ustawieniach obszaru, aby odblokować analizę opartą na AI za pomocą \"Ask AI\".",
   "FormRoomAIProviderNotConnected": "Połącz dostawcę AI w ustawieniach przestrzeni roboczej, aby analizować dane z formularzy za pomocą \"Ask AI\", tworzyć wykresy i odkrywać nowe spostrzeżenia.",
   "FormRoomAIProviderNotConnectedAskAdmin": "Poproś <1>superadministratora</1> o podłączenie i włączenie dostawcy AI w ustawieniach przestrzeni roboczej, aby analizować dane formularzy za pomocą \"Ask AI\", tworzyć wykresy i odkrywać wnioski.",
-  "FormRoomAIReadyDescriptionFile": "Popś o przeanalizowanie odpowiedzi z formular wniosków iiz danych.",
+  "FormRoomAIReadyDescriptionFile": "Zapytaj AI, aby przeanalizować odpowiedzi z tego formularza, wygenerować wnioski i zwizualizować dane.",
   "FormRoomAIReadyDescriptionFolder": "Odpowiedzi z formularzy są przechowywane tutaj w połączonej bazie danych. Aby przeanalizować dane za pomocą AI, otwórz konkretny formularz i kliknij \"Ask AI\".",
   "FormRoomAIReadyDescriptionRoom": "Analizuj dane za pomocą funkcji \"Ask AI\", twórz wykresy i odkrywaj nowe spostrzeżenia. Wybierz formularz i kliknij \"Ask AI\", aby zacząć.",
   "FormRoomAIReadyTitle": "Analiza AI jest gotowa",

@@ -68,7 +68,7 @@ const WIDTH_KEY = "infoPanelWidth";
 const DEFAULT_WIDTH = 400;
 const MAX_WIDTH = 800;
 const SECTION_MIN_WIDTH = 416;
-/** The name column's own minimum (Home TableHeader `minWidth`). */
+/** The name column's own minimum (the DataTable's `fill` column). */
 const NAME_MIN_WIDTH = 210;
 
 const WIDE = { width: 1920, height: 1080 };
@@ -121,8 +121,7 @@ const launcherOffset = async (page: Page) => {
 
   return (
     placement?.arg as
-      | { position: { offset: { web: { horizontal: number } } } }
-      | undefined
+      { position: { offset: { web: { horizontal: number } } } } | undefined
   )?.position.offset.web.horizontal;
 };
 
@@ -176,7 +175,8 @@ const openPanelFromMenu = async (page: Page) => {
   await expect(panel(page)).toBeVisible();
 };
 
-const isDesktopLayout = (page: Page) => (page.viewportSize()?.width ?? 0) >= 1024;
+const isDesktopLayout = (page: Page) =>
+  (page.viewportSize()?.width ?? 0) >= 1024;
 
 /** A drag of the edge by a finger, as pointer events with `pointerType: "touch"`. */
 const touchDragEdge = async (page: Page, dx: number) => {
@@ -338,15 +338,13 @@ test.describe("Info panel resize on a desktop", () => {
     const header = page.getByTestId("table-header");
     await expect(header).toBeVisible();
 
-    await expect
-      .poll(() => header.evaluate((el) => el.style.gridTemplateColumns))
-      .not.toBe("");
-
-    const columns = await header.evaluate((el) =>
-      el.style.gridTemplateColumns.split(" ").map((size) => parseFloat(size)),
-    );
+    const columns = await header
+      .getByRole("columnheader")
+      .evaluateAll((cells) =>
+        cells.map((cell) => cell.getBoundingClientRect().width),
+      );
     expect(columns[0]).toBeGreaterThanOrEqual(NAME_MIN_WIDTH);
-    expect(columns.every((size) => size >= 0)).toBe(true);
+    expect(columns.every((size) => size > 0)).toBe(true);
     await expect(
       page.getByTestId("table-body").locator(".table-row").first(),
     ).toBeVisible();

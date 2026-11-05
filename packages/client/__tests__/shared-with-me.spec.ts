@@ -93,7 +93,7 @@ test.describe("Shared with me", () => {
 
     // Should not have any table list items
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "shared-with-me",
       "shared-with-me-empty.png",
@@ -235,7 +235,9 @@ test.describe("Shared with me", () => {
     const table = page.getByTestId("table-header");
     await expect(table).toBeVisible();
 
-    const sharedByColumn = table.getByTestId("column-SharedByShareWithMe");
+    const sharedByColumn = table.getByTestId(
+      "data-table-header-SharedByShareWithMe",
+    );
     await expect(sharedByColumn).toBeVisible();
   });
 
@@ -248,13 +250,13 @@ test.describe("Shared with me", () => {
     const tableHeader = page.getByTestId("table-header");
     await expect(tableHeader).toBeVisible();
 
-    const tableSettings = tableHeader.getByTestId("settings-block");
+    const tableSettings = tableHeader.getByTestId("data-table-settings-button");
     await expect(tableSettings).toBeVisible();
 
-    tableSettings.click();
+    await tableSettings.click();
 
     const sharedByOption = page.getByTestId(
-      "table_settings_SharedByShareWithMe",
+      "data-table-settings-SharedByShareWithMe",
     );
 
     await expect(sharedByOption).toBeVisible();
@@ -262,7 +264,7 @@ test.describe("Shared with me", () => {
     await sharedByOption.uncheck();
 
     const sharedByColumn = tableHeader.getByTestId(
-      "column-SharedByShareWithMe",
+      "data-table-header-SharedByShareWithMe",
     );
     await expect(sharedByColumn).not.toBeVisible();
   });
@@ -277,7 +279,7 @@ test.describe("Shared with me", () => {
     await expect(table).toBeVisible();
 
     const accessLevelColumn = table.getByTestId(
-      "column-AccessLevelShareWithMe",
+      "data-table-header-AccessLevelShareWithMe",
     );
     await expect(accessLevelColumn).toBeVisible();
   });
@@ -291,13 +293,13 @@ test.describe("Shared with me", () => {
     const tableHeader = page.getByTestId("table-header");
     await expect(tableHeader).toBeVisible();
 
-    const tableSettings = tableHeader.getByTestId("settings-block");
+    const tableSettings = tableHeader.getByTestId("data-table-settings-button");
     await expect(tableSettings).toBeVisible();
 
-    tableSettings.click();
+    await tableSettings.click();
 
     const accessLevelOption = page.getByTestId(
-      "table_settings_AccessLevelShareWithMe",
+      "data-table-settings-AccessLevelShareWithMe",
     );
 
     await expect(accessLevelOption).toBeVisible();
@@ -305,7 +307,7 @@ test.describe("Shared with me", () => {
     await accessLevelOption.uncheck();
 
     const accessLevelColumn = tableHeader.getByTestId(
-      "column-AccessLevelShareWithMe",
+      "data-table-header-AccessLevelShareWithMe",
     );
     await expect(accessLevelColumn).not.toBeVisible();
   });

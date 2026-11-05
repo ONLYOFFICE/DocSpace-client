@@ -65,7 +65,11 @@ const describeFocus = (page: Page) =>
 
     const rect = el.getBoundingClientRect();
     let visible = rect.width > 0 && rect.height > 0;
-    for (let node: Element | null = el; node && visible; node = node.parentElement) {
+    for (
+      let node: Element | null = el;
+      node && visible;
+      node = node.parentElement
+    ) {
       const style = getComputedStyle(node);
       if (
         style.display === "none" ||
@@ -94,7 +98,11 @@ const describeFocus = (page: Page) =>
             parseFloat(style.outlineOffset) + parseFloat(style.outlineWidth),
           );
     const clipped = new Set<string>();
-    for (let node = el.parentElement; node && reach > 0; node = node.parentElement) {
+    for (
+      let node = el.parentElement;
+      node && reach > 0;
+      node = node.parentElement
+    ) {
       const s = getComputedStyle(node);
       if (s.overflowX === "visible" && s.overflowY === "visible") continue;
       const box = node.getBoundingClientRect();
@@ -229,8 +237,8 @@ test.describe("Keyboard navigation: rooms", () => {
       "text-input",
       "filter_icon_button",
       "filter_sort_combobox",
-      "column-Name",
-      "table-settings-button",
+      "data-table-sort-Name",
+      "data-table-settings-button",
       "dev-tools-bar",
       "profile_user_icon_button",
     ]) {
@@ -364,7 +372,10 @@ test.describe("Keyboard navigation: rooms", () => {
   test("a column is sorted from the keyboard", async ({ page, baseUrl }) => {
     await openRooms(page, baseUrl);
 
-    const header = await tabTo(page, (s) => s.name.startsWith('div "Name'));
+    const header = await tabTo(
+      page,
+      (s) => s.testId === "data-table-sort-Name",
+    );
     expect(header.ring).toBe(true);
 
     const request = page.waitForRequest((r) =>

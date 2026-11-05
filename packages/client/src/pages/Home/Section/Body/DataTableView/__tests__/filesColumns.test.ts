@@ -13,8 +13,8 @@ import type {
 } from "../DataTableView.types";
 import TableStore from "SRC_DIR/store/TableStore";
 
-// The installed ui-kit package predates the DataTable, so the client's own
-// test run cannot resolve it; the two column helpers are all this file needs.
+// The two column helpers are all this file needs, and as stand-ins they keep
+// the options they were given, which the tests then read.
 vi.mock("@onlyoffice/apps-ui-kit/components/data-table", () => ({
   DATA_TABLE_SETTINGS_WIDTH: 24,
   // What the options asked for, kept on the column so a test can read it.

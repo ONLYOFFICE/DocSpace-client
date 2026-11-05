@@ -934,10 +934,10 @@ export const encryptedFilesHandlers = (
         if (named.some((userId) => !guidRe.test(userId))) {
           return errorResponse(400, "The value is not valid");
         }
-        const subjects = named.length > 0 ? named : [...members];
+        const subjects = named.length > 0 ? named : Array.from(members);
         const encrypted = Array.from(files.values()).filter((f) => f.encrypted);
         const answer: { userId: string; fileIds: number[] }[] = [];
-        for (const userId of new Set(subjects.map(String))) {
+        for (const userId of Array.from(new Set(subjects.map(String)))) {
           const fileIds = encrypted
             .filter(
               (f) =>

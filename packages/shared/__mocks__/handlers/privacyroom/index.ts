@@ -382,7 +382,9 @@ export const privacyroomAccessHandlers = (
           return errorResponse(400, "The value is not valid");
         }
         const answer: Array<Omit<TEncryptionKeyPair, "privateKeyEnc">> = [];
-        for (const userId of new Set(requested.map((u) => u.toLowerCase()))) {
+        for (const userId of Array.from(
+          new Set(requested.map((u) => u.toLowerCase())),
+        )) {
           const stored =
             userKeys.get(userId) ??
             (keys ?? []).filter((k) => String(k.userId).toLowerCase() === userId);

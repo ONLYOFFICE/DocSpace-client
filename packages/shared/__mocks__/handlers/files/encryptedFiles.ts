@@ -850,8 +850,8 @@ export const encryptedFilesHandlers = (
      * 404 for a missing file, 415 for a file outside a private room
      * (NotSupportedException); SanitizeAccessKeys drops entries without a
      * public key and keeps the private half only on the caller's entries.
-     * The private-room check accepts RootFolderType VirtualRooms only, so
-     * every file of an archived room is answered 415 as well.
+     * Since bd89a24dcd a file of an archived private room is accepted like
+     * one of an active room.
      */
     http.get(
       `${apiBase}/files/file/:fileId(\\d+)/publickeys`,
@@ -864,7 +864,7 @@ export const encryptedFilesHandlers = (
           url: new URL(request.url).pathname,
         });
         if (!f) return errorResponse(404, `file ${fileId} not found`);
-        if (archived || outsidePrivateRoom.has(fileId)) {
+        if (outsidePrivateRoom.has(fileId)) {
           return errorResponse(415, "Unsupported Media Type");
         }
         return okResponse(

@@ -415,7 +415,7 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors S
     expect(res.status).toBe(415);
   });
 
-  it("File in an archived private room answers 415 today", async () => {
+  it("File in an archived private room", async () => {
     const keysHandle: { current: EncryptedFilesHandlerHandle | null } = {
       current: null,
     };
@@ -434,8 +434,12 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors S
     ]);
 
     const res = await fetch(PUBLIC_KEYS_URL(8));
+    const body = (await res.json()) as { response: unknown[] };
 
-    expect(res.status).toBe(415);
+    expect(res.status).toBe(200);
+    expect(body.response).toEqual([
+      { id: "a", userId: ALICE_ID, publicKey: "PK-A", privateKeyEnc: "ENC-A", date: "", cryptoEngineId: "" },
+    ]);
   });
 
   it("drops entries without a public key and keeps the private half only on the caller's entries", async () => {

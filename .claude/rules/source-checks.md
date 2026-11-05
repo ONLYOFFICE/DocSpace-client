@@ -60,8 +60,9 @@ wrong place, move it in the markup. `tabindex-allowlist.json` is **empty**
 and stays so: a new positive value fails the push rather than joining it.
 Directories are excluded by whole path segment, not by the shared walker's
 substring match, so `categories/common` and other `common`/`test`-named
-directories are scanned. The check reads values on the line itself: a computed
-`tabIndex={index + 1}` is not caught.
+directories are scanned. The check reads values on the line itself: a literal,
+or an offset added to a counter (`tabIndex={index + 1}`). Any other computed
+value - a variable, a ternary - is not caught.
 
 ## Images (images.test.js)
 

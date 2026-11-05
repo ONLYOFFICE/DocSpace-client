@@ -75,7 +75,13 @@ const isExcluded = (relPath) =>
   relPath.split("/").some((segment) => excludedSegments.has(segment));
 const sourcePattern = /\.(js|jsx|ts|tsx)$/;
 // `tabIndex={2}`, `tabIndex: 2`, `tabindex="2"` - any value above zero.
-const positiveTabIndex = /tab[iI]ndex\s*(?:=\s*\{?\s*["']?|:\s*["']?)0*[1-9]/;
+const literalTabIndex = /tab[iI]ndex\s*(?:=\s*\{?\s*["']?|:\s*["']?)0*[1-9]/;
+// `tabIndex={index + 1}` - an offset added to a counter, the way a list of
+// fields numbers itself; it is positive for every item.
+const offsetTabIndex = /tab[iI]ndex\s*=\s*\{[^}]*\+\s*0*[1-9]/;
+const positiveTabIndex = {
+  test: (line) => literalTabIndex.test(line) || offsetTabIndex.test(line),
+};
 const commentPrefix = /^\s*(\/\/|\/?\*)/;
 const toRelPath = (filePath) =>
   path.relative(BASE_DIR, filePath).split(path.sep).join("/");

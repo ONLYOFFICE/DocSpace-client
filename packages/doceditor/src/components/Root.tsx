@@ -128,6 +128,7 @@ const Root = ({
 
   deepLinkSettings,
   baseSdkConfig,
+  docServiceEncryptionSupported,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -369,6 +370,7 @@ const Root = ({
           isSkipError={!!isSkipError}
           onDownloadAs={onDownloadAs}
           filesSettings={filesSettings}
+          docServiceEncryptionSupported={docServiceEncryptionSupported}
           shareKey={shareKey}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}

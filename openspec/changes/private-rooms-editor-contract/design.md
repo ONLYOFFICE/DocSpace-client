@@ -878,7 +878,11 @@ land. The same commit changed the private-room file-key contract
    navigation; the SDK decision moved to `refusesEncryptedOpen` of
    `docs-layout/open-encrypted.ts`, fed the files settings of
    `DocsSettingsStore`, so an encrypted file opens through the same path
-   as a plain one once the capability is present.
+   as a plain one once the capability is present. Task 2.4 (2026-11-05):
+   the doceditor reads the files settings in `getData` for an encrypted
+   file only, a failed read counting as absent, and `Editor` renders the
+   message in place of the editor without mounting the key hook when the
+   capability is absent.
 
 3. **Co-editing allowed (decided 2026-10-29).** The Document Server encrypts
    every change with the DEK and stores only ciphertext, and each co-editor's

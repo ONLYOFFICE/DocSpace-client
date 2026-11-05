@@ -45,7 +45,9 @@ import type {
   TFile,
   TFileFillingFormStatus,
   TFileLink,
+  TFilesSettings,
 } from "@docspace/shared/api/files/types";
+import { isEncryptedEditingAvailable } from "@docspace/shared/services/private-room/editor-capability";
 import { TUser } from "@docspace/shared/api/people/types";
 import type {
   TGetColorTheme,
@@ -391,6 +393,33 @@ export async function getSettings(share?: string) {
     return settings.response as TSettings;
   } catch (error) {
     logger.error(`Error in getSettings: ${error}`);
+  }
+}
+
+/** The files settings of the portal; undefined when they cannot be read. */
+export async function getFilesSettings(share?: string) {
+  logger.debug("Start GET /files/settings");
+
+  try {
+    const [getFilesSettingsRes] = await createRequest(
+      ["/files/settings"],
+      [share ? ["Request-Token", share] : ["", ""]],
+      "GET",
+      undefined,
+    );
+
+    const res = await fetch(getFilesSettingsRes);
+
+    if (!res.ok) {
+      logger.error(`error: ${res.status}, GET /files/settings failed`);
+      return;
+    }
+
+    const settings = await res.json();
+
+    return settings.response as TFilesSettings;
+  } catch (error) {
+    logger.error(`Error in getFilesSettings: ${error}`);
   }
 }
 
@@ -796,6 +825,10 @@ export async function getData(
 
     if ("editorConfig" in config && typeof settings !== "string") {
       const newFileId = config.file.id.toString();
+      // Spec: editor-integration, "Document Server capability check before opening"
+      const docServiceEncryptionSupported = config.file.encrypted
+        ? isEncryptedEditingAvailable(await getFilesSettings(share))
+        : undefined;
       const response: TResponse = {
         config,
         user,
@@ -804,6 +837,7 @@ export async function getData(
         isSharingAccess: false,
         doc,
         fileId: newFileId !== fileId ? newFileId : fileId,
+        docServiceEncryptionSupported,
       };
 
       const successAuth = !!user;

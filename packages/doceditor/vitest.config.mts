@@ -62,13 +62,9 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@docspace/shared": path.resolve(__dirname, "../shared"),
-      PUBLIC_DIR: path.resolve(__dirname, "../../public"),
+      "@": path.resolve(import.meta.dirname, "./src"),
+      "@docspace/shared": path.resolve(import.meta.dirname, "../shared"),
+      PUBLIC_DIR: path.resolve(import.meta.dirname, "../../public"),
     },
-  },
-
-  esbuild: {
-    target: "esnext",
   },
 });

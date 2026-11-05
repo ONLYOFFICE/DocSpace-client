@@ -28,7 +28,7 @@ import path from "path";
 import { defineConfig, type Plugin } from "vitest/config";
 import svgr from "vite-plugin-svgr";
 
-import { jsxInJsPlugin } from "./config/plugins/jsx-in-js";
+import { jsxInJsPlugin } from "./config/plugins/jsx-in-js.mts";
 
 // Mirror the shared vitest setup: same SVG handling, same jsdom env, same
 // global i18n + DOMRect mocks via shared/vitest/setupTests.ts. The aliases
@@ -103,23 +103,23 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      PUBLIC_DIR: path.resolve(__dirname, "../../public"),
-      ASSETS_DIR: path.resolve(__dirname, "./public"),
-      SRC_DIR: path.resolve(__dirname, "./src"),
-      PACKAGE_FILE: path.resolve(__dirname, "./package.json"),
-      COMMON_DIR: path.resolve(__dirname, "../common"),
-      "@docspace/shared": path.resolve(__dirname, "../shared"),
+      PUBLIC_DIR: path.resolve(import.meta.dirname, "../../public"),
+      ASSETS_DIR: path.resolve(import.meta.dirname, "./public"),
+      SRC_DIR: path.resolve(import.meta.dirname, "./src"),
+      PACKAGE_FILE: path.resolve(import.meta.dirname, "./package.json"),
+      COMMON_DIR: path.resolve(import.meta.dirname, "../common"),
+      "@docspace/shared": path.resolve(import.meta.dirname, "../shared"),
       "PUBLIC_DIR/scripts/config.json": path.resolve(
-        __dirname,
+        import.meta.dirname,
         "../shared/__mocks__/configMock.js",
       ),
       "react-i18next": path.resolve(
-        __dirname,
+        import.meta.dirname,
         "../shared/__mocks__/reacti18nextMock.tsx",
       ),
-      "hex-rgb": path.resolve(__dirname, "../shared/__mocks__/hex-rgb.js"),
+      "hex-rgb": path.resolve(import.meta.dirname, "../shared/__mocks__/hex-rgb.js"),
       "react-svg": path.resolve(
-        __dirname,
+        import.meta.dirname,
         "../shared/__mocks__/reactSvgMock.tsx",
       ),
     },

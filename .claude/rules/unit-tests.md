@@ -5,7 +5,7 @@ paths:
   - "packages/shared/**/*.test.*"
   - "packages/shared/**/__tests__/**"
   - "packages/doceditor/src/**/*.test.*"
-  - "packages/*/vitest.config.ts"
+  - "packages/*/vitest.config.mts"
   - "packages/*/vitest/**"
 ---
 

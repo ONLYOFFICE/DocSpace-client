@@ -234,16 +234,28 @@ on and the root JSON they really import (`locales/.constants`, `locales/en`,
 `scripts/config.json`); `test` also watches `public/images` (svgr imports).
 `lint` watches only its own package plus shared's `biome.json` and
 `biome-plugins/`: Biome never reads a dependency's files, so an edit in
-`packages/shared` does not rerun another package's lint. A cold run takes
-about three minutes, a push with nothing changed seconds. A new import of
-another root `public/` file into code or tests must be added to those inputs,
-or the cache hides it.
+`packages/shared` does not rerun another package's lint. A cold run takes a
+minute or a few depending on the machine, a push with nothing changed seconds.
+A new import of another root `public/` file into code or tests must be added
+to those inputs, or the cache hides it.
+
+Nx does not hash environment variables or the Node version: after switching
+Node, or when a test result depends on an env variable (`POOL`), run
+`pnpm nx reset` so the next push runs everything for real. Up to three Vitest
+suites run at once with `--parallel=3`; if tests time out only under the gate,
+rerun the same `nx run-many` command with `--parallel=1` to confirm it is load,
+not a real failure.
 
 The manual `pnpm run tsc`, `lint`, `test`, `test:client`, `test:sdk` and
 `test:doceditor` go through the same cache and replay a stored result when
 nothing changed. Nx prints only the output of failed tasks. To debug a blocked
 push, run the failing task on its own; `pnpm nx reset` drops the cache if a
 result looks stale. Never bypass the gate with `git push --no-verify`.
+
+The Vitest configs are `vitest.config.mts` (and the client's
+`config/plugins/jsx-in-js.mts` they import), so Vite loads them as ES modules
+without its `configLoader: 'native'` compatibility warning; use
+`import.meta.dirname` there, not `__dirname`.
 
 CI lives in Gitea Actions (`.gitea/workflows/frontend-common-tests.yaml`) but
 is **manual-dispatch only** — there is no automatic PR/push CI, so the

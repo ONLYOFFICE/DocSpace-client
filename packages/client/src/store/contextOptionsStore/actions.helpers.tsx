@@ -825,7 +825,13 @@ export const askAIImpl = async (
 ) => {
   const skipAi = getPersisted(PersistenceKeys.skipAiModal, false);
 
-  if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
+  // The responses are already in a forms database the AI reads (the external
+  // one or the built-in one): there is nothing to connect.
+  if (
+    item.parentRoomType !== FolderType.FormRoom ||
+    skipAi ||
+    item.security?.AnalyzeResponses
+  ) {
     self.filesActionsStore.askAIAction(item, analyze);
     return;
   }
@@ -858,4 +864,3 @@ export const askAIImpl = async (
     endLoader(() => clearActiveOperations([item.id]));
   }
 };
-

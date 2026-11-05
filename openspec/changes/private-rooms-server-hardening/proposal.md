@@ -56,7 +56,8 @@ the file to change so the backend team can pick them up; nothing here is
 - A caller who may change the access of a private room can read the public keys of named users who are not members yet, so the client verifies invitees' keys before granting access (`private-rooms-invite-atomic-rewrap`, decided 2026-10-28; design decision 10). Today the room access keys cover members only.
 - Found when the server was re-checked on 2026-10-28 (`e618acc6c0`): saving a user's keys can delete another sign-in link of that user, such as Google or SSO; a private room accepts external and invitation links and can be duplicated, saved as a template or index-exported, each guarded by the client only; an empty key set passes every key check; the private flag is accepted with any room type; and a third-party room created as private is not key-checked. The server refuses or fixes each of these (design decisions 11-13).
 - Re-checked on 2026-11-02 against `release/v4.1.0` (`e9cfda8d43`): none of the backend items has landed; the key save can also fail once the other sign-in link is gone, template creation has its own gate, and the private flag also reaches AI agents, templates and rooms from templates (design Context).
-- Landed on the server on 2026-11-04 (`3b9c527a6e` and `bd89a24dcd`, re-checked 2026-11-05): the archived-room guards, the socket recipients, the public keys of files in archived rooms, the invitee keys route (`GET privacyroom/{roomId}/access/candidates`), the sign-in link fix, the link, duplicate, index-export and template refusals, and the metadata guards. The same commits refuse copy-as for encrypted files and for private-room sources and destinations, and keep folders from leaving or entering a private room (design decisions 15 and 16). Still open: the owner change, the availability rule, title validation, e-mail titles, audit and history, the folder check of the abort route, recovery and offboarding, and the key-set, room-type and third-party checks of room creation.
+- Landed on the server on 2026-11-04 (`3b9c527a6e` and `bd89a24dcd`, re-checked 2026-11-05): the archived-room guards, the socket recipients, the public keys of files in archived rooms, the invitee keys route (`GET privacyroom/{roomId}/access/candidates`), the sign-in link fix, the link, duplicate, index-export and template refusals, and the metadata guards. The same commits refuse copy-as for encrypted files and for private-room sources and destinations, and keep folders from leaving or entering a private room (design decisions 15 and 16). Still open after them: the owner change, the availability rule, title validation, e-mail titles, audit and history, the folder check of the abort route, recovery and offboarding, and the key-set, room-type and third-party checks of room creation.
+- Landed on the server on 2026-11-05 (`1259577f63`): the owner change answers 409 when the new owner lacks a file key, a new route `GET privacyroom/{roomId}/access/missing` lists which users miss keys on which files, the access write stores what it can and answers `skippedUserIds` (proposal decision 7 decided), every key write is audited and listed in the file history, and the letters and pushes name a private room "Private room" instead of its title (English only until translated). Still open: the availability rule, title validation, the revocation operation and its audit, the folder check of the abort route, recovery and offboarding, and the key-set, room-type and third-party checks of room creation.
 
 ## Capabilities
 
@@ -110,12 +111,11 @@ None.
   2026-10-26). Not a release prerequisite.
 - Client-side TOFU and fail-closed fixes (separate changes).
 - The audit log viewer UI in the management app (follows once events exist).
-- A route that tells a room manager which members lack an access entry on
-  which files. It would make the backfill exact
-  (`private-rooms-fanout-dialog-and-backfill`, archived) and let the
-  pending-access marker of `private-rooms-invite-atomic-rewrap` survive a
-  reload and reach other devices; today the server reads back the caller's
-  own entries only. A later target, not a release prerequisite.
+- (Landed 2026-11-05, now group 14 of tasks.md.) A route that tells a room
+  manager which members lack an access entry on which files. It makes the
+  backfill exact (`private-rooms-fanout-dialog-and-backfill`, archived) and
+  lets the pending-access marker of `private-rooms-invite-atomic-rewrap`
+  survive a reload and reach other devices, which that change decides.
 - A server-side Private section with its own root, search area and new-items
   routing (`private-rooms-sidebar-section`, archived): a later target.
 
@@ -144,9 +144,7 @@ None.
 6. Third-party private rooms (open): key-check them like every private room
    (the spec assumes this, design decision 13) or refuse the private flag on
    third-party storage.
-7. Member removal racing an upload on another device (open): the access
-   write refuses the whole request when one listed user can no longer read
-   the file, so such an upload stores no entry for anyone. Options: the write
-   stores the entries of the users who can read and reports the others, or
-   the server blocks a member's removal while uploads naming them are open.
-   `private-rooms-invite-atomic-rewrap` leaves this race to this change.
+7. Member removal racing an upload on another device (decided by the server
+   on 2026-11-05): the access write stores the entries of the users who can
+   read and reports the others in `skippedUserIds` (design decision 17);
+   the client reads that list (task 12.6).

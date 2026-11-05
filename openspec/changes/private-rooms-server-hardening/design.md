@@ -14,6 +14,13 @@ under "Landed on 2026-11-04" at the end of this section. The items below
 describe the state before them and keep the line numbers of `e9cfda8d43`;
 the list names each one the two commits closed.
 
+Re-checked again on 2026-11-05 at `1259577f63` ("check file keys, refuse
+unencrypted saves, hide room titles in letters", the same author): it landed
+the owner-change check, a route for the missing file keys of a room, the
+partial access write with a skipped list, the audit event of a key write,
+the neutral room name in letters, and the editor items of
+`private-rooms-editor-contract`; see "Landed on 2026-11-05".
+
 - Owner change: `products/ASC.Files/Core/Core/FileStorageService.cs`
   (`ChangeOwnerAsync`, from line 5348; the room loop runs to line 5427) only
   calls `ThrowIfKeysAreNotSetAsync` for a private room (line 5383); no
@@ -274,11 +281,86 @@ keys before that update and needs those keys first.
   the private settings), `PUT files/rooms/{id}/links` (403 for a private
   room), room template creation (403) and `copyas` (403) were updated.
 
-Still open on the server after the two commits: the owner change (2.1), the
-availability rule and its error code (3.1b), title validation (4.1), e-mail
-titles (4.2), audit and history (6), the folder segment of the abort route
-(7.2), recovery and offboarding (8), the key-set, room-type and third-party
-checks of room creation (12.3), and decisions 6.0 and 12.5.
+### Landed on 2026-11-05 (read in `1259577f63`)
+
+- Owner change (task 2.1, decision 1 revised): `SecurityController.ChangeFileOwner`
+  (`POST files/owner`) calls `FileStorageService.ChangeOwnerAsync` with
+  `demandFileKeys: true`; for a private room whose new owner is not its
+  creator it reads the encrypted files of the room, subfolders included,
+  that hold no key for the new owner (`DocSpaceHelper.GetEncryptedFilesWithoutKeyAsync`,
+  `FileDao.GetFileIdsWithKeyAsync`) and throws
+  `CustomHttpException(HttpStatusCode.Conflict, "The new owner holds no key
+  for some encrypted files of the room")`, 409, leaving the owner as it was
+  (`FileStorageService.cs:5499-5506`). The reassignment of a deleted user's
+  rooms leaves `demandFileKeys` off, so it is never stopped by a missing key.
+  The key check of the new owner (`ThrowIfKeysAreNotSetAsync`, 403) stays
+  before it. `PrivateRoomFileKeysTests`: `ChangeOwner_*`,
+  `ReassignOfADeletedUser_IsNotStoppedByAMissingFileKey`.
+- Missing file keys (decision 18, not in the plan):
+  `GET api/2.0/privacyroom/{roomId}/access/missing?userIds=…`
+  (`PrivacyRoomControllerCommon.GetRoomMissingFileKeys`,
+  `GetRoomMissingFileKeysRequestDto`, `EncryptionKeyPairDtoHelper.GetMissingFileKeysAsync`)
+  answers `RoomMissingFileKeysDto[]`: one entry per user who lacks a key,
+  `userId` and the `fileIds` of the encrypted files of the room, subfolders
+  included, that hold no key for them; a user with every key is absent, so
+  an empty list means nothing is missing; a file stored in the clear is never
+  reported. Without `userIds` it checks the room's direct user shares plus
+  the creator; with them, the named users, members or not; an id that names
+  nobody on the portal is ignored. The access checks are those of the
+  candidates route (`DemandRoomAccessManagerAsync`, shared by both): 404
+  unknown room, 403 no read access, 400 not a room or not private, 403 when
+  `CanSetAccessAsync` refuses (members without the right, non-members,
+  administrators who are not members, an archived private room); a
+  malformed id is 400; anonymous 401. `PrivateRoomFileKeysTests.Missing_*`.
+- Access write (task 12.5 decided, decision 17): `FileStorageService.SetEncryptionInfoAsync`
+  (`PUT files/{fileId}/access`) keeps the caller checks (read, private
+  parent room, create right: 403 and nothing stored) and then checks each
+  listed recipient on a fresh read of the file (`fileDao.GetFileAsync` per
+  recipient, because a security check caches the share record it found on
+  the entry and reused it for the next user, which let a non-member pass
+  right after a member); the recipients who can read get their entries
+  stored in one `SetFileKey`, the others are returned, and the action
+  answers `FileKeysWrittenDto { skippedUserIds }` (`FileStorageService.cs:5405-5460`,
+  `FilesController.cs:1287-1297`). A write where every recipient is skipped
+  stores nothing and records nothing. `PrivateRoomFileKeysTests.WriteKeys_*`.
+- Audit (task 6.1, the write half; decision 19): every stored write records
+  `MessageAction.FileKeysSet` (5164) through `filesMessageService` with the
+  file and the accepted recipients' ids (`AuditReportResource.FileKeysSet`,
+  "File keys issued for "{0}" to: {1}"); `PrivacyRoomActionMapper` lists it
+  under Create. `HistoryService.TrackedActions` and `AuditInterpreter`
+  (`FileUploadedInterpreter`) also list it, so the file history
+  (`GET files/file/{fileId}/log`) and the folder history show a "file keys
+  issued" entry with the actor and the time but without the recipients.
+  No revocation event: no server operation removes entries (6.0 still open).
+- Letters (task 4.2, decision 4 revised): `NotifyConstants.GetRoomTitle`
+  returns `FilesPatternResource.PrivateRoomTitle` ("Private room") for a
+  room with the private setting, and every room notify action of Files uses
+  it (invited to room, access updated, documents uploaded and created,
+  folder created, room archived and removed, the form notices); the file
+  notices of `NotifyClient` print it for a file inside a private room; the
+  invitation e-mails (`FileSharing.cs:447`, `:459`, the resends in
+  `FileStorageService.cs:5697`, `:5732`) pass no title for a private room
+  and `SaasRoomInvite*NotifyAction` print
+  `WebstudioNotifyPatternResource.PrivateRoomTitle` instead. Both strings
+  exist in the default culture only, so every other language prints
+  "Private room" in English until the resx files are translated.
+  `PrivateRoomTitleInLettersTests`, `SaasRoomInviteExistingUserPrivateRoomLetterTests`.
+- Metadata guards: a room created from a template of an indexed room with
+  the private flag fails without making a room
+  (`PrivateRoomSettingsTests.CreateFromTemplate_TemplateWithIndexing_FailsWithoutMakingARoom`).
+- The editor items (the capability flag `docServiceEncryptionSupported`,
+  the refused saves and submits, the dropped sessions of removed members,
+  the public document address, the refused restore by address and
+  reference data, the start-filling denial) are recorded in
+  `private-rooms-editor-contract` (tasks 2.1, 5.4, 6.3, 6.4, 10.4, 10.5,
+  10.7).
+
+Still open on the server after the three commits: the availability rule
+and its error code (3.1b), title validation (4.1), the revocation audit
+(6.1b) and the revocation operation it waits for (6.0), the folder segment
+of the abort route (7.2), recovery and offboarding (8), the key-set,
+room-type and third-party checks of room creation (12.3), and the
+translations of the letter label (4.5).
 
 ## Goals / Non-Goals
 
@@ -300,7 +382,11 @@ checks of room creation (12.3), and decisions 6.0 and 12.5.
    the client which files lack an entry for the new owner. The client runs
    the existing backfill (`room-encryption.ts` backfill path) and retries.
    Alternative: block owner change until the client pre-backfills; rejected
-   because the client cannot know the server's view of the entries.
+   because the client cannot know the server's view of the entries. Landed
+   2026-11-05 (`1259577f63`) in the second form: the owner change answers
+   409 without a list, and the client reads the list from the missing-keys
+   route (decision 18) before it asks, which gives it the server's view
+   after all.
 
 2. **Edition rule as an explicit server setting, default allow.** Keeps the
    current behaviour (all editions) while giving product a switch. Alternative:
@@ -315,7 +401,10 @@ checks of room creation (12.3), and decisions 6.0 and 12.5.
 
 4. **E-mails link instead of naming.** The notifier gets the room link and a
    generic subject for private rooms. Alternative: send the encrypted name;
-   rejected because e-mail clients cannot decrypt it.
+   rejected because e-mail clients cannot decrypt it. Landed 2026-11-05
+   (`1259577f63`) as a neutral label, "Private room", in place of the title
+   in every letter and push of Files, with the link kept; the label is in
+   the default culture only (task 4.5).
 
 5. **Recovery by recovery-administrator wrap.** The user's private key is
    wrapped (HPKE auth) for a recovery administrator's public key at enrolment,
@@ -425,6 +514,31 @@ checks of room creation (12.3), and decisions 6.0 and 12.5.
     room and withholds copy-to and duplicate (`private-rooms/file-operations`);
     the batch move mock mirrors the rule (task 13.3).
 
+17. **A key write stores what it can and names the rest (landed 2026-11-05,
+    decides proposal decision 7 and task 12.5).** The access write stores the
+    entries of the recipients who can read the file and answers the ids it
+    skipped, instead of refusing the whole request; each recipient is checked
+    on a fresh read of the file. The client reads the skipped list and treats
+    those users as not written (task 12.6). Alternative, blocking a member's
+    removal while uploads naming them are open, was not taken by the server.
+
+18. **The missing file keys of a room come from the server (landed
+    2026-11-05, not planned here).** `GET privacyroom/{roomId}/access/missing`
+    reads the file keys table for the room's members or for named users and
+    answers, per user, the encrypted files that hold no key for them. It is
+    the route this change had put out of scope as a later target: it makes
+    the backfill exact (task 14.2), lets the owner change be prepared
+    (task 2.2), and lets the pending-access marker of
+    `private-rooms-invite-atomic-rewrap` be rebuilt on another device, which
+    that change decides.
+
+19. **A key write is audited with its recipients and listed in the file
+    history without them (landed 2026-11-05).** `FileKeysSet` goes to the
+    audit trail with the recipients' ids and to the file and folder history
+    as a plain entry. The per-file access history this change asked for is
+    therefore the file history, not a dedicated route; the client decides
+    how its History tab shows the new action (task 6.2).
+
 ## Risks / Trade-offs
 
 - [Backend schedule] → every server task is independent, and each client
@@ -468,10 +582,8 @@ checks of room creation (12.3), and decisions 6.0 and 12.5.
   plain file moved or copied into a private room. Owner: backend team with
   product.
 - Member removal racing an upload on another device (proposal decision 7):
-  the access write refuses the whole request when one listed user can no
-  longer read the file (see Context). Options: store the entries of the users
-  who can read and report the others, or block a member's removal while
-  uploads naming them are open. Owner: backend team with product.
+  decided by the server on 2026-11-05, decision 17: the write stores the
+  entries of the users who can read and reports the others.
 - Third-party private rooms (proposal decision 6): key-check them like every
   private room (decision 13, what the spec assumes) or refuse the private
   flag on third-party storage. Owner: product.

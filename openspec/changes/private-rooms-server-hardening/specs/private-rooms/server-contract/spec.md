@@ -52,11 +52,15 @@ The server SHALL abort an open upload session on request, discarding the chunks 
 - **THEN** the server refuses it and the session stays open
 
 ### Requirement: Per-file access history
-The server SHALL expose, to room managers, the history of access-entry writes and revocations for a file: who wrote which user's entry and when, without the wrap content.
+The server SHALL list every stored write of a file's access entries in the file's history and in its folder's history as a "file keys issued" entry with the actor and the time, without the recipients and without the wrap content; the recipients SHALL be recorded in the audit trail only.
 
 #### Scenario: History read
-- **WHEN** a room manager requests the access history of an encrypted file
-- **THEN** the response lists each write and revocation with actor, subject user and timestamp
+- **WHEN** a reader of an encrypted file requests its history after a key write
+- **THEN** the history lists a "file keys issued" entry with the actor and the time and no recipient
+
+#### Scenario: Write with nothing stored
+- **WHEN** a key write skips every recipient
+- **THEN** no history entry and no audit event is recorded
 
 ### Requirement: Administrative recovery of a user's identity
 For the B2B launch the server SHALL support organisational recovery: a user MAY enrol by wrapping their private key for a recovery administrator's public key, and a recovery administrator SHALL be able to retrieve that wrap for a user who lost every passphrase and recovery phrase, with every retrieval audited.
@@ -140,6 +144,25 @@ The server SHALL leave out of the prospective-members answer, without failing th
 - **WHEN** the request names no user
 - **THEN** the answer is an empty list
 
+### Requirement: Missing file keys of a room
+The server SHALL report, to a caller who may change the access of an active private room, which of the named users, or of the room's direct members and its creator when none is named, hold no key on which encrypted files of the room, subfolders included, as identifiers only; a user who holds every key SHALL be absent, a file stored in the clear SHALL never be reported, and an id that names nobody on the portal SHALL be ignored. It SHALL apply the access rules of the prospective-members request.
+
+#### Scenario: Member without a key on one file
+- **WHEN** the owner asks for the missing keys of a member who holds no key on one encrypted file
+- **THEN** the answer lists that member with that file, and lists nothing for them once the key is written
+
+#### Scenario: No users named
+- **WHEN** the owner asks without naming users
+- **THEN** the room's members are checked and a user outside the room is not reported
+
+#### Scenario: Plain file
+- **WHEN** the room holds a file stored in the clear and no encrypted file
+- **THEN** the answer is empty
+
+#### Scenario: Caller who may not change access
+- **WHEN** a member without that right, an administrator who is not a member, or the owner of an archived private room asks
+- **THEN** the request is refused with 403
+
 ### Requirement: Saving keys keeps the user's other sign-in links
 The server SHALL replace only the user's encryption key record when the user's keys are saved or deleted, and SHALL NOT remove any other account link of the user, such as a Google or SSO sign-in.
 
@@ -186,6 +209,29 @@ The server SHALL refuse to duplicate a private room, to save it as a room templa
 - **THEN** its security reports copy, duplicate and index export as false
 
 ## MODIFIED Requirements
+
+### Requirement: File access entries write
+The server SHALL, when the caller can read the file, the file's parent room is private and the caller can create content in it, store the submitted entries of the listed users who can read the file, replacing their previous entries and keeping every other user's entry, and SHALL answer the ids of the listed users it skipped because they cannot read the file; otherwise it SHALL answer 403 and store nothing. Each listed user SHALL be checked on a fresh read of the file. Leaving a user out never revokes their entry.
+
+#### Scenario: Authorised replace
+- **WHEN** a room member with create rights submits entries for users who can all read the file
+- **THEN** the previous entries for those users are replaced by the submitted ones and no id is reported as skipped
+
+#### Scenario: Non-private parent room
+- **WHEN** the file's parent room is not private
+- **THEN** the write is refused with 403
+
+#### Scenario: Listed user cannot read the file
+- **WHEN** one submitted entry names a user without read access to the file, listed before or after a member
+- **THEN** the entries of the other users are stored, that user is reported as skipped, and no entry is stored for them
+
+#### Scenario: Every listed user skipped
+- **WHEN** no submitted entry names a user who can read the file
+- **THEN** nothing is stored, every id is reported as skipped and no audit event is recorded
+
+#### Scenario: User left out of the write
+- **WHEN** a write does not list a user who already holds an entry on the file
+- **THEN** that user's entry stays as it was
 
 ### Requirement: Conversion forbidden for private rooms
 The server SHALL refuse a conversion started through the conversion check, the document converter or a document-builder script when the source file, or the folder the result is saved to, lies in a private room, SHALL never convert an encrypted file, and SHALL refuse with 403 the copy-as-with-conversion request when the source file is marked encrypted or lies in a private room, or when the destination lies in a private room.
@@ -260,19 +306,27 @@ The server SHALL deny the copy right on a private room, on a file inside it and 
 - **THEN** each file reports the copy right as false, as it does editing, renaming, moving and deleting
 
 ### Requirement: Owner change requires the new owner's keys
-The server SHALL refuse an ownership change of a private room when the new owner has no encryption keys or an empty key set, and SHALL report which encrypted files in the room have no access entry for the new owner so the client can backfill them before completing the change.
+The server SHALL refuse with 403 an ownership change of a private room when the new owner has no encryption keys or an empty key set, and SHALL refuse with 409, leaving the owner as it is, when the new owner, unless they created the room, holds no access entry on some encrypted file of the room, subfolders included; the missing files are read through the missing-file-keys request. The reassignment of a deleted user's rooms SHALL NOT apply the 409 check.
 
 #### Scenario: New owner without keys
 - **WHEN** ownership of a private room is given to a user without keys
-- **THEN** the change is refused
+- **THEN** the change is refused with 403
 
 #### Scenario: New owner with keys
 - **WHEN** ownership is given to a user with keys who holds an access entry on every encrypted file
 - **THEN** the room owner changes
 
 #### Scenario: New owner missing entries
-- **WHEN** ownership is given to a user with keys who lacks access entries on some encrypted files
-- **THEN** the server answers with the list of those files and does not change the owner until the entries exist
+- **WHEN** ownership is given to a user with keys who lacks an access entry on an encrypted file, in the room or in a subfolder
+- **THEN** the server answers 409 and the owner stays, until the entry is written and the change is asked again
+
+#### Scenario: Room without encrypted files
+- **WHEN** ownership of a private room holding plain files only is given to a user with keys
+- **THEN** the room owner changes
+
+#### Scenario: Rooms of a deleted user
+- **WHEN** the rooms of a user being deleted are reassigned to a user with keys who lacks entries
+- **THEN** the reassignment completes
 
 ### Requirement: No edition or licence gate on private rooms
 The server SHALL evaluate an explicit private-room availability rule before creating a private room. The default rule SHALL allow every edition; when the rule denies, the server SHALL answer 403 with a distinct error code that the client maps to a localized message.
@@ -286,26 +340,34 @@ The server SHALL evaluate an explicit private-room availability rule before crea
 - **THEN** the server answers 403 with the private-rooms-unavailable error code
 
 ### Requirement: Audit log scope for private rooms
-The server SHALL write audit events for key envelope creation, update and deletion, for every file access-entry write (actor, file, subject users) and for every member revocation from a private room.
+The server SHALL write audit events for key envelope creation, update and deletion, for every stored file access-entry write (actor, file, the recipients whose entries were stored) and for every member revocation from a private room.
 
 #### Scenario: Key events logged
 - **WHEN** a user creates, replaces or deletes a key envelope
 - **THEN** a matching audit event is recorded
 
 #### Scenario: Access entries written
-- **WHEN** a client replaces a file's access entries
-- **THEN** an audit event records the actor, the file and the subject users
+- **WHEN** a client writes a file's access entries and at least one recipient's entry is stored
+- **THEN** an audit event records the actor, the file and the stored recipients
 
 #### Scenario: Member revoked
 - **WHEN** a member's access entries are removed from a room's files
 - **THEN** an audit event records the actor, the room and the revoked user
 
 ### Requirement: Invitation e-mails carry the room title
-The server SHALL NOT include the plaintext room title of a private room in invitation or notification e-mails; the e-mail SHALL name the room only through a link that resolves the title in the portal.
+The server SHALL NOT include the plaintext room title of a private room in invitation e-mails or in the letters and pushes about the room and its content; it SHALL name the room with a neutral label ("Private room") next to the link that resolves the title in the portal.
 
 #### Scenario: Invite to a private room
-- **WHEN** a user is invited to a private room by e-mail
-- **THEN** the e-mail contains a link to the room and no room title
+- **WHEN** a user, new or existing, is invited to a private room by e-mail, or the invitation is resent
+- **THEN** the e-mail contains a link to the room and the neutral label, and not the room title
+
+#### Scenario: Room notices
+- **WHEN** a file or folder is created or uploaded in a private room, a member's access changes, or the room is archived or removed
+- **THEN** the letter or push names the room with the neutral label and not its title
+
+#### Scenario: Ordinary room
+- **WHEN** the same letters are sent for a room without the private setting
+- **THEN** they carry its title
 
 ### Requirement: Private room creation requires keys
 The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, a third-party room created as private included, and SHALL refuse with 400 the private flag on a room type other than Custom, whichever route creates the room (a room, an AI agent, a template or a room from a template). It SHALL otherwise store the room as a Custom room with the private setting.

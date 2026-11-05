@@ -1,12 +1,15 @@
 # Tasks
 
-Server state (2026-11-05, `../server` at `bd89a24dcd`): the backend commits
+Server state (2026-11-05, `../server` at `1259577f63`): the backend commits
 `3b9c527a6e` and `bd89a24dcd` of 2026-11-04 landed 9.1, 9.3, 9.5, 11.1,
 12.1, the metadata guards of 3.1 (now 3.1a) and the link, duplicate,
 index-export and template refusals of 12.2, plus the copy-as refusal and
-the folder rule recorded in group 13 (design.md, "Landed on 2026-11-04").
-The client tasks that waited for them (3.2a, 9.4, 9.7, 11.2, 12.4a, 13.3)
-are open and unblocked; every other backend task is still open.
+the folder rule recorded in group 13 (design.md, "Landed on 2026-11-04");
+`1259577f63` of 2026-11-05 landed 2.1, 4.2, the write half of 6.1, the
+decision of 12.5 and the missing-keys route of group 14 (design.md, "Landed
+on 2026-11-05"). The client tasks that waited for them (2.2, 3.2a, 6.2, 9.4,
+9.7, 11.2, 12.4a, 12.6, 13.3, 14.1, 14.2) are open and unblocked; the other
+backend tasks are still open.
 
 ## 1. Contract mirrors
 
@@ -14,8 +17,8 @@ No mock runs ahead of the server (main spec `private-rooms/server-contract`, "E2
 
 ## 2. Owner change
 
-- [ ] 2.1 Backend: in `FileStorageService.ChangeOwnerAsync` (`../server/products/ASC.Files/Core/Core/FileStorageService.cs`) return the encrypted files lacking an entry for the new owner and refuse the change until none remain; verify with a server unit test
-- [ ] 2.2 Client: once 2.1 has merged, mirror the owner-change response in the MSW handlers with a contract test; in `packages/client/src/components/panels/ChangeRoomOwnerPanel` read the missing-files response, run the backfill from `packages/shared/services/private-room/room-encryption.ts` for the candidate, retry, and show the unreadable files on failure; verify with a client unit test and `packages/client/__tests__/private-room-members.spec.ts`
+- [x] 2.1 Backend: in `FileStorageService.ChangeOwnerAsync` (`../server/products/ASC.Files/Core/Core/FileStorageService.cs`) return the encrypted files lacking an entry for the new owner and refuse the change until none remain; verify with a server unit test. Landed 2026-11-05 in `1259577f63` in the second form of design decision 1: `POST files/owner` answers 409 when the new owner, unless they created the room, holds no key for an encrypted file of the room, subfolders included, and the files come from `GET privacyroom/{roomId}/access/missing?userIds={newOwner}` (14.1); the reassignment of a deleted user's rooms skips the check (`PrivateRoomFileKeysTests`)
+- [ ] 2.2 Client: 2.1 merged on 2026-11-05: in `changeRoomOwnerImpl` (`packages/client/src/store/filesActionsStore/rooms.helpers.ts`, reached from `packages/client/src/components/panels/ChangeRoomOwnerPanel`) read the candidate's missing files through the request of 14.1 before `setFileOwner`, run the backfill of `packages/shared/services/private-room/room-encryption.ts` for the candidate over those files, then change the owner; on a 409 show the files that could not be wrapped and keep the owner; mirror `POST files/owner` in MSW with the 409 of a candidate who lacks a key (a contract case on the merged `SecurityController.ChangeFileOwner`); verify with a client unit test of the store helper and `cd packages/client && pnpm test:e2e:docker:dev __tests__/private-room-members.spec.ts`
 
 ## 3. Availability rule and metadata guards
 
@@ -27,7 +30,8 @@ No mock runs ahead of the server (main spec `private-rooms/server-contract`, "E2
 ## 4. Titles and e-mails
 
 - [ ] 4.1 Backend: validate encrypted upload titles in the upload session (`UploadController.cs` / `FileUploader.cs`) against the opaque form, a lowercase UUID optionally followed by a dot and a lowercase alphanumeric extension (design decision 14); verify with server unit tests for a plaintext title, a UUID with an extension and a bare UUID
-- [ ] 4.2 Backend: drop the plaintext room title from private-room invitation and notification e-mails (both call sites in `FileSharing.cs`: the new-address invite at lines 429-431 and the existing-user notice at line 443; the resend in `FileStorageService.ResendEmailInvitationsAsync` at lines 5574 and 5609; the room notices of `NotifyClient.cs`, such as `SendRoomRemovedAsync` at line 352; and the notify templates, of which `pattern_saas_room_invite_existing_user` prints the title); verify with a server unit test on the notification arguments
+- [x] 4.2 Backend: drop the plaintext room title from private-room invitation and notification e-mails (both call sites in `FileSharing.cs`: the new-address invite at lines 429-431 and the existing-user notice at line 443; the resend in `FileStorageService.ResendEmailInvitationsAsync` at lines 5574 and 5609; the room notices of `NotifyClient.cs`, such as `SendRoomRemovedAsync` at line 352; and the notify templates, of which `pattern_saas_room_invite_existing_user` prints the title); verify with a server unit test on the notification arguments. Landed 2026-11-05 in `1259577f63`: every letter and push names a private room "Private room" (`NotifyConstants.GetRoomTitle`, `WebstudioNotifyPatternResource.PrivateRoomTitle`), with the link kept (`PrivateRoomTitleInLettersTests`, `SaasRoomInviteExistingUserPrivateRoomLetterTests`)
+- [ ] 4.5 Backend: translate `PrivateRoomTitle` in `FilesPatternResource` and `WebstudioNotifyPatternResource` for the other cultures (today the default culture only, so every language prints "Private room" in English); verify with the letter tests of the other cultures
 - [x] 4.3 Client: assert the title sent for encrypted uploads already matches the opaque form of the requirement "Encrypted file titles are validated", with and without an extension, in `packages/shared/services/private-room/__tests__/encrypted-upload.test.ts` (no behaviour change expected)
 - [ ] 4.4 Client: once 4.1 has merged, mirror the title check in the upload session handler of `encryptedFilesHandlers` with a contract case; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`
 
@@ -38,8 +42,9 @@ Withdrawn: the client operates with one key per user (`private-rooms-single-key`
 ## 6. Audit and history
 
 - [ ] 6.0 Decide the revocation primitive (proposal decision 4, design Open Questions): server-side removal of a user's access entries when they leave a private room or are deprovisioned, or a route for room managers to remove named users' entries; no removal operation exists today. Verified by the decision recorded in design.md and a backend task for the chosen operation added to this section
-- [ ] 6.1 Backend: write audit events for `SetEncryptionInfoAsync` (`DocumentsActionMapper.cs`, `FileStorageService.cs`) and expose the per-file access history route; the revocation audit event is BLOCKED on 6.0 and is added to the operation it decides; verify with server unit tests
-- [ ] 6.2 Client: once 6.1 has merged, add the access-history request to `packages/shared/api/privacy` with its MSW handler and contract test; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/privacyroom`
+- [x] 6.1a Backend: write an audit event for `SetEncryptionInfoAsync` and expose the per-file access history; verify with server unit tests. Landed 2026-11-05 in `1259577f63`: every stored write records `MessageAction.FileKeysSet` (5164) with the recipients' ids in the audit trail, and the file and folder history list it without them (`PrivateRoomFileKeysTests.WriteKeys_IsRecordedInTheFileHistory`); there is no dedicated history route (design decision 19)
+- [ ] 6.1b Backend: the revocation audit event, BLOCKED on 6.0, added to the operation it decides; verify with a server unit test
+- [ ] 6.2 Client: 6.1a merged on 2026-11-05: the History tab of a private room and the file history now carry a "file keys issued" entry (action 5164) for every key write; check how the client renders an action it does not know, then either name it with a new Common key (added with `/translate-comments` and `/translate-locales`) or leave it out of the tab, and mirror the entry in the history mock (`packages/shared/__mocks__/handlers/files/folderHistory.ts`, a case named after `HistoryService.TrackedActions`); verify with a unit test of the History view, `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files` and `cd common/tests && npx vitest run test/locales.test.js` when a key is added
 
 ## 7. Upload abort
 
@@ -78,7 +83,8 @@ Withdrawn: the client operates with one key per user (`private-rooms-single-key`
 - [ ] 12.3 Backend: make `ThrowIfKeysAreNotSetAsync` (`EncryptionLoginProvider.cs:97-103`) treat an empty key set as no keys, accept the private flag with the Custom room type only, on every creation path (`FileStorageService.cs:1164-1167`; AI agents `:698`, templates `:948`, rooms from templates `:1005`), and pass the private flag on in `CreateThirdPartyRoomAsync` (`:766`) (design decision 13, unless proposal decision 6 refuses third-party private rooms); verify with server unit tests for an empty key set, another room type, an AI agent created as private and a third-party room without keys
 - [ ] 12.4a Client: 12.2 merged on 2026-11-04: mirror the link refusal (403 for an external or invitation link with an access other than None on a private room, a revocation passing) in the room links handlers (`packages/shared/__mocks__/handlers/files/roomLinks.ts`), the template refusal (403) where room template creation is mocked, and report Copy, Duplicate, IndexExport, UseChat and Vectorization false in the security of a private room and of its files and folders in `privateRoomList.ts` and `encryptedFiles.ts` (today `privateRoomList.ts` reports Copy and Duplicate true), with contract cases; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers`
 - [ ] 12.4b Client: once 12.3 has merged, mirror the creation refusals (an empty key set, a room type other than Custom, an AI agent, a template, a room from a template and a third-party room created as private) in the room creation MSW handlers with contract tests; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers`
-- [ ] 12.5 Decide the member-removal race (proposal decision 7, design Open Questions) and add the backend task for the chosen option to this section; verified by the decision recorded in design.md
+- [x] 12.5 Decide the member-removal race (proposal decision 7, design Open Questions) and add the backend task for the chosen option to this section; verified by the decision recorded in design.md. Decided by the server on 2026-11-05 (`1259577f63`, design decision 17): `PUT files/{fileId}/access` stores the entries of the recipients who can read the file and answers the others in `skippedUserIds`, checking each recipient on a fresh read (`PrivateRoomFileKeysTests.WriteKeys_*`)
+- [ ] 12.6 Client: 12.5 landed on 2026-11-05: make `setFileEncryptionKeys` (`packages/shared/api/files/index.ts`) return the `skippedUserIds` of `FileKeysWrittenDto`, and have both callers treat a skipped recipient as not written: the upload orchestrator (`packages/shared/services/private-room/encrypted-upload-orchestrator.ts`) adds them to the pending-access record of the room with the file, and the membership service (`packages/shared/services/private-room/room-encryption.ts`) counts them as failures of the invite re-wrap, the backfill and the retry; mirror the merged write in `encryptedFilesHandlers` (200 with `response.skippedUserIds`, a recipient outside the room's member keys skipped, 403 kept for an unknown file) with contract cases replacing the main-spec scenario "Listed user cannot read the file"; verify with `cd packages/shared && pnpm exec vitest run services/private-room __mocks__/handlers/files`
 
 ## 13. Server commits of 2026-11-04 beyond the plan
 
@@ -88,7 +94,14 @@ Withdrawn: the client operates with one key per user (`private-rooms-single-key`
 
 No client task mirrors 13.1: the client creates files in a private room through the encrypted creation (`packages/client/src/helpers/encryptedFileCreation.ts`) and never sends `copyas` there, no mock handler exists for the route, and none is added for a call the client does not make. The doceditor's create page still sends it when a template is given (`packages/doceditor/src/app/(root)/create/page.tsx`), which `private-rooms-editor-contract` 9.4 decides.
 
+## 14. Missing file keys (server commit of 2026-11-05)
+
+- [x] 14.0 Backend: a route that tells a room manager which members lack a key on which files; landed 2026-11-05 in `1259577f63` as `GET privacyroom/{roomId}/access/missing?userIds=…` (design decision 18, `PrivateRoomFileKeysTests.Missing_*`)
+- [ ] 14.1 Client: add `getRoomMissingFileKeys(roomId, userIds?)` to `packages/shared/api/privacy` (`userIds` repeated once per user, answering `{ userId, fileIds }[]`) and an MSW handler in `packages/shared/__mocks__/handlers/privacyroom` mirroring `PrivacyRoomControllerCommon.GetRoomMissingFileKeys` as merged: computed from the stored file keys of `encryptedFilesHandlers` for the room's members or the named users, plain files left out, users unknown to the mock ignored, 404, 400 (not private, a folder, a malformed id), 403 (no read access, no right to change access, an archived room); with its contract test; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/privacyroom`
+- [ ] 14.2 Client: after 14.1, make the backfill sweep of `packages/shared/services/private-room/room-encryption.ts` exact: read the room's missing keys once and wrap only the listed files for the listed members, instead of every file for every member; keep the current sweep as the fallback when the request fails; verify with `room-encryption.test.ts` and `room-encryption.integration.test.ts` cases "Backfill wraps the missing files only" and "Backfill falls back when the missing-keys request fails"
+- [ ] 14.3 Client: `private-rooms-invite-atomic-rewrap` decides whether its pending-access marker is rebuilt from the missing-keys answer (its proposal decision of 2026-11-05); verified by that decision recorded there
+
 ## Workflow follow-up
 
 - Archive only after every backend task has merged on `../server`; until then the delta describes the agreed contract, not the branch.
-- The main spec `private-rooms/server-contract` still describes the server before 2026-11-04 for the landed items (the copy right and the file public keys in Archive, copy-as, links, the administrator bypass, the socket recipients, the invitee keys). It is corrected at the archive. If the open backend items (2, 3.1b, 4, 6, 7.2, 8, 12.3) stay open past the beta, split the landed items with their client mirrors (3.2a, 9.4, 9.7, 11.2, 12.4a, 13.3) into their own change and archive that first, so the main spec stops contradicting the server.
+- The main spec `private-rooms/server-contract` still describes the server before 2026-11-04 for the landed items (the copy right and the file public keys in Archive, copy-as, links, the administrator bypass, the socket recipients, the invitee keys, the owner change, the partial access write, the letters). It is corrected at the archive. If the open backend items (3.1b, 4.1, 4.5, 6.0, 6.1b, 7.2, 8, 12.3) stay open past the beta, split the landed items with their client mirrors (2.2, 3.2a, 6.2, 9.4, 9.7, 11.2, 12.4a, 12.6, 13.3, 14.1, 14.2) into their own change and archive that first, so the main spec stops contradicting the server.

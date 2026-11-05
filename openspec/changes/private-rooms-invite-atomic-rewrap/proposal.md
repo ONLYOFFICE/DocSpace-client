@@ -43,7 +43,9 @@ Inviting members to a private room today grants room access first and re-wraps t
 
 ## Decisions needed
 
-None. Decided on 2026-10-26: access is granted first and the wraps follow, with the pending-access state and retry; the backfill sweep re-wraps for every member when a room manager opens the room. A transactional grant-and-keys endpoint is the later target (`private-rooms-server-hardening`); wrap-first after a change to the server's access-entry authorization was not taken.
+1. (2026-11-05) Whether the pending-access marker is rebuilt from the server's missing-keys answer (`GET privacyroom/{roomId}/access/missing`, `private-rooms-server-hardening` 14.1), so it survives a reload and reaches other devices, or stays the in-memory record of design decision 2 for the beta. Owner: feature owner. Task 3.5 waits for it.
+
+Decided on 2026-10-26: access is granted first and the wraps follow, with the pending-access state and retry; the backfill sweep re-wraps for every member when a room manager opens the room. A transactional grant-and-keys endpoint is the later target (`private-rooms-server-hardening`); wrap-first after a change to the server's access-entry authorization was not taken.
 
 Decided on 2026-10-27, with `private-rooms-sdk-client-parity`: the SDK is in scope. This change is implemented after that change's tasks 5.1 (the shared invite re-wrap) and 5.3 (the SDK invite panel), and archived after it, because its sdk-surface delta modifies and renames requirements that change adds. Both conditions hold since 2026-10-28, when that change was archived.
 

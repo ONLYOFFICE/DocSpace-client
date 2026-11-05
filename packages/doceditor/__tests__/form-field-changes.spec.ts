@@ -57,6 +57,7 @@ import {
   installFakeEditor,
   openForm,
   setFormFields,
+  setReadDelay,
   type TFakeField,
 } from "./fixtures/fakeEditor";
 
@@ -68,8 +69,8 @@ type TFixtures = {
   clientRequestInterceptor: WorkerFixture;
 };
 
-// The fields are read at least this long apart while the document changes.
-const READ_INTERVAL = 3000;
+// A snapshot read the editor did not answer is tried again after this long.
+const SNAPSHOT_RETRY_DELAY = 3000;
 
 // Records the reports and the filling starts the editor page sends; the reports are answered with the given statuses in
 // turn, then with 200.
@@ -177,7 +178,7 @@ test.describe("Form field changes", () => {
 
     await openForm(page, [field("1", "name"), field("2", "email")]);
     await saveDocument(page);
-    await settle(page, READ_INTERVAL + 500);
+    await settle(page);
     await leaveEditor(page);
 
     expect(reports()).toEqual([]);
@@ -215,7 +216,7 @@ test.describe("Form field changes", () => {
 
     // The save that follows the rename finds nothing new.
     await saveDocument(page);
-    await settle(page, READ_INTERVAL + 500);
+    await settle(page);
 
     expect(reports()).toHaveLength(1);
     const reads = await getEditorReads(page);
@@ -305,7 +306,7 @@ test.describe("Form field changes", () => {
     // Within the read interval of the first rename.
     await changeFields(page, [field("1", "fullName"), field("2", "mail")]);
     await page.goto("about:blank");
-    await settle(page, READ_INTERVAL + 500);
+    await settle(page);
 
     expect(reports().at(-1)?.renames).toEqual([
       { oldKey: "email", newKey: "mail" },
@@ -340,7 +341,7 @@ test.describe("Form field changes", () => {
     await openEditor(fixtures, { version: 2 });
     await openForm(page, [field("10", "applicant"), field("11", "email")]);
     await saveDocument(page);
-    await settle(page, READ_INTERVAL + 500);
+    await settle(page);
     expect(reports()).toHaveLength(1);
 
     await changeFields(page, [
@@ -390,7 +391,7 @@ test.describe("Form field changes", () => {
     await changeFields(page, [field("1", "name")]);
 
     await expect
-      .poll(() => reports().at(-1)?.renames, { timeout: READ_INTERVAL * 2 })
+      .poll(() => reports().at(-1)?.renames, { timeout: 2000 })
       .toEqual([]);
     expect(reports()[1].sequence).toBeGreaterThan(reports()[0].sequence);
   });
@@ -530,15 +531,14 @@ test.describe("Form field changes", () => {
     await changeFields(page, [field("1", "fullName")]);
     await expect.poll(() => reports().length).toBe(1);
 
-    await settle(page, READ_INTERVAL);
     await changeFields(page, [field("1", "fullerName")]);
-    await settle(page, READ_INTERVAL + 500);
+    await settle(page);
     await leaveEditor(page);
 
     expect(reports()).toHaveLength(1);
   });
 
-  test("Many changes in a row: the fields are read at most once per interval", async ({
+  test("Many changes while the editor is slow to answer: one more read serves them all and finds the last rename", async ({
     page,
     baseUrl,
     port,
@@ -552,19 +552,22 @@ test.describe("Form field changes", () => {
       serverRequestInterceptor,
       clientRequestInterceptor,
     };
-    recordRequests(fixtures);
+    const { reports } = recordRequests(fixtures);
     await openEditor(fixtures);
 
     await openForm(page, [field("1", "name")]);
-    const afterSnapshot = (await getEditorReads(page)).length;
+    await expect.poll(async () => (await getEditorReads(page)).length).toBe(1);
+    await setReadDelay(page, 1000);
 
     for (const key of ["n1", "n2", "n3", "n4", "n5"]) {
       await changeFields(page, [field("1", key)]);
     }
-    await settle(page, READ_INTERVAL + 500);
+    await expect
+      .poll(() => reports().at(-1)?.renames)
+      .toEqual([{ oldKey: "name", newKey: "n5" }]);
 
-    // The first change at once, the last one after the interval.
-    expect((await getEditorReads(page)).length - afterSnapshot).toBe(2);
+    // The snapshot, the read the first change started and one for the changes that came while it was on its way.
+    expect(await getEditorReads(page)).toHaveLength(3);
   });
 
   test("Editor busy as the form opens: the fields are read again and the rename is reported", async ({
@@ -587,7 +590,7 @@ test.describe("Form field changes", () => {
     await page.waitForFunction(() => !!window.__fakeEditor?.config);
     await failNextReads(page, 1);
     await openForm(page, [field("1", "name")]);
-    await settle(page, READ_INTERVAL + 500);
+    await settle(page, SNAPSHOT_RETRY_DELAY + 500);
 
     await changeFields(page, [field("1", "fullName")]);
 

@@ -42,6 +42,8 @@ type TFakeEditorState = {
   config?: { events?: Record<string, (event?: object) => void> };
   // The next reads the editor does not answer.
   failReads: number;
+  // How long the editor takes to answer a read.
+  readDelay: number;
   reads: { isNoCalc?: boolean }[];
   connectors: number;
 };
@@ -60,6 +62,7 @@ export const installFakeEditor = async (page: Page) => {
     const state: TFakeEditorState = {
       forms: [],
       failReads: 0,
+      readDelay: 0,
       reads: [],
       connectors: 0,
     };
@@ -91,7 +94,7 @@ export const installFakeEditor = async (page: Page) => {
           },
         });
         const result = command();
-        setTimeout(() => callback(result), 0);
+        setTimeout(() => callback(result), state.readDelay);
       },
       executeMethod(
         _name: string,
@@ -151,6 +154,11 @@ export const failNextReads = (page: Page, count: number) =>
   page.evaluate((n) => {
     if (window.__fakeEditor) window.__fakeEditor.failReads = n;
   }, count);
+
+export const setReadDelay = (page: Page, ms: number) =>
+  page.evaluate((delay) => {
+    if (window.__fakeEditor) window.__fakeEditor.readDelay = delay;
+  }, ms);
 
 export const getEditorReads = (page: Page) =>
   page.evaluate(() => window.__fakeEditor?.reads ?? []);

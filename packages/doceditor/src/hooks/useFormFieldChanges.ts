@@ -33,8 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useMemo, useRef } from "react";
-import throttle from "lodash/throttle";
+import { useCallback, useEffect, useRef } from "react";
 
 import { reportFormFieldChanges } from "@docspace/shared/api/files";
 import type { TFormFieldKeyChange } from "@docspace/shared/api/files/types";
@@ -52,8 +51,8 @@ declare const Api: {
   GetDocument: () => { GetAllForms?: () => TBuilderForm[] };
 };
 
-// The fields are read through the editor at most this often while the document is being saved.
-const READ_INTERVAL = 3000;
+// A snapshot read the editor did not answer is tried again after this long.
+const SNAPSHOT_RETRY_DELAY = 3000;
 
 // A read the editor does not answer, as while it is busy, gives up: nothing waits on it for long.
 const READ_TIMEOUT = 5000;
@@ -203,8 +202,11 @@ const useFormFieldChanges = (
   const reported = useRef({ report: NO_RENAMES, sequence: 0 });
   // The renames sent as the editor is left, while their request is on its way.
   const flushing = useRef<string | null>(null);
-  // Reports go one after another, so a slow one cannot follow a newer one.
+  // Reads go one after another, each numbered above the one before; the server keeps the report with the highest
+  // number, so a report sent late cannot replace a newer one.
   const queue = useRef<Promise<void>>(Promise.resolve());
+  // A read is queued and has not started: a change coming now is in what it reads.
+  const readQueued = useRef(false);
   // The server refused the form, as when it is not the original form of a form-filling room: nothing more is sent in
   // this session.
   const refused = useRef(false);
@@ -253,7 +255,9 @@ const useFormFieldChanges = (
       if (!connector.current?.callCommand) return;
 
       if (attempt < SNAPSHOT_ATTEMPTS) {
-        await new Promise((resolve) => setTimeout(resolve, READ_INTERVAL));
+        await new Promise((resolve) =>
+          setTimeout(resolve, SNAPSHOT_RETRY_DELAY),
+        );
       }
     }
 
@@ -264,27 +268,39 @@ const useFormFieldChanges = (
     }
   }, [readFields]);
 
+  // Reads the fields and sends the renames when they changed since the last report. The next read does not wait for
+  // the request, so the renames read last are known as the editor is left even while a report is on its way.
   const reportFieldChanges = useCallback(() => {
-    queue.current = queue.current.then(async () => {
+    const read = queue.current.then(async () => {
+      readQueued.current = false;
+
       const before = snapshot.current;
       const to = target();
-      if (!to || !before) return;
+      if (!to || !before) return null;
 
+      const sequence = Math.max(
+        Date.now(),
+        (latest.current?.sequence ?? 0) + 1,
+      );
+      const fields = await readFields();
+      if (!fields) return null;
+
+      const renames = getRenames(before, fields);
+      latest.current = { renames, sequence };
+
+      return { to, renames, sequence, report: JSON.stringify(renames) };
+    });
+    queue.current = read.then(
+      () => undefined,
+      () => undefined,
+    );
+
+    return read.then(async (result) => {
+      // Nothing new since the last report.
+      if (!result || result.report === reported.current.report) return;
+
+      const { to, renames, sequence, report } = result;
       try {
-        const sequence = Math.max(
-          Date.now(),
-          (latest.current?.sequence ?? 0) + 1,
-        );
-        const fields = await readFields();
-        if (!fields) return;
-
-        const renames = getRenames(before, fields);
-        latest.current = { renames, sequence };
-
-        // Nothing new since the last report.
-        const report = JSON.stringify(renames);
-        if (report === reported.current.report) return;
-
         await reportFormFieldChanges(to.id, {
           version: to.openedVersion,
           sequence,
@@ -295,32 +311,22 @@ const useFormFieldChanges = (
         onReportError(error);
       }
     });
-
-    return queue.current;
   }, [target, readFields, markReported, onReportError]);
 
-  const throttledReport = useMemo(
-    () =>
-      throttle(
-        () => {
-          reportFieldChanges();
-        },
-        READ_INTERVAL,
-        { leading: true, trailing: true },
-      ),
-    [reportFieldChanges],
-  );
-
   // On a change of the document and on its save: a key changed in the field properties shows as a change at once,
-  // while the save may come only when the field or the editor is left.
+  // while the save may come only when the field or the editor is left. The fields are read at once, and changes that
+  // come while a read is on its way share one more read, so they are not read once each.
   const scheduleFieldChanges = useCallback(
     (modified: boolean) => {
       if (!form.current.enabled) return;
 
       if (modified) changed.current = true;
-      throttledReport();
+      if (readQueued.current) return;
+
+      readQueued.current = true;
+      reportFieldChanges();
     },
-    [throttledReport],
+    [reportFieldChanges],
   );
 
   // The editor is being left: the renames read last go with a request that outlives the page. They count as reported
@@ -365,11 +371,10 @@ const useFormFieldChanges = (
 
     return () => {
       disposed.current = true;
-      throttledReport.cancel();
       connector.current?.disconnect?.();
       connector.current = null;
     };
-  }, [throttledReport]);
+  }, []);
 
   return {
     takeSnapshot,
@@ -380,3 +385,4 @@ const useFormFieldChanges = (
 };
 
 export default useFormFieldChanges;
+

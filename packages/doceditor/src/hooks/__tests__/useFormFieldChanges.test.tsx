@@ -522,4 +522,120 @@ describe("useFormFieldChanges", () => {
 
     expect(report).toHaveBeenCalledTimes(2);
   });
+
+  describe("reads as the document changes", () => {
+    // The editor answers a read only when the test lets it: the fields are taken as the read starts.
+    const answers: (() => void)[] = [];
+    const holdReads = () =>
+      editor.callCommand.mockImplementation(
+        (command: () => unknown, callback: (result: unknown) => void) => {
+          const result = command();
+          answers.push(() => callback(result));
+        },
+      );
+    // Lets a queued read start, or an answered one finish.
+    const flush = () =>
+      act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      });
+    const answerRead = async () => {
+      await flush();
+      answers.shift()?.();
+      await flush();
+    };
+
+    const opened = async (...forms: TForm[]) => {
+      render();
+      setForms(...forms);
+      await hook.takeSnapshot();
+      holdReads();
+      editor.callCommand.mockClear();
+    };
+
+    afterEach(() => {
+      answers.length = 0;
+    });
+
+    it("Change: the fields are read at once, not after an interval", async () => {
+      await opened(form("1", "name"));
+
+      setForms(form("1", "fullName"));
+      hook.scheduleFieldChanges(true);
+      await flush();
+
+      expect(editor.callCommand).toHaveBeenCalledTimes(1);
+      await answerRead();
+      expect(report.mock.calls[0][1].renames).toEqual([
+        { oldKey: "name", newKey: "fullName" },
+      ]);
+    });
+
+    it("Changes while a read is on its way: one more read serves them all and finds the last state", async () => {
+      await opened(form("1", "name"));
+
+      hook.scheduleFieldChanges(true);
+      // The first read is on its way.
+      await flush();
+      setForms(form("1", "n1"));
+      hook.scheduleFieldChanges(true);
+      setForms(form("1", "n2"));
+      hook.scheduleFieldChanges(false);
+      setForms(form("1", "n3"));
+      hook.scheduleFieldChanges(true);
+
+      await answerRead();
+      await answerRead();
+      await answerRead();
+
+      expect(editor.callCommand).toHaveBeenCalledTimes(2);
+      expect(report.mock.calls.at(-1)?.[1].renames).toEqual([
+        { oldKey: "name", newKey: "n3" },
+      ]);
+    });
+
+    it("Change after the read began: it is read again, not lost", async () => {
+      await opened(form("1", "name"), form("2", "email"));
+
+      setForms(form("1", "fullName"), form("2", "email"));
+      hook.scheduleFieldChanges(true);
+      await answerRead();
+
+      setForms(form("1", "fullName"), form("2", "mail"));
+      hook.scheduleFieldChanges(true);
+      await answerRead();
+
+      expect(report.mock.calls.at(-1)?.[1].renames).toEqual([
+        { oldKey: "email", newKey: "mail" },
+        { oldKey: "name", newKey: "fullName" },
+      ]);
+    });
+
+    it("Report still on its way: the next change is read, and leaving the editor sends it", async () => {
+      await opened(form("1", "name"), form("2", "email"));
+
+      // The server has not answered either report as the page goes away, which cancels a plain request.
+      report
+        .mockImplementationOnce(() => new Promise(() => {}))
+        .mockImplementationOnce(() => new Promise(() => {}));
+      setForms(form("1", "fullName"), form("2", "email"));
+      hook.scheduleFieldChanges(true);
+      await answerRead();
+
+      setForms(form("1", "fullName"), form("2", "mail"));
+      hook.scheduleFieldChanges(true);
+      await answerRead();
+      window.dispatchEvent(new Event("pagehide"));
+
+      expect(editor.callCommand).toHaveBeenCalledTimes(2);
+      const renames = [
+        { oldKey: "email", newKey: "mail" },
+        { oldKey: "name", newKey: "fullName" },
+      ];
+      expect(report).toHaveBeenLastCalledWith(
+        7,
+        expect.objectContaining({ renames }),
+        true,
+      );
+    });
+  });
 });

@@ -118,6 +118,11 @@ const leaveEditor = async (page: Page) => {
 
 test.describe("Form field changes", () => {
   test.beforeEach(async ({ page }) => {
+    // On a phone or a tablet the editor first offers to open the document in the app; the user chose the browser
+    // before and asked to be remembered, so the editor opens at once.
+    await page.addInitScript(() =>
+      localStorage.setItem("defaultOpenDocument", "web"),
+    );
     await installFakeEditor(page);
   });
 

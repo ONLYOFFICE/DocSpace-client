@@ -48,28 +48,13 @@ import SocketHelper, {
   SocketCommands,
   type SocketEvents,
 } from "@onlyoffice/apps-ui-kit/utils/socket";
-import type { IMessage } from "@onlyoffice/docspace-plugin-sdk";
+import type {
+  IMessage,
+  IModuleEvents,
+  TModuleEventHandler,
+} from "@onlyoffice/docspace-plugin-sdk";
 
 type TDispatch = (args: { message: IMessage; pluginName: string }) => void;
-
-/**
- * What a plugin's handler returns is handled like a message from any class-side callback:
- * `{ actions: [Actions.updateArticleNavigationItems] }` redraws its sidebar entry.
- */
-export type TModuleEventHandler = (
-  message: string,
-) => IMessage | void | Promise<IMessage | void>;
-
-/** What `setModuleEvents` receives. Every function returns the one that undoes it. */
-export type TModuleEvents = {
-  /**
-   * Listens for `plugin:{module}:{event}`. Personal events (sent to the user) arrive without any
-   * subscription; room events need `subscribeRoom`.
-   */
-  on: (module: string, event: string, handler: TModuleEventHandler) => () => void;
-  /** Joins the module room `plugin-{module}-{room}` of the current portal; it is re-joined after a reconnect. */
-  subscribeRoom: (module: string, room: string) => () => void;
-};
 
 // the same rules the server applies; a name it would never send is a plugin bug worth a loud error
 const MODULE_NAME = /^[A-Za-z0-9_.-]{1,64}$/;
@@ -156,7 +141,7 @@ export const releaseModuleEvents = (pluginName: string) => {
 };
 
 /** Host side only: the object handed to one plugin's `setModuleEvents`, bound to that plugin's name. */
-export const createModuleEvents = (pluginName: string): TModuleEvents => {
+export const createModuleEvents = (pluginName: string): IModuleEvents => {
   // a fresh load replaces whatever the previous one subscribed to
   releaseModuleEvents(pluginName);
 

@@ -39,10 +39,11 @@
 // SOURCE OF TRUTH (server, looked up with CodeGraph and read in the source):
 //   - Controller: server/products/ASC.Files/Server/Api/PrivacyRoomController.cs
 //     (PrivacyRoomControllerCommon: SetKeys, ReplaceKey, GetUserKeys,
-//     GetUserKeysForRoom, DeleteKeys)
+//     GetUserKeysForRoom, GetRoomCandidateKeys, DeleteKeys)
 //   - Helper:     server/products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs
 //     (EncryptionKeyPairDtoHelper: CreateKeyPairAsync, ReplaceKeyPairAsync,
-//     GetKeyPairAsync, GetKeyPairForRoomAsync, DeleteAsync)
+//     GetKeyPairAsync, GetKeyPairForRoomAsync,
+//     GetKeyPairForRoomCandidatesAsync, DeleteAsync)
 //   - Envelope:   server/common/ASC.Api.Core/Middleware/CommonApiResponse.cs
 //
 // Contract tests: ./__tests__/contract.test.ts.
@@ -228,6 +229,20 @@ export type PrivacyroomAccessHandlerHandle = {
   setRoomKeys: (roomId: number | string, keys: TEncryptionKeyPair[]) => void;
   /** Registers a room that exists but is not private. */
   setNonPrivateRoom: (roomId: number | string) => void;
+  /** Registers a private room that lies in the archive. */
+  setArchivedRoom: (roomId: number | string) => void;
+  /**
+   * The users who may change the room's access (its owner and managers).
+   * Until a room gets this list, every member with a key in it may.
+   */
+  setRoomAccessManagers: (roomId: number | string, userIds: string[]) => void;
+  /**
+   * The stored keys of a portal user who may be invited, member or not. A
+   * user with no keys registered here or as a member is absent from the
+   * candidates answer, as a guest, a terminated user or somebody outside the
+   * portal is.
+   */
+  setUserKeys: (userId: string, keys: TEncryptionKeyPair[]) => void;
   /** Answers as another signed-in user until `reset`. */
   setCurrentUserId: (userId: string) => void;
   getRequests: () => RequestLog[];
@@ -249,6 +264,9 @@ export const privacyroomAccessHandlers = (
     Object.entries(opts.roomKeys ?? {}),
   );
   const nonPrivateRooms = new Set<string>();
+  const archivedRooms = new Set<string>();
+  const accessManagers = new Map<string, Set<string>>();
+  const userKeys = new Map<string, TEncryptionKeyPair[]>();
   const requests: RequestLog[] = [];
   let callerId = opts.userId ?? DEFAULT_USER_ID;
 
@@ -260,6 +278,15 @@ export const privacyroomAccessHandlers = (
     setNonPrivateRoom: (id) => {
       nonPrivateRooms.add(String(id));
     },
+    setArchivedRoom: (id) => {
+      archivedRooms.add(String(id));
+    },
+    setRoomAccessManagers: (id, userIds) => {
+      accessManagers.set(String(id), new Set(userIds.map(String)));
+    },
+    setUserKeys: (userId, keys) => {
+      userKeys.set(String(userId), [...keys]);
+    },
     setCurrentUserId: (userId) => {
       callerId = userId;
     },
@@ -267,6 +294,9 @@ export const privacyroomAccessHandlers = (
     reset: () => {
       roomKeys.clear();
       nonPrivateRooms.clear();
+      archivedRooms.clear();
+      accessManagers.clear();
+      userKeys.clear();
       requests.length = 0;
       callerId = opts.userId ?? DEFAULT_USER_ID;
     },
@@ -304,6 +334,67 @@ export const privacyroomAccessHandlers = (
         });
       return okResponse(sanitized);
     }),
+
+    /**
+     * Mirrors PrivacyRoomControllerCommon.GetRoomCandidateKeys ->
+     * GetKeyPairForRoomCandidatesAsync (HttpGet "{roomId:int}/access/candidates",
+     * `userIds` repeated once per user): the keys of the named users, members
+     * or not, for a caller who may change the room's access. In order: 404 for
+     * an unknown room, 403 when the caller cannot read it, 400 for a room that
+     * is not private, 403 when the caller may not change its access (a member
+     * without the right, a non-member, every caller on an archived room); a
+     * malformed id is 400 from model binding. A user without stored keys, a
+     * guest, a terminated user or somebody outside the portal is left out, an
+     * id counts once, and no entry carries `privateKeyEnc`, the caller's own
+     * included. The mock has no roles, so the managers come from
+     * `setRoomAccessManagers` and, without that list, every member with a key
+     * in the room passes; a user is "outside the portal" when no keys were
+     * registered for them.
+     */
+    http.get(
+      `${base}/:roomId(\\d+)/access/candidates`,
+      ({ params, request }) => {
+        const id = String(params.roomId);
+        const url = new URL(request.url);
+        requests.push({ method: "GET", url: url.pathname + url.search });
+        const keys = roomKeys.get(id);
+        if (!keys && !nonPrivateRooms.has(id)) {
+          return errorResponse(404, `The room ${id} is not found`);
+        }
+        const members = new Set((keys ?? []).map((k) => String(k.userId)));
+        if (!members.has(callerId) && !accessManagers.get(id)?.has(callerId)) {
+          return errorResponse(403, "You don't have enough permission to edit the file");
+        }
+        if (nonPrivateRooms.has(id)) {
+          return errorResponse(400, "This action is only available in a private room");
+        }
+        const managers = accessManagers.get(id);
+        const mayInvite = managers
+          ? managers.has(callerId)
+          : members.has(callerId);
+        if (archivedRooms.has(id) || !mayInvite) {
+          return errorResponse(403, "You don't have enough permission to perform the operation");
+        }
+        const guidRe =
+          /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        const requested = url.searchParams.getAll("userIds");
+        if (requested.some((userId) => !guidRe.test(userId))) {
+          return errorResponse(400, "The value is not valid");
+        }
+        const answer: Array<Omit<TEncryptionKeyPair, "privateKeyEnc">> = [];
+        for (const userId of new Set(requested.map((u) => u.toLowerCase()))) {
+          const stored =
+            userKeys.get(userId) ??
+            (keys ?? []).filter((k) => String(k.userId).toLowerCase() === userId);
+          for (const k of stored) {
+            if (!k.publicKey?.trim()) continue;
+            const { privateKeyEnc: _privateKeyEnc, ...rest } = k;
+            answer.push(rest);
+          }
+        }
+        return okResponse(answer);
+      },
+    ),
   ];
 };
 

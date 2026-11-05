@@ -47,3 +47,6 @@ export type TEncryptionKeyPair = {
   date?: string;
   cryptoEngineId?: string;
 };
+
+/** A key of a prospective member: the answer never carries the private half. */
+export type TRoomCandidateKey = Omit<TEncryptionKeyPair, "privateKeyEnc">;

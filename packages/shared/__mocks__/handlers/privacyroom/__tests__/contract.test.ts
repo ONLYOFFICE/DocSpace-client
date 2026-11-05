@@ -254,3 +254,96 @@ describe("privacyroom mock - GET /privacyroom/{roomId}/access (GetUserKeysForRoo
     expect((await fetch(ACCESS_URL(7))).status).toBe(403);
   });
 });
+
+describe("privacyroom mock - GET /privacyroom/{roomId}/access/candidates (GetRoomCandidateKeys)", () => {
+  const OWNER = "55555555-5555-5555-5555-555555555555";
+  const CANDIDATE = "33333333-3333-3333-3333-333333333333";
+  const MEMBER = "44444444-4444-4444-4444-444444444444";
+  const key = (userId: string, id: string, publicKey = `pk-${id}`) => ({
+    id,
+    userId,
+    publicKey,
+    privateKeyEnc: `enc-${id}`,
+  });
+  const candidatesUrl = (roomId: number, ...userIds: string[]) => {
+    const params = new URLSearchParams();
+    for (const userId of userIds) params.append("userIds", userId);
+    return `${ACCESS_URL(roomId)}/candidates?${params.toString()}`;
+  };
+  const ask = async (roomId: number, ...userIds: string[]) => {
+    const res = await fetch(candidatesUrl(roomId, ...userIds));
+    return { status: res.status, body: (await res.json()) as Envelope };
+  };
+
+  beforeEach(() => {
+    accessHandle.current!.setCurrentUserId(OWNER);
+    accessHandle.current!.setRoomKeys(7, [key(OWNER, "own")]);
+  });
+
+  it("Invitee with a key", async () => {
+    accessHandle.current!.setUserKeys(CANDIDATE, [
+      key(CANDIDATE, "cand-1"),
+      key(CANDIDATE, "cand-2"),
+    ]);
+    const { status, body } = await ask(7, CANDIDATE);
+    expect(status).toBe(200);
+    expect(body.response!.map((k) => k.id)).toEqual(["cand-1", "cand-2"]);
+    for (const entry of body.response!) {
+      expect(entry).toMatchObject({ userId: CANDIDATE });
+      expect(entry).not.toHaveProperty("privateKeyEnc");
+    }
+  });
+
+  it("Caller among the candidates", async () => {
+    const { body } = await ask(7, OWNER);
+    expect(body.response!.map((k) => k.id)).toEqual(["own"]);
+    expect(body.response![0]).not.toHaveProperty("privateKeyEnc");
+  });
+
+  it("Invitee without a key", async () => {
+    accessHandle.current!.setUserKeys(CANDIDATE, [key(CANDIDATE, "cand-1")]);
+    const { status, body } = await ask(7, CANDIDATE, MEMBER);
+    expect(status).toBe(200);
+    expect(body.response!.map((k) => k.userId)).toEqual([CANDIDATE]);
+  });
+
+  it("Same user twice", async () => {
+    accessHandle.current!.setUserKeys(CANDIDATE, [key(CANDIDATE, "cand-1")]);
+    const { body } = await ask(7, CANDIDATE, CANDIDATE.toUpperCase());
+    expect(body.response).toHaveLength(1);
+  });
+
+  it("No users named", async () => {
+    const { status, body } = await ask(7);
+    expect(status).toBe(200);
+    expect(body.response).toEqual([]);
+  });
+
+  it("Caller who may not invite", async () => {
+    accessHandle.current!.setRoomKeys(7, [key(OWNER, "own"), key(MEMBER, "m")]);
+    accessHandle.current!.setRoomAccessManagers(7, [MEMBER]);
+    expect((await ask(7, CANDIDATE)).status).toBe(403);
+
+    accessHandle.current!.setRoomKeys(8, [key(MEMBER, "m")]);
+    expect((await ask(8, CANDIDATE)).status).toBe(403);
+  });
+
+  it("Archived private room", async () => {
+    accessHandle.current!.setArchivedRoom(7);
+    expect((await ask(7, CANDIDATE)).status).toBe(403);
+  });
+
+  it("answers 400 for a room that is not private", async () => {
+    accessHandle.current!.setNonPrivateRoom(8);
+    accessHandle.current!.setRoomAccessManagers(8, [OWNER]);
+    expect((await ask(8, CANDIDATE)).status).toBe(400);
+  });
+
+  it("answers 404 for an unknown room", async () => {
+    expect((await ask(9999, CANDIDATE)).status).toBe(404);
+  });
+
+  it("answers 400 for a malformed user id", async () => {
+    expect((await ask(7, "not-a-guid")).status).toBe(400);
+  });
+});

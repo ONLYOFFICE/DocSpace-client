@@ -34,7 +34,11 @@
  */
 
 import { request } from "../client";
-import type { TPrivacyRoomRequest, TEncryptionKeyPair } from "./types";
+import type {
+  TPrivacyRoomRequest,
+  TEncryptionKeyPair,
+  TRoomCandidateKey,
+} from "./types";
 
 export async function setEncryptionKeys(data: TPrivacyRoomRequest) {
   const res = (await request({
@@ -69,6 +73,20 @@ export async function getRoomEncryptionKeys(roomId: string | number) {
     method: "get",
     url: `privacyroom/${roomId}/access`,
   })) as TEncryptionKeyPair[];
+  return res ?? [];
+}
+
+export async function getRoomCandidateKeys(
+  roomId: string | number,
+  userIds: string[],
+) {
+  const params = new URLSearchParams();
+  for (const userId of userIds) params.append("userIds", userId);
+
+  const res = (await request({
+    method: "get",
+    url: `privacyroom/${roomId}/access/candidates?${params.toString()}`,
+  })) as TRoomCandidateKey[];
   return res ?? [];
 }
 

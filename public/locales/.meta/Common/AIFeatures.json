@@ -3,7 +3,7 @@
   "content": "AI agents & tools",
   "content_en_sha1_hash": "5e8a1ea10a39a96f5c58153ad0defd0c5fb9f11c",
   "created_at": "2026-10-22T16:08:48.860Z",
-  "updated_at": "2026-10-31T12:58:28.947Z",
+  "updated_at": "2026-11-05T16:49:39.842Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 625,
+      "line_number": 628,
       "context": "const getAIFeaturesItem = useCallback(\n (i: TFileItem) => {\n return {\n id: \"option_ai-features\",\n key: \"ai-features\",\n label: t(\"Common:AIFeatures\"),\n icon: AISvgUrl,\n items: [getAskAIItem(i)],\n };\n },\n [t, getAskAIItem],",
       "module": "/packages/sdk"
     }

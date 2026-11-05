@@ -3,7 +3,7 @@
   "content": "Files can't be moved to another private room. Copy them instead.",
   "content_en_sha1_hash": "74a4bfb8963a4488cb7861aa37a1ba4662cf8b62",
   "created_at": "2026-10-22T09:35:14.027Z",
-  "updated_at": "2026-10-22T09:36:58.875Z",
+  "updated_at": "2026-11-05T16:49:39.998Z",
   "comment": {
     "text": "Error toast shown when the user tries to move files from one private (end-to-end encrypted) room into another, for example by cutting and pasting them; nothing is moved. The second sentence suggests copying instead, which is allowed; \"move\" and \"copy\" are verbs and must stay distinct.",
     "is_auto": true,
@@ -13,9 +13,15 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/filesActionsStore/copyMove.helpers.ts",
-      "line_number": 282,
+      "line_number": 218,
       "context": "return true;\n case \"refuse-folder-out\":\n toastr.error(i18n.t(\"Common:CannotTransferFolderFromPrivateRoom\"));\n return true;\n case \"refuse-move-into\":\n toastr.error(i18n.t(\"Common:CannotMoveToAnotherPrivateRoom\"));\n return true;\n case \"decrypt-out\":\n case \"reencrypt-into\":\n if (plan.refusedFolders.length > 0) {\n toastr.error(i18n.t(\"Common:CannotTransferFolderFromPrivateRoom\"));",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useFileOperations.ts",
+      "line_number": 469,
+      "context": "serverItems = [];\n } else if (plan.kind === \"refuse-folder-out\") {\n toastr.error(t(\"Common:CannotTransferFolderFromPrivateRoom\"));\n serverItems = [];\n } else if (plan.kind === \"refuse-move-into\") {\n toastr.error(t(\"Common:CannotMoveToAnotherPrivateRoom\"));\n serverItems = [];\n } else {\n const transfer = getSelectorTransfer({\n plan,\n selection: pendingItems,",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

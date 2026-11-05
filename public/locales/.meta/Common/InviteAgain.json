@@ -3,7 +3,7 @@
   "content": "Invite again",
   "content_en_sha1_hash": "07b5b407b3fed62817578cce84cc3e5793d96f2b",
   "created_at": "2026-10-28T11:11:59.988Z",
-  "updated_at": "2026-10-28T11:13:28.354Z",
+  "updated_at": "2026-11-05T16:49:39.891Z",
   "comment": {
     "text": "Button in the invitation result of a private room invite panel that returns to the invitation form holding only the people skipped for a missing or unconfirmed encryption key, so they can be invited once more; short imperative button label.",
     "is_auto": true,
@@ -13,9 +13,15 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 1127,
+      "line_number": 1218,
       "context": "className=\"invite-again\"\n scale\n size=\"normal\"\n primary\n onClick={onInviteAgain}\n label={t(\"Common:InviteAgain\")}\n testId=\"invite_panel_invite_again_button\"\n />\n ) : null}\n <Button\n className=\"close-button\"",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
+      "line_number": 1186,
+      "context": "className=\"invite-again\"\n scale\n size={ButtonSize.normal}\n primary\n onClick={onInviteAgain}\n label={t(\"Common:InviteAgain\")}\n testId=\"invite_panel_invite_again_button\"\n />\n ) : null}\n <Button\n className=\"close-button\"",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

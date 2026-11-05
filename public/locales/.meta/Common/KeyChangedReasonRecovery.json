@@ -3,7 +3,7 @@
   "content": "The user restored their identity using a recovery phrase.",
   "content_en_sha1_hash": "6c558fdcf856d995ca2ecb8c0e051cd2ffc19912",
   "created_at": "2026-05-24T17:27:30.372Z",
-  "updated_at": "2026-05-24T17:49:40.004Z",
+  "updated_at": "2026-11-05T16:49:40.022Z",
   "comment": {
     "text": "List item text in the KeyChangeDialog describing a specific reason for a key change.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx",
-      "line_number": 188,
+      "line_number": 193,
       "context": "{t(\"Common:KeyChangedReasonReset\")}\n </Text>\n </li>\n <li>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:KeyChangedReasonRecovery\")}\n </Text>\n </li>\n <li>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:KeyChangedReasonDevice\")}",
       "module": "/packages/shared"
     }

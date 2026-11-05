@@ -3,7 +3,7 @@
   "content": "The room '{{name}}' is unarchived.",
   "content_en_sha1_hash": "d68b761bc18ae09882e723fde8fedb83e39a13de",
   "created_at": "2025-05-19T21:30:56.275Z",
-  "updated_at": "2026-10-31T12:58:29.444Z",
+  "updated_at": "2026-11-05T16:49:40.000Z",
   "comment": {
     "text": "This is a toast message confirming that a single room has been unarchived. The `{{name}}` variable represents the title of the unarchived room.",
     "is_auto": true,
@@ -13,19 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
-      "line_number": 371,
+      "line_number": 379,
       "context": "const successTranslation =\n (folders as TActionItem[]).length !== 1 && Array.isArray(folders)\n ? t(\"Common:UnarchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"Common:UnarchivedRoomAction\", { name: folders[0].title })\n : t(\"Common:UnarchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n setSelected(\"close\");\n return self.moveToRoomsPage();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
-      "line_number": 371,
+      "line_number": 379,
       "context": "const successTranslation =\n (folders as TActionItem[]).length !== 1 && Array.isArray(folders)\n ? t(\"Common:UnarchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"Common:UnarchivedRoomAction\", { name: folders[0].title })\n : t(\"Common:UnarchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n setSelected(\"close\");\n return self.moveToRoomsPage();",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/dialogs/index.tsx",
+      "line_number": 129,
+      "context": "0,\n false,\n false,\n true,\n );\n toastr.success(t(\"Common:UnarchivedRoomAction\", { name: room.title }));\n navigateToParent();\n } catch (e) {\n toastr.error(e as Error);\n } finally {\n activeItemsStore.removeActiveItems([], [room.id]);",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-list/index.tsx",
-      "line_number": 386,
+      "line_number": 389,
       "context": "setSelection([]);\n setBufferSelection(null);\n toastr.success(\n ids.length > 1\n ? t(\"Common:UnarchivedRoomsAction\")\n : t(\"Common:UnarchivedRoomAction\", { name }),\n );\n } catch (e) {\n opAlert = true;\n toastr.error(e as Error);\n } finally {",
       "module": "/packages/sdk"
     }

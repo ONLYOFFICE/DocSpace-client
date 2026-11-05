@@ -3,7 +3,7 @@
   "content": "The model of this project is no longer available. Ask a Project manager to choose another model.",
   "content_en_sha1_hash": "85f36bab9ea56f9d1dde99ee13c07217d1d8b5d3",
   "created_at": "2026-10-31T12:56:52.135Z",
-  "updated_at": "2026-11-02T07:10:46.662Z",
+  "updated_at": "2026-11-05T16:49:39.799Z",
   "comment": {
     "text": "Error text in an AI project chat for regular members when the project's AI model was removed or disabled; tells them to ask a Project manager.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 940,
+      "line_number": 965,
       "context": "const canEdit = !!aiActiveProject?.security?.EditRoom;\n return {\n title: t(\"Common:AIProjectModelUnavailableTitle\"),\n description: canEdit\n ? t(\"Common:AIProjectModelUnavailableManager\")\n : t(\"Common:AIProjectModelUnavailableMember\"),\n action:\n canEdit && aiActiveProject\n ? {\n text: t(\"Common:AIProjectEdit\"),\n onClick: () => openEditAiProject(aiActiveProject),",
       "module": "/packages/client"
     }

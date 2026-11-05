@@ -3,7 +3,7 @@
   "content": "Could not invite {{users}}. Try again.",
   "content_en_sha1_hash": "55d75d7e80bbe535c43b852a8c01f966338c1fd2",
   "created_at": "2026-11-03T12:53:16.920Z",
-  "updated_at": "2026-11-03T12:55:56.345Z",
+  "updated_at": "2026-11-05T16:49:39.893Z",
   "comment": {
     "text": "Message in the result view of the invite panel of a private (end-to-end encrypted) room, naming the invitees whose invitation failed for a reason other than a missing encryption key; {{users}} is a comma-separated list of people's names. \"Try again\" is an instruction to the inviter, not a button label.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 96,
       "context": "})}\n </Text>\n ) : null}\n {refusedOtherwise.length ? (\n <Text className={styles.description}>\n {t(\"Common:EncryptedInviteFailed\", {\n users: namesOf(refusedOtherwise),\n })}\n </Text>\n ) : null}\n </section>",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteResult.tsx",
+      "line_number": 105,
+      "context": "})}\n </Text>\n ) : null}\n {refusedOtherwise.length ? (\n <Text className={styles.description}>\n {t(\"Common:EncryptedInviteFailed\", {\n users: namesOf(refusedOtherwise),\n })}\n </Text>\n ) : null}\n </section>",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

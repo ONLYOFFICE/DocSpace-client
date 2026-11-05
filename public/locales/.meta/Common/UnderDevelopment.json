@@ -3,7 +3,7 @@
   "content": "This feature is under development",
   "content_en_sha1_hash": "d0cf4ed9c9a0a0e3f159d3f5147e814bc0004e5c",
   "created_at": "2026-05-19T19:03:26.191Z",
-  "updated_at": "2026-10-31T12:58:28.894Z",
+  "updated_at": "2026-11-05T16:49:39.833Z",
   "comment": {
     "text": "An informational toast message shown when a user attempts to access or install a feature that is not yet available.",
     "is_auto": true,
@@ -33,6 +33,12 @@
       "file_path": "/packages/sdk/src/app/(forms)/forms/layout.client.tsx",
       "line_number": 536,
       "context": "},\n {\n id: \"quick-generate-ai\",\n icon: <GeneratePdfAiIcon />,\n label: t(\"Common:GenerateWithAI\"),\n onClick: () => toastr.info(t(\"Common:UnderDevelopment\")),\n },\n {\n id: \"quick-from-text\",\n icon: <CreateFromTextIcon />,\n label: t(\"Common:FromTextFile\"),",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/not-available/index.tsx",
+      "line_number": 65,
+      "context": "width: \"100%\",\n height: \"100%\",\n padding: 24,\n }}\n >\n <h2 style={{ margin: 0 }}>{t(\"Common:UnderDevelopment\")}</h2>\n </div>\n );\n };\n \n export default PrivateRoomsNotAvailable;",
       "module": "/packages/sdk"
     }
   ],

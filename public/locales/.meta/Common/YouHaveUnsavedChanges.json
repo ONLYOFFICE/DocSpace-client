@@ -3,7 +3,7 @@
   "content": "You have unsaved changes",
   "content_en_sha1_hash": "5ea3902f149163da1cf57472568ec3a89d52e790",
   "created_at": "2025-05-19T21:30:53.245Z",
-  "updated_at": "2026-10-31T12:58:29.231Z",
+  "updated_at": "2026-11-05T16:49:39.931Z",
   "comment": {
     "text": "This is a reminder message displayed above \"Save\" and \"Cancel\" buttons, indicating that changes have been made but not yet saved.",
     "is_auto": true,
@@ -31,19 +31,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 561,
-      "context": "tabIndex={3}\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={hasScroll}\n additionalClassSaveButton=\"language-time-zone-save\"",
+      "line_number": 558,
+      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={hasScroll}\n additionalClassSaveButton=\"language-time-zone-save\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 424,
+      "line_number": 422,
       "context": "onSaveClick={onOpenModal}\n onCancelClick={onCancelPortalName}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n hasScroll={hasScroll}\n saveButtonDisabled={!!errorValue}\n additionalClassSaveButton=\"portal-renaming-save\"\n additionalClassCancelButton=\"portal-renaming-cancel\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 423,
+      "line_number": 421,
       "context": "id=\"buttonsWelcomePage\"\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveGreetingSettings}\n onCancelClick={onRestoreGreetingSettings}\n showReminder={state.showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll={state.hasScroll}\n disableRestoreToDefault={greetingSettingsIsDefault}",
       "module": "/packages/client"
     },
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 578,
+      "line_number": 573,
       "context": "<SaveCancelButtons\n onSaveClick={onSubmit}\n onCancelClick={onReset}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonDisabled={saveButtonDisabled}\n disableRestoreToDefault={\n isDefaultSettings || isSaveLoading || isResetLoading\n }\n displaySettings",
       "module": "/packages/client"
     },

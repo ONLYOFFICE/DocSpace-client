@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2026-11-03T13:10:45.657Z",
+  "updated_at": "2026-11-05T16:49:39.826Z",
   "comment": {
     "text": "This is a button label. It appears on various selectors (people, AI agents, files) to confirm the user's selection.",
     "is_auto": true,
@@ -61,13 +61,13 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 64,
+      "line_number": 58,
       "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 64,
+      "line_number": 58,
       "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\");\n }",
       "module": "/packages/client"
     },
@@ -103,13 +103,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1301,
+      "line_number": 1319,
       "context": "if (!isCollaborator && !isVisitor) {\n subjectOptions.push({\n id: \"filter_author-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:SelectAction\"),\n });\n }\n \n const ownerOptions = [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1301,
+      "line_number": 1319,
       "context": "if (!isCollaborator && !isVisitor) {\n subjectOptions.push({\n id: \"filter_author-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:SelectAction\"),\n });\n }\n \n const ownerOptions = [\n {",
       "module": "/packages/client"
     },
@@ -170,7 +170,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/SelectTextInput.js",
       "line_number": 65,
-      "context": "<Label className=\"label\" text={t(\"SelectButtonText\")} />\n <TextInput\n scale\n name=\"select_button_text\"\n onChange={onChangeAcceptLabel}\n placeholder={t(\"Common:SelectAction\")}\n value={value}\n tabIndex={7}\n testId=\"select_text_input\"\n />\n </>",
+      "context": "<Label className=\"label\" text={t(\"SelectButtonText\")} />\n <TextInput\n scale\n name=\"select_button_text\"\n onChange={onChangeAcceptLabel}\n placeholder={t(\"Common:SelectAction\")}\n value={value}\n testId=\"select_text_input\"\n />\n </>\n );",
       "module": "/packages/client"
     },
     {
@@ -181,13 +181,13 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
-      "line_number": 63,
+      "line_number": 65,
       "context": "// const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const headerLabel = fileTypeDetection.filterParam\n ? (t?.(\"Common:SelectFile\") ?? \"\")\n : (t?.(\"Common:SelectAction\") ?? \"\");\n \n const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:\n return t?.(\"Editor:MailMergeFileType\") ?? \"\";",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
-      "line_number": 63,
+      "line_number": 65,
       "context": "// const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const headerLabel = fileTypeDetection.filterParam\n ? (t?.(\"Common:SelectFile\") ?? \"\")\n : (t?.(\"Common:SelectAction\") ?? \"\");\n \n const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:\n return t?.(\"Editor:MailMergeFileType\") ?? \"\";",
       "module": "/packages/doceditor"
     },
@@ -229,32 +229,32 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 191,
+      "line_number": 194,
       "context": "const getSelectItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => filesSelectionStore.addSelection(i),\n disabled: false,\n };\n },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
-      "line_number": 269,
+      "line_number": 270,
       "context": "if (!isCollaborator && !isVisitor) {\n ownerOptions.push({\n id: \"filter_owner-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:SelectAction\"),\n });\n }\n \n const subjectOptions: unknown[] = [\n {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
-      "line_number": 269,
+      "line_number": 270,
       "context": "if (!isCollaborator && !isVisitor) {\n ownerOptions.push({\n id: \"filter_owner-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:SelectAction\"),\n });\n }\n \n const subjectOptions: unknown[] = [\n {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 221,
-      "context": "if (isArchive) {\n return [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => filesSelectionStore.addSelection(item),\n },\n {\n id: \"option_open\",",
+      "line_number": 250,
+      "context": "if (isArchive) {\n const archiveItems: ContextMenuModel[] = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => filesSelectionStore.addSelection(item),\n },\n {\n id: \"option_open\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 221,
-      "context": "if (isArchive) {\n return [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => filesSelectionStore.addSelection(item),\n },\n {\n id: \"option_open\",",
+      "line_number": 250,
+      "context": "if (isArchive) {\n const archiveItems: ContextMenuModel[] = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => filesSelectionStore.addSelection(item),\n },\n {\n id: \"option_open\",",
       "module": "/packages/sdk"
     },
     {

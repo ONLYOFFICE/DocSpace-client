@@ -3,7 +3,7 @@
   "content": "Not shared with {{names}}: their encryption key has changed and was not trusted.",
   "content_en_sha1_hash": "25f2711adf05525b1b0d206493e0197e3dc00fe3",
   "created_at": "2026-10-20T15:58:24.847Z",
-  "updated_at": "2026-10-20T15:59:38.915Z",
+  "updated_at": "2026-11-05T16:49:39.895Z",
   "comment": {
     "text": "Warning toast after uploading a file to an end-to-end encrypted private room, and tooltip of the info icon next to that file in the upload panel. Shown when some room members cannot open the file because their encryption key changed and the uploader did not trust the new key. {{names}} is a comma-separated list of people's display names, one or several, so keep 'their' neutral in number; worded like Common:EncryptedSkippedKeyMismatch.",
     "is_auto": true,
@@ -13,15 +13,21 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/UploadPanel/FileRow.js",
-      "line_number": 268,
+      "line_number": 267,
       "context": "{item.skippedMembers?.length ? (\n <HelpButton\n className=\"upload-panel_not-shared\"\n iconName={InfoReactSvgUrl}\n size={12}\n tooltipContent={t(\"Common:EncryptedUploadNotSharedWith\", {\n names: item.skippedMembers\n .map((m) => m.displayName || m.userId)\n .join(\", \"),\n })}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/uploadDataStore/encryption.helpers.ts",
-      "line_number": 262,
+      "line_number": 117,
       "context": "(m) => !self.reportedSkippedMemberIds.has(m.userId),\n );\n if (fresh.length > 0) {\n for (const m of fresh) self.reportedSkippedMemberIds.add(m.userId);\n toastr.warning(\n i18n.t(\"Common:EncryptedUploadNotSharedWith\", {\n names: fresh.map((m) => m.displayName).join(\", \"),\n }),\n );\n }\n return named;",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedUpload.ts",
+      "line_number": 118,
+      "context": "(member) => !reported.has(member.userId),\n );\n if (fresh.length === 0) return;\n for (const member of fresh) reported.add(member.userId);\n toastr.warning(\n t(\"Common:EncryptedUploadNotSharedWith\", {\n names: fresh.map((m) => m.displayName ?? m.userId).join(\", \"),\n }),\n );\n },\n [privateUploadStore, t],",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

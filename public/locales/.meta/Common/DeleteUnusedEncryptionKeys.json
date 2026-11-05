@@ -3,7 +3,7 @@
   "content": "Delete unused keys",
   "content_en_sha1_hash": "1d40d7333a40b568711aeb36b56706b142353a5c",
   "created_at": "2026-10-20T11:57:55.819Z",
-  "updated_at": "2026-10-20T11:59:57.959Z",
+  "updated_at": "2026-11-05T16:49:39.982Z",
   "comment": {
     "text": "Button label and dialog title on the Keys management page: deletes the user's encryption keys that are stored on the server but no longer used, keeping the current key. Verb phrase, keep it short.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 269,
+      "line_number": 305,
       "context": "</span>\n <Button\n className={styles.resetButton}\n size={ButtonSize.small}\n onClick={deleteUnused.request}\n label={t(\"Common:DeleteUnusedEncryptionKeys\")}\n isLoading={deleteUnused.isPending}\n isDisabled={busy}\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     }

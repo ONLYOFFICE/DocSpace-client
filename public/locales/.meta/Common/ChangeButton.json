@@ -3,7 +3,7 @@
   "content": "Change",
   "content_en_sha1_hash": "64fbd995d3b6b156ee26ae3c03e6516434c34c12",
   "created_at": "2025-05-19T21:30:43.398Z",
-  "updated_at": "2026-10-31T12:58:28.812Z",
+  "updated_at": "2026-11-05T16:49:39.806Z",
   "comment": {
     "text": "This is a button label. It allows users to confirm a change, such as changing a room owner, portal owner, or user type.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 252,
-      "context": "{t(\"Settings:AccessRightsChangeOwnerConfirmText\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n tabIndex={5}\n label={t(\"Common:ChangeButton\")}\n size=\"normal\"\n primary\n scale\n isDisabled={!selectedUser}\n onClick={onChangeAction}",
+      "line_number": 251,
+      "context": "<Text className={styles.info}>\n {t(\"Settings:AccessRightsChangeOwnerConfirmText\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n label={t(\"Common:ChangeButton\")}\n size=\"normal\"\n primary\n scale\n isDisabled={!selectedUser}\n onClick={onChangeAction}",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Passphrase",
   "content_en_sha1_hash": "89950c9c18f1aef5e3733154f6e192cf5440c964",
   "created_at": "2026-05-24T17:27:34.649Z",
-  "updated_at": "2026-08-13T10:58:03.342Z",
+  "updated_at": "2026-11-05T16:49:40.026Z",
   "comment": {
     "text": "Placeholder for input fields in the passphrase management modal and dialog.",
     "is_auto": true,
@@ -13,8 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 268,
-      "context": "inputValue={passphrase}\n onChange={(e: React.ChangeEvent<HTMLInputElement>) => {\n setPassphrase(e.target.value);\n setError(\"\");\n }}\n placeholder={t(\"Common:Passphrase\")}\n scale\n size={InputSize.base}\n simpleView={!isNew}\n isFullWidth\n passwordSettings={PASSPHRASE_SETTINGS}",
+      "line_number": 282,
+      "context": ") : null}\n \n <FieldContainer\n isVertical\n labelVisible\n labelText={t(\"Common:Passphrase\")}\n labelFor=\"passphrase\"\n removeMargin\n hasError={passphraseHasError}\n errorMessage={displayedError ?? \"\"}\n errorMessageWidth=\"100%\"",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
+      "line_number": 282,
+      "context": ") : null}\n \n <FieldContainer\n isVertical\n labelVisible\n labelText={t(\"Common:Passphrase\")}\n labelFor=\"passphrase\"\n removeMargin\n hasError={passphraseHasError}\n errorMessage={displayedError ?? \"\"}\n errorMessageWidth=\"100%\"",
       "module": "/packages/shared"
     }
   ],

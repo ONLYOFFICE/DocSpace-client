@@ -3,7 +3,7 @@
   "content": "Identity provider entity ID (issuer URL)",
   "content_en_sha1_hash": "7d6f7970a43c5453f49725fd20770779402c4f27",
   "created_at": "2026-08-31T18:23:40.068Z",
-  "updated_at": "2026-08-31T21:02:30.818Z",
+  "updated_at": "2026-11-05T16:49:39.970Z",
   "comment": {
     "text": "Tooltip text for the Identity Provider entity ID field within the Single Sign-On integration settings.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
-      "line_number": 99,
-      "context": "<SsoFormField\n labelText={t(\"IdpEntityId\")}\n name=\"entityId\"\n placeholder={PROVIDER_URL}\n tabIndex={5}\n tooltipContent={<Text fontSize=\"12px\">{t(\"ProviderURLTooltip\")}</Text>}\n tooltipClass=\"provider-url-tooltip icon-button\"\n value={entityId}\n hasError={entityIdHasError}\n dataTestId=\"entity_id\"\n />",
+      "line_number": 97,
+      "context": "<SsoFormField\n labelText={t(\"IdpEntityId\")}\n name=\"entityId\"\n placeholder={PROVIDER_URL}\n tooltipContent={<Text fontSize=\"12px\">{t(\"ProviderURLTooltip\")}</Text>}\n tooltipClass=\"provider-url-tooltip icon-button\"\n value={entityId}\n hasError={entityIdHasError}\n dataTestId=\"entity_id\"\n />",
       "module": "/packages/client"
     }
   ],

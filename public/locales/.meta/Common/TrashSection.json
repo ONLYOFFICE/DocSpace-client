@@ -3,7 +3,7 @@
   "content": "Trash",
   "content_en_sha1_hash": "e3bf62bb7f5af7ba291b2df1a11d573bdb55d7e9",
   "created_at": "2025-05-19T21:30:49.325Z",
-  "updated_at": "2026-11-02T09:45:28.066Z",
+  "updated_at": "2026-11-05T16:49:39.797Z",
   "comment": {
     "text": "This is a noun referring to the \"Trash\" section where deleted files are stored. It appears as a label in various UI components, often as part of a longer sentence or as a section name.",
     "is_auto": true,
@@ -12,26 +12,20 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/Article/Body/Items.js",
-      "line_number": 333,
-      "context": ");\n \n const onRemove = React.useCallback(() => {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations);\n }, [deleteAction]);",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 452,
+      "line_number": 456,
       "context": "}),\n ]\n : []),\n {\n id: \"rooms-trash\",\n label: t(\"Common:TrashSection\"),\n icon: getCatalogIconUrlByType(FolderType.TRASH),\n ...nav(\n scopedUrl(\n CategoryType.Trash,\n \"/rooms/trash\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 452,
+      "line_number": 456,
       "context": "}),\n ]\n : []),\n {\n id: \"rooms-trash\",\n label: t(\"Common:TrashSection\"),\n icon: getCatalogIconUrlByType(FolderType.TRASH),\n ...nav(\n scopedUrl(\n CategoryType.Trash,\n \"/rooms/trash\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 452,
+      "line_number": 456,
       "context": "}),\n ]\n : []),\n {\n id: \"rooms-trash\",\n label: t(\"Common:TrashSection\"),\n icon: getCatalogIconUrlByType(FolderType.TRASH),\n ...nav(\n scopedUrl(\n CategoryType.Trash,\n \"/rooms/trash\",",
       "module": "/packages/client"
     },
@@ -127,7 +121,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 338,
+      "line_number": 344,
       "context": "t(\"Files:ArchiveEmptyScreenUser\"),\n )\n .with([FolderType.TRASH, P._], () =>\n t(\"Common:TrashFunctionalityDescription\", {\n appName: getSectionAppName(t, filterFolderType),\n sectionName: t(\"Common:TrashSection\"),\n }),\n )\n .otherwise(() => \"\");\n };",
       "module": "/packages/client"
     },
@@ -169,7 +163,7 @@
     },
     {
       "file_path": "/packages/client/src/HOCs/withHotkeys.js",
-      "line_number": 479,
+      "line_number": 467,
       "context": "if (confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n deleteAction(translations).catch((err) => toastr.error(err));\n }\n }",
       "module": "/packages/client"
     },
@@ -235,7 +229,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 624,
+      "line_number": 632,
       "context": "period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:FilesMovedToTrashNotice\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }`;\n \n return null;\n }, [sharedType, isEncryptedRoom, lifetime, t]);",
       "module": "/packages/client"
     },
@@ -253,13 +247,13 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
-      "line_number": 354,
+      "line_number": 358,
       "context": "if (self.filesSettingsStore.confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n self.filesActionsStore\n .deleteAction(translations)",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 206,
+      "line_number": 222,
       "context": "if (confirmDelete) {\n this.dialogsStore.setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: this.t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: this.t(\"Common:TrashSection\"),\n }),\n };\n \n this.filesActionsStore\n .deleteAction(translations)",
       "module": "/packages/client"
     },
@@ -289,7 +283,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/header/index.tsx",
-      "line_number": 143,
+      "line_number": 145,
       "context": "const navigationTitles = useMemo(\n () =>\n isTrashSection\n ? {\n warningText: t(\"Common:TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n }\n : undefined,\n [isTrashSection, t],\n );",
       "module": "/packages/sdk"
     },
@@ -331,7 +325,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 629,
+      "line_number": 645,
       "context": "<WarningComponent\n title={t(\n \"Common:TrashAutoDeleteWarning\",\n {\n sectionName: t(\n \"Common:TrashSection\",\n ),\n },\n )}\n />\n ) : undefined",
       "module": "/packages/sdk"
     },

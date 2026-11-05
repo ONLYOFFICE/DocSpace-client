@@ -3,7 +3,7 @@
   "content": "Single Sign-On",
   "content_en_sha1_hash": "9cd5b7eb1680d90f18ef828206965ff742d88dda",
   "created_at": "2025-05-19T21:30:52.736Z",
-  "updated_at": "2026-10-21T10:17:45.804Z",
+  "updated_at": "2026-11-05T16:49:39.970Z",
   "comment": {
     "text": "This is a section title and a placeholder text. It refers to the Single Sign-On feature, which allows users to authenticate using external identity providers.",
     "is_auto": true,
@@ -20,7 +20,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
       "line_number": 85,
-      "context": "<UploadXML />\n \n <SsoFormField\n labelText={t(\"CustomEntryButton\")}\n name=\"spLoginLabel\"\n placeholder={t(\"Settings:SingleSignOn\")}\n tabIndex={4}\n tooltipContent={<Text fontSize=\"12px\">{t(\"CustomEntryTooltip\")}</Text>}\n tooltipClass=\"custom-entry-tooltip icon-button\"\n value={spLoginLabel}\n hasError={spLoginLabelHasError}",
+      "context": "<UploadXML />\n \n <SsoFormField\n labelText={t(\"CustomEntryButton\")}\n name=\"spLoginLabel\"\n placeholder={t(\"Settings:SingleSignOn\")}\n tooltipContent={<Text fontSize=\"12px\">{t(\"CustomEntryTooltip\")}</Text>}\n tooltipClass=\"custom-entry-tooltip icon-button\"\n value={spLoginLabel}\n hasError={spLoginLabelHasError}\n dataTestId=\"sp_login_label\"",
       "module": "/packages/client"
     },
     {

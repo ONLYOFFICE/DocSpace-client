@@ -3,7 +3,7 @@
   "content": "When in doubt, verify the new fingerprint with the user through another trusted channel (in person, phone, signed email) before trusting it.",
   "content_en_sha1_hash": "6f795759514dd55c6ea58a56e51206f81f2ef652",
   "created_at": "2026-05-24T17:27:30.427Z",
-  "updated_at": "2026-05-24T17:48:21.410Z",
+  "updated_at": "2026-11-05T16:49:40.022Z",
   "comment": {
     "text": "Instructional text in a modal dialog providing security advice when a key changes; it appears as small, secondary text at the bottom of a details section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx",
-      "line_number": 203,
+      "line_number": 208,
       "context": "{t(\"Common:KeyChangedReasonAttack\")}\n </Text>\n </li>\n </ul>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:KeyChangedVerifyOutOfBand\")}\n </Text>\n </div>\n </details>\n </div>\n </ModalDialog.Body>",
       "module": "/packages/shared"
     }

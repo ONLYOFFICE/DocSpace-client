@@ -3,7 +3,7 @@
   "content": "Collaboration room",
   "content_en_sha1_hash": "020e5e753e7a2509b4e791bcc1a8abc08bb1e51d",
   "created_at": "2025-05-19T21:30:43.513Z",
-  "updated_at": "2026-10-31T12:58:28.930Z",
+  "updated_at": "2026-11-05T16:49:39.837Z",
   "comment": {
     "text": "This is a label for a type of room in DocSpace, specifically an \"Editing Room\" where multiple users can collaborate on documents. It appears in room selection menus and settings.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/index.tsx",
-      "line_number": 177,
+      "line_number": 178,
       "context": "standInForList: true,\n // Named by the tiles' own keys, in the banner order.\n rooms: [\n {\n roomType: RoomsType.EditingRoom,\n title: t(\"Common:CollaborationRoomTitle\"),\n },\n {\n roomType: RoomsType.VirtualDataRoom,\n title: t(\"Common:VirtualDataRoom\"),\n },",
       "module": "/packages/client"
     },
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 245,
+      "line_number": 249,
       "context": "},\n {\n id: \"quick-collaboration-room\",\n dataTestId: \"quick-collaboration-room\",\n icon: <QuickCollaborationRoomIcon />,\n label: t(\"Common:CollaborationRoomTitle\"),\n onClick: () =>\n dispatchCreateRoom(currentFolderId, RoomsType.EditingRoom),\n },\n {\n id: \"quick-public-room\",",
       "module": "/packages/client"
     },

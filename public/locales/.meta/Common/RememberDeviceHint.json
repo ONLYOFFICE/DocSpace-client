@@ -3,7 +3,7 @@
   "content": "The key stays on this device through auto-lock for 30 days. Do not use this on a shared computer.",
   "content_en_sha1_hash": "e111e0d15b104f3a42660cb4717e309cba44ef3e",
   "created_at": "2026-10-20T17:01:15.182Z",
-  "updated_at": "2026-10-20T17:02:13.814Z",
+  "updated_at": "2026-11-05T16:49:40.027Z",
   "comment": {
     "text": "Small hint under the \"Don't ask again on this device\" checkbox in the passphrase unlock dialog for end-to-end encrypted private rooms. Says that the unlocked encryption key stays on this computer even when the session auto-locks, for at most 30 days, and warns against ticking the box on a shared computer. 'Auto-lock' is the automatic locking after inactivity or when the tab is hidden.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 340,
-      "context": "onChange={(e) => setRememberDevice(e.target.checked)}\n label={t(\"Common:RememberDeviceLabel\")}\n tabIndex={4}\n />\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:RememberDeviceHint\")}\n </Text>\n </div>\n ) : null}\n \n {onPasskeyUnlock && !isNew ? (",
+      "line_number": 372,
+      "context": "isDisabled={isLoading}\n onChange={(e) => setRememberDevice(e.target.checked)}\n label={t(\"Common:RememberDeviceLabel\")}\n />\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:RememberDeviceHint\")}\n </Text>\n </div>\n ) : null}\n \n {onPasskeyUnlock && !isNew ? (",
       "module": "/packages/shared"
     }
   ],

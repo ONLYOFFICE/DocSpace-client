@@ -3,7 +3,7 @@
   "content": "Move to",
   "content_en_sha1_hash": "349f807a5e5497d0e5f0e5eb83dd8a59d2dd2c7d",
   "created_at": "2025-05-19T21:30:46.631Z",
-  "updated_at": "2026-11-03T13:10:45.656Z",
+  "updated_at": "2026-11-05T16:49:39.825Z",
   "comment": {
     "text": "This is a button label or menu item that initiates the action of moving a selected file or folder to a different location.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 60,
+      "line_number": 54,
       "context": "isThirdParty?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }",
       "module": "/packages/client"
     },
@@ -25,25 +25,25 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
-      "line_number": 301,
+      "line_number": 305,
       "context": "onClick: self.onClickDownloadAs,\n disabled: !hasDownloadAccess || !canConvertSelected,\n },\n {\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: allFilesIsEditing\n ? () => onShowEditingToast(t)\n : self.onMoveAction,\n disabled: isRecycleBinFolder || !canMove,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 282,
+      "line_number": 307,
       "context": "case \"moveTo\":\n if (!this.isAvailableOption(\"moveTo\")) return null;\n return {\n id: \"menu-move-to\",\n label: t(\"Common:MoveTo\"),\n onClick: this.moveToHandle,\n iconUrl: MoveReactSvgUrl,\n };\n case \"pin\":\n return {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 480,
+      "line_number": 483,
       "context": "const getMoveToItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: () => onMoveClick?.(i),\n disabled: !onMoveClick,\n };\n },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 480,
+      "line_number": 483,
       "context": "const getMoveToItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: () => onMoveClick?.(i),\n disabled: !onMoveClick,\n };\n },",
       "module": "/packages/sdk"
     },

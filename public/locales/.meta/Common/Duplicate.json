@@ -3,7 +3,7 @@
   "content": "Duplicate",
   "content_en_sha1_hash": "972d57379db3e5be76d4ead709fef1ad71ff03d6",
   "created_at": "2025-05-19T21:30:44.727Z",
-  "updated_at": "2026-11-03T13:10:45.872Z",
+  "updated_at": "2026-11-05T16:49:39.995Z",
   "comment": {
     "text": "Button label. Creates a copy of the selected item.",
     "is_auto": true,
@@ -31,19 +31,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 466,
+      "line_number": 469,
       "context": "const getDuplicateItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => onDuplicateClick?.(i),\n disabled: !onDuplicateClick,\n };\n },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 192,
+      "line_number": 221,
       "context": "dialogsStore.openDialog(SDKDialogs.LeaveRoom);\n };\n const handleDuplicate = async () => {\n const opId = operationsStore.startOperation(\n \"duplicate\",\n t(\"Common:Duplicate\"),\n );\n let opAlert = false;\n try {\n const operations = await api.files.duplicate(\n [room.id as number],",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 192,
+      "line_number": 221,
       "context": "dialogsStore.openDialog(SDKDialogs.LeaveRoom);\n };\n const handleDuplicate = async () => {\n const opId = operationsStore.startOperation(\n \"duplicate\",\n t(\"Common:Duplicate\"),\n );\n let opAlert = false;\n try {\n const operations = await api.files.duplicate(\n [room.id as number],",
       "module": "/packages/sdk"
     },

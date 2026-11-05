@@ -14,56 +14,25 @@ describe("isFilesDataTableEnabled", () => {
     vi.restoreAllMocks();
   });
 
-  it("keeps the old table until the switch is on", () => {
-    expect(isFilesDataTableEnabled("files")).toBe(false);
+  it("draws the DataTable unless the switch is off", () => {
+    expect(isFilesDataTableEnabled()).toBe(true);
 
-    localStorage.setItem(FILES_DATA_TABLE_SWITCH, "on");
+    localStorage.setItem(FILES_DATA_TABLE_SWITCH, "off");
 
-    expect(isFilesDataTableEnabled("files")).toBe(true);
+    expect(isFilesDataTableEnabled()).toBe(false);
   });
 
   it("ignores any other value", () => {
-    localStorage.setItem(FILES_DATA_TABLE_SWITCH, "true");
+    localStorage.setItem(FILES_DATA_TABLE_SWITCH, "false");
 
-    expect(isFilesDataTableEnabled("files")).toBe(false);
+    expect(isFilesDataTableEnabled()).toBe(true);
   });
 
-  it("draws every documents section, the rooms lists among them", () => {
-    localStorage.setItem(FILES_DATA_TABLE_SWITCH, "on");
-
-    for (const scope of [
-      "files",
-      "trash",
-      "recent",
-      "favorites",
-      "sharedWithMe",
-      "inSharedFolder",
-      "vdrIndexing",
-      "rooms",
-      "templates",
-    ] as const) {
-      expect(isFilesDataTableEnabled(scope)).toBe(true);
-    }
-  });
-
-  it("leaves the contacts tables on the old table", () => {
-    localStorage.setItem(FILES_DATA_TABLE_SWITCH, "on");
-
-    for (const scope of [
-      "people",
-      "guests",
-      "groups",
-      "insideGroup",
-    ] as const) {
-      expect(isFilesDataTableEnabled(scope)).toBe(false);
-    }
-  });
-
-  it("falls back to the old table when storage is blocked", () => {
+  it("draws the DataTable when storage is blocked", () => {
     vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
       throw new Error("blocked");
     });
 
-    expect(isFilesDataTableEnabled("files")).toBe(false);
+    expect(isFilesDataTableEnabled()).toBe(true);
   });
 });

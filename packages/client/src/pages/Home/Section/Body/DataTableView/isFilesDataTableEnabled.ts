@@ -33,26 +33,22 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TTableScope } from "SRC_DIR/store/TableStore";
-
-import { isFilesSection } from "./columns/sections";
-
 /** `localStorage` key of the switch between the old table and the DataTable. */
 export const FILES_DATA_TABLE_SWITCH = "files-data-table";
 
 /**
- * Whether the documents list uses the ui-kit DataTable, for the sections it can
- * already draw (`SECTIONS`).
- * Opt-in while the new view is being built:
- * `localStorage.setItem("files-data-table", "on")` turns it on, anything else
- * keeps the old table.
+ * Whether the documents list uses the ui-kit DataTable. It does by default;
+ * while it is trialled, `localStorage.setItem("files-data-table", "off")`
+ * brings back the old table.
+ *
+ * Not by the table scope: on the way to Contacts the scope turns to theirs a
+ * moment before the documents body unmounts, and switching to the old table
+ * then had its header store the documents columns under the Contacts keys.
  */
-export const isFilesDataTableEnabled = (scope: TTableScope) => {
-  if (!isFilesSection(scope)) return false;
-
+export const isFilesDataTableEnabled = () => {
   try {
-    return window.localStorage.getItem(FILES_DATA_TABLE_SWITCH) === "on";
+    return window.localStorage.getItem(FILES_DATA_TABLE_SWITCH) !== "off";
   } catch {
-    return false;
+    return true;
   }
 };

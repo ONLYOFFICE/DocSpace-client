@@ -23,9 +23,10 @@ vi.mock("@onlyoffice/apps-ui-kit/components/data-table", () => ({
     width: { type: "fixed", size: 24 },
     settings,
   }),
-  contextMenuColumn: () => ({
+  contextMenuColumn: (settings: object) => ({
     id: "ContextMenu",
     width: { type: "fixed", size: 24 },
+    settings,
   }),
 }));
 
@@ -118,6 +119,19 @@ describe("files columns", () => {
 
   it("keep the row menu without the column settings when the frame hides them", () => {
     expect(ids(options({ showSettings: false })).at(-1)).toBe("ContextMenu");
+  });
+
+  it("give the row menu button the old rows' test id", () => {
+    const settingsOf = (opts: TFilesColumnsOptions) =>
+      (
+        getFilesColumns(files, opts).at(-1) as unknown as {
+          settings: object;
+        }
+      ).settings;
+    const testId = { contextMenuButtonTestId: "context-menu-button" };
+
+    expect(settingsOf(options())).toMatchObject(testId);
+    expect(settingsOf(options({ showSettings: false }))).toMatchObject(testId);
   });
 
   it("take their visibility from the tableStore flags", () => {

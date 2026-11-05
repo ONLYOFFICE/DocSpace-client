@@ -123,12 +123,11 @@ const SectionBodyContent = (props) => {
     isFormsFolder,
     draggedFiles,
     setIsChatDropTarget,
-    tableScope,
   } = props;
 
   const attachFilesToChat = useAttachHostFilesToChat();
 
-  const isDataTable = viewAs === "table" && isFilesDataTableEnabled(tableScope);
+  const isDataTable = viewAs === "table" && isFilesDataTableEnabled();
 
   useEffect(() => {
     return () => window?.getSelection()?.removeAllRanges();
@@ -550,7 +549,6 @@ export default inject(
     uploadDataStore,
     indexingStore,
     dialogsStore,
-    tableStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -618,7 +616,6 @@ export default inject(
       setDropTargetPreview,
       roomsFilterGroupId: roomsFilter?.groupId,
       setEditRoomGroupsDialogVisible,
-      tableScope: tableStore.tableScope,
       // Check if any filter or search is active (excluding sorting and groupId)
       isFilterOrSearchActive: !!(
         roomsFilter?.filterValue ||

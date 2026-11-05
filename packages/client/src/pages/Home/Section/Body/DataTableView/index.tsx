@@ -102,6 +102,8 @@ type InjectedProps = {
   isPersonalReadOnly: boolean;
   showSettings: boolean;
   section: TSection;
+  /** tableStore resolves a documents section, not the Contacts one the route is headed for. */
+  inFilesScope: boolean;
   columnFlags: TFilesColumnFlags;
   tableStorageName: string;
   columnWidthsStorageName: string;
@@ -150,6 +152,7 @@ const DataTableView = ({
   isPersonalReadOnly,
   showSettings,
   section,
+  inFilesScope,
   columnFlags,
   tableStorageName,
   columnWidthsStorageName,
@@ -239,7 +242,14 @@ const DataTableView = ({
   // What the old header does on mount: read the stored visible columns into
   // tableStore, and store the defaults when there is nothing yet. Before paint,
   // so the first frame already has the right columns.
+  //
+  // Not while tableStore resolves the Contacts keys, which it does from the
+  // moment the route heads there until this view unmounts, and back on the
+  // way here: the documents columns stored under them broke the Contacts
+  // tables.
   useLayoutEffect(() => {
+    if (!inFilesScope) return;
+
     getColumns([]);
 
     if (!getPersistedString(tableStorageName))
@@ -248,7 +258,7 @@ const DataTableView = ({
         filesColumnsRecord(section, flags, options),
       );
     // Only when the section changes, as in the old header.
-  }, [tableStorageName]);
+  }, [tableStorageName, inFilesScope]);
 
   const columns = useMemo(
     () => getFilesColumns(section, options),
@@ -381,7 +391,8 @@ const DataTableView = ({
         id="table-container"
         headerId="table-container_caption-header"
         testId="files-data-table"
-        // The old table's body test id, which the client's specs scope to.
+        // The old table's test ids, which the client's specs scope to.
+        headerTestId="table-header"
         bodyTestId="table-body"
         ariaLabel={t("Common:Documents")}
         columns={columns}
@@ -438,7 +449,8 @@ export default inject<TStore>(
 
     // Body renders this view only for the scopes SECTIONS describes.
     const { tableScope } = tableStore;
-    const section = SECTIONS[isFilesSection(tableScope) ? tableScope : "files"];
+    const inFilesScope = isFilesSection(tableScope);
+    const section = SECTIONS[inFilesScope ? tableScope : "files"];
 
     return {
       rows: filesList as TFilesTableItem[],
@@ -454,6 +466,7 @@ export default inject<TStore>(
       isPersonalReadOnly: !!treeFoldersStore.isPersonalReadOnly,
       showSettings: isFrame ? !!frameConfig?.showSettings : true,
       section,
+      inFilesScope,
       columnFlags: readColumnFlags(section, tableStore),
       tableStorageName: tableStore.tableStorageName,
       columnWidthsStorageName: tableStore.columnWidthsStorageName,

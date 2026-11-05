@@ -201,6 +201,9 @@ export const getFilesColumns = (
   ];
 };
 
+/** The old rows' menu button test id, which the client's specs look for. */
+const CONTEXT_MENU_BUTTON_TEST_ID = "context-menu-button";
+
 /**
  * The settings button with the row menus, or the row menus alone in the SDK
  * frame that hides the settings. While the rows are reordered the old rows
@@ -223,7 +226,10 @@ const lastColumn = ({
     ? settingsColumn<TFilesTableItem>({
         title: t("Common:TableSettingsTitle"),
         withContextMenu: !isIndexEditingMode,
+        contextMenuButtonTestId: CONTEXT_MENU_BUTTON_TEST_ID,
         disabled: isIndexEditingMode,
       })
-    : contextMenuColumn<TFilesTableItem>();
+    : contextMenuColumn<TFilesTableItem>({
+        contextMenuButtonTestId: CONTEXT_MENU_BUTTON_TEST_ID,
+      });
 };

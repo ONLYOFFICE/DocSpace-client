@@ -762,6 +762,47 @@ export const encryptedFilesHandlers = (
     ),
 
     /**
+     * Mirrors FilesController.CreateFile (HttpPost "{folderId}/file") ->
+     * FileStorageService.CreateNewFileAsync, for the room and its `folders`.
+     * The file it builds is never marked encrypted, so in a private room
+     * FileDao.SaveFileAsync refuses it in DemandEncryptedInPrivateRoomAsync
+     * with a SecurityException (403, "Access denied"), as CanCreateAsync
+     * refuses the folder of an archived room, and no file is stored. An
+     * ordinary room stores a plain file and answers its FileDto; the title is
+     * kept as sent (the extension rules and the template content are not
+     * modelled).
+     */
+    http.post(
+      `${apiBase}/files/:folderId(\\d+)/file`,
+      async ({ params, request }) => {
+        const folderId = Number(params.folderId);
+        if (!holdsFolder(folderId)) return undefined;
+        const body = (await request.json()) as { title: string };
+        requests.push({
+          method: "POST",
+          url: new URL(request.url).pathname,
+          body,
+        });
+        if (isPrivate || archived) {
+          return errorResponse(403, "Access denied");
+        }
+        const record: EncryptedFileRecord = {
+          id: nextFileId++,
+          title: body.title,
+          serverTitle: body.title,
+          size: 0,
+          encrypted: false,
+          fileKeys: [],
+          folderId,
+        };
+        files.set(record.id, record);
+        return okResponse(
+          buildFileDto(record, folderId, ownerId, port, archived, isPrivate),
+        );
+      },
+    ),
+
+    /**
      * Mirrors FilesController.GetEncryptionInfoAsync
      * (HttpGet "{fileId}/access"): `userKeys` are the caller's own key pairs
      * (left out when the caller has none) and `fileKeys` only the caller's

@@ -1559,6 +1559,46 @@ describe("encryptedFiles mock — POST /files/{folderId}/upload/check (mirrors U
   });
 });
 
+describe("encryptedFiles mock — POST /files/{folderId}/file (mirrors FilesController.CreateFile)", () => {
+  const create = (folderId: number, title: string) =>
+    fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/${folderId}/file`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title }),
+    });
+
+  it("Plain file created in the room", async () => {
+    const inRoom = await create(MOVING_ROOM_ID, "Notes.docx");
+    const inFolder = await create(MOVING_FOLDER_ID, "Notes.docx");
+
+    expect(inRoom.status).toBe(403);
+    expect(((await inRoom.json()) as { error: unknown }).error).toEqual({
+      message: "Access denied",
+    });
+    expect(inFolder.status).toBe(403);
+    expect(movingHandle.current!.getFiles()).toEqual([]);
+  });
+
+  it("Ordinary room", async () => {
+    const res = await create(ORDINARY_ROOM_ID, "Notes.docx");
+    const body = (await res.json()) as {
+      response: { id: number; title: string; folderId: number };
+    };
+
+    expect(res.status).toBe(200);
+    expect(body.response).toMatchObject({
+      title: "Notes.docx",
+      folderId: ORDINARY_ROOM_ID,
+    });
+    // Nothing resets the ordinary room between tests.
+    const removed = await fetch(
+      `${BASE_URL}:${PORT}/${API_PREFIX}/files/file/${body.response.id}`,
+      { method: "DELETE" },
+    );
+    expect(removed.status).toBe(200);
+  });
+});
+
 describe("encryptedFiles mock — moves inside a private room (mirrors OperationController)", () => {
   const FILEOPS = `${BASE_URL}:${PORT}/${API_PREFIX}/files/fileops`;
   const moveBatch = async (body: Record<string, unknown>) => {

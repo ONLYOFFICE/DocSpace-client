@@ -1811,6 +1811,7 @@
   "PrivateRoomNotFoundTitle": "Nuk u gjet",
   "PrivateRoomRenameNotSupported": "Riemërtimi i skedarëve të enkriptuar nuk mbështetet ende.",
   "PrivateRoomsBetaDescription": "Dhomat private janë në versionin beta. Disa veprime nuk janë ende të disponueshme për skedarët e enkriptuar dhe skedarët e enkriptuar nuk mund të hapen pa çelësin tuaj, prandaj ruajeni frazën e rikuperimit në një vend të sigurt.",
+  "PrivateRoomsBetaTitle": "Dhomat private",
   "PrivateRoomsListEmptyDescription": "Dhomat private janë të enkriptuara skaj-më-skaj. Skedarët enkriptohen në shfletuesin tuaj përpara ngarkimit dhe vetëm personat që ftoni mund t'i lexojnë.",
   "PrivateRoomsListEmptyTitle": "Nuk ka ende dhoma private",
   "PrivateRoomTitle": "Dhomë Private",

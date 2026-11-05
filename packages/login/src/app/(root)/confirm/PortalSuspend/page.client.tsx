@@ -113,7 +113,6 @@ const DeactivatePortalForm = ({
           primary
           size={ButtonSize.medium}
           label={t("Common:Deactivate")}
-          tabIndex={1}
           onClick={onDeactivateClick}
           testId="deactivate_portal_button"
         />
@@ -121,7 +120,6 @@ const DeactivatePortalForm = ({
           scale
           size={ButtonSize.medium}
           label={t("Common:CancelButton")}
-          tabIndex={1}
           onClick={onCancelClick}
           testId="cancel_button"
         />

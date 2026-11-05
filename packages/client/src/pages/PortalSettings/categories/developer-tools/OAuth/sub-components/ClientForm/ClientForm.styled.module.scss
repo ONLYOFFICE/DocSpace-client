@@ -299,3 +299,11 @@
   gap: 8px;
   margin-top: 4px;
 }
+
+// The add block is a button to the keyboard.
+.styledInputAddBlock {
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: 2px;
+  }
+}

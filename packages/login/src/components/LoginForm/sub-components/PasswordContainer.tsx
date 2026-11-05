@@ -87,7 +87,6 @@ const PasswordContainer = ({
         inputValue={password}
         size={InputSize.large}
         scale
-        tabIndex={1}
         isDisabled={isLoading}
         autoComplete="current-password"
         onChange={onChangePassword}

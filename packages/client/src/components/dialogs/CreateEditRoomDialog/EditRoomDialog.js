@@ -346,7 +346,6 @@ const EditRoomDialog = ({
 
       <ModalDialog.Footer>
         <Button
-          tabIndex={5}
           label={t("Common:SaveButton")}
           size="normal"
           primary
@@ -361,7 +360,6 @@ const EditRoomDialog = ({
           isLoading={isLoading}
         />
         <Button
-          tabIndex={5}
           label={t("Common:CancelButton")}
           size="normal"
           scale

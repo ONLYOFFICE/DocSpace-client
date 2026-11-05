@@ -49,6 +49,7 @@ import { TemplateTile } from "@onlyoffice/apps-ui-kit/components/tiles/template-
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import { getFilesItemClassName } from "SRC_DIR/helpers/filesItemClassName";
 import { TagManagement } from "SRC_DIR/components/TagManagement";
 
 import FilesTileContent from "./FilesTileContent";
@@ -308,7 +309,7 @@ const FileTile = (props) => {
       "files-item",
       className,
       activeClass,
-      `${item.id}_${item.fileExst}`,
+      getFilesItemClassName(item),
       droppableClassName,
     );
   }, [className, activeClass, item.id, item.fileExst, droppableClassName]);

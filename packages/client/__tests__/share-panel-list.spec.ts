@@ -133,6 +133,98 @@ test.describe("Info panel — Share tab list", () => {
     ).toBeVisible();
   });
 
+  test("the create-link row is a Tab stop that Enter presses", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      createLinksRouteHandler(TEST_PORT, [], "GET" as never, true),
+    );
+    let created = 0;
+    await page.route(/\/files\/file\/\d+\/link$/, (route) => {
+      if (route.request().method() !== "GET") created += 1;
+      return route.fulfill({ json: { response: {} } });
+    });
+
+    await page.goto(`${baseUrl}${MY_DOCS_URL}`);
+    const sharePanel = await openSharePanel(page);
+    const create = sharePanel
+      .getByTestId("info_panel_share_create_and_copy_link")
+      .first();
+    await expect(create).toBeVisible();
+
+    // From the Share tab, Tab walks on into the panel until it gets there.
+    let reached = false;
+    for (let i = 0; i < 20 && !reached; i++) {
+      await page.keyboard.press("Tab");
+      reached = await create.evaluate((el) => el === document.activeElement);
+    }
+    expect(reached).toBe(true);
+    await expect(create).toHaveAttribute("role", "button");
+    expect(
+      await create.evaluate((el) => getComputedStyle(el).outlineStyle),
+    ).toBe("solid");
+
+    await page.keyboard.press("Enter");
+    await expect.poll(() => created).toBe(1);
+  });
+
+  test("a link's copy button is a Tab stop that copies once", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      createLinksRouteHandler(
+        TEST_PORT,
+        { access: ShareAccessRights.ReadOnly, title: "Shared link" },
+        "GET" as never,
+        true,
+      ),
+    );
+
+    await page.goto(`${baseUrl}${MY_DOCS_URL}`);
+    const sharePanel = await openSharePanel(page);
+    const copy = sharePanel
+      .getByTestId("info_panel_members_list_item_1")
+      .getByRole("button", { name: "Copy shared link" });
+    await expect(copy).toBeVisible();
+
+    let reached = false;
+    for (let i = 0; i < 20 && !reached; i++) {
+      await page.keyboard.press("Tab");
+      reached = await copy.evaluate((el) => el === document.activeElement);
+    }
+    expect(reached).toBe(true);
+
+    // Count the copies themselves: copy-to-clipboard copies through
+    // execCommand("copy").
+    await page.evaluate(() => {
+      document.body.dataset.copies = "0";
+      const execCommand = document.execCommand.bind(document);
+      document.execCommand = (command, ...rest) => {
+        if (command === "copy")
+          document.body.dataset.copies = String(
+            Number(document.body.dataset.copies) + 1,
+          );
+        return execCommand(command, ...rest);
+      };
+    });
+    const copies = () =>
+      page.evaluate(() => Number(document.body.dataset.copies));
+
+    await page.keyboard.press("Enter");
+    await expect.poll(copies).toBe(1);
+
+    // The row copies on a click too; the button's click must not add a
+    // second copy to its own.
+    await copy.click();
+    await expect.poll(copies).toBe(2);
+    await page.waitForTimeout(300);
+    expect(await copies()).toBe(2);
+  });
+
   test("file with a link lists it", async ({ page, mockRequest, baseUrl }) => {
     mockRequest.use(
       createLinksRouteHandler(

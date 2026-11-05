@@ -68,7 +68,6 @@ const PortalRenamingDialog = (props) => {
           primary
           onClick={onSave}
           isLoading={isSaving}
-          tabIndex={3}
           testId="portal_renaming_continue_button"
         />
         <Button
@@ -78,7 +77,6 @@ const PortalRenamingDialog = (props) => {
           scale
           onClick={onClose}
           isDisabled={isSaving}
-          tabIndex={4}
           testId="portal_renaming_cancel_button"
         />
       </ModalDialog.Footer>

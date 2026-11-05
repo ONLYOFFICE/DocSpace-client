@@ -68,7 +68,6 @@ export const DisplayPageBlock = ({ t, config, setConfig }) => {
 				placeholder={t("EnterPage")}
 				value={value}
 				isDisabled={!config.filter.count}
-				tabIndex={7}
 				testId="display_page_text_input"
 			/>
 		</ControlsGroup>

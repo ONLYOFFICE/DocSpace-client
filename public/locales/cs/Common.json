@@ -1811,6 +1811,7 @@
   "PrivateRoomNotFoundTitle": "Nenalezeno",
   "PrivateRoomRenameNotSupported": "Přejmenování šifrovaných souborů zatím není podporováno.",
   "PrivateRoomsBetaDescription": "Soukromé místnosti jsou ve verzi beta. Některé akce zatím nejsou pro šifrované soubory dostupné a šifrované soubory nelze otevřít bez vašeho klíče, proto si obnovovací frázi bezpečně uschovejte.",
+  "PrivateRoomsBetaTitle": "Soukromé místnosti",
   "PrivateRoomsListEmptyDescription": "Soukromé místnosti jsou koncově zašifrované. Soubory jsou zašifrovány ve vašem prohlížeči před nahráním a přečíst je mohou pouze lidé, které pozvete.",
   "PrivateRoomsListEmptyTitle": "Zatím žádné soukromé místnosti",
   "PrivateRoomTitle": "Soukromá místnost",

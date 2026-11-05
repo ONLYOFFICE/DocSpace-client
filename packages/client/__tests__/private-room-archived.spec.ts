@@ -357,12 +357,20 @@ test.describe("Private room — archived", () => {
     baseUrl,
   }) => {
     test.slow();
-    // Under Rooms -> Archive only while the Private section is off.
+    // Under Rooms -> Archive only while the Private section is off. The key is
+    // made with the app on, since Keys management is not offered without the
+    // app or a key; the full load then reads the apps list with the app off.
+    const { passphrase } = await serveArchivedPrivateRoom(
+      page,
+      mockRequest,
+      baseUrl,
+    );
     mockRequest.use(appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] }));
-    await serveArchivedPrivateRoom(page, mockRequest, baseUrl);
 
-    await openInApp(page, ROOM_ID, "", archivedRoomUrl);
+    await page.goto(`${baseUrl}${archivedRoomUrl(ROOM_ID)}`);
+    await unlockIfPrompted(page, passphrase);
     await expect(row(page, BUDGET.name)).toBeVisible({ timeout: 15000 });
+    expect(new URL(page.url()).pathname).toBe("/rooms/archived/filter");
     await settle(page);
     await expect(page.getByTestId("ai-chat-button")).toHaveCount(0);
 

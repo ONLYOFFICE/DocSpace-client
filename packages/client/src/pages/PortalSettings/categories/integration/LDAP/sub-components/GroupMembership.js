@@ -132,7 +132,6 @@ const GroupMembership = (props) => {
             hasError={errors.groupDN}
             isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             scale
-            tabIndex={13}
             dataTestId="group_dn_field"
           />
         </FieldContainer>
@@ -155,7 +154,6 @@ const GroupMembership = (props) => {
             hasError={errors.userAttribute}
             isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             scale
-            tabIndex={14}
             dataTestId="user_attribute_field"
           />
         </FieldContainer>
@@ -180,7 +178,6 @@ const GroupMembership = (props) => {
             name={GROUP_FILTER}
             isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             heightTextArea={100}
-            tabIndex={15}
             dataTestId="group_filter_field"
           />
         </FieldContainer>
@@ -203,7 +200,6 @@ const GroupMembership = (props) => {
             isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             value={groupNameAttribute}
             scale
-            tabIndex={16}
             dataTestId="group_name_attribute_field"
           />
         </FieldContainer>
@@ -225,7 +221,6 @@ const GroupMembership = (props) => {
             value={groupAttribute}
             hasError={errors.groupAttribute}
             scale
-            tabIndex={17}
             dataTestId="group_attribute_field"
           />
         </FieldContainer>

@@ -113,7 +113,6 @@ const UnblockPortalForm = () => {
           scale
           size={ButtonSize.medium}
           label={t("Unblock")}
-          tabIndex={1}
           isLoading={isUnblocking}
           onClick={onUnblockClick}
           testId="unblock_portal_button"
@@ -122,7 +121,6 @@ const UnblockPortalForm = () => {
           scale
           size={ButtonSize.medium}
           label={t("Common:CancelButton")}
-          tabIndex={1}
           isDisabled={isUnblocking}
           onClick={onCancelClick}
           testId="unblock_cancel_button"

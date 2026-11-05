@@ -59,6 +59,23 @@ test.describe("Profile > Keys Management", () => {
     );
   });
 
+  test("Tab label", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const tab = page.getByTestId("keys-management_tab");
+    await expect(tab).toContainText("Keys management", { timeout: 15000 });
+    const badge = tab.getByTestId("keys_management_beta_badge");
+    await expect(badge).toBeVisible();
+
+    await badge.getByText("BETA", { exact: true }).click();
+
+    await expect(page.getByTestId("tooltip-title")).toHaveText(
+      "Private rooms",
+    );
+  });
+
   test("generate first key end-to-end posts a valid envelope", async ({
     page,
     mockRequest,
@@ -413,6 +430,10 @@ test.describe("Profile > Keys Management: keyboard only", () => {
       await page.keyboard.type(PASSPHRASE);
       await page.keyboard.press("Tab");
       await expect(
+        create.getByRole("button", { name: "Show", exact: true }).first(),
+      ).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(
         create.getByLabel("Confirm passphrase", { exact: true }),
       ).toBeFocused();
       await page.keyboard.type(PASSPHRASE);
@@ -538,6 +559,13 @@ test.describe("Profile > Keys Management: keyboard only", () => {
     ).toBeFocused({ timeout: 5_000 });
     await page.keyboard.type(PASSPHRASE);
     await page.keyboard.press("Tab");
+    await expect(
+      create.getByRole("button", { name: "Show", exact: true }).first(),
+    ).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(
+      create.getByLabel("Confirm passphrase", { exact: true }),
+    ).toBeFocused();
     await page.keyboard.type(PASSPHRASE);
     await page.keyboard.press("Enter");
 

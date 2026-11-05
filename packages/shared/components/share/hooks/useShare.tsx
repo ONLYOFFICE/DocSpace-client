@@ -99,7 +99,17 @@ export const useShare = ({
   const isInit = useRef(!!fileLinkProps);
 
   const [isLoadedAddLinks, setIsLoadedAddLinks] = useState(true);
+  // Set while the link the create row asked for is on its way: the row that
+  // shows it takes the focus the create row held, which goes away with it.
+  const [focusCreatedLink, setFocusCreatedLink] = useState(false);
   const hideSharePanel = !infoPanelSelection?.canShare;
+
+  // The panel stays mounted as the selection changes: a link asked for the
+  // item before must not take the focus in the links of the next one.
+  // A folder and a file can share an id: the kind is part of the item.
+  useEffect(() => {
+    setFocusCreatedLink(false);
+  }, [infoPanelSelection?.id, infoPanelSelection?.isFolder]);
 
   useEffect(() => {
     mountedRef.current = true;
@@ -171,9 +181,9 @@ export const useShare = ({
           return newLinks;
         });
         copyShareLink(infoPanelSelection, link, t);
-      } else {
-        setFileLinks([]);
+        return true;
       }
+      setFileLinks([]);
     } catch (error) {
       console.error(error);
       setFileLinks([]);
@@ -182,7 +192,7 @@ export const useShare = ({
 
         if (errorData?.response?.data?.error?.message) {
           toastr.error(errorData?.response?.data?.error?.message);
-          return;
+          return false;
         }
       }
 
@@ -191,6 +201,12 @@ export const useShare = ({
         : (error as string);
       toastr.error(message);
     }
+    return false;
+  };
+
+  const createFromRow = async () => {
+    setFocusCreatedLink(true);
+    if (!(await addGeneralLink())) setFocusCreatedLink(false);
   };
 
   const addAdditionalLinks = async () => {
@@ -583,7 +599,7 @@ export const useShare = ({
         header,
         <CreateButton
           key="share-create-link"
-          onClick={addGeneralLink}
+          onClick={createFromRow}
           title={t("Common:CreateAndCopy")}
         />,
       ];
@@ -599,6 +615,8 @@ export const useShare = ({
           isFolder={isFolder}
           onCopyLink={onCopyLink}
           onAddClick={addGeneralLink}
+          takeFocus={focusCreatedLink}
+          onFocusTaken={() => setFocusCreatedLink(false)}
           loadingLinks={loadingLinks}
           removedExpiredLink={removeLink}
           changeShareOption={changeShareOption}

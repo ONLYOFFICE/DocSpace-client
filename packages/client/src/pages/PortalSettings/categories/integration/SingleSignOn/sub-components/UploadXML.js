@@ -98,7 +98,6 @@ const UploadXML = (props) => {
             maxWidth="297px"
             name="uploadXmlUrl"
             placeholder={t("UploadXMLPlaceholder")}
-            tabIndex={1}
             value={uploadXmlUrl}
             hasError={!isValidXmlUrl}
             onFocus={onFocus}
@@ -123,7 +122,6 @@ const UploadXML = (props) => {
               !isValidXmlUrl
             }
             onClick={onUploadClick}
-            tabIndex={2}
             testId="upload_xml_button"
           />
         </div>
@@ -137,7 +135,6 @@ const UploadXML = (props) => {
           isDisabled={!enableSso || isLoadingXml}
           onInput={uploadXml}
           size="middle"
-          tabIndex={3}
           data-test-id="upload_xml_file_input"
         />
       </div>

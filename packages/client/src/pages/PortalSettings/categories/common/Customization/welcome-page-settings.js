@@ -365,7 +365,6 @@ const WelcomePageSettingsComponent = (props) => {
         hasError={!state.isValidTitle}
       >
         <TextInput
-          tabIndex={5}
           id="textInputContainerWelcomePage"
           name="greeting_title"
           scale
@@ -414,7 +413,6 @@ const WelcomePageSettingsComponent = (props) => {
       </div>
       {settingsBlock}
       <SaveCancelButtons
-        tabIndex={6}
         id="buttonsWelcomePage"
         className="save-cancel-buttons"
         onSaveClick={onSaveGreetingSettings}

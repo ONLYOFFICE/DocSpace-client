@@ -47,6 +47,8 @@ import {
 
 const mocks = vi.hoisted(() => ({
   requireUnlock: vi.fn(),
+  getRoomCandidateKeys: vi.fn(),
+  validateMembersForEncryption: vi.fn(),
   addMembersToEncryptedRoom: vi.fn(),
   backfillEncryptedFilesForRoomMembers: vi.fn(),
   setRoomSecurity: vi.fn(),
@@ -72,6 +74,11 @@ vi.mock("@docspace/shared/services/private-room/room-encryption", () => ({
   addMembersToEncryptedRoom: mocks.addMembersToEncryptedRoom,
   backfillEncryptedFilesForRoomMembers:
     mocks.backfillEncryptedFilesForRoomMembers,
+  validateMembersForEncryption: mocks.validateMembersForEncryption,
+}));
+
+vi.mock("@docspace/shared/api/privacy", () => ({
+  getRoomCandidateKeys: mocks.getRoomCandidateKeys,
 }));
 
 vi.mock("@docspace/shared/api", () => ({
@@ -233,6 +240,13 @@ describe("Invite opened from the list", () => {
   beforeEach(() => {
     mocks.getRoomSecurityInfo.mockImplementation(async () => ({ items: [] }));
     mocks.setRoomSecurity.mockImplementation(async () => ({}));
+    mocks.getRoomCandidateKeys.mockImplementation(async () => []);
+    mocks.validateMembersForEncryption.mockImplementation(
+      async (_roomId: number, memberIds: string[]) => ({
+        valid: memberIds.map((id) => ({ id, publicKey: `pk-${id}` })),
+        skipped: [],
+      }),
+    );
     mocks.addMembersToEncryptedRoom.mockImplementation(async () => ({
       fileResults: [],
       skippedMembers: [],
@@ -282,6 +296,85 @@ describe("Invite opened from the list", () => {
     expect(mocks.setRoomSecurity.mock.invocationCallOrder[0]).toBeLessThan(
       mocks.addMembersToEncryptedRoom.mock.invocationCallOrder[0],
     );
+  });
+
+  it("Order of operations: the invitees are verified before the security update, which precedes the wraps", async () => {
+    mocks.requireUnlock.mockImplementation(async () => identity);
+    renderInviteFromList(privateRoomDto({ id: ROOM_ID, title: "Pirate room" }), [
+      ANN_ITEM,
+      BOB_ITEM,
+    ]);
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    await waitFor(() =>
+      expect(mocks.addMembersToEncryptedRoom).toHaveBeenCalled(),
+    );
+    expect(mocks.getRoomCandidateKeys).toHaveBeenCalledWith(ROOM_ID, [
+      "ann",
+      "bob",
+    ]);
+    const order = [
+      mocks.getRoomCandidateKeys,
+      mocks.validateMembersForEncryption,
+      mocks.setRoomSecurity,
+      mocks.addMembersToEncryptedRoom,
+    ].map((fn) => fn.mock.invocationCallOrder[0]);
+    expect(order).toEqual([...order].sort((a, b) => a - b));
+    expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(2);
+  });
+
+  it("Invitee has no key: the security update leaves them out and no wrap runs for them", async () => {
+    mocks.requireUnlock.mockImplementation(async () => identity);
+    mocks.validateMembersForEncryption.mockImplementation(async () => ({
+      valid: [{ id: "ann", publicKey: "pk-ann" }],
+      skipped: [{ id: "bob", displayName: "bob tester", reason: "no-key" }],
+    }));
+    renderInviteFromList(privateRoomDto({ id: ROOM_ID, title: "Pirate room" }), [
+      ANN_ITEM,
+      BOB_ITEM,
+    ]);
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    expect(
+      await screen.findByTestId("invite_panel_result_skipped"),
+    ).toHaveTextContent("Common:EncryptedSkippedNoKeys");
+    expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(1);
+    expect(mocks.setRoomSecurity.mock.calls[0][1].invitations).toEqual([
+      { id: "ann", access: ShareAccessRights.Editing },
+    ]);
+    expect(mocks.addMembersToEncryptedRoom).toHaveBeenCalledWith(
+      ROOM_ID,
+      [{ id: "ann", displayName: "ann keeper" }],
+      expect.anything(),
+    );
+    expect(mocks.toastr.warning).toHaveBeenCalledWith(
+      "Common:EncryptedSkippedNoKeys",
+    );
+  });
+
+  it("Every invitee skipped: nothing is sent and the panel lists them", async () => {
+    mocks.requireUnlock.mockImplementation(async () => identity);
+    mocks.validateMembersForEncryption.mockImplementation(async () => ({
+      valid: [],
+      skipped: [{ id: "bob", displayName: "bob tester", reason: "no-key" }],
+    }));
+    const { setInviteItems } = renderInviteFromList(
+      privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+    );
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    expect(
+      await screen.findByTestId("invite_panel_result_skipped"),
+    ).toHaveTextContent("Common:EncryptedSkippedNoKeys");
+    expect(mocks.setRoomSecurity).not.toHaveBeenCalled();
+    expect(mocks.addMembersToEncryptedRoom).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByTestId("invite_panel_invite_again_button"));
+
+    expect(setInviteItems).toHaveBeenCalledWith([BOB_ITEM]);
   });
 
   it("All invitees have verified keys: the panel lists them as invited and closes on Close", async () => {

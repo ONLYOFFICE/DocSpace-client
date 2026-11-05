@@ -33,48 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { defineConfig, Plugin } from "vitest/config";
-import svgr from "vite-plugin-svgr";
-import path from "path";
-
-// Plugin to mock SVG ?url imports in tests
-const mockSvgUrlPlugin = (): Plugin => ({
-  name: "mock-svg-url",
-  enforce: "pre",
-  resolveId(id) {
-    if (id.endsWith(".svg?url")) {
-      return id;
-    }
-  },
-  load(id) {
-    if (id.endsWith(".svg?url")) {
-      return 'export default "test-file-stub"';
-    }
-  },
-});
+import { defineConfig } from "vitest/config";
+import path from "node:path";
 
 export default defineConfig({
-  plugins: [
-    mockSvgUrlPlugin(),
-    svgr({
-      svgrOptions: {
-        exportType: "default",
-        ref: true,
-        svgo: false,
-        titleProp: true,
-      },
-      include: "**/*.svg",
-      exclude: "**/*.svg?url",
-    }),
-  ],
-
   test: {
-    // Test environment
     environment: "jsdom",
-
-    // Setup files
+    globals: true,
+    clearMocks: true,
+    silent: "passed-only",
     setupFiles: ["./vitest/setupTests.ts"],
-
     // ui-kit modules each import their own CSS file. Vitest externalizes
     // node_modules by default, which hands those modules to Node as-is, and
     // Node rejects the .css import (ERR_UNKNOWN_FILE_EXTENSION). Inlining
@@ -84,56 +52,30 @@ export default defineConfig({
         inline: [/@onlyoffice[\\/]apps-ui-kit/],
       },
     },
-
-    // Global test settings
-    globals: true,
-    clearMocks: true,
-    pool: process.env.POOL || "threads",
-
-    // TypeScript configuration
     typecheck: {
       tsconfig: "./tsconfig.vitest.json",
     },
-
-    // Coverage
-    coverage: {
-      enabled: false,
-      provider: "v8",
-      reporter: ["text", "json", "html"],
-      reportsDirectory: "./coverage",
-    },
-
-    // Reporters
-    reporters: ["default", "html"],
-    outputFile: {
-      html: "./vitest/reports/index.html",
-    },
-
-    // Timeout
-    testTimeout: 70000,
-
-    // Include/exclude patterns
-    include: ["**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    include: [
+      "src/**/*.{test,spec}.{js,ts,jsx,tsx}",
+      // Checks the webpack hook in next.config.js.
+      "next.config.test.ts",
+    ],
+    exclude: ["node_modules", ".next", "__tests__/**"],
+    testTimeout: 20000,
   },
 
   resolve: {
     alias: {
-      "@docspace/shared": path.resolve(__dirname, "."),
-      PUBLIC_DIR: path.resolve(__dirname, "../../public"),
-      "PUBLIC_DIR/scripts/config.json": path.resolve(
-        __dirname,
-        "./__mocks__/configMock.js",
+      "@": path.resolve(import.meta.dirname, "./src"),
+      "@docspace/shared": path.resolve(import.meta.dirname, "../shared"),
+      PUBLIC_DIR: path.resolve(import.meta.dirname, "../../public"),
+      // As in shared and client: the real ReactSVG fetches and injects the
+      // file on a timer, which can fire after the test's jsdom is torn down
+      // ("SVGSVGElement is not defined") when the suites run in parallel.
+      "react-svg": path.resolve(
+        import.meta.dirname,
+        "../shared/__mocks__/reactSvgMock.tsx",
       ),
-      "react-i18next": path.resolve(
-        __dirname,
-        "./__mocks__/reacti18nextMock.tsx",
-      ),
-      "hex-rgb": path.resolve(__dirname, "./__mocks__/hex-rgb.js"),
-      "react-svg": path.resolve(__dirname, "./__mocks__/reactSvgMock.tsx"),
     },
-  },
-
-  esbuild: {
-    target: "esnext",
   },
 });

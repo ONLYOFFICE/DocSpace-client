@@ -97,7 +97,7 @@ import AiPresetsBridgeConnected from "../index";
 const setAiReady = vi.fn();
 
 // `inject` supplies the store props; the test renders it under a Provider.
-const AiPresetsBridge = AiPresetsBridgeConnected as unknown as React.FC;
+const AiPresetsBridge = AiPresetsBridgeConnected as unknown as React.FC<{ enabled: boolean }>;
 
 const project = (id: number, title: string, warnings?: { code: "roomUnavailable"; message: string }[]) =>
   ({
@@ -126,6 +126,7 @@ const renderBridge = (
     path = "/rooms/shared",
     user = { id: "u1", isAdmin: true } as object | null,
     aiConfig = null as { vectorizationEnabled: boolean } | null,
+    enabled = true,
   } = {},
 ) =>
   render(
@@ -136,7 +137,7 @@ const renderBridge = (
         settingsStore={{ aiConfig, standalone: true, setAiReady }}
         paymentStore={{ isAIReady: false }}
       >
-        <AiPresetsBridge />
+        <AiPresetsBridge enabled={enabled} />
       </Provider>
     </MemoryRouter>,
   );
@@ -162,6 +163,14 @@ describe("AiPresetsBridge", () => {
     act(() => aiChatStore.setIsVisible(true));
     await flush();
     expect(api.getAiProjects).toHaveBeenCalledTimes(1);
+  });
+
+  it("reads no projects while AI requests are off (unpaid portal, AI services off)", async () => {
+    const store = new AiPresetsStore();
+    renderBridge(store, { enabled: false });
+    await flush();
+    expect(api.getAiProjects).not.toHaveBeenCalled();
+    expect(store.presets).toEqual([]);
   });
 
   it("offers the save button to those who may create projects, outside a project", () => {

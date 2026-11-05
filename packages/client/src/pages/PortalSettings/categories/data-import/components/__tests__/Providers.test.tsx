@@ -33,45 +33,53 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { defineConfig } from "vitest/config";
-import path from "node:path";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { Provider } from "mobx-react";
+import { describe, expect, it, vi } from "vitest";
 
-export default defineConfig({
-  test: {
-    environment: "jsdom",
-    globals: true,
-    clearMocks: true,
-    setupFiles: ["./vitest/setupTests.ts"],
-    // ui-kit modules each import their own CSS file. Vitest externalizes
-    // node_modules by default, which hands those modules to Node as-is, and
-    // Node rejects the .css import (ERR_UNKNOWN_FILE_EXTENSION). Inlining
-    // routes them through Vite, which treats the stylesheet like any other.
-    server: {
-      deps: {
-        inline: [/@onlyoffice[\\/]apps-ui-kit/],
-      },
-    },
-    typecheck: {
-      tsconfig: "./tsconfig.vitest.json",
-    },
-    include: [
-      "src/**/*.{test,spec}.{js,ts,jsx,tsx}",
-      // Checks the webpack hook in next.config.js.
-      "next.config.test.ts",
-    ],
-    exclude: ["node_modules", ".next", "__tests__/**"],
-    testTimeout: 20000,
-  },
+vi.mock("SRC_DIR/helpers/utils", () => ({ setDocumentTitle: vi.fn() }));
 
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@docspace/shared": path.resolve(__dirname, "../shared"),
-      PUBLIC_DIR: path.resolve(__dirname, "../../public"),
-    },
-  },
+import { Component as Providers } from "../Providers";
 
-  esbuild: {
-    target: "esnext",
-  },
+const renderProviders = () => {
+  const setWorkspace = vi.fn();
+  render(
+    <Provider
+      settingsStore={{
+        theme: { isBase: true },
+        logoText: "Portal",
+        dataImportUrl: "",
+        currentColorScheme: null,
+      }}
+      importAccountsStore={{
+        services: ["GoogleWorkspace", "Nextcloud"],
+        setWorkspace,
+      }}
+      clientLoadingStore={{ showPortalSettingsLoader: false }}
+    >
+      <Providers />
+    </Provider>,
+  );
+  return { setWorkspace };
+};
+
+const importLink = (workspace: string) =>
+  screen.getByTestId(`workspace_item_${workspace}_import_link`);
+
+describe("Data import providers", () => {
+  it.each(["Enter", " "])("starts the workspace's import on %j", (key) => {
+    const { setWorkspace } = renderProviders();
+
+    fireEvent.keyDown(importLink("Nextcloud"), { key });
+
+    expect(setWorkspace).toHaveBeenCalledExactlyOnceWith("Nextcloud");
+  });
+
+  it("leaves other keys alone", () => {
+    const { setWorkspace } = renderProviders();
+
+    fireEvent.keyDown(importLink("Nextcloud"), { key: "a" });
+
+    expect(setWorkspace).not.toHaveBeenCalled();
+  });
 });

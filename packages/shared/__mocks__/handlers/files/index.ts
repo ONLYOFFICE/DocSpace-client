@@ -58,6 +58,7 @@ import {
 import {
   roomPrimaryLinkHandler,
   roomLinksHandler,
+  roomLinkSetHandler,
   roomFilePrimaryLinkHandler,
   roomFileGetPrimaryLinkHandler,
   roomFileLinksHandler,
@@ -160,6 +161,7 @@ export {
   roomListHandler,
   roomPrimaryLinkHandler,
   roomLinksHandler,
+  roomLinkSetHandler,
   roomFilePrimaryLinkHandler,
   roomFileGetPrimaryLinkHandler,
   roomFileLinksHandler,

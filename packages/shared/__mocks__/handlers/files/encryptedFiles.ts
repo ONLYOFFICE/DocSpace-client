@@ -91,6 +91,18 @@ export type EncryptedFilesHandlerHandle = {
   setRoomUserKeys: (keys: RoomMemberKeyEntry[]) => void;
   /** Marks a file as lying outside a private room (publickeys answers 415). */
   setFileOutsidePrivateRoom: (fileId: number) => void;
+  /**
+   * Marks users who cannot read the room's files: a key write skips their
+   * entry and names them in `skippedUserIds`. The mock keeps no access list,
+   * so the spec says who the server would refuse.
+   */
+  setUnreadableUsers: (userIds: string[]) => void;
+  /**
+   * The users who may change the room's access (its owner and managers), for
+   * the missing-keys route. Until set, the owner and every user with a key in
+   * `roomUserKeys` may.
+   */
+  setRoomAccessManagers: (userIds: string[]) => void;
   /** Answers as another signed-in user until `reset`. */
   setCurrentUserId: (userId: string) => void;
   /**
@@ -246,29 +258,33 @@ const seedToRecord = (seed: EncryptedFileSeed): EncryptedFileRecord => ({
   folderId: seed.folderId,
 });
 
+/** EmployeeDto of a user the mock has no directory entry for. */
+const userDto = (id: string) => ({
+  id,
+  displayName: "Test User",
+  avatar: "",
+  avatarOriginal: "",
+  avatarMax: "",
+  avatarMedium: "",
+  avatarSmall: "",
+  profileUrl: "",
+  hasAvatar: false,
+  isAnonim: false,
+});
+
 const buildFileDto = (
   record: EncryptedFileRecord,
   roomId: number,
   ownerId: string,
   port?: string,
   archived = false,
+  isPrivate = true,
 ) => {
   const section = sectionOf(archived);
   const downloadOrigin = port ? `${BASE_URL}:${port}` : BASE_URL;
   const dotIdx = record.serverTitle.lastIndexOf(".");
   const fileExst = dotIdx > 0 ? record.serverTitle.slice(dotIdx) : "";
-  const creator = {
-    id: ownerId,
-    displayName: "Test User",
-    avatar: "",
-    avatarOriginal: "",
-    avatarMax: "",
-    avatarMedium: "",
-    avatarSmall: "",
-    profileUrl: "",
-    hasAvatar: false,
-    isAnonim: false,
-  };
+  const creator = userDto(ownerId);
   return {
     id: record.id,
     title: record.serverTitle,
@@ -299,12 +315,14 @@ const buildFileDto = (
     createdBy: creator,
     updatedBy: creator,
     viewAccessibility: viewAccessibilityOf(fileExst),
+    // FileSecurity.FilterEntryAsync denies Copy, Duplicate and Vectorization
+    // on a file of a private room before the section rules (bd89a24dcd).
     security: {
       Read: true,
       Edit: true,
       Delete: true,
       Download: true,
-      Copy: false,
+      Copy: !isPrivate,
       Move: true,
       Rename: true,
       Comment: false,
@@ -314,7 +332,7 @@ const buildFileDto = (
       ReadHistory: false,
       Lock: false,
       EditHistory: false,
-      Duplicate: true,
+      Duplicate: !isPrivate,
       SubmitToFormGallery: false,
       Convert: false,
       CreateRoomFrom: false,
@@ -324,7 +342,6 @@ const buildFileDto = (
       ...(archived && {
         Edit: false,
         Delete: false,
-        Copy: true,
         Move: false,
         Rename: false,
         ReadHistory: true,
@@ -361,11 +378,15 @@ const buildFolderDto = (
     // FolderDtoHelper sets InRoom for the room's creator and for a user with
     // a direct share record; the mock's current user is always one of them.
     inRoom: true,
+    // FileSecurity.FilterEntryAsync denies Copy, Duplicate and IndexExport
+    // on a private room before the section rules, archived or not.
     ...(archived && {
       security: {
         Read: true,
         Download: true,
-        Copy: true,
+        Copy: false,
+        Duplicate: false,
+        IndexExport: false,
         Create: false,
         CopyTo: false,
         MoveTo: false,
@@ -379,9 +400,9 @@ const buildFolderDto = (
 /**
  * A folder inside the room, as FolderDtoHelper.GetAsync builds it: `private`
  * is the folder's own setting, which only a room carries, and the rights
- * follow FileSecurity.FilterEntryAsync for the room owner. In an active
- * private room a subfolder loses Copy and CopyTo; in Archive only Read,
- * ReadHistory, Copy and Download pass for a folder that is not the room.
+ * follow FileSecurity.FilterEntryAsync for the room owner. A subfolder of a
+ * private room loses Copy and CopyTo, archived or not; in Archive only Read,
+ * ReadHistory and Download pass otherwise for a folder that is not the room.
  */
 const buildSubfolderDto = (
   folder: EncryptedFolderSeed,
@@ -400,8 +421,9 @@ const buildSubfolderDto = (
     MoveTo: true,
     Copy: !isPrivate,
     CopyTo: !isPrivate,
-    Duplicate: true,
+    Duplicate: !isPrivate,
     EditAccess: !isPrivate,
+    ...(isPrivate && { IndexExport: false, UseChat: false }),
   };
   return {
     id: folder.id,
@@ -419,7 +441,7 @@ const buildSubfolderDto = (
       ? {
           Read: true,
           ReadHistory: true,
-          Copy: true,
+          Copy: false,
           Download: true,
           Create: false,
           Delete: false,
@@ -451,8 +473,10 @@ export const encryptedFilesHandlers = (
     ...buildFolderDto(roomId, archived, isPrivate, roomTitle, folders.length),
     ...(!archived && opts.roomSecurity && { security: opts.roomSecurity }),
   });
-  const ownerId =
+  const initialOwnerId =
     opts.ownerId ?? "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+  /** The room's creator; POST files/owner hands the room over. */
+  let ownerId = initialOwnerId;
   const files = new Map<number, EncryptedFileRecord>();
   for (const seed of opts.initialFiles ?? []) {
     files.set(seed.id, seedToRecord(seed));
@@ -464,6 +488,8 @@ export const encryptedFilesHandlers = (
   let freeSpace: number | null = null;
   const createdOn = new Map<string, string>();
   const outsidePrivateRoom = new Set<number>();
+  const unreadableUsers = new Set<string>();
+  let accessManagers: Set<string> | null = null;
   /** files_file_keys.create_on: set when the row is written. */
   const keyCreatedOn = (fileId: number, userId: string) => {
     const key = `${fileId}:${userId}`;
@@ -523,7 +549,14 @@ export const encryptedFilesHandlers = (
       version: 1,
       title: session.fileName,
       uploaded: true,
-      file: buildFileDto(record, session.folderId, ownerId, port, archived),
+      file: buildFileDto(
+        record,
+        session.folderId,
+        ownerId,
+        port,
+        archived,
+        isPrivate,
+      ),
     };
   };
 
@@ -549,6 +582,13 @@ export const encryptedFilesHandlers = (
     setFileOutsidePrivateRoom: (fileId) => {
       outsidePrivateRoom.add(fileId);
     },
+    setUnreadableUsers: (userIds) => {
+      unreadableUsers.clear();
+      for (const id of userIds) unreadableUsers.add(String(id));
+    },
+    setRoomAccessManagers: (userIds) => {
+      accessManagers = new Set(userIds.map(String));
+    },
     setCurrentUserId: (userId) => {
       currentUserId = userId;
     },
@@ -562,6 +602,8 @@ export const encryptedFilesHandlers = (
       sessions.clear();
       createdOn.clear();
       outsidePrivateRoom.clear();
+      unreadableUsers.clear();
+      accessManagers = null;
       requests.length = 0;
       roomUserKeys = [];
       nextFileId = 1000;
@@ -570,6 +612,7 @@ export const encryptedFilesHandlers = (
       currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
       freeSpace = null;
       archived = !!opts.archived;
+      ownerId = initialOwnerId;
     },
   };
   if (opts.handle) opts.handle.current = handle;
@@ -609,7 +652,7 @@ export const encryptedFilesHandlers = (
         : { ...roomDto(), ...(!archived && { parentRoomType: 19 }) };
       return okResponse({
         files: listed.map((f) =>
-          buildFileDto(f, roomId, ownerId, port, archived),
+          buildFileDto(f, roomId, ownerId, port, archived, isPrivate),
         ),
         folders: listedFolders,
         current,
@@ -754,11 +797,14 @@ export const encryptedFilesHandlers = (
      * FileStorageService.SetEncryptionInfoAsync -> FileDao.SetFileKey
      * (HttpPut "{fileId}/access"). The body binds to
      * `[FromBody] IEnumerable<AccessRequestKeyDto>`, so it is a bare array;
-     * the mock answers anything else with 400. SetFileKey deletes the rows of
-     * the listed users and inserts the new ones, so every other user's row
-     * stays. The action returns nothing, so the envelope has no `response`.
-     * A missing file is an InvalidOperationException, so 403. The server's
-     * read, private-room and create-right checks are not modelled here.
+     * the mock answers anything else with 400. The service checks each listed
+     * user's read access on a fresh read of the file, stores the entries of
+     * those who can read in one SetFileKey, which deletes their rows and
+     * inserts the new ones so every other user's row stays, and answers the
+     * others as `FileKeysWrittenDto.skippedUserIds`; the mock takes the users
+     * who cannot read from `setUnreadableUsers`. A missing file is an
+     * InvalidOperationException, so 403. The caller's own read, private-room
+     * and create-right checks are not modelled here.
      */
     http.put(
       `${apiBase}/files/:fileId(\\d+)/access`,
@@ -777,10 +823,16 @@ export const encryptedFilesHandlers = (
         const keys = body as EncryptedFileKey[];
         const f = files.get(fileId);
         if (!f) return errorResponse(403, `file ${fileId} not found`);
+        const accepted = keys.filter(
+          (k) => !unreadableUsers.has(String(k.userId)),
+        );
+        const skippedUserIds = keys
+          .filter((k) => unreadableUsers.has(String(k.userId)))
+          .map((k) => String(k.userId));
         // Two entries for one user collide on the (tenant, file, user) key;
         // the mock refuses the whole write like the failed transaction.
         const listed = new Set<string>();
-        for (const k of keys) {
+        for (const k of accepted) {
           const uid = String(k.userId);
           if (listed.has(uid)) {
             return errorResponse(
@@ -790,14 +842,14 @@ export const encryptedFilesHandlers = (
           }
           listed.add(uid);
         }
-        f.fileKeys = [
-          ...f.fileKeys.filter((k) => !listed.has(String(k.userId))),
-          ...keys,
-        ];
-        listed.forEach((uid) => createdOn.delete(`${fileId}:${uid}`));
-        return new Response(JSON.stringify({ status: 0, statusCode: 200 }), {
-          headers: { "Content-Type": "application/json" },
-        });
+        if (accepted.length > 0) {
+          f.fileKeys = [
+            ...f.fileKeys.filter((k) => !listed.has(String(k.userId))),
+            ...accepted,
+          ];
+          listed.forEach((uid) => createdOn.delete(`${fileId}:${uid}`));
+        }
+        return okResponse({ skippedUserIds });
       },
     ),
 
@@ -809,8 +861,8 @@ export const encryptedFilesHandlers = (
      * 404 for a missing file, 415 for a file outside a private room
      * (NotSupportedException); SanitizeAccessKeys drops entries without a
      * public key and keeps the private half only on the caller's entries.
-     * The private-room check accepts RootFolderType VirtualRooms only, so
-     * every file of an archived room is answered 415 as well.
+     * Since bd89a24dcd a file of an archived private room is accepted like
+     * one of an active room.
      */
     http.get(
       `${apiBase}/files/file/:fileId(\\d+)/publickeys`,
@@ -823,7 +875,7 @@ export const encryptedFilesHandlers = (
           url: new URL(request.url).pathname,
         });
         if (!f) return errorResponse(404, `file ${fileId} not found`);
-        if (archived || outsidePrivateRoom.has(fileId)) {
+        if (outsidePrivateRoom.has(fileId)) {
           return errorResponse(415, "Unsupported Media Type");
         }
         return okResponse(
@@ -839,6 +891,125 @@ export const encryptedFilesHandlers = (
     ),
 
     /**
+     * Mirrors PrivacyRoomControllerCommon.GetRoomMissingFileKeys ->
+     * EncryptionKeyPairDtoHelper.GetMissingFileKeysAsync (HttpGet
+     * "{roomId:int}/access/missing", `userIds` repeated once per user): one
+     * RoomMissingFileKeysDto per named user, or per direct member and the
+     * creator when none is named, who lacks a key on an encrypted file of the
+     * room, with those file ids; a user with every key is absent and a file
+     * stored in the clear is never reported. 403 when the caller cannot read
+     * the room, 400 for a room that is not private, 403 when the caller may
+     * not change its access or the room is archived, 400 for a malformed id;
+     * another room's id is left to that room's instance, so an unknown room
+     * (404 on the server) is unhandled here. The mock has no roles or portal
+     * directory: the managers come from `setRoomAccessManagers` (without it
+     * the owner and the users with a key in the room pass), and every
+     * well-formed id counts as a portal user.
+     */
+    http.get(
+      `${apiBase}/privacyroom/:roomId(\\d+)/access/missing`,
+      ({ params, request }) => {
+        if (Number(params.roomId) !== roomId) return undefined;
+        const url = new URL(request.url);
+        requests.push({ method: "GET", url: url.pathname + url.search });
+        const members = new Set([
+          ownerId,
+          ...roomUserKeys.map((k) => String(k.userId)),
+        ]);
+        if (!members.has(currentUserId) && !accessManagers?.has(currentUserId)) {
+          return errorResponse(403, "You don't have enough permission to edit the file");
+        }
+        if (!isPrivate) {
+          return errorResponse(400, "This action is only available in a private room");
+        }
+        const mayManage = accessManagers
+          ? accessManagers.has(currentUserId)
+          : members.has(currentUserId);
+        if (archived || !mayManage) {
+          return errorResponse(403, "You don't have enough permission to perform the operation");
+        }
+        const guidRe =
+          /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        const named = url.searchParams.getAll("userIds");
+        if (named.some((userId) => !guidRe.test(userId))) {
+          return errorResponse(400, "The value is not valid");
+        }
+        const subjects = named.length > 0 ? named : Array.from(members);
+        const encrypted = Array.from(files.values()).filter((f) => f.encrypted);
+        const answer: { userId: string; fileIds: number[] }[] = [];
+        for (const userId of Array.from(new Set(subjects.map(String)))) {
+          const fileIds = encrypted
+            .filter(
+              (f) =>
+                !f.fileKeys.some(
+                  (k) => String(k.userId).toLowerCase() === userId.toLowerCase(),
+                ),
+            )
+            .map((f) => f.id);
+          if (fileIds.length > 0) answer.push({ userId, fileIds });
+        }
+        return okResponse(answer);
+      },
+    ),
+
+    /**
+     * Mirrors SecurityController.ChangeFileOwner (HttpPost "owner") ->
+     * FileStorageService.ChangeOwnerAsync with demandFileKeys, for this room
+     * named in `folderIds` with the new owner in `userId`: 400 without a
+     * user; 403 when the new owner holds no encryption keys
+     * (ThrowIfKeysAreNotSetAsync; here a user outside `roomUserKeys` other
+     * than the owner); 409 "The new owner holds no key for some encrypted
+     * files of the room" when an encrypted file holds no entry for them
+     * (GetEncryptedFilesWithoutKeyAsync, not asked for the room's creator);
+     * otherwise the room with its new creator, and a repeat for the owner
+     * is answered untouched. Another room's id is left to that room's
+     * instance, and a room that is not private skips the key checks. The
+     * mock has no portal directory: the account checks of the new owner and
+     * the caller's right to change the owner are not mirrored.
+     */
+    http.post(`${apiBase}/files/owner`, async ({ request }) => {
+      const body = (await request.clone().json()) as {
+        userId?: string;
+        folderIds?: (number | string)[];
+      };
+      if (!body.folderIds?.some((folderId) => Number(folderId) === roomId)) {
+        return undefined;
+      }
+      const url = new URL(request.url);
+      requests.push({ method: "POST", url: url.pathname });
+      const userId = String(body.userId ?? "");
+      if (!userId) {
+        return errorResponse(400, "The request body has no userId");
+      }
+      const sameUser = (other: string) =>
+        other.toLowerCase() === userId.toLowerCase();
+      if (isPrivate) {
+        const hasKeys =
+          sameUser(ownerId) ||
+          roomUserKeys.some(
+            (k) => sameUser(String(k.userId)) && !!k.publicKey?.trim(),
+          );
+        if (!hasKeys) {
+          return errorResponse(403, "The user does not have an encryption key");
+        }
+        const lacksEntry =
+          !sameUser(ownerId) &&
+          Array.from(files.values()).some(
+            (f) =>
+              f.encrypted && !f.fileKeys.some((k) => sameUser(String(k.userId))),
+          );
+        if (lacksEntry) {
+          return errorResponse(
+            409,
+            "The new owner holds no key for some encrypted files of the room",
+          );
+        }
+      }
+      ownerId = userId;
+      return okResponse([{ ...roomDto(), createdBy: userDto(ownerId) }]);
+    }),
+
+    /**
      * Mirrors FilesController.GetFileInfo (HttpGet "file/{fileId}") ->
      * FilesControllerHelper.GetFileInfoAsync -> FileDtoHelper.GetAsync: the
      * file as the room listing reports it (SetAssignedMetadataTemplatesAsync
@@ -851,7 +1022,9 @@ export const encryptedFilesHandlers = (
       if (!f && withOtherRooms) return undefined;
       requests.push({ method: "GET", url: new URL(request.url).pathname });
       if (!f) return errorResponse(404, "File not found");
-      return okResponse(buildFileDto(f, roomId, ownerId, port, archived));
+      return okResponse(
+        buildFileDto(f, roomId, ownerId, port, archived, isPrivate),
+      );
     }),
 
     /**
@@ -1316,9 +1489,14 @@ export const encryptedFilesHandlers = (
      * Mirrors OperationController.MoveBatchItems (HttpPut "fileops/move"):
      * queues the move and answers the move operations, here one already
      * finished (FileOperationType.Move = 0, DistributedTaskStatus.Completed
-     * = 2) listing the moved files. Within one private room the server's
-     * CompliesPrivateRoomRulesAsync lets a move pass; the mock moves files
-     * between the room and its folders and does not model folder moves.
+     * = 2) listing the moved files and folders. Within one private room
+     * the server's CompliesPrivateRoomRulesAsync lets a move pass; the mock
+     * moves files between the room and its folders. CopyPermissionsCheck
+     * judges a folder by the private rooms around it (since bd89a24dcd):
+     * a subfolder of this room stays in it and a folder from outside does
+     * not enter it, either refused with "You don't have enough permission
+     * to move the folder"; a subfolder moved within the room passes, the
+     * mock listing it without nesting its folders.
      *
      * The archived room itself moved to the Rooms section is restored: the
      * room branch of FileMoveCopyOperation.MoveOrCopyFoldersAsync checks
@@ -1363,6 +1541,24 @@ export const encryptedFilesHandlers = (
         operations.push(operation);
         return okResponse([operation]);
       }
+      const subfolderIds = folderIds.filter(
+        (id) => id !== roomId && holdsFolder(id),
+      );
+      const foreignFolderIds = folderIds.filter((id) => !holdsFolder(id));
+      if (
+        (subfolderIds.length > 0 && !holdsFolder(destFolderId)) ||
+        (foreignFolderIds.length > 0 && holdsFolder(destFolderId))
+      ) {
+        requests.push({
+          method: "PUT",
+          url: new URL(request.url).pathname,
+          body,
+        });
+        return errorResponse(
+          403,
+          "You don't have enough permission to move the folder",
+        );
+      }
       if (!holdsFolder(destFolderId) || fileIds.some((id) => !files.has(id))) {
         return withOtherRooms
           ? undefined
@@ -1378,18 +1574,26 @@ export const encryptedFilesHandlers = (
         record.folderId = destFolderId === roomId ? undefined : destFolderId;
         return record;
       });
+      const movedFolders = subfolderIds.map((id) =>
+        buildSubfolderDto(
+          folders.find((f) => f.id === id) as EncryptedFolderSeed,
+          roomId,
+          archived,
+          isPrivate,
+        ),
+      );
       const operation = {
         id: `mock-move-${requests.length}`,
         Operation: 0,
         progress: 100,
         error: "",
-        processed: String(moved.length),
+        processed: String(moved.length + movedFolders.length),
         finished: true,
         status: 2,
         files: moved.map((f) =>
-          buildFileDto(f, roomId, ownerId, port, archived),
+          buildFileDto(f, roomId, ownerId, port, archived, isPrivate),
         ),
-        folders: [],
+        folders: movedFolders,
       };
       operations.push(operation);
       return okResponse([operation]);

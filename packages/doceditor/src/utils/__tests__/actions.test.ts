@@ -69,16 +69,27 @@ const encryptedConfig = (canCoAuthoring: boolean) => ({
 });
 
 describe("getData", () => {
+  /** What GET /files/settings answers: a capability, or a failure. */
+  let filesSettings: { docServiceEncryptionSupported: boolean } | "down";
+  let openedConfig: ReturnType<typeof encryptedConfig>;
+
   beforeEach(() => {
+    filesSettings = { docServiceEncryptionSupported: true };
+    openedConfig = encryptedConfig(true);
     vi.stubGlobal(
       "fetch",
       vi.fn(async (request: Request) => {
         const { pathname } = new URL(request.url);
         if (pathname.endsWith("/files/file/7/openedit")) {
-          return json({ response: encryptedConfig(true) });
+          return json({ response: openedConfig });
         }
         if (pathname.endsWith("/people/@self")) {
           return json({ response: { id: "user-1" } });
+        }
+        if (pathname.endsWith("/files/settings")) {
+          return filesSettings === "down"
+            ? new Response(null, { status: 500 })
+            : json({ response: filesSettings });
         }
         if (pathname.endsWith("/settings")) {
           return json({ response: { tenantStatus: 0 } });
@@ -98,5 +109,48 @@ describe("getData", () => {
     expect(result.error).toBeUndefined();
     expect(result.config?.file.encrypted).toBe(true);
     expect(result.config?.editorConfig.canCoAuthoring).toBe(true);
+  });
+
+  // Spec: editor-integration, "Document Server capability check before opening"
+  describe("Capability check", () => {
+    it("Capability present", async () => {
+      const result = await getData("7");
+
+      expect(result.docServiceEncryptionSupported).toBe(true);
+    });
+
+    it("Capability absent", async () => {
+      filesSettings = { docServiceEncryptionSupported: false };
+
+      const result = await getData("7");
+
+      expect(result.docServiceEncryptionSupported).toBe(false);
+    });
+
+    it("Files settings unavailable: the capability counts as absent", async () => {
+      filesSettings = "down";
+
+      const result = await getData("7");
+
+      expect(result.error).toBeUndefined();
+      expect(result.docServiceEncryptionSupported).toBe(false);
+    });
+
+    it("Plain file: the files settings are not read", async () => {
+      openedConfig = {
+        ...encryptedConfig(true),
+        file: { id: 7, encrypted: false, canShare: false },
+      };
+
+      const result = await getData("7");
+
+      expect(result.docServiceEncryptionSupported).toBeUndefined();
+      const calls = vi.mocked(fetch).mock.calls.map((call) =>
+        new URL((call[0] as Request).url).pathname,
+      );
+      expect(calls.some((path) => path.endsWith("/files/settings"))).toBe(
+        false,
+      );
+    });
   });
 });

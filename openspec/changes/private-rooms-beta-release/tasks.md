@@ -55,7 +55,7 @@ Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 20
 - [ ] 5.1 Write `release-notes.md` in this change folder and link it from README.md, then record when it was handed to the documentation team. It contains:
   - the accepted v1 limitations, the SHALL NOT requirements of `private-rooms/encryption-core`;
   - the warning that a lost key and recovery phrase mean lost files;
-  - the account-link risk: saving a key can remove a Google, SSO or other sign-in link until `private-rooms-server-hardening` 12.1 ships, so users with an external sign-in set a password first;
+  - the account-link item: `private-rooms-server-hardening` 12.1 merged on the server on 2026-11-04 (`3b9c527a6e`), so a release built from that commit or later keeps the sign-in links, and links lost before it are not restored; a release built from an earlier server commit keeps the warning that saving a key can remove a Google, SSO or other sign-in link, so users with an external sign-in set a password first;
   - that standalone administrators switch the feature with the Private app, and that SaaS has no switch during the beta;
   - that the SDK private pages need the host opt-in;
   - the server and Document Server items still open at release time, taken from `private-rooms-server-hardening` and `private-rooms-editor-contract`;

@@ -64,7 +64,6 @@ export const SelectTextInput = ({ t, config, setConfig }) => {
 				onChange={onChangeAcceptLabel}
 				placeholder={t("Common:SelectAction")}
 				value={value}
-				tabIndex={7}
 				testId="select_text_input"
 			/>
 		</>

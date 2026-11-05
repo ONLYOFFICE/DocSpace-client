@@ -1,0 +1,22 @@
+{
+  "key_path": "AIProviderOutOfCredits",
+  "content": "The AI provider has run out of credits",
+  "content_en_sha1_hash": "9bdfaa03c8ff7d11b4a5451e89859b2a4b5ba33e",
+  "created_at": "2026-11-03T10:46:34.574Z",
+  "updated_at": "2026-11-03T11:22:50.690Z",
+  "comment": {
+    "text": "Bold title of the warning bar above the AI chat input, shown after the user's own AI provider (e.g. OpenRouter, OpenAI) refused a request because the account there has no credits; it disappears after the next successful answer.",
+    "is_auto": true,
+    "updated_at": "2026-11-03T11:22:50.690Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

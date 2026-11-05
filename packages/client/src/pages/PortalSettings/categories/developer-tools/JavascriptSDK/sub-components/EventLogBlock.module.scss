@@ -191,3 +191,12 @@
   white-space: pre-wrap;
   word-break: break-all;
 }
+
+// An entry that expands is a button to the keyboard. The ring lies inside
+// it: the scroller around the entries clips what lies outside them.
+.logEntry.expandable {
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: -2px;
+  }
+}

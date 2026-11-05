@@ -216,21 +216,46 @@ commit messages.
 
 ### Git hooks (lefthook)
 
-`lefthook.yml` runs a blocking pre-push gate — seven sequential commands, any
+`lefthook.yml` runs a blocking pre-push gate — two sequential commands, any
 failure aborts the push:
 
-1. `pnpm run tsc` — type checking, all packages
-2. `pnpm run lint` — Biome, all packages
-3. `npm --prefix ./common/tests run test:lefthook` — locale, asset, color,
+1. `npm --prefix ./common/tests run test:lefthook` — locale, asset, color,
    license-header and dependency checks (translation-completeness suites are
    skipped here, so a green push does **not** mean locales are complete)
-4. `pnpm run test` — shared unit tests
-5. `pnpm run test:client` — client unit tests (incl. store tests)
-6. `pnpm run test:sdk` — sdk unit tests
-7. `pnpm run test:doceditor` — doceditor unit tests
+2. one `nx run-many -t tsc lint test --parallel=3` over the six packages —
+   type checking and Biome for all of them, unit tests for shared, client
+   (incl. store tests), sdk and doceditor
 
-Expect a push to take several minutes. To debug a blocked push, run the
-failing command individually. Never bypass the gate with `git push --no-verify`.
+`tsc`, `lint` and `test` are cached by Nx; their inputs are the named inputs
+in `nx.json`. Each reruns when its own package changed (minus E2E screenshots
+and Markdown) or `pnpm-lock.yaml` / `pnpm-workspace.yaml` changed. `tsc` and
+`test` also watch the non-test, non-story files of the packages they depend
+on and the root JSON they really import (`locales/.constants`, `locales/en`,
+`scripts/config.json`); `test` also watches `public/images` (svgr imports).
+`lint` watches only its own package plus shared's `biome.json` and
+`biome-plugins/`: Biome never reads a dependency's files, so an edit in
+`packages/shared` does not rerun another package's lint. A cold run takes a
+minute or a few depending on the machine, a push with nothing changed seconds.
+A new import of another root `public/` file into code or tests must be added
+to those inputs, or the cache hides it.
+
+Nx does not hash environment variables or the Node version: after switching
+Node, or when a test result depends on an env variable (`POOL`), run
+`pnpm nx reset` so the next push runs everything for real. Up to three Vitest
+suites run at once with `--parallel=3`; if tests time out only under the gate,
+rerun the same `nx run-many` command with `--parallel=1` to confirm it is load,
+not a real failure.
+
+The manual `pnpm run tsc`, `lint`, `test`, `test:client`, `test:sdk` and
+`test:doceditor` go through the same cache and replay a stored result when
+nothing changed. Nx prints only the output of failed tasks. To debug a blocked
+push, run the failing task on its own; `pnpm nx reset` drops the cache if a
+result looks stale. Never bypass the gate with `git push --no-verify`.
+
+The Vitest configs are `vitest.config.mts` (and the client's
+`config/plugins/jsx-in-js.mts` they import), so Vite loads them as ES modules
+without its `configLoader: 'native'` compatibility warning; use
+`import.meta.dirname` there, not `__dirname`.
 
 CI lives in Gitea Actions (`.gitea/workflows/frontend-common-tests.yaml`) but
 is **manual-dispatch only** — there is no automatic PR/push CI, so the

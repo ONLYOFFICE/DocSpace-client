@@ -320,7 +320,6 @@ const BruteForceProtection = (props) => {
           className="brute-force-protection-input"
           name="login_attempts"
           testId="brute_force_protection_number_attempts_input"
-          tabIndex={1}
           value={currentNumberAttempt}
           onChange={onChangeNumberAttempt}
           isDisabled={isLoadingSave}
@@ -342,7 +341,6 @@ const BruteForceProtection = (props) => {
           className="brute-force-protection-input"
           name="blocking_time"
           testId="brute_force_protection_blocking_time_input"
-          tabIndex={2}
           value={currentBlockingTime}
           onChange={onChangeBlockingTime}
           isDisabled={isLoadingSave}
@@ -364,7 +362,6 @@ const BruteForceProtection = (props) => {
           className="brute-force-protection-input"
           name="check_period"
           testId="brute_force_protection_check_period_input"
-          tabIndex={3}
           value={currentCheckPeriod}
           onChange={onChangeCheckPeriod}
           isDisabled={isLoadingSave}
@@ -374,7 +371,6 @@ const BruteForceProtection = (props) => {
       </FieldContainer>
       <SaveCancelButtons
         className="save-cancel-buttons"
-        tabIndex={4}
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}

@@ -42,7 +42,12 @@ import {
   beforeEach,
 } from "vitest";
 
-import { setupServer } from "../../../__mocks__/e2e/msw-compat";
+import {
+  http,
+  HttpResponse,
+  setupServer,
+} from "../../../__mocks__/e2e/msw-compat";
+import { API_PREFIX, BASE_URL } from "../../../__mocks__/e2e/utils";
 import {
   encryptedFilesHandlers,
   privacyroomAccessHandlers,
@@ -435,7 +440,8 @@ describe("Trusting a changed key — integration via MSW", () => {
 });
 
 describe("backfillEncryptedFilesForRoomMembers — integration via MSW", () => {
-  it("Existing wraps are replaced: a second manager's sweep re-wraps a member, who still unwraps through the file's public keys", async () => {
+  /** A room where Alice wrapped file 300 for everyone, swept by Carol. */
+  const roomWrappedByAlice = async () => {
     const alice = await generateIdentityKeyPair();
     const bob = await generateIdentityKeyPair();
     const carol = await generateIdentityKeyPair();
@@ -469,11 +475,56 @@ describe("backfillEncryptedFilesForRoomMembers — integration via MSW", () => {
 
     filesHandle.current!.setCurrentUserId(CAROL_ID);
     accessHandle.current!.setCurrentUserId(CAROL_ID);
-    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
-      currentUserId: CAROL_ID,
-      identity: carol,
-      onKeyChange: async () => "refuse",
+    const sweep = () =>
+      backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+        currentUserId: CAROL_ID,
+        identity: carol,
+        onKeyChange: async () => "refuse",
+      });
+    return { bob, dek, wrapsFromAlice, sweep };
+  };
+
+  it("Existing entries are kept: a second manager's sweep leaves a member's wrap from another sender, which the member still unwraps", async () => {
+    const { bob, dek, wrapsFromAlice, sweep } = await roomWrappedByAlice();
+
+    const result = await sweep();
+
+    expect(result.fileResults).toEqual([]);
+    expect(result.skippedMembers).toEqual([]);
+    const stored = filesHandle.current!.getFile(300);
+    expect(stored.fileKeys).toEqual(wrapsFromAlice);
+    const bobEntry = stored.fileKeys.find((k) => k.userId === BOB_ID)!;
+    expect(inspectWrap(bobEntry.privateKeyEnc).senderUserId).toBe(ALICE_ID);
+
+    filesHandle.current!.setCurrentUserId(BOB_ID);
+    accessHandle.current!.setCurrentUserId(BOB_ID);
+    const bobInfo = await getFileEncryptionAccess(300);
+    const senderKeys = await loadFileSenderKeysSafe(300, ROOM_ID);
+    const unwrapped = await unwrapDekForCurrentUser({
+      fileKeys: bobInfo.fileKeys,
+      roomMemberKeys: senderKeys,
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: 300,
     });
+    expect(Array.from(unwrapped)).toEqual(Array.from(dek));
+  });
+
+  it("Existing wraps are replaced: when the missing-keys read fails, a second manager's sweep re-wraps a member, who still unwraps through the file's public keys", async () => {
+    const { bob, dek, wrapsFromAlice, sweep } = await roomWrappedByAlice();
+    server.use(
+      http.get(
+        `${BASE_URL}:${PORT}/${API_PREFIX}/privacyroom/${ROOM_ID}/access/missing`,
+        () => new HttpResponse(null, { status: 500 }),
+      ),
+    );
+
+    let result: Awaited<ReturnType<typeof sweep>>;
+    try {
+      result = await sweep();
+    } finally {
+      server.resetHandlers();
+    }
 
     expect(result.fileResults).toEqual([{ fileId: 300, success: true }]);
     expect(result.skippedMembers).toEqual([]);

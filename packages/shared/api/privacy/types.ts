@@ -47,3 +47,12 @@ export type TEncryptionKeyPair = {
   date?: string;
   cryptoEngineId?: string;
 };
+
+/** A key of a prospective member: the answer never carries the private half. */
+export type TRoomCandidateKey = Omit<TEncryptionKeyPair, "privateKeyEnc">;
+
+/** `RoomMissingFileKeysDto`: a user and the encrypted files of a room that hold no key for them. */
+export type TRoomMissingFileKeys = {
+  userId: string;
+  fileIds: number[];
+};

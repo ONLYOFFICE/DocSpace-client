@@ -97,6 +97,19 @@ describe("getDefaultStartPageUrl", () => {
     );
   });
 
+  it("opens the AI rooms section while AI is on, and Home otherwise", () => {
+    expect(
+      getDefaultStartPageUrl(FolderType.AiHub, { aiServicesEnabled: true }),
+    ).toBe("/ai-rooms/filter");
+    expect(getDefaultStartPageUrl(FolderType.AiHub)).toBe("/dashboard");
+    expect(
+      getDefaultStartPageUrl(FolderType.AiHub, {
+        aiServicesEnabled: true,
+        isGuest: true,
+      }),
+    ).toBe("/dashboard");
+  });
+
   it("opens Rooms instead of the Overview inside an OAuth frame", () => {
     mockedIsOAuthFrame.mockReturnValue(true);
 

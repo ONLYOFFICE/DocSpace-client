@@ -41,7 +41,8 @@ place:
   calls `AccountLinker.RemoveProviderAsync(userId)` without a provider, which
   deletes the user's first account link of any provider before the encryption
   link is added (read through CodeGraph on `release/v4.1.0` at `d64d3396f5`).
-  That is `private-rooms-server-hardening` 12.1.
+  That is `private-rooms-server-hardening` 12.1, merged there on 2026-11-04
+  (`3b9c527a6e`).
 
 ## Goals / Non-Goals
 
@@ -122,14 +123,17 @@ place:
 
 10. **The account-link loss is an accepted beta risk.** The owner decided on
     2026-11-03 to merge without waiting for `private-rooms-server-hardening`
-    12.1 and without a client guard. The beta release notes name it.
+    12.1 and without a client guard. The beta release notes name it. The fix
+    merged on the server on 2026-11-04 (`3b9c527a6e`), so the notes now name
+    the server build that carries it instead of warning every user.
 
 ## Risks / Trade-offs
 
 - **Saving a key can delete a Google, SSO or other sign-in link** (Context,
   "The server"). → Accepted by the owner (decision 10). The release notes
-  tell users with an external sign-in to set a password before they create a
-  key; `private-rooms-server-hardening` 12.1 fixes it on the server.
+  tell users on an older server build with an external sign-in to set a
+  password before they create a key; `private-rooms-server-hardening` 12.1
+  fixed it on the server on 2026-11-04.
 - **No switch on SaaS.** Every SaaS user is offered the beta. → Accepted for
   the beta; the portal setting arrives with general availability.
 - **Every user now meets the defects of the beta.** → The verified blockers of

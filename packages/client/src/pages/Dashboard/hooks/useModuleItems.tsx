@@ -92,9 +92,16 @@ export type UseModuleItemsProps = {
    * not see the card at all.
    */
   canEnableApps: boolean;
+  /**
+   * The "AI rooms" section is there: AI is switched on and the server serves
+   * its root (never for a guest). It is not an app that can be switched off,
+   * so its card is either shown as on or not built at all.
+   */
+  isAiHubAvailable: boolean;
 };
 
 const APPS_SETTINGS_PATH = "/portal-settings/apps";
+const AI_HUB_PATH = "/ai-rooms/filter";
 
 /**
  * Builds the app cards for the Dashboard's "Apps" section.
@@ -114,6 +121,7 @@ export const useModuleItems = ({
   setQuotaWarningDialogVisible,
   isAppInstalled,
   canEnableApps,
+  isAiHubAvailable,
 }: UseModuleItemsProps): ModuleItem[] => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -218,6 +226,24 @@ export const useModuleItems = ({
       },
     ];
 
+    // "AI rooms" (Instructions rooms, Knowledge rooms and AI projects) comes
+    // last, as in the sidebar. Its rooms are created from a type chooser of
+    // their own inside the section, so the card opens the section; it has no
+    // onboarding tour.
+    if (isAiHubAvailable) {
+      items.push({
+        id: "ai-hub",
+        icon: <CatalogRoomsIcon />,
+        title: t("Common:AiRooms"),
+        description: t("Common:AiRoomsCreateDescription"),
+        installed: true,
+        href: AI_HUB_PATH,
+        buttonLabel: t("Common:Open"),
+        onAction: () => navigate(AI_HUB_PATH),
+        noTour: true,
+      });
+    }
+
     return items.filter((mod) => mod.installed || canEnableApps);
   }, [
     t,
@@ -229,6 +255,7 @@ export const useModuleItems = ({
     roomsInstalled,
     formsInstalled,
     canEnableApps,
+    isAiHubAvailable,
   ]);
 };
 

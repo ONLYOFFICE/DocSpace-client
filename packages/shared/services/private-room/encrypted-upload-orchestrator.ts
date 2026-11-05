@@ -239,6 +239,8 @@ type TRoomShare = {
   skipped: SkippedMemberKey[];
   /** Set when the members' wraps could not be written: the members whose keys were read. */
   failedFor?: string[];
+  /** The members the server stored no entry for: they can no longer read the file. */
+  unreadableFor?: string[];
 };
 
 /** The file was stored but its access list could not be written. */
@@ -575,8 +577,12 @@ async function wrapDekForSelfAndRoom(args: {
         })),
         ...newKeys,
       ];
-      await setFileEncryptionKeys(fileId, allKeys);
-      return { skipped };
+      const written = await setFileEncryptionKeys(fileId, allKeys);
+      const unreadableFor = (written?.skippedUserIds ?? []).map(String);
+      return {
+        skipped,
+        ...(unreadableFor.length > 0 ? { unreadableFor } : {}),
+      };
     } catch {
       // Spec: file-operations, "Uploads into a private room are encrypted on the client"
       return { skipped: [], failedFor: readMembers };
@@ -737,6 +743,7 @@ export async function uploadEncryptedFile(
     const pendingMembers = [
       ...skippedMembers.map((member) => member.userId),
       ...(share.failedFor ?? []),
+      ...(share.unreadableFor ?? []),
     ];
     for (const memberId of pendingMembers) {
       pendingAccessStore.addMissingFiles(Number(roomId), memberId, [

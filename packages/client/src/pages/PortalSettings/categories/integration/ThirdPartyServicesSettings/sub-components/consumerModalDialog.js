@@ -272,7 +272,6 @@ class ConsumerModalDialog extends React.Component {
               name={item.name}
               placeholder={item.title}
               isAutoFocussed={index === 0}
-              tabIndex={1}
               value={Object.values(state)[index]}
               isDisabled={isLoading}
               onChange={onChangeHandler}

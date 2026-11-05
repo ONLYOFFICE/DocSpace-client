@@ -72,7 +72,7 @@
     "@types/react-dom": "19.2.3",
     "cross-env": "^10.1.0",
     "css-minimizer-webpack-plugin": "^7.0.4",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.10",
     "sass": "1.79.6",
     "shx": "0.4.0",
     "terser-webpack-plugin": "5.3.16",

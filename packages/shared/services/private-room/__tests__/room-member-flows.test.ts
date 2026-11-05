@@ -46,11 +46,19 @@ vi.mock("../room-encryption", () => ({
 vi.mock("../../../api/groups", () => ({
   getGroupById: vi.fn(),
 }));
+vi.mock("../../../api/privacy", () => ({
+  getRoomCandidateKeys: vi.fn(),
+  getRoomMissingFileKeys: vi.fn(),
+}));
 vi.mock("../../../api/rooms", () => ({
   setRoomSecurity: vi.fn(),
 }));
 
 import { getGroupById } from "../../../api/groups";
+import {
+  getRoomCandidateKeys,
+  getRoomMissingFileKeys,
+} from "../../../api/privacy";
 import { setRoomSecurity } from "../../../api/rooms";
 import type { IdentityKeyPair } from "../../encryption/types";
 import {
@@ -58,13 +66,16 @@ import {
   backfillEncryptedFilesForRoomMembers,
   revokeMemberFromEncryptedRoom,
   rewrapMissingFilesForMember,
+  validateMembersForEncryption,
 } from "../room-encryption";
 import {
+  prepareNewOwner,
   retryPendingAccess,
   revokeRemovedMemberAccess,
   rewrapForInvitedMembers,
   rewrapPendingAccessOfMember,
   sendPrivateRoomInvitations,
+  verifyInvitees,
 } from "../room-member-flows";
 import { pendingAccessStore } from "../pending-access";
 
@@ -143,6 +154,144 @@ describe("sendPrivateRoomInvitations", () => {
     const result = await sendPrivateRoomInvitations(ROOM_ID, [ann], request);
 
     expect(result.responses).toEqual([{ members: [], warning: "Quota" }]);
+  });
+});
+
+describe("prepareNewOwner", () => {
+  const request = {
+    roomId: ROOM_ID,
+    candidateId: "u-bob",
+    currentUserId: "u-ann",
+    identity,
+  };
+
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
+  it("Missing entries wrapped before the transfer", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "u-bob", fileIds: [1, 2] },
+    ]);
+    vi.mocked(rewrapMissingFilesForMember).mockResolvedValue({
+      fileResults: [ok(1), ok(2)],
+      skippedMembers: [],
+      missingFileIdsByMember: {},
+    });
+
+    await expect(prepareNewOwner(request)).resolves.toEqual({
+      missingFileIds: [],
+    });
+
+    expect(getRoomMissingFileKeys).toHaveBeenCalledWith(ROOM_ID, ["u-bob"]);
+    const [roomId, userId, fileIds, options] = vi.mocked(
+      rewrapMissingFilesForMember,
+    ).mock.calls[0];
+    expect([roomId, userId, fileIds]).toEqual([ROOM_ID, "u-bob", [1, 2]]);
+    expect(options).toMatchObject({ currentUserId: "u-ann", identity });
+    // Silent: a changed key is refused, never asked about.
+    await expect(options.onKeyChange?.({} as never)).resolves.toBe("refuse");
+  });
+
+  it("Nothing missing", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "u-carol", fileIds: [1] },
+    ]);
+
+    await expect(prepareNewOwner(request)).resolves.toEqual({
+      missingFileIds: [],
+    });
+
+    expect(rewrapMissingFilesForMember).not.toHaveBeenCalled();
+  });
+
+  it("Entries still missing", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "u-bob", fileIds: [1, 2, 3] },
+    ]);
+    vi.mocked(rewrapMissingFilesForMember).mockResolvedValue({
+      fileResults: [ok(1), failed(2), ok(3)],
+      skippedMembers: [],
+      missingFileIdsByMember: { "u-bob": [2, 3] },
+    });
+
+    await expect(prepareNewOwner(request)).resolves.toEqual({
+      missingFileIds: [2, 3],
+    });
+  });
+
+  it("Candidate with a refused key change", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "u-bob", fileIds: [1, 2] },
+    ]);
+    vi.mocked(rewrapMissingFilesForMember).mockResolvedValue({
+      fileResults: [],
+      skippedMembers: [{ id: "u-bob", reason: "key-mismatch-refused" }],
+      missingFileIdsByMember: {},
+    });
+
+    await expect(prepareNewOwner(request)).resolves.toEqual({
+      missingFileIds: [1, 2],
+    });
+  });
+});
+
+describe("verifyInvitees", () => {
+  const invitees = [
+    { id: "u-ann", displayName: "Ann" },
+    { id: "u-bob", displayName: "Bob" },
+  ];
+
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
+  it("Order of operations: the invitees' keys come from the prospective members route and go through the verification", async () => {
+    vi.mocked(getRoomCandidateKeys).mockResolvedValue([
+      { id: "ann-key", userId: "u-ann", publicKey: "pk-ann" },
+    ]);
+    vi.mocked(validateMembersForEncryption).mockResolvedValue({
+      valid: [{ id: "u-ann", publicKey: "pk-ann" }],
+      skipped: [{ id: "u-bob", displayName: "Bob", reason: "no-key" }],
+    });
+
+    const result = await verifyInvitees({
+      roomId: ROOM_ID,
+      invitees,
+      currentUserId: "u-me",
+    });
+
+    expect(getRoomCandidateKeys).toHaveBeenCalledWith(ROOM_ID, [
+      "u-ann",
+      "u-bob",
+    ]);
+    const [roomId, memberIds, scope, resolver, names, keys] = vi.mocked(
+      validateMembersForEncryption,
+    ).mock.calls[0];
+    expect([roomId, memberIds, scope, resolver]).toEqual([
+      ROOM_ID,
+      ["u-ann", "u-bob"],
+      "u-me",
+      undefined,
+    ]);
+    expect(names).toEqual({ "u-ann": "Ann", "u-bob": "Bob" });
+    expect(keys?.get("u-ann")).toEqual({
+      userId: "u-ann",
+      publicKey: "pk-ann",
+      publicKeyId: "ann-key",
+    });
+    expect(keys?.has("u-bob")).toBe(false);
+    expect(result).toEqual({
+      verified: [{ id: "u-ann", publicKey: "pk-ann", displayName: "Ann" }],
+      skipped: [{ id: "u-bob", displayName: "Bob", reason: "no-key" }],
+    });
+  });
+
+  it("asks nothing without invitees", async () => {
+    await expect(
+      verifyInvitees({ roomId: ROOM_ID, invitees: [], currentUserId: "u-me" }),
+    ).resolves.toEqual({ verified: [], skipped: [] });
+    expect(getRoomCandidateKeys).not.toHaveBeenCalled();
   });
 });
 
@@ -237,6 +386,45 @@ describe("rewrapForInvitedMembers", () => {
       alert: true,
     });
     expect(backfillEncryptedFilesForRoomMembers).toHaveBeenCalledTimes(1);
+  });
+
+  it("Mixed invitation: the invitees skipped before the grant are reported with the re-wrap's own and are not granted", async () => {
+    vi.mocked(addMembersToEncryptedRoom).mockResolvedValue({
+      fileResults: [ok(1)],
+      skippedMembers: [],
+      missingFileIdsByMember: {},
+    });
+    const onOutcome = vi.fn();
+
+    const notices = await rewrapForInvitedMembers({
+      t,
+      roomId: ROOM_ID,
+      newMembers: [newMembers[0]],
+      skippedBeforeGrant: [
+        { id: "u-dan", displayName: "Dan", reason: "no-key" },
+      ],
+      currentUserId: "u-me",
+      identity,
+      onProgress,
+      onOutcome,
+    });
+
+    expect(notices).toEqual([
+      {
+        level: "warning",
+        text: 'Common:EncryptedSkippedNoKeys {"users":"Dan"}',
+      },
+    ]);
+    expect(onOutcome).toHaveBeenCalledWith({
+      granted: [newMembers[0]],
+      pending: [],
+      skipped: [{ id: "u-dan", displayName: "Dan", reason: "no-key" }],
+    });
+    expect(onProgress).toHaveBeenLastCalledWith({
+      percent: 100,
+      completed: true,
+      alert: true,
+    });
   });
 
   it("warns with the count of files left without the new members' entries", async () => {

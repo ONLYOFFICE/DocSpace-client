@@ -676,3 +676,78 @@ test.describe("AI settings on a phone", () => {
   });
 });
 
+
+// The settings sections are WAI-ARIA tabs: the bar is one Tab stop with a
+// roving tabindex, the arrows and Home/End move along it, and the next Tab
+// goes into the selected tab's panel.
+test.describe("AI settings tabs from the keyboard", () => {
+  test.beforeEach(async ({ mockRequest, page }) => {
+    useSaasBilling(mockRequest);
+    mockRequest.use(
+      ...walletServicesHandler(),
+      serviceFeeHandler(),
+      serviceStateHandler(),
+      aiPricesHandler(),
+      ...restrictionsHandler(),
+      ...servicePageHandlers(),
+    );
+    await page.clock.setSystemTime(PAID_NOW);
+  });
+
+  test("the bar is a tablist tied to its panel, and Tab goes into it", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}${AI_MODELS_ROUTE}`);
+
+    const tablist = page.getByRole("tablist").first();
+    const tabs = tablist.getByRole("tab");
+    await expect(tabs.first()).toBeVisible(FIRST_RENDER);
+    const count = await tabs.count();
+    expect(count).toBeGreaterThan(1);
+
+    // One tab stop, on the selected tab, which controls the panel.
+    const selected = tablist.getByRole("tab", { selected: true });
+    await expect(selected).toHaveAttribute("tabindex", "0");
+    await expect(tablist.locator('[role="tab"][tabindex="0"]')).toHaveCount(1);
+
+    const panel = page.getByRole("tabpanel");
+    await expect(panel).toBeVisible();
+    const panelId = await panel.getAttribute("id");
+    await expect(selected).toHaveAttribute("aria-controls", panelId ?? "");
+    await expect(panel).toHaveAttribute(
+      "aria-labelledby",
+      (await selected.getAttribute("id")) ?? "",
+    );
+
+    // No positive tabindex anywhere on the page.
+    const positive = await page.evaluate(
+      () =>
+        [...document.querySelectorAll<HTMLElement>("[tabindex]")].filter(
+          (el) => el.tabIndex > 0,
+        ).length,
+    );
+    expect(positive).toBe(0);
+
+    // The arrows move the focus along the bar without selecting.
+    const selectedName = await selected.textContent();
+    await selected.focus();
+    await page.keyboard.press("End");
+    await expect(tabs.nth(count - 1)).toBeFocused();
+    await page.keyboard.press("Home");
+    await expect(tabs.first()).toBeFocused();
+    await page.keyboard.press("ArrowRight");
+    await expect(tabs.nth(1)).toBeFocused();
+    await expect(tablist.getByRole("tab", { selected: true })).toHaveText(
+      selectedName ?? "",
+    );
+
+    // From the bar, Tab goes into the selected tab's panel.
+    await selected.focus();
+    await page.keyboard.press("Tab");
+    const inPanel = await panel.evaluate((el) =>
+      el.contains(document.activeElement),
+    );
+    expect(inPanel).toBe(true);
+  });
+});

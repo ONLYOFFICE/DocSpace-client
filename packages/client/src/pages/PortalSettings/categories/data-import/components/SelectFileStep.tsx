@@ -328,6 +328,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           scale
           onInput={onSelectFile}
           className="upload-backup-input"
+          aria-label={t("Settings:ChooseBackupFile")}
           placeholder={
             (migratingWorkspace === migratorName && files && files.join(",")) ||
             t("Settings:BackupFile")

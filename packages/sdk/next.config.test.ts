@@ -43,18 +43,22 @@ const { findSplitCopies, installedCopy, repoRoot, sharedDir } =
 
 type Resource = { request: string; context: string };
 
-// The two fields of webpack's plugin this test applies. webpack ships no types
-// to this package, and it is loaded through require like next.config.js does,
-// so `instanceof` sees the same class.
+// The two fields of webpack's plugin this test applies.
 type ReplacementPlugin = {
   resourceRegExp: RegExp;
   newResource: string | ((resource: Resource) => void);
 };
-const { NormalModuleReplacementPlugin } = require("webpack") as {
+
+// The webpack Next builds with: its own compiled copy, which it hands to the
+// `webpack` hook in next.config.js as `{ webpack }`. There is no `webpack`
+// package in this app's dependencies, so the test passes the same copy in,
+// and `instanceof` sees the class the config instantiated.
+const webpack = require("next/dist/compiled/webpack/webpack-lib") as {
   NormalModuleReplacementPlugin: abstract new (
     ...args: never[]
   ) => ReplacementPlugin;
 };
+const { NormalModuleReplacementPlugin } = webpack;
 
 const appDir = __dirname;
 
@@ -103,7 +107,7 @@ describe.skipIf(Boolean(process.env.DOCSPACE_UI_KIT_SRC?.trim()))(
   () => {
     it("resolves every dependency split between sdk and shared to the sdk's copy", () => {
       const nextConfig = require("./next.config.js");
-      const config = nextConfig.webpack(stubWebpackConfig(), {});
+      const config = nextConfig.webpack(stubWebpackConfig(), { webpack });
       const plugins = config.plugins.filter(
         (plugin: unknown): plugin is ReplacementPlugin =>
           plugin instanceof NormalModuleReplacementPlugin,

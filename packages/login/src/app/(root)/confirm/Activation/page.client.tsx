@@ -219,7 +219,6 @@ const ActivateUserForm = ({
             type={InputType.text}
             size={InputSize.large}
             scale
-            tabIndex={1}
             isAutoFocussed
             autoComplete="given-name"
             onChange={onChangeName}
@@ -244,7 +243,6 @@ const ActivateUserForm = ({
             type={InputType.text}
             size={InputSize.large}
             scale
-            tabIndex={2}
             autoComplete="family-name"
             onChange={onChangeSurName}
             onKeyDown={onKeyPress}
@@ -272,7 +270,6 @@ const ActivateUserForm = ({
             hasError={isPasswordErrorShow ? !passwordValid : undefined}
             size={InputSize.large}
             scale
-            tabIndex={1}
             autoComplete="current-password"
             onChange={onChangePassword}
             onValidateInput={onValidatePassword}
@@ -299,7 +296,6 @@ const ActivateUserForm = ({
           primary
           size={ButtonSize.medium}
           label={t("LoginRegistryButton")}
-          tabIndex={5}
           onClick={onSubmit}
           isDisabled={isLoading}
           testId="signup_button"

@@ -33,41 +33,25 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { defineConfig } from "vitest/config";
-import path from "node:path";
+import { describe, expect, it } from "vitest";
 
-export default defineConfig({
-  test: {
-    environment: "jsdom",
-    globals: true,
-    clearMocks: true,
-    setupFiles: ["./vitest/setupTests.ts"],
-    // ui-kit modules each import their own CSS file. Vitest externalizes
-    // node_modules by default, which hands those modules to Node as-is, and
-    // Node rejects the .css import (ERR_UNKNOWN_FILE_EXTENSION). Inlining
-    // routes them through Vite, which treats the stylesheet like any other.
-    server: {
-      deps: {
-        inline: [/@onlyoffice[\\/]apps-ui-kit/],
-      },
-    },
-    typecheck: {
-      tsconfig: "./tsconfig.vitest.json",
-    },
-    include: ["src/**/*.{test,spec}.{js,ts,jsx,tsx}"],
-    exclude: ["node_modules", ".next", "__tests__/**"],
-    testTimeout: 20000,
-  },
+import { getFilesItemClassName } from "../filesItemClassName";
 
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@docspace/shared": path.resolve(__dirname, "../shared"),
-      PUBLIC_DIR: path.resolve(__dirname, "../../public"),
-    },
-  },
+describe("getFilesItemClassName", () => {
+  it("names a file by its id and extension", () => {
+    expect(getFilesItemClassName({ id: 12, fileExst: ".docx" })).toBe(
+      "12_.docx",
+    );
+  });
 
-  esbuild: {
-    target: "esnext",
-  },
+  // The tiles named a folder `7_undefined`, which nothing looked for: the
+  // keyboard's focus never reached a folder or a room among the tiles.
+  it("names a folder or a room by its id alone", () => {
+    expect(getFilesItemClassName({ id: 7 })).toBe("7");
+    expect(getFilesItemClassName({ id: "7", fileExst: undefined })).toBe("7");
+  });
+
+  it("names nothing without an item", () => {
+    expect(getFilesItemClassName(null)).toBe("");
+  });
 });

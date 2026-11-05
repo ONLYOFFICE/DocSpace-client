@@ -56,6 +56,9 @@ the file to change so the backend team can pick them up; nothing here is
 - A caller who may change the access of a private room can read the public keys of named users who are not members yet, so the client verifies invitees' keys before granting access (`private-rooms-invite-atomic-rewrap`, decided 2026-10-28; design decision 10). Today the room access keys cover members only.
 - Found when the server was re-checked on 2026-10-28 (`e618acc6c0`): saving a user's keys can delete another sign-in link of that user, such as Google or SSO; a private room accepts external and invitation links and can be duplicated, saved as a template or index-exported, each guarded by the client only; an empty key set passes every key check; the private flag is accepted with any room type; and a third-party room created as private is not key-checked. The server refuses or fixes each of these (design decisions 11-13).
 - Re-checked on 2026-11-02 against `release/v4.1.0` (`e9cfda8d43`): none of the backend items has landed; the key save can also fail once the other sign-in link is gone, template creation has its own gate, and the private flag also reaches AI agents, templates and rooms from templates (design Context).
+- Landed on the server on 2026-11-04 (`3b9c527a6e` and `bd89a24dcd`, re-checked 2026-11-05): the archived-room guards, the socket recipients, the public keys of files in archived rooms, the invitee keys route (`GET privacyroom/{roomId}/access/candidates`), the sign-in link fix, the link, duplicate, index-export and template refusals, and the metadata guards. The same commits refuse copy-as for encrypted files and for private-room sources and destinations, and keep folders from leaving or entering a private room (design decisions 15 and 16). Still open after them: the owner change, the availability rule, title validation, e-mail titles, audit and history, the folder check of the abort route, recovery and offboarding, and the key-set, room-type and third-party checks of room creation.
+- Landed on the server on 2026-11-05 (`1259577f63`): the owner change answers 409 when the new owner lacks a file key, a new route `GET privacyroom/{roomId}/access/missing` lists which users miss keys on which files, the access write stores what it can and answers `skippedUserIds` (proposal decision 7 decided), every key write is audited and listed in the file history, and the letters and pushes name a private room "Private room" instead of its title (English only until translated). Still open: the availability rule, title validation, the revocation operation and its audit, the folder check of the abort route, recovery and offboarding, and the key-set, room-type and third-party checks of room creation.
+- Landed on the server on 2026-11-05, later (`cc60512acd`, `20262fdcb5`): an upload session into a private room is refused without the encrypted flag (403) or with a readable name (400), and the file write path refuses any plain file in a private room (proposal decision 5 decided); the server removes the wrapped file keys of a user who leaves a private room, is removed, has the access cleared or has their personal data deleted, audited as `RoomFileKeysRevoked` (proposal decision 4 decided); an empty key set counts as no keys; an abort through another folder is 404 and keeps the session; webhook payloads of a private room no longer reach subscribers outside it. Still open: the availability rule, the e-mail title translations, the owner part of offboarding, and the room-type and third-party checks of room creation.
 
 ## Capabilities
 
@@ -65,6 +68,17 @@ None.
 
 ### Modified Capabilities
 
+- `private-rooms/room-membership`: the backfill sweep wraps the entries
+  the server lists as missing and keeps the others, falling back to the
+  blind re-wrap of every file for every member when that read fails
+  (decided 2026-11-05 with task 14.2, design decision 20); the owner
+  change wraps the candidate's missing files before it asks the server
+  and keeps the owner when some remain or the server answers 409 (task
+  2.2, design decision 1); the server now removes the file keys of a
+  member who leaves or is removed, so the client's own revocation run goes
+  (task 6.3, design decision 22).
+- `private-rooms/file-operations`: the History tab leaves the
+  file-keys-issued entry out (task 6.2, design decision 19).
 - `private-rooms/server-contract`: owner change, edition gate, invitation
   e-mail, audit scope, recovery/offboarding
   endpoints, the copy right in archived private rooms and the public keys
@@ -109,12 +123,11 @@ None.
   2026-10-26). Not a release prerequisite.
 - Client-side TOFU and fail-closed fixes (separate changes).
 - The audit log viewer UI in the management app (follows once events exist).
-- A route that tells a room manager which members lack an access entry on
-  which files. It would make the backfill exact
-  (`private-rooms-fanout-dialog-and-backfill`, archived) and let the
-  pending-access marker of `private-rooms-invite-atomic-rewrap` survive a
-  reload and reach other devices; today the server reads back the caller's
-  own entries only. A later target, not a release prerequisite.
+- (Landed 2026-11-05, now group 14 of tasks.md.) A route that tells a room
+  manager which members lack an access entry on which files. It makes the
+  backfill exact (`private-rooms-fanout-dialog-and-backfill`, archived) and
+  lets the pending-access marker of `private-rooms-invite-atomic-rewrap`
+  survive a reload and reach other devices, which that change decides.
 - A server-side Private section with its own root, search area and new-items
   routing (`private-rooms-sidebar-section`, archived): a later target.
 
@@ -129,21 +142,22 @@ None.
 3. Recovery model for admin recovery: recovery-admin public key wrapping the
    user's private key (stashed design) versus key escrow. The spec assumes
    the former.
-4. Revocation primitive (open): the server removes a user's access entries
-   itself when the user leaves a private room or is deprovisioned, or a new
-   route lets a room manager remove named users' entries. No such operation
-   exists today; the "member revoked" audit and the offboarding requirement
-   cannot be implemented until this is decided.
-5. Server-side refusal of plaintext written into a private room (open):
-   unencrypted uploads and `copyas` conversion output currently land in a
-   private room unchecked. Whether this change adds a requirement for it is
-   undecided; `private-rooms-upload-fail-closed` defers its server guard here.
+4. Revocation primitive (decided by the server on 2026-11-05): the server
+   removes a user's wrapped file keys itself when the user leaves a private
+   room, is removed from it, has the access cleared or has their personal
+   data deleted, audited as `RoomFileKeysRevoked` (design decision 22); no
+   route for room managers. The "member revoked" audit is that event; the
+   offboarding requirement keeps its owner part open.
+5. Server-side refusal of plaintext written into a private room (decided by
+   the server on 2026-11-05): an upload session into a private room is
+   refused without the encrypted flag or with a readable name, and the file
+   write path refuses any plain file (design decision 21), after `copyas`
+   conversion output and plaintext folders on 2026-11-04 (design decisions
+   15 and 16). `private-rooms-upload-fail-closed` has its server guard.
 6. Third-party private rooms (open): key-check them like every private room
    (the spec assumes this, design decision 13) or refuse the private flag on
    third-party storage.
-7. Member removal racing an upload on another device (open): the access
-   write refuses the whole request when one listed user can no longer read
-   the file, so such an upload stores no entry for anyone. Options: the write
-   stores the entries of the users who can read and reports the others, or
-   the server blocks a member's removal while uploads naming them are open.
-   `private-rooms-invite-atomic-rewrap` leaves this race to this change.
+7. Member removal racing an upload on another device (decided by the server
+   on 2026-11-05): the access write stores the entries of the users who can
+   read and reports the others in `skippedUserIds` (design decision 17);
+   the client reads that list (task 12.6).

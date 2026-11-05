@@ -175,7 +175,6 @@ const CSP = ({
           onChange={onChangeDomain}
           value={domain}
           placeholder={t("CSPInputPlaceholder")}
-          tabIndex={1}
           hasError={error}
           isDisabled={disableCSP}
           testId="allowed_domains_text_input"

@@ -284,7 +284,6 @@ errorMessage={emailErrorText}
 					>
 						<EmailInput
 							scale
-							tabIndex={1}
 							name="e-mail"
 							value={email}
 							isAutoFocussed
@@ -314,7 +313,6 @@ errorMessage={emailErrorText}
 						dataTestId="recover_access_modal_description_container"
 					>
 						<Textarea
-							tabIndex={2}
 							hasError={descErr}
 							heightScale={false}
 							value={description}
@@ -350,7 +348,6 @@ errorMessage={emailErrorText}
 				<div className={styles.footer}>
 					<Button
 						primary
-						tabIndex={3}
 						isLoading={loading}
 						isDisabled={loading}
 						key="RecoverySendBtn"
@@ -363,7 +360,6 @@ errorMessage={emailErrorText}
 						testId="recover_access_modal_submit_button"
 					/>
 					<Button
-						tabIndex={4}
 						isLoading={loading}
 						isDisabled={loading}
 						size={ButtonSize.normal}

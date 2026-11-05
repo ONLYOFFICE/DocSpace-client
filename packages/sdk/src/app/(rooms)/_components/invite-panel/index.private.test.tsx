@@ -42,6 +42,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import type { TInviteOutcome } from "@docspace/shared/services/private-room/room-member-flows";
+import type { SkippedRoomMember } from "@docspace/shared/services/private-room/room-encryption";
 
 type TInviteInputProps = {
   setAddUsersPanelVisible: (visible: boolean) => void;
@@ -204,8 +205,12 @@ describe("InvitePanel of a private room", () => {
     expect(mocks.selector?.withGroups).toBe(true);
   });
 
-  it("Order of operations: the keys are re-wrapped after the security update, and the panel stays open with the result until closed", async () => {
+  it("Order of operations: the invitees are verified, the keys are re-wrapped after the security update, and the panel stays open with the result until closed", async () => {
     const onBeforeSubmit = vi.fn(async () => true);
+    const onVerifyInvitees = vi.fn(async () => ({
+      verified: [{ id: "bob", displayName: "Bob" }],
+      skipped: [],
+    }));
     let finish: (outcome: TInviteOutcome) => void = () => {};
     const onInviteSubmitted = vi.fn(
       () =>
@@ -216,15 +221,22 @@ describe("InvitePanel of a private room", () => {
     const { onClose } = await renderPanel({
       isPrivateRoom: true,
       onBeforeSubmit,
+      onVerifyInvitees,
       onInviteSubmitted,
     });
 
     await click("add_bob");
     await click("invite_panel_send_button");
 
-    expect(onInviteSubmitted).toHaveBeenCalledWith(["bob"], { bob: "Bob" });
+    expect(onVerifyInvitees).toHaveBeenCalledWith(["bob"], { bob: "Bob" });
+    expect(onInviteSubmitted).toHaveBeenCalledWith(
+      ["bob"],
+      { bob: "Bob" },
+      [],
+    );
     const order = [
       onBeforeSubmit,
+      onVerifyInvitees,
       mocks.setRoomSecurity,
       onInviteSubmitted,
     ].map((fn) => fn.mock.invocationCallOrder[0]);
@@ -249,21 +261,42 @@ describe("InvitePanel of a private room", () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it("Mixed invitation: the panel stays open listing the skipped invitee with the reason, and Invite again sends only them", async () => {
-    const onInviteSubmitted = vi.fn(async () => ({
-      granted: [{ id: "bob", displayName: "Bob" }],
-      pending: [],
-      skipped: [{ id: "dan", displayName: "Dan", reason: "no-key" as const }],
+  it("Mixed invitation: the skipped invitee is left out of the security update, the panel stays open listing them with the reason, and Invite again sends only them", async () => {
+    const dan = { id: "dan", displayName: "Dan", reason: "no-key" as const };
+    const onVerifyInvitees = vi.fn(async () => ({
+      verified: [{ id: "bob", displayName: "Bob" }],
+      skipped: [dan],
     }));
+    const onInviteSubmitted = vi.fn(
+      async (
+        _ids: string[],
+        _names: Record<string, string>,
+        skipped: SkippedRoomMember[],
+      ) => ({
+        granted: [{ id: "bob", displayName: "Bob" }],
+        pending: [],
+        skipped,
+      }),
+    );
     const { onClose } = await renderPanel({
       isPrivateRoom: true,
       onBeforeSubmit: async () => true,
+      onVerifyInvitees,
       onInviteSubmitted,
     });
 
     await click("add_bob_and_dan");
     await click("invite_panel_send_button");
 
+    expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(1);
+    expect(mocks.setRoomSecurity.mock.calls[0][1].invitations).toEqual([
+      { id: "bob", access: ShareAccessRights.Editing },
+    ]);
+    expect(onInviteSubmitted).toHaveBeenCalledWith(
+      ["bob"],
+      { bob: "Bob", dan: "Dan" },
+      [dan],
+    );
     expect(find("invite_panel_result_granted")?.textContent).toContain("Bob");
     expect(find("invite_panel_result_skipped")?.textContent).toContain(
       "Common:EncryptedSkippedNoKeys",
@@ -273,10 +306,14 @@ describe("InvitePanel of a private room", () => {
     await click("invite_panel_invite_again_button");
 
     expect(find("invite_panel_result")).toBeNull();
+    onVerifyInvitees.mockResolvedValueOnce({
+      verified: [{ id: "dan", displayName: "Dan" }],
+      skipped: [],
+    });
     await click("invite_panel_send_button");
 
-    expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(3);
-    expect(mocks.setRoomSecurity.mock.calls[2][1].invitations).toEqual([
+    expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(2);
+    expect(mocks.setRoomSecurity.mock.calls[1][1].invitations).toEqual([
       { id: "dan", access: ShareAccessRights.Editing },
     ]);
   });
@@ -305,7 +342,11 @@ describe("InvitePanel of a private room", () => {
     await click("invite_panel_send_button");
 
     expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(2);
-    expect(onInviteSubmitted).toHaveBeenCalledWith(["bob"], expect.anything());
+    expect(onInviteSubmitted).toHaveBeenCalledWith(
+      ["bob"],
+      expect.anything(),
+      [],
+    );
     expect(find("invite_panel_result_granted")?.textContent).toContain("Bob");
     expect(find("invite_panel_result_refused")?.textContent).toContain(
       "Common:EncryptedInviteNoKey",

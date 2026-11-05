@@ -59,10 +59,15 @@ const toMemberKeys = (
  * lists for that user.
  * Spec: private-rooms/encryption-core, "One selected key per user".
  */
+export type TSelectableKey = Pick<
+  TEncryptionKeyPair,
+  "id" | "userId" | "publicKey" | "date"
+>;
+
 export function selectMemberKeys(
-  keys: TEncryptionKeyPair[] | null | undefined,
+  keys: readonly TSelectableKey[] | null | undefined,
 ): Map<string, RoomMemberPublicKey> {
-  const byUser = new Map<string, TEncryptionKeyPair[]>();
+  const byUser = new Map<string, TSelectableKey[]>();
   if (Array.isArray(keys)) {
     for (const k of keys) {
       if (!k?.userId || !k?.publicKey) continue;

@@ -75,15 +75,11 @@ test.describe("Keys management — edge cases", () => {
     await expect(generateBtn).toBeVisible({ timeout: 15000 });
     await generateBtn.click();
 
-    const passphraseInput = page
-      .locator('input[name="passphrase"], #passphrase input')
-      .first();
+    const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5000 });
     await passphraseInput.fill(STRONG_PASSPHRASE);
 
-    const confirmInput = page
-      .locator('input[name="confirmPassphrase"], #confirmPassphrase input')
-      .first();
+    const confirmInput = page.getByLabel("Confirm passphrase", { exact: true });
     await confirmInput.fill("different-passphrase-1234");
 
     const continueBtn = page
@@ -116,15 +112,11 @@ test.describe("Keys management — edge cases", () => {
       .getByRole("button", { name: "Generate new key", exact: true })
       .click();
 
-    const passphraseInput = page
-      .locator('input[name="passphrase"], #passphrase input')
-      .first();
+    const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5000 });
     await passphraseInput.fill(STRONG_PASSPHRASE);
 
-    await page
-      .locator('input[name="confirmPassphrase"], #confirmPassphrase input')
-      .first()
+    await page.getByLabel("Confirm passphrase", { exact: true })
       .fill(STRONG_PASSPHRASE);
 
     await page
@@ -185,13 +177,9 @@ test.describe("Keys management — edge cases", () => {
       .getByRole("button", { name: "Generate new key", exact: true })
       .click();
 
-    await page
-      .locator('input[name="passphrase"], #passphrase input')
-      .first()
+    await page.getByLabel("Passphrase", { exact: true })
       .fill(STRONG_PASSPHRASE);
-    await page
-      .locator('input[name="confirmPassphrase"], #confirmPassphrase input')
-      .first()
+    await page.getByLabel("Confirm passphrase", { exact: true })
       .fill(STRONG_PASSPHRASE);
 
     await page
@@ -263,5 +251,113 @@ test.describe("Keys management — edge cases", () => {
       );
       await expect(lockNowBtn).toBeHidden({ timeout: 1000 });
     }).toPass({ timeout: 10000 });
+  });
+
+  test("Typed passphrase kept", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+    await page
+      .getByRole("button", { name: "Generate new key", exact: true })
+      .click();
+
+    const passphraseInput = page.getByLabel("Passphrase", { exact: true });
+    await expect(passphraseInput).toBeVisible({ timeout: 5000 });
+    await passphraseInput.fill(STRONG_PASSPHRASE);
+
+    await page.keyboard.press("Escape");
+
+    const confirmation = page
+      .getByRole("dialog")
+      .filter({ hasText: "Unsaved changes" });
+    await expect(confirmation).toBeVisible({ timeout: 5000 });
+    await confirmation
+      .getByRole("button", { name: "Cancel", exact: true })
+      .click();
+
+    await expect(confirmation).toBeHidden({ timeout: 5000 });
+    await expect(passphraseInput).toBeVisible();
+    await expect(passphraseInput).toHaveValue(STRONG_PASSPHRASE);
+  });
+
+  test("Typed passphrase kept from the keyboard", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+    await page
+      .getByRole("button", { name: "Generate new key", exact: true })
+      .click();
+
+    const passphraseInput = page.getByLabel("Passphrase", { exact: true });
+    await expect(passphraseInput).toBeVisible({ timeout: 5000 });
+    await passphraseInput.fill(STRONG_PASSPHRASE);
+
+    await page.keyboard.press("Escape");
+
+    const confirmation = page
+      .getByRole("dialog")
+      .filter({ hasText: "Unsaved changes" });
+    await expect(confirmation).toBeVisible({ timeout: 5000 });
+    const cancel = confirmation.getByRole("button", {
+      name: "Cancel",
+      exact: true,
+    });
+    for (let i = 0; i < 5; i++) {
+      if (await cancel.evaluate((el) => el === document.activeElement)) break;
+      await page.keyboard.press("Tab");
+    }
+    await expect(cancel).toBeFocused();
+    await page.keyboard.press("Enter");
+
+    await expect(confirmation).toBeHidden({ timeout: 5000 });
+    await expect(passphraseInput).toBeVisible();
+    await expect(passphraseInput).toHaveValue(STRONG_PASSPHRASE);
+  });
+
+  test("Typed passphrase discarded", async ({ page, mockRequest, baseUrl }) => {
+    const handleRef: { current: PrivacyroomHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [],
+        handle: handleRef,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+    const generateBtn = page.getByRole("button", {
+      name: "Generate new key",
+      exact: true,
+    });
+    await generateBtn.click();
+
+    const passphraseInput = page.getByLabel("Passphrase", { exact: true });
+    await expect(passphraseInput).toBeVisible({ timeout: 5000 });
+    await passphraseInput.fill(STRONG_PASSPHRASE);
+
+    await page.keyboard.press("Escape");
+
+    const confirmation = page
+      .getByRole("dialog")
+      .filter({ hasText: "Unsaved changes" });
+    await expect(confirmation).toBeVisible({ timeout: 5000 });
+    await confirmation
+      .getByRole("button", { name: "Close menu", exact: true })
+      .click();
+
+    await expect(confirmation).toBeHidden({ timeout: 5000 });
+    await expect(passphraseInput).toBeHidden({ timeout: 5000 });
+    await expect(generateBtn).toBeVisible();
+
+    const writes = handleRef.current!
+      .getRequests()
+      .filter((r) => r.method === "POST" || r.method === "PUT");
+    expect(writes).toHaveLength(0);
+    expect(handleRef.current!.getKeys()).toHaveLength(0);
   });
 });

@@ -72,7 +72,6 @@ const ChangePhoneForm = () => {
         size={InputSize.large}
         scale
         isAutoFocussed
-        tabIndex={1}
         hasError={false}
         guide={false}
         value=""
@@ -84,7 +83,6 @@ const ChangePhoneForm = () => {
         scale
         size={ButtonSize.medium}
         label={t("GetCode")}
-        tabIndex={2}
         isDisabled={false}
         testId="get_code_button"
       />

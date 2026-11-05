@@ -100,7 +100,6 @@ export const getAddEmailsColumns = (
     cellClassName: styles.accountsCell,
     cell: (user) => (
       <EmailCell
-        t={t}
         email={getEmail(user)}
         isOpen={openedEmailKey === user.key}
         onOpen={() => setOpenedEmailKey(user.key)}

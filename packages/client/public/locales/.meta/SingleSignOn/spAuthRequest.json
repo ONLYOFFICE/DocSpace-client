@@ -3,7 +3,7 @@
   "content": "Sign auth requests",
   "content_en_sha1_hash": "dc3cb5d4d4495345ddc64b9c6da396027cc101c6",
   "created_at": "2026-08-31T18:23:40.120Z",
-  "updated_at": "2026-08-31T20:52:37.255Z",
+  "updated_at": "2026-11-05T16:49:39.972Z",
   "comment": {
     "text": "Checkbox label in the Single Sign-On integration settings that indicates whether authentication requests should be signed.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/CheckboxSet.js",
       "line_number": 106,
-      "context": ": \"sp-sign-auth-requests\"\n }\n className={styles.checkboxInput}\n isDisabled={isDisabled}\n onChange={setCheckbox}\n label={prefix === \"idp\" ? t(\"idpAuthRequest\") : t(\"spAuthRequest\")}\n name={checkboxesNames[prefix][0]}\n tabIndex={10}\n isChecked={\n prefix === \"idp\" ? idpVerifyAuthResponsesSign : spSignAuthRequests\n }",
+      "context": ": \"sp-sign-auth-requests\"\n }\n className={styles.checkboxInput}\n isDisabled={isDisabled}\n onChange={setCheckbox}\n label={prefix === \"idp\" ? t(\"idpAuthRequest\") : t(\"spAuthRequest\")}\n name={checkboxesNames[prefix][0]}\n isChecked={\n prefix === \"idp\" ? idpVerifyAuthResponsesSign : spSignAuthRequests\n }\n dataTestId={checkboxesDataTestId.authRequestCheckbox[prefix]}",
       "module": "/packages/client"
     }
   ],

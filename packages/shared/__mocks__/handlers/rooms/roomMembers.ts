@@ -27,6 +27,7 @@
 import { http } from "msw";
 
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
+import type { EncryptedFilesHandlerHandle } from "../files/encryptedFiles";
 import type { RequestLog } from "../privacyroom";
 
 export type RoomMember = {
@@ -47,12 +48,43 @@ export type RoomMembersHandlerOptions = {
   initial?: RoomMember[];
   links?: unknown[];
   handle?: { current: RoomMembersHandlerHandle | null };
+  /**
+   * Users who never registered an encryption key, for a private room. The
+   * server (`FileSharing.SetAceObjectAsync`) saves the invitees of a request
+   * one by one and calls `EncryptionLoginProvider.ThrowIfKeysAreNotSetAsync`
+   * for each; its `InvalidOperationException` becomes a 403 in
+   * `UnhandledExceptionMiddleware`, after the invitees before it were saved.
+   */
+  withoutKeys?: string[];
+  /**
+   * The room's files. A share set to None (FileShare.None) for a member
+   * who held one removes that member's file keys once the request went
+   * through, as SetAceObjectAsync calls RevokeFileKeysAsync after its loop;
+   * the mock has no groups, so every subject counts as a user.
+   */
+  files?: { current: EncryptedFilesHandlerHandle | null };
 };
+
+/** FileShare.None. */
+const SHARE_NONE = 0;
 
 const okResponse = <T>(response: T): Response =>
   new Response(
     JSON.stringify({ response, status: 0, statusCode: 200 }),
     { headers: { "Content-Type": "application/json" } },
+  );
+
+const noKeyResponse = (): Response =>
+  new Response(
+    JSON.stringify({
+      status: 1,
+      statusCode: 403,
+      error: {
+        message: "The user does not have an encryption key",
+        type: "System.InvalidOperationException",
+      },
+    }),
+    { status: 403, headers: { "Content-Type": "application/json" } },
   );
 
 const buildMemberDto = (m: RoomMember) => ({
@@ -121,9 +153,12 @@ export const roomMembersHandlers = (
       };
       requests.push({ method: "PUT", url: baseUrl, body });
 
+      const removed: string[] = [];
       for (const inv of body.invitations ?? []) {
+        if (opts.withoutKeys?.includes(inv.id)) return noKeyResponse();
         const existing = state.find((m) => m.id === inv.id);
         if (existing) {
+          if (inv.access === SHARE_NONE) removed.push(inv.id);
           if (inv.access !== undefined) existing.access = inv.access;
           continue;
         }
@@ -133,6 +168,7 @@ export const roomMembersHandlers = (
           access: inv.access ?? 11,
         });
       }
+      opts.files?.current?.revokeFileKeys(removed);
       return okResponse({ members: state.map(buildMemberDto) });
     }),
 

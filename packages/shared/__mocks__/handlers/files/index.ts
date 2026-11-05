@@ -36,6 +36,7 @@
 import {
   filesSettingsHandler,
   showQuickActionsHandler,
+  changeDeleteConfirmHandler,
 } from "./filesSettings";
 import { foldersTreeHandler } from "./foldersTree";
 import { filesUsedSpaceHandler } from "./filesUsedSpace";
@@ -58,6 +59,7 @@ import {
 import {
   roomPrimaryLinkHandler,
   roomLinksHandler,
+  roomLinkSetHandler,
   roomFilePrimaryLinkHandler,
   roomFileGetPrimaryLinkHandler,
   roomFileLinksHandler,
@@ -140,6 +142,7 @@ export {
   privateRoomListHandler,
   type PrivateRoomListOptions,
 } from "./privateRoomList";
+export { emptyTemplateHandler } from "./emptyTemplate";
 
 export {
   type FolderHistoryFeedSeed,
@@ -155,10 +158,12 @@ export {
   foldersTreeHandler,
   filesSettingsHandler,
   showQuickActionsHandler,
+  changeDeleteConfirmHandler,
   validatePublicRoomKeyHandler,
   roomListHandler,
   roomPrimaryLinkHandler,
   roomLinksHandler,
+  roomLinkSetHandler,
   roomFilePrimaryLinkHandler,
   roomFileGetPrimaryLinkHandler,
   roomFileLinksHandler,
@@ -222,6 +227,7 @@ export const filesHandlers = (port: string) => [
   rootHandler(port),
   filesSettingsHandler(port),
   showQuickActionsHandler(port),
+  changeDeleteConfirmHandler(port),
   validatePublicRoomKeyHandler(port),
   roomListHandler(port),
   folderHandler(port),

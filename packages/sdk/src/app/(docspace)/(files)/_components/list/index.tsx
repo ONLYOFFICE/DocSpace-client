@@ -62,6 +62,15 @@ import EmptyView from "../empty-view";
 import { ListProps } from "./List.types";
 import useResetSelectionClick from "./hooks/useResetSelectionClick";
 
+// Spec: private-rooms/sdk-surface, "No search in private rooms".
+const withoutPrivateSearch = (filter: FilesFilter, isPrivate?: boolean) => {
+  if (isPrivate) filter.search = null;
+  return filter;
+};
+
+const itemKey = (item: TFolderItem | TFileItem) =>
+  `${item.isFolder ? "folder" : "file"}_${item.id}`;
+
 const List = ({
   folders,
   files,
@@ -127,10 +136,13 @@ const List = ({
   });
 
   const [filter, setFilter] = React.useState<FilesFilter>(
-    FilesFilter.getFilter({
-      search: `?${filesFilter}`,
-      pathname,
-    } as Location)!,
+    withoutPrivateSearch(
+      FilesFilter.getFilter({
+        search: `?${filesFilter}`,
+        pathname,
+      } as Location)!,
+      isPrivate,
+    ),
   );
   const [filesList, setFilesList] = React.useState<(TFolderItem | TFileItem)[]>(
     [
@@ -166,7 +178,10 @@ const List = ({
     fetchFolderAbortRef.current = controller;
 
     requestRunning.current = true;
-    const newFilter = FilesFilter.getFilter(window.location)!;
+    const newFilter = withoutPrivateSearch(
+      FilesFilter.getFilter(window.location)!,
+      isPrivate,
+    );
 
     const urlHasFolder = new URLSearchParams(window.location.search).has(
       "folder",
@@ -236,6 +251,7 @@ const List = ({
       requestRunning.current = false;
     }
   }, [
+    isPrivate,
     shareKey,
     setIsEmptyList,
     convertFolderToItem,
@@ -279,23 +295,28 @@ const List = ({
         ...newFiles.map((f) => convertFileToItem(f, sectionOverrides)),
       ];
 
-      let hasNext = false;
-      setFilesList((val) => {
-        const newVal = [...val, ...newItems];
-
-        hasNext = newTotal > newVal.length;
-
-        return newVal;
-      });
+      // The store leads once synced, so a page joins what it lists and
+      // keeps the items an action or an encrypted operation put there.
+      const listed = new Set(filesListStore.items.map(itemKey));
+      filesListStore.appendItems(
+        newItems.filter((item) => !listed.has(itemKey(item))),
+      );
       setTotal(newTotal);
-      setHasNextPage(hasNext);
+      setHasNextPage(newTotal > filesListStore.items.length);
       setFilter(filter);
     } catch (e) {
       if (!controller.signal.aborted) throw e;
     } finally {
       requestRunning.current = false;
     }
-  }, [filter, shareKey, hasNextPage, convertFolderToItem, convertFileToItem]);
+  }, [
+    filter,
+    shareKey,
+    hasNextPage,
+    filesListStore,
+    convertFolderToItem,
+    convertFileToItem,
+  ]);
 
   React.useEffect(() => {
     if (!isInit.current || requestRunning.current) {
@@ -313,9 +334,44 @@ const List = ({
     fetchCurrentFolder,
   );
 
+  // Until the store holds this list's items the list renders its own state;
+  // afterwards the store leads, also once an action has emptied it.
+  const [isStoreSynced, setIsStoreSynced] = React.useState(false);
+
   React.useEffect(() => {
     setItems(filesList);
+    setIsStoreSynced(true);
   }, [filesList, setItems]);
+
+  // Spec: private-rooms/sdk-surface, "Files list follows encrypted operations".
+  const storedFilesCount = filesListStore.storedFiles.length;
+  React.useEffect(() => {
+    if (!isStoreSynced || storedFilesCount === 0) return;
+
+    const listed = new Set(
+      filesListStore.items.filter((i) => !i.isFolder).map((i) => String(i.id)),
+    );
+    const added = filesListStore
+      .takeStoredFiles()
+      .filter(
+        (file) =>
+          String(file.folderId) === String(currentFolderId) &&
+          !listed.has(String(file.id)),
+      )
+      .map((file) => convertFileToItem(file));
+    if (added.length === 0) return;
+
+    filesListStore.prependFiles(added);
+    setTotal((count) => count + added.length);
+    setIsEmptyList(false);
+  }, [
+    isStoreSynced,
+    storedFilesCount,
+    filesListStore,
+    currentFolderId,
+    convertFileToItem,
+    setIsEmptyList,
+  ]);
 
   React.useEffect(() => {
     setRootFolderType(current.rootFolderType);
@@ -325,8 +381,7 @@ const List = ({
     setCurrentFolder(current);
   }, [current, setCurrentFolder]);
 
-  const visibleItems =
-    filesListStore.items.length > 0 ? filesListStore.items : filesList;
+  const visibleItems = isStoreSynced ? filesListStore.items : filesList;
 
   if (visibleItems.length === 0) {
     // Filtered searches always use the standard EmptyView ("no results"

@@ -3,7 +3,7 @@
   "content": "Encryption unlock required",
   "content_en_sha1_hash": "4c747530c8847898e7db7ef2d37db351e97b5f8c",
   "created_at": "2026-06-09T09:42:43.431Z",
-  "updated_at": "2026-06-09T10:15:33.081Z",
+  "updated_at": "2026-11-05T16:49:39.919Z",
   "comment": {
     "text": "Error message displayed during the private invite process when the user fails to provide the necessary passphrase to unlock encryption.",
     "is_auto": true,
@@ -12,9 +12,27 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/User.tsx",
+      "line_number": 178,
+      "context": "!!pendingAccessStore.get(room.id, String(user.id));\n \n const onRetryAccess = async () => {\n const identity = await requireUnlock(String(selfId));\n if (!identity) {\n toastr.error(t(\"Common:EncryptionUnlockRequired\"));\n return;\n }\n \n const operationId = uniqueid(\"operation_\");\n setSecondaryProgressBarData?.({",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
+      "line_number": 665,
+      "context": "try {\n if (isPrivateRoom) {\n const identity = await requireUnlock(currentUserId);\n if (!identity) {\n toastr.error(t(\"Common:EncryptionUnlockRequired\"));\n return;\n }\n const { missingFileIds } = await prepareNewOwner({\n roomId,\n candidateId: userId,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/usePrivateAccessRetryFlow.ts",
+      "line_number": 72,
+      "context": "return React.useCallback(\n async (member: NewRoomMember) => {\n const userId = identityStore.userKeys?.userId;\n const identity = userId ? await requireIdentity() : null;\n if (!userId || !identity) {\n toastr.error(t(\"Common:EncryptionUnlockRequired\"));\n return;\n }\n \n const controller = registerCryptoOperation();\n dialogs.setReencryptPercent(0);",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/usePrivateInviteFlow.ts",
-      "line_number": 130,
-      "context": "const identity = await requireIdentity();\n if (!identity) {\n // Cancelled passphrase dialog — surface as user-actionable error so\n // InvitePanel doesn't silently treat the invite as fully successful.\n throw new Error(t(\"Common:EncryptionUnlockRequired\"));\n }\n \n const controller = registerCryptoOperation();\n setIsLoading(true);\n try {",
+      "line_number": 139,
+      "context": "throw new Error(t(\"Common:EncryptionKeysNotConfigured\"));\n }\n \n const identity = await requireIdentity();\n if (!identity) {\n throw new Error(t(\"Common:EncryptionUnlockRequired\"));\n }\n \n const controller = registerCryptoOperation();\n dialogs.setReencryptPercent(0);\n try {",
       "module": "/packages/sdk"
     }
   ],

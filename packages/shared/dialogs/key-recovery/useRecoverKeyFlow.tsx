@@ -46,7 +46,7 @@ import {
 } from "@docspace/shared/services/encryption/identity";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { InvalidRecoveryPhraseError } from "@docspace/shared/services/encryption/errors";
-import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
+import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type {
   IdentityKeyPair,
@@ -111,10 +111,9 @@ export function useRecoverKeyFlow({
 
   const onPhraseSubmit = useCallback(
     async (input: string) => {
-      const pool: TEncryptionKeyPair[] = scopedTarget
-        ? [scopedTarget]
-        : (encryptionKeys ?? []);
-      if (pool.length === 0) return;
+      const target = scopedTarget ?? selectUserKey(encryptionKeys);
+      if (!target) return;
+      const pool: TEncryptionKeyPair[] = [target];
       setError(null);
       setIsPending(true);
       try {
@@ -170,7 +169,6 @@ export function useRecoverKeyFlow({
           publicKey: serialized.publicKey,
           privateKeyEnc: serialized.privateKeyEnc,
         });
-        setActiveKeyId(userId, targetKeyId);
         SecretStorage.cacheUnlocked(userId, keyPair);
         await refreshKeysFromServer();
         recovered = keyPair;

@@ -13,7 +13,7 @@
   "FormsEmpty": "Šajā apskatē redzamās telpas bija piemēri. Kad kāds jūs uzaicinās uz telpu, tā parādīsies šajā sarakstā. Atveriet to, lai atrastu veidlapas, ko varat aizpildīt.",
   "FormsEmptyTitle": "Jūsu saraksts pagaidām ir tukšs",
   "FormsFillYourself": "Aizpildāt veidlapu pats? Kad veidlapa ir palaista, izvēlieties Aizpildīt vai atveriet to, lai aizpildītu savu kopiju. Jūsu melnraksts paliek sadaļā {{inProgress}}, līdz to iesniedzat.",
-  "FormsFillYourselfTitle": "Aizpildiet to pats",
+  "FormsFillYourselfTitle": "Aizpildiet pats",
   "FormsInProgress": "Kamēr kāds aizpilda veidlapu, darba kopija tiek saglabāta sadaļā {{inProgress}}. Par atbildi tā tiek uzskatīta tikai pēc iesniegšanas. Cilvēki, kas uzaicināti kā {{formFiller}}, redz tikai savas atbildes.",
   "FormsInProgressTitle": "Iesākts, bet nepabeigts",
   "FormsItem": "Katra rinda ir veidlapu telpa. Atveriet to, lai pārvaldītu tās veidlapas un atbildes, piespraudiet to ātrai piekļuvei vai izmantojiet trīs punktus, lai uzaicinātu cilvēkus, kopētu koplietoto saiti un saglabātu telpu kā veidni.",

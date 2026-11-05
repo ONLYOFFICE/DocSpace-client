@@ -45,7 +45,7 @@ import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { isOAuthFrame, onAuthTokenPush, requestAuthToken } from "./oauthToken";
-import { frameCallEvent } from "./common";
+import { frameCallEvent, isPrivateRoomsRoute } from "./common";
 import { isPortalNotFoundRedirectClaimed } from "./portalNotFound";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
@@ -598,12 +598,18 @@ class AxiosClient {
             if (options.skipForbidden) break;
             const { pathname } = window.location;
 
+            const isPrivate = isPrivateRoomsRoute(pathname);
+
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 
             const isRooms =
               pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
-            if (isRooms && !skipRedirect && !window?.ClientConfig?.isFrame) {
+            if (
+              (isRooms || isPrivate) &&
+              !skipRedirect &&
+              !window?.ClientConfig?.isFrame
+            ) {
               this.forbiddenHandler?.();
             }
 

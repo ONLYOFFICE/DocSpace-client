@@ -385,6 +385,35 @@ test.describe("Payment complete page", () => {
     await page.waitForURL("**/billing/tariff-plan");
   });
 
+  test("in the not-paid period the callback still tops up and buys the plan", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, { tariff: "unpaid" });
+    const deposits = trackRequests(page, "POST", DEPOSIT_PATH);
+    const purchases = trackRequests(page, "PUT", UPDATE_WALLET_PATH);
+
+    await page.goto(
+      `${baseUrl}${completeUrl({
+        amount: "150",
+        admins: "5",
+        storage: "200 GB",
+        plan: "Business",
+        price: "$150.00",
+      })}`,
+    );
+
+    await expect(page.getByText("Business plan activated")).toBeVisible(
+      FIRST_RENDER,
+    );
+    await expect(page).toHaveURL(/\/billing\/payment-complete$/);
+    expect(deposits).toHaveLength(1);
+    expect(deposits[0]).toContain('"amount":150');
+    expect(purchases).toHaveLength(1);
+    expect(purchases[0]).toContain('"adminwallet":5');
+  });
+
   test("a Docs Connect purchase buys the users and leads to the service", async ({
     page,
     baseUrl,
@@ -556,7 +585,7 @@ test.describe("Payment complete page", () => {
     await page.waitForURL("**/billing/addons/backup");
   });
 
-  test("a failed Docs Connect top-up points back to Docs Connect", async ({
+  test("a failed Docs Connect top-up points back to the Docs Connect add-on page", async ({
     page,
     baseUrl,
     mockRequest,
@@ -573,13 +602,13 @@ test.describe("Payment complete page", () => {
     await expect(
       page.getByText("You can retry from Docs Connect."),
     ).toBeVisible();
-    await expect(errorButton(page)).toHaveText("Go to Docs Connect");
+    await expect(errorButton(page)).toHaveText("Try again in Wallet");
 
     await expectScreenshot(page, shot("error-docs-connect.png"));
 
     await errorButton(page).click();
 
-    await page.waitForURL("**/developer-tools/docs-connect");
+    await page.waitForURL("**/billing/addons/docs-connect");
   });
 
   test("a failed Docs Connect purchase keeps the top-up and offers a retry", async ({
@@ -600,7 +629,7 @@ test.describe("Payment complete page", () => {
 
     await errorButton(page).click();
 
-    await page.waitForURL("**/developer-tools/docs-connect");
+    await page.waitForURL("**/billing/addons/docs-connect");
   });
 
   // The page falls back to the paywall start amount instead of refusing a broken amount.

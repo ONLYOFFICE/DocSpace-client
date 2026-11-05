@@ -37,8 +37,8 @@ import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvgUrl from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 import CheckSvgUrl from "PUBLIC_DIR/images/check.edit.react.svg?url";
 
-import { useState } from "react";
-import type { TFunction } from "i18next";
+import { useEffect, useId, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -48,21 +48,24 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/email-input";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 import styles from "../../../../StyledDataImport.module.scss";
 
 /** What a click on the row leaves alone: the email and its editor. */
 export const EMAIL_CELL_CONTENT = ".user-email, .import-email-editor";
 
+const NAMESPACES = ["SMTPSettings", "Settings", "Common", "PeopleTranslations"];
+
 type TEmailEditorProps = {
-  t: TFunction;
   email: string;
   onSave: (email: string) => void;
   onCancel: () => void;
 };
 
 /** The email being typed: kept here until it is saved or dropped. */
-const EmailEditor = ({ t, email, onSave, onCancel }: TEmailEditorProps) => {
+const EmailEditor = ({ email, onSave, onCancel }: TEmailEditorProps) => {
+  const { t } = useTranslation(NAMESPACES);
   const [tempEmail, setTempEmail] = useState(email);
   const [isEmailValid, setIsEmailValid] = useState(email.length > 0);
   const [hasError, setHasError] = useState(false);
@@ -90,6 +93,18 @@ const EmailEditor = ({ t, email, onSave, onCancel }: TEmailEditorProps) => {
     if (e.key === "Enter") save();
   };
 
+  // The icons' own clicks make them keyboard buttons; the box around each,
+  // which takes the pointer's click, must not run it a second time.
+  const handleSaveIconClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    save();
+  };
+
+  const handleCancelIconClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onCancel();
+  };
+
   return (
     <div
       className={classNames(styles.emailInputWrapper, "import-email-editor")}
@@ -112,6 +127,8 @@ const EmailEditor = ({ t, email, onSave, onCancel }: TEmailEditorProps) => {
           size={16}
           iconName={CheckSvgUrl}
           dataTestId="import_check_button"
+          ariaLabel={t("Common:SaveButton")}
+          onClick={handleSaveIconClick}
         />
       </div>
 
@@ -121,6 +138,8 @@ const EmailEditor = ({ t, email, onSave, onCancel }: TEmailEditorProps) => {
           size={16}
           iconName={CrossSvgUrl}
           dataTestId="import_clear_button"
+          ariaLabel={t("Common:CancelButton")}
+          onClick={handleCancelIconClick}
         />
       </div>
     </div>
@@ -134,20 +153,59 @@ type TEmailCellProps = TEmailEditorProps & {
 
 /** The account's email, or the editor for it while it is open. */
 export const EmailCell = ({
-  t,
   email,
   isOpen,
   onOpen,
   onSave,
   onCancel,
-}: TEmailCellProps) =>
-  isOpen ? (
-    <EmailEditor t={t} email={email} onSave={onSave} onCancel={onCancel} />
+}: TEmailCellProps) => {
+  const { t } = useTranslation(NAMESPACES);
+  const emailTextId = useId();
+  const changeEmailId = useId();
+  const emailTextRef = useRef<HTMLSpanElement>(null);
+
+  // Closed by its own save or cancel, the editor took the focus with it:
+  // give it back to the email rather than leave it on the page's body.
+  const wasOpenRef = useRef(isOpen);
+  useEffect(() => {
+    const wasOpen = wasOpenRef.current;
+    wasOpenRef.current = isOpen;
+    const lost =
+      !document.activeElement || document.activeElement === document.body;
+    if (wasOpen && !isOpen && lost) emailTextRef.current?.focus();
+  }, [isOpen]);
+
+  // The email to edit is a button to the keyboard.
+  const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) =>
+    activateOnButtonKey(e, onOpen);
+
+  return isOpen ? (
+    <EmailEditor email={email} onSave={onSave} onCancel={onCancel} />
   ) : (
-    <span onClick={onOpen} className="user-email">
+    <span
+      onClick={onOpen}
+      role="button"
+      tabIndex={0}
+      // Named by the address it shows, then by what it does: the text
+      // alone gave no hint that it edits, and a name that left the
+      // visible address out could not be spoken to by voice control.
+      aria-labelledby={`${emailTextId} ${changeEmailId}`}
+      onKeyDown={handleEmailKeyDown}
+      className="user-email"
+      ref={emailTextRef}
+    >
       <EditSvg />
-      <Text color={globalColors.gray} className="user-email" truncate>
+      <Text
+        id={emailTextId}
+        color={globalColors.gray}
+        className="user-email"
+        truncate
+      >
         {email !== "" ? email : t("Settings:NoEmail")}
       </Text>
+      <span id={changeEmailId} hidden>
+        {t("PeopleTranslations:EmailChangeButton")}
+      </span>
     </span>
   );
+};

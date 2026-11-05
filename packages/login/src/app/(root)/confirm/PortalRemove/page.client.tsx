@@ -117,7 +117,6 @@ const RemovePortalForm = ({
           scale
           size={ButtonSize.medium}
           label={t("Common:Delete")}
-          tabIndex={1}
           onClick={onDeleteClick}
           testId="delete_portal_button"
         />
@@ -125,7 +124,6 @@ const RemovePortalForm = ({
           scale
           size={ButtonSize.medium}
           label={t("Common:CancelButton")}
-          tabIndex={1}
           onClick={onCancelClick}
           testId="cancel_button"
         />

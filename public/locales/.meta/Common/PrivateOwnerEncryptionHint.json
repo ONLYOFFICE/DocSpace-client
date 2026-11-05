@@ -3,7 +3,7 @@
   "content": "Only users who are already members of this room and have set up encryption can become the owner.",
   "content_en_sha1_hash": "55c53bd27032519875a90fbe1513ccf205b25391",
   "created_at": "2026-06-09T09:42:54.292Z",
-  "updated_at": "2026-06-09T10:01:55.535Z",
+  "updated_at": "2026-11-05T16:49:40.048Z",
   "comment": {
     "text": "Informational text in the \"Change Room Owner\" dialog that explains the membership and encryption requirements for a user to take ownership of a private room.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/owner-change/PrivateChangeOwnerDialog.tsx",
-      "line_number": 163,
-      "context": "controller.abort();\n };\n }, [roomId, baseExclude]);\n \n const headerLabel = t(\"Common:ChangeTheRoomOwner\");\n const infoText = t(\"Common:PrivateOwnerEncryptionHint\");\n \n const onSubmit: TOnSubmit = async (\n users,\n _access,\n _fileName,",
+      "line_number": 109,
+      "context": "roomId,\n userId: currentUserId,\n });\n \n const headerLabel = t(\"Common:ChangeTheRoomOwner\");\n const infoText = t(\"Common:PrivateOwnerEncryptionHint\");\n \n const onSubmit: TOnSubmit = async (\n users,\n _access,\n _fileName,",
       "module": "/packages/sdk"
     }
   ],

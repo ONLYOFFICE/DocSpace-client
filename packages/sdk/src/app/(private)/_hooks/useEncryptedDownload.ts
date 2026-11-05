@@ -129,7 +129,7 @@ export const useEncryptedDownload = (): UseEncryptedDownloadReturn => {
         if (controller.signal.aborted) return;
 
         if (!result.success || !result.file) {
-          toastr.error(result.error || t("Common:UnexpectedError"));
+          toastr.error(t("Common:EncryptionDownloadFailed"));
           return;
         }
         triggerFileDownload(result.file, result.file.name);

@@ -134,7 +134,6 @@ const RegisterModalDialog = ({
               name="e-mail"
               size={InputSize.base}
               scale
-              tabIndex={1}
               isDisabled={loading}
               value={email ?? ""}
               onChange={onChangeEmail}
@@ -157,7 +156,6 @@ const RegisterModalDialog = ({
           onClick={onSendRegisterRequest}
           isLoading={loading}
           isDisabled={loading}
-          tabIndex={3}
           testId="register_send_button"
         />
 
@@ -172,7 +170,6 @@ const RegisterModalDialog = ({
           onClick={onRegisterModalClose}
           isLoading={loading}
           isDisabled={loading}
-          tabIndex={2}
           testId="register_cancel_button"
         />
       </ModalDialog.Footer>

@@ -112,7 +112,6 @@ const ProviderMetadata = (props) => {
           primary
           scale={isMobileView}
           size={isMobileView ? "normal" : "small"}
-          tabIndex={25}
           onClick={downloadMetadata}
           isDisabled={!isSSOAvailable}
           testId="download_metadata_xml_button"

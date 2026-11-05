@@ -309,6 +309,64 @@ export const roomLinksHandler = (
       }),
   );
 
+/**
+ * Mirrors VirtualRoomsController.SetRoomLink (HttpPut "{id}/links") ->
+ * FileStorageService.SetInvitationLinkAsync / SetExternalLinkAsync ->
+ * FileSharingAceHelper.SetAceObjectAsync: since bd89a24dcd a link with an
+ * access other than None on a private room is refused with 403
+ * (SecurityException, "You don't have enough permission to perform the
+ * operation"), whatever its kind; a revocation (access None) passes and the
+ * route answers null, the link being gone. An ordinary room answers the
+ * link as requested. The mock keeps no links: the answer is built from the
+ * request.
+ */
+export const roomLinkSetHandler = (
+  port: string,
+  roomId: number | string,
+  { isPrivate = false }: { isPrivate?: boolean } = {},
+) =>
+  http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/${roomId}/links`,
+    async ({ request }) => {
+      const body = (await request.json()) as {
+        access?: number;
+        internal?: boolean;
+        title?: string;
+        linkType?: number;
+      };
+      const access = body.access ?? ShareAccessRights.ReadOnly;
+      if (isPrivate && access !== ShareAccessRights.None) {
+        return HttpResponse.json(
+          {
+            error: {
+              message: "You don't have enough permission to perform the operation",
+            },
+            status: 1,
+            statusCode: 403,
+          },
+          { status: 403 },
+        );
+      }
+      if (access === ShareAccessRights.None) {
+        return HttpResponse.json({ response: null, status: 0, statusCode: 200 });
+      }
+      const link = makeRoomLink(!!body.internal);
+      return HttpResponse.json({
+        response: {
+          ...link,
+          access,
+          sharedTo: {
+            ...link.sharedTo,
+            title: body.title ?? link.sharedTo.title,
+            linkType: body.linkType ?? link.sharedTo.linkType,
+          },
+        },
+        status: 0,
+        statusCode: 200,
+      });
+    },
+  );
+
 export const roomFileLinksHandler = (
   port: string,
   fileId: number | string,

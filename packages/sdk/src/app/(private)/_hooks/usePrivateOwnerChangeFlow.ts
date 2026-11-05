@@ -43,22 +43,10 @@ import { ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
-import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
 import {
   registerCryptoOperation,
   releaseCryptoOperation,
 } from "../_utils/abort-registry";
-
-export type CandidateValidationResult = {
-  validIds: string[];
-  skipped: Array<{ id: string; displayName?: string; reason: string }>;
-};
-
-type ValidateArgs = {
-  roomId: number;
-  candidateIds: string[];
-  displayNames?: Record<string, string | undefined>;
-};
 
 type ChangeOwnerArgs = {
   roomId: number;
@@ -71,58 +59,20 @@ type LeaveRoomArgs = {
 };
 
 type UsePrivateOwnerChangeFlowReturn = {
-  /**
-   * Pre-check: which candidates can actually be wrapped against the room's
-   * file_keys. Skipped reasons surface to the dialog UI so admins know who
-   * was filtered and why.
-   */
-  validateCandidates: (
-    args: ValidateArgs,
-  ) => Promise<CandidateValidationResult>;
   /** Transfer ownership via files/owner; server handles ACL/file_keys handoff. */
   changeOwner: (args: ChangeOwnerArgs) => Promise<boolean>;
   /**
-   * Leave the room by revoking the current user's membership (access=None).
-   * Parity with FilesActionsStore.onLeaveRoom — does NOT revoke DEK wraps.
+   * Leave the room: drops the user's membership (access=None), as
+   * FilesActionsStore.onLeaveRoom does.
    */
   leaveRoom: (args: LeaveRoomArgs) => Promise<void>;
   isLoading: boolean;
 };
 
-const loadRoomEncryption = () =>
-  import("@docspace/shared/services/private-room/room-encryption");
-
 export const usePrivateOwnerChangeFlow =
   (): UsePrivateOwnerChangeFlowReturn => {
     const { t } = useTranslation(["Common"]);
-    const identityStore = useEncryptionIdentityStore();
     const [isLoading, setIsLoading] = React.useState(false);
-
-    const validateCandidates = React.useCallback(
-      async ({ roomId, candidateIds, displayNames }: ValidateArgs) => {
-        const scopeUserId = identityStore.userKeys?.userId;
-        if (!scopeUserId) {
-          throw new Error(t("Common:EncryptionKeysNotConfigured"));
-        }
-        const { validateMembersForEncryption } = await loadRoomEncryption();
-        const result = await validateMembersForEncryption(
-          roomId,
-          candidateIds,
-          scopeUserId,
-          undefined,
-          displayNames,
-        );
-        return {
-          validIds: result.valid.map((v) => v.id),
-          skipped: result.skipped.map((s) => ({
-            id: s.id,
-            displayName: s.displayName,
-            reason: s.reason,
-          })),
-        };
-      },
-      [identityStore, t],
-    );
 
     const changeOwner = React.useCallback(
       async ({ roomId, newOwnerId }: ChangeOwnerArgs): Promise<boolean> => {
@@ -142,8 +92,7 @@ export const usePrivateOwnerChangeFlow =
       [t],
     );
 
-    // Parity with FilesActionsStore.onLeaveRoom — revoke membership by setting
-    // access=None. Does NOT revoke DEK wraps (intentional: reference parity).
+    // Spec: private-rooms/sdk-surface, "Leaving a private room revokes own access first"
     const leaveRoom = React.useCallback(
       async ({ roomId, userId }: LeaveRoomArgs): Promise<void> => {
         await api.rooms.updateRoomMemberRole(roomId, {
@@ -153,5 +102,5 @@ export const usePrivateOwnerChangeFlow =
       [],
     );
 
-    return { validateCandidates, changeOwner, leaveRoom, isLoading };
+    return { changeOwner, leaveRoom, isLoading };
   };

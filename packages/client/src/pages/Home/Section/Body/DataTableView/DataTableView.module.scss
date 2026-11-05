@@ -79,6 +79,21 @@
     --data-table-row-bleed-start: 20px;
   }
 
+  // A row the keyboard focused as a whole (useRowFocus): its first cell holds
+  // the focus, and the row's lines take the accent colour in place of a ring
+  // round that one cell. Raised like the caret, so no neighbour covers them.
+  &:has([data-row-focus]:focus-visible) {
+    z-index: 1;
+
+    &::before {
+      border-color: var(--accent-main);
+    }
+  }
+
+  [data-row-focus]:focus-visible {
+    outline: none;
+  }
+
   // Selected rows are what a press here starts dragging.
   &.canDrag :global(.table-container_cell) {
     cursor:

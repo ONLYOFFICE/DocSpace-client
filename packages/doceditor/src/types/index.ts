@@ -47,6 +47,8 @@ import { TSettings } from "@docspace/shared/api/settings/types";
 import { HeaderProps, TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type {
   TSelectedFileInfo,
+  TFilesSelectorFile,
+  TFilesSelectorLoadedFiles,
   FilesSettingsDto,
   FolderDtoInteger,
   SdkFolderType,
@@ -253,6 +255,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+      /** Whether the connected Document Server can edit encrypted files. */
+      docServiceEncryptionSupported?: boolean;
     }
   | {
       error: TError;
@@ -268,6 +272,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+      /** False when the server refused an encrypted file for that reason. */
+      docServiceEncryptionSupported?: false;
     };
 
 export type EditorProps = {
@@ -282,6 +288,8 @@ export type EditorProps = {
   errorMessage?: string;
   isSkipError?: boolean;
   filesSettings?: TFilesSettings;
+  /** Whether the connected Document Server can edit encrypted files. */
+  docServiceEncryptionSupported?: boolean;
   organizationName?: string;
   shareKey?: string;
 
@@ -379,6 +387,7 @@ export interface SelectFileDialogProps {
     isDisabledFolder?: boolean,
     isInsideKnowledge?: boolean,
     isInsideResultStorage?: boolean,
+    isInsidePrivateRoom?: boolean,
   ) => boolean;
   isVisible: boolean;
   onClose: () => void;
@@ -393,7 +402,13 @@ export interface SelectFileDialogProps {
     selectedFileInfo: TSelectedFileInfo,
     isInsideKnowledge?: boolean,
     isInsideResultStorage?: boolean,
+    isInsidePrivateRoom?: boolean,
   ) => void | Promise<void>;
+  onFilesLoaded?: (
+    files: TFilesSelectorFile[],
+    context: TFilesSelectorLoadedFiles,
+  ) => void;
+  disabledItems?: (string | number)[];
   fileInfo: TFile;
   filesSettings: FilesSettingsDto;
   selectedFolderId?: string | number;

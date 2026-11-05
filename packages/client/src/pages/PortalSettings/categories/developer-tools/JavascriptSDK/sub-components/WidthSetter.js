@@ -79,7 +79,6 @@ export const WidthSetter = (props) => {
           onChange={onChangeWidth}
           placeholder={t("EnterWidth")}
           value={width}
-          tabIndex={2}
           testId="width_dimension_input"
         />
         <ComboBox

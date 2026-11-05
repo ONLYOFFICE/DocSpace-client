@@ -43,6 +43,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
+import { CategoryType } from "@docspace/shared/constants";
 
 import type RoomsTourStore from "SRC_DIR/store/RoomsTourStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
@@ -380,7 +381,12 @@ export default inject(
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,
       isSectionLoading: clientLoadingStore.showBodyLoader,
-      isRoomsRoot: isRoomsFolderRoot && isRoot && !publicRoomStore.isPublicRoom,
+      isRoomsRoot:
+        isRoomsFolderRoot &&
+        isRoot &&
+        !publicRoomStore.isPublicRoom &&
+        // Spec: private-rooms/sidebar-section, "No onboarding tour in the section"
+        filesStore.categoryType !== CategoryType.PrivateRooms,
       // Same gate as ClientArticleSidebar.
       canCreate: isAdminAudience && !!roomsFolder,
       canUseTemplates: isAdminAudience,

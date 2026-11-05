@@ -90,6 +90,13 @@ pnpm test:e2e:docker:plugins            # plugins subset
 pnpm test:e2e:ui                        # local headed UI mode (functional only)
 ```
 
+A local run of the SDK suite (`cd packages/sdk && pnpm exec playwright test`)
+serves the build in `packages/sdk/.next` through `next({ dev: false })`
+(`packages/shared/__mocks__/e2e/testServer.ts`), not the sources. Run
+`pnpm run test:build` in `packages/sdk` after every SDK or shared change first,
+or the suite tests whatever build is lying there: a stale one fails on
+behaviour the branch has long had and passes on what it no longer does.
+
 `login`, `doceditor`, `sdk` and `management` have their own
 `test:e2e:docker:*` scripts; the unified multi-package image lives in
 `docker/e2e/compose.yaml` (see README → “E2E Testing with Playwright”).

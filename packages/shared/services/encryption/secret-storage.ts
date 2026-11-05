@@ -36,6 +36,7 @@
 // In-memory cache of the unlocked X25519 keypair for the current user.
 // Single-slot, per-page-session. Lives in main thread (no Worker isolation).
 
+import { clearEncryptedFilenameCache } from "./filename-cache";
 import { SESSION_CACHE_DURATION_MS, type IdentityKeyPair } from "./types";
 import { zeroBuffer } from "./utils";
 
@@ -107,6 +108,13 @@ function clearState(): void {
   }
 }
 
+/** Drops the unlocked identity and, with it, the decrypted names. */
+function lockState(): void {
+  clearState();
+  // Spec: encryption-core, "Decrypted filenames are session-scoped"
+  clearEncryptedFilenameCache();
+}
+
 export const SecretStorage = {
   cacheUnlocked(userId: string, kp: IdentityKeyPair): void {
     if (!userId) {
@@ -121,7 +129,12 @@ export const SecretStorage = {
     };
   },
 
-  /** Side-effect: any expiry / userId-mismatch wipes the slot before returning null. */
+  /**
+   * Side-effect: any expiry / userId-mismatch wipes the slot before returning null.
+   * Every caller gets its own copy, so a lock wipes the slot without erasing
+   * the key under an operation that is still running.
+   * Spec: encryption-core, "A lock wipes only the cache slot"
+   */
   getCached(userId: string): IdentityKeyPair | null {
     if (!_state) return null;
     if (_state.userId !== userId) {
@@ -129,13 +142,13 @@ export const SecretStorage = {
       return null;
     }
     if (isExpired(_state)) {
-      clearState();
+      lockState();
       return null;
     }
     bump(_state);
     return {
-      publicKey: _state.publicKey,
-      privateKey: _state.privateKey,
+      publicKey: new Uint8Array(_state.publicKey),
+      privateKey: new Uint8Array(_state.privateKey),
     };
   },
 
@@ -144,7 +157,7 @@ export const SecretStorage = {
   },
 
   lock(): void {
-    clearState();
+    lockState();
   },
 };
 

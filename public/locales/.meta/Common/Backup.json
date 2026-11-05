@@ -3,7 +3,7 @@
   "content": "Backup",
   "content_en_sha1_hash": "dd96994d01e723dd6f9b0bdb6119722dbeb9faf0",
   "created_at": "2025-05-19T21:30:50.645Z",
-  "updated_at": "2026-10-27T11:03:20.602Z",
+  "updated_at": "2026-11-05T16:49:39.836Z",
   "comment": {
     "text": "This is a navigation item or section title in the portal settings, referring to the functionality for creating and managing backups of data.",
     "is_auto": true,
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/button-component/ButtonComponent.tsx",
-      "line_number": 216,
+      "line_number": 215,
       "context": "operationsCompleted={downloadingProgress === 100}\n operations={[\n {\n label:\n downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", { progress: downloadingProgress }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,",
       "module": "/packages/shared"
     }

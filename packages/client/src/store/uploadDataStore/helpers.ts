@@ -34,11 +34,14 @@
  */
 
 import { getFileConversationProgress } from "@docspace/shared/api/files";
-import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { suspendAutoLock } from "@docspace/shared/services/encryption/secret-storage";
 
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { ItemUploadContext } from "@docspace/shared/services/private-room/encrypted-upload";
+import type { SkippedMemberKey } from "@docspace/shared/services/private-room/member-key-verification";
+import type { TUploadTarget } from "@docspace/shared/services/private-room/upload-target";
+
+export type { TUploadTarget };
 
 export type TUploadBrowserFile = File & {
   parentFolderId?: number | string;
@@ -52,6 +55,7 @@ export type TUploadFile = {
   uniqueId: string;
   fileId: number | null;
   toFolderId?: number | string | null;
+  target: TUploadTarget;
   action?: "upload" | "uploaded" | "convert" | "converted";
   error?: string | null;
   fileInfo: TFile | null;
@@ -59,7 +63,8 @@ export type TUploadFile = {
   needConvert?: boolean;
   encrypted?: boolean;
   encryptionRoomId?: number | string | null;
-  reimportRealName?: string | null;
+  /** Room members left out of the file's access list by the pin check. */
+  skippedMembers?: SkippedMemberKey[];
   percent: number;
   inAction?: boolean;
   inConversion?: boolean;
@@ -91,35 +96,7 @@ export const removeDuplicate = <T extends { uniqueId?: string }>(
   });
 };
 
-const dekByFileEntry = new WeakMap<object, Uint8Array | null>();
-
 let uploadAutoLockRelease: (() => void) | null = null;
-
-export function setFileDek(
-  entry: TUploadFile | null | undefined,
-  dek: Uint8Array | null,
-) {
-  if (!entry) return;
-  const previous = dekByFileEntry.get(entry);
-  if (previous && previous !== dek) {
-    wipeDek(previous);
-  }
-  dekByFileEntry.set(entry, dek);
-}
-
-export function takeFileDek(entry: TUploadFile | null | undefined) {
-  if (!entry) return null;
-  const dek = dekByFileEntry.get(entry);
-  if (dek) {
-    dekByFileEntry.delete(entry);
-    return dek;
-  }
-  return null;
-}
-
-export function hasFileDek(entry: TUploadFile | null | undefined) {
-  return !!entry && dekByFileEntry.has(entry);
-}
 
 export const acquireUploadAutoLockSuspension = () => {
   if (uploadAutoLockRelease) return;

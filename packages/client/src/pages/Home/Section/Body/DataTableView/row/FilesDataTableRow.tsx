@@ -55,6 +55,7 @@ import withBadges from "SRC_DIR/HOCs/withBadges";
 import withQuickButtons from "SRC_DIR/HOCs/withQuickButtons";
 import withFileActions from "SRC_DIR/HOCs/withFileActions";
 import ItemIcon from "SRC_DIR/components/ItemIcon";
+import { getFilesItemClassName } from "SRC_DIR/helpers/filesItemClassName";
 
 import styles from "../DataTableView.module.scss";
 import type { TFilesTableItem } from "../DataTableView.types";
@@ -101,6 +102,7 @@ type THocProps = {
   badgeUrl?: string;
   badgeIconColor?: string;
   onDrop: (files: File[]) => void;
+  onDropCapture: () => void;
   onMouseDown: (e: React.MouseEvent) => void;
   onDragOver: (e: React.DragEvent<HTMLElement>) => void;
   onDragLeave: (e: React.DragEvent<HTMLElement>) => void;
@@ -153,6 +155,7 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
     badgeUrl,
     badgeIconColor,
     onDrop,
+    onDropCapture,
     onMouseDown,
     onDragOver,
     onDragLeave,
@@ -326,17 +329,17 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
   // A moved row stays highlighted until the new order is saved.
   const checked = checkedProps || isIndexUpdated;
 
-  const idWithFileExst = item.fileExst
-    ? `${item.id}_${item.fileExst}`
-    : `${item.id ?? ""}`;
+  const idWithFileExst = getFilesItemClassName(item);
 
   return (
     <DragAndDrop
       // Not in DragAndDrop's props, but spread onto its element like the rest:
-      // the hotkeys find the row by this id, drag and drop reads the title.
+      // the hotkeys find the row by this id, drag and drop reads the title,
+      // and withFileActions notes the open folder before a drop is handled.
       {...({
         id: `${item.isFolder ? "folder" : "file"}_${item.id}`,
         "data-title": item.title,
+        onDropCapture,
       } as object)}
       value={value}
       className={classNames(

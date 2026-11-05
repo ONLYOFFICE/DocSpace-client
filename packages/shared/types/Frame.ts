@@ -270,6 +270,11 @@ export type TFrameConfig = {
   withSearch?: boolean;
   withSubtitle?: boolean;
   openEditorInSameTab?: boolean;
+  /**
+   * Opts the frame into private rooms while the feature is not released;
+   * removed together with the client's browser-local flag.
+   */
+  privateRooms?: boolean;
   destination?: TFrameFormsSection;
   personalDestination?: TFramePersonalSection;
   linkMainText?: string;

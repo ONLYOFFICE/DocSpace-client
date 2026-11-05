@@ -61,6 +61,7 @@ import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
 import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
 import FormBlankIcon from "PUBLIC_DIR/images/form.blank.react.svg?url";
 import CreateChatIcon from "PUBLIC_DIR/images/emptyview/create.chat.svg";
+import CreateAiAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
 import SharedIcon from "PUBLIC_DIR/images/emptyview/share-view.svg";
 
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
@@ -111,6 +112,7 @@ export const getDescription = (
   >,
   isFormsScope: boolean = false,
   filterFolderType: Nullable<number[]> = null,
+  isPrivateScope: boolean = false,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
@@ -123,6 +125,7 @@ export const getDescription = (
       security,
       isFormsScope,
       filterFolderType,
+      isPrivateScope,
     );
 
   if (isFolder)
@@ -150,13 +153,20 @@ export const getTitle = (
   rootFolderType: Nullable<FolderType>,
   isFormsScope: boolean = false,
   isPublicRoom: boolean = false,
+  isPrivateScope: boolean = false,
 ): string => {
   const isNotAdmin = isUser(access);
 
   if (isRootEmptyPage && isPublicRoom) return t("Common:EmptyScreenFolder");
 
   if (isRootEmptyPage)
-    return getRootTitle(t, access, rootFolderType, isFormsScope);
+    return getRootTitle(
+      t,
+      access,
+      rootFolderType,
+      isFormsScope,
+      isPrivateScope,
+    );
 
   if (isFolder)
     return getFolderTitle(
@@ -213,6 +223,8 @@ export const getOptions = (
   isAiChatAvailable: boolean = false,
   isTemplateGalleryAvailable: boolean = false,
   vectorizationEnabled: boolean = true,
+  isCreateSkillWithAIAvailable: boolean = true,
+  isPrivateScope: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -423,8 +435,8 @@ export const getOptions = (
 
   // The flat AI source rooms: an Instructions room holds Markdown skills,
   // a Knowledge room holds files to index. Neither takes a folder.
-  // A skill is uploaded, never created here: the server refuses a Markdown
-  // file without its name / description frontmatter.
+  // A skill is uploaded or written by AI, never created empty: the server
+  // refuses a Markdown file without its name / description frontmatter.
   const uploadMarkdownFromDevice = createUploadFromDeviceOption(
     t("EmptyView:UploadDeviceOptionTitle"),
     t("Common:InstructionsRoomMarkdownOnly"),
@@ -449,6 +461,15 @@ export const getOptions = (
   const uploadMarkdownFromStorage: EmptyViewItemType = {
     ...uploadKnowledgeFromStorage,
     key: "upload-markdown-from-storage",
+  };
+
+  const createSkillWithAI: EmptyViewItemType = {
+    title: t("Common:CreateSkillWithAI"),
+    description: t("Common:CreateSkillWithAIDescription"),
+    icon: <CreateAiAgentIcon />,
+    key: "create-skill-with-ai",
+    onClick: actions.createSkillWithAI,
+    disabled: false,
   };
 
   const migrationData = {
@@ -507,6 +528,10 @@ export const getOptions = (
   if (isRootEmptyPage) {
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
+      // Spec: private-rooms/sidebar-section, "Section empty state"
+      .with([FolderType.Rooms, P.when(() => isPrivateScope), P._], () =>
+        access === ShareAccessRights.None ? [createRoom] : [],
+      )
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,
         inviteRootRoom,
@@ -530,9 +555,11 @@ export const getOptions = (
       ])
       .with([FolderType.Archive, ShareAccessRights.None, P._], () => [
         {
-          ...actions.onGoToShared(),
+          ...(isPrivateScope ? actions.onGoToPrivate() : actions.onGoToShared()),
           icon: <FolderIcon />,
-          description: t("Common:GoToMyRooms"),
+          description: isPrivateScope
+            ? t("Common:GoToSection", { sectionName: t("Common:Private") })
+            : t("Common:GoToMyRooms"),
           key: "empty-view-goto-shared",
         },
       ])
@@ -668,13 +695,15 @@ export const getOptions = (
 
     // Markdown only, uploaded from the device (a pick from the workspace
     // could bring any format; a new empty file has no frontmatter).
-    case RoomsType.InstructionsRoom:
+    case RoomsType.InstructionsRoom: {
       if (isNotAdmin) return [];
 
-      if (isCollaborator)
-        return [uploadMarkdownFromStorage, uploadMarkdownFromDevice];
+      const skillOptions = isCreateSkillWithAIAvailable
+        ? [uploadMarkdownFromStorage, uploadMarkdownFromDevice, createSkillWithAI]
+        : [uploadMarkdownFromStorage, uploadMarkdownFromDevice];
 
-      return [inviteUser, uploadMarkdownFromStorage, uploadMarkdownFromDevice];
+      return isCollaborator ? skillOptions : [inviteUser, ...skillOptions];
+    }
 
     // Files to index: uploaded, never created or edited; nothing at all
     // while vectorization is off.

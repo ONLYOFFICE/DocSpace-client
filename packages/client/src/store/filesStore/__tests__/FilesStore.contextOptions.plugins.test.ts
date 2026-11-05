@@ -213,3 +213,39 @@ describe("getFilesContextOptions — plugin items vs encrypted files", () => {
     );
   });
 });
+
+describe("getFilesContextOptions — archived private room", () => {
+  const archivedPrivateRoomStore = () =>
+    createTestFilesStore({
+      settingsStore: { enablePlugins: true, aiServicesEnabled: true },
+      pluginStore: { getContextMenuKeysByType: () => [PLUGIN_KEY] },
+      userStore: { encryptionKeys: [{ id: "key-1" }] },
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+
+  it("Folder context menu with a folder plugin installed", () => {
+    const folder = {
+      ...baseFolder(),
+      rootFolderType: FolderType.Archive,
+    } as TItem;
+
+    const opts = archivedPrivateRoomStore().getFilesContextOptions(folder);
+
+    expect(opts).not.toContain(PLUGIN_KEY);
+    expect(opts).not.toContain("ask-ai");
+  });
+
+  it("Encrypted file in an archived private room", () => {
+    const file = {
+      ...encryptedFile(),
+      rootFolderType: FolderType.Archive,
+      security: { ...encryptedFile().security, AskAi: true },
+    } as TItem;
+
+    const opts = archivedPrivateRoomStore().getFilesContextOptions(file);
+
+    expect(opts).not.toContain(PLUGIN_KEY);
+    expect(opts).not.toContain("ask-ai");
+    expect(opts).toContain("download-encrypted");
+  });
+});

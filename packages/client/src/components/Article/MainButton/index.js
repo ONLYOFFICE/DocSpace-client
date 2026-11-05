@@ -52,6 +52,7 @@ import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.templ
 // import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 // import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
+import AIReactSvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
@@ -94,6 +95,7 @@ const ArticleMainButtonContent = (props) => {
 
     isPrivacy,
     startUpload,
+    resolveOpenFolderTarget,
     setAction,
     setSelectFileDialogVisible,
     setMainButtonVisible,
@@ -101,6 +103,8 @@ const ArticleMainButtonContent = (props) => {
     selectFileFormRoomDialogVisible,
     setSelectFileFormRoomDialogVisible,
     setSelectFileKnowledgeRoomDialogVisible,
+    setGenerateSkillDialogVisible,
+    isCreateSkillWithAIAvailable,
     knowledgeUploadAccept,
     showArticleLoader,
     isFavoritesFolder,
@@ -264,17 +268,18 @@ const ArticleMainButtonContent = (props) => {
 
   const onFileChange = React.useCallback(
     async (e) => {
+      const target = resolveOpenFolderTarget();
       const files = await getFilesFromEvent(e);
 
-      createFoldersTree(t, files)
+      createFoldersTree(t, files, target)
         .then((f) => {
-          if (f.length > 0) startUpload(f, null, t);
+          if (f.length > 0) startUpload(f, target, t);
         })
         .catch((err) => {
           toastr.error(err, undefined, 0, true);
         });
     },
-    [startUpload, t],
+    [startUpload, resolveOpenFolderTarget, t],
   );
 
   const onUploadFileClick = React.useCallback(() => {
@@ -284,6 +289,10 @@ const ArticleMainButtonContent = (props) => {
   const onShowKnowledgeRoomSelectFileDialog = React.useCallback(() => {
     setSelectFileKnowledgeRoomDialogVisible(true);
   }, [setSelectFileKnowledgeRoomDialogVisible]);
+
+  const onShowGenerateSkillDialog = React.useCallback(() => {
+    setGenerateSkillDialogVisible(true);
+  }, [setGenerateSkillDialogVisible]);
 
   const onUploadFolderClick = React.useCallback(() => {
     inputFolderElement.current.click();
@@ -572,9 +581,22 @@ const ArticleMainButtonContent = (props) => {
           key: "upload-from-device",
         },
       ];
-      const sourceUploadActions =
-        isKnowledgeRoom && !vectorizationEnabled
-          ? []
+      // An Instructions room can also have a skill written for it, as the
+      // section "+" menu and the empty view offer (getFolderModel).
+      const createSkillWithAI = {
+        id: "actions_create-skill-with-ai",
+        className: "main-button_drop-down",
+        icon: AIReactSvgUrl,
+        label: t("Common:CreateSkillWithAI"),
+        onClick: onShowGenerateSkillDialog,
+        key: "create-skill-with-ai",
+      };
+      const sourceUploadActions = isKnowledgeRoom
+        ? vectorizationEnabled
+          ? sourceRoomUploadActions
+          : []
+        : isCreateSkillWithAIAvailable
+          ? [...sourceRoomUploadActions, createSkillWithAI]
           : sourceRoomUploadActions;
       setUploadActions(sourceUploadActions);
       setActions([]);
@@ -664,6 +686,8 @@ const ArticleMainButtonContent = (props) => {
     onShowSelectFileDialog,
     onShowFormRoomSelectFileDialog,
     onShowKnowledgeRoomSelectFileDialog,
+    onShowGenerateSkillDialog,
+    isCreateSkillWithAIAvailable,
     onUploadFileClick,
     onUploadFolderClick,
     createActionsForFormRoom,
@@ -849,6 +873,7 @@ export default inject(
     currentQuotaStore,
     peopleStore,
     filesSettingsStore,
+    contextOptionsStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const {
@@ -860,7 +885,7 @@ export default inject(
       isArchiveFolder,
       selectedTreeNode,
     } = treeFoldersStore;
-    const { startUpload } = uploadDataStore;
+    const { startUpload, resolveOpenFolderTarget } = uploadDataStore;
     const canCreateEncrypted = uploadDataStore.shouldEncryptCurrentUpload();
     const {
       setSelectFileDialogVisible,
@@ -873,6 +898,7 @@ export default inject(
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
       setSelectFileKnowledgeRoomDialogVisible,
+      setGenerateSkillDialogVisible,
     } = dialogsStore;
 
     const {
@@ -929,6 +955,7 @@ export default inject(
       selectedTreeNode,
 
       startUpload,
+      resolveOpenFolderTarget,
 
       setSelectFileDialogVisible,
       selectFileDialogVisible,
@@ -970,6 +997,9 @@ export default inject(
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
       setSelectFileKnowledgeRoomDialogVisible,
+      setGenerateSkillDialogVisible,
+      isCreateSkillWithAIAvailable:
+        contextOptionsStore.isCreateSkillWithAIAvailable,
       knowledgeUploadAccept: filesSettingsStore.knowledgeUploadAccept,
       createFoldersTree,
 

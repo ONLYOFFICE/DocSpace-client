@@ -225,7 +225,12 @@ describe("AxiosClient 403 handling", () => {
     await vi.advanceTimersByTimeAsync(1000);
   };
 
-  it.each(["/rooms/shared/12/filter", "/rooms/archived/filter"])(
+  it.each([
+    "/rooms/shared/12/filter",
+    "/rooms/archived/filter",
+    "/private/12/filter",
+    "/private/archived/filter",
+  ])(
     "reports a 403 on %s and stays on the page",
     async (pathname) => {
       await failWith403(pathname);

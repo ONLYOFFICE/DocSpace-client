@@ -35,6 +35,7 @@
 
 import React, { useState, useEffect, useTransition, Suspense } from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
 
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
@@ -49,6 +50,7 @@ import { HistoryHeaderLoader } from "../../sub-components/Loaders/HistoryHeaderL
 import styles from "../WebhookHistory.styled.module.scss";
 
 const HistoryFilterHeader = (props) => {
+	const { t } = useTranslation(["Common"]);
 	const {
 		applyFilters,
 		historyFilters,
@@ -64,6 +66,13 @@ const HistoryFilterHeader = (props) => {
 
 	const openFiltersModal = () => {
 		setIsFiltersVisible(true);
+	};
+
+	// The icon's own click makes it a keyboard button; the box around it takes
+	// the pointer's click and must not open the filters a second time.
+	const onFilterIconClick = (e) => {
+		e.stopPropagation();
+		openFiltersModal();
 	};
 
 	const closeFiltersModal = () => {
@@ -100,7 +109,12 @@ const HistoryFilterHeader = (props) => {
 						onClick={openFiltersModal}
 						data-testid="webhook_filter_button"
 					>
-						<IconButton iconName={FilterReactSvrUrl} size={16} />
+						<IconButton
+							iconName={FilterReactSvrUrl}
+							size={16}
+							ariaLabel={t("Common:Filter")}
+							onClick={onFilterIconClick}
+						/>
 						<span hidden={historyFilters === null} />
 					</div>
 				</header>

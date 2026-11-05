@@ -82,9 +82,10 @@ const server = setupServer(
   ...encryptedFilesHandlers(PORT, {
     roomId: ROOM_ID,
     ownerId: ALICE_ID,
+    currentUserId: ALICE_ID,
     handle: filesHandle,
   }),
-  ...privacyroomAccessHandlers(PORT),
+  ...privacyroomAccessHandlers(PORT, { userId: ALICE_ID }),
 );
 
 class MockOpenRequest {
@@ -139,7 +140,7 @@ describe("encrypted upload — integration via MSW", () => {
       "Hello private room — this is secret content.",
     );
 
-    const uploadFileName = "abc-uuid.txt";
+    const uploadFileName = "0f8fad5b-d9cb-469f-a165-70867728950e.txt";
     const { encryptedBlob } = await encryptFile(fileContent, {
       fileName: "report.txt",
     });

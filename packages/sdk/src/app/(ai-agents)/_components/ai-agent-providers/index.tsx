@@ -50,10 +50,8 @@ import {
   PORTAL_DARK_THEME_ID,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import { editAIAgent } from "@docspace/shared/api/ai";
-import {
-  getServiceLimitChatError,
-  getServiceLimitDescription,
-} from "@docspace/shared/utils/ai";
+import { getAiChatInterruption } from "@docspace/shared/utils/ai";
+import { useAiChatNotice } from "@docspace/shared/hooks/useAiChatNotice";
 
 import {
   useAgentsAIConfigStore,
@@ -148,39 +146,33 @@ const AiAgentsAiChatProviders = ({
     [],
   );
 
+  // The SDK has no wallet page or AI settings to send the user to, so the
+  // notice above the composer only says what is going on; the error box
+  // keeps the past-tense note (see Shell.jsx in the client).
+  const {
+    composerNotice,
+    onStreamError,
+    onStreamEnd,
+  } = useAiChatNotice({
+    t,
+    language: i18n.language,
+    standalone: isStandalone,
+    isAdmin: !!(user?.isAdmin || user?.isOwner),
+    isPayer: false,
+  });
+
   const formatChatError = React.useCallback<
     NonNullable<AiAgentProvidersProps["formatChatError"]>
   >(
-    (payload) => {
-      // A spending limit reached arrives as a 403 relayed by the AI gateway
-      // (see getServiceLimitChatError); the SDK has no settings to send the
-      // user to, so both cases end in a plain message without Retry.
-      const serviceLimit = getServiceLimitChatError(payload);
-      if (serviceLimit) {
-        return {
-          title: t("Common:AILimitReached"),
-          description: getServiceLimitDescription(
-            t,
-            i18n.language,
-            serviceLimit,
-          ),
-          action: null,
-        };
-      }
-
-      if (payload?.code !== "insufficient_funds") return null;
-
-      return {
-        title: t("Common:WalletBalanceTooLow"),
-        description: t("Common:InsufficientFundsContactPayerShort"),
-        action: null,
-      };
-    },
-    [t, i18n.language],
+    (payload, context) =>
+      getAiChatInterruption(t, payload, context?.providerType, isStandalone),
+    [t, isStandalone],
   );
 
   const callbacks = React.useMemo<AiAgentProvidersProps["callbacks"]>(
     () => ({
+      onStreamError,
+      onStreamEnd,
       onWebSearchSaved: () =>
         toastr.success(t("Common:ChangesSavedSuccessfully")),
       onError: ({ type, error, context }) => {
@@ -194,7 +186,7 @@ const AiAgentsAiChatProviders = ({
         if (!isForbidden) toastr.error(t("Common:UnexpectedError"));
       },
     }),
-    [t],
+    [t, onStreamError, onStreamEnd],
   );
 
   return (
@@ -210,6 +202,7 @@ const AiAgentsAiChatProviders = ({
       callbacks={callbacks}
       entityId={entityId}
       formatChatError={formatChatError}
+      composerNotice={composerNotice}
       hideProfilePicker={false}
       profilePickerReadOnly={isAgentRoom && !canEditAgentRoom}
       isAgentRoom={isAgentRoom}

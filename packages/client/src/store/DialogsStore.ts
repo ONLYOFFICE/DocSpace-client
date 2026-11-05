@@ -47,9 +47,15 @@ import type { RefObject } from "react";
 import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
-import { ROOM_ACTION_KEYS } from "@docspace/shared/constants";
+import { CategoryType, ROOM_ACTION_KEYS } from "@docspace/shared/constants";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import {
+  getRoomsRequestScope,
+  withRoomsRequestScope,
+} from "@docspace/shared/utils/rooms";
 
 import {
+  getRooms,
   getRoomCovers,
   setRoomCover,
   removeLogoFromRoom,
@@ -95,6 +101,7 @@ import type VersionHistoryStore from "./VersionHistoryStore";
 type TFilesStore = {
   hasSelection: boolean;
   hasBufferSelection: boolean;
+  isPrivateRoomsSectionAvailable: boolean;
   setSelected: (selected: "none") => void;
 };
 
@@ -234,6 +241,8 @@ class DialogsStore {
   selectFileFormRoomDialogVisible = false;
 
   selectFileKnowledgeRoomDialogVisible = false;
+
+  generateSkillDialogVisible = false;
 
   convertPasswordDialogVisible = false;
 
@@ -942,6 +951,11 @@ class DialogsStore {
     this.selectFileKnowledgeRoomDialogVisible = visible;
   };
 
+  /** The panel that writes a skill with AI into the current Instructions room. */
+  setGenerateSkillDialogVisible = (visible: boolean) => {
+    this.generateSkillDialogVisible = visible;
+  };
+
   createMasterForm = async (
     fileInfo: TFile,
     options: {
@@ -1363,6 +1377,29 @@ class DialogsStore {
   getGroupById = async (groupId: string) => {
     const response = (await getGroupById(groupId)) as IRoomGroup;
     return response;
+  };
+
+  /**
+   * The ids of the rooms the Private section lists, none while it is not
+   * available. Spec: private-rooms/sidebar-section, "Rooms section excludes
+   * private rooms while the section is available"
+   */
+  getPrivateSectionRoomIds = async () => {
+    const ids: number[] = [];
+    if (!this.filesStore.isPrivateRoomsSectionAvailable) return ids;
+
+    const filter = withRoomsRequestScope(
+      RoomsFilter.getDefault(),
+      getRoomsRequestScope(CategoryType.PrivateRooms, undefined, true),
+    );
+    filter.pageCount = 100;
+
+    for (;;) {
+      const { folders, total } = await getRooms(filter);
+      ids.push(...folders.map((room) => room.id));
+      if (folders.length < filter.pageCount || ids.length >= total) return ids;
+      filter.page += 1;
+    }
   };
 
   updateGroupIcon = async (groupId: string, icon: Nullable<string>) => {

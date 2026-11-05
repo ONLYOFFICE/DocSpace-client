@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-11-01T08:02:57.955Z",
+  "updated_at": "2026-11-05T16:49:39.813Z",
   "comment": {
     "text": "This is a label for a section or category within the file selector, representing a collection of collaborative workspaces.",
     "is_auto": true,
@@ -49,19 +49,19 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
-      "line_number": 114,
-      "context": "title:\n type === NoAccessContainerType.Account\n ? t(\"NoAccessSectionTitle\")\n : t(\"NoAccessRoomTitle\"),\n description: t(\"RoomAccessRedirectNote\", {\n sectionName: t(\"Common:Rooms\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (\n <ManageAccessRightsDarkIcon />",
+      "line_number": 123,
+      "context": "? t(\"NoAccessSectionTitle\")\n : t(\"NoAccessRoomTitle\"),\n description: t(\"RoomAccessRedirectNote\", {\n sectionName: isPrivateSection\n ? t(\"Common:Private\")\n : t(\"Common:Rooms\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (\n <ManageAccessRightsDarkIcon />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 245,
+      "line_number": 257,
       "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 245,
+      "line_number": 257,
       "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
@@ -103,7 +103,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 187,
+      "line_number": 195,
       "context": "onAction: () => navigate(filesHref),\n },\n {\n id: \"ai-rooms\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:Rooms\"),\n description: t(\"Common:DashboardRoomsDescription\"),\n href: \"/rooms/shared/filter\",\n ...withInstallState(\n roomsInstalled,\n createOrOpen(",
       "module": "/packages/client"
     },
@@ -139,7 +139,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
-      "line_number": 78,
+      "line_number": 80,
       "context": "{\n label: t(\"Common:Files\"),\n key: FolderType.USER,\n },\n {\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,\n },\n {\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,",
       "module": "/packages/client"
     },
@@ -175,7 +175,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/empty-view/index.tsx",
-      "line_number": 153,
+      "line_number": 160,
       "context": "const getDescription = () => {\n if (isFiltered) return t(\"Common:EmptyFilterRoomsDescription\");\n if (isArchive)\n return t(\"Common:ArchiveEmptyScreen\");\n return t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });\n };\n \n const getOptions = () => {\n if (isFiltered) return filterOptions;",
       "module": "/packages/sdk"
     },

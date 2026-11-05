@@ -146,7 +146,6 @@ export const MainElementParameter = ({
               onChange={setButtonText}
               placeholder={t("SelectToPortal")}
               value={buttonValue}
-              tabIndex={3}
               testId="button_mode_text_input"
             />
             <Checkbox

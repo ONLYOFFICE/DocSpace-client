@@ -129,7 +129,25 @@ describe("FilesStore.wsModifyFolderUpdate — characterization", () => {
       data: JSON.stringify({ id: 7 }),
     } as never);
 
-    expect(getFolderInfo).toHaveBeenCalledWith(7);
+    expect(getFolderInfo).toHaveBeenCalledWith(7, true);
+  });
+
+  it("Private room updated", async () => {
+    const store = createTestFilesStore();
+    store.getFilesContextOptions = (() => []) as never;
+    store.folders = [{ id: 1, title: "Kept" } as never] as never;
+    const getFolderInfo = vi
+      .spyOn(api.files, "getFolderInfo")
+      .mockRejectedValue(Object.assign(new Error("403"), { response: { status: 403 } }));
+
+    await store.wsModifyFolderUpdate({
+      type: "folder",
+      data: JSON.stringify({ id: 7 }),
+    } as never);
+    await Promise.resolve();
+
+    expect(getFolderInfo).toHaveBeenCalledWith(7, true);
+    expect(store.folders).toEqual([{ id: 1, title: "Kept" }]);
   });
 });
 
@@ -156,7 +174,7 @@ describe("FilesStore.wsChangeFolderAccessRights — characterization", () => {
       data: JSON.stringify({ "user-1": 1 }),
     } as never);
 
-    expect(getFolderInfo).toHaveBeenCalledWith(1);
+    expect(getFolderInfo).toHaveBeenCalledWith(1, false);
   });
 
   it("ignores changes for a folder that is not the current one", () => {

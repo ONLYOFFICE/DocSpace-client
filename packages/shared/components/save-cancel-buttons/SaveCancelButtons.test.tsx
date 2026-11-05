@@ -59,13 +59,28 @@ describe("<SaveCancelButtons />", () => {
     const container = screen.getByTestId("save-cancel-buttons");
     expect(container).toBeInTheDocument();
     expect(container).toHaveAttribute("role", "group");
-    expect(container).toHaveAttribute("aria-label", "Save or cancel changes");
+    expect(container).not.toHaveAttribute("aria-label");
 
     const saveButton = screen.getByTestId("save-button");
     const cancelButton = screen.getByTestId("cancel-button");
 
     expect(saveButton).toHaveAttribute("aria-label", "Save");
     expect(cancelButton).toHaveAttribute("aria-label", "Cancel");
+  });
+
+  // Unset, tabIndex used to fall back to -1: Save and Cancel were out of the
+  // keyboard's reach on every settings page.
+  it("leaves both buttons in the Tab order by default", () => {
+    render(<SaveCancelButtons {...defaultProps} />);
+
+    expect(screen.getByTestId("save-button")).not.toHaveAttribute(
+      "tabindex",
+      "-1",
+    );
+    expect(screen.getByTestId("cancel-button")).not.toHaveAttribute(
+      "tabindex",
+      "-1",
+    );
   });
 
   it("displays custom id and className", () => {

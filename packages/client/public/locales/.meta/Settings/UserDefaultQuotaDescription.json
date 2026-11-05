@@ -3,7 +3,7 @@
   "content": "Set a storage quota for users — this limits how much space each user's {{sectionName}} folder can use.",
   "content_en_sha1_hash": "8a3539e73d55b9f0e21e0b019f618c036539108e",
   "created_at": "2026-09-04T07:59:36.526Z",
-  "updated_at": "2026-11-02T07:10:46.927Z",
+  "updated_at": "2026-11-05T16:49:39.977Z",
   "comment": {
     "text": "Subtitle for a settings category item that explains the purpose of the user storage quota; includes a variable {{sectionName}} representing the folder type.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerUser.js",
-      "line_number": 63,
-      "context": "saveQuota={(size) => setUserQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultUsersQuotaSet}\n tabIndex={2}\n dataTestId=\"quota_user\"\n toggleDescription={t(\"UserDefaultQuotaDescription\", {\n sectionName: t(\"Common:Files\"),\n })}\n />\n );\n };",
+      "line_number": 62,
+      "context": "disableQuota={() => setUserQuota(NO_QUOTA, t)}\n saveQuota={(size) => setUserQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultUsersQuotaSet}\n dataTestId=\"quota_user\"\n toggleDescription={t(\"UserDefaultQuotaDescription\", {\n sectionName: t(\"Common:Files\"),\n })}\n />\n );\n };",
       "module": "/packages/client"
     }
   ],

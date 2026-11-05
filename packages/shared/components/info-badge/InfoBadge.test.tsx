@@ -45,8 +45,8 @@ const baseProps: InfoBadgeProps = {
   label: "label",
   offset: 4,
   place: "bottom",
-  tooltipDescription: <div>Description</div>,
-  tooltipTitle: <div>Title</div>,
+  tooltipDescription: <span>Description</span>,
+  tooltipTitle: <span>Title</span>,
 };
 
 describe("<InfoBadge />", () => {

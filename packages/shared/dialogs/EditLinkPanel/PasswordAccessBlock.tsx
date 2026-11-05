@@ -71,7 +71,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
     passwordInputRef.current?.onGeneratePassword(event);
   };
 
-  const onCleanClick = (event: React.MouseEvent<Element>) => {
+  const onCleanClick = (event: React.SyntheticEvent) => {
     event.stopPropagation();
     setPasswordValue("");
     setIsPasswordValid(false);

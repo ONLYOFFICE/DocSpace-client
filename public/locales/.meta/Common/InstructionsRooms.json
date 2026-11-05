@@ -3,7 +3,7 @@
   "content": "Instructions rooms",
   "content_en_sha1_hash": "52daa30a3aab21fdb8f1496fcc820f0bd4a8db56",
   "created_at": "2026-10-31T12:57:26.780Z",
-  "updated_at": "2026-11-02T09:45:28.396Z",
+  "updated_at": "2026-11-05T16:49:39.903Z",
   "comment": {
     "text": "Plural name of the Instructions room type: room type filter option and the AI project form's rooms field and selector header.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1202,
+      "line_number": 1220,
       "context": "case RoomsType.InstructionsRoom:\n return {\n id: \"filter_type-instructions\",\n key: RoomsType.InstructionsRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:InstructionsRooms\"),\n };\n case RoomsType.KnowledgeRoom:\n return {\n id: \"filter_type-knowledge\",\n key: RoomsType.KnowledgeRoom,",
       "module": "/packages/client"
     }

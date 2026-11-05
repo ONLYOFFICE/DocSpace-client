@@ -86,6 +86,18 @@ const openContacts = async (page: Page, baseUrl: string) => {
   await expect(page.getByTestId("contacts_users_row_0")).toBeVisible();
 };
 
+const openGroupsSelector = async (page: Page, baseUrl: string) => {
+  await openContacts(page, baseUrl);
+  await page.getByTestId("filter_icon_button").click();
+  await page
+    .getByTestId("filter_block_item_filter-group")
+    .getByTestId("filter_tag_other")
+    .click();
+  const selector = page.getByTestId("groups_selector");
+  await expect(selector).toBeVisible();
+  return selector;
+};
+
 test.describe("People filter: groups selector", () => {
   test.beforeEach(async ({ mockRequest }) => {
     mockRequest.use(
@@ -122,5 +134,114 @@ test.describe("People filter: groups selector", () => {
     }
 
     expect(pageErrors.filter((m) => m.includes("ApiProvider"))).toEqual([]);
+  });
+
+  // The groups selector picks one group: the list takes the focus, the arrows
+  // walk the groups, Enter picks the one the keyboard is on, and Enter on the
+  // picked one submits it to the filter.
+  test("a group is picked from the keyboard", async ({ page, baseUrl }) => {
+    const selector = await openGroupsSelector(page, baseUrl);
+    const list = selector.getByRole("listbox");
+
+    await expect(list).toBeFocused();
+    await expect(list).toHaveAttribute("aria-label", "Groups");
+
+    const active = () =>
+      list.evaluate((el) => {
+        const id = el.getAttribute("aria-activedescendant");
+        const option = id ? document.getElementById(id) : null;
+        return {
+          text: option?.textContent?.trim() ?? "",
+          selected: option?.getAttribute("aria-selected") ?? "",
+        };
+      });
+
+    // A row's text starts with its avatar's initial.
+    await expect.poll(async () => (await active()).text).toContain(GROUPS[0].name);
+    await page.keyboard.press("ArrowDown");
+    expect((await active()).text).toContain(GROUPS[1].name);
+    await page.keyboard.press("Home");
+    expect((await active()).text).toContain(GROUPS[0].name);
+
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("Enter");
+    const picked = await active();
+    expect(picked.text).toContain(GROUPS[1].name);
+    expect(picked.selected).toBe("true");
+    await expect(selector).toBeVisible();
+
+    await page.keyboard.press("Enter");
+    await expect(selector).toBeHidden();
+    await expect(
+      page
+        .getByTestId("filter_block_item_filter-group")
+        .getByText(GROUPS[1].name, { exact: true }),
+    ).toBeVisible();
+  });
+
+  test("Escape on the groups selector goes back to the filter", async ({
+    page,
+    baseUrl,
+  }) => {
+    const selector = await openGroupsSelector(page, baseUrl);
+    await expect(selector.getByRole("listbox")).toBeFocused();
+
+    await page.keyboard.press("Escape");
+    await expect(selector).toBeHidden();
+    await expect(page.getByTestId("filter_cancel_button")).toBeVisible();
+  });
+
+  // A pick swaps "Other" for the picked group: the focus goes to that tag,
+  // whose cross clears the group and hands the focus back to "Other".
+  test("after a pick the focus is on the picked group, and its cross clears it", async ({
+    page,
+    baseUrl,
+  }) => {
+    const selector = await openGroupsSelector(page, baseUrl);
+    await expect(selector.getByRole("listbox")).toBeFocused();
+
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Enter");
+    await expect(selector).toBeHidden();
+
+    const groupBlock = page.getByTestId("filter_block_item_filter-group");
+    const picked = groupBlock.getByRole("button", { name: GROUPS[0].name });
+    await expect(picked).toBeFocused();
+
+    await page.keyboard.press("Tab");
+    const remove = groupBlock.getByRole("button", { name: "Remove" });
+    await expect(remove).toBeFocused();
+    await page.keyboard.press("Enter");
+
+    await expect(picked).toHaveCount(0);
+    await expect(groupBlock.getByTestId("filter_tag_other")).toBeFocused();
+  });
+
+  // The filter's tags are keyboard buttons: Tab reaches "Other", and Enter
+  // opens the selector from it.
+  test("the groups selector opens from the keyboard", async ({
+    page,
+    baseUrl,
+  }) => {
+    await openContacts(page, baseUrl);
+    await page.getByTestId("filter_icon_button").click();
+
+    const other = page
+      .getByTestId("filter_block_item_filter-group")
+      .getByTestId("filter_tag_other");
+    await expect(other).toBeVisible();
+    for (
+      let i = 0;
+      i < 20 && !(await other.evaluate((el) => el === document.activeElement));
+      i += 1
+    )
+      await page.keyboard.press("Tab");
+    await expect(other).toBeFocused();
+    await expect(other).toHaveAttribute("role", "button");
+
+    await page.keyboard.press("Enter");
+    const selector = page.getByTestId("groups_selector");
+    await expect(selector).toBeVisible();
+    await expect(selector.getByRole("listbox")).toBeFocused();
   });
 });

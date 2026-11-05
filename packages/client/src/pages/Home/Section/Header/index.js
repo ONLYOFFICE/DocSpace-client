@@ -69,7 +69,7 @@ import {
 
 import { CategoryType, EMPTY_ARRAY } from "@docspace/shared/constants";
 import {
-  getCategoryTypeByFolderType,
+  getCategoryTypeByFolderTypeInSection,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import {
@@ -77,6 +77,7 @@ import {
   hideInfoPanel as hideInfoPanelEvent,
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
+import { isPrivateRoomsListRoot } from "SRC_DIR/helpers/privateRoomsSection";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import {
   getLifetimePeriodTranslation,
@@ -175,6 +176,7 @@ const SectionHeaderContent = (props) => {
     showNavigationButton,
     isFormRoomRoot,
     startUpload,
+    resolveOpenFolderTarget,
     getFolderModel,
     contactsCanCreate,
     onCreateRoom,
@@ -196,6 +198,7 @@ const SectionHeaderContent = (props) => {
     rootFolderId,
     isPersonalReadOnly,
     isPrivacyFolder,
+    isPrivateRoomsSectionAvailable,
     showTemplateBadge,
 
     isRoomStorageQuotaExceeded,
@@ -278,17 +281,18 @@ const SectionHeaderContent = (props) => {
 
   const onFileChange = React.useCallback(
     async (e) => {
+      const target = resolveOpenFolderTarget();
       const files = await getFilesFromEvent(e);
 
-      createFoldersTree(t, files)
+      createFoldersTree(t, files, target)
         .then((f) => {
-          if (f.length > 0) startUpload(f, null, t);
+          if (f.length > 0) startUpload(f, target, t);
         })
         .catch((err) => {
           toastr.error(err, undefined, 0, true);
         });
     },
-    [startUpload, t],
+    [startUpload, resolveOpenFolderTarget, t],
   );
 
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
@@ -423,7 +427,9 @@ const SectionHeaderContent = (props) => {
       // folder/room id here, so it maps to CategoryType.Form → /forms/{id}).
       const categoryType = isFormsRoute
         ? CategoryType.Form
-        : getCategoryTypeByFolderType(rootFolderType, id);
+        : getCategoryTypeByFolderTypeInSection(rootFolderType, id, {
+            isPrivate: isPrivateRoomsSectionAvailable && isPrivacyFolder,
+          });
 
       const path = getCategoryUrl(categoryType, id);
 
@@ -468,6 +474,8 @@ const SectionHeaderContent = (props) => {
       setSelected,
       setIsLoading,
       isFormsRoute,
+      isPrivateRoomsSectionAvailable,
+      isPrivacyFolder,
     ],
   );
 
@@ -763,6 +771,9 @@ const SectionHeaderContent = (props) => {
         ? t("Common:Templates")
         : t("Common:Forms");
 
+    if (isPrivateRoomsListRoot(location, isRoomsFolder))
+      return t("Common:Private");
+
     // The AI root is titled by the client, as the tree titles it.
     if (getCategoryType(location) === CategoryType.AiHub)
       return t("Common:AiRooms");
@@ -797,6 +808,7 @@ const SectionHeaderContent = (props) => {
     currentGroupName,
     title,
     location,
+    isRoomsFolder,
     selectedFolder?.rootFolderType,
   ]);
 
@@ -883,7 +895,9 @@ const SectionHeaderContent = (props) => {
   const insideTheRoom =
     (categoryType === CategoryType.SharedRoom ||
       categoryType === CategoryType.Form ||
-      categoryType === CategoryType.Archive) &&
+      categoryType === CategoryType.Archive ||
+      categoryType === CategoryType.PrivateRoom ||
+      categoryType === CategoryType.PrivateArchive) &&
     !isCurrentRoom;
 
   const logo = React.useMemo(
@@ -1158,7 +1172,7 @@ export default inject(
     profileActionsStore,
     mediaViewerDataStore,
   }) => {
-    const { startUpload } = uploadDataStore;
+    const { startUpload, resolveOpenFolderTarget } = uploadDataStore;
 
     const isRoomAdmin = userStore.user?.isRoomAdmin;
     const isCollaborator = userStore.user?.isCollaborator;
@@ -1181,6 +1195,7 @@ export default inject(
       categoryType,
       setBufferSelection,
       selection: filesSelection,
+      isPrivateRoomsSectionAvailable,
     } = filesStore;
 
     const {
@@ -1392,6 +1407,7 @@ export default inject(
       isEmptyArchive,
       isArchiveFolder,
       isPrivacyFolder,
+      isPrivateRoomsSectionAvailable,
 
       setIsLoading,
 
@@ -1444,6 +1460,7 @@ export default inject(
       showNavigationButton,
       isFormRoomRoot,
       startUpload,
+      resolveOpenFolderTarget,
       getFolderModel,
       onCreateRoom,
       onEmptyTrashAction,

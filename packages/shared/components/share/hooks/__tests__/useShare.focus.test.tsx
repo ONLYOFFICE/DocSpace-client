@@ -130,4 +130,57 @@ describe("useShare", () => {
       ).toBe(true),
     );
   });
+
+  // The panel outlives the selection: a link still on its way for the item
+  // the user left must not pull the focus into the next item's links.
+  it("leaves the focus alone when the selection changes before the link comes", async () => {
+    vi.spyOn(Element.prototype, "getClientRects").mockImplementation(() => {
+      const rects = [new DOMRect(0, 0, 10, 10)];
+      return Object.assign(rects, { item: (i: number) => rects[i] ?? null });
+    });
+    let resolveLink: (link: unknown) => void = () => {};
+    vi.spyOn(ShareLinkService, "getPrimaryLink").mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          resolveLink = resolve as (link: unknown) => void;
+        }) as ReturnType<typeof ShareLinkService.getPrimaryLink>,
+    );
+
+    const otherProps = {
+      ...shareProps,
+      infoPanelSelection: { ...shareProps.infoPanelSelection, id: 2 },
+      fileLinkProps: [
+        { ...primaryLink, sharedTo: { ...primaryLink.sharedTo, id: "link-2" } },
+      ],
+    } as unknown as UseShareProps;
+    const SwitchingLinks = ({ props }: { props: UseShareProps }) => {
+      const { getLinkElements } = useShare(props);
+      return <div data-testid="links">{getLinkElements()}</div>;
+    };
+
+    const { rerender } = render(
+      <>
+        <SwitchingLinks props={shareProps} />
+        <button type="button" data-testid="elsewhere">
+          elsewhere
+        </button>
+      </>,
+    );
+    const create = screen.getByTestId("info_panel_share_create_and_copy_link");
+    act(() => create.focus());
+    fireEvent.keyDown(create, { key: "Enter" });
+
+    act(() => screen.getByTestId("elsewhere").focus());
+    rerender(
+      <>
+        <SwitchingLinks props={otherProps} />
+        <button type="button" data-testid="elsewhere">
+          elsewhere
+        </button>
+      </>,
+    );
+    await act(async () => resolveLink(primaryLink));
+
+    expect(screen.getByTestId("elsewhere")).toHaveFocus();
+  });
 });

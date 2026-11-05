@@ -104,6 +104,12 @@ export const useShare = ({
   const [focusCreatedLink, setFocusCreatedLink] = useState(false);
   const hideSharePanel = !infoPanelSelection?.canShare;
 
+  // The panel stays mounted as the selection changes: a link asked for the
+  // item before must not take the focus in the links of the next one.
+  useEffect(() => {
+    setFocusCreatedLink(false);
+  }, [infoPanelSelection?.id]);
+
   useEffect(() => {
     mountedRef.current = true;
     return () => {

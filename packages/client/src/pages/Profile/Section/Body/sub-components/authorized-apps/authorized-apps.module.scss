@@ -44,87 +44,29 @@
   gap: 12px;
 }
 
-.tableWrapper {
-  margin-top: 0px;
-
-  :global(.header-container-text) {
-    font-size: 12px;
-  }
-
-  :global(.table-container_header) {
-    position: absolute;
-  }
+// TableView: the table draws the rows' states; what is left is the content of
+// an app row.
+.cell {
+  padding-inline-end: 8px;
 }
 
-.rowWrapper {
-  display: contents;
+.mr8 {
+  margin-inline-end: 8px;
 }
 
-.tableRow {
-  :global(.table-container_cell) {
-    text-overflow: ellipsis;
+.textOverflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-    padding-inline-end: 8px;
-  }
+.descriptionText {
+  color: var(--profile-oauth-description-color);
+}
 
-  .mr8 {
-    margin-inline-end: 8px;
-  }
-
-  .textOverflow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .descriptionText {
-    color: var(--profile-oauth-description-color);
-  }
-
-  .toggleButton {
-    display: contents;
-
-    input {
-      position: relative;
-
-      margin-inline-start: -8px;
-    }
-  }
-
-  :global(.table-container_row-loader) {
-    margin-left: 8px;
-    margin-right: 16px;
-  }
-
-  &:hover {
-    :global(.table-container_cell) {
-      cursor: pointer;
-      background: var(--profile-oauth-row-background) !important;
-
-      margin-top: -1px;
-
-      border-top: var(--profile-oauth-row-border);
-    }
-
-    :global(.table-container_file-name-cell) {
-      :global(.rtl) {
-        margin-right: -24px;
-        padding-right: 24px;
-      }
-      margin-left: -24px;
-      padding-left: 24px;
-    }
-
-    :global(.table-container_row-context-menu-wrapper) {
-      :global(.rtl) {
-        margin-left: -20px;
-        padding-left: 18px;
-      }
-
-      margin-right: -20px;
-      padding-right: 18px;
-    }
-  }
+// The logo's square, where the old checkbox wrapper stood.
+.selection {
+  margin-inline-end: 12px;
 }
 
 .rowContainer {
@@ -213,18 +155,6 @@
 
 .flexWrapper {
   display: flex;
-}
-
-.nameContainer {
-  :global(.table-container_row-checkbox) {
-    margin-inline-start: -8px;
-    width: 16px;
-    padding: 16px 8px 16px 16px;
-
-    :global(.rtl) {
-      padding: 16px 16px 16px 8px;
-    }
-  }
 }
 
 .styledImage {

@@ -3,8 +3,14 @@
   max-width: 1188px;
 }
 
-.tableContainer {
-  margin-top: 12px !important;
+.table {
+  margin-top: 12px;
+}
+
+// Two tables on one page: the header scrolls with its rows, as the old
+// tables' static headers did, rather than sticking.
+.table .header {
+  position: static;
 }
 
 .modelIconPlaceholder {
@@ -29,29 +35,13 @@
   }
 }
 
-.tableContainer :global(.table-container_header) {
-  position: static !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  z-index: 0 !important; 
-}
-
-.tableContainer :global([class*="emptyTableContainer"]) {
-  height: 0 !important;
-}
-
-.tableBody {
-  width: 100%;
-}
-
 .modelCell {
   display: flex;
   flex-direction: column;
   min-width: 0;
 }
 
-.introText{
+.introText {
   margin-bottom: 12px;
   max-width: 660px;
   color: var(--settings-common-description-color);

@@ -179,45 +179,6 @@ export const getUpperCaseExtension = (extension: string) => {
   return extension.split(".").pop()?.toUpperCase() ?? "";
 };
 
-export const getLastColumn = (
-  tableStorageName: string,
-  storageColumnsSize?: string,
-  isIndexedFolder?: boolean,
-) => {
-  if (!tableStorageName) return;
-
-  const storageColumns = localStorage.getItem(tableStorageName);
-  if (!storageColumns) return;
-
-  const columns = storageColumns.split(",");
-  const filterColumns = columns.filter(
-    (column) => column !== "false" && column !== "QuickButtons",
-  );
-  let hideColumnsTable = false;
-
-  if (storageColumnsSize) {
-    const enabledColumn = storageColumnsSize
-      .split(" ")
-      .filter((_, index, array) => {
-        if (isIndexedFolder) {
-          return index !== 0 && index !== 1 && index !== array.length - 1;
-        }
-        return index !== 0 && index !== array.length - 1;
-      })
-      .find((item) => item !== "0px");
-
-    hideColumnsTable = !enabledColumn;
-  }
-
-  if (hideColumnsTable) {
-    return isIndexedFolder ? filterColumns[1] : filterColumns[0];
-  }
-
-  if (filterColumns.length > 0) {
-    return filterColumns[filterColumns.length - 1];
-  }
-  return null;
-};
 
 export const isLockedSharedRoom = (item?: TRoom) => {
   if (!item) return false;

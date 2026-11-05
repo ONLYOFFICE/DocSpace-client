@@ -33,20 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.nameContainer {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+// TableView: the table draws the rows' states; what is left is the content of
+// an app row.
+.cell {
+  padding-inline-end: 8px;
+}
 
-  :global(.table-container_row-checkbox) {
-    margin-inline-start: -8px;
-    width: 16px;
-    padding-block: 16px;
-    padding-inline-start: 16px;
-    padding-inline-end: 8px;
-  }
+// The logo's square, which turns into the checkbox.
+.selection {
+  margin-inline-end: 8px;
 }
 
 .nameImage {
@@ -64,28 +59,7 @@
   min-width: unset !important;
 }
 
-.tableWrapper {
-  margin-top: 0px;
-
-  :global(.header-container-text) {
-    font-size: 12px;
-  }
-
-  :global(.table-container_header) {
-    position: absolute;
-  }
-}
-
-.styledRowWrapper {
-  display: contents;
-}
-
-.styledTableRow {
-  :global(.table-container_cell) {
-    text-overflow: ellipsis;
-    padding-inline-end: 8px;
-  }
-
+.oauthRow {
   :global(.mr-8) {
     margin-inline-end: 8px;
   }
@@ -106,30 +80,6 @@
     input {
       position: relative;
       margin-inline-start: -8px;
-    }
-  }
-
-  :global(.table-container_row-loader) {
-    margin-left: 8px;
-    margin-right: 16px;
-  }
-
-  &:hover {
-    :global(.table-container_cell) {
-      cursor: pointer;
-      background: var(--files-section-row-view-checked-background) !important;
-      margin-top: -1px;
-      border-top: 1px solid var(--files-section-table-view-row-border-color);
-    }
-
-    :global(.table-container_file-name-cell) {
-      margin-inline-start: -24px;
-      padding-inline-start: 24px;
-    }
-
-    :global(.table-container_row-context-menu-wrapper) {
-      margin-inline-end: -20px;
-      padding-inline-end: 18px;
     }
   }
 }

@@ -33,35 +33,45 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useRef } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
+
+import type { TApiKey } from "@docspace/shared/api/api-keys/types";
 import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
-import { TableBody, TableContainer } from "@onlyoffice/apps-ui-kit/components/table";
-import TableRow from "./TableRow";
-import TableHeader from "./TableHeader";
-import { TableViewProps } from "../../types";
+import {
+  DataTable,
+  createLocalStorageWidths,
+  type DataTableRowState,
+} from "@onlyoffice/apps-ui-kit/components/data-table";
+
+import sectionTableStyles from "SRC_DIR/components/DataTable/DataTable.module.scss";
+import { useStickyHeaderTop } from "SRC_DIR/components/DataTable/useStickyHeaderTop";
+
+import type { TableViewProps } from "../../types";
+import { getContextOptions } from "../useContextOptions";
+
+import { getApiKeysColumns } from "./apiKeysColumns";
 import styles from "./TableView.module.scss";
 
-const TABLE_VERSION = "1";
-const COLUMNS_SIZE = `apiKeysColumnsSize_ver-${TABLE_VERSION}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelApiKeysColumnsSize_ver-${TABLE_VERSION}`;
+const COLUMN_WIDTHS = "apiKeysColumnsWidths_ver-1";
 
-const emptyAsyncCallback = async () => {};
+const getRowKey = (item: TApiKey) => item.id;
 
-const TableView = (props: TableViewProps) => {
-  const {
-    items,
-    viewAs,
-    sectionWidth,
-    setViewAs,
-    userId,
-    currentDeviceType,
-    culture,
-    ...rest
-  } = props;
-
-  const tableRef = useRef<HTMLDivElement>(null);
-  const [hideColumns, setHideColumns] = useState(false);
+/** The portal's API keys on the ui-kit DataTable. */
+const TableView = ({
+  items,
+  viewAs,
+  setViewAs,
+  userId,
+  currentDeviceType,
+  culture,
+  onChangeApiKeyParams,
+  onDeleteApiKey,
+  onEditApiKey,
+}: TableViewProps) => {
+  const { t } = useTranslation(["Webhooks", "Common", "Settings"]);
 
   useViewEffect({
     view: viewAs!,
@@ -69,57 +79,47 @@ const TableView = (props: TableViewProps) => {
     currentDeviceType: currentDeviceType!,
   });
 
-  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
-  const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
+  const columns = useMemo(
+    () => getApiKeysColumns(t, culture, onChangeApiKeyParams),
+    [t, culture, onChangeApiKeyParams],
+  );
+
+  const widthStorage = useMemo(
+    () => createLocalStorageWidths(`${COLUMN_WIDTHS}=${userId}`),
+    [userId],
+  );
+
+  const getRowProps = useCallback(
+    (item: TApiKey): DataTableRowState => ({
+      className: styles.apiKeysRow,
+      contextMenu: {
+        options: getContextOptions(t, item, onEditApiKey, onDeleteApiKey),
+      },
+    }),
+    [t, onEditApiKey, onDeleteApiKey],
+  );
+
+  const tableRef = useRef<HTMLDivElement>(null);
+  useStickyHeaderTop(tableRef, { belowPinned: true });
 
   return (
-    <TableContainer
-      className={styles.tableWrapper}
-      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
-      useReactWindow
-    >
-      <TableHeader
-        tableRef={tableRef}
-        sectionWidth={sectionWidth}
-        columnStorageName={columnStorageName}
-        setHideColumns={setHideColumns}
-        columnInfoPanelStorageName={columnInfoPanelStorageName}
-      />
-      <TableBody
-        itemHeight={49}
-        useReactWindow
-        infoPanelVisible={false}
-        columnStorageName={columnStorageName}
-        filesLength={items.length}
-        hasMoreFiles={false}
-        itemCount={items.length}
-        columnInfoPanelStorageName={columnInfoPanelStorageName}
-        fetchMoreFiles={emptyAsyncCallback}
-      >
-        {items.map((item) => (
-          <TableRow
-            key={item.id}
-            culture={culture}
-            item={item}
-            hideColumns={hideColumns}
-            {...rest}
-          />
-        ))}
-      </TableBody>
-    </TableContainer>
+    <DataTable<TApiKey>
+      ref={tableRef}
+      ariaLabel={t("Settings:ApiKeys")}
+      columns={columns}
+      rows={items}
+      getRowKey={getRowKey}
+      getRowProps={getRowProps}
+      widthStorage={widthStorage}
+      className={classNames(sectionTableStyles.settingsTable, styles.table)}
+    />
   );
 };
 
-export default inject(({ setup, settingsStore, userStore }: TStore) => {
-  const { viewAs, setViewAs } = setup;
-  const { currentDeviceType, culture } = settingsStore;
-
-  return {
-    viewAs,
-    setViewAs,
-    userId: userStore.user!.id,
-    currentDeviceType,
-    culture,
-  };
-})(observer(TableView));
-
+export default inject(({ setup, settingsStore, userStore }: TStore) => ({
+  viewAs: setup.viewAs,
+  setViewAs: setup.setViewAs,
+  userId: userStore.user!.id,
+  currentDeviceType: settingsStore.currentDeviceType,
+  culture: settingsStore.culture,
+}))(observer(TableView));

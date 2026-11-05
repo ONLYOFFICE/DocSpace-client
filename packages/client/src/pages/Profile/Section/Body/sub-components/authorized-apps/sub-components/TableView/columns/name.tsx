@@ -33,79 +33,59 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import type React from "react";
+import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
+import type { IClientProps } from "@docspace/shared/utils/oauth/types";
+import { DataTableRowCheckbox } from "@onlyoffice/apps-ui-kit/components/data-table";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
-import { TableCell } from "@onlyoffice/apps-ui-kit/components/table";
-import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+
+import type OAuthStore from "SRC_DIR/store/OAuthStore";
+
 import styles from "../../../authorized-apps.module.scss";
 
-interface NameCellProps {
-  name: string;
-  clientId: string;
-  icon?: string;
-  inProgress?: boolean;
-  isChecked?: boolean;
-  setSelection?: (clientId: string) => void;
-}
+type TNameCellProps = { item: IClientProps };
 
-const NameCell = ({
-  name,
-  icon,
-  clientId,
-  inProgress,
-  isChecked,
-  setSelection,
-}: NameCellProps) => {
-  const onChange = () => {
-    setSelection?.(clientId);
-  };
-
-  return (
-    <>
-      {inProgress ? (
-        <Loader
-          className="table-container_row-loader"
-          color=""
-          size="20px"
-          type={LoaderTypes.track}
-          isDecorative
-        />
-      ) : (
-        <TableCell
-          className="table-container_element-wrapper"
-          hasAccess
-          checked={isChecked}
-        >
-          <div
-            className={classNames(
-              "table-container_element-container",
-              styles.nameContainer,
-            )}
-          >
-            <div className="table-container_element">
-              {icon ? (
-                <img src={icon} alt="App icon" className={styles.styledImage} />
-              ) : null}
-            </div>
-            <Checkbox
-              className="table-container_row-checkbox"
-              onChange={onChange}
-              isChecked={isChecked}
-              title={name}
-              dataTestId="row_selection_checkbox"
-            />
-          </div>
-        </TableCell>
-      )}
-
-      <Text title={name} fontWeight="600" fontSize="13px">
-        {name}
-      </Text>
-    </>
-  );
+type TInjectedProps = TNameCellProps & {
+  checked: boolean;
+  inProgress: boolean;
+  setSelection: OAuthStore["setSelection"];
 };
 
-export default NameCell;
+/** The app's logo that turns into the checkbox, and its name. */
+const NameCell = ({
+  item,
+  checked,
+  inProgress,
+  setSelection,
+}: TInjectedProps) => (
+  <>
+    <DataTableRowCheckbox
+      // The click-outside handler that clears the selection leaves this class
+      // alone, as it did the old checkbox.
+      className={classNames(styles.selection, "table-container_row-checkbox")}
+      icon={
+        item.logo ? (
+          <img src={item.logo} alt="App icon" className={styles.styledImage} />
+        ) : null
+      }
+      checked={checked}
+      loading={inProgress}
+      label={item.name}
+      onChange={() => setSelection(item.clientId)}
+      testId="row_selection_checkbox"
+    />
+    <Text title={item.name} fontWeight="600" fontSize="13px" truncate>
+      {item.name}
+    </Text>
+  </>
+);
+
+export default inject(
+  ({ oauthStore }: { oauthStore: OAuthStore }, { item }: TNameCellProps) => ({
+    checked: oauthStore.selection.includes(item.clientId),
+    inProgress: oauthStore.activeClients.includes(item.clientId),
+    setSelection: oauthStore.setSelection,
+  }),
+)(observer(NameCell)) as unknown as React.ComponentType<TNameCellProps>;

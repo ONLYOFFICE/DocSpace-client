@@ -59,7 +59,7 @@ import {
   getCheckboxItemLabel,
 } from "@docspace/shared/utils";
 import { Context } from "@onlyoffice/apps-ui-kit/utils/context";
-import { TableGroupMenu } from "@onlyoffice/apps-ui-kit/components/table";
+import { TableGroupMenu } from "@onlyoffice/apps-ui-kit/components/table-group-menu";
 import {
   RoomsType,
   DeviceType,

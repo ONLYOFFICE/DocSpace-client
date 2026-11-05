@@ -33,74 +33,78 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useRef, useState } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
+import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
 import {
-  TableBody,
-  TableContainer,
-} from "@onlyoffice/apps-ui-kit/components/table";
+  DataTable,
+  createLocalStorageWidths,
+  type DataTableRenderRowProps,
+} from "@onlyoffice/apps-ui-kit/components/data-table";
 
 import { useStore } from "SRC_DIR/store/useStore";
+import sectionTableStyles from "SRC_DIR/components/DataTable/DataTable.module.scss";
+import { useStickyHeaderTop } from "SRC_DIR/components/DataTable/useStickyHeaderTop";
 
 import type { TTemplatesListProps } from "../../types";
-import TableHeader from "./TableHeader";
-import TableRow from "./TableRow";
+import { getMetadataTemplatesColumns } from "./metadataTemplatesColumns";
+import MetadataTemplateRow from "./MetadataTemplateRow";
 import styles from "./TableView.module.scss";
 
-const TABLE_VERSION = "1";
-const COLUMNS_SIZE = `metadataTemplatesColumnsSize_ver-${TABLE_VERSION}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelMetadataTemplatesColumnsSize_ver-${TABLE_VERSION}`;
+const COLUMN_WIDTHS = "metadataTemplatesColumnsWidths_ver-1";
 
-const emptyAsyncCallback = async () => {};
+const getRowKey = (item: TMetadataTemplate) => item.id;
 
+/** The portal's metadata templates on the ui-kit DataTable. */
 const TableView = ({
   items,
-  sectionWidth,
-  ...actions
+  onEdit,
+  onDelete,
+  onToggleVisible,
 }: TTemplatesListProps) => {
+  const { t, i18n } = useTranslation(["Metadata", "Settings", "Common"]);
   const { user } = useStore("userStore");
 
-  const tableRef = useRef<HTMLDivElement>(null);
-  const [hideColumns, setHideColumns] = useState(false);
+  const columns = useMemo(
+    () => getMetadataTemplatesColumns(t, i18n.language, onToggleVisible),
+    [t, i18n.language, onToggleVisible],
+  );
 
-  const columnStorageName = `${COLUMNS_SIZE}=${user?.id}`;
-  const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${user?.id}`;
+  const widthStorage = useMemo(
+    () => createLocalStorageWidths(`${COLUMN_WIDTHS}=${user?.id}`),
+    [user?.id],
+  );
+
+  const renderRow = useCallback(
+    ({ row, index, rowProps }: DataTableRenderRowProps<TMetadataTemplate>) => (
+      <MetadataTemplateRow
+        item={row}
+        index={index}
+        rowProps={rowProps}
+        onEdit={onEdit}
+        onDelete={onDelete}
+      />
+    ),
+    [onEdit, onDelete],
+  );
+
+  const tableRef = useRef<HTMLDivElement>(null);
+  useStickyHeaderTop(tableRef, { belowPinned: true });
 
   return (
-    <TableContainer
-      className={styles.tableWrapper}
-      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
-      useReactWindow
-    >
-      <TableHeader
-        tableRef={tableRef}
-        sectionWidth={sectionWidth}
-        columnStorageName={columnStorageName}
-        columnInfoPanelStorageName={columnInfoPanelStorageName}
-        setHideColumns={setHideColumns}
-      />
-      <TableBody
-        itemHeight={49}
-        useReactWindow
-        infoPanelVisible={false}
-        columnStorageName={columnStorageName}
-        columnInfoPanelStorageName={columnInfoPanelStorageName}
-        filesLength={items.length}
-        itemCount={items.length}
-        hasMoreFiles={false}
-        fetchMoreFiles={emptyAsyncCallback}
-      >
-        {items.map((item) => (
-          <TableRow
-            key={item.id}
-            item={item}
-            hideColumns={hideColumns}
-            {...actions}
-          />
-        ))}
-      </TableBody>
-    </TableContainer>
+    <DataTable<TMetadataTemplate>
+      ref={tableRef}
+      ariaLabel={t("Settings:MetadataTemplates")}
+      columns={columns}
+      rows={items}
+      getRowKey={getRowKey}
+      renderRow={renderRow}
+      widthStorage={widthStorage}
+      className={classNames(sectionTableStyles.settingsTable, styles.table)}
+    />
   );
 };
 

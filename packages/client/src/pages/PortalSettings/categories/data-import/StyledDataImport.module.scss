@@ -157,52 +157,10 @@
   }
 }
 
+// AccountsTable/TableView of the import steps: around the DataTable, or the
+// empty screen when the search finds nobody.
 .styledTableContainer {
   margin: 0.5px 0px 20px;
-
-  :global(.table-container_header) {
-    position: absolute;
-    padding-block: 0;
-    padding-inline: 28px 15px;
-  }
-
-  :global(.header-container-text) {
-    font-size: 12px;
-  }
-
-  :global(.checkboxWrapper) {
-    padding: 0;
-    padding-inline-start: 8px;
-  }
-
-  :global(.table-list-item) {
-    cursor: pointer;
-    padding-inline-start: 20px;
-
-    &:hover {
-      background-color: var(--files-section-row-view-checked-background);
-
-      :global(.table-container_cell) {
-        margin-top: -1px;
-        border-top: 1px solid var(--files-section-table-view-row-border-color);
-        margin-inline-start: -24px;
-        padding-inline-start: 24px;
-      }
-
-      :global(.checkboxWrapper) {
-        padding-inline-start: 32px;
-      }
-
-      :global(.table-container_row-context-menu-wrapper) {
-        margin-inline-end: -20px;
-        padding-inline-end: 20px;
-      }
-    }
-  }
-
-  :global(.table-list-item):has(:global(.selected-table-row)) {
-    background-color: var(--files-section-row-view-checked-background);
-  }
 
   :global(.clear-icon) {
     margin-inline-end: 8px;
@@ -264,7 +222,10 @@
     }
   }
 
-  &.limitReached :global(.info-block-wrapper) :global(.selected-admins-count) span {
+  &.limitReached
+    :global(.info-block-wrapper)
+    :global(.selected-admins-count)
+    span {
     color: var(--migration-error-text-color);
   }
 
@@ -982,18 +943,6 @@
     :global(.table-container_group-menu-separator) {
       margin: 0 16px;
     }
-
-    :global(.table-container_header) {
-      position: absolute;
-      padding-block: 0;
-      padding-inline: 28px 15px;
-    }
-  }
-
-  :global(.buttons-box) {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
   }
 }
 
@@ -1099,12 +1048,36 @@
   }
 }
 
-.styledTableRow {
-  :global(.table-container_cell) {
-    padding-inline-end: 30px;
-    text-overflow: ellipsis;
-  }
+// The accounts tables on the DataTable, which draws the rows: what is left is
+// their content. The first column starts 8px in, its header too, where the
+// old table's checkbox cell put them.
+.accountsCell {
+  padding-inline-end: 30px;
+}
 
+.accountsNameCell,
+.accountsNameHeader {
+  padding-inline-start: 8px;
+}
+
+// The select-all checkbox before the first column's title, which is set as
+// the table sets its own titles.
+.selectAllTitle {
+  align-self: flex-start;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-size: var(--data-table-header-font-size, 13px);
+  font-weight: 600;
+  line-height: 38px;
+  color: var(
+    --data-table-header-text-color,
+    var(--data-table-header-text-color-default)
+  );
+}
+
+.styledTableRow {
   :global(.checkbox-text) {
     font-size: 13px;
     font-weight: 600;
@@ -1141,11 +1114,6 @@
 }
 
 .styledTableRowType {
-  :global(.table-container_cell) {
-    padding-inline-end: 30px;
-    text-overflow: ellipsis;
-  }
-
   :global(.checkbox-text) {
     font-size: 13px;
     font-weight: 600;
@@ -1189,11 +1157,6 @@
 }
 
 .styledTableRowEmail {
-  :global(.table-container_cell) {
-    padding-inline-end: 30px;
-    text-overflow: ellipsis;
-  }
-
   :global(.user-email) {
     display: flex;
     gap: 8px;

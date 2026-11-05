@@ -57,19 +57,10 @@
   margin-inline-end: 5px;
 }
 
-.tableContainer {
-  margin: 0 0 20px;
-
-  :global(.table-container_header){
-    position: absolute;
-    padding: 0px 20px;
-    border-image-source: var(--table-header-border-image-source) !important;
-  }
-
-  :global(.header-container-text){
-    color: var(--table-header-text-color);
-    font-size: 12px;
-  }
+// TableView: the table draws the header and the rows' states; what is left is
+// its place on the page and the content of a session row.
+.table {
+  margin-block-end: 20px;
 }
 
 .sessionPlatform {
@@ -82,7 +73,8 @@
   color: var(--profile-active-sessions-cell-color);
 }
 
-.divider, .rowDivider{
+.divider,
+.rowDivider {
   margin: -2px 5px;
   display: inline-block;
   height: 12px;
@@ -92,7 +84,7 @@
   background-color: var(--profile-active-sessions-divider-color);
 }
 
- .rowDivider{
+.rowDivider {
   width: 0;
   border-inline-start: 2px solid var(--profile-active-sessions-divider-color);
 }
@@ -106,11 +98,11 @@
 }
 
 .rowContainer {
-  margin: 2px 0 20px;    
+  margin: 2px 0 20px;
 }
 
 .rowContent {
-  :global(.rowMainContainer){
+  :global(.rowMainContainer) {
     height: 100%;
   }
 

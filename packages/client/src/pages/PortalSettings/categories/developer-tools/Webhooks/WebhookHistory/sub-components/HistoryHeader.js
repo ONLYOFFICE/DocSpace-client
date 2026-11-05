@@ -46,7 +46,7 @@ import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import { isMobile } from "@docspace/shared/utils";
 
-import { TableGroupMenu } from "@onlyoffice/apps-ui-kit/components/table";
+import { TableGroupMenu } from "@onlyoffice/apps-ui-kit/components/table-group-menu";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";

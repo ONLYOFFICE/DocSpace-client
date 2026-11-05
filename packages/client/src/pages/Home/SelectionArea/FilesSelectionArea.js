@@ -38,7 +38,6 @@ import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { SelectionArea as SelectionAreaComponent } from "@onlyoffice/apps-ui-kit/components/selection-area";
 
-import { isFilesDataTableEnabled } from "../Section/Body/DataTableView/isFilesDataTableEnabled";
 import { FILES_DATA_TABLE_LIST_CLASS } from "../Section/Body/DataTableView/listClass";
 
 const getCountOfMissingFilesTiles = (itemsLength, countTilesInRow) => {
@@ -58,7 +57,6 @@ const SelectionArea = (props) => {
     selectionAreaIsEnabled,
     setWithContentSelection,
     countTilesInRow,
-    tableScope,
   } = props;
 
   const onMove = useCallback(
@@ -108,7 +106,7 @@ const SelectionArea = (props) => {
       containerClass="section-scroll"
       scrollClass="section-scroll"
       itemsContainerClass={
-        viewAs === "table" && isFilesDataTableEnabled(tableScope)
+        viewAs === "table"
           ? FILES_DATA_TABLE_LIST_CLASS
           : "ReactVirtualized__Grid__innerScrollContainer"
       }
@@ -127,13 +125,7 @@ const SelectionArea = (props) => {
 };
 
 export default inject(
-  ({
-    filesStore,
-    treeFoldersStore,
-    indexingStore,
-    hotkeyStore,
-    tableStore,
-  }) => {
+  ({ filesStore, treeFoldersStore, indexingStore, hotkeyStore }) => {
     const { dragging, viewAs, setSelections, folders, files } = filesStore;
     const { isRoomsFolder, isArchiveFolder, isFormsFolder, isAiSectionFolder } =
       treeFoldersStore;
@@ -155,7 +147,6 @@ export default inject(
       selectionAreaIsEnabled,
       setWithContentSelection,
       countTilesInRow,
-      tableScope: tableStore.tableScope,
     };
   },
 )(observer(SelectionArea));

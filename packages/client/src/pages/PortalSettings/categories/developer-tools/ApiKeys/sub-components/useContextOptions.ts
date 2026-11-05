@@ -37,33 +37,38 @@ import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.re
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import { TTranslation } from "@docspace/shared/types";
 import { TApiKey } from "@docspace/shared/api/api-keys/types";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+
+/** The key's menu: edit, then delete. */
+export const getContextOptions = (
+  t: TTranslation,
+  item: TApiKey,
+  onEditApiKey: (id: TApiKey["id"]) => void,
+  onDeleteApiKey: (id: TApiKey["id"]) => void,
+): ContextMenuModel[] => [
+  {
+    key: "api-key_edit",
+    label: t("Common:EditButton"),
+    icon: SettingsReactSvgUrl,
+    onClick: () => onEditApiKey(item.id),
+  },
+  {
+    key: "separator",
+    isSeparator: true,
+  },
+  {
+    key: "api-key_delete",
+    label: t("Common:Delete"),
+    icon: CatalogTrashReactSvgUrl,
+    onClick: () => onDeleteApiKey(item.id),
+  },
+];
 
 export const useContextOptions = (
   t: TTranslation,
   item: TApiKey,
   onEditApiKey: (id: TApiKey["id"]) => void,
   onDeleteApiKey: (id: TApiKey["id"]) => void,
-) => {
-  const contextOptions = [
-    {
-      key: "api-key_edit",
-      label: t("Common:EditButton"),
-      icon: SettingsReactSvgUrl,
-      onClick: () => onEditApiKey(item.id),
-    },
-    {
-      key: "separator",
-      isSeparator: true,
-    },
-    {
-      key: "api-key_delete",
-      label: t("Common:Delete"),
-      icon: CatalogTrashReactSvgUrl,
-      onClick: () => onDeleteApiKey(item.id),
-    },
-  ];
-
-  return {
-    contextOptions,
-  };
-};
+) => ({
+  contextOptions: getContextOptions(t, item, onEditApiKey, onDeleteApiKey),
+});

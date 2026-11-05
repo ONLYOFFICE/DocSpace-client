@@ -38,7 +38,7 @@ import type { TFunction } from "i18next";
 
 import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
-import type { TItem } from "../TableView/TableView.types";
+import type { TItem } from "./UsersDataTableView.types";
 
 /**
  * What `withPeopleContent` and the row computed for one user, handed to its

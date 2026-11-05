@@ -44,7 +44,7 @@ import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
-import { TableGroupMenu } from "@onlyoffice/apps-ui-kit/components/table";
+import { TableGroupMenu } from "@onlyoffice/apps-ui-kit/components/table-group-menu";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";

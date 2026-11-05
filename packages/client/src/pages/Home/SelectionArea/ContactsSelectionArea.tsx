@@ -45,7 +45,6 @@ import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
-import { isDataTableEnabled } from "SRC_DIR/components/DataTable/isDataTableEnabled";
 
 import { CONTACTS_DATA_TABLE_LIST_CLASS } from "../Section/ContactsBody/listClass";
 
@@ -78,9 +77,7 @@ const SelectionArea = ({
       containerClass="section-scroll"
       scrollClass="section-scroll"
       itemsContainerClass={
-        viewAs === "table" &&
-        isPeopleSelections &&
-        isDataTableEnabled("contacts")
+        viewAs === "table"
           ? CONTACTS_DATA_TABLE_LIST_CLASS
           : "ReactVirtualized__Grid__innerScrollContainer"
       }

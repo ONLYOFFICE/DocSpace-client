@@ -47,7 +47,7 @@ import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import {
   TableGroupMenu,
   TGroupMenuItem,
-} from "@onlyoffice/apps-ui-kit/components/table";
+} from "@onlyoffice/apps-ui-kit/components/table-group-menu";
 import { RowContainer, Row } from "@onlyoffice/apps-ui-kit/components/rows";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 

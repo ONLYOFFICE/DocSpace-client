@@ -41,7 +41,7 @@ import {
   type DataTableColumn,
 } from "@onlyoffice/apps-ui-kit/components/data-table";
 
-import type { TItem } from "../TableView/TableView.types";
+import type { TItem } from "./UsersDataTableView.types";
 
 import {
   AISpendingCell,

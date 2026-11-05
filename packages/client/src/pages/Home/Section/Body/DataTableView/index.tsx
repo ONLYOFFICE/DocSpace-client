@@ -136,9 +136,9 @@ const getRowKey = (item: TFilesTableItem) =>
   `${item.isFolder ? "folder" : "file"}_${item.id}`;
 
 /**
- * The documents list on the ui-kit DataTable, behind `isFilesDataTableEnabled`.
- * Visible columns stay in `tableStore`, under the key the old table uses;
- * widths go to the DataTable's own record, one per section.
+ * The documents list on the ui-kit DataTable. Visible columns stay in
+ * `tableStore`, in the record format the old table kept; widths go to the
+ * DataTable's own record, one per section.
  */
 const DataTableView = ({
   rows,

@@ -61,9 +61,7 @@ import { NoAccessContainerType } from "../../../../components/EmptyContainer/NoA
 import EmptyContainer from "../../../../components/EmptyContainer";
 import EmptyRoomGroupContainer from "../../../../components/EmptyContainer/EmptyRoomGroupContainer";
 import withLoader from "../../../../HOCs/withLoader";
-import TableView from "./TableView/TableContainer";
 import DataTableView from "./DataTableView";
-import { isFilesDataTableEnabled } from "./DataTableView/isFilesDataTableEnabled";
 import { FILES_DATA_TABLE_LIST_CLASS } from "./DataTableView/listClass";
 import withHotkeys from "../../../../HOCs/withHotkeys";
 import NoAccessContainer from "../../../../components/EmptyContainer/NoAccessContainer";
@@ -80,7 +78,7 @@ let isDragActive = false;
 
 const fileViews = {
   tile: FilesTileContainer,
-  table: TableView,
+  table: DataTableView,
   row: FilesRowContainer,
 };
 
@@ -127,7 +125,7 @@ const SectionBodyContent = (props) => {
 
   const attachFilesToChat = useAttachHostFilesToChat();
 
-  const isDataTable = viewAs === "table" && isFilesDataTableEnabled();
+  const isDataTable = viewAs === "table";
 
   useEffect(() => {
     return () => window?.getSelection()?.removeAllRanges();
@@ -526,9 +524,7 @@ const SectionBodyContent = (props) => {
     );
   }
 
-  const FileViewComponent = isDataTable
-    ? DataTableView
-    : (fileViews[viewAs] ?? FilesRowContainer);
+  const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
   return (
     <>

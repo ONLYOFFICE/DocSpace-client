@@ -48,7 +48,7 @@ const WebhookHistoryTable = (props) => {
     <Consumer>
       {(context) =>
         viewAs === "table" ? (
-          <HistoryTableView sectionWidth={context.sectionWidth} />
+          <HistoryTableView />
         ) : (
           <HistoryRowView sectionWidth={context.sectionWidth} />
         )

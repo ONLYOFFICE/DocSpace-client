@@ -317,75 +317,12 @@
   margin-inline-end: 8px;
 }
 
-// HistoryTableView/index.js
-.historyTableWrapper {
-  margin-top: -2px;
-  grid-template-columns: 300px 100px 400px 24px;
-
-  :global(.table-container_header) {
-    position: absolute;
-  }
-
-  :global(.header-container-text) {
-    font-size: 12px;
-  }
-
-  :global(.checkboxWrapper) {
-    padding: 0;
-    padding-inline-start: 8px;
-  }
-
-  :global(.table-list-item) {
-    cursor: pointer;
-    padding-inline-start: 20px;
-
-    &:hover {
-      background-color: var(--files-section-row-view-checked-background);
-
-      :global(.table-container_cell) {
-        margin-top: -1px;
-        border-top: 1px solid var(--files-section-table-view-row-border-color);
-        margin-inline-start: -24px;
-        padding-inline-start: 24px;
-      }
-
-      :global(.checkboxWrapper) {
-        padding-inline-start: 32px;
-      }
-
-      :global(.table-container_row-context-menu-wrapper) {
-        margin-inline-end: -20px;
-        padding-inline-end: 20px;
-      }
-    }
-  }
-
-  :global(.table-list-item:has(.selected-table-row)) {
-    background-color: var(--files-section-row-view-checked-background);
-  }
-}
-
-// HistoryTableRow.js
-.historyStyledWrapper {
-  display: contents;
-}
-
+// HistoryTableView: the table draws the rows' states; what is left is the
+// content of a delivery row.
 .historyTableRow {
   :global(.textOverflow) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  :global(.p-menuitem-icon) svg path {
-    fill: red;
-  }
-
-  :global(.p-menuitem-text) {
-    color: red;
-  }
-
-  &[data-highlighted] :global(.table-container_cell) {
-    background-color: var(--webhooks-table-cell-bg);
   }
 }

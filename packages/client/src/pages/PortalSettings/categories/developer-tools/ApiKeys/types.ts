@@ -81,25 +81,6 @@ export type TableViewProps = {
   permissions: string[];
 };
 
-export type TableHeaderProps = {
-  userId?: TUser["id"];
-  sectionWidth: number;
-  tableRef: { current: HTMLDivElement | null };
-  columnStorageName: string;
-  columnInfoPanelStorageName: string;
-  setHideColumns: (value: boolean) => void;
-};
-
-export type TableRowProps = {
-  item: TApiKey;
-  hideColumns: boolean;
-  onDeleteApiKey: ApiKeyViewProps["onDeleteApiKey"];
-  onChangeApiKeyParams: ApiKeyViewProps["onChangeApiKeyParams"];
-  culture?: string;
-  onEditApiKey: ApiKeyViewProps["onEditApiKey"];
-  permissions: string[];
-};
-
 export type RowItemType = {
   item: TApiKey;
   culture?: string;
@@ -107,15 +88,6 @@ export type RowItemType = {
   onChangeApiKeyParams: ApiKeyViewProps["onChangeApiKeyParams"];
   onDeleteApiKey: ApiKeyViewProps["onDeleteApiKey"];
   onEditApiKey: ApiKeyViewProps["onEditApiKey"];
-};
-
-export type TableHeaderColumn = {
-  key: string;
-  title: string;
-  enable: boolean;
-  default?: boolean;
-  resizable: boolean;
-  minWidth?: number;
 };
 
 export type CreateApiKeyDialogProps = {

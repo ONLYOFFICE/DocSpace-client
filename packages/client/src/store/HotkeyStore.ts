@@ -53,13 +53,15 @@ import {
   isContextMenuOpen,
   isKeyOwnedByFocus,
 } from "SRC_DIR/helpers/hotkeys";
-import { TABLE_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/table/Table.constants";
 
 import type FilesSettingsStore from "./FilesSettingsStore";
 import type IndexingStore from "./IndexingStore";
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TSelectedFolder } from "./SelectedFolderStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
+
+// The DataTable header: its 39px row and the line under it.
+const TABLE_HEADER_HEIGHT = 40;
 
 type TFilesItem = {
   id: number | string;

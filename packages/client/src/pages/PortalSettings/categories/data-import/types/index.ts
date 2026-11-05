@@ -191,41 +191,17 @@ export interface InjectedTableViewProps extends TableViewProps {
   checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
   toggleAccount: TStore["importAccountsStore"]["toggleAccount"];
   toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
-  isAccountChecked: TStore["importAccountsStore"]["isAccountChecked"];
 }
 
 export interface AddEmailTableProps extends InjectedTableViewProps {
   users: TStore["importAccountsStore"]["users"];
   setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
+  changeEmail: TStore["importAccountsStore"]["changeEmail"];
 }
 
 export interface SelectUserTableProps extends InjectedTableViewProps {
   withEmailUsers: TStore["importAccountsStore"]["withEmailUsers"];
   setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
-}
-
-export interface UsersTableHeaderProps {
-  t: TFunction;
-  sectionWidth?: number;
-
-  userId?: string;
-  tableRef: React.RefObject<HTMLDivElement | null>;
-  columnStorageName: string;
-  columnInfoPanelStorageName: string;
-  isIndeterminate: boolean;
-  isChecked: boolean;
-  toggleAll?: (e?: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-export interface UsersTableRowProps {
-  t: TFunction;
-  displayName: string;
-  email: string;
-  isDuplicate: boolean;
-  isChecked: boolean;
-  toggleAccount: (
-    e: React.MouseEvent<Element> | React.ChangeEvent<HTMLInputElement>,
-  ) => void;
 }
 
 export interface RowViewProps {
@@ -301,21 +277,6 @@ export interface InjectedAddEmailsStepProps extends AddEmailsStepProps {
   selectedWithoutEmail: TStore["importAccountsStore"]["selectedWithoutEmail"];
 }
 
-export interface AddEmailTableRowProps {
-  t: TFunction;
-  displayName: string;
-  email: string;
-  isChecked: boolean;
-  toggleAccount: () => void;
-  id: string;
-  isEmailOpen: boolean;
-  setOpenedEmailKey: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export interface InjectedAddEmailTableRowProps extends AddEmailTableRowProps {
-  changeEmail: TStore["importAccountsStore"]["changeEmail"];
-}
-
 export interface AddEmailRowContentProps {
   id: string;
   sectionWidth: number | undefined;
@@ -330,8 +291,7 @@ export interface AddEmailRowContentProps {
   toggleAccount: () => void;
 }
 
-export interface InjectedAddEmailRowContentProps
-  extends AddEmailRowContentProps {
+export interface InjectedAddEmailRowContentProps extends AddEmailRowContentProps {
   changeEmail: TStore["importAccountsStore"]["changeEmail"];
 }
 
@@ -373,29 +333,13 @@ export interface TypeSelectTableViewProps {
   accountsData: TEnhancedMigrationUser[];
   typeOptions: TOption[];
 }
-export interface InjectedTypeSelectTableViewProps
-  extends TypeSelectTableViewProps {
+export interface InjectedTypeSelectTableViewProps extends TypeSelectTableViewProps {
   userId?: string;
   checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
   toggleAccount: TStore["importAccountsStore"]["toggleAccount"];
   toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
-  isAccountChecked: TStore["importAccountsStore"]["isAccountChecked"];
   setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
   filteredUsers: TStore["importAccountsStore"]["filteredUsers"];
-}
-
-export interface TypeSelectTableRowProps {
-  id: string;
-  displayName: string;
-  email: string;
-  typeOptions: TOption[];
-  isChecked: boolean;
-  type: string;
-  toggleAccount: () => void;
-}
-
-export interface InjectedTypeSelectTableRowProps
-  extends TypeSelectTableRowProps {
   changeUserType: TStore["importAccountsStore"]["changeUserType"];
 }
 
@@ -433,8 +377,7 @@ export interface TypeSelectRowContentProps {
   type: string;
 }
 
-export interface InjectedTypeSelectRowContentProps
-  extends TypeSelectRowContentProps {
+export interface InjectedTypeSelectRowContentProps extends TypeSelectRowContentProps {
   changeUserType: TStore["importAccountsStore"]["changeUserType"];
 }
 
@@ -527,8 +470,7 @@ export interface ImportProcessingStepProps {
   migratorName: TWorkspaceService;
 }
 
-export interface InjectedImportProcessingStepProps
-  extends ImportProcessingStepProps {
+export interface InjectedImportProcessingStepProps extends ImportProcessingStepProps {
   incrementStep: TStore["importAccountsStore"]["incrementStep"];
   setIsLoading: TStore["importAccountsStore"]["setIsLoading"];
   proceedFileMigration: TStore["importAccountsStore"]["proceedFileMigration"];
@@ -539,8 +481,7 @@ export interface ImportCompleteStepProps {
   t: TFunction;
 }
 
-export interface InjectedImportCompleteStepProps
-  extends ImportCompleteStepProps {
+export interface InjectedImportCompleteStepProps extends ImportCompleteStepProps {
   getMigrationLog: TStore["importAccountsStore"]["getMigrationLog"];
   clearCheckedAccounts: TStore["importAccountsStore"]["clearCheckedAccounts"];
   sendWelcomeLetter: TStore["importAccountsStore"]["sendWelcomeLetter"];

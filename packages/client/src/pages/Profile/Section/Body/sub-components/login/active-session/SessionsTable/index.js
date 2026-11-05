@@ -43,11 +43,7 @@ const SessionsTable = ({ t, viewAs, sessionsData }) => {
     <Consumer>
       {(context) =>
         viewAs === "table" ? (
-          <TableView
-            t={t}
-            sectionWidth={context.sectionWidth}
-            sessionsData={sessionsData}
-          />
+          <TableView sessionsData={sessionsData} />
         ) : (
           <RowView
             t={t}

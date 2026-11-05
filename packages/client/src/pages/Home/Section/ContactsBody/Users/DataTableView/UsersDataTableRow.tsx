@@ -48,25 +48,12 @@ import type { EmployeeType } from "@docspace/shared/enums";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
-import type {
-  TableRowProps,
-  TableRowStores,
-} from "../TableView/TableView.types";
+import type { TableRowProps, TableRowStores } from "./UsersDataTableView.types";
 
 import { UsersRowContext, type TUsersRowValue } from "./UsersRowContext";
 import styles from "./UsersDataTableView.module.scss";
 
-type TUsersDataTableRowProps = Omit<
-  TableRowProps,
-  | "hideColumns"
-  | "typeColumnIsEnabled"
-  | "emailColumnIsEnabled"
-  | "groupColumnIsEnabled"
-  | "storageColumnIsEnabled"
-  | "aiSpendingColumnIsEnabled"
-  | "inviterColumnIsEnabled"
-  | "invitedDateColumnIsEnabled"
-> & {
+type TUsersDataTableRowProps = TableRowProps & {
   index: number;
   /** What `getRowProps` gave the row, which `renderRow` passes on. */
   rowProps: DataTableRowState;

@@ -39,10 +39,8 @@ import { Consumer } from "@onlyoffice/apps-ui-kit/utils/context";
 
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
-import { isDataTableEnabled } from "SRC_DIR/components/DataTable/isDataTableEnabled";
 
 import RowView from "./RowView";
-import TableView from "./TableView";
 import DataTableView from "./DataTableView";
 
 type UsersProps = {
@@ -54,11 +52,7 @@ const Users = ({ contactsViewAs }: UsersProps) => {
     <Consumer>
       {(context) =>
         contactsViewAs === "table" ? (
-          isDataTableEnabled("contacts") ? (
-            <DataTableView />
-          ) : (
-            <TableView sectionWidth={context.sectionWidth} />
-          )
+          <DataTableView />
         ) : (
           <RowView sectionWidth={context.sectionWidth} />
         )

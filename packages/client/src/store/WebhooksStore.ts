@@ -69,7 +69,12 @@ export type TWebhook = {
   ssl?: boolean;
   status?: number;
   triggers?: number;
-  createdBy?: string;
+  /** The author, as the portal sends it. */
+  createdBy?: {
+    displayName?: string;
+    hasAvatar?: boolean;
+    avatarSmall?: string;
+  };
   targetId?: string;
 };
 

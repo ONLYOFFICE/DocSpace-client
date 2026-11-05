@@ -1,0 +1,112 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import type { TFunction } from "i18next";
+import classNames from "classnames";
+
+import type { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
+import type { DataTableColumn } from "@onlyoffice/apps-ui-kit/components/data-table";
+import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+
+import {
+  SelectAllHeader,
+  type TSelectAll,
+} from "../../../../sub-components/SelectAllHeader";
+import styles from "../../../../StyledDataImport.module.scss";
+
+import { EmailCell } from "./EmailCell";
+
+export type TAddEmailsColumnsOptions = {
+  selectAll: TSelectAll;
+  isChecked: (user: TEnhancedMigrationUser) => boolean;
+  /** The account's email: the one saved here, else the imported one. */
+  getEmail: (user: TEnhancedMigrationUser) => string;
+  /** The checkbox's change, which the row's click handles the same way. */
+  onToggle: (user: TEnhancedMigrationUser, e: React.SyntheticEvent) => void;
+  openedEmailKey: string;
+  setOpenedEmailKey: (key: string) => void;
+  onSaveEmail: (user: TEnhancedMigrationUser, email: string) => void;
+};
+
+/** The old header's columns: the name with its checkbox, the editable email. */
+export const getAddEmailsColumns = (
+  t: TFunction,
+  {
+    selectAll,
+    isChecked,
+    getEmail,
+    onToggle,
+    openedEmailKey,
+    setOpenedEmailKey,
+    onSaveEmail,
+  }: TAddEmailsColumnsOptions,
+): DataTableColumn<TEnhancedMigrationUser>[] => [
+  {
+    id: "Name",
+    title: t("Common:Name"),
+    header: () => (
+      <SelectAllHeader title={t("Common:Name")} selectAll={selectAll} />
+    ),
+    width: { type: "fill" },
+    headerClassName: styles.accountsNameHeader,
+    cellClassName: classNames(styles.accountsCell, styles.accountsNameCell),
+    cell: (user) => (
+      <Checkbox
+        onChange={(e) => onToggle(user, e)}
+        isChecked={isChecked(user)}
+        // An account without an email cannot be imported.
+        isDisabled={!getEmail(user)}
+        truncate
+        label={user.displayName}
+      />
+    ),
+  },
+  {
+    id: "Email",
+    title: t("Common:Email"),
+    width: { type: "flex" },
+    cellClassName: styles.accountsCell,
+    cell: (user) => (
+      <EmailCell
+        t={t}
+        email={getEmail(user)}
+        isOpen={openedEmailKey === user.key}
+        onOpen={() => setOpenedEmailKey(user.key)}
+        onSave={(email) => onSaveEmail(user, email)}
+        onCancel={() => setOpenedEmailKey("")}
+      />
+    ),
+  },
+];

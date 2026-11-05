@@ -43,7 +43,7 @@ import { RowsSkeleton, TableSkeleton } from "@docspace/shared/skeletons";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
-import TableView from "./TableView";
+import DataTableView from "./DataTableView";
 import RowView from "./RowView";
 
 type GroupsProps = {
@@ -76,7 +76,7 @@ const Groups = ({
     <Consumer>
       {(context) =>
         viewAs === "table" ? (
-          <TableView sectionWidth={context.sectionWidth} />
+          <DataTableView />
         ) : (
           <RowView sectionWidth={context.sectionWidth} />
         )

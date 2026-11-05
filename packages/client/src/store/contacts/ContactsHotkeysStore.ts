@@ -38,13 +38,15 @@ import { isMobile } from "@docspace/shared/utils";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 import { TGroup } from "@docspace/shared/api/groups/types";
-import { TABLE_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/table/Table.constants";
 import {
   focusListOnSelectionKey,
   isContextMenuOpen,
   isKeyOwnedByFocus,
 } from "SRC_DIR/helpers/hotkeys";
 import GroupsStore from "./GroupsStore";
+
+// The DataTable header: its 39px row and the line under it.
+const TABLE_HEADER_HEIGHT = 40;
 
 type UsersStore = TStore["peopleStore"]["usersStore"];
 

@@ -33,107 +33,122 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import type React from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
-import { TableContainer, TableBody } from "@onlyoffice/apps-ui-kit/components/table";
-import { UserStore } from "@docspace/shared/store/UserStore";
+import type { IClientProps } from "@docspace/shared/utils/oauth/types";
+import type { UserStore } from "@docspace/shared/store/UserStore";
+import {
+  DataTable,
+  createLocalStorageWidths,
+  type DataTableRowState,
+} from "@onlyoffice/apps-ui-kit/components/data-table";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 
-import OAuthStore from "SRC_DIR/store/OAuthStore";
+import type OAuthStore from "SRC_DIR/store/OAuthStore";
+import sectionTableStyles from "SRC_DIR/components/DataTable/DataTable.module.scss";
+import { useStickyHeaderTop } from "SRC_DIR/components/DataTable/useStickyHeaderTop";
 
-import Row from "./Row";
-import Header from "./Header";
+import { getAuthorizedAppsColumns } from "./authorizedAppsColumns";
+import type { InjectedTableViewProps, TableViewProps } from "./TableView.types";
 
-import { TableViewProps } from "./TableView.types";
-import styles from "../../authorized-apps.module.scss";
+const COLUMN_WIDTHS = "consentColumnsWidths_ver-1";
 
-const TABLE_VERSION = "1";
-const COLUMNS_SIZE = `consentColumnsSize_ver-${TABLE_VERSION}`;
+const getRowKey = (item: IClientProps) => item.clientId;
 
+/** The apps the user granted access to, on the ui-kit DataTable. */
 const TableView = ({
   items,
-  sectionWidth,
+  userId,
   selection,
-  activeClients,
   setSelection,
   getContextMenuItems,
-  changeClientStatus,
-  userId,
   hasNextPage,
-  itemCount,
   fetchNextConsents,
-}: TableViewProps) => {
-  const tableRef = React.useRef<HTMLDivElement>(null);
+}: InjectedTableViewProps) => {
+  const { t } = useTranslation(["OAuth", "Common", "Files"]);
 
-  const clickOutside = React.useCallback(
-    (e: MouseEvent) => {
+  // A click anywhere but on a checkbox, or one the keyboard made, clears the
+  // selection.
+  useEffect(() => {
+    const clickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
         target.closest(".checkbox") ||
         target.closest(".table-container_row-checkbox") ||
         e.detail === 0
-      ) {
+      )
         return;
-      }
 
-      setSelection?.("");
-    },
-    [setSelection],
-  );
-
-  React.useEffect(() => {
-    window.addEventListener("click", clickOutside);
-
-    return () => {
-      window.removeEventListener("click", clickOutside);
+      setSelection("");
     };
-  }, [clickOutside, setSelection]);
 
-  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
+    window.addEventListener("click", clickOutside);
+    return () => window.removeEventListener("click", clickOutside);
+  }, [setSelection]);
 
-  const fetchMoreFiles = React.useCallback(
-    async ({ startIndex }: { startIndex: number; stopIndex: number }) => {
-      await fetchNextConsents?.(startIndex);
-    },
-    [fetchNextConsents],
+  const locale = getCookie("asc_language") || "";
+
+  const columns = useMemo(
+    () => getAuthorizedAppsColumns(t, locale),
+    [t, locale],
   );
+
+  const widthStorage = useMemo(
+    () => createLocalStorageWidths(`${COLUMN_WIDTHS}=${userId}`),
+    [userId],
+  );
+
+  // The store changes the selection in place: its contents are the key.
+  const selectionKey = selection.join("\n");
+  const selected = useMemo(
+    () => new Set(selectionKey ? selectionKey.split("\n") : []),
+    [selectionKey],
+  );
+
+  const getRowProps = useCallback(
+    (item: IClientProps, index: number): DataTableRowState => {
+      const getModel = () => getContextMenuItems(t, item, false, false);
+
+      return {
+        checked: selected.has(item.clientId),
+        testId: `auth_row_${index}`,
+        contextMenu: {
+          options: getModel(),
+          getModel,
+          title: t("Common:Actions"),
+        },
+      };
+    },
+    [t, getContextMenuItems, selected],
+  );
+
+  const loadMore = useMemo(
+    () => ({
+      hasMore: hasNextPage,
+      onLoadMore: () => fetchNextConsents(items.length),
+    }),
+    [hasNextPage, fetchNextConsents, items.length],
+  );
+
+  const tableRef = useRef<HTMLDivElement>(null);
+  useStickyHeaderTop(tableRef, { belowPinned: true });
 
   return (
-    <TableContainer
-      className={styles.tableWrapper}
-      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
-      useReactWindow
-    >
-      <Header
-        sectionWidth={sectionWidth}
-        tableRef={tableRef.current}
-        columnStorageName={columnStorageName}
-      />
-      <TableBody
-        itemHeight={49}
-        useReactWindow
-        columnStorageName={columnStorageName}
-        columnInfoPanelStorageName=" "
-        filesLength={items.length}
-        fetchMoreFiles={fetchMoreFiles}
-        hasMoreFiles={hasNextPage || false}
-        itemCount={itemCount || 0}
-        isIndexEditingMode={false}
-      >
-        {items.map((item, index) => (
-          <Row
-            key={item.clientId}
-            item={item}
-            isChecked={selection?.includes(item.clientId) || false}
-            inProgress={activeClients?.includes(item.clientId) || false}
-            setSelection={setSelection}
-            changeClientStatus={changeClientStatus}
-            getContextMenuItems={getContextMenuItems}
-            dataTestId={`auth_row_${index}`}
-          />
-        ))}
-      </TableBody>
-    </TableContainer>
+    <DataTable<IClientProps>
+      ref={tableRef}
+      ariaLabel={t("OAuth:AuthorizedApps")}
+      columns={columns}
+      rows={items}
+      getRowKey={getRowKey}
+      getRowProps={getRowProps}
+      widthStorage={widthStorage}
+      virtualize
+      loadMore={loadMore}
+      className={sectionTableStyles.settingsTable}
+    />
   );
 };
 
@@ -144,36 +159,12 @@ export default inject(
   }: {
     userStore: UserStore;
     oauthStore: OAuthStore;
-  }) => {
-    const userId = userStore.user?.id;
-
-    const {
-      viewAs,
-      setViewAs,
-      selection,
-      setSelection,
-      setBufferSelection,
-      changeClientStatus,
-      getContextMenuItems,
-      activeClients,
-      consentHasNextPage,
-      consentItemCount,
-      fetchNextConsents,
-    } = oauthStore;
-
-    return {
-      viewAs,
-      setViewAs,
-      userId,
-      changeClientStatus,
-      selection,
-      setSelection,
-      setBufferSelection,
-      activeClients,
-      getContextMenuItems,
-      hasNextPage: consentHasNextPage,
-      itemCount: consentItemCount,
-      fetchNextConsents,
-    };
-  },
-)(observer(TableView));
+  }) => ({
+    userId: userStore.user?.id,
+    selection: oauthStore.selection,
+    setSelection: oauthStore.setSelection,
+    getContextMenuItems: oauthStore.getContextMenuItems,
+    hasNextPage: oauthStore.consentHasNextPage,
+    fetchNextConsents: oauthStore.fetchNextConsents,
+  }),
+)(observer(TableView)) as unknown as React.ComponentType<TableViewProps>;

@@ -45,9 +45,14 @@ import { useLayoutEffect } from "react";
  *
  * In the Section's `stickyTableHeader` mode, with the quick-actions banner, the
  * Section places the header itself and this value is not used.
+ *
+ * `belowPinned` is for a table further down a page, such as one under a
+ * settings page's description: its resting place is far below the pinned
+ * header, so the header stops right under the pinned one instead.
  */
 export const useStickyHeaderTop = (
   tableRef: React.RefObject<HTMLDivElement | null>,
+  { belowPinned = false }: { belowPinned?: boolean } = {},
 ) => {
   useLayoutEffect(() => {
     const table = tableRef.current;
@@ -55,12 +60,13 @@ export const useStickyHeaderTop = (
     const pinned = scroller?.querySelector(".section-sticky-container");
     if (!table || !scroller || !pinned) return undefined;
 
-    // The table's offset in the scrolled content, the same at any scroll.
+    // The table's offset in the scrolled content, the same at any scroll; or
+    // the pinned header's bottom in the scroller, the same while it is pinned.
     const update = () => {
-      const top =
-        table.getBoundingClientRect().top -
-        scroller.getBoundingClientRect().top +
-        scroller.scrollTop;
+      const scrollerTop = scroller.getBoundingClientRect().top;
+      const top = belowPinned
+        ? pinned.getBoundingClientRect().bottom - scrollerTop
+        : table.getBoundingClientRect().top - scrollerTop + scroller.scrollTop;
       table.style.setProperty(
         "--data-table-header-top",
         `${Math.max(0, Math.round(top))}px`,
@@ -71,5 +77,5 @@ export const useStickyHeaderTop = (
     const observer = new ResizeObserver(update);
     observer.observe(pinned);
     return () => observer.disconnect();
-  }, [tableRef]);
+  }, [tableRef, belowPinned]);
 };

@@ -87,10 +87,7 @@ const AuthorizedApps = ({
           <Consumer>
             {(context) =>
               viewAs === "table" ? (
-                <TableView
-                  items={consents || []}
-                  sectionWidth={context.sectionWidth || 0}
-                />
+                <TableView items={consents || []} />
               ) : (
                 <RowView
                   items={consents || []}

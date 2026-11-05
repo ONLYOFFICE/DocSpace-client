@@ -43,24 +43,21 @@ import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-uti
 import { DataTableRowCheckbox } from "@onlyoffice/apps-ui-kit/components/data-table";
 import { IndexIconButtons } from "@onlyoffice/apps-ui-kit/components/rows";
 
-import AccessLevelCell from "../../TableView/sub-components/AccessLevelCell";
-import AuthorCell from "../../TableView/sub-components/AuthorCell";
-import DateCell from "../../TableView/sub-components/DateCell";
-import ErasureCell from "../../TableView/sub-components/ErasureCell";
-import { FileName } from "../../TableView/sub-components/FileNameCell/FileNameCell.helpers";
-import IndexCell from "../../TableView/sub-components/IndexCell";
-import LocationCell from "../../TableView/sub-components/LocationCell";
-import SharedByCell from "../../TableView/sub-components/SharedByCell";
-import SizeCell from "../../TableView/sub-components/SizeCell";
-import TagsCell from "../../TableView/sub-components/TagsCell";
-import TypeCell from "../../TableView/sub-components/TypeCell";
-import {
-  StyledBadgesContainer,
-  StyledQuickButtonsContainer,
-} from "../../TableView/StyledTable";
+import AccessLevelCell from "./AccessLevelCell";
+import AuthorCell from "./AuthorCell";
+import DateCell from "./DateCell";
+import ErasureCell from "./ErasureCell";
+import { FileName } from "./FileName/FileName";
+import IndexCell from "./IndexCell";
+import LocationCell from "./LocationCell";
+import SharedByCell from "./SharedByCell";
+import SizeCell from "./SizeCell";
+import TagsCell from "./TagsCell";
+import TypeCell from "./TypeCell";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 import styles from "../DataTableView.module.scss";
+import cellStyles from "./FilesCells.module.scss";
 import { type TFilesRowValue, useFilesRow } from "../row/FilesRowContext";
 import { useFilesTable } from "../row/FilesTableContext";
 
@@ -109,9 +106,7 @@ const QuickButtons = ({
     );
 
   return (
-    <StyledQuickButtonsContainer>
-      {row.quickButtonsComponent}
-    </StyledQuickButtonsContainer>
+    <div className={cellStyles.quickButtons}>{row.quickButtonsComponent}</div>
   );
 };
 
@@ -133,7 +128,7 @@ export const NameCell = ({ isLast }: Pick<TCellProps, "isLast">) => {
   return withQuickButtons(
     <>
       <NameContent row={row} />
-      <StyledBadgesContainer>{row.badgesComponent}</StyledBadgesContainer>
+      <div className={cellStyles.badges}>{row.badgesComponent}</div>
     </>,
     isLast,
     true,

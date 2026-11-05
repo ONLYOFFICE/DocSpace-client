@@ -37,12 +37,21 @@
 // stood. The section's gutters: the header line reaches 20px into them once
 // rows scroll under it, and a row's strip 24px at the start and 20px at the
 // end, as the old header's line and the old rows' negative margins did.
-.sectionTable {
+.sectionTable,
+.settingsTable {
   --data-table-bleed-start: 20px;
   --data-table-bleed-end: 20px;
   --data-table-row-bleed-start: 24px;
   --data-table-row-bleed-end: 20px;
+}
 
+// A list on a settings or profile page: the section's gutters as above, and
+// the 12px titles the old tables of those pages had.
+.settingsTable {
+  --data-table-header-font-size: 12px;
+}
+
+.sectionTable {
   // Where the old table's header sits: its container rose 25px into the
   // section's top padding. The Section's `stickyTableHeader` mode (the
   // quick-actions banner, in My documents) cancels this for both tables.

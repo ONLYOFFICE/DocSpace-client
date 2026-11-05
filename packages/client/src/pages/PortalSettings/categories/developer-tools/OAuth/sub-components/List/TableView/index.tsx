@@ -33,168 +33,176 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { inject, observer } from "mobx-react";
-import elementResizeDetectorMaker from "element-resize-detector";
+import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
-import { UserStore } from "@docspace/shared/store/UserStore";
-import { TableBody, TableContainer } from "@onlyoffice/apps-ui-kit/components/table";
+import type { IClientProps } from "@docspace/shared/utils/oauth/types";
+import type { UserStore } from "@docspace/shared/store/UserStore";
+import {
+  DataTable,
+  createLocalStorageWidths,
+  type DataTableRowState,
+} from "@onlyoffice/apps-ui-kit/components/data-table";
 
-import OAuthStore from "SRC_DIR/store/OAuthStore";
+import type OAuthStore from "SRC_DIR/store/OAuthStore";
+import sectionTableStyles from "SRC_DIR/components/DataTable/DataTable.module.scss";
+import { useStickyHeaderTop } from "SRC_DIR/components/DataTable/useStickyHeaderTop";
 
-import Row from "./sub-components/Row";
-import Header from "./sub-components/Header";
-
-import { TableViewProps } from "./TableView.types";
+import { getOAuthColumns, SCOPE_TAG_WIDTH } from "./oauthColumns";
+import type { TableViewProps } from "./TableView.types";
 import styles from "./TableView.styled.module.scss";
 
-const TABLE_VERSION = "1";
-const COLUMNS_NAME = `oauthConfigColumnsSize_ver-${TABLE_VERSION}`;
+const COLUMN_WIDTHS = "oauthConfigColumnsWidths_ver-1";
 
-const elementResizeDetector = elementResizeDetectorMaker({
-  strategy: "scroll",
-  callOnAdd: false,
-});
+// What a click on these leaves to them: no opening, no clearing.
+const NOT_HANDLED = [
+  ".checkbox",
+  ".table-container_row-checkbox",
+  ".advanced-tag",
+  ".tag",
+].join(",");
 
+// What a click on these leaves to them, clearing the selection instead of
+// opening the app.
+const CLEARING = [
+  ".type-combobox",
+  ".table-container_row-context-menu-wrapper",
+  ".toggleButton",
+].join(",");
+
+const getRowKey = (item: IClientProps) => item.clientId;
+
+/** The portal's OAuth apps on the ui-kit DataTable. */
 const TableView = ({
   items,
-  sectionWidth,
   selection,
-  activeClients,
   setSelection,
   setBufferSelection,
   getContextMenuItems,
-  changeClientStatus,
   userId,
   hasNextPage,
-  itemCount,
   fetchNextClients,
   isGroupDialogVisible,
-  setDisableDialogVisible,
 }: TableViewProps) => {
-  const tableRef = React.useRef<HTMLDivElement>(null);
-  const tagRef = React.useRef<HTMLDivElement | null>(null);
+  const { t } = useTranslation(["OAuth", "Common", "Files", "Webhooks"]);
+  const navigate = useNavigate();
 
-  const [tagCount, setTagCount] = React.useState(0);
+  // How many scope tags fit the scopes column, as the old header's tag ref
+  // measured it.
+  const [tagCount, setTagCount] = useState(0);
+  const scopesHeaderRef = useCallback((node: HTMLDivElement | null) => {
+    if (!node) return undefined;
 
-  React.useEffect(() => {
-    return () => {
-      if (!tagRef?.current) return;
-
-      elementResizeDetector.uninstall(tagRef.current);
-    };
+    const observer = new ResizeObserver(() => {
+      setTagCount(
+        Math.floor(node.getBoundingClientRect().width / SCOPE_TAG_WIDTH),
+      );
+    });
+    observer.observe(node);
+    return () => observer.disconnect();
   }, []);
 
-  const onResize = React.useCallback(
-    (node: HTMLElement) => {
-      const element = tagRef?.current ? tagRef?.current : node;
-
-      if (element) {
-        const { width } = element.getBoundingClientRect();
-
-        const columns = Math.floor(width / 120);
-
-        if (columns !== tagCount) setTagCount(columns);
-      }
-    },
-    [tagCount],
+  const columns = useMemo(
+    () => getOAuthColumns(t, tagCount, scopesHeaderRef),
+    [t, tagCount, scopesHeaderRef],
   );
 
-  const onSetTagRef = React.useCallback(
-    (node: HTMLDivElement) => {
-      if (node) {
-        tagRef.current = node;
-        onResize(node);
-
-        elementResizeDetector.listenTo(node, onResize);
-      }
-    },
-    [onResize],
+  const widthStorage = useMemo(
+    () => createLocalStorageWidths(`${COLUMN_WIDTHS}=${userId}`),
+    [userId],
   );
 
-  const clickOutside = React.useCallback(
-    (e: MouseEvent) => {
+  // A click anywhere but on a checkbox drops the selection, unless a dialog
+  // acting on it is open.
+  useEffect(() => {
+    const clickOutside = (e: MouseEvent) => {
       if (isGroupDialogVisible) return;
 
-      const target = e.target as HTMLElement;
-      if (!target) return;
+      const target = e.target as HTMLElement | null;
       if (
+        !target ||
         target.closest(".checkbox") ||
         target.closest(".table-container_row-checkbox") ||
         e.detail === 0
-      ) {
+      )
         return;
-      }
 
       setSelection?.("");
-    },
-    [setSelection, isGroupDialogVisible],
-  );
+    };
 
-  React.useEffect(() => {
     window.addEventListener("click", clickOutside);
+    return () => window.removeEventListener("click", clickOutside);
+  }, [setSelection, isGroupDialogVisible]);
 
-    return () => {
-      window.removeEventListener("click", clickOutside);
-    };
-  }, [clickOutside, setSelection]);
+  useEffect(() => () => setSelection?.(""), [setSelection]);
 
-  const columnStorageName = `${COLUMNS_NAME}=${userId}`;
+  // Read here, so that the observer re-renders when the selection, which the
+  // store changes in place, or an app changes.
+  const selected = selection?.slice() ?? [];
+  const rows = items.slice();
 
-  const fetchMoreFiles = React.useCallback(
-    async ({ startIndex }: { startIndex: number; stopIndex: number }) => {
-      await fetchNextClients?.(startIndex);
-    },
-    [fetchNextClients],
+  const getRowProps = useCallback(
+    (item: IClientProps): DataTableRowState => ({
+      checked: selected.includes(item.clientId),
+      className: styles.oauthRow,
+      testId: `${item.name}_table_row`,
+      contextMenu: {
+        options: getContextMenuItems?.(t, item) ?? [],
+        getModel: () => getContextMenuItems?.(t, item) ?? [],
+        onOpen: (isRightClick) => {
+          if (isRightClick) return;
+          setSelection?.("");
+          setBufferSelection?.(item.clientId);
+        },
+      },
+      onClick: (e) => {
+        const target = e.target as Element;
+        if (target.closest(NOT_HANDLED) || e.detail === 0) return;
+        if (target.closest(CLEARING)) {
+          setSelection?.("");
+          return;
+        }
+        navigate(`${item.clientId}`);
+      },
+    }),
+    [
+      t,
+      navigate,
+      selected,
+      getContextMenuItems,
+      setSelection,
+      setBufferSelection,
+    ],
   );
 
-  React.useEffect(() => {
-    return () => {
-      setSelection!("");
-    };
-  }, [setSelection]);
+  const loadMore = useMemo(
+    () => ({
+      hasMore: !!hasNextPage,
+      onLoadMore: () => fetchNextClients?.(rows.length),
+    }),
+    [hasNextPage, fetchNextClients, rows.length],
+  );
 
-  if (!items.length) return null;
+  const tableRef = useRef<HTMLDivElement>(null);
+  useStickyHeaderTop(tableRef, { belowPinned: true });
+
+  if (!rows.length) return null;
 
   return (
-    <TableContainer
-      className={styles.tableWrapper}
-      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
-      useReactWindow
-    >
-      <Header
-        sectionWidth={sectionWidth}
-        tableRef={tableRef.current}
-        columnStorageName={columnStorageName}
-        tagRef={onSetTagRef}
-      />
-      <TableBody
-        itemHeight={49}
-        useReactWindow
-        columnStorageName={columnStorageName}
-        columnInfoPanelStorageName=" "
-        filesLength={items.length}
-        fetchMoreFiles={fetchMoreFiles}
-        hasMoreFiles={hasNextPage || false}
-        itemCount={itemCount || 0}
-        isIndexEditingMode={false}
-      >
-        {items.map((item) => (
-          <Row
-            key={item.clientId}
-            item={item}
-            isChecked={selection?.includes(item.clientId) || false}
-            inProgress={activeClients?.includes(item.clientId) || false}
-            setSelection={setSelection}
-            setBufferSelection={setBufferSelection}
-            changeClientStatus={changeClientStatus}
-            getContextMenuItems={getContextMenuItems}
-            setDisableDialogVisible={setDisableDialogVisible}
-            tagCount={tagCount}
-          />
-        ))}
-      </TableBody>
-    </TableContainer>
+    <DataTable<IClientProps>
+      ref={tableRef}
+      ariaLabel={t("OAuth")}
+      columns={columns}
+      rows={rows}
+      getRowKey={getRowKey}
+      getRowProps={getRowProps}
+      widthStorage={widthStorage}
+      virtualize
+      loadMore={loadMore}
+      className={sectionTableStyles.settingsTable}
+    />
   );
 };
 
@@ -205,43 +213,17 @@ export default inject(
   }: {
     userStore: UserStore;
     oauthStore: OAuthStore;
-  }) => {
-    const userId = userStore.user?.id;
-
-    const {
-      viewAs,
-      setViewAs,
-      selection,
-      setSelection,
-      setBufferSelection,
-      changeClientStatus,
-      getContextMenuItems,
-      activeClients,
-      hasNextPage,
-      itemCount,
-      fetchNextClients,
-      disableDialogVisible,
-      deleteDialogVisible,
-      setDisableDialogVisible,
-    } = oauthStore;
-
-    const isGroupDialogVisible = disableDialogVisible || deleteDialogVisible;
-
-    return {
-      viewAs,
-      setViewAs,
-      userId,
-      changeClientStatus,
-      selection,
-      setSelection,
-      setBufferSelection,
-      activeClients,
-      getContextMenuItems,
-      hasNextPage,
-      itemCount,
-      fetchNextClients,
-      isGroupDialogVisible,
-      setDisableDialogVisible,
-    };
-  },
-)(observer(TableView));
+  }) => ({
+    userId: userStore.user?.id,
+    selection: oauthStore.selection,
+    setSelection: oauthStore.setSelection,
+    setBufferSelection: oauthStore.setBufferSelection,
+    getContextMenuItems: oauthStore.getContextMenuItems,
+    hasNextPage: oauthStore.hasNextPage,
+    fetchNextClients: oauthStore.fetchNextClients,
+    isGroupDialogVisible:
+      oauthStore.disableDialogVisible || oauthStore.deleteDialogVisible,
+  }),
+)(observer(TableView)) as unknown as React.ComponentType<
+  Pick<TableViewProps, "items">
+>;

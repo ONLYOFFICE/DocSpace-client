@@ -38,52 +38,61 @@ import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.fil
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 
-import { useRef } from "react";
+import { useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import classNames from "classnames";
 
+import type { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import {
-  TableContainer,
   TableGroupMenu,
-  TableBody,
   TGroupMenuItem,
-} from "@onlyoffice/apps-ui-kit/components/table";
+} from "@onlyoffice/apps-ui-kit/components/table-group-menu";
+import {
+  DataTable,
+  createLocalStorageWidths,
+  type DataTableRowState,
+} from "@onlyoffice/apps-ui-kit/components/data-table";
+
+import sectionTableStyles from "SRC_DIR/components/DataTable/DataTable.module.scss";
 
 import styles from "../../../../StyledDataImport.module.scss";
-import UsersTableRow from "./UsersTableRow";
-import UsersTableHeader from "./UsersTableHeader";
 import {
   TypeSelectTableViewProps,
   InjectedTypeSelectTableViewProps,
 } from "../../../../types";
 
-const TABLE_VERSION = "6";
-const COLUMNS_SIZE = `nextcloudFourthColumnsSize_ver-${TABLE_VERSION}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudFourthColumnsSize_ver-${TABLE_VERSION}`;
+import { NOT_TOGGLING, getUsersTypeColumns } from "./usersTypeColumns";
+
+const COLUMN_WIDTHS = "nextcloudFourthColumnsWidths_ver-1";
 
 const checkedAccountType = "result";
 
+const getRowKey = (user: TEnhancedMigrationUser) => user.key;
+
+/** The accounts to import with their types, on the DataTable. */
 const TableView = (props: TypeSelectTableViewProps) => {
   const {
     t,
-    sectionWidth,
     accountsData,
     typeOptions,
     userId,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
-    isAccountChecked,
     setSearchValue,
     filteredUsers,
+    changeUserType,
   } = props as InjectedTypeSelectTableViewProps;
   const theme = useTheme();
-  const tableRef = useRef<HTMLDivElement>(null);
-  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
-  const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
+
+  const checkedKeys = useMemo(
+    () => new Set(checkedUsers.result.map((user) => user.key)),
+    [checkedUsers.result],
+  );
 
   const isIndeterminate =
     checkedUsers.result.length > 0 &&
@@ -109,13 +118,43 @@ const TableView = (props: TypeSelectTableViewProps) => {
     },
   ];
 
+  const columns = useMemo(
+    () =>
+      getUsersTypeColumns(t, {
+        typeOptions,
+        isChecked: (user) => checkedKeys.has(user.key),
+        onToggle: (user) => toggleAccount(user, checkedAccountType),
+        onTypeChange: (user, type) => changeUserType(user.key, type),
+      }),
+    [t, typeOptions, checkedKeys, toggleAccount, changeUserType],
+  );
+
+  const widthStorage = useMemo(
+    () => createLocalStorageWidths(`${COLUMN_WIDTHS}=${userId}`),
+    [userId],
+  );
+
+  const getRowProps = useCallback(
+    (user: TEnhancedMigrationUser): DataTableRowState => ({
+      checked: checkedKeys.has(user.key),
+      className: styles.styledTableRowType,
+      onClick: (e) => {
+        if ((e.target as Element).closest(NOT_TOGGLING)) return;
+        toggleAccount(user, checkedAccountType);
+      },
+    }),
+    [checkedKeys, toggleAccount],
+  );
+
   return (
-    <TableContainer
-      className={`${styles.styledTableContainer} ${styles.userSelectTableContainer}`}
-      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
-      useReactWindow
+    <div
+      className={classNames(
+        styles.styledTableContainer,
+        styles.userSelectTableContainer,
+      )}
     >
       {checkedUsers.result.length > 0 ? (
+        // Over the table's header while accounts are selected.
         <div className="table-group-menu">
           <TableGroupMenu
             headerMenu={headerMenu}
@@ -128,42 +167,15 @@ const TableView = (props: TypeSelectTableViewProps) => {
         </div>
       ) : null}
       {accountsData.length > 0 ? (
-        <>
-          <UsersTableHeader
-            t={t}
-            sectionWidth={sectionWidth}
-            userId={userId}
-            tableRef={tableRef}
-            columnStorageName={columnStorageName}
-            columnInfoPanelStorageName={columnInfoPanelStorageName}
-            isIndeterminate={isIndeterminate}
-            isChecked={checkedUsers.result.length === filteredUsers.length}
-          />
-          <TableBody
-            itemHeight={49}
-            useReactWindow
-            infoPanelVisible={false}
-            columnStorageName={columnStorageName}
-            columnInfoPanelStorageName={columnInfoPanelStorageName}
-            filesLength={accountsData.length}
-            hasMoreFiles={false}
-            itemCount={accountsData.length}
-            fetchMoreFiles={async () => {}}
-          >
-            {accountsData.map((data) => (
-              <UsersTableRow
-                key={data.key}
-                id={data.key}
-                type={data.userType}
-                displayName={data.displayName}
-                email={data.email}
-                typeOptions={typeOptions}
-                isChecked={isAccountChecked(data.key, checkedAccountType)}
-                toggleAccount={() => toggleAccount(data, checkedAccountType)}
-              />
-            ))}
-          </TableBody>
-        </>
+        <DataTable<TEnhancedMigrationUser>
+          ariaLabel={t("Common:People")}
+          columns={columns}
+          rows={accountsData}
+          getRowKey={getRowKey}
+          getRowProps={getRowProps}
+          widthStorage={widthStorage}
+          className={sectionTableStyles.settingsTable}
+        />
       ) : (
         <EmptyScreenContainer
           imageSrc={
@@ -193,7 +205,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
           }
         />
       )}
-    </TableContainer>
+    </div>
   );
 };
 
@@ -203,9 +215,9 @@ export default inject<TStore>(({ userStore, importAccountsStore }) => {
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
-    isAccountChecked,
     setSearchValue,
     filteredUsers,
+    changeUserType,
   } = importAccountsStore;
 
   return {
@@ -213,8 +225,8 @@ export default inject<TStore>(({ userStore, importAccountsStore }) => {
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
-    isAccountChecked,
     setSearchValue,
     filteredUsers,
+    changeUserType,
   };
 })(observer(TableView));

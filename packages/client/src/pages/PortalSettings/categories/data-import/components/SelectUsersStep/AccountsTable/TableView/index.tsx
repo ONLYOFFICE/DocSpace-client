@@ -37,116 +37,109 @@ import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.
 import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
-import { useRef } from "react";
+import { useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
+import type { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
-import { TableContainer, TableBody } from "@onlyoffice/apps-ui-kit/components/table";
-import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
+import {
+  DataTable,
+  createLocalStorageWidths,
+  type DataTableRowState,
+} from "@onlyoffice/apps-ui-kit/components/data-table";
 
-import UsersTableRow from "./UsersTableRow";
-import UsersTableHeader from "./UsersTableHeader";
+import sectionTableStyles from "SRC_DIR/components/DataTable/DataTable.module.scss";
+
+import type { TSelectAll } from "../../../../sub-components/SelectAllHeader";
 import styles from "../../../../StyledDataImport.module.scss";
 import { SelectUserTableProps, TableViewProps } from "../../../../types";
 
-const TABLE_VERSION = "6";
-const COLUMNS_SIZE = `nextcloudSecondColumnsSize_ver-${TABLE_VERSION}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudSecondColumnsSize_ver-${TABLE_VERSION}`;
+import { getSelectUsersColumns } from "./selectUsersColumns";
+
+const COLUMN_WIDTHS = "nextcloudSecondColumnsWidths_ver-1";
 
 const checkedAccountType = "withEmail";
 
+const getRowKey = (user: TEnhancedMigrationUser) => user.key;
+
+/** The accounts with an email, to select for the import, on the DataTable. */
 const TableView = (props: TableViewProps) => {
   const {
     t,
     withEmailUsers,
     userId,
-    sectionWidth,
     accountsData,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
-    isAccountChecked,
     setSearchValue,
   } = props as SelectUserTableProps;
   const theme = useTheme();
-  const tableRef = useRef<HTMLDivElement>(null);
 
-  const toggleAll = (e?: React.ChangeEvent<HTMLInputElement>) =>
-    toggleAllAccounts(
-      e?.target?.checked ?? false,
-      withEmailUsers,
-      checkedAccountType,
-    );
+  const checkedKeys = useMemo(
+    () => new Set(checkedUsers.withEmail.map((user) => user.key)),
+    [checkedUsers.withEmail],
+  );
 
-  const handleToggle = (
-    e: React.MouseEvent<Element> | React.ChangeEvent<HTMLInputElement>,
-    user: TEnhancedMigrationUser,
-  ) => {
-    e.stopPropagation();
-    toggleAccount(user, checkedAccountType);
-  };
+  const selectAll: TSelectAll = useMemo(
+    () => ({
+      checked: checkedUsers.withEmail.length === withEmailUsers.length,
+      indeterminate:
+        checkedUsers.withEmail.length > 0 &&
+        checkedUsers.withEmail.length !== withEmailUsers.length,
+      onChange: (checked) =>
+        toggleAllAccounts(checked, withEmailUsers, checkedAccountType),
+    }),
+    [checkedUsers.withEmail, withEmailUsers, toggleAllAccounts],
+  );
+
+  const columns = useMemo(
+    () =>
+      getSelectUsersColumns(t, {
+        selectAll,
+        isChecked: (user) => checkedKeys.has(user.key),
+        onToggle: (user) => toggleAccount(user, checkedAccountType),
+      }),
+    [t, selectAll, checkedKeys, toggleAccount],
+  );
+
+  const widthStorage = useMemo(
+    () => createLocalStorageWidths(`${COLUMN_WIDTHS}=${userId}`),
+    [userId],
+  );
+
+  const getRowProps = useCallback(
+    (user: TEnhancedMigrationUser): DataTableRowState => ({
+      checked: checkedKeys.has(user.key),
+      className: styles.styledTableRow,
+      onClick: (e) => {
+        // The checkbox toggles the account itself.
+        if ((e.target as Element).closest(".user-select")) return;
+        toggleAccount(user, checkedAccountType);
+      },
+    }),
+    [checkedKeys, toggleAccount],
+  );
 
   const onClearFilter = () => {
     setSearchValue("");
   };
 
-  const isIndeterminate =
-    checkedUsers.withEmail.length > 0 &&
-    checkedUsers.withEmail.length !== withEmailUsers.length;
-
-  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
-  const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
-
   return (
-    <TableContainer
-      className={styles.styledTableContainer}
-      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
-      useReactWindow
-    >
+    <div className={styles.styledTableContainer}>
       {accountsData.length > 0 ? (
-        <>
-          <UsersTableHeader
-            t={t}
-            sectionWidth={sectionWidth!}
-            tableRef={tableRef}
-            userId={userId}
-            columnStorageName={columnStorageName}
-            columnInfoPanelStorageName={columnInfoPanelStorageName}
-            isIndeterminate={isIndeterminate}
-            isChecked={checkedUsers.withEmail.length === withEmailUsers.length}
-            toggleAll={toggleAll}
-          />
-          <TableBody
-            itemHeight={49}
-            useReactWindow
-            infoPanelVisible={false}
-            columnStorageName={columnStorageName}
-            columnInfoPanelStorageName={columnInfoPanelStorageName}
-            filesLength={accountsData.length}
-            hasMoreFiles={false}
-            itemCount={accountsData.length}
-            fetchMoreFiles={async () => {}}
-          >
-            {accountsData.map((data) => (
-              <UsersTableRow
-                t={t}
-                key={data.key}
-                displayName={data.displayName}
-                email={data.email}
-                isDuplicate={data.isDuplicate}
-                isChecked={isAccountChecked(data.key, checkedAccountType)}
-                toggleAccount={(
-                  e:
-                    | React.MouseEvent<Element>
-                    | React.ChangeEvent<HTMLInputElement>,
-                ) => handleToggle(e, data)}
-              />
-            ))}
-          </TableBody>
-        </>
+        <DataTable<TEnhancedMigrationUser>
+          ariaLabel={t("Common:People")}
+          columns={columns}
+          rows={accountsData}
+          getRowKey={getRowKey}
+          getRowProps={getRowProps}
+          widthStorage={widthStorage}
+          className={sectionTableStyles.settingsTable}
+        />
       ) : (
         <EmptyScreenContainer
           imageSrc={
@@ -176,7 +169,7 @@ const TableView = (props: TableViewProps) => {
           }
         />
       )}
-    </TableContainer>
+    </div>
   );
 };
 
@@ -188,7 +181,6 @@ export default inject<TStore>(({ userStore, importAccountsStore }) => {
     withEmailUsers,
     toggleAccount,
     toggleAllAccounts,
-    isAccountChecked,
     setSearchValue,
   } = importAccountsStore;
 
@@ -198,7 +190,6 @@ export default inject<TStore>(({ userStore, importAccountsStore }) => {
     withEmailUsers,
     toggleAccount,
     toggleAllAccounts,
-    isAccountChecked,
     setSearchValue,
   };
 })(observer(TableView));

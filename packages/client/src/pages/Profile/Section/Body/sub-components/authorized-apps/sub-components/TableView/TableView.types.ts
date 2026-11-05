@@ -33,49 +33,19 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
-import { TTranslation } from "@docspace/shared/types";
+import type { IClientProps } from "@docspace/shared/utils/oauth/types";
+
+import type OAuthStore from "SRC_DIR/store/OAuthStore";
 
 export interface TableViewProps {
   items: IClientProps[];
-  sectionWidth: number;
+}
 
+export interface InjectedTableViewProps extends TableViewProps {
   userId?: string;
-  selection?: string[];
-  setSelection?: (clientId: string) => void;
-  getContextMenuItems?: (
-    t: TTranslation,
-    item: IClientProps,
-    isInfo: boolean,
-    isSettings: boolean,
-  ) => ContextMenuModel[];
-  bufferSelection?: IClientProps | null;
-  activeClients?: string[];
-  hasNextPage?: boolean;
-  itemCount?: number;
-  fetchNextConsents?: (startIndex: number) => Promise<void>;
-  changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;
-}
-
-export interface HeaderProps {
-  sectionWidth: number;
-  tableRef: HTMLDivElement | null;
-  columnStorageName: string;
-  tagRef?: (node: HTMLDivElement) => void;
-}
-
-export interface RowProps {
-  item: IClientProps;
-  isChecked: boolean;
-  inProgress: boolean;
-  dataTestId?: string;
-  getContextMenuItems?: (
-    t: TTranslation,
-    item: IClientProps,
-    isInfo: boolean,
-    isSettings: boolean,
-  ) => ContextMenuModel[];
-  setSelection?: (clientId: string) => void;
-  changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;
+  selection: OAuthStore["selection"];
+  setSelection: OAuthStore["setSelection"];
+  getContextMenuItems: OAuthStore["getContextMenuItems"];
+  hasNextPage: boolean;
+  fetchNextConsents: OAuthStore["fetchNextConsents"];
 }

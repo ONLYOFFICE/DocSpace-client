@@ -59,7 +59,7 @@ import type {
   TableHeaderStores,
   TableViewStores,
   TItem,
-} from "../TableView/TableView.types";
+} from "./UsersDataTableView.types";
 
 import {
   NAME_SORT_KEY,
@@ -116,9 +116,8 @@ const getRowKey = (item: TItem) => item.id;
 
 /**
  * The Contacts users list (People, Guests, a group's members) on the ui-kit
- * DataTable, behind the `contacts` switch. Visible columns stay in
- * `tableStore`, under the key the old table uses; widths go to the
- * DataTable's own record, one per tab.
+ * DataTable. Visible columns stay in `tableStore`, in the record format the
+ * old table kept; widths go to the DataTable's own record, one per tab.
  */
 const UsersDataTableView = ({
   peopleList,

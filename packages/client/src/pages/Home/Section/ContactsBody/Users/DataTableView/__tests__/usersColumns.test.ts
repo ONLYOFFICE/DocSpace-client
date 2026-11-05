@@ -8,7 +8,7 @@ import {
   usersColumnsRecord,
   type TUsersColumnsOptions,
 } from "../usersColumns";
-import type { TItem } from "../../TableView/TableView.types";
+import type { TItem } from "../UsersDataTableView.types";
 
 // The cells are the old row's components behind withPeopleContent; what is
 // under test is which column each one sits in.

@@ -78,7 +78,6 @@ const GroupNameParam = ({
 					// onBlur={onBlur}
 					scale
 					placeholder={t("Common:EnterName")}
-					tabIndex={2}
 					// isDisabled={isDisabled}
 					// hasError={!isValidTitle}
 					isAutoFocussed

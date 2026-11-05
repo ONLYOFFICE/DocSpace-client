@@ -131,7 +131,6 @@ const EditingWrapperComponent = (props) => {
           name="title"
           scale
           value={itemTitle}
-          tabIndex={1}
           isAutoFocussed
           onChange={renameTitle}
           onKeyPress={onKeyUpUpdateItem}

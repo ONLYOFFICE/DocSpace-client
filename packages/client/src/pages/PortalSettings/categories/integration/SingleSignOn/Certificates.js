@@ -135,7 +135,6 @@ const Certificates = (props) => {
               label={t("AddCertificate")}
               onClick={openIdpModal}
               size="small"
-              tabIndex={9}
               testId="idp_add_certificate_button"
             />
             <AddIdpCertificateModal />
@@ -150,7 +149,6 @@ const Certificates = (props) => {
               label={t("AddCertificate")}
               onClick={openSpModal}
               size="small"
-              tabIndex={9}
               testId="sp_add_certificate_button"
             />
             <AddSpCertificateModal />
@@ -184,7 +182,6 @@ const Certificates = (props) => {
               labelText={t("idpSigningAlgorithm")}
               name="idpVerifyAlgorithm"
               options={verifyAlgorithmsOptions}
-              tabIndex={14}
               value={idpVerifyAlgorithm}
               dataTestId="idp_signing_combobox"
             />
@@ -197,7 +194,6 @@ const Certificates = (props) => {
                 labelText={t("spSigningAlgorithm")}
                 name="spSigningAlgorithm"
                 options={verifyAlgorithmsOptions}
-                tabIndex={14}
                 value={spSigningAlgorithm}
                 dataTestId="sp_signing_combobox"
               />
@@ -207,7 +203,6 @@ const Certificates = (props) => {
                 labelText={t("StandardDecryptionAlgorithm")}
                 name="spEncryptAlgorithm"
                 options={decryptAlgorithmsOptions}
-                tabIndex={15}
                 value={spEncryptAlgorithm}
                 dataTestId="sp_decryption_combobox"
               />

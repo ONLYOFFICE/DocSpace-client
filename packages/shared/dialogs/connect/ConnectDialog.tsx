@@ -336,7 +336,6 @@ const ConnectDialog = ({
                   isAutoFocussed
                   hasError={!isUrlValid}
                   isDisabled={isLoading}
-                  tabIndex={1}
                   scale
                   value={urlValue}
                   onChange={onChangeUrl}
@@ -361,7 +360,6 @@ const ConnectDialog = ({
                 isAutoFocussed={!showUrlField}
                 hasError={!isLoginValid}
                 isDisabled={isLoading}
-                tabIndex={2}
                 scale
                 value={loginValue}
                 onChange={onChangeLogin}
@@ -384,7 +382,6 @@ const ConnectDialog = ({
                 inputName="password"
                 hasError={!isPasswordValid}
                 isDisabled={isLoading}
-                tabIndex={3}
                 simpleView
                 passwordSettings={{ minLength: 0 }}
                 // value={passwordValue}
@@ -407,7 +404,6 @@ const ConnectDialog = ({
               hasError={!isTitleValid}
               name="folder_title"
               isDisabled={isLoading}
-              tabIndex={4}
               scale
               value={`${customerTitle}`}
               onChange={onChangeFolderName}
@@ -421,7 +417,6 @@ const ConnectDialog = ({
       <ModalDialog.Footer>
         <Button
           id="save"
-          tabIndex={5}
           label={t("Common:SaveButton")}
           size={ButtonSize.normal}
           primary
@@ -433,7 +428,6 @@ const ConnectDialog = ({
         />
         <Button
           id="cancel"
-          tabIndex={5}
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           scale={isAccount}

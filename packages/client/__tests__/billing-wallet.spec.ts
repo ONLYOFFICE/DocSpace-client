@@ -469,6 +469,78 @@ test.describe("Billing wallet", () => {
       .not.toContain("ParticipantName=contact-user-id");
   });
 
+  // The people selector from the keyboard: "Select contact" is an action link,
+  // so a button to the keyboard; the selector's list takes the focus, Enter
+  // picks the contact the keyboard is on, and Enter on the picked one submits.
+  test("a contact is picked from the keyboard", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(operationsHandler(), contactsHandler());
+
+    const requests: string[] = [];
+    page.on("request", (request) => {
+      if (new URL(request.url()).pathname.endsWith(`/${OPERATIONS_PATH}`))
+        requests.push(request.url());
+    });
+
+    await openWallet(page, baseUrl);
+    await expect(page.getByText("Wallet top-up")).toBeVisible();
+
+    const opener = page.getByRole("button", { name: "Select contact" });
+    await opener.focus();
+    await page.keyboard.press("Enter");
+
+    const selector = page.getByTestId("people-selector");
+    await expect(selector).toBeVisible();
+    const list = selector.getByRole("listbox");
+    await expect(list).toBeFocused();
+    await expect(list).toHaveAttribute("aria-activedescendant", /option/);
+
+    const active = selector.locator(
+      `[id="${await list.getAttribute("aria-activedescendant")}"]`,
+    );
+    await expect(active).toContainText("Test Contact");
+    await expect(active).toHaveAttribute("aria-selected", "false");
+
+    await page.keyboard.press("Enter");
+    await expect(active).toHaveAttribute("aria-selected", "true");
+    // The selector is still open, and the list still has the keyboard.
+    await expect(list).toBeFocused();
+
+    await page.keyboard.press("Enter");
+    await expect(selector).toBeHidden();
+    await expect(
+      page.getByTestId("selected-item").filter({ hasText: "Test Contact" }),
+    ).toBeVisible();
+    await expect
+      .poll(() => requests.at(-1))
+      .toContain("ParticipantName=contact-user-id");
+  });
+
+  test("Escape closes the people selector and gives the focus back to Select contact", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(operationsHandler(), contactsHandler());
+
+    await openWallet(page, baseUrl);
+    await expect(page.getByText("Wallet top-up")).toBeVisible();
+
+    const opener = page.getByRole("button", { name: "Select contact" });
+    await opener.focus();
+    await page.keyboard.press("Enter");
+
+    const selector = page.getByTestId("people-selector");
+    await expect(selector.getByRole("listbox")).toBeFocused();
+
+    await page.keyboard.press("Escape");
+    await expect(selector).toBeHidden();
+    await expect(opener).toBeFocused();
+  });
+
   test("the upcoming payments tab explains what will be charged", async ({
     page,
     baseUrl,

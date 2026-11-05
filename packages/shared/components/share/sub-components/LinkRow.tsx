@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
@@ -47,6 +47,7 @@ import type { TFileLink } from "../../../api/files/types";
 import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getTabStops } from "@onlyoffice/apps-ui-kit/hooks/useFocusTrap";
 
 import { getAccessTypeOptions, getLinkAccessRight } from "../Share.helpers";
 import type { LinkRowProps } from "../Share.types";
@@ -77,8 +78,19 @@ const LinkRow = ({
   onCopyLink,
   hideLinkTypeSelector,
   isExternalShareRestricted,
+  takeFocus,
+  onFocusTaken,
 }: LinkRowProps) => {
   const { t } = useTranslation("Common");
+
+  // The first link's row takes the focus once it is drawn: not while its
+  // skeleton stands in for it.
+  const firstRowRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!takeFocus || !firstRowRef.current) return;
+    getTabStops(firstRowRef.current)[0]?.focus();
+    onFocusTaken?.();
+  }, [takeFocus, onFocusTaken]);
 
   const isMobileViewLink = useIsMobile();
 
@@ -112,7 +124,7 @@ const LinkRow = ({
     [styles.isDisabled]: isArchiveFolder,
   });
 
-  return links?.map((link) => {
+  return links?.map((link, index) => {
     if (("isLoaded" in link && link.isLoaded) || "isLoaded" in link)
       return <RowSkeleton key="loading-link" />;
 
@@ -155,7 +167,11 @@ const LinkRow = ({
       isExternalShareRestricted && !link.sharedTo.internal;
 
     return (
-      <div className={className} key={link.sharedTo.id}>
+      <div
+        className={className}
+        key={link.sharedTo.id}
+        ref={index === 0 ? firstRowRef : undefined}
+      >
         <AccessTypeIcon
           avatar={LinkIcon}
           isLoaded={isLoaded}

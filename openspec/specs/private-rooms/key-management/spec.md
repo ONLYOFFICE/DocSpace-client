@@ -364,21 +364,6 @@ The system SHALL return the keyboard focus to the control that opened a key dial
 - **WHEN** the passphrase prompt was opened by a keyboard action and the user unlocks
 - **THEN** the focus is back on the element that had it before the prompt
 
-### Requirement: Tab order in key dialogs follows the visual order
-The system SHALL move the focus with Tab through a key dialog's fields, links, checkboxes and actions in the order they are displayed, and backwards with Shift+Tab, without any hand-assigned order; the system SHALL NOT trap the focus inside the dialog in this version, so Tab from the last action leaves it.
-
-#### Scenario: Forward through the creation dialog
-- **WHEN** the creation dialog has the focus in the passphrase field and the user presses Tab repeatedly
-- **THEN** the focus visits the confirmation field, then the dialog's links and actions in their displayed order
-
-#### Scenario: Backwards from the primary action
-- **WHEN** the focus is on the primary action and the user presses Shift+Tab
-- **THEN** the focus moves to the control displayed before it
-
-#### Scenario: No trap
-- **WHEN** the focus is on the last action of a key dialog and the user presses Tab
-- **THEN** the focus leaves the dialog
-
 ### Requirement: Enter confirms a key dialog from its text fields
 The system SHALL treat Enter pressed in any text field of a key dialog as its primary action while that action is enabled, SHALL NOT submit while it is disabled, and SHALL leave Enter pressed on a button, link or checkbox to that control, acting once for a held key. In the recovery phrase field Shift+Enter inserts a line break instead.
 
@@ -513,3 +498,26 @@ The system SHALL NOT announce the preset highlighted in the open auto-lock list 
 #### Scenario: Moving through the open list
 - **WHEN** the auto-lock list is open and the user moves its highlight with the arrow keys
 - **THEN** the highlighted preset is shown but not announced, and Enter still selects it
+
+### Requirement: Tab in key dialogs follows the visual order and stays inside the dialog
+The system SHALL move the focus with Tab through a key dialog's fields, links, checkboxes and actions in the order they are displayed, and backwards with Shift+Tab, without any hand-assigned order, and SHALL keep the focus inside the dialog while it is open: Tab from its last control goes to its first, Shift+Tab from its first control to its last, and the page behind the dialog is not reached.
+
+#### Scenario: Forward through the creation dialog
+- **WHEN** the creation dialog has the focus in the passphrase field and the user presses Tab repeatedly
+- **THEN** the focus visits the passphrase field's show-passphrase toggle, the confirmation field and its toggle, then the dialog's links and actions in their displayed order
+
+#### Scenario: Backwards from the primary action
+- **WHEN** the focus is on the primary action and the user presses Shift+Tab
+- **THEN** the focus moves to the control displayed before it
+
+#### Scenario: Tab wraps from the last control
+- **WHEN** the focus is on the last control of a key dialog and the user presses Tab
+- **THEN** the focus moves to the dialog's first control and stays inside the dialog
+
+#### Scenario: Shift+Tab wraps from the first control
+- **WHEN** the focus is on the first control of a key dialog and the user presses Shift+Tab
+- **THEN** the focus moves to the dialog's last control and stays inside the dialog
+
+#### Scenario: A confirmation over a key dialog holds the focus
+- **WHEN** the unsaved-changes confirmation is open over the creation dialog and the user presses Tab repeatedly
+- **THEN** the focus moves only among the confirmation's controls, reaching neither the creation dialog below it nor the page

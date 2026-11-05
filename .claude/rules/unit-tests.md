@@ -127,6 +127,14 @@ jsdom gaps these tests work around:
   by its text, never by `queryByText` alone.
 - jsdom ignores `inert`, so a hidden dialog's buttons still take part in
   `user.tab()`: assert that the focus left a dialog, not where it went.
+- jsdom lays nothing out, and the kit's focus trap (in `ModalDialog` and
+  `Aside`) leaves out every control whose `getClientRects()` is empty - so in
+  jsdom it sees none and Tab moves nothing. A Tab-order test stubs
+  `Element.prototype.getClientRects` to return one rect in a `describe` of its
+  own and restores it after each test ("Tab order" in
+  `passphrase-modal/__tests__/PassphraseModal.test.tsx`). Put a control on the
+  page outside the dialog when testing the wrap: with nothing else on the page
+  `user.tab()` wraps by itself, trap or not.
 - `userEvent` sends no keys to a disabled element. To show that a handler's own
   guard refuses a key, `fireEvent.keyDown` on the field.
 - That an async submit did not start cannot be shown by waiting: spy on its

@@ -236,7 +236,6 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
                     hasError={!!errorMessage}
                     size={InputSize.large}
                     scale
-                    tabIndex={1}
                     autoComplete="current-password"
                     onChange={onChangePassword}
                     onKeyDown={onKeyPress}
@@ -253,7 +252,6 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
                 size={ButtonSize.medium}
                 scale
                 label={t("Common:ContinueButton")}
-                tabIndex={5}
                 isLoading={isLoading}
                 isDisabled={isLoading}
                 onClick={onSubmitAction}

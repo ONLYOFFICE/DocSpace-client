@@ -197,7 +197,6 @@ const ProfileRemoveForm = ({
           scale
           size={ButtonSize.medium}
           label={t("DeleteProfileBtn")}
-          tabIndex={1}
           isDisabled={isLoading}
           onClick={onDeleteProfile}
           testId="delete_profile_button"

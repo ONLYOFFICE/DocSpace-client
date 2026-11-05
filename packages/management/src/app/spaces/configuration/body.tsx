@@ -157,7 +157,6 @@ export const Body = ({
           placeholder={t("EnterDomainName")}
           value={domain}
           onChange={onChangeDomain}
-          tabIndex={1}
           scale
         />
       </FieldContainer>
@@ -174,7 +173,6 @@ export const Body = ({
           placeholder={t("EnterSpaceName")}
           value={name}
           onChange={onChangeName}
-          tabIndex={2}
           scale
         />
       </FieldContainer>
@@ -187,7 +185,6 @@ export const Body = ({
         label={t("Common:Connect")}
         onClick={onConnectClick}
         primary
-        tabIndex={3}
         isLoading={isLoading}
         // scale={false}
       />

@@ -33,20 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// The section's gutters: the header line reaches 20px into them once rows
-// scroll under it, and a row's strip 24px at the start and 20px at the end,
-// as the old header's line and the old rows' negative margins did.
 .table {
-  --data-table-bleed-start: 20px;
-  --data-table-bleed-end: 20px;
-  --data-table-row-bleed-start: 24px;
-  --data-table-row-bleed-end: 20px;
-
-  // Where the old table's header sits: its container rose 25px into the
-  // section's top padding. The Section's `stickyTableHeader` mode (the
-  // quick-actions banner, in My documents) cancels this for both tables.
-  margin-top: -25px;
-
   // The line Body draws where a row dragged while reordering will land. Body
   // makes it 100vw wide, which the old list clipped; here it spans the rows
   // and the section's gutters, as the old one showed, without overflowing.
@@ -55,14 +42,6 @@
     width: auto !important;
     background-color: var(--table-container-indexing-separator);
   }
-}
-
-// The old table's `noSelect`: no text selection while the selection area or
-// a drag owns the mouse. On every descendant too, and as specific as the old
-// rule, because the file name's link sets `user-select: text` with two classes.
-:global(.table-container).noSelect,
-:global(.table-container).noSelect *:not(img) {
-  user-select: none;
 }
 
 // The drag-and-drop wrapper of a row adds no box of its own.

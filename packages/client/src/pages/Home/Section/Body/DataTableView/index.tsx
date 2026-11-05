@@ -82,7 +82,9 @@ import {
   FilesTableContext,
   type TFilesTableValue,
 } from "./row/FilesTableContext";
-import { useStickyHeaderTop } from "./useStickyHeaderTop";
+import { useStickyHeaderTop } from "SRC_DIR/components/DataTable/useStickyHeaderTop";
+import sectionTableStyles from "SRC_DIR/components/DataTable/DataTable.module.scss";
+
 import { useTagCount } from "./useTagCount";
 import styles from "./DataTableView.module.scss";
 
@@ -407,8 +409,8 @@ const DataTableView = ({
         loadMore={loadMore}
         apiRef={apiRef}
         ref={tableRef}
-        className={classNames(styles.table, {
-          [styles.noSelect]: !withContentSelection,
+        className={classNames(sectionTableStyles.sectionTable, styles.table, {
+          [sectionTableStyles.noSelect]: !withContentSelection,
         })}
       />
     </FilesTableContext>

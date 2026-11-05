@@ -62,9 +62,11 @@ export const copyShareLink = async (link: string) => {
 };
 
 const copyRowSelectedText = (e: KeyboardEvent) => {
-  const container = document.querySelector(
-    ".ReactVirtualized__Grid__innerScrollContainer",
-  );
+  // The old lists render their rows in react-virtualized's grid; the ui-kit
+  // DataTable has no such grid, and keeps the old table's root class.
+  const container =
+    document.querySelector(".ReactVirtualized__Grid__innerScrollContainer") ??
+    document.querySelector(".table-container");
   if (!container) return e;
 
   const checkedElements = container.querySelectorAll(".checked");

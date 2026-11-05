@@ -33,8 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import {
+  dataTableSwitchKey,
+  isDataTableEnabled,
+} from "SRC_DIR/components/DataTable/isDataTableEnabled";
+
 /** `localStorage` key of the switch between the old table and the DataTable. */
-export const FILES_DATA_TABLE_SWITCH = "files-data-table";
+export const FILES_DATA_TABLE_SWITCH = dataTableSwitchKey("files");
 
 /**
  * Whether the documents list uses the ui-kit DataTable. It does by default;
@@ -45,10 +50,4 @@ export const FILES_DATA_TABLE_SWITCH = "files-data-table";
  * moment before the documents body unmounts, and switching to the old table
  * then had its header store the documents columns under the Contacts keys.
  */
-export const isFilesDataTableEnabled = () => {
-  try {
-    return window.localStorage.getItem(FILES_DATA_TABLE_SWITCH) !== "off";
-  } catch {
-    return true;
-  }
-};
+export const isFilesDataTableEnabled = () => isDataTableEnabled("files");

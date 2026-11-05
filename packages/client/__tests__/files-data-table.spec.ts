@@ -131,13 +131,13 @@ const openMyDocuments = async (page: Page, baseUrl: string) => {
 };
 
 /** Width of each rendered column, by column id. */
-const columnWidths = (page: Page) =>
+const columnWidths = (page: Page): Promise<Record<string, number>> =>
   header(page)
     .getByRole("columnheader")
     .evaluateAll((cells) =>
       Object.fromEntries(
         cells.map((cell) => [
-          cell.getAttribute("data-column-id"),
+          cell.getAttribute("data-column-id") ?? "",
           cell.getBoundingClientRect().width,
         ]),
       ),
@@ -231,6 +231,22 @@ const scrollList = (page: Page, dy: number) =>
   body(page)
     .hover({ position: { x: 600, y: 10 } })
     .then(() => page.mouse.wheel(0, dy));
+
+/** Keeps what the page copies, which `copy-to-clipboard` selects first. */
+const recordCopiedText = (page: Page) =>
+  page.addInitScript(() => {
+    const execCommand = document.execCommand.bind(document);
+    document.execCommand = (command, ...args) => {
+      if (command === "copy")
+        Object.assign(window, {
+          __copiedText: window.getSelection()?.toString() ?? "",
+        });
+      return execCommand(command, ...args);
+    };
+  });
+
+const copiedText = (page: Page) =>
+  page.evaluate(() => Reflect.get(window, "__copiedText") ?? null);
 
 test.describe("Files list on the DataTable", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -435,6 +451,25 @@ test.describe("Files list on the DataTable", () => {
     expect(caretBox!.y + caretBox!.height).toBeLessThanOrEqual(
       viewport!.height,
     );
+  });
+
+  test("copies the selected rows with Ctrl+Shift+C", async ({
+    page,
+    baseUrl,
+  }) => {
+    await recordCopiedText(page);
+    await openMyDocuments(page, baseUrl);
+
+    await row(page, 2).locator('[role="cell"]').nth(1).click();
+    await row(page, 4)
+      .locator('[role="cell"]')
+      .nth(1)
+      .click({ modifiers: ["Control"] });
+    await page.keyboard.press("Control+Shift+KeyC");
+
+    await expect.poll(() => copiedText(page)).toContain("File 003");
+    expect(await copiedText(page)).toContain("File 005");
+    expect(await copiedText(page)).not.toContain("File 004");
   });
 
   test("tints the folder under a dragged file across its whole row", async ({

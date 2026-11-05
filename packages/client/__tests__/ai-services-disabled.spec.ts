@@ -52,47 +52,41 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
  * has to take away outside the AI section itself.
  *
  * Every ASC.AI controller is behind `[AiFeature]` and answers 403 once the
- * switch is off, so a client that still asks gets nothing but errors. Two
- * places used to ask anyway:
- *
- * - the chat stores hydrated on every page (Shell -> AiAgentProviders ->
- *   StoresHydrator, gated by `canUseAi`), which filled the console with 403s;
- * - Storage management, which asked for the AI agents list inside the same
- *   `Promise.all` as its own data - one 403 rejected the lot and left the page
- *   empty behind an error toast (the workspace date and the employee count
- *   never arrived).
- *
- * The AI agent quota block and the agents statistic go with it, and so does
- * the quota page's own URL - the mobile list links to it, so it is reachable
- * by hand as well.
+ * switch is off, so a client that still asks gets nothing but errors. The chat
+ * stores hydrated on every page (Shell -> AiAgentProviders -> StoresHydrator)
+ * and the AI projects list of the chat's model picker (AiPresetsBridge) are
+ * both gated by Shell's `canUseAi`, and Storage management must load its own
+ * data without any AI request beside it.
  *
  * Assertions are functional only, so this holds on a local run as well as in
  * Docker.
  */
 
 const DISK_SPACE_URL = "/portal-settings/management/disk-space";
-const AI_AGENT_QUOTA_URL = `${DISK_SPACE_URL}/quota-per-ai-agent`;
 
 const PORTAL_CREATED_DATE = '[data-testid="portal_created_date"]';
 const QUOTA_PER_ROOM_TOGGLE = '[data-testid="quota_room_button"]';
-const QUOTA_PER_AI_AGENT_TOGGLE = '[data-testid="quota_ai_agent_button"]';
 const TOAST = '[data-testid="toast-content"]';
 
-const pathnameOf = (page: Page) => new URL(page.url()).pathname;
-
-/** Every AI call the page made, by path - `ai/agents`, `ai/threads/list`, … */
+/**
+ * Every AI call the page made, by path - `ai/threads/list`, … - and the AI
+ * projects list, which is a `files/rooms` read of the AI hub.
+ */
 const trackAiCalls = (page: Page) => {
   const calls = new Set<string>();
   const marker = `/${API_PREFIX}/`;
 
   page.on("request", (request) => {
-    const { pathname } = new URL(request.url());
+    const { pathname, searchParams } = new URL(request.url());
 
     if (!pathname.includes(marker)) return;
 
     const path = pathname.slice(pathname.indexOf(marker) + marker.length);
 
     if (path.startsWith("ai/")) calls.add(`${request.method()} ${path}`);
+    if (path === "files/rooms" && searchParams.get("searchArea") === "AiHub") {
+      calls.add(`${request.method()} ${path}?searchArea=AiHub`);
+    }
   });
 
   return calls;
@@ -131,14 +125,9 @@ test.describe("Portal with AI services switched off", () => {
 
     await page.goto(`${baseUrl}${DISK_SPACE_URL}`);
 
-    // The page's own requests must survive the AI section being unreachable:
-    // this text is the tail of the same Promise.all the agents list was in.
     await expect(page.locator(PORTAL_CREATED_DATE)).toContainText("2021");
     await expect(page.locator(TOAST)).toHaveCount(0);
-
-    // The quotas that remain are still offered - only the AI one is gone.
     await expect(page.locator(QUOTA_PER_ROOM_TOGGLE)).toBeVisible();
-    await expect(page.locator(QUOTA_PER_AI_AGENT_TOGGLE)).toHaveCount(0);
   });
 
   test("no AI request is fired at all", async ({
@@ -157,38 +146,15 @@ test.describe("Portal with AI services switched off", () => {
     expect(
       [...aiCalls].sort(),
       "AI endpoints were called on a portal with AI services off; they all " +
-        "answer 403. Gate the caller on `aiServicesEnabled` (see Shell's " +
-        "`canUseAi` and StorageManagement.basicRequests).",
+        "answer 403. Gate the caller on Shell's `canUseAi`.",
     ).toEqual([]);
-  });
-
-  test("the AI agent quota page is closed by URL", async ({
-    page,
-    baseUrl,
-    mockRequest,
-  }) => {
-    useAiServices(mockRequest, false);
-
-    await page.goto(`${baseUrl}${AI_AGENT_QUOTA_URL}`);
-
-    // The mobile quota list links here, so the address survives the block
-    // being hidden - and must not open a page the portal cannot serve. The
-    // guard sends the visitor back to the settings root, which lands on its
-    // own first section.
-    await expect
-      .poll(() => pathnameOf(page), {
-        message: "the AI agent quota page stayed open with AI services off",
-      })
-      .not.toBe(AI_AGENT_QUOTA_URL);
-
-    expect(pathnameOf(page)).toContain("/portal-settings");
   });
 });
 
 test.describe("Portal with AI services switched on", () => {
-  // The other half of each rule: what is taken away must be there to begin
-  // with, or the assertions above would hold on a page that never had it.
-  test("storage management offers the AI agent quota and asks for the agents", async ({
+  // The other half of the rule: the tracker must see AI requests when AI is
+  // on, or the empty list above would hold on a page that never asked.
+  test("the AI projects list is read on boot", async ({
     page,
     baseUrl,
     mockRequest,
@@ -198,29 +164,12 @@ test.describe("Portal with AI services switched on", () => {
     const aiCalls = trackAiCalls(page);
 
     await page.goto(`${baseUrl}${DISK_SPACE_URL}`);
-
-    await expect(page.locator(QUOTA_PER_AI_AGENT_TOGGLE)).toBeVisible();
+    await expect(page.locator(PORTAL_CREATED_DATE)).toBeVisible();
     await settle(page);
 
     expect(
-      [...aiCalls].some((call) => call.startsWith("GET ai/agents")),
-      "the agents list was not requested with AI services on",
-    ).toBe(true);
-  });
-
-  test("the AI agent quota page opens by URL", async ({
-    page,
-    baseUrl,
-    mockRequest,
-  }) => {
-    useAiServices(mockRequest, true);
-
-    await page.goto(`${baseUrl}${AI_AGENT_QUOTA_URL}`);
-
-    await expect
-      .poll(() => pathnameOf(page), {
-        message: "the AI agent quota page was bounced with AI services on",
-      })
-      .toBe(AI_AGENT_QUOTA_URL);
+      [...aiCalls],
+      "the AI projects list was not requested with AI services on",
+    ).toContain("GET files/rooms?searchArea=AiHub");
   });
 });

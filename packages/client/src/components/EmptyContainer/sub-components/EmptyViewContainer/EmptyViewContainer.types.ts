@@ -45,8 +45,6 @@ import type {
 } from "@docspace/shared/enums";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOptionsStore";
-import { AuthStore } from "@docspace/shared/store/AuthStore";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 export type UploadType = "pdf" | "file" | "folder";
 
@@ -57,6 +55,7 @@ export type ExtensionType =
   | "xlsx"
   | "pptx"
   | "pdf"
+  | "md"
   | FolderExtensionType;
 
 export type CreateEvent = Event & {
@@ -90,8 +89,9 @@ export interface InjectedEmptyViewContainerProps
     Pick<
       TStore["dialogsStore"],
       | "setSelectFileFormRoomDialogVisible"
+      | "setSelectFileKnowledgeRoomDialogVisible"
+      | "setGenerateSkillDialogVisible"
       | "setQuotaWarningDialogVisible"
-      | "setSelectFileAiKnowledgeDialogVisible"
       | "setTemplateAccessSettingsVisible"
     >,
     Pick<
@@ -115,26 +115,21 @@ export interface InjectedEmptyViewContainerProps
   isVisitor?: boolean;
   isFrame?: boolean;
   logoText: string;
-  isKnowledgeTab?: boolean;
-  isResultsTab?: boolean;
-  isAIRoom?: boolean;
   filterFolderType: Nullable<number[]>;
   roomsFilterSearchArea: RoomSearchArea | string;
-  isPortalAdmin: AuthStore["isAdmin"];
-  aiReady?: boolean;
-  standalone: SettingsStore["standalone"];
   isCardLinkedToPortal?: boolean;
   enableAIService?: (onSuccess?: () => void | Promise<void>) => Promise<void>;
   getAIConfig?: () => Promise<void>;
   refreshCurrentFolder?: () => Promise<void>;
   refreshPaymentInfo?: () => Promise<void>;
   language?: string;
-  isGracePeriod: boolean;
-  knowledgeId: number | null;
-  startUpload: TStore["uploadDataStore"]["startUpload"];
-  createFoldersTree: TStore["filesActionsStore"]["createFoldersTree"];
   templateGalleryAvailable: boolean;
   onShowTemplateGallery: TStore["contextOptionsStore"]["onShowTemplateGallery"];
+  createRoom: TStore["contextOptionsStore"]["onCreateRoom"];
+  /** Vectorization is on for the portal: a Knowledge room takes uploads. */
+  vectorizationEnabled?: boolean;
+  /** The AI can write a skill: an Instructions room offers it. */
+  isCreateSkillWithAIAvailable?: boolean;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &
@@ -153,8 +148,8 @@ export type OptionActions = {
     filterParam: FilesSelectorFilterTypes | FilterType | string,
     openRoot?: boolean,
   ) => void;
-  uploadFromDocspaceAiKnowledge: VoidFunction;
-  uploadFromDeviceAiKnowledge: VoidFunction;
+  uploadFromDocspaceKnowledgeRoom: VoidFunction;
+  createSkillWithAI: VoidFunction;
   onUploadAction: (type: UploadType) => void;
   createAndCopySharedLink: VoidFunction;
   openInfoPanel: VoidFunction;
@@ -164,11 +159,9 @@ export type OptionActions = {
   inviteRootUser: ContactsConextOptionsStore["inviteUser"];
   onGoToPersonal: () => LinkProps;
   onGoToShared: () => LinkProps;
+  onGoToPrivate: () => LinkProps;
   onGoToForms: () => LinkProps;
-  onGoToAgents: () => LinkProps;
-  onCreateAIAgent: VoidFunction;
   onOpenAiChat: VoidFunction;
-  onStartNewChat: VoidFunction;
   onGoToServices: VoidFunction;
   onGoToAIProviderSettings: VoidFunction;
   onTopUpAndActivateAI: VoidFunction;

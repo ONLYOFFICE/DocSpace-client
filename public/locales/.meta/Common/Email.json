@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2026-10-22T16:09:36.869Z",
+  "updated_at": "2026-11-05T16:49:39.886Z",
   "comment": {
     "text": "This is a label for an email address, used in user information displays and table headers. It appears as a short label.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx",
-      "line_number": 198,
+      "line_number": 200,
       "context": "</Text>\n </div>\n \n <div className={styles.profileCardField}>\n <Text as=\"span\" className={styles.profileCardLabel}>\n {t(\"Common:Email\")}\n </Text>\n <Text as=\"span\" className={styles.profileCardValue}>\n {email}\n </Text>\n </div>",
       "module": "/packages/client"
     },
@@ -49,8 +49,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
-      "line_number": 97,
-      "context": "hasError={lastNameHasError}\n dataTestId=\"last_name_field\"\n />\n \n <SsoFormField\n labelText={t(\"Common:Email\")}\n name=\"email\"\n placeholder={SSO_EMAIL}\n tabIndex={18}\n value={email}\n hasError={emailHasError}",
+      "line_number": 95,
+      "context": "hasError={lastNameHasError}\n dataTestId=\"last_name_field\"\n />\n \n <SsoFormField\n labelText={t(\"Common:Email\")}\n name=\"email\"\n placeholder={SSO_EMAIL}\n value={email}\n hasError={emailHasError}\n dataTestId=\"email_field\"",
       "module": "/packages/client"
     },
     {
@@ -80,13 +80,13 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
       "line_number": 101,
-      "context": "id=\"login\"\n name=\"login\"\n size={InputSize.large}\n hasError={isEmailErrorShow ? !emailValid : undefined}\n value={email}\n placeholder={t(\"Common:Email\")}\n scale\n isAutoFocussed\n tabIndex={1}\n isDisabled={isLoading || !!emailFromLink}\n autoComplete=\"username\"",
+      "context": "id=\"login\"\n name=\"login\"\n size={InputSize.large}\n hasError={isEmailErrorShow ? !emailValid : undefined}\n value={email}\n placeholder={t(\"Common:Email\")}\n scale\n isAutoFocussed\n isDisabled={isLoading || !!emailFromLink}\n autoComplete=\"username\"\n onChange={onChange}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 356,
-      "context": "name=\"wizard-email\"\n tabIndex={1}\n size={InputSize.large}\n scale\n value={email}\n placeholder={t(\"Common:Email\")}\n emailSettings={emailSettings}\n hasError={hasErrorEmail}\n onValidateInput={onEmailChangeHandler}\n isAutoFocussed\n onChange={onChangeEmail}",
+      "line_number": 355,
+      "context": "<EmailInput\n name=\"wizard-email\"\n size={InputSize.large}\n scale\n value={email}\n placeholder={t(\"Common:Email\")}\n emailSettings={emailSettings}\n hasError={hasErrorEmail}\n onValidateInput={onEmailChangeHandler}\n isAutoFocussed\n onChange={onChangeEmail}",
       "module": "/packages/login"
     },
     {

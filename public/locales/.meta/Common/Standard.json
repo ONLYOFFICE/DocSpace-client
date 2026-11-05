@@ -3,7 +3,7 @@
   "content": "Standard",
   "content_en_sha1_hash": "2dfa66079d9b7229409430972fd5f1567d78a3b6",
   "created_at": "2025-05-19T21:30:49.027Z",
-  "updated_at": "2026-08-31T18:23:50.750Z",
+  "updated_at": "2026-11-05T16:49:39.936Z",
   "comment": {
     "text": "This is a label for a theme option in the appearance settings. It refers to the default or standard visual theme.",
     "is_auto": true,
@@ -13,8 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 683,
-      "context": "<div className={appearanceStyles.colorDescription}>\n {t(\"Settings:ColorDescription\")}\n </div>\n \n <div className={appearanceStyles.themeStandardContainer}>\n <div className={appearanceStyles.themeName}>{t(\"Common:Standard\")}</div>\n \n <div className={appearanceStyles.themeContainer}>\n {appearanceTheme.map((item) => {\n if (!item.name) return;\n return (",
+      "line_number": 436,
+      "context": "// none: each swatch is named by its group, as the page heads them, and its\n // place in it. A number after the word needs no inflection in any language.\n const getThemeLabel = (item) => {\n const isCustom = !item.name;\n const group = appearanceTheme.filter((theme) => !theme.name === isCustom);\n const label = isCustom ? t(\"Common:Custom\") : t(\"Common:Standard\");\n return `${label} ${group.indexOf(item) + 1}`;\n };\n \n const onClickEdit = () => {\n appearanceTheme.forEach((item) => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 436,
+      "context": "// none: each swatch is named by its group, as the page heads them, and its\n // place in it. A number after the word needs no inflection in any language.\n const getThemeLabel = (item) => {\n const isCustom = !item.name;\n const group = appearanceTheme.filter((theme) => !theme.name === isCustom);\n const label = isCustom ? t(\"Common:Custom\") : t(\"Common:Standard\");\n return `${label} ${group.indexOf(item) + 1}`;\n };\n \n const onClickEdit = () => {\n appearanceTheme.forEach((item) => {",
       "module": "/packages/client"
     }
   ],

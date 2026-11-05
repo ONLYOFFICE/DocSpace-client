@@ -38,7 +38,7 @@ import react from "@vitejs/plugin-react";
 import svgr, { type VitePluginSvgrOptions } from "vite-plugin-svgr";
 
 import { pkg, getBuildDate } from "./config/utils";
-import { jsxInJsPlugin } from "./config/plugins/jsx-in-js";
+import { jsxInJsPlugin } from "./config/plugins/jsx-in-js.mts";
 import { staticUrlPlugin } from "./config/plugins/static-url";
 import { htmlTransformPlugin } from "./config/plugins/html-transform";
 import { chunkRetryPlugin } from "./config/plugins/chunk-retry";

@@ -34,16 +34,10 @@
  */
 import { inject, observer } from "mobx-react";
 
-import AiRoomTabs from "./AiRoomTabs";
-
 const SectionSubmenuContent = ({
-  isAIRoom,
   allowInvitingGuests,
   checkGuests,
   currentClientView,
-  canUseChat,
-  showArticleLoader,
-  showTabsLoader,
 }) => {
   const isContacts =
     currentClientView === "users" || currentClientView === "groups";
@@ -53,39 +47,19 @@ const SectionSubmenuContent = ({
 
   if (isContacts && allowInvitingGuests === false) checkGuests();
 
-  if (
-    (isAIRoom && canUseChat) ||
-    (currentClientView === "chat" && (showTabsLoader || showArticleLoader))
-  )
-    return <AiRoomTabs />;
-
   // The Rooms/Templates submenu was replaced by the Templates item in the
   // sidebar (ClientArticleSidebar → Rooms → Templates).
   return null;
 };
 
-export default inject(
-  ({
-    settingsStore,
-    clientLoadingStore,
-    selectedFolderStore,
-    accessRightsStore,
-  }) => {
-    const { canUseChat } = accessRightsStore;
+export default inject(({ settingsStore, clientLoadingStore }) => {
+  const { allowInvitingGuests, checkGuests } = settingsStore;
 
-    const { allowInvitingGuests, checkGuests } = settingsStore;
+  const { currentClientView } = clientLoadingStore;
 
-    const { currentClientView, showArticleLoader, showTabsLoader } =
-      clientLoadingStore;
-
-    return {
-      isAIRoom: selectedFolderStore.isAIRoom,
-      allowInvitingGuests,
-      checkGuests,
-      currentClientView,
-      canUseChat,
-      showArticleLoader,
-      showTabsLoader,
-    };
-  },
-)(observer(SectionSubmenuContent));
+  return {
+    allowInvitingGuests,
+    checkGuests,
+    currentClientView,
+  };
+})(observer(SectionSubmenuContent));

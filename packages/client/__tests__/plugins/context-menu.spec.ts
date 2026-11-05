@@ -243,7 +243,11 @@ test.describe("Context Menu Sample Plugin", () => {
     for (const rowIndex of [0, 3]) {
       const row = table.getByTestId(`table-row-${rowIndex}`);
       const icon = row.getByTestId("room-icon-image");
-      await icon.click();
+      // Under the pointer the icon turns into the row's checkbox, which takes
+      // the click, as it does for a user. `force` skips only Playwright's
+      // hit-target check, which used to pass because the row was a
+      // role="button" drop zone.
+      await icon.click({ force: true });
     }
 
     const row = table.getByTestId(`table-row-3`);

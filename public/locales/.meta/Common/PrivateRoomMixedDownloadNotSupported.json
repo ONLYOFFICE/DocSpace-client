@@ -3,7 +3,7 @@
   "content": "You cannot download encrypted and unencrypted files at the same time.",
   "content_en_sha1_hash": "679e7d1ad47444bd4c7e7842118dd4d7fc6fbac8",
   "created_at": "2026-06-09T09:42:54.560Z",
-  "updated_at": "2026-06-09T09:55:47.538Z",
+  "updated_at": "2026-11-05T16:49:40.045Z",
   "comment": {
     "text": "Error toast message that appears when a user attempts to download a selection containing both encrypted and unencrypted files simultaneously.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useDownloadActions.ts",
-      "line_number": 91,
-      "context": "toastr.error(msg);\n });\n return;\n }\n if (encryptedFiles.length > 0) {\n toastr.error(t(\"Common:PrivateRoomMixedDownloadNotSupported\"));\n return;\n }\n }\n \n data.forEach((item) => {",
+      "line_number": 96,
+      "context": "toastr.error(getEncryptedOperationErrorMessage(t, error));\n });\n return;\n }\n if (encryptedFiles.length > 0) {\n toastr.error(t(\"Common:PrivateRoomMixedDownloadNotSupported\"));\n return;\n }\n }\n \n data.forEach((item) => {",
       "module": "/packages/sdk"
     }
   ],

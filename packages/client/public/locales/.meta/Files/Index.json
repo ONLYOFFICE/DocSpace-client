@@ -3,7 +3,7 @@
   "content": "Index",
   "content_en_sha1_hash": "c2df9b932637fe9d32a0f16da1c11873398f873d",
   "created_at": "2025-05-19T21:30:55.718Z",
-  "updated_at": "2026-10-01T08:23:21.800Z",
+  "updated_at": "2026-10-31T12:58:29.138Z",
   "comment": {
     "text": "This is a column header or label for an index number, often appearing in file lists or tables to indicate the sequential order of items.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 280,
+      "line_number": 277,
       "context": "return this.t(\"Common:CreationDate\");\n case \"Lifetime ends\":\n return this.t(\"LifetimeEnds\");\n \n case \"Index\":\n return this.t(\"Files:Index\");\n \n case \"Versions\":\n return this.t(\"Common:Versions\");\n case \"Comments\":\n return this.t(\"Common:Comments\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/RowsView/FilesRowContent.js",
-      "line_number": 183,
+      "line_number": 182,
       "context": "containerWidth=\"15%\"\n fontSize=\"12px\"\n fontWeight={400}\n className=\"row_update-text\"\n >\n {`${t(\"Files:Index\")} ${order}`}\n </Text>\n ) : null}\n {mainInfo ? (\n <Text\n containerMinWidth=\"200px\"",
       "module": "/packages/client"
     },

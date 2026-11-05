@@ -60,11 +60,14 @@ import type {
   TEditAgentData,
   TGetAgents,
   TAIUserConfig,
+  TProfile,
   TProfilesList,
   TMetadataAIFillRequest,
   TMetadataAIFillResult,
   TMetadataAIGenerateRequest,
   TMetadataAIGenerateResult,
+  TGenerateSkillRequest,
+  TGenerateSkillResult,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -251,39 +254,6 @@ export const deleteAIAgent = async (id: TAgent["id"]) => {
   await request({ method: "DELETE", url: `${baseUrl}/agents/${id}`, data: {} });
 };
 
-export const resetAIAgentQuota = async (
-  roomIds: TAgent["id"] | TAgent["id"][],
-) => {
-  const data = {
-    roomIds,
-  };
-  const options = {
-    method: "put",
-    url: `${baseUrl}/agents/resetquota`,
-    data,
-  };
-
-  return request(options);
-};
-
-export function setCustomAIAgentQuota(
-  roomIds: TAgent["id"] | TAgent["id"][],
-  quota: number,
-) {
-  const data = {
-    roomIds,
-    quota,
-  };
-
-  const options = {
-    method: "put",
-    url: `${baseUrl}/agents/agentquota`,
-    data,
-  };
-
-  return request(options);
-}
-
 export const getProfilesList = async () => {
   const response = await authFetch(`/api/2.0/ai/profiles/list`, {
     method: "GET",
@@ -295,6 +265,19 @@ export const getProfilesList = async () => {
   if (!response.ok) return [] as TProfilesList;
 
   return (await response.json()) as TProfilesList;
+};
+
+// One AI profile by id, as the chat's own `profiles/get-by-id` returns it
+// (without its key); `null` when it is gone or cannot be read.
+export const getProfileById = async (id: string) => {
+  const response = await authFetch(
+    `/api/2.0/ai/profiles/get-by-id?id=${encodeURIComponent(id)}`,
+    { method: "GET", headers: { "Content-Type": "application/json" } },
+  );
+
+  if (!response.ok) return null;
+
+  return (await response.json()) as TProfile;
 };
 
 // A draft attachment of the AI chat, as the chat's own
@@ -549,3 +532,30 @@ export const generateMetadataWithAI = (
   data: TMetadataAIGenerateRequest,
   signal?: AbortSignal,
 ) => postMetadataAI<TMetadataAIGenerateResult>("generate", data, signal);
+
+/** Write a skill with AI for an Instructions room; the caller saves it after review. */
+export const generateSkillWithAI = async (
+  data: TGenerateSkillRequest,
+  signal?: AbortSignal,
+) => {
+  const response = await authFetch(`/api/2.0/ai/skills/generate`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+    signal,
+  });
+
+  const body = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw Object.assign(new Error(body?.error ?? response.statusText), {
+      status: response.status,
+      code: body?.code,
+      providerMessage: body?.providerMessage,
+    });
+  }
+
+  return body as TGenerateSkillResult;
+};

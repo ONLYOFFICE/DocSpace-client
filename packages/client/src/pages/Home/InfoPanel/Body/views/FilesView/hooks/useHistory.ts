@@ -62,6 +62,24 @@ import { useLoader } from "../../../helpers/useLoader";
 
 const PAGE_COUNT = 100;
 
+// An AI project reads its history through `ai/projects/{id}/history`; every
+// other selection through the Files log.
+const getHistory = (
+  selectionType: "file" | "folder",
+  selection: TRoom | TFile | TFolder,
+  filter: Parameters<typeof api.rooms.getHistory>[2],
+  signal: AbortSignal,
+  requestToken?: string,
+) => {
+  return api.rooms.getHistory(
+    selectionType,
+    selection.id,
+    filter,
+    signal,
+    requestToken,
+  );
+};
+
 const addLinksToHistory = (fetchedHistory: TFeed, links: RoomMember[]) => {
   const historyWithLinks: TFeedAction<TFeedData | RoomMember>[] =
     fetchedHistory.items.map((feed) => {
@@ -195,9 +213,9 @@ export const useHistory = ({
     const dayFilter = getDayFilter(day === undefined ? historyDay : day);
 
     try {
-      const response = await api.rooms.getHistory(
+      const response = await getHistory(
         selectionType,
-        selection.id,
+        selection,
         { page: 0, startIndex: 0, count: PAGE_COUNT, ...dayFilter },
         abortController.current.signal,
         selectionRequestToken,
@@ -294,9 +312,9 @@ export const useHistory = ({
     const startIndex = filter.startIndex + PAGE_COUNT;
 
     try {
-      const data = await api.rooms.getHistory(
+      const data = await getHistory(
         selectionType,
-        selection.id,
+        selection,
         { page, startIndex, count: PAGE_COUNT, ...getDayFilter(historyDay) },
         abortController.current.signal,
         requestToken,

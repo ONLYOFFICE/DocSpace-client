@@ -12,7 +12,7 @@
   "FormsDemoTimeOff": "Wnioski urlopowe",
   "FormsEmpty": "Obszary w tym oprowadzaniu były przykładami. Gdy ktoś zaprosi cię do obszaru, pojawi się on na tej liście. Otwórz go, aby znaleźć formularze, które możesz wypełnić.",
   "FormsEmptyTitle": "Twoja lista jest na razie pusta",
-  "FormsFillYourself": "Sam wypełniasz formularz? Po uruchomieniu formularza wybierz Wypełnij formularz lub otwórz go, aby wypełnić własną kopię. Twoja wersja robocza pozostaje w folderze {{inProgress}}, dopóki jej nie prześlesz.",
+  "FormsFillYourself": "Wypełniasz formularz samodzielnie? Po uruchomieniu formularza wybierz Wypełnij formularz lub otwórz go, aby wypełnić własną kopię. Twoja wersja robocza pozostaje w folderze {{inProgress}}, dopóki jej nie prześlesz.",
   "FormsFillYourselfTitle": "Wypełnij go sam",
   "FormsInProgress": "Gdy ktoś wypełnia formularz, kopia robocza jest zapisywana w folderze {{inProgress}}. Liczy się jako odpowiedź dopiero po przesłaniu. Osoby zaproszone jako {{formFiller}} widzą tylko własne odpowiedzi.",
   "FormsInProgressTitle": "Rozpoczęte, nieukończone",

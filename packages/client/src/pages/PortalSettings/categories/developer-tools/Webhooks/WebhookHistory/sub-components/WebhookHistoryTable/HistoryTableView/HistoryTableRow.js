@@ -77,12 +77,17 @@ const HistoryTableRow = (props) => {
     if (isRetryPending) {
       return;
     }
-    await retryWebhook(item.id);
-    await fetchHistoryItems({
-      ...(historyFilters ? formatFilters(historyFilters) : {}),
-      configId: id,
-    });
-    toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);
+    try {
+      await retryWebhook(item.id);
+      await fetchHistoryItems({
+        ...(historyFilters ? formatFilters(historyFilters) : {}),
+        configId: id,
+      });
+      toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error);
+    }
   };
 
   const contextOptions = [

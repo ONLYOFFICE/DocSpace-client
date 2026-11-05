@@ -98,16 +98,41 @@ vi.mock("@onlyoffice/apps-ui-kit/components/password-input", () => ({
     onChange,
     inputName,
     hasError,
+    simpleView,
+    passwordSettings,
+    onValidateInput,
   }: {
     inputValue?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     inputName?: string;
     hasError?: boolean;
+    simpleView?: boolean;
+    passwordSettings?: {
+      minLength: number;
+      digitsRegexStr: string;
+      upperCaseRegexStr: string;
+      specSymbolsRegexStr: string;
+    };
+    onValidateInput?: (rulesPassed: boolean) => void;
   }) =>
     React.createElement("input", {
       "data-testid": inputName,
       value: inputValue ?? "",
-      onChange,
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+        // Outside the simple view the kit checks its rules on every change.
+        if (!simpleView && passwordSettings) {
+          const { value } = e.target;
+          onValidateInput?.(
+            value.trim().length >= passwordSettings.minLength &&
+              [
+                passwordSettings.digitsRegexStr,
+                passwordSettings.upperCaseRegexStr,
+                passwordSettings.specSymbolsRegexStr,
+              ].every((rule) => new RegExp(rule).test(value)),
+          );
+        }
+        onChange?.(e);
+      },
       "data-has-error": String(hasError),
     }),
 }));
@@ -217,8 +242,8 @@ describe("KeyRotationDialog — passphrase minimum-length guard", () => {
     // Step 1: type valid values (>=12 chars, different current/new)
     act(() => {
       typeInto("currentPassphrase", "old-current-pass");
-      typeInto("newPassphrase", "ValidPass1234"); // 13 chars
-      typeInto("confirmNewPassphrase", "ValidPass1234");
+      typeInto("newPassphrase", "ValidPass123!"); // 13 chars
+      typeInto("confirmNewPassphrase", "ValidPass123!");
     });
 
     // Step 2: click submit (button is enabled at this point)
@@ -254,32 +279,62 @@ describe("KeyRotationDialog — passphrase minimum-length guard", () => {
     const onSubmit = vi.fn().mockResolvedValue(undefined);
     render(<KeyRotationDialog {...makeProps(onSubmit)} />);
     typeInto("currentPassphrase", "old-pass-here");
-    typeInto("newPassphrase", "123456789012"); // 12 chars, different from current
-    typeInto("confirmNewPassphrase", "123456789012");
+    typeInto("newPassphrase", "Rv7mKt2p!x9w"); // 12 chars, different from current
+    typeInto("confirmNewPassphrase", "Rv7mKt2p!x9w");
     await act(async () => {
       fireEvent.click(screen.getByTestId("Common:SaveButton"));
     });
-    expect(onSubmit).toHaveBeenCalledWith("old-pass-here", "123456789012");
+    expect(onSubmit).toHaveBeenCalledWith("old-pass-here", "Rv7mKt2p!x9w");
   });
 
   it("allows submission when new passphrase is 13 chars (above minimum)", async () => {
     const onSubmit = vi.fn().mockResolvedValue(undefined);
     render(<KeyRotationDialog {...makeProps(onSubmit)} />);
     typeInto("currentPassphrase", "old-pass-here");
-    typeInto("newPassphrase", "1234567890123"); // 13 chars
-    typeInto("confirmNewPassphrase", "1234567890123");
+    typeInto("newPassphrase", "Rv7mKt2p!x9wz"); // 13 chars
+    typeInto("confirmNewPassphrase", "Rv7mKt2p!x9wz");
     await act(async () => {
       fireEvent.click(screen.getByTestId("Common:SaveButton"));
     });
-    expect(onSubmit).toHaveBeenCalledWith("old-pass-here", "1234567890123");
+    expect(onSubmit).toHaveBeenCalledWith("old-pass-here", "Rv7mKt2p!x9wz");
   });
 
   it("enables submit button when all fields are valid (>=12 chars)", () => {
     render(<KeyRotationDialog {...makeProps()} />);
     typeInto("currentPassphrase", "old-current-pass");
-    typeInto("newPassphrase", "ValidPass1234"); // 13 chars, different from current
-    typeInto("confirmNewPassphrase", "ValidPass1234");
+    typeInto("newPassphrase", "ValidPass123!"); // 13 chars, different from current
+    typeInto("confirmNewPassphrase", "ValidPass123!");
     const btn = screen.getByTestId("Common:SaveButton") as HTMLButtonElement;
     expect(btn.disabled).toBe(false);
+  });
+
+  it("keeps Save disabled until the kit rules are met", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", "old-current-pass");
+    typeInto("newPassphrase", "Rv7mKt2pQx9w"); // not weak, no special character
+    typeInto("confirmNewPassphrase", "Rv7mKt2pQx9w");
+    const btn = screen.getByTestId("Common:SaveButton") as HTMLButtonElement;
+    expect(btn.disabled).toBe(true);
+  });
+
+  it("Passphrase change", async () => {
+    const onSubmit = vi.fn().mockResolvedValue(undefined);
+    render(<KeyRotationDialog {...makeProps(onSubmit)} />);
+    typeInto("currentPassphrase", "old-current-pass");
+    typeInto("newPassphrase", "Qwerty123456!"); // meets the kit rules, common pattern
+    typeInto("confirmNewPassphrase", "Qwerty123456!");
+
+    const newField = screen.getByTestId("newPassphrase");
+    expect(newField).toHaveAttribute("data-has-error", "true");
+    expect(newField.closest("[data-error-message]")).toHaveAttribute(
+      "data-error-message",
+      "Common:PassphraseCommonPattern",
+    );
+    const btn = screen.getByTestId("Common:SaveButton") as HTMLButtonElement;
+    expect(btn.disabled).toBe(true);
+    await act(async () => {
+      fireEvent.click(btn);
+    });
+    expect(onSubmit).not.toHaveBeenCalled();
   });
 });

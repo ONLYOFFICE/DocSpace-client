@@ -3,7 +3,7 @@
   "content": "Change the room owner",
   "content_en_sha1_hash": "5f42ce139e83e5ff11db6c8a0f00f2dda51b76df",
   "created_at": "2026-08-13T14:36:42.148Z",
-  "updated_at": "2026-08-17T17:23:21.737Z",
+  "updated_at": "2026-11-05T16:49:39.887Z",
   "comment": {
     "text": "Dialog title or panel header used when initiating the process of transferring room ownership.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 198,
-      "context": "const ownerIsCurrentUser = roomOwnerId === userId;\n \n const headerLabel = isAIAgent\n ? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Common:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\")\n : t(\"Common:PeopleSelectorInfo\");",
+      "line_number": 145,
+      "context": "const ownerIsCurrentUser = roomOwnerId === userId;\n \n const headerLabel = isAIProject\n ? t(\"Common:AIProjectChangeOwner\")\n : t(\"Common:ChangeTheRoomOwner\");\n \n const infoText = isAIProject\n ? t(\"Common:AIProjectChangeOwnerInfo\", { productName: getBrandName(\"ProductName\") })\n : t(\"Common:PeopleSelectorInfo\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/owner-change/PrivateChangeOwnerDialog.tsx",
-      "line_number": 162,
-      "context": "cancelled = true;\n controller.abort();\n };\n }, [roomId, baseExclude]);\n \n const headerLabel = t(\"Common:ChangeTheRoomOwner\");\n const infoText = t(\"Common:PrivateOwnerEncryptionHint\");\n \n const onSubmit: TOnSubmit = async (\n users,\n _access,",
+      "line_number": 108,
+      "context": "isPrivateRoom: true,\n roomId,\n userId: currentUserId,\n });\n \n const headerLabel = t(\"Common:ChangeTheRoomOwner\");\n const infoText = t(\"Common:PrivateOwnerEncryptionHint\");\n \n const onSubmit: TOnSubmit = async (\n users,\n _access,",
       "module": "/packages/sdk"
     },
     {

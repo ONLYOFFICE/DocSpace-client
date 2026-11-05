@@ -35,14 +35,16 @@
 
 import EmptyFilterLightSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg?url";
 import EmptyFilterDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.dark.svg?url";
-import EmptyFolderLightSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg?url";
-import EmptyFolderDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg?url";
+import SettingsSvg from "PUBLIC_DIR/images/settings.desc.react.svg";
 
 import { useState } from "react";
+import { Link } from "react-router";
+import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { ActionButton } from "@onlyoffice/apps-ui-kit/components/action-button";
 import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
 import { SearchInput } from "@onlyoffice/apps-ui-kit/components/search-input";
 import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
@@ -52,6 +54,8 @@ import type {
   TMetadataTemplate,
 } from "@docspace/shared/api/metadata/types";
 
+import { useStore } from "SRC_DIR/store/useStore";
+
 import { useAssignableTemplates } from "../../hooks/useAssignableTemplates";
 import { filterTemplatesByName } from "../../utils";
 import styles from "../Panel.module.scss";
@@ -59,7 +63,7 @@ import styles from "../Panel.module.scss";
 type TemplateListProps = {
   assigned: TEntryMetadataTemplate[];
   selected: TMetadataTemplate | null;
-  onSelect: (template: TMetadataTemplate) => void;
+  onSelect: (template: TMetadataTemplate | null) => void;
   onOpen: (template: TMetadataTemplate) => void;
 };
 
@@ -71,24 +75,57 @@ const TemplateList = ({
 }: TemplateListProps) => {
   const { t } = useTranslation(["Metadata", "Common"]);
   const { isBase } = useTheme();
-  const { templates, isLoading } = useAssignableTemplates(assigned);
+  const { user } = useStore("userStore");
+  const { templates, hasTemplates, isLoading } =
+    useAssignableTemplates(assigned);
   const [search, setSearch] = useState("");
 
   if (isLoading) return null;
 
   if (!templates.length) {
+    const isAdmin = !!(user?.isAdmin || user?.isOwner);
+
     return (
       <EmptyScreenContainer
         className={styles.emptyScreen}
-        imageSrc={isBase ? EmptyFolderLightSvgUrl : EmptyFolderDarkSvgUrl}
+        imageSrc={isBase ? EmptyFilterLightSvgUrl : EmptyFilterDarkSvgUrl}
         imageAlt=""
-        headerText={t("Metadata:NoTemplatesToAdd")}
-        descriptionText={t("Metadata:NoTemplatesToAddDescription")}
+        headerText={
+          hasTemplates
+            ? t("Metadata:AllTemplatesAdded")
+            : t("Metadata:NoTemplatesAvailable")
+        }
+        descriptionText={
+          isAdmin
+            ? t("Metadata:CreateTemplateInSettings")
+            : t("Metadata:AskAdminToCreateTemplate")
+        }
+        buttons={
+          isAdmin ? (
+            <ActionButton
+              as={Link}
+              icon={<SettingsSvg />}
+              label={t("Common:GoToSettings")}
+              to="/portal-settings/customization/metadata-templates"
+              data-testid="metadata_templates_settings_link"
+            />
+          ) : null
+        }
       />
     );
   }
 
   const foundTemplates = filterTemplatesByName(templates, search);
+
+  const changeSearch = (value: string) => {
+    setSearch(value);
+
+    const isSelectedFound = filterTemplatesByName(templates, value).some(
+      ({ id }) => id === selected?.id,
+    );
+
+    if (selected && !isSelectedFound) onSelect(null);
+  };
 
   return (
     <div className={styles.templateList}>
@@ -97,7 +134,7 @@ const TemplateList = ({
           size={InputSize.base}
           value={search}
           placeholder={t("Common:Search")}
-          onChange={setSearch}
+          onChange={changeSearch}
           onClearSearch={() => setSearch("")}
           scale
           dataTestId="metadata_template_search"
@@ -114,6 +151,12 @@ const TemplateList = ({
             })}
             onClick={() => onSelect(template)}
             onDoubleClick={() => onOpen(template)}
+            onKeyDown={(e) => {
+              if (e.key !== "Enter") return;
+
+              e.preventDefault();
+              onOpen(template);
+            }}
             data-testid={`metadata_template_item_${template.id}`}
           >
             <Text
@@ -150,4 +193,4 @@ const TemplateList = ({
   );
 };
 
-export default TemplateList;
+export default observer(TemplateList);

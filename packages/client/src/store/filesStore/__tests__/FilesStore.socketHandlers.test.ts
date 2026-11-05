@@ -35,7 +35,7 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import api from "@docspace/shared/api";
-import { FileType } from "@docspace/shared/enums";
+import { FileType, FolderType } from "@docspace/shared/enums";
 
 beforeEach(() => {
   (window as unknown as { DocSpace: unknown }).DocSpace = { navigate: vi.fn() };
@@ -129,7 +129,25 @@ describe("FilesStore.wsModifyFolderUpdate — characterization", () => {
       data: JSON.stringify({ id: 7 }),
     } as never);
 
-    expect(getFolderInfo).toHaveBeenCalledWith(7);
+    expect(getFolderInfo).toHaveBeenCalledWith(7, true);
+  });
+
+  it("Private room updated", async () => {
+    const store = createTestFilesStore();
+    store.getFilesContextOptions = (() => []) as never;
+    store.folders = [{ id: 1, title: "Kept" } as never] as never;
+    const getFolderInfo = vi
+      .spyOn(api.files, "getFolderInfo")
+      .mockRejectedValue(Object.assign(new Error("403"), { response: { status: 403 } }));
+
+    await store.wsModifyFolderUpdate({
+      type: "folder",
+      data: JSON.stringify({ id: 7 }),
+    } as never);
+    await Promise.resolve();
+
+    expect(getFolderInfo).toHaveBeenCalledWith(7, true);
+    expect(store.folders).toEqual([{ id: 1, title: "Kept" }]);
   });
 });
 
@@ -156,7 +174,7 @@ describe("FilesStore.wsChangeFolderAccessRights — characterization", () => {
       data: JSON.stringify({ "user-1": 1 }),
     } as never);
 
-    expect(getFolderInfo).toHaveBeenCalledWith(1);
+    expect(getFolderInfo).toHaveBeenCalledWith(1, false);
   });
 
   it("ignores changes for a folder that is not the current one", () => {
@@ -169,6 +187,52 @@ describe("FilesStore.wsChangeFolderAccessRights — characterization", () => {
     } as never);
 
     expect(getFolderInfo).not.toHaveBeenCalled();
+  });
+});
+
+describe("FilesStore.wsChangeAiAccessSettings", () => {
+  const setup = (rootFolderType: number) => {
+    const setAiServicesEnabled = vi.fn();
+    const fetchTreeFolders = vi.fn();
+    const store = createTestFilesStore({
+      settingsStore: { setAiServicesEnabled },
+      treeFoldersStore: { fetchTreeFolders },
+      selectedFolderStore: { rootFolderType },
+    });
+    return { store, setAiServicesEnabled, fetchTreeFolders };
+  };
+
+  it("turns the AI sections off, re-reads the tree and tells a user inside AI rooms why", async () => {
+    const { toastr } = await import("@onlyoffice/apps-ui-kit/components/toast");
+    const { store, setAiServicesEnabled, fetchTreeFolders } = setup(FolderType.AiHub);
+
+    store.wsChangeAiAccessSettings({ enabled: false });
+
+    expect(setAiServicesEnabled).toHaveBeenCalledWith(false);
+    expect(fetchTreeFolders).toHaveBeenCalledTimes(1);
+    expect(toastr.warning).toHaveBeenCalledTimes(1);
+  });
+
+  it("turns them back on silently, and ignores a payload without the flag", async () => {
+    const { toastr } = await import("@onlyoffice/apps-ui-kit/components/toast");
+    const { store, setAiServicesEnabled, fetchTreeFolders } = setup(FolderType.AiHub);
+
+    store.wsChangeAiAccessSettings({ enabled: true });
+    store.wsChangeAiAccessSettings({});
+
+    expect(setAiServicesEnabled).toHaveBeenCalledTimes(1);
+    expect(setAiServicesEnabled).toHaveBeenCalledWith(true);
+    expect(fetchTreeFolders).toHaveBeenCalledTimes(1);
+    expect(toastr.warning).not.toHaveBeenCalled();
+  });
+
+  it("shows no toast to a user outside AI rooms", async () => {
+    const { toastr } = await import("@onlyoffice/apps-ui-kit/components/toast");
+    const { store } = setup(FolderType.Rooms);
+
+    store.wsChangeAiAccessSettings({ enabled: false });
+
+    expect(toastr.warning).not.toHaveBeenCalled();
   });
 });
 

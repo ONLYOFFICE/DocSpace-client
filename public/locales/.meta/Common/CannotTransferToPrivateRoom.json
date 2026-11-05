@@ -3,7 +3,7 @@
   "content": "You can't move or copy items into a private room. Upload files directly to the room to keep them encrypted.",
   "content_en_sha1_hash": "291dbad0c890447f1a955d50dd6b3dfc9b69e5d6",
   "created_at": "2026-06-09T09:42:36.027Z",
-  "updated_at": "2026-10-22T16:09:36.824Z",
+  "updated_at": "2026-11-05T16:49:39.998Z",
   "comment": {
     "text": "Error toast message appearing when attempting to move or copy items from a non-private source into a private room.",
     "is_auto": true,
@@ -12,15 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 395,
-      "context": "const isPrivateDestination =\n (selectedTreeNode as unknown as { private?: boolean })?.private ===\n true || isInsidePrivateRoom === true;\n \n if (!sourceInPrivateRoom && isPrivateDestination) {\n toastr.error(t(\"Common:CannotTransferToPrivateRoom\"));\n setIsRequestRunning(false);\n return;\n }\n \n const fileIds: number[] = [];",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/store/filesActionsStore/copyMove.helpers.ts",
-      "line_number": 499,
-      "context": "destFolderInfo?.rootFolderType === FolderType.Rooms;\n const isPrivateDestination =\n destFolderInfo?.private === true || isDestInsideSameRoom;\n \n if (isPrivateDestination && !sourceInPrivateRoom) {\n toastr.error(i18n.t(\"Common:CannotTransferToPrivateRoom\"));\n return;\n }\n \n if (!isPrivateDestination && sourceInPrivateRoom) {\n const { bufferSelection: dragBufferSelection } = self.filesStore;",
+      "line_number": 212,
+      "context": "switch (plan.kind) {\n case \"generic\":\n case \"same-room\":\n return false;\n case \"refuse-into\":\n toastr.error(i18n.t(\"Common:CannotTransferToPrivateRoom\"));\n return true;\n case \"refuse-folder-out\":\n toastr.error(i18n.t(\"Common:CannotTransferFolderFromPrivateRoom\"));\n return true;\n case \"refuse-move-into\":",
       "module": "/packages/client"
     },
     {
@@ -33,6 +27,12 @@
       "file_path": "/packages/sdk/src/app/(docspace)/_utils/drag-drop-boundaries.ts",
       "line_number": 83,
       "context": "export type DragDropDecision =\n /** Case 1: non-private source → private destination → hard block. */\n | {\n kind: \"block-private-dest\";\n toastKey: \"Common:CannotTransferToPrivateRoom\";\n }\n /** Case 2: private source → non-private destination → folder error + files may proceed. */\n | {\n kind: \"partial-private-source\";\n toastKey: \"Common:CannotTransferFolderFromPrivateRoom\";",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useFileOperations.ts",
+      "line_number": 463,
+      "context": "}\n : null,\n });\n \n if (plan.kind === \"refuse-into\") {\n toastr.error(t(\"Common:CannotTransferToPrivateRoom\"));\n serverItems = [];\n } else if (plan.kind === \"refuse-folder-out\") {\n toastr.error(t(\"Common:CannotTransferFolderFromPrivateRoom\"));\n serverItems = [];\n } else if (plan.kind === \"refuse-move-into\") {",
       "module": "/packages/sdk"
     }
   ],

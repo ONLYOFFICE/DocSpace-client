@@ -3,7 +3,7 @@
   "content": "Watermark for files in the room enabled",
   "content_en_sha1_hash": "9506b337eecb9b7c7c5901282ebc888da3503049",
   "created_at": "2025-05-19T21:30:54.957Z",
-  "updated_at": "2026-08-17T17:23:21.766Z",
+  "updated_at": "2026-10-31T12:58:29.166Z",
   "comment": {
     "text": "This is a toast message indicating that watermarks have been enabled for files within a specific room.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 381,
+      "line_number": 338,
       "context": "case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"Common:RoomUpdateAccess\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"Common:RoomGroupRemove\");\n case FeedActionKeys.RoomWatermarkSet:\n return t(\"Common:RoomWatermarkSet\");\n case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"Common:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"Common:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 298,
+      "line_number": 260,
       "context": "case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"Common:RoomUpdateAccess\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"Common:RoomGroupRemove\");\n case FeedActionKeys.RoomWatermarkSet:\n return t(\"Common:RoomWatermarkSet\");\n case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"Common:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"Common:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:",
       "module": "/packages/client"
     },

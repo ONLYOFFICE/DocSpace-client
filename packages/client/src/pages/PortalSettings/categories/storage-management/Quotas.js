@@ -47,19 +47,13 @@ import styles from "./StyledComponent.module.scss";
 import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
 import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
-import { QuotaPerAIAgentComponentSection } from "./sub-components/QuotaPerAIAgent";
 
-const QuotaPerItemsComponent = ({
-  isStatisticsAvailable,
-  showRoomQuota,
-  showAIAgentQuota,
-}) => {
+const QuotaPerItemsComponent = ({ isStatisticsAvailable, showRoomQuota }) => {
   if (isMobile())
     return (
       <MobileQuotasComponent
         isDisabled={!isStatisticsAvailable}
         showRoomQuota={showRoomQuota}
-        showAIAgentQuota={showAIAgentQuota}
       />
     );
 
@@ -67,7 +61,6 @@ const QuotaPerItemsComponent = ({
     <>
       {showRoomQuota ? <QuotaPerRoomComponentSection /> : null}
       <QuotaPerUserComponentSection />
-      {showAIAgentQuota ? <QuotaPerAIAgentComponentSection /> : null}
     </>
   );
 };
@@ -76,18 +69,12 @@ const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
   const { isBase } = useTheme();
 
-  const {
-    isStatisticsAvailable,
-    storageManagementUrl,
-    aiServicesEnabled,
-    isAppInstalled,
-  } = props;
+  const { isStatisticsAvailable, storageManagementUrl, isAppInstalled } = props;
 
   // A quota for a section switched off in Settings -> Apps has nothing to
   // apply to. Read during render so the observer re-renders once the apps
   // list arrives.
   const showRoomQuota = isAppInstalled("ai-rooms");
-  const showAIAgentQuota = aiServicesEnabled && isAppInstalled("ai-agents");
 
   return (
     <div className={styles.baseQuotaComponent}>
@@ -128,7 +115,6 @@ const QuotasComponent = (props) => {
       <QuotaPerItemsComponent
         isStatisticsAvailable={isStatisticsAvailable}
         showRoomQuota={showRoomQuota}
-        showAIAgentQuota={showAIAgentQuota}
       />
     </div>
   );
@@ -136,12 +122,11 @@ const QuotasComponent = (props) => {
 
 export default inject(({ currentQuotaStore, settingsStore, appsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
-  const { storageManagementUrl, aiServicesEnabled } = settingsStore;
+  const { storageManagementUrl } = settingsStore;
 
   return {
     isStatisticsAvailable,
     storageManagementUrl,
-    aiServicesEnabled,
     isAppInstalled: appsStore.isInstalled,
   };
 })(observer(QuotasComponent));

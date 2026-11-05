@@ -3,7 +3,7 @@
   "content": "What's deleted",
   "content_en_sha1_hash": "955d906e5a3f0e9b633f0ee33f9f04bf0c500983",
   "created_at": "2026-08-04T09:58:55.182Z",
-  "updated_at": "2026-08-05T17:18:50.653Z",
+  "updated_at": "2026-10-31T12:58:29.081Z",
   "comment": {
     "text": "Label for an AI suggestion category that introduces information regarding items located in the forms trash.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 783,
+      "line_number": 723,
       "context": "],\n \n // +\n formsTrash: [\n {\n name: t(\"AiSuggestions:FormsTrashWhatSDeleted\"),\n prompt: t(\"AiSuggestions:FormsTrashWhatSDeletedPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTrashFindADeletedForm\"),",
       "module": "/packages/client"
     }

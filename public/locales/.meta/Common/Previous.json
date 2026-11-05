@@ -3,7 +3,7 @@
   "content": "Previous",
   "content_en_sha1_hash": "50f94286ba30706a19070d3ec0a0c8d34d6cf6eb",
   "created_at": "2025-05-19T21:30:47.476Z",
-  "updated_at": "2026-10-22T16:09:36.888Z",
+  "updated_at": "2026-11-05T16:49:39.908Z",
   "comment": {
     "text": "Button label. Navigates to the previous page in a paginated list of items, such as user accounts.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 366,
+      "line_number": 362,
       "context": "/>\n ) : null}\n <QuickActions\n items={createItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n </section>\n \n {moduleItems.length > 0 ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/index.js",
-      "line_number": 760,
+      "line_number": 756,
       "context": "items={quickActions.items}\n className={styles.quickActions}\n isLoading={showFilterLoader}\n onClose={onHideQuickActions}\n closeLabel={t(\"Common:DisableQuickActionsOnAllPages\")}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n dataTestId=\"quick-actions\"\n />\n </Section.SectionBanner>\n ) : null}",
       "module": "/packages/client"
     },
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 616,
+      "line_number": 632,
       "context": "className={styles.createNewSection}\n >\n <QuickActions\n items={quickActionItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n </div>\n ) : undefined\n }",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-layout/index.tsx",
-      "line_number": 325,
+      "line_number": 321,
       "context": "sectionBannerContent={\n !isArchive && canCreateRooms ? (\n <QuickActions\n items={quickActionItems}\n className={styles.quickActions}\n prevLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n />\n ) : undefined\n }\n sectionFilterContent={",
       "module": "/packages/sdk"
     }

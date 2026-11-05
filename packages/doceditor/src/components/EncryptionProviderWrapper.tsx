@@ -42,10 +42,7 @@ import {
   EncryptionProvider,
   type PassphraseDialogProps,
 } from "@docspace/shared/context/encryption";
-import {
-  getActiveKeyId,
-  selectActiveKey,
-} from "@docspace/shared/services/encryption/active-key-preference";
+import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import type { TUser } from "@docspace/shared/api/people/types";
@@ -173,7 +170,7 @@ const EncryptionProviderWrapper = ({
     };
   }, [userId]);
 
-  const chosen = selectActiveKey(keys, getActiveKeyId(userId));
+  const chosen = selectUserKey(keys);
 
   const userKeys =
     chosen && userId

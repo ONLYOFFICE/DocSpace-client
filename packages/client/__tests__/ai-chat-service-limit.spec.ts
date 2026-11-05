@@ -47,24 +47,28 @@ import {
   aiChatServiceLimitExceededEvent,
   rootHandler,
   filesSettingsHandler,
-  agentFolderChatHandler,
+  roomListHandler,
+  TypeRoomList,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 /**
- * The chat error box when a round is refused by an AI spending limit, in an
- * agent room's AI Chat tab.
+ * A round refused by an AI spending limit, in the AI Chat panel opened from
+ * the rooms list header.
  *
- * The AI gateway relays the accounting service's 403 inside the stream, the
- * chat library turns it into a generic "auth" error, and Shell's
- * formatChatError swaps that for a message naming when the limit resets. Only
- * admins can change the limit, so they get a button to AI settings -> Limits;
- * everyone else is pointed to the Full admin and gets no button at all (a
- * Retry would only hit the same limit again).
+ * The AI gateway relays the accounting service's 403 inside the stream and
+ * the chat library turns it into a generic "auth" error. The answer keeps a
+ * past-tense note (Shell's formatChatError), and the state goes to the
+ * notice above the composer (useAiChatNotice), which names when the limit
+ * resets and leaves sending open: the limit also resets with its period, and
+ * nothing tells a regular user about it. Only admins can change the limit,
+ * so the notice gives them a button to AI settings -> Limits; everyone else
+ * is pointed to the Full admin. The limit comes as an "auth" error, which
+ * the library never offers to retry.
  */
 
-/** `folder=2` scopes the section to the mock agent room (agentFolderChatHandler). */
-const AGENT_CHAT_URL = "/ai-agents/2/chat?folder=2";
+/** The rooms list (roomListHandler); its header carries the AI Chat button. */
+const ROOMS_URL = "/rooms/shared/";
 const LIMITS_URL = "/portal-settings/ai-settings/limits";
 const DESKTOP = { width: 1440, height: 1024 };
 
@@ -78,25 +82,40 @@ const OWNER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 const REGULAR_USER_ID = "regular-user-id";
 
 const errorBox = (page: Page) => page.getByTestId("chat-error");
+const notice = (page: Page) => page.getByTestId("composer-notice");
 
 /**
- * The agent has no model of its own, which raises the "Model updated" notice
- * over the picker; it has nothing to do with the limit, so it is marked as
- * already dismissed for the account (ModelUpdatedBanner's per-account flag).
+ * A chat without a remembered model raises the "Model updated" notice over the
+ * picker; it has nothing to do with the limit, so it is marked as already
+ * dismissed for the account (ModelUpdatedBanner's per-account flag).
  */
 const dismissModelUpdatedNotice = (page: Page, userId: string) =>
   page.addInitScript((key) => {
     window.localStorage.setItem(key, "true");
   }, `ai_chat_model_updated_bar_dismissed_${userId}`);
 
-const openAgentChatAndSend = async (page: Page, baseUrl: string) => {
+/** Opens the rooms list, docks the AI Chat panel from the header and sends. */
+const openChatAndSend = async (page: Page, baseUrl: string) => {
   await page.setViewportSize(DESKTOP);
-  await page.goto(`${baseUrl}${AGENT_CHAT_URL}`);
+  await page.goto(`${baseUrl}${ROOMS_URL}`);
 
-  await page.getByTestId("composer-input").fill("Summarize this room");
+  await page.getByTestId("ai-chat-button").click();
+  await expect(page.getByTestId("ai-chat-slot")).toHaveAttribute(
+    "data-open",
+    "true",
+  );
+
+  await page.getByTestId("composer-input").fill("Summarize my rooms");
   await page.getByTestId("send-button").click();
 
   await expect(errorBox(page)).toBeVisible();
+  await expect(notice(page)).toBeVisible();
+};
+
+/** The notice does not hold the composer: a new message can be sent. */
+const expectSendingOpen = async (page: Page) => {
+  await page.getByTestId("composer-input").fill("Try again");
+  await expect(page.getByTestId("send-button")).toBeEnabled();
 };
 
 /**
@@ -125,7 +144,7 @@ const waitToSettle = async (page: Page, locator: Locator) => {
   }
 };
 
-/** The whole desktop window: navigation, the agent room and its chat. */
+/** The whole desktop window: navigation, the rooms list and the chat panel. */
 const shootDesktop = async (page: Page, name: string) => {
   await waitToSettle(page, errorBox(page));
   await expectScreenshot(page, ["desktop", "ai-chat-service-limit", name]);
@@ -143,7 +162,7 @@ test.describe("AI chat: spending limit reached", () => {
       settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       aiConfigHandler(TEST_PORT),
-      agentFolderChatHandler(TEST_PORT),
+      roomListHandler(TEST_PORT, TypeRoomList.ContextMenu),
       ...aiChatStoreHandlers(TEST_PORT),
       aiChatSendWithStreamHandler(TEST_PORT, [
         aiChatServiceLimitExceededEvent(RESET_AT),
@@ -159,22 +178,29 @@ test.describe("AI chat: spending limit reached", () => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "owner", "en-US"));
     await dismissModelUpdatedNotice(page, OWNER_ID);
 
-    await openAgentChatAndSend(page, baseUrl);
+    await openChatAndSend(page, baseUrl);
 
     await expect(page.getByTestId("chat-error-title")).toHaveText(
+      "Response interrupted: the AI spending limit was reached",
+    );
+    // No Retry for an "auth" error.
+    await expect(errorBox(page).getByRole("button")).toHaveCount(0);
+
+    await expect(page.getByTestId("composer-notice-title")).toHaveText(
       "AI spending limit reached",
     );
-    await expect(page.getByTestId("chat-error-description")).toHaveText(
+    await expect(page.getByTestId("composer-notice-description")).toHaveText(
       `AI requests are paused until ${RESET_AT_SHOWN}. Raise the limit in the AI settings to continue now.`,
     );
-
-    // The host's Button drops the library's data-testid, so the box's buttons
-    // are found by role: the override replaces Retry rather than adding to it.
-    const action = errorBox(page).getByRole("button");
+    // The host's Button drops the library's data-testid, so the notice's
+    // button is found by role.
+    const action = notice(page).getByRole("button");
     await expect(action).toHaveCount(1);
     await expect(action).toHaveText("Change AI limit");
 
     await shootDesktop(page, "admin-change-limit.png");
+
+    await expectSendingOpen(page);
 
     await action.click();
     await expect(page).toHaveURL(new RegExp(`${LIMITS_URL}$`));
@@ -188,17 +214,23 @@ test.describe("AI chat: spending limit reached", () => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "regular", "en-US"));
     await dismissModelUpdatedNotice(page, REGULAR_USER_ID);
 
-    await openAgentChatAndSend(page, baseUrl);
+    await openChatAndSend(page, baseUrl);
 
     await expect(page.getByTestId("chat-error-title")).toHaveText(
-      "AI spending limit reached",
+      "Response interrupted: the AI spending limit was reached",
     );
-    await expect(page.getByTestId("chat-error-description")).toHaveText(
-      `AI requests are paused until ${RESET_AT_SHOWN}. Contact the Full admin to raise the limit.`,
-    );
-
     await expect(errorBox(page).getByRole("button")).toHaveCount(0);
 
+    await expect(page.getByTestId("composer-notice-title")).toHaveText(
+      "AI spending limit reached",
+    );
+    await expect(page.getByTestId("composer-notice-description")).toHaveText(
+      `AI requests are paused until ${RESET_AT_SHOWN}. Contact the Full admin to raise the limit.`,
+    );
+    await expect(notice(page).getByRole("button")).toHaveCount(0);
+
     await shootDesktop(page, "user-contact-admin.png");
+
+    await expectSendingOpen(page);
   });
 });

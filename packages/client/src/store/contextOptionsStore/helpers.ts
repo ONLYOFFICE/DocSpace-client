@@ -98,9 +98,9 @@ export type TContextItem = {
   canOpenPlayer?: boolean;
   locked?: boolean;
   encrypted?: boolean;
+  private?: boolean;
   isFolder?: boolean;
   isRoom?: boolean;
-  isAIAgent?: boolean;
   isTemplate?: boolean;
   isEdit?: boolean;
   isEditing?: boolean;
@@ -112,8 +112,6 @@ export type TContextItem = {
   customFilterEnabled?: boolean;
   customFilterEnabledBy?: string;
   indexing?: boolean;
-  isInsideKnowledge?: boolean;
-  isInsideResultStorage?: boolean;
   sendFormToExternalDB?: boolean;
 };
 
@@ -154,6 +152,10 @@ type TCreateEventPayload = {
   openEditor?: boolean;
   edit?: boolean;
   isFormsCreate?: boolean;
+  /** The "AI rooms" section's chooser: Instructions, Knowledge, AI project. */
+  isAiRoomsCreate?: boolean;
+  /** "New project" in the "AI Projects" section: the project form, no chooser. */
+  isAiProjectCreate?: boolean;
   // ROOM_CREATE only: opens the create-room dialog on this preset type and
   // locks the type chooser (read by GlobalEvents / CreateRoomEvent).
   startRoomType?: RoomsType;
@@ -233,14 +235,6 @@ export const onClickEditRoom = (item: TContextItem) => {
   window.dispatchEvent(event);
 };
 
-export const onClickEditAgent = (item: TContextItem) => {
-  const event: TStoreCustomEvent = new CustomEvent(Events.AGENT_EDIT, {
-    detail: { context: "context_menu" },
-  });
-  event.item = item;
-  window.dispatchEvent(event);
-};
-
 export const onEditRoomTemplate = (
   item: TContextItem,
   cb?: (room: TRoom) => void,
@@ -273,6 +267,39 @@ export function placePlugins(
   });
   return newResult;
 }
+
+const ROOM_EXIT_KEYS = [
+  "remove-shared-room",
+  "leave-room",
+  "archive-room",
+  "unarchive-room",
+  "delete",
+];
+
+export const layoutRoomOptions = (
+  options: TContextOption[],
+  customActions: TContextOption[],
+): TContextOption[] => {
+  const isExitOption = (option: TContextOption) =>
+    ROOM_EXIT_KEYS.includes(option.key);
+
+  const mainOptions = options.filter(
+    (option) =>
+      !option.disabled &&
+      !isExitOption(option) &&
+      option.key !== "more-options",
+  );
+  while (mainOptions[mainOptions.length - 1]?.isSeparator) mainOptions.pop();
+
+  return [
+    ...mainOptions,
+    ...options.filter((option) => option.key === "more-options"),
+    { key: "separator-custom-actions", isSeparator: true },
+    ...customActions,
+    { key: "separator-after-custom-actions", isSeparator: true },
+    ...options.filter(isExitOption),
+  ];
+};
 
 export const onShowEditingToast = (t: TTranslation) => {
   toastr.error(t("Files:DocumentEdited"));

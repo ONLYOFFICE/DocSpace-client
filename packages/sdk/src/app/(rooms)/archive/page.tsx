@@ -71,6 +71,7 @@ import { getRooms } from "@/api/rooms";
 import { getSettings } from "@/api/settings";
 import { getSelf } from "@/api/people";
 import { PAGE_COUNT } from "@/utils/constants";
+import { scopeRoomsRequest } from "@/utils/roomsRequestScope";
 
 import ArchivePage from "./page.client";
 
@@ -141,7 +142,7 @@ export default async function Archive({
   try {
     [filesSettings, roomsData, portalSettings, user] = await Promise.all([
       getFilesSettings(),
-      getRooms(filter),
+      getRooms(scopeRoomsRequest(filter, { isArchive: true })),
       getSettings(),
       getSelf(),
     ]);

@@ -1352,6 +1352,35 @@ export const myHandler = (port: string, isList?: boolean) => {
   });
 };
 
+export const myDocumentsManyFilesHandler = (port: string, count: number) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_MY_DOCUMENTS}`,
+    ({ params }) => {
+      if (params.id === "@root") return;
+
+      const [template] = myDocumentsFiles.response.files;
+      const files = Array.from({ length: count }, (_, i) => ({
+        ...template,
+        id: 5000 + i,
+        title: `Tile ${i + 1}`,
+      }));
+
+      return new Response(
+        JSON.stringify({
+          ...myDocumentsFiles,
+          response: {
+            ...myDocumentsFiles.response,
+            folders: [],
+            files,
+            count,
+            total: count,
+          },
+        }),
+      );
+    },
+  );
+};
+
 export const getFileInfoResolver = (): Response => {
   return new Response(JSON.stringify(fileInfo));
 };

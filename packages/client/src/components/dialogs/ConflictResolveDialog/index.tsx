@@ -98,6 +98,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     createDefineRoomType,
     destFolderInfo,
     toFillOut,
+    privateRenames,
   } = conflictResolveDialogData;
 
   const onClose = () => {
@@ -251,6 +252,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
         data,
         t,
         conflictResolveType === ConflictResolveType.Duplicate,
+        privateRenames,
       );
     } catch (error) {
       const message = (error as { message: string }).message
@@ -355,6 +357,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
       submitButtonLabel={t("OKButton")}
       messageText={messageText}
       selectActionText={t("Common:ConflictResolveSelectAction")}
+      withOverwrite={!privateRenames}
       overwriteTitle={overwriteTitle}
       overwriteDescription={overwriteDescription}
       duplicateTitle={duplicateTitle}

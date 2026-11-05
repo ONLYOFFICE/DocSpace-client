@@ -3,7 +3,7 @@
   "content": "You can't move the folder to its subfolder",
   "content_en_sha1_hash": "506393764de44f23f65ce73e264a120055299986",
   "created_at": "2025-05-19T21:30:46.641Z",
-  "updated_at": "2026-10-22T16:09:36.823Z",
+  "updated_at": "2026-11-05T16:49:39.824Z",
   "comment": {
     "text": "This is an error toast message that appears when a user attempts to move a folder into one of its own subfolders, which is an invalid operation.",
     "is_auto": true,
@@ -13,21 +13,27 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 347,
-      "context": "(\"contentLength\" in item && item.contentLength)\n ) {\n if ((item as TFile).encrypted) continue;\n regularFileIds.push(item.id);\n } else if (item.id === selectedItemId) {\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n } else {\n folderIds.push(item.id);\n }\n }",
+      "line_number": 369,
+      "context": "return;\n }\n \n if (transfer.kind === \"encrypted\") {\n if (transfer.movesIntoItself) {\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n }\n if (transfer.refusedFolders) {\n toastr.error(t(\"Common:CannotTransferFolderFromPrivateRoom\"));\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 347,
-      "context": "(\"contentLength\" in item && item.contentLength)\n ) {\n if ((item as TFile).encrypted) continue;\n regularFileIds.push(item.id);\n } else if (item.id === selectedItemId) {\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n } else {\n folderIds.push(item.id);\n }\n }",
+      "line_number": 369,
+      "context": "return;\n }\n \n if (transfer.kind === \"encrypted\") {\n if (transfer.movesIntoItself) {\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n }\n if (transfer.refusedFolders) {\n toastr.error(t(\"Common:CannotTransferFolderFromPrivateRoom\"));\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/HotkeyStore.ts",
-      "line_number": 785,
-      "context": "const fileInAction = activeFiles.includes(item.id);\n if (!fileInAction) {\n fileIds.push(item.id);\n }\n } else if (item.id === selectedItemId) {\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n } else {\n const folderInAction = activeFolders.includes(item.id);\n \n if (!folderInAction) {\n folderIds.push(item.id);",
+      "line_number": 914,
+      "context": "if (!fileInAction) {\n fileIds.push(item.id);\n }\n } else if (item.id === selectedItemId) {\n isPastedIntoItself = true;\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n } else if (item.parentId === selectedItemId) {\n isPastedIntoSameFolder = true;\n } else {\n const folderInAction = activeFolders.includes(item.id);",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useFileOperations.ts",
+      "line_number": 481,
+      "context": "isCopy: !isMove,\n isMove,\n });\n if (transfer.kind === \"encrypted\") {\n if (transfer.movesIntoItself) {\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n }\n if (transfer.refusedFolders) {\n toastr.error(t(\"Common:CannotTransferFolderFromPrivateRoom\"));\n }\n serverItems = pendingItems.filter((i) =>",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

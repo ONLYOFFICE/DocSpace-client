@@ -49,10 +49,14 @@ import {
   isFieldNameTaken,
   isNameFreedOnSave,
   isRowControlClick,
+  isTemplateNameReserved,
+  isTemplateNameTaken,
   isValidField,
+  leavesTemplateEmpty,
   moveItem,
   removeOption,
   settleInOrder,
+  splitCreatedFields,
   settleRequests,
   toMoveIndex,
   setFieldType,
@@ -233,6 +237,34 @@ describe("settleRequests", () => {
     expect(onApplied).toHaveBeenCalledTimes(1);
     await settleRequests([], onApplied);
     expect(onApplied).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("splitCreatedFields", () => {
+  it("creates a field whose name is free before the removals, so the template is never left without fields", () => {
+    const created = [
+      { name: "Amount", type: MetadataFieldType.Number, order: 0 },
+      { name: " court ", type: MetadataFieldType.String, order: 1 },
+    ];
+
+    expect(splitCreatedFields(created, template)).toEqual({
+      beforeRemoval: [created[0]],
+      afterRemoval: [created[1]],
+    });
+  });
+});
+
+describe("leavesTemplateEmpty", () => {
+  const ids = (template.fields ?? []).map(({ id }) => id);
+  const amount = { name: "Amount", type: MetadataFieldType.Number };
+
+  it("tells when the removals would take the template's last field", () => {
+    expect(leavesTemplateEmpty(template, ids, [])).toBe(true);
+  });
+
+  it("is satisfied by a kept field or by a field created first", () => {
+    expect(leavesTemplateEmpty(template, ids.slice(1), [])).toBe(false);
+    expect(leavesTemplateEmpty(template, ids, [amount])).toBe(false);
   });
 });
 
@@ -429,6 +461,39 @@ describe("isFieldNameTaken", () => {
     expect(
       isFieldNameTaken(fields, { ...createFieldForm("a"), name: "Court" }),
     ).toBe(false);
+  });
+});
+
+describe("isTemplateNameTaken", () => {
+  const templates = [
+    { id: 1, name: "Contract" },
+    { id: 2, name: "Invoice" },
+  ] as TMetadataTemplate[];
+
+  it("rejects a name another template already has, ignoring case", () => {
+    expect(isTemplateNameTaken(templates, " contract ")).toBe(true);
+    expect(isTemplateNameTaken(templates, "Invoice", 1)).toBe(true);
+    expect(isTemplateNameTaken(templates, "Report")).toBe(false);
+  });
+
+  it("lets a template keep its own name", () => {
+    expect(isTemplateNameTaken(templates, "CONTRACT", 1)).toBe(false);
+  });
+
+  it("does not flag an empty name", () => {
+    expect(isTemplateNameTaken(templates, "  ")).toBe(false);
+  });
+});
+
+describe("isTemplateNameReserved", () => {
+  it("holds back the name of the custom fields template, ignoring case", () => {
+    expect(isTemplateNameReserved(" system ")).toBe(true);
+    expect(isTemplateNameTaken([], "System")).toBe(false);
+  });
+
+  it("leaves other names free", () => {
+    expect(isTemplateNameReserved("Systems")).toBe(false);
+    expect(isTemplateNameReserved("")).toBe(false);
   });
 });
 

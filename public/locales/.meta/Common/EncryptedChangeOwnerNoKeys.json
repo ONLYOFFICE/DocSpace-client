@@ -3,7 +3,7 @@
   "content": "Cannot transfer ownership to {{user}}: they have not set up encryption keys yet. Ask them to generate keys in their profile, then try again.",
   "content_en_sha1_hash": "2750bb2b31c5f5f6992f460841b362691a3056a1",
   "created_at": "2026-05-24T17:27:26.269Z",
-  "updated_at": "2026-08-17T17:23:21.737Z",
+  "updated_at": "2026-11-05T16:49:40.036Z",
   "comment": {
     "text": "Error toast message shown when room ownership transfer fails because the recipient has not configured encryption keys. The {{user}} variable represents the name of the target user.",
     "is_auto": true,
@@ -12,16 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 119,
-      "context": "candidate.label ||\n candidate.displayName ||\n candidate.id;\n toastr.error(\n reason === \"no-key\"\n ? t(\"Common:EncryptedChangeOwnerNoKeys\", { user: name })\n : t(\"Common:EncryptedChangeOwnerKeyMismatch\", { user: name }),\n );\n return;\n }\n }",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(private)/_components/owner-change/PrivateChangeOwnerDialog.tsx",
-      "line_number": 196,
-      "context": "entry?.displayName ||\n candidate.displayName ||\n newOwnerId;\n toastr.error(\n reason === \"no-key\"\n ? t(\"Common:EncryptedChangeOwnerNoKeys\", { user: name })\n : t(\"Common:EncryptedChangeOwnerKeyMismatch\", {\n user: name,\n }),\n );\n return;",
-      "module": "/packages/sdk"
+      "file_path": "/packages/shared/services/private-room/room-member-flows.ts",
+      "line_number": 566,
+      "context": "skipped[0].displayName ||\n candidate.label ||\n candidate.displayName ||\n candidate.id;\n return reason === \"no-key\"\n ? t(\"Common:EncryptedChangeOwnerNoKeys\", { user: name })\n : t(\"Common:EncryptedChangeOwnerKeyMismatch\", { user: name });\n }\n \n /**\n * Wraps for the candidate owner of a private room the encrypted files the",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

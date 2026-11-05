@@ -3,7 +3,7 @@
   "content": "Don't trust",
   "content_en_sha1_hash": "86150c586e52ca66d3aa06d55e2001f68a85a367",
   "created_at": "2026-05-24T17:27:30.400Z",
-  "updated_at": "2026-05-24T17:48:52.592Z",
+  "updated_at": "2026-11-05T16:49:40.022Z",
   "comment": {
     "text": "Button label used to decline a key change request in the Key Change Dialog.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx",
-      "line_number": 216,
-      "context": "<Button\n scale\n key=\"RefuseButton\"\n onClick={onRefuse}\n size={ButtonSize.normal}\n label={t(\"Common:KeyChangedRefuse\")}\n tabIndex={1}\n />\n <Button\n scale\n primary",
+      "line_number": 221,
+      "context": "<Button\n scale\n key=\"RefuseButton\"\n onClick={onRefuse}\n size={ButtonSize.normal}\n label={t(\"Common:KeyChangedRefuse\")}\n />\n <Button\n scale\n primary\n key=\"AcceptButton\"",
       "module": "/packages/shared"
     }
   ],

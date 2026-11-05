@@ -33,28 +33,23 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
-import {
-  EmployeeType,
-  EmployeeStatus,
-  MembersSubjectType,
-  RoomsType,
-} from "@docspace/shared/enums";
-import { getUserList } from "@docspace/shared/api/people";
-import { getRoomMembers } from "@docspace/shared/api/rooms";
+import { EmployeeType, EmployeeStatus, RoomsType } from "@docspace/shared/enums";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { validateMembersForEncryption } from "@docspace/shared/services/private-room/room-encryption";
+import { getNewOwnerKeyRefusal } from "@docspace/shared/services/private-room/room-member-flows";
+import { usePrivateRoomOwnerExclusions } from "@docspace/shared/hooks/usePrivateRoomOwnerExclusions";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ChangeRoomOwner = (props) => {
   const {
@@ -68,7 +63,8 @@ const ChangeRoomOwner = (props) => {
     changeRoomOwner,
     userId,
     useModal = true,
-    isAIAgent,
+    isAIProject,
+    changeAiProjectOwner,
     isFormSpace,
     updateInfoPanelMembers,
     roomId,
@@ -93,38 +89,35 @@ const ChangeRoomOwner = (props) => {
       return;
     }
 
+    // Spec: room-membership, "New owner must hold a verified key"
+    if (isPrivateRoom && roomId) {
+      const refusal = await getNewOwnerKeyRefusal(
+        t,
+        roomId,
+        candidate,
+        String(userId),
+      );
+      if (refusal) {
+        toastr.error(refusal);
+        return;
+      }
+    }
+
     if (showBackButton) {
       onOwnerChange && onOwnerChange(candidate);
       handleClosePanel();
       return;
     }
 
-    if (isPrivateRoom && roomId) {
-      const { skipped } = await validateMembersForEncryption(
-        Number(roomId),
-        [candidate.id],
-        String(userId),
-        undefined,
-        { [candidate.id]: candidate.label || candidate.displayName },
-      );
-      if (skipped.length > 0) {
-        const reason = skipped[0].reason;
-        const name =
-          skipped[0].displayName ||
-          candidate.label ||
-          candidate.displayName ||
-          candidate.id;
-        toastr.error(
-          reason === "no-key"
-            ? t("Common:EncryptedChangeOwnerNoKeys", { user: name })
-            : t("Common:EncryptedChangeOwnerKeyMismatch", { user: name }),
-        );
-        return;
-      }
+    if (isAIProject) {
+      // The checkbox reads "leave the project": unchecked keeps the former
+      // owner in it as a project manager.
+      await changeAiProjectOwner(candidate.id, !isChecked);
+      updateInfoPanelMembers();
+    } else {
+      await changeRoomOwner(t, candidate.id, isChecked);
+      updateInfoPanelMembers();
     }
-
-    await changeRoomOwner(t, candidate.id, isChecked);
-    updateInfoPanelMembers();
     handleClosePanel();
   };
 
@@ -139,70 +132,24 @@ const ChangeRoomOwner = (props) => {
     return newFilter;
   }, []);
 
-  const baseExclude = useMemo(
-    () => (isPrivateRoom && userId ? [userId] : []),
-    [isPrivateRoom, userId],
-  );
-
-  const [excludeItems, setExcludeItems] = useState(baseExclude);
-  const [excludeReady, setExcludeReady] = useState(!isPrivateRoom);
-
-  useEffect(() => {
-    setExcludeItems(baseExclude);
-    setExcludeReady(!isPrivateRoom);
-
-    if (!isPrivateRoom || !roomId) return undefined;
-
-    const controller = new AbortController();
-    let cancelled = false;
-
-    const adminsFilter = Filter.getDefault();
-    adminsFilter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
-    adminsFilter.employeeStatus = EmployeeStatus.Active;
-    adminsFilter.pageCount = 100;
-
-    Promise.all([
-      getRoomMembers(roomId, { count: 100 }, controller.signal),
-      getUserList(adminsFilter, controller.signal),
-    ])
-      .then(([members, admins]) => {
-        if (cancelled) return;
-        const memberIds = new Set(
-          (members?.items ?? [])
-            .filter((m) => m?.subjectType === MembersSubjectType.User)
-            .map((m) => m?.sharedTo?.id)
-            .filter(Boolean),
-        );
-        const nonMemberAdmins = (admins?.items ?? [])
-          .map((a) => a.id)
-          .filter((id) => id && !memberIds.has(id));
-        const merged = new Set([...baseExclude, ...nonMemberAdmins]);
-        setExcludeItems([...merged]);
-        setExcludeReady(true);
-      })
-      .catch(() => {
-        if (cancelled) return;
-        setExcludeReady(true);
-      });
-
-    return () => {
-      cancelled = true;
-      controller.abort();
-    };
-  }, [isPrivateRoom, roomId, baseExclude]);
+  const { excludeItems, excludeReady } = usePrivateRoomOwnerExclusions({
+    isPrivateRoom,
+    roomId,
+    userId,
+  });
 
   const ownerIsCurrentUser = roomOwnerId === userId;
 
-  const headerLabel = isAIAgent
-    ? t("Files:ChangeTheAgentOwner")
+  const headerLabel = isAIProject
+    ? t("Common:AIProjectChangeOwner")
     : t("Common:ChangeTheRoomOwner");
 
-  const infoText = isAIAgent
-    ? t("Files:ChangeAgentOwnerSelectorInfo")
+  const infoText = isAIProject
+    ? t("Common:AIProjectChangeOwnerInfo", { productName: getBrandName("ProductName") })
     : t("Common:PeopleSelectorInfo");
 
-  const footerCheckboxLabel = isAIAgent
-    ? t("Common:LeaveTheAgent")
+  const footerCheckboxLabel = isAIProject
+    ? t("Common:AIProjectLeave")
     : isFormSpace
       ? t("Common:LeaveTheFormSpace")
       : t("Common:LeaveTheRoom");
@@ -225,7 +172,7 @@ const ChangeRoomOwner = (props) => {
       filter={filter}
       withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
       footerCheckboxLabel={footerCheckboxLabel}
-      isChecked={!showBackButton}
+      isChecked={!showBackButton && !isAIProject}
       withOutCurrentAuthorizedUser
       filterUserId={roomOwnerId}
       currentUserId={userId}
@@ -279,6 +226,7 @@ export default inject(
     filesActionsStore,
     userStore,
     infoPanelStore,
+    aiProjectsStore,
   }) => {
     const { changeRoomOwnerIsVisible, setChangeRoomOwnerIsVisible } =
       dialogsStore;
@@ -298,7 +246,9 @@ export default inject(
       roomOwnerId: room?.createdBy?.id,
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
-      isAIAgent: room?.isAIAgent,
+      isAIProject: room?.isAIProject,
+      changeAiProjectOwner: (newOwnerId, keepAsManager) =>
+        aiProjectsStore.changeOwner(room, newOwnerId, keepAsManager),
       isFormSpace: room?.roomType === RoomsType.FormRoom,
       updateInfoPanelMembers,
       roomId: room?.id,

@@ -39,7 +39,7 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "files/settings";
 
-const getFilesSettings = (): TFilesSettings => {
+export const getFilesSettings = (): TFilesSettings => {
   return {
     extsImagePreviewed: [
       ".svg",
@@ -206,6 +206,12 @@ const getFilesSettings = (): TFilesSettings => {
       ".xltx",
       ".pdf",
     ],
+    // Mirrors FilesSettingsDtoConverter.Get ->
+    // DocumentServiceEncryptionChecker.IsSupportedAsync: true when the crypto
+    // library answers under the Document Server address, as it does on the
+    // stand these mocks stand in for; a spec passes false for a Document
+    // Server without the add-on.
+    docServiceEncryptionSupported: true,
     extsWebReviewed: [".docm", ".docx", ".docxf", ".dotm", ".dotx"],
     extsWebCustomFilterEditing: [".xlsm", ".xlsx", ".xltm", ".xltx"],
     extsWebRestrictedEditing: [".pdf"],

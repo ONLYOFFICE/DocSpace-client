@@ -474,7 +474,6 @@ const LanguageAndTimeZoneComponent = (props) => {
       >
         <div className="settings-block__wrapper-language">
           <ComboBox
-            tabIndex={1}
             id="comboBoxLanguage"
             options={cultureNamesNew}
             selectedOption={state.language}
@@ -499,7 +498,6 @@ const LanguageAndTimeZoneComponent = (props) => {
         isVertical
       >
         <ComboBox
-          tabIndex={2}
           id="comboBoxTimezone"
           options={timezones}
           directionY="both"
@@ -553,7 +551,6 @@ const LanguageAndTimeZoneComponent = (props) => {
       </div>
       {settingsBlock}
       <SaveCancelButtons
-        tabIndex={3}
         className="save-cancel-buttons"
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}

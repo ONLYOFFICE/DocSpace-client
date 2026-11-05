@@ -113,8 +113,6 @@ type RoomsLayoutProps = {
   infoPanelBody?: React.ReactNode;
   emptyView?: React.ReactNode;
   titleOverride?: string;
-  onPrivateInviteRoom?: (room: TFolder) => void;
-  onPrivateChangeOwner?: (room: TFolder) => void;
   refreshRef?: React.MutableRefObject<(() => void) | null>;
   renderCreateRoomDialog?: (args: {
     visible: boolean;
@@ -143,8 +141,6 @@ const RoomsLayout = observer(
     infoPanelBody,
     emptyView,
     titleOverride,
-    onPrivateInviteRoom,
-    onPrivateChangeOwner,
     refreshRef: refreshRefProp,
     renderCreateRoomDialog,
   }: RoomsLayoutProps) => {
@@ -360,8 +356,6 @@ const RoomsLayout = observer(
                   titleOverride={titleOverride}
                   isPrivate={isPrivate}
                   hasEncryptionKeys={isPrivate ? hasEncryptionKeys : undefined}
-                  onPrivateInviteRoom={onPrivateInviteRoom}
-                  onPrivateChangeOwner={onPrivateChangeOwner}
                   infoPanelVisible={
                     infoPanelStore.isVisible || !!ai?.isChatPanelVisible
                   }

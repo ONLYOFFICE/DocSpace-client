@@ -275,6 +275,7 @@ const PeopleTableRow = ({
     >
       <TableRow
         key={item.id}
+        checked={isChecked}
         className={classNames(styles.styledPeopleRow, "table-row", {
           [styles.checked]: isChecked || isActive,
           [styles.hideColumns]: hideColumns,

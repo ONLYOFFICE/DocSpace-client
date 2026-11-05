@@ -47,6 +47,8 @@ type ConflictResolveDialogProps = {
   conflictItems: ConflictItem[];
   onClose: () => void;
   onSubmit: (resolveType: ConflictResolveType) => void;
+  /** False leaves out overwriting; keeping both is then preselected. */
+  withOverwrite?: boolean;
 };
 
 const ConflictResolveDialog = ({
@@ -54,6 +56,7 @@ const ConflictResolveDialog = ({
   conflictItems,
   onClose,
   onSubmit,
+  withOverwrite,
 }: ConflictResolveDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -114,6 +117,7 @@ const ConflictResolveDialog = ({
       headerLabel={t("Common:ActionRequired")}
       messageText={messageText}
       selectActionText={t("Common:ConflictResolveSelectAction")}
+      withOverwrite={withOverwrite}
       overwriteTitle={overwriteTitle}
       overwriteDescription={overwriteDescription}
       duplicateTitle={duplicateTitle}

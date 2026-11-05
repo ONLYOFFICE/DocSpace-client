@@ -39,47 +39,30 @@
 "use client";
 
 import React from "react";
+import { observer } from "mobx-react";
 
-import { useEncryption } from "@docspace/shared/context/encryption";
+import { useEncryptedFilenameRecovery } from "@docspace/shared/hooks/useResolvedFileTitle";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import { usePrivateRoomFilesStoreOptional } from "../../_store/PrivateRoomFilesStore";
 import { useEncryptionIdentityStore } from "../../_store/EncryptionIdentityStore";
 
-// Triggers filename recovery on unlock. No-op outside of a room-files page
-// (e.g. on the rooms list), where the store has no active roomId. Bails out
-// when the current view has no folder context (loading transition) or the
-// identity is missing (e.g. lock raced ahead).
+// Recovers the names of the encrypted files of the open folder whenever the
+// list changes: navigation, paging and socket updates alike. No-op outside of
+// a room-files page, where the store has no active roomId.
 const FilenameRecoveryEffect: React.FC = () => {
-  const { isUnlocked, getIdentity } = useEncryption();
   const filesStore = usePrivateRoomFilesStoreOptional();
   const filesListStore = useFilesListStore();
   const identityStore = useEncryptionIdentityStore();
 
-  React.useEffect(() => {
-    if (!isUnlocked) return;
-    if (!filesStore) return;
-    if (!filesStore.roomId) return;
-    const userId = identityStore.userKeys?.userId;
-    if (!userId) return;
-    const identity = getIdentity();
-    if (!identity) return;
-    void filesStore.recoverEncryptedFilenamesForCurrentView(
-      filesListStore.items,
-      userId,
-      identity,
-    );
-  }, [
-    isUnlocked,
-    filesStore,
-    filesStore?.roomId,
-    filesListStore.items,
-    identityStore.userKeys?.userId,
-    getIdentity,
-  ]);
+  // Spec: private-rooms/sdk-surface, "Decrypted titles in lists and history"
+  useEncryptedFilenameRecovery(filesListStore.items, {
+    userId: identityStore.userKeys?.userId,
+    roomId: filesStore?.roomId,
+  });
 
   return null;
 };
 
-export default FilenameRecoveryEffect;
+export default observer(FilenameRecoveryEffect);

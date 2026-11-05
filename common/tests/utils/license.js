@@ -60,7 +60,7 @@ const EXCLUDE_DIRS = [
   ".meta",
 ];
 
-const SOURCE_EXT_REGEX = /\.(jsx?|tsx?)$/;
+const SOURCE_EXT_REGEX = /\.(jsx?|tsx?|mts|cts)$/;
 
 // The canonical marker every first-party source file must carry at the top.
 const LICENSE_MARKER = "SPDX-License-Identifier: AGPL-3.0-only";
@@ -76,7 +76,7 @@ const isExcludedFile = (repoRelPath) => {
     !SOURCE_EXT_REGEX.test(repoRelPath) ||
     /\.(test|spec|stories)\./.test(repoRelPath) ||
     /\.d\.ts$/.test(repoRelPath) ||
-    /\.config\.(jsx?|tsx?)$/.test(repoRelPath) ||
+    /\.config\.(jsx?|tsx?|mts|cts)$/.test(repoRelPath) ||
     /(^|\/)(playwright|vitest|next|vite|jest|babel)\.config\./.test(
       repoRelPath,
     ) ||

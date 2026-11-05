@@ -49,7 +49,6 @@ const LeaveRoomDialog = (props) => {
     setIsVisible,
     setChangeRoomOwnerIsVisible,
     isRoomOwner,
-    isAIAgent,
     isFormSpace,
     isFormFiller,
     onLeaveRoomAction,
@@ -72,7 +71,6 @@ const LeaveRoomDialog = (props) => {
   };
 
   const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
     if (e.keyCode === 13 || e.which === 13) onLeaveRoom();
   };
 
@@ -84,23 +82,15 @@ const LeaveRoomDialog = (props) => {
     };
   }, []);
 
-  const titleText = isAIAgent
-    ? t("Common:LeaveTheAgent")
-    : isFormSpace
-      ? t("Common:LeaveTheFormSpace")
-      : t("Common:LeaveTheRoom");
+  const titleText = isFormSpace
+    ? t("Common:LeaveTheFormSpace")
+    : t("Common:LeaveTheRoom");
 
-  const roomDescription = isRoomOwner
+  const descriptionText = isRoomOwner
     ? t("Common:LeaveRoomDescription")
     : t("Common:WantLeaveRoom");
 
-  const agentDescription = isRoomOwner
-    ? t("Common:LeaveAgentDescription")
-    : t("Common:WantLeaveAgent");
-
-  const descriptionText = isAIAgent ? agentDescription : roomDescription;
-
-  const showFormFillingWarning = isFormFiller && !isAIAgent && !isRoomOwner;
+  const showFormFillingWarning = isFormFiller && !isRoomOwner;
 
   const okButtonLabel = isRoomOwner
     ? t("Common:AssignOwner")
@@ -170,7 +160,6 @@ export default inject(
     const folderItem = selections[0] ? selections[0] : selectedFolderStore;
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
-    const isAIAgent = folderItem?.isAIAgent;
     const isFormSpace = folderItem?.roomType === RoomsType.FormRoom;
     const isFormFiller = folderItem?.access === ShareAccessRights.FormFilling;
 
@@ -179,7 +168,6 @@ export default inject(
       setIsVisible,
       setChangeRoomOwnerIsVisible,
       isRoomOwner,
-      isAIAgent,
       isFormSpace,
       isFormFiller,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,

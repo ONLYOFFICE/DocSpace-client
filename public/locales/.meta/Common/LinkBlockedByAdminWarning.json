@@ -3,7 +3,7 @@
   "content": "This link is blocked by admin and won't work for external users",
   "content_en_sha1_hash": "d0082eb9e225eee86e2f72201d1ba794b4ac17a4",
   "created_at": "2026-06-02T08:43:21.584Z",
-  "updated_at": "2026-10-02T12:15:32.379Z",
+  "updated_at": "2026-11-05T16:49:39.797Z",
   "comment": {
     "text": "Error toast message appearing when a user attempts to copy or use a share link that has been restricted by an administrator.",
     "is_auto": true,
@@ -37,25 +37,25 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
-      "line_number": 236,
+      "line_number": 241,
       "context": "self.filesSettingsStore.isLinkBlockedByAdmin(\n item as { rootFolderType: FolderType },\n itemLink,\n )\n ) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n return;\n }\n \n copyToBuffer(itemLink.sharedTo.shareLink);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
-      "line_number": 236,
+      "line_number": 241,
       "context": "self.filesSettingsStore.isLinkBlockedByAdmin(\n item as { rootFolderType: FolderType },\n itemLink,\n )\n ) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n return;\n }\n \n copyToBuffer(itemLink.sharedTo.shareLink);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
-      "line_number": 236,
+      "line_number": 241,
       "context": "self.filesSettingsStore.isLinkBlockedByAdmin(\n item as { rootFolderType: FolderType },\n itemLink,\n )\n ) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n return;\n }\n \n copyToBuffer(itemLink.sharedTo.shareLink);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 432,
+      "line_number": 448,
       "context": "isExternalShareRestricted &&\n !link.sharedTo?.internal &&\n blockExistingLinksOnRestrict;\n \n if (isBlockedByAdmin) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n \n const isRoomItem =\n \"roomType\" in infoPanelSelection &&\n infoPanelSelection.roomType !== undefined;\n const isFileItem = \"folderId\" in infoPanelSelection;",
       "module": "/packages/shared"
     }

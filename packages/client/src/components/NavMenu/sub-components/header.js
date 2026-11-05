@@ -49,12 +49,12 @@ const HeaderComponent = ({
   toggleArticleOpen,
   customHeader,
   defaultFolderType,
-  aiServicesEnabled,
   isGuest,
+  aiServicesEnabled,
 }) => {
   const defaultUrl = getDefaultStartPageUrl(defaultFolderType, {
-    aiServicesEnabled,
     isGuest,
+    aiServicesEnabled,
   });
   const logo = getLogoUrl(
     WhiteLabelLogoType.LightSmall,
@@ -103,8 +103,8 @@ export default inject(({ settingsStore, userStore }) => {
     currentProductId,
     toggleArticleOpen,
     defaultFolderType,
-    aiServicesEnabled,
     isGuest: userStore.user?.isVisitor ?? false,
+    aiServicesEnabled,
     // currentProductName: (product && product.title) || "",
   };
 })(observer(HeaderComponent));

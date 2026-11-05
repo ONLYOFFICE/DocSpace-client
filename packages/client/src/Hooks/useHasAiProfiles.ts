@@ -48,7 +48,9 @@ import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 export const useHasAiProfiles = (): boolean => {
   const { useProfilesStore } = useStores();
   const initialized = useProfilesStore((s) => s.initialized);
-  const hasProfilesNow = useProfilesStore((s) => s.profiles.length > 0);
+  // The portal-wide flag: the chat starts knowing only its assigned
+  // profiles, so the list's length says nothing about the catalogue.
+  const hasProfilesNow = useProfilesStore((s) => s.hasProfiles);
 
   const [hasProfiles, setHasProfiles] = useState(false);
 

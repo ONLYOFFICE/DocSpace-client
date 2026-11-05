@@ -151,7 +151,7 @@ const EditRoomDialog = ({
     onSave(params);
   };
 
-  const onKeyUpHandler = (e) => {
+  const onKeyDownHandler = (e) => {
     if (isWrongTitle) return;
     if (e.keyCode === 13) onEditRoom();
   };
@@ -334,7 +334,7 @@ const EditRoomDialog = ({
           isWrongTitle={isWrongTitle}
           setIsValidTitle={setIsValidTitle}
           setIsWrongTitle={setIsWrongTitle}
-          onKeyUp={onKeyUpHandler}
+          onKeyDown={onKeyDownHandler}
           onOwnerChange={onOwnerChange}
           onOpenAccessSettings={onOpenAccessSettings}
           canChangeOwner={roomParams?.security?.ChangeOwner}
@@ -346,7 +346,6 @@ const EditRoomDialog = ({
 
       <ModalDialog.Footer>
         <Button
-          tabIndex={5}
           label={t("Common:SaveButton")}
           size="normal"
           primary
@@ -361,7 +360,6 @@ const EditRoomDialog = ({
           isLoading={isLoading}
         />
         <Button
-          tabIndex={5}
           label={t("Common:CancelButton")}
           size="normal"
           scale

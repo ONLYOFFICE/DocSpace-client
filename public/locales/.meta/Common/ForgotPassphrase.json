@@ -3,7 +3,7 @@
   "content": "Forgot passphrase?",
   "content_en_sha1_hash": "038e3d6cb7b28bbbbb151504638702f03061d2e2",
   "created_at": "2026-06-09T09:42:45.649Z",
-  "updated_at": "2026-08-13T10:58:03.284Z",
+  "updated_at": "2026-11-05T16:49:39.986Z",
   "comment": {
     "text": "Clickable link in key management and passphrase modals that initiates the passphrase recovery process.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/KeyRotationDialog.tsx",
-      "line_number": 194,
-      "context": "isHovered\n onClick={onForgotPassphrase}\n dataTestId=\"forgot_passphrase_link\"\n tabIndex={2}\n >\n {t(\"Common:ForgotPassphrase\")}\n </Link>\n </div>\n ) : null}\n </div>",
+      "line_number": 253,
+      "context": "isHovered\n onClick={onForgotPassphrase}\n onKeyDown={activateAsButton}\n dataTestId=\"forgot_passphrase_link\"\n >\n {t(\"Common:ForgotPassphrase\")}\n </Link>\n </div>\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 324,
-      "context": "isHovered\n onClick={onForgotPassphrase}\n dataTestId=\"forgot_passphrase_link\"\n tabIndex={3}\n >\n {t(\"Common:ForgotPassphrase\")}\n </Link>\n </div>\n ) : null}\n \n {showRememberDevice && !isNew ? (",
+      "line_number": 357,
+      "context": "isHovered\n onClick={onForgotPassphrase}\n onKeyDown={activateAsButton}\n dataTestId=\"forgot_passphrase_link\"\n >\n {t(\"Common:ForgotPassphrase\")}\n </Link>\n </div>\n ) : null}\n \n {showRememberDevice && !isNew ? (",
       "module": "/packages/shared"
     }
   ],

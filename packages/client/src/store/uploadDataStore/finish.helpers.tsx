@@ -247,6 +247,9 @@ export function finishUploadFilesImpl(
   const filesWithoutErrors = self.uploadedFilesHistory.filter(
     (f) => !f.error,
   );
+  const failedMoveTitles = filesWithErrors
+    .map((f) => f.file?.uploadContext?.moveSource?.title)
+    .filter((title): title is string => !!title);
 
   self.showFinishUploadToastr(
     t,
@@ -255,6 +258,15 @@ export function finishUploadFilesImpl(
     filesWithErrors,
     filesWithAllErrors.length,
   );
+
+  // Spec: private-rooms/file-operations, "Files leaving a private room are decrypted".
+  if (failedMoveTitles.length > 0) {
+    toastr.error(
+      t("Common:EncryptedMovePartialFailure", {
+        names: failedMoveTitles.join(", "),
+      }),
+    );
+  }
 
   self.uploaded = true;
   self.converted = true;

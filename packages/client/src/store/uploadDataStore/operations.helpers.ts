@@ -250,6 +250,18 @@ export function itemOperationToFolderImpl(
 
   const operation = isCopy ? OPERATIONS_NAME.copy : OPERATIONS_NAME.move;
 
+  if (!isCopy) {
+    const { hotkeysClipboard, setHotkeysClipboard } = self.filesStore;
+
+    setHotkeysClipboard(
+      hotkeysClipboard.filter((item) =>
+        item.isFolder
+          ? !folderIds.some((id) => id === item.id)
+          : !fileIds.some((id) => id === item.id),
+      ),
+    );
+  }
+
   setSecondaryProgressBarData({
     operation,
     percent: 0,
@@ -400,11 +412,16 @@ export async function navigateToNewFolderLocationImpl(
   filter.folder = folderId as string;
 
   try {
-    const { rootFolderType, parentId, roomType } =
-      await getFolderInfo(folderId!);
+    const {
+      rootFolderType,
+      parentId,
+      roomType,
+      private: isPrivate,
+    } = await getFolderInfo(folderId!);
     const path = getCategoryUrl(
       getCategoryTypeByFolderTypeInSection(rootFolderType, parentId, {
         roomType,
+        isPrivate: self.filesStore.isPrivateRoomsSectionAvailable && !!isPrivate,
       }),
       folderId,
     );

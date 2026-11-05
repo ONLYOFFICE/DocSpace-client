@@ -34,6 +34,7 @@
  */
 
 import { removeFiles, moveToFolder } from "@docspace/shared/api/files";
+import { getRoomMissingFileKeys } from "@docspace/shared/api/privacy";
 import {
   AnalyticsEvents,
   Events,
@@ -42,8 +43,15 @@ import {
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { splitFileAndFolderIds } from "@docspace/shared/utils/common";
-import { revokeMemberFromEncryptedRoom } from "@docspace/shared/services/private-room/room-encryption";
+import {
+  isPrivateRoomsRoute,
+  splitFileAndFolderIds,
+} from "@docspace/shared/utils/common";
+import {
+  prepareNewOwner,
+  revokeOwnAccessOnLeave,
+} from "@docspace/shared/services/private-room/room-member-flows";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import uniqueid from "lodash/uniqueId";
 import api from "@docspace/shared/api";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
@@ -110,17 +118,16 @@ self: FilesActionStore,
   action: string,
   id: number | number[],
   t: TTranslation,
-  isAIAgent = false,
 
 )=> {
-  return setPinActionHelper(action, id, t, isAIAgent);
+  return setPinActionHelper(action, id, t);
 };
 
 
 export const setMuteActionImpl = (
 self: FilesActionStore,action: string, item: TActionItem, t: TTranslation
 )=> {
-  const { id, new: newCount, rootFolderId, isAIAgent } = item;
+  const { id, new: newCount, rootFolderId } = item;
   const { treeFolders } = self.treeFoldersStore;
   const { folders, updateRoomMute } = self.filesStore;
 
@@ -129,9 +136,11 @@ self: FilesActionStore,action: string, item: TActionItem, t: TTranslation
   const folderIndex = id && folders.findIndex((x) => x.id == id);
   if (folderIndex > -1) updateRoomMute(folderIndex, muteStatus);
 
+  // A room outside the tree (an AI project's root is not in it) has no
+  // counter to adjust.
   const treeIndex = treeFolders.findIndex((x) => x.id == rootFolderId);
-  const count = treeFolders[treeIndex].newItems;
-  if (treeIndex) {
+  if (treeIndex > -1) {
+    const count = treeFolders[treeIndex].newItems;
     // `new`/`newItems` are optional on the view-models; the
     // old JS did unchecked arithmetic (NaN when missing), the erased casts
     // keep that behavior.
@@ -145,13 +154,8 @@ self: FilesActionStore,action: string, item: TActionItem, t: TTranslation
         (count as number) + (newCount as number);
   }
 
-  let notificationsDisabled = t("Common:RoomNotificationsDisabled");
-  let notificationsEnabled = t("Common:RoomNotificationsEnabled");
-
-  if (isAIAgent) {
-    notificationsDisabled = t("Common:AIAgentNotificationsDisabled");
-    notificationsEnabled = t("Common:AIAgentNotificationsEnabled");
-  }
+  const notificationsDisabled = t("Common:RoomNotificationsDisabled");
+  const notificationsEnabled = t("Common:RoomNotificationsEnabled");
 
   (muteRoomNotification(id, muteStatus) as Promise<unknown>)
     .then(() =>
@@ -414,13 +418,11 @@ self: FilesActionStore,t: TTranslation
 
   const items: number[] = [];
 
-  const isAIAgent = selection.some((s) => s.isAIAgent);
-
   selection.forEach((item) => {
     if (!item.pinned) items.push(item.id);
   });
 
-  self.setPinAction("pin", items, t, isAIAgent);
+  self.setPinAction("pin", items, t);
 };
 
 
@@ -431,13 +433,11 @@ self: FilesActionStore,t: TTranslation
 
   const items: number[] = [];
 
-  const isAIAgent = selection.some((s) => s.isAIAgent);
-
   selection.forEach((item) => {
     if (item.pinned) items.push(item.id);
   });
 
-  self.setPinAction("unpin", items, t, isAIAgent);
+  self.setPinAction("unpin", items, t);
 };
 
 
@@ -530,75 +530,7 @@ self: FilesActionStore,items: (TActionItem | number)[], t: TTranslation
 };
 
 
-export const changeAIAgentsQuotaImpl = (
-self: FilesActionStore,
-  items: (TActionItem | number)[],
-  successCallback?: (...args: unknown[]) => unknown,
-  abortCallback?: (...args: unknown[]) => unknown,
 
-)=> {
-  const event = new Event(Events.CHANGE_QUOTA);
-
-  const itemsIDs = items.map((item) => {
-    return (item as TActionItem)?.id ? (item as TActionItem).id : item;
-  });
-
-  const payload = {
-    visible: true,
-    type: "agent",
-    ids: itemsIDs,
-    successCallback,
-    abortCallback,
-  };
-
-  // the still-.js GlobalEvents component reads this extra
-  // field off the dispatched Event.
-  (event as Event & { payload?: typeof payload }).payload = payload;
-
-  window.dispatchEvent(event);
-};
-
-
-export const disableAIAgentQuotaImpl = async (
-self: FilesActionStore,
-  items: (TActionItem | number)[],
-  t: TTranslation,
-
-)=> {
-  const { setCustomAIAgentQuota } = self.filesStore;
-
-  const agentIDs = items.map((item) => {
-    return (item as TActionItem)?.id ? (item as TActionItem).id : item;
-  }) as number[];
-
-  try {
-    await setCustomAIAgentQuota(agentIDs, -1);
-    toastr.success(t("Common:StorageQuotaDisabled"));
-  } catch (e) {
-    toastr.error(e as string);
-  }
-};
-
-
-export const resetAIAgentQuotaImpl = async (
-self: FilesActionStore,
-  items: (TActionItem | number)[],
-  t: TTranslation,
-
-)=> {
-  const { resetAIAgentQuota } = self.filesStore;
-
-  const userIDs = items.map((item) => {
-    return (item as TActionItem)?.id ? (item as TActionItem).id : item;
-  }) as number[];
-
-  try {
-    await resetAIAgentQuota(userIDs);
-    toastr.success(t("Common:StorageQuotaReset"));
-  } catch (e) {
-    toastr.error(e as string);
-  }
-};
 
 
 export const onClickCreateRoomImpl = (
@@ -639,7 +571,7 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
   const { user } = self.userStore;
 
   // the fallback is the selected-folder store snapshot; only
-  // id/isAIAgent/private are read from it, matching the old JS duck typing.
+  // id/private are read from it, matching the old JS duck typing.
   const room = (
     selection.length
       ? selection[0]
@@ -649,7 +581,6 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
   ) as TActionItem;
 
   const roomId = room.id;
-  const isAIAgent = room.isAIAgent;
   const isPrivateRoom = room.private === true;
 
   // user is nullable on UserStore; the old JS read the
@@ -657,13 +588,9 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
   const isAdmin = user!.isOwner || user!.isAdmin;
   const isRoot = self.selectedFolderStore.isRootFolder;
 
-  const roomSuccessText = isOwner
+  const successText = isOwner
     ? t("Common:LeftAndAppointNewOwner")
     : t("Common:YouLeftTheRoom");
-  const agentSuccessText = isOwner
-    ? t("Common:LeftAgentAndAppointNewOwner")
-    : t("Files:YouLeftTheAgent");
-  const successText = isAIAgent ? agentSuccessText : roomSuccessText;
 
   const leave = () =>
     (
@@ -676,9 +603,10 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
         if (!isAdmin) {
           if (!isRoot) {
             const filter = RoomsFilter.getDefault();
-            window.DocSpace.navigate(
-              `rooms/shared/filter?${filter.toUrlParams()}`,
-            );
+            const list = isPrivateRoomsRoute(window.DocSpace.location.pathname)
+              ? "/private/filter"
+              : "rooms/shared/filter";
+            window.DocSpace.navigate(`${list}?${filter.toUrlParams()}`);
           } else {
             self.filesStore.removeFiles(null, [roomId]);
           }
@@ -699,72 +627,94 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
 
   if (!isPrivateRoom) return leave();
 
-  // Must run before the role change drops access to files/{id}/access;
-  // best-effort - a failed cleanup must not trap the user in the room.
-  const revokeOwnEncryptedAccess = async () => {
-    try {
-      const results = await revokeMemberFromEncryptedRoom(
-        Number(roomId),
-        String(user?.id),
-        {},
-      );
-      const failures = results.filter((r) => !r.success);
-      if (failures.length > 0) {
-        console.error(
-          `[ENCRYPTION] ${failures.length} file(s) kept the leaver's wrap entries`,
-        );
-      }
-    } catch (err) {
-      console.error("[ENCRYPTION] revoke own access on leave failed:", err);
-    }
-  };
-
-  return revokeOwnEncryptedAccess().then(leave);
+  return revokeOwnAccessOnLeave(roomId, String(user?.id)).then(leave);
 };
 
 
-export const changeRoomOwnerImpl = (
-self: FilesActionStore,t: TTranslation, userId: string, isLeaveChecked = false
-)=> {
+/** The HTTP status an API request was refused with, if any. */
+const statusOf = (error: unknown) =>
+  (error as { response?: { status?: number } })?.response?.status;
+
+// Spec: private-rooms/room-membership, "Ownership transfer wraps the candidate's missing files"
+export const changeRoomOwnerImpl = async (
+  self: FilesActionStore,
+  t: TTranslation,
+  userId: string,
+  isLeaveChecked = false,
+) => {
   const { setFolder, setSelected, selection, bufferSelection } =
     self.filesStore;
-  const {
-    isRootFolder,
-    setCreatedBy,
-    id,
-    setInRoom,
-    setSecurity,
-    setAccess,
-  } = self.selectedFolderStore;
+  const { isRootFolder, setCreatedBy, setInRoom, setSecurity, setAccess } =
+    self.selectedFolderStore;
 
-  const roomId = selection.length
-    ? selection[0].id
-    : bufferSelection
-      ? bufferSelection.id
-      : id;
+  const room = (
+    selection.length
+      ? selection[0]
+      : bufferSelection
+        ? bufferSelection
+        : self.selectedFolderStore
+  ) as TActionItem;
+  const roomId = room.id;
+  const isPrivateRoom = room.private === true;
+  const currentUserId = String(self.userStore.user?.id);
 
-  return api.files
-    .setFileOwner(userId, [roomId] as number[])
-    .then(async (res) => {
-      if (isRootFolder) {
-        setFolder(res[0]);
-      } else {
-        setCreatedBy(res[0].createdBy);
-        setSecurity(res[0].security);
-        setAccess(res[0].access);
-
-        // user is nullable on UserStore; the old JS read
-        // `.id` unchecked, the `!` keeps that behavior.
-        const isMe = userId === self.userStore.user!.id;
-        if (isMe) setInRoom(true);
+  try {
+    if (isPrivateRoom) {
+      const identity = await requireUnlock(currentUserId);
+      if (!identity) {
+        toastr.error(t("Common:EncryptionUnlockRequired"));
+        return;
       }
+      const { missingFileIds } = await prepareNewOwner({
+        roomId,
+        candidateId: userId,
+        currentUserId,
+        identity,
+      });
+      if (missingFileIds.length > 0) {
+        toastr.error(
+          t("Common:EncryptedReencryptPartialFailure", {
+            count: missingFileIds.length,
+          }),
+        );
+        return;
+      }
+    }
 
-      if (isLeaveChecked) await self.onLeaveRoom(t);
-      else toastr.success(t("Common:AppointNewOwner"));
-    })
-    .catch((e) => toastr.error(e as string))
-    .finally(() => {
-      setSelected("none");
-    });
+    const res = await api.files.setFileOwner(userId, [roomId] as number[]);
+    if (isRootFolder) {
+      setFolder(res[0]);
+    } else {
+      setCreatedBy(res[0].createdBy);
+      setSecurity(res[0].security);
+      setAccess(res[0].access);
+
+      // user is nullable on UserStore; the old JS read
+      // `.id` unchecked, the `!` keeps that behavior.
+      const isMe = userId === self.userStore.user!.id;
+      if (isMe) setInRoom(true);
+    }
+
+    if (isLeaveChecked) await self.onLeaveRoom(t);
+    else toastr.success(t("Common:AppointNewOwner"));
+  } catch (e) {
+    // The server refuses the transfer while the candidate lacks an entry on
+    // an encrypted file, for example one uploaded since they were wrapped
+    // above; it lists those files on request.
+    const listed =
+      isPrivateRoom && statusOf(e) === 409
+        ? await getRoomMissingFileKeys(roomId, [userId]).catch(() => [])
+        : [];
+    const count =
+      listed.find((entry) => entry.userId.toLowerCase() === userId.toLowerCase())
+        ?.fileIds.length ?? 0;
+    if (count > 0) {
+      toastr.error(t("Common:EncryptedReencryptPartialFailure", { count }));
+    } else {
+      toastr.error(e as string);
+    }
+  } finally {
+    setSelected("none");
+  }
 };
 

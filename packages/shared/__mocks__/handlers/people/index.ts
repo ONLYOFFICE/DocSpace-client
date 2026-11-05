@@ -56,6 +56,11 @@ import { themeProviderHandler } from "./theme";
 import { userPhotoHandler } from "./userPhoto";
 
 export {
+  usersWithRoomSharedHandler,
+  type RoomSharedUser,
+} from "./roomShared";
+
+export {
   selfHandler,
   selfUpdateHandler,
   selfDeleteHandler,

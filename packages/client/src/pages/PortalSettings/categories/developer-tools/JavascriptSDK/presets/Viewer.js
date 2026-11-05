@@ -253,7 +253,6 @@ const Viewer = (props) => {
                   filterParam={FilesSelectorFilterTypes.ALL}
                   isSelect
                   isDocumentIcon
-                  withAIAgentsTreeFolder
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>

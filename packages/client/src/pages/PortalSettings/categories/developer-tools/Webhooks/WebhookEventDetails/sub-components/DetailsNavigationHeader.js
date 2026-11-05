@@ -62,8 +62,13 @@ const DetailsNavigationHeader = () => {
   };
 
   const handleRetryEvent = async () => {
-    await retryWebhook(eventId);
-    toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);
+    try {
+      await retryWebhook(eventId);
+      toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error);
+    }
   };
 
   return (

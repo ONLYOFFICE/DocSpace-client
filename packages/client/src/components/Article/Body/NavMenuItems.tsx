@@ -204,14 +204,6 @@ const NavMenuItems = ({
           // rendered as children of USER — skip at top level
           return null;
 
-        case FolderType.AIAgents:
-          return {
-            id: String(id),
-            label: title,
-            icon,
-            onClick: go(`/rooms/shared/filter?type=AIAgents`),
-          };
-
         default:
           return {
             id: String(id),

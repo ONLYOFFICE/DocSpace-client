@@ -40,6 +40,9 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import type { TTranslation } from "@docspace/shared/types";
+import { RoomsType } from "@docspace/shared/enums";
+
+import type { TUploadTarget } from "SRC_DIR/store/uploadDataStore/helpers";
 
 const FOLDER_INPUT_ATTRS = {
   webkitdirectory: "",
@@ -47,33 +50,48 @@ const FOLDER_INPUT_ATTRS = {
 } as Record<string, string>;
 
 type UploadFileInputsProps = {
-  startUpload?: (files: File[], folderId: null, t: TTranslation) => void;
-  createFoldersTree?: (t: TTranslation, files: File[]) => Promise<File[]>;
-  isAIRoom?: boolean;
-  extsFilesVectorized?: string[];
+  startUpload?: (files: File[], target: TUploadTarget, t: TTranslation) => void;
+  createFoldersTree?: (
+    t: TTranslation,
+    files: File[],
+    target: TUploadTarget,
+  ) => Promise<File[]>;
+  resolveOpenFolderTarget?: () => TUploadTarget;
+  isKnowledgeRoom?: boolean;
+  isInstructionsRoom?: boolean;
+  // Only the formats vectorization reads are offered in a Knowledge room;
+  // the server refuses anything else.
+  knowledgeUploadAccept?: string;
 };
+
+// An Instructions room holds Markdown skills only.
+const INSTRUCTIONS_UPLOAD_ACCEPT = ".md";
 
 const UploadFileInputs = ({
   startUpload,
   createFoldersTree,
-  isAIRoom,
-  extsFilesVectorized,
+  resolveOpenFolderTarget,
+  isKnowledgeRoom,
+  isInstructionsRoom,
+  knowledgeUploadAccept,
 }: UploadFileInputsProps) => {
   const { t } = useTranslation(["Common"]);
 
   const onFileChange = React.useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const target = resolveOpenFolderTarget?.();
+      if (!target) return;
       const files = await getFilesFromEvent(e);
 
-      createFoldersTree?.(t, files)
+      createFoldersTree?.(t, files, target)
         .then((tree) => {
-          if (tree.length > 0) startUpload?.(tree, null, t);
+          if (tree.length > 0) startUpload?.(tree, target, t);
         })
         .catch((err) => {
-          toastr.error(err, null, 0, true);
+          toastr.error(err, undefined, 0, true);
         });
     },
-    [createFoldersTree, startUpload, t],
+    [createFoldersTree, startUpload, resolveOpenFolderTarget, t],
   );
 
   const onInputClick = React.useCallback(
@@ -93,9 +111,11 @@ const UploadFileInputs = ({
         style={{ display: "none" }}
         onChange={onFileChange}
         onClick={onInputClick}
-        {...(isAIRoom && extsFilesVectorized
-          ? { accept: extsFilesVectorized.join(",") }
-          : {})}
+        {...(isKnowledgeRoom && knowledgeUploadAccept
+          ? { accept: knowledgeUploadAccept }
+          : isInstructionsRoom
+            ? { accept: INSTRUCTIONS_UPLOAD_ACCEPT }
+            : {})}
       />
       <input
         id="customPDFInput"
@@ -128,8 +148,11 @@ export default inject(
     filesSettingsStore,
   }: TStore) => ({
     startUpload: uploadDataStore.startUpload,
+    resolveOpenFolderTarget: uploadDataStore.resolveOpenFolderTarget,
     createFoldersTree: filesActionsStore.createFoldersTree,
-    isAIRoom: selectedFolderStore.isAIRoom,
-    extsFilesVectorized: filesSettingsStore.extsFilesVectorized,
+    isKnowledgeRoom: selectedFolderStore.roomType === RoomsType.KnowledgeRoom,
+    isInstructionsRoom:
+      selectedFolderStore.roomType === RoomsType.InstructionsRoom,
+    knowledgeUploadAccept: filesSettingsStore.knowledgeUploadAccept,
   }),
 )(observer(UploadFileInputs));

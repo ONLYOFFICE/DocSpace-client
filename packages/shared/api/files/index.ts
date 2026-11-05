@@ -90,6 +90,7 @@ import type {
   UpdateXlsxResponse,
   TDocumentBuilderTask,
   TFolderLogReportDateRange,
+  TFileKeysWritten,
 } from "./types";
 
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
@@ -98,7 +99,6 @@ export async function openEdit(
   fileId: number | string,
   version?: string | number,
   doc?: string,
-  view?: string,
   headers?: Record<string, string>,
   shareKey?: string,
   editorType?: string,
@@ -126,7 +126,7 @@ export async function openEdit(
   const res = (await request(options)) as TOpenEditRequest;
 
   if (action === "view") {
-    res.config.editorConfig.mode = "view";
+    res.editorConfig.mode = "view";
   }
 
   return res;
@@ -148,6 +148,7 @@ export async function getFolderInfo(
   folderId: number | string,
   skipRedirect = false,
   share?: string,
+  signal?: AbortSignal,
 ) {
   const headers = share
     ? {
@@ -159,6 +160,7 @@ export async function getFolderInfo(
     method: "get",
     url: `/files/folder/${folderId}`,
     headers,
+    signal,
   };
 
   const res = (await request(options, skipRedirect)) as TFolder;
@@ -406,18 +408,6 @@ export async function getTrashFolderList() {
 //   return request(options);
 // }
 
-/**
- * The one folder title the server refuses with 403 for a reason other than
- * access: a second `.ai` folder in a room's root ("The room already contains
- * the .ai folder", `InvalidOperationException` -> Forbidden). The shared
- * client reads a 403 inside a room as lost access and leaves for the root,
- * so for this title alone the redirect is skipped and the toast stands.
- */
-const AI_FOLDER_TITLE = ".ai";
-
-const skipRedirectForTitle = (title: string): boolean =>
-  title.trim() === AI_FOLDER_TITLE;
-
 export async function createFolder(
   parentFolderId: number | string,
   title: string,
@@ -429,7 +419,7 @@ export async function createFolder(
     data,
   };
 
-  const res = (await request(options, skipRedirectForTitle(title))) as TFolder;
+  const res = (await request(options)) as TFolder;
 
   return res;
 }
@@ -469,7 +459,7 @@ export async function renameFolder(folderId: number, title: string) {
     data,
   };
 
-  const res = (await request(options, skipRedirectForTitle(title))) as TFolder;
+  const res = (await request(options)) as TFolder;
 
   return res;
 }
@@ -837,6 +827,16 @@ export async function finalizeUploadSession(
   return res;
 }
 
+export async function abortUploadSession(
+  folderId: string | number,
+  sessionId: string,
+) {
+  return request({
+    method: "delete",
+    url: `/files/${folderId}/session/${sessionId}`,
+  });
+}
+
 // TODO: Need update res type and remove unknown
 export function uploadFile(url: string, data: unknown) {
   return axios.post(url, data);
@@ -1003,17 +1003,6 @@ export async function getNewFiles(folderId: number | string) {
   const res = (await request({
     method: "get",
     url: `/files/${folderId}/news`,
-  })) as TNewFiles[];
-
-  return res;
-}
-
-export async function getNewFilesAgents() {
-  // Agents are served by the Node AI service now; its /news endpoint forwards
-  // to the same .NET endpoint, so the response shape is identical.
-  const res = (await request({
-    method: "get",
-    url: `/ai/agents/news`,
   })) as TNewFiles[];
 
   return res;
@@ -1382,15 +1371,6 @@ export async function removeFromFavorite(
   return res;
 }
 
-export async function getIsEncryptionSupport() {
-  const res = (await request({
-    method: "get",
-    url: "/files/@privacy/available",
-  })) as boolean;
-
-  return res;
-}
-
 // TODO: Need update res type
 export function setEncryptionKeys(keys: { [key: string]: string | boolean }) {
   const data = {
@@ -1442,14 +1422,38 @@ export async function setFileEncryptionKeys(
     publicKeyId: string;
     privateKeyEnc: string;
   }>,
-) {
-  const res = await request({
+): Promise<TFileKeysWritten> {
+  const res = (await request({
     method: "put",
     url: `files/${fileId}/access`,
     data: keys,
+  })) as Partial<TFileKeysWritten> | undefined;
+
+  return { skippedUserIds: res?.skippedUserIds ?? [] };
+}
+
+/**
+ * A new file in the folder with the given content, in one multipart request.
+ * A same-named file gets a numbered title, nothing is overwritten.
+ */
+export async function insertFile(
+  folderId: number | string,
+  title: string,
+  content: Blob,
+) {
+  const fd = new FormData();
+
+  fd.append("title", title);
+  fd.append("createNewIfExist", "true");
+  fd.append("file", content, title);
+
+  const res = await request({
+    method: "post",
+    url: `/files/${folderId}/insert`,
+    data: fd,
   });
 
-  return res;
+  return res as TFile;
 }
 
 export async function updateFileStream(

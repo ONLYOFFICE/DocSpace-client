@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-10-27T11:03:20.491Z",
+  "updated_at": "2026-11-05T16:49:39.799Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -211,7 +211,7 @@
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 138,
+      "line_number": 145,
       "context": "return null;\n }\n };\n \n export const getUnexpectedErrorText = () => {\n return i18n.t(\"Common:UnexpectedError\");\n };\n \n export const connectedCloudsTitleTranslation = (key, t) => {\n switch (key) {\n case \"Box\":",
       "module": "/packages/client"
     },
@@ -229,19 +229,25 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 1038,
-      "context": "// with the status only in the message (`HTTP <status>`), not as a\n // property, so the message is checked alongside the axios-style shape.\n const status = error?.response?.status ?? error?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(error?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
+      "line_number": 1011,
+      "context": "// with the status only in the message (`HTTP <status>`), not as a\n // property, so the message is checked alongside the axios-style shape.\n const status = error?.response?.status ?? error?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(error?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n onStreamError: onAiStreamError,\n onStreamEnd: onAiStreamEnd,\n }),\n [t, onAiStreamError, onAiStreamEnd],",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 734,
+      "context": "} catch (error) {\n // A failure the server reports for the task carries its own message; one\n // of the polling itself does not, and is not shown as is.\n toastr.error(\n error instanceof TaskPollingError\n ? t(\"Common:UnexpectedError\")\n : (error as string),\n );\n console.error(error);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
-      "line_number": 176,
+      "line_number": 180,
       "context": "});\n \n !item!.url &&\n toastr.error(\n (translations as TDownloadTranslations).error ||\n i18n.t(\"Common:UnexpectedError\"),\n null,\n 0,\n true,\n );\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
-      "line_number": 176,
+      "line_number": 180,
       "context": "});\n \n !item!.url &&\n toastr.error(\n (translations as TDownloadTranslations).error ||\n i18n.t(\"Common:UnexpectedError\"),\n null,\n 0,\n true,\n );\n }",
       "module": "/packages/client"
     },
@@ -265,7 +271,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
-      "line_number": 387,
+      "line_number": 386,
       "context": "combineUrl(window.ClientConfig?.proxy?.url, ssoLogoutUrl || \"/login\"),\n );\n } catch (e) {\n if (axios.isCancel(e)) return;\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n onDebugClick = () => {\n this.setIsDebugDialogVisible(true);",
       "module": "/packages/client"
     },
@@ -277,8 +283,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-agent-providers/index.tsx",
-      "line_number": 190,
-      "context": "| { response?: { status?: number }; status?: number; message?: string }\n | undefined;\n const status = err?.response?.status ?? err?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(err?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
+      "line_number": 186,
+      "context": "| { response?: { status?: number }; status?: number; message?: string }\n | undefined;\n const status = err?.response?.status ?? err?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(err?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t, onStreamError, onStreamEnd],\n );",
       "module": "/packages/sdk"
     },
     {
@@ -319,8 +325,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-providers/index.tsx",
-      "line_number": 111,
-      "context": "| { response?: { status?: number }; status?: number; message?: string }\n | undefined;\n const status = err?.response?.status ?? err?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(err?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
+      "line_number": 110,
+      "context": "| { response?: { status?: number }; status?: number; message?: string }\n | undefined;\n const status = err?.response?.status ?? err?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(err?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t, onStreamError, onStreamEnd],\n );",
       "module": "/packages/sdk"
     },
     {
@@ -330,15 +336,9 @@
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedCopyMove.ts",
-      "line_number": 226,
-      "context": "FilesFilter.getDefault(),\n )) as TGetFolder;\n const dest = resolveEncryptedCopyDest(destFolderData);\n \n if (dest.mode === \"blocked\") {\n toastr.error(t(\"Common:UnexpectedError\"));\n return;\n }\n \n const { decryptEncryptedItemToFile, addCopySuffix } =\n await loadCopyModule();",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedDownload.ts",
-      "line_number": 132,
-      "context": "});\n \n if (controller.signal.aborted) return;\n \n if (!result.success || !result.file) {\n toastr.error(result.error || t(\"Common:UnexpectedError\"));\n return;\n }\n triggerFileDownload(result.file, result.file.name);\n } catch (error) {\n if (controller.signal.aborted) return;",
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsActions.ts",
+      "line_number": 296,
+      "context": "if (progressStarted) progressStore.error();\n // A failure the server reports for the task carries its own message;\n // one of the polling itself does not, and is not shown as is.\n toastr.error(\n error instanceof TaskPollingError\n ? t(\"Common:UnexpectedError\")\n : (error as string),\n );\n console.error(error);\n }\n },",
       "module": "/packages/sdk"
     },
     {
@@ -379,13 +379,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 1601,
+      "line_number": 1609,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n /**",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 1601,
+      "line_number": 1609,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n /**",
       "module": "/packages/shared"
     }

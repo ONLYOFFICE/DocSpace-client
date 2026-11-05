@@ -47,6 +47,8 @@ import { TSettings } from "@docspace/shared/api/settings/types";
 import { HeaderProps, TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type {
   TSelectedFileInfo,
+  TFilesSelectorFile,
+  TFilesSelectorLoadedFiles,
   FilesSettingsDto,
   FolderDtoInteger,
   SdkFolderType,
@@ -234,6 +236,8 @@ export type TError = {
   status?: "not-found" | "access-denied" | number | string;
   type?: string;
   editorUrl?: string;
+  /** What actually failed, for the error report only; never shown. */
+  cause?: string;
 };
 
 export type TResponse =
@@ -251,6 +255,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+      /** Whether the connected Document Server can edit encrypted files. */
+      docServiceEncryptionSupported?: boolean;
     }
   | {
       error: TError;
@@ -266,6 +272,7 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+      docServiceEncryptionSupported?: undefined;
     };
 
 export type EditorProps = {
@@ -280,6 +287,8 @@ export type EditorProps = {
   errorMessage?: string;
   isSkipError?: boolean;
   filesSettings?: TFilesSettings;
+  /** Whether the connected Document Server can edit encrypted files. */
+  docServiceEncryptionSupported?: boolean;
   organizationName?: string;
   shareKey?: string;
 
@@ -328,7 +337,7 @@ export interface SelectFolderDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | FileEntryDtoIntegerAllOfSecurity
@@ -368,7 +377,7 @@ export interface SelectFileDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | FileEntryDtoIntegerAllOfSecurity
@@ -377,6 +386,7 @@ export interface SelectFileDialogProps {
     isDisabledFolder?: boolean,
     isInsideKnowledge?: boolean,
     isInsideResultStorage?: boolean,
+    isInsidePrivateRoom?: boolean,
   ) => boolean;
   isVisible: boolean;
   onClose: () => void;
@@ -391,7 +401,13 @@ export interface SelectFileDialogProps {
     selectedFileInfo: TSelectedFileInfo,
     isInsideKnowledge?: boolean,
     isInsideResultStorage?: boolean,
+    isInsidePrivateRoom?: boolean,
   ) => void | Promise<void>;
+  onFilesLoaded?: (
+    files: TFilesSelectorFile[],
+    context: TFilesSelectorLoadedFiles,
+  ) => void;
+  disabledItems?: (string | number)[];
   fileInfo: TFile;
   filesSettings: FilesSettingsDto;
   selectedFolderId?: string | number;
@@ -515,7 +531,7 @@ export type StartFillingSelectorDialogProps = {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | FileEntryDtoIntegerAllOfSecurity

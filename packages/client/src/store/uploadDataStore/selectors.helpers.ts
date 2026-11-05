@@ -34,15 +34,11 @@
  */
 
 import sumBy from "lodash/sumBy";
-import { RoomsType } from "@docspace/shared/enums";
 import {
-  shouldEncryptUpload,
+  resolveUploadGate,
   willEncryptUploadItem,
 } from "@docspace/shared/services/private-room/encrypted-upload";
-import {
-  getActiveKeyId,
-  selectActiveKey,
-} from "@docspace/shared/services/encryption/active-key-preference";
+import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import { countActiveUploadsForRoom } from "@docspace/shared/utils/uploadErrors";
 
 import type { TUploadFile } from "./helpers";
@@ -120,7 +116,7 @@ export function getUserEncryptionKeysImpl(self: UploadDataStore): {
   }
 
   const userIdStr = String(userId);
-  const activeKey = selectActiveKey(keys, getActiveKeyId(userIdStr));
+  const activeKey = selectUserKey(keys);
   if (!activeKey) {
     return { publicKey: null, userId: null, publicKeyId: null };
   }
@@ -133,15 +129,10 @@ export function getUserEncryptionKeysImpl(self: UploadDataStore): {
 }
 
 export function shouldEncryptCurrentUploadImpl(self: UploadDataStore) {
-  const isPrivate = self.treeFoldersStore.isPrivacyFolder;
-  const roomType = isPrivate
-    ? RoomsType.CustomRoom
-    : self.selectedFolderStore.roomType;
   const { publicKey, userId } = self.getUserEncryptionKeys();
   return (
-    shouldEncryptUpload(roomType as RoomsType, isPrivate) &&
-    !!publicKey &&
-    !!userId
+    resolveUploadGate({ publicKey, userId }, self.resolveOpenFolderTarget())
+      .action === "encrypt"
   );
 }
 
@@ -158,6 +149,6 @@ export function willEncryptItemImpl(
       publicKey,
       userId,
     },
-    self.getUploadFolderContext(),
+    item.target,
   );
 }

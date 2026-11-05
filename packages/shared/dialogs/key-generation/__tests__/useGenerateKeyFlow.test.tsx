@@ -132,12 +132,69 @@ describe("useGenerateKeyFlow", () => {
   });
 
   describe("entry branch", () => {
-    it("opens the passphrase modal directly regardless of existing keys (no gate)", async () => {
+    it("opens the passphrase modal for a user without a key", async () => {
+      render(<Harness userId="42" refreshKeysFromServer={vi.fn()} />);
+      await act(async () => latest.request());
+      expect(captured.passphrase).not.toBeNull();
+    });
+
+    it("Key already exists: no passphrase modal opens", async () => {
       render(
         <Harness userId="42" hasExistingKeys refreshKeysFromServer={vi.fn()} />,
       );
       await act(async () => latest.request());
-      expect(captured.passphrase).not.toBeNull();
+      expect(captured.passphrase).toBeNull();
+    });
+  });
+
+  describe("User cancels inside key generation", () => {
+    it("reports a cancel of the passphrase dialog", async () => {
+      const onCancel = vi.fn();
+      const onError = vi.fn();
+      render(
+        <Harness
+          userId="42"
+          refreshKeysFromServer={vi.fn()}
+          onCancel={onCancel}
+          onError={onError}
+        />,
+      );
+      await act(async () => latest.request());
+
+      await act(async () => {
+        (captured.passphrase!.onCancel as () => void)();
+      });
+
+      expect(onCancel).toHaveBeenCalledTimes(1);
+      expect(onError).not.toHaveBeenCalled();
+      expect(captured.passphrase).toBeNull();
+      expect(setEncryptionKeys).not.toHaveBeenCalled();
+    });
+
+    it("reports a cancel of the recovery-phrase dialog", async () => {
+      happyMocks();
+      const onCancel = vi.fn();
+      render(
+        <Harness
+          userId="42"
+          refreshKeysFromServer={vi.fn()}
+          onCancel={onCancel}
+        />,
+      );
+      await act(async () => latest.request());
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+
+      await act(async () => {
+        (captured.recovery!.onCancel as () => void)();
+      });
+
+      expect(onCancel).toHaveBeenCalledTimes(1);
+      expect(captured.recovery).toBeNull();
+      expect(setEncryptionKeys).not.toHaveBeenCalled();
     });
   });
 
@@ -277,32 +334,7 @@ describe("useGenerateKeyFlow", () => {
       expect(callOrder).toEqual(["api", "apply", "refresh"]);
     });
 
-    it("registers INACTIVE (activate=false) when the account already has keys", async () => {
-      happyMocks();
-      render(
-        <Harness userId="42" hasExistingKeys refreshKeysFromServer={vi.fn()} />,
-      );
-      await act(async () => latest.request());
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
-      await act(async () => {
-        await (captured.recovery!.onConfirm as () => Promise<void>)();
-      });
-
-      expect(applyNewIdentity).toHaveBeenCalledWith(
-        expect.objectContaining({
-          userId: "42",
-          newIdentity: dummyKeyPair,
-          newPublicKeyB64: "pub-base64",
-          activate: false,
-        }),
-      );
-    });
-
-    it("activates (activate=true) in the zero-keys bootstrap case", async () => {
+    it("applies the new key as the user's only key", async () => {
       happyMocks();
       render(
         <Harness
@@ -322,7 +354,7 @@ describe("useGenerateKeyFlow", () => {
       });
 
       expect(applyNewIdentity).toHaveBeenCalledWith(
-        expect.objectContaining({ activate: true }),
+        expect.objectContaining({ userId: "42" }),
       );
     });
 

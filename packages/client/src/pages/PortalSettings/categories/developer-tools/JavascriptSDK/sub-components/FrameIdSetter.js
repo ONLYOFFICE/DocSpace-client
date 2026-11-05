@@ -68,7 +68,6 @@ export const FrameIdSetter = (props) => {
 				value={frameId}
 				onChange={onChangeFrameId}
 				placeholder={t("EnterId")}
-				tabIndex={4}
 				testId="frame_id_input"
 			/>
 		</ControlsGroup>

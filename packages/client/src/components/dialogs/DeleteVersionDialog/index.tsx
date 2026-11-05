@@ -77,7 +77,6 @@ const DeleteVersionDialogComponent: React.FC<DeleteVersionDialogProps> = (
   };
 
   const onKeyUp = (e: KeyboardEvent) => {
-    if (e.key === "Esc" || e.key === "Escape") onClose();
     if (e.key === "Enter") onDelete();
   };
 

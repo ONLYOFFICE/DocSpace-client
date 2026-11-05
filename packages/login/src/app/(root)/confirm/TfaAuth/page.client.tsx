@@ -159,7 +159,6 @@ const TfaAuthForm = () => {
               size={InputSize.large}
               scale
               isAutoFocussed
-              tabIndex={1}
               placeholder={t("EnterCodePlaceholder")}
               isDisabled={isLoading}
               maxLength={6}
@@ -176,7 +175,6 @@ const TfaAuthForm = () => {
             scale
             primary
             size={ButtonSize.medium}
-            tabIndex={3}
             label={
               isLoading
                 ? t("Common:LoadingProcessing")

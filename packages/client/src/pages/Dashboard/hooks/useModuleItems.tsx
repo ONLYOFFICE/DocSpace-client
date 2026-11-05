@@ -42,14 +42,13 @@ import { Events, RoomsType } from "@docspace/shared/enums";
 import CatalogRoomsIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg";
 import CatalogFolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
 import CatalogDocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg";
-import AiAgentsIcon from "PUBLIC_DIR/images/icons/16/ai-agents.svg";
 
 import type { ModuleItem } from "../sub-components/ModuleCard";
 import { DASHBOARD_ANALYTICS_CONTEXT } from "../utils";
 
 // The dashboard sits outside any folder, so creation is dispatched without a
 // parent and each dialog falls back to its section root. `context` is only read
-// by analytics: it tags the RoomCreated / AgentCreated events as coming from
+// by analytics: it tags the RoomCreated events as coming from
 // the Dashboard rather than the sidebar.
 const DASHBOARD_CREATE_DETAIL = {
   parentId: null,
@@ -69,29 +68,10 @@ const dispatchCreateRoom = (startRoomType?: RoomsType) => {
   window.dispatchEvent(event);
 };
 
-// Opens the create-agent dialog. GlobalEvents' onCreateAgent runs the
-// AI-readiness gate itself, showing the activate-AI dialog first when the
-// portal isn't set up yet.
-const dispatchCreateAgent = () => {
-  window.dispatchEvent(
-    new CustomEvent(Events.AGENT_CREATE, { detail: DASHBOARD_CREATE_DETAIL }),
-  );
-};
-
 export type UseModuleItemsProps = {
   isGuest: boolean;
   /** Admins / owners / room admins — the set allowed to create rooms. */
   canCreateRooms: boolean;
-  /** `canCreateRooms` plus AI being ready, which agent creation also needs. */
-  canCreateAgents: boolean;
-  /**
-   * The portal-wide AI switch (Settings -> Integration -> AI services).
-   *
-   * Stricter than `canCreateAgents`, and it removes the card instead of
-   * degrading it: a portal with AI switched off has no agents to open either,
-   * so an app card leading into that section would only offer a dead end.
-   */
-  aiServicesEnabled: boolean;
   /**
    * Rooms quota is exhausted or the portal is in its grace period. Room and
    * form-set creation then opens the quota warning instead of the create
@@ -112,9 +92,16 @@ export type UseModuleItemsProps = {
    * not see the card at all.
    */
   canEnableApps: boolean;
+  /**
+   * The "AI rooms" section is there: AI is switched on and the server serves
+   * its root (never for a guest). It is not an app that can be switched off,
+   * so its card is either shown as on or not built at all.
+   */
+  isAiHubAvailable: boolean;
 };
 
 const APPS_SETTINGS_PATH = "/portal-settings/apps";
+const AI_HUB_PATH = "/ai-rooms/filter";
 
 /**
  * Builds the app cards for the Dashboard's "Apps" section.
@@ -130,12 +117,11 @@ const APPS_SETTINGS_PATH = "/portal-settings/apps";
 export const useModuleItems = ({
   isGuest,
   canCreateRooms,
-  canCreateAgents,
-  aiServicesEnabled,
   isWarningRoomsDialog,
   setQuotaWarningDialogVisible,
   isAppInstalled,
   canEnableApps,
+  isAiHubAvailable,
 }: UseModuleItemsProps): ModuleItem[] => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -144,7 +130,6 @@ export const useModuleItems = ({
   // Dashboard tracks the apps list and the memo re-runs once it loads.
   const roomsInstalled = isAppInstalled("ai-rooms");
   const formsInstalled = isAppInstalled("ai-forms");
-  const agentsInstalled = isAppInstalled("ai-agents");
 
   return React.useMemo(() => {
     // Wraps a room-flavoured create so an exhausted quota surfaces its own
@@ -239,30 +224,25 @@ export const useModuleItems = ({
           ),
         ),
       },
-      // Dropped outright on a portal with AI switched off - see
-      // `aiServicesEnabled`. The sidebar drops its AI Agents item under the
-      // same rule, so the app is absent from both places at once.
-      ...(aiServicesEnabled
-        ? [
-            {
-              id: "ai-agents",
-              icon: <AiAgentsIcon />,
-              title: t("Common:AIAgents"),
-              description: t("Common:DashboardAIChatAgentsDescription"),
-              href: "/ai-agents/filter",
-              ...withInstallState(
-                agentsInstalled,
-                createOrOpen(
-                  canCreateAgents,
-                  "/ai-agents/filter",
-                  t("Common:CreateAIAgent"),
-                  dispatchCreateAgent,
-                ),
-              ),
-            },
-          ]
-        : []),
     ];
+
+    // "AI rooms" (Instructions rooms, Knowledge rooms and AI projects) comes
+    // last, as in the sidebar. Its rooms are created from a type chooser of
+    // their own inside the section, so the card opens the section; it has no
+    // onboarding tour.
+    if (isAiHubAvailable) {
+      items.push({
+        id: "ai-hub",
+        icon: <CatalogRoomsIcon />,
+        title: t("Common:AiRooms"),
+        description: t("Common:AiRoomsCreateDescription"),
+        installed: true,
+        href: AI_HUB_PATH,
+        buttonLabel: t("Common:Open"),
+        onAction: () => navigate(AI_HUB_PATH),
+        noTour: true,
+      });
+    }
 
     return items.filter((mod) => mod.installed || canEnableApps);
   }, [
@@ -270,14 +250,12 @@ export const useModuleItems = ({
     navigate,
     isGuest,
     canCreateRooms,
-    canCreateAgents,
-    aiServicesEnabled,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
     roomsInstalled,
     formsInstalled,
-    agentsInstalled,
     canEnableApps,
+    isAiHubAvailable,
   ]);
 };
 

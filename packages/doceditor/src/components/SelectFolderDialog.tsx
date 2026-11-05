@@ -119,7 +119,6 @@ const SelectFolderDialog = ({
 			withCreate
 			disabledCreatePublicRoom={disabledCreatePublicRoom}
 			formProps={formProps}
-			withAIAgentsTreeFolder
 		/>
 	);
 };

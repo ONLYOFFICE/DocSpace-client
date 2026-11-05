@@ -77,7 +77,6 @@ const FieldMapping = (props) => {
         labelText={t("Common:FirstName")}
         name="firstName"
         placeholder={SSO_GIVEN_NAME}
-        tabIndex={16}
         value={firstName}
         hasError={firstNameHasError}
         dataTestId="first_name_field"
@@ -87,7 +86,6 @@ const FieldMapping = (props) => {
         labelText={t("Common:LastName")}
         name="lastName"
         placeholder={SSO_SN}
-        tabIndex={17}
         value={lastName}
         hasError={lastNameHasError}
         dataTestId="last_name_field"
@@ -97,7 +95,6 @@ const FieldMapping = (props) => {
         labelText={t("Common:Email")}
         name="email"
         placeholder={SSO_EMAIL}
-        tabIndex={18}
         value={email}
         hasError={emailHasError}
         dataTestId="email_field"
@@ -107,7 +104,6 @@ const FieldMapping = (props) => {
         labelText={t("Common:Location")}
         name="location"
         placeholder={SSO_LOCATION}
-        tabIndex={19}
         value={location}
         hasError={locationHasError}
       />
@@ -116,7 +112,6 @@ const FieldMapping = (props) => {
         labelText={t("Common:Title")}
         name="title"
         placeholder={SSO_TITLE}
-        tabIndex={20}
         value={title}
         hasError={titleHasError}
       />
@@ -125,7 +120,6 @@ const FieldMapping = (props) => {
         labelText={t("Common:Phone")}
         name="phone"
         placeholder={SSO_PHONE}
-        tabIndex={21}
         value={phone}
         hasError={phoneHasError}
   /> */}

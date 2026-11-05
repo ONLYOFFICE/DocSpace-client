@@ -3,7 +3,7 @@
   "content": "Copy link",
   "content_en_sha1_hash": "2f84eea5d45da4f1ce1760b85db18a854f4e1b39",
   "created_at": "2025-05-19T21:30:43.782Z",
-  "updated_at": "2026-10-21T10:17:45.750Z",
+  "updated_at": "2026-11-05T16:49:39.918Z",
   "comment": {
     "text": "Button label. This action copies a shareable link to the clipboard.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 480,
-      "context": "disabled: false,\n },\n {\n id: \"option_link-for-room-members\",\n key: \"link-for-room-members\",\n label: t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => self.onCopyLink(item, t),\n disabled: item.isTemplate\n ? false\n : (!item.isRoom && item.canShare) ||",
+      "line_number": 482,
+      "context": "disabled: false,\n },\n {\n id: \"option_link-for-room-members\",\n key: \"link-for-room-members\",\n label: t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => self.onCopyLink(item, t),\n // A shareable file copies its external link instead; the AI rooms\n // have none, so their files keep this one.\n disabled: item.isTemplate",
       "module": "/packages/client"
     },
     {
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 251,
+      "line_number": 254,
       "context": "const getLinkForRoomMembersItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_link-for-room-members\",\n key: \"link-for-room-members\",\n label: t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: i.isFolder\n ? () => copyFolderLink(i.id)\n : () => copyFileLink(i.id),\n disabled: false,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 326,
+      "line_number": 358,
       "context": "? \"option_external-link\"\n : \"option_link-for-room-members\",\n key: canCopyExternalLink ? \"external-link\" : \"link-for-room-members\",\n label: canCopyExternalLink\n ? t(\"Common:CopySharedLink\")\n : t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: async () => {\n try {\n let url: string;\n if (canCopyExternalLink) {",
       "module": "/packages/sdk"
     },
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 465,
+      "line_number": 481,
       "context": "if (isRestrictedByAdmin) {\n return [\n {\n key: \"copy-link-settings-key\",\n label: t(\"Common:CopyLink\"),\n icon: CopyToReactSvgUrl,\n onClick: () => onCopyLink(link),\n },\n {\n key: \"delete-link-separator\",",
       "module": "/packages/shared"
     }

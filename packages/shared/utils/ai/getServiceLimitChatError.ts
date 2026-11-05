@@ -40,19 +40,32 @@ export type TServiceLimitChatError = {
   until: string | null;
 };
 
-// The AI gateway relays the accounting service's 403 "Service limit exceeded:
-// Service limit exceeded for customer No.X. Service group 'ai-services', amount
-// limit 1.0, available 0.02 until 2026-10-23 23:59:59Z" as is, and ai-chat
-// folds every 403 into code "auth", so the text is the only signal left. A
-// lifetime limit never resets, so its message has no "until" part.
+// The AI gateway answers a spending limit with 402 and the OpenAI-style body
+// { error: { code: "service_limit_exceeded", type: "payment_error",
+// message: "Service limit exceeded" } }; ai-chat folds every 402 into code
+// "insufficient_funds" (the same as an empty wallet), so the text is the only
+// signal left. Older gateways relayed the accounting service's 403 "Service
+// limit exceeded for customer No.X. Service group 'ai-services', amount limit
+// 1.0, available 0.02 until 2026-10-23 23:59:59Z" (or cut to "403 Service
+// limit exceeded"), which ai-chat folds into code "auth". Only that long form
+// carries a reset date; a lifetime limit has no "until" part either.
+const SERVICE_LIMIT_CODES = new Set([
+  "auth",
+  "insufficient_funds",
+  "service_limit_exceeded",
+]);
+
 export const getServiceLimitChatError = (
   payload: TChatErrorPayload,
 ): TServiceLimitChatError | null => {
-  if (payload?.code !== "auth") return null;
+  if (!payload?.code || !SERVICE_LIMIT_CODES.has(payload.code)) return null;
 
   const message = payload.message ?? "";
   if (!/service limit exceeded/i.test(message)) return null;
-  if (!/service group 'ai-services'/i.test(message)) return null;
+  // The gateway may shorten the text to "403 Service limit exceeded"; only a
+  // message that names another service group is someone else's limit.
+  const group = message.match(/service group '([^']*)'/i);
+  if (group && group[1].toLowerCase() !== "ai-services") return null;
 
   const until = message.match(
     /\buntil (\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2}:\d{2})Z\b/,

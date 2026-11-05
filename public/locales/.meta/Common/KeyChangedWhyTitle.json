@@ -3,7 +3,7 @@
   "content": "Why does this happen?",
   "content_en_sha1_hash": "9a5b63c2c27331b350ca1f1ac9bc40e93e0def5f",
   "created_at": "2026-05-24T17:27:30.469Z",
-  "updated_at": "2026-05-24T17:47:12.141Z",
+  "updated_at": "2026-11-05T16:49:40.021Z",
   "comment": {
     "text": "Title for an expandable information section within the key change dialog.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx",
-      "line_number": 174,
+      "line_number": 179,
       "context": "</div>\n </div>\n \n <details className={styles.disclosure}>\n <summary className={styles.disclosureSummary}>\n {t(\"Common:KeyChangedWhyTitle\")}\n </summary>\n <div className={styles.disclosureBody}>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:KeyChangedWhyIntro\")}\n </Text>",
       "module": "/packages/shared"
     }

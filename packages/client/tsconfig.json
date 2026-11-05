@@ -13,8 +13,9 @@
       "@docspace/shared/*": ["../shared/*"]
     },
     "target": "esnext",
+    "allowImportingTsExtensions": true,
     "types": ["vite/client"]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.mts"],
   "exclude": ["node_modules", "dist"]
 }

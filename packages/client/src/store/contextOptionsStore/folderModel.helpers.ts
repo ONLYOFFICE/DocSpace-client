@@ -49,6 +49,7 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.template.react.svg?url";
+import AIReactSvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 import { isMobile, isTablet } from "react-device-detect";
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
@@ -376,10 +377,23 @@ export const getFolderModelImpl = (
       icon: ActionsUploadReactSvgUrl,
       onClick: () => onUploadAction("file"),
     };
+    // An Instructions room can also have a skill written for it: the AI
+    // service turns a name and a description into the Markdown file.
+    const createSkillWithAI: TContextOption = {
+      id: "personal_create-skill-with-ai",
+      key: "create-skill-with-ai",
+      label: t("Common:CreateSkillWithAI"),
+      icon: AIReactSvgUrl,
+      onClick: () => self.onShowGenerateSkillDialog(),
+    };
     const sourceRoomOptions: TContextOption[] =
-      roomType === RoomsType.KnowledgeRoom && !vectorizationEnabled
-        ? []
-        : [uploadFromStorage, uploadFromDevice];
+      roomType === RoomsType.KnowledgeRoom
+        ? vectorizationEnabled
+          ? [uploadFromStorage, uploadFromDevice]
+          : []
+        : self.isCreateSkillWithAIAvailable
+          ? [uploadFromStorage, uploadFromDevice, createSkillWithAI]
+          : [uploadFromStorage, uploadFromDevice];
 
     return sourceRoomOptions.length > 0 ? sourceRoomOptions : null;
   }

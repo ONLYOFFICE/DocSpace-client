@@ -333,6 +333,7 @@ export default inject(
       isRecycleBinFolder,
       isPersonalRoom,
       isRoom,
+      isAiHubFolderRoot,
       isTemplatesFolderRoot,
       isSharedWithMeFolderRoot,
     } = treeFoldersStore;
@@ -374,7 +375,10 @@ export default inject(
       setIsRoomDelete,
       deleteRoomsAction,
       isPersonalRoom,
-      isRoom,
+      // Instructions and Knowledge rooms live under the "AI rooms" root, not
+      // under Rooms, but their files go to Trash the same way, so the room
+      // wording applies (without it the dialog had no text at all).
+      isRoom: isRoom || isAiHubFolderRoot,
       isTemplatesFolder: isTemplatesFolderRoot,
       onRemoveSharedFilesOrFolder,
       setUnsubscribe,

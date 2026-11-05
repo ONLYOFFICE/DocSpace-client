@@ -47,7 +47,6 @@ const os = require("os");
 const packagePath = path.resolve(__dirname, "package.json");
 const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
 
-const BannerPlugin = require("webpack").BannerPlugin;
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
@@ -127,7 +126,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withBundleAnalyzer({
-  webpack(config) {
+  webpack(config, { webpack }) {
     const isProduction = config.mode === "production";
 
     // Add resolve configuration for shared package
@@ -181,7 +180,7 @@ module.exports = withBundleAnalyzer({
       };
 
       config.plugins.push(
-        new BannerPlugin({
+        new webpack.BannerPlugin({
           raw: true,
           banner,
         }),

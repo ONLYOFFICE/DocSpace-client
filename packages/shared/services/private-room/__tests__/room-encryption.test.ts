@@ -1215,6 +1215,23 @@ describe("validateMembersForEncryption", () => {
     expect(getRoomEncryptionKeysMock).not.toHaveBeenCalled();
   });
 
+  it("Keys of prospective members fed in: the room keys are not read", async () => {
+    const result = await validateMembersForEncryption(
+      ROOM_ID,
+      [BOB],
+      ALICE,
+      undefined,
+      { [BOB]: "Bob" },
+      new Map([
+        [BOB, { userId: BOB, publicKey: pubB64(bob), publicKeyId: "bob-key" }],
+      ]),
+    );
+
+    expect(getRoomEncryptionKeysMock).not.toHaveBeenCalled();
+    expect(result.valid).toEqual([{ id: BOB, publicKey: pubB64(bob) }]);
+    expect(result.skipped).toEqual([]);
+  });
+
   it("returns valid entry when member has key in room ACL", async () => {
     getRoomEncryptionKeysMock.mockResolvedValue([
       { userId: BOB, publicKey: pubB64(bob) },

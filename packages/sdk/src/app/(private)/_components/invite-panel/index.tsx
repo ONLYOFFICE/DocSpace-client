@@ -39,6 +39,7 @@ import React from "react";
 
 import type { TUser } from "@docspace/shared/api/people/types";
 import { RoomsType } from "@docspace/shared/enums";
+import type { SkippedRoomMember } from "@docspace/shared/services/private-room/room-encryption";
 
 import InvitePanel from "@/app/(rooms)/_components/invite-panel";
 
@@ -67,11 +68,21 @@ const PrivateInvitePanel: React.FC<PrivateInvitePanelProps> = ({
   defaultAccess,
   onMembersUpdated,
 }) => {
-  const { onInviteSubmitted, onBeforeSubmit } = usePrivateInviteFlow();
+  const { onVerifyInvitees, onInviteSubmitted, onBeforeSubmit } =
+    usePrivateInviteFlow();
+
+  const handleVerifyInvitees = React.useCallback(
+    (memberIds: string[], displayNames: Record<string, string>) =>
+      onVerifyInvitees({ roomId, memberIds, displayNames }),
+    [onVerifyInvitees, roomId],
+  );
 
   const handleInviteSubmitted = React.useCallback(
-    (memberIds: string[], displayNames: Record<string, string>) =>
-      onInviteSubmitted({ roomId, memberIds, displayNames }),
+    (
+      memberIds: string[],
+      displayNames: Record<string, string>,
+      skipped: SkippedRoomMember[],
+    ) => onInviteSubmitted({ roomId, memberIds, displayNames, skipped }),
     [onInviteSubmitted, roomId],
   );
 
@@ -87,6 +98,7 @@ const PrivateInvitePanel: React.FC<PrivateInvitePanelProps> = ({
       culture={culture}
       onMembersUpdated={onMembersUpdated}
       onBeforeSubmit={onBeforeSubmit}
+      onVerifyInvitees={handleVerifyInvitees}
       onInviteSubmitted={handleInviteSubmitted}
     />
   );

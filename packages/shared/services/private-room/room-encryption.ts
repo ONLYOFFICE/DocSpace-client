@@ -644,12 +644,14 @@ export async function validateMembersForEncryption(
   scopeUserId: string,
   onKeyChange?: KeyMismatchResolver,
   displayNames?: Record<string, string | undefined>,
+  /** The keys to verify against; the room's member keys when left out. */
+  keys?: Map<string, RoomMemberPublicKey>,
 ): Promise<MemberValidationResult> {
   const valid: NewRoomMember[] = [];
   const skipped: SkippedRoomMember[] = [];
   if (memberIds.length === 0) return { valid, skipped };
 
-  const { keyByUserId } = await loadRoomMemberKeys(roomId);
+  const keyByUserId = keys ?? (await loadRoomMemberKeys(roomId)).keyByUserId;
 
   for (const memberId of memberIds) {
     const displayName = displayNames?.[memberId];

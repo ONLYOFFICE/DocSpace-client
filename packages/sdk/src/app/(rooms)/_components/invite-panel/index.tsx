@@ -85,7 +85,9 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import {
   sendPrivateRoomInvitations,
   type TInviteOutcome,
+  type TInviteeVerification,
 } from "@docspace/shared/services/private-room/room-member-flows";
+import type { SkippedRoomMember } from "@docspace/shared/services/private-room/room-encryption";
 
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button/Button.enums";
@@ -194,14 +196,25 @@ type InvitePanelProps = {
   culture?: string;
   onMembersUpdated?: () => void;
   /**
+   * Invoked before `setRoomSecurity` with the invitees who are portal users.
+   * Private rooms use it to verify their keys: the ones it skips are left
+   * out of the security update and reported in the result.
+   */
+  onVerifyInvitees?: (
+    memberIds: string[],
+    displayNamesByMemberId: Record<string, string>,
+  ) => Promise<TInviteeVerification>;
+  /**
    * Invoked once `setRoomSecurity` has resolved. Private rooms use it to
    * wrap the file keys for the new members; the panel stays open until it
    * settles and shows the outcome it resolves with, or closes on `null`.
-   * A rejection is shown as a toast.
+   * A rejection is shown as a toast. `skipped` names the invitees
+   * `onVerifyInvitees` left out.
    */
   onInviteSubmitted?: (
     memberIds: string[],
     displayNamesByMemberId: Record<string, string>,
+    skipped: SkippedRoomMember[],
   ) => Promise<TInviteOutcome | null>;
   /**
    * Optional async gate called BEFORE `setRoomSecurity`. Return `true` to
@@ -225,6 +238,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   isPrivateRoom = false,
   culture,
   onMembersUpdated,
+  onVerifyInvitees,
   onInviteSubmitted,
   onBeforeSubmit,
 }) => {
@@ -661,9 +675,34 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         }
       }
 
+      const displayNames: Record<string, string> = {};
+      for (const item of inviteItems) {
+        const id = item.id;
+        const name = item.displayName ?? item.email;
+        if (typeof id === "string" && name) displayNames[id] = name;
+      }
+
+      // Spec: private-rooms/sdk-surface, "Invite panel offers people only and reports the invitation result"
+      const idsToVerify = inviteItems
+        .filter((item) => !item.isGroup && typeof item.id === "string")
+        .map((item) => item.id as string);
+      const verification: TInviteeVerification =
+        isPrivateRoom && onVerifyInvitees && idsToVerify.length > 0
+          ? await onVerifyInvitees(idsToVerify, displayNames)
+          : { verified: [], skipped: [] };
+      const verifiedIds = new Set(verification.verified.map((m) => m.id));
+      const invitationsToSend =
+        isPrivateRoom && onVerifyInvitees
+          ? invitations.filter(
+              (invitation) =>
+                invitation.id === undefined ||
+                verifiedIds.has(String(invitation.id)),
+            )
+          : invitations;
+
       // Spec: private-rooms/sdk-surface, "SDK invitations into a private room are sent one invitee per request"
       const privateSend = isPrivateRoom
-        ? await sendPrivateRoomInvitations(roomId, invitations, {
+        ? await sendPrivateRoomInvitations(roomId, invitationsToSend, {
             notify: data.notify,
             message: data.message,
           })
@@ -696,7 +735,10 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         .map((inv) => inv.id)
         .filter((id): id is string => typeof id === "string" && id.length > 0);
       const showsResult =
-        !!onInviteSubmitted && (memberIds.length > 0 || refused.length > 0);
+        !!onInviteSubmitted &&
+        (memberIds.length > 0 ||
+          refused.length > 0 ||
+          verification.skipped.length > 0);
 
       if (!showsResult) {
         setIsLoading(false);
@@ -715,17 +757,15 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
       // Spec: private-rooms/sdk-surface, "Invite panel offers people only and reports the invitation result"
       if (showsResult) {
         const run = ++sendRunRef.current;
-        const displayNames: Record<string, string> = {};
-        for (const item of inviteItems) {
-          const id = item.id;
-          const name = item.displayName ?? item.email;
-          if (typeof id === "string" && name) displayNames[id] = name;
-        }
 
         let outcome: TInviteOutcome | null = null;
-        if (memberIds.length > 0) {
+        if (memberIds.length > 0 || verification.skipped.length > 0) {
           try {
-            outcome = await onInviteSubmitted(memberIds, displayNames);
+            outcome = await onInviteSubmitted(
+              memberIds,
+              displayNames,
+              verification.skipped,
+            );
           } catch (encryptError) {
             toastr.error(encryptError as string | Error);
           }

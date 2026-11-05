@@ -39,7 +39,11 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
-import type { TInviteOutcome } from "@docspace/shared/services/private-room/room-member-flows";
+import type {
+  TInviteOutcome,
+  TInviteeVerification,
+} from "@docspace/shared/services/private-room/room-member-flows";
+import type { SkippedRoomMember } from "@docspace/shared/services/private-room/room-encryption";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
@@ -49,13 +53,23 @@ import {
   releaseCryptoOperation,
 } from "../_utils/abort-registry";
 
-type InviteAfterSubmitArgs = {
+type InviteVerifyArgs = {
   roomId: number;
   memberIds: string[];
   displayNames: Record<string, string>;
 };
 
+type InviteAfterSubmitArgs = InviteVerifyArgs & {
+  /** The invitees the verification before the grant left out. */
+  skipped?: SkippedRoomMember[];
+};
+
 type UsePrivateInviteFlowReturn = {
+  /**
+   * Verifies the invitees' keys before the room security update, through
+   * the shared flow: the ones it skips are not granted the room.
+   */
+  onVerifyInvitees: (args: InviteVerifyArgs) => Promise<TInviteeVerification>;
   /**
    * Invoked once the room security update has succeeded: wraps the room's
    * file keys for the new members through the shared flow, with the
@@ -83,9 +97,37 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
   const identityStore = useEncryptionIdentityStore();
   const dialogs = usePrivateDialogsStore();
 
+  const onVerifyInvitees = React.useCallback(
+    async ({ roomId, memberIds, displayNames }: InviteVerifyArgs) => {
+      const userId = identityStore.userKeys?.userId;
+      if (!userId) {
+        throw new Error(t("Common:EncryptionKeysNotConfigured"));
+      }
+      const { verifyInvitees } = await loadMemberFlows();
+      return verifyInvitees({
+        roomId,
+        invitees: memberIds.map((id) => ({ id, displayName: displayNames[id] })),
+        currentUserId: userId,
+      });
+    },
+    [identityStore, t],
+  );
+
   const onInviteSubmitted = React.useCallback(
-    async ({ roomId, memberIds, displayNames }: InviteAfterSubmitArgs) => {
-      if (memberIds.length === 0) return null;
+    async ({
+      roomId,
+      memberIds,
+      displayNames,
+      skipped = [],
+    }: InviteAfterSubmitArgs) => {
+      if (memberIds.length === 0) {
+        if (skipped.length === 0) return null;
+        const { skippedMemberNotices } = await loadMemberFlows();
+        for (const { level, text } of skippedMemberNotices(t, skipped)) {
+          toastr[level](text);
+        }
+        return { granted: [], pending: [], skipped };
+      }
 
       const userId = identityStore.userKeys?.userId;
       if (!userId) {
@@ -109,6 +151,7 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
             id,
             displayName: displayNames[id],
           })),
+          skippedBeforeGrant: skipped,
           currentUserId: userId,
           identity,
           onProgress: ({ percent, completed }) => {
@@ -139,5 +182,5 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
     return true;
   }, [requireIdentity, t]);
 
-  return { onInviteSubmitted, onBeforeSubmit };
+  return { onVerifyInvitees, onInviteSubmitted, onBeforeSubmit };
 };

@@ -59,6 +59,8 @@ const mocks = vi.hoisted(() => ({
   requireIdentity: vi.fn(),
   userKeys: { userId: "me" } as { userId: string } | null,
   rewrapForInvitedMembers: vi.fn(),
+  verifyInvitees: vi.fn(),
+  skippedMemberNotices: vi.fn(),
   toastr: { success: vi.fn(), warning: vi.fn(), error: vi.fn() },
 }));
 
@@ -76,6 +78,8 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
 
 vi.mock("@docspace/shared/services/private-room/room-member-flows", () => ({
   rewrapForInvitedMembers: mocks.rewrapForInvitedMembers,
+  verifyInvitees: mocks.verifyInvitees,
+  skippedMemberNotices: mocks.skippedMemberNotices,
 }));
 
 vi.mock("../_store/EncryptionIdentityStore", () => ({
@@ -216,6 +220,81 @@ describe("usePrivateInviteFlow", () => {
 
     expect(mocks.toastr.error).not.toHaveBeenCalled();
     expect(dialogs.reencryptPercent).toBeNull();
+  });
+
+  it("Order of operations: the invitees are verified through the shared flow before the grant", async () => {
+    const verification = {
+      verified: [{ id: "bob", displayName: "Bob" }],
+      skipped: [{ id: "dan", displayName: "Dan", reason: "no-key" as const }],
+    };
+    mocks.verifyInvitees.mockResolvedValue(verification);
+
+    await act(async () => {
+      await expect(
+        flow.onVerifyInvitees({
+          roomId: 10,
+          memberIds: ["bob", "dan"],
+          displayNames: { bob: "Bob", dan: "Dan" },
+        }),
+      ).resolves.toEqual(verification);
+    });
+
+    expect(mocks.verifyInvitees).toHaveBeenCalledWith({
+      roomId: 10,
+      invitees: [
+        { id: "bob", displayName: "Bob" },
+        { id: "dan", displayName: "Dan" },
+      ],
+      currentUserId: "me",
+    });
+  });
+
+  it("Mixed invitation: the invitees skipped before the grant go to the re-wrap with the granted ones", async () => {
+    const skipped = [
+      { id: "dan", displayName: "Dan", reason: "no-key" as const },
+    ];
+    mocks.rewrapForInvitedMembers.mockImplementation(async () => []);
+
+    await act(async () => {
+      await flow.onInviteSubmitted({
+        roomId: 10,
+        memberIds: ["bob"],
+        displayNames: { bob: "Bob" },
+        skipped,
+      });
+    });
+
+    expect(mocks.rewrapForInvitedMembers).toHaveBeenCalledWith(
+      expect.objectContaining({
+        newMembers: [{ id: "bob", displayName: "Bob" }],
+        skippedBeforeGrant: skipped,
+      }),
+    );
+  });
+
+  it("Every invitee skipped: nothing is wrapped and the skipped are reported", async () => {
+    const skipped = [
+      { id: "dan", displayName: "Dan", reason: "no-key" as const },
+    ];
+    mocks.skippedMemberNotices.mockReturnValue([
+      { level: "warning", text: "Common:EncryptedSkippedNoKeys" },
+    ]);
+
+    let outcome: unknown;
+    await act(async () => {
+      outcome = await flow.onInviteSubmitted({
+        roomId: 10,
+        memberIds: [],
+        displayNames: {},
+        skipped,
+      });
+    });
+
+    expect(outcome).toEqual({ granted: [], pending: [], skipped });
+    expect(mocks.rewrapForInvitedMembers).not.toHaveBeenCalled();
+    expect(mocks.toastr.warning).toHaveBeenCalledWith(
+      "Common:EncryptedSkippedNoKeys",
+    );
   });
 
   it("re-wraps nothing for a user without keys", async () => {

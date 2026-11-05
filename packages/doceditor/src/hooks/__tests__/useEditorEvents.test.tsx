@@ -202,7 +202,7 @@ describe("useEditorEvents", () => {
       act(() => onDocumentStateChange({ data: true }));
       act(() => onDocumentStateChange({ data: false }));
 
-      expect(scheduleFieldChanges).toHaveBeenCalledTimes(2);
+      expect(scheduleFieldChanges.mock.calls).toEqual([[true], [false]]);
     });
 
     it("Editor closed: the renames read last are sent", () => {

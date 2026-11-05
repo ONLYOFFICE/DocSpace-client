@@ -907,11 +907,12 @@ const useEditorEvents = ({
     (event: object) => {
       // Before the readiness check: the editor keeps the handler of its first render. A rename shows as a change at
       // once, while its save may come only when the editor is left, so the fields are read on both.
-      scheduleFieldChanges?.();
+      const modified = (event as { data: boolean }).data;
+      scheduleFieldChanges?.(modified);
 
       if (!documentReady) return;
 
-      setDocSaved(!(event as { data: boolean }).data);
+      setDocSaved(!modified);
 
       setTimeout(() => {
         if (docSaved) {

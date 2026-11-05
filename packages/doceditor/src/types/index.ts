@@ -437,7 +437,8 @@ export interface UseEventsProps {
   disconnectUsers?: () => Promise<void>;
   takeFieldsSnapshot?: () => Promise<void>;
   reportFieldChanges?: () => Promise<void>;
-  scheduleFieldChanges?: () => void;
+  // modified: the document has changes not saved yet.
+  scheduleFieldChanges?: (modified: boolean) => void;
   flushFieldChanges?: () => void;
 }
 

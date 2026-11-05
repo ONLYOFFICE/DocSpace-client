@@ -99,6 +99,25 @@ describe("useFormFieldChanges", () => {
     act(() => root?.render(<Probe fileId={7} version={3} enabled={enabled} />));
   };
 
+  // A snapshot whose reads fail waits between its tries; the wait passes at once.
+  const takeSnapshotWithRetries = async () => {
+    vi.useFakeTimers();
+    try {
+      const done = hook.takeSnapshot();
+      await vi.runAllTimersAsync();
+      await done;
+    } finally {
+      vi.useRealTimers();
+    }
+  };
+
+  // The editor does not tell the fields on the next read.
+  const failNextRead = () =>
+    editor.callCommand.mockImplementationOnce(
+      (_command: () => unknown, callback: (result: unknown) => void) =>
+        callback(null),
+    );
+
   beforeEach(() => {
     // The command runs as the editor would run it: against the builder API of the open document.
     (globalThis as { Api?: object }).Api = {
@@ -145,7 +164,7 @@ describe("useFormFieldChanges", () => {
     await first.takeSnapshot();
 
     setForms(form("1", "fullName"));
-    first.scheduleFieldChanges();
+    first.scheduleFieldChanges(true);
     await hook.reportFieldChanges();
 
     expect(report).toHaveBeenCalledWith(7, {
@@ -230,7 +249,7 @@ describe("useFormFieldChanges", () => {
   it("No id in the snapshot: later reads are not compared against it", async () => {
     render();
     setForms(form(undefined, "name"), form(undefined, "email"));
-    await hook.takeSnapshot();
+    await takeSnapshotWithRetries();
 
     setForms(form("1", "fullName"), form("2", "email"));
     await hook.reportFieldChanges();
@@ -241,7 +260,7 @@ describe("useFormFieldChanges", () => {
   it("One field without an id: the whole read tells nothing, not only that field", async () => {
     render();
     setForms(form(undefined, "name"), form("2", "email"));
-    await hook.takeSnapshot();
+    await takeSnapshotWithRetries();
 
     setForms(form(undefined, "fullName"), form("2", "mail"));
     await hook.reportFieldChanges();
@@ -361,5 +380,146 @@ describe("useFormFieldChanges", () => {
     root = null;
 
     expect(editor.disconnect).toHaveBeenCalledTimes(1);
+  });
+
+  it("Editor busy as the form opens: the snapshot is read again and the renames are reported", async () => {
+    render();
+    setForms(form("1", "name"));
+    failNextRead();
+    await takeSnapshotWithRetries();
+
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+
+    expect(report.mock.calls[0][1].renames).toEqual([
+      { oldKey: "name", newKey: "fullName" },
+    ]);
+  });
+
+  it("Document changed before the snapshot was read again: nothing is reported and the session says so", async () => {
+    render();
+    setForms(form("1", "name"));
+    failNextRead();
+
+    vi.useFakeTimers();
+    try {
+      const done = hook.takeSnapshot();
+      await vi.advanceTimersByTimeAsync(0);
+      // The rename comes while the snapshot waits for its next try.
+      setForms(form("1", "fullName"));
+      hook.scheduleFieldChanges(true);
+      await vi.runAllTimersAsync();
+      await done;
+    } finally {
+      vi.useRealTimers();
+    }
+    await hook.reportFieldChanges();
+
+    expect(report).not.toHaveBeenCalled();
+    expect(console.error).toHaveBeenCalledWith(
+      expect.stringContaining("not tracked"),
+    );
+  });
+
+  it("Document only saved before the snapshot was read again: the snapshot is still taken", async () => {
+    render();
+    setForms(form("1", "name"));
+    failNextRead();
+
+    vi.useFakeTimers();
+    try {
+      const done = hook.takeSnapshot();
+      await vi.advanceTimersByTimeAsync(0);
+      hook.scheduleFieldChanges(false);
+      await vi.runAllTimersAsync();
+      await done;
+    } finally {
+      vi.useRealTimers();
+    }
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+
+    expect(report).toHaveBeenCalledTimes(1);
+  });
+
+  it("No connector, as in Community Edition: one try and nothing logged", async () => {
+    editor.createConnector.mockImplementation(() => undefined);
+    render();
+
+    await hook.takeSnapshot();
+
+    expect(editor.createConnector).toHaveBeenCalledTimes(1);
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it("Report sent as the editor is left failed while the editor stays open: it is sent again", async () => {
+    render();
+    setForms(form("1", "name"));
+    await hook.takeSnapshot();
+
+    report.mockRejectedValueOnce(httpError(500));
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+
+    report.mockRejectedValueOnce(httpError(500));
+    hook.flushFieldChanges();
+    await vi.waitFor(() => expect(console.error).toHaveBeenCalledTimes(2));
+    hook.flushFieldChanges();
+
+    expect(report).toHaveBeenCalledTimes(3);
+  });
+
+  it("Report sent as the editor is left taken by the server: it is not sent again", async () => {
+    render();
+    setForms(form("1", "name"));
+    await hook.takeSnapshot();
+
+    report.mockRejectedValueOnce(httpError(500));
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+
+    hook.flushFieldChanges();
+    await vi.waitFor(() => expect(report).toHaveBeenCalledTimes(2));
+    await Promise.resolve();
+    hook.flushFieldChanges();
+    await hook.reportFieldChanges();
+
+    expect(report).toHaveBeenCalledTimes(2);
+  });
+
+  it("Report sent as the editor is left still on its way: it is not sent twice", async () => {
+    render();
+    setForms(form("1", "name"));
+    await hook.takeSnapshot();
+
+    report.mockRejectedValueOnce(httpError(500));
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+
+    // Closing from the editor and the page going away that follows it.
+    report.mockImplementationOnce(() => new Promise(() => {}));
+    hook.flushFieldChanges();
+    window.dispatchEvent(new Event("pagehide"));
+
+    expect(report).toHaveBeenCalledTimes(2);
+  });
+
+  it("Report sent as the editor is left refused: nothing more is sent in the session", async () => {
+    render();
+    setForms(form("1", "name"));
+    await hook.takeSnapshot();
+
+    report.mockRejectedValueOnce(httpError(500));
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+
+    report.mockRejectedValueOnce(httpError(403));
+    hook.flushFieldChanges();
+    await vi.waitFor(() => expect(console.error).toHaveBeenCalledTimes(2));
+
+    setForms(form("1", "fullerName"));
+    await hook.reportFieldChanges();
+
+    expect(report).toHaveBeenCalledTimes(2);
   });
 });

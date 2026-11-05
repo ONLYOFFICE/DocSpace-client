@@ -58,6 +58,9 @@ const READ_INTERVAL = 3000;
 // A read the editor does not answer, as while it is busy, gives up: nothing waits on it for long.
 const READ_TIMEOUT = 5000;
 
+// How many times the fields of the form as it was opened are read before the session gives up tracking them.
+const SNAPSHOT_ATTEMPTS = 3;
+
 // The longest key the server accepts.
 const MAX_KEY_LENGTH = 255;
 
@@ -188,12 +191,18 @@ const useFormFieldChanges = (
   // One connector for the session, made on the first read and closed with the editor.
   const connector = useRef<TEditorConnector | null>(null);
   const snapshot = useRef<Map<string, string> | null>(null);
+  // The document was changed since it was opened: a snapshot taken now could hold renames already.
+  const changed = useRef(false);
+  const disposed = useRef(false);
   // The renames read last and the number of that read; the server keeps the report with the highest number.
   const latest = useRef<{
     renames: TFormFieldKeyChange[];
     sequence: number;
   } | null>(null);
-  const reported = useRef(NO_RENAMES);
+  // The renames the server took last, with the number of their report.
+  const reported = useRef({ report: NO_RENAMES, sequence: 0 });
+  // The renames sent as the editor is left, while their request is on its way.
+  const flushing = useRef<string | null>(null);
   // Reports go one after another, so a slow one cannot follow a newer one.
   const queue = useRef<Promise<void>>(Promise.resolve());
   // The server refused the form, as when it is not the original form of a form-filling room: nothing more is sent in
@@ -208,18 +217,51 @@ const useFormFieldChanges = (
     return { id, openedVersion };
   }, []);
 
+  const markReported = useCallback((report: string, sequence: number) => {
+    if (sequence >= reported.current.sequence) {
+      reported.current = { report, sequence };
+    }
+  }, []);
+
+  const onReportError = useCallback((error: unknown) => {
+    const status = getErrorStatus(error);
+    if (status === 403 || status === 404) refused.current = true;
+
+    console.error("Form field changes were not reported:", error);
+  }, []);
+
   const readFields = useCallback(() => {
     connector.current ??= getDocEditor()?.createConnector?.() ?? null;
     return readEditorFields(connector.current);
   }, []);
 
+  // The fields as the form was opened. A read the editor does not answer, as while it is still busy opening the form,
+  // is tried again while the document is unchanged; without a snapshot nothing is reported in the session.
   const takeSnapshot = useCallback(async () => {
-    if (!form.current.enabled) return;
+    for (let attempt = 1; attempt <= SNAPSHOT_ATTEMPTS; attempt += 1) {
+      if (!form.current.enabled || disposed.current || changed.current) break;
 
-    const fields = await readFields();
-    snapshot.current = fields
-      ? new Map(fields.map((f) => [f.id, f.key]))
-      : null;
+      const fields = await readFields();
+
+      // A change made while the fields were read may be in them already.
+      if (fields && !changed.current) {
+        snapshot.current = new Map(fields.map((f) => [f.id, f.key]));
+        return;
+      }
+
+      // No connector, as in Community Edition: there is nothing to track.
+      if (!connector.current?.callCommand) return;
+
+      if (attempt < SNAPSHOT_ATTEMPTS) {
+        await new Promise((resolve) => setTimeout(resolve, READ_INTERVAL));
+      }
+    }
+
+    if (form.current.enabled && !disposed.current) {
+      console.error(
+        "Form field changes are not tracked: the editor did not tell the fields of the form",
+      );
+    }
   }, [readFields]);
 
   const reportFieldChanges = useCallback(() => {
@@ -241,32 +283,26 @@ const useFormFieldChanges = (
 
         // Nothing new since the last report.
         const report = JSON.stringify(renames);
-        if (report === reported.current) return;
+        if (report === reported.current.report) return;
 
         await reportFormFieldChanges(to.id, {
           version: to.openedVersion,
           sequence,
           renames,
         });
-        reported.current = report;
+        markReported(report, sequence);
       } catch (error) {
-        const status = getErrorStatus(error);
-        if (status === 403 || status === 404) refused.current = true;
-
-        console.error("Form field changes were not reported:", error);
+        onReportError(error);
       }
     });
 
     return queue.current;
-  }, [target, readFields]);
+  }, [target, readFields, markReported, onReportError]);
 
-  // On a change of the document and on its save: a key changed in the field properties shows as a change at once,
-  // while the save may come only when the field or the editor is left.
-  const scheduleFieldChanges = useMemo(
+  const throttledReport = useMemo(
     () =>
       throttle(
         () => {
-          if (!form.current.enabled) return;
           reportFieldChanges();
         },
         READ_INTERVAL,
@@ -275,15 +311,31 @@ const useFormFieldChanges = (
     [reportFieldChanges],
   );
 
-  // The editor is being left: the renames read last go with a request that outlives the page.
+  // On a change of the document and on its save: a key changed in the field properties shows as a change at once,
+  // while the save may come only when the field or the editor is left.
+  const scheduleFieldChanges = useCallback(
+    (modified: boolean) => {
+      if (!form.current.enabled) return;
+
+      if (modified) changed.current = true;
+      throttledReport();
+    },
+    [throttledReport],
+  );
+
+  // The editor is being left: the renames read last go with a request that outlives the page. They count as reported
+  // once the server took them, since the editor may stay open, as in a frame that only reports its closing.
   const flushFieldChanges = useCallback(() => {
     const last = latest.current;
     const to = target();
     if (!to || !last) return;
 
     const report = JSON.stringify(last.renames);
-    if (report === reported.current) return;
+    if (report === reported.current.report || report === flushing.current) {
+      return;
+    }
 
+    flushing.current = report;
     reportFormFieldChanges(
       to.id,
       {
@@ -292,9 +344,13 @@ const useFormFieldChanges = (
         renames: last.renames,
       },
       true,
-    ).catch(() => {});
-    reported.current = report;
-  }, [target]);
+    )
+      .then(() => markReported(report, last.sequence))
+      .catch(onReportError)
+      .finally(() => {
+        if (flushing.current === report) flushing.current = null;
+      });
+  }, [target, markReported, onReportError]);
 
   useEffect(() => {
     if (!enabled) return;
@@ -304,14 +360,16 @@ const useFormFieldChanges = (
     return () => window.removeEventListener("pagehide", flushFieldChanges);
   }, [enabled, flushFieldChanges]);
 
-  useEffect(
-    () => () => {
-      scheduleFieldChanges.cancel();
+  useEffect(() => {
+    disposed.current = false;
+
+    return () => {
+      disposed.current = true;
+      throttledReport.cancel();
       connector.current?.disconnect?.();
       connector.current = null;
-    },
-    [scheduleFieldChanges],
-  );
+    };
+  }, [throttledReport]);
 
   return {
     takeSnapshot,

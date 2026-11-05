@@ -70,7 +70,10 @@ None.
 - `private-rooms/room-membership`: the backfill sweep wraps the entries
   the server lists as missing and keeps the others, falling back to the
   blind re-wrap of every file for every member when that read fails
-  (decided 2026-11-05 with task 14.2, design decision 20).
+  (decided 2026-11-05 with task 14.2, design decision 20); the owner
+  change wraps the candidate's missing files before it asks the server
+  and keeps the owner when some remain or the server answers 409 (task
+  2.2, design decision 1).
 - `private-rooms/server-contract`: owner change, edition gate, invitation
   e-mail, audit scope, recovery/offboarding
   endpoints, the copy right in archived private rooms and the public keys

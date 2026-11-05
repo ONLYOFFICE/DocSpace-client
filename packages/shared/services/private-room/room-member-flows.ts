@@ -36,7 +36,10 @@
 import type { TFunction } from "i18next";
 
 import { getGroupById } from "../../api/groups";
-import { getRoomCandidateKeys } from "../../api/privacy";
+import {
+  getRoomCandidateKeys,
+  getRoomMissingFileKeys,
+} from "../../api/privacy";
 import { setRoomSecurity } from "../../api/rooms";
 import type { IdentityKeyPair } from "../encryption/types";
 import {
@@ -562,4 +565,43 @@ export async function getNewOwnerKeyRefusal(
   return reason === "no-key"
     ? t("Common:EncryptedChangeOwnerNoKeys", { user: name })
     : t("Common:EncryptedChangeOwnerKeyMismatch", { user: name });
+}
+
+/**
+ * Wraps for the candidate owner of a private room the encrypted files the
+ * server lists them as lacking an entry on, which the server refuses to
+ * hand the room over with. Resolves with the ids of the files the candidate
+ * still lacks: every listed file when their key was refused, otherwise the
+ * files whose write failed or whose entry the server did not store.
+ */
+// Spec: private-rooms/room-membership, "Ownership transfer wraps the candidate's missing files"
+export async function prepareNewOwner({
+  roomId,
+  candidateId,
+  currentUserId,
+  identity,
+}: {
+  roomId: number | string;
+  candidateId: string;
+  currentUserId: string;
+  identity: IdentityKeyPair;
+}): Promise<{ missingFileIds: number[] }> {
+  const candidate = candidateId.toLowerCase();
+  const listed = await getRoomMissingFileKeys(roomId, [candidateId]);
+  const fileIds =
+    listed.find((entry) => entry.userId.toLowerCase() === candidate)
+      ?.fileIds ?? [];
+  if (fileIds.length === 0) return { missingFileIds: [] };
+
+  const { skippedMembers, missingFileIdsByMember } =
+    await rewrapMissingFilesForMember(Number(roomId), candidateId, fileIds, {
+      currentUserId,
+      identity,
+      onKeyChange: async () => "refuse",
+    });
+  if (skippedMembers.some((member) => member.id === candidateId)) {
+    return { missingFileIds: fileIds };
+  }
+  const stillMissing = new Set(missingFileIdsByMember[candidateId] ?? []);
+  return { missingFileIds: fileIds.filter((id) => stillMissing.has(id)) };
 }

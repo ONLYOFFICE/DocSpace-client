@@ -258,6 +258,20 @@ const seedToRecord = (seed: EncryptedFileSeed): EncryptedFileRecord => ({
   folderId: seed.folderId,
 });
 
+/** EmployeeDto of a user the mock has no directory entry for. */
+const userDto = (id: string) => ({
+  id,
+  displayName: "Test User",
+  avatar: "",
+  avatarOriginal: "",
+  avatarMax: "",
+  avatarMedium: "",
+  avatarSmall: "",
+  profileUrl: "",
+  hasAvatar: false,
+  isAnonim: false,
+});
+
 const buildFileDto = (
   record: EncryptedFileRecord,
   roomId: number,
@@ -269,18 +283,7 @@ const buildFileDto = (
   const downloadOrigin = port ? `${BASE_URL}:${port}` : BASE_URL;
   const dotIdx = record.serverTitle.lastIndexOf(".");
   const fileExst = dotIdx > 0 ? record.serverTitle.slice(dotIdx) : "";
-  const creator = {
-    id: ownerId,
-    displayName: "Test User",
-    avatar: "",
-    avatarOriginal: "",
-    avatarMax: "",
-    avatarMedium: "",
-    avatarSmall: "",
-    profileUrl: "",
-    hasAvatar: false,
-    isAnonim: false,
-  };
+  const creator = userDto(ownerId);
   return {
     id: record.id,
     title: record.serverTitle,
@@ -463,8 +466,10 @@ export const encryptedFilesHandlers = (
     ...buildFolderDto(roomId, archived, isPrivate, roomTitle, folders.length),
     ...(!archived && opts.roomSecurity && { security: opts.roomSecurity }),
   });
-  const ownerId =
+  const initialOwnerId =
     opts.ownerId ?? "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+  /** The room's creator; POST files/owner hands the room over. */
+  let ownerId = initialOwnerId;
   const files = new Map<number, EncryptedFileRecord>();
   for (const seed of opts.initialFiles ?? []) {
     files.set(seed.id, seedToRecord(seed));
@@ -593,6 +598,7 @@ export const encryptedFilesHandlers = (
       currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
       freeSpace = null;
       archived = !!opts.archived;
+      ownerId = initialOwnerId;
     },
   };
   if (opts.handle) opts.handle.current = handle;
@@ -931,6 +937,63 @@ export const encryptedFilesHandlers = (
         return okResponse(answer);
       },
     ),
+
+    /**
+     * Mirrors SecurityController.ChangeFileOwner (HttpPost "owner") ->
+     * FileStorageService.ChangeOwnerAsync with demandFileKeys, for this room
+     * named in `folderIds` with the new owner in `userId`: 400 without a
+     * user; 403 when the new owner holds no encryption keys
+     * (ThrowIfKeysAreNotSetAsync; here a user outside `roomUserKeys` other
+     * than the owner); 409 "The new owner holds no key for some encrypted
+     * files of the room" when an encrypted file holds no entry for them
+     * (GetEncryptedFilesWithoutKeyAsync, not asked for the room's creator);
+     * otherwise the room with its new creator, and a repeat for the owner
+     * is answered untouched. Another room's id is left to that room's
+     * instance, and a room that is not private skips the key checks. The
+     * mock has no portal directory: the account checks of the new owner and
+     * the caller's right to change the owner are not mirrored.
+     */
+    http.post(`${apiBase}/files/owner`, async ({ request }) => {
+      const body = (await request.clone().json()) as {
+        userId?: string;
+        folderIds?: (number | string)[];
+      };
+      if (!body.folderIds?.some((folderId) => Number(folderId) === roomId)) {
+        return undefined;
+      }
+      const url = new URL(request.url);
+      requests.push({ method: "POST", url: url.pathname });
+      const userId = String(body.userId ?? "");
+      if (!userId) {
+        return errorResponse(400, "The request body has no userId");
+      }
+      const sameUser = (other: string) =>
+        other.toLowerCase() === userId.toLowerCase();
+      if (isPrivate) {
+        const hasKeys =
+          sameUser(ownerId) ||
+          roomUserKeys.some(
+            (k) => sameUser(String(k.userId)) && !!k.publicKey?.trim(),
+          );
+        if (!hasKeys) {
+          return errorResponse(403, "The user does not have an encryption key");
+        }
+        const lacksEntry =
+          !sameUser(ownerId) &&
+          Array.from(files.values()).some(
+            (f) =>
+              f.encrypted && !f.fileKeys.some((k) => sameUser(String(k.userId))),
+          );
+        if (lacksEntry) {
+          return errorResponse(
+            409,
+            "The new owner holds no key for some encrypted files of the room",
+          );
+        }
+      }
+      ownerId = userId;
+      return okResponse([{ ...roomDto(), createdBy: userDto(ownerId) }]);
+    }),
 
     /**
      * Mirrors FilesController.GetFileInfo (HttpGet "file/{fileId}") ->

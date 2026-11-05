@@ -48,13 +48,17 @@ vi.mock("../../../api/groups", () => ({
 }));
 vi.mock("../../../api/privacy", () => ({
   getRoomCandidateKeys: vi.fn(),
+  getRoomMissingFileKeys: vi.fn(),
 }));
 vi.mock("../../../api/rooms", () => ({
   setRoomSecurity: vi.fn(),
 }));
 
 import { getGroupById } from "../../../api/groups";
-import { getRoomCandidateKeys } from "../../../api/privacy";
+import {
+  getRoomCandidateKeys,
+  getRoomMissingFileKeys,
+} from "../../../api/privacy";
 import { setRoomSecurity } from "../../../api/rooms";
 import type { IdentityKeyPair } from "../../encryption/types";
 import {
@@ -65,6 +69,7 @@ import {
   validateMembersForEncryption,
 } from "../room-encryption";
 import {
+  prepareNewOwner,
   retryPendingAccess,
   revokeRemovedMemberAccess,
   rewrapForInvitedMembers,
@@ -149,6 +154,85 @@ describe("sendPrivateRoomInvitations", () => {
     const result = await sendPrivateRoomInvitations(ROOM_ID, [ann], request);
 
     expect(result.responses).toEqual([{ members: [], warning: "Quota" }]);
+  });
+});
+
+describe("prepareNewOwner", () => {
+  const request = {
+    roomId: ROOM_ID,
+    candidateId: "u-bob",
+    currentUserId: "u-ann",
+    identity,
+  };
+
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
+  it("Missing entries wrapped before the transfer", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "u-bob", fileIds: [1, 2] },
+    ]);
+    vi.mocked(rewrapMissingFilesForMember).mockResolvedValue({
+      fileResults: [ok(1), ok(2)],
+      skippedMembers: [],
+      missingFileIdsByMember: {},
+    });
+
+    await expect(prepareNewOwner(request)).resolves.toEqual({
+      missingFileIds: [],
+    });
+
+    expect(getRoomMissingFileKeys).toHaveBeenCalledWith(ROOM_ID, ["u-bob"]);
+    const [roomId, userId, fileIds, options] = vi.mocked(
+      rewrapMissingFilesForMember,
+    ).mock.calls[0];
+    expect([roomId, userId, fileIds]).toEqual([ROOM_ID, "u-bob", [1, 2]]);
+    expect(options).toMatchObject({ currentUserId: "u-ann", identity });
+    // Silent: a changed key is refused, never asked about.
+    await expect(options.onKeyChange?.({} as never)).resolves.toBe("refuse");
+  });
+
+  it("Nothing missing", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "u-carol", fileIds: [1] },
+    ]);
+
+    await expect(prepareNewOwner(request)).resolves.toEqual({
+      missingFileIds: [],
+    });
+
+    expect(rewrapMissingFilesForMember).not.toHaveBeenCalled();
+  });
+
+  it("Entries still missing", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "u-bob", fileIds: [1, 2, 3] },
+    ]);
+    vi.mocked(rewrapMissingFilesForMember).mockResolvedValue({
+      fileResults: [ok(1), failed(2), ok(3)],
+      skippedMembers: [],
+      missingFileIdsByMember: { "u-bob": [2, 3] },
+    });
+
+    await expect(prepareNewOwner(request)).resolves.toEqual({
+      missingFileIds: [2, 3],
+    });
+  });
+
+  it("Candidate with a refused key change", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "u-bob", fileIds: [1, 2] },
+    ]);
+    vi.mocked(rewrapMissingFilesForMember).mockResolvedValue({
+      fileResults: [],
+      skippedMembers: [{ id: "u-bob", reason: "key-mismatch-refused" }],
+      missingFileIdsByMember: {},
+    });
+
+    await expect(prepareNewOwner(request)).resolves.toEqual({
+      missingFileIds: [1, 2],
+    });
   });
 });
 

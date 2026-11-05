@@ -1,5 +1,30 @@
 # Spec Delta
 
+## ADDED Requirements
+
+### Requirement: Ownership transfer wraps the candidate's missing files
+The system SHALL, before it asks the server to transfer a private room to a verified candidate, read from the server which encrypted files of the room lack the candidate's entry, wrap those for the candidate with the current user's unlocked identity, and ask for the transfer only when no such file remains. Otherwise, and when the server refuses the transfer for a missing entry, the owner SHALL stay and Common:EncryptedReencryptPartialFailure SHALL count the files.
+
+#### Scenario: Missing entries wrapped before the transfer
+- **WHEN** the owner transfers a private room to a member who lacks an entry on some of its encrypted files
+- **THEN** those files gain the member's entry before the transfer is asked, and the member becomes the owner
+
+#### Scenario: Entries still missing
+- **WHEN** some of those files cannot be wrapped for the candidate, because their key was refused, a write failed or the server did not store the entry
+- **THEN** the transfer is not asked, the owner stays and Common:EncryptedReencryptPartialFailure counts the files
+
+#### Scenario: Transfer refused by the server
+- **WHEN** the server refuses the transfer because the candidate still lacks an entry on an encrypted file, for example one uploaded meanwhile
+- **THEN** the owner stays and Common:EncryptedReencryptPartialFailure counts the files the server lists as missing
+
+#### Scenario: Unlock declined
+- **WHEN** the owner declines to unlock their identity for the transfer
+- **THEN** nothing is read or written, the owner stays and Common:EncryptionUnlockRequired is shown
+
+#### Scenario: Ordinary room
+- **WHEN** the owner transfers a room that is not private
+- **THEN** no unlock is asked, no file is read and the transfer is asked at once
+
 ## MODIFIED Requirements
 
 ### Requirement: Backfill re-wraps every member

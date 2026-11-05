@@ -386,7 +386,13 @@ translations of the letter label (4.5).
    2026-11-05 (`1259577f63`) in the second form: the owner change answers
    409 without a list, and the client reads the list from the missing-keys
    route (decision 18) before it asks, which gives it the server's view
-   after all.
+   after all. Implemented 2026-11-05 (task 2.2) in the store helper that
+   both the owner panel and the edit dialog reach: it unlocks the current
+   user's identity, wraps the listed files for the candidate with
+   `rewrapMissingFilesForMember`, refusing a changed key silently, and asks
+   for the transfer only when nothing is left; files still missing, or a
+   409 from a file added meanwhile, are counted with
+   Common:EncryptedReencryptPartialFailure and the owner stays.
 
 2. **Edition rule as an explicit server setting, default allow.** Keeps the
    current behaviour (all editions) while giving product a switch. Alternative:

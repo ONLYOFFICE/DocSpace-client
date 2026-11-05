@@ -73,7 +73,6 @@ import type {
 import {
   addMembersToEncryptedRoom,
   backfillEncryptedFilesForRoomMembers,
-  revokeMemberFromEncryptedRoom,
   rewrapMissingFilesForMember,
 } from "../room-encryption";
 import { loadFileSenderKeysSafe } from "../room-member-keys";
@@ -549,78 +548,5 @@ describe("backfillEncryptedFilesForRoomMembers — integration via MSW", () => {
       fileId: 300,
     });
     expect(Array.from(unwrapped)).toEqual(Array.from(dek));
-  });
-});
-
-describe("revokeMemberFromEncryptedRoom — integration via MSW", () => {
-  it("Revocation succeeds: the member's access entries remain stored on the server", async () => {
-    const alice = await generateIdentityKeyPair();
-    const bob = await generateIdentityKeyPair();
-    const dek = generateDEK();
-    const sharedWrap: ServerAccessKeyDto[] = await wrapDekForRecipients({
-      dek,
-      senderIdentity: alice,
-      senderUserId: ALICE_ID,
-      recipients: [
-        { userId: ALICE_ID, publicKey: pubB64(alice) },
-        { userId: BOB_ID, publicKey: pubB64(bob) },
-      ],
-      fileId: 300,
-    });
-
-    filesHandle.current!.setFiles([
-      {
-        id: 300,
-        title: "shared.docx",
-        encrypted: true,
-        fileKeys: sharedWrap,
-      },
-    ]);
-
-    const result = await revokeMemberFromEncryptedRoom(
-      ROOM_ID,
-      [BOB_ID],
-      {},
-    );
-
-    expect(result).toEqual([{ fileId: 300, success: true }]);
-
-    const stored = filesHandle.current!.getFile(300);
-    expect(stored.fileKeys.map((k) => k.userId)).toEqual([ALICE_ID, BOB_ID]);
-
-    const puts = filesHandle.current!
-      .getRequests()
-      .filter((r) => r.method === "PUT");
-    expect(puts).toHaveLength(0);
-  });
-
-  it("is a no-op when the revoked user is not in the ACL", async () => {
-    const alice = await generateIdentityKeyPair();
-    const dek = generateDEK();
-    const aliceWrap = await wrapDekForRecipients({
-      dek,
-      senderIdentity: alice,
-      senderUserId: ALICE_ID,
-      recipients: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
-      fileId: 301,
-    });
-
-    filesHandle.current!.setFiles([
-      { id: 301, title: "only-alice.docx", encrypted: true, fileKeys: aliceWrap },
-    ]);
-
-    const result = await revokeMemberFromEncryptedRoom(
-      ROOM_ID,
-      [BOB_ID],
-      {},
-    );
-
-    expect(result).toEqual([{ fileId: 301, success: true }]);
-    expect(filesHandle.current!.getFile(301).fileKeys).toHaveLength(1);
-
-    const puts = filesHandle.current!
-      .getRequests()
-      .filter((r) => r.method === "PUT");
-    expect(puts).toHaveLength(0);
   });
 });

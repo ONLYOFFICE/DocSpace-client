@@ -590,65 +590,6 @@ export async function backfillEncryptedFilesForRoomMembers(
   return { fileResults, skippedMembers, missingFileIdsByMember };
 }
 
-export async function revokeMemberFromEncryptedRoom(
-  roomId: number,
-  revokedUserIds: string | string[],
-  options: { onProgress?: (processed: number, total: number) => void },
-): Promise<FileEncryptionOpResult[]> {
-  const results: FileEncryptionOpResult[] = [];
-  const { onProgress } = options;
-  const revokedSet = new Set(
-    (Array.isArray(revokedUserIds) ? revokedUserIds : [revokedUserIds]).map(
-      String,
-    ),
-  );
-  if (revokedSet.size === 0) return results;
-
-  const encryptedFiles = await getEncryptedFilesInRoom(roomId);
-  if (encryptedFiles.length === 0) return results;
-
-  onProgress?.(0, encryptedFiles.length);
-
-  for (let i = 0; i < encryptedFiles.length; i++) {
-    const file = encryptedFiles[i];
-    try {
-      const info = await getFileEncryptionAccess(file.id);
-      if (!info?.fileKeys) {
-        results.push({
-          fileId: file.id,
-          success: false,
-          error: "no encryption keys for file",
-        });
-        continue;
-      }
-      const remaining = info.fileKeys.filter(
-        (k) => !revokedSet.has(String(k.userId)),
-      );
-      if (remaining.length === info.fileKeys.length) {
-        results.push({ fileId: file.id, success: true });
-        continue;
-      }
-      await setFileEncryptionKeys(
-        file.id,
-        remaining.map((k) => ({
-          userId: k.userId,
-          publicKeyId: k.publicKeyId || "",
-          privateKeyEnc: k.privateKeyEnc,
-        })),
-      );
-      results.push({ fileId: file.id, success: true });
-    } catch (error) {
-      results.push({
-        fileId: file.id,
-        success: false,
-        error: error instanceof Error ? error.message : "unknown error",
-      });
-    }
-    onProgress?.(i + 1, encryptedFiles.length);
-  }
-  return results;
-}
-
 export async function roomHasEncryptedFiles(roomId: number): Promise<boolean> {
   const filter = FilesFilter.getDefault();
   filter.page = 0;

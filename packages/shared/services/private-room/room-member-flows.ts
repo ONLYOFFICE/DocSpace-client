@@ -35,7 +35,6 @@
 
 import type { TFunction } from "i18next";
 
-import { getGroupById } from "../../api/groups";
 import {
   getRoomCandidateKeys,
   getRoomMissingFileKeys,
@@ -45,7 +44,6 @@ import type { IdentityKeyPair } from "../encryption/types";
 import {
   addMembersToEncryptedRoom,
   backfillEncryptedFilesForRoomMembers,
-  revokeMemberFromEncryptedRoom,
   rewrapMissingFilesForMember,
   validateMembersForEncryption,
   type NewRoomMember,
@@ -60,73 +58,6 @@ export type TMemberFlowNotice = {
   level: "success" | "warning" | "error";
   text: string;
 };
-
-// Spec: private-rooms/room-membership, "Leaving a room revokes own access first"
-export async function revokeOwnAccessOnLeave(
-  roomId: number | string,
-  userId: string,
-): Promise<void> {
-  try {
-    const results = await revokeMemberFromEncryptedRoom(
-      Number(roomId),
-      String(userId),
-      {},
-    );
-    const failures = results.filter((r) => !r.success);
-    if (failures.length > 0) {
-      // biome-ignore lint/suspicious/noConsole: leaving goes on; the kept entries are logged for triage.
-      console.error(
-        `[ENCRYPTION] ${failures.length} file(s) kept the leaver's wrap entries`,
-      );
-    }
-  } catch (err) {
-    // biome-ignore lint/suspicious/noConsole: leaving goes on; the failure is logged for triage.
-    console.error("[ENCRYPTION] revoke own access on leave failed:", err);
-  }
-}
-
-/**
- * Removes a removed member's entries from the room's file keys; a group
- * stands for its members. Resolves with the notice to show, or null when
- * there is nothing to report.
- */
-export async function revokeRemovedMemberAccess(
-  t: TFunction,
-  roomId: number | string,
-  member: { id: number | string; isGroup?: boolean },
-): Promise<TMemberFlowNotice | null> {
-  try {
-    let revokedIds: string[] = [String(member.id)];
-    if (member.isGroup) {
-      const group = await getGroupById(String(member.id), true);
-      revokedIds = (group.members ?? []).map((m) => String(m.id));
-      if (revokedIds.length === 0) return null;
-    }
-
-    const results = await revokeMemberFromEncryptedRoom(
-      Number(roomId),
-      revokedIds,
-      {},
-    );
-    const failures = results.filter((r) => !r.success);
-    if (failures.length > 0) {
-      return {
-        level: "warning",
-        text: t("Common:EncryptedRevokePartialFailure", {
-          count: failures.length,
-        }),
-      };
-    }
-    if (results.length > 0) {
-      return { level: "success", text: t("Common:EncryptedRevokeCompleted") };
-    }
-    return null;
-  } catch (err) {
-    // biome-ignore lint/suspicious/noConsole: the removal stands; the failure is logged for triage.
-    console.error("[ENCRYPTION] revoke encrypted access failed:", err);
-    return { level: "error", text: t("Common:EncryptedRevokeFailed") };
-  }
-}
 
 /** An item of the invite list: a user, or a group when `isGroup` is set. */
 export type TInviteItem = {

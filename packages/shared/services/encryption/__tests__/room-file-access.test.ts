@@ -217,8 +217,7 @@ describe("roomFileAccess wrap → unwrap → revoke roundtrip", () => {
     let revokedFileKeys: ServerAccessKeyDto[];
 
     beforeAll(() => {
-      // Simulate what `revokeMemberFromEncryptedRoom` does at the API
-      // level: re-publish the file's access list with Bob's entry dropped.
+      // The access list as the server leaves it once it revoked Bob.
       revokedFileKeys = fileKeys.filter(
         (k) => String(k.userId) !== BOB_ID,
       );

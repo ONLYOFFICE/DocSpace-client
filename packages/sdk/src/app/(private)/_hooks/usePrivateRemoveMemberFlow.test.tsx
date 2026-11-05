@@ -45,7 +45,7 @@ import { ShareAccessRights } from "@docspace/shared/enums";
 const mocks = vi.hoisted(() => ({
   uploads: 0,
   setRoomSecurity: vi.fn(),
-  revokeRemovedMemberAccess: vi.fn(),
+  setFileEncryptionKeys: vi.fn(),
   toastr: { success: vi.fn(), warning: vi.fn(), error: vi.fn() },
 }));
 
@@ -54,11 +54,10 @@ vi.mock("react-i18next", () => ({
 }));
 
 vi.mock("@docspace/shared/api", () => ({
-  default: { rooms: { setRoomSecurity: mocks.setRoomSecurity } },
-}));
-
-vi.mock("@docspace/shared/services/private-room/room-member-flows", () => ({
-  revokeRemovedMemberAccess: mocks.revokeRemovedMemberAccess,
+  default: {
+    rooms: { setRoomSecurity: mocks.setRoomSecurity },
+    files: { setFileEncryptionKeys: mocks.setFileEncryptionKeys },
+  },
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
@@ -87,10 +86,6 @@ describe("usePrivateRemoveMemberFlow", () => {
   beforeEach(() => {
     mocks.uploads = 0;
     mocks.setRoomSecurity.mockImplementation(async () => ({}));
-    mocks.revokeRemovedMemberAccess.mockImplementation(async () => ({
-      level: "success",
-      text: "Common:EncryptedRevokeCompleted",
-    }));
   });
 
   afterEach(() => {
@@ -109,33 +104,36 @@ describe("usePrivateRemoveMemberFlow", () => {
       "Common:CannotRemoveMemberWhileUploads",
     );
     expect(mocks.setRoomSecurity).not.toHaveBeenCalled();
-    expect(mocks.revokeRemovedMemberAccess).not.toHaveBeenCalled();
   });
 
-  it("removes the member, then revokes a group's members through the shared flow", async () => {
+  it("Remove a member", async () => {
     render();
 
-    await act(() => flow.remove({ roomId: 10, userId: "team", isGroup: true }));
+    await act(() => flow.remove({ roomId: 10, userId: "bob" }));
 
+    expect(mocks.setRoomSecurity).toHaveBeenCalledWith(10, {
+      invitations: [{ id: "bob", access: ShareAccessRights.None }],
+      notify: false,
+      message: "",
+    });
+    expect(mocks.setFileEncryptionKeys).not.toHaveBeenCalled();
+  });
+
+  it("Remove a group", async () => {
+    render();
+
+    await act(() => flow.remove({ roomId: 10, userId: "team" }));
+
+    expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(1);
     expect(mocks.setRoomSecurity).toHaveBeenCalledWith(10, {
       invitations: [{ id: "team", access: ShareAccessRights.None }],
       notify: false,
       message: "",
     });
-    expect(mocks.revokeRemovedMemberAccess).toHaveBeenCalledWith(
-      expect.any(Function),
-      10,
-      { id: "team", isGroup: true },
-    );
-    expect(mocks.setRoomSecurity.mock.invocationCallOrder[0]).toBeLessThan(
-      mocks.revokeRemovedMemberAccess.mock.invocationCallOrder[0],
-    );
-    expect(mocks.toastr.success).toHaveBeenCalledWith(
-      "Common:EncryptedRevokeCompleted",
-    );
+    expect(mocks.setFileEncryptionKeys).not.toHaveBeenCalled();
   });
 
-  it("revokes nothing when the server refuses the removal", async () => {
+  it("shows the error when the server refuses the removal", async () => {
     mocks.setRoomSecurity.mockImplementation(async () => {
       throw new Error("403");
     });
@@ -143,7 +141,6 @@ describe("usePrivateRemoveMemberFlow", () => {
 
     await act(() => flow.remove({ roomId: 10, userId: "bob" }));
 
-    expect(mocks.revokeRemovedMemberAccess).not.toHaveBeenCalled();
     expect(mocks.toastr.error).toHaveBeenCalledWith("Common:EncryptionError");
   });
 });

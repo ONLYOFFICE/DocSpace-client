@@ -47,10 +47,7 @@ import {
   isPrivateRoomsRoute,
   splitFileAndFolderIds,
 } from "@docspace/shared/utils/common";
-import {
-  prepareNewOwner,
-  revokeOwnAccessOnLeave,
-} from "@docspace/shared/services/private-room/room-member-flows";
+import { prepareNewOwner } from "@docspace/shared/services/private-room/room-member-flows";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import uniqueid from "lodash/uniqueId";
 import api from "@docspace/shared/api";
@@ -571,7 +568,7 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
   const { user } = self.userStore;
 
   // the fallback is the selected-folder store snapshot; only
-  // id/private are read from it, matching the old JS duck typing.
+  // its id is read, matching the old JS duck typing.
   const room = (
     selection.length
       ? selection[0]
@@ -581,7 +578,6 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
   ) as TActionItem;
 
   const roomId = room.id;
-  const isPrivateRoom = room.private === true;
 
   // user is nullable on UserStore; the old JS read the
   // flags unchecked (crash when logged out), the `!` keeps that behavior.
@@ -625,9 +621,7 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
         setSelected("none");
       });
 
-  if (!isPrivateRoom) return leave();
-
-  return revokeOwnAccessOnLeave(roomId, String(user?.id)).then(leave);
+  return leave();
 };
 
 

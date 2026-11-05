@@ -103,6 +103,14 @@ export type EncryptedFilesHandlerHandle = {
    * `roomUserKeys` may.
    */
   setRoomAccessManagers: (userIds: string[]) => void;
+  /**
+   * Mirrors the private-room branch of FileSharingAceHelper
+   * .SetAceObjectAsync: the users whose share on the room was removed lose
+   * their entries on every file of the room, its folders included
+   * (RevokeFileKeysAsync); the room's creator keeps theirs, and an
+   * ordinary room keeps every key.
+   */
+  revokeFileKeys: (userIds: string[]) => void;
   /** Answers as another signed-in user until `reset`. */
   setCurrentUserId: (userId: string) => void;
   /**
@@ -591,6 +599,15 @@ export const encryptedFilesHandlers = (
     },
     setRoomAccessManagers: (userIds) => {
       accessManagers = new Set(userIds.map(String));
+    },
+    revokeFileKeys: (userIds) => {
+      if (!isPrivate) return;
+      const revoked = userIds.map(String).filter((id) => id !== ownerId);
+      for (const f of Array.from(files.values())) {
+        f.fileKeys = f.fileKeys.filter(
+          (k) => !revoked.includes(String(k.userId)),
+        );
+      }
     },
     setCurrentUserId: (userId) => {
       currentUserId = userId;

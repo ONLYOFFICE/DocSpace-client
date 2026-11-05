@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { defineConfig, Plugin } from "vitest/config";
+import { defineConfig, type Plugin } from "vitest/config";
 import svgr from "vite-plugin-svgr";
 import path from "path";
 
@@ -88,6 +88,7 @@ export default defineConfig({
     // Global test settings
     globals: true,
     clearMocks: true,
+    silent: "passed-only",
     pool: process.env.POOL || "threads",
 
     // TypeScript configuration
@@ -118,22 +119,18 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      "@docspace/shared": path.resolve(__dirname, "."),
-      PUBLIC_DIR: path.resolve(__dirname, "../../public"),
+      "@docspace/shared": path.resolve(import.meta.dirname, "."),
+      PUBLIC_DIR: path.resolve(import.meta.dirname, "../../public"),
       "PUBLIC_DIR/scripts/config.json": path.resolve(
-        __dirname,
+        import.meta.dirname,
         "./__mocks__/configMock.js",
       ),
       "react-i18next": path.resolve(
-        __dirname,
+        import.meta.dirname,
         "./__mocks__/reacti18nextMock.tsx",
       ),
-      "hex-rgb": path.resolve(__dirname, "./__mocks__/hex-rgb.js"),
-      "react-svg": path.resolve(__dirname, "./__mocks__/reactSvgMock.tsx"),
+      "hex-rgb": path.resolve(import.meta.dirname, "./__mocks__/hex-rgb.js"),
+      "react-svg": path.resolve(import.meta.dirname, "./__mocks__/reactSvgMock.tsx"),
     },
-  },
-
-  esbuild: {
-    target: "esnext",
   },
 });

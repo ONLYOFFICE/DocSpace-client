@@ -41,6 +41,7 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     clearMocks: true,
+    silent: "passed-only",
     setupFiles: ["./vitest/setupTests.ts"],
     // ui-kit modules each import their own CSS file. Vitest externalizes
     // node_modules by default, which hands those modules to Node as-is, and
@@ -65,13 +66,16 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@docspace/shared": path.resolve(__dirname, "../shared"),
-      PUBLIC_DIR: path.resolve(__dirname, "../../public"),
+      "@": path.resolve(import.meta.dirname, "./src"),
+      "@docspace/shared": path.resolve(import.meta.dirname, "../shared"),
+      PUBLIC_DIR: path.resolve(import.meta.dirname, "../../public"),
+      // As in shared and client: the real ReactSVG fetches and injects the
+      // file on a timer, which can fire after the test's jsdom is torn down
+      // ("SVGSVGElement is not defined") when the suites run in parallel.
+      "react-svg": path.resolve(
+        import.meta.dirname,
+        "../shared/__mocks__/reactSvgMock.tsx",
+      ),
     },
-  },
-
-  esbuild: {
-    target: "esnext",
   },
 });

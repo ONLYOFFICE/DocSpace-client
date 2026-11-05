@@ -40,12 +40,10 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { TableRow } from "@onlyoffice/apps-ui-kit/components/table";
-import { TableCell } from "@onlyoffice/apps-ui-kit/components/table";
+import { DataTableRow } from "@onlyoffice/apps-ui-kit/components/data-table";
 import { DragAndDrop } from "@onlyoffice/apps-ui-kit/components/drag-and-drop";
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
-import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
@@ -55,6 +53,7 @@ import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import Badges from "@docspace/shared/components/badges";
 import EditorsTooltip from "../../editors-tooltip";
 
+import { SDK_TABLE_TEST_IDS } from "@/app/(docspace)/_components/data-table/constants";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
@@ -82,22 +81,23 @@ import styles from "../TableView.module.scss";
 import AuthorCell from "./AuthorCell";
 import LocationCell from "./LocationCell";
 import AccessCell from "./AccessCell";
-import {
-  getSectionColumns,
-  type ColumnKey,
-  type SectionColumn,
-  type WithRuntimeFields,
-} from "../columns";
+import { ROW_CHECKBOX_CLASS } from "./FilesCells";
+import { FilesRowContext, type TFilesRowValue } from "./FilesRowContext";
+import type { WithRuntimeFields } from "../columns";
 
+/**
+ * A files row on the DataTable: the drag-and-drop wrapper the selection area,
+ * the hotkeys and drag and drop find by its `files-item` class and `value`,
+ * around the ui-kit row whose cells read this row's context.
+ */
 const TableViewRow = observer(
   ({
     item,
     index,
+    rowProps,
     timezone,
     displayFileExtension,
-    lastColumn,
     currentUserId,
-    isPrivate,
     hasEncryptionKeys,
   }: TableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
@@ -105,7 +105,9 @@ const TableViewRow = observer(
     const { filesSettings } = useFilesSettingsStore();
     const isExtsCustomFilter =
       "fileExst" in item
-        ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(item.fileExst)
+        ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(
+            item.fileExst,
+          )
         : false;
 
     const storeItem = filesListStore.items.find((i) => i.id === item.id);
@@ -141,6 +143,10 @@ const TableViewRow = observer(
     });
 
     const dragCtx = React.useContext(DragContext);
+    const isDragging = !!dragCtx?.isDragging;
+    // An OS drag moves no pointer, so `:hover` does not mark the folder under
+    // it; the drag-over events do.
+    const [isDragOver, setIsDragOver] = React.useState(false);
 
     const isChecked = filesSelectionStore.isCheckedItem(item);
     const isDroppable =
@@ -183,7 +189,9 @@ const TableViewRow = observer(
 
     const fileSize = "contentLength" in item ? item.contentLength : "";
     const fileType =
-      "fileType" in item ? getFileTypeName(item.fileType, t) : t("Common:Folder");
+      "fileType" in item
+        ? getFileTypeName(item.fileType, t)
+        : t("Common:Folder");
 
     // `lastOpened` (Recent) and `autoDelete` (Trash) are runtime-only fields —
     // not declared on TFile/TFolder.
@@ -208,60 +216,36 @@ const TableViewRow = observer(
         })
       : "";
 
-    // Visible columns + order are section-specific (same source as the header).
-    const sectionColumns = getSectionColumns(filesListStore.rootFolderType);
+    const onSelect = () => filesSelectionStore.addSelection(item);
 
-    const onCheckboxChange = React.useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.stopPropagation();
-        filesSelectionStore.addSelection(item);
-      },
-      [filesSelectionStore, item],
-    );
-
-    const onRowClick = React.useCallback(() => {
+    const onRowClick = (e: React.MouseEvent) => {
+      // The checkbox selects the row on its own, as the old one did.
+      if ((e.target as Element).closest(`.${ROW_CHECKBOX_CLASS}`)) return;
       if (filesSelectionStore.isCheckedItem(item)) return;
       filesSelectionStore.setSelection([]);
       filesSelectionStore.setBufferSelection(item);
-    }, [filesSelectionStore, item]);
+    };
 
-    const onRowDoubleClick = React.useCallback(() => {
-      if (item.isFolder) {
-        openFolder(item.id, item.title);
-      } else {
-        openFile(item);
-      }
-    }, [item, openFolder, openFile]);
+    const open = () => {
+      if (item.isFolder) openFolder(item.id, item.title);
+      else openFile(item);
+    };
 
-    const onNameClick = React.useCallback(
-      (e: React.MouseEvent) => {
-        e.stopPropagation();
-        if (item.isFolder) {
-          openFolder(item.id, item.title);
-        } else {
-          openFile(item);
-        }
-      },
-      [item, openFolder, openFile],
-    );
+    const onNameClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      open();
+    };
 
-    const onClickFavorite = React.useCallback(() => {
-      if (observableItem.isFavorite) {
-        removeFromFavorites(observableItem);
-      } else {
-        markAsFavorite(observableItem);
-      }
-    }, [observableItem, markAsFavorite, removeFromFavorites]);
+    const onClickFavorite = () => {
+      if (observableItem.isFavorite) removeFromFavorites(observableItem);
+      else markAsFavorite(observableItem);
+    };
 
-    const onClickLock = React.useCallback(() => {
-      if (!observableItem.isFolder) {
-        lockFile(observableItem as TFileItem);
-      }
-    }, [observableItem, lockFile]);
+    const onClickLock = () => {
+      if (!observableItem.isFolder) lockFile(observableItem as TFileItem);
+    };
 
-    const handleCopyShareLink = React.useCallback(() => {
-      onCopyShareLink?.(observableItem);
-    }, [onCopyShareLink, observableItem]);
+    const handleCopyShareLink = () => onCopyShareLink?.(observableItem);
 
     // Spread observable item to create a new object reference when MobX
     // properties change, so that QuickButtons memo(fast-deep-equal) detects
@@ -272,7 +256,7 @@ const TableViewRow = observer(
       <EditorsTooltip item={observableItem} currentUserId={currentUserId} />
     );
 
-    const badgesNode = (
+    const badges = (
       <div className={styles.badgesContainer}>
         <Badges
           t={t}
@@ -283,9 +267,7 @@ const TableViewRow = observer(
           isExtsCustomFilter={isExtsCustomFilter}
           editorsTooltip={editorsTooltip}
           onFilesClick={() => {
-            if (!observableItem.isFolder) {
-              openFile(observableItem);
-            }
+            if (!observableItem.isFolder) openFile(observableItem);
           }}
           onClickFavorite={onClickFavorite}
           onClickLock={onClickLock}
@@ -303,10 +285,7 @@ const TableViewRow = observer(
       </div>
     );
 
-    const isTrashFolder =
-      filesListStore.rootFolderType === FolderType.TRASH;
-
-    const quickButtonsNode = (
+    const quickButtons = (
       <div className={styles.quickButtonsContainer}>
         <QuickButtons
           t={t}
@@ -316,20 +295,38 @@ const TableViewRow = observer(
           onClickLock={onClickLock}
           onClickShare={onCopyShareLink ? handleCopyShareLink : undefined}
           openShareTab={onCopyShareLink ? handleCopyShareLink : undefined}
-          isTrashFolder={isTrashFolder}
+          isTrashFolder={filesListStore.rootFolderType === FolderType.TRASH}
         />
       </div>
     );
 
-    const contextMenuModel = getContextMenuModel(true);
+    const icon = (
+      <EncryptedItemIconWrapper
+        encrypted={!!("encrypted" in item && (item as TFileItem).encrypted)}
+        hasEncryptionKeys={hasEncryptionKeys ?? true}
+        isRoom={false}
+      >
+        <RoomIcon
+          logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+          color={
+            "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
+          }
+          title={title}
+          showDefault={
+            "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+          }
+        />
+      </EncryptedItemIconWrapper>
+    );
 
-    // Inner content for a non-Name cell, keyed by column. The section descriptor
-    // decides which of these render and in what order (header stays in lockstep).
-    const renderCell = (key: ColumnKey): React.ReactNode => {
+    const renderCell = (key: string): React.ReactNode => {
       switch (key) {
         case "Author":
           return item.createdBy ? (
-            <AuthorCell fileOwner={fileOwner || ""} createdBy={item.createdBy} />
+            <AuthorCell
+              fileOwner={fileOwner || ""}
+              createdBy={item.createdBy}
+            />
           ) : null;
         case "SharedBy":
           return item.sharedBy ? (
@@ -375,94 +372,90 @@ const TableViewRow = observer(
       }
     };
 
+    const rowValue: TFilesRowValue = {
+      icon,
+      checked: isChecked,
+      selectLabel: t("Common:TitleSelectFile"),
+      onSelect,
+      onOpen: onNameClick,
+      titleWithoutExt,
+      fileExst: displayFileExtension && "fileExst" in item ? item.fileExst : "",
+      badges,
+      quickButtons,
+      renderCell,
+    };
+
+    const contextMenu = {
+      options: getContextMenuModel(true),
+      getModel: () => getContextMenuModel(),
+      onOpen: (isRightClick: boolean) => {
+        if (isRightClick && filesSelectionStore.selection.length > 1) return;
+        filesSelectionStore.setSelection([]);
+        filesSelectionStore.setBufferSelection(item);
+      },
+      title: item.isFolder
+        ? t("Common:TitleShowFolderActions")
+        : t("Common:TitleShowActions"),
+    };
+
+    const onDragOver = (
+      isDragActive: boolean,
+      _e: React.DragEvent<HTMLElement>,
+    ) => {
+      if (!dragCtx) return;
+      const over = isDragActive && isDroppable;
+      setIsDragOver(over);
+      if (over) dragCtx.onFolderDragOver(item.title);
+      else dragCtx.onFolderDragLeave();
+    };
+
+    const onDragLeave = () => {
+      if (!dragCtx) return;
+      setIsDragOver(false);
+      dragCtx.onFolderDragLeave();
+    };
+
+    const onDrop = (files: File[]) => {
+      if (!dragCtx) return;
+      setIsDragOver(false);
+      if (isDroppable) dragCtx.onFilesDroppedToFolder(files, item.id as number);
+      else dragCtx.onFilesDroppedToCurrentFolder(files);
+    };
+
+    // DragAndDrop types its handler without the event, but passes it on.
+    const onMouseDown = (e: React.MouseEvent) =>
+      dragCtx?.onItemMouseDown(e.nativeEvent, item);
+
     return (
       <DragAndDrop
         data-title={item.title}
-        className={classNames(styles.dragAndDropWrapper, "files-item", { droppable: isDroppable })}
+        className={classNames(styles.dragAndDropWrapper, "files-item", {
+          droppable: isDroppable,
+        })}
         value={value}
-        onDrop={dragCtx ? (files) => { if (isDroppable) dragCtx.onFilesDroppedToFolder(files, item.id as number); else dragCtx.onFilesDroppedToCurrentFolder(files); } : undefined}
-        onDragOver={dragCtx ? (isDragActive: boolean, e: React.DragEvent<HTMLElement>) => { const over = isDragActive && isDroppable; e.currentTarget.classList.toggle("droppable-hover", over); if (over) dragCtx.onFolderDragOver(item.title); else dragCtx.onFolderDragLeave(); } : undefined}
-        onDragLeave={dragCtx ? (e: React.DragEvent<HTMLElement>) => { e.currentTarget.classList.remove("droppable-hover"); dragCtx.onFolderDragLeave(); } : undefined}
-        // @ts-expect-error: native onMouseDown with event arg passed via ...rest to root div
-        onMouseDown={(e: MouseEvent) => dragCtx?.onItemMouseDown(e, item)}
+        onDrop={dragCtx ? onDrop : undefined}
+        onDragOver={dragCtx ? onDragOver : undefined}
+        onDragLeave={dragCtx ? onDragLeave : undefined}
+        onMouseDown={onMouseDown as unknown as () => void}
       >
-        <TableRow
-          className={classNames({
-            "table-row-selected": isChecked,
-            [styles.isHighlight]: filesListStore.highlightFileId === item.id,
-          })}
-          checked={isChecked}
-          contextOptions={contextMenuModel}
-          getContextModel={getContextMenuModel}
-          onClick={onRowClick}
-          onDoubleClick={onRowDoubleClick}
-          selectionProp={{ className: classNames("files-item", "table-container_file-name-cell"), value }}
-          fileContextClick={(isRightClick?: boolean) => {
-            if (isRightClick && filesSelectionStore.selection.length > 1) return;
-            filesSelectionStore.setSelection([]);
-            filesSelectionStore.setBufferSelection(item);
-          }}
-        >
-          <TableCell
-            className="table-container_file-name-cell table-container_element-wrapper"
-            hasAccess
+        <FilesRowContext value={rowValue}>
+          <DataTableRow
+            {...rowProps}
+            row={item}
+            index={index}
+            testId={SDK_TABLE_TEST_IDS.row}
             checked={isChecked}
-          >
-            <div className="table-container_element-container" onClick={(e) => e.stopPropagation()}>
-              <div className="table-container_element">
-                <EncryptedItemIconWrapper
-                  encrypted={
-                    !!("encrypted" in item && (item as TFileItem).encrypted)
-                  }
-                  hasEncryptionKeys={hasEncryptionKeys ?? true}
-                  isRoom={false}
-                >
-                  <RoomIcon
-                    logo={
-                      "isRoom" in item && item.isRoom ? item.roomLogo : item.icon
-                    }
-                    color={
-                      "isRoom" in item && item.isRoom
-                        ? item.roomIconColor
-                        : undefined
-                    }
-                    title={title}
-                    showDefault={
-                      "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
-                    }
-                  />
-                </EncryptedItemIconWrapper>
-              </div>
-              <Checkbox
-                className="table-container_row-checkbox"
-                onChange={onCheckboxChange}
-                isChecked={isChecked}
-                title={t("Common:TitleSelectFile")}
-              />
-            </div>
-            <span className={styles.nameCellText} onClick={onNameClick}>
-              {titleWithoutExt}
-              {displayFileExtension && "fileExst" in item ? (
-                <span className={styles.nameCellExst}>{item.fileExst}</span>
-              ) : null}
-            </span>
-            {badgesNode}
-            {lastColumn === "Name" ? quickButtonsNode : null}
-          </TableCell>
-          {sectionColumns
-            .filter((column: SectionColumn) => column.key !== "Name")
-            .map((column: SectionColumn) => (
-              <TableCell
-                key={column.key}
-                className={
-                  lastColumn === column.key ? styles.lastCell : undefined
-                }
-              >
-                {renderCell(column.key)}
-                {lastColumn === column.key ? quickButtonsNode : null}
-              </TableCell>
-            ))}
-        </TableRow>
+            // A drag owns the pointer: the folders it can go into take it.
+            hover={!isDragging}
+            dropTarget={isDragging && isDroppable}
+            dropOver={isDragOver}
+            highlight={filesListStore.highlightFileId === item.id}
+            cellProps={{ className: "files-item", value }}
+            contextMenu={contextMenu}
+            onClick={onRowClick}
+            onDoubleClick={open}
+          />
+        </FilesRowContext>
       </DragAndDrop>
     );
   },

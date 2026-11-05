@@ -66,63 +66,71 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import {
-  TableContainer,
-  TableBody,
-  TableHeader,
-} from "@onlyoffice/apps-ui-kit/components/table";
-import type { TTableColumn } from "@onlyoffice/apps-ui-kit/components/table";
+  createLocalStorageWidths,
+  settingsColumn,
+  type DataTableColumn,
+  type DataTableRenderRowProps,
+} from "@onlyoffice/apps-ui-kit/components/data-table";
 import { SortByFieldName } from "@docspace/shared/enums";
-import { useIsServer } from "@docspace/shared/hooks/useIsServer";
 import type { Nullable, TSortBy } from "@docspace/shared/types";
-import type { IndexRange } from "react-virtualized";
 
+import {
+  SDK_DATA_TABLE_VIRTUALIZE,
+  SDK_TABLE_TEST_IDS,
+  SdkDataTable,
+  getColumnWidthsStorageName,
+  useColumnVisibility,
+  useTableSort,
+} from "@/app/(docspace)/_components/data-table";
+import {
+  ColumnCell,
+  NameCell,
+} from "@/app/(docspace)/(files)/_components/table-view/sub-components/FilesCells";
 import type {
   TFolderItem,
   TFileItem,
 } from "@/app/(docspace)/_hooks/useItemList";
+import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 
-import { RoomsTableViewRow } from "./RoomsTableViewRow";
+import {
+  RoomsTableViewRow,
+  type RoomsTableViewRowProps,
+} from "./RoomsTableViewRow";
 
-import styles from "@/app/(docspace)/(files)/_components/table-view/TableView.module.scss";
+type TRoomItem = TFolderItem | TFileItem;
 
 const COLUMN_STORAGE_NAME = "sdkRoomsTableColumns";
-const COLUMN_INFO_PANEL_STORAGE_NAME = "sdkRoomsTableInfoPanelColumns";
+const COLUMN_WIDTHS_PREFIX = "sdkRoomsTable";
+const DEFAULT_VISIBILITY = { Tags: true, Owner: true, Activity: true };
 
-type RoomsTableViewProps = {
-  total: number;
-  items: (TFolderItem | TFileItem)[];
+type RoomsTableViewProps = Omit<
+  RoomsTableViewRowProps,
+  "item" | "index" | "rowProps"
+> & {
+  items: TRoomItem[];
   hasMoreFiles: boolean;
   filterSortBy: Nullable<TSortBy>;
   filterSortOrder: string;
   onSort: (sortBy: string, sortDirection: string) => void;
-  timezone: string;
-  fetchMoreFiles: (params: IndexRange) => Promise<void>;
-  onEditRoom?: (item: TFolderItem | TFileItem) => void;
-  onChangeOwner?: (item: TFolderItem | TFileItem) => void;
-  onTagClick?: (tag: string) => void;
-  onRoomChanged?: (id: number) => void;
-  onRestoreRoom?: (item: TFolderItem | TFileItem) => void;
-  onDeleteRoom?: (item: TFolderItem | TFileItem) => void;
-  onDeleteSelected?: (items: (TFolderItem | TFileItem)[]) => void;
-  onRestoreSelected?: (items: (TFolderItem | TFileItem)[]) => void;
-  onArchiveRoom?: (item: TFolderItem | TFileItem) => void;
-  onArchiveSelected?: (items: (TFolderItem | TFileItem)[]) => void;
-  onInfoRoom?: (item: TFolderItem | TFileItem) => void;
-  onInviteRoom?: (item: TFolderItem | TFileItem) => void;
-  isArchive?: boolean;
-  hasEncryptionKeys?: boolean;
-  infoPanelVisible?: boolean;
+  fetchMoreFiles: () => Promise<void>;
 };
 
+const getRowKey = (item: TRoomItem) => item.id;
+
+const cellTestId = () => SDK_TABLE_TEST_IDS.cell;
+
+/**
+ * The SDK's rooms list on the ui-kit DataTable. Visible columns stay in the
+ * record the old header kept; widths go to the DataTable's own record.
+ */
 const RoomsTableView = ({
-  total,
   items,
   hasMoreFiles,
   filterSortBy,
   filterSortOrder,
   onSort,
-  timezone,
   fetchMoreFiles,
+  timezone,
   onEditRoom,
   onChangeOwner,
   onTagClick,
@@ -137,156 +145,132 @@ const RoomsTableView = ({
   onInviteRoom,
   isArchive,
   hasEncryptionKeys,
-  infoPanelVisible,
 }: RoomsTableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
-  const isSSR = useIsServer();
-  const containerRef = React.useRef<HTMLDivElement>(null);
+  const { user } = useDocsUserStore();
 
-  const onColumnSort = React.useCallback(
-    (sortBy: string) => {
-      if (filterSortBy === sortBy) {
-        const newDirection = filterSortOrder === "ascending" ? "desc" : "asc";
-        onSort(sortBy, newDirection);
-      } else {
-        onSort(sortBy, filterSortOrder === "ascending" ? "asc" : "desc");
-      }
-    },
-    [filterSortBy, filterSortOrder, onSort],
+  const { isVisible, setVisible } = useColumnVisibility(
+    `${COLUMN_STORAGE_NAME}_enabled`,
+    DEFAULT_VISIBILITY,
   );
 
-  const [columnState, setColumnState] = React.useState<Record<string, boolean>>(
-    () => {
-      try {
-        const stored = localStorage.getItem(`${COLUMN_STORAGE_NAME}_enabled`);
-        if (stored) return JSON.parse(stored);
-      } catch {}
-      return { Tags: true, Owner: true, Activity: true };
-    },
+  const { sort, onSortChange } = useTableSort(
+    filterSortBy,
+    filterSortOrder,
+    onSort,
   );
 
-  const onColumnChange = React.useCallback((key: string) => {
-    setColumnState((prev) => {
-      const next = { ...prev, [key]: !prev[key] };
-      try {
-        localStorage.setItem(
-          `${COLUMN_STORAGE_NAME}_enabled`,
-          JSON.stringify(next),
-        );
-      } catch {}
-      return next;
+  const columns = React.useMemo(() => {
+    const column = (
+      id: string,
+      title: string,
+      sortKey: string,
+    ): DataTableColumn<TRoomItem> => ({
+      id,
+      title,
+      sortKey,
+      width: { type: "flex" },
+      visible: isVisible(id),
+      hideable: true,
+      cellTestId,
+      cell: (_, { isLast }) => <ColumnCell columnKey={id} isLast={isLast} />,
     });
-  }, []);
 
-  const lastColumn = React.useMemo(() => {
-    const orderedKeys = ["Activity", "Owner", "Tags", "Name"];
-    return (
-      orderedKeys.find((key) => key === "Name" || columnState[key] !== false) ??
-      "Name"
-    );
-  }, [columnState]);
-
-  const columns: TTableColumn[] = React.useMemo(
-    () => [
+    return [
       {
-        key: "Name",
+        id: "Name",
         title: t("Common:Label"),
-        sortBy: SortByFieldName.Name,
-        enable: true,
-        resizable: true,
-        default: true,
-        minWidth: 210,
-        onClick: onColumnSort,
+        sortKey: SortByFieldName.Name,
+        width: { type: "fill" },
+        cellClassName: "table-container_file-name-cell",
+        cellTestId,
+        cell: (_, { isLast }) => <NameCell isLast={isLast} />,
       },
-      {
-        key: "Tags",
-        title: t("Common:Tags"),
-        sortBy: SortByFieldName.Tags,
-        enable: columnState.Tags !== false,
-        resizable: true,
-        onClick: onColumnSort,
-        onChange: onColumnChange,
-      },
-      {
-        key: "Owner",
-        title: t("Common:Owner"),
-        sortBy: SortByFieldName.Author,
-        enable: columnState.Owner !== false,
-        resizable: true,
-        onClick: onColumnSort,
-        onChange: onColumnChange,
-      },
-      {
-        key: "Activity",
-        title: t("Common:LastActivityDate"),
-        sortBy: SortByFieldName.ModifiedDate,
-        enable: columnState.Activity !== false,
-        resizable: true,
-        onClick: onColumnSort,
-        onChange: onColumnChange,
-      },
+      column("Tags", t("Common:Tags"), SortByFieldName.Tags),
+      column("Owner", t("Common:Owner"), SortByFieldName.Author),
+      column(
+        "Activity",
+        t("Common:LastActivityDate"),
+        SortByFieldName.ModifiedDate,
+      ),
+      settingsColumn<TRoomItem>({
+        title: t("Common:TableSettingsTitle"),
+        withContextMenu: true,
+        contextMenuButtonTestId: SDK_TABLE_TEST_IDS.contextMenuButton,
+      }),
+    ] satisfies DataTableColumn<TRoomItem>[];
+  }, [t, isVisible]);
+
+  const widthStorage = React.useMemo(
+    () =>
+      createLocalStorageWidths(
+        getColumnWidthsStorageName(COLUMN_WIDTHS_PREFIX, user?.id),
+      ),
+    [user?.id],
+  );
+
+  const loadMore = React.useMemo(
+    () => ({ hasMore: hasMoreFiles, onLoadMore: fetchMoreFiles }),
+    [hasMoreFiles, fetchMoreFiles],
+  );
+
+  const renderRow = React.useCallback(
+    ({ row, index, rowProps }: DataTableRenderRowProps<TRoomItem>) => (
+      <RoomsTableViewRow
+        item={row}
+        index={index}
+        rowProps={rowProps}
+        timezone={timezone}
+        onEditRoom={onEditRoom}
+        onChangeOwner={onChangeOwner}
+        onTagClick={onTagClick}
+        onRoomChanged={onRoomChanged}
+        onRestoreRoom={onRestoreRoom}
+        onDeleteRoom={onDeleteRoom}
+        onDeleteSelected={onDeleteSelected}
+        onRestoreSelected={onRestoreSelected}
+        onArchiveRoom={onArchiveRoom}
+        onArchiveSelected={onArchiveSelected}
+        onInfoRoom={onInfoRoom}
+        onInviteRoom={onInviteRoom}
+        isArchive={isArchive}
+        hasEncryptionKeys={hasEncryptionKeys}
+      />
+    ),
+    [
+      timezone,
+      onEditRoom,
+      onChangeOwner,
+      onTagClick,
+      onRoomChanged,
+      onRestoreRoom,
+      onDeleteRoom,
+      onDeleteSelected,
+      onRestoreSelected,
+      onArchiveRoom,
+      onArchiveSelected,
+      onInfoRoom,
+      onInviteRoom,
+      isArchive,
+      hasEncryptionKeys,
     ],
-    [t, onColumnSort, onColumnChange, columnState],
   );
 
   return (
-    <TableContainer
-      forwardedRef={containerRef}
-      useReactWindow={!isSSR}
-      className={styles.tableViewContainer}
-    >
-      <TableHeader
-        containerRef={containerRef}
-        columns={columns}
-        columnStorageName={COLUMN_STORAGE_NAME}
-        columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}
-        sectionWidth={0}
-        useReactWindow={!isSSR}
-        sortBy={filterSortBy ?? undefined}
-        sorted={filterSortOrder === "descending"}
-        sortingVisible
-        showSettings
-        settingsTitle={t("Common:TableSettingsTitle")}
-        infoPanelVisible={infoPanelVisible}
-      />
-      <TableBody
-        columnStorageName={COLUMN_STORAGE_NAME}
-        columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}
-        fetchMoreFiles={fetchMoreFiles}
-        filesLength={items.length}
-        hasMoreFiles={hasMoreFiles}
-        itemCount={total}
-        itemHeight={48}
-        useReactWindow={!isSSR}
-        infoPanelVisible={infoPanelVisible}
-      >
-        {items.map((item, index) => (
-          <RoomsTableViewRow
-            key={`${item.id}`}
-            index={index}
-            item={item}
-            timezone={timezone}
-            lastColumn={lastColumn}
-            onEditRoom={onEditRoom}
-            onChangeOwner={onChangeOwner}
-            onTagClick={onTagClick}
-            onRoomChanged={onRoomChanged}
-            onRestoreRoom={onRestoreRoom}
-            onDeleteRoom={onDeleteRoom}
-            onDeleteSelected={onDeleteSelected}
-            onRestoreSelected={onRestoreSelected}
-            onArchiveRoom={onArchiveRoom}
-            onArchiveSelected={onArchiveSelected}
-            onInfoRoom={onInfoRoom}
-            onInviteRoom={onInviteRoom}
-            isArchive={isArchive}
-            hasEncryptionKeys={hasEncryptionKeys}
-          />
-        ))}
-      </TableBody>
-    </TableContainer>
+    <SdkDataTable<TRoomItem>
+      ariaLabel={t("Common:Rooms")}
+      columns={columns}
+      rows={items}
+      getRowKey={getRowKey}
+      sort={sort}
+      onSortChange={onSortChange}
+      onColumnVisibilityChange={setVisible}
+      widthStorage={widthStorage}
+      renderRow={renderRow}
+      virtualize={SDK_DATA_TABLE_VIRTUALIZE}
+      loadMore={loadMore}
+    />
   );
 };
 
 export default observer(RoomsTableView);
-

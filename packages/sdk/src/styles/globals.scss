@@ -67,18 +67,8 @@ body.drag-cursor * {
   border-radius: 4px;
 }
 
-// Table view: highlight all droppable rows during drag (base color).
-// drag-cursor = internal file-move drag; os-drag = OS file upload drag.
-body.drag-cursor .droppable .table-container_cell,
-body.os-drag .droppable .table-container_cell {
-  background: var(--sdk-dnd-bg, rgba(255, 249, 219, 1)) !important;
-}
-
-// Table view: hover target — stronger color
-body.drag-cursor .droppable.droppable-hover .table-container_cell,
-body.os-drag .droppable.droppable-hover .table-container_cell {
-  background: var(--sdk-dnd-accept-bg, rgba(255, 239, 175, 1)) !important;
-}
+// Table view: the DataTable tints droppable rows during a drag with these
+// colours (`SdkDataTable.module.scss`).
 
 html,
 body {

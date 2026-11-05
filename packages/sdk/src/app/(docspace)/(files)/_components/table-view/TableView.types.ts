@@ -35,25 +35,23 @@
 
 import type { Nullable, TSortBy } from "@docspace/shared/types";
 import type { FolderType } from "@docspace/shared/enums";
-import type { IndexRange } from "react-virtualized";
+import type { DataTableRowState } from "@onlyoffice/apps-ui-kit/components/data-table";
 
 import type { TFileItem, TFolderItem } from "../../../_hooks/useItemList";
 
 export type TableViewRowProps = {
   item: TFolderItem | TFileItem;
   index: number;
+  /** What the DataTable gives the row through `renderRow`. */
+  rowProps: DataTableRowState;
   timezone: string;
   displayFileExtension: boolean;
-  hideColumns?: boolean;
-  lastColumn: string;
   currentUserId?: string;
-  isPrivate?: boolean;
   /** Whether the current user has loaded their E2EE key pair. */
   hasEncryptionKeys?: boolean;
 };
 
 export type TableViewProps = {
-  total: number;
   items: (TFolderItem | TFileItem)[];
   hasMoreFiles: boolean;
   filterSortBy: Nullable<TSortBy>;
@@ -61,10 +59,8 @@ export type TableViewProps = {
   onSort: (sortBy: string, sortDirection: string) => void;
   timezone: string;
   displayFileExtension: boolean;
-  fetchMoreFiles: (params: IndexRange) => Promise<void>;
+  fetchMoreFiles: () => Promise<void>;
   currentUserId?: string;
-  infoPanelVisible?: boolean;
-  isPrivate?: boolean;
   /** Whether the current user has loaded their E2EE key pair. */
   hasEncryptionKeys?: boolean;
   /**
@@ -73,4 +69,3 @@ export type TableViewProps = {
    */
   rootFolderType?: FolderType;
 };
-

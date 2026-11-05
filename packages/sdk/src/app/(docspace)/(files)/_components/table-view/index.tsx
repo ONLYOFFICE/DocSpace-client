@@ -38,64 +38,41 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import type { TFunction } from "i18next";
 
 import {
-  TableContainer,
-  TableBody,
-  TableHeader,
-} from "@onlyoffice/apps-ui-kit/components/table";
-import type { TTableColumn } from "@onlyoffice/apps-ui-kit/components/table";
-import { useIsServer } from "@docspace/shared/hooks/useIsServer";
+  createLocalStorageWidths,
+  type DataTableRenderRowProps,
+} from "@onlyoffice/apps-ui-kit/components/data-table";
+
+import {
+  SDK_DATA_TABLE_VIRTUALIZE,
+  SdkDataTable,
+  getColumnWidthsStorageName,
+  useColumnVisibility,
+  useTableSort,
+} from "@/app/(docspace)/_components/data-table";
 
 import type { TableViewProps } from "./TableView.types";
 import { TableViewRow } from "./sub-components/TableViewRow";
 import {
-  getSectionColumns,
   getColumnStorageKey,
-  type ColumnKey,
-  type SectionColumn,
+  getSectionColumns,
+  type TableItem,
 } from "./columns";
-
-import styles from "./TableView.module.scss";
+import { getFilesColumns } from "./filesColumns";
 
 const COLUMN_STORAGE_NAME = "sdkDocsTableColumns";
-const COLUMN_INFO_PANEL_STORAGE_NAME = "sdkDocsTableInfoPanelColumns";
+const COLUMN_WIDTHS_PREFIX = "sdkDocsTable";
 
-// Resolve a column's header title. Literal `t()` calls (not a dynamic key) so
-// the i18n usage scanner sees every key. All keys live in the Common namespace
-// (the only namespace the SDK bundles).
-const getColumnTitle = (key: ColumnKey, t: TFunction): string => {
-  switch (key) {
-    case "Name":
-      return t("Common:Label");
-    case "Author":
-      return t("Common:ByAuthor");
-    case "Created":
-      return t("Common:ByCreation");
-    case "Modified":
-      return t("Common:LastModifiedDate");
-    case "Size":
-      return t("Common:Size");
-    case "Type":
-      return t("Common:Type");
-    case "Location":
-      return t("Common:Location");
-    case "LastOpened":
-      return t("Common:LastOpened");
-    case "Erasure":
-      return t("Common:ByErasure");
-    case "AccessLevel":
-      return t("Common:AccessLevel");
-    case "SharedBy":
-      return t("Common:SharedBy");
-    default:
-      return "";
-  }
-};
+const getRowKey = (item: TableItem) =>
+  `${item.isFolder ? "folder" : "file"}_${item.id}`;
 
+/**
+ * The SDK's documents list on the ui-kit DataTable. Visible columns stay in
+ * the per-section record the old header kept; widths go to the DataTable's
+ * own record, one per section and user.
+ */
 const TableView = ({
-  total,
   items,
   hasMoreFiles,
   filterSortBy,
@@ -105,147 +82,81 @@ const TableView = ({
   displayFileExtension,
   fetchMoreFiles,
   currentUserId,
-  infoPanelVisible,
-  isPrivate,
   hasEncryptionKeys,
   rootFolderType,
 }: TableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
-  const isSSR = useIsServer();
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  const onColumnSort = React.useCallback(
-    (sortBy: string) => {
-      if (filterSortBy === sortBy) {
-        const newDirection = filterSortOrder === "ascending" ? "desc" : "asc";
-        onSort(sortBy, newDirection);
-      } else {
-        onSort(sortBy, filterSortOrder === "ascending" ? "asc" : "desc");
-      }
-    },
-    [filterSortBy, filterSortOrder, onSort],
-  );
 
   // Visible columns and their order are section-specific (single source of
-  // truth in columns.ts), so header and row never drift.
+  // truth in columns.ts).
   const sectionColumns = React.useMemo(
     () => getSectionColumns(rootFolderType),
     [rootFolderType],
   );
 
-  // Column-visibility (gear toggle) is persisted per section so hiding a column
-  // in one section doesn't affect another.
-  const storageKey = getColumnStorageKey(
-    `${COLUMN_STORAGE_NAME}_enabled`,
-    rootFolderType,
+  // Column visibility is kept per section, so hiding a column in one section
+  // doesn't affect another.
+  const { isVisible, setVisible } = useColumnVisibility(
+    getColumnStorageKey(`${COLUMN_STORAGE_NAME}_enabled`, rootFolderType),
   );
 
-  const [columnState, setColumnState] = React.useState<Record<string, boolean>>(
-    {},
+  const { sort, onSortChange } = useTableSort(
+    filterSortBy,
+    filterSortOrder,
+    onSort,
   );
 
-  // Load the persisted visibility for the current section (and reload when the
-  // section changes — TableView is reused across sections).
-  React.useEffect(() => {
-    let next: Record<string, boolean> = {};
-    try {
-      const stored = localStorage.getItem(storageKey);
-      if (stored) next = JSON.parse(stored);
-    } catch {}
-    setColumnState(next);
-  }, [storageKey]);
-
-  const onColumnChange = React.useCallback(
-    (key: string) => {
-      setColumnState((prev) => {
-        const next = { ...prev, [key]: prev[key] === false };
-        try {
-          localStorage.setItem(storageKey, JSON.stringify(next));
-        } catch {}
-        return next;
-      });
-    },
-    [storageKey],
+  const columns = React.useMemo(
+    () => getFilesColumns(sectionColumns, t, isVisible),
+    [sectionColumns, t, isVisible],
   );
 
-  // Last visible column hosts the quick-action buttons — compute it from the
-  // section's actual column order (reversed), honouring hidden columns.
-  const lastColumn = React.useMemo(() => {
-    const reversed = [...sectionColumns].reverse();
-    const last = reversed.find(
-      (c) => c.key === "Name" || columnState[c.key] !== false,
-    );
-    return last?.key ?? "Name";
-  }, [sectionColumns, columnState]);
-
-  const columns: TTableColumn[] = React.useMemo(
+  const widthStorage = React.useMemo(
     () =>
-      sectionColumns.map((column: SectionColumn) => {
-        const isName = column.key === "Name";
-        // A column is sortable iff the descriptor gives it a sortBy (client
-        // model). Only then wire sortBy + onClick so the header is clickable.
-        const sortProps = column.sortBy
-          ? { sortBy: column.sortBy, onClick: onColumnSort }
-          : {};
-        return {
-          key: column.key,
-          title: getColumnTitle(column.key, t),
-          enable: isName ? true : columnState[column.key] !== false,
-          resizable: true,
-          ...(isName ? { default: true, minWidth: 210 } : {}),
-          ...(isName ? {} : { onChange: onColumnChange }),
-          ...sortProps,
-        } satisfies TTableColumn;
-      }),
-    [sectionColumns, t, onColumnSort, onColumnChange, columnState],
+      createLocalStorageWidths(
+        getColumnWidthsStorageName(
+          COLUMN_WIDTHS_PREFIX,
+          currentUserId,
+          String(rootFolderType ?? "default"),
+        ),
+      ),
+    [currentUserId, rootFolderType],
+  );
+
+  const loadMore = React.useMemo(
+    () => ({ hasMore: hasMoreFiles, onLoadMore: fetchMoreFiles }),
+    [hasMoreFiles, fetchMoreFiles],
+  );
+
+  const renderRow = React.useCallback(
+    ({ row, index, rowProps }: DataTableRenderRowProps<TableItem>) => (
+      <TableViewRow
+        item={row}
+        index={index}
+        rowProps={rowProps}
+        timezone={timezone}
+        displayFileExtension={displayFileExtension}
+        currentUserId={currentUserId}
+        hasEncryptionKeys={hasEncryptionKeys}
+      />
+    ),
+    [timezone, displayFileExtension, currentUserId, hasEncryptionKeys],
   );
 
   return (
-    <TableContainer
-      forwardedRef={containerRef}
-      useReactWindow={!isSSR}
-      className={styles.tableViewContainer}
-    >
-      <TableHeader
-        containerRef={containerRef}
-        columns={columns}
-        columnStorageName={COLUMN_STORAGE_NAME}
-        columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}
-        sectionWidth={0}
-        useReactWindow={!isSSR}
-        sortBy={filterSortBy ?? undefined}
-        sorted={filterSortOrder === "descending"}
-        sortingVisible
-        showSettings
-        settingsTitle={t("Common:TableSettingsTitle")}
-        infoPanelVisible={infoPanelVisible}
-      />
-      <TableBody
-        columnStorageName={COLUMN_STORAGE_NAME}
-        columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}
-        fetchMoreFiles={fetchMoreFiles}
-        filesLength={items.length}
-        hasMoreFiles={hasMoreFiles}
-        itemCount={total}
-        itemHeight={48}
-        useReactWindow={!isSSR}
-        infoPanelVisible={infoPanelVisible}
-      >
-        {items.map((item, index) => (
-          <TableViewRow
-            key={`${item.id}`}
-            index={index}
-            item={item}
-            timezone={timezone}
-            displayFileExtension={displayFileExtension}
-            lastColumn={lastColumn}
-            currentUserId={currentUserId}
-            isPrivate={isPrivate}
-            hasEncryptionKeys={hasEncryptionKeys}
-          />
-        ))}
-      </TableBody>
-    </TableContainer>
+    <SdkDataTable<TableItem>
+      ariaLabel={t("Common:Documents")}
+      columns={columns}
+      rows={items}
+      getRowKey={getRowKey}
+      sort={sort}
+      onSortChange={onSortChange}
+      onColumnVisibilityChange={setVisible}
+      widthStorage={widthStorage}
+      renderRow={renderRow}
+      virtualize={SDK_DATA_TABLE_VIRTUALIZE}
+      loadMore={loadMore}
+    />
   );
 };
 

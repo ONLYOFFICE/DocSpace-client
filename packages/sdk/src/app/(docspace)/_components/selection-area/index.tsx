@@ -47,6 +47,7 @@ import { checkIsSSR } from "@docspace/shared/utils";
 import useFilesSelection from "@/app/(docspace)/_hooks/useFilesSelection";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { SDK_DATA_TABLE_LIST_CLASS } from "@/app/(docspace)/_components/data-table/constants";
 
 type SelectionAreaProps = {
   isRooms?: boolean;
@@ -126,7 +127,11 @@ const SelectionArea = observer(({ isRooms }: SelectionAreaProps) => {
       selectableClass={selectableClass}
       scrollClass="section-scroll"
       viewAs={filesViewAs || "row"}
-      itemsContainerClass="ReactVirtualized__Grid__innerScrollContainer"
+      itemsContainerClass={
+        filesViewAs === "table"
+          ? SDK_DATA_TABLE_LIST_CLASS
+          : "ReactVirtualized__Grid__innerScrollContainer"
+      }
       arrayTypes={arrayTypes}
       itemClass="files-item"
       onMove={onMove}

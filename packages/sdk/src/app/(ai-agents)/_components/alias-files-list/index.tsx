@@ -164,7 +164,11 @@ const AliasFilesList = ({
   React.useEffect(() => {
     const next = store.current?.rootFolderType ?? current?.rootFolderType;
     if (next !== undefined) setRootFolderType(next);
-  }, [store.current?.rootFolderType, current?.rootFolderType, setRootFolderType]);
+  }, [
+    store.current?.rootFolderType,
+    current?.rootFolderType,
+    setRootFolderType,
+  ]);
 
   const { getIcon } = useItemIcon({
     filesSettings: effectiveFilesSettings ?? undefined,
@@ -226,13 +230,12 @@ const AliasFilesList = ({
 
   const folderId = store.current?.id ?? current?.id ?? 0;
 
-  useFilesSocket(
-    effectivePortalSettings?.socketUrl ?? "",
-    folderId,
-    () => store.fetch(),
+  useFilesSocket(effectivePortalSettings?.socketUrl ?? "", folderId, () =>
+    store.fetch(),
   );
 
-  const visibleItems = filesListStore.items.length > 0 ? filesListStore.items : items;
+  const visibleItems =
+    filesListStore.items.length > 0 ? filesListStore.items : items;
   const effectiveTotal = total ?? store.total;
   const hasNextPage = effectiveTotal > items.length;
   const currentFolder = store.current ?? current ?? null;
@@ -267,7 +270,6 @@ const AliasFilesList = ({
   if (filesViewAs === "table") {
     return (
       <TableView
-        total={effectiveTotal}
         items={visibleItems}
         hasMoreFiles={hasNextPage}
         filterSortBy={store.filter.sortBy as TSortBy | null}

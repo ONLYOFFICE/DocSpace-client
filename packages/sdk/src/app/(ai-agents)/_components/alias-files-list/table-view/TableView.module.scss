@@ -33,130 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@onlyoffice/apps-ui-kit/styles/mixins";
-@use "@onlyoffice/apps-ui-kit/styles/variables/colors";
-
-.tableViewContainer {
-  :global {
-    .table-container_row-context-menu-wrapper {
-      justify-content: flex-end;
-    }
-
-    .table-row-selected,
-    .table-container_row:hover {
-      .table-container_cell {
-        cursor: pointer;
-        background: var(--sdk-table-row-bg-active) !important;
-      }
-
-      .table-container_file-name-cell {
-        margin-inline-start: -24px;
-        padding-inline-start: 24px;
-      }
-
-      .table-container_row-context-menu-wrapper {
-        margin-inline-end: -20px;
-        padding-inline-end: 20px;
-      }
-    }
-
-    .table-row-selected+.table-row-selected {
-      .table-row {
-
-        .table-container_file-name-cell,
-        .table-container_row-context-menu-wrapper {
-          border-image-slice: 1;
-        }
-      }
-    }
-
-    .table-container_element-wrapper,
-    .table-container_row-loader {
-      min-width: 40px;
-      margin-inline-start: -20px;
-      padding-inline-start: 20px;
-    }
-
-    .table-container_element-container {
-      width: 32px;
-      min-width: 32px;
-      height: 32px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .table-container_row-checkbox {
-      width: 12px;
-    }
-
-    .ReactVirtualized__Grid__innerScrollContainer {
-      padding-bottom: 1px;
-    }
-
-    // Non-bold column header titles
-    .header-container-text {
-      font-weight: 400 !important;
-    }
-
-    // Quick buttons visibility: shared link always visible, unshared on hover
-    .create-share-link {
-      display: none;
-    }
-
-    .link-shared {
-      display: flex;
-    }
-
-    .table-container_row:hover,
-    .table-row-selected {
-      .create-share-link {
-        display: flex !important;
-      }
-    }
-  }
-
-  :global(.light) & {
-    --sdk-table-row-bg-active: #{colors.$light-gray-hover};
-    --sdk-table-element-wrapper-border-image: linear-gradient(
-      to right,
-      #{colors.$white} 20px,
-      #{colors.$gray-light-mid} 20px
-    );
-  }
-
-  :global(.dark) & {
-    --sdk-table-row-bg-active: #{colors.$light-dark-gray-hover};
-    --sdk-table-element-wrapper-border-image: linear-gradient(
-      to right,
-      #{colors.$black} 20px,
-      #{colors.$gray-dark-strong} 20px
-    );
-  }
-
-  :global {
-    .table-container_element-wrapper {
-      border-image-slice: 1;
-      border-image-source: var(--sdk-table-element-wrapper-border-image);
-    }
-  }
-}
-
-.nameCellText {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 13px;
-  margin-inline-start: 12px;
-  flex-shrink: 1;
-  min-width: 0;
-}
-
-.nameCellExst {
-  color: var(--files-section-table-view-exst-color);
-}
+// The table draws the rows' states, lines and checkbox; what is left is the
+// content of the rows. The name is laid out by the files table's NameCell.
 
 .secondaryCell {
   display: flex;
@@ -183,6 +61,7 @@
   }
 }
 
+// The quick buttons at the end of the last column shown.
 .quickButtonsContainer {
   display: flex;
   justify-content: flex-end;
@@ -197,17 +76,11 @@
   }
 
   :global(.badge) {
-    padding: 12px 8px;
+    padding-block: 12px;
+    padding-inline: 8px;
   }
 
   :global(.favorite) {
-    margin-top: 1px;
+    margin-block-start: 1px;
   }
-}
-
-// Last cell hosting quick buttons: allow badges to overflow
-.lastCell {
-  overflow: visible !important;
-  z-index: 1;
-  position: relative;
 }

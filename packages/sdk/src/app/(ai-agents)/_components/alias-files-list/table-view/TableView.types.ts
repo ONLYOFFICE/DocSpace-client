@@ -34,21 +34,23 @@
  */
 
 import type { Nullable, TSortBy } from "@docspace/shared/types";
-import type { IndexRange } from "react-virtualized";
+import type { DataTableRowState } from "@onlyoffice/apps-ui-kit/components/data-table";
 
-import type { TFileItem, TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
+import type {
+  TFileItem,
+  TFolderItem,
+} from "@/app/(docspace)/_hooks/useItemList";
 
 export type TableViewRowProps = {
   item: TFolderItem | TFileItem;
   index: number;
+  /** What the DataTable gives the row through `renderRow`. */
+  rowProps: DataTableRowState;
   timezone: string;
   displayFileExtension: boolean;
-  hideColumns?: boolean;
-  lastColumn: string;
 };
 
 export type TableViewProps = {
-  total: number;
   items: (TFolderItem | TFileItem)[];
   hasMoreFiles: boolean;
   filterSortBy: Nullable<TSortBy>;
@@ -56,5 +58,5 @@ export type TableViewProps = {
   onSort: (sortBy: string, sortDirection: string) => void;
   timezone: string;
   displayFileExtension: boolean;
-  fetchMoreFiles: (params: IndexRange) => Promise<void>;
+  fetchMoreFiles: () => Promise<void>;
 };

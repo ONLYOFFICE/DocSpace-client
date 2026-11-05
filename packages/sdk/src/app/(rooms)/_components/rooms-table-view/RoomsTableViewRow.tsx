@@ -63,15 +63,14 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { TableRow, TableCell } from "@onlyoffice/apps-ui-kit/components/table";
+import {
+  DataTableRow,
+  type DataTableRowState,
+} from "@onlyoffice/apps-ui-kit/components/data-table";
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
-
-import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
-import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import Badges from "@docspace/shared/components/badges";
@@ -84,6 +83,7 @@ import api from "@docspace/shared/api";
 import { isAdmin } from "@docspace/shared/utils/common";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
+import { SDK_TABLE_TEST_IDS } from "@/app/(docspace)/_components/data-table/constants";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 
 import useCopyRoomPrimaryLink from "../../_hooks/useCopyRoomPrimaryLink";
@@ -94,6 +94,11 @@ import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import { getRoomIconLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
+import { ROW_CHECKBOX_CLASS } from "@/app/(docspace)/(files)/_components/table-view/sub-components/FilesCells";
+import {
+  FilesRowContext,
+  type TFilesRowValue,
+} from "@/app/(docspace)/(files)/_components/table-view/sub-components/FilesRowContext";
 import useRoomContextMenuModel from "../../_hooks/useRoomContextMenuModel";
 import { useTagsChanged } from "../../_hooks/useTagsChanged";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
@@ -105,11 +110,12 @@ import type {
 
 import styles from "@/app/(docspace)/(files)/_components/table-view/TableView.module.scss";
 
-type RoomsTableViewRowProps = {
+export type RoomsTableViewRowProps = {
   item: TFolderItem | TFileItem;
   index: number;
+  /** What the DataTable gives the row through `renderRow`. */
+  rowProps: DataTableRowState;
   timezone: string;
-  lastColumn: string;
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
   onChangeOwner?: (item: TFolderItem | TFileItem) => void;
   onTagClick?: (tag: string) => void;
@@ -126,12 +132,16 @@ type RoomsTableViewRowProps = {
   hasEncryptionKeys?: boolean;
 };
 
+/**
+ * A room row on the DataTable. The cells carry the `files-item` class and the
+ * `value` the selection area reads, as the old row's menu cell did.
+ */
 const RoomsTableViewRow = observer(
   ({
     item,
     index,
+    rowProps,
     timezone,
-    lastColumn,
     onEditRoom,
     onChangeOwner,
     onTagClick,
@@ -232,7 +242,7 @@ const RoomsTableViewRow = observer(
       } catch {
         toastr.error(t("Common:UnexpectedError"));
       }
-    }, [canMute, item.id, refreshRooms, t]);
+    }, [canMute, item.id, onRoomChanged, t]);
 
     const lastActivity = getCorrectDate(
       i18n.language || "",
@@ -242,39 +252,23 @@ const RoomsTableViewRow = observer(
       timezone ?? "UTC",
     );
 
-    const onCheckboxChange = React.useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.stopPropagation();
-        filesSelectionStore.addSelection(item);
-      },
-      [filesSelectionStore, item],
-    );
-
-    const onRowClick = React.useCallback(() => {
+    const onRowClick = (e: React.MouseEvent) => {
+      // The checkbox selects the row on its own, as the old one did.
+      if ((e.target as Element).closest(`.${ROW_CHECKBOX_CLASS}`)) return;
       if (filesSelectionStore.isCheckedItem(item)) return;
       filesSelectionStore.setSelection([]);
       filesSelectionStore.setBufferSelection(item);
-    }, [filesSelectionStore, item]);
+    };
 
-    const onRowDoubleClick = React.useCallback(() => {
-      if (item.isFolder) {
-        openFolder(item.id, item.title);
-      } else {
-        openFile(item);
-      }
-    }, [item, openFolder, openFile]);
+    const open = () => {
+      if (item.isFolder) openFolder(item.id, item.title);
+      else openFile(item);
+    };
 
-    const onNameClick = React.useCallback(
-      (e: React.MouseEvent) => {
-        e.stopPropagation();
-        if (item.isFolder) {
-          openFolder(item.id, item.title);
-        } else {
-          openFile(item);
-        }
-      },
-      [item, openFolder, openFile],
-    );
+    const onNameClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      open();
+    };
 
     const itemSnapshot = { ...observableItem };
 
@@ -284,7 +278,7 @@ const RoomsTableViewRow = observer(
     // icon — with the encrypted state shown via the green shield badge from
     // EncryptedItemIconWrapper (intentional divergence from the main client,
     // which swaps the whole icon for private.svg).
-    const roomIconElement = (
+    const icon = (
       <EncryptedItemIconWrapper
         encrypted={isPrivateRoomItem}
         hasEncryptionKeys={!!hasEncryptionKeys}
@@ -304,7 +298,7 @@ const RoomsTableViewRow = observer(
       </EncryptedItemIconWrapper>
     );
 
-    const badgesNode = (
+    const badges = (
       <div className={styles.inlineBadges}>
         <Badges
           t={t}
@@ -319,7 +313,7 @@ const RoomsTableViewRow = observer(
 
     const onCopyPrimaryLink = useCopyRoomPrimaryLink(itemSnapshot, t);
 
-    const quickButtonsNode = (
+    const quickButtons = (
       <div className={styles.quickButtonsContainer}>
         <QuickButtons
           t={t}
@@ -330,104 +324,77 @@ const RoomsTableViewRow = observer(
       </div>
     );
 
-    const contextMenuModel = getContextModel(item);
-    const getRowContextModel = React.useCallback(
-      () => getContextModel(item),
-      [getContextModel, item],
-    );
+    const renderCell = (key: string): React.ReactNode => {
+      switch (key) {
+        case "Tags":
+          return (
+            <TagManagement
+              id={item.id}
+              tags={roomTags}
+              columnCount={2}
+              isActive={isHovered || isChecked}
+              access={tagAccess}
+              roomName={item.title}
+              onSelectTag={onSelectTag}
+              onTagsChanged={onRoomTagsChanged}
+            />
+          );
+        case "Owner":
+          return <span className={styles.secondaryCell}>{owner}</span>;
+        case "Activity":
+          return (
+            <span className={styles.secondaryCell} suppressHydrationWarning>
+              {lastActivity}
+            </span>
+          );
+        default:
+          return null;
+      }
+    };
+
+    const rowValue: TFilesRowValue = {
+      icon,
+      checked: isChecked,
+      loading: inProgress,
+      selectLabel: t("Common:TitleSelectFile"),
+      onSelect: () => filesSelectionStore.addSelection(item),
+      onOpen: onNameClick,
+      titleWithoutExt: item.title,
+      fileExst: "",
+      badges,
+      quickButtons,
+      renderCell,
+    };
+
+    const contextMenu = {
+      options: getContextModel(item),
+      getModel: () => getContextModel(item),
+      onOpen: (isRightClick: boolean) => {
+        if (isRightClick && filesSelectionStore.selection.length > 1) return;
+        filesSelectionStore.setSelection([]);
+        filesSelectionStore.setBufferSelection(item);
+      },
+      title: t("Common:TitleShowFolderActions"),
+    };
 
     return (
-      <TableRow
-        className={classNames({
-          "table-row-selected": isChecked,
-        })}
-        checked={isChecked}
-        contextOptions={contextMenuModel}
-        getContextModel={getRowContextModel}
-        onClick={onRowClick}
-        onDoubleClick={onRowDoubleClick}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        selectionProp={{
-          className: classNames("files-item", "table-container_file-name-cell"),
-          value,
-        }}
-        fileContextClick={(isRightClick) => {
-          if (isRightClick && filesSelectionStore.selection.length > 1) return;
-          filesSelectionStore.setSelection([]);
-          filesSelectionStore.setBufferSelection(item);
-        }}
-      >
-        <TableCell
-          className="table-container_file-name-cell table-container_element-wrapper"
-          hasAccess
+      <FilesRowContext value={rowValue}>
+        <DataTableRow
+          {...rowProps}
+          row={item}
+          index={index}
+          testId={SDK_TABLE_TEST_IDS.row}
           checked={isChecked}
-        >
-          <div
-            className="table-container_element-container"
-            onClick={(e) => e.stopPropagation()}
-            onMouseDown={(e) => {
-              if (e.button === 0) e.stopPropagation();
-            }}
-          >
-            <div className="table-container_element">
-              {inProgress ? (
-                <Loader
-                  color=""
-                  size="20px"
-                  type={LoaderTypes.track}
-                  isDecorative
-                />
-              ) : (
-                roomIconElement
-              )}
-            </div>
-            <Checkbox
-              className="table-container_row-checkbox"
-              onChange={onCheckboxChange}
-              isChecked={isChecked}
-              title={t("Common:TitleSelectFile")}
-            />
-          </div>
-          <span className={styles.nameCellText} onClick={onNameClick}>
-            {item.title}
-          </span>
-          {badgesNode}
-          {lastColumn === "Name" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell
-          className={lastColumn === "Tags" ? styles.lastCell : undefined}
-        >
-          <TagManagement
-            id={item.id}
-            tags={roomTags}
-            columnCount={2}
-            isActive={isHovered || isChecked}
-            access={tagAccess}
-            roomName={item.title}
-            onSelectTag={onSelectTag}
-            onTagsChanged={onRoomTagsChanged}
-          />
-          {lastColumn === "Tags" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell
-          className={lastColumn === "Owner" ? styles.lastCell : undefined}
-        >
-          <span className={styles.secondaryCell}>{owner}</span>
-          {lastColumn === "Owner" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell
-          className={lastColumn === "Activity" ? styles.lastCell : undefined}
-        >
-          <span className={styles.secondaryCell} suppressHydrationWarning>
-            {lastActivity}
-          </span>
-          {lastColumn === "Activity" ? quickButtonsNode : null}
-        </TableCell>
-      </TableRow>
+          cellProps={{ className: "files-item", value }}
+          contextMenu={contextMenu}
+          onClick={onRowClick}
+          onDoubleClick={open}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        />
+      </FilesRowContext>
     );
   },
 );
 
 export { RoomsTableViewRow };
-

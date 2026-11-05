@@ -65,7 +65,6 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { decode } from "he";
 
 import type { TAgent } from "@docspace/shared/api/ai/types";
 import { RoomsType } from "@docspace/shared/enums";
@@ -80,20 +79,6 @@ import { TileContainer } from "@onlyoffice/apps-ui-kit/components/tiles/tile-con
 import { Row } from "@onlyoffice/apps-ui-kit/components/rows/row";
 import { RowContent } from "@onlyoffice/apps-ui-kit/components/rows/row-content";
 import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows/row-container";
-import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@onlyoffice/apps-ui-kit/components/avatar";
-import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
-import {
-  TableContainer,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableCell,
-} from "@onlyoffice/apps-ui-kit/components/table";
-import type { TTableColumn } from "@onlyoffice/apps-ui-kit/components/table";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 
@@ -105,9 +90,8 @@ import AgentsSectionEmptyView, {
   type AgentsListSection,
 } from "../agents-section-empty-view";
 import useAgentContextOptions from "./useAgentContextOptions";
+import AgentsTable from "./AgentsTable";
 import styles from "./AgentsList.module.scss";
-
-const COLUMN_STORAGE_NAME = "ai-agents-table";
 
 // Mirror client TagManagement wrapper: derive granular access flags from the
 // agent's `access` ShareAccessRights value + the viewer's admin status.
@@ -134,10 +118,7 @@ const computeTagAccess = (
 // with the ui-kit RoomTile contract (string label).
 const getRoomTypeName = (
   _type: string,
-  t: (
-    key: string,
-    interpolation?: Record<string, string | number>,
-  ) => string,
+  t: (key: string, interpolation?: Record<string, string | number>) => string,
 ) => t("Common:AIRoomTitle", { defaultValue: "AI agent" });
 
 type Props = {
@@ -158,24 +139,12 @@ const AgentsList = observer(({ agents, section }: Props) => {
   const isAdmin = !!(userStore.user?.isAdmin || userStore.user?.isOwner);
   const getContextOptions = useAgentContextOptions();
 
-  const tableContainerRef = React.useRef<HTMLDivElement>(null);
-  const [sectionWidth, setSectionWidth] = React.useState(0);
-
-  React.useEffect(() => {
-    const el = tableContainerRef.current;
-    if (!el || typeof ResizeObserver === "undefined") return;
-    const ro = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        setSectionWidth(entry.contentRect.width);
-      }
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const goToAgent = (id: TAgent["id"]) => {
-    router.push(`/ai-agents/${id}?tab=chat`);
-  };
+  const goToAgent = React.useCallback(
+    (id: TAgent["id"]) => {
+      router.push(`/ai-agents/${id}?tab=chat`);
+    },
+    [router],
+  );
 
   if (!agents.length) {
     const f = store.filter;
@@ -212,10 +181,7 @@ const AgentsList = observer(({ agents, section }: Props) => {
   if (store.viewAs === "tile") {
     return (
       <>
-        <TileContainer
-          useReactWindow={false}
-          className={styles.tilesGrid}
-        >
+        <TileContainer useReactWindow={false} className={styles.tilesGrid}>
           {agents.map((agent) => {
             const options = getContextOptions(agent);
             const logo = agent.logo;
@@ -386,126 +352,9 @@ const AgentsList = observer(({ agents, section }: Props) => {
   }
 
   // ---------- Table view ----------
-  // Mirrors `client/.../TableView/sub-components/AIAgentsRowData.tsx` columns:
-  // Name (avatar + title) | Activity (created date) | Owner (avatar + name).
-  // Skipping Tags & Quota columns we don't surface in the SDK.
-  const columns: TTableColumn[] = [
-    {
-      key: "Name",
-      title: t("Common:Name", { defaultValue: "Name" }),
-      enable: true,
-      default: true,
-      resizable: true,
-      minWidth: 210,
-    },
-    {
-      key: "Activity",
-      title: t("Common:LastModifiedDate", {
-        defaultValue: "Last activity",
-      }),
-      enable: true,
-      resizable: true,
-    },
-    {
-      key: "Owner",
-      title: t("Common:Owner", { defaultValue: "Owner" }),
-      enable: true,
-      resizable: true,
-    },
-  ];
-
   return (
     <>
-      <TableContainer forwardedRef={tableContainerRef} useReactWindow={false}>
-        <TableHeader
-          containerRef={tableContainerRef}
-          columns={columns}
-          columnStorageName={COLUMN_STORAGE_NAME}
-          sectionWidth={sectionWidth}
-          useReactWindow={false}
-          showSettings={false}
-        />
-        <TableBody
-          columnStorageName={COLUMN_STORAGE_NAME}
-          fetchMoreFiles={async () => {}}
-          filesLength={agents.length}
-          hasMoreFiles={false}
-          itemCount={agents.length}
-          itemHeight={48}
-          useReactWindow={false}
-        >
-          {agents.map((agent) => {
-            const options = getContextOptions(agent);
-            const logo = agent.logo;
-            const showDefault = !(logo?.cover || logo?.medium);
-            const createdBy = agent.createdBy;
-            const ownerName = createdBy?.displayName
-              ? decode(createdBy.displayName)
-              : "";
-            const ownerAvatar =
-              createdBy?.hasAvatar && createdBy?.avatarSmall
-                ? createdBy.avatarSmall
-                : DefaultUserPhotoSize32PngUrl;
-
-            return (
-              <TableRow
-                key={agent.id}
-                contextOptions={options}
-                getContextModel={() => options}
-                checked={store.isSelected(agent.id)}
-                onClick={() => goToAgent(agent.id)}
-              >
-                <TableCell className="table-container_file-name-cell">
-                  <div className={styles.tableTitleCell}>
-                    <RoomIcon
-                      title={agent.title}
-                      color={logo?.color}
-                      logo={logo}
-                      size="32px"
-                      radius="6px"
-                      showDefault={showDefault}
-                      imgClassName="react-svg-icon"
-                    />
-                    <Link
-                      type={LinkType.page}
-                      title={agent.title}
-                      fontWeight={600}
-                      fontSize="13px"
-                      truncate
-                      isTextOverflow
-                      onClick={() => goToAgent(agent.id)}
-                    >
-                      {agent.title}
-                    </Link>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <Text fontSize="12px" fontWeight={600} truncate>
-                    {formatCreated(agent.created)}
-                  </Text>
-                </TableCell>
-                <TableCell>
-                  <div className={styles.tableOwnerCell}>
-                    <Avatar
-                      source={ownerAvatar}
-                      role={AvatarRole.user}
-                      size={AvatarSize.min}
-                    />
-                    <Text
-                      fontSize="12px"
-                      fontWeight={600}
-                      title={ownerName}
-                      truncate
-                    >
-                      {ownerName}
-                    </Text>
-                  </div>
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </TableContainer>
+      <AgentsTable agents={agents} goToAgent={goToAgent} />
       {loadMore}
     </>
   );

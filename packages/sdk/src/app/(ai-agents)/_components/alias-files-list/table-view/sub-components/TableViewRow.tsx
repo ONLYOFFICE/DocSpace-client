@@ -38,18 +38,21 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import classNames from "classnames";
 
-import { TableRow } from "@onlyoffice/apps-ui-kit/components/table";
-import { TableCell } from "@onlyoffice/apps-ui-kit/components/table";
+import { DataTableRow } from "@onlyoffice/apps-ui-kit/components/data-table";
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
-import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import Badges from "@docspace/shared/components/badges";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
+import { SDK_TABLE_TEST_IDS } from "@/app/(docspace)/_components/data-table/constants";
+import { ROW_CHECKBOX_CLASS } from "@/app/(docspace)/(files)/_components/table-view/sub-components/FilesCells";
+import {
+  FilesRowContext,
+  type TFilesRowValue,
+} from "@/app/(docspace)/(files)/_components/table-view/sub-components/FilesRowContext";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
@@ -68,8 +71,18 @@ import getTitleWithoutExt from "@/app/(docspace)/_utils/get-title-without-ext";
 import type { TableViewRowProps } from "../TableView.types";
 import styles from "../TableView.module.scss";
 
+/**
+ * A row of an AI agent's files on the DataTable. The cells carry the
+ * `files-item` class and the `value`, as the old row's menu cell did.
+ */
 const TableViewRow = observer(
-  ({ item, index, timezone, displayFileExtension, lastColumn }: TableViewRowProps) => {
+  ({
+    item,
+    index,
+    rowProps,
+    timezone,
+    displayFileExtension,
+  }: TableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
 
@@ -110,7 +123,9 @@ const TableViewRow = observer(
     const value = generateFilesItemValue(item, false, index);
 
     const titleWithoutExt =
-      "fileExst" in item ? getTitleWithoutExt(item.title, item.fileExst) : item.title;
+      "fileExst" in item
+        ? getTitleWithoutExt(item.title, item.fileExst)
+        : item.title;
 
     const modifiedDate = getCorrectDate(
       i18n.language || "",
@@ -122,59 +137,40 @@ const TableViewRow = observer(
 
     const fileSize = "contentLength" in item ? item.contentLength : "";
     const fileType =
-      "fileType" in item ? getFileTypeName(item.fileType, t) : t("Common:Folder");
+      "fileType" in item
+        ? getFileTypeName(item.fileType, t)
+        : t("Common:Folder");
 
-    const onCheckboxChange = React.useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.stopPropagation();
-        filesSelectionStore.addSelection(item);
-      },
-      [filesSelectionStore, item],
-    );
-
-    const onRowClick = React.useCallback(() => {
+    const onRowClick = (e: React.MouseEvent) => {
+      // The checkbox selects the row on its own, as the old one did.
+      if ((e.target as Element).closest(`.${ROW_CHECKBOX_CLASS}`)) return;
       filesSelectionStore.setSelection([]);
       filesSelectionStore.setBufferSelection(item);
-    }, [filesSelectionStore, item]);
+    };
 
-    const onRowDoubleClick = React.useCallback(() => {
-      if (item.isFolder) {
-        openFolder(item.id, item.title);
-      } else {
-        openFile(item);
-      }
-    }, [item, openFolder, openFile]);
+    const open = () => {
+      if (item.isFolder) openFolder(item.id, item.title);
+      else openFile(item);
+    };
 
-    const onNameClick = React.useCallback(
-      (e: React.MouseEvent) => {
-        e.stopPropagation();
-        if (item.isFolder) {
-          openFolder(item.id, item.title);
-        } else {
-          openFile(item);
-        }
-      },
-      [item, openFolder, openFile],
-    );
+    const onNameClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      open();
+    };
 
-    const onClickFavorite = React.useCallback(() => {
-      if (observableItem.isFavorite) {
-        removeFromFavorites(observableItem);
-      } else {
-        markAsFavorite(observableItem);
-      }
-    }, [observableItem, markAsFavorite, removeFromFavorites]);
+    const onClickFavorite = () => {
+      if (observableItem.isFavorite) removeFromFavorites(observableItem);
+      else markAsFavorite(observableItem);
+    };
 
-    const handleShareClick = React.useCallback(() => {
-      onShareClick?.(observableItem);
-    }, [onShareClick, observableItem]);
+    const handleShareClick = () => onShareClick?.(observableItem);
 
     // Spread observable item to create a new object reference when MobX
     // properties change, so that QuickButtons memo(fast-deep-equal) detects
     // the update (same proxy ref would short-circuit to true).
     const itemSnapshot = { ...observableItem };
 
-    const badgesNode = (
+    const badges = (
       <div className={styles.badgesContainer}>
         <Badges
           t={t}
@@ -183,9 +179,7 @@ const TableViewRow = observer(
           viewAs="table"
           showNew={false}
           onFilesClick={() => {
-            if (!observableItem.isFolder) {
-              openFile(observableItem);
-            }
+            if (!observableItem.isFolder) openFile(observableItem);
           }}
           onClickFavorite={onClickFavorite}
           onRetryVectorization={onRetryVectorization}
@@ -193,7 +187,7 @@ const TableViewRow = observer(
       </div>
     );
 
-    const quickButtonsNode = (
+    const quickButtons = (
       <div className={styles.quickButtonsContainer}>
         <QuickButtons
           t={t}
@@ -207,67 +201,65 @@ const TableViewRow = observer(
       </div>
     );
 
-    const contextMenuModel = getContextMenuModel(true);
+    const renderCell = (key: string): React.ReactNode => {
+      switch (key) {
+        case "Modified":
+          return (
+            <span className={styles.secondaryCell} suppressHydrationWarning>
+              {modifiedDate}
+            </span>
+          );
+        case "Size":
+          return <span className={styles.secondaryCell}>{fileSize}</span>;
+        case "Type":
+          return <span className={styles.secondaryCell}>{fileType}</span>;
+        default:
+          return null;
+      }
+    };
+
+    const rowValue: TFilesRowValue = {
+      icon: (
+        <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
+      ),
+      checked: isChecked,
+      selectLabel: t("Common:TitleSelectFile"),
+      onSelect: () => filesSelectionStore.addSelection(item),
+      onOpen: onNameClick,
+      titleWithoutExt,
+      fileExst: displayFileExtension && "fileExst" in item ? item.fileExst : "",
+      badges,
+      quickButtons,
+      renderCell,
+    };
+
+    const contextMenu = {
+      options: getContextMenuModel(true),
+      getModel: () => getContextMenuModel(),
+      onOpen: (isRightClick: boolean) => {
+        if (isRightClick && filesSelectionStore.selection.length > 1) return;
+        filesSelectionStore.setSelection([]);
+        filesSelectionStore.setBufferSelection(item);
+      },
+      title: item.isFolder
+        ? t("Common:TitleShowFolderActions")
+        : t("Common:TitleShowActions"),
+    };
 
     return (
-      <TableRow
-        className={classNames({
-          "table-row-selected": isChecked,
-        })}
-        checked={isChecked}
-        contextOptions={contextMenuModel}
-        getContextModel={getContextMenuModel}
-        onClick={onRowClick}
-        onDoubleClick={onRowDoubleClick}
-        selectionProp={{ className: classNames("files-item", "table-container_file-name-cell"), value }}
-        fileContextClick={(isRightClick?: boolean) => {
-          if (isRightClick && filesSelectionStore.selection.length > 1) return;
-          filesSelectionStore.setSelection([]);
-          filesSelectionStore.setBufferSelection(item);
-        }}
-      >
-        <TableCell
-          className="table-container_file-name-cell table-container_element-wrapper"
-          hasAccess
+      <FilesRowContext value={rowValue}>
+        <DataTableRow
+          {...rowProps}
+          row={item}
+          index={index}
+          testId={SDK_TABLE_TEST_IDS.row}
           checked={isChecked}
-        >
-          <div className="table-container_element-container" onClick={(e) => e.stopPropagation()}>
-            <div className="table-container_element">
-              <RoomIcon
-                logo={item.icon}
-                title={item.title}
-                showDefault={false}
-              />
-            </div>
-            <Checkbox
-              className="table-container_row-checkbox"
-              onChange={onCheckboxChange}
-              isChecked={isChecked}
-              title={t("Common:TitleSelectFile")}
-            />
-          </div>
-          <span className={styles.nameCellText} onClick={onNameClick}>
-            {titleWithoutExt}
-            {displayFileExtension && "fileExst" in item ? (
-              <span className={styles.nameCellExst}>{item.fileExst}</span>
-            ) : null}
-          </span>
-          {badgesNode}
-          {lastColumn === "Name" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell className={lastColumn === "Modified" ? styles.lastCell : undefined}>
-          <span className={styles.secondaryCell} suppressHydrationWarning>{modifiedDate}</span>
-          {lastColumn === "Modified" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell className={lastColumn === "Size" ? styles.lastCell : undefined}>
-          <span className={styles.secondaryCell}>{fileSize}</span>
-          {lastColumn === "Size" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell className={lastColumn === "Type" ? styles.lastCell : undefined}>
-          <span className={styles.secondaryCell}>{fileType}</span>
-          {lastColumn === "Type" ? quickButtonsNode : null}
-        </TableCell>
-      </TableRow>
+          cellProps={{ className: "files-item", value }}
+          contextMenu={contextMenu}
+          onClick={onRowClick}
+          onDoubleClick={open}
+        />
+      </FilesRowContext>
     );
   },
 );

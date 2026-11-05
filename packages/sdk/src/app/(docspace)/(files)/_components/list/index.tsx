@@ -73,7 +73,6 @@ const List = ({
   current,
   currentUserId,
   withoutFavorite,
-  infoPanelVisible,
   allowedContextOptions,
   allowedFolderContextOptions,
   emptyView,
@@ -88,7 +87,8 @@ const List = ({
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
     useSettingsStore();
   const filesListStore = useFilesListStore();
-  const { setItems, setRootFolderType, setPathParts, setCurrentFolder } = filesListStore;
+  const { setItems, setRootFolderType, setPathParts, setCurrentFolder } =
+    filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
 
@@ -364,7 +364,6 @@ const List = ({
   if (filesViewAs === "table") {
     return (
       <TableView
-        total={total}
         items={visibleItems}
         hasMoreFiles={hasNextPage}
         filterSortBy={filter.sortBy}
@@ -383,8 +382,6 @@ const List = ({
         displayFileExtension={displayFileExtension}
         fetchMoreFiles={fetchMoreFiles}
         currentUserId={currentUserId}
-        infoPanelVisible={infoPanelVisible}
-        isPrivate={isPrivate}
         hasEncryptionKeys={hasEncryptionKeys}
         rootFolderType={rootFolderType}
       />

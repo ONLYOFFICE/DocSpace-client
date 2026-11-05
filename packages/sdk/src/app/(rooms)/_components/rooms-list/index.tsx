@@ -181,7 +181,6 @@ const RoomsList = ({
   onPrivateInviteRoom,
   onPrivateChangeOwner,
   roomActionsRef,
-  infoPanelVisible,
 }: RoomsListProps) => {
   const timezone = portalSettings.timezone;
   const searchParams = useSearchParams();
@@ -587,8 +586,7 @@ const RoomsList = ({
       newFilter.sortBy = sp.get("sortBy") as typeof newFilter.sortBy;
     if (sp.get("sortOrder"))
       newFilter.sortOrder = sp.get("sortOrder") as typeof newFilter.sortOrder;
-    if (sp.get("filterValue"))
-      newFilter.filterValue = sp.get("filterValue");
+    if (sp.get("filterValue")) newFilter.filterValue = sp.get("filterValue");
     if (sp.get("subjectId")) newFilter.subjectId = sp.get("subjectId");
     if (sp.get("subjectOwnerId"))
       newFilter.subjectOwnerId = sp.get("subjectOwnerId");
@@ -797,17 +795,14 @@ const RoomsList = ({
     setRootFolderType(current.rootFolderType);
   }, [current.rootFolderType, setRootFolderType]);
 
-  const visibleItems = initRef.current
-    ? filesListStore.items
-    : initialItems;
+  const visibleItems = initRef.current ? filesListStore.items : initialItems;
 
   let content: React.ReactNode;
 
   if (visibleItems.length === 0) {
-    content =
-      emptyView ?? (
-        <EmptyView isFiltered={!!filter.filterValue} isArchive={isArchive} />
-      );
+    content = emptyView ?? (
+      <EmptyView isFiltered={!!filter.filterValue} isArchive={isArchive} />
+    );
   } else if (filesViewAs === "tile") {
     content = (
       <RoomsTileView
@@ -835,7 +830,6 @@ const RoomsList = ({
   } else if (filesViewAs === "table") {
     content = (
       <RoomsTableView
-        total={total}
         items={visibleItems}
         hasMoreFiles={hasNextPage}
         filterSortBy={filter.sortBy as TSortBy}
@@ -866,7 +860,6 @@ const RoomsList = ({
         onInviteRoom={onInviteRoom}
         isArchive={isArchive}
         hasEncryptionKeys={hasEncryptionKeys}
-        infoPanelVisible={infoPanelVisible}
       />
     );
   } else {
@@ -1002,4 +995,3 @@ const RoomsList = ({
 };
 
 export default observer(RoomsList);
-

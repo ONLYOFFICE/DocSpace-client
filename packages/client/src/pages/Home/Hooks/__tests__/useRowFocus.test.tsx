@@ -155,6 +155,18 @@ describe("useRowFocus", () => {
 
       expect(field).toHaveFocus();
     });
+
+    // The list's hotkeys move the caret from a row's checkbox: the focus
+    // follows to the caret's row, as it does from the list.
+    it("takes the focus from a row's checkbox to the caret's row", async () => {
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      byTestId("b-name").append(checkbox);
+
+      moveCaret(checkbox);
+
+      await waitFor(() => expect(byTestId("a-name")).toHaveFocus());
+    });
   });
 
   // A tile is the item's own card inside a drag-and-drop wrapper, and the card

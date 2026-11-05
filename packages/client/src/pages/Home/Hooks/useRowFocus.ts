@@ -194,10 +194,26 @@ const rowKey = (row: HTMLElement): TRowKey | null => {
 };
 
 // A control the user types into: a caret moved while it has the focus was not
-// moved by those keys, which the list's hotkeys leave to the control.
+// moved by those keys, which the list's hotkeys leave to the control. A
+// checkbox or a radio takes no typing - the hotkeys move the caret from a
+// row's checkbox, and the focus must follow - so it is no such control.
+const NOT_TYPED_INTO = new Set([
+  "checkbox",
+  "radio",
+  "button",
+  "submit",
+  "reset",
+  "image",
+  "file",
+  "range",
+  "color",
+]);
 const isEditable = (el: Element | null) =>
   el instanceof HTMLElement &&
-  (el.isContentEditable || el.matches("input, textarea, select"));
+  (el.isContentEditable ||
+    el instanceof HTMLTextAreaElement ||
+    el instanceof HTMLSelectElement ||
+    (el instanceof HTMLInputElement && !NOT_TYPED_INTO.has(el.type)));
 
 // The first Tab stop after `from` (or, going back, before it).
 const stopBeside = (from: HTMLElement, back: boolean) => {

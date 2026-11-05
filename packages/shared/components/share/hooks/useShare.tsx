@@ -106,9 +106,10 @@ export const useShare = ({
 
   // The panel stays mounted as the selection changes: a link asked for the
   // item before must not take the focus in the links of the next one.
+  // A folder and a file can share an id: the kind is part of the item.
   useEffect(() => {
     setFocusCreatedLink(false);
-  }, [infoPanelSelection?.id]);
+  }, [infoPanelSelection?.id, infoPanelSelection?.isFolder]);
 
   useEffect(() => {
     mountedRef.current = true;

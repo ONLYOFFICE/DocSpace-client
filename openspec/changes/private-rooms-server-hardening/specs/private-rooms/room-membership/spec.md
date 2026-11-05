@@ -3,11 +3,15 @@
 ## ADDED Requirements
 
 ### Requirement: Private room creation needs a Document Server that encrypts
-The system SHALL refuse to create a private room, before any request, when the files settings report that the connected Document Server cannot work with encrypted files, and SHALL show Common:PrivateRoomDocServiceNotSupported, as it SHALL when the server refuses the creation for that reason.
+The system SHALL refuse to create a private room, before any request and, in the Private section, before the creation dialog opens, when the files settings report that the connected Document Server cannot work with encrypted files, and SHALL show Common:PrivateRoomDocServiceNotSupported, as it SHALL when the server refuses the creation for that reason.
 
 #### Scenario: Document Server without encryption
 - **WHEN** the user confirms the creation of a private room and the files settings report no encrypted-editing support
 - **THEN** no room is created and Common:PrivateRoomDocServiceNotSupported is shown
+
+#### Scenario: Creation started in the Private section
+- **WHEN** the user starts creating a room in the Private section and the files settings report no encrypted-editing support
+- **THEN** Common:PrivateRoomDocServiceNotSupported is shown and no dialog opens
 
 #### Scenario: Creation refused by the server
 - **WHEN** the server refuses the creation of a private room because the Document Server cannot encrypt

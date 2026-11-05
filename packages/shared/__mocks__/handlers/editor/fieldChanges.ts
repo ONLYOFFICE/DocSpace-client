@@ -40,6 +40,7 @@ type TFieldRename = { oldKey: string; newKey: string };
 
 export type TFieldChangesReport = {
   version: number;
+  sessionId: string;
   sequence: number;
   renames: TFieldRename[];
 };

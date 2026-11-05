@@ -67,6 +67,9 @@ export type TFormFieldKeyChange = {
 
 export type TFormFieldChangesRequest = {
   version: number;
+  // One editor session: the reports of a session replace each other, while the sessions of one user on one version
+  // that is not saved yet each keep their own renames.
+  sessionId: string;
   sequence: number;
   renames: TFormFieldKeyChange[];
 };

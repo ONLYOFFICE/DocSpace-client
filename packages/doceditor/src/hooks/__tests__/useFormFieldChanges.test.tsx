@@ -169,6 +169,7 @@ describe("useFormFieldChanges", () => {
 
     expect(report).toHaveBeenCalledWith(7, {
       version: 3,
+      sessionId: expect.any(String),
       sequence: expect.any(Number),
       renames: [{ oldKey: "name", newKey: "fullName" }],
     });
@@ -186,6 +187,7 @@ describe("useFormFieldChanges", () => {
     expect(report).toHaveBeenCalledTimes(1);
     expect(report).toHaveBeenCalledWith(7, {
       version: 3,
+      sessionId: expect.any(String),
       sequence: expect.any(Number),
       renames: [{ oldKey: "name", newKey: "fullName" }],
     });
@@ -194,6 +196,54 @@ describe("useFormFieldChanges", () => {
       expect.any(Function),
       true,
     );
+  });
+
+  it("Reports of one session, as the document changes and as the editor is left: they carry one session id", async () => {
+    render();
+    setForms(form("1", "name"), form("2", "email"));
+    await hook.takeSnapshot();
+
+    setForms(form("1", "fullName"), form("2", "email"));
+    await hook.reportFieldChanges();
+    report.mockRejectedValueOnce(httpError(500));
+    setForms(form("1", "fullName"), form("2", "mail"));
+    await hook.reportFieldChanges();
+    window.dispatchEvent(new Event("pagehide"));
+
+    expect(report).toHaveBeenCalledTimes(3);
+    const [first, ...rest] = report.mock.calls.map(([, data]) => data.sessionId);
+    // What the server takes: letters, digits, hyphens and underscores, 64 at most.
+    expect(first).toMatch(/^[A-Za-z0-9_-]{1,64}$/);
+    expect(rest).toEqual([first, first]);
+  });
+
+  it("Editor opened again on the version not saved yet: the new session has an id of its own", async () => {
+    // The first session renames a field and is left before the version is saved.
+    render();
+    setForms(form("1", "name"), form("2", "email"));
+    await hook.takeSnapshot();
+    setForms(form("1", "fullName"), form("2", "email"));
+    await hook.reportFieldChanges();
+    act(() => root?.unmount());
+
+    // The second one opens the same version with that rename in it and renames another field.
+    render();
+    setForms(form("1", "fullName"), form("2", "email"));
+    await hook.takeSnapshot();
+    setForms(form("1", "fullName"), form("2", "mail"));
+    await hook.reportFieldChanges();
+
+    const [first, second] = report.mock.calls.map(([, data]) => data);
+    expect(first).toMatchObject({
+      version: 3,
+      renames: [{ oldKey: "name", newKey: "fullName" }],
+    });
+    expect(second).toMatchObject({
+      version: 3,
+      renames: [{ oldKey: "email", newKey: "mail" }],
+    });
+    // The server keeps the renames of each session, so the second report does not replace the first.
+    expect(second.sessionId).not.toBe(first.sessionId);
   });
 
   it("Saved without renames: nothing is sent", async () => {
@@ -344,6 +394,7 @@ describe("useFormFieldChanges", () => {
       7,
       {
         version: 3,
+        sessionId: report.mock.calls[0][1].sessionId,
         sequence: report.mock.calls[0][1].sequence,
         renames: [{ oldKey: "name", newKey: "fullName" }],
       },

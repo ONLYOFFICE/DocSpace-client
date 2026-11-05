@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { reportFormFieldChanges } from "@docspace/shared/api/files";
 import type { TFormFieldKeyChange } from "@docspace/shared/api/files/types";
@@ -173,6 +173,14 @@ const getRenames = (
 // No renames is what the server assumes for a session that has not reported.
 const NO_RENAMES = JSON.stringify([]);
 
+// Tells this editor session from the other sessions of the user on the same version: a session opened again before
+// the version was saved starts from fields renamed already, so it must not replace the renames of the one before. The
+// page may be served without a secure context, where crypto.randomUUID is missing, so the id is built from random bytes.
+const createSessionId = () =>
+  Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) =>
+    byte.toString(16).padStart(2, "0"),
+  ).join("");
+
 // Tells the server which fields the user renamed in this editor session: a field keeps its id in the session when its key
 // changes, so the version the session is saved as keeps the earlier responses of these fields under their new names.
 // Reported as the document changes, before the filling starts and when the editor is left, since the user may close
@@ -187,6 +195,7 @@ const useFormFieldChanges = (
   // from here.
   const form = useRef({ fileId, version, enabled });
   form.current = { fileId, version, enabled };
+  const [sessionId] = useState(createSessionId);
   // One connector for the session, made on the first read and closed with the editor.
   const connector = useRef<TEditorConnector | null>(null);
   const snapshot = useRef<Map<string, string> | null>(null);
@@ -303,6 +312,7 @@ const useFormFieldChanges = (
       try {
         await reportFormFieldChanges(to.id, {
           version: to.openedVersion,
+          sessionId,
           sequence,
           renames,
         });
@@ -311,7 +321,7 @@ const useFormFieldChanges = (
         onReportError(error);
       }
     });
-  }, [target, readFields, markReported, onReportError]);
+  }, [target, readFields, markReported, onReportError, sessionId]);
 
   // On a change of the document and on its save: a key changed in the field properties shows as a change at once,
   // while the save may come only when the field or the editor is left. The fields are read at once, and changes that
@@ -346,6 +356,7 @@ const useFormFieldChanges = (
       to.id,
       {
         version: to.openedVersion,
+        sessionId,
         sequence: last.sequence,
         renames: last.renames,
       },
@@ -356,7 +367,7 @@ const useFormFieldChanges = (
       .finally(() => {
         if (flushing.current === report) flushing.current = null;
       });
-  }, [target, markReported, onReportError]);
+  }, [target, markReported, onReportError, sessionId]);
 
   useEffect(() => {
     if (!enabled) return;

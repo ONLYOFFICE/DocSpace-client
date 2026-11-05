@@ -214,6 +214,7 @@ test.describe("Form field changes", () => {
     await expect.poll(reports).toEqual([
       {
         version: 1,
+        sessionId: expect.stringMatching(/^[A-Za-z0-9_-]{1,64}$/),
         sequence: expect.any(Number),
         renames: [{ oldKey: "name", newKey: "fullName" }],
       },
@@ -370,6 +371,9 @@ test.describe("Form field changes", () => {
         renames: [{ oldKey: "applicant", newKey: "applicantName" }],
       }),
     ]);
+    // Each opening of the editor is a session of its own, which the server keeps apart from the others.
+    const [first, second] = reports();
+    expect(second.sessionId).not.toBe(first.sessionId);
   });
 
   test("Renamed, then renamed back: an empty report replaces the rename", async ({

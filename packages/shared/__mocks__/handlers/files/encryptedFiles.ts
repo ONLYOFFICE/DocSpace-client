@@ -1489,9 +1489,14 @@ export const encryptedFilesHandlers = (
      * Mirrors OperationController.MoveBatchItems (HttpPut "fileops/move"):
      * queues the move and answers the move operations, here one already
      * finished (FileOperationType.Move = 0, DistributedTaskStatus.Completed
-     * = 2) listing the moved files. Within one private room the server's
-     * CompliesPrivateRoomRulesAsync lets a move pass; the mock moves files
-     * between the room and its folders and does not model folder moves.
+     * = 2) listing the moved files and folders. Within one private room
+     * the server's CompliesPrivateRoomRulesAsync lets a move pass; the mock
+     * moves files between the room and its folders. CopyPermissionsCheck
+     * judges a folder by the private rooms around it (since bd89a24dcd):
+     * a subfolder of this room stays in it and a folder from outside does
+     * not enter it, either refused with "You don't have enough permission
+     * to move the folder"; a subfolder moved within the room passes, the
+     * mock listing it without nesting its folders.
      *
      * The archived room itself moved to the Rooms section is restored: the
      * room branch of FileMoveCopyOperation.MoveOrCopyFoldersAsync checks
@@ -1536,6 +1541,24 @@ export const encryptedFilesHandlers = (
         operations.push(operation);
         return okResponse([operation]);
       }
+      const subfolderIds = folderIds.filter(
+        (id) => id !== roomId && holdsFolder(id),
+      );
+      const foreignFolderIds = folderIds.filter((id) => !holdsFolder(id));
+      if (
+        (subfolderIds.length > 0 && !holdsFolder(destFolderId)) ||
+        (foreignFolderIds.length > 0 && holdsFolder(destFolderId))
+      ) {
+        requests.push({
+          method: "PUT",
+          url: new URL(request.url).pathname,
+          body,
+        });
+        return errorResponse(
+          403,
+          "You don't have enough permission to move the folder",
+        );
+      }
       if (!holdsFolder(destFolderId) || fileIds.some((id) => !files.has(id))) {
         return withOtherRooms
           ? undefined
@@ -1551,18 +1574,26 @@ export const encryptedFilesHandlers = (
         record.folderId = destFolderId === roomId ? undefined : destFolderId;
         return record;
       });
+      const movedFolders = subfolderIds.map((id) =>
+        buildSubfolderDto(
+          folders.find((f) => f.id === id) as EncryptedFolderSeed,
+          roomId,
+          archived,
+          isPrivate,
+        ),
+      );
       const operation = {
         id: `mock-move-${requests.length}`,
         Operation: 0,
         progress: 100,
         error: "",
-        processed: String(moved.length),
+        processed: String(moved.length + movedFolders.length),
         finished: true,
         status: 2,
         files: moved.map((f) =>
           buildFileDto(f, roomId, ownerId, port, archived, isPrivate),
         ),
-        folders: [],
+        folders: movedFolders,
       };
       operations.push(operation);
       return okResponse([operation]);

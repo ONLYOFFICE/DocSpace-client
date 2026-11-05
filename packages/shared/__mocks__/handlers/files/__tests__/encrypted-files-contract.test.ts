@@ -1482,6 +1482,20 @@ describe("encryptedFiles mock — POST /files/{folderId}/upload/check (mirrors U
 
 describe("encryptedFiles mock — moves inside a private room (mirrors OperationController)", () => {
   const FILEOPS = `${BASE_URL}:${PORT}/${API_PREFIX}/files/fileops`;
+  const moveBatch = async (body: Record<string, unknown>) => {
+    const res = await fetch(`${FILEOPS}/move`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        fileIds: [],
+        folderIds: [],
+        conflictResolveType: 0,
+        deleteAfter: false,
+        ...body,
+      }),
+    });
+    return { status: res.status, body: await res.json() };
+  };
 
   it("CheckMoveOrCopyBatchItems lists a plain file whose title the destination holds, never an encrypted one", async () => {
     movingHandle.current!.setFiles([
@@ -1531,6 +1545,43 @@ describe("encryptedFiles mock — moves inside a private room (mirrors Operation
       await fetch(`${FILEOPS}?id=${body.response[0].id}`)
     ).json()) as { response: { id: string }[] };
     expect(status.response.map((o) => o.id)).toEqual([body.response[0].id]);
+  });
+
+  it("Subfolder moved out", async () => {
+    const { status, body } = await moveBatch({
+      destFolderId: 424242,
+      folderIds: [MOVING_FOLDER_ID],
+    });
+
+    expect(status).toBe(403);
+    expect(body.error.message).toBe(
+      "You don't have enough permission to move the folder",
+    );
+  });
+
+  it("Open folder moved in", async () => {
+    const { status, body } = await moveBatch({
+      destFolderId: MOVING_ROOM_ID,
+      folderIds: [424243],
+    });
+
+    expect(status).toBe(403);
+    expect(body.error.message).toBe(
+      "You don't have enough permission to move the folder",
+    );
+  });
+
+  it("Subfolder moved within the room", async () => {
+    const { status, body } = await moveBatch({
+      destFolderId: MOVING_ROOM_ID,
+      folderIds: [MOVING_FOLDER_ID],
+    });
+
+    expect(status).toBe(200);
+    expect(body.response[0]).toMatchObject({ finished: true, error: "" });
+    expect(
+      body.response[0].folders.map((folder: { id: number }) => folder.id),
+    ).toEqual([MOVING_FOLDER_ID]);
   });
 });
 

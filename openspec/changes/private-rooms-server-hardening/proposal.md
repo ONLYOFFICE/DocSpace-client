@@ -77,6 +77,10 @@ None.
   2.2, design decision 1); the server now removes the file keys of a
   member who leaves or is removed, so the client's own revocation run goes
   (task 6.3, design decision 22).
+- `private-rooms/sdk-surface`: the SDK removes a member and leaves a
+  private room through the role update alone, without its own
+  revocation run, and no longer expands a removed group (task 6.3,
+  design decision 22).
 - `private-rooms/file-operations`: the History tab leaves the
   file-keys-issued entry out (task 6.2, design decision 19).
 - `private-rooms/server-contract`: owner change, edition gate, invitation

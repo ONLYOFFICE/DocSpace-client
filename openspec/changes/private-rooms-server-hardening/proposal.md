@@ -58,6 +58,7 @@ the file to change so the backend team can pick them up; nothing here is
 - Re-checked on 2026-11-02 against `release/v4.1.0` (`e9cfda8d43`): none of the backend items has landed; the key save can also fail once the other sign-in link is gone, template creation has its own gate, and the private flag also reaches AI agents, templates and rooms from templates (design Context).
 - Landed on the server on 2026-11-04 (`3b9c527a6e` and `bd89a24dcd`, re-checked 2026-11-05): the archived-room guards, the socket recipients, the public keys of files in archived rooms, the invitee keys route (`GET privacyroom/{roomId}/access/candidates`), the sign-in link fix, the link, duplicate, index-export and template refusals, and the metadata guards. The same commits refuse copy-as for encrypted files and for private-room sources and destinations, and keep folders from leaving or entering a private room (design decisions 15 and 16). Still open after them: the owner change, the availability rule, title validation, e-mail titles, audit and history, the folder check of the abort route, recovery and offboarding, and the key-set, room-type and third-party checks of room creation.
 - Landed on the server on 2026-11-05 (`1259577f63`): the owner change answers 409 when the new owner lacks a file key, a new route `GET privacyroom/{roomId}/access/missing` lists which users miss keys on which files, the access write stores what it can and answers `skippedUserIds` (proposal decision 7 decided), every key write is audited and listed in the file history, and the letters and pushes name a private room "Private room" instead of its title (English only until translated). Still open: the availability rule, title validation, the revocation operation and its audit, the folder check of the abort route, recovery and offboarding, and the key-set, room-type and third-party checks of room creation.
+- Landed on the server on 2026-11-05, later (`cc60512acd`, `20262fdcb5`): an upload session into a private room is refused without the encrypted flag (403) or with a readable name (400), and the file write path refuses any plain file in a private room (proposal decision 5 decided); the server removes the wrapped file keys of a user who leaves a private room, is removed, has the access cleared or has their personal data deleted, audited as `RoomFileKeysRevoked` (proposal decision 4 decided); an empty key set counts as no keys; an abort through another folder is 404 and keeps the session; webhook payloads of a private room no longer reach subscribers outside it. Still open: the availability rule, the e-mail title translations, the owner part of offboarding, and the room-type and third-party checks of room creation.
 
 ## Capabilities
 
@@ -73,7 +74,9 @@ None.
   (decided 2026-11-05 with task 14.2, design decision 20); the owner
   change wraps the candidate's missing files before it asks the server
   and keeps the owner when some remain or the server answers 409 (task
-  2.2, design decision 1).
+  2.2, design decision 1); the server now removes the file keys of a
+  member who leaves or is removed, so the client's own revocation run goes
+  (task 6.3, design decision 22).
 - `private-rooms/file-operations`: the History tab leaves the
   file-keys-issued entry out (task 6.2, design decision 19).
 - `private-rooms/server-contract`: owner change, edition gate, invitation
@@ -139,17 +142,18 @@ None.
 3. Recovery model for admin recovery: recovery-admin public key wrapping the
    user's private key (stashed design) versus key escrow. The spec assumes
    the former.
-4. Revocation primitive (open): the server removes a user's access entries
-   itself when the user leaves a private room or is deprovisioned, or a new
-   route lets a room manager remove named users' entries. No such operation
-   exists today; the "member revoked" audit and the offboarding requirement
-   cannot be implemented until this is decided.
-5. Server-side refusal of plaintext written into a private room (open for
-   uploads): `copyas` conversion output and plaintext folders are refused
-   since 2026-11-04 (design decisions 15 and 16); unencrypted uploads still
-   land in a private room unchecked. Whether this change adds a requirement
-   for them is undecided; `private-rooms-upload-fail-closed` defers its
-   server guard here.
+4. Revocation primitive (decided by the server on 2026-11-05): the server
+   removes a user's wrapped file keys itself when the user leaves a private
+   room, is removed from it, has the access cleared or has their personal
+   data deleted, audited as `RoomFileKeysRevoked` (design decision 22); no
+   route for room managers. The "member revoked" audit is that event; the
+   offboarding requirement keeps its owner part open.
+5. Server-side refusal of plaintext written into a private room (decided by
+   the server on 2026-11-05): an upload session into a private room is
+   refused without the encrypted flag or with a readable name, and the file
+   write path refuses any plain file (design decision 21), after `copyas`
+   conversion output and plaintext folders on 2026-11-04 (design decisions
+   15 and 16). `private-rooms-upload-fail-closed` has its server guard.
 6. Third-party private rooms (open): key-check them like every private room
    (the spec assumes this, design decision 13) or refuse the private flag on
    third-party storage.

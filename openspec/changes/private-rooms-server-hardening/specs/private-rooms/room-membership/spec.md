@@ -57,3 +57,36 @@ The system SHALL let a room manager run a backfill sweep, once per room and page
 #### Scenario: Room listed over several pages
 - **WHEN** the fallback sweep lists the room and a folder of it holds subfolders and more files than one page of the server's listing returns
 - **THEN** the sweep reaches every encrypted file of that folder, not only those on the first page
+
+### Requirement: Removed member loses file access entries
+The system SHALL remove a member of a private room through the role update alone, relying on the server to remove the member's wrapped keys from every encrypted file of the room when the share goes, and SHALL NOT rewrite the access entries of the room's files itself; the notice after the removal SHALL report the role update only. Existing ciphertext and file keys SHALL NOT be regenerated.
+
+#### Scenario: Revocation succeeds
+- **WHEN** the removal is confirmed and the role update succeeds
+- **THEN** the member's keys are gone from the server and the client has written no access entry
+
+#### Scenario: Removed member retains an old copy
+- **WHEN** a removed member had already downloaded and decrypted a file
+- **THEN** that local copy remains readable; only server-side access is withdrawn
+
+#### Scenario: Removal from a room selected in a list
+- **WHEN** a member is removed from the Members tab of a private room selected in the Private or Rooms list
+- **THEN** the same role update runs as for a removal from inside the room, and nothing more
+
+### Requirement: Removing a group revokes each member
+The system SHALL remove a group from a private room through the role update alone; the server removes the keys of every user the update takes out of the room, and the client SHALL NOT run a revocation of its own.
+
+#### Scenario: Group removed
+- **WHEN** a group is removed from a private room
+- **THEN** the server removes the keys of every user who loses the room, and the client writes no access entry
+
+### Requirement: Leaving a room revokes own access first
+The system SHALL drop the leaver's role without a revocation of its own when a member leaves a private room; the server removes the leaver's wrapped keys with the role, the room's creator excepted.
+
+#### Scenario: Leave succeeds
+- **WHEN** a member confirms leaving a private room
+- **THEN** the role is dropped and the leaver's keys are gone from every encrypted file of the room
+
+#### Scenario: Cleanup fails
+- **WHEN** the role update fails
+- **THEN** the member stays in the room with their keys and the failure is shown

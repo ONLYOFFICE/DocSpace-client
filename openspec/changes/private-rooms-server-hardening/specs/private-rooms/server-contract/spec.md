@@ -22,11 +22,11 @@ The server SHALL refuse with 400 a private room creation that turns content inde
 - **THEN** the update is applied
 
 ### Requirement: Encrypted file titles are validated
-The server SHALL accept a file marked encrypted only when its title is an opaque identifier, a lowercase UUID optionally followed by a dot and a lowercase alphanumeric extension, so that no plaintext file name is stored for an encrypted file.
+The server SHALL refuse with 400, when an upload session opens into a private room or a folder of one, a file name that is not an opaque identifier, a lowercase UUID optionally followed by a dot and a lowercase alphanumeric extension, so that no plaintext file name is stored for an encrypted file; an uppercase UUID or extension and a second dot count as readable.
 
 #### Scenario: Plaintext title on an encrypted upload
-- **WHEN** an upload session with the encrypted flag carries a human-readable title
-- **THEN** the server refuses the session
+- **WHEN** an upload session into a private room carries a human-readable title, an uppercase UUID or extension, or a second dot
+- **THEN** the server refuses the session with 400 before any chunk
 
 #### Scenario: Opaque title
 - **WHEN** the title is a UUID followed by an extension
@@ -37,7 +37,7 @@ The server SHALL accept a file marked encrypted only when its title is an opaque
 - **THEN** the upload is accepted
 
 ### Requirement: Upload session abort
-The server SHALL abort an open upload session on request, discarding the chunks received so far, and SHALL answer 404 for a session that does not exist, was finalised, aborted or expired. It SHALL refuse with 403 to abort a session another account opened, and SHALL refuse an abort whose folder segment is not the folder the session uploads into. The client SHALL call it when an encrypted upload is cancelled after its session opened.
+The server SHALL abort an open upload session on request, discarding the chunks received so far, and SHALL answer 404 for a session that does not exist, was finalised, aborted or expired. It SHALL refuse with 403 to abort a session another account opened, and SHALL answer 404 for an abort whose folder segment is not the folder the session uploads into, keeping the session open. The client SHALL call it when an encrypted upload is cancelled after its session opened.
 
 #### Scenario: Cancelled encrypted upload
 - **WHEN** the user cancels an encrypted upload after the first chunk was sent
@@ -49,7 +49,7 @@ The server SHALL abort an open upload session on request, discarding the chunks 
 
 #### Scenario: Abort through another folder
 - **WHEN** an abort request names a folder other than the one the session uploads into
-- **THEN** the server refuses it and the session stays open
+- **THEN** the server answers 404 and the session stays open
 
 ### Requirement: Per-file access history
 The server SHALL list every stored write of a file's access entries in the file's history and in its folder's history as a "file keys issued" entry with the actor and the time, without the recipients and without the wrap content; the recipients SHALL be recorded in the audit trail only.
@@ -100,11 +100,15 @@ The server SHALL NOT grant a portal administrator, the portal owner included, wh
 - **THEN** they keep the rights of their share in the room
 
 ### Requirement: Private-room events reach members only
-The server SHALL send the socket events of a private room, active or archived, and of its entries only to users who can read the room. It SHALL NOT add portal administrators who are not members to the recipients, so the room title reaches no one outside the room.
+The server SHALL send the socket events of a private room, active or archived, and of its entries only to users who can read the room, and SHALL send a webhook payload about an entry of a private room only to the subscriptions whose account can read that entry, judged for each subscription on its own. It SHALL NOT add portal administrators who are not members to the recipients, so the room title reaches no one outside the room.
 
 #### Scenario: Private room renamed
 - **WHEN** a private room is renamed or a file is added to it
 - **THEN** members receive the event and a portal administrator who is not a member receives none
+
+#### Scenario: Webhook of a folder of a private room
+- **WHEN** a folder of a private room changes and a member's subscription is checked before the subscription of an account outside the room
+- **THEN** the member's subscription receives the payload and the outside subscription receives none
 
 ### Requirement: Public keys of prospective members
 The server SHALL return, to a caller who may change the access of an active private room, the public keys of the named portal users, members or not, with no private half on any entry, the caller's own included, so the client can verify an invitee's key before granting access. It SHALL answer 404 for an unknown room, 400 for a room that is not private, a folder inside a room or a malformed id, and 403 for a caller who cannot read the room or may not change its access.
@@ -207,6 +211,55 @@ The server SHALL refuse to duplicate a private room, to save it as a room templa
 #### Scenario: Rights reported
 - **WHEN** the owner reads a private room
 - **THEN** its security reports copy, duplicate and index export as false
+
+### Requirement: Plaintext never enters a private room
+The server SHALL refuse with 403 an upload session into a private room, or into a folder of one, that is not marked encrypted, before any chunk, and SHALL refuse with 403 on the file write path any file inside a private room that is not marked encrypted, whichever route writes it, so that no new way of creating a file stores a plain one there. An ordinary room SHALL keep accepting plain files under any name.
+
+#### Scenario: Session without the encrypted flag
+- **WHEN** an upload session into a private room is opened without the encrypted flag
+- **THEN** the server refuses it with 403 and no session exists
+
+#### Scenario: Plain file created in the room
+- **WHEN** a file is created in the clear in a private room or in one of its subfolders through the file creation route
+- **THEN** the server refuses it with 403 and creates no file
+
+#### Scenario: Ordinary room
+- **WHEN** a plain file is created or an unencrypted session is opened in a room that is not private
+- **THEN** the server accepts it as before
+
+### Requirement: File keys follow the share
+The server SHALL remove a user's wrapped keys from every encrypted file of a private room, subfolders included, when their share on the room is removed or set to none, when they leave or have their access cleared, and from every file on the portal when their personal data is deleted, keeping the keys of the room's creator and of a share removed before a change of owner; each room revocation SHALL be audited with the room and the users and SHALL NOT appear in the file or folder history.
+
+#### Scenario: Member removed
+- **WHEN** a room manager removes a member from a private room
+- **THEN** the member's keys are gone from every encrypted file of the room and the other members keep theirs
+
+#### Scenario: Member leaves
+- **WHEN** a member leaves a private room
+- **THEN** the leaver's keys are gone from every encrypted file of the room
+
+#### Scenario: Owner keeps the keys
+- **WHEN** the owner clears the room's access, sets their own share to none or has it removed by a manager
+- **THEN** the owner keeps their keys and stays the owner
+
+#### Scenario: Personal data deleted
+- **WHEN** a user's personal data is deleted
+- **THEN** every file key held for that user on the portal is removed
+
+#### Scenario: Owner changed
+- **WHEN** ownership of a private room is transferred
+- **THEN** the new owner's share removed by the transfer costs them no key
+
+### Requirement: Clearing the access of a private room
+The server SHALL refuse with 403 a portal administrator who is not a member clearing the access of a private room or of an entry inside one, while the clearing of an ordinary room by an administrator stays as it was; whoever loses access to a private room through a clearing SHALL lose their wrapped file keys, the room's creator excepted.
+
+#### Scenario: Access cleared by an administrator outside the room
+- **WHEN** a portal administrator who is not a member clears the access of a private room
+- **THEN** the server answers 403 and nothing changes
+
+#### Scenario: Members cleared by the owner
+- **WHEN** the owner clears the access of a private room
+- **THEN** the members lose their keys on every encrypted file of the room and the owner keeps theirs
 
 ## MODIFIED Requirements
 

@@ -362,6 +362,60 @@ of the abort route (7.2), recovery and offboarding (8), the key-set,
 room-type and third-party checks of room creation (12.3), and the
 translations of the letter label (4.5).
 
+### Landed on 2026-11-05, later (read in `cc60512acd` and `20262fdcb5`)
+
+- Plaintext never enters a private room (decision 21): `FileUploader`
+  refuses an upload session into a private room, its subfolders included,
+  with 403 (`ErrorMessage_SecurityException_Create`) when the session is
+  not marked encrypted and with 400 (`ErrorMessage_BadRequest`) when the
+  file name fails `EncryptedFileNameRegex`,
+  `^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(\.[a-z0-9]+)?$`,
+  so an uppercase UUID or extension and a second dot count as readable;
+  the file write path refuses a file that is not marked encrypted inside a
+  private room with 403 (`FileDao.DemandEncryptedInPrivateRoomAsync` on
+  `SaveFileAsync` and `ReplaceFileVersionAsync`, the provider, SharePoint
+  and third-party DAOs alike), which covers `POST files/{folderId}/file`
+  and any new write (`PrivateRoomContentRulesTests`). The client already
+  sends such names: `makeOpaqueUploadName` asserts the same pattern and
+  `getFileExtension` lowercases the extension.
+- File keys follow the share (decision 22): `FileSharingAceHelper
+  .SetAceObjectAsync` collects the users whose share on a private room is
+  removed (not links, not groups, not the share removed before an owner
+  change, not the room's creator) and `RevokeFileKeysAsync` deletes their
+  keys on every file of the room, subfolders included, in one batched
+  delete (`FileDao.DeleteFileKeysAsync(fileIds, userIds)`,
+  `AbstractQueries.DeleteFileKeysOfUsersAsync`); the self-removal path of
+  `FileSharing.cs` does the same for a member who leaves, the creator
+  excepted; `FileStorageService.RemoveSharedInfoAsync` (`DELETE
+  files/share`) refuses a portal administrator outside a private room with
+  403 and revokes the keys of the subjects other than the caller; and
+  `DeletePersonalDataAsync` drops every key of the user
+  (`DeleteAllFileKeysOfUserAsync`). Each room revocation is audited as
+  `MessageAction.RoomFileKeysRevoked` (5165, "File keys in the room
+  "{0}" removed for: {1}") in the Delete group of
+  `DocumentsActionMapper`; it is not in `HistoryService.TrackedActions`,
+  so the file and folder history do not list it (`PrivateRoomLeaveTests`,
+  `PrivateRoomFileKeysTests`).
+- Empty key set: `EncryptionLoginProvider.ThrowIfKeysAreNotSetAsync`
+  treats a stored `[]` as no keys, which deleting the last key leaves
+  behind (`PrivateRoomContentRulesTests.EmptyKeySet_CountsAsNoKeys`).
+- Abort bound to the folder (decision 23): `FileUploader
+  .AbortUploadAsync(uploadId, folderId)` throws `ItemNotFoundException`,
+  404, when the session was opened against another folder and keeps the
+  session; `UploadController` passes the folder of the route.
+- Webhooks (decision 24): `WebhookManager` and `FileEntryWebhookDtoHelper`
+  set the entry's share record to null before each subscriber's access
+  check, since `FileSecurity` keeps the record it found and answered the
+  next subscriber with it; a folder event of a private room no longer
+  reaches a subscription outside the room, and the room quota and the
+  origin of a trashed file are judged per subscriber
+  (`WebhookPrivateRoomAccessTests`, `WebhookEntryContextTests`,
+  `WebhookFileOperationPayloadTests`).
+- Documentation: the Swagger responses of the upload session routes (400,
+  403, 404) and of `DELETE files/share` were updated, the OpenAPI documents
+  and the C# SDK regenerated. The commit message calls the upload rules
+  breaking for clients; this client already follows them.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -566,6 +620,49 @@ translations of the letter label (4.5).
     members; rejected because every room open by a manager rewrote every
     entry of every file for nothing.
 
+21. **Plaintext is refused by the server at the session and at the write
+    (landed 2026-11-05, proposal decision 5 decided).** The server refuses
+    a session into a private room without the encrypted flag and a file
+    name it could read, and the file write path refuses any file in the
+    clear, so a new way of writing a file cannot walk around the check.
+    The client mirrors both in its mocks (tasks 4.4 and 4.6) and keeps its
+    own fail-closed gate, which refuses earlier and with a message. The
+    deferral of `private-rooms-upload-fail-closed` is met. Alternative:
+    the server guard at the end of the upload only; rejected by the server
+    as it would still store the chunks and the name.
+
+22. **The server revokes file keys with the share (landed 2026-11-05,
+    proposal decision 4 decided).** A user who leaves a private room or is
+    removed from it, has their access cleared, or has their personal data
+    deleted loses their wrapped keys on every file of the room in one
+    batched delete, audited as `RoomFileKeysRevoked` (5165); the creator
+    keeps theirs, and so does a share removed before an owner change. The
+    "member revoked" audit this change asked for is that event. The client
+    stops running its own revocation (task 6.3): it could never remove
+    another user's entries, since the access write never removes a user it
+    does not name, and the server now does it whether or not a client is
+    online. A member who comes back holds no key until an invitation or
+    the backfill sweep (decision 20) wraps the files again. No manager
+    route to revoke named users was added; offboarding (task 8.1) still
+    needs the owner part. Alternative: keep the client run as a belt and
+    braces; rejected, it only re-writes entries the server deletes anyway
+    and shows a notice about work it did not do.
+
+23. **An abort through another folder is 404, not 403 (landed
+    2026-11-05).** The server treats a session named through a folder other
+    than its own as not found there, keeps the session, and says so in the
+    route's responses; task 7.3 mirrors 404. Alternative: 403; the server
+    chose 404 to tell nothing about a session the caller did not reach
+    through its folder.
+
+24. **Webhook payloads are judged per subscriber (landed 2026-11-05, not
+    planned here).** The share record `FileSecurity` leaves on an entry is
+    reset before each subscriber's check, so a private room's folder title
+    no longer reaches a subscription outside the room; the cause in
+    `FileSecurity` stays, being a hot path that also writes the entry's
+    access. Server only; the `server-contract` delta records the scenario
+    under "Private-room events reach members only".
+
 ## Risks / Trade-offs
 
 - [Backend schedule] → every server task is independent, and each client
@@ -594,20 +691,17 @@ translations of the letter label (4.5).
 - SCIM availability on the platform (the stashed doc could not confirm it).
   Owner: platform team. Affects only whether the offboarding trigger is SCIM
   or manual deactivation.
-- Revocation primitive. The server has no operation that removes a user's
-  access entries, so "member revocation" cannot be audited or used by
-  offboarding until one exists. Options: the server deletes a user's entries
-  for every file of a private room when that user is removed from it (or
-  deprovisioned), or a new route lets a room manager delete named users'
-  entries. Owner: backend team with product. Blocks the revocation part of
-  task 6.1 and task 8.1.
-- Server refusal of plaintext written into a private room. Closed on
-  2026-11-04 for `copyas` conversion output (decision 15) and for a
-  plaintext folder moved or copied into a private room (decision 16); still
-  open for unencrypted upload sessions and uploads, which
-  `private-rooms-upload-fail-closed` defers here, and not re-checked for a
-  plain file moved or copied into a private room. Owner: backend team with
-  product.
+- Revocation primitive: decided by the server on 2026-11-05, decision 22:
+  the server deletes a user's keys for every file of a private room when
+  the user leaves it, is removed from it, has their access cleared or
+  their personal data deleted, audited as `RoomFileKeysRevoked`. No
+  manager route. Task 6.3 adapts the client; task 8.1 keeps the owner part
+  of offboarding.
+- Server refusal of plaintext written into a private room: closed on
+  2026-11-05, decision 21, at the upload session and on the file write
+  path, after `copyas` output (decision 15) and folders (decision 16) on
+  2026-11-04. A plain file moved or copied into a private room goes
+  through the same write path and is refused there.
 - Member removal racing an upload on another device (proposal decision 7):
   decided by the server on 2026-11-05, decision 17: the write stores the
   entries of the users who can read and reports the others.

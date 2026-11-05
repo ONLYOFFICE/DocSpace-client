@@ -41,6 +41,11 @@ import { getUrlByDefaultFolderType } from "./utils";
 export type TStartPageContext = {
   /** Guests have no personal Files section. */
   isGuest?: boolean;
+  /**
+   * The portal has AI switched on. The "AI rooms" section exists only then,
+   * and never for a guest, who is barred from AI.
+   */
+  aiServicesEnabled?: boolean;
 };
 
 /**
@@ -51,9 +56,10 @@ export type TStartPageContext = {
  */
 export const isStartPageAvailable = (
   folderType: FolderType,
-  { isGuest = false }: TStartPageContext = {},
+  { isGuest = false, aiServicesEnabled = false }: TStartPageContext = {},
 ) => {
   if (folderType === FolderType.USER) return !isGuest;
+  if (folderType === FolderType.AiHub) return aiServicesEnabled && !isGuest;
 
   return true;
 };

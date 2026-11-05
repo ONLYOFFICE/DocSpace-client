@@ -416,6 +416,46 @@ translations of the letter label (4.5).
   and the C# SDK regenerated. The commit message calls the upload rules
   breaking for clients; this client already follows them.
 
+### Landed on 2026-11-05, last (read in `b562fc3fb1`)
+
+- Third-party private rooms refused (decision 13, proposal decision 6
+  decided): `FileStorageService.CreateThirdPartyRoomAsync` throws, before
+  anything else, an `ArgumentException` with
+  `ErrorMessage_PrivateRoomOnThirdPartyNotSupported`, so `private` on
+  `POST files/rooms/thirdparty/{id}` answers 400 ("A private room cannot
+  be created on a third-party storage") with or without keys, and the
+  connection can still back an ordinary room; existing rooms are left as
+  they are (`ThirdPartyPrivateRoomTests`). The client offers a third-party
+  storage for public rooms only (`SetRoomParams.js`), so it never sends one.
+- Document Server without encryption (decision 26):
+  `InternalCreateFolderAsync` (`isRoom && privacy`), after the key check,
+  throws an `InvalidOperationException` with
+  `ErrorMessage_DocServiceEncryptionNotSupported` when
+  `DocumentServiceEncryptionChecker.IsSupportedAsync` answers false, so
+  creating a private room or a private AI agent answers 403 ("The
+  document server connected to this portal cannot work with encrypted
+  files"); `DocumentServiceHelper` refuses the editor configuration of an
+  encrypted file of a private room with a `NotSupportedException`, so
+  `GET files/file/{fileId}/openedit` answers 415 (`private-rooms-editor-contract`).
+  The checker answers the setting `files:docservice:encryption-assume-supported`
+  when it is set, for tests and local development, and caches a probe
+  without an answer (an HTTP error or the timeout) for 30 seconds as false,
+  a clear answer for ten minutes. Not in the server suite: the answer
+  cannot be set per portal.
+- Audit trail (decision 25): `FilesMessageService` stores on an event of a
+  private room the titles to hide (`EventDescription.PrivateTitles`: the
+  folders on the way, the entry when it is a folder, an old title; not
+  file names), and `AuditEventsRepository` reads with `HidePrivateTitles`,
+  so `PrivateTitleMask` shows them as `AuditReportResource.PrivateRoomTitle`
+  in the action text, the context and the description of the audit API and
+  report, the users' names kept. The stored rows keep the titles: the
+  history of the room reads them for its members. Room quota events name
+  the rooms through `NotifyConstants.GetRoomTitle` when written
+  (`VirtualRoomsController`); events written before keep their titles. The
+  what's-new letters (`StudioWhatsNewNotify`) read the same repository and
+  name the room neutrally (`AuditPrivateRoomTitleTests`). Nothing on the
+  client reads the audit trail.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -541,7 +581,10 @@ translations of the letter label (4.5).
     that creates a room (rooms, AI agents, templates, rooms from templates), and
     `CreateThirdPartyRoomAsync` passes the private flag on, so a third-party
     private room is key-checked. Alternative for third-party rooms: refuse the
-    private flag on them (proposal decision 6).
+    private flag on them (proposal decision 6). The server took the
+    alternative on 2026-11-05 (`b562fc3fb1`): a third-party storage keeps no
+    file keys and its string ids do not fit the client's wrapping, so the
+    private flag is refused there with 400, with or without keys.
 
 14. **The opaque title form is the one the client sends (found 2026-10-28).**
     The client names every encrypted upload `makeOpaqueUploadName`: a
@@ -668,6 +711,26 @@ translations of the letter label (4.5).
     access. Server only; the `server-contract` delta records the scenario
     under "Private-room events reach members only".
 
+25. **The audit trail names a private room neutrally (landed 2026-11-05,
+    not planned here).** An administrator outside a private room read its
+    title and its folders' names in the audit trail. The server keeps the
+    record and masks the titles on reading, keeping the stored rows for the
+    room's history. Server only; the `server-contract` delta records it as
+    "Audit trail names a private room neutrally". Alternative: write the
+    neutral title into the rows; rejected by the server, as the history of
+    the room is built from them.
+
+26. **A private room needs a Document Server that encrypts (landed
+    2026-11-05, not planned here).** Without the crypto library the browser
+    cannot decrypt a file in the editors, so the server refuses to create a
+    private room (403) and to open an encrypted file of one (415). The
+    client reads the same capability for the editors already
+    (`isEncryptedEditingAvailable`, `private-rooms-editor-contract` 2.2);
+    task 3.2c refuses the creation before the request on it and names the
+    server's 403 the same way, and `private-rooms-editor-contract` 2.5
+    shows the editors' message for the 415. Alternative: let the server's
+    message through; rejected, it is English and comes after the dialog.
+
 ## Risks / Trade-offs
 
 - [Backend schedule] → every server task is independent, and each client
@@ -711,6 +774,6 @@ translations of the letter label (4.5).
 - Member removal racing an upload on another device (proposal decision 7):
   decided by the server on 2026-11-05, decision 17: the write stores the
   entries of the users who can read and reports the others.
-- Third-party private rooms (proposal decision 6): key-check them like every
-  private room (decision 13, what the spec assumes) or refuse the private
-  flag on third-party storage. Owner: product.
+- Third-party private rooms (proposal decision 6): decided by the server
+  on 2026-11-05 (`b562fc3fb1`), decision 13: the private flag is refused on
+  third-party storage with 400.

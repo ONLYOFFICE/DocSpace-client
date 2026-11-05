@@ -2,6 +2,17 @@
 
 ## ADDED Requirements
 
+### Requirement: Private room creation needs a Document Server that encrypts
+The system SHALL refuse to create a private room, before any request, when the files settings report that the connected Document Server cannot work with encrypted files, and SHALL show Common:PrivateRoomDocServiceNotSupported, as it SHALL when the server refuses the creation for that reason.
+
+#### Scenario: Document Server without encryption
+- **WHEN** the user confirms the creation of a private room and the files settings report no encrypted-editing support
+- **THEN** no room is created and Common:PrivateRoomDocServiceNotSupported is shown
+
+#### Scenario: Creation refused by the server
+- **WHEN** the server refuses the creation of a private room because the Document Server cannot encrypt
+- **THEN** Common:PrivateRoomDocServiceNotSupported is shown instead of the server's message
+
 ### Requirement: Ownership transfer wraps the candidate's missing files
 The system SHALL, before it asks the server to transfer a private room to a verified candidate, read from the server which encrypted files of the room lack the candidate's entry, wrap those for the candidate with the current user's unlocked identity, and ask for the transfer only when no such file remains. Otherwise, and when the server refuses the transfer for a missing entry, the owner SHALL stay and Common:EncryptedReencryptPartialFailure SHALL count the files.
 

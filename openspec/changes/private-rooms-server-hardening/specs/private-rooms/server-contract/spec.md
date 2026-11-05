@@ -265,6 +265,32 @@ The server SHALL refuse with 403 a portal administrator who is not a member clea
 - **WHEN** the owner clears the access of a private room
 - **THEN** the members lose their keys on every encrypted file of the room and the owner keeps theirs
 
+### Requirement: Private rooms need a Document Server that encrypts
+The server SHALL refuse with 403, after the key check, the creation of a private room or a private AI agent, and with 415 the editor configuration of an encrypted file of a private room, while the connected Document Server does not serve the crypto library the browser decrypts with.
+
+#### Scenario: Room created without the library
+- **WHEN** a user with encryption keys creates a private room and the Document Server does not serve the crypto library
+- **THEN** the server answers 403 and creates no room
+
+#### Scenario: Encrypted file opened without the library
+- **WHEN** the editor configuration of an encrypted file of a private room is asked for and the Document Server does not serve the crypto library
+- **THEN** the server answers 415
+
+### Requirement: Audit trail names a private room neutrally
+The server SHALL show the title of a private room, the titles of its folders and the old title of a renamed one as the neutral label ("Private room") in the audit trail and its report, keeping the users' names, and the history of the room SHALL show its members the real titles. Events written before this rule SHALL keep their titles.
+
+#### Scenario: Audit trail read by an administrator
+- **WHEN** an administrator reads the audit trail or its report for events of a private room
+- **THEN** the room and its folders appear as "Private room" and the names of the users are shown
+
+#### Scenario: History of the room
+- **WHEN** a member reads the history of the private room
+- **THEN** the real titles are shown
+
+#### Scenario: Ordinary room
+- **WHEN** an administrator reads the audit trail for events of a room without the private setting
+- **THEN** its title is shown
+
 ## MODIFIED Requirements
 
 ### Requirement: File access entries write
@@ -422,12 +448,16 @@ The server SHALL NOT include the plaintext room title of a private room in invit
 - **WHEN** a file or folder is created or uploaded in a private room, a member's access changes, or the room is archived or removed
 - **THEN** the letter or push names the room with the neutral label and not its title
 
+#### Scenario: What's-new letter
+- **WHEN** the what's-new letter lists events of a private room
+- **THEN** it names the room and its folders with the neutral label
+
 #### Scenario: Ordinary room
 - **WHEN** the same letters are sent for a room without the private setting
 - **THEN** they carry its title
 
 ### Requirement: Private room creation requires keys
-The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, a third-party room created as private included, and SHALL refuse with 400 the private flag on a room type other than Custom, whichever route creates the room (a room, an AI agent, a template or a room from a template). It SHALL otherwise store the room as a Custom room with the private setting.
+The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and SHALL refuse with 400 the private flag on a room type other than Custom, whichever route creates the room (a room, an AI agent, a template or a room from a template), and on a room created on third-party storage, with or without keys. It SHALL otherwise store the room as a Custom room with the private setting.
 
 #### Scenario: Caller without keys
 - **WHEN** a user without encryption keys creates a private room
@@ -442,8 +472,8 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 - **THEN** the room is created as a Custom room with the private setting
 
 #### Scenario: Third-party room created as private
-- **WHEN** a user without encryption keys connects third-party storage as a private room
-- **THEN** the server answers 403 and creates no room
+- **WHEN** a user, with or without encryption keys, creates a room on a connected third-party storage as private
+- **THEN** the server answers 400, creates no room, and the connection can still back an ordinary room
 
 #### Scenario: Private flag on another room type
 - **WHEN** a room creation request sets the private flag with a room type other than Custom

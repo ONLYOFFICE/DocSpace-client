@@ -1,5 +1,18 @@
 # Spec Delta
 
+## ADDED Requirements
+
+### Requirement: Private room creation needs a Document Server that encrypts
+The SDK SHALL refuse to start private room creation when its files settings report that the connected Document Server cannot work with encrypted files, with Common:PrivateRoomDocServiceNotSupported, and SHALL show the same key when the server refuses the creation for that reason.
+
+#### Scenario: Document Server without encryption
+- **WHEN** a user starts creating a private room and the files settings report no encrypted-editing support
+- **THEN** Common:PrivateRoomDocServiceNotSupported is shown and no dialog opens
+
+#### Scenario: Creation refused by the server
+- **WHEN** the server refuses the creation of a private room because the Document Server cannot encrypt
+- **THEN** Common:PrivateRoomDocServiceNotSupported is shown instead of the server's message
+
 ## MODIFIED Requirements
 
 ### Requirement: Member removal warning

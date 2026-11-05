@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useState } from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -69,5 +70,64 @@ describe("UserFields", () => {
     fireEvent.keyDown(add, { key: "a" });
 
     expect(onClickAdd).not.toHaveBeenCalled();
+  });
+
+  it.each(["Enter", " "])("deletes a field on %j pressed on its delete button", (key) => {
+    const onDeleteInput = vi.fn();
+    render(
+      <UserFields
+        buttonLabel="Add"
+        inputs={["10.0.0.1"]}
+        onChangeInput={vi.fn()}
+        onDeleteInput={onDeleteInput}
+        onClickAdd={vi.fn()}
+        validateFunc={() => true}
+      />,
+    );
+
+    fireEvent.keyDown(screen.getByRole("button", { name: "Common:Delete" }), {
+      key,
+    });
+
+    expect(onDeleteInput).toHaveBeenCalledWith(0);
+  });
+
+  const Stateful = ({ initial }: { initial: string[] }) => {
+    const [inputs, setInputs] = useState(initial);
+    return (
+      <UserFields
+        buttonLabel="Add"
+        inputs={inputs}
+        onChangeInput={vi.fn()}
+        onDeleteInput={(index: number) =>
+          setInputs((list) => list.filter((_, i) => i !== index))
+        }
+        onClickAdd={vi.fn()}
+        validateFunc={() => true}
+      />
+    );
+  };
+
+  it("gives the focus to the delete button that takes the deleted one's place", () => {
+    render(<Stateful initial={["10.0.0.1", "10.0.0.2"]} />);
+    const [first] = screen.getAllByRole("button", { name: "Common:Delete" });
+    first.focus();
+
+    fireEvent.keyDown(first, { key: "Enter" });
+
+    const [left] = screen.getAllByRole("button", { name: "Common:Delete" });
+    expect(screen.getAllByRole("button", { name: "Common:Delete" })).toHaveLength(1);
+    expect(left).toHaveFocus();
+  });
+
+  it("gives the focus to Add once the last field is deleted", () => {
+    render(<Stateful initial={["10.0.0.1"]} />);
+    const button = screen.getByRole("button", { name: "Common:Delete" });
+    button.focus();
+
+    fireEvent.keyDown(button, { key: "Enter" });
+
+    expect(screen.queryByRole("button", { name: "Common:Delete" })).toBeNull();
+    expect(screen.getByText("Add")).toHaveFocus();
   });
 });

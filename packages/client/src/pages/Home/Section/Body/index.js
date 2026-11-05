@@ -130,7 +130,10 @@ const SectionBodyContent = (props) => {
   // is kept: passing through the list with Tab moves the caret only. A row
   // outside it takes the selection, so the focus and the selection agree -
   // unless it only stands in for a caret row scrolled away: then a selection
-  // of several, which the user made, is kept and the row takes the caret.
+  // of several, which the user made, is kept and the row takes the caret. A
+  // single selected item is replaced still, as anywhere else in the list: one
+  // item is what a click selects, and the focused row taking over from it
+  // loses nothing a keyboard user built.
   const onRowFocus = React.useCallback(
     ({ id, isFolder }, { standIn = false } = {}) => {
       const item = filesList.find(

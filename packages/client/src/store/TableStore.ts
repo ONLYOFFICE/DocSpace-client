@@ -43,6 +43,7 @@ import {
   TABLE_PEOPLE_COLUMNS,
 } from "SRC_DIR/helpers/constants";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { removeOldColumnSizes } from "SRC_DIR/components/DataTable/removeOldColumnSizes";
 
 import type PeopleStore from "./contacts/PeopleStore";
 import type IndexingStore from "./IndexingStore";
@@ -66,34 +67,6 @@ const TABLE_VDR_INDEXING_COLUMNS = `vdrIndexingColumns_ver-${TableVersions.Rooms
 const TABLE_TEMPLATES_ROOM_COLUMNS = `templatesRoomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_SHARED_WITH_ME_COLUMNS = `sharedWithMeTableColumns_ver-${TableVersions.SharedWithMe}`;
 const TABLE_IN_SHARED_FOLDER_COLUMNS = `inSharedFolderTableColumns_ver-${TableVersions.InSharedFolder}`;
-
-const COLUMNS_SIZE = `filesColumnsSize_ver-${TableVersions.Files}`;
-const COLUMNS_ROOMS_SIZE = `roomsColumnsSize_ver-${TableVersions.Rooms}`;
-const COLUMNS_TRASH_SIZE = `trashColumnsSize_ver-${TableVersions.Trash}`;
-const COLUMNS_RECENT_SIZE = `recentColumnsSize_ver-${TableVersions.Recent}`;
-const COLUMNS_FAVORITES_SIZE = `favoritesColumnsSize_ver-${TableVersions.Favorites}`;
-const COLUMNS_VDR_INDEXING_SIZE = `vdrIndexingColumnsSize_ver-${TableVersions.Rooms}`;
-const COLUMNS_PEOPLE_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
-const COLUMNS_GUESTS_SIZE = `guestsColumnsSize_ver-${TableVersions.Guests}`;
-const COLUMNS_GROUPS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
-const COLUMNS_INSIDE_GROUPS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
-const COLUMNS_TEMPLATES_ROOM_SIZE = `templatesRoomsColumnsSize_ver-${TableVersions.Rooms}`;
-const COLUMNS_SHARED_WITH_ME_SIZE = `sharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
-const COLUMNS_IN_SHARED_FOLDER_SIZE = `inSharedFolderColumnsSize_ver-${TableVersions.InSharedFolder}`;
-
-const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
-const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
-const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
-const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
-const COLUMNS_FAVORITES_SIZE_INFO_PANEL = `favoritesColumnsSizeInfoPanel_ver-${TableVersions.Favorites}`;
-const COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL = `vdrIndexingColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
-const COLUMNS_PEOPLE_INFO_PANEL_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
-const COLUMNS_GUESTS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Guests}`;
-const COLUMNS_GROUPS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Groups}`;
-const COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
-const COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL = `templatesRoomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
-const COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE = `infoPanelSharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
-const COLUMNS_IN_SHARED_FOLDER_INFO_PANEL_SIZE = `infoPanelInSharedColumnsSize_ver-${TableVersions.InSharedFolder}`;
 
 // Column widths of the ui-kit DataTable: shares of the table, one record per
 // section and no separate info-panel record. The record carries its own format
@@ -123,10 +96,6 @@ export type TTableScope =
 type TTableStorageKeys = {
   /** Visible columns, comma-separated. */
   columns: string;
-  /** Column sizes of the old Table. */
-  size: string;
-  /** Column sizes of the old Table while the info panel is open. */
-  infoPanelSize: string;
   /** Column widths of the DataTable. */
   widths: string;
 };
@@ -137,80 +106,54 @@ const widthsKey = (section: string) =>
 const TABLE_STORAGE_KEYS: Record<TTableScope, TTableStorageKeys> = {
   templates: {
     columns: TABLE_TEMPLATES_ROOM_COLUMNS,
-    size: COLUMNS_TEMPLATES_ROOM_SIZE,
-    infoPanelSize: COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL,
     widths: widthsKey("templatesRooms"),
   },
   rooms: {
     columns: TABLE_ROOMS_COLUMNS,
-    size: COLUMNS_ROOMS_SIZE,
-    infoPanelSize: COLUMNS_ROOMS_SIZE_INFO_PANEL,
     widths: widthsKey("rooms"),
   },
   people: {
     columns: TABLE_PEOPLE_COLUMNS,
-    size: COLUMNS_PEOPLE_SIZE,
-    infoPanelSize: COLUMNS_PEOPLE_INFO_PANEL_SIZE,
     widths: widthsKey("people"),
   },
   guests: {
     columns: TABLE_GUESTS_COLUMNS,
-    size: COLUMNS_GUESTS_SIZE,
-    infoPanelSize: COLUMNS_GUESTS_INFO_PANEL_SIZE,
     widths: widthsKey("guests"),
   },
   groups: {
     columns: TABLE_GROUPS_COLUMNS,
-    size: COLUMNS_GROUPS_SIZE,
-    infoPanelSize: COLUMNS_GROUPS_INFO_PANEL_SIZE,
     widths: widthsKey("groups"),
   },
   insideGroup: {
     columns: TABLE_INSIDE_GROUP_COLUMNS,
-    size: COLUMNS_INSIDE_GROUPS_SIZE,
-    infoPanelSize: COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE,
     widths: widthsKey("insideGroup"),
   },
   trash: {
     columns: TABLE_TRASH_COLUMNS,
-    size: COLUMNS_TRASH_SIZE,
-    infoPanelSize: COLUMNS_TRASH_SIZE_INFO_PANEL,
     widths: widthsKey("trash"),
   },
   recent: {
     columns: TABLE_RECENT_COLUMNS,
-    size: COLUMNS_RECENT_SIZE,
-    infoPanelSize: COLUMNS_RECENT_SIZE_INFO_PANEL,
     widths: widthsKey("recent"),
   },
   favorites: {
     columns: TABLE_FAVORITES_COLUMNS,
-    size: COLUMNS_FAVORITES_SIZE,
-    infoPanelSize: COLUMNS_FAVORITES_SIZE_INFO_PANEL,
     widths: widthsKey("favorites"),
   },
   sharedWithMe: {
     columns: TABLE_SHARED_WITH_ME_COLUMNS,
-    size: COLUMNS_SHARED_WITH_ME_SIZE,
-    infoPanelSize: COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE,
     widths: widthsKey("sharedWithMe"),
   },
   inSharedFolder: {
     columns: TABLE_IN_SHARED_FOLDER_COLUMNS,
-    size: COLUMNS_IN_SHARED_FOLDER_SIZE,
-    infoPanelSize: COLUMNS_IN_SHARED_FOLDER_INFO_PANEL_SIZE,
     widths: widthsKey("inSharedFolder"),
   },
   vdrIndexing: {
     columns: TABLE_VDR_INDEXING_COLUMNS,
-    size: COLUMNS_VDR_INDEXING_SIZE,
-    infoPanelSize: COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL,
     widths: widthsKey("vdrIndexing"),
   },
   files: {
     columns: TABLE_COLUMNS,
-    size: COLUMNS_SIZE,
-    infoPanelSize: COLUMNS_SIZE_INFO_PANEL,
     widths: widthsKey("files"),
   },
 };
@@ -373,6 +316,8 @@ class TableStore {
     this.indexingStore = indexingStore;
     this.selectedFolderStore = selectedFolderStore;
     this.peopleStore = peopleStore;
+
+    removeOldColumnSizes();
   }
 
   setRoomColumnType = (enable: boolean) => {
@@ -1020,16 +965,6 @@ class TableStore {
   // Column names
   get tableStorageName() {
     return this.getStorageName("columns");
-  }
-
-  // Table column sizes
-  get columnStorageName() {
-    return this.getStorageName("size");
-  }
-
-  // Column sizes for info-panel
-  get columnInfoPanelStorageName() {
-    return this.getStorageName("infoPanelSize");
   }
 
   // Column widths of the DataTable, the same with the info panel open or not

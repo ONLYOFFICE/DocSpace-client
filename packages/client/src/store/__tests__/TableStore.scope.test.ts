@@ -37,8 +37,6 @@ const createStore = ({
 
 const keysOf = (store: TableStore) => ({
   columns: store.tableStorageName,
-  size: store.columnStorageName,
-  infoPanelSize: store.columnInfoPanelStorageName,
   widths: store.columnWidthsStorageName,
 });
 
@@ -115,80 +113,54 @@ describe("TableStore scope", () => {
     expect(SECTIONS.map(({ setup }) => keysOf(createStore(setup)))).toEqual([
       {
         columns: "filesTableColumns_ver-3=user-1",
-        size: "filesColumnsSize_ver-3=user-1",
-        infoPanelSize: "filesColumnsSizeInfoPanel_ver-3=user-1",
         widths: "filesColumnsWidths_ver-1=user-1",
       },
       {
         columns: "templatesRoomsTableColumns_ver-3=user-1",
-        size: "templatesRoomsColumnsSize_ver-3=user-1",
-        infoPanelSize: "templatesRoomsColumnsSizeInfoPanel_ver-3=user-1",
         widths: "templatesRoomsColumnsWidths_ver-1=user-1",
       },
       ...Array(4).fill({
         columns: "roomsTableColumns_ver-3=user-1",
-        size: "roomsColumnsSize_ver-3=user-1",
-        infoPanelSize: "roomsColumnsSizeInfoPanel_ver-3=user-1",
         widths: "roomsColumnsWidths_ver-1=user-1",
       }),
       {
         columns: "peopleTableColumns_ver-3=user-1",
-        size: "peopleColumnsSize_ver-3=user-1",
-        infoPanelSize: "infoPanelPeopleColumnsSize_ver-3=user-1",
         widths: "peopleColumnsWidths_ver-1=user-1",
       },
       {
         columns: "guestsTableColumns_ver-1=user-1",
-        size: "guestsColumnsSize_ver-1=user-1",
-        infoPanelSize: "infoPanelGuestsColumnsSize_ver-1=user-1",
         widths: "guestsColumnsWidths_ver-1=user-1",
       },
       {
         columns: "groupsTableColumns_ver-6=user-1",
-        size: "groupsColumnsSize_ver-6=user-1",
-        infoPanelSize: "infoPanelGuestsColumnsSize_ver-6=user-1",
         widths: "groupsColumnsWidths_ver-1=user-1",
       },
       {
         columns: "insideGroupTableColumns_ver-6=user-1",
-        size: "insideGroupColumnsSize_ver-6=user-1",
-        infoPanelSize: "infoPanelInsideGroupPeopleColumnsSize_ver-6=user-1",
         widths: "insideGroupColumnsWidths_ver-1=user-1",
       },
       {
         columns: "trashTableColumns_ver-5=user-1",
-        size: "trashColumnsSize_ver-5=user-1",
-        infoPanelSize: "trashColumnsSizeInfoPanel_ver-5=user-1",
         widths: "trashColumnsWidths_ver-1=user-1",
       },
       {
         columns: "recentTableColumns_ver-2=user-1",
-        size: "recentColumnsSize_ver-2=user-1",
-        infoPanelSize: "recentColumnsSizeInfoPanel_ver-2=user-1",
         widths: "recentColumnsWidths_ver-1=user-1",
       },
       {
         columns: "favoritesTableColumns_ver-1=user-1",
-        size: "favoritesColumnsSize_ver-1=user-1",
-        infoPanelSize: "favoritesColumnsSizeInfoPanel_ver-1=user-1",
         widths: "favoritesColumnsWidths_ver-1=user-1",
       },
       {
         columns: "sharedWithMeTableColumns_ver-2=user-1",
-        size: "sharedWithMeColumnsSize_ver-2=user-1",
-        infoPanelSize: "infoPanelSharedWithMeColumnsSize_ver-2=user-1",
         widths: "sharedWithMeColumnsWidths_ver-1=user-1",
       },
       {
         columns: "inSharedFolderTableColumns_ver-1=user-1",
-        size: "inSharedFolderColumnsSize_ver-1=user-1",
-        infoPanelSize: "infoPanelInSharedColumnsSize_ver-1=user-1",
         widths: "inSharedFolderColumnsWidths_ver-1=user-1",
       },
       {
         columns: "vdrIndexingColumns_ver-3=user-1",
-        size: "vdrIndexingColumnsSize_ver-3=user-1",
-        infoPanelSize: "vdrIndexingColumnsSizeInfoPanel_ver-3=user-1",
         widths: "vdrIndexingColumnsWidths_ver-1=user-1",
       },
     ]);
@@ -232,8 +204,6 @@ describe("TableStore scope", () => {
 
       expect(keysOf(store)).toEqual({
         columns: "groupsTableColumns_ver-6=user-1",
-        size: "groupsColumnsSize_ver-6=user-1",
-        infoPanelSize: "infoPanelGuestsColumnsSize_ver-6=user-1",
         widths: "groupsColumnsWidths_ver-1=user-1",
       });
     });
@@ -245,8 +215,8 @@ describe("TableStore scope", () => {
       });
 
       expect(store.tableScope).toBe("inSharedFolder");
-      expect(store.columnStorageName).toBe(
-        "inSharedFolderColumnsSize_ver-1=user-1",
+      expect(store.columnWidthsStorageName).toBe(
+        "inSharedFolderColumnsWidths_ver-1=user-1",
       );
     });
   });

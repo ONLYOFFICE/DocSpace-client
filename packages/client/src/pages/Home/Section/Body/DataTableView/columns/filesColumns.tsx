@@ -53,8 +53,10 @@ import {
   LastOpenedColumnCell,
   LocationColumnCell,
   NameCell,
+  QuotaColumnCell,
   SharedByColumnCell,
   SizeColumnCell,
+  TagsColumnCell,
   TypeColumnCell,
 } from "../cells/FilesCells";
 import type {
@@ -77,6 +79,8 @@ const CELLS: Record<TCellKind, (props: TCellProps) => React.ReactNode> = {
   location: LocationColumnCell,
   sharedBy: SharedByColumnCell,
   accessLevel: AccessLevelColumnCell,
+  tags: TagsColumnCell,
+  quota: QuotaColumnCell,
 };
 
 // The old rows' class on the last column's cells: its text keeps 8px from the
@@ -90,9 +94,10 @@ const columnsOf = (section: TSection, options: TFilesColumnsOptions) =>
 /**
  * The visible-columns record in the exact shape the old header writes: every
  * column of the section in its order, a disabled one as `false`, a column the
- * section does not have here as an empty slot. The old table resets its column
- * sizes when the record's length differs from its column count, so the shape
- * matters as long as both tables share the key.
+ * section does not have here as an empty slot, unless the old header left it
+ * out altogether (`slotWhenAbsent`). The old table resets its column sizes when
+ * the record's length differs from its column count, so the shape matters as
+ * long as both tables share the key.
  */
 export const filesColumnsRecord = (
   section: TSection,
@@ -103,9 +108,11 @@ export const filesColumnsRecord = (
     // Never hidden: the old header had no setting for it.
     ...(section.withIndex ? ["Index"] : []),
     "Name",
-    ...section.columns.map((column) =>
-      (column.when?.(options) ?? true) ? flags[column.id] && column.id : "",
-    ),
+    ...section.columns.flatMap((column) => {
+      if (column.when?.(options) ?? true)
+        return [flags[column.id] && column.id];
+      return column.slotWhenAbsent === false ? [] : [""];
+    }),
   ].join(",");
 
 /** The section's column with this id, among those it has. */
@@ -173,7 +180,8 @@ export const getFilesColumns = (
       return {
         id: column.id,
         cellTestId: cellTestId(column.testId),
-        title: column.title(t),
+        title: column.title(t, options),
+        headerRef: column.measuresTags ? options.tagsHeaderRef : undefined,
         width: { type: "flex" },
         resizable,
         visible: flags[column.id],

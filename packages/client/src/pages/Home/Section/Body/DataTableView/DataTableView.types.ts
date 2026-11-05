@@ -36,18 +36,26 @@
 import type { TFunction } from "i18next";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 
-/** A row of the files list: a file or a folder, as `filesStore.filesList` gives it. */
-export type TFilesTableItem = (TFile | TFolder) & {
-  icon?: string;
-  isFolder?: boolean;
-  fileExst?: string;
-  contentLength?: string;
-  daysRemaining?: number;
-  isThirdPartyFolder?: boolean;
-  /** Filled in by `filesStore` for the row menu. */
-  contextOptions?: unknown[];
-};
+/**
+ * A row of the files list: a file, a folder or a room, as
+ * `filesStore.filesList` gives it.
+ */
+export type TFilesTableItem = (TFile | TFolder) &
+  Partial<
+    Pick<TRoom, "logo" | "tags" | "isTemplate" | "isRoom" | "isArchive">
+  > & {
+    isPrivateRoom?: boolean;
+    icon?: string;
+    isFolder?: boolean;
+    fileExst?: string;
+    contentLength?: string;
+    daysRemaining?: number;
+    isThirdPartyFolder?: boolean;
+    /** Filled in by `filesStore` for the row menu. */
+    contextOptions?: unknown[];
+  };
 
 /**
  * Whether each column of the section is on, by column id, as `tableStore`
@@ -70,4 +78,11 @@ export type TFilesColumnsOptions = {
   indexColumnSize: number;
   /** The rows are being reordered: no resizing, column settings or row menus. */
   isIndexEditingMode: boolean;
+  /** The portal shows storage, so the rooms lists have a Storage column. */
+  showStorageInfo: boolean;
+  /** Rooms have a default quota: Storage reads "Storage and quota". */
+  isDefaultRoomsQuotaSet: boolean;
+  isArchiveFolder: boolean;
+  /** Ref of the Tags header cell, measured for how many tags fit a cell. */
+  tagsHeaderRef: (element: HTMLDivElement | null) => void;
 };

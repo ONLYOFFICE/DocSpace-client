@@ -78,7 +78,12 @@ import type {
 } from "./DataTableView.types";
 import { FilesDataTableRow } from "./row/FilesDataTableRow";
 import { FILES_DATA_TABLE_LIST_CLASS } from "./listClass";
+import {
+  FilesTableContext,
+  type TFilesTableValue,
+} from "./row/FilesTableContext";
 import { useStickyHeaderTop } from "./useStickyHeaderTop";
+import { useTagCount } from "./useTagCount";
 import styles from "./DataTableView.module.scss";
 
 const VIRTUALIZE = { innerClassName: FILES_DATA_TABLE_LIST_CLASS };
@@ -115,6 +120,14 @@ type InjectedProps = {
   indexColumnSize: number;
   isIndexEditingMode: boolean;
   changeIndex: TStore["filesActionsStore"]["changeIndex"];
+  roomsFilter: TStore["filesStore"]["roomsFilter"];
+  setRoomsFilter: TStore["filesStore"]["setRoomsFilter"];
+  setIsLoading: (isLoading: boolean) => void;
+  showStorageInfo: boolean;
+  isDefaultRoomsQuotaSet: boolean;
+  isArchiveFolder: boolean;
+  isExternalShareRestricted: boolean;
+  blockExistingLinksOnRestrict: boolean;
 };
 
 const getRowKey = (item: TFilesTableItem) =>
@@ -157,10 +170,36 @@ const DataTableView = ({
   indexColumnSize,
   isIndexEditingMode,
   changeIndex,
+  roomsFilter,
+  setRoomsFilter,
+  setIsLoading,
+  showStorageInfo,
+  isDefaultRoomsQuotaSet,
+  isArchiveFolder,
+  isExternalShareRestricted,
+  blockExistingLinksOnRestrict,
 }: InjectedProps) => {
   const { t } = useTranslation(["Files", "Common"]);
 
   useViewEffect({ view: viewAs, setView: setViewAs, currentDeviceType });
+
+  const { tagCount, tagsHeaderRef } = useTagCount();
+
+  const tableValue = useMemo<TFilesTableValue>(
+    () => ({
+      tagCount,
+      // Only the rooms list marks restricted rooms, as in the old rows.
+      isExternalShareRestricted:
+        section === SECTIONS.rooms && isExternalShareRestricted,
+      blockExistingLinksOnRestrict,
+    }),
+    [
+      tagCount,
+      section,
+      isExternalShareRestricted,
+      blockExistingLinksOnRestrict,
+    ],
+  );
 
   // The injector hands a new object on every render; the columns are rebuilt
   // only when a flag actually changes.
@@ -180,6 +219,10 @@ const DataTableView = ({
       showSettings,
       indexColumnSize,
       isIndexEditingMode,
+      showStorageInfo,
+      isDefaultRoomsQuotaSet,
+      isArchiveFolder,
+      tagsHeaderRef,
     }),
     [
       t,
@@ -190,6 +233,10 @@ const DataTableView = ({
       showSettings,
       indexColumnSize,
       isIndexEditingMode,
+      showStorageInfo,
+      isDefaultRoomsQuotaSet,
+      isArchiveFolder,
+      tagsHeaderRef,
     ],
   );
 
@@ -217,18 +264,21 @@ const DataTableView = ({
     [columnWidthsStorageName],
   );
 
-  const sortBy = filter.sortBy ?? "";
-  const sortDesc = filter.sortOrder === "descending";
+  // The rooms lists sort through their own filter.
+  const sortFilter = section.rooms ? roomsFilter : filter;
+  const sortBy = sortFilter.sortBy ?? "";
+  const sortDesc = sortFilter.sortOrder === "descending";
 
   const sort: DataTableSort = useMemo(
     () => ({ key: sortBy, desc: sortDesc }),
     [sortBy, sortDesc],
   );
 
-  // The old header's onFilter: a new sort key, or the other order of this one.
+  // The old header's onFilter and onRoomsFilter: a new sort key, or the other
+  // order of this one, with the section loader on until the list comes back.
   const onSortChange = useCallback(
     (nextSortBy: string) => {
-      const newFilter = filter.clone();
+      const newFilter = sortFilter.clone();
 
       if (newFilter.sortBy !== nextSortBy) {
         newFilter.sortBy = nextSortBy as typeof newFilter.sortBy;
@@ -237,11 +287,14 @@ const DataTableView = ({
           newFilter.sortOrder === "ascending" ? "descending" : "ascending";
       }
 
+      setIsLoading(true);
+      if (section.rooms) setRoomsFilter(newFilter as typeof roomsFilter);
+
       window.DocSpace.navigate(
         `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
       );
     },
-    [filter],
+    [sortFilter, section.rooms, setIsLoading, setRoomsFilter],
   );
 
   const onColumnVisibilityChange = useCallback(
@@ -331,29 +384,31 @@ const DataTableView = ({
   }, [scrollToItem, rows, setScrollToItem]);
 
   return (
-    <DataTable<TFilesTableItem>
-      id="table-container"
-      headerId="table-container_caption-header"
-      testId="files-data-table"
-      // The old table's body test id, which the client's specs scope to.
-      bodyTestId="table-body"
-      ariaLabel={t("Common:Documents")}
-      columns={columns}
-      rows={rows}
-      getRowKey={getRowKey}
-      sort={sort}
-      onSortChange={onSortChange}
-      onColumnVisibilityChange={onColumnVisibilityChange}
-      widthStorage={widthStorage}
-      renderRow={renderRow}
-      virtualize={VIRTUALIZE}
-      loadMore={loadMore}
-      apiRef={apiRef}
-      ref={tableRef}
-      className={classNames(styles.table, {
-        [styles.noSelect]: !withContentSelection,
-      })}
-    />
+    <FilesTableContext value={tableValue}>
+      <DataTable<TFilesTableItem>
+        id="table-container"
+        headerId="table-container_caption-header"
+        testId="files-data-table"
+        // The old table's body test id, which the client's specs scope to.
+        bodyTestId="table-body"
+        ariaLabel={t("Common:Documents")}
+        columns={columns}
+        rows={rows}
+        getRowKey={getRowKey}
+        sort={sort}
+        onSortChange={onSortChange}
+        onColumnVisibilityChange={onColumnVisibilityChange}
+        widthStorage={widthStorage}
+        renderRow={renderRow}
+        virtualize={VIRTUALIZE}
+        loadMore={loadMore}
+        apiRef={apiRef}
+        ref={tableRef}
+        className={classNames(styles.table, {
+          [styles.noSelect]: !withContentSelection,
+        })}
+      />
+    </FilesTableContext>
   );
 };
 
@@ -369,9 +424,14 @@ export default inject<TStore>(
     hotkeyStore,
     indexingStore,
     filesActionsStore,
+    clientLoadingStore,
+    currentQuotaStore,
+    filesSettingsStore,
   }) => {
     const {
       filter,
+      roomsFilter,
+      setRoomsFilter,
       filesList,
       viewAs,
       setViewAs,
@@ -423,6 +483,17 @@ export default inject<TStore>(
       indexColumnSize: filesStore.indexColumnSize,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       changeIndex: filesActionsStore.changeIndex,
+      roomsFilter,
+      setRoomsFilter,
+      setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
+      showStorageInfo: currentQuotaStore.showStorageInfo,
+      isDefaultRoomsQuotaSet: currentQuotaStore.isDefaultRoomsQuotaSet,
+      isArchiveFolder: !!treeFoldersStore.isArchiveFolder,
+      isExternalShareRestricted:
+        !!filesSettingsStore.isExternalShareRestricted &&
+        !!filesSettingsStore.externalShareApplyToRooms,
+      blockExistingLinksOnRestrict:
+        !!filesSettingsStore.blockExistingLinksOnRestrict,
     };
   },
 )(observer(DataTableView));

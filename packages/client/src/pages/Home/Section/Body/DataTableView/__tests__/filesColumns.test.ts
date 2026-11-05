@@ -40,8 +40,10 @@ vi.mock("../cells/FilesCells", () => ({
   IndexColumnCell: () => null,
   LastOpenedColumnCell: () => null,
   LocationColumnCell: () => null,
+  QuotaColumnCell: () => null,
   SharedByColumnCell: () => null,
   SizeColumnCell: () => null,
+  TagsColumnCell: () => null,
   TypeColumnCell: () => null,
 }));
 
@@ -66,6 +68,10 @@ const options = (
   showSettings: true,
   indexColumnSize: 37,
   isIndexEditingMode: false,
+  showStorageInfo: false,
+  isDefaultRoomsQuotaSet: false,
+  isArchiveFolder: false,
+  tagsHeaderRef: () => {},
   flags: FILES_FLAGS,
   ...overrides,
 });
@@ -356,6 +362,111 @@ describe("VDR columns", () => {
     expect(filesColumnsRecord(vdr, VDR_FLAGS, vdrOptions())).toBe(
       "Index,Name,AuthorIndexing,false,ModifiedIndexing,SizeIndexing,false",
     );
+  });
+});
+
+describe("rooms and templates columns", () => {
+  const row = {} as TFilesTableItem;
+  const ROOM_FLAGS = {
+    Type: true,
+    Tags: true,
+    Owner: false,
+    Activity: true,
+    Storage: true,
+  };
+  const roomOptions = (overrides: Partial<TFilesColumnsOptions> = {}) =>
+    options({ flags: ROOM_FLAGS, showStorageInfo: true, ...overrides });
+
+  it("are the old rooms header's columns, with its test ids", () => {
+    expect(
+      getFilesColumns(SECTIONS.rooms, roomOptions()).map((column) => [
+        column.id,
+        column.title,
+        column.cellTestId?.(row, 0),
+      ]),
+    ).toEqual([
+      ["Name", "Common:Label", "rooms-cell-name-0"],
+      ["Type", "Common:Type", "rooms-cell-type-0"],
+      ["Tags", "Common:Tags", "rooms-cell-tags-0"],
+      ["Owner", "Common:Owner", "rooms-cell-owner-0"],
+      ["Activity", "LastActivity", "rooms-cell-activity-0"],
+      ["Storage", "Common:Storage", "rooms-cell-storage-0"],
+      ["Settings", undefined, undefined],
+    ]);
+  });
+
+  it("are the old templates header's columns under their own keys", () => {
+    expect(
+      getFilesColumns(SECTIONS.templates, roomOptions()).map((column) => [
+        column.id,
+        column.cellTestId?.(row, 0),
+      ]),
+    ).toEqual([
+      ["Name", "templates-cell-name-0"],
+      ["TypeTemplates", "templates-cell-type-0"],
+      ["TagsTemplates", "templates-cell-tags-0"],
+      ["OwnerTemplates", "templates-cell-owner-0"],
+      ["ActivityTemplates", "templates-cell-activity-0"],
+      ["StorageTemplates", "templates-cell-storage-0"],
+      ["Settings", undefined],
+    ]);
+  });
+
+  it("sort by every column from the header", () => {
+    expect(sortable(roomOptions(), SECTIONS.rooms)).toEqual([
+      ["Name", "AZ", true],
+      ["Type", "roomType", true],
+      ["Tags", "Tags", true],
+      ["Owner", "Author", true],
+      ["Activity", "DateAndTime", true],
+      ["Storage", "usedspace", true],
+    ]);
+  });
+
+  it("name Storage after the quota, outside the archive", () => {
+    const storageTitle = (opts: TFilesColumnsOptions) =>
+      getFilesColumns(SECTIONS.rooms, opts).find(
+        (column) => column.id === "Storage",
+      )?.title;
+
+    expect(storageTitle(roomOptions({ isDefaultRoomsQuotaSet: true }))).toBe(
+      "Common:StorageAndQuota",
+    );
+    expect(
+      storageTitle(
+        roomOptions({ isDefaultRoomsQuotaSet: true, isArchiveFolder: true }),
+      ),
+    ).toBe("Common:Storage");
+  });
+
+  it("measure the Tags header cell, and no other", () => {
+    const tagsHeaderRef = () => {};
+    const measured = getFilesColumns(
+      SECTIONS.rooms,
+      roomOptions({ tagsHeaderRef }),
+    )
+      .filter((column) => column.headerRef === tagsHeaderRef)
+      .map((column) => column.id);
+
+    expect(measured).toEqual(["Tags"]);
+  });
+
+  it("have no Storage, and no slot for it in the record, without storage info", () => {
+    const opts = roomOptions({ showStorageInfo: false });
+
+    expect(ids(opts, SECTIONS.rooms)).not.toContain("Storage");
+    expect(filesColumnsRecord(SECTIONS.rooms, ROOM_FLAGS, opts)).toBe(
+      "Name,Type,Tags,false,Activity",
+    );
+    expect(filesColumnsRecord(SECTIONS.rooms, ROOM_FLAGS, roomOptions())).toBe(
+      "Name,Type,Tags,false,Activity,Storage",
+    );
+  });
+
+  it("are the rooms lists, sorted through the rooms filter", () => {
+    expect(SECTIONS.rooms.rooms).toBe(true);
+    expect(SECTIONS.templates.rooms).toBe(true);
+    expect(SECTIONS.files.rooms).toBeFalsy();
   });
 });
 

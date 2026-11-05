@@ -48,13 +48,16 @@ import IndexCell from "../../TableView/sub-components/IndexCell";
 import LocationCell from "../../TableView/sub-components/LocationCell";
 import SharedByCell from "../../TableView/sub-components/SharedByCell";
 import SizeCell from "../../TableView/sub-components/SizeCell";
+import TagsCell from "../../TableView/sub-components/TagsCell";
 import TypeCell from "../../TableView/sub-components/TypeCell";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
 } from "../../TableView/StyledTable";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 import { useFilesRow } from "../row/FilesRowContext";
+import { useFilesTable } from "../row/FilesTableContext";
 
 type TCellProps = {
   /** The last rendered column carries the row's quick buttons. */
@@ -258,10 +261,50 @@ export const SizeColumnCell = ({ isLast, sideColor }: TCellProps) => {
 
 export const TypeColumnCell = ({ isLast, sideColor }: TCellProps) => {
   const row = useFilesRow();
+  const { isExternalShareRestricted, blockExistingLinksOnRestrict } =
+    useFilesTable();
   if (!row) return null;
 
   return withQuickButtons(
-    <TypeCell t={row.t} item={row.item} sideColor={sideColor} />,
+    <TypeCell
+      t={row.t}
+      item={row.item}
+      sideColor={sideColor}
+      isExternalShareRestricted={isExternalShareRestricted}
+      blockExistingLinksOnRestrict={blockExistingLinksOnRestrict}
+    />,
+    isLast,
+  );
+};
+
+/** A room's tags; all of them while the row is hovered, selected or acted on. */
+export const TagsColumnCell = ({ isLast }: TCellProps) => {
+  const row = useFilesRow();
+  const { tagCount } = useFilesTable();
+  if (!row) return null;
+
+  return withQuickButtons(
+    <TagsCell
+      item={row.item}
+      tagCount={tagCount}
+      isHovered={row.isHovered}
+      isActive={row.isActive}
+      checkedProps={row.checked}
+    />,
+    isLast,
+  );
+};
+
+/** A room's storage, and its quota where one is set. */
+export const QuotaColumnCell = ({ isLast }: TCellProps) => {
+  const row = useFilesRow();
+  if (!row) return null;
+
+  // A room's rights, which the file and folder types do not list.
+  const security = row.item.security as { EditRoom?: boolean } | undefined;
+
+  return withQuickButtons(
+    <SpaceQuota item={row.item} type="room" isReadOnly={!security?.EditRoom} />,
     isLast,
   );
 };

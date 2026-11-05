@@ -53,7 +53,9 @@ export type TCellKind =
   | "type"
   | "location"
   | "sharedBy"
-  | "accessLevel";
+  | "accessLevel"
+  | "tags"
+  | "quota";
 
 /** The `tableStore` property that says whether a column is on. */
 type TColumnFlag = {
@@ -65,7 +67,7 @@ export type TSectionColumn = {
   /** The old header's key: the visible-columns record and `setColumnEnable` use it. */
   id: string;
   flag: TColumnFlag;
-  title: (t: TFunction) => string;
+  title: (t: TFunction, options: TFilesColumnsOptions) => string;
   cell: TCellKind;
   /** The column's part of the old cell test id (`TSection.cellTestId`). */
   testId: string;
@@ -75,6 +77,15 @@ export type TSectionColumn = {
   sortable?: boolean;
   /** Whether the section has the column at all; it always has by default. */
   when?: (options: TFilesColumnsOptions) => boolean;
+  /**
+   * Whether a column the section does not have still takes an empty slot in
+   * the visible-columns record. The old header kept one for a column it
+   * blanked, but left out one it never added (Storage without quotas).
+   * @default true
+   */
+  slotWhenAbsent?: boolean;
+  /** The header cell is measured to tell the cells how many tags fit (`tagRef`). */
+  measuresTags?: boolean;
 };
 
 /** A section of the documents table: its columns after Name, and how its rows differ. */
@@ -87,6 +98,8 @@ export type TSection = {
   withIndex?: boolean;
   /** Whether the last column carries the row's quick buttons. */
   quickButtons: boolean;
+  /** The rooms list: its sort lives in `roomsFilter`, not the files filter. */
+  rooms?: boolean;
   columns: TSectionColumn[];
 };
 
@@ -100,11 +113,66 @@ export type TFilesSection = Extract<
   | "sharedWithMe"
   | "inSharedFolder"
   | "vdrIndexing"
+  | "rooms"
+  | "templates"
 >;
 
 /** `<section>-cell-<part>-<index>`, the test ids of most old rows. */
 const dashed = (section: string) => (part: string, index: number) =>
   `${section}-cell-${part}-${index}`;
+
+/**
+ * Rooms and room templates: one set of columns under each list's own keys.
+ * Storage exists only while the portal shows storage at all.
+ */
+const roomsColumns = (
+  keys: Record<
+    "type" | "tags" | "owner" | "activity" | "storage",
+    Pick<TSectionColumn, "id" | "flag">
+  >,
+): TSectionColumn[] => [
+  {
+    ...keys.type,
+    title: (t) => t("Common:Type"),
+    cell: "type",
+    testId: "type",
+    sortKey: SortByFieldName.RoomType,
+  },
+  {
+    ...keys.tags,
+    title: (t) => t("Common:Tags"),
+    cell: "tags",
+    testId: "tags",
+    sortKey: SortByFieldName.Tags,
+    measuresTags: true,
+  },
+  {
+    ...keys.owner,
+    title: (t) => t("Common:Owner"),
+    cell: "author",
+    testId: "owner",
+    sortKey: SortByFieldName.Author,
+  },
+  {
+    ...keys.activity,
+    title: (t) => t("LastActivity"),
+    cell: "modified",
+    testId: "activity",
+    sortKey: SortByFieldName.ModifiedDate,
+  },
+  {
+    ...keys.storage,
+    title: (t, { isDefaultRoomsQuotaSet, isArchiveFolder }) =>
+      isDefaultRoomsQuotaSet && !isArchiveFolder
+        ? t("Common:StorageAndQuota")
+        : t("Common:Storage"),
+    cell: "quota",
+    testId: "storage",
+    sortKey: SortByFieldName.UsedSpace,
+    when: ({ showStorageInfo }) => showStorageInfo,
+    slotWhenAbsent: false,
+  },
+];
 
 /**
  * Shared with me and the folders inside it: one set of columns, but only the
@@ -163,7 +231,8 @@ const sharedColumns = (inFolder: boolean): TSectionColumn[] => [
  * The old header's columns for each section (`getFilesColumns`,
  * `getTrashFolderColumns`, `getRecentFolderColumns`,
  * `getFavoritesFolderColumns`, `getSharedWithMeFolderColumns`,
- * `getIndexingColumns` in `TableView/TableHeader.js`), in their order.
+ * `getIndexingColumns`, `getRoomsColumns`, `getTemplatesColumns` in
+ * `TableView/TableHeader.js`), in their order.
  */
 export const SECTIONS: Record<TFilesSection, TSection> = {
   files: {
@@ -438,6 +507,44 @@ export const SECTIONS: Record<TFilesSection, TSection> = {
         testId: "type",
       },
     ],
+  },
+
+  // Rooms, Archive, Forms and the AI section, all under the rooms keys.
+  rooms: {
+    cellTestId: dashed("rooms"),
+    nameSortable: true,
+    quickButtons: true,
+    rooms: true,
+    columns: roomsColumns({
+      type: { id: "Type", flag: "roomColumnTypeIsEnabled" },
+      tags: { id: "Tags", flag: "roomColumnTagsIsEnabled" },
+      owner: { id: "Owner", flag: "roomColumnOwnerIsEnabled" },
+      activity: { id: "Activity", flag: "roomColumnActivityIsEnabled" },
+      storage: { id: "Storage", flag: "roomQuotaColumnIsEnable" },
+    }),
+  },
+
+  templates: {
+    cellTestId: dashed("templates"),
+    nameSortable: true,
+    quickButtons: true,
+    rooms: true,
+    columns: roomsColumns({
+      type: { id: "TypeTemplates", flag: "templatesRoomColumnTypeIsEnabled" },
+      tags: { id: "TagsTemplates", flag: "templateRoomColumnTagsIsEnabled" },
+      owner: {
+        id: "OwnerTemplates",
+        flag: "templatesRoomColumnOwnerIsEnabled",
+      },
+      activity: {
+        id: "ActivityTemplates",
+        flag: "templateRoomColumnActivityIsEnabled",
+      },
+      storage: {
+        id: "StorageTemplates",
+        flag: "templateRoomQuotaColumnIsEnable",
+      },
+    }),
   },
 };
 

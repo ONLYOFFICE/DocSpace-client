@@ -177,16 +177,29 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
   } = props;
 
   const [isDragActive, setIsDragActive] = useState(false);
+  // The tags of a room under the pointer show in full, as in the old row.
+  const [isHovered, setIsHovered] = useState(false);
 
   const { acceptBackground, background } = theme.dragAndDrop;
   const isDragDisabled = dragging && !isDragging;
 
+  const hasLogo = !!item.logo?.cover || !!item.logo?.medium;
+
+  // The old row's icon, with a room's logo, colour and badges.
   const element = (
     <ItemIcon
       icon={item.icon}
       fileExst={item.fileExst}
+      isRoom={item.isRoom}
+      isPrivateRoom={item.isPrivateRoom}
       title={item.title}
+      showDefault={hasLogo ? undefined : item.isRoom}
+      logo={item.logo}
+      color={item.logo?.color}
+      isArchive={item.isArchive}
+      isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
+      encrypted={"encrypted" in item ? item.encrypted : undefined}
       badgeIconColor={badgeIconColor}
       className={classNames({ "icon-with-index-column": isIndexing })}
     />
@@ -214,6 +227,9 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       background,
     ],
   );
+
+  const onMouseEnter = useEventCallback(() => setIsHovered(true));
+  const onMouseLeave = useEventCallback(() => setIsHovered(false));
 
   const onChangeIndex = useEventCallback(
     (e: React.MouseEvent, action: VDRIndexingAction) => {
@@ -270,6 +286,8 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       theme,
       element,
       checked: checkedProps,
+      isActive,
+      isHovered,
       inProgress,
       linkStyles: props.linkStyles,
       titleWithoutExt: props.titleWithoutExt,
@@ -290,6 +308,8 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       t,
       theme,
       checkedProps,
+      isActive,
+      isHovered,
       inProgress,
       badgeUrl,
       badgeIconColor,
@@ -397,6 +417,7 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
               [rowStyles.isIndexing]: isIndexing,
               [rowStyles.isIndexEditingMode]: isIndexEditingMode,
               [rowStyles.isIndexUpdated]: isIndexUpdated,
+              [rowStyles.isRoom]: item.isRoom,
             },
           )}
           cellProps={{
@@ -410,6 +431,8 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
           // neither selects nor opens.
           onClick={isIndexEditingMode ? undefined : onMouseClick}
           onDoubleClick={isIndexEditingMode ? undefined : onDoubleClick}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
         />
       </FilesRowContext>
     </DragAndDrop>

@@ -53,6 +53,9 @@ export type TFilesRowValue = {
   theme: TTheme;
   element: React.ReactNode;
   checked: boolean;
+  /** The row is the one acted on, or under the pointer: tags show in full. */
+  isActive: boolean;
+  isHovered: boolean;
   inProgress: boolean;
   linkStyles: LinkProps;
   titleWithoutExt: string;

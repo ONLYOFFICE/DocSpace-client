@@ -28,7 +28,7 @@ describe("isFilesDataTableEnabled", () => {
     expect(isFilesDataTableEnabled("files")).toBe(false);
   });
 
-  it("draws My documents, Trash, Recent, Favorites, Shared with me and VDR", () => {
+  it("draws every documents section, the rooms lists among them", () => {
     localStorage.setItem(FILES_DATA_TABLE_SWITCH, "on");
 
     for (const scope of [
@@ -39,16 +39,24 @@ describe("isFilesDataTableEnabled", () => {
       "sharedWithMe",
       "inSharedFolder",
       "vdrIndexing",
+      "rooms",
+      "templates",
     ] as const) {
       expect(isFilesDataTableEnabled(scope)).toBe(true);
     }
   });
 
-  it("leaves the sections it cannot draw yet on the old table", () => {
+  it("leaves the contacts tables on the old table", () => {
     localStorage.setItem(FILES_DATA_TABLE_SWITCH, "on");
 
-    expect(isFilesDataTableEnabled("rooms")).toBe(false);
-    expect(isFilesDataTableEnabled("people")).toBe(false);
+    for (const scope of [
+      "people",
+      "guests",
+      "groups",
+      "insideGroup",
+    ] as const) {
+      expect(isFilesDataTableEnabled(scope)).toBe(false);
+    }
   });
 
   it("falls back to the old table when storage is blocked", () => {

@@ -4,7 +4,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+} from "vitest";
 
 import { setupServer } from "../../../e2e/msw-compat";
 import { API_PREFIX, BASE_URL } from "../../../e2e/utils";
@@ -138,5 +146,43 @@ describe("createRoom mock — PUT /files/rooms/{id} (mirrors FileStorageService.
 
     expect(status).toBe(200);
     expect(body.response).toMatchObject({ id, title: "Renamed" });
+  });
+});
+
+describe("createRoom mock — a Document Server without encryption (mirrors InternalCreateFolderAsync since b562fc3fb1)", () => {
+  const refusing: { current: CreateRoomHandlerHandle | null } = {
+    current: null,
+  };
+
+  beforeEach(() => {
+    server.use(
+      ...createPrivateRoomHandlers(PORT, {
+        docServiceEncryptionSupported: false,
+        handle: refusing,
+      }),
+    );
+  });
+  afterEach(() => server.resetHandlers());
+
+  it("Room created without the library", async () => {
+    const { status, body } = await create({
+      private: true,
+      indexing: true,
+    });
+
+    expect(status).toBe(403);
+    expect(body.error).toEqual({
+      message:
+        "The document server connected to this portal cannot work with encrypted files",
+      type: "System.InvalidOperationException",
+    });
+    expect(refusing.current!.getRooms()).toEqual([]);
+  });
+
+  it("creates an ordinary room as before", async () => {
+    const { status } = await create({});
+
+    expect(status).toBe(200);
+    expect(refusing.current!.getRooms()).toHaveLength(1);
   });
 });

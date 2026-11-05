@@ -297,6 +297,25 @@ describe("ContextOptionsStore.onCreateRoom — Private section", () => {
     expect(toastr.error).toHaveBeenCalledWith("Common:EncryptionRequiresHttps");
   });
 
+  it("Creation started in the Private section", () => {
+    window.history.pushState({}, "", "/private/filter");
+    const spy = dispatched();
+
+    createTestContextOptionsStore({
+      filesSettingsStore: {
+        getIcon: () => "icon.svg",
+        isEncryptedEditingAvailable: false,
+      },
+    }).onCreateRoom();
+
+    const events = spy.events();
+    spy.restore();
+    expect(events).toHaveLength(0);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomDocServiceNotSupported",
+    );
+  });
+
   it("opens the generic chooser outside the section", () => {
     window.history.pushState({}, "", "/rooms/shared/filter");
     const spy = dispatched();

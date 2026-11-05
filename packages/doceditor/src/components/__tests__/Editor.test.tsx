@@ -301,6 +301,34 @@ describe("Editor", () => {
       expect(editorMounted()).toBe(true);
     });
 
+    it("Editor refused by the server", async () => {
+      await renderEditor({
+        config: undefined,
+        isSkipError: true,
+        errorMessage: "refused",
+        docServiceEncryptionSupported: false,
+      });
+
+      expect(env.keyHookCalls).toBe(0);
+      expect(editorMounted()).toBe(false);
+      expect(container?.textContent).toContain(
+        "Common:PrivateRoomEditorNotSupported",
+      );
+    });
+
+    it("keeps the editor's error page for another refusal", async () => {
+      await renderEditor({
+        config: undefined,
+        isSkipError: true,
+        errorMessage: "refused",
+        docServiceEncryptionSupported: undefined,
+      });
+
+      expect(container?.textContent).not.toContain(
+        "Common:PrivateRoomEditorNotSupported",
+      );
+    });
+
     it("Plain file without the capability: the editor mounts", async () => {
       await renderEditor({
         config: makeConfig(false),

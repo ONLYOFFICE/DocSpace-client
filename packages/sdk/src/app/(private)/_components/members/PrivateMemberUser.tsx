@@ -213,7 +213,7 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
       userId,
       displayName,
       onConfirm: async () => {
-        await remove({ roomId, userId, isGroup });
+        await remove({ roomId, userId });
         onRemoved?.();
       },
     });
@@ -223,7 +223,6 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
     roomId,
     userId,
     displayName,
-    isGroup,
     remove,
     onRemoved,
     dialogs,

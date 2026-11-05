@@ -50,7 +50,7 @@ import type { TInfoPanelMembers } from "../Members.types";
 
 const mocks = vi.hoisted(() => ({
   updateRoomMemberRole: vi.fn(),
-  revokeMemberFromEncryptedRoom: vi.fn(),
+  setFileEncryptionKeys: vi.fn(),
 }));
 
 vi.mock("@docspace/shared/api", () => ({
@@ -62,8 +62,9 @@ vi.mock("@docspace/shared/api", () => ({
   },
 }));
 
-vi.mock("@docspace/shared/services/private-room/room-encryption", () => ({
-  revokeMemberFromEncryptedRoom: mocks.revokeMemberFromEncryptedRoom,
+vi.mock("@docspace/shared/api/files", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  setFileEncryptionKeys: mocks.setFileEncryptionKeys,
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
@@ -187,9 +188,6 @@ const renderMembersOf = (room: TRoom) => {
 describe("Members tab of a room selected in a list", () => {
   beforeEach(() => {
     mocks.updateRoomMemberRole.mockImplementation(async () => ({}));
-    mocks.revokeMemberFromEncryptedRoom.mockImplementation(async () => [
-      { success: true },
-    ]);
   });
 
   it("offers the links of an ordinary room selected in a list", () => {
@@ -242,15 +240,7 @@ describe("Members tab of a room selected in a list", () => {
         invitations: [{ id: "bob", access: ShareAccessRights.None }],
       }),
     );
-    expect(mocks.revokeMemberFromEncryptedRoom).toHaveBeenCalledWith(
-      14,
-      ["bob"],
-      {},
-    );
-    expect(
-      mocks.updateRoomMemberRole.mock.invocationCallOrder[0],
-    ).toBeLessThan(
-      mocks.revokeMemberFromEncryptedRoom.mock.invocationCallOrder[0],
-    );
+    expect(mocks.updateRoomMemberRole).toHaveBeenCalledTimes(1);
+    expect(mocks.setFileEncryptionKeys).not.toHaveBeenCalled();
   });
 });

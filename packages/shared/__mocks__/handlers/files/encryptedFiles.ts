@@ -103,6 +103,14 @@ export type EncryptedFilesHandlerHandle = {
    * `roomUserKeys` may.
    */
   setRoomAccessManagers: (userIds: string[]) => void;
+  /**
+   * Mirrors the private-room branch of FileSharingAceHelper
+   * .SetAceObjectAsync: the users whose share on the room was removed lose
+   * their entries on every file of the room, its folders included
+   * (RevokeFileKeysAsync); the room's creator keeps theirs, and an
+   * ordinary room keeps every key.
+   */
+  revokeFileKeys: (userIds: string[]) => void;
   /** Answers as another signed-in user until `reset`. */
   setCurrentUserId: (userId: string) => void;
   /**
@@ -174,6 +182,9 @@ const sectionOf = (archived: boolean) =>
     : { id: ROOMS_SECTION_ID, title: "Rooms", folderType: 14 };
 /** ChunkedUploadSessionHolder.SlidingExpiration. */
 const SESSION_SLIDING_EXPIRATION_MS = 12 * 60 * 60 * 1000;
+/** FileUploader.EncryptedFileNameRegex. */
+const ENCRYPTED_FILE_NAME =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(\.[a-z0-9]+)?$/;
 
 /** Configuration.DocType for the extensions the mock seeds use. */
 const DOCUMENT_TYPE_BY_EXTENSION = {
@@ -589,6 +600,15 @@ export const encryptedFilesHandlers = (
     setRoomAccessManagers: (userIds) => {
       accessManagers = new Set(userIds.map(String));
     },
+    revokeFileKeys: (userIds) => {
+      if (!isPrivate) return;
+      const revoked = userIds.map(String).filter((id) => id !== ownerId);
+      for (const f of Array.from(files.values())) {
+        f.fileKeys = f.fileKeys.filter(
+          (k) => !revoked.includes(String(k.userId)),
+        );
+      }
+    },
     setCurrentUserId: (userId) => {
       currentUserId = userId;
     },
@@ -754,6 +774,47 @@ export const encryptedFilesHandlers = (
               ),
             ),
           ),
+        );
+      },
+    ),
+
+    /**
+     * Mirrors FilesController.CreateFile (HttpPost "{folderId}/file") ->
+     * FileStorageService.CreateNewFileAsync, for the room and its `folders`.
+     * The file it builds is never marked encrypted, so in a private room
+     * FileDao.SaveFileAsync refuses it in DemandEncryptedInPrivateRoomAsync
+     * with a SecurityException (403, "Access denied"), as CanCreateAsync
+     * refuses the folder of an archived room, and no file is stored. An
+     * ordinary room stores a plain file and answers its FileDto; the title is
+     * kept as sent (the extension rules and the template content are not
+     * modelled).
+     */
+    http.post(
+      `${apiBase}/files/:folderId(\\d+)/file`,
+      async ({ params, request }) => {
+        const folderId = Number(params.folderId);
+        if (!holdsFolder(folderId)) return undefined;
+        const body = (await request.json()) as { title: string };
+        requests.push({
+          method: "POST",
+          url: new URL(request.url).pathname,
+          body,
+        });
+        if (isPrivate || archived) {
+          return errorResponse(403, "Access denied");
+        }
+        const record: EncryptedFileRecord = {
+          id: nextFileId++,
+          title: body.title,
+          serverTitle: body.title,
+          size: 0,
+          encrypted: false,
+          fileKeys: [],
+          folderId,
+        };
+        files.set(record.id, record);
+        return okResponse(
+          buildFileDto(record, folderId, ownerId, port, archived, isPrivate),
         );
       },
     ),
@@ -1192,6 +1253,13 @@ export const encryptedFilesHandlers = (
      * the folder's maximum upload size, the room's free space included, with
      * FileSizeComment.GetFileSizeException: a TenantQuotaException, which
      * UnhandledExceptionMiddleware answers with 402 and the exception type.
+     * FileUploader.InitiateUploadAsync then refuses a session into a private
+     * room or one of its `folders` (a folder the mock does not hold stands
+     * for one outside the room) that is not marked encrypted with a
+     * SecurityException (403, "Access denied" from CustomExceptionHandler),
+     * and one whose name fails EncryptedFileNameRegex with an
+     * ArgumentException for `fileName` (400, its message); an ordinary room
+     * takes any session.
      */
     http.post(
       `${apiBase}/files/:folderId(\\d+)/session`,
@@ -1215,6 +1283,13 @@ export const encryptedFilesHandlers = (
             `The maximum file size is exceeded (${filesSizeToString(freeSpace)}).`,
             "ASC.Core.Tenants.TenantQuotaException",
           );
+        }
+        const intoPrivateRoom = isPrivate && holdsFolder(folderId);
+        if (intoPrivateRoom && !body.encrypted) {
+          return errorResponse(403, "Access denied");
+        }
+        if (intoPrivateRoom && !ENCRYPTED_FILE_NAME.test(body.fileName)) {
+          return errorResponse(400, "Bad request. (Parameter 'fileName')");
         }
 
         const sessionId = `mock-session-${nextSessionId++}`;
@@ -1348,13 +1423,14 @@ export const encryptedFilesHandlers = (
     /**
      * Mirrors UploadController.AbortUploadSession
      * (HttpDelete "{folderId}/session/{sessionId}") ->
-     * FileUploader.AbortUploadAsync: discards the session and the parts it
-     * received. The session is found by its id alone, the folder segment is
-     * not matched. ChunkedUploadSessionHolder.GetSessionAsync throws
-     * ItemNotFoundException, so 404, for a session that is unknown,
-     * finalised or already aborted (expiry is not modelled); a session
-     * another account opened is a SecurityException, so 403. The action
-     * returns nothing, so the envelope has no `response`.
+     * FileUploader.AbortUploadAsync(uploadId, folderId): discards the session
+     * and the parts it received. ChunkedUploadSessionHolder.GetSessionAsync
+     * throws ItemNotFoundException, so 404, for a session that is unknown,
+     * finalised or already aborted (expiry is not modelled); a session opened
+     * against another folder than the path names is an ItemNotFoundException
+     * as well and stays open; a session another account opened is then a
+     * SecurityException, so 403. The action returns nothing, so the envelope
+     * has no `response`.
      */
     http.delete(
       `${apiBase}/files/:folderId(\\d+)/session/:sessionId`,
@@ -1368,6 +1444,9 @@ export const encryptedFilesHandlers = (
         });
         if (!session || session.completed) {
           return errorResponse(404, "session not found");
+        }
+        if (session.folderId !== Number(params.folderId)) {
+          return errorResponse(404, "The required file was not found");
         }
         if (session.userId !== currentUserId) {
           return errorResponse(403, "Access denied");

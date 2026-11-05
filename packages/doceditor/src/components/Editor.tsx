@@ -501,7 +501,8 @@ const EditorNotSupported = ({ config }: Pick<EditorProps, "config">) => {
 
 // Spec: editor-integration, "Document Server capability check before opening"
 const Editor = (props: EditorProps) =>
-  props.config?.file?.encrypted && !props.docServiceEncryptionSupported ? (
+  (props.config?.file?.encrypted && !props.docServiceEncryptionSupported) ||
+  (!props.config && props.docServiceEncryptionSupported === false) ? (
     <EditorNotSupported config={props.config} />
   ) : (
     <EditorBody {...props} />

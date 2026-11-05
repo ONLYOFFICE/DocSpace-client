@@ -1283,7 +1283,7 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
       //     chunk endpoint to delay) so the remove action fires during upload.
       //
       // With an active upload → remove shows CannotRemoveMemberWhileUploads.
-      // Without uploads → revokeMemberFromEncryptedRoom runs.
+      // Without uploads → the role update runs and no access entry is written.
     },
   );
 

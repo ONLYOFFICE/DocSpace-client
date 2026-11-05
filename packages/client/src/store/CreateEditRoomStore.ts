@@ -68,7 +68,10 @@ import { TRoom, TWatermark } from "@docspace/shared/api/rooms/types";
 import { addEntityMcpServer } from "@docspace/shared/api/ai";
 import { startDbSync } from "@docspace/shared/api/rooms";
 import { DbSyncService } from "@docspace/shared/services/db-sync.service";
-import { resolvePrivateRoomKeys } from "@docspace/shared/services/private-room/create-room-gate";
+import {
+  isRefusedForDocService,
+  resolvePrivateRoomKeys,
+} from "@docspace/shared/services/private-room/create-room-gate";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
@@ -606,6 +609,12 @@ class CreateEditRoomStore {
     const serverRoomType = isPrivateRoom ? RoomsType.CustomRoom : type;
 
     if (isPrivateRoom) {
+      // Spec: private-rooms/room-membership, "Private room creation needs a Document Server that encrypts"
+      if (!this.filesStore!.filesSettingsStore.isEncryptedEditingAvailable) {
+        toastr.error(t("Common:PrivateRoomDocServiceNotSupported"));
+        return;
+      }
+
       const userStore = this.filesStore!.userStore;
       const { keys, fetchFailed } = await resolvePrivateRoomKeys(
         userStore?.encryptionKeys,
@@ -748,7 +757,14 @@ class CreateEditRoomStore {
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);
     } catch (err) {
-      toastr.error(err as string);
+      if (
+        isPrivateRoom &&
+        (await isRefusedForDocService(err, () => api.files.getSettingsFiles()))
+      ) {
+        toastr.error(t("Common:PrivateRoomDocServiceNotSupported"));
+      } else {
+        toastr.error(err as string);
+      }
     } finally {
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);

@@ -47,7 +47,6 @@ const mocks = vi.hoisted(() => ({
   room: {} as Record<string, unknown>,
   currentFolder: null as { id: number } | null,
   updateRoomMemberRole: vi.fn(),
-  revokeOwnAccessOnLeave: vi.fn(),
   openFolder: vi.fn(),
   toastr: { success: vi.fn(), error: vi.fn() },
 }));
@@ -58,10 +57,6 @@ vi.mock("react-i18next", () => ({
 
 vi.mock("@docspace/shared/api", () => ({
   default: { rooms: { updateRoomMemberRole: mocks.updateRoomMemberRole } },
-}));
-
-vi.mock("@docspace/shared/services/private-room/room-member-flows", () => ({
-  revokeOwnAccessOnLeave: mocks.revokeOwnAccessOnLeave,
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
@@ -148,7 +143,6 @@ describe("LeaveRoomDialog", () => {
     };
     mocks.currentFolder = { id: ROOM_ID };
     mocks.updateRoomMemberRole.mockImplementation(async () => ({}));
-    mocks.revokeOwnAccessOnLeave.mockImplementation(async () => {});
   });
 
   afterEach(() => {
@@ -156,17 +150,13 @@ describe("LeaveRoomDialog", () => {
     root = null;
   });
 
-  it("Member leaves: the own entries are revoked before the role is dropped, then the private rooms list opens", async () => {
+  it("Member leaves: the role is dropped, then the private rooms list opens", async () => {
     await leave();
 
-    expect(mocks.revokeOwnAccessOnLeave).toHaveBeenCalledWith(ROOM_ID, "me");
     expect(mocks.updateRoomMemberRole).toHaveBeenCalledWith(ROOM_ID, {
       invitations: [{ id: "me", access: 0 }],
       force: false,
     });
-    expect(
-      mocks.revokeOwnAccessOnLeave.mock.invocationCallOrder[0],
-    ).toBeLessThan(mocks.updateRoomMemberRole.mock.invocationCallOrder[0]);
     expect(mocks.toastr.success).toHaveBeenCalledWith("Common:YouLeftTheRoom");
     expect(mocks.openFolder).toHaveBeenCalledWith(SECTION_ROOT_ID, "");
   });
@@ -176,7 +166,7 @@ describe("LeaveRoomDialog", () => {
 
     await leave();
 
-    expect(mocks.revokeOwnAccessOnLeave).toHaveBeenCalledTimes(1);
+    expect(mocks.updateRoomMemberRole).toHaveBeenCalledTimes(1);
     expect(mocks.openFolder).not.toHaveBeenCalled();
   });
 
@@ -187,17 +177,19 @@ describe("LeaveRoomDialog", () => {
 
     await leave({ room: room as never, onClose: vi.fn(), onLeftOpenRoom });
 
-    expect(mocks.revokeOwnAccessOnLeave).toHaveBeenCalledWith(ROOM_ID, "me");
+    expect(mocks.updateRoomMemberRole).toHaveBeenCalledWith(ROOM_ID, {
+      invitations: [{ id: "me", access: 0 }],
+      force: false,
+    });
     expect(onLeftOpenRoom).toHaveBeenCalledTimes(1);
     expect(mocks.openFolder).not.toHaveBeenCalled();
   });
 
-  it("revokes nothing when an ordinary room is left", async () => {
+  it("leaves an ordinary room through the role update", async () => {
     mocks.room = { ...mocks.room, private: false };
 
     await leave();
 
-    expect(mocks.revokeOwnAccessOnLeave).not.toHaveBeenCalled();
     expect(mocks.updateRoomMemberRole).toHaveBeenCalledTimes(1);
     expect(mocks.openFolder).not.toHaveBeenCalled();
   });

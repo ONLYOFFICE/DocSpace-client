@@ -416,6 +416,46 @@ translations of the letter label (4.5).
   and the C# SDK regenerated. The commit message calls the upload rules
   breaking for clients; this client already follows them.
 
+### Landed on 2026-11-05, last (read in `b562fc3fb1`)
+
+- Third-party private rooms refused (decision 13, proposal decision 6
+  decided): `FileStorageService.CreateThirdPartyRoomAsync` throws, before
+  anything else, an `ArgumentException` with
+  `ErrorMessage_PrivateRoomOnThirdPartyNotSupported`, so `private` on
+  `POST files/rooms/thirdparty/{id}` answers 400 ("A private room cannot
+  be created on a third-party storage") with or without keys, and the
+  connection can still back an ordinary room; existing rooms are left as
+  they are (`ThirdPartyPrivateRoomTests`). The client offers a third-party
+  storage for public rooms only (`SetRoomParams.js`), so it never sends one.
+- Document Server without encryption (decision 26):
+  `InternalCreateFolderAsync` (`isRoom && privacy`), after the key check,
+  throws an `InvalidOperationException` with
+  `ErrorMessage_DocServiceEncryptionNotSupported` when
+  `DocumentServiceEncryptionChecker.IsSupportedAsync` answers false, so
+  creating a private room or a private AI agent answers 403 ("The
+  document server connected to this portal cannot work with encrypted
+  files"); `DocumentServiceHelper` refuses the editor configuration of an
+  encrypted file of a private room with a `NotSupportedException`, so
+  `GET files/file/{fileId}/openedit` answers 415 (`private-rooms-editor-contract`).
+  The checker answers the setting `files:docservice:encryption-assume-supported`
+  when it is set, for tests and local development, and caches a probe
+  without an answer (an HTTP error or the timeout) for 30 seconds as false,
+  a clear answer for ten minutes. Not in the server suite: the answer
+  cannot be set per portal.
+- Audit trail (decision 25): `FilesMessageService` stores on an event of a
+  private room the titles to hide (`EventDescription.PrivateTitles`: the
+  folders on the way, the entry when it is a folder, an old title; not
+  file names), and `AuditEventsRepository` reads with `HidePrivateTitles`,
+  so `PrivateTitleMask` shows them as `AuditReportResource.PrivateRoomTitle`
+  in the action text, the context and the description of the audit API and
+  report, the users' names kept. The stored rows keep the titles: the
+  history of the room reads them for its members. Room quota events name
+  the rooms through `NotifyConstants.GetRoomTitle` when written
+  (`VirtualRoomsController`); events written before keep their titles. The
+  what's-new letters (`StudioWhatsNewNotify`) read the same repository and
+  name the room neutrally (`AuditPrivateRoomTitleTests`). Nothing on the
+  client reads the audit trail.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -541,7 +581,10 @@ translations of the letter label (4.5).
     that creates a room (rooms, AI agents, templates, rooms from templates), and
     `CreateThirdPartyRoomAsync` passes the private flag on, so a third-party
     private room is key-checked. Alternative for third-party rooms: refuse the
-    private flag on them (proposal decision 6).
+    private flag on them (proposal decision 6). The server took the
+    alternative on 2026-11-05 (`b562fc3fb1`): a third-party storage keeps no
+    file keys and its string ids do not fit the client's wrapping, so the
+    private flag is refused there with 400, with or without keys.
 
 14. **The opaque title form is the one the client sends (found 2026-10-28).**
     The client names every encrypted upload `makeOpaqueUploadName`: a
@@ -644,7 +687,12 @@ translations of the letter label (4.5).
     online. A member who comes back holds no key until an invitation or
     the backfill sweep (decision 20) wraps the files again. No manager
     route to revoke named users was added; offboarding (task 8.1) still
-    needs the owner part. Alternative: keep the client run as a belt and
+    needs the owner part. A group's removal revokes nothing yet:
+    `SetAceObjectAsync` leaves group subjects out of the users it collects
+    (`!w.SubjectGroup`, `FileSharing.cs:444`), so a user who loses the
+    room with the group's share keeps their keys; task 6.4 asks the
+    server to revoke them, and the client runs no revocation for a group
+    either, since its run could not remove them. Alternative: keep the client run as a belt and
     braces; rejected, it only re-writes entries the server deletes anyway
     and shows a notice about work it did not do.
 
@@ -662,6 +710,26 @@ translations of the letter label (4.5).
     `FileSecurity` stays, being a hot path that also writes the entry's
     access. Server only; the `server-contract` delta records the scenario
     under "Private-room events reach members only".
+
+25. **The audit trail names a private room neutrally (landed 2026-11-05,
+    not planned here).** An administrator outside a private room read its
+    title and its folders' names in the audit trail. The server keeps the
+    record and masks the titles on reading, keeping the stored rows for the
+    room's history. Server only; the `server-contract` delta records it as
+    "Audit trail names a private room neutrally". Alternative: write the
+    neutral title into the rows; rejected by the server, as the history of
+    the room is built from them.
+
+26. **A private room needs a Document Server that encrypts (landed
+    2026-11-05, not planned here).** Without the crypto library the browser
+    cannot decrypt a file in the editors, so the server refuses to create a
+    private room (403) and to open an encrypted file of one (415). The
+    client reads the same capability for the editors already
+    (`isEncryptedEditingAvailable`, `private-rooms-editor-contract` 2.2);
+    task 3.2c refuses the creation before the request on it and names the
+    server's 403 the same way, and `private-rooms-editor-contract` 2.5
+    shows the editors' message for the 415. Alternative: let the server's
+    message through; rejected, it is English and comes after the dialog.
 
 ## Risks / Trade-offs
 
@@ -696,7 +764,8 @@ translations of the letter label (4.5).
   the user leaves it, is removed from it, has their access cleared or
   their personal data deleted, audited as `RoomFileKeysRevoked`. No
   manager route. Task 6.3 adapts the client; task 8.1 keeps the owner part
-  of offboarding.
+  of offboarding; task 6.4 covers the users who lose the room with a
+  group's removal, which the server does not revoke yet.
 - Server refusal of plaintext written into a private room: closed on
   2026-11-05, decision 21, at the upload session and on the file write
   path, after `copyas` output (decision 15) and folders (decision 16) on
@@ -705,6 +774,6 @@ translations of the letter label (4.5).
 - Member removal racing an upload on another device (proposal decision 7):
   decided by the server on 2026-11-05, decision 17: the write stores the
   entries of the users who can read and reports the others.
-- Third-party private rooms (proposal decision 6): key-check them like every
-  private room (decision 13, what the spec assumes) or refuse the private
-  flag on third-party storage. Owner: product.
+- Third-party private rooms (proposal decision 6): decided by the server
+  on 2026-11-05 (`b562fc3fb1`), decision 13: the private flag is refused on
+  third-party storage with 400.

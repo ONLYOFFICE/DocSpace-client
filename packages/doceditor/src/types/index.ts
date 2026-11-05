@@ -272,7 +272,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
-      docServiceEncryptionSupported?: undefined;
+      /** False when the server refused an encrypted file for that reason. */
+      docServiceEncryptionSupported?: false;
     };
 
 export type EditorProps = {

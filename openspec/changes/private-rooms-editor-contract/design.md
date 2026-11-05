@@ -882,7 +882,21 @@ land. The same commit changed the private-room file-key contract
    the doceditor reads the files settings in `getData` for an encrypted
    file only, a failed read counting as absent, and `Editor` renders the
    message in place of the editor without mounting the key hook when the
-   capability is absent.
+   capability is absent. Landed later on 2026-11-05 (`b562fc3fb1`): the
+   server also refuses the editor configuration of an encrypted file of a
+   private room while the capability is false, `DocumentServiceHelper`
+   throwing a `NotSupportedException`, so `GET files/file/{fileId}/openedit`
+   answers 415 with `ErrorMessage_DocServiceEncryptionNotSupported`, and
+   it refuses to create a private room (403, `private-rooms-server-hardening`
+   3.1c). The checker answers the setting
+   `files:docservice:encryption-assume-supported` when it is set (tests and
+   local development; the server's test profile sets it), and caches a probe
+   without an answer (an HTTP error or the timeout) for 30 seconds as
+   false, a clear answer for ten minutes. The doceditor maps any 415 of
+   `openedit` to its `not-supported` error page with the server's message
+   (`openEdit` in `packages/doceditor/src/utils/actions.ts`), so the
+   `notSupported` state of task 2.4 is no longer reached for a file of a
+   private room; task 2.5 shows it for that 415.
 
 3. **Co-editing allowed (decided 2026-10-29).** The Document Server encrypts
    every change with the DEK and stores only ciphertext, and each co-editor's

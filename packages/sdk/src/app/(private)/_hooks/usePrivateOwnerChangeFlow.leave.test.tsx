@@ -44,7 +44,7 @@ import { ShareAccessRights } from "@docspace/shared/enums";
 
 const mocks = vi.hoisted(() => ({
   updateRoomMemberRole: vi.fn(async () => ({})),
-  revokeOwnAccessOnLeave: vi.fn(async () => {}),
+  setFileEncryptionKeys: vi.fn(),
 }));
 
 vi.mock("react-i18next", () => ({
@@ -52,11 +52,10 @@ vi.mock("react-i18next", () => ({
 }));
 
 vi.mock("@docspace/shared/api", () => ({
-  default: { rooms: { updateRoomMemberRole: mocks.updateRoomMemberRole } },
-}));
-
-vi.mock("@docspace/shared/services/private-room/room-member-flows", () => ({
-  revokeOwnAccessOnLeave: mocks.revokeOwnAccessOnLeave,
+  default: {
+    rooms: { updateRoomMemberRole: mocks.updateRoomMemberRole },
+    files: { setFileEncryptionKeys: mocks.setFileEncryptionKeys },
+  },
 }));
 
 vi.mock("../_store/EncryptionIdentityStore", () => ({
@@ -73,7 +72,7 @@ describe("usePrivateOwnerChangeFlow", () => {
     root = null;
   });
 
-  it("Member leaves: the own entries are revoked before the role is dropped", async () => {
+  it("Member leaves", async () => {
     let flow: ReturnType<typeof usePrivateOwnerChangeFlow> | null = null;
     const Probe = () => {
       flow = usePrivateOwnerChangeFlow();
@@ -84,12 +83,9 @@ describe("usePrivateOwnerChangeFlow", () => {
 
     await act(() => flow!.leaveRoom({ roomId: 10, userId: "me" }));
 
-    expect(mocks.revokeOwnAccessOnLeave).toHaveBeenCalledWith(10, "me");
     expect(mocks.updateRoomMemberRole).toHaveBeenCalledWith(10, {
       invitations: [{ id: "me", access: ShareAccessRights.None }],
     });
-    expect(
-      mocks.revokeOwnAccessOnLeave.mock.invocationCallOrder[0],
-    ).toBeLessThan(mocks.updateRoomMemberRole.mock.invocationCallOrder[0]);
+    expect(mocks.setFileEncryptionKeys).not.toHaveBeenCalled();
   });
 });

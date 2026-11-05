@@ -53,7 +53,6 @@ import { arrayBufferToBase64 } from "../../encryption/utils";
 import {
   addMembersToEncryptedRoom,
   backfillEncryptedFilesForRoomMembers,
-  revokeMemberFromEncryptedRoom,
   rewrapMissingFilesForMember,
   validateMembersForEncryption,
 } from "../room-encryption";
@@ -254,6 +253,8 @@ describe("listing the encrypted files of a room", () => {
     Array.from({ length: count }, (_, i) => ({ id: from + i, encrypted: true }));
 
   it("Room listed over several pages", async () => {
+    getRoomMissingFileKeysMock.mockRejectedValue(new Error("not served"));
+    getRoomEncryptionKeysMock.mockResolvedValue([]);
     const SUBFOLDER_A = 901;
     const SUBFOLDER_B = 902;
     getFolderMock.mockImplementation(
@@ -273,9 +274,12 @@ describe("listing the encrypted files of a room", () => {
       },
     );
 
-    const results = await revokeMemberFromEncryptedRoom(ROOM_ID, "bob", {});
+    const { fileResults } = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: {} as IdentityKeyPair,
+    });
 
-    expect(results).toHaveLength(150);
+    expect(fileResults).toHaveLength(150);
     expect(
       getFolderMock.mock.calls.filter(([id]) => id === ROOM_ID),
     ).toHaveLength(2);
@@ -1389,187 +1393,6 @@ describe("validateMembersForEncryption", () => {
     expect(result.skipped).toEqual([
       { id: BOB, displayName: "Bob", reason: "key-mismatch-refused" },
     ]);
-  });
-});
-
-
-describe("revokeMemberFromEncryptedRoom", () => {
-  let alice: IdentityKeyPair;
-  let bob: IdentityKeyPair;
-  /** What the server shows Alice: her own entry only. */
-  let aliceOwnWrap: ServerAccessKeyDto[];
-  /** What the server shows Bob: his own entry only. */
-  let bobOwnWrap: ServerAccessKeyDto[];
-
-  beforeEach(async () => {
-    alice = await generateIdentityKeyPair();
-    bob = await generateIdentityKeyPair();
-    const dek = generateDEK();
-    aliceOwnWrap = await wrapDekForRecipients({
-      dek,
-      senderIdentity: alice,
-      senderUserId: ALICE,
-      recipients: [{ userId: ALICE, publicKey: pubB64(alice) }],
-      fileId: FILE_ID,
-    });
-    bobOwnWrap = await wrapDekForRecipients({
-      dek,
-      senderIdentity: alice,
-      senderUserId: ALICE,
-      recipients: [{ userId: BOB, publicKey: pubB64(bob) }],
-      fileId: FILE_ID,
-    });
-
-    getFolderMock.mockReset();
-    getFileEncryptionAccessMock.mockReset();
-    setFileEncryptionKeysMock.mockReset();
-    setFileEncryptionKeysMock.mockResolvedValue({});
-
-    resetMockIDB();
-    resetTofuStores();
-    vi.stubGlobal("indexedDB", mockIDB);
-  });
-
-  afterEach(() => {
-    vi.unstubAllGlobals();
-  });
-
-  it("returns empty result when revokedUserIds is empty", async () => {
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [], {});
-    expect(result).toEqual([]);
-    expect(getFolderMock).not.toHaveBeenCalled();
-  });
-
-  it("returns empty result when the room has no encrypted files", async () => {
-    getFolderMock.mockResolvedValue({ files: [], folders: [] });
-
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
-
-    expect(result).toEqual([]);
-    expect(getFileEncryptionAccessMock).not.toHaveBeenCalled();
-    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
-  });
-
-  it("Revocation succeeds: another member's entry is not in the caller's read, so nothing is written", async () => {
-    getFolderMock.mockResolvedValue({
-      files: singleFile(FILE_ID),
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: aliceOwnWrap,
-      userKeys: [],
-    });
-
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
-
-    expect(result).toEqual([{ fileId: FILE_ID, success: true }]);
-    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
-  });
-
-  it("Leave succeeds: the leaver's own entry is left out of the write", async () => {
-    getFolderMock.mockResolvedValue({
-      files: singleFile(FILE_ID),
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: bobOwnWrap,
-      userKeys: [],
-    });
-
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
-
-    expect(result).toEqual([{ fileId: FILE_ID, success: true }]);
-    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
-    const [fileId, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
-    expect(fileId).toBe(FILE_ID);
-    expect(keysPosted).toEqual([]);
-  });
-
-  it("accepts a single userId string in addition to an array", async () => {
-    getFolderMock.mockResolvedValue({
-      files: singleFile(FILE_ID),
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: bobOwnWrap,
-      userKeys: [],
-    });
-
-    await revokeMemberFromEncryptedRoom(ROOM_ID, BOB, {});
-
-    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
-    const [, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
-    expect(keysPosted).toEqual([]);
-  });
-
-  it("returns an error result when fileKeys is missing", async () => {
-    getFolderMock.mockResolvedValue({
-      files: singleFile(FILE_ID),
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({ fileKeys: null });
-
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
-
-    expect(result).toEqual([
-      {
-        fileId: FILE_ID,
-        success: false,
-        error: "no encryption keys for file",
-      },
-    ]);
-    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
-  });
-
-  it("records per-file errors and KEEPS processing the rest", async () => {
-    const fileA = 4242;
-    const fileB = 4343;
-    getFolderMock.mockResolvedValue({
-      files: [
-        { id: fileA, encrypted: true },
-        { id: fileB, encrypted: true },
-      ],
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: bobOwnWrap,
-      userKeys: [],
-    });
-    setFileEncryptionKeysMock.mockImplementationOnce(async () => {
-      throw new Error("file A access denied");
-    });
-
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
-
-    expect(result).toHaveLength(2);
-    expect(result[0]).toEqual({
-      fileId: fileA,
-      success: false,
-      error: "file A access denied",
-    });
-    expect(result[1]).toEqual({ fileId: fileB, success: true });
-  });
-
-  it("reports progress 0/N at start and N/N at end", async () => {
-    getFolderMock.mockResolvedValue({
-      files: [
-        { id: 1, encrypted: true },
-        { id: 2, encrypted: true },
-      ],
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: bobOwnWrap,
-      userKeys: [],
-    });
-
-    const progress: Array<[number, number]> = [];
-    await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {
-      onProgress: (p, total) => progress.push([p, total]),
-    });
-
-    expect(progress[0]).toEqual([0, 2]);
-    expect(progress.at(-1)).toEqual([2, 2]);
   });
 });
 

@@ -76,6 +76,10 @@ The client SHALL learn from the server whether the connected Document Server dec
 - **WHEN** the Document Server declares the capability
 - **THEN** the key flow runs as specified and the editor is mounted when keys are ready
 
+#### Scenario: Editor refused by the server
+- **WHEN** the server refuses the editor configuration of an encrypted file of a private room because the Document Server cannot work with encrypted files
+- **THEN** Common:PrivateRoomEditorNotSupported is shown, not the server's message or a format error
+
 ### Requirement: Encrypted files can be co-edited
 The system SHALL let several members edit an encrypted file at the same time. Each co-editor's editor SHALL obtain the DEK from that member's own access entry, and the Document Server SHALL relay and store only changes encrypted with the DEK.
 

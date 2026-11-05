@@ -84,7 +84,10 @@ const defaultFakes = () => ({
   },
   uploadDataStore: { shouldEncryptCurrentUpload: () => false },
   versionHistoryStore: {},
-  filesSettingsStore: { getIcon: () => "icon.svg" },
+  filesSettingsStore: {
+    getIcon: () => "icon.svg",
+    isEncryptedEditingAvailable: true,
+  },
   selectedFolderStore: { id: 1, security: {}, navigationPath: [] },
   publicRoomStore: { isPublicRoom: false },
   oformsStore: {},

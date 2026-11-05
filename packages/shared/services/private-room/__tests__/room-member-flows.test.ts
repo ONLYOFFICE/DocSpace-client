@@ -39,12 +39,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 vi.mock("../room-encryption", () => ({
   addMembersToEncryptedRoom: vi.fn(),
   backfillEncryptedFilesForRoomMembers: vi.fn(),
-  revokeMemberFromEncryptedRoom: vi.fn(),
   rewrapMissingFilesForMember: vi.fn(),
   validateMembersForEncryption: vi.fn(),
-}));
-vi.mock("../../../api/groups", () => ({
-  getGroupById: vi.fn(),
 }));
 vi.mock("../../../api/privacy", () => ({
   getRoomCandidateKeys: vi.fn(),
@@ -54,7 +50,6 @@ vi.mock("../../../api/rooms", () => ({
   setRoomSecurity: vi.fn(),
 }));
 
-import { getGroupById } from "../../../api/groups";
 import {
   getRoomCandidateKeys,
   getRoomMissingFileKeys,
@@ -64,14 +59,12 @@ import type { IdentityKeyPair } from "../../encryption/types";
 import {
   addMembersToEncryptedRoom,
   backfillEncryptedFilesForRoomMembers,
-  revokeMemberFromEncryptedRoom,
   rewrapMissingFilesForMember,
   validateMembersForEncryption,
 } from "../room-encryption";
 import {
   prepareNewOwner,
   retryPendingAccess,
-  revokeRemovedMemberAccess,
   rewrapForInvitedMembers,
   rewrapPendingAccessOfMember,
   sendPrivateRoomInvitations,
@@ -783,91 +776,5 @@ describe("rewrapPendingAccessOfMember", () => {
     expect(second).toBeNull();
     expect((await first)?.level).toBe("success");
     expect(rewrapMissingFilesForMember).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe("revokeRemovedMemberAccess", () => {
-  afterEach(() => {
-    vi.resetAllMocks();
-  });
-
-  it("revokes the entries of every member of a removed group", async () => {
-    vi.mocked(getGroupById).mockResolvedValue({
-      members: [{ id: "u-ann" }, { id: "u-bob" }],
-    } as never);
-    vi.mocked(revokeMemberFromEncryptedRoom).mockResolvedValue([
-      ok(1),
-      ok(2),
-    ] as never);
-
-    const notice = await revokeRemovedMemberAccess(t, ROOM_ID, {
-      id: "g-1",
-      isGroup: true,
-    });
-
-    expect(getGroupById).toHaveBeenCalledWith("g-1", true);
-    expect(revokeMemberFromEncryptedRoom).toHaveBeenCalledWith(
-      ROOM_ID,
-      ["u-ann", "u-bob"],
-      {},
-    );
-    expect(notice).toEqual({
-      level: "success",
-      text: "Common:EncryptedRevokeCompleted",
-    });
-  });
-
-  it("revokes nothing for a group without members", async () => {
-    vi.mocked(getGroupById).mockResolvedValue({ members: [] } as never);
-
-    const notice = await revokeRemovedMemberAccess(t, ROOM_ID, {
-      id: "g-2",
-      isGroup: true,
-    });
-
-    expect(notice).toBeNull();
-    expect(revokeMemberFromEncryptedRoom).not.toHaveBeenCalled();
-  });
-
-  it("revokes a removed user's own entries and reports nothing when the room holds no encrypted file", async () => {
-    vi.mocked(revokeMemberFromEncryptedRoom).mockResolvedValue([] as never);
-
-    const notice = await revokeRemovedMemberAccess(t, ROOM_ID, { id: "u-ann" });
-
-    expect(getGroupById).not.toHaveBeenCalled();
-    expect(revokeMemberFromEncryptedRoom).toHaveBeenCalledWith(
-      ROOM_ID,
-      ["u-ann"],
-      {},
-    );
-    expect(notice).toBeNull();
-  });
-
-  it("warns with the count of files that kept the removed member's entries", async () => {
-    vi.mocked(revokeMemberFromEncryptedRoom).mockResolvedValue([
-      ok(1),
-      failed(2),
-    ] as never);
-
-    const notice = await revokeRemovedMemberAccess(t, ROOM_ID, { id: "u-ann" });
-
-    expect(notice).toEqual({
-      level: "warning",
-      text: `Common:EncryptedRevokePartialFailure ${JSON.stringify({ count: 1 })}`,
-    });
-  });
-
-  it("reports the failed revocation when it rejects", async () => {
-    allowConsoleError(/revoke encrypted access failed/);
-    vi.mocked(revokeMemberFromEncryptedRoom).mockRejectedValue(
-      new Error("down"),
-    );
-
-    const notice = await revokeRemovedMemberAccess(t, ROOM_ID, { id: "u-ann" });
-
-    expect(notice).toEqual({
-      level: "error",
-      text: "Common:EncryptedRevokeFailed",
-    });
   });
 });

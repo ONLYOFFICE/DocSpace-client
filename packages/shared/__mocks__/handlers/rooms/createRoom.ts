@@ -63,6 +63,12 @@ export type CreateRoomHandlerOptions = {
   initial?: CreatedRoomRecord[];
   startId?: number;
   handle?: { current: CreateRoomHandlerHandle | null };
+  /**
+   * `false` serves a Document Server without the crypto library, which
+   * DocumentServiceEncryptionChecker.IsSupportedAsync reports; true when
+   * left out, as the files-settings mock answers.
+   */
+  docServiceEncryptionSupported?: boolean;
 };
 
 const okResponse = <T>(response: T, status = 200): Response =>
@@ -71,9 +77,17 @@ const okResponse = <T>(response: T, status = 200): Response =>
     { headers: { "Content-Type": "application/json" } },
   );
 
-const errorResponse = (status: number, message: string): Response =>
+const errorResponse = (
+  status: number,
+  message: string,
+  type?: string,
+): Response =>
   new Response(
-    JSON.stringify({ error: { message }, status: 1, statusCode: status }),
+    JSON.stringify({
+      error: { message, ...(type && { type }) },
+      status: 1,
+      statusCode: status,
+    }),
     { status, headers: { "Content-Type": "application/json" } },
   );
 
@@ -123,10 +137,22 @@ const buildHandlers = (port: string, opts: CreateRoomHandlerOptions) => {
    * private room refuses with 400 "Bad request." indexing, or a lifetime
    * or watermark whose `enabled` is not false, an object without the flag
    * counting as enabled. The key check of the creator is not mirrored.
+   * Before that, since b562fc3fb1, DemandPrivateRoomCanBeCreatedAsync
+   * refuses a private room while the Document Server cannot encrypt with
+   * an InvalidOperationException, which CustomExceptionHandler answers
+   * with 403, the resource message and the exception type.
    */
   const create = http.post(url, async ({ request }) => {
     const body = (await request.json()) as CreateRoomBody;
     requests.push({ method: "POST", url, body });
+
+    if (body.private && opts.docServiceEncryptionSupported === false) {
+      return errorResponse(
+        403,
+        "The document server connected to this portal cannot work with encrypted files",
+        "System.InvalidOperationException",
+      );
+    }
 
     if (
       body.private &&

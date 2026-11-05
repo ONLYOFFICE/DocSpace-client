@@ -55,17 +55,38 @@ vi.mock("SRC_DIR/i18n", () => ({
   default: { t: (k: string) => k, exists: () => true, language: "en" },
 }));
 
+const getSettingsFiles = vi.hoisted(() => vi.fn());
+vi.mock("@docspace/shared/api", async (io) => {
+  const actual = (await io()) as { default: Record<string, object> };
+  return {
+    ...actual,
+    default: {
+      ...actual.default,
+      files: { ...actual.default.files, getSettingsFiles },
+    },
+  };
+});
+
 const CreateEditRoomStore = (await import("../CreateEditRoomStore")).default;
 const { toastr } = await import("@onlyoffice/apps-ui-kit/components/toast");
 
 const t = ((key: string) => key) as unknown as TFunction;
 
 /** CreateEditRoomStore with only the deps onCreateRoom touches before the room exists. */
-const createStore = (userStore: Record<string, unknown>) => {
+const createStore = (
+  userStore: Record<string, unknown>,
+  { editorsEncrypt = true }: { editorsEncrypt?: boolean } = {},
+) => {
   const createRoom = vi.fn(async () => ({ id: 77 }));
   const store = new CreateEditRoomStore(
     ...([
-      { createRoom, selection: [], bufferSelection: null, userStore },
+      {
+        createRoom,
+        selection: [],
+        bufferSelection: null,
+        userStore,
+        filesSettingsStore: { isEncryptedEditingAvailable: editorsEncrypt },
+      },
       {
         processCreatingRoomFromData: false,
         setProcessCreatingRoomFromData: vi.fn(),
@@ -160,5 +181,52 @@ describe("CreateEditRoomStore.onCreateRoom for a private room", () => {
 
     expect(getEncryptionKeys).not.toHaveBeenCalled();
     expect(createRoom).toHaveBeenCalledTimes(1);
+  });
+
+  it("Document Server without encryption", async () => {
+    const getEncryptionKeys = vi.fn();
+    const { store, createRoom } = createStore(
+      { encryptionKeys: [{ id: "key-1" }], getEncryptionKeys },
+      { editorsEncrypt: false },
+    );
+
+    await store.onCreateRoom(t);
+
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomDocServiceNotSupported",
+    );
+    expect(getEncryptionKeys).not.toHaveBeenCalled();
+    expect(createRoom).not.toHaveBeenCalled();
+  });
+
+  it("Creation refused by the server", async () => {
+    getSettingsFiles.mockResolvedValue({ docServiceEncryptionSupported: false });
+    const { store, createRoom } = createStore({
+      encryptionKeys: [{ id: "key-1" }],
+    });
+    createRoom.mockRejectedValue({ response: { status: 403 } });
+
+    await store.onCreateRoom(t);
+
+    expect(getSettingsFiles).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomDocServiceNotSupported",
+    );
+  });
+
+  it("shows the server's error for a 403 while the editors can encrypt", async () => {
+    getSettingsFiles.mockResolvedValue({ docServiceEncryptionSupported: true });
+    const refusal = { response: { status: 403 } };
+    const { store, createRoom } = createStore({
+      encryptionKeys: [{ id: "key-1" }],
+    });
+    createRoom.mockRejectedValue(refusal);
+
+    await store.onCreateRoom(t);
+
+    expect(toastr.error).toHaveBeenCalledWith(refusal);
+    expect(toastr.error).not.toHaveBeenCalledWith(
+      "Common:PrivateRoomDocServiceNotSupported",
+    );
   });
 });

@@ -42,7 +42,6 @@ import api from "@docspace/shared/api";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
-import { revokeOwnAccessOnLeave } from "@docspace/shared/services/private-room/room-member-flows";
 
 import {
   registerCryptoOperation,
@@ -63,8 +62,8 @@ type UsePrivateOwnerChangeFlowReturn = {
   /** Transfer ownership via files/owner; server handles ACL/file_keys handoff. */
   changeOwner: (args: ChangeOwnerArgs) => Promise<boolean>;
   /**
-   * Leave the room: the user's own file-key entries are revoked first, then
-   * their membership (access=None), as FilesActionsStore.onLeaveRoom does.
+   * Leave the room: drops the user's membership (access=None), as
+   * FilesActionsStore.onLeaveRoom does.
    */
   leaveRoom: (args: LeaveRoomArgs) => Promise<void>;
   isLoading: boolean;
@@ -96,7 +95,6 @@ export const usePrivateOwnerChangeFlow =
     // Spec: private-rooms/sdk-surface, "Leaving a private room revokes own access first"
     const leaveRoom = React.useCallback(
       async ({ roomId, userId }: LeaveRoomArgs): Promise<void> => {
-        await revokeOwnAccessOnLeave(roomId, userId);
         await api.rooms.updateRoomMemberRole(roomId, {
           invitations: [{ id: userId, access: ShareAccessRights.None }],
         });

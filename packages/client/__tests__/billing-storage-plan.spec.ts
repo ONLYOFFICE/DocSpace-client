@@ -57,6 +57,8 @@ const STORAGE_ROUTE = "/billing/addons/disk-storage";
 const CALCULATE_PATH = "portal/payment/calculatewallet";
 const UPDATE_WALLET_PATH = "portal/payment/updatewallet";
 const REQUEST_PATH = "portal/payment/request";
+const DEPOSIT_PATH = "portal/payment/deposit";
+const CHECKOUT_PATH = "portal/payment/checkoutsetupurl";
 // The size input is debounced and the upgrade price comes from the server.
 const AFTER_ESTIMATE = { timeout: 15000 };
 
@@ -276,6 +278,50 @@ test.describe("Storage plan dialog", () => {
       AFTER_ESTIMATE,
     );
     await expect(page.getByText("$10.00/month (100 GB)")).toBeVisible();
+  });
+
+  // A downgrade costs nothing now, so an inactive card must not send it to Stripe:
+  // checkout would charge the full price and the wait for the new size never ends.
+  test("with an inactive card a downgrade is scheduled without Stripe checkout", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, { card: "unlinked" });
+    const state: StorageState = { size: 200, quota: {} };
+    mockRequest.use(...purchaseHandlers(state));
+    const checkouts = trackRequests(page, "GET", CHECKOUT_PATH);
+    const deposits = trackRequests(page, "POST", DEPOSIT_PATH);
+    const purchases = trackRequests(page, "PUT", UPDATE_WALLET_PATH);
+    let popups = 0;
+    page.on("popup", () => {
+      popups += 1;
+    });
+
+    await openStorage(page, baseUrl);
+    await openEditDialog(page);
+    await fillSize(page, "100");
+
+    await expect(dialog(page).getByText("Reduced storage")).toBeVisible(
+      AFTER_ESTIMATE,
+    );
+    await expect(okButton(page)).toHaveText("Update");
+    await expect(okButton(page)).toBeEnabled(AFTER_ESTIMATE);
+    // The page itself fetches a checkout link for the unlinked-card banner.
+    const checkoutsBeforeBuy = checkouts.length;
+
+    await okButton(page).click();
+
+    await expect.poll(() => purchases.length).toBe(1);
+    expect(purchases[0]).toContain('"storage":100');
+    expect(purchases[0]).toContain('"productQuantityType":0');
+    await expect(page.getByText("Change scheduled: Storage adjustment")).toBeVisible(
+      AFTER_ESTIMATE,
+    );
+    expect(checkouts).toHaveLength(checkoutsBeforeBuy);
+    expect(deposits).toHaveLength(0);
+    expect(popups).toBe(0);
+    await expect(page.getByText("Unexpected error")).toHaveCount(0);
   });
 
   test("less than 100 GB is refused", async ({ page, baseUrl, mockRequest }) => {

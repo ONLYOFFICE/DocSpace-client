@@ -430,6 +430,10 @@ test.describe("Profile > Keys Management: keyboard only", () => {
       await page.keyboard.type(PASSPHRASE);
       await page.keyboard.press("Tab");
       await expect(
+        create.getByRole("button", { name: "Show", exact: true }).first(),
+      ).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(
         create.getByLabel("Confirm passphrase", { exact: true }),
       ).toBeFocused();
       await page.keyboard.type(PASSPHRASE);
@@ -555,6 +559,13 @@ test.describe("Profile > Keys Management: keyboard only", () => {
     ).toBeFocused({ timeout: 5_000 });
     await page.keyboard.type(PASSPHRASE);
     await page.keyboard.press("Tab");
+    await expect(
+      create.getByRole("button", { name: "Show", exact: true }).first(),
+    ).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(
+      create.getByLabel("Confirm passphrase", { exact: true }),
+    ).toBeFocused();
     await page.keyboard.type(PASSPHRASE);
     await page.keyboard.press("Enter");
 

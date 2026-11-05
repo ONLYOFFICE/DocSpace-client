@@ -72,5 +72,9 @@ describe("MultiInputGroup", () => {
 
     expect(onAdd).toHaveBeenCalledWith("redirect_uris", URL_VALUE);
     expect(input).toHaveFocus();
+    // Taking the focus back must not bring the add block back for the value
+    // just added.
+    expect(input).toHaveValue("");
+    expect(add).not.toBeVisible();
   });
 });

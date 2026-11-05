@@ -103,7 +103,6 @@ const ContinuePortalForm = () => {
           scale
           size={ButtonSize.medium}
           label={t("Reactivate")}
-          tabIndex={1}
           onClick={onRestoreClick}
           testId="continue_reactivate_button"
         />
@@ -111,7 +110,6 @@ const ContinuePortalForm = () => {
           scale
           size={ButtonSize.medium}
           label={t("Common:CancelButton")}
-          tabIndex={1}
           onClick={onCancelClick}
           testId="continue_cancel_button"
         />

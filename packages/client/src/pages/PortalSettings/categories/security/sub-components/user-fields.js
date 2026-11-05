@@ -44,7 +44,7 @@ import {
 	InputType,
 } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
-import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 import { useTranslation } from "react-i18next";
 
 import styles from "./user-fields.module.scss";
@@ -79,14 +79,9 @@ const UserFields = (props) => {
 	const [errors, setErrors] = useState(new Array(inputs.length).fill(false));
 	const prevInputsCount = usePrevious(inputs.length);
 
-	// "Add" is an action link with no href, so it is a button to the keyboard;
-	// the press is consumed so that what it adds does not take it as well.
-	const onAddKeyDown = (e) => {
-		if (e.key !== "Enter" && e.key !== " ") return;
-		e.preventDefault();
-		consumeKey(e);
-		onClickAdd();
-	};
+	// "Add" is a link with no href, so it is a button to the keyboard; the
+	// press is consumed so that what it adds does not take it as well.
+	const onAddKeyDown = (e) => activateOnButtonKey(e, onClickAdd);
 
 	useEffect(() => {
 		if (inputs.length > prevInputsCount) setErrors([...errors, false]);

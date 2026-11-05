@@ -44,6 +44,7 @@ import { useRowFocus } from "../useRowFocus";
 // wrapper. Outside the list, an info panel draws a files item of its own.
 const buildPage = () => {
   document.body.innerHTML = `
+   <div id="sectionScroll">
     <div class="section-scroll">
      <div data-testid="list" tabindex="-1">
       <div class="section-sticky-container">
@@ -63,6 +64,7 @@ const buildPage = () => {
       </div>
      </div>
     </div>
+   </div>
     <div class="section-scroll info-panel-scroll">
       <div class="files-item">
         <button type="button" data-testid="panel-button">panel</button>
@@ -268,6 +270,92 @@ describe("useRowFocus", () => {
       act(() => byTestId("b-menu").focus());
 
       expect(byTestId("b-menu")).toHaveFocus();
+    });
+  });
+
+  // The mobile layout scrolls the page and renders no section scroller: the
+  // list is found by the wrapper the section body puts round it. Without
+  // it, Tab into the list landed on the first row's name link with no row
+  // selected, and the arrows moved the selection while the focus stayed on
+  // that link - Enter opened the link's item, not the selected one. On a
+  // touch device the floating create button's menu, rendered before the list
+  // even while closed, has a scroller of the section's class: no list either.
+  describe("without a section scroller (the mobile layout)", () => {
+    const CARET_B = { id: "row-b", fileExst: "docx" };
+
+    beforeEach(() => {
+      document.body.innerHTML = `
+        <div class="section-scroll" data-testid="create-menu"></div>
+        <input data-testid="search" />
+        <div data-files-list style="display: contents">
+          <div id="file_1" class="files-item row-a_docx">
+            <div data-testid="a-card">
+              <a href="#a" data-testid="a-link">A</a>
+              <button type="button" data-testid="a-menu">menu</button>
+            </div>
+          </div>
+          <div id="file_2" class="files-item row-b_docx">
+            <div data-testid="b-card">
+              <a href="#b" data-testid="b-link">B</a>
+            </div>
+          </div>
+        </div>
+        <button type="button" data-testid="outside">outside</button>
+      `;
+    });
+
+    const render = (onRowFocus = vi.fn()) =>
+      renderHook(({ caret }) => useRowFocus(caret, onRowFocus), {
+        initialProps: { caret: null as typeof CARET_A | null },
+      });
+
+    it("takes the focus from a row's control to the caret's row", async () => {
+      const hook = render();
+      act(() => byTestId("a-link").focus());
+
+      fireEvent.keyDown(byTestId("a-link"), { key: "ArrowDown" });
+      hook.rerender({ caret: CARET_B });
+
+      await waitFor(() => expect(byTestId("b-card")).toHaveFocus());
+    });
+
+    // The section's body holds the focus once the page loads, round the list
+    // and the header alike; there is no scroller for the arrows to focus.
+    it("takes the focus from a container round the list to the caret's row", async () => {
+      const list = document.querySelector("[data-files-list]")!;
+      const container = document.createElement("div");
+      container.tabIndex = -1;
+      list.replaceWith(container);
+      container.append(list);
+      const hook = render();
+      act(() => container.focus());
+
+      fireEvent.keyDown(container, { key: "ArrowDown" });
+      hook.rerender({ caret: CARET_B });
+
+      await waitFor(() => expect(byTestId("b-card")).toHaveFocus());
+    });
+
+    it("lands Tab into the list on a row as a whole and selects it", () => {
+      const onRowFocus = vi.fn();
+      render(onRowFocus);
+      act(() => byTestId("search").focus());
+
+      fireEvent.keyDown(byTestId("search"), { key: "Tab" });
+
+      expect(byTestId("a-card")).toHaveFocus();
+      expect(onRowFocus).toHaveBeenCalledWith({ id: "1", isFolder: false });
+    });
+
+    it("releases the row when the focus moves on within the list", async () => {
+      const hook = render();
+      fireEvent.keyDown(window, { key: "ArrowDown" });
+      hook.rerender({ caret: CARET_A });
+      await waitFor(() => expect(byTestId("a-card")).toHaveFocus());
+
+      act(() => byTestId("b-link").focus());
+
+      expect(byTestId("a-card")).not.toHaveAttribute("data-row-focus");
     });
   });
 

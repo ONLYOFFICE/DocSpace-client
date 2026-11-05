@@ -139,6 +139,26 @@ const expectFocusTrapped = async (
   }
 };
 
+// From the container's first stop, Tab must reach every next stop in DOM
+// order, to the last one: no positive tabIndex sending it ahead.
+const expectTabInDomOrder = async (page: Page, container: Locator) => {
+  const stops = await markStops(container);
+  // A dialog of one or two stops would make the walk check nothing.
+  expect(stops.length).toBeGreaterThan(2);
+
+  await container.locator('[data-trap-stop="0"]').focus();
+  for (let index = 1; index < stops.length; index += 1) {
+    await page.keyboard.press("Tab");
+    const stop = await page.evaluate(() =>
+      document.activeElement?.getAttribute("data-trap-stop"),
+    );
+    expect(
+      stop,
+      `Tab from ${stops[index - 1]} went to ${await describeFocus(page)}, not ${stops[index]}`,
+    ).toBe(String(index));
+  }
+};
+
 // Tabs forward until the focused element has this test id.
 const tabToTestId = async (page: Page, testId: string, limit = 80) => {
   for (let i = 0; i < limit; i += 1) {
@@ -283,6 +303,28 @@ test.describe("Focus trap in modal dialogs", () => {
     await page.keyboard.press("Enter");
     await expect(roomTypes.first()).toBeVisible();
     await expectFocusTrapped(page, modal(page, roomTypes.first()), 40);
+  });
+
+  // A data room's settings carried positive tabIndex values in the middle of
+  // the dialog: the retention field (1) came before the name (2), and from
+  // the tags (2) Tab went to Cancel (5), past the five toggles between them.
+  test("Tab goes through a new data room's settings in their order", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(roomTagsHandler(TEST_PORT));
+    await openRooms(page, baseUrl);
+    await page.getByTestId("main-button").click();
+    await page
+      .getByTestId("room-type-list-item")
+      .filter({ hasText: "Virtual Data Room" })
+      .click();
+
+    const save = page.getByTestId("create_room_dialog_save");
+    await expect(save).toBeVisible();
+
+    await expectTabInDomOrder(page, modal(page, save));
   });
 
   test("the filter panel keeps the focus while it is open", async ({

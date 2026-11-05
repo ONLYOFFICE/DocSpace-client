@@ -493,7 +493,6 @@ const CreateRoomDialog = ({
           <ModalDialog.Footer>
             <Button
               id="shared_create-room-modal_submit"
-              tabIndex={5}
               label={t("Common:Create")}
               size="normal"
               primary
@@ -505,7 +504,6 @@ const CreateRoomDialog = ({
             />
             <Button
               id="shared_create-room-modal_cancel"
-              tabIndex={5}
               label={t("Common:CancelButton")}
               size="normal"
               scale

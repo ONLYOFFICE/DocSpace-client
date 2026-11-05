@@ -5,7 +5,7 @@ paths:
   - "packages/shared/**/*.test.*"
   - "packages/shared/**/__tests__/**"
   - "packages/doceditor/src/**/*.test.*"
-  - "packages/*/vitest.config.ts"
+  - "packages/*/vitest.config.mts"
   - "packages/*/vitest/**"
 ---
 
@@ -46,6 +46,10 @@ paths:
   scope `vi.fn()` implementations are cleared between tests.
 - `console.error` containing `[ENCRYPTION]` **fails the test**; opt out with
   the global `allowConsoleError(/pattern/)`.
+- `silent: "passed-only"` in all four configs: console output of a passing
+  test is dropped, a failing test still prints its logs. A `console.log` you
+  add while debugging stays invisible until the test fails — run that file
+  with `--silent=false` to see it.
 - `__mocks__/handlers/**` + `__mocks__/e2e/**` are MSW for Playwright only;
   unit tests mock API modules with `vi.mock` instead.
 
@@ -156,11 +160,17 @@ pnpm test:doceditor   # doceditor
 cd packages/client && pnpm exec vitest run src/store/filesStore   # single path
 ```
 
-All four suites are part of the blocking lefthook pre-push gate.
+All four suites are part of the blocking lefthook pre-push gate, run in one
+`nx run-many -t tsc lint test` call and cached by Nx: a suite reruns only when
+its own package, the non-test, non-story files of a package it depends on,
+`pnpm-lock.yaml` / `pnpm-workspace.yaml`, `public/images`, or the root JSON it
+imports (`locales/.constants`, `locales/en`, `scripts/config.json`) changed —
+see `CLAUDE.md` → "Git hooks". A test that starts reading another root
+`public/` file needs it added to the `test` inputs in `nx.json`.
 
 Vitest strips types without checking them: run `pnpm exec tsc --noEmit -p
-tsconfig.json` in the package before committing a test, or the pre-push
-`pnpm run tsc` finds the error later.
+tsconfig.json` in the package before committing a test, or the pre-push `tsc`
+task finds the error later.
 
 ## Snapshots
 

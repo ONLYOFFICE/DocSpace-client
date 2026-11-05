@@ -160,6 +160,7 @@ import {
 
 import styles from "./DocsLayout.module.scss";
 import { makeDropUpload } from "./drop-upload";
+import { refusesEncryptedOpen } from "./open-encrypted";
 
 type DocsLayoutProps = {
   folders: TFolder[];
@@ -503,12 +504,13 @@ const DocsLayoutCore = observer(
     };
 
     const docsSettingsStore = useDocsSettingsStore();
+    const { filesSettings: portalFilesSettings } = docsSettingsStore;
     const storeOriginalFiles =
-      docsSettingsStore.filesSettings?.storeOriginalFiles ?? false;
+      portalFilesSettings?.storeOriginalFiles ?? false;
 
     const openFileHandler = React.useCallback(
       (file: TFileItem, preview?: boolean) => {
-        if (isPrivate && file.encrypted) {
+        if (refusesEncryptedOpen(isPrivate, file, portalFilesSettings)) {
           toastr.info(t("Common:PrivateRoomEditorNotSupported"));
           return;
         }
@@ -518,7 +520,7 @@ const DocsLayoutCore = observer(
         }
         openFileInEditor(file, preview);
       },
-      [openFileInEditor, requestConvert, isPrivate, t],
+      [openFileInEditor, requestConvert, isPrivate, portalFilesSettings, t],
     );
     const shareHandler = React.useCallback(
       (item: TFileItem | TFolderItem) => {

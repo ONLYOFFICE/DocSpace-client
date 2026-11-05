@@ -51,6 +51,7 @@ vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/files", () => ({
 
 import DocsLayout from ".";
 import { makeDropUpload } from "./drop-upload";
+import { refusesEncryptedOpen } from "./open-encrypted";
 
 type DocsLayoutProps = Parameters<typeof DocsLayout>[0];
 
@@ -112,5 +113,32 @@ describe("DocsLayout", () => {
 
     expect(privatePage.props.ai).toBeUndefined();
     expect(privatePage.type).not.toBe(genericPage.type);
+  });
+});
+
+describe("refusesEncryptedOpen", () => {
+  const encrypted = { encrypted: true };
+
+  it("Capability absent", () => {
+    expect(refusesEncryptedOpen(true, encrypted, null)).toBe(true);
+    expect(refusesEncryptedOpen(true, encrypted, {})).toBe(true);
+    expect(
+      refusesEncryptedOpen(true, encrypted, {
+        docServiceEncryptionSupported: false,
+      }),
+    ).toBe(true);
+  });
+
+  it("Capability present", () => {
+    expect(
+      refusesEncryptedOpen(true, encrypted, {
+        docServiceEncryptionSupported: true,
+      }),
+    ).toBe(false);
+  });
+
+  it("Plain file, or a page that is not private", () => {
+    expect(refusesEncryptedOpen(true, { encrypted: false }, null)).toBe(false);
+    expect(refusesEncryptedOpen(false, encrypted, null)).toBe(false);
   });
 });

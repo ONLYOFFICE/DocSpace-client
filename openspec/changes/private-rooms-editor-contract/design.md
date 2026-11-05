@@ -872,7 +872,13 @@ land. The same commit changed the private-room file-key contract
    files-settings mock answers true, and `isEncryptedEditingAvailable` of
    `packages/shared/services/private-room/editor-capability.ts` (absent
    counts as false) is read by the client `FilesSettingsStore`, the SDK
-   `DocsSettingsStore` and the doceditor `useFilesSettings`.
+   `DocsSettingsStore` and the doceditor `useFilesSettings`. Task 2.3
+   (2026-11-05): the client refuses in `openDocEditorImpl` before any key
+   flow, with Common:PrivateRoomEditorNotSupported as an info toast and no
+   navigation; the SDK decision moved to `refusesEncryptedOpen` of
+   `docs-layout/open-encrypted.ts`, fed the files settings of
+   `DocsSettingsStore`, so an encrypted file opens through the same path
+   as a plain one once the capability is present.
 
 3. **Co-editing allowed (decided 2026-10-29).** The Document Server encrypts
    every change with the DEK and stores only ciphertext, and each co-editor's

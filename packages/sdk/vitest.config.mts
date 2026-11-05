@@ -69,6 +69,13 @@ export default defineConfig({
       "@": path.resolve(import.meta.dirname, "./src"),
       "@docspace/shared": path.resolve(import.meta.dirname, "../shared"),
       PUBLIC_DIR: path.resolve(import.meta.dirname, "../../public"),
+      // As in shared and client: the real ReactSVG fetches and injects the
+      // file on a timer, which can fire after the test's jsdom is torn down
+      // ("SVGSVGElement is not defined") when the suites run in parallel.
+      "react-svg": path.resolve(
+        import.meta.dirname,
+        "../shared/__mocks__/reactSvgMock.tsx",
+      ),
     },
   },
 });

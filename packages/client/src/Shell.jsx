@@ -1083,7 +1083,7 @@ const Shell = ({ page = "home", ...rest }) => {
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
-          <AiPresetsBridge />
+          <AiPresetsBridge enabled={canUseAi} />
 
           <AiChatVisibilityBridge onChange={setIsChatPanelVisible} />
           {layout}

@@ -368,9 +368,10 @@ test.describe("Files list: the focus follows the keyboard", () => {
   });
 
   // A selection of several made with the pointer leaves no caret, so Tab
-  // into the list lands on the first row on screen - outside it. The focus
-  // and the selection used to disagree: the row focused, two others ticked.
-  test("Tab into the list onto a row outside a selection of several selects that row", async ({
+  // into the list lands on the first row on screen - outside it. That row only
+  // stands in for the missing caret, no choice of the user's, so it must not
+  // undo the selection the user made.
+  test("Tab into the list onto a row outside a selection of several keeps that selection", async ({
     page,
   }) => {
     // The row's checkbox takes the place of its icon only under the pointer:
@@ -393,7 +394,7 @@ test.describe("Files list: the focus follows the keyboard", () => {
     }
 
     expect(where.row).toBe(fileRow(1));
-    await expect.poll(() => selectedFiles(page)).toEqual([1]);
+    await expect.poll(() => selectedFiles(page)).toEqual([2, 3]);
   });
 
   test("the list's hotkeys still work with the focus on a row's name", async ({

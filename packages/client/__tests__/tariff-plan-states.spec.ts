@@ -550,15 +550,15 @@ test.describe("Tariff plan downgrade refused by quota", () => {
 
 test.describe("Not-paid portal", () => {
   // A linked but expired card cannot be charged: a deposit is refused with 403
-  // "Customer payment method is not set", so the repurchase has to go through Stripe.
+  // "Customer payment method is not set", so a top-up has to go through Stripe.
   test("an inactive card sends the repurchase to Stripe checkout instead of a deposit", async ({
     page,
     baseUrl,
     mockRequest,
   }) => {
     useSaasBilling(mockRequest, { tariff: "unpaid", card: "expired" });
-    // Enough credits: only the card decides that Stripe is needed.
-    mockRequest.use(walletServicesHandler(), balanceHandler(10_000));
+    // No credits: the purchase needs a top-up, and the card cannot pay for it.
+    mockRequest.use(walletServicesHandler(), balanceHandler(0));
     const deposits: string[] = [];
     const purchases: string[] = [];
     page.on("request", (request) => {
@@ -579,6 +579,34 @@ test.describe("Not-paid portal", () => {
     expect(deposits).toHaveLength(0);
     expect(purchases).toHaveLength(0);
   });
+
+  // The card only matters for a top-up: credits that cover the tariff pay for
+  // it from the wallet, as they do with a linked card.
+  test("an inactive card with enough credits charges the wallet instead of Stripe", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, { tariff: "unpaid", card: "expired" });
+    mockRequest.use(walletServicesHandler(), balanceHandler(10_000));
+    const deposits: string[] = [];
+    const purchases: string[] = [];
+    page.on("request", (request) => {
+      const path = new URL(request.url()).pathname;
+      if (path.endsWith("/portal/payment/deposit")) deposits.push(path);
+      if (path.endsWith("/portal/payment/updatewallet")) purchases.push(path);
+    });
+    await page.clock.setSystemTime(PAID_NOW);
+
+    await page.goto(`${baseUrl}/billing/tariff-plan`);
+    await expect(planButton(page)).toContainText("Upgrade now");
+    await expect(planButton(page)).toBeEnabled();
+    await planButton(page).click();
+
+    await expect.poll(() => purchases.length).toBe(1);
+    await expect(modalWith(page, "Continue to Stripe")).toHaveCount(0);
+    expect(deposits).toHaveLength(0);
+  });
 });
 
 test.describe("Startup plan", () => {
@@ -593,6 +621,9 @@ test.describe("Startup plan", () => {
       payer: "none",
       card: "unlinked",
     });
+    // A first purchase starts from an empty wallet: only a short balance
+    // sends it through Stripe, enough credits would be charged directly.
+    mockRequest.use(balanceHandler(0));
     await page.clock.setSystemTime(PAID_NOW);
 
     await page.goto(`${baseUrl}/billing/tariff-plan`);
@@ -623,6 +654,9 @@ test.describe("Startup plan", () => {
       payer: "none",
       card: "unlinked",
     });
+    // A first purchase starts from an empty wallet: only a short balance
+    // sends it through Stripe, enough credits would be charged directly.
+    mockRequest.use(balanceHandler(0));
     await page.clock.setSystemTime(PAID_NOW);
 
     await page.goto(`${baseUrl}/billing/tariff-plan`);
@@ -656,6 +690,7 @@ test.describe("Startup plan", () => {
       isDelayedPaymentMethod: true,
     });
     mockRequest.use(
+      balanceHandler(0),
       http.get(apiUrl("portal/payment/checkoutsetupurl"), () =>
         jsonResponse("https://example.com/checkout"),
       ),
@@ -666,7 +701,9 @@ test.describe("Startup plan", () => {
     await planButton(page).click();
 
     const dialog = modalWith(page, "Continue to Stripe");
-    await dialog.getByTestId("top_up_amount_input").first().fill("25");
+    // The amount starts at the shortfall, which is also the least the dialog
+    // accepts: the wallet is empty, so that is the whole price.
+    await expect(dialog.getByTestId("top_up_amount_input").first()).not.toHaveValue("");
 
     const checkout = page.waitForEvent("popup");
     await dialog.getByTestId("first_topup_continue_to_stripe").click();
@@ -687,6 +724,7 @@ test.describe("Startup plan", () => {
       card: "unlinked",
     });
     mockRequest.use(
+      balanceHandler(0),
       http.get(apiUrl("portal/payment/checkoutsetupurl"), () =>
         jsonResponse("https://example.com/checkout"),
       ),
@@ -697,7 +735,9 @@ test.describe("Startup plan", () => {
     await planButton(page).click();
 
     const dialog = modalWith(page, "Continue to Stripe");
-    await dialog.getByTestId("top_up_amount_input").first().fill("25");
+    // The amount starts at the shortfall, which is also the least the dialog
+    // accepts: the wallet is empty, so that is the whole price.
+    await expect(dialog.getByTestId("top_up_amount_input").first()).not.toHaveValue("");
 
     const checkout = page.waitForEvent("popup");
     await dialog.getByTestId("first_topup_continue_to_stripe").click();

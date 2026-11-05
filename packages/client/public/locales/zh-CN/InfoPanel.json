@@ -3,7 +3,7 @@
   "AllHistory": "全部历史记录",
   "AndMoreLabel": "以及<1>另外 {{count}} 个</1>",
   "Data": "数据",
-  "ExpectUsers": "等待用户",
+  "ExpectUsers": "待处理用户",
   "ExportHistory": "导出历史记录",
   "ExportHistoryDescription": "将活动下载为 .xlsx 电子表格。",
   "FeedLinkWasDeleted": "已删除链接",

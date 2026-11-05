@@ -3,7 +3,7 @@
   "AllHistory": "Todo o histórico",
   "AndMoreLabel": "e <1>{{count}} mais</1>",
   "Data": "Dados",
-  "ExpectUsers": "Esperar usuários",
+  "ExpectUsers": "Usuários pendentes",
   "ExportHistory": "Exportar o histórico",
   "ExportHistoryDescription": "Baixe a atividade como uma planilha .xlsx.",
   "FeedLinkWasDeleted": "O link foi excluído",

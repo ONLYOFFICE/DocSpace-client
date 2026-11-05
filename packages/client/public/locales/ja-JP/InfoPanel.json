@@ -3,7 +3,7 @@
   "AllHistory": "すべての履歴",
   "AndMoreLabel": "と、<1>{{count}}もっと</1>",
   "Data": "データ",
-  "ExpectUsers": "期待されているユーザー",
+  "ExpectUsers": "保留中のユーザー",
   "ExportHistory": "履歴のエクスポート",
   "ExportHistoryDescription": "アクティビティを.xlsx形式のスプレッドシートとしてダウンロードします。",
   "FeedLinkWasDeleted": "リンクが削除されました",

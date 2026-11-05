@@ -454,6 +454,100 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors S
   });
 });
 
+describe("encryptedFiles mock — GET /privacyroom/{roomId}/access/missing (mirrors PrivacyRoomControllerCommon.GetRoomMissingFileKeys)", () => {
+  const CAROL_ID = "33333333-3333-3333-3333-333333333333";
+  const memberKey = (userId: string) => ({
+    id: `${userId}-key`,
+    userId,
+    publicKey: `pk-${userId}`,
+    privateKeyEnc: "",
+    date: "2026-01-01T00:00:00",
+    cryptoEngineId: "{DC522726-5E0E-43E5-AA02-8EA156BECBC5}",
+  });
+  const missingUrl = (roomId: number, ...userIds: string[]) => {
+    const params = new URLSearchParams();
+    for (const userId of userIds) params.append("userIds", userId);
+    const query = params.toString();
+    return `${BASE_URL}:${PORT}/${API_PREFIX}/privacyroom/${roomId}/access/missing${query ? `?${query}` : ""}`;
+  };
+  const ask = async (roomId: number, ...userIds: string[]) => {
+    const res = await fetch(missingUrl(roomId, ...userIds));
+    return { status: res.status, body: await res.json() };
+  };
+
+  beforeEach(() => {
+    handle.current!.setRoomUserKeys([memberKey(ALICE_ID), memberKey(BOB_ID)]);
+    handle.current!.setFiles([
+      {
+        id: 21,
+        title: "one.txt",
+        encrypted: true,
+        fileKeys: [
+          { userId: ALICE_ID, publicKeyId: "alice-pk", privateKeyEnc: "a" },
+        ],
+      },
+      {
+        id: 22,
+        title: "two.txt",
+        encrypted: true,
+        fileKeys: [
+          { userId: ALICE_ID, publicKeyId: "alice-pk", privateKeyEnc: "a" },
+          { userId: BOB_ID, publicKeyId: "bob-pk", privateKeyEnc: "b" },
+        ],
+      },
+      { id: 23, title: "plain.txt", encrypted: false, fileKeys: [] },
+    ]);
+  });
+
+  it("Member without a key on one file", async () => {
+    const { status, body } = await ask(ROOM_ID, BOB_ID);
+    expect(status).toBe(200);
+    expect(body.response).toEqual([{ userId: BOB_ID, fileIds: [21] }]);
+
+    await fetch(FILE_ACCESS_URL(21), {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify([
+        { userId: BOB_ID, publicKeyId: "bob-pk", privateKeyEnc: "b" },
+      ]),
+    });
+
+    expect((await ask(ROOM_ID, BOB_ID)).body.response).toEqual([]);
+  });
+
+  it("No users named", async () => {
+    const { body } = await ask(ROOM_ID);
+    expect(body.response).toEqual([{ userId: BOB_ID, fileIds: [21] }]);
+  });
+
+  it("Prospective member named", async () => {
+    const { body } = await ask(ROOM_ID, CAROL_ID, CAROL_ID);
+    expect(body.response).toEqual([{ userId: CAROL_ID, fileIds: [21, 22] }]);
+  });
+
+  it("Plain file", async () => {
+    handle.current!.setFiles([
+      { id: 23, title: "plain.txt", encrypted: false, fileKeys: [] },
+    ]);
+    expect((await ask(ROOM_ID, BOB_ID)).body.response).toEqual([]);
+  });
+
+  it("Caller who may not change access", async () => {
+    handle.current!.setRoomAccessManagers([BOB_ID]);
+    expect((await ask(ROOM_ID, BOB_ID)).status).toBe(403);
+
+    handle.current!.setCurrentUserId(CAROL_ID);
+    expect((await ask(ROOM_ID, BOB_ID)).status).toBe(403);
+
+    expect((await ask(ARCHIVED_ROOM_ID, BOB_ID)).status).toBe(403);
+  });
+
+  it("answers 400 for a room that is not private and for a malformed id", async () => {
+    expect((await ask(ORDINARY_ROOM_ID, BOB_ID)).status).toBe(400);
+    expect((await ask(ROOM_ID, "not-a-guid")).status).toBe(400);
+  });
+});
+
 describe("encryptedFiles mock — entry DTOs (mirrors FoldersController.GetFolderByFolderId and GetFolderInfo)", () => {
   const ROOMS_SECTION_ID = 2002;
   const FOLDER_URL = `${BASE_URL}:${PORT}/${API_PREFIX}/files/${ROOM_ID}`;

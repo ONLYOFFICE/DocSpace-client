@@ -38,6 +38,7 @@ import type {
   TPrivacyRoomRequest,
   TEncryptionKeyPair,
   TRoomCandidateKey,
+  TRoomMissingFileKeys,
 } from "./types";
 
 export async function setEncryptionKeys(data: TPrivacyRoomRequest) {
@@ -87,6 +88,21 @@ export async function getRoomCandidateKeys(
     method: "get",
     url: `privacyroom/${roomId}/access/candidates?${params.toString()}`,
   })) as TRoomCandidateKey[];
+  return res ?? [];
+}
+
+export async function getRoomMissingFileKeys(
+  roomId: string | number,
+  userIds: string[] = [],
+) {
+  const params = new URLSearchParams();
+  for (const userId of userIds) params.append("userIds", userId);
+  const query = params.toString();
+
+  const res = (await request({
+    method: "get",
+    url: `privacyroom/${roomId}/access/missing${query ? `?${query}` : ""}`,
+  })) as TRoomMissingFileKeys[];
   return res ?? [];
 }
 

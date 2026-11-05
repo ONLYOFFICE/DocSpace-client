@@ -97,6 +97,12 @@ export type EncryptedFilesHandlerHandle = {
    * so the spec says who the server would refuse.
    */
   setUnreadableUsers: (userIds: string[]) => void;
+  /**
+   * The users who may change the room's access (its owner and managers), for
+   * the missing-keys route. Until set, the owner and every user with a key in
+   * `roomUserKeys` may.
+   */
+  setRoomAccessManagers: (userIds: string[]) => void;
   /** Answers as another signed-in user until `reset`. */
   setCurrentUserId: (userId: string) => void;
   /**
@@ -471,6 +477,7 @@ export const encryptedFilesHandlers = (
   const createdOn = new Map<string, string>();
   const outsidePrivateRoom = new Set<number>();
   const unreadableUsers = new Set<string>();
+  let accessManagers: Set<string> | null = null;
   /** files_file_keys.create_on: set when the row is written. */
   const keyCreatedOn = (fileId: number, userId: string) => {
     const key = `${fileId}:${userId}`;
@@ -560,6 +567,9 @@ export const encryptedFilesHandlers = (
       unreadableUsers.clear();
       for (const id of userIds) unreadableUsers.add(String(id));
     },
+    setRoomAccessManagers: (userIds) => {
+      accessManagers = new Set(userIds.map(String));
+    },
     setCurrentUserId: (userId) => {
       currentUserId = userId;
     },
@@ -574,6 +584,7 @@ export const encryptedFilesHandlers = (
       createdOn.clear();
       outsidePrivateRoom.clear();
       unreadableUsers.clear();
+      accessManagers = null;
       requests.length = 0;
       roomUserKeys = [];
       nextFileId = 1000;
@@ -856,6 +867,68 @@ export const encryptedFilesHandlers = (
               return rest;
             }),
         );
+      },
+    ),
+
+    /**
+     * Mirrors PrivacyRoomControllerCommon.GetRoomMissingFileKeys ->
+     * EncryptionKeyPairDtoHelper.GetMissingFileKeysAsync (HttpGet
+     * "{roomId:int}/access/missing", `userIds` repeated once per user): one
+     * RoomMissingFileKeysDto per named user, or per direct member and the
+     * creator when none is named, who lacks a key on an encrypted file of the
+     * room, with those file ids; a user with every key is absent and a file
+     * stored in the clear is never reported. 403 when the caller cannot read
+     * the room, 400 for a room that is not private, 403 when the caller may
+     * not change its access or the room is archived, 400 for a malformed id;
+     * another room's id is left to that room's instance, so an unknown room
+     * (404 on the server) is unhandled here. The mock has no roles or portal
+     * directory: the managers come from `setRoomAccessManagers` (without it
+     * the owner and the users with a key in the room pass), and every
+     * well-formed id counts as a portal user.
+     */
+    http.get(
+      `${apiBase}/privacyroom/:roomId(\\d+)/access/missing`,
+      ({ params, request }) => {
+        if (Number(params.roomId) !== roomId) return undefined;
+        const url = new URL(request.url);
+        requests.push({ method: "GET", url: url.pathname + url.search });
+        const members = new Set([
+          ownerId,
+          ...roomUserKeys.map((k) => String(k.userId)),
+        ]);
+        if (!members.has(currentUserId) && !accessManagers?.has(currentUserId)) {
+          return errorResponse(403, "You don't have enough permission to edit the file");
+        }
+        if (!isPrivate) {
+          return errorResponse(400, "This action is only available in a private room");
+        }
+        const mayManage = accessManagers
+          ? accessManagers.has(currentUserId)
+          : members.has(currentUserId);
+        if (archived || !mayManage) {
+          return errorResponse(403, "You don't have enough permission to perform the operation");
+        }
+        const guidRe =
+          /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        const named = url.searchParams.getAll("userIds");
+        if (named.some((userId) => !guidRe.test(userId))) {
+          return errorResponse(400, "The value is not valid");
+        }
+        const subjects = named.length > 0 ? named : [...members];
+        const encrypted = Array.from(files.values()).filter((f) => f.encrypted);
+        const answer: { userId: string; fileIds: number[] }[] = [];
+        for (const userId of new Set(subjects.map(String))) {
+          const fileIds = encrypted
+            .filter(
+              (f) =>
+                !f.fileKeys.some(
+                  (k) => String(k.userId).toLowerCase() === userId.toLowerCase(),
+                ),
+            )
+            .map((f) => f.id);
+          if (fileIds.length > 0) answer.push({ userId, fileIds });
+        }
+        return okResponse(answer);
       },
     ),
 

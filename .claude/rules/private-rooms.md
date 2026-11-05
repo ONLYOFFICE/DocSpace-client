@@ -66,7 +66,10 @@ Workflow:
    or no `codegraph` CLI: stop and ask the user to install and index it
    (`npm i -g @colbymchenry/codegraph`, then `codegraph init` in `../server`)
    instead of guessing. Details: the "Server behaviour" paragraph of
-   `openspec/config.yaml`.
+   `openspec/config.yaml`. The same applies after every pull of `../server`:
+   read its new commits (`git log <last read>..HEAD`), explore the symbols
+   they touch with CodeGraph, and record what landed in the change's
+   design.md and tasks.md before the specs or the mocks change.
 7. Commit after every completed task: one task (one ticked sub-item of
    tasks.md) = one commit with its code, tests, locales, mocks and the tick;
    planning edits and archives get their own commits. Subject in English,
@@ -84,3 +87,10 @@ Workflow:
    embedding frame also needs the host opt-in `privateRooms`
    (`packages/shared/utils/privateRooms.ts`). There is no browser-local
    flag; see `private-rooms/feature-gating`.
+9. Before a task commit, type-check per package with `pnpm exec tsc` in
+   every package the change reaches (`pnpm run tsc` through Nx can hang on
+   its daemon). An edit under `packages/shared/__mocks__` reaches `login`
+   and `management` too: they compile the shared mocks with a target below
+   ES2015 and no `downlevelIteration`, so a spread of a `Set` or `Map` or a
+   `for...of` over one fails there with TS2802 while shared, client, sdk
+   and doceditor pass. Use `Array.from` in the mocks.

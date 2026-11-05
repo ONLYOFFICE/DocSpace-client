@@ -1217,3 +1217,18 @@ export const showQuickActionsHandler = (port: string, status?: number) => {
     },
   );
 };
+
+// The endpoint name is misspelled on the server, too.
+export const PATH_CHANGE_DELETE_CONFIRM = "files/changedeleteconfrim";
+
+// Answers with the value it was sent, the way the portal does.
+export const changeDeleteConfirmHandler = (port: string) => {
+  return http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_CHANGE_DELETE_CONFIRM}`,
+    async ({ request }) => {
+      const body = (await request.json()) as { set: boolean };
+
+      return new Response(JSON.stringify({ response: body.set }));
+    },
+  );
+};

@@ -1242,13 +1242,17 @@ describe("encryptedFiles mock — upload sessions (mirrors UploadController)", (
     expect(handle.current!.getSessions()).toHaveLength(1);
   });
 
-  it("abort finds the session by its id whatever folder the path names", async () => {
+  it("Abort through another folder", async () => {
     const session = await createSession(ROOM_ID, 2);
 
     const res = await abort(ARCHIVED_ROOM_ID, session.id);
 
-    expect(res.status).toBe(200);
-    expect(handle.current!.getSessions()).toEqual([]);
+    expect(res.status).toBe(404);
+    expect(((await res.json()) as { error: unknown }).error).toEqual({
+      message: "The required file was not found",
+    });
+    expect(handle.current!.getSessions()).toHaveLength(1);
+    expect((await abort(ROOM_ID, session.id)).status).toBe(200);
   });
 
   it("Ordinary room", async () => {

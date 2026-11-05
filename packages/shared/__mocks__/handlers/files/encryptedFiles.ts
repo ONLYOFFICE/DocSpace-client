@@ -1365,13 +1365,14 @@ export const encryptedFilesHandlers = (
     /**
      * Mirrors UploadController.AbortUploadSession
      * (HttpDelete "{folderId}/session/{sessionId}") ->
-     * FileUploader.AbortUploadAsync: discards the session and the parts it
-     * received. The session is found by its id alone, the folder segment is
-     * not matched. ChunkedUploadSessionHolder.GetSessionAsync throws
-     * ItemNotFoundException, so 404, for a session that is unknown,
-     * finalised or already aborted (expiry is not modelled); a session
-     * another account opened is a SecurityException, so 403. The action
-     * returns nothing, so the envelope has no `response`.
+     * FileUploader.AbortUploadAsync(uploadId, folderId): discards the session
+     * and the parts it received. ChunkedUploadSessionHolder.GetSessionAsync
+     * throws ItemNotFoundException, so 404, for a session that is unknown,
+     * finalised or already aborted (expiry is not modelled); a session opened
+     * against another folder than the path names is an ItemNotFoundException
+     * as well and stays open; a session another account opened is then a
+     * SecurityException, so 403. The action returns nothing, so the envelope
+     * has no `response`.
      */
     http.delete(
       `${apiBase}/files/:folderId(\\d+)/session/:sessionId`,
@@ -1385,6 +1386,9 @@ export const encryptedFilesHandlers = (
         });
         if (!session || session.completed) {
           return errorResponse(404, "session not found");
+        }
+        if (session.folderId !== Number(params.folderId)) {
+          return errorResponse(404, "The required file was not found");
         }
         if (session.userId !== currentUserId) {
           return errorResponse(403, "Access denied");

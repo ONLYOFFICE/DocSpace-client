@@ -1805,6 +1805,7 @@
   "PrivateRoomDisclosureBody": "El cifrado se ejecuta por completo en su navegador, por lo que los archivos solo pueden leerlos las personas que usted invite. Usted confía en el código que ofrece su espacio de trabajo: bloquee su sesión cuando no la esté utilizando.",
   "PrivateRoomDisclosureDismiss": "Entendido",
   "PrivateRoomDisclosureTitle": "Cifrado de extremo a extremo en el cliente",
+  "PrivateRoomDocServiceNotSupported": "No se pueden crear salas privadas: los editores conectados a este espacio de trabajo no pueden trabajar con archivos cifrados.",
   "PrivateRoomEditorNotSupported": "Los archivos cifrados no se pueden abrir en este editor.",
   "PrivateRoomEmptyBenefitAEAD": "Cada documento tiene su propia clave, por lo que un archivo filtrado nunca expone a los demás.",
   "PrivateRoomEmptyBenefitE2EE": "Sus archivos se cifran en su navegador: solo los miembros invitados pueden leerlos.",

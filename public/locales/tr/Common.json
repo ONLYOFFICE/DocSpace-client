@@ -1805,6 +1805,7 @@
   "PrivateRoomDisclosureBody": "Şifreleme tamamen tarayıcınızda çalışır, bu nedenle dosyaları yalnızca davet ettiğiniz kişiler okuyabilir. çalışma alanı tarafından sunulan koda güvenirsiniz — kullanmadığınızda oturumunuzu kilitleyin.",
   "PrivateRoomDisclosureDismiss": "Anladım",
   "PrivateRoomDisclosureTitle": "İstemci tarafında uçtan uca şifreleme",
+  "PrivateRoomDocServiceNotSupported": "Özel odalar oluşturulamaz: bu çalışma alanına bağlı düzenleyiciler şifrelenmiş dosyalarla çalışamaz.",
   "PrivateRoomEditorNotSupported": "Şifrelenmiş dosyalar bu düzenleyicide açılamaz.",
   "PrivateRoomEmptyBenefitAEAD": "Her belge kendi anahtarını alır; böylece bir dosyanın sızması diğerini asla açığa çıkarmaz.",
   "PrivateRoomEmptyBenefitE2EE": "Dosyalarınız tarayıcınızda şifrelenir — yalnızca davet edilen üyeler okuyabilir.",

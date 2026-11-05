@@ -93,6 +93,7 @@ import type { ICover } from "@onlyoffice/apps-ui-kit/components/room-logo-cover-
 import type { Nullable, TCreatedBy } from "@docspace/shared/types";
 import { RoomsType, AnalyticsEvents } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
+import { isRefusedForDocService } from "@docspace/shared/services/private-room/create-room-gate";
 
 import {
   useDialogsStore,
@@ -441,7 +442,15 @@ const CreateEditRoomDialog = ({
       }
       onClose();
     } catch (e) {
-      toastr.error(e as Error);
+      if (
+        !isEdit &&
+        isPrivate &&
+        (await isRefusedForDocService(e, () => api.files.getSettingsFiles()))
+      ) {
+        toastr.error(t("Common:PrivateRoomDocServiceNotSupported"));
+      } else {
+        toastr.error(e as Error);
+      }
     } finally {
       setIsLoading(false);
     }

@@ -49,6 +49,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import CreateEditRoomDialog, {
   type EditableRoom,
 } from "@/app/(rooms)/_components/create-edit-room-dialog";
+import { useDocsSettingsStore } from "@/app/(personal-files)/_store/DocsSettingsStore";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 
 import { useEncryptionIdentityStore } from "../../_store/EncryptionIdentityStore";
@@ -71,6 +72,7 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
   const { t } = useTranslation(["Common"]);
   const identityStore = useEncryptionIdentityStore();
   const docsUser = useDocsUserStore();
+  const docsSettings = useDocsSettingsStore();
   const user = docsUser.user as TUser | null;
   const userId = user?.id ? String(user.id) : undefined;
 
@@ -80,7 +82,10 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
   const mayHoldKey = !keysLoaded || hasKeys;
 
   const isCreation = !room;
-  const canCreate = !isCreation || hasPrivateRoomSecureContext();
+  const hasSecureContext = !isCreation || hasPrivateRoomSecureContext();
+  const editorsEncrypt =
+    !isCreation || docsSettings.isEncryptedEditingAvailable;
+  const canCreate = hasSecureContext && editorsEncrypt;
   const autoPromptedRef = React.useRef(false);
 
   const refreshKeysFromServer = React.useCallback(
@@ -109,9 +114,14 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
   // Spec: private-rooms/sdk-surface, "Private room creation gate"
   React.useEffect(() => {
     if (!visible || canCreate) return;
-    toastr.error(t("Common:EncryptionRequiresHttps"));
+    if (!hasSecureContext) {
+      toastr.error(t("Common:EncryptionRequiresHttps"));
+    } else {
+      // Spec: private-rooms/sdk-surface, "Private room creation needs a Document Server that encrypts"
+      toastr.error(t("Common:PrivateRoomDocServiceNotSupported"));
+    }
     onClose();
-  }, [visible, canCreate, onClose, t]);
+  }, [visible, canCreate, hasSecureContext, onClose, t]);
 
   React.useEffect(() => {
     if (!visible) {

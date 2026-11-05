@@ -33,6 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { TFilesSettings } from "../../api/files/types";
+
+import { isEncryptedEditingAvailable } from "./editor-capability";
+
 /**
  * Whether this browser can create a private room: its keys need WebCrypto,
  * which only a secure context exposes.
@@ -63,4 +67,26 @@ export async function resolvePrivateRoomKeys<TKey>(
   }
 
   return { keys: keys && keys.length > 0 ? keys : null, fetchFailed };
+}
+
+/**
+ * Whether the server refused a private room's creation because the
+ * Document Server cannot work with encrypted files. A missing key is a 403
+ * as well, so the files settings are read again to tell the two apart.
+ * Spec: private-rooms/room-membership, "Private room creation needs a Document Server that encrypts"
+ */
+export async function isRefusedForDocService(
+  error: unknown,
+  readFilesSettings: () => Promise<
+    Pick<TFilesSettings, "docServiceEncryptionSupported"> | undefined
+  >,
+): Promise<boolean> {
+  const status = (error as { response?: { status?: number } })?.response
+    ?.status;
+  if (status !== 403) return false;
+  try {
+    return !isEncryptedEditingAvailable(await readFilesSettings());
+  } catch {
+    return false;
+  }
 }

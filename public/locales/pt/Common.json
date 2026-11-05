@@ -1805,6 +1805,7 @@
   "PrivateRoomDisclosureBody": "A encriptação é executada inteiramente no seu navegador, por isso os ficheiros só podem ser lidos pelas pessoas que convidar. Confia no código fornecido pelo seu espaço de trabalho — bloqueie a sua sessão quando não a estiver a utilizar.",
   "PrivateRoomDisclosureDismiss": "Compreendi",
   "PrivateRoomDisclosureTitle": "Encriptação de ponta a ponta no cliente",
+  "PrivateRoomDocServiceNotSupported": "Não é possível criar salas privadas: os editores ligados a este espaço de trabalho não conseguem trabalhar com ficheiros encriptados.",
   "PrivateRoomEditorNotSupported": "Os ficheiros encriptados não podem ser abertos neste editor.",
   "PrivateRoomEmptyBenefitAEAD": "Cada documento tem a sua própria chave, pelo que um ficheiro comprometido nunca expõe outro.",
   "PrivateRoomEmptyBenefitE2EE": "Os seus ficheiros são encriptados no seu browser — apenas os membros convidados os podem ler.",

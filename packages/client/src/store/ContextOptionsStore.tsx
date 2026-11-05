@@ -1002,6 +1002,15 @@ class ContextOptionsStore {
       return;
     }
 
+    // Spec: private-rooms/room-membership, "Private room creation needs a Document Server that encrypts"
+    if (
+      isPrivateSection &&
+      !this.filesSettingsStore.isEncryptedEditingAvailable
+    ) {
+      toastr.error(i18n.t("Common:PrivateRoomDocServiceNotSupported"));
+      return;
+    }
+
     if (fromItem) {
       this.filesActionsStore.setProcessCreatingRoomFromData(true);
     }

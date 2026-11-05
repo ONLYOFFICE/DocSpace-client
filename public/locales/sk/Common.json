@@ -1805,6 +1805,7 @@
   "PrivateRoomDisclosureBody": "Šifrovanie prebieha úplne vo vašom prehliadači, takže súbory môžu čítať iba ľudia, ktorých pozvete. Spoliehate sa na kód, ktorý poskytuje váš pracovného priestoru — keď reláciu nepoužívate, uzamknite ju.",
   "PrivateRoomDisclosureDismiss": "Rozumiem",
   "PrivateRoomDisclosureTitle": "Koncové šifrovanie na strane klienta",
+  "PrivateRoomDocServiceNotSupported": "Súkromné miestnosti nie je možné vytvoriť: editory pripojené k tomuto pracovnému priestoru nedokážu pracovať so šifrovanými súbormi.",
   "PrivateRoomEditorNotSupported": "Šifrované súbory nie je možné otvoriť v tomto editore.",
   "PrivateRoomEmptyBenefitAEAD": "Každý dokument má vlastný kľúč, takže jeden uniknutý súbor nikdy neodhalí iný.",
   "PrivateRoomEmptyBenefitE2EE": "Vaše súbory sú šifrované vo vašom prehliadači — môžu ich čítať iba pozvaní členovia.",

@@ -1805,6 +1805,7 @@
   "PrivateRoomDisclosureBody": "Şifrələmə tamamilə brauzerinizdə işləyir, ona görə də faylları yalnız dəvət etdiyiniz insanlar oxuya bilər. Siz iş sahəsi tərəfindən təqdim edilən koda etibar edirsiniz — istifadə etmədiyiniz zaman sessiyanızı kilidləyin.",
   "PrivateRoomDisclosureDismiss": "Anladım",
   "PrivateRoomDisclosureTitle": "Müştəri tərəfində uçdan-uca şifrələmə",
+  "PrivateRoomDocServiceNotSupported": "Şəxsi otaqlar yaradıla bilməz: bu iş sahəsinə qoşulmuş redaktorlar şifrələnmiş fayllarla işləyə bilmir.",
   "PrivateRoomEditorNotSupported": "Şifrələnmiş faylları bu redaktorda açmaq mümkün deyil.",
   "PrivateRoomEmptyBenefitAEAD": "Hər sənəd öz açarını alır, buna görə bir faylın sızması digərini heç vaxt ifşa etmir.",
   "PrivateRoomEmptyBenefitE2EE": "Fayllarınız brauzerinizdə şifrələnir — yalnız dəvət edilmiş üzvlər onları oxuya bilər.",

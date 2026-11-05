@@ -1805,6 +1805,7 @@
   "PrivateRoomDisclosureBody": "암호화는 전적으로 브라우저에서 실행되므로 초대한 사람만 파일을 읽을 수 있습니다. 워크스페이스 제공하는 코드를 신뢰하게 됩니다. 사용하지 않을 때는 세션을 잠그세요.",
   "PrivateRoomDisclosureDismiss": "확인",
   "PrivateRoomDisclosureTitle": "클라이언트 측 종단 간 암호화",
+  "PrivateRoomDocServiceNotSupported": "비공개 방을 만들 수 없습니다. 이 작업 공간에 연결된 편집기에서 암호화된 파일을 처리할 수 없습니다.",
   "PrivateRoomEditorNotSupported": "암호화된 파일은 이 편집기에서 열 수 없습니다.",
   "PrivateRoomEmptyBenefitAEAD": "모든 문서에 고유한 키가 부여되므로 파일 하나가 유출되어도 다른 파일이 노출되지 않습니다.",
   "PrivateRoomEmptyBenefitE2EE": "파일이 브라우저에서 암호화됩니다 — 초대된 멤버만 읽을 수 있습니다.",

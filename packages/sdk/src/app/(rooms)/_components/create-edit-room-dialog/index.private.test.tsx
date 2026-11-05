@@ -42,6 +42,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const mocks = vi.hoisted(() => ({
   createRoom: vi.fn(),
+  getSettingsFiles: vi.fn(),
   toastr: { success: vi.fn(), error: vi.fn() },
 }));
 
@@ -50,7 +51,10 @@ vi.mock("react-i18next", () => ({
 }));
 
 vi.mock("@docspace/shared/api", () => ({
-  default: { rooms: { createRoom: mocks.createRoom, editRoom: vi.fn() } },
+  default: {
+    rooms: { createRoom: mocks.createRoom, editRoom: vi.fn() },
+    files: { getSettingsFiles: mocks.getSettingsFiles },
+  },
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
@@ -176,6 +180,22 @@ describe("CreateEditRoomDialog of a private room", () => {
       "Common:EncryptionKeysRequiredForPrivateRoom",
     );
     expect(mocks.createRoom).not.toHaveBeenCalled();
+  });
+
+  it("Creation refused by the server", async () => {
+    mocks.createRoom.mockRejectedValue({ response: { status: 403 } });
+    mocks.getSettingsFiles.mockResolvedValue({
+      docServiceEncryptionSupported: false,
+    });
+    await render({ isPrivate: true, resolveEncryptionKeys: async () => true });
+
+    await typeName("Vault");
+    await clickCreate();
+
+    expect(mocks.getSettingsFiles).toHaveBeenCalledTimes(1);
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomDocServiceNotSupported",
+    );
   });
 
   it("Key list failed to load", async () => {

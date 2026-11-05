@@ -1805,6 +1805,7 @@
   "PrivateRoomDisclosureBody": "暗号化はすべてお使いのブラウザー内で実行されるため、ファイルを読めるのは招待した相手だけです。お使いの ワークスペース が配信するコードを信頼することになります。使用していないときはセッションをロックしてください。",
   "PrivateRoomDisclosureDismiss": "了解しました",
   "PrivateRoomDisclosureTitle": "ブラウザー上のエンドツーエンド暗号化",
+  "PrivateRoomDocServiceNotSupported": "プライベートルームを作成できません。このワークスペースに接続されているエディターは暗号化されたファイルを扱えません。",
   "PrivateRoomEditorNotSupported": "暗号化されたファイルはこのエディターでは開けません。",
   "PrivateRoomEmptyBenefitAEAD": "各ドキュメントには固有のキーが割り当てられるため、1つのファイルが漏洩しても他のファイルが危険にさらされることはありません。",
   "PrivateRoomEmptyBenefitE2EE": "ファイルはブラウザ内で暗号化されます — 招待されたメンバーのみが閲覧できます。",

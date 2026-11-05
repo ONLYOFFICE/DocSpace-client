@@ -1805,6 +1805,7 @@
   "PrivateRoomDisclosureBody": "Criptarea rulează integral în browserul dvs., astfel încât fișierele pot fi citite doar de persoanele pe care le invitați. Aveți încredere în codul oferit de spațiului de lucru — blocați-vă sesiunea când nu o utilizați.",
   "PrivateRoomDisclosureDismiss": "Am înțeles",
   "PrivateRoomDisclosureTitle": "Criptare end-to-end pe partea de client",
+  "PrivateRoomDocServiceNotSupported": "Camerele private nu pot fi create: editorii conectați la acest spațiu de lucru nu pot lucra cu fișiere criptate.",
   "PrivateRoomEditorNotSupported": "Fișierele criptate nu pot fi deschise în acest editor.",
   "PrivateRoomEmptyBenefitAEAD": "Fiecare document primește propria cheie, astfel încât un fișier scurs nu expune niciodată altul.",
   "PrivateRoomEmptyBenefitE2EE": "Fișierele dvs. sunt criptate în browserul dvs. — doar membrii invitați le pot citi.",

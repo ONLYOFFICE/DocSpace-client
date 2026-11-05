@@ -1805,6 +1805,7 @@
   "PrivateRoomDisclosureBody": "Enkriptimi ekzekutohet tërësisht në shfletuesin tuaj, kështu që skedarët mund t'i lexojnë vetëm personat që ftoni. Mbështeteni te kodi që ofron hapësirës së punës juaj — kyçeni sesionin kur nuk e përdorni.",
   "PrivateRoomDisclosureDismiss": "E kuptova",
   "PrivateRoomDisclosureTitle": "Enkriptim skaj-më-skaj në anën e klientit",
+  "PrivateRoomDocServiceNotSupported": "Dhomat private nuk mund të krijohen: redaktuesit e lidhur me këtë hapësirë pune nuk mund të punojnë me skedarë të enkriptuar.",
   "PrivateRoomEditorNotSupported": "Skedarët e enkriptuar nuk mund të hapen në këtë redaktues.",
   "PrivateRoomEmptyBenefitAEAD": "Çdo dokument merr çelësin e vet, kështu që një skedar i rrjedhur nuk zbuloi kurrë tjetrin.",
   "PrivateRoomEmptyBenefitE2EE": "Skedarët tuaj enkriptohen në shfletuesin tuaj — vetëm anëtarët e ftuar mund t'i lexojnë.",

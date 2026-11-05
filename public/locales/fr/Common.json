@@ -1805,6 +1805,7 @@
   "PrivateRoomDisclosureBody": "Le chiffrement s'exécute entièrement dans votre navigateur, de sorte que les fichiers ne sont lisibles que par les personnes que vous invitez. Vous faites confiance au code fourni par votre espace de travail — verrouillez votre session lorsque vous ne l'utilisez pas.",
   "PrivateRoomDisclosureDismiss": "Compris",
   "PrivateRoomDisclosureTitle": "Chiffrement de bout en bout côté client",
+  "PrivateRoomDocServiceNotSupported": "Impossible de créer des salles privées : les éditeurs connectés à cet espace de travail ne peuvent pas traiter les fichiers chiffrés.",
   "PrivateRoomEditorNotSupported": "Les fichiers chiffrés ne peuvent pas être ouverts dans cet éditeur.",
   "PrivateRoomEmptyBenefitAEAD": "Chaque document possède sa propre clé, de sorte qu'un fichier compromis n'expose jamais les autres.",
   "PrivateRoomEmptyBenefitE2EE": "Vos fichiers sont chiffrés dans votre navigateur — seuls les membres invités peuvent les lire.",

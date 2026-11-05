@@ -347,6 +347,8 @@ export type TFilesSettings = {
   extsWebCustomFilterEditing: string[];
   extsWebEdited: string[];
   extsWebEncrypt: string[];
+  /** Whether the connected Document Server can edit encrypted files. */
+  docServiceEncryptionSupported?: boolean;
   extsWebPreviewed: string[];
   extsWebRestrictedEditing: string[];
   extsWebReviewed: string[];

@@ -867,7 +867,12 @@ land. The same commit changed the private-room file-key contract
    `{internal Document Server address}/sdkjs/common/crypto/onlyoffice-crypto.js`
    with a five-second timeout, answers true on 200, caches the result for
    ten minutes per portal and address, and answers false without a Document
-   Server address.
+   Server address. Client side 2026-11-05 (task 2.2):
+   `docServiceEncryptionSupported` is optional on `TFilesSettings`, the
+   files-settings mock answers true, and `isEncryptedEditingAvailable` of
+   `packages/shared/services/private-room/editor-capability.ts` (absent
+   counts as false) is read by the client `FilesSettingsStore`, the SDK
+   `DocsSettingsStore` and the doceditor `useFilesSettings`.
 
 3. **Co-editing allowed (decided 2026-10-29).** The Document Server encrypts
    every change with the DEK and stores only ciphertext, and each co-editor's

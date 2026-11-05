@@ -121,6 +121,9 @@ ai-chat's own optional peers (LLM SDKs, radix, codemirror, ...) must be
 declared by those same apps; their versions sit in the `catalog:` block of
 `pnpm-workspace.yaml` - see `.claude/rules/pnpm.md`.
 
+`@onlyoffice/docspace-plugin-sdk` is switched to an unpublished build the same
+way, with `pnpm run update-plugin-sdk` (a pack from `../../docspace-plugin-sdk`).
+
 ### buildtools sibling repo
 
 `../buildtools` (ONLYOFFICE Apps Build Tools) is a **separate, optional repo**,

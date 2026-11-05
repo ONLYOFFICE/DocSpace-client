@@ -34,10 +34,11 @@
  */
 
 /**
- * Shared by update-ui-kit.mjs and update-ai-chat.mjs. ui-kit and ai-chat are
- * normally installed from npm; both scripts switch the apps over to a locally
- * packed tarball at the repo root instead, make pnpm install it, and then prove
- * that what landed in node_modules and pnpm-lock.yaml is what was copied in.
+ * Shared by update-ui-kit.mjs, update-ai-chat.mjs and update-plugin-sdk.mjs.
+ * ui-kit, ai-chat and the plugin SDK are normally installed from npm; the
+ * scripts switch the apps over to a locally packed tarball at the repo root
+ * instead, make pnpm install it, and then prove that what landed in
+ * node_modules and pnpm-lock.yaml is what was copied in.
  */
 
 import { createHash } from "node:crypto";

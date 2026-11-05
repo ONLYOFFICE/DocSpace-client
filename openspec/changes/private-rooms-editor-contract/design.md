@@ -869,7 +869,9 @@ ciphertext.
    or private-room file (`FileSecurity.cs:1894-1914`,
    `FileConverter.cs:306-309`), but `POST files/file/{fileId}/copyas` inserts
    a converted copy with only a create-rights check
-   (`FilesControllerHelper.cs:263-280`, `FileConverter.cs:643-654`). Print is
+   (`FilesControllerHelper.cs:263-280`, `FileConverter.cs:643-654`) until
+   2026-11-04, when `bd89a24dcd` made it refuse an encrypted source, a
+   private-room source and a private-room destination with 403. Print is
    local to the session. Version history is withheld: the client withholds
    version operations for encrypted files, the edit history lists no saved
    version, and there is no `changesUrl` to show. Forms follow D9.
@@ -1164,7 +1166,8 @@ BLOCKED or "after <x>" waits.
   inside the private room.
 - [Server paths store ciphertext as a plaintext file or send it to the
   Document Server] → tasks 10.2 to 10.4; `copyas`, restore by address and
-  conversion are reachable through the API today.
+  conversion are reachable through the API today. `copyas` closed on
+  2026-11-04 (`bd89a24dcd`, task 10.2).
 
 ## Migration Plan
 

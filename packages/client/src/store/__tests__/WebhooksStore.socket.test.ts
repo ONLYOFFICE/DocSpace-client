@@ -534,8 +534,7 @@ describe("WebhooksStore socket: delivery journal", () => {
     expect(store.eventDetails).toEqual({});
   });
 
-  it("re-reads the opened event details after a reconnect", async () => {
-    vi.useRealTimers();
+  it("re-reads the opened event details once for a flapping connection", async () => {
     const store = createStore();
     vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(5)));
     await store.fetchEventData(5);
@@ -544,9 +543,25 @@ describe("WebhooksStore socket: delivery journal", () => {
     );
 
     emit("reconnect", undefined);
-    await vi.waitFor(() => expect(store.eventDetails).toEqual(logItem(5, 500)));
+    emit("reconnect", undefined);
+    await settle();
 
+    expect(getWebhooksJournal).toHaveBeenCalledTimes(2);
     expect(getWebhooksJournal).toHaveBeenLastCalledWith({ eventId: 5 });
+    expect(store.eventDetails).toEqual(logItem(5, 500));
+  });
+
+  it("drops a pending reconnect re-read once the details are closed", async () => {
+    const store = createStore();
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(5)));
+    await store.fetchEventData(5);
+
+    emit("reconnect", undefined);
+    store.clearEventDetails();
+    await settle();
+
+    expect(getWebhooksJournal).toHaveBeenCalledTimes(1);
+    expect(store.eventDetails).toEqual({});
   });
 
   it("logs a failed re-read of the event details", async () => {

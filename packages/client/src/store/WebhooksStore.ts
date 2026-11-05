@@ -145,6 +145,7 @@ class WebhooksStore {
     makeAutoObservable(this, {
       debounceReloadWebhooks: false,
       debounceLoadJournalTop: false,
+      debounceFetchEventData: false,
       isWebhooksListStale: false,
       eventDetailsRequest: false,
     });
@@ -178,6 +179,7 @@ class WebhooksStore {
   };
 
   clearEventDetails = () => {
+    this.debounceFetchEventData.cancel();
     this.eventDetailsRequest += 1;
     this.eventDetails = {};
   };
@@ -257,10 +259,16 @@ class WebhooksStore {
 
     const eventId = Number(this.eventDetails?.id);
 
-    if (eventId) {
-      this.fetchEventData(eventId).catch((error) => console.error(error));
-    }
+    if (eventId) this.debounceFetchEventData(eventId);
   };
+
+  debounceFetchEventData = debounce(
+    (eventId: number) => {
+      this.fetchEventData(eventId).catch((error) => console.error(error));
+    },
+    300,
+    { maxWait: 1000 },
+  );
 
   debounceLoadJournalTop = debounce(
     () => {

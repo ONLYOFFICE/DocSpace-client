@@ -45,6 +45,15 @@
   // section's top padding. The Section's `stickyTableHeader` mode (the
   // quick-actions banner, in My documents) cancels this for both tables.
   margin-top: -25px;
+
+  // The line Body draws where a row dragged while reordering will land. Body
+  // makes it 100vw wide, which the old list clipped; here it spans the rows
+  // and the section's gutters, as the old one showed, without overflowing.
+  :global(.indexing-separator) {
+    inset-inline: -20px;
+    width: auto !important;
+    background-color: var(--table-container-indexing-separator);
+  }
 }
 
 // The old table's `noSelect`: no text selection while the selection area or
@@ -105,5 +114,13 @@
   // off the keyboard ring of a button flush with its end.
   :global(.table-container_row-context-menu-wrapper) {
     overflow: visible;
+  }
+
+  // The cell with the reorder arrows is widened by `StyledTable.module.scss`,
+  // and on a moved row padded too, for the arrows to reach the gutter. The old
+  // cells were content-box, so the padding added to that width.
+  :global(.index-buttons),
+  :global(.index-buttons-name) {
+    box-sizing: content-box;
   }
 }

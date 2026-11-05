@@ -16,9 +16,12 @@ import TableStore from "SRC_DIR/store/TableStore";
 // The installed ui-kit package predates the DataTable, so the client's own
 // test run cannot resolve it; the two column helpers are all this file needs.
 vi.mock("@onlyoffice/apps-ui-kit/components/data-table", () => ({
-  settingsColumn: () => ({
+  DATA_TABLE_SETTINGS_WIDTH: 24,
+  // What the options asked for, kept on the column so a test can read it.
+  settingsColumn: (settings: object) => ({
     id: "Settings",
     width: { type: "fixed", size: 24 },
+    settings,
   }),
   contextMenuColumn: () => ({
     id: "ContextMenu",
@@ -34,6 +37,7 @@ vi.mock("../cells/FilesCells", () => ({
   AuthorColumnCell: () => null,
   DateColumnCell: () => null,
   ErasureColumnCell: () => null,
+  IndexColumnCell: () => null,
   LastOpenedColumnCell: () => null,
   LocationColumnCell: () => null,
   SharedByColumnCell: () => null,
@@ -60,6 +64,8 @@ const options = (
   isPublicRoom: false,
   isPersonalReadOnly: false,
   showSettings: true,
+  indexColumnSize: 37,
+  isIndexEditingMode: false,
   flags: FILES_FLAGS,
   ...overrides,
 });
@@ -242,6 +248,114 @@ describe("shared with me columns", () => {
         ["SizeShareWithMe", "Size", true],
       ]);
     }
+  });
+});
+
+describe("VDR columns", () => {
+  const vdr = SECTIONS.vdrIndexing;
+  const row = {} as TFilesTableItem;
+  const VDR_FLAGS = {
+    AuthorIndexing: true,
+    CreatedIndexing: false,
+    ModifiedIndexing: true,
+    SizeIndexing: true,
+    TypeIndexing: false,
+  };
+  const vdrOptions = (overrides: Partial<TFilesColumnsOptions> = {}) =>
+    options({ flags: VDR_FLAGS, ...overrides });
+
+  it("start with the order, and keep the old indexing test ids", () => {
+    expect(
+      getFilesColumns(vdr, vdrOptions()).map((column) => [
+        column.id,
+        column.cellTestId?.(row, 2),
+      ]),
+    ).toEqual([
+      ["Index", "index_cell_order_2"],
+      ["Name", "index_cell_name_2"],
+      ["AuthorIndexing", "index_cell_author_2"],
+      ["CreatedIndexing", "index_cell_created_2"],
+      ["ModifiedIndexing", "index_cell_modified_2"],
+      ["SizeIndexing", "index_cell_size_2"],
+      ["TypeIndexing", "index_cell_type_2"],
+      ["Settings", undefined],
+    ]);
+  });
+
+  it("give the order a fixed column as wide as the longest order, never hidden", () => {
+    const [index] = getFilesColumns(vdr, vdrOptions({ indexColumnSize: 41 }));
+
+    expect(index.width).toEqual({ type: "fixed", size: 41 });
+    expect(index.hideable).toBeFalsy();
+    expect(index.cellClassName).toBe("table-container_index-cell");
+  });
+
+  it("sort nothing from the header", () => {
+    expect(sortable(vdrOptions(), vdr)).toEqual([]);
+  });
+
+  it("let every column be resized until the rows are reordered", () => {
+    const resizable = (opts: TFilesColumnsOptions) =>
+      getFilesColumns(vdr, opts)
+        .filter((column) => column.width.type !== "fixed")
+        .map((column) => column.resizable);
+
+    expect(resizable(vdrOptions())).toEqual(Array(6).fill(true));
+    expect(resizable(vdrOptions({ isIndexEditingMode: true }))).toEqual(
+      Array(6).fill(false),
+    );
+  });
+
+  it("grey the settings out and drop the row menus while reordering", () => {
+    const settingsOf = (opts: TFilesColumnsOptions) =>
+      (getFilesColumns(vdr, opts).at(-1) as unknown as { settings: object })
+        .settings;
+
+    expect(settingsOf(vdrOptions())).toMatchObject({
+      withContextMenu: true,
+      disabled: false,
+    });
+    expect(settingsOf(vdrOptions({ isIndexEditingMode: true }))).toMatchObject({
+      withContextMenu: false,
+      disabled: true,
+    });
+  });
+
+  it("keep an empty last column in a frame without settings while reordering", () => {
+    const last = getFilesColumns(
+      vdr,
+      vdrOptions({ showSettings: false, isIndexEditingMode: true }),
+    ).at(-1);
+
+    expect(last?.id).toBe("ContextMenu");
+    expect(last?.cell(row, { index: 0, isLast: false, compact: false })).toBe(
+      null,
+    );
+  });
+
+  it("mark the cell that holds the reorder arrows, as the old rows did", () => {
+    const classes = (opts: TFilesColumnsOptions) =>
+      Object.fromEntries(
+        getFilesColumns(vdr, opts)
+          .filter((column) => column.cellClassName)
+          .map((column) => [column.id, column.cellClassName]),
+      );
+
+    expect(classes(vdrOptions({ isIndexEditingMode: true }))).toEqual({
+      Index: "table-container_index-cell",
+      Name: "table-container_file-name-cell",
+      SizeIndexing: "no-extra-space index-buttons",
+    });
+    // With Name alone the arrows sit at its end.
+    expect(
+      classes(vdrOptions({ isIndexEditingMode: true, flags: {} })).Name,
+    ).toBe("table-container_file-name-cell index-buttons-name");
+  });
+
+  it("put the order first in the visible-columns record", () => {
+    expect(filesColumnsRecord(vdr, VDR_FLAGS, vdrOptions())).toBe(
+      "Index,Name,AuthorIndexing,false,ModifiedIndexing,SizeIndexing,false",
+    );
   });
 });
 

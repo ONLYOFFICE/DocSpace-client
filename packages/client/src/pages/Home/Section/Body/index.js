@@ -64,6 +64,7 @@ import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import DataTableView from "./DataTableView";
 import { isFilesDataTableEnabled } from "./DataTableView/isFilesDataTableEnabled";
+import { FILES_DATA_TABLE_LIST_CLASS } from "./DataTableView/listClass";
 import withHotkeys from "../../../../HOCs/withHotkeys";
 import NoAccessContainer from "../../../../components/EmptyContainer/NoAccessContainer";
 
@@ -245,8 +246,11 @@ const SectionBodyContent = (props) => {
     const indexSeparatorNode = document.createElement("div");
     indexSeparatorNode.classList.add("indexing-separator");
 
+    // The list the rows are positioned in, where the reorder line goes.
     const parent = document.querySelector(
-      ".ReactVirtualized__Grid__innerScrollContainer",
+      isDataTable
+        ? `.${FILES_DATA_TABLE_LIST_CLASS}`
+        : ".ReactVirtualized__Grid__innerScrollContainer",
     );
 
     if (styles) {

@@ -36,12 +36,15 @@
 import type React from "react";
 
 import type { TFile } from "@docspace/shared/api/files/types";
+import { VDRIndexingAction } from "@docspace/shared/enums";
+import { IndexIconButtons } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import AccessLevelCell from "../../TableView/sub-components/AccessLevelCell";
 import AuthorCell from "../../TableView/sub-components/AuthorCell";
 import DateCell from "../../TableView/sub-components/DateCell";
 import ErasureCell from "../../TableView/sub-components/ErasureCell";
 import FileNameCell from "../../TableView/sub-components/FileNameCell";
+import IndexCell from "../../TableView/sub-components/IndexCell";
 import LocationCell from "../../TableView/sub-components/LocationCell";
 import SharedByCell from "../../TableView/sub-components/SharedByCell";
 import SizeCell from "../../TableView/sub-components/SizeCell";
@@ -59,15 +62,43 @@ type TCellProps = {
   sideColor: string;
 };
 
+// Pushed to the end of the name cell, which has no column of its own to fill.
+const INDEX_BUTTONS_IN_NAME: React.CSSProperties = {
+  justifyContent: "flex-end",
+  flexGrow: "1",
+};
+
 /**
  * The quick buttons sit at the end of the last column rather than in a column
  * of their own, as in the old table, so they take no width while there is
- * room. `isLast` follows the visible columns, where the old table parsed it out
- * of `localStorage`.
+ * room; while the rows are reordered, the arrows that move the row take their
+ * place. `isLast` follows the visible columns, where the old table parsed it
+ * out of `localStorage`.
  */
-const QuickButtons = ({ isLast }: Pick<TCellProps, "isLast">) => {
+const QuickButtons = ({
+  isLast,
+  inName,
+}: {
+  isLast: boolean;
+  inName: boolean;
+}) => {
   const row = useFilesRow();
   if (!isLast || !row) return null;
+
+  if (row.isIndexEditingMode)
+    return (
+      <IndexIconButtons
+        containerClassName="index-arrows-container"
+        style={inName ? INDEX_BUTTONS_IN_NAME : undefined}
+        commonIconClassName="change-index_icon"
+        onUpIndexClick={(e) =>
+          row.onChangeIndex(e, VDRIndexingAction.HigherIndex)
+        }
+        onDownIndexClick={(e) =>
+          row.onChangeIndex(e, VDRIndexingAction.LowerIndex)
+        }
+      />
+    );
 
   return (
     <StyledQuickButtonsContainer>
@@ -76,10 +107,14 @@ const QuickButtons = ({ isLast }: Pick<TCellProps, "isLast">) => {
   );
 };
 
-const withQuickButtons = (cell: React.ReactNode, isLast: boolean) => (
+const withQuickButtons = (
+  cell: React.ReactNode,
+  isLast: boolean,
+  inName = false,
+) => (
   <>
     {cell}
-    <QuickButtons isLast={isLast} />
+    <QuickButtons isLast={isLast} inName={inName} />
   </>
 );
 
@@ -99,13 +134,24 @@ export const NameCell = ({ isLast }: Pick<TCellProps, "isLast">) => {
         linkStyles={row.linkStyles}
         titleWithoutExt={row.titleWithoutExt}
         onContentSelect={row.onContentFileSelect}
-        isIndexEditingMode={false}
+        isIndexEditingMode={row.isIndexEditingMode}
         displayFileExtension={row.displayFileExtension}
       />
       <StyledBadgesContainer>{row.badgesComponent}</StyledBadgesContainer>
     </>,
     isLast,
+    true,
   );
+};
+
+/** The item's place in the room's order. */
+export const IndexColumnCell = ({
+  sideColor,
+}: Pick<TCellProps, "sideColor">) => {
+  const row = useFilesRow();
+  if (!row) return null;
+
+  return <IndexCell item={row.item} sideColor={sideColor} />;
 };
 
 export const AuthorColumnCell = ({ isLast, sideColor }: TCellProps) => {

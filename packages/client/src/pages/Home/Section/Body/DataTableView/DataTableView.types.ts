@@ -66,4 +66,8 @@ export type TFilesColumnsOptions = {
   isPersonalReadOnly: boolean;
   /** False in the SDK frame when its config hides the column settings. */
   showSettings: boolean;
+  /** Width of the "#" column, wide enough for the longest order loaded. */
+  indexColumnSize: number;
+  /** The rows are being reordered: no resizing, column settings or row menus. */
+  isIndexEditingMode: boolean;
 };

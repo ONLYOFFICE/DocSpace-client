@@ -38,6 +38,7 @@ import type { TFunction } from "i18next";
 
 import type { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import type { LinkProps } from "@docspace/shared/utils/plugin-file-utils";
+import type { VDRIndexingAction } from "@docspace/shared/enums";
 
 import type { TFilesTableItem } from "../DataTableView.types";
 
@@ -63,6 +64,10 @@ export type TFilesRowValue = {
   createdDate: string;
   lastOpenedDate: string;
   fileOwner: string;
+  /** The rows are being reordered: the last column holds the move arrows. */
+  isIndexEditingMode: boolean;
+  /** Moves the row up or down one place. */
+  onChangeIndex: (e: React.MouseEvent, action: VDRIndexingAction) => void;
 };
 
 export const FilesRowContext = createContext<TFilesRowValue | null>(null);

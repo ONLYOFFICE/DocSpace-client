@@ -34,9 +34,11 @@
  */
 
 import type React from "react";
+import classNames from "classnames";
 
 import { SortByFieldName } from "@docspace/shared/enums";
 import {
+  DATA_TABLE_SETTINGS_WIDTH,
   contextMenuColumn,
   settingsColumn,
   type DataTableColumn,
@@ -47,6 +49,7 @@ import {
   AuthorColumnCell,
   DateColumnCell,
   ErasureColumnCell,
+  IndexColumnCell,
   LastOpenedColumnCell,
   LocationColumnCell,
   NameCell,
@@ -97,6 +100,8 @@ export const filesColumnsRecord = (
   options: TFilesColumnsOptions,
 ) =>
   [
+    // Never hidden: the old header had no setting for it.
+    ...(section.withIndex ? ["Index"] : []),
     "Name",
     ...section.columns.map((column) =>
       (column.when?.(options) ?? true) ? flags[column.id] && column.id : "",
@@ -115,52 +120,102 @@ export const getFilesColumns = (
   section: TSection,
   options: TFilesColumnsOptions,
 ): DataTableColumn<TFilesTableItem>[] => {
-  const { t, flags, sideColor } = options;
-  const { testIdPrefix, quickButtons } = section;
+  const { t, flags, sideColor, isIndexEditingMode } = options;
+  const { quickButtons } = section;
 
   // The old table's cell test ids, which the client's specs find cells by.
   const cellTestId = (part: string) => (_: TFilesTableItem, index: number) =>
-    `${testIdPrefix}-cell-${part}-${index}`;
+    section.cellTestId(part, index);
 
   const sectionColumns = columnsOf(section, options);
   // Never Name, as in the old rows; in compact the column is not drawn anyway.
   const lastId = sectionColumns.findLast((column) => flags[column.id])?.id;
 
+  // While the rows are reordered the old header ignored drags on its handles.
+  const resizable = !isIndexEditingMode;
+
+  const index: DataTableColumn<TFilesTableItem>[] = section.withIndex
+    ? [
+        {
+          id: "Index",
+          cellTestId: cellTestId("order"),
+          title: "#",
+          width: { type: "fixed", size: options.indexColumnSize },
+          // The selected-row styles reach into the gutter from this cell, the
+          // row's first, as they do from the name cell elsewhere.
+          cellClassName: "table-container_index-cell",
+          cell: () => <IndexColumnCell sideColor={sideColor} />,
+        },
+      ]
+    : [];
+
   return [
+    ...index,
     {
       id: "Name",
       cellTestId: cellTestId("name"),
       title: t("Common:Label"),
       width: { type: "fill" },
+      resizable,
       sortKey: section.nameSortable ? SortByFieldName.Name : undefined,
       // The old table's name-cell class: drag and drop and the selected-row
       // styles of `StyledTable.module.scss` look for it.
-      cellClassName: "table-container_file-name-cell",
+      cellClassName: classNames("table-container_file-name-cell", {
+        // The reorder arrows at the end of Name reach into the gutter.
+        "index-buttons-name": isIndexEditingMode && !lastId,
+      }),
       cell: (_, { isLast }) => <NameCell isLast={isLast && quickButtons} />,
     },
     ...sectionColumns.map((column): DataTableColumn<TFilesTableItem> => {
       const Cell = CELLS[column.cell];
+      const isLastColumn = column.id === lastId;
 
       return {
         id: column.id,
         cellTestId: cellTestId(column.testId),
         title: column.title(t),
         width: { type: "flex" },
+        resizable,
         visible: flags[column.id],
         hideable: true,
         sortKey: column.sortKey,
         sortable: column.sortable,
-        cellClassName: column.id === lastId ? LAST_COLUMN_CLASS : undefined,
+        cellClassName: classNames({
+          [LAST_COLUMN_CLASS]: isLastColumn,
+          "index-buttons": isLastColumn && isIndexEditingMode,
+        }),
         cell: (_, { isLast }) => (
           <Cell isLast={isLast && quickButtons} sideColor={sideColor} />
         ),
       };
     }),
-    options.showSettings
-      ? settingsColumn<TFilesTableItem>({
-          title: t("Common:TableSettingsTitle"),
-          withContextMenu: true,
-        })
-      : contextMenuColumn<TFilesTableItem>(),
+    lastColumn(options),
   ];
+};
+
+/**
+ * The settings button with the row menus, or the row menus alone in the SDK
+ * frame that hides the settings. While the rows are reordered the old rows
+ * dropped their menu cell and the header greyed the settings out.
+ */
+const lastColumn = ({
+  t,
+  showSettings,
+  isIndexEditingMode,
+}: TFilesColumnsOptions): DataTableColumn<TFilesTableItem> => {
+  if (!showSettings && isIndexEditingMode)
+    return {
+      id: "ContextMenu",
+      title: "",
+      width: { type: "fixed", size: DATA_TABLE_SETTINGS_WIDTH },
+      cell: () => null,
+    };
+
+  return showSettings
+    ? settingsColumn<TFilesTableItem>({
+        title: t("Common:TableSettingsTitle"),
+        withContextMenu: !isIndexEditingMode,
+        disabled: isIndexEditingMode,
+      })
+    : contextMenuColumn<TFilesTableItem>();
 };

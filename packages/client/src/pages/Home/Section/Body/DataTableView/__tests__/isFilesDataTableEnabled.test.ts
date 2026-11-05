@@ -28,7 +28,7 @@ describe("isFilesDataTableEnabled", () => {
     expect(isFilesDataTableEnabled("files")).toBe(false);
   });
 
-  it("draws My documents, Trash, Recent, Favorites and Shared with me", () => {
+  it("draws My documents, Trash, Recent, Favorites, Shared with me and VDR", () => {
     localStorage.setItem(FILES_DATA_TABLE_SWITCH, "on");
 
     for (const scope of [
@@ -38,6 +38,7 @@ describe("isFilesDataTableEnabled", () => {
       "favorites",
       "sharedWithMe",
       "inSharedFolder",
+      "vdrIndexing",
     ] as const) {
       expect(isFilesDataTableEnabled(scope)).toBe(true);
     }
@@ -46,7 +47,6 @@ describe("isFilesDataTableEnabled", () => {
   it("leaves the sections it cannot draw yet on the old table", () => {
     localStorage.setItem(FILES_DATA_TABLE_SWITCH, "on");
 
-    expect(isFilesDataTableEnabled("vdrIndexing")).toBe(false);
     expect(isFilesDataTableEnabled("rooms")).toBe(false);
     expect(isFilesDataTableEnabled("people")).toBe(false);
   });

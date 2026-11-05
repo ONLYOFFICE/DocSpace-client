@@ -67,7 +67,7 @@ export type TSectionColumn = {
   flag: TColumnFlag;
   title: (t: TFunction) => string;
   cell: TCellKind;
-  /** The column's part of the old cell test id, `<section>-cell-<testId>-<index>`. */
+  /** The column's part of the old cell test id (`TSection.cellTestId`). */
   testId: string;
   /** The old header's `sortBy`: the sort it shows, and turns the column on for. */
   sortKey?: SortByFieldName;
@@ -79,10 +79,12 @@ export type TSectionColumn = {
 
 /** A section of the documents table: its columns after Name, and how its rows differ. */
 export type TSection = {
-  /** The first part of the old cell test ids. */
-  testIdPrefix: string;
+  /** The old table's test id of a cell, from the column's part and the row index. */
+  cellTestId: (part: string, index: number) => string;
   /** Whether a click on Name sorts by name. */
   nameSortable: boolean;
+  /** Whether a fixed "#" column with each item's order comes before Name. */
+  withIndex?: boolean;
   /** Whether the last column carries the row's quick buttons. */
   quickButtons: boolean;
   columns: TSectionColumn[];
@@ -91,8 +93,18 @@ export type TSection = {
 /** The scopes the DataTable draws, and so the ones `SECTIONS` describes. */
 export type TFilesSection = Extract<
   TTableScope,
-  "files" | "trash" | "recent" | "favorites" | "sharedWithMe" | "inSharedFolder"
+  | "files"
+  | "trash"
+  | "recent"
+  | "favorites"
+  | "sharedWithMe"
+  | "inSharedFolder"
+  | "vdrIndexing"
 >;
+
+/** `<section>-cell-<part>-<index>`, the test ids of most old rows. */
+const dashed = (section: string) => (part: string, index: number) =>
+  `${section}-cell-${part}-${index}`;
 
 /**
  * Shared with me and the folders inside it: one set of columns, but only the
@@ -150,12 +162,12 @@ const sharedColumns = (inFolder: boolean): TSectionColumn[] => [
 /**
  * The old header's columns for each section (`getFilesColumns`,
  * `getTrashFolderColumns`, `getRecentFolderColumns`,
- * `getFavoritesFolderColumns`, `getSharedWithMeFolderColumns` in
- * `TableView/TableHeader.js`), in their order.
+ * `getFavoritesFolderColumns`, `getSharedWithMeFolderColumns`,
+ * `getIndexingColumns` in `TableView/TableHeader.js`), in their order.
  */
 export const SECTIONS: Record<TFilesSection, TSection> = {
   files: {
-    testIdPrefix: "files",
+    cellTestId: dashed("files"),
     nameSortable: true,
     quickButtons: true,
     columns: [
@@ -216,7 +228,7 @@ export const SECTIONS: Record<TFilesSection, TSection> = {
   },
 
   trash: {
-    testIdPrefix: "trash",
+    cellTestId: dashed("trash"),
     nameSortable: true,
     // The old trash row never drew them.
     quickButtons: false,
@@ -279,7 +291,7 @@ export const SECTIONS: Record<TFilesSection, TSection> = {
   // Recent is ordered by when each item was last opened; nothing in its
   // header sorts.
   recent: {
-    testIdPrefix: "recent",
+    cellTestId: dashed("recent"),
     nameSortable: false,
     quickButtons: true,
     columns: [
@@ -322,7 +334,7 @@ export const SECTIONS: Record<TFilesSection, TSection> = {
   },
 
   favorites: {
-    testIdPrefix: "favorites",
+    cellTestId: dashed("favorites"),
     nameSortable: false,
     quickButtons: true,
     columns: [
@@ -368,17 +380,64 @@ export const SECTIONS: Record<TFilesSection, TSection> = {
   // The old table drew both with one row component, so the cell test ids are
   // the same.
   sharedWithMe: {
-    testIdPrefix: "shared-with-me",
+    cellTestId: dashed("shared-with-me"),
     nameSortable: true,
     quickButtons: true,
     columns: sharedColumns(false),
   },
 
   inSharedFolder: {
-    testIdPrefix: "shared-with-me",
+    cellTestId: dashed("shared-with-me"),
     nameSortable: true,
     quickButtons: true,
     columns: sharedColumns(true),
+  },
+
+  // A room with indexing: the items keep the order the room gives them, so
+  // nothing in its header sorts.
+  vdrIndexing: {
+    cellTestId: (part, index) => `index_cell_${part}_${index}`,
+    nameSortable: false,
+    withIndex: true,
+    quickButtons: true,
+    columns: [
+      {
+        id: "AuthorIndexing",
+        flag: "authorVDRColumnIsEnabled",
+        title: (t) => t("Common:ByAuthor"),
+        cell: "author",
+        testId: "author",
+        when: ({ isPublicRoom }) => !isPublicRoom,
+      },
+      {
+        id: "CreatedIndexing",
+        flag: "createdVDRColumnIsEnabled",
+        title: (t) => t("Common:ByCreation"),
+        cell: "created",
+        testId: "created",
+      },
+      {
+        id: "ModifiedIndexing",
+        flag: "modifiedVDRColumnIsEnabled",
+        title: (t) => t("Common:ByLastModified"),
+        cell: "modified",
+        testId: "modified",
+      },
+      {
+        id: "SizeIndexing",
+        flag: "sizeVDRColumnIsEnabled",
+        title: (t) => t("Common:Size"),
+        cell: "size",
+        testId: "size",
+      },
+      {
+        id: "TypeIndexing",
+        flag: "typeVDRColumnIsEnabled",
+        title: (t) => t("Common:Type"),
+        cell: "type",
+        testId: "type",
+      },
+    ],
   },
 };
 

@@ -48,6 +48,7 @@ import {
 import type { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { LinkProps } from "@docspace/shared/utils/plugin-file-utils";
+import type { VDRIndexingAction } from "@docspace/shared/enums";
 
 import withContent from "SRC_DIR/HOCs/withContent";
 import withBadges from "SRC_DIR/HOCs/withBadges";
@@ -76,6 +77,14 @@ export type TFilesDataTableRowProps = {
   setDropTargetPreview: (title: string | null) => void;
   setFirsElemChecked: (checked: boolean) => void;
   setHeaderBorder: (border: boolean) => void;
+  /** A room with indexing, whose rows start with their order. */
+  isIndexing: boolean;
+  /** `filesActionsStore.changeIndex`: moves an item one place up or down. */
+  onEditIndex: (
+    action: VDRIndexingAction,
+    item: TFilesTableItem,
+    t: TFunction,
+  ) => void;
 };
 
 /** The props `withFileActions`, `withContent`, `withQuickButtons` and `withBadges` add. */
@@ -113,6 +122,9 @@ type THocProps = {
   createdDate: string;
   lastOpenedDate: string;
   fileOwner: string;
+  isIndexEditingMode: boolean;
+  /** The item was moved while reordering and is not saved yet. */
+  isIndexUpdated: boolean;
 };
 
 /**
@@ -158,6 +170,10 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
     selectedFolderTitle,
     canCreateSecurity,
     disableDrag,
+    isIndexing,
+    isIndexEditingMode,
+    isIndexUpdated,
+    onEditIndex,
   } = props;
 
   const [isDragActive, setIsDragActive] = useState(false);
@@ -172,15 +188,16 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       title={item.title}
       badgeUrl={badgeUrl}
       badgeIconColor={badgeIconColor}
-      className=""
+      className={classNames({ "icon-with-index-column": isIndexing })}
     />
   );
 
-  // The tint of a folder a drag hovers, and the fade of every other row.
+  // The tint of a folder a drag hovers, and the fade of every other row. A
+  // drag while reordering moves the row, so no folder takes the tint.
   const cellStyle = useMemo<React.CSSProperties>(
     () => ({
       background:
-        dragging && isDragging
+        dragging && isDragging && !isIndexEditingMode
           ? isDragActive
             ? acceptBackground
             : background
@@ -190,11 +207,19 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
     [
       dragging,
       isDragging,
+      isIndexEditingMode,
       isDragActive,
       isDragDisabled,
       acceptBackground,
       background,
     ],
+  );
+
+  const onChangeIndex = useEventCallback(
+    (e: React.MouseEvent, action: VDRIndexingAction) => {
+      e.stopPropagation();
+      onEditIndex(action, item, t);
+    },
   );
 
   const onDragOverEvent = useEventCallback(
@@ -256,6 +281,8 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       createdDate: props.createdDate,
       lastOpenedDate: props.lastOpenedDate,
       fileOwner: props.fileOwner,
+      isIndexEditingMode,
+      onChangeIndex,
     }),
     // `element` is rebuilt from the item each render, like the old row's.
     [
@@ -276,21 +303,28 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       props.createdDate,
       props.lastOpenedDate,
       props.fileOwner,
+      isIndexEditingMode,
+      onChangeIndex,
     ],
   );
 
+  // No menu while the rows are reordered: the old row dropped its options.
   const contextMenu = useMemo(
-    () => ({
-      options: item.contextOptions as ContextMenuModel[] | undefined,
-      getModel: getContextModel,
-      onOpen: fileContextClick,
-      onClose: onHideContextMenu,
-      badgeUrl,
-      title: item.isFolder
-        ? t("Common:TitleShowFolderActions")
-        : t("Common:TitleShowActions"),
-    }),
+    () =>
+      isIndexEditingMode
+        ? undefined
+        : {
+            options: item.contextOptions as ContextMenuModel[] | undefined,
+            getModel: getContextModel,
+            onOpen: fileContextClick,
+            onClose: onHideContextMenu,
+            badgeUrl,
+            title: item.isFolder
+              ? t("Common:TitleShowFolderActions")
+              : t("Common:TitleShowActions"),
+          },
     [
+      isIndexEditingMode,
       item.contextOptions,
       item.isFolder,
       getContextModel,
@@ -300,6 +334,9 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       t,
     ],
   );
+
+  // A moved row stays highlighted until the new order is saved.
+  const checked = checkedProps || isIndexUpdated;
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
@@ -339,7 +376,7 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
           row={item}
           index={index}
           testId={`table-row-${index}`}
-          checked={checkedProps}
+          checked={checked}
           active={isActive}
           className={classNames(
             rowStyles.styledTableRow,
@@ -349,7 +386,7 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
               [styles.active]: isActive,
               // A folder the dragged items can be dropped into.
               [styles.dropTarget]: dragging && isDragging,
-              [rowStyles.checked]: checkedProps,
+              [rowStyles.checked]: checked,
               [rowStyles.active]: isActive,
               [rowStyles.isDragging]: dragging,
               [rowStyles.isHighlight]: isHighlight,
@@ -357,6 +394,9 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
               [rowStyles.canDrag]: !item.isThirdPartyFolder && canDrag,
               [rowStyles.isBlockingOperation]: isBlockingOperation,
               [rowStyles.inProgress]: inProgress,
+              [rowStyles.isIndexing]: isIndexing,
+              [rowStyles.isIndexEditingMode]: isIndexEditingMode,
+              [rowStyles.isIndexUpdated]: isIndexUpdated,
             },
           )}
           cellProps={{
@@ -366,8 +406,10 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
             style: cellStyle,
           }}
           contextMenu={contextMenu}
-          onClick={onMouseClick}
-          onDoubleClick={onDoubleClick}
+          // Reordering: a press starts the drag (withFileActions), a click
+          // neither selects nor opens.
+          onClick={isIndexEditingMode ? undefined : onMouseClick}
+          onDoubleClick={isIndexEditingMode ? undefined : onDoubleClick}
         />
       </FilesRowContext>
     </DragAndDrop>

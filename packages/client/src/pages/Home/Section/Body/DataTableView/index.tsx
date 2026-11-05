@@ -112,6 +112,9 @@ type InjectedProps = {
   disableDrag: boolean;
   setDropTargetPreview: (title: string | null) => void;
   withContentSelection: boolean;
+  indexColumnSize: number;
+  isIndexEditingMode: boolean;
+  changeIndex: TStore["filesActionsStore"]["changeIndex"];
 };
 
 const getRowKey = (item: TFilesTableItem) =>
@@ -151,6 +154,9 @@ const DataTableView = ({
   disableDrag,
   setDropTargetPreview,
   withContentSelection,
+  indexColumnSize,
+  isIndexEditingMode,
+  changeIndex,
 }: InjectedProps) => {
   const { t } = useTranslation(["Files", "Common"]);
 
@@ -172,8 +178,19 @@ const DataTableView = ({
       isPublicRoom,
       isPersonalReadOnly,
       showSettings,
+      indexColumnSize,
+      isIndexEditingMode,
     }),
-    [t, sideColor, flags, isPublicRoom, isPersonalReadOnly, showSettings],
+    [
+      t,
+      sideColor,
+      flags,
+      isPublicRoom,
+      isPersonalReadOnly,
+      showSettings,
+      indexColumnSize,
+      isIndexEditingMode,
+    ],
   );
 
   // What the old header does on mount: read the stored visible columns into
@@ -251,6 +268,7 @@ const DataTableView = ({
 
   const highlightId = highlightFile.id;
   const highlightIsExst = highlightFile.isExst;
+  const isIndexing = !!section.withIndex;
 
   // The old table's row with the client's HOCs around the ui-kit row.
   const renderRow = useCallback(
@@ -271,9 +289,13 @@ const DataTableView = ({
         setDropTargetPreview={setDropTargetPreview}
         setFirsElemChecked={setFirsElemChecked}
         setHeaderBorder={setHeaderBorder}
+        isIndexing={isIndexing}
+        onEditIndex={changeIndex}
       />
     ),
     [
+      isIndexing,
+      changeIndex,
       theme,
       highlightId,
       highlightIsExst,
@@ -345,6 +367,8 @@ export default inject<TStore>(
     selectedFolderStore,
     uploadDataStore,
     hotkeyStore,
+    indexingStore,
+    filesActionsStore,
   }) => {
     const {
       filter,
@@ -396,6 +420,9 @@ export default inject<TStore>(
       setDropTargetPreview:
         uploadDataStore.primaryProgressDataStore.setDropTargetPreview,
       withContentSelection: hotkeyStore.withContentSelection,
+      indexColumnSize: filesStore.indexColumnSize,
+      isIndexEditingMode: indexingStore.isIndexEditingMode,
+      changeIndex: filesActionsStore.changeIndex,
     };
   },
 )(observer(DataTableView));

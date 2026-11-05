@@ -77,6 +77,7 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
 
   const [prevEmail, setPrevEmail] = useState(email);
   const emailTextId = useId();
+  const changeEmailId = useId();
   const [tempEmail, setTempEmail] = useState(email);
   const [isEmailValid, setIsEmailValid] = useState(email.length > 0);
   const [isPrevEmailValid, setIsPrevEmailValid] = useState(email.length > 0);
@@ -248,10 +249,10 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
             onClick={openEmail}
             role="button"
             tabIndex={0}
-            // Named by what it does, described by the email it changes: its
-            // text alone read as the address, with no hint that it edits.
-            aria-label={t("PeopleTranslations:EmailChangeButton")}
-            aria-describedby={emailTextId}
+            // Named by the address it shows, then by what it does: the text
+            // alone gave no hint that it edits, and a name that left the
+            // visible address out could not be spoken to by voice control.
+            aria-labelledby={`${emailTextId} ${changeEmailId}`}
             onKeyDown={handleEmailKeyDown}
             className="user-email"
             ref={emailTextRef}
@@ -265,6 +266,9 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
             >
               {prevEmail !== "" ? prevEmail : t("Settings:NoEmail")}
             </Text>
+            <span id={changeEmailId} hidden>
+              {t("PeopleTranslations:EmailChangeButton")}
+            </span>
           </span>
         )}
       </TableCell>

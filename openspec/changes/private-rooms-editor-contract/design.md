@@ -810,6 +810,17 @@ container. The add-on read of 2026-10-30 ("the encrypted upload route
 unreachable") is superseded by the request log: `/upload` is used, with
 ciphertext.
 
+### Landed on the server on 2026-11-05
+
+`1259577f63` on `release/v4.1.0` of `../server` ("check file keys, refuse
+unencrypted saves, hide room titles in letters") implemented the portal
+items P-1, P-3, P-7 and P-8 of `contract-v1.md` and tasks 2.1, 5.4, 6.3,
+6.4, 10.4, 10.5 and 10.7, each recorded at its task and decision (D2, D8,
+D9, D10). P-5, the stable key and base while a session exists (task 6.2),
+and the key-pair list in the signed configuration (task 10.6) did not
+land. The same commit changed the private-room file-key contract
+(`private-rooms-server-hardening`, "Landed on 2026-11-05").
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -850,7 +861,13 @@ ciphertext.
    build through `settings/version/build` (10.0.2.5 on the stand) while
    `files/docservice.version` is empty; `info/info.json` is loopback-only
    and names the build, not the library; so the boolean is derived from the
-   library path until a published signal exists (DS-16).
+   library path until a published signal exists (DS-16). Landed 2026-11-05
+   (`1259577f63`): `docServiceEncryptionSupported` on `FilesSettingsDto`,
+   read by `GET files/settings`; `DocumentServiceEncryptionChecker` probes
+   `{internal Document Server address}/sdkjs/common/crypto/onlyoffice-crypto.js`
+   with a five-second timeout, answers true on 200, caches the result for
+   ten minutes per portal and address, and answers false without a Document
+   Server address.
 
 3. **Co-editing allowed (decided 2026-10-29).** The Document Server encrypts
    every change with the DEK and stores only ciphertext, and each co-editor's
@@ -964,7 +981,7 @@ ciphertext.
    downloads it in the browser. `document.url` is built from the public portal
    address and then `ReplaceCommunityAddress` swaps its host for the address
    meant for Document Server requests; for an encrypted file the swap is
-   skipped.
+   skipped. Landed 2026-11-05 (`1259577f63`, `Configuration.cs:232-236`).
 
 9. **PDF forms: fill as an edit, no form-data collection, no "Share to fill
    out".** Filling a form in the edit mode of a private room works and its
@@ -980,13 +997,23 @@ ciphertext.
    after ff9f51aeffb, and the add-on passing the form flag of the container it
    opened to `encryptFile` when it saves.
    Role-based filling in a private virtual data room is server-compatible but
-   unverified in the editor, and stays an open question.
+   unverified in the editor, and stays an open question. Landed 2026-11-05
+   (`1259577f63`): the server refuses the submit callback of a file in a
+   private room, hides the submit button for an encrypted file, refuses
+   start filling for an encrypted file and denies the start-filling right
+   inside a private room, in a virtual data room too, which closes the role
+   question for v1: no filling starts there.
 
 10. **An encrypted file's save fails closed.** The encrypted flag of a
     force-saved version is copied from the callback, so a callback without it
     would store ciphertext marked as plaintext. The server refuses a save of a
     file whose current version is encrypted when the callback carries no
-    encrypted flag, and keeps the previous version.
+    encrypted flag, and keeps the previous version. Landed 2026-11-05
+    (`1259577f63`): the tracker answers an error for a file in a private
+    room when the callback carries no flag, is a user submit or comes from
+    a user who may no longer edit, and `SaveEditingAsync` throws for a save
+    without the flag; outside a force save the tracker is removed and the
+    editing stop sent, so the next open starts a fresh session.
 
 11. **The bundle carries a build stamp and a library version.** Implemented
     2026-10-29 (task 1.4), 2.2.0 on 2026-10-30 exporting
@@ -1167,7 +1194,8 @@ BLOCKED or "after <x>" waits.
 - [Server paths store ciphertext as a plaintext file or send it to the
   Document Server] → tasks 10.2 to 10.4; `copyas`, restore by address and
   conversion are reachable through the API today. `copyas` closed on
-  2026-11-04 (`bd89a24dcd`, task 10.2).
+  2026-11-04 (`bd89a24dcd`, task 10.2); restore by address and reference
+  data closed on 2026-11-05 (`1259577f63`, task 10.4).
 
 ## Migration Plan
 

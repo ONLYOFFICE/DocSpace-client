@@ -457,14 +457,14 @@ client-side guarantee stays the one of `private-rooms/encryption-core`
 | DS-18 | Document Server | spreadsheet editor applies relayed encrypted changes | closed in 10.0.2.5 |
 | DS-19 | Document Server | no duplicated replay on a presentation reopen | new, from the run of 2026-10-30 |
 | DS-20 | Document Server | an image inserted from the device is shown | new, from the run of 2026-10-30 |
-| P-1 | Portal server | `document.url` reachable from the browser | task 6.3 |
+| P-1 | Portal server | `document.url` reachable from the browser | implemented 2026-11-05 (task 6.3) |
 | P-2 | Portal and Document Server | secure contexts | deployment rule |
-| P-3 | Portal server | refuse a save without the encrypted flag | task 6.4 |
+| P-3 | Portal server | refuse a save without the encrypted flag | implemented 2026-11-05 (task 6.4) |
 | P-4 | Portal server | form classification from the header | implemented |
 | P-5 | Portal server | stable key and base while a session exists | task 6.2 |
 | P-6 | Portal | no decrypted copy stored in the portal | task 5.1 |
-| P-7 | Portal server | refuse encrypted form submissions | task 5.4 |
-| P-8 | Portal server | capability flag | task 2.1 |
+| P-7 | Portal server | refuse encrypted form submissions | implemented 2026-11-05 (task 5.4) |
+| P-8 | Portal server | capability flag | implemented 2026-11-05 as `docServiceEncryptionSupported` (task 2.1) |
 
 ## 14. Open questions
 

@@ -41,7 +41,7 @@ import { useTranslation } from "react-i18next";
 
 import { DocumentEditor, type IConfig } from "@onlyoffice/apps-ui-kit/document-editor";
 
-import { ThemeKeys } from "@docspace/shared/enums";
+import { StartFillingMode, ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
@@ -67,6 +67,7 @@ import useEditorEvents from "@/hooks/useEditorEvents";
 import useAIAttachFile from "@/hooks/useAIAttachFile";
 import useGoBackAndClose from "@/hooks/useGoBackAndClose";
 import useFileEncryptionKeys from "@/hooks/useFileEncryptionKeys";
+import useFormFieldChanges from "@/hooks/useFormFieldChanges";
 import { isPDFDocument } from "@/utils";
 
 import Bar from "./Bar";
@@ -115,6 +116,21 @@ const Editor = ({
   // file; shown in place of the editor.
   const [frameError, setFrameError] = React.useState<string | null>(null);
 
+  // Only the original form of a form-filling room open for editing: the editor sets this mode for PDF forms of such
+  // rooms alone, and filled or completed forms are not open for editing.
+  const {
+    takeSnapshot: takeFieldsSnapshot,
+    reportFieldChanges,
+    scheduleFieldChanges,
+    flushFieldChanges,
+  } = useFormFieldChanges(
+    fileInfo?.id,
+    fileInfo?.version,
+    config?.startFillingMode === StartFillingMode.StartFillingRoomForm &&
+      config?.editorConfig?.mode === "edit" &&
+      !!config?.document?.permissions?.edit,
+  );
+
   const {
     onDocumentReady,
     onSDKRequestOpen,
@@ -158,7 +174,11 @@ const Editor = ({
     openShareFormDialog,
     onOpenRoleMappingPanel,
     shareKey,
-      disconnectUsers,
+    disconnectUsers,
+    takeFieldsSnapshot,
+    reportFieldChanges,
+    scheduleFieldChanges,
+    flushFieldChanges,
   });
 
   // AI is not available to guests and anonymous viewers — the same rule the

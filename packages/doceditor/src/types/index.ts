@@ -435,6 +435,10 @@ export interface UseEventsProps {
   openShareFormDialog?: VoidFunction;
   onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
   disconnectUsers?: () => Promise<void>;
+  takeFieldsSnapshot?: () => Promise<void>;
+  reportFieldChanges?: () => Promise<void>;
+  scheduleFieldChanges?: () => void;
+  flushFieldChanges?: () => void;
 }
 
 export interface UseInitProps {
@@ -498,6 +502,13 @@ export type TEditorConnector = {
     params: object[],
     callback: (response: object | { error: string }) => void,
   ) => void;
+  // Runs the command inside the editor, where Api is the document builder API; isNoCalc skips recalculating the document.
+  callCommand?: (
+    command: () => unknown,
+    callback: (result: unknown) => void,
+    isNoCalc?: boolean,
+  ) => void;
+  disconnect?: () => void;
 };
 
 export type TCatchError =

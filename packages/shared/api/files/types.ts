@@ -60,6 +60,17 @@ export type TFile = TFileBase & {
   hasMetadataFields?: boolean;
 };
 
+export type TFormFieldKeyChange = {
+  oldKey: string;
+  newKey: string;
+};
+
+export type TFormFieldChangesRequest = {
+  version: number;
+  sequence: number;
+  renames: TFormFieldKeyChange[];
+};
+
 export type TFileEncryptionInfo = {
   userKeys: Array<{
     id: string;

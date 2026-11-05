@@ -107,7 +107,15 @@ vi.mock("@/utils/aiProxy", () => ({
   abortAllRequests: vi.fn(),
 }));
 
-import { markAsFavorite, removeFromFavorite } from "@docspace/shared/api/files";
+import {
+  manageFormFilling,
+  markAsFavorite,
+  removeFromFavorite,
+} from "@docspace/shared/api/files";
+import {
+  FormFillingManageAction,
+  StartFillingMode,
+} from "@docspace/shared/enums";
 
 import useEditorEvents from "../useEditorEvents";
 
@@ -164,6 +172,78 @@ describe("useEditorEvents", () => {
       });
 
       expect(markAsFavorite).toHaveBeenCalledWith([7], []);
+    });
+  });
+
+  describe("form field changes", () => {
+    const settle = () =>
+      act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      });
+
+    it("Editor ready: the fields are read as they were opened", async () => {
+      const takeFieldsSnapshot = vi.fn(async () => undefined);
+      render({ fileInfo: fileInfo(false), takeFieldsSnapshot });
+
+      await act(async () => {
+        events.onDocumentReady();
+      });
+
+      expect(takeFieldsSnapshot).toHaveBeenCalledTimes(1);
+    });
+
+    it("Document changed and saved, in the handler of the first render: the renames are scheduled on both", () => {
+      const scheduleFieldChanges = vi.fn();
+      render({ fileInfo: fileInfo(false), scheduleFieldChanges });
+
+      // The editor keeps this handler, made while the document was not ready yet.
+      const { onDocumentStateChange } = events;
+
+      act(() => onDocumentStateChange({ data: true }));
+      act(() => onDocumentStateChange({ data: false }));
+
+      expect(scheduleFieldChanges).toHaveBeenCalledTimes(2);
+    });
+
+    it("Editor closed: the renames read last are sent", () => {
+      const flushFieldChanges = vi.fn();
+      render({ fileInfo: fileInfo(false), flushFieldChanges });
+
+      events.onSDKRequestClose();
+
+      expect(flushFieldChanges).toHaveBeenCalledTimes(1);
+    });
+
+    it("Filling started from the editor: it starts once the renames are reported", async () => {
+      let reported: () => void = () => {};
+      const reportFieldChanges = vi.fn(
+        () =>
+          new Promise<void>((resolve) => {
+            reported = resolve;
+          }),
+      );
+      render({
+        fileInfo: fileInfo(false),
+        config: {
+          ...config,
+          startFillingMode: StartFillingMode.StartFillingRoomForm,
+        },
+        reportFieldChanges,
+      });
+
+      events.onRequestStartFilling({});
+      await settle();
+
+      expect(reportFieldChanges).toHaveBeenCalledTimes(1);
+      expect(manageFormFilling).not.toHaveBeenCalled();
+
+      reported();
+      await settle();
+
+      expect(manageFormFilling).toHaveBeenCalledWith(
+        7,
+        FormFillingManageAction.Start,
+      );
     });
   });
 });

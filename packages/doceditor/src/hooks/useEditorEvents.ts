@@ -126,6 +126,10 @@ const useEditorEvents = ({
   openShareFormDialog,
   onOpenRoleMappingPanel,
   disconnectUsers,
+  takeFieldsSnapshot,
+  reportFieldChanges,
+  scheduleFieldChanges,
+  flushFieldChanges,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
 
@@ -272,6 +276,8 @@ const useEditorEvents = ({
     frameCallCommand("setIsLoaded");
 
     checkAndRequestRoles();
+
+    takeFieldsSnapshot?.();
 
     frameCallEvent({
       event: "onAppReady",
@@ -547,6 +553,7 @@ const useEditorEvents = ({
     t,
     successAuth,
     fileInfo?.id,
+    takeFieldsSnapshot,
   ]);
 
   const onUserActionRequired = React.useCallback(() => {
@@ -554,6 +561,8 @@ const useEditorEvents = ({
   }, []);
 
   const onSDKRequestClose = React.useCallback(() => {
+    flushFieldChanges?.();
+
     const editorGoBack = sdkConfig?.editorGoBack;
     const returnUrl = getSafeReturnUrl(sdkConfig?.returnUrl);
 
@@ -580,6 +589,7 @@ const useEditorEvents = ({
     sdkConfig?.returnUrl,
     config?.editorConfig?.customization?.goback?.url,
     fileInfo,
+    flushFieldChanges,
   ]);
 
   const getDefaultFileName = React.useCallback(
@@ -895,6 +905,10 @@ const useEditorEvents = ({
 
   const onDocumentStateChange = React.useCallback(
     (event: object) => {
+      // Before the readiness check: the editor keeps the handler of its first render. A rename shows as a change at
+      // once, while its save may come only when the editor is left, so the fields are read on both.
+      scheduleFieldChanges?.();
+
       if (!documentReady) return;
 
       setDocSaved(!(event as { data: boolean }).data);
@@ -931,6 +945,7 @@ const useEditorEvents = ({
       documentReady,
       successAuth,
       organizationName,
+      scheduleFieldChanges,
     ],
   );
 
@@ -1120,6 +1135,8 @@ const useEditorEvents = ({
             onOpenRoleMappingPanel?.(event.data);
         })
         .with(StartFillingMode.StartFillingRoomForm, async () => {
+          await reportFieldChanges?.();
+
           await manageFormFilling(fileInfo!.id, FormFillingManageAction.Start);
 
           await disconnectUsers?.();
@@ -1132,7 +1149,12 @@ const useEditorEvents = ({
           console.error("Unknown start filling mode");
         });
     },
-    [config?.startFillingMode, openShareFormDialog, onOpenRoleMappingPanel],
+    [
+      config?.startFillingMode,
+      openShareFormDialog,
+      onOpenRoleMappingPanel,
+      reportFieldChanges,
+    ],
   );
 
   const onRequestRefreshFile = React.useCallback(async () => {

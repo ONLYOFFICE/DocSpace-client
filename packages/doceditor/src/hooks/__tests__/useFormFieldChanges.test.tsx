@@ -1,0 +1,365 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import React, { act } from "react";
+import { createRoot, type Root } from "react-dom/client";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+(globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT =
+  true;
+
+type TForm = { GetInternalId?: () => unknown; GetFormKey?: () => unknown };
+
+const { editor } = vi.hoisted(() => ({
+  editor: {
+    forms: [] as TForm[],
+    createConnector: vi.fn(),
+    callCommand: vi.fn(),
+    disconnect: vi.fn(),
+  },
+}));
+
+vi.mock("@docspace/shared/api/files", () => ({
+  reportFormFieldChanges: vi.fn(async () => undefined),
+}));
+
+vi.mock("@/utils", () => ({
+  getDocEditor: () => ({ createConnector: editor.createConnector }),
+}));
+
+import { reportFormFieldChanges } from "@docspace/shared/api/files";
+
+import useFormFieldChanges from "../useFormFieldChanges";
+
+const report = vi.mocked(reportFormFieldChanges);
+
+const form = (id: string | undefined, key: string): TForm => ({
+  ...(id !== undefined && { GetInternalId: () => id }),
+  GetFormKey: () => key,
+});
+
+const setForms = (...forms: TForm[]) => {
+  editor.forms = forms;
+};
+
+const httpError = (status: number) =>
+  Object.assign(new Error(`status ${status}`), { response: { status } });
+
+describe("useFormFieldChanges", () => {
+  let root: Root | null = null;
+  let hook: ReturnType<typeof useFormFieldChanges>;
+
+  const Probe = ({
+    fileId,
+    version,
+    enabled,
+  }: {
+    fileId?: number;
+    version?: number;
+    enabled: boolean;
+  }) => {
+    hook = useFormFieldChanges(fileId, version, enabled);
+    return null;
+  };
+
+  const render = (enabled = true) => {
+    root = createRoot(document.createElement("div"));
+    act(() => root?.render(<Probe fileId={7} version={3} enabled={enabled} />));
+  };
+
+  beforeEach(() => {
+    // The command runs as the editor would run it: against the builder API of the open document.
+    (globalThis as { Api?: object }).Api = {
+      GetDocument: () => ({ GetAllForms: () => editor.forms }),
+    };
+    editor.callCommand.mockImplementation(
+      (command: () => unknown, callback: (result: unknown) => void) =>
+        callback(command()),
+    );
+    editor.createConnector.mockImplementation(() => ({
+      callCommand: editor.callCommand,
+      disconnect: editor.disconnect,
+    }));
+    vi.spyOn(console, "error").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    act(() => root?.unmount());
+    root = null;
+    delete (globalThis as { Api?: object }).Api;
+    vi.mocked(console.error).mockRestore();
+  });
+
+  it("Not the original form of a form-filling room: the editor is not asked and nothing is sent", async () => {
+    render(false);
+    setForms(form("1", "name"));
+
+    await hook.takeSnapshot();
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+
+    expect(editor.createConnector).not.toHaveBeenCalled();
+    expect(report).not.toHaveBeenCalled();
+  });
+
+  it("Callbacks kept from the first render, before the file was known: they report the form as it is now", async () => {
+    root = createRoot(document.createElement("div"));
+    act(() => root?.render(<Probe enabled={false} />));
+    // The editor holds on to the callbacks it got first.
+    const first = hook;
+
+    act(() => root?.render(<Probe fileId={7} version={3} enabled />));
+    setForms(form("1", "name"));
+    await first.takeSnapshot();
+
+    setForms(form("1", "fullName"));
+    first.scheduleFieldChanges();
+    await hook.reportFieldChanges();
+
+    expect(report).toHaveBeenCalledWith(7, {
+      version: 3,
+      sequence: expect.any(Number),
+      renames: [{ oldKey: "name", newKey: "fullName" }],
+    });
+    expect(first.scheduleFieldChanges).toBe(hook.scheduleFieldChanges);
+  });
+
+  it("Field renamed: the old and the new key of that field are reported, read without recalculating the document", async () => {
+    render();
+    setForms(form("1", "name"), form("2", "email"));
+    await hook.takeSnapshot();
+
+    setForms(form("1", "fullName"), form("2", "email"), form("3", "phone"));
+    await hook.reportFieldChanges();
+
+    expect(report).toHaveBeenCalledTimes(1);
+    expect(report).toHaveBeenCalledWith(7, {
+      version: 3,
+      sequence: expect.any(Number),
+      renames: [{ oldKey: "name", newKey: "fullName" }],
+    });
+    expect(editor.callCommand).toHaveBeenLastCalledWith(
+      expect.any(Function),
+      expect.any(Function),
+      true,
+    );
+  });
+
+  it("Saved without renames: nothing is sent", async () => {
+    render();
+    setForms(form("1", "name"));
+    await hook.takeSnapshot();
+
+    await hook.reportFieldChanges();
+
+    expect(report).not.toHaveBeenCalled();
+  });
+
+  it("Same renames on the next save: they are sent once", async () => {
+    render();
+    setForms(form("1", "name"));
+    await hook.takeSnapshot();
+
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+    await hook.reportFieldChanges();
+
+    expect(report).toHaveBeenCalledTimes(1);
+  });
+
+  it("Rename undone: an empty report replaces the earlier one", async () => {
+    render();
+    setForms(form("1", "name"));
+    await hook.takeSnapshot();
+
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+    setForms(form("1", "name"));
+    await hook.reportFieldChanges();
+
+    expect(report).toHaveBeenCalledTimes(2);
+    expect(report.mock.calls[1][1].renames).toEqual([]);
+    expect(report.mock.calls[1][1].sequence).toBeGreaterThan(
+      report.mock.calls[0][1].sequence,
+    );
+  });
+
+  it("A field the editor gives no id: the read tells nothing and nothing is sent", async () => {
+    render();
+    setForms(form("1", "name"), form("2", "email"));
+    await hook.takeSnapshot();
+
+    setForms(form(undefined, "fullName"), form(undefined, "email"));
+    await hook.reportFieldChanges();
+
+    expect(report).not.toHaveBeenCalled();
+  });
+
+  it("No id in the snapshot: later reads are not compared against it", async () => {
+    render();
+    setForms(form(undefined, "name"), form(undefined, "email"));
+    await hook.takeSnapshot();
+
+    setForms(form("1", "fullName"), form("2", "email"));
+    await hook.reportFieldChanges();
+
+    expect(report).not.toHaveBeenCalled();
+  });
+
+  it("One field without an id: the whole read tells nothing, not only that field", async () => {
+    render();
+    setForms(form(undefined, "name"), form("2", "email"));
+    await hook.takeSnapshot();
+
+    setForms(form(undefined, "fullName"), form("2", "mail"));
+    await hook.reportFieldChanges();
+
+    expect(report).not.toHaveBeenCalled();
+  });
+
+  it("Key cleared or too long: that field is left out of the report", async () => {
+    render();
+    setForms(form("1", "name"), form("2", "email"), form("3", "phone"));
+    await hook.takeSnapshot();
+
+    setForms(
+      form("1", ""),
+      form("2", "x".repeat(256)),
+      form("3", "mobile"),
+    );
+    await hook.reportFieldChanges();
+
+    expect(report.mock.calls[0][1].renames).toEqual([
+      { oldKey: "phone", newKey: "mobile" },
+    ]);
+  });
+
+  it("Fields sharing a key: renamed together they are one rename, split apart they are none", async () => {
+    render();
+    setForms(form("1", "choice"), form("2", "choice"), form("3", "agree"));
+    await hook.takeSnapshot();
+
+    setForms(form("1", "option"), form("2", "option"), form("3", "agree"));
+    await hook.reportFieldChanges();
+    expect(report.mock.calls[0][1].renames).toEqual([
+      { oldKey: "choice", newKey: "option" },
+    ]);
+
+    setForms(form("1", "option"), form("2", "choice"), form("3", "agree"));
+    await hook.reportFieldChanges();
+    expect(report.mock.calls[1][1].renames).toEqual([]);
+  });
+
+  it("Form refused by the server: nothing more is sent in the session", async () => {
+    render();
+    setForms(form("1", "name"));
+    await hook.takeSnapshot();
+
+    report.mockRejectedValueOnce(httpError(403));
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+    setForms(form("1", "fullerName"));
+    await hook.reportFieldChanges();
+
+    expect(report).toHaveBeenCalledTimes(1);
+  });
+
+  it("Other failure: the report is sent again on the next save", async () => {
+    render();
+    setForms(form("1", "name"));
+    await hook.takeSnapshot();
+
+    report.mockRejectedValueOnce(httpError(429));
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+    await hook.reportFieldChanges();
+
+    expect(report).toHaveBeenCalledTimes(2);
+  });
+
+  it("Editor left with an unsent report: it goes with a request that outlives the page", async () => {
+    render();
+    setForms(form("1", "name"));
+    await hook.takeSnapshot();
+
+    report.mockRejectedValueOnce(httpError(500));
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+
+    window.dispatchEvent(new Event("pagehide"));
+
+    expect(report).toHaveBeenCalledTimes(2);
+    expect(report).toHaveBeenLastCalledWith(
+      7,
+      {
+        version: 3,
+        sequence: report.mock.calls[0][1].sequence,
+        renames: [{ oldKey: "name", newKey: "fullName" }],
+      },
+      true,
+    );
+  });
+
+  it("Editor left after the report was sent: nothing more is sent", async () => {
+    render();
+    setForms(form("1", "name"));
+    await hook.takeSnapshot();
+
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+    window.dispatchEvent(new Event("pagehide"));
+
+    expect(report).toHaveBeenCalledTimes(1);
+  });
+
+  it("Several reads: one connector serves the session and is closed with the editor", async () => {
+    render();
+    setForms(form("1", "name"));
+    await hook.takeSnapshot();
+
+    setForms(form("1", "fullName"));
+    await hook.reportFieldChanges();
+    setForms(form("1", "fullerName"));
+    await hook.reportFieldChanges();
+
+    expect(editor.createConnector).toHaveBeenCalledTimes(1);
+    expect(editor.disconnect).not.toHaveBeenCalled();
+
+    act(() => root?.unmount());
+    root = null;
+
+    expect(editor.disconnect).toHaveBeenCalledTimes(1);
+  });
+});

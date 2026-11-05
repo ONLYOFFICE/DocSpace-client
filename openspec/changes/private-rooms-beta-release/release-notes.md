@@ -76,23 +76,31 @@ From the SHALL NOT requirements of `private-rooms/encryption-core`:
 Server (`private-rooms-server-hardening`), backend items not merged as of
 2026-11-05 (the archived-room guards, room events, the invitee keys route,
 the sign-in link fix, the link and template refusals and the room metadata
-guards merged on 2026-11-04):
+guards merged on 2026-11-04; the owner-change check, the missing-keys
+route, the partial key write, the audit of key writes and the neutral room
+name in letters on 2026-11-05):
 
-- owner change of a private room with encrypted files (2);
 - the private-room availability rule (3.1b);
-- validation of encrypted upload titles, and the plaintext room title still
-  sent in invitation and notification e-mails (4);
-- audit events and the per-file access history (6);
+- validation of encrypted upload titles (4.1);
+- the translations of the "Private room" label of letters and pushes, which
+  every language prints in English for now (4.5);
+- the revocation of a removed member's file keys and its audit (6.0, 6.1b);
 - the folder check of the upload-session abort (7.2);
 - recovery and offboarding for organisations (8);
 - the key-set, room-type and third-party checks of room creation (12.3).
 
+Client follow-ups of the merged server items, not in the beta: the owner
+change prepared through the missing-keys route (2.2), the skipped
+recipients of a key write (12.6) and the exact backfill (14.2).
+
 Document Server and editor (`private-rooms-editor-contract`):
 
 - written sign-off of the editor contract by the Document Server team (1.6);
-- the encrypted-editing capability check (2);
+- the client side of the encrypted-editing capability check (2.2 to 2.4;
+  the server reports `docServiceEncryptionSupported` since 2026-11-05);
 - DS-17 and DS-19 above (4.7);
-- server-side refusals of actions the editor must not offer for encrypted
-  files (5.4, 10);
-- session end and the stable document address of encrypted files (6);
+- the stable document key and base while a session exists (6.2); the public
+  document address and the refused saves without the encrypted flag landed
+  on 2026-11-05;
+- the key-pair list in the signed editor configuration (10.6);
 - opening encrypted files from the SDK (7.1).

@@ -83,7 +83,6 @@ const IdpSettings = (props) => {
         labelText={t("CustomEntryButton")}
         name="spLoginLabel"
         placeholder={t("Settings:SingleSignOn")}
-        tabIndex={4}
         tooltipContent={<Text fontSize="12px">{t("CustomEntryTooltip")}</Text>}
         tooltipClass="custom-entry-tooltip icon-button"
         value={spLoginLabel}
@@ -95,7 +94,6 @@ const IdpSettings = (props) => {
         labelText={t("IdpEntityId")}
         name="entityId"
         placeholder={PROVIDER_URL}
-        tabIndex={5}
         tooltipContent={<Text fontSize="12px">{t("ProviderURLTooltip")}</Text>}
         tooltipClass="provider-url-tooltip icon-button"
         value={entityId}
@@ -111,7 +109,6 @@ const IdpSettings = (props) => {
             ? "https://idpservice/SSO/POST"
             : "https://idpservice/SSO/REDIRECT"
         }
-        tabIndex={7}
         tooltipContent={
           <Text fontSize="12px">{t("SignOnEndpointUrlTooltip")}</Text>
         }
@@ -137,7 +134,6 @@ const IdpSettings = (props) => {
             options={ssoBindingOptions}
             selected={ssoBinding}
             spacing="20px"
-            tabIndex={6}
             dataTestId="sso_binding"
           />
         </div>
@@ -151,7 +147,6 @@ const IdpSettings = (props) => {
             ? "https://idpservice/SLO/POST"
             : "https://idpservice/SLO/REDIRECT"
         }
-        tabIndex={9}
         tooltipContent={
           <Text fontSize="12px">{t("LogoutEndpointUrlTooltip")}</Text>
         }
@@ -177,7 +172,6 @@ const IdpSettings = (props) => {
             options={sloBindingOptions}
             selected={sloBinding}
             spacing="20px"
-            tabIndex={8}
           />
         </div>
       </SsoFormField>
@@ -187,7 +181,6 @@ const IdpSettings = (props) => {
         value={nameIdFormat}
         name="nameIdFormat"
         options={nameIdOptions}
-        tabIndex={8}
         dataTestId="name_id_format_combobox"
       />
     </div>

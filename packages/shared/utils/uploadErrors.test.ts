@@ -57,6 +57,32 @@ describe("isQuotaError", () => {
     expect(isQuotaError({ type: "RoomQuotaException" })).toBe(true);
   });
 
+  it("matches the server's quota response, its exception named with the namespace", () => {
+    expect(
+      isQuotaError({
+        response: {
+          status: 402,
+          data: {
+            status: 1,
+            statusCode: 402,
+            error: {
+              message: "The maximum file size is exceeded (1 MB).",
+              type: "ASC.Core.Tenants.TenantQuotaException",
+            },
+          },
+        },
+      }),
+    ).toBe(true);
+    expect(
+      isQuotaError({
+        response: {
+          status: 402,
+          data: { error: { type: "ASC.Core.Billing.BillingException" } },
+        },
+      }),
+    ).toBe(false);
+  });
+
   it("matches quota-related text in response message", () => {
     expect(
       isQuotaError({
@@ -139,6 +165,28 @@ describe("countActiveUploadsForRoom", () => {
     const files = [queued(42), queued(42), queued(99)];
     expect(countActiveUploadsForRoom(files, 42)).toBe(2);
     expect(countActiveUploadsForRoom(files, 99)).toBe(1);
+  });
+
+  it("Uploads in flight: an upload into the room counts for the room", () => {
+    expect(
+      countActiveUploadsForRoom([queued(42, { encryptionRoomId: 42 })], 42),
+    ).toBe(1);
+  });
+
+  it("Uploads into a subfolder: an upload into a folder inside the room counts for the room", () => {
+    const files = [
+      queued(55, { encryptionRoomId: 42 }),
+      queued(77, { encryptionRoomId: "42" }),
+    ];
+
+    expect(countActiveUploadsForRoom(files, 42)).toBe(2);
+    expect(countActiveUploadsForRoom(files, 55)).toBe(0);
+  });
+
+  it("does not count an upload into a subfolder of another room", () => {
+    expect(
+      countActiveUploadsForRoom([queued(55, { encryptionRoomId: 99 })], 42),
+    ).toBe(0);
   });
 
   it("matches roomId across number vs string", () => {

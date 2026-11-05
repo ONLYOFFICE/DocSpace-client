@@ -33,13 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import { KEY_DIALOG_DISPLAY_TYPE } from "@docspace/shared/dialogs/key-dialog-display";
+import { submitOnEnter } from "@docspace/shared/dialogs/key-dialog-keys";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
@@ -62,6 +64,7 @@ export const ResetKeysConfirmDialog: React.FC<ResetKeysConfirmDialogProps> = ({
   isPending,
 }) => {
   const { t } = useTranslation(["Common"]);
+  const titleId = useId();
   const expectedToken = t("Common:ResetEncryptionKeysConfirmationToken");
   const [typed, setTyped] = useState("");
 
@@ -71,15 +74,23 @@ export const ResetKeysConfirmDialog: React.FC<ResetKeysConfirmDialogProps> = ({
 
   const matches = typed.trim().toUpperCase() === expectedToken.toUpperCase();
 
+  const handleKeyDown = useMemo(
+    () => submitOnEnter(onConfirm, matches && !isPending),
+    [onConfirm, matches, isPending],
+  );
+
   return (
     <ModalDialog
       visible={visible}
       onClose={onCancel}
       displayType={ModalDialogType.modal}
+      displayTypeDetailed={KEY_DIALOG_DISPLAY_TYPE}
+      closeOnBackdropClick={false}
+      aria-labelledby={titleId}
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {t("Common:ResetEncryptionKeysTitle")}
+        <span id={titleId}>{t("Common:ResetEncryptionKeysTitle")}</span>
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div
@@ -106,11 +117,13 @@ export const ResetKeysConfirmDialog: React.FC<ResetKeysConfirmDialogProps> = ({
             size={InputSize.base}
             value={typed}
             onChange={(e) => setTyped(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder={expectedToken}
             autoFocus
             scale
             isDisabled={isPending}
-            aria-describedby="reset-keys-warning reset-keys-confirmation"
+            aria-labelledby="reset-keys-confirmation"
+            aria-describedby="reset-keys-warning"
             aria-required="true"
           />
         </div>

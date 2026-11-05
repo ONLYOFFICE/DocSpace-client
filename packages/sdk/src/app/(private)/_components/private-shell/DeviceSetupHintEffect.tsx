@@ -42,8 +42,14 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
+import {
+  clearDeviceSetupHintHandler,
+  registerDeviceSetupHintHandler,
+} from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+
+import { useKeysManagementLink } from "../../_hooks/useKeysManagementLink";
 
 const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 
@@ -51,16 +57,14 @@ const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 // selectedFolderStore.private the way the main-client wrapper does. We only
 // suppress the toast once the user already has a configured envelope.
 const DeviceSetupHintEffect: React.FC = () => {
-  const { hasConfiguredKey } = useEncryption();
+  const { hasConfiguredKey, keysLoaded } = useEncryption();
   const { t } = useTranslation(["Common"]);
+  const { url, open, explain } = useKeysManagementLink();
 
-  React.useEffect(() => {
-    if (hasConfiguredKey) return;
-    try {
-      if (sessionStorage.getItem(DEVICE_SETUP_HINT_SESSION_KEY) === "1") return;
-      sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
-    } catch {
-      // sessionStorage throws in private-mode Safari; fall through.
+  const showHint = React.useCallback(() => {
+    if (!url) {
+      explain();
+      return;
     }
 
     toastr.info(
@@ -75,7 +79,7 @@ const DeviceSetupHintEffect: React.FC = () => {
             color="accent"
             onClick={() => {
               toastr.clear();
-              window.open("/profile/keys-management", "_blank");
+              open();
             }}
           />,
         ]}
@@ -84,7 +88,24 @@ const DeviceSetupHintEffect: React.FC = () => {
       30000,
       true,
     );
-  }, [hasConfiguredKey, t]);
+  }, [t, url, open, explain]);
+
+  // The upload gate asks for the hint when a key-less upload is refused.
+  React.useEffect(() => {
+    registerDeviceSetupHintHandler(showHint);
+    return () => clearDeviceSetupHintHandler();
+  }, [showHint]);
+
+  React.useEffect(() => {
+    if (!keysLoaded || hasConfiguredKey) return;
+    try {
+      if (sessionStorage.getItem(DEVICE_SETUP_HINT_SESSION_KEY) === "1") return;
+      sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
+    } catch {
+      // sessionStorage throws in private-mode Safari; fall through.
+    }
+    showHint();
+  }, [keysLoaded, hasConfiguredKey, showHint]);
 
   return null;
 };

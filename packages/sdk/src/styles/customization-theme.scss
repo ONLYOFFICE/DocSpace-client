@@ -227,7 +227,7 @@ body.light {
   --tile-text-weight: 400;
   --tile-text-color: var(--color-main-text);
   --tile-badge-box-shadow: none;
-  --tile-option-button-padding-end: 8px;
+  --tile-option-button-margin-end: 0px;
   --tile-min-width: 198px;
 
   // ── Calendar / DatePicker ──────────────────────────────────────────────────
@@ -459,7 +459,7 @@ body.dark {
   --tile-text-weight: 400;
   --tile-text-color: var(--color-main-text);
   --tile-badge-box-shadow: none;
-  --tile-option-button-padding-end: 8px;
+  --tile-option-button-margin-end: 0px;
   --tile-min-width: 198px;
 
   // ── Calendar / DatePicker ──────────────────────────────────────────────────

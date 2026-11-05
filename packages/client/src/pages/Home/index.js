@@ -42,7 +42,6 @@ import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
-import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import {
   useChatNoAccess,
@@ -59,8 +58,10 @@ import { createFolder } from "@docspace/shared/api/files";
 import Section from "@onlyoffice/apps-ui-kit/components/section";
 import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { getCategoryType } from "@docspace/shared/utils/common";
+import {
+  getCategoryType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 
@@ -99,6 +100,7 @@ import {
 } from "./Hooks";
 import { useQuickActions } from "./Hooks/useQuickActions";
 import { useHideQuickActions } from "./Hooks/useHideQuickActions";
+import { useSectionDrop } from "./Hooks/useSectionDrop";
 
 import styles from "./Home.module.scss";
 
@@ -117,6 +119,7 @@ const PureHome = observer((props) => {
     selectedFolderStore,
     t,
     startUpload,
+    resolveOpenFolderTarget,
     setDragging,
     dragging,
     isChatDropTarget,
@@ -219,6 +222,7 @@ const PureHome = observer((props) => {
     canCreateFiles,
     canCreateEncrypted,
     canCreateRooms,
+    onCreateRoom,
     isDocumentsFolder,
     isRoom,
     isFormRoomFolder,
@@ -335,6 +339,14 @@ const PureHome = observer((props) => {
   const isFormRoom =
     getCategoryType(location) === CategoryType.Form || isFormRoomFolder;
 
+  const isPrivateRoomsSection =
+    getCategoryType(location) === CategoryType.PrivateRooms;
+
+  const onCreatePrivateRoom = useCallback(
+    () => onCreateRoom(null, false, "sidebar"),
+    [onCreateRoom],
+  );
+
   // Quick-actions banner (ported from the SDK): create tiles above the
   // files/rooms list. The hook resolves which tile set applies (or none) from
   // the current section + create permission.
@@ -347,6 +359,7 @@ const PureHome = observer((props) => {
     setTemplateGalleryVisible,
     setOformFromFolderId,
     setCreateRoomFromTemplate,
+    onCreatePrivateRoom,
     isDocumentsFolder,
     isRoom,
     isFormRoom,
@@ -361,6 +374,8 @@ const PureHome = observer((props) => {
     isFavoritesFolder,
     isRecentFolder,
     isFormsSection,
+    isPrivateRoomsSection,
+    isPrivateRoute: isPrivateRoomsRoute(location.pathname),
     isContactsPage,
     isProfile,
     isSettingsPage,
@@ -370,28 +385,22 @@ const PureHome = observer((props) => {
 
   const onHideQuickActions = useHideQuickActions({ t, setShowQuickActions });
 
-  const onDrop = useEventCallback((f, uploadToFolder) => {
-    if (isContactsPage || isProfile) return;
-
-    if (
-      folderSecurity &&
-      hasOwnProperty(folderSecurity, "Create") &&
-      !folderSecurity.Create
-    )
-      return;
-
-    const dragged = dragging;
-    dragging && setDragging(false);
-
-    if (disableDrag) return;
-
-    createFoldersTree(t, f, uploadToFolder, dragged)
-      .then((fItem) => {
-        if (fItem.length > 0) startUpload(fItem, uploadToFolder, t);
-      })
-      .catch((err) => {
-        toastr.error(err, undefined, 0, true);
-      });
+  const { onDrop, onDropCapture } = useSectionDrop({
+    t,
+    canUpload:
+      !isContactsPage &&
+      !isProfile &&
+      !(
+        folderSecurity &&
+        hasOwnProperty(folderSecurity, "Create") &&
+        !folderSecurity.Create
+      ),
+    disableDrag,
+    dragging,
+    setDragging,
+    resolveOpenFolderTarget,
+    createFoldersTree,
+    startUpload,
   });
 
   useOperations({
@@ -700,6 +709,7 @@ const PureHome = observer((props) => {
           [styles.stickyBannerVars]: showQuickActions,
         })}
         data-layout-mode={isAiChatFullscreen ? "ai-fullscreen" : undefined}
+        onDropCapture={onDropCapture}
       >
         <SectionWrapper
           {...sectionProps}
@@ -936,7 +946,7 @@ export const Component = inject(
       cancelSecondaryOperationById,
     } = secondaryProgressDataStore;
 
-    const { startUpload } = uploadDataStore;
+    const { startUpload, resolveOpenFolderTarget } = uploadDataStore;
 
     const { createFoldersTree } = filesActionsStore;
 
@@ -1047,6 +1057,7 @@ export const Component = inject(
       fetchRooms,
 
       startUpload,
+      resolveOpenFolderTarget,
       createFoldersTree,
 
       setToPreviewFile,
@@ -1143,6 +1154,7 @@ export const Component = inject(
       canCreateFiles: folderSecurity?.Create,
       canCreateEncrypted: uploadDataStore.shouldEncryptCurrentUpload(),
       canCreateRooms: isAdmin || isRoomAdmin,
+      onCreateRoom: contextOptionsStore.onCreateRoom,
       isDocumentsFolder,
       isRoom,
       isFormRoomFolder:

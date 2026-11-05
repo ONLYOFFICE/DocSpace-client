@@ -48,6 +48,7 @@ import type { TPathParts } from "@docspace/shared/types";
 import { FolderType, DeviceType } from "@docspace/shared/enums";
 import { RoomsType } from "@docspace/shared/enums";
 import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
+import { usePickerFileTitles } from "@docspace/shared/hooks/usePickerFileTitles";
 import type {
   FilesSelectorProps,
   FolderDtoInteger,
@@ -114,8 +115,11 @@ import DocsMainButton from "../main-button";
 import VersionHistoryPanel from "../version-history-panel";
 import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";
 
-import useDocsActions from "../../_hooks/useDocsActions";
+import useDocsActions, {
+  type TDocumentExtension,
+} from "../../_hooks/useDocsActions";
 import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
+
 import useTrashActions from "../../_hooks/useTrashActions";
 import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
@@ -138,10 +142,8 @@ import { DragContext } from "@/app/(docspace)/_contexts/DragContext";
 import DragTooltip from "../drag-tooltip";
 
 import {
-  PRIVATE_FILE_CONTEXT_OPTIONS,
-  PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS,
+  getPrivateFileContextOptions,
   PRIVATE_FOLDER_CONTEXT_OPTIONS,
-  PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS,
 } from "../../_constants/private-context-options";
 
 import {
@@ -157,6 +159,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/files";
 
 import styles from "./DocsLayout.module.scss";
+import { makeDropUpload } from "./drop-upload";
 
 type DocsLayoutProps = {
   folders: TFolder[];
@@ -183,8 +186,20 @@ type DocsLayoutProps = {
    * Only meaningful when `isPrivate` is also true.
    */
   isArchive?: boolean;
-  /** Override the upload pipeline (private rooms swap in encrypted upload). */
-  uploadFilesToFolder?: (files: FileList | File[]) => Promise<void>;
+  /**
+   * Override the upload pipeline (private rooms swap in encrypted upload);
+   * gets the folder row the files were dropped on, if any.
+   */
+  uploadFilesToFolder?: (
+    files: FileList | File[],
+    targetFolderId?: number | string,
+  ) => Promise<void>;
+  /** Creates documents in place of the editor (private rooms create them encrypted). */
+  createFileInFolder?: (
+    folderId: number | string,
+    title: string,
+    extension: TDocumentExtension,
+  ) => Promise<boolean>;
   /** Root-room id for HPKE-Auth unwrap of encrypted previews. */
   currentRoomId?: number | string | null;
   /** Whether the current user has loaded their E2EE key pair. */
@@ -219,6 +234,7 @@ const DocsLayoutCore = observer(
     isPrivate,
     isArchive,
     uploadFilesToFolder: uploadFilesToFolderOverride,
+    createFileInFolder,
     currentRoomId,
     hasEncryptionKeys,
     ai,
@@ -230,6 +246,8 @@ const DocsLayoutCore = observer(
     const versionHistoryStore = useVersionHistoryStore();
     const docsUserStore = useDocsUserStore();
     const { sdkConfig } = useSDKConfig();
+    // Spec: private-rooms/sdk-surface, "Decrypted titles in lists and history"
+    const pickerFileTitles = usePickerFileTitles(docsUserStore.user?.id);
 
     const { roomChanged } = useRoomActions();
 
@@ -256,8 +274,16 @@ const DocsLayoutCore = observer(
       isCanCreate &&
       !(isPrivate && isArchive);
 
+    const privateCreate = React.useMemo(
+      () =>
+        isPrivate ? { canCreateFiles: !!hasEncryptionKeys } : undefined,
+      [isPrivate, hasEncryptionKeys],
+    );
+
     const docsActions = useDocsActions({
       uploadFilesToFolderOverride,
+      createFileOverride: createFileInFolder,
+      privateCreate,
     });
     const {
       uploadFilesToFolder,
@@ -278,44 +304,30 @@ const DocsLayoutCore = observer(
     const isAiChatPanelVisible = ai?.isChatPanelVisible ?? false;
     const isAiChatPanelFullscreen = ai?.isChatPanelFullscreen ?? false;
 
-    const {
-      desktopModel: defaultDesktopModel,
-      quickActionItems: defaultQuickActionItems,
-      privateQuickActionItems,
-    } = useDocsMenuModels({
+    const { desktopModel, quickActionItems } = useDocsMenuModels({
       openCreateDialog,
       onUploadFiles,
       onUploadFolder,
+      privateCreate,
     });
+    const showQuickActions =
+      isActionButtonEnabled && quickActionItems.length > 0;
 
-    const desktopModel = React.useMemo(() => {
-      if (!isPrivate) return defaultDesktopModel;
-      const allowed = new Set(["new-folder", "separator-1", "upload-files"]);
-      return defaultDesktopModel.filter((item) =>
-        allowed.has(String(item.key)),
-      );
-    }, [isPrivate, defaultDesktopModel]);
-    // Private rooms swap the document/PDF tiles for the encrypted-room set
-    // (new folder + upload). Archived private rooms are read-only, so the
-    // banner is hidden upstream via `isActionButtonEnabled`.
-    const quickActionItems = isPrivate
-      ? privateQuickActionItems
-      : defaultQuickActionItems;
-
-    // Archived private rooms get the narrower read-only whitelist; active
-    // private rooms use the full whitelist; non-private rooms have no filter.
-    const allowedContextOptions = isPrivate
-      ? isArchive
-        ? PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS
-        : hasEncryptionKeys
-          ? PRIVATE_FILE_CONTEXT_OPTIONS
-          : PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS
-      : undefined;
-    // Archive folders use the same read-only whitelist as files.
+    // Private rooms, active and archived alike, filter each item's options;
+    // non-private rooms have no filter.
+    const allowedContextOptions = React.useMemo(
+      () =>
+        isPrivate
+          ? (file: TFile) =>
+              getPrivateFileContextOptions({
+                mustConvert: file.viewAccessibility?.MustConvert,
+                hasKeys: !!hasEncryptionKeys,
+              })
+          : undefined,
+      [isPrivate, hasEncryptionKeys],
+    );
     const allowedFolderContextOptions = isPrivate
-      ? isArchive
-        ? PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS
-        : PRIVATE_FOLDER_CONTEXT_OPTIONS
+      ? PRIVATE_FOLDER_CONTEXT_OPTIONS
       : undefined;
 
     const handleCreateFolder = React.useCallback(
@@ -359,7 +371,9 @@ const DocsLayoutCore = observer(
       foldersTree,
       selectorInitData,
       disabledItems,
-      pendingHasEncrypted,
+      selectorPinnedRootId,
+      showEncryptedTransferBanner,
+      getSelectorIsDisabled,
       operationProgress,
       trackOperation,
       requestCopy,
@@ -375,15 +389,9 @@ const DocsLayoutCore = observer(
       conflictItems,
       closeConflictDialog,
       confirmConflict,
-    } = useFileOperations();
-
-    // Show the encrypted-transfer warning when move/copy is in progress from a
-    // private room and at least one pending item is an encrypted file.
-    // Matches the reference: packages/client/src/components/FilesSelector ~286.
-    const showEncryptedTransferBanner =
-      !!(selectorMode === "copy" || selectorMode === "move") &&
-      pendingHasEncrypted &&
-      !!isPrivate;
+    } = useFileOperations({
+      uploadDecryptedFiles: docsActions.defaultUploadFilesToFolder,
+    });
 
     const {
       isTrash,
@@ -476,12 +484,18 @@ const DocsLayoutCore = observer(
     const { onItemMouseDown } = useDragActions({ trackOperation });
     const dragStore = useDragStore();
 
+    const dropUpload = makeDropUpload({
+      isPrivate: !!isPrivate,
+      privateUpload: uploadFilesToFolderOverride,
+      genericUpload: uploadFilesToFolder,
+      canCreate: isCanCreate && !isArchive,
+    });
+
     const dragContextValue: React.ContextType<typeof DragContext> = {
       onItemMouseDown,
       isDragging: dragStore.dragging || dragStore.osDragging,
-      onFilesDroppedToFolder: (files, folderId) =>
-        uploadFilesToFolder(files, folderId),
-      onFilesDroppedToCurrentFolder: (files) => uploadFilesToFolder(files),
+      onFilesDroppedToFolder: (files, folderId) => dropUpload(files, folderId),
+      onFilesDroppedToCurrentFolder: (files) => dropUpload(files),
       // Hovered sub-folder overrides the current-folder default in the
       // "Drop to" label; clearing it falls back to the current folder.
       onFolderDragOver: dragStore.setOsHoveredFolderTitle,
@@ -579,7 +593,7 @@ const DocsLayoutCore = observer(
                               data-no-filter={showFilter ? undefined : ""}
                             >
                               <DropZone
-                                onFilesDropped={uploadFilesToFolder}
+                                onFilesDropped={dropUpload}
                                 disabled={
                                   (!isMyDocuments && !isPrivate) ||
                                   (isPrivate && !!isArchive)
@@ -604,9 +618,9 @@ const DocsLayoutCore = observer(
                                       />
                                     }
                                     stickyTableHeader
-                                    scrollableBanner={isActionButtonEnabled}
+                                    scrollableBanner={showQuickActions}
                                     sectionBannerContent={
-                                      isActionButtonEnabled ? (
+                                      showQuickActions ? (
                                         <div
                                           className={styles.createNewSection}
                                         >
@@ -637,6 +651,7 @@ const DocsLayoutCore = observer(
                                       <Filter
                                         filesFilter={filesFilter}
                                         currentFolderId={current.id}
+                                        hideSearch={isPrivate}
                                         showMainButton={
                                           isActionButtonEnabled && !isMobile
                                         }
@@ -731,7 +746,7 @@ const DocsLayoutCore = observer(
                                   )
                                 }
                               />
-                              {isInRooms ? <RoomDialogs /> : null}
+                              {isInRooms && !isPrivate ? <RoomDialogs /> : null}
                               <ShareSelector />
                               <VersionHistoryPanel />
                               <CreateFileDialog
@@ -761,6 +776,7 @@ const DocsLayoutCore = observer(
                               />
                               {selectorDialogVisible && selectorInitData && (
                                 <FilesSelector
+                                  {...pickerFileTitles}
                                   isPanelVisible={selectorDialogVisible}
                                   embedded={false}
                                   currentDeviceType={DeviceType.desktop}
@@ -837,15 +853,10 @@ const DocsLayoutCore = observer(
                                       : undefined
                                   }
                                   getFilesArchiveError={() => ""}
-                                  getIsDisabled={(
-                                    isFirstLoad: boolean,
-                                    _isSelectedParentFolder: boolean,
-                                    _selectedItemId:
-                                      string | number | undefined,
-                                    _selectedItemType:
-                                      "rooms" | "files" | undefined,
-                                    isRoot: boolean,
-                                  ) => isFirstLoad || isRoot}
+                                  pinnedRootId={selectorPinnedRootId}
+                                  getIsDisabled={
+                                    getSelectorIsDisabled as unknown as FilesSelectorProps["getIsDisabled"]
+                                  }
                                   onCancel={closeSelectorDialog}
                                   onSubmit={(
                                     selectedItemId: string | number | undefined,

@@ -34,37 +34,15 @@
  */
 
 /**
- * Private (end-to-end encrypted) rooms are not ready to be released: the
- * editors half of the feature is still being built. The client code is kept
- * intact and fully functional, but every surface that offers the feature to a
- * user is hidden until a tester opts in from the browser console:
+ * The host opt-in of an embedding frame. Private rooms are offered on every
+ * portal while the E2E rooms app is on; a host that embeds the client or the
+ * SDK still has to ask for them with the `privateRooms` property of its frame
+ * configuration, which the SDK frame URL carries under the same name.
  *
- *   localStorage.setItem("privateRooms", "true");   // then reload the page
- *   localStorage.removeItem("privateRooms");        // back to hidden
- *
- * Any non-empty value counts as "enabled" (presence-flag pattern), so
- * `"true"`, `"1"` or `"on"` all work.
- *
- * Gated surfaces (all of them behave exactly as before once the flag is set):
- *   - the Private room card in the create-room type chooser
- *     (`getCreateRoomTypes` in ./rooms.tsx),
- *   - the "e2e-rooms" app: sidebar item, `/e2e-rooms` route and the enable
- *     flow (`SRC_DIR/helpers/disabled-apps.ts`, `AppsStore.isEnabled`),
- *   - the Keys management tab and its `profile/keys-management` routes.
- *
- * The flag is read on demand, but the routing table is built once per page
- * load, so flipping it requires a reload.
+ * Spec: private-rooms/feature-gating, "Client in an embedded frame takes the host opt-in"
  */
 export const PRIVATE_ROOMS_FLAG_KEY = "privateRooms";
 
-export const isPrivateRoomsEnabled = (): boolean => {
-  if (typeof window === "undefined") return false;
-
-  try {
-    return Boolean(window.localStorage.getItem(PRIVATE_ROOMS_FLAG_KEY));
-  } catch {
-    // Storage can throw in a sandboxed iframe or with cookies disabled;
-    // an unreadable flag means the feature stays hidden.
-    return false;
-  }
-};
+/** Whether a frame property or URL parameter value turns the opt-in on. */
+export const isPrivateRoomsOptInValue = (value: unknown): boolean =>
+  value === true || value === "true" || value === "1";

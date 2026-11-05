@@ -85,47 +85,92 @@ export function shouldEncryptUpload(
   return isEncryptableRoomType(roomType) && isPrivate;
 }
 
-export type UploadFolderContext = {
-  isPrivacyFolder: boolean;
-  selectedRoomType?: RoomsType | null;
+/**
+ * Privacy of an upload's target.
+ * Spec: private-rooms/file-operations, "Upload target is fixed when the user
+ * starts the upload".
+ */
+export type UploadTargetContext = {
+  isPrivate: boolean;
+  roomType?: RoomsType | null;
 };
+
+/** Set on a decrypted copy that completes a move out of a private room. */
+export type MoveSourceRef = { fileId: number | string; title: string };
 
 export type ItemUploadContext = {
   roomType?: RoomsType;
   isPrivate?: boolean;
+  moveSource?: MoveSourceRef;
 };
 
 export function resolveItemRoomContext(
   uploadContext: ItemUploadContext | undefined,
-  folder: UploadFolderContext,
+  target: UploadTargetContext,
 ): { roomType: RoomsType | null | undefined; isPrivate: boolean } {
-  const roomType =
-    uploadContext?.roomType ??
-    (folder.isPrivacyFolder ? RoomsType.CustomRoom : folder.selectedRoomType);
+  const roomType = uploadContext?.roomType ?? target.roomType;
   const isPrivate =
     uploadContext && "isPrivate" in uploadContext
       ? !!uploadContext.isPrivate
-      : folder.isPrivacyFolder;
+      : target.isPrivate;
   return { roomType, isPrivate };
 }
 
-export function willEncryptUploadItem(
-  params: {
-    uploadContext?: ItemUploadContext;
-    alreadyEncrypted?: boolean;
-    publicKey?: string | null;
-    userId?: string | null;
-  },
-  folder: UploadFolderContext,
-): boolean {
-  if (params.alreadyEncrypted) return false;
-  if (!params.publicKey || !params.userId) return false;
+export type UploadGateParams = {
+  uploadContext?: ItemUploadContext;
+  alreadyEncrypted?: boolean;
+  publicKey?: string | null;
+  userId?: string | null;
+};
+
+/**
+ * `no-key`: no usable key on this device; `locked`: unlock was declined;
+ * `unsupported-room-type`: a private target names a room type that is never
+ * encrypted.
+ */
+export type UploadRefusalReason = "no-key" | "locked" | "unsupported-room-type";
+
+/**
+ * `encrypt` before sending, send `plain` bytes as they are (non-private
+ * target or already DSE3), or `refuse` and send nothing.
+ * Spec: private-rooms/file-operations, "Uploads into a private room are
+ * encrypted on the client".
+ */
+export type UploadGateOutcome =
+  | { action: "encrypt" }
+  | { action: "plain" }
+  | { action: "refuse"; reason: UploadRefusalReason };
+
+export function resolveUploadGate(
+  params: UploadGateParams,
+  target: UploadTargetContext,
+): UploadGateOutcome {
   const { roomType, isPrivate } = resolveItemRoomContext(
     params.uploadContext,
-    folder,
+    target,
   );
-  if (roomType === null || roomType === undefined) return false;
-  return shouldEncryptUpload(roomType, isPrivate);
+
+  if (!isPrivate) return { action: "plain" };
+  // Spec: private-rooms/file-operations, "Queued private uploads are sent only as ciphertext".
+  if (
+    roomType === null ||
+    roomType === undefined ||
+    !isEncryptableRoomType(roomType)
+  ) {
+    return { action: "refuse", reason: "unsupported-room-type" };
+  }
+  if (!params.publicKey || !params.userId) {
+    return { action: "refuse", reason: "no-key" };
+  }
+  if (params.alreadyEncrypted) return { action: "plain" };
+  return { action: "encrypt" };
+}
+
+export function willEncryptUploadItem(
+  params: UploadGateParams,
+  target: UploadTargetContext,
+): boolean {
+  return resolveUploadGate(params, target).action === "encrypt";
 }
 
 function newUuid(): string {

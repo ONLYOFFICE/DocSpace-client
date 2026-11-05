@@ -35,6 +35,13 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 
+const { zeroBufferSpy } = vi.hoisted(() => ({ zeroBufferSpy: vi.fn() }));
+vi.mock("../utils", async (io) => {
+  const actual = (await io()) as typeof import("../utils");
+  zeroBufferSpy.mockImplementation(actual.zeroBuffer);
+  return { ...actual, zeroBuffer: zeroBufferSpy };
+});
+
 import {
   SecretStorage,
   registerUnlockHandler,
@@ -46,6 +53,13 @@ import {
 } from "../secret-storage";
 import { SESSION_CACHE_DURATION_MS } from "../types";
 import type { IdentityKeyPair } from "../types";
+import {
+  getCachedEncryptedFilename,
+  rememberEncryptedFilename,
+} from "../filename-cache";
+import { generateIdentityKeyPair } from "../identity";
+import { generateDEK } from "../file-keys";
+import { wrapDEK, unwrapDEK } from "../hpke";
 
 function makeIdentity(seed: number): IdentityKeyPair {
   const pk = new Uint8Array(32);
@@ -56,6 +70,77 @@ function makeIdentity(seed: number): IdentityKeyPair {
   }
   return { publicKey: pk, privateKey: sk };
 }
+
+describe("A lock wipes only the cache slot", () => {
+  const ALICE_ID = "11111111-1111-1111-1111-111111111111";
+  const BOB_ID = "22222222-2222-2222-2222-222222222222";
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    SecretStorage.lock();
+  });
+
+  const wrapForBob = async (identity: IdentityKeyPair, bob: IdentityKeyPair) => {
+    const dek = generateDEK();
+    const wrapped = await wrapDEK({
+      dek,
+      senderPrivateKey: identity.privateKey,
+      senderPublicKey: identity.publicKey,
+      senderUserId: ALICE_ID,
+      recipientPublicKey: bob.publicKey,
+      recipientUserId: BOB_ID,
+      fileId: 7,
+    });
+    return { dek, wrapped };
+  };
+
+  it("Lock now during an upload", async () => {
+    const alice = await generateIdentityKeyPair();
+    const bob = await generateIdentityKeyPair();
+    SecretStorage.cacheUnlocked(ALICE_ID, alice);
+    const identity = SecretStorage.getCached(ALICE_ID)!;
+
+    SecretStorage.lock();
+    const { dek, wrapped } = await wrapForBob(identity, bob);
+
+    await expect(
+      unwrapDEK({
+        wrapped,
+        recipientPrivateKey: bob.privateKey,
+        recipientUserId: BOB_ID,
+        expectedSenderPublicKey: alice.publicKey,
+        expectedSenderUserId: ALICE_ID,
+        fileId: 7,
+      }),
+    ).resolves.toEqual(dek);
+    expect(SecretStorage.getCached(ALICE_ID)).toBeNull();
+  });
+
+  it("Idle expiry during a re-wrap", async () => {
+    const alice = await generateIdentityKeyPair();
+    const bob = await generateIdentityKeyPair();
+    SecretStorage.cacheUnlocked(ALICE_ID, alice);
+    const identity = SecretStorage.getCached(ALICE_ID)!;
+    const t0 = Date.now();
+    vi.spyOn(Date, "now").mockImplementation(
+      () => t0 + SESSION_CACHE_DURATION_MS + 1,
+    );
+
+    expect(SecretStorage.getCached(ALICE_ID)).toBeNull();
+    const { dek, wrapped } = await wrapForBob(identity, bob);
+
+    await expect(
+      unwrapDEK({
+        wrapped,
+        recipientPrivateKey: bob.privateKey,
+        recipientUserId: BOB_ID,
+        expectedSenderPublicKey: alice.publicKey,
+        expectedSenderUserId: ALICE_ID,
+        fileId: 7,
+      }),
+    ).resolves.toEqual(dek);
+  });
+});
 
 describe("SecretStorage cache", () => {
   beforeEach(() => {
@@ -121,26 +206,37 @@ describe("SecretStorage cache", () => {
     ).toThrow();
   });
 
-  it("lock() wipes both buffers (zeroBuffer)", () => {
+  it("lock() zeroes the slot, not the copies handed out", () => {
     const kp = makeIdentity(1);
-    // Capture the *exact* arrays held by the cache so we can inspect them
-    // after lock(). cacheUnlocked copies into fresh Uint8Arrays - pull them
-    // back via getCached before locking.
     SecretStorage.cacheUnlocked("alice", kp);
-    const cached = SecretStorage.getCached("alice")!;
-    const pkRef = cached.publicKey;
-    const skRef = cached.privateKey;
-    // Sanity: the buffers held by the cache are not the originals.
-    expect(pkRef).not.toBe(kp.publicKey);
-    expect(skRef).not.toBe(kp.privateKey);
+    const handedOut = SecretStorage.getCached("alice")!;
+    expect(handedOut.privateKey).not.toBe(kp.privateKey);
+    zeroBufferSpy.mockClear();
 
     SecretStorage.lock();
 
-    // After lock, the buffers held by the cache must be zeroed.
-    expect(Array.from(pkRef)).toEqual(Array(32).fill(0));
-    expect(Array.from(skRef)).toEqual(Array(32).fill(0));
-    // And getCached returns null.
+    expect(zeroBufferSpy).toHaveBeenCalledTimes(2);
+    const wiped = zeroBufferSpy.mock.calls.map(([buf]) => buf as Uint8Array);
+    for (const buf of wiped) {
+      expect(Array.from(buf)).toEqual(Array(32).fill(0));
+    }
+    expect(wiped).not.toContain(handedOut.privateKey);
+    expect(wiped).not.toContain(handedOut.publicKey);
+    expect(Array.from(handedOut.privateKey)).toEqual(Array.from(kp.privateKey));
     expect(SecretStorage.getCached("alice")).toBeNull();
+  });
+
+  it("hands every caller its own copy", () => {
+    SecretStorage.cacheUnlocked("alice", makeIdentity(1));
+    const first = SecretStorage.getCached("alice")!;
+    first.privateKey.fill(0);
+
+    const second = SecretStorage.getCached("alice")!;
+
+    expect(second.privateKey).not.toBe(first.privateKey);
+    expect(Array.from(second.privateKey)).toEqual(
+      Array.from(makeIdentity(1).privateKey),
+    );
   });
 
   it("auto-locks on idle expiry", () => {
@@ -161,6 +257,32 @@ describe("SecretStorage cache", () => {
     } finally {
       vi.restoreAllMocks();
     }
+  });
+
+  it("Unlocked session expires", () => {
+    SecretStorage.cacheUnlocked("alice", makeIdentity(1));
+    rememberEncryptedFilename(7, "Report.docx");
+    expect(getCachedEncryptedFilename(7)).toBe("Report.docx");
+
+    const t0 = Date.now();
+    vi.spyOn(Date, "now").mockImplementation(
+      () => t0 + SESSION_CACHE_DURATION_MS + 1,
+    );
+    try {
+      expect(SecretStorage.getCached("alice")).toBeNull();
+      expect(getCachedEncryptedFilename(7)).toBeNull();
+    } finally {
+      vi.restoreAllMocks();
+    }
+  });
+
+  it("Lock clears names", () => {
+    SecretStorage.cacheUnlocked("alice", makeIdentity(1));
+    rememberEncryptedFilename(7, "Report.docx");
+
+    SecretStorage.lock();
+
+    expect(getCachedEncryptedFilename(7)).toBeNull();
   });
 
   it("each successful getCached bumps lastUsedAt — usage extends the session", () => {

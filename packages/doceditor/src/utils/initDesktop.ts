@@ -42,6 +42,7 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 import { regDesktop } from "@docspace/shared/utils/desktop";
+import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 
 const initDesktop = (
   cfg: IInitialConfig,
@@ -50,9 +51,12 @@ const initDesktop = (
   t: Nullable<TTranslation>,
 ) => {
   const keyPairs = cfg?.editorConfig?.encryptionKeys;
-  const keyPair =
-    keyPairs?.find((k) => String(k.userId) === String(user.id)) ??
-    keyPairs?.[0];
+  const ownKeyPairs = keyPairs?.filter(
+    (k) => String(k.userId) === String(user.id),
+  );
+  const keyPair = selectUserKey(
+    ownKeyPairs && ownKeyPairs.length > 0 ? ownKeyPairs : keyPairs,
+  );
   const encryptionKeys = keyPair
     ? {
         privateKeyEnc: keyPair.privateKeyEnc,

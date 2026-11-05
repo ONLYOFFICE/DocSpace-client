@@ -47,12 +47,33 @@ export type RoomMembersHandlerOptions = {
   initial?: RoomMember[];
   links?: unknown[];
   handle?: { current: RoomMembersHandlerHandle | null };
+  /**
+   * Users who never registered an encryption key, for a private room. The
+   * server (`FileSharing.SetAceObjectAsync`) saves the invitees of a request
+   * one by one and calls `EncryptionLoginProvider.ThrowIfKeysAreNotSetAsync`
+   * for each; its `InvalidOperationException` becomes a 403 in
+   * `UnhandledExceptionMiddleware`, after the invitees before it were saved.
+   */
+  withoutKeys?: string[];
 };
 
 const okResponse = <T>(response: T): Response =>
   new Response(
     JSON.stringify({ response, status: 0, statusCode: 200 }),
     { headers: { "Content-Type": "application/json" } },
+  );
+
+const noKeyResponse = (): Response =>
+  new Response(
+    JSON.stringify({
+      status: 1,
+      statusCode: 403,
+      error: {
+        message: "The user does not have an encryption key",
+        type: "System.InvalidOperationException",
+      },
+    }),
+    { status: 403, headers: { "Content-Type": "application/json" } },
   );
 
 const buildMemberDto = (m: RoomMember) => ({
@@ -122,6 +143,7 @@ export const roomMembersHandlers = (
       requests.push({ method: "PUT", url: baseUrl, body });
 
       for (const inv of body.invitations ?? []) {
+        if (opts.withoutKeys?.includes(inv.id)) return noKeyResponse();
         const existing = state.find((m) => m.id === inv.id);
         if (existing) {
           if (inv.access !== undefined) existing.access = inv.access;

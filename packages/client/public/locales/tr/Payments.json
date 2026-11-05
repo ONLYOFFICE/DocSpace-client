@@ -11,7 +11,7 @@
   "NotPossibleRoomRestoring": "Mevcut planınıza dahil olan oda sayısı sınırına ulaşıldığı için bu odayı geri yüklemek mümkün değil.",
   "NumberOfRoomsAccordingToTariff": "Tarife planınıza göre oda sayısı: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Tarife planınıza göre yönetici sayısı: {{currentValue}}/{{maxValue}}",
-  "PlanPaymentOverdue": "Yeni kullanıcı eklenemiyor, yeni oda oluşturulamıyor veya yapay zeka ajanı oluşturulamıyor. {{planName}} plan ödemesi gecikti.",
+  "PlanPaymentOverdue": "Yeni kullanıcı eklenemiyor, yeni oda oluşturulamıyor veya AI ajanı oluşturulamıyor. {{planName}} plan ödemesi gecikti.",
   "RoomsQuotaAlmostExhausted": "Oda kotası neredeyse doldu.",
   "UsersQuotaAlmostExhausted": "Ücretli kullanıcı kotası neredeyse doldu."
 }

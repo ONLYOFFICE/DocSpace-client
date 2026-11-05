@@ -110,8 +110,6 @@ type InjectedProps = {
   highlightFile: TStore["filesStore"]["highlightFile"];
   scrollToItem: TStore["filesStore"]["scrollToItem"];
   setScrollToItem: TStore["filesStore"]["setScrollToItem"];
-  setFirsElemChecked: (checked: boolean) => void;
-  setHeaderBorder: (border: boolean) => void;
   selectedFolderTitle: string;
   canCreateSecurity?: boolean;
   disableDrag: boolean;
@@ -160,8 +158,6 @@ const DataTableView = ({
   highlightFile,
   scrollToItem,
   setScrollToItem,
-  setFirsElemChecked,
-  setHeaderBorder,
   selectedFolderTitle,
   canCreateSecurity,
   disableDrag,
@@ -340,8 +336,6 @@ const DataTableView = ({
         canCreateSecurity={canCreateSecurity}
         disableDrag={disableDrag}
         setDropTargetPreview={setDropTargetPreview}
-        setFirsElemChecked={setFirsElemChecked}
-        setHeaderBorder={setHeaderBorder}
         isIndexing={isIndexing}
         onEditIndex={changeIndex}
       />
@@ -356,8 +350,6 @@ const DataTableView = ({
       canCreateSecurity,
       disableDrag,
       setDropTargetPreview,
-      setFirsElemChecked,
-      setHeaderBorder,
     ],
   );
 
@@ -440,8 +432,6 @@ export default inject<TStore>(
       highlightFile,
       scrollToItem,
       setScrollToItem,
-      setFirsElemChecked,
-      setHeaderBorder,
       disableDrag,
     } = filesStore;
     const { theme, currentDeviceType, isFrame, frameConfig } = settingsStore;
@@ -472,8 +462,6 @@ export default inject<TStore>(
       highlightFile,
       scrollToItem,
       setScrollToItem,
-      setFirsElemChecked,
-      setHeaderBorder,
       selectedFolderTitle: selectedFolderStore.title,
       canCreateSecurity: selectedFolderStore.security?.Create,
       disableDrag,

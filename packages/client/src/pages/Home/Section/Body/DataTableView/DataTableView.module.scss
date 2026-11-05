@@ -33,13 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@onlyoffice/apps-ui-kit/styles/variables/colors" as *;
-
-// The section's 20px gutters on both sides: the header line reaches across
-// them once rows scroll under it, as the old header's did.
+// The section's gutters: the header line reaches 20px into them once rows
+// scroll under it, and a row's strip 24px at the start and 20px at the end,
+// as the old header's line and the old rows' negative margins did.
 .table {
   --data-table-bleed-start: 20px;
   --data-table-bleed-end: 20px;
+  --data-table-row-bleed-start: 24px;
+  --data-table-row-bleed-end: 20px;
 
   // Where the old table's header sits: its container rose 25px into the
   // section's top padding. The Section's `stickyTableHeader` mode (the
@@ -64,62 +65,125 @@
   user-select: none;
 }
 
-// What the old ui-kit `TableRow` added to every Files row, which the DataTable
-// row does not: these rules belong to the client's rows, not to the table.
+// The drag-and-drop wrapper of a row adds no box of its own.
+.dragAndDrop {
+  display: contents;
+}
+
+// The table draws the row's states; what is left is the content of a Files
+// row, as the old `StyledTable.module.scss` laid it out.
 .filesRow {
-  :global(.light) & {
-    --files-data-table-drop-background: #{$dnd-hover-color};
-  }
+  // Reordering a data room tints every row, a row under the pointer more; a
+  // moved row keeps the tint, past the table like a selected one.
+  &.isIndexEditingMode {
+    --data-table-row-background: var(
+      --files-section-table-view-row-index-update
+    );
+    --data-table-row-selected-background: var(
+      --files-section-table-view-row-index-update
+    );
 
-  :global(.dark) & {
-    --files-data-table-drop-background: #{$dnd-dark-hover};
-  }
-
-  // The old cells are 49px and overlap the next row by their top border, so
-  // two rows share one line and the hotkey caret's border runs unbroken.
-  &:global(.table-container_row) :global(.table-container_cell) {
-    height: 49px !important;
-    max-height: none !important;
-  }
-  // The share button shows on the row under the pointer, the selected rows
-  // and the row whose menu is open; a shared item keeps its own.
-  @media (hover: hover) {
-    :global(.create-share-link) {
-      display: none;
-    }
-
-    &:hover,
-    &:global(.checked),
-    &.active {
-      :global(.create-share-link) {
-        display: block;
-      }
+    &:hover {
+      --data-table-row-background: var(
+        --files-section-table-view-row-index-active
+      );
+      --data-table-row-selected-background: var(
+        --files-section-table-view-row-index-active
+      );
     }
   }
 
-  :global(.droppable-hover) {
-    background: none;
+  // While something is dragged, a folder's strip starts 20px into the
+  // gutter, not 24px, unless it is the one under the pointer, as the old
+  // rows' did.
+  &.isDragging:not(:hover) {
+    --data-table-row-bleed-start: 20px;
   }
 
-  &.dropTarget:not(.active) :global(.droppable-hover) {
-    background: var(--files-data-table-drop-background) !important;
+  // Selected rows are what a press here starts dragging.
+  &.canDrag :global(.table-container_cell) {
+    cursor:
+      url("/static/images/cursor.palm.react.svg") 8 0,
+      auto;
   }
 
-  :global(.table-container_row-loader) {
-    display: inline-flex;
+  &.inProgress :global(.context-menu-container) {
+    pointer-events: none;
   }
 
-  // The cell holds the "..." button and nothing to ellipsize; clipping it cut
-  // off the keyboard ring of a button flush with its end.
-  :global(.table-container_row-context-menu-wrapper) {
-    overflow: visible;
+  :global(.item-file-name) {
+    padding-block: 14px;
+    padding-inline: 0 8px;
   }
 
-  // The cell with the reorder arrows is widened by `StyledTable.module.scss`,
-  // and on a moved row padded too, for the arrows to reach the gutter. The old
-  // cells were content-box, so the padding added to that width.
+  :global(.item-file-name-index) {
+    text-decoration: none;
+  }
+
+  :global(.item-file-exst) {
+    color: var(--files-section-table-view-exst-color);
+  }
+
+  :global(.edit) svg:not(:root) {
+    width: 12px;
+    height: 12px;
+  }
+
+  :global(.no-extra-space) p {
+    margin-inline-end: 8px !important;
+  }
+
+  :global(.icon-with-index-column) {
+    width: 28px;
+    justify-content: flex-start;
+  }
+
+  // The arrows that move a row reach past their cell to the section's
+  // gutter; on a row under the pointer or a moved one, further still. The
+  // old cells were content-box, so the padding adds to the width.
   :global(.index-buttons),
   :global(.index-buttons-name) {
     box-sizing: content-box;
+    width: calc(100% + 24px);
+  }
+
+  :global(.index-buttons) {
+    justify-content: space-between;
+  }
+
+  &.isIndexUpdated,
+  &.isIndexing:hover {
+    :global(.index-buttons),
+    :global(.index-buttons-name) {
+      padding-inline-end: 20px;
+    }
+
+    :global(.index-buttons-name) {
+      [dir="rtl"] & {
+        width: calc(100% + 44px) !important;
+        padding-inline-end: unset;
+
+        :global(.index-arrows-container) {
+          padding-inline-end: 20px;
+        }
+      }
+    }
+  }
+}
+
+// The icon that turns into the row's checkbox, then the name 8px on, as the
+// old 40px element wrapper placed it.
+.selection {
+  margin-inline-end: 8px;
+}
+
+// After the order column the icon sits at the start of a narrower square,
+// and the checkbox 4px in, as the old ones did.
+.indexedSelection {
+  width: 28px;
+  justify-items: start;
+
+  label {
+    margin-inline-start: 4px;
   }
 }

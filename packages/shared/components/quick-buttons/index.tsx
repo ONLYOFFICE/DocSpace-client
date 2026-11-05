@@ -69,6 +69,12 @@ import type { QuickButtonsProps } from "./QuickButtons.types";
 import styles from "./QuickButtons.module.scss";
 import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
+// The DataTable's `DATA_TABLE_ROW_ACTIONS_CLASS`: a share button the item has
+// no link for yet shows only on a row under the pointer, selected or acted on.
+// Spelled out because the kit the shared package installs does not have it
+// yet; other views ignore the class.
+const ROW_ACTIONS_CLASS = "data-table-row-actions";
+
 export const QuickButtons = memo((props: QuickButtonsProps) => {
   const {
     t,
@@ -287,6 +293,7 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
               iconName={LinkReactSvgUrl}
               className={classNames("badge copy-link icons-group", {
                 "create-share-link": !item.shared && !showShareIcon,
+                [ROW_ACTIONS_CLASS]: !item.shared && !showShareIcon,
                 "link-shared": item.shared || showShareIcon,
               })}
               size={sizeQuickButton}
@@ -302,6 +309,7 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
               iconName={ShareSvgUrl}
               className={classNames("badge copy-link icons-group", {
                 "create-share-link": !item.sharedForUser && !item.shared,
+                [ROW_ACTIONS_CLASS]: !item.sharedForUser && !item.shared,
                 "link-shared": item.sharedForUser || item.shared,
               })}
               size={sizeQuickButton}

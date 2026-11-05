@@ -49,6 +49,8 @@ import type { TFilesTableItem } from "../DataTableView.types";
  */
 export type TFilesRowValue = {
   item: TFilesTableItem;
+  /** Position of the row in the list. */
+  index: number;
   t: TFunction;
   theme: TTheme;
   element: React.ReactNode;
@@ -67,6 +69,8 @@ export type TFilesRowValue = {
   createdDate: string;
   lastOpenedDate: string;
   fileOwner: string;
+  /** A room with indexing: the order column comes before the name. */
+  isIndexing: boolean;
   /** The rows are being reordered: the last column holds the move arrows. */
   isIndexEditingMode: boolean;
   /** Moves the row up or down one place. */

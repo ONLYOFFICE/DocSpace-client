@@ -56,7 +56,6 @@ import withQuickButtons from "SRC_DIR/HOCs/withQuickButtons";
 import withFileActions from "SRC_DIR/HOCs/withFileActions";
 import ItemIcon from "SRC_DIR/components/ItemIcon";
 
-import rowStyles from "../../TableView/StyledTable.module.scss";
 import styles from "../DataTableView.module.scss";
 import type { TFilesTableItem } from "../DataTableView.types";
 import { FilesRowContext, type TFilesRowValue } from "./FilesRowContext";
@@ -75,8 +74,6 @@ export type TFilesDataTableRowProps = {
   canCreateSecurity?: boolean;
   disableDrag: boolean;
   setDropTargetPreview: (title: string | null) => void;
-  setFirsElemChecked: (checked: boolean) => void;
-  setHeaderBorder: (border: boolean) => void;
   /** A room with indexing, whose rows start with their order. */
   isIndexing: boolean;
   /** `filesActionsStore.changeIndex`: moves an item one place up or down. */
@@ -165,8 +162,6 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
     getContextModel,
     onHideContextMenu,
     setDropTargetPreview,
-    setFirsElemChecked,
-    setHeaderBorder,
     selectedFolderTitle,
     canCreateSecurity,
     disableDrag,
@@ -180,7 +175,6 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
   // The tags of a room under the pointer show in full, as in the old row.
   const [isHovered, setIsHovered] = useState(false);
 
-  const { acceptBackground, background } = theme.dragAndDrop;
   const isDragDisabled = dragging && !isDragging;
 
   const hasLogo = !!item.logo?.cover || !!item.logo?.medium;
@@ -203,29 +197,6 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       badgeIconColor={badgeIconColor}
       className={classNames({ "icon-with-index-column": isIndexing })}
     />
-  );
-
-  // The tint of a folder a drag hovers, and the fade of every other row. A
-  // drag while reordering moves the row, so no folder takes the tint.
-  const cellStyle = useMemo<React.CSSProperties>(
-    () => ({
-      background:
-        dragging && isDragging && !isIndexEditingMode
-          ? isDragActive
-            ? acceptBackground
-            : background
-          : "none",
-      opacity: isDragDisabled ? 0.4 : 1,
-    }),
-    [
-      dragging,
-      isDragging,
-      isIndexEditingMode,
-      isDragActive,
-      isDragDisabled,
-      acceptBackground,
-      background,
-    ],
   );
 
   const onMouseEnter = useEventCallback(() => setIsHovered(true));
@@ -253,13 +224,6 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
     },
   );
 
-  // The first row tells the header whether to lengthen its border.
-  useEffect(() => {
-    if (index !== 0) return;
-    setFirsElemChecked(checkedProps || isActive);
-    setHeaderBorder(showHotkeyBorder);
-  }, [index, checkedProps, isActive, showHotkeyBorder]);
-
   useEffect(() => {
     if (!dragging) return;
 
@@ -282,6 +246,7 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
   const rowValue = useMemo<TFilesRowValue>(
     () => ({
       item,
+      index,
       t,
       theme,
       element,
@@ -299,12 +264,14 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       createdDate: props.createdDate,
       lastOpenedDate: props.lastOpenedDate,
       fileOwner: props.fileOwner,
+      isIndexing,
       isIndexEditingMode,
       onChangeIndex,
     }),
     // `element` is rebuilt from the item each render, like the old row's.
     [
       item,
+      index,
       t,
       theme,
       checkedProps,
@@ -323,6 +290,7 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       props.createdDate,
       props.lastOpenedDate,
       props.fileOwner,
+      isIndexing,
       isIndexEditingMode,
       onChangeIndex,
     ],
@@ -372,7 +340,7 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
       } as object)}
       value={value}
       className={classNames(
-        rowStyles.styledDragAndDrop,
+        styles.dragAndDrop,
         "files-item",
         className,
         idWithFileExst,
@@ -398,33 +366,30 @@ const FilesRow = (props: TFilesDataTableRowProps & THocProps) => {
           testId={`table-row-${index}`}
           checked={checked}
           active={isActive}
-          className={classNames(
-            rowStyles.styledTableRow,
-            styles.filesRow,
-            "table-row",
-            {
-              [styles.active]: isActive,
-              // A folder the dragged items can be dropped into.
-              [styles.dropTarget]: dragging && isDragging,
-              [rowStyles.checked]: checked,
-              [rowStyles.active]: isActive,
-              [rowStyles.isDragging]: dragging,
-              [rowStyles.isHighlight]: isHighlight,
-              [rowStyles.showHotkeyBorder]: showHotkeyBorder,
-              [rowStyles.canDrag]: !item.isThirdPartyFolder && canDrag,
-              [rowStyles.isBlockingOperation]: isBlockingOperation,
-              [rowStyles.inProgress]: inProgress,
-              [rowStyles.isIndexing]: isIndexing,
-              [rowStyles.isIndexEditingMode]: isIndexEditingMode,
-              [rowStyles.isIndexUpdated]: isIndexUpdated,
-              [rowStyles.isRoom]: item.isRoom,
-            },
-          )}
+          // No tint under the pointer while a drag or the reordering owns it,
+          // nor on a moved row, which keeps its own.
+          hover={!dragging && !isIndexEditingMode && !isIndexUpdated}
+          caret={showHotkeyBorder}
+          // A folder the dragged items can go into; a drag while reordering
+          // moves the row, so no folder takes it.
+          dropTarget={dragging && isDragging && !isIndexEditingMode}
+          dropOver={isDragActive}
+          dimmed={isDragDisabled}
+          highlight={!!isHighlight}
+          busy={isBlockingOperation}
+          className={classNames(styles.filesRow, "table-row", {
+            [styles.isDragging]: dragging,
+            [styles.canDrag]:
+              !item.isThirdPartyFolder && canDrag && (checked || isActive),
+            [styles.inProgress]: inProgress,
+            [styles.isIndexing]: isIndexing,
+            [styles.isIndexEditingMode]: isIndexEditingMode,
+            [styles.isIndexUpdated]: isIndexUpdated,
+          })}
           cellProps={{
             className: classNames("files-item", className, value),
             value,
             documentTitle,
-            style: cellStyle,
           }}
           contextMenu={contextMenu}
           // Reordering: a press starts the drag (withFileActions), a click

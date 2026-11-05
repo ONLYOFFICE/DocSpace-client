@@ -33,17 +33,21 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useMemo } from "react";
 import type React from "react";
 
 import type { TFile } from "@docspace/shared/api/files/types";
 import { VDRIndexingAction } from "@docspace/shared/enums";
+import { classNames } from "@docspace/shared/utils";
+import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
+import { DataTableRowCheckbox } from "@onlyoffice/apps-ui-kit/components/data-table";
 import { IndexIconButtons } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import AccessLevelCell from "../../TableView/sub-components/AccessLevelCell";
 import AuthorCell from "../../TableView/sub-components/AuthorCell";
 import DateCell from "../../TableView/sub-components/DateCell";
 import ErasureCell from "../../TableView/sub-components/ErasureCell";
-import FileNameCell from "../../TableView/sub-components/FileNameCell";
+import { FileName } from "../../TableView/sub-components/FileNameCell/FileNameCell.helpers";
 import IndexCell from "../../TableView/sub-components/IndexCell";
 import LocationCell from "../../TableView/sub-components/LocationCell";
 import SharedByCell from "../../TableView/sub-components/SharedByCell";
@@ -56,7 +60,8 @@ import {
 } from "../../TableView/StyledTable";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
-import { useFilesRow } from "../row/FilesRowContext";
+import styles from "../DataTableView.module.scss";
+import { type TFilesRowValue, useFilesRow } from "../row/FilesRowContext";
 import { useFilesTable } from "../row/FilesTableContext";
 
 type TCellProps = {
@@ -127,23 +132,58 @@ export const NameCell = ({ isLast }: Pick<TCellProps, "isLast">) => {
 
   return withQuickButtons(
     <>
-      <FileNameCell
-        t={row.t}
-        item={row.item}
-        theme={row.theme}
-        element={row.element}
-        checked={row.checked}
-        inProgress={row.inProgress}
-        linkStyles={row.linkStyles}
-        titleWithoutExt={row.titleWithoutExt}
-        onContentSelect={row.onContentFileSelect}
-        isIndexEditingMode={row.isIndexEditingMode}
-        displayFileExtension={row.displayFileExtension}
-      />
+      <NameContent row={row} />
       <StyledBadgesContainer>{row.badgesComponent}</StyledBadgesContainer>
     </>,
     isLast,
     true,
+  );
+};
+
+/**
+ * The old `FileNameCell` on the DataTable: the item's icon, which the table
+ * turns into the row's checkbox, a loader while an operation runs, then the
+ * name as a link. While the rows are reordered the icon stays and the name
+ * is no link.
+ */
+const NameContent = ({ row }: { row: TFilesRowValue }) => {
+  const { item, isIndexEditingMode, linkStyles } = row;
+
+  const linkProps = useMemo(
+    () =>
+      createPluginFileHandlers(
+        item,
+        isIndexEditingMode ? undefined : { ...linkStyles },
+      ),
+    [item, isIndexEditingMode, linkStyles],
+  );
+
+  const fileExst = "fileExst" in item && item.fileExst ? item.fileExst : "";
+
+  return (
+    <>
+      <DataTableRowCheckbox
+        className={classNames(styles.selection, {
+          [styles.indexedSelection]: row.isIndexing,
+        })}
+        icon={row.element}
+        checked={row.checked}
+        loading={row.inProgress}
+        disabled={isIndexEditingMode}
+        label={row.t("Common:TitleSelectFile")}
+        onChange={(checked) => row.onContentFileSelect?.(checked, item)}
+        testId={`files-cell-checkbox-${row.index}`}
+      />
+      <FileName
+        title={item.title}
+        color={row.theme.filesSection.tableView.fileName.linkColor}
+        linkProps={linkProps}
+        indexingClass={isIndexEditingMode ? "item-file-name-index" : ""}
+        titleWithoutExt={row.titleWithoutExt}
+        displayFileExtension={row.displayFileExtension}
+        fileExst={fileExst}
+      />
+    </>
   );
 };
 

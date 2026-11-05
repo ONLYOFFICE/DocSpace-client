@@ -239,8 +239,72 @@ describe("encryptedFiles mock — PUT /files/{fileId}/access (mirrors FilesContr
     });
 
     expect(res.status).toBe(200);
-    expect(await res.json()).not.toHaveProperty("response");
+    expect((await res.json()).response).toEqual({ skippedUserIds: [] });
     expect(handle.current!.getFile(2).fileKeys).toEqual(newKeys);
+  });
+
+  it("Listed user cannot read the file", async () => {
+    const STRANGER_ID = "33333333-3333-3333-3333-333333333333";
+    handle.current!.setUnreadableUsers([STRANGER_ID]);
+    for (const order of [
+      [ALICE_ID, STRANGER_ID],
+      [STRANGER_ID, ALICE_ID],
+    ]) {
+      handle.current!.setFiles([
+        { id: 6, title: "w.txt", encrypted: true, fileKeys: [] },
+      ]);
+
+      const res = await fetch(FILE_ACCESS_URL(6), {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(
+          order.map((userId) => ({
+            userId,
+            publicKeyId: `${userId}-pk`,
+            privateKeyEnc: "wrap",
+          })),
+        ),
+      });
+
+      expect(res.status).toBe(200);
+      expect((await res.json()).response).toEqual({
+        skippedUserIds: [STRANGER_ID],
+      });
+      expect(handle.current!.getFile(6).fileKeys).toEqual([
+        { userId: ALICE_ID, publicKeyId: `${ALICE_ID}-pk`, privateKeyEnc: "wrap" },
+      ]);
+    }
+  });
+
+  it("Every listed user skipped", async () => {
+    const STRANGER_ID = "33333333-3333-3333-3333-333333333333";
+    handle.current!.setUnreadableUsers([STRANGER_ID]);
+    handle.current!.setFiles([
+      {
+        id: 7,
+        title: "v.txt",
+        encrypted: true,
+        fileKeys: [
+          { userId: ALICE_ID, publicKeyId: "alice-pk", privateKeyEnc: "a" },
+        ],
+      },
+    ]);
+
+    const res = await fetch(FILE_ACCESS_URL(7), {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify([
+        { userId: STRANGER_ID, publicKeyId: "s-pk", privateKeyEnc: "wrap" },
+      ]),
+    });
+
+    expect(res.status).toBe(200);
+    expect((await res.json()).response).toEqual({
+      skippedUserIds: [STRANGER_ID],
+    });
+    expect(handle.current!.getFile(7).fileKeys).toEqual([
+      { userId: ALICE_ID, publicKeyId: "alice-pk", privateKeyEnc: "a" },
+    ]);
   });
 
   it("keeps the entry of a user the write does not list", async () => {

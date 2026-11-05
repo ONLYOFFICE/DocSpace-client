@@ -79,12 +79,14 @@ export interface SkippedRoomMember {
 export interface RoomRewrapResult {
   fileResults: FileEncryptionOpResult[];
   skippedMembers: SkippedRoomMember[];
-}
-
-export interface AddMembersResult extends RoomRewrapResult {
-  /** The files each invitee with a verified key got no wrap for. */
+  /**
+   * The files each member with a verified key got no entry for: the write
+   * failed, or the server answered that the member cannot read the file.
+   */
   missingFileIdsByMember: Record<string, number[]>;
 }
+
+export type AddMembersResult = RoomRewrapResult;
 
 export interface RoomEncryptionOptions {
   currentUserId: string;
@@ -190,6 +192,7 @@ async function wrapFilesForMembers(
   for (const member of validMembers) {
     memberDisplayName.set(member.id, member.displayName);
   }
+  const notStoredFileIds = new Map<string, number[]>();
 
   const resolveMemberKey = async (
     m: NewRoomMember,
@@ -290,7 +293,12 @@ async function wrapFilesForMembers(
         })),
         ...newKeys,
       ];
-      await setFileEncryptionKeys(fileId, allKeys);
+      const written = await setFileEncryptionKeys(fileId, allKeys);
+      for (const userId of written?.skippedUserIds ?? []) {
+        const id = String(userId);
+        if (!recipients.some((r) => String(r.userId) === id)) continue;
+        notStoredFileIds.set(id, [...(notStoredFileIds.get(id) ?? []), fileId]);
+      }
 
       fileResults.push({ fileId, success: true });
     } catch (error) {
@@ -326,12 +334,14 @@ async function wrapFilesForMembers(
     .filter((result) => !result.success)
     .map((result) => result.fileId);
   const missingFileIdsByMember: Record<string, number[]> = {};
-  if (failedFileIds.length > 0) {
-    for (const m of validMembers) {
-      if (String(m.id) === String(currentUserId)) continue;
-      if (skippedReasons.has(m.id)) continue;
-      missingFileIdsByMember[m.id] = [...failedFileIds];
-    }
+  for (const m of validMembers) {
+    if (String(m.id) === String(currentUserId)) continue;
+    if (skippedReasons.has(m.id)) continue;
+    const missing = [
+      ...failedFileIds,
+      ...(notStoredFileIds.get(String(m.id)) ?? []),
+    ];
+    if (missing.length > 0) missingFileIdsByMember[m.id] = missing;
   }
 
   return { fileResults, skippedMembers, missingFileIdsByMember };
@@ -357,8 +367,9 @@ export async function backfillEncryptedFilesForRoomMembers(
   const { currentUserId, identity, onProgress, onKeyChange } = options;
 
   const encryptedFiles = await getEncryptedFilesInRoom(roomId);
+  const missingFileIdsByMember: Record<string, number[]> = {};
   if (encryptedFiles.length === 0) {
-    return { fileResults, skippedMembers: [] };
+    return { fileResults, skippedMembers: [], missingFileIdsByMember };
   }
 
   // For HPKE-Auth sender verification we need a pool of known room-member
@@ -493,7 +504,15 @@ export async function backfillEncryptedFilesForRoomMembers(
         ...newKeys,
       ];
       try {
-        await setFileEncryptionKeys(file.id, allKeys);
+        const written = await setFileEncryptionKeys(file.id, allKeys);
+        for (const userId of written?.skippedUserIds ?? []) {
+          const id = String(userId);
+          if (!recipients.some((r) => String(r.userId) === id)) continue;
+          missingFileIdsByMember[id] = [
+            ...(missingFileIdsByMember[id] ?? []),
+            file.id,
+          ];
+        }
         fileResults.push({ fileId: file.id, success: true });
       } catch (e) {
         const err = e as {
@@ -535,7 +554,7 @@ export async function backfillEncryptedFilesForRoomMembers(
     skippedMembers.push({ id, reason });
   }
 
-  return { fileResults, skippedMembers };
+  return { fileResults, skippedMembers, missingFileIdsByMember };
 }
 
 export async function revokeMemberFromEncryptedRoom(

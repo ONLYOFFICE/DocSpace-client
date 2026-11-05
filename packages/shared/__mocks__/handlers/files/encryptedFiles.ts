@@ -91,6 +91,12 @@ export type EncryptedFilesHandlerHandle = {
   setRoomUserKeys: (keys: RoomMemberKeyEntry[]) => void;
   /** Marks a file as lying outside a private room (publickeys answers 415). */
   setFileOutsidePrivateRoom: (fileId: number) => void;
+  /**
+   * Marks users who cannot read the room's files: a key write skips their
+   * entry and names them in `skippedUserIds`. The mock keeps no access list,
+   * so the spec says who the server would refuse.
+   */
+  setUnreadableUsers: (userIds: string[]) => void;
   /** Answers as another signed-in user until `reset`. */
   setCurrentUserId: (userId: string) => void;
   /**
@@ -464,6 +470,7 @@ export const encryptedFilesHandlers = (
   let freeSpace: number | null = null;
   const createdOn = new Map<string, string>();
   const outsidePrivateRoom = new Set<number>();
+  const unreadableUsers = new Set<string>();
   /** files_file_keys.create_on: set when the row is written. */
   const keyCreatedOn = (fileId: number, userId: string) => {
     const key = `${fileId}:${userId}`;
@@ -549,6 +556,10 @@ export const encryptedFilesHandlers = (
     setFileOutsidePrivateRoom: (fileId) => {
       outsidePrivateRoom.add(fileId);
     },
+    setUnreadableUsers: (userIds) => {
+      unreadableUsers.clear();
+      for (const id of userIds) unreadableUsers.add(String(id));
+    },
     setCurrentUserId: (userId) => {
       currentUserId = userId;
     },
@@ -562,6 +573,7 @@ export const encryptedFilesHandlers = (
       sessions.clear();
       createdOn.clear();
       outsidePrivateRoom.clear();
+      unreadableUsers.clear();
       requests.length = 0;
       roomUserKeys = [];
       nextFileId = 1000;
@@ -754,11 +766,14 @@ export const encryptedFilesHandlers = (
      * FileStorageService.SetEncryptionInfoAsync -> FileDao.SetFileKey
      * (HttpPut "{fileId}/access"). The body binds to
      * `[FromBody] IEnumerable<AccessRequestKeyDto>`, so it is a bare array;
-     * the mock answers anything else with 400. SetFileKey deletes the rows of
-     * the listed users and inserts the new ones, so every other user's row
-     * stays. The action returns nothing, so the envelope has no `response`.
-     * A missing file is an InvalidOperationException, so 403. The server's
-     * read, private-room and create-right checks are not modelled here.
+     * the mock answers anything else with 400. The service checks each listed
+     * user's read access on a fresh read of the file, stores the entries of
+     * those who can read in one SetFileKey, which deletes their rows and
+     * inserts the new ones so every other user's row stays, and answers the
+     * others as `FileKeysWrittenDto.skippedUserIds`; the mock takes the users
+     * who cannot read from `setUnreadableUsers`. A missing file is an
+     * InvalidOperationException, so 403. The caller's own read, private-room
+     * and create-right checks are not modelled here.
      */
     http.put(
       `${apiBase}/files/:fileId(\\d+)/access`,
@@ -777,10 +792,16 @@ export const encryptedFilesHandlers = (
         const keys = body as EncryptedFileKey[];
         const f = files.get(fileId);
         if (!f) return errorResponse(403, `file ${fileId} not found`);
+        const accepted = keys.filter(
+          (k) => !unreadableUsers.has(String(k.userId)),
+        );
+        const skippedUserIds = keys
+          .filter((k) => unreadableUsers.has(String(k.userId)))
+          .map((k) => String(k.userId));
         // Two entries for one user collide on the (tenant, file, user) key;
         // the mock refuses the whole write like the failed transaction.
         const listed = new Set<string>();
-        for (const k of keys) {
+        for (const k of accepted) {
           const uid = String(k.userId);
           if (listed.has(uid)) {
             return errorResponse(
@@ -790,14 +811,14 @@ export const encryptedFilesHandlers = (
           }
           listed.add(uid);
         }
-        f.fileKeys = [
-          ...f.fileKeys.filter((k) => !listed.has(String(k.userId))),
-          ...keys,
-        ];
-        listed.forEach((uid) => createdOn.delete(`${fileId}:${uid}`));
-        return new Response(JSON.stringify({ status: 0, statusCode: 200 }), {
-          headers: { "Content-Type": "application/json" },
-        });
+        if (accepted.length > 0) {
+          f.fileKeys = [
+            ...f.fileKeys.filter((k) => !listed.has(String(k.userId))),
+            ...accepted,
+          ];
+          listed.forEach((uid) => createdOn.delete(`${fileId}:${uid}`));
+        }
+        return okResponse({ skippedUserIds });
       },
     ),
 

@@ -671,6 +671,36 @@ describe("addMembersToEncryptedRoom", () => {
     expect(result.missingFileIdsByMember).toEqual({ [BOB]: [SECOND_FILE_ID] });
   });
 
+  it("Listed user cannot read the file: the invitee the server skipped lists the file as missing", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+      { userId: CAROL, publicKey: pubB64(carol) },
+    ]);
+    setFileEncryptionKeysMock.mockResolvedValue({ skippedUserIds: [BOB] });
+
+    const result = await addMembersToEncryptedRoom(
+      ROOM_ID,
+      [
+        { id: BOB, displayName: "Bob" },
+        { id: CAROL, displayName: "Carol" },
+      ],
+      { currentUserId: ALICE, identity: alice },
+    );
+
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
+    expect(result.skippedMembers).toEqual([]);
+    expect(result.missingFileIdsByMember).toEqual({ [BOB]: [FILE_ID] });
+  });
+
   it("sweeps the FIRST page (page=0), not skipping past small rooms (regression)", async () => {
     getFolderMock.mockImplementation(
       async (_roomId: number, filter: { page: number }) => {
@@ -803,6 +833,22 @@ describe("rewrapMissingFilesForMember", () => {
       { currentUserId: ALICE, identity: alice },
     );
 
+    expect(result.missingFileIdsByMember).toEqual({ [BOB]: [SECOND_FILE_ID] });
+  });
+
+  it("Retry still fails: the member the server skipped stays missing the file", async () => {
+    setFileEncryptionKeysMock.mockResolvedValue({ skippedUserIds: [BOB] });
+
+    const result = await rewrapMissingFilesForMember(
+      ROOM_ID,
+      BOB,
+      [SECOND_FILE_ID],
+      { currentUserId: ALICE, identity: alice },
+    );
+
+    expect(result.fileResults).toEqual([
+      { fileId: SECOND_FILE_ID, success: true },
+    ]);
     expect(result.missingFileIdsByMember).toEqual({ [BOB]: [SECOND_FILE_ID] });
   });
 
@@ -1078,6 +1124,34 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     expect(result.fileResults).toHaveLength(1);
     expect(result.fileResults[0]?.success).toBe(false);
     expect(result.fileResults[0]?.error).toContain("HTTP 403");
+  });
+
+  it("Listed user cannot read the file: the backfill lists the file as missing for the member the server skipped", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    setFileEncryptionKeysMock.mockResolvedValue({ skippedUserIds: [BOB] });
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
+    expect(result.missingFileIdsByMember).toEqual({ [BOB]: [FILE_ID] });
   });
 
   it("posts the recipient's real publicKeyId from getFilePublicKeys, never empty (regression)", async () => {

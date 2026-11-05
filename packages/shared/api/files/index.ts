@@ -90,6 +90,7 @@ import type {
   UpdateXlsxResponse,
   TDocumentBuilderTask,
   TFolderLogReportDateRange,
+  TFileKeysWritten,
 } from "./types";
 
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
@@ -1421,14 +1422,14 @@ export async function setFileEncryptionKeys(
     publicKeyId: string;
     privateKeyEnc: string;
   }>,
-) {
-  const res = await request({
+): Promise<TFileKeysWritten> {
+  const res = (await request({
     method: "put",
     url: `files/${fileId}/access`,
     data: keys,
-  });
+  })) as Partial<TFileKeysWritten> | undefined;
 
-  return res;
+  return { skippedUserIds: res?.skippedUserIds ?? [] };
 }
 
 export async function updateFileStream(

@@ -278,6 +278,7 @@ const buildFileDto = (
   ownerId: string,
   port?: string,
   archived = false,
+  isPrivate = true,
 ) => {
   const section = sectionOf(archived);
   const downloadOrigin = port ? `${BASE_URL}:${port}` : BASE_URL;
@@ -314,12 +315,14 @@ const buildFileDto = (
     createdBy: creator,
     updatedBy: creator,
     viewAccessibility: viewAccessibilityOf(fileExst),
+    // FileSecurity.FilterEntryAsync denies Copy, Duplicate and Vectorization
+    // on a file of a private room before the section rules (bd89a24dcd).
     security: {
       Read: true,
       Edit: true,
       Delete: true,
       Download: true,
-      Copy: false,
+      Copy: !isPrivate,
       Move: true,
       Rename: true,
       Comment: false,
@@ -329,7 +332,7 @@ const buildFileDto = (
       ReadHistory: false,
       Lock: false,
       EditHistory: false,
-      Duplicate: true,
+      Duplicate: !isPrivate,
       SubmitToFormGallery: false,
       Convert: false,
       CreateRoomFrom: false,
@@ -418,8 +421,9 @@ const buildSubfolderDto = (
     MoveTo: true,
     Copy: !isPrivate,
     CopyTo: !isPrivate,
-    Duplicate: true,
+    Duplicate: !isPrivate,
     EditAccess: !isPrivate,
+    ...(isPrivate && { IndexExport: false, UseChat: false }),
   };
   return {
     id: folder.id,
@@ -545,7 +549,14 @@ export const encryptedFilesHandlers = (
       version: 1,
       title: session.fileName,
       uploaded: true,
-      file: buildFileDto(record, session.folderId, ownerId, port, archived),
+      file: buildFileDto(
+        record,
+        session.folderId,
+        ownerId,
+        port,
+        archived,
+        isPrivate,
+      ),
     };
   };
 
@@ -641,7 +652,7 @@ export const encryptedFilesHandlers = (
         : { ...roomDto(), ...(!archived && { parentRoomType: 19 }) };
       return okResponse({
         files: listed.map((f) =>
-          buildFileDto(f, roomId, ownerId, port, archived),
+          buildFileDto(f, roomId, ownerId, port, archived, isPrivate),
         ),
         folders: listedFolders,
         current,
@@ -1011,7 +1022,9 @@ export const encryptedFilesHandlers = (
       if (!f && withOtherRooms) return undefined;
       requests.push({ method: "GET", url: new URL(request.url).pathname });
       if (!f) return errorResponse(404, "File not found");
-      return okResponse(buildFileDto(f, roomId, ownerId, port, archived));
+      return okResponse(
+        buildFileDto(f, roomId, ownerId, port, archived, isPrivate),
+      );
     }),
 
     /**
@@ -1547,7 +1560,7 @@ export const encryptedFilesHandlers = (
         finished: true,
         status: 2,
         files: moved.map((f) =>
-          buildFileDto(f, roomId, ownerId, port, archived),
+          buildFileDto(f, roomId, ownerId, port, archived, isPrivate),
         ),
         folders: [],
       };

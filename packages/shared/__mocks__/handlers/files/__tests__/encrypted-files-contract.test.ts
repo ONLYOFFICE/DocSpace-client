@@ -668,7 +668,12 @@ describe("encryptedFiles mock — entry DTOs (mirrors FoldersController.GetFolde
       parentRoomType: 19,
       encrypted: true,
     });
-    expect(secret.security?.Copy).toBe(false);
+    expect(secret.security).toMatchObject({
+      Copy: false,
+      Duplicate: false,
+      Vectorization: false,
+    });
+    expect(plain.security).toMatchObject({ Copy: false, Duplicate: false });
     expect(secret.security).not.toHaveProperty("EditForm");
     expect(secret.viewAccessibility).not.toHaveProperty("CoAuhtoring");
     expect(plain).not.toHaveProperty("encrypted");
@@ -681,6 +686,27 @@ describe("encryptedFiles mock — entry DTOs (mirrors FoldersController.GetFolde
       private: true,
     });
     expect(body.response.current).not.toHaveProperty("pathParts");
+  });
+
+  it("Rights reported on a subfolder and in an ordinary room", async () => {
+    const list = async (roomId: number) =>
+      (
+        await (
+          await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/${roomId}`)
+        ).json()
+      ).response as { files: Dto[]; folders: Dto[] };
+
+    const { folders } = await list(MOVING_ROOM_ID);
+    expect(folders[0].security).toMatchObject({
+      Copy: false,
+      CopyTo: false,
+      Duplicate: false,
+      IndexExport: false,
+      UseChat: false,
+    });
+
+    const { files } = await list(ORDINARY_ROOM_ID);
+    expect(files[0].security).toMatchObject({ Copy: true, Duplicate: true });
   });
 
   it("the room listing answers its breadcrumbs from the Rooms section as pathParts", async () => {

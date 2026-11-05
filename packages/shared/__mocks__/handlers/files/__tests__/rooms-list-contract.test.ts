@@ -130,6 +130,27 @@ describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonCo
     },
   );
 
+  it("Rights reported", async () => {
+    useList();
+
+    const list = (await getRooms("?searchArea=Active")) as unknown as {
+      folders: { id: number; security: Record<string, boolean> }[];
+    };
+    const securityOf = (id: number) =>
+      list.folders.find((room) => room.id === id)?.security;
+
+    expect(securityOf(PRIVATE_ROOM_ID)).toMatchObject({
+      Copy: false,
+      Duplicate: false,
+      IndexExport: false,
+      UseChat: false,
+    });
+    expect(securityOf(ORDINARY_ROOM_ID)).toMatchObject({
+      Copy: true,
+      Duplicate: true,
+    });
+  });
+
   it("a further private room carries the count of the folders below it", async () => {
     server.use(
       privateRoomListHandler(PORT, {

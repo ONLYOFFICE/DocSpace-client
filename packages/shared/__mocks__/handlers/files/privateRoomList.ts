@@ -68,20 +68,22 @@ export const privateRoomListHandler = (
   const ownerId = opts.ownerId ?? "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
   const title = opts.title ?? "Private Test Room";
 
-  const security = {
+  // FileSecurity.FilterEntryAsync denies Copy, Duplicate, IndexExport and
+  // UseChat on a private room before the section rules (bd89a24dcd).
+  const securityOf = (isPrivate: boolean) => ({
     Read: true,
     Create: true,
     Delete: true,
     EditRoom: true,
     Rename: true,
     CopyTo: true,
-    Copy: true,
+    Copy: !isPrivate,
     MoveTo: true,
     Move: true,
     Pin: true,
     Mute: true,
     EditAccess: true,
-    Duplicate: true,
+    Duplicate: !isPrivate,
     Download: true,
     CopySharedLink: false,
     CreateRoomFrom: false,
@@ -91,7 +93,7 @@ export const privateRoomListHandler = (
     ChangeOwner: true,
     IndexExport: false,
     UseChat: false,
-  };
+  });
 
   const createdBy = {
     id: ownerId,
@@ -133,7 +135,7 @@ export const privateRoomListHandler = (
     id,
     rootFolderId: 2002,
     canShare: true,
-    security,
+    security: securityOf(isPrivate),
     title: roomTitle,
     access: 0,
     shared: false,

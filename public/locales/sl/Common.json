@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "Prenos in kopiranje neomejeno",
   "RoomDenyDownloadEnabled": "Prenos in kopiranje omejeno",
   "RoomEmptyAtTheMoment": "Ta soba je trenutno prazna.",
-  "RoomExpectUsers": "Pričakujte uporabnike",
+  "RoomExpectUsers": "Uporabniki v čakanju",
   "RoomExternalLinkCreated": "Povezava ustvarjena.",
   "RoomExternalLinkDeleted": "Povezava <1>«{{linkTitle}}»</1> izbrisana.",
   "RoomExternalLinkRenamed": "Povezava <1>«{{oldLinkTitle}}»</1> preimenovana v <1>«{{linkTitle}}»</1>",

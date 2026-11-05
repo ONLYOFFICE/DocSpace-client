@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "Descarga y copia sin restricciones",
   "RoomDenyDownloadEnabled": "Descarga y copia restringidas",
   "RoomEmptyAtTheMoment": "Esta sala está vacía en este momento.",
-  "RoomExpectUsers": "Esperar usuarios",
+  "RoomExpectUsers": "Usuarios pendientes",
   "RoomExternalLinkCreated": "Enlace creado.",
   "RoomExternalLinkDeleted": "El enlace <1>«{{linkTitle}}»</1> se ha eliminado.",
   "RoomExternalLinkRenamed": "El enlace <1>«{{oldLinkTitle}}»</1> se ha renombrado a <1>«{{linkTitle}}»</1>",

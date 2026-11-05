@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "Downloaden en kopiëren zonder beperkingen",
   "RoomDenyDownloadEnabled": "Downloaden en kopiëren beperkt",
   "RoomEmptyAtTheMoment": "Deze kamer is op dit moment leeg.",
-  "RoomExpectUsers": "Verwacht gebruikers",
+  "RoomExpectUsers": "Wachtende gebruikers",
   "RoomExternalLinkCreated": "Link aangemaakt.",
   "RoomExternalLinkDeleted": "Link <1>«{{linkTitle}}»</1> verwijderd.",
   "RoomExternalLinkRenamed": "Link <1>«{{oldLinkTitle}}»</1> hernoemd naar <1>«{{linkTitle}}»</1>",

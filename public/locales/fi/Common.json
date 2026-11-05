@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "Lataaminen ja kopiointi rajoittamaton",
   "RoomDenyDownloadEnabled": "Lataaminen ja kopiointi rajoitettu",
   "RoomEmptyAtTheMoment": "Tämä huone on tällä hetkellä tyhjä.",
-  "RoomExpectUsers": "Odota käyttäjiä",
+  "RoomExpectUsers": "Odottavat käyttäjät",
   "RoomExternalLinkCreated": "Linkki luotu.",
   "RoomExternalLinkDeleted": "Linkki <1>«{{linkTitle}}»</1> poistettu.",
   "RoomExternalLinkRenamed": "Linkki <1>«{{oldLinkTitle}}»</1> nimetty uudelleen <1>«{{linkTitle}}»</1>",

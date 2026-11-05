@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "ດາວໂຫຼດ ແລະ ກ໊ອບີ້ແບບບໍ່ຈຳກັດ",
   "RoomDenyDownloadEnabled": "ດາວໂຫຼດ ແລະ ກ໊ອບເຜີຍ ສ່ວນທີ່ຖືກຈຳກັດ",
   "RoomEmptyAtTheMoment": "ຫ້ອງນີ້ຫວ່າງເປົ່າໃນຂະນະນີ້.",
-  "RoomExpectUsers": "ຄາດຫວັງວ່າຜູ້ໃຊ້",
+  "RoomExpectUsers": "ຜູ້ໃຊ້ທີ່ລໍຖ້າ",
   "RoomExternalLinkCreated": "ເຊື່ອມຕໍ່ຖືກສ້າງແລ້ວ.",
   "RoomExternalLinkDeleted": "ເຊື່ອມຕໍ່ <1>«{{linkTitle}}»</1> ຖືກລົບອອກແລ້ວ.",
   "RoomExternalLinkRenamed": "ເຊື່ອມຕໍ່ <1>«{{oldLinkTitle}}»</1> ຖືກປ່ຽນຊື່ເປັນ <1>«{{linkTitle}}»</1>",

@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "已解除下载和复制限制",
   "RoomDenyDownloadEnabled": "已添加下载和复制限制",
   "RoomEmptyAtTheMoment": "这个房间目前是空的。",
-  "RoomExpectUsers": "等待用户",
+  "RoomExpectUsers": "待处理用户",
   "RoomExternalLinkCreated": "链接已创建。",
   "RoomExternalLinkDeleted": "链接<1>«{{linkTitle}}»</1>已删除。",
   "RoomExternalLinkRenamed": "链接<1>«{{oldLinkTitle}}»</1>重命名为<1>«{{linkTitle}}»</1>",

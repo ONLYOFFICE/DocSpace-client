@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "Không hạn chế tải xuống và sao chép",
   "RoomDenyDownloadEnabled": "Hạn chế tải xuống và sao chép",
   "RoomEmptyAtTheMoment": "Phòng này hiện đang trống.",
-  "RoomExpectUsers": "Người dùng được mong chờ",
+  "RoomExpectUsers": "Người dùng đang chờ",
   "RoomExternalLinkCreated": "Đã tạo liên kết.",
   "RoomExternalLinkDeleted": "Đã xóa liên kết <1>«{{linkTitle}}»</1>.",
   "RoomExternalLinkRenamed": "Liên kết <1>«{{oldLinkTitle}}»</1> được đổi tên thành <1>«{{linkTitle}}»</1>",

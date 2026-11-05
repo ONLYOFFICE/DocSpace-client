@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "Скачивание и копирование без ограничений",
   "RoomDenyDownloadEnabled": "Загрузка и копирование ограничены",
   "RoomEmptyAtTheMoment": "В данный момент эта комната пуста.",
-  "RoomExpectUsers": "Ожидайте пользователей",
+  "RoomExpectUsers": "Ожидающие пользователи",
   "RoomExternalLinkCreated": "Ссылка создана.",
   "RoomExternalLinkDeleted": "Ссылка <1>«{{linkTitle}}»</1> удалена.",
   "RoomExternalLinkRenamed": "Ссылка <1>«{{oldLinkTitle}}»</1> переименована в <1>«{{linkTitle}}»</1>",

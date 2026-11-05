@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "Неограничено изтегляне и копиране",
   "RoomDenyDownloadEnabled": "Ограничено изтегляне и копиране",
   "RoomEmptyAtTheMoment": "Тази стая е празна в момента.",
-  "RoomExpectUsers": "Очаквай потребители",
+  "RoomExpectUsers": "Чакащи потребители",
   "RoomExternalLinkCreated": "Създаден линк.",
   "RoomExternalLinkDeleted": "Линкът <1>«{{linkTitle}}»</1> е изтрит.",
   "RoomExternalLinkRenamed": "Линкът <1>«{{oldLinkTitle}}»</1> е преименуван на <1>«{{linkTitle}}»</1>",

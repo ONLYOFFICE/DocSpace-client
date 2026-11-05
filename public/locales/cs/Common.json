@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "Stahování a kopírování bez omezení",
   "RoomDenyDownloadEnabled": "Stahování a kopírování s omezením",
   "RoomEmptyAtTheMoment": "Tato místnost je momentálně prázdná.",
-  "RoomExpectUsers": "Očekávejte, že uživatelé",
+  "RoomExpectUsers": "Čekající uživatelé",
   "RoomExternalLinkCreated": "Vytvořený odkaz.",
   "RoomExternalLinkDeleted": "Odkaz <1>«{{linkTitle}}»</1> odstraněn.",
   "RoomExternalLinkRenamed": "Odkaz <1>«{{oldLinkTitle}}»</1> přejmenován na <1>«{{linkTitle}}»</1>",

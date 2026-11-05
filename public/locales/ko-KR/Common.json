@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "다운로드 및 복사가 제한되지 않습니다",
   "RoomDenyDownloadEnabled": "다운로드 및 복사가 제한되었습니다",
   "RoomEmptyAtTheMoment": "현재 이 방은 비어 있습니다.",
-  "RoomExpectUsers": "예상 사용자",
+  "RoomExpectUsers": "대기 중인 사용자",
   "RoomExternalLinkCreated": "링크가 생성되었습니다.",
   "RoomExternalLinkDeleted": "<1>«{{linkTitle}}»</1> 링크가 삭제되었습니다.",
   "RoomExternalLinkRenamed": "<1>«{{oldLinkTitle}}»</1> 링크의 이름이 <1>«{{linkTitle}}»</1> 링크로 변경되었습니다.",

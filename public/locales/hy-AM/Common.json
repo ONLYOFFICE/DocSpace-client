@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "Ներբեռնումը և պատճենումը անսահմանափակ են",
   "RoomDenyDownloadEnabled": "Ներբեռնումը և պատճենումը սահմանափակված են",
   "RoomEmptyAtTheMoment": "Այս սենյակն այս պահին դատարկ է։",
-  "RoomExpectUsers": "Սպասեք օգտատերերին",
+  "RoomExpectUsers": "Սպասման մեջ գտնվող օգտատերեր",
   "RoomExternalLinkCreated": "Հղումը ստեղծվել է:",
   "RoomExternalLinkDeleted": "Հղումը <1>«{{linkTitle}}»</1> ջնջված է։",
   "RoomExternalLinkRenamed": "Հղումը <1>«{{oldLinkTitle}}»</1> վերանվանվել է <1>«{{linkTitle}}»</1>",

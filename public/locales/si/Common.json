@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "බාගත කිරීම සහ කොපිරී කිරීම අවරෝධයකින් තොරව",
   "RoomDenyDownloadEnabled": "බාගැනීම සහ පිටපත් කිරීම සීමා කර ඇත",
   "RoomEmptyAtTheMoment": "දැනට මෙම කාමරය හිස්ය",
-  "RoomExpectUsers": "අපේක්‍ෂිත පරිශ්‍රීලකයින්",
+  "RoomExpectUsers": "පොරොත්තු පරිශීලකයින්",
   "RoomExternalLinkCreated": "ලිංකිය සාදා ගන්නා ලදි.",
   "RoomExternalLinkDeleted": "<1>«{{linkTitle}}»</1> සබැඳිය මකා දමන ලදී.",
   "RoomExternalLinkRenamed": "සබැඳිය <1>«{{oldLinkTitle}}»</1> ලෙස නැවත නම් කරන ලදී <1>«{{linkTitle}}»</1>",

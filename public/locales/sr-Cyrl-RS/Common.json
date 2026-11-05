@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "Преузимање и копирање без ограничења",
   "RoomDenyDownloadEnabled": "Преузимање и копирање ограничено",
   "RoomEmptyAtTheMoment": "Ова соба је празна у овом тренутку.",
-  "RoomExpectUsers": "Очекуј кориснике",
+  "RoomExpectUsers": "Корисници на чекању",
   "RoomExternalLinkCreated": "Линк креиран.",
   "RoomExternalLinkDeleted": "Линк <1>«{{linkTitle}}»</1> обрисан.",
   "RoomExternalLinkRenamed": "Линк <1>«{{oldLinkTitle}}»</1> преименован на <1>«{{linkTitle}}»</1>",

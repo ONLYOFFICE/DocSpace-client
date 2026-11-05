@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "Shkarkimi dhe kopjimi i pakufizuar",
   "RoomDenyDownloadEnabled": "Shkarkimi dhe kopjimi i kufizuar",
   "RoomEmptyAtTheMoment": "Kjo dhomë është bosh për momentin.",
-  "RoomExpectUsers": "Prisni përdoruesit",
+  "RoomExpectUsers": "Përdorues në pritje",
   "RoomExternalLinkCreated": "Lidhja u krijua.",
   "RoomExternalLinkDeleted": "Lidhja <1>«{{linkTitle}}»</1> u fshi.",
   "RoomExternalLinkRenamed": "Lidhja <1>«{{oldLinkTitle}}»</1> u riemërtua në <1>«{{linkTitle}}»</1>",

@@ -2002,7 +2002,7 @@
   "RoomDenyDownloadDisabled": "Завантаження та копіювання не обмежено",
   "RoomDenyDownloadEnabled": "Завантаження та копіювання обмежено",
   "RoomEmptyAtTheMoment": "Зараз ця кімната порожня.",
-  "RoomExpectUsers": "Очікувати користувачів",
+  "RoomExpectUsers": "Користувачі в очікуванні",
   "RoomExternalLinkCreated": "Посилання створено.",
   "RoomExternalLinkDeleted": "Посилання <1>«{{linkTitle}}»</1> видалено.",
   "RoomExternalLinkRenamed": "Посилання <1>«{{oldLinkTitle}}»</1> перейменовано в <1>«{{linkTitle}}»</1>",

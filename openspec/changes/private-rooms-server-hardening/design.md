@@ -6,6 +6,14 @@ See proposal.md. Server state on `hotfix/v4.0.1` (`../server`). Re-checked on
 `release/v4.1.0` at `e9cfda8d43` on 2026-11-02: none of the backend tasks
 has landed, and the line numbers below are those of that commit.
 
+Re-checked on 2026-11-05 at `bd89a24dcd` (`release/v4.1.0`): two commits by
+the backend team on 2026-11-04, `3b9c527a6e` ("protect archived rooms, keep
+login links, add invitee keys route") and `bd89a24dcd` ("enforce stricter
+content boundaries and validate room settings"), landed the items listed
+under "Landed on 2026-11-04" at the end of this section. The items below
+describe the state before them and keep the line numbers of `e9cfda8d43`;
+the list names each one the two commits closed.
+
 - Owner change: `products/ASC.Files/Core/Core/FileStorageService.cs`
   (`ChangeOwnerAsync`, from line 5348; the room loop runs to line 5427) only
   calls `ThrowIfKeysAreNotSetAsync` for a private room (line 5383); no
@@ -87,7 +95,8 @@ has landed, and the line numbers below are those of that commit.
   through the bypass, for administrators who are not members. Once task 9.1
   denies Copy on subfolders in Archive, the copy right check at `:241`
   refuses the request, as it does in an active private room, so no separate
-  requirement is needed.
+  requirement is needed. Closed on 2026-11-04 by the Archive Copy denial
+  and by the folder rule of decision 16.
 - Room events: `SocketManager.WhoCanRead`
   (`products/ASC.Files/Core/Utils/SocketManager.cs:411-419`) adds every
   administrator to the recipients for VirtualRooms and Archive entries, and
@@ -168,6 +177,109 @@ admits a caller who passes `FileSharingHelper.CanSetAccessAsync` (`:101`,
 defined at `:624`). `private-rooms-invite-atomic-rewrap` verifies invitees'
 keys before that update and needs those keys first.
 
+### Landed on 2026-11-04 (read in `3b9c527a6e` and `bd89a24dcd`)
+
+- Key save (task 12.1, decision 11): `EncryptionLoginProvider.SetKeysAsync`
+  passes `ProviderConstants.Encryption` to `RemoveProviderAsync`
+  (`common/ASC.FederatedLogin/LoginProviders/EncryptionLoginProvider.cs:69`).
+  `KeysAndLoginLinksTests`: a planted Google link survives a key save, a key
+  replacement and a key deletion. Links already lost are not restored.
+- Private-room denials in every section (tasks 9.1 and 12.2, decisions 7
+  and 12): `FileSecurity.FilterEntryAsync` computes `inPrivateRoom` before
+  the section switch and denies Copy, Duplicate, IndexExport, UseChat and
+  Vectorization inside a private room, on the room and on its entries, in
+  Rooms and in Archive alike
+  (`products/ASC.Files/Core/Core/Security/FileSecurity.cs:1706-1718`); the
+  Archive branch skips the administrator bypass while `inPrivateRoom`
+  (`:2086`). `ArchivedPrivateRoomSecurityTests`: an administrator who is not
+  a member, and the portal owner, get 403 on the archived room, a subfolder
+  and a file by id and cannot delete or unarchive the room; the creator
+  keeps Read and Delete and loses Copy on the room, the subfolder and the
+  file; a member administrator keeps Read without Copy; a member's batch
+  copy of a file into another room stores nothing; an ordinary archived
+  room keeps the bypass. `PrivateRoomContentBoundaryTests`: the room's
+  security reports Duplicate, Copy and IndexExport false, and a duplicate
+  request creates no room.
+- Room events (task 9.3, decision 8): `SocketManager.WhoCanRead` adds the
+  administrators only when the entry is neither a private room nor inside
+  one (`products/ASC.Files/Core/Utils/SocketManager.cs:415-418`).
+- File public keys in Archive (task 9.5, decision 9):
+  `EncryptionKeyPairDtoHelper.GetKeyPairAsync(fileId)` accepts
+  `VirtualRooms or Archive`
+  (`products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs:212`);
+  `PrivateRoomContentBoundaryTests.ArchivedRoom_FileAccessKeys_AreReadable`.
+- Invitee keys (task 11.1, decision 10):
+  `GET api/2.0/privacyroom/{roomId}/access/candidates?userIds=…&userIds=…`
+  (`PrivacyRoomControllerCommon.GetRoomCandidateKeys`,
+  `GetRoomCandidateKeysRequestDto` with `roomId` from the route and
+  `userIds` from the query,
+  `EncryptionKeyPairDtoHelper.GetKeyPairForRoomCandidatesAsync`). Checks in
+  order: 404 for an unknown room (`FileNotFoundException`); 403 when the
+  caller cannot read the room; 400 when the entry is not a room or not
+  private (`ErrorMessage_PrivateRoomOnly`, which makes a subfolder of a
+  private room and an ordinary room 400); 403 when
+  `FileSharingHelper.CanSetAccessAsync` refuses, which covers a member
+  without the right, a non-member, an administrator who is not a member and
+  every caller on an archived private room. Users who do not exist on the
+  portal, are terminated or are guests are skipped, as are users without a
+  key record or without a public key; ids are de-duplicated; every entry
+  has `privateKeyEnc` null, the caller's own included; no ids answer an
+  empty list; a malformed id is 400 from model binding; an anonymous
+  caller gets 401. `RoomCandidateKeysTests` covers each case. The OpenAPI
+  documents and the C# SDK were regenerated with the route.
+- Metadata guards (the guards half of task 3.1): `CreateRoomAsync` refuses
+  with 400 (`ErrorMessage_BadRequest`) a private room created with
+  `indexing == true`, or with a `lifetime` or a `watermark` whose `enabled`
+  is not false (`products/ASC.Files/Core/Core/FileStorageService.cs:1204-1209`);
+  `RoomDataLifetimeDto.Enabled` and `WatermarkRequestDto.Enabled` are
+  `bool?`, so an object without the flag counts as enabled.
+  `UpdateRoomAsync` refuses the same for a private room when indexing is
+  turned on (`updateData.Indexing == true && !folder.SettingsIndexing`) or
+  a lifetime or watermark is sent enabled (`:1527-1532`); turning them off
+  passes. `PrivateRoomSettingsTests`. The availability rule and its error
+  code did not land.
+- Links (task 12.2, decision 12): `FileSharingAceHelper.SetAceObjectAsync`
+  throws `SecurityException` (403) when a requested entry is a link with an
+  access other than None and the entry is a private room or lies in one
+  (`products/ASC.Files/Core/Utils/FileSharing.cs:106-112`); a revocation
+  (access None) passes. Every link route runs through it;
+  `PrivateRoomContentBoundaryTests.SetRoomLink_IsRefused` covers External
+  and Invitation.
+- Templates (task 12.2, decision 12): `CheckCanCreateRoomTemplateAsync`
+  refuses a private room with `SecurityException` (403), next to the AI
+  rooms (`FileStorageService.cs:839`);
+  `PrivateRoomContentBoundaryTests.CreateTemplateFromTheRoom_IsRefused`.
+- Copy-as (decision 15, not in the plan): `FilesControllerHelper.CopyFileAsAsync`
+  throws `SecurityException` (403) when the source file is marked
+  encrypted, lies in a private room, or the destination folder lies in a
+  private room
+  (`products/ASC.Files/Server/Helpers/FilesControllerHelper.cs:267-274`);
+  `PrivateRoomContentBoundaryTests.CopyAs_*`. It is
+  `private-rooms-editor-contract` task 10.2.
+- Folder moves and copies (decision 16, not in the plan): the folder-level
+  private-room rule of the copy check applies to every folder that is not a
+  room
+  (`products/ASC.Files/Core/Services/WCFService/FileOperations/CopyPermissionsCheck.cs:484`).
+  `CompliesPrivateRoomRulesAsync` passes a folder only when neither it nor
+  the destination lies in a private room, or both lie in the same private
+  room and the operation is a move. A subfolder cannot leave its private
+  room, an open folder cannot enter one, and a copy of a subfolder, within
+  the room or out of an archived room, is refused with
+  `ErrorMessage_SecurityException_MoveFolder`.
+  `PrivateRoomContentBoundaryTests`: `MoveSubfolderOut_LeavesItInTheRoom`,
+  `MoveOpenFolderIn_LeavesItOutside`, `MoveSubfolderWithinTheRoom_IsAllowed`,
+  `ArchivedRoom_SubfolderCopyLeavesNoEmptyTreeOutside`. This closes the
+  empty-folder-tree finding of task 9.2.
+- Documentation: the Swagger responses of room creation and update (400 for
+  the private settings), `PUT files/rooms/{id}/links` (403 for a private
+  room), room template creation (403) and `copyas` (403) were updated.
+
+Still open on the server after the two commits: the owner change (2.1), the
+availability rule and its error code (3.1b), title validation (4.1), e-mail
+titles (4.2), audit and history (6), the folder segment of the abort route
+(7.2), recovery and offboarding (8), the key-set, room-type and third-party
+checks of room creation (12.3), and decisions 6.0 and 12.5.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -223,14 +335,16 @@ keys before that update and needs those keys first.
    private rooms (`private-rooms-archived-room-rules`), so the server rule is
    the second line, not a client prerequisite. Alternative: deny every right
    to non-members in Archive; rejected because a member administrator must
-   keep the rights of their share.
+   keep the rights of their share. Landed 2026-11-04 (`3b9c527a6e`;
+   `bd89a24dcd` then moved the Copy denial into the section-independent
+   block described in Context).
 
 8. **Private-room events go to members only.** `WhoCanRead` adds the
    administrators only for rooms without the private setting. Alternative:
    strip the title from the event payload; rejected because a member's client
-   needs it to refresh the list.
+   needs it to refresh the list. Landed 2026-11-04 (`bd89a24dcd`).
 
-9. **Files of archived private rooms get their public keys (found on a local portal, 2026-10-22).** `SecurityController.GetEncryptionAccess` -> `EncryptionKeyPairDtoHelper.GetKeyPairAsync(fileId)` (`products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs:212-218`) treats a file as private only when `file.RootFolderType == FolderType.VirtualRooms` and throws `NotSupportedException` (415) otherwise, while `GetKeyPairForRoomAsync` in the same file (`:260`) accepts `VirtualRooms or Archive`. A copy out of an archived private room on the local portal received 415 from `files/file/{fileId}/publickeys` and still decrypted, because the client also looks the sender up in the room roster. The fallback the file-operations requirement "Sender keys of files leaving a private room" relies on, the file's own public keys where the source room is not known, therefore fails in Archive today. The fix applies the room check's `VirtualRooms or Archive` condition to the file check.
+9. **Files of archived private rooms get their public keys (found on a local portal, 2026-10-22).** `SecurityController.GetEncryptionAccess` -> `EncryptionKeyPairDtoHelper.GetKeyPairAsync(fileId)` (`products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs:212-218`) treats a file as private only when `file.RootFolderType == FolderType.VirtualRooms` and throws `NotSupportedException` (415) otherwise, while `GetKeyPairForRoomAsync` in the same file (`:260`) accepts `VirtualRooms or Archive`. A copy out of an archived private room on the local portal received 415 from `files/file/{fileId}/publickeys` and still decrypted, because the client also looks the sender up in the room roster. The fallback the file-operations requirement "Sender keys of files leaving a private room" relies on, the file's own public keys where the source room is not known, therefore fails in Archive today. The fix applies the room check's `VirtualRooms or Archive` condition to the file check. Landed 2026-11-04 (`bd89a24dcd`).
 
 10. **Invitee keys through a dedicated route (decided 2026-10-28).** A
     read-only route on `PrivacyRoomController`, for example `GET
@@ -246,13 +360,18 @@ keys before that update and needs those keys first.
     of members is what unwrapping and sender lookup rely on; a portal-wide
     route for any user's keys, rejected because it would tell anyone whether
     a user has keys, where the room scope limits it to people the caller is
-    about to share with.
+    about to share with. Landed 2026-11-04 (`3b9c527a6e`) as
+    `GET api/2.0/privacyroom/{roomId}/access/candidates`, with the checks
+    and exclusions listed in Context: an archived private room is refused
+    with 403, a folder inside a room with 400, and guests, terminated users
+    and users of another portal are left out as users without keys are.
 
 11. **A key save replaces the encryption link only (found 2026-10-28).**
     `EncryptionLoginProvider.SetKeysAsync` passes the provider to
     `RemoveProviderAsync` (`ProviderConstants.Encryption`), so no other
     sign-in link of the user is matched and the save no longer fails on the
     surviving encryption record. No alternative: the current call is a bug.
+    Landed 2026-11-04 (`3b9c527a6e`).
 
 12. **Private rooms refuse links and room-level copies (found 2026-10-28).**
     The link routes refuse an external or invitation link on a private room,
@@ -260,7 +379,10 @@ keys before that update and needs those keys first.
     Duplicate and IndexExport next to Convert, AskAi and Embed, and
     `CheckCanCreateRoomTemplateAsync` refuses a private room. `CreateRoomFrom`
     needs no change: it is never granted on a room. Alternative: rely on the client, which already withholds these
-    actions; rejected because any API caller reaches them.
+    actions; rejected because any API caller reaches them. Landed 2026-11-04
+    (`bd89a24dcd`): the link refusal sits in the share pipeline, so it
+    covers every link route and lets a revocation through; the denials
+    cover Copy, UseChat and Vectorization as well and apply in Archive too.
 
 13. **Key checks look at the key set, not the record (found 2026-10-28).**
     `ThrowIfKeysAreNotSetAsync` treats an empty key set as no keys, which
@@ -282,6 +404,26 @@ keys before that update and needs those keys first.
     task 4.1 accepts exactly that form, an extension optional. Alternative:
     require an extension; rejected because a file without one could no longer
     be uploaded into a private room.
+
+15. **Copy-as is refused around private rooms (landed 2026-11-04, not
+    planned here).** `POST files/file/{fileId}/copyas` answers 403 when the
+    source file is marked encrypted or lies in a private room, or when the
+    destination lies in one, so neither ciphertext nor a plaintext copy
+    crosses the room border through conversion. It closes the copy-as half
+    of the open question on plaintext written into a private room and
+    `private-rooms-editor-contract` task 10.2. The client needs no change:
+    the client creates files in a private room through the encrypted
+    creation and never sends copy-as there; the doceditor's create page
+    still can, which `private-rooms-editor-contract` 9.4 decides.
+
+16. **The folder rule of the copy check judges every folder by its rooms
+    (landed 2026-11-04, not planned here).** Only a room carries the
+    private flag, so the rule reads the rooms above the folder and above
+    the destination: a subfolder stays inside its private room, an open
+    folder does not enter one, and only a move within the same private
+    room passes. The client already refuses a folder copy out of a private
+    room and withholds copy-to and duplicate (`private-rooms/file-operations`);
+    the batch move mock mirrors the rule (task 13.3).
 
 ## Risks / Trade-offs
 
@@ -318,11 +460,13 @@ keys before that update and needs those keys first.
   deprovisioned), or a new route lets a room manager delete named users'
   entries. Owner: backend team with product. Blocks the revocation part of
   task 6.1 and task 8.1.
-- Server refusal of plaintext written into a private room (unencrypted
-  upload sessions and uploads, `copyas` conversion output, a plaintext folder
-  copied or moved into a private room). No requirement in
-  this change covers it yet, although `private-rooms-upload-fail-closed`
-  defers its server-side guard here. Owner: backend team with product.
+- Server refusal of plaintext written into a private room. Closed on
+  2026-11-04 for `copyas` conversion output (decision 15) and for a
+  plaintext folder moved or copied into a private room (decision 16); still
+  open for unencrypted upload sessions and uploads, which
+  `private-rooms-upload-fail-closed` defers here, and not re-checked for a
+  plain file moved or copied into a private room. Owner: backend team with
+  product.
 - Member removal racing an upload on another device (proposal decision 7):
   the access write refuses the whole request when one listed user can no
   longer read the file (see Context). Options: store the entries of the users

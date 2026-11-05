@@ -56,6 +56,7 @@ the file to change so the backend team can pick them up; nothing here is
 - A caller who may change the access of a private room can read the public keys of named users who are not members yet, so the client verifies invitees' keys before granting access (`private-rooms-invite-atomic-rewrap`, decided 2026-10-28; design decision 10). Today the room access keys cover members only.
 - Found when the server was re-checked on 2026-10-28 (`e618acc6c0`): saving a user's keys can delete another sign-in link of that user, such as Google or SSO; a private room accepts external and invitation links and can be duplicated, saved as a template or index-exported, each guarded by the client only; an empty key set passes every key check; the private flag is accepted with any room type; and a third-party room created as private is not key-checked. The server refuses or fixes each of these (design decisions 11-13).
 - Re-checked on 2026-11-02 against `release/v4.1.0` (`e9cfda8d43`): none of the backend items has landed; the key save can also fail once the other sign-in link is gone, template creation has its own gate, and the private flag also reaches AI agents, templates and rooms from templates (design Context).
+- Landed on the server on 2026-11-04 (`3b9c527a6e` and `bd89a24dcd`, re-checked 2026-11-05): the archived-room guards, the socket recipients, the public keys of files in archived rooms, the invitee keys route (`GET privacyroom/{roomId}/access/candidates`), the sign-in link fix, the link, duplicate, index-export and template refusals, and the metadata guards. The same commits refuse copy-as for encrypted files and for private-room sources and destinations, and keep folders from leaving or entering a private room (design decisions 15 and 16). Still open: the owner change, the availability rule, title validation, e-mail titles, audit and history, the folder check of the abort route, recovery and offboarding, and the key-set, room-type and third-party checks of room creation.
 
 ## Capabilities
 
@@ -134,10 +135,12 @@ None.
    route lets a room manager remove named users' entries. No such operation
    exists today; the "member revoked" audit and the offboarding requirement
    cannot be implemented until this is decided.
-5. Server-side refusal of plaintext written into a private room (open):
-   unencrypted uploads and `copyas` conversion output currently land in a
-   private room unchecked. Whether this change adds a requirement for it is
-   undecided; `private-rooms-upload-fail-closed` defers its server guard here.
+5. Server-side refusal of plaintext written into a private room (open for
+   uploads): `copyas` conversion output and plaintext folders are refused
+   since 2026-11-04 (design decisions 15 and 16); unencrypted uploads still
+   land in a private room unchecked. Whether this change adds a requirement
+   for them is undecided; `private-rooms-upload-fail-closed` defers its
+   server guard here.
 6. Third-party private rooms (open): key-check them like every private room
    (the spec assumes this, design decision 13) or refuse the private flag on
    third-party storage.

@@ -3,15 +3,23 @@
 ## ADDED Requirements
 
 ### Requirement: Room metadata features withheld for private rooms
-The server SHALL refuse watermark, content indexing and data lifetime settings on a private room, both at creation and on update, because each of them requires the server to read or transform the document content.
+The server SHALL refuse with 400 a private room creation that turns content indexing on or carries a data lifetime or a watermark that is not explicitly disabled, and SHALL refuse with 400 a private room update that turns indexing on or sends an enabled lifetime or watermark, because each of them requires the server to read or transform the document content. Turning any of them off SHALL stay possible.
 
 #### Scenario: Watermark on a private room
 - **WHEN** a room update sets a watermark on a private room
-- **THEN** the server refuses the update with a validation error and the room is unchanged
+- **THEN** the server refuses the update with 400 and the room is unchanged
 
 #### Scenario: Indexing at creation
 - **WHEN** a private room is created with indexing enabled
-- **THEN** the server refuses the request
+- **THEN** the server refuses the request with 400 and creates no room
+
+#### Scenario: Lifetime without the enabled flag
+- **WHEN** a private room is created with a lifetime object that does not say it is disabled
+- **THEN** the server refuses the request with 400
+
+#### Scenario: Settings turned off
+- **WHEN** an update of a private room sets indexing off and a disabled lifetime and watermark
+- **THEN** the update is applied
 
 ### Requirement: Encrypted file titles are validated
 The server SHALL accept a file marked encrypted only when its title is an opaque identifier, a lowercase UUID optionally followed by a dot and a lowercase alphanumeric extension, so that no plaintext file name is stored for an encrypted file.
@@ -73,7 +81,7 @@ For the B2B launch the server SHALL, when a user is deprovisioned (SCIM or manua
 - **THEN** the deactivation is refused until a new owner with keys is named
 
 ### Requirement: Administrator bypass excludes archived private rooms
-The server SHALL NOT grant a portal administrator who is not a member of an archived private room any right by role alone: no read, copy or download on its files and folders, and no move, delete or index export on the room. This SHALL match an active private room. An administrator who is a member SHALL keep the rights of their own share.
+The server SHALL NOT grant a portal administrator, the portal owner included, who is not a member of an archived private room any right by role alone: no read, copy or download on its files and folders, and no move, delete or index export on the room. This SHALL match an active private room. An administrator who is a member SHALL keep the rights of their own share.
 
 #### Scenario: Non-member administrator reads an archived private room's file
 - **WHEN** a portal administrator who is not a member requests a file of an archived private room by id
@@ -95,40 +103,71 @@ The server SHALL send the socket events of a private room, active or archived, a
 - **THEN** members receive the event and a portal administrator who is not a member receives none
 
 ### Requirement: Public keys of prospective members
-The server SHALL return, to a caller who may change the access of a private room, the public keys of named portal users whether or not they are members of the room, without the private half, so the client can verify an invitee's key before granting access. A named user without stored keys, or with an empty key set, SHALL be absent from the answer. It SHALL answer 404 for an unknown room, 400 for a room that is not private, and 403 for a caller who may not change the room's access.
+The server SHALL return, to a caller who may change the access of an active private room, the public keys of the named portal users, members or not, with no private half on any entry, the caller's own included, so the client can verify an invitee's key before granting access. It SHALL answer 404 for an unknown room, 400 for a room that is not private, a folder inside a room or a malformed id, and 403 for a caller who cannot read the room or may not change its access.
 
 #### Scenario: Invitee with a key
 - **WHEN** a caller who may change the access of a private room asks for the keys of a portal user who is not a member and has stored keys
 - **THEN** the user's public keys are returned with their ids, without the encrypted private half
 
+#### Scenario: Caller among the candidates
+- **WHEN** the caller names their own id
+- **THEN** their entry is returned without the encrypted private half
+
+#### Scenario: Caller who may not invite
+- **WHEN** a member without the right to change the room's access, a non-member or an administrator who is not a member asks for keys
+- **THEN** the request is refused with 403 and no key is returned
+
+#### Scenario: Archived private room
+- **WHEN** the owner of an archived private room asks for the keys of a user
+- **THEN** the request is refused with 403, because the access of an archived room cannot change
+
+### Requirement: Prospective members who cannot be invited are absent
+The server SHALL leave out of the prospective-members answer, without failing the request, a named user who has no stored key or no public key, is a guest, is terminated or does not exist on the portal; a repeated id SHALL count once, and no ids SHALL answer an empty list.
+
 #### Scenario: Invitee without a key
 - **WHEN** a named user has never stored a key
 - **THEN** the user is absent from the answer and the request still succeeds
 
-#### Scenario: Caller who may not invite
-- **WHEN** a caller who may not change the room's access asks for keys
-- **THEN** the request is refused with 403 and no key is returned
+#### Scenario: Guest or terminated user named
+- **WHEN** a named user is a guest, is terminated or belongs to another portal
+- **THEN** the user is absent from the answer and the request still succeeds
+
+#### Scenario: Same user twice
+- **WHEN** the same id is named twice
+- **THEN** the user's keys are returned once
+
+#### Scenario: No users named
+- **WHEN** the request names no user
+- **THEN** the answer is an empty list
 
 ### Requirement: Saving keys keeps the user's other sign-in links
-The server SHALL replace only the user's encryption key record when the user's keys are saved, and SHALL NOT remove any other account link of the user, such as a Google or SSO sign-in.
+The server SHALL replace only the user's encryption key record when the user's keys are saved or deleted, and SHALL NOT remove any other account link of the user, such as a Google or SSO sign-in.
 
 #### Scenario: User with a linked sign-in provider saves keys
 - **WHEN** a user whose account is linked to a sign-in provider creates or replaces their encryption keys
 - **THEN** the keys are saved, the provider link stays, the user can still sign in through it, and the user holds one encryption key record
 
+#### Scenario: User with a linked sign-in provider deletes a key
+- **WHEN** a user whose account is linked to a sign-in provider deletes an encryption key
+- **THEN** the key is removed and the provider link stays
+
 ### Requirement: No external or invitation links on a private room
-The server SHALL refuse to create or update an external link or an invitation link on a private room, active or archived, so that a private room is reached through membership only.
+The server SHALL refuse with 403 to create or update an external link or an invitation link with any access on a private room, active or archived, or on a folder or file inside one, so that a private room is reached through membership only. Revoking a link that exists SHALL stay possible.
 
 #### Scenario: External link requested
 - **WHEN** a room manager requests an external link for a private room
-- **THEN** the server refuses the request and the room has no external link
+- **THEN** the server refuses the request with 403 and the room has no external link
 
 #### Scenario: Invitation link requested
 - **WHEN** a room manager requests an invitation link for a private room
-- **THEN** the server refuses the request and no link is created
+- **THEN** the server refuses the request with 403 and no link is created
+
+#### Scenario: Link revoked
+- **WHEN** a room manager sets the access of a link that a private room still holds to none
+- **THEN** the request is accepted and the link is removed
 
 ### Requirement: Room-level copies of a private room are refused
-The server SHALL refuse to duplicate a private room, to save it as a room template and to export its index, because each of them carries the room's structure or titles outside the room.
+The server SHALL refuse to duplicate a private room, to save it as a room template (403) and to export its index, and SHALL report the copy, duplicate, index-export, AI chat and vectorization rights as unavailable on a private room and on every file and folder inside it, whether the room is active or archived, because each of them carries the room's structure, titles or content outside the room.
 
 #### Scenario: Duplicate requested
 - **WHEN** a room manager requests a duplicate of a private room
@@ -136,13 +175,67 @@ The server SHALL refuse to duplicate a private room, to save it as a room templa
 
 #### Scenario: Template requested
 - **WHEN** a room manager asks to save a private room as a template
-- **THEN** the server refuses the request and creates no template
+- **THEN** the server refuses the request with 403 and creates no template
 
 #### Scenario: Index export requested
 - **WHEN** a caller requests the index export of a private room
 - **THEN** the server refuses the request and produces no export
 
+#### Scenario: Rights reported
+- **WHEN** the owner reads a private room
+- **THEN** its security reports copy, duplicate and index export as false
+
 ## MODIFIED Requirements
+
+### Requirement: Conversion forbidden for private rooms
+The server SHALL refuse a conversion started through the conversion check, the document converter or a document-builder script when the source file, or the folder the result is saved to, lies in a private room, SHALL never convert an encrypted file, and SHALL refuse with 403 the copy-as-with-conversion request when the source file is marked encrypted or lies in a private room, or when the destination lies in a private room.
+
+#### Scenario: Conversion into a private room
+- **WHEN** a document-converter or document-builder result would be written into a private room
+- **THEN** the operation is refused
+
+#### Scenario: Copy-as into a private room
+- **WHEN** a non-private file is copied with conversion into a private room or into a folder inside one
+- **THEN** the server answers 403 and stores nothing
+
+#### Scenario: Copy-as out of a private room
+- **WHEN** an encrypted file is copied with conversion to a folder outside its room
+- **THEN** the server answers 403 and creates no copy
+
+### Requirement: Server-side copy out of a private room is refused
+The server SHALL refuse a batch copy of a file or a folder from inside a private room to a folder outside that room, whether the room is active or archived, before the operation is queued, so no copy and no folder tree is created; it SHALL refuse a batch move or copy of a folder from outside into a private room; and only a move within the same private room SHALL pass the private-room check.
+
+#### Scenario: Copy out of an archived private room
+- **WHEN** a member requests a batch copy of an encrypted file from an archived private room to My documents
+- **THEN** the server refuses the request with "You don't have enough permission to move the file", queues no operation and creates no file
+
+#### Scenario: Copy out of an active private room
+- **WHEN** a member requests a batch copy of an encrypted file from an active private room to My documents
+- **THEN** the server refuses the request with "You don't have enough permission to copy the file" and creates no file
+
+#### Scenario: Copy within the same private room
+- **WHEN** a member requests a batch copy of an encrypted file into a subfolder of the same private room
+- **THEN** the server refuses the request and creates no file
+
+#### Scenario: Move into another private room
+- **WHEN** a member of two private rooms requests a batch move of an encrypted file from one into the other
+- **THEN** the server refuses the file with "You don't have enough permission to move the file" and moves nothing
+
+#### Scenario: Subfolder moved out
+- **WHEN** the owner requests a batch move of a subfolder of a private room to a folder in My documents
+- **THEN** the folder stays in the room and nothing appears outside
+
+#### Scenario: Open folder moved in
+- **WHEN** the owner requests a batch move of a folder from My documents into a private room
+- **THEN** the folder stays outside and the room is unchanged
+
+#### Scenario: Subfolder moved within the room
+- **WHEN** the owner requests a batch move of a subfolder of a private room into another folder of the same room
+- **THEN** the folder is moved
+
+#### Scenario: Subfolder copied out of an archived private room
+- **WHEN** the owner requests a batch copy of a subfolder of an archived private room to a folder outside it
+- **THEN** no folder, not even an empty one, lands outside
 
 ### Requirement: File public keys
 The server SHALL return, for one file in a private room, active or archived, the keys of every user with a direct user share on the file, its parent folders or its room, plus the owner, skipping groups and users without stored keys, with the private half only on the caller's own entries; it SHALL answer 415 for a file outside a private room. Existing access entries are not consulted.
@@ -156,7 +249,7 @@ The server SHALL return, for one file in a private room, active or archived, the
 - **THEN** the keys are returned as for a file in an active private room, and the server MUST NOT answer 415
 
 ### Requirement: Copy right inside archived private rooms
-The server SHALL deny the copy right on a file inside a private room, and on a subfolder of one, to every user, room owner included, whether the room is active or archived. In an archived private room the other rights follow the rules of every archived room.
+The server SHALL deny the copy right on a private room, on a file inside it and on a subfolder of it, to every user, room owner included, whether the room is active or archived. In an archived private room the other rights follow the rules of every archived room.
 
 #### Scenario: File in an active private room
 - **WHEN** the owner of an active private room lists its encrypted files

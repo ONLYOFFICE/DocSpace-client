@@ -33,10 +33,13 @@ Handover to the documentation team: not yet recorded.
 - **A lost key and recovery phrase mean lost files.** Nobody can decrypt the
   files without the user's key, including administrators and support. Users
   must keep the recovery phrase shown when the key is created.
-- **External sign-in links.** Saving an encryption key can remove the
-  account's link to Google, SSO or another external sign-in provider
-  (`private-rooms-server-hardening` 12.1). Users who sign in through an
-  external provider should set a password before they create a key.
+- **External sign-in links.** On a server build before commit `3b9c527a6e`
+  of 2026-11-04, saving an encryption key could remove the account's link
+  to Google, SSO or another external sign-in provider
+  (`private-rooms-server-hardening` 12.1). The server release that carries
+  that commit keeps the links; a link lost before the fix is not restored.
+  Users on an older server build should set a password before they create
+  a key.
 
 ## Known limitations of this version
 
@@ -70,20 +73,19 @@ From the SHALL NOT requirements of `private-rooms/encryption-core`:
 
 ## Open at release time
 
-Server (`private-rooms-server-hardening`), backend items not merged:
+Server (`private-rooms-server-hardening`), backend items not merged as of
+2026-11-05 (the archived-room guards, room events, the invitee keys route,
+the sign-in link fix, the link and template refusals and the room metadata
+guards merged on 2026-11-04):
 
 - owner change of a private room with encrypted files (2);
-- the private-room availability rule and the guards on room metadata (3);
+- the private-room availability rule (3.1b);
 - validation of encrypted upload titles, and the plaintext room title still
   sent in invitation and notification e-mails (4);
 - audit events and the per-file access history (6);
 - the folder check of the upload-session abort (7.2);
 - recovery and offboarding for organisations (8);
-- archived private rooms and room events (9);
-- the invitee keys route (11);
-- the external sign-in link removal above, the refusal of external and
-  invitation links on private rooms, and the key and room-type checks of
-  room creation (12).
+- the key-set, room-type and third-party checks of room creation (12.3).
 
 Document Server and editor (`private-rooms-editor-contract`):
 

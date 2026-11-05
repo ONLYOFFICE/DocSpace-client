@@ -66,7 +66,8 @@ until these hold:
    first.
 
 `private-rooms-server-hardening` 12.1 is not a prerequisite any more: the
-owner accepted the account-link risk for the beta (decision 2).
+owner accepted the account-link risk for the beta (decision 2). The fix
+merged on the server on 2026-11-04 (`3b9c527a6e`), before the beta shipped.
 
 Prerequisites 1 and 2 no longer hold the flag back (decision 6): the flag is
 removed while they are open, and the release notes name them.
@@ -97,7 +98,7 @@ None.
   - E2E: `packages/client/__tests__/fixtures/base.ts`, `private-rooms-hidden.spec.ts`
 - **Shared:** `packages/shared/utils/privateRooms.ts` (the browser flag goes, the frame opt-in value check stays), the `BetaBadge` component, and `public/locales` (Common keys).
 - **SDK:** the opt-in helpers keep the parameter name after the shared module shrinks; behaviour unchanged.
-- **Server (`../server`):** none for the beta. `private-rooms-server-hardening` 12.1 stays open and is named in the release notes.
+- **Server (`../server`):** none for the beta. `private-rooms-server-hardening` 12.1 merged there on 2026-11-04 (`3b9c527a6e`); the release notes name the server build that carries it.
 - **Document Server:**
   - the release build named with the crypto add-on;
   - DS-17 and DS-19 for spreadsheets and presentations (prerequisite 2).
@@ -124,6 +125,8 @@ None.
    switch until general availability.
 2. **Merge without the server fix for the account-link loss** (owner,
    2026-11-03), with no client guard. The release notes name the risk.
+   Overtaken on 2026-11-04: the fix landed on `release/v4.1.0` of the server
+   (`3b9c527a6e`).
 3. **The switch is the apps catalog entry of the E2E rooms app** (follows
    from decision 1). No new administrator control in this change.
 4. **The E2E suite runs with the section shown** (follows from decision 1):

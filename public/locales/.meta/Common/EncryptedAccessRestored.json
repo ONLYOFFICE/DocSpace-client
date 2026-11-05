@@ -3,7 +3,7 @@
   "content": "{{user}} now has access to every encrypted file in the room.",
   "content_en_sha1_hash": "12a4737be0b1d26256b0fc8c7eab5be0d60a1db1",
   "created_at": "2026-10-28T12:52:53.980Z",
-  "updated_at": "2026-10-28T12:55:23.720Z",
+  "updated_at": "2026-11-05T16:49:40.036Z",
   "comment": {
     "text": "Success toast in the Members tab of a private room, shown after the user clicks Try again on a member marked as having pending access and every missing file key was written; {{user}} is that member's display name. Full sentence stating that the member can now open all encrypted files of the room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/services/private-room/room-member-flows.ts",
-      "line_number": 376,
+      "line_number": 496,
       "context": "}\n \n pendingAccessStore.clear(roomId, member.id);\n return {\n level: \"success\",\n text: t(\"Common:EncryptedAccessRestored\", { user: users }),\n };\n } catch (error) {\n // biome-ignore lint/suspicious/noConsole: the member stays pending; the failed retry is logged for triage.\n console.error(\"Failed to restore access to encrypted files:\", error);\n onProgress({ percent: 100, completed: true, alert: true });",
       "module": "/packages/shared"
     }

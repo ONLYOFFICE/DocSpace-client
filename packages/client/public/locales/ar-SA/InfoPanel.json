@@ -3,7 +3,7 @@
   "AllHistory": "كل السجل",
   "AndMoreLabel": "و <1> {{count}} المزيد </1>",
   "Data": "بيانات",
-  "ExpectUsers": "مستخدمين متوقعين",
+  "ExpectUsers": "المستخدمون قيد الانتظار",
   "ExportHistory": "تصدير السجل",
   "ExportHistoryDescription": "قم بتنزيل النشاط كجدول بيانات .xlsx.",
   "FeedLinkWasDeleted": "تم حذف الرابط",

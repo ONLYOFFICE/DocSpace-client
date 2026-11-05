@@ -3,7 +3,7 @@
   "content": "Access pending",
   "content_en_sha1_hash": "fed6768eb2a42979579135c34212d9640792943e",
   "created_at": "2026-10-28T11:11:46.779Z",
-  "updated_at": "2026-10-28T12:55:23.720Z",
+  "updated_at": "2026-11-05T16:49:39.893Z",
   "comment": {
     "text": "Short status label for a person added to a private room who cannot open some of its encrypted files yet: a group heading in the invitation result of the invite panel, and a note under the member's name in the Members tab, where a Try again link may follow after a separator. Noun phrase naming a state, not a command.",
     "is_auto": true,
@@ -13,9 +13,27 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteResult.js",
-      "line_number": 66,
+      "line_number": 72,
       "context": ") : null}\n \n {pending.length ? (\n <section data-testid=\"invite_panel_result_pending\">\n <Heading className={styles.subHeader}>\n {t(\"Common:EncryptedAccessPending\")}\n </Heading>\n <Text>{namesOf(pending.map((entry) => entry.member))}</Text>\n <Text className={styles.description}>\n {failed\n ? t(\"Common:EncryptedReencryptFailed\")",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMemberUser.tsx",
+      "line_number": 255,
+      "context": "<div\n className={styles.pendingAccess}\n data-testid=\"private_member_access_pending\"\n >\n <Text className={styles.userSubtitle} truncate>\n {`${t(\"Common:EncryptedAccessPending\")}${canInvite ? \" |\" : \"\"}`}\n </Text>\n {canInvite ? (\n <Link\n type={LinkType.action}\n fontSize=\"12px\"",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteResult.tsx",
+      "line_number": 81,
+      "context": ") : null}\n \n {pending.length ? (\n <section data-testid=\"invite_panel_result_pending\">\n <Heading className={styles.subHeader}>\n {t(\"Common:EncryptedAccessPending\")}\n </Heading>\n <Text>{namesOf(pending.map((entry) => entry.member))}</Text>\n <Text className={styles.description}>\n {failed\n ? t(\"Common:EncryptedReencryptFailed\")",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/shared/components/share/sub-components/User.tsx",
+      "line_number": 259,
+      "context": "truncate\n color=\"var(--info-panel-members-subtitle-color)\"\n dir=\"auto\"\n >\n {isAccessPending\n ? `${t(\"Common:EncryptedAccessPending\")}${onRetryAccess ? \" |\" : \"\"}`\n : `${typeLabel} | ${(user as TUser).email}`}\n </Text>\n {isAccessPending && onRetryAccess ? (\n <Link\n type={LinkType.action}",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

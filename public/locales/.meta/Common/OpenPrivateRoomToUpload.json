@@ -3,7 +3,7 @@
   "content": "Files were not uploaded. Open the private room to upload files to it.",
   "content_en_sha1_hash": "9810d5510577f2f131a8b19805d23854c869f7d2",
   "created_at": "2026-10-21T08:36:59.600Z",
-  "updated_at": "2026-10-21T08:38:49.786Z",
+  "updated_at": "2026-11-05T16:49:39.796Z",
   "comment": {
     "text": "Warning toast shown when files from the computer are dropped onto the row or tile of a private (end-to-end encrypted) room, or one of its folders, in a list such as Rooms or Archive: nothing was uploaded, and the second sentence tells the user (imperative) to open that room and upload from inside it.",
     "is_auto": true,
@@ -13,9 +13,15 @@
   "usage": [
     {
       "file_path": "/packages/client/src/HOCs/withFileActions.js",
-      "line_number": 99,
+      "line_number": 105,
       "context": "const target = await resolveDropTarget(open, item).catch((err) => {\n toastr.error(err, null, 0, true);\n return null;\n });\n if (isDropRefused(open, target)) {\n if (target) toastr.warning(t(\"Common:OpenPrivateRoomToUpload\"));\n return;\n }\n \n createFoldersTree(t, files, target, dragged)\n .then((f) => {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/private/[roomId]/page.client.tsx",
+      "line_number": 203,
+      "context": "},\n targetFolderId,\n folderData.current?.rootFolderType,\n ).catch(() => null);\n if (target?.folderId === undefined || target?.folderId === null) {\n toastr.error(t(\"Common:OpenPrivateRoomToUpload\"));\n return;\n }\n await uploadFiles({ files, folderId: target.folderId, roomId });\n },\n [",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

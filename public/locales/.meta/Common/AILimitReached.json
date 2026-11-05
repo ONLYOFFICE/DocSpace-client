@@ -3,7 +3,7 @@
   "content": "AI spending limit reached",
   "content_en_sha1_hash": "ce3224f6b0e14dd5decae190689dfd7df99f3abf",
   "created_at": "2026-10-23T12:27:54.735Z",
-  "updated_at": "2026-11-02T08:07:42.832Z",
+  "updated_at": "2026-11-05T16:49:39.894Z",
   "comment": {
     "text": "Title of the notice shown in the AI chat, AI agent and metadata AI panel when an AI request is blocked because the AI spending limit set for the portal or user has been reached. Short heading, no trailing period.",
     "is_auto": true,
@@ -18,22 +18,10 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 958,
-      "context": "if (standalone) return null;\n \n const serviceLimit = getServiceLimitChatError(payload);\n if (serviceLimit) {\n return {\n title: t(\"Common:AILimitReached\"),\n description: getServiceLimitDescription(\n t,\n language,\n serviceLimit,\n isAdmin,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-agent-providers/index.tsx",
+      "file_path": "/packages/shared/hooks/useAiChatNotice.ts",
       "line_number": 161,
-      "context": "// (see getServiceLimitChatError); the SDK has no settings to send the\n // user to, so both cases end in a plain message without Retry.\n const serviceLimit = getServiceLimitChatError(payload);\n if (serviceLimit) {\n return {\n title: t(\"Common:AILimitReached\"),\n description: getServiceLimitDescription(\n t,\n i18n.language,\n serviceLimit,\n ),",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-providers/index.tsx",
-      "line_number": 82,
-      "context": ">(\n (payload) => {\n const serviceLimit = getServiceLimitChatError(payload);\n if (serviceLimit) {\n return {\n title: t(\"Common:AILimitReached\"),\n description: getServiceLimitDescription(\n t,\n i18n.language,\n serviceLimit,\n ),",
-      "module": "/packages/sdk"
+      "context": "};\n }\n \n if (block.kind === \"limit\") {\n return {\n title: t(\"Common:AILimitReached\"),\n description: getServiceLimitDescription(\n t,\n language,\n { until: block.until },\n isAdmin,",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

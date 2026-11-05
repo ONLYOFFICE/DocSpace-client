@@ -3,7 +3,7 @@
   "content": "Set a default storage quota for rooms in this workspace — room admins can adjust it later for individual rooms.",
   "content_en_sha1_hash": "c93c23e62c99483f8768c7a0eb60181f8305f52d",
   "created_at": "2026-09-04T07:59:36.298Z",
-  "updated_at": "2026-11-02T07:10:46.927Z",
+  "updated_at": "2026-11-05T16:49:39.977Z",
   "comment": {
     "text": "Subtitle for a menu item and a description for a toggle in the storage management settings, explaining the default storage quota for rooms.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom.js",
-      "line_number": 61,
-      "context": "saveQuota={(size) => setRoomQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultRoomsQuotaSet}\n tabIndex={1}\n dataTestId=\"quota_room\"\n toggleDescription={t(\"SetDefaultRoomQuota\")}\n />\n );\n };\n \n export const QuotaPerRoomComponentSection = inject(({ currentQuotaStore }) => {",
+      "line_number": 60,
+      "context": "disableQuota={() => setRoomQuota(NO_QUOTA, t)}\n saveQuota={(size) => setRoomQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultRoomsQuotaSet}\n dataTestId=\"quota_room\"\n toggleDescription={t(\"SetDefaultRoomQuota\")}\n />\n );\n };\n \n export const QuotaPerRoomComponentSection = inject(({ currentQuotaStore }) => {",
       "module": "/packages/client"
     }
   ],

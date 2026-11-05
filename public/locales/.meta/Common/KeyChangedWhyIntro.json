@@ -3,7 +3,7 @@
   "content": "A key change can be legitimate or it can be an attack. Common reasons:",
   "content_en_sha1_hash": "d99b84a7c00f6472ad0e98d66afaa7b227c649dc",
   "created_at": "2026-05-24T17:27:30.455Z",
-  "updated_at": "2026-05-24T17:47:28.833Z",
+  "updated_at": "2026-11-05T16:49:40.022Z",
   "comment": {
     "text": "Introductory text in the KeyChangeDialog that precedes a list of potential reasons for a key change.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx",
-      "line_number": 178,
+      "line_number": 183,
       "context": "<summary className={styles.disclosureSummary}>\n {t(\"Common:KeyChangedWhyTitle\")}\n </summary>\n <div className={styles.disclosureBody}>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:KeyChangedWhyIntro\")}\n </Text>\n <ul className={styles.reasonList}>\n <li>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:KeyChangedReasonReset\")}",
       "module": "/packages/shared"
     }

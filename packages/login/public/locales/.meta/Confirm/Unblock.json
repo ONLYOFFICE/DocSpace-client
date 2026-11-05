@@ -3,7 +3,7 @@
   "content": "Unblock",
   "content_en_sha1_hash": "12aabd251c4213f1cebfe4cb83e6547df55552c3",
   "created_at": "2026-10-15T12:49:40.742Z",
-  "updated_at": "2026-10-15T12:52:07.473Z",
+  "updated_at": "2026-11-05T16:49:40.007Z",
   "comment": {
     "text": "Primary button label on the workspace unblock confirmation page, next to Cancel; verb in the imperative, keep it short.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalUnblock/page.client.tsx",
       "line_number": 115,
-      "context": "<div className={styles.buttonsWrapper}>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Unblock\")}\n tabIndex={1}\n isLoading={isUnblocking}\n onClick={onUnblockClick}\n testId=\"unblock_portal_button\"\n />",
+      "context": "<div className={styles.buttonsWrapper}>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Unblock\")}\n isLoading={isUnblocking}\n onClick={onUnblockClick}\n testId=\"unblock_portal_button\"\n />\n <Button",
       "module": "/packages/login"
     }
   ],

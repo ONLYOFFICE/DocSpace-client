@@ -3,7 +3,7 @@
   "content": "Workspace name",
   "content_en_sha1_hash": "6e0f2ba26a5e7f14ec0a62b070be54ac103989bb",
   "created_at": "2026-08-13T22:44:34.364Z",
-  "updated_at": "2026-08-14T15:49:03.413Z",
+  "updated_at": "2026-11-05T16:49:40.039Z",
   "comment": {
     "text": "Label for a text input field used to name the workspace or portal during configuration or creation.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/configuration/body.tsx",
-      "line_number": 166,
+      "line_number": 165,
       "context": "scale\n />\n </FieldContainer>\n <FieldContainer\n isVertical\n labelText={t(\"PortalName\")}\n labelVisible\n hasError={!!(portalNameError || checkDomainError)}\n errorMessage={portalNameError || checkDomainError}\n >\n <TextInput",
       "module": "/packages/management"
     },

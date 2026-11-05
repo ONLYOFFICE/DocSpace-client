@@ -3,7 +3,7 @@
   "content": "Timed options also lock keys when the tab is hidden. Keys always lock after 30 minutes without use.",
   "content_en_sha1_hash": "e65d87f9ca87f2cdce7743fc4790936af83fec2f",
   "created_at": "2026-07-27T13:06:59.744Z",
-  "updated_at": "2026-07-27T13:41:04.599Z",
+  "updated_at": "2026-11-05T16:49:39.980Z",
   "comment": {
     "text": "Instructional hint text located below the AutoLock setting label that explains how keys are locked based on tab visibility and inactivity.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/AutoLockSetting.tsx",
-      "line_number": 89,
-      "context": "<div className={styles.label}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:AutoLockLabel\")}\n </Text>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:AutoLockHint\")}\n </Text>\n </div>\n <ComboBox\n className={styles.select}\n options={options}",
+      "line_number": 90,
+      "context": "<div className={styles.label}>\n <Text id={labelId} fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:AutoLockLabel\")}\n </Text>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:AutoLockHint\")}\n </Text>\n </div>\n <ComboBox\n className={styles.select}\n options={options}",
       "module": "/packages/client"
     }
   ],

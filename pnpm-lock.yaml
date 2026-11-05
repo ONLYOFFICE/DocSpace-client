@@ -3573,7 +3573,7 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-GNVqbjoOU5eWTpmBPZUb4CGs9xHlgtBXesrLcnM3oVN8KJICY+L0nQlg6p3o29y/amwwIX+MmHw26ONe9a+X7w==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-ghhMu8WDvstZrwYQXfoC9lHwNB8BxIOUSUat0NjP5tgJhcPi3Z1cN+S3rAfZ6uwRTLhqVdorxW7Ao6yDqQFsEw==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.1.0
     engines: {node: '>=22'}
     peerDependencies:
@@ -13101,7 +13101,7 @@ snapshots:
   '@testing-library/dom@10.4.2':
     dependencies:
       '@babel/code-frame': 7.29.7
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.29.7
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
       dom-accessibility-api: 0.5.16

@@ -3,7 +3,7 @@
   "AllHistory": "전체 내역",
   "AndMoreLabel": "및 <1>{{count}} 이상</1>",
   "Data": "데이터",
-  "ExpectUsers": "예상 사용자",
+  "ExpectUsers": "대기 중인 사용자",
   "ExportHistory": "내역 내보내기",
   "ExportHistoryDescription": "활동을 .xlsx 스프레드시트로 다운로드합니다.",
   "FeedLinkWasDeleted": "링크가 삭제되었습니다",

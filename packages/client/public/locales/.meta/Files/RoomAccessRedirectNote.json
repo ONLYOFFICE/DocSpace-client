@@ -3,7 +3,7 @@
   "content": "You will be redirected to the {{sectionName}} section automatically in 5 seconds.",
   "content_en_sha1_hash": "0f2fe7aa7a6cccc6c4cbd7962ad1192cb3fb4ff8",
   "created_at": "2026-10-22T16:10:48.317Z",
-  "updated_at": "2026-10-22T16:11:35.518Z",
+  "updated_at": "2026-11-05T16:49:39.812Z",
   "comment": {
     "text": "Description in the no-access view shown when a room cannot be opened, below its title. {{sectionName}} is the label of the section the page returns to on its own after 5 seconds, Rooms or Private; keep it unchanged and let the word for section carry any case ending.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
-      "line_number": 132,
+      "line_number": 120,
       "context": "emptyViewProps = {\n title:\n type === NoAccessContainerType.Account\n ? t(\"NoAccessSectionTitle\")\n : t(\"NoAccessRoomTitle\"),\n description: t(\"RoomAccessRedirectNote\", {\n sectionName: isPrivateSection\n ? t(\"Common:Private\")\n : t(\"Common:Rooms\"),\n }),\n icon: theme.isBase ? (",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2026-11-03T13:10:45.688Z",
+  "updated_at": "2026-11-05T16:49:39.838Z",
   "comment": {
     "text": "This is a button label that initiates the sharing process for a file or document.",
     "is_auto": true,
@@ -61,13 +61,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/Header.tsx",
-      "line_number": 109,
+      "line_number": 114,
       "context": "const tabItems = availableTabs.map((id) => {\n let name: string;\n if (id === InfoPanelView.infoMembers) {\n name = t(\"Common:Contacts\");\n } else if (id === InfoPanelView.infoShare) {\n name = t(\"Common:Share\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"Common:SubmenuHistory\");\n } else {\n name = t(\"Common:SubmenuDetails\");\n }",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 941,
+      "line_number": 969,
       "context": "if (hasShare && hasCopyLink) {\n actionGroup.push({\n id: \"option_share\",\n key: \"share\",\n label: t(\"Common:Share\"),\n icon: ShareReactSvgUrl,\n items: [getShareItem(item!), getLinkForRoomMembersItem(item!)],\n });\n } else {\n if (hasShare) actionGroup.push(getShareItem(item!));",
       "module": "/packages/sdk"
     }

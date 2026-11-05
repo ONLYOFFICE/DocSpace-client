@@ -3,7 +3,7 @@
   "content": "Users invited",
   "content_en_sha1_hash": "72c2af47b22442f2b4c2dd3ce416b620691f6ca7",
   "created_at": "2025-05-19T21:30:49.475Z",
-  "updated_at": "2026-11-02T07:10:46.796Z",
+  "updated_at": "2026-11-05T16:49:39.890Z",
   "comment": {
     "text": "This is a toast message confirming that users have been successfully invited. It appears after an invitation process is completed.",
     "is_auto": true,
@@ -13,33 +13,27 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 511,
-      "context": "setIsLoading(false);\n \n onClose();\n \n if (!isPrivateInvite) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n if (result?.warning) {\n toastr.warning(result?.warning);\n }",
+      "line_number": 567,
+      "context": "setIsLoading(false);\n onClose();\n }\n \n if (!isPrivateInvite) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n responses.forEach((response) => {\n if (response?.warning) toastr.warning(response.warning);\n response?.aiProjectWarnings?.forEach((warning) =>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 511,
-      "context": "setIsLoading(false);\n \n onClose();\n \n if (!isPrivateInvite) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n if (result?.warning) {\n toastr.warning(result?.warning);\n }",
+      "line_number": 567,
+      "context": "setIsLoading(false);\n onClose();\n }\n \n if (!isPrivateInvite) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n responses.forEach((response) => {\n if (response?.warning) toastr.warning(response.warning);\n response?.aiProjectWarnings?.forEach((warning) =>",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 511,
-      "context": "setIsLoading(false);\n \n onClose();\n \n if (!isPrivateInvite) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n if (result?.warning) {\n toastr.warning(result?.warning);\n }",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(private)/_hooks/usePrivateInviteFlow.ts",
-      "line_number": 186,
-      "context": "count: failures.length,\n }),\n );\n } else if (result.skippedMembers.length === 0) {\n // Zero skipped and zero file failures → fully successful invite.\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n // Silent follow-up: backfill envelopes for members who registered\n // their keypair after the initial invite (their pre-existing files\n // would otherwise stay inaccessible). Fire-and-forget; skip when",
-      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 680,
-      "context": "setIsLoading(false);\n \n handleClose();\n if (!onInviteSubmitted) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n if (result?.warning) {\n toastr.warning(result.warning);\n }",
+      "line_number": 748,
+      "context": "if (!showsResult) {\n setIsLoading(false);\n handleClose();\n }\n if (!onInviteSubmitted) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n for (const response of responses) {\n if (response?.warning) toastr.warning(response.warning);\n }",
       "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/shared/services/private-room/room-member-flows.ts",
+      "line_number": 376,
+      "context": "text: t(\"Common:EncryptedReencryptPartialFailure\", {\n count: failures.length,\n }),\n });\n } else if (allSkipped.length === 0) {\n notices.push({ level: \"success\", text: t(\"Common:UsersInvited\") });\n }\n \n void backfillEncryptedFilesForRoomMembers(roomId, {\n currentUserId,\n identity,",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

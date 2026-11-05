@@ -3,7 +3,7 @@
   "content": "Signing algorithm",
   "content_en_sha1_hash": "3161b0573e8acf2303ef8b56d9ae3a27d4d84c1a",
   "created_at": "2026-08-31T18:23:40.163Z",
-  "updated_at": "2026-08-31T20:49:42.369Z",
+  "updated_at": "2026-11-05T16:49:39.970Z",
   "comment": {
     "text": "Label for a combo box in the Service Provider SSO certificate settings, used to select the cryptographic signing algorithm.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
-      "line_number": 197,
-      "context": "{provider === \"ServiceProvider\" ? (\n <>\n <SsoComboBox\n isDisabled={isDisabledSpSigning}\n labelText={t(\"spSigningAlgorithm\")}\n name=\"spSigningAlgorithm\"\n options={verifyAlgorithmsOptions}\n tabIndex={14}\n value={spSigningAlgorithm}\n dataTestId=\"sp_signing_combobox\"",
+      "line_number": 194,
+      "context": "{provider === \"ServiceProvider\" ? (\n <>\n <SsoComboBox\n isDisabled={isDisabledSpSigning}\n labelText={t(\"spSigningAlgorithm\")}\n name=\"spSigningAlgorithm\"\n options={verifyAlgorithmsOptions}\n value={spSigningAlgorithm}\n dataTestId=\"sp_signing_combobox\"\n />",
       "module": "/packages/client"
     }
   ],

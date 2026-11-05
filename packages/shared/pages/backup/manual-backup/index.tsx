@@ -275,14 +275,20 @@ const ManualBackup = ({
 
     try {
       await saveDeposite(topUpAmount, walletCodeCurrency || "USD");
-      await fetchWalletBalance?.(true);
-      return true;
     } catch (error) {
       toastr.error(error as Error);
       return false;
     } finally {
       setIsToppingUp(false);
     }
+
+    try {
+      await fetchWalletBalance?.(true);
+    } catch (error) {
+      console.error(error);
+    }
+
+    return true;
   };
 
   const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;

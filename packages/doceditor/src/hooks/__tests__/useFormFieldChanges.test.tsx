@@ -472,6 +472,36 @@ describe("useFormFieldChanges", () => {
     );
   });
 
+  it("Document changed while the snapshot was read: the session gives up at once, without waiting for another try", async () => {
+    render();
+    setForms(form("1", "name"));
+    let answer: () => void = () => {};
+    editor.callCommand.mockImplementationOnce(
+      (command: () => unknown, callback: (result: unknown) => void) => {
+        const result = command();
+        answer = () => callback(result);
+      },
+    );
+
+    vi.useFakeTimers();
+    try {
+      const done = hook.takeSnapshot();
+      await vi.advanceTimersByTimeAsync(0);
+      hook.scheduleFieldChanges(true);
+      answer();
+      await vi.advanceTimersByTimeAsync(0);
+
+      expect(console.error).toHaveBeenCalledWith(
+        expect.stringContaining("not tracked"),
+      );
+
+      await vi.runAllTimersAsync();
+      await done;
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it("Document only saved before the snapshot was read again: the snapshot is still taken", async () => {
     render();
     setForms(form("1", "name"));

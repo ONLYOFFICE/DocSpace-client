@@ -263,6 +263,9 @@ const useFormFieldChanges = (
       // No connector, as in Community Edition: there is nothing to track.
       if (!connector.current?.callCommand) return;
 
+      // A changed document cannot give a snapshot on a later try.
+      if (changed.current) break;
+
       if (attempt < SNAPSHOT_ATTEMPTS) {
         await new Promise((resolve) =>
           setTimeout(resolve, SNAPSHOT_RETRY_DELAY),

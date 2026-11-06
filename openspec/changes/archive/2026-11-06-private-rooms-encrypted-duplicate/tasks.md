@@ -16,5 +16,5 @@
 
 ## Workflow follow-up
 
-- Proposal decision 1 (Move as a stand-in, or the server answering Duplicate by role for encrypted files) is open for the owner and the backend team. If the server changes, the client rule needs no edit: the server's Duplicate answer is already its first operand.
+- Proposal decision 1 (Move as a stand-in, or the server answering Duplicate by role for encrypted files) was decided by the owner on 2026-11-06: the Move stand-in stays, with no server change.
 - Archive with `/opsx:archive private-rooms-encrypted-duplicate` after review. The archive adds the requirement to `openspec/specs/private-rooms/file-operations/spec.md`.

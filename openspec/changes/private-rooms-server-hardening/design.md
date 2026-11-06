@@ -757,6 +757,11 @@ six encrypted files, no subfolder); no data was changed:
     (`bd89a24dcd`): the link refusal sits in the share pipeline, so it
     covers every link route and lets a revocation through; the denials
     cover Copy, UseChat and Vectorization as well and apply in Archive too.
+    The refusal of Duplicate on the room's entries, wider than this decision
+    asked, stays: the client and the SDK offer Duplicate of an encrypted
+    file on the Move right instead (`private-rooms-encrypted-duplicate`,
+    archived 2026-11-06), and the owner decided the same day not to ask the
+    server to answer Duplicate by role again.
 
 13. **Key checks look at the key set, not the record (found 2026-10-28).**
     `ThrowIfKeysAreNotSetAsync` treats an empty key set as no keys, which

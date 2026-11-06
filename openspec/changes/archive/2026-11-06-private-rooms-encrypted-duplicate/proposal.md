@@ -77,4 +77,6 @@ None.
    should instead answer Duplicate on encrypted files by role again and
    refuse only its own duplicate operation for them. The stand-in needs no
    server change, and design.md compares it with the server read. Until this
-   is decided, the change goes ahead with the stand-in.
+   is decided, the change goes ahead with the stand-in. Decided by the owner
+   on 2026-11-06, after the archive: the Move stand-in stays, and the
+   backend team is not asked for a change.

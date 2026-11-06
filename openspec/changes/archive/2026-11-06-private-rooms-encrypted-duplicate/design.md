@@ -76,7 +76,8 @@ No stashed design document covers the Duplicate entry.
    - (b) Ask the backend to answer Duplicate by role again for encrypted
      files and refuse only the duplicate operation itself. That is cleaner in
      meaning but needs a server change for a right the client can already
-     derive. Proposal decision 1 keeps it open.
+     derive. Not taken (proposal decision 1, decided by the owner on
+     2026-11-06).
    - (c) The create right of the file's folder. Rejected: it is not at hand
      outside the folder (Recent, Favorites), and it ignores the own-file
      limit of a content creator.

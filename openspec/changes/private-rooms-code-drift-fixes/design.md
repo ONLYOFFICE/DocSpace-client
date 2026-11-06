@@ -131,11 +131,13 @@ No stashed design document covers these points.
    - With it, a `decrypt-out` plan stores itself in a `dialogsStore` field
      (`encryptedTransferConfirm`) instead of starting.
    - A new `EncryptedTransferConfirmDialog` under
-     `packages/client/src/components/dialogs`, rendered by `DialogsWrapper`,
-     shows the title Common:EncryptedTransferBannerTitle, the text
-     Common:EncryptedTransferBannerDescription, and the buttons Common:Move
-     and Common:CancelButton.
-   - Move runs the stored plan, and Cancel clears it.
+     `packages/client/src/components/dialogs`, rendered by `FilesPanels`
+     next to `MoveToPublicRoom` (`DialogsWrapper` holds only the About and
+     Debug dialogs), shows the title Common:EncryptedTransferBannerTitle, the
+     text Common:EncryptedTransferBannerDescription, and the buttons
+     Common:Move and Common:CancelButton.
+   - Move runs the stored plan (`FilesActionsStore.confirmEncryptedTransfer`),
+     and Cancel clears it.
 
    The paste clears the clipboard only once the user confirms, so a declined
    paste can be repeated. Alternative: show a toast and move anyway.

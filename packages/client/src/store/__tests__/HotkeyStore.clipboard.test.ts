@@ -189,6 +189,7 @@ const setup = () => {
     clip,
     paste,
     filesStore,
+    filesActionsStore,
     itemOperationToFolder,
     copyEncryptedFilesToFolder,
     createFoldersTree,
@@ -214,13 +215,19 @@ describe("HotkeyStore - clipboard paste and private rooms", () => {
     expect(s.filesStore.hotkeysClipboard).toEqual([]);
   });
 
-  it("Cut and paste out of a private room: files are decrypted and their sources deleted", async () => {
+  it("Move out by drag and drop or paste: cut files are decrypted and their sources deleted once confirmed", async () => {
     const s = setup();
     s.goTo(location.privateRoom(7));
     s.clip([privateFile(1), privateFile(2)], true);
     s.goTo(location.myDocuments(5));
     await s.paste();
 
+    expect(s.copyEncryptedFilesToFolder).not.toHaveBeenCalled();
+    expect(s.filesStore.hotkeysClipboard).toHaveLength(2);
+
+    s.filesActionsStore.confirmEncryptedTransfer();
+
+    expect(s.filesStore.hotkeysClipboard).toEqual([]);
     expect(s.itemOperationToFolder).not.toHaveBeenCalled();
     expect(s.copyEncryptedFilesToFolder).toHaveBeenCalledWith(
       [privateFile(1), privateFile(2)],
@@ -239,6 +246,7 @@ describe("HotkeyStore - clipboard paste and private rooms", () => {
     s.clip([privateFile(1)], true);
     s.goTo(location.room(8));
     await s.paste();
+    s.filesActionsStore.confirmEncryptedTransfer();
 
     expect(s.itemOperationToFolder).not.toHaveBeenCalled();
     expect(s.copyEncryptedFilesToFolder).toHaveBeenCalledWith(
@@ -250,6 +258,21 @@ describe("HotkeyStore - clipboard paste and private rooms", () => {
         sourceRoomId: 7,
       }),
     );
+  });
+
+  it("Warning declined", async () => {
+    const s = setup();
+    s.goTo(location.privateRoom(7));
+    s.clip([privateFile(1)], true);
+    s.goTo(location.myDocuments(5));
+    await s.paste();
+
+    s.filesActionsStore.dialogsStore.setEncryptedTransferConfirm(null);
+    s.filesActionsStore.confirmEncryptedTransfer();
+
+    expect(s.copyEncryptedFilesToFolder).not.toHaveBeenCalled();
+    expect(s.itemOperationToFolder).not.toHaveBeenCalled();
+    expect(s.filesStore.hotkeysClipboard).toEqual([privateFile(1)]);
   });
 
   it("Copy hotkey inside a private room: nothing is added to the clipboard", () => {

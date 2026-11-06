@@ -84,6 +84,12 @@ in `private-rooms-ai-integration`.
 
 ## Editors
 
+- **Blocker found on the release stand (2026-11-06, Document Server
+  10.0.3.19):** a document created in a private room opens and saves, but
+  cannot be reopened after that save while the Document Server still holds
+  its editing session (the editor reports error -82). Known as
+  `private-rooms-editor-contract` 6.2, fixed together with the Document
+  Server team; the beta must not ship with it.
 - **Document Server build:** not named yet (beta gate item 0.1, left open by
   proposal decision 6). On a Document Server build without the crypto add-on,
   private rooms cannot be created (the server answers 403 since `b562fc3fb1`)

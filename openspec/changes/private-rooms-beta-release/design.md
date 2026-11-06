@@ -210,7 +210,19 @@ browser, no data changed:
   Copy, Duplicate, IndexExport, UseChat, Vectorization, AskAi, Convert and
   Embed false, and the audit trail masks the room title (see
   `private-rooms-server-hardening`, "Release stand check").
-- Not run: the API probes that would open an upload session or ask for a
-  copy-as (the server refusals of `cc60512acd` and `bd89a24dcd`), and every
-  flow that needs a second user with a key (invitation, owner change,
-  revocation, letters): no other user of the portal holds one.
+- Later the same day, with the owner's go-ahead: the API probes passed as
+  the server contract says (an upload session without the encrypted flag
+  403, a readable name 400, an opaque name opens, its cancel through
+  another folder 404 with the session kept and through its own 200, copy-as
+  of an encrypted file 403, a private room with indexing 400, an external
+  link on a private room 403). A new private room, an encrypted document
+  created in it and opened on the first try; after one edit and a save the
+  document **cannot be reopened** (Document Server error -82), the known
+  open item 6.2 of `private-rooms-editor-contract` reproduced on the
+  release build. That is a beta blocker: every document edited in a
+  private room becomes unopenable while the Document Server holds its
+  session. Details in that change's design.md, "Release stand check of
+  2026-11-06".
+- Still not run: every flow that needs a second user with a key
+  (invitation, owner change, revocation, letters): no other user of the
+  portal holds one.

@@ -1056,10 +1056,15 @@ const Shell = ({ page = "home", ...rest }) => {
             isProjectModelUnavailable || (standalone ? undefined : !isAIReady)
           }
           composerNotice={aiComposerNotice}
-          // A chat opened from an AI preset or inside a project starts with
-          // no suggestion chips: its sources are the subject, not the page.
+          // A chat inside a project offers the project's own chips; one
+          // opened from an AI preset starts with none: its sources are the
+          // subject, not the page.
           suggestions={
-            isInsideAiProject || aiPresetContextRooms ? NO_SUGGESTIONS : aiSuggestions
+            isInsideAiProject
+              ? (aiActiveProject?.aiProject.suggestions ?? NO_SUGGESTIONS)
+              : aiPresetContextRooms
+                ? NO_SUGGESTIONS
+                : aiSuggestions
           }
           // An empty project chat opens with the project's logo, name and
           // sources instead of the default illustration.

@@ -158,6 +158,8 @@ type MockProjectOptions = {
   profile?: typeof PROFILE | null;
   /** The project's instructions to the chat. */
   instructions?: string;
+  /** The suggestion chips of the project's empty chat. */
+  suggestions?: { name: string; prompt: string }[];
   instructionsRooms?: (typeof INSTRUCTIONS_ROOMS)[keyof typeof INSTRUCTIONS_ROOMS][];
   knowledgeRooms?: (typeof KNOWLEDGE_ROOMS)[keyof typeof KNOWLEDGE_ROOMS][];
 };
@@ -179,6 +181,7 @@ export const aiProjectMock = ({
   tags = [],
   profile = PROFILE,
   instructions = "",
+  suggestions = [],
   instructionsRooms = [],
   knowledgeRooms = [],
 }: MockProjectOptions) => {
@@ -211,6 +214,7 @@ export const aiProjectMock = ({
     aiProject: {
       profile,
       instructions,
+      suggestions,
       instructionsRooms,
       knowledgeRooms,
       canEditSettings: sec.EditRoom,
@@ -444,6 +448,33 @@ export const aiProjectInstructionsHandlers = (
       if (!project) return notFound();
       const { instructions } = (await request.json()) as { instructions?: string };
       project.aiProject.instructions = instructions ?? "";
+      return answer(project);
+    }),
+  ];
+};
+
+/**
+ * `GET` / `PUT files/rooms/:id/suggestions`: the suggestion chips of the
+ * project's empty chat; a write replaces them, `[]` clears them.
+ */
+export const aiProjectSuggestionsHandlers = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+) => {
+  const url = `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/suggestions`;
+  const answer = (project: AiProjectMock) =>
+    HttpResponse.json({ response: { suggestions: project.aiProject.suggestions } });
+  return [
+    http.get(url, ({ params }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return notFound();
+      return answer(project);
+    }),
+    http.put(url, async ({ params, request }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return notFound();
+      const { suggestions } = (await request.json()) as { suggestions?: AiProjectMock["aiProject"]["suggestions"] };
+      project.aiProject.suggestions = suggestions ?? [];
       return answer(project);
     }),
   ];
@@ -765,6 +796,7 @@ export const aiProjectsHandlers = (
   ...aiProjectSourcesHandlers(port, projects),
   ...aiProjectModelHandlers(port, projects),
   ...aiProjectInstructionsHandlers(port, projects),
+  ...aiProjectSuggestionsHandlers(port, projects),
   aiProjectGetByIdHandler(port, projects),
   aiProjectCreateHandler(port, projects),
   roomLogoUploadHandler(port),

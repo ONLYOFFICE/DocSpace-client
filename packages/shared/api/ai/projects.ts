@@ -49,9 +49,10 @@ import type { TOperation } from "../files/types";
  * linked rooms are `files/rooms/{id}/sources` and the skills of those rooms
  * `files/rooms/{id}/skills`. The project's model is proxied by ASC.AI.Chat
  * (`ai/projects/{id}/model`) until Files serves it; the project's own
- * instructions to the chat are `files/rooms/{id}/instructions`. This module
- * composes the `aiProject` block the page reads from the room, its sources,
- * its model and its instructions. The list answers the rooms
+ * instructions to the chat are `files/rooms/{id}/instructions` and the
+ * suggestion chips of its empty chat `files/rooms/{id}/suggestions`. This
+ * module composes the `aiProject` block the page reads from the room, its
+ * sources, its model, its instructions and its suggestions. The list answers the rooms
  * without the block (`aiProject.partial`): a project is read again when it
  * is opened or picked.
  *
@@ -63,6 +64,7 @@ import type { TOperation } from "../files/types";
 const roomsUrl = "/files/rooms";
 const modelUrl = (id: number) => `${roomsUrl}/${id}/model`;
 const instructionsUrl = (id: number) => `${roomsUrl}/${id}/instructions`;
+const suggestionsUrl = (id: number) => `${roomsUrl}/${id}/suggestions`;
 
 /** `FileShare` on the server, limited to what a project uses: a Member is the room's Read. */
 export const AiProjectAccess = {
@@ -79,6 +81,14 @@ export const KNOWLEDGE_ROOM_TYPE = RoomsType.KnowledgeRoom;
 export const AI_PROJECT_ROOM_TYPE = RoomsType.AiProjectRoom;
 /** Rooms of one type a project links at most (`AiHubService.MaxRoomsPerType`). */
 export const AI_PROJECT_MAX_ROOMS_PER_TYPE = 20;
+/** Suggestion chips a project keeps at most. */
+export const AI_PROJECT_MAX_SUGGESTIONS = 10;
+
+/** A suggestion chip of the project's empty chat: its label, and the prompt a click puts into the composer. */
+export type TAiProjectSuggestion = {
+  name: string;
+  prompt: string;
+};
 
 export type TAiProjectUser = {
   id: string;
@@ -135,10 +145,11 @@ export type TAiProjectCover = { id: string; data: string };
  * A non-fatal problem of the last create or update, after the project itself
  * was saved. `roomUnavailable`: rooms the server refused to link or unlink;
  * `modelNotSaved`: the model the server refused to store;
- * `instructionsNotSaved`: the instructions the server refused to store.
+ * `instructionsNotSaved`: the instructions the server refused to store;
+ * `suggestionsNotSaved`: the suggestions the server refused to store.
  */
 export type TAiProjectWarning = {
-  code: "roomUnavailable" | "modelNotSaved" | "instructionsNotSaved";
+  code: "roomUnavailable" | "modelNotSaved" | "instructionsNotSaved" | "suggestionsNotSaved";
   roomId: number | null;
   subjectId: string | null;
   /** Localised on the server. */
@@ -149,6 +160,8 @@ export type TAiProjectSettings = {
   profile: TAiProjectProfile | null;
   /** The project's own instructions to the chat (its role, tone, main tasks); "" when none. */
   instructions: string;
+  /** The suggestion chips of the project's empty chat, in their order. */
+  suggestions: TAiProjectSuggestion[];
   instructionsRooms: TAiProjectSource[];
   knowledgeRooms: TAiProjectSource[];
   canEditSettings: boolean;
@@ -206,6 +219,8 @@ export type TAiProjectSettingsRequest = {
   profileId?: string | null;
   /** The instructions to the chat; "" clears them, `undefined` keeps them. */
   instructions?: string;
+  /** The suggestion chips, at most `AI_PROJECT_MAX_SUGGESTIONS`; `[]` clears them, `undefined` keeps them. */
+  suggestions?: TAiProjectSuggestion[];
   instructionsRoomIds?: number[];
   knowledgeRoomIds?: number[];
   /**
@@ -323,8 +338,9 @@ export type TAiProjectRoomDto = Omit<Partial<TAiProject>, "logo" | "security" | 
   logo?: Partial<TAiProjectLogo> | null;
   security?: Record<string, boolean>;
   aiProject?:
-    | (Omit<TAiProjectSettings, "instructions" | "instructionsRooms" | "knowledgeRooms"> & {
+    | (Omit<TAiProjectSettings, "instructions" | "suggestions" | "instructionsRooms" | "knowledgeRooms"> & {
         instructions?: string | null;
+        suggestions?: TAiProjectSuggestion[] | null;
         instructionsRooms?: TRoomSource[];
         knowledgeRooms?: TRoomSource[];
       })
@@ -386,6 +402,7 @@ export const toAiProject = (folder: TAiProjectRoomDto): TAiProject => {
     aiProject: {
       profile: settings?.profile ?? null,
       instructions: settings?.instructions ?? "",
+      suggestions: settings?.suggestions ?? [],
       instructionsRooms: (settings?.instructionsRooms ?? []).map(toSource),
       knowledgeRooms: (settings?.knowledgeRooms ?? []).map(toSource),
       canEditSettings: settings?.canEditSettings ?? !!security.EditRoom,
@@ -486,6 +503,21 @@ export const getAiProjectInstructions = async (id: number) => {
   return res?.instructions ?? "";
 };
 
+/** Two suggestion lists with the same chips in the same order. */
+const sameSuggestions = (a: TAiProjectSuggestion[], b: TAiProjectSuggestion[]) =>
+  a.length === b.length && a.every((item, i) => item.name === b[i].name && item.prompt === b[i].prompt);
+
+/**
+ * The suggestion chips of the project's empty chat
+ * (`GET files/rooms/{id}/suggestions`, readable by every member); `[]` when none.
+ */
+export const getAiProjectSuggestions = async (id: number): Promise<TAiProjectSuggestion[]> => {
+  const res = (await request({ method: "GET", url: suggestionsUrl(id) })) as {
+    suggestions?: TAiProjectSuggestion[] | null;
+  } | null;
+  return res?.suggestions ?? [];
+};
+
 /**
  * The project room with the `aiProject` block composed from its sources,
  * its model (`null`: the portal default) and its instructions; every room
@@ -506,11 +538,13 @@ const toSourceRooms = (sources: TSourcesDto) => {
   };
 };
 
+type TChatSettings = { instructions: string; suggestions: TAiProjectSuggestion[] };
+
 const withSources = (
   room: TAiProjectRoomDto,
   sources: TSourcesDto,
   profile: TAiProjectProfile | null,
-  instructions: string,
+  { instructions, suggestions }: TChatSettings,
   warnings: TAiProjectWarning[] = [],
 ): TAiProjectRoomDto => {
   return {
@@ -518,6 +552,7 @@ const withSources = (
     aiProject: {
       profile,
       instructions,
+      suggestions,
       ...toSourceRooms(sources),
       canEditSettings: !!room.security?.EditRoom,
       ...(warnings.length ? { warnings } : {}),
@@ -642,6 +677,28 @@ const saveInstructions = async (id: number, instructions: string, previous: stri
   }
 };
 
+/**
+ * Stores the suggestions sent and answers the ones the project keeps; a
+ * refused write does not fail the save, keeps `previous` and comes back as
+ * a warning.
+ */
+const saveSuggestions = async (
+  id: number,
+  suggestions: TAiProjectSuggestion[],
+  previous: TAiProjectSuggestion[],
+) => {
+  const warnings: TAiProjectWarning[] = [];
+  try {
+    const res = (await request({ method: "PUT", url: suggestionsUrl(id), data: { suggestions } })) as {
+      suggestions?: TAiProjectSuggestion[] | null;
+    } | null;
+    return { suggestions: res?.suggestions ?? suggestions, warnings };
+  } catch (e) {
+    warnings.push({ code: "suggestionsNotSaved", roomId: null, subjectId: null, message: errorMessage(e) });
+    return { suggestions: previous, warnings };
+  }
+};
+
 export const getAiProjects = async (
   query: TAiProjectsQuery = {},
   signal?: AbortSignal,
@@ -665,15 +722,16 @@ export const deleteAiProjectLogo = async (id: number) => {
 };
 
 export const getAiProject = async (id: number) => {
-  const [room, sources, profile, instructions] = await Promise.all([
+  const [room, sources, profile, instructions, suggestions] = await Promise.all([
     request({ method: "GET", url: `${roomsUrl}/${id}` }),
     getSources(id),
     // A model that cannot be read leaves the project on the portal default.
     getModel(id).catch(() => null),
-    // Instructions that cannot be read leave the chat without them.
+    // Instructions or suggestions that cannot be read leave the chat without them.
     getAiProjectInstructions(id).catch(() => ""),
+    getAiProjectSuggestions(id).catch(() => []),
   ]);
-  return toAiProject(withSources(room as TAiProjectRoomDto, sources, profile, instructions));
+  return toAiProject(withSources(room as TAiProjectRoomDto, sources, profile, { instructions, suggestions }));
 };
 
 /**
@@ -684,25 +742,30 @@ export const getAiProject = async (id: number) => {
 export const refreshAiProjectSettings = async (project: TAiProject): Promise<TAiProject> => {
   const known = project.aiProject.profile;
   const knownInstructions = project.aiProject.instructions;
-  const [sources, profile, instructions] = await Promise.all([
+  const knownSuggestions = project.aiProject.suggestions;
+  const [sources, profile, instructions, readSuggestions] = await Promise.all([
     getSources(project.id),
     getAiProjectModel(project.id, known).catch(() => known),
     getAiProjectInstructions(project.id).catch(() => knownInstructions),
+    getAiProjectSuggestions(project.id).catch(() => knownSuggestions),
   ]);
+  // The same chips keep their list, so the chat does not rebuild them.
+  const suggestions = sameSuggestions(readSuggestions, knownSuggestions) ? knownSuggestions : readSuggestions;
   const { instructionsRooms, knowledgeRooms } = toAiProject(
-    withSources({ id: project.id }, sources, profile, instructions),
+    withSources({ id: project.id }, sources, profile, { instructions, suggestions }),
   ).aiProject;
   const ids = (rooms: TAiProjectSource[]) => rooms.map(({ id, title }) => `${id}:${title}`).join(",");
   if (
     profile === known &&
     instructions === knownInstructions &&
+    suggestions === knownSuggestions &&
     ids(instructionsRooms) === ids(project.aiProject.instructionsRooms) &&
     ids(knowledgeRooms) === ids(project.aiProject.knowledgeRooms)
   )
     return project;
   return {
     ...project,
-    aiProject: { ...project.aiProject, profile, instructions, instructionsRooms, knowledgeRooms },
+    aiProject: { ...project.aiProject, profile, instructions, suggestions, instructionsRooms, knowledgeRooms },
   };
 };
 
@@ -722,8 +785,16 @@ export const createAiProject = async (data: TAiProjectRequest) => {
   // A new project has no instructions until some are written.
   const text = data.aiProject?.instructions ?? "";
   const saved = text ? await saveInstructions(room.id, text, "") : { instructions: "", warnings: [] };
+  const chips = data.aiProject?.suggestions ?? [];
+  const savedChips = chips.length ? await saveSuggestions(room.id, chips, []) : { suggestions: [], warnings: [] };
   return toAiProject(
-    withSources(room, sources, model.profile, saved.instructions, [...warnings, ...model.warnings, ...saved.warnings]),
+    withSources(
+      room,
+      sources,
+      model.profile,
+      { instructions: saved.instructions, suggestions: savedChips.suggestions },
+      [...warnings, ...model.warnings, ...saved.warnings, ...savedChips.warnings],
+    ),
   );
 };
 
@@ -795,20 +866,31 @@ export const updateAiProject = async (id: number, data: TAiProjectRequest, curre
           warnings: [] as TAiProjectWarning[],
         }
       : await saveInstructions(id, text, previous);
-  const allWarnings = [...warnings, ...model.warnings, ...saved.warnings];
+  // The suggestions likewise.
+  const chips = data.aiProject?.suggestions;
+  const previousChips = current?.aiProject.suggestions ?? [];
+  const savedChips =
+    chips === undefined || (current && sameSuggestions(chips, previousChips))
+      ? {
+          suggestions: current ? previousChips : await getAiProjectSuggestions(id).catch(() => []),
+          warnings: [] as TAiProjectWarning[],
+        }
+      : await saveSuggestions(id, chips, previousChips);
+  const chat = { instructions: saved.instructions, suggestions: savedChips.suggestions };
+  const allWarnings = [...warnings, ...model.warnings, ...saved.warnings, ...savedChips.warnings];
   if (current && !room) {
     const { aiProject } = toAiProject(
       withSources(
         { id, security: current.security } as TAiProjectRoomDto,
         sources,
         model.profile,
-        saved.instructions,
+        chat,
         allWarnings,
       ),
     );
     return { ...current, aiProject };
   }
-  return toAiProject(withSources(room as TAiProjectRoomDto, sources, model.profile, saved.instructions, allWarnings));
+  return toAiProject(withSources(room as TAiProjectRoomDto, sources, model.profile, chat, allWarnings));
 };
 
 /** Starts the delete; the answer is the file operation to follow. */

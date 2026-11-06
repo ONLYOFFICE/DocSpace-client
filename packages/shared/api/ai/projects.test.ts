@@ -90,6 +90,7 @@ describe("toAiProject", () => {
       partial: true,
       profile: null,
       instructions: "",
+      suggestions: [],
       instructionsRooms: [],
       knowledgeRooms: [],
       canEditSettings: true,
@@ -462,6 +463,63 @@ describe("the calls", () => {
     expect(refused.aiProject.instructions).toBe("Old");
     expect(refused.aiProject.warnings).toEqual([
       { code: "instructionsNotSaved", roomId: null, subjectId: null, message: "Not allowed" },
+    ]);
+  });
+
+  it("reads the project's suggestions with the room, and none when they cannot be read", async () => {
+    const chips = [{ name: "Summary", prompt: "Summarize the contracts" }];
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+      "GET /files/rooms/7/suggestions": { suggestions: chips },
+    });
+    expect((await getAiProject(7)).aiProject.suggestions).toEqual(chips);
+
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+    });
+    expect((await getAiProject(7)).aiProject.suggestions).toEqual([]);
+  });
+
+  it("stores the suggestions of a new project, and none when there are none", async () => {
+    const chips = [{ name: "Summary", prompt: "Summarize the contracts" }];
+    route({
+      "POST /files/rooms": folder({ aiProject: undefined }),
+      "PUT /files/rooms/7/suggestions": ({ data }: { data?: unknown }) => {
+        expect(data).toEqual({ suggestions: chips });
+        return { suggestions: chips };
+      },
+    });
+    expect((await createAiProject({ title: "Sales", aiProject: { suggestions: chips } })).aiProject.suggestions).toEqual(
+      chips,
+    );
+
+    request.mockClear();
+    await createAiProject({ title: "Sales", aiProject: { suggestions: [] } });
+    expect(request).not.toHaveBeenCalledWith(expect.objectContaining({ url: "/files/rooms/7/suggestions" }));
+  });
+
+  it("writes changed suggestions on an edit, skips unchanged ones and keeps the save when refused", async () => {
+    const old = [{ name: "Old", prompt: "Old prompt" }];
+    const opened = toAiProject(folder({ aiProject: { ...folder().aiProject, suggestions: old } }));
+
+    await updateAiProject(7, { title: opened.title, aiProject: { suggestions: [{ ...old[0] }] } }, opened);
+    expect(request).not.toHaveBeenCalled();
+
+    route({
+      "PUT /files/rooms/7/suggestions": () => {
+        throw { response: { data: { error: "Too many suggestions" } } };
+      },
+    });
+    const refused = await updateAiProject(
+      7,
+      { title: opened.title, aiProject: { suggestions: [{ name: "New", prompt: "New prompt" }] } },
+      opened,
+    );
+    expect(refused.aiProject.suggestions).toEqual(old);
+    expect(refused.aiProject.warnings).toEqual([
+      { code: "suggestionsNotSaved", roomId: null, subjectId: null, message: "Too many suggestions" },
     ]);
   });
 

@@ -41,6 +41,10 @@ import {
 } from "./arbiter";
 import { aiConfigHandler } from "./config";
 import {
+  aiDocumentAgentSettingsGetHandler,
+  aiDocumentAgentSettingsPutHandler,
+} from "./documentAgent";
+import {
   AI_PROJECT_WITH_SOURCES,
   AI_PROJECT_WITHOUT_SOURCES,
   AI_PROJECTS,
@@ -88,6 +92,8 @@ import {
 export {
   aiAgentGetByIdHandler,
   aiAgentsHandler,
+  aiDocumentAgentSettingsGetHandler,
+  aiDocumentAgentSettingsPutHandler,
   aiArbiterPanelHandler,
   AI_ARBITER_PANEL_FOLDERS,
   AI_ARBITER_SESSION_ID,
@@ -140,6 +146,7 @@ export {
 } from "./chatStores";
 export type { AiChatProfile, AssignmentMap } from "./chatStores";
 export type { AiProjectMock, AiHubRoomMock } from "./projects";
+export type { DocumentAgentSettingsMock } from "./documentAgent";
 export {
   META_FILL_RESULT,
   META_GENERATE_RESULT,
@@ -153,6 +160,9 @@ export const aiHandlers = (port: string) => [
   aiConfigHandler(port),
   aiVectorizationGetHandler(port),
   aiVectorizationPutHandler(port),
+  // No document-agent settings saved yet: the tab shows its defaults.
+  aiDocumentAgentSettingsGetHandler(port),
+  aiDocumentAgentSettingsPutHandler(port),
   ...aiChatEmptyStoreHandlers(port),
   // The "AI rooms" section and its projects: empty until a spec seeds them.
   aiHubRoomsHandler(port, [], []),

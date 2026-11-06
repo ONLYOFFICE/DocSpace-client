@@ -37,7 +37,9 @@ import type { EditorProps, IInitialConfig, TGoBack } from "@/types";
 import { useTranslation } from "react-i18next";
 import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 
-import { getSafeReturnUrl, isFormRoomFile, toFormsSectionUrl } from "@/utils";
+import { getSafeReturnUrl } from "@docspace/shared/utils/getSafeReturnUrl";
+
+import { isFormRoomFile, toFormsSectionUrl } from "@/utils";
 
 const useGoBackAndClose = (
   fileInfo: EditorProps["fileInfo"],

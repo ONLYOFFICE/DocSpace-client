@@ -46,7 +46,7 @@ import {
 } from "@docspace/shared/api/oauth";
 import AppLoader from "@onlyoffice/apps-ui-kit/components/app-loader";
 import { frameCallEvent } from "@docspace/shared/utils/common";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getSafeReturnUrl } from "@docspace/shared/utils/getSafeReturnUrl";
 import { loginWithConfirmKey } from "@docspace/shared/api/user";
 import OperationContainer from "@docspace/shared/components/operation-container";
 
@@ -64,7 +64,8 @@ const AuthHandler = () => {
   const { key = "", first = "" } = linkData;
   const { email = "" } = confirmLinkResult;
 
-  const referenceUrl = searchParams?.get("referenceUrl");
+  // Only a page of the portal is followed after logging in (Bug 84860).
+  const referenceUrl = getSafeReturnUrl(searchParams?.get("referenceUrl"));
   const isFileHandler =
     referenceUrl && referenceUrl.indexOf("filehandler.ashx") !== -1;
   const isExternalDownloading =
@@ -124,18 +125,11 @@ const AuthHandler = () => {
         }
 
         if (referenceUrl) {
-          try {
-            const url = new URL(referenceUrl);
-            if (isFileHandler && isExternalDownloading) {
-              setAuthorized(true);
-              return;
-            }
-            return window.location.replace(url.toString());
-          } catch {
-            return window.location.replace(
-              combineUrl(window.location.origin, referenceUrl),
-            );
+          if (isFileHandler && isExternalDownloading) {
+            setAuthorized(true);
+            return;
           }
+          return window.location.replace(referenceUrl);
         }
 
         if (res && res.tfa && res.confirmUrl) {

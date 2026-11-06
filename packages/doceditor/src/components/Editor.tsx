@@ -161,7 +161,7 @@ const EditorBody = ({
     takeSnapshot: takeFieldsSnapshot,
     reportFieldChanges,
     scheduleFieldChanges,
-    flushFieldChanges,
+    closeFieldChanges,
   } = useFormFieldChanges(
     fileInfo?.id,
     fileInfo?.version,
@@ -217,7 +217,7 @@ const EditorBody = ({
     takeFieldsSnapshot,
     reportFieldChanges,
     scheduleFieldChanges,
-    flushFieldChanges,
+    closeFieldChanges,
   });
 
   // AI is not available to guests and anonymous viewers — the same rule the

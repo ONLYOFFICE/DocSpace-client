@@ -60,6 +60,9 @@ const READ_TIMEOUT = 5000;
 // How many times the fields of the form as it was opened are read before the session gives up tracking them.
 const SNAPSHOT_ATTEMPTS = 3;
 
+// The editor closed from its own button waits this long at most for a read on its way.
+const CLOSE_READ_WAIT = 1000;
+
 // The longest key the server accepts.
 const MAX_KEY_LENGTH = 255;
 
@@ -379,6 +382,22 @@ const useFormFieldChanges = (
       });
   }, [target, markReported, onReportError, sessionId]);
 
+  // The editor is closed from its own button: a read on its way, as of a rename made just before, is waited for a
+  // short while so that its renames go too. Leaving the page cannot wait, so pagehide sends the renames read last.
+  const closeFieldChanges = useCallback(async () => {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    await Promise.race([
+      queue.current,
+      new Promise<void>((resolve) => {
+        timer = setTimeout(resolve, CLOSE_READ_WAIT);
+      }),
+    ]);
+    clearTimeout(timer);
+
+    flushFieldChanges();
+  }, [flushFieldChanges]);
+
   useEffect(() => {
     if (!enabled) return;
 
@@ -402,6 +421,7 @@ const useFormFieldChanges = (
     reportFieldChanges,
     scheduleFieldChanges,
     flushFieldChanges,
+    closeFieldChanges,
   };
 };
 

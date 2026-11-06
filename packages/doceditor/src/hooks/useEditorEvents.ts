@@ -129,7 +129,7 @@ const useEditorEvents = ({
   takeFieldsSnapshot,
   reportFieldChanges,
   scheduleFieldChanges,
-  flushFieldChanges,
+  closeFieldChanges,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
 
@@ -560,8 +560,8 @@ const useEditorEvents = ({
     frameCallCommand("setIsLoaded");
   }, []);
 
-  const onSDKRequestClose = React.useCallback(() => {
-    flushFieldChanges?.();
+  const onSDKRequestClose = React.useCallback(async () => {
+    await closeFieldChanges?.();
 
     const editorGoBack = sdkConfig?.editorGoBack;
     const returnUrl = getSafeReturnUrl(sdkConfig?.returnUrl);
@@ -589,7 +589,7 @@ const useEditorEvents = ({
     sdkConfig?.returnUrl,
     config?.editorConfig?.customization?.goback?.url,
     fileInfo,
-    flushFieldChanges,
+    closeFieldChanges,
   ]);
 
   const getDefaultFileName = React.useCallback(

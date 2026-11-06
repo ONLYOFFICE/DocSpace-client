@@ -116,6 +116,7 @@ import {
   FormFillingManageAction,
   StartFillingMode,
 } from "@docspace/shared/enums";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 
 import useEditorEvents from "../useEditorEvents";
 
@@ -205,13 +206,31 @@ describe("useEditorEvents", () => {
       expect(scheduleFieldChanges.mock.calls).toEqual([[true], [false]]);
     });
 
-    it("Editor closed: the renames read last are sent", () => {
-      const flushFieldChanges = vi.fn();
-      render({ fileInfo: fileInfo(false), flushFieldChanges });
+    it("Editor closed: it is left once the renames are sent", async () => {
+      let sent: () => void = () => {};
+      const closeFieldChanges = vi.fn(
+        () =>
+          new Promise<void>((resolve) => {
+            sent = resolve;
+          }),
+      );
+      const closeEvent = { event: "onEditorCloseCallback" };
+      render({
+        fileInfo: fileInfo(false),
+        sdkConfig: { frameId: "frame", src: "", editorGoBack: "event" },
+        closeFieldChanges,
+      });
 
-      events.onSDKRequestClose();
+      const closed = events.onSDKRequestClose();
+      await settle();
 
-      expect(flushFieldChanges).toHaveBeenCalledTimes(1);
+      expect(closeFieldChanges).toHaveBeenCalledTimes(1);
+      expect(frameCallEvent).not.toHaveBeenCalledWith(closeEvent);
+
+      sent();
+      await closed;
+
+      expect(frameCallEvent).toHaveBeenCalledWith(closeEvent);
     });
 
     it("Filling started from the editor: it starts once the renames are reported", async () => {

@@ -731,5 +731,46 @@ describe("useFormFieldChanges", () => {
         true,
       );
     });
+
+    it("Editor closed while a change is read: the rename goes once the read answers", async () => {
+      await opened(form("1", "name"));
+
+      // The plain report is cancelled as the editor is left.
+      report.mockImplementationOnce(() => new Promise(() => {}));
+      setForms(form("1", "fullName"));
+      hook.scheduleFieldChanges(true);
+      await flush();
+
+      const closed = hook.closeFieldChanges();
+      await answerRead();
+      await closed;
+
+      expect(report).toHaveBeenLastCalledWith(
+        7,
+        expect.objectContaining({
+          renames: [{ oldKey: "name", newKey: "fullName" }],
+        }),
+        true,
+      );
+    });
+
+    it("Editor closed while the editor does not answer the read: closing waits no longer than a second", async () => {
+      await opened(form("1", "name"));
+
+      setForms(form("1", "fullName"));
+      hook.scheduleFieldChanges(true);
+      await flush();
+
+      vi.useFakeTimers();
+      try {
+        const closed = hook.closeFieldChanges();
+        await vi.advanceTimersByTimeAsync(1000);
+        await closed;
+      } finally {
+        vi.useRealTimers();
+      }
+
+      expect(report).not.toHaveBeenCalled();
+    });
   });
 });

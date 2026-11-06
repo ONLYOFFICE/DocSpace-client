@@ -448,7 +448,8 @@ export interface UseEventsProps {
   reportFieldChanges?: () => Promise<void>;
   // modified: the document has changes not saved yet.
   scheduleFieldChanges?: (modified: boolean) => void;
-  flushFieldChanges?: () => void;
+  // Sends the renames as the editor is closed, after a short wait for a read on its way.
+  closeFieldChanges?: () => Promise<void>;
 }
 
 export interface UseInitProps {

@@ -62,6 +62,7 @@ export interface IWhiteLabelData {
 export interface IHeaderProps {
   isSettingPaid: boolean;
   standalone: boolean;
+  onPaidBadgeClick?: () => void;
   onUseTextAsLogo: () => void;
   isEmpty: boolean;
   logoTextWhiteLabel: string;
@@ -71,6 +72,7 @@ export interface IHeaderProps {
 export interface IWhiteLabel {
   isSettingPaid: boolean;
   standalone: boolean;
+  onPaidBadgeClick?: () => void;
   logoUrls: ILogo[];
   showAbout: boolean;
   onSave: (data: IWhiteLabelData) => void;

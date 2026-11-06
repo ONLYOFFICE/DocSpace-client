@@ -39,14 +39,12 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import classnames from "classnames";
 import styles from "./ToggleAutoSync.module.scss";
 
 const ToggleAutoSync = ({
-  theme,
   toggleCron,
   isLdapAvailable,
   isLdapEnabledOnServer,
@@ -92,16 +90,7 @@ const ToggleAutoSync = ({
             {t("LdapAutoSyncToggle")}
           </Text>
           {!isLdapAvailable ? (
-            <Badge
-              backgroundColor={
-                theme.isBase
-                  ? globalColors.favoritesStatus
-                  : globalColors.favoriteStatusDark
-              }
-              label={t("Common:Paid")}
-              className="toggle-caption_title_badge"
-              isPaidBadge
-            />
+            <PaidBadge className="toggle-caption_title_badge" />
           ) : null}
         </div>
         <Text
@@ -117,8 +106,7 @@ const ToggleAutoSync = ({
   );
 };
 
-export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
-  const { theme } = settingsStore;
+export default inject(({ currentQuotaStore, ldapStore }) => {
   const {
     toggleCron,
     isCronEnabled,
@@ -131,7 +119,6 @@ export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
 
   return {
-    theme,
     toggleCron,
     isLdapAvailable,
     isCronEnabled,

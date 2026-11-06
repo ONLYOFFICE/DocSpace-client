@@ -11,7 +11,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Integration
 
-- [ ] 2.1 Pre-push gate (`pnpm exec tsc` in client and sdk, `pnpm run lint`, `pnpm run test:client`, `pnpm run test:sdk`) and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify green
+- [x] 2.1 Pre-push gate (`pnpm exec tsc` in client and sdk, `pnpm run lint`, `pnpm run test:client`, `pnpm run test:sdk`) and `npx -y @fission-ai/openspec@latest validate --all --strict`; verify green. Done 2026-11-06: client and sdk `tsc` clean, lint green for the six packages, the client and sdk unit suites green, 21 of 21 OpenSpec items valid
 
 ## Workflow follow-up
 

@@ -73,6 +73,7 @@ import {
 import styles from "./ManualBackup.module.scss";
 import { combineUrl } from "../../../utils/combineUrl";
 import NoteComponent from "../sub-components/NoteComponent";
+import PrivateRoomsBackupWarning from "../sub-components/PrivateRoomsBackupWarning";
 import { cancelBackup } from "../../../api/backup";
 
 const getPaymentError = (
@@ -184,6 +185,7 @@ const ManualBackup = ({
 
   errorInformation,
   isManagement = false,
+  showPrivateRoomsWarning = false,
 
   backupProgressError,
   setBackupProgressError,
@@ -564,6 +566,7 @@ const ManualBackup = ({
           </Link>
         ) : null}
       </div>
+      <PrivateRoomsBackupWarning isVisible={showPrivateRoomsWarning} />
 
       <div className={styles.modules}>
         <div

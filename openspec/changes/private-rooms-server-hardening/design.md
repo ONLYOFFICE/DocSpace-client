@@ -939,6 +939,9 @@ six encrypted files, no subfolder); no data was changed:
     rooms are available, and in the restore confirmation, that a restored
     portal cannot open the files of its private rooms (task 15.2); the
     release notes and the release gate carry the limitation (task 15.3).
+    The management app's restore page shows nothing: it does not know the
+    E2E rooms app's state, and nothing private is shown while the app may
+    be off (the owner, 2026-11-06).
     Alternative: back both tables up with the original ids kept next to
     each row, so a member who opens a room after the restore unwraps under
     the old ids and re-wraps under the new ones; kept as a later option,

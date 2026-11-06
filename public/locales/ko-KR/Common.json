@@ -1818,6 +1818,7 @@
   "PrivateRoomNotFoundDescription": "찾으시는 비공개 룸이 존재하지 않거나 접근 권한이 없습니다.",
   "PrivateRoomNotFoundTitle": "찾을 수 없음",
   "PrivateRoomRenameNotSupported": "암호화된 파일의 이름 변경은 아직 지원되지 않습니다.",
+  "PrivateRoomsBackupWarning": "백업에는 비공개 룸의 암호화 키가 포함되지 않습니다. 백업에서 복원된 워크스페이스에서는 비공개 룸의 파일을 열 수 없습니다.",
   "PrivateRoomsBetaDescription": "비공개 룸은 베타 버전입니다. 암호화된 파일에서는 일부 작업을 아직 사용할 수 없으며, 암호화된 파일은 키 없이 열 수 없으므로 복구 문구를 안전하게 보관하세요.",
   "PrivateRoomsBetaTitle": "비공개 룸",
   "PrivateRoomsListEmptyDescription": "비공개 룸은 종단 간 암호화됩니다. 파일은 업로드 전에 브라우저에서 암호화되며 초대한 사람만 읽을 수 있습니다.",

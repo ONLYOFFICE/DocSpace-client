@@ -69,6 +69,7 @@ import { RoomsModule } from "./sub-components/RoomsModule";
 import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModule";
 import { useDefaultOptions } from "./hooks";
 import type { AutomaticBackupProps } from "./AutoBackup.types";
+import PrivateRoomsBackupWarning from "../sub-components/PrivateRoomsBackupWarning";
 import styles from "./AutoBackup.module.scss";
 
 const hoursArray = Array(24)
@@ -174,6 +175,7 @@ const AutomaticBackup = ({
   setTemporaryLink,
   setErrorInformation,
   isInitialError,
+  showPrivateRoomsWarning = false,
   errorInformation,
   isManagement = false,
   backupProgressError,
@@ -444,6 +446,7 @@ const AutomaticBackup = ({
           </Link>
         ) : null}
       </div>
+      <PrivateRoomsBackupWarning isVisible={showPrivateRoomsWarning} />
 
       <div
         className={classNames(

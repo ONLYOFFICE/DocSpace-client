@@ -1818,6 +1818,7 @@
   "PrivateRoomNotFoundDescription": "La sala privada que busca no existe o usted no tiene acceso.",
   "PrivateRoomNotFoundTitle": "No encontrado",
   "PrivateRoomRenameNotSupported": "El cambio de nombre de archivos cifrados aún no es compatible.",
+  "PrivateRoomsBackupWarning": "Las copias de seguridad no incluyen las claves de cifrado de las salas privadas. Un espacio de trabajo restaurado a partir de una copia de seguridad no puede abrir los archivos de sus salas privadas.",
   "PrivateRoomsBetaDescription": "Las salas privadas están en fase beta. Algunas acciones aún no están disponibles para los archivos cifrados, y los archivos cifrados no se pueden abrir sin su clave, así que guarde su frase de recuperación en un lugar seguro.",
   "PrivateRoomsBetaTitle": "Salas privadas",
   "PrivateRoomsListEmptyDescription": "Las salas privadas están cifradas de extremo a extremo. Los archivos se cifran en su navegador antes de subirlos y solo las personas que invite pueden leerlos.",

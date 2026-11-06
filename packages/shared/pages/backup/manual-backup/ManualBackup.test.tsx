@@ -209,6 +209,22 @@ describe("ManualBackup", () => {
     expect(screen.getByText("Common:ThirdPartyStorage")).toBeInTheDocument();
   });
 
+  it("Section available", () => {
+    render(<ManualBackup {...defaultProps} showPrivateRoomsWarning />);
+
+    expect(
+      screen.getByText("Common:PrivateRoomsBackupWarning"),
+    ).toBeInTheDocument();
+  });
+
+  it("Section not available", () => {
+    render(<ManualBackup {...defaultProps} />);
+
+    expect(
+      screen.queryByText("Common:PrivateRoomsBackupWarning"),
+    ).not.toBeInTheDocument();
+  });
+
   it("shows loader when isInitialLoading is true", () => {
     render(<ManualBackup {...defaultProps} isInitialLoading />);
 

@@ -1818,6 +1818,7 @@
   "PrivateRoomNotFoundDescription": "De privékamer die u zoekt bestaat niet of u hebt er geen toegang tot.",
   "PrivateRoomNotFoundTitle": "Niet gevonden",
   "PrivateRoomRenameNotSupported": "Het hernoemen van versleutelde bestanden wordt nog niet ondersteund.",
+  "PrivateRoomsBackupWarning": "Back-ups bevatten de versleutelingssleutels van privékamers niet. Een werkruimte die uit een back-up is hersteld, kan de bestanden in de privékamers niet openen.",
   "PrivateRoomsBetaDescription": "Privékamers zijn in bèta. Sommige acties zijn nog niet beschikbaar voor versleutelde bestanden, en versleutelde bestanden kunnen niet worden geopend zonder uw sleutel, dus bewaar uw herstelzin op een veilige plek.",
   "PrivateRoomsBetaTitle": "Privékamers",
   "PrivateRoomsListEmptyDescription": "Privékamers zijn end-to-end versleuteld. Bestanden worden in uw browser versleuteld voordat ze worden geüpload en alleen de mensen die u uitnodigt kunnen ze lezen.",

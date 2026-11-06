@@ -1818,6 +1818,7 @@
   "PrivateRoomNotFoundDescription": "您查找的私人房间不存在，或者您没有访问权限。",
   "PrivateRoomNotFoundTitle": "未找到",
   "PrivateRoomRenameNotSupported": "暂不支持重命名加密文件。",
+  "PrivateRoomsBackupWarning": "备份不包含私人房间的加密密钥。从备份恢复的工作区无法打开其私人房间中的文件。",
   "PrivateRoomsBetaDescription": "私人房间目前处于测试阶段。部分操作暂不适用于加密文件，且没有您的密钥将无法打开加密文件，因此请妥善保管您的恢复短语。",
   "PrivateRoomsBetaTitle": "私人房间",
   "PrivateRoomsListEmptyDescription": "私人房间采用端到端加密。文件在上传前会在您的浏览器中加密，只有您邀请的人才能阅读。",

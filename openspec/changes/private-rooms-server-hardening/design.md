@@ -637,6 +637,42 @@ six encrypted files, no subfolder); no data was changed:
   there. Details in `private-rooms-beta-release`, design.md "Release
   stand check".
 
+### Landed on 2026-11-06 (read in `8f15bab14f`, `4162789259` and `db5f85f317`)
+
+- Role-change letter (task 4.7): `FileStorageService.SetAceObjectAsync`
+  passes `folder.SettingsPrivate ? null : folder.Title` to
+  `StudioNotifyService.SendMsgUserRoleChangedAsync`
+  (`FileStorageService.cs:4612`), its only caller (CodeGraph).
+  `UserRoleChangedNotifyAction` and `UserAgentRoleChangedNotifyAction`
+  (`web/ASC.Web.Core/Notify/Actions.cs:3593`, `:3623`) put
+  `PrivateRoomTitle` of `WebstudioNotifyPatternResource`, in the
+  recipient's culture (`GetCulture(user)`), in `RoomTitle` when the title
+  is null (`PrivateRoomTitleInLettersTests.RoleChangedLetters_WithNoTitle_NameTheRoomNeutrally`).
+  The other `StudioNotifyService` methods that take a room title, the
+  invitation letters for a new and an existing user in the room and agent
+  variants (`Actions.cs:1314`, `:1344`, `:1373`, `:1402`), already fall
+  back the same way, so no web letter takes a private room's title any
+  more.
+- Folder created in a private room, beyond the plan:
+  `FolderCreatedInRoomNotifyAction` (`NotifyConstants.cs:461`) puts the
+  new `FilesPatternResource.PrivateFolderTitle` ("Private folder") in
+  `FolderTitle` for a folder of a private room, beside the neutral room
+  label; `PrivateRoom_IsNamedNeutrally` now asserts that none of the Files
+  letters of a private room carries the folder's title either. The
+  `server-contract` delta's scenario "Room notices" names the folder
+  label now. The document title these letters carry is the stored,
+  opaque title of an encrypted file.
+- Both labels exist in the default culture only:
+  `PrivateRoomTitle` and `PrivateFolderTitle` are in
+  `FilesPatternResource.resx`, and `PrivateRoomTitle` in
+  `WebstudioNotifyPatternResource.resx`, while none of the other 29
+  cultures of either resource carries them (task 4.5).
+- `8f15bab14f` adds a Socket.IO test client (`PortalSocket`) and socket
+  delivery and contract tests for user, quota, file and folder events;
+  none of them is about a private room, so the socket recipients of 10.2
+  stay a stand check. `db5f85f317` renames wallet texts, nothing for
+  private rooms.
+
 ## Goals / Non-Goals
 
 **Goals:**

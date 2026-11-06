@@ -111,22 +111,21 @@ in `private-rooms-ai-integration`.
 ## Open at release time
 
 Server (`private-rooms-server-hardening`), after the backend commits of
-2026-11-04 and 2026-11-05 (`3b9c527a6e`, `bd89a24dcd`, `1259577f63`,
-`cc60512acd`, `20262fdcb5`, `b562fc3fb1`) and the backend team's reply of
-2026-11-05. Merged by then: the archived-room guards, room events, the
+2026-11-04 to 2026-11-06 (`3b9c527a6e`, `bd89a24dcd`, `1259577f63`,
+`cc60512acd`, `20262fdcb5`, `b562fc3fb1`, `4162789259`) and the backend
+team's reply of 2026-11-05. Merged by then: the archived-room guards, room events, the
 invitee keys and missing-keys routes, the sign-in link fix, the link,
 template and copy refusals, the room metadata guards, the owner-change
 check, the partial key write, the audit of key writes and revocations, the
-neutral room name in letters and the audit trail, the plaintext refusals
+neutral room name in letters (the role-change letter included since
+`4162789259`) and the audit trail, the neutral folder name in letters,
+the plaintext refusals
 and the title validation of uploads, the revocation of a leaving member's
 keys, the third-party refusal and the Document Server gate. Still open:
 
-- the translations of the "Private room" label of letters, pushes and the
-  audit trail, which every language prints in English for now (4.5);
-- the role-change letter ("You are assigned a new role in the ... room
-  ..."), which still names a private room by its title (4.7, found on
-  the release stand on 2026-11-06); the invitation letter names it
-  "Private room";
+- the translations of the "Private room" and "Private folder" labels of
+  letters, pushes and the audit trail, which every language prints in
+  English for now (4.5);
 - the revocation of file keys when a group is removed from a private room
   (6.4);
 - recovery and offboarding for organisations (8); deactivating a user

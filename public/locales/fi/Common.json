@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Tässä huoneessa ei ole vielä taitoja.",
   "AIProjectSources": "Lähteet",
   "AIProjectAddSuggestion": "Lisää ehdotus",
+  "AIProjectEditSuggestion": "Muokkaa ehdotusta",
+  "AIProjectSuggestionPrompt": "Kehote",
   "AIProjectSuggestionLabelPlaceholder": "Chatissa näytettävä nimi",
   "AIProjectSuggestionPromptPlaceholder": "Viestikenttään lisättävä kehote",
   "AIProjectSuggestions": "Ehdotukset",

@@ -3,7 +3,7 @@
   "content": "Label shown in the chat",
   "content_en_sha1_hash": "d5bbd1015c4ad65f5968c1d9fe616e238391736d",
   "created_at": "2026-11-06T08:54:42.760Z",
-  "updated_at": "2026-11-06T08:56:21.950Z",
+  "updated_at": "2026-11-06T09:16:28.136Z",
   "comment": {
     "text": "Placeholder of the text field for a suggestion's short label, the text shown on the clickable chip in the project's empty AI chat. Describes what to enter, noun phrase.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 467,
-      "context": "<div className={styles.suggestionHeader}>\n <TextInput\n type={InputType.text}\n value={row.name}\n onChange={(e) => updateSuggestion(row.key, { name: e.target.value })}\n placeholder={t(\"Common:AIProjectSuggestionLabelPlaceholder\")}\n hasError={row.invalid && !row.name.trim()}\n isDisabled={isSaving}\n scale\n testId=\"ai-project-suggestion-name\"\n />",
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/SuggestionDialog.tsx",
+      "line_number": 101,
+      "context": "if (e.key === \"Enter\") {\n e.preventDefault();\n onSubmit();\n }\n }}\n placeholder={t(\"Common:AIProjectSuggestionLabelPlaceholder\")}\n isAutoFocussed\n scale\n testId=\"ai-project-suggestion-name\"\n />\n </div>",
       "module": "/packages/client"
     }
   ],

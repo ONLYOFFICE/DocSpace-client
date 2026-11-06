@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Această sală nu are încă abilități.",
   "AIProjectSources": "Surse",
   "AIProjectAddSuggestion": "Adăugați o sugestie",
+  "AIProjectEditSuggestion": "Editați sugestia",
+  "AIProjectSuggestionPrompt": "Prompt",
   "AIProjectSuggestionLabelPlaceholder": "Eticheta afișată în chat",
   "AIProjectSuggestionPromptPlaceholder": "Prompt inserat în câmpul de mesaj",
   "AIProjectSuggestions": "Sugestii",

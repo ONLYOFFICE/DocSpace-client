@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "В этой комнате пока нет навыков.",
   "AIProjectSources": "Источники",
   "AIProjectAddSuggestion": "Добавить подсказку",
+  "AIProjectEditSuggestion": "Изменить подсказку",
+  "AIProjectSuggestionPrompt": "Запрос",
   "AIProjectSuggestionLabelPlaceholder": "Название, которое видно в чате",
   "AIProjectSuggestionPromptPlaceholder": "Запрос, который подставляется в поле сообщения",
   "AIProjectSuggestions": "Подсказки",

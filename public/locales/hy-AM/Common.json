@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Այս սենյակում դեռ հմտություններ չկան։",
   "AIProjectSources": "Աղբյուրներ",
   "AIProjectAddSuggestion": "Ավելացնել առաջարկ",
+  "AIProjectEditSuggestion": "Խմբագրել առաջարկը",
+  "AIProjectSuggestionPrompt": "Հարցում",
   "AIProjectSuggestionLabelPlaceholder": "Զրույցում ցուցադրվող պիտակ",
   "AIProjectSuggestionPromptPlaceholder": "Հաղորդագրության դաշտում տեղադրվող հարցում",
   "AIProjectSuggestions": "Առաջարկներ",

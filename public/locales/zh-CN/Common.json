@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "此房间还没有技能。",
   "AIProjectSources": "来源",
   "AIProjectAddSuggestion": "添加建议",
+  "AIProjectEditSuggestion": "编辑建议",
+  "AIProjectSuggestionPrompt": "提示词",
   "AIProjectSuggestionLabelPlaceholder": "在对话中显示的标签",
   "AIProjectSuggestionPromptPlaceholder": "插入到消息框中的提示词",
   "AIProjectSuggestions": "建议",

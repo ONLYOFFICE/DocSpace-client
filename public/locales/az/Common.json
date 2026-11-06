@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Bu otaqda hələ bacarıq yoxdur.",
   "AIProjectSources": "Mənbələr",
   "AIProjectAddSuggestion": "Təklif əlavə edin",
+  "AIProjectEditSuggestion": "Təklifi redaktə edin",
+  "AIProjectSuggestionPrompt": "Sorğu",
   "AIProjectSuggestionLabelPlaceholder": "Çatda göstərilən ad",
   "AIProjectSuggestionPromptPlaceholder": "Mesaj sahəsinə daxil edilən sorğu",
   "AIProjectSuggestions": "Təkliflər",

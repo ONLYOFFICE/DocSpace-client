@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Kjo dhomë nuk ka ende aftësi.",
   "AIProjectSources": "Burimet",
   "AIProjectAddSuggestion": "Shto sugjerim",
+  "AIProjectEditSuggestion": "Redakto sugjerimin",
+  "AIProjectSuggestionPrompt": "Kërkesa",
   "AIProjectSuggestionLabelPlaceholder": "Etiketa që shfaqet në bisedë",
   "AIProjectSuggestionPromptPlaceholder": "Kërkesa që futet në fushën e mesazhit",
   "AIProjectSuggestions": "Sugjerime",

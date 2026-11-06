@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Dieser Raum enthält noch keine Skills.",
   "AIProjectSources": "Quellen",
   "AIProjectAddSuggestion": "Vorschlag hinzufügen",
+  "AIProjectEditSuggestion": "Vorschlag bearbeiten",
+  "AIProjectSuggestionPrompt": "Prompt",
   "AIProjectSuggestionLabelPlaceholder": "Im Chat angezeigte Bezeichnung",
   "AIProjectSuggestionPromptPlaceholder": "In das Nachrichtenfeld eingefügter Prompt",
   "AIProjectSuggestions": "Vorschläge",

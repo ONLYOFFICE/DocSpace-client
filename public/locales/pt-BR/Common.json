@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Esta sala ainda não tem habilidades.",
   "AIProjectSources": "Fontes",
   "AIProjectAddSuggestion": "Adicionar sugestão",
+  "AIProjectEditSuggestion": "Editar sugestão",
+  "AIProjectSuggestionPrompt": "Prompt",
   "AIProjectSuggestionLabelPlaceholder": "Rótulo exibido no chat",
   "AIProjectSuggestionPromptPlaceholder": "Prompt inserido no campo de mensagem",
   "AIProjectSuggestions": "Sugestões",

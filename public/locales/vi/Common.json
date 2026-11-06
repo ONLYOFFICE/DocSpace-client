@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Phòng này chưa có kỹ năng nào.",
   "AIProjectSources": "Nguồn",
   "AIProjectAddSuggestion": "Thêm gợi ý",
+  "AIProjectEditSuggestion": "Chỉnh sửa gợi ý",
+  "AIProjectSuggestionPrompt": "Lời nhắc",
   "AIProjectSuggestionLabelPlaceholder": "Nhãn hiển thị trong cuộc trò chuyện",
   "AIProjectSuggestionPromptPlaceholder": "Lời nhắc được chèn vào ô tin nhắn",
   "AIProjectSuggestions": "Gợi ý",

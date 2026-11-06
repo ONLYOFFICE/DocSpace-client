@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Questa stanza non ha ancora competenze.",
   "AIProjectSources": "Fonti",
   "AIProjectAddSuggestion": "Aggiungi suggerimento",
+  "AIProjectEditSuggestion": "Modifica suggerimento",
+  "AIProjectSuggestionPrompt": "Prompt",
   "AIProjectSuggestionLabelPlaceholder": "Etichetta mostrata nella chat",
   "AIProjectSuggestionPromptPlaceholder": "Prompt inserito nel campo del messaggio",
   "AIProjectSuggestions": "Suggerimenti",

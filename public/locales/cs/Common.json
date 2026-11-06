@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Tato místnost zatím nemá žádné dovednosti.",
   "AIProjectSources": "Zdroje",
   "AIProjectAddSuggestion": "Přidat návrh",
+  "AIProjectEditSuggestion": "Upravit návrh",
+  "AIProjectSuggestionPrompt": "Výzva",
   "AIProjectSuggestionLabelPlaceholder": "Popisek zobrazený v chatu",
   "AIProjectSuggestionPromptPlaceholder": "Výzva vložená do pole zprávy",
   "AIProjectSuggestions": "Návrhy",

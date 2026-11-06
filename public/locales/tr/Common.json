@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Bu odada henüz beceri yok.",
   "AIProjectSources": "Kaynaklar",
   "AIProjectAddSuggestion": "Öneri ekle",
+  "AIProjectEditSuggestion": "Öneriyi düzenle",
+  "AIProjectSuggestionPrompt": "İstem",
   "AIProjectSuggestionLabelPlaceholder": "Sohbette gösterilen etiket",
   "AIProjectSuggestionPromptPlaceholder": "Mesaj alanına eklenen istem",
   "AIProjectSuggestions": "Öneriler",

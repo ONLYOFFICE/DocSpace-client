@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "이 방에는 아직 스킬이 없습니다.",
   "AIProjectSources": "소스",
   "AIProjectAddSuggestion": "제안 추가",
+  "AIProjectEditSuggestion": "제안 편집",
+  "AIProjectSuggestionPrompt": "프롬프트",
   "AIProjectSuggestionLabelPlaceholder": "채팅에 표시되는 레이블",
   "AIProjectSuggestionPromptPlaceholder": "메시지 입력란에 삽입되는 프롬프트",
   "AIProjectSuggestions": "제안",

@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "ຫ້ອງນີ້ຍັງບໍ່ມີທັກສະເທື່ອ.",
   "AIProjectSources": "ແຫຼ່ງຂໍ້ມູນ",
   "AIProjectAddSuggestion": "ເພີ່ມຄຳແນະນຳ",
+  "AIProjectEditSuggestion": "ແກ້ໄຂຄຳແນະນຳ",
+  "AIProjectSuggestionPrompt": "ຄຳສັ່ງ",
   "AIProjectSuggestionLabelPlaceholder": "ປ້າຍທີ່ສະແດງໃນການສົນທະນາ",
   "AIProjectSuggestionPromptPlaceholder": "ຄຳສັ່ງທີ່ຖືກໃສ່ໃນຊ່ອງຂໍ້ຄວາມ",
   "AIProjectSuggestions": "ຄຳແນະນຳ",

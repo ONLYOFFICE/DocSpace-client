@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Táto miestnosť zatiaľ nemá žiadne zručnosti.",
   "AIProjectSources": "Zdroje",
   "AIProjectAddSuggestion": "Pridať návrh",
+  "AIProjectEditSuggestion": "Upraviť návrh",
+  "AIProjectSuggestionPrompt": "Výzva",
   "AIProjectSuggestionLabelPlaceholder": "Označenie zobrazené v chate",
   "AIProjectSuggestionPromptPlaceholder": "Výzva vložená do poľa správy",
   "AIProjectSuggestions": "Návrhy",

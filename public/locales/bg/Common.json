@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "В тази стая все още няма умения.",
   "AIProjectSources": "Източници",
   "AIProjectAddSuggestion": "Добави предложение",
+  "AIProjectEditSuggestion": "Редактирай предложението",
+  "AIProjectSuggestionPrompt": "Заявка",
   "AIProjectSuggestionLabelPlaceholder": "Етикет, показван в чата",
   "AIProjectSuggestionPromptPlaceholder": "Заявка, вмъквана в полето за съобщение",
   "AIProjectSuggestions": "Предложения",

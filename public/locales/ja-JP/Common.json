@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "このルームにはまだスキルがありません。",
   "AIProjectSources": "ソース",
   "AIProjectAddSuggestion": "候補を追加",
+  "AIProjectEditSuggestion": "候補を編集",
+  "AIProjectSuggestionPrompt": "プロンプト",
   "AIProjectSuggestionLabelPlaceholder": "チャットに表示されるラベル",
   "AIProjectSuggestionPromptPlaceholder": "メッセージ欄に挿入されるプロンプト",
   "AIProjectSuggestions": "候補",

@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "මෙම කාමරයේ තවමත් කුසලතා නොමැත.",
   "AIProjectSources": "මූලාශ්‍ර",
   "AIProjectAddSuggestion": "යෝජනාවක් එක් කරන්න",
+  "AIProjectEditSuggestion": "යෝජනාව සංස්කරණය කරන්න",
+  "AIProjectSuggestionPrompt": "විමසුම",
   "AIProjectSuggestionLabelPlaceholder": "කතාබහේ පෙන්වන ලේබලය",
   "AIProjectSuggestionPromptPlaceholder": "පණිවිඩ ක්ෂේත්‍රයට ඇතුළු කරන විමසුම",
   "AIProjectSuggestions": "යෝජනා",

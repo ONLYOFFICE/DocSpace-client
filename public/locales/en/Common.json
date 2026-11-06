@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "This room has no skills yet.",
   "AIProjectSources": "Sources",
   "AIProjectAddSuggestion": "Add suggestion",
+  "AIProjectEditSuggestion": "Edit suggestion",
+  "AIProjectSuggestionPrompt": "Prompt",
   "AIProjectSuggestionLabelPlaceholder": "Label shown in the chat",
   "AIProjectSuggestionPromptPlaceholder": "Prompt inserted into the message field",
   "AIProjectSuggestions": "Suggestions",

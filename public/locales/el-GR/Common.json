@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Αυτό το δωμάτιο δεν έχει ακόμη δεξιότητες.",
   "AIProjectSources": "Πηγές",
   "AIProjectAddSuggestion": "Προσθήκη πρότασης",
+  "AIProjectEditSuggestion": "Επεξεργασία πρότασης",
+  "AIProjectSuggestionPrompt": "Εντολή",
   "AIProjectSuggestionLabelPlaceholder": "Ετικέτα που εμφανίζεται στη συνομιλία",
   "AIProjectSuggestionPromptPlaceholder": "Εντολή που εισάγεται στο πεδίο μηνύματος",
   "AIProjectSuggestions": "Προτάσεις",

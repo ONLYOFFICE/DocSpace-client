@@ -3,7 +3,7 @@
   "content": "Add suggestion",
   "content_en_sha1_hash": "76f9a995f14b28342a47bdf90b205c023a3817e8",
   "created_at": "2026-11-06T08:54:42.727Z",
-  "updated_at": "2026-11-06T08:56:21.950Z",
+  "updated_at": "2026-11-06T09:16:28.131Z",
   "comment": {
     "text": "Button in the Suggestions section of the create/edit AI project panel that adds a new suggestion row (a label and a prompt). Verb phrase, imperative, short.",
     "is_auto": true,
@@ -14,7 +14,13 @@
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
       "line_number": 454,
-      "context": "<Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {t(\"Common:AIProjectSuggestions\")}\n </Text>\n <div className={styles.addRow}>\n <AddButton\n label={t(\"Common:AIProjectAddSuggestion\")}\n onClick={() => setSuggestions((rows) => [...rows, toSuggestionRow({ name: \"\", prompt: \"\" })])}\n isDisabled={isSaving || suggestions.length >= AI_PROJECT_MAX_SUGGESTIONS}\n testId=\"ai-project-add-suggestion\"\n />\n </div>",
+      "context": "<Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {t(\"Common:AIProjectSuggestions\")}\n </Text>\n <div className={styles.addRow}>\n <AddButton\n label={t(\"Common:AIProjectAddSuggestion\")}\n onClick={() => setEditedSuggestion(\"new\")}\n isDisabled={isSaving || suggestions.length >= AI_PROJECT_MAX_SUGGESTIONS}\n testId=\"ai-project-add-suggestion\"\n />\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/SuggestionDialog.tsx",
+      "line_number": 82,
+      "context": "autoMaxHeight\n onClose={onClose}\n dataTestId=\"ai-project-suggestion-dialog\"\n >\n <ModalDialog.Header>\n {suggestion ? t(\"Common:AIProjectEditSuggestion\") : t(\"Common:AIProjectAddSuggestion\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.body}>\n <div className={styles.field}>\n <Text as=\"label\" htmlFor=\"ai-project-suggestion-name\" fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>",
       "module": "/packages/client"
     }
   ],

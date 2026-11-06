@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "У цій кімнаті ще немає навичок.",
   "AIProjectSources": "Джерела",
   "AIProjectAddSuggestion": "Додати підказку",
+  "AIProjectEditSuggestion": "Змінити підказку",
+  "AIProjectSuggestionPrompt": "Запит",
   "AIProjectSuggestionLabelPlaceholder": "Назва, яку видно в чаті",
   "AIProjectSuggestionPromptPlaceholder": "Запит, що вставляється в поле повідомлення",
   "AIProjectSuggestions": "Підказки",

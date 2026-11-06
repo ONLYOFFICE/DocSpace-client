@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Ova soba još uvek nema veštine.",
   "AIProjectSources": "Izvori",
   "AIProjectAddSuggestion": "Dodaj predlog",
+  "AIProjectEditSuggestion": "Uredi predlog",
+  "AIProjectSuggestionPrompt": "Upit",
   "AIProjectSuggestionLabelPlaceholder": "Oznaka prikazana u ćaskanju",
   "AIProjectSuggestionPromptPlaceholder": "Upit koji se umeće u polje za poruku",
   "AIProjectSuggestions": "Predlozi",

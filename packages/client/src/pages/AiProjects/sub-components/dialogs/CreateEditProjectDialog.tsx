@@ -43,7 +43,6 @@ import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
-import { InputType, TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
@@ -87,6 +86,7 @@ import { useStore } from "SRC_DIR/store/useStore";
 import { coverLogo, uploadedLogo } from "../list/ProjectLogo";
 import { SourceRoomLogo } from "../project/RoomItem";
 import { savedProjectProfileId } from "../../utils";
+import SuggestionDialog from "./SuggestionDialog";
 import styles from "./CreateEditProjectDialog.module.scss";
 
 type CreateEditProjectDialogProps = {
@@ -113,8 +113,8 @@ const logoCrop = (file: File, { x, y, zoom }: TIcon) =>
     img.src = url;
   });
 
-/** A suggestion as the form edits it: a local key for the row, and whether a field was left empty on submit. */
-type TSuggestionRow = TAiProjectSuggestion & { key: string; invalid?: boolean };
+/** A suggestion as the form lists it, with a local key for its chip. */
+type TSuggestionRow = TAiProjectSuggestion & { key: string };
 
 const toSuggestionRow = (suggestion: TAiProjectSuggestion): TSuggestionRow => ({
   ...suggestion,
@@ -134,8 +134,8 @@ const ROOM_ICONS: Record<TRoomType, "instructionsRoom.svg" | "knowledgeRoom.svg"
  * The create / edit aside of a project, as the mockups draw it: the logo
  * with its colour next to the name, the owner row (edit only), the model
  * with its note under the field, the instructions to the chat as the agent
- * dialog had them, the suggestion chips of the empty chat (a label and a
- * prompt each), then the rooms of each kind as tags with
+ * dialog had them, the suggestion chips of the empty chat (added and
+ * edited in a centred dialog), then the rooms of each kind as tags with
  * the "Select rooms" button in the same line and the hint below.
  */
 const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogProps) => {
@@ -186,6 +186,8 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const [suggestions, setSuggestions] = React.useState<TSuggestionRow[]>(() =>
     (project?.aiProject.suggestions ?? []).map(toSuggestionRow),
   );
+  // The suggestion open in its dialog: `"new"` to add one, a row key to edit it.
+  const [editedSuggestion, setEditedSuggestion] = React.useState<string | null>(null);
   const [instructions, setInstructions] = React.useState<TAiProjectSource[]>(project?.aiProject.instructionsRooms ?? []);
   const [knowledge, setKnowledge] = React.useState<TAiProjectSource[]>(project?.aiProject.knowledgeRooms ?? []);
   const [selector, setSelector] = React.useState<TRoomType | null>(null);
@@ -296,15 +298,6 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
       setIsValidTitle(false);
       return;
     }
-    // A row with nothing in it is dropped; one with only a label or only a
-    // prompt cannot be shown as a chip and stops the save.
-    const filled = suggestions
-      .map((row) => ({ ...row, name: row.name.trim(), prompt: row.prompt.trim() }))
-      .filter((row) => row.name || row.prompt);
-    if (filled.some((row) => !row.name || !row.prompt)) {
-      setSuggestions(filled.map((row) => ({ ...row, invalid: !row.name || !row.prompt })));
-      return;
-    }
     setIsSaving(true);
     try {
       // A picture that was cropped in this dialog goes up first, as a room's
@@ -329,7 +322,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
         aiProject: {
           profileId: savedProfileId,
           instructions: prompt.trim(),
-          suggestions: filled.map(({ name: label, prompt: text }) => ({ name: label, prompt: text })),
+          suggestions: suggestions.map(({ name: label, prompt: text }) => ({ name: label, prompt: text })),
           instructionsRoomIds: instructions.map((r) => r.id),
           knowledgeRoomIds: knowledge.map((r) => r.id),
           rooms: [...instructions, ...knowledge],
@@ -439,11 +432,18 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
     </StyledParam>
   );
 
-  const updateSuggestion = (key: string, change: Partial<TAiProjectSuggestion>) =>
-    setSuggestions((rows) => rows.map((row) => (row.key === key ? { ...row, ...change, invalid: false } : row)));
+  const onSaveSuggestion = (suggestion: TAiProjectSuggestion) => {
+    setSuggestions((rows) =>
+      editedSuggestion === "new"
+        ? [...rows, toSuggestionRow(suggestion)]
+        : rows.map((row) => (row.key === editedSuggestion ? { ...row, ...suggestion } : row)),
+    );
+    setEditedSuggestion(null);
+  };
 
-  // The chips of the empty chat: "Add suggestion" adds a row of a label and
-  // a prompt, each row has a cross, the limit disables the button.
+  // The chips of the empty chat, as the rooms below list theirs: "Add
+  // suggestion" and a click on a chip open the centred dialog, the cross
+  // removes the chip, the limit disables the button.
   const suggestionsBlock = (
     <div className={styles.block}>
       <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
@@ -452,43 +452,37 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
       <div className={styles.addRow}>
         <AddButton
           label={t("Common:AIProjectAddSuggestion")}
-          onClick={() => setSuggestions((rows) => [...rows, toSuggestionRow({ name: "", prompt: "" })])}
+          onClick={() => setEditedSuggestion("new")}
           isDisabled={isSaving || suggestions.length >= AI_PROJECT_MAX_SUGGESTIONS}
           testId="ai-project-add-suggestion"
         />
       </div>
-      {suggestions.map((row) => (
-        <div className={styles.suggestion} key={row.key} data-testid="ai-project-suggestion">
-          <div className={styles.suggestionHeader}>
-            <TextInput
-              type={InputType.text}
-              value={row.name}
-              onChange={(e) => updateSuggestion(row.key, { name: e.target.value })}
-              placeholder={t("Common:AIProjectSuggestionLabelPlaceholder")}
-              hasError={row.invalid && !row.name.trim()}
-              isDisabled={isSaving}
-              scale
-              testId="ai-project-suggestion-name"
-            />
-            <IconButton
-              iconName={CrossReactSvgUrl}
-              size={12}
-              onClick={() => setSuggestions((rows) => rows.filter((r) => r.key !== row.key))}
-              isDisabled={isSaving}
-              dataTestId="ai-project-remove-suggestion"
-            />
-          </div>
-          <Textarea
-            value={row.prompt}
-            onChange={(e) => updateSuggestion(row.key, { prompt: e.target.value })}
-            heightTextArea={64}
-            placeholder={t("Common:AIProjectSuggestionPromptPlaceholder")}
-            hasError={row.invalid && !row.prompt.trim()}
-            isDisabled={isSaving}
-            dataTestId="ai-project-suggestion-prompt"
-          />
+      {suggestions.length > 0 ? (
+        <div className={styles.roomList}>
+          {suggestions.map((row) => (
+            <div className={styles.suggestionItem} key={row.key} title={row.prompt} data-testid="ai-project-suggestion">
+              <button
+                type="button"
+                className={styles.suggestionLabel}
+                onClick={() => setEditedSuggestion(row.key)}
+                disabled={isSaving}
+                data-testid="ai-project-edit-suggestion"
+              >
+                <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect truncate>
+                  {row.name}
+                </Text>
+              </button>
+              <IconButton
+                iconName={CrossReactSvgUrl}
+                size={12}
+                onClick={() => setSuggestions((rows) => rows.filter((r) => r.key !== row.key))}
+                isDisabled={isSaving}
+                dataTestId="ai-project-remove-suggestion"
+              />
+            </div>
+          ))}
         </div>
-      ))}
+      ) : null}
       <Text className={styles.hint} fontSize="12px" lineHeight="16px" noSelect>
         {t("Common:AIProjectSuggestionsHint", { limit: AI_PROJECT_MAX_SUGGESTIONS })}
       </Text>
@@ -498,6 +492,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const selected = selector === INSTRUCTIONS_ROOM_TYPE ? instructions : knowledge;
 
   return (
+    <>
     <ModalDialog
         visible
         displayType={ModalDialogType.aside}
@@ -589,7 +584,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
             </div>
             <TagInput
               t={t}
-              title={`${t("Common:Tags")}:`}
+              title={t("Common:Tags")}
               tagHandler={tagHandler}
               setIsScrollLocked={() => {}}
               isDisabled={isSaving}
@@ -675,6 +670,15 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
           <Button label={t("Common:CancelButton")} size={ButtonSize.normal} scale onClick={store.closeProjectDialog} isDisabled={isSaving} />
         </ModalDialog.Footer>
     </ModalDialog>
+    {/* A sibling of the form, not inside it: Enter in its fields must not submit the project. */}
+    {editedSuggestion !== null ? (
+      <SuggestionDialog
+        suggestion={suggestions.find((row) => row.key === editedSuggestion) ?? null}
+        onSave={onSaveSuggestion}
+        onClose={() => setEditedSuggestion(null)}
+      />
+    ) : null}
+    </>
   );
 };
 

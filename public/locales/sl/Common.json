@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Ta soba še nima veščin.",
   "AIProjectSources": "Viri",
   "AIProjectAddSuggestion": "Dodaj predlog",
+  "AIProjectEditSuggestion": "Uredi predlog",
+  "AIProjectSuggestionPrompt": "Poziv",
   "AIProjectSuggestionLabelPlaceholder": "Oznaka, prikazana v klepetu",
   "AIProjectSuggestionPromptPlaceholder": "Poziv, vstavljen v polje za sporočilo",
   "AIProjectSuggestions": "Predlogi",

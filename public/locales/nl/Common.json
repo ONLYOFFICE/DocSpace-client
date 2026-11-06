@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Deze kamer heeft nog geen vaardigheden.",
   "AIProjectSources": "Bronnen",
   "AIProjectAddSuggestion": "Suggestie toevoegen",
+  "AIProjectEditSuggestion": "Suggestie bewerken",
+  "AIProjectSuggestionPrompt": "Prompt",
   "AIProjectSuggestionLabelPlaceholder": "Label dat in de chat wordt getoond",
   "AIProjectSuggestionPromptPlaceholder": "Prompt die in het berichtveld wordt ingevoegd",
   "AIProjectSuggestions": "Suggesties",

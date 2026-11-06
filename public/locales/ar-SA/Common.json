@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "لا تحتوي هذه الغرفة على مهارات بعد.",
   "AIProjectSources": "المصادر",
   "AIProjectAddSuggestion": "إضافة اقتراح",
+  "AIProjectEditSuggestion": "تعديل الاقتراح",
+  "AIProjectSuggestionPrompt": "الطلب",
   "AIProjectSuggestionLabelPlaceholder": "التسمية المعروضة في الدردشة",
   "AIProjectSuggestionPromptPlaceholder": "الطلب الذي يُدرج في حقل الرسالة",
   "AIProjectSuggestions": "الاقتراحات",

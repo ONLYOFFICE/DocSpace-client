@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Ten pokój nie ma jeszcze żadnych umiejętności.",
   "AIProjectSources": "Źródła",
   "AIProjectAddSuggestion": "Dodaj sugestię",
+  "AIProjectEditSuggestion": "Edytuj sugestię",
+  "AIProjectSuggestionPrompt": "Prompt",
   "AIProjectSuggestionLabelPlaceholder": "Etykieta wyświetlana w czacie",
   "AIProjectSuggestionPromptPlaceholder": "Prompt wstawiany do pola wiadomości",
   "AIProjectSuggestions": "Sugestie",

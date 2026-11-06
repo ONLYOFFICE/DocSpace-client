@@ -213,6 +213,8 @@
   "AIProjectSkillsEmpty": "Šajā telpā vēl nav prasmju.",
   "AIProjectSources": "Avoti",
   "AIProjectAddSuggestion": "Pievienot ieteikumu",
+  "AIProjectEditSuggestion": "Rediģēt ieteikumu",
+  "AIProjectSuggestionPrompt": "Uzvedne",
   "AIProjectSuggestionLabelPlaceholder": "Tērzēšanā rādītā etiķete",
   "AIProjectSuggestionPromptPlaceholder": "Ziņojuma laukā ievietotā uzvedne",
   "AIProjectSuggestions": "Ieteikumi",

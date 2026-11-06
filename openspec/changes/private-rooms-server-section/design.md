@@ -94,11 +94,33 @@ recorded.
   in the shared Archive.
 - **Recent.** `searchArea=PrivateRooms` there answers 400
   (`EntryManager.cs:439`): Recent picks files by the type of their room.
-- **New items.** `FileMarker` counts the marks of private rooms under the
-  Private root and leaves them out of the Rooms root (`:1179` and the
-  `PrivateRooms` arms around it). The anchor holds no children, so the
-  root's count is surfaced directly, as for Forms, and the Rooms badge now
-  shows the corrected count on its first read.
+- **New items.** The section has a count, but no news listing of its own.
+  - **The count.** `FileMarker.SetTagsNewAsync` (`FileMarker.cs:1104-1213`)
+    reads the marks of the Rooms root when the parent is the Private root,
+    keeps those of private rooms, and writes the sum to the root's own
+    `new` (`Current.New`), because the anchor holds no children. The Rooms
+    root keeps the rest and saves the corrected count on its first read. The
+    count therefore reaches the client in the `current.new` of the Private
+    root in `GET files/@root` and of `GET files/@private`, the same way as
+    for Forms. `getFoldersTree` takes `current.new` only for Forms today.
+    The top-level `new` of an anchor stays 0
+    (`PrivateRoomSectionTests.NewItems_CountInTheSectionAndNotInRooms`
+    checks `Current.New` only).
+  - **The news listing.** The section has none. `GET files/{folderId}/news`
+    on the Private root reads the marks of that folder's own tree
+    (`FileMarker.GetMarkedEntriesAsync`, `:903-925`, with no redirect to
+    the Rooms root), so for an anchor it finds none. `GET files/rooms/news`
+    (`VirtualRoomsController.GetRoomsNewItems`, `:1829`) lists the news of
+    every room under the Rooms root, private and form rooms included, as
+    before.
+  - **How the Forms panel works around this.** The Forms item already takes
+    this route: `NewFilesPanel` asks for `rooms/news` and splits the groups
+    by room type on the client (`filterRoomGroups`). Its mark-all-as-read
+    marks each room by id, since marking the anchor does nothing:
+    `RemoveMarkAsNewAsync` (`:583-599`) returns when the folder has no marks
+    of its own.
+  - **Today's Rooms panel.** It still lists the news of private rooms while
+    the Rooms count no longer includes them.
 - **Room groups.** `RoomGroupArea` and `GroupsController.ValidateSearchArea`
   accept `PrivateRooms` (`RoomGroup.cs:67`, `:80`; `GroupsController.cs:319`).
   A group takes rooms of its own section only. A private room linked to a

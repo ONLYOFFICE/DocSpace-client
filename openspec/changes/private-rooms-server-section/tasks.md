@@ -26,7 +26,7 @@ The server landed the section in `c866c055e1` (1.1), and its shape is recorded i
 
 ## 4. New-items counter
 
-- [ ] 4.1 After 1.3 and 3.1: give the Private root the count of its own `new` in `getFoldersTree` (`packages/shared/api/files`), as Forms has. Then show it on the Private item in `packages/client/src/components/ClientArticleSidebar`, open its new-items panel, and offer mark-all-as-read as the Rooms item does (delta "New-items counter on the section item" and "Rooms counter leaves private rooms out"). Verify: `ClientArticleSidebar.test.tsx` cases "Counter shown" and "Mark all as read", and the E2E case "New-items counter" in `packages/client/__tests__/private-rooms-section.spec.ts` under Docker
+- [ ] 4.1 After 1.3 and 3.1: take the Private root's count from its `current.new` in `getFoldersTree` (`packages/shared/api/files`), as for Forms, since the anchor's top-level `new` is 0, and show it on the Private item in `packages/client/src/components/ClientArticleSidebar`. Its new-items panel lists `GET files/rooms/news` filtered to private rooms, and its mark-all-as-read marks those rooms by id, as the Forms panel does, because the server has no news listing per section and marking the anchor does nothing (design.md, "Landed on 2026-11-06", New items). The Rooms panel leaves private rooms out, so it matches the Rooms count (delta "New-items counter on the section item" and "Rooms counter leaves private rooms out"). Verify: `NewFilesPanel` cases for the Private and Rooms splits, `ClientArticleSidebar.test.tsx` cases "Counter shown" and "Mark all as read", and the E2E case "New-items counter" in `packages/client/__tests__/private-rooms-section.spec.ts` under Docker
 
 ## 5. Decisions carried into the section
 

@@ -133,10 +133,10 @@ const ROOM_ICONS: Record<TRoomType, "instructionsRoom.svg" | "knowledgeRoom.svg"
 /**
  * The create / edit aside of a project, as the mockups draw it: the logo
  * with its colour next to the name, the owner row (edit only), the model
- * with its note under the field, the instructions to the chat as the agent
- * dialog had them, the suggestion chips of the empty chat (added and
- * edited in a centred dialog), then the rooms of each kind as tags with
- * the "Select rooms" button in the same line and the hint below.
+ * with its note under the field, the rooms of each kind as tags with the
+ * "Select rooms" button in the same line and the hint below, then the
+ * instructions to the chat as the agent dialog had them and the suggestion
+ * chips of the empty chat (added and edited in a centred dialog).
  */
 const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogProps) => {
   const { t } = useTranslation(["Common"]);
@@ -627,6 +627,8 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
                 {t("Common:AIProjectModelHint")}
               </Text>
             </div>
+            {roomsBlock(t("Common:InstructionsRooms"), t("Common:AIProjectInstructionsHint"), instructions, INSTRUCTIONS_ROOM_TYPE, setInstructions)}
+            {roomsBlock(t("Common:AIProjectKnowledgeRooms"), t("Common:AIProjectKnowledgeHint"), knowledge, KNOWLEDGE_ROOM_TYPE, setKnowledge)}
             <div className={styles.block}>
               <div>
                 <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
@@ -646,8 +648,6 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
               />
             </div>
             {suggestionsBlock}
-            {roomsBlock(t("Common:InstructionsRooms"), t("Common:AIProjectInstructionsHint"), instructions, INSTRUCTIONS_ROOM_TYPE, setInstructions)}
-            {roomsBlock(t("Common:AIProjectKnowledgeRooms"), t("Common:AIProjectKnowledgeHint"), knowledge, KNOWLEDGE_ROOM_TYPE, setKnowledge)}
             {project?.createdBy ? (
               <div className={styles.owner}>
                 <ChangeRoomOwner

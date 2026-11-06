@@ -355,6 +355,48 @@ describe("UploadDataStore.asyncUpload — cancellation mid-chunk", () => {
     expect(store.finishUploadFilesCalled).toBe(true);
     expect(toastr.info).toHaveBeenCalledWith("Common:CancelUpload");
   });
+
+  it("aborts the chunk request in flight and does not fail the cancelled file", async () => {
+    const { store } = createTestUploadDataStore();
+    const browserFile = makeBrowserFile("cancelled.docx", 1024);
+    const entry = makeUploadFile({
+      uniqueId: "cancel-abort",
+      file: browserFile,
+      toFolderId: 1,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+
+    vi.mocked(filesApi.startUploadSession).mockResolvedValue({
+      id: "sess-1",
+      path: [],
+    } as never);
+    let chunkSignal: AbortSignal | undefined;
+    vi.mocked(filesApi.uploadChunkParallel).mockImplementation(
+      (_folderId, _sessionId, _chunkNumber, _data, signal) =>
+        new Promise((_res, rej) => {
+          chunkSignal = signal;
+          signal?.addEventListener("abort", () =>
+            rej(new Error("canceled")),
+          );
+        }) as never,
+    );
+
+    const done = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(chunkSignal).toBeDefined());
+    expect(chunkSignal?.aborted).toBe(false);
+
+    store.cancelUpload();
+    await done;
+
+    expect(chunkSignal?.aborted).toBe(true);
+    expect(filesApi.finalizeUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0].cancel).toBe(true);
+    expect(store.files[0].error).toBeFalsy();
+    expect(toastr.info).toHaveBeenCalledWith("Common:CancelUpload");
+  });
 });
 
 describe("UploadDataStore.uploadFileChunks + asyncUpload — full cycle", () => {

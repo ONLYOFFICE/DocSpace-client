@@ -92,17 +92,55 @@ describe("uploadChunkParallel", () => {
     expect(request).toHaveBeenCalledTimes(1);
   });
 
-  it("does not retry a cancelled upload", async () => {
-    const controller = new AbortController();
-    controller.abort();
-    request.mockRejectedValueOnce({
+  it("does not retry a cancelled request", async () => {
+    const canceledError = {
       isAxiosError: true,
       code: "ERR_CANCELED",
       __CANCEL__: true,
+    };
+    request.mockRejectedValueOnce(canceledError);
+
+    const result = await settle(upload());
+
+    expect(result).toEqual({ error: canceledError });
+    expect(request).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not retry once the upload is aborted", async () => {
+    const controller = new AbortController();
+    request.mockImplementationOnce(async () => {
+      controller.abort();
+      throw timeoutError;
     });
 
-    await settle(upload(controller.signal));
+    const result = await settle(upload(controller.signal));
 
+    expect(result).toEqual({ error: timeoutError });
     expect(request).toHaveBeenCalledTimes(1);
+  });
+
+  it("stops waiting for the retry when the upload is aborted", async () => {
+    const controller = new AbortController();
+    const canceledError = {
+      isAxiosError: true,
+      code: "ERR_CANCELED",
+      __CANCEL__: true,
+    };
+    request
+      .mockRejectedValueOnce(timeoutError)
+      .mockRejectedValueOnce(canceledError);
+
+    const result = upload(controller.signal).then(
+      (value) => ({ value }),
+      (error: unknown) => ({ error }),
+    );
+    await vi.advanceTimersByTimeAsync(0);
+    expect(request).toHaveBeenCalledTimes(1);
+
+    controller.abort();
+
+    expect(await result).toEqual({ error: canceledError });
+    expect(request).toHaveBeenCalledTimes(2);
+    expect(vi.getTimerCount()).toBe(0);
   });
 });

@@ -789,6 +789,7 @@ export async function startUploadSession(
 
 const CHUNK_UPLOAD_ATTEMPTS = 3;
 const CHUNK_RETRY_DELAY_MS = 1000;
+const CHUNK_RETRY_JITTER_MS = 500;
 
 const isRetryableChunkError = (error: unknown) => {
   if (!axios.isAxiosError(error) || axios.isCancel(error)) return false;
@@ -797,6 +798,20 @@ const isRetryableChunkError = (error: unknown) => {
 
   return !status || status === 502 || status === 503 || status === 504;
 };
+
+const waitBeforeChunkRetry = (attempt: number, signal?: AbortSignal) =>
+  new Promise<void>((resolve) => {
+    const done = () => {
+      clearTimeout(timer);
+      signal?.removeEventListener("abort", done);
+      resolve();
+    };
+    const timer = setTimeout(
+      done,
+      CHUNK_RETRY_DELAY_MS * attempt + Math.random() * CHUNK_RETRY_JITTER_MS,
+    );
+    signal?.addEventListener("abort", done);
+  });
 
 export async function uploadChunkParallel(
   folderId: string | number,
@@ -821,9 +836,7 @@ export async function uploadChunkParallel(
       )
         throw error;
 
-      await new Promise((resolve) => {
-        setTimeout(resolve, CHUNK_RETRY_DELAY_MS * attempt);
-      });
+      await waitBeforeChunkRetry(attempt, signal);
     }
   }
 }

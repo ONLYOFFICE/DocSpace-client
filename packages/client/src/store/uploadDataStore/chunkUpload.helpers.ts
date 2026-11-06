@@ -316,6 +316,14 @@ export async function asyncUploadImpl(
         }
       }
     } catch (error) {
+      if (
+        self.uploaded ||
+        !self.files.some((f) => f.file === file) ||
+        self.files[indexOfFile]?.cancel
+      ) {
+        return resolve();
+      }
+
       return reject(error);
     }
   }
@@ -340,6 +348,13 @@ export async function uploadFileChunksImpl(
 
   const isThirdPartyFolder = typeof toFolderId === "string";
   if (!isThirdPartyFolder) {
+    const { uniqueId } = self.files[indexOfFile];
+    const controller = new AbortController();
+    const stopWatchingCancel = when(
+      () => isRowCancelled(self, uniqueId),
+      () => controller.abort(),
+    );
+
     const chunksArray: TUploadChunk[] = [];
     for (let index = 0; index < length; index++) {
       chunksArray.push({
@@ -352,6 +367,7 @@ export async function uploadFileChunksImpl(
             sessionId,
             index + 1,
             requestsDataArray[index],
+            controller.signal,
           ),
       });
     }
@@ -381,7 +397,11 @@ export async function uploadFileChunksImpl(
       }
     });
 
-    await promise;
+    try {
+      await promise;
+    } finally {
+      stopWatchingCancel();
+    }
   } else {
     for (let index = 0; index < length; index++) {
       if (

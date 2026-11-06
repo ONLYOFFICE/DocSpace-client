@@ -219,6 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "Mesaj alanına eklenen istem",
   "AIProjectSuggestions": "Öneriler",
   "AIProjectSuggestionsHint": "Boş bir proje sohbetinde sunulan hızlı istemler. En fazla {{limit}} öneri.",
+  "AIProjectTextTooLong": "Metin çok uzun. En fazla {{limit}} karakter olabilir.",
   "AIProjectRoomDescription": "Üyelerinin sohbetleri için bir modeli, talimat odalarını ve bilgi odalarını bir araya getiren proje.",
   "AIProjectRoomTitle": "AI projesi",
   "AIProvider": "Yapay Zeka Sağlayıcısı",

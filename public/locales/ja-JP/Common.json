@@ -219,6 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "メッセージ欄に挿入されるプロンプト",
   "AIProjectSuggestions": "候補",
   "AIProjectSuggestionsHint": "プロジェクトの空のチャットに表示されるクイックプロンプトです。最大{{limit}}件まで。",
+  "AIProjectTextTooLong": "テキストが長すぎます。最大{{limit}}文字までです。",
   "AIProjectRoomDescription": "メンバーのチャット用に、モデル、指示ルーム、ナレッジルームをまとめたプロジェクトです。",
   "AIProjectRoomTitle": "AIプロジェクト",
   "AIProvider": "AIプロバイダー",

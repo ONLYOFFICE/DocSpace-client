@@ -219,6 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "插入到消息框中的提示词",
   "AIProjectSuggestions": "建议",
   "AIProjectSuggestionsHint": "在项目的空白对话中提供的快捷提示词。最多 {{limit}} 条建议。",
+  "AIProjectTextTooLong": "文本过长。最多 {{limit}} 个字符。",
   "AIProjectRoomDescription": "为成员的对话绑定模型、指令房间和知识房间的项目。",
   "AIProjectRoomTitle": "AI 项目",
   "AIProvider": "AI 提供商",

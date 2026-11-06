@@ -219,6 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "Запрос, который подставляется в поле сообщения",
   "AIProjectSuggestions": "Подсказки",
   "AIProjectSuggestionsHint": "Быстрые запросы, которые предлагаются в пустом чате проекта. Не более {{limit}} подсказок.",
+  "AIProjectTextTooLong": "Слишком длинный текст. Максимальная длина — {{limit}} символов.",
   "AIProjectRoomDescription": "Проект, объединяющий модель, комнаты инструкций и комнаты знаний для чатов его участников.",
   "AIProjectRoomTitle": "ИИ-проект",
   "AIProvider": "ИИ-провайдер",

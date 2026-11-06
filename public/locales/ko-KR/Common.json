@@ -219,6 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "메시지 입력란에 삽입되는 프롬프트",
   "AIProjectSuggestions": "제안",
   "AIProjectSuggestionsHint": "프로젝트의 빈 채팅에 제공되는 빠른 프롬프트입니다. 최대 {{limit}}개까지 추가할 수 있습니다.",
+  "AIProjectTextTooLong": "텍스트가 너무 깁니다. 최대 길이는 {{limit}}자입니다.",
   "AIProjectRoomDescription": "멤버의 채팅을 위해 모델, 지침 방, 지식 방을 하나로 묶는 프로젝트입니다.",
   "AIProjectRoomTitle": "AI 프로젝트",
   "AIProvider": "AI 제공업체",

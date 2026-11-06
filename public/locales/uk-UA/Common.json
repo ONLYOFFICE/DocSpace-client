@@ -219,6 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "Запит, що вставляється в поле повідомлення",
   "AIProjectSuggestions": "Підказки",
   "AIProjectSuggestionsHint": "Швидкі запити, які пропонуються в порожньому чаті проєкту. Не більше {{limit}} підказок.",
+  "AIProjectTextTooLong": "Занадто довгий текст. Максимальна довжина — {{limit}} символів.",
   "AIProjectRoomDescription": "Проєкт, що поєднує модель, кімнати інструкцій і кімнати знань для чатів його учасників.",
   "AIProjectRoomTitle": "Проєкт AI",
   "AIProvider": "Постачальник AI",

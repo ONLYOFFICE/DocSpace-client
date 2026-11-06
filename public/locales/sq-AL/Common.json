@@ -219,6 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "Kërkesa që futet në fushën e mesazhit",
   "AIProjectSuggestions": "Sugjerime",
   "AIProjectSuggestionsHint": "Kërkesa të shpejta që ofrohen në një bisedë të zbrazët të projektit. Deri në {{limit}} sugjerime.",
+  "AIProjectTextTooLong": "Teksti është shumë i gjatë. Gjatësia maksimale është {{limit}} karaktere.",
   "AIProjectRoomDescription": "Një projekt që bashkon një model, dhoma udhëzimesh dhe dhoma njohurish për bisedat e anëtarëve të tij.",
   "AIProjectRoomTitle": "Projekt IA",
   "AIProvider": "Ofruesi i IA",

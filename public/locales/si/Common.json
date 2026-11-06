@@ -219,6 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "පණිවිඩ ක්ෂේත්‍රයට ඇතුළු කරන විමසුම",
   "AIProjectSuggestions": "යෝජනා",
   "AIProjectSuggestionsHint": "ව්‍යාපෘතියේ හිස් කතාබහක ලබා දෙන ඉක්මන් විමසුම්. යෝජනා {{limit}} දක්වා.",
+  "AIProjectTextTooLong": "පෙළ දිග වැඩියි. උපරිම දිග අක්ෂර {{limit}} කි.",
   "AIProjectRoomDescription": "එහි සාමාජිකයින්ගේ කතාබහ සඳහා ආකෘතියක්, උපදෙස් කාමර සහ දැනුම් කාමර එකට බැඳෙන ව්‍යාපෘතියක්.",
   "AIProjectRoomTitle": "AI ව්‍යාපෘතිය",
   "AIProvider": "AI සපයන්නා",

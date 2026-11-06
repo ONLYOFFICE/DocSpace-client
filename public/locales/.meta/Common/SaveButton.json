@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-11-06T09:16:27.951Z",
+  "updated_at": "2026-11-06T10:16:22.084Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -115,13 +115,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 662,
+      "line_number": 695,
       "context": ") : null}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={project ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n type=\"submit\"\n isLoading={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/SuggestionDialog.tsx",
-      "line_number": 124,
+      "line_number": 153,
       "context": "</div>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={suggestion ? t(\"Common:SaveButton\") : t(\"Common:AddButton\")}\n size={ButtonSize.normal}\n primary\n scale\n isDisabled={!canSave}\n onClick={onSubmit}",
       "module": "/packages/client"
     },

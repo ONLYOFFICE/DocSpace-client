@@ -219,6 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "Prompt inserido no campo de mensagem",
   "AIProjectSuggestions": "Sugestões",
   "AIProjectSuggestionsHint": "Prompts rápidos propostos num chat vazio do projeto. Até {{limit}} sugestões.",
+  "AIProjectTextTooLong": "O texto é demasiado longo. O comprimento máximo é de {{limit}} caracteres.",
   "AIProjectRoomDescription": "Um projeto que reúne um modelo, salas de instruções e salas de conhecimento para os chats dos seus membros.",
   "AIProjectRoomTitle": "Projeto de IA",
   "AIProvider": "Provedor de IA",

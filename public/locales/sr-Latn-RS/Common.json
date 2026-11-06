@@ -219,6 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "Upit koji se umeće u polje za poruku",
   "AIProjectSuggestions": "Predlozi",
   "AIProjectSuggestionsHint": "Brzi upiti koji se nude u praznom ćaskanju projekta. Do {{limit}} predloga.",
+  "AIProjectTextTooLong": "Tekst je predugačak. Maksimalna dužina je {{limit}} znakova.",
   "AIProjectRoomDescription": "Projekat koji povezuje model, sobe za instrukcije i sobe znanja za ćaskanja svojih članova.",
   "AIProjectRoomTitle": "AI projekat",
   "AIProvider": "AI provajder",

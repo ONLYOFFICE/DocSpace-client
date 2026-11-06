@@ -3,7 +3,7 @@
   "content": "Prompt",
   "content_en_sha1_hash": "a817d7eb8e0f1dab755ab5203a082e5c3c094fce",
   "created_at": "2026-11-06T09:14:54.601Z",
-  "updated_at": "2026-11-06T09:16:28.649Z",
+  "updated_at": "2026-11-06T10:16:22.225Z",
   "comment": {
     "text": "Field label (followed by a colon) in the add/edit suggestion dialog of an AI project, above the text that a click on the chip puts into the chat message input. Noun: the AI prompt, not a verb.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/SuggestionDialog.tsx",
-      "line_number": 109,
-      "context": "testId=\"ai-project-suggestion-name\"\n />\n </div>\n <div className={styles.field}>\n <Text as=\"label\" htmlFor=\"ai-project-suggestion-prompt\" fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {`${t(\"Common:AIProjectSuggestionPrompt\")}:`}\n </Text>\n <Textarea\n id=\"ai-project-suggestion-prompt\"\n value={prompt}\n onChange={(e) => setPrompt(e.target.value)}",
+      "line_number": 128,
+      "context": "/>\n </FieldContainer>\n </div>\n <div className={styles.field}>\n <Text as=\"label\" htmlFor=\"ai-project-suggestion-prompt\" fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {`${t(\"Common:AIProjectSuggestionPrompt\")}:`}\n </Text>\n <FieldContainer\n isVertical\n removeMargin\n labelVisible={false}",
       "module": "/packages/client"
     }
   ],

@@ -219,6 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "Viestikenttään lisättävä kehote",
   "AIProjectSuggestions": "Ehdotukset",
   "AIProjectSuggestionsHint": "Pikakehotteet, joita tarjotaan projektin tyhjässä chatissa. Enintään {{limit}} ehdotusta.",
+  "AIProjectTextTooLong": "Teksti on liian pitkä. Enimmäispituus on {{limit}} merkkiä.",
   "AIProjectRoomDescription": "Projekti, joka yhdistää mallin, ohjehuoneet ja tietohuoneet jäsentensä chatteja varten.",
   "AIProjectRoomTitle": "AI-projekti",
   "AIProvider": "AI-palveluntarjoaja",

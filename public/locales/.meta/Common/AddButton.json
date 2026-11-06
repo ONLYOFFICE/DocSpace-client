@@ -3,7 +3,7 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2026-11-06T09:16:27.971Z",
+  "updated_at": "2026-11-06T10:16:22.100Z",
   "comment": {
     "text": "This is a button label that initiates an \"add\" action, such as adding a file, a server, or an item to a selection.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/SuggestionDialog.tsx",
-      "line_number": 124,
+      "line_number": 153,
       "context": "</div>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={suggestion ? t(\"Common:SaveButton\") : t(\"Common:AddButton\")}\n size={ButtonSize.normal}\n primary\n scale\n isDisabled={!canSave}\n onClick={onSubmit}",
       "module": "/packages/client"
     },

@@ -43,6 +43,7 @@ import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
+import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
@@ -300,6 +301,9 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
     selectedProfileOption ? String(selectedProfileOption.key) : undefined,
     profilesLoaded,
   );
+
+  // Shown as an error under the field; the server refuses the text, the form does not.
+  const instructionsTooLong = prompt.trim().length > AI_PROJECT_MAX_TEXT_LENGTH;
 
   if (!state) return null;
 
@@ -640,15 +644,24 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
                   {t("Common:InstructionsDescriptionAgent")}
                 </Text>
               </div>
-              <Textarea
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                heightTextArea={144}
-                maxLength={AI_PROJECT_MAX_TEXT_LENGTH}
-                placeholder={t("Common:InstructionsDescriptionAgentExample")}
-                isDisabled={isSaving}
-                dataTestId="ai-project-instructions-textarea"
-              />
+              <FieldContainer
+                isVertical
+                removeMargin
+                labelVisible={false}
+                hasError={instructionsTooLong}
+                errorMessage={t("Common:AIProjectTextTooLong", { limit: AI_PROJECT_MAX_TEXT_LENGTH })}
+                errorMessageWidth="100%"
+              >
+                <Textarea
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  heightTextArea={144}
+                  placeholder={t("Common:InstructionsDescriptionAgentExample")}
+                  hasError={instructionsTooLong}
+                  isDisabled={isSaving}
+                  dataTestId="ai-project-instructions-textarea"
+                />
+              </FieldContainer>
             </div>
             {project?.createdBy ? (
               <div className={styles.owner}>

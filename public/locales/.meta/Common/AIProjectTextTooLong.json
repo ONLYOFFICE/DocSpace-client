@@ -1,0 +1,41 @@
+{
+  "key_path": "AIProjectTextTooLong",
+  "content": "The text is too long. The maximum length is {{limit}} characters.",
+  "content_en_sha1_hash": "ebe66916f775effc4411638d35683e6ac00d263b",
+  "created_at": "2026-11-06T10:14:48.491Z",
+  "updated_at": "2026-11-06T10:16:22.754Z",
+  "comment": {
+    "text": "Error shown in red under a text field of the AI project form or its add/edit suggestion dialog when the entered text is longer than allowed; {{limit}} is the maximum number of characters (255 for a suggestion label, 10000 for the instructions or a prompt). Full sentence.",
+    "is_auto": true,
+    "updated_at": "2026-11-06T10:16:22.754Z",
+    "model": "claude-fable-5-1"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
+      "line_number": 653,
+      "context": "<FieldContainer\n isVertical\n removeMargin\n labelVisible={false}\n hasError={instructionsTooLong}\n errorMessage={t(\"Common:AIProjectTextTooLong\", { limit: AI_PROJECT_MAX_TEXT_LENGTH })}\n errorMessageWidth=\"100%\"\n >\n <Textarea\n value={prompt}\n onChange={(e) => setPrompt(e.target.value)}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/SuggestionDialog.tsx",
+      "line_number": 104,
+      "context": "<FieldContainer\n isVertical\n removeMargin\n labelVisible={false}\n hasError={nameTooLong}\n errorMessage={t(\"Common:AIProjectTextTooLong\", { limit: AI_PROJECT_MAX_SUGGESTION_NAME_LENGTH })}\n errorMessageWidth=\"100%\"\n >\n <TextInput\n id=\"ai-project-suggestion-name\"\n type={InputType.text}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/SuggestionDialog.tsx",
+      "line_number": 104,
+      "context": "<FieldContainer\n isVertical\n removeMargin\n labelVisible={false}\n hasError={nameTooLong}\n errorMessage={t(\"Common:AIProjectTextTooLong\", { limit: AI_PROJECT_MAX_SUGGESTION_NAME_LENGTH })}\n errorMessageWidth=\"100%\"\n >\n <TextInput\n id=\"ai-project-suggestion-name\"\n type={InputType.text}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

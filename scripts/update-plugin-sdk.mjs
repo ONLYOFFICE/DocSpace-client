@@ -39,44 +39,51 @@
  * a locally packed tarball, for trying an SDK build before it is published, and
  * makes pnpm actually install it.
  *
- * The same procedure as update-ui-kit.mjs, for the same reason: the tarball
- * sits at the repo root as `onlyoffice-docspace-plugin-sdk.tgz`, with no
- * version in its name, so from the second run on the specifier no longer
- * changes and a plain `pnpm install` keeps the cached copy. The script copies
- * the pack, repoints the manifests, rewrites the recorded integrity, drops the
- * extracted copy, installs, and verifies by hash what landed. The Dockerfiles
- * already copy the root `*.tgz`, so an image builds in either mode.
+ * The tarball is versioned in its filename, as ai-chat's is:
+ * `onlyoffice-docspace-plugin-sdk-<version>.tgz`, with a pre-release version
+ * such as `3.1.0-20261106` (another pack that day: `3.1.0-20261106.2`), so it
+ * never claims to be a release that is not on npm, and the published `3.1.0`
+ * is still the newer version under `^3.1.0`. A new version means a new `file:`
+ * specifier in every app manifest, and pnpm re-resolves it on its own. A
+ * different build under a version already at the root is refused: that is the
+ * ui-kit trap again. The extracted copy is dropped either way, and the result
+ * is verified by hash against the tarball.
+ * An earlier unversioned `onlyoffice-docspace-plugin-sdk.tgz` at the root is
+ * replaced. The Dockerfiles copy the root `*.tgz`, so an image builds in either
+ * mode.
  *
- * Pack in the SDK checkout with `npm run build && npm pack`. The version the
- * apps see is the one in the packed package.json.
+ * Pack in the SDK checkout with the pre-release version, then restore its
+ * package.json:
  *
- * Back to the registry: `pnpm -r update @onlyoffice/docspace-plugin-sdk@^<version>`,
- * then delete the tarball.
+ *   npm version 3.1.0-20261106 --no-git-tag-version && npm run build && npm pack
  *
  *   node scripts/update-plugin-sdk.mjs                     # newest pack in the sibling checkout
  *   node scripts/update-plugin-sdk.mjs path/to/pack.tgz    # an explicit tarball
  *   DOCSPACE_PLUGIN_SDK_SRC=... node scripts/update-plugin-sdk.mjs
+ *
+ * Back to the registry: `pnpm -r update @onlyoffice/docspace-plugin-sdk@^<version>`,
+ * then delete the tarball.
  */
-
 import fs from "node:fs";
 import path from "node:path";
 import {
   LOCKFILE,
+  PLUGIN_SDK_AT_ROOT,
+  PLUGIN_SDK_TARBALL,
   PNPM_DIR,
   ROOT,
+  escapeRegExp,
   fail,
   integrityOf,
   lockDrift,
   newestIn,
   packedManifest,
+  placeVersionedTarball,
   pnpmInstall,
-  repointManifests,
   verifyExtractedCopies,
 } from "./lib/vendored-tarball.mjs";
 
 const PACKAGE = "@onlyoffice/docspace-plugin-sdk";
-const TARBALL = path.join(ROOT, "onlyoffice-docspace-plugin-sdk.tgz");
-const SPECIFIER = "file:../../onlyoffice-docspace-plugin-sdk.tgz";
 
 // pnpm shortens a long virtual store name and appends a hash, so the SDK's
 // directory is `@onlyoffice+docspace-plugin_<hash>` as often as the full name.
@@ -103,59 +110,82 @@ const findSource = () => {
     );
   }
 
-  const pack = newestIn(sdk, /^onlyoffice-docspace-plugin-sdk-.*\.tgz$/);
+  const pack = newestIn(sdk, PLUGIN_SDK_TARBALL);
 
   if (pack === null) {
     fail(
-      `No onlyoffice-docspace-plugin-sdk-*.tgz in ${sdk}. Run \`npm run build && npm pack\` there first.`,
+      `No onlyoffice-docspace-plugin-sdk-*.tgz in ${sdk}. Pack it there first ` +
+        "(`npm version <x.y.z-yyyymmdd> --no-git-tag-version && npm run build && npm pack`).",
     );
   }
 
   return path.join(sdk, pack);
 };
 
-// The lockfile has entries for the tarball only once the apps already use it;
-// coming from the registry there are none, and pnpm resolves the new
-// specifier fresh.
-const LOCK_PATTERN =
-  /(integrity: )sha512-[A-Za-z0-9+/=]+(, tarball: file:onlyoffice-docspace-plugin-sdk\.tgz)/g;
-const lock = fs.readFileSync(LOCKFILE, "utf8");
-const lockMatches = lock.match(LOCK_PATTERN) ?? [];
-
 const source = findSource();
-const hadTarball = fs.existsSync(TARBALL);
-// Snapshot before overwriting: the rollback below has to put these exact bytes
-// back, and by then the file on disk is already the new pack.
-const previousTarball = hadTarball ? fs.readFileSync(TARBALL) : null;
-const before = hadTarball ? integrityOf(TARBALL) : null;
+const file = path.basename(source);
 
-if (path.resolve(source) !== TARBALL) fs.copyFileSync(source, TARBALL);
-
-const after = integrityOf(TARBALL);
-const manifests = repointManifests(PACKAGE, SPECIFIER);
-
-if (manifests.touched.length > 0) {
-  console.log(`${PACKAGE} -> ${SPECIFIER} (${manifests.touched.join(", ")} repointed)`);
+// The app manifests carry the version in this filename.
+if (!PLUGIN_SDK_TARBALL.test(file)) {
+  fail(`${file} is not named onlyoffice-docspace-plugin-sdk-<version>.tgz -- rename it first.`);
 }
+
+const target = path.join(ROOT, file);
+const lock = fs.readFileSync(LOCKFILE, "utf8");
+const after = integrityOf(source);
+const before = fs.existsSync(target) ? integrityOf(target) : null;
+
+// A second build under a version already in use is the stale-copy trap: a
+// teammate's install can keep the first build. Every pack gets its own version.
+if (before !== null && before !== after) {
+  const [, version] = file.match(PLUGIN_SDK_TARBALL);
+  const counter = version.match(/^(.*-\d{8})\.(\d+)$/);
+  const next = counter ? `${counter[1]}.${Number(counter[2]) + 1}` : `${version}.2`;
+  fail(
+    `${file} is already at the root with other contents. Pack this build as ` +
+      `${next} (npm version ${next} --no-git-tag-version) and re-run.`,
+  );
+}
+
+const appsNaming = (name) =>
+  fs
+    .readdirSync(path.join(ROOT, "packages"))
+    .map((app) => path.join(ROOT, "packages", app, "package.json"))
+    .filter((manifest) => fs.existsSync(manifest))
+    .map((manifest) => fs.readFileSync(manifest, "utf8"))
+    .filter((text) => text.includes(`"${PACKAGE}"`))
+    .every((text) => text.includes(`"${PACKAGE}": "file:../../${name}"`));
+
+const othersAtRoot = fs
+  .readdirSync(ROOT)
+  .filter((f) => PLUGIN_SDK_AT_ROOT.test(f) && f !== file);
 
 // An unchanged tarball still falls through to the verification below: a
 // previous run may have died after rewriting the tree, and only the check
 // tells whether what is installed is this build.
-if (before === after && manifests.touched.length === 0) {
-  console.log(
-    `${path.relative(ROOT, TARBALL)} is already this build -- checking what is installed.`,
-  );
+if (before === after && othersAtRoot.length === 0 && appsNaming(file)) {
+  console.log(`${file} is already this build -- checking what is installed.`);
 } else {
+  const placed = placeVersionedTarball(PACKAGE, PLUGIN_SDK_AT_ROOT, source);
+
+  console.log(
+    `${PACKAGE} -> ${file}` +
+      (placed.touched.length > 0 ? ` (${placed.touched.join(", ")} repointed)` : ""),
+  );
+
   const restore = () => {
     fs.writeFileSync(LOCKFILE, lock);
-    if (previousTarball === null) fs.rmSync(TARBALL, { force: true });
-    else fs.writeFileSync(TARBALL, previousTarball);
-    manifests.restore();
+    placed.restore();
   };
 
-  // Point the lockfile at the new contents. Without this pnpm trusts the old
-  // hash and never reads the file.
-  fs.writeFileSync(LOCKFILE, lock.replace(LOCK_PATTERN, `$1${after}$2`));
+  // Same filename, new contents: point the lockfile at them, or pnpm trusts
+  // the old hash and never reads the file. A new filename matches nothing
+  // here and pnpm resolves it fresh.
+  const pattern = new RegExp(
+    `(integrity: )sha512-[A-Za-z0-9+/=]+(, tarball: file:${escapeRegExp(file)}\\})`,
+    "g",
+  );
+  fs.writeFileSync(LOCKFILE, lock.replace(pattern, `$1${after}$2`));
 
   // And drop every extracted copy, which pnpm would otherwise relink as is.
   if (fs.existsSync(PNPM_DIR)) {
@@ -166,29 +196,44 @@ if (before === after && manifests.touched.length === 0) {
     }
   }
 
-  const rewritten =
-    lockMatches.length > 0
-      ? ` (${lockMatches.length} lockfile ${lockMatches.length === 1 ? "entry" : "entries"} rewritten)`
-      : "";
-
-  console.log(`Installing ${path.basename(source)}${rewritten}...`);
+  console.log(`Installing ${file}...`);
   try {
     pnpmInstall();
   } catch (error) {
-    // The tarball, the lockfile and the app manifests were already rewritten
+    // The tarball, the manifests and the lockfile were already rewritten
     // above, so a failed install leaves the tree claiming a version it does
     // not have. Put all of it back.
     restore();
-    fail(`pnpm install failed; tarball, lockfile and manifests restored: ${error.message}`);
+    fail(`pnpm install failed; SDK tarball, manifests and lockfile restored: ${error.message}`);
   }
 }
 
-// Prove it landed: the install's exit code says nothing about which build is
-// in node_modules.
-const copies = verifyExtractedCopies(TARBALL, PACKAGE, isExtractedCopy);
+// Prove it landed: no lockfile reference to another SDK tarball, every
+// extracted copy byte-identical to the tarball, and the lockfile entry
+// describing the manifest that was actually packed.
+const leftovers = [
+  ...new Set(
+    [
+      ...fs
+        .readFileSync(LOCKFILE, "utf8")
+        .matchAll(/onlyoffice-docspace-plugin-sdk(?:-[^\s'"(),}]+)?\.tgz/g),
+    ]
+      .map(([name]) => name)
+      .filter((name) => name !== file),
+  ),
+];
 
-// The bytes match, but the lockfile can still describe the previous build.
-const drift = lockDrift(`${PACKAGE}@file:onlyoffice-docspace-plugin-sdk.tgz`, packedManifest(TARBALL));
+if (leftovers.length > 0) {
+  fail(
+    `pnpm-lock.yaml still references ${leftovers.join(", ")} -- some manifest ` +
+      "still names it. Repoint it and re-run.",
+  );
+}
+
+const copies = verifyExtractedCopies(target, PACKAGE, isExtractedCopy);
+
+const packed = packedManifest(target);
+const drift = lockDrift(`${PACKAGE}@file:${file}`, packed);
 
 if (drift.length > 0) {
   console.error(`pnpm-lock.yaml still describes a previous build of ${PACKAGE}:\n`);
@@ -199,13 +244,19 @@ if (drift.length > 0) {
   );
 }
 
-const { version } = JSON.parse(fs.readFileSync(path.join(copies[0], "package.json"), "utf8"));
-
 console.log(
-  `${PACKAGE} ${version} installed and verified against the tarball ` +
+  `${PACKAGE} ${packed.version} installed and verified against ${file} ` +
     `(${copies.length} extracted ${copies.length === 1 ? "copy" : "copies"}).`,
 );
+
+// npm pack names the file after the version it packs, so a mismatch means the
+// file was renamed by hand.
+const [, fileVersion] = file.match(PLUGIN_SDK_TARBALL);
+if (fileVersion !== packed.version) {
+  console.warn(`Warning: ${file} contains ${PACKAGE} ${packed.version}, not ${fileVersion}.`);
+}
+
 console.log(
   "The apps now use the tarball instead of the npm release. To go back, run " +
-    `\`pnpm -r update ${PACKAGE}@^<version>\` and delete onlyoffice-docspace-plugin-sdk.tgz.`,
+    `\`pnpm -r update ${PACKAGE}@^<version>\` and delete ${file}.`,
 );

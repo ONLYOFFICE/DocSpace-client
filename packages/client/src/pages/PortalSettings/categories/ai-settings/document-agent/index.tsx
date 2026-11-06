@@ -69,6 +69,18 @@ type TDocumentAgentProps = {
 
 const BYTES_PER_MB = 1024 * 1024;
 
+/**
+ * The agent's own ceilings (`AGENT_MAX_TOOL_CALLS`, `AGENT_MAX_FILE_BYTES`
+ * defaults): a request may only lower them, and a higher value is silently
+ * clamped, so the fields stop there.
+ */
+const MAX_TOOL_CALLS = 150;
+const MAX_FILE_MB = 32;
+const FIELD_MAX: Record<"maxToolCalls" | "maxFileMb", number> = {
+  maxToolCalls: MAX_TOOL_CALLS,
+  maxFileMb: MAX_FILE_MB,
+};
+
 
 const CHAT_MODEL_KEY = "chat-model";
 
@@ -160,10 +172,16 @@ const DocumentAgentComponent = ({
   const patch = (changes: Partial<TDraft>) =>
     setDraft((prev) => (prev ? { ...prev, ...changes } : prev));
 
+  // Digits only, and nothing above the agent's ceiling: a larger number
+  // is refused as typed, the field keeps its value.
   const onText =
     (field: "maxToolCalls" | "maxFileMb") =>
-    (e: React.ChangeEvent<HTMLInputElement>) =>
-      patch({ [field]: e.target.value });
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      if (value !== "" && !/^\d+$/.test(value)) return;
+      if (value !== "" && Number(value) > FIELD_MAX[field]) return;
+      patch({ [field]: value });
+    };
 
   const parsed = fromDraft(draft);
   const isDirty =
@@ -221,6 +239,7 @@ const DocumentAgentComponent = ({
           size={InputSize.base}
           scale
           value={value}
+          maxLength={String(FIELD_MAX[field]).length}
           onChange={onText(field)}
           isDisabled={fieldsDisabled}
           hasError={hasError}

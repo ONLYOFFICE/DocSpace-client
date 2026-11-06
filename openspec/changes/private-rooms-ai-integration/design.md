@@ -66,6 +66,18 @@ file key of an encrypted file for the editor
 `private-rooms/editor-integration`). Whether the library can call a provider
 without the gateway, and what it uses the SDKs for, is spike 1.
 
+Seen on the release stand `tests.onlyoffice.io` on 2026-11-06 (Document
+Server 10.0.3.19): the editor's AI Tools tab is shown for an encrypted file.
+Because the doceditor skips the plugin's initialisation, no portal model is
+connected and AI Chat asks to "Connect an AI Model", but the plugin's own
+Settings let the user add a provider key, after which Summarization,
+Translation and the chat would send the clear text of the open document
+from the browser to that provider. Option C below therefore already exists
+de facto through the plugin, outside the client's control and without the
+room-owner opt-in of decision 4; whether the plugin can be hidden for an
+encrypted file through the editor configuration is a question to the
+Document Server team (Open Questions).
+
 No stashed design document covers AI in private rooms; the ban predates the
 AI chat.
 
@@ -158,3 +170,10 @@ decides the ban is permanent.
 - Product: whether a bring-your-own-key AI without the gateway is
   acceptable on SaaS, and how the promise is worded in the positioning
   documents of `private-rooms-release-gate` once a phase ships.
+- Document Server team: whether the editor's AI plugin can be left out
+  of the editor for an encrypted file through the editor configuration,
+  so the ban holds in the editor too, or whether its own provider
+  settings must be accepted as the user's choice (Context, the stand
+  observation of 2026-11-06). Owner: the feature owner with the Document
+  Server team; affects `private-rooms-editor-contract` if a configuration
+  change is needed.

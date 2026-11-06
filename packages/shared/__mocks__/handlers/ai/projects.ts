@@ -225,9 +225,10 @@ export const aiProjectMock = ({
 export type AiProjectMock = ReturnType<typeof aiProjectMock>;
 
 /**
- * The stock list: a project with both source kinds, one with skills only,
- * and one shared with the caller as a member, without sources at all. Dates
- * descend as the default sort lists them.
+ * The stock list: a project with both source kinds, instructions and three
+ * suggestion chips, one with skills only and a single chip, and one shared
+ * with the caller as a member, without sources, instructions or chips at
+ * all. Dates descend as the default sort lists them.
  */
 export const AI_PROJECTS: AiProjectMock[] = [
   aiProjectMock({
@@ -237,6 +238,13 @@ export const AI_PROJECTS: AiProjectMock[] = [
     created: "2026-10-22T10:00:00.0000000+00:00",
     pinned: true,
     tags: ["sales", "internal"],
+    instructions:
+      "You are a sales assistant. Answer briefly, cite the contract you rely on and flag every deadline.",
+    suggestions: [
+      { name: "Summarize contracts", prompt: "Summarize the contracts signed this month and list the main risks." },
+      { name: "Draft a follow-up", prompt: "Draft a follow-up email to a client after the first sales call." },
+      { name: "Find deadlines", prompt: "Find all payment and delivery deadlines in the knowledge base." },
+    ],
     instructionsRooms: [INSTRUCTIONS_ROOMS.sales, INSTRUCTIONS_ROOMS.legal],
     knowledgeRooms: [KNOWLEDGE_ROOMS.contracts],
   }),
@@ -246,6 +254,9 @@ export const AI_PROJECTS: AiProjectMock[] = [
     color: "FF6680",
     created: "2026-10-21T10:00:00.0000000+00:00",
     tags: ["legal"],
+    suggestions: [
+      { name: "Review a contract", prompt: "Review the attached contract and point out clauses that need a lawyer." },
+    ],
     instructionsRooms: [INSTRUCTIONS_ROOMS.legal],
   }),
   aiProjectMock({

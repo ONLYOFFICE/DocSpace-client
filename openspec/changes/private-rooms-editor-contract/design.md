@@ -854,6 +854,17 @@ removed once it confirms the editor does not need them. The list of
 questions to the Document Server team in the document of 2026-11-02 was
 not checked on the server.
 
+### Release stand check of 2026-11-06
+
+The owner's SaaS stand `tests.onlyoffice.io` (DocSpace `4.1.0.12300`) uses
+Document Server `10.0.3.19` at `doc-eu.onlyoffice.io`, which serves
+`sdkjs/common/crypto/onlyoffice-crypto.js`: HPKE through `@hpke/common`
+1.10.1, `VERSION_HPKE_WRAP = 2`, `VERSION_IDENTITY = 2`, the DSE3 header
+and chunk constants (`DSE3_FIXED_HEADER_SIZE`, `DSE3_CHUNK_PLAINTEXT_SIZE`,
+`DSE3_FLAG_HAS_ENCRYPTED_NAME`); no version-3 reader. `GET files/settings`
+answers `docServiceEncryptionSupported: true`. Read-only; no file was opened
+in the editor during the check.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -1291,7 +1302,9 @@ BLOCKED or "after <x>" waits.
 - Which build of the crypto library does each Document Server release ship,
   and when does a build that reads and writes DSE3 version 3 ship? Owner:
   Document Server team, together with
-  `private-rooms-dse3-header-authentication`.
+  `private-rooms-dse3-header-authentication`. The SaaS Document Server
+  10.0.3.19 serves a library with wrap and identity version 2 and no
+  version-3 reader ("Release stand check of 2026-11-06").
 - Does the community or enterprise edition carry the crypto add-on, or only
   the developer edition, and from which release? This sets the minimum
   Document Server version. Owner: Document Server team. The backend team's

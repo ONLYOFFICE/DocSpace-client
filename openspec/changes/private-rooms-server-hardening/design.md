@@ -672,6 +672,19 @@ six encrypted files, no subfolder); no data was changed:
   none of them is about a private room, so the socket recipients of 10.2
   stay a stand check. `db5f85f317` renames wallet texts, nothing for
   private rooms.
+- `c866c055e1` (later the same day) adds the Private section. It is
+  recorded in `private-rooms-server-section` (design.md, "Landed on
+  2026-11-06"). For this change:
+  - private rooms keep the Rooms root, so every rule here keyed on
+    `VirtualRooms` still applies to them, among them the CopyTo refusal on
+    their subfolders (`FileSecurity.cs:2055-2058`);
+  - the commit leaves two items open, as it says itself: a subfolder of a
+    private room still goes to Trash on deletion, and a private room or its
+    subfolder can still be added to Favorites. Neither is planned here;
+  - the backend's note of the same day says a public room and a
+    form-filling room "are refused" as private. The code at `c866c055e1`
+    refuses neither at creation (`FileStorageService.cs:666-690`,
+    `:1220-1230`), so task 12.8 stays open.
 
 ## Goals / Non-Goals
 

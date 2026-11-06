@@ -130,3 +130,20 @@ export const getCopyTargetRoomTypes = (
 
   return types;
 };
+
+/**
+ * Which room sections the selector lists. A caller that names them keeps its
+ * choice; otherwise they follow the apps, as the sidebar does: a section
+ * switched off in Settings -> Apps is not offered, so nothing can be moved,
+ * copied or restored into a room - or a new room - nobody can open.
+ */
+export const getRoomSectionTreeFolders = (
+  isInstalled: (id: string) => boolean,
+  {
+    withRoomsTreeFolder,
+    withFormsTreeFolder,
+  }: { withRoomsTreeFolder?: boolean; withFormsTreeFolder?: boolean },
+) => ({
+  withRoomsTreeFolder: withRoomsTreeFolder ?? isInstalled("ai-rooms"),
+  withFormsTreeFolder: withFormsTreeFolder ?? isInstalled("ai-forms"),
+});

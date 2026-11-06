@@ -581,7 +581,9 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
 
   // user is nullable on UserStore; the old JS read the
   // flags unchecked (crash when logged out), the `!` keeps that behavior.
-  const isAdmin = user!.isOwner || user!.isAdmin;
+  // Spec: private-rooms/room-membership, "Leaving a private room ends its listing"
+  const keepsReading =
+    (user!.isOwner || user!.isAdmin) && room.private !== true;
   const isRoot = self.selectedFolderStore.isRootFolder;
 
   const successText = isOwner
@@ -596,7 +598,7 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
       }) as Promise<unknown>
     )
       .then(() => {
-        if (!isAdmin) {
+        if (!keepsReading) {
           if (!isRoot) {
             const filter = RoomsFilter.getDefault();
             const list = isPrivateRoomsRoute(window.DocSpace.location.pathname)

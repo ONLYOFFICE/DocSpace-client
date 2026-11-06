@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { RoomsType } from "@docspace/shared/enums";
 
-import { getCopyTargetRoomTypes } from "../utils";
+import { getCopyTargetRoomTypes, getRoomSectionTreeFolders } from "../utils";
 
 const VECTORIZED = [".txt", ".md", ".docx", ".pdf"];
 
@@ -61,5 +61,42 @@ describe("getCopyTargetRoomTypes", () => {
       true,
     );
     expect(types).toEqual(ordinary);
+  });
+});
+
+// Bug 84825: Move to / Copy listed Rooms with its "New room" while the Rooms
+// app was switched off, so a file could go into a room nobody can open.
+describe("getRoomSectionTreeFolders", () => {
+  const installedExcept =
+    (...off: string[]) =>
+    (id: string) =>
+      !off.includes(id);
+
+  it("lists Rooms and Forms while both apps are on", () => {
+    expect(getRoomSectionTreeFolders(installedExcept(), {})).toEqual({
+      withRoomsTreeFolder: true,
+      withFormsTreeFolder: true,
+    });
+  });
+
+  it("drops Rooms while the Rooms app is off", () => {
+    expect(getRoomSectionTreeFolders(installedExcept("ai-rooms"), {})).toEqual(
+      { withRoomsTreeFolder: false, withFormsTreeFolder: true },
+    );
+  });
+
+  it("drops Forms while the Forms app is off", () => {
+    expect(getRoomSectionTreeFolders(installedExcept("ai-forms"), {})).toEqual(
+      { withRoomsTreeFolder: true, withFormsTreeFolder: false },
+    );
+  });
+
+  it("keeps what the caller asked for", () => {
+    expect(
+      getRoomSectionTreeFolders(installedExcept("ai-rooms", "ai-forms"), {
+        withRoomsTreeFolder: true,
+        withFormsTreeFolder: true,
+      }),
+    ).toEqual({ withRoomsTreeFolder: true, withFormsTreeFolder: true });
   });
 });

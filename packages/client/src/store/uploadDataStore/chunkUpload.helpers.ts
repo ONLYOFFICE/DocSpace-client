@@ -224,11 +224,12 @@ export async function asyncUploadImpl(
 ) {
   const { operationId, file, indexOfFile, path, length } = chunkData;
 
-  if (
+  const isUploadStopped = () =>
     self.uploaded ||
     !self.files.some((f) => f.file === file) ||
-    self.files[indexOfFile].cancel
-  ) {
+    self.files[indexOfFile]?.cancel;
+
+  if (isUploadStopped()) {
     return resolve();
   }
 
@@ -255,11 +256,7 @@ export async function asyncUploadImpl(
         ].isFinished = true;
       }
 
-      if (
-        self.uploaded ||
-        !self.files.some((f) => f.file === file) ||
-        self.files[indexOfFile]?.cancel
-      ) {
+      if (isUploadStopped()) {
         return resolve();
       }
 
@@ -316,11 +313,7 @@ export async function asyncUploadImpl(
         }
       }
     } catch (error) {
-      if (
-        self.uploaded ||
-        !self.files.some((f) => f.file === file) ||
-        self.files[indexOfFile]?.cancel
-      ) {
+      if (isUploadStopped()) {
         return resolve();
       }
 
@@ -375,7 +368,8 @@ export async function uploadFileChunksImpl(
       isActive: false,
       isFinished: false,
       isFinalize: true,
-      onUpload: () => finalizeUploadSession(folderId, sessionId),
+      onUpload: () =>
+        finalizeUploadSession(folderId, sessionId, controller.signal),
     });
 
     if (!self.asyncUploadObj[operationId]) {

@@ -397,6 +397,53 @@ describe("UploadDataStore.asyncUpload — cancellation mid-chunk", () => {
     expect(store.files[0].error).toBeFalsy();
     expect(toastr.info).toHaveBeenCalledWith("Common:CancelUpload");
   });
+
+  it("aborts the finalize request in flight and does not fail the cancelled file", async () => {
+    const { store } = createTestUploadDataStore();
+    const browserFile = makeBrowserFile("cancelled.docx", 1024);
+    const entry = makeUploadFile({
+      uniqueId: "cancel-finalize",
+      file: browserFile,
+      toFolderId: 1,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+
+    vi.mocked(filesApi.startUploadSession).mockResolvedValue({
+      id: "sess-1",
+      path: [],
+    } as never);
+    vi.mocked(filesApi.uploadChunkParallel).mockResolvedValue({
+      uploaded: false,
+      id: null,
+      file: null,
+    } as never);
+    let finalizeSignal: AbortSignal | undefined;
+    vi.mocked(filesApi.finalizeUploadSession).mockImplementation(
+      (_folderId, _sessionId, signal) =>
+        new Promise((_res, rej) => {
+          finalizeSignal = signal;
+          signal?.addEventListener("abort", () =>
+            rej(new Error("canceled")),
+          );
+        }) as never,
+    );
+
+    const done = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(finalizeSignal).toBeDefined());
+    expect(finalizeSignal?.aborted).toBe(false);
+
+    store.cancelUpload();
+    await done;
+
+    expect(finalizeSignal?.aborted).toBe(true);
+    expect(store.files[0].cancel).toBe(true);
+    expect(store.files[0].action).toBe("upload");
+    expect(store.files[0].error).toBeFalsy();
+    expect(toastr.info).toHaveBeenCalledWith("Common:CancelUpload");
+  });
 });
 
 describe("UploadDataStore.uploadFileChunks + asyncUpload — full cycle", () => {
@@ -466,7 +513,7 @@ describe("UploadDataStore.uploadFileChunks + asyncUpload — full cycle", () => 
     await done;
 
     expect(vi.mocked(filesApi.finalizeUploadSession).mock.calls).toEqual([
-      [42, "sess-1"],
+      [42, "sess-1", expect.any(AbortSignal)],
     ]);
     expect(journal).toEqual(["finalize", "resolved"]);
 

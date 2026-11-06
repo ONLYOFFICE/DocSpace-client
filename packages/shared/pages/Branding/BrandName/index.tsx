@@ -62,6 +62,7 @@ export const BrandName = ({
   showNotAvailable,
   isSettingPaid,
   standalone,
+  onPaidBadgeClick,
   onSave,
   isBrandNameLoaded,
   defaultBrandName,
@@ -150,6 +151,7 @@ export const BrandName = ({
             className={classNames(styles.paidBadge, "paid-badge")}
             fontWeight="700"
             label={t("Common:Paid")}
+            onClick={onPaidBadgeClick}
             isPaidBadge
             backgroundColor={
               isBase

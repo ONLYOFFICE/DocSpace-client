@@ -39,7 +39,6 @@ import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touc
 
 import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
@@ -48,8 +47,7 @@ import { TableGroupMenu } from "@onlyoffice/apps-ui-kit/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
-import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 import { DeviceType } from "@docspace/shared/enums";
 
 import TariffBar from "SRC_DIR/components/TariffBar";
@@ -104,7 +102,6 @@ const SectionHeaderContent = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { isBase } = useTheme();
 
   const isOAuth = location.pathname.includes("oauth");
 
@@ -348,16 +345,9 @@ const SectionHeaderContent = (props) => {
             <div className="settings-section_header">
               <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
-                <Badge
-                  backgroundColor={
-                    isBase
-                      ? globalColors.favoritesStatus
-                      : globalColors.favoriteStatusDark
-                  }
-                  label={t("Common:Paid")}
+                <PaidBadge
                   fontWeight="700"
                   className="settings-section_badge"
-                  isPaidBadge
                 />
               ) : (
                 ""

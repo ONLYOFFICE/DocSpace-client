@@ -16,7 +16,7 @@
 ## 4. Key and list fixes
 
 - [x] 4.1 Auto-lock: drop the 24-hour clamp from `getAutoLockTimeoutSeconds` so the preset check decides (design decision 3). Verify: a case "Tampered auto-lock value" writing "999999" straight to storage, reading 0, in `packages/shared/services/encryption/__tests__/auto-lock-preference.test.ts`; `cd packages/shared && pnpm exec vitest run services/encryption`
-- [ ] 4.2 Sort: re-sort by the resolved titles, folders first, when a private room's list is sorted by name and no query is set (design decision 4). Verify: cases "Sort by name" without a query (decrypted order) and outside a private room (server order kept) in `filesStore/__tests__/FilesStore.clientSearch.test.ts`; `cd packages/client && pnpm exec vitest run src/store/filesStore`
+- [x] 4.2 Sort: re-sort by the resolved titles, folders first, when a private room's list is sorted by name and no query is set (design decision 4). Verify: cases "Sort by name" without a query (decrypted order) and outside a private room (server order kept) in `filesStore/__tests__/FilesStore.clientSearch.test.ts`; `cd packages/client && pnpm exec vitest run src/store/filesStore`
 - [ ] 4.3 Form from a file: return from the Alt+Shift+O hotkey in a private room (design decision 5). Verify: a case "Form from a file" (no picker opened in a private room, opened elsewhere) next to `HOCs/__tests__/withHotkeys.upload.test.tsx`; `cd packages/client && pnpm exec vitest run src/HOCs`
 
 ## 5. Editor and SDK

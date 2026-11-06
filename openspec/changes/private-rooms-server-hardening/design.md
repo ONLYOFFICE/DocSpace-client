@@ -909,6 +909,25 @@ six encrypted files, no subfolder); no data was changed:
     the beta needs an honest warning now. A warning is cheaper than a
     silent loss and does not foreclose the later option.
 
+29. **The editor configuration hides the AI tools for an encrypted file
+    (found on the release stand, 2026-11-06).** The editor's AI Tools tab
+    was shown for an encrypted file on `tests.onlyoffice.io`; the doceditor
+    skips the plugin's initialisation, so no portal model is connected,
+    but the plugin's own settings let the user add a provider key and send
+    the clear text from the browser. The portal already tells the editor
+    to hide its AI tools: `AiConfigDto.Disabled`
+    (`products/ASC.Files/Core/ApiModels/ResponseDto/EditorConfigDto.cs:370-385`),
+    written into `customization.ai` by `CustomizationConfig.GetAIConfigAsync`
+    (`Configuration.cs:935-948`) when the portal's AI access setting is off
+    or the caller is an anonymous visitor; `editorConfig.plugins` carries an
+    empty `pluginsData` (`PluginsConfigDto`, `EditorConfigDto.cs:231-266`),
+    the AI plugin being the Document Server's own. The server sets the flag
+    for an encrypted file as well (task 16.1), and the client mirrors it
+    (task 16.2). Alternative: hide the plugin from the doceditor by
+    rewriting the configuration it receives; rejected, the configuration
+    is signed by the server and the flag belongs with the other
+    per-file customization getters there.
+
 ## Risks / Trade-offs
 
 - [Backend schedule] → every server task is independent, and each client

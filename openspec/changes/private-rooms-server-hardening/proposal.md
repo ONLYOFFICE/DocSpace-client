@@ -73,6 +73,12 @@ the file to change so the backend team can pick them up; nothing here is
   a portal backup carries neither the file keys nor the users' key
   records, so a restore loses the content of private rooms (decision 9,
   task group 15).
+- Found on the release stand on 2026-11-06: the editor shows its AI Tools
+  tab for an encrypted file, with the plugin's own provider settings. The
+  editor configuration already carries a switch that hides the AI tools
+  (`customization.ai.disabled`, set today for a portal without AI and for
+  anonymous visitors); the server sets it for an encrypted file as well
+  (task group 16, design decision 29).
 
 ## Capabilities
 
@@ -112,7 +118,8 @@ None.
   private-room event recipients, the public keys of prospective members,
   sign-in links kept on a key save, no links on a private room, refused
   room-level copies, a Document Server that encrypts, a neutral audit
-  trail and a backup that excludes the private-room keys.
+  trail, a backup that excludes the private-room keys and an editor
+  configuration that hides the AI tools for an encrypted file.
 
 ## Impact
 

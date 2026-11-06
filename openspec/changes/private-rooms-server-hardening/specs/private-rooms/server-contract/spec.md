@@ -298,6 +298,17 @@ The server SHALL NOT include the wrapped file keys of private rooms or the users
 - **WHEN** a portal with a private room is restored from a backup
 - **THEN** the private room and its encrypted files are present, no member can open them, and no key import restores that access
 
+### Requirement: Editor configuration hides AI tools for an encrypted file
+The server SHALL answer the editor configuration of an encrypted file with the AI tools disabled, whatever the portal's AI access setting, so the editor shows no AI tools for it; a plain file keeps the portal-wide answer.
+
+#### Scenario: Encrypted file
+- **WHEN** a member opens the editor configuration of an encrypted file on a portal with AI switched on
+- **THEN** the configuration says the AI tools are disabled
+
+#### Scenario: Plain file
+- **WHEN** the same member opens the editor configuration of a plain file on that portal
+- **THEN** the configuration says the AI tools are enabled
+
 ## MODIFIED Requirements
 
 ### Requirement: File access entries write

@@ -251,13 +251,29 @@ browser, no data changed:
   - the file's context menu offers Select, Edit, Preview, Move or copy,
     Download, File info and Delete, with no rename, links, duplicate or
     AI entries, and the History tab lists no file-keys entry.
-- Not run: the owner change. The Change room owner panel admits room
-  administrators and portal administrators only ("No members found") and
-  the second user is of the User type; the owner changes the account type
-  or creates a key for an administrator account, then the flow is run.
-  The member's side (the letter wording, opening the room, the download
-  that decrypts, the loss of access after the removal) is the owner's to
-  check in the member's browser.
+- The owner change: the Change room owner panel admits room
+  administrators and portal administrators only ("No members found" while
+  the second user was of the User type), so the owner had the account
+  raised to Room admin in Contacts; the panel then listed the user, and
+  "Assign Owner" with "Leave the room" ticked transferred the room and
+  left it ("You have left the room"). The client found no missing key to
+  wrap, the server accepted the transfer, and the leave revoked the old
+  owner's keys on the server ("File keys in the room "Private room"
+  removed for: <old owner>", then "Deleted user: <old owner>"). Afterwards
+  the room and its file answer the portal owner 403, who is no longer a
+  member, and the Private list shows the other room only.
+- Two observations for the client and the server:
+  - the room's row stayed in the Private list after the owner change that
+    left the room, until the page was reloaded; the leave through the
+    room's own "Leave the room" action was not run for comparison
+    (`private-rooms/sidebar-section`, "Scope holds on every request of a
+    list", the refill after leaving);
+  - the audit row of the owner change carries an empty action text next
+    to the revocation and the leave rows (server, `DocumentsActionMapper`
+    or the room-owner-changed resource, to check).
+- The member's side (the letter wording, opening the room as the new
+  owner, the download that decrypts, the reopen of the saved document)
+  is the owner's to check in the member's browser.
 - A deep link to a private room without its `/filter` segment
   (`/private/9064440`) was rewritten by the client to
   `/private/undefined/filter?...` and showed the Private list instead of

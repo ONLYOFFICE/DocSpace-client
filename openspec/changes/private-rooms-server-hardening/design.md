@@ -603,10 +603,14 @@ six encrypted files, no subfolder); no data was changed:
   removal revokes them on the server (`RoomFileKeysRevoked` in the audit
   trail, the file's public keys without the member, `access/missing`
   naming the file for them), and a second invitation re-keys them. The
-  owner change (decision 1, task 2.2) could not be run: the panel admits
-  room and portal administrators only, and the second user is of the
-  User type. Details in `private-rooms-beta-release`, design.md "Release
-  stand check".
+  owner change (decision 1, task 2.2) ran once the second user was made a
+  room administrator: nothing to wrap, the transfer accepted, and the
+  leave that followed revoked the old owner's keys on the server and
+  closed the room to them (403 on the room and its file for the portal
+  owner outside it, decision 7's bypass exclusion in the active section
+  too). The audit row of the owner change has an empty action text (to
+  check on the server). Details in `private-rooms-beta-release`,
+  design.md "Release stand check".
 
 ## Goals / Non-Goals
 

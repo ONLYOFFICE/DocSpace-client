@@ -155,8 +155,8 @@ const EditorBody = ({
   // file; shown in place of the editor.
   const [frameError, setFrameError] = React.useState<string | null>(null);
 
-  // Only the original form of a form-filling room open for editing: the editor sets this mode for PDF forms of such
-  // rooms alone, and filled or completed forms are not open for editing.
+  // Only the original form of a form-filling room open for editing: the server sets trackFormFieldChanges for such
+  // forms alone, unless the editors are Community Edition, and filled or completed forms are not open for editing.
   const {
     takeSnapshot: takeFieldsSnapshot,
     reportFieldChanges,

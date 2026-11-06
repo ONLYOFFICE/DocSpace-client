@@ -408,7 +408,14 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "Alt+Shift+o",
       () => {
-        if (folderWithNoAction || isFormRoom || isParentFolderFormRoom) return;
+        // Spec: private-rooms/file-operations, "Create hotkeys respect keys"
+        if (
+          folderWithNoAction ||
+          isFormRoom ||
+          isParentFolderFormRoom ||
+          isPrivacyFolder
+        )
+          return;
 
         if (isMobile) {
           toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));

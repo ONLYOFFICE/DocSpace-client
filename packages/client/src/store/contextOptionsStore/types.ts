@@ -53,6 +53,7 @@ export type TFilesStore = {
   roomsForDelete: unknown[];
   roomsForRestore: unknown[];
   isThirdPartySelection: boolean;
+  isRoomsSectionOff: boolean;
   isFiltered: boolean;
   allFilesIsEditing: boolean;
   canConvertSelected: boolean;

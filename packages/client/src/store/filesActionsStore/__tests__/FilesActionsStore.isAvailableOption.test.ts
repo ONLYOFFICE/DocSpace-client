@@ -132,6 +132,17 @@ describe("FilesActionsStore.isAvailableOption — characterization", () => {
     ).toBe(true);
   });
 
+  it("create-room: hidden while the Rooms app is off (bug 84823)", () => {
+    expect(
+      createTestFilesActionsStore({
+        filesStore: {
+          isRoomsSectionOff: true,
+          selection: [sec({ CreateRoomFrom: true })],
+        },
+      }).isAvailableOption("create-room"),
+    ).toBe(false);
+  });
+
   it("create-group / add-to-group / remove-from-group gating", () => {
     const on = {
       filesSettingsStore: { organizeRoomsGrouping: true },

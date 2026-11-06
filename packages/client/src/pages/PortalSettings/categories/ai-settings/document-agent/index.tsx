@@ -48,7 +48,6 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import type {
-  TDocumentAgentOutputLocation,
   TDocumentAgentReasoning,
   TDocumentAgentSettings,
   TDocumentAgentTaskLog,
@@ -68,8 +67,6 @@ type TDocumentAgentProps = {
   resetDocumentAgentSettings?: AISettingsStore["resetDocumentAgentSettings"];
 };
 
-/** Mirrors the agent's own ceilings; the service may only lower them. */
-const MAX_TASK_TIMEOUT_SECONDS = 7 * 24 * 3600;
 const BYTES_PER_MB = 1024 * 1024;
 
 
@@ -82,37 +79,22 @@ const asPositiveInt = (value: string): number | null => {
 };
 
 /** Text fields hold strings while being typed; the settings hold numbers. */
-type TDraft = Omit<
-  TDocumentAgentSettings,
-  "contextWindow" | "taskTimeoutSeconds" | "maxToolCalls" | "maxFileBytes"
-> & {
-  contextWindow: string;
-  taskTimeoutSeconds: string;
+type TDraft = Omit<TDocumentAgentSettings, "maxToolCalls" | "maxFileBytes"> & {
   maxToolCalls: string;
   maxFileMb: string;
 };
 
 const toDraft = (settings: TDocumentAgentSettings): TDraft => ({
   ...settings,
-  contextWindow: settings.contextWindow ? String(settings.contextWindow) : "",
-  taskTimeoutSeconds: String(settings.taskTimeoutSeconds),
   maxToolCalls: String(settings.maxToolCalls),
   maxFileMb: String(Math.round(settings.maxFileBytes / BYTES_PER_MB)),
 });
 
 const fromDraft = (draft: TDraft): TDocumentAgentSettings | null => {
-  const taskTimeoutSeconds = asPositiveInt(draft.taskTimeoutSeconds);
   const maxToolCalls = asPositiveInt(draft.maxToolCalls);
   const maxFileMb = asPositiveInt(draft.maxFileMb);
-  const contextWindow = draft.contextWindow === "" ? null : asPositiveInt(draft.contextWindow);
 
-  if (
-    taskTimeoutSeconds === null ||
-    taskTimeoutSeconds > MAX_TASK_TIMEOUT_SECONDS ||
-    maxToolCalls === null ||
-    maxFileMb === null ||
-    (draft.contextWindow !== "" && contextWindow === null)
-  ) {
+  if (maxToolCalls === null || maxFileMb === null) {
     return null;
   }
 
@@ -120,8 +102,6 @@ const fromDraft = (draft: TDraft): TDocumentAgentSettings | null => {
 
   return {
     ...rest,
-    contextWindow,
-    taskTimeoutSeconds,
     maxToolCalls,
     maxFileBytes: maxFileMb * BYTES_PER_MB,
   };
@@ -181,7 +161,7 @@ const DocumentAgentComponent = ({
     setDraft((prev) => (prev ? { ...prev, ...changes } : prev));
 
   const onText =
-    (field: "contextWindow" | "taskTimeoutSeconds" | "maxToolCalls" | "maxFileMb") =>
+    (field: "maxToolCalls" | "maxFileMb") =>
     (e: React.ChangeEvent<HTMLInputElement>) =>
       patch({ [field]: e.target.value });
 
@@ -227,16 +207,11 @@ const DocumentAgentComponent = ({
 
   const numberField = (
     label: string,
-    field: "contextWindow" | "taskTimeoutSeconds" | "maxToolCalls" | "maxFileMb",
+    field: "maxToolCalls" | "maxFileMb",
     hint: string,
-    placeholder?: string,
   ) => {
     const value = draft[field];
-    const hasError =
-      field === "contextWindow"
-        ? value !== "" && asPositiveInt(value) === null
-        : asPositiveInt(value) === null ||
-          (field === "taskTimeoutSeconds" && Number(value) > MAX_TASK_TIMEOUT_SECONDS);
+    const hasError = asPositiveInt(value) === null;
 
     return (
       <FieldContainer labelVisible isVertical labelText={label} removeMargin hasError={hasError}>
@@ -246,7 +221,6 @@ const DocumentAgentComponent = ({
           size={InputSize.base}
           scale
           value={value}
-          placeholder={placeholder}
           onChange={onText(field)}
           isDisabled={fieldsDisabled}
           hasError={hasError}
@@ -256,14 +230,6 @@ const DocumentAgentComponent = ({
       </FieldContainer>
     );
   };
-
-  const outputOptions = (
-    [
-      ["currentFolder", t("Common:DocumentAgentOutputCurrentFolder")],
-      ["resultsSubfolder", t("Common:DocumentAgentOutputResultsSubfolder")],
-      ["myDocuments", t("Common:DocumentAgentOutputMyDocuments")],
-    ] as [TDocumentAgentOutputLocation, string][]
-  ).map(([value, label]) => ({ value, label, dataTestId: `document-agent-output-${value}` }));
 
   const taskLogOptions = (
     [
@@ -329,22 +295,9 @@ const DocumentAgentComponent = ({
           <Text className={styles.hint}>{t("Common:DocumentAgentReasoningHint")}</Text>
         </FieldContainer>
 
-        {numberField(
-          t("Common:DocumentAgentContextWindow"),
-          "contextWindow",
-          t("Common:DocumentAgentContextWindowHint"),
-          t("Common:DocumentAgentContextWindowPlaceholder"),
-        )}
-
         <Text className={styles.sectionTitle} fontWeight={600}>
           {t("Common:DocumentAgentLimitsSection")}
         </Text>
-
-        {numberField(
-          t("Common:DocumentAgentTaskTimeout"),
-          "taskTimeoutSeconds",
-          t("Common:DocumentAgentTaskTimeoutHint"),
-        )}
         {numberField(
           t("Common:DocumentAgentMaxToolCalls"),
           "maxToolCalls",
@@ -359,24 +312,6 @@ const DocumentAgentComponent = ({
         <Text className={styles.sectionTitle} fontWeight={600}>
           {t("Common:DocumentAgentResultsSection")}
         </Text>
-
-        <FieldContainer
-          labelVisible
-          isVertical
-          labelText={t("Common:DocumentAgentOutputLocation")}
-          removeMargin
-        >
-          <RadioButtonGroup
-            name="document-agent-output"
-            orientation="vertical"
-            spacing="8px"
-            options={outputOptions}
-            selected={draft.outputLocation}
-            onClick={(e) => patch({ outputLocation: e.target.value as TDocumentAgentOutputLocation })}
-            isDisabled={fieldsDisabled}
-            dataTestId="document-agent-output-group"
-          />
-        </FieldContainer>
 
         <FieldContainer
           labelVisible
@@ -396,30 +331,6 @@ const DocumentAgentComponent = ({
           />
           <Text className={styles.hint}>{t("Common:DocumentAgentTaskLogHint")}</Text>
         </FieldContainer>
-
-        <Text className={styles.sectionTitle} fontWeight={600}>
-          {t("Common:DocumentAgentToolsSection")}
-        </Text>
-
-        <ToggleButton
-          className={styles.toggle}
-          label={t("Common:DocumentAgentShareSystemServers")}
-          isChecked={draft.shareSystemServers}
-          onChange={() => patch({ shareSystemServers: !draft.shareSystemServers })}
-          isDisabled={fieldsDisabled}
-          dataTestId="document-agent-share-servers-toggle"
-        />
-        <Text className={styles.hint}>{t("Common:DocumentAgentShareSystemServersHint")}</Text>
-
-        <ToggleButton
-          className={styles.toggle}
-          label={t("Common:DocumentAgentAllowWriteTools")}
-          isChecked={draft.allowWriteTools}
-          onChange={() => patch({ allowWriteTools: !draft.allowWriteTools })}
-          isDisabled={fieldsDisabled}
-          dataTestId="document-agent-write-tools-toggle"
-        />
-        <Text className={styles.hint}>{t("Common:DocumentAgentAllowWriteToolsHint")}</Text>
       </div>
 
       <div className={styles.buttonContainer}>

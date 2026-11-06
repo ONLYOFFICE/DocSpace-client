@@ -56,13 +56,8 @@ export const DOCUMENT_AGENT_DEFAULTS: TDocumentAgentSettings = {
   enabled: true,
   profileId: null,
   reasoning: "default",
-  contextWindow: null,
-  taskTimeoutSeconds: 1800,
   maxToolCalls: 150,
   maxFileBytes: 32 * 1024 * 1024,
-  outputLocation: "currentFolder",
-  shareSystemServers: false,
-  allowWriteTools: false,
   taskLog: "never",
 };
 

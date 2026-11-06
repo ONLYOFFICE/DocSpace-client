@@ -136,34 +136,21 @@ export type TDocumentAgentReasoning =
   | "high"
   | "max";
 
-/** Where the files the document agent delivers are saved. */
-export type TDocumentAgentOutputLocation =
-  | "currentFolder"
-  | "resultsSubfolder"
-  | "myDocuments";
-
 /** When the agent's task log is saved next to its results. */
 export type TDocumentAgentTaskLog = "never" | "onFailure" | "always";
 
 /**
  * Tenant settings of the document agent (Portal settings → AI settings →
  * Document Agent). The AI service reads them when it builds the agent's
- * request: the model and the limits go into `metadata.docagent`, the output
- * location picks the folder of the outputs endpoint.
+ * request: the model and the limits go into `metadata.docagent`.
  */
 export type TDocumentAgentSettings = {
   enabled: boolean;
   /** The profile the agent runs on; null means the chat's own model. */
   profileId: string | null;
   reasoning: TDocumentAgentReasoning;
-  /** The model's context window in tokens; null lets the agent guess. */
-  contextWindow: number | null;
-  taskTimeoutSeconds: number;
   maxToolCalls: number;
   maxFileBytes: number;
-  outputLocation: TDocumentAgentOutputLocation;
-  shareSystemServers: boolean;
-  allowWriteTools: boolean;
   taskLog: TDocumentAgentTaskLog;
 };
 

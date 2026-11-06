@@ -73,6 +73,7 @@ import {
   frameCallEvent,
 } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getSafeReturnUrl } from "@docspace/shared/utils/getSafeReturnUrl";
 import {
   FormFillingManageAction,
   StartFillingMode,
@@ -89,7 +90,6 @@ import {
   getCurrentDocumentVersion,
   getDocEditor,
   getFormsSectionFolderUrl,
-  getSafeReturnUrl,
   isFormRole,
   isFormRoomFile,
   setDocumentTitle,

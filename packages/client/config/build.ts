@@ -35,6 +35,14 @@
 
 import type { UserConfig } from "vite";
 
+const isSharedModule = (id: string) =>
+  /([\\/]packages[\\/]shared[\\/]|[\\/]@onlyoffice[\\/]apps-ui-kit[\\/])/.test(
+    id,
+  ) &&
+  !/[\\/]@onlyoffice[\\/]apps-ui-kit[\\/](dist[\\/]esm[\\/])?ai-agent[\\/]/.test(
+    id,
+  );
+
 export const getBuildConfig = (
   isProduction: boolean,
 ): UserConfig["build"] => ({
@@ -147,8 +155,11 @@ export const getBuildConfig = (
           },
           // Our shared package + @onlyoffice/apps-ui-kit (installed from npm,
           // so it lives under node_modules like any other dependency) reused
-          // across routes — one chunk instead of dozens of tiny per-component
-          // files (color-picker, slider, table, icon SVGs, …).
+          // across routes — grouped instead of dozens of tiny per-component
+          // files (color-picker, slider, table, icon SVGs, …). `shared` takes
+          // only what the entry needs (`$initial`), so it stays preloaded
+          // without the code of lazy pages; `shared-lazy` groups the rest by
+          // the set of lazy chunks that use it, merging subgroups below 20KB.
           // ui-kit's ai-agent subtree is excluded for the same reason as the
           // AI deps above: it statically imports @onlyoffice/ai-chat and is
           // itself only reached from lazy AI pages — captured here it would
@@ -161,14 +172,17 @@ export const getBuildConfig = (
           // source in the workspace.
           {
             name: "shared",
-            test: (id: string) =>
-              /([\\/]packages[\\/]shared[\\/]|[\\/]@onlyoffice[\\/]apps-ui-kit[\\/])/.test(
-                id,
-              ) &&
-              !/[\\/]@onlyoffice[\\/]apps-ui-kit[\\/](dist[\\/]esm[\\/])?ai-agent[\\/]/.test(
-                id,
-              ),
+            tags: ["$initial"],
+            test: isSharedModule,
             priority: 5,
+          },
+          {
+            name: "shared-lazy",
+            entriesAware: true,
+            entriesAwareMergeThreshold: 20_000,
+            minSize: 0,
+            test: isSharedModule,
+            priority: 4,
           },
         ],
       },

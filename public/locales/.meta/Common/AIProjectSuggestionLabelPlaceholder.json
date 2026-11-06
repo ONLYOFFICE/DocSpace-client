@@ -3,7 +3,7 @@
   "content": "Label shown in the chat",
   "content_en_sha1_hash": "d5bbd1015c4ad65f5968c1d9fe616e238391736d",
   "created_at": "2026-11-06T08:54:42.760Z",
-  "updated_at": "2026-11-06T10:16:22.225Z",
+  "updated_at": "2026-11-06T10:28:34.455Z",
   "comment": {
     "text": "Placeholder of the text field for a suggestion's short label, the text shown on the clickable chip in the project's empty AI chat. Describes what to enter, noun phrase.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/SuggestionDialog.tsx",
       "line_number": 118,
-      "context": "if (e.key === \"Enter\") {\n e.preventDefault();\n onSubmit();\n }\n }}\n placeholder={t(\"Common:AIProjectSuggestionLabelPlaceholder\")}\n isAutoFocussed\n hasError={nameTooLong}\n scale\n testId=\"ai-project-suggestion-name\"\n />",
+      "context": "if (e.key === \"Enter\") {\n e.preventDefault();\n onSubmit();\n }\n }}\n placeholder={t(\"Common:AIProjectSuggestionLabelPlaceholder\")}\n maxLength={AI_PROJECT_MAX_SUGGESTION_NAME_LENGTH}\n isAutoFocussed\n hasError={nameTooLong}\n scale\n testId=\"ai-project-suggestion-name\"",
       "module": "/packages/client"
     }
   ],

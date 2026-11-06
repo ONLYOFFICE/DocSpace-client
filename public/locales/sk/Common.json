@@ -219,7 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "Výzva vložená do poľa správy",
   "AIProjectSuggestions": "Návrhy",
   "AIProjectSuggestionsHint": "Rýchle výzvy ponúkané v prázdnom chate projektu. Najviac {{limit}} návrhov.",
-  "AIProjectTextTooLong": "Text je príliš dlhý. Maximálna dĺžka je {{limit}} znakov.",
+  "AIProjectTextTooLong": "Maximálna dĺžka je {{limit}} znakov.",
   "AIProjectRoomDescription": "Projekt, ktorý pre chaty svojich členov prepája model, inštrukčné miestnosti a znalostné miestnosti.",
   "AIProjectRoomTitle": "AI projekt",
   "AIProvider": "Poskytovateľ AI",

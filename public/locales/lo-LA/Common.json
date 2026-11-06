@@ -219,7 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "ຄຳສັ່ງທີ່ຖືກໃສ່ໃນຊ່ອງຂໍ້ຄວາມ",
   "AIProjectSuggestions": "ຄຳແນະນຳ",
   "AIProjectSuggestionsHint": "ຄຳສັ່ງດ່ວນທີ່ສະເໜີໃນການສົນທະນາທີ່ຫວ່າງເປົ່າຂອງໂຄງການ. ສູງສຸດ {{limit}} ຄຳແນະນຳ.",
-  "AIProjectTextTooLong": "ຂໍ້ຄວາມຍາວເກີນໄປ. ຄວາມຍາວສູງສຸດແມ່ນ {{limit}} ຕົວອັກສອນ.",
+  "AIProjectTextTooLong": "ຄວາມຍາວສູງສຸດແມ່ນ {{limit}} ຕົວອັກສອນ.",
   "AIProjectRoomDescription": "ໂຄງການທີ່ລວມຮູບແບບ, ຫ້ອງຄຳແນະນຳ ແລະ ຫ້ອງຄວາມຮູ້ ສຳລັບການສົນທະນາຂອງສະມາຊິກ.",
   "AIProjectRoomTitle": "ໂຄງການ AI",
   "AIProvider": "ຜູ້ໃຫ້ບໍລິການ AI",

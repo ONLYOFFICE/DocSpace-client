@@ -219,7 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "الطلب الذي يُدرج في حقل الرسالة",
   "AIProjectSuggestions": "الاقتراحات",
   "AIProjectSuggestionsHint": "طلبات سريعة تُعرض في دردشة المشروع الفارغة. حتى {{limit}} اقتراحات.",
-  "AIProjectTextTooLong": "النص طويل جدًا. الحد الأقصى للطول هو {{limit}} حرفًا.",
+  "AIProjectTextTooLong": "الحد الأقصى للطول هو {{limit}} حرفًا.",
   "AIProjectRoomDescription": "مشروع يربط نموذجًا وغرف تعليمات وغرف معرفة لدردشات أعضائه.",
   "AIProjectRoomTitle": "مشروع ذكاء اصطناعي",
   "AIProvider": "مُزَوِّد الذكاء الاصطناعي",

@@ -219,7 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "Εντολή που εισάγεται στο πεδίο μηνύματος",
   "AIProjectSuggestions": "Προτάσεις",
   "AIProjectSuggestionsHint": "Γρήγορες εντολές που προσφέρονται σε μια κενή συνομιλία του έργου. Έως {{limit}} προτάσεις.",
-  "AIProjectTextTooLong": "Το κείμενο είναι πολύ μεγάλο. Το μέγιστο μήκος είναι {{limit}} χαρακτήρες.",
+  "AIProjectTextTooLong": "Το μέγιστο μήκος είναι {{limit}} χαρακτήρες.",
   "AIProjectRoomDescription": "Ένα έργο που συνδυάζει ένα μοντέλο, δωμάτια οδηγιών και δωμάτια γνώσης για τις συνομιλίες των μελών του.",
   "AIProjectRoomTitle": "Έργο AI",
   "AIProvider": "Πάροχος AI",

@@ -219,7 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "Заявка, вмъквана в полето за съобщение",
   "AIProjectSuggestions": "Предложения",
   "AIProjectSuggestionsHint": "Бързи заявки, предлагани в празен чат на проекта. До {{limit}} предложения.",
-  "AIProjectTextTooLong": "Текстът е твърде дълъг. Максималната дължина е {{limit}} знака.",
+  "AIProjectTextTooLong": "Максималната дължина е {{limit}} знака.",
   "AIProjectRoomDescription": "Проект, който обединява модел, стаи с инструкции и стаи със знания за чатовете на своите членове.",
   "AIProjectRoomTitle": "ИИ проект",
   "AIProvider": "Поставчик на ИИ",

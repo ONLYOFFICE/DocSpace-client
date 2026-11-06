@@ -219,7 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "Prompt die in het berichtveld wordt ingevoegd",
   "AIProjectSuggestions": "Suggesties",
   "AIProjectSuggestionsHint": "Snelle prompts die in een lege projectchat worden aangeboden. Maximaal {{limit}} suggesties.",
-  "AIProjectTextTooLong": "De tekst is te lang. De maximale lengte is {{limit}} tekens.",
+  "AIProjectTextTooLong": "De maximale lengte is {{limit}} tekens.",
   "AIProjectRoomDescription": "Een project dat een model, instructiekamers en kenniskamers bundelt voor de chats van zijn leden.",
   "AIProjectRoomTitle": "AI-project",
   "AIProvider": "AI provider",

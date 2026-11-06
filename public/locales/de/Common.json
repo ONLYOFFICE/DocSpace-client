@@ -219,7 +219,7 @@
   "AIProjectSuggestionPromptPlaceholder": "In das Nachrichtenfeld eingefügter Prompt",
   "AIProjectSuggestions": "Vorschläge",
   "AIProjectSuggestionsHint": "Schnelle Prompts, die in einem leeren Projekt-Chat angeboten werden. Bis zu {{limit}} Vorschläge.",
-  "AIProjectTextTooLong": "Der Text ist zu lang. Die maximale Länge beträgt {{limit}} Zeichen.",
+  "AIProjectTextTooLong": "Die maximale Länge beträgt {{limit}} Zeichen.",
   "AIProjectRoomDescription": "Ein Projekt, das ein Modell, Anweisungsräume und Wissensräume für die Chats seiner Mitglieder verbindet.",
   "AIProjectRoomTitle": "KI-Projekt",
   "AIProvider": "KI-Anbieter",

@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-11-05T16:49:39.827Z",
+  "updated_at": "2026-11-06T08:56:14.600Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -115,7 +115,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 563,
+      "line_number": 667,
       "context": ") : null}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={project ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n type=\"submit\"\n isLoading={isSaving}",
       "module": "/packages/client"
     },
@@ -403,7 +403,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 638,
+      "line_number": 647,
       "context": "</div>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n label={isEdit ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n isLoading={isLoading}\n onClick={canStartKeySetup ? onRequestCreateKeys : onSave}",
       "module": "/packages/sdk"
     },

@@ -3,7 +3,7 @@
   "content": "Tags",
   "content_en_sha1_hash": "848eed0fbd5429f556b2982dec3ea87136e33e44",
   "created_at": "2025-05-19T21:30:49.252Z",
-  "updated_at": "2026-11-05T16:49:39.839Z",
+  "updated_at": "2026-11-06T08:56:14.617Z",
   "comment": {
     "text": "This is a label for a column header in a table, a section in an information panel, or a field for entering tags. It refers to keywords or labels associated with an item.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 507,
+      "line_number": 592,
       "context": "dataTestId=\"ai-project-title\"\n />\n </div>\n <TagInput\n t={t}\n title={`${t(\"Common:Tags\")}:`}\n tagHandler={tagHandler}\n setIsScrollLocked={() => {}}\n isDisabled={isSaving}\n dataTestId=\"ai-project-tags-input\"\n />",
       "module": "/packages/client"
     },
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 561,
+      "line_number": 570,
       "context": "</div>\n </div>\n \n <div className={styles.tagsSection}>\n <Text fontWeight={600} fontSize=\"13px\">\n {t(\"Common:Tags\")}:\n </Text>\n <TextInput\n type={InputType.text}\n scale\n size={InputSize.base}",
       "module": "/packages/sdk"
     },

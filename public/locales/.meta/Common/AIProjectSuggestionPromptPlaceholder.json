@@ -1,0 +1,29 @@
+{
+  "key_path": "AIProjectSuggestionPromptPlaceholder",
+  "content": "Prompt inserted into the message field",
+  "content_en_sha1_hash": "97d0955202734a0ed1b4a4fa205272d99fb56f9b",
+  "created_at": "2026-11-06T08:54:42.793Z",
+  "updated_at": "2026-11-06T08:56:21.950Z",
+  "comment": {
+    "text": "Placeholder of the multi-line field for a suggestion's prompt: the text put into the chat message input when the user clicks the chip. Describes what to enter, noun phrase.",
+    "is_auto": true,
+    "updated_at": "2026-11-06T08:56:21.950Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
+      "line_number": 485,
+      "context": "</div>\n <Textarea\n value={row.prompt}\n onChange={(e) => updateSuggestion(row.key, { prompt: e.target.value })}\n heightTextArea={64}\n placeholder={t(\"Common:AIProjectSuggestionPromptPlaceholder\")}\n hasError={row.invalid && !row.prompt.trim()}\n isDisabled={isSaving}\n dataTestId=\"ai-project-suggestion-prompt\"\n />\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

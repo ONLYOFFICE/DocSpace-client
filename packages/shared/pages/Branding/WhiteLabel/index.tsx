@@ -61,6 +61,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     isSettingPaid,
     showAbout,
     standalone,
+    onPaidBadgeClick,
     onSave,
     onRestoreDefault,
     isSaving,
@@ -215,6 +216,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
       <WhiteLabelHeader
         isSettingPaid={isSettingPaid}
         standalone={standalone}
+        onPaidBadgeClick={onPaidBadgeClick}
         onUseTextAsLogo={onUseTextAsLogo}
         isEmpty={isEmptyLogoText}
         logoTextWhiteLabel={logoTextWhiteLabel}

@@ -398,6 +398,8 @@ export const settingsNoAuth = {
           connectzoom: "/docspace/configuration/connect-zoom-docspace.aspx",
           creatingbackup:
             "/docspace/configuration/docspace-backup-restore-settings.aspx#creatingbackup_block",
+          customfilter:
+            "/docspace/administration/managing-files/docspace-managing-documents-files#managingdocuments_block:~:text=Enable%20custom%20filter",
           dataImport:
             "/docspace/configuration/docspace-data-import-settings.aspx",
           docspacefaq: "/docspace/faq.aspx",

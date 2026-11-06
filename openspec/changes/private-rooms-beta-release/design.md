@@ -223,6 +223,43 @@ browser, no data changed:
   private room becomes unopenable while the Document Server holds its
   session. Details in that change's design.md, "Release stand check of
   2026-11-06".
-- Still not run: every flow that needs a second user with a key
-  (invitation, owner change, revocation, letters): no other user of the
-  portal holds one.
+- With a second user holding a key ("User Test", `fenran@yandex.ru`, a
+  user of the User type, key created by the owner at 12:38), the member
+  flows from the owner's side, each checked through the API after the UI:
+  - an invitee without a key (a User-type account) is refused before the
+    grant: the invite result shows Common:EncryptedUploadNotSharedWith-style
+    wording ("Could not share encrypted files with ...: they have not set
+    up encryption keys yet") and the room's member list stays unchanged;
+  - the invitee with a key is added as Viewer and the file keys are
+    written for them at once ("File keys issued for ... to: <owner>,
+    <member>" in the audit trail, `access/missing` empty, both users in
+    the file's public keys);
+  - a role change (Viewer to Editor) keeps the keys ("appointed: Editor",
+    no revocation);
+  - removal through the Members panel shows the warning dialog and the
+    server revokes the keys: "File keys in the room "Private room" removed
+    for: <member>" in the audit trail, the file's public keys back to the
+    owner alone, `access/missing?userIds=<member>` naming the file;
+  - a second invitation re-keys the returning member (keys issued again,
+    `access/missing` empty);
+  - archiving moves the room under the Archive root, lists it under
+    Private → Archive, the client stays in the Private section, the
+    room reports Copy, CopyTo, Duplicate, IndexExport and UseChat false and
+    its file Copy and Duplicate false with Download true, the file's
+    public keys still answer; restoring puts it back under the Rooms root
+    and the empty Archive state offers "Go to Private";
+  - the file's context menu offers Select, Edit, Preview, Move or copy,
+    Download, File info and Delete, with no rename, links, duplicate or
+    AI entries, and the History tab lists no file-keys entry.
+- Not run: the owner change. The Change room owner panel admits room
+  administrators and portal administrators only ("No members found") and
+  the second user is of the User type; the owner changes the account type
+  or creates a key for an administrator account, then the flow is run.
+  The member's side (the letter wording, opening the room, the download
+  that decrypts, the loss of access after the removal) is the owner's to
+  check in the member's browser.
+- A deep link to a private room without its `/filter` segment
+  (`/private/9064440`) was rewritten by the client to
+  `/private/undefined/filter?...` and showed the Private list instead of
+  the room; the addresses the client builds carry `/filter`, so this is a
+  typed-address case only, noted for `private-rooms/sidebar-section`.

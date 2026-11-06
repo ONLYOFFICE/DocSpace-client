@@ -589,10 +589,24 @@ six encrypted files, no subfolder); no data was changed:
 - No other user of the portal holds a key (the candidates route answers
   nobody for the first thirty users), so the invitation, owner change and
   revocation flows and the letters were not exercised.
-- Not run: the API probes of the upload-session refusals (no encrypted
-  flag, a readable name), the abort through another folder and copy-as
-  (`cc60512acd`, `bd89a24dcd`); they write to the stand and wait for the
-  owner's go-ahead, or stay with the server suite that covers them.
+- Later the same day, with the owner's go-ahead, the API probes passed:
+  an upload session without the encrypted flag 403 ("Access denied"), a
+  readable name 400 ("Bad request. (Parameter 'fileName')"), an opaque
+  name opens, its cancel through another folder 404 with the session
+  kept and through its own folder 200, a second cancel 404; copy-as of an
+  encrypted file 403; a private room with `indexing: true` 400; an
+  external link on a private room 403. With a second user holding a key,
+  the member flows confirmed decisions 10, 17, 18 and 22 on the build:
+  the invitee without a key is left out before the grant (candidates
+  route), the invitee with a key gets the file keys at once
+  (`FileKeysSet` in the audit trail), a role change keeps them, the
+  removal revokes them on the server (`RoomFileKeysRevoked` in the audit
+  trail, the file's public keys without the member, `access/missing`
+  naming the file for them), and a second invitation re-keys them. The
+  owner change (decision 1, task 2.2) could not be run: the panel admits
+  room and portal administrators only, and the second user is of the
+  User type. Details in `private-rooms-beta-release`, design.md "Release
+  stand check".
 
 ## Goals / Non-Goals
 

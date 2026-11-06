@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
 
 import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
@@ -40,6 +41,11 @@ import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
 import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
 
 import styles from "./Styles.module.scss";
+
+const barStyle = {
+  "--public-room-bar-top-margin": "0",
+  "--public-room-bar-bottom-margin": "0",
+} as CSSProperties;
 
 // Spec: private-rooms/key-management, "Backup warns about private rooms"
 const PrivateRoomsBackupWarning = ({
@@ -59,6 +65,7 @@ const PrivateRoomsBackupWarning = ({
         headerText={t("Common:PrivateRoomsBackupWarningTitle")}
         bodyText={t("Common:PrivateRoomsBackupWarning")}
         dataTestId="private-rooms-backup-warning"
+        style={barStyle}
       />
     </div>
   );

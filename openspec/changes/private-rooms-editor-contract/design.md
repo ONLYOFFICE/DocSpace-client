@@ -821,6 +821,39 @@ and the key-pair list in the signed configuration (task 10.6) did not
 land. The same commit changed the private-room file-key contract
 (`private-rooms-server-hardening`, "Landed on 2026-11-05").
 
+### Reported by the backend team on 2026-11-05
+
+The backend developer's reply to the server document of 2026-11-02
+(recorded in `private-rooms-server-hardening`, design.md "Answered by the
+backend team on 2026-11-05") checked which Document Server images on their
+machine serve `sdkjs/common/crypto/onlyoffice-crypto.js`, the path
+`DocumentServiceEncryptionChecker` probes (D2). Reported, not re-run here:
+
+| Image | Version | Library |
+| --- | --- | --- |
+| `documentserver:latest` (Community) | 10.0.0-169 | no |
+| `4testing-documentserver-de:10.0.0.168` | 10.0.0-168 | yes |
+| `4testing-documentserver-de:10.0.0.158` | 10.0.0-158 | yes |
+| `4testing-documentserver:10.0.0.2` (Community) | 10.0.0-2 | no |
+| `documentserver-de:latest` | 9.3.1-10 | no |
+| `documentserver:9.4.0.1` | 9.4.0-129 | no |
+
+Docker Hub beyond these and the Enterprise images were not checked. Since
+`b562fc3fb1` a portal on an image without the library can neither create
+a private room (403) nor open an encrypted file (415), so if the library
+ships in the developer edition only, private rooms become an edition
+limitation that product has not accepted. The question to the Document
+Server team stands (Open Questions, "Does the community or enterprise
+edition carry the crypto add-on"), and gate item 0.1 of
+`private-rooms-beta-release` depends on it. For tests and development the
+server setting `files:docservice:encryption-assume-supported` skips the
+probe without adding the library. The reply keeps the stable key and base
+(task 6.2) and the key pairs in the signed configuration (task 10.6) with
+the Document Server team: the first is fixed together with it, the second
+removed once it confirms the editor does not need them. The list of
+questions to the Document Server team in the document of 2026-11-02 was
+not checked on the server.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -1261,7 +1294,11 @@ BLOCKED or "after <x>" waits.
   `private-rooms-dse3-header-authentication`.
 - Does the community or enterprise edition carry the crypto add-on, or only
   the developer edition, and from which release? This sets the minimum
-  Document Server version. Owner: Document Server team.
+  Document Server version. Owner: Document Server team. The backend team's
+  image check of 2026-11-05 ("Reported by the backend team") found the
+  library in the developer-edition images 10.0.0.158 and 10.0.0.168 only,
+  not in the Community images 10.0.0-2 and 10.0.0-169 nor in the published
+  9.x images.
 - Will the Document Server publish a capability signal (health check or
   settings) to replace the library-path probe? Owner: Document Server team.
 - Role-based filling in a private virtual data room: does the encrypted

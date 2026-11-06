@@ -39,9 +39,8 @@
   margin-inline-start: 24px;
 }
 
-// The learn-more link above keeps its own bottom margin, the bar's own
-// margins are switched off, and the wrapper sets the gap to the modules.
+// The bar's own margins are switched off; each page sets the gaps around
+// the wrapper through the class it passes.
 .privateRoomsWarning {
-  margin: 0 0 20px;
   max-width: 700px;
 }

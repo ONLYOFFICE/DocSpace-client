@@ -35,6 +35,7 @@
 
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
 
@@ -50,15 +51,18 @@ const barStyle = {
 // Spec: private-rooms/key-management, "Backup warns about private rooms"
 const PrivateRoomsBackupWarning = ({
   isVisible = false,
+  className,
 }: {
   isVisible?: boolean;
+  /** The page's own margins around the bar. */
+  className?: string;
 }) => {
   const { t } = useTranslation(["Common"]);
 
   if (!isVisible) return null;
 
   return (
-    <div className={styles.privateRoomsWarning}>
+    <div className={classNames(styles.privateRoomsWarning, className)}>
       <PublicRoomBar
         barIsVisible
         iconName={CatalogPrivateReactSvgUrl}

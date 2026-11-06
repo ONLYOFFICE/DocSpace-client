@@ -566,7 +566,10 @@ const ManualBackup = ({
           </Link>
         ) : null}
       </div>
-      <PrivateRoomsBackupWarning isVisible={showPrivateRoomsWarning} />
+      <PrivateRoomsBackupWarning
+        isVisible={showPrivateRoomsWarning}
+        className={styles.privateRoomsNotice}
+      />
 
       <div className={styles.modules}>
         <div

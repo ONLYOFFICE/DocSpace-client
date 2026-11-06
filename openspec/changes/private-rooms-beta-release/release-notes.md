@@ -75,6 +75,13 @@ server stores and indexes them in the clear and shows them to the room's
 members; letters, pushes and the audit trail name a private room "Private
 room" to everyone else.
 
+AI is not available in private rooms or on encrypted files: no AI chat in
+the room or the section, no AI in the editor for an encrypted file, no
+vectorization and no AI agents. The server has no clear text to work with,
+and every AI path of the portal would carry it through the portal. Kept by
+decision of 2026-11-06; the options for a later integration are recorded
+in `private-rooms-ai-integration`.
+
 ## Editors
 
 - **Document Server build:** not named yet (beta gate item 0.1, left open by

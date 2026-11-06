@@ -39,6 +39,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 import { getCategoryType } from "@docspace/shared/utils/common";
+import componentLoader from "@docspace/shared/utils/component-loader";
 import { CategoryType } from "@docspace/shared/constants";
 import { Consumer } from "@onlyoffice/apps-ui-kit/utils";
 import type { Nullable } from "@docspace/shared/types";
@@ -62,7 +63,6 @@ import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
-import ProfileSectionBodyContent from "../../Profile/Section/Body";
 
 import useProfileBody, {
   type UseProfileBodyProps,
@@ -72,6 +72,10 @@ import useFiles, { type UseFilesProps } from "../Hooks/useFiles";
 import OformsStore from "SRC_DIR/store/OformsStore";
 import AiProjectViewConnected from "SRC_DIR/pages/AiProjects/AiProjectView";
 import EmptyAiRoomsContainerConnected from "SRC_DIR/components/EmptyContainer/EmptyAiRoomsContainer";
+
+const ProfileSectionBodyContent = React.lazy(() =>
+  componentLoader(() => import("../../Profile/Section/Body")),
+);
 
 // Every prop of the project view is injected.
 const AiProjectView = AiProjectViewConnected as unknown as React.FC;
@@ -498,7 +502,9 @@ const View = ({
               currentView={currentView}
             />
           ) : currentView === "profile" ? (
-            <ProfileSectionBodyContent />
+            <React.Suspense fallback={null}>
+              <ProfileSectionBodyContent />
+            </React.Suspense>
           ) : isAiProjectRoomRoot && !isLoading ? (
             <AiProjectView />
           ) : isAiRoomsOff && !isLoading ? (

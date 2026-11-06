@@ -12,7 +12,7 @@
 
 ## 3. Integration
 
-- [ ] 3.1 Pre-push gate (`npm --prefix ./common/tests run test:lefthook`, `pnpm nx run-many -t tsc lint test` over the six packages) and `npx -y @fission-ai/openspec@latest validate --all --strict` (`OPENSPEC_TELEMETRY=0`) green; then record in `private-rooms-invite-atomic-rewrap` 5.1 that the SDK private folder is fully green again. Verify: the gate output and the validate summary
+- [x] 3.1 Pre-push gate (`npm --prefix ./common/tests run test:lefthook`, `pnpm nx run-many -t tsc lint test` over the six packages) and `npx -y @fission-ai/openspec@latest validate --all --strict` (`OPENSPEC_TELEMETRY=0`) green; then record in `private-rooms-invite-atomic-rewrap` 5.1 that the SDK private folder is fully green again. Verify: the gate output and the validate summary. Done 2026-11-06: `common/tests` 61 passed and 3 skipped, `nx run-many -t tsc lint test` green over the six packages, `validate --all --strict` 21 of 21; recorded in `private-rooms-invite-atomic-rewrap` 5.1, now ticked
 
 ## Workflow follow-up
 

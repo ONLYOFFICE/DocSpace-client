@@ -53,8 +53,12 @@ The change MUST NOT be applied until all of the following hold:
 3. Archived: `private-rooms-sdk-gating-and-parity`, `private-rooms-ux-gaps`,
    `private-rooms-remove-dead-api-calls` and `private-rooms-spec-drift-fixes`.
 4. `private-rooms-server-hardening` items merged on the server:
-   - always: owner-change hand-over, availability rule, metadata guards,
-     title validation, the e-mail title, and the account-link fix of 12.1;
+   - always: owner-change hand-over, metadata guards, title validation,
+     the e-mail title, and the account-link fix of 12.1 (all merged by
+     2026-11-05); the availability rule only if product decides on one
+     (`private-rooms-server-hardening` decision 1; the server added none
+     and the portal setting of prerequisite 8 is the availability control
+     of this change);
    - if the launch scope is B2B: recovery and offboarding as well.
 5. External penetration test performed on the crypto core and the private
    room flows, with the summary published (stashed task #69).
@@ -64,6 +68,12 @@ The change MUST NOT be applied until all of the following hold:
 8. The portal setting for private rooms is merged on the server release
    branch, and its JSON name, payload, write route and defaults have been read
    in `../server` through CodeGraph.
+9. Backup and restore of private rooms decided and done
+   (`private-rooms-server-hardening` decision 9 and task group 15): either
+   the file keys and the users' key records survive a portal restore, or
+   the loss is an accepted limitation written into the release notes and
+   shown in the backup settings. Found by the backend team on 2026-11-05:
+   today a restored portal cannot open the files of its private rooms.
 
 ## Capabilities
 

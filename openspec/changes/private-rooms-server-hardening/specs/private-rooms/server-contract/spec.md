@@ -291,6 +291,13 @@ The server SHALL show the title of a private room, the titles of its folders and
 - **WHEN** an administrator reads the audit trail for events of a room without the private setting
 - **THEN** its title is shown
 
+### Requirement: Backup excludes private-room keys
+The server SHALL NOT include the wrapped file keys of private rooms or the users' encryption key records in a portal backup, and a restore SHALL NOT keep the ids of files and users. A restored portal therefore holds the encrypted files of its private rooms without a key that opens them.
+
+#### Scenario: Portal restored from a backup
+- **WHEN** a portal with a private room is restored from a backup
+- **THEN** the private room and its encrypted files are present, no member can open them, and no key import restores that access
+
 ## MODIFIED Requirements
 
 ### Requirement: File access entries write

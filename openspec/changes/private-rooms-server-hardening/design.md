@@ -860,6 +860,21 @@ replaces a read.
     exist as a private room whose chat refuses; rejected by the server as
     a useless object.
 
+28. **A restore loses the content of private rooms, and the backup pages
+    say so (owner, 2026-11-06, proposal decision 9).** The backup keeps
+    excluding `files_file_keys` and the `e2e` records of `account_links`,
+    and the client warns on the backup and restore pages while private
+    rooms are available, and in the restore confirmation, that a restored
+    portal cannot open the files of its private rooms (task 15.2); the
+    release notes and the release gate carry the limitation (task 15.3).
+    Alternative: back both tables up with the original ids kept next to
+    each row, so a member who opens a room after the restore unwraps under
+    the old ids and re-wraps under the new ones; kept as a later option,
+    since it needs the backup format, the ids and the senders' key records
+    to travel together and a member to visit every room afterwards, and
+    the beta needs an honest warning now. A warning is cheaper than a
+    silent loss and does not foreclose the later option.
+
 ## Risks / Trade-offs
 
 - [Backend schedule] → every server task is independent, and each client
@@ -909,11 +924,7 @@ replaces a read.
 - Private AI agents (proposal decision 8, decision 27): the server
   proposes to refuse them with 400; the feature owner confirms. Changes
   the mock of task 12.4b only.
-- Backup and restore (proposal decision 9, task group 15): a portal
-  backup carries neither the file keys nor the users' key records, and a
-  restore remaps the ids the wraps are bound to (Context, "Answered by
-  the backend team"). Owner: product with the backend team.
-  Whether the fix is a warning, the backup of both tables with a
-  client-side re-wrap keyed by the original ids, or both, changes the
-  server-contract delta and the client tasks, so it is resolved before
-  group 15 is scheduled.
+- Backup and restore (proposal decision 9, task group 15): decided by the
+  owner on 2026-11-06, decision 28: the backup pages warn about the loss
+  for now; the backup of both tables with the original ids and a
+  client-side re-wrap stays a later option, outside this change.

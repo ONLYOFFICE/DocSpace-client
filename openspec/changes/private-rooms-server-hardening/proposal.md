@@ -99,6 +99,9 @@ None.
   Server cannot encrypt (task 3.2c).
 - `private-rooms/file-operations`: the History tab leaves the
   file-keys-issued entry out (task 6.2, design decision 19).
+- `private-rooms/key-management`: the backup and restore settings warn
+  that a backup carries no private-room keys and a restored portal cannot
+  open their files (task 15.2, design decision 28).
 - `private-rooms/server-contract`: owner change, invitation
   e-mail, audit scope, recovery/offboarding
   endpoints, the copy right in archived private rooms and the public keys
@@ -108,8 +111,8 @@ None.
   access history, the administrator bypass in archived private rooms,
   private-room event recipients, the public keys of prospective members,
   sign-in links kept on a key save, no links on a private room, refused
-  room-level copies, a Document Server that encrypts and a neutral audit
-  trail.
+  room-level copies, a Document Server that encrypts, a neutral audit
+  trail and a backup that excludes the private-room keys.
 
 ## Impact
 
@@ -196,6 +199,10 @@ None.
    identity only, not the wraps (design.md, "Answered by the backend
    team"). Product with the backend team: warn that a restore loses that
    content, back both tables up with the original ids kept so the client
-   can unwrap under the old ids and re-wrap under the new ones, or both. Task group 15; a gate item of
+   can unwrap under the old ids and re-wrap under the new ones, or both.
+   Decided 2026-11-06 by the owner: warn about the loss for now; the
+   backup of the tables with the original ids stays a later option
+   (design decision 28). Task 15.2 adds the warning to the backup and
+   restore pages, 15.3 the records. Task group 15; a gate item of
    `private-rooms-release-gate` (prerequisite 9) and a "Before users
    start" item of the beta release notes until decided.

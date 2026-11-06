@@ -35,11 +35,9 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
-import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 
 import ItemIcon from "SRC_DIR/components/ItemIcon";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -55,7 +53,6 @@ const buttonProps = {
 };
 const StatisticsComponent = (props) => {
   const { t } = useTranslation("Settings");
-  const { isBase } = useTheme();
   const { isStatisticsAvailable, isAppInstalled } = props;
 
   // Same rule as the quotas: a section switched off in Settings -> Apps
@@ -105,16 +102,7 @@ const StatisticsComponent = (props) => {
           {t("Statistics")}
         </Text>
         {!isStatisticsAvailable ? (
-          <Badge
-            backgroundColor={
-              isBase
-                ? globalColors.favoritesStatus
-                : globalColors.favoriteStatusDark
-            }
-            label={t("Common:Paid")}
-            className="paid-badge"
-            isPaidBadge
-          />
+          <PaidBadge className="paid-badge" />
         ) : null}
       </div>
       <Text className="statistics-description">

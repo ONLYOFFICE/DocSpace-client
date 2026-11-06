@@ -36,17 +36,14 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
-import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 import classnames from "classnames";
 import styles from "./ToggleSSO.module.scss";
 
 const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
   const { t } = useTranslation("SingleSignOn");
-  const { isBase } = useTheme();
 
   const onChangeToggle = React.useCallback(() => {
     ssoToggle(t);
@@ -73,16 +70,9 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
             {t("TurnOnSSO")}
           </Text>
           {!isSSOAvailable ? (
-            <Badge
-              backgroundColor={
-                isBase
-                  ? globalColors.favoritesStatus
-                  : globalColors.favoriteStatusDark
-              }
-              label={t("Common:Paid")}
+            <PaidBadge
               fontWeight="700"
               className="toggle-caption_title_badge"
-              isPaidBadge
             />
           ) : null}
         </div>

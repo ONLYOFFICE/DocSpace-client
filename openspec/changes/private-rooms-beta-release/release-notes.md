@@ -48,9 +48,11 @@ Handover to the documentation team: not yet recorded.
   on 2026-11-05). A portal restored from a backup keeps the encrypted
   files, but nobody can open them any more. A key exported before the
   backup does not bring that access back. Decided on 2026-11-06: the
-  loss is accepted for now, and the backup and restore settings will warn
-  about it (`private-rooms-server-hardening` 15.2); keeping the keys in
-  the backup is a later option.
+  loss is accepted for now. The backup, automatic backup and restore
+  settings show the warning while private rooms are available on the
+  portal, and the restore confirmation repeats it
+  (`private-rooms-server-hardening` 15.2, on the branch since 2026-11-06);
+  keeping the keys in the backup is a later option.
 
 ## Known limitations of this version
 
@@ -133,8 +135,8 @@ keys, the third-party refusal and the Document Server gate. Still open:
   template paths of room creation;
 - the availability rule, withdrawn until product decides whether private
   rooms are limited by edition (decision 1);
-- the warning about backup and restore on the backup pages (15.2), see
-  "Before users start".
+- backup and restore: the keys stay out of the backup (group 15, the
+  warning of 15.2 is on the branch), see "Before users start".
 
 Client follow-ups of the merged server items: none open; the owner change
 prepared through the missing-keys route (2.2), the skipped recipients of a

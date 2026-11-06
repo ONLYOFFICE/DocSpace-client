@@ -212,6 +212,7 @@ export default inject(
       settingsFileSelector,
       isInitialLoading,
       ensureAppsLoaded: appsStore.ensureLoaded,
+      showPrivateRoomsWarning: appsStore.isPrivateRoomsSectionAvailable,
 
       // settingsStore
       standalone,

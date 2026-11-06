@@ -1818,6 +1818,8 @@
   "PrivateRoomNotFoundDescription": "お探しのプライベートルームは存在しないか、アクセス権がありません。",
   "PrivateRoomNotFoundTitle": "見つかりません",
   "PrivateRoomRenameNotSupported": "暗号化されたファイルの名前変更はまだサポートされていません。",
+  "PrivateRoomsBackupWarning": "バックアップにはプライベートルームの暗号化キーは含まれません。バックアップから復元されたワークスペースでは、プライベートルーム内のファイルを開くことができません。",
+  "PrivateRoomsBackupWarningTitle": "プライベートルームはバックアップされません",
   "PrivateRoomsBetaDescription": "プライベートルームはベータ版です。暗号化されたファイルでは一部の操作をまだ利用できません。また、暗号化されたファイルはキーがないと開けないため、リカバリーフレーズを安全に保管してください。",
   "PrivateRoomsBetaTitle": "プライベートルーム",
   "PrivateRoomsListEmptyDescription": "プライベートルームはエンドツーエンドで暗号化されています。ファイルはアップロード前にブラウザーで暗号化され、招待した相手だけが読むことができます。",

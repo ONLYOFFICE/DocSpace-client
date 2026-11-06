@@ -3,7 +3,7 @@
   "content": "Backup list",
   "content_en_sha1_hash": "98b1ceabeb6d14fa20a075269a5b3b3135b838b9",
   "created_at": "2026-08-31T18:22:52.452Z",
-  "updated_at": "2026-08-31T19:29:08.982Z",
+  "updated_at": "2026-11-06T10:45:55.531Z",
   "comment": {
     "text": "Button label and dialog title for the list of available backups.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 435,
+      "line_number": 447,
       "context": ")}\n {...onClickVersionListProp}\n noSelect\n dataTestId=\"restore_backup_list_button\"\n >\n {t(\"Common:BackupList\")}\n </Text>\n \n {isVisibleBackupListDialog ? (\n <BackupListModalDialog\n isVisibleDialog={isVisibleBackupListDialog}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 234,
+      "line_number": 240,
       "context": "<ModalDialog\n displayType={ModalDialogType.aside}\n visible={isVisibleDialog}\n onClose={onModalClose}\n >\n <ModalDialog.Header>{t(\"Common:BackupList\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.backupList} data-testid=\"backup-list-modal\">\n <div\n className={classNames(\n styles.backupListContent,",
       "module": "/packages/shared"
     }

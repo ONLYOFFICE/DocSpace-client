@@ -3,7 +3,7 @@
   "content": "Custom name",
   "content_en_sha1_hash": "6af17c24b419d7ba33d00f75f28cd72968d1cce2",
   "created_at": "2026-08-31T18:23:41.770Z",
-  "updated_at": "2026-08-31T20:23:28.487Z",
+  "updated_at": "2026-11-06T10:45:53.908Z",
   "comment": {
     "text": "Dialog title, navigation menu item label, and browser tab title for the portal renaming feature.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 163,
+      "line_number": 160,
       "context": "}\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalRenaming\"),\n );\n setPortalName(portalNameInitially);\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 163,
+      "line_number": 160,
       "context": "}\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalRenaming\"),\n );\n setPortalName(portalNameInitially);\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();",
       "module": "/packages/client"
     },

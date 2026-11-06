@@ -184,3 +184,33 @@ DocSpace server 3.1.0, Document Server 10.0.2.5 (not the build of gate item
   listed in Rooms with its private badge, and the Keys management tab and
   page stayed, also after a full load of `/profile/keys-management`. The app
   was switched back on afterwards.
+
+## Release stand check (2026-11-06, SaaS, part of task 6.2)
+
+The owner's SaaS stand `tests.onlyoffice.io`: DocSpace `4.1.0.12300`
+(`standalone: false`), Document Server `10.0.3.19` at `doc-eu.onlyoffice.io`,
+the user the portal owner, holding one key. Read through the API and the
+browser, no data changed:
+
+- `GET files/settings` answers `docServiceEncryptionSupported: true`, and
+  `doc-eu.onlyoffice.io/sdkjs/common/crypto/onlyoffice-crypto.js` is served
+  (HPKE 1.10.1, `VERSION_HPKE_WRAP = 2`, `VERSION_IDENTITY = 2`, the DSE3
+  constants), so gate item 0.1 is met for SaaS: the release's Document
+  Server carries the add-on and reads container version 2, as the client
+  writes. The standalone package build stays the Document Server team's
+  question (`private-rooms-editor-contract`, Open Questions).
+- The Private item carries the Beta badge, the list shows the owner's
+  private room with its Private tag, and the Keys management tab carries
+  the badge with the key card (Active, X25519), the device remembered and
+  auto-lock off.
+- The E2E rooms app is on (`e2e-rooms`, enabled); no switch is offered on
+  SaaS, so the app-off half of task 6.2 needs a standalone portal.
+- The server carries every backend commit through `b562fc3fb1`: the
+  candidates and missing-keys routes answer, the room and its files report
+  Copy, Duplicate, IndexExport, UseChat, Vectorization, AskAi, Convert and
+  Embed false, and the audit trail masks the room title (see
+  `private-rooms-server-hardening`, "Release stand check").
+- Not run: the API probes that would open an upload session or ask for a
+  copy-as (the server refusals of `cc60512acd` and `bd89a24dcd`), and every
+  flow that needs a second user with a key (invitation, owner change,
+  revocation, letters): no other user of the portal holds one.

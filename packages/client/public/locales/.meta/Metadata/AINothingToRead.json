@@ -3,7 +3,7 @@
   "content": "AI could not read the content of this item.",
   "content_en_sha1_hash": "c0af5713c7edc44e1cb1c216502fc8c1edb76a7c",
   "created_at": "2026-10-21T10:17:41.255Z",
-  "updated_at": "2026-11-02T11:49:57.598Z",
+  "updated_at": "2026-11-06T10:45:54.146Z",
   "comment": {
     "text": "Error in the AI metadata panel when AI could not extract any content from the file, folder or room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/utils.ts",
-      "line_number": 412,
+      "line_number": 418,
       "context": "case \"unsupported\":\n return t(\"Metadata:AIUnsupportedFormat\");\n case \"forbidden\":\n return t(\"Common:AccessDenied\");\n default:\n return t(\"Metadata:AINothingToRead\");\n }\n };\n \n export const getMetadataAIError = (t: TTranslation, error: unknown) => {\n const { status, skipped } = (error ?? {}) as TMetadataAIError;",
       "module": "/packages/client"
     }

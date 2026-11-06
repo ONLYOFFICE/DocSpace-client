@@ -62,6 +62,7 @@ export interface AutomaticBackupProps {
 	buttonSize?: ButtonSize;
 	removeItem: ThirdPartyAccountType;
 	isNeedFilePath?: boolean;
+	showPrivateRoomsWarning?: boolean;
 	isInitialError: boolean;
 	isEnableAuto: boolean; //  checkEnablePortalSettings(isRestoreAndAutoBackupAvailable);
 

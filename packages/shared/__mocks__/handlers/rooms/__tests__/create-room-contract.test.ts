@@ -106,6 +106,83 @@ describe("createRoom mock — POST /files/rooms (mirrors FileStorageService.Inte
     expect(status).toBe(200);
     expect(body.response).toMatchObject({ private: false, indexing: true });
   });
+
+  it.each([
+    ["an Instructions room", 10],
+    ["a Knowledge room", 11],
+    ["an AI project room", 12],
+  ])("AI hub room created as private: %s", async (_, roomType) => {
+    const { status, body } = await create({ private: true, roomType });
+
+    expect(status).toBe(400);
+    expect(body.error.message).toBe("Bad request.");
+    expect(handle.current!.getRooms()).toEqual([]);
+  });
+
+  it("AI hub room without the flag", async () => {
+    const { status } = await create({ private: false, roomType: 11 });
+
+    expect(status).toBe(200);
+  });
+});
+
+describe("createRoom mock — a caller without keys (mirrors EncryptionLoginProvider.ThrowIfKeysAreNotSetAsync since cc60512acd)", () => {
+  const keyless: { current: CreateRoomHandlerHandle | null } = { current: null };
+  const keylessServer = setupServer(
+    ...createPrivateRoomHandlers(PORT, { handle: keyless, callerHasKeys: false }),
+  );
+
+  beforeAll(() => {
+    server.close();
+    keylessServer.listen({ onUnhandledRequest: "error" });
+  });
+  afterEach(() => keyless.current?.reset());
+  afterAll(() => {
+    keylessServer.close();
+    server.listen({ onUnhandledRequest: "error" });
+  });
+
+  it("Caller who deleted all keys", async () => {
+    const { status, body } = await create({ private: true });
+
+    expect(status).toBe(403);
+    expect(body.error.message).toBe("The user does not have an encryption key");
+    expect(body.error.type).toBe("System.InvalidOperationException");
+    expect(keyless.current!.getRooms()).toEqual([]);
+  });
+
+  it("Ordinary room needs no key", async () => {
+    const { status } = await create({ private: false });
+
+    expect(status).toBe(200);
+  });
+});
+
+describe("createRoom mock — POST /files/rooms/thirdparty/{id} (mirrors FileStorageService.CreateThirdPartyRoomAsync since b562fc3fb1)", () => {
+  const createThirdParty = (body: Record<string, unknown>) =>
+    send("POST", `${ROOMS_URL}/thirdparty/sbox-7`, {
+      title: "On the storage",
+      roomType: 5,
+      ...body,
+    });
+
+  it("Third-party room created as private", async () => {
+    const { status, body } = await createThirdParty({ private: true });
+
+    expect(status).toBe(400);
+    expect(body.error.message).toBe(
+      "A private room cannot be created on a third-party storage",
+    );
+    expect(handle.current!.getRooms()).toEqual([]);
+  });
+
+  it("Third-party room without the flag", async () => {
+    const { status, body } = await createThirdParty({ private: false });
+
+    expect(status).toBe(200);
+    expect(body.response).toMatchObject({ private: false, parentId: "sbox-7" });
+    expect(String(body.response.id).startsWith("sbox-7-")).toBe(true);
+  });
 });
 
 describe("createRoom mock — PUT /files/rooms/{id} (mirrors FileStorageService.UpdateRoomAsync)", () => {

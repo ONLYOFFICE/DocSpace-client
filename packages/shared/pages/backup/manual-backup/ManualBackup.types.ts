@@ -70,6 +70,7 @@ export interface ManualBackupProps {
 	maxWidth?: string;
 	buttonSize?: ButtonSize;
 	isNeedFilePath?: boolean;
+	showPrivateRoomsWarning?: boolean;
 	isFreeBackupsLimitReached?: boolean;
 	isInitialLoading: boolean;
 	settingsFileSelector: FilesSelectorSettings;

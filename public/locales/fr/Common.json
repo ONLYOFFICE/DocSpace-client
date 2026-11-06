@@ -1819,6 +1819,7 @@
   "PrivateRoomNotFoundTitle": "Introuvable",
   "PrivateRoomRenameNotSupported": "Le renommage des fichiers chiffrés n'est pas encore pris en charge.",
   "PrivateRoomsBackupWarning": "Les sauvegardes n'incluent pas les clés de chiffrement des salles privées. Un espace de travail restauré à partir d'une sauvegarde ne peut pas ouvrir les fichiers de ses salles privées.",
+  "PrivateRoomsBackupWarningTitle": "Les salles privées ne sont pas sauvegardées",
   "PrivateRoomsBetaDescription": "Les salles privées sont en version bêta. Certaines actions ne sont pas encore disponibles pour les fichiers chiffrés, et les fichiers chiffrés ne peuvent pas être ouverts sans votre clé, alors conservez votre phrase de récupération en lieu sûr.",
   "PrivateRoomsBetaTitle": "Salles privées",
   "PrivateRoomsListEmptyDescription": "Les salles privées sont chiffrées de bout en bout. Les fichiers sont chiffrés dans votre navigateur avant le téléversement et seules les personnes que vous invitez peuvent les lire.",

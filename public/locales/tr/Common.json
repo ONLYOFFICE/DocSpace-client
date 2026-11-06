@@ -1819,6 +1819,7 @@
   "PrivateRoomNotFoundTitle": "Bulunamadı",
   "PrivateRoomRenameNotSupported": "Şifrelenmiş dosyaları yeniden adlandırma henüz desteklenmiyor.",
   "PrivateRoomsBackupWarning": "Yedekler, özel odaların şifreleme anahtarlarını içermez. Bir yedekten geri yüklenen çalışma alanı, özel odalarındaki dosyaları açamaz.",
+  "PrivateRoomsBackupWarningTitle": "Özel odalar yedeklenmez",
   "PrivateRoomsBetaDescription": "Özel odalar beta aşamasındadır. Şifrelenmiş dosyalar için bazı işlemler henüz kullanılamıyor ve şifrelenmiş dosyalar anahtarınız olmadan açılamaz, bu nedenle kurtarma ifadenizi güvenli bir yerde saklayın.",
   "PrivateRoomsBetaTitle": "Özel odalar",
   "PrivateRoomsListEmptyDescription": "Özel odalar uçtan uca şifrelenir. Dosyalar yüklenmeden önce tarayıcınızda şifrelenir ve yalnızca davet ettiğiniz kişiler bunları okuyabilir.",

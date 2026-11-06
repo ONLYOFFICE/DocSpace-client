@@ -1819,6 +1819,7 @@
   "PrivateRoomNotFoundTitle": "Nicht gefunden",
   "PrivateRoomRenameNotSupported": "Das Umbenennen verschlüsselter Dateien wird noch nicht unterstützt.",
   "PrivateRoomsBackupWarning": "Sicherungen enthalten nicht die Verschlüsselungsschlüssel privater Räume. Ein aus einer Sicherung wiederhergestellter Arbeitsbereich kann die Dateien in seinen privaten Räumen nicht öffnen.",
+  "PrivateRoomsBackupWarningTitle": "Private Räume werden nicht gesichert",
   "PrivateRoomsBetaDescription": "Private Räume befinden sich in der Beta-Phase. Einige Aktionen sind für verschlüsselte Dateien noch nicht verfügbar, und verschlüsselte Dateien lassen sich ohne Ihren Schlüssel nicht öffnen. Bewahren Sie Ihre Wiederherstellungsphrase daher sicher auf.",
   "PrivateRoomsBetaTitle": "Private Räume",
   "PrivateRoomsListEmptyDescription": "Private Räume sind Ende-zu-Ende-verschlüsselt. Dateien werden vor dem Hochladen in Ihrem Browser verschlüsselt und können nur von den von Ihnen eingeladenen Personen gelesen werden.",

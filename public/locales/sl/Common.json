@@ -1819,6 +1819,7 @@
   "PrivateRoomNotFoundTitle": "Ni najdeno",
   "PrivateRoomRenameNotSupported": "Preimenovanje šifriranih datotek še ni podprto.",
   "PrivateRoomsBackupWarning": "Varnostne kopije ne vsebujejo šifrirnih ključev zasebnih sob. Delovni prostor, obnovljen iz varnostne kopije, ne more odpreti datotek v svojih zasebnih sobah.",
+  "PrivateRoomsBackupWarningTitle": "Zasebne sobe niso varnostno kopirane",
   "PrivateRoomsBetaDescription": "Zasebne sobe so v različici beta. Nekatera dejanja za šifrirane datoteke še niso na voljo, šifriranih datotek pa ni mogoče odpreti brez vašega ključa, zato obnovitveno frazo hranite na varnem.",
   "PrivateRoomsBetaTitle": "Zasebne sobe",
   "PrivateRoomsListEmptyDescription": "Zasebne sobe so šifrirane od konca do konca. Datoteke se šifrirajo v vašem brskalniku pred nalaganjem in berejo jih lahko samo osebe, ki jih povabite.",

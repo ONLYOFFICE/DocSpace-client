@@ -1819,6 +1819,7 @@
   "PrivateRoomNotFoundTitle": "Non trovato",
   "PrivateRoomRenameNotSupported": "La rinomina dei file crittografati non è ancora supportata.",
   "PrivateRoomsBackupWarning": "I backup non includono le chiavi di cifratura delle stanze private. Uno spazio di lavoro ripristinato da un backup non può aprire i file nelle sue stanze private.",
+  "PrivateRoomsBackupWarningTitle": "Le stanze private non vengono incluse nel backup",
   "PrivateRoomsBetaDescription": "Le stanze private sono in versione beta. Alcune azioni non sono ancora disponibili per i file crittografati e i file crittografati non possono essere aperti senza la tua chiave, quindi conserva la tua frase di recupero in un luogo sicuro.",
   "PrivateRoomsBetaTitle": "Stanze private",
   "PrivateRoomsListEmptyDescription": "Le stanze private sono crittografate end-to-end. I file vengono crittografati nel browser prima del caricamento e solo le persone che inviti possono leggerli.",

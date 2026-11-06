@@ -1819,6 +1819,7 @@
   "PrivateRoomNotFoundTitle": "Nenašlo sa",
   "PrivateRoomRenameNotSupported": "Premenovanie šifrovaných súborov zatiaľ nie je podporované.",
   "PrivateRoomsBackupWarning": "Zálohy neobsahujú šifrovacie kľúče súkromných miestností. Pracovný priestor obnovený zo zálohy nemôže otvoriť súbory vo svojich súkromných miestnostiach.",
+  "PrivateRoomsBackupWarningTitle": "Súkromné miestnosti sa nezálohujú",
   "PrivateRoomsBetaDescription": "Súkromné miestnosti sú vo verzii beta. Niektoré akcie zatiaľ nie sú pre šifrované súbory dostupné a šifrované súbory nemožno otvoriť bez vášho kľúča, preto si obnovovaciu frázu bezpečne uschovajte.",
   "PrivateRoomsBetaTitle": "Súkromné miestnosti",
   "PrivateRoomsListEmptyDescription": "Súkromné miestnosti sú koncovo zašifrované. Súbory sú zašifrované vo vašom prehliadači pred nahraním a prečítať si ich môžu iba ľudia, ktorých pozvete.",

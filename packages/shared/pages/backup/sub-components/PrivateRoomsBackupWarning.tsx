@@ -6,7 +6,7 @@
  * version 3 as published by the Free Software Foundation, together with the
  * additional terms provided in the LICENSE file.
  *
- * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * This program is distributed WITHOUT ANY WARRANTY, without even the implied
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
  * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
  *
@@ -35,7 +35,9 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
+
+import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
 
 import styles from "./Styles.module.scss";
 
@@ -50,11 +52,14 @@ const PrivateRoomsBackupWarning = ({
   if (!isVisible) return null;
 
   return (
-    <div
-      className={styles.privateRoomsWarning}
-      data-testid="private-rooms-backup-warning"
-    >
-      <Text>{t("Common:PrivateRoomsBackupWarning")}</Text>
+    <div className={styles.privateRoomsWarning}>
+      <PublicRoomBar
+        barIsVisible
+        iconName={CatalogPrivateReactSvgUrl}
+        headerText={t("Common:PrivateRoomsBackupWarningTitle")}
+        bodyText={t("Common:PrivateRoomsBackupWarning")}
+        dataTestId="private-rooms-backup-warning"
+      />
     </div>
   );
 };

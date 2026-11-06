@@ -560,6 +560,40 @@ replaces a read.
   provides; a member who opens the room after the restore with their own
   key can then re-wrap for the others.
 
+### Release stand check (2026-11-06, `tests.onlyoffice.io`)
+
+The owner's SaaS stand runs DocSpace `4.1.0.12300`. Read through the API as
+the portal owner, a member of the one private room ("Pirate room", Custom,
+six encrypted files, no subfolder); no data was changed:
+
+- The build carries the commits of 2026-11-04 and 2026-11-05 through
+  `b562fc3fb1`: `GET privacyroom/{roomId}/access/candidates` answers the
+  owner's entry without the private half, `GET privacyroom/{roomId}/access/missing`
+  answers an empty list, `GET files/settings` carries
+  `docServiceEncryptionSupported: true`, the room reports Copy, Duplicate,
+  IndexExport, UseChat, Embed and CreateRoomFrom false (CopyTo, Create and
+  Download true), and its files report Copy, Duplicate, Vectorization,
+  AskAi, Convert and Embed false with CopyLink true, which the client
+  withholds itself (`private-rooms/file-operations`). No link exists on the
+  room; the only member is the owner.
+- Audit trail (task 6.6, decision 25): `GET security/audit/events/last`
+  shows the rows of 2026-11-06 with the context "Rooms: Private room" to
+  the owner as well, and the rows of 2026-11-05 with "Rooms: Pirate room".
+  The mask applies to every reader of the audit API, the room's members
+  included, and the rows written before the commit keep their title, as
+  the backend team's reply said; the file names in the actions are the
+  opaque upload names. The client's audit trail renders that context as
+  text, so nothing to change.
+- File history: the file keys of the six files were written before
+  `1259577f63`, so no "file keys issued" entry is listed yet.
+- No other user of the portal holds a key (the candidates route answers
+  nobody for the first thirty users), so the invitation, owner change and
+  revocation flows and the letters were not exercised.
+- Not run: the API probes of the upload-session refusals (no encrypted
+  flag, a readable name), the abort through another folder and copy-as
+  (`cc60512acd`, `bd89a24dcd`); they write to the stand and wait for the
+  owner's go-ahead, or stay with the server suite that covers them.
+
 ## Goals / Non-Goals
 
 **Goals:**

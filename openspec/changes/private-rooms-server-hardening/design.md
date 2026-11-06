@@ -609,8 +609,14 @@ six encrypted files, no subfolder); no data was changed:
   closed the room to them (403 on the room and its file for the portal
   owner outside it, decision 7's bypass exclusion in the active section
   too). The audit row of the owner change has an empty action text (to
-  check on the server). Details in `private-rooms-beta-release`,
-  design.md "Release stand check".
+  check on the server). The invitation letter the member received (task
+  4.2) reads "... invited you to join the room Private room on
+  https://tests.onlyoffice.io." with the Join room link: the neutral
+  label stands where the title did, in English, so the sentence reads
+  "the room Private room"; a template variant for private rooms would
+  read better, for the backend team with the translations of 4.5.
+  Details in `private-rooms-beta-release`, design.md "Release stand
+  check".
 
 ## Goals / Non-Goals
 

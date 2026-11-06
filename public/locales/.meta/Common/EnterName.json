@@ -3,7 +3,7 @@
   "content": "Enter name",
   "content_en_sha1_hash": "5df85959e93e078f85961a413efbd7ba4ef678d2",
   "created_at": "2025-05-19T21:30:44.990Z",
-  "updated_at": "2026-11-05T16:49:39.865Z",
+  "updated_at": "2026-11-06T10:45:53.783Z",
   "comment": {
     "text": "This is a placeholder text for an input field, prompting the user to type a name for a new room, agent, or group.",
     "is_auto": true,
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 353,
+      "line_number": 350,
       "context": "onChange={onChangePortalName}\n isDisabled={\n (!isSettingPaid && !standalone) || isLoadingPortalNameSave\n }\n hasError={hasError}\n placeholder={`${t(\"Common:EnterName\")}`}\n />\n <div className=\"errorText\">{errorValue}</div>\n </FieldContainer>\n </div>\n );",
       "module": "/packages/client"
     },
@@ -73,7 +73,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 544,
+      "line_number": 553,
       "context": "</Text>\n <TextInput\n type={InputType.text}\n scale\n size={InputSize.base}\n placeholder={t(\"Common:EnterName\")}\n value={name}\n onChange={onChangeName}\n hasError={hasNameError}\n isAutoFocussed\n isDisabled={isLoading}",
       "module": "/packages/sdk"
     }

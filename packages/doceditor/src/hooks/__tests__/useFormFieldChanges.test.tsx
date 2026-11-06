@@ -318,6 +318,19 @@ describe("useFormFieldChanges", () => {
     expect(report).not.toHaveBeenCalled();
   });
 
+  it("A field the editor gives no key: the other fields are still tracked", async () => {
+    render();
+    setForms({ GetInternalId: () => "1" }, form("2", "email"));
+    await hook.takeSnapshot();
+
+    setForms({ GetInternalId: () => "1" }, form("2", "mail"));
+    await hook.reportFieldChanges();
+
+    expect(report.mock.calls[0][1].renames).toEqual([
+      { oldKey: "email", newKey: "mail" },
+    ]);
+  });
+
   it("Key cleared or too long: that field is left out of the report", async () => {
     render();
     setForms(form("1", "name"), form("2", "email"), form("3", "phone"));

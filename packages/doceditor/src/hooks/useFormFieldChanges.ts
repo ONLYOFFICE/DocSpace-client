@@ -65,22 +65,29 @@ const MAX_KEY_LENGTH = 255;
 
 type TEditorField = { id: string; key: string };
 
-// Every field has an id of its own and a key; a read that cannot tell a field apart tells nothing.
-const isEditorFields = (value: unknown): value is TEditorField[] => {
-  if (!Array.isArray(value)) return false;
+// Every field has an id of its own; a read that cannot tell a field apart tells nothing. A field the editor gives no key
+// stays in the read with an empty one, so every read holds the same fields and the other fields are still tracked; an
+// empty key is never reported.
+const toEditorFields = (value: unknown): TEditorField[] | null => {
+  if (!Array.isArray(value)) return null;
 
+  const fields: TEditorField[] = [];
   const ids = new Set<string>();
-  const valid = value.every((field: unknown) => {
-    if (typeof field !== "object" || field === null) return false;
-    if (!("id" in field) || !("key" in field)) return false;
-    if (typeof field.id !== "string" || !field.id) return false;
-    if (typeof field.key !== "string") return false;
 
-    ids.add(field.id);
-    return true;
-  });
+  for (const field of value) {
+    if (typeof field !== "object" || field === null) return null;
+    if (!("id" in field)) return null;
 
-  return valid && ids.size === value.length;
+    const { id } = field;
+    if (typeof id !== "string" || !id || ids.has(id)) return null;
+    ids.add(id);
+
+    const key =
+      "key" in field && typeof field.key === "string" ? field.key : "";
+    fields.push({ id, key });
+  }
+
+  return fields;
 };
 
 const getErrorStatus = (error: unknown) => {
@@ -129,7 +136,7 @@ const readEditorFields = (
         try {
           const fields: unknown =
             typeof result === "string" ? JSON.parse(result) : null;
-          resolve(isEditorFields(fields) ? fields : null);
+          resolve(toEditorFields(fields));
         } catch {
           resolve(null);
         }

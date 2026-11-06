@@ -78,7 +78,9 @@ the file to change so the backend team can pick them up; nothing here is
   editor configuration already carries a switch that hides the AI tools
   (`customization.ai.disabled`, set today for a portal without AI and for
   anonymous visitors); the server sets it for an encrypted file as well
-  (task group 16, design decision 29).
+  (task group 16, design decision 29). The same stand showed the
+  role-change letter naming a private room by its title, a call site the
+  neutral label of 2026-11-05 missed (task 4.7).
 
 ## Capabilities
 

@@ -614,9 +614,23 @@ six encrypted files, no subfolder); no data was changed:
   https://tests.onlyoffice.io." with the Join room link: the neutral
   label stands where the title did, in English, so the sentence reads
   "the room Private room"; a template variant for private rooms would
-  read better, for the backend team with the translations of 4.5.
-  Details in `private-rooms-beta-release`, design.md "Release stand
-  check".
+  read better, for the backend team with the translations of 4.5. The
+  role-change letter the member received, however, names the room:
+  "You are assigned a new role in the Buy sandali room Probe
+  2026-11-06: Editor". Read in the source: on a share update
+  `FileStorageService.SetAceObjectAsync` sends the Files notice through
+  `notifyClient.SendRoomUpdateAccessForUser` (neutral since `1259577f63`)
+  and then the web letter through
+  `studioNotifyService.SendMsgUserRoleChangedAsync(user, folder.Title,
+  url, role, ...)` (`FileStorageService.cs:4612`), whose patterns
+  `pattern_user_role_changed` and `pattern_user_agent_role_changed`
+  (`WebstudioNotifyPatternResource.resx:1949`, `:1981`) print
+  `${RoomTitle}` from that string; `StudioNotifyService.cs:512` takes the
+  title as given. The scenario "Room notices" of the `server-contract`
+  delta ("a member's access changes") is therefore not met on the build;
+  task 4.7 asks the server to pass `NotifyConstants.GetRoomTitle(folder)`
+  there. Details in `private-rooms-beta-release`, design.md "Release
+  stand check".
 
 ## Goals / Non-Goals
 

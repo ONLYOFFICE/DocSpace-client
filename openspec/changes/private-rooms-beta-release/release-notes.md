@@ -121,6 +121,10 @@ keys, the third-party refusal and the Document Server gate. Still open:
 
 - the translations of the "Private room" label of letters, pushes and the
   audit trail, which every language prints in English for now (4.5);
+- the role-change letter ("You are assigned a new role in the ... room
+  ..."), which still names a private room by its title (4.7, found on
+  the release stand on 2026-11-06); the invitation letter names it
+  "Private room";
 - the revocation of file keys when a group is removed from a private room
   (6.4);
 - recovery and offboarding for organisations (8); deactivating a user

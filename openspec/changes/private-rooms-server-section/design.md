@@ -57,6 +57,86 @@ describes the agreed target on the Forms model and is corrected at the read
 design document covers a server section; the archived sidebar change
 recorded the follow-up with the user on 2026-10-22.
 
+### Landed on 2026-11-06 (read in `c866c055e1`)
+
+Read through CodeGraph and in the source on `release/v4.1.0`. The backend
+team's note of the same day ("Private rooms: how to work through the API")
+describes the same commit; where the note and the code differ, the code is
+recorded.
+
+- **Root.** `FolderType.PrivateRooms = 42`
+  (`products/ASC.Files/Core/Core/Entries/Folder.cs:152`), a tenant root
+  `privaterooms` created on first read
+  (`FolderDao.GetFolderIDPrivateRoomsAsync`, `FolderDao.cs:2283`, cached by
+  `GlobalFolder.GetFolderPrivateRoomsAsync` in `Global.cs`), titled
+  "Private" (`FilesMappingAction.cs`, `FilesUCResource.PrivateRooms`).
+  **The root holds no rooms.** Private rooms stay under the Rooms root, keep
+  `VirtualRooms` as their root folder type and the Rooms root as their
+  parent, and the section is chosen by the room's private setting, not by a
+  room type. No room was moved.
+- **Root listing and route.** The root is listed by `GET files/@root` and
+  `GET files/@private` reads it (`FoldersController.cs:1146`), both only
+  while the `e2e-rooms` app is on (`IsPrivateRoomsAppEnabledAsync`,
+  `:1149`, `:1198`). With the app off, `@private` answers 404 and the root
+  is not listed. The section's content is built from the Rooms tree, as for
+  Forms (`FileStorageService`, `parent.FolderType is Forms or PrivateRooms`).
+- **Search area.** `SearchArea.PrivateRooms`, serialized by name.
+  `SearchArea.MatchesRoom` (`SearchArea.cs:90-96`) replaces
+  `MatchesRoomType`: `Active` and `Templates` take rooms that are neither
+  form rooms nor private, and `PrivateRooms` takes private rooms of any
+  type. `GetRoomsSectionIdAsync` maps the area to the new root
+  (`VirtualRoomsController.cs:1433`).
+- **Privacy filter on the rooms list.** `FileSecurity` (`:2983-2995`) reads
+  `searchArea=Active&privacyFilter=Private` as the `PrivateRooms` area,
+  which is how today's client builds its section. It then forces the filter
+  by area: `PrivateRooms` means private, and `Active` means not private
+  whatever the request says. **So `Active` without a filter no longer
+  returns private rooms.** On every other area the filter applies as before,
+  so archived private rooms are `searchArea=Archive&privacyFilter=Private`
+  in the shared Archive.
+- **Recent.** `searchArea=PrivateRooms` there answers 400
+  (`EntryManager.cs:439`): Recent picks files by the type of their room.
+- **New items.** `FileMarker` counts the marks of private rooms under the
+  Private root and leaves them out of the Rooms root (`:1179` and the
+  `PrivateRooms` arms around it). The anchor holds no children, so the
+  root's count is surfaced directly, as for Forms, and the Rooms badge now
+  shows the corrected count on its first read.
+- **Room groups.** `RoomGroupArea` and `GroupsController.ValidateSearchArea`
+  accept `PrivateRooms` (`RoomGroup.cs:67`, `:80`; `GroupsController.cs:319`).
+  A group takes rooms of its own section only. A private room linked to a
+  Rooms group is no longer shown or counted there, and the link is kept
+  (`PrivateRoomSectionTests.Group_TakesRoomsOfItsOwnSectionOnly`).
+- **Start page.** `SettingsController` accepts the root as a default start
+  folder (`web/ASC.Web.Api/Api/Settings/SettingsController.cs:1099`).
+- **Room links unchanged.** `PathProvider` builds links by the root folder
+  type. A private room's is `VirtualRooms`, so its link stays
+  `rooms/shared/{id}/filter?folder={id}`. The new `private/{id}/filter` arm
+  serves only the root itself.
+- **Used space** stays in the Rooms counter. The root has no counter of its
+  own (`FolderDao.cs:2283`).
+- **Tests:** `PrivateRoomSectionTests` covers the Rooms area without private
+  rooms, both ways of asking for the section, the `@private` route and the
+  root by id, the root listing, the app turned off, an administrator outside
+  the room, a member, the archive, new items, Recent and groups.
+- **Not addressed by the commit, as it says itself:** a subfolder of a
+  private room still goes to Trash, and a private room or its subfolder can
+  still be added to Favorites.
+- **The note against the code:** the note says that a public room and a
+  form-filling room "are refused" as private. `CreateRoomAsync`
+  (`FileStorageService.cs:666-690`) and `InternalCreateFolderAsync`
+  (`:1220-1230`) refuse no room type with the private flag: only AI hub
+  types, keys, the Document Server, indexing, lifetime and watermark. The
+  room is created, and its link fails later
+  (`private-rooms-server-hardening` 12.8, still open).
+- **The client today.** The client does not know the new root type: the kit's
+  `FolderType` ends at `AiHub = 41`. `getFoldersTree` takes it into the
+  tree folders with the server's title, where it only gets a socket
+  subscription and no sidebar item, so nothing new is shown. Today's
+  section requests (`Active` with `Private`, `Archive` with `Private`) and
+  Rooms requests (`Active` with `NotPrivate`) keep working. With the section
+  not available, a Rooms request carries no filter and now lists no private
+  room (proposal decision 5).
+
 ## Goals / Non-Goals
 
 **Goals:**

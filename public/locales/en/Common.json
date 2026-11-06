@@ -794,7 +794,6 @@
   "DocumentAgentReasoning_max": "Maximum",
   "DocumentAgentReasoning_medium": "Medium",
   "DocumentAgentReasoning_off": "No reasoning",
-  "DocumentAgentReasoningDefault": "Model default",
   "DocumentAgentReasoningHint": "How much the model thinks before each step. Ignored by models that cannot reason.",
   "DocumentAgentResultsSection": "Results",
   "DocumentAgentTaskLog": "Task log",

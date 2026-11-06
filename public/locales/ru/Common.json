@@ -794,7 +794,6 @@
   "DocumentAgentReasoning_max": "Максимальная",
   "DocumentAgentReasoning_medium": "Средняя",
   "DocumentAgentReasoning_off": "Без рассуждений",
-  "DocumentAgentReasoningDefault": "По умолчанию для модели",
   "DocumentAgentReasoningHint": "Сколько модель думает перед каждым шагом. Модели без рассуждений это игнорируют.",
   "DocumentAgentResultsSection": "Результаты",
   "DocumentAgentTaskLog": "Журнал задачи",

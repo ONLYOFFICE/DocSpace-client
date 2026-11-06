@@ -80,6 +80,40 @@ const FIELD_MAX: Record<"maxToolCalls" | "maxFileMb", number> = {
 };
 
 
+/** The agent's reasoning levels, which are the chat library's own. */
+type TReasoningLevel = Exclude<TDocumentAgentReasoning, "default">;
+const ALL_DEPTHS: TReasoningLevel[] = ["low", "medium", "high", "max"];
+const FALLBACK_DEPTH: TReasoningLevel = "medium";
+
+type TReasoningSupport = {
+  thinks: boolean;
+  canDisable: boolean;
+  depths: readonly TReasoningLevel[];
+  defaultDepth?: TReasoningLevel | undefined;
+};
+
+/**
+ * What a profile's model can do, as the catalogue reported it at save
+ * time; a profile saved before that carries only the boolean, which means
+ * every depth and the option to switch thinking off.
+ */
+const supportOf = (profile: TProfileLike | undefined): TReasoningSupport => {
+  if (profile?.reasoningSupport) return profile.reasoningSupport;
+  const thinks = profile?.reasoning === true;
+  return { thinks, canDisable: true, depths: thinks ? ALL_DEPTHS : [] };
+};
+
+/** The level the model runs at when nobody picked one. */
+const defaultLevelOf = (support: TReasoningSupport): TReasoningLevel =>
+  support.thinks ? (support.defaultDepth ?? FALLBACK_DEPTH) : "off";
+
+type TProfileLike = {
+  id: string;
+  name: string;
+  reasoning?: boolean | undefined;
+  reasoningSupport?: TReasoningSupport | undefined;
+};
+
 const asPositiveInt = (value: string): number | null => {
   if (!/^\d+$/.test(value)) return null;
   const number = Number(value);
@@ -152,15 +186,14 @@ const DocumentAgentComponent = ({
     [profiles, defaultProfile],
   );
 
-  const reasoningOptions = React.useMemo<TOption[]>(
-    () => [
-      { key: "default", label: t("Common:DocumentAgentReasoningDefault") },
-      { key: "off", label: t("Common:DocumentAgentReasoning_off") },
-      { key: "low", label: t("Common:DocumentAgentReasoning_low") },
-      { key: "medium", label: t("Common:DocumentAgentReasoning_medium") },
-      { key: "high", label: t("Common:DocumentAgentReasoning_high") },
-      { key: "max", label: t("Common:DocumentAgentReasoning_max") },
-    ],
+  const reasoningLabels = React.useMemo<Record<TReasoningLevel, string>>(
+    () => ({
+      off: t("Common:DocumentAgentReasoning_off"),
+      low: t("Common:DocumentAgentReasoning_low"),
+      medium: t("Common:DocumentAgentReasoning_medium"),
+      high: t("Common:DocumentAgentReasoning_high"),
+      max: t("Common:DocumentAgentReasoning_max"),
+    }),
     [t],
   );
 
@@ -218,8 +251,22 @@ const DocumentAgentComponent = ({
     profileOptions.find((option) => option.key === draft.profileId) ??
     profileOptions[0] ??
     ({ key: "none", label: t("Common:SelectAction") } as TOption);
+  // The effort follows the chosen model: its own depths to pick from, and
+  // its default level until one is picked by hand (`reasoning` stays
+  // "default" then). A level the model has not got falls back to its default.
+  const activeProfile = (profiles as TProfileLike[]).find(
+    (profile) => profile.id === String(selectedProfile.key),
+  );
+  const support = supportOf(activeProfile);
+  const reasoningOptions: TOption[] = [
+    ...(support.canDisable || !support.thinks ? (["off"] as const) : []),
+    ...support.depths,
+  ].map((level) => ({ key: level, label: reasoningLabels[level] }));
+  const modelDefaultLevel = defaultLevelOf(support);
   const selectedReasoning =
-    reasoningOptions.find((option) => option.key === draft.reasoning) ?? reasoningOptions[0];
+    reasoningOptions.find((option) => option.key === draft.reasoning) ??
+    reasoningOptions.find((option) => option.key === modelDefaultLevel) ??
+    reasoningOptions[0];
 
   const fieldsDisabled = !draft.enabled || saveRequestRunning;
 
@@ -291,7 +338,9 @@ const DocumentAgentComponent = ({
           <ComboBox
             options={profileOptions}
             selectedOption={selectedProfile}
-            onSelect={(option) => patch({ profileId: String(option.key) })}
+            onSelect={(option) =>
+              patch({ profileId: String(option.key), reasoning: "default" })
+            }
             scaled
             scaledOptions
             dropDownMaxHeight={profileOptions.length > 7 ? 300 : undefined}
@@ -317,7 +366,7 @@ const DocumentAgentComponent = ({
             scaledOptions
             isDefaultMode
             displaySelectedOption
-            isDisabled={fieldsDisabled}
+            isDisabled={fieldsDisabled || !support.thinks}
             dataTestId="document-agent-reasoning-combobox"
           />
           <Text className={styles.hint}>{t("Common:DocumentAgentReasoningHint")}</Text>

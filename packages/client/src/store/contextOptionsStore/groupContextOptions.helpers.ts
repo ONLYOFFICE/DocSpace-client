@@ -352,7 +352,7 @@ self: ContextOptionsStore,t: TTranslation
       onClick: allFilesIsEditing
         ? () => onShowEditingToast(t)
         : () => {
-            if (self.filesSettingsStore.confirmDelete) {
+            if (self.filesActionsStore.isDeleteConfirmationForced) {
               setDeleteDialogVisible(true);
             } else {
               const translations = {

@@ -72,7 +72,7 @@ const withHotkeys = (Component) => {
       viewAs,
       setViewAs,
       setHotkeyPanelVisible,
-      confirmDelete,
+      isDeleteConfirmationForced,
       setDeleteDialogVisible,
       setSelectFileDialogVisible,
       deleteAction,
@@ -459,7 +459,7 @@ const withHotkeys = (Component) => {
             return;
           }
 
-          if (confirmDelete) {
+          if (isDeleteConfirmationForced) {
             setDeleteDialogVisible(true);
           } else {
             const translations = {
@@ -472,7 +472,7 @@ const withHotkeys = (Component) => {
         }
       },
       hotkeysFilter,
-      [confirmDelete],
+      [isDeleteConfirmationForced],
     );
 
     // //TODO: Undo the last action
@@ -554,7 +554,6 @@ const withHotkeys = (Component) => {
       settingsStore,
       filesStore,
       dialogsStore,
-      filesSettingsStore,
       filesActionsStore,
       hotkeyStore,
       mediaViewerDataStore,
@@ -646,7 +645,7 @@ const withHotkeys = (Component) => {
         setHotkeyPanelVisible,
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        confirmDelete: filesSettingsStore.confirmDelete,
+        isDeleteConfirmationForced: filesActionsStore.isDeleteConfirmationForced,
         deleteAction,
         isAvailableOption,
 

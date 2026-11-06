@@ -461,6 +461,14 @@ class FilesActionStore {
 
   alreadyExportingRoomIndex = false;
 
+  // Spec: private-rooms/file-operations, "Deletion bypasses the recycle bin"
+  get isDeleteConfirmationForced() {
+    return (
+      this.filesSettingsStore.confirmDelete ||
+      this.treeFoldersStore.isPrivacyFolder
+    );
+  }
+
   constructor(
     settingsStore: SettingsStore,
     uploadDataStore: UploadDataStore,

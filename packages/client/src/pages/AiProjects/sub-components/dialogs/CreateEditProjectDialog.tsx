@@ -182,6 +182,16 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const hasImage = !!previewIcon || !!storedImage;
   // `null` until a model is picked: the portal default is preselected.
   const [profileId, setProfileId] = React.useState<string | null>(project?.aiProject.profile?.id ?? null);
+  // What the form opened with: the instructions and suggestions are sent
+  // only when they differ from it. A refresh of the open project replaces
+  // the store's copy while the form keeps its fields, so comparing against
+  // that copy would write the form's older values over another member's change.
+  const [seed] = React.useState(() => ({
+    instructions: (project?.aiProject.instructions ?? "").trim(),
+    suggestions: JSON.stringify(
+      (project?.aiProject.suggestions ?? []).map(({ name: label, prompt: text }) => [label, text]),
+    ),
+  }));
   const [prompt, setPrompt] = React.useState(project?.aiProject.instructions ?? "");
   const [suggestions, setSuggestions] = React.useState<TSuggestionRow[]>(() =>
     (project?.aiProject.suggestions ?? []).map(toSuggestionRow),
@@ -321,8 +331,11 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
         logo: { color: `#${color}`, cover: coverIcon?.id ?? "", image },
         aiProject: {
           profileId: savedProfileId,
-          instructions: prompt.trim(),
-          suggestions: suggestions.map(({ name: label, prompt: text }) => ({ name: label, prompt: text })),
+          instructions: prompt.trim() === seed.instructions ? undefined : prompt.trim(),
+          suggestions:
+            JSON.stringify(suggestions.map(({ name: label, prompt: text }) => [label, text])) === seed.suggestions
+              ? undefined
+              : suggestions.map(({ name: label, prompt: text }) => ({ name: label, prompt: text })),
           instructionsRoomIds: instructions.map((r) => r.id),
           knowledgeRoomIds: knowledge.map((r) => r.id),
           rooms: [...instructions, ...knowledge],
@@ -502,7 +515,11 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
           e.preventDefault();
           void onSubmit();
         }}
-        onClose={store.closeProjectDialog}
+        // A swipe on the suggestion dialog's header also reaches this
+        // dialog's own swipe handler: the form stays while that one is open.
+        onClose={() => {
+          if (editedSuggestion === null) store.closeProjectDialog();
+        }}
         isCloseable={!isSaving}
         containerVisible={selector !== null}
         dataTestId="ai-project-dialog"

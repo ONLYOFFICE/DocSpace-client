@@ -456,6 +456,100 @@ translations of the letter label (4.5).
   name the room neutrally (`AuditPrivateRoomTitleTests`). Nothing on the
   client reads the audit trail.
 
+### Answered by the backend team on 2026-11-05 (reply to the document of 2026-11-02)
+
+The backend developer's reply to the "what to fix on the server" document
+of 2026-11-02 (`e9cfda8d43`), received on 2026-11-06, goes through that
+document item by item. Everything it lists as done is the content of the
+commits read above, so the reads stand; what it adds beyond them is
+recorded here. A statement about the server that the reply makes and this
+change did not read in the source is marked as such; nothing below
+replaces a read.
+
+- Availability rule (task 3.1b, decision 2): no rule and no code, "no
+  restrictions for now". The rule waits for the product decision of
+  proposal decision 1 and leaves this change (decision 2 revised): the main
+  spec's "No edition or licence gate on private rooms" describes the branch.
+- Room types (task 12.3, decision 13): the server did not restrict the
+  private flag to Custom and decided not to. Read in
+  `InternalCreateFolderAsync` (`FileStorageService.cs:1151-1366`): the flag
+  is stored with any room type after the Document Server check and the
+  metadata guards (`:1222-1232`, `:1253`); `CreateRoomAsync` refuses it with
+  400 for the AI hub room types, Knowledge, Instructions and AI project
+  rooms (`:672-676`); `CreateAiAgentAsync` (`:701`) passes it on, so a
+  private AI agent is created today. The reply says a public or
+  form-filling room created as private is refused because its creation
+  sets an external link, which the link refusal of decision 12 rejects; the
+  creation path read here sets no link, so where that happens was not read
+  and task 12.4b reads it before mirroring. The reply proposes to refuse a
+  private AI agent with 400, the chat and the vectorization being denied in
+  a private room (`FileSecurity.cs:1706-1718`), and waits for confirmation:
+  proposal decision 8, decision 27.
+- Groups (task 6.4): the reply asks whether a group can be added to a
+  private room. The client's invite panel offers people only
+  (`private-rooms/room-membership`, "Invite panel offers people only"), so
+  the client never sends a group share; the API and the SDK generic panel
+  do not stop one, which is why 6.4 stays.
+- Deactivation: deactivating a user revokes no keys; the reply counts it
+  as offboarding (task 8.1), as this change does.
+- `PUT files/rooms/{id}/share` still stops at the first invitee without a
+  key, and the reply did not trace whether the invitees before it are
+  stored. `private-rooms-invite-atomic-rewrap` traced it (its design.md,
+  Context): each earlier invitee's share is stored in its own iteration,
+  and the client verifies the invitees through the candidates route before
+  the grant (its task 2.1, done).
+- Letters (task 4.5): the "Private room" label exists in English only,
+  confirmed.
+- `ShareRecord` reuse in `FileSecurity` (decision 24): the cause stays; the
+  reply adds that other loops over users, such as the letters of
+  `NotifyClient`, were not checked for the same reuse.
+- OpenSearch: the room title lies in the index as in the database; the
+  reply expects the search to intersect its hits with the SQL rights and
+  did not trace the query. Room and folder titles are never encrypted:
+  whoever reads the database sees them in `files_folder`, in the index and
+  in `audit_events`. The release notes of `private-rooms-beta-release`
+  say so.
+- Watermark (task 3.1a): the reply disputes the reason given for the
+  refusal (the Document Server draws the watermark in the browser, where
+  the plaintext is) and keeps the refusal.
+- Rooms created before `bd89a24dcd` with a setting now refused are not
+  migrated: the feature was never released, so nothing is done.
+- Audit trail (task 6.6): the reply asks the client to group audit rows by
+  `target` instead of `context` if it groups by room title, every private
+  room now reading "Private room". The client's audit trail renders
+  `context` as text in each row
+  (`packages/client/src/pages/PortalSettings/categories/security/audit-trail/TableView/TableRow.js:89`,
+  `RowView/AuditContent.js:87`) and groups nothing by it: no client change.
+- Document Server images: recorded in `private-rooms-editor-contract`
+  (design.md, "Reported by the backend team on 2026-11-05").
+- Not covered by the server suite, to be checked by hand on a full stand
+  (task 10.2): the editor session drop itself; the real crypto library and
+  the capability answering true without the test setting; the refusals
+  without the library, run once and not in the suite; the socket
+  recipients; the hidden submit button of a form; the room title at the
+  call sites of the letters (the letters themselves are tested); the audit
+  trail export and the room history report; digest letters with several
+  private rooms, whether they merge into one.
+- Backup and restore (new; proposal decision 9, task group 15): the reply
+  reports that the file keys and the personal key records are not part of
+  a portal backup. Read in the source: `FilesModuleSpecifics._tables`
+  (`common/ASC.Data.Backup.Core/Tasks/Modules/FilesModuleSpecifics.cs:52-102`)
+  lists the files tables a backup carries and has no `files_file_keys`,
+  and no module under `common/ASC.Data.Backup.Core` names `account_links`,
+  the table the `e2e` provider record of `EncryptionLoginProvider` lives
+  in. A restored portal therefore holds the encrypted files without a
+  single wrapped file key and without the users' key records. Adding the
+  tables would not be enough on SaaS, where a restore remaps the integer
+  ids (`TableInfo` with `IdType.Integer`, through `ColumnMapper`): the
+  client binds every wrap to the sender, the recipient and the file id
+  (`packages/shared/services/encryption/hpke.ts:95-113`, `buildInfo`), so
+  a wrap written for the old file id does not open the file under its new
+  one. Nobody is warned today. The reply's options: warn that a restore
+  loses the content of private rooms, or store the original ids next to
+  each key and re-wrap on the client after a restore. The reply drew this
+  from the code; no restore was run, and a standalone dump or a region
+  move was not checked.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -491,7 +585,11 @@ translations of the letter label (4.5).
 2. **Edition rule as an explicit server setting, default allow.** Keeps the
    current behaviour (all editions) while giving product a switch. Alternative:
    hard-code Enterprise-only; rejected until product decides (open decision in
-   the proposal).
+   the proposal). Withdrawn on 2026-11-06: the backend team's reply of
+   2026-11-05 adds no rule and no code until product decides (proposal
+   decision 1), so the delta no longer modifies "No edition or licence
+   gate on private rooms" and the main spec's requirement describes the
+   branch; a rule, once decided, gets a change of its own.
 
 3. **No composite file-key.** The stashed `SECURITY.md` recommended keying
    entries by (file, user, public key id) so a user could hold one entry per
@@ -584,7 +682,14 @@ translations of the letter label (4.5).
     private flag on them (proposal decision 6). The server took the
     alternative on 2026-11-05 (`b562fc3fb1`): a third-party storage keeps no
     file keys and its string ids do not fit the client's wrapping, so the
-    private flag is refused there with 400, with or without keys.
+    private flag is refused there with 400, with or without keys. The
+    room-type part was not taken either (reply of 2026-11-05, Context
+    "Answered by the backend team"): the flag stays accepted with every
+    room type the room creation accepts, the AI hub room types refuse it
+    with 400 (`FileStorageService.cs:672-676`), and a private AI agent is
+    created, which the reply proposes to refuse (decision 27). The
+    template path (`CreateRoomTemplateAsync`, `CreateRoomFromTemplateAsync`)
+    stays as read on 2026-11-02.
 
 14. **The opaque title form is the one the client sends (found 2026-10-28).**
     The client names every encrypted upload `makeOpaqueUploadName`: a
@@ -731,6 +836,20 @@ translations of the letter label (4.5).
     shows the editors' message for the 415. Alternative: let the server's
     message through; rejected, it is English and comes after the dialog.
 
+27. **A private AI agent: proposed refusal, not decided (reply of
+    2026-11-05).** The server creates an AI agent with the private flag
+    today (`CreateAiAgentAsync`, `FileStorageService.cs:701`, through
+    `InternalCreateFolderAsync`), while the chat and the vectorization are
+    denied inside a private room (`FileSecurity.cs:1706-1718`), so the
+    agent cannot do what it is for. The backend team proposes to answer
+    400 and waits for confirmation (proposal decision 8). The client
+    creates a private room as a Custom room with the flag
+    (`CreateEditRoomStore.onCreateRoom`) and sends no flag when it creates
+    an agent, so the client is unaffected either way; the mock follows the
+    server once decided (task 12.4b). Alternative: let a private agent
+    exist as a private room whose chat refuses; rejected by the server as
+    a useless object.
+
 ## Risks / Trade-offs
 
 - [Backend schedule] → every server task is independent, and each client
@@ -777,3 +896,14 @@ translations of the letter label (4.5).
 - Third-party private rooms (proposal decision 6): decided by the server
   on 2026-11-05 (`b562fc3fb1`), decision 13: the private flag is refused on
   third-party storage with 400.
+- Private AI agents (proposal decision 8, decision 27): the server
+  proposes to refuse them with 400; the feature owner confirms. Changes
+  the mock of task 12.4b only.
+- Backup and restore (proposal decision 9, task group 15): a portal
+  backup carries neither the file keys nor the users' key records, and a
+  SaaS restore remaps the file ids the wraps are bound to (Context,
+  "Answered by the backend team"). Owner: product with the backend team.
+  Whether the fix is a warning, the backup of both tables with a
+  client-side re-wrap keyed by the original ids, or both, changes the
+  server-contract delta and the client tasks, so it is resolved before
+  group 15 is scheduled.

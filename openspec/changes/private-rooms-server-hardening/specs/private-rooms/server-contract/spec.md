@@ -411,17 +411,6 @@ The server SHALL refuse with 403 an ownership change of a private room when the 
 - **WHEN** the rooms of a user being deleted are reassigned to a user with keys who lacks entries
 - **THEN** the reassignment completes
 
-### Requirement: No edition or licence gate on private rooms
-The server SHALL evaluate an explicit private-room availability rule before creating a private room. The default rule SHALL allow every edition; when the rule denies, the server SHALL answer 403 with a distinct error code that the client maps to a localized message.
-
-#### Scenario: Community edition
-- **WHEN** a user with keys creates a private room on any edition and the rule allows
-- **THEN** the room is created
-
-#### Scenario: Rule denies
-- **WHEN** the availability rule denies private rooms for the portal
-- **THEN** the server answers 403 with the private-rooms-unavailable error code
-
 ### Requirement: Audit log scope for private rooms
 The server SHALL write audit events for key envelope creation, update and deletion, for every stored file access-entry write (actor, file, the recipients whose entries were stored) and for every member revocation from a private room.
 
@@ -457,7 +446,7 @@ The server SHALL NOT include the plaintext room title of a private room in invit
 - **THEN** they carry its title
 
 ### Requirement: Private room creation requires keys
-The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and SHALL refuse with 400 the private flag on a room type other than Custom, whichever route creates the room (a room, an AI agent, a template or a room from a template), and on a room created on third-party storage, with or without keys. It SHALL otherwise store the room as a Custom room with the private setting.
+The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and SHALL refuse with 400 the private flag on a room created on third-party storage, with or without keys, and on the AI hub room types (Knowledge, Instructions and AI project rooms). It SHALL otherwise store the room with the requested room type and the private setting; an AI agent created with the flag is stored as a private agent under the same key and Document Server checks as a room.
 
 #### Scenario: Caller without keys
 - **WHEN** a user without encryption keys creates a private room
@@ -469,19 +458,19 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 
 #### Scenario: Caller with keys
 - **WHEN** a user with encryption keys creates a private room
-- **THEN** the room is created as a Custom room with the private setting
+- **THEN** the room is created with the requested room type and the private setting
 
 #### Scenario: Third-party room created as private
 - **WHEN** a user, with or without encryption keys, creates a room on a connected third-party storage as private
 - **THEN** the server answers 400, creates no room, and the connection can still back an ordinary room
 
-#### Scenario: Private flag on another room type
-- **WHEN** a room creation request sets the private flag with a room type other than Custom
+#### Scenario: AI hub room created as private
+- **WHEN** a Knowledge, Instructions or AI project room creation request sets the private flag
 - **THEN** the server answers 400 and creates no room
 
 #### Scenario: AI agent created as private
-- **WHEN** an AI agent creation request sets the private flag
-- **THEN** the server answers 400 and creates no agent
+- **WHEN** a user with encryption keys creates an AI agent with the private flag while the Document Server encrypts
+- **THEN** the agent is created with the private setting
 
 ## REMOVED Requirements
 

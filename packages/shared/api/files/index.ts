@@ -787,6 +787,17 @@ export async function startUploadSession(
   }) as TUploadOperation;
 }
 
+const CHUNK_UPLOAD_ATTEMPTS = 3;
+const CHUNK_RETRY_DELAY_MS = 1000;
+
+const isRetryableChunkError = (error: unknown) => {
+  if (!axios.isAxiosError(error) || axios.isCancel(error)) return false;
+
+  const status = error.response?.status;
+
+  return !status || status === 502 || status === 503 || status === 504;
+};
+
 export async function uploadChunkParallel(
   folderId: string | number,
   sessionId: string,
@@ -794,12 +805,27 @@ export async function uploadChunkParallel(
   data: FormData,
   signal?: AbortSignal,
 ) {
-  return request({
-    method: "post",
-    url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
-    data,
-    signal,
-  });
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await request({
+        method: "post",
+        url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
+        data,
+        signal,
+      });
+    } catch (error) {
+      if (
+        attempt >= CHUNK_UPLOAD_ATTEMPTS ||
+        signal?.aborted ||
+        !isRetryableChunkError(error)
+      )
+        throw error;
+
+      await new Promise((resolve) => {
+        setTimeout(resolve, CHUNK_RETRY_DELAY_MS * attempt);
+      });
+    }
+  }
 }
 
 export async function uploadChunkSequential(

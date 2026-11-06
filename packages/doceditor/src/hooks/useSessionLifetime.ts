@@ -46,6 +46,14 @@ const MAX_TIMEOUT_MS = 2 ** 31 - 1;
 const RETRY_SECONDS = 30;
 
 const useSessionLifetime = (user?: TUser) => {
+  // The editor is often a tab of its own, which the client's PrivateRoute
+  // never ran in. A document left by a session that ends without a user to
+  // name (the cookie is gone, the editor is reloaded) is then reopened only
+  // for the user it was open for - keepPageForLogin reads this id.
+  React.useEffect(() => {
+    if (user?.id) sessionStorage.setItem("sessionUserId", user.id);
+  }, [user?.id]);
+
   React.useEffect(() => {
     if (!user?.id || !user.authCookieLifetime || user.authCookieLifetime <= 0)
       return undefined;

@@ -43,12 +43,11 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";
-import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import WelcomeAuthSocial from "PUBLIC_DIR/images/welcome-social_auth.svg?url";
 import WelcomeAuthSocialDark from "PUBLIC_DIR/images/welcome-social_auth_dark.svg?url";
 import styles from "./SocialAuthWelcome.module.scss";
@@ -170,17 +169,7 @@ const SocialAuthWelcomeDialogComponent = ({
               >
                 {t("Common:ChangeButton")}
               </Link>
-              <Badge
-                className="paid-badge"
-                fontWeight="700"
-                backgroundColor={
-                  isBase
-                    ? globalColors.favoritesStatus
-                    : globalColors.favoriteStatusDark
-                }
-                label={t("Common:Paid")}
-                isPaidBadge
-              />
+              <PaidBadge className="paid-badge" fontWeight="700" />
             </div>
 
             <div className={styles.infoRow}>

@@ -1445,6 +1445,7 @@ class FilesStore {
       filterType: this.filterType,
       filterSearch: this.filterSearch,
       filter: this.filter,
+      isRoomsSectionOff: this.isRoomsSectionOff,
     });
 
   createFile = async (
@@ -2144,6 +2145,14 @@ class FilesStore {
 
   get isPrivateRoomsSectionAvailable() {
     return !!this.appsStore?.isPrivateRoomsSectionAvailable;
+  }
+
+  // The Rooms app is switched off (Settings -> Apps, standalone only). The
+  // server still grants CreateRoomFrom then, so every "Create room" entry
+  // point checks this too: a room created from a file would land in a section
+  // nobody can open, and take the file with it.
+  get isRoomsSectionOff() {
+    return !!this.appsStore && !this.appsStore.isInstalled("ai-rooms");
   }
 
   get hasMoreFiles() {

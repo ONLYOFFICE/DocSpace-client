@@ -59,6 +59,7 @@ import styles from "./WhiteLabel.module.scss";
 export const WhiteLabelHeader = ({
   isSettingPaid,
   standalone,
+  onPaidBadgeClick,
   onUseTextAsLogo,
   isEmpty,
   logoTextWhiteLabel,
@@ -80,6 +81,7 @@ export const WhiteLabelHeader = ({
             className={classNames(styles.paidBadge, "paid-badge")}
             fontWeight="700"
             label={t("Common:Paid")}
+            onClick={onPaidBadgeClick}
             isPaidBadge
             backgroundColor={
               isBase

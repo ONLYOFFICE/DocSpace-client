@@ -47,6 +47,7 @@ import {
 import { getServiceLimitDescription } from "@docspace/shared/utils/ai";
 
 import type { TMetadataSelection } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
+import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import { useMetadataAIPanel } from "./hooks/useMetadataAIPanel";
@@ -77,6 +78,7 @@ const MetadataAIDialog = ({
 }: MetadataAIDialogProps) => {
   const { t } = useTranslation(["Metadata", "Files", "Common"]);
   const { isAdmin, language } = useStore("authStore");
+  const { isPayer } = useStore("paymentStore");
   const navigate = useNavigate();
 
   const {
@@ -86,7 +88,7 @@ const MetadataAIDialog = ({
     drafts,
     summary,
     error,
-    serviceLimit,
+    aiBlock,
     isSaving,
     canSave,
     prompt,
@@ -122,26 +124,56 @@ const MetadataAIDialog = ({
     return "";
   };
 
-  const openAISettings = (page: string) => () => {
+  const openPage = (path: string) => () => {
     onClose();
-    navigate(`/portal-settings/ai-settings/${page}`);
+    navigate(path);
   };
 
+  const openAISettings = (page: string) =>
+    openPage(`/portal-settings/ai-settings/${page}`);
+
   const getNotice = () => {
-    if (serviceLimit) {
+    if (aiBlock?.kind === "limit") {
       return (
         <AINotice
           title={t("Common:AILimitReached")}
           description={getServiceLimitDescription(
             t,
             language,
-            serviceLimit,
+            aiBlock,
             isAdmin,
           )}
           buttonLabel={t("Common:ChangeAILimit")}
           onClick={isAdmin ? openAISettings("limits") : undefined}
           dataTestId="metadata_ai_limit_notice"
           buttonTestId="metadata_ai_change_limit_button"
+        />
+      );
+    }
+
+    if (aiBlock?.kind === "wallet") {
+      return (
+        <AINotice
+          title={t("Common:AIPaused")}
+          description={
+            isPayer
+              ? t("Common:AIPausedWalletEmpty")
+              : t("Common:AIPausedWalletEmptyContactPayer")
+          }
+          buttonLabel={t("Common:TopUpWallet")}
+          onClick={isPayer ? openPage(PAYMENT_ROUTES.wallet) : undefined}
+          dataTestId="metadata_ai_wallet_notice"
+          buttonTestId="metadata_ai_top_up_button"
+        />
+      );
+    }
+
+    if (aiBlock?.kind === "provider") {
+      return (
+        <AINotice
+          title={t("Common:AIProviderOutOfCredits")}
+          description={t("Common:AIProviderOutOfCreditsTopUp")}
+          dataTestId="metadata_ai_provider_credits_notice"
         />
       );
     }

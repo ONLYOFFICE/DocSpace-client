@@ -169,6 +169,36 @@ describe("ContextOptionsStore.getGroupContextOptions — characterization", () =
     expect(Array.isArray(model)).toBe(true);
     expect(menuShape(model)).toMatchSnapshot();
   });
+
+  // Bug 84823: the server keeps granting CreateRoomFrom when the Rooms app is
+  // switched off; the entry is disabled, which the menu then leaves out.
+  it("disables create-room while the Rooms app is off", () => {
+    const createRoomDisabled = (isRoomsSectionOff: boolean) => {
+      const store = createTestContextOptionsStore({
+        filesStore: {
+          isRoomsSectionOff,
+          selection: [
+            {
+              id: 1,
+              fileExst: ".docx",
+              security: { CreateRoomFrom: true },
+              contextOptions: [],
+            },
+          ],
+        },
+      });
+      const option = (
+        store.getGroupContextOptions(t) as Array<{
+          key?: string;
+          disabled?: boolean;
+        }>
+      ).find((o) => o.key === "create-room");
+      return option?.disabled;
+    };
+
+    expect(createRoomDisabled(false)).toBe(false);
+    expect(createRoomDisabled(true)).toBe(true);
+  });
 });
 
 describe("ContextOptionsStore.getGroupContextOptions — Private section", () => {

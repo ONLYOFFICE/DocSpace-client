@@ -47,6 +47,7 @@ import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { isOAuthFrame, onAuthTokenPush, requestAuthToken } from "./oauthToken";
 import { frameCallEvent, isPrivateRoomsRoute } from "./common";
 import { isPortalNotFoundRedirectClaimed } from "./portalNotFound";
+import { keepPageForLogin } from "./referenceUrl";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix, timeout: apiTimeout } = apiConf;
@@ -566,15 +567,7 @@ class AxiosClient {
             // user back to it rather than to the default page. The login page
             // itself is not kept: it would only send the user back there.
             if (!window.location.pathname.startsWith("/login")) {
-              sessionStorage.setItem("referenceUrl", window.location.href);
-
-              // Named after the user the tab was showing (PrivateRoute keeps
-              // it), so the page is reopened for that user alone and not for
-              // whoever logs in next in this tab.
-              const sessionUserId = sessionStorage.getItem("sessionUserId");
-              if (sessionUserId) {
-                sessionStorage.setItem("loggedOutUserId", sessionUserId);
-              }
+              keepPageForLogin();
             }
 
             this.request(opt)?.then(() => {

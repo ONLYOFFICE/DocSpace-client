@@ -69,10 +69,15 @@ import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import type AppsStore from "SRC_DIR/store/AppsStore";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
 import { usePickerFileTitles } from "@docspace/shared/hooks/usePickerFileTitles";
-import { getAcceptButtonLabel, getCopyTargetRoomTypes } from "./utils";
+import {
+  getAcceptButtonLabel,
+  getCopyTargetRoomTypes,
+  getRoomSectionTreeFolders,
+} from "./utils";
 import { getIsDisabled } from "@docspace/shared/utils/filesSelector";
 import {
   getPickedRoomId,
@@ -117,6 +122,7 @@ const FilesSelectorWrapper = ({
   treeFolders,
   withRecentTreeFolder,
   withFavoritesTreeFolder,
+  withRoomsTreeFolder,
   withFormsTreeFolder,
 
   selection,
@@ -600,6 +606,7 @@ const FilesSelectorWrapper = ({
       treeFolders={treeFolders as unknown as FolderDtoInteger[]}
       withRecentTreeFolder={withRecentTreeFolder}
       withFavoritesTreeFolder={withFavoritesTreeFolder}
+      withRoomsTreeFolder={withRoomsTreeFolder}
       withFormsTreeFolder={withFormsTreeFolder}
       onSetBaseFolderPath={onSetBaseFolderPath}
       isUserOnly={isUserOnly}
@@ -692,6 +699,7 @@ export default inject(
       filesStore,
       infoPanelStore,
       userStore,
+      appsStore,
     }: {
       settingsStore: SettingsStore;
       selectedFolderStore: SelectedFolderStore;
@@ -702,6 +710,7 @@ export default inject(
       filesStore: FilesStore;
       infoPanelStore: InfoPanelStore;
       userStore: UserStore;
+      appsStore: AppsStore;
     },
     {
       isCopy,
@@ -713,6 +722,8 @@ export default inject(
       currentFolderId: currentFolderIdProp,
       isThirdParty,
       openRoot: openRootProp,
+      withRoomsTreeFolder,
+      withFormsTreeFolder,
     }: FilesSelectorProps,
   ) => {
     const {
@@ -897,6 +908,10 @@ export default inject(
       getIcon,
 
       roomsFolderId,
+      ...getRoomSectionTreeFolders(appsStore.isInstalled, {
+        withRoomsTreeFolder,
+        withFormsTreeFolder,
+      }),
       currentFolderId:
         isThirdParty && currentFolderIdProp
           ? currentFolderIdProp

@@ -42,11 +42,10 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { isMobile } from "@docspace/shared/utils";
-import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import ConsumerItem from "./sub-components/consumerItem";
@@ -228,17 +227,7 @@ class ThirdPartyServices extends React.Component {
                   <Text fontSize="16px" fontWeight={700}>
                     {t("IncludedInBusiness")}
                   </Text>
-                  <Badge
-                    className={styles.paidBadge}
-                    backgroundColor={
-                      theme.isBase
-                        ? globalColors.favoritesStatus
-                        : globalColors.favoriteStatusDark
-                    }
-                    fontWeight="700"
-                    label={t("Common:Paid")}
-                    isPaidBadge
-                  />
+                  <PaidBadge className={styles.paidBadge} fontWeight="700" />
                 </div>
               ) : null}
               {paidConsumers.map((consumer) => (

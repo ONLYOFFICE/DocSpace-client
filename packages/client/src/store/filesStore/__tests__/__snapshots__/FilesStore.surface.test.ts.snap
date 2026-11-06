@@ -116,6 +116,7 @@ exports[`FilesStore — public surface > exposes a stable set of public members 
   "isMuteCurrentRoomNotifications",
   "isPreview",
   "isPrivateRoomsSectionAvailable",
+  "isRoomsSectionOff",
   "isThirdPartySelection",
   "isUpdatingRowItem",
   "isViewedSelected",

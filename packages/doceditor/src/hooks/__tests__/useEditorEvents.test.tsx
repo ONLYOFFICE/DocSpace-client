@@ -93,7 +93,6 @@ vi.mock("@/utils", () => ({
   getCurrentDocumentVersion: vi.fn(),
   getDocEditor: vi.fn(() => undefined),
   getFormsSectionFolderUrl: vi.fn(),
-  getSafeReturnUrl: vi.fn(),
   isFormRole: vi.fn(),
   isFormRoomFile: vi.fn(() => false),
   setDocumentTitle: vi.fn(),

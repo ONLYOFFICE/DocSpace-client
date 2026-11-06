@@ -320,6 +320,7 @@ type TFilesStore = {
   roomsFilter: RoomsFilter;
   categoryType: number;
   isPrivateRoomsSectionAvailable: boolean;
+  isRoomsSectionOff: boolean;
   hasSelection: boolean;
   allFilesIsEditing: boolean;
   canConvertSelected: boolean;

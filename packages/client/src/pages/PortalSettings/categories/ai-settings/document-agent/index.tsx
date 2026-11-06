@@ -80,8 +80,6 @@ const FIELD_MAX: Record<"maxToolCalls" | "maxFileMb", number> = {
 };
 
 
-const CHAT_MODEL_KEY = "chat-model";
-
 const asPositiveInt = (value: string): number | null => {
   if (!/^\d+$/.test(value)) return null;
   const number = Number(value);
@@ -127,6 +125,7 @@ const DocumentAgentComponent = ({
 
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
+  const defaultProfile = useProfilesStore((s) => s.defaultProfile);
   const ensureProfiles = useProfilesStore((s) => s.ensureProfiles);
 
   // The chat starts knowing only its assigned profiles; the model combo box
@@ -142,15 +141,15 @@ const DocumentAgentComponent = ({
     if (documentAgentSettings) setDraft(toDraft(documentAgentSettings));
   }, [documentAgentSettings]);
 
+  // The portal's default profile first, then the rest of the catalogue.
   const profileOptions = React.useMemo<TOption[]>(
     () => [
-      { key: CHAT_MODEL_KEY, label: t("Common:DocumentAgentChatModel") },
-      ...profiles.map((profile) => ({
-        key: profile.id,
-        label: profile.name,
-      })),
+      ...(defaultProfile ? [{ key: defaultProfile.id, label: defaultProfile.name }] : []),
+      ...profiles
+        .filter((profile) => profile.id !== defaultProfile?.id)
+        .map((profile) => ({ key: profile.id, label: profile.name })),
     ],
-    [profiles, t],
+    [profiles, defaultProfile],
   );
 
   const reasoningOptions = React.useMemo<TOption[]>(
@@ -213,9 +212,12 @@ const DocumentAgentComponent = ({
     setSaveRequestRunning(false);
   };
 
+  // Nothing chosen yet, or a profile that is gone, shows as the portal's
+  // default; the setting stays null until a model is picked by hand.
   const selectedProfile =
-    profileOptions.find((option) => option.key === (draft.profileId ?? CHAT_MODEL_KEY)) ??
-    profileOptions[0];
+    profileOptions.find((option) => option.key === draft.profileId) ??
+    profileOptions[0] ??
+    ({ key: "none", label: t("Common:SelectAction") } as TOption);
   const selectedReasoning =
     reasoningOptions.find((option) => option.key === draft.reasoning) ?? reasoningOptions[0];
 
@@ -289,9 +291,7 @@ const DocumentAgentComponent = ({
           <ComboBox
             options={profileOptions}
             selectedOption={selectedProfile}
-            onSelect={(option) =>
-              patch({ profileId: option.key === CHAT_MODEL_KEY ? null : String(option.key) })
-            }
+            onSelect={(option) => patch({ profileId: String(option.key) })}
             scaled
             scaledOptions
             dropDownMaxHeight={profileOptions.length > 7 ? 300 : undefined}

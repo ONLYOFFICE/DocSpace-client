@@ -183,7 +183,11 @@ DocSpace server 3.1.0, Document Server 10.0.2.5 (not the build of gate item
   Private section went without a reload, the private room "Pirate room" was
   listed in Rooms with its private badge, and the Keys management tab and
   page stayed, also after a full load of `/profile/keys-management`. The app
-  was switched back on afterwards.
+  was switched back on afterwards. Since the server's Private section
+  (`c866c055e1`, 2026-11-06) the Rooms list leaves private rooms out, and the
+  owner decided the same day to hide them while the section is not available
+  (`private-rooms-server-section`, proposal decision 5): with the app off a
+  private room is reached by its address only.
 
 ## Release stand check (2026-11-06, SaaS, part of task 6.2)
 

@@ -466,8 +466,7 @@ describe("the calls", () => {
     ]);
   });
 
-  // TEMPORARY MOCK: while the route is missing, an unreadable list falls back to stock chips.
-  it("reads the project's suggestions with the room, and the mock chips when they cannot be read", async () => {
+  it("reads the project's suggestions with the room, and none when they cannot be read", async () => {
     const chips = [{ name: "Summary", prompt: "Summarize the contracts" }];
     route({
       "GET /files/rooms/7": folder({ aiProject: undefined }),
@@ -480,11 +479,7 @@ describe("the calls", () => {
       "GET /files/rooms/7": folder({ aiProject: undefined }),
       "GET /files/rooms/7/sources": sources(),
     });
-    expect((await getAiProject(7)).aiProject.suggestions.map((chip) => chip.name)).toEqual([
-      "Summarize contracts",
-      "Draft a follow-up",
-      "Find deadlines",
-    ]);
+    expect((await getAiProject(7)).aiProject.suggestions).toEqual([]);
   });
 
   it("stores the suggestions of a new project, and none when there are none", async () => {

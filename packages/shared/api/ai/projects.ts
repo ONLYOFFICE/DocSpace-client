@@ -508,17 +508,6 @@ const sameSuggestions = (a: TAiProjectSuggestion[], b: TAiProjectSuggestion[]) =
   a.length === b.length && a.every((item, i) => item.name === b[i].name && item.prompt === b[i].prompt);
 
 /**
- * TEMPORARY MOCK: remove once the server serves `files/rooms/{id}/suggestions`.
- * Until then the route answers 404 and every project shows these chips, so
- * the chat can be looked at with suggestions.
- */
-const MOCK_AI_PROJECT_SUGGESTIONS: TAiProjectSuggestion[] = [
-  { name: "Summarize contracts", prompt: "Summarize the contracts signed this month and list the main risks." },
-  { name: "Draft a follow-up", prompt: "Draft a follow-up email to a client after the first sales call." },
-  { name: "Find deadlines", prompt: "Find all payment and delivery deadlines in the knowledge base." },
-];
-
-/**
  * The suggestion chips of the project's empty chat
  * (`GET files/rooms/{id}/suggestions`, readable by every member); `[]` when none.
  */
@@ -740,8 +729,7 @@ export const getAiProject = async (id: number) => {
     getModel(id).catch(() => null),
     // Instructions or suggestions that cannot be read leave the chat without them.
     getAiProjectInstructions(id).catch(() => ""),
-    // TEMPORARY MOCK: `[]` again once the route exists (see MOCK_AI_PROJECT_SUGGESTIONS).
-    getAiProjectSuggestions(id).catch(() => MOCK_AI_PROJECT_SUGGESTIONS),
+    getAiProjectSuggestions(id).catch(() => []),
   ]);
   return toAiProject(withSources(room as TAiProjectRoomDto, sources, profile, { instructions, suggestions }));
 };

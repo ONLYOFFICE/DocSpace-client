@@ -17,7 +17,7 @@ The server landed the section in `c866c055e1` (1.1), and its shape is recorded i
   - `privateRoomList.ts` and `roomList.ts` answer `searchArea=PrivateRooms` with the private rooms, `Active` without private rooms whatever the filter except `Private`, which means the section, and `Archive` with the filter as given (`VirtualRoomsCommonController.GetRoomsFolder`, `FileSecurity` around `:2983`);
   - Recent with `searchArea=PrivateRooms` answers 400 (`EntryManager`).
 
-  Add contract cases for the section list, its archive, the Rooms list without private rooms, the private filter on Rooms, the root listing with the app on and off, and Recent. Verify: `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`; type-check login and management too (`Array.from` in the mocks)
+  Add contract cases for the section list, its archive, the Rooms list without private rooms, the private filter on Rooms, the root listing with the app on and off, and Recent. Update the E2E case "App-off spec" of `packages/client/__tests__/private-rooms-app-off.spec.ts` in the same commit: "Existing Private Room" is no longer listed in Rooms (proposal decision 5), "Ordinary Room" still is. Verify: `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`, that spec under Docker `tests-dev`; type-check login and management too (`Array.from` in the mocks)
 
 ## 3. Listing
 

@@ -156,6 +156,8 @@ type MockProjectOptions = {
   /** The room tags, by name. */
   tags?: string[];
   profile?: typeof PROFILE | null;
+  /** The project's instructions to the chat. */
+  instructions?: string;
   instructionsRooms?: (typeof INSTRUCTIONS_ROOMS)[keyof typeof INSTRUCTIONS_ROOMS][];
   knowledgeRooms?: (typeof KNOWLEDGE_ROOMS)[keyof typeof KNOWLEDGE_ROOMS][];
 };
@@ -176,6 +178,7 @@ export const aiProjectMock = ({
   pinned = false,
   tags = [],
   profile = PROFILE,
+  instructions = "",
   instructionsRooms = [],
   knowledgeRooms = [],
 }: MockProjectOptions) => {
@@ -207,6 +210,7 @@ export const aiProjectMock = ({
     security: sec,
     aiProject: {
       profile,
+      instructions,
       instructionsRooms,
       knowledgeRooms,
       canEditSettings: sec.EditRoom,
@@ -414,6 +418,33 @@ export const aiProjectModelHandlers = (
       const id = new URL(request.url).searchParams.get("id");
       if (id !== PROFILE.id) return HttpResponse.json({ error: "Profile not found" }, { status: 404 });
       return HttpResponse.json({ id: PROFILE.id, name: PROFILE.name, providerType: PROFILE.provider, capabilities: 1 });
+    }),
+  ];
+};
+
+/**
+ * `GET` / `PUT files/rooms/:id/instructions`: the project's instructions to
+ * the chat ("" when none); a write replaces them, "" clears them.
+ */
+export const aiProjectInstructionsHandlers = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+) => {
+  const url = `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/instructions`;
+  const answer = (project: AiProjectMock) =>
+    HttpResponse.json({ response: { instructions: project.aiProject.instructions } });
+  return [
+    http.get(url, ({ params }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return notFound();
+      return answer(project);
+    }),
+    http.put(url, async ({ params, request }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return notFound();
+      const { instructions } = (await request.json()) as { instructions?: string };
+      project.aiProject.instructions = instructions ?? "";
+      return answer(project);
     }),
   ];
 };
@@ -733,6 +764,7 @@ export const aiProjectsHandlers = (
   aiProjectSkillsHandler(port, projects),
   ...aiProjectSourcesHandlers(port, projects),
   ...aiProjectModelHandlers(port, projects),
+  ...aiProjectInstructionsHandlers(port, projects),
   aiProjectGetByIdHandler(port, projects),
   aiProjectCreateHandler(port, projects),
   roomLogoUploadHandler(port),

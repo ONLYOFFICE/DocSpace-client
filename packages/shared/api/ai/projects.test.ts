@@ -89,6 +89,7 @@ describe("toAiProject", () => {
     expect(project.aiProject).toEqual({
       partial: true,
       profile: null,
+      instructions: "",
       instructionsRooms: [],
       knowledgeRooms: [],
       canEditSettings: true,
@@ -398,6 +399,69 @@ describe("the calls", () => {
     expect(project.aiProject.profile).toBeNull();
     expect(project.aiProject.warnings).toEqual([
       { code: "modelNotSaved", roomId: null, subjectId: null, message: "AI profile does not support chat" },
+    ]);
+  });
+
+  it("reads the project's instructions with the room, and none when they cannot be read", async () => {
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+      "GET /files/rooms/7/instructions": { instructions: "Be brief." },
+    });
+    expect((await getAiProject(7)).aiProject.instructions).toBe("Be brief.");
+
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+    });
+    expect((await getAiProject(7)).aiProject.instructions).toBe("");
+  });
+
+  it("stores the instructions of a new project, and none when they are empty", async () => {
+    route({
+      "POST /files/rooms": folder({ aiProject: undefined }),
+      "PUT /files/rooms/7/instructions": ({ data }: { data?: unknown }) => {
+        expect(data).toEqual({ instructions: "Be brief." });
+        return { instructions: "Be brief." };
+      },
+    });
+    expect((await createAiProject({ title: "Sales", aiProject: { instructions: "Be brief." } })).aiProject.instructions).toBe(
+      "Be brief.",
+    );
+
+    request.mockClear();
+    await createAiProject({ title: "Sales", aiProject: { instructions: "" } });
+    expect(request).not.toHaveBeenCalledWith(expect.objectContaining({ url: "/files/rooms/7/instructions" }));
+  });
+
+  it("writes changed instructions on an edit, skips unchanged ones and keeps the save when refused", async () => {
+    const opened = toAiProject(folder({ aiProject: { ...folder().aiProject, instructions: "Old" } }));
+    route({
+      "PUT /files/rooms/7/instructions": ({ data }: { data?: unknown }) => {
+        expect(data).toEqual({ instructions: "" });
+        return { instructions: "" };
+      },
+    });
+    const cleared = await updateAiProject(
+      7,
+      { title: opened.title, aiProject: { instructions: "" } },
+      opened,
+    );
+    expect(cleared.aiProject.instructions).toBe("");
+
+    request.mockClear();
+    await updateAiProject(7, { title: opened.title, aiProject: { instructions: "Old" } }, opened);
+    expect(request).not.toHaveBeenCalled();
+
+    route({
+      "PUT /files/rooms/7/instructions": () => {
+        throw { response: { data: { error: "Not allowed" } } };
+      },
+    });
+    const refused = await updateAiProject(7, { title: opened.title, aiProject: { instructions: "New" } }, opened);
+    expect(refused.aiProject.instructions).toBe("Old");
+    expect(refused.aiProject.warnings).toEqual([
+      { code: "instructionsNotSaved", roomId: null, subjectId: null, message: "Not allowed" },
     ]);
   });
 

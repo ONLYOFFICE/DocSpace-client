@@ -42,6 +42,7 @@ import { ModalDialog, ModalDialogType } from "@onlyoffice/apps-ui-kit/components
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
@@ -121,7 +122,8 @@ const ROOM_ICONS: Record<TRoomType, "instructionsRoom.svg" | "knowledgeRoom.svg"
 /**
  * The create / edit aside of a project, as the mockups draw it: the logo
  * with its colour next to the name, the owner row (edit only), the model
- * with its note under the field, then the rooms of each kind as tags with
+ * with its note under the field, the instructions to the chat as the agent
+ * dialog had them, then the rooms of each kind as tags with
  * the "Select rooms" button in the same line and the hint below.
  */
 const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogProps) => {
@@ -168,6 +170,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const hasImage = !!previewIcon || !!storedImage;
   // `null` until a model is picked: the portal default is preselected.
   const [profileId, setProfileId] = React.useState<string | null>(project?.aiProject.profile?.id ?? null);
+  const [prompt, setPrompt] = React.useState(project?.aiProject.instructions ?? "");
   const [instructions, setInstructions] = React.useState<TAiProjectSource[]>(project?.aiProject.instructionsRooms ?? []);
   const [knowledge, setKnowledge] = React.useState<TAiProjectSource[]>(project?.aiProject.knowledgeRooms ?? []);
   const [selector, setSelector] = React.useState<TRoomType | null>(null);
@@ -301,6 +304,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
         logo: { color: `#${color}`, cover: coverIcon?.id ?? "", image },
         aiProject: {
           profileId: savedProfileId,
+          instructions: prompt.trim(),
           instructionsRoomIds: instructions.map((r) => r.id),
           knowledgeRoomIds: knowledge.map((r) => r.id),
           rooms: [...instructions, ...knowledge],
@@ -529,6 +533,24 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
               <Text className={styles.hint} fontSize="12px" lineHeight="16px" noSelect>
                 {t("Common:AIProjectModelHint")}
               </Text>
+            </div>
+            <div className={styles.block}>
+              <div>
+                <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+                  {t("Common:AIInstructions")}
+                </Text>
+                <Text className={styles.hint} fontSize="12px" lineHeight="16px" noSelect>
+                  {t("Common:InstructionsDescriptionAgent")}
+                </Text>
+              </div>
+              <Textarea
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                heightTextArea={144}
+                placeholder={t("Common:InstructionsDescriptionAgentExample")}
+                isDisabled={isSaving}
+                dataTestId="ai-project-instructions-textarea"
+              />
             </div>
             {roomsBlock(t("Common:InstructionsRooms"), t("Common:AIProjectInstructionsHint"), instructions, INSTRUCTIONS_ROOM_TYPE, setInstructions)}
             {roomsBlock(t("Common:AIProjectKnowledgeRooms"), t("Common:AIProjectKnowledgeHint"), knowledge, KNOWLEDGE_ROOM_TYPE, setKnowledge)}

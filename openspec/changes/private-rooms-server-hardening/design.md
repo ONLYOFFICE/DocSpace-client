@@ -539,16 +539,26 @@ replaces a read.
   the table the `e2e` provider record of `EncryptionLoginProvider` lives
   in. A restored portal therefore holds the encrypted files without a
   single wrapped file key and without the users' key records. Adding the
-  tables would not be enough on SaaS, where a restore remaps the integer
-  ids (`TableInfo` with `IdType.Integer`, through `ColumnMapper`): the
-  client binds every wrap to the sender, the recipient and the file id
+  tables alone would not be enough: a restore never keeps the ids (the
+  owner, 2026-11-06; the reply named SaaS), the integer ids being remapped
+  through `ColumnMapper` (`TableInfo` with `IdType.Integer`) and the user
+  ids through `UserIDColumns`, and the client binds every wrap to the
+  sender, the recipient and the file id
   (`packages/shared/services/encryption/hpke.ts:95-113`, `buildInfo`), so
-  a wrap written for the old file id does not open the file under its new
-  one. Nobody is warned today. The reply's options: warn that a restore
+  a wrap written for the old ids does not open the file under the new
+  ones. Nobody is warned today. The reply's options: warn that a restore
   loses the content of private rooms, or store the original ids next to
   each key and re-wrap on the client after a restore. The reply drew this
-  from the code; no restore was run, and a standalone dump or a region
-  move was not checked.
+  from the code; no restore was run. A key the user exported before the
+  backup does not help: the export carries the sealed identity only
+  (`private-rooms/key-management`, "Export a key"), and with no wrap
+  stored there is nothing for it to unwrap. The re-wrap option therefore
+  needs both tables restored with the original ids kept next to each row,
+  so the client can unwrap under the old ids (`buildInfo` takes them as
+  parameters) and wrap again under the new ones, and it needs the sender's
+  public key of every wrap, which the `e2e` record of `account_links`
+  provides; a member who opens the room after the restore with their own
+  key can then re-wrap for the others.
 
 ## Goals / Non-Goals
 
@@ -901,8 +911,8 @@ replaces a read.
   the mock of task 12.4b only.
 - Backup and restore (proposal decision 9, task group 15): a portal
   backup carries neither the file keys nor the users' key records, and a
-  SaaS restore remaps the file ids the wraps are bound to (Context,
-  "Answered by the backend team"). Owner: product with the backend team.
+  restore remaps the ids the wraps are bound to (Context, "Answered by
+  the backend team"). Owner: product with the backend team.
   Whether the fix is a warning, the backup of both tables with a
   client-side re-wrap keyed by the original ids, or both, changes the
   server-contract delta and the client tasks, so it is resolved before

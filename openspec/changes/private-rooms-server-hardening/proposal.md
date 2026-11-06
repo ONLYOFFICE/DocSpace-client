@@ -190,11 +190,12 @@ None.
    27). The client never creates one.
 9. Backup and restore (found by the backend team on 2026-11-05): a portal
    backup carries neither `files_file_keys` nor the `e2e` records of
-   `account_links`, and a SaaS restore remaps the file ids the wraps are
-   bound to, so a restored portal cannot open the files of its private
-   rooms and nobody is warned (design.md, "Answered by the backend team").
-   Product with the backend team: warn that a restore loses that content,
-   back both tables up with the original ids so the client can re-wrap
-   after a restore, or both. Task group 15; a gate item of
+   `account_links`, and a restore remaps the ids the wraps are bound to,
+   so a restored portal cannot open the files of its private rooms and
+   nobody is warned; a key the user exported beforehand restores their
+   identity only, not the wraps (design.md, "Answered by the backend
+   team"). Product with the backend team: warn that a restore loses that
+   content, back both tables up with the original ids kept so the client
+   can unwrap under the old ids and re-wrap under the new ones, or both. Task group 15; a gate item of
    `private-rooms-release-gate` (prerequisite 9) and a "Before users
    start" item of the beta release notes until decided.

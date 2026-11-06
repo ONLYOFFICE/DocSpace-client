@@ -152,6 +152,7 @@ export type BuildContextOptionsDeps = {
   filterType: FilesStore["filterType"];
   filterSearch: FilesStore["filterSearch"];
   filter: FilesStore["filter"];
+  isRoomsSectionOff: FilesStore["isRoomsSectionOff"];
 };
 
 export const buildContextOptions = (
@@ -404,6 +405,13 @@ export const buildContextOptions = (
 
     if (!item.security?.UpdateXlsx) {
       fileOptions = removeOptions(fileOptions, ["update-xlsx-data"]);
+    }
+
+    if (deps.isRoomsSectionOff) {
+      fileOptions = removeOptions(fileOptions, [
+        "create-room-separator",
+        "create-room",
+      ]);
     }
 
     if (deps.publicRoomStore.isPublicRoom) {
@@ -1029,6 +1037,13 @@ export const buildContextOptions = (
 
   if (optionsToRemove.length) {
     folderOptions = removeOptions(folderOptions, optionsToRemove);
+  }
+
+  if (deps.isRoomsSectionOff) {
+    folderOptions = removeOptions(folderOptions, [
+      "create-room-separator",
+      "create-room",
+    ]);
   }
 
   if (deps.publicRoomStore.isPublicRoom) {

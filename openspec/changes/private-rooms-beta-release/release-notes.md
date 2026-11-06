@@ -23,8 +23,8 @@ Handover to the documentation team: not yet recorded.
   switches the feature off and on with the Private app in the apps settings.
   While it is off:
   - the Private section, the Private app and the Private room type are gone;
-  - existing private rooms stay usable and are listed in Rooms with their
-    private badge;
+  - existing private rooms stay usable by their address but are not listed
+    anywhere, since the Rooms list leaves them out (server, 2026-11-06);
   - users who already hold a key keep the Keys management tab.
 - **Embedding:** an embedded client frame and the SDK private pages show
   private rooms only when the host sets `privateRooms` in the frame

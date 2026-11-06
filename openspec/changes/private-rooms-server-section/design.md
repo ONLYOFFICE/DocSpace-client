@@ -49,12 +49,10 @@ The client handles the Forms root in `ClientArticleSidebar`,
 `EditRoomGroupsDialog` (`RoomSearchArea.Forms`, `FolderType.FormRooms`);
 the Private section takes the same paths.
 
-The server work is announced, not on the branch. Nothing here is the
-server's shape until it is read: the `server-contract` delta of this change
-describes the agreed target on the Forms model and is corrected at the read
-(task 1.2) before any mock follows it, the way
-`private-rooms-server-hardening` handled its backend items. No stashed
-design document covers a server section; the archived sidebar change
+The server work landed on 2026-11-06 and is read below. Until then the
+`server-contract` delta described the target on the Forms model. It was
+corrected at the read (task 1.2), before any mock followed it. No stashed
+design document covers a server section. The archived sidebar change
 recorded the follow-up with the user on 2026-10-22.
 
 ### Landed on 2026-11-06 (read in `c866c055e1`)
@@ -154,73 +152,84 @@ recorded.
 
 ## Decisions
 
-1. **The client waits for the server; no mock runs ahead.** The main spec
+1. **The client followed the server, and no mock ran ahead.** The main spec
    `private-rooms/server-contract` ("E2E mocks mirror the server contract")
-   forbids a handler for a shape the server does not have, so every client
-   task of this change is blocked on task 1.2. Alternative: build the
-   client against the Forms model now and adjust at the read; rejected, the
-   archived sidebar change already took the client-only route and a second
-   rewrite before the read would make it three.
+   forbids a handler for a shape the server does not have. So every client
+   task waited for the read of 1.2, which corrected the planned Forms model
+   in one point: private rooms are not moved under the new root.
 
 2. **The section keeps its addresses and its rules; only the data source
-   changes.** `/private` and `/private/archived` stay, the availability
-   rule of `private-rooms/feature-gating` stays, and so do the withheld
-   actions (no AI chat, no groups unless decided, no onboarding tour, no
-   Recent or Favorites). The listing requests carry the section's search
-   area instead of the privacy filter; the Rooms requests carry no privacy
-   filter any more, because private rooms no longer live under the Rooms
-   root. Alternative: keep sending the privacy filter as belt and braces;
-   rejected, it would hide a private room the move of proposal decision 4
-   left under Rooms instead of showing the defect.
+   changes.**
+   - `/private` and `/private/archived` stay, the availability rule of
+     `private-rooms/feature-gating` stays, and so do the withheld actions
+     (no AI chat, no groups unless decided, no onboarding tour, no Recent or
+     Favorites).
+   - The section list asks for `searchArea=PrivateRooms`, and its Archive
+     for `searchArea=Archive&privacyFilter=Private`, since the server has no
+     archive area per section and keeps the filter there.
+   - The Rooms list asks for `searchArea=Active` with no filter: the server
+     leaves private rooms out of that area whatever the filter. A private
+     filter sent there would turn the request into the section.
+   - Rooms → Archive keeps `privacyFilter=NotPrivate`, because the shared
+     Archive holds both kinds.
 
-3. **Section addresses and live updates decide by the root, not by the
-   private setting.** Today the client decides the section of a folder from
-   the private setting of its room ("Section addresses are decided before
-   the folder is shown") and reads the room on a live event because the
-   event carries no private flag. With a root of its own the folder data
-   carries the root folder type and the parent id, so the address decision
-   and the socket split read those; the private setting keeps deciding
-   encryption and nothing else ("Encryption does not depend on the
-   section"). Alternative: keep both signals; rejected, they disagree
-   while the existing rooms are moved.
+   Alternative: keep `searchArea=Active&privacyFilter=Private` for the
+   section, which the server still reads as the section. Rejected: it relies
+   on a compatibility path the server keeps for today's client, and naming
+   the area says what is meant.
 
-4. **The counter is the root's counter.** The Private item shows
-   `FileMarker`'s count for the Private root, as the Rooms and Forms items
-   do for theirs, with the same panel and mark-all-as-read; the Rooms
-   counter stops counting private rooms because the server's routing
-   changes, not because the client subtracts. Alternative: a count derived
-   from the listing on the client; rejected, it is what the archived change
-   could not do correctly.
+3. **Addresses and live updates keep deciding by the private setting.** A
+   private room reports the Rooms root as its root and the Rooms root as its
+   parent. The setting on the room is therefore the only signal the client
+   gets, both for the address decision ("Section addresses are decided
+   before the folder is shown") and for the socket split ("Live updates
+   respect the split"), which stay as they are. The planned switch to the
+   root folder type (former tasks 3.2 and 3.3) is dropped. Alternative: ask
+   the server to report the Private root as the root folder type of a
+   private room. Not asked: it would change every room link and every check
+   the server keys on `VirtualRooms`.
+
+4. **The counter is the root's counter.** The Private item shows the count
+   the root listing gives for the Private root. As with Forms, that is the
+   folder's own `new`, because the anchor holds no children (`getFoldersTree`
+   already special-cases Forms). The Private item gets the same panel and
+   mark-all-as-read as Rooms. The Rooms counter already leaves private rooms
+   out on the server. Alternative: a count derived from the listing on the
+   client. Rejected: it is what the archived change could not do correctly.
+
+5. **The root type comes from the kit.** `FolderType` is the kit's enum and
+   ends at `AiHub = 41`. `PrivateRooms = 42` is added in
+   `docspace-ui-kit-react` on `release/v4.1.0`, which ships with the release.
+   `RoomSearchArea.PrivateRooms` is added in this repository's enums.
+   Alternative: a local constant in shared. Rejected: the enum is shared by
+   every app.
 
 ## Risks / Trade-offs
 
-- [The server shape differs from the Forms model] → the delta and the tasks
-  are corrected at the read before anything is built; no code is written
-  against the model.
-- [Existing private rooms left under the Rooms root during the move] →
-  proposal decision 4; the client shows what the server lists and filters
-  nothing.
-- [Private rooms invisible while the app is off] → proposal decision 5
-  before task 3.1; the feature-gating requirement that lists them in Rooms
-  stays.
-- [The sidebar screenshots move] → regenerated under Docker with the full
+- [Private rooms invisible while the section is not available] → The server
+  already behaves this way. Proposal decision 5 picks between accepting it
+  in the spec and listing them through the `PrivateRooms` area. Task 3.1
+  waits for it.
+- [Today's client between the server commit and this change] → The section
+  requests (`Active` with `Private`, `Archive` with `Private`) and the Rooms
+  requests (`Active` with `NotPrivate`) keep working. The Private item has no
+  counter yet, and the Rooms counter no longer counts private news. The new
+  root sits unnamed among the tree folders. Check the root list, the sidebar
+  and the move and copy picker on a stand with the build.
+- [The sidebar screenshots move] → Regenerated under Docker with the full
   E2E run (task 7.1) and announced to the teams that merge into the release
   branch.
-- [The SDK private pages list through the shared helpers] → task 6.1 checks
-  them at the read.
+- [The SDK private pages list through the shared helpers] → Task 6.1.
 
 ## Migration Plan
 
-1. The backend team lands the section; task 1.2 reads it and corrects the
-   delta and the proposal decisions.
-2. Mocks follow (group 2), then the listing and navigation (group 3), then
-   the counter (group 4).
-3. Rollback: the client work is reverted as a whole; the server keeps
-   answering the Rooms listing with the privacy filter, which the main spec
-   still requires until this change is archived.
+1. Done: the backend team landed the section, and task 1.2 read it and
+   corrected the deltas and the proposal decisions.
+2. Then: the kit's `FolderType` (1.3), the mocks (group 2), the listing
+   (group 3) and the counter (group 4).
+3. Rollback: revert the client work as a whole. The server keeps answering
+   today's client (the section through `Active` with `Private`).
 
 ## Open Questions
 
-- Proposal decisions 1 to 5. Decisions 1 and 2 add requirements to the
-  deltas (group 5); decisions 3 to 5 are settled by the server commit and
-  recorded at the read (task 1.2) before group 3.
+- Proposal decisions 1, 2 and 5.

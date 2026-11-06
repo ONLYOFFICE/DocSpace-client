@@ -23,7 +23,7 @@ The system SHALL show on the Rooms item the new-items count of the Rooms root on
 ## MODIFIED Requirements
 
 ### Requirement: Section lists only private rooms
-The system SHALL request the section list as the active rooms of the Private root the server provides, and its Archive as the archived rooms of that root, through the section's search area. Both values SHALL come from the address category, whatever search area or privacy filter the address query carries. A room without the private setting MUST NOT appear in either list.
+The system SHALL request the section list with the section's search area (`PrivateRooms`), and its Archive as the shared Archive with the private filter. Both SHALL come from the address category, whatever search area or privacy filter the address query carries. A room without the private setting MUST NOT appear in either list.
 
 #### Scenario: List opened
 - **WHEN** the user opens the Private list
@@ -35,18 +35,18 @@ The system SHALL request the section list as the active rooms of the Private roo
 
 #### Scenario: Archive address carries the active search area
 - **WHEN** `/private/archived/filter?searchArea=Active` is opened
-- **THEN** the request names the section's archive and only archived private rooms are listed
+- **THEN** the request names the Archive area with the private filter, and only archived private rooms are listed
 
 #### Scenario: Connected third-party room
 - **WHEN** the user has a room on connected third-party storage
 - **THEN** that room is never listed in the Private section
 
 ### Requirement: Rooms section excludes private rooms while the section is available
-The system SHALL request the Rooms list and Rooms → Archive without a privacy filter; while the section is available, private rooms are absent from them because they live under the Private root, not under the Rooms root. While the section is not available, the Rooms list SHALL list private rooms with their private badge as before.
+The system SHALL request the Rooms list without a privacy filter, the server leaving private rooms out of the Rooms area, and Rooms → Archive with the non-private filter, since the shared Archive holds both. While the section is not available, the Rooms list SHALL list private rooms with their private badge as before.
 
 #### Scenario: Section available
 - **WHEN** the user opens Rooms or Rooms → Archive while the section is available
-- **THEN** the request carries no privacy filter and no private room is listed
+- **THEN** the Rooms request carries no privacy filter, the Rooms → Archive request carries the non-private filter, and no private room is listed
 
 #### Scenario: Section not available
 - **WHEN** the user opens Rooms while the section is not available
@@ -86,17 +86,6 @@ The system SHALL apply the section's search area to every rooms-list request of 
 #### Scenario: Restore from the archive
 - **WHEN** the user restores a private room from Private → Archive
 - **THEN** the user stays in Private → Archive, whose refreshed list names the section's archive and no longer contains the room
-
-### Requirement: Live updates respect the split
-The system SHALL insert a room that arrives through a live update only into the open list whose root it belongs to. That covers a room created, restored or shared with the user. The client SHALL read the room's root from the room itself, because the live event does not carry it.
-
-#### Scenario: Invited to a private room
-- **WHEN** another user adds the current user to a private room while the Rooms list is open and the section is available
-- **THEN** the room is not inserted into the Rooms list, and it is listed in Private once that list is opened
-
-#### Scenario: Ordinary room created in another tab
-- **WHEN** the user creates a non-private room in another tab while the Private list is open
-- **THEN** the room is not inserted into the Private list
 
 ## REMOVED Requirements
 

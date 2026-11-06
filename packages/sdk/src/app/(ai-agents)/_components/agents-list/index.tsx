@@ -152,7 +152,7 @@ type Props = {
 
 const AgentsList = observer(({ agents, section }: Props) => {
   const router = useRouter();
-  const { t } = useTranslation(["Common", "Files"]);
+  const { t, i18n } = useTranslation(["Common", "Files"]);
   const store = useAgentsListStore();
   const userStore = useAgentsUserStore();
   const isAdmin = !!(userStore.user?.isAdmin || userStore.user?.isOwner);
@@ -373,7 +373,7 @@ const AgentsList = observer(({ agents, section }: Props) => {
                     fontWeight={400}
                     className="row_update-text"
                   >
-                    {formatCreated(agent.created)}
+                    {formatCreated(agent.created, i18n.language)}
                   </Text>
                 </RowContent>
               </Row>
@@ -481,7 +481,7 @@ const AgentsList = observer(({ agents, section }: Props) => {
                 </TableCell>
                 <TableCell>
                   <Text fontSize="12px" fontWeight={600} truncate>
-                    {formatCreated(agent.created)}
+                    {formatCreated(agent.created, i18n.language)}
                   </Text>
                 </TableCell>
                 <TableCell>

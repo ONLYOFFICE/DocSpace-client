@@ -82,6 +82,7 @@ import type {
   TTranslation,
 } from "../../types";
 import type { TFile, TFileLink, TFolder } from "../../api/files/types";
+import { LATIN_NUMBERING_SYSTEM } from "../../utils/latin-digits";
 
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -337,9 +338,10 @@ export const getExpiredOptions = (
   locale: string,
 ) => {
   const relativeTime = new Intl.RelativeTimeFormat(locale, {
+    numberingSystem: LATIN_NUMBERING_SYSTEM,
     numeric: "always",
     style: "long",
-  });
+  } as Intl.RelativeTimeFormatOptions);
 
   const oneDay = relativeTime.format(1, "day");
   const severalDays = relativeTime.format(7, "day");

@@ -48,6 +48,7 @@ import {
 
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { LATIN_NUMBERING_SYSTEM } from "@docspace/shared/utils/latin-digits";
 import { getEffectiveFraction } from "@onlyoffice/apps-ui-kit/billing/wallet/utils";
 
 import { parseAiPrices } from "@onlyoffice/apps-ui-kit/billing/utils/parsers";
@@ -124,6 +125,7 @@ class ServicesStore {
     );
 
     return new Intl.NumberFormat(language, {
+      numberingSystem: LATIN_NUMBERING_SYSTEM,
       style: "currency",
       currency: this.aiModelsCurrency,
       minimumFractionDigits: 2,

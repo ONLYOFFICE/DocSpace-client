@@ -41,6 +41,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import { now, parseToDateTime, isAfter } from "@onlyoffice/apps-ui-kit/utils/date";
+import { LATIN_NUMBERING_SYSTEM } from "@docspace/shared/utils/latin-digits";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
@@ -48,7 +49,7 @@ import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-me
 import certTableStyles from "../styled-containers/StyledCertificatesTable.module.scss";
 
 const CertificatesTable = (props) => {
-  const { t } = useTranslation(["SingleSignOn", "Common"]);
+  const { t, i18n } = useTranslation(["SingleSignOn", "Common"]);
   const {
     prefix,
     setSpCertificate,
@@ -92,7 +93,9 @@ const CertificatesTable = (props) => {
     const getOptions = () => contextOptions;
 
     const getFullDate = (date) => {
-      return `${new Date(date).toLocaleDateString()}`;
+      return new Date(date).toLocaleDateString(i18n.language, {
+        numberingSystem: LATIN_NUMBERING_SYSTEM,
+      });
     };
 
     const isExpired = isAfter(now(), parseToDateTime(certificate.expiredDate));

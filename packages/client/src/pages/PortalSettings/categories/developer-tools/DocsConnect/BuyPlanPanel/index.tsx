@@ -66,6 +66,7 @@ import ExternalLinkSvg from "PUBLIC_DIR/images/external.link.14.react.svg";
 
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { LATIN_NUMBERING_SYSTEM } from "@docspace/shared/utils/latin-digits";
 import type {
   TDocsConnectInfo,
   TDocsConnectDevPackCalculation,
@@ -373,6 +374,7 @@ const BuyPlanPanel = ({
 
   const formatCurrencyExact = (amount: number) =>
     new Intl.NumberFormat(i18n.language, {
+      numberingSystem: LATIN_NUMBERING_SYSTEM,
       style: "currency",
       currency,
       minimumFractionDigits: 2,

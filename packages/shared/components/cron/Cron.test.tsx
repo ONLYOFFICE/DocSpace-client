@@ -38,11 +38,19 @@ import { expect, describe, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 import Cron from "./Cron";
+import { fixFormatValue } from "./Cron.utils";
 
 describe("<Cron />", () => {
   it("renders without error", () => {
     render(<Cron value="* * * * *" setValue={() => {}} />);
 
     expect(screen.queryByTestId("cron")).toBeInTheDocument();
+  });
+});
+
+describe("fixFormatValue", () => {
+  it("pads hours and minutes with Western digits in Arabic", () => {
+    expect(fixFormatValue(5, "ar-SA")).toBe("05");
+    expect(fixFormatValue(23, "ar-SA")).toBe("23");
   });
 });

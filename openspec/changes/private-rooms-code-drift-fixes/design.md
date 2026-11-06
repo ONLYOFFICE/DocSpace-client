@@ -118,7 +118,8 @@ No stashed design document covers these points.
    profile address. Its doc comment no longer promises a hidden page.
 8. **SDK members: users only, guests dropped.** The request asks for
    `filterType: 16` (`ShareFilterType.User`), and `classifyMembers` skips a
-   member whose `sharedTo.isVisitor` is set. The members mock
+   member whose `sharedTo.isVisitor` is set, and a group entry
+   (`subjectType` 2) should one still reach it. The members mock
    (`roomMembersHandlers`) answers `filterType=16` with user records only and
    gets a contract case, "Users only", whose doc comment names
    `SecurityDao.GetPureSharesQuery`. Alternative: drop groups on the client

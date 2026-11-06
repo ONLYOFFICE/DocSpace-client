@@ -1101,7 +1101,11 @@ class PluginStore {
     )
       return;
 
-    if (itemId !== undefined && item.itemId && !item.itemId.includes(itemId))
+    if (
+      itemId !== undefined &&
+      item.itemId &&
+      !item.itemId.some((id) => String(id) === String(itemId))
+    )
       return;
 
     if (item.items && item.items.length > 0) {

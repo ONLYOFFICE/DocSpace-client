@@ -148,8 +148,10 @@ export type TDocumentAgentSettings = {
   reasoning: TDocumentAgentReasoning;
   maxToolCalls: number;
   maxFileBytes: number;
-  /** Whether the full log of every task is saved next to its results. */
+  /** Whether the full log of every task is saved as a file. */
   taskLog: boolean;
+  /** The folder the log files go to; null means next to the task's results. */
+  taskLogFolderId: string | null;
 };
 
 // `profileId` is injected by the Node AI service on GET /ai/agents/:id

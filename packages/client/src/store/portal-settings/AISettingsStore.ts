@@ -59,6 +59,7 @@ export const DOCUMENT_AGENT_DEFAULTS: TDocumentAgentSettings = {
   maxToolCalls: 150,
   maxFileBytes: 32 * 1024 * 1024,
   taskLog: false,
+  taskLogFolderId: null,
 };
 
 class AISettingsStore {

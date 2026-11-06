@@ -95,6 +95,15 @@
   color: var(--settings-common-description-color);
 }
 
+.radioGroup {
+  margin-top: 4px;
+}
+
+.folderInput {
+  margin-top: 12px;
+  width: 100%;
+}
+
 .toggleRow {
   display: flex;
   flex-direction: row;

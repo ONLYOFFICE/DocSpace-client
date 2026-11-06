@@ -40,6 +40,7 @@ import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
+import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { TextInput, InputSize, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
@@ -52,6 +53,7 @@ import type {
 } from "@docspace/shared/api/ai/types";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 
 import styles from "./DocumentAgent.module.scss";
 import { DocumentAgentLoader } from "./DocumentAgentLoader";
@@ -167,10 +169,16 @@ const DocumentAgentComponent = ({
   }, [ensureProfiles]);
 
   const [draft, setDraft] = React.useState<TDraft | null>(null);
+  // "A folder of your choice" is picked before a folder is: the radio holds
+  // that while the id is still empty.
+  const [customLogFolder, setCustomLogFolder] = React.useState(false);
   const [saveRequestRunning, setSaveRequestRunning] = React.useState(false);
 
   React.useEffect(() => {
-    if (documentAgentSettings) setDraft(toDraft(documentAgentSettings));
+    if (documentAgentSettings) {
+      setDraft(toDraft(documentAgentSettings));
+      setCustomLogFolder(documentAgentSettings.taskLogFolderId !== null);
+    }
   }, [documentAgentSettings]);
 
   // The portal's default profile first, then the rest of the catalogue.
@@ -215,7 +223,8 @@ const DocumentAgentComponent = ({
   const isDirty =
     !!documentAgentSettings &&
     JSON.stringify(toDraft(documentAgentSettings)) !== JSON.stringify(draft);
-  const isSaveDisabled = !parsed || !isDirty || saveRequestRunning;
+  const logFolderMissing = draft.taskLog && customLogFolder && draft.taskLogFolderId === null;
+  const isSaveDisabled = !parsed || !isDirty || saveRequestRunning || logFolderMissing;
 
   const onSave = async () => {
     if (!parsed) return;
@@ -402,6 +411,57 @@ const DocumentAgentComponent = ({
             </Text>
           </div>
         </div>
+
+        {draft.taskLog ? (
+          <FieldContainer
+            labelVisible
+            isVertical
+            labelText={t("Common:DocumentAgentTaskLogFolder")}
+            removeMargin
+          >
+            <RadioButtonGroup
+              className={styles.radioGroup}
+              name="document-agent-tasklog-folder"
+              orientation="vertical"
+              spacing="12px"
+              fontSize="13px"
+              options={[
+                {
+                  value: "results",
+                  label: t("Common:DocumentAgentTaskLogNextToResults"),
+                  dataTestId: "document-agent-tasklog-folder-results",
+                },
+                {
+                  value: "custom",
+                  label: t("Common:DocumentAgentTaskLogCustomFolder"),
+                  dataTestId: "document-agent-tasklog-folder-custom",
+                },
+              ]}
+              selected={customLogFolder ? "custom" : "results"}
+              onClick={(e) => {
+                const custom = e.target.value === "custom";
+                setCustomLogFolder(custom);
+                if (!custom) patch({ taskLogFolderId: null });
+              }}
+              isDisabled={fieldsDisabled}
+              dataTestId="document-agent-tasklog-folder-group"
+            />
+            {customLogFolder ? (
+              <FilesSelectorInput
+                className={styles.folderInput}
+                id={draft.taskLogFolderId ?? undefined}
+                withoutInitPath={draft.taskLogFolderId === null}
+                isSelectFolder
+                withCreate
+                isDisabled={fieldsDisabled}
+                isError={logFolderMissing}
+                onSelectFolder={(folderId) =>
+                  patch({ taskLogFolderId: folderId === undefined ? null : String(folderId) })
+                }
+              />
+            ) : null}
+          </FieldContainer>
+        ) : null}
       </div>
 
       <div className={styles.buttonContainer}>

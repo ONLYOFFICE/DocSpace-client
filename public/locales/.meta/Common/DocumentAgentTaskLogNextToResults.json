@@ -1,0 +1,28 @@
+{
+  "key_path": "DocumentAgentTaskLogNextToResults",
+  "content": "Next to the task's results",
+  "content_en_sha1_hash": "4cff0c20c7c3f748129de65d050c63301660242c",
+  "created_at": "2026-11-06T13:44:16.707Z",
+  "updated_at": "2026-11-06T13:44:16.707Z",
+  "comment": {
+    "text": "Portal settings → AI settings → Document Agent tab: radio option: the log goes into the same folder as the task's result files.",
+    "is_auto": true,
+    "updated_at": "2026-11-06T13:44:16.707Z",
+    "model": "claude-fable-5-1"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": true,
+      "ai_model": "claude-fable-5-1",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key_path": "DocumentAgentTaskLogCustomFolder",
+  "content": "A folder of your choice",
+  "content_en_sha1_hash": "dce3cfa3927dc83b1e0c54a43c0c2e760e255224",
+  "created_at": "2026-11-06T13:44:16.707Z",
+  "updated_at": "2026-11-06T13:44:16.707Z",
+  "comment": {
+    "text": "Portal settings → AI settings → Document Agent tab: radio option: the log goes into one folder the admin picks with the folder selector below.",
+    "is_auto": true,
+    "updated_at": "2026-11-06T13:44:16.707Z",
+    "model": "claude-fable-5-1"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": true,
+      "ai_model": "claude-fable-5-1",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -219,7 +219,6 @@
   "AIProjectSuggestionPromptPlaceholder": "Prompt wstawiany do pola wiadomości",
   "AIProjectSuggestions": "Sugestie",
   "AIProjectSuggestionsHint": "Szybkie prompty proponowane w pustym czacie projektu. Maksymalnie {{limit}} sugestii.",
-  "AIProjectTextTooLong": "Maksymalna długość to {{limit}} znaków.",
   "AIProjectRoomDescription": "Projekt, który łączy model, pokoje instrukcji i pokoje wiedzy na potrzeby czatów swoich członków.",
   "AIProjectRoomTitle": "Projekt AI",
   "AIProvider": "Dostawca AI",

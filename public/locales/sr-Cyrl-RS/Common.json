@@ -219,7 +219,6 @@
   "AIProjectSuggestionPromptPlaceholder": "Упит који се умеће у поље за поруку",
   "AIProjectSuggestions": "Предлози",
   "AIProjectSuggestionsHint": "Брзи упити који се нуде у празном ћаскању пројекта. До {{limit}} предлога.",
-  "AIProjectTextTooLong": "Максимална дужина је {{limit}} знакова.",
   "AIProjectRoomDescription": "Пројекат који повезује модел, собе за инструкције и собе знања за ћаскања својих чланова.",
   "AIProjectRoomTitle": "АИ пројекат",
   "AIProvider": "Пружалац АИ",

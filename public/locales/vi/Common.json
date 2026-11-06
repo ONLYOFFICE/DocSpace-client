@@ -219,7 +219,6 @@
   "AIProjectSuggestionPromptPlaceholder": "Lời nhắc được chèn vào ô tin nhắn",
   "AIProjectSuggestions": "Gợi ý",
   "AIProjectSuggestionsHint": "Các lời nhắc nhanh được đề xuất trong cuộc trò chuyện trống của dự án. Tối đa {{limit}} gợi ý.",
-  "AIProjectTextTooLong": "Độ dài tối đa là {{limit}} ký tự.",
   "AIProjectRoomDescription": "Dự án kết hợp một mô hình, các Phòng hướng dẫn và Phòng kiến thức cho các cuộc trò chuyện của thành viên.",
   "AIProjectRoomTitle": "Dự án AI",
   "AIProvider": "Nhà cung cấp AI",

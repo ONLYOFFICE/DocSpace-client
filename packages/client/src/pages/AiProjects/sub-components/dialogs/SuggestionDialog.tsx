@@ -41,7 +41,6 @@ import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { InputType, TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
-import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import {
   AI_PROJECT_MAX_SUGGESTION_NAME_LENGTH,
   AI_PROJECT_MAX_TEXT_LENGTH,
@@ -61,8 +60,8 @@ type SuggestionDialogProps = {
  * The centred dialog over the project form that adds or edits one
  * suggestion chip: the label the chat shows and the prompt a click puts
  * into the composer. Saving needs both. A field takes no more than its
- * limit (255 characters for the label, 10,000 for the prompt); reaching
- * it shows the error under the field.
+ * limit (255 characters for the label, 10,000 for the prompt), as the
+ * other dialogs' fields do.
  */
 const SuggestionDialog = ({ suggestion, onSave, onClose }: SuggestionDialogProps) => {
   const { t } = useTranslation(["Common"]);
@@ -71,8 +70,6 @@ const SuggestionDialog = ({ suggestion, onSave, onClose }: SuggestionDialogProps
 
   const label = name.trim();
   const text = prompt.trim();
-  const nameTooLong = name.length >= AI_PROJECT_MAX_SUGGESTION_NAME_LENGTH;
-  const promptTooLong = prompt.length >= AI_PROJECT_MAX_TEXT_LENGTH;
   const canSave = !!label && !!text;
 
   const onSubmit = () => {
@@ -96,57 +93,37 @@ const SuggestionDialog = ({ suggestion, onSave, onClose }: SuggestionDialogProps
             <Text as="label" htmlFor="ai-project-suggestion-name" fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
               {`${t("Common:Label")}:`}
             </Text>
-            <FieldContainer
-              isVertical
-              removeMargin
-              labelVisible={false}
-              hasError={nameTooLong}
-              errorMessage={t("Common:AIProjectTextTooLong", { limit: AI_PROJECT_MAX_SUGGESTION_NAME_LENGTH })}
-              errorMessageWidth="100%"
-            >
-              <TextInput
-                id="ai-project-suggestion-name"
-                type={InputType.text}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    onSubmit();
-                  }
-                }}
-                placeholder={t("Common:AIProjectSuggestionLabelPlaceholder")}
-                maxLength={AI_PROJECT_MAX_SUGGESTION_NAME_LENGTH}
-                isAutoFocussed
-                hasError={nameTooLong}
-                scale
-                testId="ai-project-suggestion-name"
-              />
-            </FieldContainer>
+            <TextInput
+              id="ai-project-suggestion-name"
+              type={InputType.text}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  onSubmit();
+                }
+              }}
+              placeholder={t("Common:AIProjectSuggestionLabelPlaceholder")}
+              maxLength={AI_PROJECT_MAX_SUGGESTION_NAME_LENGTH}
+              isAutoFocussed
+              scale
+              testId="ai-project-suggestion-name"
+            />
           </div>
           <div className={styles.field}>
             <Text as="label" htmlFor="ai-project-suggestion-prompt" fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
               {`${t("Common:AIProjectSuggestionPrompt")}:`}
             </Text>
-            <FieldContainer
-              isVertical
-              removeMargin
-              labelVisible={false}
-              hasError={promptTooLong}
-              errorMessage={t("Common:AIProjectTextTooLong", { limit: AI_PROJECT_MAX_TEXT_LENGTH })}
-              errorMessageWidth="100%"
-            >
-              <Textarea
-                id="ai-project-suggestion-prompt"
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                heightTextArea={120}
-                maxLength={AI_PROJECT_MAX_TEXT_LENGTH}
-                placeholder={t("Common:AIProjectSuggestionPromptPlaceholder")}
-                hasError={promptTooLong}
-                dataTestId="ai-project-suggestion-prompt"
-              />
-            </FieldContainer>
+            <Textarea
+              id="ai-project-suggestion-prompt"
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              heightTextArea={120}
+              maxLength={AI_PROJECT_MAX_TEXT_LENGTH}
+              placeholder={t("Common:AIProjectSuggestionPromptPlaceholder")}
+              dataTestId="ai-project-suggestion-prompt"
+            />
           </div>
         </div>
       </ModalDialog.Body>

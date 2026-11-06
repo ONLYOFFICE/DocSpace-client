@@ -219,7 +219,6 @@
   "AIProjectSuggestionPromptPlaceholder": "Prompt inserat în câmpul de mesaj",
   "AIProjectSuggestions": "Sugestii",
   "AIProjectSuggestionsHint": "Prompturi rapide oferite într-un chat gol al proiectului. Până la {{limit}} sugestii.",
-  "AIProjectTextTooLong": "Lungimea maximă este de {{limit}} caractere.",
   "AIProjectRoomDescription": "Un proiect care reunește un model, săli de instrucțiuni și săli de cunoștințe pentru chaturile membrilor săi.",
   "AIProjectRoomTitle": "Proiect IA",
   "AIProvider": "Furnizor de IA",

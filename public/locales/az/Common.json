@@ -219,7 +219,6 @@
   "AIProjectSuggestionPromptPlaceholder": "Mesaj sahəsinə daxil edilən sorğu",
   "AIProjectSuggestions": "Təkliflər",
   "AIProjectSuggestionsHint": "Boş layihə çatında təklif olunan sürətli sorğular. {{limit}} təklifə qədər.",
-  "AIProjectTextTooLong": "Maksimum uzunluq {{limit}} simvoldur.",
   "AIProjectRoomDescription": "Üzvlərinin söhbətləri üçün modeli, Təlimat otaqlarını və Bilik otaqlarını birləşdirən layihə.",
   "AIProjectRoomTitle": "AI layihəsi",
   "AIProvider": "Təmin edici AI",

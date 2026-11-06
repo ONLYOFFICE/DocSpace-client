@@ -7,7 +7,7 @@
 
 ## 2. SDK
 
-- [ ] 2.1 In `packages/sdk/src/app/(docspace)/_hooks/useItemContextMenu.ts`, add the duplicate item for a file when `security.Duplicate` is set or when the file is encrypted and `security.Move` is set, with the same spec pointer. Verify: cases "Duplicate offered for an encrypted file", "Duplicate withheld without the move right" and "Duplicate withheld in an archived private room" next to "Copy offered for an encrypted file" in `useItemContextMenu.test.tsx`, `cd packages/sdk && pnpm exec vitest run "src/app/(docspace)/_hooks"`
+- [x] 2.1 In `packages/sdk/src/app/(docspace)/_hooks/useItemContextMenu.ts`, add the duplicate item for a file when `security.Duplicate` is set or when the file is encrypted and `security.Move` is set, with the same spec pointer. Verify: cases "Duplicate offered for an encrypted file", "Duplicate withheld without the move right" and "Duplicate withheld in an archived private room" next to "Copy offered for an encrypted file" in `useItemContextMenu.test.tsx`, `cd packages/sdk && pnpm exec vitest run "src/app/(docspace)/_hooks"`
 - [ ] 2.2 SDK private E2E: rebuild (`cd packages/sdk && pnpm run test:build`) and run `pnpm exec playwright test __tests__/e2e/private --reporter=line`. "Same-room copy" and "Copy of a name that already has a copy" pass without spec edits, and nothing else fails. Verify: that run's summary
 
 ## 3. Integration

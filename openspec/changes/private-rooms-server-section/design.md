@@ -162,14 +162,14 @@ recorded.
 **Goals:**
 - The Private section becomes a server section: counter, panel,
   mark-all-as-read, and listings that depend on no client-side filter.
-- The addresses, the availability rule and every withheld action of the
-  section stay as they are.
+- The addresses and the availability rule stay as they are. Every withheld
+  action of the section stays too, except room groups.
+- The section can be the start page and has room groups (proposal decisions
+  1 and 2).
 - The mocks mirror the server once read, never a planned shape.
 
 **Non-Goals:**
 - Changing how private rooms are opened, left, created or encrypted.
-- The start page option and room groups, unless decided (proposal decisions
-  1 and 2).
 - Section availability.
 
 ## Decisions
@@ -184,8 +184,8 @@ recorded.
    changes.**
    - `/private` and `/private/archived` stay, the availability rule of
      `private-rooms/feature-gating` stays, and so do the withheld actions
-     (no AI chat, no groups unless decided, no onboarding tour, no Recent or
-     Favorites).
+     (no AI chat, no onboarding tour, no Recent or Favorites). Room groups
+     come to the section (proposal decision 2).
    - The section list asks for `searchArea=PrivateRooms`, and its Archive
      for `searchArea=Archive&privacyFilter=Private`, since the server has no
      archive area per section and keeps the filter there.
@@ -228,10 +228,9 @@ recorded.
 
 ## Risks / Trade-offs
 
-- [Private rooms invisible while the section is not available] → The server
-  already behaves this way. Proposal decision 5 picks between accepting it
-  in the spec and listing them through the `PrivateRooms` area. Task 3.1
-  waits for it.
+- [Private rooms invisible while the section is not available] → Decided so
+  (proposal decision 5). A member still reaches a room by its address,
+  through the fallback of the section addresses.
 - [Today's client between the server commit and this change] → The section
   requests (`Active` with `Private`, `Archive` with `Private`) and the Rooms
   requests (`Active` with `NotPrivate`) keep working. The Private item has no
@@ -254,4 +253,4 @@ recorded.
 
 ## Open Questions
 
-- Proposal decisions 1, 2 and 5.
+None. Proposal decisions 1, 2 and 5 were taken on 2026-11-06.

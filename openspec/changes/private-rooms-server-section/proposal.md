@@ -60,7 +60,10 @@ None.
     counting private rooms" are removed and replaced by a counter on the
     Private item.
   - "Section is not a start page option" and "No room groups in the section"
-    follow decisions 1 and 2.
+    are replaced by "Section is a start page option while available" and
+    "Room groups in the section" (decisions 1 and 2).
+  - "Rooms section excludes private rooms while the section is available" is
+    renamed to "Rooms section never lists private rooms" (decision 5).
   - "Live updates respect the split" is unchanged.
 - `private-rooms/server-contract`:
   - "Private rooms have no section of their own on the server" is replaced by
@@ -108,28 +111,22 @@ None.
   items.
 - Section availability (`private-rooms/feature-gating`), unchanged.
 
-## Decisions needed
+## Decisions
 
-1. **Start page:** whether the client offers the Private section as a default
-   start page. The server accepts the root as a start folder since
-   `c866c055e1`, while "Section is not a start page option" withholds it "in
-   this version". Owner: feature owner.
-2. **Room groups:** whether the section offers room groups. The server has
-   the `PrivateRooms` group area since `c866c055e1`, while "No room groups in
-   the section" withholds them. Owner: feature owner.
+1. **Start page:** offered while the section is available (owner,
+   2026-11-06). The server accepts the root as a start folder since
+   `c866c055e1`. While the section is not available, the option is not
+   offered and a Private start page opens Rooms.
+2. **Room groups:** offered in the section (owner, 2026-11-06), with groups of
+   the `PrivateRooms` area that hold private rooms only. The server supports
+   them since `c866c055e1`.
 3. **Archive:** answered by the server: archived private rooms stay in the
    shared Archive, listed with the private filter.
 4. **Existing rooms:** answered by the server: nothing moves, private rooms
    stay under the Rooms root.
-5. **Listing while the section is not available.** The server's answer:
-   `searchArea=Active` without a filter no longer lists private rooms, so on a
-   standalone portal with the E2E rooms app off, or in a frame without the
-   opt-in, the client shows them nowhere. The main spec still says the Rooms
-   list shows them with their badge then. Either:
-   - (a) accept that, and say in the spec that private rooms are not listed
-     while the section is not available; or
-   - (b) keep them in Rooms by asking the server with the `PrivateRooms`
-     area, which the rooms list answers whatever the app, and merging the
-     two lists.
-
-   Owner: feature owner.
+5. **Listing while the section is not available:** private rooms are hidden
+   (owner, 2026-11-06). The server already leaves them out of the Rooms area,
+   so the client sends the same filters whether the section is available or
+   not, and lists them nowhere then. Members still reach a private room by
+   its address. The beta's "Existing private rooms stay usable when the app
+   is off" is revised in `private-rooms-beta-release` to match.

@@ -74,9 +74,11 @@ Settings let the user add a provider key, after which Summarization,
 Translation and the chat would send the clear text of the open document
 from the browser to that provider. Option C below therefore already exists
 de facto through the plugin, outside the client's control and without the
-room-owner opt-in of decision 4; whether the plugin can be hidden for an
-encrypted file through the editor configuration is a question to the
-Document Server team (Open Questions).
+room-owner opt-in of decision 4. The editor configuration carries the
+switch: `customization.ai.disabled` (`AiConfigDto`, set by the server for a
+portal without AI and for anonymous visitors), so the ban reaches the
+editor once the server sets it for an encrypted file
+(`private-rooms-server-hardening`, task group 16, decision 29).
 
 No stashed design document covers AI in private rooms; the ban predates the
 AI chat.
@@ -170,10 +172,8 @@ decides the ban is permanent.
 - Product: whether a bring-your-own-key AI without the gateway is
   acceptable on SaaS, and how the promise is worded in the positioning
   documents of `private-rooms-release-gate` once a phase ships.
-- Document Server team: whether the editor's AI plugin can be left out
-  of the editor for an encrypted file through the editor configuration,
-  so the ban holds in the editor too, or whether its own provider
-  settings must be accepted as the user's choice (Context, the stand
-  observation of 2026-11-06). Owner: the feature owner with the Document
-  Server team; affects `private-rooms-editor-contract` if a configuration
-  change is needed.
+- Closed 2026-11-06: the editor hides its AI tools when the
+  configuration says `customization.ai.disabled`; the server sets it for
+  an encrypted file in `private-rooms-server-hardening` 16.1, and a phase
+  of this change that switches AI on in the editor lifts that flag for
+  the rooms that opted in.

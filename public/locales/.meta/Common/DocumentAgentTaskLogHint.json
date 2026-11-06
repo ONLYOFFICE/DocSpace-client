@@ -1,9 +1,9 @@
 {
   "key_path": "DocumentAgentTaskLogHint",
-  "content": "Every task leaves a file with each of its steps next to its results.",
-  "content_en_sha1_hash": "d99536c79ec01ff45a52d6591813bef79d3f3837",
+  "content": "Every task leaves a file with each of its steps.",
+  "content_en_sha1_hash": "584b3d91b06f3e1641a12f89ad4e7b7035ab7d81",
   "created_at": "2026-11-06T10:41:22.945Z",
-  "updated_at": "2026-11-06T10:41:22.945Z",
+  "updated_at": "2026-11-06T14:14:59.918Z",
   "comment": {
     "text": "Portal settings → AI settings → Document Agent tab: a hint under a field. The Document Agent is an external service that creates and edits office files for the user.",
     "is_auto": true,

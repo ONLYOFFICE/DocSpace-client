@@ -1,0 +1,28 @@
+{
+  "key_path": "DocumentAgentRangeError",
+  "content": "Enter a number from 1 to {{max}}.",
+  "content_en_sha1_hash": "fdb98bb8dbaaf08c7a3092dd91d1c16f1f8de26b",
+  "created_at": "2026-11-06T14:14:59.918Z",
+  "updated_at": "2026-11-06T14:14:59.918Z",
+  "comment": {
+    "text": "Portal settings → AI settings → Document Agent tab: the validation message under a numeric field (tool calls per task, file size) when it is empty, zero or not a number; {{max}} is the field's upper limit.",
+    "is_auto": true,
+    "updated_at": "2026-11-06T14:14:59.918Z",
+    "model": "claude-fable-5-1"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": true,
+      "ai_model": "claude-fable-5-1",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

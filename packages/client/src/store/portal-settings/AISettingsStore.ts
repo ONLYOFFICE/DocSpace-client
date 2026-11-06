@@ -105,7 +105,10 @@ class AISettingsStore {
     this.setKnowledgeConfig(null);
   };
 
+  // The same settings again keep their object: the tab rebuilds its draft
+  // on a new one, and a refetch on every visit must not throw edits away.
   setDocumentAgentSettings = (settings: TDocumentAgentSettings) => {
+    if (JSON.stringify(settings) === JSON.stringify(this.documentAgentSettings)) return;
     this.documentAgentSettings = settings;
   };
 

@@ -46,6 +46,15 @@ import { TextInput, InputSize, InputType } from "@onlyoffice/apps-ui-kit/compone
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import {
+  clampReasoningLevel,
+  DEFAULT_REASONING_LEVEL,
+  FULL_REASONING_SUPPORT,
+  getReasoningSupport,
+  NO_REASONING_SUPPORT,
+  type ReasoningLevel,
+  type ReasoningSupport,
+} from "@onlyoffice/ai-chat";
 
 import type {
   TDocumentAgentReasoning,
@@ -82,37 +91,36 @@ const FIELD_MAX: Record<"maxToolCalls" | "maxFileMb", number> = {
 
 /** The agent's reasoning levels, which are the chat library's own. */
 type TReasoningLevel = Exclude<TDocumentAgentReasoning, "default">;
-const ALL_DEPTHS: TReasoningLevel[] = ["low", "medium", "high", "max"];
-const FALLBACK_DEPTH: TReasoningLevel = "medium";
-
-type TReasoningSupport = {
-  thinks: boolean;
-  canDisable: boolean;
-  depths: readonly TReasoningLevel[];
-  defaultDepth?: TReasoningLevel | undefined;
-};
-
-/**
- * What a profile's model can do, as the catalogue reported it at save
- * time; a profile saved before that carries only the boolean, which means
- * every depth and the option to switch thinking off.
- */
-const supportOf = (profile: TProfileLike | undefined): TReasoningSupport => {
-  if (profile?.reasoningSupport) return profile.reasoningSupport;
-  const thinks = profile?.reasoning === true;
-  return { thinks, canDisable: true, depths: thinks ? ALL_DEPTHS : [] };
-};
-
-/** The level the model runs at when nobody picked one. */
-const defaultLevelOf = (support: TReasoningSupport): TReasoningLevel =>
-  support.thinks ? (support.defaultDepth ?? FALLBACK_DEPTH) : "off";
 
 type TProfileLike = {
   id: string;
   name: string;
+  providerType: string;
+  basedOn?: string | undefined;
+  modelId: string;
   reasoning?: boolean | undefined;
-  reasoningSupport?: TReasoningSupport | undefined;
+  reasoningSupport?: ReasoningSupport | undefined;
 };
+
+/**
+ * What a profile's model can do with thinking, resolved as the chat does
+ * it: the catalogue's record saved on the profile wins, else the provider's
+ * table by model id (an `external` profile by the provider it is based on),
+ * else the legacy boolean: everything when on, nothing when off.
+ */
+const supportOf = (profile: TProfileLike | undefined): ReasoningSupport => {
+  if (!profile) return NO_REASONING_SUPPORT;
+  if (profile.reasoningSupport) return profile.reasoningSupport;
+  const fromTable = getReasoningSupport(profile.basedOn ?? profile.providerType, profile.modelId);
+  if (fromTable.thinks) return fromTable;
+  return profile.reasoning === true ? FULL_REASONING_SUPPORT : NO_REASONING_SUPPORT;
+};
+
+/** The level the model runs at when nobody picked one: its catalogue default, snapped to its depths. */
+const defaultLevelOf = (support: ReasoningSupport): ReasoningLevel =>
+  support.thinks
+    ? clampReasoningLevel(support.defaultDepth ?? DEFAULT_REASONING_LEVEL, support)
+    : "off";
 
 const asPositiveInt = (value: string): number | null => {
   if (!/^\d+$/.test(value)) return null;
@@ -268,12 +276,15 @@ const DocumentAgentComponent = ({
   const reasoningOptions: TOption[] = [
     ...(support.canDisable || !support.thinks ? (["off"] as const) : []),
     ...support.depths,
-  ].map((level) => ({ key: level, label: reasoningLabels[level] }));
-  const modelDefaultLevel = defaultLevelOf(support);
+  ].map((level) => ({ key: level, label: reasoningLabels[level as TReasoningLevel] }));
+  // Shown as the model will run it: a saved level the model has not got is
+  // snapped to the nearest it has, as the chat snaps it.
+  const shownLevel =
+    draft.reasoning === "default"
+      ? defaultLevelOf(support)
+      : clampReasoningLevel(draft.reasoning, support);
   const selectedReasoning =
-    reasoningOptions.find((option) => option.key === draft.reasoning) ??
-    reasoningOptions.find((option) => option.key === modelDefaultLevel) ??
-    reasoningOptions[0];
+    reasoningOptions.find((option) => option.key === shownLevel) ?? reasoningOptions[0];
 
   const fieldsDisabled = !draft.enabled || saveRequestRunning;
 
@@ -286,7 +297,14 @@ const DocumentAgentComponent = ({
     const hasError = asPositiveInt(value) === null;
 
     return (
-      <FieldContainer labelVisible isVertical labelText={label} removeMargin hasError={hasError}>
+      <FieldContainer
+        labelVisible
+        isVertical
+        labelText={label}
+        removeMargin
+        hasError={hasError}
+        errorMessage={t("Common:DocumentAgentRangeError", { max: FIELD_MAX[field] })}
+      >
         <TextInput
           type={InputType.text}
           inputMode="numeric"
@@ -337,9 +355,11 @@ const DocumentAgentComponent = ({
           <ComboBox
             options={profileOptions}
             selectedOption={selectedProfile}
-            onSelect={(option) =>
-              patch({ profileId: String(option.key), reasoning: "default" })
-            }
+            onSelect={(option) => {
+              // The same model again is no change: the effort picked for it stays.
+              if (String(option.key) === draft.profileId) return;
+              patch({ profileId: String(option.key), reasoning: "default" });
+            }}
             scaled
             scaledOptions
             dropDownMaxHeight={profileOptions.length > 7 ? 300 : undefined}
@@ -380,12 +400,12 @@ const DocumentAgentComponent = ({
         {numberField(
           t("Common:DocumentAgentMaxToolCalls"),
           "maxToolCalls",
-          t("Common:DocumentAgentMaxToolCallsHint"),
+          t("Common:DocumentAgentMaxToolCallsHint", { max: MAX_TOOL_CALLS }),
         )}
         {numberField(
           t("Common:DocumentAgentMaxFileSize"),
           "maxFileMb",
-          t("Common:DocumentAgentMaxFileSizeHint"),
+          t("Common:DocumentAgentMaxFileSizeHint", { max: MAX_FILE_MB }),
         )}
       </div>
 

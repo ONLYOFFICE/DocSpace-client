@@ -69,10 +69,9 @@ import { Component as ServicesPage } from "../categories/payments/ServicesPage";
 import { Component as Apps } from "../categories/apps";
 
 // Loaded on demand: the AI settings category statically imports the ai-agent
-// settings pages from @onlyoffice/ai-chat, and this View is part of the entry
-// graph (routes/portalSettings.js imports ViewComponent statically) — a
-// static import here would drag the chat stack onto the initial-load
-// critical path. The chunk is fetched only when the tab is opened.
+// settings pages from @onlyoffice/ai-chat — a static import here would load
+// the chat stack with every settings tab. The chunk is fetched only when the
+// tab is opened.
 const AISettings = React.lazy(() =>
   // See the AIAgentView lazy in pages/Home/View: componentLoader recovers
   // from a chunk that no longer exists after a deploy.

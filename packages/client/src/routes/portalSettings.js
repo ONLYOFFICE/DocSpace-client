@@ -43,9 +43,20 @@ import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStor
 import { generalRoutes } from "./general";
 
 import ProtectedAppRoute from "../components/ProtectedAppRoute";
-import { ViewComponent } from "../pages/PortalSettings/View";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
 import { getPluginSectionRoute } from "SRC_DIR/helpers/plugins/navigation";
+
+const LazyView = React.lazy(() =>
+  componentLoader(() => import("../pages/PortalSettings/View")).then((m) => ({
+    default: m.ViewComponent,
+  })),
+);
+
+const ViewComponent = () => (
+  <React.Suspense fallback={null}>
+    <LazyView />
+  </React.Suspense>
+);
 
 const DevToolsRedirect = () => {
   const location = useLocation();

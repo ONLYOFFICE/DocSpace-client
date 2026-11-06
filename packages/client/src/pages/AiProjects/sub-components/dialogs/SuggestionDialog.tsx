@@ -60,9 +60,9 @@ type SuggestionDialogProps = {
 /**
  * The centred dialog over the project form that adds or edits one
  * suggestion chip: the label the chat shows and the prompt a click puts
- * into the composer. Saving needs both; text over its limit (255
- * characters for the label, 10,000 for the prompt) is shown as an error
- * under the field, and the server refuses it.
+ * into the composer. Saving needs both. A field takes no more than its
+ * limit (255 characters for the label, 10,000 for the prompt); reaching
+ * it shows the error under the field.
  */
 const SuggestionDialog = ({ suggestion, onSave, onClose }: SuggestionDialogProps) => {
   const { t } = useTranslation(["Common"]);
@@ -71,8 +71,8 @@ const SuggestionDialog = ({ suggestion, onSave, onClose }: SuggestionDialogProps
 
   const label = name.trim();
   const text = prompt.trim();
-  const nameTooLong = label.length > AI_PROJECT_MAX_SUGGESTION_NAME_LENGTH;
-  const promptTooLong = text.length > AI_PROJECT_MAX_TEXT_LENGTH;
+  const nameTooLong = name.length >= AI_PROJECT_MAX_SUGGESTION_NAME_LENGTH;
+  const promptTooLong = prompt.length >= AI_PROJECT_MAX_TEXT_LENGTH;
   const canSave = !!label && !!text;
 
   const onSubmit = () => {
@@ -116,6 +116,7 @@ const SuggestionDialog = ({ suggestion, onSave, onClose }: SuggestionDialogProps
                   }
                 }}
                 placeholder={t("Common:AIProjectSuggestionLabelPlaceholder")}
+                maxLength={AI_PROJECT_MAX_SUGGESTION_NAME_LENGTH}
                 isAutoFocussed
                 hasError={nameTooLong}
                 scale
@@ -140,6 +141,7 @@ const SuggestionDialog = ({ suggestion, onSave, onClose }: SuggestionDialogProps
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 heightTextArea={120}
+                maxLength={AI_PROJECT_MAX_TEXT_LENGTH}
                 placeholder={t("Common:AIProjectSuggestionPromptPlaceholder")}
                 hasError={promptTooLong}
                 dataTestId="ai-project-suggestion-prompt"

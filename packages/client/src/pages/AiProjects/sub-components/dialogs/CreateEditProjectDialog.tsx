@@ -302,8 +302,8 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
     profilesLoaded,
   );
 
-  // Shown as an error under the field; the server refuses the text, the form does not.
-  const instructionsTooLong = prompt.trim().length > AI_PROJECT_MAX_TEXT_LENGTH;
+  // The field takes no more than the limit; reaching it shows the error under the field.
+  const instructionsTooLong = prompt.length >= AI_PROJECT_MAX_TEXT_LENGTH;
 
   if (!state) return null;
 
@@ -656,6 +656,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   heightTextArea={144}
+                  maxLength={AI_PROJECT_MAX_TEXT_LENGTH}
                   placeholder={t("Common:InstructionsDescriptionAgentExample")}
                   hasError={instructionsTooLong}
                   isDisabled={isSaving}

@@ -34,14 +34,22 @@
  */
 
 import { describe, expect, it } from "vitest";
+import {
+  FilesSecurity,
+  RoomsType as PluginRoomsType,
+  Security,
+} from "@onlyoffice/docspace-plugin-sdk";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+import type { TFile } from "@docspace/shared/api/files/types";
 
+import { getAvailableInfoPanelTabs } from "SRC_DIR/helpers/info-panel/tabs";
+import type { IInfoPanelItemClient } from "SRC_DIR/helpers/plugins/types";
 import {
   listItemOf,
   privateRoomDto,
 } from "SRC_DIR/store/filesStore/__tests__/listItem.fixture";
 
 import { InfoPanelView } from "../index";
-import { getAvailableInfoPanelTabs } from "../tabs";
 
 describe("getAvailableInfoPanelTabs", () => {
   it("Private room selected in a list", () => {
@@ -60,5 +68,85 @@ describe("getAvailableInfoPanelTabs", () => {
       InfoPanelView.infoDetails,
     ]);
     expect(useRoomsView).toBe(true);
+  });
+});
+
+const TAB = "info_plugin-qr";
+const RIGHTS = [FilesSecurity.CopyLink, Security.EditAccess];
+
+const file = (security: Record<string, boolean> = {}) =>
+  ({ id: 1, isFile: true, fileExst: ".docx", security }) as unknown as TFile;
+
+const room = (roomType: RoomsType) =>
+  ({
+    id: 7,
+    isRoom: true,
+    roomType,
+    rootFolderType: FolderType.Rooms,
+    security: {},
+  }) as unknown as TFile;
+
+const tabsFor = (selection: TFile, item: Partial<IInfoPanelItemClient>) =>
+  getAvailableInfoPanelTabs({
+    selection,
+    isTrash: false,
+    isRecentFolder: false,
+    enablePlugins: true,
+    infoPanelItemsList: [
+      {
+        key: "qr",
+        value: { subMenu: { name: "QR" }, ...item } as IInfoPanelItemClient,
+      },
+    ],
+  }).tabs;
+
+describe("getAvailableInfoPanelTabs: plugin itemSecurity", () => {
+  it("shows a tab that lists no rights", () => {
+    expect(tabsFor(file({ CopyLink: false }), {})).toContain(TAB);
+  });
+
+  it("shows a tab when every listed right is granted", () => {
+    expect(
+      tabsFor(file({ CopyLink: true, EditAccess: true }), {
+        itemSecurity: RIGHTS,
+      }),
+    ).toContain(TAB);
+  });
+
+  it("hides a tab when one listed right is missing", () => {
+    expect(
+      tabsFor(file({ CopyLink: true, EditAccess: false }), {
+        itemSecurity: RIGHTS,
+      }),
+    ).not.toContain(TAB);
+  });
+});
+
+describe("getAvailableInfoPanelTabs: plugin itemId", () => {
+  it("shows a tab for a listed id, numeric or written as a string", () => {
+    expect(tabsFor(file(), { itemId: [1] })).toContain(TAB);
+    expect(tabsFor(file(), { itemId: ["1"] })).toContain(TAB);
+  });
+
+  it("hides a tab for an id that is not listed", () => {
+    expect(tabsFor(file(), { itemId: [2] })).not.toContain(TAB);
+  });
+});
+
+describe("getAvailableInfoPanelTabs: plugin roomType", () => {
+  const roomType = [PluginRoomsType.PublicRoom];
+
+  it("shows a tab for a room of a listed type", () => {
+    expect(tabsFor(room(RoomsType.PublicRoom), { roomType })).toContain(TAB);
+  });
+
+  it("hides a tab for a room of another type", () => {
+    expect(tabsFor(room(RoomsType.EditingRoom), { roomType })).not.toContain(
+      TAB,
+    );
+  });
+
+  it("does not check a file against it", () => {
+    expect(tabsFor(file(), { roomType })).toContain(TAB);
   });
 });

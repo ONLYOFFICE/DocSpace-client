@@ -862,8 +862,47 @@ Document Server `10.0.3.19` at `doc-eu.onlyoffice.io`, which serves
 1.10.1, `VERSION_HPKE_WRAP = 2`, `VERSION_IDENTITY = 2`, the DSE3 header
 and chunk constants (`DSE3_FIXED_HEADER_SIZE`, `DSE3_CHUNK_PLAINTEXT_SIZE`,
 `DSE3_FLAG_HAS_ENCRYPTED_NAME`); no version-3 reader. `GET files/settings`
-answers `docServiceEncryptionSupported: true`. Read-only; no file was opened
-in the editor during the check.
+answers `docServiceEncryptionSupported: true`.
+
+Later the same day, with the owner's go-ahead, a full run on the stand
+(DocSpace `4.1.0.12300`, Document Server `10.0.3.19`, the client of the
+release, one user holding a key, the device remembered):
+
+- A new private room ("Probe 2026-11-06"), a document created from the
+  empty template through the encrypted creation (`24c4fd94-...docx`,
+  version 1, 7043 bytes, DSE3 version 2 with the name flag), the audit
+  trail with "File keys issued for ... to: <user id>" next to "File
+  Uploaded", both under the context "Rooms: Private room".
+- The editor opened it in edit mode on the first open; a line was typed
+  and saved with Ctrl+S: version 2 (39087 bytes, "Edited with encrypt;
+  Saved", DSE3 version 2 header), the audit trail with "File Updated".
+- **The reopen fails.** With the editor tab closed and the file opened
+  again from the list (twice at once by a double-click, then once alone,
+  then once more after a minute), the editor shows "Something went wrong.
+  An error has occurred while opening the file" and the console logs the
+  Document Server error code -82. `GET files/file/{id}/openedit` answers
+  200 with a new document key, the encrypted flag and the key pairs;
+  `GET files/file/{id}/history` lists both versions as encrypted. Opening
+  `?version=1` in view mode shows the typed line, so the Document Server
+  serves the held session of the first key on top of the first version,
+  while the open of version 2 under its new key fails. A file of the older
+  room that no editor had saved ("Test doc.docx", 34757 bytes) opens and
+  shows its content. This is the scenario of task 6.2 (P-5, the stable key
+  and base while a session exists) on the release build: a document saved
+  once in a private room cannot be reopened while the Document Server
+  holds its session, which the run of 2026-10-30 found to last at least a
+  day when the session has changes. Not traced further on the stand (the
+  Document Server side is not reachable from the portal); the backend
+  team's reply of 2026-11-05 keeps 6.2 with the Document Server team.
+- The editor's **AI Tools** tab is shown for the encrypted file, with AI
+  Chat, Summarization, Translation, Quick AI Action, Create AI assistant
+  and Grammar & Spelling. The doceditor skips the plugin's initialisation
+  for an encrypted file, so no portal model is connected: AI Chat asks to
+  "Connect an AI Model" and Settings lists none. The plugin still lets
+  the user add their own provider key there, after which its actions
+  would send the clear text of the document to that provider from the
+  browser. Recorded in `private-rooms-ai-integration` (design.md,
+  Context) as a path that exists outside the client's control.
 
 ## Goals / Non-Goals
 

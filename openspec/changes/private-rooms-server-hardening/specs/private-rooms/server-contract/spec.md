@@ -490,6 +490,10 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 - **WHEN** a user with encryption keys creates an AI agent with the private flag while the Document Server encrypts
 - **THEN** the agent is created with the private setting
 
+#### Scenario: Public or form-filling room created as private
+- **WHEN** a room creation request sets the private flag with the public or the form-filling room type, whose rooms exist through an external link
+- **THEN** the server answers 400 and creates no room
+
 ## REMOVED Requirements
 
 ### Requirement: No recovery, offboarding or file-key audit endpoints

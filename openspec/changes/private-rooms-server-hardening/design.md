@@ -480,8 +480,13 @@ replaces a read.
   private AI agent is created today. The reply says a public or
   form-filling room created as private is refused because its creation
   sets an external link, which the link refusal of decision 12 rejects; the
-  creation path read here sets no link, so where that happens was not read
-  and task 12.4b reads it before mirroring. The reply proposes to refuse a
+  creation path read here sets no link. Read with task 12.4b on 2026-11-06:
+  nothing at creation refuses them; the primary link of a public or
+  form-filling room is made lazily by `GetPrimaryExternalLinkAsync` on the
+  first read (`FileStorageService.cs:4451-4500`, "entries that never had
+  one keep the lazy creation") and is refused there by the link refusal
+  of decision 12, so the room is stored and only its link read fails
+  (task 12.8). The reply proposes to refuse a
   private AI agent with 400, the chat and the vectorization being denied in
   a private room (`FileSecurity.cs:1706-1718`), and waits for confirmation:
   proposal decision 8, decision 27.

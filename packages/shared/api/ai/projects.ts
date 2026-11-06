@@ -83,6 +83,8 @@ export const AI_PROJECT_ROOM_TYPE = RoomsType.AiProjectRoom;
 export const AI_PROJECT_MAX_ROOMS_PER_TYPE = 20;
 /** Suggestion chips a project keeps at most. */
 export const AI_PROJECT_MAX_SUGGESTIONS = 10;
+/** Characters the instructions, and each label or prompt of a suggestion, hold at most. */
+export const AI_PROJECT_MAX_TEXT_LENGTH = 10000;
 
 /** A suggestion chip of the project's empty chat: its label, and the prompt a click puts into the composer. */
 export type TAiProjectSuggestion = {

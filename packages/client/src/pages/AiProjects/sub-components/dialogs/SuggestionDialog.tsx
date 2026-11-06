@@ -41,6 +41,7 @@ import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { InputType, TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { AI_PROJECT_MAX_TEXT_LENGTH } from "@docspace/shared/api/ai/projects";
 import type { TAiProjectSuggestion } from "@docspace/shared/api/ai/projects";
 
 import styles from "./SuggestionDialog.module.scss";
@@ -55,7 +56,8 @@ type SuggestionDialogProps = {
 /**
  * The centred dialog over the project form that adds or edits one
  * suggestion chip: the label the chat shows and the prompt a click puts
- * into the composer. Saving needs both.
+ * into the composer. Saving needs both; each holds at most
+ * `AI_PROJECT_MAX_TEXT_LENGTH` characters.
  */
 const SuggestionDialog = ({ suggestion, onSave, onClose }: SuggestionDialogProps) => {
   const { t } = useTranslation(["Common"]);
@@ -98,6 +100,7 @@ const SuggestionDialog = ({ suggestion, onSave, onClose }: SuggestionDialogProps
                   onSubmit();
                 }
               }}
+              maxLength={AI_PROJECT_MAX_TEXT_LENGTH}
               placeholder={t("Common:AIProjectSuggestionLabelPlaceholder")}
               isAutoFocussed
               scale
@@ -113,6 +116,7 @@ const SuggestionDialog = ({ suggestion, onSave, onClose }: SuggestionDialogProps
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               heightTextArea={120}
+              maxLength={AI_PROJECT_MAX_TEXT_LENGTH}
               placeholder={t("Common:AIProjectSuggestionPromptPlaceholder")}
               dataTestId="ai-project-suggestion-prompt"
             />

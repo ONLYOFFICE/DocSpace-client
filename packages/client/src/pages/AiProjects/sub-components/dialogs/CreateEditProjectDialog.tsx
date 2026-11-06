@@ -57,6 +57,7 @@ import { RoomSearchArea } from "@docspace/shared/enums";
 import {
   AI_PROJECT_MAX_ROOMS_PER_TYPE,
   AI_PROJECT_MAX_SUGGESTIONS,
+  AI_PROJECT_MAX_TEXT_LENGTH,
   INSTRUCTIONS_ROOM_TYPE,
   KNOWLEDGE_ROOM_TYPE,
 } from "@docspace/shared/api/ai/projects";
@@ -643,6 +644,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 heightTextArea={144}
+                maxLength={AI_PROJECT_MAX_TEXT_LENGTH}
                 placeholder={t("Common:InstructionsDescriptionAgentExample")}
                 isDisabled={isSaving}
                 dataTestId="ai-project-instructions-textarea"

@@ -6,7 +6,7 @@
 
 ## 2. Paste in a private room
 
-- [ ] 2.1 In `HotkeyStore.moveFilesFromClipboard`, compute the private plan before the rights guard. Refusals show their toasts in any folder, and a `same-room` plan needs MoveTo only (design decision 2). Verify: cases "Paste within the same private room" (subfolder without CopyTo, the server move requested), "Paste with hotkey" and "Paste into another private room" in a subfolder (toast shown), and an ordinary folder without CopyTo still ignoring the paste, in `store/__tests__/HotkeyStore.clipboard.test.ts`; `cd packages/client && pnpm exec vitest run src/store/__tests__/HotkeyStore.clipboard.test.ts`
+- [x] 2.1 In `HotkeyStore.moveFilesFromClipboard`, compute the private plan before the rights guard. Refusals show their toasts in any folder, and a `same-room` plan needs MoveTo only (design decision 2). Verify: cases "Paste within the same private room" (subfolder without CopyTo, the server move requested), "Paste with hotkey" and "Paste into another private room" in a subfolder (toast shown), and an ordinary folder without CopyTo still ignoring the paste, in `store/__tests__/HotkeyStore.clipboard.test.ts`; `cd packages/client && pnpm exec vitest run src/store/__tests__/HotkeyStore.clipboard.test.ts`
 
 ## 3. Warning before a move out without the picker
 

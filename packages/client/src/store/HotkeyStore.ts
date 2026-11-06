@@ -860,11 +860,6 @@ class HotkeyStore {
 
     if (!selections.length) return;
 
-    // `security` is nullable on SelectedFolderStore — the
-    // original .js read `.CopyTo`/`.MoveTo` unguarded; non-null assertions
-    // keep runtime identical.
-    if (!security!.CopyTo || !security!.MoveTo) return;
-
     // Spec: private-rooms/file-operations, "Clipboard hotkeys follow the private-room transfer rules".
     const source = this.hotkeysClipboardSource;
     const destInPrivateRoom = !!this.treeFoldersStore.isPrivacyFolder;
@@ -885,6 +880,17 @@ class HotkeyStore {
       move: !isCopy,
       dest,
     });
+
+    const isRefused =
+      plan.kind === "refuse-into" ||
+      plan.kind === "refuse-folder-out" ||
+      plan.kind === "refuse-move-into";
+    const canPaste =
+      plan.kind === "same-room"
+        ? !!security?.MoveTo
+        : !!security?.CopyTo && !!security?.MoveTo;
+    if (!isRefused && !canPaste) return;
+
     if (
       this.filesActionsStore.runPrivateTransferPlan(plan, selectedItemId!, dest, {
         move: !isCopy,

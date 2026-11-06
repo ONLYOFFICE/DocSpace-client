@@ -53,7 +53,10 @@ const privateFolder = (id: number): TItem => ({
   security: { Copy: false, Move: true },
 });
 
+const canPaste = { CopyTo: true, MoveTo: true };
+
 const location = {
+  // The server refuses CopyTo on a folder inside a private room.
   privateRoom: (roomId: number, folderId = roomId) => ({
     private: true,
     id: folderId,
@@ -62,6 +65,7 @@ const location = {
       folderId === roomId ? [] : [{ id: roomId, isRoom: true, private: true }],
     isRoom: folderId === roomId,
     roomType: RoomsType.CustomRoom,
+    security: folderId === roomId ? canPaste : { CopyTo: false, MoveTo: true },
   }),
   // The server grants Copy in an archived room, private or not.
   archivedPrivateRoom: (roomId: number) => ({
@@ -71,6 +75,7 @@ const location = {
     navigationPath: [],
     isRoom: true,
     roomType: RoomsType.CustomRoom,
+    security: canPaste,
   }),
   room: (roomId: number) => ({
     private: false,
@@ -79,14 +84,16 @@ const location = {
     navigationPath: [],
     isRoom: true,
     roomType: RoomsType.CustomRoom,
+    security: canPaste,
   }),
-  myDocuments: (folderId: number) => ({
+  myDocuments: (folderId: number, security = canPaste) => ({
     private: false,
     id: folderId,
     rootFolderId: MY_ROOT,
     navigationPath: [],
     isRoom: false,
     roomType: null,
+    security,
   }),
 };
 
@@ -112,7 +119,7 @@ const setup = () => {
     roomType: null as RoomsType | null,
     navigationPath: [] as { id: number; isRoom: boolean }[],
     isRoom: false,
-    security: { CopyTo: true, MoveTo: true },
+    security: canPaste as { CopyTo: boolean; MoveTo: boolean },
     getSelectedFolder: () => ({ id: selectedFolderStore.id }),
   });
   const itemOperationToFolder = vi.fn(async () => {});
@@ -163,6 +170,7 @@ const setup = () => {
     selectedFolderStore.roomType = where.roomType;
     selectedFolderStore.navigationPath = where.navigationPath;
     selectedFolderStore.isRoom = where.isRoom;
+    selectedFolderStore.security = where.security;
   };
 
   const clip = (items: TItem[], cut = false) => {
@@ -287,6 +295,18 @@ describe("HotkeyStore - clipboard paste and private rooms", () => {
     expect(s.copyEncryptedFilesToFolder).not.toHaveBeenCalled();
   });
 
+  it("Paste with hotkey: refused in a subfolder of a private room", async () => {
+    const s = setup();
+    s.goTo(location.myDocuments(5));
+    s.clip([file(1)], true);
+    s.goTo(location.privateRoom(7, 9));
+    await s.paste();
+
+    expect(toastr.error).toHaveBeenCalledWith("Common:CannotTransferToPrivateRoom");
+    expect(s.itemOperationToFolder).not.toHaveBeenCalled();
+    expect(s.copyEncryptedFilesToFolder).not.toHaveBeenCalled();
+  });
+
   it("Paste within the same private room: the server moves the files without decryption", async () => {
     const s = setup();
     s.goTo(location.privateRoom(7));
@@ -313,6 +333,18 @@ describe("HotkeyStore - clipboard paste and private rooms", () => {
     expect(s.itemOperationToFolder).not.toHaveBeenCalled();
     expect(s.copyEncryptedFilesToFolder).not.toHaveBeenCalled();
     expect(s.filesStore.hotkeysClipboard).toEqual([]);
+  });
+
+  it("paste into an ordinary folder without CopyTo is ignored", async () => {
+    const s = setup();
+    s.goTo(location.room(8));
+    s.clip([file(1)], true);
+    s.goTo(location.myDocuments(5, { CopyTo: false, MoveTo: true }));
+    await s.paste();
+
+    expect(toastr.error).not.toHaveBeenCalled();
+    expect(s.itemOperationToFolder).not.toHaveBeenCalled();
+    expect(s.filesStore.hotkeysClipboard).toEqual([file(1)]);
   });
 
   it("paste between non-private folders keeps the server-side transfer", async () => {

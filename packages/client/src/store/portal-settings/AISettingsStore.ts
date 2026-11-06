@@ -35,10 +35,15 @@
 
 import { makeAutoObservable } from "mobx";
 
-import { type KnowledgeConfig } from "@docspace/shared/api/ai/types";
+import {
+  type KnowledgeConfig,
+  type TDocumentAgentSettings,
+} from "@docspace/shared/api/ai/types";
 import {
   updateKnowledgeConfig,
   getKnowledgeConfig,
+  getDocumentAgentSettings,
+  updateDocumentAgentSettings,
 } from "@docspace/shared/api/ai";
 import { KnowledgeType } from "@docspace/shared/api/ai/enums";
 
@@ -46,10 +51,29 @@ import { KnowledgeType } from "@docspace/shared/api/ai/enums";
 // web-search management that used to live here was built on the removed
 // C# AI API; those settings are now handled by the chat-lib (profiles,
 // tools and web-search engines of the Node AI service).
+/** What the Document Agent tab shows until the portal has saved anything. */
+export const DOCUMENT_AGENT_DEFAULTS: TDocumentAgentSettings = {
+  enabled: true,
+  profileId: null,
+  reasoning: "default",
+  contextWindow: null,
+  taskTimeoutSeconds: 1800,
+  maxToolCalls: 150,
+  maxFileBytes: 32 * 1024 * 1024,
+  outputLocation: "currentFolder",
+  shareSystemServers: false,
+  allowWriteTools: false,
+  taskLog: "never",
+};
+
 class AISettingsStore {
   knowledgeConfig: KnowledgeConfig | null = null;
 
   knowledgeInitied = false;
+
+  documentAgentSettings: TDocumentAgentSettings = DOCUMENT_AGENT_DEFAULTS;
+
+  documentAgentInitied = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -83,6 +107,37 @@ class AISettingsStore {
   restoreKnowledge = async () => {
     await updateKnowledgeConfig(KnowledgeType.None, "");
     this.setKnowledgeConfig(null);
+  };
+
+  setDocumentAgentSettings = (settings: TDocumentAgentSettings) => {
+    this.documentAgentSettings = settings;
+  };
+
+  setDocumentAgentInitied = (value: boolean) => {
+    this.documentAgentInitied = value;
+  };
+
+  // A portal that has never saved the settings (or an AI service without the
+  // endpoint yet) shows the defaults.
+  fetchDocumentAgentSettings = async () => {
+    try {
+      const res = await getDocumentAgentSettings();
+
+      if (res) this.setDocumentAgentSettings({ ...DOCUMENT_AGENT_DEFAULTS, ...res });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setDocumentAgentInitied(true);
+    }
+  };
+
+  updateDocumentAgentSettings = async (settings: TDocumentAgentSettings) => {
+    const res = await updateDocumentAgentSettings(settings);
+    this.setDocumentAgentSettings({ ...settings, ...(res ?? {}) });
+  };
+
+  resetDocumentAgentSettings = async () => {
+    await this.updateDocumentAgentSettings(DOCUMENT_AGENT_DEFAULTS);
   };
 }
 

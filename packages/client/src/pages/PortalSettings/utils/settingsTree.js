@@ -564,6 +564,13 @@ export const settingsTree = [
         tKey: "Common:AILimits",
         isCategory: true,
       },
+      {
+        id: "portal-settings_catalog-ai-settings-document-agent",
+        key: "7-6",
+        link: "document-agent",
+        tKey: "Common:DocumentAgent",
+        isCategory: true,
+      },
     ],
   },
   {

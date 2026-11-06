@@ -436,6 +436,14 @@ const PortalSettingsRoutes = {
       ),
     },
     {
+      path: "ai-settings/document-agent",
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
       path: "apps",
       element: (
         <ProtectedAppsSettingsRoute>

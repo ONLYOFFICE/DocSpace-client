@@ -68,6 +68,7 @@ import type {
   TMetadataAIGenerateResult,
   TGenerateSkillRequest,
   TGenerateSkillResult,
+  TDocumentAgentSettings,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -79,6 +80,9 @@ const baseUrl = "/ai";
 // fire one (Bug 83181). Callers that self-toast skip it for 403 via this check.
 const isForbiddenError = (e: unknown): boolean =>
   (e as { response?: { status?: number } })?.response?.status === 403;
+
+const isNotFoundError = (e: unknown): boolean =>
+  (e as { response?: { status?: number } })?.response?.status === 404;
 
 const getAuthHeaders = async (): Promise<Record<string, string>> => {
   if (typeof window === "undefined") return {};
@@ -173,6 +177,35 @@ export const getKnowledgeConfig = async () => {
     console.log(e);
     if (!isForbiddenError(e)) toastr.error(e as string);
   }
+};
+
+// The document agent's tenant settings. The endpoint is the planned
+// `/ai/document-agent/settings` of the AI service; until it lands the GET
+// answers 404, which the caller treats as "defaults" (no toast).
+export const getDocumentAgentSettings = async () => {
+  try {
+    const res = await request({
+      method: "get",
+      url: `${baseUrl}/document-agent/settings`,
+    });
+
+    return res as TDocumentAgentSettings;
+  } catch (e) {
+    console.log(e);
+    if (!isForbiddenError(e) && !isNotFoundError(e)) toastr.error(e as string);
+  }
+};
+
+export const updateDocumentAgentSettings = async (
+  settings: TDocumentAgentSettings,
+) => {
+  const res = await request({
+    method: "put",
+    url: `${baseUrl}/document-agent/settings`,
+    data: settings,
+  });
+
+  return res as TDocumentAgentSettings;
 };
 
 export const updateKnowledgeConfig = async (

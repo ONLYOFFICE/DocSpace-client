@@ -1,0 +1,28 @@
+{
+  "key_path": "DocumentAgent",
+  "content": "Document Agent",
+  "content_en_sha1_hash": "b5c188a494f453b71e515b6088f27a59906f9d23",
+  "created_at": "2026-11-06T10:41:22.945Z",
+  "updated_at": "2026-11-06T10:41:22.945Z",
+  "comment": {
+    "text": "Name of the Document Agent tab in Portal settings → AI settings (and its item in the settings tree). Short noun phrase, title case.",
+    "is_auto": true,
+    "updated_at": "2026-11-06T10:41:22.945Z",
+    "model": "claude-fable-5-1"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": true,
+      "ai_model": "claude-fable-5-1",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

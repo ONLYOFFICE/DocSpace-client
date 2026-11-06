@@ -33,27 +33,28 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import generalStyles from "../AISettings.module.scss";
 import styles from "./DocumentAgent.module.scss";
 
 export const DocumentAgentLoader = () => {
   return (
-    <div className={generalStyles.search}>
-      <RectangleSkeleton
-        className={generalStyles.description}
-        width="700px"
-        height="36px"
-      />
-      <div className={styles.form}>
-        <RectangleSkeleton width="200px" height="20px" />
-        <RectangleSkeleton width="340px" height="32px" />
-        <RectangleSkeleton width="340px" height="32px" />
-        <RectangleSkeleton width="340px" height="32px" />
+    <div className={styles.container}>
+      <RectangleSkeleton className={styles.description} width="700px" height="40px" />
+      <RectangleSkeleton width="480px" height="64px" borderRadius="6px" />
+      <div className={styles.section}>
+        <RectangleSkeleton width="160px" height="22px" />
+        <RectangleSkeleton width="340px" height="56px" />
+        <RectangleSkeleton width="340px" height="56px" />
+      </div>
+      <div className={styles.section}>
+        <RectangleSkeleton width="160px" height="22px" />
+        <RectangleSkeleton width="340px" height="56px" />
+        <RectangleSkeleton width="340px" height="56px" />
       </div>
       <div className={styles.buttonContainer}>
-        <RectangleSkeleton width="128px" height="32px" />
+        <RectangleSkeleton width="96px" height="32px" />
         <RectangleSkeleton width="128px" height="32px" />
       </div>
     </div>

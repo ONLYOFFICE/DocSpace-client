@@ -55,8 +55,6 @@ import type {
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
-import generalStyles from "../AISettings.module.scss";
-
 import styles from "./DocumentAgent.module.scss";
 import { DocumentAgentLoader } from "./DocumentAgentLoader";
 
@@ -259,20 +257,31 @@ const DocumentAgentComponent = ({
   ).map(([value, label]) => ({ value, label, dataTestId: `document-agent-tasklog-${value}` }));
 
   return (
-    <div className={generalStyles.search} data-testid="document-agent-settings">
-      <Text className={generalStyles.description}>{t("Common:DocumentAgentDescription")}</Text>
+    <div className={styles.container} data-testid="document-agent-settings">
+      <Text className={styles.description} lineHeight="20px">
+        {t("Common:DocumentAgentDescription")}
+      </Text>
 
-      <div className={styles.form}>
+      <div className={styles.toggleBox}>
         <ToggleButton
           className={styles.toggle}
-          label={t("Common:DocumentAgentEnable")}
           isChecked={draft.enabled}
           onChange={() => patch({ enabled: !draft.enabled })}
           isDisabled={saveRequestRunning}
           dataTestId="document-agent-enabled-toggle"
         />
+        <div className={styles.toggleCaption}>
+          <Text fontWeight={600} lineHeight="20px" noSelect>
+            {t("Common:DocumentAgentEnable")}
+          </Text>
+          <Text fontSize="12px" lineHeight="16px">
+            {t("Common:DocumentAgentEnableHint")}
+          </Text>
+        </div>
+      </div>
 
-        <Text className={styles.sectionTitle} fontWeight={600}>
+      <div className={styles.section}>
+        <Text className={styles.sectionTitle} fontSize="16px" fontWeight={700} lineHeight="22px">
           {t("Common:DocumentAgentModelSection")}
         </Text>
 
@@ -313,10 +322,13 @@ const DocumentAgentComponent = ({
           />
           <Text className={styles.hint}>{t("Common:DocumentAgentReasoningHint")}</Text>
         </FieldContainer>
+      </div>
 
-        <Text className={styles.sectionTitle} fontWeight={600}>
+      <div className={styles.section}>
+        <Text className={styles.sectionTitle} fontSize="16px" fontWeight={700} lineHeight="22px">
           {t("Common:DocumentAgentLimitsSection")}
         </Text>
+
         {numberField(
           t("Common:DocumentAgentMaxToolCalls"),
           "maxToolCalls",
@@ -327,8 +339,10 @@ const DocumentAgentComponent = ({
           "maxFileMb",
           t("Common:DocumentAgentMaxFileSizeHint"),
         )}
+      </div>
 
-        <Text className={styles.sectionTitle} fontWeight={600}>
+      <div className={styles.section}>
+        <Text className={styles.sectionTitle} fontSize="16px" fontWeight={700} lineHeight="22px">
           {t("Common:DocumentAgentResultsSection")}
         </Text>
 
@@ -339,9 +353,11 @@ const DocumentAgentComponent = ({
           removeMargin
         >
           <RadioButtonGroup
+            className={styles.radioGroup}
             name="document-agent-tasklog"
             orientation="vertical"
-            spacing="8px"
+            spacing="12px"
+            fontSize="13px"
             options={taskLogOptions}
             selected={draft.taskLog}
             onClick={(e) => patch({ taskLog: e.target.value as TDocumentAgentTaskLog })}

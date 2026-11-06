@@ -33,24 +33,59 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.form {
-  max-width: 340px;
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  max-width: 700px;
+}
+
+.description {
+  color: var(--settings-common-description-color);
+  margin-bottom: 20px;
+}
+
+.toggleBox {
+  box-sizing: border-box;
   width: 100%;
+  max-width: 480px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+
+  padding: 12px;
+  border-radius: 6px;
+  background: var(--sso-toggle-content-bg);
+
+  .toggle {
+    position: static;
+    margin-top: 1px;
+  }
+
+  .toggleCaption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.section {
+  width: 100%;
+  max-width: 340px;
 
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 
-  margin-top: 12px;
-  margin-bottom: 16px;
+  margin-top: 28px;
 }
 
 .sectionTitle {
-  margin-top: 8px;
-}
-
-.toggle {
-  margin-top: 4px;
+  margin-bottom: -4px;
 }
 
 .hint {
@@ -60,7 +95,21 @@
   color: var(--settings-common-description-color);
 }
 
+.radioGroup {
+  margin-top: 4px;
+}
+
 .buttonContainer {
   display: flex;
   gap: 8px;
+
+  margin-top: 28px;
+
+  @include mixins.mobile {
+    width: 100%;
+
+    button {
+      flex: 1;
+    }
+  }
 }

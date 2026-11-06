@@ -1,0 +1,28 @@
+{
+  "key_path": "DocumentAgentEnableHint",
+  "content": "Users can hand document tasks to the agent from the AI chat.",
+  "content_en_sha1_hash": "c68fc6f8d7df06d355006c715aa9783cdbd300a4",
+  "created_at": "2026-11-06T10:41:22.945Z",
+  "updated_at": "2026-11-06T10:41:22.945Z",
+  "comment": {
+    "text": "Portal settings → AI settings → Document Agent tab: the caption under the 'Enable Document Agent' toggle, saying what switching it on gives users.",
+    "is_auto": true,
+    "updated_at": "2026-11-06T10:41:22.945Z",
+    "model": "claude-fable-5-1"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": true,
+      "ai_model": "claude-fable-5-1",
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

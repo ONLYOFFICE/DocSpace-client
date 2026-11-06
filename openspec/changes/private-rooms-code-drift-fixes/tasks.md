@@ -27,7 +27,7 @@
 
 ## 6. Integration
 
-- [ ] 6.1 Pre-push gate (`npm --prefix ./common/tests run test:lefthook`, `pnpm nx run-many -t tsc lint test` over the six packages), the client private-room E2E specs under Docker (`tests-dev`) and `npx -y @fission-ai/openspec@latest validate --all --strict` (`OPENSPEC_TELEMETRY=0`). Verify: green runs recorded here
+- [x] 6.1 Pre-push gate (`npm --prefix ./common/tests run test:lefthook`, `pnpm nx run-many -t tsc lint test` over the six packages), the client private-room E2E specs under Docker (`tests-dev`) and `npx -y @fission-ai/openspec@latest validate --all --strict` (`OPENSPEC_TELEMETRY=0`). Verify: green runs recorded here. Done 2026-11-06 at `68f92cf30fc`: `common/tests` 61 passed, 3 skipped (the locale-completeness suites the gate leaves out); `nx run-many -t tsc lint test` green for the six packages; the 14 client private-room specs (`private-room*`, `private-rooms*`, `keys-management*`, `encrypted-file-ui`) in Docker through `tests-dev` with two workers, 147 passed; `validate --all --strict` 20 of 20. Also run during the tasks: the SDK private E2E after `pnpm run test:build`, 36 passed and 14 `test.fixme` (5.3), and the full client unit suite, 1995 passed (3.1)
 
 ## Workflow follow-up
 

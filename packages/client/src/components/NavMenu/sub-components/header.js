@@ -50,8 +50,12 @@ const HeaderComponent = ({
   customHeader,
   defaultFolderType,
   isGuest,
+  aiServicesEnabled,
 }) => {
-  const defaultUrl = getDefaultStartPageUrl(defaultFolderType, { isGuest });
+  const defaultUrl = getDefaultStartPageUrl(defaultFolderType, {
+    isGuest,
+    aiServicesEnabled,
+  });
   const logo = getLogoUrl(
     WhiteLabelLogoType.LightSmall,
     !theme.isBase,
@@ -90,6 +94,7 @@ export default inject(({ settingsStore, userStore }) => {
     theme,
     toggleArticleOpen,
     defaultFolderType,
+    aiServicesEnabled,
   } = settingsStore;
 
   return {
@@ -99,6 +104,7 @@ export default inject(({ settingsStore, userStore }) => {
     toggleArticleOpen,
     defaultFolderType,
     isGuest: userStore.user?.isVisitor ?? false,
+    aiServicesEnabled,
     // currentProductName: (product && product.title) || "",
   };
 })(observer(HeaderComponent));

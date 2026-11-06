@@ -153,7 +153,6 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
             name="file_lifetime_days"
             isAutoFocussed={!roomParams.lifetime}
             isDisabled={isLoading}
-            tabIndex={1}
             value={inputValue}
             onChange={onChange}
             scale

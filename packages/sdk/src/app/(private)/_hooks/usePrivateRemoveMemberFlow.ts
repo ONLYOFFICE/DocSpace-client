@@ -44,35 +44,25 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
 import { useActiveEncryptedUploadsForRoom } from "../_store/PrivateEncryptedUploadStore";
-import {
-  registerCryptoOperation,
-  releaseCryptoOperation,
-} from "../_utils/abort-registry";
 
 type RemoveArgs = {
   roomId: number;
   userId: string;
-  /** When true the userId refers to a group; members are expanded via
-   *  getGroupById before the DEK revoke so every member's wrap is removed. */
-  isGroup?: boolean;
 };
 
 type UsePrivateRemoveMemberFlowReturn = {
   /**
-   * Removes a member from the room and re-issues file_keys without the
-   * revoked user. Returns null if uploads are still in flight (guard).
+   * Removes a member from the room through the role update; does nothing
+   * while uploads into the room are in flight (guard).
    */
   remove: (args: RemoveArgs) => Promise<void>;
   /**
-   * Non-null while uploads are in flight: blocks the revoke action and
-   * surfaces a localized reason for the disable state.
+   * Non-null while uploads are in flight: blocks the removal and surfaces a
+   * localized reason for the disable state.
    */
   guardReason: string | null;
   isLoading: boolean;
 };
-
-const loadMemberFlows = () =>
-  import("@docspace/shared/services/private-room/room-member-flows");
 
 export const usePrivateRemoveMemberFlow = (
   roomId: number | string,
@@ -90,41 +80,23 @@ export const usePrivateRemoveMemberFlow = (
   );
 
   const remove = React.useCallback(
-    async ({ roomId: targetRoomId, userId, isGroup }: RemoveArgs) => {
+    async ({ roomId: targetRoomId, userId }: RemoveArgs) => {
       if (guardReason) {
         toastr.warning(guardReason);
         return;
       }
 
-      const controller = registerCryptoOperation();
       setIsLoading(true);
       try {
-        // 1. Revoke access on the server first (synchronous server-side ACL
-        // change). If this fails, file_keys cleanup is moot.
+        // Spec: private-rooms/sdk-surface, "Member removal warning"
         await api.rooms.setRoomSecurity(targetRoomId, {
           invitations: [{ id: userId, access: ShareAccessRights.None }],
           notify: false,
           message: "",
         });
-
-        if (controller.signal.aborted) return;
-
-        // 2. Strip the removed member, or a group's members, from every
-        // file_keys ACL in the room. Best-effort: failures leave dangling wraps
-        // but grant no decryption ability, as membership is already gone.
-        const { revokeRemovedMemberAccess } = await loadMemberFlows();
-        const notice = await revokeRemovedMemberAccess(t, targetRoomId, {
-          id: userId,
-          isGroup,
-        });
-
-        if (controller.signal.aborted) return;
-        if (notice) toastr[notice.level](notice.text);
       } catch (error) {
-        // Step 1 (server ACL) failure: surface a localized encryption error.
         toastr.error(getEncryptionErrorMessage(t, error));
       } finally {
-        releaseCryptoOperation(controller);
         setIsLoading(false);
       }
     },

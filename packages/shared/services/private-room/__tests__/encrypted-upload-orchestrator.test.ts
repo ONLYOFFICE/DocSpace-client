@@ -1042,6 +1042,27 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     ]);
   });
 
+  it("Listed user cannot read the file: the member the server skipped is recorded as pending access", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { setFileEncryptionKeys } = await import("../../../api/files");
+    pendingAccessStore.clear(10, "bob");
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "b-1", userId: "bob", publicKey: "pk-b", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+    vi.mocked(setFileEncryptionKeys)
+      .mockResolvedValueOnce({ skippedUserIds: [] })
+      .mockResolvedValueOnce({ skippedUserIds: ["bob"] });
+
+    const { results } = await upload();
+
+    expect(results[0].ok).toBe(true);
+    expect(results[0].shareFailed).toBeUndefined();
+    expect(pendingAccessStore.get(10, "bob")?.missingFileIds).toEqual([
+      Number(results[0].fileId),
+    ]);
+    pendingAccessStore.clear(10, "bob");
+  });
+
   it("a shared upload is not flagged", async () => {
     const { getRoomEncryptionKeys } = await import("../../../api/privacy");
     vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([

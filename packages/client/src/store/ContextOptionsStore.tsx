@@ -1002,6 +1002,15 @@ class ContextOptionsStore {
       return;
     }
 
+    // Spec: private-rooms/room-membership, "Private room creation needs a Document Server that encrypts"
+    if (
+      isPrivateSection &&
+      !this.filesSettingsStore.isEncryptedEditingAvailable
+    ) {
+      toastr.error(i18n.t("Common:PrivateRoomDocServiceNotSupported"));
+      return;
+    }
+
     if (fromItem) {
       this.filesActionsStore.setProcessCreatingRoomFromData(true);
     }
@@ -1094,6 +1103,22 @@ class ContextOptionsStore {
   onShowKnowledgeRoomSelectFileDialog = () => {
     this.dialogsStore.setSelectFileKnowledgeRoomDialogVisible(true);
   };
+
+  onShowGenerateSkillDialog = () => {
+    this.dialogsStore.setGenerateSkillDialogVisible(true);
+  };
+
+  /**
+   * "Create skill with AI" is offered while the AI can write one: AI services
+   * are on and AI is set up on the portal (unknown counts as set up until the
+   * chat profiles are read, as for the AI rooms).
+   */
+  get isCreateSkillWithAIAvailable() {
+    return (
+      this.settingsStore.aiServicesEnabled &&
+      this.settingsStore.aiReady !== false
+    );
+  }
 
   getContextOptionsPlusFormRoom = (
     t: TTranslation,

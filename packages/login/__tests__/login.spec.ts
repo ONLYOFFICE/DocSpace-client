@@ -58,6 +58,37 @@ test("login render", async ({
   await expectScreenshot(page,["desktop", "login", "login-render.png"]);
 });
 
+// Positive tabIndex values sent Tab from the remember checkbox straight to
+// the login button, and the forgot-password link came after it.
+test("Tab walks the login form in its displayed order", async ({
+  page,
+  baseUrl,
+}) => {
+  await page.goto(`${baseUrl}/login`);
+  await page.getByTestId("email-input").focus();
+
+  const visited: string[] = [];
+  for (let i = 0; i < 12 && visited.at(-1) !== "login_submit"; i += 1) {
+    await page.keyboard.press("Tab");
+    visited.push(
+      await page.evaluate(
+        () => document.activeElement?.closest("[id]")?.id ?? "",
+      ),
+    );
+  }
+
+  const order = [
+    "login_password",
+    "login_remember",
+    "login_forgot-password-link",
+    "login_submit",
+  ];
+  const positions = order.map((id) => visited.indexOf(id));
+  const walk = visited.join(" > ");
+  expect(positions.every((position) => position >= 0), walk).toBe(true);
+  expect(positions, walk).toEqual([...positions].sort((a, b) => a - b));
+});
+
 test("login error authentication failed", async ({
   page,
   port,

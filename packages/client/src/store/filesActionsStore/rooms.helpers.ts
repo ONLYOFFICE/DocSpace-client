@@ -34,6 +34,7 @@
  */
 
 import { removeFiles, moveToFolder } from "@docspace/shared/api/files";
+import { getRoomMissingFileKeys } from "@docspace/shared/api/privacy";
 import {
   AnalyticsEvents,
   Events,
@@ -46,7 +47,8 @@ import {
   isPrivateRoomsRoute,
   splitFileAndFolderIds,
 } from "@docspace/shared/utils/common";
-import { revokeOwnAccessOnLeave } from "@docspace/shared/services/private-room/room-member-flows";
+import { prepareNewOwner } from "@docspace/shared/services/private-room/room-member-flows";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import uniqueid from "lodash/uniqueId";
 import api from "@docspace/shared/api";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
@@ -566,7 +568,7 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
   const { user } = self.userStore;
 
   // the fallback is the selected-folder store snapshot; only
-  // id/private are read from it, matching the old JS duck typing.
+  // its id is read, matching the old JS duck typing.
   const room = (
     selection.length
       ? selection[0]
@@ -576,7 +578,6 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
   ) as TActionItem;
 
   const roomId = room.id;
-  const isPrivateRoom = room.private === true;
 
   // user is nullable on UserStore; the old JS read the
   // flags unchecked (crash when logged out), the `!` keeps that behavior.
@@ -620,54 +621,94 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
         setSelected("none");
       });
 
-  if (!isPrivateRoom) return leave();
-
-  return revokeOwnAccessOnLeave(roomId, String(user?.id)).then(leave);
+  return leave();
 };
 
 
-export const changeRoomOwnerImpl = (
-self: FilesActionStore,t: TTranslation, userId: string, isLeaveChecked = false
-)=> {
+/** The HTTP status an API request was refused with, if any. */
+const statusOf = (error: unknown) =>
+  (error as { response?: { status?: number } })?.response?.status;
+
+// Spec: private-rooms/room-membership, "Ownership transfer wraps the candidate's missing files"
+export const changeRoomOwnerImpl = async (
+  self: FilesActionStore,
+  t: TTranslation,
+  userId: string,
+  isLeaveChecked = false,
+) => {
   const { setFolder, setSelected, selection, bufferSelection } =
     self.filesStore;
-  const {
-    isRootFolder,
-    setCreatedBy,
-    id,
-    setInRoom,
-    setSecurity,
-    setAccess,
-  } = self.selectedFolderStore;
+  const { isRootFolder, setCreatedBy, setInRoom, setSecurity, setAccess } =
+    self.selectedFolderStore;
 
-  const roomId = selection.length
-    ? selection[0].id
-    : bufferSelection
-      ? bufferSelection.id
-      : id;
+  const room = (
+    selection.length
+      ? selection[0]
+      : bufferSelection
+        ? bufferSelection
+        : self.selectedFolderStore
+  ) as TActionItem;
+  const roomId = room.id;
+  const isPrivateRoom = room.private === true;
+  const currentUserId = String(self.userStore.user?.id);
 
-  return api.files
-    .setFileOwner(userId, [roomId] as number[])
-    .then(async (res) => {
-      if (isRootFolder) {
-        setFolder(res[0]);
-      } else {
-        setCreatedBy(res[0].createdBy);
-        setSecurity(res[0].security);
-        setAccess(res[0].access);
-
-        // user is nullable on UserStore; the old JS read
-        // `.id` unchecked, the `!` keeps that behavior.
-        const isMe = userId === self.userStore.user!.id;
-        if (isMe) setInRoom(true);
+  try {
+    if (isPrivateRoom) {
+      const identity = await requireUnlock(currentUserId);
+      if (!identity) {
+        toastr.error(t("Common:EncryptionUnlockRequired"));
+        return;
       }
+      const { missingFileIds } = await prepareNewOwner({
+        roomId,
+        candidateId: userId,
+        currentUserId,
+        identity,
+      });
+      if (missingFileIds.length > 0) {
+        toastr.error(
+          t("Common:EncryptedReencryptPartialFailure", {
+            count: missingFileIds.length,
+          }),
+        );
+        return;
+      }
+    }
 
-      if (isLeaveChecked) await self.onLeaveRoom(t);
-      else toastr.success(t("Common:AppointNewOwner"));
-    })
-    .catch((e) => toastr.error(e as string))
-    .finally(() => {
-      setSelected("none");
-    });
+    const res = await api.files.setFileOwner(userId, [roomId] as number[]);
+    if (isRootFolder) {
+      setFolder(res[0]);
+    } else {
+      setCreatedBy(res[0].createdBy);
+      setSecurity(res[0].security);
+      setAccess(res[0].access);
+
+      // user is nullable on UserStore; the old JS read
+      // `.id` unchecked, the `!` keeps that behavior.
+      const isMe = userId === self.userStore.user!.id;
+      if (isMe) setInRoom(true);
+    }
+
+    if (isLeaveChecked) await self.onLeaveRoom(t);
+    else toastr.success(t("Common:AppointNewOwner"));
+  } catch (e) {
+    // The server refuses the transfer while the candidate lacks an entry on
+    // an encrypted file, for example one uploaded since they were wrapped
+    // above; it lists those files on request.
+    const listed =
+      isPrivateRoom && statusOf(e) === 409
+        ? await getRoomMissingFileKeys(roomId, [userId]).catch(() => [])
+        : [];
+    const count =
+      listed.find((entry) => entry.userId.toLowerCase() === userId.toLowerCase())
+        ?.fileIds.length ?? 0;
+    if (count > 0) {
+      toastr.error(t("Common:EncryptedReencryptPartialFailure", { count }));
+    } else {
+      toastr.error(e as string);
+    }
+  } finally {
+    setSelected("none");
+  }
 };
 

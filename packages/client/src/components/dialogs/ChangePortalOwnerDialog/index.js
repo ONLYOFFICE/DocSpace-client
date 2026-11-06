@@ -248,7 +248,6 @@ const ChangePortalOwnerDialog = ({
           </Text>
           <div className={styles.buttonWrapper}>
             <Button
-              tabIndex={5}
               label={t("Common:ChangeButton")}
               size="normal"
               primary
@@ -259,7 +258,6 @@ const ChangePortalOwnerDialog = ({
               testId="change_portal_owner_change_button"
             />
             <Button
-              tabIndex={5}
               label={t("Common:CancelButton")}
               size="normal"
               scale

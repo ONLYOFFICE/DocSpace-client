@@ -162,7 +162,6 @@ const EmailContainer = ({
 					size={InputSize.large}
 					scale
 					isAutoFocussed
-					tabIndex={1}
 					isDisabled={isLoading}
 					autoComplete="off"
 					onChange={onChangeLogin}
@@ -179,7 +178,6 @@ const EmailContainer = ({
 					size={InputSize.large}
 					scale
 					isAutoFocussed
-					tabIndex={1}
 					isDisabled={isLoading}
 					autoComplete="username"
 					onChange={onChangeLogin}

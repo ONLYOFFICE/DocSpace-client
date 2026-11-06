@@ -254,7 +254,6 @@ const EditAgentDialog = ({
 
       <ModalDialog.Footer>
         <Button
-          tabIndex={5}
           label={t("Common:SaveButton")}
           primary
           scale
@@ -269,7 +268,6 @@ const EditAgentDialog = ({
           isLoading={isLoading}
         />
         <Button
-          tabIndex={5}
           label={t("Common:CancelButton")}
           scale
           onClick={onCloseAction}

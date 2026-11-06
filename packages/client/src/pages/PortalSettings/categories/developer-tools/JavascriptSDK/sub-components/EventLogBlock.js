@@ -44,6 +44,7 @@ import { DropDownItem } from "@onlyoffice/apps-ui-kit/components/drop-down-item"
 import copy from "copy-to-clipboard";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 import styles from "./EventLogBlock.module.scss";
 
@@ -108,6 +109,11 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
     });
   };
 
+  // An entry that expands is a button to the keyboard. Its id, a number,
+  // comes back from the data attribute as a string.
+  const onEntryKeyDown = (e) =>
+    activateOnButtonKey(e, () => toggle(Number(e.currentTarget.dataset.entryId)));
+
   const toggleEvent = (eventName) => {
     setHiddenEvents((prev) => {
       const next = new Set(prev);
@@ -132,6 +138,7 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
                 color={hasHidden ? globalColors.lightBlueMain : undefined}
                 onClick={() => setFilterOpen((v) => !v)}
                 iconName={VerticalDotsReactSvgUrl}
+                ariaLabel={t("Common:Filter")}
               />
               <DropDown
                 open={filterOpen}
@@ -176,6 +183,11 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
                     [styles.expandable]: expandable,
                   })}
                   onClick={expandable ? () => toggle(entry.id) : undefined}
+                  role={expandable ? "button" : undefined}
+                  tabIndex={expandable ? 0 : undefined}
+                  aria-expanded={expandable ? expanded : undefined}
+                  data-entry-id={entry.id}
+                  onKeyDown={expandable ? onEntryKeyDown : undefined}
                 >
                   <span className={styles.gutter}>
                     <span

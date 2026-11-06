@@ -36,6 +36,7 @@
 import type { Page } from "@playwright/test";
 
 import {
+  rootHandler,
   settingsHandler,
   TypeSettings,
   selfActivationStatusHandler,
@@ -205,7 +206,11 @@ test.describe("Dashboard tour", () => {
     mockRequest,
     baseUrl,
   }) => {
-    mockRequest.use(selfByTypeHandler(TEST_PORT, "visitor"));
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "visitor"),
+      // The server serves no "AI rooms" root to a guest.
+      rootHandler(TEST_PORT, { withAiHub: false }),
+    );
 
     await startTour(page, baseUrl);
 

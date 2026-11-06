@@ -5,7 +5,7 @@ paths:
   - "packages/shared/**/*.test.*"
   - "packages/shared/**/__tests__/**"
   - "packages/doceditor/src/**/*.test.*"
-  - "packages/*/vitest.config.ts"
+  - "packages/*/vitest.config.mts"
   - "packages/*/vitest/**"
 ---
 
@@ -46,6 +46,10 @@ paths:
   scope `vi.fn()` implementations are cleared between tests.
 - `console.error` containing `[ENCRYPTION]` **fails the test**; opt out with
   the global `allowConsoleError(/pattern/)`.
+- `silent: "passed-only"` in all four configs: console output of a passing
+  test is dropped, a failing test still prints its logs. A `console.log` you
+  add while debugging stays invisible until the test fails — run that file
+  with `--silent=false` to see it.
 - `__mocks__/handlers/**` + `__mocks__/e2e/**` are MSW for Playwright only;
   unit tests mock API modules with `vi.mock` instead.
 
@@ -127,6 +131,14 @@ jsdom gaps these tests work around:
   by its text, never by `queryByText` alone.
 - jsdom ignores `inert`, so a hidden dialog's buttons still take part in
   `user.tab()`: assert that the focus left a dialog, not where it went.
+- jsdom lays nothing out, and the kit's focus trap (in `ModalDialog` and
+  `Aside`) leaves out every control whose `getClientRects()` is empty - so in
+  jsdom it sees none and Tab moves nothing. A Tab-order test stubs
+  `Element.prototype.getClientRects` to return one rect in a `describe` of its
+  own and restores it after each test ("Tab order" in
+  `passphrase-modal/__tests__/PassphraseModal.test.tsx`). Put a control on the
+  page outside the dialog when testing the wrap: with nothing else on the page
+  `user.tab()` wraps by itself, trap or not.
 - `userEvent` sends no keys to a disabled element. To show that a handler's own
   guard refuses a key, `fireEvent.keyDown` on the field.
 - That an async submit did not start cannot be shown by waiting: spy on its
@@ -148,11 +160,17 @@ pnpm test:doceditor   # doceditor
 cd packages/client && pnpm exec vitest run src/store/filesStore   # single path
 ```
 
-All four suites are part of the blocking lefthook pre-push gate.
+All four suites are part of the blocking lefthook pre-push gate, run in one
+`nx run-many -t tsc lint test` call and cached by Nx: a suite reruns only when
+its own package, the non-test, non-story files of a package it depends on,
+`pnpm-lock.yaml` / `pnpm-workspace.yaml`, `public/images`, or the root JSON it
+imports (`locales/.constants`, `locales/en`, `scripts/config.json`) changed —
+see `CLAUDE.md` → "Git hooks". A test that starts reading another root
+`public/` file needs it added to the `test` inputs in `nx.json`.
 
 Vitest strips types without checking them: run `pnpm exec tsc --noEmit -p
-tsconfig.json` in the package before committing a test, or the pre-push
-`pnpm run tsc` finds the error later.
+tsconfig.json` in the package before committing a test, or the pre-push `tsc`
+task finds the error later.
 
 ## Snapshots
 

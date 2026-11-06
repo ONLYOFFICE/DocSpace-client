@@ -3,7 +3,7 @@
   "content": "No private rooms here yet",
   "content_en_sha1_hash": "9a716cb4c49a46ea9e629b8ae39619e8a29e9c74",
   "created_at": "2026-10-21T15:26:52.385Z",
-  "updated_at": "2026-10-21T15:27:35.951Z",
+  "updated_at": "2026-11-05T16:49:39.821Z",
   "comment": {
     "text": "Heading of the empty screen shown when the Private section of the left sidebar, which lists end-to-end encrypted private rooms, has no rooms yet; shown to every user. Private rooms here means rooms with end-to-end encryption, not rooms hidden from other users.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 495,
-      "context": "aiReady\n ? getAIAgentsAIEnabledTitle(t, access)\n : getAIAgentsAIDisabledTitle(t, standalone, isPortalAdmin),\n )\n .with([FolderType.Rooms, P.when(() => isPrivateScope)], () =>\n t(\"EmptyView:EmptyRootPrivateRoomsTitle\"),\n )\n .with(\n [\n FolderType.Rooms,\n P.union(",
+      "line_number": 427,
+      "context": "isFormsScope: boolean = false,\n isPrivateScope: boolean = false,\n ) => {\n return match([rootFolderType, access])\n .with([FolderType.Rooms, P.when(() => isPrivateScope)], () =>\n t(\"EmptyView:EmptyRootPrivateRoomsTitle\"),\n )\n .with(\n [\n FolderType.Rooms,\n P.union(",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "{{count}} more encryption key(s) are stored for your account but not used. Files shared only with them cannot be opened.",
   "content_en_sha1_hash": "f5c8a4d8b3a641a11846c11b0a24ab038b30b10c",
   "created_at": "2026-10-20T11:58:35.359Z",
-  "updated_at": "2026-10-20T11:59:57.959Z",
+  "updated_at": "2026-11-05T16:49:39.982Z",
   "comment": {
     "text": "Notice on the Keys management page of the profile (also the message of the confirmation dialog) shown when the server stores more of the user's end-to-end encryption keys than the one in use. {{count}} is the number of unused keys; files that were shared only with those keys can no longer be opened.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 261,
+      "line_number": 297,
       "context": "deletingKeyId={remove.pendingId}\n />\n {deleteUnused.unusedCount > 0 ? (\n <div className={styles.resetSection} data-testid=\"unused_keys_notice\">\n <span className={styles.resetHint}>\n {t(\"Common:UnusedEncryptionKeysNotice\", {\n count: deleteUnused.unusedCount,\n })}\n </span>\n <Button\n className={styles.resetButton}",
       "module": "/packages/client"
     }

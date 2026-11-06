@@ -54,10 +54,7 @@ import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOpti
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { pendingAccessStore } from "@docspace/shared/services/private-room/pending-access";
-import {
-  retryPendingAccess,
-  revokeRemovedMemberAccess,
-} from "@docspace/shared/services/private-room/room-member-flows";
+import { retryPendingAccess } from "@docspace/shared/services/private-room/room-member-flows";
 
 import MembersHelper from "../Members.utils";
 import type { UserProps } from "../Members.types";
@@ -158,14 +155,6 @@ const User = ({
       });
   };
 
-  const revokeEncryptedAccess = async () => {
-    const notice = await revokeRemovedMemberAccess(t, room.id, {
-      id: user.id,
-      isGroup: "isGroup" in user && !!user.isGroup,
-    });
-    if (notice) toastr[notice.level](notice.text);
-  };
-
   const isGroup = "isGroup" in user && !!user.isGroup;
   const isAccessPending =
     !!room.private &&
@@ -222,10 +211,7 @@ const User = ({
 
       return setRemoveUserConfirmation!(
         true,
-        async () => {
-          await updateRole(option, false);
-          await revokeEncryptedAccess();
-        },
+        () => updateRole(option, false),
         true,
       );
     }

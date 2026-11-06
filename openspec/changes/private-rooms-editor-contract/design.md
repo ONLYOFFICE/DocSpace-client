@@ -810,6 +810,17 @@ container. The add-on read of 2026-10-30 ("the encrypted upload route
 unreachable") is superseded by the request log: `/upload` is used, with
 ciphertext.
 
+### Landed on the server on 2026-11-05
+
+`1259577f63` on `release/v4.1.0` of `../server` ("check file keys, refuse
+unencrypted saves, hide room titles in letters") implemented the portal
+items P-1, P-3, P-7 and P-8 of `contract-v1.md` and tasks 2.1, 5.4, 6.3,
+6.4, 10.4, 10.5 and 10.7, each recorded at its task and decision (D2, D8,
+D9, D10). P-5, the stable key and base while a session exists (task 6.2),
+and the key-pair list in the signed configuration (task 10.6) did not
+land. The same commit changed the private-room file-key contract
+(`private-rooms-server-hardening`, "Landed on 2026-11-05").
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -850,7 +861,42 @@ ciphertext.
    build through `settings/version/build` (10.0.2.5 on the stand) while
    `files/docservice.version` is empty; `info/info.json` is loopback-only
    and names the build, not the library; so the boolean is derived from the
-   library path until a published signal exists (DS-16).
+   library path until a published signal exists (DS-16). Landed 2026-11-05
+   (`1259577f63`): `docServiceEncryptionSupported` on `FilesSettingsDto`,
+   read by `GET files/settings`; `DocumentServiceEncryptionChecker` probes
+   `{internal Document Server address}/sdkjs/common/crypto/onlyoffice-crypto.js`
+   with a five-second timeout, answers true on 200, caches the result for
+   ten minutes per portal and address, and answers false without a Document
+   Server address. Client side 2026-11-05 (task 2.2):
+   `docServiceEncryptionSupported` is optional on `TFilesSettings`, the
+   files-settings mock answers true, and `isEncryptedEditingAvailable` of
+   `packages/shared/services/private-room/editor-capability.ts` (absent
+   counts as false) is read by the client `FilesSettingsStore`, the SDK
+   `DocsSettingsStore` and the doceditor `useFilesSettings`. Task 2.3
+   (2026-11-05): the client refuses in `openDocEditorImpl` before any key
+   flow, with Common:PrivateRoomEditorNotSupported as an info toast and no
+   navigation; the SDK decision moved to `refusesEncryptedOpen` of
+   `docs-layout/open-encrypted.ts`, fed the files settings of
+   `DocsSettingsStore`, so an encrypted file opens through the same path
+   as a plain one once the capability is present. Task 2.4 (2026-11-05):
+   the doceditor reads the files settings in `getData` for an encrypted
+   file only, a failed read counting as absent, and `Editor` renders the
+   message in place of the editor without mounting the key hook when the
+   capability is absent. Landed later on 2026-11-05 (`b562fc3fb1`): the
+   server also refuses the editor configuration of an encrypted file of a
+   private room while the capability is false, `DocumentServiceHelper`
+   throwing a `NotSupportedException`, so `GET files/file/{fileId}/openedit`
+   answers 415 with `ErrorMessage_DocServiceEncryptionNotSupported`, and
+   it refuses to create a private room (403, `private-rooms-server-hardening`
+   3.1c). The checker answers the setting
+   `files:docservice:encryption-assume-supported` when it is set (tests and
+   local development; the server's test profile sets it), and caches a probe
+   without an answer (an HTTP error or the timeout) for 30 seconds as
+   false, a clear answer for ten minutes. The doceditor maps any 415 of
+   `openedit` to its `not-supported` error page with the server's message
+   (`openEdit` in `packages/doceditor/src/utils/actions.ts`), so the
+   `notSupported` state of task 2.4 is no longer reached for a file of a
+   private room; task 2.5 shows it for that 415.
 
 3. **Co-editing allowed (decided 2026-10-29).** The Document Server encrypts
    every change with the DEK and stores only ciphertext, and each co-editor's
@@ -869,7 +915,9 @@ ciphertext.
    or private-room file (`FileSecurity.cs:1894-1914`,
    `FileConverter.cs:306-309`), but `POST files/file/{fileId}/copyas` inserts
    a converted copy with only a create-rights check
-   (`FilesControllerHelper.cs:263-280`, `FileConverter.cs:643-654`). Print is
+   (`FilesControllerHelper.cs:263-280`, `FileConverter.cs:643-654`) until
+   2026-11-04, when `bd89a24dcd` made it refuse an encrypted source, a
+   private-room source and a private-room destination with 403. Print is
    local to the session. Version history is withheld: the client withholds
    version operations for encrypted files, the edit history lists no saved
    version, and there is no `changesUrl` to show. Forms follow D9.
@@ -962,7 +1010,7 @@ ciphertext.
    downloads it in the browser. `document.url` is built from the public portal
    address and then `ReplaceCommunityAddress` swaps its host for the address
    meant for Document Server requests; for an encrypted file the swap is
-   skipped.
+   skipped. Landed 2026-11-05 (`1259577f63`, `Configuration.cs:232-236`).
 
 9. **PDF forms: fill as an edit, no form-data collection, no "Share to fill
    out".** Filling a form in the edit mode of a private room works and its
@@ -978,13 +1026,23 @@ ciphertext.
    after ff9f51aeffb, and the add-on passing the form flag of the container it
    opened to `encryptFile` when it saves.
    Role-based filling in a private virtual data room is server-compatible but
-   unverified in the editor, and stays an open question.
+   unverified in the editor, and stays an open question. Landed 2026-11-05
+   (`1259577f63`): the server refuses the submit callback of a file in a
+   private room, hides the submit button for an encrypted file, refuses
+   start filling for an encrypted file and denies the start-filling right
+   inside a private room, in a virtual data room too, which closes the role
+   question for v1: no filling starts there.
 
 10. **An encrypted file's save fails closed.** The encrypted flag of a
     force-saved version is copied from the callback, so a callback without it
     would store ciphertext marked as plaintext. The server refuses a save of a
     file whose current version is encrypted when the callback carries no
-    encrypted flag, and keeps the previous version.
+    encrypted flag, and keeps the previous version. Landed 2026-11-05
+    (`1259577f63`): the tracker answers an error for a file in a private
+    room when the callback carries no flag, is a user submit or comes from
+    a user who may no longer edit, and `SaveEditingAsync` throws for a save
+    without the flag; outside a force save the tracker is removed and the
+    editing stop sent, so the next open starts a fresh session.
 
 11. **The bundle carries a build stamp and a library version.** Implemented
     2026-10-29 (task 1.4), 2.2.0 on 2026-10-30 exporting
@@ -1164,7 +1222,9 @@ BLOCKED or "after <x>" waits.
   inside the private room.
 - [Server paths store ciphertext as a plaintext file or send it to the
   Document Server] → tasks 10.2 to 10.4; `copyas`, restore by address and
-  conversion are reachable through the API today.
+  conversion are reachable through the API today. `copyas` closed on
+  2026-11-04 (`bd89a24dcd`, task 10.2); restore by address and reference
+  data closed on 2026-11-05 (`1259577f63`, task 10.4).
 
 ## Migration Plan
 

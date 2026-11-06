@@ -105,7 +105,6 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
           scale
           size={ButtonSize.medium}
           label={t("Common:SaveButton")}
-          tabIndex={2}
           isDisabled={false}
           onClick={onChangeOwnerClick}
           testId="save_change_owner_button"
@@ -114,7 +113,6 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
           scale
           size={ButtonSize.medium}
           label={t("Common:CancelButton")}
-          tabIndex={2}
           isDisabled={false}
           onClick={onCancelClick}
           testId="cancel_button"

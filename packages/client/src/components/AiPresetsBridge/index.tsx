@@ -67,6 +67,11 @@ type TDialogProps = {
 const Dialog = DialogComponent as unknown as ComponentType<TDialogProps>;
 
 type AiPresetsBridgeProps = {
+  /**
+   * AI requests are allowed (see Shell's `canUseAi`): off on an unpaid
+   * portal and with AI services switched off, so no project list is read.
+   */
+  enabled: boolean;
   aiPresetsStore: AiPresetsStore;
   userId: string | null;
   /** The user may create AI projects (owner, admins, room admins). */
@@ -88,6 +93,7 @@ type AiPresetsBridgeProps = {
  * reachable.
  */
 const AiPresetsBridge = ({
+  enabled,
   aiPresetsStore,
   userId,
   canCreateProjects,
@@ -112,8 +118,8 @@ const AiPresetsBridge = ({
   }, [setAiReady, aiReady]);
 
   React.useEffect(() => {
-    aiPresetsStore.init(userId);
-  }, [aiPresetsStore, userId]);
+    aiPresetsStore.init(enabled ? userId : null);
+  }, [aiPresetsStore, enabled, userId]);
 
   // The save button creates a project from a plain chat, for those who may
   // create one. A chat opened from a project in the AI rooms section already

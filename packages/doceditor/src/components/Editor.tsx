@@ -74,7 +74,46 @@ import Bar from "./Bar";
 
 type TCustomization = NonNullable<IConfig["editorConfig"]>["customization"];
 
-const Editor = ({
+/** A message under the bar, in place of the editor. */
+const EditorMessage = ({
+  config,
+  children,
+}: Pick<EditorProps, "config"> & { children: React.ReactNode }) => (
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      height: "100%",
+      width: "100%",
+    }}
+  >
+    <div
+      style={{
+        height: "auto",
+        overflow: "visible",
+        position: "relative",
+        zIndex: 1000,
+      }}
+    >
+      <Bar quotaExceededScope={config?.quotaExceededScope} />
+    </div>
+    <div
+      style={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        padding: "24px",
+      }}
+    >
+      {children}
+    </div>
+  </div>
+);
+
+const EditorBody = ({
   config,
   successAuth,
   user,
@@ -414,38 +453,7 @@ const Editor = ({
     encryption.status !== "ready";
 
   const renderMessage = (message: React.ReactNode) => (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        width: "100%",
-      }}
-    >
-      <div
-        style={{
-          height: "auto",
-          overflow: "visible",
-          position: "relative",
-          zIndex: 1000,
-        }}
-      >
-        <Bar quotaExceededScope={config?.quotaExceededScope} />
-      </div>
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          padding: "24px",
-        }}
-      >
-        {message}
-      </div>
-    </div>
+    <EditorMessage config={config}>{message}</EditorMessage>
   );
 
   if (isEncryptionGating) {
@@ -501,5 +509,23 @@ const Editor = ({
     </div>
   );
 };
+
+const EditorNotSupported = ({ config }: Pick<EditorProps, "config">) => {
+  const { t } = useTranslation(["Common"]);
+  return (
+    <EditorMessage config={config}>
+      {t("Common:PrivateRoomEditorNotSupported")}
+    </EditorMessage>
+  );
+};
+
+// Spec: editor-integration, "Document Server capability check before opening"
+const Editor = (props: EditorProps) =>
+  (props.config?.file?.encrypted && !props.docServiceEncryptionSupported) ||
+  (!props.config && props.docServiceEncryptionSupported === false) ? (
+    <EditorNotSupported config={props.config} />
+  ) : (
+    <EditorBody {...props} />
+  );
 
 export default dynamic(() => Promise.resolve(Editor), { ssr: false });

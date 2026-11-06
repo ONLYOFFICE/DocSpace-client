@@ -33,10 +33,13 @@ Handover to the documentation team: not yet recorded.
 - **A lost key and recovery phrase mean lost files.** Nobody can decrypt the
   files without the user's key, including administrators and support. Users
   must keep the recovery phrase shown when the key is created.
-- **External sign-in links.** Saving an encryption key can remove the
-  account's link to Google, SSO or another external sign-in provider
-  (`private-rooms-server-hardening` 12.1). Users who sign in through an
-  external provider should set a password before they create a key.
+- **External sign-in links.** On a server build before commit `3b9c527a6e`
+  of 2026-11-04, saving an encryption key could remove the account's link
+  to Google, SSO or another external sign-in provider
+  (`private-rooms-server-hardening` 12.1). The server release that carries
+  that commit keeps the links; a link lost before the fix is not restored.
+  Users on an older server build should set a password before they create
+  a key.
 
 ## Known limitations of this version
 
@@ -60,7 +63,8 @@ From the SHALL NOT requirements of `private-rooms/encryption-core`:
 
 - **Document Server build:** not named yet (beta gate item 0.1, left open by
   proposal decision 6). On a Document Server build without the crypto add-on,
-  encrypted files do not open in the editor.
+  private rooms cannot be created (the server answers 403 since `b562fc3fb1`)
+  and encrypted files do not open in the editor (415).
 - **Spreadsheets and presentations** (gate item 0.2, `private-rooms-editor-contract`
   4.7). On build 10.0.2.5 (run of 2026-10-30):
   - DS-17: a second session joining a held session with pending changes can
@@ -70,27 +74,34 @@ From the SHALL NOT requirements of `private-rooms/encryption-core`:
 
 ## Open at release time
 
-Server (`private-rooms-server-hardening`), backend items not merged:
+Server (`private-rooms-server-hardening`), backend items not merged as of
+2026-11-05 (the archived-room guards, room events, the invitee keys route,
+the sign-in link fix, the link and template refusals and the room metadata
+guards merged on 2026-11-04; the owner-change check, the missing-keys
+route, the partial key write, the audit of key writes and the neutral room
+name in letters on 2026-11-05):
 
-- owner change of a private room with encrypted files (2);
-- the private-room availability rule and the guards on room metadata (3);
-- validation of encrypted upload titles, and the plaintext room title still
-  sent in invitation and notification e-mails (4);
-- audit events and the per-file access history (6);
+- the private-room availability rule (3.1b);
+- validation of encrypted upload titles (4.1);
+- the translations of the "Private room" label of letters and pushes, which
+  every language prints in English for now (4.5);
+- the revocation of a removed member's file keys and its audit (6.0, 6.1b);
 - the folder check of the upload-session abort (7.2);
 - recovery and offboarding for organisations (8);
-- archived private rooms and room events (9);
-- the invitee keys route (11);
-- the external sign-in link removal above, the refusal of external and
-  invitation links on private rooms, and the key and room-type checks of
-  room creation (12).
+- the key-set, room-type and third-party checks of room creation (12.3).
+
+Client follow-ups of the merged server items, not in the beta: the owner
+change prepared through the missing-keys route (2.2), the skipped
+recipients of a key write (12.6) and the exact backfill (14.2).
 
 Document Server and editor (`private-rooms-editor-contract`):
 
 - written sign-off of the editor contract by the Document Server team (1.6);
-- the encrypted-editing capability check (2);
+- the client side of the encrypted-editing capability check (2.2 to 2.4;
+  the server reports `docServiceEncryptionSupported` since 2026-11-05);
 - DS-17 and DS-19 above (4.7);
-- server-side refusals of actions the editor must not offer for encrypted
-  files (5.4, 10);
-- session end and the stable document address of encrypted files (6);
+- the stable document key and base while a session exists (6.2); the public
+  document address and the refused saves without the encrypted flag landed
+  on 2026-11-05;
+- the key-pair list in the signed editor configuration (10.6);
 - opening encrypted files from the SDK (7.1).

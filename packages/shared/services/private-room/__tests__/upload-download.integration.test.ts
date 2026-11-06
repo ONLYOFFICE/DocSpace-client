@@ -140,7 +140,7 @@ describe("encrypted upload — integration via MSW", () => {
       "Hello private room — this is secret content.",
     );
 
-    const uploadFileName = "abc-uuid.txt";
+    const uploadFileName = "0f8fad5b-d9cb-469f-a165-70867728950e.txt";
     const { encryptedBlob } = await encryptFile(fileContent, {
       fileName: "report.txt",
     });

@@ -27,6 +27,7 @@
 import { http } from "msw";
 
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
+import type { EncryptedFilesHandlerHandle } from "../files/encryptedFiles";
 import type { RequestLog } from "../privacyroom";
 
 export type RoomMember = {
@@ -55,7 +56,17 @@ export type RoomMembersHandlerOptions = {
    * `UnhandledExceptionMiddleware`, after the invitees before it were saved.
    */
   withoutKeys?: string[];
+  /**
+   * The room's files. A share set to None (FileShare.None) for a member
+   * who held one removes that member's file keys once the request went
+   * through, as SetAceObjectAsync calls RevokeFileKeysAsync after its loop;
+   * the mock has no groups, so every subject counts as a user.
+   */
+  files?: { current: EncryptedFilesHandlerHandle | null };
 };
+
+/** FileShare.None. */
+const SHARE_NONE = 0;
 
 const okResponse = <T>(response: T): Response =>
   new Response(
@@ -142,10 +153,12 @@ export const roomMembersHandlers = (
       };
       requests.push({ method: "PUT", url: baseUrl, body });
 
+      const removed: string[] = [];
       for (const inv of body.invitations ?? []) {
         if (opts.withoutKeys?.includes(inv.id)) return noKeyResponse();
         const existing = state.find((m) => m.id === inv.id);
         if (existing) {
+          if (inv.access === SHARE_NONE) removed.push(inv.id);
           if (inv.access !== undefined) existing.access = inv.access;
           continue;
         }
@@ -155,6 +168,7 @@ export const roomMembersHandlers = (
           access: inv.access ?? 11,
         });
       }
+      opts.files?.current?.revokeFileKeys(removed);
       return okResponse({ members: state.map(buildMemberDto) });
     }),
 

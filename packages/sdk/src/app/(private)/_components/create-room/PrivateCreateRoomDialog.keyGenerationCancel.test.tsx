@@ -101,6 +101,10 @@ vi.mock("@docspace/shared/api/privacy", () => ({
 vi.mock("@/app/(rooms)/_components/create-edit-room-dialog", () => ({
   default: () => null,
 }));
+vi.mock("@/app/(personal-files)/_store/DocsSettingsStore", () => ({
+  useDocsSettingsStore: () => ({ isEncryptedEditingAvailable: true }),
+}));
+
 vi.mock("@/app/(personal-files)/_store/DocsUserStore", () => ({
   useDocsUserStore: () => ({ user: { id: "me", email: "me@example.com" } }),
 }));

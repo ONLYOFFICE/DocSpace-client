@@ -3,7 +3,7 @@
   "content": "Private",
   "content_en_sha1_hash": "237dfa0a21c8e17a7276cf161eef7e0fba067c47",
   "created_at": "2026-10-21T11:27:35.216Z",
-  "updated_at": "2026-10-21T11:29:09.205Z",
+  "updated_at": "2026-11-05T16:49:39.807Z",
   "comment": {
     "text": "Label of the left sidebar section that lists end-to-end encrypted private rooms, placed next to the Rooms and Forms sections and holding an Archive sub-item. It names the section, that is the private rooms as a group, not a property of one item: use a short plural or section-name form, like the Rooms and Forms labels, not an adjective agreeing with a single noun.",
     "is_auto": true,
@@ -13,9 +13,63 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 520,
-      "context": "// Private rooms are listed apart from Rooms, by the rooms' privacy filter;\n // there is no folder of their own to count new items against.\n if (roomsFolder && privateRoomsSectionAvailable) {\n mainItems.push({\n id: \"private-rooms\",\n label: t(\"Common:Private\"),\n icon: CatalogPrivateReactSvgUrl,\n ...nav(searchAreaUrl(\"/private/filter\", RoomSearchArea.Active)),\n children: [\n {\n id: \"private-rooms-archive\",",
+      "line_number": 545,
+      "context": "// Spec: private-rooms/sidebar-section, \"No new-items counter on the section item\"\n if (roomsFolder && privateRoomsSectionAvailable) {\n mainItems.push({\n id: \"private-rooms\",\n label: t(\"Common:Private\"),\n icon: CatalogPrivateReactSvgUrl,\n ...nav(searchAreaUrl(\"/private/filter\", RoomSearchArea.Active)),\n badgeComponent: (\n <BetaBadge\n place=\"right-start\"",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
+      "line_number": 122,
+      "context": "type === NoAccessContainerType.Account\n ? t(\"NoAccessSectionTitle\")\n : t(\"NoAccessRoomTitle\"),\n description: t(\"RoomAccessRedirectNote\", {\n sectionName: isPrivateSection\n ? t(\"Common:Private\")\n : t(\"Common:Rooms\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
+      "line_number": 122,
+      "context": "type === NoAccessContainerType.Account\n ? t(\"NoAccessSectionTitle\")\n : t(\"NoAccessRoomTitle\"),\n description: t(\"RoomAccessRedirectNote\", {\n sectionName: isPrivateSection\n ? t(\"Common:Private\")\n : t(\"Common:Rooms\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 561,
+      "context": ".with([FolderType.Archive, ShareAccessRights.None, P._], () => [\n {\n ...(isPrivateScope ? actions.onGoToPrivate() : actions.onGoToShared()),\n icon: <FolderIcon />,\n description: isPrivateScope\n ? t(\"Common:GoToSection\", { sectionName: t(\"Common:Private\") })\n : t(\"Common:GoToMyRooms\"),\n key: \"empty-view-goto-shared\",\n },\n ])\n .with([FolderType.TRASH, P._, P.when((item) => !item)], () => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 448,
+      "context": "}\n };\n \n const e2eRoomsItem: NavMenuItem = {\n id: E2E_ROOMS_ID,\n label: t(\"Common:Private\"),\n icon: CatalogPrivateReactSvgUrl,\n onClick: handleE2eRoomsClick,\n children: e2eRoomsEnabled\n ? [\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
+      "line_number": 129,
+      "context": "alwaysOn: false,\n },\n {\n id: \"e2e-rooms\",\n icon: <CatalogPrivateIcon />,\n title: t(\"Common:Private\"),\n description: t(\"Common:DashboardE2eRoomsDescription\"),\n alwaysOn: false,\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 775,
+      "context": "return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n if (isPrivateRoomsListRoot(location, isRoomsFolder))\n return t(\"Common:Private\");\n \n // The AI root is titled by the client, as the tree titles it.\n if (getCategoryType(location) === CategoryType.AiHub)\n return t(\"Common:AiRooms\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/filesStore/fetch.helpers.ts",
+      "line_number": 416,
+      "context": "isRootRoom && window.location.pathname.startsWith(\"/forms\")\n ? i18n.t(\"Common:Forms\")\n : isRootRoom &&\n folderType === Rooms &&\n isPrivateRoomsRoute(address.pathname)\n ? i18n.t(\"Common:Private\")\n : title;\n \n let shared: boolean | undefined;\n let quotaLimit: number | undefined;\n let usedSpace: number | undefined;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/filesStore/fetch.helpers.ts",
+      "line_number": 416,
+      "context": "isRootRoom && window.location.pathname.startsWith(\"/forms\")\n ? i18n.t(\"Common:Forms\")\n : isRootRoom &&\n folderType === Rooms &&\n isPrivateRoomsRoute(address.pathname)\n ? i18n.t(\"Common:Private\")\n : title;\n \n let shared: boolean | undefined;\n let quotaLimit: number | undefined;\n let usedSpace: number | undefined;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/private/page.client.tsx",
+      "line_number": 112,
+      "context": "// Spec: private-rooms/sdk-surface, \"Membership from every entry point\"\n const privateRoomActions = usePrivateRoomActions({\n onRoomChanged: refreshRooms,\n });\n \n const headerTitle = isArchive ? t(\"Common:Archive\") : t(\"Common:Private\");\n const currentWithTitle = React.useMemo(\n () => ({ ...folderData.current, title: headerTitle }),\n [folderData.current, headerTitle],\n );",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

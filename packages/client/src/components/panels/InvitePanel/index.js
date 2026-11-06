@@ -56,6 +56,8 @@ import {
   getMembersToRewrap,
   rewrapForInvitedMembers,
   sendPrivateRoomInvitations,
+  skippedMemberNotices,
+  verifyInvitees,
 } from "@docspace/shared/services/private-room/room-member-flows";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 
@@ -483,9 +485,27 @@ const InvitePanel = ({
         }
       }
 
+      // Spec: private-rooms/room-membership, "Invitees without usable keys are skipped with a warning"
+      const verification =
+        isPrivateInvite && invitedMembers.length > 0
+          ? await verifyInvitees({
+              roomId,
+              invitees: invitedMembers,
+              currentUserId: String(currentUserId),
+            })
+          : { verified: [], skipped: [] };
+      const verifiedIds = new Set(verification.verified.map((m) => m.id));
+      const invitationsToSend = isPrivateInvite
+        ? invitations.filter(
+            (invitation) =>
+              invitation.id === undefined ||
+              verifiedIds.has(String(invitation.id)),
+          )
+        : invitations;
+
       // Spec: private-rooms/room-membership, "Private-room invitations are sent one invitee per request"
       const privateSend = isPrivateInvite
-        ? await sendPrivateRoomInvitations(roomId, invitations, {
+        ? await sendPrivateRoomInvitations(roomId, invitationsToSend, {
             culture: data.culture,
             notify: data.notify,
             message: data.message,
@@ -556,7 +576,15 @@ const InvitePanel = ({
 
       if (showsResult && newMembers.length === 0) {
         setIsLoading(false);
-        setInviteOutcome({ granted: [], pending: [], skipped: [], refused });
+        skippedMemberNotices(t, verification.skipped).forEach(
+          ({ level, text }) => toastr[level](text),
+        );
+        setInviteOutcome({
+          granted: [],
+          pending: [],
+          skipped: verification.skipped,
+          refused,
+        });
         return;
       }
 
@@ -576,6 +604,7 @@ const InvitePanel = ({
           t,
           roomId,
           newMembers,
+          skippedBeforeGrant: verification.skipped,
           currentUserId: String(currentUserId),
           identity,
           onProgress: (progress) =>

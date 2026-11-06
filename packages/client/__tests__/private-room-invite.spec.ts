@@ -268,7 +268,7 @@ test.describe("Private room — invite entry point", () => {
     await expect(panel.getByText(DAN.displayName)).toBeVisible();
     await expect(panel.getByText(CAROL.displayName)).toHaveCount(0);
   });
-  test("Invitee without a key named: the panel names the invitee the server refused and shares the files with the one it added", async ({
+  test("Invitee without a key named: the panel names the invitee left out before the grant and shares the files with the one it added", async ({
     page,
     mockRequest,
     baseUrl,
@@ -350,9 +350,13 @@ test.describe("Private room — invite entry point", () => {
     await expect(page.getByTestId("invite_panel_result_granted")).toContainText(
       CAROL.displayName,
     );
-    await expect(page.getByTestId("invite_panel_result_refused")).toContainText(
+    // The invitees are verified before the security update: Dan has no key,
+    // so he is left out of it and named among the skipped, not refused by the
+    // server.
+    await expect(page.getByTestId("invite_panel_result_skipped")).toContainText(
       DAN.displayName,
     );
+    await expect(page.getByTestId("invite_panel_result_refused")).toHaveCount(0);
     const storedFile = filesHandle.current!.getFiles()[0];
     expect(storedFile.fileKeys.map((k) => String(k.userId)).sort()).toEqual(
       [CAROL.id, TEST_USER_ID].sort(),

@@ -63,6 +63,7 @@ const mocks = vi.hoisted(() => ({
   },
   toastr: { success: vi.fn(), error: vi.fn() },
   keysLoaded: true,
+  editorsEncrypt: true,
 }));
 
 vi.mock("react-i18next", () => ({
@@ -98,6 +99,12 @@ vi.mock("@/app/(rooms)/_components/create-edit-room-dialog", () => ({
   },
 }));
 
+vi.mock("@/app/(personal-files)/_store/DocsSettingsStore", () => ({
+  useDocsSettingsStore: () => ({
+    isEncryptedEditingAvailable: mocks.editorsEncrypt,
+  }),
+}));
+
 vi.mock("@/app/(personal-files)/_store/DocsUserStore", () => ({
   useDocsUserStore: () => ({ user: { id: "me", email: "me@example.com" } }),
 }));
@@ -125,6 +132,7 @@ describe("PrivateCreateRoomDialog", () => {
     mocks.identity.keys = [];
     mocks.identity.hasKeys = false;
     mocks.keysLoaded = true;
+    mocks.editorsEncrypt = true;
   });
 
   afterEach(() => {
@@ -174,6 +182,19 @@ describe("PrivateCreateRoomDialog", () => {
 
     expect(mocks.toastr.error).toHaveBeenCalledWith(
       "Common:EncryptionRequiresHttps",
+    );
+    expect(mocks.toastr.error).toHaveBeenCalledTimes(1);
+    expect(onClose).toHaveBeenCalled();
+    expect(mocks.dialog).toBeNull();
+    expect(mocks.confirm?.visible).toBe(false);
+  });
+
+  it("Document Server without encryption", () => {
+    mocks.editorsEncrypt = false;
+    const { onClose } = open();
+
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomDocServiceNotSupported",
     );
     expect(mocks.toastr.error).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalled();

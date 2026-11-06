@@ -91,7 +91,6 @@ const GuestShareLinkForm = ({
           scale
           size={ButtonSize.medium}
           label={t("Common:Approve")}
-          tabIndex={2}
           isDisabled={isLoading}
           onClick={() => onApproveInvite(email, confirmHeader)}
           testId="approve_button"
@@ -100,7 +99,6 @@ const GuestShareLinkForm = ({
           scale
           size={ButtonSize.medium}
           label={t("Common:Deny")}
-          tabIndex={2}
           isDisabled={isLoading}
           onClick={onDenyInvite}
           testId="deny_button"

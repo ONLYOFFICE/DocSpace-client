@@ -47,7 +47,6 @@ const os = require("os");
 const packagePath = path.resolve(__dirname, "package.json");
 const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
 
-const { BannerPlugin, NormalModuleReplacementPlugin } = require("webpack");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
@@ -120,7 +119,7 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_E2E_TEST: process.env.E2E_TEST,
   },
-  webpack: (config) => {
+  webpack: (config, { webpack }) => {
     const isProduction = config.mode === "production";
 
     // Add resolve configuration for shared package
@@ -151,7 +150,7 @@ const nextConfig = {
       // within an ApiProvider"). Resolving every ui-kit import from this app's
       // directory keeps a single copy -- the webpack side of Vite's dedupe.
       config.plugins.push(
-        new NormalModuleReplacementPlugin(
+        new webpack.NormalModuleReplacementPlugin(
           /^@onlyoffice\/apps-ui-kit(\/|$)/,
           (resource) => {
             resource.context = __dirname;
@@ -239,7 +238,7 @@ const nextConfig = {
       };
 
       config.plugins.push(
-        new BannerPlugin({
+        new webpack.BannerPlugin({
           raw: true,
           banner,
         }),

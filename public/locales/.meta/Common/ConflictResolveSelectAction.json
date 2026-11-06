@@ -3,7 +3,7 @@
   "content": "Please select the action:",
   "content_en_sha1_hash": "690f45f13bb9e035ca831a55006b8db7f845025e",
   "created_at": "2025-05-19T21:30:43.643Z",
-  "updated_at": "2026-10-27T19:13:17.803Z",
+  "updated_at": "2026-11-05T16:49:39.863Z",
   "comment": {
     "text": "This is a label for a dropdown menu or radio button group within a conflict resolution dialog. It prompts the user to choose how to handle a file conflict (e.g., overwrite, create a copy, skip).",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 357,
-      "context": "onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}\n onClose={onCloseConflictDialog}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"OKButton\")}\n messageText={messageText}\n selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}\n duplicateTitle={duplicateTitle}\n duplicateDescription={duplicateDescription}\n skipTitle={t(\"Common:SkipTitle\")}",
+      "line_number": 359,
+      "context": "onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}\n onClose={onCloseConflictDialog}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"OKButton\")}\n messageText={messageText}\n selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n withOverwrite={!privateRenames}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}\n duplicateTitle={duplicateTitle}\n duplicateDescription={duplicateDescription}",
       "module": "/packages/client"
     },
     {
@@ -31,8 +31,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/conflict-resolve-dialog/index.tsx",
-      "line_number": 116,
-      "context": "<ConflictResolve\n visible={visible}\n isLoading={false}\n headerLabel={t(\"Common:ActionRequired\")}\n messageText={messageText}\n selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}\n duplicateTitle={duplicateTitle}\n duplicateDescription={duplicateDescription}\n skipTitle={skipTitle}",
+      "line_number": 119,
+      "context": "<ConflictResolve\n visible={visible}\n isLoading={false}\n headerLabel={t(\"Common:ActionRequired\")}\n messageText={messageText}\n selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n withOverwrite={withOverwrite}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}\n duplicateTitle={duplicateTitle}\n duplicateDescription={duplicateDescription}",
       "module": "/packages/sdk"
     }
   ],

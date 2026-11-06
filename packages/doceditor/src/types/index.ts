@@ -255,6 +255,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+      /** Whether the connected Document Server can edit encrypted files. */
+      docServiceEncryptionSupported?: boolean;
     }
   | {
       error: TError;
@@ -270,6 +272,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+      /** False when the server refused an encrypted file for that reason. */
+      docServiceEncryptionSupported?: false;
     };
 
 export type EditorProps = {
@@ -284,6 +288,8 @@ export type EditorProps = {
   errorMessage?: string;
   isSkipError?: boolean;
   filesSettings?: TFilesSettings;
+  /** Whether the connected Document Server can edit encrypted files. */
+  docServiceEncryptionSupported?: boolean;
   organizationName?: string;
   shareKey?: string;
 

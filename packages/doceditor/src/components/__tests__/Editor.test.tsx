@@ -59,6 +59,7 @@ const env = vi.hoisted(() => {
       status: "off" as "off" | "loading" | "ready" | "error",
       encryptionKeys: undefined as Record<string, unknown> | undefined,
     },
+    keyHookCalls: 0,
     events: {
       createUrl: "",
       documentReady: false,
@@ -152,7 +153,10 @@ vi.mock("@/hooks/useGoBackAndClose", () => ({
 }));
 
 vi.mock("@/hooks/useFileEncryptionKeys", () => ({
-  default: () => env.encryption,
+  default: () => {
+    env.keyHookCalls += 1;
+    return env.encryption;
+  },
 }));
 
 vi.mock("@/utils/events", () => env.eventHelpers);
@@ -215,6 +219,8 @@ describe("Editor", () => {
       successAuth: true,
       user,
       isSharingAccess: true,
+      // The Document Server of these cases edits encrypted files.
+      docServiceEncryptionSupported: true,
       onSDKRequestSaveAs: vi.fn(),
       onSDKRequestSharingSettings: vi.fn(),
       onSDKRequestInsertImage: vi.fn(),
@@ -247,6 +253,7 @@ describe("Editor", () => {
     env.captured.config = undefined;
     env.encryption.status = "off";
     env.encryption.encryptionKeys = undefined;
+    env.keyHookCalls = 0;
   });
 
   afterEach(() => {
@@ -266,6 +273,72 @@ describe("Editor", () => {
       contractVersion: 1,
     };
   };
+
+  describe("Capability check", () => {
+    it("Capability absent: no editor and no key flow for an encrypted file", async () => {
+      await renderEditor({
+        config: makeConfig(true),
+        fileInfo: makeFileInfo(true),
+        docServiceEncryptionSupported: false,
+      });
+
+      expect(env.keyHookCalls).toBe(0);
+      expect(editorMounted()).toBe(false);
+      expect(container?.textContent).toContain(
+        "Common:PrivateRoomEditorNotSupported",
+      );
+    });
+
+    it("Capability present: the key flow runs and the editor mounts", async () => {
+      asEncrypted();
+      await renderEditor({
+        config: makeConfig(true),
+        fileInfo: makeFileInfo(true),
+        docServiceEncryptionSupported: true,
+      });
+
+      expect(env.keyHookCalls).toBeGreaterThan(0);
+      expect(editorMounted()).toBe(true);
+    });
+
+    it("Editor refused by the server", async () => {
+      await renderEditor({
+        config: undefined,
+        isSkipError: true,
+        errorMessage: "refused",
+        docServiceEncryptionSupported: false,
+      });
+
+      expect(env.keyHookCalls).toBe(0);
+      expect(editorMounted()).toBe(false);
+      expect(container?.textContent).toContain(
+        "Common:PrivateRoomEditorNotSupported",
+      );
+    });
+
+    it("keeps the editor's error page for another refusal", async () => {
+      await renderEditor({
+        config: undefined,
+        isSkipError: true,
+        errorMessage: "refused",
+        docServiceEncryptionSupported: undefined,
+      });
+
+      expect(container?.textContent).not.toContain(
+        "Common:PrivateRoomEditorNotSupported",
+      );
+    });
+
+    it("Plain file without the capability: the editor mounts", async () => {
+      await renderEditor({
+        config: makeConfig(false),
+        fileInfo: makeFileInfo(false),
+        docServiceEncryptionSupported: false,
+      });
+
+      expect(editorMounted()).toBe(true);
+    });
+  });
 
   describe("Save copy as", () => {
     it("Save copy as: the event is absent for an encrypted file", async () => {

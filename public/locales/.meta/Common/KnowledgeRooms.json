@@ -3,7 +3,7 @@
   "content": "Knowledge rooms",
   "content_en_sha1_hash": "2334c2009c2eab341e10fa225a853cd08b541e69",
   "created_at": "2026-10-31T12:57:30.292Z",
-  "updated_at": "2026-11-01T07:12:22.994Z",
+  "updated_at": "2026-11-05T16:49:39.903Z",
   "comment": {
     "text": "Plural name of the Knowledge room type, shown as a room type filter option.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1209,
+      "line_number": 1227,
       "context": "case RoomsType.KnowledgeRoom:\n return {\n id: \"filter_type-knowledge\",\n key: RoomsType.KnowledgeRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:KnowledgeRooms\"),\n };\n case RoomsType.CustomRoom:\n default:\n return {\n id: \"filter_type-custom\",",
       "module": "/packages/client"
     }

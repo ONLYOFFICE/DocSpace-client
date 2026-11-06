@@ -145,6 +145,7 @@ class WebhooksStore {
     makeAutoObservable(this, {
       debounceReloadWebhooks: false,
       debounceLoadJournalTop: false,
+      debounceFetchEventData: false,
       isWebhooksListStale: false,
       eventDetailsRequest: false,
     });
@@ -156,6 +157,7 @@ class WebhooksStore {
     SocketHelper?.on(SocketEvents.DeleteWebhook, this.onWebhookDeleted);
     SocketHelper?.on(SocketEvents.AddWebhookLog, this.onWebhookLogAdded);
     SocketHelper?.on(SocketEvents.UpdateWebhookLog, this.onWebhookLogUpdated);
+    SocketHelper?.onReconnect(this.onSocketReconnect);
   }
 
   setIsWebhooksListActive = (isActive: boolean) => {
@@ -177,6 +179,7 @@ class WebhooksStore {
   };
 
   clearEventDetails = () => {
+    this.debounceFetchEventData.cancel();
     this.eventDetailsRequest += 1;
     this.eventDetails = {};
   };
@@ -246,6 +249,26 @@ class WebhooksStore {
 
     this.loadJournalItem(id);
   };
+
+  // Events emitted while the socket was down are not replayed: re-read
+  // whatever is open now.
+  onSocketReconnect = () => {
+    this.onWebhookChanged();
+
+    if (this.historyParams) this.debounceLoadJournalTop();
+
+    const eventId = Number(this.eventDetails?.id);
+
+    if (eventId) this.debounceFetchEventData(eventId);
+  };
+
+  debounceFetchEventData = debounce(
+    (eventId: number) => {
+      this.fetchEventData(eventId).catch((error) => console.error(error));
+    },
+    300,
+    { maxWait: 1000 },
+  );
 
   debounceLoadJournalTop = debounce(
     () => {

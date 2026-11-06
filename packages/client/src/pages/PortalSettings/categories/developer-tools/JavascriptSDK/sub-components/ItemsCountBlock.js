@@ -79,7 +79,6 @@ export const ItemsCountBlock = ({ t, count, setConfig }) => {
 				onChange={onChangeCount}
 				placeholder={t("EnterCount")}
 				value={value}
-				tabIndex={6}
 				testId="items_count_input"
 			/>
 		</ControlsGroup>

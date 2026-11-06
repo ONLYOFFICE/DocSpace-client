@@ -35,18 +35,22 @@
 
 import type { TFunction } from "i18next";
 
-import { getGroupById } from "../../api/groups";
+import {
+  getRoomCandidateKeys,
+  getRoomMissingFileKeys,
+} from "../../api/privacy";
 import { setRoomSecurity } from "../../api/rooms";
 import type { IdentityKeyPair } from "../encryption/types";
 import {
   addMembersToEncryptedRoom,
   backfillEncryptedFilesForRoomMembers,
-  revokeMemberFromEncryptedRoom,
   rewrapMissingFilesForMember,
   validateMembersForEncryption,
   type NewRoomMember,
+  type RoomEncryptionOptions,
   type SkippedRoomMember,
 } from "./room-encryption";
+import { selectMemberKeys } from "./room-member-keys";
 import { pendingAccessStore } from "./pending-access";
 
 /** A message a membership flow asks its caller to show. */
@@ -54,73 +58,6 @@ export type TMemberFlowNotice = {
   level: "success" | "warning" | "error";
   text: string;
 };
-
-// Spec: private-rooms/room-membership, "Leaving a room revokes own access first"
-export async function revokeOwnAccessOnLeave(
-  roomId: number | string,
-  userId: string,
-): Promise<void> {
-  try {
-    const results = await revokeMemberFromEncryptedRoom(
-      Number(roomId),
-      String(userId),
-      {},
-    );
-    const failures = results.filter((r) => !r.success);
-    if (failures.length > 0) {
-      // biome-ignore lint/suspicious/noConsole: leaving goes on; the kept entries are logged for triage.
-      console.error(
-        `[ENCRYPTION] ${failures.length} file(s) kept the leaver's wrap entries`,
-      );
-    }
-  } catch (err) {
-    // biome-ignore lint/suspicious/noConsole: leaving goes on; the failure is logged for triage.
-    console.error("[ENCRYPTION] revoke own access on leave failed:", err);
-  }
-}
-
-/**
- * Removes a removed member's entries from the room's file keys; a group
- * stands for its members. Resolves with the notice to show, or null when
- * there is nothing to report.
- */
-export async function revokeRemovedMemberAccess(
-  t: TFunction,
-  roomId: number | string,
-  member: { id: number | string; isGroup?: boolean },
-): Promise<TMemberFlowNotice | null> {
-  try {
-    let revokedIds: string[] = [String(member.id)];
-    if (member.isGroup) {
-      const group = await getGroupById(String(member.id), true);
-      revokedIds = (group.members ?? []).map((m) => String(m.id));
-      if (revokedIds.length === 0) return null;
-    }
-
-    const results = await revokeMemberFromEncryptedRoom(
-      Number(roomId),
-      revokedIds,
-      {},
-    );
-    const failures = results.filter((r) => !r.success);
-    if (failures.length > 0) {
-      return {
-        level: "warning",
-        text: t("Common:EncryptedRevokePartialFailure", {
-          count: failures.length,
-        }),
-      };
-    }
-    if (results.length > 0) {
-      return { level: "success", text: t("Common:EncryptedRevokeCompleted") };
-    }
-    return null;
-  } catch (err) {
-    // biome-ignore lint/suspicious/noConsole: the removal stands; the failure is logged for triage.
-    console.error("[ENCRYPTION] revoke encrypted access failed:", err);
-    return { level: "error", text: t("Common:EncryptedRevokeFailed") };
-  }
-}
 
 /** An item of the invite list: a user, or a group when `isGroup` is set. */
 export type TInviteItem = {
@@ -140,6 +77,52 @@ export const getMembersToRewrap = (
       id: item.id as string,
       displayName: (item.displayName || item.email) as string,
     }));
+
+/** The invitees whose key passed verification, and those left out before the grant. */
+export type TInviteeVerification = {
+  verified: NewRoomMember[];
+  skipped: SkippedRoomMember[];
+};
+
+/**
+ * Verifies the invitees' keys before the room security update, through the
+ * public keys of prospective members: the room access keys cover members
+ * only. An invitee without a stored key, or whose changed key is refused, is
+ * left out of the grant.
+ * Spec: private-rooms/room-membership, "Invitees without usable keys are skipped with a warning"
+ */
+export async function verifyInvitees({
+  roomId,
+  invitees,
+  currentUserId,
+  onKeyChange,
+}: {
+  roomId: number | string;
+  invitees: NewRoomMember[];
+  currentUserId: string;
+  onKeyChange?: RoomEncryptionOptions["onKeyChange"];
+}): Promise<TInviteeVerification> {
+  if (invitees.length === 0) return { verified: [], skipped: [] };
+
+  const memberIds = invitees.map((member) => member.id);
+  const candidateKeys = await getRoomCandidateKeys(roomId, memberIds);
+  const displayNames: Record<string, string | undefined> = {};
+  for (const member of invitees) displayNames[member.id] = member.displayName;
+
+  const { valid, skipped } = await validateMembersForEncryption(
+    Number(roomId),
+    memberIds,
+    currentUserId,
+    onKeyChange,
+    displayNames,
+    selectMemberKeys(candidateKeys),
+  );
+  const verified = valid.map((member) => ({
+    ...member,
+    displayName: displayNames[member.id],
+  }));
+  return { verified, skipped };
+}
 
 /** How the per-invitee requests of a private-room invitation ended. */
 export type TPrivateRoomInvitations<TInvitation> = {
@@ -229,11 +212,47 @@ const getInviteOutcome = (
   };
 };
 
+/** The warnings that name the invitees left out, by reason. */
+export function skippedMemberNotices(
+  t: TFunction,
+  skippedMembers: SkippedRoomMember[],
+  members: NewRoomMember[] = [],
+): TMemberFlowNotice[] {
+  const notices: TMemberFlowNotice[] = [];
+  if (skippedMembers.length === 0) return notices;
+  const formatName = (m: { id: string; displayName?: string }) =>
+    m.displayName || members.find((n) => n.id === m.id)?.displayName || m.id;
+  const noKeyNames = skippedMembers
+    .filter((m) => m.reason === "no-key")
+    .map(formatName);
+  const mismatchNames = skippedMembers
+    .filter((m) => m.reason === "key-mismatch-refused")
+    .map(formatName);
+  if (noKeyNames.length > 0) {
+    notices.push({
+      level: "warning",
+      text: t("Common:EncryptedSkippedNoKeys", {
+        users: noKeyNames.join(", "),
+      }),
+    });
+  }
+  if (mismatchNames.length > 0) {
+    notices.push({
+      level: "warning",
+      text: t("Common:EncryptedSkippedKeyMismatch", {
+        users: mismatchNames.join(", "),
+      }),
+    });
+  }
+  return notices;
+}
+
 // Spec: private-rooms/room-membership, "Invited members receive re-wrapped file keys"
 export async function rewrapForInvitedMembers({
   t,
   roomId,
   newMembers,
+  skippedBeforeGrant = [],
   currentUserId,
   identity,
   onProgress,
@@ -242,6 +261,8 @@ export async function rewrapForInvitedMembers({
   t: TFunction;
   roomId: number;
   newMembers: NewRoomMember[];
+  /** The invitees the verification before the grant left out. */
+  skippedBeforeGrant?: SkippedRoomMember[];
   currentUserId: string;
   identity: IdentityKeyPair;
   onProgress: (progress: TInviteRewrapProgress) => void;
@@ -256,13 +277,13 @@ export async function rewrapForInvitedMembers({
     },
   })
     .then(({ fileResults, skippedMembers, missingFileIdsByMember = {} }) => {
-      const notices: TMemberFlowNotice[] = [];
+      const allSkipped = [...skippedBeforeGrant, ...skippedMembers];
       const failures = fileResults.filter((r) => !r.success);
-      const hasAlert = failures.length > 0 || skippedMembers.length > 0;
+      const hasAlert = failures.length > 0 || allSkipped.length > 0;
       onProgress({ percent: 100, completed: true, alert: hasAlert });
       const outcome = getInviteOutcome(
         newMembers,
-        skippedMembers,
+        allSkipped,
         missingFileIdsByMember,
       );
       for (const member of outcome.granted) {
@@ -273,34 +294,7 @@ export async function rewrapForInvitedMembers({
       }
       onOutcome?.(outcome);
 
-      if (skippedMembers.length > 0) {
-        const formatName = (m: { id: string; displayName?: string }) =>
-          m.displayName ||
-          newMembers.find((n) => n.id === m.id)?.displayName ||
-          m.id;
-        const noKeyNames = skippedMembers
-          .filter((m) => m.reason === "no-key")
-          .map(formatName);
-        const mismatchNames = skippedMembers
-          .filter((m) => m.reason === "key-mismatch-refused")
-          .map(formatName);
-        if (noKeyNames.length > 0) {
-          notices.push({
-            level: "warning",
-            text: t("Common:EncryptedSkippedNoKeys", {
-              users: noKeyNames.join(", "),
-            }),
-          });
-        }
-        if (mismatchNames.length > 0) {
-          notices.push({
-            level: "warning",
-            text: t("Common:EncryptedSkippedKeyMismatch", {
-              users: mismatchNames.join(", "),
-            }),
-          });
-        }
-      }
+      const notices = skippedMemberNotices(t, allSkipped, newMembers);
 
       if (failures.length > 0) {
         notices.push({
@@ -309,7 +303,7 @@ export async function rewrapForInvitedMembers({
             count: failures.length,
           }),
         });
-      } else if (skippedMembers.length === 0) {
+      } else if (allSkipped.length === 0) {
         notices.push({ level: "success", text: t("Common:UsersInvited") });
       }
 
@@ -338,7 +332,7 @@ export async function rewrapForInvitedMembers({
       onOutcome?.({
         granted: [],
         pending: newMembers.map((member) => ({ member, missingFileIds: [] })),
-        skipped: [],
+        skipped: skippedBeforeGrant,
         failed: true,
       });
       return [
@@ -502,4 +496,43 @@ export async function getNewOwnerKeyRefusal(
   return reason === "no-key"
     ? t("Common:EncryptedChangeOwnerNoKeys", { user: name })
     : t("Common:EncryptedChangeOwnerKeyMismatch", { user: name });
+}
+
+/**
+ * Wraps for the candidate owner of a private room the encrypted files the
+ * server lists them as lacking an entry on, which the server refuses to
+ * hand the room over with. Resolves with the ids of the files the candidate
+ * still lacks: every listed file when their key was refused, otherwise the
+ * files whose write failed or whose entry the server did not store.
+ */
+// Spec: private-rooms/room-membership, "Ownership transfer wraps the candidate's missing files"
+export async function prepareNewOwner({
+  roomId,
+  candidateId,
+  currentUserId,
+  identity,
+}: {
+  roomId: number | string;
+  candidateId: string;
+  currentUserId: string;
+  identity: IdentityKeyPair;
+}): Promise<{ missingFileIds: number[] }> {
+  const candidate = candidateId.toLowerCase();
+  const listed = await getRoomMissingFileKeys(roomId, [candidateId]);
+  const fileIds =
+    listed.find((entry) => entry.userId.toLowerCase() === candidate)
+      ?.fileIds ?? [];
+  if (fileIds.length === 0) return { missingFileIds: [] };
+
+  const { skippedMembers, missingFileIdsByMember } =
+    await rewrapMissingFilesForMember(Number(roomId), candidateId, fileIds, {
+      currentUserId,
+      identity,
+      onKeyChange: async () => "refuse",
+    });
+  if (skippedMembers.some((member) => member.id === candidateId)) {
+    return { missingFileIds: fileIds };
+  }
+  const stillMissing = new Set(missingFileIdsByMember[candidateId] ?? []);
+  return { missingFileIds: fileIds.filter((id) => stillMissing.has(id)) };
 }

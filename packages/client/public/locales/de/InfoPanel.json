@@ -3,7 +3,7 @@
   "AllHistory": "Gesamter Verlauf",
   "AndMoreLabel": "und <1>{{count}} mehr</1>",
   "Data": "Daten",
-  "ExpectUsers": "Eingeladene Benutzer",
+  "ExpectUsers": "Ausstehende Benutzer",
   "ExportHistory": "Verlauf exportieren",
   "ExportHistoryDescription": "Aktivitäten als .xlsx-Tabelle herunterladen.",
   "FeedLinkWasDeleted": "Link wurde gelöscht",

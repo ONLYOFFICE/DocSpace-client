@@ -53,7 +53,6 @@ import { arrayBufferToBase64 } from "../../encryption/utils";
 import {
   addMembersToEncryptedRoom,
   backfillEncryptedFilesForRoomMembers,
-  revokeMemberFromEncryptedRoom,
   rewrapMissingFilesForMember,
   validateMembersForEncryption,
 } from "../room-encryption";
@@ -69,6 +68,7 @@ const getFileEncryptionAccessMock = vi.fn();
 const setFileEncryptionKeysMock = vi.fn();
 const getRoomEncryptionKeysMock = vi.fn();
 const getFilePublicKeysMock = vi.fn();
+const getRoomMissingFileKeysMock = vi.fn();
 
 vi.mock("../../../api/files", () => ({
   getFolder: (...args: unknown[]) => getFolderMock(...args),
@@ -82,6 +82,8 @@ vi.mock("../../../api/privacy", () => ({
   getRoomEncryptionKeys: (...args: unknown[]) =>
     getRoomEncryptionKeysMock(...args),
   getFilePublicKeys: (...args: unknown[]) => getFilePublicKeysMock(...args),
+  getRoomMissingFileKeys: (...args: unknown[]) =>
+    getRoomMissingFileKeysMock(...args),
 }));
 
 vi.mock("../../../api/files/filter", () => {
@@ -251,6 +253,8 @@ describe("listing the encrypted files of a room", () => {
     Array.from({ length: count }, (_, i) => ({ id: from + i, encrypted: true }));
 
   it("Room listed over several pages", async () => {
+    getRoomMissingFileKeysMock.mockRejectedValue(new Error("not served"));
+    getRoomEncryptionKeysMock.mockResolvedValue([]);
     const SUBFOLDER_A = 901;
     const SUBFOLDER_B = 902;
     getFolderMock.mockImplementation(
@@ -270,9 +274,12 @@ describe("listing the encrypted files of a room", () => {
       },
     );
 
-    const results = await revokeMemberFromEncryptedRoom(ROOM_ID, "bob", {});
+    const { fileResults } = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: {} as IdentityKeyPair,
+    });
 
-    expect(results).toHaveLength(150);
+    expect(fileResults).toHaveLength(150);
     expect(
       getFolderMock.mock.calls.filter(([id]) => id === ROOM_ID),
     ).toHaveLength(2);
@@ -671,6 +678,36 @@ describe("addMembersToEncryptedRoom", () => {
     expect(result.missingFileIdsByMember).toEqual({ [BOB]: [SECOND_FILE_ID] });
   });
 
+  it("Listed user cannot read the file: the invitee the server skipped lists the file as missing", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+      { userId: CAROL, publicKey: pubB64(carol) },
+    ]);
+    setFileEncryptionKeysMock.mockResolvedValue({ skippedUserIds: [BOB] });
+
+    const result = await addMembersToEncryptedRoom(
+      ROOM_ID,
+      [
+        { id: BOB, displayName: "Bob" },
+        { id: CAROL, displayName: "Carol" },
+      ],
+      { currentUserId: ALICE, identity: alice },
+    );
+
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
+    expect(result.skippedMembers).toEqual([]);
+    expect(result.missingFileIdsByMember).toEqual({ [BOB]: [FILE_ID] });
+  });
+
   it("sweeps the FIRST page (page=0), not skipping past small rooms (regression)", async () => {
     getFolderMock.mockImplementation(
       async (_roomId: number, filter: { page: number }) => {
@@ -806,6 +843,22 @@ describe("rewrapMissingFilesForMember", () => {
     expect(result.missingFileIdsByMember).toEqual({ [BOB]: [SECOND_FILE_ID] });
   });
 
+  it("Retry still fails: the member the server skipped stays missing the file", async () => {
+    setFileEncryptionKeysMock.mockResolvedValue({ skippedUserIds: [BOB] });
+
+    const result = await rewrapMissingFilesForMember(
+      ROOM_ID,
+      BOB,
+      [SECOND_FILE_ID],
+      { currentUserId: ALICE, identity: alice },
+    );
+
+    expect(result.fileResults).toEqual([
+      { fileId: SECOND_FILE_ID, success: true },
+    ]);
+    expect(result.missingFileIdsByMember).toEqual({ [BOB]: [SECOND_FILE_ID] });
+  });
+
   it("requests nothing without files to wrap", async () => {
     const result = await rewrapMissingFilesForMember(ROOM_ID, BOB, [], {
       currentUserId: ALICE,
@@ -847,6 +900,8 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     setFileEncryptionKeysMock.mockResolvedValue({});
     getRoomEncryptionKeysMock.mockReset();
     getFilePublicKeysMock.mockReset();
+    getRoomMissingFileKeysMock.mockReset();
+    getRoomMissingFileKeysMock.mockRejectedValue(new Error("not served"));
 
     resetMockIDB();
     resetTofuStores();
@@ -855,6 +910,86 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
 
   afterEach(() => {
     vi.unstubAllGlobals();
+  });
+
+  it("Backfill wraps the missing files only", async () => {
+    const OTHER_FILE_ID = FILE_ID + 1;
+    getRoomMissingFileKeysMock.mockResolvedValue([
+      { userId: BOB, fileIds: [FILE_ID] },
+    ]);
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+      { userId: CAROL, publicKey: pubB64(await generateIdentityKeyPair()) },
+    ]);
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(getRoomMissingFileKeysMock).toHaveBeenCalledWith(ROOM_ID);
+    expect(getFolderMock).not.toHaveBeenCalled();
+    expect(getFileEncryptionAccessMock).toHaveBeenCalledTimes(1);
+    expect(getFileEncryptionAccessMock).not.toHaveBeenCalledWith(OTHER_FILE_ID);
+    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    const [fileId, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
+    expect(fileId).toBe(FILE_ID);
+    expect(
+      (keysPosted as ServerAccessKeyDto[]).map((k) => String(k.userId)).sort(),
+    ).toEqual([ALICE, BOB].sort());
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
+  });
+
+  it("Nothing missing: no file is read", async () => {
+    getRoomMissingFileKeysMock.mockResolvedValue([]);
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(result.fileResults).toEqual([]);
+    expect(getFolderMock).not.toHaveBeenCalled();
+    expect(getFileEncryptionAccessMock).not.toHaveBeenCalled();
+    expect(getRoomEncryptionKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("Backfill falls back when the missing-keys request fails", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(getRoomMissingFileKeysMock).toHaveBeenCalledWith(ROOM_ID);
+    expect(getFolderMock).toHaveBeenCalled();
+    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
   });
 
   it("returns empty result when there are no encrypted files", async () => {
@@ -1080,6 +1215,34 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     expect(result.fileResults[0]?.error).toContain("HTTP 403");
   });
 
+  it("Listed user cannot read the file: the backfill lists the file as missing for the member the server skipped", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    setFileEncryptionKeysMock.mockResolvedValue({ skippedUserIds: [BOB] });
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
+    expect(result.missingFileIdsByMember).toEqual({ [BOB]: [FILE_ID] });
+  });
+
   it("posts the recipient's real publicKeyId from getFilePublicKeys, never empty (regression)", async () => {
     getFolderMock.mockResolvedValue({
       files: singleFile(FILE_ID),
@@ -1139,6 +1302,23 @@ describe("validateMembersForEncryption", () => {
     expect(result.valid).toEqual([]);
     expect(result.skipped).toEqual([]);
     expect(getRoomEncryptionKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("Keys of prospective members fed in: the room keys are not read", async () => {
+    const result = await validateMembersForEncryption(
+      ROOM_ID,
+      [BOB],
+      ALICE,
+      undefined,
+      { [BOB]: "Bob" },
+      new Map([
+        [BOB, { userId: BOB, publicKey: pubB64(bob), publicKeyId: "bob-key" }],
+      ]),
+    );
+
+    expect(getRoomEncryptionKeysMock).not.toHaveBeenCalled();
+    expect(result.valid).toEqual([{ id: BOB, publicKey: pubB64(bob) }]);
+    expect(result.skipped).toEqual([]);
   });
 
   it("returns valid entry when member has key in room ACL", async () => {
@@ -1213,187 +1393,6 @@ describe("validateMembersForEncryption", () => {
     expect(result.skipped).toEqual([
       { id: BOB, displayName: "Bob", reason: "key-mismatch-refused" },
     ]);
-  });
-});
-
-
-describe("revokeMemberFromEncryptedRoom", () => {
-  let alice: IdentityKeyPair;
-  let bob: IdentityKeyPair;
-  /** What the server shows Alice: her own entry only. */
-  let aliceOwnWrap: ServerAccessKeyDto[];
-  /** What the server shows Bob: his own entry only. */
-  let bobOwnWrap: ServerAccessKeyDto[];
-
-  beforeEach(async () => {
-    alice = await generateIdentityKeyPair();
-    bob = await generateIdentityKeyPair();
-    const dek = generateDEK();
-    aliceOwnWrap = await wrapDekForRecipients({
-      dek,
-      senderIdentity: alice,
-      senderUserId: ALICE,
-      recipients: [{ userId: ALICE, publicKey: pubB64(alice) }],
-      fileId: FILE_ID,
-    });
-    bobOwnWrap = await wrapDekForRecipients({
-      dek,
-      senderIdentity: alice,
-      senderUserId: ALICE,
-      recipients: [{ userId: BOB, publicKey: pubB64(bob) }],
-      fileId: FILE_ID,
-    });
-
-    getFolderMock.mockReset();
-    getFileEncryptionAccessMock.mockReset();
-    setFileEncryptionKeysMock.mockReset();
-    setFileEncryptionKeysMock.mockResolvedValue({});
-
-    resetMockIDB();
-    resetTofuStores();
-    vi.stubGlobal("indexedDB", mockIDB);
-  });
-
-  afterEach(() => {
-    vi.unstubAllGlobals();
-  });
-
-  it("returns empty result when revokedUserIds is empty", async () => {
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [], {});
-    expect(result).toEqual([]);
-    expect(getFolderMock).not.toHaveBeenCalled();
-  });
-
-  it("returns empty result when the room has no encrypted files", async () => {
-    getFolderMock.mockResolvedValue({ files: [], folders: [] });
-
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
-
-    expect(result).toEqual([]);
-    expect(getFileEncryptionAccessMock).not.toHaveBeenCalled();
-    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
-  });
-
-  it("Revocation succeeds: another member's entry is not in the caller's read, so nothing is written", async () => {
-    getFolderMock.mockResolvedValue({
-      files: singleFile(FILE_ID),
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: aliceOwnWrap,
-      userKeys: [],
-    });
-
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
-
-    expect(result).toEqual([{ fileId: FILE_ID, success: true }]);
-    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
-  });
-
-  it("Leave succeeds: the leaver's own entry is left out of the write", async () => {
-    getFolderMock.mockResolvedValue({
-      files: singleFile(FILE_ID),
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: bobOwnWrap,
-      userKeys: [],
-    });
-
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
-
-    expect(result).toEqual([{ fileId: FILE_ID, success: true }]);
-    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
-    const [fileId, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
-    expect(fileId).toBe(FILE_ID);
-    expect(keysPosted).toEqual([]);
-  });
-
-  it("accepts a single userId string in addition to an array", async () => {
-    getFolderMock.mockResolvedValue({
-      files: singleFile(FILE_ID),
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: bobOwnWrap,
-      userKeys: [],
-    });
-
-    await revokeMemberFromEncryptedRoom(ROOM_ID, BOB, {});
-
-    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
-    const [, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
-    expect(keysPosted).toEqual([]);
-  });
-
-  it("returns an error result when fileKeys is missing", async () => {
-    getFolderMock.mockResolvedValue({
-      files: singleFile(FILE_ID),
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({ fileKeys: null });
-
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
-
-    expect(result).toEqual([
-      {
-        fileId: FILE_ID,
-        success: false,
-        error: "no encryption keys for file",
-      },
-    ]);
-    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
-  });
-
-  it("records per-file errors and KEEPS processing the rest", async () => {
-    const fileA = 4242;
-    const fileB = 4343;
-    getFolderMock.mockResolvedValue({
-      files: [
-        { id: fileA, encrypted: true },
-        { id: fileB, encrypted: true },
-      ],
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: bobOwnWrap,
-      userKeys: [],
-    });
-    setFileEncryptionKeysMock.mockImplementationOnce(async () => {
-      throw new Error("file A access denied");
-    });
-
-    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
-
-    expect(result).toHaveLength(2);
-    expect(result[0]).toEqual({
-      fileId: fileA,
-      success: false,
-      error: "file A access denied",
-    });
-    expect(result[1]).toEqual({ fileId: fileB, success: true });
-  });
-
-  it("reports progress 0/N at start and N/N at end", async () => {
-    getFolderMock.mockResolvedValue({
-      files: [
-        { id: 1, encrypted: true },
-        { id: 2, encrypted: true },
-      ],
-      folders: [],
-    });
-    getFileEncryptionAccessMock.mockResolvedValue({
-      fileKeys: bobOwnWrap,
-      userKeys: [],
-    });
-
-    const progress: Array<[number, number]> = [];
-    await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {
-      onProgress: (p, total) => progress.push([p, total]),
-    });
-
-    expect(progress[0]).toEqual([0, 2]);
-    expect(progress.at(-1)).toEqual([2, 2]);
   });
 });
 

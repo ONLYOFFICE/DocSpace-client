@@ -520,7 +520,6 @@ const Uploader = (props) => {
               sizeUnits={fileSizeUnits}
               defaultUnit={defaultSizeUnit}
               setConfig={setConfig}
-              tabIndex={7}
               dataTestId="max_file_size"
               onSizeChange={setPerFileSize}
             />
@@ -534,7 +533,6 @@ const Uploader = (props) => {
                 sizeUnits={fileSizeUnits}
                 defaultUnit={defaultSizeUnit}
                 setConfig={setConfig}
-                tabIndex={8}
                 dataTestId="max_total_upload_size"
                 onSizeChange={setTotalSize}
                 availableUnits={totalAvailableUnits}
@@ -556,7 +554,6 @@ const Uploader = (props) => {
                 name="button_text"
                 value={config.linkMainText}
                 onChange={onChangeLinkFileText}
-                tabIndex={5}
                 testId="button_text_input"
               />
             </ControlsGroup>
@@ -568,7 +565,6 @@ const Uploader = (props) => {
                 name="helper_text"
                 value={config.secondaryText}
                 onChange={onChangeSecondaryText}
-                tabIndex={6}
                 testId="helper_text_input"
               />
             </ControlsGroup>

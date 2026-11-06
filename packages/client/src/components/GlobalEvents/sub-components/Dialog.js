@@ -213,7 +213,6 @@ const Dialog = ({
             value={value}
             isAutoFocussed
             hasError={Boolean(errorText)}
-            tabIndex={1}
             onChange={onChangeAction}
             onFocus={onFocus}
             isDisabled={isDisabled}

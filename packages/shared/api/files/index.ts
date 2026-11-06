@@ -91,6 +91,7 @@ import type {
   UpdateXlsxResponse,
   TDocumentBuilderTask,
   TFolderLogReportDateRange,
+  TFileKeysWritten,
 } from "./types";
 
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
@@ -1422,14 +1423,38 @@ export async function setFileEncryptionKeys(
     publicKeyId: string;
     privateKeyEnc: string;
   }>,
-) {
-  const res = await request({
+): Promise<TFileKeysWritten> {
+  const res = (await request({
     method: "put",
     url: `files/${fileId}/access`,
     data: keys,
+  })) as Partial<TFileKeysWritten> | undefined;
+
+  return { skippedUserIds: res?.skippedUserIds ?? [] };
+}
+
+/**
+ * A new file in the folder with the given content, in one multipart request.
+ * A same-named file gets a numbered title, nothing is overwritten.
+ */
+export async function insertFile(
+  folderId: number | string,
+  title: string,
+  content: Blob,
+) {
+  const fd = new FormData();
+
+  fd.append("title", title);
+  fd.append("createNewIfExist", "true");
+  fd.append("file", content, title);
+
+  const res = await request({
+    method: "post",
+    url: `/files/${folderId}/insert`,
+    data: fd,
   });
 
-  return res;
+  return res as TFile;
 }
 
 export async function updateFileStream(

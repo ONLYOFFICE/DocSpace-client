@@ -3,7 +3,7 @@
   "content": "This device is remembered until {{date}}.",
   "content_en_sha1_hash": "2cd4d533e42b27e49eedf3451863a1cf62250f66",
   "created_at": "2026-10-20T17:00:38.269Z",
-  "updated_at": "2026-10-20T17:02:13.814Z",
+  "updated_at": "2026-11-05T16:49:39.983Z",
   "comment": {
     "text": "Status text in the Keys management section of the profile, next to the \"Forget on this device\" link. Shows until when this browser keeps the encryption key without asking for the passphrase. {{date}} is an already formatted date (and time) in the user's locale.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 358,
+      "line_number": 400,
       "context": "</div>\n ) : null}\n {rememberedUntil ? (\n <div className={styles.deviceRow}>\n <Text fontSize=\"13px\">\n {t(\"Common:DeviceUnlockRememberedUntil\", {\n date: rememberedUntil,\n })}\n </Text>\n <Link\n type={LinkType.action}",
       "module": "/packages/client"
     }

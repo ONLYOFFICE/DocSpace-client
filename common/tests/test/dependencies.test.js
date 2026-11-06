@@ -101,7 +101,7 @@ beforeAll(() => {
 
   workspaces = getWorkSpaces();
 
-  const searchPattern = /\.(js|jsx|ts|tsx|mjs|cjs)$/;
+  const searchPattern = /\.(js|jsx|ts|tsx|mjs|cjs|mts|cts)$/;
 
   let codeFiles = [];
   let packageJsonFiles = [];

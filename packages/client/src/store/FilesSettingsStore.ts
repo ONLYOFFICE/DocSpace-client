@@ -65,6 +65,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
+import { isEncryptedEditingAvailable } from "@docspace/shared/services/private-room/editor-capability";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import i18n from "../i18n";
@@ -310,6 +311,11 @@ class FilesSettingsStore {
       this.storeForcesave !== null &&
       this.storeOriginalFiles !== null
     );
+  }
+
+  /** Whether the connected Document Server can edit encrypted files. */
+  get isEncryptedEditingAvailable() {
+    return isEncryptedEditingAvailable(this.filesSettings);
   }
 
   setFilesSettings = (settings: TFilesSettings) => {

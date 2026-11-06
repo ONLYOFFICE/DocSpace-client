@@ -3,7 +3,7 @@
   "content": "These files could not be decrypted and were left out of the archive: {{fileNames}}",
   "content_en_sha1_hash": "fc08c38a38db04fcda21821692a9fc2ceaf22a27",
   "created_at": "2026-10-23T14:20:51.508Z",
-  "updated_at": "2026-10-23T14:22:50.735Z",
+  "updated_at": "2026-11-05T16:49:39.999Z",
   "comment": {
     "text": "Warning toast after a folder or a room of an end-to-end encrypted private room was downloaded as a zip of decrypted files, when some files could not be decrypted (the user has no access to them or decryption failed) and were left out of the zip. {{fileNames}} is a comma-separated list of one or more file names, each with its path inside the folder, so keep the wording neutral in number.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
-      "line_number": 781,
-      "context": ");\n finish(failures.length > 0);\n \n if (failures.length > 0) {\n toastr.warning(\n i18n.t(\"Common:EncryptedDownloadPartial\", {\n fileNames: failures.join(\", \"),\n }),\n null,\n 0,\n true,",
+      "line_number": 721,
+      "context": ") =>\n downloadDecryptedZipImpl(\n self,\n `${folder.title}.zip`,\n () => listFolderEntries(self, folder),\n (fileNames) => i18n.t(\"Common:EncryptedDownloadPartial\", { fileNames }),\n );",
       "module": "/packages/client"
     }
   ],

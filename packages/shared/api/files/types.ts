@@ -93,6 +93,12 @@ export type TFileEncryptionInfo = {
   }>;
 };
 
+/** `FileKeysWrittenDto`, the answer of a file access-entry write. */
+export type TFileKeysWritten = {
+  /** The listed users whose entry was not stored: they cannot read the file. */
+  skippedUserIds: string[];
+};
+
 export type TFileViewAccessibility = {
   CanConvert: boolean;
   CoAuhtoring: boolean;
@@ -355,6 +361,8 @@ export type TFilesSettings = {
   extsWebCustomFilterEditing: string[];
   extsWebEdited: string[];
   extsWebEncrypt: string[];
+  /** Whether the connected Document Server can edit encrypted files. */
+  docServiceEncryptionSupported?: boolean;
   extsWebPreviewed: string[];
   extsWebRestrictedEditing: string[];
   extsWebReviewed: string[];

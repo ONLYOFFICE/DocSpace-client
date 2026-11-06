@@ -31,21 +31,20 @@ vi.mock("@docspace/shared/api/rooms", async (io) => ({
   updateRoomMemberRole: vi.fn(),
 }));
 
-vi.mock("@docspace/shared/services/private-room/room-encryption", () => ({
-  revokeMemberFromEncryptedRoom: vi.fn(),
+vi.mock("@docspace/shared/api/files", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  setFileEncryptionKeys: vi.fn(),
 }));
 
 import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { revokeMemberFromEncryptedRoom } from "@docspace/shared/services/private-room/room-encryption";
+import { setFileEncryptionKeys } from "@docspace/shared/api/files";
 import type { TTranslation } from "@docspace/shared/types";
 
 import { createTestFilesActionsStore } from "./testHarness";
 // After the harness on purpose: the harness re-mocks the toast module, and
 // this import must resolve to the instance the store under test uses.
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-
-declare function allowConsoleError(matcher: RegExp | string): void;
 
 const t = ((key: string) => key) as TTranslation;
 
@@ -55,15 +54,14 @@ const makeStore = (room: Record<string, unknown>) =>
     selectedFolderStore: { isRootFolder: true },
   });
 
-describe("FilesActionsStore — onLeaveRoom private-room key cleanup", () => {
+describe("FilesActionsStore — onLeaveRoom of a private room", () => {
   beforeEach(() => {
     vi.mocked(updateRoomMemberRole).mockResolvedValue(
       {} as Awaited<ReturnType<typeof updateRoomMemberRole>>,
     );
-    vi.mocked(revokeMemberFromEncryptedRoom).mockResolvedValue([]);
   });
 
-  it("leaves a non-private room without touching encryption keys", async () => {
+  it("leaves a non-private room through the role update", async () => {
     const store = makeStore({ id: 42, title: "Room", private: false });
 
     await store.onLeaveRoom(t);
@@ -72,53 +70,38 @@ describe("FilesActionsStore — onLeaveRoom private-room key cleanup", () => {
       invitations: [{ id: "user-1", access: ShareAccessRights.None }],
       force: false,
     });
-    expect(revokeMemberFromEncryptedRoom).not.toHaveBeenCalled();
     expect(toastr.success).toHaveBeenCalled();
   });
 
-  it("revokes the leaver's own key entries before leaving a private room", async () => {
+  it("Leave succeeds", async () => {
     const store = makeStore({ id: 42, title: "Room", private: true });
 
     await store.onLeaveRoom(t);
 
-    expect(revokeMemberFromEncryptedRoom).toHaveBeenCalledWith(
-      42,
-      "user-1",
-      {},
-    );
-    expect(updateRoomMemberRole).toHaveBeenCalledTimes(1);
-    // The revoke needs file access, which the role change drops.
-    expect(
-      vi.mocked(revokeMemberFromEncryptedRoom).mock.invocationCallOrder[0],
-    ).toBeLessThan(vi.mocked(updateRoomMemberRole).mock.invocationCallOrder[0]);
+    expect(updateRoomMemberRole).toHaveBeenCalledWith(42, {
+      invitations: [{ id: "user-1", access: ShareAccessRights.None }],
+      force: false,
+    });
+    expect(setFileEncryptionKeys).not.toHaveBeenCalled();
     expect(toastr.success).toHaveBeenCalled();
   });
 
-  it("still leaves when the key cleanup fails entirely", async () => {
-    allowConsoleError("[ENCRYPTION] revoke own access on leave failed");
-    vi.mocked(revokeMemberFromEncryptedRoom).mockRejectedValue(
-      new Error("boom"),
-    );
-    const store = makeStore({ id: 42, title: "Room", private: true });
+  it("Cleanup fails", async () => {
+    vi.mocked(updateRoomMemberRole).mockRejectedValue(new Error("refused"));
+    const removeFiles = vi.fn();
+    const store = createTestFilesActionsStore({
+      filesStore: {
+        selection: [{ id: 42, title: "Room", private: true }],
+        removeFiles,
+      },
+      selectedFolderStore: { isRootFolder: true },
+    });
 
-    await store.onLeaveRoom(t);
+    await expect(store.onLeaveRoom(t)).rejects.toThrow("refused");
 
-    expect(updateRoomMemberRole).toHaveBeenCalledTimes(1);
-    expect(toastr.success).toHaveBeenCalled();
-  });
-
-  it("still leaves when some files could not be re-keyed", async () => {
-    allowConsoleError(/\[ENCRYPTION\] 1 file\(s\) kept the leaver's/);
-    vi.mocked(revokeMemberFromEncryptedRoom).mockResolvedValue([
-      { fileId: 1, success: true },
-      { fileId: 2, success: false, error: "x" },
-    ]);
-    const store = makeStore({ id: 42, title: "Room", private: true });
-
-    await store.onLeaveRoom(t);
-
-    expect(updateRoomMemberRole).toHaveBeenCalledTimes(1);
-    expect(toastr.success).toHaveBeenCalled();
+    expect(setFileEncryptionKeys).not.toHaveBeenCalled();
+    expect(removeFiles).not.toHaveBeenCalled();
+    expect(toastr.success).not.toHaveBeenCalled();
   });
 });
 
@@ -129,7 +112,6 @@ describe("FilesActionsStore — onLeaveRoom from inside the room", () => {
     vi.mocked(updateRoomMemberRole).mockResolvedValue(
       {} as Awaited<ReturnType<typeof updateRoomMemberRole>>,
     );
-    vi.mocked(revokeMemberFromEncryptedRoom).mockResolvedValue([]);
     navigate = vi.fn();
   });
 

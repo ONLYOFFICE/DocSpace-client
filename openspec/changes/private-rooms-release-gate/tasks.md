@@ -15,7 +15,7 @@
 - [x] 1.11 `private-rooms-spec-drift-fixes` archived; verify with `openspec list` showing it under `changes/archive`. Archived 2026-11-02 (`changes/archive/2026-11-02-private-rooms-spec-drift-fixes`)
 - [ ] 1.12 `private-rooms-beta-release` archived, so the beta requirements this change modifies are in the main specs; verify with `openspec list` showing it under `changes/archive`
 - [ ] 1.13 The portal setting for private rooms merged on the server release branch (proposal prerequisite 8); verify by recording in design.md, with the server files read through CodeGraph, its JSON name, the payload that carries it, the route an administrator writes it through and its default on upgraded and new portals
-- [ ] 1.14 Backup and restore of private rooms (proposal prerequisite 9): `private-rooms-server-hardening` 15.2 and 15.3 ticked, the warning shown on the backup and restore pages and the limitation in the release notes; verify with those records. 15.1 was decided on 2026-11-06: warn about the loss for now
+- [x] 1.14 Backup and restore of private rooms (proposal prerequisite 9): `private-rooms-server-hardening` 15.2 and 15.3 ticked, the warning shown on the backup and restore pages and the limitation in the release notes; verify with those records. 15.1 was decided on 2026-11-06: warn about the loss for now. Done 2026-11-06: the warning is on the branch (`private-rooms-server-hardening` 15.2) and the beta release notes carry the limitation (15.3); the general-availability notes of 3.2 take it over from there
 
 ## 2. Remove the beta label
 

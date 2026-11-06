@@ -3,7 +3,7 @@
   "content": "Recovery phrase is invalid. Check that all 24 words are spelled correctly and from the BIP-39 wordlist.",
   "content_en_sha1_hash": "ec53817c245712e8a6d5060a00ba062c8a1d39a8",
   "created_at": "2026-05-24T17:27:29.943Z",
-  "updated_at": "2026-07-27T13:07:50.928Z",
+  "updated_at": "2026-11-05T16:49:40.025Z",
   "comment": {
     "text": "Error text displayed in the recovery phrase input modal or during the key recovery process when the entered 24-word mnemonic fails validation against the BIP-39 wordlist.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-recovery/RecoveryPhraseInputModal.tsx",
-      "line_number": 95,
+      "line_number": 110,
       "context": "setIsValidating(true);\n try {\n const ok = await validateMnemonic(normalized);\n if (!ok) {\n setLocalError(t(\"Common:InvalidRecoveryPhrase\"));\n return;\n }\n onSubmit(normalized);\n } catch (e) {\n console.error(\"Recovery phrase validation failed:\", e);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/key-recovery/RecoveryPhraseInputModal.tsx",
-      "line_number": 95,
+      "line_number": 110,
       "context": "setIsValidating(true);\n try {\n const ok = await validateMnemonic(normalized);\n if (!ok) {\n setLocalError(t(\"Common:InvalidRecoveryPhrase\"));\n return;\n }\n onSubmit(normalized);\n } catch (e) {\n console.error(\"Recovery phrase validation failed:\", e);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/key-recovery/useRecoverKeyFlow.tsx",
-      "line_number": 137,
+      "line_number": 136,
       "context": "if (e instanceof InvalidRecoveryPhraseError) continue;\n throw e;\n }\n }\n if (!unlocked) {\n setError(t(\"Common:InvalidRecoveryPhrase\"));\n return;\n }\n setKeyPair(unlocked.kp);\n setTargetKeyId(unlocked.id);\n setMnemonic(input);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/services/encryption/error-i18n.ts",
-      "line_number": 63,
+      "line_number": 71,
       "context": "}\n if (error instanceof InvalidPassphraseError) {\n return t(\"Common:InvalidPassphrase\");\n }\n if (error instanceof InvalidRecoveryPhraseError) {\n return t(\"Common:InvalidRecoveryPhrase\");\n }\n if (error instanceof InvalidFormatError) {\n return t(\"Common:EncryptionInvalidKeyFile\");\n }\n if (",
       "module": "/packages/shared"
     }

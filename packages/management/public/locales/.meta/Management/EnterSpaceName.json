@@ -3,7 +3,7 @@
   "content": "Enter workspace name",
   "content_en_sha1_hash": "a0bec15b2cbc12eec7bf7aee62431f3d1a0eb4f5",
   "created_at": "2026-08-12T11:00:50.895Z",
-  "updated_at": "2026-08-14T14:58:32.913Z",
+  "updated_at": "2026-11-05T16:49:40.039Z",
   "comment": {
     "text": "Placeholder for a text input field prompting the user to provide a name when creating or configuring a workspace.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/configuration/body.tsx",
-      "line_number": 174,
-      "context": "errorMessage={portalNameError || checkDomainError}\n >\n <TextInput\n type={InputType.text}\n size={InputSize.base}\n placeholder={t(\"EnterSpaceName\")}\n value={name}\n onChange={onChangeName}\n tabIndex={2}\n scale\n />",
+      "line_number": 173,
+      "context": "errorMessage={portalNameError || checkDomainError}\n >\n <TextInput\n type={InputType.text}\n size={InputSize.base}\n placeholder={t(\"EnterSpaceName\")}\n value={name}\n onChange={onChangeName}\n scale\n />\n </FieldContainer>",
       "module": "/packages/management"
     },
     {

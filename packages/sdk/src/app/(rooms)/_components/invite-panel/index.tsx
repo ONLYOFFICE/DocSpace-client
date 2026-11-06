@@ -82,6 +82,12 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
+import {
+  sendPrivateRoomInvitations,
+  type TInviteOutcome,
+  type TInviteeVerification,
+} from "@docspace/shared/services/private-room/room-member-flows";
+import type { SkippedRoomMember } from "@docspace/shared/services/private-room/room-encryption";
 
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button/Button.enums";
@@ -107,6 +113,7 @@ import { getDate } from "@docspace/shared/components/share/Share.helpers";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
+import InviteResult from "./sub-components/InviteResult";
 import LinkSettingsPanel from "../link-settings-panel";
 import type { LinkSettingsSubmitOption } from "../link-settings-panel/LinkSettingsPanel.types";
 import { fixAccess } from "./utils";
@@ -189,15 +196,26 @@ type InvitePanelProps = {
   culture?: string;
   onMembersUpdated?: () => void;
   /**
-   * Invoked after `setRoomSecurity` resolves successfully but BEFORE the panel
-   * closes. Private rooms use this hook to run `addMembersToEncryptedRoom`,
-   * which wraps file DEKs for the new recipients. The panel surfaces thrown
-   * errors as toasts and stays open on failure.
+   * Invoked before `setRoomSecurity` with the invitees who are portal users.
+   * Private rooms use it to verify their keys: the ones it skips are left
+   * out of the security update and reported in the result.
+   */
+  onVerifyInvitees?: (
+    memberIds: string[],
+    displayNamesByMemberId: Record<string, string>,
+  ) => Promise<TInviteeVerification>;
+  /**
+   * Invoked once `setRoomSecurity` has resolved. Private rooms use it to
+   * wrap the file keys for the new members; the panel stays open until it
+   * settles and shows the outcome it resolves with, or closes on `null`.
+   * A rejection is shown as a toast. `skipped` names the invitees
+   * `onVerifyInvitees` left out.
    */
   onInviteSubmitted?: (
     memberIds: string[],
     displayNamesByMemberId: Record<string, string>,
-  ) => Promise<void>;
+    skipped: SkippedRoomMember[],
+  ) => Promise<TInviteOutcome | null>;
   /**
    * Optional async gate called BEFORE `setRoomSecurity`. Return `true` to
    * proceed, `false` to abort the submission without error (the callee is
@@ -220,6 +238,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   isPrivateRoom = false,
   culture,
   onMembersUpdated,
+  onVerifyInvitees,
   onInviteSubmitted,
   onBeforeSubmit,
 }) => {
@@ -252,6 +271,11 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   const [hasErrors, setHasErrors] = useState(false);
   const [shareLinks, setShareLinks] = useState<ShareLink[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [inviteOutcome, setInviteOutcome] = useState<TInviteOutcome | null>(
+    null,
+  );
+  // Counts sends and closes, so a re-wrap that ends after a close shows nothing.
+  const sendRunRef = useRef(0);
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
   const [activeLink, setActiveLink] = useState<ShareLink>({});
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
@@ -271,6 +295,8 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   // ─── Handlers ───────────────────────────────────────────────────────────────
 
   const handleClose = () => {
+    sendRunRef.current += 1;
+    setInviteOutcome(null);
     setInviteItems([]);
     onClose();
   };
@@ -649,42 +675,112 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         }
       }
 
-      const result = (await api.rooms.setRoomSecurity(
-        roomId,
-        data,
-      )) as SetRoomSecurityResult;
-
-      if (onInviteSubmitted) {
-        const memberIds = invitations
-          .map((inv) => inv.id)
-          .filter((id): id is string => typeof id === "string" && id.length > 0);
-        const displayNames: Record<string, string> = {};
-        for (const item of inviteItems) {
-          const id = item.id;
-          const name = item.displayName ?? item.email;
-          if (typeof id === "string" && name) displayNames[id] = name;
-        }
-        try {
-          await onInviteSubmitted(memberIds, displayNames);
-        } catch (encryptError) {
-          setIsLoading(false);
-          toastr.error(encryptError as string | Error);
-          return;
-        }
+      const displayNames: Record<string, string> = {};
+      for (const item of inviteItems) {
+        const id = item.id;
+        const name = item.displayName ?? item.email;
+        if (typeof id === "string" && name) displayNames[id] = name;
       }
 
-      setIsLoading(false);
+      // Spec: private-rooms/sdk-surface, "Invite panel offers people only and reports the invitation result"
+      const idsToVerify = inviteItems
+        .filter((item) => !item.isGroup && typeof item.id === "string")
+        .map((item) => item.id as string);
+      const verification: TInviteeVerification =
+        isPrivateRoom && onVerifyInvitees && idsToVerify.length > 0
+          ? await onVerifyInvitees(idsToVerify, displayNames)
+          : { verified: [], skipped: [] };
+      const verifiedIds = new Set(verification.verified.map((m) => m.id));
+      const invitationsToSend =
+        isPrivateRoom && onVerifyInvitees
+          ? invitations.filter(
+              (invitation) =>
+                invitation.id === undefined ||
+                verifiedIds.has(String(invitation.id)),
+            )
+          : invitations;
 
-      handleClose();
+      // Spec: private-rooms/sdk-surface, "SDK invitations into a private room are sent one invitee per request"
+      const privateSend = isPrivateRoom
+        ? await sendPrivateRoomInvitations(roomId, invitationsToSend, {
+            notify: data.notify,
+            message: data.message,
+          })
+        : null;
+      const result = privateSend
+        ? null
+        : ((await api.rooms.setRoomSecurity(
+            roomId,
+            data,
+          )) as SetRoomSecurityResult);
+      const responses = (
+        privateSend ? privateSend.responses : [result]
+      ) as (SetRoomSecurityResult | null)[];
+      const itemOf = (invitation: (typeof invitations)[number]) =>
+        inviteItems[invitations.indexOf(invitation)];
+      const refused = (privateSend?.refused ?? []).map(
+        ({ invitation, noKey }) => {
+          const item = itemOf(invitation);
+          return {
+            member: {
+              id: String(item.id ?? item.email),
+              displayName: item.displayName ?? item.email,
+            },
+            noKey,
+          };
+        },
+      );
+
+      const memberIds = (privateSend ? privateSend.accepted : invitations)
+        .map((inv) => inv.id)
+        .filter((id): id is string => typeof id === "string" && id.length > 0);
+      const showsResult =
+        !!onInviteSubmitted &&
+        (memberIds.length > 0 ||
+          refused.length > 0 ||
+          verification.skipped.length > 0);
+
+      if (!showsResult) {
+        setIsLoading(false);
+        handleClose();
+      }
       if (!onInviteSubmitted) {
         toastr.success(t("Common:UsersInvited"));
       }
 
-      if (result?.warning) {
-        toastr.warning(result.warning);
+      for (const response of responses) {
+        if (response?.warning) toastr.warning(response.warning);
       }
 
-      onMembersUpdated?.();
+      if (memberIds.length > 0 || !privateSend) onMembersUpdated?.();
+
+      // Spec: private-rooms/sdk-surface, "Invite panel offers people only and reports the invitation result"
+      if (showsResult) {
+        const run = ++sendRunRef.current;
+
+        let outcome: TInviteOutcome | null = null;
+        if (memberIds.length > 0 || verification.skipped.length > 0) {
+          try {
+            outcome = await onInviteSubmitted(
+              memberIds,
+              displayNames,
+              verification.skipped,
+            );
+          } catch (encryptError) {
+            toastr.error(encryptError as string | Error);
+          }
+        }
+
+        setIsLoading(false);
+        if (run !== sendRunRef.current) return;
+        if (refused.length > 0) {
+          setInviteOutcome({
+            ...(outcome ?? { granted: [], pending: [], skipped: [] }),
+            refused,
+          });
+        } else if (outcome) setInviteOutcome(outcome);
+        else handleClose();
+      }
     } catch (err) {
       const error = err as {
         response?: {
@@ -731,6 +827,23 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
 
   const closeUsersPanel = () => {
     setAddUsersPanelVisible(false);
+  };
+
+  const canInviteAgain =
+    !!inviteOutcome?.skipped.length || !!inviteOutcome?.refused?.length;
+
+  const onInviteAgain = () => {
+    if (!inviteOutcome) return;
+    const skippedIds = new Set([
+      ...inviteOutcome.skipped.map((member) => member.id),
+      ...(inviteOutcome.refused ?? []).map(({ member }) => member.id),
+    ]);
+    setInviteItems(
+      inviteItems.filter(
+        (item) => typeof item.id === "string" && skippedIds.has(item.id),
+      ),
+    );
+    setInviteOutcome(null);
   };
 
   type TSelectorItemArg = {
@@ -1004,7 +1117,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
               roomId={roomId}
               isAgent={roomTypeResolved === RoomsType.AIRoom}
               disableInvitedUsers={invitedUsersArray}
-              withGuests={showGuestsTab}
+              withGuests={false}
               withHeader
               data-test-id="invite_panel_people_selector"
               headerProps={{
@@ -1047,30 +1160,67 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
       ) : null}
 
       <ModalDialog.Header>
-        <div className={styles.invitePanelHeader}>{t("Common:Invite")}</div>
+        <div className={styles.invitePanelHeader}>
+          {inviteOutcome
+            ? t("Common:EncryptedInviteResultTitle")
+            : t("Common:Invite")}
+        </div>
       </ModalDialog.Header>
-      <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
+      <ModalDialog.Body>
+        {inviteOutcome ? (
+          <InviteResult t={t} outcome={inviteOutcome} />
+        ) : (
+          bodyInvitePanel
+        )}
+      </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          className="send-invitation"
-          scale
-          size={ButtonSize.normal}
-          isDisabled={hasErrors || !hasInvitedUsers}
-          primary
-          onClick={onClickSend}
-          label={t("Common:SendInvitation")}
-          isLoading={isLoading}
-          testId="invite_panel_send_button"
-        />
-        <Button
-          className="cancel-button"
-          scale
-          size={ButtonSize.normal}
-          onClick={handleClose}
-          label={t("Common:CancelButton")}
-          isDisabled={isLoading}
-          testId="invite_panel_cancel_button"
-        />
+        {inviteOutcome ? (
+          <>
+            {canInviteAgain ? (
+              <Button
+                className="invite-again"
+                scale
+                size={ButtonSize.normal}
+                primary
+                onClick={onInviteAgain}
+                label={t("Common:InviteAgain")}
+                testId="invite_panel_invite_again_button"
+              />
+            ) : null}
+            <Button
+              className="close-button"
+              scale
+              size={ButtonSize.normal}
+              primary={!canInviteAgain}
+              onClick={handleClose}
+              label={t("Common:CloseButton")}
+              testId="invite_panel_close_button"
+            />
+          </>
+        ) : (
+          <>
+            <Button
+              className="send-invitation"
+              scale
+              size={ButtonSize.normal}
+              isDisabled={hasErrors || !hasInvitedUsers}
+              primary
+              onClick={onClickSend}
+              label={t("Common:SendInvitation")}
+              isLoading={isLoading}
+              testId="invite_panel_send_button"
+            />
+            <Button
+              className="cancel-button"
+              scale
+              size={ButtonSize.normal}
+              onClick={handleClose}
+              label={t("Common:CancelButton")}
+              isDisabled={isLoading}
+              testId="invite_panel_cancel_button"
+            />
+          </>
+        )}
       </ModalDialog.Footer>
     </ModalDialog>
   );

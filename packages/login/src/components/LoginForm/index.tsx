@@ -63,6 +63,7 @@ import { TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
 import { ButtonKeys } from "@docspace/shared/enums";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
+import { getSafeReturnUrl } from "@docspace/shared/utils/getSafeReturnUrl";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { LoginFormProps } from "@/types";
@@ -111,7 +112,8 @@ const LoginForm = ({
 
   const message = searchParams?.get("message");
   const authError = searchParams?.get("authError");
-  const referenceUrl = searchParams?.get("referenceUrl");
+  // Only a page of the portal is followed after logging in (Bug 84860).
+  const referenceUrl = getSafeReturnUrl(searchParams?.get("referenceUrl"));
   const loginData = searchParams?.get("loginData") ?? null;
   const linkData = searchParams?.get("linkData");
   const isPublicAuth = searchParams?.get("publicAuth");
@@ -709,7 +711,6 @@ const LoginForm = ({
         label={
           isLoading ? t("Common:LoadingProcessing") : t("Common:LoginButton")
         }
-        tabIndex={5}
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onSubmit}

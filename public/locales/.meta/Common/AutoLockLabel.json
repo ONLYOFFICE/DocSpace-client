@@ -3,7 +3,7 @@
   "content": "Auto-lock after inactivity",
   "content_en_sha1_hash": "3317bd4a4c87eb2ec94b86913ccd99ac27080765",
   "created_at": "2026-05-24T17:27:19.207Z",
-  "updated_at": "2026-05-24T18:32:17.792Z",
+  "updated_at": "2026-11-05T16:49:39.980Z",
   "comment": {
     "text": "Label for a setting in the Keys management section that enables automatic session locking after a period of inactivity.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/AutoLockSetting.tsx",
-      "line_number": 86,
-      "context": "return (\n <div className={styles.container}>\n <div className={styles.label}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:AutoLockLabel\")}\n </Text>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:AutoLockHint\")}\n </Text>\n </div>",
+      "line_number": 87,
+      "context": "return (\n <div className={styles.container} role=\"group\" aria-labelledby={labelId}>\n <div className={styles.label}>\n <Text id={labelId} fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:AutoLockLabel\")}\n </Text>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:AutoLockHint\")}\n </Text>\n </div>",
       "module": "/packages/client"
     }
   ],

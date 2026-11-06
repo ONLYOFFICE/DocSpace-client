@@ -39,15 +39,25 @@ import {
 } from "@docspace/shared/services/encryption/identity";
 import {
   capabilitiesHandler,
+  encryptedFilesHandlers,
+  filesSettingsHandler,
+  privacyroomAccessHandlers,
   privacyroomKeysHandlers,
+  privateRoomListHandler,
+  roomListHandler,
+  rootHandler,
   selfActivationStatusHandler,
   settingsHandler,
   TypeSettings,
+  type EncryptedFilesHandlerHandle,
+  type PrivacyroomAccessHandlerHandle,
   type PrivacyroomHandlerHandle,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
+import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
 const TEST_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+const ROOM_ID = 9451;
 // Both passphrases must satisfy PASSPHRASE_SETTINGS in PassphraseModal:
 // length >= 12, uppercase, digits, special characters.
 const KNOWN_PASSPHRASE = "Test-Horse-Battery-Staple-99!";
@@ -115,14 +125,10 @@ test.describe("Keys management — advanced flows", () => {
       .getByRole("button", { name: "Continue", exact: true })
       .click();
 
-    const newPassphraseInput = page
-      .locator('input[name="passphrase"], #passphrase input')
-      .first();
+    const newPassphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(newPassphraseInput).toBeVisible({ timeout: 5000 });
     await newPassphraseInput.fill(NEW_PASSPHRASE);
-    await page
-      .locator('input[name="confirmPassphrase"], #confirmPassphrase input')
-      .first()
+    await page.getByLabel("Confirm passphrase", { exact: true })
       .fill(NEW_PASSPHRASE);
 
     const putPromise = page.waitForRequest(
@@ -173,6 +179,8 @@ test.describe("Keys management — advanced flows", () => {
         handle: handleRef,
         userId: TEST_USER_ID,
       }),
+      // No private room in the list: the warning names none.
+      roomListHandler(TEST_PORT),
     );
 
     await page.goto(`${baseUrl}/profile/keys-management`);
@@ -190,6 +198,12 @@ test.describe("Keys management — advanced flows", () => {
       .filter({ hasText: "Delete encryption keyWarning" });
     await expect(deleteDialog).toBeVisible({ timeout: 5000 });
     await expect(deleteDialog.getByText(/inaccessible/i)).toBeVisible();
+    await expect(
+      deleteDialog.getByText(
+        "None of your private rooms has files encrypted for you, so no room is affected.",
+        { exact: true },
+      ),
+    ).toBeVisible({ timeout: 10000 });
 
     await deleteDialog.getByLabel("Cancel", { exact: true }).click();
 
@@ -206,7 +220,12 @@ test.describe("Keys management — advanced flows", () => {
         req.url().endsWith("/privacyroom/keys/99"),
       { timeout: 30000 },
     );
-    await deleteDialog.getByLabel("Confirm", { exact: true }).click();
+    const confirmButton = deleteDialog.getByRole("button", {
+      name: "Confirm",
+      exact: true,
+    });
+    await expect(confirmButton).toBeEnabled({ timeout: 10000 });
+    await confirmButton.click();
 
     // Confirming no longer deletes immediately: a passphrase-verification
     // modal appears, and the DELETE fires only once the passphrase unlocks
@@ -215,8 +234,7 @@ test.describe("Keys management — advanced flows", () => {
       .getByRole("dialog")
       .filter({ hasText: "Enter passphrase" });
     await expect(verifyDialog).toBeVisible({ timeout: 5000 });
-    await verifyDialog
-      .locator('input[name="passphrase"]')
+    await verifyDialog.getByLabel("Passphrase", { exact: true })
       .fill(KNOWN_PASSPHRASE);
     await verifyDialog
       .getByRole("button", { name: "Continue", exact: true })
@@ -226,6 +244,62 @@ test.describe("Keys management — advanced flows", () => {
     await expect
       .poll(() => handleRef.current!.getKeys().length, { timeout: 5000 })
       .toBe(0);
+  });
+
+  test("Affected rooms listed", async ({ page, mockRequest, baseUrl }) => {
+    const affectedRoomId = 9460;
+    const envelope = { ...(await realEnvelope()), id: "99" };
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [envelope],
+        userId: TEST_USER_ID,
+      }),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: affectedRoomId,
+        title: "Board minutes",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: affectedRoomId,
+        title: "Board minutes",
+        initialFiles: [
+          {
+            id: 8900,
+            title: "minutes.docx",
+            encrypted: true,
+            fileKeys: [
+              {
+                userId: TEST_USER_ID,
+                publicKeyId: "99",
+                privateKeyEnc: "WRAPPED_DEK_FIXTURE",
+              },
+            ],
+          },
+        ],
+      }),
+    );
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const deleteBtn = page
+      .locator("[class*='keyItemActions']")
+      .first()
+      .getByTestId("icon-button")
+      .nth(2);
+    await expect(deleteBtn).toBeVisible({ timeout: 10000 });
+    await deleteBtn.click();
+
+    const deleteDialog = page
+      .getByRole("dialog")
+      .filter({ hasText: "Delete encryption keyWarning" });
+    await expect(
+      deleteDialog.getByText(
+        "You will no longer be able to open the files of these private rooms: Board minutes",
+        { exact: true },
+      ),
+    ).toBeVisible({ timeout: 10000 });
+    await expect(
+      deleteDialog.getByRole("button", { name: "Confirm", exact: true }),
+    ).toBeEnabled();
   });
 
   test("change passphrase posts new envelope under the new passphrase", async ({
@@ -255,12 +329,10 @@ test.describe("Keys management — advanced flows", () => {
     await expect(rotateBtn).toBeVisible({ timeout: 10000 });
     await rotateBtn.click();
 
-    await page
-      .locator('input[name="currentPassphrase"]')
+    await page.getByLabel("Current passphrase", { exact: true })
       .fill(KNOWN_PASSPHRASE);
-    await page.locator('input[name="newPassphrase"]').fill(NEW_PASSPHRASE);
-    await page
-      .locator('input[name="confirmNewPassphrase"]')
+    await page.getByLabel("New passphrase", { exact: true }).fill(NEW_PASSPHRASE);
+    await page.getByLabel("Confirm new passphrase", { exact: true })
       .fill(NEW_PASSPHRASE);
 
     const putPromise = page.waitForRequest(
@@ -285,5 +357,122 @@ test.describe("Keys management — advanced flows", () => {
     expect(body.id).toBeTruthy();
     expect(body.publicKey).toBe(envelope.publicKey);
     expect(body.privateKeyEnc).not.toBe(envelope.privateKeyEnc);
+  });
+
+  test("Auto-lock on a remembered device", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const { keysHandle, passphrase } = await bootstrapEncryption(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const own = { ...keysHandle.getKeys()[0], userId: TEST_USER_ID };
+
+    const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+    const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        handle: filesHandle,
+      }),
+      ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
+    );
+    accessHandle.current!.setRoomKeys(ROOM_ID, [own]);
+
+    // The tab-hide lock obeys the auto-lock preference, which is off by default.
+    await page.evaluate(() =>
+      localStorage.setItem("encryption-auto-lock-timeout-seconds", "300"),
+    );
+
+    // In-app navigation keeps the in-memory identity across pages.
+    const navigate = (url: string) =>
+      page.evaluate(
+        (u) =>
+          (
+            window as unknown as { DocSpace: { navigate: (u: string) => void } }
+          ).DocSpace.navigate(u),
+        url,
+      );
+    const openRoom = async () => {
+      const loaded = page.waitForResponse(
+        (res) =>
+          res.request().method() === "GET" &&
+          new URL(res.url()).pathname.endsWith(`/files/${ROOM_ID}`) &&
+          res.ok(),
+        { timeout: 15000 },
+      );
+      await navigate(`/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+      await loaded;
+    };
+    const upload = (name: string) =>
+      page.locator("#customFileInput").first().setInputFiles({
+        name,
+        mimeType: "text/plain",
+        buffer: Buffer.from(`content of ${name}`),
+      });
+
+    const lockNow = page.getByTestId("lock_now_link");
+    const setVisibility = (state: "hidden" | "visible") =>
+      page.evaluate((value) => {
+        Object.defineProperty(document, "visibilityState", {
+          configurable: true,
+          get: () => value,
+        });
+        document.dispatchEvent(new Event("visibilitychange"));
+      }, state);
+    // The listener is re-registered as auto-lock suspension clears, so keep
+    // re-dispatching until the lock takes effect.
+    const hideTabUntilLocked = async () => {
+      await expect(lockNow).toBeVisible({ timeout: 10000 });
+      await expect(async () => {
+        await setVisibility("hidden");
+        await expect(lockNow).toBeHidden({ timeout: 1000 });
+      }).toPass({ timeout: 10000 });
+      await setVisibility("visible");
+    };
+
+    const prompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+
+    // Not remembered yet: after the hidden-tab lock the upload prompts.
+    await hideTabUntilLocked();
+    await openRoom();
+    await upload("first.txt");
+    await expect(prompt).toBeVisible({ timeout: 15000 });
+    await prompt
+      .getByLabel("Passphrase", { exact: true })
+      .fill(passphrase);
+    await prompt.getByText("Don't ask again on this device").click();
+    await prompt.getByRole("button", { name: "Confirm" }).click();
+    await expect
+      .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
+      .toBe(1);
+
+    // Remembered: the hidden tab still locks, the device stays remembered.
+    await navigate("/profile/keys-management");
+    const forgetDevice = page.getByTestId("forget_device_link");
+    await expect(forgetDevice).toBeVisible({ timeout: 10000 });
+    await hideTabUntilLocked();
+    await expect(forgetDevice).toBeVisible();
+
+    // The next upload restores the key from the device record.
+    await openRoom();
+    await upload("second.txt");
+    await expect
+      .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
+      .toBe(2);
+    await expect(prompt).toBeHidden();
   });
 });

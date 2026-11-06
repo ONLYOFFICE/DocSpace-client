@@ -307,8 +307,8 @@ importers:
         specifier: 1.2.0
         version: 1.2.0
       lefthook:
-        specifier: ^2.1.10
-        version: 2.1.16
+        specifier: ^2.2.2
+        version: 2.2.2
       madge:
         specifier: 8.0.0
         version: 8.0.0(supports-color@7.2.0)(typescript@5.9.3)
@@ -316,8 +316,8 @@ importers:
         specifier: 23.2.1
         version: 23.2.1
       prettier:
-        specifier: ^3.9.6
-        version: 3.9.9
+        specifier: ^3.9.10
+        version: 3.9.10
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -367,13 +367,13 @@ importers:
         specifier: 'catalog:'
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:../../onlyoffice-ai-chat-1.0.2-progress.22.tgz
-        version: file:onlyoffice-ai-chat-1.0.2-progress.22.tgz(ebfc3269144ca83955c0791ed073ac72)
+        specifier: file:../../onlyoffice-ai-chat-1.0.2-progress.37.tgz
+        version: file:onlyoffice-ai-chat-1.0.2-progress.37.tgz(ebfc3269144ca83955c0791ed073ac72)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(10d50702004e8e096e6e9bb8c550f0a5)
+        version: file:onlyoffice-apps-ui-kit.tgz(f355c474ed3917c0abf3682353c23429)
       '@onlyoffice/doceditor-types':
-        specifier: ^10.0.0
+        specifier: ^10.0.1
         version: 10.0.1
       '@onlyoffice/docspace-sdk-js':
         specifier: ^2.2.0
@@ -409,8 +409,8 @@ importers:
         specifier: 3.1.2
         version: 3.1.2
       '@tanstack/react-query':
-        specifier: ^5.101.4
-        version: 5.104.1(react@19.2.8)
+        specifier: ^5.105.3
+        version: 5.105.3(@types/react@19.2.10)(react@19.2.8)
       '@uiw/codemirror-theme-github':
         specifier: 4.23.5
         version: 4.23.5(@codemirror/language@6.12.4)(@codemirror/state@6.7.6)(@codemirror/view@6.43.13)
@@ -520,8 +520,8 @@ importers:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
       react-hook-form:
-        specifier: ^7.84.0
-        version: 7.89.0(@types/react@19.2.10)(react@19.2.8)
+        specifier: ^7.91.0
+        version: 7.91.0(@types/react@19.2.10)(react@19.2.8)
       react-hotkeys-hook:
         specifier: 3.4.7
         version: 3.4.7(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -550,8 +550,8 @@ importers:
         specifier: 16.4.2
         version: 16.4.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-syntax-highlighter:
-        specifier: ^16.1.1
-        version: 16.1.1(react@19.2.8)
+        specifier: ^16.1.2
+        version: 16.1.2(react@19.2.8)
       react-toastify:
         specifier: 10.0.6
         version: 10.0.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -665,8 +665,8 @@ importers:
         specifier: 1.0.9
         version: 1.0.9
       '@vitejs/plugin-react':
-        specifier: ^6.0.5
-        version: 6.1.1(babel-plugin-react-compiler@1.0.0)(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))
+        specifier: ^6.2.1
+        version: 6.2.1(babel-plugin-react-compiler@1.0.0)(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))
       '@vitest/ui':
         specifier: 4.1.12
         version: 4.1.12(vitest@4.1.12)
@@ -680,10 +680,10 @@ importers:
         specifier: ^2.15.0
         version: 2.15.0(@types/node@24.10.7)(typescript@5.9.3)
       prettier:
-        specifier: ^3.9.6
-        version: 3.9.9
+        specifier: ^3.9.10
+        version: 3.9.10
       rollup-plugin-visualizer:
-        specifier: ^7.0.1
+        specifier: ^7.1.1
         version: 7.1.1(rolldown@1.2.12)
       sass:
         specifier: 1.79.6
@@ -717,9 +717,9 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(10d50702004e8e096e6e9bb8c550f0a5)
+        version: file:onlyoffice-apps-ui-kit.tgz(f355c474ed3917c0abf3682353c23429)
       '@onlyoffice/doceditor-types':
-        specifier: ^10.0.0
+        specifier: ^10.0.1
         version: 10.0.1
       '@onlyoffice/document-editor-react':
         specifier: 2.3.0
@@ -818,9 +818,12 @@ importers:
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
         version: 7.0.4(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
+      jsdom:
+        specifier: ^27.4.0
+        version: 27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1)
       prettier:
-        specifier: ^3.9.6
-        version: 3.9.9
+        specifier: ^3.9.10
+        version: 3.9.10
       sass:
         specifier: 1.79.6
         version: 1.79.6
@@ -833,6 +836,9 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
+      vitest:
+        specifier: 4.1.12
+        version: 4.1.12(@types/node@24.10.7)(@vitest/coverage-v8@4.1.12)(@vitest/ui@4.1.12)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))
 
   packages/login:
     dependencies:
@@ -844,7 +850,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(10d50702004e8e096e6e9bb8c550f0a5)
+        version: file:onlyoffice-apps-ui-kit.tgz(f355c474ed3917c0abf3682353c23429)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -937,8 +943,8 @@ importers:
         specifier: ^7.0.4
         version: 7.0.4(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
       prettier:
-        specifier: ^3.9.6
-        version: 3.9.9
+        specifier: ^3.9.10
+        version: 3.9.10
       sass:
         specifier: 1.79.6
         version: 1.79.6
@@ -965,7 +971,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(10d50702004e8e096e6e9bb8c550f0a5)
+        version: file:onlyoffice-apps-ui-kit.tgz(f355c474ed3917c0abf3682353c23429)
       axios:
         specifier: '>=1.15.2'
         version: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -1085,8 +1091,8 @@ importers:
         specifier: ^7.0.4
         version: 7.0.4(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
       prettier:
-        specifier: ^3.9.6
-        version: 3.9.9
+        specifier: ^3.9.10
+        version: 3.9.10
       sass:
         specifier: 1.79.6
         version: 1.79.6
@@ -1130,11 +1136,11 @@ importers:
         specifier: 'catalog:'
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:../../onlyoffice-ai-chat-1.0.2-progress.22.tgz
-        version: file:onlyoffice-ai-chat-1.0.2-progress.22.tgz(ebfc3269144ca83955c0791ed073ac72)
+        specifier: file:../../onlyoffice-ai-chat-1.0.2-progress.37.tgz
+        version: file:onlyoffice-ai-chat-1.0.2-progress.37.tgz(ebfc3269144ca83955c0791ed073ac72)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(10d50702004e8e096e6e9bb8c550f0a5)
+        version: file:onlyoffice-apps-ui-kit.tgz(f355c474ed3917c0abf3682353c23429)
       '@radix-ui/react-dialog':
         specifier: 'catalog:'
         version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1157,8 +1163,8 @@ importers:
         specifier: 'catalog:'
         version: 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@tanstack/react-query':
-        specifier: ^5.101.4
-        version: 5.104.1(react@19.2.8)
+        specifier: ^5.105.3
+        version: 5.105.3(@types/react@19.2.10)(react@19.2.8)
       adm-zip:
         specifier: 0.6.1
         version: 0.6.1
@@ -1250,8 +1256,8 @@ importers:
         specifier: 16.4.2
         version: 16.4.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-syntax-highlighter:
-        specifier: ^16.1.1
-        version: 16.1.1(react@19.2.8)
+        specifier: ^16.1.2
+        version: 16.1.2(react@19.2.8)
       react-virtualized:
         specifier: ^9.22.6
         version: 9.22.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1353,8 +1359,8 @@ importers:
         specifier: ^27.4.0
         version: 27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1)
       prettier:
-        specifier: ^3.9.6
-        version: 3.9.9
+        specifier: ^3.9.10
+        version: 3.9.10
       sass:
         specifier: 1.79.6
         version: 1.79.6
@@ -1389,17 +1395,17 @@ importers:
         specifier: 1.8.0
         version: 1.8.0
       '@noble/hashes':
-        specifier: ^2.2.0
+        specifier: ^2.4.0
         version: 2.4.0
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(10d50702004e8e096e6e9bb8c550f0a5)
+        version: file:onlyoffice-apps-ui-kit.tgz(f355c474ed3917c0abf3682353c23429)
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@tanstack/react-query':
-        specifier: ^5.101.4
-        version: 5.104.1(react@19.2.8)
+        specifier: ^5.105.3
+        version: 5.105.3(@types/react@19.2.10)(react@19.2.8)
       '@use-gesture/react':
         specifier: 10.3.1
         version: 10.3.1(react@19.2.8)
@@ -1446,8 +1452,8 @@ importers:
         specifier: 25.10.10
         version: 25.10.10(typescript@5.9.3)
       linkifyjs:
-        specifier: ^4.3.3
-        version: 4.3.3
+        specifier: ^4.4.0
+        version: 4.4.0
       lodash:
         specifier: 4.18.1
         version: 4.18.1
@@ -1470,8 +1476,8 @@ importers:
         specifier: 3.1.0
         version: 3.1.0(react@19.2.8)
       react-hook-form:
-        specifier: ^7.84.0
-        version: 7.89.0(@types/react@19.2.10)(react@19.2.8)
+        specifier: ^7.91.0
+        version: 7.91.0(@types/react@19.2.10)(react@19.2.8)
       react-i18next:
         specifier: 15.7.4
         version: 15.7.4(i18next@25.10.10(typescript@5.9.3))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3)
@@ -1556,10 +1562,10 @@ importers:
         version: 1.58.1
       '@storybook/addon-docs':
         specifier: 10.2.8
-        version: 10.2.8(@types/react@19.2.10)(esbuild@0.28.2)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
+        version: 10.2.8(@types/react@19.2.10)(esbuild@0.28.2)(storybook@10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
       '@storybook/react':
-        specifier: ^10.5.5
-        version: 10.6.1(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(supports-color@8.1.1)(typescript@5.9.3)
+        specifier: ^10.6.5
+        version: 10.6.5(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8))(supports-color@8.1.1)(typescript@5.9.3)
       '@testing-library/jest-dom':
         specifier: 6.6.4
         version: 6.6.4
@@ -1636,8 +1642,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       prettier:
-        specifier: ^3.9.6
-        version: 3.9.9
+        specifier: ^3.9.10
+        version: 3.9.10
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -1651,8 +1657,8 @@ importers:
         specifier: 14.2.5
         version: 14.2.5(supports-color@8.1.1)
       storybook:
-        specifier: ^10.5.5
-        version: 10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8)
+        specifier: ^10.6.5
+        version: 10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8)
       ts-node:
         specifier: 10.9.2
         version: 10.9.2(@types/node@24.10.7)(typescript@5.9.3)
@@ -3466,9 +3472,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.2-progress.22.tgz':
-    resolution: {integrity: sha512-5XmpVS+pvLvfnw+aY1kGEJu0ifTy63Xx60N4vJbpvCcpH9lAcfnpDMJlY/TMZZ2zZ6YrKrZ4dgha/wCSwd0J3w==, tarball: file:onlyoffice-ai-chat-1.0.2-progress.22.tgz}
-    version: 1.0.2-progress.22
+  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.2-progress.37.tgz':
+    resolution: {integrity: sha512-/6bLNEMZCX34bVd/Xmag0FxGM64KBuH5S8AwSjEoz1TxXWmC0BC3SYwaECJZubRe+3T7ByzRmk0tZupybsczvA==, tarball: file:onlyoffice-ai-chat-1.0.2-progress.37.tgz}
+    version: 1.0.2-progress.37
     peerDependencies:
       '@anthropic-ai/sdk': ^0.60.0
       '@assistant-ui/react': ^0.11.0
@@ -3567,11 +3573,11 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-A4RavDIZ+ywi7VuPuUTmzzPq6aoFAxWdMZ2poi/f3FwygcMJJYRQRyyNbBh+VtoWAzzlZOeZdTCxSQGbhYBKLQ==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-0Z02S+kJIjLTqAMtClQJVNMGypRZ9pD3ChLKLP3IU7XFO6wCkROJy1srp+FIxuBEYJXL9EXzMbB5d2K3WivpwQ==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.1.0
     engines: {node: '>=22'}
     peerDependencies:
-      '@onlyoffice/ai-chat': '>=1.0.2-progress.22'
+      '@onlyoffice/ai-chat': '>=1.0.2-progress.34'
       '@onlyoffice/doceditor-types': '>=9.3.1'
       '@onlyoffice/document-editor-react': 2.3.0
       '@socket.io/component-emitter': 3.1.2
@@ -4903,28 +4909,28 @@ packages:
       react-dom: 19.2.8
       storybook: ^10.2.8
 
-  '@storybook/react-dom-shim@10.6.1':
-    resolution: {integrity: sha512-OkPFycR6kVE+9ZsgQWRqnUfZm/sLY6dxsNAn3lsvV7DSAQWH9QnHLkqP9E/N/Hg6cKPDtGzDZ8vPNDz2FuaDuQ==}
+  '@storybook/react-dom-shim@10.6.5':
+    resolution: {integrity: sha512-Qbbkp+5Otg32w8Ddav6rH6MGPiYVfEzrgn0HqbqlqS8kY+DRXo+NYXJwZTVSDSwrYPrfH+Ok2tV4uE8Zo0c3cg==}
     peerDependencies:
       '@types/react': 19.2.10
       '@types/react-dom': 19.2.3
       react: 19.2.8
       react-dom: 19.2.8
-      storybook: ^10.6.1
+      storybook: ^10.6.5
     peerDependenciesMeta:
       '@types/react':
         optional: true
       '@types/react-dom':
         optional: true
 
-  '@storybook/react@10.6.1':
-    resolution: {integrity: sha512-t0QIzO0MVcpD52UEMZKSv35nO/+8vUnLGoFC1E3BIVjHEIdr6IFFM7ty2E7FWsaZGsah3XrFINKT3dPd2Atz+Q==}
+  '@storybook/react@10.6.5':
+    resolution: {integrity: sha512-vvRjRe/O8NRiQbGyA7Ne6h2jbD6GjwNZFkMdHl+0kZH8Z/S9ZWWmKmjCySvH/OmgighdCOQ98tcfND7m65WQBg==}
     peerDependencies:
       '@types/react': 19.2.10
       '@types/react-dom': 19.2.3
       react: 19.2.8
       react-dom: 19.2.8
-      storybook: ^10.6.1
+      storybook: ^10.6.5
       typescript: '>= 4.9.x'
     peerDependenciesMeta:
       '@types/react':
@@ -5018,13 +5024,17 @@ packages:
   '@tanem/svg-injector@10.1.68':
     resolution: {integrity: sha512-UkJajeR44u73ujtr5GVSbIlELDWD/mzjqWe54YMK61ljKxFcJoPd9RBSaO7xj02ISCWUqJW99GjrS+sVF0UnrA==}
 
-  '@tanstack/query-core@5.104.1':
-    resolution: {integrity: sha512-TiRghcrGkUTE+M4JBxvpPSpBhxvIzQairw+cksrHYGr+2uwC77yW1SY9nYxnYRYOppvucf8rEg6b5byoz4rTpw==}
+  '@tanstack/query-core@5.105.3':
+    resolution: {integrity: sha512-v1rbNy7MB/4Akth7CQH+CerV13K7Ok9hAusEsfz4sCjDdu3/kOSJPoWfoB+YjdEX1eBFBWKNAGE5nqZCgdlHDw==}
 
-  '@tanstack/react-query@5.104.1':
-    resolution: {integrity: sha512-Zz70EgjahNI7aCz8BZxM3vUGU44ycxEAzMuCUjLeA7SVhhOkg3ZgPjPJPvHjs6Rmky/dtmnu1WzjGHNHmhCoZQ==}
+  '@tanstack/react-query@5.105.3':
+    resolution: {integrity: sha512-dj5hGWZmwoc9NG4enoXuYbiYwb5FxgJYPVv06eUgicMTfEMTRXn08Xv9D/r1V8TfjAv+BpxdvZFzJ1h3hSWZcQ==}
     peerDependencies:
+      '@types/react': 19.2.10
       react: 19.2.8
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
   '@testing-library/dom@10.4.2':
     resolution: {integrity: sha512-yzr2S9HyAIdhz2/6qHgbs665Q7PKVcDF05vsOlHPxG1mo36gKVesdYVeDLnXgfjJ03CrKRk08knc6+E/9m8v2Q==}
@@ -5330,13 +5340,13 @@ packages:
     peerDependencies:
       react: 19.2.8
 
-  '@vitejs/plugin-react@6.1.1':
-    resolution: {integrity: sha512-yxLaQV9gkhS8ezJqCM6+ndU7mDY6gqAg75NQ+0IjwEI8IYOmQCgkRwHKVSfWXW076DsqMo0Dk+0FK1U+M5RgFw==}
+  '@vitejs/plugin-react@6.2.1':
+    resolution: {integrity: sha512-9KyWCij3r0+qLG3Q62vBmv0VyevmYibAtxaCIVK9o0k6CXgaajZRIe8tpfchQcdZArJ5b/7OrIz4W3b2uxVRDA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
-      '@rolldown/plugin-babel': ^0.1.7 || ^0.2.0
+      '@rolldown/plugin-babel': ^0.1.7 || ^0.2.0 || ^0.3.0
       babel-plugin-react-compiler: ^1.0.0
-      oxc-transform-react: ^0.145.0
+      oxc-transform-react: '>=0.152.0 <0.157.0'
       vite: '>=8.0.16'
     peerDependenciesMeta:
       '@rolldown/plugin-babel':
@@ -7056,58 +7066,63 @@ packages:
   kuler@2.0.0:
     resolution: {integrity: sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==}
 
-  lefthook-darwin-arm64@2.1.16:
-    resolution: {integrity: sha512-oOjS1mn3UGNfo72UtR9VJMyulgbjvLkv5KEmJVgfWiO8wZ4Z469o2ZllvH5FrHluzv4Hlkc9OG+vnCP+5/ztMA==}
+  lefthook-android-arm64@2.2.2:
+    resolution: {integrity: sha512-wb9rQQFLX7u1dJLxvMrq9VUfMYi5kxM7tJQ6Y4mWEOwaU+SmIm2wjoT/nromKq27Y8fh2Qd7FgCD3G1wfW8CnQ==}
+    cpu: [arm64]
+    os: [android]
+
+  lefthook-darwin-arm64@2.2.2:
+    resolution: {integrity: sha512-6V8D3bLnD/60Xhqn0o2EQD6H3Fe/U9LGkt4WF1O/3eBHbux+5ZJqoH0hfrC+Bi9Dy1Ve1AWxiAY7U2asYl8qVA==}
     cpu: [arm64]
     os: [darwin]
 
-  lefthook-darwin-x64@2.1.16:
-    resolution: {integrity: sha512-/thON8TbzsqXBjF0hkVPsisBJOKGfss0+lVqcJ0jNwaRDIQSn6Frsn7c9eqs7uyMNEQKUVLTeIkpwPrNldT8JA==}
+  lefthook-darwin-x64@2.2.2:
+    resolution: {integrity: sha512-fH/kArZ9ZZ65wCFtvBMgGcq25qwQpkQ5jp93ba+8wpjgxxzjczYGluwHvM/NQDJWLOFXuKXW0yFs76SramQkyQ==}
     cpu: [x64]
     os: [darwin]
 
-  lefthook-freebsd-arm64@2.1.16:
-    resolution: {integrity: sha512-Eg7s0gcGwZnQqYyWTfOqb+2qupXtmHt/XHftXJvLhTaTMXR6uQbAyl7ceYTl2wH43AOCLrJ5BMMdqlWJaj/EbA==}
+  lefthook-freebsd-arm64@2.2.2:
+    resolution: {integrity: sha512-MCRsU01ju989QQffOfS3gCeFfyVDXs5B/FzR65fmrNvqcxb98fldvfzzoAbnK2q6SBJlRT3QT1tNEMCxddCwlA==}
     cpu: [arm64]
     os: [freebsd]
 
-  lefthook-freebsd-x64@2.1.16:
-    resolution: {integrity: sha512-vCmyKLO8mtAf+hm8rpfAlt4wQ23S7AGnlT6JlrLPBSt5V8J2kXuI/N1W2XQbWx6OqckqchhBdLQP3Xh4IiYBXA==}
+  lefthook-freebsd-x64@2.2.2:
+    resolution: {integrity: sha512-LkKuJU0S2oLimeoHwPTy1TLWB6GcN0t5lLxiXNlsBKUkr6R47QRcvPMZMoXmu3IetQtd+WliXMLE8qTwi2fqBg==}
     cpu: [x64]
     os: [freebsd]
 
-  lefthook-linux-arm64@2.1.16:
-    resolution: {integrity: sha512-zMEZ8x+PzXqjouEFsf2lWt2o0p5yvvT0YP0CpJC41y4FIRusx0sy3l+cjvKRIysLGOzKMr4V3/fE6w7f2KgwUw==}
+  lefthook-linux-arm64@2.2.2:
+    resolution: {integrity: sha512-d+HFtS2DEKaOnD7vRU0tUz8pNgHwsUYmQ22+1dyXpOrXGyzNXR0AqX5KsIRF36JGhVvO5X5Anw5QYgR3mxVSuA==}
     cpu: [arm64]
     os: [linux]
 
-  lefthook-linux-x64@2.1.16:
-    resolution: {integrity: sha512-HdfNz3z5hzrEXyP5KC51os+2M6BThL4qMfu8rB777tbXzf7WMoxf/FV6mnzoqM1RN0K+KJAQYbnJatfPQhqusQ==}
+  lefthook-linux-x64@2.2.2:
+    resolution: {integrity: sha512-N/OlQyAhcU6RAXjrwFxLsh70sn96rBoi+XkuLJ8CVBkk9Ci3VDXQayDZTNz5B1xML8RwoMcV8Wblniy1xFOmSA==}
     cpu: [x64]
     os: [linux]
 
-  lefthook-openbsd-arm64@2.1.16:
-    resolution: {integrity: sha512-zKkyN/ocUXOzFaLPn3ciucJ6CYcnUmqFsIwp7ge96sQ8l83omxL9rK0/KvSsMcus+TfHTNN+DFWVJxeMepPVtQ==}
+  lefthook-openbsd-arm64@2.2.2:
+    resolution: {integrity: sha512-6G/gKXcpIwC+XcODg7ELZYP/hIrVIHQxhy2GoRdVyecmpGMFj+BZo3iqcUmeWusQMuL+UdNexbkrUaeJalIkNw==}
     cpu: [arm64]
     os: [openbsd]
 
-  lefthook-openbsd-x64@2.1.16:
-    resolution: {integrity: sha512-Ptu0D2JK1COlDK1lcr7F6WDGkCzQ80ozeTrqNzPEyBjUdZAFLwR5K5gWgaRtR06RSoYDC72RFxKM1QYnsfF0rQ==}
+  lefthook-openbsd-x64@2.2.2:
+    resolution: {integrity: sha512-eMJGi3/tqKEqu7XCZlqwQWRtK5JlL/9diaqqgRlEdlRD7GxwzHZN21z6awbITum9emea3lALvXFe6V8odQLGOA==}
     cpu: [x64]
     os: [openbsd]
 
-  lefthook-windows-arm64@2.1.16:
-    resolution: {integrity: sha512-YTzFJwlF3qbHx+CCuiyDmDPASh6mYBp1I8zfTeGKI3L24Eoct6FUaGUlfAoz8SI3DECPmBhfNgAK4dZlX9Hd5g==}
+  lefthook-windows-arm64@2.2.2:
+    resolution: {integrity: sha512-4P1EaQb5xG1zhYD1RLJ6TEGdFkmHkB+Slqx6yRDPKuBDNxMiD0+kTAAdUY2E8xPuRR35xHpVPR+b3/HtzPrjQQ==}
     cpu: [arm64]
     os: [win32]
 
-  lefthook-windows-x64@2.1.16:
-    resolution: {integrity: sha512-mQVpfaagdIZPJCGDeedRnslyd9JTc13vjmp02uu4X7cr/VZK94obwk96dhgsRp9+LL1XMhX5zTcb0zNLo1hC+A==}
+  lefthook-windows-x64@2.2.2:
+    resolution: {integrity: sha512-9Ck4zancQilBfXT3ZeRipm7Lcq4RQfxyMpy8SAVINw0t/BrbjsT25V46ZuziERcwdajnE4myfMzC33GoCBwr7g==}
     cpu: [x64]
     os: [win32]
 
-  lefthook@2.1.16:
-    resolution: {integrity: sha512-U69YGDNsZ7R+umeSzdLzORNCHQFz/w4LKyNTjJQcGrQRQCr8hlCJfJwwm9sqq9Uc5N6dImS58ywURA0FkqoHlg==}
+  lefthook@2.2.2:
+    resolution: {integrity: sha512-37fYHAhL12r1twaEV0PA5TwoIT491eTGGYjhhXxlYNMq3DSkiGZBQ++Jfk5maXj0vq52NRauLtMikBKtbNJs3Q==}
     hasBin: true
 
   lie@3.3.0:
@@ -7202,8 +7217,8 @@ packages:
     resolution: {integrity: sha512-cNOjgCnLB+FnvWWtyRTzmB3POJ+cXxTA81LoW7u8JdmhfXzriropYwpjShnz1QLLWsQwY7nIxoDmcPTwphDK9w==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  linkifyjs@4.3.3:
-    resolution: {integrity: sha512-P8aEP5U/D1/IlTY2OeYsErdwh9bGuLE30NcXtKEjgdHcahveQoQwM2yZNsioQHsWFz0P7KKudisbrzCgR0sDHg==}
+  linkifyjs@4.4.0:
+    resolution: {integrity: sha512-InTexvtbai+2c+dEVGcc6O6P2DMVIiwD9a/i4zFroazOIYLOS6FSVmAJ7kFeumnCMx6/gQqNAkbUvgMubV4+MA==}
 
   lodash.assign@4.2.0:
     resolution: {integrity: sha512-hFuH8TY+Yji7Eja3mGiuAxBqLagejScbG8GbG0j6o9vzn0YL14My+ktnqtZgFTosKymC9/44wP6s7xyuLfnClw==}
@@ -8089,8 +8104,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  prettier@3.9.9:
-    resolution: {integrity: sha512-Z/CJHIkdujO/OtN7nXUii0Rf3VT5SRuhjBA82Xvu2XhBUgX3nhP67T0LHceBdQLex7OOFGTox+Q5Yg8Jk2Qivg==}
+  prettier@3.9.10:
+    resolution: {integrity: sha512-skGHTH1Yb9QvaTC4hWnRTzEYtCpApF0UMBPz+t/0ZPzP8ihefo/btKd+QA7pUE0fEwA1SbS/NmhyEcstdXOIdA==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -8220,8 +8235,8 @@ packages:
     peerDependencies:
       react: 19.2.8
 
-  react-hook-form@7.89.0:
-    resolution: {integrity: sha512-vKcoCfy8RKZDrhSdqsRFp0uEOdS1AhLjOL6hR7Wmfzg1akNxEhaPf5WORx8SgEQPVXakdDyDkqQp+KNxVnnPHg==}
+  react-hook-form@7.91.0:
+    resolution: {integrity: sha512-5BEBUnCBwa28AFXYTYmOaB/+CSpJ/+CWVASHEvIGUzFdHyUiPHeRhG7r5hOZ8nZi0yP7pbHdFNXO/p31EKTJFQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       '@types/react': 19.2.10
@@ -8348,8 +8363,8 @@ packages:
       react: 19.2.8
       react-dom: 19.2.8
 
-  react-syntax-highlighter@16.1.1:
-    resolution: {integrity: sha512-PjVawBGy80C6YbC5DDZJeUjBmC7skaoEUdvfFQediQHgCL7aKyVHe57SaJGfQsloGDac+gCpTfRdtxzWWKmCXA==}
+  react-syntax-highlighter@16.1.2:
+    resolution: {integrity: sha512-4dM0+mYtfnhgwYWAvFx56fgyjIYk2yFopfiICFvMDhRfeSGRNd+ngFALdPD9q7llyGAmiE6pzOSOwI8Lf9ca1w==}
     engines: {node: '>= 16.20.2'}
     peerDependencies:
       react: 19.2.8
@@ -8773,8 +8788,8 @@ packages:
   std-env@4.3.0:
     resolution: {integrity: sha512-OtU/EgQ1kIm5KwqQpBC6ZEMXrZRui11w8zgfTWp8cdO9B8OaPsbA8bTHO2P+HNo1VlUTGMVBwPhydu6poeXiag==}
 
-  storybook@10.6.1:
-    resolution: {integrity: sha512-NeEmukMWPA5OqHizUkQtxCIhGt7MUZLPY4FFgpC0LNiipjrac/oKpH0TxI+9Zc+vI5+IoN+NiskOmBP7gtYfmA==}
+  storybook@10.6.5:
+    resolution: {integrity: sha512-qurC38Nx4PDF9YIq6GO95dpUx8a3B9AZwlcHBo4cOI9At09ifjQRsqcwcdOf2YX0cpVhFKmHkI20SWCrxqYQrg==}
     hasBin: true
     peerDependencies:
       '@types/react': 19.2.10
@@ -11740,7 +11755,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@23.2.1':
     optional: true
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.2-progress.22.tgz(ebfc3269144ca83955c0791ed073ac72)':
+  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.2-progress.37.tgz(ebfc3269144ca83955c0791ed073ac72)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
       assistant-stream: 0.2.47
@@ -11779,7 +11794,7 @@ snapshots:
       tailwind-merge: 3.6.0
       zustand: 5.0.7(@types/react@19.2.10)(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
 
-  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(10d50702004e8e096e6e9bb8c550f0a5)':
+  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(f355c474ed3917c0abf3682353c23429)':
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@onlyoffice/docspace-api-sdk': 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -11817,7 +11832,7 @@ snapshots:
       xss: 1.0.15
       zoom-level: 2.5.0
     optionalDependencies:
-      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-1.0.2-progress.22.tgz(ebfc3269144ca83955c0791ed073ac72)
+      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-1.0.2-progress.37.tgz(ebfc3269144ca83955c0791ed073ac72)
       '@onlyoffice/doceditor-types': 10.0.1
       '@onlyoffice/document-editor-react': 2.3.0(@onlyoffice/doceditor-types@10.0.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@socket.io/component-emitter': 3.1.2
@@ -11827,7 +11842,7 @@ snapshots:
       mobx-react: 9.2.2(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-markdown: 10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1)
       react-router: 8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      react-syntax-highlighter: 16.1.1(react@19.2.8)
+      react-syntax-highlighter: 16.1.2(react@19.2.8)
       rehype-katex: 7.0.1
       rehype-raw: 7.0.0
       remark-gfm: 4.0.1(supports-color@8.1.1)
@@ -12909,15 +12924,15 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@storybook/addon-docs@10.2.8(@types/react@19.2.10)(esbuild@0.28.2)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))':
+  '@storybook/addon-docs@10.2.8(@types/react@19.2.10)(esbuild@0.28.2)(storybook@10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))':
     dependencies:
       '@mdx-js/react': 3.1.1(@types/react@19.2.10)(react@19.2.8)
-      '@storybook/csf-plugin': 10.2.8(esbuild@0.28.2)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
+      '@storybook/csf-plugin': 10.2.8(esbuild@0.28.2)(storybook@10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))
       '@storybook/icons': 2.1.0(react@19.2.8)
-      '@storybook/react-dom-shim': 10.2.8(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))
+      '@storybook/react-dom-shim': 10.2.8(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8))
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
-      storybook: 10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8)
+      storybook: 10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8)
       ts-dedent: 2.3.0
     transitivePeerDependencies:
       - '@types/react'
@@ -12926,9 +12941,9 @@ snapshots:
       - vite
       - webpack
 
-  '@storybook/csf-plugin@10.2.8(esbuild@0.28.2)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))':
+  '@storybook/csf-plugin@10.2.8(esbuild@0.28.2)(storybook@10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8))(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))(webpack@5.111.1(cssnano@7.1.9(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.5(@types/node@24.10.7))(svgo@4.1.0))':
     dependencies:
-      storybook: 10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8)
+      storybook: 10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8)
       unplugin: 2.3.11
     optionalDependencies:
       esbuild: 0.28.2
@@ -12941,30 +12956,30 @@ snapshots:
     dependencies:
       react: 19.2.8
 
-  '@storybook/react-dom-shim@10.2.8(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))':
+  '@storybook/react-dom-shim@10.2.8(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8))':
     dependencies:
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
-      storybook: 10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8)
+      storybook: 10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8)
 
-  '@storybook/react-dom-shim@10.6.1(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))':
+  '@storybook/react-dom-shim@10.6.5(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8))':
     dependencies:
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
-      storybook: 10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8)
+      storybook: 10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8)
     optionalDependencies:
       '@types/react': 19.2.10
       '@types/react-dom': 19.2.3(@types/react@19.2.10)
 
-  '@storybook/react@10.6.1(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))(supports-color@8.1.1)(typescript@5.9.3)':
+  '@storybook/react@10.6.5(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8))(supports-color@8.1.1)(typescript@5.9.3)':
     dependencies:
       '@storybook/global': 5.0.0
-      '@storybook/react-dom-shim': 10.6.1(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8))
+      '@storybook/react-dom-shim': 10.6.5(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8))
       react: 19.2.8
       react-docgen: 8.0.4(supports-color@8.1.1)
       react-docgen-typescript: 2.4.0(typescript@5.9.3)
       react-dom: 19.2.8(react@19.2.8)
-      storybook: 10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8)
+      storybook: 10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8)
     optionalDependencies:
       '@types/react': 19.2.10
       '@types/react-dom': 19.2.3(@types/react@19.2.10)
@@ -13075,12 +13090,14 @@ snapshots:
       content-type: 1.0.5
       tslib: 2.8.1
 
-  '@tanstack/query-core@5.104.1': {}
+  '@tanstack/query-core@5.105.3': {}
 
-  '@tanstack/react-query@5.104.1(react@19.2.8)':
+  '@tanstack/react-query@5.105.3(@types/react@19.2.10)(react@19.2.8)':
     dependencies:
-      '@tanstack/query-core': 5.104.1
+      '@tanstack/query-core': 5.105.3
       react: 19.2.8
+    optionalDependencies:
+      '@types/react': 19.2.10
 
   '@testing-library/dom@10.4.2':
     dependencies:
@@ -13414,7 +13431,7 @@ snapshots:
       '@use-gesture/core': 10.3.1
       react: 19.2.8
 
-  '@vitejs/plugin-react@6.1.1(babel-plugin-react-compiler@1.0.0)(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))':
+  '@vitejs/plugin-react@6.2.1(babel-plugin-react-compiler@1.0.0)(vite@8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
       vite: 8.3.2(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1)
@@ -15327,48 +15344,52 @@ snapshots:
 
   kuler@2.0.0: {}
 
-  lefthook-darwin-arm64@2.1.16:
+  lefthook-android-arm64@2.2.2:
     optional: true
 
-  lefthook-darwin-x64@2.1.16:
+  lefthook-darwin-arm64@2.2.2:
     optional: true
 
-  lefthook-freebsd-arm64@2.1.16:
+  lefthook-darwin-x64@2.2.2:
     optional: true
 
-  lefthook-freebsd-x64@2.1.16:
+  lefthook-freebsd-arm64@2.2.2:
     optional: true
 
-  lefthook-linux-arm64@2.1.16:
+  lefthook-freebsd-x64@2.2.2:
     optional: true
 
-  lefthook-linux-x64@2.1.16:
+  lefthook-linux-arm64@2.2.2:
     optional: true
 
-  lefthook-openbsd-arm64@2.1.16:
+  lefthook-linux-x64@2.2.2:
     optional: true
 
-  lefthook-openbsd-x64@2.1.16:
+  lefthook-openbsd-arm64@2.2.2:
     optional: true
 
-  lefthook-windows-arm64@2.1.16:
+  lefthook-openbsd-x64@2.2.2:
     optional: true
 
-  lefthook-windows-x64@2.1.16:
+  lefthook-windows-arm64@2.2.2:
     optional: true
 
-  lefthook@2.1.16:
+  lefthook-windows-x64@2.2.2:
+    optional: true
+
+  lefthook@2.2.2:
     optionalDependencies:
-      lefthook-darwin-arm64: 2.1.16
-      lefthook-darwin-x64: 2.1.16
-      lefthook-freebsd-arm64: 2.1.16
-      lefthook-freebsd-x64: 2.1.16
-      lefthook-linux-arm64: 2.1.16
-      lefthook-linux-x64: 2.1.16
-      lefthook-openbsd-arm64: 2.1.16
-      lefthook-openbsd-x64: 2.1.16
-      lefthook-windows-arm64: 2.1.16
-      lefthook-windows-x64: 2.1.16
+      lefthook-android-arm64: 2.2.2
+      lefthook-darwin-arm64: 2.2.2
+      lefthook-darwin-x64: 2.2.2
+      lefthook-freebsd-arm64: 2.2.2
+      lefthook-freebsd-x64: 2.2.2
+      lefthook-linux-arm64: 2.2.2
+      lefthook-linux-x64: 2.2.2
+      lefthook-openbsd-arm64: 2.2.2
+      lefthook-openbsd-x64: 2.2.2
+      lefthook-windows-arm64: 2.2.2
+      lefthook-windows-x64: 2.2.2
 
   lie@3.3.0:
     dependencies:
@@ -15433,7 +15454,7 @@ snapshots:
 
   lines-and-columns@2.0.3: {}
 
-  linkifyjs@4.3.3: {}
+  linkifyjs@4.4.0: {}
 
   lodash.assign@4.2.0: {}
 
@@ -16656,7 +16677,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  prettier@3.9.9: {}
+  prettier@3.9.10: {}
 
   pretty-format@27.5.1:
     dependencies:
@@ -16792,7 +16813,7 @@ snapshots:
       react: 19.2.8
       react-async-script: 1.2.0(react@19.2.8)
 
-  react-hook-form@7.89.0(@types/react@19.2.10)(react@19.2.8):
+  react-hook-form@7.91.0(@types/react@19.2.10)(react@19.2.8):
     dependencies:
       react: 19.2.8
     optionalDependencies:
@@ -16929,7 +16950,7 @@ snapshots:
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
 
-  react-syntax-highlighter@16.1.1(react@19.2.8):
+  react-syntax-highlighter@16.1.2(react@19.2.8):
     dependencies:
       '@babel/runtime': 7.29.7
       highlight.js: 10.7.3
@@ -17444,7 +17465,7 @@ snapshots:
 
   std-env@4.3.0: {}
 
-  storybook@10.6.1(@types/react@19.2.10)(prettier@3.9.9)(react@19.2.8):
+  storybook@10.6.5(@types/react@19.2.10)(prettier@3.9.10)(react@19.2.8):
     dependencies:
       '@storybook/global': 5.0.0
       '@storybook/icons': 2.1.0(react@19.2.8)
@@ -17465,7 +17486,7 @@ snapshots:
       ws: 8.22.0
     optionalDependencies:
       '@types/react': 19.2.10
-      prettier: 3.9.9
+      prettier: 3.9.10
     transitivePeerDependencies:
       - bufferutil
       - react

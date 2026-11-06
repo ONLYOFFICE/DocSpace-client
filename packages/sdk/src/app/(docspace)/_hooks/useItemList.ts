@@ -55,8 +55,11 @@ type useItemListProps = {
   isDocsSection?: boolean;
   isShareSection?: boolean;
   withoutFavorite?: boolean;
-  /** Filters per-item contextOptions to this whitelist (applies to files). */
-  allowedContextOptions?: ReadonlySet<string>;
+  /** Filters per-item contextOptions to this whitelist (applies to files);
+   * a function gives each file its own. */
+  allowedContextOptions?:
+    | ReadonlySet<string>
+    | ((file: TFile) => ReadonlySet<string>);
   /**
    * Separate whitelist for folder context options. When provided it overrides
    * `allowedContextOptions` for folders, allowing callers to give files and
@@ -128,8 +131,12 @@ export default function useItemList({
       const rawContextOptions = overrides
         ? getFilesContextMenuRef.current(file, overrides)
         : getFilesContextMenuRef.current(file);
-      const contextOptions = allowedContextOptions
-        ? rawContextOptions.filter((k) => allowedContextOptions.has(k))
+      const allowed =
+        typeof allowedContextOptions === "function"
+          ? allowedContextOptions(file)
+          : allowedContextOptions;
+      const contextOptions = allowed
+        ? rawContextOptions.filter((k) => allowed.has(k))
         : rawContextOptions;
 
       return {
@@ -160,7 +167,10 @@ export default function useItemList({
       // Use the folder-specific whitelist when provided; fall back to the
       // shared one so callers that only pass allowedContextOptions still work.
       const folderAllowed =
-        allowedFolderContextOptions ?? allowedContextOptions;
+        allowedFolderContextOptions ??
+        (typeof allowedContextOptions === "function"
+          ? undefined
+          : allowedContextOptions);
       const contextOptions = folderAllowed
         ? rawContextOptions.filter((k) => folderAllowed.has(k))
         : rawContextOptions;

@@ -434,10 +434,6 @@ class CurrentQuotasStore {
   }
 
   get defaultRoomsQuota() {
-    console.log(
-      "his.currentPortalQuota?.roomsQuota",
-      this.currentPortalQuota?.roomsQuota,
-    );
     return this.currentPortalQuota?.roomsQuota?.defaultQuota;
   }
 

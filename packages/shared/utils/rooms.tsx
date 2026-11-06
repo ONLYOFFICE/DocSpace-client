@@ -33,14 +33,21 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TCreatedBy } from "../types";
+import { TCreatedBy, ValueOf } from "../types";
 import { TRoom, TRoomLifetime, TWatermark } from "../api/rooms/types";
 import { TConnectingStorage } from "../api/files/types";
+import type RoomsFilter from "../api/rooms/filter";
 
-import { FolderType, RoomsType, RoomsTypePrivate } from "../enums";
+import {
+  FolderType,
+  RoomPrivacyFilter,
+  RoomSearchArea,
+  RoomsType,
+  RoomsTypePrivate,
+} from "../enums";
+import { CategoryType } from "../constants";
 
 import { RoomsTypeValues } from "./common";
-import { isPrivateRoomsEnabled } from "./privateRooms";
 
 /**
  * Room types the "AI rooms" section lists, filters by and creates through
@@ -132,17 +139,11 @@ export const ROOMS_SECTION_FOLDER_TYPES = [
  * Room types the create-room chooser of the Rooms section may offer, in
  * catalog order. The AI room types are created from the "AI rooms" section's
  * own chooser (AI_HUB_SECTION_TYPES).
- *
- * Private rooms are still unreleased, so their card is only offered when the
- * tester opted in via the `privateRooms` localStorage flag (see
- * ./privateRooms.ts). Read this per render instead of caching it at module
- * scope: the flag is flipped from the console at runtime.
+ * Spec: private-rooms/sidebar-section, "Generic chooser does not offer the Private type"
  */
 export const getCreateRoomTypes = () =>
   RoomsTypeValues.filter(
-    (type) =>
-      !AI_HUB_SECTION_TYPES.includes(type) &&
-      (isPrivateRoomsEnabled() || type !== RoomsTypePrivate),
+    (type) => !AI_HUB_SECTION_TYPES.includes(type) && type !== RoomsTypePrivate,
   );
 
 const getRoomCreationAdditionalParams = (roomType: RoomsType) => {
@@ -297,7 +298,66 @@ const getFetchedRoomParams = (
   return fetchedRoomParams;
 };
 
+export type TRoomsRequestScope = {
+  privacyFilter: RoomPrivacyFilter;
+  searchArea?: RoomSearchArea;
+};
+
+/**
+ * What a rooms-list request must carry for the address it was made from. The
+ * Private section lists only private rooms, in the area its address names;
+ * while that section is available, Rooms and Rooms -> Archive list none.
+ * Templates, Forms and AI agents searches are left alone.
+ */
+const getRoomsRequestScope = (
+  categoryType: ValueOf<typeof CategoryType>,
+  searchArea: RoomSearchArea | string | undefined,
+  isPrivateRoomsSectionAvailable: boolean,
+): TRoomsRequestScope | null => {
+  switch (categoryType) {
+    case CategoryType.PrivateRooms:
+    case CategoryType.PrivateRoom:
+      return {
+        privacyFilter: RoomPrivacyFilter.Private,
+        searchArea: RoomSearchArea.Active,
+      };
+    case CategoryType.PrivateArchive:
+      return {
+        privacyFilter: RoomPrivacyFilter.Private,
+        searchArea: RoomSearchArea.Archive,
+      };
+    case CategoryType.Shared:
+    case CategoryType.SharedRoom:
+    case CategoryType.Archive:
+    case CategoryType.ArchivedRoom: {
+      const isRoomsArea =
+        !searchArea ||
+        searchArea === RoomSearchArea.Active ||
+        searchArea === RoomSearchArea.Archive;
+      return isPrivateRoomsSectionAvailable && isRoomsArea
+        ? { privacyFilter: RoomPrivacyFilter.NotPrivate }
+        : null;
+    }
+    default:
+      return null;
+  }
+};
+
+/** A copy of the filter for the request; the filter itself stays as the address has it. */
+const withRoomsRequestScope = (
+  filter: RoomsFilter,
+  scope: TRoomsRequestScope | null,
+): RoomsFilter => {
+  if (!scope) return filter;
+  const scoped = filter.clone();
+  scoped.privacyFilter = scope.privacyFilter;
+  if (scope.searchArea) scoped.searchArea = scope.searchArea;
+  return scoped;
+};
+
 export {
+  getRoomsRequestScope,
+  withRoomsRequestScope,
   getStartRoomParams,
   getRoomCreationAdditionalParams,
   getFetchedRoomParams,

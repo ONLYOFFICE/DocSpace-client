@@ -50,6 +50,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
 import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 import api from "@docspace/shared/api";
 
@@ -421,6 +422,21 @@ const Appearance = (props) => {
     setShowColorSchemeDialog(true);
   };
 
+  // The swatches and the add button are buttons to the keyboard.
+  const onColorSelectionKeyDown = (e) => activateOnButtonKey(e, onColorSelection);
+
+  const onAddThemeKeyDown = (e) => activateOnButtonKey(e, onAddTheme);
+
+  // A theme's name is an identifier ("light-blue"), and a custom theme has
+  // none: each swatch is named by its group, as the page heads them, and its
+  // place in it. A number after the word needs no inflection in any language.
+  const getThemeLabel = (item) => {
+    const isCustom = !item.name;
+    const group = appearanceTheme.filter((theme) => !theme.name === isCustom);
+    const label = isCustom ? t("Common:Custom") : t("Common:Standard");
+    return `${label} ${group.indexOf(item) + 1}`;
+  };
+
   const onClickEdit = () => {
     appearanceTheme.forEach((item) => {
       if (item.id === selectThemeId) {
@@ -704,6 +720,11 @@ const Appearance = (props) => {
                   onClick={onColorSelection}
                   onMouseOver={onColorCheckImgHover}
                   data-testid={`appearance_standard_theme_${item.id}`}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={getThemeLabel(item)}
+                  aria-pressed={selectThemeId === item.id}
+                  onKeyDown={onColorSelectionKeyDown}
                 >
                   {selectThemeId === item.id ? (
                     <ReactSVG className={appearanceStyles.checkImg} src={CheckWhiteSvgUrl} />
@@ -732,6 +753,11 @@ const Appearance = (props) => {
                     onClick={onColorSelection}
                     onMouseOver={onColorCheckImgHover}
                     data-testid={`appearance_custom_theme_${item.id}`}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={getThemeLabel(item)}
+                    aria-pressed={selectThemeId === item.id}
+                    onKeyDown={onColorSelectionKeyDown}
                   >
                     {selectThemeId === item.id ? (
                       <ReactSVG className={appearanceStyles.checkImg} src={CheckWhiteSvgUrl} />
@@ -747,6 +773,11 @@ const Appearance = (props) => {
               data-tip="tooltip"
               className={appearanceStyles.themeAdd}
               data-testid="appearance_add_theme"
+              role="button"
+              tabIndex={0}
+              aria-label={headerAddTheme}
+              aria-disabled={!abilityAddTheme || undefined}
+              onKeyDown={onAddThemeKeyDown}
               style={{ backgroundImage: `url(${PlusThemeSvgUrl})` }}
               onClick={onAddTheme}
             />

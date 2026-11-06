@@ -652,6 +652,12 @@ export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
 
+/** Whether this window is a frame the SDK opened, known before its configuration arrives. */
+export const isSdkFrameWindow = () =>
+  typeof window !== "undefined" &&
+  window.self !== window.parent &&
+  window.name.startsWith(`${FRAME_NAME}__#`);
+
 export const getFrameInitialTheme = (): ThemeKeys | null => {
   if (typeof window === "undefined" || !window.name.includes(FRAME_NAME))
     return null;
@@ -1620,11 +1626,25 @@ export const getErrorInfo = (
  */
 const ROUTE_ID = "-?\\d+";
 
+/** The Private section of the sidebar: private rooms listed apart from Rooms. */
+export const isPrivateRoomsRoute = (pathname: string) =>
+  pathname === "/private" || pathname.startsWith("/private/");
+
 export const getCategoryType = (location: { pathname: string }) => {
   let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
   const { pathname } = location;
 
-  if (pathname.startsWith("/ai-rooms/")) {
+  if (isPrivateRoomsRoute(pathname)) {
+    const privateRoomRegexp = new RegExp(`^/private/(${ROUTE_ID})(/|$)`);
+
+    if (pathname.startsWith("/private/archived")) {
+      categoryType = CategoryType.PrivateArchive;
+    } else if (privateRoomRegexp.test(pathname)) {
+      categoryType = CategoryType.PrivateRoom;
+    } else {
+      categoryType = CategoryType.PrivateRooms;
+    }
+  } else if (pathname.startsWith("/ai-rooms/")) {
     // The "AI rooms" section (Instructions and Knowledge rooms): its own root
     // for the list and the rooms, the shared special folders for the slots.
     // The bare `/ai-rooms` is the Rooms app's SDK frame page, not this section.

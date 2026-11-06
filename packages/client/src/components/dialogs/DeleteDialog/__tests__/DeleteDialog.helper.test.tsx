@@ -73,8 +73,7 @@ describe("getDialogContent — deleting from a private room", () => {
     const keys = noteKeys({ selection: [file], isPrivacyFolder: true });
 
     expect(keys).toContain("Common:DeleteItemForever");
-    expect(keys).not.toContain("DeleteItem");
-    expect(keys).not.toContain("FileDeletedAfter");
+    expect(keys).not.toContain("MoveItemToTrash");
     expect(keys).not.toContain("Common:TrashSection");
   });
 
@@ -91,15 +90,24 @@ describe("getDialogContent — deleting from a private room", () => {
     });
 
     expect(keys).toContain("Common:DeleteItemsForever");
-    expect(keys).not.toContain("ItemsDeletedAfter");
+    expect(keys).not.toContain("MoveFilesAndFoldersToTrash");
     expect(keys).not.toContain("Common:TrashSection");
   });
 
   it("still promises Trash in an ordinary room", () => {
     const keys = noteKeys({ selection: [file] });
 
-    expect(keys).toContain("DeleteItem");
-    expect(keys).toContain("FileDeletedAfter");
+    expect(keys).toContain("MoveItemToTrash");
+  });
+
+  it("picks the Trash wording that matches a mixed selection", () => {
+    expect(noteKeys({ selection: [file, file] })).toEqual(["MoveFilesToTrash"]);
+    expect(noteKeys({ selection: [folder, folder] })).toEqual([
+      "MoveFoldersToTrash",
+    ]);
+    expect(noteKeys({ selection: [file, folder] })).toEqual([
+      "MoveFilesAndFoldersToTrash",
+    ]);
   });
 
   it("leaves the recycle-bin wording untouched", () => {

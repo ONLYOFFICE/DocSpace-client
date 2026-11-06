@@ -393,6 +393,28 @@
 
 .styledDragAndDrop {
   display: contents;
+
+  // A row the keyboard focused as a whole. The row has no box of its own, so
+  // its first cell holds the focus. The row is the caret too, so its caret
+  // frame - the lines across all its cells - takes the accent colour.
+  &:has([data-row-focus]:focus-visible) {
+    :global(.table-container_cell) {
+      border-color: var(--accent-main) !important;
+    }
+
+    :global(.table-container_file-name-cell),
+    :global(.table-container_index-cell),
+    :global(.table-container_row-context-menu-wrapper) {
+      border-image-source: linear-gradient(
+        var(--accent-main),
+        var(--accent-main)
+      );
+    }
+  }
+
+  [data-row-focus]:focus-visible {
+    outline: none;
+  }
 }
 
 // --- StyledBadgesContainer ---

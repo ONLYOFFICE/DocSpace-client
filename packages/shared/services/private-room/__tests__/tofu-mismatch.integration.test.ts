@@ -85,9 +85,10 @@ const server = setupServer(
   ...encryptedFilesHandlers(PORT, {
     roomId: ROOM_ID,
     ownerId: ALICE_ID,
+    currentUserId: ALICE_ID,
     handle: filesHandle,
   }),
-  ...privacyroomAccessHandlers(PORT, { handle: accessHandle }),
+  ...privacyroomAccessHandlers(PORT, { userId: ALICE_ID, handle: accessHandle }),
 );
 
 beforeAll(() => {

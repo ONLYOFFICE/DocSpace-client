@@ -3,7 +3,7 @@
   "content": "Previously known fingerprint",
   "content_en_sha1_hash": "00c3111795135941da5a98ba5fd61001ca4ac204",
   "created_at": "2026-05-24T17:27:30.303Z",
-  "updated_at": "2026-05-24T17:52:41.407Z",
+  "updated_at": "2026-11-05T16:49:40.021Z",
   "comment": {
     "text": "Label in the Key Change dialog's fingerprint table that identifies the value of the previous fingerprint.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx",
-      "line_number": 142,
+      "line_number": 147,
       "context": "</div>\n \n <div className={styles.fingerprintsTable}>\n <div className={styles.fingerprintRow}>\n <Text fontSize=\"12px\" className={styles.fingerprintLabel}>\n {t(\"Common:KeyChangedKnownFingerprint\")}\n </Text>\n <Text className={styles.fingerprintValue}>\n {knownFp || \"...\"}\n </Text>\n <Text className={styles.metaLine}>",
       "module": "/packages/shared"
     }

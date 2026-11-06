@@ -48,18 +48,26 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
   onClose,
   onCancel,
   onConfirm,
+  zIndex = 401,
 }) => {
   const { t, ready } = useTranslation(["Files", "Settings", "Common"]);
 
   useEventListener("keydown", (e: KeyboardEvent) => {
-    if (e.key === "Enter" && visible) {
+    // Spec: key-management, "Closing a key dialog with typed input asks for confirmation"
+    const onButton =
+      e.target instanceof Element &&
+      !!e.target.closest('button, [role="button"]');
+    if (e.key === "Enter" && visible && !e.defaultPrevented && !onButton) {
+      // Acted on: otherwise the same key goes on to press whatever receives
+      // the focus when this dialog closes.
+      e.preventDefault();
       onConfirm();
     }
   });
 
   return (
     <ModalDialog
-      zIndex={401}
+      zIndex={zIndex}
       visible={visible}
       onClose={onClose}
       isLoading={!ready}

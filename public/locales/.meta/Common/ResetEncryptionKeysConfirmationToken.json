@@ -3,7 +3,7 @@
   "content": "RESET",
   "content_en_sha1_hash": "995f2d9ddfbe7ab63a2a7ddd59856b61ae272710",
   "created_at": "2026-05-24T17:27:37.130Z",
-  "updated_at": "2026-05-24T17:33:22.084Z",
+  "updated_at": "2026-11-05T16:49:39.987Z",
   "comment": {
     "text": "A security token that must be manually typed into an input field within the encryption keys reset confirmation dialog to authorize the action.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/ResetKeysConfirmDialog.tsx",
-      "line_number": 65,
-      "context": "onConfirm,\n onCancel,\n isPending,\n }) => {\n const { t } = useTranslation([\"Common\"]);\n const expectedToken = t(\"Common:ResetEncryptionKeysConfirmationToken\");\n const [typed, setTyped] = useState(\"\");\n \n useEffect(() => {\n if (!visible) setTyped(\"\");\n }, [visible]);",
+      "line_number": 68,
+      "context": "onCancel,\n isPending,\n }) => {\n const { t } = useTranslation([\"Common\"]);\n const titleId = useId();\n const expectedToken = t(\"Common:ResetEncryptionKeysConfirmationToken\");\n const [typed, setTyped] = useState(\"\");\n \n useEffect(() => {\n if (!visible) setTyped(\"\");\n }, [visible]);",
       "module": "/packages/client"
     }
   ],

@@ -46,6 +46,7 @@ import withBadges from "../../../../../HOCs/withBadges";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withFileActions from "../../../../../HOCs/withFileActions";
 import ItemIcon from "../../../../../components/ItemIcon";
+import { getFilesItemClassName } from "../../../../../helpers/filesItemClassName";
 
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
@@ -71,6 +72,7 @@ const FilesTableRow = memo((props) => {
     dragging,
     isDragging,
     onDrop,
+    onDropCapture,
     onMouseDown,
     isActive,
     onHideContextMenu,
@@ -228,9 +230,7 @@ const FilesTableRow = memo((props) => {
     disableDrag,
   ]);
 
-  const idWithFileExst = item.fileExst
-    ? `${item.id}_${item.fileExst}`
-    : (item.id ?? "");
+  const idWithFileExst = getFilesItemClassName(item);
 
   const contextOptionProps = useMemo(() => {
     return isIndexEditingMode
@@ -267,6 +267,7 @@ const FilesTableRow = memo((props) => {
         "table-row-selected": !showHotkeyBorder && (checkedProps || isActive),
       })}
       onDrop={onDrop}
+      onDropCapture={onDropCapture}
       onMouseDown={onMouseDown}
       dragging={dragging ? isDragging : null}
       onDragOver={onDragOverEvent}

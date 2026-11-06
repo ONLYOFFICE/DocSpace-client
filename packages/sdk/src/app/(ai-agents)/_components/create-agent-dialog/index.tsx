@@ -246,7 +246,6 @@ const CreateAgentDialog = ({
       <ModalDialog.Footer>
         <Button
           id="shared_create-agent-modal_submit"
-          tabIndex={5}
           label={t("Common:Create")}
           primary
           scale
@@ -258,7 +257,6 @@ const CreateAgentDialog = ({
         />
         <Button
           id="shared_create-agent-modal_cancel"
-          tabIndex={5}
           label={t("Common:CancelButton")}
           scale
           isDisabled={isLoading}

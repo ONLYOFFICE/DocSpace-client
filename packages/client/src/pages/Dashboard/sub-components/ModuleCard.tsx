@@ -98,6 +98,8 @@ export type ModuleItem = {
    * opens Settings -> Apps, and `buttonLabel` reads "Go to Settings".
    */
   onAction: () => void;
+  /** The app has no onboarding tour, so its card offers none. */
+  noTour?: boolean;
 };
 
 type ModuleCardProps = {

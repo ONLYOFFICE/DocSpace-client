@@ -206,9 +206,6 @@ class SettingsStore {
 
   isDesktopClientInit = false;
 
-  // isDesktopEncryption: desktopEncryption;
-  isEncryptionSupport = false;
-
   legacyEncryptionKeys: { [key: string]: string | boolean } = {};
 
   roomsMode = false;
@@ -997,10 +994,9 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
-  get docspaceManagingRoomsHelpUrl() {
-    return this.helpCenterDomain &&
-      this.helpCenterEntries?.docspacemanagingrooms
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.docspacemanagingrooms}`
+  get customFilterHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.customfilter
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.customfilter}`
       : this.helpCenterDomain;
   }
 
@@ -1266,15 +1262,6 @@ class SettingsStore {
       if (axios.isCancel(e)) return;
       throw e;
     }
-  };
-
-  setIsEncryptionSupport = (isEncryptionSupport: boolean) => {
-    this.isEncryptionSupport = isEncryptionSupport;
-  };
-
-  getIsEncryptionSupport = async () => {
-    const isEncryptionSupport = await api.files.getIsEncryptionSupport();
-    this.setIsEncryptionSupport(isEncryptionSupport);
   };
 
   updateLegacyEncryptionKeys = (encryptionKeys: {

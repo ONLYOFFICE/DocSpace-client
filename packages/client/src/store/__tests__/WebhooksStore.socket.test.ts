@@ -46,6 +46,8 @@ vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
       listeners.set(event, cb),
     off: vi.fn(),
     emit: vi.fn(),
+    onReconnect: (cb: () => unknown) => listeners.set("reconnect", cb),
+    offReconnect: vi.fn(),
     socketSubscribers: new Set<string>(),
   },
   SocketEvents: {
@@ -532,6 +534,36 @@ describe("WebhooksStore socket: delivery journal", () => {
     expect(store.eventDetails).toEqual({});
   });
 
+  it("re-reads the opened event details once for a flapping connection", async () => {
+    const store = createStore();
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(5)));
+    await store.fetchEventData(5);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(
+      journal([logItem(5, 500)]),
+    );
+
+    emit("reconnect", undefined);
+    emit("reconnect", undefined);
+    await settle();
+
+    expect(getWebhooksJournal).toHaveBeenCalledTimes(2);
+    expect(getWebhooksJournal).toHaveBeenLastCalledWith({ eventId: 5 });
+    expect(store.eventDetails).toEqual(logItem(5, 500));
+  });
+
+  it("drops a pending reconnect re-read once the details are closed", async () => {
+    const store = createStore();
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(journal(logItems(5)));
+    await store.fetchEventData(5);
+
+    emit("reconnect", undefined);
+    store.clearEventDetails();
+    await settle();
+
+    expect(getWebhooksJournal).toHaveBeenCalledTimes(1);
+    expect(store.eventDetails).toEqual({});
+  });
+
   it("logs a failed re-read of the event details", async () => {
     vi.useRealTimers();
     const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
@@ -545,5 +577,72 @@ describe("WebhooksStore socket: delivery journal", () => {
 
     expect(store.eventDetails).toEqual(logItem(5));
     consoleError.mockRestore();
+  });
+});
+
+describe("WebhooksStore socket: reconnect", () => {
+  it("re-reads the open list once for a flapping connection and the events after it", async () => {
+    const store = createStore();
+    store.setIsWebhooksListActive(true);
+    store.webhooks = [{ id: 1, name: "a", uri: "u", enabled: true }];
+    vi.mocked(getAllWebhooks).mockResolvedValue([config(2)]);
+
+    emit("reconnect", undefined);
+    emit("reconnect", undefined);
+    emit("s:add-webhook", { id: 2 });
+    await settle();
+
+    expect(getAllWebhooks).toHaveBeenCalledTimes(1);
+    expect(store.webhooks.map((w) => w.id)).toEqual([2]);
+    expect(getWebhooksJournal).not.toHaveBeenCalled();
+  });
+
+  it("re-reads the top of the open journal", async () => {
+    const store = createStore();
+    await openHistory(store, logItems(5, 4), 2);
+    vi.mocked(getWebhooksJournal).mockResolvedValueOnce(
+      journal(logItems(7, 6, 5, 4), 4),
+    );
+
+    emit("reconnect", undefined);
+    await settle();
+
+    expect(getWebhooksJournal).toHaveBeenCalledTimes(2);
+    expect(getWebhooksJournal).toHaveBeenLastCalledWith({
+      ...params,
+      startIndex: 0,
+      count: store.FETCH_COUNT,
+    });
+    expect(ids(store)).toEqual([7, 6, 5, 4]);
+    expect(store.totalItems).toBe(4);
+  });
+
+  it("re-reads the list hidden behind a journal once it is shown", async () => {
+    const store = createStore();
+    await openHistory(store, logItems(5));
+    vi.mocked(getWebhooksJournal).mockResolvedValue(journal(logItems(5)));
+    vi.mocked(getAllWebhooks).mockResolvedValue([config(7)]);
+
+    emit("reconnect", undefined);
+    await settle();
+
+    expect(getAllWebhooks).not.toHaveBeenCalled();
+
+    store.clearHistoryParams();
+    store.setActiveConfigId(null);
+    store.setIsWebhooksListActive(true);
+    await vi.advanceTimersByTimeAsync(0);
+
+    expect(getAllWebhooks).toHaveBeenCalledTimes(1);
+  });
+
+  it("makes no requests outside the webhooks section", async () => {
+    createStore();
+
+    emit("reconnect", undefined);
+    await settle();
+
+    expect(getAllWebhooks).not.toHaveBeenCalled();
+    expect(getWebhooksJournal).not.toHaveBeenCalled();
   });
 });

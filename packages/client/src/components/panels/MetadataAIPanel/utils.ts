@@ -48,7 +48,7 @@ import type {
   TEntryMetadata,
 } from "@docspace/shared/api/metadata/types";
 import type { TTranslation } from "@docspace/shared/types";
-import { getServiceLimitChatError } from "@docspace/shared/utils/ai";
+import { getAiChatBlock } from "@docspace/shared/utils/ai";
 import {
   getMetadataInput,
   isMetadataSupported,
@@ -131,14 +131,13 @@ export const getMetadataAIOptions = (
     : METADATA_AI_OPTIONS;
 };
 
-export const getMetadataAIModel = (
+export const getMetadataAIProfile = (
   profiles: TProfile[],
   assignments: Record<string, string>,
 ) => {
   const profileId = assignments.GenerateMeta ?? assignments.Default;
-  const profile = profiles.find(({ id }) => id === profileId);
 
-  return profile ? profile.name || profile.modelId : null;
+  return profiles.find(({ id }) => id === profileId) ?? null;
 };
 
 type TEntryRef = { id?: number | string; isFolder?: boolean };
@@ -391,10 +390,17 @@ export const getSkippedTitles = (skipped: TMetadataAISkipped[]) =>
     .filter(({ reason }) => reason !== "limit")
     .map(({ id, title }) => title ?? id);
 
-export const getMetadataAIServiceLimit = (error: unknown) => {
+export const getMetadataAIBlock = (
+  error: unknown,
+  providerType: string | undefined,
+  standalone: boolean,
+) => {
   const { code, providerMessage } = (error ?? {}) as TMetadataAIError;
 
-  return getServiceLimitChatError({ code, message: providerMessage });
+  return getAiChatBlock(
+    { error: { code, message: providerMessage }, providerType },
+    standalone,
+  );
 };
 
 export const isMetadataAINoModel = (error: unknown) =>

@@ -3,7 +3,7 @@
   "content": "Enter count",
   "content_en_sha1_hash": "5b8f4704ee28ce808517489f31e27c09500a5144",
   "created_at": "2025-05-19T21:30:54.470Z",
-  "updated_at": "2026-05-28T15:46:18.605Z",
+  "updated_at": "2026-11-05T16:49:39.953Z",
   "comment": {
     "text": "This is a placeholder text for an input field where users enter a numerical count.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/ItemsCountBlock.js",
       "line_number": 80,
-      "context": "</LabelGroup>\n <TextInput\n scale\n name=\"items_count\"\n onChange={onChangeCount}\n placeholder={t(\"EnterCount\")}\n value={value}\n tabIndex={6}\n testId=\"items_count_input\"\n />\n </ControlsGroup>",
+      "context": "</LabelGroup>\n <TextInput\n scale\n name=\"items_count\"\n onChange={onChangeCount}\n placeholder={t(\"EnterCount\")}\n value={value}\n testId=\"items_count_input\"\n />\n </ControlsGroup>\n );",
       "module": "/packages/client"
     }
   ],

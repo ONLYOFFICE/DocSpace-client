@@ -450,8 +450,11 @@ test.describe("Unlinked card", () => {
       page.getByText("Add payment method", { exact: true }),
     ).toBeVisible();
 
+    // An unlinked card no longer blocks the upgrade: the button opens the
+    // Stripe top-up, which links a card again, or charges the wallet when the
+    // credits cover it.
     await page.getByTestId("quantity_picker_plus_icon").click();
-    await expect(planButton(page)).toBeDisabled();
+    await expect(planButton(page)).toBeEnabled();
 
     await expectScreenshot(page, [
       "desktop",

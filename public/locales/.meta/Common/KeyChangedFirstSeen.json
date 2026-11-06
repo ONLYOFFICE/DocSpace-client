@@ -3,7 +3,7 @@
   "content": "First seen: {{date}}",
   "content_en_sha1_hash": "551830f3b89c2987ba0d9525ba7c47ee4e97b7b3",
   "created_at": "2026-05-24T17:27:30.289Z",
-  "updated_at": "2026-05-24T17:53:02.127Z",
+  "updated_at": "2026-11-05T16:49:40.021Z",
   "comment": {
     "text": "Metadata line in the Key Change dialog indicating when a fingerprint was first detected, containing a formatted date variable.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx",
-      "line_number": 148,
+      "line_number": 153,
       "context": "</Text>\n <Text className={styles.fingerprintValue}>\n {knownFp || \"...\"}\n </Text>\n <Text className={styles.metaLine}>\n {t(\"Common:KeyChangedFirstSeen\", {\n date: formatDate(knownFirstSeenAt),\n })}\n {\" | \"}\n {t(\"Common:KeyChangedLastSeen\", {\n date: formatDate(knownLastSeenAt),",
       "module": "/packages/shared"
     }

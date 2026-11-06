@@ -34,17 +34,14 @@
  */
 
 import { isArbiterEnabled } from "@docspace/shared/utils/arbiter";
-import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
 
 import type { AppId } from "./apps-catalog";
 
 const TEMPORARILY_DISABLED_APPS: ReadonlySet<string> = new Set<AppId>();
 
 // Apps that are built but not released yet, each hidden behind its own opt-in
-// flag so testers can still reach them. Private rooms ("e2e-rooms") wait on the
-// editors side of the feature, see @docspace/shared/utils/privateRooms.
+// flag so testers can still reach them.
 const UNRELEASED_APPS: ReadonlyMap<AppId, () => boolean> = new Map([
-  ["e2e-rooms" as AppId, isPrivateRoomsEnabled],
   ["ai-arbiter" as AppId, isArbiterEnabled],
 ]);
 

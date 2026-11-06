@@ -53,30 +53,48 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
+import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import type { TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
 
 type LeaveRoomDialogProps = {
   currentUserId?: string;
   onTransferOwnership: (room: TFolderItem) => void;
+  /** The room to leave, for a caller that keeps its own dialog state;
+   * otherwise the selected room, with the dialogs store's visibility. */
+  room?: TFolderItem;
+  onClose?: () => void;
+  /** Called after the open room was left; by default its section opens. */
+  onLeftOpenRoom?: () => void;
 };
 
 const LeaveRoomDialog = observer(
-  ({ currentUserId, onTransferOwnership }: LeaveRoomDialogProps) => {
+  ({
+    currentUserId,
+    onTransferOwnership,
+    room: roomProp,
+    onClose: onCloseProp,
+    onLeftOpenRoom,
+  }: LeaveRoomDialogProps) => {
     const { t } = useTranslation(["Common"]);
     const dialogsStore = useDialogsStore();
     const filesListStore = useFilesListStore();
     const filesSelectionStore = useFilesSelectionStore();
+    const { openFolder } = useFolderActions({ t });
 
-    const visible = dialogsStore.isDialogOpen(SDKDialogs.LeaveRoom);
+    const visible = roomProp
+      ? true
+      : dialogsStore.isDialogOpen(SDKDialogs.LeaveRoom);
 
     const room =
+      roomProp ??
       (filesSelectionStore.selection[0] as TFolderItem | undefined) ??
       (filesSelectionStore.bufferSelection as TFolderItem | undefined) ??
       null;
 
     const [isLoading, setIsLoading] = React.useState(false);
 
-    const onClose = () => dialogsStore.closeDialog(SDKDialogs.LeaveRoom);
+    const onClose =
+      onCloseProp ?? (() => dialogsStore.closeDialog(SDKDialogs.LeaveRoom));
 
     const isOwner =
       !!room && !!currentUserId && room.createdBy?.id === currentUserId;
@@ -99,6 +117,9 @@ const LeaveRoomDialog = observer(
       if (!currentUserId) return;
 
       const roomId = room.id as number;
+      const isPrivate = (room as { private?: boolean }).private === true;
+      const leftOpenRoom =
+        String(filesListStore.currentFolder?.id) === String(roomId);
       setIsLoading(true);
       try {
         await api.rooms.updateRoomMemberRole(roomId, {
@@ -110,6 +131,11 @@ const LeaveRoomDialog = observer(
         filesSelectionStore.setBufferSelection(null);
         toastr.success(t("Common:YouLeftTheRoom"));
         onClose();
+        const sectionRootId = filesListStore.pathParts?.[0]?.id;
+        if (isPrivate && leftOpenRoom) {
+          if (onLeftOpenRoom) onLeftOpenRoom();
+          else if (sectionRootId !== undefined) openFolder(sectionRootId, "");
+        }
       } catch (e) {
         toastr.error(e as Error);
       } finally {

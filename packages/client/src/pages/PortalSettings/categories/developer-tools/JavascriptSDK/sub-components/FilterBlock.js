@@ -371,7 +371,6 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 onFocus={openInviteInputPanel}
                 isAutoFocussed
                 onKeyDown={onKeyDown}
-                tabIndex={5}
                 testId="files_author_text_input"
               />
             </div>
@@ -456,7 +455,6 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   onFocus={openInviteInputPanel}
                   isAutoFocussed
                   onKeyDown={onKeyDown}
-                  tabIndex={5}
                   testId="author_text_input"
                 />
               </div>

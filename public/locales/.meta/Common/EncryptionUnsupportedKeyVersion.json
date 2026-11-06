@@ -3,7 +3,7 @@
   "content": "This encryption key uses an unsupported version. Please update the application to continue.",
   "content_en_sha1_hash": "a901455c7d0aa80ab1f002a26b108764ca0af51b",
   "created_at": "2026-05-24T17:27:26.741Z",
-  "updated_at": "2026-05-24T17:58:11.608Z",
+  "updated_at": "2026-11-05T16:49:40.035Z",
   "comment": {
     "text": "Error message appearing in a toast or dialog when an encryption key version is incompatible with the current application version.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/services/encryption/error-i18n.ts",
-      "line_number": 72,
+      "line_number": 80,
       "context": "}\n if (\n error instanceof UnsupportedVersionError ||\n error instanceof UnsupportedSuiteError\n ) {\n return t(\"Common:EncryptionUnsupportedKeyVersion\");\n }\n if (error instanceof NoAccessError) {\n return t(\"Common:NoAccessToEncryptedFile\");\n }\n if (error instanceof KeyNotFoundError) {",
       "module": "/packages/shared"
     }

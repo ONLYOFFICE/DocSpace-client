@@ -131,6 +131,8 @@ type DashboardProps = ChatNoAccessStoreProps & {
   canManageApps: boolean;
   /** Fetches the apps list once, which `isAppInstalled` reads. */
   ensureAppsLoaded: () => void;
+  /** The AI rooms section is in the sidebar: AI is on and its root is served. */
+  isAiHubAvailable: boolean;
   setShownInfoPanelWidth: (width: number) => void;
 };
 
@@ -155,6 +157,7 @@ const Dashboard = (props: DashboardProps) => {
     isAppInstalled,
     canManageApps,
     ensureAppsLoaded,
+    isAiHubAvailable,
     setShownInfoPanelWidth,
   } = props;
   const { t } = useTranslation(["Common"]);
@@ -201,6 +204,7 @@ const Dashboard = (props: DashboardProps) => {
     // Settings -> Apps, where an app is switched on, is open to portal admins
     // and the owner only.
     canEnableApps: isAdminOrOwner && canManageApps,
+    isAiHubAvailable,
   });
 
   // The dashboard renders its own content (no SDK iframe). Tell the
@@ -387,7 +391,7 @@ const Dashboard = (props: DashboardProps) => {
                       onTakeTour={
                         // An app that is switched off has no section for its
                         // tour to run in; ModuleCard disables the icon then.
-                        isMobile
+                        isMobile || mod.noTour
                           ? undefined
                           : () => {
                               requestAppTour(mod.id as AppId);
@@ -469,6 +473,7 @@ const DashboardConnected = inject((stores: TStore) => {
     dashboardTourStore,
     appsStore,
     infoPanelStore,
+    treeFoldersStore,
   } = stores;
 
   // The app cards an onboarding tour can be started from. An app that isn't
@@ -513,6 +518,9 @@ const DashboardConnected = inject((stores: TStore) => {
     isAppInstalled: appsStore.isInstalled,
     canManageApps: appsStore.canManageApps,
     ensureAppsLoaded: appsStore.ensureLoaded,
+    // The same condition the sidebar shows the "AI rooms" section on.
+    isAiHubAvailable:
+      !!treeFoldersStore.aiHubFolder && settingsStore.aiServicesEnabled,
     setShownInfoPanelWidth: infoPanelStore.setShownWidth,
   };
 })(observer(Dashboard));

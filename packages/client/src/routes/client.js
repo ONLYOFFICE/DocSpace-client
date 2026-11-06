@@ -49,6 +49,8 @@ import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 import ProtectedAppRoute from "../components/ProtectedAppRoute";
+import PrivateRoomsSectionRoute from "../components/PrivateRoomsSectionRoute";
+import E2eRoomsRedirect from "../components/PrivateRoomsSectionRoute/E2eRoomsRedirect";
 import AiRoomsRoute from "../components/AiRoomsRoute";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
@@ -261,7 +263,7 @@ const ClientRoutes = [
             path: "rooms/shared",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId="ai-rooms">
+                <ProtectedAppRoute appId="ai-rooms" admitPrivateRooms>
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -271,7 +273,7 @@ const ClientRoutes = [
             path: "rooms/shared/filter",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId="ai-rooms">
+                <ProtectedAppRoute appId="ai-rooms" admitPrivateRooms>
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -281,7 +283,10 @@ const ClientRoutes = [
             path: "rooms/shared/:room",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                <ProtectedAppRoute
+                  appId={["ai-rooms", "ai-forms"]}
+                  admitPrivateRooms
+                >
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -291,7 +296,10 @@ const ClientRoutes = [
             path: "rooms/shared/:room/filter",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                <ProtectedAppRoute
+                  appId={["ai-rooms", "ai-forms"]}
+                  admitPrivateRooms
+                >
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -397,6 +405,66 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
+          {
+            path: "private",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/filter",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/archived",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/archived/filter",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/:room",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "private/:room/filter",
+            element: (
+              <PrivateRoute>
+                <PrivateRoomsSectionRoute>
+                  <ViewComponent />
+                </PrivateRoomsSectionRoute>
+              </PrivateRoute>
+            ),
+          },
           // The AI sections, gated by the portal's AI switch rather than by an
           // app. "AI rooms" (Instructions and Knowledge rooms, searchArea=AiHub)
           // takes the nested `/ai-rooms/*` paths the server links to, with its
@@ -496,7 +564,7 @@ const ClientRoutes = [
             path: "rooms/archived",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId="ai-rooms">
+                <ProtectedAppRoute appId="ai-rooms" admitPrivateRooms>
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -506,7 +574,7 @@ const ClientRoutes = [
             path: "rooms/archived/filter",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId="ai-rooms">
+                <ProtectedAppRoute appId="ai-rooms" admitPrivateRooms>
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -516,7 +584,10 @@ const ClientRoutes = [
             path: "rooms/archived/:room",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                <ProtectedAppRoute
+                  appId={["ai-rooms", "ai-forms"]}
+                  admitPrivateRooms
+                >
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -526,7 +597,10 @@ const ClientRoutes = [
             path: "rooms/archived/:room/filter",
             element: (
               <PrivateRoute>
-                <ProtectedAppRoute appId={["ai-rooms", "ai-forms"]}>
+                <ProtectedAppRoute
+                  appId={["ai-rooms", "ai-forms"]}
+                  admitPrivateRooms
+                >
                   <ViewComponent />
                 </ProtectedAppRoute>
               </PrivateRoute>
@@ -692,23 +766,13 @@ const ClientRoutes = [
       },
       {
         path: "/e2e-rooms",
-        async lazy() {
-          const { E2eRooms } = await componentLoader(
-            () => import("SRC_DIR/pages/E2eRooms"),
-          );
-
-          const Component = () => (
-            <PrivateRoute>
-              <ProtectedAppRoute appId="e2e-rooms">
-                <ErrorBoundary>
-                  <E2eRooms />
-                </ErrorBoundary>
-              </ProtectedAppRoute>
-            </PrivateRoute>
-          );
-
-          return { Component };
-        },
+        element: (
+          <PrivateRoute>
+            <ProtectedAppRoute appId="e2e-rooms">
+              <E2eRoomsRedirect />
+            </ProtectedAppRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard",

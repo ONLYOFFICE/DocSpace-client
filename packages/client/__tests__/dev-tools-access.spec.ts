@@ -36,6 +36,7 @@
 import type { Page } from "@playwright/test";
 
 import {
+  rootHandler,
   settingsHandler,
   TypeSettings,
   selfActivationStatusHandler,
@@ -115,6 +116,8 @@ const mockPortal = (userType: UserType) => [
   settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
   selfByTypeHandler(TEST_PORT, userType),
   selfActivationStatusHandler(TEST_PORT, null, false, true),
+  // The server serves no "AI rooms" root to a guest.
+  rootHandler(TEST_PORT, { withAiHub: userType !== "visitor" }),
 ];
 
 test.describe("Developer Tools without the rights", () => {

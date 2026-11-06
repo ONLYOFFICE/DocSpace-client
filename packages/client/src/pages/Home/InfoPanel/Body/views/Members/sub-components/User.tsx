@@ -35,9 +35,9 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import uniqueid from "lodash/uniqueId";
 
 import api from "@docspace/shared/api";
-import { getGroupById } from "@docspace/shared/api/groups";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   FolderType,
@@ -51,7 +51,10 @@ import type { TGroup } from "@docspace/shared/api/groups/types";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 
-import { revokeMemberFromEncryptedRoom } from "@docspace/shared/services/private-room/room-encryption";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import { pendingAccessStore } from "@docspace/shared/services/private-room/pending-access";
+import { retryPendingAccess } from "@docspace/shared/services/private-room/room-member-flows";
 
 import MembersHelper from "../Members.utils";
 import type { UserProps } from "../Members.types";
@@ -70,6 +73,8 @@ const User = ({
   setEditGroupMembersDialogVisible,
   setRemoveUserConfirmation,
   getActiveUploadCountForRoom,
+  setSecondaryProgressBarData,
+  selfId,
 }: UserProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -150,37 +155,42 @@ const User = ({
       });
   };
 
-  const revokeEncryptedAccess = async () => {
-    try {
-      const isGroup = "isGroup" in user && user.isGroup;
-      let revokedIds: string[] = [String(user.id)];
-      if (isGroup) {
-        const group = await getGroupById(String(user.id), true);
-        revokedIds = (group.members ?? []).map((m) => String(m.id));
-        if (revokedIds.length === 0) return;
-      }
+  const isGroup = "isGroup" in user && !!user.isGroup;
+  const isAccessPending =
+    !!room.private &&
+    !isGroup &&
+    !!pendingAccessStore.get(room.id, String(user.id));
 
-      const results = await revokeMemberFromEncryptedRoom(
-        Number(room.id),
-        revokedIds,
-        {},
-      );
-      const failures = results.filter((r) => !r.success);
-      if (failures.length > 0) {
-        toastr.warning(
-          t("Common:EncryptedRevokePartialFailure", {
-            count: failures.length,
-          }),
-        );
-        return;
-      }
-      if (results.length > 0) {
-        toastr.success(t("Common:EncryptedRevokeCompleted"));
-      }
-    } catch (err) {
-      console.error("[ENCRYPTION] revoke encrypted access failed:", err);
-      toastr.error(t("Common:EncryptedRevokeFailed"));
+  const onRetryAccess = async () => {
+    const identity = await requireUnlock(String(selfId));
+    if (!identity) {
+      toastr.error(t("Common:EncryptionUnlockRequired"));
+      return;
     }
+
+    const operationId = uniqueid("operation_");
+    setSecondaryProgressBarData?.({
+      operation: OPERATIONS_NAME.roomReencryption,
+      percent: 0,
+      operationId,
+    });
+    const notice = await retryPendingAccess({
+      t,
+      roomId: room.id,
+      member: {
+        id: String(user.id),
+        displayName: "displayName" in user ? user.displayName : undefined,
+      },
+      currentUserId: String(selfId),
+      identity,
+      onProgress: (progress) =>
+        setSecondaryProgressBarData?.({
+          operation: OPERATIONS_NAME.roomReencryption,
+          ...progress,
+          operationId,
+        }),
+    });
+    if (notice) toastr[notice.level](notice.text);
   };
 
   const onOptionClick = async (option: TOption) => {
@@ -201,10 +211,7 @@ const User = ({
 
       return setRemoveUserConfirmation!(
         true,
-        async () => {
-          await updateRole(option, false);
-          await revokeEncryptedAccess();
-        },
+        () => updateRole(option, false),
         true,
       );
     }
@@ -229,12 +236,14 @@ const User = ({
       onClickGroup={onOpenGroup}
       onRepeatInvitation={onRepeatInvitation}
       showInviteIcon={showInviteIcon}
+      isAccessPending={isAccessPending}
+      onRetryAccess={security?.EditAccess ? onRetryAccess : undefined}
     />
   );
 };
 
 export default inject(
-  ({ dialogsStore, uploadDataStore }: TStore) => {
+  ({ dialogsStore, uploadDataStore, userStore }: TStore) => {
     const {
       setEditMembersGroup,
       setEditGroupMembersDialogVisible,
@@ -242,12 +251,16 @@ export default inject(
     } = dialogsStore;
 
     const { getActiveUploadCountForRoom } = uploadDataStore;
+    const { setSecondaryProgressBarData } =
+      uploadDataStore.secondaryProgressDataStore;
 
     return {
       setEditMembersGroup,
       setEditGroupMembersDialogVisible,
       setRemoveUserConfirmation,
       getActiveUploadCountForRoom,
+      setSecondaryProgressBarData,
+      selfId: userStore.user?.id,
     };
   },
 )(observer(User));

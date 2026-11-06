@@ -41,6 +41,7 @@ import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";
 import { isOAuthFrame } from "../utils/oauthToken";
 import { isPortalNotFoundRedirectClaimed } from "../utils/portalNotFound";
+import { keepPageForLogin } from "../utils/referenceUrl";
 import {
   hasDevToolsAccess,
   canOpenDocsConnect,
@@ -128,7 +129,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
       sessionStorage.removeItem("referenceUrl");
       sessionStorage.removeItem("loggedOutUserId");
-      // Read by the 401 handler, which has no user of its own to name.
+      // Read by keepPageForLogin, whose callers have no user of their own
+      // to name.
       sessionStorage.setItem("sessionUserId", user.id);
     }
 
@@ -143,6 +145,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     const isPaymentsUrl =
       location.pathname === "/portal-settings/payments/portal-payments" ||
       location.pathname === "/billing/tariff-plan";
+    const isPaymentCompleteUrl =
+      location.pathname === "/billing/payment-complete";
     const isBackupUrl =
       location.pathname === "/portal-settings/backup/data-backup";
 
@@ -218,8 +222,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
       const isHomeUrl = location.pathname === "/";
 
+      // A session that ended without a 401 (its cookie is gone, the page is
+      // reloaded) lands here rather than in the 401 handler.
       if (wizardCompleted && !isHomeUrl && !isLogout) {
-        sessionStorage.setItem("referenceUrl", window.location.href);
+        keepPageForLogin();
       }
 
       window.location.replace(
@@ -297,6 +303,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       isLoaded &&
       (user?.isOwner || user?.isAdmin) &&
       !isPaymentsUrl &&
+      !isPaymentCompleteUrl &&
       !isBackupUrl &&
       !isPortalDeletionUrl &&
       !location.pathname.includes("wallet")

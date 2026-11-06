@@ -244,8 +244,11 @@ test.describe("Wallet low balance banner", () => {
     await page.goto(`${baseUrl}${PAGE_URL}`);
 
     // Only the low balance banner matters: the shared mocks may render other
-    // quota bars of their own.
-    const header = page.getByText("Your credits are running low: $0.60");
+    // quota bars of their own. By the header test id: the snackbar also
+    // repeats its text in a visually hidden live region for screen readers.
+    const header = page
+      .getByTestId("snackbar-header")
+      .filter({ hasText: "Your credits are running low: $0.60" });
 
     await expect(page.getByTestId("table-body")).toBeVisible();
     await expect(header).toBeHidden();

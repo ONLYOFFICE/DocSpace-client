@@ -49,14 +49,16 @@ import {
   getDefaultFileName,
   getDefaultFileTestIdPrefix,
 } from "SRC_DIR/helpers/filesUtils";
+import { runEncryptedFileCreation } from "SRC_DIR/helpers/encryptedFileCreation";
 import {
   getDisplayFileNames,
   getUniqueFileTitle,
-  runEncryptedFileCreation,
-} from "SRC_DIR/helpers/encryptedFileCreation";
+} from "@docspace/shared/services/private-room/encrypted-create-rules";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { frameCallEvent } from "@docspace/shared/utils/common";
+import { CryptoError } from "@docspace/shared/services/encryption/errors";
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import Dialog from "./sub-components/Dialog";
 
 const CreateEvent = ({
@@ -222,7 +224,11 @@ const CreateEvent = ({
         } catch (error) {
           editorWindow?.close();
           isPaymentRequiredError(error);
-          toastr.error(error);
+          toastr.error(
+            error instanceof CryptoError
+              ? getEncryptionErrorMessage(t, error)
+              : error,
+          );
         } finally {
           onCloseAction();
         }
@@ -307,10 +313,7 @@ const CreateEvent = ({
       parentId,
       extension,
       templateId,
-      title,
       fromTemplate,
-      withoutDialog,
-      keepNewFileName,
       gallerySelected?.id,
       openOnNewPage,
       openEditor,
@@ -325,10 +328,13 @@ const CreateEvent = ({
       encryptionRoomId,
       fetchFiles,
       openDocEditor,
-      actionEdit,
     ],
   );
 
+  const onSaveRef = React.useRef(onSave);
+  onSaveRef.current = onSave;
+
+  // Spec: private-rooms/file-operations, "One create action makes one file"
   React.useEffect(() => {
     const defaultName = getDefaultFileName(extension);
     const suggestedName =
@@ -355,13 +361,13 @@ const CreateEvent = ({
     if (!keepNewFileName && !withoutDialog) {
       setEventDialogVisible(true);
     } else {
-      onSave(null, title || suggestedName);
+      onSaveRef.current(null, title || suggestedName);
     }
 
     return () => {
       setEventDialogVisible(false);
     };
-  }, [extension, title, fromTemplate, withoutDialog, onSave]);
+  }, [extension, title, fromTemplate, withoutDialog]);
 
   return (
     <Dialog

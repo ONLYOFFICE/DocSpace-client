@@ -79,7 +79,6 @@ export const HeightSetter = (props) => {
           onChange={onChangeHeight}
           placeholder={t("EnterHeight")}
           value={height}
-          tabIndex={3}
           testId="height_dimension_input"
         />
         <ComboBox

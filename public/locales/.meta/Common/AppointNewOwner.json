@@ -3,7 +3,7 @@
   "content": "You have appointed a new owner.",
   "content_en_sha1_hash": "bfdff63ec08042212380b8b5ed1aeed73a496e37",
   "created_at": "2025-05-19T21:30:55.262Z",
-  "updated_at": "2026-10-31T12:58:29.444Z",
+  "updated_at": "2026-11-05T16:49:40.001Z",
   "comment": {
     "text": "Toast message. It appears after successfully appointing a new owner for a file or room.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
-      "line_number": 682,
-      "context": "const isMe = userId === self.userStore.user!.id;\n if (isMe) setInRoom(true);\n }\n \n if (isLeaveChecked) await self.onLeaveRoom(t);\n else toastr.success(t(\"Common:AppointNewOwner\"));\n })\n .catch((e) => toastr.error(e as string))\n .finally(() => {\n setSelected(\"none\");\n });",
+      "line_number": 699,
+      "context": "const isMe = userId === self.userStore.user!.id;\n if (isMe) setInRoom(true);\n }\n \n if (isLeaveChecked) await self.onLeaveRoom(t);\n else toastr.success(t(\"Common:AppointNewOwner\"));\n } catch (e) {\n // The server refuses the transfer while the candidate lacks an entry on\n // an encrypted file, for example one uploaded since they were wrapped\n // above; it lists those files on request.\n const listed =",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/owner-change/PrivateChangeOwnerDialog.tsx",
-      "line_number": 213,
-      "context": "// revoke current user's membership; otherwise show AppointNewOwner\n // toast. DEK wraps are NOT revoked (intentional reference parity).\n if (isLeaveChecked && currentUserId) {\n await leaveRoom({ roomId, userId: currentUserId });\n } else {\n toastr.success(t(\"Common:AppointNewOwner\"));\n }\n \n onChanged?.(roomId);\n onClose();\n } catch (error) {",
+      "line_number": 149,
+      "context": "leaving && String(filesListStore.currentFolder?.id) === String(roomId);\n if (leaving) {\n await leaveRoom({ roomId, userId: currentUserId as string });\n toastr.success(t(\"Common:YouLeftTheRoom\"));\n } else {\n toastr.success(t(\"Common:AppointNewOwner\"));\n }\n \n onChanged?.(roomId);\n onClose();\n if (leftOpenRoom) router.push(privateRoute(\"/private\"));",
       "module": "/packages/sdk"
     },
     {

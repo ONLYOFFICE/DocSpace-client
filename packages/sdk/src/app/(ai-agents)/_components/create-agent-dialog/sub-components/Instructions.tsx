@@ -122,7 +122,6 @@ const InstructionsSettings = ({
             defaultValue:
               "Example: You are an AI assistant that helps with writing and editing.",
           })}
-          tabIndex={2}
           dataTestId="create_agent_instructions_textarea"
         />
       </div>

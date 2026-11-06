@@ -39,6 +39,7 @@
 "use client";
 
 import React from "react";
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly, isMobile } from "react-device-detect";
 
@@ -47,6 +48,7 @@ import { RoomsType } from "@docspace/shared/enums";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { Avatar, AvatarRole, AvatarSize } from "@onlyoffice/apps-ui-kit/components/avatar";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
@@ -56,12 +58,14 @@ import {
 import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
 import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { pendingAccessStore } from "@docspace/shared/services/private-room/pending-access";
 
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import EmailPlusSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 
 import MembersHelper from "../../../(docspace)/_components/info-panel/views/Members/Members.utils";
 import { usePrivateRemoveMemberFlow } from "../../_hooks/usePrivateRemoveMemberFlow";
+import { usePrivateAccessRetryFlow } from "../../_hooks/usePrivateAccessRetryFlow";
 import { usePrivateDialogsStore } from "../../_store/PrivateDialogsStore";
 import styles from "./PrivateMembersView.module.scss";
 
@@ -113,10 +117,14 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
   onRemoved,
   onRoleChanged,
 }) => {
-  const { t } = useTranslation(["Common", "People"]);
+  const { t } = useTranslation(["Common"]);
   const { remove, guardReason, isLoading } = usePrivateRemoveMemberFlow(roomId);
   const dialogs = usePrivateDialogsStore();
   const [isRoleChanging, setIsRoleChanging] = React.useState(false);
+  const retryAccess = usePrivateAccessRetryFlow(roomId);
+  const [isRetrying, setIsRetrying] = React.useState(false);
+  const isAccessPending =
+    !isGroup && !!pendingAccessStore.get(roomId, userId);
 
   // Build role options for CustomRoom (private rooms are always CustomRoom).
   // Mirrors: packages/client/.../Members/sub-components/User.tsx:107-128
@@ -185,14 +193,27 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
     [access, roomId, userId, t, onRoleChanged],
   );
 
+  const onRetryAccess = React.useCallback(() => {
+    if (isRetrying) return;
+    setIsRetrying(true);
+    retryAccess({ id: userId, displayName }).finally(() => {
+      setIsRetrying(false);
+    });
+  }, [isRetrying, retryAccess, userId, displayName]);
+
   const handleRemoveClick = React.useCallback(() => {
-    if (guardReason || isLoading) return;
+    // Spec: private-rooms/sdk-surface, "Member removal is blocked during active uploads"
+    if (guardReason) {
+      toastr.warning(guardReason);
+      return;
+    }
+    if (isLoading) return;
     dialogs.openRemoveUser({
       roomId,
       userId,
       displayName,
       onConfirm: async () => {
-        await remove({ roomId, userId, isGroup });
+        await remove({ roomId, userId });
         onRemoved?.();
       },
     });
@@ -202,7 +223,6 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
     roomId,
     userId,
     displayName,
-    isGroup,
     remove,
     onRemoved,
     dialogs,
@@ -225,7 +245,27 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
             </span>
           ) : null}
         </div>
-        {typeLabel ? (
+        {isAccessPending ? (
+          <div
+            className={styles.pendingAccess}
+            data-testid="private_member_access_pending"
+          >
+            <Text className={styles.userSubtitle} truncate>
+              {`${t("Common:EncryptedAccessPending")}${canInvite ? " |" : ""}`}
+            </Text>
+            {canInvite ? (
+              <Link
+                type={LinkType.action}
+                fontSize="12px"
+                isSemitransparent={isRetrying}
+                onClick={onRetryAccess}
+                dataTestId="private_member_retry_access"
+              >
+                {t("Common:TryAgain")}
+              </Link>
+            ) : null}
+          </div>
+        ) : typeLabel ? (
           <Text className={styles.userSubtitle} truncate>
             {`${typeLabel} | ${email ?? ""}`}
           </Text>
@@ -281,13 +321,14 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
           iconName={RemoveSvgUrl}
           size={16}
           isClickable={!isLoading}
-          isDisabled={!!guardReason || isLoading}
+          isDisabled={isLoading}
           onClick={handleRemoveClick}
-          title={guardReason ?? t("People:RemoveUser")}
+          title={t("Common:RoomMembersRemoveUser")}
+          dataTestId="private_member_remove_button"
         />
       ) : null}
     </div>
   );
 };
 
-export default PrivateMemberUser;
+export default observer(PrivateMemberUser);

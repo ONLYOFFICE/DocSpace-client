@@ -3,7 +3,7 @@
   "content": "Encrypted — set up your encryption keys in Profile to access this file",
   "content_en_sha1_hash": "e21bf01db9f3408cf5b8ba3e58d0d2bcf06d814d",
   "created_at": "2026-05-24T17:27:33.450Z",
-  "updated_at": "2026-06-09T11:32:15.254Z",
+  "updated_at": "2026-11-05T16:49:39.831Z",
   "comment": {
     "text": "Tooltip for a file icon badge and an error message shown when a user needs to configure encryption keys in their Profile to access a file.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/services/encryption/error-i18n.ts",
-      "line_number": 75,
+      "line_number": 83,
       "context": "error instanceof UnsupportedSuiteError\n ) {\n return t(\"Common:EncryptionUnsupportedKeyVersion\");\n }\n if (error instanceof NoAccessError) {\n return t(\"Common:NoAccessToEncryptedFile\");\n }\n if (error instanceof KeyNotFoundError) {\n return t(\"Common:NoEncryptionKey\");\n }\n if (",
       "module": "/packages/shared"
     }

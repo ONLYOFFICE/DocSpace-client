@@ -43,24 +43,16 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { CryptoError } from "@docspace/shared/services/encryption/errors";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import {
-  getFolder,
-  deleteFile,
-  startUploadSession,
-  uploadChunkSequential,
-  finalizeUploadSession,
-} from "@docspace/shared/api/files";
-import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
-import FilesFilter from "@docspace/shared/api/files/filter";
-import type { TGetFolder } from "@docspace/shared/api/files/types";
-
-import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+  resolveFolderTarget,
+  type TUploadTarget,
+} from "@docspace/shared/services/private-room/upload-target";
+import { sameRoomCopyNames } from "@docspace/shared/services/private-room/private-transfer";
 
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
 import {
   registerCryptoOperation,
   releaseCryptoOperation,
 } from "../_utils/abort-registry";
-import { resolveEncryptedCopyDest } from "../_utils/encrypted-copy-dest";
 import { useEncryptedUpload } from "./useEncryptedUpload";
 
 type EncryptedSourceItem = {
@@ -82,63 +74,27 @@ type CopyMoveArgs = {
   destFolderId: number | string;
   // The room the files currently live in — needed to unwrap their DEKs.
   sourceRoomId: number | string;
+  /** The standard upload, with its conflict check, for decrypted copies. */
+  uploadDecrypted: (files: File[], folderId: number | string) => Promise<void>;
 };
 
 type UseEncryptedCopyMoveReturn = {
   duplicateFile: (args: DuplicateArgs) => Promise<void>;
   copyFiles: (args: CopyMoveArgs) => Promise<void>;
-  moveFiles: (args: CopyMoveArgs) => Promise<void>;
 };
 
 const loadCopyModule = () =>
   import("@docspace/shared/services/private-room/encrypted-copy");
 
-const PLAINTEXT_CHUNK_SIZE = 10 * 1024 * 1024;
-
-const uploadPlaintextFile = async (
-  file: File,
-  folderId: number | string,
-  signal: AbortSignal,
-): Promise<void> => {
-  const session = await startUploadSession(
-    folderId,
-    file.name,
-    file.size,
-    "",
-    false,
-    undefined,
-    true,
-  );
-  const sessionId = session?.id;
-  if (!sessionId) {
-    throw new Error("startUploadSession returned no session id");
-  }
-
-  const total = file.size;
-  let anyChunkSent = false;
-  for (let offset = 0; offset < total; offset += PLAINTEXT_CHUNK_SIZE) {
-    if (signal.aborted) return;
-    const end = Math.min(offset + PLAINTEXT_CHUNK_SIZE, total);
-    const formData = new FormData();
-    formData.append("file", file.slice(offset, end), file.name);
-    await uploadChunkSequential(folderId, sessionId, formData);
-    anyChunkSent = true;
-  }
-
-  if (signal.aborted) return;
-
-  if (anyChunkSent) {
-    await finalizeUploadSession(folderId, sessionId).catch(() => {});
-  } else {
-    await finalizeUploadSession(folderId, sessionId);
-  }
-};
+const renamed = (file: File, name: string | undefined) =>
+  new File([file], name ?? file.name, {
+    type: file.type || "application/octet-stream",
+  });
 
 export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
   const { t } = useTranslation(["Common"]);
   const { requireIdentity } = useEncryption();
   const identityStore = useEncryptionIdentityStore();
-  const filesListStore = useFilesListStore();
   const { uploadFiles } = useEncryptedUpload();
 
   const duplicateFile = React.useCallback(
@@ -156,8 +112,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
       const controller = registerCryptoOperation();
       try {
-        const { decryptEncryptedItemToFile, addCopySuffix } =
-          await loadCopyModule();
+        const { decryptEncryptedItemToFile } = await loadCopyModule();
 
         const decrypted = await decryptEncryptedItemToFile(
           {
@@ -174,11 +129,21 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
         if (controller.signal.aborted) return;
 
-        const copyFile = new File([decrypted], addCopySuffix(decrypted.name), {
-          type: decrypted.type || "application/octet-stream",
-        });
+        const copyNames = await sameRoomCopyNames(
+          [{ item, file: decrypted }],
+          folderId,
+          roomId,
+          userId,
+          identity,
+        );
 
-        await uploadFiles({ files: [copyFile], folderId, roomId });
+        if (controller.signal.aborted) return;
+
+        await uploadFiles({
+          files: [renamed(decrypted, copyNames.get(item))],
+          folderId,
+          roomId,
+        });
       } catch (error) {
         if (controller.signal.aborted) return;
         // Typed crypto errors carry precise diagnostic messages; untyped errors
@@ -195,11 +160,13 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
     [requireIdentity, identityStore, uploadFiles, t],
   );
 
-  const runCopyMove = React.useCallback(
-    async (
-      { files, destFolderId, sourceRoomId }: CopyMoveArgs,
-      isMove: boolean,
-    ) => {
+  const copyFiles = React.useCallback(
+    async ({
+      files,
+      destFolderId,
+      sourceRoomId,
+      uploadDecrypted,
+    }: CopyMoveArgs) => {
       if (files.length === 0) return;
 
       const userId = identityStore.userKeys?.userId;
@@ -207,6 +174,20 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         toastr.error(t("Common:EncryptionKeysNotConfigured"));
         return;
       }
+
+      // Spec: private-rooms/sdk-surface, "Copy and move destination resolved fail-closed"
+      let dest: TUploadTarget;
+      try {
+        dest = await resolveFolderTarget({ id: destFolderId });
+      } catch {
+        toastr.error(
+          t("Common:EncryptedCopyFailed", {
+            names: files.map((f) => f.title).join(", "),
+          }),
+        );
+        return;
+      }
+
       const identity = await requireIdentity();
       if (!identity) {
         toastr.error(t("Common:EncryptionLockedAddMembers"));
@@ -215,20 +196,10 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
       const controller = registerCryptoOperation();
       const failed: { title: string; error: unknown }[] = [];
+      const decryptedOut: File[] = [];
+      const decryptedIn: { item: EncryptedSourceItem; file: File }[] = [];
       try {
-        const destFolderData = (await getFolder(
-          destFolderId as number,
-          FilesFilter.getDefault(),
-        )) as TGetFolder;
-        const dest = resolveEncryptedCopyDest(destFolderData);
-
-        if (dest.mode === "blocked") {
-          toastr.error(t("Common:UnexpectedError"));
-          return;
-        }
-
-        const { decryptEncryptedItemToFile, addCopySuffix } =
-          await loadCopyModule();
+        const { decryptEncryptedItemToFile } = await loadCopyModule();
 
         for (const item of files) {
           if (controller.signal.aborted) return;
@@ -249,42 +220,47 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
             if (controller.signal.aborted) return;
 
-            let uploaded = false;
-            if (dest.mode === "plaintext") {
-              await uploadPlaintextFile(
-                decrypted,
-                destFolderId,
-                controller.signal,
-              );
-              uploaded = !controller.signal.aborted;
-            } else {
-              const sameRoom = String(dest.roomId) === String(sourceRoomId);
-              const fileToUpload =
-                !isMove && sameRoom
-                  ? new File([decrypted], addCopySuffix(decrypted.name), {
-                      type: decrypted.type || "application/octet-stream",
-                    })
-                  : decrypted;
+            if (dest.isPrivate) decryptedIn.push({ item, file: decrypted });
+            else decryptedOut.push(decrypted);
+          } catch (error) {
+            if (controller.signal.aborted) return;
+            failed.push({ title: item.title, error });
+          }
+        }
 
-              const uploadResult = await uploadFiles({
-                files: [fileToUpload],
-                folderId: destFolderId,
-                roomId: dest.roomId,
-              });
-              uploaded = uploadResult.ok;
-            }
+        if (controller.signal.aborted) return;
+
+        if (decryptedOut.length > 0) {
+          await uploadDecrypted(decryptedOut, destFolderId);
+        }
+
+        const destRoomId = dest.encryptionRoomId as number | string;
+        const copyNames =
+          decryptedIn.length > 0 &&
+          String(destRoomId) === String(sourceRoomId)
+            ? await sameRoomCopyNames(
+                decryptedIn,
+                destFolderId,
+                destRoomId,
+                userId,
+                identity,
+              )
+            : new Map<EncryptedSourceItem, string>();
+
+        for (const { item, file } of decryptedIn) {
+          if (controller.signal.aborted) return;
+
+          try {
+            const uploadResult = await uploadFiles({
+              files: [renamed(file, copyNames.get(item))],
+              folderId: destFolderId,
+              roomId: destRoomId,
+            });
 
             if (controller.signal.aborted) return;
 
-            if (!uploaded) {
+            if (!uploadResult.ok) {
               failed.push({ title: item.title, error: null });
-              continue;
-            }
-
-            if (isMove && dest.mode !== "plaintext") {
-              await deleteFile(item.id, false, true);
-              forgetEncryptedFilename(item.id);
-              filesListStore.removeItem(item.id);
             }
           } catch (error) {
             if (controller.signal.aborted) return;
@@ -316,18 +292,8 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         releaseCryptoOperation(controller);
       }
     },
-    [requireIdentity, identityStore, uploadFiles, filesListStore, t],
+    [requireIdentity, identityStore, uploadFiles, t],
   );
 
-  const copyFiles = React.useCallback(
-    (args: CopyMoveArgs) => runCopyMove(args, false),
-    [runCopyMove],
-  );
-
-  const moveFiles = React.useCallback(
-    (args: CopyMoveArgs) => runCopyMove(args, true),
-    [runCopyMove],
-  );
-
-  return { duplicateFile, copyFiles, moveFiles };
+  return { duplicateFile, copyFiles };
 };

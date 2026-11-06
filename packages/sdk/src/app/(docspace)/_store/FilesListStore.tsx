@@ -41,7 +41,7 @@ import { makeAutoObservable } from "mobx";
 import { FolderType } from "@docspace/shared/enums";
 import { TPathParts } from "@docspace/shared/types";
 
-import type { TFolder } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import {
   applyTagChangeToRoomTags,
   isSharedTagChange,
@@ -57,6 +57,8 @@ export class FilesListStore {
   pathParts: TPathParts[] | null = null;
   currentFolder: TFolder | null = null;
   highlightFileId: number | string | null = null;
+  /** Files an upload stored, waiting for the list to convert and show them. */
+  storedFiles: TFile[] = [];
 
   private highlightTimerId: ReturnType<typeof setTimeout> | null = null;
 
@@ -173,6 +175,26 @@ export class FilesListStore {
 
   removeItem = (id: number | string) => {
     this.items = this.items.filter((i) => i.id !== id);
+  };
+
+  addStoredFile = (file: TFile) => {
+    this.storedFiles = [...this.storedFiles, file];
+  };
+
+  takeStoredFiles = () => {
+    const files = this.storedFiles;
+    this.storedFiles = [];
+    return files;
+  };
+
+  /** Puts files ahead of the other files, after the folders. */
+  prependFiles = (files: TFileItem[]) => {
+    const folderCount = this.items.filter((i) => i.isFolder).length;
+    this.items = [
+      ...this.items.slice(0, folderCount),
+      ...files,
+      ...this.items.slice(folderCount),
+    ];
   };
 
   updateItemTitle = (id: number | string, title: string) => {

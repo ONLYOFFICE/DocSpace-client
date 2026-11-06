@@ -3,7 +3,7 @@
   "content": "Identity provider single logout endpoint URL",
   "content_en_sha1_hash": "c1595739bc41da49d0bbd20081a466ab5ca7da5f",
   "created_at": "2026-08-31T18:23:40.028Z",
-  "updated_at": "2026-08-31T21:05:27.358Z",
+  "updated_at": "2026-11-05T16:49:39.971Z",
   "comment": {
     "text": "Form field label in the Single Sign-On integration settings that identifies the input for the identity provider's single logout endpoint URL.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
-      "line_number": 147,
+      "line_number": 143,
       "context": "/>\n </div>\n </SsoFormField>\n \n <SsoFormField\n labelText={t(\"LogoutEndpointUrl\")}\n name={sloBinding?.includes(\"POST\") ? \"sloUrlPost\" : \"sloUrlRedirect\"}\n placeholder={\n sloBinding?.includes(\"POST\")\n ? \"https://idpservice/SLO/POST\"\n : \"https://idpservice/SLO/REDIRECT\"",
       "module": "/packages/client"
     }

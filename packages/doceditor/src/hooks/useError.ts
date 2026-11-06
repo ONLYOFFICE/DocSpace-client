@@ -37,6 +37,7 @@ import React from "react";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { frameCallCommand } from "@docspace/shared/utils/common";
+import { keepPageForLogin } from "@docspace/shared/utils/referenceUrl";
 
 import { TError } from "@/types";
 
@@ -48,7 +49,7 @@ interface UseErrorProps {
 const useError = ({ error, editorUrl }: UseErrorProps) => {
   React.useEffect(() => {
     if (error?.message === "unauthorized") {
-      sessionStorage.setItem("referenceUrl", window.location.href);
+      keepPageForLogin();
 
       window.open(
         combineUrl(window.ClientConfig?.proxy?.url, "/login"),

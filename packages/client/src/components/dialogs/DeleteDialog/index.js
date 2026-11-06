@@ -41,6 +41,7 @@ import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { RoomsType } from "@docspace/shared/enums";
 
 import { getDialogContent } from "./DeleteDialog.helper";
@@ -71,9 +72,12 @@ const DeleteDialogComponent = (props) => {
     selection: selectionProps,
     onRemoveSharedFilesOrFolder,
     setUnsubscribe,
+    confirmDelete,
+    setConfirmDelete,
   } = props;
 
   const [isChecked, setIsChecked] = useState(false);
+  const [dontAskAgain, setDontAskAgain] = useState(false);
 
   const selection = useMemo(
     () =>
@@ -85,6 +89,19 @@ const DeleteDialogComponent = (props) => {
 
   const isTemplate = selection[0]?.isTemplate;
   const isFormSpace = selection[0]?.roomType === RoomsType.FormRoom;
+
+  // Only a plain move to Trash is gated by the "confirm delete" profile setting;
+  // every other case (permanent, third-party, private room, rooms, templates,
+  // unsubscribe) always asks, so "Don't ask again" would be a lie there.
+  const canSkipConfirmation =
+    !!confirmDelete &&
+    !isTemplate &&
+    !isRoomDelete &&
+    !unsubscribe &&
+    !isRecycleBinFolder &&
+    !isPrivacyFolder &&
+    !selection[0]?.providerKey &&
+    !!(isPersonalRoom || isRoom || isTemplatesFolder || isSharedWithMeFolderRoot);
 
   const onClose = () => {
     if (
@@ -102,6 +119,10 @@ const DeleteDialogComponent = (props) => {
   };
 
   const onDelete = () => {
+    if (canSkipConfirmation && dontAskAgain) {
+      setConfirmDelete(false, "confirmDelete");
+    }
+
     setSelected("none");
     onClose();
 
@@ -276,6 +297,20 @@ const DeleteDialogComponent = (props) => {
             onChange={() => setIsChecked(!isChecked)}
           />
         ) : null}
+        {canSkipConfirmation ? (
+          <div className={styles.dontAskAgain}>
+            <Checkbox
+              label={t("DontAskAgainCheckbox")}
+              dataTestId="delete_dialog_dont_ask_again_checkbox"
+              isChecked={dontAskAgain}
+              onChange={() => setDontAskAgain(!dontAskAgain)}
+            />
+            <HelpButton
+              tooltipContent={<Text fontSize="12px">{t("DontAskAgainHint")}</Text>}
+              dataTestId="delete_dialog_dont_ask_again_help"
+            />
+          </div>
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -319,6 +354,7 @@ export default inject(
     filesActionsStore,
     treeFoldersStore,
     contextOptionsStore,
+    filesSettingsStore,
   }) => {
     const {
       selection,
@@ -333,6 +369,7 @@ export default inject(
       isRecycleBinFolder,
       isPersonalRoom,
       isRoom,
+      isAiHubFolderRoot,
       isTemplatesFolderRoot,
       isSharedWithMeFolderRoot,
     } = treeFoldersStore;
@@ -349,6 +386,7 @@ export default inject(
     } = dialogsStore;
 
     const { onRemoveSharedFilesOrFolder } = contextOptionsStore;
+    const { confirmDelete, setConfirmDelete } = filesSettingsStore;
 
     return {
       selection: removeMediaItem
@@ -374,10 +412,15 @@ export default inject(
       setIsRoomDelete,
       deleteRoomsAction,
       isPersonalRoom,
-      isRoom,
+      // Instructions and Knowledge rooms live under the "AI rooms" root, not
+      // under Rooms, but their files go to Trash the same way, so the room
+      // wording applies (without it the dialog had no text at all).
+      isRoom: isRoom || isAiHubFolderRoot,
       isTemplatesFolder: isTemplatesFolderRoot,
       onRemoveSharedFilesOrFolder,
       setUnsubscribe,
+      confirmDelete,
+      setConfirmDelete,
     };
   },
 )(observer(DeleteDialog));

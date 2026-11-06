@@ -41,10 +41,10 @@ import styles from "../MetadataAIPanel.module.scss";
 type AINoticeProps = {
   title: string;
   description: string;
-  buttonLabel: string;
+  buttonLabel?: string;
   onClick?: () => void;
   dataTestId: string;
-  buttonTestId: string;
+  buttonTestId?: string;
 };
 
 const AINotice = ({

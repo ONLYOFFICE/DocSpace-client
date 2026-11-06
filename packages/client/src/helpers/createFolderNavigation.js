@@ -52,6 +52,7 @@ export const createFolderNavigation = async (
   userId,
   roomType,
   currentTitle,
+  isPrivate = false,
 ) => {
   if (!item) return { url: "", state: {} };
 
@@ -75,7 +76,7 @@ export const createFolderNavigation = async (
   const baseCategory = getCategoryTypeByFolderTypeInSection(
     rootFolderType,
     id,
-    { roomType: itemRoomType },
+    { roomType: itemRoomType, isPrivate },
   );
 
   const path = getCategoryUrl(baseCategory, id);
@@ -85,7 +86,8 @@ export const createFolderNavigation = async (
   if (isRoom) {
     if (userId) {
       const key =
-        categoryType === CategoryType.Archive
+        categoryType === CategoryType.Archive ||
+        categoryType === CategoryType.PrivateArchive
           ? `${FILTER_ARCHIVE_DOCUMENTS}=${userId}`
           : `${FILTER_ROOM_DOCUMENTS}=${userId}`;
 

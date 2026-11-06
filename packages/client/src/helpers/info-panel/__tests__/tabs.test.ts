@@ -33,17 +33,43 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   FilesSecurity,
   RoomsType as PluginRoomsType,
   Security,
 } from "@onlyoffice/docspace-plugin-sdk";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
+import type { TFile } from "@docspace/shared/api/files/types";
 
 import { getAvailableInfoPanelTabs } from "SRC_DIR/helpers/info-panel/tabs";
 import type { IInfoPanelItemClient } from "SRC_DIR/helpers/plugins/types";
-import type { TFile } from "@docspace/shared/api/files/types";
+import {
+  listItemOf,
+  privateRoomDto,
+} from "SRC_DIR/store/filesStore/__tests__/listItem.fixture";
+
+import { InfoPanelView } from "../index";
+
+describe("getAvailableInfoPanelTabs", () => {
+  it("Private room selected in a list", () => {
+    const { tabs, useRoomsView } = getAvailableInfoPanelTabs({
+      selection: listItemOf(privateRoomDto()),
+      isTrash: false,
+      isRecentFolder: false,
+      enablePlugins: false,
+      infoPanelItemsList: [],
+    });
+
+    expect(tabs).not.toContain(InfoPanelView.infoShare);
+    expect(tabs).toEqual([
+      InfoPanelView.infoMembers,
+      InfoPanelView.infoHistory,
+      InfoPanelView.infoDetails,
+    ]);
+    expect(useRoomsView).toBe(true);
+  });
+});
 
 const TAB = "info_plugin-qr";
 const RIGHTS = [FilesSecurity.CopyLink, Security.EditAccess];

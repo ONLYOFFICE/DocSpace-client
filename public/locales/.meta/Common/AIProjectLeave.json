@@ -3,7 +3,7 @@
   "content": "Leave the project",
   "content_en_sha1_hash": "acf7b89d24c13b797c28dfce2919fa58a632d6dc",
   "created_at": "2026-10-31T12:56:51.887Z",
-  "updated_at": "2026-10-31T12:59:25.206Z",
+  "updated_at": "2026-11-05T16:49:39.887Z",
   "comment": {
     "text": "Checkbox label in the change project owner panel: the former owner leaves the project after handing it over. Verb phrase.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 214,
+      "line_number": 152,
       "context": "const infoText = isAIProject\n ? t(\"Common:AIProjectChangeOwnerInfo\", { productName: getBrandName(\"ProductName\") })\n : t(\"Common:PeopleSelectorInfo\");\n \n const footerCheckboxLabel = isAIProject\n ? t(\"Common:AIProjectLeave\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");\n \n const selectorComponent = excludeReady ? (",
       "module": "/packages/client"
     }

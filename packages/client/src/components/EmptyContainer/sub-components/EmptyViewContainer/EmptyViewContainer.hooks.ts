@@ -54,6 +54,7 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TTranslation } from "@docspace/shared/types";
 import { CategoryType } from "@docspace/shared/constants";
+import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
@@ -94,11 +95,14 @@ export const useEmptyView = (
   t: TTranslation,
 ) => {
   const { isBase } = useTheme();
+  const { pathname } = useLocation();
 
   const isFormsScope =
     rootFolderType === FolderType.RoomTemplates
       ? roomsFilterSearchArea === RoomSearchArea.FormTemplates
       : isFormsSectionScope(filterFolderType);
+
+  const isPrivateScope = isPrivateRoomsRoute(pathname);
 
   const emptyViewOptions = useMemo(() => {
     const description = getDescription(
@@ -115,6 +119,7 @@ export const useEmptyView = (
       security,
       isFormsScope,
       filterFolderType,
+      isPrivateScope,
     );
     const title = getTitle(
       type,
@@ -128,6 +133,7 @@ export const useEmptyView = (
       rootFolderType,
       isFormsScope,
       isPublicRoom,
+      isPrivateScope,
     );
     const icon = getIcon(
       type,
@@ -157,6 +163,7 @@ export const useEmptyView = (
     security,
     isFormsScope,
     filterFolderType,
+    isPrivateScope,
   ]);
 
   return emptyViewOptions;
@@ -188,6 +195,7 @@ export const useOptions = (
     setQuotaWarningDialogVisible,
     setSelectFileFormRoomDialogVisible,
     setSelectFileKnowledgeRoomDialogVisible,
+    setGenerateSkillDialogVisible,
     inviteUser: inviteRootUser,
     setTemplateAccessSettingsVisible,
 
@@ -202,6 +210,8 @@ export const useOptions = (
     templateGalleryAvailable,
     onShowTemplateGallery,
     vectorizationEnabled = true,
+    isCreateSkillWithAIAvailable = true,
+    createRoom,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -241,6 +251,17 @@ export const useOptions = (
       state,
     };
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
+
+  const onGoToPrivate = useCallback((): LinkProps => {
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
+
+    return {
+      to: {
+        pathname: getCategoryUrl(CategoryType.PrivateRooms),
+        search: newFilter.toUrlParams(userId, false),
+      },
+    };
+  }, [userId]);
 
   const onGoToForms = useCallback((): LinkProps => {
     const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);
@@ -304,6 +325,11 @@ export const useOptions = (
   }, [myFolder?.rootFolderType, myFolder?.title, myFolderId]);
 
   const onCreateRoom = useCallback(() => {
+    if (isPrivateRoomsRoute(window.location.pathname)) {
+      createRoom(null, false, "empty_state");
+      return;
+    }
+
     if (isWarningRoomsDialog) {
       setQuotaWarningDialogVisible(true);
       return;
@@ -326,7 +352,12 @@ export const useOptions = (
       event.payload = { isAiRoomsCreate: true };
     }
     window.dispatchEvent(event);
-  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
+  }, [
+    isWarningRoomsDialog,
+    setQuotaWarningDialogVisible,
+    selectedFolder?.id,
+    createRoom,
+  ]);
 
   // Opens the create dialog straight on its template picker, scoped to form
   // templates -- the Forms "Space template" quick action.
@@ -402,6 +433,10 @@ export const useOptions = (
     setSelectFileKnowledgeRoomDialogVisible?.(true);
   }, [setSelectFileKnowledgeRoomDialogVisible]);
 
+  const createSkillWithAI = useCallback(() => {
+    setGenerateSkillDialogVisible?.(true);
+  }, [setGenerateSkillDialogVisible]);
+
   const onCreate = useCallback(
     (extension: ExtensionType, withoutDialog?: boolean) => {
       const event: CreateEvent = new Event(Events.CREATE);
@@ -462,6 +497,7 @@ export const useOptions = (
           onCreate,
           uploadFromDocspace,
           uploadFromDocspaceKnowledgeRoom,
+          createSkillWithAI,
           onUploadAction,
           createAndCopySharedLink,
           openInfoPanel,
@@ -472,6 +508,7 @@ export const useOptions = (
           navigate,
           onGoToPersonal,
           onGoToShared,
+          onGoToPrivate,
           onGoToForms,
           onOpenAccessSettings,
           onOpenAiChat,
@@ -488,6 +525,8 @@ export const useOptions = (
         isAiChatAvailable,
         templateGalleryAvailable,
         vectorizationEnabled,
+        isCreateSkillWithAIAvailable,
+        isPrivateRoomsRoute(pathname),
       ),
     [
       type,
@@ -504,6 +543,7 @@ export const useOptions = (
       onOpenAccessSettings,
       uploadFromDocspace,
       uploadFromDocspaceKnowledgeRoom,
+      createSkillWithAI,
       onUploadAction,
       createAndCopySharedLink,
       onCreate,
@@ -515,6 +555,7 @@ export const useOptions = (
       navigate,
       onGoToPersonal,
       onGoToShared,
+      onGoToPrivate,
       onGoToForms,
       trashSection,
       isVisitor,
@@ -524,6 +565,8 @@ export const useOptions = (
       isAiChatAvailable,
       templateGalleryAvailable,
       vectorizationEnabled,
+      isCreateSkillWithAIAvailable,
+      pathname,
     ],
   );
 

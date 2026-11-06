@@ -37,15 +37,25 @@ import {
   capabilitiesHandler,
   encryptedFilesHandlers,
   filesSettingsHandler,
+  myHandler,
+  privacyroomAccessHandlers,
   privacyroomKeysHandlers,
   rootHandler,
   selfActivationStatusHandler,
   settingsHandler,
   TypeSettings,
   type EncryptedFilesHandlerHandle,
+  type PrivacyroomAccessHandlerHandle,
 } from "@docspace/shared/__mocks__/handlers";
-import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
+import { http } from "msw";
+import { BASE_URL, type WorkerFixture } from "@docspace/shared/__mocks__/e2e";
+import { myDocumentsResolver } from "@docspace/shared/__mocks__/handlers/files/documents";
+import { generateIdentityKeyPair } from "@docspace/shared/services/encryption/identity";
+import { encryptFile } from "@docspace/shared/services/encryption/file-keys";
+import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
+import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
 import { expect, test, TEST_PORT } from "./fixtures/base";
+import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
 const ROOM_ID = 9400;
 const FILE_ID = 8800;
@@ -115,7 +125,7 @@ test.describe("Encrypted file UI in private room", () => {
     );
     installRoomWithEncryptedFile(mockRequest, filesHandle);
 
-    await page.goto(`${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
     await page.waitForResponse(
       (res) =>
         res.request().method() === "GET" &&
@@ -131,6 +141,52 @@ test.describe("Encrypted file UI in private room", () => {
     await expect(badge).not.toHaveClass(/noAccessIcon/);
   });
 
+  test("Create menu opened", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [seedUserKey],
+        userId: TEST_USER_ID,
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        initialFiles: [seedEncryptedFile],
+        roomSecurity: { Read: true, Create: true },
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await expect(page.getByTestId("table-row-0")).toBeVisible({
+      timeout: 15000,
+    });
+
+    // The seeded key is a fixture, so name recovery asks for the passphrase
+    // once the list is in; the menu does not depend on it.
+    const passphrasePrompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    await passphrasePrompt.waitFor({ timeout: 5000 }).catch(() => {});
+    if (await passphrasePrompt.isVisible()) {
+      await passphrasePrompt
+        .getByRole("button", { name: "Cancel", exact: true })
+        .click();
+      await expect(passphrasePrompt).toBeHidden();
+    }
+
+    await page.getByTestId("main-button").first().click();
+
+    for (const id of [
+      "personal_new-document",
+      "personal_new-spreadsheet",
+      "personal_new-presentation",
+      "personal_new-pdf-form",
+      "personal_new-folder",
+    ]) {
+      await expect(page.locator(`#${id}`)).toBeVisible({ timeout: 5000 });
+    }
+    await expect(page.getByText("Upload files", { exact: true })).toBeVisible();
+  });
+
   test("shows the no-access badge when user has NO keys", async ({
     page,
     mockRequest,
@@ -141,7 +197,7 @@ test.describe("Encrypted file UI in private room", () => {
     };
     installRoomWithEncryptedFile(mockRequest, filesHandle);
 
-    await page.goto(`${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
     await page.waitForResponse(
       (res) =>
         res.request().method() === "GET" &&
@@ -173,7 +229,7 @@ test.describe("Encrypted file UI in private room", () => {
     );
     installRoomWithEncryptedFile(mockRequest, filesHandle);
 
-    await page.goto(`${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
     await page.waitForResponse(
       (res) =>
         res.request().method() === "GET" &&
@@ -224,7 +280,7 @@ test.describe("Encrypted file UI in private room", () => {
     );
     installRoomWithEncryptedFile(mockRequest, filesHandle);
 
-    await page.goto(`${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
     await page.waitForResponse(
       (res) =>
         res.request().method() === "GET" &&
@@ -257,5 +313,164 @@ test.describe("Encrypted file UI in private room", () => {
 
     expect(await page.locator("#option_copy-external-link").count()).toBe(0);
     expect(await page.locator("#option_copy-shared-link").count()).toBe(0);
+  });
+});
+
+test.describe("Encrypted file moved out of a private room", () => {
+  const MOVE_ROOM_ID = 9450;
+  const MOVE_FILE_ID = 8850;
+  const ALICE_ID = "11111111-1111-1111-1111-111111111111";
+  const PLAIN_TEXT = "Moved out of the private room in plaintext.";
+
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Cut and paste out of a private room: the decrypted copy is uploaded and the source deleted", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const { keysHandle, passphrase } = await bootstrapEncryption(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const bobPublicKey = keysHandle.getKeys()[0].publicKey;
+    const alice = await generateIdentityKeyPair();
+    const alicePublicKey = arrayBufferToBase64(
+      alice.publicKey.buffer as ArrayBuffer,
+    );
+
+    const plainBytes = new TextEncoder().encode(PLAIN_TEXT);
+    const { encryptedBlob, dek } = await encryptFile(plainBytes, {
+      fileName: "moved.txt",
+    });
+    const fileKeys = await wrapDekForRecipients({
+      dek,
+      senderIdentity: alice,
+      senderUserId: ALICE_ID,
+      recipients: [
+        { userId: ALICE_ID, publicKey: alicePublicKey },
+        { userId: TEST_USER_ID, publicKey: bobPublicKey },
+      ],
+      fileId: MOVE_FILE_ID,
+    });
+
+    const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+    const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      myHandler(TEST_PORT),
+      ...[12764, 100].map((id) =>
+        http.get(`${BASE_URL}:${TEST_PORT}/api/2.0/files/${id}`, () =>
+          myDocumentsResolver(),
+        ),
+      ),
+      // The decrypted copy is uploaded into My documents (folder 100).
+      http.get(`${BASE_URL}:${TEST_PORT}/api/2.0/files/folder/100`, async () => {
+        const { response } = await myDocumentsResolver().json();
+        return Response.json({ response: response.current, status: 0, statusCode: 200 });
+      }),
+      http.post(`${BASE_URL}:${TEST_PORT}/api/2.0/files/100/upload/check`, () =>
+        Response.json({ response: [], status: 0, statusCode: 200 }),
+      ),
+    );
+    mockRequest.use(
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: MOVE_ROOM_ID,
+        ownerId: ALICE_ID,
+        initialFiles: [
+          {
+            id: MOVE_FILE_ID,
+            title: "moved.txt",
+            serverTitle: "obfuscated.txt",
+            size: plainBytes.byteLength,
+            encrypted: true,
+            fileKeys,
+            bytes: new Uint8Array(await encryptedBlob.arrayBuffer()),
+          },
+        ],
+        handle: filesHandle,
+      }),
+      ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
+    );
+    accessHandle.current!.setRoomKeys(MOVE_ROOM_ID, [
+      { id: "alice-1", userId: ALICE_ID, publicKey: alicePublicKey, privateKeyEnc: "" },
+      { id: "bob-1", userId: TEST_USER_ID, publicKey: bobPublicKey, privateKeyEnc: "" },
+    ]);
+
+    await page.goto(
+      `${baseUrl}/private/${MOVE_ROOM_ID}/filter?folder=${MOVE_ROOM_ID}`,
+    );
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+
+    const passphrasePrompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    if (await passphrasePrompt.isVisible().catch(() => false)) {
+      await passphrasePrompt
+        .getByRole("button", { name: "Cancel", exact: true })
+        .click();
+      await expect(passphrasePrompt).toBeHidden();
+    }
+
+    await page.keyboard.press("Control+a");
+    await page.keyboard.press("Control+x");
+    await expect(
+      page.getByTestId("toast-content").filter({ hasText: /: 1$/ }),
+    ).toBeVisible({ timeout: 5000 });
+
+    // In-app navigation keeps the store, and with it the clipboard.
+    await page.evaluate(() =>
+      (window as unknown as { DocSpace: { navigate: (url: string) => void } }).DocSpace.navigate(
+        "/rooms/personal/filter?folder=12764",
+      ),
+    );
+    // The room's own row 0 is still on screen until the destination has loaded.
+    await expect(
+      page.getByRole("heading", { name: "My documents", level: 1 }),
+    ).toBeVisible({ timeout: 15000 });
+
+    const deleteRequest = page.waitForRequest(
+      (req) =>
+        req.method() === "PUT" && /\/files\/fileops\/delete/.test(req.url()),
+      { timeout: 30000 },
+    );
+    await page.keyboard.press("Control+v");
+
+    try {
+      await passphrasePrompt.waitFor({ state: "visible", timeout: 5000 });
+      await passphrasePrompt
+        .locator('input[name="passphrase"], #passphrase input')
+        .first()
+        .fill(passphrase);
+      await passphrasePrompt.getByRole("button", { name: "Confirm" }).click();
+    } catch {}
+
+    const deleteBody = (await deleteRequest).postDataJSON() as {
+      fileIds: number[];
+      immediately: boolean;
+    };
+    expect(deleteBody).toMatchObject({ fileIds: [MOVE_FILE_ID], immediately: true });
+
+    // waitForRequest resolves when the request is sent, before the mock handles it.
+    await expect
+      .poll(() => filesHandle.current!.getFiles().map((f) => f.id))
+      .not.toContain(MOVE_FILE_ID);
+    const remaining = filesHandle.current!.getFiles();
+    const copy = remaining.find((f) => f.title === "moved.txt");
+    expect(copy?.encrypted).toBe(false);
+    expect(new TextDecoder().decode(copy?.bytes)).toBe(PLAIN_TEXT);
   });
 });

@@ -65,7 +65,6 @@ export const LabledInput = ({
 				id={id}
 				name={name}
 				placeholder={placeholder}
-				tabIndex={1}
 				value={value}
 				onChange={onChange}
 				required={required}

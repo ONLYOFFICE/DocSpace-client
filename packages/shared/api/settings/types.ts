@@ -291,6 +291,7 @@ export type THelpCenterEntries = {
   connectzoom: string;
   creatingbackup: string;
   configuringsettings: string;
+  customfilter: string;
   docspacemanagingrooms: string;
   enterpriseinstall: string;
   enterpriseinstallscript: string;

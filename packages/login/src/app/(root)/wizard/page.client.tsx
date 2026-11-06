@@ -349,7 +349,6 @@ function WizardForm(props: WizardFormProps) {
       >
         <EmailInput
           name="wizard-email"
-          tabIndex={1}
           size={InputSize.large}
           scale
           value={email}
@@ -373,7 +372,6 @@ function WizardForm(props: WizardFormProps) {
       >
         <PasswordInput
           ref={refPassInput}
-          tabIndex={2}
           size={InputSize.large}
           scale
           inputName="password"
@@ -427,7 +425,6 @@ function WizardForm(props: WizardFormProps) {
             value={instanceId}
             placeholder={t("Common:InstanceId")}
             scale
-            tabIndex={3}
             isDisabled={isCreated}
             onChange={onChangeInstanceId}
             testId="instance_id_input"

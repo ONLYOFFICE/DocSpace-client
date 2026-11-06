@@ -445,15 +445,15 @@ The server SHALL write audit events for key envelope creation, update and deleti
 - **THEN** an audit event records the actor, the room and the revoked user
 
 ### Requirement: Invitation e-mails carry the room title
-The server SHALL NOT include the plaintext room title of a private room in invitation e-mails or in the letters and pushes about the room and its content; it SHALL name the room with a neutral label ("Private room") next to the link that resolves the title in the portal.
+The server SHALL NOT include the plaintext title of a private room or of its folders in invitation e-mails or in the letters and pushes about the room and its content; it SHALL name the room with a neutral label ("Private room") and a folder of it with another ("Private folder"), next to the link that resolves the title in the portal.
 
 #### Scenario: Invite to a private room
 - **WHEN** a user, new or existing, is invited to a private room by e-mail, or the invitation is resent
 - **THEN** the e-mail contains a link to the room and the neutral label, and not the room title
 
 #### Scenario: Room notices
-- **WHEN** a file or folder is created or uploaded in a private room, a member's access changes, or the room is archived or removed
-- **THEN** the letter or push names the room with the neutral label and not its title
+- **WHEN** a file or folder is created or uploaded in a private room, a member's access or role changes, or the room is archived or removed
+- **THEN** the letter or push names the room with the neutral label and not its title, and a folder it names with the folder label and not the folder's title
 
 #### Scenario: What's-new letter
 - **WHEN** the what's-new letter lists events of a private room

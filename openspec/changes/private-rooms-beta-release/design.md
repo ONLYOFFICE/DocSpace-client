@@ -264,10 +264,10 @@ browser, no data changed:
   member, and the Private list shows the other room only.
 - Two observations for the client and the server:
   - the room's row stayed in the Private list after the owner change that
-    left the room, until the page was reloaded; the leave through the
-    room's own "Leave the room" action was not run for comparison
-    (`private-rooms/sidebar-section`, "Scope holds on every request of a
-    list", the refill after leaving);
+    left the room, until the page was reloaded: the leave helper keeps
+    the row for a portal administrator, who keeps reading an ordinary
+    room after leaving it, while the server refuses them a private room
+    (`private-rooms-admin-leave`);
   - the audit row of the owner change carries an empty action text next
     to the revocation and the leave rows (server, `DocumentsActionMapper`
     or the room-owner-changed resource, to check).
@@ -277,5 +277,7 @@ browser, no data changed:
 - A deep link to a private room without its `/filter` segment
   (`/private/9064440`) was rewritten by the client to
   `/private/undefined/filter?...` and showed the Private list instead of
-  the room; the addresses the client builds carry `/filter`, so this is a
-  typed-address case only, noted for `private-rooms/sidebar-section`.
+  the room. `/rooms/shared/5735991` does the same
+  (`/rooms/shared/undefined/filter?...`), so it is the client's handling
+  of a bare room address in every section, not a private-rooms matter;
+  the addresses the client builds carry `/filter`.

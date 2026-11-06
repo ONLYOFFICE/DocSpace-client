@@ -68,12 +68,13 @@ The change MUST NOT be applied until all of the following hold:
 8. The portal setting for private rooms is merged on the server release
    branch, and its JSON name, payload, write route and defaults have been read
    in `../server` through CodeGraph.
-9. Backup and restore of private rooms decided and done
-   (`private-rooms-server-hardening` decision 9 and task group 15): either
-   the file keys and the users' key records survive a portal restore, or
-   the loss is an accepted limitation written into the release notes and
-   shown in the backup settings. Found by the backend team on 2026-11-05:
-   today a restored portal cannot open the files of its private rooms.
+9. Backup and restore of private rooms: the loss is an accepted
+   limitation for now (owner, 2026-11-06; `private-rooms-server-hardening`
+   decision 9 and task group 15), so the warning on the backup and restore
+   pages is merged and the release notes carry the limitation. Found by
+   the backend team on 2026-11-05: a restored portal cannot open the files
+   of its private rooms. The backup of the keys with the original ids is
+   a later option and not a gate criterion.
 
 ## Capabilities
 

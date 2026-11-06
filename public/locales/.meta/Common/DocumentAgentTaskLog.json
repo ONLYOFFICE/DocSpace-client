@@ -1,7 +1,7 @@
 {
   "key_path": "DocumentAgentTaskLog",
-  "content": "Task log",
-  "content_en_sha1_hash": "0506d61157248c03a515a5890a877f30d666bb8e",
+  "content": "Save task logs",
+  "content_en_sha1_hash": "d35bf0d2908fd631cd7718a2e10d1e9238749af0",
   "created_at": "2026-11-06T10:41:22.945Z",
   "updated_at": "2026-11-06T10:41:22.945Z",
   "comment": {

@@ -40,7 +40,6 @@ import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
-import { RadioButtonGroup } from "@onlyoffice/apps-ui-kit/components/radio-button-group";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { TextInput, InputSize, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
@@ -50,7 +49,6 @@ import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import type {
   TDocumentAgentReasoning,
   TDocumentAgentSettings,
-  TDocumentAgentTaskLog,
 } from "@docspace/shared/api/ai/types";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
@@ -297,14 +295,6 @@ const DocumentAgentComponent = ({
     );
   };
 
-  const taskLogOptions = (
-    [
-      ["never", t("Common:DocumentAgentTaskLogNever")],
-      ["onFailure", t("Common:DocumentAgentTaskLogOnFailure")],
-      ["always", t("Common:DocumentAgentTaskLogAlways")],
-    ] as [TDocumentAgentTaskLog, string][]
-  ).map(([value, label]) => ({ value, label, dataTestId: `document-agent-tasklog-${value}` }));
-
   return (
     <div className={styles.container} data-testid="document-agent-settings">
       <Text className={styles.description} lineHeight="20px">
@@ -395,26 +385,23 @@ const DocumentAgentComponent = ({
           {t("Common:DocumentAgentResultsSection")}
         </Text>
 
-        <FieldContainer
-          labelVisible
-          isVertical
-          labelText={t("Common:DocumentAgentTaskLog")}
-          removeMargin
-        >
-          <RadioButtonGroup
-            className={styles.radioGroup}
-            name="document-agent-tasklog"
-            orientation="vertical"
-            spacing="12px"
-            fontSize="13px"
-            options={taskLogOptions}
-            selected={draft.taskLog}
-            onClick={(e) => patch({ taskLog: e.target.value as TDocumentAgentTaskLog })}
+        <div className={styles.toggleRow}>
+          <ToggleButton
+            className={styles.toggle}
+            isChecked={draft.taskLog}
+            onChange={() => patch({ taskLog: !draft.taskLog })}
             isDisabled={fieldsDisabled}
-            dataTestId="document-agent-tasklog-group"
+            dataTestId="document-agent-tasklog-toggle"
           />
-          <Text className={styles.hint}>{t("Common:DocumentAgentTaskLogHint")}</Text>
-        </FieldContainer>
+          <div className={styles.toggleCaption}>
+            <Text fontWeight={600} lineHeight="20px" noSelect>
+              {t("Common:DocumentAgentTaskLog")}
+            </Text>
+            <Text fontSize="12px" lineHeight="16px" className={styles.hint}>
+              {t("Common:DocumentAgentTaskLogHint")}
+            </Text>
+          </div>
+        </div>
       </div>
 
       <div className={styles.buttonContainer}>

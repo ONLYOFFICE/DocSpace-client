@@ -95,8 +95,25 @@
   color: var(--settings-common-description-color);
 }
 
-.radioGroup {
-  margin-top: 4px;
+.toggleRow {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+
+  .toggle {
+    position: static;
+    margin-top: 1px;
+  }
+
+  .toggleCaption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .hint {
+      margin-top: 0;
+    }
+  }
 }
 
 .buttonContainer {

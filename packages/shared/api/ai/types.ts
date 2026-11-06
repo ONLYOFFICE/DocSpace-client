@@ -136,9 +136,6 @@ export type TDocumentAgentReasoning =
   | "high"
   | "max";
 
-/** When the agent's task log is saved next to its results. */
-export type TDocumentAgentTaskLog = "never" | "onFailure" | "always";
-
 /**
  * Tenant settings of the document agent (Portal settings → AI settings →
  * Document Agent). The AI service reads them when it builds the agent's
@@ -151,7 +148,8 @@ export type TDocumentAgentSettings = {
   reasoning: TDocumentAgentReasoning;
   maxToolCalls: number;
   maxFileBytes: number;
-  taskLog: TDocumentAgentTaskLog;
+  /** Whether the full log of every task is saved next to its results. */
+  taskLog: boolean;
 };
 
 // `profileId` is injected by the Node AI service on GET /ai/agents/:id

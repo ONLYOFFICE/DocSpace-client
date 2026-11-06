@@ -41,7 +41,7 @@ import { useTranslation } from "react-i18next";
 
 import { DocumentEditor, type IConfig } from "@onlyoffice/apps-ui-kit/document-editor";
 
-import { StartFillingMode, ThemeKeys } from "@docspace/shared/enums";
+import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
@@ -165,7 +165,7 @@ const EditorBody = ({
   } = useFormFieldChanges(
     fileInfo?.id,
     fileInfo?.version,
-    config?.startFillingMode === StartFillingMode.StartFillingRoomForm &&
+    !!config?.trackFormFieldChanges &&
       config?.editorConfig?.mode === "edit" &&
       !!config?.document?.permissions?.edit,
   );

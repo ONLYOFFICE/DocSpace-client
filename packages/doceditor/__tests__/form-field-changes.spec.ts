@@ -132,6 +132,10 @@ test.describe("Form field changes", () => {
       ["A filled form or a draft of the room", { edit: false }],
       ["A form opened for viewing", { mode: "view" }],
       ["A PDF form outside a form-filling room", { startFillingMode: 0 }],
+      [
+        "The original form with Community Edition editors",
+        { trackFormFieldChanges: false },
+      ],
     ];
 
     for (const [title, form] of cases) {

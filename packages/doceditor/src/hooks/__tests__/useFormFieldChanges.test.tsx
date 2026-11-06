@@ -141,7 +141,7 @@ describe("useFormFieldChanges", () => {
     vi.mocked(console.error).mockRestore();
   });
 
-  it("Not the original form of a form-filling room: the editor is not asked and nothing is sent", async () => {
+  it("Tracking off (not the original form of a form-filling room, or Community Edition editors): the editor is not asked and nothing is sent", async () => {
     render(false);
     setForms(form("1", "name"));
 
@@ -493,7 +493,7 @@ describe("useFormFieldChanges", () => {
     expect(report).toHaveBeenCalledTimes(1);
   });
 
-  it("No connector, as in Community Edition: one try and nothing logged", async () => {
+  it("No connector from the editor: one try and nothing logged", async () => {
     editor.createConnector.mockImplementation(() => undefined);
     render();
 

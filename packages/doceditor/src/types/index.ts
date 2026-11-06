@@ -226,6 +226,9 @@ export interface IInitialConfig {
   message?: undefined;
   startFilling?: boolean;
   startFillingMode?: StartFillingMode;
+  // True when the editor reports the fields renamed in the original form of a form-filling room. False with Document
+  // Server Community Edition, whose editors cannot tell the fields of the open form.
+  trackFormFieldChanges?: boolean;
   fillingSessionId?: string;
   fillingStatus?: boolean;
   quotaExceededScope?: number;

@@ -299,6 +299,8 @@ export type TOpenEditFormOptions = {
   edit?: boolean;
   // StartFillingMode; 3 is the original form of a form-filling room.
   startFillingMode?: number;
+  // Off with Community Edition editors; by default on for the original form of a form-filling room only.
+  trackFormFieldChanges?: boolean;
 };
 
 // A PDF form opened in the editor, by default the original form of a form-filling room opened for editing.
@@ -307,6 +309,7 @@ export const openEditForm = ({
   mode = "edit",
   edit = true,
   startFillingMode = 3,
+  trackFormFieldChanges = startFillingMode === 3,
 }: TOpenEditFormOptions = {}) => {
   const config = structuredClone(openEditSuccess);
   const { response } = config;
@@ -324,7 +327,11 @@ export const openEditForm = ({
 
   return {
     ...config,
-    response: { ...response, startFilling: startFillingMode === 3 },
+    response: {
+      ...response,
+      startFilling: startFillingMode === 3,
+      trackFormFieldChanges,
+    },
   };
 };
 

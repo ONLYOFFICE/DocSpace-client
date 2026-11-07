@@ -35,6 +35,12 @@
 
 import type { UserConfig } from "vite";
 
+const isVendorModule = (id: string) =>
+  /[\\/]node_modules[\\/]/.test(id) &&
+  !/[\\/](shiki|@shikijs|react-shiki|heic2any|@onlyoffice[\\/](ai-chat|apps-ui-kit)|openai|@anthropic-ai|@mistralai|@google[\\/]genai|@assistant-ui|assistant-stream|@radix-ui|zustand|katex|rehype-[\w-]+|remark-[\w-]+|react-markdown|micromark[\w-]*|mdast-util-[\w-]+|hast-util-[\w-]+|hastscript|unist-[\w-]+|unified|vfile[\w-]*|codemirror|@codemirror|@uiw)[\\/]/.test(
+    id,
+  );
+
 const isSharedModule = (id: string) =>
   /([\\/]packages[\\/]shared[\\/]|[\\/]@onlyoffice[\\/]apps-ui-kit[\\/])/.test(
     id,
@@ -118,19 +124,23 @@ export const getBuildConfig = (
             test: /[\\/]node_modules[\\/].*firebase/,
             priority: 100,
           },
-          // Core framework used on every page.
+          // Core framework used on every page. The prefix also matches
+          // react-* libraries used only by lazy pages (react-joyride, ...);
+          // `$initial` leaves those to `vendor-lazy`.
           {
             name: "vendor-react",
+            tags: ["$initial"],
             test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-i18next|scheduler|mobx|mobx-react)/,
             priority: 90,
           },
-          // Everything else from node_modules in a single vendor chunk —
-          // except the deps below, which are only reachable through lazy
-          // routes / dynamic imports. `vendor` is statically reachable from
-          // the entry, so it is modulepreloaded; capturing a lazy dep here
-          // would drag it onto the critical path. Excluded modules match no
-          // group and fall back to automatic chunking, which keeps the
-          // `import()` / lazy-route boundary.
+          // Everything else from node_modules that the entry needs goes into
+          // a single vendor chunk, which is modulepreloaded. `$initial` keeps
+          // deps reached only through lazy routes / dynamic imports out of
+          // it: `vendor-lazy` groups them by the set of lazy chunks that use
+          // them, the same way `shared-lazy` does below.
+          //
+          // The deps below match neither group and fall back to automatic
+          // chunking, which keeps the `import()` / lazy-route boundary.
           //
           // The list (verify with `grep` before extending — a dep imported by
           // any eager module gains nothing from being excluded):
@@ -146,12 +156,17 @@ export const getBuildConfig = (
           //   codemirror — JavascriptSDK settings page (lazy) and ai-chat
           {
             name: "vendor",
-            test: (id: string) =>
-              /[\\/]node_modules[\\/]/.test(id) &&
-              !/[\\/](shiki|@shikijs|react-shiki|heic2any|@onlyoffice[\\/](ai-chat|apps-ui-kit)|openai|@anthropic-ai|@mistralai|@google[\\/]genai|@assistant-ui|assistant-stream|@radix-ui|zustand|katex|rehype-[\w-]+|remark-[\w-]+|react-markdown|micromark[\w-]*|mdast-util-[\w-]+|hast-util-[\w-]+|hastscript|unist-[\w-]+|unified|vfile[\w-]*|codemirror|@codemirror|@uiw)[\\/]/.test(
-                id,
-              ),
+            tags: ["$initial"],
+            test: isVendorModule,
             priority: 10,
+          },
+          {
+            name: "vendor-lazy",
+            entriesAware: true,
+            entriesAwareMergeThreshold: 20_000,
+            minSize: 0,
+            test: isVendorModule,
+            priority: 9,
           },
           // Our shared package + @onlyoffice/apps-ui-kit (installed from npm,
           // so it lives under node_modules like any other dependency) reused

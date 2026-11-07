@@ -136,3 +136,99 @@ describe("withHotkeys — upload hotkeys in a private room", () => {
     expect(folderPicker).toHaveBeenCalledTimes(1);
   });
 });
+
+const pressAltShiftO = () => {
+  const modifiers = { altKey: true, shiftKey: true };
+  fireEvent.keyDown(document, { key: "Alt", keyCode: 18, altKey: true });
+  fireEvent.keyDown(document, { key: "Shift", keyCode: 16, ...modifiers });
+  fireEvent.keyDown(document, { key: "o", keyCode: 79, ...modifiers });
+  fireEvent.keyUp(document, { key: "o", keyCode: 79, ...modifiers });
+  fireEvent.keyUp(document, { key: "Shift", keyCode: 16, altKey: true });
+  fireEvent.keyUp(document, { key: "Alt", keyCode: 18 });
+};
+
+const renderForFormFromFile = (isPrivacyFolder: boolean) => {
+  const setSelectFileDialogVisible = vi.fn();
+  const Section = withHotkeys(UploadInputs) as unknown as React.ComponentType<
+    Record<string, unknown>
+  >;
+
+  render(
+    <Section
+      t={(key: string) => key}
+      enabledHotkeys
+      mediaViewerIsVisible={false}
+      filesIsLoading={false}
+      security={{ Create: true }}
+      isPrivacyFolder={isPrivacyFolder}
+      canCreateEncrypted
+      activateHotkeys={vi.fn()}
+      setSelectFileDialogVisible={setSelectFileDialogVisible}
+    />,
+  );
+
+  pressAltShiftO();
+
+  return { setSelectFileDialogVisible };
+};
+
+describe("withHotkeys — form from a file", () => {
+  it("Form from a file", () => {
+    const { setSelectFileDialogVisible } = renderForFormFromFile(true);
+
+    expect(setSelectFileDialogVisible).not.toHaveBeenCalled();
+  });
+
+  it("opens the file picker outside a private room", () => {
+    const { setSelectFileDialogVisible } = renderForFormFromFile(false);
+
+    expect(setSelectFileDialogVisible).toHaveBeenCalledWith(true);
+  });
+});
+
+// A forced confirmation stands for a private room with confirmDelete off; the
+// getter has its own cases in FilesActionsStore.deleteDownload.test.ts.
+const renderForDelete = (isDeleteConfirmationForced: boolean) => {
+  const setDeleteDialogVisible = vi.fn();
+  const deleteAction = vi.fn(async () => {});
+  const Section = withHotkeys(UploadInputs) as unknown as React.ComponentType<
+    Record<string, unknown>
+  >;
+
+  render(
+    <Section
+      t={(key: string) => key}
+      enabledHotkeys
+      mediaViewerIsVisible={false}
+      filesIsLoading={false}
+      security={{}}
+      activateHotkeys={vi.fn()}
+      isAvailableOption={(option: string) => option === "delete"}
+      isGroupMenuBlocked={false}
+      isDeleteConfirmationForced={isDeleteConfirmationForced}
+      setDeleteDialogVisible={setDeleteDialogVisible}
+      deleteAction={deleteAction}
+    />,
+  );
+
+  fireEvent.keyDown(document, { key: "Delete", keyCode: 46 });
+  fireEvent.keyUp(document, { key: "Delete", keyCode: 46 });
+
+  return { setDeleteDialogVisible, deleteAction };
+};
+
+describe("withHotkeys — the Delete key", () => {
+  it("Confirmation disabled in settings", () => {
+    const { setDeleteDialogVisible, deleteAction } = renderForDelete(true);
+
+    expect(setDeleteDialogVisible).toHaveBeenCalledWith(true);
+    expect(deleteAction).not.toHaveBeenCalled();
+  });
+
+  it("deletes without the dialog when the confirmation is not forced", () => {
+    const { setDeleteDialogVisible, deleteAction } = renderForDelete(false);
+
+    expect(setDeleteDialogVisible).not.toHaveBeenCalled();
+    expect(deleteAction).toHaveBeenCalledTimes(1);
+  });
+});

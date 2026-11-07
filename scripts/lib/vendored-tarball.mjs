@@ -34,10 +34,11 @@
  */
 
 /**
- * Shared by update-ui-kit.mjs and update-ai-chat.mjs. ui-kit and ai-chat are
- * normally installed from npm; both scripts switch the apps over to a locally
- * packed tarball at the repo root instead, make pnpm install it, and then prove
- * that what landed in node_modules and pnpm-lock.yaml is what was copied in.
+ * Shared by update-ui-kit.mjs, update-ai-chat.mjs and update-plugin-sdk.mjs.
+ * ui-kit, ai-chat and the plugin SDK are normally installed from npm; the
+ * scripts switch the apps over to a locally packed tarball at the repo root
+ * instead, make pnpm install it, and then prove that what landed in
+ * node_modules and pnpm-lock.yaml is what was copied in.
  */
 
 import { createHash } from "node:crypto";
@@ -364,23 +365,31 @@ export const repointManifests = (packageName, specifier) => {
 };
 
 /**
- * Puts `source` at the repo root as the only ai-chat tarball there and
- * repoints every app manifest at it, away from the registry range or from an
- * earlier tarball.
+ * `onlyoffice-docspace-plugin-sdk-<version>.tgz`, versioned like ai-chat. At
+ * the root an earlier unversioned `onlyoffice-docspace-plugin-sdk.tgz` counts
+ * as the SDK tarball too, so the switch to versioned names replaces it.
+ */
+export const PLUGIN_SDK_TARBALL = /^onlyoffice-docspace-plugin-sdk-(.+)\.tgz$/;
+export const PLUGIN_SDK_AT_ROOT = /^onlyoffice-docspace-plugin-sdk(?:-.+)?\.tgz$/;
+
+/**
+ * Puts `source` at the repo root as the only tarball of `packageName` there
+ * (every root file matching `atRoot` is replaced) and repoints every app
+ * manifest at it, away from the registry range or from an earlier tarball.
  *
- * The ai-chat tarball is versioned in its filename, so a new one is not just a
- * file swap -- every app manifest naming it has to change with it, or the
- * install fails on a path that no longer exists.
+ * The tarball is versioned in its filename, so a new one is not just a file
+ * swap -- every app manifest naming it has to change with it, or the install
+ * fails on a path that no longer exists.
  *
  * Returns the new filename, the repointed apps, and a `restore` that puts the
  * previous tarball(s) and every rewritten manifest back -- the install that
  * follows can still fail, and a tree whose manifests name a file the lockfile
  * does not know is the half-updated state the updaters exist to avoid.
  */
-export const placeAiChat = (source) => {
+export const placeVersionedTarball = (packageName, atRoot, source) => {
   const file = path.basename(source);
   const target = path.join(ROOT, file);
-  const current = fs.readdirSync(ROOT).filter((f) => AI_CHAT_TARBALL.test(f));
+  const current = fs.readdirSync(ROOT).filter((f) => atRoot.test(f));
 
   // Snapshot before touching anything: the bytes of every tarball about to be
   // removed or overwritten.
@@ -391,7 +400,7 @@ export const placeAiChat = (source) => {
     if (stale !== file) fs.rmSync(path.join(ROOT, stale), { force: true });
   }
 
-  const manifests = repointManifests("@onlyoffice/ai-chat", `file:../../${file}`);
+  const manifests = repointManifests(packageName, `file:../../${file}`);
 
   const restore = () => {
     manifests.restore();
@@ -401,3 +410,6 @@ export const placeAiChat = (source) => {
 
   return { file, touched: manifests.touched, restore };
 };
+
+export const placeAiChat = (source) =>
+  placeVersionedTarball("@onlyoffice/ai-chat", AI_CHAT_TARBALL, source);

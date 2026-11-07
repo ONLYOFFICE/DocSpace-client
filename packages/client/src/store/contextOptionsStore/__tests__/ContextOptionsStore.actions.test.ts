@@ -219,11 +219,93 @@ describe("ContextOptionsStore — action handler delegation (batch 2)", () => {
         setIsFolderActions: vi.fn(),
         setIsRoomDelete: vi.fn(),
       },
-      filesSettingsStore: { confirmDelete: true },
+      filesActionsStore: { isDeleteConfirmationForced: true },
       selectedFolderStore: { getSelectedFolder: () => ({}) },
       filesStore: { setBufferSelection: vi.fn(), isThirdPartySelection: false },
     });
     store.onClickDeleteSelectedFolder(t, false);
     expect(setDeleteDialogVisible).toHaveBeenCalledWith(true);
+  });
+});
+
+// A forced confirmation stands for a private room with confirmDelete off; the
+// getter has its own cases in FilesActionsStore.deleteDownload.test.ts.
+const deleteSetup = (isDeleteConfirmationForced: boolean) => {
+  const setDeleteDialogVisible = vi.fn();
+  const deleteAction = vi.fn(async () => {});
+  const store = createTestContextOptionsStore({
+    dialogsStore: {
+      setDeleteDialogVisible,
+      setIsFolderActions: vi.fn(),
+      setIsRoomDelete: vi.fn(),
+    },
+    filesActionsStore: {
+      isDeleteConfirmationForced,
+      deleteAction,
+      deleteRoomsAction: vi.fn(async () => {}),
+    },
+    filesSettingsStore: { confirmDelete: false },
+    selectedFolderStore: { id: 7, getSelectedFolder: () => ({ id: 7 }) },
+    filesStore: {
+      setBufferSelection: vi.fn(),
+      isThirdPartySelection: false,
+      selection: [1, 2].map((id) => ({
+        id,
+        fileExst: ".docx",
+        security: {},
+        contextOptions: ["delete"],
+      })),
+    },
+  });
+  return { store, setDeleteDialogVisible, deleteAction };
+};
+
+describe("ContextOptionsStore — delete from the menu of a selection", () => {
+  const clickDelete = (store: ReturnType<typeof deleteSetup>["store"]) =>
+    (
+      store.getGroupContextOptions(t) as Array<{
+        key?: string;
+        onClick?: () => void;
+      }>
+    )
+      .find((option) => option.key === "delete")
+      ?.onClick?.();
+
+  it("Confirmation disabled in settings", () => {
+    const { store, setDeleteDialogVisible, deleteAction } = deleteSetup(true);
+
+    clickDelete(store);
+
+    expect(setDeleteDialogVisible).toHaveBeenCalledWith(true);
+    expect(deleteAction).not.toHaveBeenCalled();
+  });
+
+  it("deletes without the dialog when the confirmation is not forced", () => {
+    const { store, setDeleteDialogVisible, deleteAction } = deleteSetup(false);
+
+    clickDelete(store);
+
+    expect(setDeleteDialogVisible).not.toHaveBeenCalled();
+    expect(deleteAction).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("ContextOptionsStore — delete from the menu of the open folder", () => {
+  it("Confirmation disabled in settings", () => {
+    const { store, setDeleteDialogVisible, deleteAction } = deleteSetup(true);
+
+    store.onClickDeleteSelectedFolder(t, false);
+
+    expect(setDeleteDialogVisible).toHaveBeenCalledWith(true);
+    expect(deleteAction).not.toHaveBeenCalled();
+  });
+
+  it("deletes without the dialog when the confirmation is not forced", () => {
+    const { store, setDeleteDialogVisible, deleteAction } = deleteSetup(false);
+
+    store.onClickDeleteSelectedFolder(t, false);
+
+    expect(setDeleteDialogVisible).not.toHaveBeenCalled();
+    expect(deleteAction).toHaveBeenCalledTimes(1);
   });
 });

@@ -72,7 +72,7 @@ const withHotkeys = (Component) => {
       viewAs,
       setViewAs,
       setHotkeyPanelVisible,
-      confirmDelete,
+      isDeleteConfirmationForced,
       setDeleteDialogVisible,
       setSelectFileDialogVisible,
       deleteAction,
@@ -408,7 +408,14 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "Alt+Shift+o",
       () => {
-        if (folderWithNoAction || isFormRoom || isParentFolderFormRoom) return;
+        // Spec: private-rooms/file-operations, "Create hotkeys respect keys"
+        if (
+          folderWithNoAction ||
+          isFormRoom ||
+          isParentFolderFormRoom ||
+          isPrivacyFolder
+        )
+          return;
 
         if (isMobile) {
           toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
@@ -459,7 +466,7 @@ const withHotkeys = (Component) => {
             return;
           }
 
-          if (confirmDelete) {
+          if (isDeleteConfirmationForced) {
             setDeleteDialogVisible(true);
           } else {
             const translations = {
@@ -472,7 +479,7 @@ const withHotkeys = (Component) => {
         }
       },
       hotkeysFilter,
-      [confirmDelete],
+      [isDeleteConfirmationForced],
     );
 
     // //TODO: Undo the last action
@@ -554,7 +561,6 @@ const withHotkeys = (Component) => {
       settingsStore,
       filesStore,
       dialogsStore,
-      filesSettingsStore,
       filesActionsStore,
       hotkeyStore,
       mediaViewerDataStore,
@@ -646,7 +652,7 @@ const withHotkeys = (Component) => {
         setHotkeyPanelVisible,
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        confirmDelete: filesSettingsStore.confirmDelete,
+        isDeleteConfirmationForced: filesActionsStore.isDeleteConfirmationForced,
         deleteAction,
         isAvailableOption,
 

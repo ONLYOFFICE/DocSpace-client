@@ -76,6 +76,14 @@ proposal.md.
 - **The setting's default hides the section on upgraded portals.** → Proposal
   decision 3, taken with product and the server team before the setting
   lands.
+- **A Document Server build changes the encrypted-editing contract
+  unnoticed.** The client and doceditor E2E suites replace the Document
+  Server's `api.js` with a stub that records the configuration, so they
+  prove what the client hands over, not that a Document Server accepts it.
+  → Proposal prerequisite 10 runs the editor check on a stand for every
+  build adopted; the contract version in the configuration lets a Document
+  Server that checks it refuse the file instead of opening it wrong
+  (`private-rooms-editor-contract` decision 5, its sign-off in task 1.6).
 
 ## Migration Plan
 

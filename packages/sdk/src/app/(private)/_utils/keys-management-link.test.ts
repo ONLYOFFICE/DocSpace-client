@@ -38,12 +38,12 @@ import { describe, expect, it } from "vitest";
 import { getKeysManagementUrl } from "./keys-management-link";
 
 describe("keys-management link", () => {
-  it("points at the portal's keys-management page with the opt-in", () => {
+  it("Forgot passphrase", () => {
     expect(getKeysManagementUrl("https://portal.example.com")).toBe(
-      "https://portal.example.com/profile/keys-management?privateRooms=1",
+      "https://portal.example.com/profile/keys-management",
     );
     expect(getKeysManagementUrl("https://portal.example.com/some/path/")).toBe(
-      "https://portal.example.com/profile/keys-management?privateRooms=1",
+      "https://portal.example.com/profile/keys-management",
     );
   });
 

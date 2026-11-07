@@ -38,6 +38,7 @@ import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { TFile } from "@docspace/shared/api/files/types";
+import { FolderType } from "@docspace/shared/enums";
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT =
   true;
@@ -83,6 +84,46 @@ describe("useItemContextMenu in a private room", () => {
     expect(menu.getFilesContextMenu(file({ encrypted: true }))).toContain(
       AVAILABLE_CONTEXT_ITEMS.copy,
     );
+  });
+
+  it("Duplicate offered for an encrypted file", () => {
+    expect(
+      menu.getFilesContextMenu(
+        file({
+          encrypted: true,
+          security: { Read: true, Duplicate: false, Move: true },
+        } as Partial<TFile>),
+      ),
+    ).toContain(AVAILABLE_CONTEXT_ITEMS.duplicate);
+  });
+
+  it("Duplicate withheld without the move right", () => {
+    expect(
+      menu.getFilesContextMenu(
+        file({
+          encrypted: true,
+          security: { Read: true, Duplicate: false, Move: false },
+        } as Partial<TFile>),
+      ),
+    ).not.toContain(AVAILABLE_CONTEXT_ITEMS.duplicate);
+  });
+
+  it("Duplicate withheld in an archived private room", () => {
+    expect(
+      menu.getFilesContextMenu(
+        file({
+          encrypted: true,
+          rootFolderType: FolderType.Archive,
+          security: {
+            Read: true,
+            Download: true,
+            ReadHistory: true,
+            Duplicate: false,
+            Move: false,
+          },
+        } as Partial<TFile>),
+      ),
+    ).not.toContain(AVAILABLE_CONTEXT_ITEMS.duplicate);
   });
 
   it("follows the Copy right for a file that is not encrypted", () => {

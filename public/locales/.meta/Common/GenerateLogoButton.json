@@ -3,7 +3,7 @@
   "content": "Generate",
   "content_en_sha1_hash": "fc45f9b7a9a6e8b48f0e28821ec1981804dd1eb6",
   "created_at": "2025-05-26T07:15:43.935Z",
-  "updated_at": "2026-11-05T16:49:40.026Z",
+  "updated_at": "2026-11-06T10:45:55.473Z",
   "comment": {
     "text": "This is a button label. Clicking it generates a logo based on the provided text input.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
-      "line_number": 157,
+      "line_number": 159,
       "context": "<Button\n testId=\"generate-logo-button\"\n id=\"btnGenerateLogo\"\n className={styles.generateLogo}\n size={ButtonSize.small}\n label={t(\"GenerateLogoButton\")}\n onClick={onUseTextAsLogo}\n isDisabled={!isSettingPaid || isEmpty}\n />\n </FieldContainer>\n </div>",
       "module": "/packages/shared"
     }

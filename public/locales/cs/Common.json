@@ -1818,6 +1818,8 @@
   "PrivateRoomNotFoundDescription": "Soukromá místnost, kterou hledáte, neexistuje nebo k ní nemáte přístup.",
   "PrivateRoomNotFoundTitle": "Nenalezeno",
   "PrivateRoomRenameNotSupported": "Přejmenování šifrovaných souborů zatím není podporováno.",
+  "PrivateRoomsBackupWarning": "Zálohy neobsahují šifrovací klíče soukromých místností. Pracovní prostor obnovený ze zálohy nemůže otevřít soubory ve svých soukromých místnostech.",
+  "PrivateRoomsBackupWarningTitle": "Soukromé místnosti se nezálohují",
   "PrivateRoomsBetaDescription": "Soukromé místnosti jsou ve verzi beta. Některé akce zatím nejsou pro šifrované soubory dostupné a šifrované soubory nelze otevřít bez vašeho klíče, proto si obnovovací frázi bezpečně uschovejte.",
   "PrivateRoomsBetaTitle": "Soukromé místnosti",
   "PrivateRoomsListEmptyDescription": "Soukromé místnosti jsou koncově zašifrované. Soubory jsou zašifrovány ve vašem prohlížeči před nahráním a přečíst je mohou pouze lidé, které pozvete.",

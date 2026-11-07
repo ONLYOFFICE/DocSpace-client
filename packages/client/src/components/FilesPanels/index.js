@@ -103,6 +103,7 @@ import ExternalSyncDbPanel from "../panels/ExternalSyncDbPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 import AssignRoles from "../dialogs/AssignRoles";
+import EncryptedTransferConfirmDialog from "../dialogs/EncryptedTransferConfirmDialog";
 import ShareSelector from "../ShareSelector";
 
 import TemplateGallery from "../TemplateGallery";
@@ -158,6 +159,7 @@ const Panels = (props) => {
     embeddingPanelData,
     metadataAIPanelData,
     moveToPublicRoomVisible,
+    encryptedTransferConfirm,
     settingsPluginDialogVisible,
     pluginDialogVisible,
     pluginSelectorVisible,
@@ -395,6 +397,9 @@ const Panels = (props) => {
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
+    encryptedTransferConfirm && (
+      <EncryptedTransferConfirmDialog key="encrypted-transfer-confirm-dialog" />
+    ),
     leaveRoomDialogVisible && <LeaveRoomDialog key="leave-room-dialog" />,
     changeRoomOwnerIsVisible && (
       <ChangeRoomOwnerPanel key="change-room-owner" />
@@ -538,6 +543,7 @@ export default inject(
       embeddingPanelData,
       metadataAIPanelData,
       moveToPublicRoomVisible,
+      encryptedTransferConfirm,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
@@ -666,6 +672,7 @@ export default inject(
       embeddingPanelData,
       metadataAIPanelData,
       moveToPublicRoomVisible,
+      encryptedTransferConfirm,
       settingsPluginDialogVisible,
       pluginDialogVisible,
       pluginSelectorVisible,

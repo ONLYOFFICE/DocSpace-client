@@ -110,6 +110,13 @@ describe("auto-lock preference storage", () => {
     expect(getAutoLockTimeoutSeconds()).toBe(3600);
   });
 
+  it("Tampered auto-lock value", () => {
+    window.localStorage.setItem(AUTO_LOCK_TIMEOUT_KEY, "999999");
+
+    expect(getAutoLockTimeoutSeconds()).toBe(0);
+    expect(getCurrentAutoLockPresetId()).toBe("off");
+  });
+
   it("getAutoLockTimeoutSeconds rejects non-preset values at read time (tamper defense)", () => {
     // Writing succeeds (legacy API), but read-time whitelist enforcement
     // returns the safe default when the stored value isn't a known preset.

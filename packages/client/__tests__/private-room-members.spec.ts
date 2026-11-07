@@ -47,6 +47,7 @@ import {
   usersWithRoomSharedHandler,
   type EncryptedFilesHandlerHandle,
   type PrivacyroomAccessHandlerHandle,
+  type RoomMembersHandlerHandle,
 } from "@docspace/shared/__mocks__/handlers";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { generateIdentityKeyPair } from "@docspace/shared/services/encryption/identity";
@@ -394,5 +395,64 @@ test.describe("Private room — member removal during uploads", () => {
     await expect
       .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
       .toBe(1);
+  });
+});
+
+test.describe("Private room — leaving", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  // The mocked user is the portal owner; the room belongs to Carol.
+  test("Administrator leaves", async ({ page, mockRequest, baseUrl }) => {
+    const membersHandle: { current: RoomMembersHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID, {
+        initial: [
+          { id: CAROL.id, displayName: CAROL.displayName, email: CAROL.email },
+          { id: TEST_USER_ID, access: ShareAccessRights.Editing },
+        ],
+        handle: membersHandle,
+      }),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: CAROL.id,
+        title: "Private Test Room",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: CAROL.id,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/filter`);
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+    await expect(row).toContainText("Private Test Room");
+
+    await row.click({ button: "right" });
+    await page.getByText("Leave the room", { exact: true }).click();
+    await page.getByRole("button", { name: "OK", exact: true }).click();
+
+    await expect(page.getByText("You have left the room")).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(page.getByTestId("table-row-0")).toHaveCount(0);
+    expect(
+      membersHandle.current!.getRequests().some(
+        (r) =>
+          r.method === "PUT" &&
+          JSON.stringify(r.body).includes(TEST_USER_ID) &&
+          JSON.stringify(r.body).includes(`"access":${ShareAccessRights.None}`),
+      ),
+    ).toBe(true);
   });
 });

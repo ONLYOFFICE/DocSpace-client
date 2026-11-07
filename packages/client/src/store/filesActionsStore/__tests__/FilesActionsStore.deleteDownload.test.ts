@@ -5,6 +5,7 @@ import { describe, it, expect, vi } from "vitest";
 vi.mock("@docspace/shared/api/files", async (io) => ({
   ...((await io()) as Record<string, unknown>),
   removeFiles: vi.fn(async () => [{}]),
+  deleteFile: vi.fn(async () => [{}]),
   duplicate: vi.fn(async () => [{}]),
   getFolder: vi.fn(),
   getFileEncryptionAccess: vi.fn(),
@@ -32,9 +33,11 @@ import { createTestFilesActionsStore, t } from "./testHarness";
 // After the harness, which mocks the toast module.
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
+  deleteFile,
   downloadFiles,
   getFileEncryptionAccess,
   getFolder,
+  removeFiles,
 } from "@docspace/shared/api/files";
 import {
   createZipFromBuffers,
@@ -178,6 +181,72 @@ describe("FilesActionsStore — delete/download/duplicate (batch 8)", () => {
     await store.duplicateAction({ id: 1, fileExst: ".docx" } as never);
     expect(p.setSecondaryProgressBarData).toHaveBeenCalled();
     expect(p.store.loopFilesOperations).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("FilesActionsStore — delete confirmation in a private room", () => {
+  const setup = (isPrivacyFolder: boolean) => {
+    const setDeleteDialogVisible = vi.fn();
+    const store = createTestFilesActionsStore({
+      treeFoldersStore: { isPrivacyFolder },
+      filesSettingsStore: { confirmDelete: false },
+      dialogsStore: { setDeleteDialogVisible, setIsRoomDelete: vi.fn() },
+      filesStore: {
+        hasSelection: true,
+        allFilesIsEditing: false,
+        selection: [
+          { id: 5, title: "plan.docx", fileExst: ".docx", security: { Delete: true } },
+        ],
+        files: [],
+        removeFiles: vi.fn(),
+        getIsEmptyTrash: vi.fn(),
+      },
+      uploadDataStore: progress().store,
+    });
+    return { store, setDeleteDialogVisible };
+  };
+
+  const headerDelete = (store: ReturnType<typeof setup>["store"]) =>
+    (store.getHeaderMenu(t) as Array<{ id?: string; onClick?: () => void }>)
+      .find((option) => option?.id === "menu-delete")
+      ?.onClick?.();
+
+  it("Confirmation disabled in settings: the item menu", async () => {
+    const { store, setDeleteDialogVisible } = setup(true);
+
+    await store.deleteItemAction(5, "plan.docx", null, true);
+
+    expect(store.isDeleteConfirmationForced).toBe(true);
+    expect(setDeleteDialogVisible).toHaveBeenCalledWith(true);
+    expect(deleteFile).not.toHaveBeenCalled();
+  });
+
+  it("Confirmation disabled in settings: the header menu", async () => {
+    const { store, setDeleteDialogVisible } = setup(true);
+
+    headerDelete(store);
+
+    expect(setDeleteDialogVisible).toHaveBeenCalledWith(true);
+    expect(removeFiles).not.toHaveBeenCalled();
+  });
+
+  it("deletes from the item menu without the dialog outside a private room", async () => {
+    const { store, setDeleteDialogVisible } = setup(false);
+
+    await store.deleteItemAction(5, "plan.docx", null, true);
+
+    expect(store.isDeleteConfirmationForced).toBe(false);
+    expect(setDeleteDialogVisible).not.toHaveBeenCalled();
+    expect(deleteFile).toHaveBeenCalledWith(5);
+  });
+
+  it("deletes from the header menu without the dialog outside a private room", async () => {
+    const { store, setDeleteDialogVisible } = setup(false);
+
+    headerDelete(store);
+
+    await vi.waitFor(() => expect(removeFiles).toHaveBeenCalledTimes(1));
+    expect(setDeleteDialogVisible).not.toHaveBeenCalled();
   });
 });
 

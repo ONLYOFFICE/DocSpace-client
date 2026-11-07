@@ -212,9 +212,7 @@ export default class FilesHeaderOptionStore {
   private deleteRooms = () => this.filesActionsStore.deleteRooms(this.t);
 
   private deleteAction = () => {
-    const { confirmDelete } = this.filesActionsStore.filesSettingsStore;
-
-    if (confirmDelete) {
+    if (this.filesActionsStore.isDeleteConfirmationForced) {
       this.dialogsStore.setDeleteDialogVisible(true);
     } else {
       const translations = {

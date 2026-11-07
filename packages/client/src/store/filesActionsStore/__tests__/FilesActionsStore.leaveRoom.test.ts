@@ -138,3 +138,80 @@ describe("FilesActionsStore — onLeaveRoom from inside the room", () => {
   );
 });
 
+describe("FilesActionsStore — onLeaveRoom as an administrator", () => {
+  const admin = { user: { id: "user-1", isAdmin: true }, encryptionKeys: [] };
+
+  beforeEach(() => {
+    vi.mocked(updateRoomMemberRole).mockResolvedValue(
+      {} as Awaited<ReturnType<typeof updateRoomMemberRole>>,
+    );
+  });
+
+  it("Administrator leaves from the list", async () => {
+    const removeFiles = vi.fn();
+    const setInRoomFolder = vi.fn();
+    const store = createTestFilesActionsStore({
+      userStore: admin,
+      filesStore: {
+        selection: [{ id: 42, title: "Room", private: true }],
+        removeFiles,
+        setInRoomFolder,
+      },
+      selectedFolderStore: { isRootFolder: true },
+    });
+
+    await store.onLeaveRoom(t);
+
+    expect(removeFiles).toHaveBeenCalledWith(null, [42]);
+    expect(setInRoomFolder).not.toHaveBeenCalled();
+    expect(toastr.success).toHaveBeenCalled();
+  });
+
+  it("Administrator leaves from inside the room", async () => {
+    const navigate = vi.fn();
+    (window as unknown as { DocSpace: unknown }).DocSpace = {
+      navigate,
+      location: { pathname: "/private/42/filter", search: "?folder=42" },
+    };
+    const setInRoom = vi.fn();
+    const store = createTestFilesActionsStore({
+      userStore: admin,
+      filesStore: { selection: [], bufferSelection: null, removeFiles: vi.fn() },
+      selectedFolderStore: {
+        id: 42,
+        private: true,
+        isRootFolder: false,
+        setInRoom,
+      },
+    });
+    const updateCurrentFolder = vi.fn();
+    (store as unknown as { updateCurrentFolder: unknown }).updateCurrentFolder =
+      updateCurrentFolder;
+
+    await store.onLeaveRoom(t);
+
+    expect(navigate).toHaveBeenCalledTimes(1);
+    expect(navigate.mock.calls[0][0].startsWith("/private/filter?")).toBe(true);
+    expect(setInRoom).not.toHaveBeenCalled();
+    expect(updateCurrentFolder).not.toHaveBeenCalled();
+  });
+
+  it("Administrator leaves an ordinary room", async () => {
+    const removeFiles = vi.fn();
+    const setInRoomFolder = vi.fn();
+    const store = createTestFilesActionsStore({
+      userStore: admin,
+      filesStore: {
+        selection: [{ id: 42, title: "Room", private: false }],
+        removeFiles,
+        setInRoomFolder,
+      },
+      selectedFolderStore: { isRootFolder: true },
+    });
+
+    await store.onLeaveRoom(t);
+
+    expect(setInRoomFolder).toHaveBeenCalledWith(42, false);
+    expect(removeFiles).not.toHaveBeenCalled();
+  });
+});

@@ -38,12 +38,13 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
+  MembersSubjectType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
-// Private (encrypted) rooms only ever contain real user accounts with an
-// encryption identity — no groups and no guests (the invite flow skips members
-// without keys). So the section set is Administration / Users / Expected.
+/** ShareFilterType.User: the server answers user records only. */
+export const USERS_ONLY = 16;
+
 export type MemberSectionKey = "administrators" | "users" | "expected";
 
 export type ClassifiedMemberSection = {
@@ -63,6 +64,11 @@ export function classifyMembers(
       activationStatus?: EmployeeActivationStatus;
       status?: EmployeeStatus;
     };
+
+    // Spec: private-rooms/sdk-surface, "Members grouped without groups and guests"
+    if (member.subjectType === MembersSubjectType.Group || shared.isVisitor) {
+      continue;
+    }
 
     if (shared.status === EmployeeStatus.Disabled && !member.isOwner) {
       continue;

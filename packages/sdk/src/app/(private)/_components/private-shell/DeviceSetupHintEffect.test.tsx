@@ -114,7 +114,7 @@ describe("DeviceSetupHintEffect", () => {
     act(() => hint.props.components[0].props.onClick());
 
     expect(open).toHaveBeenCalledWith(
-      "https://portal.example.com/profile/keys-management?privateRooms=1",
+      "https://portal.example.com/profile/keys-management",
       "_blank",
     );
     open.mockRestore();

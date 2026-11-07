@@ -112,7 +112,7 @@ describe("EncryptionShell passphrase dialog", () => {
 
     expect(onCancel).toHaveBeenCalledTimes(1);
     expect(open).toHaveBeenCalledWith(
-      "https://portal.example.com/profile/keys-management?privateRooms=1",
+      "https://portal.example.com/profile/keys-management",
       "_blank",
     );
     expect(toastr.info).not.toHaveBeenCalled();

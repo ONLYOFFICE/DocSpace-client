@@ -62,7 +62,7 @@ describe("ContextOptionsStore — action handler delegation (batch 9)", () => {
         setIsFolderActions: vi.fn(),
         setIsRoomDelete: vi.fn(),
       },
-      filesSettingsStore: { confirmDelete: true },
+      filesActionsStore: { isDeleteConfirmationForced: true },
       selectedFolderStore: { id: 1, getSelectedFolder: () => ({}) },
       filesStore: { setBufferSelection: vi.fn(), isThirdPartySelection: false },
     });

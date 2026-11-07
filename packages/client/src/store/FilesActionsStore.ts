@@ -142,12 +142,14 @@ import {
   copyFilesToKnowledgeRoomImpl,
   moveDragItemsImpl,
   getPublicKeyImpl,
+  confirmEncryptedTransferImpl,
 } from "./filesActionsStore/copyMove.helpers";
 import { planPrivateTransfer } from "@docspace/shared/services/private-room/private-transfer";
 import type {
   TEncryptedTransferDest,
   TPrivateTransferParams,
   TPrivateTransferPlan,
+  TPrivateTransferRunOptions,
 } from "./filesActionsStore/copyMove.helpers";
 import {
   moveToRoomsPageImpl,
@@ -461,6 +463,14 @@ class FilesActionStore {
 
   alreadyExportingRoomIndex = false;
 
+  // Spec: private-rooms/file-operations, "Deletion bypasses the recycle bin"
+  get isDeleteConfirmationForced() {
+    return (
+      this.filesSettingsStore.confirmDelete ||
+      this.treeFoldersStore.isPrivacyFolder
+    );
+  }
+
   constructor(
     settingsStore: SettingsStore,
     uploadDataStore: UploadDataStore,
@@ -631,8 +641,10 @@ class FilesActionStore {
     plan: TPrivateTransferPlan,
     destFolderId: number | string,
     dest: TEncryptedTransferDest | null | undefined,
-    options: { move: boolean; sourceRoomId?: number | string | null },
+    options: TPrivateTransferRunOptions,
   )=> runPrivateTransferPlanImpl(this, plan, destFolderId, dest, options);
+
+  confirmEncryptedTransfer = ()=> confirmEncryptedTransferImpl(this);
 
   getItemsInfo = (items: TActionItem[])=> getItemsInfoImpl(this, items);
 

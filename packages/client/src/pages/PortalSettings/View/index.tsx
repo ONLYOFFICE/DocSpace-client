@@ -73,8 +73,8 @@ import { Component as Apps } from "../categories/apps";
 // the chat stack with every settings tab. The chunk is fetched only when the
 // tab is opened.
 const AISettings = React.lazy(() =>
-  // See the AIAgentView lazy in pages/Home/View: componentLoader recovers
-  // from a chunk that no longer exists after a deploy.
+  // componentLoader recovers from a chunk that no longer exists after a
+  // deploy.
   componentLoader(() => import("../categories/ai-settings")).then((m) => ({
     default: m.Component,
   })),

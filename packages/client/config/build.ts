@@ -49,6 +49,12 @@ const isSharedModule = (id: string) =>
     id,
   );
 
+const lazyGroupOptions = {
+  entriesAware: true,
+  entriesAwareMergeThreshold: 20_000,
+  minSize: 0,
+};
+
 export const getBuildConfig = (
   isProduction: boolean,
 ): UserConfig["build"] => ({
@@ -149,8 +155,8 @@ export const getBuildConfig = (
           //   heic2any   — emscripten HEIC decoder (~1.3MB), MediaViewer only
           //   AI stack   — @onlyoffice/ai-chat and its externalized peers
           //                (openai/anthropic/genai/mistral SDKs, assistant-ui,
-          //                radix, zustand, katex); reached only from the lazy
-          //                Home/Dashboard/PortalSettings AI pages
+          //                radix, zustand, katex); the chat UI is reached only
+          //                from the lazy AI pages and the lazy chat panel
           //   markdown   — react-markdown + unified/remark/rehype pipeline;
           //                used by the AI chat and lazy DebugInfo only
           //   codemirror — JavascriptSDK settings page (lazy) and ai-chat
@@ -162,9 +168,7 @@ export const getBuildConfig = (
           },
           {
             name: "vendor-lazy",
-            entriesAware: true,
-            entriesAwareMergeThreshold: 20_000,
-            minSize: 0,
+            ...lazyGroupOptions,
             test: isVendorModule,
             priority: 9,
           },
@@ -175,10 +179,12 @@ export const getBuildConfig = (
           // only what the entry needs (`$initial`), so it stays preloaded
           // without the code of lazy pages; `shared-lazy` groups the rest by
           // the set of lazy chunks that use it, merging subgroups below 20KB.
-          // ui-kit's ai-agent subtree is excluded for the same reason as the
-          // AI deps above: it statically imports @onlyoffice/ai-chat and is
-          // itself only reached from lazy AI pages — captured here it would
-          // pull the whole chat UI into the preloaded `shared` chunk.
+          // ui-kit's ai-agent subtree is excluded together with the AI deps
+          // above and chunked automatically next to @onlyoffice/ai-chat. The
+          // entry reaches only its providers, which Shell mounts and which
+          // take ai-chat through its light subpaths (`/store`,
+          // `/widget-providers`, ...); the chat UI stays behind the lazy AI
+          // pages and the lazy chat panel.
           //
           // Both patterns have to allow for the `dist/esm` segment the
           // published package inserts: a module id reads
@@ -193,9 +199,7 @@ export const getBuildConfig = (
           },
           {
             name: "shared-lazy",
-            entriesAware: true,
-            entriesAwareMergeThreshold: 20_000,
-            minSize: 0,
+            ...lazyGroupOptions,
             test: isSharedModule,
             priority: 4,
           },

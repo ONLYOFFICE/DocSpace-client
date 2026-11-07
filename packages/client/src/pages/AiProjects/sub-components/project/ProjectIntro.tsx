@@ -40,7 +40,7 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
-import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers/stores";
 import type { TAiProject, TAiProjectSource } from "@docspace/shared/api/ai/projects";
 import { useStore } from "SRC_DIR/store/useStore";
 

@@ -70,7 +70,6 @@ import useProfileBody, {
 import useContacts, { type UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { type UseFilesProps } from "../Hooks/useFiles";
 import OformsStore from "SRC_DIR/store/OformsStore";
-import AiProjectViewConnected from "SRC_DIR/pages/AiProjects/AiProjectView";
 import EmptyAiRoomsContainerConnected from "SRC_DIR/components/EmptyContainer/EmptyAiRoomsContainer";
 
 const ProfileSectionBodyContent = React.lazy(() =>
@@ -78,7 +77,11 @@ const ProfileSectionBodyContent = React.lazy(() =>
 );
 
 // Every prop of the project view is injected.
-const AiProjectView = AiProjectViewConnected as unknown as React.FC;
+const AiProjectView = React.lazy(() =>
+  componentLoader(() => import("SRC_DIR/pages/AiProjects/AiProjectView")).then(
+    (m) => ({ default: m.default as unknown as React.FC }),
+  ),
+);
 const EmptyAiRoomsContainer = EmptyAiRoomsContainerConnected as unknown as React.FC;
 
 type ViewProps = UseContactsProps &
@@ -506,7 +509,9 @@ const View = ({
               <ProfileSectionBodyContent />
             </React.Suspense>
           ) : isAiProjectRoomRoot && !isLoading ? (
-            <AiProjectView />
+            <React.Suspense fallback={null}>
+              <AiProjectView />
+            </React.Suspense>
           ) : isAiRoomsOff && !isLoading ? (
             <EmptyAiRoomsContainer />
           ) : (

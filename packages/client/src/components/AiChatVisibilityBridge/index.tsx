@@ -36,7 +36,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 
 type Props = {
   onChange: (isVisible: boolean) => void;

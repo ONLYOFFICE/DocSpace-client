@@ -41,7 +41,7 @@ import { reaction } from "mobx";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
-import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers/stores";
 
 import type { TTranslation } from "@docspace/shared/types";
 

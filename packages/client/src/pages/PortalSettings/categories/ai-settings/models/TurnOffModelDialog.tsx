@@ -43,7 +43,7 @@ import {
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers/stores";
 
 import styles from "./TurnOffModelDialog.module.scss";
 

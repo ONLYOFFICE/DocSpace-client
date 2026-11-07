@@ -46,7 +46,7 @@ import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers/stores";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { inject, observer } from "mobx-react";

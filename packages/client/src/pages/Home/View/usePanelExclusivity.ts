@@ -36,7 +36,7 @@
 import React from "react";
 import { reaction } from "mobx";
 
-import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers/stores";
 import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 

@@ -45,7 +45,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { AiChatPanelBody } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
 import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
-import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers/stores";
 import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import { EmptyView } from "@onlyoffice/apps-ui-kit/components/empty-view";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";

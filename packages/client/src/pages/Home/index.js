@@ -41,13 +41,13 @@ import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
+import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useAiChatPanel";
 import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import {
   useChatNoAccess,
   mapChatNoAccessStores,
 } from "SRC_DIR/Hooks/useChatNoAccess";
-import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 
 import {
   addTagsToRoom,

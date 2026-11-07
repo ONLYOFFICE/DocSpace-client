@@ -76,7 +76,7 @@ import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
-import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
+import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useAiChatPanel";
 import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 import ChatPanelView from "@onlyoffice/apps-ui-kit/components/section/sub-components/ChatPanel";
 

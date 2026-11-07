@@ -50,7 +50,7 @@ import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
 import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
-import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers/stores";
 import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
 import { RoomSearchArea } from "@docspace/shared/enums";
 import {

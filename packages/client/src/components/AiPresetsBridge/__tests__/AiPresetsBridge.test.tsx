@@ -57,7 +57,7 @@ class FakeAiChatStore {
 let aiChatStore = new FakeAiChatStore();
 
 // The bridge reads whether a chat profile exists to tell "AI is set up".
-vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers", () => ({
+vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/stores", () => ({
   useStores: () => ({
     useProfilesStore: (select: (s: { initialized: boolean; hasProfiles: boolean }) => unknown) =>
       select({ initialized: true, hasProfiles: true }),

@@ -48,7 +48,7 @@ import {
   ContextMenuButtonDisplayType,
 } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
-import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers/stores";
 import { ContextFolderDialog } from "@onlyoffice/apps-ui-kit/ai-agent/providers/files";
 import { getFolderInfo, getFolderPath } from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

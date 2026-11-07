@@ -38,7 +38,7 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { useStores as useAiChatStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useStores as useAiChatStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers/stores";
 import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import {
   useAttachHostFilesToChat,

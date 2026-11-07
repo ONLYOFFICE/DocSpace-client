@@ -66,7 +66,7 @@ import { useNavigate, useLocation } from "react-router";
 
 import { Tabs, TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { SECTION_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/section/Section.constants";
-import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers/stores";
 import {
   AiModels,
   ModelAssignment,

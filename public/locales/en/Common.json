@@ -1818,6 +1818,8 @@
   "PrivateRoomNotFoundDescription": "The private room you are looking for does not exist or you do not have access.",
   "PrivateRoomNotFoundTitle": "Not found",
   "PrivateRoomRenameNotSupported": "Renaming encrypted files is not supported yet.",
+  "PrivateRoomsBackupWarning": "Backups do not include the encryption keys of private rooms. A workspace restored from a backup cannot open the files in its private rooms.",
+  "PrivateRoomsBackupWarningTitle": "Private rooms are not backed up",
   "PrivateRoomsBetaDescription": "Private rooms are in beta. Some actions are not available for encrypted files yet, and encrypted files cannot be opened without your key, so keep your recovery phrase safe.",
   "PrivateRoomsBetaTitle": "Private rooms",
   "PrivateRoomsListEmptyDescription": "Private rooms are end-to-end encrypted. Files are encrypted in your browser before upload and only the people you invite can read them.",

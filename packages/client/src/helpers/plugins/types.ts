@@ -77,6 +77,7 @@ import type {
   IPostMessageCallbackMessage,
   IPostMessagePlugin,
   IMediaViewer,
+  RoomsType as PluginRoomsType,
 } from "@onlyoffice/docspace-plugin-sdk";
 
 import type { TCurrentFile } from "@onlyoffice/docspace-plugin-sdk/react";
@@ -221,6 +222,7 @@ export interface IContextMenuItemValidation {
     | TFolderSecurity
     | Partial<TFileSecurity & TRoomSecurity & TFolderSecurity>;
   itemId?: number | string;
+  roomType?: PluginRoomsType;
 }
 
 // Client-specific window interface

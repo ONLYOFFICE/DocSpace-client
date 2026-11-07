@@ -75,6 +75,15 @@ The change MUST NOT be applied until all of the following hold:
    the backend team on 2026-11-05: a restored portal cannot open the files
    of its private rooms. The backup of the keys with the original ids is
    a later option and not a gate criterion.
+10. Every Document Server build the release adopts, the one named for
+    prerequisite 7 and each later one up to general availability, has passed
+    the editor check on a stand with the crypto add-on before the portal
+    moves to it: create, edit, save, close every editor and reopen; a second
+    member joining a held session; a view-only member. The E2E suites stop
+    at the configuration handed to `DocsAPI.DocEditor`, so a Document Server
+    that changes what it expects passes them unnoticed (decided by the owner
+    on 2026-11-06). The check of 2026-11-06 on 10.0.3.19 fails at the
+    reopen (`private-rooms-editor-contract` 6.2).
 
 ## Capabilities
 

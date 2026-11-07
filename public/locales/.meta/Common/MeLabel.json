@@ -3,7 +3,7 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2026-11-05T16:49:39.796Z",
+  "updated_at": "2026-11-06T10:45:53.687Z",
   "comment": {
     "text": "This label appears next to a user's name to indicate that the user is the current user. It is displayed in parentheses.",
     "is_auto": true,
@@ -193,7 +193,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMemberUser.tsx",
-      "line_number": 245,
+      "line_number": 244,
       "context": "<div className={styles.userBody}>\n <div className={styles.nameWrapper}>\n <Text className={styles.userName}>{displayName}</Text>\n {isMe ? (\n <span className={styles.meLabel}>\n &nbsp;{`(${t(\"Common:MeLabel\")})`}\n </span>\n ) : null}\n </div>\n {isAccessPending ? (\n <div",
       "module": "/packages/sdk"
     },

@@ -75,6 +75,7 @@ const BackupListModalDialog = ({
   navigate,
 
   standalone,
+  showPrivateRoomsWarning = false,
   setTenantStatus,
 
   downloadingProgress,
@@ -211,6 +212,11 @@ const BackupListModalDialog = ({
       )}
     >
       {t("Common:RestoreBackupWarningText")}{" "}
+      {showPrivateRoomsWarning ? (
+        <>
+          {t("Common:PrivateRoomsBackupWarning")}{" "}
+        </>
+      ) : null}
       {!standalone ? (
         <Text
           as="span"

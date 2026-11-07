@@ -22,11 +22,11 @@ The system SHALL offer private rooms on every portal, SaaS and standalone, with 
 - **THEN** no private-rooms surface appears and nothing is written to localStorage
 
 ### Requirement: Existing private rooms stay usable when the app is off
-The system SHALL keep rooms that are already private, and files that are already encrypted, readable and manageable for their members when an administrator switches the E2E rooms app off. Only the creation of new private rooms is withheld. While the app is off, private rooms SHALL be listed in Rooms with their private badge.
+The system SHALL keep rooms that are already private, and files that are already encrypted, readable and manageable for their members, who reach them by their address, when an administrator switches the E2E rooms app off. Only the creation of new private rooms is withheld. While the app is off, private rooms SHALL NOT be listed: the server leaves them out of the Rooms area, and the client does not ask for them.
 
 #### Scenario: App switched off after rooms exist
 - **WHEN** an administrator switches the E2E rooms app off on a standalone portal with private rooms
-- **THEN** members still find their private rooms in Rooms with the private badge, and can open them and download or upload encrypted files
+- **THEN** members no longer find their private rooms in Rooms, and a private room opened by its address still opens under Rooms and lets them download or upload encrypted files
 
 #### Scenario: No new private room while off
 - **WHEN** the E2E rooms app is off
@@ -69,7 +69,7 @@ While the client runs inside an embedded frame, the client SHALL offer private r
 
 #### Scenario: Frame without the property
 - **WHEN** a host embeds the client without the property
-- **THEN** the Private section is not available in the frame and the Rooms list carries no privacy filter
+- **THEN** the Private section is not available in the frame, the Rooms list carries no privacy filter and lists no private room
 
 #### Scenario: Browser flag in a frame
 - **WHEN** a host embeds the client without the property in a browser whose localStorage holds a `privateRooms` entry

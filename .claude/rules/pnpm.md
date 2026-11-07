@@ -277,7 +277,7 @@ extracted copy, that the lockfile references no other ai-chat tarball, and the
 lockfile entry's peers and dependencies against the packed manifest; a failed
 install restores the tarballs, manifests and lockfile. It warns when the
 filename and the packed version disagree. Go back with
-`pnpm -r update @onlyoffice/ai-chat@^<version>` and delete the tarball. Both
+`pnpm -r update @onlyoffice/ai-chat@^<version>` and delete the tarball. The
 updaters share their helpers in `scripts/lib/vendored-tarball.mjs`.
 
 Most of ai-chat's own peers are optional too (the assistant-ui widgets, the
@@ -296,3 +296,40 @@ peers as ai-chat's own `dependencies`. pnpm treats a name that is also an
 optional peer of the package as a peer: it resolves it from the dependent when
 it can and silently drops it when it cannot, so a fresh resolution loses the
 LLM SDKs while an incremental one appears to work. It was tried and reverted.
+
+## The plugin SDK dependency
+
+`@onlyoffice/docspace-plugin-sdk` (only `packages/client` depends on it) comes
+from npm as well. An SDK build that is not published yet - a client feature
+that needs new SDK typings - is packed in the `docspace-plugin-sdk` checkout
+under a **pre-release version dated by the pack day**, so the tarball never
+claims a release that is not on npm and the published `x.y.z` still outranks it
+under `^x.y.z`. Another pack the same day takes a counter - `3.1.0-20261106.2`,
+`.3` - and the script refuses a different build under a version already at the
+root, naming the next one (not `HHMM`: a semver numeric part cannot start with
+`0`):
+
+```bash
+# in the SDK checkout (restore package.json afterwards)
+npm version 3.1.0-20261106 --no-git-tag-version && npm run build && npm pack
+# here
+pnpm run update-plugin-sdk                 # newest pack in ../../docspace-plugin-sdk
+pnpm run update-plugin-sdk path/to/pack.tgz
+DOCSPACE_PLUGIN_SDK_SRC=../elsewhere pnpm run update-plugin-sdk
+```
+
+Pack from a checkout with `core.autocrlf=false`: npm packs the working-tree
+bytes, and a Windows checkout ships CRLF in the SDK's `npx/` scripts (a CRLF
+shebang breaks `npx` on Linux and macOS) and in the plugin template.
+
+As with ai-chat, the version is part of the filename -
+`onlyoffice-docspace-plugin-sdk-<version>.tgz` at the repo root - so a new pack
+is a new `file:` specifier and pnpm re-resolves it on its own; the script
+repoints the manifest, removes the previous SDK tarball (an unversioned
+`onlyoffice-docspace-plugin-sdk.tgz` included), rewrites the integrity for a
+same-name repack and verifies the install as `update-ui-kit` does. The
+Dockerfiles copy the root `*.tgz`, so they need no change. pnpm shortens the
+SDK's directory under `node_modules/.pnpm` to `@onlyoffice+docspace-plugin_<hash>`;
+the script matches that prefix. Go back with
+`pnpm -r update @onlyoffice/docspace-plugin-sdk@^<version>` once the release is
+on npm, and delete the tarball.

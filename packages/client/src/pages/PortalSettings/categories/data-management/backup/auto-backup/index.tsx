@@ -248,6 +248,7 @@ export default inject(
       removeItem,
       settingsFileSelector,
       ensureAppsLoaded: appsStore.ensureLoaded,
+      showPrivateRoomsWarning: appsStore.isPrivateRoomsSectionAvailable,
       disabledCreatePublicRoom:
         isExternalShareRestricted && externalShareApplyToRooms,
       isEnableAuto,

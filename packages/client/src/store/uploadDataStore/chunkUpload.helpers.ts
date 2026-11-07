@@ -295,14 +295,24 @@ export async function asyncUploadImpl(
           const finalizeIndex =
             self.asyncUploadObj[operationId].chunksArray.length - 1;
 
-          const finalizeRes =
-            await self.asyncUploadObj[operationId].chunksArray[
-              finalizeChunkIndex
-            ].onUpload();
+          const finalizeRes = (await self.asyncUploadObj[
+            operationId
+          ].chunksArray[finalizeChunkIndex].onUpload()) as TChunkUploadResponse;
+
+          if (isUploadStopped()) {
+            const row = self.files[indexOfFile];
+            if (finalizeRes?.uploaded && row) {
+              restoreRowCancelledLate(self, row.uniqueId, {
+                fileId: finalizeRes.id,
+                file: finalizeRes.file,
+              });
+            }
+            return resolve();
+          }
 
           self.checkChunkUpload({
             t,
-            res: finalizeRes as TChunkUploadResponse,
+            res: finalizeRes,
             index: finalizeIndex,
             indexOfFile,
             path,
@@ -368,8 +378,7 @@ export async function uploadFileChunksImpl(
       isActive: false,
       isFinished: false,
       isFinalize: true,
-      onUpload: () =>
-        finalizeUploadSession(folderId, sessionId, controller.signal),
+      onUpload: () => finalizeUploadSession(folderId, sessionId),
     });
 
     if (!self.asyncUploadObj[operationId]) {
@@ -393,6 +402,9 @@ export async function uploadFileChunksImpl(
 
     try {
       await promise;
+    } catch (error) {
+      controller.abort();
+      throw error;
     } finally {
       stopWatchingCancel();
     }

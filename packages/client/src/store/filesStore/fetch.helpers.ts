@@ -808,6 +808,10 @@ export function fetchRoomsImpl(
           // Spec: private-rooms/sidebar-section, "Section titles and path labels"
           if (self.categoryType === CategoryType.PrivateRooms)
             setDocumentTitle(i18n.t("Common:Private"));
+          // The AI root is titled by the client, as the tree and the section
+          // header title it; the server's folder title is not shown anywhere.
+          if (self.categoryType === CategoryType.AiHub)
+            setDocumentTitle(i18n.t("Common:AiWorkspace"));
 
           const isEmptyList = data.folders.length === 0;
           if (filter && isEmptyList) {

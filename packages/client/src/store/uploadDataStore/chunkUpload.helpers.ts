@@ -224,11 +224,12 @@ export async function asyncUploadImpl(
 ) {
   const { operationId, file, indexOfFile, path, length } = chunkData;
 
-  if (
+  const isUploadStopped = () =>
     self.uploaded ||
     !self.files.some((f) => f.file === file) ||
-    self.files[indexOfFile].cancel
-  ) {
+    self.files[indexOfFile]?.cancel;
+
+  if (isUploadStopped()) {
     return resolve();
   }
 
@@ -255,11 +256,7 @@ export async function asyncUploadImpl(
         ].isFinished = true;
       }
 
-      if (
-        self.uploaded ||
-        !self.files.some((f) => f.file === file) ||
-        self.files[indexOfFile]?.cancel
-      ) {
+      if (isUploadStopped()) {
         return resolve();
       }
 
@@ -298,16 +295,32 @@ export async function asyncUploadImpl(
           const finalizeIndex =
             self.asyncUploadObj[operationId].chunksArray.length - 1;
 
-          const finalizeRes =
-            await self.asyncUploadObj[operationId].chunksArray[
-              finalizeChunkIndex
-            ].onUpload();
+          const finalizeRes = (await self.asyncUploadObj[
+            operationId
+          ].chunksArray[finalizeChunkIndex].onUpload()) as TChunkUploadResponse;
+
+          // The row is found by its file: a batch cancelled during finalize
+          // drops its rows on the next drop, so `indexOfFile` may already
+          // belong to a new file that has not been sent yet.
+          const rowIndex = self.files.findIndex((f) => f.file === file);
+          const row = self.files[rowIndex];
+          if (!row) return resolve();
+
+          if (row.cancel) {
+            if (finalizeRes?.uploaded) {
+              restoreRowCancelledLate(self, row.uniqueId, {
+                fileId: finalizeRes.id,
+                file: finalizeRes.file,
+              });
+            }
+            return resolve();
+          }
 
           self.checkChunkUpload({
             t,
-            res: finalizeRes as TChunkUploadResponse,
+            res: finalizeRes,
             index: finalizeIndex,
-            indexOfFile,
+            indexOfFile: rowIndex,
             path,
             chunksLength: length,
             resolve,
@@ -316,6 +329,10 @@ export async function asyncUploadImpl(
         }
       }
     } catch (error) {
+      if (isUploadStopped()) {
+        return resolve();
+      }
+
       return reject(error);
     }
   }
@@ -340,6 +357,13 @@ export async function uploadFileChunksImpl(
 
   const isThirdPartyFolder = typeof toFolderId === "string";
   if (!isThirdPartyFolder) {
+    const { uniqueId } = self.files[indexOfFile];
+    const controller = new AbortController();
+    const stopWatchingCancel = when(
+      () => isRowCancelled(self, uniqueId),
+      () => controller.abort(),
+    );
+
     const chunksArray: TUploadChunk[] = [];
     for (let index = 0; index < length; index++) {
       chunksArray.push({
@@ -352,6 +376,7 @@ export async function uploadFileChunksImpl(
             sessionId,
             index + 1,
             requestsDataArray[index],
+            controller.signal,
           ),
       });
     }
@@ -381,7 +406,14 @@ export async function uploadFileChunksImpl(
       }
     });
 
-    await promise;
+    try {
+      await promise;
+    } catch (error) {
+      controller.abort();
+      throw error;
+    } finally {
+      stopWatchingCancel();
+    }
   } else {
     for (let index = 0; index < length; index++) {
       if (

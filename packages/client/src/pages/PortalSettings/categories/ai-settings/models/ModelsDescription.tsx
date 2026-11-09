@@ -34,6 +34,7 @@
  */
 
 import React from "react";
+import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
@@ -46,9 +47,14 @@ const BYOK_PATH = "/portal-settings/ai-settings/byok";
 type ModelsDescriptionProps = {
   className?: string;
   hasByok: boolean;
+  aiToolsFeePercent?: string;
 };
 
-const ModelsDescription = ({ className, hasByok }: ModelsDescriptionProps) => {
+const ModelsDescription = ({
+  className,
+  hasByok,
+  aiToolsFeePercent,
+}: ModelsDescriptionProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
 
@@ -70,7 +76,9 @@ const ModelsDescription = ({ className, hasByok }: ModelsDescriptionProps) => {
   return (
     <Text className={className}>
       {hasByok ? (
-        t("Common:AIModelsDescription")
+        t("Common:AIModelsDescriptionWithFee", {
+          percent: aiToolsFeePercent,
+        })
       ) : (
         <CommonTrans
           i18nKey="AIModelsDescriptionNoByok"
@@ -82,4 +90,10 @@ const ModelsDescription = ({ className, hasByok }: ModelsDescriptionProps) => {
   );
 };
 
-export default ModelsDescription;
+export default inject<TStore>(({ paymentStore }) => {
+  const { aiToolsFeePercent } = paymentStore;
+
+  return {
+    aiToolsFeePercent,
+  };
+})(observer(ModelsDescription));

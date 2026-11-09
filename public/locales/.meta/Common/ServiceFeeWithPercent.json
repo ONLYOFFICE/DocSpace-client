@@ -3,11 +3,12 @@
   "content": "Service fee, {{percent}}%",
   "content_en_sha1_hash": "6e483104ec2b501994fe1eacf8f79ac8fcd6acb0",
   "created_at": "2026-11-09T17:07:12.364Z",
-  "updated_at": "2026-11-09T17:07:12.364Z",
+  "updated_at": "2026-11-09T17:12:09.867Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Row label in the BYOK tooltip of a wallet transaction in the transaction history, followed by the service fee amount charged to the wallet. {{percent}} is a number followed by a literal % sign.",
+    "is_auto": true,
+    "updated_at": "2026-11-09T17:12:09.867Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [],
   "languages": {

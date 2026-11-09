@@ -3,11 +3,12 @@
   "content": "API key saved",
   "content_en_sha1_hash": "c0e80f9588e75615524766f931bb5406527c756e",
   "created_at": "2026-11-09T17:06:22.737Z",
-  "updated_at": "2026-11-09T17:07:34.877Z",
+  "updated_at": "2026-11-09T17:12:09.867Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Success toast shown on the BYOK tab of the AI settings page after the administrator saves a provider API key for a model. Short past-tense status message.",
+    "is_auto": true,
+    "updated_at": "2026-11-09T17:12:09.867Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {

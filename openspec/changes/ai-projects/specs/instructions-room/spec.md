@@ -28,9 +28,13 @@ An Instructions room SHALL hold Markdown (`.md`) files only: no subfolders can b
 - **WHEN** a user tries to create a folder inside an Instructions room
 - **THEN** the action is not offered and the server refuses it
 
-#### Scenario: Skills are uploaded, not created
-- **WHEN** a Content creator opens the empty view, the "+" menu or the main button inside an Instructions room
-- **THEN** only "Upload from storage" and "Upload from device" are offered, in that order, as a new empty file would have no frontmatter and be refused
+#### Scenario: Create a skill from the room
+- **WHEN** a Content creator opens the empty view, the "+" menu or the main button inside an Instructions room while the Markdown plugin is enabled
+- **THEN** "Markdown file" is offered next to the upload, and the new file starts with a `name` / `description` frontmatter derived from its title and opens in the Markdown plugin
+
+#### Scenario: No Markdown plugin
+- **WHEN** the Markdown plugin is disabled
+- **THEN** only an upload of Markdown files is offered, and a skill opens view-only, as the document editor never edits Markdown
 
 #### Scenario: Upload from storage
 - **WHEN** a Content creator picks "Upload from storage"

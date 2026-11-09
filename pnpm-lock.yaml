@@ -3573,7 +3573,7 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-x6992ldiaKlD2W6LsxLZ3lrrQueUIB0Y+gyWkhO7nO+psKSDapdRp9/xJlsNlnHFLGe+CVEEW9GfnlSj5XCXlA==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-WtsjgR/2BL+NVt6wU4oqjnrs2/696gBFZW2tzHZqEIUcfxmRuqUc0cmrJj3Mupo0rc780BYH6toSSCyi4uOY/Q==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.1.0
     engines: {node: '>=22'}
     peerDependencies:

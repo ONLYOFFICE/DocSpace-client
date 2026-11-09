@@ -80,9 +80,14 @@ const NavMenu = (props) => {
 
   const timeout = React.useRef(null);
   const scrollTopRef = React.useRef(0);
+  const scrollFrameRef = React.useRef(0);
   const headerRef = React.useRef(null);
 
   const location = useLocation();
+
+  const hideHeader = (!showHeader && isFrame) || isPublicPreview();
+  const isHeaderShown =
+    currentDeviceType === DeviceType.mobile && isMobile() && !hideHeader;
 
   const [isBackdropVisible, setIsBackdropVisible] = useState(
     isBackdropVisibleProp,
@@ -98,8 +103,7 @@ const NavMenu = (props) => {
   // only when isFixed flips.
   const [scrollTick, setScrollTick] = useState(0);
 
-  const onScroll = useCallback((e) => {
-    const eventTarget = e.target;
+  const onScrollFrame = useCallback((eventTarget) => {
     const scrollHeight = eventTarget.scrollHeight;
     const clientHeight = eventTarget.clientHeight;
 
@@ -138,7 +142,25 @@ const NavMenu = (props) => {
     }
   }, []);
 
+  // Once a frame, not on every scroll event: reading the scroller's sizes in
+  // the event, after the scrollbar has restyled its thumb, lays the whole page
+  // out on the spot.
+  const onScroll = useCallback(
+    (e) => {
+      const eventTarget = e.target;
+      if (scrollFrameRef.current) return;
+      scrollFrameRef.current = requestAnimationFrame(() => {
+        scrollFrameRef.current = 0;
+        onScrollFrame(eventTarget);
+      });
+    },
+    [onScrollFrame],
+  );
+
+  // Only while the bar is shown: elsewhere there is nothing to slide.
   useEffect(() => {
+    if (!isHeaderShown) return undefined;
+
     const scroll = isMobile()
       ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
       : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
@@ -146,8 +168,10 @@ const NavMenu = (props) => {
 
     return () => {
       scroll?.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(scrollFrameRef.current);
+      scrollFrameRef.current = 0;
     };
-  }, [onScroll]);
+  }, [onScroll, isHeaderShown]);
 
   // --nav-offset must describe the space the bar actually occupies at the top of
   // the viewport, because the section header (top: var(--nav-offset)) and the
@@ -239,10 +263,8 @@ const NavMenu = (props) => {
   };
 
   const isAsideAvailable = !!asideContent;
-  const hideHeader = (!showHeader && isFrame) || isPublicPreview();
 
-  if (currentDeviceType !== DeviceType.mobile || !isMobile() || hideHeader)
-    return null;
+  if (!isHeaderShown) return null;
 
   const isPreparationPortal = location.pathname === "/preparation-portal";
 

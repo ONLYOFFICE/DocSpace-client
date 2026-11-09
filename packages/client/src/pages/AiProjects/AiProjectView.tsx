@@ -46,7 +46,7 @@ import { AiChatPanelBody } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel"
 import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
-import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
+// import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import { EmptyView } from "@onlyoffice/apps-ui-kit/components/empty-view";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import type { TAiProject } from "@docspace/shared/api/ai/projects";
@@ -59,7 +59,8 @@ import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import EmptyAccessLightIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.light.svg";
 import EmptyAccessDarkIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg";
 
-import { ProjectSources } from "./sub-components/project/ProjectSources";
+// Concept: the sources column is off, the composer connects the rooms instead.
+// import { ProjectSources } from "./sub-components/project/ProjectSources";
 import styles from "./AiProjectView.module.scss";
 
 type AiProjectViewProps = {
@@ -98,17 +99,19 @@ const AiProjectView = ({
   inRoom,
   setInRoom,
   userId,
-  infoPanelVisible,
+  // infoPanelVisible,
 }: AiProjectViewProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
   const navigate = useNavigate();
   const aiChatStore = useAiChatStore();
   const isAiChatAvailable = useIsAiChatAvailable();
-  const isDesktop = useIsDesktop();
-  const { useRouter, useCloudsStore } = useStores();
+  const { useCloudsStore } = useStores();
+  // Concept: the sources column is off, so nothing hides for the history.
+  // const isDesktop = useIsDesktop();
+  // const { useRouter } = useStores();
   // The chat history takes the sources' place: while it is open they hide.
-  const isHistoryOpen = useRouter((s: { currentPage: string }) => s.currentPage) === "history";
+  // const isHistoryOpen = useRouter((s: { currentPage: string }) => s.currentPage) === "history";
 
   // The room on screen is the project: read it and start its chat. Another
   // project room replaces it; the same room is left as it is. A project the
@@ -255,11 +258,12 @@ const AiProjectView = ({
     };
   }, [inRoom, roomId, setInRoom, userId, navigate, t]);
 
-  // The sources column replaces the composer's chips while it is on screen.
-  React.useEffect(() => {
-    aiChatStore.setComposerContextHidden(true);
-    return () => aiChatStore.setComposerContextHidden(false);
-  }, [aiChatStore]);
+  // Concept: the sources column is off, so the composer keeps its chips and
+  // connects the Instructions and Knowledge rooms as in the docked chat.
+  // React.useEffect(() => {
+  //   aiChatStore.setComposerContextHidden(true);
+  //   return () => aiChatStore.setComposerContextHidden(false);
+  // }, [aiChatStore]);
 
   // The context folder is picked only in the project's sources column. Once
   // the project view is left, the folder would keep scoping every round with
@@ -284,12 +288,13 @@ const AiProjectView = ({
     // `chat-container` drops the body's vertical padding while the chat
     // shows, as for an agent's chat.
     <div className={classnames(styles.projectChat, "chat-container")}>
+      {/* Concept: the sources cards are off; the composer connects the rooms.
       {!isDesktop && !isHistoryOpen && !infoPanelVisible ? (
         <ProjectSources store={store} project={project} compact />
-      ) : null}
+      ) : null} */}
       <div className={classnames(styles.panelBody, styles.projectBody)}>
-        {/* The history and the info panel each take the sources' place. */}
-        {isDesktop && !isHistoryOpen && !infoPanelVisible ? <ProjectSources store={store} project={project} /> : null}
+        {/* The history and the info panel each take the sources' place.
+        {isDesktop && !isHistoryOpen && !infoPanelVisible ? <ProjectSources store={store} project={project} /> : null} */}
         <div className={styles.panelChat}>
           <AiChatPanelBody />
         </div>

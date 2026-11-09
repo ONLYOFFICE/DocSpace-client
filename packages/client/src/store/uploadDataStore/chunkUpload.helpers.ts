@@ -299,9 +299,15 @@ export async function asyncUploadImpl(
             operationId
           ].chunksArray[finalizeChunkIndex].onUpload()) as TChunkUploadResponse;
 
-          if (isUploadStopped()) {
-            const row = self.files[indexOfFile];
-            if (finalizeRes?.uploaded && row) {
+          // The row is found by its file: a batch cancelled during finalize
+          // drops its rows on the next drop, so `indexOfFile` may already
+          // belong to a new file that has not been sent yet.
+          const rowIndex = self.files.findIndex((f) => f.file === file);
+          const row = self.files[rowIndex];
+          if (!row) return resolve();
+
+          if (row.cancel) {
+            if (finalizeRes?.uploaded) {
               restoreRowCancelledLate(self, row.uniqueId, {
                 fileId: finalizeRes.id,
                 file: finalizeRes.file,
@@ -314,7 +320,7 @@ export async function asyncUploadImpl(
             t,
             res: finalizeRes,
             index: finalizeIndex,
-            indexOfFile,
+            indexOfFile: rowIndex,
             path,
             chunksLength: length,
             resolve,

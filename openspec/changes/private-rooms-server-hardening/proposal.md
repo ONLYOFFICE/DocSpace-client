@@ -68,7 +68,9 @@ the file to change so the backend team can pick them up; nothing here is
   private flag stays accepted with every room type the creation accepts,
   the AI hub room types refuse it with 400 and a private AI agent is
   created, which the server proposes to refuse (decision 8); the audit
-  trail of the client needs no change; a list of server behaviours no
+  trail of the client needs no change; a public or form-filling room
+  created as private is stored today, its link refused only on the first
+  read (task 12.8, read on 2026-11-06); a list of server behaviours no
   test covers goes to a manual check (task 10.2); and one finding is new:
   a portal backup carries neither the file keys nor the users' key
   records, so a restore loses the content of private rooms (decision 9,

@@ -188,6 +188,22 @@ describe("AutomaticBackup", () => {
     expect(screen.getByTestId("auto-backup")).toBeInTheDocument();
   });
 
+  it("Section available", () => {
+    render(<AutomaticBackup {...defaultProps} showPrivateRoomsWarning />);
+
+    expect(
+      screen.getByText("Common:PrivateRoomsBackupWarning"),
+    ).toBeInTheDocument();
+  });
+
+  it("Section not available", () => {
+    render(<AutomaticBackup {...defaultProps} />);
+
+    expect(
+      screen.queryByText("Common:PrivateRoomsBackupWarning"),
+    ).not.toBeInTheDocument();
+  });
+
   it("shows loader when isInitialLoading is true", () => {
     render(<AutomaticBackup {...defaultProps} isInitialLoading />);
 

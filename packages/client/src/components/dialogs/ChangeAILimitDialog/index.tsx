@@ -53,7 +53,6 @@ import type { TServiceLimitPeriod } from "@onlyoffice/apps-ui-kit/billing/shared
 import {
   DEFAULT_LIMIT_PERIOD,
   MAX_LIMIT_AMOUNT,
-  MIN_LIMIT_AMOUNT,
   formatAmountInput,
   formatPeriodEnd,
   getCurrencySymbol,
@@ -113,12 +112,6 @@ const ChangeAILimitDialog = ({
     if (amount > MAX_LIMIT_AMOUNT) {
       return t("Common:MaxCurrency", {
         currency: format(MAX_LIMIT_AMOUNT, 0),
-      });
-    }
-
-    if (amount < MIN_LIMIT_AMOUNT) {
-      return t("Common:MinCurrency", {
-        currency: format(MIN_LIMIT_AMOUNT, 0),
       });
     }
 

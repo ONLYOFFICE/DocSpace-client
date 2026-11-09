@@ -53,6 +53,7 @@ export interface BackupListModalDialogProps {
 
   // settingsStore
   standalone: boolean;
+  showPrivateRoomsWarning?: boolean;
   setTenantStatus: (tenantStatus: TenantStatus) => void;
   // backup
   downloadingProgress: number;

@@ -3,7 +3,7 @@
   "content": "Try again",
   "content_en_sha1_hash": "042c862e4467d7d057cced262e6869dd75c22b7d",
   "created_at": "2025-10-27T16:14:24.460Z",
-  "updated_at": "2026-11-05T16:49:39.982Z",
+  "updated_at": "2026-11-06T10:45:55.081Z",
   "comment": {
     "text": "This is a button label that appears when an error occurs or a service is unavailable, allowing the user to retry the action or check availability.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMemberUser.tsx",
-      "line_number": 265,
+      "line_number": 264,
       "context": "fontSize=\"12px\"\n isSemitransparent={isRetrying}\n onClick={onRetryAccess}\n dataTestId=\"private_member_retry_access\"\n >\n {t(\"Common:TryAgain\")}\n </Link>\n ) : null}\n </div>\n ) : typeLabel ? (\n <Text className={styles.userSubtitle} truncate>",
       "module": "/packages/sdk"
     },

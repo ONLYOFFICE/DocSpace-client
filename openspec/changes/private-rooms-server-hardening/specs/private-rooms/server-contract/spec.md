@@ -445,15 +445,15 @@ The server SHALL write audit events for key envelope creation, update and deleti
 - **THEN** an audit event records the actor, the room and the revoked user
 
 ### Requirement: Invitation e-mails carry the room title
-The server SHALL NOT include the plaintext room title of a private room in invitation e-mails or in the letters and pushes about the room and its content; it SHALL name the room with a neutral label ("Private room") next to the link that resolves the title in the portal.
+The server SHALL NOT include the plaintext title of a private room or of its folders in invitation e-mails or in the letters and pushes about the room and its content; it SHALL name the room with a neutral label ("Private room") and a folder of it with another ("Private folder"), next to the link that resolves the title in the portal.
 
 #### Scenario: Invite to a private room
 - **WHEN** a user, new or existing, is invited to a private room by e-mail, or the invitation is resent
 - **THEN** the e-mail contains a link to the room and the neutral label, and not the room title
 
 #### Scenario: Room notices
-- **WHEN** a file or folder is created or uploaded in a private room, a member's access changes, or the room is archived or removed
-- **THEN** the letter or push names the room with the neutral label and not its title
+- **WHEN** a file or folder is created or uploaded in a private room, a member's access or role changes, or the room is archived or removed
+- **THEN** the letter or push names the room with the neutral label and not its title, and a folder it names with the folder label and not the folder's title
 
 #### Scenario: What's-new letter
 - **WHEN** the what's-new letter lists events of a private room
@@ -489,6 +489,10 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 #### Scenario: AI agent created as private
 - **WHEN** a user with encryption keys creates an AI agent with the private flag while the Document Server encrypts
 - **THEN** the agent is created with the private setting
+
+#### Scenario: Public or form-filling room created as private
+- **WHEN** a room creation request sets the private flag with the public or the form-filling room type, whose rooms exist through an external link
+- **THEN** the server answers 400 and creates no room
 
 ## REMOVED Requirements
 

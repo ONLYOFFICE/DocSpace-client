@@ -1818,6 +1818,8 @@
   "PrivateRoomNotFoundDescription": "Axtardığınız şəxsi otaq mövcud deyil və ya sizin ona girişiniz yoxdur.",
   "PrivateRoomNotFoundTitle": "Tapılmadı",
   "PrivateRoomRenameNotSupported": "Şifrələnmiş faylların adının dəyişdirilməsi hələ dəstəklənmir.",
+  "PrivateRoomsBackupWarning": "Yedək nüsxələrə şəxsi otaqların şifrələmə açarları daxil deyil. Yedək nüsxədən bərpa edilmiş iş sahəsi öz şəxsi otaqlarındakı faylları aça bilməz.",
+  "PrivateRoomsBackupWarningTitle": "Şəxsi otaqların yedək nüsxəsi yaradılmır",
   "PrivateRoomsBetaDescription": "Şəxsi otaqlar beta mərhələsindədir. Şifrələnmiş fayllar üçün bəzi əməliyyatlar hələ əlçatan deyil və şifrələnmiş faylları açarınız olmadan açmaq mümkün deyil, ona görə də bərpa ifadənizi təhlükəsiz yerdə saxlayın.",
   "PrivateRoomsBetaTitle": "Şəxsi otaqlar",
   "PrivateRoomsListEmptyDescription": "Şəxsi otaqlar uçdan-uca şifrələnir. Fayllar yükləməzdən əvvəl brauzerinizdə şifrələnir və yalnız dəvət etdiyiniz şəxslər onları oxuya bilər.",

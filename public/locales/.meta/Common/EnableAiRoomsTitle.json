@@ -1,14 +1,14 @@
 {
   "key_path": "EnableAiRoomsTitle",
-  "content": "Enable AI Rooms?",
-  "content_en_sha1_hash": "e8d97fae67dc4fea4bc9ea0cc7ededa61e5f650e",
-  "created_at": "2026-05-24T17:27:26.129Z",
-  "updated_at": "2026-05-24T18:13:11.455Z",
+  "content": "Enable AI Chat?",
+  "content_en_sha1_hash": "ddc7930d180cc6d26d1206b2dec6ec1a5b020e1b",
+  "created_at": "2026-11-09T09:25:22.038Z",
+  "updated_at": "2026-11-09T09:26:33.410Z",
   "comment": {
-    "text": "Dialog title for a modal window prompting the user to activate the AI Rooms feature.",
+    "text": "Title of the dashboard modal asking the admin to enable the AI Chat section (formerly \"AI rooms\"). A question; keep the question mark.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:13:11.455Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-09T09:27:35.823Z",
+    "model": "claude-fable-5-1"
   },
   "usage": [
     {

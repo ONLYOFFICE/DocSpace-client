@@ -576,7 +576,7 @@ const ClientArticleSidebar = ({
     if (aiHubFolder && aiServicesEnabled) {
       mainItems.push({
         id: "ai-rooms",
-        label: t("Common:AiRooms"),
+        label: t("Common:AIChat"),
         icon: getCatalogIconUrlByType(FolderType.Rooms),
         ...nav(searchAreaUrl("/ai-rooms/filter", RoomSearchArea.AiHub)),
         ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),

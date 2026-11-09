@@ -355,6 +355,313 @@ describe("UploadDataStore.asyncUpload — cancellation mid-chunk", () => {
     expect(store.finishUploadFilesCalled).toBe(true);
     expect(toastr.info).toHaveBeenCalledWith("Common:CancelUpload");
   });
+
+  it("aborts the chunk request in flight and does not fail the cancelled file", async () => {
+    const { store } = createTestUploadDataStore();
+    const browserFile = makeBrowserFile("cancelled.docx", 1024);
+    const entry = makeUploadFile({
+      uniqueId: "cancel-abort",
+      file: browserFile,
+      toFolderId: 1,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+
+    vi.mocked(filesApi.startUploadSession).mockResolvedValue({
+      id: "sess-1",
+      path: [],
+    } as never);
+    let chunkSignal: AbortSignal | undefined;
+    vi.mocked(filesApi.uploadChunkParallel).mockImplementation(
+      (_folderId, _sessionId, _chunkNumber, _data, signal) =>
+        new Promise((_res, rej) => {
+          chunkSignal = signal;
+          signal?.addEventListener("abort", () =>
+            rej(new Error("canceled")),
+          );
+        }) as never,
+    );
+
+    const done = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(chunkSignal).toBeDefined());
+    expect(chunkSignal?.aborted).toBe(false);
+
+    store.cancelUpload();
+    await done;
+
+    expect(chunkSignal?.aborted).toBe(true);
+    expect(filesApi.finalizeUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0].cancel).toBe(true);
+    expect(store.files[0].error).toBeFalsy();
+    expect(toastr.info).toHaveBeenCalledWith("Common:CancelUpload");
+  });
+
+  it("shows the file as uploaded when finalize completes after a cancel", async () => {
+    const { store } = createTestUploadDataStore();
+    const browserFile = makeBrowserFile("cancelled.docx", 1024);
+    const entry = makeUploadFile({
+      uniqueId: "cancel-finalize",
+      file: browserFile,
+      toFolderId: 1,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+
+    vi.mocked(filesApi.startUploadSession).mockResolvedValue({
+      id: "sess-1",
+      path: [],
+    } as never);
+    vi.mocked(filesApi.uploadChunkParallel).mockResolvedValue({
+      uploaded: false,
+      id: null,
+      file: null,
+    } as never);
+    const serverFile = makeFileInfo({
+      id: 777,
+      folderId: 1,
+      version: 1,
+      fileExst: ".docx",
+    });
+    let releaseFinalize: (() => void) | undefined;
+    vi.mocked(filesApi.finalizeUploadSession).mockImplementation(
+      () =>
+        new Promise((res) => {
+          releaseFinalize = () =>
+            res({ uploaded: true, id: 777, file: serverFile } as never);
+        }) as never,
+    );
+
+    const done = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(releaseFinalize).toBeDefined());
+
+    store.cancelUpload();
+    expect(store.files[0].cancel).toBe(true);
+
+    releaseFinalize?.();
+    await done;
+
+    expect(vi.mocked(filesApi.finalizeUploadSession).mock.calls).toEqual([
+      [1, "sess-1"],
+    ]);
+    expect(store.files[0].cancel).toBe(false);
+    expect(store.files[0].action).toBe("uploaded");
+    expect(store.files[0].fileId).toBe(777);
+    expect(store.files[0].error).toBeFalsy();
+    expect(
+      store.uploadedFilesHistory.find((h) => h.uniqueId === "cancel-finalize")
+        ?.action,
+    ).toBe("uploaded");
+  });
+
+  it("leaves the next dropped file alone when a cancelled finalize completes after the drop", async () => {
+    const { store } = createTestUploadDataStore();
+    const cancelledFile = makeBrowserFile("cancelled.docx", 1024);
+    const entry = makeUploadFile({
+      uniqueId: "cancel-then-drop",
+      file: cancelledFile,
+      toFolderId: 1,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    replaceAction(store, "refreshFiles");
+    replaceAction(store, "finishUploadFiles");
+
+    vi.mocked(filesApi.startUploadSession).mockImplementation(
+      async (_folderId, fileName) =>
+        ({
+          id: fileName === "next.docx" ? "sess-next" : "sess-cancelled",
+          path: [],
+        }) as never,
+    );
+    vi.mocked(filesApi.uploadChunkParallel).mockResolvedValue({
+      uploaded: false,
+      id: null,
+      file: null,
+    } as never);
+    let releaseFinalize: (() => void) | undefined;
+    vi.mocked(filesApi.finalizeUploadSession).mockImplementation(
+      (_folderId, sessionId) => {
+        if (sessionId === "sess-next") {
+          return Promise.resolve({
+            uploaded: true,
+            id: 888,
+            file: makeFileInfo({ id: 888 }),
+          }) as never;
+        }
+        return new Promise((res) => {
+          releaseFinalize = () =>
+            res({
+              uploaded: true,
+              id: 777,
+              file: makeFileInfo({ id: 777 }),
+            } as never);
+        }) as never;
+      },
+    );
+
+    const done = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(releaseFinalize).toBeDefined());
+    store.cancelUpload();
+
+    // The next drop replaces the cancelled row; the new one waits for the
+    // unlock check before it is started.
+    const handleUploadConflicts = vi.fn();
+    store.handleUploadConflicts = handleUploadConflicts as never;
+    let unlock: ((canProceed: boolean) => void) | undefined;
+    store.ensureEncryptionUnlockedForBatch = (() =>
+      new Promise<boolean>((res) => {
+        unlock = res;
+      })) as never;
+    const nextFile = makeBrowserFile("next.docx", 1024, { parentFolderId: 1 });
+    store.startUpload([nextFile], makeUploadTarget(), t);
+    store.handleFilesUpload(handleUploadConflicts.mock.calls[0][2], t);
+    expect(store.files).toHaveLength(1);
+    expect(store.files[0].file).toBe(nextFile);
+
+    releaseFinalize?.();
+    await done;
+
+    expect(store.files[0]).toMatchObject({
+      action: "upload",
+      fileId: null,
+      cancel: false,
+    });
+
+    unlock?.(true);
+    await vi.waitFor(() => expect(store.files[0].action).toBe("uploaded"));
+
+    expect(
+      vi.mocked(filesApi.startUploadSession).mock.calls.map((c) => c[1]),
+    ).toEqual(["cancelled.docx", "next.docx"]);
+    expect(store.files[0].fileId).toBe(888);
+  });
+
+  it("keeps a row cancelled on its own as uploaded when finalize completes, without converting it or deleting the move source", async () => {
+    const { store } = createTestUploadDataStore();
+    const browserFile = makeBrowserFile("moved.doc", 1024, {
+      uploadContext: { moveSource: { fileId: 5, title: "moved.doc" } },
+    });
+    const entry = makeUploadFile({
+      uniqueId: "cancel-row",
+      file: browserFile,
+      toFolderId: 1,
+      needConvert: true,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    const deleteMovedEncryptedSource = vi.fn();
+    store.deleteMovedEncryptedSource = deleteMovedEncryptedSource as never;
+    const startConversion = vi.fn();
+    store.startConversion = startConversion as never;
+
+    vi.mocked(filesApi.startUploadSession).mockResolvedValue({
+      id: "sess-1",
+      path: [],
+    } as never);
+    vi.mocked(filesApi.uploadChunkParallel).mockResolvedValue({
+      uploaded: false,
+      id: null,
+      file: null,
+    } as never);
+    let releaseFinalize: (() => void) | undefined;
+    vi.mocked(filesApi.finalizeUploadSession).mockImplementation(
+      () =>
+        new Promise((res) => {
+          releaseFinalize = () =>
+            res({
+              uploaded: true,
+              id: 777,
+              file: makeFileInfo({ id: 777 }),
+            } as never);
+        }) as never,
+    );
+
+    const done = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(releaseFinalize).toBeDefined());
+
+    store.cancelCurrentUpload("cancel-row", t);
+    expect(store.currentUploadNumber).toBe(0);
+
+    releaseFinalize?.();
+    await done;
+
+    expect(store.files[0]).toMatchObject({
+      action: "uploaded",
+      cancel: false,
+      fileId: 777,
+      error: null,
+    });
+    expect(
+      store.uploadedFilesHistory.find((h) => h.uniqueId === "cancel-row")
+        ?.action,
+    ).toBe("uploaded");
+    expect(store.currentUploadNumber).toBe(0);
+    expect(deleteMovedEncryptedSource).not.toHaveBeenCalled();
+    expect(startConversion).not.toHaveBeenCalled();
+    expect(store.filesToConversion).toEqual([]);
+  });
+});
+
+describe("UploadDataStore.uploadFileChunks — failed chunk", () => {
+  it("aborts the other chunks of the file once one chunk fails for good", async () => {
+    const { store } = createTestUploadDataStore({
+      filesSettingsStore: { uploadThreadCount: 3 },
+    });
+    const browserFile = makeBrowserFile("big.docx", 5000);
+    const entry = makeUploadFile({
+      uniqueId: "chunk-fail",
+      file: browserFile,
+      toFolderId: 42,
+      inAction: true,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+
+    const signals: AbortSignal[] = [];
+    vi.mocked(filesApi.uploadChunkParallel).mockImplementation(
+      (_folderId, _sessionId, chunkNumber, _data, signal) => {
+        if (signal) signals.push(signal);
+        if (chunkNumber === 1) return Promise.reject(new Error("boom")) as never;
+        return new Promise((_res, rej) => {
+          signal?.addEventListener("abort", () => rej(new Error("canceled")));
+        }) as never;
+      },
+    );
+
+    const requests = Array.from({ length: 5 }, () => new FormData());
+    await expect(
+      store.uploadFileChunks(
+        "sess-1",
+        42,
+        requests,
+        5000,
+        0,
+        browserFile,
+        [42],
+        t,
+        "op-1",
+        42,
+        true,
+      ),
+    ).rejects.toThrow("boom");
+
+    expect(
+      vi.mocked(filesApi.uploadChunkParallel).mock.calls.map((c) => c[2]),
+    ).toEqual([1, 2, 3]);
+    expect(signals).toHaveLength(3);
+    expect(signals.every((s) => s.aborted)).toBe(true);
+    expect(filesApi.finalizeUploadSession).not.toHaveBeenCalled();
+  });
 });
 
 describe("UploadDataStore.uploadFileChunks + asyncUpload — full cycle", () => {

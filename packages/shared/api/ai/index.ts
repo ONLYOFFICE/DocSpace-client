@@ -66,6 +66,8 @@ import type {
   TMetadataAIFillResult,
   TMetadataAIGenerateRequest,
   TMetadataAIGenerateResult,
+  TGenerateSkillRequest,
+  TGenerateSkillResult,
   TByokKey,
   TByokProvider,
 } from "./types";
@@ -559,3 +561,30 @@ export const generateMetadataWithAI = (
   data: TMetadataAIGenerateRequest,
   signal?: AbortSignal,
 ) => postMetadataAI<TMetadataAIGenerateResult>("generate", data, signal);
+
+/** Write a skill with AI for an Instructions room; the caller saves it after review. */
+export const generateSkillWithAI = async (
+  data: TGenerateSkillRequest,
+  signal?: AbortSignal,
+) => {
+  const response = await authFetch(`/api/2.0/ai/skills/generate`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+    signal,
+  });
+
+  const body = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw Object.assign(new Error(body?.error ?? response.statusText), {
+      status: response.status,
+      code: body?.code,
+      providerMessage: body?.providerMessage,
+    });
+  }
+
+  return body as TGenerateSkillResult;
+};

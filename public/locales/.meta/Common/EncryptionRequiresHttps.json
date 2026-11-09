@@ -3,7 +3,7 @@
   "content": "Encryption is unavailable: this feature requires a secure HTTPS connection.",
   "content_en_sha1_hash": "b6283c95e632585f9c10518d49e7196f396b493c",
   "created_at": "2026-05-24T17:27:26.726Z",
-  "updated_at": "2026-10-31T12:58:28.976Z",
+  "updated_at": "2026-11-06T10:45:53.787Z",
   "comment": {
     "text": "Error message displayed when encryption cannot be used because the connection is not secure (HTTP instead of HTTPS).",
     "is_auto": true,
@@ -13,38 +13,44 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 190,
-      "context": "if (!isTemplateItem || !roomParams.isPrivate) return;\n if (encryptionKeys && encryptionKeys.length > 0) return;\n if (keyAutoPromptedRef.current) return;\n keyAutoPromptedRef.current = true;\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n onCloseRef.current?.();\n return;\n }\n setKeyConfirmVisible(true);\n }, [isTemplateItem, roomParams.isPrivate, encryptionKeys, t]);",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 190,
-      "context": "if (!isTemplateItem || !roomParams.isPrivate) return;\n if (encryptionKeys && encryptionKeys.length > 0) return;\n if (keyAutoPromptedRef.current) return;\n keyAutoPromptedRef.current = true;\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n onCloseRef.current?.();\n return;\n }\n setKeyConfirmVisible(true);\n }, [isTemplateItem, roomParams.isPrivate, encryptionKeys, t]);",
+      "line_number": 236,
+      "context": "}, [isTemplateItem, isPrivateStart, roomParams.isPrivate, encryptionKeys, t]);\n \n const setRoomType = async (newRoomType) => {\n if (newRoomType === RoomsTypePrivate) {\n if (!hasPrivateRoomSecureContext()) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n return;\n }\n const keys = await loadOwnKeys();\n if (!isMountRef.current) return;\n if (keys === null) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useImportKeyFlow.tsx",
-      "line_number": 101,
-      "context": "setImported(null);\n }, []);\n \n const request = useCallback(() => {\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n return;\n }\n fileInputRef.current?.click();\n }, [t]);",
+      "line_number": 102,
+      "context": "setImported(null);\n }, []);\n \n const request = useCallback(() => {\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n return;\n }\n // Spec: private-rooms/key-management, \"Import a key\".\n if (hasExistingKeys) return;\n fileInputRef.current?.click();",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 1001,
+      "context": "const isPrivateSection =\n !fromItem && isPrivateRoomsRoute(window.location.pathname);\n \n // Spec: private-rooms/room-membership, \"Private rooms need a secure context\"\n if (isPrivateSection && !hasPrivateRoomSecureContext()) {\n toastr.error(i18n.t(\"Common:EncryptionRequiresHttps\"));\n return;\n }\n \n // Spec: private-rooms/room-membership, \"Private room creation needs a Document Server that encrypts\"\n if (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/create-room/PrivateCreateRoomDialog.tsx",
-      "line_number": 94,
-      "context": "refreshKeysFromServer,\n });\n \n const promptKeySetup = React.useCallback(() => {\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n return;\n }\n setKeyConfirmVisible(true);\n }, [t]);",
+      "line_number": 118,
+      "context": "// Spec: private-rooms/sdk-surface, \"Private room creation gate\"\n React.useEffect(() => {\n if (!visible || canCreate) return;\n if (!hasSecureContext) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n } else {\n // Spec: private-rooms/sdk-surface, \"Private room creation needs a Document Server that encrypts\"\n toastr.error(t(\"Common:PrivateRoomDocServiceNotSupported\"));\n }\n onClose();",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/key-generation/useGenerateKeyFlow.tsx",
-      "line_number": 105,
-      "context": "setMnemonic(null);\n }, []);\n \n const request = useCallback(() => {\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n return;\n }\n if (isPending || step !== \"idle\") return;\n setStep(\"passphrase\");\n }, [t, isPending, step]);",
+      "line_number": 115,
+      "context": "onCancel?.();\n }, [reset, onCancel]);\n \n const request = useCallback(() => {\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n return;\n }\n // Spec: private-rooms/key-management, \"Generate a new key\".\n if (hasExistingKeys || isPending || step !== \"idle\") return;\n setStep(\"passphrase\");",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/hooks/usePrivateRoomKeyGate.ts",
+      "line_number": 96,
+      "context": "* Offers key generation. Returns false, with the secure-context toast,\n * where the browser has no WebCrypto.\n */\n const offerKeyGeneration = () => {\n if (!hasPrivateRoomSecureContext()) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n return false;\n }\n setKeyConfirmVisible(true);\n return true;\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/services/encryption/error-i18n.ts",
-      "line_number": 57,
-      "context": "export function getEncryptionErrorMessage(\n t: TFunction,\n error: unknown,\n ): string {\n if (error instanceof WebCryptoUnavailableError) {\n return t(\"Common:EncryptionRequiresHttps\");\n }\n if (error instanceof InvalidPassphraseError) {\n return t(\"Common:InvalidPassphrase\");\n }\n if (error instanceof InvalidRecoveryPhraseError) {",
+      "line_number": 65,
+      "context": "extension: error.extension,\n })\n : t(\"Common:EncryptionKeysNotConfigured\");\n }\n if (error instanceof WebCryptoUnavailableError) {\n return t(\"Common:EncryptionRequiresHttps\");\n }\n if (error instanceof InvalidPassphraseError) {\n return t(\"Common:InvalidPassphrase\");\n }\n if (error instanceof InvalidRecoveryPhraseError) {",
       "module": "/packages/shared"
     }
   ],

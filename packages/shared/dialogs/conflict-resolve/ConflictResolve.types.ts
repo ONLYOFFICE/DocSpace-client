@@ -44,6 +44,8 @@ export type ConflictResolveProps = {
   selectActionText: string;
   submitButtonLabel: string;
   cancelButtonLabel: string;
+  /** False leaves out overwriting; keeping both is then preselected. */
+  withOverwrite?: boolean;
   overwriteTitle: string;
   overwriteDescription: string;
   duplicateTitle: string;

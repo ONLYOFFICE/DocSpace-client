@@ -77,7 +77,6 @@ export const SearchTerm = ({ t, config, setConfig }) => {
 					onChange={onChangeSearch}
 					placeholder={t("Common:Search")}
 					value={value}
-					tabIndex={5}
 					testId="search_term_text_input"
 				/>
 				<Checkbox

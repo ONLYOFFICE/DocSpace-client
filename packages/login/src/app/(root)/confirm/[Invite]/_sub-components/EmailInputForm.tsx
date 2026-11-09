@@ -101,7 +101,6 @@ const EmailInputForm = ({
           placeholder={t("Common:Email")}
           scale
           isAutoFocussed
-          tabIndex={1}
           isDisabled={isLoading || !!emailFromLink}
           autoComplete="username"
           onChange={onChange}
@@ -119,7 +118,6 @@ const EmailInputForm = ({
         size={ButtonSize.medium}
         scale
         label={t("Common:ContinueButton")}
-        tabIndex={1}
         isDisabled={isLoading || isContinueDisabled}
         isLoading={isLoading}
         onClick={onContinue}

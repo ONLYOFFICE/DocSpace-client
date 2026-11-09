@@ -1,0 +1,626 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import {
+  aiConfigHandler,
+  capabilitiesHandler,
+  encryptedFilesHandlers,
+  filesSettingsHandler,
+  privacyroomAccessHandlers,
+  privateRoomListHandler,
+  rootHandler,
+  selfActivationStatusHandler,
+  settingsHandler,
+  TypeSettings,
+  type EncryptedFileSeed,
+  type EncryptedFilesHandlerHandle,
+  type PrivacyroomAccessHandlerHandle,
+} from "@docspace/shared/__mocks__/handlers";
+import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
+import { generateIdentityKeyPair } from "@docspace/shared/services/encryption/identity";
+import { encryptFile } from "@docspace/shared/services/encryption/file-keys";
+import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
+import { isDSE3Format } from "@docspace/shared/services/encryption/streaming-encryption";
+import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
+import type { Page } from "@playwright/test";
+import { expect, test, TEST_PORT } from "./fixtures/base";
+import { bootstrapEncryption } from "./fixtures/encryption-helpers";
+
+const SOURCE_ROOM_ID = 9520;
+const SOURCE_ROOM_TITLE = "Source Private Room";
+const DEST_ROOM_ID = 9530;
+const DEST_ROOM_TITLE = "Destination Private Room";
+const DEST_FOLDER_ID = 9531;
+const DEST_FOLDER_TITLE = "Drafts";
+const TEST_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+const ALICE_ID = "11111111-1111-1111-1111-111111111111";
+const BOB_ID = "22222222-2222-2222-2222-222222222222";
+
+const PLAN = { id: 8951, name: "plan.txt", text: "Plan of record." };
+/** A file of the destination room whose decrypted name is the same as PLAN's. */
+const OLDER_PLAN = { id: 8961, name: "plan.txt", text: "Older plan." };
+/** An earlier copy of PLAN next to it in the source room. */
+const PLAN_COPY = { id: 8952, name: "plan (1).txt", text: "First copy." };
+
+type TKeyHolder = {
+  userId: string;
+  pair: Awaited<ReturnType<typeof generateIdentityKeyPair>>;
+  publicKey: string;
+};
+
+/** Encrypts a file the way a member's upload does, its key wrapped for `recipients`. */
+const encryptedSeed = async (
+  file: { id: number; name: string; text: string },
+  sender: TKeyHolder,
+  recipients: { userId: string; publicKey: string }[],
+): Promise<EncryptedFileSeed> => {
+  const plain = new TextEncoder().encode(file.text);
+  const { encryptedBlob, dek } = await encryptFile(plain, {
+    fileName: file.name,
+  });
+  return {
+    id: file.id,
+    title: file.name,
+    serverTitle: `${crypto.randomUUID()}.txt`,
+    size: plain.byteLength,
+    encrypted: true,
+    fileKeys: await wrapDekForRecipients({
+      dek,
+      senderIdentity: sender.pair,
+      senderUserId: sender.userId,
+      recipients,
+      fileId: file.id,
+    }),
+    bytes: new Uint8Array(await encryptedBlob.arrayBuffer()),
+  };
+};
+
+const MOVE_REFUSAL =
+  /can't be moved to another private room|CannotMoveToAnotherPrivateRoom/;
+
+type TRooms = {
+  sourceHandle: EncryptedFilesHandlerHandle;
+  destHandle: EncryptedFilesHandlerHandle;
+  passphrase: string;
+};
+
+/**
+ * Generates the member's key, then serves two private rooms the member
+ * belongs to: the source, where Alice encrypted the file for herself and the
+ * member, and the destination, whose other member is Bob.
+ */
+const serveTwoPrivateRooms = async (
+  page: Page,
+  mockRequest: WorkerFixture,
+  baseUrl: string,
+  {
+    sourceArchived = false,
+    sourceHoldsCopy = false,
+    destHoldsPlan = false,
+    destHoldsFolder = false,
+  } = {},
+): Promise<TRooms> => {
+  const { keysHandle, passphrase } = await bootstrapEncryption(
+    page,
+    mockRequest,
+    baseUrl,
+  );
+  const memberKey = keysHandle.getKeys()[0];
+  const keyHolder = async (userId: string): Promise<TKeyHolder> => {
+    const pair = await generateIdentityKeyPair();
+    return {
+      userId,
+      pair,
+      publicKey: arrayBufferToBase64(pair.publicKey.buffer as ArrayBuffer),
+    };
+  };
+  const alice = await keyHolder(ALICE_ID);
+  const bob = await keyHolder(BOB_ID);
+  const memberRecipient = {
+    userId: TEST_USER_ID,
+    publicKey: memberKey.publicKey,
+  };
+
+  const seed = await encryptedSeed(PLAN, alice, [alice, memberRecipient]);
+  const sourceFiles = sourceHoldsCopy
+    ? [seed, await encryptedSeed(PLAN_COPY, alice, [alice, memberRecipient])]
+    : [seed];
+  const destFiles = destHoldsPlan
+    ? [await encryptedSeed(OLDER_PLAN, bob, [bob, memberRecipient])]
+    : [];
+
+  const sourceHandle: { current: EncryptedFilesHandlerHandle | null } = {
+    current: null,
+  };
+  const destHandle: { current: EncryptedFilesHandlerHandle | null } = {
+    current: null,
+  };
+  const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
+    current: null,
+  };
+  mockRequest.use(
+    ...encryptedFilesHandlers(TEST_PORT, {
+      roomId: SOURCE_ROOM_ID,
+      title: SOURCE_ROOM_TITLE,
+      ownerId: ALICE_ID,
+      archived: sourceArchived,
+      initialFiles: sourceFiles,
+      withOtherRooms: true,
+      handle: sourceHandle,
+    }),
+    ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
+    privateRoomListHandler(
+      TEST_PORT,
+      sourceArchived
+        ? { roomId: DEST_ROOM_ID, title: DEST_ROOM_TITLE }
+        : {
+            roomId: SOURCE_ROOM_ID,
+            title: SOURCE_ROOM_TITLE,
+            otherPrivateRooms: [
+              {
+                roomId: DEST_ROOM_ID,
+                title: DEST_ROOM_TITLE,
+                foldersCount: destHoldsFolder ? 1 : 0,
+              },
+            ],
+          },
+    ),
+  );
+  mockRequest.use(
+    ...encryptedFilesHandlers(TEST_PORT, {
+      roomId: DEST_ROOM_ID,
+      title: DEST_ROOM_TITLE,
+      ownerId: TEST_USER_ID,
+      // The member owns the destination room.
+      roomSecurity: {
+        Read: true,
+        Create: true,
+        CopyTo: true,
+        MoveTo: true,
+        EditRoom: true,
+      },
+      initialFiles: destFiles,
+      folders: destHoldsFolder
+        ? [{ id: DEST_FOLDER_ID, title: DEST_FOLDER_TITLE }]
+        : [],
+      withOtherRooms: true,
+      handle: destHandle,
+    }),
+  );
+  const member = { ...memberKey, userId: TEST_USER_ID };
+  accessHandle.current!.setRoomKeys(SOURCE_ROOM_ID, [
+    { id: "alice-1", userId: ALICE_ID, publicKey: alice.publicKey, privateKeyEnc: "" },
+    member,
+  ]);
+  accessHandle.current!.setRoomKeys(DEST_ROOM_ID, [
+    member,
+    { id: "bob-1", userId: BOB_ID, publicKey: bob.publicKey, privateKeyEnc: "" },
+  ]);
+
+  return {
+    sourceHandle: sourceHandle.current!,
+    destHandle: destHandle.current!,
+    passphrase,
+  };
+};
+
+const navigateInApp = (page: Page, url: string) =>
+  page.evaluate(
+    (u) =>
+      (
+        window as unknown as { DocSpace: { navigate: (to: string) => void } }
+      ).DocSpace.navigate(u),
+    url,
+  );
+
+/** Opens a room in-app, so the identity stays unlocked. */
+const openRoomInApp = async (page: Page, roomId: number, url: string) => {
+  const loaded = page.waitForResponse(
+    (res) =>
+      res.request().method() === "GET" &&
+      new URL(res.url()).pathname.endsWith(`/files/${roomId}`) &&
+      res.ok(),
+    { timeout: 15000 },
+  );
+  await navigateInApp(page, url);
+  await loaded;
+};
+
+const activeRoomUrl = (roomId: number) =>
+  `/private/${roomId}/filter?folder=${roomId}`;
+
+/** The list shows titles without their extension. */
+const row = (page: Page, title: string) =>
+  page
+    .locator('[data-testid^="table-row-"]')
+    .filter({ hasText: title.replace(/\.txt$/, "") });
+
+/**
+ * Opens Copy or Move from the file's menu. With both rights the two sit
+ * under "Move or copy"; with one of them the entry stands on its own.
+ */
+const openTransferDialog = async (
+  page: Page,
+  action: "copy" | "move",
+  fileRow = row(page, PLAN.name),
+) => {
+  await fileRow.getByTestId("context-menu-button").first().click();
+  const submenu = page.getByTestId("option_move-or-copy");
+  const entry = page.getByTestId(`option_${action}-to`);
+  await expect(submenu.or(entry).first()).toBeVisible({ timeout: 10000 });
+  if (await submenu.isVisible()) await submenu.hover();
+  await entry.click();
+};
+
+const passphrasePrompt = (page: Page) =>
+  page.getByRole("dialog").filter({ hasText: "Enter passphrase" });
+
+const unlockIfPrompted = async (page: Page, passphrase: string) => {
+  const prompt = passphrasePrompt(page);
+  try {
+    await prompt.waitFor({ state: "visible", timeout: 5000 });
+  } catch {
+    return;
+  }
+  await prompt
+    .locator('input[name="passphrase"], #passphrase input')
+    .first()
+    .fill(passphrase);
+  await prompt.getByRole("button", { name: "Confirm" }).click();
+};
+
+const selector = (page: Page) => page.getByTestId("aside").first();
+
+const selectorItem = (page: Page, title: string | RegExp) =>
+  selector(page)
+    .locator('[data-testid^="selector-item-"]')
+    .filter({ hasText: title });
+
+/**
+ * Picks a room from Rooms at the picker's root, the destination room unless
+ * another is named, or a folder of it, and confirms.
+ */
+const copyToDestinationRoom = async (
+  page: Page,
+  { room = DEST_ROOM_TITLE, folder }: { room?: string; folder?: string } = {},
+) => {
+  const picker = selector(page);
+  await picker.getByText("Apps", { exact: true }).first().click();
+  await selectorItem(page, /^Rooms$/).click();
+  await selectorItem(page, room).click();
+  if (folder) await selectorItem(page, folder).click();
+  await picker.getByRole("button", { name: "Copy here" }).click();
+};
+
+/** Records every request the page sends, as "METHOD pathname". */
+const recordRequests = (page: Page) => {
+  const seen: string[] = [];
+  page.on("request", (req) => {
+    seen.push(`${req.method()} ${new URL(req.url()).pathname}`);
+  });
+  return seen;
+};
+
+/** Checks the copy stored in the destination room. */
+const expectReencryptedCopy = async (rooms: TRooms) => {
+  await expect
+    .poll(() => rooms.destHandle.getFiles().length, { timeout: 30000 })
+    .toBe(1);
+  const [copy] = rooms.destHandle.getFiles();
+  expect(copy.encrypted).toBe(true);
+  expect(isDSE3Format(copy.bytes!)).toBe(true);
+  expect(new TextDecoder().decode(copy.bytes)).not.toContain(PLAN.text);
+  expect(rooms.destHandle.getSessions().map((s) => s.encrypted)).toEqual([
+    true,
+  ]);
+  await expect
+    .poll(() =>
+      rooms.destHandle
+        .getFile(copy.id)
+        .fileKeys.map((k) => String(k.userId))
+        .sort(),
+    )
+    .toEqual([BOB_ID, TEST_USER_ID].sort());
+  expect(rooms.sourceHandle.getFile(PLAN.id).encrypted).toBe(true);
+};
+
+test.describe("Private room — copy into another private room", () => {
+  test.beforeEach(async ({ page, mockRequest }) => {
+    await page.setViewportSize({ width: 1440, height: 1024 });
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      aiConfigHandler(TEST_PORT),
+    );
+  });
+
+  test("Copy to another private room", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl);
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+
+    await openTransferDialog(page, "copy");
+    await copyToDestinationRoom(page);
+    await unlockIfPrompted(page, rooms.passphrase);
+
+    await expectReencryptedCopy(rooms);
+  });
+
+  test("Subfolder of another private room", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl, {
+      destHoldsFolder: true,
+    });
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+
+    await openTransferDialog(page, "copy");
+    await copyToDestinationRoom(page, { folder: DEST_FOLDER_TITLE });
+    await unlockIfPrompted(page, rooms.passphrase);
+
+    await expectReencryptedCopy(rooms);
+    expect(rooms.destHandle.getSessions().map((s) => s.folderId)).toEqual([
+      DEST_FOLDER_ID,
+    ]);
+    expect(rooms.destHandle.getFiles()[0].folderId).toBe(DEST_FOLDER_ID);
+  });
+
+  test("Destination picker in a private room", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl, {
+      destHoldsPlan: true,
+    });
+    const opaqueTitle = rooms.destHandle
+      .getFile(OLDER_PLAN.id)
+      .serverTitle.replace(/\.txt$/, "");
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+
+    await openTransferDialog(page, "copy");
+    const picker = selector(page);
+    await expect(selectorItem(page, /^plan$/)).toBeVisible({ timeout: 10000 });
+    await picker.getByText("Apps", { exact: true }).first().click();
+    await selectorItem(page, /^Rooms$/).click();
+    await selectorItem(page, DEST_ROOM_TITLE).click();
+
+    await expect(selectorItem(page, /^plan$/)).toBeVisible({ timeout: 15000 });
+    await expect(picker.getByText(opaqueTitle)).toHaveCount(0);
+  });
+
+  test("Copy into a room holding a file of the same name", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl, {
+      destHoldsPlan: true,
+    });
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+
+    await openTransferDialog(page, "copy");
+    await copyToDestinationRoom(page);
+    await unlockIfPrompted(page, rooms.passphrase);
+
+    const dialog = page
+      .getByRole("dialog")
+      .filter({ hasText: "Action required" });
+    await expect(dialog).toBeVisible({ timeout: 30000 });
+    await expect(dialog).toContainText(PLAN.name);
+    await expect(dialog.getByText("Overwrite with version update")).toHaveCount(
+      0,
+    );
+    expect(rooms.destHandle.getSessions()).toEqual([]);
+
+    await dialog.getByRole("button", { name: "OK" }).click();
+
+    await expect
+      .poll(() => rooms.destHandle.getFiles().length, { timeout: 30000 })
+      .toBe(2);
+    expect(rooms.destHandle.getFiles().every((f) => f.encrypted)).toBe(true);
+    await openRoomInApp(page, DEST_ROOM_ID, activeRoomUrl(DEST_ROOM_ID));
+    const rows = page.locator('[data-testid^="table-row-"]');
+    await expect(rows.filter({ hasText: "plan (1)" })).toHaveCount(1, {
+      timeout: 15000,
+    });
+    await expect(rows).toHaveCount(2);
+  });
+
+  test("Copy of a name that already has a copy", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl, {
+      sourceHoldsCopy: true,
+    });
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    const original = row(page, PLAN.name).filter({ hasNotText: "plan (1)" });
+    await expect(original).toBeVisible({ timeout: 15000 });
+
+    await openTransferDialog(page, "copy", original);
+    await copyToDestinationRoom(page, { room: SOURCE_ROOM_TITLE });
+    await unlockIfPrompted(page, rooms.passphrase);
+
+    await expect
+      .poll(() => rooms.sourceHandle.getFiles().length, { timeout: 30000 })
+      .toBe(3);
+    expect(rooms.sourceHandle.getSessions().map((s) => s.encrypted)).toEqual([
+      true,
+    ]);
+    await expect(
+      page.getByRole("dialog").filter({ hasText: "Action required" }),
+    ).toHaveCount(0);
+    await expect(
+      page
+        .locator('[data-testid^="table-row-"]')
+        .filter({ hasText: "plan (2)" }),
+    ).toHaveCount(1, { timeout: 15000 });
+  });
+
+  test("Duplicate offered for an encrypted file", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl);
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+    const seen = recordRequests(page);
+
+    await row(page, PLAN.name)
+      .getByTestId("context-menu-button")
+      .first()
+      .click();
+    const submenu = page.getByTestId("option_move-or-copy");
+    await expect(submenu).toBeVisible({ timeout: 10000 });
+    await submenu.hover();
+    await page.getByTestId("option_create-duplicate").click();
+    await unlockIfPrompted(page, rooms.passphrase);
+
+    await expect
+      .poll(() => rooms.sourceHandle.getFiles().length, { timeout: 30000 })
+      .toBe(2);
+    const copy = rooms.sourceHandle
+      .getFiles()
+      .find((f) => f.id !== PLAN.id)!;
+    expect(copy.encrypted).toBe(true);
+    expect(isDSE3Format(copy.bytes!)).toBe(true);
+    expect(new TextDecoder().decode(copy.bytes)).not.toContain(PLAN.text);
+    expect(rooms.sourceHandle.getSessions().map((s) => s.encrypted)).toEqual([
+      true,
+    ]);
+    await expect
+      .poll(() =>
+        rooms.sourceHandle
+          .getFile(copy.id)
+          .fileKeys.map((k) => String(k.userId))
+          .sort(),
+      )
+      .toEqual([ALICE_ID, TEST_USER_ID].sort());
+    await expect(
+      page
+        .locator('[data-testid^="table-row-"]')
+        .filter({ hasText: "plan (1)" }),
+    ).toHaveCount(1, { timeout: 15000 });
+    expect(seen.filter((r) => r.endsWith("/fileops/duplicate"))).toEqual([]);
+  });
+
+  test("Copy from an archived private room", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl, {
+      sourceArchived: true,
+    });
+    await openRoomInApp(
+      page,
+      SOURCE_ROOM_ID,
+      `/private/archived/filter?folder=${SOURCE_ROOM_ID}`,
+    );
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+
+    await openTransferDialog(page, "copy");
+    await copyToDestinationRoom(page);
+    await unlockIfPrompted(page, rooms.passphrase);
+
+    await expectReencryptedCopy(rooms);
+  });
+
+  test("Paste into another private room", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl);
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+
+    await page.keyboard.press("Control+a");
+    await page.keyboard.press("Control+x");
+    await expect(
+      page.getByTestId("toast-content").filter({ hasText: /: 1$/ }),
+    ).toBeVisible({ timeout: 5000 });
+
+    await openRoomInApp(page, DEST_ROOM_ID, activeRoomUrl(DEST_ROOM_ID));
+    await expect(
+      page.getByRole("heading", { name: DEST_ROOM_TITLE, level: 1 }),
+    ).toBeVisible({ timeout: 15000 });
+    const seen = recordRequests(page);
+    await page.keyboard.press("Control+v");
+
+    await expect(
+      page.getByTestId("toast-content").filter({ hasText: MOVE_REFUSAL }),
+    ).toBeVisible({ timeout: 10000 });
+    expect(seen.filter((r) => r.includes("/fileops/"))).toEqual([]);
+    expect(seen.filter((r) => /\/session(\/|$)/.test(r))).toEqual([]);
+    expect(rooms.destHandle.getFiles()).toEqual([]);
+    expect(rooms.sourceHandle.getFile(PLAN.id)).toBeTruthy();
+  });
+
+  test("Move dialog", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    await serveTwoPrivateRooms(page, mockRequest, baseUrl);
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+
+    await openTransferDialog(page, "move");
+
+    const picker = selector(page);
+    await expect(picker.getByText(SOURCE_ROOM_TITLE).first()).toBeVisible({
+      timeout: 10000,
+    });
+    await expect(picker.getByText("Apps", { exact: true })).toHaveCount(0);
+    await expect(picker.getByText(DEST_ROOM_TITLE)).toHaveCount(0);
+  });
+});

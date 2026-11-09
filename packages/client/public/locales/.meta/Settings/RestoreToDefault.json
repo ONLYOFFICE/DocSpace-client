@@ -3,7 +3,7 @@
   "content": "Restore to default",
   "content_en_sha1_hash": "4679ca338a63ec93afce427c08feb4f9b69c6008",
   "created_at": "2025-05-19T21:30:52.427Z",
-  "updated_at": "2026-05-28T15:46:18.622Z",
+  "updated_at": "2026-11-05T16:49:39.975Z",
   "comment": {
     "text": "Button label. This button reverts all settings on the current page to their default values.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 382,
-      "context": "tabIndex={4}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"RestoreToDefault\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"brute-force-protection-save\"\n additionalClassCancelButton=\"brute-force-protection-cancel\"\n isSaving={isLoadingSave}",
+      "line_number": 378,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"RestoreToDefault\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"brute-force-protection-save\"\n additionalClassCancelButton=\"brute-force-protection-cancel\"\n isSaving={isLoadingSave}",
       "module": "/packages/client"
     }
   ],

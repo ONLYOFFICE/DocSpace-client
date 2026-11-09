@@ -34,7 +34,6 @@
  */
 
 import { useState, useEffect, useCallback } from "react";
-import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { withTranslation } from "react-i18next";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
@@ -45,7 +44,7 @@ import { useNavigate } from "react-router";
 import { isMobileDevice } from "@docspace/shared/utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -69,11 +68,9 @@ const textInputProps = {
   testId: "customization_dns_settings_text_input",
   className: "dns-textarea",
   scale: true,
-  tabIndex: 8,
 };
 
 const buttonProps = {
-  tabIndex: 9,
   className: "save-cancel-buttons send-request-button",
   testId: "customization_dns_settings_button",
   primary: true,
@@ -122,8 +119,6 @@ const DNSSettingsComponent = (props) => {
   });
 
   const { getCommonInitialValue } = useCommon(defaultProps.common);
-
-  const theme = useTheme();
 
   const checkInnerWidth = useCallback(() => {
     if (!isMobileDevice()) {
@@ -310,17 +305,7 @@ const DNSSettingsComponent = (props) => {
         <div className="category-item-heading">
           <div className="category-item-title">{t("DNSSettings")}</div>
           {!isSettingPaid && !standalone ? (
-            <Badge
-              className="paid-badge"
-              fontWeight="700"
-              backgroundColor={
-                theme.isBase
-                  ? globalColors.favoritesStatus
-                  : globalColors.favoriteStatusDark
-              }
-              label={t("Common:Paid")}
-              isPaidBadge
-            />
+            <PaidBadge className="paid-badge" fontWeight="700" />
           ) : null}
         </div>
       ) : null}

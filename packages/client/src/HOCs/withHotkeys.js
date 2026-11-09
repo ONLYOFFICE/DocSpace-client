@@ -72,7 +72,7 @@ const withHotkeys = (Component) => {
       viewAs,
       setViewAs,
       setHotkeyPanelVisible,
-      confirmDelete,
+      isDeleteConfirmationForced,
       setDeleteDialogVisible,
       setSelectFileDialogVisible,
       deleteAction,
@@ -117,8 +117,7 @@ const withHotkeys = (Component) => {
       isVisitor,
       deleteRooms,
       archiveRooms,
-      isWarningRoomsDialog,
-      setQuotaWarningDialogVisible,
+      createRoom,
 
       security,
       copyToClipboard,
@@ -221,18 +220,7 @@ const withHotkeys = (Component) => {
         (isRoomsFolder || isFormsFolder) &&
         security?.Create
       ) {
-        if (isWarningRoomsDialog) {
-          setQuotaWarningDialogVisible(true);
-          return;
-        }
-
-        const event = new CustomEvent(Events.ROOM_CREATE, {
-          detail: { parentId: currentFolderId, context: "hotkey" },
-        });
-        if (isFormsFolder) {
-          event.payload = { isFormsCreate: true };
-        }
-        window.dispatchEvent(event);
+        createRoom(null, false, "hotkey");
       }
     };
 
@@ -420,7 +408,14 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "Alt+Shift+o",
       () => {
-        if (folderWithNoAction || isFormRoom || isParentFolderFormRoom) return;
+        // Spec: private-rooms/file-operations, "Create hotkeys respect keys"
+        if (
+          folderWithNoAction ||
+          isFormRoom ||
+          isParentFolderFormRoom ||
+          isPrivacyFolder
+        )
+          return;
 
         if (isMobile) {
           toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
@@ -471,7 +466,7 @@ const withHotkeys = (Component) => {
             return;
           }
 
-          if (confirmDelete) {
+          if (isDeleteConfirmationForced) {
             setDeleteDialogVisible(true);
           } else {
             const translations = {
@@ -484,7 +479,7 @@ const withHotkeys = (Component) => {
         }
       },
       hotkeysFilter,
-      [confirmDelete],
+      [isDeleteConfirmationForced],
     );
 
     // //TODO: Undo the last action
@@ -566,7 +561,6 @@ const withHotkeys = (Component) => {
       settingsStore,
       filesStore,
       dialogsStore,
-      filesSettingsStore,
       filesActionsStore,
       hotkeyStore,
       mediaViewerDataStore,
@@ -574,7 +568,7 @@ const withHotkeys = (Component) => {
       selectedFolderStore,
       userStore,
       indexingStore,
-      currentQuotaStore,
+      contextOptionsStore,
       uploadDataStore,
     }) => {
       const {
@@ -614,7 +608,6 @@ const withHotkeys = (Component) => {
       const {
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        setQuotaWarningDialogVisible,
       } = dialogsStore;
       const {
         isAvailableOption,
@@ -644,8 +637,6 @@ const withHotkeys = (Component) => {
 
       const canCreateEncrypted = uploadDataStore.shouldEncryptCurrentUpload();
 
-      const { isWarningRoomsDialog } = currentQuotaStore;
-
       const security = selectedFolderStore.security;
       const { roomType } = selectedFolderStore;
       const isFormRoom = roomType === RoomsType.FormRoom;
@@ -661,7 +652,7 @@ const withHotkeys = (Component) => {
         setHotkeyPanelVisible,
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        confirmDelete: filesSettingsStore.confirmDelete,
+        isDeleteConfirmationForced: filesActionsStore.isDeleteConfirmationForced,
         deleteAction,
         isAvailableOption,
 
@@ -706,9 +697,7 @@ const withHotkeys = (Component) => {
         isVisitor,
         deleteRooms,
         archiveRooms,
-
-        isWarningRoomsDialog,
-        setQuotaWarningDialogVisible,
+        createRoom: contextOptionsStore.onCreateRoom,
 
         security,
         copyToClipboard,

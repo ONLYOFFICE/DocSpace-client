@@ -55,6 +55,12 @@ const DEPOSIT_PATH = "portal/payment/deposit";
 const UPDATE_WALLET_PATH = "portal/payment/updatewallet";
 const FIRST_RENDER = { timeout: 15000 };
 
+const providerError = () =>
+  new Response(
+    JSON.stringify({ error: { message: "Payment provider is unavailable" } }),
+    { status: 500, headers: { "Content-Type": "application/json" } },
+  );
+
 const servicePageHandlers = () => [
   http.get(apiUrl("portal/payment/customer/operations"), () =>
     jsonResponse({ collection: [] }),
@@ -325,6 +331,33 @@ test.describe("Docs Connect plan panel", () => {
       ),
     ).toBeVisible();
     await expect(page.getByText("Your plan has been purchased")).toHaveCount(0);
+  });
+
+  // Nothing is paid before the checkout opens, so the panel stays and the server message is kept.
+  test("a failed Stripe checkout link keeps the panel open with the provider error", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    usePreset(mockRequest, "paid", 1, { card: "unlinked" });
+    mockRequest.use(
+      http.get(apiUrl("portal/payment/checkoutsetupurl"), () => providerError()),
+    );
+    const purchases = trackRequests(page, "PUT", UPDATE_WALLET_PATH);
+
+    await openPanel(page, baseUrl, "Edit subscription");
+    await usersInput(page).fill("100");
+    await expect(submitButton(page)).toHaveText("Top up & Buy");
+
+    await submitButton(page).click();
+
+    await expect(page.getByTestId("toast-content")).toContainText(
+      "Payment provider is unavailable",
+    );
+    await expect(page.getByText("Unexpected error")).toHaveCount(0);
+    await expect(submitButton(page)).toBeVisible();
+    await expect(submitButton(page)).toBeEnabled();
+    expect(purchases).toHaveLength(0);
   });
 
   test("a deactivated plan is paid again with a top-up", async ({

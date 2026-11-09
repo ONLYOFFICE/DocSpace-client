@@ -103,6 +103,7 @@ import ExternalSyncDbPanel from "../panels/ExternalSyncDbPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 import AssignRoles from "../dialogs/AssignRoles";
+import EncryptedTransferConfirmDialog from "../dialogs/EncryptedTransferConfirmDialog";
 import ShareSelector from "../ShareSelector";
 
 import TemplateGallery from "../TemplateGallery";
@@ -110,10 +111,12 @@ import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
 import AskAIConnectDialog from "../dialogs/AskAIConnectDialog";
 import AiProjectDialog from "../dialogs/AiProjectDialog";
+import GenerateSkillDialog from "../dialogs/GenerateSkillDialog";
 
 const Panels = (props) => {
   const {
     aiProjectDialogVisible,
+    generateSkillDialogVisible,
     uploadPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
@@ -156,6 +159,7 @@ const Panels = (props) => {
     embeddingPanelData,
     metadataAIPanelData,
     moveToPublicRoomVisible,
+    encryptedTransferConfirm,
     settingsPluginDialogVisible,
     pluginDialogVisible,
     pluginSelectorVisible,
@@ -393,6 +397,9 @@ const Panels = (props) => {
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
+    encryptedTransferConfirm && (
+      <EncryptedTransferConfirmDialog key="encrypted-transfer-confirm-dialog" />
+    ),
     leaveRoomDialogVisible && <LeaveRoomDialog key="leave-room-dialog" />,
     changeRoomOwnerIsVisible && (
       <ChangeRoomOwnerPanel key="change-room-owner" />
@@ -476,6 +483,9 @@ const Panels = (props) => {
       <AskAIConnectDialog key="ask-ai-connect-dialog" />
     ),
     aiProjectDialogVisible && <AiProjectDialog key="ai-project-dialog" />,
+    generateSkillDialogVisible && (
+      <GenerateSkillDialog key="generate-skill-dialog" />
+    ),
   ];
 };
 
@@ -533,6 +543,7 @@ export default inject(
       embeddingPanelData,
       metadataAIPanelData,
       moveToPublicRoomVisible,
+      encryptedTransferConfirm,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
@@ -616,6 +627,7 @@ export default inject(
 
     return {
       aiProjectDialogVisible: aiProjectsStore.projectDialog !== null,
+      generateSkillDialogVisible: dialogsStore.generateSkillDialogVisible,
       preparationPortalDialogVisible,
       uploadPanelVisible,
       copyPanelVisible,
@@ -660,6 +672,7 @@ export default inject(
       embeddingPanelData,
       metadataAIPanelData,
       moveToPublicRoomVisible,
+      encryptedTransferConfirm,
       settingsPluginDialogVisible,
       pluginDialogVisible,
       pluginSelectorVisible,

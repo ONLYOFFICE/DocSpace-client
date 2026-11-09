@@ -190,7 +190,6 @@ const CreateGroupDialog = ({
           <Button
             id="create-group-modal_submit"
             testId="create_edit_group_create_button"
-            tabIndex={5}
             label={t("Common:Create")}
             size={ButtonSize.normal}
             primary
@@ -202,7 +201,6 @@ const CreateGroupDialog = ({
           <Button
             id="create-group-modal_cancel"
             testId="create_edit_group_cancel_button"
-            tabIndex={5}
             label={t("Common:CancelButton")}
             size={ButtonSize.normal}
             scale

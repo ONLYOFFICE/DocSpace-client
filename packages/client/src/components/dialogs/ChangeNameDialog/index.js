@@ -188,7 +188,6 @@ const ChangeNameDialog = (props) => {
 									placeholder={field.placeholder}
 									isDisabled={isSaving}
 									onKeyDown={onKeyDown}
-									tabIndex={index + 1}
 									hasError={field.hasError}
 									testId={`${field.dataTestId}_input`}
 								/>
@@ -207,7 +206,6 @@ const ChangeNameDialog = (props) => {
 					primary
 					onClick={onSaveClick}
 					isLoading={isSaving}
-					tabIndex={3}
 					isDisabled={
 						!isNameValid ||
 						!isSurnameValid ||
@@ -224,7 +222,6 @@ const ChangeNameDialog = (props) => {
 					scale
 					onClick={onClose}
 					isDisabled={isSaving}
-					tabIndex={4}
 					testId="dialog_change_name_cancel_button"
 				/>
 			</ModalDialog.Footer>

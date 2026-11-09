@@ -35,7 +35,7 @@
 
 import { describe, it, expect } from "vitest";
 
-import { sectionFromPathname } from "./usePrivateFrameBridge";
+import { sectionFromPathname, withoutSearchText } from "./usePrivateFrameBridge";
 
 describe("usePrivateFrameBridge / sectionFromPathname", () => {
   it("maps the archive route to 'archive'", () => {
@@ -59,5 +59,21 @@ describe("usePrivateFrameBridge / sectionFromPathname", () => {
 
   it("treats the /private/archive prefix as the archive section", () => {
     expect(sectionFromPathname("/private/archived-room")).toBe("archive");
+  });
+});
+
+describe("usePrivateFrameBridge / withoutSearchText", () => {
+  it("Open location from the history: the host message carries no search text", () => {
+    expect(
+      withoutSearchText("?folder=7002&search=Quarterly%20report&privateRooms=true"),
+    ).toBe("?folder=7002&privateRooms=true");
+    expect(withoutSearchText("?search=Quarterly")).toBe("");
+  });
+
+  it("passes a query without a search text through unchanged", () => {
+    expect(withoutSearchText("?folder=7002&privateRooms=true")).toBe(
+      "?folder=7002&privateRooms=true",
+    );
+    expect(withoutSearchText("")).toBe("");
   });
 });

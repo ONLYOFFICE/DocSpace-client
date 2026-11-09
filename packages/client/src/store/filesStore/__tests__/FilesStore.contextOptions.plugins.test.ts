@@ -5,6 +5,7 @@ import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
 import type { TItem } from "../types";
+import { PluginFileType } from "../../../helpers/plugins/enums";
 
 // Bug 82885: plugin context-menu keys must never reach a file from an
 // encrypted room. Plugins get only a file id and fetch the bytes themselves,
@@ -123,6 +124,32 @@ describe("getFilesContextOptions — plugin items vs encrypted files", () => {
     expect(store.getFilesContextOptions(privateRoom)).not.toContain(PLUGIN_KEY);
   });
 
+  it("asks the plugin store for a room's keys with its id and room type", () => {
+    const getContextMenuKeysByType = vi.fn(() => [PLUGIN_KEY]);
+    const store = createTestFilesStore({
+      settingsStore: { enablePlugins: true },
+      pluginStore: { getContextMenuKeysByType },
+      userStore: { encryptionKeys: [{ id: "key-1" }] },
+    });
+    store.dialogsStore = { roomGroups: [] } as never;
+
+    const room = {
+      ...baseFolder(),
+      id: 6,
+      title: "Room",
+      roomType: RoomsType.CustomRoom,
+    } as unknown as TItem;
+
+    expect(store.getFilesContextOptions(room)).toContain(PLUGIN_KEY);
+
+    const roomCall = (getContextMenuKeysByType.mock.calls as unknown[][]).find(
+      (args) => args[0] === PluginFileType.room,
+    );
+
+    expect(roomCall?.[4]).toBe(6);
+    expect(roomCall?.[5]).toBe(RoomsType.CustomRoom);
+  });
+
   it("keeps plugin actions out of a form room's contents", () => {
     const store = storeWithPlugin();
 
@@ -211,5 +238,41 @@ describe("getFilesContextOptions — plugin items vs encrypted files", () => {
     expect(store.getFilesContextOptions(encryptedVideo)).not.toContain(
       PLUGIN_KEY,
     );
+  });
+});
+
+describe("getFilesContextOptions — archived private room", () => {
+  const archivedPrivateRoomStore = () =>
+    createTestFilesStore({
+      settingsStore: { enablePlugins: true, aiServicesEnabled: true },
+      pluginStore: { getContextMenuKeysByType: () => [PLUGIN_KEY] },
+      userStore: { encryptionKeys: [{ id: "key-1" }] },
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+
+  it("Folder context menu with a folder plugin installed", () => {
+    const folder = {
+      ...baseFolder(),
+      rootFolderType: FolderType.Archive,
+    } as TItem;
+
+    const opts = archivedPrivateRoomStore().getFilesContextOptions(folder);
+
+    expect(opts).not.toContain(PLUGIN_KEY);
+    expect(opts).not.toContain("ask-ai");
+  });
+
+  it("Encrypted file in an archived private room", () => {
+    const file = {
+      ...encryptedFile(),
+      rootFolderType: FolderType.Archive,
+      security: { ...encryptedFile().security, AskAi: true },
+    } as TItem;
+
+    const opts = archivedPrivateRoomStore().getFilesContextOptions(file);
+
+    expect(opts).not.toContain(PLUGIN_KEY);
+    expect(opts).not.toContain("ask-ai");
+    expect(opts).toContain("download-encrypted");
   });
 });

@@ -3,7 +3,7 @@
   "content": "Set up your encryption keys in Profile before creating a private room.",
   "content_en_sha1_hash": "a72a5c40597b42602477a7e20502ab346fa4508d",
   "created_at": "2026-05-24T17:27:26.632Z",
-  "updated_at": "2026-11-01T08:02:58.351Z",
+  "updated_at": "2026-11-06T10:45:55.157Z",
   "comment": {
     "text": "Error toast message appearing when a user attempts to create a private room without having encryption keys configured in their Profile.",
     "is_auto": true,
@@ -13,14 +13,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/CreateEditRoomStore.ts",
-      "line_number": 620,
-      "context": "keys = null;\n }\n }\n \n if (!keys || keys.length === 0) {\n toastr.error(t(\"Common:EncryptionKeysRequiredForPrivateRoom\"));\n return;\n }\n }\n \n // The AI room types refuse the settings that do not apply to them.",
+      "line_number": 630,
+      "context": "toastr.error(t(\"Common:EncryptionKeysLoadFailed\"));\n return;\n }\n \n if (!keys) {\n toastr.error(t(\"Common:EncryptionKeysRequiredForPrivateRoom\"));\n return;\n }\n }\n \n // The AI room types refuse the settings that do not apply to them.",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 483,
-      "context": "\"var(--row-hover-background, rgba(0, 0, 0, 0.04))\",\n }}\n data-test-id=\"create_edit_room_keys_required\"\n >\n <Text>\n {t(\"Common:EncryptionKeysRequiredForPrivateRoom\")}\n {canStartKeySetup ? null : (\n <>\n {\" \"}\n <Link\n tag=\"a\"",
+      "line_number": 403,
+      "context": "toastr.error(t(\"Common:EncryptionKeysLoadFailed\"));\n return;\n }\n if (!hasKeys) {\n setIsLoading(false);\n toastr.error(t(\"Common:EncryptionKeysRequiredForPrivateRoom\"));\n return;\n }\n }\n const logo = await buildLogoParams();\n const newRoom = (await api.rooms.createRoom({",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
+      "line_number": 403,
+      "context": "toastr.error(t(\"Common:EncryptionKeysLoadFailed\"));\n return;\n }\n if (!hasKeys) {\n setIsLoading(false);\n toastr.error(t(\"Common:EncryptionKeysRequiredForPrivateRoom\"));\n return;\n }\n }\n const logo = await buildLogoParams();\n const newRoom = (await api.rooms.createRoom({",
       "module": "/packages/sdk"
     }
   ],

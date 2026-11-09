@@ -34,7 +34,7 @@
  */
 
 import equal from "fast-deep-equal";
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import {
@@ -122,6 +122,7 @@ import type AccessRightsStore from "./AccessRightsStore";
 import type ClientLoadingStore from "./ClientLoadingStore";
 import type PluginStore from "./PluginStore";
 import type PublicRoomStore from "./PublicRoomStore";
+import type AppsStore from "./AppsStore";
 import type IndexingStore from "./IndexingStore";
 import type DialogsStore from "./DialogsStore";
 
@@ -156,6 +157,7 @@ import {
   fetchFilesImpl,
   fetchRoomsImpl,
   fetchMoreFilesImpl,
+  refetchRoomsListOnSectionChangeImpl,
 } from "./filesStore/fetch.helpers";
 import {
   onResolveNewFileImpl,
@@ -375,6 +377,14 @@ class FilesStore {
   // Narrow interface (Track F): attached post-construction in
   // store/index.ts (mutual reference); only `roomGroups` is read here.
   dialogsStore: Nullable<Pick<DialogsStore, "roomGroups">> = null;
+
+  // Attached post-construction in store/index.ts with
+  // watchPrivateRoomsSection; read for the Private section's request scope
+  // and address.
+  appsStore: Nullable<
+    Pick<AppsStore, "isPrivateRoomsSectionAvailable" | "isInstalled"> &
+      Partial<Pick<AppsStore, "waitForFrameOptIn">>
+  > = null;
 
   arrRoomGroups: unknown[] = [];
 
@@ -688,7 +698,8 @@ class FilesStore {
   wsModifyFolderUpdate = async (opt?: TOptSocket) =>
     wsModifyFolderUpdateImpl(this, opt);
 
-  refreshFolder = (id: number | string) => refreshFolderImpl(this, id);
+  refreshFolder = (id: number | string, skipRedirect = false) =>
+    refreshFolderImpl(this, id, skipRedirect);
 
   wsModifyFolderDelete = (opt?: TOptSocket) =>
     wsModifyFolderDeleteImpl(this, opt);
@@ -1312,6 +1323,17 @@ class FilesStore {
       clearSelection,
     );
 
+  watchPrivateRoomsSection = (
+    appsStore: Pick<AppsStore, "isPrivateRoomsSectionAvailable" | "isInstalled">,
+  ) => {
+    this.appsStore = appsStore;
+
+    reaction(
+      () => appsStore.isPrivateRoomsSectionAvailable,
+      () => refetchRoomsListOnSectionChangeImpl(this),
+    );
+  };
+
   fetchRooms = (
     folderId: Nullable<number | string>,
     filter?: Nullable<TRoomsFilter>,
@@ -1423,6 +1445,7 @@ class FilesStore {
       filterType: this.filterType,
       filterSearch: this.filterSearch,
       filter: this.filter,
+      isRoomsSectionOff: this.isRoomsSectionOff,
     });
 
   createFile = async (
@@ -1604,13 +1627,9 @@ class FilesStore {
           !this.selectedFolderStore.isRootFolder && canCreateInSharedFolder
         );
       }
-      case FolderType.Privacy:
-        return (
-          this.settingsStore.isDesktopClient &&
-          this.settingsStore.isEncryptionSupport
-        );
       case FolderType.COMMON:
         return this.authStore.isAdmin;
+      case FolderType.Privacy:
       case FolderType.Archive:
       case FolderType.TRASH:
       default:
@@ -2122,6 +2141,18 @@ class FilesStore {
     }
 
     return minWidth + orderLength * 2;
+  }
+
+  get isPrivateRoomsSectionAvailable() {
+    return !!this.appsStore?.isPrivateRoomsSectionAvailable;
+  }
+
+  // The Rooms app is switched off (Settings -> Apps, standalone only). The
+  // server still grants CreateRoomFrom then, so every "Create room" entry
+  // point checks this too: a room created from a file would land in a section
+  // nobody can open, and take the file with it.
+  get isRoomsSectionOff() {
+    return !!this.appsStore && !this.appsStore.isInstalled("ai-rooms");
   }
 
   get hasMoreFiles() {

@@ -18,6 +18,8 @@
     "test:e2e:docker:dev:update-screenshots": "docker-compose run --rm tests-dev pnpm exec playwright test --update-snapshots",
     "test:e2e:docker:clear": "docker rmi doceditor-tests",
     "test:e2e:ui": "pnpm run test:build && pnpm exec playwright test --ui",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "biome lint ./src",
     "lint:fix": "biome lint --write ./src",
     "format": "prettier --check ./src",
@@ -30,7 +32,7 @@
     "@aws-sdk/client-cloudwatch-logs": "3.981.0",
     "@docspace/shared": "workspace:*",
     "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tgz",
-    "@onlyoffice/doceditor-types": "^10.0.0",
+    "@onlyoffice/doceditor-types": "^10.0.1",
     "@onlyoffice/document-editor-react": "2.3.0",
     "classnames": "2.5.1",
     "crypto-js": "4.2.0",
@@ -65,12 +67,14 @@
     "@types/react-dom": "19.2.3",
     "cross-env": "^10.1.0",
     "css-minimizer-webpack-plugin": "^7.0.4",
+    "jsdom": "^27.4.0",
     "nconf": "0.12.1",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.10",
     "sass": "1.79.6",
     "shx": "0.4.0",
     "terser-webpack-plugin": "5.3.16",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "4.1.12"
   },
   "nx": {
     "targets": {

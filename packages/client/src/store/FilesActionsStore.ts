@@ -81,6 +81,7 @@ import {
   nameWithoutExtension as nameWithoutExtensionHelper,
 } from "./filesActionsStore/helpers";
 import type { TTreeNode, TUploadTreeFile } from "./filesActionsStore/helpers";
+import type { TUploadTarget } from "./uploadDataStore/helpers";
 import {
   isAvailableOptionImpl,
   getOptionImpl,
@@ -125,11 +126,13 @@ import {
   resolveRoomIdForFileImpl,
   downloadEncryptedFileImpl,
   downloadEncryptedFilesAsZipImpl,
+  downloadEncryptedFolderImpl,
 } from "./filesActionsStore/download.helpers";
 import {
   duplicateActionImpl,
   duplicateEncryptedFileImpl,
   copyEncryptedFilesToFolderImpl,
+  runPrivateTransferPlanImpl,
   getItemsInfoImpl,
   checkFileConflictsImpl,
   setConflictDialogDataImpl,
@@ -139,6 +142,14 @@ import {
   copyFilesToKnowledgeRoomImpl,
   moveDragItemsImpl,
   getPublicKeyImpl,
+  confirmEncryptedTransferImpl,
+} from "./filesActionsStore/copyMove.helpers";
+import { planPrivateTransfer } from "@docspace/shared/services/private-room/private-transfer";
+import type {
+  TEncryptedTransferDest,
+  TPrivateTransferParams,
+  TPrivateTransferPlan,
+  TPrivateTransferRunOptions,
 } from "./filesActionsStore/copyMove.helpers";
 import {
   moveToRoomsPageImpl,
@@ -253,6 +264,8 @@ export type TDownloadTranslations = {
   label?: string;
   error?: string;
   passwordError?: string;
+  /** The toast of a failed request that is not the server's own message. */
+  errorMessage?: (error: unknown) => string;
 };
 export type TRemoveTranslations = {
   successRemoveTemplate?: string;
@@ -308,6 +321,8 @@ type TFilesStore = {
   filter: FilesFilter;
   roomsFilter: RoomsFilter;
   categoryType: number;
+  isPrivateRoomsSectionAvailable: boolean;
+  isRoomsSectionOff: boolean;
   hasSelection: boolean;
   allFilesIsEditing: boolean;
   canConvertSelected: boolean;
@@ -448,6 +463,14 @@ class FilesActionStore {
 
   alreadyExportingRoomIndex = false;
 
+  // Spec: private-rooms/file-operations, "Deletion bypasses the recycle bin"
+  get isDeleteConfirmationForced() {
+    return (
+      this.filesSettingsStore.confirmDelete ||
+      this.treeFoldersStore.isPrivacyFolder
+    );
+  }
+
   constructor(
     settingsStore: SettingsStore,
     uploadDataStore: UploadDataStore,
@@ -519,9 +542,9 @@ class FilesActionStore {
   createFoldersTree = async (
     t: TTranslation,
     files: TUploadTreeFile[] | Record<string, TUploadTreeFile>,
-    folderId?: number | string | null,
+    target: TUploadTarget,
     dragged?: boolean,
-  )=> createFoldersTreeImpl(this, t, files, folderId, dragged);
+  )=> createFoldersTreeImpl(this, t, files, target, dragged);
 
   updateFilesAfterDelete = (operationId: string, operationName: TOperationName)=> updateFilesAfterDeleteImpl(this, operationId, operationName);
 
@@ -554,7 +577,12 @@ class FilesActionStore {
 
   downloadEncryptedFile = async (file: TActionItem)=> downloadEncryptedFileImpl(this, file);
 
-  downloadEncryptedFilesAsZip = async (encryptedFiles: TActionItem[])=> downloadEncryptedFilesAsZipImpl(this, encryptedFiles);
+  downloadEncryptedFilesAsZip = async (
+    encryptedFiles: TActionItem[],
+    folders: TActionItem[] = [],
+  ) => downloadEncryptedFilesAsZipImpl(this, encryptedFiles, folders);
+
+  downloadEncryptedFolder = async (folder: TActionItem)=> downloadEncryptedFolderImpl(this, folder);
 
   completeAction = async (
     selectedItem: { id: number; isFolder?: boolean },
@@ -601,12 +629,22 @@ class FilesActionStore {
   copyEncryptedFilesToFolder = async (
     items: TActionItem[],
     destFolderId: number | string | undefined,
-    destInfo?: {
-      private?: boolean;
-      rootFolderId?: number | string;
-      roomType?: Nullable<RoomsType>;
+    destInfo?: TEncryptedTransferDest & {
+      deleteSourceOnSuccess?: boolean;
+      sourceRoomId?: number | string | null;
     },
   )=> copyEncryptedFilesToFolderImpl(this, items, destFolderId, destInfo);
+
+  planPrivateTransfer = (params: TPrivateTransferParams)=> planPrivateTransfer(params);
+
+  runPrivateTransferPlan = (
+    plan: TPrivateTransferPlan,
+    destFolderId: number | string,
+    dest: TEncryptedTransferDest | null | undefined,
+    options: TPrivateTransferRunOptions,
+  )=> runPrivateTransferPlanImpl(this, plan, destFolderId, dest, options);
+
+  confirmEncryptedTransfer = ()=> confirmEncryptedTransferImpl(this);
 
   getItemsInfo = (items: TActionItem[])=> getItemsInfoImpl(this, items);
 

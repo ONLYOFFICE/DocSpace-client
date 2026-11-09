@@ -53,6 +53,7 @@ import {
   isContextMenuOpen,
   isKeyOwnedByFocus,
 } from "SRC_DIR/helpers/hotkeys";
+import { getFilesItemClassName } from "SRC_DIR/helpers/filesItemClassName";
 import { TABLE_HEADER_HEIGHT } from "@onlyoffice/apps-ui-kit/components/table/Table.constants";
 
 import type FilesSettingsStore from "./FilesSettingsStore";
@@ -60,6 +61,13 @@ import type IndexingStore from "./IndexingStore";
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TSelectedFolder } from "./SelectedFolderStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
+import type {
+  TEncryptedTransferDest,
+  TPrivateTransferParams,
+  TPrivateTransferPlan,
+  TPrivateTransferRunOptions,
+} from "./filesActionsStore/copyMove.helpers";
+import type { TUploadTarget } from "./uploadDataStore/helpers";
 
 type TFilesItem = {
   id: number | string;
@@ -132,7 +140,19 @@ type TFilesActionsStore = {
     conflicts: unknown[],
     operationData: TOperationData,
   ) => void;
-  createFoldersTree: (t: TTranslation, files: unknown[]) => Promise<unknown[]>;
+  planPrivateTransfer: (params: TPrivateTransferParams) => TPrivateTransferPlan;
+  runPrivateTransferPlan: (
+    plan: TPrivateTransferPlan,
+    destFolderId: number | string,
+    dest: TEncryptedTransferDest | null | undefined,
+    options: TPrivateTransferRunOptions,
+  ) => boolean;
+  resolveRoomIdForFile: (file?: null) => number | string | null;
+  createFoldersTree: (
+    t: TTranslation,
+    files: unknown[],
+    target: TUploadTarget,
+  ) => Promise<unknown[]>;
 };
 
 type TUploadDataStore = {
@@ -141,7 +161,8 @@ type TUploadDataStore = {
     fileIds: (number | string)[],
     folderIds: (number | string)[],
   ) => void;
-  startUpload: (files: unknown[], folderId: null, t: TTranslation) => void;
+  startUpload: (files: unknown[], target: TUploadTarget, t: TTranslation) => void;
+  resolveOpenFolderTarget: () => TUploadTarget;
 };
 
 class HotkeyStore {
@@ -164,6 +185,12 @@ class HotkeyStore {
   elemOffset = 0;
 
   hotkeysClipboardAction: "move" | "copy" | null = null;
+
+  /** Where the clipboard items were taken from, for the private-room rules. */
+  hotkeysClipboardSource: {
+    inPrivateRoom: boolean;
+    roomId: number | string | null;
+  } | null = null;
 
   hotkeysClipboardFromShared = false;
 
@@ -317,12 +344,7 @@ class HotkeyStore {
   getItemOffset = () => {
     const { hotkeyCaret, viewAs } = this.filesStore;
 
-    // `hotkeyCaret` can be null — the original .js read
-    // `.fileExst` on it unguarded (callers ensure a caret is set); the
-    // non-null assertion keeps runtime identical.
-    const className = hotkeyCaret!.fileExst
-      ? `${hotkeyCaret!.id}_${hotkeyCaret!.fileExst}`
-      : `${hotkeyCaret!.id}`;
+    const className = getFilesItemClassName(hotkeyCaret);
 
     let item: HTMLCollectionOf<Element> | undefined =
       document.getElementsByClassName(className);
@@ -799,10 +821,17 @@ class HotkeyStore {
     const canCopy = selection.every((s) => s.security?.Copy);
     const canMove = selection.every((s) => s.security?.Move);
 
-    if (!canCopy || (isCut && !canMove) || !selection.length) return;
+    // A cut is a move: inside a private room the server allows Move and denies Copy.
+    if ((isCut ? !canMove : !canCopy) || !selection.length) return;
+    // Spec: file-operations, "Copy hotkey withheld in an archived private room".
+    if (!isCut && this.treeFoldersStore.isPrivacyFolder) return;
 
     setHotkeysClipboard();
     this.hotkeysClipboardAction = isCut ? "move" : "copy";
+    this.hotkeysClipboardSource = {
+      inPrivateRoom: !!this.treeFoldersStore.isPrivacyFolder,
+      roomId: this.filesActionsStore.resolveRoomIdForFile(null),
+    };
     this.hotkeysClipboardFromShared = this.isInSharedFolder;
 
     const copyText = `${t("AddedToClipboard")}: ${selection.length}`;
@@ -817,6 +846,7 @@ class HotkeyStore {
       id: selectedItemId,
       security,
       getSelectedFolder,
+      roomType,
     } = this.selectedFolderStore;
     const { activeFiles, activeFolders, hotkeysClipboard } = this.filesStore;
     const { checkFileConflicts, setSelectedItems, setConflictDialogData } =
@@ -831,10 +861,50 @@ class HotkeyStore {
 
     if (!selections.length) return;
 
-    // `security` is nullable on SelectedFolderStore — the
-    // original .js read `.CopyTo`/`.MoveTo` unguarded; non-null assertions
-    // keep runtime identical.
-    if (!security!.CopyTo || !security!.MoveTo) return;
+    // Spec: private-rooms/file-operations, "Clipboard hotkeys follow the private-room transfer rules".
+    const source = this.hotkeysClipboardSource;
+    const destInPrivateRoom = !!this.treeFoldersStore.isPrivacyFolder;
+    const dest = {
+      private: destInPrivateRoom,
+      insidePrivateRoom: destInPrivateRoom,
+      roomId: destInPrivateRoom
+        ? this.filesActionsStore.resolveRoomIdForFile(null)
+        : null,
+      rootFolderId: this.selectedFolderStore.rootFolderId,
+      rootFolderType: this.selectedFolderStore.rootFolderType ?? undefined,
+      roomType,
+    };
+    const plan = this.filesActionsStore.planPrivateTransfer({
+      items: selections as TPrivateTransferParams["items"],
+      sourceInPrivateRoom: !!source?.inPrivateRoom,
+      sourceRoomId: source?.roomId,
+      move: !isCopy,
+      dest,
+    });
+
+    const isRefused =
+      plan.kind === "refuse-into" ||
+      plan.kind === "refuse-folder-out" ||
+      plan.kind === "refuse-move-into";
+    const canPaste =
+      plan.kind === "same-room"
+        ? !!security?.MoveTo
+        : !!security?.CopyTo && !!security?.MoveTo;
+    if (!isRefused && !canPaste) return;
+
+    const clearClipboard = () => this.filesStore.setHotkeysClipboard([]);
+    if (
+      this.filesActionsStore.runPrivateTransferPlan(plan, selectedItemId!, dest, {
+        move: !isCopy,
+        sourceRoomId: source?.roomId,
+        confirmDecryption: true,
+        onConfirm: clearClipboard,
+      })
+    ) {
+      // A decrypt-out plan waits for the user; the clipboard stays until they confirm.
+      if (plan.kind !== "decrypt-out") clearClipboard();
+      return;
+    }
 
     let isPastedIntoItself = false;
     let isPastedIntoSameFolder = false;
@@ -911,7 +981,7 @@ class HotkeyStore {
 
   uploadClipboardFiles = async (t: TTranslation, event: ClipboardEvent) => {
     const { createFoldersTree } = this.filesActionsStore;
-    const { startUpload } = this.uploadDataStore;
+    const { startUpload, resolveOpenFolderTarget } = this.uploadDataStore;
 
     // Return early if the event target is an input or textarea element
     if (
@@ -927,11 +997,12 @@ class HotkeyStore {
       return this.moveFilesFromClipboard(t);
     }
 
+    const target = resolveOpenFolderTarget();
     const files = await getFilesFromEvent(event);
 
-    createFoldersTree(t, files)
+    createFoldersTree(t, files, target)
       .then((f) => {
-        if (f.length > 0) startUpload(f, null, t);
+        if (f.length > 0) startUpload(f, target, t);
       })
       .catch((err) => {
         toastr.error(err as string, null, 0, true);

@@ -68,6 +68,10 @@ import { TRoom, TWatermark } from "@docspace/shared/api/rooms/types";
 import { addEntityMcpServer } from "@docspace/shared/api/ai";
 import { startDbSync } from "@docspace/shared/api/rooms";
 import { DbSyncService } from "@docspace/shared/services/db-sync.service";
+import {
+  isRefusedForDocService,
+  resolvePrivateRoomKeys,
+} from "@docspace/shared/services/private-room/create-room-gate";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
@@ -605,18 +609,24 @@ class CreateEditRoomStore {
     const serverRoomType = isPrivateRoom ? RoomsType.CustomRoom : type;
 
     if (isPrivateRoom) {
-      const userStore = this.filesStore!.userStore;
-      let keys = userStore?.encryptionKeys;
-
-      if (!keys || keys.length === 0) {
-        try {
-          keys = (await userStore?.getEncryptionKeys?.()) ?? null;
-        } catch {
-          keys = null;
-        }
+      // Spec: private-rooms/room-membership, "Private room creation needs a Document Server that encrypts"
+      if (!this.filesStore!.filesSettingsStore.isEncryptedEditingAvailable) {
+        toastr.error(t("Common:PrivateRoomDocServiceNotSupported"));
+        return;
       }
 
-      if (!keys || keys.length === 0) {
+      const userStore = this.filesStore!.userStore;
+      const { keys, fetchFailed } = await resolvePrivateRoomKeys(
+        userStore?.encryptionKeys,
+        () => userStore?.getEncryptionKeys?.(),
+      );
+
+      if (fetchFailed) {
+        toastr.error(t("Common:EncryptionKeysLoadFailed"));
+        return;
+      }
+
+      if (!keys) {
         toastr.error(t("Common:EncryptionKeysRequiredForPrivateRoom"));
         return;
       }
@@ -747,7 +757,14 @@ class CreateEditRoomStore {
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);
     } catch (err) {
-      toastr.error(err as string);
+      if (
+        isPrivateRoom &&
+        (await isRefusedForDocService(err, () => api.files.getSettingsFiles()))
+      ) {
+        toastr.error(t("Common:PrivateRoomDocServiceNotSupported"));
+      } else {
+        toastr.error(err as string);
+      }
     } finally {
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
@@ -847,12 +864,16 @@ class CreateEditRoomStore {
     setIsSectionBodyLoading(true);
 
     const isFormRoom = room.roomType === RoomsType.FormRoom;
+    const isPrivateRoom =
+      this.filesStore!.isPrivateRoomsSectionAvailable && room.private === true;
     const path = getCategoryUrl(
       isFormRoom
         ? CategoryType.Form
-        : room.rootFolderType === FolderType.AiHub
-          ? CategoryType.AiHubRoom
-          : CategoryType.SharedRoom,
+        : isPrivateRoom
+          ? CategoryType.PrivateRoom
+          : room.rootFolderType === FolderType.AiHub
+            ? CategoryType.AiHubRoom
+            : CategoryType.SharedRoom,
       room.id,
     );
 

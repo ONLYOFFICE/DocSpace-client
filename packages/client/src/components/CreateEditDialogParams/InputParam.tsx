@@ -123,7 +123,6 @@ const InputParam = ({
           onBlur={onBlur}
           scale
           placeholder={placeholder}
-          tabIndex={2}
           isDisabled={isDisabled}
           hasError={!isValidTitle}
           isAutoFocussed={isAutoFocussed}

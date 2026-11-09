@@ -1,14 +1,13 @@
 {
   "key_path": "RoomExpectUsers",
-  "content": "Expect users",
-  "content_en_sha1_hash": "a90ef1efac83c2fbe3c15d7bcf5318e2c517db33",
-  "created_at": "2026-06-01T21:20:31.286Z",
-  "updated_at": "2026-06-15T19:31:56.230Z",
+  "content": "Pending users",
+  "content_en_sha1_hash": "996dea87361fbe0c0e2adfb65ac13d4287b19b32",
+  "created_at": "2026-11-05T16:49:21.533Z",
+  "updated_at": "2026-11-05T16:49:40.044Z",
   "comment": {
-    "text": "A label in the info panel's member list used to categorize users who are expected to join the room.",
-    "is_auto": true,
-    "updated_at": "2026-06-01T21:27:53.787Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {

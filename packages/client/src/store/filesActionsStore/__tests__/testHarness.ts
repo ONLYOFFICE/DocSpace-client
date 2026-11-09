@@ -139,6 +139,12 @@ const defaultFakes = (): FakeStores => ({
     clearActiveOperations: vi.fn(),
     loopFilesOperations: vi.fn(async () => {}),
     itemOperationToFolder: vi.fn(async () => {}),
+    resolveOpenFolderTarget: vi.fn(() => ({
+      folderId: 1,
+      isPrivate: false,
+      roomType: null,
+      encryptionRoomId: null,
+    })),
   },
   treeFoldersStore: {
     treeFolders: [],
@@ -203,6 +209,11 @@ const defaultFakes = (): FakeStores => ({
     setMoveToPanelVisible: vi.fn(),
     setCopyPanelVisible: vi.fn(),
     setDownloadDialogVisible: vi.fn(),
+    // Stateful like the real store: a held transfer is read back on confirm.
+    encryptedTransferConfirm: null as unknown,
+    setEncryptedTransferConfirm(value: unknown) {
+      this.encryptedTransferConfirm = value;
+    },
   },
   mediaViewerDataStore: {
     setMediaViewerData: vi.fn(),

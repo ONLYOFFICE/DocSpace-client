@@ -34,13 +34,21 @@
  */
 
 
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { observable, runInAction } from "mobx";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { PRIVATE_ROOMS_FLAG_KEY } from "@docspace/shared/utils/privateRooms";
 
-const { getApps, temporarilyDisabled } = vi.hoisted(() => ({
+const { getApps, temporarilyDisabled, frame } = vi.hoisted(() => ({
   getApps: vi.fn(),
   temporarilyDisabled: new Set<string>(),
+  frame: { isSdkFrame: false },
+}));
+
+vi.mock("@docspace/shared/utils/common", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  isSdkFrameWindow: () => frame.isSdkFrame,
 }));
 
 vi.mock("@docspace/shared/api/apps", () => ({
@@ -139,5 +147,157 @@ describe("AppsStore.isInstalled", () => {
       await store.fetchApps();
       expect(store.isInstalled("ai-arbiter")).toBe(false);
     }
+  });
+});
+
+describe("AppsStore.isPrivateRoomsSectionAvailable in an SDK frame", () => {
+  const createFramedStore = (standalone = false) => {
+    const settingsStore = observable({
+      standalone,
+      frameConfig: null as null | Record<string, unknown>,
+    });
+    const store = new AppsStore(settingsStore as unknown as SettingsStore);
+    return { settingsStore, store };
+  };
+
+  beforeEach(() => {
+    frame.isSdkFrame = true;
+    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: true }]);
+  });
+
+  afterEach(() => {
+    frame.isSdkFrame = false;
+    window.localStorage.clear();
+    vi.useRealTimers();
+  });
+
+  it("Host enables private rooms in a frame", async () => {
+    const { settingsStore, store } = createFramedStore();
+    await store.fetchApps();
+
+    expect(store.isFrameOptInSettled).toBe(false);
+    expect(store.isPrivateRoomsSectionAvailable).toBe(false);
+
+    runInAction(() => {
+      settingsStore.frameConfig = { frameId: "ds-frame", privateRooms: true };
+    });
+    await store.waitForFrameOptIn();
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(true);
+  });
+
+  it("Frame without the property", async () => {
+    const { settingsStore, store } = createFramedStore();
+    await store.fetchApps();
+
+    runInAction(() => {
+      settingsStore.frameConfig = { frameId: "ds-frame" };
+    });
+    await store.waitForFrameOptIn();
+
+    expect(store.isFrameOptInSettled).toBe(true);
+    expect(store.isPrivateRoomsSectionAvailable).toBe(false);
+  });
+
+  it("Frame configuration carries the opt-in", async () => {
+    const { settingsStore, store } = createFramedStore(true);
+    await store.fetchApps();
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(false);
+
+    runInAction(() => {
+      settingsStore.frameConfig = { frameId: "ds-frame", privateRooms: "1" };
+    });
+    await store.waitForFrameOptIn();
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(true);
+  });
+
+  it("Frame configuration without the opt-in", async () => {
+    const { settingsStore, store } = createFramedStore(true);
+    await store.fetchApps();
+
+    runInAction(() => {
+      settingsStore.frameConfig = { frameId: "ds-frame", privateRooms: false };
+    });
+    await store.waitForFrameOptIn();
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(false);
+  });
+
+  it("Browser flag in a frame", async () => {
+    window.localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
+    const { settingsStore, store } = createFramedStore();
+    await store.fetchApps();
+
+    runInAction(() => {
+      settingsStore.frameConfig = { frameId: "ds-frame" };
+    });
+    await store.waitForFrameOptIn();
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(false);
+  });
+
+  it("treats a host that never sends its configuration as not opted in", async () => {
+    vi.useFakeTimers();
+    const { store } = createFramedStore();
+
+    await vi.advanceTimersByTimeAsync(5000);
+    await store.waitForFrameOptIn();
+
+    expect(store.isFrameOptInSettled).toBe(true);
+    expect(store.isPrivateRoomsSectionAvailable).toBe(false);
+  });
+
+  it("has nothing to wait for outside an SDK frame", () => {
+    frame.isSdkFrame = false;
+
+    expect(createFramedStore().store.isFrameOptInSettled).toBe(true);
+  });
+});
+
+describe("AppsStore.isPrivateRoomsSectionAvailable", () => {
+  it("SaaS portal", async () => {
+    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: false }]);
+    const store = createStore(false);
+
+    await store.fetchApps();
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(true);
+  });
+
+  it("Standalone portal with the app on", async () => {
+    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: true }]);
+    const store = createStore(true);
+
+    await store.fetchApps();
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(true);
+  });
+
+  it("stays off on a standalone portal while the app is off", async () => {
+    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: false }]);
+    const store = createStore(true);
+
+    await store.fetchApps();
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(false);
+  });
+
+  it("is optimistic on standalone until the list arrives", () => {
+    const store = createStore(true);
+
+    expect(store.isLoaded).toBe(false);
+    expect(store.isPrivateRoomsSectionAvailable).toBe(true);
+  });
+
+  it("App switched off on a standalone portal", async () => {
+    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: true }]);
+    const store = createStore(true);
+    await store.fetchApps();
+
+    store.handleAppEnabledChange({ id: "e2e-rooms", enabled: false });
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(false);
   });
 });

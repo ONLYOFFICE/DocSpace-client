@@ -181,5 +181,16 @@ describe("AuthStore in an OAuth frame", () => {
       expect(api.user.logout).toHaveBeenCalledTimes(1);
       expect(signOutOAuth).not.toHaveBeenCalled();
     });
+
+    // The private route names a page it sends to the login page after the
+    // user the tab shows; once that user logged out, the tab shows no one.
+    it("forgets which user the tab was showing", async () => {
+      vi.mocked(isOAuthFrame).mockReturnValue(false);
+      sessionStorage.setItem("sessionUserId", "owner-id");
+
+      await createStore().logout(false);
+
+      expect(sessionStorage.getItem("sessionUserId")).toBeNull();
+    });
   });
 });

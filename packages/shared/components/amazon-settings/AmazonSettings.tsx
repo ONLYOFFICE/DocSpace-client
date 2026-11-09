@@ -291,7 +291,6 @@ const AmazonSettings = ({
           hasError={isError[bucket]}
           onChange={onChangeText}
           isDisabled={isLoadingData || isLoading || isDisabled}
-          tabIndex={1}
           type={InputType.text}
           size={InputSize.base}
           testId="amazon-bucket-input"
@@ -322,7 +321,6 @@ const AmazonSettings = ({
           isDefaultMode={false}
           dropDownMaxHeight={300}
           isDisabled={isDisabled}
-          tabIndex={2}
           showDisabledItems
           dataTestId="amazon_settings_region_combobox"
           dropDownTestId="amazon_settings_region_dropdown"
@@ -348,7 +346,6 @@ const AmazonSettings = ({
           hasError={isError[SERVICE_URL]}
           onChange={onChangeText}
           isDisabled={isLoadingData || isLoading || isDisabled}
-          tabIndex={3}
           type={InputType.text}
           size={InputSize.base}
           testId="amazon-service-url-input"
@@ -367,7 +364,6 @@ const AmazonSettings = ({
           isIndeterminate={false}
           isDisabled={isDisabled}
           onChange={onChangeCheckbox}
-          tabIndex={4}
           data-testid="amazon-force-path-style-checkbox"
           helpButton={
             <div
@@ -394,7 +390,6 @@ const AmazonSettings = ({
           isIndeterminate={false}
           isDisabled={isDisabled}
           onChange={onChangeCheckbox}
-          tabIndex={5}
           data-testid="amazon-use-http-checkbox"
           helpButton={
             <div
@@ -435,7 +430,6 @@ const AmazonSettings = ({
           scaledOptions
           dropDownMaxHeight={300}
           isDisabled={isDisabled}
-          tabIndex={7}
           showDisabledItems
           data-testid="amazon-sse-method-combobox"
         />
@@ -493,7 +487,6 @@ const AmazonSettings = ({
                 scaledOptions
                 dropDownMaxHeight={300}
                 isDisabled={isDisabled}
-                tabIndex={8}
                 showDisabledItems
                 dataTestId="amazon_managed_cmk_combobox"
               />
@@ -513,7 +506,6 @@ const AmazonSettings = ({
                     hasError={isError[SSE_KEY]}
                     onChange={onChangeText}
                     isDisabled={isLoadingData || isLoading || isDisabled}
-                    tabIndex={9}
                     type={InputType.text}
                     size={InputSize.base}
                     testId="amazon-customer-kms-key-input"
@@ -537,7 +529,6 @@ const AmazonSettings = ({
             hasError={isError[SSE_KEY]}
             onChange={onChangeText}
             isDisabled={isLoadingData || isLoading || isDisabled}
-            tabIndex={8}
             type={InputType.text}
             size={InputSize.base}
             testId="amazon-client-side-kms-key-input"

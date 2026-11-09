@@ -56,7 +56,6 @@ const QuotaPerRoomComponent = (props) => {
       saveQuota={(size) => setRoomQuota(size, t)}
       {...initialSizeProp}
       isQuotaSet={isDefaultRoomsQuotaSet}
-      tabIndex={1}
       dataTestId="quota_room"
       toggleDescription={t("SetDefaultRoomQuota")}
     />

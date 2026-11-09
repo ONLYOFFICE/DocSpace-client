@@ -48,7 +48,9 @@ import {
   setMetadataCustomFields,
   setMetadataValues,
 } from "@docspace/shared/api/metadata";
+import type { TProfile } from "@docspace/shared/api/ai/types";
 import type { TEntryMetadata } from "@docspace/shared/api/metadata/types";
+import type { TAiChatBlock } from "@docspace/shared/utils/ai";
 import type { TMetadataInput } from "@docspace/shared/utils/metadata";
 
 import type {
@@ -62,6 +64,7 @@ import {
   isTemplateFormValid,
   toCustomFieldDrafts,
 } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/utils";
+import { useStore } from "SRC_DIR/store/useStore";
 
 import type {
   TMetadataAIMode,
@@ -73,9 +76,9 @@ import {
   applyAIValues,
   getFillCustomFieldChanges,
   getFillNotFound,
+  getMetadataAIBlock,
   getMetadataAIError,
-  getMetadataAIModel,
-  getMetadataAIServiceLimit,
+  getMetadataAIProfile,
   getSkippedTitles,
   getSuggestNotFound,
   getTemplateForms,
@@ -101,6 +104,7 @@ export const useMetadataAIPanel = ({
   onSaved,
 }: TUseMetadataAIPanel) => {
   const { t } = useTranslation(["Metadata", "Common"]);
+  const { standalone } = useStore("settingsStore");
 
   const [phase, setPhase] = useState<TMetadataAIPhase>("loading");
   const [metadata, setMetadata] = useState<TEntryMetadata | null>(null);
@@ -108,12 +112,13 @@ export const useMetadataAIPanel = ({
   const [drafts, setDrafts] = useState<TCustomFieldDraft[]>([]);
   const [summary, setSummary] = useState<TMetadataAISummary | null>(null);
   const [error, setError] = useState("");
-  const [serviceLimit, setServiceLimit] =
-    useState<ReturnType<typeof getMetadataAIServiceLimit>>(null);
+  const [aiBlock, setAIBlock] = useState<TAiChatBlock | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [overwrite, setOverwrite] = useState(false);
-  const [model, setModel] = useState<string | null | undefined>();
+  const [profile, setProfile] = useState<TProfile | null | undefined>();
+
+  const model = profile && (profile.name || profile.modelId);
 
   const controller = useRef<AbortController | null>(null);
   const beforeRun = useRef<{
@@ -158,7 +163,7 @@ export const useMetadataAIPanel = ({
 
     Promise.all([getProfilesList(), getProfileAssignments()])
       .then(([profiles, assignments]) => {
-        if (isActive) setModel(getMetadataAIModel(profiles, assignments));
+        if (isActive) setProfile(getMetadataAIProfile(profiles, assignments));
       })
       .catch(() => {});
 
@@ -220,7 +225,7 @@ export const useMetadataAIPanel = ({
     resetHistory();
 
     setError("");
-    setServiceLimit(null);
+    setAIBlock(null);
     setPhase("analyzing");
 
     try {
@@ -229,10 +234,10 @@ export const useMetadataAIPanel = ({
     } catch (e) {
       if (abort.signal.aborted) return;
 
-      const limit = getMetadataAIServiceLimit(e);
+      const block = getMetadataAIBlock(e, profile?.providerType, standalone);
 
-      if (limit) setServiceLimit(limit);
-      else if (isMetadataAINoModel(e)) setModel(null);
+      if (block) setAIBlock(block);
+      else if (isMetadataAINoModel(e)) setProfile(null);
       else setError(getMetadataAIError(t, e));
       setPhase("ready");
     }
@@ -343,7 +348,7 @@ export const useMetadataAIPanel = ({
     drafts,
     summary,
     error,
-    serviceLimit,
+    aiBlock,
     isSaving,
     canSave,
     prompt,

@@ -3,7 +3,7 @@
   "content": "You have left the room",
   "content_en_sha1_hash": "46542dad576cfe3647d36a31566045dcad57950c",
   "created_at": "2025-05-19T21:30:56.359Z",
-  "updated_at": "2026-10-31T12:58:29.444Z",
+  "updated_at": "2026-11-06T10:45:55.189Z",
   "comment": {
     "text": "This is a toast message confirming that the user has successfully left a room. It appears after a user initiates the action to leave a room.",
     "is_auto": true,
@@ -13,14 +13,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
-      "line_number": 585,
-      "context": "const isAdmin = user!.isOwner || user!.isAdmin;\n const isRoot = self.selectedFolderStore.isRootFolder;\n \n const successText = isOwner\n ? t(\"Common:LeftAndAppointNewOwner\")\n : t(\"Common:YouLeftTheRoom\");\n \n const leave = () =>\n (\n api.rooms.updateRoomMemberRole(roomId, {\n invitations: [{ id: user?.id, access: ShareAccessRights.None }],",
+      "line_number": 591,
+      "context": "(user!.isOwner || user!.isAdmin) && room.private !== true;\n const isRoot = self.selectedFolderStore.isRootFolder;\n \n const successText = isOwner\n ? t(\"Common:LeftAndAppointNewOwner\")\n : t(\"Common:YouLeftTheRoom\");\n \n const leave = () =>\n (\n api.rooms.updateRoomMemberRole(roomId, {\n invitations: [{ id: user?.id, access: ShareAccessRights.None }],",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(private)/_components/owner-change/PrivateChangeOwnerDialog.tsx",
+      "line_number": 147,
+      "context": "const leaving = !!isLeaveChecked && !!currentUserId;\n const leftOpenRoom =\n leaving && String(filesListStore.currentFolder?.id) === String(roomId);\n if (leaving) {\n await leaveRoom({ roomId, userId: currentUserId as string });\n toastr.success(t(\"Common:YouLeftTheRoom\"));\n } else {\n toastr.success(t(\"Common:AppointNewOwner\"));\n }\n \n onChanged?.(roomId);",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/leave-room-dialog/index.tsx",
-      "line_number": 111,
-      "context": "force: false,\n });\n filesListStore.removeItem(roomId);\n filesSelectionStore.setSelection([]);\n filesSelectionStore.setBufferSelection(null);\n toastr.success(t(\"Common:YouLeftTheRoom\"));\n onClose();\n } catch (e) {\n toastr.error(e as Error);\n } finally {\n setIsLoading(false);",
+      "line_number": 132,
+      "context": "force: false,\n });\n filesListStore.removeItem(roomId);\n filesSelectionStore.setSelection([]);\n filesSelectionStore.setBufferSelection(null);\n toastr.success(t(\"Common:YouLeftTheRoom\"));\n onClose();\n const sectionRootId = filesListStore.pathParts?.[0]?.id;\n if (isPrivate && leftOpenRoom) {\n if (onLeftOpenRoom) onLeftOpenRoom();\n else if (sectionRootId !== undefined) openFolder(sectionRootId, \"\");",
       "module": "/packages/sdk"
     }
   ],

@@ -73,6 +73,7 @@ import {
 import styles from "./ManualBackup.module.scss";
 import { combineUrl } from "../../../utils/combineUrl";
 import NoteComponent from "../sub-components/NoteComponent";
+import PrivateRoomsBackupWarning from "../sub-components/PrivateRoomsBackupWarning";
 import { cancelBackup } from "../../../api/backup";
 
 const getPaymentError = (
@@ -184,6 +185,7 @@ const ManualBackup = ({
 
   errorInformation,
   isManagement = false,
+  showPrivateRoomsWarning = false,
 
   backupProgressError,
   setBackupProgressError,
@@ -275,14 +277,20 @@ const ManualBackup = ({
 
     try {
       await saveDeposite(topUpAmount, walletCodeCurrency || "USD");
-      await fetchWalletBalance?.(true);
-      return true;
     } catch (error) {
       toastr.error(error as Error);
       return false;
     } finally {
       setIsToppingUp(false);
     }
+
+    try {
+      await fetchWalletBalance?.(true);
+    } catch (error) {
+      console.error(error);
+    }
+
+    return true;
   };
 
   const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;
@@ -558,6 +566,10 @@ const ManualBackup = ({
           </Link>
         ) : null}
       </div>
+      <PrivateRoomsBackupWarning
+        isVisible={showPrivateRoomsWarning}
+        className={styles.privateRoomsNotice}
+      />
 
       <div className={styles.modules}>
         <div

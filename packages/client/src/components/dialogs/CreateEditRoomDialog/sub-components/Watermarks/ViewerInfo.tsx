@@ -307,7 +307,6 @@ const ViewerInfoWatermark = ({
         scale
         name="watermark_text"
         value={textValue}
-        tabIndex={1}
         onChange={onTextChange}
         type={InputType.text}
         testId="virtual_data_room_watermark_text_input"

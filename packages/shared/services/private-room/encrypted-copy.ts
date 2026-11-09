@@ -38,7 +38,8 @@ import { decryptFile, wipeDek } from "../encryption/file-keys";
 import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import type { IdentityKeyPair } from "../encryption/types";
-import { loadRoomMemberKeysSafe } from "./room-member-keys";
+import type { MoveSourceRef } from "./encrypted-upload";
+import { loadFileSenderKeysSafe } from "./room-member-keys";
 
 type EncryptedItem = {
   id: number;
@@ -52,7 +53,7 @@ export async function decryptEncryptedItemToFile(
   item: EncryptedItem,
   currentUserId: string,
   identity: IdentityKeyPair,
-  roomId: number | string,
+  roomId: number | string | null | undefined,
 ): Promise<File> {
   const encryptionInfo = await getFileEncryptionAccess(item.id);
   if (!encryptionInfo || !encryptionInfo.fileKeys) {
@@ -72,7 +73,7 @@ export async function decryptEncryptedItemToFile(
   }
   const encryptedData = await response.arrayBuffer();
 
-  const roomMemberKeys = await loadRoomMemberKeysSafe(roomId);
+  const roomMemberKeys = await loadFileSenderKeysSafe(item.id, roomId);
 
   let dek;
   try {
@@ -116,6 +117,7 @@ export function addCopySuffix(name: string, n: number = 1): string {
 export type UploadDestContext = {
   roomType?: number;
   isPrivate: boolean;
+  moveSource?: MoveSourceRef;
 };
 
 export type TaggedUploadFile = File & {

@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2026-11-02T09:45:28.184Z",
+  "updated_at": "2026-11-05T16:49:39.839Z",
   "comment": {
     "text": "This is a header label for a people selector or invitation panel, identifying the section as \"Contacts\".",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 1088,
-      "context": "withGuests={showGuestsTab && roomType !== RoomsType.AiProjectRoom}\n withHeader\n dataTestId=\"invite_panel_people_selector\"\n headerProps={{\n // Todo: Update groups empty screen texts when they are ready\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
+      "line_number": 1116,
+      "context": "withGuests={showGuestsTab && roomType !== RoomsType.AiProjectRoom}\n withHeader\n data-test-id=\"invite_panel_people_selector\"\n headerProps={{\n // Todo: Update groups empty screen texts when they are ready\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/client"
     },
     {
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1277,
+      "line_number": 1295,
       "context": "const subjectOptions = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: isTemplatesFolder ? t(\"TemplateOwner\") : t(\"Common:Contacts\"),\n isHeader: true,\n withMultiItems: true,\n },\n {\n id: \"filter_author-me\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 871,
+      "line_number": 883,
       "context": "const accountsNavigationPath = React.useMemo(() => {\n if (isContactsInsideGroupPage) {\n return [\n {\n id: 0,\n title: t(\"Common:Contacts\"),\n isRoom: false,\n isRootRoom: true,\n },\n ];\n }",
       "module": "/packages/client"
     },
@@ -67,7 +67,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 233,
+      "line_number": 229,
       "context": "isVertical\n labelVisible\n hasError={errors.userQuotaLimit}\n labelText={t(\"LdapQuota\")}\n tooltipContent={t(\"LdapUserQuotaTooltip\", {\n contactsName: t(\"Common:Contacts\"),\n })}\n inlineHelpButton\n dataTestId=\"quota_field_container\"\n >\n <TextInput",
       "module": "/packages/client"
     },
@@ -91,7 +91,7 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/GuestShareLink/page.client.tsx",
-      "line_number": 110,
+      "line_number": 108,
       "context": "onClick={onDenyInvite}\n testId=\"deny_button\"\n />\n </div>\n <Text fontSize=\"12px\" fontWeight=\"400\" className=\"guest-info\">\n {t(\"Common:GuestApprovalNote\", { sectionName: t(\"Common:Contacts\") })}\n </Text>\n </FormWrapper>\n );\n };",
       "module": "/packages/login"
     },
@@ -109,25 +109,25 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/Header.tsx",
-      "line_number": 107,
+      "line_number": 112,
       "context": "}, [selectedTabId, fileView, setView]);\n \n const tabItems = availableTabs.map((id) => {\n let name: string;\n if (id === InfoPanelView.infoMembers) {\n name = t(\"Common:Contacts\");\n } else if (id === InfoPanelView.infoShare) {\n name = t(\"Common:Share\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"Common:SubmenuHistory\");\n } else {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 976,
+      "line_number": 1089,
       "context": "disableInvitedUsers={invitedUsersArray}\n withGuests={showGuestsTab}\n withHeader\n data-test-id=\"invite_panel_people_selector\"\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 976,
+      "line_number": 1089,
       "context": "disableInvitedUsers={invitedUsersArray}\n withGuests={showGuestsTab}\n withHeader\n data-test-id=\"invite_panel_people_selector\"\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
-      "line_number": 277,
+      "line_number": 278,
       "context": "const subjectOptions: unknown[] = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:Contacts\"),\n isHeader: true,\n isLast: !tags.length,\n withMultiItems: true,\n },\n {",
       "module": "/packages/sdk"
     },

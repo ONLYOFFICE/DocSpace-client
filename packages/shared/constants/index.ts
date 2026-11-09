@@ -260,10 +260,13 @@ export const CategoryType = Object.freeze({
   AIAgents: 15,
   Forms: 17,
   Form: 18,
+  PrivateRooms: 19,
+  PrivateRoom: 20,
   /** The "AI rooms" section list (`FolderType.AiHub` root). */
   AiHub: 21,
   /** An Instructions room, a Knowledge room or an AI project, opened in the "AI rooms" section. */
   AiHubRoom: 22,
+  PrivateArchive: 23,
 });
 
 export const SHARED_MEMBERS_COUNT = 100;

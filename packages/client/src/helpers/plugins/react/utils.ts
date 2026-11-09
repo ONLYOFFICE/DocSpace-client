@@ -46,7 +46,7 @@ import type {
   TCurrentFile,
 } from "@onlyoffice/docspace-plugin-sdk/react";
 
-const pluginRoomTypes: Partial<Record<RoomsType, PluginRoomsType>> = {
+export const pluginRoomTypes: Partial<Record<RoomsType, PluginRoomsType>> = {
   [RoomsType.FormRoom]: PluginRoomsType.FormRoom,
   [RoomsType.EditingRoom]: PluginRoomsType.EditingRoom,
   [RoomsType.CustomRoom]: PluginRoomsType.CustomRoom,

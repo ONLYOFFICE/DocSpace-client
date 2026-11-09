@@ -61,9 +61,6 @@ vi.mock("@docspace/shared/services/encryption/identity", () => ({
 vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
   SecretStorage: { lock: vi.fn() },
 }));
-vi.mock("@docspace/shared/services/encryption/active-key-preference", () => ({
-  getActiveKeyId: vi.fn(),
-}));
 vi.mock("@docspace/shared/api/privacy", () => ({
   updateEncryptionKeys: vi.fn(),
 }));
@@ -72,7 +69,6 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import { changePassphrase } from "@docspace/shared/services/encryption/identity";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
-import { getActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -148,8 +144,7 @@ describe("useRotatePassphraseFlow", () => {
     expect(SecretStorage.lock).not.toHaveBeenCalled();
   });
 
-  it("on success (rotating the ACTIVE key): uploads, locks, refreshes, toasts, then closes the dialog", async () => {
-    vi.mocked(getActiveKeyId).mockReturnValue(dummyKey.id);
+  it("on success: uploads, locks, refreshes, toasts, then closes the dialog", async () => {
     vi.mocked(changePassphrase).mockResolvedValueOnce({
       publicKey: "pub-new",
       privateKeyEnc: "enc-new",
@@ -187,26 +182,5 @@ describe("useRotatePassphraseFlow", () => {
     expect(callOrder).toEqual(["api", "lock", "refresh"]);
     expect(toastr.success).toHaveBeenCalledTimes(1);
     expect(captured.rotation).toBeNull();
-  });
-
-  it("rotating a NON-active key does not re-lock (active selection untouched)", async () => {
-    vi.mocked(getActiveKeyId).mockReturnValue("some-other-active-key");
-    vi.mocked(changePassphrase).mockResolvedValueOnce({
-      publicKey: "pub-new",
-      privateKeyEnc: "enc-new",
-    });
-    const refresh = vi.fn().mockResolvedValue(undefined);
-
-    render(<Harness userId="42" refreshKeysFromServer={refresh} />);
-    act(() => latest.request(dummyKey));
-    await act(async () => {
-      await (
-        captured.rotation!.onSubmit as (a: string, b: string) => Promise<void>
-      )("old", "new");
-    });
-
-    expect(updateEncryptionKeys).toHaveBeenCalledTimes(1);
-    expect(SecretStorage.lock).not.toHaveBeenCalled();
-    expect(toastr.success).toHaveBeenCalledTimes(1);
   });
 });

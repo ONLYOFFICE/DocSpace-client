@@ -87,7 +87,6 @@ const ForgotContainer = ({
 						<Checkbox
 							id="login_remember"
 							className="login-checkbox"
-							tabIndex={3}
 							isChecked={isChecked}
 							onChange={onChangeCheckbox}
 							label={t("Common:Remember")}

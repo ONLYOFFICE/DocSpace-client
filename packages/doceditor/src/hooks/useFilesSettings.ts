@@ -37,6 +37,7 @@ import React from "react";
 
 import { getSettingsFiles } from "@docspace/shared/api/files";
 import { TFilesSettings } from "@docspace/shared/api/files/types";
+import { isEncryptedEditingAvailable } from "@docspace/shared/services/private-room/editor-capability";
 
 const useFilesSettings = () => {
   const [settings, setSettings] = React.useState<TFilesSettings>(
@@ -53,7 +54,10 @@ const useFilesSettings = () => {
     initSettings();
   }, []);
 
-  return { filesSettings: settings };
+  return {
+    filesSettings: settings,
+    isEncryptedEditingAvailable: isEncryptedEditingAvailable(settings),
+  };
 };
 
 export default useFilesSettings;

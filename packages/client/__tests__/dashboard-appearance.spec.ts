@@ -40,6 +40,7 @@ import {
   aiConfigHandler,
   freeQuotaHandler,
   quotaHandler,
+  rootHandler,
   selfActivationStatusHandler,
   selfByTypeHandler,
   settingsHandler,
@@ -516,6 +517,8 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       plan.tariff(),
       plan.quota(),
       aiConfigHandler(TEST_PORT, !ai.enabled),
+      // The server serves the "AI rooms" root to everyone but a guest.
+      rootHandler(TEST_PORT, { withAiHub: !role.isGuest }),
     );
 
     await openDashboard(page, baseUrl, viewport);
@@ -595,9 +598,14 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       page.getByRole("button", { name: "AI Chat", exact: true }),
     ).toHaveCount(ai.enabled && !role.isGuest ? 1 : 0);
 
-    // None of the remaining app cards is gated on AI, so the catalog is the
-    // same size whether AI is on or off.
-    await expect(page.locator(APP_CARDS)).toHaveCount(3);
+    // The "AI rooms" card joins the three apps where the sidebar has the
+    // section: AI services on and the root served, which a guest never is.
+    await expect(page.locator(APP_CARDS)).toHaveCount(
+      ai.enabled && !role.isGuest ? 4 : 3,
+    );
+    await expect(
+      page.locator('[data-tour-id="dashboard-app-card-ai-hub"]'),
+    ).toHaveCount(ai.enabled && !role.isGuest ? 1 : 0);
     await expectFilledRows(page, viewport.columns);
 
     if (!withScreenshot) return;

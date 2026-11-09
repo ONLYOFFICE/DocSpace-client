@@ -41,6 +41,8 @@ import type {
 import type { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 
+import type { TPrivateRename } from "SRC_DIR/store/uploadDataStore/start.helpers";
+
 export type TConflictResolveDialogData = {
   destFolderId: number;
   folderIds: number[];
@@ -59,6 +61,8 @@ export type TConflictResolveDialogData = {
      * UploadDataStore.cancelUploadAction. */
     allNewFiles?: { uniqueId: string }[];
   };
+  /** Set for files bound for a private room; only keeping both is offered. */
+  privateRenames?: TPrivateRename[];
 
   selectedFolder?: TFolder;
   fromShareCollectSelector?: boolean;
@@ -113,6 +117,7 @@ export interface ConflictResolveDialogProps {
     },
     t: TTranslation,
     create: boolean,
+    privateRenames?: TPrivateRename[],
   ) => void;
   isFileDialog: boolean;
   isFolderDialog: boolean;

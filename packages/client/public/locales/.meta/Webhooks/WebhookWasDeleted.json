@@ -3,7 +3,7 @@
   "content": "This webhook has been deleted",
   "content_en_sha1_hash": "0785ce67b897bb80e8b502c018e23a3d2873562d",
   "created_at": "2026-10-30T10:27:15.342Z",
-  "updated_at": "2026-11-02T07:10:46.912Z",
+  "updated_at": "2026-11-05T16:49:39.961Z",
   "comment": {
     "text": "Info toast shown when the webhook whose delivery history or event details the user has open is deleted elsewhere (by another admin, in another tab, or automatically by the server); the user is then returned to the webhooks list. Short sentence, past/perfect tense, no trailing period.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/WebhooksStore.ts",
-      "line_number": 221,
+      "line_number": 224,
       "context": "if (this.activeConfigId !== id) return;\n \n window.DocSpace.navigate(\"/developer-tools/webhooks\");\n i18n\n .loadNamespaces(\"Webhooks\")\n .then(() => toastr.info(i18n.t(\"Webhooks:WebhookWasDeleted\")));\n };\n \n isHistoryOf = (configId: number) =>\n !!this.historyParams && Number(this.historyParams.configId) === configId;",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Do not share encrypted files with this user until you have verified the change through another channel.",
   "content_en_sha1_hash": "ffdd904fb86227d624dac4f9033d5f0404d2585e",
   "created_at": "2026-05-24T17:27:30.441Z",
-  "updated_at": "2026-05-24T17:47:56.627Z",
+  "updated_at": "2026-11-05T16:49:40.021Z",
   "comment": {
     "text": "Warning text within a specialized box in the KeyChangeDialog, alerting the user to security precautions during a key change.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx",
-      "line_number": 135,
+      "line_number": 140,
       "context": "{t(\"Common:KeyChangedDescription\", { user: subject })}\n </Text>\n \n <div className={styles.warningBox}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:KeyChangedWarning\")}\n </Text>\n </div>\n \n <div className={styles.fingerprintsTable}>\n <div className={styles.fingerprintRow}>",
       "module": "/packages/shared"
     }

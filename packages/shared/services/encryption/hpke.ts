@@ -154,6 +154,17 @@ export type WrapDekParams = {
   fileId: number;
 };
 
+/**
+ * A private key whose bytes are all zero was wiped by a lock; X25519 still
+ * accepts it and would produce a wrap nobody can open.
+ * Spec: encryption-core, "Wrapping refuses an erased key"
+ */
+function assertNotErased(privateKey: Uint8Array) {
+  if (privateKey.every((byte) => byte === 0)) {
+    throw new InvalidFormatError("private key is erased");
+  }
+}
+
 export async function wrapDEK(params: WrapDekParams): Promise<string> {
   const {
     dek,
@@ -170,6 +181,7 @@ export async function wrapDEK(params: WrapDekParams): Promise<string> {
       `DEK must be ${AES_KEY_SIZE_BYTES} bytes`,
     );
   }
+  assertNotErased(senderPrivateKey);
   if (!Number.isFinite(fileId) || fileId <= 0) {
     throw new InvalidFormatError(
       "fileId must be a positive integer (server-assigned)",
@@ -235,6 +247,7 @@ export type UnwrapDekParams = {
 export async function unwrapDEK(
   params: UnwrapDekParams,
 ): Promise<Uint8Array> {
+  assertNotErased(params.recipientPrivateKey);
   const buf = base64ToUint8Array(params.wrapped);
   if (buf.byteLength !== TOTAL_BLOB_SIZE) {
     throw new InvalidFormatError(

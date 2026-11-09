@@ -50,12 +50,14 @@ type Props = {
   defaultFolderType?: SettingsStore["defaultFolderType"];
   updateDefaultFolderType?: SettingsStore["updateDefaultFolderType"];
   userType?: UserStore["userType"];
+  aiServicesEnabled?: SettingsStore["aiServicesEnabled"];
 };
 
 const StartPageSettingComponent = ({
   defaultFolderType,
   updateDefaultFolderType,
   userType,
+  aiServicesEnabled,
 }: Props) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
 
@@ -82,10 +84,14 @@ const StartPageSettingComponent = ({
         label: t("Common:Forms"),
         key: FolderType.Forms,
       },
+      {
+        label: t("Common:AiRooms"),
+        key: FolderType.AiHub,
+      },
     ];
 
     return options.filter((option) =>
-      isStartPageAvailable(option.key, { isGuest }),
+      isStartPageAvailable(option.key, { isGuest, aiServicesEnabled }),
     );
   };
 
@@ -129,7 +135,8 @@ const StartPageSettingComponent = ({
 
 export const DefaultPageSetting = inject(
   ({ settingsStore, userStore }: TStore) => {
-    const { defaultFolderType, updateDefaultFolderType } = settingsStore;
+    const { defaultFolderType, updateDefaultFolderType, aiServicesEnabled } =
+      settingsStore;
 
     const { userType } = userStore;
 
@@ -137,6 +144,7 @@ export const DefaultPageSetting = inject(
       defaultFolderType,
       updateDefaultFolderType,
       userType,
+      aiServicesEnabled,
     };
   },
 )(observer(StartPageSettingComponent));

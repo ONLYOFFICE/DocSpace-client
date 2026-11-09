@@ -67,6 +67,7 @@ vi.mock("../encrypted-upload-orchestrator", () => ({
     ],
     quotaErrorRaised: false,
     aborted: false,
+    skippedMembers: [],
   })),
 }));
 
@@ -161,6 +162,7 @@ describe("createEncryptedFile", () => {
       ],
       quotaErrorRaised: true,
       aborted: false,
+      skippedMembers: [],
     });
 
     await expect(createEncryptedFile(baseArgs())).rejects.toBe(quotaError);
@@ -178,6 +180,7 @@ describe("createEncryptedFile", () => {
       ],
       quotaErrorRaised: false,
       aborted: true,
+      skippedMembers: [],
     });
 
     await expect(createEncryptedFile(baseArgs())).rejects.toBeInstanceOf(
@@ -201,6 +204,7 @@ describe("createEncryptedFile", () => {
           ],
           quotaErrorRaised: false,
           aborted: false,
+          skippedMembers: [],
         };
       },
     );

@@ -344,6 +344,8 @@ export enum FeedActionKeys {
   FileLocked = "FileLocked",
   FileUnlocked = "FileUnlocked",
   FileVersionRemoved = "FileVersionRemoved",
+  /** A key write of an encrypted file (MessageAction 5164); the History tab leaves it out. */
+  FileKeysSet = "FileKeysSet",
   FormStartedToFill = "FormStartedToFill",
   FormPartiallyFilled = "FormPartiallyFilled",
   FormCompletelyFilled = "FormCompletelyFilled",

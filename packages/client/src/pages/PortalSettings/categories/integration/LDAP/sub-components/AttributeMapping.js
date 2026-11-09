@@ -154,7 +154,6 @@ const AttributeMapping = (props) => {
             value={firstName}
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={7}
             dataTestId="first_name_field"
           />
         </FieldContainer>
@@ -176,7 +175,6 @@ const AttributeMapping = (props) => {
             value={secondName}
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={8}
             dataTestId="second_name_field"
           />
         </FieldContainer>
@@ -198,7 +196,6 @@ const AttributeMapping = (props) => {
             value={mail}
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={9}
             dataTestId="mail_field"
           />
         </FieldContainer>
@@ -218,7 +215,6 @@ const AttributeMapping = (props) => {
             value={avatarAttribute}
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={10}
             testId="avatar_field"
           />
         </FieldContainer>
@@ -244,7 +240,6 @@ const AttributeMapping = (props) => {
             isDisabled={
               !isDefaultUsersQuotaSet || !isLdapEnabled || isUIDisabled
             }
-            tabIndex={11}
             testId="quota_limit_input"
           />
           {!isDefaultUsersQuotaSet ? (
@@ -291,7 +286,6 @@ const AttributeMapping = (props) => {
             isAdmin={isAdmin}
             isMobileView={isMobile()}
             isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={12}
             directionX="left"
             scaledOptions={!isMobile()}
           />

@@ -33,13 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FC } from "react";
+import { FC, type KeyboardEvent } from "react";
 import classNames from "classnames";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 import styles from "../Share.module.scss";
 
@@ -49,9 +50,16 @@ interface CreateButtonProps {
 }
 
 export const CreateButton: FC<CreateButtonProps> = ({ onClick, title }) => {
+	// The row is a div: a button to the keyboard.
+	const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) =>
+		activateOnButtonKey(e, onClick);
+
 	return (
 		<div
 			onClick={onClick}
+			onKeyDown={handleKeyDown}
+			role="button"
+			tabIndex={0}
 			className={classNames(styles.linkRow, styles.createButton)}
 			data-testid="info_panel_share_create_and_copy_link"
 		>

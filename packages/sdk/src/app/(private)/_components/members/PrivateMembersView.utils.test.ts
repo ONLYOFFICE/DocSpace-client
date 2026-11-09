@@ -37,6 +37,7 @@ import { describe, it, expect } from "vitest";
 
 import {
   EmployeeActivationStatus,
+  MembersSubjectType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import type { RoomMember } from "@docspace/shared/api/rooms/types";
@@ -50,13 +51,14 @@ const mk = (
   access: number,
   sharedTo: Record<string, unknown>,
   isOwner = false,
+  subjectType: MembersSubjectType = MembersSubjectType.User,
 ): RoomMember =>
   ({
     access,
     canEditAccess: true,
     isLocked: false,
     isOwner,
-    subjectType: 0,
+    subjectType,
     sharedTo,
   }) as unknown as RoomMember;
 
@@ -102,13 +104,27 @@ describe("classifyMembers (private room — users only, no groups/guests)", () =
     expect(sectionFor(sections, "administrators")).toEqual([]);
   });
 
-  it("never drops a member — anything not admin/pending falls into users", () => {
-    const stray = mk(ShareAccessRights.None, {
-      id: "g",
-      displayName: "G",
-      isGroup: true,
+  it("Members listed", () => {
+    const admin = mk(ShareAccessRights.RoomManager, { id: "a", displayName: "A" });
+    const user = mk(ShareAccessRights.ReadOnly, { id: "u", displayName: "U" });
+    const group = mk(
+      ShareAccessRights.ReadOnly,
+      { id: "g", name: "Marketing", isGroup: true },
+      false,
+      MembersSubjectType.Group,
+    );
+    const guest = mk(ShareAccessRights.ReadOnly, {
+      id: "v",
+      displayName: "V",
+      isVisitor: true,
     });
-    const sections = classifyMembers([stray]);
-    expect(sections.flatMap((s) => s.members)).toContain(stray);
+
+    const sections = classifyMembers([admin, group, user, guest]);
+
+    expect(sections.map((s) => [s.key, s.members])).toEqual([
+      ["administrators", [admin]],
+      ["users", [user]],
+      ["expected", []],
+    ]);
   });
 });

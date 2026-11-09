@@ -38,6 +38,8 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
+import { keepPageForLogin } from "@docspace/shared/utils/referenceUrl";
+
 // A plain value, never an Error instance: React strips the message of an
 // Error passed from a server component in production builds, and the client
 // gets minified React error 441 instead.
@@ -58,7 +60,7 @@ const CreateFileError = ({
 
   React.useEffect(() => {
     if (typeof error !== "string" && error.status === 401) {
-      sessionStorage.setItem("referenceUrl", window.location.href);
+      keepPageForLogin();
 
       return window.location.replace(`${window.location.origin}/login`);
     }

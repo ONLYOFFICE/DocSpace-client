@@ -3,7 +3,7 @@
   "content": "Confirm",
   "content_en_sha1_hash": "04a212215ef9fbf686d280802eb81ee7a6e681cd",
   "created_at": "2026-05-24T17:27:21.378Z",
-  "updated_at": "2026-07-27T13:07:50.586Z",
+  "updated_at": "2026-11-05T16:49:39.823Z",
   "comment": {
     "text": "Button label used in confirmation and passphrase dialogs to finalize an action or save changes.",
     "is_auto": true,
@@ -13,26 +13,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EncryptionProviderWrapper.jsx",
-      "line_number": 259,
+      "line_number": 260,
       "context": "isLoading={isLoading}\n externalError={error}\n onSubmit={onSubmit}\n onCancel={onCancel}\n onForgotPassphrase={handleForgotPassphrase}\n submitLabel={t(\"Common:Confirm\")}\n showRememberDevice\n onPasskeyUnlock={passkey.available ? passkey.unlock : undefined}\n isPasskeyUnlocking={passkey.isUnlocking}\n />\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/EncryptionProviderWrapper.tsx",
-      "line_number": 125,
+      "line_number": 122,
       "context": "isLoading={isLoading}\n externalError={error}\n onSubmit={onSubmit}\n onCancel={onCancel}\n onForgotPassphrase={handleForgotPassphrase}\n submitLabel={t(\"Common:Confirm\")}\n showRememberDevice\n onPasskeyUnlock={passkey.available ? passkey.unlock : undefined}\n isPasskeyUnlocking={passkey.isUnlocking}\n />\n );",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_store/EncryptionShell.tsx",
-      "line_number": 81,
+      "line_number": 83,
       "context": "isLoading={isLoading}\n externalError={error}\n onSubmit={onSubmit}\n onCancel={onCancel}\n onForgotPassphrase={handleForgotPassphrase}\n submitLabel={t(\"Common:Confirm\")}\n />\n );\n };\n \n type EncryptionShellProps = { children: React.ReactNode };",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/confirmation-modal/ConfirmationModal.tsx",
-      "line_number": 82,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={confirmLabel ?? t(\"Common:Confirm\")}\n onClick={onConfirm}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}",
+      "line_number": 93,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={confirmLabel ?? t(\"Common:Confirm\")}\n onClick={onConfirm}\n isLoading={isLoading}\n isDisabled={isLoading}\n />\n <Button",
       "module": "/packages/shared"
     }
   ],

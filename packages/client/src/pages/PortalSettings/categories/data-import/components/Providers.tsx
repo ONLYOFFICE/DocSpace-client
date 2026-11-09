@@ -39,6 +39,7 @@ import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 import GoogleWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.google.react.svg?url";
 import NextcloudWorkspaceSvgUrl from "PUBLIC_DIR/images/thirdparties/nextcloud.svg?url";
@@ -133,6 +134,14 @@ const Providers = (props: ProvidersProps) => {
               isTextOverflow
               color="accent"
               dataTestId={`workspace_item_${workspace.title}_import_link`}
+              // The item's click imports for the pointer; to the keyboard the
+              // link is that button. The press is consumed: the step it opens
+              // may listen for it too.
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) =>
+                activateOnButtonKey(e, () => setWorkspace(workspace.title))
+              }
             >
               {t("Import")}
             </Link>

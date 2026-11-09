@@ -39,6 +39,7 @@ export interface IBrandNameProps {
   showNotAvailable: boolean;
   isSettingPaid: boolean;
   standalone: boolean;
+  onPaidBadgeClick?: () => void;
   onSave: (data: IWhiteLabelData) => void;
   isBrandNameLoaded: boolean;
   defaultBrandName: string;

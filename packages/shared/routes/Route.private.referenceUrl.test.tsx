@@ -51,17 +51,22 @@ const self = { id: "self-id", isAdmin: false, isOwner: false };
 const stubLocation = (href: string) => {
   const url = new URL(href);
   const assigned: string[] = [];
+  const replaced: string[] = [];
   let current = href;
   const location = {
     origin: url.origin,
     pathname: url.pathname,
     assigned,
+    replaced,
     get href() {
       return current;
     },
     set href(value: string) {
       assigned.push(value);
       current = value;
+    },
+    replace(value: string) {
+      replaced.push(value);
     },
   };
 
@@ -161,5 +166,87 @@ describe("PrivateRoute returning a tab to where it was before the login", () => 
 
     expect(sessionStorage.getItem("referenceUrl")).toBeNull();
     expect(sessionStorage.getItem("loggedOutUserId")).toBeNull();
+  });
+});
+
+const SECURITY = "http://localhost/portal-settings/security/access-portal";
+
+// A tab whose session cookie is gone is reloaded: the portal answers it
+// anonymously, with no 401, and the route sends it to the login page itself.
+const renderSignedOut = (pathname: string) => {
+  const props = {
+    isLoaded: true,
+    isAuthenticated: false,
+    wizardCompleted: true,
+    user: undefined,
+  } as unknown as PrivateRouteProps;
+
+  render(
+    <MemoryRouter initialEntries={[pathname]}>
+      <PrivateRoute {...props}>content</PrivateRoute>
+    </MemoryRouter>,
+  );
+};
+
+describe("PrivateRoute sending a signed-out tab to the login page", () => {
+  let location: ReturnType<typeof stubLocation>;
+
+  beforeEach(() => {
+    resetPortalNotFoundRedirect();
+    sessionStorage.clear();
+    location = stubLocation(SECURITY);
+  });
+
+  afterEach(() => {
+    Object.defineProperty(window, "location", {
+      value: realLocation,
+      writable: true,
+      configurable: true,
+    });
+  });
+
+  it("keeps the page for the next login", () => {
+    renderSignedOut(new URL(SECURITY).pathname);
+
+    expect(location.replaced).toEqual(["/login"]);
+    expect(sessionStorage.getItem("referenceUrl")).toBe(SECURITY);
+  });
+
+  // Bug 84856: the owner's settings page was opened for the user who logged
+  // in next in the tab, and answered with the access error.
+  it("names the user the tab was showing, so the page is reopened only for them", () => {
+    sessionStorage.setItem("sessionUserId", "owner-id");
+
+    renderSignedOut(new URL(SECURITY).pathname);
+
+    expect(sessionStorage.getItem("loggedOutUserId")).toBe("owner-id");
+  });
+
+  it("names no one when the tab never learned its user", () => {
+    renderSignedOut(new URL(SECURITY).pathname);
+
+    expect(sessionStorage.getItem("loggedOutUserId")).toBeNull();
+  });
+
+  it("names no one for the portal root, which it does not keep", () => {
+    location = stubLocation(ROOT);
+    sessionStorage.setItem("sessionUserId", "owner-id");
+
+    renderSignedOut("/");
+
+    expect(sessionStorage.getItem("referenceUrl")).toBeNull();
+    expect(sessionStorage.getItem("loggedOutUserId")).toBeNull();
+  });
+
+  // The route reopens the page for the owner and for no one else.
+  it("does not open the page for another user after the login", () => {
+    sessionStorage.setItem("sessionUserId", "owner-id");
+    renderSignedOut(new URL(SECURITY).pathname);
+
+    location = stubLocation(ROOT);
+    renderAtRoot();
+
+    expect(location.assigned).toEqual([]);
+    expect(sessionStorage.getItem("referenceUrl")).toBeNull();
   });
 });

@@ -38,6 +38,12 @@
 .autoBackup {
   @include backup.common-backup-styles;
 
+  // The learn-more link has no margin of its own here; the bottom gap
+  // collapses with the toggle block's margin-top.
+  .privateRoomsNotice {
+    margin: 20px 0;
+  }
+
   .autoBackupThirdPartyModule {
     margin-top: 16px;
     margin-inline-start: 24px;

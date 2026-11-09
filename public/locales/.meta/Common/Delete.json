@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2026-11-02T09:45:28.095Z",
+  "updated_at": "2026-11-06T10:45:53.699Z",
   "comment": {
     "text": "This is a button label or tooltip text. It allows users to remove a selected item, such as a chat or an image.",
     "is_auto": true,
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
+      "line_number": 213,
       "context": "};\n }, [onKeyUp]);\n \n const getAccessButtonLabel = () => {\n if (isTemplate) {\n return t(\"Common:Delete\");\n }\n \n if (isRoomDelete) {\n return t(\"Common:DeletePermanently\");\n }",
       "module": "/packages/client"
     },
@@ -138,15 +138,27 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/sub-components/user-fields.js",
+      "line_number": 196,
+      "context": "className={`${styles[\"trash-icon\"]} ${classNameAdditional}-delete-icon ${DELETE_BUTTON}`}\n iconName={TrashReactSvgUrl}\n size={16}\n color=\"--security-side-color\"\n onClick={() => onDelete(index)}\n ariaLabel={t(\"Common:Delete\")}\n dataTestId={deleteIconDataTestId}\n />\n )}\n </div>\n </FieldContainer>",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 281,
+      "line_number": 278,
       "context": "const headerMenu = isOAuth\n ? getHeaderMenuItems(t, true)\n : [\n {\n label: t(\"Common:Delete\"),\n disabled: !selection || !selection.length > 0,\n onClick,\n iconUrl: DeleteReactSvgUrl,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
-      "line_number": 169,
-      "context": "className={styles.actionButton}\n iconName={TrashReactSvgUrl}\n size={16}\n onClick={handleDelete}\n isDisabled={isDeleting}\n title={t(\"Common:Delete\")}\n />\n </div>\n </div>\n {createdDate ? (\n <>",
+      "line_number": 154,
+      "context": "className={styles.actionButton}\n iconName={TrashReactSvgUrl}\n size={16}\n onClick={handleDelete}\n isDisabled={isDeleting}\n title={t(\"Common:Delete\")}\n role=\"button\"\n ariaLabel={t(\"Common:Delete\")}\n tabIndex={isDeleting ? -1 : 0}\n onKeyDown={activateAsButton}\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
+      "line_number": 154,
+      "context": "className={styles.actionButton}\n iconName={TrashReactSvgUrl}\n size={16}\n onClick={handleDelete}\n isDisabled={isDeleting}\n title={t(\"Common:Delete\")}\n role=\"button\"\n ariaLabel={t(\"Common:Delete\")}\n tabIndex={isDeleting ? -1 : 0}\n onKeyDown={activateAsButton}\n />",
       "module": "/packages/client"
     },
     {
@@ -205,37 +217,37 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 981,
+      "line_number": 982,
       "context": "? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? isFormSpace\n ? t(\"Common:DeleteFormSpace\")\n : t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => self.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
-      "line_number": 214,
+      "line_number": 218,
       "context": "}\n \n canDelete &&\n options.push({\n key: \"delete-rooms\",\n label: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => deleteRooms(t),\n });\n \n return options as ContextMenuModel[];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
-      "line_number": 214,
+      "line_number": 218,
       "context": "}\n \n canDelete &&\n options.push({\n key: \"delete-rooms\",\n label: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => deleteRooms(t),\n });\n \n return options as ContextMenuModel[];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/DialogsStore.ts",
-      "line_number": 1247,
+      "line_number": 1261,
       "context": "ref!.current!.click(),\n },\n \n hasImage\n ? {\n label: t(\"Common:Delete\"),\n icon: TrashIconSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,\n onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),\n }\n : {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 407,
+      "line_number": 432,
       "context": "};\n case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 407,
+      "line_number": 432,
       "context": "};\n case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: this.deleteRooms,\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete\":",
       "module": "/packages/client"
     },
@@ -254,7 +266,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalRemove/page.client.tsx",
       "line_number": 119,
-      "context": "<div className={styles.buttonsWrapper}>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Common:Delete\")}\n tabIndex={1}\n onClick={onDeleteClick}\n testId=\"delete_portal_button\"\n />\n <Button",
+      "context": "<div className={styles.buttonsWrapper}>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Common:Delete\")}\n onClick={onDeleteClick}\n testId=\"delete_portal_button\"\n />\n <Button\n scale",
       "module": "/packages/login"
     },
     {
@@ -289,13 +301,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 581,
+      "line_number": 584,
       "context": "const getDeleteItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_delete\",\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => onDeleteClick?.(i),\n disabled: !onDeleteClick,\n };\n },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 581,
+      "line_number": 584,
       "context": "const getDeleteItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_delete\",\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => onDeleteClick?.(i),\n disabled: !onDeleteClick,\n };\n },",
       "module": "/packages/sdk"
     },
@@ -343,7 +355,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 312,
+      "line_number": 318,
       "context": "});\n \n if (hasCoverOrPreview) {\n items.push({\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,\n label: t(\"Common:Delete\"),\n icon: DeleteSvgUrl,\n onClick: onDeleteLogo,\n });\n }",
       "module": "/packages/sdk"
     },
@@ -373,13 +385,13 @@
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 475,
+      "line_number": 491,
       "context": "key: \"delete-link-separator\",\n isSeparator: true,\n },\n {\n key: \"delete-link-key\",\n label: link.canRevoke ? t(\"Common:RevokeLink\") : t(\"Common:Delete\"),\n icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,\n onClick: () => removeLink(link),\n },\n ];\n }",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 475,
+      "line_number": 491,
       "context": "key: \"delete-link-separator\",\n isSeparator: true,\n },\n {\n key: \"delete-link-key\",\n label: link.canRevoke ? t(\"Common:RevokeLink\") : t(\"Common:Delete\"),\n icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,\n onClick: () => removeLink(link),\n },\n ];\n }",
       "module": "/packages/shared"
     },

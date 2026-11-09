@@ -42,7 +42,12 @@ import {
   beforeEach,
 } from "vitest";
 
-import { setupServer } from "../../../__mocks__/e2e/msw-compat";
+import {
+  http,
+  HttpResponse,
+  setupServer,
+} from "../../../__mocks__/e2e/msw-compat";
+import { API_PREFIX, BASE_URL } from "../../../__mocks__/e2e/utils";
 import {
   encryptedFilesHandlers,
   privacyroomAccessHandlers,
@@ -50,10 +55,15 @@ import {
   type PrivacyroomAccessHandlerHandle,
 } from "../../../__mocks__/handlers";
 
+import { getFileEncryptionAccess } from "../../../api/files";
 import { generateIdentityKeyPair } from "../../encryption/identity";
 import { generateDEK } from "../../encryption/file-keys";
-import { wrapDekForRecipients } from "../../encryption/room-file-access";
-import { resetTofuStores } from "../../encryption/tofu-store";
+import { inspectWrap } from "../../encryption/hpke";
+import {
+  unwrapDekForCurrentUser,
+  wrapDekForRecipients,
+} from "../../encryption/room-file-access";
+import { getTofuStore, resetTofuStores } from "../../encryption/tofu-store";
 import { arrayBufferToBase64 } from "../../encryption/utils";
 import type {
   IdentityKeyPair,
@@ -62,8 +72,16 @@ import type {
 
 import {
   addMembersToEncryptedRoom,
-  revokeMemberFromEncryptedRoom,
+  backfillEncryptedFilesForRoomMembers,
+  rewrapMissingFilesForMember,
 } from "../room-encryption";
+import { loadFileSenderKeysSafe } from "../room-member-keys";
+import {
+  onMemberKeyTrusted,
+  verifyMemberKey,
+} from "../member-key-verification";
+import { pendingAccessStore } from "../pending-access";
+import { rewrapPendingAccessOfMember } from "../room-member-flows";
 
 const PORT = "3000";
 const ROOM_ID = 4242;
@@ -86,9 +104,11 @@ const server = setupServer(
   ...encryptedFilesHandlers(PORT, {
     roomId: ROOM_ID,
     ownerId: ALICE_ID,
+    currentUserId: ALICE_ID,
     handle: filesHandle,
   }),
   ...privacyroomAccessHandlers(PORT, {
+    userId: ALICE_ID,
     handle: accessHandle,
   }),
 );
@@ -266,76 +286,267 @@ describe("addMembersToEncryptedRoom — integration via MSW", () => {
   });
 });
 
-describe("revokeMemberFromEncryptedRoom — integration via MSW", () => {
-  it("removes the revoked member from every file's ACL", async () => {
+describe("rewrapMissingFilesForMember — integration via MSW", () => {
+  it("Retry succeeds: the member gets an entry for the named file only, and unwraps it", async () => {
     const alice = await generateIdentityKeyPair();
     const bob = await generateIdentityKeyPair();
+    const dek1 = generateDEK();
+    const dek2 = generateDEK();
+    const aliceWrap = (dek: Uint8Array, fileId: number) =>
+      wrapDekForRecipients({
+        dek,
+        senderIdentity: alice,
+        senderUserId: ALICE_ID,
+        recipients: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+        fileId,
+      });
+
+    filesHandle.current!.setFiles([
+      {
+        id: 101,
+        title: "doc1.docx",
+        serverTitle: "uuid-101.docx",
+        encrypted: true,
+        fileKeys: await aliceWrap(dek1, 101),
+      },
+      {
+        id: 102,
+        title: "doc2.docx",
+        serverTitle: "uuid-102.docx",
+        encrypted: true,
+        fileKeys: await aliceWrap(dek2, 102),
+      },
+    ]);
+    accessHandle.current!.setRoomKeys(ROOM_ID, [
+      {
+        id: "1",
+        userId: ALICE_ID,
+        publicKey: pubB64(alice),
+        privateKeyEnc: "",
+      },
+      {
+        id: "2",
+        userId: BOB_ID,
+        publicKey: pubB64(bob),
+        privateKeyEnc: "",
+      },
+    ]);
+
+    const result = await rewrapMissingFilesForMember(ROOM_ID, BOB_ID, [102], {
+      currentUserId: ALICE_ID,
+      identity: alice,
+    });
+
+    expect(result.fileResults).toEqual([{ fileId: 102, success: true }]);
+    expect(result.missingFileIdsByMember).toEqual({});
+    expect(
+      filesHandle.current!.getFile(101).fileKeys.map((k) => k.userId),
+    ).toEqual([ALICE_ID]);
+    const stored = filesHandle.current!.getFile(102);
+    expect(stored.fileKeys.map((k) => k.userId).sort()).toEqual(
+      [ALICE_ID, BOB_ID].sort(),
+    );
+
+    const unwrapped = await unwrapDekForCurrentUser({
+      fileKeys: stored.fileKeys,
+      roomMemberKeys: [
+        { userId: ALICE_ID, publicKey: pubB64(alice) },
+        { userId: BOB_ID, publicKey: pubB64(bob) },
+      ],
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: 102,
+    });
+    expect(Array.from(unwrapped)).toEqual(Array.from(dek2));
+
+    const puts = filesHandle.current!
+      .getRequests()
+      .filter((r) => r.method === "PUT");
+    expect(puts).toHaveLength(1);
+    expect(puts[0].url).toMatch(/\/files\/102\/access$/);
+  });
+});
+
+describe("Trusting a changed key — integration via MSW", () => {
+  it("Key trusted after a refusal: the member gets entries for the files they missed, and unwraps them", async () => {
+    const alice = await generateIdentityKeyPair();
+    const bobOld = await generateIdentityKeyPair();
+    const bobNew = await generateIdentityKeyPair();
     const dek = generateDEK();
-    const sharedWrap: ServerAccessKeyDto[] = await wrapDekForRecipients({
+    await getTofuStore(ALICE_ID).checkKey(BOB_ID, pubB64(bobOld));
+
+    // Uploaded while the changed key was refused: wrapped for the uploader only.
+    filesHandle.current!.setFiles([
+      {
+        id: 101,
+        title: "doc1.docx",
+        serverTitle: "uuid-101.docx",
+        encrypted: true,
+        fileKeys: await wrapDekForRecipients({
+          dek,
+          senderIdentity: alice,
+          senderUserId: ALICE_ID,
+          recipients: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+          fileId: 101,
+        }),
+      },
+    ]);
+    accessHandle.current!.setRoomKeys(ROOM_ID, [
+      { id: "1", userId: ALICE_ID, publicKey: pubB64(alice), privateKeyEnc: "" },
+      { id: "3", userId: BOB_ID, publicKey: pubB64(bobNew), privateKeyEnc: "" },
+    ]);
+    pendingAccessStore.addMissingFiles(ROOM_ID, BOB_ID, [101]);
+
+    let rewrapped: Promise<unknown> = Promise.resolve();
+    const unsubscribe = onMemberKeyTrusted((memberId, scopeUserId) => {
+      rewrapped = rewrapPendingAccessOfMember({
+        t: ((key: string) => key) as never,
+        member: { id: memberId },
+        currentUserId: scopeUserId,
+        identity: alice,
+      });
+    });
+    try {
+      const verification = await verifyMemberKey({
+        userId: BOB_ID,
+        scopeUserId: ALICE_ID,
+        publicKey: pubB64(bobNew),
+        resolver: async () => "accept",
+      });
+      expect(verification.kind).toBe("ok");
+      await rewrapped;
+    } finally {
+      unsubscribe();
+    }
+
+    const stored = filesHandle.current!.getFile(101);
+    expect(stored.fileKeys.map((k) => k.userId).sort()).toEqual(
+      [ALICE_ID, BOB_ID].sort(),
+    );
+    const unwrapped = await unwrapDekForCurrentUser({
+      fileKeys: stored.fileKeys,
+      roomMemberKeys: [
+        { userId: ALICE_ID, publicKey: pubB64(alice) },
+        { userId: BOB_ID, publicKey: pubB64(bobNew) },
+      ],
+      currentUserId: BOB_ID,
+      currentIdentity: bobNew,
+      fileId: 101,
+    });
+    expect(Array.from(unwrapped)).toEqual(Array.from(dek));
+    expect(pendingAccessStore.get(ROOM_ID, BOB_ID)).toBeUndefined();
+  });
+});
+
+describe("backfillEncryptedFilesForRoomMembers — integration via MSW", () => {
+  /** A room where Alice wrapped file 300 for everyone, swept by Carol. */
+  const roomWrappedByAlice = async () => {
+    const alice = await generateIdentityKeyPair();
+    const bob = await generateIdentityKeyPair();
+    const carol = await generateIdentityKeyPair();
+    const dek = generateDEK();
+    const wrapsFromAlice = await wrapDekForRecipients({
       dek,
       senderIdentity: alice,
       senderUserId: ALICE_ID,
       recipients: [
         { userId: ALICE_ID, publicKey: pubB64(alice) },
         { userId: BOB_ID, publicKey: pubB64(bob) },
+        { userId: CAROL_ID, publicKey: pubB64(carol) },
       ],
       fileId: 300,
     });
-
     filesHandle.current!.setFiles([
-      {
-        id: 300,
-        title: "shared.docx",
-        encrypted: true,
-        fileKeys: sharedWrap,
-      },
+      { id: 300, title: "doc.docx", encrypted: true, fileKeys: wrapsFromAlice },
     ]);
+    const memberKeys = [
+      { id: "1", userId: ALICE_ID, publicKey: pubB64(alice) },
+      { id: "2", userId: BOB_ID, publicKey: pubB64(bob) },
+      { id: "3", userId: CAROL_ID, publicKey: pubB64(carol) },
+    ].map((k) => ({
+      ...k,
+      privateKeyEnc: "",
+      date: "2026-01-01T00:00:00",
+      cryptoEngineId: "",
+    }));
+    filesHandle.current!.setRoomUserKeys(memberKeys);
+    accessHandle.current!.setRoomKeys(ROOM_ID, memberKeys);
 
-    const result = await revokeMemberFromEncryptedRoom(
-      ROOM_ID,
-      [BOB_ID],
-      {},
-    );
+    filesHandle.current!.setCurrentUserId(CAROL_ID);
+    accessHandle.current!.setCurrentUserId(CAROL_ID);
+    const sweep = () =>
+      backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+        currentUserId: CAROL_ID,
+        identity: carol,
+        onKeyChange: async () => "refuse",
+      });
+    return { bob, dek, wrapsFromAlice, sweep };
+  };
 
-    expect(result).toEqual([{ fileId: 300, success: true }]);
+  it("Existing entries are kept: a second manager's sweep leaves a member's wrap from another sender, which the member still unwraps", async () => {
+    const { bob, dek, wrapsFromAlice, sweep } = await roomWrappedByAlice();
 
+    const result = await sweep();
+
+    expect(result.fileResults).toEqual([]);
+    expect(result.skippedMembers).toEqual([]);
     const stored = filesHandle.current!.getFile(300);
-    expect(stored.fileKeys).toHaveLength(1);
-    expect(stored.fileKeys[0].userId).toBe(ALICE_ID);
+    expect(stored.fileKeys).toEqual(wrapsFromAlice);
+    const bobEntry = stored.fileKeys.find((k) => k.userId === BOB_ID)!;
+    expect(inspectWrap(bobEntry.privateKeyEnc).senderUserId).toBe(ALICE_ID);
 
-    const puts = filesHandle.current!
-      .getRequests()
-      .filter((r) => r.method === "PUT");
-    expect(puts).toHaveLength(1);
+    filesHandle.current!.setCurrentUserId(BOB_ID);
+    accessHandle.current!.setCurrentUserId(BOB_ID);
+    const bobInfo = await getFileEncryptionAccess(300);
+    const senderKeys = await loadFileSenderKeysSafe(300, ROOM_ID);
+    const unwrapped = await unwrapDekForCurrentUser({
+      fileKeys: bobInfo.fileKeys,
+      roomMemberKeys: senderKeys,
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: 300,
+    });
+    expect(Array.from(unwrapped)).toEqual(Array.from(dek));
   });
 
-  it("is a no-op when the revoked user is not in the ACL", async () => {
-    const alice = await generateIdentityKeyPair();
-    const dek = generateDEK();
-    const aliceWrap = await wrapDekForRecipients({
-      dek,
-      senderIdentity: alice,
-      senderUserId: ALICE_ID,
-      recipients: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
-      fileId: 301,
-    });
-
-    filesHandle.current!.setFiles([
-      { id: 301, title: "only-alice.docx", encrypted: true, fileKeys: aliceWrap },
-    ]);
-
-    const result = await revokeMemberFromEncryptedRoom(
-      ROOM_ID,
-      [BOB_ID],
-      {},
+  it("Existing wraps are replaced: when the missing-keys read fails, a second manager's sweep re-wraps a member, who still unwraps through the file's public keys", async () => {
+    const { bob, dek, wrapsFromAlice, sweep } = await roomWrappedByAlice();
+    server.use(
+      http.get(
+        `${BASE_URL}:${PORT}/${API_PREFIX}/privacyroom/${ROOM_ID}/access/missing`,
+        () => new HttpResponse(null, { status: 500 }),
+      ),
     );
 
-    expect(result).toEqual([{ fileId: 301, success: true }]);
-    expect(filesHandle.current!.getFile(301).fileKeys).toHaveLength(1);
+    let result: Awaited<ReturnType<typeof sweep>>;
+    try {
+      result = await sweep();
+    } finally {
+      server.resetHandlers();
+    }
 
-    const puts = filesHandle.current!
-      .getRequests()
-      .filter((r) => r.method === "PUT");
-    expect(puts).toHaveLength(0);
+    expect(result.fileResults).toEqual([{ fileId: 300, success: true }]);
+    expect(result.skippedMembers).toEqual([]);
+    const stored = filesHandle.current!.getFile(300);
+    expect(stored.fileKeys.map((k) => k.userId).sort()).toEqual(
+      [ALICE_ID, BOB_ID, CAROL_ID].sort(),
+    );
+    const bobEntry = stored.fileKeys.find((k) => k.userId === BOB_ID)!;
+    const bobEntryFromAlice = wrapsFromAlice.find((k) => k.userId === BOB_ID)!;
+    expect(bobEntry.privateKeyEnc).not.toBe(bobEntryFromAlice.privateKeyEnc);
+    expect(inspectWrap(bobEntry.privateKeyEnc).senderUserId).toBe(CAROL_ID);
+
+    filesHandle.current!.setCurrentUserId(BOB_ID);
+    accessHandle.current!.setCurrentUserId(BOB_ID);
+    const bobInfo = await getFileEncryptionAccess(300);
+    const senderKeys = await loadFileSenderKeysSafe(300, ROOM_ID);
+    const unwrapped = await unwrapDekForCurrentUser({
+      fileKeys: bobInfo.fileKeys,
+      roomMemberKeys: senderKeys,
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: 300,
+    });
+    expect(Array.from(unwrapped)).toEqual(Array.from(dek));
   });
 });

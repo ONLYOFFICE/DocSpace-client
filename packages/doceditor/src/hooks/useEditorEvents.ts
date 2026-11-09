@@ -73,6 +73,7 @@ import {
   frameCallEvent,
 } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getSafeReturnUrl } from "@docspace/shared/utils/getSafeReturnUrl";
 import {
   FormFillingManageAction,
   StartFillingMode,
@@ -81,6 +82,7 @@ import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 import type { Nullable } from "@docspace/shared/types";
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
+import { getRefreshFileAction } from "@/utils/refreshFileAction";
 
 import { isMobile } from "react-device-detect";
 
@@ -88,7 +90,6 @@ import {
   getCurrentDocumentVersion,
   getDocEditor,
   getFormsSectionFolderUrl,
-  getSafeReturnUrl,
   isFormRole,
   isFormRoomFile,
   setDocumentTitle,
@@ -284,7 +285,9 @@ const useEditorEvents = ({
       // don't init the editor's AI plugin for them at all — mirrors the
       // portal, where guests get no AI chat, and the backend gateway
       // rejects guest calls anyway.
-      const aiAllowed = Boolean(user) && !user?.isVisitor;
+      // Spec: private-rooms/editor-integration, "AI editor tools disabled for encrypted files"
+      const aiAllowed =
+        Boolean(user) && !user?.isVisitor && !config?.file?.encrypted;
       const connector = aiAllowed ? docEditor?.createConnector?.() : undefined;
 
       if (connector && !isOAuthFrame()) {
@@ -314,9 +317,7 @@ const useEditorEvents = ({
           pending.forEach((call) => connector.sendEvent("ai_onCallTool", call));
         };
 
-        const isEncrypted = !!config?.file?.encrypted;
-
-        if (successAuth && !isEncrypted) {
+        if (successAuth) {
           try {
             const hasError = (data: unknown) =>
               !!data &&
@@ -938,7 +939,8 @@ const useEditorEvents = ({
       const newTitle = (event as { data: { title: string } }).data.title;
       const favorite = (event as { data: { favorite: boolean } }).data.favorite;
 
-      if (favorite !== fileInfo?.isFavorite && fileInfo?.id) {
+      // Favorites are withheld for an encrypted file, as in the client.
+      if (favorite !== fileInfo?.isFavorite && fileInfo?.id && !fileInfo.encrypted) {
         try {
           if (favorite) {
             await markAsFavorite([fileInfo.id], []);
@@ -1136,15 +1138,19 @@ const useEditorEvents = ({
   const onRequestRefreshFile = React.useCallback(async () => {
     if (!fileInfo?.id) return;
 
+    const action = getRefreshFileAction(
+      searchParams.get("action"),
+      config?.editorConfig.mode,
+    );
+
     const res = await openEdit(
       fileInfo.id,
       undefined,
       doc,
-      config?.editorConfig.mode,
       undefined,
       shareKey,
       config?.editorType,
-      config?.editorConfig.mode,
+      action,
     );
 
     getDocEditor()?.refreshFile(res);
@@ -1152,6 +1158,7 @@ const useEditorEvents = ({
     fileInfo?.id,
     doc,
     shareKey,
+    searchParams,
     config?.editorType,
     config?.editorConfig.mode,
   ]);

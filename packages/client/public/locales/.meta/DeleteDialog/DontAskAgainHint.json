@@ -1,0 +1,29 @@
+{
+  "key_path": "DontAskAgainHint",
+  "content": "You can turn this confirmation back on in My profile → File management.",
+  "content_en_sha1_hash": "ad5dad6e9e3e74a2bb727921498c1055a6de43f9",
+  "created_at": "2026-11-05T18:23:44.395Z",
+  "updated_at": "2026-11-05T18:24:12.196Z",
+  "comment": {
+    "text": "Tooltip of the question-mark button next to the Don't ask again checkbox in the Move to Trash? dialog. My profile and File management are the names of the profile page and its tab, translate them exactly as those UI labels; the arrow shows navigation.",
+    "is_auto": true,
+    "updated_at": "2026-11-05T18:24:12.196Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 309,
+      "context": "dataTestId=\"delete_dialog_dont_ask_again_checkbox\"\n isChecked={dontAskAgain}\n onChange={() => setDontAskAgain(!dontAskAgain)}\n />\n <HelpButton\n tooltipContent={<Text fontSize=\"12px\">{t(\"DontAskAgainHint\")}</Text>}\n dataTestId=\"delete_dialog_dont_ask_again_help\"\n />\n </div>\n ) : null}\n </ModalDialog.Body>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

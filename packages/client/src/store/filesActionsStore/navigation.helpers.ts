@@ -40,6 +40,8 @@ import {
   RoomSearchArea,
 } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getEncryptedOperationErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
+import i18n from "../../i18n";
 import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
@@ -98,7 +100,9 @@ self: FilesActionStore
           ? CategoryType.AiHub
           : CategoryType.ArchivedRoom === categoryType
             ? CategoryType.Archive
-            : categoryType;
+            : categoryType === CategoryType.PrivateRoom
+              ? CategoryType.PrivateRooms
+              : categoryType;
 
   const path = getCategoryUrl(correctCategoryType);
 
@@ -114,7 +118,10 @@ self: FilesActionStore
     rootFolderType: self.selectedFolderStore.rootFolderType,
   };
 
-  if ((categoryType as TCategoryType) == CategoryType.Archive) {
+  if (
+    (categoryType as TCategoryType) == CategoryType.Archive ||
+    categoryType === CategoryType.PrivateArchive
+  ) {
     filter.searchArea = RoomSearchArea.Archive;
   }
 
@@ -182,6 +189,7 @@ self: FilesActionStore,item: {
   title?: string;
   rootFolderType?: FolderType;
   roomType?: RoomsType;
+  private?: boolean;
 }
 )=> {
   if (self.publicRoomStore.isPublicRoom)
@@ -192,7 +200,11 @@ self: FilesActionStore,item: {
   const categoryType = getCategoryTypeByFolderTypeInSection(
     rootFolderType,
     id,
-    { roomType },
+    {
+      roomType,
+      isPrivate:
+        self.filesStore.isPrivateRoomsSectionAvailable && item.private === true,
+    },
   );
 
   const state = { title, rootFolderType, isRoot: false, isRoom };
@@ -205,7 +217,8 @@ self: FilesActionStore,item: {
   if (isRoom || isTemplate) {
     if (self.userStore.user?.id) {
       const key =
-        categoryType === CategoryType.Archive
+        categoryType === CategoryType.Archive ||
+        categoryType === CategoryType.PrivateArchive
           ? `${FILTER_ARCHIVE_DOCUMENTS}=${self.userStore.user?.id}`
           : `${FILTER_ROOM_DOCUMENTS}=${self.userStore.user?.id}`;
 
@@ -370,6 +383,7 @@ self: FilesActionStore,fromHotkeys = true
   if (
     categoryType === CategoryType.SharedRoom ||
     categoryType === CategoryType.Form ||
+    categoryType === CategoryType.PrivateRoom ||
     categoryType === CategoryType.AiHubRoom ||
     isArchivedRoom
   ) {
@@ -383,7 +397,9 @@ self: FilesActionStore,fromHotkeys = true
   if (
     categoryType === CategoryType.Shared ||
     categoryType === CategoryType.Archive ||
-    categoryType === CategoryType.AiHub
+    categoryType === CategoryType.AiHub ||
+    categoryType === CategoryType.PrivateRooms ||
+    categoryType === CategoryType.PrivateArchive
   ) {
     return self.moveToRoomsPage();
   }
@@ -572,6 +588,8 @@ self: FilesActionStore,
       self.userStore.user?.id,
       roomType,
       currentTitle,
+      self.filesStore.isPrivateRoomsSectionAvailable &&
+        (item.private === true || self.treeFoldersStore.isPrivacyFolder),
     );
 
     if (openingNewTab(url, e)) return;
@@ -676,7 +694,7 @@ self: FilesActionStore,
 
     if (item.encrypted) {
       return self.downloadEncryptedFile(item).catch((err) =>
-        toastr.error(err as string),
+        toastr.error(getEncryptedOperationErrorMessage(i18n.t, err)),
       );
     }
 

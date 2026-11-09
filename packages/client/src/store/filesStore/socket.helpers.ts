@@ -38,13 +38,16 @@ import api from "@docspace/shared/api";
 import {
   AnalyticsEvents,
   FolderType,
+  RoomPrivacyFilter,
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
+import { getRoomsRequestScope } from "@docspace/shared/utils/rooms";
 import {
   frameCallEvent,
   getCategoryType,
   getFileExtension,
+  isPrivateRoomsRoute,
 } from "@docspace/shared/utils/common";
 import {
   CategoryType,
@@ -220,13 +223,32 @@ export async function wsModifyFolderCreateImpl(
       return (self.roomCreated = false);
     }
 
-    const folderInfo = await api.files.getFolderInfo(folder.id);
-
-    console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
+    // Spec: private-rooms/sidebar-section, "Live updates skip rooms the user cannot read"
+    const folderInfo = await api.files
+      .getFolderInfo(folder.id, true)
+      .catch(() => null);
 
     if (!folderInfo || !isInSelectedFolder(folderInfo.parentId)) {
       console.log("Skip UNSUBSCRIBED folder creation");
       return;
+    }
+
+    console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
+
+    // Spec: private-rooms/sidebar-section, "Live updates respect the split"
+    if (folder.roomType) {
+      const scope = getRoomsRequestScope(
+        getCategoryType(window.DocSpace?.location ?? window.location),
+        self.roomsFilter.searchArea,
+        self.isPrivateRoomsSectionAvailable,
+      );
+      const isPrivate = !!folderInfo.private;
+      if (
+        (scope?.privacyFilter === RoomPrivacyFilter.Private && !isPrivate) ||
+        (scope?.privacyFilter === RoomPrivacyFilter.NotPrivate && isPrivate)
+      ) {
+        return;
+      }
     }
 
     const newFolders = [folderInfo, ...self.folders];
@@ -283,13 +305,18 @@ export async function wsModifyFolderUpdateImpl(
     const folder = JSON.parse(opt?.data);
     if (!folder || !folder.id) return;
 
-    self.refreshFolder(folder.id);
+    // Spec: private-rooms/sidebar-section, "Live updates skip rooms the user cannot read"
+    self.refreshFolder(folder.id, true);
   }
 }
 
-export function refreshFolderImpl(self: FilesStore, id: number | string) {
+export function refreshFolderImpl(
+  self: FilesStore,
+  id: number | string,
+  skipRedirect = false,
+) {
   api.files
-    .getFolderInfo(id)
+    .getFolderInfo(id, skipRedirect)
     .then((response) => {
       const folderInfo = {
         isFolder: true,
@@ -595,7 +622,12 @@ export function redirectToParentImpl(
       );
       archiveFilter.searchArea = RoomSearchArea.Archive;
       const params = archiveFilter.toUrlParams(userId as string, true);
-      const path = getCategoryUrl(CategoryType.Archive);
+      // An archived private room may be open at its active-form /private address.
+      const path = getCategoryUrl(
+        isPrivateRoomsRoute(window.DocSpace.location.pathname)
+          ? CategoryType.PrivateArchive
+          : CategoryType.Archive,
+      );
 
       return window.DocSpace.navigate(`${path}?${params}`);
     }
@@ -605,14 +637,18 @@ export function redirectToParentImpl(
       }
 
       if (pathPart.id === roomsFolderId) {
-        const isForms =
-          getCategoryType(window.DocSpace.location) === CategoryType.Form;
+        const categoryType = getCategoryType(window.DocSpace.location);
+        const isForms = categoryType === CategoryType.Form;
 
         const roomsFilter = RoomsFilter.getDefault();
         if (isForms) roomsFilter.searchArea = RoomSearchArea.Forms;
 
         const path = getCategoryUrl(
-          isForms ? CategoryType.Forms : CategoryType.Shared,
+          isForms
+            ? CategoryType.Forms
+            : categoryType === CategoryType.PrivateRoom
+              ? CategoryType.PrivateRooms
+              : CategoryType.Shared,
         );
 
         return window.DocSpace.navigate(
@@ -645,7 +681,11 @@ export function redirectToParentImpl(
 
       const categoryType = isPublic
         ? CategoryType.PublicRoom
-        : getCategoryTypeByFolderTypeInSection(rootFolderType, pathPart.id);
+        : getCategoryTypeByFolderTypeInSection(rootFolderType, pathPart.id, {
+            isPrivate:
+              self.isPrivateRoomsSectionAvailable &&
+              self.treeFoldersStore.isPrivacyFolder,
+          });
 
       const path = getCategoryUrl(categoryType, pathPart.id);
 

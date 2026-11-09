@@ -37,6 +37,7 @@ import type { Page } from "@playwright/test";
 
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
+  rootHandler,
   settingsHandler,
   TypeSettings,
   selfActivationStatusHandler,
@@ -82,6 +83,8 @@ test.describe("Guest restrictions on the create section", () => {
       settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
       selfByTypeHandler(TEST_PORT, "visitor"),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
+      // The server serves no "AI rooms" root to a guest.
+      rootHandler(TEST_PORT, { withAiHub: false }),
     );
   });
 

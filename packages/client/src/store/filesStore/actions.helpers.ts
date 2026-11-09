@@ -42,7 +42,9 @@ import {
   updateTempContent,
 } from "@docspace/shared/utils/common";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import config from "PACKAGE_FILE";
+import i18n from "../../i18n";
 
 import type { Nullable } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
@@ -139,7 +141,15 @@ export function openDocEditorImpl(
   fillForm = false,
   targetWindow: Nullable<Window> = null,
 ) {
-  const { openOnNewPage } = self.filesSettingsStore;
+  const { openOnNewPage, isEncryptedEditingAvailable } =
+    self.filesSettingsStore;
+  const item = self.files.find((f) => f.id === id);
+
+  // Spec: private-rooms/editor-integration, "Document Server capability check before opening"
+  if (item?.encrypted && !isEncryptedEditingAvailable) {
+    toastr.info(i18n.t("Common:PrivateRoomEditorNotSupported"));
+    return;
+  }
 
   const share = shareKey || self.publicRoomStore.publicRoomKey;
 
@@ -171,8 +181,6 @@ export function openDocEditorImpl(
   );
 
   if (isFrame && frameConfig?.events?.onEditorOpen) {
-    const item = self.files.find((f) => f.id === id);
-
     frameCallEvent({
       event: "onEditorOpen",
       data: {

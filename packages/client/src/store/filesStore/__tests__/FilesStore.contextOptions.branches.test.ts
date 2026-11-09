@@ -175,6 +175,73 @@ describe("getFilesContextOptions — encrypted file", () => {
   });
 });
 
+// The server reports no Duplicate right for any entry of a private room.
+const encryptedRoomFile = (security: Record<string, boolean>): TItem =>
+  ({
+    ...encryptedFile(),
+    rootFolderType: FolderType.Rooms,
+    security: {
+      ...encryptedFile().security,
+      Duplicate: false,
+      Copy: false,
+      ...security,
+    },
+  }) as unknown as TItem;
+
+// AccessRightsStore.canMoveItems reads the item's Move right.
+const storeReadingMove = () =>
+  createTestFilesStore({
+    accessRightsStore: {
+      canMoveItems: (item: { security?: { Move?: boolean } }) =>
+        !!item.security?.Move,
+    },
+  });
+
+describe("getFilesContextOptions — Duplicate of an encrypted file", () => {
+  it("Duplicate offered for an encrypted file", () => {
+    const store = storeReadingMove();
+    const opts = store.getFilesContextOptions(
+      encryptedRoomFile({ Move: true }),
+    );
+
+    expect(opts).toContain("duplicate");
+  });
+
+  it("Duplicate withheld without the move right", () => {
+    const store = storeReadingMove();
+    const opts = store.getFilesContextOptions(
+      encryptedRoomFile({ Move: false }),
+    );
+
+    expect(opts).not.toContain("duplicate");
+  });
+
+  it("Duplicate withheld in an archived private room", () => {
+    const store = storeReadingMove();
+    const opts = store.getFilesContextOptions({
+      ...encryptedRoomFile({
+        Move: false,
+        Edit: false,
+        Delete: false,
+        Rename: false,
+      }),
+      rootFolderType: FolderType.Archive,
+    } as unknown as TItem);
+
+    expect(opts).not.toContain("duplicate");
+  });
+
+  it("keeps the Duplicate right of a plain file without the move right", () => {
+    const store = storeReadingMove();
+    const opts = store.getFilesContextOptions({
+      ...fullPermFile(),
+      security: { ...fullPermFile().security, Move: false },
+    } as unknown as TItem);
+
+    expect(opts).toContain("duplicate");
+  });
+});
+
 // The server refuses external links to files in the AI rooms, so the menu
 // keeps only the link for room members there.
 describe("getFilesContextOptions — file in an AI room", () => {
@@ -278,5 +345,133 @@ describe("getFilesContextOptions — room/folder with no permissions", () => {
       expect(opts).not.toContain(gated);
     }
     expect(opts).toMatchSnapshot();
+  });
+});
+
+describe("getFilesContextOptions — folder inside an archived private room", () => {
+  const archivedFolder = (): TItem =>
+    ({
+      id: 6,
+      parentId: 7,
+      title: "Reports",
+      isFolder: true,
+      private: false,
+      rootFolderType: FolderType.Archive,
+      security: { Read: true, Download: true, Copy: true, Duplicate: true },
+      viewAccessibility: {},
+    }) as unknown as TItem;
+
+  const withheld = [
+    "copy-to",
+    "duplicate",
+    "sharing-settings",
+    "copy-shared-link",
+    "manage-links",
+    "link-for-room-members",
+    "mark-as-favorite",
+  ];
+
+  it("Folder menu in an archived private room", () => {
+    const store = createTestFilesStore({
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+    const opts = store.getFilesContextOptions(archivedFolder());
+
+    for (const option of withheld) {
+      expect(opts).not.toContain(option);
+    }
+    expect(opts).toContain("download");
+    expect(opts).toContain("download-encrypted");
+  });
+
+  it("keeps download and copy-to for the same folder in an ordinary archived room", () => {
+    const opts = createTestFilesStore().getFilesContextOptions(
+      archivedFolder(),
+    );
+
+    expect(opts).toContain("download");
+    expect(opts).toContain("copy-to");
+    expect(opts).not.toContain("download-encrypted");
+  });
+});
+
+describe("getFilesContextOptions — download in a private room", () => {
+  const downloadSecurity = { Read: true, Download: true };
+
+  it("Folder context menu", () => {
+    const store = createTestFilesStore({
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+    const folder = {
+      id: 6,
+      parentId: 7,
+      title: "Reports",
+      isFolder: true,
+      rootFolderType: FolderType.Rooms,
+      security: downloadSecurity,
+      viewAccessibility: {},
+    } as unknown as TItem;
+    const opts = store.getFilesContextOptions(folder);
+
+    expect(opts).toContain("download");
+    expect(opts).toContain("download-encrypted");
+  });
+
+  it("Private room with the download right", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const room = {
+      id: 7,
+      title: "Private room",
+      roomType: RoomsType.CustomRoom,
+      rootFolderType: FolderType.Rooms,
+      private: true,
+      security: downloadSecurity,
+      viewAccessibility: {},
+    } as unknown as TItem;
+    const opts = store.getFilesContextOptions(room);
+
+    expect(opts).toContain("download");
+    expect(opts).toContain("download-encrypted");
+  });
+});
+
+describe("getFilesContextOptions — room-level operations of a private room", () => {
+  const ROOM_LEVEL_OPTIONS = [
+    "edit-index",
+    "export-room-index",
+    "save-as-template",
+    "duplicate-room",
+  ];
+  const room = (isPrivate: boolean) =>
+    ({
+      id: 7,
+      title: "Room",
+      roomType: RoomsType.CustomRoom,
+      rootFolderType: FolderType.Rooms,
+      private: isPrivate,
+      security: {
+        Read: true,
+        Download: true,
+        Duplicate: true,
+        EditRoom: true,
+        EditAccess: true,
+        IndexExport: true,
+      },
+      viewAccessibility: {},
+    }) as unknown as TItem;
+
+  it("Private room context menu", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+
+    const ordinary = store.getFilesContextOptions(room(false));
+    const opts = store.getFilesContextOptions(room(true));
+
+    expect(ordinary).toEqual(expect.arrayContaining(ROOM_LEVEL_OPTIONS));
+    for (const option of ROOM_LEVEL_OPTIONS) {
+      expect(opts).not.toContain(option);
+    }
+    expect(opts).toContain("download");
   });
 });

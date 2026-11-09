@@ -50,7 +50,7 @@ import useFilesFilter from "./useFilesFilter";
 
 export type { FilterProps };
 
-export const Filter = observer(({ filesFilter, shareKey, currentFolderId, showMainButton, mainButtonProps, mainButtonIcon }: FilterProps) => {
+export const Filter = observer(({ filesFilter, shareKey, currentFolderId, showMainButton, mainButtonProps, mainButtonIcon, hideSearch }: FilterProps) => {
   const { t } = useTranslation(["Common"]);
   const { filesViewAs, setFilesViewAs } = useSettingsStore();
   const { currentDeviceType } = useDeviceType();
@@ -78,6 +78,7 @@ export const Filter = observer(({ filesFilter, shareKey, currentFolderId, showMa
     filesViewAs,
     setFilesViewAs,
     setClearSearch,
+    withoutSearch: hideSearch,
   });
 
   const initSearchValue = getSelectedInputValue();
@@ -125,6 +126,7 @@ export const Filter = observer(({ filesFilter, shareKey, currentFolderId, showMa
       showMainButton={showMainButton}
       mainButtonProps={mainButtonProps}
       mainButtonIcon={mainButtonIcon}
+      hideSearch={hideSearch}
     />
   );
 });

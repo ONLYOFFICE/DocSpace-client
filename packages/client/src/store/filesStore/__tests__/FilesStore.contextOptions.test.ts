@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { describe, it, expect, beforeEach } from "vitest";
+import { afterEach, describe, it, expect, beforeEach } from "vitest";
 import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
@@ -217,6 +217,36 @@ describe("FilesStore.getFilesContextOptions — characterization", () => {
     expect(opts).not.toContain("send-by-email");
   });
 
+  // Bug 84823: the server keeps granting CreateRoomFrom when the Rooms app is
+  // switched off, and a room created then is unreachable - with the file
+  // moved into it.
+  it("drops create-room for files and folders while the Rooms app is off", () => {
+    const roomKeys = ["create-room", "create-room-separator"];
+    const withRoomsApp = (installed: boolean) => {
+      const store2 = createTestFilesStore();
+      store2.dialogsStore = { roomGroups: [] } as never;
+      store2.appsStore = {
+        isPrivateRoomsSectionAvailable: true,
+        isInstalled: (id: string) => id !== "ai-rooms" || installed,
+      };
+      return store2;
+    };
+
+    const on = withRoomsApp(true);
+    expect(on.getFilesContextOptions(documentFile())).toEqual(
+      expect.arrayContaining(roomKeys),
+    );
+    expect(on.getFilesContextOptions(plainFolder())).toEqual(
+      expect.arrayContaining(roomKeys),
+    );
+
+    const off = withRoomsApp(false);
+    for (const item of [documentFile(), plainFolder()]) {
+      const opts = off.getFilesContextOptions(item);
+      for (const key of roomKeys) expect(opts).not.toContain(key);
+    }
+  });
+
   // A public room strips the chat entirely, and the two AI entries are
   // alternatives — so a form whose responses the server would let you analyze
   // must not smuggle the chat back in through the other key.
@@ -248,5 +278,30 @@ describe("FilesStore.getFilesContextOptions — characterization", () => {
       isLinkExpired: true,
     } as TItem;
     expect(store.getFilesContextOptions(expired)).toStrictEqual(["select"]);
+  });
+});
+
+describe("FilesStore.getFilesContextOptions — Private section", () => {
+  afterEach(() => window.history.pushState({}, "", "/"));
+
+  it("Context menu of a private room in the section", () => {
+    const store = createTestFilesStore({
+      filesSettingsStore: { organizeRoomsGrouping: true },
+    });
+    store.dialogsStore = { roomGroups: [{ id: "g1" }] } as never;
+    const privateRoom = { ...customRoom(), private: true } as TItem;
+
+    window.history.pushState({}, "", "/rooms/shared/filter");
+    const inRooms = store.getFilesContextOptions(privateRoom);
+
+    window.history.pushState({}, "", "/private/filter");
+    const inPrivate = store.getFilesContextOptions(privateRoom);
+
+    expect(inRooms).toEqual(
+      expect.arrayContaining(["create-group", "add-to-group"]),
+    );
+    expect(inPrivate).not.toContain("create-group");
+    expect(inPrivate).not.toContain("add-to-group");
+    expect(inPrivate).not.toContain("remove-from-group");
   });
 });

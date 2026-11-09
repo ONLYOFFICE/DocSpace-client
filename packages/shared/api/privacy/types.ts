@@ -39,10 +39,6 @@ export type TPrivacyRoomRequest = {
   privateKeyEnc: string;
 };
 
-export type TPrivacySettingsRequest = {
-  enable?: boolean;
-};
-
 export type TEncryptionKeyPair = {
   id: string;
   privateKeyEnc: string;
@@ -50,4 +46,13 @@ export type TEncryptionKeyPair = {
   userId: string;
   date?: string;
   cryptoEngineId?: string;
+};
+
+/** A key of a prospective member: the answer never carries the private half. */
+export type TRoomCandidateKey = Omit<TEncryptionKeyPair, "privateKeyEnc">;
+
+/** `RoomMissingFileKeysDto`: a user and the encrypted files of a room that hold no key for them. */
+export type TRoomMissingFileKeys = {
+  userId: string;
+  fileIds: number[];
 };

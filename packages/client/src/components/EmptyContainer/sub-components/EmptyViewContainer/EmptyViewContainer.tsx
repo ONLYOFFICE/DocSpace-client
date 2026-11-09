@@ -150,6 +150,7 @@ const InjectedEmptyViewContainer = inject<
     const {
       setSelectFileFormRoomDialogVisible,
       setSelectFileKnowledgeRoomDialogVisible,
+      setGenerateSkillDialogVisible,
       setQuotaWarningDialogVisible,
       setTemplateAccessSettingsVisible,
     } = dialogsStore;
@@ -187,6 +188,7 @@ const InjectedEmptyViewContainer = inject<
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
       setSelectFileKnowledgeRoomDialogVisible,
+      setGenerateSkillDialogVisible,
       setQuotaWarningDialogVisible,
       setTemplateAccessSettingsVisible,
       isVisitor: userStore?.user?.isVisitor,
@@ -202,7 +204,10 @@ const InjectedEmptyViewContainer = inject<
       language,
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
       vectorizationEnabled: settingsStore.aiConfig?.vectorizationEnabled !== false,
+      isCreateSkillWithAIAvailable:
+        contextOptionsStore.isCreateSkillWithAIAvailable,
       onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
+      createRoom: contextOptionsStore.onCreateRoom,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

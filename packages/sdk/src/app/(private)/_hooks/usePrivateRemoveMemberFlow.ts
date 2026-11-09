@@ -39,41 +39,30 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
-import { getGroupById } from "@docspace/shared/api/groups";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
 import { useActiveEncryptedUploadsForRoom } from "../_store/PrivateEncryptedUploadStore";
-import {
-  registerCryptoOperation,
-  releaseCryptoOperation,
-} from "../_utils/abort-registry";
 
 type RemoveArgs = {
   roomId: number;
   userId: string;
-  /** When true the userId refers to a group; members are expanded via
-   *  getGroupById before the DEK revoke so every member's wrap is removed. */
-  isGroup?: boolean;
 };
 
 type UsePrivateRemoveMemberFlowReturn = {
   /**
-   * Removes a member from the room and re-issues file_keys without the
-   * revoked user. Returns null if uploads are still in flight (guard).
+   * Removes a member from the room through the role update; does nothing
+   * while uploads into the room are in flight (guard).
    */
   remove: (args: RemoveArgs) => Promise<void>;
   /**
-   * Non-null while uploads are in flight: blocks the revoke action and
-   * surfaces a localized reason for the disable state.
+   * Non-null while uploads are in flight: blocks the removal and surfaces a
+   * localized reason for the disable state.
    */
   guardReason: string | null;
   isLoading: boolean;
 };
-
-const loadRoomEncryption = () =>
-  import("@docspace/shared/services/private-room/room-encryption");
 
 export const usePrivateRemoveMemberFlow = (
   roomId: number | string,
@@ -91,71 +80,23 @@ export const usePrivateRemoveMemberFlow = (
   );
 
   const remove = React.useCallback(
-    async ({ roomId: targetRoomId, userId, isGroup }: RemoveArgs) => {
+    async ({ roomId: targetRoomId, userId }: RemoveArgs) => {
       if (guardReason) {
         toastr.warning(guardReason);
         return;
       }
 
-      const controller = registerCryptoOperation();
       setIsLoading(true);
       try {
-        // 1. Revoke access on the server first (synchronous server-side ACL
-        // change). If this fails, file_keys cleanup is moot.
+        // Spec: private-rooms/sdk-surface, "Member removal warning"
         await api.rooms.setRoomSecurity(targetRoomId, {
           invitations: [{ id: userId, access: ShareAccessRights.None }],
           notify: false,
           message: "",
         });
-
-        if (controller.signal.aborted) return;
-
-        // 2. Resolve the set of user IDs whose DEK wraps must be removed.
-        // For a group, expand to its member list (includeMembers=true).
-        // Mirrors: packages/client/.../Members/sub-components/User.tsx:165-171
-        let revokedIds: string[] = [userId];
-        if (isGroup) {
-          const group = await getGroupById(userId, true);
-          revokedIds = (group.members ?? []).map((m) => String(m.id));
-          // Empty group: nothing to revoke on the encryption side.
-          if (revokedIds.length === 0) return;
-        }
-
-        if (controller.signal.aborted) return;
-
-        // 3. Strip the revoked user(s) from every file_keys ACL in the room.
-        // Best-effort: failures here leave dangling wraps but don't grant
-        // decryption ability (the user lost room membership in step 1).
-        try {
-          const { revokeMemberFromEncryptedRoom } = await loadRoomEncryption();
-          const results = await revokeMemberFromEncryptedRoom(
-            Number(targetRoomId),
-            revokedIds,
-            {},
-          );
-
-          if (controller.signal.aborted) return;
-
-          const failures = results.filter((r) => !r.success);
-          if (failures.length > 0) {
-            toastr.warning(
-              t("Common:EncryptedRevokePartialFailure", {
-                count: failures.length,
-              }),
-            );
-            return;
-          }
-          if (results.length > 0) {
-            toastr.success(t("Common:EncryptedRevokeCompleted"));
-          }
-        } catch {
-          toastr.error(t("Common:EncryptedRevokeFailed"));
-        }
       } catch (error) {
-        // Step 1 (server ACL) failure: surface a localized encryption error.
         toastr.error(getEncryptionErrorMessage(t, error));
       } finally {
-        releaseCryptoOperation(controller);
         setIsLoading(false);
       }
     },

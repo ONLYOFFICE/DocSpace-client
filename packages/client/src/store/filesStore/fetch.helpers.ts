@@ -72,6 +72,7 @@ import {
   setDocumentTitle,
 } from "SRC_DIR/helpers/utils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
+import { getAiWorkspaceTitle } from "SRC_DIR/helpers/aiWorkspace";
 import {
   getSectionAddressCorrection,
   SECTION_DECIDED_STATE,
@@ -811,7 +812,9 @@ export function fetchRoomsImpl(
           // The AI root is titled by the client, as the tree and the section
           // header title it; the server's folder title is not shown anywhere.
           if (self.categoryType === CategoryType.AiHub)
-            setDocumentTitle(i18n.t("Common:AiWorkspace"));
+            setDocumentTitle(
+              getAiWorkspaceTitle(i18n.t, window.location.search),
+            );
 
           const isEmptyList = data.folders.length === 0;
           if (filter && isEmptyList) {

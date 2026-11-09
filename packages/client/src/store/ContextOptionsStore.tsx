@@ -81,6 +81,7 @@ import {
   setInfoPanelMobileHidden,
   showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
+import { getAiWorkspaceCreatePayload } from "SRC_DIR/helpers/aiWorkspace";
 import {
   onClickEditRoom as onClickEditRoomHelper,
   onShowEditingToast,
@@ -1032,9 +1033,10 @@ class ContextOptionsStore {
       event.payload = { isFormsCreate: true };
     }
 
-    // "AI rooms" draws its own chooser.
+    // The AI Workspace list creates what it holds: the entry's room type,
+    // or an agent on the root.
     if (!fromItem && window.location.pathname.startsWith("/ai-rooms/")) {
-      event.payload = { isAiRoomsCreate: true };
+      event.payload = getAiWorkspaceCreatePayload(window.location.search);
     }
 
     window.dispatchEvent(event);

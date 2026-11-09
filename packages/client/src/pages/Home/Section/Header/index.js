@@ -78,6 +78,7 @@ import {
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import { isPrivateRoomsListRoot } from "SRC_DIR/helpers/privateRoomsSection";
+import { getAiWorkspaceTitle } from "SRC_DIR/helpers/aiWorkspace";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import {
   getLifetimePeriodTranslation,
@@ -774,9 +775,9 @@ const SectionHeaderContent = (props) => {
     if (isPrivateRoomsListRoot(location, isRoomsFolder))
       return t("Common:Private");
 
-    // The AI root is titled by the client, as the tree titles it.
+    // The AI root is titled by the client, after what its list holds.
     if (getCategoryType(location) === CategoryType.AiHub)
-      return t("Common:AiWorkspace");
+      return getAiWorkspaceTitle(t, location.search);
 
     if (isContactsPage) {
       switch (contactsTab) {

@@ -821,7 +821,6 @@ export function fetchRoomsImpl(
             const {
               subjectId,
               filterValue,
-              type,
               withSubfolders: withRoomsSubfolders,
               searchInContent: searchInContentRooms,
               tags,
@@ -832,7 +831,7 @@ export function fetchRoomsImpl(
               subjectId ||
               filter.subjectOwnerId ||
               filterValue ||
-              type ||
+              filter.hasTypeFilter() ||
               filter.provider ||
               withRoomsSubfolders ||
               searchInContentRooms ||

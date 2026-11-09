@@ -568,6 +568,16 @@ class RoomsFilter {
     return Boolean(this.metadataTemplateId || this.metadataFilters?.length);
   }
 
+  /**
+   * Whether the room type narrows the list as a filter. In AI Workspace the
+   * type picks the list itself (the agents, Skills, Knowledge) and is always
+   * set, so it never makes the list "filtered" there.
+   */
+  hasTypeFilter() {
+    if (this.searchArea === RoomSearchArea.AiHub) return false;
+    return Boolean(this.type);
+  }
+
   clone() {
     const filter = new RoomsFilter(
       this.page,

@@ -70,3 +70,27 @@ describe("RoomsFilter AI Workspace default", () => {
     expect(RoomsFilter.getDefault(undefined, RoomSearchArea.Active).type).toBeNull();
   });
 });
+
+describe("RoomsFilter.hasTypeFilter", () => {
+  it("never counts the AI Workspace list type as a filter", () => {
+    const agents = RoomsFilter.getDefault(undefined, RoomSearchArea.AiHub);
+    expect(agents.hasTypeFilter()).toBe(false);
+
+    const skills = RoomsFilter.getFilter({
+      search: `?searchArea=AiHub&type=${RoomsType.InstructionsRoom}`,
+    } as Location);
+    expect(skills?.hasTypeFilter()).toBe(false);
+  });
+
+  it("counts a room type as a filter in the other search areas", () => {
+    const rooms = RoomsFilter.getDefault(undefined, RoomSearchArea.Active);
+    expect(rooms.hasTypeFilter()).toBe(false);
+
+    rooms.type = String(RoomsType.CustomRoom);
+    expect(rooms.hasTypeFilter()).toBe(true);
+
+    const archive = RoomsFilter.getDefault(undefined, RoomSearchArea.Archive);
+    archive.type = [String(RoomsType.PublicRoom)];
+    expect(archive.hasTypeFilter()).toBe(true);
+  });
+});

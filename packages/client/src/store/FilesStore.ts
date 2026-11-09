@@ -2287,7 +2287,6 @@ class FilesStore {
       subjectId,
       subjectOwnerId,
       filterValue,
-      type,
       withSubfolders: withRoomsSubfolders,
       searchInContent: searchInContentRooms,
       tags,
@@ -2313,7 +2312,7 @@ class FilesStore {
       isAiSectionFolder ||
       isTemplatesFolder
         ? filterValue ||
-          type ||
+          this.roomsFilter.hasTypeFilter() ||
           provider ||
           withRoomsSubfolders ||
           searchInContentRooms ||

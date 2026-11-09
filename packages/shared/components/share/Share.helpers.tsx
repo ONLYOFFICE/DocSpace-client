@@ -337,11 +337,14 @@ export const getExpiredOptions = (
   onCalendarOpen: VoidFunction,
   locale: string,
 ) => {
-  const relativeTime = new Intl.RelativeTimeFormat(locale, {
+  const relativeTimeOptions: Intl.RelativeTimeFormatOptions & {
+    numberingSystem?: string;
+  } = {
     numberingSystem: LATIN_NUMBERING_SYSTEM,
     numeric: "always",
     style: "long",
-  } as Intl.RelativeTimeFormatOptions);
+  };
+  const relativeTime = new Intl.RelativeTimeFormat(locale, relativeTimeOptions);
 
   const oneDay = relativeTime.format(1, "day");
   const severalDays = relativeTime.format(7, "day");

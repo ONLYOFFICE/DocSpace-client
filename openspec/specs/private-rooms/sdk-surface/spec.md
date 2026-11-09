@@ -43,11 +43,11 @@ The private layout SHALL run the shell effects: lock state synchronised across t
 - **THEN** no device-setup hint is shown until the list has loaded and contains no key for this device
 
 ### Requirement: Forgot passphrase and device setup link out to the client
-The SDK SHALL NOT offer key generation, recovery or key management itself; the forgot-passphrase link and the device-setup hint SHALL open the client's keys-management profile page in a new tab through a link that works while the client keeps the feature behind its opt-in, and SHALL explain in place when the client page is not reachable from the host.
+The SDK SHALL NOT offer key recovery or key management itself, and SHALL offer key generation only where creating a private room needs a key; the forgot-passphrase link and the device-setup hint SHALL open the client's keys-management profile page in a new tab, and SHALL explain in place when the client page is not reachable from the host.
 
 #### Scenario: Forgot passphrase
 - **WHEN** the user clicks the forgot link in the SDK passphrase modal
-- **THEN** the client's profile keys-management page opens in a new tab with the opt-in carried along, so the page renders even if the browser has no flag set
+- **THEN** the client's profile keys-management page opens in a new tab, its address carrying no opt-in parameter
 
 #### Scenario: No keys on this device
 - **WHEN** a user without an identity on this device enters a private room in the SDK

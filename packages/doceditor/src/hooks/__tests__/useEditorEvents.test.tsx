@@ -116,6 +116,7 @@ import {
   StartFillingMode,
 } from "@docspace/shared/enums";
 import { frameCallEvent } from "@docspace/shared/utils/common";
+import { getDocEditor } from "@/utils";
 
 import useEditorEvents from "../useEditorEvents";
 
@@ -262,6 +263,66 @@ describe("useEditorEvents", () => {
         7,
         FormFillingManageAction.Start,
       );
+    });
+  });
+
+  describe("onDocumentReady", () => {
+    const openDocument = async (encrypted: boolean) => {
+      const createConnector = vi.fn(() => ({
+        attachEvent: vi.fn(),
+        executeMethod: vi.fn(),
+        sendEvent: vi.fn(),
+      }));
+      vi.mocked(getDocEditor).mockReturnValue({
+        createConnector,
+        showMessage: vi.fn(),
+      } as never);
+      const addEventListener = vi.spyOn(window, "addEventListener");
+      const postMessage = vi
+        .spyOn(window, "postMessage")
+        .mockImplementation(() => undefined);
+
+      render({
+        fileInfo: fileInfo(encrypted),
+        config: { ...config, file: fileInfo(encrypted) } as IInitialConfig,
+        user: { id: "user-1", isVisitor: false } as UseEventsProps["user"],
+        successAuth: true,
+      });
+      await act(async () => {
+        events.onSDKAppReady();
+        await events.onDocumentReady();
+      });
+
+      const readyPosted = postMessage.mock.calls.some(
+        ([message]) =>
+          (message as { type?: string })?.type === "editorDocumentReady",
+      );
+      const messageListenerAdded = addEventListener.mock.calls.some(
+        ([type]) => type === "message",
+      );
+      addEventListener.mockRestore();
+      postMessage.mockRestore();
+      vi.mocked(getDocEditor).mockReturnValue(undefined);
+
+      return { createConnector, readyPosted, messageListenerAdded };
+    };
+
+    it("Encrypted file opened", async () => {
+      const { createConnector, readyPosted, messageListenerAdded } =
+        await openDocument(true);
+
+      expect(createConnector).not.toHaveBeenCalled();
+      expect(readyPosted).toBe(false);
+      expect(messageListenerAdded).toBe(false);
+    });
+
+    it("creates the AI connector and the tool bridge for a plain file", async () => {
+      const { createConnector, readyPosted, messageListenerAdded } =
+        await openDocument(false);
+
+      expect(createConnector).toHaveBeenCalledTimes(1);
+      expect(readyPosted).toBe(true);
+      expect(messageListenerAdded).toBe(true);
     });
   });
 });

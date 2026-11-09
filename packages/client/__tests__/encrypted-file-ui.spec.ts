@@ -47,6 +47,7 @@ import {
   type EncryptedFilesHandlerHandle,
   type PrivacyroomAccessHandlerHandle,
 } from "@docspace/shared/__mocks__/handlers";
+import type { Page } from "@playwright/test";
 import { http } from "msw";
 import { BASE_URL, type WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 import { myDocumentsResolver } from "@docspace/shared/__mocks__/handlers/files/documents";
@@ -332,10 +333,15 @@ test.describe("Encrypted file moved out of a private room", () => {
     );
   });
 
-  test("Cut and paste out of a private room: the decrypted copy is uploaded and the source deleted", async ({
+  /** Cuts the room's encrypted file and pastes it into My documents. */
+  const cutAndPasteIntoMyDocuments = async ({
     page,
     mockRequest,
     baseUrl,
+  }: {
+    page: Page;
+    mockRequest: WorkerFixture;
+    baseUrl: string;
   }) => {
     const { keysHandle, passphrase } = await bootstrapEncryption(
       page,
@@ -442,12 +448,30 @@ test.describe("Encrypted file moved out of a private room", () => {
       page.getByRole("heading", { name: "My documents", level: 1 }),
     ).toBeVisible({ timeout: 15000 });
 
+    await page.keyboard.press("Control+v");
+
+    return { filesHandle, passphrase, passphrasePrompt };
+  };
+
+  const encryptedTransferWarning = (page: Page) =>
+    page.getByRole("dialog").filter({ hasText: "Encrypted files" });
+
+  test("Cut and paste out of a private room: the decrypted copy is uploaded and the source deleted", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const { filesHandle, passphrase, passphrasePrompt } =
+      await cutAndPasteIntoMyDocuments({ page, mockRequest, baseUrl });
+
     const deleteRequest = page.waitForRequest(
       (req) =>
         req.method() === "PUT" && /\/files\/fileops\/delete/.test(req.url()),
       { timeout: 30000 },
     );
-    await page.keyboard.press("Control+v");
+    await encryptedTransferWarning(page)
+      .getByRole("button", { name: "Move", exact: true })
+      .click();
 
     try {
       await passphrasePrompt.waitFor({ state: "visible", timeout: 5000 });
@@ -472,5 +496,30 @@ test.describe("Encrypted file moved out of a private room", () => {
     const copy = remaining.find((f) => f.title === "moved.txt");
     expect(copy?.encrypted).toBe(false);
     expect(new TextDecoder().decode(copy?.bytes)).toBe(PLAIN_TEXT);
+  });
+
+  test("Warning declined", async ({ page, mockRequest, baseUrl }) => {
+    const deleteRequests: string[] = [];
+    page.on("request", (req) => {
+      if (/\/files\/fileops\/delete/.test(req.url())) deleteRequests.push(req.url());
+    });
+    const { filesHandle, passphrasePrompt } = await cutAndPasteIntoMyDocuments({
+      page,
+      mockRequest,
+      baseUrl,
+    });
+
+    const warning = encryptedTransferWarning(page);
+    await warning.getByRole("button", { name: "Cancel", exact: true }).click();
+    await expect(warning).toBeHidden();
+
+    expect(filesHandle.current!.getFiles().map((f) => f.id)).toEqual([
+      MOVE_FILE_ID,
+    ]);
+    expect(deleteRequests).toEqual([]);
+    await expect(passphrasePrompt).toBeHidden();
+
+    await page.keyboard.press("Control+v");
+    await expect(warning).toBeVisible();
   });
 });

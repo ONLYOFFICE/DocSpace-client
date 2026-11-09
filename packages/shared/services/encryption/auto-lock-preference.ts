@@ -92,7 +92,6 @@ export function getAutoLockTimeoutSeconds(): number {
   if (raw === null) return DEFAULT_AUTO_LOCK_SECONDS;
   const parsed = Number.parseInt(raw, 10);
   if (!Number.isFinite(parsed) || parsed < 0) return DEFAULT_AUTO_LOCK_SECONDS;
-  if (parsed > MAX_AUTO_LOCK_SECONDS) return MAX_AUTO_LOCK_SECONDS;
   // Defense against localStorage tampering — a hostile script (or browser
   // extension) could write an arbitrary value to extend the auto-lock window
   // beyond the UI-offered presets. Read-time enforce the whitelist; falling

@@ -2218,6 +2218,7 @@
   "Size": "Tamanho",
   "SizeImageLarge": "A imagem é demasiado grande, por favor selecione outra imagem.",
   "SkillNameNeedsLetterOrDigit": "O nome deve conter pelo menos uma letra ou um algarismo",
+  "Skills": "Competências",
   "Skip": "Pular",
   "SkipDescription": "Nenhum ficheiro será copiado. O ficheiro original será mantido na pasta de destino.",
   "SkipFolderDescription": "Nenhuma pasta será copiada",

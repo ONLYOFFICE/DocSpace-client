@@ -2218,6 +2218,7 @@
   "Size": "Dimensione",
   "SizeImageLarge": "La dimensione dell'immagine è troppo grande, seleziona un'altra immagine.",
   "SkillNameNeedsLetterOrDigit": "Il nome deve contenere almeno una lettera o una cifra",
+  "Skills": "Competenze",
   "Skip": "Salta",
   "SkipDescription": "Nessun file verrà copiato. Il file originale verrà conservato nella cartella di destinazione.",
   "SkipFolderDescription": "Nessuna cartella sarà copiata",

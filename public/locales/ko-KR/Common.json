@@ -2218,6 +2218,7 @@
   "Size": "크기",
   "SizeImageLarge": "이미지 크기가 너무 큽니다. 다른 이미지를 선택해주세요.",
   "SkillNameNeedsLetterOrDigit": "이름에는 문자나 숫자가 하나 이상 포함되어야 합니다",
+  "Skills": "스킬",
   "Skip": "건너뛰기",
   "SkipDescription": "파일이 복사되지 않습니다. 원본 파일이 대상 폴더에 유지됩니다.",
   "SkipFolderDescription": "어떤 폴더도 복사되지 않습니다",

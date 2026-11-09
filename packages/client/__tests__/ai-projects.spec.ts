@@ -110,8 +110,8 @@ test.describe("AI Chat", () => {
         await expect(table(page)).toContainText(room.title);
       }
 
-      // One AI section in the sidebar, with its own Recent, Favorites and
-      // Trash and no Archive; the projects have no section of their own.
+      // One AI section in the sidebar, with Templates, Skills, Knowledge base
+      // and Trash and no Archive; the projects have no section of their own.
       await expect(sidebar(page)).toContainText("AI Chat");
       await expect(sidebar(page)).not.toContainText("AI Projects");
 

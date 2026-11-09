@@ -2218,6 +2218,7 @@
   "Size": "Boyut",
   "SizeImageLarge": "Resim boyutu çok büyük, lütfen başka bir resim seçin.",
   "SkillNameNeedsLetterOrDigit": "Ad en az bir harf veya rakam içermelidir",
+  "Skills": "Beceriler",
   "Skip": "Atla",
   "SkipDescription": "Hiçbir dosya kopyalanmayacaktır. Orijinal dosya hedef klasörde tutulacaktır.",
   "SkipFolderDescription": "Hiçbir klasör kopyalanmayacak",

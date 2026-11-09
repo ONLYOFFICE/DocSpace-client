@@ -2218,6 +2218,7 @@
   "Size": "Koko",
   "SizeImageLarge": "Kuva on liian suuri, ole hyvä ja valitse toinen kuva.",
   "SkillNameNeedsLetterOrDigit": "Nimessä on oltava vähintään yksi kirjain tai numero",
+  "Skills": "Taidot",
   "Skip": "Ohita",
   "SkipDescription": "Mitään tiedostoa ei kopioida. Alkuperäinen tiedosto säilytetään kohdekansiossa.",
   "SkipFolderDescription": "Kansioita ei kopioida",

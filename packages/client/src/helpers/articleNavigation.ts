@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
+import { FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { CategoryType } from "@docspace/shared/constants";
@@ -204,6 +204,22 @@ export const getSectionTrashUrl = (
 };
 
 /**
+ * The AI Chat section's entries are the `/ai-rooms` list narrowed to one
+ * room type, so the active entry is read from the `type` filter in the query.
+ */
+const AI_HUB_TYPE_ITEM_IDS: Record<string, string> = {
+  [RoomsType.AiProjectRoom]: "ai-rooms-templates",
+  [RoomsType.InstructionsRoom]: "ai-rooms-skills",
+  [RoomsType.KnowledgeRoom]: "ai-rooms-knowledge",
+};
+
+/** The one room type a rooms filter query is narrowed to, if exactly one. */
+const getSingleRoomType = (search: string): string | undefined => {
+  const types = new URLSearchParams(search).getAll("type");
+  return types.length === 1 ? types[0] : undefined;
+};
+
+/**
  * Map the current location to the active NavMenu item id (a folder id).
  *
  * Templates share the `/rooms/shared` path with the Rooms list and are told
@@ -235,10 +251,8 @@ export const getClientActiveId = (
       ? "private-rooms-archive"
       : "private-rooms";
   if (pathname.startsWith("/ai-rooms/")) {
-    if (pathname.includes("/recent")) return "ai-rooms-recent";
-    if (pathname.includes("/favorite")) return "ai-rooms-favorites";
     if (pathname.includes("/trash")) return "ai-rooms-trash";
-    return "ai-rooms";
+    return AI_HUB_TYPE_ITEM_IDS[getSingleRoomType(search) ?? ""] ?? "ai-rooms";
   }
   if (pathname.startsWith("/forms")) {
     if (pathname.includes("/recent")) return "forms-recent";

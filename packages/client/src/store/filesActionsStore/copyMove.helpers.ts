@@ -192,6 +192,23 @@ export type { TEncryptedTransferDest };
 export type TPrivateTransferPlan = TSharedPrivateTransferPlan<TActionItem>;
 export type TPrivateTransferParams = TSharedPrivateTransferParams<TActionItem>;
 
+export type TPrivateTransferRunOptions = {
+  move: boolean;
+  sourceRoomId?: number | string | null;
+  /** Hold a decrypt-out plan for the user's confirmation instead of starting it. */
+  confirmDecryption?: boolean;
+  /** Runs once a held plan is confirmed. */
+  onConfirm?: () => void;
+};
+
+/** A decrypt-out plan waiting in EncryptedTransferConfirmDialog. */
+export type TEncryptedTransferConfirm = {
+  plan: TPrivateTransferPlan;
+  destFolderId: number | string;
+  dest: TEncryptedTransferDest | null | undefined;
+  options: TPrivateTransferRunOptions;
+};
+
 /**
  * Apply a transfer plan. Returns true when the plan was handled here and the
  * caller must not run the generic server-side transfer.
@@ -201,7 +218,7 @@ self: FilesActionStore,
   plan: TPrivateTransferPlan,
   destFolderId: number | string,
   dest: TEncryptedTransferDest | null | undefined,
-  options: { move: boolean; sourceRoomId?: number | string | null },
+  options: TPrivateTransferRunOptions,
 
 ): boolean => {
   switch (plan.kind) {
@@ -219,6 +236,16 @@ self: FilesActionStore,
       return true;
     case "decrypt-out":
     case "reencrypt-into":
+      // Spec: private-rooms/file-operations, "Files leaving a private room are decrypted"
+      if (plan.kind === "decrypt-out" && options.confirmDecryption) {
+        self.dialogsStore.setEncryptedTransferConfirm({
+          plan,
+          destFolderId,
+          dest,
+          options: { ...options, confirmDecryption: false },
+        });
+        return true;
+      }
       if (plan.refusedFolders.length > 0) {
         toastr.error(i18n.t("Common:CannotTransferFolderFromPrivateRoom"));
       }
@@ -612,6 +639,20 @@ export const copyFilesToKnowledgeRoomImpl = async (
     .catch((error) => toastr.error(error));
 };
 
+export const confirmEncryptedTransferImpl = (self: FilesActionStore) => {
+  const pending = self.dialogsStore.encryptedTransferConfirm;
+  if (!pending) return;
+
+  self.dialogsStore.setEncryptedTransferConfirm(null);
+  self.runPrivateTransferPlan(
+    pending.plan,
+    pending.destFolderId,
+    pending.dest,
+    pending.options,
+  );
+  pending.options.onConfirm?.();
+};
+
 export const moveDragItemsImpl = (
 self: FilesActionStore,
   destFolderId: number | string,
@@ -660,6 +701,7 @@ self: FilesActionStore,
     self.runPrivateTransferPlan(plan, destFolderId, destFolderInfo, {
       move: dragIsMove,
       sourceRoomId: openRoomId,
+      confirmDecryption: true,
     })
   ) {
     return;

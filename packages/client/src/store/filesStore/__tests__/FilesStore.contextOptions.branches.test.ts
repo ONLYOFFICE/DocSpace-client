@@ -175,6 +175,73 @@ describe("getFilesContextOptions — encrypted file", () => {
   });
 });
 
+// The server reports no Duplicate right for any entry of a private room.
+const encryptedRoomFile = (security: Record<string, boolean>): TItem =>
+  ({
+    ...encryptedFile(),
+    rootFolderType: FolderType.Rooms,
+    security: {
+      ...encryptedFile().security,
+      Duplicate: false,
+      Copy: false,
+      ...security,
+    },
+  }) as unknown as TItem;
+
+// AccessRightsStore.canMoveItems reads the item's Move right.
+const storeReadingMove = () =>
+  createTestFilesStore({
+    accessRightsStore: {
+      canMoveItems: (item: { security?: { Move?: boolean } }) =>
+        !!item.security?.Move,
+    },
+  });
+
+describe("getFilesContextOptions — Duplicate of an encrypted file", () => {
+  it("Duplicate offered for an encrypted file", () => {
+    const store = storeReadingMove();
+    const opts = store.getFilesContextOptions(
+      encryptedRoomFile({ Move: true }),
+    );
+
+    expect(opts).toContain("duplicate");
+  });
+
+  it("Duplicate withheld without the move right", () => {
+    const store = storeReadingMove();
+    const opts = store.getFilesContextOptions(
+      encryptedRoomFile({ Move: false }),
+    );
+
+    expect(opts).not.toContain("duplicate");
+  });
+
+  it("Duplicate withheld in an archived private room", () => {
+    const store = storeReadingMove();
+    const opts = store.getFilesContextOptions({
+      ...encryptedRoomFile({
+        Move: false,
+        Edit: false,
+        Delete: false,
+        Rename: false,
+      }),
+      rootFolderType: FolderType.Archive,
+    } as unknown as TItem);
+
+    expect(opts).not.toContain("duplicate");
+  });
+
+  it("keeps the Duplicate right of a plain file without the move right", () => {
+    const store = storeReadingMove();
+    const opts = store.getFilesContextOptions({
+      ...fullPermFile(),
+      security: { ...fullPermFile().security, Move: false },
+    } as unknown as TItem);
+
+    expect(opts).toContain("duplicate");
+  });
+});
+
 // The server refuses external links to files in the AI rooms, so the menu
 // keeps only the link for room members there.
 describe("getFilesContextOptions — file in an AI room", () => {

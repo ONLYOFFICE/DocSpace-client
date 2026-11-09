@@ -539,7 +539,8 @@ export const buildContextOptions = (
       fileOptions = removeOptions(fileOptions, ["copy-to"]);
     }
 
-    if (!canDuplicate) {
+    // Spec: private-rooms/file-operations, "Duplicate of an encrypted file follows the move right"
+    if (!canDuplicate && !(isEncrypted && canMove)) {
       fileOptions = removeOptions(fileOptions, ["duplicate"]);
     }
 
@@ -967,6 +968,7 @@ export const buildContextOptions = (
           security,
           item.security,
           item.id,
+          item.roomType,
         );
 
         pluginRoomsKeys &&

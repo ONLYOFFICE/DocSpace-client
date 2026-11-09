@@ -65,6 +65,7 @@ import type {
   TEncryptedTransferDest,
   TPrivateTransferParams,
   TPrivateTransferPlan,
+  TPrivateTransferRunOptions,
 } from "./filesActionsStore/copyMove.helpers";
 import type { TUploadTarget } from "./uploadDataStore/helpers";
 
@@ -144,7 +145,7 @@ type TFilesActionsStore = {
     plan: TPrivateTransferPlan,
     destFolderId: number | string,
     dest: TEncryptedTransferDest | null | undefined,
-    options: { move: boolean; sourceRoomId?: number | string | null },
+    options: TPrivateTransferRunOptions,
   ) => boolean;
   resolveRoomIdForFile: (file?: null) => number | string | null;
   createFoldersTree: (
@@ -860,11 +861,6 @@ class HotkeyStore {
 
     if (!selections.length) return;
 
-    // `security` is nullable on SelectedFolderStore — the
-    // original .js read `.CopyTo`/`.MoveTo` unguarded; non-null assertions
-    // keep runtime identical.
-    if (!security!.CopyTo || !security!.MoveTo) return;
-
     // Spec: private-rooms/file-operations, "Clipboard hotkeys follow the private-room transfer rules".
     const source = this.hotkeysClipboardSource;
     const destInPrivateRoom = !!this.treeFoldersStore.isPrivacyFolder;
@@ -885,13 +881,28 @@ class HotkeyStore {
       move: !isCopy,
       dest,
     });
+
+    const isRefused =
+      plan.kind === "refuse-into" ||
+      plan.kind === "refuse-folder-out" ||
+      plan.kind === "refuse-move-into";
+    const canPaste =
+      plan.kind === "same-room"
+        ? !!security?.MoveTo
+        : !!security?.CopyTo && !!security?.MoveTo;
+    if (!isRefused && !canPaste) return;
+
+    const clearClipboard = () => this.filesStore.setHotkeysClipboard([]);
     if (
       this.filesActionsStore.runPrivateTransferPlan(plan, selectedItemId!, dest, {
         move: !isCopy,
         sourceRoomId: source?.roomId,
+        confirmDecryption: true,
+        onConfirm: clearClipboard,
       })
     ) {
-      this.filesStore.setHotkeysClipboard([]);
+      // A decrypt-out plan waits for the user; the clipboard stays until they confirm.
+      if (plan.kind !== "decrypt-out") clearClipboard();
       return;
     }
 

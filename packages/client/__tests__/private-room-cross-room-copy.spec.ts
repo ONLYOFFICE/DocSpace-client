@@ -504,6 +504,55 @@ test.describe("Private room — copy into another private room", () => {
     ).toHaveCount(1, { timeout: 15000 });
   });
 
+  test("Duplicate offered for an encrypted file", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl);
+    await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
+    await expect(row(page, PLAN.name)).toBeVisible({ timeout: 15000 });
+    const seen = recordRequests(page);
+
+    await row(page, PLAN.name)
+      .getByTestId("context-menu-button")
+      .first()
+      .click();
+    const submenu = page.getByTestId("option_move-or-copy");
+    await expect(submenu).toBeVisible({ timeout: 10000 });
+    await submenu.hover();
+    await page.getByTestId("option_create-duplicate").click();
+    await unlockIfPrompted(page, rooms.passphrase);
+
+    await expect
+      .poll(() => rooms.sourceHandle.getFiles().length, { timeout: 30000 })
+      .toBe(2);
+    const copy = rooms.sourceHandle
+      .getFiles()
+      .find((f) => f.id !== PLAN.id)!;
+    expect(copy.encrypted).toBe(true);
+    expect(isDSE3Format(copy.bytes!)).toBe(true);
+    expect(new TextDecoder().decode(copy.bytes)).not.toContain(PLAN.text);
+    expect(rooms.sourceHandle.getSessions().map((s) => s.encrypted)).toEqual([
+      true,
+    ]);
+    await expect
+      .poll(() =>
+        rooms.sourceHandle
+          .getFile(copy.id)
+          .fileKeys.map((k) => String(k.userId))
+          .sort(),
+      )
+      .toEqual([ALICE_ID, TEST_USER_ID].sort());
+    await expect(
+      page
+        .locator('[data-testid^="table-row-"]')
+        .filter({ hasText: "plan (1)" }),
+    ).toHaveCount(1, { timeout: 15000 });
+    expect(seen.filter((r) => r.endsWith("/fileops/duplicate"))).toEqual([]);
+  });
+
   test("Copy from an archived private room", async ({
     page,
     mockRequest,

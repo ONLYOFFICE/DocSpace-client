@@ -281,6 +281,7 @@ export default inject(
       maxFreeBackups > 0 ? backupCount >= maxFreeBackups : true;
     return {
       ensureAppsLoaded: appsStore.ensureLoaded,
+      showPrivateRoomsWarning: appsStore.isPrivateRoomsSectionAvailable,
 
       // backup
       accounts,

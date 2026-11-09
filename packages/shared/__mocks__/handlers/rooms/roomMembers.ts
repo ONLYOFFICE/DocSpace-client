@@ -35,6 +35,10 @@ export type RoomMember = {
   displayName?: string;
   email?: string;
   access?: number;
+  /** A portal group (SubjectType.Group) rather than an account. */
+  isGroup?: boolean;
+  /** A guest account (EmployeeFullDto.isVisitor). */
+  isVisitor?: boolean;
 };
 
 export type RoomMembersHandlerHandle = {
@@ -60,13 +64,21 @@ export type RoomMembersHandlerOptions = {
    * The room's files. A share set to None (FileShare.None) for a member
    * who held one removes that member's file keys once the request went
    * through, as SetAceObjectAsync calls RevokeFileKeysAsync after its loop;
-   * the mock has no groups, so every subject counts as a user.
+   * the mock's groups have no members, so every subject counts as a user.
    */
   files?: { current: EncryptedFilesHandlerHandle | null };
 };
 
 /** FileShare.None. */
 const SHARE_NONE = 0;
+
+/** SubjectType.User and SubjectType.Group (ASC.Files.Core.Security). */
+const SUBJECT_USER = 0;
+const SUBJECT_GROUP = 2;
+
+/** ShareFilterType.User and ShareFilterType.ExternalLink. */
+const FILTER_USER = "16";
+const FILTER_EXTERNAL_LINK = "2";
 
 const okResponse = <T>(response: T): Response =>
   new Response(
@@ -87,7 +99,24 @@ const noKeyResponse = (): Response =>
     { status: 403, headers: { "Content-Type": "application/json" } },
   );
 
-const buildMemberDto = (m: RoomMember) => ({
+/**
+ * FileShareDtoHelper.Get: a group entry carries GroupSummaryDto in sharedTo
+ * and SubjectType.Group.
+ */
+const buildGroupDto = (m: RoomMember) => ({
+  access: m.access ?? 11,
+  sharedTo: {
+    id: m.id,
+    name: m.displayName ?? m.id,
+    manager: null,
+  },
+  isOwner: false,
+  isLocked: false,
+  canEditAccess: true,
+  subjectType: SUBJECT_GROUP,
+});
+
+const buildUserDto = (m: RoomMember) => ({
   access: m.access ?? 11,
   sharedTo: {
     id: m.id,
@@ -103,12 +132,16 @@ const buildMemberDto = (m: RoomMember) => ({
     isAnonim: false,
     activationStatus: 1,
     status: 1,
+    isVisitor: !!m.isVisitor,
   },
   isOwner: m.access === 0,
   isLocked: false,
   canEditAccess: true,
-  subjectType: 0,
+  subjectType: SUBJECT_USER,
 });
+
+const buildMemberDto = (m: RoomMember) =>
+  m.isGroup ? buildGroupDto(m) : buildUserDto(m);
 
 export const roomMembersHandlers = (
   port: string,
@@ -135,15 +168,23 @@ export const roomMembersHandlers = (
   const baseUrl = `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/${roomId}/share`;
 
   return [
+    /**
+     * VirtualRoomsController.GetRoomSecurityInfo. SecurityDao.GetPureSharesQuery
+     * keeps SubjectType.User records only for ShareFilterType.User, guests
+     * included, and the total counts the same records; any other filter but
+     * the external links answers users and groups (UserOrGroup).
+     */
     http.get(baseUrl, ({ request }) => {
       const url = new URL(request.url);
       requests.push({ method: "GET", url: url.pathname });
-      // filterType=2 requests external links, not user members
-      if (url.searchParams.get("filterType") === "2") {
+      const filterType = url.searchParams.get("filterType");
+      if (filterType === FILTER_EXTERNAL_LINK) {
         const items = opts.links ?? [];
         return okResponse({ items, total: items.length });
       }
-      const items = state.map(buildMemberDto);
+      const subjects =
+        filterType === FILTER_USER ? state.filter((m) => !m.isGroup) : state;
+      const items = subjects.map(buildMemberDto);
       return okResponse({ items, total: items.length });
     }),
 

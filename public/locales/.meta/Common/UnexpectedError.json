@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-11-05T16:49:39.799Z",
+  "updated_at": "2026-11-06T10:45:54.251Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -213,6 +213,12 @@
       "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 145,
       "context": "return null;\n }\n };\n \n export const getUnexpectedErrorText = () => {\n return i18n.t(\"Common:UnexpectedError\");\n };\n \n export const connectedCloudsTitleTranslation = (key, t) => {\n switch (key) {\n case \"Box\":",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 492,
+      "context": "t(\"Common:InsufficientFunds\"),\n );\n } else if (isPollingTimeoutError(error)) {\n // The store has already re-read the plan; keep the raw error for\n // anything thrown before the checkout opened.\n toastr.error(t(\"Common:UnexpectedError\"));\n closeBuyPlan?.();\n } else {\n toastr.error(error as Error);\n }\n }",
       "module": "/packages/client"
     },
     {

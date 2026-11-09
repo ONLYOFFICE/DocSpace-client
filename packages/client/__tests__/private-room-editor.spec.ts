@@ -44,6 +44,7 @@ import {
   TypeSettings,
   type EncryptedFilesHandlerHandle,
 } from "@docspace/shared/__mocks__/handlers";
+import type { Page } from "@playwright/test";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 const ROOM_ID = 9400;
@@ -72,6 +73,26 @@ const seedEncryptedFile = {
       privateKeyEnc: "WRAPPED_DEK_FIXTURE",
     },
   ],
+};
+
+// The seeded key is a fixture, so name recovery asks for the passphrase once
+// the list is in; opening does not depend on it.
+const openRoomList = async (page: Page, baseUrl: string) => {
+  await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+  const row = page.getByTestId("table-row-0");
+  await expect(row).toBeVisible({ timeout: 15000 });
+
+  const passphrasePrompt = page
+    .getByRole("dialog")
+    .filter({ hasText: "Enter passphrase" });
+  await passphrasePrompt.waitFor({ timeout: 5000 }).catch(() => {});
+  if (await passphrasePrompt.isVisible()) {
+    await passphrasePrompt
+      .getByRole("button", { name: "Cancel", exact: true })
+      .click();
+    await expect(passphrasePrompt).toBeHidden();
+  }
+  return row;
 };
 
 // The client E2E server serves the Vite client only: the doceditor app is
@@ -107,22 +128,7 @@ test.describe("Private room editor", () => {
     page,
     baseUrl,
   }) => {
-    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
-    const row = page.getByTestId("table-row-0");
-    await expect(row).toBeVisible({ timeout: 15000 });
-
-    // The seeded key is a fixture, so name recovery asks for the passphrase
-    // once the list is in; opening does not depend on it.
-    const passphrasePrompt = page
-      .getByRole("dialog")
-      .filter({ hasText: "Enter passphrase" });
-    await passphrasePrompt.waitFor({ timeout: 5000 }).catch(() => {});
-    if (await passphrasePrompt.isVisible()) {
-      await passphrasePrompt
-        .getByRole("button", { name: "Cancel", exact: true })
-        .click();
-      await expect(passphrasePrompt).toBeHidden();
-    }
+    const row = await openRoomList(page, baseUrl);
 
     const popupPromise = page.waitForEvent("popup", { timeout: 15000 });
     await row.dblclick();
@@ -133,5 +139,28 @@ test.describe("Private room editor", () => {
     expect(editorUrl.searchParams.get("fileId")).toBe(String(FILE_ID));
     expect(editorUrl.searchParams.get("action")).toBeNull();
     await editorPage.close();
+  });
+
+  test("Capability absent: an encrypted file of the list is refused with a notice and no editor page", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      filesSettingsHandler(TEST_PORT, { docServiceEncryptionSupported: false }),
+    );
+    const row = await openRoomList(page, baseUrl);
+
+    let popups = 0;
+    page.on("popup", () => {
+      popups += 1;
+    });
+    await row.dblclick();
+
+    await expect(
+      page.getByText("Encrypted files cannot be opened in this editor."),
+    ).toBeVisible({ timeout: 10000 });
+    expect(popups).toBe(0);
+    expect(new URL(page.url()).pathname).toBe(`/private/${ROOM_ID}/filter`);
   });
 });

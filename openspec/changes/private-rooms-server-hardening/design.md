@@ -480,8 +480,13 @@ replaces a read.
   private AI agent is created today. The reply says a public or
   form-filling room created as private is refused because its creation
   sets an external link, which the link refusal of decision 12 rejects; the
-  creation path read here sets no link, so where that happens was not read
-  and task 12.4b reads it before mirroring. The reply proposes to refuse a
+  creation path read here sets no link. Read with task 12.4b on 2026-11-06:
+  nothing at creation refuses them; the primary link of a public or
+  form-filling room is made lazily by `GetPrimaryExternalLinkAsync` on the
+  first read (`FileStorageService.cs:4451-4500`, "entries that never had
+  one keep the lazy creation") and is refused there by the link refusal
+  of decision 12, so the room is stored and only its link read fails
+  (task 12.8). The reply proposes to refuse a
   private AI agent with 400, the chat and the vectorization being denied in
   a private room (`FileSecurity.cs:1706-1718`), and waits for confirmation:
   proposal decision 8, decision 27.
@@ -632,6 +637,55 @@ six encrypted files, no subfolder); no data was changed:
   there. Details in `private-rooms-beta-release`, design.md "Release
   stand check".
 
+### Landed on 2026-11-06 (read in `8f15bab14f`, `4162789259` and `db5f85f317`)
+
+- Role-change letter (task 4.7): `FileStorageService.SetAceObjectAsync`
+  passes `folder.SettingsPrivate ? null : folder.Title` to
+  `StudioNotifyService.SendMsgUserRoleChangedAsync`
+  (`FileStorageService.cs:4612`), its only caller (CodeGraph).
+  `UserRoleChangedNotifyAction` and `UserAgentRoleChangedNotifyAction`
+  (`web/ASC.Web.Core/Notify/Actions.cs:3593`, `:3623`) put
+  `PrivateRoomTitle` of `WebstudioNotifyPatternResource`, in the
+  recipient's culture (`GetCulture(user)`), in `RoomTitle` when the title
+  is null (`PrivateRoomTitleInLettersTests.RoleChangedLetters_WithNoTitle_NameTheRoomNeutrally`).
+  The other `StudioNotifyService` methods that take a room title, the
+  invitation letters for a new and an existing user in the room and agent
+  variants (`Actions.cs:1314`, `:1344`, `:1373`, `:1402`), already fall
+  back the same way, so no web letter takes a private room's title any
+  more.
+- Folder created in a private room, beyond the plan:
+  `FolderCreatedInRoomNotifyAction` (`NotifyConstants.cs:461`) puts the
+  new `FilesPatternResource.PrivateFolderTitle` ("Private folder") in
+  `FolderTitle` for a folder of a private room, beside the neutral room
+  label; `PrivateRoom_IsNamedNeutrally` now asserts that none of the Files
+  letters of a private room carries the folder's title either. The
+  `server-contract` delta's scenario "Room notices" names the folder
+  label now. The document title these letters carry is the stored,
+  opaque title of an encrypted file.
+- Both labels exist in the default culture only:
+  `PrivateRoomTitle` and `PrivateFolderTitle` are in
+  `FilesPatternResource.resx`, and `PrivateRoomTitle` in
+  `WebstudioNotifyPatternResource.resx`, while none of the other 29
+  cultures of either resource carries them (task 4.5).
+- `8f15bab14f` adds a Socket.IO test client (`PortalSocket`) and socket
+  delivery and contract tests for user, quota, file and folder events;
+  none of them is about a private room, so the socket recipients of 10.2
+  stay a stand check. `db5f85f317` renames wallet texts, nothing for
+  private rooms.
+- `c866c055e1` (later the same day) adds the Private section. It is
+  recorded in `private-rooms-server-section` (design.md, "Landed on
+  2026-11-06"). For this change:
+  - private rooms keep the Rooms root, so every rule here keyed on
+    `VirtualRooms` still applies to them, among them the CopyTo refusal on
+    their subfolders (`FileSecurity.cs:2055-2058`);
+  - the commit leaves two items open, as it says itself: a subfolder of a
+    private room still goes to Trash on deletion, and a private room or its
+    subfolder can still be added to Favorites. Neither is planned here;
+  - the backend's note of the same day says a public room and a
+    form-filling room "are refused" as private. The code at `c866c055e1`
+    refuses neither at creation (`FileStorageService.cs:666-690`,
+    `:1220-1230`), so task 12.8 stays open.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -752,6 +806,11 @@ six encrypted files, no subfolder); no data was changed:
     (`bd89a24dcd`): the link refusal sits in the share pipeline, so it
     covers every link route and lets a revocation through; the denials
     cover Copy, UseChat and Vectorization as well and apply in Archive too.
+    The refusal of Duplicate on the room's entries, wider than this decision
+    asked, stays: the client and the SDK offer Duplicate of an encrypted
+    file on the Move right instead (`private-rooms-encrypted-duplicate`,
+    archived 2026-11-06), and the owner decided the same day not to ask the
+    server to answer Duplicate by role again.
 
 13. **Key checks look at the key set, not the record (found 2026-10-28).**
     `ThrowIfKeysAreNotSetAsync` treats an empty key set as no keys, which
@@ -939,6 +998,9 @@ six encrypted files, no subfolder); no data was changed:
     rooms are available, and in the restore confirmation, that a restored
     portal cannot open the files of its private rooms (task 15.2); the
     release notes and the release gate carry the limitation (task 15.3).
+    The management app's restore page shows nothing: it does not know the
+    E2E rooms app's state, and nothing private is shown while the app may
+    be off (the owner, 2026-11-06).
     Alternative: back both tables up with the original ids kept next to
     each row, so a member who opens a room after the restore unwraps under
     the old ids and re-wraps under the new ones; kept as a later option,

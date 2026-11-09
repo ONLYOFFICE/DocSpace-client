@@ -78,6 +78,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     setRestoreResource,
     buttonSize,
     standalone,
+    showPrivateRoomsWarning = false,
     downloadingProgress,
     navigate,
     setTenantStatus,
@@ -377,6 +378,17 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
       >
         {t("Common:RestoreBackupWarningText")}
       </Text>
+      {showPrivateRoomsWarning ? (
+        <Text
+          className={classNames(
+            styles.restoreBackupWarningDescription,
+            styles.settingsUnavailable,
+            "restore-backup_warning-description",
+          )}
+        >
+          {t("Common:PrivateRoomsBackupWarning")}
+        </Text>
+      ) : null}
       {!standalone ? (
         <Text
           className={classNames(
@@ -442,6 +454,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           isNotify={checkboxState.notification}
           navigate={navigate}
           standalone={standalone}
+          showPrivateRoomsWarning={showPrivateRoomsWarning}
           setTenantStatus={setTenantStatus}
           downloadingProgress={downloadingProgress}
         />

@@ -147,6 +147,22 @@ describe("RestoreBackup", () => {
     expect(screen.getByTestId("restore-backup")).toBeInTheDocument();
   });
 
+  it("Section available", () => {
+    render(<RestoreBackup {...defaultProps} showPrivateRoomsWarning />);
+
+    expect(
+      screen.getByText("Common:PrivateRoomsBackupWarning"),
+    ).toBeInTheDocument();
+  });
+
+  it("Section not available", () => {
+    render(<RestoreBackup {...defaultProps} />);
+
+    expect(
+      screen.queryByText("Common:PrivateRoomsBackupWarning"),
+    ).not.toBeInTheDocument();
+  });
+
   it("displays error information when provided", () => {
     const errorMessage = "Error occurred during backup restoration";
     render(<RestoreBackup {...defaultProps} errorInformation={errorMessage} />);
